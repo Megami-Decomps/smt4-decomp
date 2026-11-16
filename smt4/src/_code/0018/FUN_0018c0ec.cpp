@@ -32,7 +32,7 @@ int FUN_0029bde4(...);
 int unitRecalculateEffectiveStats(...);
 int flagCountUnlockedSlots(...);
 int beginStatusPanelClose(void);
-int FUN_0029ee6c(...);
+int buttonHelpSetText(...);
 int buttonHelpSetPreset(...);
 int FUN_002d9680(void);
 int statusDownSetEntries(...);
@@ -43,7 +43,7 @@ int scrRunOpcodesStub(...);
 int FUN_00204358(...);
 int textEncodeFontSlot(...);
 int btlTalkBustUpCreate(void);
-int FUN_002958f8(...);
+int statusBustUpPortraitRelease(...);
 int scrScriptProcessStartEntry(...);
 int FUN_00297060(...);
 int FUN_0029a0cc(void);
@@ -52,7 +52,7 @@ int gameGlobalsSetSelected(...);
 int FUN_0029c424(...);
 int FUN_0029c4c8(...);
 int FUN_0029c4e4(...);
-int FUN_0029cc44(...);
+int messageDismissNumericBanner(...);
 int statusPanelSetOpen(...);
 int FUN_0029d8f4(...);
 int FUN_0029e788(void);
@@ -160,7 +160,7 @@ extern int FUN_00295618(void);
 extern int FUN_0029563c(void);
 /* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: btlTalkBustUpCreate. */
-/* Supplied declaration required: FUN_002958f8. */
+/* Supplied declaration required: statusBustUpPortraitRelease. */
 /* Supplied declaration required: FUN_00295a18. */
 /* Supplied declaration required: infoWinStartTimer. */
 extern int dialogIsActive(void);
@@ -199,7 +199,7 @@ extern int FUN_0029c48c(void);
 /* Supplied declaration required: unitRecalculateEffectiveStats. */
 /* Supplied declaration required: flagCountUnlockedSlots. */
 /* Supplied declaration required: beginStatusPanelClose. */
-/* Supplied declaration required: FUN_0029cc44. */
+/* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: statusPanelSetOpen. */
 /* Supplied declaration required: FUN_0029d8f4. */
 extern int FUN_0029e0f8(void);
@@ -209,7 +209,7 @@ extern int FUN_0029e0f8(void);
 /* Supplied declaration required: FUN_0029e874. */
 extern int flagWordTestBit(int, unsigned int);
 /* Supplied declaration required: FUN_0029ede8. */
-/* Supplied declaration required: FUN_0029ee6c. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: FUN_0029f848. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: FUN_002a0cc8. */
@@ -984,7 +984,7 @@ LAB_0018d058:
         timerStart(temp_v2 + temp_v4 * 0x8c + 0xac,1,0);
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < 6);
-      FUN_0029cc44(1);
+      messageDismissNumericBanner(1);
       eventQueueAddUniqueIfValid(0x100016d);
     }
     break;
@@ -997,12 +997,12 @@ LAB_0018d058:
     } while (temp_v4 < 6);
     if (*(char *)(temp_v2 + 0xaa) != '\0') {
       temp_v4 = gameGetSlotTable();
-      FUN_002958f8(0xffffffff,1);
+      statusBustUpPortraitRelease(0xffffffff,1);
       temp_v8 = 0;
       do {
         if (-1 < *(char *)(temp_v4 + temp_v8 + 0x9108)) {
           temp_v18 = gameGetUnitRecord();
-          FUN_002958f8((int)*(short *)(temp_v18 + 0x46),1);
+          statusBustUpPortraitRelease((int)*(short *)(temp_v18 + 0x46),1);
         }
         temp_v8 = temp_v8 + 1;
       } while (temp_v8 < 3);
@@ -1157,7 +1157,7 @@ LAB_0018da7c:
         temp_v18 = temp_v18 + 1;
       }
       if (0 >= temp_v18) {
-        FUN_0029ee6c(0,0x323232ff);
+        buttonHelpSetText(0,0x323232ff);
         if (*(char *)((int)*(char *)(temp_v8 + 0x3654) + temp_v2 + 0xcf7c) != '\0') {
           beginStatusPanelClose();
           piVar20 = (int *)(temp_v2 + 0x3534);
@@ -1385,7 +1385,7 @@ joined_r0x0018edf0:
       temp_v4 = 0;
       FUN_002c1658(0,1);
       if (temp_v4 != 0) {
-        FUN_0029ee6c(0,0x323232ff);
+        buttonHelpSetText(0,0x323232ff);
         if (*(char *)(temp_v8 + 0x3c71) != '\0') {
           resultSetMenuState(temp_v2,0xf);
         }
@@ -1527,7 +1527,7 @@ joined_r0x0018edf0:
           FUN_0029bed8(*(unsigned short *)(temp_v4 + 0x46));
           *(unsigned char *)(temp_v2 + 0xd640) = 0;
         }
-        FUN_0029ee6c(0,0x323232ff);
+        buttonHelpSetText(0,0x323232ff);
         if (*(int *)(temp_v2 + 0x3530) != 0xc) {
           if (*(char *)(temp_v8 + 0x3c71) != '\0') {
             resultSetMenuState(temp_v2,0xf);

@@ -4,7 +4,7 @@
 extern "C" {
 
 extern void asdMemFreeSlot(u32 handle);
-extern void FUN_0038b3f8(s32 a, s32 b);
+extern void statusBustUpPortraitRelease(s32 a, s32 b);
 extern u32 requestIdToCode(s32 index);
 extern void asdTMTexTableReleaseNode(s32 a, u32 b);
 extern void asdMemFree(void *ptr);
@@ -29,7 +29,7 @@ void resSetFree(ResSet *set)
     asdMemFreeSlot(set->h38);
     asdMemFreeSlot(set->h40);
     asdMemFreeSlot(set->h48);
-    FUN_0038b3f8(set->unk90, 1);
+    statusBustUpPortraitRelease(set->unk90, 1);
     if (set != NULL) {
         for (i = 0; i < 9; i++) {
             if (asdTMTexTableNodeIsLoaded(0x2E, requestIdToCode(i)) != 0) {

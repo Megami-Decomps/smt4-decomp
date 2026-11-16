@@ -1,4 +1,4 @@
-/* NON_MATCHING: three inlined render-stack push schedules and job-array base reuse differ; grouped origin and explicit callback handle are recovered. */
+/* NON_MATCHING: loop and the A/B pushes now match; only the stackC push schedules its count increment (add r2,r1,#1) after the old-top load where retail does it first. */
 #include "common.h"
 #include "camp/RenderCtx.h"
 #include "code/Code0028.h"
@@ -33,7 +33,7 @@ s32 jobGetStatus(u32 job);
 s32 FUN_00285584(u32 job, s32 x, s32 y);
 s32 FUN_002c5d80(u32 first, u32 second);
 s32 packNibblesAndByte(u32 high, u32 low, u32 byte);
-void FUN_002c18e4(RenderCtx *context);
+void renderCtxResetColorScale(RenderCtx *context);
 
 /* Draws the title scene's jobs with the three render stacks pushed. */
 s32 FUN_001f42d4(u32 job)
@@ -41,27 +41,35 @@ s32 FUN_001f42d4(u32 job)
     TitleJobWork *work = (TitleJobWork *)jobGetWork(job);
     s32 i;
 
-    renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
-    renderCtxPushC(g_titleScene, FUN_002865c0(6, 0.0f));
-    renderCtxPushB(g_titleScene, packNibblesAndByte(6, 7, 0));
+    RenderCtx *context = g_titleScene;
+    s32 state = FUN_002c5d80(1, 0);
+    renderStackPushCounted(&context->stackA, state);
+    context = g_titleScene;
+    state = FUN_002865c0(6, 0.0f);
+    renderStackPush(&context->additional.stackC, state);
+    context = g_titleScene;
+    state = packNibblesAndByte(6, 7, 0);
+    renderStackPushCountedDirect(&context->stackB, state);
     for (i = 0; i < work->count; i++) {
         if (g_eventTex->jobsActive) {
-            if (!jobIsValid(work->jobs[i]))
-                continue;
-        } else {
-            if (!jobIsValid(work->jobs[i]) || jobGetStatus(work->jobs[i]) != 4)
-                continue;
+            if (jobIsValid(work->jobs[i])) {
+                TitleJobOrigin origin = work->origin;
+                s32 x = (s32)origin.x;
+                s32 y = (s32)origin.y;
+                FUN_00285584(work->jobs[i], x, y);
+            }
+        } else if (jobIsValid(work->jobs[i]) && jobGetStatus(work->jobs[i]) == 4) {
+            TitleJobOrigin origin = work->origin;
+            s32 x = (s32)origin.x;
+            s32 y = (s32)origin.y;
+            FUN_00285584(work->jobs[i], x, y);
         }
-        TitleJobOrigin origin = work->origin;
-        s32 x = (s32)origin.x;
-        s32 y = (s32)origin.y;
-        FUN_00285584(work->jobs[i], x, y);
     }
     renderStackPop(&g_titleScene->stackB);
     renderStackPop(&g_titleScene->stackA);
     renderStackPop(&g_titleScene->additional.stackC);
     renderCtxApplyTransforms(g_titleScene);
-    FUN_002c18e4(g_titleScene);
+    renderCtxResetColorScale(g_titleScene);
     return 0;
 }
 

@@ -66,10 +66,10 @@ int libc_strcpy(...);
 int textEncodeFontSlot(...);
 int FUN_0029ede8(...);
 int messageMainSetTargetFlags(s32 flags);
-int FUN_0029cc44(...);
+int messageDismissNumericBanner(...);
 int countdownSetModeFive(void);
 int beginStatusPanelClose(void);
-int FUN_0029ee6c(...);
+int buttonHelpSetText(...);
 int sortMenuCreate(...);
 int FUN_0029e328(...);
 int useCounterStart(void);
@@ -124,10 +124,10 @@ void Obj422448::FUN_003abed8()
         }
         FUN_002328b4();
     } else if (menuPressed != 0) {
-        FUN_0029cc44(1);
+        messageDismissNumericBanner(1);
         countdownSetModeFive();
         beginStatusPanelClose();
-        FUN_0029ee6c(0, 0x323232FF);
+        buttonHelpSetText(0, 0x323232FF);
         screen->state = 10;
         screen->substate = 0;
         FUN_00232848();
@@ -141,7 +141,7 @@ void Obj422448::FUN_003abed8()
         useCounterStart();
         screen->state = 4;
         screen->substate = 0;
-        FUN_0029ee6c(0, 0x323232FF);
+        buttonHelpSetText(0, 0x323232FF);
         FUN_002328b4();
     }
 

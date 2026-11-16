@@ -1,4 +1,4 @@
-/* NON_MATCHING: named extra-model records restore retail loop and task/state stores; task argument setup and vector-copy scratch registers still differ. */
+/* NON_MATCHING: task setup and stores now match; only the position-to-previousPosition copy in the entry loop uses r0/r1 the other way round (retail: ldm r1, {r1, r2}; stm r0). */
 #include "map/mapEnemy.h"
 #include "sys/Task.h"
 #include "shard/S1Mover.h"
@@ -73,8 +73,8 @@ void mapEnemyFreeWork();
 void MapEnemy_Register(u32 parent)
 {
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\map\\mapEnemy.cpp", 308);
-    MapEnemy *work = static_cast<MapEnemy *>(asdMemAlloc(0x100, 0x100, 0, sizeof(MapEnemy), 1));
-    g_mapEnemy = work;
+    g_mapEnemy = static_cast<MapEnemy *>(asdMemAlloc(0x100, 0x100, 0, sizeof(MapEnemy), 1));
+    MapEnemy *work = g_mapEnemy;
     work->controller.task = taskCreateDraw("MENEMY", 2, 0, 0,
         reinterpret_cast<TaskFunc>(FUN_001d9294), reinterpret_cast<TaskFunc>(mapEnemyFreeWork), NULL, parent);
     work->controller.state = 0;

@@ -47,8 +47,8 @@ s32 FUN_00293aac(void);
 s32 FUN_00293b8c(void);
 s32 FUN_0029e924(void *list);
 s32 flaggedEntryGetValueByState(void *list);
-void FUN_003c2c6c(void *list);
-void FUN_003c2b74(void *list);
+void listCursorStepBack(void *list);
+void listCursorStepForward(void *list);
 void FUN_00233404(void);
 void FUN_00233240(void *animation, s32 channel);
 s32 gameGetFlagByte12e8(void);
@@ -81,9 +81,9 @@ void Obj4223f8::updateBrowse()
                 s32 cursorBefore = flaggedEntryGetValueByState(ui->list);
                 if (FUN_00293b8c() != 1) {
                     if (FUN_00293b8c() == -1)
-                        FUN_003c2c6c(ui->list);
+                        listCursorStepBack(ui->list);
                 } else {
-                    FUN_003c2b74(ui->list);
+                    listCursorStepForward(ui->list);
                 }
                 if (FUN_0029e924(ui->list) != firstBefore || flaggedEntryGetValueByState(ui->list) != cursorBefore)
                     FUN_00233404();

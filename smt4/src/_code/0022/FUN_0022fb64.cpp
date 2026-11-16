@@ -32,7 +32,7 @@ struct SelectionOwner {
 extern "C" {
 s32 flaggedValueHolderGetTotal(SelectionList* list);
 void FUN_0029212c(u32 id);
-void FUN_0029ee6c(u32 index, u32 color);
+void buttonHelpSetText(u32 index, u32 color);
 
 // Renders the selected page's current item, or a dark placeholder for an empty page.
 void FUN_0022fb64(SelectionOwner* owner)
@@ -43,7 +43,7 @@ void FUN_0022fb64(SelectionOwner* owner)
         s32 selection = flaggedValueHolderGetTotal(&owner->menu.lists[page]);
         FUN_0029212c(items[selection].id);
     } else {
-        FUN_0029ee6c(0, 0x323232ff);
+        buttonHelpSetText(0, 0x323232ff);
     }
 }
 }

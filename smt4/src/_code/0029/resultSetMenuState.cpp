@@ -27,7 +27,7 @@ extern int gameGlobalsSetSelected(int);
 extern int FUN_0029c4c8(int);
 extern int FUN_0029dfc0(int);
 extern int FUN_0029e874(int);
-extern int FUN_0029ee6c(int, u32);
+extern int buttonHelpSetText(int, u32);
 extern int FUN_002b827c(int);
 extern int buttonHelpSetPreset(u8 preset);
 extern int ifTouchRegionRemove(void);
@@ -79,7 +79,7 @@ void resultSetMenuState(MenuTask *task, int newState)
     default:
         goto done;
     }
-    FUN_0029ee6c(0, 0x323232FF);
+    buttonHelpSetText(0, 0x323232FF);
     buttonHelpSetPreset(preset);
 done:
     if (task->state != 0x14) {

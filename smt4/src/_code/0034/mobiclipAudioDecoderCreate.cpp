@@ -1,57 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `mobiclipAudioDecoderCreate` (_code @ 0x34f800, 0xdc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "classes/MobiclipAudioDecoderIV.h"
+#include <new>
+
+/* An allocator: slot 0 hands out `size` bytes with the given alignment. */
+class BlockAllocator {
+public:
+    virtual void *allocate(u32 size, u32 alignment) = 0;
+};
+
+inline void *operator new(u32 size, BlockAllocator *allocator, u32 alignment) throw()
+{
+    return allocator->allocate(size, alignment);
+}
+
+/* The part of the request this function reads. */
+struct DecoderRequest {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s32 kind;
+    /* 0x08 */ u32 first;
+    /* 0x0C */ u32 second;
+};
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern unsigned char DAT_00420a88; /* 0x420a88 */
-extern unsigned char DAT_00420aac; /* 0x420aac */
-extern unsigned char DAT_00420b04; /* 0x420b04 */
-
-
-unsigned int mobiclipAudioDecoderCreate(unsigned int param_1,unsigned int *param_2,int param_3,unsigned int *param_4)
-
+// Creates the audio decoder of the request's kind (2: none) and sets it up; returns 0 for an
+// unknown kind.
+u32 mobiclipAudioDecoderCreate(void *owner, BlockAllocator *allocator, DecoderRequest *request, MobiclipAudioDecoder **created)
 {
-  int *piVar1;
-  int temp_v0;
-  
-  temp_v0 = *(int *)(param_3 + 4);
-  if (temp_v0 != 0) {
-    if (temp_v0 != 1) {
-      if (temp_v0 == 2) {
-        *param_4 = 0;
-        return 1;
-      }
-      if (temp_v0 != 4) {
+    s32 kind = request->kind;
+    switch (kind) {
+    case 0:
+        *created = new (allocator, 4) Obj420afc;
+        break;
+    case 1:
+        *created = new (allocator, 4) Obj420aa4;
+        break;
+    case 2:
+        *created = NULL;
+        break;
+    case 4:
+        *created = new (allocator, 4) Obj420a80;
+        break;
+    default:
         return 0;
-      }
-      piVar1 = (int *)(**(romwright_code **)*param_2)(param_2,8,4);
-      if (piVar1 != (int *)0x0) {
-        *piVar1 = (int)&DAT_00420a88;
-        piVar1[1] = 0;
-      }
     }
-    else {
-      piVar1 = (int *)(**(romwright_code **)*param_2)(param_2,8,4);
-      if (piVar1 != (int *)0x0) {
-        *piVar1 = (int)&DAT_00420aac;
-        piVar1[1] = 0;
-      }
+    if (*created != NULL) {
+        (*created)->initialize(request->first, request->second);
     }
-  }
-  else {
-    piVar1 = (int *)(**(romwright_code **)*param_2)(param_2,8,4);
-    if (piVar1 != (int *)0x0) {
-      *piVar1 = (int)&DAT_00420b04;
-      piVar1[1] = 0;
-    }
-  }
-  *param_4 = (unsigned int)piVar1;
-  if (piVar1 != (int *)0x0) {
-    (**(romwright_code **)(*piVar1 + 8))(piVar1,*(unsigned int *)(param_3 + 8),*(unsigned int *)(param_3 + 0xc));
-  }
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

@@ -11,7 +11,7 @@ int bgmSwitchCurrent(...);
 int FUN_0027df30(...);
 int gameMoneyAdd(...);
 int FUN_0029c43c(...);
-int FUN_0029cc44(...);
+int messageDismissNumericBanner(...);
 int messageBannerInitSelection(...);
 int btlScriptQueueRequestIfIdle(...);
 int FUN_003bf5a8(...);
@@ -148,7 +148,7 @@ extern int FUN_00256940(int, int, unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int messageMainTargetIsClear(void);
 /* Supplied declaration required: FUN_0029c43c. */
-/* Supplied declaration required: FUN_0029cc44. */
+/* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: messageBannerInitSelection. */
 /* Supplied declaration required: buttonHelpGetMode. */
 /* Supplied declaration required: FUN_002b6b00. */
@@ -1109,7 +1109,7 @@ LAB_00346854:
     if (temp_v5 != 1) {
       if ((temp_v5 == 2) && (temp_v5 = messageMainTargetIsClear(), temp_v5 == 1)) {
         gameMoneyAdd(*(unsigned int *)(psVar2 + 0x14));
-        FUN_0029cc44(1);
+        messageDismissNumericBanner(1);
         temp_v1 = 0;
         psVar2[1] = temp_v1;
         break;

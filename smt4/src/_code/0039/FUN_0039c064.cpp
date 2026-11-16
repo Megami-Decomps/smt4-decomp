@@ -1,18 +1,27 @@
-/* NON_MATCHING: `active` is the byte right after `requested` (0x5A8D, corrected); retail forms the two field addresses with separate large adds (0x5800+0x28C, 0x5A00+0x8D) and stores through them, this build uses a pooled offset register for both. */
 #include "common.h"
-struct NavigationState {
-    /* 0x0000 */ u8 unk00[16];
+#include <stddef.h>
+
+/* IV's navigation category selection work: the per-screen refresh requests sit at 0x5A8C. */
+struct NaviCategorySelectionWorkIV {
+    /* 0x0000 */ u8 unk0000[0x10];
     /* 0x0010 */ u32 flags;
-    /* 0x0014 */ u8 unk14[0x5a78];
-    /* 0x5a8c */ u8 requested;
-    /* 0x5a8d */ u8 active;
+    /* 0x0014 */ u8 unk0014[0x5A78];
+    /* 0x5A8C */ u8 refresh[2]; /* one redraw request per screen */
 };
-extern "C" void FUN_0039c57c(NavigationState *state);
-/* Resets navigation control and requests both update paths. */
-extern "C" void FUN_0039c064(NavigationState *state)
+typedef char NaviCategorySelectionWorkIVOffsets[
+    offsetof(NaviCategorySelectionWorkIV, flags) == 0x10 &&
+    offsetof(NaviCategorySelectionWorkIV, refresh) == 0x5A8C ? 1 : -1];
+
+extern "C" {
+void FUN_0039c57c(NaviCategorySelectionWorkIV *work, u32 category);
+
+/* Selects the category, clears the 0x10 flag and requests a redraw of both screens. */
+void FUN_0039c064(NaviCategorySelectionWorkIV *work, u32 category)
 {
-    FUN_0039c57c(state);
-    state->flags &= ~16;
-    state->requested = 1;
-    state->active = 1;
+    FUN_0039c57c(work, category);
+    work->flags &= ~0x10u;
+    for (s32 screen = 0; screen < 2; screen++) {
+        work->refresh[screen] = 1;
+    }
+}
 }

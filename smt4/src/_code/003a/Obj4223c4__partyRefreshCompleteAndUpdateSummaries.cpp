@@ -60,8 +60,8 @@ s32 messageMainGetChoiceResult();
 s32 gameRecordCopy(u16, RefreshSummary *);
 void gameDataStoreRecord(u16, const RefreshSummary *);
 void FUN_0022d434(PartyRefresh *);
-void FUN_0029cc44(s32);
-void FUN_0029ee6c(s32, u32);
+void messageDismissNumericBanner(s32);
+void buttonHelpSetText(s32, u32);
 void beginStatusPanelClose();
 void FUN_00233240(void *, s32);
 void FUN_00232848();
@@ -107,8 +107,8 @@ void Obj4223c4::partyRefreshCompleteAndUpdateSummaries()
     FUN_002a0cc8(0);
     if (block->count < 1) {
         if (!block->keepDisplay)
-            FUN_0029cc44(1);
-        FUN_0029ee6c(0, 0x323232ff);
+            messageDismissNumericBanner(1);
+        buttonHelpSetText(0, 0x323232ff);
         beginStatusPanelClose();
         FUN_00233240(work->control, 1);
         FUN_002a0cc8(1);

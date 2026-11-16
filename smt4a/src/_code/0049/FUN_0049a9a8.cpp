@@ -9,7 +9,7 @@ int cellListAppend(...);
 int dataTable17Count(void);
 int FUN_0049d048(unsigned char *, int);
 int FUN_0049d09c(unsigned char *, int);
-int FUN_004cfeb0(int, unsigned int, int, int);
+int listScrollerInitialize(int, unsigned int, int, int);
 int listCursorSetPage(int, int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -28,7 +28,7 @@ extern int dataTable17Type1GetEntry(unsigned int *, unsigned int);
 /* Supplied declaration required: dataTable17Count. */
 /* Supplied declaration required: FUN_0049d048. */
 /* Supplied declaration required: FUN_0049d09c. */
-/* Supplied declaration required: FUN_004cfeb0. */
+/* Supplied declaration required: listScrollerInitialize. */
 /* Supplied declaration required: listCursorSetPage. */
 
 
@@ -259,7 +259,7 @@ LAB_0049ad64:
     }
     temp_v2 = param_1 + temp_v9 * 0x74;
     temp_v14 = 1;
-    FUN_004cfeb0(temp_v2 + 0xb60,temp_v7,*(unsigned short *)(param_1 + temp_v9 * 0x1002 + 0x1f74),0);
+    listScrollerInitialize(temp_v2 + 0xb60,temp_v7,*(unsigned short *)(param_1 + temp_v9 * 0x1002 + 0x1f74),0);
     *(unsigned char *)(temp_v2 + 0xb6d) = 1;
     listCursorSetPage(temp_v2 + 0xb60,0);
     temp_v9 = temp_v9 + 1;

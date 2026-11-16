@@ -7,7 +7,7 @@ extern "C" {
 int pairCopy(...);
 int FUN_00231dec(...);
 int FUN_002bed3c(void);
-int FUN_002c18e4(...);
+int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
 int renderCtxSelectStereoLayout(...);
 int FUN_003996c8(void);
@@ -54,7 +54,7 @@ extern int flagBitIsSet(unsigned int);
 extern int FUN_002b8694(void);
 /* Supplied declaration required: FUN_002bed3c. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_002c18e4. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
 /* Supplied declaration required: FUN_003996c8. */
@@ -322,7 +322,7 @@ LAB_0039f450:
         DAT_0044cdd8 = DAT_0044cdd8 + 1;
       }
       renderCtxApplyTransforms(g_titleScene);
-      FUN_002c18e4(g_titleScene);
+      renderCtxResetColorScale(g_titleScene);
       if ((*(char *)(param_1 + 0x9ec) != '\0') && (*(char *)(param_1 + 0x9ee) == '\0')) {
         FUN_0039bd04(param_1);
       }

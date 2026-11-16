@@ -1,4 +1,3 @@
-/* NON_MATCHING: range locals and direct combatant flag reads recovered; excluded-mask load pair and AND scratch registers differ. */
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -15,15 +14,14 @@ BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
 u32 FUN_003c1d64(void)
 {
     u32 category = scrGetArg(0);
-    s32 choice = btlResolveEntryChoice(scrGetArg(1));
-    s32 first;
-    s32 count;
-    FUN_00301a08(choice, &first, &count);
-    for (s32 index = first; index < count + first; ++index) {
+    s32 first, count;
+    FUN_00301a08(btlResolveEntryChoice(scrGetArg(1)), &first, &count);
+    for (s32 index = first; index < first + count; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
-        if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
-            (entry->flags & g_btlCandidateMasks.required) != 0 &&
-            (g_btlCandidateMasks.excluded & entry->flags) == 0 && FUN_003020fc(entry, category)) {
+        if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
+            (entry->flags & g_btlCandidateMasks.required) &&
+            !(entry->flags & g_btlCandidateMasks.excluded) &&
+            FUN_003020fc(entry, category)) {
             scrSetResult(1);
             return 1;
         }

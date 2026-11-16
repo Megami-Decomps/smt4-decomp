@@ -1,8 +1,11 @@
-/* NON_MATCHING: capacity load grouping, copy-loop registers, and final vector update scheduling differ. */
-#include "classes/AllocatorWordVector.h"
+#include "classes/AllocatedArray.h"
 
-// Append one copied value to an allocator-owned word vector, growing it geometrically.
-extern "C" u32 FUN_0023669c(AllocatorWordVector *vector, const u32 *value)
+extern "C" {
+
+// Appends a word to an allocator-backed array (the traverser's render-node list); returns whether it fitted.
+u32 FUN_0023669c(AllocatedArray<u32> *array, const u32 *value)
 {
-    return allocatorWordVectorPush(vector, *value);
+    return array->push_back(*value);
 }
+
+} /* extern "C" */

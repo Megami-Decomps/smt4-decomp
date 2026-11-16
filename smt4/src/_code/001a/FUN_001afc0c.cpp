@@ -17,8 +17,8 @@ int FUN_002905d0(void);
 int useCounterStart(void);
 int FUN_0029e328(...);
 int sortMenuCreate(...);
-int FUN_0029ee6c(...);
-int FUN_0029efc0(...);
+int buttonHelpSetText(...);
+int resourceRunOperationIfUnblocked(...);
 int FUN_0029efd8(int, int);
 int uiScrollHandleActionsOrTouch(int, unsigned int, int, int, int, int, char [8], int, int);
 int eventQueueAddUniqueIfValid(...);
@@ -55,9 +55,9 @@ extern unsigned int flaggedEntryGetValueA(int);
 /* Supplied declaration required: FUN_0029e328. */
 /* Supplied declaration required: sortMenuCreate. */
 extern int FUN_0029ee54(int);
-/* Supplied declaration required: FUN_0029ee6c. */
+/* Supplied declaration required: buttonHelpSetText. */
 extern int FUN_0029efa8(int);
-/* Supplied declaration required: FUN_0029efc0. */
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 extern int gameGetPlayerData(void);
@@ -118,7 +118,7 @@ void FUN_001afc0c(void)
     }
   }
   else {
-    temp_v2 = FUN_0029efc0(temp_v11);
+    temp_v2 = resourceRunOperationIfUnblocked(temp_v11);
     temp_v3 = FUN_0029efa8(temp_v11);
     temp_v0 = *(short *)(temp_v9 + (temp_v3 + temp_v2) * 2);
     temp_v14[0] = '\0';
@@ -127,10 +127,10 @@ void FUN_001afc0c(void)
     uiScrollHandleActionsOrTouch(temp_v11,temp_v6,temp_v1 + 0x9dc,(int)*(short *)(temp_v1 + 0x9f6),
                  (int)*(short *)(temp_v1 + 0x9f2),(int)*(short *)(temp_v1 + 0x9f4),temp_v14,0,1);
     if (temp_v2 != 0) {
-      temp_v2 = FUN_0029efc0(temp_v11);
+      temp_v2 = resourceRunOperationIfUnblocked(temp_v11);
       temp_v3 = FUN_0029efa8(temp_v11);
       if (*(short *)(temp_v9 + (temp_v3 + temp_v2) * 2) != temp_v0) {
-        temp_v2 = FUN_0029efc0(temp_v11);
+        temp_v2 = resourceRunOperationIfUnblocked(temp_v11);
         temp_v3 = FUN_0029efa8(temp_v11);
         temp_v8 = *(unsigned short *)(temp_v9 + (temp_v3 + temp_v2) * 2);
         temp_v10 = (unsigned int)temp_v8;
@@ -163,7 +163,7 @@ void FUN_001afc0c(void)
       temp_v2 = temp_v11;
       FUN_0029efd8(temp_v11,1);
       if (temp_v2 != 0) {
-        temp_v2 = FUN_0029efc0(temp_v11);
+        temp_v2 = resourceRunOperationIfUnblocked(temp_v11);
         temp_v3 = FUN_0029efa8(temp_v11);
         temp_v8 = *(unsigned short *)(temp_v9 + (temp_v3 + temp_v2) * 2);
         temp_v10 = (unsigned int)temp_v8;
@@ -240,7 +240,7 @@ void FUN_001afc0c(void)
             temp_v6 = 0x100016d;
             if (temp_v2 != 0) {
               eventQueueAddUniqueIfValid(0x100016d);
-              FUN_0029ee6c(0,0x323232ff);
+              buttonHelpSetText(0,0x323232ff);
               sortMenuCreate(0xe,0);
               FUN_0029e328(0x22);
               FUN_0029e328(0x21);
@@ -283,7 +283,7 @@ void FUN_001afc0c(void)
               temp_v2 = 0;
               FUN_002c1658(0,1);
               if (temp_v2 == 0 && temp_v14[0] == '\0') goto LAB_001b02f8;
-              temp_v2 = FUN_0029efc0(temp_v11);
+              temp_v2 = resourceRunOperationIfUnblocked(temp_v11);
               temp_v3 = FUN_0029efa8(temp_v11);
               temp_v10 = (unsigned int)*(unsigned short *)(temp_v9 + (temp_v3 + temp_v2) * 2);
               if (*(char *)(temp_v1 + 0x5f1) != '\0') {
@@ -440,11 +440,11 @@ LAB_001b02f8:
 LAB_001b0368:
     temp_v13 = *(char *)(temp_v1 + 0x5c4) == '\0';
     if (!temp_v13) {
-      temp_v6 = FUN_0029efc0(temp_v11);
+      temp_v6 = resourceRunOperationIfUnblocked(temp_v11);
       temp_v5 = flaggedEntryGetValueA(temp_v11);
     }
     else {
-      temp_v6 = FUN_0029efc0(temp_v11);
+      temp_v6 = resourceRunOperationIfUnblocked(temp_v11);
       temp_v5 = flaggedEntryGetValueA(temp_v11);
     }
     gameDataSetLinkSlot(temp_v13,temp_v5,temp_v6);

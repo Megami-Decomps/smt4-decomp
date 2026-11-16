@@ -1,56 +1,67 @@
-/* NON_MATCHING: the three globals are now g_gameState fields; retail addresses them from one literal g_gameState+0x100 (r1) and r1-256 (r4), build loads g_gameState itself. */
 #include "common.h"
 #include "map/lmapMain.h"
 #include "gamedata/Table1bOr1c.h"
 #include "mikado/mikadoMain.h"
-#include "map/mapDepart.h"
 #include <stddef.h>
 
+/* The fields of g_gameState this music gate uses. */
+struct GameStateBgmView {
+    u8 unk000[0x28];
+    u32 bgmId;          // 0x028
+    u8 unk02C[0x11D - 0x2C];
+    s8 bgmReleased;     // 0x11D
+    u8 unk11E[0x145 - 0x11E];
+    s8 scriptPending;   // 0x145
+};
+typedef char GameStateBgmViewLayoutCheck[
+    offsetof(GameStateBgmView, bgmReleased) == 0x11D &&
+    offsetof(GameStateBgmView, scriptPending) == 0x145 ? 1 : -1];
+
+/* The music fields beyond the recovered map-main state prefix. */
+struct LmapBgmTailView {
+    u8 unk000[0x40];
+    s32 area;           // 0x040
+    u8 unk044[4];
+    s32 kind;           // 0x048
+    u8 unk04C[0x994 - 0x4C];
+    s32 mode;           // 0x994
+    u8 unk998;
+    s8 suppressed;      // 0x999
+};
+
 extern "C" {
-extern LmapMainState *g_lmapMainState;
-extern GameState g_gameState;
+extern LmapBgmTailView *g_lmapMainState;
+extern GameStateBgmView g_gameState;
 
 s32 bgmGetStateById(u32 id);
 s32 FUN_00287328(u32 id);
 u16 FUN_002903f0(void);
 
+/* Selects the map music from the area, or a story override, and starts it unless it is already
+ * playing; releases the music while a script is pending, the music is held or the map suppresses it. */
 void FUN_00266a2c(void)
 {
-    /* These accesses are beyond the recovered canonical type's end.
-     * This local view starts at byte 0x994, not at a new object boundary.
-     * Its rounded sizeof is a C++ layout property, not an allocation size. */
-    struct BgmTailViewIV {
-        s32 mode;
-        u8 unk998;
-        u8 suppressed;
-    };
-    typedef char BgmTailViewIVLayoutCheck[
-        offsetof(BgmTailViewIV, mode) == 0 &&
-        offsetof(BgmTailViewIV, suppressed) == 5 &&
-        sizeof(BgmTailViewIV) == 8 ? 1 : -1];
+    GameStateBgmView *game = &g_gameState;
+    LmapBgmTailView *map = g_lmapMainState;
 
-    const BgmTailViewIV *tail = reinterpret_cast<const BgmTailViewIV *>(
-        reinterpret_cast<const u8 *>(g_lmapMainState) + 0x994);
-
-    if (g_gameState.scriptPending != 0 || g_gameState.bgmReleased == 0 ||
-        tail->suppressed != 0) {
+    if (game->scriptPending != 0 || game->bgmReleased == 0 || map->suppressed != 0) {
         bgmReleaseStopped();
         g_gameState.bgmReleased = 1;
         return;
     }
 
-    if (g_lmapMainState->unk40 == 0x66) {
+    if (map->area == 0x66) {
         g_gameState.bgmId = 0x01000055;
-    } else if (g_lmapMainState->unk40 == 0x67) {
+    } else if (map->area == 0x67) {
         g_gameState.bgmId = 0x01000056;
-    } else if (g_lmapMainState->unk48 == 5) {
+    } else if (map->kind == 5) {
         g_gameState.bgmId = 0x01000054;
     } else {
         g_gameState.bgmId = 0x01000053;
     }
 
     u32 id;
-    if (tail->mode != 1 && tail->mode != 2 && (id = FUN_002903f0()) != 0) {
+    if (map->mode != 1 && map->mode != 2 && (id = FUN_002903f0()) != 0) {
         const s32 overrideState = table1bOr1cGetRecordValue(id);
         if (overrideState == 1) {
             g_gameState.bgmId = 0x01000037;
@@ -60,11 +71,10 @@ void FUN_00266a2c(void)
     }
 
     const s32 state = bgmGetStateById(g_gameState.bgmId);
-    if (state == 1 || state == 2) {
-        return;
-    }
     if (state == 0) {
         bgmReleaseStopped();
+    } else if (state == 1 || state == 2) {
+        return;
     }
     FUN_00287328(g_gameState.bgmId);
 }

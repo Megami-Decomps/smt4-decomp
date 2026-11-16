@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the schedule of the pooled comparator address differs (retail loads it into r0 after mov r2,r0; the build loads r1 early) */
 #include "common.h"
 #include "gamedata/DataTable.h"
 
@@ -20,8 +19,8 @@ s32 idMapCompareKeys(const void *left, const void *right);
 
 extern u8 DAT_00404386[]; /* 0x404386 */
 
-/* Finds the entry with the given id in data table 6's section 1 and maps its index through a byte table. */
-u8 idMapLookup(u16 id)
+/* Finds the entry with the given id in data table 6's section 1. */
+static __inline Entry0026a69c *idMapFind(u16 id)
 {
     void *table = dataTableGet(6, 1);
     Entry0026a69c *entries = reinterpret_cast<Entry0026a69c *>(dataTableGetEntries(table));
@@ -29,7 +28,13 @@ u8 idMapLookup(u16 id)
     Entry0026a69c key;
 
     key.id = id;
-    return DAT_00404386[libc_bsearch(&key, entries, count, sizeof(Entry0026a69c), idMapCompareKeys)->index];
+    return libc_bsearch(&key, entries, count, sizeof(Entry0026a69c), idMapCompareKeys);
+}
+
+/* Maps the index of the entry with the given id through a byte table. */
+u8 idMapLookup(u16 id)
+{
+    return DAT_00404386[idMapFind(id)->index];
 }
 
 } /* extern "C" */

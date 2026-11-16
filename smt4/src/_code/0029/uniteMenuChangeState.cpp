@@ -9,8 +9,8 @@ void buttonHelpSetPreset(u32 preset);
 const void *dataTableGet(u32 table, u32 group);
 const UniteDescriptionEntry *dataTableGetEntries(const void *table);
 u32 dataTableGetCount(const void *table);
-void FUN_0029ee6c(const char *text, u32 color);
-s32 FUN_0029efc0(const void *cursor);
+void buttonHelpSetText(const char *text, u32 color);
+s32 resourceRunOperationIfUnblocked(const void *cursor);
 s32 FUN_0029efa8(const void *cursor);
 void FUN_0029dc74(u32 id, void *member);
 void unitInitializeFromSavedRecord(u32 id, void *member);
@@ -35,12 +35,12 @@ void uniteMenuChangeState(u32 state, s32 preservePrevious)
         const void *table = dataTableGet(0x24, 2);
         const UniteDescriptionEntry *entry = dataTableGetEntries(table);
         const char *text = dataTableGetCount(table) > 1 ? entry->text : NULL;
-        FUN_0029ee6c(text, 0x323232FF);
+        buttonHelpSetText(text, 0x323232FF);
         break;
     }
     case 0x0D: {
         buttonHelpSetPreset(0x54);
-        s32 selected = FUN_0029efc0(work->firstListIV.cursor);
+        s32 selected = resourceRunOperationIfUnblocked(work->firstListIV.cursor);
         selected += FUN_0029efa8(work->firstListIV.cursor);
         u32 index = work->firstListIV.indices[selected];
         const UnitePairEntryIV *pair = &work->pairListIV.pairs[index];
@@ -69,7 +69,7 @@ void uniteMenuChangeState(u32 state, s32 preservePrevious)
     case 0x0F:
         if (work->state != 0x10 && work->state != 0x11 && work->state != 0x12) {
             buttonHelpSetPreset(0x55);
-            s32 selected = FUN_0029efc0(work->secondListIV.cursor);
+            s32 selected = resourceRunOperationIfUnblocked(work->secondListIV.cursor);
             selected += FUN_0029efa8(work->secondListIV.cursor);
             buttonHelpShowSkillDetails(work->secondListIV.indices[selected]);
             menuSetModeAndResetTransitions(0x0E);
@@ -93,12 +93,12 @@ void uniteMenuChangeState(u32 state, s32 preservePrevious)
         const void *table = dataTableGet(0x24, 2);
         const UniteDescriptionEntry *entry = dataTableGetEntries(table);
         const char *text = dataTableGetCount(table) > 1 ? entry->text : NULL;
-        FUN_0029ee6c(text, 0x323232FF);
+        buttonHelpSetText(text, 0x323232FF);
         break;
     }
     case 0x1B:
         buttonHelpSetPreset(0x5A);
-        FUN_0029ee6c(NULL, 0x323232FF);
+        buttonHelpSetText(NULL, 0x323232FF);
         work->eventFlagsIV.opened = 1;
         break;
     case 0x21:

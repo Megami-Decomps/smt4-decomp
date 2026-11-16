@@ -20,13 +20,13 @@ struct EffectEditor {
 
 extern "C" {
 extern EffectEditor g_effectEditor;
-void FUN_00363590(void* list, void* item);
+void linkedItemsRemoveAndRelease(void* list, void* item);
 
 // Selects the current editor item and resets the two editing blocks.
 void FUN_003c36e4(void)
 {
     void* item = linkedFindItemByIndex(reinterpret_cast<const LinkedItems *>(g_effectEditor.list), g_effectEditor.index + g_effectEditor.blocks[1].index);
-    FUN_00363590(g_effectEditor.list, item);
+    linkedItemsRemoveAndRelease(g_effectEditor.list, item);
     g_effectEditor.blocks[0].index = 0;
     g_effectEditor.index = 0;
     g_effectEditor.blocks[1].index = 0;

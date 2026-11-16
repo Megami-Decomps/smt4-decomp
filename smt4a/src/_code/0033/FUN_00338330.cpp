@@ -11,7 +11,7 @@ void matrix44SetIdentity(TransformMtx44 *matrix);
 void FUN_002b4c30(TransformRotation *rotation, const void *source);
 void matrix43Multiply(TransformMtx44 *result, const TransformMtx44 *left, const TransformRotation *right);
 void matrixCopyFull(TransformMtx44 *destination, const TransformMtx44 *source);
-void FUN_002a2048(TransformMtx44 *matrix, const TransformVec3 *translation, u32 mode);
+void mathMatrixApplyTranslation(TransformMtx44 *matrix, const TransformVec3 *translation, u32 mode);
 void matrixApplyByMode(void *transform, const TransformMtx44 *matrix, u32 flags);
 
 }
@@ -41,7 +41,7 @@ static void matrixComposeScaleRotateTranslate(TransformMtx44 *matrix, const Tran
         value.x = translation->x;
         value.y = translation->y;
         value.z = translation->z;
-        FUN_002a2048(matrix, &value, 2);
+        mathMatrixApplyTranslation(matrix, &value, 2);
     }
 }
 

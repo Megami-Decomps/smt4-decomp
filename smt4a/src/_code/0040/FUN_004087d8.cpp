@@ -1,4 +1,3 @@
-/* NON_MATCHING: canonical render push fixes stack-address scheduling; only the saved VFP constant registers (1.0f/0.0f in s16/s17 swapped) and the s0/s1 conversion register differ. */
 #include "camp/RenderCtx.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -19,14 +18,9 @@ f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 void FUN_00164b5c(s32 layer, u32 texture, u32 frame, s32 x, s32 y, u32 mode);
 f32 FUN_00168594(const char *text, s32 font, f32 initialWidth);
 
-/* Draws the selected caption over its stereo-shifted frame with the owner's opacity. */
-void FUN_004087d8(ChoiceCaptionWork *work, s32 first)
+/* Draws the frame and the centred caption at full speed. */
+static void choiceCaptionDrawBody(ChoiceCaptionWork *work, s32 first)
 {
-    efctSetSpeed(work->alpha);
-    FUN_00183bb0();
-    RenderCtxA *context = g_renderCtx;
-    renderCtxPushA(context, FUN_001692ac(1, 0));
-    efctSetSpeed(1.0f);
     asdTMTexTableEntryAt(0x2B, 0x56);
     TextureTableEntryIV *metrics = asdTMTexTableEntryAt(0x2B, 0x59);
     s32 offset = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
@@ -35,7 +29,19 @@ void FUN_004087d8(ChoiceCaptionWork *work, s32 first)
     s32 width = (s32)FUN_00168594(first != 0 ? work->first : work->second, 4, 0.0f);
     f32 x = (f32)(offset + (availableWidth - width) / 2 + metrics->x);
     f32 y = (f32)metrics->y;
-    textDrawString(4, 0xFFFFFFFF, first != 0 ? work->first : work->second, x, y, 0.0f, 0.0f, work->alpha);
+    const char *text = first != 0 ? work->first : work->second;
+    textDrawString(4, 0xFFFFFFFF, text, x, y, 0.0f, 0.0f, work->alpha);
+}
+
+/* Draws the selected caption over its stereo-shifted frame with the owner's opacity. */
+void FUN_004087d8(ChoiceCaptionWork *work, s32 first)
+{
+    efctSetSpeed(work->alpha);
+    FUN_00183bb0();
+    RenderCtxA *context = g_renderCtx;
+    renderCtxPushA(context, FUN_001692ac(1, 0));
+    efctSetSpeed(1.0f);
+    choiceCaptionDrawBody(work, first);
     renderStackPop(&g_renderCtx->stackA);
     efctSetSpeed(1.0f);
 }

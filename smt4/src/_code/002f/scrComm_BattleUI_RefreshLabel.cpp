@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only: retail keeps the battle state in r4 and the option label in r5; built swaps r4/r5. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 
@@ -19,22 +18,19 @@ typedef struct Label {
 extern u32 g_btlUiBlock;
 
 GameOptions *gameGetSupportUnitData(void);
-s32 btlApplyOptionAndSnapshotReserve(void);
+void btlApplyOptionAndSnapshotReserve(BtlMainState *state);
 Label *supportUnitGetEntry(s32 a, u16 b);
-s32 FUN_002942c4(s32 number, s32 arg);
+s32 statusBustUpPortraitAcquire(s32 number, s32 arg);
 s32 FUN_003ae620(u32 block);
 
 /* Script command: refreshes the battle UI label from the options' selection and flags the battle UI for redraw. */
 u32 scrComm_BattleUI_RefreshLabel(void)
 {
     BtlMainState *state = btlGetMainState();
-    u16 labelB;
-    Label *label;
 
-    btlApplyOptionAndSnapshotReserve();
-    labelB = gameGetSupportUnitData()->labelB;
-    label = supportUnitGetEntry(gameGetSupportUnitData()->labelA, labelB);
-    FUN_002942c4((s16)(label->number + 1), 0);
+    btlApplyOptionAndSnapshotReserve(state);
+    const Label *label = supportUnitGetEntry(gameGetSupportUnitData()->labelA, gameGetSupportUnitData()->labelB);
+    statusBustUpPortraitAcquire((s16)(label->number + 1), 0);
     state->battleMask |= 0x2000000;
     FUN_003ae620(g_btlUiBlock);
     return 1;

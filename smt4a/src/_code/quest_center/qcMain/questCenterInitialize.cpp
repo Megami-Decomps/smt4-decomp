@@ -1,4 +1,4 @@
-/* NON_MATCHING: private opening-tail view adds a zero-offset base copy; global/zero and draw-work registers and scheduling differ. 5TE candidate. */
+/* NON_MATCHING: initialised through g_qcMain.work as retail; only the first draw task's work/callback argument loads take r1/r2 the other way round. */
 #include "quest_center/qcMain.h"
 extern "C" QcGlobalsA g_qcMain;
 #include "AsdSDK/AsdDebug.h"
@@ -18,15 +18,16 @@ s32 FUN_002bd3a4(u32 handle);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc update, AsdProcFunc end, u32 work, void *owner);
 
+/* Creates the quest center: its work block (options from the caller's arguments), the main process and its draw tasks. */
 void questCenterInitialize(const s32 *arguments, u32 argumentBytes)
 {
     jyoucyuGetTableEntry(0);
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\quest_center\\qcMain.cpp", 0xa0);
-    QcWork *work = static_cast<QcWork *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(QcWork), 1));
-    g_qcMain.work = work;
-    work->done = 0;
-    work->entry = NULL;
-    work->mode = 0;
+    g_qcMain.work = static_cast<QcWork *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(QcWork), 1));
+    g_qcMain.work->done = 0;
+    g_qcMain.work->entry = NULL;
+    g_qcMain.work->mode = 0;
+    QcWork *work = g_qcMain.work;
     if (arguments == NULL) {
         g_qcMain.option0 = 0;
         g_qcMain.option1 = 0;

@@ -319,7 +319,7 @@ typedef char UniteWorkResultBuildAOffsets[
 extern "C" {
 #endif
 /* Canonical declaration (matches the definition). */
-u32 FUN_0029e93c(const void *object);
+u32 resourceRunEmbeddedOperationIfUnblocked(const void *object);
 #ifdef __cplusplus
 }
 #endif

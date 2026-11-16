@@ -9,7 +9,7 @@ int uiSlotEntryDraw(...);
 int FUN_001a7810(...);
 int FUN_001af670(...);
 int dataTable24Sub0GetRecord(...);
-int FUN_0029efc0(...);
+int resourceRunOperationIfUnblocked(...);
 int FUN_002bdf94(...);
 int textDrawString(int, unsigned int, unsigned char [72]);
 int textFormatBuffer(unsigned char [72], unsigned char *);
@@ -44,7 +44,7 @@ extern int uniteGetWork(void);
 extern int FUN_0029d644(int);
 extern unsigned int FUN_0029dde0(void);
 extern int FUN_0029efa8(int);
-/* Supplied declaration required: FUN_0029efc0. */
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int FUN_002a0d0c(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: textDrawString. */
@@ -98,7 +98,7 @@ void FUN_001dddd8(int param_1,int param_2,int param_3)
     FUN_002bdf94(0,*(short *)(temp_v2 + 8) + param_1,*(short *)(temp_v2 + 10) + param_2,1,2,0x65,
                  &LAB_001de11c,temp_v3);
     temp_v2 = temp_v0 + 0x4e8;
-    temp_v4 = FUN_0029efc0();
+    temp_v4 = resourceRunOperationIfUnblocked();
     temp_v5 = FUN_0029d644(temp_v2);
     temp_v10 = 0;
     if (temp_v10 < temp_v5) {
@@ -185,7 +185,7 @@ void FUN_001dddd8(int param_1,int param_2,int param_3)
         temp_v10 = temp_v10 + 1;
       } while (temp_v10 < temp_v5);
     }
-    temp_v4 = FUN_0029efc0(temp_v2);
+    temp_v4 = resourceRunOperationIfUnblocked(temp_v2);
     temp_v5 = FUN_0029efa8(temp_v2);
     temp_v4 = temp_v4 + temp_v5;
     temp_v5 = dataTable24Sub0GetRecord(temp_v4);

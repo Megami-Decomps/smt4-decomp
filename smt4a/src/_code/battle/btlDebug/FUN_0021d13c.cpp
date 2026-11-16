@@ -21,7 +21,7 @@ int FUN_0021a9e8(...);
 int FUN_0022e774(void);
 int FUN_0023f328(...);
 int FUN_00333f6c(void);
-int FUN_00371c3c(...);
+int statusBustUpPortraitAcquire(...);
 int messageDismissNumericBanner(...);
 int statusIconSetKind(...);
 int statusDownGetValue(void);
@@ -44,7 +44,7 @@ int FUN_0020acd8(...);
 int FUN_0021a6c8(...);
 int btlCommandResolveSelectedTarget(...);
 int FUN_002ccde8(...);
-int FUN_0038b3f8(...);
+int statusBustUpPortraitRelease(...);
 int devilIsTextureLoaded(...);
 int FUN_003df57c(...);
 int FUN_003eb200(void);
@@ -203,11 +203,11 @@ extern int uiSearchSecondary(int);
 extern int uiSearchPrimary(int *);
 /* Supplied declaration required: useCounterRelease. */
 /* Supplied declaration required: FUN_00370ecc. */
-/* Supplied declaration required: FUN_00371c3c. */
+/* Supplied declaration required: statusBustUpPortraitAcquire. */
 /* Supplied declaration required: FUN_003756c8. */
 extern int panelStateIs0(void);
 /* Supplied declaration required: messageDismissNumericBanner. */
-/* Supplied declaration required: FUN_0038b3f8. */
+/* Supplied declaration required: statusBustUpPortraitRelease. */
 /* Supplied declaration required: statusIconSetKind. */
 /* Supplied declaration required: devilIsTextureLoaded. */
 /* Supplied declaration required: statusDownGetValue. */
@@ -1666,7 +1666,7 @@ LAB_0021fa24:
                   temp_v4 = (int)*(short *)(param_1 + 0x4b14);
                   if ((((temp_v4 != 0) && (*(char *)(param_1 + 0x4b18) == '\0')) &&
                       (devilIsTextureLoaded(temp_v4,1), temp_v4 != 0)) && (*piVar19 == 0)) {
-                    FUN_0038b3f8((int)*(short *)(param_1 + 0x4b14),1);
+                    statusBustUpPortraitRelease((int)*(short *)(param_1 + 0x4b14),1);
                   }
                   uiSpriteSelectAnim(param_1 + 0x1344,0x1c);
                   if (*piVar19 == 1) {
@@ -1696,7 +1696,7 @@ LAB_0021fbdc:
                   temp_v4 = (int)*(short *)(param_1 + 0x4b14);
                   if (((temp_v4 != 0) && (*(char *)(param_1 + 0x4b18) == '\0')) &&
                      ((devilIsTextureLoaded(temp_v4,1), temp_v4 != 0 && (*(int *)(param_1 + 0x4b28) == 1)))) {
-                    FUN_0038b3f8((int)*(short *)(param_1 + 0x4b14),1);
+                    statusBustUpPortraitRelease((int)*(short *)(param_1 + 0x4b14),1);
                   }
                   temp_v2 = 0;
                   puVar20 = (unsigned char *)(param_1 + 0x4b0f);
@@ -2359,7 +2359,7 @@ LAB_00220b54:
           piVar16 = (int *)(temp_v35[2] + 0x4bb0);
           temp_v9 = *piVar16;
           if (0 < temp_v9) {
-            FUN_0038b3f8((int)(short)temp_v9,1);
+            statusBustUpPortraitRelease((int)(short)temp_v9,1);
             *piVar16 = 0;
           }
           *(unsigned char *)(temp_v7 + 0x41e8) = 0;
@@ -2393,9 +2393,9 @@ LAB_00220b54:
         temp_v5 = *puVar22;
         if (temp_v5 == *(unsigned short *)((int)temp_v26 + 0x62)) goto LAB_0022129c;
         if (0 < (int)temp_v5) {
-          FUN_0038b3f8((int)(short)temp_v5,1);
+          statusBustUpPortraitRelease((int)(short)temp_v5,1);
         }
-        FUN_00371c3c((int)*(short *)((int)temp_v26 + 0x62),1);
+        statusBustUpPortraitAcquire((int)*(short *)((int)temp_v26 + 0x62),1);
         *puVar22 = (unsigned int)*(unsigned short *)((int)temp_v26 + 0x62);
         *(short *)(temp_v29 + 0x4210) = *temp_v32;
         *(unsigned short *)(temp_v29 + 0x41f2) = *(unsigned short *)((int)temp_v26 + 0x2a);
@@ -2423,7 +2423,7 @@ LAB_00220b54:
       piVar16 = (int *)(temp_v35[2] + 0x4bb0);
       temp_v9 = *piVar16;
       if (0 < temp_v9) {
-        FUN_0038b3f8((int)(short)temp_v9,1);
+        statusBustUpPortraitRelease((int)(short)temp_v9,1);
         *piVar16 = 0;
       }
       *(unsigned char *)(temp_v7 + 0x4ae5) = 0;
@@ -2537,7 +2537,7 @@ LAB_0022129c:
                     temp_v4 = *temp_v37;
                     FUN_003ec6d8(temp_v4,(int)*(short *)(param_1 + 0x4b16));
                     if (temp_v4 == 0) {
-                      FUN_0038b3f8((int)*(short *)(param_1 + 0x4b16),1);
+                      statusBustUpPortraitRelease((int)*(short *)(param_1 + 0x4b16),1);
                     }
                   }
                   temp_v4 = (int)*(short *)(param_1 + 0x4b14);
@@ -2548,7 +2548,7 @@ LAB_0022129c:
                     *puVar20 = temp_v2;
                   }
                   else {
-                    FUN_00371c3c((int)*(short *)(param_1 + 0x4b14),1);
+                    statusBustUpPortraitAcquire((int)*(short *)(param_1 + 0x4b14),1);
                     puVar20 = (unsigned char *)(param_1 + 0x4b18);
                     temp_v2 = 0;
                     *puVar20 = temp_v2;

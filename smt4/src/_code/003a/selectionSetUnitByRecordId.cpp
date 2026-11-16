@@ -5,7 +5,7 @@
 extern "C" {
 extern CountdownContextPrefixIV g_countdown;
 const Table00Record *dataTable00FindById(u32 id);
-s32 FUN_002942c4(s32 index, s32 mode);
+s32 statusBustUpPortraitAcquire(s32 index, s32 mode);
 }
 
 static inline void lookupSelectionIndex(s16 *index, u32 selectionId)
@@ -34,7 +34,7 @@ extern "C" void selectionSetUnitByRecordId(u32 requestedId)
         lookupSelectionIndex(&state->secondaryIndex, requestedId);
 
         if (state->initialIndex >= 0)
-            FUN_002942c4(state->initialIndex, 1);
+            statusBustUpPortraitAcquire(state->initialIndex, 1);
     }
 
     state->currentId = requestedId;

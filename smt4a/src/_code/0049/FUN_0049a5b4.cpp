@@ -66,7 +66,7 @@ s32 FUN_0049cab8(u32 item);
 s32 aocItemGetPrice(PackedItem *item);
 void FUN_0049cd18(PackedItem *item, s32 count, s32 charge);
 void qsort(void *base, u32 count, u32 size, void *compare);
-void FUN_004cfeb0(void *list, s32 a, u32 b, s32 c);
+void listScrollerInitialize(void *list, s32 a, u32 b, s32 c);
 void listCursorSetPage(void *list, s32 page);
 void FUN_004d05c4(void *p, s32 a, s32 b, s32 c);
 
@@ -132,7 +132,7 @@ void FUN_0049a5b4(SaleMenu *menu)
         FUN_0049cd18(&item, -owned, 0);
     }
     qsort(entries, *count, 6, &sortCompareKeyPair);
-    FUN_004cfeb0(menu->list, 10, *count, 0);
+    listScrollerInitialize(menu->list, 10, *count, 0);
     ((u8 *)menu)[0x9F95] = 1;
     listCursorSetPage(menu->list, 1);
     menu->window->attach(menu->list);

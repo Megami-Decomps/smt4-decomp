@@ -58,8 +58,8 @@ const char *FUN_0014bf3c(u32 demon, u32 flags);
 void FUN_001a90f0(char *destination, const char *source);
 void textFormatBuffer(char *destination, const char *format, ...);
 f32 FUN_00168594(const char *text, u32 font, f32 spacing);
-void FUN_0038b3f8(s32 id, u32 kind);
-void FUN_00371c3c(s32 id, u32 kind);
+void statusBustUpPortraitRelease(s32 id, u32 kind);
+void statusBustUpPortraitAcquire(s32 id, u32 kind);
 u16 FUN_0036fcd0(void *item, u32 flags);
 u32 requestIdToCode(u32 id);
 void asdTMTexTableReleaseNode(u32 table, u32 code);
@@ -79,7 +79,7 @@ static __forceinline void setCharacterEquipmentLabelA(CharacterInfoPanelA *panel
 static inline void clearCharacterPreviewA(CharacterInfoPanelA *panel)
 {
     if (panel->previewId && devilIsTextureLoaded(panel->previewId, 1))
-        FUN_0038b3f8(panel->previewId, 1);
+        statusBustUpPortraitRelease(panel->previewId, 1);
     panel->previewId = 0;
 }
 
@@ -141,9 +141,9 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanelA *panel, const Cha
         if (record->demon) {
             if (record->owner) {
                 if (panel->previewId && devilIsTextureLoaded(panel->previewId, 1))
-                    FUN_0038b3f8(panel->previewId, 1);
+                    statusBustUpPortraitRelease(panel->previewId, 1);
                 panel->previewId = record->demon;
-                FUN_00371c3c(panel->previewId, 1);
+                statusBustUpPortraitAcquire(panel->previewId, 1);
             }
         } else {
             clearCharacterPreviewA(panel);

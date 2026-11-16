@@ -7,7 +7,7 @@ s32 FUN_002865c0(u32 mode, f32 alpha);
 s32 FUN_002c5d80(u32 first, u32 second);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);
 void taskRunPhase(u32 phase);
-void FUN_002c18e4(RenderCtx *context);
+void renderCtxResetColorScale(RenderCtx *context);
 
 s32 FUN_001aa4a8(u32 job)
 {
@@ -23,7 +23,7 @@ s32 FUN_001aa4a8(u32 job)
     renderStackPop(&g_titleScene->stackA);
     renderStackPop(&g_titleScene->additional.stackC);
     renderCtxApplyTransforms(g_titleScene);
-    FUN_002c18e4(g_titleScene);
+    renderCtxResetColorScale(g_titleScene);
     return 0;
 }
 }

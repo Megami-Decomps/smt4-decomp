@@ -1,4 +1,3 @@
-/* NON_MATCHING: timed-close state constants use r1/r0 instead of retail's r2/r1. */
 #include "ui/PartyPanelState.h"
 #include "util/MathFunctions.h"
 extern "C" PartyPanelState *g_partyPanel;
@@ -62,7 +61,8 @@ extern "C" s32 infoWindowUpdate(u32 job)
         break;
     case 4:
         if (window->closeDelay >= 0 && window->frames > window->closeDelay) {
-            window->state = 5;
+            /* Begin closing, written as infoWinStartTimer does it. */
+            g_infoWin->state = 5;
             window->closeDelay = 30;
             timerStart(&window->transition, 1, 0);
         }

@@ -1,7 +1,7 @@
-/* NON_MATCHING: palette tail copies, cached-state registers and bounds/count global-address grouping differ. */
 #include "shard/S1ListPanel.h"
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 #include <stddef.h>
+#include <string.h>
 
 struct DebugSpatialBounds {
     BattleVector3 minimum;
@@ -23,22 +23,32 @@ u32 FUN_001692ac(u32, u32);
 void FUN_00280a08(u32, u32, u32, u32,
                  f32, f32, f32, f32, f32, f32, f32, f32, f32, f32, f32, f32);
 
+// Draw the queued spatial bounds in cycling colors on a plane above the supplied height.
 void FUN_00379a48(f32 height)
 {
-    DebugBoundsPalette palette = DAT_00532240;
-    if (DAT_00611874.count) {
+    u32 colors[12];
+    memcpy(colors, DAT_00532240.colors, sizeof(colors));
+    DebugSpatialBoundsQueue *queue = &DAT_00611874;
+    if (queue->count != 0) {
         RenderCtxA *context = g_renderCtx;
         renderCtxPushA(context, FUN_001692ac(5, 1));
         renderCtxSelectTexture(g_renderCtx, 0);
-        for (s32 index = 0; index < DAT_00611874.count; ++index) {
-            const DebugSpatialBounds *bounds = &DAT_00611874.bounds[index];
-            u32 color = palette.colors[index % 12] | 0x70;
-            f32 elevation = height + 100.0f;
-            FUN_00280a08(color, color, color, color,
-                bounds->minimum.x, elevation, bounds->minimum.z,
-                bounds->minimum.x, elevation, bounds->maximum.z,
-                bounds->maximum.x, elevation, bounds->minimum.z,
-                bounds->maximum.x, elevation, bounds->maximum.z);
+        s32 index = 0;
+        if (queue->count > 0) {
+            height += 100.0f;
+            for (; index < queue->count; ++index) {
+                const DebugSpatialBounds *bounds = &queue->bounds[index];
+                f32 minimumX = bounds->minimum.x;
+                f32 minimumZ = bounds->minimum.z;
+                f32 maximumZ = bounds->maximum.z;
+                f32 maximumX = bounds->maximum.x;
+                u32 color = colors[index % 12] | 0x70;
+                FUN_00280a08(color, color, color, color,
+                    minimumX, height, minimumZ,
+                    minimumX, height, maximumZ,
+                    maximumX, height, minimumZ,
+                    maximumX, height, maximumZ);
+            }
         }
         renderStackPop(&g_renderCtx->stackA);
     }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: recovered script-mode setter matches; state-store tail merging differs. */
+/* NON_MATCHING: only the tail merge of the state stores differs: retail shares case 1's store with case 2's (state 3), this build shares case 0's with case 1's. */
 #include "common.h"
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
 
@@ -40,21 +40,19 @@ u32 questSysLoadStep(QuestLoadStep *step)
         step->state = 1;
         break;
     case 1:
-        if (step->script == NULL || step->messages == NULL) {
-            return 0;
+        if (step->script != NULL && step->messages != NULL) {
+            if (step->showButtonHelp) {
+                buttonHelpSetPreset(0x90);
+            }
+            step->process = FUN_00297060(step->script, step->messages);
+            scriptProcessSetMode(step->process, 2);
+            scrScriptProcessStartEntry(step->process, step->entry);
+            step->state = 2;
         }
-        if (step->showButtonHelp) {
-            buttonHelpSetPreset(0x90);
-        }
-        step->process = FUN_00297060(step->script, step->messages);
-        scriptProcessSetMode(step->process, 2);
-        scrScriptProcessStartEntry(step->process, step->entry);
-        step->state = 2;
         break;
     case 2: {
-        if (scrRunOpcodesStub(step->process) != 2) {
-            return 0;
-        }
+        if (scrRunOpcodesStub(step->process) != 2)
+            break;
         u32 selection = FUN_002903f0();
         if (FUN_00298dc8()) {
             FUN_0029016c(selection, 0);
@@ -63,9 +61,9 @@ u32 questSysLoadStep(QuestLoadStep *step)
         if (gameJumpRequestIsPending()) {
             scrScriptProcessStartEntry(step->process, 13);
             step->state = 3;
-        } else {
-            step->state = 4;
+            break;
         }
+        step->state = 4;
         break;
     }
     case 3:

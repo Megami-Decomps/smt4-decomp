@@ -453,7 +453,7 @@ LAB_003323f0:
               FUN_00299900(0);
               if ((*(unsigned char *)(iVar7 + 3) & 0xf0) != 0) {
                 if (iStack_634 != 10) {
-                  FUN_0029cc44(1);
+                  messageDismissNumericBanner(1);
                 }
                 FUN_0026a55c();
               }
@@ -477,7 +477,7 @@ LAB_003323f0:
               iVar7 = FUN_00292844();
               if ((*(unsigned char *)(iVar7 + 3) & 0xf0) != 0) {
                 FUN_0026a55c();
-                FUN_0029cc44(1);
+                messageDismissNumericBanner(1);
               }
             }
             campReleaseTouchRegions();
@@ -490,7 +490,7 @@ LAB_003323f0:
           }
           else {
             campReleaseTouchRegions();
-            FUN_0029ee6c(0,0x323232ff);
+            buttonHelpSetText(0,0x323232ff);
             FUN_0026a55c();
             FUN_0026a598();
             *(unsigned int *)(iVar12 + 0x18) = *(unsigned int *)(iVar12 + 0x20);
@@ -551,7 +551,7 @@ LAB_003323f0:
                   iVar7 = FUN_00292844();
                   if (*(unsigned char *)(iVar7 + 3) >> 4 == 0) {
                     FUN_0026a55c();
-                    FUN_0029cc44(1);
+                    messageDismissNumericBanner(1);
                   }
                 }
                 iVar7 = DAT_0043da90;
@@ -601,7 +601,7 @@ LAB_003323f0:
               else {
                 FUN_0026a598();
                 FUN_0026d5a4();
-                FUN_0029cc44(1);
+                messageDismissNumericBanner(1);
                 FUN_0026a55c();
                 iVar7 = DAT_0043da90;
                 puVar13 = (unsigned int *)(DAT_0043da90 + 0x18);
@@ -773,7 +773,7 @@ joined_r0x00333130:
             uVar9 = FUN_0029e908(iVar12 + 0x34);
             iVar7 = dataTable15GetUnlockedEntryId((int)*(char *)(iVar12 + 0x98),uVar9);
             uVar9 = FUN_00241a64();
-            FUN_0029ee6c(uVar9,0x323232ff);
+            buttonHelpSetText(uVar9,0x323232ff);
             if (iVar7 == 0x2d) {
               FUN_00253fe8(0xa11923ff,1,0x12,0x15);
             }
@@ -828,7 +828,7 @@ LAB_003333b4:
       uVar9 = FUN_0029e908(iVar12 + 0x34);
       iVar12 = dataTable15GetUnlockedEntryId((int)*(char *)(iVar12 + 0x98),uVar9);
       uVar9 = FUN_00241a64();
-      FUN_0029ee6c(uVar9,0x323232ff);
+      buttonHelpSetText(uVar9,0x323232ff);
       if (iVar12 == 0x2d) {
         FUN_00253fe8(0xa11923ff,1,0x12,0x15);
       }

@@ -19,7 +19,7 @@ void messageMainSetTargetFlags(s32 flags);
 s32 scrRunOpcodesStub(u32 script);
 s32 messageMainGetChoiceResult(void);
 s32 messageMainTargetIsClear(void);
-s32 FUN_0029cc44(s32 value);
+s32 messageDismissNumericBanner(s32 value);
 void partyMoneyAddForward(s32 amount);
 s32 questCenterGetHealingFee(void);
 }
@@ -40,7 +40,7 @@ extern "C" void FUN_00381e04(HealingScene199 *scene)
             if (choice == 0) {
                 if (gameGetSlotTable()->money < questCenterGetHealingFee()) {
                     scrScriptProcessStartMappedEntry(scene, "qc_HealingNoMoney");
-                    FUN_0029cc44(0);
+                    messageDismissNumericBanner(0);
                     buttonHelpSetPreset(0xa3);
                     scene->substate = 5;
                 } else {
@@ -49,7 +49,7 @@ extern "C" void FUN_00381e04(HealingScene199 *scene)
                 }
             } else if (choice == 1) {
                 scene->substate = 5;
-                FUN_0029cc44(0);
+                messageDismissNumericBanner(0);
             }
         }
         break;
@@ -59,7 +59,7 @@ extern "C" void FUN_00381e04(HealingScene199 *scene)
         }
         break;
     case 3:
-        if (FUN_0029cc44(0) == 1) {
+        if (messageDismissNumericBanner(0) == 1) {
             scene->substate++;
             scene->unk0C = 0;
             partyMoneyAddForward(-questCenterGetHealingFee());

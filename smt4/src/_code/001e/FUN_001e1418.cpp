@@ -8,7 +8,7 @@ s32 FUN_002c5d80(u32 kind, u32 flags);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
 void FUN_002bed3c(void);
 void efctSetSpeed(f32 speed);
-void FUN_002c18e4(RenderCtx *context);
+void renderCtxResetColorScale(RenderCtx *context);
 
 // Draw the title sprite with stereo parallax and restore its render state.
 u32 FUN_001e1418(void)
@@ -23,7 +23,7 @@ u32 FUN_001e1418(void)
     efctSetSpeed(1.0f);
     renderStackPop(&g_titleScene->stackA);
     renderCtxApplyTransforms(g_titleScene);
-    FUN_002c18e4(g_titleScene);
+    renderCtxResetColorScale(g_titleScene);
     return 0;
 }
 }

@@ -103,7 +103,7 @@ typedef struct RenderCtxA {
         struct {
             /* 0x0700 */ u8 unk0700[0xAD8];
             /* 0x11D8 */ f32 colorScale[4];
-            /* 0x11E8 */ u8 colorScaleDirty;
+            /* 0x11E8 */ s8 colorScaleDirty; /* forces the next colour-scale upload */
             /* 0x11E9 */ u8 unk11E9[0x6F];
         } color;
         struct {

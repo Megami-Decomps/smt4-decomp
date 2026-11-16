@@ -51,7 +51,7 @@ void timerStart(SpritePlaybackView *sprite, s32 key, s32 mode);
 void FUN_0029f848(void *selector, s32 count, s32 rows, s32 wrap, s32 first, s32 enabled);
 void memFill8(void *destination, u32 value);
 void buttonHelpSetPreset(s32 preset);
-void FUN_0029ee6c(s32 first, u32 color);
+void buttonHelpSetText(s32 first, u32 color);
 u32 bgmVolumeToStep(u8 volume);
 u32 classifyValueByThreshold(u8 volume);
 u32 calcByteThresholdRank(u8 volume);
@@ -78,7 +78,7 @@ extern "C" void titleConfigCreate(void)
     asdLoadFileAsyncSimple("camp/config.bf", reinterpret_cast<u32 *>(&work->scriptData), 0);
     asdLoadFileAsyncSimple("camp/config.mbm", reinterpret_cast<u32 *>(&work->modelData), 0);
     buttonHelpSetPreset(0x99);
-    FUN_0029ee6c(0, 0x323232ff);
+    buttonHelpSetText(0, 0x323232ff);
     work->musicStep = bgmVolumeToStep(g_titleConfigValues.values.music);
     work->effectsStep = classifyValueByThreshold(g_titleConfigValues.values.effects);
     work->voiceStep = calcByteThresholdRank(g_titleConfigValues.values.voice);

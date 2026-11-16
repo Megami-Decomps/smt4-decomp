@@ -19,7 +19,7 @@ typedef struct {
 
 extern Countdown g_countdown;
 
-int FUN_002958f8(int id, int arg);
+int statusBustUpPortraitRelease(int id, int arg);
 int asdTMTexTableReleaseNode(int kind, int index);
 
 /* Ticks the countdown; when it runs out, triggers the record's id and clears kind 0x22. */
@@ -30,7 +30,7 @@ void countdownTimerUpdate(void)
     g_countdown.timer = g_countdown.timer - 1;
     if (g_countdown.timer <= 0) {
         if (g_countdown.record->id >= 0) {
-            FUN_002958f8(g_countdown.record->id, 1);
+            statusBustUpPortraitRelease(g_countdown.record->id, 1);
         }
         i = 0;
         do {

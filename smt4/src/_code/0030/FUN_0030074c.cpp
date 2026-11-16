@@ -1,4 +1,3 @@
-/* NON_MATCHING: max-MP percentage division swaps the multiplier and dividend registers; all other instructions agree. */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
@@ -26,20 +25,19 @@ u32 FUN_0030074c()
             s32 amount = 0;
             switch (mode) {
             case 0:
-                amount = value * entry->maxMp / 100;
+                amount = entry->maxMp * value / 100;
                 break;
             case 1:
-                amount = value * entry->mp / 100;
+                amount = entry->mp * value / 100;
                 break;
             case 2:
                 amount = value;
                 break;
             }
             FUN_00250720(state);
-            s32 order = i << 3;
             FUN_002551ac(0, actor, &state->actions[entry->members.ids[0]], 0,
                 -1, amount, -1, entry->hp, entry->maxHp, 0, 0, 0, 0,
-                1, 0, order, order, order, order, 1, 0, 1, 1, 0, 1);
+                1, 0, i << 3, i << 3, i << 3, i << 3, 1, 0, 1, 1, 0, 1);
             FUN_002505c0(0, actor, 0x10001B5, 0, 0, 0, 0);
         }
     }

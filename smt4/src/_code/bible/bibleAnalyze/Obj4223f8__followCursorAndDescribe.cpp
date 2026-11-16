@@ -48,7 +48,7 @@ s32 flaggedValueHolderGetTotal(void *);
 void FUN_0029da34(s32, s32, u16, s32);
 const char *dataLookupDisplayName(u8 *, u32);
 void textFormatBuffer(char *, const char *, ...);
-void FUN_0029ee6c(const char *, u32);
+void buttonHelpSetText(const char *, u32);
 extern const char DAT_0040226c[];
 extern const char DAT_00402274[];
 extern BibleAnalyzeTextView DAT_0043d990;
@@ -80,6 +80,6 @@ void Obj4223f8::followCursorAndDescribe()
         const char *displayName = dataLookupDisplayName(nameBuffer, work->nameId);
         const char *fallback = DAT_0040226c;
         textFormatBuffer(text, DAT_00402274, displayName == NULL ? fallback : displayName, DAT_0043d990.suffix);
-        FUN_0029ee6c(text, 0x323232ff);
+        buttonHelpSetText(text, 0x323232ff);
     }
 }

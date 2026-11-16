@@ -1,4 +1,4 @@
-/* NON_MATCHING: first cap selector spills to the stack; final segment-coordinate multiply is fused. */
+/* NON_MATCHING: FUN_0036c91c shape (cap selectors as locals) fixes the stack spill; only the segment offset still differs: retail multiplies and adds y separately (mul + add), this build fuses them into mla. */
 #include "ui/SegmentedTextureBar.h"
 #include "shard/TextureDrawCall.h"
 
@@ -12,8 +12,10 @@ void FUN_002ec0fc(const SegmentedTextureBarOrigin *origin, s32 x, s32 y, u32 fir
     s32 fillSegments = segmentCount - 3;
     if (fillSegments > 0) {
         FUN_002bf288(2, 0x39, 0x3e, origin->x + x, y, 0x6e);
-        FUN_002bf288(2, 0x39, firstVariant != 0 ? 0x3c : 0x3a, origin->x + x, y, 0x6f);
-        FUN_002bf288(2, 0x39, secondVariant != 0 ? 0x3d : 0x3b, origin->x + x, y, 0x6f);
+        s32 firstCap = firstVariant != 0 ? 0x3c : 0x3a;
+        FUN_002bf288(2, 0x39, firstCap, origin->x + x, y, 0x6f);
+        s32 secondCap = secondVariant != 0 ? 0x3d : 0x3b;
+        FUN_002bf288(2, 0x39, secondCap, origin->x + x, y, 0x6f);
         u32 sprite = fillVariant != 0 ? 0x40 : 0x3f;
         const TexSprite *texture = reinterpret_cast<TexSprite *>(asdTMTexTableEntryAt(0x39, sprite));
         const SegmentedTextureBarSize *size = reinterpret_cast<const SegmentedTextureBarSize *>(texture->frames);

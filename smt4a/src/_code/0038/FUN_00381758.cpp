@@ -6,7 +6,7 @@
 extern "C" {
 
 void matrixApplyByMode(void *transform, const TransformMtx44 *matrix, s32 mode);
-void FUN_002a2048(TransformMtx44 *matrix, const TransformVec3 *translation, s32 mode);
+void mathMatrixApplyTranslation(TransformMtx44 *matrix, const TransformVec3 *translation, s32 mode);
 void FUN_002b4c30(TransformRotation *rotation, const void *source);
 void matrix44SetIdentity(TransformMtx44 *matrix);
 void matrix43Multiply(TransformMtx44 *dst, const TransformMtx44 *a, const TransformRotation *b);
@@ -35,7 +35,7 @@ void FUN_00381758(TransformOwner *owner, const TransformVec3 *translation, const
     }
     if (translation != NULL) {
         TransformVec3 offset = { translation->x, translation->y, translation->z };
-        FUN_002a2048(&matrix, &offset, 2);
+        mathMatrixApplyTranslation(&matrix, &offset, 2);
     }
     matrixApplyByMode(owner->transform, &matrix, 0);
 }

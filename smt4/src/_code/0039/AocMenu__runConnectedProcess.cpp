@@ -7,7 +7,7 @@
 extern "C" {
 
 int FUN_00233240(...);
-int FUN_0023392c(...);
+int aocMenuSetButtonHelp(...);
 int jobStopAndClearFlags(...);
 int FUN_00233db8(...);
 int FUN_00233e70(...);
@@ -37,7 +37,7 @@ extern int g_aocMain; /* 0x432fc8 */
 
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00233240. */
-/* Supplied declaration required: FUN_0023392c. */
+/* Supplied declaration required: aocMenuSetButtonHelp. */
 /* Supplied declaration required: jobStopAndClearFlags. */
 /* Supplied declaration required: FUN_00233db8. */
 /* Supplied declaration required: FUN_00233e70. */
@@ -121,7 +121,7 @@ void AocMenu::runConnectedProcess()
           temp_v1 = strIsEmpty(&record.word(0));
           if (temp_v1 != 0) {
             *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) | 0x100;
-            FUN_0023392c(param_1,1);
+            aocMenuSetButtonHelp(param_1,1);
             param_1[2] = 2;
             jobStopAndClearFlags(param_1);
             return;

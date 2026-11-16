@@ -10,7 +10,7 @@ int FUN_00290994(...);
 int FUN_0029a17c(...);
 int vec2GetYInt(...);
 int vec2GetXInt(...);
-int FUN_002c18e4(...);
+int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
 
 int gameDataGetPlayerName(void);
@@ -50,7 +50,7 @@ extern int g_titleScene; /* 0x44ea00 */
 extern int ifTouchGetSelectionModeForRegion(int);
 extern int FUN_0029ee54(int);
 extern int FUN_0029efa8(int);
-extern int FUN_0029efc0(int);
+extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: libc_bsearch. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: textDrawString. */
@@ -64,7 +64,7 @@ extern int gameFlagIsSet(unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c18e4. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
@@ -159,22 +159,22 @@ unsigned int FUN_001a26dc(void)
       }
       FUN_002bf380(2,0x1e,1,(int)*(short *)(temp_v7 + 8),(int)*(short *)(temp_v7 + 10),0xd3);
       temp_v10 = 0xff;
-      temp_v8 = FUN_0029efc0(temp_v12);
+      temp_v8 = resourceRunOperationIfUnblocked(temp_v12);
       if ((*(char *)(temp_v8 + temp_v3 + temp_v2 + 0x758) == 'B') &&
          ((temp_v8 = gameFlagIsSet(500), temp_v8 != 0 || (temp_v8 = gameFlagIsSet(0x1e1), temp_v8 != 0))))
       {
         temp_v10 = 0x5a5a5aff;
       }
-      temp_v8 = FUN_0029efc0(temp_v12);
+      temp_v8 = resourceRunOperationIfUnblocked(temp_v12);
       if ((*(char *)(temp_v8 + temp_v3 + temp_v2 + 0x758) == 'A') &&
          ((temp_v8 = gameFlagIsSet(499), temp_v8 != 0 || (temp_v8 = gameFlagIsSet(0x1d8), temp_v8 != 0))))
       {
         temp_v10 = 0x5a5a5aff;
       }
-      temp_v8 = FUN_0029efc0(temp_v12);
+      temp_v8 = resourceRunOperationIfUnblocked(temp_v12);
       if (*(char *)(temp_v8 + temp_v3 + temp_v2 + 0x758) != '=') {
         if (*(char *)(temp_v2 + 0x74e) != '\x02') {
-          temp_v8 = FUN_0029efc0(temp_v12);
+          temp_v8 = resourceRunOperationIfUnblocked(temp_v12);
           temp_v0 = *(unsigned char *)(temp_v8 + temp_v3 + temp_v2 + 0x758);
           if (temp_v0 >= 0x4c) {
             puVar7 = (unsigned short *)0x0;
@@ -193,7 +193,7 @@ unsigned int FUN_001a26dc(void)
           }
         }
         else {
-          temp_v8 = FUN_0029efc0(temp_v12);
+          temp_v8 = resourceRunOperationIfUnblocked(temp_v12);
           puVar7 = (unsigned short *)(unsigned int)*(unsigned char *)(temp_v8 + temp_v3 + temp_v2 + 0x758);
           tmnlGetEntryText(puVar7);
         }
@@ -259,14 +259,14 @@ unsigned int FUN_001a26dc(void)
     else {
       FUN_002bf288(2,0x1e,0x15,(int)*(short *)(temp_v3 + 8),(int)*(short *)(temp_v3 + 10),0xe7);
     }
-    temp_v7 = FUN_0029efc0(temp_v12);
+    temp_v7 = resourceRunOperationIfUnblocked(temp_v12);
     temp_v10 = 0xffffffff;
     if (*(char *)(temp_v7 + temp_v4 + temp_v2 + 0x758) != '=') {
       if (*(int *)(temp_v2 + 0x744) == 3) {
         temp_v10 = 0x72e027ff;
       }
       if (*(char *)(temp_v2 + 0x74e) != '\x02') {
-        temp_v7 = FUN_0029efc0(temp_v12);
+        temp_v7 = resourceRunOperationIfUnblocked(temp_v12);
         temp_v0 = *(unsigned char *)(temp_v7 + temp_v4 + temp_v2 + 0x758);
         if (temp_v0 >= 0x4c) {
           puVar7 = (unsigned short *)0x0;
@@ -285,7 +285,7 @@ unsigned int FUN_001a26dc(void)
         }
       }
       else {
-        temp_v7 = FUN_0029efc0(temp_v12);
+        temp_v7 = resourceRunOperationIfUnblocked(temp_v12);
         puVar7 = (unsigned short *)(unsigned int)*(unsigned char *)(temp_v7 + temp_v4 + temp_v2 + 0x758);
         tmnlGetEntryText(puVar7);
       }
@@ -358,7 +358,7 @@ unsigned int FUN_001a26dc(void)
     *(unsigned char *)(temp_v2 + 0x1264) = 0;
   }
   renderCtxApplyTransforms(g_titleScene);
-  FUN_002c18e4(g_titleScene);
+  renderCtxResetColorScale(g_titleScene);
   return 0;
 }
 

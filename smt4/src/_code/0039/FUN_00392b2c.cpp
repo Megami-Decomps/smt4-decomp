@@ -16,7 +16,7 @@ s32 packNibblesAndByte(u32 a, u32 b, u32 c);
 f32 renderCtxCalculateStereoParallax(RenderCtx* ctx, f32 depth);
 void FUN_002bf380(s32 layer, s32 group, s32 index, s32 x, s32 y, s32 z);
 void effectRenderTransformedInstance(void* instance, f32 offset);
-void FUN_002c18e4(RenderCtx* scene);
+void renderCtxResetColorScale(RenderCtx* scene);
 f32 vec2GetSpeed(const void *animation);
 
 // Draws the menu screen (frame, shadow and its 24 effect instances) and then runs the
@@ -45,7 +45,7 @@ void FUN_00392b2c(AocMenu* screen)
     FUN_002bed3c();
     efctSetSpeed(1.0f);
     renderCtxApplyTransforms(g_titleScene);
-    FUN_002c18e4(g_titleScene);
+    renderCtxResetColorScale(g_titleScene);
 
     if (screen->callbacks.draw[screen->step] != NULL) {
         (screen->*screen->callbacks.draw[screen->step])();

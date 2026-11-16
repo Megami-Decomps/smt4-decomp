@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail keeps the part pointer in r0 and starts the counter in the same register; built allocates the part to r1 (the counter's value is never defined on the skipped path). */
 #include "common.h"
 
 struct Part00362550 {
@@ -19,18 +18,16 @@ struct Object00362550 {
 
 extern "C" {
 
-/* Counts up to the part's entry count (0xc0) when its flag byte is set. */
-s32 FUN_00362550(Object00362550 *object)
+/* Walks the part's entries once its flag byte is set; the per-entry work is compiled out of this
+ * build, only the counting loop remains. */
+void FUN_00362550(Object00362550 *object)
 {
     Part00362550 *part = &object->owner->part;
-    /* i is returned unset when the flags are clear, as in the original. */
-    s32 i;
     if ((part->flags & 0xff000000) != 0) {
-        i = 0;
+        s32 i = 0;
         while (i < part->count)
             i++;
     }
-    return i;
 }
 
 } /* extern "C" */

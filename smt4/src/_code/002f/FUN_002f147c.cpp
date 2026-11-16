@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_0029cc44(s32 mode);
+void messageDismissNumericBanner(s32 mode);
 
-/* Runs FUN_0029cc44 with mode one. */
+/* Runs messageDismissNumericBanner with mode one. */
 void FUN_002f147c(void)
 {
-    FUN_0029cc44(1);
+    messageDismissNumericBanner(1);
 }
 
 } /* extern "C" */

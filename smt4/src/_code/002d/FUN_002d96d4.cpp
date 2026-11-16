@@ -11,7 +11,7 @@ int FUN_00290994(...);
 int FUN_002580d4(...);
 int FUN_0029a17c(...);
 int itemGetFlagBit1(...);
-int FUN_0029efc0(...);
+int resourceRunOperationIfUnblocked(...);
 int dataTable54FindById(void);
 int partyMemberFindById(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
@@ -80,10 +80,10 @@ extern int FUN_0029d644(unsigned int *);
 extern int ifTouchGetSelectionModeForRegion(int);
 extern unsigned int FUN_0029dde0(void);
 extern int objectPartRunUnlessLocked(unsigned int *);
-extern int FUN_0029e93c(unsigned int *);
+extern int resourceRunEmbeddedOperationIfUnblocked(unsigned int *);
 /* Supplied declaration required: itemGetFlagBit1. */
 extern int FUN_0029efa8(unsigned int *);
-/* Supplied declaration required: FUN_0029efc0. */
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: dataTable54FindById. */
 /* Supplied declaration required: partyMemberFindById. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
@@ -181,7 +181,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
     FUN_002bdf94(0,(int)&param_1->field_0x0 + (int)*(short *)(temp_v4 + 8),
                  *(short *)(temp_v4 + 10) + param_2,1,2,0x65,"%d",temp_v5);
     if (*(char *)(temp_v3 + 0x34) != '\0') {
-      temp_v22 = (unsigned int *)FUN_0029efc0(temp_v21);
+      temp_v22 = (unsigned int *)resourceRunOperationIfUnblocked(temp_v21);
       temp_v4 = 0;
       temp_v3 = FUN_0029d644(temp_v21);
       if (0 < temp_v3) {
@@ -289,7 +289,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
       }
       temp_v3 = FUN_0029efa8(temp_v21);
       temp_v3 = asdTMTexTableEntryAt(0x24,temp_v3 + 0x3f);
-      temp_v4 = FUN_0029efc0(temp_v21);
+      temp_v4 = resourceRunOperationIfUnblocked(temp_v21);
       temp_v13 = FUN_0029efa8(temp_v21);
       psVar8 = (short *)(unsigned int)*(unsigned short *)((int)puVar4 + (temp_v13 + temp_v4) * 2 + 0x6278);
       devilGetRecord();
@@ -443,7 +443,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
       puVar4 = temp_v21;
     }
     else {
-      temp_v3 = FUN_0029e93c(temp_v22);
+      temp_v3 = resourceRunEmbeddedOperationIfUnblocked(temp_v22);
       temp_v13 = 0;
       temp_v4 = FUN_0028cfbc(temp_v22);
       if (0 < temp_v4) {

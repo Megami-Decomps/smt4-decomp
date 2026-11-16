@@ -8,7 +8,7 @@ extern "C" {
 extern AocMain *g_aocMain;
 extern AocSystem *g_aocSystem;
 RequestParameters FUN_003887cc(AocSystem *system);
-void FUN_0023392c(AocMenu *menu, s32 request, s32 mode);
+void aocMenuSetButtonHelp(AocMenu *menu, s32 request, s32 mode);
 void FUN_00233db8(AocMenu *menu, u32 request);
 void FUN_00126fb8(void *query);
 void FUN_002b8244(s32 mode);
@@ -37,7 +37,7 @@ void AocMenu::closeMenu()
     flags &= ~0x70u;
     g_aocMain->flags = flags;
     if (closing) {
-        FUN_0023392c(menu, -1, 0);
+        aocMenuSetButtonHelp(menu, -1, 0);
         jobOwnerFreeSlotAndStop(menu->jobOwner);
         jobStopAndClearFlags(menu);
         menu->step = 0x12;
@@ -56,7 +56,7 @@ void AocMenu::closeMenu()
     switch (menu->substep) {
     case 0:
         FUN_002b8244(0);
-        FUN_0023392c(menu, -1, 0);
+        aocMenuSetButtonHelp(menu, -1, 0);
         menu->substep = 1;
         break;
     case 1:

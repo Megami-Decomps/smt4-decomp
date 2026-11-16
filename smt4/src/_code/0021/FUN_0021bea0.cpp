@@ -87,7 +87,7 @@ extern char *FUN_002ced4c(void);
 extern int FUN_002ef868(void);
 /* Supplied declaration required: contentEntryGetB. */
 extern int FUN_003234c8(void);
-extern int FUN_00328168(unsigned int, unsigned int);
+extern int dataTable2eSub3FindByKeyPair(unsigned int, unsigned int);
 extern unsigned int __aeabi_idivmod(void);
 
 
@@ -124,7 +124,7 @@ void FUN_0021bea0(void)
   temp_v5 = g_mapEnemy;
   temp_v0 = gameGetMapBlock();
   DAT_0049fadc = 0x3c;
-  temp_v1 = FUN_00328168(g_gameState,DAT_0049f920);
+  temp_v1 = dataTable2eSub3FindByKeyPair(g_gameState,DAT_0049f920);
   DAT_0049fb7c = 0x1e;
   DAT_0049fb80 = 3500.0f;
   DAT_0049fb84 = 0x44fa0000;

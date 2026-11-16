@@ -53,7 +53,7 @@ void asdMemFree(void *block);
 void __ARM_common_memcpy4_8(void *destination, u32 source);
 u32 *gameDataGetExtraBlock(void);
 void FUN_00268250(u8 mode, u32 arg0, u32 arg1, void *buffer, u32 size);
-void FUN_002c9104(void);
+void clockRecordStartSeconds(void);
 void gameDataBlocksSetIndexedValue(s32 index, u32 value);
 u8 *gameDataBlocksGetSaveData(void);
 u32 gameDataBlocksGetTable(void);
@@ -141,7 +141,7 @@ u32 FUN_00371750(void)
         __aeabi_memcpy4(body, gameDataBlocksGetSaveData(), SAVE_FULL_BODY_SIZE);
         *reinterpret_cast<u16 *>(body) = 4;
         job->buffer[SAVE_BODY_OFFSET + 2] = job->flag;
-        FUN_002c9104();
+        clockRecordStartSeconds();
         FUN_00268250(2, job->kind, job->slot, job->buffer, job->size);
         job->stage = SAVE_STAGE_WAIT_FULL;
         break;

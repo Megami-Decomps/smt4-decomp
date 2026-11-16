@@ -1,46 +1,70 @@
-/* NON_MATCHING: the skills are now a struct assignment like retail; the array-backed UnitSummarySkills copies through VFP (vldmia) where retail uses core ldm/stm, and the growth-stat load registers differ. */
-#include "gamedata/UnitSummary.h"
-#include "bible/bibleLegionDraw.h"
+#include "common.h"
+#include "gamedata/DemonSaveSnapshot.h"
+
+/* IV's saved demon record (0x34 bytes): the fields a refresh rewrites. */
+struct DemonSaveSnapshotIV {
+    /* 0x00 */ u16 level;
+    /* 0x02 */ u16 attributes[5];
+    /* 0x0C */ u16 skills[5];
+    /* 0x16 */ u8 unk16low : 2;
+    u8 flags : 4;
+    u8 unk16high : 2;
+    /* 0x17 */ u8 unk17;
+    /* 0x18 */ u16 id;
+    /* 0x1A */ u16 variant;
+    /* 0x1C */ DemonSnapshotFourWords data;
+    /* 0x2C */ u32 unk2C;
+    /* 0x30 */ u32 experience;
+};
+
+/* IV's live demon record, as far as the refresh reads it. */
+struct DemonSaveRefreshSourceIV {
+    /* 0x000 */ u16 id;
+    /* 0x002 */ u16 variant;
+    /* 0x004 */ u16 attributes[5];
+    /* 0x00E */ u8 unk00E[0x12];
+    /* 0x020 */ u16 skills[5];
+    /* 0x02A */ u8 unk02A[6];
+    /* 0x030 */ u32 experience;
+    /* 0x034 */ DemonSnapshotFourWords data;
+    /* 0x044 */ u8 unk044[4];
+    /* 0x048 */ u8 level;
+    /* 0x049 */ u8 unk049[0x547];
+    /* 0x590 */ u16 bonuses[5];
+    /* 0x59A */ u8 unk59A[0x67];
+    /* 0x601 */ u8 flags;
+};
+typedef char DemonSaveSnapshotIVLayoutCheck[(sizeof(DemonSaveSnapshotIV) == 0x34 &&
+    offsetof(DemonSaveRefreshSourceIV, bonuses) == 0x590 && offsetof(DemonSaveRefreshSourceIV, flags) == 0x601) ? 1 : -1];
 
 extern "C" {
-s32 gameRecordCopy(u32, StoredUnitSummary *);
-void gameDataStoreRecord(u32, const StoredUnitSummary *);
+DemonSaveRefreshSourceIV *FUN_003ad6e0(u32 id);
+s32 gameRecordCopy(u32 id, DemonSaveSnapshotIV *snapshot);
+void gameDataStoreRecord(u32 id, const DemonSaveSnapshotIV *snapshot);
 
-/* Refresh a stored unit summary from its live stats and growth bonuses. */
-void FUN_003a7fec(u32 unused, u32 unitId)
+/* Refresh an existing saved demon with its current level, stats, skills and inheritance. */
+void FUN_003a7fec(u32 unused, u32 id)
 {
-    /* Keep the odd-offset padding in StatBlock byte-aligned; view the growth
-       extension locally instead of introducing an aligned union at 0x49. */
-    struct GrowthView {
-        u8 unk000[0x590];
-        u16 stats[5];
-        u8 unk59A[0x67];
-        u8 bonus;
-    };
-    typedef char GrowthViewOffsets[
-        offsetof(GrowthView, stats) == 0x590 &&
-        offsetof(GrowthView, bonus) == 0x601 ? 1 : -1];
-    const StatBlock *unit = reinterpret_cast<const StatBlock *>(FUN_003ad6e0(unitId));
-    const GrowthView *growth = (const GrowthView *)unit;
-    StoredUnitSummary summary;
-    if (gameRecordCopy(unitId, &summary)) {
-        summary.level = unit->level;
-        summary.experience = unit->experience;
-        summary.id = unit->summary.id;
-        summary.kind = unit->summary.kind;
-        summary.stats[0] = unit->summary.stats[0] + growth->stats[0];
-        summary.baseStats[0] = unit->cur2;
-        summary.stats[1] = unit->summary.stats[1] + growth->stats[1];
-        summary.baseStats[1] = unit->cur6;
-        summary.stats[2] = unit->summary.stats[2] + growth->stats[2];
-        summary.baseStats[2] = unit->cur3;
-        summary.stats[3] = unit->summary.stats[3] + growth->stats[3];
-        summary.baseStats[3] = unit->cur4;
-        summary.stats[4] = unit->summary.stats[4] + growth->stats[4];
-        summary.baseStats[4] = unit->cur5;
-        summary.skills = unit->skills;
-        summary.optionBits.bonus = growth->bonus;
-        gameDataStoreRecord(unitId, &summary);
+    DemonSaveRefreshSourceIV *demon = FUN_003ad6e0(id);
+    DemonSaveSnapshotIV snapshot;
+    if (gameRecordCopy(id, &snapshot)) {
+        snapshot.level = demon->level;
+        snapshot.experience = demon->experience;
+        snapshot.id = demon->id;
+        snapshot.variant = demon->variant;
+        snapshot.attributes[0] = demon->attributes[0] + demon->bonuses[0];
+        snapshot.skills[0] = demon->skills[0];
+        snapshot.attributes[1] = demon->attributes[1] + demon->bonuses[1];
+        snapshot.skills[1] = demon->skills[1];
+        snapshot.attributes[2] = demon->attributes[2] + demon->bonuses[2];
+        snapshot.skills[2] = demon->skills[2];
+        snapshot.attributes[3] = demon->attributes[3] + demon->bonuses[3];
+        snapshot.skills[3] = demon->skills[3];
+        snapshot.attributes[4] = demon->attributes[4] + demon->bonuses[4];
+        snapshot.skills[4] = demon->skills[4];
+        snapshot.data = demon->data;
+        snapshot.flags = demon->flags & 0xF;
+        gameDataStoreRecord(id, &snapshot);
     }
 }
 }

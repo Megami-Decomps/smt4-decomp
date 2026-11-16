@@ -38,7 +38,7 @@ int buttonHelpCreate(void);
 int fileSlotLoad(int);
 int FUN_0029bb14(void);
 int asdMdlManagerCreateLoaded(...);
-int FUN_0029ee6c(...);
+int buttonHelpSetText(...);
 int soundChannelRequestIfEnabled(int, int, int);
 int FUN_002a03d8(...);
 int lightOwnerRegister(...);
@@ -124,7 +124,7 @@ extern int FUN_002896bc(void);
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: slotSetRequest. */
 extern int ifTouchGetSelectionModeForRegion(int);
-/* Supplied declaration required: FUN_0029ee6c. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: lightOwnerRegister. */
@@ -248,7 +248,7 @@ int FUN_001e9990(unsigned int handle)
     temp_v2 = puVar13[2];
     dataTableGet(0x3a,0);
     temp_v4 = dataTableGetEntries();
-    FUN_0029ee6c(temp_v4 + temp_v2 * 0x56 + 0x16,0x323232ff);
+    buttonHelpSetText(temp_v4 + temp_v2 * 0x56 + 0x16,0x323232ff);
     if (*(char *)(puVar13 + 0x18) != '\0') {
       commonBgReset();
     }
@@ -451,7 +451,7 @@ int FUN_001e9990(unsigned int handle)
     temp_v2 = puVar13[2];
     dataTableGet(0x3a,0);
     temp_v4 = dataTableGetEntries();
-    FUN_0029ee6c(temp_v4 + temp_v2 * 0x56 + 0x16,0x323232ff);
+    buttonHelpSetText(temp_v4 + temp_v2 * 0x56 + 0x16,0x323232ff);
     if (((*(char *)((int)puVar13 + 99) == '\0') && (temp_v4 = buttonHelpHasEnabledEntryForId(1), temp_v4 == 0)) &&
        (temp_v4 = padIsButtonPressed(0), temp_v4 == 0)) goto LAB_001ea720;
     puVar13 = g_titleMain;

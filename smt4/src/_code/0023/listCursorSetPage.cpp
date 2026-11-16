@@ -10,8 +10,8 @@ typedef struct ListCursor {
     /* 0x10 */ u8 list[1];
 } ListCursor;
 
-s32 FUN_0029efc0(void *list);
-s32 FUN_0029e93c(void *list);
+s32 resourceRunOperationIfUnblocked(void *list);
+s32 resourceRunEmbeddedOperationIfUnblocked(void *list);
 s32 flaggedEntryGetValueA(void *list);
 s32 flaggedEntryGetValueB(void *list);
 void scrollOwnerSetValue(void *list, s32 top);
@@ -22,9 +22,9 @@ void flaggedEntrySetValueB(void *list, s32 position);
 static s32 listCursorGetTop(ListCursor *cursor)
 {
     if (cursor->kind == 1) {
-        return FUN_0029e93c(cursor->list);
+        return resourceRunEmbeddedOperationIfUnblocked(cursor->list);
     }
-    return FUN_0029efc0(cursor->list);
+    return resourceRunOperationIfUnblocked(cursor->list);
 }
 
 static s32 listCursorGetPosition(ListCursor *cursor)

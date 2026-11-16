@@ -17,9 +17,9 @@ u32 FUN_00298dc8(s32 quest);
 u32 FUN_00298e00(u32 quest);
 u32 questIsCompleted(s32 quest);
 bool questIsOfferable(u16 quest);
-u32 FUN_0029efc0(const void *cursor);
+u32 resourceRunOperationIfUnblocked(const void *cursor);
 u32 FUN_0029efa8(const void *cursor);
-void FUN_0029ee6c(const u8 *text, u32 color);
+void buttonHelpSetText(const u8 *text, u32 color);
 
 void FUN_00290404()
 {
@@ -28,11 +28,11 @@ void FUN_00290404()
     u16 quest;
     if (panel->detailMode) {
         const void *cursor = panel->alternate.cursor;
-        u32 row = FUN_0029efc0(cursor);
+        u32 row = resourceRunOperationIfUnblocked(cursor);
         row += FUN_0029efa8(cursor);
         quest = menu->cursor.alternate.ids[row];
     } else {
-        u32 row = FUN_0029efc0(&menu->cursor);
+        u32 row = resourceRunOperationIfUnblocked(&menu->cursor);
         row += FUN_0029efa8(&menu->cursor);
         quest = menu->list[row];
     }
@@ -67,6 +67,6 @@ void FUN_00290404()
     }
     DataTableView<QuestStatusLabel> labels(0x34, 0);
     const u8 *text = status < labels.count ? labels.entries[status].text : NULL;
-    FUN_0029ee6c(text, 0x323232FF);
+    buttonHelpSetText(text, 0x323232FF);
 }
 }

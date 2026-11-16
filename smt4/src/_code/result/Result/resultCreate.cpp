@@ -1,4 +1,3 @@
-/* NON_MATCHING: global pointer uses r5 instead of r4; draw-task result store omits retail's r0-to-r1 move. */
 #include "result/ResultInput.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -43,8 +42,8 @@ void resultCreate(u8 kind)
     if (!g_result) {
         FUN_002898e4();
         asdDebugTrace(DAT_00405dfc, 4708);
-        ResultProcessWorkIV *work = (ResultProcessWorkIV *)asdMemAlloc(0x100, 0x100, 0, sizeof(*work), 1);
-        g_result = work;
+        g_result = (ResultProcessWorkIV *)asdMemAlloc(0x100, 0x100, 0, sizeof(ResultProcessWorkIV), 1);
+        ResultProcessWorkIV *work = g_result;
         work->calculate = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00405df0), 2, 0, 0, FUN_0018c0ec, scrResultDestroy, 0);
         taskCreateDraw(DAT_00405ddc, 0x80, 0, 0, FUN_001a16c0, NULL, 0, reinterpret_cast<void *>(work->calculate));
         taskCreateDraw(DAT_00405dc8, 0xDE, 0, 0, FUN_001a16c0, NULL, 0, reinterpret_cast<void *>(work->calculate));

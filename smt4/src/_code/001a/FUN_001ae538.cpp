@@ -29,7 +29,7 @@ extern int g_camp; /* 0x43da90 */
 /* Supplied declaration required: FUN_00283f80. */
 /* Supplied declaration required: FUN_0028f870. */
 extern int FUN_0029efa8(int);
-extern int FUN_0029efc0(int);
+extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: FUN_002bf380. */
 extern int gameFlagIsSet(unsigned int);
@@ -185,16 +185,16 @@ void FUN_001ae538(int param_1,unsigned int param_2,unsigned int param_3,int para
   FUN_002bf288(2,0x1d,0x510,temp_v11,param_3,0x6a);
   temp_v3 = 0;
   do {
-    temp_v1 = FUN_0029efc0(temp_v9);
+    temp_v1 = resourceRunOperationIfUnblocked(temp_v9);
     temp_v4 = FUN_0029ee54((const void *)(temp_v9));
     if (temp_v4 <= temp_v1 + temp_v3) break;
-    temp_v1 = FUN_0029efc0(temp_v9);
+    temp_v1 = resourceRunOperationIfUnblocked(temp_v9);
     FUN_00283f80(temp_v10,temp_v3 + 2,*(unsigned short *)(temp_v6 + (temp_v1 + temp_v3) * 2),temp_v11,param_3);
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 9);
   FUN_0028f870(temp_v9,temp_v11,param_3,0);
   if (temp_v12 != 0) {
-    temp_v3 = FUN_0029efc0(temp_v9);
+    temp_v3 = resourceRunOperationIfUnblocked(temp_v9);
     temp_v1 = FUN_0029efa8(temp_v9);
     temp_v0 = *(unsigned short *)(temp_v6 + (temp_v1 + temp_v3) * 2);
     temp_v6 = FUN_0029efa8(temp_v9);

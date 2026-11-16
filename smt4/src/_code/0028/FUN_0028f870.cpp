@@ -40,7 +40,7 @@ extern TitleSceneWork *g_titleScene;  /* 0x44ea00 */
 
 s32 ifTouchGetSelectionModeForRegion(s32 region);
 s32 FUN_0029ee54(u32 list);
-s32 FUN_0029efc0(u32 list);
+s32 resourceRunOperationIfUnblocked(u32 list);
 BankSprite *asdTMTexTableEntryAt(s32 bank, s32 sprite);
 void FUN_0029a17c(s32 x, s32 y, s32 width, s32 height, s32 flag);
 s32 __aeabi_idivmod(s32 numerator, s32 denominator);
@@ -104,7 +104,7 @@ void FUN_0028f870(u32 list, s32 x, s32 y, s32 wide)
     if (thumbHeight < 1) {
         thumbHeight = 1;
     }
-    s32 thumbOffset = __aeabi_idivmod(track->cell[1] << 12, FUN_0029ee54(list)) * FUN_0029efc0(list) >> 12;
+    s32 thumbOffset = __aeabi_idivmod(track->cell[1] << 12, FUN_0029ee54(list)) * resourceRunOperationIfUnblocked(list) >> 12;
     setRenderState(g_titleScene, 3);
     FUN_0029a17c(x + track->x, track->y + y + thumbOffset, track->cell[0], thumbHeight, 1);
     s32 thumbSprite;

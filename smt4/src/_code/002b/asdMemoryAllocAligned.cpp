@@ -1,4 +1,3 @@
-/* NON_MATCHING: register choice for the lock global (r9 vs sl) and the header stores/uxth of the alignment are scheduled differently from retail. */
 #include "common.h"
 
 extern "C" {
@@ -24,11 +23,21 @@ AsdMemoryBlock *FUN_002b24d8(u32 heap, u32 kind, u32 flags, u32 size, s32 tag);
 void FUN_002b23f4(AsdMemoryBlock *block);
 void rt_memclr(void *dest, u32 size);
 
-/* The aligned user data of a block: the first `alignment` boundary past its header. */
-static __inline u8 *asdMemoryBlockData(AsdMemoryBlock *block)
+/* Fills in the block's header and returns its user data: the first `alignment` boundary past the
+ * header, whose preceding word points back at the block. */
+static __inline void *asdMemoryBlockInit(AsdMemoryBlock *block, u32 size, u16 alignment, u16 unk06)
 {
-    u32 mask = block->alignment - 1;
-    return (u8 *)(block + 1) + ((block->alignment - ((u32)(block + 1) & mask)) & mask);
+    block->size = size;
+    block->alignment = alignment;
+    block->unk06 = unk06;
+    u32 boundary = block->alignment;
+    u32 mask = boundary - 1;
+    u32 padding = (boundary - ((u32)(block + 1) & mask)) & mask;
+    u8 *data = (u8 *)block + padding;
+    data += sizeof(AsdMemoryBlock);
+    ((AsdMemoryBlock **)data)[-1] = block;
+    FUN_002b23f4(block);
+    return data;
 }
 
 /* Allocates `size` cleared bytes aligned to `alignment` (at least 0x80); the block header sits below. */
@@ -38,14 +47,10 @@ void *asdMemoryAllocAligned(u32 heap, u32 kind, u32 flags, u32 size, u32 alignme
     if (alignment < 0x80) {
         alignment = 0x80;
     }
-    u32 total = (size + alignment + alignment + sizeof(AsdMemoryBlock) - 1) & -alignment;
+    u32 mask = -alignment;
+    u32 total = (size + alignment + alignment + sizeof(AsdMemoryBlock) - 1) & mask;
     AsdMemoryBlock *block = FUN_002b24d8(heap, kind, flags, total, tag);
-    block->size = total;
-    block->alignment = alignment;
-    block->unk06 = 0;
-    u8 *data = asdMemoryBlockData(block);
-    ((AsdMemoryBlock **)data)[-1] = block;
-    FUN_002b23f4(block);
+    void *data = asdMemoryBlockInit(block, total, alignment, 0);
     rt_memclr(data, size);
     nn_os_CriticalSection_Leave(DAT_00465120.criticalSection);
     return data;

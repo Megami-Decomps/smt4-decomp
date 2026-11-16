@@ -7,7 +7,7 @@ s32 gameFlagIsSet(u32);
 void asdTMTexTableReleaseNode(s32 table, s32 node);
 void FUN_002a60cc(void *, u32, s32);
 void aocSlotRelease(SpriteTransitionWork *);
-s32 FUN_0024ecc0(u32, u32);
+s32 bustupCutAnimAssignSlot(u32, u32);
 void bustupSpriteStartTransition(SpriteTransitionWork *, s32, s32);
 void FUN_002a4e18(Vec3f *, u32);
 extern void *g_aocSystem;
@@ -38,7 +38,7 @@ void FUN_00249c4c(u32 job, u32 resourceId, s32 immediate)
     work->initialized = 1;
     aocSlotRelease(work);
     work->unk08 = resourceId;
-    switch (FUN_0024ecc0(job, resourceId)) {
+    switch (bustupCutAnimAssignSlot(job, resourceId)) {
     case 0:
         work->mode = 0;
         if (work->state) {

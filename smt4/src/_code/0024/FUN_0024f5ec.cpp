@@ -30,7 +30,7 @@ void FUN_00347198(TiledIndexMesh *mesh);
 void FUN_00346f2c(TiledIndexMesh *mesh);
 void FUN_00343778(RenderCtx *context, const TiledMeshRowDrawState *row);
 void FUN_0023b724(TiledIndexMesh *mesh, s32 mode, s32 firstIndex, s32 indexCount);
-void FUN_002c18e4(RenderCtx *context);
+void renderCtxResetColorScale(RenderCtx *context);
 
 void FUN_0024f5ec(TiledMeshDrawWork *work, u32 mode)
 {
@@ -57,7 +57,7 @@ void FUN_0024f5ec(TiledMeshDrawWork *work, u32 mode)
         FUN_00343778(g_titleScene, &work->rows[row]);
         FUN_0023b724(work->mesh, 0, work->trianglesPerRow * row * 3, work->trianglesPerRow * 3);
     }
-    FUN_002c18e4(g_titleScene);
+    renderCtxResetColorScale(g_titleScene);
     renderCtxApplyTransforms(g_titleScene);
     renderStackPop(&g_titleScene->stackA);
 }

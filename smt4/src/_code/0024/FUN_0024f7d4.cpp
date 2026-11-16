@@ -16,7 +16,7 @@ extern "C" {
 void FUN_0025009c(Matrix44 *destination, const Matrix44 *source);
 void matrix44SetIdentity(Matrix44 *destination);
 void mathMatrixApplyScale(Matrix44 *matrix, const Vector3View *scale, s32 mode);
-void FUN_0024fd70(Matrix44 *matrix, const Vector3View *offset, s32 mode);
+void mathMatrixApplyTranslation(Matrix44 *matrix, const Vector3View *offset, s32 mode);
 void matrixApplyByMode(void *transform, const Matrix44 *matrix, s32 mode);
 }
 
@@ -41,7 +41,7 @@ static void matrixInitializeWithScaleAndOffset(Matrix44 *matrix, const Vector3Vi
         components.x = offset->x;
         components.y = offset->y;
         components.z = offset->z;
-        FUN_0024fd70(matrix, &components, 2);
+        mathMatrixApplyTranslation(matrix, &components, 2);
     }
 }
 

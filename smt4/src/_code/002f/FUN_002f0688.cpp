@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps the constant 1 in r5 across the scrSetResult call (shared by the shift and the return value); built rematerialises it */
+/* NON_MATCHING: the status local now keeps retail's shared constant 1 in r5 (shift base and return value); only the flag halfword loads into r1 where retail uses r0. */
 #include "battle/BattleUnitSlot.h"
 #include "script/ScriptArgs.h"
 
@@ -22,9 +22,10 @@ u32 FUN_002f0688(void)
 {
     u32 bit = scrGetArg(0);
     UnitStats002f0688 *stats = reinterpret_cast<BtlUnit002f0688 *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->stats;
+    s32 result = 1; /* the command's status: always continue */
 
     scrSetResult((stats->flags & (1 << bit)) != 0);
-    return 1;
+    return result;
 }
 
 } /* extern "C" */

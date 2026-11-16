@@ -35,7 +35,7 @@ int btlTalkBustUpSetDemonTexture(...);
 int scrScriptProcessStartEntry(...);
 int FUN_0029bd4c(void);
 int beginStatusPanelClose(void);
-int FUN_0029ee6c(...);
+int buttonHelpSetText(...);
 int messageStatesSetFirst(...);
 int FUN_002b7bca(...);
 int buttonHelpSetPreset(...);
@@ -92,7 +92,7 @@ extern int FUN_0029c48c(void);
 /* Supplied declaration required: arrayContainsU16. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
 extern int FUN_0029ee54(int);
-/* Supplied declaration required: FUN_0029ee6c. */
+/* Supplied declaration required: buttonHelpSetText. */
 extern int FUN_0029efa8(int);
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
@@ -383,7 +383,7 @@ void FUN_001cea8c(int param_1)
           *piVar9 = *piVar25;
         }
         else {
-          FUN_0029ee6c(0,0x323232ff);
+          buttonHelpSetText(0,0x323232ff);
           timerStart(param_1 + 0xac,1,0);
           *piVar9 = *piVar9 + 1;
           if (*piVar25 == 3) {

@@ -62,7 +62,7 @@ void messageBannerInitSelection(s32 a, s32 b);
 void messageTargetSetValue(s32 target, s32 value);
 s32 questCenterGetHealingFee(void);
 void messageMainSetTargetFlags(s32 flags);
-void FUN_0029ee6c(s32 a, u32 color);
+void buttonHelpSetText(s32 a, u32 color);
 void FUN_00289c98(s32 value);
 void FUN_002355ac(s32 value);
 
@@ -125,7 +125,7 @@ void fieldSceneApplyPendingQuestUpdate(FieldSceneWork *work)
     }
     if (primaryState != 0) {
         work->pending.savedPrimaryState = primaryState;
-        FUN_0029ee6c(0, 0x323232FF);
+        buttonHelpSetText(0, 0x323232FF);
         FUN_00289c98(1);
         work->state = 0xC;
         work->phase = 0;

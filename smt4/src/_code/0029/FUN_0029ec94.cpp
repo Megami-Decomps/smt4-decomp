@@ -4,15 +4,15 @@
 extern "C" {
 extern UniteWork *g_unite;
 s32 FUN_00293f10(s32 id, s32 byDevilId);
-void FUN_002958f8(s32 id, s32 byDevilId);
-void FUN_002942c4(s32 id, s32 byDevilId);
+void statusBustUpPortraitRelease(s32 id, s32 byDevilId);
+void statusBustUpPortraitAcquire(s32 id, s32 byDevilId);
 
 void FUN_0029ec94(void)
 {
     UniteWork *work = g_unite;
-    s32 first = FUN_0029e93c(work->portraitSelectionIV.cursor);
+    s32 first = resourceRunEmbeddedOperationIfUnblocked(work->portraitSelectionIV.cursor);
     if (work->menu.mode == 1)
-        first = FUN_0029e93c(work->portraitSelectionIV.alternateCursor);
+        first = resourceRunEmbeddedOperationIfUnblocked(work->portraitSelectionIV.alternateCursor);
 
     for (s32 slot = 0; slot < 4; ++slot) {
         u32 id = (u16)work->portraitSelectionIV.loaded[slot];
@@ -21,7 +21,7 @@ void FUN_0029ec94(void)
             work->portraitSelectionIV.desired[first + 2] != id &&
             work->portraitSelectionIV.desired[first + 3] != id) {
             if (FUN_00293f10(work->portraitSelectionIV.loaded[slot], 1)) {
-                FUN_002958f8(work->portraitSelectionIV.loaded[slot], 1);
+                statusBustUpPortraitRelease(work->portraitSelectionIV.loaded[slot], 1);
                 work->portraitSelectionIV.loaded[slot] = 0;
             }
         }
@@ -34,7 +34,7 @@ void FUN_0029ec94(void)
             work->portraitSelectionIV.desired[first + entry] != (u16)work->portraitSelectionIV.loaded[3]) {
             for (s32 slot = 0; slot < 4; ++slot) {
                 if (!work->portraitSelectionIV.loaded[slot]) {
-                    FUN_002942c4((s16)work->portraitSelectionIV.desired[first + entry], 1);
+                    statusBustUpPortraitAcquire((s16)work->portraitSelectionIV.desired[first + entry], 1);
                     work->portraitSelectionIV.loaded[slot] = work->portraitSelectionIV.desired[first + entry];
                     break;
                 }

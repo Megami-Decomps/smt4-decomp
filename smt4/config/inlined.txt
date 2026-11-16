@@ -43,3 +43,6 @@ _ZN14AocRequestBaseC1Ej = 0xe5801000; // 0x352740, 0x352ee8 (the AocRequest cons
 effMenuNodeGetState = 0xe5900008; // 0x31ba70 (effectEditorUpdate, after ldr r0, [r4, #68])
 btlMainStateGetPartyCaptureId = 0xe1d00bf4; // 0x199660 (FUN_00199424, after bl btlGetMainState and its two hook NOPs; BtlMainState s16 at 0xb4)
 resultSlotFollowUpIndex = 0xe3a00002; // 0x394700 (FUN_003946b4: mov r0, #2 in place of the call, then mov r4, r0 keeps the slot index for FUN_002c5be8 and the indexed store)
+partyWidgetSetTransitionActive = 0xe5c01025; // 0x2933a8 0x2933e4 0x293438 0x293474 (partyPanelSetState: widget reloaded into r0, mov r1, #0, then strb r1, [r0, #37]; smt4a has the same row)
+partyWidgetSetTransitionPending = 0xe5c01027; // 0x2933b4 0x2933f0 0x293444 0x293480 (partyPanelSetState: strb r1, [r0, #39] after the same setup)
+aocMenuSetReadyFlag = 0xe5c01b81; // 0x38f860 (aocMenuInitializePanelSprites: mov r1, #0; g_aocMain reloaded into r0; strb r1, [r0, #2945]; smt4a has the same row)

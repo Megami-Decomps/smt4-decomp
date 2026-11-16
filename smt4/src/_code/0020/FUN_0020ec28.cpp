@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail lays the returns out differently (a shared `return 0` at the end, `return 1` right after the first branch); built branches the other way */
 #include "common.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "script/ScriptArgs.h"
@@ -14,10 +13,7 @@ void FUN_002a03d8(s32 index, s32 value);
 u32 FUN_0020ec28(void)
 {
     s32 value = scrGetArg(1);
-    if (scrGetCommandFrame() != 0) {
-        if (FUN_002b89a4(0) != 0 && FUN_002b89a4(0) != 0)
-            return 1;
-    } else {
+    if (scrGetCommandFrame() == 0) {
         if (FUN_002c1d5c() != 0)
             return 1;
         s32 mode = scrGetArg(0);
@@ -25,6 +21,8 @@ u32 FUN_0020ec28(void)
             return 1;
         FUN_002a03d8(0, value);
         FUN_002a03d8(1, value);
+    } else if (FUN_002b89a4(0) != 0 && FUN_002b89a4(0) != 0) {
+        return 1;
     }
     return 0;
 }

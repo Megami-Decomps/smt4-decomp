@@ -21,7 +21,7 @@ extern "C" {
 extern RenderCtx *g_titleScene;
 
 DebugListWork *jobGetWork(void);
-void FUN_002c18e4(RenderCtx *context);
+void renderCtxResetColorScale(RenderCtx *context);
 void renderCtxSelectStereoLayout(RenderCtx *context);
 s32 FUN_002c5d80(u32 mode, u32 option);
 void FUN_0032accc(void);
@@ -66,7 +66,7 @@ u32 FUN_00201830(void)
             rows = work->itemCount;
             if (rows < 1) {
                 renderCtxApplyTransforms(g_titleScene);
-                FUN_002c18e4(g_titleScene);
+                renderCtxResetColorScale(g_titleScene);
                 return 0;
             }
         } else if (work->cursor >= DEBUG_LIST_ROWS) {
@@ -85,7 +85,7 @@ u32 FUN_00201830(void)
         }
     }
     renderCtxApplyTransforms(g_titleScene);
-    FUN_002c18e4(g_titleScene);
+    renderCtxResetColorScale(g_titleScene);
     return 0;
 }
 

@@ -845,11 +845,11 @@ struct SequentialAnimationPrefixA {
     /* 0x0000 */ u8 unk0000[8];
     /* 0x0008 */ u32 activeState;
     /* 0x000C */ u8 unk000C[0xBC];
-    /* 0x00C8 */ u8 introWork[0x8A];
-    /* 0x0152 */ s8 introFinished;
-    /* 0x0153 */ u8 unk0153[0x89A];
+    /* 0x00C8 */ UiSpriteState intro;
+    /* 0x0154 */ u8 unk0154[0x899];
     /* 0x09ED */ s8 completion;
-    /* 0x09EE */ u8 unk09EE[0x626];
+    /* 0x09EE */ u8 unk09EE[0x22];
+    /* 0x0A10 */ UiSpriteState rows[11];
     /* 0x1014 */ s32 progress;
     /* 0x1018 */ u8 unk1018[8];
     /* 0x1020 */ s32 textureId;
@@ -857,9 +857,9 @@ struct SequentialAnimationPrefixA {
 
 typedef char SequentialAnimationPrefixAOffsetsCheck[
     offsetof(SequentialAnimationPrefixA, activeState) == 8 &&
-    offsetof(SequentialAnimationPrefixA, introWork) == 0xC8 &&
-    offsetof(SequentialAnimationPrefixA, introFinished) == 0x152 &&
+    offsetof(SequentialAnimationPrefixA, intro) == 0xC8 &&
     offsetof(SequentialAnimationPrefixA, completion) == 0x9ED &&
+    offsetof(SequentialAnimationPrefixA, rows) == 0xA10 &&
     offsetof(SequentialAnimationPrefixA, progress) == 0x1014 &&
     offsetof(SequentialAnimationPrefixA, textureId) == 0x1020 &&
     sizeof(SequentialAnimationPrefixA) == 0x1024 ? 1 : -1];

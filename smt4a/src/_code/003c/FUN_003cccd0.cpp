@@ -1,4 +1,4 @@
-/* NON_MATCHING: the selection range's stack slots and loads differ; register allocation of the mask AND/ORR chain differs; u64 mask loads pair differently (ldm versus two ldr); the frame/saved-register set differs (the active-entry byte already folds with the s8 flag). */
+/* NON_MATCHING: only the loop entry address: retail keeps it in r2 beside the flag words (ldrd r0, [r2]); the build reuses r0 and loads the flags with ldm. */
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -30,18 +30,17 @@ static inline bool candidateHasPendingCounter(BtlCombatantEntryA *entry)
 extern "C" u32 FUN_003cccd0(void)
 {
     u32 id = scrGetArg(0);
-    s32 choice = btlResolveEntryChoice(scrGetArg(1));
-    struct EntryRange { s32 count; s32 first; } range;
-    FUN_00301a08(choice, &range.first, &range.count);
-    for (s32 index = range.first; index < range.first + range.count; ++index) {
-        BtlMainStateA *state = btlGetMainState();
-        BtlCombatantEntryA *entry = &state->entries[index];
-        u64 flags = entry->flags;
-        if ((flags & g_btlCandidateMasks.unavailable) == 0 &&
-            (flags & g_btlCandidateMasks.required) != 0 &&
-            (g_btlCandidateMasks.excluded & flags) == 0 && entry->id == id && candidateHasPendingCounter(entry)) {
-            scrSetResult(1);
-            return 1;
+    s32 first, count;
+    FUN_00301a08(btlResolveEntryChoice(scrGetArg(1)), &first, &count);
+    for (s32 index = first; index < first + count; ++index) {
+        BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
+        if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
+            (entry->flags & g_btlCandidateMasks.required) &&
+            !(g_btlCandidateMasks.excluded & entry->flags) && entry->id == id) {
+            if (candidateHasPendingCounter(entry)) {
+                scrSetResult(1);
+                return 1;
+            }
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {

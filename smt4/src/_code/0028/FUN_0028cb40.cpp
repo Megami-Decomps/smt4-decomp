@@ -28,7 +28,7 @@ struct PlayerData {
 extern "C" {
 
 u32 FUN_00297ca4(CommandMenu* menu, u32 arg);
-s32 FUN_0029efc0(void* list);
+s32 resourceRunOperationIfUnblocked(void* list);
 s32 flagBitIsSet(s32 bit);
 s32 gameFlagIsSet(u32 flag);
 PlayerData* gameGetPlayerData(void);
@@ -50,7 +50,7 @@ void FUN_0028cb40(CommandMenu* menu, u16* layout, s16* cursor)
         *layout = 1;
         break;
     case 1: {
-        s32 base = FUN_0029efc0(menu->itemList);
+        s32 base = resourceRunOperationIfUnblocked(menu->itemList);
         index = FUN_0029efa8(menu->itemList) + base;
         u16 page;
         if (menu->hasPlayerList != 0) {
@@ -78,7 +78,7 @@ void FUN_0028cb40(CommandMenu* menu, u16* layout, s16* cursor)
             s32 slotIds[6] = { 0, 1, 2, 3, 4, 5 };
             for (s32 i = 0; i < 6; i++) {
                 if (flagBitIsSet(i + 0x2e)) {
-                    s32 selected = FUN_0029efc0(menu->skillList) + FUN_0029efa8(menu->skillList);
+                    s32 selected = resourceRunOperationIfUnblocked(menu->skillList) + FUN_0029efa8(menu->skillList);
                     if (selected == index) {
                         *cursor = slotIds[i];
                         return;
@@ -88,7 +88,7 @@ void FUN_0028cb40(CommandMenu* menu, u16* layout, s16* cursor)
             }
             return;
         }
-        result = FUN_0029efc0(menu) + FUN_0029efa8(menu->skillList);
+        result = resourceRunOperationIfUnblocked(menu) + FUN_0029efa8(menu->skillList);
         break;
     case 4:
         result = 0;
@@ -100,7 +100,7 @@ void FUN_0028cb40(CommandMenu* menu, u16* layout, s16* cursor)
         break;
     case 7:
         *layout = 8;
-        result = menu->targetIds[FUN_0029efc0(menu->targetList) + FUN_0029efa8(menu->targetList)];
+        result = menu->targetIds[resourceRunOperationIfUnblocked(menu->targetList) + FUN_0029efa8(menu->targetList)];
         break;
     case 9:
         result = 0;

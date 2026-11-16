@@ -15,8 +15,8 @@ struct ScrollList;
 extern "C" {
 
 s32 ifTouchGetSelectionModeForRegion(s16 id);
-s32 FUN_0029efc0(ScrollList *list);
-s32 FUN_0029e93c(ScrollList *list);
+s32 resourceRunOperationIfUnblocked(ScrollList *list);
+s32 resourceRunEmbeddedOperationIfUnblocked(ScrollList *list);
 s32 FUN_0029ee54(ScrollList *list);
 s32 FUN_0029e958(ScrollList *list);
 s32 objectPartRunUnlessLocked(ScrollList *list);
@@ -36,9 +36,9 @@ u32 FUN_0026ab64(ScrollList *list, ScrollPoint touch, ScrollPoint barSize, s16 b
     s32 barMode = ifTouchGetSelectionModeForRegion(barId);
 
     if (previousMode == 6 || previousMode == 2) {
-        s32 position = FUN_0029efc0(list) + FUN_0029efa8(list);
+        s32 position = resourceRunOperationIfUnblocked(list) + FUN_0029efa8(list);
         if (horizontal != 0) {
-            position = FUN_0029e93c(list) + objectPartRunUnlessLocked(list);
+            position = resourceRunEmbeddedOperationIfUnblocked(list) + objectPartRunUnlessLocked(list);
         }
         if (position - 1 < 0) {
             return 1;
@@ -49,9 +49,9 @@ u32 FUN_0026ab64(ScrollList *list, ScrollPoint touch, ScrollPoint barSize, s16 b
             FUN_0029eb5c(list, position - 1);
         }
     } else if (nextMode == 6 || nextMode == 2) {
-        s32 position = FUN_0029efc0(list) + FUN_0029efa8(list) + 1;
+        s32 position = resourceRunOperationIfUnblocked(list) + FUN_0029efa8(list) + 1;
         if (horizontal != 0) {
-            position = FUN_0029e93c(list) + objectPartRunUnlessLocked(list) + 1;
+            position = resourceRunEmbeddedOperationIfUnblocked(list) + objectPartRunUnlessLocked(list) + 1;
             if (FUN_0029e958(list) <= position) {
                 return 1;
             }
@@ -81,7 +81,7 @@ u32 FUN_0026ab64(ScrollList *list, ScrollPoint touch, ScrollPoint barSize, s16 b
             return 1;
         }
         s16 target = y * total / barSize.y;
-        if (FUN_0029efa8(list) + FUN_0029efc0(list) != target && playSound != 0) {
+        if (FUN_0029efa8(list) + resourceRunOperationIfUnblocked(list) != target && playSound != 0) {
             eventQueueAddUnique(0x100016c);
         }
         FUN_0029eb5c(list, target);

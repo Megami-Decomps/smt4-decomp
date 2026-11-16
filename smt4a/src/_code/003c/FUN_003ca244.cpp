@@ -22,7 +22,7 @@ typedef char DepartureCollectedItemOffsets[offsetof(DepartureCollectedItems, ids
 extern "C" {
 extern MapDepart *g_mapDepart;
 extern DepartureCollectedItems DAT_005f1d74;
-s32 FUN_00480a54(s32 item);
+s32 itemGetTable8Sub3Value(s32 item);
 
 /* Collapse repeated collected items into a stable list with quantities and source attributes. */
 void FUN_003ca244(void)
@@ -48,7 +48,7 @@ void FUN_003ca244(void)
             DAT_005f1d74.ids[count] = items.ids[index];
             DAT_005f1d74.attributes[count] = items.attributes[index];
             DAT_005f1d74.quantities[count] = static_cast<s16>(quantity);
-            if (FUN_00480a54(DAT_005f1d74.ids[count]) != 0)
+            if (itemGetTable8Sub3Value(DAT_005f1d74.ids[count]) != 0)
                 owner->count++;
             count++;
         }

@@ -25,7 +25,7 @@ unsigned int appTryPurchase(unsigned int, int, int);
 int appCheckPurchaseRequirements(void);
 int textEncodeFontSlot(...);
 int FUN_0029eb5c(int, int);
-int FUN_0029efc0(...);
+int resourceRunOperationIfUnblocked(...);
 int FUN_0029efd8(...);
 int uiScrollHandleActionsOrTouch(...);
 int FUN_0029f848(...);
@@ -68,7 +68,7 @@ extern int useCounterIsFinished(void);
 /* Supplied declaration required: FUN_0029eb5c. */
 /* Supplied declaration required: FUN_0029ede8. */
 extern int FUN_0029ee54(int);
-/* Supplied declaration required: FUN_0029efc0. */
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: FUN_0029f848. */
@@ -225,7 +225,7 @@ unsigned int FUN_003291dc(int *param_1)
       eventQueueAddUniqueIfValid();
       return 0;
     }
-    temp_v6 = FUN_0029efc0(temp_v7 + 0x10);
+    temp_v6 = resourceRunOperationIfUnblocked(temp_v7 + 0x10);
     temp_v4 = FUN_0029efa8((const void *)(temp_v7 + 0x10));
     temp_v6 = *(int *)(temp_v7 + (temp_v4 + temp_v6) * 4 + 0x74);
     temp_v6 = appTryPurchase(temp_v6,0,0);
@@ -295,7 +295,7 @@ unsigned int FUN_003291dc(int *param_1)
     temp_v6 = 0;
     FUN_002c1658(0,1);
     if (temp_v6 != 0 || temp_v12[0] != '\0') {
-      temp_v6 = FUN_0029efc0(temp_v7 + 0x10);
+      temp_v6 = resourceRunOperationIfUnblocked(temp_v7 + 0x10);
       temp_v4 = FUN_0029efa8((const void *)(temp_v7 + 0x10));
       temp_v4 = *(int *)(temp_v7 + (temp_v4 + temp_v6) * 4 + 0x74);
       temp_v6 = appTryPurchase(temp_v4,0,1);
@@ -360,7 +360,7 @@ unsigned int FUN_003291dc(int *param_1)
         FUN_00248738(temp_v7,3);
       }
       else {
-        temp_v6 = FUN_0029efc0(temp_v7 + 0x10);
+        temp_v6 = resourceRunOperationIfUnblocked(temp_v7 + 0x10);
         temp_v4 = FUN_0029efa8((const void *)(temp_v7 + 0x10));
         appTryPurchase(*(unsigned int *)(temp_v7 + (temp_v4 + temp_v6) * 4 + 0x74),0,0);
         eventQueueAddUnique(0x100025c);
@@ -386,7 +386,7 @@ unsigned int FUN_003291dc(int *param_1)
         temp_v0 = *(char *)(temp_v7 + 0x2b7);
       }
       if (temp_v11 && temp_v0 == '\0') {
-        temp_v10 = FUN_0029efc0(temp_v7 + 0x10);
+        temp_v10 = resourceRunOperationIfUnblocked(temp_v7 + 0x10);
         temp_v9 = flaggedEntryGetValueA(temp_v7 + 0x10);
         *(unsigned int *)(temp_v7 + 0x2a8) = 0;
         if (*(char *)(temp_v7 + 0x2b4) != '\0') {

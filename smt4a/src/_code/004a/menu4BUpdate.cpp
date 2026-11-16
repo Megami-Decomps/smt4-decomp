@@ -26,8 +26,8 @@ extern s32 FUN_0035db94(void);
 extern void uiSpriteBankApplyPreset(u8 *block, s16 page);
 extern u32 FUN_0031d174(u8 *block);
 extern s32 statusDownGetMode(void);
-extern void FUN_004d01f8(u8 *block);
-extern void FUN_004d0100(u8 *block);
+extern void listCursorStepBack(u8 *block);
+extern void listCursorStepForward(u8 *block);
 extern void sendEvent100020D(void);
 
 /* Per-frame update: tracks the selected page, switches to state 5 on confirm, otherwise scrolls the list. */
@@ -57,10 +57,10 @@ void menu4BUpdate(Menu4B *obj)
         y = FUN_0031d174(obj->block20);
         if (statusDownGetMode() != 1) {
             if (statusDownGetMode() == -1) {
-                FUN_004d01f8(obj->block20);
+                listCursorStepBack(obj->block20);
             }
         } else {
-            FUN_004d0100(obj->block20);
+            listCursorStepForward(obj->block20);
         }
         if (FUN_002a482c(obj->block20) != x || FUN_0031d174(obj->block20) != y) {
             sendEvent100020D();

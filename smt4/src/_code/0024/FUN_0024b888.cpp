@@ -1,21 +1,26 @@
-/* NON_MATCHING: unit and four identifier arguments are assigned different saved registers from retail. */
 #include "battle/btlReflect.h"
 #include "battle/BtlMainAccess.h"
-struct BattleMainState;
 
 extern "C" {
 
-
-// Queue reflection action thirty-five with four halfword identifiers.
-u32 FUN_0024b888(s32 unit, u32 argument, u16 first, u16 second, u16 third, u16 fourth)
+/* Queues reflection action 0x23 for the unit with four identifiers. */
+static __inline void queueKind23Action(s32 unit, u32 argument, s32 first, s32 second, s32 third,
+                                       s32 fourth)
 {
-    btlGetMainState();
     ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)unit, 0, argument);
     action->kind = 0x23;
     action->first = first;
     action->second = second;
     action->extraIds.third = third;
     action->extraIds.fourth = fourth;
+}
+
+/* Queues reflection action 0x23 with four halfword identifiers; returns 1. */
+u32 FUN_0024b888(s32 unit, u32 argument, s32 first, s32 second, s32 third, s32 fourth)
+{
+    btlGetMainState();
+    queueKind23Action(unit, argument, first, second, third, fourth);
     return 1;
 }
+
 }

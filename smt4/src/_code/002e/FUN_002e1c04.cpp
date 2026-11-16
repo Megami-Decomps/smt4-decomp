@@ -10,7 +10,7 @@ void effMenuCallHandler(s32 handler, s32 flag);
 void requestDispatch(void *request);
 void FUN_0028186c(EffectNode *node);
 void layoutApplyForState(RenderCtx *context);
-void FUN_002c18e4(RenderCtx *context);
+void renderCtxResetColorScale(RenderCtx *context);
 u32 FUN_002c501c(void);
 s32 FUN_002c5d80(u32 first, u32 second);
 void effectRestoreSavedRenderPairs(RenderCtx *context, u32 value);
@@ -36,7 +36,7 @@ void FUN_002e1c04(void)
     if (g_effectEditor.dispatch.cachedEvent != 0) {
         requestDispatch(reinterpret_cast<void *>(g_effectEditor.dispatch.cachedEvent));
     }
-    FUN_002c18e4(g_titleScene);
+    renderCtxResetColorScale(g_titleScene);
     renderCtxApplyTransforms(g_titleScene);
     renderStackPop(&g_titleScene->depthStacks.stackD);
     renderStackPop(&g_titleScene->stackA);

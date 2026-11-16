@@ -11,7 +11,7 @@ struct Obj55ca08Selection {
 };
 extern "C" {
 s32 ifTouchGetSelectionModeForRegion(s32 region);
-s32 FUN_0029efc0(void);
+s32 resourceRunOperationIfUnblocked(void);
 s32 flaggedEntryGetValueA(void);
 s32 flaggedEntryGetValueB(const u8 *state);
 void eventQueueAddUnique(u32 event);
@@ -43,13 +43,13 @@ void Obj55ca08::synchronize(const u8 *selection)
     }
     if (selected != 0) {
         s32 index = selectedIndex;
-        s32 offset = entry->type == 1 ? FUN_0029e93c(entry->state) : FUN_0029efc0();
+        s32 offset = entry->type == 1 ? resourceRunEmbeddedOperationIfUnblocked(entry->state) : resourceRunOperationIfUnblocked();
         if (offset + index < entry->count) {
             s32 previous = entry->type == 1 ? flaggedEntryGetValueB(entry->state) : flaggedEntryGetValueA();
             if (soundEnabled != 0 && previous != index) {
                 eventQueueAddUnique(0x100016c);
             }
-            offset = entry->type == 1 ? FUN_0029e93c(entry->state) : FUN_0029efc0();
+            offset = entry->type == 1 ? resourceRunEmbeddedOperationIfUnblocked(entry->state) : resourceRunOperationIfUnblocked();
             if (entry->type == 0) {
                 scrollOwnerSetValue(entry->state, offset);
                 flaggedEntrySetValueA(entry->state, index);

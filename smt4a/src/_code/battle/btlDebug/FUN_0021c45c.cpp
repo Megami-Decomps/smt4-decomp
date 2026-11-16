@@ -25,7 +25,7 @@ int asdLoadFileAsyncSimple(...);
 int dataSet16LoadAndSort(void);
 int campButtonHelpLoad(void);
 int campButtonHelpAcquire(void);
-int FUN_00371c3c(...);
+int statusBustUpPortraitAcquire(...);
 int FUN_00387240(...);
 int FUN_003eb200(void);
 int paramsClearPacket(int);
@@ -71,7 +71,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: dataSet16LoadAndSort. */
 /* Supplied declaration required: campButtonHelpLoad. */
 /* Supplied declaration required: campButtonHelpAcquire. */
-/* Supplied declaration required: FUN_00371c3c. */
+/* Supplied declaration required: statusBustUpPortraitAcquire. */
 /* Supplied declaration required: FUN_00387240. */
 extern int gameDataFlagTestBit(int *);
 extern int FUN_003e4d68(unsigned int);
@@ -249,7 +249,7 @@ void FUN_0021c45c(int param_1,int param_2)
   *(unsigned int *)(param_1 + 0x4bb4) = 0;
   *(unsigned int *)(param_1 + 0x4bb8) = 0;
   *(unsigned int *)(param_1 + 0x4bbc) = 0;
-  FUN_00371c3c(0xffffffff,1);
+  statusBustUpPortraitAcquire(0xffffffff,1);
   temp_v1 = 0;
   *(unsigned int *)(param_1 + 0x4bb0) = 0xffffffff;
   do {
@@ -257,7 +257,7 @@ void FUN_0021c45c(int param_1,int param_2)
     if (*(char *)(temp_v5 + temp_v1 + 0x1ca0) >= '\0') {
       temp_v5 = gameGetSlotTable();
       temp_v5 = gameGetSlotRecord((int)*(char *)(temp_v5 + temp_v1 + 0x1ca0));
-      FUN_00371c3c((int)*(short *)(temp_v5 + 0x62),1);
+      statusBustUpPortraitAcquire((int)*(short *)(temp_v5 + 0x62),1);
       temp_v2 = param_1 + temp_v1 * 4;
       *(unsigned int *)(temp_v2 + 0x4bb4) = (unsigned int)*(unsigned short *)(temp_v5 + 0x62);
       *(unsigned int *)(temp_v2 + 0x4220) = (unsigned int)*(unsigned short *)(temp_v5 + 0x62);
@@ -281,7 +281,7 @@ void FUN_0021c45c(int param_1,int param_2)
     if (temp_v5 != 0) {
       temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 0x62);
       FUN_00184310();
-      FUN_00371c3c((int)(short)(*(short *)(temp_v3 + 0x9c) + 1),0);
+      statusBustUpPortraitAcquire((int)(short)(*(short *)(temp_v3 + 0x9c) + 1),0);
     }
     temp_v7 = temp_v7 + 1;
   } while ((int)temp_v7 < 0xc);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: menu-reset offset-pool reuse and register scheduling differ. */
+/* NON_MATCHING: retail loads the 0x12DC mode offset from its own pool word for the final store (the build derives it from 0x12F0) and schedules the kind-offset load after the instance load. */
 #include "shard/Shard0033.h"
 #include "font/ComWin/ComWin.h"
 
@@ -49,11 +49,9 @@ void FUN_0029e788()
     }
     MenuSessionResetViewIV *current = (MenuSessionResetViewIV *)g_gameGlobals.instance;
     current->flag1e60 = 0;
-    if (current->kind != 9) {
-        s32 mode = current->mode;
-        if (mode == 4 || mode == 5 || mode == 6) {
-            current->selection = 0;
-        }
+    if (current->kind != 9 &&
+        (current->mode == 4 || current->mode == 5 || current->mode == 6)) {
+        current->selection = 0;
     }
     session->first = 0;
     session->flag12f0 = 0;

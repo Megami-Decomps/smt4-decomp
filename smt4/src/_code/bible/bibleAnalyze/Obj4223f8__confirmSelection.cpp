@@ -45,7 +45,7 @@ void pointConvertToFloat(FloatPoint *point, s32 x, s32 y);
 void buttonHelpSetPreset(s32 preset);
 const char *dataLookupDisplayName(u8 *scratch, u32 id);
 void textFormatBuffer(char *buffer, const char *format, ...);
-void FUN_0029ee6c(const char *text, u32 color);
+void buttonHelpSetText(const char *text, u32 color);
 u32 flaggedValueHolderGetTotal(const void *holder);
 void FUN_0029da34(s32 a, s32 b, u32 id);
 void FUN_00233670(void *selection, s32 a, s32 b, s32 count);
@@ -71,7 +71,7 @@ void Obj4223f8::confirmSelection()
             name = DAT_0040226c;
         }
         textFormatBuffer(text, DAT_00402274, name, DAT_0043d990[2]);
-        FUN_0029ee6c(text, 0x323232FF);
+        buttonHelpSetText(text, 0x323232FF);
     } else {
         BibleDetailEntry *entries = reinterpret_cast<BibleDetailEntry *>(reinterpret_cast<u8 *>(this) + 0x5A8);
         FUN_0029da34(0, 1, entries[flaggedValueHolderGetTotal(self->holderArea)].itemId);

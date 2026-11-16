@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail places case 3's flag clear out of line after the epilogue; armcc folds it into the compare chain here. */
 #include "common.h"
 #include "shard/JobWork.h"
 
@@ -26,7 +25,8 @@ u32 FUN_00391000(u32 job)
 
     switch (work->state) {
     case 0:
-        if (FUN_002b8ee0(work->loader, 0) != 0) {
+        u8 *loader = work->loader;
+        if (FUN_002b8ee0(loader, 0) != 0) {
             work->state = 1;
             work->flags |= 0x2000;
             work->sound = FUN_002aa024(0x3a, 0x45);
@@ -40,7 +40,8 @@ u32 FUN_00391000(u32 job)
         }
         break;
     case 3:
-        work->flags &= ~0x3000;
+        work->flags &= ~0x2000; /* set when the sound started */
+        work->flags &= ~0x1000;
         break;
     }
     return 0;

@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail keeps the constant 1 (the shift base) in r6 and returns it from there; here it is rematerialised (mov r0, #1). */
 #include "common.h"
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
@@ -12,6 +11,7 @@ extern "C" {
 u32 scrBtlAllEntriesInGroup(void)
 {
     u32 group = scrGetArg(0);
+    s32 result = 1; /* the command's status: always continue */
     s32 i;
 
     for (i = 0; i < BTL_ENTRY_COUNT; i++) {
@@ -20,11 +20,11 @@ u32 scrBtlAllEntriesInGroup(void)
         if ((entry->flags & BTL_ENTRY_FLAG_PRESENT) != 0 && (entry->flags & BTL_ENTRY_FLAG_ACTIVE) != 0 &&
             (entry->flags & BTL_ENTRY_FLAG_BLOCKED) == 0 && (entry->groupMask & (1 << (group & 0xFF))) == 0) {
             scrSetResult(0);
-            return 1;
+            return result;
         }
     }
     scrSetResult(1);
-    return 1;
+    return result;
 }
 
 }

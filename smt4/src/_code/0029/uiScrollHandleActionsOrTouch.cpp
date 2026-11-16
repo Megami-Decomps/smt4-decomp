@@ -8,9 +8,9 @@ extern "C" {
 u8 ifTouchGetSelectionModeForRegion(s32);
 u32 FUN_0029d644(const FlaggedEntry *);
 s32 FUN_0028cfbc(FlaggedEntry *);
-s32 FUN_0029e93c(FlaggedEntry *);
+s32 resourceRunEmbeddedOperationIfUnblocked(FlaggedEntry *);
 s32 objectPartRunUnlessLocked(FlaggedEntry *);
-s32 FUN_0029efc0(FlaggedEntry *);
+s32 resourceRunOperationIfUnblocked(FlaggedEntry *);
 s32 FUN_0029efa8(FlaggedEntry *);
 void flaggedEntrySetValueA(FlaggedEntry *, s32);
 void flaggedEntrySetValueB(FlaggedEntry *, s32);
@@ -42,9 +42,9 @@ u32 uiScrollHandleActionsOrTouch(FlaggedEntry *owner, const SpriteInfo *sprite, 
             }
         }
     }
-    s32 previousX = FUN_0029e93c(owner);
+    s32 previousX = resourceRunEmbeddedOperationIfUnblocked(owner);
     previousX += objectPartRunUnlessLocked(owner);
-    s32 previousY = FUN_0029efc0(owner);
+    s32 previousY = resourceRunOperationIfUnblocked(owner);
     previousY += FUN_0029efa8(owner);
     if (selected >= 0) {
         if (alternateAxis)
@@ -60,11 +60,11 @@ u32 uiScrollHandleActionsOrTouch(FlaggedEntry *owner, const SpriteInfo *sprite, 
                               thirdAction, alternateAxis, notify);
     }
     if (notify) {
-        s32 currentX = FUN_0029e93c(owner);
+        s32 currentX = resourceRunEmbeddedOperationIfUnblocked(owner);
         currentX += objectPartRunUnlessLocked(owner);
         bool changed = currentX != previousX;
         if (!changed) {
-            s32 currentY = FUN_0029efc0(owner);
+            s32 currentY = resourceRunOperationIfUnblocked(owner);
             currentY += FUN_0029efa8(owner);
             changed = currentY != previousY;
         }

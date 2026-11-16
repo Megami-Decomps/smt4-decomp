@@ -5,7 +5,7 @@
 extern "C" {
 
 void uiQuestLoadResources(void);
-s32 FUN_0029efc0(void *selector);
+s32 resourceRunOperationIfUnblocked(void *selector);
 void FUN_0028fe0c(u32 id, s32 arg);
 void timerStart(void *timer, s32 a, s32 b);
 
@@ -16,7 +16,7 @@ void FUN_002cf780(void)
 
     quest->panel.detailMode = 1;
     uiQuestLoadResources();
-    s32 base = FUN_0029efc0(quest->panel.alternate.cursor);
+    s32 base = resourceRunOperationIfUnblocked(quest->panel.alternate.cursor);
     s32 offset = FUN_0029efa8(quest->panel.alternate.cursor);
     FUN_0028fe0c(quest->cursor.alternate.ids[offset + base], 1);
     timerStart(quest->mainSprite, 0, 0);

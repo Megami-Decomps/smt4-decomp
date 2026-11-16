@@ -5,7 +5,7 @@
 extern "C" {
 void asdMemFree(void *);
 void FUN_002cc220(void);
-void FUN_0038b3f8(s32, s32);
+void statusBustUpPortraitRelease(s32, s32);
 PartyTextureSlot *FUN_003e4d68(u32);
 s32 FUN_00187168(const PartyTextureSlot *);
 void ifTouchRegionRemove(void);
@@ -22,7 +22,7 @@ void partyReleasePreviewResources(PartyResourceWork *work)
     FUN_002cc220();
     for (s32 i = 0; i < 4; ++i) {
         if (work->loadedTextures[i] != 0) {
-            FUN_0038b3f8((s16)work->loadedTextures[i], 1);
+            statusBustUpPortraitRelease((s16)work->loadedTextures[i], 1);
             work->loadedTextures[i] = 0;
         }
     }
@@ -31,12 +31,12 @@ void partyReleasePreviewResources(PartyResourceWork *work)
         if (FUN_00187168(slot)) {
             /* The canonical DevilRecordA is only the 0x40-byte prefix. */
             const DevilTableRecordA *record = (const DevilTableRecordA *)FUN_00184310(slot->id);
-            FUN_0038b3f8((s16)(record->unk9C + 1), 0);
+            statusBustUpPortraitRelease((s16)(record->unk9C + 1), 0);
         }
     }
     if (work->previewTexture != 0 && work->previewShared == 0 &&
         devilIsTextureLoaded(work->previewTexture, 1)) {
-        FUN_0038b3f8(work->previewTexture, 1);
+        statusBustUpPortraitRelease(work->previewTexture, 1);
     }
     for (s32 i = 0; i < work->touchRegionCount; ++i) {
         ifTouchRegionRemove();

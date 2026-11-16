@@ -10,8 +10,8 @@ struct StateWindow {
 };
 
 extern "C" {
-s32 FUN_0029e93c(const StateCounter *counter);
-s32 FUN_0029efc0(const StateCounter *counter);
+s32 resourceRunEmbeddedOperationIfUnblocked(const StateCounter *counter);
+s32 resourceRunOperationIfUnblocked(const StateCounter *counter);
 
 // Check whether the mode-selected counter plus an offset remains below its limit.
 s32 stateCounterBelowLimit(StateWindow *window, s32 offset)
@@ -19,10 +19,10 @@ s32 stateCounterBelowLimit(StateWindow *window, s32 offset)
     s32 value;
     switch (window->mode) {
     case 1:
-        value = FUN_0029e93c(&window->counter);
+        value = resourceRunEmbeddedOperationIfUnblocked(&window->counter);
         break;
     default:
-        value = FUN_0029efc0(&window->counter);
+        value = resourceRunOperationIfUnblocked(&window->counter);
         break;
     }
     return window->limit > value + offset;

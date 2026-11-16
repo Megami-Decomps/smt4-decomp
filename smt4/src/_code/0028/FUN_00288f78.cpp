@@ -1,4 +1,3 @@
-/* NON_MATCHING: shared success epilogue is placed after the special-state test, adding a forward branch from the slot path. */
 #include "common.h"
 #include "shard/SaveWork.h"
 
@@ -25,20 +24,19 @@ u32 FUN_00288f78(s32 id)
     if ((id - 0x1F <= 4U || id == 0x67) && gameFlagIsSet(0x15A) == 0) {
         return 3;
     }
-    if (reinterpret_cast<MapBlock *>(gameGetMapBlock())->mode != 1) {
+    if (reinterpret_cast<MapBlock *>(gameGetMapBlock())->mode == 1) {
+        if (block->specialState != 3) {
+            return 1;
+        }
+    } else {
         if (id == 0x18) {
             return 2;
         }
-        if (id >= 0x40) {
-            return 0;
+        if (id < 0x40 && block->slotState[id] != 3) {
+            return 1;
         }
-        if (block->slotState[id] == 3) {
-            return 0;
-        }
-    } else if (block->specialState == 3) {
-        return 0;
     }
-    return 1;
+    return 0;
 }
 
 }

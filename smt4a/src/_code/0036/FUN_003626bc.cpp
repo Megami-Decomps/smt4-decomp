@@ -10,7 +10,7 @@ struct ModelTransformTarget {
 extern "C" {
 void FUN_002b4c30(Matrix44 *matrix, const Matrix44 *source);
 void matrix44SetIdentity(Matrix44 *matrix);
-void FUN_002a2048(Matrix44 *matrix, const ModelTransformVector *translation, s32 mode);
+void mathMatrixApplyTranslation(Matrix44 *matrix, const ModelTransformVector *translation, s32 mode);
 void matrixApplyByMode(Matrix44 *target, const Matrix44 *matrix, u32 flags);
 }
 
@@ -35,7 +35,7 @@ static void matrixInitializeWithScaleAndOffset(Matrix44 *matrix, const ModelTran
         components.x = offset->x;
         components.y = offset->y;
         components.z = offset->z;
-        FUN_002a2048(matrix, &components, 2);
+        mathMatrixApplyTranslation(matrix, &components, 2);
     }
 }
 

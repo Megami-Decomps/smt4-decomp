@@ -1,4 +1,4 @@
-/* NON_MATCHING: list-member return chaining matches; node-iteration registers and link-clear store order differ. */
+/* NON_MATCHING: list clearing now has retail's instruction sequence; only the node/zero registers differ (retail node r1, zero r0). */
 #include "classes/Obj420f70.h"
 
 extern "C" void asdFatalError();

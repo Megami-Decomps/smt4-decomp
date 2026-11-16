@@ -1,4 +1,4 @@
-/* NON_MATCHING: same stores; the scheduler orders the vtable store and the float constant loads differently (retail loads the six tuning floats together and writes them with one vstm right after the byte stores; the build interleaves them with the zero stores). */
+/* NON_MATCHING: same stores; the scheduler orders the vtable store and the float constant loads differently (retail loads the six tuning floats together and writes them with one vstm right after the byte stores; the build interleaves them with the zero stores). Lead: with 0x24-0x38 as a member struct whose default constructor sets the six floats, 0xAC-0xC3 as two zero-initialised 3-float members, and the rest in the init list, only r2/r3 (vtable vs 0x66) stay swapped. */
 #include "classes/Obj557b28.h"
 
 Obj557b28::Obj557b28()

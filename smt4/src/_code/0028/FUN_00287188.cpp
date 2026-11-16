@@ -25,7 +25,7 @@ typedef struct CampScreen {
 
 void asdMemFree(void *block);
 void FUN_00205bf4(void);
-void FUN_002958f8(s16 portrait, s32 a);
+void statusBustUpPortraitRelease(s16 portrait, s32 a);
 s32 FUN_002b6ad0(void);
 SupportUnitData *gameGetSupportUnitData(void);
 SupportUnitEntry *supportUnitGetEntry(s16 unit, u16 slot);
@@ -43,15 +43,15 @@ void FUN_00287188(CampScreen *screen)
         screen->buffer = NULL;
     }
     FUN_00205bf4();
-    FUN_002958f8(-1, 1);
+    statusBustUpPortraitRelease(-1, 1);
     for (i = 0; i < 3; i++) {
         if (screen->portraits[i] > 0) {
-            FUN_002958f8((s16)screen->portraits[i], 1);
+            statusBustUpPortraitRelease((s16)screen->portraits[i], 1);
         }
     }
     if (FUN_002b6ad0() != 0) {
         u16 slot = gameGetSupportUnitData()->slot;
-        FUN_002958f8((s16)(supportUnitGetEntry(gameGetSupportUnitData()->unit, slot)->portrait + 1), 0);
+        statusBustUpPortraitRelease((s16)(supportUnitGetEntry(gameGetSupportUnitData()->unit, slot)->portrait + 1), 0);
     }
     for (i = 0; i < screen->touchRegionCount; i++) {
         ifTouchRegionRemove();

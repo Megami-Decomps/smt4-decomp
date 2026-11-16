@@ -8,7 +8,7 @@ int CONCAT44(...);
 int FUN_001a9f6c(...);
 int FUN_0024f880(...);
 int FUN_0024f890(...);
-int FUN_0024fd70(...);
+int mathMatrixApplyTranslation(...);
 int mathMatrixApplyScale(...);
 int matrix44SetIdentity(...);
 int matrix43Multiply(...);
@@ -158,7 +158,7 @@ extern float DAT_004ea998; /* 0x4ea998 */
 /* Supplied declaration required: FUN_001a9f6c. */
 /* Supplied declaration required: FUN_0024f880. */
 /* Supplied declaration required: FUN_0024f890. */
-/* Supplied declaration required: FUN_0024fd70. */
+/* Supplied declaration required: mathMatrixApplyTranslation. */
 /* Supplied declaration required: mathMatrixApplyScale. */
 /* Supplied declaration required: matrix44SetIdentity. */
 /* Supplied declaration required: matrix43Multiply. */
@@ -411,7 +411,7 @@ void FUN_002e7278(fn_002e7278_arg0 *param_1)
               *(float *)(temp_v2 + 0x80) = temp_v28;
               *(float *)(temp_v2 + 0x84) = temp_v29;
               *(unsigned int *)(temp_v2 + 0x88) = *(unsigned int *)(temp_v2 + 0x88) | 0x800;
-              FUN_0024fd70(&temp_v30,&temp_v60,2);
+              mathMatrixApplyTranslation(&temp_v30,&temp_v60,2);
               temp_v2 = pfVar9->field_0x0;
               *(float *)(temp_v2 + 0x58) = temp_v27;
               *(float *)(temp_v2 + 0x68) = temp_v28;
@@ -521,7 +521,7 @@ void FUN_002e7278(fn_002e7278_arg0 *param_1)
               temp_v27 = *pfVar8;
               temp_v28 = pfVar8[1];
               temp_v29 = pfVar8[2];
-              FUN_0024fd70(&temp_v30,&temp_v27,2);
+              mathMatrixApplyTranslation(&temp_v30,&temp_v27,2);
               temp_v2 = pfVar9->field_0x0;
               *(float *)(temp_v2 + 0x58) = temp_v27;
               *(float *)(temp_v2 + 0x68) = temp_v28;

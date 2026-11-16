@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rebuild from asm of the run window's loading-dots draw; armcc here keeps the frame divisions (retail: magic-number /5, then %8 via shifts) and the two spilled neighbour indices in different registers, and orders the stereo-parallax float convert differently. */
+/* NON_MATCHING: dots, pool order and divisions now match; the label coordinates load point.y/point.x into other registers (and schedule the z/width float loads and r2 argument differently), and retail sets r0=0 before releasing the frame. */
 #include "gfx/RenderStateStack.h"
 #include "shard/TextureDrawCall.h"
 #include "gfx/SpritePartDraw.h"
@@ -57,12 +57,13 @@ u8 FUN_0018f278(void)
         FUN_002bf288(2, 14, 0x151, x, 0, 111);
         renderStackPop(&g_titleScene->stackB);
         LayoutPoint *labelPoint = asdTMTexTableEntryAt(14, 0x153);
-        textDrawString(4, 0xF49800FF, reinterpret_cast<const char *>(win->label), (f32)(labelPoint->x + (x - 14)), (f32)(labelPoint->y + y), 0.56640625f, 0.0f,
-                     win->alpha);
-        s32 step = win->frame / 5;
-        s32 lit = step % 8;
+        u32 color = 0xF49800FF;
+        f32 labelY = (f32)(labelPoint->y + y);
+        f32 labelX = (f32)(labelPoint->x + (x - 14));
+        textDrawString(4, color, reinterpret_cast<const char *>(win->label), labelX, labelY, 0.56640625f, 0.0f, win->alpha);
+        s32 lit = (win->frame / 5) % 8;
         s32 litPrevious = (lit + 7) % 8;
-        s32 lit2 = (step + 4) % 8;
+        s32 lit2 = (win->frame / 5 + 4) % 8;
         s32 lit2Previous = (lit2 + 7) % 8;
         for (s32 row = 0; row < 3; row++) {
             for (s32 column = 0; column < 3; column++) {

@@ -1,27 +1,33 @@
-/* NON_MATCHING: retail keeps an empty counting loop (`for (i = 0; i < count; i++)`) and returns its counter in r0 (the pointer to the block when the flag bits are clear); armcc drops the loop from a void function. */
 #include "common.h"
 
-struct Obj2198d4Block {
-    s32 count;
-    u8 unk04[8];
-    u32 flags;
+struct Part002198d4 {
+    /* 0x00 */ s32 count;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0c */ u32 flags;
 };
 
-struct Obj2198d4Owner {
-    u8 unk00[0xc0];
-    Obj2198d4Block block;
+struct Owner002198d4 {
+    /* 0x00 */ u8 unk00[0xc0];
+    /* 0xc0 */ Part002198d4 part;
 };
 
-struct Obj2198d4 {
-    u8 unk00[0x24];
-    Obj2198d4Owner *owner;
+struct Object002198d4 {
+    /* 0x00 */ u8 unk00[0x24];
+    /* 0x24 */ Owner002198d4 *owner;
 };
 
-extern "C" void FUN_002198d4(Obj2198d4 *obj)
+extern "C" {
+
+/* Walks the part's entries once its flag byte is set; the per-entry work is compiled out of this
+ * build, only the counting loop remains. */
+void FUN_002198d4(Object002198d4 *object)
 {
-    Obj2198d4Block *block = &obj->owner->block;
-    if (block->flags & 0xff000000) {
-        for (s32 i = 0; i < block->count; i++) {
-        }
+    Part002198d4 *part = &object->owner->part;
+    if ((part->flags & 0xff000000) != 0) {
+        s32 i = 0;
+        while (i < part->count)
+            i++;
     }
 }
+
+} /* extern "C" */

@@ -8,7 +8,7 @@ void buttonHelpShowSkillDetails(u16 skill);
 void FUN_0029212c(u16 item);
 void FUN_001b0558();
 
-void FUN_0029ee6c(const char *text, u32 color);
+void buttonHelpSetText(const char *text, u32 color);
 
 void FUN_0026c868()
 {
@@ -55,7 +55,7 @@ void FUN_0026c868()
         break;
     }
     if (text != NULL) {
-        FUN_0029ee6c(text, 0x323232ff);
+        buttonHelpSetText(text, 0x323232ff);
     }
 }
 }

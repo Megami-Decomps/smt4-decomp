@@ -33,10 +33,10 @@ int campUpdateCategoryHighlightColors(void);
 int FUN_00298d0c(int);
 int campRefreshEquipmentCategory(int);
 int slotSetRequest(int, int, int);
-int FUN_0029cc44(...);
+int messageDismissNumericBanner(...);
 int FUN_0029e788(void);
 int FUN_0029e874(int);
-int FUN_0029ee6c(int, int);
+int buttonHelpSetText(int, int);
 int timerStart(...);
 int FUN_002cf780(void);
 int FUN_002e24c8(void);
@@ -77,15 +77,15 @@ extern int g_camp; /* 0x43da90 */
 extern int dataTable15GetUnlockedEntryId(int, unsigned int);
 /* Supplied declaration required: campRefreshEquipmentCategory. */
 /* Supplied declaration required: slotSetRequest. */
-/* Supplied declaration required: FUN_0029cc44. */
+/* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: FUN_0029e774. */
 /* Supplied declaration required: FUN_0029e788. */
 /* Supplied declaration required: FUN_0029e874. */
 extern unsigned int objectPartRunUnlessLocked(int);
 extern int FUN_0029ee54(int);
-/* Supplied declaration required: FUN_0029ee6c. */
+/* Supplied declaration required: buttonHelpSetText. */
 extern int FUN_0029efa8(int);
-extern int FUN_0029efc0(int);
+extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_002a035c. */
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: timerStart. */
@@ -128,7 +128,7 @@ void FUN_001d0750(int *param_1)
     FUN_0026d5a4();
     campUpdateCategoryHighlightColors();
     guestWinRequestClose();
-    FUN_0029cc44(1);
+    messageDismissNumericBanner(1);
     temp_v1 = FUN_0029ee54(temp_v2 + 0x1dc);
     if (0 < temp_v1) {
       FUN_0029e874(1);
@@ -153,7 +153,7 @@ void FUN_001d0750(int *param_1)
     FUN_0026d5a4();
     spriteTable22Acquire();
     FUN_003ad0e0();
-    temp_v1 = FUN_0029efc0(temp_v2 + 0x240);
+    temp_v1 = resourceRunOperationIfUnblocked(temp_v2 + 0x240);
     temp_v4 = FUN_0029efa8(temp_v2 + 0x240);
     selectionSetUnitByRecordId((int)*(short *)(temp_v2 + (temp_v4 + temp_v1) * 2 + 0x1db4));
     FUN_003aca0c();
@@ -213,7 +213,7 @@ void FUN_001d0750(int *param_1)
   case 0xe:
     campTimersStart();
     guestWinRequestClose();
-    FUN_0029cc44(1);
+    messageDismissNumericBanner(1);
     temp_v1 = g_camp;
     puVar5 = (unsigned int *)(g_camp + 0x18);
     *(unsigned int *)(g_camp + 0x1c) = 0;
@@ -224,7 +224,7 @@ void FUN_001d0750(int *param_1)
   case 0x10:
     campTimersStart();
     guestWinRequestClose();
-    FUN_0029cc44(1);
+    messageDismissNumericBanner(1);
     temp_v1 = g_camp;
     puVar5 = (unsigned int *)(g_camp + 0x18);
     *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
@@ -266,7 +266,7 @@ void FUN_001d0750(int *param_1)
       timerStart(temp_v2 + 0x6d4,1,0);
       FUN_0026d5a4();
       guestWinRequestClose();
-      FUN_0029cc44(1);
+      messageDismissNumericBanner(1);
       FUN_0029e874(1);
       FUN_0029e788();
       *(unsigned int *)(temp_v2 + 0x20) = 0x1a;
@@ -289,7 +289,7 @@ void FUN_001d0750(int *param_1)
   case 0x18:
     campTimersStart();
     guestWinRequestClose();
-    FUN_0029cc44(1);
+    messageDismissNumericBanner(1);
     partyPanelSetEnabled(0);
     temp_v1 = g_camp;
     puVar5 = (unsigned int *)(g_camp + 0x18);
@@ -302,7 +302,7 @@ void FUN_001d0750(int *param_1)
     campTimersStart();
     FUN_0026d5a4();
     guestWinRequestClose();
-    FUN_0029cc44(1);
+    messageDismissNumericBanner(1);
     bibleOpenMode2(0);
     temp_v1 = g_camp;
     puVar5 = (unsigned int *)(g_camp + 0x18);
@@ -315,7 +315,7 @@ void FUN_001d0750(int *param_1)
     FUN_002e24c8();
     *(int *)(temp_v2 + 0xc) = temp_v1;
     FUN_0026d5a4();
-    FUN_0029ee6c(0,0x323232ff);
+    buttonHelpSetText(0,0x323232ff);
     temp_v1 = g_camp;
     puVar5 = (unsigned int *)(g_camp + 0x18);
     *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
@@ -323,13 +323,13 @@ void FUN_001d0750(int *param_1)
     *(unsigned int *)(temp_v1 + 0x1c) = 0;
     *(unsigned int *)(temp_v1 + 0x14) = 0;
     guestWinRequestClose();
-    FUN_0029cc44(1);
+    messageDismissNumericBanner(1);
     scrEffectRunIfActive();
     return;
   case 0x1b:
     FUN_0026d5a4();
     guestWinRequestClose();
-    FUN_0029cc44(1);
+    messageDismissNumericBanner(1);
     temp_v1 = g_camp;
     puVar5 = (unsigned int *)(g_camp + 0x18);
     *(unsigned int *)(g_camp + 0x1c) = 0;
@@ -343,7 +343,7 @@ void FUN_001d0750(int *param_1)
   case 0x1c:
     FUN_0026d5a4();
     guestWinRequestClose();
-    FUN_0029cc44(1);
+    messageDismissNumericBanner(1);
     temp_v1 = g_camp;
     puVar5 = (unsigned int *)(g_camp + 0x18);
     *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
@@ -370,7 +370,7 @@ void FUN_001d0750(int *param_1)
     campTimersStart();
     FUN_0026d5a4();
     guestWinRequestClose();
-    FUN_0029cc44(1);
+    messageDismissNumericBanner(1);
     temp_v1 = g_camp;
     puVar5 = (unsigned int *)(g_camp + 0x18);
     *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
@@ -382,7 +382,7 @@ void FUN_001d0750(int *param_1)
     campTimersStart();
     FUN_0026d5a4();
     guestWinRequestClose();
-    FUN_0029cc44(1);
+    messageDismissNumericBanner(1);
     temp_v1 = g_camp;
     puVar5 = (unsigned int *)(g_camp + 0x18);
     *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
@@ -396,7 +396,7 @@ void FUN_001d0750(int *param_1)
     timerStart(temp_v2 + 0x6d4,1,0);
     FUN_0026d5a4();
     guestWinRequestClose();
-    FUN_0029cc44(1);
+    messageDismissNumericBanner(1);
     *(unsigned int *)(temp_v2 + 0x20) = 0x2b;
     temp_v1 = g_camp;
     puVar5 = (unsigned int *)(g_camp + 0x18);
@@ -517,7 +517,7 @@ void FUN_001d0750(int *param_1)
       campUiResetSlots();
       uniteReleaseModel();
       guestWinRequestClose();
-      FUN_0029cc44(1);
+      messageDismissNumericBanner(1);
       partyPanelSetEnabled(1);
       FUN_0028a924(0xd,0,0xffffffff);
       FUN_0028a368(1);
@@ -538,21 +538,21 @@ void FUN_001d0750(int *param_1)
     *(unsigned int *)(temp_v2 + 0x18) = 0x31;
     campCecSetSubstate(2);
     FUN_0026d5a4();
-    FUN_0029cc44(1);
+    messageDismissNumericBanner(1);
     scrEffectRunIfActive();
     return;
   case 0x33:
     *(unsigned int *)(temp_v2 + 0x18) = 0x32;
     campCecSetSubstate(1);
     FUN_0026d5a4();
-    FUN_0029cc44(1);
+    messageDismissNumericBanner(1);
     scrEffectRunIfActive();
     return;
   case 0x34:
     *(unsigned int *)(temp_v2 + 0x18) = 0x33;
     campCecSetSubstate(3);
     FUN_0026d5a4();
-    FUN_0029cc44(1);
+    messageDismissNumericBanner(1);
     scrEffectRunIfActive();
     return;
   }

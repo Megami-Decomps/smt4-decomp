@@ -6,7 +6,7 @@
 
 extern "C" {
 s32 scrRunOpcodesStub(ScriptRunState *);
-void FUN_0029ee6c(u32, u32);
+void buttonHelpSetText(u32, u32);
 void messageTargetSetValue(u32, u32);
 void FUN_0022fb64(SelectMenu *);
 s32 FUN_0027ee9c(void);
@@ -54,7 +54,7 @@ void FUN_003a3a9c(SelectMenu *menu)
     MenuViewIV *work = reinterpret_cast<MenuViewIV *>(menu);
     if (work->phase != 0) {
         if (work->phase == 1 && scrRunOpcodesStub(work->process) == 2) {
-            FUN_0029ee6c(0, 0x323232FF);
+            buttonHelpSetText(0, 0x323232FF);
             work->state = 3;
             work->phase = 0;
         }

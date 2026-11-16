@@ -4,9 +4,8 @@
 
 extern "C" {
 extern UniteWork* g_unite;
-s32 resourceRunEmbeddedOperationIfUnblocked(void* cursor);
-void FUN_0038b3f8(s32 demonId, s32 bank);
-void FUN_00371c3c(s32 demonId, s32 bank);
+void statusBustUpPortraitRelease(s32 demonId, s32 bank);
+void statusBustUpPortraitAcquire(s32 demonId, s32 bank);
 
 // Keep the four preview portrait slots synchronized with the current fusion selection.
 void FUN_00231574(void)
@@ -23,7 +22,7 @@ void FUN_00231574(void)
             id != work->portraitSelectionA.desired[selected + 2] &&
             id != work->portraitSelectionA.desired[selected + 3]) {
             if (devilIsTextureLoaded(work->portraitSelectionA.loaded[slot], 1)) {
-                FUN_0038b3f8(work->portraitSelectionA.loaded[slot], 1);
+                statusBustUpPortraitRelease(work->portraitSelectionA.loaded[slot], 1);
                 work->portraitSelectionA.loaded[slot] = 0;
             }
         }
@@ -36,7 +35,7 @@ void FUN_00231574(void)
             id != static_cast<u16>(work->portraitSelectionA.loaded[3])) {
             for (s32 slot = 0; slot < 4; ++slot) {
                 if (work->portraitSelectionA.loaded[slot] == 0) {
-                    FUN_00371c3c(static_cast<s16>(work->portraitSelectionA.desired[selected + index]), 1);
+                    statusBustUpPortraitAcquire(static_cast<s16>(work->portraitSelectionA.desired[selected + index]), 1);
                     work->portraitSelectionA.loaded[slot] = work->portraitSelectionA.desired[selected + index];
                     break;
                 }

@@ -16,7 +16,7 @@ int vec2GetYInt(...);
 int vec2GetXInt(void);
 int FUN_002bf380(...);
 int asdTMTexTableEntryAt(...);
-int FUN_002c18e4(...);
+int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
 int renderCtxSelectStereoLayout(int);
 int VectorSignedToFloat(...);
@@ -48,7 +48,7 @@ extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_002c18e4. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
@@ -274,7 +274,7 @@ LAB_001a03b8:
     *(unsigned char *)(temp_v1 + 0x1264) = 0;
   }
   renderCtxApplyTransforms(g_titleScene);
-  FUN_002c18e4(g_titleScene);
+  renderCtxResetColorScale(g_titleScene);
   return 0;
 }
 

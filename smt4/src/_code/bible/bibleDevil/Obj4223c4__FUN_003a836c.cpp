@@ -1,4 +1,3 @@
-/* NON_MATCHING: the 0x5A8 icon offset literal is loaded before the selection store instead of after it (pool order swaps). */
 #include "common.h"
 #include "status/StatusCamera.h"
 #include "bible/bibleDevil.h"
@@ -41,24 +40,11 @@ void buttonHelpSetPreset(s32 preset);
 void FUN_0022e0fc(BibleDevilIcon *icon, s8 animation);
 void FUN_0022d1a8(BibleDevilScreen *screen);
 
-/* Waits for the use counter; when it finishes, returns to state 2, otherwise refreshes the devil icon. */
 }
 
-void Obj4223c4::FUN_003a836c()
+/* Redraws the screen's devil icon with the animation of the saved sort kind (reset to kind 1 when unknown). */
+static __inline void iconRefresh(BibleDevilScreen *screen)
 {
-    BibleDevilScreen * screen = reinterpret_cast<BibleDevilScreen *>(this);
-    if (useCounterIsFinished()) {
-        useCounterRelease();
-        buttonHelpSetPreset(45);
-        FUN_002a0cc8(0);
-        screen->state = 2;
-        screen->step = 0;
-        return;
-    }
-    if (useCounterGetCurrentValue() == 75) {
-        return;
-    }
-    DAT_0043d9c8.selection = -1;
     if (screen->icon.devilId != 0) {
         BibleDevilType *type = &reinterpret_cast<BibleDevilRecord *>(FUN_002a0d0c())->type;
         s8 animation;
@@ -86,5 +72,24 @@ void Obj4223c4::FUN_003a836c()
         }
         FUN_0022e0fc(&screen->icon, animation);
     }
+}
+
+/* Waits for the use counter; when it finishes, returns to state 2, otherwise refreshes the devil icon. */
+void Obj4223c4::FUN_003a836c()
+{
+    BibleDevilScreen * screen = reinterpret_cast<BibleDevilScreen *>(this);
+    if (useCounterIsFinished()) {
+        useCounterRelease();
+        buttonHelpSetPreset(45);
+        FUN_002a0cc8(0);
+        screen->state = 2;
+        screen->step = 0;
+        return;
+    }
+    if (useCounterGetCurrentValue() == 75) {
+        return;
+    }
+    DAT_0043d9c8.selection = -1;
+    iconRefresh(screen);
     FUN_0022d1a8(screen);
 }

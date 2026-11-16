@@ -1,4 +1,4 @@
-/* NON_MATCHING: mask operand registers differ and the shared HP-zero store is folded into the opposite branch. */
+/* NON_MATCHING: only registers: the entry address (index product in r0, base in r1; retail swaps them) and the first and last mask ANDs. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/PlayerDataBlock.h"
@@ -22,19 +22,21 @@ void FUN_003f135c(BtlMainStateA *battle)
 {
     for (s32 i = 0; i < 109; ++i) {
         BtlCombatantEntryA *entry = &battle->entries[i];
-        if (entry && (g_btlMain.combatantMasks.required & entry->flags) &&
-            !(g_btlMain.exclusionMask & entry->flags) &&
-            !(g_btlMain.actorCategories[2] & entry->flags)) {
-            if (entry->record) {
+        if (entry != NULL && (entry->flags & g_btlMain.combatantMasks.required) &&
+            !(entry->flags & g_btlMain.exclusionMask) &&
+            !(entry->flags & g_btlMain.actorCategories[2])) {
+            if (entry->record != NULL) {
                 flagsClearActionBits(&((BattleActionFlagRecordView *)entry->record)->playerFlags);
                 BattleActionFlagRecordView *record = (BattleActionFlagRecordView *)entry->record;
-                if (record->playerFlags & 2)
-                    record->hp = 0;
-            } else if (entry->secondaryRecord) {
+                if (!(record->playerFlags & 2))
+                    continue;
+                record->hp = 0;
+            } else if (entry->secondaryRecord != NULL) {
                 flagsClearActionBits(&((BattleActionFlagRecordView *)entry->secondaryRecord)->slotFlags);
                 BattleActionFlagRecordView *record = (BattleActionFlagRecordView *)entry->secondaryRecord;
-                if (record->slotFlags & 2)
-                    record->hp = 0;
+                if (!(record->slotFlags & 2))
+                    continue;
+                record->hp = 0;
             } else if (entry->specialMaximum.record) {
                 flagsClearActionBits(&((BattleActionFlagRecordView *)entry->specialMaximum.record)->slotFlags);
             }

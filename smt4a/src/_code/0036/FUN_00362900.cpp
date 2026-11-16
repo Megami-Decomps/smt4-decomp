@@ -9,7 +9,7 @@ int CONCAT44(...);
 int FUN_001bc460(...);
 int FUN_00237354(...);
 int matrix43Multiply(...);
-int FUN_002a2048(...);
+int mathMatrixApplyTranslation(...);
 int matrix44SetIdentity(...);
 int FUN_00381f00(...);
 int quadSourceCopyOut(...);
@@ -159,7 +159,7 @@ extern float DAT_00647358; /* 0x647358 */
 /* Supplied declaration required: mathMatrixApplyScale. */
 /* Supplied declaration required: FUN_00237354. */
 /* Supplied declaration required: matrix43Multiply. */
-/* Supplied declaration required: FUN_002a2048. */
+/* Supplied declaration required: mathMatrixApplyTranslation. */
 /* Supplied declaration required: matrix44SetIdentity. */
 /* Supplied declaration required: FUN_00381f00. */
 /* Supplied declaration required: quadSourceCopyOut. */
@@ -411,7 +411,7 @@ void FUN_00362900(fn_00362900_arg0 *param_1)
               *(float *)(temp_v2 + 0x80) = temp_v28;
               *(float *)(temp_v2 + 0x84) = temp_v29;
               *(unsigned int *)(temp_v2 + 0x88) = *(unsigned int *)(temp_v2 + 0x88) | 0x800;
-              FUN_002a2048(&temp_v30,&temp_v60,2);
+              mathMatrixApplyTranslation(&temp_v30,&temp_v60,2);
               temp_v2 = pfVar9->field_0x0;
               *(float *)(temp_v2 + 0x58) = temp_v27;
               *(float *)(temp_v2 + 0x68) = temp_v28;
@@ -521,7 +521,7 @@ void FUN_00362900(fn_00362900_arg0 *param_1)
               temp_v27 = *pfVar8;
               temp_v28 = pfVar8[1];
               temp_v29 = pfVar8[2];
-              FUN_002a2048(&temp_v30,&temp_v27,2);
+              mathMatrixApplyTranslation(&temp_v30,&temp_v27,2);
               temp_v2 = pfVar9->field_0x0;
               *(float *)(temp_v2 + 0x58) = temp_v27;
               *(float *)(temp_v2 + 0x68) = temp_v28;

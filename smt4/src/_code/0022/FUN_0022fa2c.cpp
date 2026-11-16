@@ -7,7 +7,7 @@ extern "C" {
 int useCounterStart(void);
 int FUN_0029e328(int id);
 int sortMenuCreate(int a, int b);
-int FUN_0029ee6c(int a, int color);
+int buttonHelpSetText(int a, int color);
 int buttonHelpSetPreset(int arg);
 
 typedef struct Scene {
@@ -39,7 +39,7 @@ void FUN_0022fa2c(Scene *scene)
     }
     useCounterStart();
     buttonHelpSetPreset(5);
-    FUN_0029ee6c(0, 0x323232ff);
+    buttonHelpSetText(0, 0x323232ff);
     scene->unk004 = 8;
     scene->unk008 = 0;
 }

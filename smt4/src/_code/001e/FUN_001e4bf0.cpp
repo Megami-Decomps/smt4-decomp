@@ -6,7 +6,7 @@
 
 extern "C" {
 void FUN_001e071c(BtlUiObjC *);
-void FUN_002c18e4(RenderCtx *);
+void renderCtxResetColorScale(RenderCtx *);
 void renderCtxSelectStereoLayout(RenderCtx *);
 extern RenderCtx *g_titleScene;
 extern BtlUiGlobals g_btlUi;
@@ -33,7 +33,7 @@ s32 FUN_001e4bf0(u32 job)
                 FUN_001e071c(&ui->objC);
             renderStackPop(&g_titleScene->stackA);
             renderCtxApplyTransforms(g_titleScene);
-            FUN_002c18e4(g_titleScene);
+            renderCtxResetColorScale(g_titleScene);
             return 0;
         }
     }

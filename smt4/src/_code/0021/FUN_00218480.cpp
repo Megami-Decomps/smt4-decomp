@@ -8,7 +8,7 @@ int FUN_0025043c(...);
 int FUN_002621b4(...);
 int btlItemComputeValues(...);
 int FUN_0028cb40(...);
-int FUN_0028cdec(...);
+int btlCommandResolveSelectedTarget(...);
 int playSceneSetState(int, int, int);
 int flaggedEntrySetValueB(...);
 int dataTable40FindById(void);
@@ -32,7 +32,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002621b4. */
 /* Supplied declaration required: btlItemComputeValues. */
 /* Supplied declaration required: FUN_0028cb40. */
-/* Supplied declaration required: FUN_0028cdec. */
+/* Supplied declaration required: btlCommandResolveSelectedTarget. */
 extern int playerPadTestBit(unsigned int);
 /* Supplied declaration required: playSceneSetState. */
 /* Supplied declaration required: flaggedEntrySetValueB. */
@@ -105,7 +105,7 @@ void FUN_00218480(int param_1)
       }
     }
     else {
-      FUN_0028cdec(param_1);
+      btlCommandResolveSelectedTarget(param_1);
     }
     if ((*(unsigned int *)(temp_v2 + 0x28) & 0x1ff) >> 5 == 4) {
       *(unsigned int *)(param_1 + 0x3048) = 0x24;
@@ -171,7 +171,7 @@ void FUN_00218480(int param_1)
         }
       }
       else {
-        FUN_0028cdec(param_1);
+        btlCommandResolveSelectedTarget(param_1);
       }
       if ((*(unsigned int *)(temp_v4 + 0x28) & 0x1ff) >> 5 == 4) {
         *(unsigned int *)(param_1 + 0x3048) = 0x24;

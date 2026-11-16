@@ -1,4 +1,3 @@
-/* NON_MATCHING: state/timer now combine into STM through a state-transition helper; only the zero register copy for the loop index (retail `mov r1, ip`) and an address/scratch register choice differ. */
 #include "common.h"
 
 struct DepartureGameState {
@@ -34,12 +33,6 @@ struct DepartingEnemyTable {
     /* 0x303C */ s32 activeCount;
 };
 
-static __inline void departingEnemyStartState(DepartingEnemy *enemy, s32 state)
-{
-    enemy->state = state;
-    enemy->timer = 0;
-}
-
 extern "C" {
 
 extern DepartureGameState g_gameState;
@@ -48,29 +41,32 @@ extern DepartingEnemyTable *g_mapEnemy;
 /* Clears departure interpolation and cancels eligible active enemy states. */
 void FUN_001d2f48(void)
 {
+    s32 index;
     DepartingEnemyTable *table = g_mapEnemy;
-    s32 index = 0;
+    const f32 resetValue = 0.0f;
     g_gameState.active = 0;
-    g_gameState.position[0] = 0.0f;
-    g_gameState.position[1] = 0.0f;
-    g_gameState.position[2] = 0.0f;
-    g_gameState.position[3] = 0.0f;
+    g_gameState.position[0] = resetValue;
+    g_gameState.position[1] = resetValue;
+    g_gameState.position[2] = resetValue;
+    g_gameState.position[3] = resetValue;
     g_gameState.id = 0;
     g_gameState.flags[0] = 0;
     g_gameState.flags[1] = 0;
     g_gameState.flags[2] = 0;
     g_gameState.pending = 0;
     g_gameState.state = 0;
-    g_gameState.target[0] = 0.0f;
-    g_gameState.target[1] = 0.0f;
-    g_gameState.target[2] = 0.0f;
-    g_gameState.target[3] = 0.0f;
-    for (; index < 32; ++index) {
-        DepartingEnemy *enemy = &table->enemies[index];
-        if (enemy->active != 0 && enemy->kind != 0 && enemy->kind < 11 &&
-            enemy->locked == 0 && enemy->state == 16) {
-            departingEnemyStartState(enemy, 11);
+    g_gameState.target[0] = resetValue;
+    g_gameState.target[1] = resetValue;
+    g_gameState.target[2] = resetValue;
+    g_gameState.target[3] = resetValue;
+
+    for (index = 0; index < 32; ++index) {
+        DepartingEnemy &enemy = table->enemies[index];
+        if (enemy.active != 0 && enemy.kind != 0 && enemy.kind < 11 &&
+            enemy.locked == 0 && enemy.state == 16) {
             --table->activeCount;
+            enemy.state = 11;
+            enemy.timer = 0;
         }
     }
 }

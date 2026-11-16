@@ -1,4 +1,3 @@
-/* NON_MATCHING: final unit lookup adds one register move and changes call scheduling; -O2 candidate. */
 #include "battle/BattleUnitSlot.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/btlAction.h"
@@ -19,7 +18,8 @@ u32 scrBattleDamagePartyHp()
     s32 mode = scrGetArg(1);
     void *source = btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit));
     for (s32 slot = 0; slot < 4; ++slot) {
-        BtlEntry *target = &btlGetMainState()->entries[slot];
+        BtlMainState *battle = btlGetMainState();
+        BtlEntry *target = &battle->entries[slot];
         if ((target->flags & 1) && !(target->flags & 0x40) && target->members.ids[0] >= 0) {
             s32 damage = 0;
             switch (mode) {
@@ -27,14 +27,13 @@ u32 scrBattleDamagePartyHp()
             case 1: damage = target->hp * amount / 100; break;
             case 2: damage = amount; break;
             }
-            if (target->hp <= damage)
+            if (damage >= target->hp)
                 damage = target->hp - 1;
             FUN_00250720(reinterpret_cast<SlotManager *>(btlGetMainState()));
-            BtlActionRecord *unit = btlGetMainState()->actions;
-            unit += target->members.ids[0];
-            s32 slotMask = slot << 3;
+            battle = btlGetMainState();
+            BtlActionRecord *unit = &battle->actions[target->members.ids[0]];
             FUN_002551ac(0, source, unit, 0, damage, -1, -1, target->hp, target->maxHp,
-                          0, 0, 0, 0, 1, 0, slotMask, slotMask, slotMask, slotMask, 1, 0, 1, 1, 0, 1);
+                          0, 0, 0, 0, 1, 0, slot << 3, slot << 3, slot << 3, slot << 3, 1, 0, 1, 1, 0, 1);
             FUN_002505c0(0, source, 0x1000185, 0, 0, 0, 0);
         }
     }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: integer arm now first (retail's case-body layout: int bodies, then float bodies), compare results written as `if (cond) result = 1; else result = 0;` (shared mov #1/#0 tails), `(l | r) != 0` for the integer or, `l > r`/`l >= r` unswapped; remaining: retail does not if-convert the float `or` (bne/b to the shared 1/0 tails), keeps one `vstr` per mul/div case with the quotient in s2 (vdiv s2,s0,s1), and loads the depth once for the two tag reads (ldr r1,[r0,#28]!). */
+/* NON_MATCHING: every case body and the scriptVmPushFloat result push now match; only the two tag reads differ: retail loads the depth once (ldr r1,[r0,#28]!, add r0,r0,#3) and reuses it after the topTag store, this build reloads it (one extra instruction shifts every branch). */
 #include "script/ScriptVm.h"
 
 extern "C" {
@@ -169,7 +169,7 @@ void scrFloatOp(ScriptVmProcess *process, u32 op)
         scriptVmPush(process, SCRIPT_VM_TAG_INT, g_scrContext.intResult);
         return;
     }
-    scriptVmPush(process, SCRIPT_VM_TAG_FLOAT, *(u32 *)&g_scrContext.floatResult);
+    scriptVmPushFloat(process, g_scrContext.floatResult);
     return;
 
 }

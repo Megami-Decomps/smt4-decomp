@@ -1,4 +1,4 @@
-/* NON_MATCHING: count-increment load scheduling, navigation pointer lifetime and cursor-clamp arithmetic registers differ; 96 instructions each. */
+/* NON_MATCHING: loop and navigation setup now match; only the cursor clamp test loads row/column into r1/r2 the other way round. */
 #include "status/StatusDown.h"
 #include "gamedata/DevilRecord.h"
 #include "AsdSDK/AsdMemUtil.h"
@@ -23,13 +23,14 @@ void FUN_001ee8b4(const u8 *quantities)
             status->inventory.entries[status->inventory.count][0] = record->header.id;
             u8 quantity = quantities[record->header.id];
             status->inventory.entries[status->inventory.count][1] = quantity;
+            s16 count = status->inventory.count;
             if (quantity)
                 ++status->inventory.ownedCount;
-            ++status->inventory.count;
+            status->inventory.count = count + 1;
         }
     }
+    FUN_0029f848(&status->inventory.navigation, status->inventory.count, 9, 4, 1, 1);
     GridNavigation *navigation = &status->inventory.navigation;
-    FUN_0029f848(navigation, status->inventory.count, 9, 4, 1, 1);
     s32 count = status->inventory.count;
     if (count > 0 && status->inventory.column + status->inventory.row * 4 >= count) {
         status->inventory.row = (count - 1) / 4;

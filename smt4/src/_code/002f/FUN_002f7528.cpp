@@ -1,4 +1,4 @@
-/* NON_MATCHING: the group value-kind test is outlined after the epilogue; entry/flag registers differ. */
+/* NON_MATCHING: written like FUN_002f7418 (same registers and calls); only the loop's value-kind test is placed after the epilogue where retail keeps it in the loop body. */
 #include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
 #include "util/SlotRangeSelect.h"
@@ -7,31 +7,28 @@
 extern "C" {
 BtlEntry *btlMainFindActiveEntry(BtlMainState *battle);
 
-static inline bool valueKindIsZeroOrTwo(u16 value)
-{
-    return (value & 0xFC00) == 0 || value >> 10 == 2;
-}
-
 // Report whether a group member or the active entry has a value of encoded kind zero or two.
 u32 FUN_002f7528(void)
 {
-    s32 valueIndex = scrGetArg(0);
-    u32 group = (u32)btlScriptResolveGroupArg(scrGetArg(1));
-    s32 start;
+    s32 slot = scrGetArg(0);
+    s32 first;
     s32 count;
-    FUN_002499fc(group, &start, &count);
-    for (s32 index = start; index < start + count; ++index) {
-        BtlEntry *entry = &btlGetMainState()->entries[index];
-        u32 flags = entry->flags;
-        if ((flags & 0x10) == 0 && (flags & 1) != 0 && (flags & 0x40) == 0 &&
-            valueKindIsZeroOrTwo(entry->values[valueIndex])) {
+    s32 i;
+
+    FUN_002499fc(btlScriptResolveGroupArg(scrGetArg(1)), &first, &count);
+    for (i = first; i < first + count; i++) {
+        BtlEntry *unit = &btlGetMainState()->entries[i];
+
+        if ((unit->flags & 0x10) == 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0
+            && ((unit->values[slot] & 0xFC00) == 0 || unit->values[slot] >> 10 == 2)) {
             scrSetResult(1);
             return 1;
         }
     }
     if (btlGetMainState()->hasActiveEntry != 0) {
-        BtlEntry *entry = btlMainFindActiveEntry(btlGetMainState());
-        if (entry != NULL && valueKindIsZeroOrTwo(entry->values[valueIndex])) {
+        BtlEntry *active = btlMainFindActiveEntry(btlGetMainState());
+
+        if (active != NULL && ((active->values[slot] & 0xFC00) == 0 || active->values[slot] >> 10 == 2)) {
             scrSetResult(1);
             return 1;
         }

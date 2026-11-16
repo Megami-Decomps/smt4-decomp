@@ -293,6 +293,11 @@ struct GameStateA {
             u8 secondary; /* 0x023 */
             /* 0x024 */ u8 unk024[3];
         } controllerFlags;
+        struct {
+            /* 0x019 */ u8 unk019[0xa];
+            /* 0x023 */ u8 loading;  /* set while the departure loads the destination map */
+            /* 0x024 */ u8 ready;    /* the destination map is ready (shows the debug overlay) */
+        } departFlags;
     };
     /* 0x027 */ s8 progressEnabled;
     /* 0x028 */ u8 unk028[4];
@@ -319,6 +324,10 @@ struct GameStateA {
             /* 0x034 */ u8 unk034BeforeDepart[0x1F8];
             /* 0x22C */ u8 mapLoadActive; /* set while a departure loads the destination map */
         } depart;
+        struct {
+            /* 0x034 */ u8 unk034BeforeDepartLoad[0x22C];
+            /* 0x260 */ u8 mapLoadActive; /* set from the departure's tenth frame until the map is loaded */
+        } departLoad;
         struct {
             /* 0x034 */ u8 unk034[0x36E];
             /* 0x3A2 */ s8 unk3A2;

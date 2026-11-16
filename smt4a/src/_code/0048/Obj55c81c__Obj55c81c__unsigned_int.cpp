@@ -1,8 +1,8 @@
-/* NON_MATCHING: retail stores `owner` ([r0,#8]) right after loading the vtable and reuses r1 for the zeros; built schedules that store after the flag byte. */
+/* NON_MATCHING: store order now matches retail; only the vtable (r2) and the constant 1 (r3) swap registers. */
 #include "classes/Obj55c81c.h"
 
 Obj55c81c::Obj55c81c(u32 owner)
-    : owner(owner)
+    : Obj55c81cOwner(owner)
 {
     unk28 = 0;
     child = NULL;

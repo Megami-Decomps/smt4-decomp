@@ -1,4 +1,3 @@
-/* NON_MATCHING: cleanup result return is shared at function end rather than before the completed-script branch. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlEvent.h"
 #include "battle/btlMain.h"
@@ -29,25 +28,20 @@ u32 FUN_0023f074(BtlEvent *event)
         scrScriptProcessStartEntry(event->runner, 0);
         event->state = 7;
         u32 result;
-        if (scrRunOpcodesStub(event->runner) != 2) {
-            result = 0;
-        } else {
+        if (scrRunOpcodesStub(event->runner) == 2) {
             uiFadeRelease();
             buttonHelpRelease();
-            /* This flag lies beyond the shared BtlMainState prefix. */
-            struct EventCompletionView {
-                u8 prefix[0x4978];
-                s32 completed;
-            };
-            EventCompletionView *battle = reinterpret_cast<EventCompletionView *>(btlGetMainState());
-            if ((event->flags & 1) == 0 && battle->completed != 1) {
+            BtlMainState *battle = btlGetMainState();
+            if ((event->flags & 1) == 0 && battle->completion.complete != 1) {
                 event->state = 8;
                 result = FUN_0023ed64(event);
             } else {
-                battle->completed = 1;
+                battle->completion.complete = 1;
                 result = ~0u;
                 event->state = 9;
             }
+        } else {
+            result = 0;
         }
         return result;
     }

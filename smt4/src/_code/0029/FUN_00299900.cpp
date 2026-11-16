@@ -32,16 +32,16 @@ typedef char CampListsOffsets[
 
 extern "C" {
 extern CampLists *g_camp;
-u32 FUN_0029efc0(const GridNavigation *grid);
+u32 resourceRunOperationIfUnblocked(const GridNavigation *grid);
 void buttonHelpShowSkillDetails(u32 id);
 void FUN_0029212c(u32 id);
 u32 table8Type5GetValue(void);
-void FUN_0029ee6c(s32 mode, u32 color);
+void buttonHelpSetText(s32 mode, u32 color);
 
 /* The index of the grid's highlighted entry. */
 static __inline u32 selectedIndex(const GridNavigation *grid)
 {
-    u32 row = FUN_0029efc0(grid);
+    u32 row = resourceRunOperationIfUnblocked(grid);
     return FUN_0029efa8(grid) + row;
 }
 
@@ -59,7 +59,7 @@ void FUN_00299900(u32 list)
         if (camp->listE[selectedIndex(&camp->grids[4])] != 0) {
             buttonHelpShowSkillDetails(table8Type5GetValue());
         } else {
-            FUN_0029ee6c(0, 0x323232FF);
+            buttonHelpSetText(0, 0x323232FF);
         }
         break;
     case 11:

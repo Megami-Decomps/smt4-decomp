@@ -39,7 +39,7 @@ extern int statusGetAvailableChoiceCount(void);
 /* Supplied declaration required: FUN_0028f870. */
 extern int FUN_00298848(unsigned int, unsigned int);
 extern int FUN_0029efa8(int);
-extern int FUN_0029efc0(int);
+extern int resourceRunOperationIfUnblocked(int);
 extern int *gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002b6c34. */
 extern int aocIndexValueOrDefault(unsigned int);
@@ -85,7 +85,7 @@ void FUN_001f3958(int param_1,int param_2,int param_3)
       FUN_002bf288(2,0x1d,temp_v6 + 0x5a8,param_1,param_2,0x6a);
     }
     else {
-      temp_v1 = FUN_0029efc0(temp_v0);
+      temp_v1 = resourceRunOperationIfUnblocked(temp_v0);
       temp_v7 = (unsigned int)*(unsigned short *)(temp_v5 + (temp_v1 + temp_v6) * 2 + 0x1db4);
       temp_v1 = asdTMTexTableEntryAt(0x1d,temp_v6 + 0x40d);
       FUN_002bf288(2,0x1d,0x44f,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,
@@ -150,7 +150,7 @@ void FUN_001f3958(int param_1,int param_2,int param_3)
   if (temp_v11 == 0) {
     return;
   }
-  temp_v6 = FUN_0029efc0(temp_v0);
+  temp_v6 = resourceRunOperationIfUnblocked(temp_v0);
   temp_v1 = FUN_0029efa8(temp_v0);
   temp_v7 = (unsigned int)*(unsigned short *)(temp_v5 + (temp_v1 + temp_v6) * 2 + 0x1db4);
   temp_v6 = FUN_0029efa8(temp_v0);

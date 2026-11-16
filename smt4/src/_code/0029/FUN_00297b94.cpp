@@ -5,7 +5,7 @@
 extern "C" {
 const char *FUN_002e38c0(u8 message, s32 alternate);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
-void FUN_0029ee6c(const char *text, u32 color);
+void buttonHelpSetText(const char *text, u32 color);
 void FUN_00253fe8(u32 color, s32 start, s32 line, s32 length);
 
 /* Selects the menu help text and highlights a formatted numeric argument when present. */
@@ -33,7 +33,7 @@ void FUN_00297b94(PlayScene *scene, s32 selection, s32 page)
     if (selection == 9) {
         char buffer[128];
         textFormatBuffer(buffer, text, help->value);
-        FUN_0029ee6c(buffer, 0x323232FF);
+        buttonHelpSetText(buffer, 0x323232FF);
         s32 highlightLength;
         if (help->value >= 100) {
             highlightLength = 5;
@@ -45,6 +45,6 @@ void FUN_00297b94(PlayScene *scene, s32 selection, s32 page)
         FUN_00253fe8(0xA11923FF, 1, 18, highlightLength);
         return;
     }
-    FUN_0029ee6c(text, 0x323232FF);
+    buttonHelpSetText(text, 0x323232FF);
 }
 }

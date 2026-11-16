@@ -73,7 +73,7 @@ void FUN_00258408(const char *name);
 void FUN_00258170(UniteRenderTarget *target);
 u32 asdMdlManagerCreateLoaded(const char *path, s32 heap);
 u32 asdCameraLoadFromFile(const char *path);
-void FUN_002942c4(s32 id, u32 kind);
+void statusBustUpPortraitAcquire(s32 id, u32 kind);
 u32 asdLoadFileSyncDefault(const char *path);
 const char *FUN_002cdecc(s8 tone);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
@@ -134,7 +134,7 @@ void FUN_001eea88(void)
         FUN_00258170(&work->renderTarget);
     }
     for (s32 i = 0; i < work->materialCount; i++) {
-        FUN_002942c4((s16)work->materialDevils[i], 1);
+        statusBustUpPortraitAcquire((s16)work->materialDevils[i], 1);
     }
     work->scriptFile = asdLoadFileSyncDefault("battle/DevilLvUp.bf");
     char path[64];

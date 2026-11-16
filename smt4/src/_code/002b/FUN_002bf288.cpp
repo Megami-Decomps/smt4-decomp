@@ -1,4 +1,3 @@
-/* NON_MATCHING: Complete renderer request extent recovered; payload-copy destination and flags/index registers still differ. */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 
@@ -17,13 +16,13 @@ extern "C" s32 FUN_002af63c(TextureTableFilePrefixIV *file,
                            TextureTableEntryIV *entry,
                            TextureDrawRequestPrefixIV *request);
 
+// Draw a table texture with its stored origin.
 extern "C" void FUN_002bf288(u32 flags, u32 tableId, s32 entryId,
                             u32 argument, TextureDrawPayloadIV payload)
 {
     TextureTableFilePrefixIV *file = asdTMTexTableCallFileA(tableId, entryId);
-    TextureTableEntryIV *entry = *file->entries + entryId % 1000;
+    TextureTableEntryIV *entry = &(*file->entries)[entryId % 1000];
     const TexturePlacementPrefixIV *placement = entry->placement;
-
     TextureDrawRequestIV request;
     request.flags = flags;
     request.argument = argument;
@@ -34,10 +33,10 @@ extern "C" void FUN_002bf288(u32 flags, u32 tableId, s32 entryId,
     request.horizontalUnit = 1;
     request.verticalUnit = 1;
 
-    if (placement != 0) {
+    if (placement) {
         if (placement->mode == 0) {
-            if ((placement->flags & 1) != 0) {
-                request.flags = flags | 0x8000;
+            if (placement->flags & 1) {
+                request.flags |= 0x8000;
                 request.x = placement->x;
                 request.y = placement->y;
             }

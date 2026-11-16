@@ -1,4 +1,4 @@
-/* NON_MATCHING: allocation head, arm order and the clamp now match retail; retail keeps the geometry in r0 into the replace arm and copies it to r6 only in the default-texture arm, and loads the segment count again after the call. */
+/* NON_MATCHING: code shape matches retail (geometry re-read from the block, kept in r0 into the replace arm); only the loop's segment count and UV store base swap r2/r3. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Gfx/Effect/effBehavior.h"
@@ -26,17 +26,16 @@ static PolyGeomBlock *allocGeomBlock(u32 payloadBytes, s32 line)
 /* Builds a polygon effect's textured geometry block (the given texture, or a default one) and gives each segment alternating texture coordinates. The effect's unk70 is clamped to at least 1. */
 PolyGeomBlock *effPolyFlashGeomTexCreate2(PolyParams *params, void *texture)
 {
-    PolyGeom *geom;
     PolyGeomBlock *block = allocGeomBlock(params->segments * 0x18, 1197);
 
     params->unk70 = (params->unk70 <= 1) ? 1 : params->unk70;
-    geom = FUN_00247334(params->segments & 0xffff, 2, 4, &DAT_004737c2, 76);
-    block->geom = geom;
+    block->geom = FUN_00247334(params->segments & 0xffff, 2, 4, &DAT_004737c2, 76);
     if (texture == NULL) {
+        PolyGeom *geom = block->geom;
         geom->unk04 = FUN_0024c3c8(18);
         refCountIncrement(reinterpret_cast<int *>(geom->unk04));
     } else {
-        textureSlotReplace(geom, texture);
+        textureSlotReplace(block->geom, texture);
     }
     u32 segments = params->segments;
     if (segments != 0) {

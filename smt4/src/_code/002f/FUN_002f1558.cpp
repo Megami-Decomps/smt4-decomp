@@ -63,7 +63,7 @@ extern unsigned int FUN_0029a924(int);
 extern unsigned int FUN_0029a9d4(int, unsigned int);
 extern int ifTouchGetSelectionModeForRegion(int);
 extern int FUN_0029efa8(unsigned int);
-extern int FUN_0029efc0(unsigned int);
+extern int resourceRunOperationIfUnblocked(unsigned int);
 extern int gameGetUnitRecord(int);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: dataTable00FindById. */
@@ -282,7 +282,7 @@ void FUN_002f1558(int param_1)
     } while (temp_v3 < *temp_v19);
   }
   temp_v6 = 0;
-  temp_v3 = FUN_0029efc0(*(unsigned int *)(param_1 + 0x340c));
+  temp_v3 = resourceRunOperationIfUnblocked(*(unsigned int *)(param_1 + 0x340c));
   temp_v13 = FUN_0029efa8(*(unsigned int *)(param_1 + 0x340c));
   temp_v5 = temp_v3 + temp_v13;
   temp_v3 = FUN_00297ca4(param_1,1);

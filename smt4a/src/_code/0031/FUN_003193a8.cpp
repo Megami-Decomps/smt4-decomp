@@ -20,7 +20,7 @@ int FUN_00319aec(...);
 int statusDisplayBindUnitRecord(...);
 int FUN_003343c0(...);
 int objBInitBlock19D0(void);
-int FUN_0038b3f8(...);
+int statusBustUpPortraitRelease(...);
 int FUN_0038b548(...);
 int sysPlayVoice(...);
 
@@ -38,7 +38,7 @@ int btlTalkBustUpReleaseAllSlots(void);
 int btlTalkBustUpSetDemonTexture(...);
 int btlTalkBustUpReleaseTexture(void);
 int btlTalkBustUpSetUnk2F4(...);
-int FUN_00371c3c(unsigned int, int);
+int statusBustUpPortraitAcquire(unsigned int, int);
 int FUN_004bcd90(...);
 int __aeabi_memcpy4(int, int, int);
 
@@ -82,9 +82,9 @@ extern int battleTalkIsBustReady(void);
 extern int FUN_0035db94(void);
 /* Supplied declaration required: btlTalkBustUpReleaseTexture. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
-/* Supplied declaration required: FUN_00371c3c. */
+/* Supplied declaration required: statusBustUpPortraitAcquire. */
 extern int maskToCode(void);
-/* Supplied declaration required: FUN_0038b3f8. */
+/* Supplied declaration required: statusBustUpPortraitRelease. */
 /* Supplied declaration required: FUN_0038b548. */
 /* Supplied declaration required: devilIsTextureLoaded. */
 /* Supplied declaration required: sysPlayVoice. */
@@ -243,7 +243,7 @@ unsigned int FUN_003193a8(int param_1)
               statusDownSwitchTab(0);
               FUN_002c8538(0);
               temp_v8 = gameDataGetRecordValue();
-              FUN_00371c3c(temp_v8,1);
+              statusBustUpPortraitAcquire(temp_v8,1);
               FUN_004bcd90(temp_v6);
               *(unsigned int *)(param_1 + 0x3bc) = 6;
               btlTalkBustUpReleaseAllSlots();
@@ -386,7 +386,7 @@ unsigned int FUN_003193a8(int param_1)
         temp_v8 = 3;
       }
       temp_v7 = gameDataGetRecordValue();
-      FUN_0038b3f8(temp_v7,1);
+      statusBustUpPortraitRelease(temp_v7,1);
       FUN_002c85b0(0);
       statusDownSwitchTab(0);
       FUN_0038b548(1);

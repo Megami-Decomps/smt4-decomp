@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation in the rank comparison: retail keeps `a` in r6 and the first rank in r4. */
 #include "common.h"
 #include "gamedata/Table04Record.h"
 
@@ -31,12 +30,28 @@ static __inline u32 unitSortLevel(const UnitSortEntry *entry)
     return ((UnitLowRecord *)dataTable04FindById(entry->id))->level;
 }
 
-static __inline u32 unitSortRank(const UnitSortEntry *entry)
+/* Tie-break by the slots' ranks, higher first (0 without a slot), then FUN_003811ec. */
+static __inline s32 compareSlotRanks(const UnitSortEntry *a, const UnitSortEntry *b)
 {
-    if (entry->slot < 0) {
-        return 0;
+    u16 rankA;
+    u16 rankB;
+    s32 diff;
+
+    if (a->slot < 0) {
+        rankA = 0;
+    } else {
+        rankA = gameGetSlotRecord(a->slot)->rank;
     }
-    return gameGetSlotRecord(entry->slot)->rank;
+    if (b->slot < 0) {
+        rankB = 0;
+    } else {
+        rankB = gameGetSlotRecord(b->slot)->rank;
+    }
+    diff = rankB - rankA;
+    if (diff != 0) {
+        return diff;
+    }
+    return FUN_003811ec(a, b);
 }
 
 /* Sort comparator: higher level first, then higher slot rank, then FUN_003811ec. */
@@ -47,12 +62,7 @@ s32 FUN_003758d8(const UnitSortEntry *a, const UnitSortEntry *b)
     if (diff != 0) {
         return diff;
     }
-    u32 rankA = unitSortRank(a);
-    diff = unitSortRank(b) - rankA;
-    if (diff != 0) {
-        return diff;
-    }
-    return FUN_003811ec(a, b);
+    return compareSlotRanks(a, b);
 }
 
 } /* extern "C" */

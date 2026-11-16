@@ -259,7 +259,7 @@ unsigned int FUN_001c8e28(void)
       FUN_0029963c(2,*(unsigned short *)((int)puVar2 + 0x36e));
       FUN_0029963c(0,*(unsigned short *)((int)puVar2 + 0x36a));
       *(unsigned char *)((int)puVar2 + 0x355) = 1;
-      FUN_0029ee6c(0,0x323232ff);
+      buttonHelpSetText(0,0x323232ff);
       *(unsigned char *)((int)puVar2 + 0x71) = 1;
       *(unsigned char *)(puVar2 + 0x1c) = 1;
       FUN_002bd8e8(puVar2 + 0x27,2,0);

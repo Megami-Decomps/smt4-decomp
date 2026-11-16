@@ -78,7 +78,7 @@ void campFillUnitComparison(u8 *out, u16 id, s32 flag);
 u32 FUN_004a8750(u16 id, u8 category, s32 flag, s32 full, s32 extra);
 void inventoryListAppend(EntryList *list, u8 *entry);
 void FUN_004a84e8(EntryList *list, s32 mode);
-void FUN_004cfeb0(void *layout, s32 columns, s32 count, s32 a, s32 b, s32 c);
+void listScrollerInitialize(void *layout, s32 columns, s32 count, s32 a, s32 b, s32 c);
 u8 gaugePercent(EntryList *list, s32 arg);
 u8 calcPercentClamped(s32 numerator, s32 denominator);
 void FUN_004d05c4(void *header, s32 a, s32 b, s32 count);
@@ -113,7 +113,7 @@ void FUN_004a1958(EntryScreen *screen)
             }
         }
         screen->listedCount = 24;
-        FUN_004cfeb0(screen->layout, 10, screen->list.count, 0, 1, 1);
+        listScrollerInitialize(screen->layout, 10, screen->list.count, 0, 1, 1);
         asdDebugHookPtrInt(screen->layout, 1);
         screen->dirty = 1;
         s32 total = 0;
@@ -182,7 +182,7 @@ void FUN_004a1958(EntryScreen *screen)
             }
             FUN_004a84e8(&screen->list, mode);
         }
-        FUN_004cfeb0(screen->layout, 10, screen->list.count, 0, 1, 1);
+        listScrollerInitialize(screen->layout, 10, screen->list.count, 0, 1, 1);
         asdDebugHookPtrInt(screen->layout, 1);
         screen->dirty = 1;
         screen->percent = gaugePercent(&screen->list, 1);

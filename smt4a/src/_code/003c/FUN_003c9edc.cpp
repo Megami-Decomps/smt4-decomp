@@ -1,4 +1,3 @@
-/* NON_MATCHING: the selection range's stack slots and loads differ; register allocation of the mask AND/ORR chain differs; u64 mask loads pair differently (ldm versus two ldr) (the active-entry byte already folds with the s8 flag). */
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "util/SlotRangeSelect.h"
@@ -21,16 +20,13 @@ s32 FUN_003c9edc(void)
     };
     typedef char EntryQueryOffsetsCheck[offsetof(EntryQueryView, value) == 0xC8 &&
         sizeof(EntryQueryView) == 0x408 ? 1 : -1];
-    s32 first[6];
-    s32 count;
-    s32 group = btlResolveEntryChoice(scrGetArg(0));
-    FUN_00301a08(group, first, &count);
-    for (s32 index = first[0]; index < count + first[0]; ++index) {
+    s32 first, count;
+    FUN_00301a08(btlResolveEntryChoice(scrGetArg(0)), &first, &count);
+    for (s32 index = first; index < first + count; ++index) {
         EntryQueryView *entry = &((EntryQueryView *)btlGetMainState()->entries)[index];
-        u64 flags = entry->flags;
-        if ((g_btlCandidateMasks.unavailable & flags) == 0 &&
-            (g_btlCandidateMasks.required & flags) != 0 &&
-            (g_btlCandidateMasks.excluded & flags) == 0 && entry->value > 0) {
+        if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
+            (entry->flags & g_btlCandidateMasks.required) && !(entry->flags & g_btlCandidateMasks.excluded) &&
+            entry->value > 0) {
             scrSetResult(1);
             return 1;
         }

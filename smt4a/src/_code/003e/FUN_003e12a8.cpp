@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail stores the added id through r0/r1 swapped and keeps the request field stores in source order (the build reorders them). */
+/* NON_MATCHING: retail keeps the request field stores in source order (kind, unk10, count, unk0C); the build schedules the zero stores first. */
 #include "common.h"
 
 extern "C" {
@@ -38,6 +38,7 @@ void FUN_003e12a8(AocLoadRequest *request, AocUiList *list)
     u32 ids[42];
     u32 source;
     s32 count;
+    u32 value;
     s32 added;
     s32 i;
 
@@ -46,13 +47,18 @@ void FUN_003e12a8(AocLoadRequest *request, AocUiList *list)
     __aeabi_memset4(ids, sizeof(ids), -1);
     count = FUN_0039ba24(ids, 42, source);
     added = 0;
-    for (i = 0; i < count; i++) {
-        if (!uiHasEntryId(list, ids[i])) {
-            valueSlotsInsert(list, FUN_00409fe8(ids[i], 1, 1));
-            list->added[added].id = ids[i];
-            uiInsertIdInFirstFreeSlot(list, (s16)ids[i]);
-            added++;
-        }
+    i = 0;
+    if (i < count) {
+        do {
+            if (uiHasEntryId(list, ids[i]) == 0) {
+                value = FUN_00409fe8(ids[i], 1, 1);
+                valueSlotsInsert(list, value);
+                list->added[added].id = ids[i];
+                uiInsertIdInFirstFreeSlot(list, (s16)ids[i]);
+                added++;
+            }
+            i++;
+        } while (i < count);
     }
     request->kind = 11;
     request->unk10 = 0;

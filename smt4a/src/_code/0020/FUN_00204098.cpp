@@ -84,7 +84,7 @@ int obj04Finish(void);
 int FUN_0035ac58(...);
 int FUN_0037c6ac(...);
 int messageDismissNumericBanner(...);
-int FUN_0038b3f8(...);
+int statusBustUpPortraitRelease(...);
 int FUN_003f2fb0(...);
 int FUN_003f3048(...);
 int flagValueAdd(...);
@@ -282,7 +282,7 @@ extern int statusCursorIsAtLast(void);
 /* Supplied declaration required: FUN_00387240. */
 /* Supplied declaration required: buttonHelpSetMode. */
 /* Supplied declaration required: messageDismissNumericBanner. */
-/* Supplied declaration required: FUN_0038b3f8. */
+/* Supplied declaration required: statusBustUpPortraitRelease. */
 extern int aocDataBlockHasEntries(void);
 /* Supplied declaration required: FUN_003982f4. */
 /* Supplied declaration required: stateHolderEnterState7. */
@@ -1304,12 +1304,12 @@ LAB_00205528:
     } while (temp_v7 < 8);
     if (*(char *)(temp_v6 + 0xaa) != '\0') {
       temp_v7 = gameGetSlotTable();
-      FUN_0038b3f8(0xffffffff,1);
+      statusBustUpPortraitRelease(0xffffffff,1);
       temp_v16 = 0;
       do {
         if (-1 < *(char *)(temp_v7 + temp_v16 + 0x1ca0)) {
           temp_v27 = gameGetSlotRecord();
-          FUN_0038b3f8((int)*(short *)(temp_v27 + 0x62),1);
+          statusBustUpPortraitRelease((int)*(short *)(temp_v27 + 0x62),1);
         }
         temp_v16 = temp_v16 + 1;
       } while (temp_v16 < 3);

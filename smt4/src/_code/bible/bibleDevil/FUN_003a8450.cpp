@@ -49,7 +49,7 @@ s32 FUN_0027ee9c(void);
 s32 gameGetNavigationState(void);
 s32 gameGetFlagByte12e8(void);
 void FUN_00233240(void *status, s32 mode);
-void FUN_0029cc44(s32 flag);
+void messageDismissNumericBanner(s32 flag);
 void ifTouchRegionClearAll(u32 region);
 void FUN_00233818(SelectedRow *row);
 s32 demonPurchaseValidate(DevilView *view, u32 devil);
@@ -62,7 +62,7 @@ void FUN_002328b4(void);
 void sortMenuCreate(s32 a, s32 b);
 void FUN_0029e328(u8 value);
 void useCounterStart(void);
-void FUN_0029ee6c(s32 a, u32 color);
+void buttonHelpSetText(s32 a, u32 color);
 void beginStatusPanelClose(void);
 void FUN_00232848(void);
 void uniteLoadPreviewRoomModel(void);
@@ -90,7 +90,7 @@ void FUN_003a8450(DevilView *view)
         *(u16 *)((u8 *)view + 0xA5B4) = gameGetFlagByte12e8() == 1 ? 1 : 5;
         FUN_00233240(view->status, *(s16 *)((u8 *)view + 0xA5B4));
         if (view->hideHelp == 0)
-            FUN_0029cc44(1);
+            messageDismissNumericBanner(1);
         ifTouchRegionClearAll(view->touchRegion);
         FUN_00233818(row);
         return;
@@ -151,13 +151,13 @@ void FUN_003a8450(DevilView *view)
         FUN_002a0cc8(1);
         view->state = 6;
         view->subState = 0;
-        FUN_0029ee6c(0, 0x323232FF);
+        buttonHelpSetText(0, 0x323232FF);
         FUN_002328b4();
         return;
     }
     if (view->hideHelp == 0)
-        FUN_0029cc44(1);
-    FUN_0029ee6c(0, 0x323232FF);
+        messageDismissNumericBanner(1);
+    buttonHelpSetText(0, 0x323232FF);
     beginStatusPanelClose();
     FUN_00233240(view->status, 1);
     FUN_002a0cc8(1);

@@ -64,7 +64,7 @@ typedef struct {
 extern int btlTalkBustUpExists(void);
 /* Supplied declaration required: asdMemFreeIfNotNull. */
 /* Supplied declaration required: FUN_00250d84. */
-extern int FUN_00250ec0(unsigned int);
+extern int goalConditionsSatisfied(unsigned int);
 /* Supplied declaration required: scrWorkGetValue. */
 /* Supplied declaration required: scrWorkSetValue. */
 /* Supplied declaration required: messageForwardDefaultMode. */
@@ -147,7 +147,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
     scrWorkSetValue(0);
     temp_v3 = temp_v0;
     dataTable1bOr1cGetRecord();
-    temp_v1 = FUN_00250ec0(temp_v0);
+    temp_v1 = goalConditionsSatisfied(temp_v0);
     if (temp_v1 == 0) {
       scrSetResult(0);
       return 1;

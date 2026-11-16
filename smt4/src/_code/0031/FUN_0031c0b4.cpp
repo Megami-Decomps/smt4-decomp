@@ -2,13 +2,13 @@
 
 extern "C" {
 
-int FUN_0024ecc0(...);
+int bustupCutAnimAssignSlot(...);
 
 u32 FUN_0031c0b4(void)
 {
-    FUN_0024ecc0(0, 1);
-    FUN_0024ecc0(0, 2);
-    FUN_0024ecc0(0, 3);
+    bustupCutAnimAssignSlot(0, 1);
+    bustupCutAnimAssignSlot(0, 2);
+    bustupCutAnimAssignSlot(0, 3);
     return 1;
 }
 

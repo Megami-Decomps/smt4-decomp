@@ -6,7 +6,7 @@
 
 extern "C" {
 
-int FUN_0023392c(unsigned int *, int, int);
+int aocMenuSetButtonHelp(unsigned int *, int, int);
 int jobStopAndClearFlags(unsigned int *);
 int FUN_00233db8(unsigned int *, int);
 int FUN_00233e70(unsigned int *, int, int);
@@ -22,7 +22,7 @@ typedef struct {
 
 extern int g_aocMain; /* 0x432fc8 */
 
-/* Supplied declaration required: FUN_0023392c. */
+/* Supplied declaration required: aocMenuSetButtonHelp. */
 /* Supplied declaration required: jobStopAndClearFlags. */
 /* Supplied declaration required: FUN_00233db8. */
 /* Supplied declaration required: FUN_00233e70. */
@@ -175,7 +175,7 @@ void AocMenu::runLicenseFlow()
             param_1[0x82] = 0;
           }
         }
-        FUN_0023392c(param_1,2,1);
+        aocMenuSetButtonHelp(param_1,2,1);
         return;
       }
       (**(romwright_code **)(*(int *)param_1[0x82] + 0xc))(&temp_v3);

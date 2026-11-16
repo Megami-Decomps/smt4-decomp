@@ -17,7 +17,7 @@ int messageMainSetEnabled(...);
 int FUN_00297060(unsigned int, unsigned int);
 int FUN_002973ec(void);
 int gameCounterAddSaturating(int, int);
-int FUN_0029ee6c(...);
+int buttonHelpSetText(...);
 int asdTMTexTableEntryAt(int, int);
 int dataTableGetCount(...);
 int dataTableGetEntries(void);
@@ -44,9 +44,9 @@ extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: FUN_002973ec. */
 /* Supplied declaration required: gameCounterAddSaturating. */
 extern int ifTouchGetSelectionModeForRegion(int);
-/* Supplied declaration required: FUN_0029ee6c. */
+/* Supplied declaration required: buttonHelpSetText. */
 extern int FUN_0029efa8(int);
-extern int FUN_0029efc0(int);
+extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_0029efd8. */
 extern unsigned short FUN_002b8584(unsigned int, unsigned int);
 /* Supplied declaration required: eventQueueAddUnique. */
@@ -138,7 +138,7 @@ void FUN_0018b978(void)
     if (temp_v5 < temp_v7) {
       temp_v10 = temp_v2 + temp_v5 * 0x50;
     }
-    FUN_0029ee6c(temp_v10,0x323232ff);
+    buttonHelpSetText(temp_v10,0x323232ff);
     FUN_001d15fc();
     *(unsigned int *)(temp_v8 + 100) = 1;
     return;
@@ -213,7 +213,7 @@ LAB_0018bf50:
   asdTMTexTableEntryAt(0x2f,0x59);
   scrRunOpcodesStub(*(unsigned int *)(temp_v8 + 0xb4));
   temp_v2 = g_config;
-  temp_v3 = FUN_0029efc0(g_config);
+  temp_v3 = resourceRunOperationIfUnblocked(g_config);
   temp_v4 = FUN_0029efa8(temp_v2);
   temp_v9 = dataTableGet(0x36,0);
   dataTableGetEntries();
@@ -306,7 +306,7 @@ LAB_0018bf50:
     if (temp_v7 < temp_v5) {
       temp_v10 = temp_v8 + temp_v7 * 0x50;
     }
-    FUN_0029ee6c(temp_v10,0x323232ff);
+    buttonHelpSetText(temp_v10,0x323232ff);
     if (temp_v0) {
       eventQueueAddUnique(0x100016c);
       return;
@@ -317,7 +317,7 @@ LAB_0018bf50:
   FUN_0029efd8(temp_v8,1);
   temp_v2 = g_config;
   if (temp_v3 != 0) {
-    temp_v8 = FUN_0029efc0(g_config);
+    temp_v8 = resourceRunOperationIfUnblocked(g_config);
     temp_v2 = FUN_0029efa8(temp_v2);
     temp_v9 = dataTableGet(0x36,0);
     temp_v3 = dataTableGetEntries();
@@ -325,7 +325,7 @@ LAB_0018bf50:
     if ((unsigned int)(temp_v8 + temp_v2) < temp_v5) {
       temp_v10 = temp_v3 + (temp_v8 + temp_v2) * 0x80;
     }
-    FUN_0029ee6c(temp_v10 + 0x3c,0x323232ff);
+    buttonHelpSetText(temp_v10 + 0x3c,0x323232ff);
     FUN_001d15fc();
     return;
   }

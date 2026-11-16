@@ -20,7 +20,7 @@ int resultCreate(int);
 int FUN_0029bbc8(void);
 int partyFindActiveSlotById(int);
 int slotSetRequest(...);
-int FUN_0029ee6c(int, int);
+int buttonHelpSetText(int, int);
 int dataTable1bOr1cGetRecord(void);
 int buttonHelpSetPreset(int);
 int FUN_002bff50(void);
@@ -57,7 +57,7 @@ extern unsigned int uiQuestGetCurrentEntryId(void);
 /* Supplied declaration required: FUN_0023547c. */
 /* Supplied declaration required: scrScriptProcessStartMappedEntry. */
 /* Supplied declaration required: FUN_00250d84. */
-extern int FUN_00250ec0(unsigned int);
+extern int goalConditionsSatisfied(unsigned int);
 /* Supplied declaration required: FUN_00269dc8. */
 /* Supplied declaration required: buttonHelpResetSlots. */
 extern int screenFadeIsBusy(void);
@@ -73,7 +73,7 @@ extern int questReadRuntimeFlag(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0029bbc8. */
 /* Supplied declaration required: partyFindActiveSlotById. */
 /* Supplied declaration required: slotSetRequest. */
-/* Supplied declaration required: FUN_0029ee6c. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 extern int FUN_002b8660(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
@@ -148,11 +148,11 @@ void FUN_003821d8(unsigned int *param_1)
         }
         else {
 LAB_003822fc:
-          temp_v2 = FUN_00250ec0(temp_v4);
+          temp_v2 = goalConditionsSatisfied(temp_v4);
           if (temp_v2 != 0) {
             if (param_1[2] != 0xb) {
               buttonHelpSetPreset(0xa3);
-              FUN_0029ee6c(0,0x323232ff);
+              buttonHelpSetText(0,0x323232ff);
               scrScriptProcessStartMappedEntry(param_1,&LAB_00382660);
               temp_v4 = param_1[2] + 1;
             }

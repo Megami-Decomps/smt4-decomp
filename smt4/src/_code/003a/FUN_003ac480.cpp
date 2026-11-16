@@ -40,8 +40,8 @@ struct CountdownGlobals {
 extern "C" {
 extern CountdownGlobals g_countdown;
 s32 FUN_00293f10(s32 image, s32 arg);
-s32 FUN_002942c4(s32 image, s32 arg);
-s32 FUN_002958f8(s32 image, s32 arg);
+s32 statusBustUpPortraitAcquire(s32 image, s32 arg);
+s32 statusBustUpPortraitRelease(s32 image, s32 arg);
 void uiSpriteSetImageKeyframe(void *sprite, s32 keyframe, ...);
 s32 FUN_002bf818(void *sprite);
 
@@ -103,13 +103,13 @@ swap:
         uiSpriteSetImageKeyframe(panel->swapSprite, 1, 0);
         panel->loading = panel->request;
         if (panel->loading.id >= 0)
-            FUN_002942c4(panel->loading.id, 1);
+            statusBustUpPortraitAcquire(panel->loading.id, 1);
         panel->outAnimation = 0;
         break;
     case 4:
         if (FUN_002bf818(panel->swapSprite) != 0) {
             if (panel->shown.key != panel->loading.key && panel->shown.id >= 0)
-                FUN_002958f8(panel->shown.id, 1);
+                statusBustUpPortraitRelease(panel->shown.id, 1);
             panel->shown.key = 0;
             panel->swapState = 1;
         }
@@ -126,10 +126,10 @@ swap:
             return 0;
         }
         if (panel->loading.id >= 0)
-            FUN_002958f8(panel->loading.id, 1);
+            statusBustUpPortraitRelease(panel->loading.id, 1);
         panel->loading = panel->request;
         if (panel->loading.id >= 0)
-            FUN_002942c4(panel->loading.id, 1);
+            statusBustUpPortraitAcquire(panel->loading.id, 1);
         panel->outAnimation = 0;
         break;
     }

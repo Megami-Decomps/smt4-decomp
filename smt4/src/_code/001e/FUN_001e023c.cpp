@@ -40,7 +40,7 @@ FadeJob *jobGetWork(u32 handle);
 void FUN_001a79a8(FadeJob *job);
 s32 FUN_002c5d80(u32 slot, u32 flags);
 void FUN_0033e160(u32 handle, s32 zero, s32 level, u8 *params, u32 color, u32 flag, FadeVec2 origin);
-void FUN_002c18e4(RenderCtx *context);
+void renderCtxResetColorScale(RenderCtx *context);
 
 /* Draws the fade job with temporary title-scene render states, when it has no pending request and is active. */
 u32 FUN_001e023c(u32 handle)
@@ -66,7 +66,7 @@ u32 FUN_001e023c(u32 handle)
         renderStackPop(&g_titleScene->additional.stackC);
         renderStackPop(&g_titleScene->stackA);
         renderCtxApplyTransforms(g_titleScene);
-        FUN_002c18e4(g_titleScene);
+        renderCtxResetColorScale(g_titleScene);
     }
     return 0;
 }

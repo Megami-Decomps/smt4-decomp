@@ -48,7 +48,7 @@ extern unsigned int FUN_00295cec(void);
 extern int FUN_0029d644(int);
 extern int ifTouchGetSelectionModeForRegion(int);
 extern int FUN_0029efa8(int);
-extern int FUN_0029efc0(int);
+extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_002b6b8c. */
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -103,7 +103,7 @@ void FUN_0033149c(int param_1)
     do {
       if ((*(int *)(param_1 + 8) != 2 && *(int *)(param_1 + 8) != 3) ||
          (temp_v2 = FUN_0029efa8(param_1 + 0x10), temp_v2 != temp_v9)) {
-        temp_v2 = FUN_0029efc0(param_1 + 0x10);
+        temp_v2 = resourceRunOperationIfUnblocked(param_1 + 0x10);
         temp_v10 = *(unsigned int *)(param_1 + (temp_v2 + temp_v9) * 4 + 0x74);
         temp_v2 = asdTMTexTableEntryAt(0x1d,temp_v9 + 0x40e);
         temp_v4 = asdTMTexTableEntryAt(0x1d,0x58f);
@@ -168,7 +168,7 @@ void FUN_0033149c(int param_1)
     } while (temp_v9 < temp_v2);
   }
   if (*(int *)(param_1 + 8) == 2 || *(int *)(param_1 + 8) == 3) {
-    temp_v2 = FUN_0029efc0(param_1 + 0x10);
+    temp_v2 = resourceRunOperationIfUnblocked(param_1 + 0x10);
     temp_v9 = FUN_0029efa8(param_1 + 0x10);
     temp_v10 = *(unsigned int *)(param_1 + (temp_v9 + temp_v2) * 4 + 0x74);
     temp_v2 = FUN_0029efa8(param_1 + 0x10);

@@ -1,4 +1,3 @@
-/* NON_MATCHING: the early returns now match; retail tests the entry flag with a branch and `ands; movne r0, #1`, where the build predicates `ldrne; andne`. */
 #include "common.h"
 #include "shard/ItemStackLimit.h"
 
@@ -29,6 +28,9 @@ bool FUN_00481404(u16 id)
     if (entry == NULL) {
         return false;
     }
-    return (entry->flags & 1) != 0;
+    if (entry->flags & 1) {
+        return true;
+    }
+    return false;
 }
 }

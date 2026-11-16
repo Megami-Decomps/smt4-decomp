@@ -26,7 +26,7 @@ void modelApplyChangedCachedVector(RenderCtx *ctx, f32 a, f32 b, f32 c, f32 d);
 void renderCtxSelectBlendPreset(u32 mode);
 void FUN_00347198(u32 object);
 void FUN_0034724c(u32 object);
-void FUN_002c18e4(RenderCtx *ctx);
+void renderCtxResetColorScale(RenderCtx *ctx);
 
 /* Draws one packet under a pushed render state (5 or 1 by its flags): sets its camera matrix and
  * color, runs the draw and pops the state. */
@@ -67,7 +67,7 @@ void FUN_00256a50(DrawPacket *packet, u32 mode)
             packet->pending = 0;
         }
         FUN_0034724c(packet->object);
-        FUN_002c18e4(g_titleScene);
+        renderCtxResetColorScale(g_titleScene);
         renderCtxApplyTransforms(g_titleScene);
         renderStackPop(&g_titleScene->stackA);
     }

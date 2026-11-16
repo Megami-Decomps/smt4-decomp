@@ -3,7 +3,7 @@
 extern "C" {
 extern void *g_camp;
 PlayerInitialRecordIV *gameGetPlayerData();
-u32 FUN_0029efc0(const void *selector);
+u32 resourceRunOperationIfUnblocked(const void *selector);
 u32 FUN_0029efa8(const void *selector);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_00299370(PlayerInitialRecordIV *player);
@@ -36,7 +36,7 @@ void campPreviewSelectedEquipment(s32 category)
     else if (category == 21) { selector = camp->selectors[4]; choices = camp->body; }
     else if (category == 22) { selector = camp->selectors[5]; choices = camp->legs; }
     else if (category == 23) { selector = camp->selectors[6]; choices = camp->accessories; }
-    u32 selected = FUN_0029efc0(selector);
+    u32 selected = resourceRunOperationIfUnblocked(selector);
     selected += FUN_0029efa8(selector);
     PlayerInitialRecordIV preview;
     __aeabi_memcpy4(&preview, player, sizeof(preview));

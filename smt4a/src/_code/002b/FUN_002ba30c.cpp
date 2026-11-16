@@ -1,4 +1,3 @@
-/* NON_MATCHING: first loop only: retail forms the slot index (i * 88) before loading the global, ours loads the global first (r0/r1 swapped). */
 #include "common.h"
 
 /* An engine record's handle object; slot 1 of its vtable releases it. */
@@ -44,30 +43,24 @@ extern Owner *g_engineRecordList;
 /* Releases the handles of every live special slot, regular slot and extra record. */
 void FUN_002ba30c(void)
 {
-    s32 i;
-
-    for (i = 0; i < 3; i++) {
-        Owner *owner = g_engineRecordList;
-        Slot *slot = &owner->u.table.slots[32 + i];
-
+    for (s32 index = 0; index < 3; ++index) {
+        Slot *slot = &g_engineRecordList->u.table.slots[32 + index];
         if (slot->active != 0 && slot->handle != NULL) {
             slot->handle->release();
             slot->handle = NULL;
         }
     }
-    for (i = 0; i < 32; i++) {
-        Owner *owner = g_engineRecordList;
-        Slot *slot = &owner->u.table.slots[i];
-
+    for (s32 index = 0; index < 32; ++index) {
+        Slot *slot = &g_engineRecordList->u.table.slots[index];
         if (slot->active != 0 && slot->registered != 0 && slot->handle != NULL) {
             slot->handle->release();
             slot->handle = NULL;
         }
     }
-    for (i = 0; i < 17; i++) {
-        if (g_engineRecordList->u.extras[i].handle != NULL) {
-            g_engineRecordList->u.extras[i].handle->release();
-            g_engineRecordList->u.extras[i].handle = NULL;
+    for (s32 index = 0; index < 17; ++index) {
+        if (g_engineRecordList->u.extras[index].handle != NULL) {
+            g_engineRecordList->u.extras[index].handle->release();
+            g_engineRecordList->u.extras[index].handle = NULL;
         }
     }
 }

@@ -1,4 +1,3 @@
-/* NON_MATCHING: the signed background-pending load now matches (field is s8); the game-mode preset branches are laid out differently (retail outlines the below-100 arm after the default preset). */
 #include "map/mapDepart.h"
 extern "C" {
 extern GameState g_gameState;
@@ -31,22 +30,19 @@ void FUN_00273840(s32 enabled)
             FUN_00289880();
     } else if (!NaviMain_IsMapOpen()) {
         if (g_gameState.unk000 == 101) {
-            if (lmapMainGetFlag()) {
+            if (lmapMainGetFlag())
                 buttonHelpSetPreset(0xDE);
-                return;
-            }
-        } else if (g_gameState.unk000 < 100) {
-            if (g_gameState.unk000 == 36) {
-                buttonHelpSetPreset(0xD1);
-                return;
-            }
-            if (gameFlagIsSet(0x16))
-                buttonHelpSetPreset(0x3F);
             else
-                buttonHelpSetPreset(0xD9);
-            return;
+                buttonHelpSetPreset(0xD0);
+        } else if (g_gameState.unk000 >= 100) {
+            buttonHelpSetPreset(0xD0);
+        } else if (g_gameState.unk000 == 36) {
+            buttonHelpSetPreset(0xD1);
+        } else if (gameFlagIsSet(0x16)) {
+            buttonHelpSetPreset(0x3F);
+        } else {
+            buttonHelpSetPreset(0xD9);
         }
-        buttonHelpSetPreset(0xD0);
         return;
     }
     FUN_002757a8();

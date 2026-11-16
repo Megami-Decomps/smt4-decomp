@@ -3,7 +3,7 @@
 
 extern "C" {
 void FUN_0027ea28(void *job, u32 message, s32 argument, s32 flags);
-void FUN_0023392c(SceneWindowWork *, s32, s32);
+void aocMenuSetButtonHelp(SceneWindowWork *, s32, s32);
 void FUN_0027e9c0(void *job);
 void jobOwnerFreeSlotAndStop(void *job);
 void eventQueueAddUniqueIfValid(u32 eventId);
@@ -19,14 +19,14 @@ void AocMenu::waitCloseAnimation()
     switch (work->transition.phase) {
     case 0:
         FUN_0027ea28(job, 0x67, 0, 0);
-        FUN_0023392c(work, 3, 1);
+        aocMenuSetButtonHelp(work, 3, 1);
         work->transition.phase = 1;
         break;
     case 1:
         if (uiSpriteGetCompletionState(&work->dialog.cursor) && buttonHelpHasEnabledEntryForId(0x10)) {
             eventQueueAddUniqueIfValid(0x100016d);
             FUN_0027e9c0(job);
-            FUN_0023392c(work, -1, 0);
+            aocMenuSetButtonHelp(work, -1, 0);
             work->transition.phase = 2;
         }
         break;

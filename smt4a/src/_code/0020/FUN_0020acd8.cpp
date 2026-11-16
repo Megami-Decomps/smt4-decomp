@@ -1,5 +1,3 @@
-/* NON_MATCHING: retail inlines the stripped query (a `mov r0, #0` body, smt4's FUN_0023dcb8) in place of
-   its call; needs a config/inlined.txt entry for btlDebugQueryEnabled. */
 #include "common.h"
 
 namespace {

@@ -50,8 +50,8 @@ void sendEvent100020E(void);
 void FUN_004a3b48(StatusMenu* menu);
 void ifTouchGetButtonHelpValue(void);
 void sysPlaySe(void);
-void FUN_004d0100(void* list);
-void FUN_004d01f8(void* list);
+void listCursorStepForward(void* list);
+void listCursorStepBack(void* list);
 void FUN_00183f58(s32 a, s32 b, s32 c, s32 d);
 
 #define MENU_BYTE(menu, offset) (*(reinterpret_cast<u8*>(menu) + (offset)))
@@ -90,10 +90,10 @@ void FUN_004a1db4(StatusMenu* menu)
     s32 cursor = FUN_002a482c(menu->list);
     s32 page = FUN_0031d174(menu->list);
     if (statusDownGetMode() == 1) {
-        FUN_004d0100(menu->list);
+        listCursorStepForward(menu->list);
     } else {
         if (statusDownGetMode() == -1) {
-            FUN_004d01f8(menu->list);
+            listCursorStepBack(menu->list);
         } else {
             if (MENU_BYTE(menu, 0x860) != 1) {
                 if (FUN_002a482c(menu->list) == cursor && FUN_0031d174(menu->list) == page) return;

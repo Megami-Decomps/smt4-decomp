@@ -28,7 +28,7 @@ typedef struct TouchMenuModule {
 
 void FUN_00220d24(s32 mode);
 void FUN_00295214(s32 mode);
-void FUN_0029ee6c(void *target, u32 color);
+void buttonHelpSetText(void *target, u32 color);
 void ifTouchRegionRemove(void);
 
 extern TouchMenuModule g_useCounter;
@@ -51,7 +51,7 @@ void touchMenuClose(void)
         if (panel->fadeOut) {
             FUN_00220d24(1);
         } else {
-            FUN_0029ee6c(work->panel.fadeTarget, 0x323232ff);
+            buttonHelpSetText(work->panel.fadeTarget, 0x323232ff);
         }
         work->panel.fadePending = 0;
     } else {

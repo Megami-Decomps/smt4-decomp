@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail stores the 0x3048 state word through a literal offset (ldr r1,=0x3048; str r7,[r1,r0]), clears the battle flag as ldr/bic/str [r0,#1588] (built adds the field address first) and keeps the slot-reset stores in source order (built reorders them). */
+/* NON_MATCHING: only the first store differs: retail writes the 0x3048 state word through a literal offset (ldr r1,=0x3048; str r7,[r1,r0]) where the build adds 0x3000 to r0 and restores it. */
 #include "shard/W6_W6Match7_MaterialAnimationFlags.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"
 #include "shard/W6_W6Match2_KeyedValueTable.h"
@@ -20,6 +20,13 @@ void asdMemFree(void *);
 extern BtlMain *g_btlMain;
 }
 
+/* Clears the given battle flag bits. */
+static __inline void btlMainClearFlags(BtlMain *main, u32 mask)
+{
+    main->flags &= ~mask;
+}
+
+/* Releases the battle's transient resources: version slots, the optional object, model slots and sprite placements. */
 extern "C" void FUN_003d9be4(MaterialMergeOwner *owner)
 {
     struct DeletingMethods {
@@ -64,7 +71,7 @@ extern "C" void FUN_003d9be4(MaterialMergeOwner *owner)
     keyedRecordsFreeAll();
     textureCacheReleaseAll();
     if (g_btlMain != NULL) {
-        g_btlMain->flags &= ~0x8000000u;
+        btlMainClearFlags(g_btlMain, 0x08000000);
     }
     modelManagerReleaseSlots(owner);
 
@@ -72,8 +79,8 @@ extern "C" void FUN_003d9be4(MaterialMergeOwner *owner)
     for (s32 i = 0; i < 50; ++i) {
         KeyedValueSlot *slot = &models->slots[i];
         slot->firstKey = -1;
-        slot->action.flags = 0;
         slot->secondKey = -1;
+        slot->action.flags = 0;
         slot->action.index = 0;
         if (slot->action.unk20 != 0) {
             void *child = reinterpret_cast<void *>(slot->action.unk20);

@@ -1,27 +1,24 @@
-/* NON_MATCHING: packed-color loads and register allocation differ, including STRD rather than retail's nonconsecutive-register STM; recovered tail call is correct. */
 #include "common.h"
 
-struct BattleStageModel;
-struct StageGradientView {
+/* The stage's gradient colors: per-channel RGB, one alpha per stop, and the packed RGBA stops. */
+struct StageGradientWork {
     u8 unk00[0x5c];
-    u32 red, green, blue;
-    u32 alpha0, alpha1, alpha2;
-    u32 color0, color1, color2;
+    u32 rgb[3];    // 0x5c
+    u32 alpha[3];  // 0x68
+    u32 packed[3]; // 0x74
 };
 
 extern "C" {
-void FUN_0024ac7c(s32 enabled);
+void FUN_0024ac7c(u32 enabled);
 void FUN_002e2444(u32 first, u32 middle, u32 last);
 
-// Repack the stage's outer gradient colors, retaining the middle stop's RGB.
-void FUN_0034043c(BattleStageModel *stage)
+// Repacks the gradient's outer stops from its RGB and alphas, keeps the middle stop's RGB, and applies it.
+void FUN_0034043c(StageGradientWork *work)
 {
-    StageGradientView *gradient = reinterpret_cast<StageGradientView *>(stage);
-    u32 greenBlue = (gradient->green << 16) | (gradient->blue << 8);
-    gradient->color2 = greenBlue | gradient->alpha2 | (gradient->red << 24);
-    gradient->color0 = gradient->alpha0 | (gradient->red << 24) | greenBlue;
-    gradient->color1 = (gradient->color1 & 0xffffff00) | gradient->alpha1;
+    work->packed[0] = work->alpha[0] | (work->rgb[0] << 24) | (work->rgb[1] << 16) | (work->rgb[2] << 8);
+    work->packed[1] = (work->packed[1] & 0xffffff00) | work->alpha[1];
+    work->packed[2] = work->alpha[2] | (work->rgb[0] << 24) | (work->rgb[1] << 16) | (work->rgb[2] << 8);
     FUN_0024ac7c(1);
-    FUN_002e2444(gradient->color0, gradient->color1, gradient->color2);
+    FUN_002e2444(work->packed[0], work->packed[1], work->packed[2]);
 }
 }

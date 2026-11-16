@@ -19,29 +19,35 @@ void FUN_00280c70(LightNode *node, s32 kind)
 {
     s32 state;
 
-    if (kind == 1) {
+    switch (kind) {
+    case 1:
         state = DAT_005b3c90[0];
-    } else if (kind == 2) {
+        break;
+    case 2:
         state = DAT_005b3c98[0];
         asdLightActivate(0);
-    } else if (kind == 4) {
+        break;
+    case 4:
         state = DAT_005b3c90[1];
-    } else if (kind == 5) {
+        break;
+    case 5:
         state = DAT_005b3c98[1];
         asdLightActivate(1);
-    } else {
+        break;
+    default:
         return;
     }
-
     if (state != 0) {
         FUN_002246d0(node, state);
-        s32 scene = kind >= 3 ? 1 : 0;
+        s32 scene;
+        if (kind < 3)
+            scene = 0;
+        else
+            scene = 1;
         sceneTraverserVisit(g_effAsdLightHandle[scene], g_asdModelTransformBuilder[scene]);
         g_asdLightCount[scene].count++;
-        node->kind = kind;
-        node->kindCopy = kind;
-        node->unk14 = 0;
-        node->unk18 = 0;
+        node->kindCopy = node->kind = kind;
+        node->unk18 = node->unk14 = 0;
     }
 }
 

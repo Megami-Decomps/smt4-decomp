@@ -15,8 +15,8 @@ void FUN_0022d434(BibleScreen *screen);
 void panelSetScrollPosition(void *cursor, s32 row, s32 scroll);
 s32 buttonHelpGetMode();
 void buttonHelpSetPreset(s32 mode);
-void FUN_0029cc44(s32 enabled);
-void FUN_0029ee6c(s32 mode, u32 color);
+void messageDismissNumericBanner(s32 enabled);
+void buttonHelpSetText(s32 mode, u32 color);
 void beginStatusPanelClose();
 void FUN_00233240(void *panel, s32 enabled);
 void FUN_00232848();
@@ -69,8 +69,8 @@ void Obj4223c4::bibleApplyConfirmedSelection()
     FUN_002a0cc8(0);
     if (list->entries[0].count <= 0) {
         if (list->keepPanel == 0)
-            FUN_0029cc44(1);
-        FUN_0029ee6c(0, 0x323232FF);
+            messageDismissNumericBanner(1);
+        buttonHelpSetText(0, 0x323232FF);
         beginStatusPanelClose();
         FUN_00233240(reinterpret_cast<ConfirmationPanelView *>(screen)->panel, 1);
         FUN_002a0cc8(1);

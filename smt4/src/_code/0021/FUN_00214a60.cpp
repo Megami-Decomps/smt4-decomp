@@ -10,7 +10,7 @@ int textFormatFullWidthTwoDigits(...);
 int FUN_0025090c(...);
 float FUN_0028f4b4(const char *, unsigned int, float);
 int FUN_002907c4(...);
-int FUN_0029ee6c(int, int);
+int buttonHelpSetText(int, int);
 int FUN_002ae038(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int drawSetColorFromRGBA8(...);
@@ -73,7 +73,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_0025090c. */
 /* Supplied declaration required: FUN_0028f4b4. */
 /* Supplied declaration required: FUN_002907c4. */
-/* Supplied declaration required: FUN_0029ee6c. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: FUN_002ae038. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: textDrawString. */
@@ -149,7 +149,7 @@ unsigned int FUN_00214a60(void)
     else {
       temp_v4 = 0;
     }
-    FUN_0029ee6c(temp_v4,0x323232ff);
+    buttonHelpSetText(temp_v4,0x323232ff);
     FUN_002bf380(2,0x36,*(unsigned int *)(temp_v26 + 0x34),*(unsigned int *)(temp_v26 + 100),0,2);
     temp_v22 = 0x3f80000000000000;
     temp_v4 = 0;

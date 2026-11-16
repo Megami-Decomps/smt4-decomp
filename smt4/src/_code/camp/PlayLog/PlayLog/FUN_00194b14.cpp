@@ -44,7 +44,7 @@ struct PlayLogView {
 extern "C" {
 extern PlayLogView *g_playLog;
 
-s32 FUN_0029efc0(void *list);
+s32 resourceRunOperationIfUnblocked(void *list);
 void FUN_00290994(void *list, s32 x, s32 a, s32 table, s32 s0, s32 s1, s32 s2, s32 s3, s32 s4, s32 s5, s32 s6,
                   s32 barC, s32 barA, s32 barB, s32 flags, s32 extra);
 void FUN_002907c4(char *out, u32 value);
@@ -68,7 +68,7 @@ void FUN_00194b14(void)
         PlayLogFrame *frame = asdTMTexTableEntryAt(PLAYLOG_FONT_TABLE, row + 0x15);
         FUN_002bf380(2, PLAYLOG_FONT_TABLE, 1, frame->x + x, frame->y, 0xB);
 
-        u32 entryId = *(s16 *)((u8 *)log + PLAYLOG_IDS_OFFSET + (FUN_0029efc0(log->list) + row) * 2);
+        u32 entryId = *(s16 *)((u8 *)log + PLAYLOG_IDS_OFFSET + (resourceRunOperationIfUnblocked(log->list) + row) * 2);
         DataTableView<PlayLogEntry> table(PLAYLOG_ENTRY_TABLE, 0);
         PlayLogEntry *entry = NULL;
         if (entryId < table.count)
@@ -85,7 +85,7 @@ void FUN_00194b14(void)
         char first[16];
         char second[28];
         if (entry->kind != 1) {
-            u32 value = log->values[*(s16 *)((u8 *)log + PLAYLOG_IDS_OFFSET + (FUN_0029efc0(log->list) + row) * 2)];
+            u32 value = log->values[*(s16 *)((u8 *)log + PLAYLOG_IDS_OFFSET + (resourceRunOperationIfUnblocked(log->list) + row) * 2)];
             if (entry->unit[0] != '0') {
                 FUN_002907c4(first, value);
                 textFormatBuffer(text, "%s\x81@%s", first, entry->unit);
@@ -94,7 +94,7 @@ void FUN_00194b14(void)
                 textFormatBuffer(text, "%s", first);
             }
         } else {
-            u32 seconds = log->values[*(s16 *)((u8 *)log + PLAYLOG_IDS_OFFSET + (FUN_0029efc0(log->list) + row) * 2)];
+            u32 seconds = log->values[*(s16 *)((u8 *)log + PLAYLOG_IDS_OFFSET + (resourceRunOperationIfUnblocked(log->list) + row) * 2)];
             u32 rest = seconds % PLAYLOG_SECONDS_PER_HOUR;
             FUN_002907c4(first, seconds / PLAYLOG_SECONDS_PER_HOUR);
             FUN_002907c4(second, rest / 60);

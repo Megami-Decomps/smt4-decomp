@@ -1,34 +1,27 @@
-/* NON_MATCHING: resource fallback comparison matches; suppression-mask scalar versus paired loads still differ. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "script/ScriptArgs.h"
 
+// These word fields fall inside an unaligned padding union in the shared combatant layout.
+struct ResourceValueView {
+    u8 unk000[0xac];
+    s32 primary; // 0xac
+    u32 unkB0;
+    s32 fallback; // 0xb4
+};
 extern "C" {
 
 // Report whether an eligible combatant has a positive primary or fallback resource.
-u32 FUN_003bba04(void)
+u32 FUN_003bba04()
 {
-    // Word fields cannot be added to the shared entry's halfword-aligned union.
-    struct ResourceEntry {
-        /* 0x000 */ u64 flags;
-        /* 0x008 */ u8 unk008[0xA4];
-        /* 0x0AC */ s32 primary;
-        /* 0x0B0 */ u8 unk0B0[4];
-        /* 0x0B4 */ s32 fallback;
-        /* 0x0B8 */ u8 unk0B8[0x350];
-    };
-    for (s32 i = 0; i < 0x6D; ++i) {
-        BtlMainStateA* battle = btlGetMainState();
-        ResourceEntry* entry = reinterpret_cast<ResourceEntry*>(battle->entries) + i;
-        if ((g_btlCandidateMasks.unavailable & entry->flags) != 0 &&
-            (g_btlCandidateMasks.required & entry->flags) != 0 &&
-            (g_btlCandidateMasks.excluded & entry->flags) == 0) {
-            s32 resource = entry->primary;
-            if (resource <= 0) {
-                resource = entry->fallback;
-            }
-            if (resource > 0) {
+    for (s32 i = 0; i < 109; ++i) {
+        BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
+        if ((g_btlCandidateMasks.unavailable & entry->flags) &&
+            (entry->flags & g_btlCandidateMasks.required) && !(entry->flags & g_btlCandidateMasks.excluded)) {
+            ResourceValueView *values = (ResourceValueView *)entry;
+            if (values->primary > 0 || values->fallback > 0) {
                 scrSetResult(1);
                 return 1;
             }

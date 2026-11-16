@@ -3,7 +3,7 @@ extern "C" {
 s32 gameFlagIsSet(u32 flag);
 SpriteTransitionWork *jobGetWork(u32 job);
 void aocSlotRelease(SpriteTransitionWork *work);
-s32 FUN_0024ecc0(u32 job, u32 portrait);
+s32 bustupCutAnimAssignSlot(u32 job, u32 portrait);
 void bustupSpriteStartTransition(SpriteTransitionWork *work, u32 mode, u32 flags);
 void FUN_002a4e18(Vec3f *target, u32 portrait);
 void FUN_002bf6fc(u32 job, u32 first, u32 second, u32 third, u32 flags);
@@ -16,7 +16,7 @@ void bustupConfigureSlotTransition(u32 job, u32 portrait, s32 mode, u32 first, u
     work->initialized = 1;
     aocSlotRelease(work);
     work->unk08 = portrait;
-    s32 result = FUN_0024ecc0(job, portrait);
+    s32 result = bustupCutAnimAssignSlot(job, portrait);
     switch (result) {
     case 0:
         work->mode = 0;

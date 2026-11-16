@@ -52,7 +52,7 @@ s32 inputIsQuestCancelPressed(void);
 s32 gameGetNavigationState(void);
 s32 gameGetFlagByte12e8(void);
 void FUN_00233240(void *panel, s32 value);
-void FUN_0029cc44(s32 arg);
+void messageDismissNumericBanner(s32 arg);
 void ifTouchRegionClearAll(u32 regions);
 void FUN_00233818(void *panel);
 s32 flaggedValueHolderGetTotal(void *cursor);
@@ -60,7 +60,7 @@ void textEncodeFontSlot(s32 slot, void *buffer);
 u32 demonGetRaceLabel(u32 id, u32 arg);
 void scrScriptProcessStartEntry(u32 script, s32 entry);
 void FUN_002328b4(void);
-void FUN_0029ee6c(s32 a, u32 color);
+void buttonHelpSetText(s32 a, u32 color);
 void beginStatusPanelClose(void);
 void FUN_00232848(void);
 void uniteLoadPreviewRoomModel(void);
@@ -94,7 +94,7 @@ void FUN_003a6f80(DevilListInput *work)
         ((DevilListInputView *)work)->targetId = gameGetFlagByte12e8() == 1 ? 1 : 5;
         FUN_00233240((u8 *)work + 0xDC, ((DevilListInputView *)work)->targetId);
         if (block->previewEnabled == 0) {
-            FUN_0029cc44(1);
+            messageDismissNumericBanner(1);
         }
         ifTouchRegionClearAll(work->touchRegions);
         FUN_00233818(work->touchPanel);
@@ -116,9 +116,9 @@ void FUN_003a6f80(DevilListInput *work)
     } else {
         if (menu != 0) {
             if (block->previewEnabled == 0) {
-                FUN_0029cc44(1);
+                messageDismissNumericBanner(1);
             }
-            FUN_0029ee6c(0, 0x323232FF);
+            buttonHelpSetText(0, 0x323232FF);
             beginStatusPanelClose();
             FUN_00233240((u8 *)work + 0xDC, 1);
             FUN_002a0cc8(1);

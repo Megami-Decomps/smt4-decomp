@@ -24,7 +24,7 @@ s32 placeWinGetValue(void);
 s32 FUN_001dd910(void);
 const SpriteInfo *asdTMTexTableEntryAt(u32 table, u32 sprite);
 u32 FUN_002bf380(u32 flags, u32 table, u32 spriteId, s32 x, s32 y, s32 z);
-void FUN_002c18e4(RenderCtx *context);
+void renderCtxResetColorScale(RenderCtx *context);
 
 void FUN_003a2f88(SceneArrowDrawWork *work)
 {
@@ -59,6 +59,6 @@ void FUN_003a2f88(SceneArrowDrawWork *work)
     }
     renderStackPop(&g_titleScene->stackA);
     renderCtxApplyTransforms(g_titleScene);
-    FUN_002c18e4(g_titleScene);
+    renderCtxResetColorScale(g_titleScene);
 }
 }

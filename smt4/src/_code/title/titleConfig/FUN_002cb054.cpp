@@ -47,7 +47,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int ifTouchGetSelectionModeForRegion(int);
 extern int FUN_0029efa8(int);
-extern int FUN_0029efc0(int);
+extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
@@ -117,7 +117,7 @@ unsigned int FUN_002cb054(void)
   temp_v22 = 0;
   temp_v25 = 0;
   FUN_002bf380(2,0x2f,0xc,temp_v2,temp_v3,0xb);
-  temp_v4 = FUN_0029efc0(temp_v1 + 0xe8);
+  temp_v4 = resourceRunOperationIfUnblocked(temp_v1 + 0xe8);
   temp_v28 = FUN_0029efa8(temp_v1 + 0xe8);
   temp_v28 = temp_v28 + temp_v4;
   temp_v8 = 0;
@@ -142,7 +142,7 @@ unsigned int FUN_002cb054(void)
       temp_v24 = 0;
       temp_v25 = 0;
       temp_v29 = 0xe09800ff;
-      if ((temp_v26 != 0) && (temp_v4 = FUN_0029efc0(temp_v1 + 0xe8), temp_v4 + temp_v8 == temp_v28)) {
+      if ((temp_v26 != 0) && (temp_v4 = resourceRunOperationIfUnblocked(temp_v1 + 0xe8), temp_v4 + temp_v8 == temp_v28)) {
         temp_v0 = 1;
         temp_v29 = 0x72e027ff;
       }
@@ -196,7 +196,7 @@ unsigned int FUN_002cb054(void)
         }
       }
       temp_v4 = asdTMTexTableEntryAt(0x2f,0x1a);
-      temp_v6 = FUN_0029efc0(temp_v1 + 0xe8);
+      temp_v6 = resourceRunOperationIfUnblocked(temp_v1 + 0xe8);
       if ((unsigned int)(temp_v6 + temp_v8) < 3) {
         dataTableGet(0x3a,1);
         temp_v7 = dataTableGetEntries();
@@ -238,7 +238,7 @@ unsigned int FUN_002cb054(void)
       }
       temp_v27 = *(short *)(temp_v5 + 8) + temp_v2;
       temp_v6 = *(short *)(temp_v5 + 10) + temp_v3;
-      temp_v5 = FUN_0029efc0(temp_v1 + 0xe8);
+      temp_v5 = resourceRunOperationIfUnblocked(temp_v1 + 0xe8);
       temp_v4 = g_titleConfig;
       temp_v5 = *(int *)(temp_v1 + (temp_v5 + temp_v8) * 4 + 0x28);
       FUN_002bf380(2,0x2f,3,temp_v27,temp_v6,0x1f);

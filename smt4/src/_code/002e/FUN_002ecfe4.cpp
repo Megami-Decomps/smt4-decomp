@@ -1,4 +1,4 @@
-/* NON_MATCHING: scheduling only: retail computes the thread address (add r0, r4, #1068) after the joined-flag store, the build hoists it above the wait call. Same difference as FUN_002e2f14. */
+/* NON_MATCHING: FUN_002e2f14 shape; only scheduling remains: retail computes the thread address (add r0, r4, #1068) after the joined-flag store and copies it to r5, the build hoists it into r5 above the wait call. */
 #include "nn/Result.h"
 #include "nn/os/Thread.h"
 #include "sys/ResultReport.h"
@@ -27,14 +27,16 @@ void FUN_002ecfe4(void)
     CecProcess *process = g_cecProcess;
     if (process != NULL) {
         s32 signaled;
-        u32 handle = process->thread.handle;
-        s32 result = FUN_002c40f8(&signaled, &handle, 1, 0, -1);
+        u32 handles[1] = { process->thread.handle };
+        s32 result = FUN_002c40f8(&signaled, handles, 1, 0, -1);
         bool failed = nnResultIsFailure(result);
         if (failed) {
             FUN_002c526c(result, failed);
         }
         process->thread.joined = 1;
-        process->thread.~NnOsThread();
+        /* Joined above: finalize the thread, then close its handle through the handle's destructor. */
+        process->thread.finalize();
+        process->thread.NnOsHandle::~NnOsHandle();
         FUN_002c3f5c(process->queue);
         if (process->buffer != NULL) {
             asdMemFree(process->buffer);

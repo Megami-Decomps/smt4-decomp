@@ -11,16 +11,26 @@ extern "C" void asdOperatorDelete(void *block);
 /* A 0x30-byte element of the camera's two-element table; its constructor clears four values. */
 extern "C" void nn_math_ARMv6_MTX34CopyAsm(nw::math::MTX34 *dest, const nw::math::MTX34 *source);
 
+/* A word that starts cleared. */
+struct Obj557b18Word {
+    Obj557b18Word() : value(0) {}
+    /* 0x0 */ u32 value;
+};
+
+/* Two cleared words. */
+struct Obj557b18WordPair {
+    /* 0x0 */ Obj557b18Word first;
+    /* 0x4 */ Obj557b18Word second;
+};
+
 class Obj557b18Element {
 public:
     Obj557b18Element();
 
     /* 0x00 */ u8 unk00[0x14];
-    /* 0x14 */ u32 first;
-    /* 0x18 */ u32 second;
+    /* 0x14 */ Obj557b18WordPair front;
     /* 0x1C */ u8 unk1c[8];
-    /* 0x24 */ u32 third;
-    /* 0x28 */ u32 fourth;
+    /* 0x24 */ Obj557b18WordPair back;
     /* 0x2C */ u8 unk2c[4];
 };
 

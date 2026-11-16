@@ -24,7 +24,7 @@ extern StatusDown *g_statusDown;
 extern void timerStart(void *timer, s32 id, s32 arg);
 extern void ifTouchRegionRemove(void);
 extern void *__aeabi_memset4(void *dest, s32 size, s32 value);
-extern void FUN_0029ee6c(s32 arg, u32 color);
+extern void buttonHelpSetText(s32 arg, u32 color);
 
 /* Switches the status screen to tab `tab`: starts the matching slide timer, drops the touch regions, resets the state and picks the tab's icon. */
 void statusDownSwitchTab(u32 tab)
@@ -65,7 +65,7 @@ void statusDownSwitchTab(u32 tab)
         status->icon = 0x13;
     if (tab == 5)
         status->icon = 0x15;
-    FUN_0029ee6c(0, 0x323232FF);
+    buttonHelpSetText(0, 0x323232FF);
 }
 
 } /* extern "C" */

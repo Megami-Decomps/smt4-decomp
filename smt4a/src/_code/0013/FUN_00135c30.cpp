@@ -97,7 +97,7 @@ int FUN_001399b0(...);
 int gfxSetupResGraphicsFile(...);
 int FUN_00139c90(...);
 int FUN_0013a1e4(...);
-int FUN_0013a324(...);
+int asdRenderContextCreate(...);
 int asdGxPresetVectorSet(...);
 int asdGxPresetRequest(...);
 int asdMemorySetUseAllocatorA(...);
@@ -339,7 +339,7 @@ extern unsigned long long FUN_00139c4c(void);
 /* Supplied declaration required: FUN_0013a11c. */
 /* Supplied declaration required: FUN_0013a144. */
 /* Supplied declaration required: FUN_0013a1e4. */
-/* Supplied declaration required: FUN_0013a324. */
+/* Supplied declaration required: asdRenderContextCreate. */
 /* Supplied declaration required: asdGxResumeAndApplyPreset. */
 /* Supplied declaration required: titleConfigSetDefaults. */
 /* Supplied declaration required: asdProcessSetGroupEnabled. */
@@ -491,7 +491,7 @@ void FUN_00135c30(void)
   temp_v36 = 0x8d62;
   FUN_00139c90(&temp_v28);
   asdGxPresetRequest(1);
-  FUN_0013a324();
+  asdRenderContextCreate();
   temp_v2 = g_renderCtx;
   *(unsigned int *)(g_renderCtx + 0x1378) = 0;
   temp_v3 = packNibblesAndByte(6,7,0);

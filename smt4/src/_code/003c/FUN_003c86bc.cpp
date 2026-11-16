@@ -1,4 +1,4 @@
-/* NON_MATCHING: candidate counting, selection loop and ordered stat copies now match (ported from smt4a FUN_004da144); only the selection ordinal/loop temp registers (retail r2/r1) and the stat-value registers are exchanged. */
+/* NON_MATCHING: candidate counting, selection loop and ordered stat copies match; the selection ordinal/loop temp registers (retail r2/r1) and four stat-value registers differ. Writing the unit setup as a static __inline over a u16 word pointer with u16 temporaries declared first (FUN_003c8428's body) fixes the stat registers. */
 #include "shard/GameOptions.h"
 #include "gamedata/SupportUnitRecord.h"
 #include "AsdSDK/AsdMemUtil.h"
@@ -56,19 +56,19 @@ void FUN_003c86bc(void)
     unit->unk46 = 0x4B1;
     unit->unk0048[0] = record->flags & 0x7F;
     StatCopies *stats = reinterpret_cast<StatCopies *>(unit);
-    u16 health = record->stats.base[0];
+    u32 health = record->stats.base[0];
     stats->base[0] = health;
-    u16 mana = record->stats.base[1];
+    u32 mana = record->stats.base[1];
     stats->base[1] = mana;
-    u16 stat2 = record->stats.base[2];
+    u32 stat2 = record->stats.base[2];
     stats->base[2] = stat2;
-    u16 stat4 = record->stats.base[4];
+    u32 stat4 = record->stats.base[4];
     stats->base[4] = stat4;
-    u16 stat5 = record->stats.base[5];
+    u32 stat5 = record->stats.base[5];
     stats->base[5] = stat5;
-    u16 stat6 = record->stats.base[6];
+    u32 stat6 = record->stats.base[6];
     stats->base[6] = stat6;
-    u16 stat3 = record->stats.base[3];
+    u32 stat3 = record->stats.base[3];
     stats->base[3] = stat3;
     stats->maximum[0] = health;
     stats->current[0] = health;

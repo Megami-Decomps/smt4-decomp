@@ -1,8 +1,8 @@
-/* NON_MATCHING: retail pads the saved-register set with R6 and reserves 0x610 bytes; the recovered record alignment yields a three-register save and 0x614-byte split reservation. */
 #include "shard/GameGlobals.h"
 
+/* A saved unit record being transferred (0x60C bytes: the frame retail reserves for it). */
 struct GameTransferRecord {
-    u32 words[0x610 / 4];
+    u32 words[0x60C / 4];
 };
 
 extern "C" {

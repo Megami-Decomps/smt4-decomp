@@ -15,7 +15,7 @@ int sysPlaySe(...);
 int __ARM_common_memcpy4_8(unsigned int, unsigned int);
 int FUN_002299b0(void);
 int scrScriptProcessStartEntry(unsigned int, int);
-int FUN_002c9104(void);
+int clockRecordStartSeconds(void);
 int libc_strcpy(...);
 int messageStateEndMode2(void);
 int FUN_002f0384(...);
@@ -52,7 +52,7 @@ extern unsigned int gameDataBlocksGetTable(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002c8538. */
-/* Supplied declaration required: FUN_002c9104. */
+/* Supplied declaration required: clockRecordStartSeconds. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: messageStateEndMode2. */
 /* Supplied declaration required: FUN_002f0384. */
@@ -120,7 +120,7 @@ void FUN_0041de6c(int param_1)
     *(unsigned char *)(temp_v0 + 2) = *(unsigned char *)(param_1 + 6);
     gameDataBlocksGetSaveData();
     FUN_002299b0();
-    FUN_002c9104();
+    clockRecordStartSeconds();
     FUN_00408184(0x20,1);
     temp_v0 = gameDataBlocksGetSaveData();
     saveLoadStartSave(*(int *)(param_1 + 0x2f8) + 1,*(unsigned char *)(temp_v0 + 2));

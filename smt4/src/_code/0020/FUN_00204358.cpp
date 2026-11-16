@@ -15,7 +15,7 @@ int scrScriptProcessStartEntry(...);
 int flaggedEntrySetValueA(...);
 int ifTouchRegionAdd(int, int, int, int);
 int FUN_0029ede8(int, unsigned int, unsigned int, int);
-int FUN_0029ee6c(...);
+int buttonHelpSetText(...);
 int FUN_0029efa8(...);
 int FUN_0029efd8(...);
 int uiScrollHandleActionsOrTouch(...);
@@ -58,7 +58,7 @@ extern int messageMainGetChoiceResult(void);
 extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: FUN_0029ede8. */
-/* Supplied declaration required: FUN_0029ee6c. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: FUN_0029efa8. */
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
@@ -167,7 +167,7 @@ void FUN_00204358(int param_1)
       if (temp_v9 < temp_v8) {
         do {
           if (temp_v9 == temp_v6) {
-            FUN_0029ee6c(temp_v10,0x323232ff);
+            buttonHelpSetText(temp_v10,0x323232ff);
             *piVar16 = *piVar16 + 1;
             return;
           }
@@ -176,7 +176,7 @@ void FUN_00204358(int param_1)
         } while (temp_v9 < temp_v8);
       }
       temp_v10 = 0;
-      FUN_0029ee6c(temp_v10,0x323232ff);
+      buttonHelpSetText(temp_v10,0x323232ff);
       *piVar16 = *piVar16 + 1;
       break;
     }
@@ -256,7 +256,7 @@ void FUN_00204358(int param_1)
       }
       temp_v12 = 0;
 LAB_00204838:
-      FUN_0029ee6c(temp_v12,0x323232ff);
+      buttonHelpSetText(temp_v12,0x323232ff);
     }
     temp_v12 = FUN_0029efa8(temp_v10);
     if (temp_v12 != temp_v15) {
@@ -453,7 +453,7 @@ LAB_00204d14:
     }
     temp_v12 = 0;
 LAB_0020491c:
-    FUN_0029ee6c(temp_v12,0x323232ff);
+    buttonHelpSetText(temp_v12,0x323232ff);
     temp_v10 = FUN_0029efa8(temp_v10);
     if (temp_v10 == temp_v15) goto LAB_00204cf8;
 LAB_002049f0:
@@ -483,7 +483,7 @@ LAB_002049f0:
     if (temp_v8 != 0) {
       do {
         if (temp_v9 == temp_v6) {
-          FUN_0029ee6c(temp_v10,0x323232ff);
+          buttonHelpSetText(temp_v10,0x323232ff);
           return;
         }
         temp_v9 = temp_v9 + 1;
@@ -491,12 +491,12 @@ LAB_002049f0:
       } while (temp_v9 < temp_v8);
     }
     temp_v10 = 0;
-    FUN_0029ee6c(temp_v10,0x323232ff);
+    buttonHelpSetText(temp_v10,0x323232ff);
     return;
   case 5:
     temp_v10 = FUN_002bf818(temp_v12);
     if (temp_v10 != 0) {
-      FUN_0029ee6c(0,0x323232ff);
+      buttonHelpSetText(0,0x323232ff);
       resultSetMenuState(param_1,0x12);
       return;
     }

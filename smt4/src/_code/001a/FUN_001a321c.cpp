@@ -21,7 +21,7 @@ int itemDrawCategoryBadge(...);
 int FUN_002be650(...);
 int FUN_002be90c(...);
 int gameDataBlocksGetSaveData(void);
-int FUN_002c18e4(...);
+int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
 int requestForward(...);
 
@@ -150,7 +150,7 @@ extern int vec2GetXInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: gameDataBlocksGetSaveData. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_002c18e4. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
@@ -1768,7 +1768,7 @@ LAB_001a6a8c:
     *(unsigned char *)(temp_v5 + 0x12c4) = 0;
   }
   renderCtxApplyTransforms(g_titleScene);
-  FUN_002c18e4(g_titleScene);
+  renderCtxResetColorScale(g_titleScene);
   return 0;
 }
 

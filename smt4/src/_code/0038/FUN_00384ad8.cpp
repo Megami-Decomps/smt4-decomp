@@ -7,7 +7,7 @@ void renderCtxSelectStereoLayout(RenderCtx *context);
 void FUN_002bed3c(void);
 u32 FUN_002c5d80(u32 slot, u32 flags);
 void FUN_00383f70(void *work);
-void FUN_002c18e4(RenderCtx *context);
+void renderCtxResetColorScale(RenderCtx *context);
 
 /* Draws `work` through FUN_00383f70 under render state FUN_002c5d80(1, 0) on the title scene's first stack. */
 void FUN_00384ad8(void *work)
@@ -19,7 +19,7 @@ void FUN_00384ad8(void *work)
     FUN_00383f70(work);
     renderStackPop(&g_titleScene->stackA);
     renderCtxApplyTransforms(g_titleScene);
-    FUN_002c18e4(g_titleScene);
+    renderCtxResetColorScale(g_titleScene);
 }
 
 } /* extern "C" */

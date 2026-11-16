@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the prologue differs: retail copies this to r5 before forming the entries base and loads the mode into r0 (reloading r0 from r5 for the first call); the build keeps r0 live. */
 #include "common.h"
 #include "classes/Obj4223c4.h"
 #include "code/Code0029.h"
@@ -18,9 +17,7 @@ struct DevilListFlags {
     u8 previewMode;
 };
 struct DevilListWork {
-    u8 unk000[0x14];
-    s32 mode;
-    u8 unk018[8];
+    u8 unk000[0x20];
     u8 cursor[0x76];
     DevilListVisibility visibility;
     u8 unk0c6[0x4de];
@@ -47,13 +44,16 @@ void FUN_003aab90(DevilListVisibility *visibility);
 
 }
 
+/* In the list step, refreshes the preview demon when the cursor moved (the party member's record
+ * or a temporary one built from the saved record), then rebuilds the visible-id set. */
 void Obj4223c4::devilListUpdatePreviewAndVisibility()
 {
-    DevilListWork * work = reinterpret_cast<DevilListWork *>(this);
+    DevilListWork *work = reinterpret_cast<DevilListWork *>(this);
     DevilListEntry *entries = work->entries;
-    if (work->mode == 9) {
+    if (step == 9) {
         FUN_003a72a4(work);
-    } else if (work->mode == 2) {
+    } else if (step == 2) {
+
         u16 rawPrevious = entries[flaggedValueHolderGetTotal(work->cursor)].id;
         s16 previousId = rawPrevious;
         uiOwnerUpdateAnimationChannels(work);

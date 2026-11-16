@@ -14,7 +14,7 @@ u32 FUN_002d96a4();
 void statusPanelSetOpen(s32 enabled);
 void messageBannerInitSelection(s32 first, s32 second);
 void messageTargetSetValue(s32 value, s32 mode);
-void FUN_0029ee6c(const char *text, u32 color);
+void buttonHelpSetText(const char *text, u32 color);
 void uniteMenuChangeState(u32 state, s32 preservePrevious);
 
 void FUN_002dabac(s32 index)
@@ -54,7 +54,7 @@ void FUN_002dabac(s32 index)
         messageBannerInitSelection(1, 0);
         messageTargetSetValue(-work->fusionPriceIV.cost, 0);
     }
-    FUN_0029ee6c(NULL, 0x323232ff);
+    buttonHelpSetText(NULL, 0x323232ff);
     menuSetModeAndResetTransitions(7);
     uniteMenuChangeState(19, 1);
 }

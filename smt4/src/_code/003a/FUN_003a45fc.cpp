@@ -48,7 +48,7 @@ s32 dataTable17Sub1ChildGetCount(const Table17Handle &ignored, s32 index);
 u32 questEvaluateUnlockConditions(const QuestUnlockConditions *conditions);
 s32 gameTestIndexedAuxiliaryFlag(s32 index);
 u32 contentGetEntryKind(u32 id);
-void FUN_00233730(PlaceListCursor *cursor, s32 rows, s32 count, s32 current, s32 first, s32 second);
+void listScrollerInitialize(PlaceListCursor *cursor, s32 rows, s32 count, s32 current, s32 first, s32 second);
 void listCursorSetPage(PlaceListCursor *cursor, s32 page);
 
 /* Fills the nine tab lists of the place window with the entries of the current place, flags those
@@ -159,7 +159,7 @@ u32 FUN_003a45fc(PlaceListScene *scene)
     for (i = 0; i < PLACE_TAB_COUNT; i++) {
         s32 rows = (i == 7 || i == 8) ? 10 : 9;
         s32 special = i == 7 || i == 8;
-        FUN_00233730(&scene->cursors[i], rows, scene->tabs[i].count, 0, 1, special);
+        listScrollerInitialize(&scene->cursors[i], rows, scene->tabs[i].count, 0, 1, special);
         asdDebugHookPtrInt(&scene->cursors[i], 1);
         scene->cursors[i].enabled = 1;
         listCursorSetPage(&scene->cursors[i], 0);

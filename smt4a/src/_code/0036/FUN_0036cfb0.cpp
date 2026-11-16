@@ -1,4 +1,3 @@
-/* NON_MATCHING: script creation store scheduling and merged final step-reset branch differ. */
 #include "shard/W6_W6Match4_CampCecResumeState.h"
 #include "shard/Shard0031.h"
 
@@ -25,8 +24,10 @@ u32 FUN_0036cfb0(CampCecResumeState *state)
     switch (state->exchange.scriptStep) {
     case 0:
         if (state->launch.resource != NULL && state->launch.entry != 0) {
-            state->launch.script = FUN_00275bc8(state->launch.resource, state->launch.entry);
-            scrScriptProcessStartEntry(state->launch.script, state->exchange.exchangeKind == 1 ? 25 : 26);
+            ScriptRunState *script = FUN_00275bc8(state->launch.resource, state->launch.entry);
+            s32 entry = state->exchange.exchangeKind == 1 ? 25 : 26;
+            state->launch.script = script;
+            scrScriptProcessStartEntry(script, entry);
             sysPlaySe(0x3e);
             cecProcessStart();
             cecProcessCall4();
@@ -39,8 +40,11 @@ u32 FUN_0036cfb0(CampCecResumeState *state)
         if (scrRunOpcodesStub(state->launch.script) == 2) {
             SlotTable *slots = gameGetSlotTable();
             for (s32 index = 0; index < 24; ++index) {
-                if (slots->slots[index] >= 0 && bitsAt60Test(gameGetSlotRecord(slots->slots[index]), 2))
-                    bitsAt60Clear(gameGetSlotRecord(slots->slots[index]), 4);
+                if (slots->slots[index] >= 0) {
+                    if (bitsAt60Test(gameGetSlotRecord(slots->slots[index]), 2) != 0) {
+                        bitsAt60Clear(gameGetSlotRecord(slots->slots[index]), 4);
+                    }
+                }
             }
             FUN_002a6480(0);
             FUN_0031d890();
@@ -50,9 +54,9 @@ u32 FUN_0036cfb0(CampCecResumeState *state)
         break;
     case 2:
         if (scrRunOpcodesStub(state->launch.script) == 2) {
+            state->exchange.scriptStep = 0;
             state->state = 12;
             result = 3;
-            state->exchange.scriptStep = 0;
         }
         break;
     }

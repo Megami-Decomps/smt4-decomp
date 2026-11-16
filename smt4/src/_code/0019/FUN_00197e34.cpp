@@ -57,7 +57,7 @@ extern int idIsAtLeast350(unsigned int);
 extern int FUN_00298e40(unsigned int, int, unsigned char **);
 /* Supplied declaration required: drawSkillCategoryLabel. */
 extern int FUN_0029efa8(int);
-extern int FUN_0029efc0(int);
+extern int resourceRunOperationIfUnblocked(int);
 extern int gameGetFlagBlock(void);
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 /* Supplied declaration required: FUN_002b75ec. */
@@ -137,7 +137,7 @@ void FUN_00197e34(void)
     temp_v13 = temp_v3 + 0x660;
     temp_v11 = temp_v3 + 0x78a;
   }
-  temp_v6 = FUN_0029efc0(temp_v13);
+  temp_v6 = resourceRunOperationIfUnblocked(temp_v13);
   temp_v13 = FUN_0029efa8(temp_v13);
   temp_v1 = *(unsigned short *)(temp_v11 + (temp_v13 + temp_v6) * 2);
   if (*(char *)(temp_v28[0] + 0xf2) != '\0') {

@@ -9,7 +9,7 @@ s32 FUN_002c7e3c();
 void sysPlaySe(u32 sound);
 s32 fieldStateAllowsAction();
 s32 gameWorkStateGet();
-u32 FUN_0046fca8(AocSystemA *system, s32 id);
+u32 dataArchiveSetFindFileWithEntry(AocSystemA *system, s32 id);
 u32 dataTableValueOrZero(u32 table);
 void asdTextDrawDirectoryEntry(AsdText *text, s32 font, s32 mode, s32 x, s32 y, u32 directory, s32 index);
 s32 FUN_001688c4(AsdText *text);
@@ -34,7 +34,7 @@ void FUN_00333de0(s32 selected)
     }
     status->unk598 = (s16)selected;
     if (selected >= 0 && gameWorkStateGet()) {
-        u32 directory = FUN_0046fca8(g_aocSystem, selected);
+        u32 directory = dataArchiveSetFindFileWithEntry(g_aocSystem, selected);
         if (directory == 0)
             directory = dataTableValueOrZero(0x3F);
         asdTextDrawDirectoryEntry(status->caption.text, 3, -1, 0, 3, directory, selected);

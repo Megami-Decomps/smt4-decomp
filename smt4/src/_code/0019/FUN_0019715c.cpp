@@ -48,7 +48,7 @@ extern unsigned int FUN_0028fb40(unsigned int);
 /* Supplied declaration required: FUN_0028fc60. */
 extern int FUN_0029ee54(int);
 extern int FUN_0029efa8(int);
-extern int FUN_0029efc0(int);
+extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
@@ -132,10 +132,10 @@ void FUN_0019715c(int param_1,int param_2)
         }
         temp_v9 = 0;
         do {
-          temp_v4 = FUN_0029efc0(temp_v12);
+          temp_v4 = resourceRunOperationIfUnblocked(temp_v12);
           temp_v5 = FUN_0029ee54(temp_v12);
           if (temp_v5 <= temp_v4 + temp_v9) break;
-          temp_v4 = FUN_0029efc0(temp_v12);
+          temp_v4 = resourceRunOperationIfUnblocked(temp_v12);
           temp_v0 = *(unsigned short *)(temp_v1 + (temp_v4 + temp_v9) * 2);
           temp_v10 = (unsigned int)temp_v0;
           temp_v4 = asdTMTexTableEntryAt(0x1d,temp_v9 + 0x40d);
@@ -177,7 +177,7 @@ void FUN_0019715c(int param_1,int param_2)
         } while (temp_v9 < 0xb);
         FUN_0028f870(temp_v12,temp_v2,temp_v3,1);
         if (temp_v15 != 0) {
-          temp_v9 = FUN_0029efc0(temp_v12);
+          temp_v9 = resourceRunOperationIfUnblocked(temp_v12);
           temp_v4 = FUN_0029efa8(temp_v12);
           temp_v0 = *(unsigned short *)(temp_v1 + (temp_v4 + temp_v9) * 2);
           temp_v10 = (unsigned int)temp_v0;

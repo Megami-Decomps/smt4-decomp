@@ -1,19 +1,42 @@
-/* NON_MATCHING: compiler collapses retail's individual status-bit tests into constant mask operations. */
 #include "common.h"
 
 struct ResourceStatusKind { u8 unk00[0x3a]; u8 kind; };
 
-// Filter the requested status bits according to the active resource kind.
-extern "C" u32 FUN_003d2b2c(const ResourceStatusKind *resource, u32 mask)
+extern "C" {
+// Select the requested status ailments that the resource's cure kind affects.
+u16 FUN_003d2b2c(const ResourceStatusKind *resource, u16 ailments)
 {
-    if (!(resource->kind & 0x7f) || !mask)
-        return 0;
-    u32 kind = resource->kind & 0x7f;
-    switch (kind) {
-    case 23: return mask & 0x80;
-    case 22: case 31: return mask & 0x39e0;
-    case 24: return (u16)mask;
-    case 28: return mask & 0x3bc0;
-    default: return (u16)(mask & (1u << kind));
+    u16 result = 0;
+    if ((resource->kind & 0x7f) != 0 && ailments != 0) {
+        u32 kind = resource->kind & 0x7f;
+        if (kind == 22) {
+            if (ailments & 0x20) result = 0x20;
+            if (ailments & 0x40) result |= 0x40;
+            if (ailments & 0x80) result |= 0x80;
+            if (ailments & 0x100) result |= 0x100;
+            if (ailments & 0x200) result |= 0x200;
+            if (ailments & 0x800) result |= 0x800;
+            if (ailments & 0x1000) result |= 0x1000;
+            if (ailments & 0x2000) result |= 0x2000;
+            return result;
+        } else if (kind == 23) {
+            if (ailments & 0x80) result = 0x80;
+        } else if (kind == 28) {
+            if (ailments & 0x40) result = 0x40;
+            if (ailments & 0x80) result |= 0x80;
+            if (ailments & 0x100) result |= 0x100;
+            if (ailments & 0x800) result |= 0x800;
+            if (ailments & 0x1000) result |= 0x1000;
+            if (ailments & 0x2000) result |= 0x2000;
+        } else if (kind == 24) {
+            result = ailments;
+        } else if (kind == 31) {
+            if (ailments & 0x20) result = 0x20;
+            if (ailments & 0x200) result |= 0x200;
+        } else {
+            if (ailments & (1 << kind)) result = 1 << kind;
+        }
     }
+    return result;
+}
 }

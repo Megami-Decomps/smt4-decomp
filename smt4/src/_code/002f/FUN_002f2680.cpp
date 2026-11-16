@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation in the unit-key comparison (retail moves `a` to r6 and keeps the key in r4). */
 #include "common.h"
 #include "gamedata/DataTable40.h"
 
@@ -38,32 +37,40 @@ static __inline u16 skillSortKey(const SkillSortItem *item)
     return reinterpret_cast<SkillSortRecord *>(dataTable40FindById(item->skillId))->sortKey;
 }
 
-/* Returns the sort key of an item's unit, or 0 without one. */
-static __inline u16 unitSortKey(const SkillSortItem *item)
+/* Tie-break by descending unit sort key (0 without a unit), then FUN_002497f8. */
+static __inline s32 compareUnitSortKeys(SkillSortItem *a, SkillSortItem *b)
 {
-    if (item->unitId < 0) {
-        return 0;
+    u16 keyA;
+    u16 keyB;
+    s32 diff;
+
+    if (a->unitId < 0) {
+        keyA = 0;
+    } else {
+        keyA = gameGetUnitRecord(a->unitId)->sortKey;
     }
-    return gameGetUnitRecord(item->unitId)->sortKey;
+    if (b->unitId < 0) {
+        keyB = 0;
+    } else {
+        keyB = gameGetUnitRecord(b->unitId)->sortKey;
+    }
+    diff = keyB - keyA;
+    if (diff != 0) {
+        return diff;
+    }
+    return FUN_002497f8(a, b);
 }
 
 /* Sort comparator: orders two items by descending skill key, then descending unit key, then by
  * FUN_002497f8. */
 s32 FUN_002f2680(SkillSortItem *a, SkillSortItem *b)
 {
-    s32 skillA = skillSortKey(a);
-    s32 diff = skillSortKey(b) - skillA;
-    s32 unitA;
-
+    s32 keyA = skillSortKey(a);
+    s32 diff = skillSortKey(b) - keyA;
     if (diff != 0) {
         return diff;
     }
-    unitA = unitSortKey(a);
-    diff = unitSortKey(b) - unitA;
-    if (diff != 0) {
-        return diff;
-    }
-    return FUN_002497f8(a, b);
+    return compareUnitSortKeys(a, b);
 }
 
 } /* extern "C" */

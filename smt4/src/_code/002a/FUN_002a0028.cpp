@@ -24,7 +24,7 @@ struct UniteMenuAvailability {
 
 extern "C" {
 extern UniteTouchWork *g_unite;
-s32 FUN_0029efc0(const ScrollSelection *selection);
+s32 resourceRunOperationIfUnblocked(const ScrollSelection *selection);
 void FUN_0029f848(ScrollSelection *selection, u32 count, u32 visible, u32 option, u32 first, u32 second);
 void FUN_0029eb5c(ScrollSelection *selection, s32 index);
 void ifTouchRegionRemove();
@@ -37,7 +37,7 @@ extern "C" void FUN_002a0028(s32 refreshRegions)
     UniteTouchWork *work = g_unite;
     UniteMenuAvailability *available = reinterpret_cast<UniteMenuAvailability *>(FUN_002a0d0c());
     ScrollSelection *selection = &work->selection;
-    s32 top = FUN_0029efc0(selection);
+    s32 top = resourceRunOperationIfUnblocked(selection);
     s32 offset = FUN_0029efa8(selection);
     u32 count = 3;
     if (available->first) {

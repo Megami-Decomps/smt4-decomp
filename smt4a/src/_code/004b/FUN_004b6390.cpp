@@ -16,7 +16,7 @@ int FUN_002c7e6c(void);
 int FUN_002c85b0(...);
 int campButtonHelpAcquire(void);
 int FUN_0036b644(...);
-int FUN_00371c3c(...);
+int statusBustUpPortraitAcquire(...);
 int objBMarkAndInit20D4(void);
 int stateHolderMarkAndInit2588(void);
 int FUN_003e4140(...);
@@ -49,7 +49,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002c85b0. */
 /* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: FUN_0036b644. */
-/* Supplied declaration required: FUN_00371c3c. */
+/* Supplied declaration required: statusBustUpPortraitAcquire. */
 /* Supplied declaration required: objBMarkAndInit20D4. */
 /* Supplied declaration required: stateHolderMarkAndInit2588. */
 /* Supplied declaration required: FUN_003e4140. */
@@ -71,12 +71,12 @@ void FUN_004b6390(int param_1)
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 3);
   temp_v1 = gameGetSlotTable();
-  FUN_00371c3c(0xffffffff,1);
+  statusBustUpPortraitAcquire(0xffffffff,1);
   temp_v2 = 0;
   do {
     if (-1 < *(char *)(temp_v1 + temp_v2 + 0x1ca0)) {
       temp_v0 = gameGetSlotRecord();
-      FUN_00371c3c((int)*(short *)(temp_v0 + 0x62),1);
+      statusBustUpPortraitAcquire((int)*(short *)(temp_v0 + 0x62),1);
     }
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 3);

@@ -7,7 +7,7 @@ const char *FUN_0035a060(u32 value);
 s32 stringFormatUnbounded(char *dest, const char *format, ...);
 void rt_memcpy(void *dest, const void *src, u32 size);
 
-static inline const char *naKeyFormat(u32 kind)
+static const char *naKeyFormat(u32 kind)
 {
     switch (kind) {
     case 0:
@@ -30,7 +30,7 @@ static inline const char *naKeyFormat(u32 kind)
 // Build the NA_* text key of the given kind (name, sort name, descriptions, disclaimer, icon) for two IDs.
 void FUN_00234330(char *dest, u32 kind, u32 first, u32 second)
 {
-    char key[64];
+    char key[0x44];
     stringFormatUnbounded(key, naKeyFormat(kind), FUN_0035a010(first), FUN_0035a060(second));
     rt_memcpy(dest, key, 0x40);
 }

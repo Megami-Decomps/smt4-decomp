@@ -22,7 +22,7 @@ extern "C" {
 
 void FUN_002b8ee0(void* widget, s32 arg);
 u16 FUN_002b8584(u32 group, u32 index);
-s32 FUN_0029efc0(void* list);
+s32 resourceRunOperationIfUnblocked(void* list);
 s32 FUN_0029efd8(void* list, s32 arg);
 u32 FUN_002907a8(void);
 u32 asdTMTexTableEntryAt(u32 group, u32 index);
@@ -65,16 +65,16 @@ void FUN_0019514c(u8** screenRef)
             }
         }
         u8 flags = 0;
-        s32 previous = FUN_0029efc0(list);
+        s32 previous = resourceRunOperationIfUnblocked(list);
         s32 handled = uiScrollHandleActionsOrTouch(list, asdTMTexTableEntryAt(0x30, 0x1c), 0,
             *reinterpret_cast<s16*>(screen + 0x34c), *reinterpret_cast<s16*>(screen + 0x348),
             *reinterpret_cast<s16*>(screen + 0x34a), &flags, 0, 0);
         if (handled == 0) {
             if (FUN_0029efd8(list, 0) != 0) {
                 if ((s32)FUN_0029ee54(list) > 5) {
-                    while (FUN_0029efc0(list) == previous) {
-                        if (FUN_0029efc0(list) != 0 && FUN_0029efa8(list) == 0) break;
-                        if (FUN_0029efc0(list) == (s32)FUN_0029ee54(list) - 5 && FUN_0029efa8(list) == 4) break;
+                    while (resourceRunOperationIfUnblocked(list) == previous) {
+                        if (resourceRunOperationIfUnblocked(list) != 0 && FUN_0029efa8(list) == 0) break;
+                        if (resourceRunOperationIfUnblocked(list) == (s32)FUN_0029ee54(list) - 5 && FUN_0029efa8(list) == 4) break;
                         FUN_0029efd8(list, 0);
                     }
                 }
@@ -87,7 +87,7 @@ void FUN_0019514c(u8** screenRef)
                 break;
             }
         }
-        if (FUN_0029efc0(list) != previous) eventQueueAddUniqueIfValid(0x0100016e);
+        if (resourceRunOperationIfUnblocked(list) != previous) eventQueueAddUniqueIfValid(0x0100016e);
         break;
     }
     case 2:

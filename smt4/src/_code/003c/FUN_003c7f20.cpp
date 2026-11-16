@@ -1,62 +1,53 @@
-/* NON_MATCHING: retail schedules the thread-handle load before `sub sp`, re-reads bufferA into r0 (moving it to r5 only inside the null test) and loads unkA0 into r0 after the -1 store; this build keeps bufferA in r5 and loads unkA0 into r1. */
+/* NON_MATCHING: only the -1 store / context test block differs: retail materialises -1 in r1 and loads the context into r0 after the store (the build loads it first into r1); declaring FUN_002759bc with a context argument fixes the registers, so the call may really pass it. */
+#include "shard/W6_W6Match1_BattleStageModel.h"
+#include "battle/BtlStageStackRegion.h"
 #include "nn/Result.h"
+#include "nn/os/Handle.h"
 #include "nn/os/Thread.h"
 #include "AsdSDK/AsdMemAlloc.h"
-#include "AsdSDK/AsdMemUtil.h"
-#include "sys/HandleWait.h"
-
-/* A model-streaming worker (as far as its shutdown touches it). */
-struct StreamWorker {
-    /* 0x00 */ u8 unk00[0x80];
-    /* 0x80 */ u32 unk80;
-    /* 0x84 */ u8 unk84[0x1C];
-    /* 0xA0 */ u32 unkA0;
-    /* 0xA4 */ NnOsThread thread;
-    /* 0xAC */ void *bufferB;
-    /* 0xB0 */ void *bufferA;
-    /* 0xB4 */ u8 unkB4[0x0C];
-    /* 0xC0 */ s32 unkC0;
-};
+#include "sys/ResultReport.h"
 
 extern "C" {
-
-
-void FUN_002c3f5c(void *block);
+s32 FUN_002c40f8(s32 *signaled, u32 *handles, s32 count, s32 waitAll, s64 timeout);
 void FUN_002759bc(void);
-void mdlHandleArrayDestroy(StreamWorker *worker);
+void mdlHandleArrayDestroy(BattleStageModel *stage);
 
-/* Joins and closes the worker's thread. */
-static __inline void workerStopThread(StreamWorker *worker)
+/* Waits for the loader thread to end, then finalizes and closes it. */
+static __inline void stageStopThread(BattleStageModel *stage)
 {
-    handleWait(worker->thread.handle, -1);
-    worker->thread.joined = 1;
-    worker->thread.~NnOsThread();
+    s32 signaled;
+    u32 handles[1] = { stage->thread.handle };
+    s32 result = FUN_002c40f8(&signaled, handles, 1, 0, -1);
+    bool failed = nnResultIsFailure(result);
+    if (failed) {
+        FUN_002c526c(result, failed);
+    }
+    stage->thread.joined = 1;
+    stage->thread.finalize();
+    stage->thread.NnOsHandle::~NnOsHandle();
 }
 
-/* Shuts the worker down: joins and closes its thread, frees its buffers and destroys its model handle array. */
-void FUN_003c7f20(StreamWorker *worker)
+/* Tears the stage model down: joins its loader thread, releases the thread's stack, the frame
+ * textures and the model handles. */
+void FUN_003c7f20(BattleStageModel *stage)
 {
-    workerStopThread(worker);
-    if (worker->bufferA != NULL) {
-        FUN_002c3f5c(worker->bufferA);
-        void *buffer = worker->bufferA;
-        if (buffer != NULL) {
-            FUN_002c3f5c(buffer);
-            asdMemFreeNonNull(buffer);
-        }
-        worker->bufferA = NULL;
+    stageStopThread(stage);
+    if (stage->stackRegion != NULL) {
+        FUN_002c3f5c(stage->stackRegion);
+        delete static_cast<StackRegion *>(stage->stackRegion);
+        stage->stackRegion = NULL;
     }
-    if (worker->bufferB != NULL) {
-        asdMemFree(worker->bufferB);
-        worker->bufferB = NULL;
+    if (stage->threadStack != NULL) {
+        asdMemFree(stage->threadStack);
+        stage->threadStack = NULL;
     }
-    worker->unkC0 = -1;
-    if (worker->unkA0 != 0) {
-        worker->unkA0 = 0;
+    stage->unkc0 = -1;
+    if (stage->context != NULL) {
+        stage->context = NULL;
     }
     FUN_002759bc();
-    mdlHandleArrayDestroy(worker);
-    worker->unk80 = 0;
+    mdlHandleArrayDestroy(stage);
+    stage->state = 0;
 }
 
 } /* extern "C" */

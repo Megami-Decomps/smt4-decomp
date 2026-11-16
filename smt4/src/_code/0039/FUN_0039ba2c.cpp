@@ -1,4 +1,3 @@
-/* NON_MATCHING: centered-text VFP scheduling differs (retail loads origin.x/y with two vldr, build merges them into one vldm); the completion getter call matches. */
 #include "shard/S1ListPanel.h"
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include "ui/UiSpriteState.h"
@@ -33,6 +32,7 @@ f32 FUN_0028f4b4(const u8 *text, s32 mode, f32 scale);
 void FUN_002bf818(UiSpriteState *sprite);
 s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 
+/* Draws the title banner and its centered caption; marks it complete once its closing animation ends. */
 void FUN_0039ba2c(TitleBannerView *banner)
 {
     Point2 origin;
@@ -40,18 +40,17 @@ void FUN_0039ba2c(TitleBannerView *banner)
     renderStackPushIndexed(g_titleScene, 3, FUN_002c5d80(1, 0));
     efctSetSpeed(1.0f);
     FUN_002bed3c();
-    FUN_002bf380(2, 28, 28, (s32)((f32)vec2GetXInt((&banner->sprite)) + origin.x), (s32)origin.y, 211);
+    FUN_002bf380(2, 28, 28, (s32)((f32)vec2GetXInt(&banner->sprite) + origin.x), (s32)origin.y, 211);
     SpriteInfo *info = asdTMTexTableEntryAt(28, 0x111B);
     u8 text[64];
     __aeabi_memcpy4(text, DAT_00404c48, 45);
-    f32 width = FUN_0028f4b4(text, 2, 0.0f);
-    f32 inset = (f32)((info->size[0] - (s32)width) / 2);
-    f32 x = (f32)(vec2GetXInt((&banner->sprite)) + info->x) + inset + origin.x;
-    f32 y = (f32)info->y + origin.y;
-    textDrawString(2, DAT_0044cdc8.color, reinterpret_cast<const char *>(text), x, y, 0.0f, 0.0f, 1.0f);
+    s32 textWidth = (s32)FUN_0028f4b4(text, 2, 0.0f);
+    f32 center = (f32)((info->size[0] - textWidth) / 2);
+    f32 x = (f32)(vec2GetXInt(&banner->sprite) + info->x) + center + origin.x;
+    textDrawString(2, DAT_0044cdc8.color, reinterpret_cast<const char *>(text), x, (f32)info->y + origin.y, 0.0f, 0.0f, 1.0f);
     renderCtxPopState(g_titleScene, 3);
     efctSetSpeed(1.0f);
-    FUN_002bf818((&banner->sprite));
+    FUN_002bf818(&banner->sprite);
     if (banner->closing && uiSpriteGetCompletionState(&banner->sprite))
         banner->complete = 1;
 }

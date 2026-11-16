@@ -7,7 +7,7 @@ extern "C" {
 void uiQuestLoadResources(void);
 void FUN_0028fe0c(u16 id, s32 mode);
 void FUN_00290d5c(s32 sound);
-s32 FUN_0029efc0(void *cursor);
+s32 resourceRunOperationIfUnblocked(void *cursor);
 void timerStart(void *timer, s32 a, s32 b);
 
 /* Switch the quest menu to a new state, remembering the old one and restarting its timer. */
@@ -29,7 +29,7 @@ void FUN_00223cf0(void)
     quest->panel.detailMode = 0;
     if (quest->state != 13) {
         uiQuestLoadResources();
-        FUN_0028fe0c(quest->list[FUN_0029efc0(quest->cursor.data) + FUN_0029efa8(quest->cursor.data)], 1);
+        FUN_0028fe0c(quest->list[resourceRunOperationIfUnblocked(quest->cursor.data) + FUN_0029efa8(quest->cursor.data)], 1);
         timerStart(quest->mainSprite, 0, 0);
         uiQuestChangeState(1);
         return;

@@ -12,7 +12,7 @@ int guestWinRequestOpen(void);
 int FUN_0029e328(...);
 int sortMenuCreate(...);
 int messageBannerInitSelection(...);
-int FUN_0029ee6c(...);
+int buttonHelpSetText(...);
 int FUN_0029efd8(...);
 int buttonHelpSetPreset(...);
 
@@ -78,9 +78,9 @@ extern int FUN_0029e02c(void);
 /* Supplied declaration required: messageBannerInitSelection. */
 extern unsigned int objectPartRunUnlessLocked(int);
 extern int FUN_0029ee54(int);
-/* Supplied declaration required: FUN_0029ee6c. */
+/* Supplied declaration required: buttonHelpSetText. */
 extern int FUN_0029efa8(int);
-extern int FUN_0029efc0(int);
+extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: FUN_002a0cc8. */
@@ -118,7 +118,7 @@ void FUN_0018a3e0(void)
     }
   }
   else {
-    temp_v3 = FUN_0029efc0(g_camp + 0x1dc);
+    temp_v3 = resourceRunOperationIfUnblocked(g_camp + 0x1dc);
     temp_v4 = FUN_0029efa8(temp_v6 + 0x1dc);
     temp_v3 = temp_v6 + (temp_v4 + temp_v3) * 8;
     temp_v5 = *(unsigned int *)(temp_v3 + 0xe3c);
@@ -160,7 +160,7 @@ void FUN_0018a3e0(void)
     return;
   }
   campUpdateCategoryHighlightColors();
-  temp_v3 = FUN_0029efc0(temp_v6 + 0x1dc);
+  temp_v3 = resourceRunOperationIfUnblocked(temp_v6 + 0x1dc);
   temp_v4 = FUN_0029efa8(temp_v6 + 0x1dc);
   temp_v3 = temp_v3 + temp_v4;
   temp_v7 = 0;
@@ -236,7 +236,7 @@ void FUN_0018a3e0(void)
     dataTable15GetUnlockedEntryId((int)*(char *)(temp_v6 + 0x98),temp_v5);
     FUN_00299900();
     temp_v6 = g_camp;
-    temp_v3 = FUN_0029efc0(g_camp + 0x1dc);
+    temp_v3 = resourceRunOperationIfUnblocked(g_camp + 0x1dc);
     temp_v4 = FUN_0029efa8(temp_v6 + 0x1dc);
     temp_v6 = temp_v6 + (temp_v4 + temp_v3) * 8;
     temp_v3 = *(int *)(temp_v6 + 0xe40);
@@ -256,7 +256,7 @@ void FUN_0018a3e0(void)
     dataTable15GetUnlockedEntryId((int)*(char *)(temp_v6 + 0x98),temp_v5);
     FUN_00299900();
     temp_v6 = g_camp;
-    temp_v3 = FUN_0029efc0(g_camp + 0x1dc);
+    temp_v3 = resourceRunOperationIfUnblocked(g_camp + 0x1dc);
     temp_v4 = FUN_0029efa8(temp_v6 + 0x1dc);
     temp_v6 = temp_v6 + (temp_v4 + temp_v3) * 8;
     temp_v3 = *(int *)(temp_v6 + 0xe40);
@@ -358,7 +358,7 @@ LAB_0018a948:
           FUN_0029e328(0xf);
           FUN_0029e328(0x11);
           FUN_0029e328(3);
-          FUN_0029ee6c(0,0x323232ff);
+          buttonHelpSetText(0,0x323232ff);
           temp_v1 = buttonHelpGetStatus();
           *(unsigned char *)(temp_v6 + 0x31) = temp_v1;
           temp_v6 = g_camp;

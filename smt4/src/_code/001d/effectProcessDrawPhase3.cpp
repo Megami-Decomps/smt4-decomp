@@ -7,7 +7,7 @@ u32 FUN_002865c0(u32, f32);
 s32 FUN_002c5d80(u32, u32);
 s32 packNibblesAndByte(u32, u32, u32);
 void taskRunPhase(s32);
-void FUN_002c18e4(RenderCtx *);
+void renderCtxResetColorScale(RenderCtx *);
 void renderCtxSelectStereoLayout(RenderCtx *);
 
 s32 effectProcessDrawPhase3(u32 job)
@@ -27,7 +27,7 @@ s32 effectProcessDrawPhase3(u32 job)
     renderStackPop(&g_titleScene->stackA);
     renderStackPop(&g_titleScene->additional.stackC);
     renderCtxApplyTransforms(g_titleScene);
-    FUN_002c18e4(g_titleScene);
+    renderCtxResetColorScale(g_titleScene);
     renderCtxSelectStereoLayout(g_titleScene);
     return 0;
 }

@@ -21,7 +21,7 @@ int FUN_00299370(...);
 int FUN_0029e328(...);
 int sortMenuCreate(...);
 int objectPartRunUnlessLocked(...);
-int FUN_0029ee6c(...);
+int buttonHelpSetText(...);
 int buttonHelpSetPreset(...);
 int FUN_002bf810(...);
 
@@ -87,9 +87,9 @@ extern int FUN_0029e0f8(void);
 /* Supplied declaration required: messageBannerInitSelection. */
 /* Supplied declaration required: objectPartRunUnlessLocked. */
 extern int FUN_0029e958(int);
-/* Supplied declaration required: FUN_0029ee6c. */
+/* Supplied declaration required: buttonHelpSetText. */
 extern int FUN_0029efa8(int);
-extern int FUN_0029efc0(int);
+extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: lightOwnerRegister. */
@@ -210,7 +210,7 @@ void FUN_0018854c(unsigned int param_1)
     FUN_0029a0e8(psVar3);
     FUN_0029a0cc(psVar3);
     statusPanelSetOpen(1);
-    temp_v4 = FUN_0029efc0(temp_v11);
+    temp_v4 = resourceRunOperationIfUnblocked(temp_v11);
     temp_v11 = FUN_0029efa8(temp_v11);
     temp_v8 = *(short *)(temp_v9 + (temp_v11 + temp_v4) * 2);
     if (param_1 != 0x14) {
@@ -282,7 +282,7 @@ void FUN_0018854c(unsigned int param_1)
       }
     }
     else if (*(char *)(temp_v5 + 0x32) != '\0') {
-      temp_v4 = FUN_0029efc0(temp_v11);
+      temp_v4 = resourceRunOperationIfUnblocked(temp_v11);
       temp_v6 = FUN_0029efa8(temp_v11);
       temp_v3 = (unsigned int)*(unsigned short *)(temp_v9 + (temp_v6 + temp_v4) * 2);
       if (param_1 != 0x14) {
@@ -329,7 +329,7 @@ void FUN_0018854c(unsigned int param_1)
     temp_v4 = 0;
     FUN_002c1658(0,1);
     if (temp_v4 != 0 || temp_v13[0] != '\0') {
-      temp_v5 = FUN_0029efc0(temp_v11);
+      temp_v5 = resourceRunOperationIfUnblocked(temp_v11);
       temp_v11 = FUN_0029efa8(temp_v11);
       psVar14 = (short *)(temp_v9 + (temp_v11 + temp_v5) * 2);
       temp_v5 = recordAcceptsStickDirection(*psVar14);
@@ -473,7 +473,7 @@ void FUN_0018854c(unsigned int param_1)
             FUN_0029e328(3);
           }
           *(unsigned char *)(temp_v5 + 0x33) = 1;
-          FUN_0029ee6c(0,0x323232ff);
+          buttonHelpSetText(0,0x323232ff);
           temp_v1 = buttonHelpGetStatus();
           *(unsigned char *)(temp_v5 + 0x31) = temp_v1;
           temp_v5 = g_camp;
@@ -486,7 +486,7 @@ void FUN_0018854c(unsigned int param_1)
           eventQueueAddUniqueIfValid(temp_v2);
           return;
         }
-        temp_v4 = FUN_0029efc0(temp_v11);
+        temp_v4 = resourceRunOperationIfUnblocked(temp_v11);
         temp_v6 = FUN_0029efa8(temp_v11);
         temp_v6 = temp_v6 + temp_v4;
         if (param_1 != 0x14) {
@@ -602,7 +602,7 @@ joined_r0x00188f3c:
         }
       }
       else {
-        temp_v4 = FUN_0029efc0(temp_v11);
+        temp_v4 = resourceRunOperationIfUnblocked(temp_v11);
         temp_v6 = FUN_0029efa8(temp_v11);
         temp_v6 = temp_v6 + temp_v4;
         if (param_1 != 0x14) {

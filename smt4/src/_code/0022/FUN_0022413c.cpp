@@ -11,7 +11,7 @@ int FUN_002ae9ec(...);
 int renderCtxCalculateStereoParallax(int);
 int FUN_002bed3c(void);
 int efctSetSpeed(void);
-int FUN_002c18e4(...);
+int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
 int VectorSignedToFloat(...);
 
@@ -38,7 +38,7 @@ extern int FUN_002865c0(unsigned int);
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int jobGetWork(void);
-/* Supplied declaration required: FUN_002c18e4. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -271,7 +271,7 @@ unsigned int FUN_0022413c(void)
     FUN_002bed3c();
     efctSetSpeed();
     renderCtxApplyTransforms(g_titleScene);
-    FUN_002c18e4(g_titleScene);
+    renderCtxResetColorScale(g_titleScene);
   }
   return 0;
 }

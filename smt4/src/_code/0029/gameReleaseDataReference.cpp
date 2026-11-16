@@ -2,7 +2,7 @@
 #include "gamedata/GameDataAccess_Smt4.h"
 
 extern "C" {
-void FUN_002958f8(s32 handle, s32 enabled);
+void statusBustUpPortraitRelease(s32 handle, s32 enabled);
 void resourceReleaseReference(void *resource);
 void jobStop(u32 job, s32 reason);
 void asdMemFree(void *memory);
@@ -16,7 +16,7 @@ void gameReleaseDataReference(void)
     }
     GameData *data = g_gameGlobals.data;
     if (data->unk12FC != 0) {
-        FUN_002958f8(data->unk12FC, 1);
+        statusBustUpPortraitRelease(data->unk12FC, 1);
     }
     if (data->unk12FE > 0 && data->resource != NULL) {
         resourceReleaseReference(data->resource);

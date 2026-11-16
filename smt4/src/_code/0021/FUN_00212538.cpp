@@ -11,7 +11,7 @@ int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
 int textFormatBuffer(...);
 int FUN_002c0944(...);
-int FUN_002c18e4(...);
+int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
 int renderCtxSelectTexture(...);
 int VectorFloatToUnsigned(...);
@@ -73,7 +73,7 @@ extern int gameGetSlotTable(void);
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c0944. */
-/* Supplied declaration required: FUN_002c18e4. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
@@ -787,7 +787,7 @@ LAB_00213b6c:
     *(unsigned char *)(temp_v1 + 0x1264) = 0;
   }
   renderCtxApplyTransforms(g_titleScene);
-  FUN_002c18e4(g_titleScene);
+  renderCtxResetColorScale(g_titleScene);
   return 0;
 }
 

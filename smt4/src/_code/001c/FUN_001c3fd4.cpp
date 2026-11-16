@@ -39,7 +39,7 @@ int FUN_0029bd4c(void);
 int FUN_0029c43c(...);
 int FUN_0029c4ac(...);
 int FUN_0029c4c8(...);
-int FUN_0029ee6c(...);
+int buttonHelpSetText(...);
 int buttonHelpGetMode(void);
 int partyMemberFindById(...);
 int devilGetRecord(void);
@@ -213,7 +213,7 @@ extern int useCounterIsFinished(void);
 /* Supplied declaration required: objectPartRunUnlessLocked. */
 extern int itemGetFlagBit1(unsigned short);
 /* Supplied declaration required: FUN_0029eb5c. */
-/* Supplied declaration required: FUN_0029ee6c. */
+/* Supplied declaration required: buttonHelpSetText. */
 extern int FUN_0029efa8(int);
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: buttonHelpGetMode. */
@@ -2016,7 +2016,7 @@ LAB_001c6d98:
             else {
               timerStart(temp_v5,4,0);
             }
-            FUN_0029ee6c(0,0x323232ff);
+            buttonHelpSetText(0,0x323232ff);
             FUN_0026c214();
             temp_v6 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x14),1);
             if (temp_v6 != 0) {
@@ -2633,7 +2633,7 @@ LAB_001c7c50:
     }
     *(unsigned int *)(temp_v24 + 0x6b8) = 0;
     __aeabi_memset4(temp_v24 + 0x67c,0x3c,0xffffffff);
-    FUN_0029ee6c(0,0x323232ff);
+    buttonHelpSetText(0,0x323232ff);
     if (*(int *)(temp_v1 + 0x20) != 0x10) {
       if (*(int *)(temp_v1 + 0x20) == 0xb) {
         temp_v14 = 1;

@@ -46,8 +46,8 @@ void FUN_002a7c80(char *destination, const char *source);
 const char *aocIndexValueOrDefault(u32 skill);
 void textFormatBuffer(char *destination, const char *format, ...);
 f32 FUN_0028f4b4(const char *text, u32 font, f32 spacing);
-void FUN_002958f8(s32 id, u32 kind);
-void FUN_002942c4(s32 id, u32 kind);
+void statusBustUpPortraitRelease(s32 id, u32 kind);
+void statusBustUpPortraitAcquire(s32 id, u32 kind);
 extern const char DAT_00402898[];
 }
 
@@ -65,7 +65,7 @@ static __forceinline void setCharacterEquipmentLabel(CharacterInfoPanel *panel, 
 static inline void clearCharacterPreview(CharacterInfoPanel *panel)
 {
     if (panel->previewId && FUN_00293f10(panel->previewId, 1))
-        FUN_002958f8(panel->previewId, 1);
+        statusBustUpPortraitRelease(panel->previewId, 1);
     panel->previewId = 0;
 }
 
@@ -125,9 +125,9 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanel *panel, const Char
     if (panel->previewId != record->demon) {
         if (record->demon) {
             if (panel->previewId && FUN_00293f10(panel->previewId, 1))
-                FUN_002958f8(panel->previewId, 1);
+                statusBustUpPortraitRelease(panel->previewId, 1);
             panel->previewId = record->demon;
-            FUN_002942c4(panel->previewId, 1);
+            statusBustUpPortraitAcquire(panel->previewId, 1);
         } else {
             clearCharacterPreview(panel);
         }

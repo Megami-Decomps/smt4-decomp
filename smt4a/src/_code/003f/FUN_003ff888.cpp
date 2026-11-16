@@ -1,4 +1,3 @@
-/* NON_MATCHING: The filter countdown stays in r1 rather than retail's saved r4, adding an index initialization. */
 #include "shard/Shard0031.h"
 #include <stddef.h>
 #include "gamedata/SaveSlotTable.h"
@@ -22,26 +21,24 @@ s32 FUN_003ff888(void)
     };
     typedef char RosterCountOffsetCheck[offsetof(RosterView, count) == 0x1CA3 ? 1 : -1];
     s8 occupiedSlots[24];
-    if (gameFlagIsSet(0x401) != 0) {
-        RosterView *roster = (RosterView *)gameGetSlotTable();
-        u8 occupiedCount = 0;
-        __aeabi_memset4(occupiedSlots, sizeof(occupiedSlots), -1);
-        s32 remaining = roster->count;
-        if (remaining != 0) {
-            const s8 *slot = roster->slots.active.slots;
-            for (; remaining > 0; --remaining, ++slot) {
-                if (*slot >= 0) {
-                    occupiedSlots[occupiedCount++] = *slot;
-                }
-            }
-            for (s32 index = 0; index < occupiedCount; ++index) {
-                SlotRecord *record = gameGetSlotRecord(occupiedSlots[index]);
-                if (record != NULL && FUN_004bd730(record) != 0 &&
-                    FUN_004bd0d8(record) == 0 && bitsAt60Test(record, 1) == 0 &&
-                    bitsAt60Test(record, 10) == 0) {
-                    return 1;
-                }
-            }
+    s32 i;
+    if (gameFlagIsSet(0x401) == 0) {
+        return 0;
+    }
+    RosterView *roster = (RosterView *)gameGetSlotTable();
+    u8 occupiedCount = 0;
+    __aeabi_memset4(occupiedSlots, sizeof(occupiedSlots), -1);
+    for (i = 0; i < roster->count; i++) {
+        if (roster->slots.active.slots[i] >= 0) {
+            occupiedSlots[occupiedCount++] = roster->slots.active.slots[i];
+        }
+    }
+    for (i = 0; i < occupiedCount; i++) {
+        SlotRecord *record = gameGetSlotRecord(occupiedSlots[i]);
+        if (record != NULL && FUN_004bd730(record) != 0 &&
+            FUN_004bd0d8(record) == 0 && bitsAt60Test(record, 1) == 0 &&
+            bitsAt60Test(record, 10) == 0) {
+            return 1;
         }
     }
     return 0;

@@ -50,7 +50,7 @@ void gfxObjectDestroy(s32 object);
 void statusCameraDestroy(void);
 void asdMdlManagerMarkDestroy(s32 manager);
 void asdMdlManagerDestroy(s32 manager);
-void FUN_002958f8(s32 id, s32 arg);
+void statusBustUpPortraitRelease(s32 id, s32 arg);
 void scrScriptProcessDestroy(s32 process);
 u8 *bufferArrayFree(u8 *buffer);
 void jobStop(s32 job, s32 arg);
@@ -109,7 +109,7 @@ void FUN_00223dcc(void)
     screen->modelManagerA = 0;
     screen->modelManagerB = 0;
     for (s32 i = 0; i < 4; i++) {
-        if (screen->pendingIds[i] != 0) FUN_002958f8((s16)screen->pendingIds[i], 1);
+        if (screen->pendingIds[i] != 0) statusBustUpPortraitRelease((s16)screen->pendingIds[i], 1);
     }
     scrScriptProcessDestroy(screen->scriptProcess);
     asdMemFree((void *)((s32)screen->scratchB));

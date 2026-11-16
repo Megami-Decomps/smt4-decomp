@@ -41,7 +41,7 @@ int FUN_00256898(...);
 int btlReflectQueueKind34(...);
 int FUN_00282820(...);
 int btlMainFindEntryByListedId(...);
-int FUN_0029cc44(int);
+int messageDismissNumericBanner(int);
 int dataTable40FindById(void);
 int jyoucyuRowApply(...);
 int FUN_00394a80(...);
@@ -152,7 +152,7 @@ extern int FUN_0028299c(int);
 /* Supplied declaration required: gameSavedFlagSet. */
 extern unsigned int FUN_0029a924(unsigned int);
 extern unsigned int FUN_0029a9d4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0029cc44. */
+/* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: dataTable40FindById. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: FUN_0033b33c. */
@@ -254,7 +254,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
   temp_v30 = 0;
   temp_v31 = 0;
   if (((*param_2 & 0x1080) != 0) && (temp_v4 = FUN_002485b8(), temp_v4 != 0)) {
-    FUN_0029cc44(1);
+    messageDismissNumericBanner(1);
   }
   FUN_003cf4f8(param_1,param_2,asStack_478);
   temp_v20 = 0;

@@ -44,7 +44,7 @@ void releaseEntriesA(InventoryHelpList *help);
 void slotPoolResetTrackedState(InventoryListView *list);
 s32 FUN_0026264c(u16 id);
 void inventoryListAppend(InventoryListView *list, const CampUnitComparison *record);
-void FUN_004cfeb0(InventoryCursorState *cursor, s32 visible, s32 count, s32 first, s32 mode, s32 enabled);
+void listScrollerInitialize(InventoryCursorState *cursor, s32 visible, s32 count, s32 first, s32 mode, s32 enabled);
 u8 gaugePercent(InventoryListView *list, u32 mode);
 void *jyoucyuGetTableEntry(u32 index);
 void FUN_004a5b20(Screen4A *work);
@@ -76,7 +76,7 @@ void FUN_004a4848(Screen4A *owner)
         }
         reinterpret_cast<InventoryTotalView *>(owner)->total = total;
         itemListSelectVariant(reinterpret_cast<ItemListSelectionOwner *>(owner), 1, 1);
-        FUN_004cfeb0(&work->cursor, 10, work->list.count, 0, 1, 1);
+        listScrollerInitialize(&work->cursor, 10, work->list.count, 0, 1, 1);
         asdDebugHookPtr(&work->cursor);
         work->cursor.enabled = 1;
         work->percentage = gaugePercent(&work->list, 1);

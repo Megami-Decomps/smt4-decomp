@@ -75,7 +75,7 @@ void FUN_0029da34(RelativeDirectory *directory, u32 entry, u16 devilId, u32 cont
 s32 gameGetFlagByte12e8(void);
 void useCounterStart(void);
 void sortMenuCreate(s32 kind, s32 mode);
-void FUN_0029ee6c(s32 text, u32 color);
+void buttonHelpSetText(s32 text, u32 color);
 void FUN_003a8aa0(BibleBrowseView *view);
 struct LayoutSlot {
     u8 unk00[8];
@@ -154,12 +154,12 @@ void FUN_003a98b8(BibleBrowseView *view)
         FUN_002a0cc8(1);
         view->mode = 3;
         view->modeTimer = 0;
-        FUN_0029ee6c(0, 0x323232FF);
+        buttonHelpSetText(0, 0x323232FF);
         FUN_002328b4();
         return;
     }
     beginStatusPanelClose();
-    FUN_0029ee6c(0, 0x323232FF);
+    buttonHelpSetText(0, 0x323232FF);
     FUN_00233240(view->animation, 1);
     FUN_002a0cc8(1);
     view->mode = 6;

@@ -7,7 +7,7 @@
 extern "C" {
 
 int FUN_0029ee54(...);
-int FUN_0029ee6c(...);
+int buttonHelpSetText(...);
 int FUN_0029efd8(...);
 int uiScrollHandleActionsOrTouch(int, unsigned int, int, int, int, int, char [4], int, int);
 int libc_bsearch(...);
@@ -35,9 +35,9 @@ extern int DAT_0043dd24; /* 0x43dd24 */
 /* Supplied declaration required: FUN_00295214. */
 extern int FUN_0029d644(int);
 /* Supplied declaration required: FUN_0029ee54. */
-/* Supplied declaration required: FUN_0029ee6c. */
+/* Supplied declaration required: buttonHelpSetText. */
 extern int FUN_0029efa8(int);
-extern int FUN_0029efc0(int);
+extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: libc_bsearch. */
@@ -111,7 +111,7 @@ unsigned int FUN_001a1f8c(void)
                 *(short *)(temp_v0 + 0x786) = *(short *)(temp_v0 + 0x786) + 1;
               } while (temp_v6 < temp_v9);
             }
-            temp_v6 = FUN_0029efc0(temp_v10);
+            temp_v6 = resourceRunOperationIfUnblocked(temp_v10);
             temp_v4 = FUN_0029efa8(temp_v10);
             temp_v1 = *(unsigned char *)(temp_v4 + temp_v6 + temp_v0 + 0x758);
             if (temp_v1 < 0x4c) goto LAB_001a2150;
@@ -128,7 +128,7 @@ unsigned int FUN_001a1f8c(void)
                 *(short *)(temp_v0 + 0x786) = *(short *)(temp_v0 + 0x786) + 1;
               } while (temp_v6 < temp_v9);
             }
-            temp_v6 = FUN_0029efc0(temp_v10);
+            temp_v6 = resourceRunOperationIfUnblocked(temp_v10);
             temp_v4 = FUN_0029efa8(temp_v10);
             temp_v1 = *(unsigned char *)(temp_v4 + temp_v6 + temp_v0 + 0x758);
             if (temp_v1 >= 0x4c) {
@@ -145,7 +145,7 @@ LAB_001a2150:
               puVar13 = puVar13 + 0xc;
             }
           }
-          FUN_0029ee6c(puVar13,0x323232ff);
+          buttonHelpSetText(puVar13,0x323232ff);
           temp_v6 = FUN_0029ee54(temp_v10);
           temp_v4 = FUN_0029d644(temp_v10);
           if (temp_v4 < temp_v6) {
@@ -171,7 +171,7 @@ LAB_001a2150:
     if (temp_v5 < temp_v10) {
       FUN_002bf818(temp_v0 + 0x6b8);
     }
-    temp_v5 = FUN_0029efc0(temp_v9);
+    temp_v5 = resourceRunOperationIfUnblocked(temp_v9);
     temp_v6 = FUN_0029efa8(temp_v9);
     temp_v7 = asdTMTexTableEntryAt(0x1e,0x48);
     puVar13 = (unsigned short *)0x0;
@@ -184,7 +184,7 @@ LAB_001a2150:
         *(unsigned char *)(temp_v0 + 0x74d) = 1;
       }
       if (*(char *)(temp_v0 + 0x74e) == '\x02') {
-        temp_v10 = FUN_0029efc0(temp_v9);
+        temp_v10 = resourceRunOperationIfUnblocked(temp_v9);
         temp_v9 = FUN_0029efa8(temp_v9);
         temp_v1 = *(unsigned char *)(temp_v9 + temp_v10 + temp_v0 + 0x758);
         if (temp_v1 < 0x4c) {
@@ -196,10 +196,10 @@ LAB_001a2150:
           libc_bsearch(puVar13,temp_v8,temp_v7,0x72,&recordCompareSignedValue);
           puVar13 = puVar13 + 0xc;
         }
-        FUN_0029ee6c(puVar13,0x323232ff);
+        buttonHelpSetText(puVar13,0x323232ff);
         break;
       }
-      temp_v10 = FUN_0029efc0(temp_v9);
+      temp_v10 = resourceRunOperationIfUnblocked(temp_v9);
       temp_v9 = FUN_0029efa8(temp_v9);
       temp_v1 = *(unsigned char *)(temp_v9 + temp_v10 + temp_v0 + 0x758);
       if (temp_v1 >= 0x4c) {
@@ -227,7 +227,7 @@ LAB_001a2150:
           if (-1 < *(int *)(temp_v0 + 0x750)) {
             temp_v10 = reinterpret_cast<int>(FUN_002a0d0c());
             pbVar12 = (unsigned char *)(temp_v10 + *(int *)(temp_v0 + 0x750));
-            temp_v10 = FUN_0029efc0(temp_v9);
+            temp_v10 = resourceRunOperationIfUnblocked(temp_v9);
             temp_v9 = FUN_0029efa8(temp_v9);
             temp_v2 = *(unsigned char *)(temp_v10 + temp_v9 + temp_v0 + 0x758) & 0x7f;
             temp_v1 = temp_v2 | (*pbVar12 & 0x80);
@@ -259,7 +259,7 @@ LAB_001a2150:
                 FUN_00220d24(1);
               }
               else {
-                FUN_0029ee6c(temp_v9 + 0x7f6,0x323232ff);
+                buttonHelpSetText(temp_v9 + 0x7f6,0x323232ff);
               }
               *(unsigned char *)(temp_v9 + 0x7f4) = 0;
             }
@@ -274,7 +274,7 @@ LAB_001a2150:
       }
       *(unsigned char *)(temp_v0 + 0x74d) = 1;
       if (*(char *)(temp_v0 + 0x74e) == '\x02') {
-        temp_v10 = FUN_0029efc0(temp_v9);
+        temp_v10 = resourceRunOperationIfUnblocked(temp_v9);
         temp_v9 = FUN_0029efa8(temp_v9);
         temp_v1 = *(unsigned char *)(temp_v9 + temp_v10 + temp_v0 + 0x758);
         if (temp_v1 < 0x4c) {
@@ -286,15 +286,15 @@ LAB_001a2150:
           libc_bsearch(puVar13,temp_v8,temp_v7,0x72,&recordCompareSignedValue);
           puVar13 = puVar13 + 0xc;
         }
-        FUN_0029ee6c(puVar13,0x323232ff);
+        buttonHelpSetText(puVar13,0x323232ff);
         break;
       }
-      temp_v10 = FUN_0029efc0(temp_v9);
+      temp_v10 = resourceRunOperationIfUnblocked(temp_v9);
       temp_v9 = FUN_0029efa8(temp_v9);
       temp_v1 = *(unsigned char *)(temp_v9 + temp_v10 + temp_v0 + 0x758);
       if (temp_v1 >= 0x4c) {
         puVar13 = (unsigned short *)0x0;
-        FUN_0029ee6c(puVar13,0x323232ff);
+        buttonHelpSetText(puVar13,0x323232ff);
         break;
       }
       temp_v7 = dataTableGet(0x38,0);
@@ -305,7 +305,7 @@ LAB_001a2150:
       libc_bsearch(puVar13,temp_v8,temp_v7,0x72,&recordCompareSignedValue);
       puVar13 = puVar13 + 0xc;
     }
-    FUN_0029ee6c(puVar13,0x323232ff);
+    buttonHelpSetText(puVar13,0x323232ff);
     break;
   case 3:
     FUN_002bf818(DAT_0043dd24 + 0x5a0);

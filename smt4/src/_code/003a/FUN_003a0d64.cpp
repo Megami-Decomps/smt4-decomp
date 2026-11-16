@@ -46,7 +46,7 @@ s32 dataTable17Sub1GetCount(u32 *ignored);
 s32 FUN_0028e9d0(u32 flag);
 void FUN_003a4210(PlaceScene *scene);
 void buttonHelpSetPreset(s32 preset);
-void FUN_0029ee6c(s32 slot, u32 color);
+void buttonHelpSetText(s32 slot, u32 color);
 
 /* Whether any flag of the place's two flag ranges is set. */
 static bool placeFlagsAnySet()
@@ -104,7 +104,7 @@ void FUN_003a0d64(PlaceScene *scene)
         scene->state = 1;
         FUN_003a4210(scene);
         buttonHelpSetPreset(0x75);
-        FUN_0029ee6c(0, 0x323232FF);
+        buttonHelpSetText(0, 0x323232FF);
     } else {
         scene->substate = 0;
         scene->state = 3;

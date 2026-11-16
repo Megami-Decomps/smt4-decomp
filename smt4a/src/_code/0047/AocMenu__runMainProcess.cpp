@@ -22,7 +22,7 @@ int countOwnerIsValidIndex(...);
 int FUN_00477d10(...);
 int flaggedValueHolderGetTotal(...);
 int sub10OwnerStart(unsigned int *);
-int FUN_004d032c(unsigned int *, int);
+int listCursorSetPosition(unsigned int *, int);
 int sendEvent100020D(void);
 int selectOwnerReset(unsigned int *);
 int _ZN13ObjBase3c2ef07vfunc0cEv(unsigned int *, unsigned int *);
@@ -73,7 +73,7 @@ extern int statusDecodeActivityState(int);
 /* Supplied declaration required: flaggedValueHolderGetTotal. */
 extern int FUN_004d0058(unsigned int *, unsigned int);
 /* Supplied declaration required: sub10OwnerStart. */
-/* Supplied declaration required: FUN_004d032c. */
+/* Supplied declaration required: listCursorSetPosition. */
 /* Supplied declaration required: sendEvent100020D. */
 extern unsigned int selectOwnerGetSelected(unsigned int *);
 /* Supplied declaration required: selectOwnerReset. */
@@ -174,7 +174,7 @@ void AocMenu::runMainProcess()
           if (temp_v0 != 0) {
             if (temp_v4 != temp_v2) {
               *(unsigned char *)((int)param_1 + 0x2e6) = 1;
-              FUN_004d032c(temp_v8,temp_v4);
+              listCursorSetPosition(temp_v8,temp_v4);
               if ((char)param_1[0xb1] != '\0' && temp_v4 != temp_v2) {
                 sendEvent100020D();
               }
@@ -197,7 +197,7 @@ void AocMenu::runMainProcess()
               break;
             }
             if (temp_v5) {
-              FUN_004d032c(temp_v8,temp_v4);
+              listCursorSetPosition(temp_v8,temp_v4);
               if ((char)param_1[0xb1] != '\0' && temp_v4 != temp_v2) {
                 sendEvent100020D();
               }

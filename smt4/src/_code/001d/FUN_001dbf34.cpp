@@ -8,7 +8,7 @@
 
 extern "C" {
 
-int FUN_002958f8(...);
+int statusBustUpPortraitRelease(...);
 int FUN_0029c4ac(...);
 int FUN_0029c4c8(...);
 int FUN_0029c4e4(void);
@@ -26,7 +26,7 @@ int btlTalkBustUpReleaseAllSlots(void);
 int btlTalkBustUpReleaseTexture(void);
 int statusDownSwitchTab(...);
 int FUN_00293f10(...);
-int FUN_002942c4(unsigned int, int);
+int statusBustUpPortraitAcquire(unsigned int, int);
 int FUN_002954bc(...);
 int btlTalkBustUpSetUnk2F4(...);
 int btlTalkBustUpSetDemonTexture(...);
@@ -57,7 +57,7 @@ extern int buttonHelpHasEnabledEntryForId(unsigned int);
 /* Supplied declaration required: statusDownSwitchTab. */
 extern int FUN_00293aac(void);
 /* Supplied declaration required: FUN_00293f10. */
-/* Supplied declaration required: FUN_002942c4. */
+/* Supplied declaration required: statusBustUpPortraitAcquire. */
 /* Supplied declaration required: FUN_002954bc. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
@@ -65,7 +65,7 @@ extern int btlTalkBustUpGetValue(void);
 extern int FUN_00295618(void);
 extern int FUN_0029563c(void);
 /* Supplied declaration required: textEncodeFontSlot. */
-/* Supplied declaration required: FUN_002958f8. */
+/* Supplied declaration required: statusBustUpPortraitRelease. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: gameGlobalsSetSelected. */
 /* Supplied declaration required: FUN_0029bed8. */
@@ -243,7 +243,7 @@ unsigned int FUN_001dbf34(int param_1)
               statusDownSwitchTab(0);
               FUN_0029e874(0);
               temp_v6 = FUN_00262f78();
-              FUN_002942c4(temp_v6,1);
+              statusBustUpPortraitAcquire(temp_v6,1);
               unitRecalculateEffectiveStats(temp_v3);
               objectFlagsClear(temp_v3,0x220);
               FUN_002954bc(temp_v3);
@@ -373,7 +373,7 @@ LAB_001dc504:
       *(unsigned int *)(param_1 + 0xd38) = 10;
     }
     temp_v5 = FUN_00262f78();
-    FUN_002958f8(temp_v5,1);
+    statusBustUpPortraitRelease(temp_v5,1);
     gameGlobalsSetSelected(0);
     statusDownSwitchTab(0);
     FUN_0026d654(1);

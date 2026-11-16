@@ -15,7 +15,7 @@ int renderCtxCalculateStereoParallax(...);
 int textDrawString(...);
 int textFormatBuffer(...);
 int efctSetSpeed(void);
-int FUN_002c18e4(...);
+int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
 int renderCtxSelectTexture(...);
 int renderCtxSelectStereoLayout(int);
@@ -59,7 +59,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: textFormatBuffer. */
 
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_002c18e4. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
@@ -232,7 +232,7 @@ int FUN_001b72e0(unsigned int job)
         *(unsigned char *)(temp_v1 + 0x12c4) = 0;
       }
       renderCtxApplyTransforms(g_titleScene);
-      FUN_002c18e4(g_titleScene);
+      renderCtxResetColorScale(g_titleScene);
       return 0;
     }
   }

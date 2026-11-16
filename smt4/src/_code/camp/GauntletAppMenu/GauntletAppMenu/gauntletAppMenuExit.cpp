@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c18e4(u32 handle);
+int renderCtxResetColorScale(u32 handle);
 int renderCtxApplyTransforms(u32 handle);
 int renderCtxSelectTexture(u32 handle, int arg);
 int FUN_0033149c(GauntletAppMenuWork *menu);
@@ -19,7 +19,7 @@ u32 gauntletAppMenuExit(void)
     renderCtxSelectTexture(g_titleScene, 0);
     FUN_0033149c(menu);
     renderCtxApplyTransforms(g_titleScene);
-    FUN_002c18e4(g_titleScene);
+    renderCtxResetColorScale(g_titleScene);
     return 0;
 }
 

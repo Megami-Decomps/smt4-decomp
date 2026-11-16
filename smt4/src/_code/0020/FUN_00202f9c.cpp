@@ -39,7 +39,7 @@ int FUN_002108c0(int arg0, u32 arg1);
 int msgWindowReset(void);
 int messageMainSetEnabled(int arg);
 int gameGlobalsSetSelected(int arg);
-int FUN_0029ee6c(int arg0, int color);
+int buttonHelpSetText(int arg0, int color);
 void scrScriptProcessDestroy(ScriptResource *resource);
 int ifTouchRegionRemove(void);
 int jobStop(void *context, int arg);
@@ -57,7 +57,7 @@ void FUN_00202f9c(void)
         ifTouchRegionRemove();
         ifTouchRegionRemove();
     }
-    FUN_0029ee6c(0, 0x323232ff);
+    buttonHelpSetText(0, 0x323232ff);
     state2 = g_saveLoadUIFlags.state;
     i = 0;
     do {

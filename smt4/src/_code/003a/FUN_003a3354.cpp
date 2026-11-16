@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_0029cc44(...);
+int messageDismissNumericBanner(...);
 
 int scrRunOpcodesStub(...);
 int shopSelectEntryStart(...);
@@ -18,7 +18,7 @@ int pointConvertToFloat(...);
 int FUN_00233240(unsigned int *, int);
 int messageMainFinishWindow(void);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
-int FUN_0029ee6c(...);
+int buttonHelpSetText(...);
 int FUN_002bf818(...);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -45,8 +45,8 @@ extern int messageWindowIsState1(void);
 /* Supplied declaration required: messageMainFinishWindow. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int messageMainGetChoiceResult(void);
-/* Supplied declaration required: FUN_0029cc44. */
-/* Supplied declaration required: FUN_0029ee6c. */
+/* Supplied declaration required: messageDismissNumericBanner. */
+/* Supplied declaration required: buttonHelpSetText. */
 extern unsigned int vec2GetYInt(unsigned int *);
 extern unsigned int vec2GetXInt(unsigned int *);
 /* Supplied declaration required: FUN_002bf818. */
@@ -100,12 +100,12 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
         if (temp_v3 != 0) {
           temp_v3 = messageTargetGetValue();
           temp_v3 = dataTable17Sub0GetRecord(&temp_v4,param_1[temp_v3 + 0x574b] + 4);
-          FUN_0029ee6c(temp_v3 + 0x40,0x323232ff);
+          buttonHelpSetText(temp_v3 + 0x40,0x323232ff);
         }
         temp_v3 = FUN_00290e78();
         if (temp_v3 != 0) {
           messageMainFinishWindow();
-          FUN_0029ee6c(0,0x323232ff);
+          buttonHelpSetText(0,0x323232ff);
           temp_v3 = messageMainGetChoiceResult();
           if (temp_v3 != -1) {
             param_1[0x218] = param_1[temp_v3 + 0x574b];
@@ -143,12 +143,12 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
       if (temp_v3 != 0) {
         temp_v3 = messageTargetGetValue();
         temp_v3 = dataTable17Sub0GetRecord(&temp_v4,param_1[temp_v3 + 0x574b]);
-        FUN_0029ee6c(temp_v3 + 0x40,0x323232ff);
+        buttonHelpSetText(temp_v3 + 0x40,0x323232ff);
       }
       temp_v3 = FUN_00290e78();
       if (temp_v3 != 0) {
         messageMainFinishWindow();
-        FUN_0029ee6c(0,0x323232ff);
+        buttonHelpSetText(0,0x323232ff);
         temp_v3 = messageMainGetChoiceResult();
         if (temp_v3 != -1) {
           temp_v0 = param_1[temp_v3 + 0x574b];
@@ -201,7 +201,7 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
           FUN_00230234(param_1);
           return;
         }
-        FUN_0029cc44(1);
+        messageDismissNumericBanner(1);
         param_1[1] = 0xc;
         param_1[2] = 0;
       }

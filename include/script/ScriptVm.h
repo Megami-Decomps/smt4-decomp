@@ -80,6 +80,15 @@ static void scriptVmPush(ScriptVmProcess *process, u8 tag, u32 value)
     process->depth++;
 }
 
+/* Pushes a float value (tag SCRIPT_VM_TAG_FLOAT). Plain static like scriptVmPush; the f32
+ * parameter (rather than its bits) gives retail's register order in the float opcodes. */
+static void scriptVmPushFloat(ScriptVmProcess *process, f32 value)
+{
+    process->tags[process->depth] = SCRIPT_VM_TAG_FLOAT;
+    process->values[process->depth].f = value;
+    process->depth++;
+}
+
 typedef char ScriptVmProcessLayout[
     offsetof(ScriptVmProcess, pc) == 0x18 && offsetof(ScriptVmProcess, tags) == 0x20 &&
     offsetof(ScriptVmProcess, values) == 0x3c && offsetof(ScriptVmProcess, tables.functions) == 0xb4 &&

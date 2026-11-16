@@ -1,55 +1,46 @@
-/* NON_MATCHING: temporary retrieved clock and copied working date-time occupy reversed eight-byte stack slots. */
-#include "common.h"
+/* NON_MATCHING: written like clockGetSecondsSinceStart; only the stack slots of the returned date-time temporary and its copy are swapped (retail: temporary at sp, copy at sp+8). */
+#include "gamedata/GameData.h"
 
-// Private views of the date-time value and the referenced game-data records.
-namespace {
-
-struct DateTimeView {
-    u32 unk00; // 0x00
-    u32 unk04; // 0x04
+/* The small game data block viewed whole: the counter and the recorded clock time in seconds. */
+struct GameDataSmallBlock {
+    /* 0x00 */ u16 counter;
+    /* 0x02 */ u8 unk02[2];
+    /* 0x04 */ u32 startSeconds;
+    /* 0x08 */ u32 unk08;
 };
 
-struct TimeRecordView {
-    u8 unk00[4]; // 0x00
-    s32 unk04;   // 0x04
+/* nn::fnd::DateTime: milliseconds since 2000-01-01. */
+struct NnDateTime {
+    s64 value;
 };
-
-struct GameDataBlocksView {
-    u8 unk00[12];         // 0x00
-    TimeRecordView* unk0C; // 0x0C
-};
-
-}
 
 extern "C" {
-extern GameDataBlocksView g_gameDataBlocks;
-
-void FUN_002c567c(DateTimeView* result);
-s32 nn_fnd_DateTime_GetDay(const DateTimeView* dateTime);
-s32 nn_fnd_DateTime_GetMonth(const DateTimeView* dateTime);
-s32 nn_fnd_DateTime_GetYear(const DateTimeView* dateTime);
+extern GameDataBlocks g_gameDataBlocks;
+NnDateTime FUN_002c567c(void);
+s32 nn_fnd_DateTime_GetDay(const NnDateTime *dateTime);
+s32 nn_fnd_DateTime_GetMonth(const NnDateTime *dateTime);
+s32 nn_fnd_DateTime_GetYear(const NnDateTime *dateTime);
 s32 nn_fnd_DateTime_DateToDays(s32 year, s32 month, s32 day);
-s32 FUN_003e0c80(const DateTimeView* dateTime);
-s32 FUN_003e0ce8(const DateTimeView* dateTime);
-s32 FUN_003e0d54(const DateTimeView* dateTime);
+s32 FUN_003e0c80(const NnDateTime *dateTime);
+s32 FUN_003e0ce8(const NnDateTime *dateTime);
+s32 FUN_003e0d54(const NnDateTime *dateTime);
 
-// Convert the retrieved date-time to seconds and store it in the game-data record.
+/* Records the current clock time, in seconds, as the start time. */
 void FUN_0026b4cc(void)
 {
-    DateTimeView retrieved;
-    FUN_002c567c(&retrieved);
-    DateTimeView dateTime = retrieved;
+    NnDateTime now;
+    u32 seconds;
 
-    s32 day = nn_fnd_DateTime_GetDay(&dateTime);
-    s32 month = nn_fnd_DateTime_GetMonth(&dateTime);
-    s32 year = nn_fnd_DateTime_GetYear(&dateTime);
-    s32 hours = nn_fnd_DateTime_DateToDays(year, month, day) * 24;
-    hours += FUN_003e0c80(&dateTime);
-    s32 minutes = hours * 60;
-    minutes += FUN_003e0ce8(&dateTime);
-    s32 seconds = minutes * 60;
-    seconds += FUN_003e0d54(&dateTime);
+    now = FUN_002c567c();
+    seconds = nn_fnd_DateTime_DateToDays(nn_fnd_DateTime_GetYear(&now), nn_fnd_DateTime_GetMonth(&now),
+                                         nn_fnd_DateTime_GetDay(&now));
+    seconds *= 24;
+    seconds += FUN_003e0c80(&now);
+    seconds *= 60;
+    seconds += FUN_003e0ce8(&now);
+    seconds *= 60;
+    seconds += FUN_003e0d54(&now);
+    ((GameDataSmallBlock *)g_gameDataBlocks.smallBlock)->startSeconds = seconds;
+}
 
-    g_gameDataBlocks.unk0C->unk04 = seconds;
-}
-}
+} /* extern "C" */

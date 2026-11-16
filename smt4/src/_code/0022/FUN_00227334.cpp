@@ -37,7 +37,7 @@ struct DevilRecord {
 extern "C" {
 extern BtlUi g_btlUi;
 
-s32 FUN_0029efc0(const u8 *object);
+s32 resourceRunOperationIfUnblocked(const u8 *object);
 s32 gameGetSupportUnitData(void);
 SupportUnitEntry *supportUnitGetEntry(s32 kind, u32 index);
 DevilRecord *devilGetRecord(s32 id);
@@ -68,7 +68,7 @@ void FUN_00227334(u32 unused, u32 kind, s32 value, s32 isSupport, s32 devilId, s
     case 1:
         if (isSupport != 0) {
             u8 *selection = work->supportSelection;
-            s32 count = FUN_0029efc0(selection) + FUN_0029efa8(selection);
+            s32 count = resourceRunOperationIfUnblocked(selection) + FUN_0029efa8(selection);
             if (count == 0) {
                 textFormatBuffer(label, "Attack");
                 tableId = playerGetMappedCategory();

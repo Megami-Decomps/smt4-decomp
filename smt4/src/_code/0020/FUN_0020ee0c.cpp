@@ -8,7 +8,7 @@
 extern "C" {
 extern BtlEffectGlobals g_btlEffect;
 extern RenderCtx *g_titleScene;
-void FUN_002c18e4(RenderCtx *context);
+void renderCtxResetColorScale(RenderCtx *context);
 
 u32 FUN_0020ee0c(u32 process)
 {
@@ -31,7 +31,7 @@ u32 FUN_0020ee0c(u32 process)
         effect->object->methods->draw(effect->object);
         renderStackPop(&g_titleScene->additional.stackC);
         renderCtxApplyTransforms(g_titleScene);
-        FUN_002c18e4(g_titleScene);
+        renderCtxResetColorScale(g_titleScene);
     }
     return 0;
 }

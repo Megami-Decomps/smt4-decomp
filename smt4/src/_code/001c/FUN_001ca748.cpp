@@ -24,7 +24,7 @@ int useCounterStart(void);
 int FUN_0029e328(...);
 int sortMenuCreate(...);
 int objectPartRunUnlessLocked(...);
-int FUN_0029ee6c(...);
+int buttonHelpSetText(...);
 int FUN_002a0cc8(...);
 int FUN_002b7bca(...);
 int eventQueueAddUnique(...);
@@ -40,7 +40,7 @@ int flaggedEntryGetValueA(...);
 int FUN_0029eb5c(...);
 int FUN_0029ee54(...);
 int FUN_0029efa8(...);
-int FUN_0029efc0(...);
+int resourceRunOperationIfUnblocked(...);
 int FUN_0029efd8(...);
 int uiScrollHandleActionsOrTouch(...);
 int FUN_0029f848(...);
@@ -99,13 +99,13 @@ extern int useCounterIsFinished(void);
 /* Supplied declaration required: FUN_0029e328. */
 /* Supplied declaration required: sortMenuCreate. */
 /* Supplied declaration required: objectPartRunUnlessLocked. */
-extern short FUN_0029e93c(int);
+extern short resourceRunEmbeddedOperationIfUnblocked(int);
 extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: FUN_0029eb5c. */
 /* Supplied declaration required: FUN_0029ee54. */
-/* Supplied declaration required: FUN_0029ee6c. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: FUN_0029efa8. */
-/* Supplied declaration required: FUN_0029efc0. */
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: FUN_0029f848. */
@@ -440,13 +440,13 @@ LAB_001cabe4:
         temp_v6 = 0;
         FUN_002c1658(0,1);
         if ((temp_v6 != 0) || (*(char *)(temp_v2 + 0x2388) != '\0')) {
-          temp_v6 = FUN_0029efc0(temp_v15);
+          temp_v6 = resourceRunOperationIfUnblocked(temp_v15);
           temp_v8 = FUN_0029efa8(temp_v15);
           temp_v10 = FUN_0029ee54(temp_v15);
           if ((temp_v6 + temp_v8) - temp_v10 != -1) {
-            FUN_0029efc0();
+            resourceRunOperationIfUnblocked();
             FUN_0029efa8(temp_v15);
-            temp_v6 = FUN_0029efc0(temp_v15);
+            temp_v6 = resourceRunOperationIfUnblocked(temp_v15);
             temp_v15 = FUN_0029efa8(temp_v15);
             *(int *)(temp_v2 + 0x53c) = temp_v15 + temp_v6;
             temp_v7 = FUN_002bf810(0x100016d);
@@ -835,7 +835,7 @@ LAB_001cb104:
     FUN_002bf818(temp_v2 + 0x140);
     if (*(char *)(temp_v2 + 0x412) == '\0') {
       temp_v9 = temp_v2 + 0x223c;
-      temp_v6 = FUN_0029efc0();
+      temp_v6 = resourceRunOperationIfUnblocked();
       temp_v15 = FUN_0029efa8(temp_v9);
       temp_v8 = objectPartRunUnlessLocked(temp_v9);
       temp_v10 = asdTMTexTableEntryAt(0x1a,0x406);
@@ -903,10 +903,10 @@ LAB_001cbbac:
               temp_v6 = temp_v9;
               FUN_0029efd8(temp_v9,1);
               if (temp_v6 != 0) {
-                temp_v4 = FUN_0029efc0(temp_v9);
+                temp_v4 = resourceRunOperationIfUnblocked(temp_v9);
                 temp_v5 = FUN_0029efa8(temp_v9);
                 *(short *)(temp_v2 + 0x2236) = temp_v5 + temp_v4;
-                temp_v4 = FUN_0029e93c(temp_v9);
+                temp_v4 = resourceRunEmbeddedOperationIfUnblocked(temp_v9);
                 temp_v5 = objectPartRunUnlessLocked(temp_v9);
                 *(short *)(temp_v2 + 0x2234) = temp_v5 + temp_v4;
                 *(unsigned char *)(temp_v2 + 0x410) = 1;
@@ -922,20 +922,20 @@ LAB_001cbbac:
             }
           }
           *(unsigned char *)(temp_v2 + 0x481) = 1;
-          temp_v4 = FUN_0029efc0(temp_v9);
+          temp_v4 = resourceRunOperationIfUnblocked(temp_v9);
           temp_v5 = FUN_0029efa8(temp_v9);
           *(short *)(temp_v2 + 0x2236) = temp_v5 + temp_v4;
-          temp_v4 = FUN_0029e93c(temp_v9);
+          temp_v4 = resourceRunEmbeddedOperationIfUnblocked(temp_v9);
           temp_v5 = objectPartRunUnlessLocked(temp_v9);
           *(short *)(temp_v2 + 0x2234) = temp_v5 + temp_v4;
           break;
         }
       }
       *(unsigned char *)(temp_v2 + 0x481) = 0xff;
-      temp_v4 = FUN_0029efc0(temp_v9);
+      temp_v4 = resourceRunOperationIfUnblocked(temp_v9);
       temp_v5 = FUN_0029efa8(temp_v9);
       *(short *)(temp_v2 + 0x2236) = temp_v5 + temp_v4;
-      temp_v4 = FUN_0029e93c(temp_v9);
+      temp_v4 = resourceRunEmbeddedOperationIfUnblocked(temp_v9);
       temp_v5 = objectPartRunUnlessLocked(temp_v9);
       *(short *)(temp_v2 + 0x2234) = temp_v5 + temp_v4;
     }
@@ -973,7 +973,7 @@ LAB_001cbbac:
   case 0x15:
     if (*(char *)(temp_v2 + 0x412) == '\0') {
       temp_v6 = temp_v2 + 0x22a8;
-      temp_v15 = FUN_0029efc0();
+      temp_v15 = resourceRunOperationIfUnblocked();
       if ((*(char *)(temp_v2 + 0x411) == '\0') && (temp_v8 = FUN_00288498(), temp_v8 != 0)) {
         temp_v8 = 4;
         FUN_002c1658(4,0);
@@ -1007,7 +1007,7 @@ LAB_001cbbac:
       uiScrollHandleActionsOrTouch(temp_v6,temp_v7,0,(int)*(short *)(temp_v2 + 0x474),(int)*(short *)(temp_v2 + 0x476),
                    (int)*(short *)(temp_v2 + 0x478),temp_v2 + 0x2388,0,0);
       if (temp_v8 != 0) {
-        temp_v6 = FUN_0029efc0(temp_v6);
+        temp_v6 = resourceRunOperationIfUnblocked(temp_v6);
         if (temp_v6 != temp_v15) {
           temp_v7 = 0x100016c;
           eventQueueAddUniqueIfValid(temp_v7);
@@ -1017,20 +1017,20 @@ LAB_001cbbac:
         temp_v8 = temp_v6;
         FUN_0029efd8(temp_v6,0);
         if ((temp_v8 != 0) && (temp_v8 = FUN_0029ee54(temp_v6), temp_v8 >= 9)) {
-          FUN_0029efc0(temp_v6);
+          resourceRunOperationIfUnblocked(temp_v6);
           temp_v8 = FUN_0029efa8(temp_v6);
           if ((temp_v8 != 7) && (temp_v8 = FUN_0029efa8(temp_v6), temp_v8 != 0)) {
             eventQueueAddUniqueIfValid(0x100016c);
           }
-          temp_v8 = FUN_0029efc0(temp_v6);
+          temp_v8 = resourceRunOperationIfUnblocked(temp_v6);
           while ((temp_v8 == temp_v15 &&
-                 ((temp_v8 = FUN_0029efc0(temp_v6), temp_v8 != 0 ||
+                 ((temp_v8 = resourceRunOperationIfUnblocked(temp_v6), temp_v8 != 0 ||
                   (temp_v8 = FUN_0029efa8(temp_v6), temp_v8 != 0))))) {
-            temp_v8 = FUN_0029efc0(temp_v6);
+            temp_v8 = resourceRunOperationIfUnblocked(temp_v6);
             temp_v10 = FUN_0029ee54(temp_v6);
             if ((temp_v8 == temp_v10 - 8) && (temp_v8 = FUN_0029efa8(temp_v6), temp_v8 == 7)) break;
             FUN_0029efd8(temp_v6,0);
-            temp_v8 = FUN_0029efc0(temp_v6);
+            temp_v8 = resourceRunOperationIfUnblocked(temp_v6);
           }
         }
       }
@@ -1099,7 +1099,7 @@ LAB_001cbbac:
     if (temp_v6 == 0) {
       messageMainFinishWindow();
     }
-    FUN_0029ee6c(0,0x323232ff);
+    buttonHelpSetText(0,0x323232ff);
     FUN_0029bd4c();
     *(unsigned int *)(temp_v2 + 0x2384) = 0;
     break;
@@ -1123,7 +1123,7 @@ LAB_001cbbac:
           if (temp_v6 == 0) {
             messageMainFinishWindow();
           }
-          FUN_0029ee6c(0,0x323232ff);
+          buttonHelpSetText(0,0x323232ff);
           FUN_0029bd4c();
           break;
         }
@@ -1148,7 +1148,7 @@ LAB_001cbbac:
         if (temp_v6 == 0) {
           messageMainFinishWindow();
         }
-        FUN_0029ee6c(0,0x323232ff);
+        buttonHelpSetText(0,0x323232ff);
         FUN_0029bd4c();
       }
     }
@@ -1211,7 +1211,7 @@ LAB_001cbbac:
     if (temp_v6 == 0) {
       messageMainFinishWindow();
     }
-    FUN_0029ee6c(0,0x323232ff);
+    buttonHelpSetText(0,0x323232ff);
     FUN_0029bd4c();
   }
   temp_v17 = *(char *)(temp_v2 + 0x410) == '\0';
@@ -1243,7 +1243,7 @@ LAB_001cbbac:
      ((temp_v6 == 0xf || temp_v6 == 4 ||
       ((temp_v6 == 9 || temp_v6 == 7 || ((temp_v6 == 8 || temp_v6 == 0xc) || temp_v6 == 0xd)))))) {
     temp_v6 = temp_v2 + 0x4d4;
-    temp_v15 = FUN_0029efc0();
+    temp_v15 = resourceRunOperationIfUnblocked();
     temp_v8 = FUN_0029efa8(temp_v6);
     temp_v15 = temp_v15 + temp_v8;
     if (*(int *)(temp_v2 + 0x400) == 6) {
@@ -1267,7 +1267,7 @@ LAB_001cc6b4:
     }
     if (temp_v17) {
       textFormatBuffer(temp_v18,&LAB_001cc740);
-      FUN_0029ee6c(temp_v18,0x323232ff);
+      buttonHelpSetText(temp_v18,0x323232ff);
     }
     else {
       buttonHelpShowSkillDetails(temp_v11);
@@ -1275,7 +1275,7 @@ LAB_001cc6b4:
   }
   if (*(int *)(temp_v2 + 0x400) == 0x10) {
     temp_v13 = 0;
-    temp_v6 = FUN_0029efc0();
+    temp_v6 = resourceRunOperationIfUnblocked();
     temp_v15 = FUN_0029efa8(temp_v2 + 0x564);
     temp_v15 = temp_v15 + temp_v6;
     if (temp_v15 == 0) {
@@ -1304,22 +1304,22 @@ LAB_001cc6b4:
   if (*(int *)(temp_v2 + 0x400) == 0x11) {
     if (temp_v17) {
       textFormatBuffer(temp_v18,&LAB_001cc740);
-      FUN_0029ee6c(temp_v18,0x323232ff);
+      buttonHelpSetText(temp_v18,0x323232ff);
     }
     else {
-      temp_v6 = FUN_0029efc0();
+      temp_v6 = resourceRunOperationIfUnblocked();
       temp_v15 = FUN_0029efa8(temp_v2 + 0xdcc);
       temp_v11 = (unsigned int)*(unsigned short *)(temp_v2 + (temp_v15 + temp_v6) * 4 + 0x5ca);
       if (temp_v11 != 0) {
         temp_v11 = (unsigned int)dataTable0cSub1GetText((unsigned short)temp_v11);
         textFormatBuffer(temp_v18,&LAB_001cca08,temp_v11);
-        FUN_0029ee6c(temp_v18,0x323232ff);
+        buttonHelpSetText(temp_v18,0x323232ff);
       }
     }
   }
   if (*(int *)(temp_v2 + 0x400) == 0x13) {
     temp_v6 = objectPartRunUnlessLocked();
-    temp_v15 = FUN_0029efc0(temp_v2 + 0x223c);
+    temp_v15 = resourceRunOperationIfUnblocked(temp_v2 + 0x223c);
     temp_v8 = FUN_0029efa8(temp_v2 + 0x223c);
     temp_v6 = temp_v2 + (temp_v6 + (temp_v8 + temp_v15) * 4) * 4;
     temp_v4 = *(short *)(temp_v6 + 0xe32);
@@ -1336,7 +1336,7 @@ LAB_001cc6b4:
       textFormatBuffer(temp_v18,&LAB_001cca0c,temp_v12,temp_v7);
       puVar16 = temp_v18;
     }
-    FUN_0029ee6c(puVar16,0x323232ff);
+    buttonHelpSetText(puVar16,0x323232ff);
   }
   temp_v6 = *(int *)(temp_v2 + 0x400);
   if (((temp_v6 != 0x16 && temp_v6 != 0x17) && (temp_v6 != 0x18 && temp_v6 != 0x19)) &&
@@ -1371,7 +1371,7 @@ LAB_001cc6b4:
       }
     }
   }
-  FUN_0029ee6c(0,0x323232ff);
+  buttonHelpSetText(0,0x323232ff);
   *(int *)(temp_v2 + 0x40c) = *(int *)(temp_v2 + 0x40c) + 1;
   return 0;
 }

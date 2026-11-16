@@ -1,4 +1,3 @@
-/* NON_MATCHING: first two 64-bit mask tests use different AND temporaries, omitting retail's r9 save and four frame bytes. */
 #include "common.h"
 #include "battle/BtlMainAccess.h"
 #include "shard/W5_W5Match7_BattleMask.h"
@@ -17,15 +16,13 @@ BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
 u32 btlScriptGetEncodedCombatantStat()
 {
     u32 id = scrGetArg(0);
-    s32 stat = scrGetArg(1);
-    s32 choice = scrGetArg(2);
-    u32 first;
-    u32 count;
-    FUN_00301a08(btlResolveEntryChoice(choice), reinterpret_cast<s32 *>(&first), reinterpret_cast<s32 *>(&count));
-    for (s32 index = first; index < static_cast<s32>(first + count); ++index) {
-        BtlMainStateA *battle = btlGetMainState();
-        BtlCombatantEntryA *entry = &battle->entries[index];
-                if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
+    u32 stat = scrGetArg(1);
+    s32 choice = btlResolveEntryChoice(scrGetArg(2));
+    s32 first, count;
+    FUN_00301a08(choice, &first, &count);
+    for (s32 index = first; index < first + count; ++index) {
+        BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
+        if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
             (entry->flags & g_btlCandidateMasks.required) != 0 &&
             (entry->flags & g_btlCandidateMasks.excluded) == 0 &&
             entry->id == id && (entry->encodedStats.values[stat] >> 10) == 1) {

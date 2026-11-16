@@ -1,4 +1,4 @@
-/* NON_MATCHING: initialization constants change registers and move into the valid-input branch, the first count reload is coalesced, and offset-bound comparison/result scheduling differ; candidate -O2. */
+/* NON_MATCHING: retail hoists the 0/1 scan constants to the entry (r8/r7) and keeps getTop's result in r0 for the setter; the cursor helpers and the count reload now match. */
 #include "shard/Shard0031.h"
 #include "sys/RuntimeObjects.h"
 #include "gamedata/GameDataAccess.h"
@@ -34,42 +34,66 @@ void recordTrackDirtyValue(FlaggedEntry *entry, u32 value);
 void flaggedEntrySetValueA(FlaggedEntry *entry, s32 value);
 void flaggedEntrySetValueB(FlaggedEntry *entry, s32 value);
 
+static s32 flaggedMenuListGetTop(FlaggedMenuList *list)
+{
+    if (list->mode == 1) {
+        return resourceRunEmbeddedOperationIfUnblocked(&list->entry);
+    }
+    return resourceRunOperationIfUnblocked(&list->entry);
+}
+
+static s32 flaggedMenuListGetPosition(FlaggedMenuList *list)
+{
+    if (list->mode == 1) {
+        return flaggedEntryGetValueB(&list->entry);
+    }
+    return flaggedEntryGetValueA(&list->entry);
+}
+
+static void flaggedMenuListSet(FlaggedMenuList *list, s32 top, s32 position)
+{
+    if (list->mode == 0) {
+        scrollOwnerSetValue(&list->entry, top);
+        flaggedEntrySetValueA(&list->entry, position);
+    }
+    if (list->mode == 1) {
+        recordTrackDirtyValue(&list->entry, top);
+        flaggedEntrySetValueB(&list->entry, position);
+    }
+}
+
+static void menuSelectionScanFind(MenuSelectionScan *scan)
+{
+    scan->selected = -1;
+    scan->selectable = 0;
+    scan->blocked = 0;
+    for (s32 i = 0; i < scan->count; ++i) {
+        s32 state = recordGetModeForId(scan->ids[i]);
+        if (state == 1 || state == 2) {
+            scan->selectable = 1;
+            scan->selected = i;
+        }
+        if (state == 6) {
+            scan->selectable = 0;
+            scan->blocked = 1;
+            scan->selected = i;
+        }
+    }
+}
+
 void menuSynchronizeFlaggedSelection(MenuSelectionScan *scan, FlaggedMenuList *list)
 {
     if (scan->first != -1 && scan->second != -1 && scan->count != -1) {
-        scan->selected = -1;
-        scan->selectable = 0;
-        scan->blocked = 0;
-        for (s32 i = 0; i < scan->count; ++i) {
-            s32 state = recordGetModeForId(scan->ids[i]);
-            if (state == 1 || state == 2) {
-                scan->selectable = 1;
-                scan->selected = i;
-            }
-            if (state == 6) {
-                scan->selectable = 0;
-                scan->blocked = 1;
-                scan->selected = i;
-            }
-        }
+        menuSelectionScanFind(scan);
     }
     if (scan->selectable != 0) {
         s32 selected = scan->selected;
-        s32 offset = list->mode == 1 ? resourceRunEmbeddedOperationIfUnblocked(&list->entry) : resourceRunOperationIfUnblocked(&list->entry);
-        if (offset + selected < list->count) {
-            s32 current = list->mode == 1 ? flaggedEntryGetValueB(&list->entry) : flaggedEntryGetValueA(&list->entry);
-            if (scan->playSound != 0 && current != selected) {
+        if (flaggedMenuListGetTop(list) + selected < list->count) {
+            s32 position = flaggedMenuListGetPosition(list);
+            if (scan->playSound != 0 && position != selected) {
                 eventQueueAddUnique(0x100020d);
             }
-            offset = list->mode == 1 ? resourceRunEmbeddedOperationIfUnblocked(&list->entry) : resourceRunOperationIfUnblocked(&list->entry);
-            if (list->mode == 0) {
-                scrollOwnerSetValue(&list->entry, offset);
-                flaggedEntrySetValueA(&list->entry, selected);
-            }
-            if (list->mode == 1) {
-                recordTrackDirtyValue(&list->entry, offset);
-                flaggedEntrySetValueB(&list->entry, selected);
-            }
+            flaggedMenuListSet(list, flaggedMenuListGetTop(list), selected);
         }
     }
 }

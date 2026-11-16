@@ -13,7 +13,7 @@ int FUN_00290994(...);
 int gameRecordCopy(...);
 int FUN_0029a17c(...);
 int FUN_0029e6f0(void);
-int FUN_0029efc0(...);
+int resourceRunOperationIfUnblocked(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int fontMeasureLineAdvance(...);
 int devilGetRecord(void);
@@ -60,7 +60,7 @@ extern int ifTouchGetSelectionModeForRegion(int);
 extern unsigned int FUN_0029dde0(void);
 /* Supplied declaration required: FUN_0029e6f0. */
 extern int FUN_0029efa8(int);
-/* Supplied declaration required: FUN_0029efc0. */
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int *gameGetSlotTable(void);
 /* Supplied declaration required: partyMemberFindById. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
@@ -187,7 +187,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
       efctSetSpeed();
     }
     temp_v18 = temp_v2 + 0x6c7c;
-    temp_v9 = FUN_0029efc0();
+    temp_v9 = resourceRunOperationIfUnblocked();
     temp_v4 = 0;
     temp_v8 = FUN_0029d644((const void *)(temp_v2 + 0x6c7c));
     if (0 < temp_v8) {
@@ -316,7 +316,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         temp_v8 = FUN_0029d644((const void *)(temp_v18));
       } while (temp_v4 < temp_v8);
     }
-    temp_v4 = FUN_0029efc0(temp_v18);
+    temp_v4 = resourceRunOperationIfUnblocked(temp_v18);
     temp_v6 = FUN_0029efa8(temp_v18);
     temp_v8 = temp_v21;
     temp_v9 = temp_v20;

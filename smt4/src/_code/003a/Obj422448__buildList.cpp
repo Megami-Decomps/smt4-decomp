@@ -66,7 +66,7 @@ Obj422448Source *table8Type5FindById(u32 id);
 u32 aocIndexValueOrDefault(u32 index);
 void recordAppendFloatEntry(void *list, Obj422448Entry *entry);
 void FUN_0022e0fc(void *list, s32 line);
-void FUN_00233730(void *holder, s32 a, s32 count, s32 b, s32 c, s32 d);
+void listScrollerInitialize(void *holder, s32 a, s32 count, s32 b, s32 c, s32 d);
 u8 gaugePercent(void *list);
 u32 jyoucyuGetTableEntry(s32 index);
 }
@@ -127,7 +127,7 @@ void Obj422448::buildList()
         }
         FUN_0022e0fc(list, line);
     }
-    FUN_00233730(self->holder, 10, (s16)self->listCount, 0, 1, 1);
+    listScrollerInitialize(self->holder, 10, (s16)self->listCount, 0, 1, 1);
     asdDebugHookPtrInt(self->holder, 1);
     self->unk02D = 1;
     BibleListPanel *&panel = self->panel;

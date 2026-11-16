@@ -22,20 +22,20 @@ struct MenuScreen {
 
 extern "C" {
 
-s32 FUN_0029efc0(SelectorState *selector);
+s32 resourceRunOperationIfUnblocked(SelectorState *selector);
 s32 FUN_0029efa8(SelectorState *selector);
-void FUN_0029ee6c(const char *text, u32 color);
+void buttonHelpSetText(const char *text, u32 color);
 
 /* Highlights the text of the entry whose id matches the currently selected id. */
 void FUN_00242000(MenuScreen *menu)
 {
-    s32 base = FUN_0029efc0(&menu->selector);
+    s32 base = resourceRunOperationIfUnblocked(&menu->selector);
     s32 offset = FUN_0029efa8(&menu->selector);
     u32 id = menu->ids[offset + base];
 
     for (u32 i = 0; i < menu->entryCount; i++) {
         if (menu->entries[i].id == id) {
-            FUN_0029ee6c(menu->entries[i].text, 0x323232FF);
+            buttonHelpSetText(menu->entries[i].text, 0x323232FF);
             return;
         }
     }

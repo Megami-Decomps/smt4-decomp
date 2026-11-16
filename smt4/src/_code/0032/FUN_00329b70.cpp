@@ -9,7 +9,7 @@ int statusCameraDestroy(void);
 int btlTalkBustUpReleaseTexture(void);
 int statusCameraSelectPreset(...);
 int resourceReleaseReference(...);
-int FUN_002958f8(...);
+int statusBustUpPortraitRelease(...);
 
 int FUN_00258170(...);
 int FUN_00258408(...);
@@ -93,7 +93,7 @@ extern unsigned int asdCameraLoadFromFile(unsigned char *);
 /* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 extern int FUN_00295618(void);
 /* Supplied declaration required: textEncodeFontSlot. */
-/* Supplied declaration required: FUN_002958f8. */
+/* Supplied declaration required: statusBustUpPortraitRelease. */
 /* Supplied declaration required: soundSlotStopById. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
@@ -524,7 +524,7 @@ LAB_0032a1a4:
       temp_v7 = 0;
       if (*(short *)(temp_v2 + 0x1e) != 0) {
         do {
-          FUN_002958f8((int)*(short *)(temp_v2 + temp_v7 * 2 + 0xe),1);
+          statusBustUpPortraitRelease((int)*(short *)(temp_v2 + temp_v7 * 2 + 0xe),1);
           temp_v10 = temp_v2 + temp_v7 * 4;
           resourceReleaseReference(*(unsigned int *)(temp_v10 + 0x28));
           *(unsigned int *)(temp_v10 + 0x28) = 0;

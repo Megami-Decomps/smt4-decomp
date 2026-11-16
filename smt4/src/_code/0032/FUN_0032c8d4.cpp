@@ -101,7 +101,7 @@ unsigned int FUN_0032c8d4(void)
       }
       if (!bVar22 || uVar20 == 3) {
         uVar18 = FUN_00241a64(uVar8);
-        FUN_0029ee6c(uVar18,0x323232ff);
+        buttonHelpSetText(uVar18,0x323232ff);
         if (uVar8 == 0x2d) {
           FUN_00253fe8(0xa11923ff,1,0x12,0x15);
         }
@@ -228,7 +228,7 @@ unsigned int FUN_0032c8d4(void)
       puVar17[7] = 0;
       puVar17[5] = 0;
     }
-    FUN_0029ee6c(0,0x323232ff);
+    buttonHelpSetText(0,0x323232ff);
     if (puVar2[9] == 0x1f) break;
     dataTable15GetUnlockedEntryId((int)*(char *)(puVar2 + 0x26),
                  (int)*(char *)((int)puVar2 + *(char *)(puVar2 + 0x26) + 0x9b));
@@ -448,7 +448,7 @@ code_r0x0032d518:
       }
     }
     else {
-      iVar7 = FUN_0029efc0(puVar2 + 0x77);
+      iVar7 = resourceRunOperationIfUnblocked(puVar2 + 0x77);
       iVar19 = FUN_0029efa8(puVar2 + 0x77);
       FUN_0028a924(6,puVar2[(iVar19 + iVar7) * 2 + 0x38f],puVar2[(iVar19 + iVar7) * 2 + 0x390]);
       FUN_0028a368(1);
@@ -631,7 +631,7 @@ code_r0x0032d518:
   case 0xf:
     iVar7 = FUN_0028a318();
     if (iVar7 != 0) {
-      iVar7 = FUN_0029efc0(puVar17 + 0x77);
+      iVar7 = resourceRunOperationIfUnblocked(puVar17 + 0x77);
       iVar19 = FUN_0029efa8(puVar17 + 0x77);
       iVar7 = FUN_002987d8(puVar17[(iVar19 + iVar7) * 2 + 0x390],
                            puVar17[(iVar19 + iVar7) * 2 + 0x38f]);
@@ -676,7 +676,7 @@ code_r0x0032d518:
       }
       break;
     }
-    iVar7 = FUN_0029efc0(DAT_0043da90 + 0x90);
+    iVar7 = resourceRunOperationIfUnblocked(DAT_0043da90 + 0x90);
     iVar19 = FUN_0029efa8(puVar17 + 0x90);
     acStack_634[0] = '\0';
     uVar18 = asdTMTexTableEntryAt(0x1d,0x56d);
@@ -738,7 +738,7 @@ code_r0x0032d518:
             FUN_0029e328(0xf);
             FUN_0029e328(0x11);
             FUN_0029e328(3);
-            FUN_0029ee6c(0,0x323232ff);
+            buttonHelpSetText(0,0x323232ff);
             uVar4 = FUN_002b898c();
             *(unsigned char *)((int)puVar17 + 0x31) = uVar4;
             puVar17 = DAT_0043da90;
@@ -763,7 +763,7 @@ code_r0x0032d518:
   case 0x11:
     iVar7 = FUN_0028a318();
     if (iVar7 != 0) {
-      FUN_0029efc0(puVar17 + 0x77);
+      resourceRunOperationIfUnblocked(puVar17 + 0x77);
       FUN_0029efa8(puVar17 + 0x77);
       iVar7 = FUN_0028d1f4(puVar17[0xb]);
       piVar10 = (int *)FUN_002a8764();

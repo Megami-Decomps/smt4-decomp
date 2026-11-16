@@ -22,7 +22,7 @@ int nodeGroupSetScale(...);
 int nodeOwnerSetTranslations(...);
 int FUN_00293f10(...);
 int aocHandleButtons(...);
-int FUN_002942c4(int, int);
+int statusBustUpPortraitAcquire(int, int);
 int playerModelLoadPart(...);
 int FUN_002945a4(...);
 int playerModelListCreate(void);
@@ -32,7 +32,7 @@ int statusCameraSelectPreset(int);
 int resourceReleaseReference(void);
 int FUN_00294fe0(...);
 int FUN_002950e8(...);
-int FUN_002958f8(...);
+int statusBustUpPortraitRelease(...);
 int FUN_00297684(...);
 int FUN_0029ae60(int);
 int lmapSceneSetUnk134(int);
@@ -91,7 +91,7 @@ extern int objSlotsAllEmpty(unsigned int);
 /* Supplied declaration required: FUN_00293f10. */
 /* Supplied declaration required: aocHandleButtons. */
 extern unsigned int FUN_00294090(int, unsigned int);
-/* Supplied declaration required: FUN_002942c4. */
+/* Supplied declaration required: statusBustUpPortraitAcquire. */
 /* Supplied declaration required: playerModelLoadPart. */
 /* Supplied declaration required: FUN_002945a4. */
 /* Supplied declaration required: playerModelListCreate. */
@@ -103,7 +103,7 @@ extern unsigned int *_ZN9Obj4206e8C1Ev(void);
 /* Supplied declaration required: FUN_00294fe0. */
 extern int nkdwHeaderParse(unsigned int);
 /* Supplied declaration required: FUN_002950e8. */
-/* Supplied declaration required: FUN_002958f8. */
+/* Supplied declaration required: statusBustUpPortraitRelease. */
 /* Supplied declaration required: FUN_00296284. */
 /* Supplied declaration required: FUN_00297684. */
 /* Supplied declaration required: FUN_0029ae60. */
@@ -247,7 +247,7 @@ unsigned int FUN_0018f660(void)
       pcVar4[0x1e60] = '\x01';
     }
     if (*(short *)(pcVar4 + 0x12fc) != 0) {
-      FUN_002958f8((int)*(short *)(pcVar4 + 0x12fc),1);
+      statusBustUpPortraitRelease((int)*(short *)(pcVar4 + 0x12fc),1);
       pcVar4[0x12fc] = '\0';
       pcVar4[0x12fd] = '\0';
     }
@@ -270,7 +270,7 @@ unsigned int FUN_0018f660(void)
         }
         *(unsigned short *)(pcVar4 + 0x12fc) = temp_v1;
         if (temp_v7 != 0) {
-          FUN_002942c4(temp_v7,temp_v5);
+          statusBustUpPortraitAcquire(temp_v7,temp_v5);
         }
       }
       else {
@@ -630,7 +630,7 @@ LAB_00190190:
             eventQueueAddUnique(0x100016d);
             if (!(*temp_v14 == '\x03' || *temp_v14 == '\t')) {
               if (*(short *)(pcVar4 + 0x12fc) != 0) {
-                FUN_002958f8((int)*(short *)(pcVar4 + 0x12fc),1);
+                statusBustUpPortraitRelease((int)*(short *)(pcVar4 + 0x12fc),1);
                 pcVar4[0x12fc] = '\0';
                 pcVar4[0x12fd] = '\0';
               }

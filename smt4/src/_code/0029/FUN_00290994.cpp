@@ -31,10 +31,10 @@ s32 ifTouchGetSelectionModeForRegion(s32 region);
 ScrollTrack *asdTMTexTableEntryAt(u32 group, u32 id);
 s32 FUN_0029e958(void *list);   /* horizontal: total entries */
 s32 FUN_0028cfbc(void *list);   /* horizontal: visible entries */
-s32 FUN_0029e93c(void *list);   /* horizontal: first visible entry */
+s32 resourceRunEmbeddedOperationIfUnblocked(void *list);   /* horizontal: first visible entry */
 s32 FUN_0029ee54(void *list);   /* vertical: total entries */
 s32 FUN_0029d644(void *list);   /* vertical: visible entries */
-s32 FUN_0029efc0(void *list);   /* vertical: first visible entry */
+s32 resourceRunOperationIfUnblocked(void *list);   /* vertical: first visible entry */
 void FUN_0029a17c(s32 x, s32 y, s32 width, s32 height, s32 flag);
 
 /* Proportional thumb: its length for `visible` of `total` entries in a bar `full` long, and its offset for entry `first`. */
@@ -71,13 +71,13 @@ void FUN_00290994(void *list, s32 x, s32 y, u32 group, u32 frameId, u32 trackId,
     s32 offset = 0;
     s32 left, top, width, height;
     if (horizontal != 0) {
-        width = scrollThumb(FUN_0028cfbc(list), FUN_0029e958(list), track->range->length, FUN_0029e93c(list), &offset);
+        width = scrollThumb(FUN_0028cfbc(list), FUN_0029e958(list), track->range->length, resourceRunEmbeddedOperationIfUnblocked(list), &offset);
         renderStackSet(&g_titleScene->state, SCROLL_SCISSOR_ON);
         left = track->x + x + offset;
         top = track->y + y;
         height = track->range->thickness;
     } else {
-        height = scrollThumb(FUN_0029d644(list), FUN_0029ee54(list), track->range->thickness, FUN_0029efc0(list), &offset);
+        height = scrollThumb(FUN_0029d644(list), FUN_0029ee54(list), track->range->thickness, resourceRunOperationIfUnblocked(list), &offset);
         renderStackSet(&g_titleScene->state, SCROLL_SCISSOR_ON);
         left = track->x + x;
         top = y + offset + track->y;

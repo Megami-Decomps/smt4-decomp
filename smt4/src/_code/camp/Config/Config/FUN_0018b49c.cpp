@@ -31,7 +31,7 @@ extern "C" {
 extern ConfigMenu* g_config;
 extern TitleScene* g_titleScene;
 
-s32 FUN_0029efc0(ConfigMenu* menu);
+s32 resourceRunOperationIfUnblocked(ConfigMenu* menu);
 void FUN_002bf380(s32 a, s32 b, s32 c, s32 x, s32 y, s32 d);
 LayoutEntry* asdTMTexTableEntryAt(u32 group, u32 index);
 s32 packNibblesAndByte(u32 a, u32 b, u32 c);
@@ -62,7 +62,7 @@ static void setDrawState(s32 value)
 void FUN_0018b49c(s32 x, s32 y)
 {
     ConfigMenu* menu = g_config;
-    FUN_0029efc0(menu);
+    resourceRunOperationIfUnblocked(menu);
     FUN_0029efa8(menu);
     FUN_002bf380(2, 0x2f, 0, x, y, 0xb);
     u32 color = 0xe09800ff;
@@ -92,7 +92,7 @@ void FUN_0018b49c(s32 x, s32 y)
         textFormatBuffer(text, LAB_0018b754, entry);
         textDrawString(2, color, text, label->x, (f32)(frame->x + label->x + x), (f32)(frame->y + label->y + y));
         s32 kind = (menu->mode != 1) ? 2 : 3;
-        u32 value = menu->cursorValues[FUN_0029efc0(menu)];
+        u32 value = menu->cursorValues[resourceRunOperationIfUnblocked(menu)];
         FUN_00196fe8(kind, frame->x + x, frame->y + y, value, entry);
     }
 }

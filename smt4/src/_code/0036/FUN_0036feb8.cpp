@@ -4,7 +4,7 @@
 extern "C" {
 
 void FUN_0036efa8(void **item);
-void FUN_0036f210(void **item);
+void gfxResourceDetachOwner(void **item);
 
 typedef struct {
     u8 unk0[0x2c];
@@ -21,7 +21,7 @@ void FUN_0036feb8(ResItemLists *lists)
     s32 secondCount = lists->secondCount;
     for (s32 i = 0; i < secondCount; i++) {
         void *item = static_cast<RelativePointer *>(lists->secondTable.get())[i].get();
-        FUN_0036f210(&item);
+        gfxResourceDetachOwner(&item);
     }
     s32 firstCount = lists->firstCount;
     for (s32 i = 0; i < firstCount; i++) {

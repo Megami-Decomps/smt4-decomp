@@ -43,7 +43,7 @@ s32 FUN_0029e9cc(u16 id);
 void FUN_0022e17c(CompendiumListEntryIV *entry, u16 id, s32 useCurrent);
 void recordAppendFloatEntry(CompendiumEntryListIV *list, const CompendiumListEntryIV *entry);
 void motionPlayForMode(void *screen, s32 mode, s32 flags);
-void FUN_00233730(SelectionFlags *selection, s32 rows, s32 count, s32 current, s32 first, s32 second);
+void listScrollerInitialize(SelectionFlags *selection, s32 rows, s32 count, s32 current, s32 first, s32 second);
 u8 gaugePercent(CompendiumEntryListIV *list, u32 scale);
 void *jyoucyuGetTableEntry(s32 index);
 void *FUN_0023a1b8(void *object);
@@ -75,7 +75,7 @@ void FUN_003a8aa0(Obj42247c *screen)
         }
         work->total = total;
         motionPlayForMode(screen, 1, 1);
-        FUN_00233730(&screen->flags, 10, block->count, 0, 1, 1);
+        listScrollerInitialize(&screen->flags, 10, block->count, 0, 1, 1);
         FUN_0023a1b8(&screen->flags);
         screen->flags.active = 1;
         work->completion = gaugePercent(&work->list, 1);

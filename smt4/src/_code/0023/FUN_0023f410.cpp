@@ -1,4 +1,4 @@
-/* NON_MATCHING: the flags word is loaded into r8 instead of r1, and the unk4c store is scheduled before the flags load. */
+/* NON_MATCHING: the flags word is loaded into r1; retail loads it into r8. */
 #include "common.h"
 
 extern "C" {
@@ -23,10 +23,9 @@ typedef struct {
 /* Resets every ready slot of group `group` to mode 4; bit 3 of flags follows `keepFlag`. */
 void FUN_0023f410(SlotOwner *owner, int group, int keepFlag, int keepFlag58)
 {
-    u32 first = 0;
-    int count = 0;
-    u32 end;
-    u32 i;
+    s32 first = 0;
+    s32 count = 0;
+    s32 i;
 
     if (group == 0) {
         count = 4;
@@ -40,17 +39,13 @@ void FUN_0023f410(SlotOwner *owner, int group, int keepFlag, int keepFlag58)
         first = 0x43;
         count = 0x2a;
     }
-    end = count + first;
-    for (i = first; (int)end > (int)i; i++) {
+    for (i = first; i < first + count; i++) {
         Slot *slot = &owner->slots[i];
-        u32 state = slot->state;
 
-        if ((state & 1) && (state & 0x80) && !(state & 2)) {
-            u32 oldFlags = slot->flags;
-            u32 flags = (oldFlags & ~6) | 1;
-
-            slot->flags = flags;
+        if ((slot->state & 1) && (slot->state & 0x80) && !(slot->state & 2)) {
+            slot->flags = (slot->flags & ~6) | 1;
             slot->unk4c = 0;
+            u32 flags = slot->flags;
             if (keepFlag != 0) {
                 flags |= 8;
             }

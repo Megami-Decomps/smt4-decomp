@@ -49,7 +49,7 @@ extern int FUN_00285574(void);
 extern int table1bOr1cGetRecordValue(void);
 extern int FUN_002903f0(void);
 /* Supplied declaration required: gameFlagIsSet. */
-extern int FUN_00328168(unsigned int, unsigned int);
+extern int dataTable2eSub3FindByKeyPair(unsigned int, unsigned int);
 
 
 void FUN_0027d0ec(void)
@@ -63,7 +63,7 @@ void FUN_0027d0ec(void)
   unsigned char temp_v4;
   
   temp_v2 = g_mapMain;
-  temp_v0 = FUN_00328168(*(unsigned int *)(g_mapMain + 0x2c),*(unsigned int *)(g_mapMain + 0x30));
+  temp_v0 = dataTable2eSub3FindByKeyPair(*(unsigned int *)(g_mapMain + 0x2c),*(unsigned int *)(g_mapMain + 0x30));
   if (temp_v0 != 0) {
     g_gameState.f0049f94a = *(char *)(temp_v0 + 2);
     g_gameState.f0049f948 = (short)g_gameState.f0049f94a;

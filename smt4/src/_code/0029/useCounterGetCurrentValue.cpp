@@ -18,17 +18,17 @@ typedef struct UseCounterGlobal {
 
 extern UseCounterGlobal g_useCounter;
 
-s32 FUN_0029efc0(void *cursor);
+s32 resourceRunOperationIfUnblocked(void *cursor);
 s32 FUN_0029efa8(void *cursor);
 
-/* Returns the current value for the cursor (indexed by the sum of FUN_0029efc0 and FUN_0029efa8), or 75 when inactive. */
+/* Returns the current value for the cursor (indexed by the sum of resourceRunOperationIfUnblocked and FUN_0029efa8), or 75 when inactive. */
 u8 useCounterGetCurrentValue(void)
 {
     UseCounterState *state = g_useCounter.state;
     u8 value = 75;
 
     if (state->active != 0) {
-        value = state->values[FUN_0029efc0(state->cursor) + FUN_0029efa8(state->cursor)];
+        value = state->values[resourceRunOperationIfUnblocked(state->cursor) + FUN_0029efa8(state->cursor)];
     }
     return value;
 }

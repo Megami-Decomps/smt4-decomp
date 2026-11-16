@@ -10,7 +10,7 @@ int recordAppendFloatEntry(int, unsigned char [8]);
 int FUN_0022e17c(unsigned char [8], int, int);
 void entryTableClear(void *table);
 int FUN_00233670(...);
-int FUN_00233730(...);
+int listScrollerInitialize(...);
 int FUN_00233818(void);
 int ifTouchRegionClearAll(unsigned int);
 int FUN_0029ce60(unsigned int, int, int);
@@ -36,7 +36,7 @@ extern unsigned char gaugePercent(int, unsigned int);
 /* Supplied declaration required: FUN_0022e17c. */
 /* Supplied declaration required: entryTableClear. */
 /* Supplied declaration required: FUN_00233670. */
-/* Supplied declaration required: FUN_00233730. */
+/* Supplied declaration required: listScrollerInitialize. */
 /* Supplied declaration required: FUN_00233818. */
 /* Supplied declaration required: ifTouchRegionClearAll. */
 /* Supplied declaration required: FUN_0029ce60. */
@@ -119,7 +119,7 @@ void FUN_0022d434(int param_1)
       }
       FUN_0022e0fc(temp_v2,temp_v0);
     }
-    FUN_00233730(param_1 + 0x20,10,(int)*(short *)(param_1 + 0x5a8),0,1,1);
+    listScrollerInitialize(param_1 + 0x20,10,(int)*(short *)(param_1 + 0x5a8),0,1,1);
     *(unsigned char *)(param_1 + 0x2d) = 1;
     temp_v1 = gaugePercent(temp_v2,1);
     *(unsigned char *)(param_1 + 0x94) = temp_v1;
@@ -150,7 +150,7 @@ void FUN_0022d434(int param_1)
       } while (temp_v4 < *(unsigned char *)(temp_v9 + 0x910b));
     }
     *(unsigned short *)(param_1 + 0xa5ae) = 0x18;
-    FUN_00233730(param_1 + 0x20,10,(int)*(short *)(param_1 + 0x5a8),0,1,1);
+    listScrollerInitialize(param_1 + 0x20,10,(int)*(short *)(param_1 + 0x5a8),0,1,1);
     temp_v4 = 1;
     temp_v3 = 0;
     *(unsigned char *)(param_1 + 0x2d) = 1;

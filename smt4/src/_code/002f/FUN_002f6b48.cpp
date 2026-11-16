@@ -1,39 +1,45 @@
-/* NON_MATCHING: ARMCC merges flag tests and uses an immediate target limit with different saved registers. */
-#include "battle/BtlMainAccess.h"
-#include "battle/btlUnit.h"
-#include "shard/W4_W4Match2_BtlUnits.h"
+#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
+#include "shard/BtlScriptTargets.h"
 #include "battle/BattleUnitSlot.h"
-#include "script/ScriptArgs.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
+
 extern u32 g_btlScriptUnit;
 
-// Install two script action ids and select up to two eligible reserve entries.
-u32 FUN_002f6b48(void)
+u32 scrGetArg(u32 index);
+
+/* Script command: queues action kind 12 with the two argument actions and targets the first two usable enemy entries. */
+s32 FUN_002f6b48(void)
 {
-    // Pending actions lie beyond the shared battle prefix's recovered end.
-    struct PendingActionsView {
-        u8 unk00[0x1FD0];
-        s64 first;
-        s64 second;
-    };
-    typedef char PendingActionsOffsets[offsetof(PendingActionsView, first) == 0x1FD0 &&
-        offsetof(PendingActionsView, second) == 0x1FD8 ? 1 : -1];
-    u32 first = scrGetArg(0);
-    u32 second = scrGetArg(1);
-    reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->data->unk14C = 12;
-    reinterpret_cast<PendingActionsView*>(btlGetMainState())->first = (s64)(s32)(first | 0x10000);
-    reinterpret_cast<PendingActionsView*>(btlGetMainState())->second = (s64)(s32)(second | 0x10000);
-    s8 found = 0;
-    for (s32 i = 4; i < 54; ++i) {
-        u32 flags = btlGetMainState()->entries[i].flags;
-        if ((flags & 1) == 0 && (flags & 0x40) == 0) {
-            reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->targets[i] = i;
-            if (++found >= 2) {
-                break;
-            }
+    s32 first = scrGetArg(0);
+    s32 second = scrGetArg(1);
+    s32 i;
+
+    BtlScriptActorData *data = reinterpret_cast<BtlScriptActor *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->data;
+    data->actionKind = 12;
+    btlGetMainState()->pendingAction = (s32)(first | 0x10000);
+    btlGetMainState()->secondaryPendingAction = (s32)(second | 0x10000);
+
+    s8 maxTargets = 2;
+    s8 targetCount = 0;
+    for (i = 4; i < 0x36; i++) {
+        BtlMainState *state = btlGetMainState();
+        u32 flags = state->entries[i].flags;
+        if (flags & BTL_ENTRY_FLAG_ACTIVE) {
+            continue;
+        }
+        if (flags & BTL_ENTRY_FLAG_BLOCKED) {
+            continue;
+        }
+        reinterpret_cast<BtlScriptActor *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->targets[i] = i;
+        targetCount++;
+        if (targetCount >= maxTargets) {
+            break;
         }
     }
     return 1;
 }
-}
+
+} /* extern "C" */

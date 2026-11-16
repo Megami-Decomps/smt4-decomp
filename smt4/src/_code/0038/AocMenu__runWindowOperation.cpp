@@ -35,13 +35,13 @@ s32 strIsEmpty(RequestParameters *event);
 s32 byteIsAtLeast100(RequestParameters *event);
 void jobStopAndClearFlags(u32 *job);
 void FUN_00233db8(u32 *job, s32 mode);
-void FUN_0023392c(u32 *job, s32 a, s32 b);
+void aocMenuSetButtonHelp(u32 *job, s32 a, s32 b);
 void FUN_00234124(u32 *job, RequestParameters *event);
 s32 FUN_0026b564(void);
 void ifTouchRegionClearAll(u32 *regions);
 void FUN_00233818(u32 *entries);
 void FUN_00233e70(u32 *job, s32 a, s32 b);
-void FUN_00233730(u32 *range, s32 a, s32 entry, s32 b, s32 c, s32 d);
+void listScrollerInitialize(u32 *range, s32 a, s32 entry, s32 b, s32 c, s32 d);
 RegionRecord *asdTMTexTableEntryAt(u32 group, u32 id);
 void touchRegisterFirstRegion(Obj422594 *object, s32 x, s32 y, s32 width, s32 height);
 void touchRegisterSecondRegion(Obj422594 *object, s32 x, s32 y, s32 width, s32 height);
@@ -59,7 +59,7 @@ void AocMenu::runWindowOperation()
     WindowOperation *operation = reinterpret_cast<WindowOperation *>(job[0x82]);
     switch (job[2]) {
     case 0:
-        FUN_0023392c(job, 0xffffffff, 0);
+        aocMenuSetButtonHelp(job, 0xffffffff, 0);
         job[2] = 1;
         return;
     case 1:
@@ -119,7 +119,7 @@ void AocMenu::runWindowOperation()
             jobStopAndClearFlags(job);
             WindowOperation *current;
             if (aoc->entry != 0) {
-                FUN_00233730(job + 0x90, 3, aoc->entry, 0, 1, 1);
+                listScrollerInitialize(job + 0x90, 3, aoc->entry, 0, 1, 1);
                 Obj422594 *object = reinterpret_cast<Obj422594 *>(job + 0xba);
                 reinterpret_cast<u8 *>(job)[0x24d] = 1;
                 object->initialize(job + 0x90);
@@ -135,7 +135,7 @@ void AocMenu::runWindowOperation()
                 FUN_00233670(job + 0xad, 0x3a, 0x88, limit);
                 reinterpret_cast<u8 *>(job)[0x2c4] = 1;
                 reinterpret_cast<u8 *>(job)[0x2e6] = 0;
-                FUN_0023392c(job, 2, 1);
+                aocMenuSetButtonHelp(job, 2, 1);
                 current = reinterpret_cast<WindowOperation *>(job[0x82]);
                 job[1] = 6;
                 job[2] = 0;

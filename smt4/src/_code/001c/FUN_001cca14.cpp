@@ -21,7 +21,7 @@ int FUN_00290994(...);
 int FUN_0029a17c(...);
 int FUN_0029ab54(...);
 int FUN_0029efa8(...);
-int FUN_0029efc0(...);
+int resourceRunOperationIfUnblocked(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002bdf94(...);
 int itemDrawCategoryBadge(...);
@@ -75,7 +75,7 @@ extern unsigned short *FUN_0029acb0(void);
 extern int objectPartRunUnlessLocked(int);
 extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: FUN_0029efa8. */
-/* Supplied declaration required: FUN_0029efc0. */
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: FUN_002b75ec. */
 /* Supplied declaration required: devilGetRecord. */
@@ -307,7 +307,7 @@ LAB_001ccb9c:
   case 0x14:
     temp_v12 = g_statusDown + 0x223c;
     temp_v24 = temp_v12;
-    temp_v13 = FUN_0029efc0();
+    temp_v13 = resourceRunOperationIfUnblocked();
     temp_v7 = FUN_0029efa8(temp_v12);
     temp_v12 = objectPartRunUnlessLocked(temp_v12);
     FUN_002bf380(2,0x1a,0x10,temp_v1,temp_v2,0xb3);
@@ -322,7 +322,7 @@ LAB_001ccb9c:
     do {
       temp_v13 = 0;
       do {
-        temp_v7 = FUN_0029efc0(temp_v24);
+        temp_v7 = resourceRunOperationIfUnblocked(temp_v24);
         temp_v7 = temp_v13 + (temp_v7 + temp_v12) * 4;
         if (*(short *)(temp_v25 + 0x30) <= temp_v7) break;
         temp_v3 = asdTMTexTableEntryAt(0x1a,temp_v13 + temp_v12 * 4 + 0x4ae);
@@ -475,7 +475,7 @@ LAB_001ccb9c:
       temp_v12 = 0;
       do {
         temp_v13 = asdTMTexTableEntryAt(0x1a,temp_v12 + 0x48d);
-        temp_v7 = FUN_0029efc0(temp_v10 + 0x22a8);
+        temp_v7 = resourceRunOperationIfUnblocked(temp_v10 + 0x22a8);
         FUN_002b75ec(*(unsigned int *)(temp_v10 + 0x22a0),*(short *)(temp_v13 + 8) + temp_v1,
                      *(short *)(temp_v13 + 10) + temp_v2,0xb5,6,temp_v7 + temp_v12);
         temp_v12 = temp_v12 + 1;

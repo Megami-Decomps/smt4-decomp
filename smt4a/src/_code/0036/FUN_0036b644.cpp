@@ -1,21 +1,23 @@
-/* NON_MATCHING: the loop prologue now matches retail (count shift and entry address stay inside the loop); armcc threads the found-entry path into a duplicated store tail and uses ip for the group counter where retail uses r3. */
+/* NON_MATCHING: with the search as an inline helper returning the entry, control flow and the store tail match retail; only the resource pointer and the count halfword trade r4/r5. */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
+
+/* The first entry of delimiter-separated sequence `sequence` (-1 values end each one), or NULL. */
+static __inline SpriteSequenceEntry *findSequence(SpritePlaybackView *sprite, s32 sequence)
+{
+    s32 group = 0;
+    for (u32 index = 0; index < (u32)(sprite->resource->sequenceBytes >> 2); ++index) {
+        if (group == sequence)
+            return &sprite->resource->sequence[index];
+        if (sprite->resource->sequence[index].value == -1)
+            ++group;
+    }
+    return NULL;
+}
 
 // Select the requested delimiter-separated sequence and restart its playback state.
 extern "C" void FUN_0036b644(SpritePlaybackView *sprite, s32 sequence)
 {
-    s32 group = 0;
-    u32 count = sprite->resource->sequenceBytes >> 2;
-    SpriteSequenceEntry *selected = NULL;
-    for (u32 index = 0; index < (u32)(sprite->resource->sequenceBytes >> 2); ++index) {
-        SpriteSequenceEntry *entry = &sprite->resource->sequence[index];
-        if (group == sequence) {
-            selected = &sprite->resource->sequence[index];
-            break;
-        }
-        if (sprite->resource->sequence[index].value == -1)
-            ++group;
-    }
+    SpriteSequenceEntry *selected = findSequence(sprite, sequence);
     sprite->sequence = selected;
     if (selected != NULL) {
         sprite->sequenceFrame = 0;

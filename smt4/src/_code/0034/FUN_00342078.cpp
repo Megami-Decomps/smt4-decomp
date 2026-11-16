@@ -1,4 +1,3 @@
-/* NON_MATCHING: the group base now matches (group offset added separately, byte via writeback ldrb); retail loads the flag byte before the set/clear branch and shares one store, and recomputes the touched mask after its load. */
 #include "common.h"
 
 struct FlagBlock {
@@ -12,6 +11,18 @@ extern "C" {
 
 FlagBlock *FUN_0023d2ec(void);
 
+/* Sets or clears bit `bit` of a byte-packed bit array. */
+static __inline void bitArrayWrite(u8 *bits, u32 bit, s32 set)
+{
+    u8 *byte = &bits[bit >> 3];
+    u8 mask = 1 << (bit & 7);
+    if (set != 0) {
+        *byte |= mask;
+    } else {
+        *byte &= ~mask;
+    }
+}
+
 /* Sets or clears flag `bit` of group `group` (< 100); setting also marks the group in the touched bitmap. */
 void FUN_00342078(u32 group, u32 bit, s32 set)
 {
@@ -21,16 +32,9 @@ void FUN_00342078(u32 group, u32 bit, s32 set)
     if ((s32)group >= 100) {
         return;
     }
-    u8 *bank = FUN_0023d2ec()->groups[group];
-    u8 mask = 1 << (bit & 7);
-    u8 *flag = &bank[bit >> 3];
-
+    bitArrayWrite(FUN_0023d2ec()->groups[group], bit, set);
     if (set != 0) {
-        *flag |= mask;
-        u8 *touched = &FUN_0023d2ec()->touched[group >> 3];
-        *touched |= 1 << (group & 7);
-    } else {
-        *flag &= ~mask;
+        bitArrayWrite(FUN_0023d2ec()->touched, group, 1);
     }
 }
 

@@ -1,31 +1,32 @@
-/* NON_MATCHING: retail keeps the constant 0 in r5 for both the scrGetArg index and the fade channel and clamps with cmpne/movgt; built reloads 0 and branches around the clamp. */
-#include "common.h"
-#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-#include "script/ScriptArgs.h"
-
-struct EventCommand {
-    u8 unk00[0x10];
-    s32 position; // 0x10
-    s32 length;   // 0x14
-};
+#include "event/eventCommand.h"
 
 extern "C" {
 
-extern EventCommand *g_eventCommand; /* 0x57f554 */
-void eventSetUnderMessageFade(u32 channel, s32 steps, s32 mode, f32 value);
+void eventSetUnderMessageFade(u32 color, s32 duration, s32 fadeIn, f32 alpha);
+extern EventCommandGlobals g_eventCommand;
+s32 scrGetArg(u32 index);
+u32 scrGetCommandFrame(void);
+s32 FUN_00203d74(void);
 
-// Script command: start the under-message fade (steps clamped to 4 while FUN_00203d74 is true); while running, report completion.
+/* Starts the underlay fade out in `color` with the duration from script argument 0. */
+static __inline void underMessageFadeOut(u32 color)
+{
+    s32 duration = scrGetArg(0);
+
+    if (FUN_00203d74() != 0 && duration > 4) {
+        duration = 4;
+    }
+    eventSetUnderMessageFade(color, duration, 0, 1.0f);
+}
+
+/* Script command: fades the message underlay out over the given duration (at most 4 when the check passes). */
 u8 FUN_0031c444(void)
 {
-    if (scrGetCommandFrame() != 0) {
-        return g_eventCommand->position == g_eventCommand->length;
+    if (scrGetCommandFrame() == 0) {
+        underMessageFadeOut(0);
+        return 0;
     }
-    s32 steps = scrGetArg(0);
-    if (FUN_00203d74() != 0 && steps > 4) {
-        steps = 4;
-    }
-    eventSetUnderMessageFade(0, steps, 0, 1.0f);
-    return 0;
+    return g_eventCommand.command->elapsed == g_eventCommand.command->duration;
 }
 
 } /* extern "C" */

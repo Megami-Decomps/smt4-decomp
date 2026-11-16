@@ -1,5 +1,5 @@
-/* NON_MATCHING: Retail ldr r6, [pc, #136] differs from recovered ldr r6, [pc, #140]. */
-#include "common.h"
+/* NON_MATCHING: retail stores writeCount before loading nextMessageIndex/messageCount as one ldrd; this build loads the pair (ldm) first and stores both counters after. */
+#include "shard/W6_W6Match1_CriticalSection.h"
 
 struct InboxMessageSlotView {
     u8 unk00[0x4c]; // 0x00
@@ -16,33 +16,27 @@ struct InboxReadStateView {
     u32 readCount;                     // 0x7c
     InboxMessageSlotView messages[12]; // 0x80
     u8 unk410[0x10];                   // 0x410
-    u8 unk420;                         // 0x420: start of critical section storage
+    u8 lock[4];                        // 0x420: nn::os::CriticalSection storage (opaque here)
 };
 
 extern "C" {
 s32 cecInboxReadMessages(u32 inboxHandle, void* destination,
                          s32 messageIndex, u32 count);
-void nn_os_CriticalSection_Enter(void* criticalSection);
-void nn_os_CriticalSection_Leave(void* criticalSection);
 }
 
 // Read messages into the locked ring, waiting for space until the final index is reached.
 extern "C" void FUN_001dc684(InboxReadStateView* state)
 {
-    void* criticalSection = &state->unk420;
-
     for (;;) {
-        nn_os_CriticalSection_Enter(criticalSection);
+        ScopedCriticalLock lock(static_cast<void *>(state->lock));
         if (state->writeCount - state->readCount < 12u) {
             cecInboxReadMessages(state->inboxHandle,
                                 &state->messages[state->writeCount % 12u],
                                 state->nextMessageIndex, 1);
             ++state->writeCount;
             if (++state->nextMessageIndex >= state->messageCount) {
-                nn_os_CriticalSection_Leave(criticalSection);
                 return;
             }
         }
-        nn_os_CriticalSection_Leave(criticalSection);
     }
 }

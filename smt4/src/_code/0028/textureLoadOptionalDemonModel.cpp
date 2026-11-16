@@ -1,14 +1,6 @@
-/* NON_MATCHING: repeated key resolution keeps separate record/key registers, rematerializes the model limit, and emits strd rather than retail coordinate stm. */
 #include "addon/aocMain.h"
 #include "gamedata/DevilModel.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-
-namespace {
-struct TextureKey {
-    u32 table;
-    s32 node;
-};
-}
 
 extern "C" {
 DevilModelOverride* dataTable00FindById(u16 id);
@@ -16,55 +8,66 @@ s32 recordPrepareLinkedOwner(AocSystem*, u32 table, s32 node);
 void FUN_002ae9ec(u32 kind, u32 table, u32 file, s32 x, s32 y, u32 layer);
 void FUN_00388eb4(AocSystem*, s32 id, u32 kind, s32 node, s32 x, s32 y, u32 layer);
 extern AocSystem* g_aocSystem;
-}
 
-namespace {
-inline bool resolveTextureKey(s32 id, s32 mapped, TextureKey& key)
+// Whether the texture of demon `id` (its model, or its override model) is loaded.
+static inline s32 isDemonTextureLoaded(s32 id, s32 mapped)
 {
-    key.table = 0x17;
-    key.node = id;
+    s32 category = 0x17;
+    s32 resource = id;
     if (mapped) {
         if (id < 0) {
-            key.node = 0;
+            resource = 0;
         } else {
-            const DevilRecord* record = reinterpret_cast<const DevilRecord*>(devilGetRecord(static_cast<u16>(id)));
-            if (!record) {
-                return false;
-            }
-            const DevilModelOverride* overrideRecord = dataTable00FindById(static_cast<u16>(id));
-            if (overrideRecord->flags & 1) {
-                key.table = 0x23;
-                key.node = overrideRecord->model;
-                if (key.node >= 0x81) {
-                    return false;
-                }
+            const DevilRecord* devil = reinterpret_cast<const DevilRecord*>(devilGetRecord(static_cast<u16>(id)));
+            if (!devil)
+                return 0;
+            const DevilModelOverride* record = dataTable00FindById(static_cast<u16>(id));
+            if (record->flags & 1) {
+                resource = record->model;
+                category = 0x23;
+                if (resource >= 0x81)
+                    return 0;
             } else {
-                key.node = record->model + 1;
-                if (key.node >= 0x266) {
-                    return false;
-                }
+                resource = devil->model + 1;
+                if (resource >= 0x266)
+                    return 0;
             }
         }
     }
-    return true;
-}
+    return asdTMTexTableNodeIsLoaded(category, resource);
 }
 
-extern "C" void textureLoadOptionalDemonModel(s32 id, s32 x, s32 y, u32 layer, s32 mapped)
+// Draw demon `id`'s model texture when it is loaded, through the add-on system when it owns the model.
+void textureLoadOptionalDemonModel(s32 id, s32 x, s32 y, u32 layer, s32 mapped)
 {
-    TextureKey source;
-    if (!resolveTextureKey(id, mapped, source)) {
-        return;
-    }
-    TextureKey availability;
-    if (!resolveTextureKey(id, mapped, availability)) {
-        return;
-    }
-    if (asdTMTexTableNodeIsLoaded(availability.table, availability.node)) {
-        if (!recordPrepareLinkedOwner(g_aocSystem, source.table, source.node)) {
-            FUN_002ae9ec(2, source.table, static_cast<u32>(source.node) * 1000u + 1u, x, y, layer);
+    s32 resource = id;
+    s32 category = 0x17;
+    if (mapped) {
+        if (id < 0) {
+            resource = 0;
         } else {
-            FUN_00388eb4(g_aocSystem, id, 2, source.node, x, y, layer);
+            const DevilRecord* devil = reinterpret_cast<const DevilRecord*>(devilGetRecord(static_cast<u16>(id)));
+            if (!devil)
+                return;
+            const DevilModelOverride* record = dataTable00FindById(static_cast<u16>(id));
+            if (record->flags & 1) {
+                resource = record->model;
+                category = 0x23;
+                if (resource >= 0x81)
+                    return;
+            } else {
+                resource = devil->model + 1;
+                if (resource >= 0x266)
+                    return;
+            }
         }
     }
+    if (isDemonTextureLoaded(id, mapped)) {
+        if (recordPrepareLinkedOwner(g_aocSystem, category, resource)) {
+            FUN_00388eb4(g_aocSystem, id, 2, resource, x, y, layer);
+        } else {
+            FUN_002ae9ec(2, category, resource * 1000 + 1, x, y, layer);
+        }
+    }
+}
 }

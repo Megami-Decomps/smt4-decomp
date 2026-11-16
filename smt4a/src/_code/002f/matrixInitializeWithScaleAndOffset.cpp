@@ -12,7 +12,7 @@ struct Vector3View {
 extern "C" {
 void FUN_002b4c30(Matrix44View* destination, const Matrix44View* source);
 void matrix44SetIdentity(Matrix44View* destination);
-void FUN_002a2048(Matrix44View* matrix, const Vector3View* offset, s32 mode);
+void mathMatrixApplyTranslation(Matrix44View* matrix, const Vector3View* offset, s32 mode);
 
 // Initialize a matrix, then apply optional uniform scaling and a three-component offset.
 void matrixInitializeWithScaleAndOffset(Matrix44View* matrix, const Vector3View* offset,
@@ -34,7 +34,7 @@ void matrixInitializeWithScaleAndOffset(Matrix44View* matrix, const Vector3View*
         components.x = offset->x;
         components.y = offset->y;
         components.z = offset->z;
-        FUN_002a2048(matrix, &components, 2);
+        mathMatrixApplyTranslation(matrix, &components, 2);
     }
 }
 }

@@ -28,7 +28,7 @@ u32 FUN_002c15ac(u32 kind);
 void FUN_002c0944(u32 a, u32 b, u32 c, u32 d, f32 e, f32 f, f32 g, f32 h, f32 i);
 f32 vec2GetSpeed(const void *object);
 void FUN_0038368c(TitleOverlay *overlay);
-void FUN_002c18e4(RenderCtx *ctx);
+void renderCtxResetColorScale(RenderCtx *ctx);
 
 /* Draws the title overlay once it is past state 2: under a pushed render state, an optional
  * full-screen fade of the scene's preset, then the overlay itself. */
@@ -56,7 +56,7 @@ void FUN_003844a0(TitleOverlay *overlay)
     FUN_002bed3c();
     efctSetSpeed(1.0f);
     renderCtxApplyTransforms(g_titleScene);
-    FUN_002c18e4(g_titleScene);
+    renderCtxResetColorScale(g_titleScene);
 }
 
 }

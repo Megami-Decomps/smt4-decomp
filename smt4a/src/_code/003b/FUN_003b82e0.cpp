@@ -1,4 +1,4 @@
-/* NON_MATCHING: required/excluded-mask u64 loads are ldr pairs in retail where armcc emits ldm, and the range loads pair as ldrd in retail; active-entry byte now folds (s8 flag). */
+/* NON_MATCHING: only the excluded-mask test: retail loads the mask with two ldr (ip, r3) where armcc emits add+ldm, with the AND temporaries swapped. */
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -32,9 +32,9 @@ u32 FUN_003b82e0()
     for (s32 index = first; index < first + count; ++index) {
         BtlMainStateA *state = btlGetMainState();
         BtlCombatantEntryA *entry = &state->entries[index];
-        if (!(g_btlCandidateMasks.unavailable & entry->flags) &&
+        if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
             (entry->flags & g_btlCandidateMasks.required) &&
-            !(entry->flags & g_btlCandidateMasks.excluded) &&
+            !(g_btlCandidateMasks.excluded & entry->flags) &&
             entry->id == unitId && reinterpret_cast<StatView *>(entry)->values[stat] >= 1) {
             scrSetResult(1);
             return 1;

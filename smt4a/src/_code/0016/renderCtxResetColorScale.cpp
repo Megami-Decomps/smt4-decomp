@@ -1,39 +1,32 @@
-/* NON_MATCHING: unit-float tests now go through plain-static comparison helpers (VFP vcmp against a register copy like retail); retail reads the dirty flag through a literal register offset and orders the branches differently. */
 #include "camp/RenderCtx.h"
 
 extern "C" int FUN_0019f828(void *target, const f32 *scale);
 
-static bool channelEquals(f32 value, f32 expected)
+/* Stores and uploads the RGBA modulation when it differs or an upload is forced, then clears the
+ * force flag (the body of materialUploadChangedParameterVector). */
+static __inline void colorScaleUpdate(RenderCtxA *context, const f32 *scale)
 {
-    return value == expected;
-}
-
-static bool colorScaleIsNeutral(const f32 *scale)
-{
-    if (!channelEquals(scale[0], 1.0f)) {
-        return false;
-    }
-    if (!channelEquals(scale[1], 1.0f)) {
-        return false;
-    }
-    if (!channelEquals(scale[2], 1.0f)) {
-        return false;
-    }
-    if (!channelEquals(scale[3], 1.0f)) {
-        return false;
-    }
-    return true;
-}
-
-/* Restore neutral RGBA modulation, updating the target only when necessary. */
-extern "C" void renderCtxResetColorScale(RenderCtxA *context)
-{
-    if (context->color.colorScaleDirty || !colorScaleIsNeutral(context->color.colorScale)) {
-        context->color.colorScale[0] = 1.0f;
-        context->color.colorScale[1] = 1.0f;
-        context->color.colorScale[2] = 1.0f;
-        context->color.colorScale[3] = 1.0f;
+    if (context->color.colorScaleDirty != 0 ||
+        context->color.colorScale[0] != scale[0] ||
+        context->color.colorScale[1] != scale[1] ||
+        context->color.colorScale[2] != scale[2] ||
+        context->color.colorScale[3] != scale[3]) {
+        context->color.colorScale[0] = scale[0];
+        context->color.colorScale[1] = scale[1];
+        context->color.colorScale[2] = scale[2];
+        context->color.colorScale[3] = scale[3];
         FUN_0019f828(context->colorTarget.colorScaleTarget, context->color.colorScale);
     }
     context->color.colorScaleDirty = 0;
+}
+
+/* Restores neutral RGBA modulation, updating the target only when necessary. */
+extern "C" void renderCtxResetColorScale(RenderCtxA *context)
+{
+    f32 neutral[4];
+    neutral[0] = 1.0f;
+    neutral[1] = 1.0f;
+    neutral[2] = 1.0f;
+    neutral[3] = 1.0f;
+    colorScaleUpdate(context, neutral);
 }

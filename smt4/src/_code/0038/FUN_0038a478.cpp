@@ -12,7 +12,7 @@ int textDrawString(...);
 int FUN_002bed3c(void);
 int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
-int FUN_002c18e4(...);
+int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
 int VectorSignedToFloat(...);
 int __aeabi_memcpy4(int [21], unsigned char *, int);
@@ -42,7 +42,7 @@ extern int vec2GetXInt(void);
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern unsigned int *jobGetWork(void);
-/* Supplied declaration required: FUN_002c18e4. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -228,7 +228,7 @@ unsigned int FUN_0038a478(void)
       FUN_002bed3c();
       efctSetSpeed();
       renderCtxApplyTransforms(g_titleScene);
-      FUN_002c18e4(g_titleScene);
+      renderCtxResetColorScale(g_titleScene);
     }
   }
   return 0;

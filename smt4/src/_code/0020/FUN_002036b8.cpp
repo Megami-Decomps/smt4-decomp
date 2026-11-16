@@ -7,7 +7,7 @@ extern "C" {
 
 int FUN_00290994(...);
 int FUN_0029a17c(...);
-int FUN_0029efc0(...);
+int resourceRunOperationIfUnblocked(...);
 int textDrawString(...);
 int textFormatBuffer(...);
 int FUN_002bf380(...);
@@ -39,7 +39,7 @@ extern int uniteGetWork(void);
 extern int FUN_0029d644(int);
 extern int ifTouchGetSelectionModeForRegion(int);
 extern int FUN_0029efa8(int);
-/* Supplied declaration required: FUN_0029efc0. */
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
@@ -71,7 +71,7 @@ void FUN_002036b8(int param_1,int param_2)
     FUN_002bf380(2,0x24,6,param_1,param_2,0x65);
     FUN_002bf288(2,0x24,0x1d2,param_1,param_2,0x6a);
     temp_v2 = temp_v1 + 0x9508;
-    temp_v3 = FUN_0029efc0();
+    temp_v3 = resourceRunOperationIfUnblocked();
     temp_v8 = 0;
     temp_v4 = FUN_0029d644(temp_v2);
     if (0 < temp_v4) {
@@ -104,7 +104,7 @@ void FUN_002036b8(int param_1,int param_2)
         temp_v4 = FUN_0029d644(temp_v2);
       } while (temp_v8 < temp_v4);
     }
-    temp_v3 = FUN_0029efc0(temp_v2);
+    temp_v3 = resourceRunOperationIfUnblocked(temp_v2);
     temp_v4 = FUN_0029efa8(temp_v2);
     temp_v3 = temp_v1 + (temp_v4 + temp_v3) * 2;
     temp_v4 = FUN_00254058(*(unsigned short *)(temp_v3 + 0x9468));

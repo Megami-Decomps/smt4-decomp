@@ -10,7 +10,7 @@ int buttonHelpCreate(void);
 int buttonHelpAcquireResources(void);
 void partyStatusRefreshSlot(void*, int, int);
 int FUN_0028e9ec(...);
-int FUN_002942c4(...);
+int statusBustUpPortraitAcquire(...);
 int FUN_00295eb0(...);
 int asdLoadFileAsyncSimple(...);
 int FUN_0029f848(...);
@@ -49,7 +49,7 @@ extern int FUN_0028e9a0(unsigned int);
 extern int flagValueIsPositive(unsigned int);
 /* Supplied declaration required: FUN_0028e9ec. */
 extern int flagBitIsSet(int);
-/* Supplied declaration required: FUN_002942c4. */
+/* Supplied declaration required: statusBustUpPortraitAcquire. */
 /* Supplied declaration required: FUN_00295eb0. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: FUN_0029f848. */
@@ -191,14 +191,14 @@ void FUN_00199b9c(int param_1,unsigned int param_2)
   FUN_002bd954(param_1 + 0x122c,0x15,0x124,param_1,6);
   spriteStartAnimationByIndex(param_1 + 0x122c,8);
   FUN_002bd954(param_1 + 0x12b8,0x15,0,param_1,6);
-  FUN_002942c4(0xffffffff,1);
+  statusBustUpPortraitAcquire(0xffffffff,1);
   temp_v1 = 0;
   do {
     temp_v5 = gameGetSlotTable();
     if (*(char *)(temp_v5 + temp_v1 + 0x9108) >= '\0') {
       temp_v5 = gameGetSlotTable();
       temp_v5 = gameGetUnitRecord((int)*(char *)(temp_v5 + temp_v1 + 0x9108));
-      FUN_002942c4((int)*(short *)(temp_v5 + 0x46),1);
+      statusBustUpPortraitAcquire((int)*(short *)(temp_v5 + 0x46),1);
       *(unsigned int *)(param_1 + temp_v1 * 4 + 0x3410) = (unsigned int)*(unsigned short *)(temp_v5 + 0x46);
       temp_v5 = gameGetSlotTable();
       *(short *)(param_1 + temp_v1 * 2 + 0x38f6) = (short)*(char *)(temp_v5 + temp_v1 + 0x9108);
@@ -218,7 +218,7 @@ void FUN_00199b9c(int param_1,unsigned int param_2)
     temp_v0 = *(unsigned short *)(temp_v1 + 0x606);
     temp_v1 = gameGetSupportUnitData();
     temp_v1 = supportUnitGetEntry((int)*(short *)(temp_v1 + 0x604),temp_v0);
-    FUN_002942c4((int)(short)(*(short *)(temp_v1 + 0x5a) + 1),0);
+    statusBustUpPortraitAcquire((int)(short)(*(short *)(temp_v1 + 0x5a) + 1),0);
   }
   partyStatusRefreshSlot(reinterpret_cast<void*>(param_1),0,1);
   partyStatusRefreshSlot(reinterpret_cast<void*>(param_1),1,1);

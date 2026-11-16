@@ -1,50 +1,45 @@
-/* NON_MATCHING: compiler merges pending-action flag tests and uses different saved registers. */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
+#include "shard/BtlScriptTargets.h"
 #include "battle/BattleUnitSlot.h"
 #include "battle/BtlMainAccess.h"
-#include "script/ScriptArgs.h"
 
-// Keep the unit prefix local: btlUnit.h imports a conflicting, shorter BtlMainState definition.
-struct ScriptCommandDataView {
-    u8 unk000[0x14c];
-    u16 command; // 0x14c
-};
-struct ScriptCommandUnitView {
-    u8 unk00[0x28];
-    ScriptCommandDataView *data; // 0x28
-    u8 unk2c[0xc];
-    s8 targets[109]; // 0x38
-};
-
-static inline bool battleEntryCanBeTarget(u32 flags)
-{
-    if (flags & 1)
-        return false;
-    if (flags & 0x40)
-        return false;
-    return true;
-}
 extern "C" {
+
 extern u32 g_btlScriptUnit;
 
-// Install the two scripted actions and mark up to two available enemy entries as targets.
-u32 FUN_002f6c24()
+u32 scrGetArg(u32 index);
+
+/* Script command: queues action kind 12 with the two argument actions and targets the first two usable enemy entries. */
+s32 FUN_002f6c24(void)
 {
-    u32 first = scrGetArg(0);
-    u32 second = scrGetArg(1);
-    reinterpret_cast<ScriptCommandUnitView *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->data->command = 12;
+    s32 first = scrGetArg(0);
+    s32 second = scrGetArg(1);
+    s32 i;
+
+    BtlScriptActorData *data = reinterpret_cast<BtlScriptActor *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->data;
+    data->actionKind = 12;
     btlGetMainState()->pendingAction = (s32)(first | 0x20000);
     btlGetMainState()->secondaryPendingAction = (s32)(second | 0x40000);
-    s8 count = 0;
-    for (s32 i = 4; i < 54; ++i) {
-        u32 flags = btlGetMainState()->entries[i].flags;
-        if (battleEntryCanBeTarget(flags)) {
-            reinterpret_cast<ScriptCommandUnitView *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->targets[i] = (s8)i;
-            if (++count >= 2)
-                return 1;
+
+    s8 maxTargets = 2;
+    s8 targetCount = 0;
+    for (i = 4; i < 0x36; i++) {
+        BtlMainState *state = btlGetMainState();
+        u32 flags = state->entries[i].flags;
+        if (flags & BTL_ENTRY_FLAG_ACTIVE) {
+            continue;
+        }
+        if (flags & BTL_ENTRY_FLAG_BLOCKED) {
+            continue;
+        }
+        reinterpret_cast<BtlScriptActor *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->targets[i] = i;
+        targetCount++;
+        if (targetCount >= maxTargets) {
+            break;
         }
     }
     return 1;
 }
-}
+
+} /* extern "C" */

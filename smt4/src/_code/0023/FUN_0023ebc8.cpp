@@ -1,4 +1,4 @@
-/* NON_MATCHING: enemy stat copies and reset loops fold differently; local view extends shared payload prefix. */
+/* NON_MATCHING: closer (-1 slots as s16, the flag-bit store before the special test, if/else special): remaining are the prologue store order, retail holding the 0x100 skill-array offset in r1, and armcc strength-reducing the definition side of the skill loop to a post-incremented pointer where retail indexes it. */
 #include "battle/btlUnit.h"
 #include "gamedata/DevilRecord.h"
 #include "AsdSDK/AsdMemUtil.h"
@@ -23,7 +23,8 @@ struct EnemyBattleStats {
 };
 struct EnemyBattlePayloadView {
     u8 kind, unk01;
-    u16 id, slot, alternateSlot, model;
+    u16 id;
+    s16 slot, alternateSlot, model;
     u8 unk0A[2];
     s32 value;
     u8 work[0xC4];
@@ -45,13 +46,17 @@ void FUN_0023ebc8(BtlMainState *battle, BtlUnitData *data, const EnemyBattleDefi
 {
     EnemyBattlePayloadView *unit = reinterpret_cast<EnemyBattlePayloadView *>(data);
     unit->kind = 4;
-    unit->model = 0xFFFF;
+    unit->model = -1;
     unit->id = definition->id;
-    unit->slot = 0xFFFF;
-    unit->alternateSlot = 0xFFFF;
+    unit->slot = -1;
+    unit->alternateSlot = -1;
     memClear(&unit->value, 200);
     unit->value = definition->value;
-    unit->special = definition->specialA != 0 || definition->specialB != 0;
+    unit->special = definition->flags & 1; /* retail stores this and overwrites it at once */
+    if (definition->specialA != 0 || definition->specialB != 0)
+        unit->special = 1;
+    else
+        unit->special = 0;
     unit->stats.hp = definition->hp;
     unit->stats.maximumHp = definition->hp;
     unit->stats.mp = definition->mp;
@@ -70,8 +75,9 @@ void FUN_0023ebc8(BtlMainState *battle, BtlUnitData *data, const EnemyBattleDefi
     for (s32 index = 0; index < 14; ++index)
         unit->counters[index] = 0;
     for (s32 index = 0; index < 18; ++index) {
-        unit->skills[index] = definition->skills[index];
-        unit->initialSkills[index] = definition->skills[index];
+        u16 *skill = &unit->skills[index];
+        skill[0] = definition->skills[index];
+        skill[18] = definition->skills[index]; /* initialSkills[index] */
     }
     unit->behavior = definition->behavior;
     DevilRecord *record = reinterpret_cast<DevilRecord *>(devilGetRecord(unit->id));

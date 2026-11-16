@@ -6971,3 +6971,22 @@
 00221ddc drawColoredRectangle inferred [med] Draws a rectangle in its RGBA colour under a temporary render-state preset. Twin of smt4 FUN_0019d9d4.
 0051d95c animCurveFindPackedKey inferred [med] Twin of smt4 FUN_003f89f8 (same source).
 0035fc4c btlTalkBustUpReleaseTexture inferred [high] Twin of smt4 btlTalkBustUpReleaseTexture: same body (texture-node release, 0x2F4 flag clear, add-on slot release, timer=0/state=3) with table 0x10 instead of 0x18.
+00281a3c scrOpPushFloatVar inferred [med] Twin of smt4 FUN_001dc750.
+0046fca8 dataArchiveSetFindFileWithEntry inferred [med] Twin of smt4 FUN_00389084.
+003cb88c dataTable2eSub3FindByKeyPair inferred [med] Twin of smt4 FUN_00328168.
+00363590 linkedItemsRemoveAndRelease inferred [med] Twin of smt4 FUN_002e7ed4.
+00376498 effectTimelineNodesFitDuration inferred [med] Twin of smt4 FUN_002f3078.
+0045181c gfxResourceDetachOwner inferred [med] Twin of smt4 FUN_0036f210.
+00275748 nameMainCreateJobs inferred [high] Twin of smt4 nameMainCreateJobs (same allocation, form setup and draw tasks).
+002ac078 randomOffsetJobUpdate inferred [high] Twin of smt4 randomOffsetJobUpdate (same body plus the endless checks).
+00151118 titleDbgBgCreate evidence asdDebugTrace path title	itleDbgBg.cpp; creates the TBG C process and the TBG U draw task.
+0013a324 asdRenderContextCreate evidence Allocates g_renderCtx with the debug path AsdSDK\Source\Gfx\AsdRenderContext.cpp line 36.
+004d0100 listCursorStepForward inferred [med] Same object and accessors as listCursorSetPage; advances top, then position, wrapping to 0. Twin of smt4 FUN_003c2b74.
+004d01f8 listCursorStepBack inferred [med] listCursorSetPage accessors; steps top, then position back, wrapping to the end. Twin of smt4 FUN_003c2c6c.
+004d032c listCursorSetPosition inferred [med] listCursorSetPage accessors; keeps the top and sets the position. Twin of smt4 FUN_003c2d84.
+004cfeb0 listScrollerInitialize inferred [med] Sets visible/total/direction of a scroller, configures its list and rewinds top/position to 0. Twin of smt4 FUN_00233730.
+00480a54 itemGetTable8Sub3Value inferred [med] Returns the table 8 section 3 record byte 0x24 for kind-9 items, add-on record first, then bsearch.
+002a2048 mathMatrixApplyTranslation inferred [med] Twin of smt4 FUN_0024fd70 (same source).
+00371c3c statusBustUpPortraitAcquire inferred [med] Twin of smt4 FUN_002942c4 (tables 15/25).
+0038b3f8 statusBustUpPortraitRelease inferred [med] Twin of smt4 FUN_002958f8.
+002c9104 clockRecordStartSeconds inferred [med] Writes the current date and time in seconds into the block startSeconds that clockGetSecondsSinceStart reads.

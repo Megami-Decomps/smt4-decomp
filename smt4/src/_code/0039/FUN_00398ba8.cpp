@@ -43,7 +43,7 @@ void FUN_002bed3c(void);
 s32 FUN_002c5d80(s32 a, s32 b);
 u32 packNibblesAndByte(u32 a, u32 b, u32 c);
 SlotLayout *asdTMTexTableEntryAt(u32 group, u32 id);
-void FUN_002c18e4(RenderCtx *context);
+void renderCtxResetColorScale(RenderCtx *context);
 
 /* Draws the eight-slot picker: the frame parts, then for each slot its marker, the selected
  * slot's cursor (blinking every 30 frames) and the slot's two-glyph label. */
@@ -96,7 +96,7 @@ void FUN_00398ba8(SlotPicker *picker)
     efctSetSpeed(1.0f);
     renderStackPop(&g_renderCtx->stackA);
     renderCtxApplyTransforms(g_renderCtx);
-    FUN_002c18e4(g_renderCtx);
+    renderCtxResetColorScale(g_renderCtx);
 }
 
 }

@@ -1,7 +1,7 @@
 #include "shard/W8Match1_CallbackSelection.h"
 extern "C" {
 void FUN_002bed3c(void);
-void FUN_002c18e4(void*);
+void renderCtxResetColorScale(void*);
 void renderCtxApplyTransforms(void*);
 extern void* g_titleScene;
 
@@ -14,6 +14,6 @@ void _ZN9Obj4223c46renderEv(CallbackSelectionWork* work)
         (work->*work->callbacks[work->selection])();
     }
     renderCtxApplyTransforms(g_titleScene);
-    FUN_002c18e4(g_titleScene);
+    renderCtxResetColorScale(g_titleScene);
 }
 }

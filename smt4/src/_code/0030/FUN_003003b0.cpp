@@ -1,4 +1,3 @@
-/* NON_MATCHING: regular apply and remove blocks are laid out in the opposite order, changing branch and literal-pool offsets. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
@@ -20,7 +19,9 @@ u32 FUN_003003b0(void)
     s32 checkImmunity = scrGetArg(2);
     ScriptUnit *source = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     BtlMainState *battle = btlGetMainState();
-    if (apply != 0) {
+    if (!apply) {
+        FUN_00246d38(0, source, battle->actions, 1u << status);
+    } else {
         if (checkImmunity != 0 &&
             (FUN_00246134(0, FUN_002463e8(status), 2, ~0u) & 0x10000) != 0) {
             FUN_00246080(0, 0, source, battle->actions, 4);
@@ -29,8 +30,6 @@ u32 FUN_003003b0(void)
             FUN_00246e24(0, source, battle->actions, 1u << status, 1);
             FUN_002505c0(0, source, 0x10001BD, 0, 0, 0, 0);
         }
-    } else {
-        FUN_00246d38(0, source, battle->actions, 1u << status);
     }
     return 1;
 }

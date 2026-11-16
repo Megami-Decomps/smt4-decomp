@@ -28,7 +28,7 @@ int uiSpriteSetKeyframe(...);
 int FUN_0019e330(...);
 int asdLoadFileSyncDefault(void);
 int FUN_00275bc8(...);
-int FUN_00371c3c(...);
+int statusBustUpPortraitAcquire(...);
 int FUN_00387240(...);
 int paramsClearPacket(...);
 
@@ -77,7 +77,7 @@ extern int DAT_0057f2c4; /* 0x57f2c4 */
 /* Supplied declaration required: uniteCameraDestroy. */
 extern int FUN_003316b4(int);
 extern unsigned int asdVramBGetFreeBytes(void);
-/* Supplied declaration required: FUN_00371c3c. */
+/* Supplied declaration required: statusBustUpPortraitAcquire. */
 /* Supplied declaration required: FUN_00387240. */
 /* Supplied declaration required: FUN_003d2a00. */
 /* Supplied declaration required: _ZN9Obj557af8C1EPK21AsdAnimCameraResource. */
@@ -217,7 +217,7 @@ void FUN_002a74ac(void)
   temp_v3 = 0;
   if (*(short *)(temp_v0 + 0x1e) != 0) {
     do {
-      FUN_00371c3c((int)*(short *)(temp_v0 + temp_v3 * 2 + 0xe),1);
+      statusBustUpPortraitAcquire((int)*(short *)(temp_v0 + temp_v3 * 2 + 0xe),1);
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < (int)(unsigned int)*(unsigned short *)(temp_v0 + 0x1e));
   }

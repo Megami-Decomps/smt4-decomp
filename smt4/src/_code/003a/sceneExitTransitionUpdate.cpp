@@ -4,7 +4,7 @@ extern "C" {
 void pointConvertToFloat(f32 *position, s32 x, s32 y);
 void FUN_00233240(void *transition, s32 mode);
 void FUN_00297684(void *script);
-void FUN_0029ee6c(s32 mode, u32 color);
+void buttonHelpSetText(s32 mode, u32 color);
 void *lmapSceneGetScript(void);
 s32 FUN_002bf818(SceneSprite *animation);
 s8 uiSpriteGetCompletionState(const void *record);
@@ -22,7 +22,7 @@ void sceneExitTransitionUpdate(SceneExitTransition *work)
     case 0:
         FUN_00233240(work->transition, 1);
         work->phase = 1;
-        FUN_0029ee6c(0, 0x323232ff);
+        buttonHelpSetText(0, 0x323232ff);
         return;
     case 1: {
         SceneSprite *animation = &work->animation;

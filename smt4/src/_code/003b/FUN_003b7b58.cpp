@@ -10,7 +10,7 @@ extern "C" {
 int FUN_0028c040(void);
 int buttonHelpCreate(void);
 int statusDownSwitchTab(...);
-int FUN_002942c4(...);
+int statusBustUpPortraitAcquire(...);
 int asdLoadFileAsyncSimple(...);
 int gameGlobalsSetSelected(...);
 int asdTMTexTableLoadEntryAsync(int, int);
@@ -38,7 +38,7 @@ extern unsigned char DAT_00405a4c; /* 0x405a4c */
 /* Supplied declaration required: FUN_0028c040. */
 /* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: statusDownSwitchTab. */
-/* Supplied declaration required: FUN_002942c4. */
+/* Supplied declaration required: statusBustUpPortraitAcquire. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: gameGlobalsSetSelected. */
 /* Supplied declaration required: FUN_0029e874. */
@@ -69,12 +69,12 @@ void FUN_003b7b58(int param_1)
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 2);
   temp_v1 = gameGetSlotTable();
-  FUN_002942c4(0xffffffff,1);
+  statusBustUpPortraitAcquire(0xffffffff,1);
   temp_v2 = 0;
   do {
     if (-1 < *(char *)(temp_v1 + temp_v2 + 0x9108)) {
       temp_v0 = gameGetUnitRecord();
-      FUN_002942c4((int)*(short *)(temp_v0 + 0x46),1);
+      statusBustUpPortraitAcquire((int)*(short *)(temp_v0 + 0x46),1);
     }
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 3);

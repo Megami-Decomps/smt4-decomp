@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail materializes the -1 "not found" index in r6 before the search, and loads the two ids in the other order. */
 #include "common.h"
 
 extern "C" {
@@ -19,15 +18,16 @@ typedef struct SlotTable {
 SlotTable *gameGetSlotTable(void);
 
 /* The unit's index in the slot table, or -1. */
-static __inline s32 slotTableIndexOf(SlotUnit *unit)
+static s32 slotTableIndexOf(SlotUnit *unit)
 {
-    if (unit != NULL) {
-        SlotUnit *slot = gameGetSlotTable()->units;
-
-        for (s32 i = 0; i < 24; i++, slot++) {
-            if (slot == unit || slot->id == unit->id) {
-                return i;
-            }
+    if (unit == NULL) {
+        return -1;
+    }
+    SlotUnit *slot = gameGetSlotTable()->units;
+    s32 i;
+    for (i = 0; i < 24; i++, slot++) {
+        if (slot == unit || slot->id == unit->id) {
+            return i;
         }
     }
     return -1;

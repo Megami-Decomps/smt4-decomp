@@ -71,7 +71,7 @@ u16 *FUN_00184310(u32 id);
 s32 FUN_0026264c(u32 id);
 void campFillUnitComparison(ListEntry *out, u32 id, s32 arg);
 void FUN_004a833c(void *list, ListEntry *entry);
-void FUN_004cfeb0(Unk4cfeb0Scroller *scroller, s32 visible, s32 total,
+void listScrollerInitialize(Unk4cfeb0Scroller *scroller, s32 visible, s32 total,
     s32 direction, s32 unused, s32 option);
 
 /* Scans every (group, subgroup) entry, and for each of its keys every item and unlockable id that
@@ -134,7 +134,7 @@ void FUN_004a5b20(EntryListWork *work)
         }
     }
     itemListSelectVariant(reinterpret_cast<ItemListSelectionOwner *>(work), 1, 1);
-    FUN_004cfeb0(reinterpret_cast<Unk4cfeb0Scroller *>(work->header), 10, work->first, 0, 1, 1);
+    listScrollerInitialize(reinterpret_cast<Unk4cfeb0Scroller *>(work->header), 10, work->first, 0, 1, 1);
     asdDebugHookPtrInt(work->header, 1);
     work->ready = 1;
     work->busy = 0;

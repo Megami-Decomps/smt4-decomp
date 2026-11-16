@@ -1,4 +1,4 @@
-/* NON_MATCHING: stack-push address scheduling, commutative X addition, text-call argument loads and zero-return epilogue ordering differ. */
+/* NON_MATCHING: x is now one expression (offset + parallax) and the text position adds the frame offset second, like retail; remaining: the text call loads its color/depth constants in a different order and the zero return is materialised before the stack restore. */
 #include "camp/RenderCtx.h"
 #include "text/TextDraw.h"
 
@@ -46,13 +46,12 @@ u32 placeWindowDrawLabel(void)
     RenderCtx *context = g_titleScene;
     u32 state = FUN_002c5d80(1, 0);
     renderCtxPushA(context, state);
-    s32 x = vec2GetXInt(&window->position);
-    x += static_cast<s32>(renderCtxCalculateStereoParallax(g_titleScene, 0.27f));
+    s32 x = vec2GetXInt(&window->position) + static_cast<s32>(renderCtxCalculateStereoParallax(g_titleScene, 0.27f));
     s32 y = vec2GetYInt(&window->position);
     FUN_002bf380(2, 0xe, 0xe, x, y, 0x65);
     PlaceWindowFrame *frame = asdTMTexTableEntryAt(0xe, 0x10b);
     textDrawString(3, 0xffffffff, window->text,
-        static_cast<f32>(frame->offsetX + x), static_cast<f32>(frame->offsetY + y),
+        static_cast<f32>(x + frame->offsetX), static_cast<f32>(y + frame->offsetY),
         0.56640625f, 0.0f, 1.0f);
     FUN_002bed3c();
     efctSetSpeed(1.0f);

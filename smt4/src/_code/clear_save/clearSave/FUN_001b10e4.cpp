@@ -45,7 +45,7 @@ void slotSetRequest(s32 slot, s32 value, u32 mask);
 void FUN_002a03d8(s32 slot, s32 value);
 u32 FUN_002896bc(void);
 void buttonHelpSetPreset(u32 preset);
-void FUN_0029ee6c(void *record, u32 color);
+void buttonHelpSetText(void *record, u32 color);
 void FUN_001c36d8(u8 *options);
 void FUN_0030aa50(s32 value);
 s32 jobWorkerPollAndFree(void);
@@ -63,7 +63,7 @@ static __inline void clearSaveHighlightRow(u32 index)
     u8 *entries = static_cast<u8 *>(dataTableGetEntries(section));
     u32 count = dataTableGetCount(section);
     u8 *record = index < count ? entries + index * 0x52 : NULL;
-    FUN_0029ee6c(record, 0x323232ff);
+    buttonHelpSetText(record, 0x323232ff);
 }
 
 /* Per-frame step of the clear-save screen: fade in, pick what to clear and a unit, confirm, save, fade out. */

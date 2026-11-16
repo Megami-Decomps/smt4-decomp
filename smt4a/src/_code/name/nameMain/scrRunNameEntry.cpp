@@ -6,7 +6,7 @@ extern NameGlobals g_name;
 u32 scrGetArg(u32 index);
 void scrCommMessageSetMode(s32 mode);
 void saveDataClearValues(void);
-void FUN_00275748(u32 *mode, u32 size);
+void nameMainCreateJobs(u32 *mode, u32 size);
 void *jobFind(u32 job);
 void asdMemFree(void *memory);
 const u16 *gameDataGetPlayerName(void);
@@ -31,7 +31,7 @@ u32 scrRunNameEntry(void)
             saveDataClearValues();
             break;
         }
-        FUN_00275748(&mode, 4);
+        nameMainCreateJobs(&mode, 4);
         g_name.status.active = 1;
     }
     NameWork *work = g_name.work;

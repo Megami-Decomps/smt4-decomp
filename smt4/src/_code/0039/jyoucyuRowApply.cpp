@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only: retail starts the row index with moveq r1,#0 (the build reuses r0, known to be 0 there) */
 #include "common.h"
 #include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
@@ -16,30 +15,37 @@ void asdSndEnsureCurrentSlotData(u32 value);
 
 extern Row00394750 DAT_0043988c[3]; /* 0x43988c */
 
+/* The table row with the given id, or NULL. */
+static __inline Row00394750 *findRow(u32 id)
+{
+    s32 index = 0;
+    while (index < 3) {
+        Row00394750 *row = &DAT_0043988c[index];
+        if (row->id == id) {
+            return row;
+        }
+        ++index;
+    }
+    return NULL;
+}
+
 /* Looks id up in the three-row table; when the row has a value and entry 1 is clear, passes the value on. */
 void jyoucyuRowApply(u32 id)
 {
-    s32 i;
-
     if (jyoucyuGetTableEntry(1) == 0) {
-        for (i = 0; i < 3; i++) {
-            Row00394750 *row = &DAT_0043988c[i];
-
-            if (row->id == id) {
-                if (row != NULL) {
-                    id = row->value;
-                }
-                if (row == NULL || id == 0) {
-                    return;
-                }
-                if (jyoucyuGetTableEntry(1) != 0) {
-                    return;
-                }
-                asdSoundSelectSlotB(2);
-                asdSndEnsureCurrentSlotData(id);
-                return;
-            }
+        Row00394750 *row = findRow(id);
+        u32 value;
+        if (row != NULL) {
+            value = row->value;
         }
+        if (row == NULL || value == 0) {
+            return;
+        }
+        if (jyoucyuGetTableEntry(1) != 0) {
+            return;
+        }
+        asdSoundSelectSlotB(2);
+        asdSndEnsureCurrentSlotData(value);
     }
 }
 

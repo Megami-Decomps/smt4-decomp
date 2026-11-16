@@ -1,7 +1,6 @@
-/* NON_MATCHING: first-stack push count/previous-value register grouping differs; context wrapper fixes third-stack evaluation order. */
 #include "camp/RenderCtx.h"
 #include "code/Code0028.h"
-#include "util/BitsAndBytes_VariantA.h"
+#include "util/BitsAndBytes.h"
 
 /* The terminal's four slots (0xC bytes each); only the handle and its in-use flag are used here. */
 struct TerminalSlot {
@@ -29,8 +28,10 @@ u32 FUN_002e0948(void)
 {
     TerminalScreen *screen = g_tmnl;
     if ((u32)(screen->page - 1) < 98) {
-        renderCtxPushC(g_titleScene, FUN_002865c0(6, 0.0f));
-        renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
+        RenderCtx *context = g_titleScene;
+        s32 state = FUN_002865c0(6, 0.0f);
+        renderStackPushCounted(&context->additional.stackC, state);
+        renderCtxPushACountedDirect(g_titleScene, FUN_002c5d80(1, 0));
         renderCtxPushB(g_titleScene, packNibblesAndByte(6, 1, 0));
         for (s32 i = 0; i < 4; ++i) {
             if (screen->slots[i].inUse != 0) {

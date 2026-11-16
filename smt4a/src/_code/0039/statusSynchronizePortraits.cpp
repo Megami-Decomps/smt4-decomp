@@ -11,8 +11,8 @@ PortraitSlotTableView *gameGetSlotTable();
 PartySlotA *gameGetSlotRecord();
 PartySlotA *btlMainGetUnk14();
 void FUN_0020ad6c(void *work, s32 state, s32 initial);
-void FUN_00371c3c(s16 id, s32 enabled);
-void FUN_0038b3f8(s16 id, s32 enabled);
+void statusBustUpPortraitAcquire(s16 id, s32 enabled);
+void statusBustUpPortraitRelease(s16 id, s32 enabled);
 void statusIconSetKind(void *work, s32 kind);
 
 // Update the four retained portrait resources when the status display mode changes.
@@ -49,11 +49,11 @@ void statusSynchronizePortraits(void *work, s32 mode)
         u32 *portrait = &view->portraits[index];
         if (*portrait != id) {
             if (*portrait != 0) {
-                FUN_0038b3f8((s16)*portrait, 1);
+                statusBustUpPortraitRelease((s16)*portrait, 1);
                 *portrait = 0;
             }
             if (id != 0)
-                FUN_00371c3c((s16)id, 1);
+                statusBustUpPortraitAcquire((s16)id, 1);
             *portrait = id;
         }
     }

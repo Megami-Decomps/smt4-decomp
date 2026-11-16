@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002881bc(void);
 int FUN_0028836c(void);
 int statusCameraApply(void);
-int FUN_002c18e4(int);
+int renderCtxResetColorScale(int);
 int renderCtxApplyTransforms(int);
 int FUN_0033e160(unsigned int, int, unsigned int, float *, int, int);
 int VectorFloatToUnsigned(double, int);
@@ -38,7 +38,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_002881bc. */
 /* Supplied declaration required: FUN_0028836c. */
 /* Supplied declaration required: statusCameraApply. */
-/* Supplied declaration required: FUN_002c18e4. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
 extern int FUN_002c501c(void);
 extern int FUN_002c5d80(unsigned int, unsigned int);
@@ -145,7 +145,7 @@ LAB_0032b100:
     *(unsigned char *)(temp_v1 + 0x1264) = 0;
   }
   renderCtxApplyTransforms(g_titleScene);
-  FUN_002c18e4(g_titleScene);
+  renderCtxResetColorScale(g_titleScene);
   return 0;
 }
 

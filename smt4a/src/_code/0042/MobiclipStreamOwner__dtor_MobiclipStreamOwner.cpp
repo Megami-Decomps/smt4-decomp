@@ -1,6 +1,5 @@
-/* NON_MATCHING: native destructor ABI restores retail's write-back member walk; original-this is still recomputed after thread cleanup instead of retained across it. */
 /* The destructor of the Mobiclip stream reader owner: tears the reader down, closes its two handles and finalizes
- * its thread. Returns the owner. */
+ * its thread (the base's member). Returns the owner. */
 #include "common.h"
 #include "nn/os/Handle.h"
 #include "nn/os/Thread.h"
@@ -8,9 +7,13 @@
 
 extern "C" void FUN_00422654(void *reader);
 
-struct MobiclipStreamOwner {
+/* The base that owns the reader thread; its implicit destructor runs after the owner's handles close. */
+struct MobiclipStreamThreadOwner {
     /* 0x00 */ u8 unk00[0x30];
     /* 0x30 */ NnOsThread thread;
+};
+
+struct MobiclipStreamOwner : MobiclipStreamThreadOwner {
     /* 0x38 */ u8 unk38[0x14];
     /* 0x4C */ NnOsHandle firstHandle;
     /* 0x50 */ NnOsHandle secondHandle;

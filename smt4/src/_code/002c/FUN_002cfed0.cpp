@@ -7,7 +7,7 @@ int FUN_00199424(void);
 int FUN_0028cf30(void *scene, u32 a, u32 b);
 int btlGetMainState(void);
 int playSceneSetState(void *scene, int a, int b);
-int FUN_0029ee6c(int a, int color);
+int buttonHelpSetText(int a, int color);
 int uiSpriteSetImageKeyframe(void *block, int a, int b);
 int buttonHelpSetPreset(int a);
 int spriteStartAnimationByIndex(void *block, int a);
@@ -67,7 +67,7 @@ void FUN_002cfed0(Scene *scene, u32 a, u8 b, u32 c)
                 playSceneSetState(scene, 0x10, 1);
                 return;
             }
-            FUN_0029ee6c(0, 0x323232ff);
+            buttonHelpSetText(0, 0x323232ff);
             playSceneSetState(scene, 0x28, 1);
             result = buttonHelpGetStatus();
             if (result != 0x3d) {

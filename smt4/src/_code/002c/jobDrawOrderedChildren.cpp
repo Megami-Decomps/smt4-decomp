@@ -16,7 +16,7 @@ s32 jobIsValid(u32);
 f32 jobGetScalarFrame(u32);
 s32 FUN_002865c0(u32, f32);
 void FUN_001dbc5c(u32, f32, f32);
-void FUN_002c18e4(RenderCtx *);
+void renderCtxResetColorScale(RenderCtx *);
 
 u32 jobDrawOrderedChildren(u32 job)
 {
@@ -62,7 +62,7 @@ u32 jobDrawOrderedChildren(u32 job)
     }
     renderStackPop(&g_titleScene->additional.stackC);
     renderCtxApplyTransforms(g_titleScene);
-    FUN_002c18e4(g_titleScene);
+    renderCtxResetColorScale(g_titleScene);
     return 0;
 }
 }

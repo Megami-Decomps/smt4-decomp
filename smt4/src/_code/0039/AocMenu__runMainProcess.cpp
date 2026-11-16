@@ -13,7 +13,7 @@ int FUN_00233404(void);
 int FUN_00233410(unsigned int *);
 int aocIsEntryIndexValid(...);
 int flaggedValueHolderGetTotal(...);
-int FUN_0023392c(...);
+int aocMenuSetButtonHelp(...);
 int FUN_0023478c(...);
 int recordClearWideHandle(unsigned int *);
 int archiveFileReplaceHandle(unsigned int *, unsigned int *, unsigned int *);
@@ -23,7 +23,7 @@ int asdTextDrawDirectoryEntry(...);
 int scrScriptProcessStartEntry(...);
 int FUN_002b8244(...);
 int eventQueueAddUniqueIfValid(...);
-int FUN_003c2d84(unsigned int *, int);
+int listCursorSetPosition(unsigned int *, int);
 int recordResetIndex(unsigned int *);
 int _ZN13ObjBase3c2ef07vfunc0cEv(unsigned int *, unsigned int *);
 
@@ -53,7 +53,7 @@ extern unsigned int FUN_002333f0(unsigned int *);
 /* Supplied declaration required: FUN_00233410. */
 /* Supplied declaration required: aocIsEntryIndexValid. */
 /* Supplied declaration required: flaggedValueHolderGetTotal. */
-/* Supplied declaration required: FUN_0023392c. */
+/* Supplied declaration required: aocMenuSetButtonHelp. */
 /* Supplied declaration required: FUN_0023478c. */
 /* Supplied declaration required: recordClearWideHandle. */
 /* Supplied declaration required: archiveFileReplaceHandle. */
@@ -75,7 +75,7 @@ extern int ifTouchIsInitialSelection(int);
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: memClear. */
 extern int statusDecodeActivityState(int);
-/* Supplied declaration required: FUN_003c2d84. */
+/* Supplied declaration required: listCursorSetPosition. */
 /* Supplied declaration required: recordResetIndex. */
 /* Supplied declaration required: _ZN13ObjBase3c2ef07vfunc0cEv. */
 
@@ -174,7 +174,7 @@ void AocMenu::runMainProcess()
           if (temp_v0 != 0) {
             if (temp_v4 != temp_v2) {
               *(unsigned char *)((int)param_1 + 0x2e6) = 1;
-              FUN_003c2d84(temp_v8,temp_v4);
+              listCursorSetPosition(temp_v8,temp_v4);
               if ((char)param_1[0xb1] != '\0' && temp_v4 != temp_v2) {
                 FUN_00233404();
               }
@@ -197,7 +197,7 @@ void AocMenu::runMainProcess()
               break;
             }
             if (temp_v5) {
-              FUN_003c2d84(temp_v8,temp_v4);
+              listCursorSetPosition(temp_v8,temp_v4);
               if ((char)param_1[0xb1] != '\0' && temp_v4 != temp_v2) {
                 FUN_00233404();
               }
@@ -229,7 +229,7 @@ void AocMenu::runMainProcess()
           FUN_002869e8(*temp_v10,3,0xffffffff,0);
         }
       }
-      FUN_0023392c(param_1,2,0);
+      aocMenuSetButtonHelp(param_1,2,0);
     }
     if (*(char *)((int)param_1 + 0x2c6) != '\0') {
       temp_v1 = FUN_002333f0(param_1 + 0xad);

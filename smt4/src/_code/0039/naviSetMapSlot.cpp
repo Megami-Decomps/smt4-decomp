@@ -1,4 +1,3 @@
-/* NON_MATCHING: slot addressing (table + index*16 with the 0x62 folded into the store offsets) and the out-of-line clear arm now match; the stack-argument loads (retail ldm of area/flags) and the enabled/icon result registers still differ. */
 #include "common.h"
 #include "shard/MapNaviTable_GetCategoryCount.h"
 
@@ -71,7 +70,7 @@ static __inline NavigationIcon *findNavigationIcon(s32 map, u8 category)
 
 // Populate one navigation slot from the map/area category and its icon mapping.
 void naviSetMapSlot(NavigationSlotTable *table, s32 index, s32 active, s32 map,
-                  s32 area, u16 flags, u32 unused, u16 value, s32 enabled)
+                  s32 area, u32 flags, u32 unused, u32 value, s32 enabled)
 {
     if (active) {
         NavigationCategory *category = findNavigationCategory(map, area);
@@ -80,7 +79,10 @@ void naviSetMapSlot(NavigationSlotTable *table, s32 index, s32 active, s32 map,
         table->slots[index].area = area;
         table->slots[index].category = category->category;
         table->slots[index].icon = icon->icon;
-        table->slots[index].enabled = enabled != 0;
+        if (enabled != 0)
+            table->slots[index].enabled = 1;
+        else
+            table->slots[index].enabled = 0;
         table->slots[index].flags = flags;
         table->slots[index].value = value;
     } else {

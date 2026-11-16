@@ -8,7 +8,7 @@ extern "C" {
 
 int FUN_001b079c(...);
 int FUN_0029a17c(...);
-int FUN_0029efc0(...);
+int resourceRunOperationIfUnblocked(...);
 int textDrawString(...);
 int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
@@ -34,7 +34,7 @@ extern unsigned int dataTable24Sub0GetRecordS90X(int);
 /* Supplied declaration required: FUN_0029a17c. */
 extern int ifTouchGetSelectionModeForRegion(int);
 extern int FUN_0029efa8(int);
-/* Supplied declaration required: FUN_0029efc0. */
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: textDrawString. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
@@ -66,7 +66,7 @@ void FUN_001f1bc4(int param_1,int param_2)
   temp_v0 = uniteGetWork();
   if (temp_v0 != 0) {
     temp_v1 = temp_v0 + 0x4e8;
-    temp_v2 = FUN_0029efc0();
+    temp_v2 = resourceRunOperationIfUnblocked();
     temp_v3 = FUN_0029efa8(temp_v1);
     temp_v4 = dataTable24Sub0GetRecordS90X(temp_v3 + temp_v2);
     temp_v2 = FUN_0029efa8(temp_v1);
@@ -75,7 +75,7 @@ void FUN_001f1bc4(int param_1,int param_2)
       FUN_002bf288(2,0x24,0xb5,param_1,param_2,0x97);
     }
     temp_v13 = temp_v0 + 0x54c;
-    temp_v3 = FUN_0029efc0();
+    temp_v3 = resourceRunOperationIfUnblocked();
     temp_v11 = 0;
     do {
       temp_v5 = asdTMTexTableEntryAt(0x24,temp_v11 + 0xb6);
@@ -115,7 +115,7 @@ void FUN_001f1bc4(int param_1,int param_2)
     } while (temp_v11 < 8);
     temp_v1 = FUN_0029efa8(temp_v1);
     temp_v1 = asdTMTexTableEntryAt(0x24,temp_v1 + 200);
-    temp_v2 = FUN_0029efc0(temp_v13);
+    temp_v2 = resourceRunOperationIfUnblocked(temp_v13);
     temp_v3 = FUN_0029efa8(temp_v13);
     temp_v11 = FUN_0029efa8(temp_v13);
     temp_v11 = asdTMTexTableEntryAt(0x24,temp_v11 + 200);

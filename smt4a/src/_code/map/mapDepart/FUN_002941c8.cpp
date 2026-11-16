@@ -8,7 +8,7 @@ int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
 int FUN_0029a794(...);
-int FUN_00480a54(...);
+int itemGetTable8Sub3Value(...);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -38,7 +38,7 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_0029a794. */
 extern unsigned int FUN_00480738(unsigned int);
-/* Supplied declaration required: FUN_00480a54. */
+/* Supplied declaration required: itemGetTable8Sub3Value. */
 extern unsigned int FUN_00480c28(void);
 
 
@@ -141,7 +141,7 @@ void FUN_002941c8(int *param_1)
           puVar1[temp_v0 + 5] = temp_v1;
           puVar1[temp_v0 + 9] = param_1[temp_v0 + 6];
           puVar1[temp_v0 + 0xd] = param_1[temp_v0 + 10];
-          FUN_00480a54();
+          itemGetTable8Sub3Value();
           if (temp_v1 != 0) {
             puVar1[0x34] = puVar1[0x34] + 1;
           }

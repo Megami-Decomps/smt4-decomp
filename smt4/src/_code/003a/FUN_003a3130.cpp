@@ -33,7 +33,7 @@ u32 FUN_00292bf0(void);
 u32 gameSlotTableGetHeader(void);
 void slotSetRequest(s32 slot, s32 kind, s32 value);
 s32 screenFadeIsBusy(void);
-void FUN_0029cc44(s32 value);
+void messageDismissNumericBanner(s32 value);
 ScriptProcess *FUN_00297060(void *file, u32 owner);
 }
 
@@ -62,7 +62,7 @@ extern "C" void FUN_003a3130(ShopExit *exit)
         break;
     case 6:
         if (screenFadeIsBusy() == 0) {
-            FUN_0029cc44(1);
+            messageDismissNumericBanner(1);
             exit->next = 18;
             exit->state = 0;
         }

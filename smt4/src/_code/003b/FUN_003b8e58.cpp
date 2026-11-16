@@ -86,7 +86,7 @@ s32 FUN_002903f0(void);
 u32 tableGroupFindEntryIndex(u32 group, u8 *name);
 void infoWinStartTimer(s32 flag);
 void scrScriptProcessStartEntry(u32 script, u32 entry);
-void FUN_0029ee6c(s32 a, u32 color);
+void buttonHelpSetText(s32 a, u32 color);
 void messageStatesSetFirst(s32 flag);
 void buttonHelpSetPreset(s32 preset);
 void textFormatBuffer(u8 buffer[36], const char *format, const char *text);
@@ -163,7 +163,7 @@ void FUN_003b8e58(GateScene *scene)
                 if (scene->marked == 0)
                     scene->marked = 1;
                 buttonHelpSetPreset(GATE_BUTTON_PRESET);
-                FUN_0029ee6c(0, GATE_FADE_COLOR);
+                buttonHelpSetText(0, GATE_FADE_COLOR);
                 next = GATE_STEP_RUN_EXIT_SCRIPT;
             } else {
                 if (scene->modelActive != 0) {

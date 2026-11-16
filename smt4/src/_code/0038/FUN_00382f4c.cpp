@@ -26,10 +26,10 @@ s32 scrRunOpcodesStub(u32 script);
 s32 messageWindowIsState1(void);
 s32 messageTargetGetValue(void);
 u32 dataTable28Sub1GetRecord(void *table, u8 index);
-void FUN_0029ee6c(u32 record, u32 color);
+void buttonHelpSetText(u32 record, u32 color);
 s32 FUN_002d8e10(void);
 s32 FUN_002485b8(void);
-void FUN_0029cc44(s32 flag);
+void messageDismissNumericBanner(s32 flag);
 void messageBannerInitSelection(s32 a, s32 b);
 void messageTargetSetValue(u32 value, s32 flag);
 void messageMainSetTargetFlags(s32 flags);
@@ -51,12 +51,12 @@ void FUN_00382f4c(ChoiceMenu *menu)
         if (messageWindowIsState1() != 0) {
             s32 value = messageTargetGetValue();
             const u8 *table = menu->inTown == 0 ? DAT_00405718 : DAT_0040571b;
-            FUN_0029ee6c(dataTable28Sub1GetRecord(menu->table, table[value]), 0x323232FF);
+            buttonHelpSetText(dataTable28Sub1GetRecord(menu->table, table[value]), 0x323232FF);
             if (value != -1) {
                 if (menu->inTown != 0) {
                     if (value != 0) {
                         if (FUN_002d8e10() != 0)
-                            FUN_0029cc44(0);
+                            messageDismissNumericBanner(0);
                     } else if (FUN_002485b8() == 0) {
                         messageBannerInitSelection(1, 0);
                         messageTargetSetValue(0xFFFFFF9C, 0);
@@ -72,7 +72,7 @@ void FUN_00382f4c(ChoiceMenu *menu)
                     menu->result = messageTargetGetValue();
                     if (menu->inTown != 0 && messageTargetGetValue() == 0) {
                         menu->closed = 1;
-                        FUN_0029cc44(0);
+                        messageDismissNumericBanner(0);
                     }
                     FUN_002f6208();
                     menu->state = 11;
@@ -93,29 +93,29 @@ void FUN_00382f4c(ChoiceMenu *menu)
             break;
         case 1:
             if (FUN_002485b8() != 0)
-                FUN_0029cc44(0);
+                messageDismissNumericBanner(0);
             FUN_002636b0();
             menu->state = 8;
             menu->subState = 0;
             break;
         case 2:
             if (FUN_002485b8() != 0)
-                FUN_0029cc44(0);
+                messageDismissNumericBanner(0);
             FUN_002636b0();
             menu->subState = 0;
             menu->state = 9;
             break;
         case 3:
             if (FUN_002485b8() != 0)
-                FUN_0029cc44(0);
+                messageDismissNumericBanner(0);
             FUN_002636b0();
             menu->state = 10;
             menu->subState = 0;
-            FUN_0029cc44(0);
+            messageDismissNumericBanner(0);
             break;
         case -1:
             if (FUN_002485b8() != 0)
-                FUN_0029cc44(0);
+                messageDismissNumericBanner(0);
             messageBannerBeginClose();
             menu->state = 15;
             menu->subState = 0;

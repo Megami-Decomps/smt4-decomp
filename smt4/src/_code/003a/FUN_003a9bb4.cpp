@@ -70,7 +70,7 @@ s32 FUN_0029e9cc(u32 id);
 void FUN_0022e17c(ListEntry *out, u32 id, s32 arg);
 void recordListAppendUniqueKey(void *list, ListEntry *entry);
 void motionPlayForMode(EntryListWork *work, s32 arg);
-void FUN_00233730(void *header, s32 a, s32 b, s32 c, s32 d);
+void listScrollerInitialize(void *header, s32 a, s32 b, s32 c, s32 d);
 
 /* Scans every (group, subgroup) entry, and for each of its keys every item and unlockable id that
  * is allowed, adding it to the work's list; then finalises the list. */
@@ -134,7 +134,7 @@ void FUN_003a9bb4(EntryListWork *work)
         }
     }
     motionPlayForMode(work, 1);
-    FUN_00233730(work->header, 10, work->first, 0, 1);
+    listScrollerInitialize(work->header, 10, work->first, 0, 1);
     asdDebugHookPtrInt(work->header, 1);
     work->ready = 1;
     work->busy = 0;

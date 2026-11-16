@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps the constants 0, 1 and 2 in callee-saved registers across the second allocation (push {r4-r7, lr}); the real BootState constructor/new expression and virtual setMode call now match everything else. */
+/* NON_MATCHING: constructor, holder setup (mode/enabled passed through an inline helper, as retail keeps them in r6/r5) and stores match; only the process-creation argument setup differs (retail loads the onEnd callback after storing the global and forms the stack-argument pointer in r5, the build in r0). */
 #include "common.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
@@ -28,20 +28,25 @@ void FUN_002ef9ec();
 HolderView* vtblHolderInit557bbc(HolderView* self);
 extern BootStateView* DAT_00588e2c;
 
-// Create the boot process and its holder, then initialize the holder's mode.
-void FUN_0020e5f0(void)
+/* Creates the state's mode holder and sets its initial mode. */
+static __inline void bootStateCreateHolder(BootStateView* state, s32 mode, s32 enabled)
 {
-    BootStateView* state = new BootStateView;
-
-    DAT_00588e2c = state;
-    state->process = reinterpret_cast<void*>(asdProcessCreateSimple(reinterpret_cast<const s8 *>("BOOT C"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(runnerShutdown), reinterpret_cast<AsdProcFunc>(FUN_002ef9ec), 0));
-
     HolderView* holder = static_cast<HolderView*>(asdOperatorNew(12));
     if (holder != 0) {
         holder = vtblHolderInit557bbc(holder);
     }
     state->holder = holder;
-    holder->setMode(2, 1);
+    holder->setMode(mode, enabled);
+}
+
+// Create the boot process and its holder, then initialize the holder's mode.
+void FUN_0020e5f0(void)
+{
+    DAT_00588e2c = new BootStateView;
+    BootStateView* state = DAT_00588e2c;
+    state->process = reinterpret_cast<void*>(asdProcessCreateSimple(reinterpret_cast<const s8 *>("BOOT C"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(runnerShutdown), reinterpret_cast<AsdProcFunc>(FUN_002ef9ec), 0));
+
+    bootStateCreateHolder(state, 2, 1);
     state->unk04 = 0;
     state->unk0C = 0;
 }

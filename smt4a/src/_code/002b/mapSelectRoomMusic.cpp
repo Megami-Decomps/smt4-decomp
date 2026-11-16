@@ -50,7 +50,7 @@ extern GameStateView g_gameState;
 extern MapMain *g_mapMain;
 extern MusicSlot g_textEntryTable[];
 
-u8 *FUN_003cb88c(s32 area, s32 sub);
+u8 *dataTable2eSub3FindByKeyPair(s32 area, s32 sub);
 void soundActorQueueStartPending(void);
 void FUN_00249ac4(s32 area, s32 sub);
 s32 slotFindByPair(s32 area, s32 sub);
@@ -66,7 +66,7 @@ void mapSelectRoomMusic(void)
     MapMain *map = g_mapMain;
     if (g_gameState.pending != 0)
         g_gameState.pending = 0;
-    u8 *room = FUN_003cb88c(map->area, map->sub);
+    u8 *room = dataTable2eSub3FindByKeyPair(map->area, map->sub);
     if (room != NULL) {
         s8 roomId = (s8)room[2];
         g_gameState.room = roomId;

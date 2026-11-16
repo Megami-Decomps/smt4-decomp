@@ -66,8 +66,8 @@ void FUN_002328b4(void);
 void FUN_0022de74(BibleDevilScreen *);
 void buttonHelpGetStatus(void);
 void buttonHelpSetPreset(void);
-void FUN_003c2b74(void *);
-void FUN_003c2c6c(void *);
+void listCursorStepForward(void *);
+void listCursorStepBack(void *);
 void FUN_002b8454(s32, s32, s32, s32);
 void FUN_00233404(void);
 
@@ -110,9 +110,9 @@ void FUN_003a72a4(BibleDevilScreen *screen)
     s32 selection = FUN_0029e924(screen->cursor);
     s32 scroll = flaggedEntryGetValueByState(screen->cursor);
     if (FUN_00293b8c() == 1) {
-        FUN_003c2b74(screen->cursor);
+        listCursorStepForward(screen->cursor);
     } else if (FUN_00293b8c() == -1) {
-        FUN_003c2c6c(screen->cursor);
+        listCursorStepBack(screen->cursor);
     } else if (screen->mode == 1 && inputIsQuestConfirmPressed()) {
         s8 next = screen->page + 1;
         screen->page = next;

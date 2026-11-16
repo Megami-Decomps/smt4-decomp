@@ -75,7 +75,7 @@ extern int FUN_0029d644(unsigned int);
 extern int ifTouchGetSelectionModeForRegion(int);
 extern int FUN_0029ee54(unsigned int);
 extern int FUN_0029efa8(unsigned int);
-extern int FUN_0029efc0(unsigned int);
+extern int resourceRunOperationIfUnblocked(unsigned int);
 extern int gameGetUnitRecord(int);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002b6c34. */
@@ -172,7 +172,7 @@ void FUN_0025d1c4(int param_1)
   temp_v7 = vec2GetYInt(param_1 + 0x12b8);
   temp_v5 = 0;
   temp_v21 = 0;
-  temp_v8 = FUN_0029efc0(*temp_v20);
+  temp_v8 = resourceRunOperationIfUnblocked(*temp_v20);
   temp_v16 = 0;
   if (temp_v16 < temp_v4) {
     do {
@@ -453,7 +453,7 @@ void FUN_0025d1c4(int param_1)
   if (temp_v24 == 0) {
     return;
   }
-  temp_v3 = FUN_0029efc0(*temp_v20);
+  temp_v3 = resourceRunOperationIfUnblocked(*temp_v20);
   temp_v4 = FUN_0029efa8(*temp_v20);
   temp_v15 = temp_v3 + temp_v4;
   if (*(int *)(temp_v2 + 0x5c) == 1) {

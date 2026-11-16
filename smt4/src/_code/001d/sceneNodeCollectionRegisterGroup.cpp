@@ -1,4 +1,4 @@
-/* NON_MATCHING: the asdLightActivate calls now merge; retail keeps group in r6 and a zero in r7 hoisted to entry so the lastGroup/unk14 stores form one strd (r6,r7), ours allocates group in r4 and the zero late (no strd). */
+/* NON_MATCHING: switch and bank selection match (FUN_001c0998 shape); retail hoists a zero into r7 at entry (pushing r4-r8) and stores lastGroup/unk14 as one strd (r6,r7); this build loads the zero late and stores the fields singly. */
 #include "common.h"
 #include "shard/W6_W6Match7_SceneAttachment.h"
 
@@ -11,45 +11,56 @@ struct SceneGroupSlot {
     /* 0x18 */ u32 unk18;
 };
 
+struct SceneTraverser;
+struct ModelTransformBuilder;
+struct SceneLightCounter {
+    /* 0x00 */ u32 count;
+    /* 0x04 */ u8 unk04[0x14];
+};
+
 extern "C" {
 
 void asdLightActivate(u32 slot);
-void sceneTraverserVisit(u32 first, u32 second);
+extern SceneNode *sceneGroup1Root[2];  /* groups 1 and 4 */
+extern SceneNode *sceneGroup2Root[2];  /* groups 2 and 5 */
+extern SceneTraverser *DAT_00464b7c[2];
+extern ModelTransformBuilder *g_asdModelTransformBuilder[2];
+extern SceneLightCounter g_asdLightCount[2];
+void sceneTraverserVisit(SceneTraverser *traverser, ModelTransformBuilder *builder);
 
-extern u32 DAT_00464b7c;
-extern u32 g_asdModelTransformBuilder;
-extern SceneNode *sceneGroup1Root;   /* followed by the group 4 root */
-extern SceneNode *sceneGroup2Root;   /* followed by the group 5 root */
-extern u32 g_asdLightCount;          /* two six-word records */
-
-/* Attaches the collection to the root of scene group 1, 2, 4 or 5, visits it and counts it. */
+/* Attaches the collection to the root of scene group 1, 2, 4 or 5, visits that bank's scene and records the group. */
 void sceneNodeCollectionRegisterGroup(SceneGroupSlot *collection, s32 group)
 {
     SceneNode *root;
-    s32 half;
-
-    if (group == 1) {
-        root = (&sceneGroup1Root)[0];
-    } else if (group == 2) {
-        root = (&sceneGroup2Root)[0];
+    switch (group) {
+    case 1:
+        root = sceneGroup1Root[0];
+        break;
+    case 2:
+        root = sceneGroup2Root[0];
         asdLightActivate(0);
-    } else if (group == 4) {
-        root = (&sceneGroup1Root)[1];
-    } else if (group == 5) {
-        root = (&sceneGroup2Root)[1];
+        break;
+    case 4:
+        root = sceneGroup1Root[1];
+        break;
+    case 5:
+        root = sceneGroup2Root[1];
         asdLightActivate(1);
-    } else {
+        break;
+    default:
         return;
     }
-    if (root != NULL) {
-        sceneNodeCollectionAttach((const SceneNodeCollection *)collection, root);
-        half = group >= 3;
-        sceneTraverserVisit((&DAT_00464b7c)[half], (&g_asdModelTransformBuilder)[half]);
-        (&g_asdLightCount)[half * 6]++;
-        collection->group = group;
-        collection->lastGroup = group;
-        collection->unk14 = 0;
-        collection->unk18 = 0;
+    if (SceneNode *parent = root) {
+        sceneNodeCollectionAttach((const SceneNodeCollection *)collection, parent);
+        s32 bank;
+        if (group < 3)
+            bank = 0;
+        else
+            bank = 1;
+        sceneTraverserVisit(DAT_00464b7c[bank], g_asdModelTransformBuilder[bank]);
+        ++g_asdLightCount[bank].count;
+        collection->lastGroup = collection->group = group;
+        collection->unk18 = collection->unk14 = 0;
     }
 }
 

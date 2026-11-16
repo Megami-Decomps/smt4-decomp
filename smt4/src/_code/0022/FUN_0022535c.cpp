@@ -10,7 +10,7 @@ f32 renderCtxCalculateStereoParallax(RenderCtx *, f32);
 s32 aocJobIsValid(void);
 s32 btlMainIsSecondJobValid(void);
 void FUN_0032fe34(BtlTalkBustUp *, f32);
-void FUN_002c18e4(RenderCtx *);
+void renderCtxResetColorScale(RenderCtx *);
 
 /* Draw the battle portrait with its stereo offset inside the temporary render state. */
 u32 FUN_0022535c(void)
@@ -29,7 +29,7 @@ u32 FUN_0022535c(void)
     }
     renderStackPop(&g_titleScene->stackA);
     renderCtxApplyTransforms(g_titleScene);
-    FUN_002c18e4(g_titleScene);
+    renderCtxResetColorScale(g_titleScene);
     return 0;
 }
 }

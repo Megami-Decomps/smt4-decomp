@@ -1,4 +1,3 @@
-/* NON_MATCHING: near (206 rows each): in the last help-text case retail tail-calls buttonHelpSetText straight from the add/movls result (ours routes it through r6), and in the demon branch retail keeps the record pointer in r3 (movs) while ours keeps it in r0 and loads the mode into r1. */
 #include "common.h"
 #include "gamedata/DataTable.h"
 
@@ -11,6 +10,12 @@ struct PartyHelpPanel {
     /* 0x09B4 */ u8 screen;
     /* 0x09B5 */ u8 unk09B5[0x863];
     /* 0x1218 */ s32 mode;
+};
+
+/* A row of the help-text table. */
+struct PartyHelpRecord {
+    /* 0x00 */ u8 kind;
+    /* 0x01 */ u8 text[0x5B];
 };
 
 /* A unit record (observed field). */
@@ -29,16 +34,16 @@ u32 partyPanelGetSelectedDemonId(void);
 void FUN_003aeb18(s32 value, s32 other);
 HelpUnitRecord *slotRecordFindById(u16 id);
 void unitRecordBuild(u16 id, u8 *record);
-void FUN_0032d0c8(s32 a, s32 b, u16 id);
+void FUN_0032d0c8(s32 mode, s32 visible, u16 id, HelpUnitRecord *record);
 
-/* The help-text entry at `offset`, or NULL when the help table has no more than `lastIndex` entries. */
-static __inline u8 *partyHelpTextEntry(u32 lastIndex, u32 offset)
+/* The help-text table's entry `index`, or NULL when the table has no such entry. */
+static __inline u8 *partyHelpText(u32 index)
 {
     void *table = dataTableGet(HELP_TEXT_TABLE, 0);
-    u8 *entries = static_cast<u8 *>(dataTableGetEntries(table));
+    PartyHelpRecord *records = static_cast<PartyHelpRecord *>(dataTableGetEntries(table));
 
-    if (dataTableGetCount(table) > lastIndex) {
-        return entries + offset;
+    if (dataTableGetCount(table) > index) {
+        return records[index].text;
     }
     return NULL;
 }
@@ -65,28 +70,28 @@ void FUN_0023f900(void)
     }
     if (selected < 0) {
         if (panel->screen == 12 || panel->screen == 13) {
-            buttonHelpSetText(partyHelpTextEntry(6, 0x229), HELP_TEXT_COLOR);
+            buttonHelpSetText(partyHelpText(6), HELP_TEXT_COLOR);
         }
         if (panel->screen == 14) {
-            buttonHelpSetText(partyHelpTextEntry(7, 0x285), HELP_TEXT_COLOR);
+            buttonHelpSetText(partyHelpText(7), HELP_TEXT_COLOR);
         }
         if (panel->screen == 4) {
-            buttonHelpSetText(partyHelpTextEntry(2, 0xB9), HELP_TEXT_COLOR);
+            buttonHelpSetText(partyHelpText(2), HELP_TEXT_COLOR);
         }
         if (panel->screen == 15) {
-            buttonHelpSetText(partyHelpTextEntry(8, 0x2E1), HELP_TEXT_COLOR);
+            buttonHelpSetText(partyHelpText(8), HELP_TEXT_COLOR);
         }
         if (panel->screen == 2) {
-            buttonHelpSetText(partyHelpTextEntry(0, 1), HELP_TEXT_COLOR);
+            buttonHelpSetText(partyHelpText(0), HELP_TEXT_COLOR);
         }
         if (panel->screen == 3) {
-            buttonHelpSetText(partyHelpTextEntry(1, 0x5D), HELP_TEXT_COLOR);
+            buttonHelpSetText(partyHelpText(1), HELP_TEXT_COLOR);
         }
         if (panel->screen == 17) {
-            buttonHelpSetText(partyHelpTextEntry(9, 0x33D), HELP_TEXT_COLOR);
+            buttonHelpSetText(partyHelpText(9), HELP_TEXT_COLOR);
         }
         if (panel->screen == 19) {
-            buttonHelpSetText(partyHelpTextEntry(10, 0x399), HELP_TEXT_COLOR);
+            buttonHelpSetText(partyHelpText(10), HELP_TEXT_COLOR);
             return;
         }
     } else {
@@ -98,11 +103,11 @@ void FUN_0023f900(void)
         }
         if (panel->mode == 1) {
             if (record->demonId == 0x29D || record->demonId == 0x29E || record->demonId == 0x317) {
-                FUN_0032d0c8(0, 11, (u16)selected);
+                FUN_0032d0c8(0, 11, (u16)selected, record);
                 return;
             }
         }
-        FUN_0032d0c8(0, 1, (u16)selected);
+        FUN_0032d0c8(0, 1, (u16)selected, record);
     }
 }
 

@@ -15,7 +15,7 @@ int FUN_003180c4(...);
 int btlTalkBustUpSetDemonTexture(...);
 int btlTalkBustUpReleaseTexture(void);
 int btlTalkBustUpSetUnk2F4(...);
-int FUN_0038b3f8(...);
+int statusBustUpPortraitRelease(...);
 int soundChannelStopAll(...);
 int workOwnerRelease(...);
 int resourceReleaseReference(...);
@@ -105,7 +105,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 /* Supplied declaration required: btlTalkBustUpReleaseTexture. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
-/* Supplied declaration required: FUN_0038b3f8. */
+/* Supplied declaration required: statusBustUpPortraitRelease. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d2158. */
 /* Supplied declaration required: FUN_003d2a00. */
@@ -654,7 +654,7 @@ LAB_003cf9bc:
       temp_v6 = 0;
       if (*(short *)(temp_v2 + 0x1e) != 0) {
         do {
-          FUN_0038b3f8((int)*(short *)(temp_v2 + temp_v6 * 2 + 0xe),1);
+          statusBustUpPortraitRelease((int)*(short *)(temp_v2 + temp_v6 * 2 + 0xe),1);
           temp_v10 = temp_v2 + temp_v6 * 4;
           resourceReleaseReference(*(unsigned int *)(temp_v10 + 0x28));
           *(unsigned int *)(temp_v10 + 0x28) = 0;

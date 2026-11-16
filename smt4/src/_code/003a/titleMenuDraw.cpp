@@ -17,7 +17,7 @@ extern TitleScene *g_titleScene;
 
 void FUN_002bed3c(void);
 void renderCtxApplyTransforms(TitleScene *scene);
-void FUN_002c18e4(TitleScene *scene);
+void renderCtxResetColorScale(TitleScene *scene);
 void FUN_003a9648(TitleMenu *menu);
 void scrollMenuDrawVisibleEntries(TitleMenu *menu);
 
@@ -37,7 +37,7 @@ void titleMenuDraw(TitleMenu *menu)
             break;
         }
         renderCtxApplyTransforms(g_titleScene);
-        FUN_002c18e4(g_titleScene);
+        renderCtxResetColorScale(g_titleScene);
     }
 }
 

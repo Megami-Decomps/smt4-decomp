@@ -1,49 +1,55 @@
-/* NON_MATCHING: retail has an 88-byte frame with the matrix at sp+24 and the vector at sp+8 (8 more bytes, keeps the matrix address in r6); this build packs a 76-byte frame. */
-#include "common.h"
+#include "shard/W5_W5Match2_PlainData.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexTMX.h"
 
-struct XformVec21a1a4 {
-    /* 0x0 */ f32 x;
-    /* 0x4 */ f32 y;
-    /* 0x8 */ f32 z;
+struct Vector3View {
+    f32 x;
+    f32 y;
+    f32 z;
 };
 
-struct XformMtx21a1a4 {
-    /* 0x00 */ f32 m[4][4];
-};
-
-struct XformOwner21a1a4 {
+/* An object with a transform at 0x10. */
+struct XformObject2ff7ac {
     /* 0x00 */ u8 unk00[0x10];
     /* 0x10 */ u8 transform[1];
 };
 
 extern "C" {
-
-void FUN_002b4c30(XformMtx21a1a4 *dest, const XformMtx21a1a4 *src);
-void matrix44SetIdentity(XformMtx21a1a4 *mtx);
-void FUN_002a2048(XformMtx21a1a4 *mtx, const XformVec21a1a4 *translation, s32 order);
-void matrixApplyByMode(void *dest, const XformMtx21a1a4 *mtx, s32 arg);
-
-// Build base (or identity) x uniform scale x translation and store it into the owner's transform.
-void FUN_002ff7ac(XformOwner21a1a4 *owner, const XformVec21a1a4 *translation, const XformMtx21a1a4 *base,
-                  f32 scale)
-{
-    XformMtx21a1a4 mtx;
-    XformVec21a1a4 vec;
-    if (base != NULL) {
-        FUN_002b4c30(&mtx, base);
-    } else {
-        matrix44SetIdentity(&mtx);
-    }
-    if (scale != 1.0f) {
-        vec.x = vec.y = vec.z = scale;
-        mathMatrixApplyScale(reinterpret_cast<f32 *>(&mtx), reinterpret_cast<const f32 *>(&vec), 2);
-    }
-    if (translation != NULL) {
-        vec = *translation;
-        FUN_002a2048(&mtx, &vec, 2);
-    }
-    matrixApplyByMode(owner->transform, &mtx, 0);
+void FUN_002b4c30(Matrix44 *destination, const Matrix44 *source);
+void matrix44SetIdentity(Matrix44 *destination);
+void mathMatrixApplyTranslation(Matrix44 *matrix, const Vector3View *offset, s32 mode);
+void matrixApplyByMode(void *transform, const Matrix44 *matrix, s32 mode);
 }
 
-} /* extern "C" */
+// Inlined copy of matrixInitializeWithScaleAndOffset: copy or initialize a matrix,
+// then apply optional uniform scaling and offset.
+static void matrixInitializeWithScaleAndOffset(Matrix44 *matrix, const Vector3View *offset,
+                                               const Matrix44 *source, f32 scale)
+{
+    if (source != 0) {
+        FUN_002b4c30(matrix, source);
+    } else {
+        matrix44SetIdentity(matrix);
+    }
+
+    Vector3View components;
+    if (scale != 1.0f) {
+        components.x = components.y = components.z = scale;
+        mathMatrixApplyScale(reinterpret_cast<f32 *>(matrix), reinterpret_cast<const f32 *>(&components), 2);
+    }
+
+    if (offset != 0) {
+        components.x = offset->x;
+        components.y = offset->y;
+        components.z = offset->z;
+        mathMatrixApplyTranslation(matrix, &components, 2);
+    }
+}
+
+/* Sets the object's transform from `base` (identity when NULL), a uniform scale and a translation. */
+extern "C" void FUN_002ff7ac(XformObject2ff7ac *object, const Vector3View *translation,
+                             const Matrix44 *base, f32 scale)
+{
+    Matrix44 matrix;
+    matrixInitializeWithScaleAndOffset(&matrix, translation, base, scale);
+    matrixApplyByMode(object->transform, &matrix, 0);
+}

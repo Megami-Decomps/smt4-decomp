@@ -1,49 +1,49 @@
-/* NON_MATCHING: retail keeps separate release branches; the readable loop shares them and checks the updated pointer before dereferencing it. */
-/* Polls deferred resource releases and removes entries whose update has completed. */
 #include "common.h"
 
-extern "C" void FUN_003965f0(void *object)
+/* A pooled controller: slots 0/1 are its destructors, slot 3 its per-frame update. */
+class PoolController {
+public:
+    virtual ~PoolController();
+    virtual void start();
+    virtual void update();
+    /* 0x04 */ s32 kind;
+    /* 0x08 */ u8 flags; // bit 0 = still running
+};
+
+struct ControllerPoolIV {
+    u8 unk00[0x10];
+    s32 count;                  // 0x10
+    s32 firstKindCount;         // 0x14
+    PoolController *slots[32];  // 0x18
+};
+
+/* Deletes the controller in the slot and counts it out of the pool. */
+static __inline void controllerPoolReleaseSlot(ControllerPoolIV *pool, s32 index)
 {
-    struct Entry;
-    struct Callbacks {
-        void *unk00;
-        void (*release)(Entry *entry);
-        void *unk08;
-        void (*update)(Entry *entry);
-    };
-    struct Entry {
-        Callbacks *callbacks;
-        u32 tracked;
-        u8 flags;
-    };
-    struct ReleaseQueue {
-        u8 unk00[0x10];
-        s32 count;
-        s32 pending;
-        Entry *entries[32];
-    };
-    ReleaseQueue *queue = (ReleaseQueue *)object;
+    PoolController *controller = pool->slots[index];
+    if (controller != NULL) {
+        s32 kind = controller->kind;
+        delete controller;
+        pool->slots[index] = NULL;
+        if (kind == 0)
+            --pool->firstKindCount;
+        --pool->count;
+    }
+}
+
+// Update active controllers and release every controller that has finished.
+extern "C" void FUN_003965f0(ControllerPoolIV *pool)
+{
     for (s32 i = 0; i < 32; ++i) {
-        Entry *entry = queue->entries[i];
-        if (entry == NULL) {
-            continue;
-        }
-        if (entry->flags & 1) {
-            entry->callbacks->update(entry);
-            entry = queue->entries[i];
-            if (entry->flags & 1) {
-                continue;
-            }
-            if (entry == NULL) {
-                continue;
+        PoolController *controller = pool->slots[i];
+        if (controller != NULL) {
+            if ((controller->flags & 1) == 0) {
+                controllerPoolReleaseSlot(pool, i);
+            } else {
+                controller->update();
+                if ((pool->slots[i]->flags & 1) == 0)
+                    controllerPoolReleaseSlot(pool, i);
             }
         }
-        u32 tracked = entry->tracked;
-        entry->callbacks->release(entry);
-        queue->entries[i] = NULL;
-        if (tracked == 0) {
-            --queue->pending;
-        }
-        --queue->count;
     }
 }

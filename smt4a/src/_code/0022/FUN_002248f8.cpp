@@ -27,7 +27,7 @@ int FUN_003343f0(...);
 int FUN_00336aec(...);
 int campCommonBgRelease(void);
 int partyPanelDestroy(void);
-int FUN_0038b3f8(...);
+int statusBustUpPortraitRelease(...);
 int devilIsTextureLoaded(...);
 int pairQueueAppend(...);
 int controllerStartInterpolation(...);
@@ -167,7 +167,7 @@ extern int FUN_0035fa18(int, int, int);
 extern int menu32State387CNotIn22To25(void);
 /* Supplied declaration required: partyPanelDestroy. */
 extern int menu32ModeIsNot5(int);
-/* Supplied declaration required: FUN_0038b3f8. */
+/* Supplied declaration required: statusBustUpPortraitRelease. */
 extern int menu32ModeIsNot6(int);
 /* Supplied declaration required: FUN_0039ebcc. */
 /* Supplied declaration required: devilIsTextureLoaded. */
@@ -908,7 +908,7 @@ LAB_002255d4:
       temp_v4 = 0;
       do {
         if (*(char *)(puVar14 + temp_v4 * 7 + 6) != '\0') {
-          FUN_0038b3f8((int)(short)puVar14[temp_v4 * 7 + 5],1);
+          statusBustUpPortraitRelease((int)(short)puVar14[temp_v4 * 7 + 5],1);
           *(unsigned char *)(puVar14 + temp_v4 * 7 + 6) = 0;
         }
         temp_v15 = (float)(temp_v14 >> 0x20);

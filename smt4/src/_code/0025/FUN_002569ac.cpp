@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses a separate countdown and 0x900-relative halfword stores; direct indexed records compile differently. */
 #include "common.h"
 
 struct BankRecord {
@@ -15,12 +14,11 @@ extern "C" {
 // Clear the four value fields of every record in the selected bank.
 void FUN_002569ac(RecordBank *banks, s32 bank)
 {
-    for (s32 index = 0; index < 133; ++index) {
-        BankRecord *record = &banks[bank].records[index];
-        record->values[0] = 0;
-        record->values[1] = 0;
-        record->values[2] = 0;
-        record->values[3] = 0;
+    for (u32 index = 0; index < 133; ++index) {
+        banks[bank].records[index].values[0] = 0;
+        banks[bank].records[index].values[1] = 0;
+        banks[bank].records[index].values[2] = 0;
+        banks[bank].records[index].values[3] = 0;
     }
 }
 }

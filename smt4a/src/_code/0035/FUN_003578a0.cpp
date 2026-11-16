@@ -1,4 +1,3 @@
-/* NON_MATCHING: prologue, box/count addressing (map pointer) and the in-loop plane height now match retail; the loop body's box-corner load and colour-move scheduling still differs (retail loads minX, minZ, maxZ, maxX before the modulo). */
 #include "camp/RenderCtx.h"
 #include <string.h>
 
@@ -37,18 +36,24 @@ void FUN_003578a0(f32 height)
     DebugMapBoxes *map = &DAT_00613178;
     if (map->count != 0) {
         RenderCtxA *context = g_renderCtx;
-        s32 state = FUN_001692ac(5, 1);
-        renderStackPush(&context->stackA, state);
+        renderCtxPushA(context, FUN_001692ac(5, 1));
         renderCtxSelectTexture(g_renderCtx, 0);
-        for (s32 index = 0; index < map->count; ++index) {
-            const DebugMapBox *box = &map->boxes[index];
-            f32 planeHeight = height + 100.0f;
-            u32 color = colors[index % 12] | 0x70;
-            FUN_00280a08(color, color, color, color,
-                box->minimumX, planeHeight, box->minimumZ,
-                box->minimumX, planeHeight, box->maximumZ,
-                box->maximumX, planeHeight, box->minimumZ,
-                box->maximumX, planeHeight, box->maximumZ);
+        s32 index = 0;
+        if (map->count > 0) {
+            height += 100.0f;
+            for (; index < map->count; ++index) {
+                const DebugMapBox *box = &map->boxes[index];
+                f32 minimumX = box->minimumX;
+                f32 minimumZ = box->minimumZ;
+                f32 maximumZ = box->maximumZ;
+                f32 maximumX = box->maximumX;
+                u32 color = colors[index % 12] | 0x70;
+                FUN_00280a08(color, color, color, color,
+                    minimumX, height, minimumZ,
+                    minimumX, height, maximumZ,
+                    maximumX, height, minimumZ,
+                    maximumX, height, maximumZ);
+            }
         }
         renderStackPop(&g_renderCtx->stackA);
     }

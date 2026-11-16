@@ -1,4 +1,3 @@
-/* NON_MATCHING: native frame44/shared literal tables versus local-table frame52/.constdata, with table-base hoisting differences (93/93). No dummy stack padding added. */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 
 namespace {
@@ -19,35 +18,60 @@ struct SpritePairLayout {
     s16 first;
     s16 second;
 };
+struct SpriteIndices2 { u32 ids[2]; };
+struct SpriteIndices3 { u32 ids[3]; };
+struct SpriteIndices4 { u32 ids[4]; };
+/* Sprite id sets for the three- and four-entry selections. */
+struct SpritePairIndexSets {
+    u8 unk00[0x58];
+    SpriteIndices3 firstThree;  // 0x58
+    SpriteIndices3 secondThree; // 0x64
+    SpriteIndices4 firstFour;   // 0x70
+    SpriteIndices4 secondFour;  // 0x80
+};
+/* Sprite id sets for the two-entry selection. */
+struct SpritePairTwoIndexSets {
+    SpriteIndices2 first;
+    SpriteIndices2 second;
+};
 }
 
 extern "C" {
-const SpritePairLayout* asdTMTexTableEntryAt(u32 table, s32 id);
+extern const SpritePairIndexSets DAT_004040d4;
+extern const SpritePairTwoIndexSets DAT_00403cd4;
+const SpritePairLayout* asdTMTexTableEntryAt(u32 table, u32 id);
 void pairSetHalves(UiAnimatedSprite* sprite, s16 first, s16 second);
 
-void uiLayoutSelectionSpritePair(void* context)
+// Size the selection's two sprites from the table entries chosen for a two-, three- or four-entry list.
+void uiLayoutSelectionSpritePair(SpritePairWork* work)
 {
-    SpritePairWork* work = static_cast<SpritePairWork*>(context);
     const SpritePairLayout* first = NULL;
     const SpritePairLayout* second = NULL;
-    if (work->kind == 0xb) {
-        if (work->count == 2) {
-            const u32 firstIds[2] = {0xac, 0xad};
-            first = asdTMTexTableEntryAt(0xe, firstIds[work->selection]);
-            const u32 secondIds[2] = {0xae, 0xaf};
-            second = asdTMTexTableEntryAt(0xe, secondIds[work->selection]);
-        } else if (work->count == 3) {
-            const u32 firstIds[3] = {0xa2, 0xa3, 0xa4};
-            first = asdTMTexTableEntryAt(0xe, firstIds[work->selection]);
-            const u32 secondIds[3] = {0xa5, 0xa6, 0xa7};
-            second = asdTMTexTableEntryAt(0xe, secondIds[work->selection]);
-        } else if (work->count == 4) {
-            const u32 firstIds[4] = {0xb8, 0xb9, 0xba, 0xbb};
-            first = asdTMTexTableEntryAt(0xe, firstIds[work->selection]);
-            const u32 secondIds[4] = {0xbc, 0xbd, 0xbe, 0xbf};
-            second = asdTMTexTableEntryAt(0xe, secondIds[work->selection]);
+    if (work->kind == 11) {
+        switch (work->count) {
+        case 2: {
+            SpriteIndices2 primary = DAT_00403cd4.first;
+            first = asdTMTexTableEntryAt(0xe, primary.ids[work->selection]);
+            SpriteIndices2 secondary = DAT_00403cd4.second;
+            second = asdTMTexTableEntryAt(0xe, secondary.ids[work->selection]);
+            break;
         }
-    } else if (work->kind == 0x13) {
+        case 3: {
+            SpriteIndices3 primary = DAT_004040d4.firstThree;
+            first = asdTMTexTableEntryAt(0xe, primary.ids[work->selection]);
+            SpriteIndices3 secondary = DAT_004040d4.secondThree;
+            second = asdTMTexTableEntryAt(0xe, secondary.ids[work->selection]);
+            break;
+        }
+        case 4: {
+            SpriteIndices4 primary = DAT_004040d4.firstFour;
+            first = asdTMTexTableEntryAt(0xe, primary.ids[work->selection]);
+            SpriteIndices4 secondary = DAT_004040d4.secondFour;
+            second = asdTMTexTableEntryAt(0xe, secondary.ids[work->selection]);
+            break;
+        }
+        }
+    } else if (work->kind == 19) {
         return;
     }
     pairSetHalves(&work->first, first->first, first->second);

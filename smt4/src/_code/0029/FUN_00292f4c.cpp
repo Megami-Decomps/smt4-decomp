@@ -33,7 +33,7 @@ typedef struct UnitView {
     u16 id;
 } UnitView;
 
-s32 FUN_0029efc0(u32 list);
+s32 resourceRunOperationIfUnblocked(u32 list);
 s32 FUN_0029efa8(u32 list);
 s32 FUN_00297ca4(SkillMenuWork *work, s32 arg);
 void FUN_0029212c(u32 id);
@@ -42,7 +42,7 @@ u32 FUN_0028d24c(void);
 void buttonHelpShowSkillDetails(u32 id);
 s32 flagBitIsSet(s32 flag);
 u32 dataTable16Sub2GetRecord(u32 index);
-void FUN_0029ee6c(u32 record, u32 color);
+void buttonHelpSetText(u32 record, u32 color);
 UnitView *gameGetUnitRecord(s32 index);
 u32 partyMemberFindById(u16 id);
 void FUN_0029da34(u32 a, s32 b, s32 id, u32 member);
@@ -57,7 +57,7 @@ void FUN_00292f4c(SkillMenuWork *work)
 {
     SkillMenuView *view = (SkillMenuView *)work;
     u32 *panel = (u32 *)((u8 *)work + 0x59BC);
-    u32 index = FUN_0029efc0(view->list) + FUN_0029efa8(view->list);
+    u32 index = resourceRunOperationIfUnblocked(view->list) + FUN_0029efa8(view->list);
 
     if (FUN_00297ca4(work, 0) != 1) {
         if (FUN_00297ca4(work, 0) != 2) {
@@ -78,7 +78,7 @@ void FUN_00292f4c(SkillMenuWork *work)
                 for (s32 i = 0; i < 6; i++) {
                     if (flagBitIsSet(i + 0x2E) != 0) {
                         if (shown == (s32)index) {
-                            FUN_0029ee6c(dataTable16Sub2GetRecord(order[i]), 0x323232FF);
+                            buttonHelpSetText(dataTable16Sub2GetRecord(order[i]), 0x323232FF);
                             return;
                         }
                         shown++;

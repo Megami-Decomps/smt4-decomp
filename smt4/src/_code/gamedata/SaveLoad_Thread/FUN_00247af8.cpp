@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail retains request arguments in GPRs; the build spills the payload size through a VFP register. */
+/* NON_MATCHING: the build parks the stack argument `size` in s16 (vpush d8) where retail keeps it in r4 until the request pointer moves there after the stm; the other argument registers now match. */
 #include "gamedata/SaveLoadThreadRequest.h"
 #include "shard/Sys43e310.h"
 #include "AsdSDK/AsdDebug.h"
@@ -9,22 +9,27 @@ extern const char DAT_00404290[];
 extern const char DAT_004042ac[];
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 clear);
 
+// The public thread prefix ends before its request pointer and result.
+struct SaveLoadThreadView {
+    u8 unk00;
+    s8 busy;
+    s8 firstState, secondState;
+    SaveLoadThreadRequest *request;
+    u32 unk08;
+    s32 result;
+};
+
+static __inline SaveLoadThreadView *saveLoadThread(void)
+{
+    return (SaveLoadThreadView *)&g_saveLoadThread;
+}
+
 // Initialize a save/load request and start loading its interface resources.
 void FUN_00247af8(u8 kind, u32 file, u32 slot, void *payload, u32 size)
 {
-    // The public thread prefix ends before its request pointer and result.
-    struct ThreadView {
-        u8 unk00;
-        s8 busy;
-        s8 firstState, secondState;
-        SaveLoadThreadRequest *request;
-        u32 unk08;
-        s32 result;
-    };
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\gamedata\\SaveLoad_Thread.cpp", 254);
     SaveLoadThreadRequest *request = (SaveLoadThreadRequest *)asdMemoryAlloc(0x100, 0x100, 0, sizeof(SaveLoadThreadRequest), 1);
-    ThreadView *thread = (ThreadView *)&g_saveLoadThread;
-    thread->request = request;
+    saveLoadThread()->request = request;
     request->kind = kind;
     request->firstResult = -1;
     request->payloadSize = size;
@@ -40,8 +45,8 @@ void FUN_00247af8(u8 kind, u32 file, u32 slot, void *payload, u32 size)
     if (request->modelFile == NULL) {
         asdLoadFileAsyncSimple(DAT_004042ac, reinterpret_cast<u32 *>(&request->modelFile), 0);
     }
-    thread->result = -1;
-    thread->firstState = 0;
-    thread->secondState = 0;
+    saveLoadThread()->result = -1;
+    saveLoadThread()->firstState = 0;
+    saveLoadThread()->secondState = 0;
 }
 }

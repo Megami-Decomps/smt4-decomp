@@ -1,4 +1,3 @@
-/* NON_MATCHING: only process callback argument stores, final speed store scheduling and literal order differ. */
 #include "event/NpcTextureWork.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -53,6 +52,8 @@ void FUN_00285e44(s32 npcId, u32 style, s32 x)
     else
         work->display.screenRegion = 5;
     work->speed = 0.33f;
-    asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00403570), 2, 0, 0, FUN_001dfc64, FUN_002db92c, reinterpret_cast<u32>(work));
+    AsdProcUpdateFunc update = FUN_001dfc64; /* the portrait's per-frame step */
+    AsdProcFunc end = FUN_002db92c;          /* releases the textures and frees the work */
+    asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00403570), 2, 0, 0, update, end, reinterpret_cast<u32>(work));
 }
 }

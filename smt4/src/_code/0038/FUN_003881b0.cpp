@@ -284,7 +284,7 @@ void FUN_003881b0(unsigned int param_1,unsigned int param_2,unsigned int param_3
         uStack_7c = uVar10;
         FUN_002b1fc4(&uStack_b8,&uStack_a8,&uStack_98,&uStack_88,0,1);
         renderCtxApplyTransforms(DAT_0044ea00);
-        FUN_002c18e4(DAT_0044ea00);
+        renderCtxResetColorScale(DAT_0044ea00);
       }
     }
     return;

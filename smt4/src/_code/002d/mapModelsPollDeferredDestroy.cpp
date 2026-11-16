@@ -1,4 +1,3 @@
-/* NON_MATCHING: the phase switch matches the retail guards and entry addresses, but the compiler duplicates the zero-return epilogue. */
 #include "common.h"
 
 struct DeferredMapModel {
@@ -34,44 +33,47 @@ s32 FUN_001e34fc(s32 map, s32 area, u32 flags);
 // Mark stale map models, allow two frames to drain, then release them.
 u32 mapModelsPollDeferredDestroy(void)
 {
+    s32 i;
+    DeferredMapModel *entry;
     switch (g_deferredMapModels->state) {
     case 0:
-        for (s32 i = 0; i < 64; ++i) {
-            DeferredMapModel *entry = &g_deferredMapModels->entries[i];
+        for (i = 0; i < 64; ++i) {
+            entry = &g_deferredMapModels->entries[i];
             if (entry->active && !FUN_00316d64(entry->map, entry->area) && entry->manager) {
                 asdMdlManagerMarkDestroy(entry->manager);
                 entry->destroyPending = 1;
             }
         }
+        ++g_deferredMapModels->state;
+        g_deferredMapModels->delay = 0;
         break;
     case 1:
         ++g_deferredMapModels->delay;
-        if (g_deferredMapModels->delay < 2)
-            return 0;
-        for (s32 i = 0; i < 64; ++i) {
-            DeferredMapModel *entry = &g_deferredMapModels->entries[i];
-            if (entry->active && entry->destroyPending) {
-                if (entry->manager) {
-                    asdMdlManagerDestroy(entry->manager);
-                    entry->manager = NULL;
+        if (g_deferredMapModels->delay >= 2) {
+            for (i = 0; i < 64; ++i) {
+                entry = &g_deferredMapModels->entries[i];
+                if (entry->active && entry->destroyPending) {
+                    if (entry->manager) {
+                        asdMdlManagerDestroy(entry->manager);
+                        entry->manager = NULL;
+                    }
+                    if (entry->resource) {
+                        FUN_002e00e0(entry->resource);
+                        entry->resource = NULL;
+                    }
+                    entry->active = 0;
+                    entry->destroyPending = 0;
                 }
-                if (entry->resource) {
-                    FUN_002e00e0(entry->resource);
-                    entry->resource = NULL;
-                }
-                entry->active = 0;
-                entry->destroyPending = 0;
             }
+            ++g_deferredMapModels->state;
+            g_deferredMapModels->delay = 0;
         }
         break;
     case 2:
         if (FUN_001e34fc(g_deferredMapModels->map, g_deferredMapModels->area, 1))
             return 1;
-    default:
-        return 0;
+        break;
     }
-    ++g_deferredMapModels->state;
-    g_deferredMapModels->delay = 0;
     return 0;
 }
 }

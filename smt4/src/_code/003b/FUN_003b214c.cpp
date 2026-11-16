@@ -1,58 +1,78 @@
-/* NON_MATCHING: only the peeled first parent-right compare uses r2 in retail (the loop's own compare uses r1); the build uses r1 for both. */
 #include "common.h"
 
-struct ResourceTreeValue {
-    /* 0x00 */ u8 unk00[0x10];
-    /* 0x10 */ void *resource;
-};
-struct ResourceTreeNode {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ ResourceTreeNode *parent;
-    /* 0x08 */ ResourceTreeNode *left;
-    /* 0x0c */ ResourceTreeNode *right;
-    /* 0x10 */ u8 unk10[8];
-    /* 0x18 */ ResourceTreeValue *value;
-};
-struct ResourceReadinessTree {
-    /* 0x00 */ u8 unk00[0x14];
-    /* 0x14 */ ResourceTreeNode *sentinel;
-};
-struct ResourceTreeOwner {
-    /* 0x0000 */ u8 unk0000[0x1414];
-    /* 0x1414 */ ResourceReadinessTree tree;
+namespace {
+
+struct EntryLocalView {
+    u8 unk00[0x10]; // 0x00
+    void* unk10;    // 0x10
 };
 
-extern "C" {
-s32 FUN_003afac0(void *resource);
+struct TreeNodeLocalView {
+    u32 unk00;                  // 0x00
+    TreeNodeLocalView* parent;   // 0x04
+    TreeNodeLocalView* left;     // 0x08
+    TreeNodeLocalView* right;    // 0x0C
+    u8 unk10[0x08];              // 0x10
+    EntryLocalView* entry;       // 0x18
+};
 
-bool FUN_003b214c(ResourceTreeOwner *owner)
-{
-    ResourceReadinessTree *tree = &owner->tree;
-    bool ready = true;
-    ResourceTreeNode *node = tree->sentinel->left;
-    for (ResourceTreeNode *end = tree->sentinel; node != end; end = tree->sentinel) {
-        if (!FUN_003afac0(node->value->resource)) {
-            ready = false;
-        }
-        ResourceTreeNode *successor = node->right;
-        if (successor) {
+struct TreeLocalView {
+    u8 unk00[0x14];              // 0x00
+    TreeNodeLocalView* sentinel; // 0x14
+};
+
+struct ObjectLocalView {
+    u8 unk00[0x1414]; // 0x0000
+    TreeLocalView tree; // 0x1414
+};
+
+} // namespace
+
+extern "C" s32 FUN_003afac0(void* object);
+
+namespace {
+
+// In-order iterator over the tree's nodes.
+struct TreeIterator {
+    TreeNodeLocalView* node;
+
+    TreeIterator(TreeNodeLocalView* start) : node(start) {}
+    bool operator!=(TreeNodeLocalView* other) const { return node != other; }
+    TreeIterator& operator++()
+    {
+        TreeNodeLocalView* next = node->right;
+        if (next != 0) {
             do {
-                node = successor;
-                successor = node->left;
-            } while (successor);
+                node = next;
+                next = node->left;
+            } while (next != 0);
         } else {
-            ResourceTreeNode *parent = node->parent;
-            ResourceTreeNode *right = parent->right;
-            while (node == right) {
-                node = parent;
-                parent = parent->parent;
-                right = parent->right;
+            next = node->parent;
+            while (node == next->right) {
+                node = next;
+                next = node->parent;
             }
-            if (node->right != parent) {
-                node = parent;
+            if (node->right != next) {
+                node = next;
             }
+        }
+        return *this;
+    }
+};
+
+} // namespace
+
+// Visit all tree entries and return whether every helper call succeeded.
+extern "C" u32 FUN_003b214c(ObjectLocalView* object)
+{
+    u32 allSucceeded = 1;
+    TreeLocalView* tree = &object->tree;
+
+    for (TreeIterator it(tree->sentinel->left); it != tree->sentinel; ++it) {
+        if (FUN_003afac0(it.node->entry->unk10) == 0) {
+            allSucceeded = 0;
         }
     }
-    return ready;
-}
+
+    return allSucceeded;
 }

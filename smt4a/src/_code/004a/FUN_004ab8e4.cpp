@@ -5,7 +5,7 @@
 extern "C" {
 extern BtlUiGlobalsA g_btlUi;
 void sysMemClear(void *memory, u32 size);
-void FUN_00371c3c(s16 portrait, s32 kind);
+void statusBustUpPortraitAcquire(s16 portrait, s32 kind);
 
 // Reset the two battle portrait slots and prepare their offscreen slide-in positions.
 void FUN_004ab8e4(void)
@@ -31,7 +31,7 @@ void FUN_004ab8e4(void)
             panel->slots[index].portrait = 0;
         }
         if (panel->slots[index].portrait != 0 && !devilIsTextureLoaded((s16)panel->slots[index].portrait, 1)) {
-            FUN_00371c3c((s16)panel->slots[index].portrait, 1);
+            statusBustUpPortraitAcquire((s16)panel->slots[index].portrait, 1);
             panel->slots[index].requested = 1;
         }
     }

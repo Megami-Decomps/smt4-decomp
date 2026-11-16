@@ -107,7 +107,7 @@ extern int FUN_003c30e4(void);
 extern int FUN_003c311c(void);
 /* Supplied declaration required: dataTable29Section6Count. */
 /* Supplied declaration required: dataTable2FType0Count. */
-extern int FUN_003cb88c(int, unsigned int);
+extern int dataTable2eSub3FindByKeyPair(int, unsigned int);
 /* Supplied declaration required: moriModelContentCopyBody. */
 extern unsigned int modelListInit(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
@@ -154,7 +154,7 @@ void FUN_00303f48(void)
   temp_v6 = g_mapEnemy;
   temp_v0 = gameFlagsGetBlock();
   DAT_005f17f0 = 0x3c;
-  temp_v1 = FUN_003cb88c(g_gameState,DAT_005f1600);
+  temp_v1 = dataTable2eSub3FindByKeyPair(g_gameState,DAT_005f1600);
   DAT_005f18a0 = 0x1e;
   DAT_005f18a4 = 3500.0f;
   DAT_005f18a8 = 0x44fa0000;

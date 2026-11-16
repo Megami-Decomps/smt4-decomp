@@ -35,9 +35,9 @@ int statusCameraSelectPreset(int);
 int aocDataBlockResolveEntries(void);
 int FUN_0031416c(...);
 int FUN_00316580(...);
-int FUN_00371c3c(int, int);
+int statusBustUpPortraitAcquire(int, int);
 int FUN_003857b4(...);
-int FUN_0038b3f8(...);
+int statusBustUpPortraitRelease(...);
 int FUN_003e40d0(...);
 int linkHolderApplyFirst(...);
 int linkHolderClearFlag(...);
@@ -103,11 +103,11 @@ extern unsigned int FUN_002f72dc(int);
 extern int objStateNotEnding(void);
 extern int FUN_00334044(void);
 /* Supplied declaration required: FUN_00340a94. */
-/* Supplied declaration required: FUN_00371c3c. */
+/* Supplied declaration required: statusBustUpPortraitAcquire. */
 extern int lmapSceneGetScript(void);
 extern int statusDownGetMode(void);
 /* Supplied declaration required: FUN_003857b4. */
-/* Supplied declaration required: FUN_0038b3f8. */
+/* Supplied declaration required: statusBustUpPortraitRelease. */
 extern int FUN_0039c1f4(void);
 /* Supplied declaration required: devilIsTextureLoaded. */
 /* Supplied declaration required: FUN_003e40d0. */
@@ -245,7 +245,7 @@ unsigned int FUN_00208c08(void)
       *(unsigned char *)(temp_v2 + 0x2011) = 1;
     }
     if (*(short *)(temp_v2 + 0x138c) != 0) {
-      FUN_0038b3f8((int)*(short *)(temp_v2 + 0x138c),1);
+      statusBustUpPortraitRelease((int)*(short *)(temp_v2 + 0x138c),1);
       *(unsigned short *)(temp_v2 + 0x138c) = 0;
     }
     if ((0 < *(short *)(temp_v2 + 0x138e)) && (*(int *)(temp_v2 + 0x2028) != 0)) {
@@ -267,7 +267,7 @@ unsigned int FUN_00208c08(void)
         }
         *(short *)(temp_v2 + 0x138c) = temp_v1;
         if (temp_v3 != 0) {
-          FUN_00371c3c(temp_v3,temp_v9);
+          statusBustUpPortraitAcquire(temp_v3,temp_v9);
         }
       }
       else {
@@ -593,7 +593,7 @@ LAB_00209b8c:
             if (*(char *)(temp_v2 + 0x2032) != '\0') {
               eventQueueAddUnique(0x100020e);
               if (*(short *)(temp_v2 + 0x138c) != 0) {
-                FUN_0038b3f8((int)*(short *)(temp_v2 + 0x138c),1);
+                statusBustUpPortraitRelease((int)*(short *)(temp_v2 + 0x138c),1);
                 *(unsigned short *)(temp_v2 + 0x138c) = 0;
               }
               if ((0 < *(short *)(temp_v2 + 0x138e)) && (*(int *)(temp_v2 + 0x2028) != 0)) {

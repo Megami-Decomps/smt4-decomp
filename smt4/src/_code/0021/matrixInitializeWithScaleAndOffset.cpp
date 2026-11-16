@@ -13,7 +13,7 @@ extern "C" {
 void FUN_0025009c(Matrix44View* destination, const Matrix44View* source);
 void matrix44SetIdentity(Matrix44View* destination);
 void mathMatrixApplyScale(Matrix44View* matrix, const Vector3View* scale, s32 mode);
-void FUN_0024fd70(Matrix44View* matrix, const Vector3View* offset, s32 mode);
+void mathMatrixApplyTranslation(Matrix44View* matrix, const Vector3View* offset, s32 mode);
 
 // Copy or initialize a matrix, then apply optional uniform scaling and offset.
 void matrixInitializeWithScaleAndOffset(Matrix44View* matrix, const Vector3View* offset,
@@ -35,7 +35,7 @@ void matrixInitializeWithScaleAndOffset(Matrix44View* matrix, const Vector3View*
         components.x = offset->x;
         components.y = offset->y;
         components.z = offset->z;
-        FUN_0024fd70(matrix, &components, 2);
+        mathMatrixApplyTranslation(matrix, &components, 2);
     }
 }
 }

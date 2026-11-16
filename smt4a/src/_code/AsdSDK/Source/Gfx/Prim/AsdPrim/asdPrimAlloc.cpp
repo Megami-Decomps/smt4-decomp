@@ -1,4 +1,4 @@
-/* NON_MATCHING: instruction scheduling and register allocation differ; retail 19 vs built 19 rows, 9 diff lines. */
+/* NON_MATCHING: only the new used-count register differs (retail adds into r3, this build into r0). */
 #include "AsdSDK/Source/Gfx/Prim/AsdPrim.h"
 
 extern "C" {
@@ -14,9 +14,9 @@ u8 *asdPrimAlloc(s32 size)
     if (offset & 0xf) {
         offset += offset % 16;
     }
-    block = g_asdPrimBuffers.buf[g_asdPrimBuffers.current];
+    block = g_asdPrimBuffers.buf[g_asdPrimBuffers.current] + offset;
     g_asdPrimBuffers.used[g_asdPrimBuffers.current] = offset + size;
-    return block + offset;
+    return block;
 }
 
 } /* extern "C" */

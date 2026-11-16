@@ -79,7 +79,7 @@ void FUN_00408184(s32 id, s32 value);
 void resourceOwnerReleaseAndReset(u32 registry);
 void uniteCameraDestroy(void);
 void ptrListRemoveClearOwner(u32 registry, u32 owner);
-void FUN_0038b3f8(s32 id, s32 flag);
+void statusBustUpPortraitRelease(s32 id, s32 flag);
 void scrScriptProcessDestroy(s32 process);
 void *ptrTable44FreeAll(void *table);
 void jobStop(u32 job, s32 arg);
@@ -146,7 +146,7 @@ extern "C" void FUN_0031fb04(void)
     }
     for (s32 i = 0; i < 4; ++i) {
         if (unite->loadedPortraits[i] != 0) {
-            FUN_0038b3f8((s16)unite->loadedPortraits[i], 1);
+            statusBustUpPortraitRelease((s16)unite->loadedPortraits[i], 1);
         }
     }
     scrScriptProcessDestroy(unite->scriptProcess);

@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_0025ccac(...);
+int selectionPanelDrawMarkers(...);
 int FUN_0025d1c4(...);
 int FUN_0025ee64(...);
 int FUN_0025f300(...);
 int campDrawPartyComparisonIndicators(...);
 int FUN_0025f6b8(...);
 int FUN_002bed3c(...);
-int FUN_002c18e4(...);
+int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
 int renderCtxSelectStereoLayout(...);
 int FUN_002dc120(...);
@@ -42,14 +42,14 @@ typedef struct {
 
 extern int g_titleScene; /* 0x44ea00 */
 
-/* Supplied declaration required: FUN_0025ccac. */
+/* Supplied declaration required: selectionPanelDrawMarkers. */
 /* Supplied declaration required: FUN_0025d1c4. */
 /* Supplied declaration required: FUN_0025ee64. */
 /* Supplied declaration required: FUN_0025f300. */
 /* Supplied declaration required: campDrawPartyComparisonIndicators. */
 /* Supplied declaration required: FUN_0025f6b8. */
 /* Supplied declaration required: FUN_002bed3c. */
-/* Supplied declaration required: FUN_002c18e4. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -134,7 +134,7 @@ LAB_001e076c:
     FUN_0025f6b8(param_1,0,1,0);
     campDrawPartyComparisonIndicators(param_1,0);
     FUN_0025ee64(param_1);
-    FUN_0025ccac(param_1,1);
+    selectionPanelDrawMarkers(param_1,1);
     break;
   case 0x18:
   case 0x19:
@@ -183,19 +183,19 @@ LAB_001e076c:
     FUN_0025f6b8(param_1,0,1);
     campDrawPartyComparisonIndicators(param_1,1);
     FUN_0025ee64(param_1);
-    FUN_0025ccac(param_1,0);
+    selectionPanelDrawMarkers(param_1,0);
     break;
   case 0x23:
     FUN_0025f6b8(param_1,0,1);
     campDrawPartyComparisonIndicators(param_1,1);
     FUN_0025ee64(param_1);
-    FUN_0025ccac(param_1,1);
+    selectionPanelDrawMarkers(param_1,1);
     break;
   case 0x24:
     FUN_0025f6b8(param_1,0,0,0);
     campDrawPartyComparisonIndicators(param_1,0);
     FUN_0025ee64(param_1);
-    FUN_0025ccac(param_1,0);
+    selectionPanelDrawMarkers(param_1,0);
     break;
   case 0x25:
   case 0x26:
@@ -246,7 +246,7 @@ LAB_001e076c:
     *(unsigned char *)(temp_v0 + 0x12c4) = 0;
   }
   renderCtxApplyTransforms(g_titleScene);
-  FUN_002c18e4(g_titleScene);
+  renderCtxResetColorScale(g_titleScene);
   return;
 }
 

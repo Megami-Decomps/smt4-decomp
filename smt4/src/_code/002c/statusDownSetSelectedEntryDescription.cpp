@@ -25,7 +25,7 @@ extern StatusDownSelectionWorkIV *g_statusDown;
 extern AocSystem *g_aocSystem;
 void buttonHelpSetPreset(u32 preset);
 void *fileSlotGetBuffer(u32 slot);
-RelativeDirectory *FUN_00389084(AocSystem *system, s32 entry);
+RelativeDirectory *dataArchiveSetFindFileWithEntry(AocSystem *system, s32 entry);
 void asdTextDrawDirectoryEntry(AsdText *text, u32 font, s32 mode, s32 x, s32 y,
                   RelativeDirectory *directory, u32 index);
 u32 FUN_002b753c(AsdText *text);
@@ -53,7 +53,7 @@ void statusDownSetSelectedEntryDescription(s32 entry)
         RelativeDirectory *directory = (RelativeDirectory *)fileSlotGetBuffer(0x40);
         asdTextDrawDirectoryEntry(screen->text, 3, -1, 0, 3, directory, 0);
     } else {
-        RelativeDirectory *directory = FUN_00389084(g_aocSystem, entry);
+        RelativeDirectory *directory = dataArchiveSetFindFileWithEntry(g_aocSystem, entry);
         if (directory == NULL) {
             directory = (RelativeDirectory *)fileSlotGetBuffer(0x40);
         }

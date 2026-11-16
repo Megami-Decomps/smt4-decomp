@@ -16,7 +16,7 @@ s32 rangeLimitMin(ListMenu *menu);
 u32 flaggedEntryGetValueByState(ListMenu *menu);
 u32 flaggedValueHolderGetTotal(ListMenu *menu);
 void FUN_0022ade4(ListMenu *menu, s32 index, s32 value, s32 marked, s32 size);
-void FUN_0029ee6c(u8 *highlight, u32 color);
+void buttonHelpSetText(u8 *highlight, u32 color);
 
 /* Draw the list menu: its frame and icons at the menu position, every entry except the cursor's, then
  * the cursor entry highlighted. */
@@ -70,7 +70,7 @@ void FUN_003bb780(ListMenu *menu)
         FUN_0022ade4(menu, flaggedEntryGetValueByState(menu), value, 0, 36);
         highlight = NULL;
     }
-    FUN_0029ee6c(highlight, 0x323232FF);
+    buttonHelpSetText(highlight, 0x323232FF);
     efctSetSpeed(savedAlpha);
 }
 

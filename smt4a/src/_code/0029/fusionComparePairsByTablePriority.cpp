@@ -1,17 +1,18 @@
-/* NON_MATCHING: packed-ID extraction/address scheduling and nested comparator register lifetimes differ from retail. */
+/* NON_MATCHING: retail forms the first packed-ID address with add #4096 (the build loads 0x13B8 from the pool), copies the first ID before each lookup, and loads the second half's IDs in the other order. */
 #include "shard/W6_W6Match8_FusionCompare.h"
 #include "shard/W5_W5Match2_UniteWork.h"
 
 
-static __inline s32 compareFusionPriority(const u32 *first, const u32 *second)
+/* Orders two demons by their data-table priority, then by race, level and ID. */
+static __inline s32 compareFusionPriority(u32 first, u32 second)
 {
-    const DevilRecordA *a = FUN_00184310(*first);
-    const DevilRecordA *b = FUN_00184310(*second);
+    const DevilRecordA *a = FUN_00184310(first);
+    const DevilRecordA *b = FUN_00184310(second);
     s32 firstPriority = dataTableGetEntry0102Value(a->id);
     s32 secondPriority = dataTableGetEntry0102Value(b->id);
     s32 result = firstPriority - secondPriority;
     if (result == 0) {
-        result = fusionCompareRaceLevelIdA(first, second);
+        result = fusionCompareRaceLevelIdA(&first, &second);
     }
     return result;
 }
@@ -19,14 +20,14 @@ static __inline s32 compareFusionPriority(const u32 *first, const u32 *second)
 // Sort fusion pairs by data-table priority, race, descending level and ID.
 extern "C" s32 fusionComparePairsByTablePriority(const u16 *first, const u16 *second)
 {
-    UniteWork *list = g_unite;
-    u32 firstId = list->pairList.pairs[*first].packedIds & 0x7fff;
-    u32 secondId = list->pairList.pairs[*second].packedIds & 0x7fff;
-    s32 result = compareFusionPriority(&firstId, &secondId);
+    UniteWork *work = g_unite;
+    u32 left = work->pairList.pairs[*first].packedIds;
+    u32 right = work->pairList.pairs[*second].packedIds;
+    s32 result = compareFusionPriority(left & 0x7FFF, right & 0x7FFF);
     if (result == 0) {
-        firstId = (list->pairList.pairs[*first].packedIds & 0x3fffffff) >> 15;
-        secondId = (list->pairList.pairs[*second].packedIds & 0x3fffffff) >> 15;
-        result = compareFusionPriority(&firstId, &secondId);
+        left = work->pairList.pairs[*first].packedIds;
+        right = work->pairList.pairs[*second].packedIds;
+        result = compareFusionPriority((left & 0x3FFFFFFF) >> 15, (right & 0x3FFFFFFF) >> 15);
     }
     return result;
 }

@@ -8,7 +8,14 @@ public:
     virtual void vfunc08();
     virtual void update();
 };
-class Obj55c81c {
+/* The nonvirtual state base: initialized before the controller's vtable is stored. */
+struct Obj55c81cOwner {
+    Obj55c81cOwner(u32 owner) : owner(owner) {}
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ u32 owner;
+};
+
+class Obj55c81c : public Obj55c81cOwner {
 public:
     Obj55c81c(u32 owner);
     virtual ~Obj55c81c();
@@ -17,8 +24,6 @@ public:
     virtual void vfunc10();
     virtual void vfunc14();
     virtual void vfunc18();
-    /* 0x04 */ u8 unk04[4];
-    /* 0x08 */ u32 owner;
     /* 0x0C */ u8 flags;
     /* 0x10 */ u32 unk10[4];
     /* 0x20 */ u8 unk20[8];

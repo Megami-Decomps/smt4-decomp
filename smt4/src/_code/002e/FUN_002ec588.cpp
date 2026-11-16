@@ -11,7 +11,7 @@ int scrEffectRunIfActive(void);
 int randBetween(int, int);
 int FUN_00297060(void);
 int asdLoadFileAsyncSimple(...);
-int FUN_0029cc44(void);
+int messageDismissNumericBanner(void);
 int buttonHelpSetPreset(...);
 int textFormatBuffer(...);
 
@@ -75,7 +75,7 @@ extern int FUN_0028fb40(unsigned short);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: FUN_0029cc44. */
+/* Supplied declaration required: messageDismissNumericBanner. */
 extern int flagWordTestBit(unsigned int, unsigned int);
 /* Supplied declaration required: gameGetUnitRecord. */
 extern int gameGetSlotTable(void);
@@ -406,7 +406,7 @@ unsigned int FUN_002ec588(int param_1)
         textFormatBuffer(temp_v12,&LAB_002ece48,temp_v8 + 1);
         asdLoadFileAsyncSimple(temp_v12,param_1 + 0xd00,0);
         *(unsigned char *)(param_1 + 0xd63) = 1;
-        FUN_0029cc44();
+        messageDismissNumericBanner();
         scrEffectRunIfActive();
         buttonHelpSetPreset(0x3c);
         *(int *)(temp_v13 + 0x50) = *(int *)(temp_v13 + 0x50) + 1;

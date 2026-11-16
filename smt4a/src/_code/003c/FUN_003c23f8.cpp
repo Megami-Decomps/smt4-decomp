@@ -1,5 +1,4 @@
 #include "code/Code003e.h"
-/* NON_MATCHING: mode/actor spill allocation, division constant hoisting and event-argument stores differ from retail. */
 #include "shard/W5_W5Match7_BattleMask.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
@@ -18,31 +17,31 @@ u32 FUN_004fc094(s32 mode, BtlUnitA *actor, s32 option, BattleRosterRecordA *tar
                  s32 value21, s16 value22, s32 value23, s32 value24,
                  s32 value25, s32 value26);
 
+// Queue nonlethal HP damage (percent of max HP, percent of HP, or a fixed amount) for each eligible party member.
 u32 FUN_003c23f8(void)
 {
     s32 amount = scrGetArg(0);
     s32 mode = scrGetArg(1);
     BtlUnitA *actor = btlUnitGet(g_btlScriptUnit);
-    for (s32 index = 0; index < 4; ++index) {
-        BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
-        if ((entry->flags & g_battleMaskPresets.eligibility.active) != 0 &&
-            (entry->flags & g_battleMaskPresets.eligibility.excluded) == 0 &&
-            entry->unitIndex >= 0) {
+    for (s32 slot = 0; slot < 4; ++slot) {
+        BtlMainStateA *battle = btlGetMainState();
+        BtlCombatantEntryA *entry = &battle->entries[slot];
+        if ((entry->flags & g_battleMaskPresets.eligibility.active) &&
+            !(entry->flags & g_battleMaskPresets.eligibility.excluded) && entry->unitIndex >= 0) {
             s32 damage = 0;
-            if (mode == 0)
-                damage = entry->maxHp * amount / 100;
-            else if (mode == 1)
-                damage = entry->hp * amount / 100;
-            else if (mode == 2)
-                damage = amount;
+            switch (mode) {
+            case 0: damage = entry->maxHp * amount / 100; break;
+            case 1: damage = entry->hp * amount / 100; break;
+            case 2: damage = amount; break;
+            }
             if (damage >= entry->hp)
                 damage = entry->hp - 1;
             FUN_003ee0c0(btlGetMainState());
-            BattleRosterRecordA *target = &btlGetMainState()->roster[entry->unitIndex];
-            s32 eventFlags = index << 3;
+            battle = btlGetMainState();
+            BattleRosterRecordA *target = &battle->roster[entry->unitIndex];
             FUN_004fc094(0, actor, 0, target, 0, damage, -1, ~0u,
                          entry->hp, entry->maxHp, 0, 0, 0, 0, 1, 0,
-                         eventFlags, eventFlags, eventFlags, eventFlags,
+                         slot << 3, slot << 3, slot << 3, slot << 3,
                          1, 0, 1, 1, 0, 1);
         }
     }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: protagonist branch placement and preview pointer/value store registers differ; final value/cost loads combine into LDRD instead of accessor calls' retained loads/NOPs. */
+/* NON_MATCHING: only the stock-cost loop test differs: retail loads the user (ldrsh r0) before the slot unit (r1) and compares r1 with r0; written either way round, armcc swaps one of the two. */
 #include "ui/PartyPanel.h"
 #include <stddef.h>
 #include "gamedata/SaveSlotTableIV.h"
@@ -8,6 +8,10 @@ extern PartyPanel *g_partyPanel;
 s32 FUN_0029a924(u16 action);
 s32 FUN_0029a9d4(u16 action, u32 mode);
 s32 FUN_002621b4(u32 user, s32 target, u32 action, s32 *result);
+s32 partyWidgetGetX(void *widget);
+s32 partyWidgetGetCost(void *widget);
+void partyWidgetSetValue(void *widget, s32 value);
+void partyWidgetSetCost(void *widget, s32 cost);
 
 void FUN_0026b7c0(void)
 {
@@ -32,41 +36,41 @@ void FUN_0026b7c0(void)
     PartyActionView *panel = reinterpret_cast<PartyActionView *>(g_partyPanel);
     const SaveSlotTableIV *slots = gameGetSlotTable();
     s32 result = 0;
-    if (panel->user >= 0) {
+    if (panel->user < 0) {
+        partyWidgetSetCost(panel->protagonist, -FUN_0029a9d4(panel->action, 1));
+    } else {
         for (s32 index = 0; index < 3; ++index) {
             if (slots->active[index] == panel->user)
-                panel->party[index]->cost = -FUN_0029a924(panel->action);
+                partyWidgetSetCost(panel->party[index], -FUN_0029a924(panel->action));
         }
         for (s32 index = 0; index < 24; ++index) {
             if (panel->stockSlots[index].unit == panel->user)
-                panel->stock[index]->cost = -FUN_0029a924(panel->action);
+                partyWidgetSetCost(panel->stock[index], -FUN_0029a924(panel->action));
         }
-    } else {
-        panel->protagonist->cost = -FUN_0029a9d4(panel->action, 1);
     }
     if (panel->protagonistActive) {
         FUN_002621b4(panel->user, -1, panel->action, &result);
-        panel->protagonist->value = result;
+        partyWidgetSetValue(panel->protagonist, result);
     }
     for (s32 index = 0; index < 3; ++index) {
         if (slots->active[index] >= 0) {
             FUN_002621b4(panel->user, slots->active[index], panel->action, &result);
-            panel->party[index]->value = result;
+            partyWidgetSetValue(panel->party[index], result);
         }
     }
     for (s32 index = 0; index < 24; ++index) {
         if (panel->stockSlots[index].unit >= 0) {
             FUN_002621b4(panel->user, panel->stockSlots[index].unit, panel->action, &result);
-            panel->stock[index]->value = result;
+            partyWidgetSetValue(panel->stock[index], result);
         }
     }
     if (panel->user < 0) {
-        FUN_00298d28(panel->protagonist->value, panel->protagonist->cost);
+        FUN_00298d28(partyWidgetGetX(panel->protagonist), partyWidgetGetCost(panel->protagonist));
         return;
     }
     for (s32 index = 0; index < 24; ++index) {
         if (panel->stockSlots[index].unit == panel->user)
-            FUN_00298d28(panel->stock[index]->value, panel->stock[index]->cost);
+            FUN_00298d28(partyWidgetGetX(panel->stock[index]), partyWidgetGetCost(panel->stock[index]));
     }
 }
 }

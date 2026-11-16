@@ -35,7 +35,7 @@ void FUN_0047bc90(u32 *job, RequestParameters *event);
 void releaseEntriesB(u32 *regions);
 void releaseEntriesA(u32 *entries);
 void FUN_00476e58(u32 *job, s32 a, s32 b);
-void FUN_004cfeb0(u32 *range, s32 a, s32 entry, s32 b, s32 c, s32 d);
+void listScrollerInitialize(u32 *range, s32 a, s32 entry, s32 b, s32 c, s32 d);
 void touchRegisterFirstRegion(Obj422594 *object, s32 x, s32 y, s32 width, s32 height);
 void touchRegisterSecondRegion(Obj422594 *object, s32 x, s32 y, s32 width, s32 height);
 void touchRegionOwnerAdd(Obj422594 *object, s32 x, s32 y, s32 width, s32 height);
@@ -111,7 +111,7 @@ void AocMenu::runWindowOperation()
             jobFlagsWorkStop(job);
             WindowOperation *current;
             if (g_aocMain->entry != 0) {
-                FUN_004cfeb0(job + 0x90, 3, g_aocMain->entry, 0, 1, 1);
+                listScrollerInitialize(job + 0x90, 3, g_aocMain->entry, 0, 1, 1);
                 Obj422594 *object = reinterpret_cast<Obj422594 *>(job + 0xba);
                 reinterpret_cast<u8 *>(job)[0x24d] = 1;
                 object->initialize(job + 0x90);

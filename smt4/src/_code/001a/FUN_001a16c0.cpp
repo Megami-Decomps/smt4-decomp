@@ -39,7 +39,7 @@ void efctSetSpeed(f32 speed);
 u32 vec2GetXInt(void *vector);
 u32 vec2GetYInt(void *vector);
 void FUN_003b3388(ResultScreen *result, u32 x, u32 y);
-void FUN_002c18e4(RenderCtx *context);
+void renderCtxResetColorScale(RenderCtx *context);
 s8 uiSpriteGetCompletionState(const void *sprite);
 f32 vec2GetSpeed(const void *sprite);
 
@@ -85,7 +85,7 @@ u32 FUN_001a16c0(u32 job)
             }
             renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
             renderCtxApplyTransforms(g_titleScene);
-            FUN_002c18e4(g_titleScene);
+            renderCtxResetColorScale(g_titleScene);
         }
     }
     return 0;

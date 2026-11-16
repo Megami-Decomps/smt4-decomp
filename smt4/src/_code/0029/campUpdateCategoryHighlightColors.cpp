@@ -11,7 +11,7 @@ extern "C" {
 extern CampInventoryLists *g_camp;
 s32 FUN_0029ee54(CampInventoryController *controller);
 s32 FUN_0029efa8(CampInventoryController *controller);
-s32 FUN_0029efc0(CampInventoryController *controller);
+s32 resourceRunOperationIfUnblocked(CampInventoryController *controller);
 PadState *gameGetPlayerData();
 CampUnitCategoryRecord *gameGetUnitRecord(s32 unit);
 u32 categoryGetColor(s16 category);
@@ -57,7 +57,7 @@ void campUpdateCategoryHighlightColors()
             work->categoryTimers[unit + 1] = 0;
         }
     }
-    s32 page = FUN_0029efc0(&work->categories.controller);
+    s32 page = resourceRunOperationIfUnblocked(&work->categories.controller);
     s32 row = FUN_0029efa8(&work->categories.controller);
     FUN_0026dafc(work->categoryColors[reinterpret_cast<CampInventorySlot *>(work->categories.slotData)[page + row].unit + 1]);
 }

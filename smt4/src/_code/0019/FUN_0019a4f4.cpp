@@ -7,8 +7,8 @@ extern "C" {
 
 void partyStatusRefreshSlot(void*, int, int);
 int FUN_0028e9ec(...);
-int FUN_002942c4(...);
-int FUN_002958f8(...);
+int statusBustUpPortraitAcquire(...);
+int statusBustUpPortraitRelease(...);
 int FUN_002bf810(...);
 int FUN_00338bd4(...);
 int VectorSignedToFloat(...);
@@ -21,13 +21,13 @@ int playerSkillInsertFirstFree(...);
 int gameClearUnlockedSavedId(...);
 int btlItemComputeValues(...);
 int FUN_0028cb40(...);
-int FUN_0028cdec(...);
+int btlCommandResolveSelectedTarget(...);
 int FUN_0028cf30(...);
 int FUN_0028cfd8(void);
 int gameReleaseDataReference(void);
 int beginStatusPanelClose(void);
-int FUN_0029cc44(...);
-int FUN_0029ee6c(...);
+int messageDismissNumericBanner(...);
+int buttonHelpSetText(...);
 int uiSpriteSetImageKeyframe(...);
 int dataTable08Sub1GetRecord(...);
 int FUN_002b8ee0(...);
@@ -46,7 +46,7 @@ int useCounterStart(void);
 int FUN_0029e328(...);
 int sortMenuCreate(...);
 int FUN_0029efa8(...);
-int FUN_0029efc0(...);
+int resourceRunOperationIfUnblocked(...);
 int gameGetUnitRecord(...);
 int dataTable40FindById(void);
 int buttonHelpSetPreset(...);
@@ -105,7 +105,7 @@ extern unsigned int statusDownGetValue(void);
 extern int statusScreenIsClosed(void);
 /* Supplied declaration required: btlItemComputeValues. */
 /* Supplied declaration required: FUN_0028cb40. */
-/* Supplied declaration required: FUN_0028cdec. */
+/* Supplied declaration required: btlCommandResolveSelectedTarget. */
 /* Supplied declaration required: FUN_0028cf30. */
 extern int FUN_0028cfbc(int);
 /* Supplied declaration required: FUN_0028cfd8. */
@@ -125,9 +125,9 @@ extern int flagValueIsPositive(unsigned int);
 /* Supplied declaration required: flagBitIsSet. */
 /* Supplied declaration required: FUN_00292f4c. */
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_002942c4. */
+/* Supplied declaration required: statusBustUpPortraitAcquire. */
 extern int FUN_00295618(void);
-/* Supplied declaration required: FUN_002958f8. */
+/* Supplied declaration required: statusBustUpPortraitRelease. */
 /* Supplied declaration required: FUN_00297b94. */
 /* Supplied declaration required: FUN_00297ca4. */
 /* Supplied declaration required: playSceneSetState. */
@@ -136,7 +136,7 @@ extern int FUN_0029a924(unsigned int);
 extern int FUN_0029a9d4(unsigned int, unsigned int);
 extern int messageMainTargetIsClear(void);
 /* Supplied declaration required: beginStatusPanelClose. */
-/* Supplied declaration required: FUN_0029cc44. */
+/* Supplied declaration required: messageDismissNumericBanner. */
 extern int FUN_0029d644(char *);
 extern int ifTouchGetSelectionModeForRegion(int);
 extern int useCounterGetCurrentValue(void);
@@ -150,9 +150,9 @@ extern int useCounterIsFinished(void);
 extern int FUN_0029e958(int);
 /* Supplied declaration required: FUN_0029eb5c. */
 extern int flagWordTestBit(unsigned int *, unsigned int);
-/* Supplied declaration required: FUN_0029ee6c. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: FUN_0029efa8. */
-/* Supplied declaration required: FUN_0029efc0. */
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: FUN_0029f848. */
@@ -579,7 +579,7 @@ LAB_0019aebc:
       temp_v31 = (unsigned int *)(param_1 + 0x340c);
       temp_v33 = (char *)0x0;
       temp_v19 = 0;
-      temp_v5 = FUN_0029efc0(*temp_v31);
+      temp_v5 = resourceRunOperationIfUnblocked(*temp_v31);
       temp_v17 = FUN_0029efa8(*temp_v31);
       temp_v5 = temp_v5 + temp_v17;
       temp_v17 = FUN_00297ca4(param_1,1);
@@ -844,7 +844,7 @@ LAB_0019b58c:
           FUN_0029efd8(temp_v7,1);
           if (temp_v7 != 0) goto LAB_0019b58c;
         }
-        temp_v5 = FUN_0029efc0(*(unsigned int *)(param_1 + 0x340c));
+        temp_v5 = resourceRunOperationIfUnblocked(*(unsigned int *)(param_1 + 0x340c));
         temp_v17 = FUN_0029efa8(*(unsigned int *)(param_1 + 0x340c));
         piVar14 = (int *)(param_1 + 0x3504);
         temp_v6 = temp_v5 + temp_v17;
@@ -1002,7 +1002,7 @@ LAB_0019b924:
         eventQueueAddUniqueIfValid(temp_v9);
         break;
       }
-      temp_v5 = FUN_0029efc0(*piVar14);
+      temp_v5 = resourceRunOperationIfUnblocked(*piVar14);
       temp_v17 = FUN_0029efa8(*piVar14);
       temp_v10 = (unsigned int)*(unsigned short *)(param_1 + (temp_v17 + temp_v5) * 2 + 0x3480);
       temp_v6 = temp_v10;
@@ -1323,7 +1323,7 @@ joined_r0x0019c3c8:
     break;
   case 0x1c:
     if (*(int *)(param_1 + 0x3044) >= 9) {
-      FUN_0029ee6c(0,0x323232ff);
+      buttonHelpSetText(0,0x323232ff);
       playSceneSetState(param_1,0x1d,0);
     }
     break;
@@ -1378,7 +1378,7 @@ joined_r0x0019c3c8:
         *(unsigned int *)(param_1 + 0x3468) = 0;
         *(unsigned int *)(param_1 + 0x346c) = 0;
         if (temp_v5 != 7) {
-          FUN_0028cdec(param_1);
+          btlCommandResolveSelectedTarget(param_1);
         }
         else {
           *(unsigned int *)(param_1 + 0x3470) = 0;
@@ -1427,7 +1427,7 @@ joined_r0x0019c3c8:
             *(unsigned int *)(param_1 + 0x346c) = 0;
             if (temp_v5 != 7) {
               temp_v5 = param_1;
-              FUN_0028cdec();
+              btlCommandResolveSelectedTarget();
               if (temp_v5 != 0) break;
             }
             else {
@@ -1575,7 +1575,7 @@ LAB_0019c9b8:
   case 0x25:
     temp_v5 = messageMainTargetIsClear();
     if (temp_v5 == 1) {
-      FUN_0029cc44(1);
+      messageDismissNumericBanner(1);
       playSceneSetState(param_1,0x26,0);
     }
     break;
@@ -1834,7 +1834,7 @@ LAB_0019cf8c:
         if ((temp_v8 != 0) && (temp_v8 = FUN_002bf818(temp_v18 + 0xc28), temp_v8 != 0)) {
           temp_v8 = *(int *)(temp_v16 + 0x340c);
           if (0 < temp_v8) {
-            FUN_002958f8((int)(short)temp_v8,1);
+            statusBustUpPortraitRelease((int)(short)temp_v8,1);
             *(int *)(temp_v16 + 0x340c) = 0;
           }
           *(unsigned char *)(temp_v17 + 0x38cc) = 0;
@@ -1861,9 +1861,9 @@ LAB_0019d3e4:
             temp_v6 = *temp_v44;
             if (temp_v6 == *(unsigned short *)((int)temp_v31 + 0x46)) goto LAB_0019d5d8;
             if (0 < (int)temp_v6) {
-              FUN_002958f8((int)(short)temp_v6,1);
+              statusBustUpPortraitRelease((int)(short)temp_v6,1);
             }
-            FUN_002942c4((int)*(short *)((int)temp_v31 + 0x46),1);
+            statusBustUpPortraitAcquire((int)*(short *)((int)temp_v31 + 0x46),1);
             *temp_v44 = (unsigned int)*(unsigned short *)((int)temp_v31 + 0x46);
             *(unsigned short *)(temp_v41 + 0x38f4) = *(unsigned short *)(temp_v7 + 0x5940);
             *(unsigned short *)(temp_v41 + 0x38d6) = *(unsigned short *)((int)temp_v31 + 0x2a);
@@ -1890,7 +1890,7 @@ LAB_0019d3e4:
         else if (temp_v8 + 1 >= 8) {
           temp_v7 = *(int *)(temp_v16 + 0x340c);
           if (0 < temp_v7) {
-            FUN_002958f8((int)(short)temp_v7,1);
+            statusBustUpPortraitRelease((int)(short)temp_v7,1);
             *(int *)(temp_v16 + 0x340c) = 0;
           }
           *(unsigned char *)(temp_v17 + 0x5925) = 0;

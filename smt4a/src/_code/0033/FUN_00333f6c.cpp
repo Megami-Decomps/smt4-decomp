@@ -28,7 +28,7 @@ typedef struct SharedResource {
 extern SharedResource g_gameGlobals;
 
 void asdMemFree(void *block);
-void FUN_0038b3f8(s32 effectId, s32 arg);
+void statusBustUpPortraitRelease(s32 effectId, s32 arg);
 void resourceReleaseReference(void *model);
 void jobStop(u32 job, s32 arg);
 void statusDownDestroy(void);
@@ -61,7 +61,7 @@ void FUN_00333f6c(void)
         work->bufferCC = NULL;
     }
     if (work->effectId != 0) {
-        FUN_0038b3f8(work->effectId, 1);
+        statusBustUpPortraitRelease(work->effectId, 1);
     }
     if (work->modelCount > 0 && work->model != NULL) {
         resourceReleaseReference(work->model);

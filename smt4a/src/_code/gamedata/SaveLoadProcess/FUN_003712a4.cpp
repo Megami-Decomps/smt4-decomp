@@ -10,7 +10,7 @@ int asdMemoryAlloc(int, int, int, unsigned int, int);
 int asdMemFree(unsigned int);
 int __ARM_common_memcpy4_8(unsigned int, int);
 int FUN_00268250(...);
-int FUN_002c9104(void);
+int clockRecordStartSeconds(void);
 int gameApplyFlagTriggers(void);
 int FUN_00388068(void);
 int gameFlagsSetFlagsFromTaggedGroupEntries(unsigned int);
@@ -44,7 +44,7 @@ extern int FUN_00229c9c(void);
 extern unsigned int *gameDataGetExtraBlock(void);
 extern unsigned int gameDataBlocksGetTable(void);
 /* Supplied declaration required: FUN_00268250. */
-/* Supplied declaration required: FUN_002c9104. */
+/* Supplied declaration required: clockRecordStartSeconds. */
 /* Supplied declaration required: gameApplyFlagTriggers. */
 extern int byte1IsZero(void);
 /* Supplied declaration required: FUN_00388068. */
@@ -167,7 +167,7 @@ LAB_0037156c:
       if (*(char *)(temp_v1 + 0x18) == '\0') {
         temp_v4 = gameDataBlocksGetSaveData();
         *(char *)(temp_v4 + 3) = temp_v10;
-        FUN_002c9104();
+        clockRecordStartSeconds();
         if (*(char *)(temp_v1 + 0x18) == '\0') {
           asdMemFree(*(unsigned int *)(temp_v1 + 8));
           *(unsigned int *)(temp_v1 + 4) = 8;

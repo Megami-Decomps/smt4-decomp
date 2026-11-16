@@ -40,7 +40,7 @@ void gameGetOptionProgressStatus(void);
 void buttonHelpSetPreset(s32 preset);
 void spriteStartAnimationByIndex(u8 *panel, s32 value);
 s32 scrScriptProcessStartEntry(u32 script, s32 entry);
-s32 FUN_0029efc0(u8 *list);
+s32 resourceRunOperationIfUnblocked(u8 *list);
 
 extern UiQuest00199024 *g_uiQuest; /* 0x43dd50 */
 
@@ -53,7 +53,7 @@ void uiQuestStartSelected(void)
     u16 id;
 
     quest->busy = 1;
-    base = FUN_0029efc0(quest->list);
+    base = resourceRunOperationIfUnblocked(quest->list);
     offset = FUN_0029efa8(quest->list);
     id = quest->ids[offset + base];
     FUN_0028eeb8(id);

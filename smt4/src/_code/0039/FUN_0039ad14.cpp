@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler combines source-coordinate loads into VLDM and schedules interpolation arithmetic in different VFP registers. */
+/* NON_MATCHING: the deltas are now loaded separately (no VLDM) in retail's y-then-x order; the elapsed conversions and products still land in different VFP registers. */
 #include "map/NavigationInterpolation.h"
 #include "map/mapDepart.h"
 
@@ -22,8 +22,10 @@ u32 FUN_0039ad14(NavigationInterpolation *state)
             state->flags &= ~0x10;
         } else {
             NavigationPoint position;
-            position.x = (state->target.x - state->source.x) * (f32)state->elapsed * (1.0f / 15.0f);
-            position.y = (state->target.y - state->source.y) * (f32)state->elapsed * (1.0f / 15.0f);
+            f32 dy = state->target.y - state->source.y;
+            f32 dx = state->target.x - state->source.x;
+            position.x = dx * (f32)state->elapsed * (1.0f / 15.0f);
+            position.y = dy * (f32)state->elapsed * (1.0f / 15.0f);
             position.x += state->source.x;
             position.y += state->source.y;
             NaviMain_SetCursorPos(state->cursorData, &position);

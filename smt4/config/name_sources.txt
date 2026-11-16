@@ -4488,3 +4488,27 @@
 001e960c soundTestActionMenuUpdate inferred [high] Twin of smt4a soundTestActionMenuUpdate, matched from the same source.
 0019d9d4 drawColoredRectangle inferred [med] Twin of smt4a FUN_00221ddc (same source).
 003f89f8 animCurveFindPackedKey inferred [med] Rounds time/timeScale to a frame and searches the packed 12-bit-frame keys. Twin of smt4a FUN_0051d95c.
+001dc750 scrOpPushFloatVar inferred [med] Script opcode pushing floatVariables[operand] with the FLOAT tag; the int sibling is FUN_001dc7b0. Twin of smt4a FUN_00281a3c.
+0023392c aocMenuSetButtonHelp inferred [med] Lays out the add-on menu six button-help units per selection; twin of smt4a FUN_00477d10.
+0029ee6c buttonHelpSetText inferred [high] Same code as smt4a buttonHelpSetText (look-alike 1.00, same source).
+0024ecc0 bustupCutAnimAssignSlot inferred [high] Same source as smt4a bustupCutAnimAssignSlot.
+0025ccac selectionPanelDrawMarkers inferred [high] Same source as smt4a selectionPanelDrawMarkers.
+00250ec0 goalConditionsSatisfied inferred [high] Same source as smt4a goalConditionsSatisfied.
+0029cc44 messageDismissNumericBanner inferred [high] Same source as smt4a messageDismissNumericBanner.
+0028cdec btlCommandResolveSelectedTarget inferred [high] Same source as smt4a btlCommandResolveSelectedTarget.
+00389084 dataArchiveSetFindFileWithEntry inferred [med] Returns the first loaded kind-0x13 archive file whose entry `index` has data. Twin of smt4a FUN_0046fca8.
+00328168 dataTable2eSub3FindByKeyPair inferred [med] Linear search of data table 0x2E section 3 by two signed-byte keys. Twin of smt4a FUN_003cb88c.
+002e7ed4 linkedItemsRemoveAndRelease inferred [med] Unlinks an item, releases its sharers, hands references on and frees its resource. Twin of smt4a FUN_00363590.
+002f3078 effectTimelineNodesFitDuration inferred [med] Same logic as FUN_002c79c4 over the handler nodes. Twin of smt4a FUN_00376498.
+0036f210 gfxResourceDetachOwner inferred [med] Releases the native handle through g_gfxReleaseCallback and clears the owner. Twin of smt4a FUN_0045181c.
+0029efc0 resourceRunOperationIfUnblocked inferred [high] Same call slot as smt4a resourceRunOperationIfUnblocked in the matched twin pairs FUN_003c2c6c/FUN_004d01f8, FUN_003c2b74/FUN_004d0100, FUN_003c2d84/FUN_004d032c.
+0029e93c resourceRunEmbeddedOperationIfUnblocked inferred [high] Twin slot of smt4a resourceRunEmbeddedOperationIfUnblocked (mode-1 path) in the same pairs.
+0011817c titleDbgBgCreate evidence asdDebugTrace path title	itleDbgBg.cpp; twin of smt4a FUN_00151118.
+003c2b74 listCursorStepForward inferred [med] Twin of smt4a FUN_004d0100.
+003c2c6c listCursorStepBack inferred [med] Twin of smt4a FUN_004d01f8.
+003c2d84 listCursorSetPosition inferred [med] Twin of smt4a FUN_004d032c.
+00233730 listScrollerInitialize inferred [med] Twin of smt4a FUN_004cfeb0 (same source).
+0024fd70 mathMatrixApplyTranslation inferred [med] Counterpart of mathMatrixApplyScale (same mode 0/1/2 shape): builds, applies locally or adds a translation. Twin of smt4a FUN_002a2048.
+002c18e4 renderCtxResetColorScale inferred [high] Same body and offsets as smt4a renderCtxResetColorScale (colour scale at 0x11CC, dirty flag 0x11DC).
+002942c4 statusBustUpPortraitAcquire inferred [med] Increments the workA/workB portrait refcounts and loads texture table 0x17/0x23 entries on first use. Twin of smt4a FUN_00371c3c.
+002958f8 statusBustUpPortraitRelease inferred [med] Decrements the same refcounts and releases the table node on the last user. Twin of smt4a FUN_0038b3f8.

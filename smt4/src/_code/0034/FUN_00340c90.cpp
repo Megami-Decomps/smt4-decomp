@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001c08ec(void);
 int flagsPackFourBooleans(...);
 int FUN_0023e024(...);
-int FUN_002c18e4(...);
+int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
 int renderCtxSelectTexture(...);
 int FUN_002f5288(void *, int *);
@@ -61,7 +61,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: flagsPackFourBooleans. */
 /* Supplied declaration required: FUN_0023e024. */
 extern int FUN_002865c0(unsigned int);
-/* Supplied declaration required: FUN_002c18e4. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectTexture. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
@@ -314,7 +314,7 @@ void FUN_00340c90(fn_00340c90_arg0 *param_1)
     *(unsigned char *)(temp_v0 + 0x12c4) = 0;
   }
   renderCtxApplyTransforms(g_titleScene);
-  FUN_002c18e4(g_titleScene);
+  renderCtxResetColorScale(g_titleScene);
   return;
 }
 

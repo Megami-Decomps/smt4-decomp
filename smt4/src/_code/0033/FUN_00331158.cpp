@@ -52,12 +52,12 @@ s32 FUN_0028fc60(u32 id);
 void campReleaseScreenTouchRegions(CampList *list, s32 flag);
 s32 dataTable15GetUnlockedEntryId(s32 category, u32 part);
 void FUN_00299900(s32 arg);
-void FUN_0029cc44(s32 arg);
+void messageDismissNumericBanner(s32 arg);
 void FUN_0029e328(s32 id);
 void sortMenuCreate(s32 id, s32 arg);
-void FUN_0029ee6c(s32 a, u32 color);
+void buttonHelpSetText(s32 a, u32 color);
 s32 FUN_0029efa8(CampList *list);
-s32 FUN_0029efc0(CampList *list);
+s32 resourceRunOperationIfUnblocked(CampList *list);
 s32 FUN_0029efd8(CampList *list, s32 flag);
 s32 uiScrollHandleActionsOrTouch(CampList *list, u32 text, u8 *state, s32 top, s32 lines, s32 spacing, s8 *touched, s32 a, s32 b);
 void eventQueueAddUniqueIfValid(u32 event);
@@ -112,7 +112,7 @@ void FUN_00331158(s32 kind)
     }
 
     if ((FUN_002c1658(0, 1) | touched) != 0 && kind == CAMP_LIST_A) {
-        s32 index = FUN_0029efc0(list) + FUN_0029efa8(list);
+        s32 index = resourceRunOperationIfUnblocked(list) + FUN_0029efa8(list);
         u32 id = camp->idTable[index];
         if (FUN_0028fc60(id) != 0) {
             camp->selectedId = camp->idTable[index];
@@ -121,7 +121,7 @@ void FUN_00331158(s32 kind)
             campChangeState(5);
             campReleaseScreenTouchRegions(list, 1);
             guestWinRequestClose();
-            FUN_0029cc44(1);
+            messageDismissNumericBanner(1);
             return eventQueueAddUniqueIfValid(CAMP_EVENT_SELECT);
         }
         return eventQueueAddUniqueIfValid(CAMP_EVENT_CANCEL);
@@ -153,7 +153,7 @@ void FUN_00331158(s32 kind)
         FUN_0029e328(16);
         FUN_0029e328(3);
     }
-    FUN_0029ee6c(0, 0x323232FF);
+    buttonHelpSetText(0, 0x323232FF);
     camp->helpStatus = buttonHelpGetStatus();
     campChangeState(40);
     eventQueueAddUniqueIfValid(CAMP_EVENT_SELECT);

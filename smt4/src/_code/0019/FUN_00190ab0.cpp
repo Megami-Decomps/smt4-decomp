@@ -28,7 +28,7 @@ u32 FUN_00293988(void *scene);
 s32 FUN_0029ee54(void);
 void playSceneSetState(SkillMenuWork *work, s32 state, s32 flag);
 void uiSpriteSetImageKeyframe(void *sprite, s32 frame, s32 flag);
-void FUN_0029ee6c(u32 record, u32 color);
+void buttonHelpSetText(u32 record, u32 color);
 
 /* Resets the six menu sprites' keyframes. */
 static __inline void resetSprites(SkillMenuWork *work)
@@ -103,7 +103,7 @@ u32 FUN_00190ab0(SkillMenuWork *work)
         playSceneSetState(work, 9, 1);
         resetSprites(work);
     }
-    FUN_0029ee6c(0, 0x323232FF);
+    buttonHelpSetText(0, 0x323232FF);
     return 1;
 }
 

@@ -1,4 +1,3 @@
-/* NON_MATCHING: identical code except armcc keeps the zero in r4 and the tab-list base in ip (retail swaps them) */
 #include "common.h"
 
 /* One item category of the menu: its entry count leads a 0x74-byte record. */
@@ -23,13 +22,13 @@ extern "C" {
 void FUN_0022e818(CategoryMenu *menu, s32 mode)
 {
     menu->tabCount = 0;
-    if (mode == 0) {
+    switch (mode) {
+    case 0:
         if (menu->categories[0].count > 0 || menu->categories[1].count > 0 || menu->categories[2].count > 0) {
-            menu->tabs[0] = 0;
-            menu->tabCount = 1;
+            menu->tabs[menu->tabCount] = 0;
+            menu->tabCount++;
         }
-        if (menu->categories[3].count > 0 || menu->categories[4].count > 0 || menu->categories[5].count > 0 ||
-            menu->categories[6].count > 0) {
+        if (menu->categories[3].count > 0 || menu->categories[4].count > 0 || menu->categories[5].count > 0 || menu->categories[6].count > 0) {
             menu->tabs[menu->tabCount] = 1;
             menu->tabCount++;
         }
@@ -39,10 +38,11 @@ void FUN_0022e818(CategoryMenu *menu, s32 mode)
         }
         menu->tabs[menu->tabCount] = 3;
         menu->tabCount++;
-    } else if (mode == 1) {
+        break;
+    case 1:
         if (menu->categories[0].count > 0) {
-            menu->tabs[0] = 0;
-            menu->tabCount = 1;
+            menu->tabs[menu->tabCount] = 0;
+            menu->tabCount++;
         }
         if (menu->categories[1].count > 0) {
             menu->tabs[menu->tabCount] = 1;
@@ -52,10 +52,11 @@ void FUN_0022e818(CategoryMenu *menu, s32 mode)
             menu->tabs[menu->tabCount] = 2;
             menu->tabCount++;
         }
-    } else if (mode == 2) {
+        break;
+    case 2:
         if (menu->categories[3].count > 0) {
-            menu->tabs[0] = 3;
-            menu->tabCount = 1;
+            menu->tabs[menu->tabCount] = 3;
+            menu->tabCount++;
         }
         if (menu->categories[4].count > 0) {
             menu->tabs[menu->tabCount] = 4;
@@ -69,6 +70,7 @@ void FUN_0022e818(CategoryMenu *menu, s32 mode)
             menu->tabs[menu->tabCount] = 6;
             menu->tabCount++;
         }
+        break;
     }
 }
 }

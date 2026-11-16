@@ -42,7 +42,7 @@ void rectangleInitializeSelection(void *rectangle, s32 width, s32 a, s32 b);
 void uiInitializeEightTimerSet(void *timers);
 void FUN_00233240(void *timers, s32 index);
 void FUN_00233670(void *list, s32 a, s32 b, s32 count);
-void FUN_0029ee6c(s32 a, u32 color);
+void buttonHelpSetText(s32 a, u32 color);
 void FUN_003ace14(void);
 void uiFreeCallbackContext(void);
 void FUN_003ad068(void);
@@ -82,7 +82,7 @@ extern "C" void FUN_003ab550(Obj422448 *screen)
     screen->buildList();
     FUN_00233670(view->listView, 0x1D, 0x40E, 10);
     view->listReady = 1;
-    FUN_0029ee6c(0, 0x323232FF);
+    buttonHelpSetText(0, 0x323232FF);
     FUN_003ad0e0();
     view->state = 1;
     view->stateArg = 0;

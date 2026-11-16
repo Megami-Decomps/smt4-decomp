@@ -16,7 +16,7 @@ int debugDrawText(...);
 int vec2GetYInt(...);
 int vec2GetXInt(...);
 int FUN_002bf380(...);
-int FUN_002c18e4(...);
+int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
 int renderCtxSelectStereoLayout(int);
 int uiDrawRotatingLoadingGrid(...);
@@ -55,7 +55,7 @@ extern int FUN_002a0d0c(void);
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002c18e4. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
@@ -244,7 +244,7 @@ unsigned int FUN_001add9c(void)
     *(unsigned char *)(temp_v3 + 0x1264) = 0;
   }
   renderCtxApplyTransforms(g_titleScene);
-  FUN_002c18e4(g_titleScene);
+  renderCtxResetColorScale(g_titleScene);
   return 0;
 }
 

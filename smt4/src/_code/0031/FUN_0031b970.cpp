@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002958f8(int a, int b);
+int statusBustUpPortraitRelease(int a, int b);
 int asdMemFreeSlot(u32 value);
 int asdMemFree(u32 *ptr);
 
@@ -28,7 +28,7 @@ void FUN_0031b970(u32 *obj)
     asdMemFreeSlot(obj[0xe]);
     asdMemFreeSlot(obj[0x10]);
     asdMemFreeSlot(obj[0x23]);
-    FUN_002958f8((int)*(s16 *)(obj + 0x22), 1);
+    statusBustUpPortraitRelease((int)*(s16 *)(obj + 0x22), 1);
     asdMemFree(obj);
 }
 

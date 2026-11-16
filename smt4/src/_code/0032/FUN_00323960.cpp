@@ -14,13 +14,13 @@ extern "C" {
 u32 DAT_0044f578[0x2e0 / 4];
 EditorBlock00323960 DAT_0044f858;
 
-void FUN_002e7ed4(LinkedItems *items, LinkedItem *item);
+void linkedItemsRemoveAndRelease(LinkedItems *items, LinkedItem *item);
 
 /* Selects the current editor item and resets the two editing blocks. */
 void FUN_00323960(void)
 {
     s32 index = DAT_0044f858.index + g_effectEditor.selection.index;
-    FUN_002e7ed4(static_cast<LinkedItems *>(g_effectEditor.selection.list),
+    linkedItemsRemoveAndRelease(static_cast<LinkedItems *>(g_effectEditor.selection.list),
                  linkedFindItemByIndex(static_cast<LinkedItems *>(g_effectEditor.selection.list), index));
     DAT_0044f578[3] = 0;
     g_effectEditor.selection.index = 0;

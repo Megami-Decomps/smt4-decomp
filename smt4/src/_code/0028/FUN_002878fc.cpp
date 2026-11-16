@@ -1,4 +1,4 @@
-/* NON_MATCHING: structure now matches retail; retail hoists the pool 0/1 counts and pointers (r7-r9, sl) out of the pool loop and selects them with register moves, the build loads them in place. */
+/* NON_MATCHING: with pools 0 and 1 read up front the hoisting matches retail; the zero/index registers (retail sets the pool index in the shrink-wrapped prologue) and the hoisted-value register numbering differ. */
 #include "gfx/TaggedRecordPools.h"
 
 extern "C" {
@@ -10,15 +10,19 @@ void FUN_002878fc(s32 tag)
 {
     if (tag == 0)
         return;
+    s32 firstCount = g_mapCollision.counts[0];
+    TaggedPoolRecord *firstPool = g_mapCollision.pools[0];
+    s32 secondCount = g_mapCollision.counts[1];
+    TaggedPoolRecord *secondPool = g_mapCollision.pools[1];
     for (s32 pool = 0; pool < 4; ++pool) {
         s32 count;
         TaggedPoolRecord *record;
         if (pool == 0) {
-            count = g_mapCollision.counts[0];
-            record = g_mapCollision.pools[0];
+            count = firstCount;
+            record = firstPool;
         } else if (pool == 1) {
-            count = g_mapCollision.counts[1];
-            record = g_mapCollision.pools[1];
+            count = secondCount;
+            record = secondPool;
         } else if (pool == 2) {
             count = g_mapCollision.counts[2];
             record = g_mapCollision.pools[2];

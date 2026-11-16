@@ -1,5 +1,6 @@
-/* NON_MATCHING: retail initializes the work through the allocation result in r0 (copied to r4 for
- * later) and passes the new job straight from r0; armcc here works through r4 and r1 */
+/* NON_MATCHING: initialised through g_requestWork as retail (stores via the allocation in r0); only the
+ * scheduling differs: retail copies the work to r4 before the field stores and loads the onEnd callback
+ * after them. */
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemAlloc.h"
@@ -31,12 +32,12 @@ void FUN_002a0a38(void)
     SoundTestWork *work;
 
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\sound\\soundTest.cpp", 49);
-    work = (SoundTestWork *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(SoundTestWork), 1);
-    g_requestWork = work;
-    work->state = 0;
-    work->frame = 0;
-    work->selection = 0;
-    work->requested = 0;
+    g_requestWork = (SoundTestWork *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(SoundTestWork), 1);
+    g_requestWork->state = 0;
+    g_requestWork->frame = 0;
+    g_requestWork->selection = 0;
+    g_requestWork->requested = 0;
+    work = g_requestWork;
     work->job = asdProcessCreateSimple((const s8 *)"ST C", 4, 0, 0, soundTestActionMenuUpdate, workRequest, 0);
     taskCreateDraw((const s8 *)"ST D", 0xEA, 0, 0, soundTestDrawJobUpdate, FUN_0037a114, 0, work->job);
 }

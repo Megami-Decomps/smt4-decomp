@@ -1,4 +1,4 @@
-/* NON_MATCHING: allocation flag lifetime adds saved r8; resource argument and flag-load scheduling differ. */
+/* NON_MATCHING: the block is now cleared with memset like retail (five zero words through the allocation); only the freeOnEnd store is scheduled before the active load (retail: after). */
 #include "ones_room/onesRoom.h"
 #include "script/scrScriptProcess.h"
 #include "AsdSDK/AsdDebug.h"
@@ -23,16 +23,12 @@ void onesRoomRequestTransition();
 void FUN_002758fc(s32 inactive)
 {
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\ones_room\\onesRoom.cpp", 146);
-    g_onesRoom = static_cast<OnesRoom *>(asdMemoryAlloc(0x100, 0x100, 0, 0x14, 1));
-    OnesRoomWork *room = reinterpret_cast<OnesRoomWork *>(g_onesRoom);
-    room->job = 0;
-    room->dataA = NULL;
-    room->process = NULL;
-    room->dataB = NULL;
-    memset(&room->active, 0, 4);
+    g_onesRoom = static_cast<OnesRoom *>(asdMemoryAlloc(0x100, 0x100, 0, sizeof(OnesRoomWork), 1));
+    memset(g_onesRoom, 0, sizeof(OnesRoomWork));
     if (inactive == 0) {
-        room->active = 1;
+        reinterpret_cast<OnesRoomWork *>(g_onesRoom)->active = 1;
     }
+    OnesRoomWork *room = reinterpret_cast<OnesRoomWork *>(g_onesRoom);
     campCommonBgAcquire();
     campButtonHelpAcquire();
     FUN_003b61ec();

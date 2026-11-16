@@ -11,7 +11,7 @@ int forwardRecoveredCallback(void);
 int FUN_0028c92c(...);
 int FUN_002ad314(...);
 int FUN_002aff70(...);
-int FUN_002c18e4(...);
+int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
 int renderCtxSelectTexture(unsigned int, unsigned int);
 int modelApplyChangedCachedVector(...);
@@ -139,7 +139,7 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_0028c92c. */
 /* Supplied declaration required: FUN_002ad314. */
 /* Supplied declaration required: FUN_002aff70. */
-/* Supplied declaration required: FUN_002c18e4. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: modelApplyChangedCachedVector. */
@@ -391,7 +391,7 @@ void FUN_001f6b74(fn_001f6b74_arg0 *param_1)
       temp_v33 = (unsigned int *)((int)temp_v33 + iStack_134);
     } while (temp_v10 < temp_v7);
   }
-  FUN_002c18e4(g_titleScene);
+  renderCtxResetColorScale(g_titleScene);
   renderCtxApplyTransforms(g_titleScene);
   return;
 }

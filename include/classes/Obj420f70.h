@@ -16,10 +16,10 @@ struct HeapLinkList {
         if (first != NULL) {
             HeapLinkNode *node = first;
             do {
-                HeapLinkNode *next = node->next;
-                node->next = NULL;
-                node->previous = NULL;
-                node = next;
+                HeapLinkNode *current = node;
+                node = node->next;
+                current->next = NULL;
+                current->previous = NULL;
             } while (node != NULL);
             first = NULL;
         }

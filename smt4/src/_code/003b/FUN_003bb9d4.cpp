@@ -14,11 +14,11 @@ typedef struct Panel {
 } Panel;
 
 int FUN_00233670(void *button, int a, int b, int c);
-int FUN_00233730(Panel *panel, int a, u32 b, int c, int d, int e);
+int listScrollerInitialize(Panel *panel, int a, u32 b, int c, int d, int e);
 
 void FUN_003bb9d4(Panel *panel)
 {
-    FUN_00233730(panel, 10, panel->unk52c, 0, 1, 1);
+    listScrollerInitialize(panel, 10, panel->unk52c, 0, 1, 1);
     asdDebugHookPtrInt(panel, 1);
     panel->shown = 1;
     FUN_00233670(panel->button, 0x2a, 5, 10);

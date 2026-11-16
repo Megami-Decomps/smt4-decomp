@@ -7,7 +7,7 @@
 extern "C" {
 
 int efctSetSpeed(f32 alpha);
-int FUN_002c18e4(RenderCtx *ctx);
+int renderCtxResetColorScale(RenderCtx *ctx);
 int FUN_002c5d80(u32 a, u32 b);
 
 extern UIFadeGlobals g_uiFade;
@@ -29,7 +29,7 @@ void uiFadeDraw(u32 arg)
     efctSetSpeed(fade->alpha);
     FUN_002bf288(2, 0xe, 0x10c, 0, 0, arg);
     renderStackPop(&g_titleScene->stackA);
-    FUN_002c18e4(g_titleScene);
+    renderCtxResetColorScale(g_titleScene);
     efctSetSpeed(1.0f);
 }
 

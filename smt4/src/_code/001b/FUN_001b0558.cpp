@@ -15,7 +15,7 @@ void updateEquippedWeaponHelp(RelativeDirectory *directory, u32 index);
 void* dataTableGet(u32 id, u8 section);
 PartyHelpRecord* dataTableGetEntries(void* table);
 u32 dataTableGetCount(void* table);
-void FUN_0029ee6c(const char* text, u32 color);
+void buttonHelpSetText(const char* text, u32 color);
 StatBlock* partyMemberFindById(u32 id);
 void FUN_0029dc74(u32 id, StatBlock* block);
 void FUN_0029da34(u32 mode, u32 visible, u32 id, StatBlock* block);
@@ -42,22 +42,22 @@ extern "C" void FUN_001b0558(void)
     }
     if (selection < 0) {
         if (panel->panelState == 12 || panel->panelState == 13) {
-            FUN_0029ee6c(partyHelpText(6), 0x323232FF);
+            buttonHelpSetText(partyHelpText(6), 0x323232FF);
         }
         if (panel->panelState == 14) {
-            FUN_0029ee6c(partyHelpText(7), 0x323232FF);
+            buttonHelpSetText(partyHelpText(7), 0x323232FF);
         }
         if (panel->panelState == 4) {
-            FUN_0029ee6c(partyHelpText(2), 0x323232FF);
+            buttonHelpSetText(partyHelpText(2), 0x323232FF);
         }
         if (panel->panelState == 15) {
-            FUN_0029ee6c(partyHelpText(8), 0x323232FF);
+            buttonHelpSetText(partyHelpText(8), 0x323232FF);
         }
         if (panel->panelState == 2) {
-            FUN_0029ee6c(partyHelpText(0), 0x323232FF);
+            buttonHelpSetText(partyHelpText(0), 0x323232FF);
         }
         if (panel->panelState == 3) {
-            FUN_0029ee6c(partyHelpText(1), 0x323232FF);
+            buttonHelpSetText(partyHelpText(1), 0x323232FF);
         }
     } else {
         StatBlock fallback;

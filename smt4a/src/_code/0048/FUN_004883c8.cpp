@@ -1,4 +1,3 @@
-/* NON_MATCHING: same code as retail except that retail preloads the y argument into fp and reads the enabled flag from the stack at its use (ours preloads enabled and reads y late). */
 #include "gamedata/MapNaviCategories.h"
 #include "shard/Shard0048.h"
 
@@ -35,7 +34,7 @@ static inline MapNaviCategoryRecord *findCategory(s32 mapId, s32 section)
 
 // Set a secondary marker from its category record, or clear an unused slot.
 extern "C" void FUN_004883c8(Block66Owner *owner, s32 slot, s32 active, s32 mapId,
-                  s32 section, u16 x, u32 unused, u16 y, s32 enabled)
+                  s32 section, u32 x, u32 unused, u32 y, s32 enabled)
 {
     if (active != 0) {
         MapNaviCategoryRecord *record = findCategory(mapId, section);

@@ -8,7 +8,7 @@ extern "C" {
 
 int FUN_002302d8(...);
 int listCursorSetPage(...);
-int FUN_00233730(...);
+int listScrollerInitialize(...);
 int FUN_0029212c(...);
 
 /* stack frame of param_2: 4 slot(s), 16 byte(s) */
@@ -23,7 +23,7 @@ typedef struct {
 /* Supplied declaration required: listCursorSetPage. */
 /* Supplied declaration required: cellListAppend. */
 extern int flaggedValueHolderGetTotal(int);
-/* Supplied declaration required: FUN_00233730. */
+/* Supplied declaration required: listScrollerInitialize. */
 /* Supplied declaration required: FUN_0029212c. */
 
 
@@ -182,7 +182,7 @@ void FUN_0022fcb8(int param_1,unsigned int param_2)
       temp_v4 = temp_v4 + 1;
     } while ((int)temp_v4 < 0x30d);
   }
-  FUN_00233730(param_1 + 0xc20,10,*(unsigned short *)(param_1 + 0x9ca4),0,1,1);
+  listScrollerInitialize(param_1 + 0xc20,10,*(unsigned short *)(param_1 + 0x9ca4),0,1,1);
   *(unsigned char *)(param_1 + 0xc2d) = 1;
   listCursorSetPage(param_1 + 0xc20,0);
   FUN_002302d8(param_1,param_2);

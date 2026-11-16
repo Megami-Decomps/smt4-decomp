@@ -1,18 +1,17 @@
-/* NON_MATCHING: register allocation only: in the compaction loop retail keeps the slot address in r3 and the loaded handle in ip, the build uses ip for the address and r3 for the handle. */
 #include "event/2dEvent/2dEventTex.h"
 
 extern "C" {
-extern EventTexA* g_eventTex;
-s32 jobIsValid(u32 job);
-s32 jobGetStatus(u32 job);
+extern EventTexA *g_eventTex;
+s32 jobIsValid(u32);
+s32 jobGetStatus(u32);
 
+/* Drops finished jobs, adds `job` to the first free slot, compacts the slots and sorts them by job status. */
 void eventInsertSortedTextureJob(u32 job)
 {
-    EventTexA* work = g_eventTex;
+    EventTexA *work = g_eventTex;
     for (s32 index = 0; index < work->count; ++index) {
-        if (!jobIsValid(work->slots[index])) {
+        if (!jobIsValid(work->slots[index]))
             work->slots[index] = 0;
-        }
     }
     for (s32 index = 0; index < EVENT_TEX_HANDLES_A; ++index) {
         if (!work->slots[index]) {
@@ -23,9 +22,8 @@ void eventInsertSortedTextureJob(u32 job)
     s32 hole = -1;
     for (s32 index = 0; index < EVENT_TEX_HANDLES_A; ++index) {
         if (hole < 0) {
-            if (!work->slots[index]) {
+            if (!work->slots[index])
                 hole = index;
-            }
         } else if (work->slots[index]) {
             work->slots[hole] = work->slots[index];
             work->slots[index] = 0;
@@ -33,31 +31,30 @@ void eventInsertSortedTextureJob(u32 job)
         }
     }
     work->count = 0;
-    while (work->count < EVENT_TEX_HANDLES_A && work->slots[work->count]) {
+    while (work->count < EVENT_TEX_HANDLES_A && work->slots[work->count])
         ++work->count;
-    }
-    bool swapped;
+    bool changed;
     do {
-        swapped = false;
+        changed = false;
         for (s32 index = 0; index < work->count - 1; ++index) {
             if (!work->slots[index]) {
                 if (work->slots[index + 1]) {
-                    swapped = true;
                     work->slots[index] = work->slots[index + 1];
+                    changed = true;
                 }
                 continue;
             }
-            if (work->slots[index + 1]) {
-                s32 firstStatus = jobGetStatus(work->slots[index]);
-                s32 secondStatus = jobGetStatus(work->slots[index + 1]);
-                if (secondStatus < firstStatus) {
-                    u32 first = work->slots[index];
-                    swapped = true;
-                    work->slots[index] = work->slots[index + 1];
-                    work->slots[index + 1] = first;
-                }
+            if (!work->slots[index + 1])
+                continue;
+            s32 currentStatus = jobGetStatus(work->slots[index]);
+            s32 nextStatus = jobGetStatus(work->slots[index + 1]);
+            if (nextStatus < currentStatus) {
+                u32 previous = work->slots[index];
+                work->slots[index] = work->slots[index + 1];
+                work->slots[index + 1] = previous;
+                changed = true;
             }
         }
-    } while (swapped);
+    } while (changed);
 }
 }

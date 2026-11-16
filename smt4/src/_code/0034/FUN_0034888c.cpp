@@ -1,4 +1,3 @@
-/* NON_MATCHING: status flag updates and the byte/bit clear (mvn + and) now match; retail pushes r4-r8 and hoists both the 1 (r7) and the 0 (r6) of the flag-clear loop into registers, ours hoists only the 1. */
 #include "quest_center/QuestRuntime.h"
 #include "code/Code0029.h"
 
@@ -9,6 +8,32 @@ s32 table1bOr1cGetRecordValue(u32 id);
 void FUN_0028eeb8(u32 id);
 void FUN_0023ddbc(u32 flag, s32 value);
 
+/* Reports a game flag change to FUN_0023ddbc, then sets or clears the flag's bit. */
+static __inline void gameFlagWrite(u32 flag, s32 value)
+{
+    QuestRuntimeFlagBlock *block = gameGetFlagBlock();
+
+    FUN_0023ddbc(flag, value);
+    u32 index = flag >> 3;
+    if (value) {
+        block->flagBytes[index] |= 1 << (flag & 7);
+    } else {
+        s32 keep = ~(1 << (flag & 7));
+        block->flagBytes[index] &= keep;
+    }
+}
+
+/* Clears the selected quest's flags 0x500-0x51f. */
+static __inline void clearSelectedQuestFlags(void)
+{
+    u32 flag;
+
+    for (flag = 0x500; flag < 0x520; flag++) {
+        gameFlagWrite(flag, 0);
+    }
+}
+
+/* Deactivates quest `id` (clears status flag 2, sets 0x1c) and releases its repeat slot, its selection flags or its record; 0 when it was not active. */
 u8 FUN_0034888c(u32 id)
 {
     QuestRuntimeStatus *status = &gameGetFlagBlock()->quests[id];
@@ -37,14 +62,7 @@ u8 FUN_0034888c(u32 id)
         }
     } else if (reinterpret_cast<ActiveQuests *>(gameGetFlagBlock())->selected == id) {
         active->selected = 0;
-        for (u32 flag = 0x500; flag < 0x520; ++flag) {
-            QuestRuntimeFlagBlock *block = gameGetFlagBlock();
-            FUN_0023ddbc(flag, 0);
-            s32 byte = flag / 8;
-            s32 bit = flag % 8;
-            u32 mask = ~(1u << bit);
-            block->flagBytes[byte] &= mask;
-        }
+        clearSelectedQuestFlags();
     } else if (!table1bOr1cGetRecordValue(id) && (dataTable1bOr1cGetRecord(id)->flags & 2)) {
         FUN_0028eeb8(id);
     }

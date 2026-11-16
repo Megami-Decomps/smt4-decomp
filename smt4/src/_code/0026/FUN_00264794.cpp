@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the literal-pool order (retail: gameState, scene, mainState) and the first loads' order differ */
 #include "map/lmapMain.h"
 
 struct Vec3f {
@@ -41,14 +40,15 @@ extern LmapScene *g_lmapScene;
 /* Records the current map, area, object and position (twice: as the current and the origin position). */
 void FUN_00264794(void)
 {
+    LmapMainState *mainState = g_lmapMainState;
     g_gameState.saved = 1;
-    g_gameState.current.map = g_lmapMainState->unk40;
-    g_gameState.current.area = g_lmapMainState->unk48;
+    g_gameState.current.map = mainState->unk40;
+    g_gameState.current.area = mainState->unk48;
     g_gameState.current.objectId = g_gameState.currentObjectId;
     g_gameState.current.position = *(Vec3f *)g_lmapScene->transform.position;
     g_gameState.current.heading = g_lmapScene->transform.headingDegrees;
-    g_gameState.origin.map = g_lmapMainState->unk40;
-    g_gameState.origin.area = g_lmapMainState->unk48;
+    g_gameState.origin.map = mainState->unk40;
+    g_gameState.origin.area = mainState->unk48;
     g_gameState.origin.position = *(Vec3f *)g_lmapScene->transform.position;
     g_gameState.origin.heading = g_lmapScene->transform.headingDegrees;
 }

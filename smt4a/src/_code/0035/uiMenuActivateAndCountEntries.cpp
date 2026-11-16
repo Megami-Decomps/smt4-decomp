@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses `mov r3, #1` where armcc emits `mov r1, #1`. */
 #include "common.h"
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "code/Code002a.h"
@@ -10,7 +9,7 @@ struct MenuState {
     /* 0x0000 */ u8 unk0000[0x3890];
     /* 0x3890 */ u32 selectedIndex;
     /* 0x3894 */ u8 unk3894[0x12];
-    /* 0x38a6 */ u16 count;
+    /* 0x38a6 */ s16 count;  /* number of ids[] in use (>= 0) */
     /* 0x38a8 */ s16 ids[4];
     /* 0x38b0 */ u8 unk38b0[3];
     /* 0x38b3 */ u8 active;
@@ -20,6 +19,7 @@ struct MenuState {
 void FUN_003756c8(s32 enabled);
 void FUN_0020ad6c(MenuState *menu, s32 kind, s32 enabled);
 
+/* Activates the menu, counts its used entries, refreshes the button help and switches to state 14. */
 void uiMenuActivateAndCountEntries(MenuState *menu)
 {
     menu->active = 1;

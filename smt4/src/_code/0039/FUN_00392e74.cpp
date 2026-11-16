@@ -14,7 +14,7 @@ struct AocMainBlock {
 };
 
 extern "C" {
-void FUN_0023392c(AocMenu *menu, s32 a, s32 b);
+void aocMenuSetButtonHelp(AocMenu *menu, s32 a, s32 b);
 void jobOwnerFreeSlotAndStop(void *owner);
 void jobStopAndClearFlags(AocMenu *menu);
 s32 jobIsValid(u32 job);
@@ -32,7 +32,7 @@ extern "C" void FUN_00392e74(AocMenu *menu)
     u8 *raw = (u8 *)menu;
     if ((u32)(menu->step - 4) < 11 && FUN_002ad1e0((u8 *)g_aocMain + 0x98)) {
         g_aocMain->flags &= ~0x10000u;
-        FUN_0023392c(menu, -1, 0);
+        aocMenuSetButtonHelp(menu, -1, 0);
         jobOwnerFreeSlotAndStop(menu->jobOwner);
         jobStopAndClearFlags(menu);
         u32 *job = (u32 *)(raw + 0x1780);

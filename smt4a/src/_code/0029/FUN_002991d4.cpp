@@ -62,7 +62,7 @@ int FUN_003a6b10(...);
 int FUN_003ca244(void);
 int sysPlayVoice(...);
 int loadSlotEnsureLoaded(int);
-int FUN_00480a54(void);
+int itemGetTable8Sub3Value(void);
 
 /* stack frame of void: 12 slot(s), 48 byte(s) */
 typedef struct {
@@ -179,7 +179,7 @@ extern unsigned short *dataTable20GetEntry(int);
 /* Supplied declaration required: loadSlotEnsureLoaded. */
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: gameScaleCategoryAmount. */
-/* Supplied declaration required: FUN_00480a54. */
+/* Supplied declaration required: itemGetTable8Sub3Value. */
 /* Supplied declaration required: flagValueAdd. */
 /* Supplied declaration required: partyAddMoneyClamped. */
 extern int inputIsQuestMenuPressed(void);
@@ -452,7 +452,7 @@ unsigned int FUN_002991d4(void)
               *(unsigned char *)(temp_v14 + 0x5f1d40) = *(unsigned char *)((int)&temp_v18 + temp_v8);
               *(short *)(temp_v13 + 0x5f1d50) = temp_v15;
               temp_v13 = (int)*(short *)(temp_v13 + 0x5f1d20);
-              FUN_00480a54();
+              itemGetTable8Sub3Value();
               if (temp_v13 != 0) {
                 *(int *)(temp_v11 + 0xd0) = *(int *)(temp_v11 + 0xd0) + 1;
               }
@@ -526,7 +526,7 @@ LAB_00299e1c:
             temp_v11 = DAT_005f1d72 * 2;
             temp_v8 = (int)*(short *)(temp_v11 + 0x5f1d20);
             temp_v3 = *(short *)(temp_v11 + 0x5f1d50);
-            FUN_00480a54();
+            itemGetTable8Sub3Value();
             if (temp_v8 != 0) {
               temp_v11 = temp_v4 + temp_v8 * 4;
               *(unsigned int *)(temp_v11 + 0xd0) = 1;
@@ -613,7 +613,7 @@ LAB_0029a094:
             temp_v11 = DAT_005f1e1a * 2;
             temp_v6 = (unsigned int)*(short *)(temp_v11 + 0x5f1dc8);
             temp_v11 = (int)*(short *)(temp_v11 + 0x5f1df8);
-            FUN_00480a54();
+            itemGetTable8Sub3Value();
             if (temp_v6 != 0) {
               gameScaleCategoryAmount(temp_v6 & 0xff,temp_v11);
               temp_v8 = temp_v4 + temp_v6 * 4;
