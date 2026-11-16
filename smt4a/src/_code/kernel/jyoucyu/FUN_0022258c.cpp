@@ -1,4 +1,3 @@
-/* NON_MATCHING: block layout only: retail places the group 2 body before the final all-loaded check, ours after it; every instruction and the debug-hook NOP match */
 #include "AsdSDK/AsdDebugHooks.h"
 #include "event/bustupEvent/BustupTex.h"
 
@@ -99,7 +98,12 @@ void FUN_0022258c(u32 group)
         FUN_003c5c88();
         g_jyoucyu.data = 1;
     }
-    if (g_jyoucyu.data == 1 && (g_jyoucyu.system == 1 && g_jyoucyu.textures == 1)) {
+    s32 loaded = 1;
+    if (g_jyoucyu.system != 1)
+        loaded = 0;
+    if (g_jyoucyu.textures != 1)
+        loaded = 0;
+    if (g_jyoucyu.data == 1 && loaded) {
         g_jyoucyuLevel = 1;
     }
 }

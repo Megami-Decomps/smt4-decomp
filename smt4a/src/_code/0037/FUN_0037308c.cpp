@@ -1,4 +1,3 @@
-/* NON_MATCHING: range loads and entries base/product registers differ, final exclusion-mask AND registers differ; active-entry byte now folds (s8 flag). */
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -9,13 +8,13 @@ struct BattleQueryParametersViewA {
     u8 prefix[0x74];
     u32 parameters[12];
 };
-struct BattleEntryQueryRangeA { s32 first; s32 count; };
 extern "C" {
 s32 scrGetArg(s32 argument);
 void scrSetResult(s32 value);
 s32 btlResolveEntryChoice(s32 choice);
 BtlCombatantEntryA* FUN_003eaf20(BtlMainStateA* battle);
 
+// Test selected eligible combatants, then the special combatant, for a parameter equal to argument 2.
 s32 FUN_0037308c(void)
 {
     s32 choice = btlResolveEntryChoice(scrGetArg(0));
@@ -31,14 +30,13 @@ s32 FUN_0037308c(void)
         parameter = 11;
     }
     u32 expected = scrGetArg(2);
-    BattleEntryQueryRangeA range;
-    FUN_00301a08(choice, &range.first, &range.count);
-    for (s32 index = range.first; index < range.first + range.count; ++index) {
+    s32 first, count;
+    FUN_00301a08(choice, &first, &count);
+    for (s32 index = first; index < first + count; ++index) {
         BtlCombatantEntryA* entry = &btlGetMainState()->entries[index];
-        u64 flags = entry->flags;
-        if (!(flags & g_btlCandidateMasks.unavailable) &&
-            (flags & g_btlCandidateMasks.required) &&
-            !(flags & g_btlCandidateMasks.excluded) &&
+        if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
+            (g_btlCandidateMasks.required & entry->flags) &&
+            !(g_btlCandidateMasks.excluded & entry->flags) &&
             reinterpret_cast<BattleQueryParametersViewA*>(entry)->parameters[parameter] == expected) {
             scrSetResult(1);
             return 1;

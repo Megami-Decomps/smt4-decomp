@@ -1,4 +1,4 @@
-/* NON_MATCHING: global-address hoisting and 64-bit marker-mask register allocation differ. */
+/* NON_MATCHING: the UI-block tail now matches; retail loads the roster-count offset into r2 and reloads r2 with &g_btlCamera after the ldrb (the build uses r3 for the offset and loads the camera early). */
 #include "battle/btlMain.h"
 #include "battle/btlCamera.h"
 #include "battle/BattleEditorState.h"
@@ -43,8 +43,8 @@ void FUN_002b50e4(BtlMainStateA* battle)
         FUN_004feecc(1, 0);
     }
     battle->markerMasks.bits |= g_btlEditor.markerMask;
-    if (g_btlUiBlock) {
-        FUN_004aa780(g_btlUiBlock, 1);
+    if (void *ui = g_btlUiBlock) {
+        FUN_004aa780(ui, 1);
     }
 }
 }

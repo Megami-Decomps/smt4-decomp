@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the entry schedule differs: retail copies the parameter after the push and keeps node->data in r3 (built: r0, begin in r3). */
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 struct NodeInitializationData {

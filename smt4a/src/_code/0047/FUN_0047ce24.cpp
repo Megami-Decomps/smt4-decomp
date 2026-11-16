@@ -18,7 +18,7 @@ int FUN_001b63b0(void);
 int renderCtxCallB(void);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
 int renderStatePop(void);
-int FUN_0032cef8(unsigned int);
+int renderStatePush(unsigned int);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
@@ -87,7 +87,7 @@ extern int asdSoundGetOption2(void);
 /* Supplied declaration required: renderStatePop. */
 extern unsigned int flagsAt6CGet(void);
 extern int asdSoundGetOption0(void);
-/* Supplied declaration required: FUN_0032cef8. */
+/* Supplied declaration required: renderStatePush. */
 extern int asdSoundGetOption3(void);
 extern int asdSoundGetOption1(void);
 
@@ -216,7 +216,7 @@ LAB_0047cf80:
         temp_v19[0x21] = (float)packNibblesAndByte(6, 1, 0);
         temp_v19[0x22] = (float)packNibblesAndByte(6, 1, 2);
         temp_v19[0x23] = (float)packNibblesAndByte(5, 0, 1);
-        FUN_0032cef8(*(unsigned int *)((int)temp_v19 + (*(unsigned short *)(temp_v8 + 0xc) >> 4 & 0xfc) + 0x80)
+        renderStatePush(*(unsigned int *)((int)temp_v19 + (*(unsigned short *)(temp_v8 + 0xc) >> 4 & 0xfc) + 0x80)
                     );
       }
       if (((*(unsigned short *)(temp_v8 + 0xc) & 4) != 0) && (temp_v4 = 0, (*param_3 & 4) == 0)) {

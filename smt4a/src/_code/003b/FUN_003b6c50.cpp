@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler merges both Boolean job-state calls; retail keeps separate enabled/disabled branches. */
 #include "event/bustupEvent/BustupCutAnim.h"
 
 extern "C" {
@@ -10,12 +9,13 @@ void FUN_00164ce0(u32, u8);
 u32 FUN_003b6c50(void)
 {
     s32 enabled = scrGetArg(0);
-    u32 job = g_bustupCutAnim->slots[0];
-    if (job != 0) {
-        if (enabled != 0)
-            FUN_00164ce0(job, 1);
-        else
-            FUN_00164ce0(job, 0);
+    BustupCutAnimA *anim = g_bustupCutAnim;
+    if (anim->slots[0] != 0) {
+        if (enabled == 0) {
+            FUN_00164ce0(anim->slots[0], 0);
+        } else {
+            FUN_00164ce0(anim->slots[0], 1);
+        }
     }
     return 1;
 }

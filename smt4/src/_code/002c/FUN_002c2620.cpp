@@ -1,4 +1,3 @@
-/* NON_MATCHING: registry/bucket bases use r6/r5 rather than retail r5/r6, and traversal uses r3/r2 rather than r2/r3. */
 #include "common.h"
 
 /* A node of the graphics context's id registry: an id and the data it names, chained in id order. */

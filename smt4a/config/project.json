@@ -37556,13 +37556,23 @@
     },
     {
       "address": "0x188688",
-      "function": "FUN_00188688",
+      "function": "fsGetUserMountHandle",
       "module": "_code",
-      "object": "build/obj/_code/0018/FUN_00188688.o",
+      "object": "build/obj/_code/0018/fsGetUserMountHandle.o",
       "size": 40,
-      "source": "src/_code/0018/FUN_00188688.cpp",
-      "target": "orig/target/_code/0018/FUN_00188688.o",
-      "thumb": false
+      "source": "src/_code/0018/fsGetUserMountHandle.cpp",
+      "target": "orig/target/_code/0018/fsGetUserMountHandle.o",
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x1886bc",
@@ -41669,7 +41679,18 @@
       "size": 80,
       "source": "src/_code/0019/asdMdlNodeInit.cpp",
       "target": "orig/target/_code/0019/asdMdlNodeInit.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O2",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x19cbf8",
@@ -51624,12 +51645,12 @@
     },
     {
       "address": "0x1d0ea0",
-      "function": "FUN_001d0ea0",
+      "function": "aocResolveMountPath",
       "module": "_code",
-      "object": "build/obj/_code/001d/FUN_001d0ea0.o",
+      "object": "build/obj/_code/001d/aocResolveMountPath.o",
       "size": 300,
-      "source": "src/_code/001d/FUN_001d0ea0.cpp",
-      "target": "orig/target/_code/001d/FUN_001d0ea0.o",
+      "source": "src/_code/001d/aocResolveMountPath.cpp",
+      "target": "orig/target/_code/001d/aocResolveMountPath.o",
       "thumb": false
     },
     {
@@ -98671,12 +98692,12 @@
     },
     {
       "address": "0x32cef8",
-      "function": "FUN_0032cef8",
+      "function": "renderStatePush",
       "module": "_code",
-      "object": "build/obj/_code/0032/FUN_0032cef8.o",
+      "object": "build/obj/_code/0032/renderStatePush.o",
       "size": 84,
-      "source": "src/_code/0032/FUN_0032cef8.cpp",
-      "target": "orig/target/_code/0032/FUN_0032cef8.o",
+      "source": "src/_code/0032/renderStatePush.cpp",
+      "target": "orig/target/_code/0032/renderStatePush.o",
       "thumb": false
     },
     {
@@ -102997,12 +103018,12 @@
     },
     {
       "address": "0x34aae4",
-      "function": "FUN_0034aae4",
+      "function": "uiQuestClose",
       "module": "_code",
-      "object": "build/obj/_code/0034/FUN_0034aae4.o",
+      "object": "build/obj/_code/0034/uiQuestClose.o",
       "size": 224,
-      "source": "src/_code/0034/FUN_0034aae4.cpp",
-      "target": "orig/target/_code/0034/FUN_0034aae4.o",
+      "source": "src/_code/0034/uiQuestClose.cpp",
+      "target": "orig/target/_code/0034/uiQuestClose.o",
       "thumb": false
     },
     {
@@ -139243,7 +139264,18 @@
       "size": 140,
       "source": "src/_code/0042/FUN_00428940.cpp",
       "target": "orig/target/_code/0042/FUN_00428940.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x4289cc",
@@ -139253,7 +139285,18 @@
       "size": 140,
       "source": "src/_code/0042/FUN_004289cc.cpp",
       "target": "orig/target/_code/0042/FUN_004289cc.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x428a58",
@@ -141795,7 +141838,18 @@
       "size": 76,
       "source": "src/_code/0043/FUN_0043128c.cpp",
       "target": "orig/target/_code/0043/FUN_0043128c.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O2",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x4312dc",

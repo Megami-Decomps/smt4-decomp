@@ -1,4 +1,3 @@
-/* NON_MATCHING: visibility-point stack slots are reversed, signed/unsigned bit tests share one vmov, and row-base scheduling differs. */
 #include "shard/W6_W6Match2_OffsetPosition2D.h"
 #include "code/Code0029.h"
 
@@ -42,16 +41,17 @@ u32 flaggedEntryGetValueByState(ComparisonMenuSelection *);
 void FUN_003a9df4(ComparisonMenuScene *, s32, u32, s32);
 void FUN_0022d7b0(ComparisonMenuScene *, u32);
 
+/* Whether the menu's anchor (position plus offset) has an x coordinate on screen, tested on the float's bits. */
 static bool comparisonMenuOnScreen(const ComparisonMenuScene *scene)
 {
-    ComparisonMenuPoint position, offset;
+    ComparisonMenuPoint offset, position;
     pairCopy(&scene->anchor, &position);
     uiMenuAnchorGetOffset(&scene->anchor, &offset);
-    union { f32 value; s32 signedBits; u32 bits; } x;
-    x.value = position.x + offset.x;
-    return x.signedBits < 0x43a00000 && x.bits < 0xc3a00000;
+    f32 x = position.x + offset.x;
+    return reinterpret_cast<const s32 &>(x) < 0x43a00000 && reinterpret_cast<const u32 &>(x) < 0xc3a00000;
 }
 
+/* Draws the menu frame, then its visible rows (the selected one highlighted in mode 2). */
 void scrollMenuDrawVisibleEntries(ComparisonMenuScene *scene)
 {
     if (!comparisonMenuOnScreen(scene))
@@ -68,19 +68,19 @@ void scrollMenuDrawVisibleEntries(ComparisonMenuScene *scene)
     if (scene->selection.count == 0)
         return;
 
-    struct { s32 first, visible; } range;
-    range.visible = rangeLimitMin(&scene->selection);
-    range.first = FUN_0029e924(&scene->selection);
+    s32 first = FUN_0029e924(&scene->selection);
+    s32 visible = rangeLimitMin(&scene->selection);
     ComparisonMenuEntry *entries = scene->entries;
-    for (s32 row = 0; row < range.visible; ++row) {
+    s32 row;
+    for (row = 0; row < visible; ++row) {
         if (scene->mode != 2 || flaggedEntryGetValueByState(&scene->selection) != row)
-            FUN_003a9df4(scene, row, 0, entries[range.first + row].value);
+            FUN_003a9df4(scene, row, 0, entries[first + row].value);
     }
     if (scene->selection.count > 0 && scene->mode == 2) {
         s32 selected = flaggedValueHolderGetTotal(&scene->selection);
         s16 value = entries[selected].value;
-        s32 row = flaggedEntryGetValueByState(&scene->selection);
-        FUN_003a9df4(scene, row, 1, value);
+        s32 selectedRow = flaggedEntryGetValueByState(&scene->selection);
+        FUN_003a9df4(scene, selectedRow, 1, value);
     }
     FUN_0022d7b0(scene, layer);
 }

@@ -1,58 +1,61 @@
-/* NON_MATCHING: ported smt4a cyclingPanelAdvance (integer bit compares of the frame floats); opening-frame loads still not paired into vldmia and registers differ. */
+/* NON_MATCHING: ported smt4a cyclingPanelAdvance; phase 1 pairs the secondary/reveal frames into vldmia/vstmia where retail pairs opening/secondary (and keeps 4.0f in s2, not s3). */
 #include "ui/MaskedChoiceRows.h"
+
+// The animation tail follows the shared row-list prefix.
+struct CyclingPanelWork {
+    /* 0x000 */ MaskedChoiceRows choices;
+    /* 0x300 */ u8 unk300[0x90];
+    /* 0x390 */ u32 phase;
+    /* 0x394 */ f32 closing;
+    /* 0x398 */ f32 opening;
+    /* 0x39C */ f32 secondary;
+    /* 0x3A0 */ f32 reveal;
+};
+typedef char CyclingPanelWorkOffsets[offsetof(CyclingPanelWork, phase) == 0x390 && offsetof(CyclingPanelWork, reveal) == 0x3A0 ? 1 : -1];
 
 static __inline s32 panelFrameBits(f32 frame)
 {
     return reinterpret_cast<const s32 &>(frame);
 }
 
-extern "C" void FUN_0033d0f0(MaskedChoiceRows *choices)
+// Advance the panel reveal/close phases and cycle rows that have multiple choices.
+extern "C" void FUN_0033d0f0(CyclingPanelWork *work)
 {
-    // The animation tail follows the shared row-list prefix.
-    struct ChoiceAnimationView {
-        MaskedChoiceRows choices;
-        u8 unk300[0x90];
-        u32 phase;
-        f32 closingFrame;
-        f32 openingFrames[3];
-    };
-    typedef char ChoiceAnimationOffsets[offsetof(ChoiceAnimationView, phase) == 0x390 && offsetof(ChoiceAnimationView, openingFrames) == 0x398 ? 1 : -1];
-    ChoiceAnimationView *view = reinterpret_cast<ChoiceAnimationView *>(choices);
-    switch (view->phase) {
+    switch (work->phase) {
     case 0: {
-        f32 frame = view->openingFrames[0] + 1.0f;
-        view->openingFrames[0] = frame;
+        f32 frame = work->opening + 1.0f;
+        work->opening = frame;
         if (panelFrameBits(frame) >= 0x40000000)
-            view->phase = 1;
+            work->phase = 1;
         break;
     }
     case 1: {
-        f32 secondary = view->openingFrames[1] + 1.0f;
-        f32 reveal = view->openingFrames[2] + 1.0f;
-        f32 opening = view->openingFrames[0] + 1.0f;
-        view->openingFrames[0] = opening;
-        view->openingFrames[2] = reveal;
-        view->openingFrames[1] = secondary;
+        f32 secondary = work->secondary + 1.0f;
+        f32 opening = work->opening + 1.0f;
+        f32 reveal = work->reveal + 1.0f;
+        work->opening = opening;
+        work->secondary = secondary;
+        work->reveal = reveal;
         s32 completed = 0;
         if (panelFrameBits(opening) >= 0x40800000) {
             completed = 1;
-            view->openingFrames[0] = 4.0f;
+            work->opening = 4.0f;
         }
         if (panelFrameBits(secondary) >= 0x40800000) {
             ++completed;
-            view->openingFrames[1] = 4.0f;
+            work->secondary = 4.0f;
         }
         if (panelFrameBits(reveal) >= 0x41000000) {
             ++completed;
-            view->openingFrames[2] = 8.0f;
+            work->reveal = 8.0f;
         }
         if (completed == 3)
-            view->phase = 2;
+            work->phase = 2;
         break;
     }
     case 2:
-        for (s32 index = 0; index < choices->count; ++index) {
-            MaskedChoiceRow *row = &choices->rows[index];
+        for (s32 index = 0; index < work->choices.count; ++index) {
+            MaskedChoiceRow *row = &work->choices.rows[index];
             if (row->count == 0 || row->count == 1)
                 continue;
             f32 frame = row->frame + 1.0f;
@@ -71,11 +74,11 @@ extern "C" void FUN_0033d0f0(MaskedChoiceRows *choices)
         }
         break;
     case 3: {
-        f32 frame = view->closingFrame + 1.0f;
-        view->closingFrame = frame;
+        f32 frame = work->closing + 1.0f;
+        work->closing = frame;
         if (panelFrameBits(frame) >= 0x40800000) {
-            view->closingFrame = 4.0f;
-            view->phase = 4;
+            work->closing = 4.0f;
+            work->phase = 4;
         }
         break;
     }

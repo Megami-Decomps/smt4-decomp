@@ -1,36 +1,36 @@
-/* NON_MATCHING: retail keeps a null test on the manager address (`this != NULL` of a member call on a global, as `cmp r1, #0; beq`) and copies the index to r2 before setting the result; armcc folds the always-true test of a global's address away (also with __weak). */
 #include "common.h"
+#include <stddef.h>
 
-typedef struct SlotObject {
+/* A playing sound: only the word read here is known. */
+struct SoundSlotView {
     /* 0x00 */ u8 unk00[0xB0];
     /* 0xB0 */ u32 value;
-} SlotObject;
-
-/* The slot manager: sixteen slot objects at 0x8BC. */
-struct SlotManager {
-    /* 0x000 */ u8 unk000[0x8BC];
-    /* 0x8BC */ SlotObject *slots[16];
-
-    u32 getValue(u32 index);
 };
 
-/* The value of slot `index`, or 0xFFFFFFFF when the index is out of range or the slot empty. */
-u32 SlotManager::getValue(u32 index)
-{
-    if (index < 16 && this != NULL && slots[index] != NULL) {
-        return slots[index]->value;
-    }
-    return 0xffffffff;
-}
+/* The 3D sound manager block inside the sound system: its table of sixteen sounds. */
+struct SoundSlotTableView {
+    /* 0x000 */ u8 unk000[0x8BC];
+    /* 0x8BC */ SoundSlotView *slots[16];
+};
+typedef char SoundSlotTableViewLayoutCheck[offsetof(SoundSlotTableView, slots) == 0x8BC &&
+    offsetof(SoundSlotView, value) == 0xB0 ? 1 : -1];
 
 extern "C" {
+/* Weak like the sound system's other references: retail tests the block's address before using it. */
+extern __weak SoundSlotTableView DAT_0063ea3c;
 
-extern SlotManager DAT_0063ea3c;
-
-/* Returns the value of slot `index` of the slot manager, or 0xFFFFFFFF when out of range or empty. */
-u32 FUN_0036bc6c(u32 index)
+/* Returns the word at 0xB0 of sound `index`, or -1 when the index is out of range or the slot is empty. */
+u32 FUN_0036bc6c(s32 index)
 {
-    return DAT_0063ea3c.getValue(index);
+    SoundSlotTableView *table = &DAT_0063ea3c;
+    u32 value = 0xffffffff;
+    if (index >= 0 && index < 16 && table != NULL) {
+        SoundSlotView *entry = table->slots[index];
+        if (entry != NULL) {
+            value = entry->value;
+        }
+    }
+    return value;
 }
 
 } /* extern "C" */

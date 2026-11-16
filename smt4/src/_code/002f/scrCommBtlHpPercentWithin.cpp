@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only: retail accumulates the maximum in r5 and the current value in r6; built swaps them. */
+/* NON_MATCHING: the zeroing now matches; only the two accumulators swap r5/r6 inside the loop (retail adds the maximum into r5, the current HP into r6). */
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
@@ -10,8 +10,8 @@ extern "C" {
 u32 scrCommBtlHpPercentWithin(void)
 {
     s32 limit = scrGetArg(0);
-    s32 maxSum = 0;
     s32 curSum = 0;
+    s32 maxSum = 0;
     s32 index;
 
     for (index = 0; index < 0x6D; index++) {

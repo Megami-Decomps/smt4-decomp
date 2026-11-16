@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps byteCount in r6 and commands in r8 (ours r5/r6) and builds the queued entry address without write-back. */
+/* NON_MATCHING: IDENTICAL with unit cflags `--fpu=softvfp` (default flags otherwise); under the default VFP build retail keeps byteCount in r6 and commands in r8 (ours r5/r6) and builds the queued entry address without write-back. */
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {

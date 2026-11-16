@@ -55,7 +55,7 @@ static __inline void uiQuestRelease(UiQuest *quest)
 }
 
 /* Closes the quest screen: releases its resources, stops its job and frees it. */
-void FUN_0034aae4(void)
+void uiQuestClose(void)
 {
     UiQuest *quest = g_uiQuest;
 

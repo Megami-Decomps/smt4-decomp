@@ -5,7 +5,7 @@ extern "C" {
 int FUN_00269dc8(void);
 int messageSlotSet(int a);
 int scrCommMessageSetMode(...);
-int FUN_00296934(void);
+int uiQuestClose(void);
 int buttonHelpSetPreset(int a);
 int FUN_002fec80(int a);
 extern int scrGetCommandFrame(void);
@@ -25,7 +25,7 @@ u8 FUN_002cddcc(void)
     }
     done = FUN_002fec60();
     if (done != 0) {
-        FUN_00296934();
+        uiQuestClose();
         buttonHelpSetPreset(0x90);
         scrCommMessageSetMode(0xffffffff);
         messageSlotSet(0);

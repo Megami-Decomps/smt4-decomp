@@ -1,4 +1,4 @@
-/* NON_MATCHING: the position updates are scheduled differently (retail keeps the three new coordinates in registers for the part stores) */
+/* NON_MATCHING: the new coordinates now stay in VFP registers for the first part update (y/z swap s1/s2); the snap-to-final path still forwards the stored position where retail reloads it with one ldm, and the tail call to FUN_00341bec is not turned into the linker's branch-NOP. */
 #include "shard/S1Mover.h"
 
 extern "C" {
@@ -12,18 +12,18 @@ void FUN_00341bec(Mover *mover);
 void FUN_00341a3c(Mover *mover)
 {
     if (mover->active != 0) {
-        mover->position.x += mover->velocity.x;
-        mover->position.y += mover->velocity.y;
-        mover->position.z += mover->velocity.z;
+        f32 x = mover->position.x += mover->velocity.x;
+        f32 y = mover->position.y += mover->velocity.y;
+        f32 z = mover->position.z += mover->velocity.z;
         mover->positionB.x += mover->velocityB.x;
         mover->positionB.y += mover->velocityB.y;
         mover->positionB.z += mover->velocityB.z;
 
         MovedPart *part = mover->parts[0];
 
-        part->x = mover->position.x;
-        part->y = mover->position.y;
-        part->z = mover->position.z;
+        part->x = x;
+        part->y = y;
+        part->z = z;
         part->flags |= MOVED_PART_DIRTY;
         providerEntrySetVector(mover->parts[0], &mover->positionB);
 

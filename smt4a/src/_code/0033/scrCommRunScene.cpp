@@ -8,7 +8,7 @@ extern void scrCommMessageSetMode(s32 value);
 extern void FUN_002f0c18(void);
 extern void FUN_0038b710(u32 scene);
 extern s32 stateHolder4IsZero(void);
-extern void FUN_0034aae4(void);
+extern void uiQuestClose(void);
 extern void sysPlaySe(u32 id);
 extern void messageSlotSet(s32 value);
 
@@ -25,7 +25,7 @@ u8 scrCommRunScene(void)
     }
     running = stateHolder4IsZero();
     if (running != 0) {
-        FUN_0034aae4();
+        uiQuestClose();
         sysPlaySe(0x92);
         scrCommMessageSetMode(-1);
         messageSlotSet(0);

@@ -6510,3 +6510,7 @@
 00371c3c statusBustUpPortraitAcquire
 0038b3f8 statusBustUpPortraitRelease
 002c9104 clockRecordStartSeconds
+001d0ea0 aocResolveMountPath
+0034aae4 uiQuestClose
+00188688 fsGetUserMountHandle
+0032cef8 renderStatePush

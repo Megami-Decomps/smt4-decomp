@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the zero for the flag store and the index lands in r1 (retail r0) beside the g_mapIf address. */
 #include "map/mapIf.h"
 
 extern "C" {
@@ -8,9 +7,9 @@ extern MapIfGlobalsA g_mapIf;
 /* Restarts (state 6) every active interface record in states 8-16, except the categories that keep their state. */
 void FUN_0031297c(void)
 {
+    s32 index = 0;
     MapIfStateA *state = g_mapIf.state;
     state->head.unk1C = 0;
-    s32 index = 0;
     for (u32 left = 128; left != 0; --left) {
         if (state->records[index].active && state->records[index].display.category != 0x1d &&
             state->records[index].display.category != 0x31 && state->records[index].display.category != 0x1e &&

@@ -1,4 +1,4 @@
-/* NON_MATCHING: native thread destruction forms the saved handle pointer before FinalizeImpl instead of after; joined-store and context-reset scheduling still differ. */
+/* NON_MATCHING: the thread stop now matches (wait, joined flag, finalize, NnOsHandle close as in uniteScreenDestroy); only the context load is scheduled before the -1 store to unkc0 (retail loads it after the store). */
 #include "shard/W6_W6Match1_BattleStageModel.h"
 #include "battle/btlStage.h"
 #include "nn/Result.h"
@@ -41,17 +41,19 @@ inline void StackRegion::operator delete(void *block)
     asdMemFreeNonNull(block);
 }
 
-/* Waits for the thread to end. */
-static void threadJoin(NnOsThread *thread)
+/* Waits for the loader thread to end, then finalizes it and closes its handle. */
+static __inline void stageStopThread(BattleStageModel *stage)
 {
-    s32 index;
-    u32 handle = thread->handle;
-    s32 result = FUN_002c40f8(&index, &handle, 1, 0, -1);
+    s32 signaled;
+    u32 handles[1] = { stage->thread.handle };
+    s32 result = FUN_002c40f8(&signaled, handles, 1, 0, -1);
     bool failed = nnResultIsFailure(result);
     if (failed) {
         FUN_002c526c(result, failed);
     }
-    thread->joined = 1;
+    stage->thread.joined = 1;
+    stage->thread.finalize();
+    stage->thread.NnOsHandle::~NnOsHandle();
 }
 
 
@@ -63,8 +65,7 @@ extern "C" void FUN_0021eda8(u32 handle)
     BattleStageModel *stage = (BattleStageModel *)g_btlStage.stage;
 
     if (stage != NULL) {
-        threadJoin(&stage->thread);
-        stage->thread.~NnOsThread();
+        stageStopThread(stage);
         if (stage->stackRegion != NULL) {
             FUN_002c3f5c(stage->stackRegion);
             delete static_cast<StackRegion *>(stage->stackRegion);
@@ -75,7 +76,8 @@ extern "C" void FUN_0021eda8(u32 handle)
             stage->threadStack = NULL;
         }
         stage->unkc0 = -1;
-        if (stage->context != NULL) {
+        void *context = stage->context;
+        if (context != NULL) {
             stage->context = NULL;
         }
         FUN_002759bc();

@@ -1,4 +1,3 @@
-/* NON_MATCHING: Early exits share the final zero return, and the drawing data pointer loads directly into its argument register. */
 #include "shard/Shard0031.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
@@ -18,13 +17,17 @@ void saveSlotDrawSummary(u32 handle, void *data, void *layout, s32 width, s32 he
 u32 FUN_0025cf44(void)
 {
     OverlayObj *work = g_campCec.instance;
-    if (work != NULL && textureGetIndexedResource(46) != 0 &&
-        asdTMTexTableNodeIsLoaded(46, 0) != 0) {
-        const TextureSummaryDimensions *dimensions = reinterpret_cast<const TextureSummaryDimensions *>(asdTMTexTableEntryAt(46, 151));
-        cecCardDrawBackgroundAndLabel(work->unk174, g_campCec.instance->block40, work->slides, 0, 0);
-        saveSlotDrawSummary(work->unk174, g_campCec.instance->block40, work->slides + 1,
-                            dimensions->width, dimensions->height, 0);
-    }
+    if (work == NULL)
+        return 0;
+    if (textureGetIndexedResource(46) == 0)
+        return 0;
+    if (asdTMTexTableNodeIsLoaded(46, 0) == 0)
+        return 0;
+    const TextureSummaryDimensions *dimensions = reinterpret_cast<const TextureSummaryDimensions *>(asdTMTexTableEntryAt(46, 151));
+    void *data = g_campCec.instance->block40;
+    cecCardDrawBackgroundAndLabel(work->unk174, data, work->slides, 0, 0);
+    data = g_campCec.instance->block40;
+    saveSlotDrawSummary(work->unk174, data, work->slides + 1, dimensions->width, dimensions->height, 0);
     return 0;
 }
 }

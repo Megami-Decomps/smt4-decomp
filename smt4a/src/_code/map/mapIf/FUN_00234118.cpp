@@ -1,4 +1,4 @@
-/* NON_MATCHING: path branch layout and allocation/null initialization differ; incoming four-float pose ABI recovered from entry stores. */
+/* NON_MATCHING: body, branches and the allocate-then-construct result now match; retail loads &g_mapIf before the store constants and places g_gameState's pool word before g_mapIf's. */
 #include "map/mapIf.h"
 #include "code/Code0040.h"
 
@@ -31,15 +31,15 @@ void FUN_00234118(MapIfSpawnPose pose)
     state->position[2] = pose.z;
     state->heading = pose.heading;
     char path[128];
-    if (g_gameState != 0x18)
-        textFormatBuffer(path, "map/all/m%03d_fast.bam", g_gameState);
-    else
+    if (g_gameState == 0x18)
         textFormatBuffer(path, "map/all/m099_fast.bam");
+    else
+        textFormatBuffer(path, "map/all/m%03d_fast.bam", g_gameState);
     if (g_gameState == 0x2c || g_gameState == 0x2d || g_gameState == 0x2e || g_gameState == 0x2f)
         textFormatBuffer(path, "map/all/m%03d_fast.bam", 0x2b);
     void *memory = FUN_00178b04(0x20, "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapIf.cpp", 0x16ee);
-    MapIfResource *resource = NULL;
-    if (memory)
+    MapIfResource *resource = static_cast<MapIfResource *>(memory);
+    if (memory != NULL)
         resource = modelListInit(memory);
     slot->resource = resource;
     FUN_0040aa6c(resource, path);

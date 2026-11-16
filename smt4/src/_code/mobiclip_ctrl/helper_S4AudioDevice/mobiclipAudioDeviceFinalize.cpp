@@ -34,7 +34,7 @@ void asdMemFree(void *);
 void sndVoiceFree(u32);
 void sndSystemShutdown();
 void dspComponentUnload();
-void FUN_0010fc90();
+void soundCallbacksCloseDspResource();
 
 /* Frees voice `index`'s handle and buffer under the module lock; out-of-range indices are ignored. */
 static __inline void releaseVoice(MovieAudioState *state, s32 index)
@@ -94,6 +94,6 @@ void mobiclipAudioDeviceFinalize()
     state->allocator = NULL;
     sndSystemShutdown();
     dspComponentUnload();
-    FUN_0010fc90();
+    soundCallbacksCloseDspResource();
 }
 }

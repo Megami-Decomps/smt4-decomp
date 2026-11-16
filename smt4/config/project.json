@@ -3895,12 +3895,12 @@
     },
     {
       "address": "0x10fc90",
-      "function": "FUN_0010fc90",
+      "function": "soundCallbacksCloseDspResource",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_0010fc90.o",
+      "object": "build/obj/_code/0010/soundCallbacksCloseDspResource.o",
       "size": 64,
-      "source": "src/_code/0010/FUN_0010fc90.cpp",
-      "target": "orig/target/_code/0010/FUN_0010fc90.o",
+      "source": "src/_code/0010/soundCallbacksCloseDspResource.cpp",
+      "target": "orig/target/_code/0010/soundCallbacksCloseDspResource.o",
       "thumb": false
     },
     {
@@ -18158,12 +18158,12 @@
     },
     {
       "address": "0x15dc2c",
-      "function": "FUN_0015dc2c",
+      "function": "aocResolveMountPath",
       "module": "_code",
-      "object": "build/obj/_code/0015/FUN_0015dc2c.o",
+      "object": "build/obj/_code/0015/aocResolveMountPath.o",
       "size": 300,
-      "source": "src/_code/0015/FUN_0015dc2c.cpp",
-      "target": "orig/target/_code/0015/FUN_0015dc2c.o",
+      "source": "src/_code/0015/aocResolveMountPath.cpp",
+      "target": "orig/target/_code/0015/aocResolveMountPath.o",
       "thumb": false
     },
     {
@@ -29770,12 +29770,12 @@
     },
     {
       "address": "0x2113c0",
-      "function": "FUN_002113c0",
+      "function": "campCecStopCommThread",
       "module": "_code",
-      "object": "build/obj/_code/0021/FUN_002113c0.o",
+      "object": "build/obj/_code/0021/campCecStopCommThread.o",
       "size": 312,
-      "source": "src/_code/0021/FUN_002113c0.cpp",
-      "target": "orig/target/_code/0021/FUN_002113c0.o",
+      "source": "src/_code/0021/campCecStopCommThread.cpp",
+      "target": "orig/target/_code/0021/campCecStopCommThread.o",
       "thumb": false
     },
     {
@@ -32412,12 +32412,12 @@
     },
     {
       "address": "0x223dcc",
-      "function": "FUN_00223dcc",
+      "function": "uniteScreenDestroy",
       "module": "_code",
-      "object": "build/obj/_code/0022/FUN_00223dcc.o",
+      "object": "build/obj/_code/0022/uniteScreenDestroy.o",
       "size": 676,
-      "source": "src/_code/0022/FUN_00223dcc.cpp",
-      "target": "orig/target/_code/0022/FUN_00223dcc.o",
+      "source": "src/_code/0022/uniteScreenDestroy.cpp",
+      "target": "orig/target/_code/0022/uniteScreenDestroy.o",
       "thumb": false
     },
     {
@@ -44125,12 +44125,12 @@
     },
     {
       "address": "0x26b4cc",
-      "function": "FUN_0026b4cc",
+      "function": "clockRecordStartSeconds",
       "module": "_code",
-      "object": "build/obj/_code/0026/FUN_0026b4cc.o",
+      "object": "build/obj/_code/0026/clockRecordStartSeconds.o",
       "size": 148,
-      "source": "src/_code/0026/FUN_0026b4cc.cpp",
-      "target": "orig/target/_code/0026/FUN_0026b4cc.o",
+      "source": "src/_code/0026/clockRecordStartSeconds.cpp",
+      "target": "orig/target/_code/0026/clockRecordStartSeconds.o",
       "thumb": false
     },
     {
@@ -50323,12 +50323,12 @@
     },
     {
       "address": "0x296934",
-      "function": "FUN_00296934",
+      "function": "uiQuestClose",
       "module": "_code",
-      "object": "build/obj/_code/0029/FUN_00296934.o",
+      "object": "build/obj/_code/0029/uiQuestClose.o",
       "size": 224,
-      "source": "src/_code/0029/FUN_00296934.cpp",
-      "target": "orig/target/_code/0029/FUN_00296934.o",
+      "source": "src/_code/0029/uiQuestClose.cpp",
+      "target": "orig/target/_code/0029/uiQuestClose.o",
       "thumb": false
     },
     {
@@ -54142,7 +54142,18 @@
       "size": 80,
       "source": "src/_code/002a/asdMdlNodeInit.cpp",
       "target": "orig/target/_code/002a/asdMdlNodeInit.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O2",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x2a9244",
@@ -54866,7 +54877,18 @@
       "size": 76,
       "source": "src/_code/002a/FUN_002ad61c.cpp",
       "target": "orig/target/_code/002a/FUN_002ad61c.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O2",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x2ad66c",
@@ -58046,13 +58068,23 @@
     },
     {
       "address": "0x2bbaf8",
-      "function": "FUN_002bbaf8",
+      "function": "fsGetUserMountHandle",
       "module": "_code",
-      "object": "build/obj/_code/002b/FUN_002bbaf8.o",
+      "object": "build/obj/_code/002b/fsGetUserMountHandle.o",
       "size": 40,
-      "source": "src/_code/002b/FUN_002bbaf8.cpp",
-      "target": "orig/target/_code/002b/FUN_002bbaf8.o",
-      "thumb": false
+      "source": "src/_code/002b/fsGetUserMountHandle.cpp",
+      "target": "orig/target/_code/002b/fsGetUserMountHandle.o",
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x2bbb2c",
@@ -59870,7 +59902,18 @@
       "size": 256,
       "source": "src/_code/002c/FUN_002c2620.cpp",
       "target": "orig/target/_code/002c/FUN_002c2620.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O2",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x2c2728",

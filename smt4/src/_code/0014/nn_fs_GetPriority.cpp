@@ -3,12 +3,12 @@
 extern "C" {
 
 int nn_fs_ipc_FileSystem_GetPriority(int *priority, u32 archive);
-extern int FUN_002bbaf8(void);
+extern int fsGetUserMountHandle(void);
 
 /* Queries the file-system priority of `archive` through the fs IPC client. */
 void nn_fs_GetPriority(u32 archive)
 {
-    int priority = FUN_002bbaf8();
+    int priority = fsGetUserMountHandle();
 
     nn_fs_ipc_FileSystem_GetPriority(&priority, archive);
 }

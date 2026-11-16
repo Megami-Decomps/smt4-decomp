@@ -74593,13 +74593,13 @@
       "target_path": "orig/target/_code/0018/FUN_001885e8.o"
     },
     {
-      "base_path": "build/obj/_code/0018/FUN_00188688.o",
+      "base_path": "build/obj/_code/0018/fsGetUserMountHandle.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00188688",
+            "name": "fsGetUserMountHandle",
             "size": 40,
             "vram": "0x188688"
           }
@@ -74607,10 +74607,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0018/FUN_00188688.cpp"
+        "source_path": "src/_code/0018/fsGetUserMountHandle.cpp"
       },
-      "name": "_code/0018/FUN_00188688",
-      "target_path": "orig/target/_code/0018/FUN_00188688.o"
+      "name": "_code/0018/fsGetUserMountHandle",
+      "target_path": "orig/target/_code/0018/fsGetUserMountHandle.o"
     },
     {
       "base_path": "build/obj/_code/0018/FUN_001886bc.o",
@@ -102578,13 +102578,13 @@
       "target_path": "orig/target/_code/001d/nw_snd_internal_PoolImpl_AllocImpl.o"
     },
     {
-      "base_path": "build/obj/_code/001d/FUN_001d0ea0.o",
+      "base_path": "build/obj/_code/001d/aocResolveMountPath.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001d0ea0",
+            "name": "aocResolveMountPath",
             "size": 300,
             "vram": "0x1d0ea0"
           }
@@ -102592,10 +102592,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/001d/FUN_001d0ea0.cpp"
+        "source_path": "src/_code/001d/aocResolveMountPath.cpp"
       },
-      "name": "_code/001d/FUN_001d0ea0",
-      "target_path": "orig/target/_code/001d/FUN_001d0ea0.o"
+      "name": "_code/001d/aocResolveMountPath",
+      "target_path": "orig/target/_code/001d/aocResolveMountPath.o"
     },
     {
       "base_path": "build/obj/_code/001d/AocSystemA__getPendingRequest.o",
@@ -192979,13 +192979,13 @@
       "target_path": "orig/target/_code/AsdSDK/Source/Snd/AsdSoundSystem/asdSoundGetOption0.o"
     },
     {
-      "base_path": "build/obj/_code/0032/FUN_0032cef8.o",
+      "base_path": "build/obj/_code/0032/renderStatePush.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0032cef8",
+            "name": "renderStatePush",
             "size": 84,
             "vram": "0x32cef8"
           }
@@ -192993,10 +192993,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0032/FUN_0032cef8.cpp"
+        "source_path": "src/_code/0032/renderStatePush.cpp"
       },
-      "name": "_code/0032/FUN_0032cef8",
-      "target_path": "orig/target/_code/0032/FUN_0032cef8.o"
+      "name": "_code/0032/renderStatePush",
+      "target_path": "orig/target/_code/0032/renderStatePush.o"
     },
     {
       "base_path": "build/obj/_code/0032/FUN_0032cf50.o",
@@ -201522,13 +201522,13 @@
       "target_path": "orig/target/_code/0034/FUN_0034aac8.o"
     },
     {
-      "base_path": "build/obj/_code/0034/FUN_0034aae4.o",
+      "base_path": "build/obj/_code/0034/uiQuestClose.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0034aae4",
+            "name": "uiQuestClose",
             "size": 224,
             "vram": "0x34aae4"
           }
@@ -201536,10 +201536,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0034/FUN_0034aae4.cpp"
+        "source_path": "src/_code/0034/uiQuestClose.cpp"
       },
-      "name": "_code/0034/FUN_0034aae4",
-      "target_path": "orig/target/_code/0034/FUN_0034aae4.o"
+      "name": "_code/0034/uiQuestClose",
+      "target_path": "orig/target/_code/0034/uiQuestClose.o"
     },
     {
       "base_path": "build/obj/_code/0034/uiQuestIsCreated.o",

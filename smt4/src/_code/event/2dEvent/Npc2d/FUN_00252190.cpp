@@ -1,4 +1,3 @@
-/* NON_MATCHING: the callbacks' pool order now matches; retail stores the region before loading them into r0/r1 and pushes all three stack arguments with one stm, the build loads them into r1/r2 first. */
 #include "event/NpcTextureWork.h"
 #include "gamedata/Table00.h"
 #include "AsdSDK/AsdDebug.h"
@@ -36,23 +35,21 @@ void FUN_00252190(u32 npcId, u32 mode, s32 x)
         work->deferred = 2;
     }
     work->phase = static_cast<u16>(-npcId);
-    s32 region;
-    if (x <= -100) {
-        region = 16;
-    } else if (x <= -60) {
-        region = 3;
-    } else if (x >= 100) {
-        region = 17;
-    } else if (x >= 40) {
-        region = 4;
-    } else if (x < 0) {
-        region = 18;
-    } else {
-        region = 5;
-    }
-    work->display.screenRegion = region;
+    if (x <= -100)
+        work->display.screenRegion = 16;
+    else if (x <= -60)
+        work->display.screenRegion = 3;
+    else if (x >= 100)
+        work->display.screenRegion = 17;
+    else if (x >= 40)
+        work->display.screenRegion = 4;
+    else if (x < 0)
+        work->display.screenRegion = 18;
+    else
+        work->display.screenRegion = 5;
     work->speed = 0.33f;
-    AsdProcUpdateFunc update = FUN_001dfc64;
-    asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00403570), 2, 0, 0, update, FUN_002db92c, reinterpret_cast<u32>(work));
+    AsdProcUpdateFunc update = FUN_001dfc64; /* the portrait's per-frame step */
+    AsdProcFunc end = FUN_002db92c;          /* releases the textures and frees the work */
+    asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00403570), 2, 0, 0, update, end, reinterpret_cast<u32>(work));
 }
 }

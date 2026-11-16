@@ -1,4 +1,4 @@
-/* NON_MATCHING: the active-entry result now matches; retail's loop-hit exit is still `bl scrSetResult; nop; nop; b epilogue` with the shared `mov r0,r7` return (r7 = 1), where the build duplicates the epilogue with `mov r0,#1`. */
+/* NON_MATCHING: only the final return differs: retail returns the shift-base 1 kept in r7 (`mov r0, r7`), the build writes `mov r0, #1`. */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
@@ -10,23 +10,10 @@ s32 scrGetArg(s32 index);
 s32 btlScriptResolveGroupArg(s32 group);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 
-// Whether the special active battle entry belongs to the group bit `flag`.
-static __inline s32 activeEntryHasGroupBit(s32 flag)
+/* Sets the script result to whether an eligible member of the group's range, or the special active entry, has group
+ * bit `flag`. */
+static __inline void groupMemberBitResult(s32 flag, s32 group)
 {
-    if (btlGetMainState()->hasActiveEntry != 0) {
-        BtlEntry *entry = btlMainFindActiveEntry(btlGetMainState());
-        if (entry != NULL && (entry->groupMask & (1 << flag)) != 0) {
-            return 1;
-        }
-    }
-    return 0;
-}
-
-// Test whether an eligible member of the selected group has the requested flag.
-u32 FUN_002f07c8(void)
-{
-    s32 flag = scrGetArg(0);
-    s32 group = btlScriptResolveGroupArg(scrGetArg(1));
     s32 first;
     s32 count;
     FUN_002499fc(group, &first, &count);
@@ -35,14 +22,24 @@ u32 FUN_002f07c8(void)
         if ((entry->flags & 0x10) == 0 && (entry->flags & 1) != 0 &&
             (entry->flags & 0x40) == 0 && (entry->groupMask & (1 << flag)) != 0) {
             scrSetResult(1);
-            return 1;
+            return;
         }
     }
-    if (activeEntryHasGroupBit(flag)) {
-        scrSetResult(1);
-    } else {
-        scrSetResult(0);
+    if (btlGetMainState()->hasActiveEntry != 0) {
+        BtlEntry *entry = btlMainFindActiveEntry(btlGetMainState());
+        if (entry != NULL && (entry->groupMask & (1 << flag)) != 0) {
+            scrSetResult(1);
+            return;
+        }
     }
+    scrSetResult(0);
+}
+
+// Test whether an eligible member of the selected group has the requested flag.
+u32 FUN_002f07c8(void)
+{
+    s32 flag = scrGetArg(0);
+    groupMemberBitResult(flag, btlScriptResolveGroupArg(scrGetArg(1)));
     return 1;
 }
 }

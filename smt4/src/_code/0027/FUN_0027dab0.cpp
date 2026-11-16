@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the entry pointer and the reloaded member id swap r1/r2 (retail: entry r2, id r1). */
+/* NON_MATCHING: IDENTICAL with unit cflags `--fpu=softvfp` (default flags otherwise); under the default VFP build only the entry pointer and the reloaded member id swap r1/r2 (retail: entry r2, id r1). */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 

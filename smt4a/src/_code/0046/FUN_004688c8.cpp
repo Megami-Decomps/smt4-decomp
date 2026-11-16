@@ -17,7 +17,7 @@ int resultCreate(int);
 int FUN_002f0c18(void);
 int uniteReleaseExit(void);
 int FUN_00331714(int *);
-int FUN_0034aae4(void);
+int uiQuestClose(void);
 int stateHolder4Request(int);
 int FUN_003dec50(void);
 int FUN_003df168(int *, int);
@@ -69,7 +69,7 @@ extern int FUN_002a746c(void);
 extern unsigned int FUN_0031f8cc(void);
 /* Supplied declaration required: uniteReleaseExit. */
 /* Supplied declaration required: FUN_00331714. */
-/* Supplied declaration required: FUN_0034aae4. */
+/* Supplied declaration required: uiQuestClose. */
 extern int stateHolder4IsD(void);
 /* Supplied declaration required: stateHolder4Request. */
 /* Supplied declaration required: FUN_003dec50. */
@@ -199,7 +199,7 @@ LAB_004689f8:
     if (temp_v2 == 0) {
       return;
     }
-    FUN_0034aae4();
+    uiQuestClose();
     temp_v4 = 5;
     break;
   case 4:
@@ -207,7 +207,7 @@ LAB_004689f8:
     if (temp_v2 == 0) {
       return;
     }
-    FUN_0034aae4();
+    uiQuestClose();
     *param_1 = *param_1 & 0xffffffdf;
     pickObjStart(param_1,&LAB_00468d84);
     temp_v4 = 6;

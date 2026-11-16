@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation and stack layout: retail keeps the maximum in r5 and the current value in r6 and places the range start at sp+4 (a larger out block); built swaps the accumulators. */
+/* NON_MATCHING: accumulators, range loop and active-entry tail now match; retail reserves a 28-byte frame (start at sp+4, count at sp) where the build uses 12 bytes, so the loop reload pairs into ldrd. */
 #include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
 #include "util/SlotRangeSelect.h"
@@ -8,44 +8,48 @@ extern "C" {
 extern BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 extern s32 btlScriptResolveGroupArg(s32 group);
 
+/* HP totals of a set of units. */
+struct HpSums {
+    s32 maximum;
+    s32 current;
+};
+
+/* Adds the maximum and current HP of the present, non-excluded units of the group's range. */
+static __inline void groupAddHp(s32 group, HpSums *sums)
+{
+    s32 count;
+    s32 start;
+
+    FUN_002499fc(group, &start, &count);
+    for (s32 index = start; index < count + start; index++) {
+        BtlEntry *unit = &btlGetMainState()->entries[index];
+
+        if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40)) {
+            sums->maximum += unit->maxHp;
+            sums->current += unit->hp;
+        }
+    }
+}
+
 /* Script command: pushes whether the HP percentage of the present, non-excluded units of the current group (and the
  * active entry) is at most argument 0. */
 u32 scrCommBtlGroupHpPercentWithin(void)
 {
     s32 limit = scrGetArg(0);
-    s32 start;
-    s32 count;
-    s32 maxSum;
-    s32 curSum;
-    u32 group;
-    s32 index;
+    s32 group = btlScriptResolveGroupArg(scrGetArg(1));
+    HpSums sums;
 
-    group = btlScriptResolveGroupArg(scrGetArg(1));
-    maxSum = 0;
-    curSum = 0;
-    FUN_002499fc(group, &start, &count);
-    index = start;
-    if (index < count + start) {
-        do {
-            BtlEntry *unit = &btlGetMainState()->entries[index];
-
-            if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40)) {
-                maxSum += unit->maxHp;
-                curSum += unit->hp;
-            }
-            index++;
-        } while (index < start + count);
-    }
+    sums.maximum = 0;
+    sums.current = 0;
+    groupAddHp(group, &sums);
     if (btlGetMainState()->hasActiveEntry != 0) {
-        BtlEntry *active;
-
-        active = btlMainFindActiveEntry(btlGetMainState());
+        BtlEntry *active = btlMainFindActiveEntry(btlGetMainState());
         if (active != NULL) {
-            maxSum += active->maxHp;
-            curSum += active->hp;
+            sums.maximum += active->maxHp;
+            sums.current += active->hp;
         }
     }
-    scrSetResult(curSum * 100 / maxSum <= limit);
+    scrSetResult(sums.current * 100 / sums.maximum <= limit);
     return 1;
 }
 

@@ -21,7 +21,7 @@ int asdMemoryAllocAligned(...);
 int _ZN18WindowStatusResultC1Ej(...);
 int FUN_001bcfb4(int, unsigned int, unsigned int);
 int asdLoadFileAsyncWrap(int, unsigned int, unsigned int, unsigned int);
-int FUN_001d0ea0(int *, unsigned int, int);
+int aocResolveMountPath(int *, unsigned int, int);
 int _ZN10AocSystemA17getPendingRequestEv(...);
 int legacyResourceIdRemap(...);
 int FUN_002e3c44(unsigned int *, int, int, int *);
@@ -74,7 +74,7 @@ extern unsigned int _ZN18WindowStatusResultC1Ev(char *);
 /* Supplied declaration required: _ZN7AocMain12queueRequestE17RequestParametersji. */
 /* Supplied declaration required: FUN_001bcfb4. */
 /* Supplied declaration required: asdLoadFileAsyncWrap. */
-/* Supplied declaration required: FUN_001d0ea0. */
+/* Supplied declaration required: aocResolveMountPath. */
 /* Supplied declaration required: _ZN10AocSystemA17getPendingRequestEv. */
 /* Supplied declaration required: _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle. */
 extern int objGetFlagBit16(int);
@@ -204,7 +204,7 @@ void FUN_001cc6d0(int param_1,int param_2)
         temp_v15 = romwright_piece_3_1((((unsigned int)(temp_v15) >> 8) & 0xffffffU),200);
       }
       else {
-        FUN_001d0ea0(&temp_v23,g_aocSystem,param_2 + 0x30);
+        aocResolveMountPath(&temp_v23,g_aocSystem,param_2 + 0x30);
         temp_v15 = temp_v23;
         temp_v16[0] = acStack_54[0];
         temp_v16[1] = acStack_54[1];

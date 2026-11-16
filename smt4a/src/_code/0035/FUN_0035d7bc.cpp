@@ -1,20 +1,8 @@
-/* NON_MATCHING: only the schedule of the zero constant differs: retail hoists `mov r6, #0` between the thread-handle load and the timeout move before the svc; the build places it after the wait. */
+/* NON_MATCHING: only the schedule of the zero constant differs: retail hoists `mov r6, #0` between the thread-handle load and the timeout move before the svc; the build sets it after the thread finalize. */
 #include "nn/Result.h"
+#include "nn/os/Handle.h"
 #include "nn/os/Thread.h"
 #include "sys/ResultReport.h"
-
-/* A kernel handle that closes itself. */
-struct KernelHandle {
-    u32 handle;
-
-    ~KernelHandle()
-    {
-        if (handle != 0) {
-            nn::svc::CloseHandle(handle);
-            handle = 0;
-        }
-    }
-};
 
 /* A worker owner: its buffer, lock, reader thread and wake-up event. */
 struct ThreadedWorker {
@@ -22,7 +10,7 @@ struct ThreadedWorker {
     /* 0x28 */ void *buffer;
     /* 0x2C */ u8 lock[0x18];
     /* 0x44 */ NnOsThread thread;
-    /* 0x4C */ KernelHandle event;
+    /* 0x4C */ NnOsHandle event;
 };
 
 extern "C" {
@@ -41,13 +29,15 @@ void FUN_0035d7bc(ThreadedWorker *worker)
         FUN_002e3140(result, failed);
     }
     worker->thread.joined = 1;
-    worker->thread.~NnOsThread();
+    /* Joined above: finalize the thread, then close its handle through the handle's destructor. */
+    worker->thread.finalize();
+    worker->thread.NnOsHandle::~NnOsHandle();
     FUN_001469a8(worker->lock);
     if (worker->buffer != NULL) {
         asdMemFree(worker->buffer);
         worker->buffer = NULL;
     }
-    worker->event.~KernelHandle();
+    worker->event.~NnOsHandle();
 }
 
 } /* extern "C" */

@@ -1,29 +1,31 @@
-/* NON_MATCHING: 64-bit mask tests read the flags in the expression (row count now equals retail); only the register assignment (retail keeps the state in r1 and the flags in r0/r2, mask words in r3/r8) and the help-call stack argument scheduling differ. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
+#include "battle/btlHelp.h"
 
-struct BattleHelpMaskView {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ u64 first;
-    /* 0x28 */ u64 second;
-};
-struct BattleHelpStateView {
-    /* 0x0000 */ u8 unk0000[0x2268];
-    /* 0x2268 */ u32 unk2268;
+struct BattleHelpMasksView {
+    u8 unk00[0x20];
+    u64 blockedStates;      // 0x20
+    u64 blockedTransitions; // 0x28
 };
 
 extern "C" {
-extern BattleHelpMaskView g_btlHelp;
-u32 FUN_00200a68(u32 first, u32 second, u32 value, u32 resource,
-                 u32 fifth, u32 sixth, s32 seventh, u32 eighth);
+extern BtlHelpGlobalsA g_btlHelp;
+u32 FUN_00200a68(s32, s32, u32, u32, s32, u32, u32, s32);
 
-u32 FUN_004c8e30(u32 first, u32 second, u32 third)
+// The help globals' blocking masks.
+static __inline const BattleHelpMasksView *helpMasks(void)
+{
+    return reinterpret_cast<const BattleHelpMasksView *>(&g_btlHelp);
+}
+
+// Submit the immediate help request only when neither blocking mask is active.
+u32 FUN_004c8e30(u32 request, s32 last, u32 argument)
 {
     BtlMainStateA *state = btlGetMainState();
-    if ((g_btlHelp.first & state->stateFlags64.bits) || (g_btlHelp.second & state->stateFlags64.bits)) {
+    if ((state->stateFlags64.bits & helpMasks()->blockedStates) ||
+        (state->stateFlags64.bits & helpMasks()->blockedTransitions))
         return 0;
-    }
-    const BattleHelpStateView *work = (const BattleHelpStateView *)state;
-    return FUN_00200a68(0, 0, first, work->unk2268, 0, third, -1, second);
+    u32 context = state->helpMessages.context;
+    return FUN_00200a68(0, 0, request, context, 0, argument, ~0u, last);
 }
 }

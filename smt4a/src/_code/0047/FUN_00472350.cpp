@@ -9,7 +9,7 @@ extern AocMain *g_aocMain;
 extern AocSystemA *g_aocSystem;
 s32 sysLightEventTryWait(AocObjB *event);
 u32 jyoucyuGetTableEntry(s32 index);
-RequestParameters FUN_001d0ea0(AocSystemA *system, u32 id);
+RequestParameters aocResolveMountPath(AocSystemA *system, u32 id);
 
 /* The AOC job step: takes the content system's pending request (or the one it already holds),
  * and queues the follow-up request when the event allows it. */
@@ -25,7 +25,7 @@ u32 FUN_00472350(u32 unusedA, u32 unusedB, u32 id)
         g_aocMain->flags &= ~0x10000u;
         request.kind = 200;
     } else {
-        request = FUN_001d0ea0(g_aocSystem, id);
+        request = aocResolveMountPath(g_aocSystem, id);
         if (byteIsAtLeast100(reinterpret_cast<const u8 *>(&request)) == 0) {
             return 1;
         }

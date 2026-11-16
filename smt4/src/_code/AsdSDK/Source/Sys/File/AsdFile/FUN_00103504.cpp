@@ -1,25 +1,17 @@
-/* NON_MATCHING: syscall wrappers inline as in retail (svcSetThreadPriority/svcWaitSynchronization1/svcCloseHandle); remaining: retail loads the handle straight into r0 after the priority call, evaluates the timeout test as a bool (movne/moveq/teq) and keeps g_asdFile in r6; armcc loads the handle through r2 and folds the bool */
+/* NON_MATCHING: the stop sequence now runs through handleWait and NnOsThread as retail (the final close reloads the thread address); remaining: retail evaluates the timeout test as a bool (movne/moveq, then teq #1) where armcc folds it into one branch, builds the zero-timeout wait arguments with str+stm, and loads the handle straight into r0 after the priority conversion. */
 #include "AsdSDK/Source/Sys/File/AsdFile.h"
 #include "nn/os/AddressSpaceManager.h"
+#include "nn/os/Thread.h"
 #include "nn/Result.h"
 #include "nn/svc.h"
-#include "sys/ResultReport.h"
-
-/* The file worker's thread: its kernel handle and whether it has been joined (nn::os::Thread). */
-struct AsdFileThread {
-    u32 handle;  // 0x00
-    u8 joined;   // 0x04
-    u8 unk05[3];
-};
+#include "sys/HandleWait.h"
 
 extern "C" {
 extern AsdFileGlobals g_asdFile;
-extern AsdFileThread g_asdFileThread;
+extern NnOsThread g_asdFileThread;
 
-s32 FUN_002c40f8(s32 *index, const u32 *handles, s32 count, s32 waitAll, s64 timeout);
 s32 nn_os_detail_ConvertLibraryToSvcPriority(s32 priority);
 void nn_os_LightEvent_Signal(void *event);
-void nn_os_Thread_FinalizeImpl(u32 *thread);
 void FUN_002c3f5c(AddressSpaceRegion *region);
 s32 FUN_002c3dfc(const char *device);
 void asdFatalError(void);
@@ -29,36 +21,20 @@ void asdFatalError(void);
 void FUN_00103504(void)
 {
     if (g_asdFileThread.handle != 0) {
-        s32 index;
-        u32 handle = g_asdFileThread.handle;
-        s32 result = FUN_002c40f8(&index, &handle, 1, 0, 0);
-        bool failed = nnResultIsFailure(result);
-        if (failed) {
-            FUN_002c526c(result, failed);
-        }
-        nnResultFields code;
-        code.value = result;
-        if (code.fields.description == 0x3fe) {
+        s32 result = handleWait(g_asdFileThread.handle, 0);
+        if (nnResultIsNotTimeout(result) != true) {
             s32 priority = nn_os_detail_ConvertLibraryToSvcPriority(0x10);
-            result = svcSetThreadPriority(g_asdFileThread.handle, priority);
-            failed = nnResultIsFailure(result);
+            result = nn::svc::SetThreadPriority(g_asdFileThread.handle, priority);
+            bool failed = nnResultIsFailure(result);
             if (failed) {
                 FUN_002c526c(result, failed);
             }
             g_asdFile.stopRequested = 1;
             nn_os_LightEvent_Signal(g_asdFile.event);
-            handle = g_asdFileThread.handle;
-            result = FUN_002c40f8(&index, &handle, 1, 0, -1);
-            failed = nnResultIsFailure(result);
-            if (failed) {
-                FUN_002c526c(result, failed);
-            }
+            handleWait(g_asdFileThread.handle, -1);
             g_asdFileThread.joined = 1;
-            nn_os_Thread_FinalizeImpl(&g_asdFileThread.handle);
-            if (g_asdFileThread.handle != 0) {
-                svcCloseHandle(g_asdFileThread.handle);
-                g_asdFileThread.handle = 0;
-            }
+            g_asdFileThread.finalize();
+            g_asdFileThread.NnOsHandle::~NnOsHandle();
             FUN_002c3f5c(g_asdFile.threadStack);
         }
     }

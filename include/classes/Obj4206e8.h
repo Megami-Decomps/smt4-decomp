@@ -38,6 +38,18 @@ public:
     Obj4206e8();
     virtual ~Obj4206e8();
 
+    /* Releases the three slots and the object's own handle. */
+    void release()
+    {
+        for (int i = 0; i < 3; i++) {
+            slots[i].release();
+        }
+        if (handle != 0) {
+            asdMdlManagerDestroy(reinterpret_cast<AsdMdlObject *>(handle));
+            handle = 0;
+        }
+    }
+
 private:
     /* 0x00: vtable pointer */
     /* 0x04 */ u32 unk04;

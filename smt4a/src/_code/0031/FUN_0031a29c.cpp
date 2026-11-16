@@ -1,29 +1,34 @@
-/* NON_MATCHING: shared flag constants are kept across calls differently and the stack frame is smaller. */
 #include "ui/MessageMain.h"
-#include "shard/W6_W6Match1_PositionedStream.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 extern MessageGlobalsA g_messageMain;
-u32 scrGetCommandFrame();
-s32 scrGetArg(u32 index);
-void *scrGetCommandOwner();
-u32 FUN_0021bdac(void *context, s32 message, u32 frame, u32 mode, u32 first, u32 second);
+u32 FUN_0021bdac(u32 owner, u32 text, u32 frame, s32 mode, s32 wait, s32 flags);
 
-u32 FUN_0031a29c()
+/* Shows the script command's first argument as a message with message state `mode`. */
+static u32 showMessage(s32 mode, s32 wait)
+{
+    u32 owner = scrGetCommandOwner();
+    u32 text = scrGetArg(0);
+    u32 frame = scrGetCommandFrame();
+
+    return FUN_0021bdac(owner, text, frame, mode, wait, 0);
+}
+
+/* Script command: resets the message mode, on the first frame raises both panel flags, puts the
+ * message window in display mode 0x15 and shows the first argument with message state 6, waiting for it. */
+u32 FUN_0031a29c(void)
 {
     scrCommMessageSetMode(0);
     if (scrGetCommandFrame() == 0) {
-        if (g_messageMain.panel) {
+        if (g_messageMain.panel != NULL) {
             g_messageMain.panel->unk30 = 1;
         }
         g_messageMain.panel->unk31 = 1;
     }
-    if (g_messageMain.state) {
-        g_messageMain.state->displayMode = 21;
+    if (g_messageMain.state != NULL) {
+        g_messageMain.state->displayMode = 0x15;
     }
-    void *context = scrGetCommandOwner();
-    s32 message = scrGetArg(0);
-    u32 frame = scrGetCommandFrame();
-    return FUN_0021bdac(context, message, frame, 6, 1, 0);
+    return showMessage(6, 1);
 }
 }

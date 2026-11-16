@@ -1,4 +1,3 @@
-/* NON_MATCHING: stat-index and found-flag saved registers are exchanged. */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 
@@ -7,18 +6,32 @@
 extern "C" {
 s32 scrGetArg(s32 index);
 
+/* The entry stat a script kind argument selects (0, 1, 2 -> 7, 10, 11); 0 for any other kind. */
+static __inline s32 statForKind(s32 kind)
+{
+    s32 stat = 0;
+    switch (kind) {
+    case 0:
+        stat = 7;
+        break;
+    case 1:
+        stat = 10;
+        break;
+    case 2:
+        stat = 11;
+        break;
+    default:
+        return stat;
+    }
+    return stat;
+}
+
+/* Script command: result 0 when a present, active entry with id arg 0 has the stat selected by arg 1 below 1,
+ * otherwise whether any such entry exists. */
 u32 FUN_00324d70()
 {
     u32 id = scrGetArg(0);
-    s32 kind = scrGetArg(1);
-    s32 stat = 0;
-    if (kind == 0) {
-        stat = 7;
-    } else if (kind == 1) {
-        stat = 10;
-    } else if (kind == 2) {
-        stat = 11;
-    }
+    s32 stat = statForKind(scrGetArg(1));
     u8 found = 0;
     for (s32 index = 0; index < BTL_ENTRY_COUNT; ++index) {
         BtlEntry *entry = &btlGetMainState()->entries[index];

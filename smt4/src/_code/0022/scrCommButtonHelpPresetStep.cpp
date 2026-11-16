@@ -7,7 +7,7 @@ extern s32 scrGetCommandFrame(void);
 extern s32 uiQuestStateIsIdle(void);
 extern s32 FUN_00215cd4(u32 id);
 extern s32 FUN_00269dc8(s32 arg);
-extern s32 FUN_00296934(void);
+extern s32 uiQuestClose(void);
 extern s32 FUN_002c1d5c(void);
 extern s32 FUN_003490b8(u32 id);
 extern s32 buttonHelpSetPreset(s32 preset);
@@ -29,7 +29,7 @@ u32 scrCommButtonHelpPresetStep(void)
     }
     result = uiQuestStateIsIdle();
     if (result != 0) {
-        FUN_00296934();
+        uiQuestClose();
         buttonHelpSetPreset(0x90);
         return 1;
     }

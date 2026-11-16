@@ -51,7 +51,8 @@ struct UniteWork {
             /* 0x03FC */ u32 frame;
         } transition;
         struct {
-            /* 0x0000 */ u8 unk0000[0x15C];
+            /* 0x0000 */ u8 unk0000[0x13C];
+            /* 0x013C */ u8 speedObject[0x20]; /* the vec2 object whose speed is amount (vec2GetSpeed reads +0x20) */
             /* 0x015C */ f32 amount;
         } optionPulse;
     };

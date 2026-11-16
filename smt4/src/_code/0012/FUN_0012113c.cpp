@@ -1,4 +1,4 @@
-/* NON_MATCHING: written from the romwright stub; parameter registers now match, remaining diffs are heapBase/buffer swapped (retail r7/r6), the frame (retail keeps two unshared 28-byte StreamInfo slots, 60 bytes; the inline helper shares one slot) and an unfolded `lsl #13` before the size compare. */
+/* NON_MATCHING: frame, heap check and value read now match retail (two unshared StreamInfo slots: the count through the inline helper, the value read in place); only the count differs: retail zeroes it in r7 before the first FUN_0014204c call, the build reuses the call's zero result in r0. Writing the helper zero-initialised gives retail's shape but swaps the buffer and heap-base registers (r6/r7). */
 #include "common.h"
 
 /* What FUN_0014204c reports about a sound id; only the word at 0x10 is used here. */
@@ -20,9 +20,11 @@ s32 nw_snd_internal_driver_StreamBufferPool_Initialize(void *pool, u32 buffer, u
 static __inline u32 streamInfoValue(u32 id)
 {
     StreamInfo info;
-    u32 value = 0;
+    u32 value;
     if (FUN_0014204c(id, &info)) {
         value = info.value;
+    } else {
+        value = 0;
     }
     return value;
 }
@@ -37,11 +39,11 @@ u32 FUN_0012113c(u8 *pool, u32 id, u32 userValue, u32 first, u32 second, u32 buf
     }
     if (size != 0) {
         u32 heapBase = nnosGetHeapBase();
-        u32 heapSize = FUN_002c3984();
+        u32 heapEnd = heapBase + FUN_002c3984();
         if (buffer < heapBase) {
             return 0;
         }
-        if (heapBase + heapSize < buffer + size) {
+        if (buffer + size > heapEnd) {
             return 0;
         }
     }
@@ -49,10 +51,15 @@ u32 FUN_0012113c(u8 *pool, u32 id, u32 userValue, u32 first, u32 second, u32 buf
         return 0;
     }
     u32 count = streamInfoValue(id);
-    if (size < count * 0xa000) {
+    u32 required = count * 0xa000;
+    if (size < required) {
         return 0;
     }
-    u32 value = streamInfoValue(id);
+    StreamInfo info;
+    u32 value = 0;
+    if (FUN_0014204c(id, &info)) {
+        value = info.value;
+    }
     nw_snd_internal_driver_StreamBufferPool_Initialize(pool + 0x88, buffer, size, value);
     *reinterpret_cast<u8 **>(pool + 0xa0) = pool + 0xa4;
     *reinterpret_cast<u32 *>(pool + 0xbc) = userValue;

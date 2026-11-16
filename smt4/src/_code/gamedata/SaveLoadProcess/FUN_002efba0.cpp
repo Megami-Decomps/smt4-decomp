@@ -30,7 +30,7 @@ const void *configGetSettings(void);
 void rt_memcpy(void *destination, const void *source, u32 size);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void __ARM_common_memcpy4_8(void *destination, const void *settings);
-void FUN_0026b4cc(void);
+void clockRecordStartSeconds(void);
 void FUN_00247af8(s32 operation, s32 flags, u32 slot, void *buffer, u32 size);
 extern SaveByteSettings g_byteSettings;
 
@@ -51,7 +51,7 @@ s32 FUN_002efba0(u32 process)
         __aeabi_memcpy4(body, gameDataBlocksGetSaveData(), 0x24D28);
         body->version = 3;
         body->mode = *(const u8 *)&work->unk14;
-        FUN_0026b4cc();
+        clockRecordStartSeconds();
         FUN_00247af8(2, 0, work->option, work->buffer, work->bufferSize);
         work->state = 1;
         break;

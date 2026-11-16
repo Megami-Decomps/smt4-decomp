@@ -1,10 +1,11 @@
-/* NON_MATCHING: party-count register allocation, latch-test if-conversion and indexed script-byte store differ; O2 may recover retail lowering. */
+/* NON_MATCHING: the latch is the 64-bit battle mask (branch layout now matches); retail copies the state pointer to ip and reaches the entries through add #8128 where the build uses a register offset, and the script-byte store addresses [slot, #9] differently. */
 #include "battle/btlAction.h"
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "shard/W4_Match6_BtlScript.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "battle/btlReflect.h"
+#include "battle/ActionStateChannels.h"
 namespace {
 union PartyPhaseState {
     BtlMainState main;
@@ -64,11 +65,10 @@ u32 btlAiWaitUiAndUpdatePartyGroup4Latch(void* work, BattleActionUnit* action)
         }
     }
     if (count != 4) {
-        state->script.battleFlags &= ~0x10000000u;
-    } else if (!(state->script.battleFlags & 0x10000000)) {
-        state->script.battleFlags |= 0x10000000;
-        static_cast<ScriptActorRecord*>(
-            g_btlAction.data)[context->state->phase.scriptUnit].state = 0x1F;
+        state->script.battleMask &= ~(u64)0x10000000;
+    } else if (!(state->script.battleMask & 0x10000000)) {
+        state->script.battleMask |= 0x10000000;
+        static_cast<ActionStateChannels *>(g_btlAction.data)->entries[context->state->main.actionState.index].pending = 0x1F;
         return 1;
     }
     FUN_00229754(context, action);

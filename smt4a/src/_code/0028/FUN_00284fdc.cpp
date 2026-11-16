@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses ldr r2, [pc, #52] where the compiled block uses ldr r0, [pc, #60]. */
 #include "common.h"
 
 struct ResetState {
@@ -24,19 +23,23 @@ extern "C" {
 extern GameDataBlocks g_gameDataBlocks;
 void FUN_003e416c(ResetState* state, u32 zero, u32 savedValue);
 
-void FUN_00284fdc(void)
+/* Zeroes the reset state's words and its halfword. */
+static __inline void resetStateClear(ResetState *state)
 {
-    GameData* data = g_gameDataBlocks.data;
-    u32 savedValue = data->currentValue;
-    data->previousValue = savedValue;
-
-    ResetState* state = &data->reset;
     state->words[0] = 0;
     state->words[1] = 0;
     state->words[2] = 0;
     state->words[3] = 0;
     state->unk10 = 0;
+}
 
-    FUN_003e416c(state, 0, savedValue);
+/* Remembers the current value as the previous one, clears the reset state and restarts it with that value. */
+void FUN_00284fdc(void)
+{
+    GameData* data = g_gameDataBlocks.data;
+    u32 savedValue = data->currentValue;
+    data->previousValue = savedValue;
+    resetStateClear(&data->reset);
+    FUN_003e416c(&data->reset, 0, savedValue);
 }
 }

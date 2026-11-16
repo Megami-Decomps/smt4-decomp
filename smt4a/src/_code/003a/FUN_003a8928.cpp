@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the operand order inside the second 64-bit mask test's two ANDs differs (retail flags-first with an ldm mask load; the build mask-first). */
+/* NON_MATCHING: only the required-mask test: retail ANDs flags & mask into ip/r3 using r7 for the high mask word (an extra saved register); the build uses ip. */
 #include "battle/BtlMainAccess.h"
 #include "battle/BattleHelpers.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -31,9 +31,9 @@ u32 FUN_003a8928()
     for (s32 index = first; index < count + first; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         const PropertyView *properties = reinterpret_cast<const PropertyView *>(entry);
-        if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
-            (g_btlCandidateMasks.required & entry->flags) != 0 &&
-            (entry->flags & g_btlCandidateMasks.excluded) == 0 && properties->values[property] >= 1) {
+        if (!(g_btlCandidateMasks.unavailable & entry->flags) &&
+            (g_btlCandidateMasks.required & entry->flags) &&
+            !(entry->flags & g_btlCandidateMasks.excluded) && properties->values[property] >= 1) {
             scrSetResult(1);
             return 1;
         }

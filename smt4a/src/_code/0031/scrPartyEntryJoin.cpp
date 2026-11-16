@@ -9,7 +9,7 @@ extern s32 FUN_00162ea4(void);
 extern void FUN_002f0c18(void);
 extern void FUN_003a7c3c(u32 id);
 extern s32 stateHolder4IsZero2(void);
-extern void FUN_0034aae4(void);
+extern void uiQuestClose(void);
 extern void sysPlaySe(s32 id);
 
 /* Script command: adds the party entry named by the argument and, once the state holder is idle,
@@ -27,7 +27,7 @@ s32 scrPartyEntryJoin(void)
         FUN_003a7c3c(id);
     }
     if (stateHolder4IsZero2() != 0) {
-        FUN_0034aae4();
+        uiQuestClose();
         sysPlaySe(0x92);
         return 1;
     }

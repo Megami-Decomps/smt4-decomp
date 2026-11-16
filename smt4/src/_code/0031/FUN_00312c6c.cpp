@@ -1,4 +1,4 @@
-/* NON_MATCHING: roll/weight registers (r2/r3) and the loop comparison orientation (cmp count,index; bgt) differ; the table-selection switch now matches. */
+/* NON_MATCHING: only the loop's exit test differs: retail compares `cmp count, index; bgt`, the build `cmp index, count; blt`. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "gamedata/DataTable.h"
@@ -31,9 +31,8 @@ u32 FUN_00312c6c(void)
     s32 cumulative = 0;
     s32 result = 0;
     for (s32 index = 0; index < count; ++index) {
-        u32 weight = weights[index];
-        if (weight != 0) {
-            cumulative += weight;
+        if (weights[index] != 0) {
+            cumulative += weights[index];
             if (roll < cumulative) {
                 result = index + 1;
                 break;

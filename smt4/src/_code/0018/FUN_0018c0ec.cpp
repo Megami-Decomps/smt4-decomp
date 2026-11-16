@@ -94,7 +94,7 @@ int FUN_00296284(int, int);
 int FUN_002963ec(...);
 int FUN_00296474(...);
 int resultSetMenuState(...);
-int FUN_00296934(void);
+int uiQuestClose(void);
 int FUN_0029c43c(...);
 int messageTargetSetValue(unsigned int, int);
 int messageBannerInitSelection(int, int);
@@ -179,7 +179,7 @@ extern int dataTable9EntryOrZero(int);
 /* Supplied declaration required: FUN_002963ec. */
 /* Supplied declaration required: FUN_00296474. */
 /* Supplied declaration required: resultSetMenuState. */
-/* Supplied declaration required: FUN_00296934. */
+/* Supplied declaration required: uiQuestClose. */
 extern int modelPairTryBind(int);
 /* Supplied declaration required: messageMainFinishWindow. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -345,7 +345,7 @@ unsigned int FUN_0018c0ec(void)
     if (temp_v4 != 0) {
       mapMainCallIfActive2();
       lmapMainCallIfActive2();
-      FUN_00296934();
+      uiQuestClose();
       resultSetMenuState(temp_v2,1);
     }
     break;

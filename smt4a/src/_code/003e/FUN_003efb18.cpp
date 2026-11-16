@@ -1,4 +1,3 @@
-/* NON_MATCHING: global-mask base and low-word registers are exchanged (retail r2/r3, compiled r3/r2). */
 #include "battle/btlPartnerAttack.h"
 
 struct PartnerFlagState {
@@ -18,8 +17,9 @@ extern BtlPartnerAttackA* g_btlPartnerAttack;
 // Permit the partner action only when a masked battle flag is set and state is 2.
 u32 FUN_003efb18(const PartnerFlagState* state)
 {
-    if ((state->flags & g_btlMain.flags) == 0 || g_btlPartnerAttack->state != 2)
-        return 0;
-    return 1;
+    if ((state->flags & g_btlMain.flags) != 0) {
+        return g_btlPartnerAttack->state == 2;
+    }
+    return 0;
 }
 }

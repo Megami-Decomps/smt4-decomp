@@ -1,9 +1,15 @@
-/* NON_MATCHING: register choice only: retail materialises the constant 1 once in r7 (shift base, then reused as the return value `mov r0, r7`); the build uses r1 for the shift and `mov r0, #1` for the returns. */
 #include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
 
+
+/* Sets the script result; commands then report 1 (done). */
+static u32 commandResult(s32 value)
+{
+    scrSetResult(value);
+    return 1;
+}
 
 /* Script command: pushes whether a live unit with id argument 0 has bit argument 1 set in its mask. */
 u32 FUN_002fede0(void)
@@ -17,12 +23,10 @@ u32 FUN_002fede0(void)
 
         if ((unit->flags & 0x10) != 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0
             && unit->id == id && (unit->groupMask & (1 << bit)) != 0) {
-            scrSetResult(1);
-            return 1;
+            return commandResult(1);
         }
     }
-    scrSetResult(0);
-    return 1;
+    return commandResult(0);
 }
 
 } /* extern "C" */

@@ -1,4 +1,4 @@
-/* NON_MATCHING: the final 100-bit clear loop now uses retail's 1-based flag id (pool constant 0x79f); armcc strength-reduces the down counter into an up counter (cmp #101) where retail keeps `subs`/bne */
+/* NON_MATCHING: only the flag-clear loop's registers differ: retail forms the byte address before the bit shift (bit in r3, address r1, count r2). */
 #include "common.h"
 #include <stddef.h>
 #include "gamedata/GameDataAccess.h"
@@ -18,6 +18,13 @@ typedef char ItemBoxCountsOffsets[offsetof(ItemBoxCounts, counts) == 0x168 &&
 extern "C" {
 
 void rt_memcpy(void *dst, const void *src, u32 bytes);
+
+/* Clears flag `id` (1-based) of the box's flag bits. */
+static __inline void itemBoxClearFlag(ItemBoxCounts *box, s32 id)
+{
+    s32 bit = id - 1;
+    box->flags[bit >> 3] &= ~(1 << (bit & 7));
+}
 
 /* Adds the item counts of one box into another, clamping each count to its stack limit. */
 void FUN_00394fd8(ItemBoxCounts *dst, const ItemBoxCounts *src, s32 keepFlags)
@@ -81,10 +88,8 @@ void FUN_00394fd8(ItemBoxCounts *dst, const ItemBoxCounts *src, s32 keepFlags)
     rt_memcpy(dst->flags, src->flags, sizeof(dst->flags));
     if (keepFlags == 0) {
         s32 id = 0x79f;
-
-        for (slot = 100; slot != 0; slot--, id++) {
-            s32 bit = id - 1;
-            dst->flags[bit >> 3] &= ~(1 << (bit & 7));
+        for (i = 100; i != 0; i--) {
+            itemBoxClearFlag(dst, id++);
         }
     }
 }

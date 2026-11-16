@@ -1,11 +1,11 @@
-/* NON_MATCHING: unlink layout and instructions match; the category-array updates allocate r1/r2 (usage pointer vs size) opposite to retail (usage r2, size r1; payload path r3/r2/r1). */
+/* NON_MATCHING: the category-bytes update now matches; in the payload-bytes update retail holds the usage block in r3 and the alignment in r1 (the build swaps them), and schedules add r0, r4, #20 one instruction later. */
 #include "sys/AllocationTracking.h"
 
 extern "C" {
 extern AllocationTracking g_allocationAddressRanges;
 u32 FUN_0019c40c(AllocationHeaderA *header);
 
-static void subtractCategoryBytes(AllocationUsage *usage, u32 category, u32 bytes)
+static void subtractCategoryBytes(u32 bytes, AllocationUsage *usage, u32 category)
 {
     usage->categoryBytes[category] -= bytes;
 }
@@ -26,7 +26,7 @@ AllocationHeaderA *FUN_0017fe8c(void *payload)
     usage->bytes -= header->size;
     if ((header->tag & 0xFF) < 8) {
         u32 category = FUN_0019c40c(header);
-        subtractCategoryBytes(g_allocationAddressRanges.usage, category, header->size);
+        subtractCategoryBytes(header->size, g_allocationAddressRanges.usage, category);
         category = FUN_0019c40c(header);
         subtractCategoryPayloadBytes(g_allocationAddressRanges.usage, category, header->size - header->alignment);
     }

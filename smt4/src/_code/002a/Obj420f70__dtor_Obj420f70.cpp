@@ -1,4 +1,4 @@
-/* NON_MATCHING: list clearing now has retail's instruction sequence; only the node/zero registers differ (retail node r1, zero r0). */
+/* NON_MATCHING: IDENTICAL with unit cflags `--fpu=softvfp` (default flags otherwise); under the default VFP build list clearing now has retail's instruction sequence; only the node/zero registers differ (retail node r1, zero r0). */
 #include "classes/Obj420f70.h"
 
 extern "C" void asdFatalError();

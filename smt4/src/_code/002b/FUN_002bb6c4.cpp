@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only: retail keeps the hoisted zero in r6 and `buffer` in r7; ours swaps them. */
+/* NON_MATCHING: IDENTICAL with unit cflags `--fpu=softvfp` (at -O3 -Otime or -O2 -Otime); under the default VFP build register allocation only: retail keeps the hoisted zero in r6 and `buffer` in r7; ours swaps them. */
 #include "common.h"
 #include "nn/Result.h"
 #include "sys/RuntimeObjects.h"

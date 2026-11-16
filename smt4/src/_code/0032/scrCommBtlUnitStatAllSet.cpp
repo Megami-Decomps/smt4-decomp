@@ -1,29 +1,38 @@
-/* NON_MATCHING: register allocation only: retail keeps the stat selector in r6 and the found flag in r5; built swaps them. */
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
 
+/* The entry stat a script selector argument picks (0, 1, 2 -> 7, 10, 11); 0 for any other selector. */
+static __inline s32 statForSelector(s32 selector)
+{
+    s32 stat = 0;
+    switch (selector) {
+    case 0:
+        stat = 7;
+        break;
+    case 1:
+        stat = 10;
+        break;
+    case 2:
+        stat = 11;
+        break;
+    default:
+        return stat;
+    }
+    return stat;
+}
 
 /* Script command: pushes 0 when a live, non-excluded unit with the group id in argument 0 has the selected stat
  * (argument 1: 0, 1, 2 select stat 7, 10, 11) set, else whether any such unit exists. */
 u32 scrCommBtlUnitStatAllSet(void)
 {
     u32 id = scrGetArg(0);
-    s32 selector = scrGetArg(1);
-    s32 found;
-    s32 stat = 0;
+    s32 stat = statForSelector(scrGetArg(1));
+    s32 found = 0;
     s32 index;
 
-    if (selector == 0) {
-        stat = 7;
-    } else if (selector == 1) {
-        stat = 10;
-    } else if (selector == 2) {
-        stat = 11;
-    }
-    found = 0;
     for (index = 0; index < 0x6D; index++) {
         BtlEntry *unit = &btlGetMainState()->entries[index];
 

@@ -1,4 +1,3 @@
-/* NON_MATCHING: written like clockGetSecondsSinceStart; only the stack slots of the returned date-time temporary and its copy are swapped (retail: temporary at sp, copy at sp+8). */
 #include "gamedata/GameData.h"
 
 /* The small game data block viewed whole: the counter and the recorded clock time in seconds. */
@@ -25,22 +24,25 @@ s32 FUN_003e0c80(const NnDateTime *dateTime);
 s32 FUN_003e0ce8(const NnDateTime *dateTime);
 s32 FUN_003e0d54(const NnDateTime *dateTime);
 
-/* Records the current clock time, in seconds, as the start time. */
-void FUN_0026b4cc(void)
+/* Records the current clock time, in seconds, as the start time in the small game data block. */
+void clockRecordStartSeconds(void)
 {
+    GameDataSmallBlock *block;
     NnDateTime now;
     u32 seconds;
 
     now = FUN_002c567c();
-    seconds = nn_fnd_DateTime_DateToDays(nn_fnd_DateTime_GetYear(&now), nn_fnd_DateTime_GetMonth(&now),
-                                         nn_fnd_DateTime_GetDay(&now));
+    s32 day = nn_fnd_DateTime_GetDay(&now);
+    s32 month = nn_fnd_DateTime_GetMonth(&now);
+    seconds = nn_fnd_DateTime_DateToDays(nn_fnd_DateTime_GetYear(&now), month, day);
     seconds *= 24;
     seconds += FUN_003e0c80(&now);
     seconds *= 60;
     seconds += FUN_003e0ce8(&now);
     seconds *= 60;
     seconds += FUN_003e0d54(&now);
-    ((GameDataSmallBlock *)g_gameDataBlocks.smallBlock)->startSeconds = seconds;
+    block = (GameDataSmallBlock *)g_gameDataBlocks.smallBlock;
+    block->startSeconds = seconds;
 }
 
 } /* extern "C" */

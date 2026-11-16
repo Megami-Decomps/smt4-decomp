@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail reaches both slot arrays from the single g_asdModelTransformBuilder literal (second array = base - 8); built loads a separate literal for the first array. */
 #include "shard/Sys464af0.h"
 
 extern "C" {
@@ -12,8 +11,10 @@ void FUN_002c2968(u32 a, u32 b);
 void FUN_00131a2c(u32 a);
 extern u8 DAT_004dae3c; /* 0x4dae3c */
 extern u8 DAT_004dae48; /* 0x4dae48 */
-extern u32 DAT_00464b7c[2]; /* 0x464b7c */
-extern u32 g_asdModelTransformBuilder[2]; /* 0x464b84 */
+/* Defined here, as in the original file: retail reaches the first array from the second's
+ * address (g_asdModelTransformBuilder - 8). */
+u32 DAT_00464b7c[2];                /* 0x464b7c: the scene-traverser root of each pass */
+u32 g_asdModelTransformBuilder[2];  /* 0x464b84: the transform builder of each pass */
 
 // Reset the model system's scratch state and rebuild both transform slots.
 void FUN_00105254(u32 a, u32 b)

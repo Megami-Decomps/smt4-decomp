@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail places case 3's flag clear after the return and shares case 0's final store; the loader call's argument setup is scheduled differently. */
 #include "shard/CampMenuJobWork.h"
 #include "shard/JobWork.h"
 
@@ -15,21 +14,23 @@ s32 FUN_0047a1e0(u32 job)
 
     switch (work->state) {
     case 0:
-        if (FUN_00167458(work->loader, 0)) {
+        void *loader = work->loader;
+        if (FUN_00167458(loader, 0) != 0) {
             work->state = 1;
             work->flags |= 0x2000;
             work->message = FUN_0019d890(0x2f, 0x45);
         }
         break;
     case 1:
-        break;
+        return 0;
     case 2:
-        if (entryDispatchUpdate(work->fade, 1)) {
+        if (entryDispatchUpdate(work->fade, 1) != 0) {
             work->state = 3;
         }
         break;
     case 3:
-        work->flags &= ~0x3000;
+        work->flags &= ~0x2000; /* set when the message started */
+        work->flags &= ~0x1000;
         break;
     }
     return 0;

@@ -6990,3 +6990,8 @@
 00371c3c statusBustUpPortraitAcquire inferred [med] Twin of smt4 FUN_002942c4 (tables 15/25).
 0038b3f8 statusBustUpPortraitRelease inferred [med] Twin of smt4 FUN_002958f8.
 002c9104 clockRecordStartSeconds inferred [med] Writes the current date and time in seconds into the block startSeconds that clockGetSecondsSinceStart reads.
+001d0ea0 aocResolveMountPath inferred [med] Twin of smt4 FUN_0015dc2c (same source).
+0034aae4 uiQuestClose inferred [med] Twin of smt4 FUN_00296934.
+00188688 fsGetUserMountHandle inferred [med] Twin of smt4 FUN_002bbaf8 (same source and flags).
+0057a650 g_btlPaletteColors inferred Same palette table read by FUN_003f2280, twin of smt4 FUN_00244fb0.
+0032cef8 renderStatePush inferred [high] Same source as smt4 renderStatePush (push on draw-context stack B).

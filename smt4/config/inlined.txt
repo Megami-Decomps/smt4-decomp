@@ -46,3 +46,5 @@ resultSlotFollowUpIndex = 0xe3a00002; // 0x394700 (FUN_003946b4: mov r0, #2 in p
 partyWidgetSetTransitionActive = 0xe5c01025; // 0x2933a8 0x2933e4 0x293438 0x293474 (partyPanelSetState: widget reloaded into r0, mov r1, #0, then strb r1, [r0, #37]; smt4a has the same row)
 partyWidgetSetTransitionPending = 0xe5c01027; // 0x2933b4 0x2933f0 0x293444 0x293480 (partyPanelSetState: strb r1, [r0, #39] after the same setup)
 aocMenuSetReadyFlag = 0xe5c01b81; // 0x38f860 (aocMenuInitializePanelSprites: mov r1, #0; g_aocMain reloaded into r0; strb r1, [r0, #2945]; smt4a has the same row)
+handleObjectGetHandle = 0xe5900000; // 0x10fcb0 (FUN_0010fc90: add r0, r4, #20, then a lone ldr r0, [r0] before svc 0x23)
+contentIndexGetValue = 0xe1d000b0; // 0x15dd2c (FUN_0015dc2c: add r0, r5, #8, then a lone ldrh r0, [r0] used as an argument)

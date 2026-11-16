@@ -660,7 +660,7 @@ code_r0x001c9900:
           *(unsigned char *)(iVar8 + 2) = *(unsigned char *)((int)puVar4 + 0x379);
           FUN_002c09bc();
           saveBuildSlotSummary();
-          FUN_0026b4cc();
+          clockRecordStartSeconds();
           gameCounterAddSaturating(0x20,1);
           iVar8 = FUN_002c09bc();
           saveLoadStartSave(DAT_0044de30 + 1,*(unsigned char *)(iVar8 + 2));

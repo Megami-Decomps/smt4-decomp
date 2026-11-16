@@ -1,4 +1,4 @@
-/* NON_MATCHING: selected-index store moves before the flags store; literal-pool ordering differs. */
+/* NON_MATCHING: instructions now match; only the literal pool order differs (armcc puts the reused 100/0/1/50 floats before the global address, retail keeps first-use order). */
 #include "map/lmapMain.h"
 
 extern "C" {
@@ -55,8 +55,8 @@ void FUN_002442ac(void)
     camera->state = 0;
     camera->phase = 0;
     camera->flags = 0;
-    camera->selected = -1;
     camera->preset = 0;
+    camera->selected = -1;
     camera->presets[0][0] = 100.0f;
     camera->presets[1][0] = 220.0f;
     camera->presets[2][0] = 0.0f;
@@ -87,8 +87,8 @@ void FUN_002442ac(void)
     camera->eye[0] = 0.0f;
     camera->eye[1] = 50.0f;
     camera->eye[2] = 0.0f;
-    camera->eye[3] = 40.0f;
     camera->target[0] = 0.0f;
+    camera->eye[3] = 40.0f;
     camera->target[1] = 50.0f;
     camera->target[2] = 100.0f;
     camera->distance = 0.0f;

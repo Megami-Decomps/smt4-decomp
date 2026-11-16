@@ -4512,3 +4512,11 @@
 002c18e4 renderCtxResetColorScale inferred [high] Same body and offsets as smt4a renderCtxResetColorScale (colour scale at 0x11CC, dirty flag 0x11DC).
 002942c4 statusBustUpPortraitAcquire inferred [med] Increments the workA/workB portrait refcounts and loads texture table 0x17/0x23 entries on first use. Twin of smt4a FUN_00371c3c.
 002958f8 statusBustUpPortraitRelease inferred [med] Decrements the same refcounts and releases the table node on the last user. Twin of smt4a FUN_0038b3f8.
+00223dcc uniteScreenDestroy inferred [med] Frees g_unite (the fusion screen): joins its worker thread and releases its models, scripts and buffers.
+002113c0 campCecStopCommThread inferred [med] CampCec state handler that tears down the StreetPass thread and starts the menu script (next state 1).
+0015dc2c aocResolveMountPath inferred [med] Matches an aocN: device prefix against the mounted add-on content packages. Twin of smt4a FUN_001d0ea0.
+0010fc90 soundCallbacksCloseDspResource inferred [med] Closes the DSP component handle opened by FUN_0011be58.
+0026b4cc clockRecordStartSeconds inferred [high] Same code as smt4a clockRecordStartSeconds (similarity 1.00, same source).
+00296934 uiQuestClose inferred [med] Releases g_uiQuest's touch regions, scripts and buffers, stops its job, frees it and clears g_uiQuest. Twin of smt4a FUN_0034aae4.
+002bbaf8 fsGetUserMountHandle inferred [med] Returns the user file-system mount handle and reports result 0xE0A046DB when it is not mounted. Twin of smt4a FUN_00188688.
+00439a3c g_btlPaletteColors inferred FUN_00244fb0 indexes it by palette and byte-swaps the entry into the unit fade colour; smt4a twin DAT_0057a650.

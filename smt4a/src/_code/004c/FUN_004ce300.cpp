@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail moves the slot table pointer to r1 and loads the price table through r0/r2; here the loads use r2/r3 (register allocation only). */
 #include "common.h"
 #include "code/Code0034.h"
 #include "gamedata/SaveSlotTable.h"
@@ -43,7 +42,9 @@ static __inline void shopStartScript(ShopWork *shop, const u8 *label)
 /* Buys the selected item when the party can afford it, otherwise runs the not-enough-money script. */
 void FUN_004ce300(ShopWork *shop)
 {
-    if (gameGetSlotTable()->money >= shop->prices[shop->selection]) {
+    s32 money = gameGetSlotTable()->money;
+    s32 price = shop->prices[shop->selection];
+    if (money >= price) {
         panelSetMode3(-shop->prices[shop->selection], 0);
         shopStartScript(shop, DAT_00530ca0);
         shop->state = 9;

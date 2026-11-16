@@ -43,7 +43,7 @@ int FUN_002e2404(...);
 int campCecSetObjectValue(...);
 int FUN_00319aec(...);
 int campCecDestroyOverlay(...);
-int FUN_0034aae4(void);
+int uiQuestClose(void);
 int sub68OwnerCall4(void);
 int useCounterRelease(void);
 int clearFlags310To31F(void);
@@ -308,7 +308,7 @@ extern int FUN_0034919c(void);
 /* Supplied declaration required: FUN_003492dc. */
 extern int partyPanelIsActive(void);
 extern unsigned int FUN_0034a9ac(void);
-/* Supplied declaration required: FUN_0034aae4. */
+/* Supplied declaration required: uiQuestClose. */
 /* Supplied declaration required: sub68OwnerCall4. */
 /* Supplied declaration required: screenSetColor670. */
 extern int FUN_0035a028(void);
@@ -1497,7 +1497,7 @@ LAB_003d6870:
   case 0x26:
     temp_v4 = FUN_002a746c();
     if (temp_v4 != 0) {
-      FUN_0034aae4();
+      uiQuestClose();
       if (*(char *)(puVar2 + 0xcaa) != '\0') {
         *(unsigned char *)(puVar2 + 0x29) = 1;
         FUN_0020d700();
@@ -1536,7 +1536,7 @@ LAB_003d6870:
       temp_v12 = uiQuestGetPanelMode();
       temp_v11 = uiQuestGetStep();
       temp_v8 = uiQuestGetMode();
-      FUN_0034aae4();
+      uiQuestClose();
       if (DAT_005e1eb4 != '\0') {
         temp_v9 = gameFlagsGetBlock();
         *(unsigned short *)(temp_v9 + 0x22) = 0;

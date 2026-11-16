@@ -126,7 +126,7 @@ int gameGetSlotRecord(...);
 int gameGetSlotTable(void);
 int FUN_0020b490(...);
 int FUN_00240674(...);
-int FUN_0034aae4(void);
+int uiQuestClose(void);
 int FUN_00358e94(...);
 int panelSetTarget(unsigned int, int);
 int FUN_0037c8e4(int, int);
@@ -256,7 +256,7 @@ extern int btlTalkBustUpGetValue(void);
 /* Supplied declaration required: FUN_00340a94. */
 /* Supplied declaration required: obj04Finish. */
 /* Supplied declaration required: FUN_0034a968. */
-/* Supplied declaration required: FUN_0034aae4. */
+/* Supplied declaration required: uiQuestClose. */
 /* Supplied declaration required: FUN_00358e94. */
 extern int asdSoundIsBankHandleLoaded(unsigned int);
 /* Supplied declaration required: FUN_00359974. */
@@ -428,7 +428,7 @@ unsigned int FUN_00204098(void)
     if (temp_v7 != 0) {
       FUN_003982f4();
       lmapMainCallIfActive2();
-      FUN_0034aae4();
+      uiQuestClose();
       FUN_0020b490(temp_v6,1);
     }
     break;

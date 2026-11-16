@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler uses r0 for the callback-global base and reloads reason before the callback; retail uses r3 and retains r0. */
 #include "common.h"
 
 extern "C" {

@@ -1158,7 +1158,7 @@ code_r0x0032d518:
   case 0x1f:
     iVar7 = FUN_002b89a4(0);
     if (iVar7 != 0) {
-      FUN_00223dcc();
+      uniteScreenDestroy();
       func_0x002ae7cc();
       FUN_0028a924(1,0,0xffffffff);
       FUN_0028a368(1);
@@ -1348,7 +1348,7 @@ code_r0x0032d518:
   case 0x23:
     iVar7 = FUN_00241990();
     if (iVar7 == 0) break;
-    FUN_00296934();
+    uiQuestClose();
     if (*(char *)(puVar2 + 0x96f) != '\0') {
       *(unsigned char *)(puVar2 + 0x26) = 1;
       FUN_00298ad8();
@@ -1369,7 +1369,7 @@ code_r0x0032d518:
       iVar13 = FUN_00223cd8();
       iVar14 = func_0x002eff4c();
       iVar15 = func_0x002cf768();
-      FUN_00296934();
+      uiQuestClose();
       if (cRam00493788 != '\0') {
         iVar16 = FUN_002c2950();
         *(unsigned short *)(iVar16 + 0x22) = 0;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail stores the three integer values as one stm (+ the table pointer from the same address register) and pushes r3-r9; built splits the stores. Fixed here: the table-entry test (return when present), buffer slot 1 and same-file reverb data. */
+/* NON_MATCHING: code matches (the integer values are written through the table pointer, giving retail's stm and table store); only the literal pool order differs: retail places the 0.4f constant before the parameter block's address. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
@@ -30,10 +30,11 @@ void FUN_00109580(void)
     DAT_004c5604.integerParameters[2] = 30;
     DAT_004c5604.scalarParameters[0] = 0.5f;
     DAT_004c5604.scalarParameters[1] = 0.8f;
-    DAT_004c5604.integerValues[0] = 3040;
-    DAT_004c5604.integerValues[1] = 3680;
-    DAT_004c5604.integerValues[2] = 2080;
-    DAT_004c5604.integerTable = DAT_004c5604.integerValues;
+    s32 *table = DAT_004c5604.integerValues;
+    table[0] = 3040;
+    table[1] = 3680;
+    table[2] = 2080;
+    DAT_004c5604.integerTable = table;
     DAT_004c5604.additionalScalars[0] = 0.4f;
     DAT_004c5604.additionalScalars[1] = 0.4f;
     DAT_004c5604.flags[1] = 1;

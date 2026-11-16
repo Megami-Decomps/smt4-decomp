@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail stores the three integer values as one stm (+ the table pointer from the same address register); built splits the stores. */
+/* NON_MATCHING: code matches (the integer values are written through the table pointer, giving retail's stm and table store, as in the smt4 twin FUN_00109580); only the literal pool order differs: retail places the 0.4f constant before the parameter block's address. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
@@ -30,10 +30,11 @@ void FUN_0013ddf0(void)
     DAT_0061975c.integerParameters[2] = 30;
     DAT_0061975c.scalarParameters[0] = 0.5f;
     DAT_0061975c.scalarParameters[1] = 0.8f;
-    DAT_0061975c.integerValues[0] = 3040;
-    DAT_0061975c.integerValues[1] = 3680;
-    DAT_0061975c.integerValues[2] = 2080;
-    DAT_0061975c.integerTable = DAT_0061975c.integerValues;
+    s32 *table = DAT_0061975c.integerValues;
+    table[0] = 3040;
+    table[1] = 3680;
+    table[2] = 2080;
+    DAT_0061975c.integerTable = table;
     DAT_0061975c.additionalScalars[0] = 0.4f;
     DAT_0061975c.additionalScalars[1] = 0.4f;
     DAT_0061975c.flags[1] = 1;

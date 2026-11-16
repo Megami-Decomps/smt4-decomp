@@ -9,7 +9,7 @@ extern s32 FUN_002c1d5c(void);
 extern s32 FUN_00269dc8(void);
 extern s32 FUN_003115b4(u32 id);
 extern s32 uiQuestIsIdle(void);
-extern s32 FUN_00296934(void);
+extern s32 uiQuestClose(void);
 extern s32 buttonHelpSetPreset(s32 preset);
 
 /* Script command with a u16 argument: on its first frame it runs FUN_00348b00 and, unless
@@ -30,7 +30,7 @@ u32 FUN_00223288(void)
     if (uiQuestIsIdle() == 0) {
         return 0;
     }
-    FUN_00296934();
+    uiQuestClose();
     buttonHelpSetPreset(0x90);
     return 1;
 }

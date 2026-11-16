@@ -1,4 +1,4 @@
-/* NON_MATCHING: canonical mask type and direct marker union remove one row; retail still pairs the marker loads as LDM instead of two LDRs (47 versus 48 rows). */
+/* NON_MATCHING: the marker test now reads the field in place and loads like retail (ldm); only the mask registers differ (retail: mask base r3, low word r1, and flags-high & mask-high into r0). */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "gamedata/Table8Record.h"
@@ -29,11 +29,13 @@ u32 FUN_004000a8(void *actor, u32 id)
         return FUN_00400164(actor, record->unk32);
     }
     BtlMainStateA *state = btlGetMainState();
-    u64 markers = state->markerMasks.bits;
-    if ((DAT_00573c90.excluded & markers) != 0) {
+    if (DAT_00573c90.excluded & state->markerMasks.bits) {
         return 0;
     }
-    return FUN_00400284(actor, 1, record, 1) ? 3 : 0;
+    if (FUN_00400284(actor, 1, record, 1)) {
+        return 3;
+    }
+    return 0;
 }
 
 } /* extern "C" */

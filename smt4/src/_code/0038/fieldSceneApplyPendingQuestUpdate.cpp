@@ -57,7 +57,7 @@ void FUN_00273f5c(void);
 void mapClearPendingEntries(void);
 void FUN_00273d34(void);
 void FUN_00273c54(void);
-void FUN_00296934(void);
+void uiQuestClose(void);
 void messageBannerInitSelection(s32 a, s32 b);
 void messageTargetSetValue(s32 target, s32 value);
 s32 questCenterGetHealingFee(void);
@@ -115,7 +115,7 @@ void fieldSceneApplyPendingQuestUpdate(FieldSceneWork *work)
             FUN_00273c54();
         }
     }
-    FUN_00296934();
+    uiQuestClose();
     if (pending->secondaryState != 0) {
         DAT_0049fa1c.secondaryDone = 1;
         work->state = 0xF;
@@ -138,7 +138,7 @@ void fieldSceneApplyPendingQuestUpdate(FieldSceneWork *work)
         messageMainSetTargetFlags(1);
         work->pending.messageActive = 0;
     }
-    FUN_00296934();
+    uiQuestClose();
     work->state = 5;
     work->phase = 0;
 }

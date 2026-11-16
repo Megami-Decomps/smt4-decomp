@@ -1,11 +1,11 @@
 #include "common.h"
 #include "util/PlatformResultCheck.h"
 extern "C" {
-u32 FUN_002bbaf8(void);
+u32 fsGetUserMountHandle(void);
 s32 nn_fs_ipc_FileSystem_IsSdmcDetected(u32 *session, s8 *detected);
 s32 asdFsIsSdCardDetected(void)
 {
-    u32 session = FUN_002bbaf8();
+    u32 session = fsGetUserMountHandle();
     s8 detected;
     s32 result = nn_fs_ipc_FileSystem_IsSdmcDetected(&session, &detected);
     u32 location = __current_pc();

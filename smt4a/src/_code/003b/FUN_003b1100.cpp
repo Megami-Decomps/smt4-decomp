@@ -1,4 +1,4 @@
-/* NON_MATCHING: the selection range's stack slots and loads differ; register allocation of the mask AND/ORR chain differs; u64 mask loads pair differently (ldm versus two ldr); the frame/saved-register set differs (the active-entry byte already folds with the s8 flag). */
+/* NON_MATCHING: only the required- and excluded-mask ANDs: retail ANDs flags & mask (using r7 for the high mask word) and pairs the excluded halves the other way round. */
 #include "battle/BtlMainAccess.h"
 #include "battle/BattleHelpers.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -34,9 +34,9 @@ u32 FUN_003b1100(void)
     for (s32 i = first; i < count + first; ++i) {
         BtlMainStateA *state = btlGetMainState();
         BtlCombatantEntryA *entry = &state->entries[i];
-        if ((g_btlCandidateMasks.unavailable & entry->flags) == 0 &&
-            (g_btlCandidateMasks.required & entry->flags) != 0 &&
-            (entry->flags & g_btlCandidateMasks.excluded) == 0 &&
+        if (!(g_btlCandidateMasks.unavailable & entry->flags) &&
+            (g_btlCandidateMasks.required & entry->flags) &&
+            !(g_btlCandidateMasks.excluded & entry->flags) &&
             ((const BattleCandidateSignedValuesView *)entry)->values[valueIndex] <= -1) {
             scrSetResult(1);
             return 1;

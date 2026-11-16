@@ -1,4 +1,3 @@
-/* NON_MATCHING: takes no parameter (scrGetArg(1)); an unknown mode returns 1 as in retail (bne to the shared `return 1`); retail still predicates `value > 4` (cmpne r4, #4; movgt) without the compiler nops and shares one `return 1`/`return 0` block between the branches, the build duplicates them. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "script/ScriptArgs.h"
@@ -8,28 +7,25 @@ s32 FUN_00162ea4(void);
 u32 FUN_00163e84(s32 slot);
 void FUN_003d54f8(u32 slot, u32 value);
 
-/* Starts both slot transitions on the first frame, then polls the completion query. */
+/* Script wait: returns 1 while the transition is still pending. On the first frame it starts both slot
+ * transitions (the value capped at 4 when FUN_00203d74 holds) unless FUN_00162ea4 holds or argument 0
+ * is neither 0 nor 1; later frames poll FUN_00163e84 twice. */
 u32 FUN_002deae0(void)
 {
     s32 value = scrGetArg(1);
-    if (scrGetCommandFrame() != 0) {
-        if (FUN_00163e84(0) != 0 && FUN_00163e84(0) != 0) {
+    if (scrGetCommandFrame() == 0) {
+        if (FUN_00203d74() != 0 && value > 4)
+            value = 4;
+        if (FUN_00162ea4() != 0)
             return 1;
-        }
-        return 0;
-    }
-    if (FUN_00203d74() != 0 && value > 4) {
-        value = 4;
-    }
-    if (FUN_00162ea4() != 0) {
-        return 1;
-    }
-    s32 mode = scrGetArg(0);
-    if (mode == 0 || mode == 1) {
+        s32 mode = scrGetArg(0);
+        if (mode != 0 && mode != 1)
+            return 1;
         FUN_003d54f8(0, value);
         FUN_003d54f8(1, value);
-        return 0;
+    } else if (FUN_00163e84(0) != 0 && FUN_00163e84(0) != 0) {
+        return 1;
     }
-    return 1;
+    return 0;
 }
 }

@@ -1,4 +1,3 @@
-/* NON_MATCHING: stores and pool order now match; only the UI-flag clear after FUN_00242914 uses r0 (retail r1) and the zero stored into task->state r1 (retail r0). */
 #include "common.h"
 #include "code/Code0024.h"
 #include "battle/btlEditor.h"
@@ -10,10 +9,10 @@ typedef struct BtlMain {
     /* 0x760 */ s32 unk760;
 } BtlMain;
 
-/* The battle's state block; flags at 0x44A0. */
+/* The battle's state block; its 64-bit battle mask at 0x44A0 (BtlMainState::battleMask). */
 typedef struct BtlMainState {
     /* 0x0000 */ u8 unk0000[0x44A0];
-    /* 0x44A0 */ u32 flags;
+    /* 0x44A0 */ u64 flags;
 } BtlMainState;
 
 typedef struct BtlTask {
@@ -59,9 +58,8 @@ s32 FUN_003c7760(BtlTask *task, BtlMainState *state)
             }
         }
         task->state = 0;
-        u32 *resetCounter = &DAT_00435d18;
         state->flags &= ~BTL_FLAG_ACTIVE;
-        battleResetCounterAndFlag(*resetCounter);
+        battleResetCounterAndFlag(DAT_00435d18);
     }
     if (task->frames < 0xFFFF) {
         task->frames++;

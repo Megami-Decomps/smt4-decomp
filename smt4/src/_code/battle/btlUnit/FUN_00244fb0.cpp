@@ -16,12 +16,12 @@ struct BtlUnitColorFade {
 };
 typedef char BtlUnitColorFadeOffsets[offsetof(BtlUnitColorFade, palette) == 0x4A3C ? 1 : -1];
 
-extern u32 DAT_00439a3c[]; /* the palette colours, red in the low byte */
+extern u32 g_btlPaletteColors[]; /* the palette colours, red in the low byte */
 
 /* Starts a colour fade on one slot: remembers the current colour and tints it from the palette. */
 void FUN_00244fb0(BtlUnitColorFade *fade, u32 slot, u32 palette, u32 param, u32 alpha)
 {
-    u32 *tint = &DAT_00439a3c[palette];
+    u32 *tint = &g_btlPaletteColors[palette];
 
     fade->mode[slot] = 4;
     fade->timer[slot] = 0;

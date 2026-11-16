@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_0015dc2c(...);
+int aocResolveMountPath(...);
 u32 _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(QueuedRequestTokenState*, const RequestParameters*, QueuedRequestHandle);
 u32 resourceResultMatchesRemappedCodes(const u32 *result);
 u32 resourceResultMatchesKnownRanges(const u32 *result);
@@ -58,7 +58,7 @@ extern unsigned int g_aocSystem; /* 0x433158 */
 #define ROMWRIGHT_PIECE_3_1_DEFINED
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
-/* Supplied declaration required: FUN_0015dc2c. */
+/* Supplied declaration required: aocResolveMountPath. */
 /* Supplied declaration required: _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle. */
 /* Supplied declaration required: resourceResultMatchesRemappedCodes. */
 /* Supplied declaration required: resourceResultMatchesKnownRanges. */
@@ -202,7 +202,7 @@ void FUN_0015c81c(int param_1,int param_2)
         temp_v15 = romwright_piece_3_1((((unsigned int)(temp_v15) >> 8) & 0xffffffU),200);
       }
       else {
-        FUN_0015dc2c(&temp_v23,g_aocSystem,param_2 + 0x30);
+        aocResolveMountPath(&temp_v23,g_aocSystem,param_2 + 0x30);
         temp_v15 = temp_v23;
         temp_v16[0] = acStack_54[0];
         temp_v16[1] = acStack_54[1];

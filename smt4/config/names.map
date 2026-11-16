@@ -4915,3 +4915,10 @@
 002c18e4 renderCtxResetColorScale
 002942c4 statusBustUpPortraitAcquire
 002958f8 statusBustUpPortraitRelease
+00223dcc uniteScreenDestroy
+002113c0 campCecStopCommThread
+0015dc2c aocResolveMountPath
+0010fc90 soundCallbacksCloseDspResource
+0026b4cc clockRecordStartSeconds
+00296934 uiQuestClose
+002bbaf8 fsGetUserMountHandle

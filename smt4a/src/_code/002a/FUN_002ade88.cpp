@@ -1,4 +1,4 @@
-/* NON_MATCHING: three scheduling/register diffs left: the reserve-row fusion call loads record->entryId after the out-pointer setup (retail right after gameGetSlotRecord), and the reserve-row and cell-row entryId compares swap r0/r1 (retail ldrh r1 + ldr r0 / ldrh r0 + ldrh r1). */
+/* NON_MATCHING: with the inlined.txt row for partyWidgetSetTransitionKind (strb r1, [r0, #40]) one diff is left: the reserve-row "same as the first pick" compare loads entryId into r0 and ids[0] into r1 (retail r1/r0). */
 #include "common.h"
 #include <stddef.h>
 #include "ui/PartyPanelState.h"
@@ -79,8 +79,8 @@ void FUN_002ade88(void)
         if (slots->reserve[i] < 0) {
             panel->animation.preview.partyAvailable[i] = 0;
         } else if (panel->idCount >= 1 && panel->animation.preview.partyAvailable[i] != 0) {
-            SlotRecord *record = gameGetSlotRecord(slots->reserve[i]);
-            if (FUN_004da344(panel->unite, (u16)panel->ids[0], record->entryId, special, &out) == 0) {
+            u16 entryId = gameGetSlotRecord(slots->reserve[i])->entryId;
+            if (FUN_004da344(panel->unite, (u16)panel->ids[0], entryId, special, &out) == 0) {
                 panel->animation.preview.partyAvailable[i] = 0;
                 switch (out.reason) {
                 case 1:
@@ -93,7 +93,7 @@ void FUN_002ade88(void)
                     panel->flags[i] |= 4;
                     break;
                 }
-                if (panel->ids[0] == gameGetSlotRecord(slots->reserve[i])->entryId) {
+                if (gameGetSlotRecord(slots->reserve[i])->entryId == panel->ids[0]) {
                     panel->flags[i] |= 0x40;
                 }
             } else if (FUN_002a4b28(out.resultId) == 0) {
@@ -149,7 +149,10 @@ void FUN_002ade88(void)
             SlotRecord *found = slotRecordFindById((u16)panel->ids[j]);
             if (found != NULL) {
                 for (s32 i = 0; i < 3; ++i) {
-                    if (slots->reserve[i] >= 0 && gameGetSlotRecord(slots->reserve[i])->entryId == found->entryId) {
+                    if (slots->reserve[i] < 0)
+                        continue;
+                    SlotRecord *member = gameGetSlotRecord(slots->reserve[i]);
+                    if (member->entryId == found->entryId) {
                         panel->animation.preview.partyAvailable[i] = 0;
                         partyWidgetSetTransitionKind(panel->characters[1 + i], 0);
                         partyWidgetSetTransitionPending(panel->characters[1 + i], 1);

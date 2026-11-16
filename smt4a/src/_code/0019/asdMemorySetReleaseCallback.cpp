@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the registers of the two range-end sums differ (retail adds into r5/ip, the build reuses the loaded size register). */
+/* NON_MATCHING: one operand order left: the second range end is `add ip, r3, r4` here, retail `add ip, r4, r3` (base + size). */
 #include "common.h"
 
 struct AllocationCallbackHeader {
@@ -28,8 +28,9 @@ extern "C" u32 asdMemorySetReleaseCallback(void* allocation, const void* callbac
     const AllocationAddressRanges* ranges = &g_allocationAddressRanges;
     u32 firstBase = ranges->firstBase;
     u32 secondBase = ranges->secondBase;
-    if ((firstBase <= (u32)allocation && (u32)allocation <= firstBase + ranges->firstSize) ||
-        (secondBase <= (u32)allocation && (u32)allocation <= secondBase + ranges->secondSize)) {
+    u32 address = (u32)allocation;
+    if ((firstBase <= address && address <= firstBase + ranges->firstSize) ||
+        (secondBase <= address && address <= secondBase + ranges->secondSize)) {
         return 0;
     }
     AllocationPrefix* prefix = (AllocationPrefix*)allocation - 1;

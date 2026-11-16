@@ -14,7 +14,7 @@ int FUN_00269dc8(void);
 int buttonHelpResetSlots(void);
 int FUN_00287528(int);
 int FUN_0028eeb8(int);
-int FUN_00296934(void);
+int uiQuestClose(void);
 int scrResultStopJobAndReleaseUi(void);
 int resultCreate(int);
 int FUN_0029bbc8(void);
@@ -64,7 +64,7 @@ extern int screenFadeIsBusy(void);
 /* Supplied declaration required: FUN_00287528. */
 extern int table1bOr1cGetRecordValue(unsigned short);
 /* Supplied declaration required: FUN_0028eeb8. */
-/* Supplied declaration required: FUN_00296934. */
+/* Supplied declaration required: uiQuestClose. */
 extern int idIsAtLeast350(unsigned int);
 extern int questIsCompleted(unsigned int);
 extern int questReadRuntimeFlag(unsigned int, unsigned int);
@@ -201,7 +201,7 @@ LAB_003822fc:
     if (temp_v2 == 0) {
       return;
     }
-    FUN_00296934();
+    uiQuestClose();
     temp_v4 = 5;
     break;
   case 4:
@@ -209,7 +209,7 @@ LAB_003822fc:
     if (temp_v2 == 0) {
       return;
     }
-    FUN_00296934();
+    uiQuestClose();
     *param_1 = *param_1 & 0xffffffdf;
     scrScriptProcessStartMappedEntry(param_1,&LAB_00382684);
     temp_v4 = 6;

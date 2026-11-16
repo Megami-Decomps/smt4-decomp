@@ -10,7 +10,7 @@ void FUN_001177e0(void);
 void FUN_0010c350(void);
 void FUN_0010bf78(void);
 void sndSystemFinalize(void);
-void FUN_0010fc90(void);
+void soundCallbacksCloseDspResource(void);
 void asdMemFree(void *block);
 
 /* Shuts the sound system down: stops everything, clears the duck state and frees the work memory. */
@@ -35,7 +35,7 @@ void asdSoundShutdown(void)
     sndSystemFinalize();
     sndSystemShutdown();
     dspComponentUnload();
-    FUN_0010fc90();
+    soundCallbacksCloseDspResource();
 }
 
 } /* extern "C" */

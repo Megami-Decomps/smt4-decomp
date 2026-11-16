@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail builds the stat base from the saved entry register (r6) and loads the entry flags into r1 before testing the list-owner result in the two flag items; all other instructions agree. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlHelp.h"
 #include "AsdSDK/Source/Util/AsdListHelpers.h"
@@ -138,26 +137,20 @@ void FUN_003c4ac4(EntryEditorScreen *screen, BtlMainState *battle)
         break;
     case 10:
         if (entry != NULL) {
-            s32 hasOwner = listBoxItemHasOwner(screen->listBox, item);
-            u32 flags = entry->flags;
-            if (hasOwner != 0) {
-                flags |= 0x1000;
+            if (listBoxItemHasOwner(screen->listBox, item) != 0) {
+                entry->flagMask |= 0x1000;
             } else {
-                flags &= ~0x1000u;
+                entry->flagMask &= ~(u64)0x1000;
             }
-            entry->flags = flags;
         }
         break;
     case 11:
         if (entry != NULL) {
-            s32 hasOwner = listBoxItemHasOwner(screen->listBox, item);
-            u32 flags = entry->flags;
-            if (hasOwner != 0) {
-                flags |= 0x4000000;
+            if (listBoxItemHasOwner(screen->listBox, item) != 0) {
+                entry->flagMask |= 0x4000000;
             } else {
-                flags &= ~0x4000000u;
+                entry->flagMask &= ~(u64)0x4000000;
             }
-            entry->flags = flags;
         }
         break;
     case 12:

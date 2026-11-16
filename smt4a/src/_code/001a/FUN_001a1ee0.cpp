@@ -1,4 +1,4 @@
-/* NON_MATCHING: same flow as FUN_002b70cc (the guard call does reduce the phase in s0 here); armcc schedules the table lookup, the fraction subtract and the compare flags differently */
+/* NON_MATCHING: written like FUN_002b70cc (table local, sign test as two returns); pool and instructions match, only the scheduling differs: retail moves the compare flags (vmrs) after the fraction subtract and loads the slope after the base. */
 #include "common.h"
 #include <math.h>
 
@@ -24,10 +24,12 @@ f32 FUN_001a1ee0(f32 x)
         phase = FUN_001b4030(phase, 65536.0f);
     }
     u16 index = (u32)phase;
+    const WaveEntry *table = DAT_00536d14;
     f32 fraction = phase - (f32)index;
-    const WaveEntry *entry = &DAT_00536d14[index & 0xff];
-    f32 wave = entry->base + fraction * entry->slope;
-    return x < 0.0f ? -wave : wave;
+    const WaveEntry *entry = &table[index & 0xff];
+    if (x < 0.0f)
+        return -(entry->base + fraction * entry->slope);
+    return entry->base + fraction * entry->slope;
 }
 
 } /* extern "C" */

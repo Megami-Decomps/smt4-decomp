@@ -20,7 +20,7 @@ void *gameDataBlocksGetTable();
 void __ARM_common_memcpy4_8(void *settings, const void *savedSettings);
 GameSaveData *gameDataBlocksGetSaveData();
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
-void FUN_0026b4cc();
+void clockRecordStartSeconds();
 extern SaveByteSettings g_byteSettings;
 
 s32 FUN_002efa00(u32 job)
@@ -44,7 +44,7 @@ s32 FUN_002efa00(u32 job)
                 __ARM_common_memcpy4_8(configGetSettings(), payload->settings);
                 __aeabi_memcpy4(gameDataBlocksGetSaveData(), payload->save, sizeof(payload->save));
                 gameDataBlocksGetSaveData()->metadata.option = work->option;
-                FUN_0026b4cc();
+                clockRecordStartSeconds();
                 work->state = 6;
             }
         }

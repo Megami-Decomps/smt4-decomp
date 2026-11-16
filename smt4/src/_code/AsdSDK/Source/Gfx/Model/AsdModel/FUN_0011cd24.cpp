@@ -1,6 +1,7 @@
-/* NON_MATCHING: retail builds the wait timeout and handle in one 16-byte frame whose first word is also the key buffer for FUN_00129684; armcc keeps a separate outgoing-argument area, and the registry walk is scheduled differently. */
+/* NON_MATCHING: the wait now goes through handleWait on the NnOsHandle global (one load of its handle, as retail); retail still builds the wait arguments in a 16-byte frame whose first word is also the key buffer for FUN_00129684 (armcc gives the key its own slot, 24 bytes), and the registry walk is scheduled differently. */
 #include "nn/Result.h"
-#include "common.h"
+#include "nn/os/Handle.h"
+#include "sys/HandleWait.h"
 
 struct ModelRegistryLink {
     ModelRegistryLink *next;     // 0x00
@@ -25,24 +26,18 @@ static __inline ModelRegistryLink *modelRegistryGetLink(ModelRegistryEntry *entr
 
 extern "C" {
 
-extern u32 *g_modelWorkHandle;
+extern NnOsHandle g_modelWorkHandle;
 extern ModelRegistryLink *g_modelWorkList;
 
-s32 FUN_002c40f8(s32 *index, u32 *handles, s32 count, s32 waitAll, u32 timeoutLow, u32 timeoutHigh);
 s32 FUN_00129684(u32 *key);
-void FUN_002c526c(void);
 void asdFatalError(void);
 
 /* Model registry worker thread: waits for a request, then runs the registered entry it names. */
 __declspec(noreturn) void FUN_0011cd24(void)
 {
     for (;;) {
+        handleWait(g_modelWorkHandle.handle, -1);
         u32 key;
-        s32 index;
-        u32 handle = *g_modelWorkHandle;
-        if (nnResultIsFailure(FUN_002c40f8(&index, &handle, 1, 0, 0xffffffff, 0xffffffff))) {
-            FUN_002c526c();
-        }
         s32 result = FUN_00129684(&key);
         if (nnResultIsSuccess(result)) {
             ModelRegistryEntry *entry = NULL;

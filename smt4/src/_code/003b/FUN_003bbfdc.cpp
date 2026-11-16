@@ -1,4 +1,4 @@
-/* NON_MATCHING: ARMCC folds the format decrement into a shifted add and delays the mode load. */
+/* NON_MATCHING: the format decrement now matches; only the mode load is scheduled after the phase/timer stores where retail issues it before them. */
 #include "gfx/PackedRenderState.h"
 
 extern "C" {
@@ -13,7 +13,8 @@ void FUN_003bbfdc(PackedRenderState* state, const PackedRenderParameters* parame
     state->variant = parameters->variant;
     state->resource = parameters->resource;
     state->flags |= 0x40000000;
-    state->formatInfo.format = (u8)((parameters->flags >> 2) & 7) - 1;
+    u32 format = (parameters->flags >> 2) & 7;
+    state->formatInfo.format = format - 1;
     if (parameters->flags & 1) {
         state->flags |= 0x10000;
     }

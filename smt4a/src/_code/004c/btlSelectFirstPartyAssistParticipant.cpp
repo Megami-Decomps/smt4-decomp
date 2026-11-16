@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail loads the marker pair with ldm and the guarantee/activation mask words with separate ldr (we get ldrd/ldm for the u64 views). */
+/* NON_MATCHING: the activation |= now matches; only the guarantee-mask test differs: retail reads the marker pair with ldm into r1/r3 and ANDs (flags-low & mask-low, mask-high & flags-high), armcc here uses ldrd. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "gamedata/GameFlags.h"
@@ -65,7 +65,7 @@ u32 btlSelectFirstPartyAssistParticipant()
             break;
         }
         const BtlMainStateA *state = btlGetMainState();
-        if (DAT_005713f0.guarantee & state->markerMasks.bits) {
+        if (state->markerMasks.bits & DAT_005713f0.guarantee) {
             chance = 100;
         }
         if (lcgRandomRange(99) < chance && selected < 1) {
@@ -75,8 +75,7 @@ u32 btlSelectFirstPartyAssistParticipant()
     }
     if (selected > 0) {
         gameFlagSetValue(0x11d6, 1, 1);
-        BtlMainStateA *state = btlGetMainState();
-        *reinterpret_cast<u64 *>(state->stateFlags.words) |= DAT_005713f0.activate;
+        btlGetMainState()->stateFlags64.bits |= DAT_005713f0.activate;
         return 1;
     }
     return 0;

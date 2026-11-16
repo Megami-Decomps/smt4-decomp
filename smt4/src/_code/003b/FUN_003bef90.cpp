@@ -1,4 +1,3 @@
-/* NON_MATCHING: final battleFlags read/modify/write uses r1 rather than retail r2; all other instructions agree. */
 #include "battle/BtlMainAccess.h"
 #include "gamedata/UnitStats.h"
 #include "gamedata/FlagBitTests.h"
@@ -48,7 +47,8 @@ u32 FUN_003bef90(void)
             }
         }
         if (selected > 0) {
-            btlGetMainState()->battleFlags |= 0x200;
+            BtlMainState *battle = btlGetMainState();
+            battle->battleMask |= 0x200;
             return 1;
         }
     }

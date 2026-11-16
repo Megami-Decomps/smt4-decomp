@@ -1,4 +1,3 @@
-/* NON_MATCHING: cleanup coalesces the original owner and resource-view registers. */
 #include "shard/W4_W4Match2_UiQuest.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
@@ -29,28 +28,38 @@ void asdMemFree(void *allocation);
 void asdTMTexTableReleaseNode(u32 index, u32 kind);
 void jobStop(u32 job, u32 flags);
 
-void FUN_00296934()
+/* Removes the quest screen's touch regions and frees its scripts, buffers, textures and table. */
+static __inline void uiQuestRelease(QuestCleanupWorkView *work)
+{
+    s32 index;
+
+    for (index = 0; index < work->touchCount; index++) {
+        ifTouchRegionRemove();
+    }
+    scrScriptProcessDestroy(work->script);
+    asdMemFree(work->bufferA);
+    asdMemFree(work->bufferB);
+    if (work->detailBuffer != 0) {
+        scrScriptProcessDestroy(work->detailScript);
+        asdMemFree(work->detailBuffer);
+        asdMemFree(work->detailAuxiliary);
+    }
+    asdTMTexTableReleaseNode(0x29, 0);
+    asdTMTexTableFreeEntry(0x29);
+    fileSlotFree(0x34);
+    uiFadeSetVisible(1);
+}
+
+/* Closes the quest screen: releases its resources, stops its job and frees it. */
+void uiQuestClose()
 {
     QuestCleanupWorkView *work = (QuestCleanupWorkView *)g_uiQuest;
-    if (work != 0) {
-        for (s32 index = 0; index < work->touchCount; ++index) {
-            ifTouchRegionRemove();
-        }
-        scrScriptProcessDestroy(work->script);
-        asdMemFree(work->bufferA);
-        asdMemFree(work->bufferB);
-        if (work->detailBuffer != 0) {
-            scrScriptProcessDestroy(work->detailScript);
-            asdMemFree(work->detailBuffer);
-            asdMemFree(work->detailAuxiliary);
-        }
-        asdTMTexTableReleaseNode(0x29, 0);
-        asdTMTexTableFreeEntry(0x29);
-        fileSlotFree(0x34);
-        uiFadeSetVisible(1);
+
+    if (work != NULL) {
+        uiQuestRelease((QuestCleanupWorkView *)g_uiQuest);
         jobStop(work->job, 0);
         asdMemFree(work);
-        g_uiQuest = 0;
+        g_uiQuest = NULL;
     }
 }
 }

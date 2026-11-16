@@ -1,4 +1,3 @@
-/* NON_MATCHING: ported from the matched smt4a twin FUN_00372570; two differences remain: the roster compare is `cmp r1, r0` (retail `cmp r0, r1`) and the zero stored for the forced page flag sits in r1 (retail reuses the state register r0) */
 #include "ui/PartyPanelState.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
 
@@ -6,13 +5,18 @@ struct PartyPanelRosterEntry {
     s32 unit;
     u32 unk04;
 };
+/* The party panel seen as the selection fields this function reads (PartyPanelState's own unk2C is a u32). */
 struct PartyPanelSelectionFields {
-    u8 unk000[0x670];
-    s32 partyIndex;
-    u8 unk674[0xc4];
-    PartyPanelRosterEntry roster[24];
-    u8 unk7f8[0x148];
-    ScrollSelectionOwner regular;
+    /* 0x000 */ u8 unk000[0x2C];
+    /* 0x02C */ s32 expanded;     /* page flag: 1 shows the second roster page */
+    /* 0x030 */ u8 unk030[0x12];
+    /* 0x042 */ u8 cursorOnly;    /* move only the alternate cursor */
+    /* 0x043 */ u8 unk043[0x62D];
+    /* 0x670 */ s32 partyIndex;
+    /* 0x674 */ u8 unk674[0xc4];
+    /* 0x738 */ PartyPanelRosterEntry roster[24];
+    /* 0x7F8 */ u8 unk7f8[0x148];
+    /* 0x940 */ ScrollSelectionOwner regular;
     ScrollSelectionOwner alternate;
 };
 
@@ -60,6 +64,8 @@ static void partyPanelExpand(void)
     FUN_002937e0();
 }
 
+/* Moves the panel cursor onto the selected party member's roster slot, switching pages unless `force`
+ * sets the page directly; returns 1 when the page was switched. */
 extern "C" u32 partyPanelFocusSelectedPartyMember(s32 force)
 {
     PartyPanelState *panel = g_partyPanel;
@@ -72,19 +78,20 @@ extern "C" u32 partyPanelFocusSelectedPartyMember(s32 force)
         if (unit >= 0) {
             s32 i;
             for (i = 0; i < 24; i++) {
-                if (fields->roster[i].unit == unit) {
+                s32 rosterUnit = fields->roster[i].unit;
+                if (unit == rosterUnit) {
                     s32 state;
-                    if (panel->unk42 != 0) {
+                    if (fields->cursorOnly != 0) {
                         scrollOwnerSelectIndex(&fields->alternate, i % 4);
                         FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(&fields->alternate), i / 4);
                         break;
                     }
                     if (i < 12) {
                         if (force == 0) {
-                            state = panel->unk2C;
+                            state = fields->expanded;
                         } else {
                             state = 0;
-                            panel->unk2C = state;
+                            fields->expanded = 0;
                         }
                         if (force == 0 && state == 1) {
                             changed = 1;
@@ -95,10 +102,10 @@ extern "C" u32 partyPanelFocusSelectedPartyMember(s32 force)
                         break;
                     }
                     if (force == 0) {
-                        state = panel->unk2C;
+                        state = fields->expanded;
                     } else {
-                        panel->unk2C = 1;
-                        state = panel->unk2C;
+                        fields->expanded = 1;
+                        state = fields->expanded;
                     }
                     if (force == 0) {
                         if (state == 0) {

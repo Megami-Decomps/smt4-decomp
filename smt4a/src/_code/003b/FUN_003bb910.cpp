@@ -1,4 +1,4 @@
-/* NON_MATCHING: combatant-array base and index arithmetic use r0/r1 opposite to retail; mask operands now agree. */
+/* NON_MATCHING: only the entry address: retail puts the state base in r1 and the index product in r0; the build swaps them. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -32,9 +32,9 @@ extern "C" u32 FUN_003bb910(void)
     for (s32 i = 0; i < 109; ++i) {
         const BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
         const CombatantComparisonValues *values = (const CombatantComparisonValues *)entry;
-        if ((entry->flags & g_btlCandidateMasks.unavailable) != 0 &&
-            (g_btlCandidateMasks.required & entry->flags) != 0 &&
-            (entry->flags & g_btlCandidateMasks.excluded) == 0 &&
+        if ((entry->flags & g_btlCandidateMasks.unavailable) &&
+            (g_btlCandidateMasks.required & entry->flags) &&
+            !(g_btlCandidateMasks.excluded & entry->flags) &&
             values->values[valueIndex] < threshold) {
             scrSetResult(1);
             return 1;

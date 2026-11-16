@@ -1,4 +1,3 @@
-/* NON_MATCHING: the fallback transition through btlStepEnter no longer hoists phase 15; remaining: the auxiliary resource store at +0x9C70 is addressed as add #0x9000/#0xC70 with [r1] (retail add #0x9C00 with [r1, #0x70]), which also reorders the 0x166 pool word. */
 #include "battle/btlMain.h"
 #include "battle/btlCamera.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -12,10 +11,14 @@ struct BattleCameraDefinition {
     u32 resource;
 };
 // Both fields extend beyond their shared prefix; keep their larger views local.
+struct BattleCameraAuxCamera {
+    u8 unk00[0x70];
+    u32 resource;
+};
 struct BattleCameraAuxView {
     BtlAuxA prefix;
-    u8 unk3054[0x6C1C];
-    u32 resource;
+    u8 unk3054[0x6BAC];
+    BattleCameraAuxCamera camera;
 };
 struct BattleCameraCandidateView {
     BattleCandidateRecord prefix;
@@ -23,7 +26,8 @@ struct BattleCameraCandidateView {
     s16 cameraId;
 };
 typedef char BattleCameraViewOffsetsCheck[
-    offsetof(BattleCameraAuxView, resource) == 0x9C70 &&
+    offsetof(BattleCameraAuxView, camera) == 0x9C00 &&
+    offsetof(BattleCameraAuxView, camera.resource) == 0x9C70 &&
     offsetof(BattleCameraCandidateView, cameraId) == 0x8C ? 1 : -1];
 }
 
@@ -47,7 +51,8 @@ void FUN_003e025c(BtlStep *step, BtlMainStateA *battle)
         BtlCombatantEntryA *entry = FUN_003f0e20(battle, record->combatant.parameterIndex);
         if (entry != NULL) {
             BattleCameraDefinition *definition = FUN_003eca48(battle, entry->id);
-            reinterpret_cast<BattleCameraAuxView *>(g_btlAux)->resource = definition->resource;
+            BattleCameraAuxCamera *auxCamera = &reinterpret_cast<BattleCameraAuxView *>(g_btlAux)->camera;
+            auxCamera->resource = definition->resource;
             if (definition != NULL && (definition->flags & 1) != 0) {
                 char path[64] = {0};
                 const BattleCameraCandidateView *candidate =

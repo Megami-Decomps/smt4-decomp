@@ -182,6 +182,10 @@ typedef struct BtlMainState {
             /* 0x225A */ s16 checkId;           /* listed id of the player's unit */
         } playerCheck;
         struct {
+            u8 unk1FD8[0x290];
+            /* 0x2268 */ u32 command;           /* the battle debug menu's command value */
+        } debugMenu;
+        struct {
             u8 unk1FD8[0xF2E];
             /* 0x2F06 */ s16 order[12];
         } turnOrder;
@@ -254,7 +258,7 @@ typedef char BtlMainStateLayoutCheck[
 typedef char BtlMainStateHeadOffsetCheck[
     offsetof(BtlMainState, editor.job) == 0x58 && offsetof(BtlMainState, encounter.drawJob) == 8 &&
     offsetof(BtlMainState, encounter.encounterId) == 0xC0 && offsetof(BtlMainState, encounter.flags) == 0xE0 &&
-    offsetof(BtlMainState, encounter.records) == 0x3F4 && offsetof(BtlMainState, talk.unitIndex) == 0x760 &&
+    offsetof(BtlMainState, encounter.records) == 0x3F4 && offsetof(BtlMainState, talk.unitIndex) == 0x760 && offsetof(BtlMainState, debugMenu.command) == 0x2268 &&
     offsetof(BtlMainState, actionState.index) == 0x84 && offsetof(BtlMainState, actionState.mode) == 0x88 &&
     offsetof(BtlMainState, spriteSource.templateIndex) == 0xC0 && offsetof(BtlMainState, spriteSource.metadata) == 0x144 &&
     offsetof(BtlMainState, spriteSource.coordinates) == 0x158 ? 1 : -1];

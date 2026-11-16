@@ -1,51 +1,54 @@
-/* NON_MATCHING: nearby-location distance arguments and result metadata use different saved-register allocation. */
-/* Selects the first active map location within range and publishes its label and interface mode. */
-#include "common.h"
+#include "map/mapDepart.h"
 
+/* A map location the player can be near. */
 struct NearbyLocation {
-    u8 unk00[0xC];
-    u8 active;
-    u8 unk0D[5];
-    s16 area;
-    s16 tableIndex;
-    u8 unk16[6];
-    f32 position[3];
-    u8 unk28[0x14];
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ u8 active;
+    /* 0x0D */ u8 unk0D[5];
+    /* 0x12 */ s16 area;
+    /* 0x14 */ s16 tableIndex;
+    /* 0x16 */ u8 unk16[6];
+    /* 0x1C */ MapVector position;
+    /* 0x28 */ u8 unk28[0x14];
 };
+
 struct NearbyLocationState {
-    NearbyLocation entries[64];
-    u8 unkF00[0xC];
-    u8 active;
-    u8 unkF0D[3];
-    s32 index;
-    s32 area;
-    u32 unkF18;
-    u32 value;
-    char label[1];
+    /* 0x000 */ NearbyLocation entries[64];
+    /* 0xF00 */ u8 unkF00[0xC];
+    /* 0xF0C */ u8 active;
+    /* 0xF0D */ u8 unkF0D[3];
+    /* 0xF10 */ s32 index;
+    /* 0xF14 */ s32 area;
+    /* 0xF18 */ u32 unkF18;
+    /* 0xF1C */ u32 value;
+    /* 0xF20 */ char label[1];
 };
+
 struct LocationTableEntry {
-    u8 unk00[8];
-    u32 value;
-    char name[0x2C];
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 value;
+    /* 0x0C */ char name[0x2C];
 };
+
 extern "C" {
 extern NearbyLocationState *DAT_00581280;
-f32 distSpatial(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
-const LocationTableEntry *dataTable2aGetEntryWithAoc(u32 index);
+f32 distSpatial(MapVector a, MapVector b);
+const LocationTableEntry *dataTable2aGetEntryWithAoc(s32 index);
 char *libc_strcpy(char *destination, const char *source);
-void FUN_00234044(s32 mode, s32 id);
+void FUN_00234044(s32 found, s32 index);
 
-void FUN_002b80fc(f32 x, f32 y, f32 z)
+/* Selects the first active map location within 200 units of `point` and publishes its label and
+ * interface mode, or clears the selection. */
+void FUN_002b80fc(MapVector point)
 {
-    for (s32 i = 0; i < 64; ++i) {
-        NearbyLocation *location = &DAT_00581280->entries[i];
-        if (location->active && distSpatial(x, y, z, location->position[0], location->position[1], location->position[2]) < 200.0f) {
+    for (s32 i = 0; i < 64; i++) {
+        if (DAT_00581280->entries[i].active &&
+            distSpatial(point, DAT_00581280->entries[i].position) < 200.0f) {
             const LocationTableEntry *entry = dataTable2aGetEntryWithAoc(DAT_00581280->entries[i].tableIndex);
-            NearbyLocationState *state = DAT_00581280;
-            state->active = 1;
-            state->index = i;
-            state->area = state->entries[i].area;
-            libc_strcpy(state->label, entry->name);
+            DAT_00581280->active = 1;
+            DAT_00581280->index = i;
+            DAT_00581280->area = DAT_00581280->entries[i].area;
+            libc_strcpy(DAT_00581280->label, entry->name);
             DAT_00581280->value = entry->value;
             FUN_00234044(1, i);
             return;

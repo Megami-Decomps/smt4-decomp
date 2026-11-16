@@ -1,4 +1,4 @@
-/* NON_MATCHING: only resource-pointer load scheduling around exit-state byte stores differs. */
+/* NON_MATCHING: only the readyToRelease store is scheduled before the resource load (retail: pending store, resource load, readyToRelease store, compare). */
 #include "addon/SceneResource.h"
 #include "ui/SceneWindowWork.h"
 #include "classes/AocMenu.h"
@@ -53,7 +53,7 @@ u32 FUN_001b4fe8()
         }
         work->state.pending = 3;
         work->readyToRelease = 1;
-        if (work->resource) {
+        if (SceneResource *resource = work->resource) {
             FUN_002c5700();
             if (work->resource) {
                 asdMemFreeNonNull(FUN_0027e974(work->resource));

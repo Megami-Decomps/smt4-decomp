@@ -1,4 +1,3 @@
-/* NON_MATCHING: mask-first OR restores retail's `ldrd r2, [r1]` and register use; only the high-word orr operand order differs (retail `orr r2, r3, ip`, here `orr r2, ip, r3`). */
 #include "battle/BtlMainAccess.h"
 
 extern "C" {
@@ -9,8 +8,7 @@ s32 scrGetArg(u32 index);
 s32 scrCommSetBattleMaskBit(void)
 {
     s32 bit = scrGetArg(0);
-    BtlMainStateA *state = btlGetMainState();
-    state->scriptFlags = (s64)(1 << bit) | state->scriptFlags;
+    btlGetMainState()->scriptFlags |= 1 << bit;
     return 1;
 }
 

@@ -1,4 +1,4 @@
-/* NON_MATCHING: slot address and 64-bit restriction-mask load/register grouping differ. */
+/* NON_MATCHING: slot address and the first two mask tests now match; only the last (alternate-state) test differs: retail ANDs into r1/r2 and ORs them, armcc here ANDs into r3/r1. */
 #include "battle/BattleUnitRecordState.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "battle/BattleActionScale.h"
@@ -22,12 +22,12 @@ void FUN_004dcb40(BattleUnitRecordState* state, BtlMainStateA* battle, u32 mode,
                   s32 combatantIndex, BattleActionScale scale, u32 option)
 {
     state->battle = battle;
-    BattleUnitSlotState* slot = &state->slots[battle->unitRecord.currentSlot];
+    BattleUnitSlotState* slot = &state->slots[state->battle->unitRecord.currentSlot];
     slot->active = 0;
     BtlCombatantEntryA* combatant = &battle->entries[combatantIndex];
     slot->combatant = combatant;
     slot->roster = NULL;
-    if (!(g_btlAction.noRoster & combatant->flags))
+    if (!(slot->combatant->flags & g_btlAction.noRoster))
         slot->roster = &battle->roster[combatant->unitIndex];
     slot->parameters = &combatant->unitParameters.parameterBlock;
     slot->combatantIndex = combatantIndex;
@@ -38,10 +38,9 @@ void FUN_004dcb40(BattleUnitRecordState* state, BtlMainStateA* battle, u32 mode,
     slot->unk0018 = 0;
     slot->flags = 0;
     slot->unk1250 = 0;
-    u64 flags = state->battle->stateFlags64.bits;
-    if (flags & g_btlAction.specialState)
+    if (g_btlAction.specialState & state->battle->stateFlags64.bits)
         slot->flags = 0x80;
-    else if (flags & g_btlAction.alternateState)
+    else if (state->battle->stateFlags64.bits & g_btlAction.alternateState)
         slot->flags = 0x1000;
     btlUnitClearRecordFields(state, state->battle->unitRecord.currentSlot);
 }

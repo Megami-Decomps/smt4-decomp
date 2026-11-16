@@ -1,10 +1,11 @@
-/* NON_MATCHING: only the saved-register choice of the stack-slot pointer/stack value (retail r6/r4) and the store scheduling at the stack release differ; thread-wait result is u32. */
 #include "common.h"
-#include "nn/svc.h"
 #include "nn/Result.h"
 #include "camp/PlayLog/PlayLog.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "sys/ResultReport.h"
+#include "battle/BtlStageStackRegion.h"
+#include "nn/os/Thread.h"
+#include <stddef.h>
 
 // Fusion (unite) screen object: only the members its teardown touches.
 struct UniteScreen {
@@ -25,20 +26,18 @@ struct UniteScreen {
     s32 camera;                 // 0x95d0
     u8 unk95d4[0x0c];
     u8 stopRequested;           // 0x95e0
-    s32 stack;                  // 0x95e4
-    u32 thread;                 // 0x95e8
-    u8 threadDone;              // 0x95ec
-    s32 threadBuffer;           // 0x95f0
+    AddressSpaceRegion *stack;  // 0x95e4
+    NnOsThread thread;          // 0x95e8
+    void *threadBuffer;         // 0x95f0
 };
+typedef char UniteScreenThreadOffsets[offsetof(UniteScreen, stack) == 0x95e4 && offsetof(UniteScreen, thread) == 0x95e8 &&
+                                      offsetof(UniteScreen, threadBuffer) == 0x95f0 ? 1 : -1];
 
 extern "C" {
 
 extern UniteScreen* g_unite;
 
 s32 FUN_002c40f8(s32 *signalled, const s32 *handles, s32 count, s32 waitAll, s64 timeout);
-void nn_os_Thread_FinalizeImpl(u32* thread);
-void FUN_002c3f5c(s32 object);
-void asdMemFreeNonNull(s32 object);
 void gameCounterAddSaturating(s32 counter, s32 amount);
 s32 lmapSceneGetScript(void);
 s32 lmapMainIsRunning(void);
@@ -57,7 +56,7 @@ void jobStop(s32 job, s32 arg);
 void fileSlotFree(s32 slot);
 void mapMainCallIfFlag(s32 flag);
 
-
+/* Waits until the worker thread ends; a failed wait is reported. */
 static __inline void uniteWaitForThread(u32 thread)
 {
     s32 handle = thread;
@@ -69,28 +68,21 @@ static __inline void uniteWaitForThread(u32 thread)
 }
 
 // Destroys the fusion screen: stops its worker thread, releases its models, scripts and buffers.
-void FUN_00223dcc(void)
+void uniteScreenDestroy(void)
 {
     UniteScreen* screen = g_unite;
     if (screen == NULL) return;
 
     screen->stopRequested = 1;
-    uniteWaitForThread(screen->thread);
-    screen->threadDone = 1;
-    nn_os_Thread_FinalizeImpl(&screen->thread);
-    if (screen->thread != 0) {
-        nn::svc::CloseHandle(screen->thread);
-        screen->thread = 0;
-    }
+    uniteWaitForThread(screen->thread.handle);
+    screen->thread.joined = 1;
+    screen->thread.finalize();
+    screen->thread.NnOsHandle::~NnOsHandle();
     FUN_002c3f5c(screen->stack);
-    s32 stack = screen->stack;
-    if (stack != 0) {
-        FUN_002c3f5c(stack);
-        asdMemFreeNonNull(stack);
-    }
-    screen->stack = 0;
-    asdMemFree((void *)(screen->threadBuffer));
-    screen->threadBuffer = 0;
+    delete static_cast<StackRegion *>(screen->stack);
+    screen->stack = NULL;
+    asdMemFree(screen->threadBuffer);
+    screen->threadBuffer = NULL;
 
     gameCounterAddSaturating(0x25, FUN_002907a8() - screen->startTime);
     if (lmapSceneGetScript() != 0 || lmapMainIsRunning() != 0) {
@@ -115,7 +107,7 @@ void FUN_00223dcc(void)
     asdMemFree((void *)((s32)screen->scratchB));
     asdMemFree((void *)((s32)screen->scratchA));
     if (screen->buffer != NULL) {
-        asdMemFreeNonNull((s32)bufferArrayFree(screen->buffer));
+        asdMemFreeNonNull(bufferArrayFree(screen->buffer));
     }
     screen->buffer = NULL;
     jobStop(screen->job, 0);

@@ -1,5 +1,3 @@
-/* NON_MATCHING: with entry->flags read directly only the third mask test (excluded) differs: retail
- * ands flags & mask low words first (and r0, r0, r3 / and r1, r1, ip), the build the mask first. */
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -11,6 +9,7 @@ void scrSetResult(s32 value);
 s32 btlResolveEntryChoice(s32 choice);
 BtlCombatantEntryA* FUN_003eaf20(BtlMainStateA* battle);
 
+// Test for a selected combatant with demon id argument 0 that has status bit argument 1 set.
 s32 FUN_0037fc54(void)
 {
     u32 demonId = scrGetArg(0);
@@ -20,10 +19,9 @@ s32 FUN_0037fc54(void)
     s32 count;
     FUN_00301a08(choice, &first, &count);
     for (s32 index = first; index < first + count; ++index) {
-        BtlMainStateA *state = btlGetMainState();
-        BtlCombatantEntryA* entry = &state->entries[index];
+        BtlCombatantEntryA* entry = &btlGetMainState()->entries[index];
         if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
-            (g_btlCandidateMasks.required & entry->flags) &&
+            (entry->flags & g_btlCandidateMasks.required) &&
             !(entry->flags & g_btlCandidateMasks.excluded) &&
             entry->id == demonId && (entry->statusFlags & (1u << statusBit))) {
             scrSetResult(1);

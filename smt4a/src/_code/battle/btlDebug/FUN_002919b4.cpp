@@ -1,4 +1,4 @@
-/* NON_MATCHING: wide-mask load grouping, callback stack stores and the alternate-menu cold branch placement differ. */
+/* NON_MATCHING: branch layout now matches (the default-menu call is the cold path); retail loads the battle's marker mask with ldm and the debug mask as two ldr before the OR, and orders the first taskCreateDraw stack stores differently. */
 #include "battle/btlMain.h"
 #include "battle/btlUI.h"
 #include "shard/W6_W6Match8_BattleDebug.h"
@@ -48,7 +48,9 @@ void FUN_002919b4(BtlMainStateA *battle, s32 menuMode)
     work->menuMode = menuMode;
     work->state = 0;
     DAT_005715f8.prefix.selection = 0;
-    if (menuMode) {
+    if (menuMode == 0) {
+        FUN_004d48d0(work, battle);
+    } else {
         if (jobIsValid(work->listBox)) {
             FUN_003592dc(work->listBox);
             jobStop(work->listBox, 0);
@@ -57,8 +59,6 @@ void FUN_002919b4(BtlMainStateA *battle, s32 menuMode)
         asdListBoxAddItems(work->listBox, DAT_00571980, 14);
         asdListBoxSetByteValue(work->listBox, 1);
         jobSetText(work->listBox, DAT_00528078);
-    } else {
-        FUN_004d48d0(work, battle);
     }
     if (g_btlUiBlock)
         FUN_004aa780(g_btlUiBlock, 1);

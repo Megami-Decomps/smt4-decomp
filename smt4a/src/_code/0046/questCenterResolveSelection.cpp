@@ -15,7 +15,7 @@ s32 FUN_002f153c();
 u8 uiQuestGetPanelMode();
 s32 uiQuestGetActive();
 u8 uiQuestGetState();
-void FUN_0034aae4();
+void uiQuestClose();
 void clearFlags310To31F();
 u16 FUN_00372140();
 u16 uiQuestRunEnabledAction();
@@ -70,7 +70,7 @@ void questCenterResolveSelection(PickObjectResources *owner)
             asdDebugHookVoid();
         }
     }
-    FUN_0034aae4();
+    uiQuestClose();
     if (work->panelMode) {
         g_gameState.selectionPending = 1;
         work->state = 17;
@@ -93,7 +93,7 @@ void questCenterResolveSelection(PickObjectResources *owner)
         messageMainSetTargetFlags(1);
         work->panelOpen = 0;
     }
-    FUN_0034aae4();
+    uiQuestClose();
     work->state = 5;
     work->phase = 0;
 }

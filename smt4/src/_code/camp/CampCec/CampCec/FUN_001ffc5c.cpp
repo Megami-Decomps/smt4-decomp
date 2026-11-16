@@ -49,7 +49,7 @@ extern u8 campCecUpdateState;
 extern u8 questQueryFalse;
 
 void campCecDrawDimmingOverlay(void);
-void FUN_002113c0(void);
+void campCecStopCommThread(void);
 void FUN_002ec588(void);
 void FUN_002ccb7c(void);
 void FUN_001ebedc(void);
@@ -102,7 +102,7 @@ void FUN_001ffc5c(void)
     work->selectB = -1;
     work->selectC = -1;
     work->selectD = 0;
-    work->handler[0] = FUN_002113c0;
+    work->handler[0] = campCecStopCommThread;
     work->handler[1] = FUN_002ec588;
     work->handler[2] = FUN_002ccb7c;
     work->handler[3] = FUN_001ebedc;

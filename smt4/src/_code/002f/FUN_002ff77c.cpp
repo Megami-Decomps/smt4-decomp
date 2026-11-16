@@ -1,4 +1,3 @@
-/* NON_MATCHING: loop entry: retail loads the span's count into r0 and first into r6 (ldr, ldr, add); here first is loaded, copied to r6, then added to count. */
 #include "common.h"
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
@@ -17,13 +16,6 @@ typedef struct DevilRecord {
     /* 0x3C */ u16 items[8];
 } DevilRecord;
 
-typedef struct EntrySpan {
-    s32 count;
-    s32 unk4;
-    s32 first;
-    s32 unkC[3];
-} EntrySpan;
-
 #define ITEM_KIND_3 3
 
 extern BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
@@ -34,55 +26,57 @@ extern u32 btlEntryHasCategoryThreeSkill(const BtlEntry *entry);
 extern u32 scrGetArg(u32 index);
 extern int scrSetResult(s32 value);
 
+/* Whether one of the entry's equipped items or its demon's items is of kind 3. */
+static __inline u32 entryHasKindThreeItem(const BtlEntry *entry)
+{
+    if (entry->equipA != NULL) {
+        for (s32 j = 0; j < 8; j++) {
+            const ItemRecord *item = dataTable40FindById(entry->equipA->items[j]);
+            if (item != NULL && item->kind == ITEM_KIND_3) {
+                return 1;
+            }
+        }
+    }
+    if (entry->equipB != NULL) {
+        for (s32 j = 0; j < 8; j++) {
+            const ItemRecord *item = dataTable40FindById(entry->equipB->items[j]);
+            if (item != NULL && item->kind == ITEM_KIND_3) {
+                return 1;
+            }
+        }
+    }
+    if (entry->devil != NULL) {
+        DevilRecord *devil = devilGetRecord(entry->id);
+
+        for (s32 j = 0; j < 8; j++) {
+            const ItemRecord *item = dataTable40FindById(devil->items[j]);
+            if (item != NULL && item->kind == ITEM_KIND_3) {
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
 /* Script command: 1 if the entry with the given id (in the range, or the active one) carries an item of kind 3. */
 u32 FUN_002ff77c(void)
 {
     u32 id = scrGetArg(0);
-    EntrySpan span;
-    s32 i;
-    s32 j;
-    BtlEntry *entry;
-    ItemRecord *item;
+    s32 first;
+    s32 count;
 
-    FUN_002499fc(btlScriptResolveGroupArg(scrGetArg(1)), &span.first, &span.count);
-    for (i = span.first; i < span.first + span.count; i++) {
-        entry = &btlGetMainState()->entries[i];
+    FUN_002499fc(btlScriptResolveGroupArg(scrGetArg(1)), &first, &count);
+    for (s32 i = first; i < first + count; i++) {
+        BtlEntry *entry = &btlGetMainState()->entries[i];
 
         if ((entry->flags & BTL_ENTRY_FLAG_PRESENT) == 0 && (entry->flags & BTL_ENTRY_FLAG_ACTIVE) != 0 &&
-            (entry->flags & BTL_ENTRY_FLAG_BLOCKED) == 0 && entry->id == id) {
-            if (entry->equipA != NULL) {
-                for (j = 0; j < 8; j++) {
-                    item = dataTable40FindById(entry->equipA->items[j]);
-                    if (item != NULL && item->kind == ITEM_KIND_3) {
-                        scrSetResult(1);
-                        return 1;
-                    }
-                }
-            }
-            if (entry->equipB != NULL) {
-                for (j = 0; j < 8; j++) {
-                    item = dataTable40FindById(entry->equipB->items[j]);
-                    if (item != NULL && item->kind == ITEM_KIND_3) {
-                        scrSetResult(1);
-                        return 1;
-                    }
-                }
-            }
-            if (entry->devil != NULL) {
-                DevilRecord *devil = devilGetRecord(entry->id);
-
-                for (j = 0; j < 8; j++) {
-                    item = dataTable40FindById(devil->items[j]);
-                    if (item != NULL && item->kind == ITEM_KIND_3) {
-                        scrSetResult(1);
-                        return 1;
-                    }
-                }
-            }
+            (entry->flags & BTL_ENTRY_FLAG_BLOCKED) == 0 && entry->id == id && entryHasKindThreeItem(entry)) {
+            scrSetResult(1);
+            return 1;
         }
     }
     if (btlGetMainState()->hasActiveEntry != 0) {
-        entry = btlMainFindActiveEntry(btlGetMainState());
+        BtlEntry *entry = btlMainFindActiveEntry(btlGetMainState());
         if (entry != NULL && entry->id == id && btlEntryHasCategoryThreeSkill(entry) != 0) {
             scrSetResult(1);
             return 1;

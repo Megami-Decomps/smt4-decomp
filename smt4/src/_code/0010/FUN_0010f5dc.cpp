@@ -21,7 +21,7 @@ u32 libc_strlen(const char *text);
 s32 asdModelForwardChecked(u32 *handle, const char *name, u32 nameLength, u32 flags);
 void FUN_0011bb34(u32 handle);
 void FUN_0011bb90(FsMount **mount);
-u32 FUN_002bbaf8(void);
+u32 fsGetUserMountHandle(void);
 s32 nn_fs_ipc_FileSystem_SetPriority(u32 *session, s32 priority);
 
 // Mounts the user file system once: initializes the service, opens "fs:USER" and applies the
@@ -40,7 +40,7 @@ void FUN_0010f5dc(void)
     FUN_0011bb34(DAT_0044e640.handle);
     DAT_0044e640.self = &DAT_0044e640;
     FUN_0011bb90(&DAT_0044e640.self);
-    u32 session = FUN_002bbaf8();
+    u32 session = fsGetUserMountHandle();
     result = nn_fs_ipc_FileSystem_SetPriority(&session, 0);
     checkPlatformResult(result, __current_pc());
 }

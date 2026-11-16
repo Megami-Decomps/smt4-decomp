@@ -10,7 +10,7 @@ s32 scrGetCommandFrame(void);
 void FUN_002f0c18(s32 value);
 s32 uiQuestIsIdle(void);
 void FUN_002f1554(u32 id);
-void FUN_0034aae4(void);
+void uiQuestClose(void);
 void flagEntrySetValue(u32 first, u32 second);
 
 u8 FUN_003b7044(void)
@@ -30,7 +30,7 @@ u8 FUN_003b7044(void)
     }
     result = uiQuestIsIdle();
     if (result != 0) {
-        FUN_0034aae4();
+        uiQuestClose();
         sysPlaySe(0x92);
         return 1;
     }
