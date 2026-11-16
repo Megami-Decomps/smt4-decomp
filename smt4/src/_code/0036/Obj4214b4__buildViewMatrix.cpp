@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ad314(...);
+int mathSinCos(...);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(...);
 int nn_math_ARMv6_MTX34MultAsm(...);
@@ -56,7 +56,7 @@ typedef struct {
     unsigned int sp14C; /* 0x14c: local_14c */
 } param_4_stack;
 
-extern unsigned int DAT_00407ed0; /* 0x407ed0 */
+extern unsigned int g_sinCosTable; /* 0x407ed0 */
 extern unsigned int DAT_00407ed4; /* 0x407ed4 */
 extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
@@ -82,7 +82,7 @@ static float romwright_sqrt_4(float value)
     return (float)sqrt((double)value);
 }
 #endif
-/* Supplied declaration required: FUN_002ad314. */
+/* Supplied declaration required: mathSinCos. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34ToMTX33Asm. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2A87B4. */
@@ -196,14 +196,14 @@ void Obj4214b4::buildViewMatrix(float *param_2, unsigned int param_3, const floa
     temp_v5 = temp_v6 & 0xff;
     temp_v9 = (float)VectorUnsignedToFloat(temp_v6 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
     temp_v11 = (float)VectorUnsignedToFloat(temp_v7 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
-    temp_v10 = (float)(&DAT_00407ed0)[temp_v2 * 4] + (temp_v3 - temp_v8) * (float)(&DAT_00407ed8)[temp_v2 * 4]
+    temp_v10 = (float)(&g_sinCosTable)[temp_v2 * 4] + (temp_v3 - temp_v8) * (float)(&DAT_00407ed8)[temp_v2 * 4]
     ;
     temp_v12 = (float)(&DAT_00407ed4)[temp_v2 * 4] + (temp_v3 - temp_v8) * (float)(&DAT_00407edc)[temp_v2 * 4]
     ;
-    temp_v3 = (float)(&DAT_00407ed0)[temp_v5 * 4] + (0.0f - temp_v9) * (float)(&DAT_00407ed8)[temp_v5 * 4];
+    temp_v3 = (float)(&g_sinCosTable)[temp_v5 * 4] + (0.0f - temp_v9) * (float)(&DAT_00407ed8)[temp_v5 * 4];
     temp_v31 = (float)(&DAT_00407ed4)[temp_v5 * 4] +
                (0.0f - temp_v9) * (float)(&DAT_00407edc)[temp_v5 * 4];
-    temp_v8 = (float)(&DAT_00407ed0)[temp_v1 * 4] + (0.0f - temp_v11) * (float)(&DAT_00407ed8)[temp_v1 * 4];
+    temp_v8 = (float)(&g_sinCosTable)[temp_v1 * 4] + (0.0f - temp_v11) * (float)(&DAT_00407ed8)[temp_v1 * 4];
     temp_v11 = (float)(&DAT_00407ed4)[temp_v1 * 4] + (0.0f - temp_v11) * (float)(&DAT_00407edc)[temp_v1 * 4];
     if (!romwright_subpiece_4_1_0(temp_v0 >> 0x1d,0)) {
       temp_v10 = -temp_v10;
@@ -233,14 +233,14 @@ void Obj4214b4::buildViewMatrix(float *param_2, unsigned int param_3, const floa
     temp_v5 = temp_v6 & 0xff;
     temp_v10 = (float)VectorUnsignedToFloat(temp_v6 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
     temp_v11 = (float)VectorUnsignedToFloat(temp_v7 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
-    temp_v9 = (float)(&DAT_00407ed0)[temp_v2 * 4] + (0.0f - temp_v8) * (float)(&DAT_00407ed8)[temp_v2 * 4];
+    temp_v9 = (float)(&g_sinCosTable)[temp_v2 * 4] + (0.0f - temp_v8) * (float)(&DAT_00407ed8)[temp_v2 * 4];
     temp_v12 = (float)(&DAT_00407ed4)[temp_v2 * 4] + (0.0f - temp_v8) * (float)(&DAT_00407edc)[temp_v2 * 4];
-    temp_v8 = (float)(&DAT_00407ed0)[temp_v5 * 4] + (temp_v3 - temp_v10) * (float)(&DAT_00407ed8)[temp_v5 * 4]
+    temp_v8 = (float)(&g_sinCosTable)[temp_v5 * 4] + (temp_v3 - temp_v10) * (float)(&DAT_00407ed8)[temp_v5 * 4]
     ;
     temp_v45 = (float)(&DAT_00407ed4)[temp_v5 * 4] +
                (temp_v3 - temp_v10) * (float)(&DAT_00407edc)[temp_v5 * 4];
     temp_v10 = (float)(&DAT_00407ed4)[temp_v1 * 4] + (0.0f - temp_v11) * (float)(&DAT_00407edc)[temp_v1 * 4];
-    temp_v3 = (float)(&DAT_00407ed0)[temp_v1 * 4] + (0.0f - temp_v11) * (float)(&DAT_00407ed8)[temp_v1 * 4];
+    temp_v3 = (float)(&g_sinCosTable)[temp_v1 * 4] + (0.0f - temp_v11) * (float)(&DAT_00407ed8)[temp_v1 * 4];
     if (!romwright_subpiece_4_1_0(temp_v0 >> 0x1d,0)) {
       temp_v8 = -temp_v8;
     }
@@ -269,12 +269,12 @@ void Obj4214b4::buildViewMatrix(float *param_2, unsigned int param_3, const floa
     temp_v8 = (float)VectorUnsignedToFloat(temp_v1 & 0xffff,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v1 = temp_v2 & 0xff;
     temp_v10 = (float)VectorUnsignedToFloat(temp_v2 & 0xffff,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v9 = (float)(&DAT_00407ed0)[temp_v0 * 4] + (0.0f - temp_v3) * (float)(&DAT_00407ed8)[temp_v0 * 4];
-    temp_v11 = (float)(&DAT_00407ed0)[temp_v5 * 4] + (0.0f - temp_v8) * (float)(&DAT_00407ed8)[temp_v5 * 4];
+    temp_v9 = (float)(&g_sinCosTable)[temp_v0 * 4] + (0.0f - temp_v3) * (float)(&DAT_00407ed8)[temp_v0 * 4];
+    temp_v11 = (float)(&g_sinCosTable)[temp_v5 * 4] + (0.0f - temp_v8) * (float)(&DAT_00407ed8)[temp_v5 * 4];
     temp_v12 = (float)(&DAT_00407ed4)[temp_v0 * 4] + (0.0f - temp_v3) * (float)(&DAT_00407edc)[temp_v0 * 4];
     temp_v56 = (float)(&DAT_00407ed4)[temp_v5 * 4] + (0.0f - temp_v8) * (float)(&DAT_00407edc)[temp_v5 * 4]
     ;
-    temp_v3 = (float)(&DAT_00407ed0)[temp_v1 * 4] +
+    temp_v3 = (float)(&g_sinCosTable)[temp_v1 * 4] +
             (temp_v17 - temp_v10) * (float)(&DAT_00407ed8)[temp_v1 * 4];
     temp_v17 = (float)(&DAT_00407ed4)[temp_v1 * 4] +
              (temp_v17 - temp_v10) * (float)(&DAT_00407edc)[temp_v1 * 4];
@@ -333,9 +333,9 @@ void Obj4214b4::buildViewMatrix(float *param_2, unsigned int param_3, const floa
     param_2[8] = temp_v3;
     return;
   }
-  FUN_002ad314(&temp_v18,afStack_138);
-  FUN_002ad314(&temp_v19,&temp_v20);
-  FUN_002ad314(&fStack_140,&temp_v21);
+  mathSinCos(&temp_v18,afStack_138);
+  mathSinCos(&temp_v19,&temp_v20);
+  mathSinCos(&fStack_140,&temp_v21);
   temp_v4 = temp_v18 * temp_v19 * fStack_140 + temp_v20 * temp_v21;
   temp_v17 = temp_v18 * temp_v20 * fStack_140 - temp_v19 * temp_v21;
   temp_v3 = temp_v18 * temp_v19 * temp_v21 - temp_v20 * fStack_140;

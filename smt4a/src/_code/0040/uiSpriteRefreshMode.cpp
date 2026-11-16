@@ -15,7 +15,7 @@ typedef struct Sprite {
     /* 0x1198 */ u8 output[4];
 } Sprite;
 
-int FUN_00187a84(Sprite *sprite, void *source, int arg2, void *target);
+int cameraComposeMatrices(Sprite *sprite, void *source, int arg2, void *target);
 int gpuWriteVertexUniformMatrix(u32 context, void *dest);
 
 /* Switches the sprite's mode by state (0/1 -> 3 with `normal`, 2 -> 4 with `alternate`, else 0); on a change re-initialises it and stores the new mode. */
@@ -34,7 +34,7 @@ void uiSpriteRefreshMode(Sprite *sprite)
         mode = 4;
     }
     if (sprite->mode != mode) {
-        FUN_00187a84(sprite, source, 0, sprite->target);
+        cameraComposeMatrices(sprite, source, 0, sprite->target);
         gpuWriteVertexUniformMatrix(sprite->context, sprite->output);
         sprite->mode = mode;
     }

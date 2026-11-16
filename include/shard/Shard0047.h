@@ -39,7 +39,7 @@ typedef char ScriptHolderPhaseOffsetCheck[
 extern "C" {
 #endif
 
-u16 FUN_004186e0(void);
+u16 rosterGetLeaderId(void);
 
 #ifdef __cplusplus
 }

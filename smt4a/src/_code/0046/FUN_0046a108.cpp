@@ -28,7 +28,7 @@ extern void *g_renderCtx;
 extern const char DAT_00533528[];
 extern const char DAT_00533560[];
 void renderCtxSelectTexture(void *context, u32 state);
-void FUN_0014e314(u32 firstColor, u32 secondColor, u32 thirdColor, u32 fourthColor, f32 x, f32 y, f32 width, f32 height, f32 depth);
+void gxSubmitDrawZeroExtraParams(u32 firstColor, u32 secondColor, u32 thirdColor, u32 fourthColor, f32 x, f32 y, f32 width, f32 height, f32 depth);
 const char *FUN_00156850(u16 id, u32 variant);
 s32 FUN_0031d174(const void *queue);
 
@@ -38,7 +38,7 @@ void FUN_0046a108(MessageDebugOverlayView *overlay)
     if (!(overlay->flags & 0x20))
         return;
     renderCtxSelectTexture(g_renderCtx, 0);
-    FUN_0014e314(128, 128, 128, 128, 0.0f, 0.0f, 320.0f, 240.0f, 0.0f);
+    gxSubmitDrawZeroExtraParams(128, 128, 128, 128, 0.0f, 0.0f, 320.0f, 240.0f, 0.0f);
     u32 color = 0xFFFFFFFF;
     s32 count = overlay->count;
     if (count > overlay->capacity)

@@ -26,7 +26,7 @@ void memClear(void *dest, u32 size);
 void asdMemFree(void *block);
 s32 textFormatBuffer(char *output, const char *format, ...);
 char *libc_strcpy(char *dest, const char *src);
-char *FUN_002522e0(const char *string, s32 c);
+char *libc_strrchr(const char *string, s32 c);
 s32 keyedRecordFindByName(const char *name);
 
 /* Resets both flash effect slots and starts loading each effect file that no record provides yet. */
@@ -53,7 +53,7 @@ u32 FUN_003dba3c(FlashEffects *effects)
         textFormatBuffer(formatted, DAT_004008c4, effectName);
         libc_strcpy(path, formattedPath);
         char *fullPath = path;
-        libc_strcpy(slot->name, FUN_002522e0(fullPath, '/') + 1);
+        libc_strcpy(slot->name, libc_strrchr(fullPath, '/') + 1);
         if (keyedRecordFindByName(slot->name) == 0xff) {
             asdLoadFileAsyncSimple(fullPath, reinterpret_cast<u32 *>(&slot->data), 0);
             slot->flags |= 1;

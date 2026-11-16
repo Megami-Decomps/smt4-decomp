@@ -2,7 +2,7 @@
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 extern "C" {
 FontRegisteredRecord *recordTableGet(u32 index);
-void FUN_002aea44(NwFontGlyph *glyph);
+void nwFontGlyphInit(NwFontGlyph *glyph);
 
 // Sum character advances up to the first newline or string terminator.
 s32 fontMeasureLineAdvance(const void *text, s32 fontIndex)
@@ -13,7 +13,7 @@ s32 fontMeasureLineAdvance(const void *text, s32 fontIndex)
     FontStringReader reader;
     NwFontGlyph glyph;
     callbackBindingInitFromKind(&reader, font, 0x30);
-    FUN_002aea44(&glyph);
+    nwFontGlyphInit(&glyph);
     reader.state = text;
     s32 character = reader.next();
     while (character != 0 && character != '\n') {

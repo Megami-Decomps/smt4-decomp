@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00120580(int, int);
 int bufferAssignByteAlias(...);
 int strHolderAssignU32Alias(...);
-int FUN_002fbb70(...);
+int streamWriterSetLengthIfFits(...);
 int FUN_002fbb92(int, int);
 int strHolderAssignU64Alias(int, int);
 int strHolderAssignU16(int, int);
@@ -27,7 +27,7 @@ typedef struct {
 extern unsigned int byteRefMin(unsigned char *, unsigned char *);
 /* Supplied declaration required: bufferAssignByteAlias. */
 /* Supplied declaration required: strHolderAssignU32Alias. */
-/* Supplied declaration required: FUN_002fbb70. */
+/* Supplied declaration required: streamWriterSetLengthIfFits. */
 /* Supplied declaration required: FUN_002fbb92. */
 /* Supplied declaration required: strHolderAssignU64Alias. */
 /* Supplied declaration required: strHolderAssignU16. */
@@ -75,10 +75,10 @@ void FUN_0011e1b4(int param_1,int param_2)
   FUN_00120580(param_1,param_2 + 0x88);
   if (temp_v0 == '\0') {
     temp_v2 = *(int *)(*(int *)(param_1 + 8) + 0x10);
-    FUN_002fbb70(param_1,temp_v3);
+    streamWriterSetLengthIfFits(param_1,temp_v3);
     temp_v5 = (temp_v2 - temp_v3) - 4;
     strHolderAssignU32Alias(param_1,&temp_v5);
-    FUN_002fbb70(param_1,temp_v2);
+    streamWriterSetLengthIfFits(param_1,temp_v2);
   }
   return;
 }

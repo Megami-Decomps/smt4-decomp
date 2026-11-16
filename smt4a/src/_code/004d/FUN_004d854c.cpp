@@ -3,7 +3,7 @@
 
 extern "C" {
 extern void *g_handleRegistry;
-void FUN_0040aad4(BattleViewOwner *owner, BattleViewObject *parent);
+void moriModelContentLoadBody(BattleViewOwner *owner, BattleViewObject *parent);
 void FUN_003fd924(BattleViewObject *object, u32 index, u32 kind, f32 x, f32 y);
 void moriModelUnitStartMaterialAnimation(BattleViewObject *object, u32 index, u32 kind, f32 value);
 void controllerSetPosition(BattleViewObject *object, f32 x, f32 y, f32 z);
@@ -13,7 +13,7 @@ void handleRegistryRegisterObject(void *registry, BattleViewObject *object);
 
 void FUN_004d854c(BattleViewOwner **slot)
 {
-    FUN_0040aad4(*slot, 0);
+    moriModelContentLoadBody(*slot, 0);
     BattleViewObject *registered = (*slot)->object;
     if (*slot != 0) {
         FUN_003fd924((*slot)->object, 0, 1, 1.0f, 1.0f);

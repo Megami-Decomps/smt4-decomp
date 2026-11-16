@@ -41,7 +41,7 @@ int FUN_003d2a00(...);
 int _ZN9Obj557af8C1EPK21AsdAnimCameraResource(void);
 int FUN_003fb5d4(unsigned int, int, int);
 int resourceOwnerLoadFileSync(void);
-int FUN_0040aad4(...);
+int moriModelContentLoadBody(...);
 int FUN_0040ab7c(...);
 int FUN_0040bd04(int, int, int, int);
 int FUN_0040c190(int);
@@ -84,7 +84,7 @@ extern unsigned int asdVramBGetFreeBytes(void);
 /* Supplied declaration required: FUN_003fb5d4. */
 extern unsigned int FUN_00409fe8(unsigned short, unsigned int, unsigned int);
 /* Supplied declaration required: resourceOwnerLoadFileSync. */
-/* Supplied declaration required: FUN_0040aad4. */
+/* Supplied declaration required: moriModelContentLoadBody. */
 /* Supplied declaration required: FUN_0040ab7c. */
 extern unsigned int modelListInit(void);
 /* Supplied declaration required: FUN_0040bd04. */
@@ -145,7 +145,7 @@ void FUN_002a74ac(void)
       *(unsigned int *)(temp_v0 + 0x90) = temp_v2;
       resourceOwnerLoadFileSync();
       FUN_0040ab7c(*(unsigned int *)(temp_v0 + 0x90),0);
-      FUN_0040aad4(*(unsigned int *)(temp_v0 + 0x90),0);
+      moriModelContentLoadBody(*(unsigned int *)(temp_v0 + 0x90),0);
       asdLoadFileWithSize("camp/jakyou_union2_ac.bch",&temp_v5,1);
       temp_v3 = 0x48;
       asdMemoryAllocTraced(0x48,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x6ef);
@@ -160,7 +160,7 @@ void FUN_002a74ac(void)
       *(unsigned int *)(temp_v0 + 0x90) = temp_v2;
       resourceOwnerLoadFileSync();
       FUN_0040ab7c(*(unsigned int *)(temp_v0 + 0x90),0);
-      FUN_0040aad4(*(unsigned int *)(temp_v0 + 0x90),0);
+      moriModelContentLoadBody(*(unsigned int *)(temp_v0 + 0x90),0);
       asdLoadFileWithSize("camp/jakyou_union2.bch",&temp_v5,1);
       temp_v3 = 0x48;
       asdMemoryAllocTraced(0x48,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x6f7);
@@ -182,7 +182,7 @@ void FUN_002a74ac(void)
     *(unsigned int *)(temp_v0 + 0x90) = temp_v2;
     resourceOwnerLoadFileSync();
     FUN_0040ab7c(*(unsigned int *)(temp_v0 + 0x90),0);
-    FUN_0040aad4(*(unsigned int *)(temp_v0 + 0x90),0);
+    moriModelContentLoadBody(*(unsigned int *)(temp_v0 + 0x90),0);
     asdLoadFileWithSize("camp/jakyou_union3.bch",&temp_v5,1);
     temp_v3 = 0x48;
     asdMemoryAllocTraced(0x48,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x711);
@@ -203,7 +203,7 @@ void FUN_002a74ac(void)
     *(unsigned int *)(temp_v0 + 0x90) = temp_v2;
     resourceOwnerLoadFileSync();
     FUN_0040ab7c(*(unsigned int *)(temp_v0 + 0x90),0);
-    FUN_0040aad4(*(unsigned int *)(temp_v0 + 0x90),0);
+    moriModelContentLoadBody(*(unsigned int *)(temp_v0 + 0x90),0);
     asdLoadFileWithSize("camp/jakyou_union4.bch",&temp_v5,1);
     temp_v3 = 0x48;
     asdMemoryAllocTraced(0x48,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x728);

@@ -61,12 +61,12 @@ extern s32 g_mapSelection;
 
 s32 menu4CReleaseSlots(void *sprites);
 void asdSequenceRequest(u32 kind, void *payload, u32 size);
-void FUN_003d54f8(s32 a, s32 b);
+void titleSetSlotValueState2(s32 a, s32 b);
 void gameDataCopySaveToWork(void);
 char *libc_strcpy(char *destination, const char *source);
 void bgmReleaseStopped(void);
 void soundChannelStopAll(s32 channel);
-void *FUN_004186e0(void);
+void *rosterGetLeaderId(void);
 s32 FUN_001bd118(void);
 SceneRecord *menu4CGetCurrentEntry(void *sprites);
 void FUN_004b7a08(SceneWork *work);
@@ -94,8 +94,8 @@ void FUN_004b82a0(SceneWork *work)
     } else if ((flags & 0x8000000) != 0) {
         *(u16 *)&payload.id = work->record->id;
         asdSequenceRequest(0x12, &payload, 2);
-        FUN_003d54f8(0, 10);
-        FUN_003d54f8(1, 10);
+        titleSetSlotValueState2(0, 10);
+        titleSetSlotValueState2(1, 10);
     } else if ((flags & 0x4000000) != 0) {
         payload.id = work->record->id;
         payload.value = 0;
@@ -127,7 +127,7 @@ void FUN_004b82a0(SceneWork *work)
         payload.id = g_mapSelection - 200;
         asdSequenceRequest(14, &payload, 4);
     } else if (work->returnToMap != 0) {
-        void *entry = FUN_004186e0();
+        void *entry = rosterGetLeaderId();
 
         if (entry != NULL && FUN_001bd118() == 6) {
             work->record = menu4CGetCurrentEntry(work->sprites);

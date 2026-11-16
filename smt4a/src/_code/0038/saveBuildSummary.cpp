@@ -55,7 +55,7 @@ typedef struct SummarySource {
     /* 0x40 */ u8 data40[1];
 } SummarySource;
 
-void FUN_002e59f8(void *first, void *second, s32 size);   /* copies `size` bytes between the two buffers */
+void memcpySrcFirst(void *first, void *second, s32 size);   /* copies `size` bytes between the two buffers */
 SummarySource *devilGetRecord(s32 id);
 SaveSlot *gameGetSaveSlotData(s32 index);
 u8 gameDataBlocksGetFlagByte(void);
@@ -74,8 +74,8 @@ void saveBuildSummary(SaveSummary *summary)
     SummarySource *source;
     s32 i;
 
-    FUN_002e59f8(table->nameA, summary->nameA, 0xe);
-    FUN_002e59f8(table->nameB, summary->nameB, 0x12);
+    memcpySrcFirst(table->nameA, summary->nameA, 0xe);
+    memcpySrcFirst(table->nameB, summary->nameB, 0x12);
     summary->value36 = table->value66;
     summary->word28 = gameDataBlocksGetSaveData()->word21d90;
     summary->unk24 = 0;
@@ -110,7 +110,7 @@ void saveBuildSummary(SaveSummary *summary)
     summary->id60 = 0x218;
     source = devilGetRecord(0x218);
     summary->value62 = source->value06;
-    FUN_002e59f8(source->data40, summary->copy50, 0x10);
+    memcpySrcFirst(source->data40, summary->copy50, 0x10);
 }
 
 } /* extern "C" */

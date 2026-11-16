@@ -13,7 +13,7 @@ typedef struct StatusDown {
 
 extern StatusDown *g_statusDown;
 
-extern s32 FUN_002a4894(StatusCursor *cursor);
+extern s32 listCursorGetRowIfUnblocked(StatusCursor *cursor);
 
 /* Returns the status screen cursor's position, or -1 when the screen does not exist. */
 s32 statusDownGetCursorPosition(void)
@@ -21,7 +21,7 @@ s32 statusDownGetCursorPosition(void)
     if (g_statusDown == NULL) {
         return -1;
     }
-    return FUN_002a4894(&g_statusDown->cursor);
+    return listCursorGetRowIfUnblocked(&g_statusDown->cursor);
 }
 
 } /* extern "C" */

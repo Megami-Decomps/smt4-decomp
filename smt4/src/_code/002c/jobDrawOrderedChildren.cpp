@@ -14,7 +14,7 @@ extern "C" {
 extern RenderCtx *g_titleScene;
 s32 jobIsValid(u32);
 f32 jobGetScalarFrame(u32);
-s32 FUN_002865c0(u32, f32);
+s32 gxPackFadeKindAlphaWord(u32, f32);
 void FUN_001dbc5c(u32, f32, f32);
 void renderCtxResetColorScale(RenderCtx *);
 
@@ -50,7 +50,7 @@ u32 jobDrawOrderedChildren(u32 job)
         }
     } while (changed);
     RenderCtx *render = g_titleScene;
-    s32 renderState = FUN_002865c0(6, 0.0f);
+    s32 renderState = gxPackFadeKindAlphaWord(6, 0.0f);
     renderStackPush(&render->additional.stackC, renderState);
     if (work->drawAll) {
         for (s32 i = 0; i < 10; ++i) {

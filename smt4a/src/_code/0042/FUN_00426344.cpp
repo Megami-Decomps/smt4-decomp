@@ -9,7 +9,7 @@ extern "C" s32 FUN_00426478(u32 id, u32 value);
 extern "C" s32 FUN_004266e4(u32 destination, u32 source, u8 first, u8 second);
 extern "C" s32 FUN_0015997c();
 extern "C" s32 FUN_00432040(u32 mode);
-extern "C" void FUN_00432104();
+extern "C" void ipcServiceSessionRelease();
 
 static __inline s32 sessionEnsureInitialized()
 {
@@ -20,7 +20,7 @@ static __inline s32 sessionEnsureInitialized()
             return result;
         result = FUN_00432040(1);
         if (nnResultIsFailure(result))
-            FUN_00432104();
+            ipcServiceSessionRelease();
         else
             DAT_005891a4 = 1;
     }

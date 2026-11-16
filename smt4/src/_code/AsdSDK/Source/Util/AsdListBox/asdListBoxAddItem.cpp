@@ -6,7 +6,7 @@
 #include "AsdSDK/Source/Util/AsdListHelpers_VariantA.h"
 
 extern "C" {
-extern const char DAT_00409d40[]; /* AsdListBox.cpp: __FILE__ */
+extern const char g_asdListBoxSourceFileName[]; /* AsdListBox.cpp: __FILE__ */
 
 void *asdListAdd(void *list, void *item, void *func);
 void asdListBoxMarkDirty(AsdListBox *listBox);
@@ -20,7 +20,7 @@ u32 asdListBoxAddItem(AsdListBox *listBox, const char *label)
     AsdListBoxModel *model = reinterpret_cast<AsdListBoxModel *>(jobGetWork(reinterpret_cast<u32>(listBox)));
     AsdListBoxItem *item;
 
-    asdDebugTrace(DAT_00409d40, 1011);
+    asdDebugTrace(g_asdListBoxSourceFileName, 1011);
     item = (AsdListBoxItem *)asdMemAlloc(0x100, 0x100, 0, sizeof(AsdListBoxItem), 1);
 
     strncpy(item->label, label, ASD_LISTBOX_PATH_LEN);

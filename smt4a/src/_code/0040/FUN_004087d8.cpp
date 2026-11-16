@@ -16,7 +16,7 @@ void gxResetColorQuadToWhite(void);
 s32 renderCtxPackPassFlags(s32 first, s32 second);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 void texDrawCompositeSprite(s32 layer, u32 texture, u32 frame, s32 x, s32 y, u32 mode);
-f32 FUN_00168594(const char *text, s32 font, f32 initialWidth);
+f32 fontMeasureTextWidth(const char *text, s32 font, f32 initialWidth);
 
 /* Draws the frame and the centred caption at full speed. */
 static void choiceCaptionDrawBody(ChoiceCaptionWork *work, s32 first)
@@ -26,7 +26,7 @@ static void choiceCaptionDrawBody(ChoiceCaptionWork *work, s32 first)
     s32 offset = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
     texDrawCompositeSprite(2, 0x2B, 7, offset, 0, 0xF1);
     s32 availableWidth = metrics->placement->width;
-    s32 width = (s32)FUN_00168594(first != 0 ? work->first : work->second, 4, 0.0f);
+    s32 width = (s32)fontMeasureTextWidth(first != 0 ? work->first : work->second, 4, 0.0f);
     f32 x = (f32)(offset + (availableWidth - width) / 2 + metrics->x);
     f32 y = (f32)metrics->y;
     const char *text = first != 0 ? work->first : work->second;

@@ -2,7 +2,7 @@
 #include "ui/SceneWindowWork.h"
 
 extern "C" {
-void FUN_0027ea28(void *dialog, s32 entry, u32 mode, u32 flags);
+void aocEntryPanelCreateText(void *dialog, s32 entry, u32 mode, u32 flags);
 void aocMenuSetButtonHelp(SceneWindowWork *window, u32 state, s32 enabled);
 void jobOwnerFreeSlotAndStop(void *owner);
 void FUN_0027e9c0(void *dialog);
@@ -17,7 +17,7 @@ void AocMenu::runQuestDialog()
     SceneWindowWork * window = reinterpret_cast<SceneWindowWork *>(this);
     s32 phase = window->transition.phase;
     if (phase == 0) {
-        FUN_0027ea28(&window->dialogJob, 100, 1, 0);
+        aocEntryPanelCreateText(&window->dialogJob, 100, 1, 0);
         aocMenuSetButtonHelp(window, 0, 1);
         window->transition.phase = 1;
         return;

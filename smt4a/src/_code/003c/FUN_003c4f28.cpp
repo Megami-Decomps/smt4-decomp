@@ -9,7 +9,7 @@ int asdTMTexTableEntryAt(...);
 int sysMemClear(int, int);
 int FUN_0035e6d4(...);
 int soundChannelRequestIfEnabled(int, int, int);
-int FUN_003d54f8(int, int);
+int titleSetSlotValueState2(int, int);
 int VectorSignedToFloat(...);
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -24,7 +24,7 @@ extern int menuAreModeTexturesLoaded(int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0035e6d4. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
-/* Supplied declaration required: FUN_003d54f8. */
+/* Supplied declaration required: titleSetSlotValueState2. */
 
 
 void FUN_003c4f28(int param_1)
@@ -83,7 +83,7 @@ LAB_003c4fac:
   case 0:
     temp_v2 = menuAreModeTexturesLoaded(param_1);
     if (temp_v2 != 0) {
-      FUN_003d54f8(0,10);
+      titleSetSlotValueState2(0,10);
       *(unsigned char *)(param_1 + 0x60) = 1;
       soundChannelRequestIfEnabled(0x1000001,0,0x3c);
       sysMemClear(param_1 + 0x9c,0x1c4);

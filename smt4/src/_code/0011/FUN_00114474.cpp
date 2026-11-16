@@ -10,7 +10,7 @@ int msgBoxFlagsSetBit7(...);
 
 int FUN_001269fc(void);
 int buttonHelpSetEnabled(...);
-int FUN_002b827c(...);
+int buttonHelpSetContext(...);
 int FUN_002b8454(...);
 int buttonHelpSetPreset(...);
 int buttonHelpGetStatus(void);
@@ -26,7 +26,7 @@ int pairSetFirstResetSecond(...);
 int msgBoxFlagsClear(...);
 int recordPackedValue(unsigned int);
 int eventQueueAddUnique(int);
-int FUN_002b8ee0(...);
+int uiSlidingSpriteAdvance(...);
 int eventQueueAddUniqueIfValid(...);
 int uiSpriteAdvanceAnimation(...);
 int FUN_002c1658(...);
@@ -59,7 +59,7 @@ extern int msgBoxIsState2(unsigned int);
 /* Supplied declaration required: FUN_001269fc. */
 /* Supplied declaration required: msgBoxFlagsSetBit7. */
 /* Supplied declaration required: buttonHelpSetEnabled. */
-/* Supplied declaration required: FUN_002b827c. */
+/* Supplied declaration required: buttonHelpSetContext. */
 /* Supplied declaration required: FUN_002b8454. */
 extern unsigned short ifTouchRegionAddRequested(unsigned int, unsigned int);
 extern int FUN_002b8660(void);
@@ -80,7 +80,7 @@ extern int msgBoxFlagsTestAny(unsigned int, unsigned int);
 /* Supplied declaration required: msgBoxFlagsClear. */
 /* Supplied declaration required: recordPackedValue. */
 /* Supplied declaration required: eventQueueAddUnique. */
-/* Supplied declaration required: FUN_002b8ee0. */
+/* Supplied declaration required: uiSlidingSpriteAdvance. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: workCommandRefreshActiveSlots. */
 extern int querySlotHasHandle(void);
@@ -146,7 +146,7 @@ unsigned int FUN_00114474(void)
       switch(*(unsigned char *)(temp_v3 + 0x7c)) {
       case 1:
         if ((*(char *)(DAT_0043e18c + 0x5f) == '\0') &&
-           (temp_v6 = FUN_002b8ee0(temp_v3 + 0x754,0), temp_v6 != 0)) {
+           (temp_v6 = uiSlidingSpriteAdvance(temp_v3 + 0x754,0), temp_v6 != 0)) {
           *(unsigned char *)(temp_v3 + 0x7c) = 2;
         }
         break;
@@ -242,7 +242,7 @@ unsigned int FUN_00114474(void)
     switch(*(unsigned char *)(DAT_0043e190 + 0x88)) {
     case 1:
       if ((*(char *)(DAT_0043e18c + 0x5f) == '\0') &&
-         (FUN_002b8ee0(DAT_0043e190 + 0x984,0), *(char *)(DAT_0043e190 + 0xa0e) != '\0')) {
+         (uiSlidingSpriteAdvance(DAT_0043e190 + 0x984,0), *(char *)(DAT_0043e190 + 0xa0e) != '\0')) {
         *(unsigned char *)(temp_v6 + 0x88) = 2;
       }
       break;
@@ -582,7 +582,7 @@ joined_r0x00114a10:
             if (temp_v6 != 0) goto LAB_00115134;
           }
           else {
-            FUN_002b8ee0(temp_v3 + 0xc4,0);
+            uiSlidingSpriteAdvance(temp_v3 + 0xc4,0);
             if (*(char *)(temp_v3 + 0x14e) != '\0') {
               *(unsigned char *)(temp_v3 + 8) = 1;
               temp_v2 = ifTouchRegionAddRequested(0x3a,0x98);
@@ -627,8 +627,8 @@ LAB_001151a8:
           goto LAB_001151d8;
         }
 LAB_001151e4:
-        FUN_002b8ee0(temp_v3 + 0xc4,0);
-        FUN_002b8ee0(temp_v3 + 0x268,0);
+        uiSlidingSpriteAdvance(temp_v3 + 0xc4,0);
+        uiSlidingSpriteAdvance(temp_v3 + 0x268,0);
         if (*(char *)(temp_v3 + 9) == '\v') {
           temp_v7 = *(char *)(temp_v3 + 0xa12);
           if (temp_v7 != -0x23) {
@@ -861,7 +861,7 @@ LAB_00115134:
                 } while ((int)temp_v5 < 6);
               }
               else {
-                FUN_002b827c(0xa0);
+                buttonHelpSetContext(0xa0);
               }
             }
             *(unsigned char *)(temp_v3 + 0xa12) = 0;
@@ -961,9 +961,9 @@ LAB_00114fc0:
   case 8:
     if (*(char *)(temp_v3 + 9) != '\v') goto LAB_00115ab4;
     if (*(char *)(DAT_0043e190 + 0x5f) != '\0') goto LAB_00114fbc;
-    FUN_002b8ee0(temp_v3 + 0xc4,0);
-    FUN_002b8ee0(temp_v3 + 0x268,0);
-    FUN_002b8ee0(temp_v3 + 0x380,0);
+    uiSlidingSpriteAdvance(temp_v3 + 0xc4,0);
+    uiSlidingSpriteAdvance(temp_v3 + 0x268,0);
+    uiSlidingSpriteAdvance(temp_v3 + 0x380,0);
     if ((*(char *)(temp_v3 + 0x14e) != '\0') && (*(char *)(temp_v3 + 0x2f2) != '\0')) {
       temp_v7 = *(char *)(temp_v3 + 0x40a);
 joined_r0x001159d0:

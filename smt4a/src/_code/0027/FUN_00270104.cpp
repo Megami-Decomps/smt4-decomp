@@ -39,7 +39,7 @@ typedef struct SkillMenuWork {
 extern u64 DAT_00573bc8;
 
 s32 resourceRunOperationIfUnblocked(u32 list);
-s32 FUN_002a4894(u32 list);
+s32 listCursorGetRowIfUnblocked(u32 list);
 s32 FUN_002cc9e0(SkillMenuWork *work, s32 arg);
 void screenShowMessage(u32 id);
 s32 gameDataFlagTestBit(u32 bit);
@@ -60,7 +60,7 @@ HelpPlayerView *gameGetPlayerData(void);
 void FUN_00270104(SkillMenuWork *work)
 {
     u32 *panel = (u32 *)((u8 *)work + 0x4B98);
-    u32 index = resourceRunOperationIfUnblocked(work->list) + FUN_002a4894(work->list);
+    u32 index = resourceRunOperationIfUnblocked(work->list) + listCursorGetRowIfUnblocked(work->list);
 
     if (FUN_002cc9e0(work, 0) != 1) {
         if (FUN_002cc9e0(work, 0) != 2) {

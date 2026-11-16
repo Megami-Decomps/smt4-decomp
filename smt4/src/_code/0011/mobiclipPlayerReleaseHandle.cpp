@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00126e5c(int handle, int state);
+int soundVoiceSetStateStopped(int handle, int state);
 
 typedef struct Handle {
     /* 0x00 */ u8 unk00[0xC];
@@ -12,11 +12,11 @@ typedef struct Handle {
     /* 0x25 */ u8 done;
 } Handle;
 
-/* When the handle is valid and in state 1, hands it to FUN_00126e5c and marks it done. */
+/* When the handle is valid and in state 1, hands it to soundVoiceSetStateStopped and marks it done. */
 void mobiclipPlayerReleaseHandle(Handle *handle)
 {
     if (handle->id != -1 && handle->state == 1) {
-        FUN_00126e5c(handle->id, handle->state);
+        soundVoiceSetStateStopped(handle->id, handle->state);
         handle->state = 0;
         handle->done = 1;
     }

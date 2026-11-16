@@ -7,12 +7,12 @@
 
 extern "C" {
 extern SceneResourceWork *g_sceneResourceWork;
-void FUN_002898e4();
+void commonBgAcquire();
 void buttonHelpAcquireResources();
 void buttonHelpCreate();
 void FUN_00296fec();
 void FUN_00392e74(SceneResource *);
-void FUN_002a03d8(u32, u32);
+void titleSetSlotValueState2(u32, u32);
 void soundChannelStopAll(u32);
 void FUN_002c5700();
 void *FUN_0027e974(SceneResource *);
@@ -25,7 +25,7 @@ u32 FUN_001b4fe8()
     SceneResourceWork *work = g_sceneResourceWork;
     switch (work->state.pending) {
     case 0: {
-        FUN_002898e4();
+        commonBgAcquire();
         buttonHelpAcquireResources();
         buttonHelpCreate();
         // The allocation extends beyond the recovered SceneWindowWork prefix.
@@ -44,8 +44,8 @@ u32 FUN_001b4fe8()
         break;
     case 2:
         if (work->state.resetChannels) {
-            FUN_002a03d8(0, 1);
-            FUN_002a03d8(1, 1);
+            titleSetSlotValueState2(0, 1);
+            titleSetSlotValueState2(1, 1);
             soundChannelStopAll(15);
         } else {
             u8 argument = 1;

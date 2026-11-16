@@ -14,7 +14,7 @@ int FUN_00188e44(unsigned char **);
 int FUN_00189cbc(unsigned int *, int *);
 int FUN_00193038(int *, int *);
 int sysFatalBreak(void);
-int FUN_0030fc80(int *);
+int clockGetTicksAsMicroseconds(int *);
 
 /* stack frame of void: 30 slot(s), 85 byte(s) */
 typedef struct {
@@ -63,7 +63,7 @@ extern unsigned char DAT_005c0adc; /* 0x5c0adc */
 /* Supplied declaration required: FUN_00189cbc. */
 /* Supplied declaration required: FUN_00193038. */
 /* Supplied declaration required: sysFatalBreak. */
-/* Supplied declaration required: FUN_0030fc80. */
+/* Supplied declaration required: clockGetTicksAsMicroseconds. */
 
 
 void FUN_0016e2a8(void)
@@ -108,7 +108,7 @@ void FUN_0016e2a8(void)
   FUN_001886bc();
   temp_v1 = FUN_00158844(reinterpret_cast<const u16 *>(temp_v1), 0x14);
   if ((int)temp_v1 >= 0) {
-    FUN_0030fc80(&temp_v4);
+    clockGetTicksAsMicroseconds(&temp_v4);
     temp_v28 = temp_v4;
     uStack_14 = uStack_a4;
     FUN_00193038(&temp_v15,&temp_v28);

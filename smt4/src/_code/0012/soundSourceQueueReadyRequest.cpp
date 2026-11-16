@@ -19,7 +19,7 @@ u8 soundSourceQueueReadyRequest(u8 arg, Source *source)
     s32 ready = source->vtable->isReady(source);
 
     if (ready != 0) {
-        Obj421aa4Manager *manager = FUN_002baed8();
+        Obj421aa4Manager *manager = soundRequestQueueGetInstance();
         Obj421aa4Node *node = soundRequestBegin(manager, 7);
 
         node->type = 0x33;

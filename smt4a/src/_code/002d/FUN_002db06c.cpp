@@ -25,7 +25,7 @@ int soundActorStartOnFreeChannel(...);
 int moriModelUnitStartMaterialAnimation(...);
 int FUN_003fd924(...);
 int controllerSetRotationEulerDegrees(...);
-int FUN_004ff98c(...);
+int itemListGetCurrentIdOrInvalid(...);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of void: 11 slot(s), 44 byte(s) */
@@ -98,7 +98,7 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_003fd924. */
 /* Supplied declaration required: animationSelectClip. */
 /* Supplied declaration required: controllerSetRotationEulerDegrees. */
-/* Supplied declaration required: FUN_004ff98c. */
+/* Supplied declaration required: itemListGetCurrentIdOrInvalid. */
 extern int FUN_004ffa14(unsigned int);
 
 
@@ -342,7 +342,7 @@ LAB_002db724:
           return;
         }
         temp_v5 = *(unsigned int *)(g_lmapScene[0x60] + 4);
-        temp_v0 = FUN_004ff98c(temp_v5);
+        temp_v0 = itemListGetCurrentIdOrInvalid(temp_v5);
         if ((temp_v0 == 10) && (temp_v0 = FUN_004ffa14(temp_v5), piVar2 = g_lmapScene, temp_v0 != 0)) {
           *(unsigned char *)(g_lmapScene + 0x8b) = 1;
           piVar2[0x8a] = 3;
@@ -734,7 +734,7 @@ LAB_002dc4e4:
         }
       }
       temp_v2 = *(int *)(g_lmapScene[0x60] + 4);
-      temp_v0 = FUN_004ff98c(temp_v2);
+      temp_v0 = itemListGetCurrentIdOrInvalid(temp_v2);
       if (temp_v0 == 5) {
         if (g_lmapScene[0x75] == 0x32) {
           eplSlotStartRequest(3);
@@ -748,7 +748,7 @@ LAB_002dc4e4:
           *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 4) | 1;
         }
       }
-      temp_v0 = FUN_004ff98c(temp_v2);
+      temp_v0 = itemListGetCurrentIdOrInvalid(temp_v2);
       if (temp_v0 == 0xb) {
         if (g_lmapScene[0x75] == 0x56) {
           eplSlotStartRequest(3);
@@ -762,7 +762,7 @@ LAB_002dc4e4:
           *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 4) | 1;
         }
       }
-      temp_v0 = FUN_004ff98c(temp_v2);
+      temp_v0 = itemListGetCurrentIdOrInvalid(temp_v2);
       if (temp_v0 == 2) {
         if (g_lmapScene[0x75] == 0x2d) {
           eplSlotStartRequest(3);
@@ -776,9 +776,9 @@ LAB_002dc4e4:
         mapEplSetSlotPosition(3);
       }
       temp_v5 = *(unsigned int *)(g_lmapScene[0x60] + 4);
-      temp_v0 = FUN_004ff98c(temp_v5);
-      if (((temp_v0 == 5) || (temp_v0 = FUN_004ff98c(temp_v5), temp_v0 == 0xb)) ||
-         (temp_v0 = FUN_004ff98c(temp_v5), temp_v0 == 2)) {
+      temp_v0 = itemListGetCurrentIdOrInvalid(temp_v5);
+      if (((temp_v0 == 5) || (temp_v0 = itemListGetCurrentIdOrInvalid(temp_v5), temp_v0 == 0xb)) ||
+         (temp_v0 = itemListGetCurrentIdOrInvalid(temp_v5), temp_v0 == 2)) {
         temp_v0 = FUN_004ffa14(temp_v5);
         piVar2 = g_lmapScene;
 joined_r0x002dc288:
@@ -834,7 +834,7 @@ joined_r0x002dc288:
         *(unsigned char *)(piVar2 + 0x8f) = 1;
       }
       temp_v5 = *(unsigned int *)(piVar2[0x60] + 4);
-      temp_v0 = FUN_004ff98c(temp_v5);
+      temp_v0 = itemListGetCurrentIdOrInvalid(temp_v5);
       if ((temp_v0 == 1) && (temp_v0 = FUN_004ffa14(temp_v5), piVar2 = g_lmapScene, temp_v0 != 0)) {
         if (g_lmapScene[0x8e] == 0) {
           g_lmapScene[0x92] = 0;
@@ -909,7 +909,7 @@ joined_r0x002dc288:
         *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 1;
       }
       temp_v5 = *(unsigned int *)(piVar2[0x60] + 4);
-      temp_v0 = FUN_004ff98c(temp_v5);
+      temp_v0 = itemListGetCurrentIdOrInvalid(temp_v5);
       if (temp_v0 == 4) {
         temp_v0 = FUN_004ffa14(temp_v5);
         piVar2 = g_lmapScene;
@@ -978,7 +978,7 @@ joined_r0x002dc288:
     }
     else {
       piVar2[0x75] = piVar2[0x75] + 1;
-      temp_v0 = FUN_004ff98c(*(unsigned int *)(piVar2[0x60] + 4));
+      temp_v0 = itemListGetCurrentIdOrInvalid(*(unsigned int *)(piVar2[0x60] + 4));
       if (temp_v0 == 2) {
         if (g_lmapScene[0x75] == 0x2d) {
           eplSlotStartRequest(3);
@@ -992,7 +992,7 @@ joined_r0x002dc288:
         mapEplSetSlotPosition(3);
       }
       temp_v5 = *(unsigned int *)(g_lmapScene[0x60] + 4);
-      temp_v0 = FUN_004ff98c(temp_v5);
+      temp_v0 = itemListGetCurrentIdOrInvalid(temp_v5);
       if ((temp_v0 == 2) && (temp_v0 = FUN_004ffa14(temp_v5), piVar2 = g_lmapScene, temp_v0 != 0)) {
         DAT_005f19d4 = 0;
         DAT_005f19d8 = (float)g_lmapScene[0x7c];
@@ -1009,7 +1009,7 @@ joined_r0x002dc288:
   }
   if (g_lmapScene[0x74] == 0x11) {
     temp_v5 = *(unsigned int *)(g_lmapScene[0x60] + 4);
-    temp_v0 = FUN_004ff98c(temp_v5);
+    temp_v0 = itemListGetCurrentIdOrInvalid(temp_v5);
     if ((temp_v0 != 5) || (temp_v0 = FUN_004ffa14(temp_v5), temp_v0 == 0)) goto LAB_002dccc8;
     g_lmapScene[0x74] = 0x12;
 LAB_002dccd8:
@@ -1043,7 +1043,7 @@ LAB_002dccc8:
 LAB_002dcd94:
   temp_v5 = *(unsigned int *)(g_lmapScene[0x60] + 4);
   controllerSetDestination(temp_v5,g_lmapScene + 0x7c);
-  temp_v0 = FUN_004ff98c(temp_v5);
+  temp_v0 = itemListGetCurrentIdOrInvalid(temp_v5);
   if ((temp_v0 != g_lmapScene[0x8a]) || ((char)g_lmapScene[0x8b] != '\0')) {
     FUN_003fd924(temp_v5,g_lmapScene[0x8a],2);
     *(unsigned char *)(g_lmapScene + 0x8b) = 0;
@@ -1053,7 +1053,7 @@ LAB_002dcd94:
   temp_v30 = (float)g_lmapScene[0x7d] + (float)g_lmapScene[0x91];
   temp_v5 = *(unsigned int *)(g_lmapScene[99] + 4);
   controllerSetDestination(temp_v5,&temp_v29);
-  temp_v0 = FUN_004ff98c(temp_v5);
+  temp_v0 = itemListGetCurrentIdOrInvalid(temp_v5);
   if ((temp_v0 != g_lmapScene[0x8e]) || ((char)g_lmapScene[0x8f] != '\0')) {
     FUN_003fd924(temp_v5,g_lmapScene[0x8e],2);
     animationSelectClip(temp_v5,0,2);

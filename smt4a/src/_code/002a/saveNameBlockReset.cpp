@@ -41,7 +41,7 @@ struct GameDataBlocks {
 };
 
 extern GameDataBlocks g_gameDataBlocks; /* 0x57f698 */
-void FUN_002e59f8(const void *source, void *destination, u32 size);
+void memcpySrcFirst(const void *source, void *destination, u32 size);
 
 /* Resets the save data's name block and copies the two player names into it. */
 void saveNameBlockReset(void)
@@ -55,13 +55,13 @@ void saveNameBlockReset(void)
     names->unk08 = 0;
     names->unk0A = 0;
     names->unk0B = 0;
-    FUN_002e59f8(sources->nameA, names->nameA, 0xE);
+    memcpySrcFirst(sources->nameA, names->nameA, 0xE);
     names->unk12 = 0x1a4;
     names->unk14 = 0x21c;
     names->unk16 = 0x294;
     names->unk1A = 0;
     names->unk1B = 0;
-    FUN_002e59f8(sources->nameB, names->nameB, 0x12);
+    memcpySrcFirst(sources->nameB, names->nameB, 0x12);
     names->unk2E = 0;
     names->unk2F = 0;
 }

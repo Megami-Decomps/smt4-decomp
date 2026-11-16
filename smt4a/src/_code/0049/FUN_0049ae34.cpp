@@ -11,7 +11,7 @@ void statusPanelSetOpen(u32 mode);
 u32 flaggedValueHolderGetTotal(const FlaggedValueHolder *holder);
 void objBSetWordByIndex(s32 which, u16 value);
 void FUN_002c85b0(void);
-void FUN_00333f6c(void);
+void gameGlobalsReleaseReference(void);
 }
 
 /* Finish equipment selection or tear down the menu's active child resource. */
@@ -47,7 +47,7 @@ extern "C" void FUN_0049ae34(EquipmentMenuState *menu)
         if (FUN_0026c3a0()) {
             menu->state = 0;
             FUN_002c85b0();
-            FUN_00333f6c();
+            gameGlobalsReleaseReference();
             placeWinSetValue(1);
         }
         break;

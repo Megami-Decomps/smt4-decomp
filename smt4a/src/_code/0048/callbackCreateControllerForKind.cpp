@@ -22,6 +22,6 @@ void callbackCreateControllerForKind(CallbackControllerOwner* owner, s32 kind)
         break;
     }
     }
-    FUN_004816b4(owner->controller, owner);
+    callbackControllerSetOwner(owner->controller, owner);
 }
 }

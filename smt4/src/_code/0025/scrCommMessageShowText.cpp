@@ -1,0 +1,19 @@
+#include "common.h"
+#include "shard/W6_W6Match3_ForwardEffect.h"
+
+extern "C" {
+
+int messageWindowShowOrPoll(u32 a, int b, u32 c, int d, int e, u32 f);
+int scrCommMessageSetMode(int arg);
+extern u32 scrGetCommandFrame(void);
+
+void scrCommMessageShowText(u32 a, u32 b)
+{
+    u32 c;
+
+    scrCommMessageSetMode(0);
+    c = scrGetCommandFrame();
+    messageWindowShowOrPoll(a, 0, c, 0xf, 0, b);
+}
+
+} /* extern "C" */

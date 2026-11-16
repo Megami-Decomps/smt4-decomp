@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match6_ProjectionCamera.h"
 
 extern "C" {
-void FUN_002ad314(f32 *sine, f32 *cosine, f32 angle);
+void mathSinCos(f32 *sine, f32 *cosine, f32 angle);
 
 // Build the oriented perspective matrix and the camera's screen-space correction.
 void cameraBuildProjectionMatrices(ProjectionCamera *camera, f32 *projection, f32 *correction)
@@ -14,7 +14,7 @@ void cameraBuildProjectionMatrices(ProjectionCamera *camera, f32 *projection, f3
     f32 farClip = lens->farClip;
     f32 angle = lens->fieldOfView * 0.5f * 40.7436637878418f;
     f32 sine, cosine;
-    FUN_002ad314(&sine, &cosine, angle);
+    mathSinCos(&sine, &cosine, angle);
     projection[1] = 0.0f;
     projection[2] = 0.0f;
     projection[3] = 0.0f;
@@ -64,7 +64,7 @@ void cameraBuildProjectionMatrices(ProjectionCamera *camera, f32 *projection, f3
     f32 scaleY = camera->scaleY;
     f32 offsetX = camera->offsetX;
     f32 offsetY = camera->offsetY;
-    FUN_002ad314(&sine, &cosine, angle);
+    mathSinCos(&sine, &cosine, angle);
     f32 verticalScale = 1.0f / (sine / cosine);
     correction[0] = (verticalScale / aspect) * scaleX;
     correction[1] = 0.0f;

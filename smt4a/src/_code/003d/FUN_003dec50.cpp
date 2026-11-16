@@ -26,7 +26,7 @@ void FUN_003dec50(void)
     s32 progress = FUN_0041862c(0);
     for (u16 id = 0; id < 32; ++id) {
         const ProgressionUnlockRecord* record = progressionFindRecord(id);
-        if (record != NULL && !FUN_002c2758(id) && record->threshold <= progress)
+        if (record != NULL && !gameDataStatusFlagGet(id) && record->threshold <= progress)
             gameDataSetStatusFlag(id, 1);
     }
 }

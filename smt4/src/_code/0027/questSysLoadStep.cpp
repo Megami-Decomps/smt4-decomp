@@ -53,7 +53,7 @@ u32 questSysLoadStep(QuestLoadStep *step)
     case 2: {
         if (scrRunOpcodesStub(step->process) != 2)
             break;
-        u32 selection = FUN_002903f0();
+        u32 selection = rosterGetLeaderId();
         if (FUN_00298dc8()) {
             FUN_0029016c(selection, 0);
         }

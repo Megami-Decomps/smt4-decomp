@@ -31,7 +31,7 @@ public:
     void FUN_0049a2b4();
     void FUN_0049b00c();
     void shopUpdateCharonRequestTransition();
-    void FUN_00497044();
+    void sceneMarkActiveEnterState21();
     void FUN_004969a8();
     void panelUpdatePageExitTransition();
     void FUN_00497290();

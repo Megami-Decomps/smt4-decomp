@@ -17,7 +17,7 @@ struct EffectBehavior {
 };
 
 extern "C" {
-extern EffectBehaviorEntry DAT_005c1d60[];
+extern EffectBehaviorEntry g_effBehaviorTable[];
 s32 effGetFrameStep(void);
 
 /* Resets the elements' frames on the first step, runs the behavior's callback and advances its time. */
@@ -42,7 +42,7 @@ void effBehaviorRun(EffectBehavior *behavior)
             }
         }
     }
-    DAT_005c1d60[behavior->index].run(behavior);
+    g_effBehaviorTable[behavior->index].run(behavior);
     behavior->time += effGetFrameStep();
 }
 

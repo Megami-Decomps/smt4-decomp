@@ -5,7 +5,7 @@ extern "C" {
 
 void asdMemFree(void *block);
 void jobStop(u32 job, s32 arg);
-void FUN_003d9be4(void *block, BtlEffectJob *job);
+void btlEffectReleaseResources(void *block, BtlEffectJob *job);
 
 extern BtlEffectGlobals g_btlEffect;
 
@@ -15,7 +15,7 @@ void btlEffectDestroy(u32 job)
     BtlEffectJob *effects = (BtlEffectJob *)jobGetWork(job);
 
     if (g_btlEffect.data != NULL) {
-        FUN_003d9be4(g_btlEffect.data, effects);
+        btlEffectReleaseResources(g_btlEffect.data, effects);
         asdMemFree(g_btlEffect.data);
         g_btlEffect.data = NULL;
     }

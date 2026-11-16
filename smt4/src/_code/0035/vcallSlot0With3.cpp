@@ -12,14 +12,14 @@ struct VObj2 {
     /* 0x00 */ const VVtbl2 *vtbl;
 };
 
-extern void FUN_002ad958(s32 value);
+extern void fsCountdownSleep(s32 value);
 
 u32 vcallSlot0With3(u32 a, VObj2 *obj, u32 c, u32 d)
 {
     if (a == 0 || obj == NULL) {
         return 0xE0E046BC;
     }
-    FUN_002ad958(1);
+    fsCountdownSleep(1);
     return obj->vtbl->slot0(obj, a, c, d);
 }
 

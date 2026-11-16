@@ -17,7 +17,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: listAppendNode. */
 /* Supplied declaration required: FUN_002b4f64. */
-extern int FUN_002baed8(void);
+extern int soundRequestQueueGetInstance(void);
 
 
 } /* extern "C" */
@@ -81,7 +81,7 @@ void Obj421aa4::updateParameters()
   temp_v9 = *(float *)(temp_v0 + 0x3c) + (float)param_1[0x31];
   temp_v5 = (float)param_1[0x33] + 0.0f + *(float *)(temp_v0 + 0x44);
   temp_v6 = (float)param_1[0x32] + 0.0f + *(float *)(temp_v0 + 0x40) + (float)param_1[0x10];
-  temp_v1 = FUN_002baed8();
+  temp_v1 = soundRequestQueueGetInstance();
   temp_v0 = temp_v1;
   FUN_002b4f64(temp_v1,0xf);
   *(unsigned int *)(temp_v0 + 0xc) = *(unsigned int *)(temp_v1 + 0x184);

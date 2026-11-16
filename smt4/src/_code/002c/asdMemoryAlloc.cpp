@@ -16,7 +16,7 @@ extern MemoryAllocationGlobals DAT_00465120;
 void nn_os_CriticalSection_Enter(void *lock);
 void nn_os_CriticalSection_Leave(void *lock);
 void *FUN_002b24d8(u32 heap, u32 alignment, u32 pool, u32 size, u32 flags);
-void FUN_002b23f4(AlignedAllocationHeader *allocation);
+void asdMemoryTrackAllocation(AlignedAllocationHeader *allocation);
 void rt_memclr(void *memory, u32 size);
 
 // Align the user allocation after its header and install the preceding back-pointer.
@@ -31,7 +31,7 @@ static __inline void *alignedAllocationInit(AlignedAllocationHeader *header, u32
     u8 *data = (u8 *)header + padding;
     ((AlignedAllocationHeader **)data)[sizeof(AlignedAllocationHeader) / sizeof(AlignedAllocationHeader *) - 1] = header;
     data += sizeof(AlignedAllocationHeader);
-    FUN_002b23f4(header);
+    asdMemoryTrackAllocation(header);
     return data;
 }
 

@@ -4,7 +4,7 @@
 
 
 extern "C" {
-extern BtlHelpListIV *DAT_00435d78;
+extern BtlHelpListIV *g_btlHelpList;
 
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 
@@ -44,7 +44,7 @@ BtlHelpEntryIV *btlHelpEntryCreate(u16 id, s16 style, u32 argument, u32 resource
     node->active = 1;
     node->next = NULL;
     node->previous = NULL;
-    btlHelpListAppend(DAT_00435d78, node);
+    btlHelpListAppend(g_btlHelpList, node);
     return node;
 }
 }

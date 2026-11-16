@@ -20,7 +20,7 @@ typedef struct BtlList {
     /* 0x8 */ s32 count;
 } BtlList;
 
-extern BtlList *DAT_00435d78;
+extern BtlList *g_btlHelpList;
 s32 infoWindowIsActive(void);
 void infoWinStartTimer(s32 mode);
 void asdMemFree(void *memory);
@@ -46,7 +46,7 @@ static __inline BtlNode *btlListRemove(BtlList *list, BtlNode *node)
  * kind 1, flag 0 clear, infoWindowIsActive passing). */
 void FUN_0027e874(void)
 {
-    BtlNode *node = DAT_00435d78->first;
+    BtlNode *node = g_btlHelpList->first;
 
     while (node != NULL) {
         BtlNode *next = node->next;
@@ -54,7 +54,7 @@ void FUN_0027e874(void)
         if (node->index >= 0 && node->kind == 1 && (node->flags & 1) == 0 && infoWindowIsActive() != 0) {
             infoWinStartTimer(1);
         }
-        asdMemFree(btlListRemove(DAT_00435d78, node));
+        asdMemFree(btlListRemove(g_btlHelpList, node));
         node = next;
     }
 }

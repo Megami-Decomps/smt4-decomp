@@ -15,7 +15,7 @@ struct BtlHelpEntryList {
     /* 0x08 */ u32 count;
 };
 extern "C" {
-extern BtlHelpEntryList *DAT_00435d78;
+extern BtlHelpEntryList *g_btlHelpList;
 void infoWinStartTimer(u32 value);
 void asdMemFree(void *allocation);
 
@@ -39,13 +39,13 @@ static __inline BtlHelpEntry *btlHelpListRemove(BtlHelpEntryList *list, BtlHelpE
 /* Clears the help entry list, notifying the active information window when required. */
 void btlHelpFreeEntries(void)
 {
-    BtlHelpEntry *entry = DAT_00435d78->tail;
+    BtlHelpEntry *entry = g_btlHelpList->tail;
     while (entry != NULL) {
         BtlHelpEntry *previous = entry->prev;
         if (entry->unk2A2 >= 0 && entry->kind == 1 && dialogIsActive() != 0) {
             infoWinStartTimer(1);
         }
-        asdMemFree(btlHelpListRemove(DAT_00435d78, entry));
+        asdMemFree(btlHelpListRemove(g_btlHelpList, entry));
         entry = previous;
     }
 }

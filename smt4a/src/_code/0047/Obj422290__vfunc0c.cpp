@@ -16,7 +16,7 @@ extern Obj422290Manager *g_aocMain;
 void FUN_00514ad4();
 void FUN_00514ba0();
 void FUN_00514b68();
-s32 FUN_0047d754(void *queue);
+s32 threadTryJoinAndClose(void *queue);
 s32 legacyResourceIdRemap(const WindowStatusResult *result);
 u32 FUN_002fb0d4(void *queue, const u32 *descriptor, void (*callback)(), Obj422290 **owner);
 void FUN_004767a8();
@@ -43,7 +43,7 @@ WindowStatusOperationResult Obj422290::vfunc0c(const void *)
             resultHandleFailure(status);
         }
     } else {
-        if (reserved == 1 && FUN_0047d754(manager->queue) != 0) {
+        if (reserved == 1 && threadTryJoinAndClose(manager->queue) != 0) {
             bool succeeded = !nnResultIsFailureBool(legacyResourceIdRemap(&result));
             if (succeeded) {
                 output.status = 0;

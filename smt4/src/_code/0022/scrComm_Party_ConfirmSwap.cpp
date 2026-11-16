@@ -8,10 +8,10 @@ void scrWorkSetValue(s32, s32);
 s32 scrWorkGetValue(s32);
 const void *fileSlotGetBuffer(u32);
 void uiBindRecordRewardText(u32, s32, s32);
-void FUN_002bff50(void);
+void messageSetConfirmDisplayMode(void);
 s32 messageForwardDefaultMode(const void *, s32, s32, s32, s32);
-s32 FUN_0029022c(void);
-u16 FUN_002903f0(void);
+s32 rosterHasLeader(void);
+u16 rosterGetLeaderId(void);
 void gameOptionsEnableAndReset(void);
 
 /* Run the swap confirmation message and reset options when the selected kinds require it. */
@@ -26,13 +26,13 @@ u32 scrComm_Party_ConfirmSwap(void)
     const void *messages = fileSlotGetBuffer(0x1E);
     if (scrWorkGetValue(0) == 0) {
         uiBindRecordRewardText(id, 0, 1);
-        FUN_002bff50();
+        messageSetConfirmDisplayMode();
         s32 result = messageForwardDefaultMode(messages, 0, scrWorkGetValue(1), 6, 0);
         scrWorkSetValue(1, scrWorkGetValue(1) + 1);
         if (result == 1) {
             scrWorkSetValue(1, 0);
-            if (FUN_0029022c()) {
-                const SecondarySortRecord *previous = dataTable1bOr1cGetRecord(FUN_002903f0());
+            if (rosterHasLeader()) {
+                const SecondarySortRecord *previous = dataTable1bOr1cGetRecord(rosterGetLeaderId());
                 const SecondarySortRecord *selected = dataTable1bOr1cGetRecord(id);
                 if (previous != NULL && selected != NULL &&
                     ((previous->classification.kind != 5 && previous->classification.kind != 4 &&

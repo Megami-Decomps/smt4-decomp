@@ -1,4 +1,4 @@
-/* Stores the FUN_004dad8c result for the global object's first word into its field at +0x90A4 (if the object exists). */
+/* Stores the histogramFindHighestSupportedValue result for the global object's first word into its field at +0x90A4 (if the object exists). */
 #include "common.h"
 
 extern "C" {
@@ -11,14 +11,14 @@ typedef struct Global {
 
 extern Global *g_unite;
 
-extern u32 FUN_004dad8c(u32 key);
+extern u32 histogramFindHighestSupportedValue(u32 key);
 
 void uniteValueRefresh(void)
 {
     Global *global = g_unite;
 
     if (global != NULL) {
-        global->value = FUN_004dad8c(global->key);
+        global->value = histogramFindHighestSupportedValue(global->key);
     }
 }
 

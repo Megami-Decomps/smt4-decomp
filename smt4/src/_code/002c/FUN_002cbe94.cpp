@@ -9,7 +9,7 @@ extern "C" void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(u32 handle);
 
 static __inline nn::Result fileRecordResult(nn::Result result)
 {
-    FUN_002c3510(result);
+    processResultSetValue(result);
     return result;
 }
 
@@ -27,17 +27,17 @@ extern "C" nn::Result FUN_002cbe94(RomFileOpenState *state, const char *path, u3
 
     if (!pathBuildWide(path, reinterpret_cast<s16 *>(resolvedPath), 0)) {
         result = 0xe0e046bc;
-        FUN_002c3510(result);
+        processResultSetValue(result);
         return result;
     }
     result = romFileOpen(&state->file, resolvedPath, 6);
     if ((s32)(result & 0x80000000) < 0) {
-        FUN_002c3510(result);
+        processResultSetValue(result);
         return result;
     }
     const PositionedResizeVtable *vtable = static_cast<PositionedResizeVtable *>(state->interface.vtable);
     result = vtable->resize(reinterpret_cast<PositionedStream *>(state), (u64)size);
-    FUN_002c3510(result);
+    processResultSetValue(result);
     if ((s32)(result & 0x80000000) < 0) {
         if ((state->file.unk00 & ~1u) != 0) {
             if (state->file.unk00 & 1)

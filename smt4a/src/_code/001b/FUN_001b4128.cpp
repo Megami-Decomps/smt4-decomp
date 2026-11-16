@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0017dd84(void);
+int asdGxCommandBufferTerminateAndSubmit(void);
 int globalCriticalSectionEnterForward(void);
 int globalCriticalSectionLeaveForward(void);
 int FUN_001963e0(void);
@@ -21,7 +21,7 @@ extern signed char DAT_0061a482; /* 0x61a482 */
 extern int DAT_0061a50c; /* 0x61a50c */
 extern int DAT_0061a510; /* 0x61a510 */
 
-/* Supplied declaration required: FUN_0017dd84. */
+/* Supplied declaration required: asdGxCommandBufferTerminateAndSubmit. */
 /* Supplied declaration required: globalCriticalSectionEnterForward. */
 /* Supplied declaration required: globalCriticalSectionLeaveForward. */
 /* Supplied declaration required: FUN_001963e0. */
@@ -47,7 +47,7 @@ void FUN_001b4128(unsigned int param_1,unsigned int param_2,int param_3)
   }
   else {
     if (*(int *)(temp_v1 + 0x14) != temp_v2) {
-      FUN_0017dd84();
+      asdGxCommandBufferTerminateAndSubmit();
     }
     if (*(int *)(temp_v1 + 0x14) == *(int *)(temp_v1 + 0xc)) {
       puVar4 = (unsigned char *)(*(int *)(temp_v1 + 0x18) + *(int *)(temp_v1 + 0x20) * 0x1c);

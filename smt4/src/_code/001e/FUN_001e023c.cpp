@@ -58,7 +58,7 @@ u32 FUN_001e023c(u32 handle)
         s32 state = renderCtxPackPassFlags(5, 1);
         renderCtxPushA(context, state);
         context = g_titleScene;
-        state = FUN_002865c0(6, 0.0f);
+        state = gxPackFadeKindAlphaWord(6, 0.0f);
         renderCtxPushC(context, state);
         EffectColor fade = {job->intensity, job->intensity, job->intensity, job->alpha};
         u32 color = packFadeColor(fade);

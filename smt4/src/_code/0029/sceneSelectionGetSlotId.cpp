@@ -32,7 +32,7 @@ UnitRecordView *gameGetUnitRecord(s32 unit);
 /* The id selected in a scene slot, or -1 when that slot is empty; slots 0 and 13 hold units. */
 s32 sceneSelectionGetSlotId(u32 slot)
 {
-    SceneSelection *selection = &reinterpret_cast<SceneContext *>(FUN_002a0d0c())->selection;
+    SceneSelection *selection = &reinterpret_cast<SceneContext *>(gameDataGetSortPreferences())->selection;
 
     switch (slot) {
     case 0:

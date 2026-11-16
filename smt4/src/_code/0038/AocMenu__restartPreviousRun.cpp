@@ -3,7 +3,7 @@
 
 extern "C" {
 
-int FUN_002a03d8(int a, int b);
+int titleSetSlotValueState2(int a, int b);
 extern int screenFadesAllReady(void);
 
 struct Object;
@@ -38,8 +38,8 @@ void AocMenu::restartPreviousRun()
         }
         return;
     }
-    FUN_002a03d8(0, 10);
-    FUN_002a03d8(1, 10);
+    titleSetSlotValueState2(0, 10);
+    titleSetSlotValueState2(1, 10);
     obj->state = 1;
 }
 

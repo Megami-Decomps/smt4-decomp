@@ -15,7 +15,7 @@ s32 padIsButtonPressed(u32 button);
 s32 bgmGetStateById(u32 sound);
 void soundChannelRequestIfEnabled(u32 sound, u32 option, u32 fadeFrames);
 void soundChannelStopAll(s32 channel);
-void FUN_002a03d8(s32 slot, s32 frames);
+void titleSetSlotValueState2(s32 slot, s32 frames);
 void slotSetRequest(s32 slot, s32 group, s32 amount);
 
 // Load the splash sprites, cycle their crossfade, and release them after dismissal.
@@ -72,7 +72,7 @@ s32 FUN_0023ed64(SplashAnimationState *state)
         if (!asdTMTexTableNodeIsLoaded(0x2d, 6))
             return 0;
         if (FUN_002c2a04(0) == 3)
-            FUN_002a03d8(0, 30);
+            titleSetSlotValueState2(0, 30);
         if (FUN_002c2a04(0) == 2)
             return 0;
         if (state->fadeBits < 0x3f800000)

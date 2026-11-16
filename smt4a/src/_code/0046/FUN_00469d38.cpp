@@ -16,7 +16,7 @@ typedef struct QuestRecord {
 void eventQueueAddUnique(u32 event);
 void frameTexInitActive(void);
 void frameTexRequestFade(s32 a);
-void *FUN_004186e0(void);
+void *rosterGetLeaderId(void);
 s32 FUN_001bd118(void);
 void qcMainSetMode(s32 mode);
 QuestRecord *dataTable1bOr1cGetRecord(void *source);
@@ -50,7 +50,7 @@ void FUN_00469d38(StepWork *work)
         }
         break;
     case 2:
-        source = FUN_004186e0();
+        source = rosterGetLeaderId();
         if (source != NULL && FUN_001bd118() == 6) {
             qcMainSetMode(1);
             FUN_00270c58(dataTable1bOr1cGetRecord(source)->id);

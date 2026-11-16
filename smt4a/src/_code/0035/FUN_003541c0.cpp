@@ -108,7 +108,7 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_003fd924. */
 /* Supplied declaration required: controllerSetRotationEulerDegrees. */
 extern int FUN_004ff970(unsigned int);
-extern int FUN_004ff98c(unsigned int);
+extern int itemListGetCurrentIdOrInvalid(unsigned int);
 extern int animationIsClipComplete(unsigned int);
 extern int FUN_004ffa14(unsigned int);
 /* Supplied declaration required: FUN_004ffaf0. */
@@ -541,7 +541,7 @@ LAB_00354dac:
         if (piVar4[0x75] == 10) {
           soundActorStartOnFreeChannel(0x1000237);
         }
-        temp_v0 = FUN_004ff98c(temp_v2);
+        temp_v0 = itemListGetCurrentIdOrInvalid(temp_v2);
         if ((temp_v0 == 0xc) && (temp_v0 = FUN_004ffa14(temp_v2), piVar4 = g_lmapScene, temp_v0 != 0)) {
           g_gameState.f005f19d4 = 0;
           g_gameState.f005f19d8 = (float)g_lmapScene[0x7c];
@@ -653,7 +653,7 @@ LAB_00354dac:
         soundActorStartOnFreeChannel(0x1000239);
       }
       temp_v2 = *(unsigned int *)(g_lmapScene[99] + 4);
-      temp_v0 = FUN_004ff98c(temp_v2);
+      temp_v0 = itemListGetCurrentIdOrInvalid(temp_v2);
       if ((temp_v0 == 0xd) && (temp_v0 = FUN_004ffa14(temp_v2), piVar4 = g_lmapScene, temp_v0 != 0)) {
         g_gameState.f005f19e8 = 0;
         piVar5 = g_lmapScene + 0x74;

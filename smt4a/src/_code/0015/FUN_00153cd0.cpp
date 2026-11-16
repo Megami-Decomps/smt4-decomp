@@ -9,7 +9,7 @@ int FUN_0018a8a8(int, int);
 int FUN_0018a8c8(int, int);
 int FUN_001b6390(int);
 int FUN_001c7bf0(int, int);
-int FUN_001c7c44(int, int *);
+int nn_snd_CTR_Voice_AppendWaveBuffer(int, int *);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -31,7 +31,7 @@ extern int FUN_0018a4d0(int, int);
 extern int FUN_001af874(unsigned int, unsigned char *, int *);
 /* Supplied declaration required: FUN_001b6390. */
 /* Supplied declaration required: FUN_001c7bf0. */
-/* Supplied declaration required: FUN_001c7c44. */
+/* Supplied declaration required: nn_snd_CTR_Voice_AppendWaveBuffer. */
 extern void nn_snd_CTR_InitializeWaveBuffer(unsigned int);
 extern void nn_snd_CTR_Voice_SetMixParam(unsigned int, unsigned int);
 extern void nn_snd_CTR_Voice_SetPitch(unsigned int, float);
@@ -132,7 +132,7 @@ void FUN_00153cd0(int *param_1,int param_2,unsigned int param_3,int param_4)
           if (*pcVar2 == '\x02') {
             param_1[temp_v4 * 0xc + 4] = unaff_r11 + 0x20;
           }
-          FUN_001c7c44(param_1[temp_v4 + 0x1a],param_1 + temp_v4 * 0xc + 2);
+          nn_snd_CTR_Voice_AppendWaveBuffer(param_1[temp_v4 + 0x1a],param_1 + temp_v4 * 0xc + 2);
           if (pcVar2[1] != '\0') {
             temp_v1 = nw_snd_Sound3DManager_Initialize_128F9C(*pcVar2,*(unsigned int *)(pcVar2 + 8));
             param_1[temp_v4 * 0xc + 8] = temp_v0 + temp_v1;
@@ -141,7 +141,7 @@ void FUN_00153cd0(int *param_1,int param_2,unsigned int param_3,int param_4)
             if (*pcVar2 == '\x02') {
               param_1[temp_v4 * 0xc + 10] = unaff_r11 + 0x26;
             }
-            FUN_001c7c44(param_1[temp_v4 + 0x1a],param_1 + temp_v4 * 0xc + 8);
+            nn_snd_CTR_Voice_AppendWaveBuffer(param_1[temp_v4 + 0x1a],param_1 + temp_v4 * 0xc + 8);
           }
           temp_v4 = temp_v4 + 1;
         } while (temp_v4 < param_1[0x3b]);

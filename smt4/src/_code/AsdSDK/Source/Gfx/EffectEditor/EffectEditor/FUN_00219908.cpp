@@ -3,7 +3,7 @@
 
 extern "C" {
 
-extern const PhaseTrigEntry DAT_00407ed0[];
+extern const PhaseTrigEntry g_sinCosTable[];
 
 s32 padIsButtonPressed(u32 button);
 s32 slotIsActive(u32 button);
@@ -44,9 +44,9 @@ void FUN_00219908(void)
     offset.x = g_effectEditorCameraDefaults.eye.x - g_effectEditorCameraDefaults.target.x;
     offset.y = g_effectEditorCameraDefaults.eye.y - g_effectEditorCameraDefaults.target.y;
     offset.z = g_effectEditorCameraDefaults.eye.z - g_effectEditorCameraDefaults.target.z;
-    PhaseSinCos a = samplePhase(DAT_00407ed0, g_effectEditorCameraDefaults.rotation.x * 0.71111107f);
-    PhaseSinCos b = samplePhase(DAT_00407ed0, g_effectEditorCameraDefaults.rotation.y * 0.71111107f);
-    PhaseSinCos c = samplePhase(DAT_00407ed0, g_effectEditorCameraDefaults.rotation.z * 0.71111107f);
+    PhaseSinCos a = samplePhase(g_sinCosTable, g_effectEditorCameraDefaults.rotation.x * 0.71111107f);
+    PhaseSinCos b = samplePhase(g_sinCosTable, g_effectEditorCameraDefaults.rotation.y * 0.71111107f);
+    PhaseSinCos c = samplePhase(g_sinCosTable, g_effectEditorCameraDefaults.rotation.z * 0.71111107f);
 
     matrix[0] = c.cosine * b.cosine;
     matrix[1] = a.sine * c.cosine * b.sine - a.cosine * c.sine;

@@ -17,7 +17,7 @@ void vcallSlot12IfValid(u32 handle);
 extern u32 DAT_00588024;
 extern u8 DAT_00617e70[];
 extern u8 DAT_00617f18[];
-extern S4Player DAT_00617f40;
+extern S4Player g_mobiclipPlayer;
 extern S4FsReader DAT_006184a0;
 extern S4File DAT_00618500;
 
@@ -26,8 +26,8 @@ void mobiclipCtrlShutdown(void)
     u32 *handle;
 
     FUN_00423c0c(DAT_00617f18);
-    movieSyncDrainSourcePositions(&DAT_00617f40);
-    FUN_00425cd8(&DAT_00617f40);
+    movieSyncDrainSourcePositions(&g_mobiclipPlayer);
+    FUN_00425cd8(&g_mobiclipPlayer);
     ((Obj420a2c *)DAT_00617e70)->Obj420a2c::releaseSources();
     ((Obj557f00 *)DAT_00617f18)->Obj557f00::close();
     FUN_005143ac(DAT_00588024);

@@ -15,7 +15,7 @@ s32 sysShutdownAndClearBusy(void)
 
     FUN_0010e574();
     result = fsUnmountByName();
-    FUN_002c3510(result);
+    processResultSetValue(result);
     if ((s32)(result & 0x80000000) >= 0) {
         DAT_00465240 = 0;
     }

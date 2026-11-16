@@ -29,8 +29,8 @@ void btlTalkBustUpSetUnk2F4(s32 value);
 s32 FUN_0035fcbc(void);
 void FUN_003deea4(s32 arg);
 void FUN_00417a60(u32 id);
-s32 FUN_004186a4(void);
-u32 FUN_004186e0(void);
+s32 rosterHasLeader(void);
+u32 rosterGetLeaderId(void);
 void optionsClearFlag1(void);
 
 
@@ -101,7 +101,7 @@ u32 scrCommTalkBustUpShow(void)
                 }
                 btlTalkBustUpSetUnk2F4(1);
             }
-            if (FUN_004186a4() != 0 && FUN_004186e0() == id) {
+            if (rosterHasLeader() != 0 && rosterGetLeaderId() == id) {
                 optionsClearFlag1();
             }
         }

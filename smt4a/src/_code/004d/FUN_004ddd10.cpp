@@ -6,7 +6,7 @@
 extern "C" {
 
 int dataTable04FindById(void);
-int FUN_003e8bb0(unsigned char [4], int, unsigned int);
+int btlEntryBuildSummary(unsigned char [4], int, unsigned int);
 int btlResetSlot(int, int, int);
 int FUN_004ab8e4(unsigned int);
 int btlSlotSetStoreValue(int, int, int);
@@ -45,7 +45,7 @@ extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: dataTable04FindById. */
 extern int FUN_003e7adc(int);
-/* Supplied declaration required: FUN_003e8bb0. */
+/* Supplied declaration required: btlEntryBuildSummary. */
 /* Supplied declaration required: btlResetSlot. */
 extern int btlSlotStateIs4To7(int, unsigned int);
 /* Supplied declaration required: FUN_003f2aac. */
@@ -124,7 +124,7 @@ unsigned int FUN_004ddd10(int *param_1,unsigned int *param_2)
     if (temp_v2 == 0) {
       return 0;
     }
-    FUN_003e8bb0(temp_v7,*param_1,param_2[8]);
+    btlEntryBuildSummary(temp_v7,*param_1,param_2[8]);
     if (temp_v11 == '\0') {
       param_2[2] = 5;
       break;
@@ -183,7 +183,7 @@ unsigned int FUN_004ddd10(int *param_1,unsigned int *param_2)
           }
         }
         if ((*(unsigned short *)(param_2[10] + 0x110) & 0x10) != 0) {
-          FUN_003e8bb0(temp_v7,*param_1,param_2[8]);
+          btlEntryBuildSummary(temp_v7,*param_1,param_2[8]);
           if ((temp_v10 == '\0') || (temp_v2 = FUN_004c6b8c(param_2[8],(int)temp_v9), temp_v2 != 0)) {
             btlSlotSetStoreValue((int)*(short *)(param_2[9] + 0x6a),0x12,0);
           }
@@ -235,7 +235,7 @@ unsigned int FUN_004ddd10(int *param_1,unsigned int *param_2)
     if ((*(unsigned short *)(param_2[10] + 0x110) & 0x10) == 0) {
       return 1;
     }
-    FUN_003e8bb0(temp_v7,*param_1,param_2[8]);
+    btlEntryBuildSummary(temp_v7,*param_1,param_2[8]);
     temp_v1 = *(short *)(param_2[10] + 0x1be);
     if (temp_v1 != 1) {
       if (temp_v1 != 2) {

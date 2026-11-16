@@ -47,7 +47,7 @@ int nodeGroupSetScale(int);
 int nodeOwnerSetTranslations(int, int *);
 int playerModelLoadPart(...);
 int FUN_00297684(int);
-int FUN_002a55ec(...);
+int asdModelSelectSecondaryMotion(...);
 int modelSelectPrimaryMotion(...);
 int FUN_003351e0(int);
 int FUN_00343c58(int, unsigned int, int *, int *);
@@ -85,7 +85,7 @@ extern int asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned in
 /* Supplied declaration required: playerModelLoadPart. */
 /* Supplied declaration required: FUN_00297684. */
 /* Supplied declaration required: lightOwnerRegister. */
-/* Supplied declaration required: FUN_002a55ec. */
+/* Supplied declaration required: asdModelSelectSecondaryMotion. */
 /* Supplied declaration required: modelSelectPrimaryMotion. */
 extern int gameGetPlayerData(void);
 extern int *FUN_00335118(int);
@@ -253,7 +253,7 @@ LAB_002741d4:
     if (*(char *)((int)g_lmapScene + 0x183) != '\0') {
       modelSelectPrimaryMotion(*(unsigned int *)(g_lmapScene[0x5e] + 8),1);
       modelSelectSecondaryMotion(*(unsigned int *)(g_lmapScene[0x5e] + 8),1);
-      FUN_002a55ec(*(unsigned int *)(g_lmapScene[0x5e] + 8),1);
+      asdModelSelectSecondaryMotion(*(unsigned int *)(g_lmapScene[0x5e] + 8),1);
       piVar3 = g_lmapScene;
       *(unsigned char *)((int)g_lmapScene + 0x183) = 0;
       *(unsigned char *)(piVar3 + 0x61) = 0;
@@ -281,7 +281,7 @@ LAB_002741d4:
         *(unsigned char *)((int)g_lmapScene + 0x181) = 0;
         modelSelectPrimaryMotion(*(unsigned int *)(piVar3[0x5f] + 8),0);
         modelSelectSecondaryMotion(*(unsigned int *)(g_lmapScene[0x5f] + 8),0);
-        FUN_002a55ec(*(unsigned int *)(g_lmapScene[0x5f] + 8),0);
+        asdModelSelectSecondaryMotion(*(unsigned int *)(g_lmapScene[0x5f] + 8),0);
       }
     }
   }

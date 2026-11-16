@@ -12,8 +12,8 @@ extern u8 g_soundVolumeSetting;
 
 s32 jyoucyuGetTableEntry(u32 index);
 s32 FUN_00162ea4(void);
-s32 FUN_001448a8(s32 id, u8 volume, s32 arg);
-s32 FUN_00143b58(s32 id, u8 volume, s32 arg, f32 pitch, f32 pan);
+s32 asdSndPlaySlotA(s32 id, u8 volume, s32 arg);
+s32 asdSndPlaySlotB(s32 id, u8 volume, s32 arg, f32 pitch, f32 pan);
 
 /* Plays sound `id` (a voice, or an effect panned by screen `position` 1-5); returns its handle or -1. */
 s32 soundPlayAtPosition(s32 id, u32 position)
@@ -25,7 +25,7 @@ s32 soundPlayAtPosition(s32 id, u32 position)
         return handle;
     }
     if ((u32)(id - SOUND_VOICE_FIRST) <= SOUND_VOICE_LAST - SOUND_VOICE_FIRST) {
-        handle = FUN_001448a8(id, g_soundVolumeSetting, 0) + SOUND_VOICE_HANDLE_BASE;
+        handle = asdSndPlaySlotA(id, g_soundVolumeSetting, 0) + SOUND_VOICE_HANDLE_BASE;
     } else if ((u32)(id - SOUND_SE_FIRST) <= SOUND_SE_LAST - SOUND_SE_FIRST) {
         pan = 0.0f;
         switch (position) {
@@ -45,7 +45,7 @@ s32 soundPlayAtPosition(s32 id, u32 position)
             pan = -0.8f;
             break;
         }
-        handle = FUN_00143b58(id, g_soundVolumeSetting, 0, 1.0f, pan);
+        handle = asdSndPlaySlotB(id, g_soundVolumeSetting, 0, 1.0f, pan);
     }
     return handle;
 }

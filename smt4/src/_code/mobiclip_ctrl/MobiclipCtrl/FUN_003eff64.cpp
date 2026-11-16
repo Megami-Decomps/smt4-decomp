@@ -85,7 +85,7 @@ extern unsigned int DAT_004c3b04; /* 0x4c3b04 */
 extern unsigned int DAT_004c3b08; /* 0x4c3b08 */
 extern unsigned char DAT_004c3b1c; /* 0x4c3b1c */
 extern unsigned char DAT_004c3b1d; /* 0x4c3b1d */
-extern unsigned char DAT_004c3b20; /* 0x4c3b20 */
+extern unsigned char g_mobiclipPlayer; /* 0x4c3b20 */
 extern unsigned int DAT_004c4080; /* 0x4c4080 */
 extern unsigned int DAT_004c4084; /* 0x4c4084 */
 extern unsigned int DAT_004c4088; /* 0x4c4088 */
@@ -215,7 +215,7 @@ void FUN_003eff64(unsigned int param_1,unsigned int param_2,int param_3)
   DAT_004c3b08 = 0;
   DAT_004c3b1c = 0;
   DAT_004c3b1d = 0;
-  FUN_00351878(&DAT_004c3b20,&FUN_0034f6c8,0x100000);
+  FUN_00351878(&g_mobiclipPlayer,&FUN_0034f6c8,0x100000);
   DAT_004c4080 = 0;
   DAT_004c4084 = 0;
   DAT_004c4088 = 0;

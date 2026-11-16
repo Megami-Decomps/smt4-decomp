@@ -9,7 +9,7 @@ int FUN_0015f490(...);
 int eventQueueAddUnique(...);
 int statusCommitSelectedSkills(...);
 int statusDownEnterState11(...);
-int FUN_004bd6b0(...);
+int partyRecordSetEquippedItemClampRank(...);
 
 int padQueryLogicalKey(...);
 int eventQueueAddUniqueIfValid(...);
@@ -66,7 +66,7 @@ extern int statusDownGetCursorPosition(void);
 extern unsigned int sysPlayVoice(unsigned int);
 /* Supplied declaration required: countersAddSaturating. */
 /* Supplied declaration required: unitRecomputeDerivedStats. */
-/* Supplied declaration required: FUN_004bd6b0. */
+/* Supplied declaration required: partyRecordSetEquippedItemClampRank. */
 
 
 void FUN_004cbd70(int param_1)
@@ -269,7 +269,7 @@ LAB_004cbdc8:
       temp_v3 = stateHolderStateIs0x12();
       if (temp_v3 != 0) {
         FUN_00333dc8(0);
-        FUN_004bd6b0(temp_v1,*(unsigned short *)(temp_v0 + 4),temp_v4);
+        partyRecordSetEquippedItemClampRank(temp_v1,*(unsigned short *)(temp_v0 + 4),temp_v4);
         statusCommitSelectedSkills(temp_v1 + 0x34);
         *(unsigned int *)(param_1 + 8) = 100;
         return;

@@ -54,11 +54,11 @@ s32 FUN_00287304(void);
 void FUN_00287328(u32 bgm);
 void FUN_00287528(s32 mode);
 void commonBgStopChildAndBeginTransition(void);
-void FUN_002898e4(void);
+void commonBgAcquire(void);
 s32 bgmGetStateById(u32 id);
 s32 objectFlagBitIsSet(u32 object, u32 bit);
 s32 questIsCompleted(u32 quest);
-void FUN_002a03d8(s32 first, s32 second);
+void titleSetSlotValueState2(s32 first, s32 second);
 void FUN_002a6fb8(void);
 void libc_strcpy(char *destination, const char *source);
 void asdSequenceRequest(u32 kind, const void *argument, u32 size);
@@ -151,7 +151,7 @@ s32 QuestCenterMainProcUpdate(u32 handle)
             if (bgmState != 1) {
                 FUN_00287328(bgm);
             }
-            FUN_002898e4();
+            commonBgAcquire();
             buttonHelpAcquireResources();
             buttonHelpCreate();
             commonBgStopChildAndBeginTransition();
@@ -202,8 +202,8 @@ s32 QuestCenterMainProcUpdate(u32 handle)
         break;
     case 4:
         if (g_qcMain.restoreMenus != 0) {
-            FUN_002a03d8(0, 1);
-            FUN_002a03d8(1, 1);
+            titleSetSlotValueState2(0, 1);
+            titleSetSlotValueState2(1, 1);
             FUN_0032c69c();
         }
         return 0xffffffff;

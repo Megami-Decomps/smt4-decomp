@@ -7,7 +7,7 @@
 extern "C" {
 
 int FUN_001a1648(void);
-int FUN_002bff50(void);
+int messageSetConfirmDisplayMode(void);
 int bannerShow(...);
 
 int scrWorkGetValue(...);
@@ -54,7 +54,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: dataTable01FindByIdWithAoc. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_002bff50. */
+/* Supplied declaration required: messageSetConfirmDisplayMode. */
 extern int gameGetMapBlock(void);
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: bannerShow. */
@@ -285,7 +285,7 @@ unsigned int scrComm_QuestUI_RunListLoop(void)
       FUN_001a1648();
     }
     if (*(char *)(temp_v4 + 6) != '\0') {
-      FUN_002bff50();
+      messageSetConfirmDisplayMode();
       temp_v8 = scrWorkGetValue(1);
       temp_v12[0] = 1;
       messageForwardDefaultMode(temp_v13,0x68,temp_v8,5);
@@ -307,7 +307,7 @@ LAB_00201ed0:
       }
     }
     else {
-      FUN_002bff50();
+      messageSetConfirmDisplayMode();
       if (!temp_v1) {
         temp_v8 = scrWorkGetValue(1);
         temp_v12[0] = 1;

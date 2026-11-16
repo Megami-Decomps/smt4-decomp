@@ -35,7 +35,7 @@ extern unsigned char LAB_00285224; /* 0x285224 */
 /* Supplied declaration required: namedEntryTableSetById. */
 /* Supplied declaration required: FUN_00263cb8. */
 /* Supplied declaration required: FUN_002671f4. */
-extern int FUN_00285574(void);
+extern int mapGetDepartureIndex(void);
 extern int gameGetMapBlock(void);
 
 
@@ -52,7 +52,7 @@ void FUN_002849a4(int param_1)
   unsigned int in_fpscr;
   
   temp_v1 = gameGetMapBlock();
-  temp_v2 = FUN_00285574();
+  temp_v2 = mapGetDepartureIndex();
   temp_v3 = (int)*(char *)(temp_v1 + 0xdcc);
   temp_v5 = (int)*(char *)(temp_v1 + 0xdcd);
   temp_v4 = temp_v3;

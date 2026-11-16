@@ -35,7 +35,7 @@ u32 tableGroupFindEntryIndex(u32, const char *);
 void scrScriptProcessStartEntry(void *, u32);
 void scrRunOpcodesStub(void *);
 s32 FUN_0040ab8c();
-void FUN_0040aad4(EquipmentMenuResource *, s32);
+void moriModelContentLoadBody(EquipmentMenuResource *, s32);
 void handleRegistryRegisterObject(u32, u32);
 void controllerSetPositionXyz(u32, f32, f32, f32);
 }
@@ -85,7 +85,7 @@ void Obj536044::FUN_00494740()
     }
     }
     if (scene->resource && FUN_0040ab8c() && scene->resource->handle == 0) {
-        FUN_0040aad4(scene->resource, 0);
+        moriModelContentLoadBody(scene->resource, 0);
         u32 handle = scene->resource->handle;
         handleRegistryRegisterObject(g_handleRegistry, handle);
         controllerSetPositionXyz(handle, 0.0f, -32000.0f, 0.0f);

@@ -13,7 +13,7 @@ typedef struct RefHolder {
 } RefHolder;
 
 extern void sharedRefRelease(SharedRef *ref);
-extern void FUN_002f4f20(void *refCount, s32 amount);
+extern void atomicAddS32(void *refCount, s32 amount);
 
 /* Replaces the holder's shared reference with `ref`: releases the old one and takes a reference on the new one. */
 void sharedRefHolderReplace(RefHolder *holder, SharedRef *ref)
@@ -28,7 +28,7 @@ void sharedRefHolderReplace(RefHolder *holder, SharedRef *ref)
         u8 *counter = ref->refCount;
 
         holder->ref = ref;
-        FUN_002f4f20(counter, 1);
+        atomicAddS32(counter, 1);
     }
 }
 

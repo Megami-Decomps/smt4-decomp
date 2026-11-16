@@ -10,8 +10,8 @@ struct CecState {
     /* 0x2 */ u8 unk02;
 };
 
-extern CecState DAT_005b4486;
-s32 FUN_00432104(void);
+extern CecState g_cecState;
+s32 ipcServiceSessionRelease(void);
 s32 FUN_0042fe18(void);
 void FUN_0042fbe4(void);
 
@@ -19,15 +19,15 @@ s32 cecShutdownIfInitialized(void)
 {
     s32 result = 0;
 
-    if (DAT_005b4486.initialized != 0) {
-        if (DAT_005b4486.flushPending != 0) {
-            s32 flushResult = FUN_00432104();
+    if (g_cecState.initialized != 0) {
+        if (g_cecState.flushPending != 0) {
+            s32 flushResult = ipcServiceSessionRelease();
 
             if (nnResultIsFailure(flushResult)) {
                 return flushResult;
             }
-            DAT_005b4486.unk02 = 0;
-            DAT_005b4486.flushPending = 0;
+            g_cecState.unk02 = 0;
+            g_cecState.flushPending = 0;
         }
         s32 stopResult = FUN_0042fe18();
         result = stopResult;
@@ -35,7 +35,7 @@ s32 cecShutdownIfInitialized(void)
             return stopResult;
         }
         FUN_0042fbe4();
-        DAT_005b4486.initialized = 0;
+        g_cecState.initialized = 0;
     }
     return result;
 }

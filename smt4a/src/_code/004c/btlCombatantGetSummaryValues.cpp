@@ -11,7 +11,7 @@ struct CombatantSummary {
 
 extern "C" {
 BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, s32 index);
-void FUN_003e8bb0(CombatantSummary *summary, BtlMainStateA *battle, BtlCombatantEntryA *entry);
+void btlEntryBuildSummary(CombatantSummary *summary, BtlMainStateA *battle, BtlCombatantEntryA *entry);
 
 // Extract the unsigned value and signed modifier from a combatant's summary.
 void btlCombatantGetSummaryValues(s32 index, u32 *value, s32 *modifier)
@@ -19,7 +19,7 @@ void btlCombatantGetSummaryValues(s32 index, u32 *value, s32 *modifier)
     BtlMainStateA *battle = btlGetMainState();
     BtlCombatantEntryA *entry = btlMainFindEntryByListedId(battle, index);
     CombatantSummary summary;
-    FUN_003e8bb0(&summary, btlGetMainState(), entry);
+    btlEntryBuildSummary(&summary, btlGetMainState(), entry);
     *value = summary.value;
     *modifier = summary.modifier;
 }

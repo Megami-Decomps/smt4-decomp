@@ -11,7 +11,7 @@ s32 libc_sprintf(char *output, const char *format, ...);
 char *libc_strcpy(char *dest, const char *src);
 s32 libc_strlen(const char *string);
 
-extern const char DAT_0053d47c[]; /* "rom:/%s" */
+extern const char g_romPathFormat[]; /* "rom:/%s" */
 
 /* Whether a ':' within the path's first eight characters names a device. */
 static s32 pathHasDevice(const char *path)
@@ -36,7 +36,7 @@ void pathSetWithRomPrefix(PathOwner *owner, const char *path)
     if (pathHasDevice(path)) {
         libc_strcpy(owner->path, path);
     } else {
-        libc_sprintf(owner->path, DAT_0053d47c, path);
+        libc_sprintf(owner->path, g_romPathFormat, path);
     }
 }
 

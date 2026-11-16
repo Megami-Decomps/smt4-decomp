@@ -50,7 +50,7 @@ int byteTableASetValue3(int);
 int commonBgStopChildAndBeginTransition(void);
 int eventCommandStop(void);
 int eventOpeningResetValidJob(void);
-int FUN_003d54f8(...);
+int titleSetSlotValueState2(...);
 int aocDrawText8(int, unsigned int, int);
 int aocDrawText7(int, unsigned int, int);
 int FUN_0047e430(int, int);
@@ -113,7 +113,7 @@ extern int campButtonHelpIsActive(void);
 /* Supplied declaration required: commonBgStopChildAndBeginTransition. */
 /* Supplied declaration required: eventCommandStop. */
 /* Supplied declaration required: eventOpeningResetValidJob. */
-/* Supplied declaration required: FUN_003d54f8. */
+/* Supplied declaration required: titleSetSlotValueState2. */
 /* Supplied declaration required: aocDrawText8. */
 /* Supplied declaration required: aocDrawText7. */
 extern int aocPackageGrantsItem(int, unsigned int, unsigned int);
@@ -183,11 +183,11 @@ unsigned int FUN_00225ddc(void)
           puVar2[2] = 0x5f;
           temp_v3 = (int)pairedAvailabilityGetState(0);
           if (temp_v3 == 3) {
-            FUN_003d54f8(0,5);
+            titleSetSlotValueState2(0,5);
           }
           temp_v3 = (int)pairedAvailabilityGetState(1);
           if (temp_v3 == 3) {
-            FUN_003d54f8(1,5);
+            titleSetSlotValueState2(1,5);
           }
           temp_v3 = campButtonHelpIsActive();
           if (temp_v3 == 0) {
@@ -304,8 +304,8 @@ unsigned int FUN_00225ddc(void)
         } while (temp_v3 < 8);
         return 0;
       }
-      FUN_003d54f8(0,5);
-      FUN_003d54f8(1,5);
+      titleSetSlotValueState2(0,5);
+      titleSetSlotValueState2(1,5);
       byteTableASetValue(0);
       temp_v2 = 0xb;
     }

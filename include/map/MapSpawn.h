@@ -17,7 +17,7 @@ struct MapSpawnGrid {
 struct MapHeadingState { u8 prefix[0x18]; f32 heading; };
 typedef char MapSpawnOffsets[sizeof(MapSpawnPoint) == 0x44 && offsetof(MapSpawnPoint, x) == 8 && offsetof(MapSpawnGrid, x) == 0xDCC && offsetof(MapHeadingState, heading) == 0x18 ? 1 : -1];
 extern "C" {
-u8 FUN_00285574(void);
+u8 mapGetDepartureIndex(void);
 }
 
 #endif

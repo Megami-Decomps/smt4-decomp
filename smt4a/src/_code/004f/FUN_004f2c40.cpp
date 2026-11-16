@@ -15,7 +15,7 @@ extern "C" {
 int CONCAT44(...);
 int uiSetFloatPair(...);
 int FUN_0014f0dc(...);
-int FUN_0018a924(...);
+int mathSinCos(...);
 int FUN_00280070(...);
 int effectSetValueVec(...);
 int effectProcessSetVector(...);
@@ -128,7 +128,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: uiSetFloatPair. */
 /* Supplied declaration required: FUN_0014f0dc. */
 extern unsigned int randBetween(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0018a924. */
+/* Supplied declaration required: mathSinCos. */
 /* Supplied declaration required: FUN_001a1ee0. */
 /* Supplied declaration required: FUN_001aff14. */
 /* Supplied declaration required: eventCommandGetPendingCleanup. */
@@ -573,7 +573,7 @@ LAB_004f33d8:
     temp_v8 = temp_v21 * temp_v5 + temp_v22 * temp_v4 + temp_v23 * temp_v2;
     temp_v7 = temp_v25 * temp_v5 + temp_v26 * temp_v4 + temp_v27 * temp_v2;
     temp_v2 = temp_v29 * temp_v5 + temp_v30 * temp_v4 + temp_v31 * temp_v2;
-    FUN_0018a924(temp_v37,&temp_v51);
+    mathSinCos(temp_v37,&temp_v51);
     temp_v4 = temp_v10 - romwright_u2f((unsigned int)(temp_v51));
     temp_v10 = temp_v10 / romwright_sqrt_4(temp_v8 * temp_v8 + temp_v7 * temp_v7 + temp_v2 * temp_v2);
     temp_v8 = temp_v8 * temp_v10;

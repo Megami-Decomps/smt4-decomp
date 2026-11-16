@@ -14,7 +14,7 @@ int buttonHelpSetEnabled(...);
 int scrScriptProcessStartEntry(...);
 int asdTextDrawDirectoryEntry(...);
 int FUN_0036bea0(...);
-int FUN_003d4c68(int);
+int bgmResumeOrRequestTrack(int);
 int FUN_00426fe4(unsigned int *, unsigned int *, unsigned int *);
 int recordClearWideHandle(unsigned int *);
 int FUN_00473910(...);
@@ -63,7 +63,7 @@ extern int buttonHelpIsActionActive(unsigned int);
 extern int FUN_0031d174(unsigned int *);
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_0036bea0. */
-/* Supplied declaration required: FUN_003d4c68. */
+/* Supplied declaration required: bgmResumeOrRequestTrack. */
 /* Supplied declaration required: FUN_00426fe4. */
 /* Supplied declaration required: recordClearWideHandle. */
 /* Supplied declaration required: FUN_00473910. */
@@ -144,7 +144,7 @@ void AocMenu::runMainProcess()
       *(unsigned char *)(param_1 + 0xd3) = 1;
       temp_v2 = bgmGetStateById(0x1000041);
       if (temp_v2 != 1) {
-        FUN_003d4c68(0x1000041);
+        bgmResumeOrRequestTrack(0x1000041);
         return;
       }
     }

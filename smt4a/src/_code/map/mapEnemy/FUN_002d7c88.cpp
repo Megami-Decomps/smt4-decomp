@@ -13,7 +13,7 @@ ModelList *modelListInit(ModelList *);
 void resourceOwnerLoadFileSync(ModelList *, const char *);
 void FUN_0040a908(ModelList *, s32);
 void FUN_0040a918(ModelList *, s32);
-void FUN_0040aad4(ModelList *, u32);
+void moriModelContentLoadBody(ModelList *, u32);
 void modelPlayClip(MoriModelBody *, u32, u8, f32, f32);
 void handleRegistryRegisterObject(void *, MoriModelBody *);
 }
@@ -62,7 +62,7 @@ extern "C" u32 FUN_002d7c88(s32 index)
     resourceOwnerLoadFileSync(slot->model, resourceName);
     FUN_0040a908(slot->model, 0x10000);
     FUN_0040a918(slot->model, 0x20000);
-    FUN_0040aad4(slot->model, 0);
+    moriModelContentLoadBody(slot->model, 0);
     MoriModelBody *body = slot->model->content.body;
     modelPlayClip(body, 0, 2, 0.0f, 0.0f);
     handleRegistryRegisterObject(g_handleRegistry, body);

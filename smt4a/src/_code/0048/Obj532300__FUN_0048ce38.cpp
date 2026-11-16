@@ -32,7 +32,7 @@ void _ZN9Obj53230012FUN_0048ce38Ev(UiCursorWork *work)
     case 1: {
         void *motion = work->motion;
 
-        if (uiSpriteAdvanceAnimation(motion, 1.0f) && FUN_002e19f8()) {
+        if (uiSpriteAdvanceAnimation(motion, 1.0f) && buttonHelpStateIsNot3()) {
             work->state = 2;
             work->flags |= 2;
         }

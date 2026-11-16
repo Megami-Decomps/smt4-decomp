@@ -12,7 +12,7 @@ typedef struct AocSystem00291ba4 AocSystem00291ba4;
 void *dataTableGet(s32 table, s32 slot);
 u32 dataTableGetCount(void *table);
 s32 groupedFileTablesCountRecordsOfKind(AocSystem00291ba4 *aoc, s32 kind, s32 slot);
-Entry00291ba4 *FUN_00389a1c(AocSystem00291ba4 *aoc, u32 index);
+Entry00291ba4 *aocPackagesGetHashTable4Entry(AocSystem00291ba4 *aoc, u32 index);
 
 extern AocSystem00291ba4 *g_aocSystem; /* 0x433158 */
 
@@ -27,7 +27,7 @@ Entry00291ba4 *contentEntryGetD(u32 index)
         return &entries[index];
     }
     if (index < groupedFileTablesCountRecordsOfKind(g_aocSystem, 0x23, 4) + count) {
-        return FUN_00389a1c(g_aocSystem, index - count);
+        return aocPackagesGetHashTable4Entry(g_aocSystem, index - count);
     }
     return NULL;
 }

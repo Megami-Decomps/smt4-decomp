@@ -331,7 +331,7 @@ joined_r0x0028baa4:
             if (temp_v10 == unaff_r11) break;
             if (temp_v10 != 0xf813) {
               if (temp_v6 == temp_v1) break;
-              temp_v9 = FUN_0019be8c(temp_v10);
+              temp_v9 = charCodeIsPrivateUseGlyph(temp_v10);
               if (temp_v9 != 0) {
                 if (temp_v10 != 0xf801) {
                   if (temp_v10 != 0xf802) goto LAB_0028bd98;

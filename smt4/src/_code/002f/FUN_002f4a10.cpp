@@ -4,7 +4,7 @@ extern "C" {
 
 int screenFadeSlotReset(int index);
 int scrGetArg(...);
-int FUN_002a03d8(int index, u32 value);
+int titleSetSlotValueState2(int index, u32 value);
 extern int FUN_002c1d5c(void);
 
 u32 FUN_002f4a10(void)
@@ -17,8 +17,8 @@ u32 FUN_002f4a10(void)
             screenFadeSlotReset(0);
             screenFadeSlotReset(1);
         } else {
-            FUN_002a03d8(0, value);
-            FUN_002a03d8(1, value);
+            titleSetSlotValueState2(0, value);
+            titleSetSlotValueState2(1, value);
         }
     }
     return 1;

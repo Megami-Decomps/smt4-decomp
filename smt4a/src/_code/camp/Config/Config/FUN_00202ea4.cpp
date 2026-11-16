@@ -202,7 +202,7 @@ void FUN_00202ea4(void)
        (temp_v6 = temp_v7,
        FUN_003450d4(temp_v7,0,temp_v7 + 0x6e,0xffffffff,0xffffffff,0xffffffff,temp_v12,0,1), temp_v6 != 0)
        ) {
-      temp_v6 = FUN_002a4894(reinterpret_cast<const Object *>(temp_v7));
+      temp_v6 = listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(temp_v7));
       *(int *)(temp_v7 + 0x88) = temp_v6;
       temp_v10 = *(unsigned int *)(temp_v7 + temp_v6 * 8 + 0x98);
       temp_v4 = dataTableGet(0x36,1);

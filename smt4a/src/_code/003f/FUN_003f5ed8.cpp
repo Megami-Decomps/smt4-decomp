@@ -71,7 +71,7 @@ void FUN_003f5ed8(DialogWork *work)
     }
     FUN_00228b04(work->list, 1);
     work->offset = resourceRunOperationIfUnblocked(work->list);
-    work->first = FUN_002a4894(reinterpret_cast<const Object *>(work->list));
+    work->first = listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(work->list));
     u32 id = work->ids[work->first + work->offset];
 
     if (work->selectedId != id) {

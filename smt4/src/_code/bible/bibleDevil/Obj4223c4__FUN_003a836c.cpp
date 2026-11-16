@@ -46,7 +46,7 @@ void FUN_0022d1a8(BibleDevilScreen *screen);
 static __inline void iconRefresh(BibleDevilScreen *screen)
 {
     if (screen->icon.devilId != 0) {
-        BibleDevilType *type = &reinterpret_cast<BibleDevilRecord *>(FUN_002a0d0c())->type;
+        BibleDevilType *type = &reinterpret_cast<BibleDevilRecord *>(gameDataGetSortPreferences())->type;
         s8 animation;
 
         switch (type->kind) {

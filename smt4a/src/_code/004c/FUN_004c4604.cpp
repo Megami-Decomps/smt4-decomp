@@ -8,7 +8,7 @@ extern "C" {
 int dataTable8FindRecord(void);
 int dataTable04FindById(void);
 int sysMemClear(...);
-int FUN_003e8bb0(unsigned char [2], unsigned int, unsigned int *);
+int btlEntryBuildSummary(unsigned char [2], unsigned int, unsigned int *);
 int btlMainFindEntryByListedId(...);
 int FUN_004bf6e0(...);
 int FUN_004bf9a0(...);
@@ -65,7 +65,7 @@ extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: dataTable04FindById. */
 extern int FUN_0028cb6c(void);
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_003e8bb0. */
+/* Supplied declaration required: btlEntryBuildSummary. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_004bf6e0. */
 /* Supplied declaration required: FUN_004bf9a0. */
@@ -235,7 +235,7 @@ LAB_004c4810:
       }
       if ((puVar3[0x116a] & DAT_005714b0) == 0 && (puVar3[0x116b] & DAT_005714b4) == 0) {
         temp_v3 = reinterpret_cast<int>(btlGetMainState());
-        FUN_003e8bb0(temp_v31,temp_v3,puVar4);
+        btlEntryBuildSummary(temp_v31,temp_v3,puVar4);
         if ((param_1 < 1) && (temp_v37 != 1)) {
           if (temp_v37 != 8) {
             return 0;

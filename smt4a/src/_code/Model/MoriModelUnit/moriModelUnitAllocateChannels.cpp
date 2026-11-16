@@ -4,7 +4,7 @@
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
-extern const char DAT_00526108[];
+extern const char g_moriModelUnitSourceFileName[];
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 void idArrayConstruct(void *array, u16 *data, s32 count);
 void FUN_0045af14(void *array, f32 *data, s32 count);
@@ -41,7 +41,7 @@ void moriModelUnitAllocateChannels(ModelUnitBuffers *unit)
             channel->capacity = capacity;
             if (capacity > 0) {
                 u32 bytes = idArrayByteSize(capacity);
-                asdDebugTrace(DAT_00526108, 0x1a8);
+                asdDebugTrace(g_moriModelUnitSourceFileName, 0x1a8);
                 channel->data = static_cast<u16 *>(asdMemoryAlloc(0x10000, 0x100, 0, bytes, 1));
                 idArrayConstruct(channel->array, channel->data, capacity);
             }
@@ -52,7 +52,7 @@ void moriModelUnitAllocateChannels(ModelUnitBuffers *unit)
         if (bytes == 0) {
             positions->data = NULL;
         } else {
-            asdDebugTrace(DAT_00526108, 0x250);
+            asdDebugTrace(g_moriModelUnitSourceFileName, 0x250);
             positions->data = static_cast<f32 *>(asdMemoryAlloc(0x10000, 0x100, 0, bytes, 1));
             FUN_0045af14(positions, positions->data, floatCount);
         }

@@ -9,7 +9,7 @@ struct NameEntryWork {
 extern "C" {
 void sequenceRequestFlushDeferred();
 u32 sequenceRequestIsDeferred();
-void FUN_00397aa4(NameFormState *form);
+void nameEntryFormRelease(NameFormState *form);
 extern NameGlobals g_name;
 
 u32 nameEntryUpdateTask()
@@ -26,7 +26,7 @@ u32 nameEntryUpdateTask()
         }
         break;
     case 2:
-        FUN_00397aa4(&work->form);
+        nameEntryFormRelease(&work->form);
         work->state.done = 1;
         work->state.phase = 3;
         break;

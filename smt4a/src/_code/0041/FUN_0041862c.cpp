@@ -13,22 +13,22 @@ typedef struct FlagBlock {
 } FlagBlock;
 
 FlagBlock *gameFlagBlockGet(void);
-u32 FUN_001bd100(u32 id);
+u32 dataTable1bOr1cRecordHasFlag1(u32 id);
 
 static u32 bit3(u8 value)
 {
     return (value & 8) >> 3;
 }
 
-/* Counts the ids below 400 whose FUN_001bd100 mask equals `mask` and that have bit 3 of their flag entry set. */
+/* Counts the ids below 400 whose dataTable1bOr1cRecordHasFlag1 mask equals `mask` and that have bit 3 of their flag entry set. */
 s32 FUN_0041862c(u32 mask)
 {
     s32 count = 0;
     u16 id = 0;
 
     do {
-        if ((FUN_001bd100(id) & ~mask) == 0) {
-            if ((mask & ~FUN_001bd100(id)) == 0 && id < 0x15E && bit3(gameFlagBlockGet()->entries[id].bits)) {
+        if ((dataTable1bOr1cRecordHasFlag1(id) & ~mask) == 0) {
+            if ((mask & ~dataTable1bOr1cRecordHasFlag1(id)) == 0 && id < 0x15E && bit3(gameFlagBlockGet()->entries[id].bits)) {
                 count++;
             }
         }

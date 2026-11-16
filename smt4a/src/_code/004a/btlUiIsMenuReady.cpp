@@ -7,7 +7,7 @@ struct BattleScreen {
 };
 struct BattleUi {u8 unk00[16];BattleScreen *screen;};
 extern "C" {
-extern BattleUi g_btlUi;int menu32ModeIsNot6(void*);int FUN_0039ebcc(void*);
+extern BattleUi g_btlUi;int menu32ModeIsNot6(void*);int spriteOperationGetModeThreeCompletion(void*);
 /* Tests the active menu mode and the section's readiness. */
-int btlUiIsMenuReady(){BattleScreen *screen=g_btlUi.screen;return menu32ModeIsNot6(&screen->menu)!=0 && FUN_0039ebcc(&screen->section)!=0;}
+int btlUiIsMenuReady(){BattleScreen *screen=g_btlUi.screen;return menu32ModeIsNot6(&screen->menu)!=0 && spriteOperationGetModeThreeCompletion(&screen->section)!=0;}
 }

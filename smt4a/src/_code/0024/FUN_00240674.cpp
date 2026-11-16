@@ -46,7 +46,7 @@ PartySlotTable *gameGetSlotTable(void);
 GaugeIcon *asdTMTexTableEntryAt(u32 table, u32 sprite);
 PartyMemberRecord *gameGetPlayerData(void);
 PartyMemberRecord *gameGetSlotRecord(s32 slot);
-PartyMemberRecord *FUN_003e503c(u16 index);
+PartyMemberRecord *partyGetSlotPreferredFirst(u16 index);
 s32 partySlotMatchesSelected(PartyMemberRecord *record);
 u32 levelGetExpRequirement(s32 level);
 u32 FUN_004ccdb8(u16 expCurve, s32 level, s32 expBonus);
@@ -101,7 +101,7 @@ extern "C" void FUN_00240674(ExpResultWork *work)
     }
 
     for (s32 i = 0; i < 12; i++) {
-        PartyMemberRecord *record = FUN_003e503c(i);
+        PartyMemberRecord *record = partyGetSlotPreferredFirst(i);
         if (actorIsActive(record)) {
             s32 index = i + 25;
             if (index > 36) {

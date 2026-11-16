@@ -19,7 +19,7 @@ void jobStop(u32 job, u32 flags);
 void partyPanelReleaseResources(void)
 {
     PartyPanelState *panel = g_partyPanel;
-    reinterpret_cast<PartyPanelSavedFlags *>(FUN_002a0d0c())->restore = panel->unk42;
+    reinterpret_cast<PartyPanelSavedFlags *>(gameDataGetSortPreferences())->restore = panel->unk42;
     if (panel->resources.script) {
         scrScriptProcessDestroy(panel->resources.script);
     }

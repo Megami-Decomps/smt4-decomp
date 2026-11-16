@@ -28,7 +28,7 @@ void FUN_00246e24(s32 a, BattleActionUnit *unit, BtlActionRecord *action, u32 ma
 void FUN_00246d38(s32 a, BattleActionUnit *unit, BtlActionRecord *action, u32 mask);
 SaveSlotTable *gameGetSlotTable(void);
 void *gameGetUnitRecord(s32 slot);
-s32 FUN_00295d7c(void *record);
+s32 slotUnitIsInActiveParty(void *record);
 void objectFlagSetBit(void *record, s32 bit);
 void objectFlagsClear(void *record, u32 flags);
 
@@ -141,7 +141,7 @@ void FUN_003c33c8(StatusFlagEditor *screen, BtlMainState *battle)
                 s8 unit = reinterpret_cast<s8 *>(gameGetSlotTable())[slot + 0x90f0];
                 if (unit >= 0) {
                     void *record = gameGetUnitRecord(unit);
-                    if (record != NULL && FUN_00295d7c(record) == 0) {
+                    if (record != NULL && slotUnitIsInActiveParty(record) == 0) {
                         for (s32 bit = 0; bit < 11; ++bit) {
                             if ((screen->mask & (1 << bit)) != 0)
                                 objectFlagSetBit(record, bit);
@@ -174,7 +174,7 @@ void FUN_003c33c8(StatusFlagEditor *screen, BtlMainState *battle)
                 s8 unit = reinterpret_cast<s8 *>(gameGetSlotTable())[slot + 0x90f0];
                 if (unit >= 0) {
                     void *record = gameGetUnitRecord(unit);
-                    if (record != NULL && FUN_00295d7c(record) == 0)
+                    if (record != NULL && slotUnitIsInActiveParty(record) == 0)
                         objectFlagsClear(record, screen->mask & 0xffff);
                 }
             }

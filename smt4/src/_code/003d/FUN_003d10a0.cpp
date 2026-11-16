@@ -41,7 +41,7 @@ extern "C" {
 s32 FUN_0029e9cc(u16 recordId);
 s32 FUN_00228220(u32 id, s32 a, s32 b, s32 casterSlot, s32 targetSlot, s32 c, u32 d, u8 *out);
 s32 FUN_0022899c(u32 id, s32 a, s32 b, s32 casterSlot, s32 targetSlot, u32 c);
-void FUN_00247478(u16 *summary, BtlMainState *state, u32 *actor);
+void btlEntryBuildSummary(u16 *summary, BtlMainState *state, u32 *actor);
 void *dataTable08Sub2GetRecord(u32 id);
 
 /* Looks for a use of the actor's skill (the first mode in its list that works) on one candidate
@@ -71,7 +71,7 @@ s32 FUN_003d10a0(BtlMainState **state, AiSkillContext *context, AiSkillTarget **
         context->outcome->state = 1;
         context->outcome->skillId = modes.skills[mode];
         u16 summary[18];
-        FUN_00247478(summary, *state, context->actor);
+        btlEntryBuildSummary(summary, *state, context->actor);
         switch (summary[0]) {
         case 1:
         case 6:

@@ -12,7 +12,7 @@ void* libc_bsearch(const void* key, const void* entries, u32 count, u32 size,
                    s32 (*compare)(const void*, const void*));
 s32 textureIdRecordCompare(const void* key, const void* record);
 u32 aocRunByName(AocSystemA* system, u32 slot, s32 resource, u32 flags);
-void FUN_001a6568(AocSystemA* system, u32 slot, s32 resource, u32 heap);
+void texTableRequestNamedTextureLoad(AocSystemA* system, u32 slot, s32 resource, u32 heap);
 
 // Queue a window texture selected by id, preferring its downloadable resource when present.
 void sWinRequestMappedTexture(s32 id, u32 options)
@@ -62,7 +62,7 @@ void sWinRequestMappedTexture(s32 id, u32 options)
         return;
     }
     if (aocRunByName(g_aocSystem, 52, resource, 1) != 0) {
-        return FUN_001a6568(g_aocSystem, 52, resource, 0x10000);
+        return texTableRequestNamedTextureLoad(g_aocSystem, 52, resource, 0x10000);
     }
     asdTMTexLoadMainHeap(52, resource);
 }

@@ -84,7 +84,7 @@ extern int dataTable15GetUnlockedEntryId(int, unsigned int);
 extern unsigned int objectPartRunUnlessLocked(int);
 extern int FUN_0029ee54(int);
 /* Supplied declaration required: buttonHelpSetText. */
-extern int FUN_0029efa8(int);
+extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_002a035c. */
 extern int gameGetSlotTable(void);
@@ -154,7 +154,7 @@ void FUN_001d0750(int *param_1)
     spriteTable22Acquire();
     FUN_003ad0e0();
     temp_v1 = resourceRunOperationIfUnblocked(temp_v2 + 0x240);
-    temp_v4 = FUN_0029efa8(temp_v2 + 0x240);
+    temp_v4 = listCursorGetRowIfUnblocked(temp_v2 + 0x240);
     selectionSetUnitByRecordId((int)*(short *)(temp_v2 + (temp_v4 + temp_v1) * 2 + 0x1db4));
     FUN_003aca0c();
     FUN_003aacd0();

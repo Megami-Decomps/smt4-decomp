@@ -6,7 +6,7 @@ extern CampStateA *g_camp;
 extern RenderCtxA *g_renderCtx;
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 s32 renderCtxPackPassFlags(u32 enabled, u32 mode);
-u32 FUN_002a4878(const void *selection);
+u32 listCursorGetRowOfChildIfUnblocked(const void *selection);
 s32 FUN_003da8f4(s32 kind, u32 selected);
 void FUN_00227294(s32 first, s32 second, s32 enabled);
 void skinObjectUpdateMatrices(RenderCtxA *context);
@@ -24,7 +24,7 @@ u32 FUN_0025ec04(void)
         menu = camp->menu.previous;
     switch (menu) {
     case 0x24:
-        if (FUN_003da8f4(camp->unkA4, FUN_002a4878(camp->block40)) != 0x1B)
+        if (FUN_003da8f4(camp->unkA4, listCursorGetRowOfChildIfUnblocked(camp->block40)) != 0x1B)
             break;
         // This menu shares the pass only for the selected special entry.
     case 4: case 5: case 10: case 15: case 16: case 17: case 19: case 29:

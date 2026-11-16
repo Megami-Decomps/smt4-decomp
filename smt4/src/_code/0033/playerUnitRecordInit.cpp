@@ -30,7 +30,7 @@ extern "C" {
 char *strncpy(char *destination, const char *source, u32 count);
 void unitApplyLevelGrowth(PlayerUnitRecord *unit, s32 levels, s32 growStats);
 void FUN_003c1ef4(s32 value);
-void FUN_00299370(s32 value);
+void playerRecalcStatsFromEquipment(s32 value);
 
 // Builds the player's unit record: level, name and base stats, grown up from level 1.
 void playerUnitRecordInit(s32 level, const char *name, const PlayerBaseStats *stats)
@@ -52,7 +52,7 @@ void playerUnitRecordInit(s32 level, const char *name, const PlayerBaseStats *st
     unit->stats.stat4 = stats->stat4;
     unit->stats.stat5 = stats->stat5;
     unit->stats.stat6 = stats->stat6;
-    FUN_00299370(0);
+    playerRecalcStatsFromEquipment(0);
     unit->hp = unit->maxHp;
     unit->mp = unit->maxMp;
 }

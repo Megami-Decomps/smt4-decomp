@@ -16,13 +16,13 @@ struct PendingWarpState {
 extern "C" {
 extern GameState g_gameState;
 s32 scrGetArg(s32 index);
-void FUN_00275e4c(void);
+void mapSaveReturnSnapshot(void);
 
 // Handle the special script warp to map101, section5 and its fixed entry pose.
 u32 scrCommRequestSpecialMapWarp(void)
 {
     if (scrGetArg(0) == 0x164f) {
-        FUN_00275e4c();
+        mapSaveReturnSnapshot();
         PendingWarpState *warp = (PendingWarpState *)&g_gameState;
         warp->map = 101;
         warp->section = 5;

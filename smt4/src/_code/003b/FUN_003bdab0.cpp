@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_00247478(unsigned char [2], unsigned int *, unsigned int *);
+int btlEntryBuildSummary(unsigned char [2], unsigned int *, unsigned int *);
 int btlFindEntryBlockByMemberId(...);
 int btlMainFindEntryByListedId(...);
 int FUN_00283ebc(unsigned int, unsigned int, int);
@@ -44,7 +44,7 @@ typedef struct {
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 extern int randRange(unsigned int);
-/* Supplied declaration required: FUN_00247478. */
+/* Supplied declaration required: btlEntryBuildSummary. */
 /* Supplied declaration required: btlFindEntryBlockByMemberId. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_00283ebc. */
@@ -108,7 +108,7 @@ unsigned int FUN_003bdab0(int param_1,unsigned int param_2,int param_3,int param
   btlMainFindEntryByListedId(puVar3,param_5);
   puVar5 = puVar3;
   btlMainFindEntryByListedId(puVar3,param_6);
-  FUN_00247478(temp_v14,puVar3,puVar6);
+  btlEntryBuildSummary(temp_v14,puVar3,puVar6);
   temp_v1 = temp_v22;
   temp_v6 = 0xffffffff;
   temp_v7 = 0xffffffff;

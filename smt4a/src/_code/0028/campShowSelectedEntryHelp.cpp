@@ -32,7 +32,7 @@ extern "C" {
 extern CampView *g_camp;
 
 s32 resourceRunOperationIfUnblocked(CampPage *page);
-s32 FUN_002a4894(CampPage *page);
+s32 listCursorGetRowIfUnblocked(CampPage *page);
 void screenShowMessage(s32 id);
 void skillHelpUpdateAttributeAndTarget(s32 id);
 
@@ -45,44 +45,44 @@ void campShowSelectedEntryHelp(s32 page)
     case 10:
         break;
     case 9:
-        skillHelpUpdateAttributeAndTarget(camp->summons[resourceRunOperationIfUnblocked(&camp->pages[3]) + FUN_002a4894(&camp->pages[3])].id);
+        skillHelpUpdateAttributeAndTarget(camp->summons[resourceRunOperationIfUnblocked(&camp->pages[3]) + listCursorGetRowIfUnblocked(&camp->pages[3])].id);
         break;
     case 0xb:
-        screenShowMessage(camp->messages0[resourceRunOperationIfUnblocked(&camp->pages[0]) + FUN_002a4894(&camp->pages[0])]);
+        screenShowMessage(camp->messages0[resourceRunOperationIfUnblocked(&camp->pages[0]) + listCursorGetRowIfUnblocked(&camp->pages[0])]);
         break;
     case 0xd:
-        screenShowMessage(camp->messages1[resourceRunOperationIfUnblocked(&camp->pages[1]) + FUN_002a4894(&camp->pages[1])]);
+        screenShowMessage(camp->messages1[resourceRunOperationIfUnblocked(&camp->pages[1]) + listCursorGetRowIfUnblocked(&camp->pages[1])]);
         break;
     case 0xe:
-        screenShowMessage(camp->messages2[resourceRunOperationIfUnblocked(&camp->pages[2]) + FUN_002a4894(&camp->pages[2])]);
+        screenShowMessage(camp->messages2[resourceRunOperationIfUnblocked(&camp->pages[2]) + listCursorGetRowIfUnblocked(&camp->pages[2])]);
         break;
     case 0x13:
     case 0x48:
-        screenShowMessage(camp->messages5[resourceRunOperationIfUnblocked(&camp->pages[5]) + FUN_002a4894(&camp->pages[5])]);
+        screenShowMessage(camp->messages5[resourceRunOperationIfUnblocked(&camp->pages[5]) + listCursorGetRowIfUnblocked(&camp->pages[5])]);
         break;
     case 0x14:
     case 0x49:
-        screenShowMessage(camp->messages6[resourceRunOperationIfUnblocked(&camp->pages[6]) + FUN_002a4894(&camp->pages[6])]);
+        screenShowMessage(camp->messages6[resourceRunOperationIfUnblocked(&camp->pages[6]) + listCursorGetRowIfUnblocked(&camp->pages[6])]);
         break;
     case 0x15:
     case 0x4a:
-        screenShowMessage(camp->messages7[resourceRunOperationIfUnblocked(&camp->pages[7]) + FUN_002a4894(&camp->pages[7])]);
+        screenShowMessage(camp->messages7[resourceRunOperationIfUnblocked(&camp->pages[7]) + listCursorGetRowIfUnblocked(&camp->pages[7])]);
         break;
     case 0x16:
     case 0x4b:
-        screenShowMessage(camp->messages8[resourceRunOperationIfUnblocked(&camp->pages[8]) + FUN_002a4894(&camp->pages[8])]);
+        screenShowMessage(camp->messages8[resourceRunOperationIfUnblocked(&camp->pages[8]) + listCursorGetRowIfUnblocked(&camp->pages[8])]);
         break;
     case 0x17:
     case 0x4c:
-        screenShowMessage(camp->messages9[resourceRunOperationIfUnblocked(&camp->pages[9]) + FUN_002a4894(&camp->pages[9])]);
+        screenShowMessage(camp->messages9[resourceRunOperationIfUnblocked(&camp->pages[9]) + listCursorGetRowIfUnblocked(&camp->pages[9])]);
         break;
     case 0x18:
     case 0x4d:
-        screenShowMessage(camp->messages10[resourceRunOperationIfUnblocked(&camp->pages[10]) + FUN_002a4894(&camp->pages[10])]);
+        screenShowMessage(camp->messages10[resourceRunOperationIfUnblocked(&camp->pages[10]) + listCursorGetRowIfUnblocked(&camp->pages[10])]);
         break;
     case 0x19:
     case 0x4e:
-        screenShowMessage(camp->messages11[resourceRunOperationIfUnblocked(&camp->pages[11]) + FUN_002a4894(&camp->pages[11])]);
+        screenShowMessage(camp->messages11[resourceRunOperationIfUnblocked(&camp->pages[11]) + listCursorGetRowIfUnblocked(&camp->pages[11])]);
         break;
     }
 }

@@ -19,7 +19,7 @@ int dialogClose(...);
 int randomGetNormalizedFloat(void);
 
 int CONCAT44(double, double);
-int FUN_0018a924(...);
+int mathSinCos(...);
 int libm_sinf(void);
 int distSpatial(void);
 int mathAngleDeltaDegrees(void);
@@ -79,7 +79,7 @@ static float romwright_fabs_4(float value)
 }
 #endif
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_0018a924. */
+/* Supplied declaration required: mathSinCos. */
 /* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: dialogClose. */
 /* Supplied declaration required: randomGetNormalizedFloat. */
@@ -946,7 +946,7 @@ LAB_0029ad50:
           *(int *)(temp_v9 + 0x35c) = (int)((unsigned long long)temp_v24 >> 0x20);
           *(float *)(temp_v9 + 0x268) =
                *(float *)(temp_v9 + 0x268) - *(float *)(temp_v9 + 0x268) * 0.25f;
-          FUN_0018a924(temp_v26,temp_v31);
+          mathSinCos(temp_v26,temp_v31);
           temp_v16 = (float)VectorSignedToFloat((int)*(short *)(temp_v9 + 0x208),
                                               (unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v18 = (float)VectorSignedToFloat((int)*(short *)(temp_v9 + 0x208),
@@ -963,7 +963,7 @@ LAB_0029ad50:
                                               (unsigned char)(in_fpscr >> 0x16) & 3);
           *(float *)(temp_v9 + 0x268) = temp_v16 * -10.0f;
           *(float *)(temp_v9 + 0x35c) = temp_v18 * 0.16666667f;
-          FUN_0018a924(temp_v26,temp_v31);
+          mathSinCos(temp_v26,temp_v31);
           *(float *)(temp_v9 + 0x244) = *(float *)(temp_v9 + 0x238) + temp_v26[0] * 90.0f;
           *(float *)(temp_v9 + 0x24c) = *(float *)(temp_v9 + 0x240) + temp_v31[0] * 90.0f;
           VectorSignedToFloat(*(short *)(temp_v9 + 0x208) - 4,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -1014,7 +1014,7 @@ LAB_0029ad50:
         if ((int)temp_v18 >= 0x43b40001) {
           *(float *)(temp_v9 + 0x250) = temp_v18 - 360.0f;
         }
-        FUN_0018a924(temp_v26,temp_v31);
+        mathSinCos(temp_v26,temp_v31);
         *(float *)(temp_v9 + 0x244) = *(float *)(temp_v9 + 0x238) + temp_v26[0] * 90.0f;
         *(unsigned int *)(temp_v9 + 0x1ec) = 1;
         *(float *)(temp_v9 + 0x24c) = *(float *)(temp_v9 + 0x240) + temp_v31[0] * 90.0f;
@@ -1064,7 +1064,7 @@ LAB_0029ad50:
           *(int *)(temp_v9 + 0x35c) = (int)((unsigned long long)temp_v24 >> 0x20);
           *(float *)(temp_v9 + 0x268) =
                *(float *)(temp_v9 + 0x268) - *(float *)(temp_v9 + 0x268) * 0.25f;
-          FUN_0018a924(temp_v26,temp_v31);
+          mathSinCos(temp_v26,temp_v31);
           temp_v16 = (float)VectorSignedToFloat((int)*(short *)(temp_v9 + 0x208),
                                               (unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v18 = (float)VectorSignedToFloat((int)*(short *)(temp_v9 + 0x208),
@@ -1081,7 +1081,7 @@ LAB_0029ad50:
                                               (unsigned char)(in_fpscr >> 0x16) & 3);
           *(float *)(temp_v9 + 0x268) = temp_v16 * -9.166667f;
           *(float *)(temp_v9 + 0x35c) = temp_v18 * 0.16666667f;
-          FUN_0018a924(temp_v26,temp_v31);
+          mathSinCos(temp_v26,temp_v31);
           *(float *)(temp_v9 + 0x244) = *(float *)(temp_v9 + 0x238) + temp_v26[0] * 30.0f;
           *(float *)(temp_v9 + 0x24c) = *(float *)(temp_v9 + 0x240) + temp_v31[0] * 30.0f;
           VectorSignedToFloat(*(short *)(temp_v9 + 0x208) - 4,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -1128,7 +1128,7 @@ LAB_0029ad50:
         if ((int)temp_v18 >= 0x43b40001) {
           *(float *)(temp_v9 + 0x250) = temp_v18 - 360.0f;
         }
-        FUN_0018a924(temp_v26,temp_v31);
+        mathSinCos(temp_v26,temp_v31);
         *(float *)(temp_v9 + 0x244) = *(float *)(temp_v9 + 0x238) + temp_v26[0] * 30.0f;
         *(float *)(temp_v9 + 0x24c) = *(float *)(temp_v9 + 0x240) + temp_v31[0] * 30.0f;
         FUN_00329dd4(pcVar14);
@@ -1163,7 +1163,7 @@ LAB_0029ad50:
           *(int *)(temp_v9 + 0x35c) = (int)((unsigned long long)temp_v24 >> 0x20);
           *(float *)(temp_v9 + 0x268) =
                *(float *)(temp_v9 + 0x268) - *(float *)(temp_v9 + 0x268) * 0.25f;
-          FUN_0018a924(temp_v26,temp_v31);
+          mathSinCos(temp_v26,temp_v31);
           temp_v16 = (float)VectorSignedToFloat((int)*(short *)(temp_v9 + 0x208),
                                               (unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v18 = (float)VectorSignedToFloat((int)*(short *)(temp_v9 + 0x208),
@@ -1180,7 +1180,7 @@ LAB_0029ad50:
                                               (unsigned char)(in_fpscr >> 0x16) & 3);
           *(float *)(temp_v9 + 0x268) = temp_v16 * -11.666667f;
           *(float *)(temp_v9 + 0x35c) = temp_v18 * 0.16666667f;
-          FUN_0018a924(temp_v26,temp_v31);
+          mathSinCos(temp_v26,temp_v31);
           *(float *)(temp_v9 + 0x244) = *(float *)(temp_v9 + 0x238) + temp_v26[0] * 200.0f;
           *(float *)(temp_v9 + 0x24c) = *(float *)(temp_v9 + 0x240) + temp_v31[0] * 200.0f;
           VectorSignedToFloat(*(short *)(temp_v9 + 0x208) - 4,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -1224,7 +1224,7 @@ joined_r0x0029d070:
              *(float *)(temp_v9 + 0x24c) +
              (*(float *)(temp_v9 + 0x240) - *(float *)(temp_v9 + 0x24c)) * 0.25f;
         *(unsigned int *)(temp_v9 + 0x268) = 0xc28c0000;
-        FUN_0018a924(temp_v26,temp_v31);
+        mathSinCos(temp_v26,temp_v31);
         *(float *)(temp_v9 + 0x244) = *(float *)(temp_v9 + 0x238) + temp_v26[0] * 200.0f;
         *(float *)(temp_v9 + 0x24c) = *(float *)(temp_v9 + 0x240) + temp_v31[0] * 200.0f;
         FUN_00329dd4(pcVar14);

@@ -32,7 +32,7 @@ int libm_sinf(void);
 int FUN_00233e10(...);
 int FUN_00246014(void);
 int FUN_002d1f40(...);
-int FUN_00317af8(...);
+int padGetNormalizedAnalogStick(...);
 int FUN_00324e38(...);
 int FUN_00352308(void);
 int table23FindRecordByKey(unsigned int, unsigned int, unsigned int);
@@ -90,7 +90,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: FUN_00303460. */
 /* Supplied declaration required: mapIfReleaseSlot3. */
 /* Supplied declaration required: mapSetSceneState. */
-/* Supplied declaration required: FUN_00317af8. */
+/* Supplied declaration required: padGetNormalizedAnalogStick. */
 /* Supplied declaration required: FUN_00324e38. */
 /* Supplied declaration required: FUN_00327ee8. */
 /* Supplied declaration required: FUN_0033abd4. */
@@ -584,7 +584,7 @@ LAB_00366a74:
     temp_v1 = *(int *)(g_lmapScene + 8) + 1;
     *(int *)(g_lmapScene + 8) = temp_v1;
     if ((temp_v1 < 0x12) ||
-       ((((FUN_00317af8(&temp_v9,temp_v10,0), temp_v9 < 0xbf000001 && ((int)temp_v9 < 0x3f000001)
+       ((((padGetNormalizedAnalogStick(&temp_v9,temp_v10,0), temp_v9 < 0xbf000001 && ((int)temp_v9 < 0x3f000001)
           ) && (temp_v10[0] < 0xbf000001)) &&
         (((int)temp_v10[0] < 0x3f000001 && (*(int *)(g_lmapScene + 8) < 0x1f)))))) {
       FUN_002e364c(g_lmapScene + 0x28);

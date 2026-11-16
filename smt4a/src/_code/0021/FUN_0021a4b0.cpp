@@ -42,7 +42,7 @@ void FUN_0021a4b0()
     UiQuestApoc *quest = g_uiQuest;
     quest->state = 1;
     s32 page = resourceRunOperationIfUnblocked(quest->cursor);
-    s32 selection = FUN_002a4894(reinterpret_cast<const Object *>(quest->cursor));
+    s32 selection = listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(quest->cursor));
     u32 questId = quest->list[selection + page];
     FUN_00417e08(questId);
     gameOptionsClassifyMode();

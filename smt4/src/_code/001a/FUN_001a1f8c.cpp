@@ -36,7 +36,7 @@ extern int DAT_0043dd24; /* 0x43dd24 */
 extern int FUN_0029d644(int);
 /* Supplied declaration required: FUN_0029ee54. */
 /* Supplied declaration required: buttonHelpSetText. */
-extern int FUN_0029efa8(int);
+extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
@@ -112,7 +112,7 @@ unsigned int FUN_001a1f8c(void)
               } while (temp_v6 < temp_v9);
             }
             temp_v6 = resourceRunOperationIfUnblocked(temp_v10);
-            temp_v4 = FUN_0029efa8(temp_v10);
+            temp_v4 = listCursorGetRowIfUnblocked(temp_v10);
             temp_v1 = *(unsigned char *)(temp_v4 + temp_v6 + temp_v0 + 0x758);
             if (temp_v1 < 0x4c) goto LAB_001a2150;
             puVar13 = (unsigned short *)0x0;
@@ -129,7 +129,7 @@ unsigned int FUN_001a1f8c(void)
               } while (temp_v6 < temp_v9);
             }
             temp_v6 = resourceRunOperationIfUnblocked(temp_v10);
-            temp_v4 = FUN_0029efa8(temp_v10);
+            temp_v4 = listCursorGetRowIfUnblocked(temp_v10);
             temp_v1 = *(unsigned char *)(temp_v4 + temp_v6 + temp_v0 + 0x758);
             if (temp_v1 >= 0x4c) {
               puVar13 = (unsigned short *)0x0;
@@ -172,20 +172,20 @@ LAB_001a2150:
       uiSpriteAdvanceAnimation(temp_v0 + 0x6b8);
     }
     temp_v5 = resourceRunOperationIfUnblocked(temp_v9);
-    temp_v6 = FUN_0029efa8(temp_v9);
+    temp_v6 = listCursorGetRowIfUnblocked(temp_v9);
     temp_v7 = asdTMTexTableEntryAt(0x1e,0x48);
     puVar13 = (unsigned short *)0x0;
     temp_v10 = temp_v9;
     uiScrollHandleActionsOrTouch(temp_v9,temp_v7,temp_v0 + 0x772,(int)*(short *)(temp_v0 + 0x770),
                  (int)*(short *)(temp_v0 + 0x76c),(int)*(short *)(temp_v0 + 0x76e),temp_v11,0,1);
     if (temp_v10 != 0) {
-      temp_v10 = FUN_0029efa8(temp_v9);
+      temp_v10 = listCursorGetRowIfUnblocked(temp_v9);
       if (temp_v10 != temp_v5 + temp_v6) {
         *(unsigned char *)(temp_v0 + 0x74d) = 1;
       }
       if (*(char *)(temp_v0 + 0x74e) == '\x02') {
         temp_v10 = resourceRunOperationIfUnblocked(temp_v9);
-        temp_v9 = FUN_0029efa8(temp_v9);
+        temp_v9 = listCursorGetRowIfUnblocked(temp_v9);
         temp_v1 = *(unsigned char *)(temp_v9 + temp_v10 + temp_v0 + 0x758);
         if (temp_v1 < 0x4c) {
           temp_v7 = dataTableGet(0x38,0);
@@ -200,7 +200,7 @@ LAB_001a2150:
         break;
       }
       temp_v10 = resourceRunOperationIfUnblocked(temp_v9);
-      temp_v9 = FUN_0029efa8(temp_v9);
+      temp_v9 = listCursorGetRowIfUnblocked(temp_v9);
       temp_v1 = *(unsigned char *)(temp_v9 + temp_v10 + temp_v0 + 0x758);
       if (temp_v1 >= 0x4c) {
         puVar13 = (unsigned short *)0x0;
@@ -225,10 +225,10 @@ LAB_001a2150:
           *(unsigned char *)(temp_v0 + 0x74c) = 1;
           *(unsigned int *)(temp_v0 + 0x744) = 3;
           if (-1 < *(int *)(temp_v0 + 0x750)) {
-            temp_v10 = reinterpret_cast<int>(FUN_002a0d0c());
+            temp_v10 = reinterpret_cast<int>(gameDataGetSortPreferences());
             pbVar12 = (unsigned char *)(temp_v10 + *(int *)(temp_v0 + 0x750));
             temp_v10 = resourceRunOperationIfUnblocked(temp_v9);
-            temp_v9 = FUN_0029efa8(temp_v9);
+            temp_v9 = listCursorGetRowIfUnblocked(temp_v9);
             temp_v2 = *(unsigned char *)(temp_v10 + temp_v9 + temp_v0 + 0x758) & 0x7f;
             temp_v1 = temp_v2 | (*pbVar12 & 0x80);
             *pbVar12 = temp_v1;
@@ -275,7 +275,7 @@ LAB_001a2150:
       *(unsigned char *)(temp_v0 + 0x74d) = 1;
       if (*(char *)(temp_v0 + 0x74e) == '\x02') {
         temp_v10 = resourceRunOperationIfUnblocked(temp_v9);
-        temp_v9 = FUN_0029efa8(temp_v9);
+        temp_v9 = listCursorGetRowIfUnblocked(temp_v9);
         temp_v1 = *(unsigned char *)(temp_v9 + temp_v10 + temp_v0 + 0x758);
         if (temp_v1 < 0x4c) {
           temp_v7 = dataTableGet(0x38,0);
@@ -290,7 +290,7 @@ LAB_001a2150:
         break;
       }
       temp_v10 = resourceRunOperationIfUnblocked(temp_v9);
-      temp_v9 = FUN_0029efa8(temp_v9);
+      temp_v9 = listCursorGetRowIfUnblocked(temp_v9);
       temp_v1 = *(unsigned char *)(temp_v9 + temp_v10 + temp_v0 + 0x758);
       if (temp_v1 >= 0x4c) {
         puVar13 = (unsigned short *)0x0;

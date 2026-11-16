@@ -5,7 +5,7 @@
 
 extern "C" {
 
-extern const char DAT_00410174[]; /* __FILE__ of AsdEffectTexture.cpp */
+extern const char g_asdEffectTextureSourceFileName[]; /* __FILE__ of AsdEffectTexture.cpp */
 
 EffectTexture *asdTextureCreate(int arg);
 void *asdMemoryAllocAligned(int, int, int, u32 size, int align, int);
@@ -25,7 +25,7 @@ EffectTexture *asdEffectTextureCreate(EffectTextureFile *file)
     tex->unk1c = file->unk18;
     tex->unk20 = file->unk14;
     tex->size = file->size;
-    asdDebugTrace(DAT_00410174, 51);
+    asdDebugTrace(g_asdEffectTextureSourceFileName, 51);
     tex->pixels = (u8 *)asdMemoryAllocAligned(0x10000, 0x100, 0, tex->size, 0x80, 1);
     memCopyWords(file->pixels, tex->pixels, tex->size);
     asdTextureSetImage((AsdTexture*)tex);

@@ -9,7 +9,7 @@ struct ModelBoneAttachmentRoot;
 
 extern "C" {
 void FUN_00233240(void *animation, s32 value);
-void FUN_002b8ee0(UiSpriteState *animation, s32 value);
+void uiSlidingSpriteAdvance(UiSpriteState *animation, s32 value);
 s32 vec2GetYInt(const UiSpriteState *animation);
 s32 vec2GetXInt(const UiSpriteState *animation);
 s32 uiSpriteGetCompletionState(const UiSpriteState *animation);
@@ -67,7 +67,7 @@ void FUN_003a099c(Scene3a *scene)
         break;
     case 1: {
         UiSpriteState *animation = &work->cursorAnimation;
-        FUN_002b8ee0(animation, 0);
+        uiSlidingSpriteAdvance(animation, 0);
         s32 y = vec2GetYInt(animation);
         s32 x = vec2GetXInt(animation);
         pointConvertToFloat(work->cursor, x, y);

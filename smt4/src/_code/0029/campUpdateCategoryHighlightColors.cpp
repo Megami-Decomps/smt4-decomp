@@ -10,7 +10,7 @@ struct CampUnitCategoryRecord {
 extern "C" {
 extern CampInventoryLists *g_camp;
 s32 FUN_0029ee54(CampInventoryController *controller);
-s32 FUN_0029efa8(CampInventoryController *controller);
+s32 listCursorGetRowIfUnblocked(CampInventoryController *controller);
 s32 resourceRunOperationIfUnblocked(CampInventoryController *controller);
 PadState *gameGetPlayerData();
 CampUnitCategoryRecord *gameGetUnitRecord(s32 unit);
@@ -58,7 +58,7 @@ void campUpdateCategoryHighlightColors()
         }
     }
     s32 page = resourceRunOperationIfUnblocked(&work->categories.controller);
-    s32 row = FUN_0029efa8(&work->categories.controller);
+    s32 row = listCursorGetRowIfUnblocked(&work->categories.controller);
     FUN_0026dafc(work->categoryColors[reinterpret_cast<CampInventorySlot *>(work->categories.slotData)[page + row].unit + 1]);
 }
 }

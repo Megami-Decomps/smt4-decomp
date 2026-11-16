@@ -15,7 +15,7 @@ struct BgmSlot {
     /* 0x1C */ u32 flags;
 };
 
-extern BgmSlot DAT_004c53c4[2];
+extern BgmSlot g_bgmRequestChannels[2];
 s32 jyoucyuGetTableEntry(u32 index);
 void asdSoundCompleteSlot(u32 handle, s32 arg);
 
@@ -26,7 +26,7 @@ u32 bgmReleaseStopped(void)
 
     if (jyoucyuGetTableEntry(1) == 0) {
         for (s32 i = 0; i < 2; i++) {
-            BgmSlot *slot = &DAT_004c53c4[i];
+            BgmSlot *slot = &g_bgmRequestChannels[i];
             if ((slot->flags & 2) != 0 && (slot->flags & 0x30) != 0) {
                 asdSoundCompleteSlot(slot->handle, 0);
                 slot->unk0C = 0;

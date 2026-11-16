@@ -90,7 +90,7 @@ extern unsigned int flagValueRead(int);
 extern int recordGetModeForId(int);
 extern int btlMainGetUnk14(void);
 extern int resourceRunOperationIfUnblocked(unsigned int);
-extern int FUN_002a4894(unsigned int);
+extern int listCursorGetRowIfUnblocked(unsigned int);
 extern int objectApplyIfUnblocked(unsigned int);
 extern int FUN_002cc9e0(int, unsigned int);
 extern unsigned int FUN_002ccd74(int, int);
@@ -107,7 +107,7 @@ extern unsigned int FUN_003df57c(int, unsigned int);
 /* Supplied declaration required: gameDataFlagTestBit. */
 /* Supplied declaration required: halfTableGet. */
 /* Supplied declaration required: FUN_0040082c. */
-extern unsigned int FUN_004bcbb4(int, int);
+extern unsigned int skillGetAdjustedCost(int, int);
 /* Supplied declaration required: FUN_004bd098. */
 extern int bitsAt60Test(int, unsigned int);
 
@@ -218,7 +218,7 @@ void FUN_0028d270(int param_1)
   puVar1 = (unsigned int *)(param_1 + 0x3e18);
   if (0 < temp_v22) {
     do {
-      if ((temp_v31 == 0) || (temp_v3 = FUN_002a4894(*temp_v24), temp_v3 != temp_v11)) {
+      if ((temp_v31 == 0) || (temp_v3 = listCursorGetRowIfUnblocked(*temp_v24), temp_v3 != temp_v11)) {
         efctSetSpeed();
         temp_v3 = asdTMTexTableEntryAt(0xd,temp_v16 + temp_v11);
         temp_v14[0] = (unsigned char *)0x3d;
@@ -422,13 +422,13 @@ void FUN_0028d270(int param_1)
                 temp_v15 = (int)(short)temp_v4;
                 temp_v6 = FUN_0014bd84(temp_v15);
                 textFormatBuffer(temp_v20,"%s",temp_v6);
-                temp_v26 = FUN_004bcbb4(temp_v18,temp_v15);
+                temp_v26 = skillGetAdjustedCost(temp_v18,temp_v15);
               }
               else {
                 temp_v15 = (int)*(short *)(param_1 + *temp_v25 * 0x10 + temp_v4 * 2 + 0x3c42);
                 temp_v6 = FUN_0014bd84(temp_v15);
                 textFormatBuffer(temp_v20,"%s",temp_v6);
-                temp_v26 = FUN_004bcbb4(temp_v18,temp_v15);
+                temp_v26 = skillGetAdjustedCost(temp_v18,temp_v15);
               }
               temp_v0 = *(short *)(param_1 + *temp_v25 * 2 + 0x4210);
               if ((-1 < temp_v0) || (temp_v0 == -2)) {
@@ -615,7 +615,7 @@ LAB_0028d9e0:
     return;
   }
   temp_v11 = resourceRunOperationIfUnblocked(*temp_v24);
-  temp_v3 = FUN_002a4894(*temp_v24);
+  temp_v3 = listCursorGetRowIfUnblocked(*temp_v24);
   temp_v10 = temp_v11 + temp_v3;
   if (*temp_v25 == 1) {
     temp_v11 = 0xd5;
@@ -626,7 +626,7 @@ LAB_0028d9e0:
   else {
     temp_v11 = 0xc9;
   }
-  temp_v3 = FUN_002a4894(*temp_v24);
+  temp_v3 = listCursorGetRowIfUnblocked(*temp_v24);
   temp_v11 = asdTMTexTableEntryAt(0xd,temp_v3 + temp_v11);
   efctSetSpeed();
   temp_v14[0] = (unsigned char *)0x3d;
@@ -638,7 +638,7 @@ LAB_0028d9e0:
   efctSetSpeed();
   temp_v14[0] = (unsigned char *)0x5b;
   texDrawTableEntryAtStoredOrigin(2,0xd,0x99,*(short *)(temp_v11 + 8) + temp_v1,*(short *)(temp_v11 + 10) + temp_v2);
-  temp_v3 = FUN_002a4894(*temp_v24);
+  temp_v3 = listCursorGetRowIfUnblocked(*temp_v24);
   temp_v3 = recordGetModeForId((int)*(short *)(param_1 + temp_v3 * 2 + 0x4824));
   if (((temp_v3 == 1 || temp_v3 == 2) || temp_v3 == 6) || (temp_v21 != 0)) {
     temp_v16 = -0xa006001;
@@ -868,13 +868,13 @@ LAB_0028d9e0:
           temp_v15 = (int)(short)temp_v10;
           temp_v6 = FUN_0014bd84();
           textFormatBuffer(temp_v20,"%s",temp_v6);
-          temp_v6 = FUN_004bcbb4(temp_v18,temp_v15);
+          temp_v6 = skillGetAdjustedCost(temp_v18,temp_v15);
         }
         else {
           temp_v15 = (int)*(short *)(param_1 + *temp_v25 * 0x10 + temp_v10 * 2 + 0x3c42);
           temp_v6 = FUN_0014bd84();
           textFormatBuffer(temp_v20,"%s",temp_v6);
-          temp_v6 = FUN_004bcbb4(temp_v18,temp_v15);
+          temp_v6 = skillGetAdjustedCost(temp_v18,temp_v15);
         }
         temp_v0 = *(short *)(param_1 + *temp_v25 * 2 + 0x4210);
         if ((-1 < temp_v0) || (temp_v0 == -2)) {

@@ -35,7 +35,7 @@ int FUN_00229a3c(...);
 int btlTargetSetFlag10(...);
 int FUN_00246080(...);
 int FUN_00246454(...);
-int FUN_00247478(short *, unsigned int, unsigned int);
+int btlEntryBuildSummary(short *, unsigned int, unsigned int);
 int FUN_00255180(...);
 int FUN_00256898(...);
 int btlReflectQueueKind34(...);
@@ -134,7 +134,7 @@ extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_0023f27c. */
 /* Supplied declaration required: FUN_00246080. */
 /* Supplied declaration required: FUN_00246454. */
-/* Supplied declaration required: FUN_00247478. */
+/* Supplied declaration required: btlEntryBuildSummary. */
 extern int FUN_002485b8(void);
 /* Supplied declaration required: FUN_00250680. */
 /* Supplied declaration required: FUN_00250720. */
@@ -246,7 +246,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
   param_2[6] = 0;
   *(unsigned int *)(*param_1 + 0x48b8) = 0;
   temp_v28 = (int)*(short *)(param_2[10] + 0x14c);
-  FUN_00247478(&temp_v22,*param_1,param_2[8]);
+  btlEntryBuildSummary(&temp_v22,*param_1,param_2[8]);
   temp_v27 = (unsigned int)temp_v24;
   temp_v29 = (unsigned int)temp_v26;
   temp_v2 = (int)temp_v22;

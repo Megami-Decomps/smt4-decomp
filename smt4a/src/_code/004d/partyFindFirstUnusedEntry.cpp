@@ -8,7 +8,7 @@ typedef char PartySlotCountOffset[offsetof(PartySlotCountView, count) == 0x1CA3 
 
 extern "C" {
 PartySlotCountView *gameGetSlotTable(void);
-s32 FUN_004bd730(SlotTableEntry *entry);
+s32 slotTableEntryIsActive(SlotTableEntry *entry);
 
 /* Return the first free entry when there is room in the ordered party slots. */
 s32 partyFindFirstUnusedEntry(void)
@@ -26,7 +26,7 @@ s32 partyFindFirstUnusedEntry(void)
         return -1;
     PartySlotCountView *entries = gameGetSlotTable();
     for (s32 index = 0; index < 24; ++index) {
-        if (FUN_004bd730(&entries->active.entries[index]) == 0)
+        if (slotTableEntryIsActive(&entries->active.entries[index]) == 0)
             return index;
     }
     return -1;

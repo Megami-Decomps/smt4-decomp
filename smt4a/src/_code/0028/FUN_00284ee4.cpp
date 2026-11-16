@@ -15,7 +15,7 @@ typedef struct PartyPanel {
 
 extern PartyPanel *g_partyPanel;
 
-void FUN_0020b718(s32 a, s32 b);
+void partyPanelChangeState(s32 a, s32 b);
 void FUN_00230ac0(s32 mode, s16 imageFrame, u32 flags, s32 resetAuxiliary);
 void FUN_0023fc38(void);
 
@@ -33,7 +33,7 @@ void FUN_00284ee4(s32 start)
         if (panel->state != 0 && panel->state != 1) {
             FUN_0023fc38();
         }
-        FUN_0020b718(0, 1);
+        partyPanelChangeState(0, 1);
     }
 }
 

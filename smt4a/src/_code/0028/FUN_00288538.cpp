@@ -43,7 +43,7 @@ extern int vec2GetYInt(int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: jobGetScalarValue. */
 extern int resourceRunOperationIfUnblocked(void);
-extern int FUN_002a4894(int);
+extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: FUN_0037245c. */
 /* Supplied declaration required: uiDrawItemListRow. */
 /* Supplied declaration required: FUN_0047fc38. */
@@ -146,7 +146,7 @@ void FUN_00288538(int param_1)
   temp_v12 = temp_v1;
   temp_v13 = temp_v0;
   temp_v0 = resourceRunOperationIfUnblocked();
-  temp_v1 = FUN_002a4894(temp_v2);
+  temp_v1 = listCursorGetRowIfUnblocked(temp_v2);
   temp_v0 = temp_v0 + temp_v1;
   temp_v1 = 0;
   do {

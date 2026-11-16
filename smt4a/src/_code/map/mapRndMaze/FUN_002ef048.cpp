@@ -13,7 +13,7 @@ f32 libm_sinf(f32 radians);
 f32 libm_cosf(f32 radians);
 void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 ModelList *modelListInit(ModelList *model);
-void FUN_0040aad4(ModelList *model, s32 mode);
+void moriModelContentLoadBody(ModelList *model, s32 mode);
 void handleRegistryRegisterObject(void *registry, MoriModelBody *controller);
 void controllerSetDestination(MoriModelBody *controller, const f32 position[3]);
 void controllerSetRotationEulerDegrees(MoriModelBody *controller, f32 x, f32 y, f32 z);
@@ -58,7 +58,7 @@ void FUN_002ef048()
     MarkerOwner *maze = reinterpret_cast<MarkerOwner *>(&g_mapRndMaze);
     maze->marker = marker;
     resourceOwnerLoadFileSync(maze->marker, "map/unit/u025.bam");
-    FUN_0040aad4(maze->marker, 0);
+    moriModelContentLoadBody(maze->marker, 0);
     MoriModelBody *controller = maze->marker->content.body;
     handleRegistryRegisterObject(g_handleRegistry, controller);
     controllerSetDestination(controller, position);

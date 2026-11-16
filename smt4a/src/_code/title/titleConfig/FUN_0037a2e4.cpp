@@ -21,7 +21,7 @@ struct TitleConfigSettings {
     /* 0x4 */ u8 changed;
     /* 0x5 */ u8 unk5[3];
 };
-extern TitleConfigSettings DAT_00588fc0;
+extern TitleConfigSettings g_titleConfigValues;
 
 void FUN_002a0b58(void);
 void titleConfigDestroy(void);
@@ -75,14 +75,14 @@ void FUN_0037a2e4(void)
             config->settingIndex[1] = findByteThresholdTier(reinterpret_cast<u8 *>(&save->unk27E90)[1]);
             config->settingIndex[2] = thresholdIndexFind(reinterpret_cast<u8 *>(&save->unk27E90)[2]);
             *reinterpret_cast<u64 *>(config->saved) = *reinterpret_cast<u64 *>(&save->unk27E90);
-            config->saved[4] = DAT_00588fc0.changed;
+            config->saved[4] = g_titleConfigValues.changed;
             return;
         }
     }
-    config->settingIndex[0] = categoryGetThresholdIndex(DAT_00588fc0.music);
-    config->settingIndex[1] = findByteThresholdTier(DAT_00588fc0.sound);
-    config->settingIndex[2] = thresholdIndexFind(DAT_00588fc0.voice);
-    __ARM_common_memcpy4_8(config->saved, &DAT_00588fc0);
+    config->settingIndex[0] = categoryGetThresholdIndex(g_titleConfigValues.music);
+    config->settingIndex[1] = findByteThresholdTier(g_titleConfigValues.sound);
+    config->settingIndex[2] = thresholdIndexFind(g_titleConfigValues.voice);
+    __ARM_common_memcpy4_8(config->saved, &g_titleConfigValues);
 }
 
 } /* extern "C" */

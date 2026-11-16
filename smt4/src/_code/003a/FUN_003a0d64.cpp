@@ -38,7 +38,7 @@ s32 jobIsValid(u32 job);
 s32 eventTexJobSlotsDone(u32 job);
 ScriptProcessWork *scrScriptProcessCreate(ScriptFile *file, u32 owner);
 void scriptProcessSetMode(ScriptRunState *process, s32 mode);
-void FUN_002a03d8(s32 a, s32 b);
+void titleSetSlotValueState2(s32 a, s32 b);
 void messageBannerInitSelection(s32 a, s32 b);
 void messageTargetSetValue(s32 value, s32 arg);
 PlaceRecord *dataTable17Sub1GetRecord(u32 *ignored, u32 index);
@@ -79,8 +79,8 @@ void FUN_003a0d64(PlaceScene *scene)
     scriptProcessSetMode(scene->scriptA, 2);
     scene->scriptB = reinterpret_cast<ScriptRunState *>(scrScriptProcessCreate(scene->scriptFile, scene->scriptOwner));
     scriptProcessSetMode(scene->scriptB, 2);
-    FUN_002a03d8(0, 10);
-    FUN_002a03d8(1, 10);
+    titleSetSlotValueState2(0, 10);
+    titleSetSlotValueState2(1, 10);
     messageBannerInitSelection(1, 0);
     messageTargetSetValue(0, 0);
 

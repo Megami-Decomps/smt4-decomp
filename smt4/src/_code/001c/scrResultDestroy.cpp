@@ -5,7 +5,7 @@ extern "C" {
 int fileSlotFree(int id);
 int scrScriptProcessDestroy(u32 process);
 int asdTMTexTableReleaseNode(int table, int index);
-int FUN_002bff50(void);
+int messageSetConfirmDisplayMode(void);
 int asdMemFree(u32 ptr);
 
 typedef struct ScriptWork {
@@ -27,7 +27,7 @@ void scrResultDestroy(void)
         scrScriptProcessDestroy(g_result->process);
         asdMemFree(work->unk3564);
         asdMemFree(work->unk356C);
-        FUN_002bff50();
+        messageSetConfirmDisplayMode();
         asdMemFree(work->unk3570);
         fileSlotFree(0x14);
         fileSlotFree(0x25);

@@ -21,7 +21,7 @@ struct GameDataBlocksCheat {
 extern GameDataBlocksCheat g_gameDataBlocks;
 s32 padIsButtonPressed(u32 button);
 s32 padIsButtonRepeat(u32 button);
-void FUN_0027f958(f32 *angle, u8 buffer[16], s32 stick);
+void padGetNormalizedAnalogStick(f32 *angle, u8 buffer[16], s32 stick);
 s32 __hardfp_atan2f(void);
 void soundPlaySeUnpanned(u32 sound);
 
@@ -56,7 +56,7 @@ u8 FUN_0031e384(void)
     if (g_gameDataBlocks.sequenceStep < 12) {
         f32 angle;
         u8 buffer[16];
-        FUN_0027f958(&angle, buffer, 0);
+        padGetNormalizedAnalogStick(&angle, buffer, 0);
         __hardfp_atan2f();
         angle = angle * 57.295776f;
         if (angle < 0.0f) {

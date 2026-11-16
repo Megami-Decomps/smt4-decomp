@@ -92,7 +92,7 @@ void menuSetModeAndResetTransitions(s32 mode);
 void FUN_00240cec(s32 arg);
 u32 taskCreateDraw(const char *name, s32 priority, u32 first, u32 second,
                    void *update, void *end, void *work, u32 parent);
-void FUN_00233670(void *list, s32 a, s32 b, s32 count);
+void messageIdListInit(void *list, s32 a, s32 b, s32 count);
 s32 gameTestProgressFlag(s32 flag);
 void FUN_003a8aa0(BibleAnalyzeScreen *screen);
 void partyIdsReset(void *ids);
@@ -134,7 +134,7 @@ void FUN_003a8fe0(BibleAnalyzeScreen *screen)
         screen->controller = window;
         window->rectangle = screen->rectangle;
         limit = screen->devilCount >= BIBLE_LIST_LIMIT ? BIBLE_LIST_LIMIT : screen->devilCount;
-        FUN_00233670(screen->listView, 0x1C, 0x1030, limit);
+        messageIdListInit(screen->listView, 0x1C, 0x1030, limit);
         screen->listReady = 1;
         screen->shownCount = 0;
         for (s32 flag = 1; flag < BIBLE_PROGRESS_FLAG_COUNT; flag++) {
@@ -152,7 +152,7 @@ void FUN_003a8fe0(BibleAnalyzeScreen *screen)
         window->state |= 0x1000;
         window->rectangle = screen->rectangle;
         limit = screen->devilCount >= BIBLE_LIST_LIMIT ? BIBLE_LIST_LIMIT : screen->devilCount;
-        FUN_00233670(screen->listView, 0x1D, 0x40E, limit);
+        messageIdListInit(screen->listView, 0x1D, 0x40E, limit);
         screen->listReady = 1;
     }
 

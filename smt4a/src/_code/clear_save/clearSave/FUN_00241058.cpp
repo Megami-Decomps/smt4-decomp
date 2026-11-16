@@ -17,7 +17,7 @@ int slotSetRequest(...);
 int FUN_00261a28(...);
 int scrScriptProcessStartEntry(...);
 int saveLoadStartWindowWithArgument(...);
-int FUN_003d54f8(int, int);
+int titleSetSlotValueState2(int, int);
 int clearTwoWordsAndByte(...);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -53,7 +53,7 @@ extern int messageGetChoiceResult(void);
 extern int pairedAvailabilityBothReady(void);
 extern int FUN_0037de28(void);
 /* Supplied declaration required: saveLoadStartWindowWithArgument. */
-/* Supplied declaration required: FUN_003d54f8. */
+/* Supplied declaration required: titleSetSlotValueState2. */
 /* Supplied declaration required: clearTwoWordsAndByte. */
 
 
@@ -78,8 +78,8 @@ unsigned int FUN_00241058(void)
     break;
   case 1:
     *(unsigned int *)(temp_v0 + 0xc) = 2;
-    FUN_003d54f8(0,0x14);
-    FUN_003d54f8(1,0x14);
+    titleSetSlotValueState2(0,0x14);
+    titleSetSlotValueState2(1,0x14);
     break;
   case 2:
     temp_v5 = pairedAvailabilityBothReady();

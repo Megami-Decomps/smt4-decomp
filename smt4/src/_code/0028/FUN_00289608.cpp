@@ -16,7 +16,7 @@ typedef struct {
 } Task;
 
 int buttonHelpCreate(void);
-int FUN_002a03d8(int index, int value);
+int titleSetSlotValueState2(int index, int value);
 int scrScriptProcessDestroy(void *resource);
 
 /* Resets the task: frees its buffers and resource, then sets phase 12 and updates indices 0/1 whose state is 3. */
@@ -43,10 +43,10 @@ void FUN_00289608(Task *task, u8 flag)
     task->phase = 12;
     s32 firstState = FUN_002c2a04(0);
     if (firstState == 3) {
-        FUN_002a03d8(0, 5);
+        titleSetSlotValueState2(0, 5);
     }
     if (FUN_002c2a04(1) == 3) {
-        FUN_002a03d8(1, 5);
+        titleSetSlotValueState2(1, 5);
     }
 }
 

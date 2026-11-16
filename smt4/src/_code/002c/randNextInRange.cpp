@@ -5,15 +5,15 @@
 
 extern "C" {
 
-extern u32 DAT_004651c0;
+extern u32 g_lcgSeed;
 
 /* Linear congruential generator (a = 0x41c64e6d, c = 0x3039); returns a value in 0..limit. */
 u32 randNextInRange(int limit)
 {
-    u32 seed = DAT_004651c0 * 0x41c64e6d;
+    u32 seed = g_lcgSeed * 0x41c64e6d;
 
-    DAT_004651c0 = seed + 0x3039;
-    return (DAT_004651c0 >> 0x10) * (limit + 1) >> 0x10;
+    g_lcgSeed = seed + 0x3039;
+    return (g_lcgSeed >> 0x10) * (limit + 1) >> 0x10;
 }
 
 } /* extern "C" */

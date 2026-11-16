@@ -4,7 +4,7 @@
 
 extern "C" {
 Obj4221a4Entry *asdTMTexTableEntryAt(u32 table, u32 id);
-void FUN_002346ac(Obj4221a4 *obj, s32 x, s32 y, s32 width, s32 height);
+void touchRegionOwnerAddRegion(Obj4221a4 *obj, s32 x, s32 y, s32 width, s32 height);
 void touchRegisterSecondRegion(Obj4221a4 *obj, s32 x, s32 y, s32 width, s32 height);
 void touchRegisterFirstRegion(Obj4221a4 *obj, s32 x, s32 y, s32 width, s32 height);
 }
@@ -32,6 +32,6 @@ void Obj4221a4::initialize(const void *param)
     size = entry->size;
     x = entry->x;
     y = entry->y;
-    FUN_002346ac(this, x, y, size->width, size->height);
+    touchRegionOwnerAddRegion(this, x, y, size->width, size->height);
     ready = 1;
 }

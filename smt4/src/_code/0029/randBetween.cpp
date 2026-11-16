@@ -1,12 +1,12 @@
 #include "common.h"
 
-extern "C" u32 DAT_004651c0;
+extern "C" u32 g_lcgSeed;
 
 // Advance the linear congruential generator and reduce its high half modulo `range`.
 static __inline s32 randModulo(s32 range)
 {
-    DAT_004651c0 = DAT_004651c0 * 0x41c64e6d + 0x3039;
-    return (s32)(DAT_004651c0 >> 16) % range;
+    g_lcgSeed = g_lcgSeed * 0x41c64e6d + 0x3039;
+    return (s32)(g_lcgSeed >> 16) % range;
 }
 
 // Draw an inclusive random integer, accepting the endpoints in either order.

@@ -7,7 +7,7 @@ extern "C" {
 
 int uiSpriteSetKeyframe(...);
 int partyPanelHasSlotValue(...);
-int FUN_002a4878(...);
+int listCursorGetRowOfChildIfUnblocked(...);
 int scrollOwnerSelectIndex(...);
 int scrollListSetSelectionTracked(...);
 int FUN_002cb84c(void);
@@ -18,7 +18,7 @@ int dataTable8FindRecord(void);
 int gameGetSlotRecord(...);
 int dataTable04FindById(void);
 int __aeabi_memset4(int, int, int);
-int FUN_0020b718(...);
+int partyPanelChangeState(...);
 int FUN_0020d934(void);
 int gameGetSaveSlotData(...);
 int FUN_0026f3a0(void);
@@ -50,7 +50,7 @@ extern unsigned int DAT_0057f274; /* 0x57f274 */
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: FUN_0020b718. */
+/* Supplied declaration required: partyPanelChangeState. */
 /* Supplied declaration required: FUN_0020d934. */
 /* Supplied declaration required: gameGetSaveSlotData. */
 /* Supplied declaration required: partyPanelHasSlotValue. */
@@ -58,8 +58,8 @@ extern int FUN_0025e684(void);
 /* Supplied declaration required: FUN_0026f3a0. */
 /* Supplied declaration required: partyPanelRefreshSelectedItemValues. */
 /* Supplied declaration required: FUN_0028c2ec. */
-/* Supplied declaration required: FUN_002a4878. */
-extern unsigned int FUN_002a4894(int);
+/* Supplied declaration required: listCursorGetRowOfChildIfUnblocked. */
+extern unsigned int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: scrollOwnerSelectIndex. */
 /* Supplied declaration required: scrollListSetSelectionTracked. */
 /* Supplied declaration required: FUN_002ade88. */
@@ -220,7 +220,7 @@ void FUN_002c39dc(int param_1,unsigned int param_2,unsigned short param_3)
     if (*(int *)(temp_v0 + 0x1c) != 0x1b) {
       return;
     }
-    FUN_0020b718(*(unsigned int *)(temp_v0 + 0x20),1);
+    partyPanelChangeState(*(unsigned int *)(temp_v0 + 0x20),1);
     return;
   case 5:
   case 6:
@@ -636,8 +636,8 @@ LAB_002c4018:
 LAB_002c45c0:
     if (*(char *)(temp_v0 + 0x42) != '\0') {
       temp_v3 = temp_v0 + 0xdb4;
-      temp_v7 = FUN_002a4878();
-      temp_v8 = FUN_002a4894(temp_v3);
+      temp_v7 = listCursorGetRowOfChildIfUnblocked();
+      temp_v8 = listCursorGetRowIfUnblocked(temp_v3);
       temp_v2 = 0;
       partyPanelHasSlotValue(0,temp_v7,temp_v8,*(unsigned int *)(temp_v0 + 0x2c));
       if (temp_v2 == 0) {
@@ -701,8 +701,8 @@ LAB_002c4664:
       }
     }
     else {
-      temp_v7 = FUN_002a4878(temp_v0 + 0xd50);
-      temp_v8 = FUN_002a4894(temp_v0 + 0xd50);
+      temp_v7 = listCursorGetRowOfChildIfUnblocked(temp_v0 + 0xd50);
+      temp_v8 = listCursorGetRowIfUnblocked(temp_v0 + 0xd50);
       temp_v2 = 0;
       partyPanelHasSlotValue(0,temp_v7,temp_v8,*(unsigned int *)(temp_v0 + 0x2c));
       if (temp_v2 == 0) {
@@ -829,7 +829,7 @@ LAB_002c4a2c:
   if (*(int *)(temp_v0 + 0x1c) != 0x1b) {
     return;
   }
-  FUN_0020b718(*(unsigned int *)(temp_v0 + 0x20),1);
+  partyPanelChangeState(*(unsigned int *)(temp_v0 + 0x20),1);
   return;
 LAB_002c3c84:
   *(unsigned int *)(temp_v0 + 0x20) = 8;

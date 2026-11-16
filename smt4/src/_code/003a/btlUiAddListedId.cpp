@@ -3,7 +3,7 @@
 extern "C" {
 
 extern BtlUiGlobals g_btlUi;
-void FUN_0030bc34(BtlUiObjC *obj);
+void btlUiTargetClear(BtlUiObjC *obj);
 
 /* Adds `id` to the battle UI's listed ids unless it is already there, then refreshes the column object. */
 void btlUiAddListedId(u32 unused, u16 id)
@@ -20,7 +20,7 @@ void btlUiAddListedId(u32 unused, u16 id)
         ui->listedIds[ui->listedIdCount] = id;
         ui->listedIdCount++;
     }
-    FUN_0030bc34(&ui->objC);
+    btlUiTargetClear(&ui->objC);
 }
 
 } /* extern "C" */

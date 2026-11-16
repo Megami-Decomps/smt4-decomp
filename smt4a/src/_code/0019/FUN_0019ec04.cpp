@@ -46,7 +46,7 @@ typedef struct {
     unsigned int spD0; /* 0xd0: local_d0 */
 } param_1_stack;
 
-extern unsigned int DAT_00536d14; /* 0x536d14 */
+extern unsigned int g_sinCosTable; /* 0x536d14 */
 extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
@@ -155,13 +155,13 @@ void FUN_0019ec04(float *param_1)
   temp_v10 = (float)VectorUnsignedToFloat(temp_v6 & 0xffff,(unsigned char)(temp_v4 >> 0x16) & 3);
   temp_v12 = (float)VectorUnsignedToFloat(temp_v7 & 0xffff,(unsigned char)(temp_v4 >> 0x16) & 3);
   temp_v9 = (float)VectorUnsignedToFloat(temp_v8 & 0xffff,(unsigned char)(temp_v4 >> 0x16) & 3);
-  temp_v11 = (float)(&DAT_00536d14)[temp_v1 * 4] + (temp_v5 - temp_v10) * (float)(&DAT_00536d1c)[temp_v1 * 4];
+  temp_v11 = (float)(&g_sinCosTable)[temp_v1 * 4] + (temp_v5 - temp_v10) * (float)(&DAT_00536d1c)[temp_v1 * 4];
   temp_v10 = (float)(&DAT_00536d18)[temp_v1 * 4] + (temp_v5 - temp_v10) * (float)(&DAT_00536d20)[temp_v1 * 4];
-  temp_v5 = (float)(&DAT_00536d14)[temp_v2 * 4] + (0.0f - temp_v12) * (float)(&DAT_00536d1c)[temp_v2 * 4];
+  temp_v5 = (float)(&g_sinCosTable)[temp_v2 * 4] + (0.0f - temp_v12) * (float)(&DAT_00536d1c)[temp_v2 * 4];
   if (!romwright_subpiece_4_1_0(temp_v4 >> 0x1d,0)) {
     temp_v11 = -temp_v11;
   }
-  temp_v13 = (float)(&DAT_00536d14)[temp_v3 * 4] +
+  temp_v13 = (float)(&g_sinCosTable)[temp_v3 * 4] +
            (0.0f - temp_v9) * (float)*(unsigned long long *)(&DAT_00536d1c + temp_v3 * 4);
   temp_v9 = (float)(&DAT_00536d18)[temp_v3 * 4] +
            (0.0f - temp_v9) * (float)((unsigned long long)*(unsigned long long *)(&DAT_00536d1c + temp_v3 * 4) >> 0x20);
@@ -190,13 +190,13 @@ void FUN_0019ec04(float *param_1)
   temp_v3 = temp_v7 & 0xff;
   temp_v10 = (float)VectorUnsignedToFloat(temp_v7 & 0xffff,(unsigned char)(temp_v4 >> 0x16) & 3);
   temp_v9 = (float)VectorUnsignedToFloat(temp_v6 & 0xffff,(unsigned char)(temp_v4 >> 0x16) & 3);
-  temp_v13 = (float)(&DAT_00536d14)[temp_v1 * 4] + (0.0f - temp_v11) * (float)(&DAT_00536d1c)[temp_v1 * 4];
+  temp_v13 = (float)(&g_sinCosTable)[temp_v1 * 4] + (0.0f - temp_v11) * (float)(&DAT_00536d1c)[temp_v1 * 4];
   temp_v14 = (float)(&DAT_00536d18)[temp_v1 * 4] + (0.0f - temp_v11) * (float)(&DAT_00536d20)[temp_v1 * 4];
-  temp_v11 = (float)(&DAT_00536d14)[temp_v3 * 4] +
+  temp_v11 = (float)(&g_sinCosTable)[temp_v3 * 4] +
            (0.0f - temp_v10) * (float)*(unsigned long long *)(&DAT_00536d1c + temp_v3 * 4);
   temp_v12 = (float)(&DAT_00536d18)[temp_v3 * 4] +
            (0.0f - temp_v10) * (float)((unsigned long long)*(unsigned long long *)(&DAT_00536d1c + temp_v3 * 4) >> 0x20);
-  temp_v10 = (float)(&DAT_00536d14)[temp_v2 * 4] + (temp_v5 - temp_v9) * (float)(&DAT_00536d1c)[temp_v2 * 4];
+  temp_v10 = (float)(&g_sinCosTable)[temp_v2 * 4] + (temp_v5 - temp_v9) * (float)(&DAT_00536d1c)[temp_v2 * 4];
   temp_v25 = (float)(&DAT_00536d18)[temp_v2 * 4] +
              (temp_v5 - temp_v9) * (float)(&DAT_00536d20)[temp_v2 * 4];
   if (!romwright_subpiece_4_1_0(temp_v4 >> 0x1d,0)) {
@@ -226,10 +226,10 @@ void FUN_0019ec04(float *param_1)
   temp_v13 = (float)VectorUnsignedToFloat(temp_v2 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
   temp_v2 = temp_v3 & 0xff;
   temp_v10 = (float)VectorUnsignedToFloat(temp_v3 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
-  temp_v11 = (float)(&DAT_00536d14)[temp_v4 * 4] + (0.0f - temp_v9) * (float)(&DAT_00536d1c)[temp_v4 * 4];
-  temp_v12 = (float)(&DAT_00536d14)[temp_v2 * 4] + (temp_v5 - temp_v10) * (float)(&DAT_00536d1c)[temp_v2 * 4];
+  temp_v11 = (float)(&g_sinCosTable)[temp_v4 * 4] + (0.0f - temp_v9) * (float)(&DAT_00536d1c)[temp_v4 * 4];
+  temp_v12 = (float)(&g_sinCosTable)[temp_v2 * 4] + (temp_v5 - temp_v10) * (float)(&DAT_00536d1c)[temp_v2 * 4];
   temp_v14 = (float)(&DAT_00536d18)[temp_v4 * 4] + (0.0f - temp_v9) * (float)(&DAT_00536d20)[temp_v4 * 4];
-  temp_v9 = (float)(&DAT_00536d14)[temp_v1 * 4] + (0.0f - temp_v13) * (float)(&DAT_00536d1c)[temp_v1 * 4];
+  temp_v9 = (float)(&g_sinCosTable)[temp_v1 * 4] + (0.0f - temp_v13) * (float)(&DAT_00536d1c)[temp_v1 * 4];
   temp_v5 = (float)(&DAT_00536d18)[temp_v2 * 4] + (temp_v5 - temp_v10) * (float)(&DAT_00536d20)[temp_v2 * 4];
   temp_v37 = (float)(&DAT_00536d18)[temp_v1 * 4] + (0.0f - temp_v13) * (float)(&DAT_00536d20)[temp_v1 * 4];
   if (!romwright_subpiece_4_1_0(temp_v0 >> 0x1d,0)) {

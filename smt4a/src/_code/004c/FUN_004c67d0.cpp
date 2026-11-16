@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rebuild of the escape-chance calculation (the draft's lost result of FUN_003eebf4 restored as the sign test the asm makes); retail unrolls the four party slots and keeps the per-unit stat sums in registers, which armcc here emits from a helper over the unit pair. */
+/* NON_MATCHING: readable rebuild of the escape-chance calculation (the draft's lost result of btlFindSelectionIndexByOrdinal restored as the sign test the asm makes); retail unrolls the four party slots and keeps the per-unit stat sums in registers, which armcc here emits from a helper over the unit pair. */
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/GameDataAccess_Smt4a.h"
@@ -11,7 +11,7 @@ extern u64 DAT_005714c8;       /* the second state always lets the party escape 
 extern u64 DAT_005714d0;       /* the second state never lets the party escape */
 
 s32 gameProgressIsAdvanced(void);
-s32 FUN_003eebf4(BtlMainStateA *battle, s32 flag);
+s32 btlFindSelectionIndexByOrdinal(BtlMainStateA *battle, s32 flag);
 s32 __aeabi_idivmod(s32 a, s32 b);
 
 /* Whether a unit slot is an active fighter. */
@@ -62,7 +62,7 @@ s32 FUN_004c67d0(void)
     enemyLevel = __aeabi_idivmod(enemyLevel, enemyCount);
     enemyAgility = __aeabi_idivmod(enemyAgility, enemyCount);
     s32 bias = 0;
-    if (FUN_003eebf4(battle, 1) >= 0)
+    if (btlFindSelectionIndexByOrdinal(battle, 1) >= 0)
         bias = -50;
     s32 chance = bias + (partyLevel - enemyLevel) + (partyAgility - enemyAgility) / 2 + escapes * 10 + 50;
     s32 table = gameDataBlocksGetTableFlag();

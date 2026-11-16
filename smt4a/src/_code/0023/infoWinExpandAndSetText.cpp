@@ -2,7 +2,7 @@
 #include "text/TextDraw.h"
 
 extern "C" {
-f32 FUN_00168594(const char *text, s32 font, f32 initialWidth);
+f32 fontMeasureTextWidth(const char *text, s32 font, f32 initialWidth);
 void uiSpriteSetKeyframe(void *sprite, s32 track, s32 frame);
 void asdTextFormatStream(void *text, s32 font, u32 color, s32 mode, s32 alignment, const char *buffer);
 void sysMemClear(void *buffer, u32 size);
@@ -22,7 +22,7 @@ void infoWinExpandAndSetText(const char *text)
             if (expanded[length] == '\0') {
                 __aeabi_memcpy4(window->message.buffer, expanded, length + 1);
                 window->hasText = 1;
-                s32 width = (s32)FUN_00168594(expanded, 3, 0.0f);
+                s32 width = (s32)fontMeasureTextWidth(expanded, 3, 0.0f);
                 if (width > 332) {
                     window->textWidth = width;
                     window->wideText = 1;

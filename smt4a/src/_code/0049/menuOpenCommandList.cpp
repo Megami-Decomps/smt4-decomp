@@ -12,7 +12,7 @@ typedef struct MenuState {
     /* 0xB40 */ u32 mode;
 } MenuState;
 
-void FUN_003343f0(s32 a);
+void gameGlobalsSetMenuOpenFlag(s32 a);
 void sortMenuAcquire(s32 menu, s32 a);
 void FUN_0031f208(s32 item);
 void useCounterStart(void);
@@ -22,7 +22,7 @@ void buttonHelpSetText(s32 a, u32 color);
 /* Opens the menu's command list (a shorter one in mode 8), plays the open sound and moves to step 10. */
 void menuOpenCommandList(MenuState *state)
 {
-    FUN_003343f0(1);
+    gameGlobalsSetMenuOpenFlag(1);
     sortMenuAcquire(12, 0);
     if (state->mode != 8) {
         FUN_0031f208(28);

@@ -6,7 +6,7 @@ extern "C" {
 
 int textFormatBuffer(unsigned char [68], unsigned char *);
 int asdMemoryAllocTraced(int, unsigned char *, int);
-int FUN_001cd3ec(void);
+int modelLoadFileAsyncByName(void);
 int FUN_00295d40(void);
 int FUN_00312de8(void);
 int dataTable2aGetEntryWithAoc(void);
@@ -18,7 +18,7 @@ int modelPlayClip(unsigned int, int, int);
 int FUN_0040a908(int, int);
 int FUN_0040a918(...);
 int moriModelContentCopyBody(void);
-int FUN_0040aad4(int, int);
+int moriModelContentLoadBody(int, int);
 int handleRegistryRegisterObject(...);
 int groupedFileTablesCountRecordsOfKind(...);
 int VectorSignedToFloat(...);
@@ -32,7 +32,7 @@ extern int *DAT_00581280; /* 0x581280 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdMemoryAllocTraced. */
-/* Supplied declaration required: FUN_001cd3ec. */
+/* Supplied declaration required: modelLoadFileAsyncByName. */
 /* Supplied declaration required: FUN_00295d40. */
 /* Supplied declaration required: FUN_00312de8. */
 /* Supplied declaration required: dataTable2aGetEntryWithAoc. */
@@ -47,7 +47,7 @@ extern int FUN_003b564c(void);
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
 /* Supplied declaration required: moriModelContentCopyBody. */
-/* Supplied declaration required: FUN_0040aad4. */
+/* Supplied declaration required: moriModelContentLoadBody. */
 extern int FUN_0040ab8c(int);
 extern int modelListInit(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
@@ -226,7 +226,7 @@ LAB_002961f8:
           temp_v5 = modelListInit();
         }
         piVar12[temp_v3 * 0xf + 0x10] = temp_v5;
-        FUN_001cd3ec();
+        modelLoadFileAsyncByName();
         FUN_0040a908(piVar12[temp_v3 * 0xf + 0x10],0x10000);
         FUN_0040a918(piVar12[temp_v3 * 0xf + 0x10],0x30000);
         *(unsigned char *)(piVar12 + temp_v3 * 0xf + 0xe) = 0;
@@ -240,7 +240,7 @@ LAB_002961f8:
         temp_v5 = modelListInit();
       }
       piVar12[temp_v3 * 0xf + 0x10] = temp_v5;
-      FUN_001cd3ec();
+      modelLoadFileAsyncByName();
       FUN_0040a908(piVar12[temp_v3 * 0xf + 0x10],0x10000);
       if ((!(param_1 == 3 && param_2 == 9)) && (temp_v8 = asdVramBGetFreeBytes(), 0x1f000 >= temp_v8)) {
         temp_v5 = piVar12[temp_v3 * 0xf + 0x10];
@@ -274,7 +274,7 @@ LAB_002961f8:
       return 0;
     }
   }
-  FUN_0040aad4(piVar12[temp_v5 * 0xf + 0x10],0);
+  moriModelContentLoadBody(piVar12[temp_v5 * 0xf + 0x10],0);
   temp_v9 = *(unsigned int *)(piVar12[temp_v5 * 0xf + 0x10] + 4);
   modelPlayClip(temp_v9,0,2);
   handleRegistryRegisterObject(g_handleRegistry,temp_v9);

@@ -31,7 +31,7 @@ struct StatusDown {
 extern "C" {
 extern StatusDown *g_statusDown;
 
-s32 FUN_002a4894(void *cursor);
+s32 listCursorGetRowIfUnblocked(void *cursor);
 StatusPoint *asdTMTexTableEntryAt(s32 group, s32 part);
 s32 recordGetModeForId(s32 id);
 void FUN_00334c6c(s32 x, s32 y, s32 flag);
@@ -47,7 +47,7 @@ void FUN_0037e5c0(s32 card, s32 x, s32 y);
 void FUN_00289418(s32 x, s32 y, f32 alpha)
 {
     StatusDown *screen = g_statusDown;
-    s32 cursor = FUN_002a4894(screen->cursor);
+    s32 cursor = listCursorGetRowIfUnblocked(screen->cursor);
     bool highlighted = false;
     if (cursor >= screen->focusLimit && screen->confirming != 0) {
         highlighted = true;

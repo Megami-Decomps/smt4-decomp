@@ -67,7 +67,7 @@ void _ZN9Obj53230012FUN_0048c1c0Ev(NaviCategorySelectionWork *work)
         uiSpriteAdvanceAnimation(&((NaviCategoryTransitionView *)work)->upper, 1.0f);
         uiSpriteAdvanceAnimation(&((NaviCategoryTransitionView *)work)->lower, 1.0f);
         ButtonHelpDisplayUnit *cursor = &((NaviCategoryTransitionView *)work)->cursor;
-        if (uiSpriteAdvanceAnimation(cursor, 1.0f) && FUN_002e19f8()) {
+        if (uiSpriteAdvanceAnimation(cursor, 1.0f) && buttonHelpStateIsNot3()) {
             work->selection = work->selectedIcon;
             work->refresh[0] = 1;
             work->refresh[1] = 1;

@@ -2,7 +2,7 @@
 #include "battle/BattleUnitRecordState.h"
 #include "gamedata/GameFlags.h"
 
-/* What FUN_003e8bb0 reports about the unit's pending command. */
+/* What btlEntryBuildSummary reports about the unit's pending command. */
 struct BtlAiCommandInfo {
     /* 0x00 */ u8 unk00[2];
     /* 0x02 */ u16 kind;
@@ -64,7 +64,7 @@ s32 jobIsValid(u32 job);
 s32 gameFlagIsSet(u32 id);
 
 void sysMemClear(void *buffer, s32 size);
-BtlAiCommandInfo FUN_003e8bb0(BtlMainStateA *battle, u32 commandId);
+BtlAiCommandInfo btlEntryBuildSummary(BtlMainStateA *battle, u32 commandId);
 void FUN_004e7c04(BattleUnitRecordState *units, s32 a);
 void btlActionMarkRandomTargetableUnit(BattleUnitRecordState *units);
 void FUN_004e8454(BattleUnitRecordState *units);
@@ -97,7 +97,7 @@ u32 FUN_004ec950(BattleUnitRecordState *units, BtlAiCommand *cmd)
 
             if (record->state == 0 && record->param == 0) {
                 record->state = 1;
-                BtlAiCommandInfo info = FUN_003e8bb0(units->battle, cmd->commandId);
+                BtlAiCommandInfo info = btlEntryBuildSummary(units->battle, cmd->commandId);
                 if (info.kind == 1) {
                     record->param = 2;
                 } else {

@@ -9,7 +9,7 @@ int asdTMTexTableReleaseNode(int, int);
 int scrScriptProcessDestroy(void);
 int FUN_002c85b0(int);
 int helpTexturesRelease(void);
-int FUN_00333f6c(void);
+int gameGlobalsReleaseReference(void);
 int campCommonBgRelease(void);
 int campButtonHelpRelease(void);
 int resourceReleaseReference(void);
@@ -27,7 +27,7 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_002c85b0. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: helpTexturesRelease. */
-/* Supplied declaration required: FUN_00333f6c. */
+/* Supplied declaration required: gameGlobalsReleaseReference. */
 /* Supplied declaration required: campCommonBgRelease. */
 /* Supplied declaration required: campButtonHelpRelease. */
 /* Supplied declaration required: resourceReleaseReference. */
@@ -67,7 +67,7 @@ void sceneReleaseJobsAndResources(int param_1)
   }
   if (*(int *)(param_1 + 0x16004) != 0) {
     FUN_002c85b0(0);
-    FUN_00333f6c();
+    gameGlobalsReleaseReference();
   }
   if (*(int *)(param_1 + 0x16054) != 0) {
     resourceReleaseReference();

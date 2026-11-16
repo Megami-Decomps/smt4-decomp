@@ -97,8 +97,8 @@ extern int vec2GetYInt(unsigned int *);
 extern int recordGetModeForId(int);
 extern int resourceRunEmbeddedOperationIfUnblocked(unsigned int *);
 extern int resourceRunOperationIfUnblocked(unsigned int *);
-extern int FUN_002a4878(unsigned int *);
-extern int FUN_002a4894(unsigned int *);
+extern int listCursorGetRowOfChildIfUnblocked(unsigned int *);
+extern int listCursorGetRowIfUnblocked(unsigned int *);
 /* Supplied declaration required: FUN_002a4b28. */
 /* Supplied declaration required: uiDrawListScrollBar. */
 extern int uiSearchSecondary(unsigned int *);
@@ -346,7 +346,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
       } while (temp_v9 < temp_v2);
     }
     if (temp_v19 != 0) {
-      temp_v2 = FUN_002a4878(temp_v15);
+      temp_v2 = listCursorGetRowOfChildIfUnblocked(temp_v15);
       temp_v9 = asdTMTexTableEntryAt(0x1a,temp_v2 + 0xe3);
       temp_v2 = g_renderCtx;
       temp_v8 = packNibblesAndByte(6, 1, 0);
@@ -400,7 +400,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
   temp_v2 = uiSearchPrimary(temp_v14);
   if (0 < temp_v2) {
     do {
-      if ((temp_v19 == 0) || (temp_v2 = FUN_002a4894(temp_v14), temp_v2 != temp_v9)) {
+      if ((temp_v19 == 0) || (temp_v2 = listCursorGetRowIfUnblocked(temp_v14), temp_v2 != temp_v9)) {
         temp_v2 = temp_v1 + temp_v9;
         psVar6 = (short *)(unsigned int)*(unsigned short *)((int)puVar2 + temp_v2 * 2 + 0x62a0);
         devilGetRecord();
@@ -506,10 +506,10 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
       temp_v2 = uiSearchPrimary(temp_v14);
     } while (temp_v9 < temp_v2);
   }
-  temp_v1 = FUN_002a4894(temp_v14);
+  temp_v1 = listCursorGetRowIfUnblocked(temp_v14);
   temp_v1 = asdTMTexTableEntryAt(0x1a,temp_v1 + 0x3f);
   temp_v2 = resourceRunOperationIfUnblocked(temp_v14);
-  temp_v9 = FUN_002a4894(temp_v14);
+  temp_v9 = listCursorGetRowIfUnblocked(temp_v14);
   psVar6 = (short *)(unsigned int)*(unsigned short *)((int)puVar2 + (temp_v9 + temp_v2) * 2 + 0x62a0);
   devilGetRecord();
   if (temp_v19 == 0) {
@@ -549,7 +549,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
   efctSetSpeed();
   texDrawTableEntryAtStoredOrigin(2,0x1a,0x3b,(int)&param_1->field_0x0 + (int)*(short *)(temp_v1 + 8),
                *(short *)(temp_v1 + 10) + param_2,0x7e);
-  temp_v2 = FUN_002a4894(temp_v14);
+  temp_v2 = listCursorGetRowIfUnblocked(temp_v14);
   temp_v2 = recordGetModeForId((int)*(short *)((int)puVar2 + temp_v2 * 2 + 0x438));
   temp_v9 = *(short *)(temp_v1 + 10) + param_2;
   temp_v8 = (int)&param_1->field_0x0 + (int)*(short *)(temp_v1 + 8);

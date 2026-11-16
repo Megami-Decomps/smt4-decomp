@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ad314(float *, float [10]);
+int mathSinCos(float *, float [10]);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ extern int g_mapIf; /* 0x447a78 */
 extern unsigned int *DAT_00447a7c; /* 0x447a7c */
 extern int g_gameState; /* 0x49f91c */
 
-/* Supplied declaration required: FUN_002ad314. */
+/* Supplied declaration required: mathSinCos. */
 
 
 int mapIfSpawnEffect(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -130,12 +130,12 @@ LAB_00252ec0:
                   return temp_v2;
                 }
                 if (param_2 != 0xb) {
-                  FUN_002ad314(&temp_v11,temp_v12);
+                  mathSinCos(&temp_v11,temp_v12);
                   *(float *)(temp_v1 + 0x22c) = *(float *)(temp_v1 + 0x22c) + temp_v11 * 50.0f;
                   *(float *)(temp_v1 + 0x234) = *(float *)(temp_v1 + 0x234) + temp_v12[0] * 50.0f;
                   goto LAB_002525f8;
                 }
-                FUN_002ad314(&temp_v11,temp_v12);
+                mathSinCos(&temp_v11,temp_v12);
                 *(float *)(temp_v1 + 0x22c) = *(float *)(temp_v1 + 0x22c) + temp_v11 * 15.0f;
                 *(float *)(temp_v1 + 0x234) = *(float *)(temp_v1 + 0x234) + temp_v12[0] * 15.0f;
                 goto LAB_00252784;

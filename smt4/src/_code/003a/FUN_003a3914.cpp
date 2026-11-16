@@ -13,7 +13,7 @@ int messageStatesSetFirst(int a);
 int scrScriptProcessDestroy(void);
 int placeWinRelease(void);
 int asdTMTexTableReleaseNode(int table, int index);
-int FUN_002bff50(void);
+int messageSetConfirmDisplayMode(void);
 int asdMemFree(void);
 int jobStop(u32 job, int mode);
 extern int jobIsValid(u32 job);
@@ -103,7 +103,7 @@ void FUN_003a3914(Scene *scene)
     }
     buttonHelpRelease();
     buttonHelpTexturesUnref();
-    FUN_002bff50();
+    messageSetConfirmDisplayMode();
     messageStatesSetFirst(1);
 }
 

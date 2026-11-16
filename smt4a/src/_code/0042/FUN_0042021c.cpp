@@ -171,7 +171,7 @@ extern "C" void FUN_0042021c(SaveLoadUi *ui)
     case 9:
         switch (ui->step) {
         case 0:
-            if (FUN_002e19f8() == 0) {
+            if (buttonHelpStateIsNot3() == 0) {
                 return;
             }
             if (FUN_0026c3a0() == 0) {

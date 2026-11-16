@@ -24,7 +24,7 @@ void FUN_004fbeac(s32 actor, u32 secondary, u32 value, u32 parameter, s32 cancel
 extern "C" {
 #endif
 
-void FUN_004fd204(s32 actor, u32 flags, u32 target, u32 parameter, u32 payload, s32 enabled);
+void btlReflectQueueKind44(s32 actor, u32 flags, u32 target, u32 parameter, u32 payload, s32 enabled);
 
 #ifdef __cplusplus
 }

@@ -76,7 +76,7 @@ extern int nw_snd_SoundArchive_IsAvailable(void);
 /* Supplied declaration required: FUN_0015fe40. */
 /* Supplied declaration required: asdSoundObjectStop. */
 /* Supplied declaration required: FUN_001756d0. */
-extern unsigned long long FUN_00178400(unsigned int, int *, unsigned char *);
+extern unsigned long long soundArchiveReadSoundInfoWithExtension(unsigned int, int *, unsigned char *);
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2BAE30. */
 extern int FUN_0019472c(unsigned int, int *, unsigned int **);
 extern int soundInfoOwnerReadInfo(unsigned int, int *, unsigned int **);
@@ -265,7 +265,7 @@ unsigned int FUN_0045cba8(unsigned int param_1,int *param_2,int *param_3,int *pa
     nw_snd_SoundArchive_GetSoundType(temp_v2,temp_v64);
     temp_v59 = temp_v2;
   }
-  temp_v33 = FUN_00178400(*(unsigned int *)(param_1 + 4),temp_v64,temp_v36);
+  temp_v33 = soundArchiveReadSoundInfoWithExtension(*(unsigned int *)(param_1 + 4),temp_v64,temp_v36);
   temp_v7 = (unsigned int)((unsigned long long)temp_v33 >> 0x20);
   if ((int)temp_v33 == 0) {
     if (temp_v0) {

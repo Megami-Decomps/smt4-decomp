@@ -1,4 +1,4 @@
-/* NON_MATCHING: found outside every function: branched to by FUN_00431e90; not written yet. */
+/* NON_MATCHING: found outside every function: branched to by nnFndDetailRemoveBlockFromRegion; not written yet. */
 /* romwright 0.5.0 decompilation of FUN_00431e1c for reference (not compiled; its own view of the boundaries):
 
 void FUN_00431e1c(unsigned int *param_1,int param_2)

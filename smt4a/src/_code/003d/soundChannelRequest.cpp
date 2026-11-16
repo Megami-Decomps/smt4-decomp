@@ -3,7 +3,7 @@
 #include "kernel/jyoucyuGetTableEntry.h"
 
 extern "C" {
-extern BgmRequestChannel DAT_0061951c[2];
+extern BgmRequestChannel g_bgmRequestChannels[2];
 extern BgmChannelSelection g_resourceSharedFlag;
 s32 FUN_00162ea4();
 
@@ -19,12 +19,12 @@ u32 soundChannelRequest(u32 track, s32 parameter)
         bgmStop(-1, 0, 1);
 
     BgmRequestChannel *active = NULL;
-    BgmRequestChannel *other = &DAT_0061951c[1];
+    BgmRequestChannel *other = &g_bgmRequestChannels[1];
     if (g_resourceSharedFlag.selected == 0) {
-        active = &DAT_0061951c[0];
+        active = &g_bgmRequestChannels[0];
     } else if (g_resourceSharedFlag.selected == 1) {
-        active = &DAT_0061951c[1];
-        other = &DAT_0061951c[0];
+        active = &g_bgmRequestChannels[1];
+        other = &g_bgmRequestChannels[0];
     }
     u32 flags = active->flags;
     if ((flags & 2) && !(flags & 0x3C)) {

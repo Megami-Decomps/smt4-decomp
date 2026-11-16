@@ -6,9 +6,9 @@ extern "C" {
 void FUN_001407cc(s32 enable)
 {
     if (enable != 0) {
-        DAT_005b4000.unk08 = DAT_005b4000.unk08 | 1;
+        g_padInputState.unk08 = g_padInputState.unk08 | 1;
     } else {
-        DAT_005b4000.unk08 = DAT_005b4000.unk08 & ~1;
+        g_padInputState.unk08 = g_padInputState.unk08 & ~1;
     }
 }
 

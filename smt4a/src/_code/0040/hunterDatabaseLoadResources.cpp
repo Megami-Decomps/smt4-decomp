@@ -47,7 +47,7 @@ void hunterDatabaseLoadResources(HunterDatabaseWork *work)
     for (s32 index = 0; index < 6; ++index) {
         u32 sprite = spriteHandleCreate(0);
         work->sprites[index] = sprite;
-        FUN_001527d8(sprite, ~0u);
+        uiObjectSetColorRgb(sprite, ~0u);
     }
     FUN_00405c94(work);
     FUN_004029f4(work, 1, 0);

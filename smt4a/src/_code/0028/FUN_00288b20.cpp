@@ -17,7 +17,7 @@ int dataTable04FindById(void);
 int unitRecordBuild(...);
 int FUN_0035ad50(...);
 int statDrawClampedDelta(...);
-int FUN_004bd6b0(...);
+int partyRecordSetEquippedItemClampRank(...);
 int VectorSignedToFloat(...);
 int __aeabi_memcpy4(...);
 
@@ -45,7 +45,7 @@ extern int g_statusDown; /* 0x588fe8 */
 /* Supplied declaration required: FUN_00185e84. */
 extern int slotRecordFindById(void);
 /* Supplied declaration required: dataTable04FindById. */
-extern int FUN_002a4894(void);
+extern int listCursorGetRowIfUnblocked(void);
 extern unsigned int FUN_002a6a24(int);
 extern int objectApplyIfUnblocked(int);
 extern int FUN_002c7e3c(void);
@@ -54,8 +54,8 @@ extern int FUN_002c7e3c(void);
 /* Supplied declaration required: statDrawClampedDelta. */
 extern unsigned int FUN_003df57c(int, unsigned int);
 extern int recordContainsPairedId(unsigned char *, int);
-extern unsigned int FUN_004bcbb4(unsigned char *, int);
-/* Supplied declaration required: FUN_004bd6b0. */
+extern unsigned int skillGetAdjustedCost(unsigned char *, int);
+/* Supplied declaration required: partyRecordSetEquippedItemClampRank. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
@@ -93,7 +93,7 @@ void FUN_00288b20(int param_1,int param_2,int param_3,int param_4,unsigned int p
   temp_v16 = param_4;
   temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,param_4));
   temp_v12 = temp_v0 + 0x5ec;
-  temp_v2 = FUN_002a4894();
+  temp_v2 = listCursorGetRowIfUnblocked();
   temp_v10 = 0;
   efctSetSpeed();
   texDrawCompositeSprite(2,0x12,8,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,0xbf);
@@ -194,7 +194,7 @@ LAB_00288c34:
     }
     temp_v3 = recordContainsPairedId(temp_v11,param_3);
     if (temp_v3 == 0) {
-      FUN_004bd6b0(temp_v11,param_3,temp_v16 - 0x42c);
+      partyRecordSetEquippedItemClampRank(temp_v11,param_3,temp_v16 - 0x42c);
     }
   }
   if ((param_7 == 0) || (param_3 != 0)) {
@@ -208,7 +208,7 @@ LAB_00288c34:
     if ((-1 < *(short *)(temp_v0 + 0x598)) && (temp_v4 = FUN_002c7e3c(), temp_v4 != 4)) {
       if ((*(int *)(temp_v0 + 0x518) == 0xe) &&
          (temp_v4 = recordContainsPairedId(temp_v11,param_3), temp_v4 == 0)) {
-        FUN_004bd6b0(temp_v11,param_3,0);
+        partyRecordSetEquippedItemClampRank(temp_v11,param_3,0);
       }
       statDrawClampedDelta(temp_v11,temp_v2,
                    (int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v3 + 8) + param_1,
@@ -242,7 +242,7 @@ LAB_00288c34:
       else {
         temp_v3 = FUN_002c7e3c();
         if (temp_v3 != 7) {
-          temp_v10 = FUN_004bcbb4(temp_v11,param_3);
+          temp_v10 = skillGetAdjustedCost(temp_v11,param_3);
         }
         else {
           dataTable04FindById();

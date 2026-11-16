@@ -24,7 +24,7 @@ extern "C" {
 
 EffBlock *effBlockCloneDeep(void *data);
 void asdMemFree(void *ptr);
-EffNode *FUN_003007a0(void);
+EffNode *effPartCreateDefault(void);
 
 // Load a block from a file, clone it into a new node and append the node to the list.
 void FUN_0037667c(EffList *list, const char *path)
@@ -33,7 +33,7 @@ void FUN_0037667c(EffList *list, const char *path)
     void *data = asdLoadFileSyncNoContext(path, &size, 1, 0x80);
     EffBlock *block = effBlockCloneDeep(data);
     asdMemFree(data);
-    EffNode *node = FUN_003007a0();
+    EffNode *node = effPartCreateDefault();
     node->next = NULL;
     node->block = block;
     if (list->tail != NULL) {

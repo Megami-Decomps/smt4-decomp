@@ -70,8 +70,8 @@ void btlActionPrepareFromSource(BattleActionSource *source, PreparedBattleAction
     else
         flags = source->flags & ~g_btlMain.flagged;
     source->flags = flags;
-    if (FUN_004186a4()) {
-        if (idIsAtLeast350(FUN_004186e0())) {
+    if (rosterHasLeader()) {
+        if (idIsAtLeast350(rosterGetLeaderId())) {
             source->flags |= g_btlMain.highId;
             return;
         }

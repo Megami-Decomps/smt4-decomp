@@ -31,7 +31,7 @@ extern int uniteGetWork(void);
 /* Supplied declaration required: FUN_00240210. */
 extern int recordGetModeForId(int);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
-extern int FUN_002a4894(int);
+extern int listCursorGetRowIfUnblocked(int);
 extern unsigned int dataTableGetEntry24Byte0(unsigned int);
 extern int objectApplyIfUnblocked(int);
 
@@ -62,10 +62,10 @@ void FUN_002aa038(int param_1,int param_2)
   }
   temp_v1 = temp_v0 + 0x4fc;
   temp_v2 = resourceRunOperationIfUnblocked();
-  temp_v3 = FUN_002a4894(temp_v1);
+  temp_v3 = listCursorGetRowIfUnblocked(temp_v1);
   temp_v4 = dataTableGetEntry24Byte0(*(unsigned int *)(temp_v0 + (temp_v3 + temp_v2) * 4 + 0x927c));
   efctSetSpeed();
-  temp_v2 = FUN_002a4894(temp_v1);
+  temp_v2 = listCursorGetRowIfUnblocked(temp_v1);
   temp_v2 = asdTMTexTableEntryAt(0x1a,temp_v2 + 0xb6);
   if (*(int *)(temp_v0 + 0x3fc) >= 4) {
     texDrawTableEntryAtStoredOrigin(2,0x1a,0xb5,param_1,param_2,0x97);
@@ -108,11 +108,11 @@ void FUN_002aa038(int param_1,int param_2)
     }
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 8);
-  temp_v1 = FUN_002a4894(temp_v1);
+  temp_v1 = listCursorGetRowIfUnblocked(temp_v1);
   temp_v1 = asdTMTexTableEntryAt(0x1a,temp_v1 + 200);
   temp_v2 = resourceRunOperationIfUnblocked(temp_v0 + 0x560);
-  temp_v3 = FUN_002a4894(temp_v0 + 0x560);
-  temp_v5 = FUN_002a4894(temp_v0 + 0x560);
+  temp_v3 = listCursorGetRowIfUnblocked(temp_v0 + 0x560);
+  temp_v5 = listCursorGetRowIfUnblocked(temp_v0 + 0x560);
   temp_v5 = asdTMTexTableEntryAt(0x1a,temp_v5 + 200);
   temp_v7 = *(int *)(temp_v0 + 0x3fc);
   if (temp_v7 >= 4) {
@@ -135,7 +135,7 @@ void FUN_002aa038(int param_1,int param_2)
   texDrawTableEntryAtStoredOrigin(2,0x1a,0xc0,temp_v11,param_2,0xab);
   efctSetSpeed();
   texDrawTableEntryAtStoredOrigin(2,0x1a,0xc1,temp_v11,param_2,0xb5);
-  temp_v1 = FUN_002a4894(temp_v0 + 0x560);
+  temp_v1 = listCursorGetRowIfUnblocked(temp_v0 + 0x560);
   temp_v1 = recordGetModeForId((int)*(short *)(temp_v0 + temp_v1 * 2 + 0x44c));
   if (!((temp_v1 == 1 || temp_v1 == 2) || temp_v1 == 6)) {
     texDrawTableEntryAtStoredOrigin(2,0x1a,0x247,temp_v11,param_2,0xb5);

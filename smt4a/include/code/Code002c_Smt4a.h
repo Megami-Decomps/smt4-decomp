@@ -7,7 +7,7 @@ extern "C" {
 
 u8 FUN_002c7cb4(void);
 
-s32 FUN_002c2758(u32 index);
+s32 gameDataStatusFlagGet(u32 index);
 
 s32 objectApplyIfUnblocked(Object *object);
 

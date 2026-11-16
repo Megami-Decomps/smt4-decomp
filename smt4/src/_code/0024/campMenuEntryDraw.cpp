@@ -14,7 +14,7 @@ extern "C" {
 extern RenderCtx *g_titleScene;
 extern const s8 DAT_0043dc48[];
 void texDrawCompositeSprite(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 priority);
-f32 FUN_0026e70c(f32 start, f32 end, f32 duration, f32 time);
+f32 floatInterpolateOverDuration(f32 start, f32 end, f32 duration, f32 time);
 void efctSetSpeed(f32 speed);
 u32 packNibblesAndByte(u32 first, u32 second, u32 third);
 
@@ -28,8 +28,8 @@ void campMenuEntryDraw(MenuEntryDraw *entry, s32 priority)
     } else {
         s32 offsetY = DAT_0043dc48[entry->row];
         texDrawTableEntryAtStoredOrigin(2, 45, 17, 0, offsetY, priority + 2);
-        f32 alpha = entry->frame < 20 ? FUN_0026e70c(0.0f, 0.8f, 20.0f, (f32)entry->frame)
-                                      : FUN_0026e70c(0.8f, 0.0f, 40.0f, (f32)(entry->frame - 20));
+        f32 alpha = entry->frame < 20 ? floatInterpolateOverDuration(0.0f, 0.8f, 20.0f, (f32)entry->frame)
+                                      : floatInterpolateOverDuration(0.8f, 0.0f, 40.0f, (f32)(entry->frame - 20));
         renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
         efctSetSpeed(alpha);
         texDrawTableEntryAtStoredOrigin(2, 45, 18, 0, offsetY, priority + 3);

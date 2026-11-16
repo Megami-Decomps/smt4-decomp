@@ -27,7 +27,7 @@ extern int recordCategoryNineIsActiveInMode24(int);
 extern int FUN_003df004(int, int, int *);
 extern int partyEntryFlagsBit3(int);
 extern int partyEntryFlagsBit1(void);
-extern int FUN_004186e0(void);
+extern int rosterGetLeaderId(void);
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -59,7 +59,7 @@ FUN_0023dedc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
   if (*(char *)(g_uiQuest + 0x90c) != '\0') {
     temp_v0 = partyEntryFlagsBit1();
     if (temp_v0 != 0) {
-      temp_v0 = FUN_004186e0();
+      temp_v0 = rosterGetLeaderId();
       if (temp_v0 == 0) {
         texDrawCompositeSprite(2,0x1e,0xc,temp_v6,param_3,param_4);
         if (param_6 != 0) {
@@ -89,7 +89,7 @@ FUN_0023dedc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
       if (*(char *)(param_1 + 6) != '\n') {
         temp_v0 = FUN_003de75c();
         if (temp_v0 != 0) {
-          temp_v0 = FUN_004186e0();
+          temp_v0 = rosterGetLeaderId();
           if (temp_v0 == temp_v5) {
             texDrawCompositeSprite(2,0x1e,0xd,temp_v6,param_3,param_4);
             if (param_6 != 0) {

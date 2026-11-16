@@ -4,7 +4,7 @@ extern "C" {
 
 int effBehaviorRun(...);
 int FUN_00362900(...);
-int FUN_00390368(...);
+int effObjectParticleInitMotion(...);
 
 typedef struct fn_003aa640_arg0 fn_003aa640_arg0;
 typedef struct fn_003aa640_arg0_p9c fn_003aa640_arg0_p9c;
@@ -52,7 +52,7 @@ typedef struct {
 
 /* Supplied declaration required: effBehaviorRun. */
 /* Supplied declaration required: FUN_00362900. */
-/* Supplied declaration required: FUN_00390368. */
+/* Supplied declaration required: effObjectParticleInitMotion. */
 
 
 void FUN_003aa640(fn_003aa640_arg0 *param_1)
@@ -80,7 +80,7 @@ void FUN_003aa640(fn_003aa640_arg0 *param_1)
       int *q = (int *)temp_v1;
       do {
         if (q[4] == 0) {
-          FUN_00390368(param_1,pfVar4);
+          effObjectParticleInitMotion(param_1,pfVar4);
         }
         temp_v2 = temp_v2 + 1;
         q = q + 10;

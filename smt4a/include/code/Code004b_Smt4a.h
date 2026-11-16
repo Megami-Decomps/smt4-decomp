@@ -8,13 +8,13 @@ struct ItemRankRecord;
 struct SoundCueContext;
 extern "C" {
 
-void FUN_004b7a54(CampScriptPanelResources *work);
+void campScriptPanelResourcesRelease(CampScriptPanelResources *work);
 
 Table02Record* dataTable02GetRecordWithAocPackage(s32 index);
 
 u8 isFlag1F0Set(void);
 
-s32 FUN_004bcbb4(const ItemRankRecord *holder, u32 skillId);
+s32 skillGetAdjustedCost(const ItemRankRecord *holder, u32 skillId);
 
 void FUN_004b7d88(const SoundCueContext* context);
 

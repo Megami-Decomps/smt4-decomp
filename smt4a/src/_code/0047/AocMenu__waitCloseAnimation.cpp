@@ -5,7 +5,7 @@
 extern "C" {
 void eventQueueAddUniqueIfValid(u32);
 void flagObjAdvance(void *);
-void FUN_0047306c(void *, u32, u32, u32);
+void aocEntryPanelCreateText(void *, u32, u32, u32);
 void jobOwnerFreeSlotAndStop(void *);
 void aocMenuSetButtonHelp(ScreenTransitionState *, s32, u32);
 s32 buttonHelpIsActionActive(u32);
@@ -20,7 +20,7 @@ void AocMenu::waitCloseAnimation()
     void *animation = &view->dialogJob;
     switch (transition->phase) {
     case 0:
-        FUN_0047306c(animation, 0x67, 0, 0);
+        aocEntryPanelCreateText(animation, 0x67, 0, 0);
         aocMenuSetButtonHelp(transition, 3, 1);
         transition->phase = 1;
         break;

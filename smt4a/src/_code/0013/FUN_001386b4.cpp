@@ -16,7 +16,7 @@ s32 FUN_001386b4(void)
 
     FUN_00142b04();
     result = fsUnmountByName();
-    FUN_0013ebd8(result);
+    processResultSetValue(result);
     if (nnResultIsSuccess(result)) {
         DAT_005b40c9 = 0;
     }

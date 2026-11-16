@@ -34,7 +34,7 @@ typedef struct UnitView {
 } UnitView;
 
 s32 resourceRunOperationIfUnblocked(u32 list);
-s32 FUN_0029efa8(u32 list);
+s32 listCursorGetRowIfUnblocked(u32 list);
 s32 FUN_00297ca4(SkillMenuWork *work, s32 arg);
 void FUN_0029212c(u32 id);
 u32 listGetU16OrZero(void *state, u32 index);
@@ -57,7 +57,7 @@ void FUN_00292f4c(SkillMenuWork *work)
 {
     SkillMenuView *view = (SkillMenuView *)work;
     u32 *panel = (u32 *)((u8 *)work + 0x59BC);
-    u32 index = resourceRunOperationIfUnblocked(view->list) + FUN_0029efa8(view->list);
+    u32 index = resourceRunOperationIfUnblocked(view->list) + listCursorGetRowIfUnblocked(view->list);
 
     if (FUN_00297ca4(work, 0) != 1) {
         if (FUN_00297ca4(work, 0) != 2) {

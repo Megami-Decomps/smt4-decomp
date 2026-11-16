@@ -12,7 +12,7 @@ int campChangeState(...);
 int FUN_0021b274(...);
 int FUN_0022e774(void);
 int campSelectorRebuildList(...);
-int FUN_002a4878(...);
+int listCursorGetRowOfChildIfUnblocked(...);
 int campTouchRegionsRemoveGroup(...);
 int FUN_002cb278(...);
 int FUN_002f78a0(...);
@@ -52,7 +52,7 @@ int FUN_00372100(...);
 int controllerSetPositionXyz(...);
 int modelPlayClip(...);
 int resourceOwnerLoadFileSync(void);
-int FUN_0040aad4(...);
+int moriModelContentLoadBody(...);
 int FUN_0040ab7c(...);
 int handleRegistryRegisterObject(...);
 int FUN_0045b538(...);
@@ -93,8 +93,8 @@ extern int FUN_0022e714(void);
 extern int recordGetModeForId(int);
 /* Supplied declaration required: campShowSelectedEntryHelp. */
 extern int resourceRunOperationIfUnblocked(int);
-/* Supplied declaration required: FUN_002a4878. */
-extern int FUN_002a4894(int);
+/* Supplied declaration required: listCursorGetRowOfChildIfUnblocked. */
+extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: statusPanelSetOpen. */
 /* Supplied declaration required: campTouchRegionsRemoveGroup. */
 extern unsigned int FUN_002bf520(void);
@@ -131,7 +131,7 @@ extern int FUN_003da8f4(int, unsigned int);
 /* Supplied declaration required: controllerSetPositionXyz. */
 /* Supplied declaration required: modelPlayClip. */
 /* Supplied declaration required: resourceOwnerLoadFileSync. */
-/* Supplied declaration required: FUN_0040aad4. */
+/* Supplied declaration required: moriModelContentLoadBody. */
 /* Supplied declaration required: FUN_0040ab7c. */
 extern int FUN_0040ab8c(unsigned int);
 extern unsigned int modelListInit(void);
@@ -230,7 +230,7 @@ void FUN_001fdde8(int param_1)
       FUN_00372100(psVar4,0);
       statusPanelSetOpen(1);
       temp_v4 = resourceRunOperationIfUnblocked(temp_v13);
-      temp_v13 = FUN_002a4894(temp_v13);
+      temp_v13 = listCursorGetRowIfUnblocked(temp_v13);
       temp_v7 = *(short *)(temp_v9 + (temp_v13 + temp_v4) * 2);
       if (param_1 != 0x16) {
         if (param_1 != 0x17) {
@@ -266,7 +266,7 @@ void FUN_001fdde8(int param_1)
       *(unsigned int *)(temp_v5 + 0x32ac) = temp_v3;
       resourceOwnerLoadFileSync();
       FUN_0040ab7c(*(unsigned int *)(temp_v5 + 0x32ac),0);
-      FUN_0040aad4(*(unsigned int *)(temp_v5 + 0x32ac),0);
+      moriModelContentLoadBody(*(unsigned int *)(temp_v5 + 0x32ac),0);
       FUN_0045b538(*(int *)(*(int *)(temp_v5 + 0x32ac) + 0xc) + 0xc);
       *(int *)(temp_v5 + 0x20) = *(int *)(temp_v5 + 0x20) + 1;
       return;
@@ -332,7 +332,7 @@ void FUN_001fdde8(int param_1)
     else {
       if (*(char *)(temp_v5 + 0x3c) != '\0') {
         temp_v4 = resourceRunOperationIfUnblocked(temp_v13);
-        temp_v8 = FUN_002a4894(temp_v13);
+        temp_v8 = listCursorGetRowIfUnblocked(temp_v13);
         temp_v2 = *(unsigned short *)(temp_v9 + (temp_v8 + temp_v4) * 2);
         if (param_1 != 0x16) {
           if (param_1 == 0x17) {
@@ -400,7 +400,7 @@ void FUN_001fdde8(int param_1)
     padQueryLogicalKey(0,1);
     if (temp_v4 != 0 || temp_v14[0] != '\0') {
       temp_v5 = resourceRunOperationIfUnblocked(temp_v13);
-      temp_v13 = FUN_002a4894(temp_v13);
+      temp_v13 = listCursorGetRowIfUnblocked(temp_v13);
       psVar13 = (short *)(temp_v9 + (temp_v13 + temp_v5) * 2);
       temp_v5 = unitMatchesAlignment(*psVar13);
       if (temp_v5 == 0) {
@@ -537,7 +537,7 @@ void FUN_001fdde8(int param_1)
         return;
       }
       temp_v4 = resourceRunOperationIfUnblocked(temp_v13);
-      temp_v8 = FUN_002a4894(temp_v13);
+      temp_v8 = listCursorGetRowIfUnblocked(temp_v13);
       temp_v8 = temp_v8 + temp_v4;
       if (param_1 != 0x16) {
         if (param_1 != 0x17) {
@@ -559,7 +559,7 @@ void FUN_001fdde8(int param_1)
         FUN_002f0384(0);
         *(unsigned char *)(temp_v5 + 0x3c) = 1;
       }
-      temp_v9 = FUN_002a4878(temp_v5 + 0x40);
+      temp_v9 = listCursorGetRowOfChildIfUnblocked(temp_v5 + 0x40);
       temp_v8 = 0;
       temp_v4 = widgetSubCallIfVisible(temp_v5 + 0x40);
       if (0 < temp_v4) {
@@ -583,7 +583,7 @@ void FUN_001fdde8(int param_1)
     }
     else {
       temp_v4 = resourceRunOperationIfUnblocked(temp_v13);
-      temp_v8 = FUN_002a4894(temp_v13);
+      temp_v8 = listCursorGetRowIfUnblocked(temp_v13);
       temp_v8 = temp_v8 + temp_v4;
       if (param_1 != 0x16) {
         if (param_1 != 0x17) {
@@ -605,7 +605,7 @@ void FUN_001fdde8(int param_1)
         FUN_002f0384(0);
         *(unsigned char *)(temp_v5 + 0x3c) = 1;
       }
-      temp_v9 = FUN_002a4878(temp_v5 + 0x40);
+      temp_v9 = listCursorGetRowOfChildIfUnblocked(temp_v5 + 0x40);
       temp_v8 = 0;
       temp_v4 = widgetSubCallIfVisible(temp_v5 + 0x40);
       if (0 < temp_v4) {
@@ -667,7 +667,7 @@ void FUN_001fdde8(int param_1)
   }
 LAB_001fea60:
   flaggedEntrySetValueB(temp_v5 + 0x40,temp_v9);
-  temp_v3 = FUN_002a4878(temp_v5 + 0x40);
+  temp_v3 = listCursorGetRowOfChildIfUnblocked(temp_v5 + 0x40);
   param_1 = FUN_003da8f4((int)*(char *)(temp_v5 + 0xa4),temp_v3);
   campShowSelectedEntryHelp();
   campTouchRegionsRemoveGroup(temp_v13,0);
@@ -734,21 +734,21 @@ LAB_001fe16c:
       campSelectorRebuildList(0x4b);
       gameSetStatusCameraHeightMode(1);
       temp_v4 = resourceRunOperationIfUnblocked(temp_v13);
-      temp_v8 = FUN_002a4894(temp_v13);
+      temp_v8 = listCursorGetRowIfUnblocked(temp_v13);
       temp_v2 = *(unsigned short *)(temp_v9 + (temp_v8 + temp_v4) * 2);
       break;
     case 0x4c:
       campSelectorRebuildList(0x4c);
       gameSetStatusCameraHeightMode(0);
       temp_v4 = resourceRunOperationIfUnblocked(temp_v13);
-      temp_v8 = FUN_002a4894(temp_v13);
+      temp_v8 = listCursorGetRowIfUnblocked(temp_v13);
       temp_v2 = *(unsigned short *)(temp_v9 + (temp_v8 + temp_v4) * 2);
       break;
     case 0x4d:
       campSelectorRebuildList(0x4d);
       gameSetStatusCameraHeightMode(2);
       temp_v4 = resourceRunOperationIfUnblocked(temp_v13);
-      temp_v8 = FUN_002a4894(temp_v13);
+      temp_v8 = listCursorGetRowIfUnblocked(temp_v13);
       temp_v2 = *(unsigned short *)(temp_v9 + (temp_v8 + temp_v4) * 2);
       break;
     case 0x4e:

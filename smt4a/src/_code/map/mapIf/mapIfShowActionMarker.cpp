@@ -37,7 +37,7 @@ extern void *g_handleRegistry;
 void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 void *modelListInit(void *memory);
 void resourceOwnerLoadFileSync(MapActionMarkerModel *model, const char *path);
-void FUN_0040aad4(MapActionMarkerModel *model, s32 arg);
+void moriModelContentLoadBody(MapActionMarkerModel *model, s32 arg);
 void handleRegistryRegisterObject(void *registry, u32 handle);
 void controllerSetDestination(u32 controller, const MapActionMarkerPlacement *destination);
 void controllerSetRotationEulerDegrees(u32 controller, f32 x, f32 y, f32 z);
@@ -60,7 +60,7 @@ void mapIfShowActionMarker(MapActionMarkerPlacement placement)
     }
     marker->model = (MapActionMarkerModel *)object;
     resourceOwnerLoadFileSync(marker->model, "map/all/action_up.bam");
-    FUN_0040aad4(marker->model, 0);
+    moriModelContentLoadBody(marker->model, 0);
     controller = marker->model->controller;
     handleRegistryRegisterObject(g_handleRegistry, controller);
     controllerSetDestination(controller, &marker->placement);

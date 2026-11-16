@@ -21,7 +21,7 @@ int FUN_00165088(...);
 int msgBoxFlagsClearBit7(...);
 int ifTouchGetButtonHelpValue(void);
 int sysPlaySe(...);
-int FUN_00183f58(...);
+int buttonHelpSelectSlot(...);
 int pairSetFirstResetSecond(...);
 
 int asdTMTexTablePrepareNodeImage(int, int);
@@ -103,7 +103,7 @@ extern int msgBoxIsState2(unsigned int);
 /* Supplied declaration required: FUN_00169704. */
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: itemGetStackLimit. */
-/* Supplied declaration required: FUN_00183f58. */
+/* Supplied declaration required: buttonHelpSelectSlot. */
 /* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
 extern int mapMainIsBusy(void);
@@ -1150,7 +1150,7 @@ LAB_0014d428:
                   sysPlaySe();
                   temp_v4 = 0;
                   do {
-                    FUN_00183f58(temp_v4 & 0xff,*(unsigned char *)(temp_v2 + temp_v4 + 0x19c8),
+                    buttonHelpSelectSlot(temp_v4 & 0xff,*(unsigned char *)(temp_v2 + temp_v4 + 0x19c8),
                                  *(unsigned short *)(temp_v2 + temp_v4 * 2 + 0x19ce),1);
                     temp_v4 = temp_v4 + 1;
                   } while ((int)temp_v4 < 6);
@@ -1199,7 +1199,7 @@ LAB_0014d428:
                   sysPlaySe();
                   temp_v4 = 0;
                   do {
-                    FUN_00183f58(temp_v4 & 0xff,*(unsigned char *)(temp_v2 + temp_v4 + 0x19c8),
+                    buttonHelpSelectSlot(temp_v4 & 0xff,*(unsigned char *)(temp_v2 + temp_v4 + 0x19c8),
                                  *(unsigned short *)(temp_v2 + temp_v4 * 2 + 0x19ce),1);
                     temp_v4 = temp_v4 + 1;
                   } while ((int)temp_v4 < 6);

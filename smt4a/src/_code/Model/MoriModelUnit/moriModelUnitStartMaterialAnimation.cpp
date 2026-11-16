@@ -8,7 +8,7 @@ void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 size, s32 kind);
 void FUN_0045ab90(MaterialFlagBindingArray *binding, const MaterialFlagAnimation *animation, void *metadata);
 void FUN_0045b384(void *samples, const MaterialFlagAnimation *animation, void *model);
 void FUN_0045b498(void *samples, void *storage, u32 count);
-extern const char DAT_00526108[];
+extern const char g_moriModelUnitSourceFileName[];
 
 /* Bind a material animation and prepare the optional per-value sample buffer. */
 void moriModelUnitStartMaterialAnimation(MoriModelUnit *unit, u32 index, u8 mode, f32 speed)
@@ -73,7 +73,7 @@ void moriModelUnitStartMaterialAnimation(MoriModelUnit *unit, u32 index, u8 mode
                 if (animation->header.members[member]->targetKind == 6) {
                     void *storage = view->state.storage;
                     if (storage == NULL) {
-                        asdDebugTrace(DAT_00526108, 942);
+                        asdDebugTrace(g_moriModelUnitSourceFileName, 942);
                         storage = asdMemoryAlloc(0x10000, 0x100, 0, count * 4, 1);
                         view->state.storage = storage;
                     }

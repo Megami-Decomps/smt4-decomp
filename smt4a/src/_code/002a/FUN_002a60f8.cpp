@@ -36,7 +36,7 @@ void campCommonBgAcquire(void);
 void FUN_0031ed60(PromptState *state, s32 flag);
 void obj04Finish(void);
 s32 FUN_0035d7bc(PromptState *state);
-s32 FUN_0035d83c(PromptState *state);
+s32 jobHandleIsReady(PromptState *state);
 void commonBgStopChildAndBeginTransition(void);
 s32 messageMainIsWindowActive(void);
 s32 FUN_002e0b5c(u32 a, u32 b);
@@ -98,7 +98,7 @@ u32 FUN_002a60f8(u32 unused, s32 enabled)
             return 0;
         gameDataAddHomeButtonHold(1);
         gameDataBlocksAddFlags(1);
-        FUN_00333574(1);
+        gameDataBlocksOrFlagsClearUnk02(1);
         scrScriptProcessStartEntry(DAT_005e2110, 1);
         next = 5;
         break;
@@ -112,7 +112,7 @@ u32 FUN_002a60f8(u32 unused, s32 enabled)
         scrRunOpcodesStub(DAT_005e2110);
         if (messageMainIsWindowActive() != 0)
             DAT_0057f6cb = 1;
-        if (FUN_0035d83c(prompt) == 0)
+        if (jobHandleIsReady(prompt) == 0)
             return 0;
         FUN_0035d7bc(prompt);
         sysPlaySe(0xE8);

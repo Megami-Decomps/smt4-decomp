@@ -4,7 +4,7 @@
 
 extern "C" {
 extern BgmChannelSelection g_resourceSharedFlag;
-extern BgmRequestChannel DAT_0061951c[2];
+extern BgmRequestChannel g_bgmRequestChannels[2];
 }
 
 /* Queue a faded switch when needed; otherwise request the track directly. */
@@ -32,13 +32,13 @@ extern "C" void bgmPlay(s32 id, u32 parameter, u32 frames)
         return;
     }
     if (g_resourceSharedFlag.selected == 0) {
-        selected = &DAT_0061951c[0];
-        other = &DAT_0061951c[1];
+        selected = &g_bgmRequestChannels[0];
+        other = &g_bgmRequestChannels[1];
     } else if (g_resourceSharedFlag.selected == 1) {
-        selected = &DAT_0061951c[1];
-        other = &DAT_0061951c[0];
+        selected = &g_bgmRequestChannels[1];
+        other = &g_bgmRequestChannels[0];
     } else {
-        other = &DAT_0061951c[1];
+        other = &g_bgmRequestChannels[1];
     }
     if (other->track.nextId != 0) {
         bgmChannelRequest(selected, id, parameter, frames);

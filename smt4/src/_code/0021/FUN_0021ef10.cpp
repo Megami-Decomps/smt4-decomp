@@ -9,7 +9,7 @@ int dataTable2eSub2GetCount(...);
 int FUN_0025090c(int, int, int, unsigned char [144]);
 int forwardRecoveredCallback(void);
 int textDrawString(int, unsigned int, unsigned char [144]);
-int FUN_002c0944(unsigned int);
+int gxSubmitDrawZeroExtraParams(unsigned int);
 int renderCtxSelectTexture(int, int);
 int renderCtxSelectStereoLayout(int);
 int findKeyedRecord(int, int);
@@ -31,7 +31,7 @@ extern int dataTable2eSub2GetRecord(int);
 /* Supplied declaration required: forwardRecoveredCallback. */
 /* Supplied declaration required: textDrawString. */
 extern unsigned long long asdTMTexTableEntryAt(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c0944. */
+/* Supplied declaration required: gxSubmitDrawZeroExtraParams. */
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int renderCtxPackPassFlags(unsigned int, unsigned int);
@@ -73,7 +73,7 @@ unsigned int FUN_0021ef10(void)
     }
     renderCtxSelectStereoLayout(g_titleScene);
     renderCtxSelectTexture(g_titleScene,0);
-    FUN_002c0944(temp_v6);
+    gxSubmitDrawZeroExtraParams(temp_v6);
     forwardRecoveredCallback();
     temp_v4 = g_titleScene;
     piVar7 = (int *)(g_titleScene + 0x124c);

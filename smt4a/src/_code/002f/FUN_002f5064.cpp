@@ -40,7 +40,7 @@ int FUN_003f33b0(int, unsigned int, int);
 int unitRecordResetCurrentValues(...);
 int unitRecomputeDerivedStats(...);
 int bitsAt60Set(...);
-int FUN_004bd6b0(int);
+int partyRecordSetEquippedItemClampRank(int);
 
 /* stack frame of param_1: 10 slot(s), 38 byte(s) */
 typedef struct {
@@ -109,7 +109,7 @@ extern int FUN_004bcaa8(unsigned short, unsigned short, int, unsigned int *, uns
 extern int getUnlockedSlotCount(int);
 extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: bitsAt60Set. */
-/* Supplied declaration required: FUN_004bd6b0. */
+/* Supplied declaration required: partyRecordSetEquippedItemClampRank. */
 
 
 void FUN_002f5064(int param_1)
@@ -176,7 +176,7 @@ void FUN_002f5064(int param_1)
           if ((*(short *)(pcVar14 + temp_v10 * 2 + 0x138) != 0) && (temp_v9 = 0, 0 < temp_v3)) {
             do {
               if (*(short *)(temp_v2 + temp_v9 * 2 + 0x34) == 0) {
-                FUN_004bd6b0(temp_v2);
+                partyRecordSetEquippedItemClampRank(temp_v2);
                 (pcVar14 + temp_v10 * 2 + 0x138)[0] = '\0';
                 (pcVar14 + temp_v10 * 2 + 0x138)[1] = '\0';
                 break;

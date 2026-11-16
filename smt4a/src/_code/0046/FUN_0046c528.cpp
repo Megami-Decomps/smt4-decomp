@@ -9,7 +9,7 @@ int FUN_001a6928(...);
 int qsort(...);
 int nnnstdMemCpy(...);
 
-int FUN_00191f68(void);
+int aocPackageOwnerFreeTables(void);
 int dataTableFileGetTable(...);
 int packageEntryIsLoaded(...);
 int packageEntryGetDirectory(void);
@@ -150,7 +150,7 @@ extern unsigned char FUN_0046e448; /* 0x46e448 */
 #define romwright_subpiece_4_2_0(value, offset) ((unsigned short)(unsigned int)(value))
 #endif
 /* Supplied declaration required: qsort. */
-/* Supplied declaration required: FUN_00191f68. */
+/* Supplied declaration required: aocPackageOwnerFreeTables. */
 extern int dataTableGetCount(void);
 extern unsigned int dataTableGetEntries(unsigned int);
 /* Supplied declaration required: FUN_001a6928. */
@@ -239,7 +239,7 @@ void FUN_0046c528(fn_0046c528_arg0 *param_1)
   int *temp_v56;
   int *temp_v57;
   
-  FUN_00191f68();
+  aocPackageOwnerFreeTables();
   temp_v38 = &param_1->field_0x404;
   temp_v39 = &param_1->field_0x40c;
   temp_v40 = &param_1->field_0x414;

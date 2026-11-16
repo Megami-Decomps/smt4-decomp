@@ -12,7 +12,7 @@ typedef struct Rec10 {
     /* 0x10 */ Inner38 *inner;
 } Rec10;
 
-extern Rec10 *FUN_0050d2cc(u8 *key);
+extern Rec10 *resourceManagerGetValueByIndex(u8 *key);
 extern s32 transferQueueForwardNext(Inner38 *inner);
 
 /* Runs transferQueueForwardNext for each of the inner object's items; 0xE if there is no inner object, 0x14 on failure. */
@@ -26,7 +26,7 @@ u32 runItemsOfInner(Ref4 *obj)
     if (obj == NULL) {
         return 1;
     }
-    record = FUN_0050d2cc(obj->inner);
+    record = resourceManagerGetValueByIndex(obj->inner);
     if (record != NULL) {
         inner = record->inner;
     }

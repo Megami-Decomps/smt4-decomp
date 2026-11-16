@@ -37,8 +37,8 @@ extern QcGlobalsA g_qcMain;
 
 void asdOperatorDelete(void *block);
 s32 bgmGetStateById(u32 id);
-void FUN_003d4c68(u32 id);
-void FUN_003d54f8(s32 a, s32 b);
+void bgmResumeOrRequestTrack(u32 id);
+void titleSetSlotValueState2(s32 a, s32 b);
 void bgmStopWithoutEntry(void);
 s32 gameFlagIsSet(u32 flag);
 void campCommonBgAcquire(void);
@@ -94,7 +94,7 @@ u32 FUN_00236110(void)
         if (g_qcMain.option1 == 0) {
             if (g_qcMain.entryId == 1) {
                 if (bgmGetStateById(0x1000044) != 1) {
-                    FUN_003d4c68(0x1000044);
+                    bgmResumeOrRequestTrack(0x1000044);
                 }
             } else {
                 if (bgmGetStateById(0x10000a3) == 1) {
@@ -106,7 +106,7 @@ u32 FUN_00236110(void)
                     (g_qcMain.entryId != 4 || gameFlagIsSet(0xf4) == 0 || gameFlagIsSet(0xf6) != 0) &&
                     (g_qcMain.entryId != 2 || gameFlagIsSet(0xd1) == 0 || gameFlagIsSet(0xd4) != 0)) {
                     if (playing != 1) {
-                        FUN_003d4c68(0x1000079);
+                        bgmResumeOrRequestTrack(0x1000079);
                     }
                 }
             }
@@ -154,8 +154,8 @@ u32 FUN_00236110(void)
         break;
     case 4:
         if (g_qcMain.active != 0) {
-            FUN_003d54f8(0, 1);
-            FUN_003d54f8(1, 1);
+            titleSetSlotValueState2(0, 1);
+            titleSetSlotValueState2(1, 1);
             bgmStopWithoutEntry();
         }
         return 0xffffffff;

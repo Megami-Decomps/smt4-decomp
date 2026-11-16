@@ -3,7 +3,7 @@
 extern "C" {
 
 int messageForwardDefaultMode(u32 a, u32 b, u32 c, int d, int e);
-int FUN_002bff50(void);
+int messageSetConfirmDisplayMode(void);
 extern u32 scrGetCommandFrame(void);
 extern u32 scrGetArg(u32 index);
 extern u32 fileSlotGetBuffer(u32 id);
@@ -14,7 +14,7 @@ void scrComm_Message_ShowConfirmSimple(void)
     u32 message = fileSlotGetBuffer(0x1e);
     u32 flag = scrGetCommandFrame();
 
-    FUN_002bff50();
+    messageSetConfirmDisplayMode();
     messageForwardDefaultMode(message, arg, flag, 6, 0);
 }
 

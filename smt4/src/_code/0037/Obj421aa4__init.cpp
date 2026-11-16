@@ -4,7 +4,7 @@
 void Obj421aa4::init()
 {
     u32 id = vfunc20();
-    Obj421aa4Manager *manager = FUN_002baed8();
+    Obj421aa4Manager *manager = soundRequestQueueGetInstance();
     Obj421aa4Node *node;
 
     unk04[0] = 0;

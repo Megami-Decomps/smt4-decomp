@@ -3,7 +3,7 @@
 
 extern "C" {
 
-extern const char DAT_00410578[]; /* ././effMisc.h: __FILE__ */
+extern const char g_effMiscSourceFileName[]; /* ././effMisc.h: __FILE__ */
 
 void *memAlloc(int, int, int, int size, int align, int);
 void rt_memclr(void *block, s32 size);
@@ -13,7 +13,7 @@ static __inline void *effAllocCleared(s32 size)
 {
     void *block;
 
-    asdDebugTrace(DAT_00410578, 450);
+    asdDebugTrace(g_effMiscSourceFileName, 450);
     block = memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
     rt_memclr(block, size);
     return block;

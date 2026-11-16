@@ -10,7 +10,7 @@ struct ClearBufferSurface {
 };
 union ClearDepthBits { f32 value; u32 bits; };
 extern "C" {
-void FUN_0017dd84();
+void asdGxCommandBufferTerminateAndSubmit();
 void asdGfxCmdBufferForward8(u32, u32, u32, u32, u32, u32, u32, u32);
 
 void gxCommandClearColorDepth(ClearBufferSurface *color, ClearBufferSurface *depth,
@@ -51,7 +51,7 @@ void gxCommandClearColorDepth(ClearBufferSurface *color, ClearBufferSurface *dep
     if (!(clearMask & 6))
         depthAddress = 0;
     if (synchronize)
-        FUN_0017dd84();
+        asdGxCommandBufferTerminateAndSubmit();
     asdGfxCmdBufferForward8(colorAddress, colorSize, packedColor, colorBits,
                            depthAddress, depthSize, packedDepth | (stencil << 24), depthBits);
 }

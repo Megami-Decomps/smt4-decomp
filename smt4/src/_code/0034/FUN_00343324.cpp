@@ -3,7 +3,7 @@
 extern "C" {
 
 int gpuWriteVertexUniformMatrix(u32 a, int b);
-int FUN_002bbbc8(void);
+int cameraComposeMatrices(void);
 
 typedef struct Obj {
     /* 0x000 */ u8 unk000[0x52C];
@@ -14,7 +14,7 @@ typedef struct Obj {
 
 void FUN_00343324(Obj *obj)
 {
-    FUN_002bbbc8();
+    cameraComposeMatrices();
     gpuWriteVertexUniformMatrix(obj->unk52C, (int)obj + 0x118c);
     obj->unk5F4 = 0;
 }

@@ -12,7 +12,7 @@ char *libc_strcpy(char *destination, const char *source);
 void textConvertToGlyphPairs(const char *source, char *destination);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 void messageMainRequestBanner();
-void FUN_0025921c(const char *text, u32 parameter);
+void scrCommMessageShowText(const char *text, u32 parameter);
 
 void FUN_002feadc()
 {
@@ -31,6 +31,6 @@ void FUN_002feadc()
         }
     }
     messageMainRequestBanner();
-    FUN_0025921c(text, room->messageParameter);
+    scrCommMessageShowText(text, room->messageParameter);
 }
 }

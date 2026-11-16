@@ -75,7 +75,7 @@ extern int FUN_00256550(unsigned int);
 extern int spriteTemplateGetPreferredDevilId(void);
 extern int *dataTable2fSub0GetRecord(int);
 extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
-extern int FUN_00285574(void);
+extern int mapGetDepartureIndex(void);
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: dataTable00FindById. */
@@ -167,7 +167,7 @@ void FUN_0021bea0(void)
   if (DAT_0049f942 != '\0') {
     temp_v17 = FUN_002ef868();
     temp_v16 = (char *)FUN_002ced4c();
-    temp_v1 = FUN_00285574();
+    temp_v1 = mapGetDepartureIndex();
     if (temp_v1 != 0) {
       temp_v2 = 0;
       dataTable2fSub0GetCount();
@@ -175,7 +175,7 @@ void FUN_0021bea0(void)
         do {
           piVar4 = (int *)dataTable2fSub0GetRecord(temp_v2);
           if (*piVar4 == -1) break;
-          temp_v1 = FUN_00285574();
+          temp_v1 = mapGetDepartureIndex();
           if (temp_v1 == (short)piVar4[2]) {
             *(char *)(temp_v0 + 0x3a) = (char)(short)piVar4[3];
             *(char *)(temp_v0 + 0x3b) = (char)*(unsigned short *)((int)piVar4 + 0xe);

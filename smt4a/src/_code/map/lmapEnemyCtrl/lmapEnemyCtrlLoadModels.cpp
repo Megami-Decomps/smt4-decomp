@@ -21,7 +21,7 @@ extern u32 g_handleRegistry;
 void *asdMemoryAllocTraced(u32 size, const char *file, int line);   /* allocate with source location */
 MoriModelContent *modelListInit(void *mem);                 /* content constructor */
 void resourceOwnerLoadFileSync(MoriModelContent *content, const char *name);
-void FUN_0040aad4(MoriModelContent *content, u32 arg);
+void moriModelContentLoadBody(MoriModelContent *content, u32 arg);
 void handleRegistryRegisterObject(u32 registry, u32 object);
 
 // Loads the field enemy and boss models and registers them.
@@ -33,7 +33,7 @@ void lmapEnemyCtrlLoadModels(LmapEnemyCtrl *ctrl)
     }
     ctrl->enemyModel = (MoriModelContent *)mem;
     resourceOwnerLoadFileSync(ctrl->enemyModel, "map/all/lmap_ene.bam");
-    FUN_0040aad4(ctrl->enemyModel, 0);
+    moriModelContentLoadBody(ctrl->enemyModel, 0);
     RegisteredModel *enemy = (RegisteredModel *)ctrl->enemyModel->body;
     handleRegistryRegisterObject(g_handleRegistry, (u32)enemy);
     enemy->flags |= 3;
@@ -44,7 +44,7 @@ void lmapEnemyCtrlLoadModels(LmapEnemyCtrl *ctrl)
     }
     ctrl->bossModel = (MoriModelContent *)mem;
     resourceOwnerLoadFileSync(ctrl->bossModel, "map/all/lmap_boss.bam");
-    FUN_0040aad4(ctrl->bossModel, 0);
+    moriModelContentLoadBody(ctrl->bossModel, 0);
     RegisteredModel *boss = (RegisteredModel *)ctrl->bossModel->body;
     handleRegistryRegisterObject(g_handleRegistry, (u32)boss);
     boss->flags |= 3;

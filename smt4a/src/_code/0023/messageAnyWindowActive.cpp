@@ -11,7 +11,7 @@ struct MessageActivityGlobals {
 
 extern "C" {
 extern MessageActivityGlobals g_messageMain;
-extern MessageActivityWindow *DAT_005e2010[12];
+extern MessageActivityWindow *g_messageWindows[12];
 
 u32 messageAnyWindowActive()
 {
@@ -20,7 +20,7 @@ u32 messageAnyWindowActive()
         return 1;
     }
     for (s32 i = 0; i < 12; ++i) {
-        if (DAT_005e2010[i]->active) {
+        if (g_messageWindows[i]->active) {
             return 1;
         }
     }

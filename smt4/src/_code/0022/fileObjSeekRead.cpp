@@ -21,7 +21,7 @@ typedef struct FileObj {
 
 static __inline nn::Result fileRecordResult(nn::Result result)
 {
-    FUN_002c3510(result);
+    processResultSetValue(result);
     return result;
 }
 
@@ -35,9 +35,9 @@ nn::Result fileObjSeekRead(FileObj *file, u32 offset, u32 buffer, u32 size)
     nn::Result result;
 
     u64 position = offset;
-    FUN_002c3510(file->vtbl->seek(file, position));
+    processResultSetValue(file->vtbl->seek(file, position));
     result = file->vtbl->read(file, &readSize, buffer, size, 1);
-    FUN_002c3510(result);
+    processResultSetValue(result);
     if (!nnResultIsSuccess(result)) {
         if ((file->handle & ~1) != 0) {
             if ((file->handle & 1) != 0) {

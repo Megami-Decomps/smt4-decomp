@@ -13,8 +13,8 @@ int nw_ut_internal_LinkListImpl_erase_2AC900(int, unsigned int, int);
 typedef int romwright_code(...);
 /* Supplied declaration required: FUN_002b4b94. */
 /* Supplied declaration required: FUN_002b4dc4. */
-extern unsigned int FUN_002bad74(unsigned int, unsigned int);
-extern unsigned int FUN_002baed8(void);
+extern unsigned int soundRequestQueueFlush(unsigned int, unsigned int);
+extern unsigned int soundRequestQueueGetInstance(void);
 /* Supplied declaration required: nw_snd_SoundPlayer_StopAllSound. */
 /* Supplied declaration required: nw_snd_internal_driver_StreamBufferPool_Finalize. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2AC900. */
@@ -39,8 +39,8 @@ void FUN_0012f844(int param_1)
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < *(unsigned int *)(param_1 + 0x20));
   }
-  temp_v0 = FUN_002baed8();
-  temp_v1 = FUN_002bad74(temp_v0,1);
+  temp_v0 = soundRequestQueueGetInstance();
+  temp_v1 = soundRequestQueueFlush(temp_v0,1);
   FUN_002b4b94(temp_v0,temp_v1);
   *(unsigned int *)(param_1 + 0x20) = 0;
   *(unsigned int *)(param_1 + 0x24) = 0;

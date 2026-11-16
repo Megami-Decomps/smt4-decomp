@@ -12,8 +12,8 @@ struct ScissorContextView {
 }
 extern "C" {
 extern ScissorContextView *g_titleScene;
-extern u32 *DAT_004729e0;
-extern u32 DAT_004729e4;
+extern u32 *g_modelCommandBuffer;
+extern u32 g_modelCommandWordCount;
 u32 asdGxGetCurrentPresetKind(void);
 u32 FUN_002ae210(u32 kind);
 u32 FUN_002ae1e8(u32 kind);
@@ -49,13 +49,13 @@ void FUN_003098b4(u32 origin)
         start = 0;
         end = (width - 1) | ((height - 1) << 16);
     }
-    u32 *packet = DAT_004729e0;
-    packet[DAT_004729e4] = start;
-    packet[DAT_004729e4 + 1] = 0xF0066;
-    DAT_004729e4 += 2;
-    packet[DAT_004729e4] = end;
-    packet[DAT_004729e4 + 1] = 0xF0067;
-    DAT_004729e4 += 2;
+    u32 *packet = g_modelCommandBuffer;
+    packet[g_modelCommandWordCount] = start;
+    packet[g_modelCommandWordCount + 1] = 0xF0066;
+    g_modelCommandWordCount += 2;
+    packet[g_modelCommandWordCount] = end;
+    packet[g_modelCommandWordCount + 1] = 0xF0067;
+    g_modelCommandWordCount += 2;
     asdModelCommandBlockRelease();
 }
 }

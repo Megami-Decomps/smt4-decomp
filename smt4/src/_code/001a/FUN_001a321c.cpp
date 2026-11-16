@@ -10,7 +10,7 @@ int FUN_00288844(...);
 int FUN_0028886c(void);
 int FUN_002888a8(...);
 int table8Type5GetValue(...);
-int FUN_002b0750(...);
+int uiDrawTableTextureSized(...);
 int FUN_002b64b8(void);
 int FUN_002b659c(...);
 int FUN_002b6c34(...);
@@ -123,7 +123,7 @@ extern unsigned int FUN_00288ddc(int, int);
 /* Supplied declaration required: unitGetStereoScreenPosition. */
 /* Supplied declaration required: FUN_00293ac0. */
 extern int FUN_0029e9cc(unsigned short);
-/* Supplied declaration required: FUN_002b0750. */
+/* Supplied declaration required: uiDrawTableTextureSized. */
 /* Supplied declaration required: FUN_002b64b8. */
 /* Supplied declaration required: FUN_002b659c. */
 /* Supplied declaration required: FUN_002b6c34. */
@@ -1105,7 +1105,7 @@ LAB_001a3ea8:
                   temp_v3 = psVar11[1];
                 }
                 temp_v22 = (short *)0xdd;
-                FUN_002b0750(2,0x1a,0x6e,temp_v28,(int)temp_v30 + (int)*(short *)(temp_v36 + 10),
+                uiDrawTableTextureSized(2,0x1a,0x6e,temp_v28,(int)temp_v30 + (int)*(short *)(temp_v36 + 10),
                              temp_v32,(int)temp_v3);
                 temp_v3 = (short)(int)temp_v33;
                 if (*temp_v38 != '\x03') {
@@ -1132,7 +1132,7 @@ LAB_001a3ea8:
                       }
                       temp_v25 = (float)(int)psVar12[1];
                       temp_v22 = (short *)0xdd;
-                      FUN_002b0750(2,0x1a,0x76,(unsigned char *)((int)temp_v28 + temp_v32),
+                      uiDrawTableTextureSized(2,0x1a,0x76,(unsigned char *)((int)temp_v28 + temp_v32),
                                    (int)*(short *)(temp_v36 + 10) + (int)temp_v30,temp_v31,temp_v25)
                       ;
                       efctSetSpeed();
@@ -1146,7 +1146,7 @@ LAB_001a3ea8:
                         *(unsigned char *)(temp_v10 + 0x12c4) = 0;
                       }
                       temp_v22 = (short *)0xde;
-                      FUN_002b0750(2,0x1a,0x77,(unsigned char *)((int)temp_v28 + temp_v32),
+                      uiDrawTableTextureSized(2,0x1a,0x77,(unsigned char *)((int)temp_v28 + temp_v32),
                                    (int)*(short *)(temp_v36 + 10) + (int)temp_v30,temp_v31,temp_v25)
                       ;
                       temp_v10 = g_titleScene;
@@ -1161,7 +1161,7 @@ LAB_001a3ea8:
                       efctSetSpeed();
                     }
                     temp_v22 = (short *)0xdd;
-                    FUN_002b0750(2,0x1a,0x6f,(unsigned char *)((int)temp_v28 + temp_v31 + temp_v32),
+                    uiDrawTableTextureSized(2,0x1a,0x6f,(unsigned char *)((int)temp_v28 + temp_v31 + temp_v32),
                                  (int)*(short *)(temp_v36 + 10) + (int)temp_v30,temp_v23,temp_v24);
                   }
                   else if ((int)psVar24 < (int)temp_v33) {
@@ -1187,7 +1187,7 @@ LAB_001a3ea8:
                       temp_v25 = (float)(int)temp_v22[1];
                       temp_v22 = (short *)0xdd;
                       temp_v27 = temp_v32 - (int)temp_v23;
-                      FUN_002b0750(2,0x1a,0x76,(unsigned char *)(temp_v27 + (int)temp_v28),
+                      uiDrawTableTextureSized(2,0x1a,0x76,(unsigned char *)(temp_v27 + (int)temp_v28),
                                    (int)*(short *)(temp_v36 + 10) + (int)temp_v30,temp_v31,temp_v25)
                       ;
                       efctSetSpeed();
@@ -1201,7 +1201,7 @@ LAB_001a3ea8:
                         *(unsigned char *)(temp_v10 + 0x12c4) = 0;
                       }
                       temp_v22 = (short *)0xde;
-                      FUN_002b0750(2,0x1a,0x77,(unsigned char *)(temp_v27 + (int)temp_v28),
+                      uiDrawTableTextureSized(2,0x1a,0x77,(unsigned char *)(temp_v27 + (int)temp_v28),
                                    (int)*(short *)(temp_v36 + 10) + (int)temp_v30,temp_v31,temp_v25)
                       ;
                       temp_v10 = g_titleScene;
@@ -1216,7 +1216,7 @@ LAB_001a3ea8:
                       efctSetSpeed();
                     }
                     temp_v22 = (short *)0xdd;
-                    FUN_002b0750(2,0x1a,0x71,
+                    uiDrawTableTextureSized(2,0x1a,0x71,
                                  (unsigned char *)
                                  (temp_v31 + (temp_v32 - (int)temp_v23) + (int)temp_v28),
                                  (int)*(short *)(temp_v36 + 10) + (int)temp_v30,temp_v23,temp_v24);
@@ -1232,7 +1232,7 @@ LAB_001a3ea8:
                     }
                     temp_v25 = (float)(int)psVar12[1];
                     temp_v22 = (short *)0xdd;
-                    FUN_002b0750(2,0x1a,0x76,(unsigned char *)((int)temp_v28 + temp_v32),
+                    uiDrawTableTextureSized(2,0x1a,0x76,(unsigned char *)((int)temp_v28 + temp_v32),
                                  (int)temp_v30 + (int)*(short *)(temp_v36 + 10),temp_v31,temp_v25);
                     efctSetSpeed();
                     temp_v10 = g_titleScene;
@@ -1245,7 +1245,7 @@ LAB_001a3ea8:
                       *(unsigned char *)(temp_v10 + 0x12c4) = 0;
                     }
                     temp_v22 = (short *)0xde;
-                    FUN_002b0750(2,0x1a,0x77,(unsigned char *)((int)temp_v28 + temp_v32),
+                    uiDrawTableTextureSized(2,0x1a,0x77,(unsigned char *)((int)temp_v28 + temp_v32),
                                  (int)*(short *)(temp_v36 + 10) + (int)temp_v30,temp_v31,temp_v25);
                     temp_v10 = g_titleScene;
                     temp_v12 = packNibblesAndByte(6,7,0);
@@ -1269,7 +1269,7 @@ LAB_001a3ea8:
                     temp_v10 = 1;
                   }
                   temp_v22 = (short *)0xdd;
-                  FUN_002b0750(2,0x1a,0x6f,(unsigned char *)((int)temp_v28 + temp_v32),
+                  uiDrawTableTextureSized(2,0x1a,0x6f,(unsigned char *)((int)temp_v28 + temp_v32),
                                (int)*(short *)(temp_v36 + 10) + (int)temp_v30,temp_v10,(int)psVar12[1]
                               );
                 }
@@ -1283,7 +1283,7 @@ LAB_001a3ea8:
                     temp_v10 = 1;
                   }
                   temp_v22 = (short *)0xdd;
-                  FUN_002b0750(2,0x1a,0x71,(unsigned char *)((temp_v32 - temp_v10) + (int)temp_v28),
+                  uiDrawTableTextureSized(2,0x1a,0x71,(unsigned char *)((temp_v32 - temp_v10) + (int)temp_v28),
                                (int)*(short *)(temp_v36 + 10) + (int)temp_v30,temp_v10,(int)psVar12[1]
                               );
                 }

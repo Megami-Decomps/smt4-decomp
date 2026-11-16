@@ -25,7 +25,7 @@ int FUN_002826dc(float *, float *, int, int);
 int distSpatial(void);
 int FUN_002d0394(void);
 int FUN_002d8614(...);
-int FUN_00317af8(float *, float *, int);
+int padGetNormalizedAnalogStick(float *, float *, int);
 int mathPositionHeadingDegrees(void);
 int FUN_0036d984(...);
 EnemyPosition mapEnemyGetEncounterTargetPosition(void);
@@ -99,13 +99,13 @@ extern unsigned int FUN_0029202c(void);
 /* Supplied declaration required: FUN_002d0394. */
 /* Supplied declaration required: FUN_002d8614. */
 extern int lmapSceneGetUnk0(void);
-/* Supplied declaration required: FUN_00317af8. */
+/* Supplied declaration required: padGetNormalizedAnalogStick. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 extern int FUN_003646d4(unsigned int);
 /* Supplied declaration required: FUN_0036d984. */
 extern int FUN_003850b4(void);
 extern int linkHolderCallFirst(unsigned int);
-extern int FUN_004ff98c(unsigned int);
+extern int itemListGetCurrentIdOrInvalid(unsigned int);
 extern int FUN_004ffa14(unsigned int);
 
 
@@ -220,7 +220,7 @@ LAB_00222954:
     if ((temp_v1 != 0x1f) || (DAT_005f0d1c == '\0')) {
       temp_v14 = 0.0f;
       temp_v15 = 0.0f;
-      FUN_00317af8(&temp_v14,&temp_v15,0);
+      padGetNormalizedAnalogStick(&temp_v14,&temp_v15,0);
       if (((((unsigned int)temp_v14 >= 0xbf000000) || ((int)temp_v14 >= 0x3f000000)) ||
           ((unsigned int)temp_v15 >= 0xbf000000)) || ((int)temp_v15 >= 0x3f000000)) {
         DAT_005f0d20 = 0;
@@ -483,7 +483,7 @@ LAB_00222b88:
       }
     }
     temp_v2 = *(unsigned int *)(DAT_005f0c88 + 4);
-    temp_v1 = FUN_004ff98c(temp_v2);
+    temp_v1 = itemListGetCurrentIdOrInvalid(temp_v2);
     if ((temp_v1 == 6) && (temp_v1 = FUN_004ffa14(temp_v2), temp_v1 != 0)) {
       DAT_005f0cf9 = 0;
       DAT_005f0ca8 = 2;

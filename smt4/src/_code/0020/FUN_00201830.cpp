@@ -25,7 +25,7 @@ void renderCtxResetColorScale(RenderCtx *context);
 void renderCtxSelectStereoLayout(RenderCtx *context);
 s32 renderCtxPackPassFlags(u32 mode, u32 option);
 void FUN_0032accc(void);
-void FUN_002b76d0(const EffectColor *first, const EffectColor *second, const EffectColor *third,
+void gfxDrawQuadFourColors(const EffectColor *first, const EffectColor *second, const EffectColor *third,
                   const EffectColor *fourth, f32 x, f32 y, f32 width, f32 height, f32 depth);
 void FUN_0026281c(char *text, const u8 *item, s32 size);
 void textDrawString(s32 layer, u32 color, const char *text, f32 x, f32 y, f32 scale, f32 a, f32 b);
@@ -54,7 +54,7 @@ u32 FUN_00201830(void)
             color.blue = 1.0f;
             color.alpha = work->fade;
             renderCtxSelectTexture(g_titleScene, 0);
-            FUN_002b76d0(&color, &color, &color, &color, 0.0f, 0.0f, 400.0f, 240.0f, 0.9570312f);
+            gfxDrawQuadFourColors(&color, &color, &color, &color, 0.0f, 0.0f, 400.0f, 240.0f, 0.9570312f);
             renderStackPop(&g_titleScene->stackA);
         }
     } else {

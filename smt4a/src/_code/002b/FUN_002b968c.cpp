@@ -6,7 +6,7 @@
 extern "C" {
 
 int CONCAT44(double, double);
-int FUN_0014e314(...);
+int gxSubmitDrawZeroExtraParams(...);
 int renderCtxSelectTexture(...);
 int FUN_0019af70(unsigned int);
 int mapTableStepWave(void);
@@ -64,7 +64,7 @@ extern int DAT_005f1c10; /* 0x5f1c10 */
 
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0014e314. */
+/* Supplied declaration required: gxSubmitDrawZeroExtraParams. */
 extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: FUN_0019af70. */
@@ -401,7 +401,7 @@ void FUN_002b968c(void)
         }
         VectorSignedToFloat(temp_v43 * 0x23,(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(temp_v1 * 0x32,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_0014e314(temp_v2 | (temp_v34 << 0x18) | (temp_v35 << 0x10) | (temp_v36 << 8),
+        gxSubmitDrawZeroExtraParams(temp_v2 | (temp_v34 << 0x18) | (temp_v35 << 0x10) | (temp_v36 << 8),
                      (temp_v39 << 0x18) | (temp_v41 << 0x10) | (temp_v42 << 8) | temp_v13,
                      (temp_v37 << 0x18) | (temp_v32 << 0x10) | (temp_v30 << 8) | temp_v10,
                      (temp_v38 << 0x18) | (temp_v33 << 0x10) | (temp_v40 << 8) | temp_v12);

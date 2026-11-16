@@ -33,5 +33,5 @@ extern "C" void soundStreamPostTargetState(SoundStreamOwner *owner)
     }
     node->byte = value;
     listAppendNode(manager, node);
-    FUN_002bad74(manager, 1);
+    soundRequestQueueFlush(manager, 1);
 }

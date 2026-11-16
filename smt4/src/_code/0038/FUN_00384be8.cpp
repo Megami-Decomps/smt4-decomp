@@ -19,7 +19,7 @@ int libc_strcat(...);
 int buttonHelpSetPreset(int);
 int textConvertToGlyphPairs(unsigned char [64], unsigned char [140]);
 int textFormatBuffer(...);
-int FUN_002bff50(void);
+int messageSetConfirmDisplayMode(void);
 int asdMemFree(void);
 int jyoucyuGetTableEntry(int);
 void animOwnerSetScale(unsigned int, float);
@@ -54,7 +54,7 @@ extern int messageWindowIsState1(void);
 /* Supplied declaration required: textConvertToGlyphPairs. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_002bff50. */
+/* Supplied declaration required: messageSetConfirmDisplayMode. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
@@ -228,7 +228,7 @@ void FUN_00384be8(unsigned int *param_1)
     if (temp_v4 == 2) {
       animOwnerSetScale(param_1[*(int *)(param_1[0x36a] + 4) + 0x343], 1.0f);
       FUN_002e1230(param_1[*(int *)(*puVar6 + 4) + 0x343],0);
-      FUN_002bff50();
+      messageSetConfirmDisplayMode();
       if (param_1[0x170] != 0) {
         scrScriptProcessDestroy();
         param_1[0x170] = 0;

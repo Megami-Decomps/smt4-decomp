@@ -1,4 +1,4 @@
-/* NON_MATCHING: only r7/r8 are swapped: retail keeps DAT_00588fd8 in r7 and &g_aocSystem in r8 (same pool order). The smt4 twin FUN_002942c4 matches with this shape. */
+/* NON_MATCHING: only r7/r8 are swapped: retail keeps g_statusBustUpResources in r7 and &g_aocSystem in r8 (same pool order). The smt4 twin FUN_002942c4 matches with this shape. */
 #include "status/StatusBustUp.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include "addon/aocMain.h"
@@ -22,12 +22,12 @@ typedef char PortraitRecordAOffsets[offsetof(PortraitDevilRecordAView, portrait)
     offsetof(PortraitOverrideAView, portrait) == 0x8C ? 1 : -1];
 
 extern "C" {
-extern StatusBustUpResources DAT_00588fd8;
+extern StatusBustUpResources g_statusBustUpResources;
 extern AocSystem *g_aocSystem;
 s32 gameFlagIsSet(u32 flag);
 PortraitOverrideAView *dataTable00FindById(u16 id);
 s32 aocRunByName(AocSystem *system, s32 table, s32 entry, s32 mode);
-void FUN_001a6568(AocSystem *system, s32 table, s32 entry, u32 options);
+void texTableRequestNamedTextureLoad(AocSystem *system, s32 table, s32 entry, u32 options);
 
 void statusBustUpPortraitAcquire(s32 id, s32 byDevilId)
 {
@@ -50,23 +50,23 @@ void statusBustUpPortraitAcquire(s32 id, s32 byDevilId)
                 id = override->portrait;
                 if (id >= 154)
                     return;
-                if (((s8 *)DAT_00588fd8.workB)[id] <= 0 && !asdTMTexTableNodeIsLoaded(overrideTable, id)) {
+                if (((s8 *)g_statusBustUpResources.workB)[id] <= 0 && !asdTMTexTableNodeIsLoaded(overrideTable, id)) {
                     if (aocRunByName(g_aocSystem, overrideTable, id, 1))
-                        FUN_001a6568(g_aocSystem, overrideTable, id, 0x10000);
+                        texTableRequestNamedTextureLoad(g_aocSystem, overrideTable, id, 0x10000);
                     else
                         asdTMTexLoadMainHeap(overrideTable, id);
                 }
-                ++((s8 *)DAT_00588fd8.workB)[id];
+                ++((s8 *)g_statusBustUpResources.workB)[id];
                 return;
             }
         }
     }
-    if (((s8 *)DAT_00588fd8.workA)[id] <= 0 && !asdTMTexTableNodeIsLoaded(table, id)) {
+    if (((s8 *)g_statusBustUpResources.workA)[id] <= 0 && !asdTMTexTableNodeIsLoaded(table, id)) {
         if (aocRunByName(g_aocSystem, table, id, 1))
-            FUN_001a6568(g_aocSystem, table, id, 0x10000);
+            texTableRequestNamedTextureLoad(g_aocSystem, table, id, 0x10000);
         else
             asdTMTexLoadMainHeap(table, id);
     }
-    ++((s8 *)DAT_00588fd8.workA)[id];
+    ++((s8 *)g_statusBustUpResources.workA)[id];
 }
 }

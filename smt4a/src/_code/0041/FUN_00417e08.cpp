@@ -25,7 +25,7 @@ u32 FUN_00417e08(u16 id)
         return 0;
     }
     kind = FUN_001bd118(id);
-    if (FUN_001bd100(id) == 0 && kind != 0 && kind != 10 && kind != 1 && roster->leader != 0) {
+    if (dataTable1bOr1cRecordHasFlag1(id) == 0 && kind != 0 && kind != 10 && kind != 1 && roster->leader != 0) {
         return 0;
     }
     entry->refresh = 0;
@@ -40,7 +40,7 @@ u32 FUN_00417e08(u16 id)
     if (kind == 10 && goalConditionsSatisfied(id) != 0) {
         entry->flagsB |= 0x20;
     }
-    if (FUN_001bd100(id) != 0) {
+    if (dataTable1bOr1cRecordHasFlag1(id) != 0) {
         if (kind == 1) {
             for (i = 0; i < 4; i++) {
                 if (roster->active[i].id == 0) {

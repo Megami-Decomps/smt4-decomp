@@ -17,13 +17,13 @@ typedef struct BtlList {
     /* 0x0 */ BtlNode *first;
 } BtlList;
 
-extern BtlList *DAT_00435d78;
+extern BtlList *g_btlHelpList;
 extern s32 infoWindowIsActive(void);
 
 /* Whether any node in the list has a valid index, kind 1, flag 0 clear and passes infoWindowIsActive. */
 u32 btlNodeListAnyReady(void)
 {
-    BtlNode *node = DAT_00435d78->first;
+    BtlNode *node = g_btlHelpList->first;
 
     while (node != NULL) {
         BtlNode *next = node->next;

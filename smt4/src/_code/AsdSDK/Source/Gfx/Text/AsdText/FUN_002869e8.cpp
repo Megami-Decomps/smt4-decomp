@@ -35,7 +35,7 @@ extern unsigned char DAT_004def28; /* 0x4def28 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001eb584. */
 /* Supplied declaration required: FUN_00247fc0. */
-extern int FUN_002ae424(unsigned int);
+extern int charCodeIsPrivateUseGlyph(unsigned int);
 /* Supplied declaration required: recordTableGet. */
 extern int FUN_002b31b4(int *);
 /* Supplied declaration required: asdMemFree. */
@@ -161,7 +161,7 @@ LAB_00286bb8:
             temp_v1 = 0x8260;
           }
 LAB_00286c00:
-          temp_v2 = FUN_002ae424(temp_v1);
+          temp_v2 = charCodeIsPrivateUseGlyph(temp_v1);
           if (temp_v2 != 0) {
             if (temp_v1 == 0xf816) {
               temp_v4 = 1;

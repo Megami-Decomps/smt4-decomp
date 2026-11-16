@@ -5,7 +5,7 @@
 extern "C" {
 
 int operatorDeleteArray(void);
-int FUN_002e98ea(int, int, int);
+int libc_wcsncpyShort(int, int, int);
 
 typedef struct fn_002e95c4_arg0 fn_002e95c4_arg0;
 struct fn_002e95c4_arg0 {
@@ -26,7 +26,7 @@ extern unsigned char LAB_002e9610; /* 0x2e9610 */
 extern int wstrlenU16(void);
 extern int FUN_002e786a(int, unsigned char *, unsigned int);
 /* Supplied declaration required: operatorDeleteArray. */
-/* Supplied declaration required: FUN_002e98ea. */
+/* Supplied declaration required: libc_wcsncpyShort. */
 
 
 void onlineUrlSetText(fn_002e95c4_arg0 *param_1,int param_2)
@@ -46,7 +46,7 @@ void onlineUrlSetText(fn_002e95c4_arg0 *param_1,int param_2)
     temp_v0 = temp_v0 + 1;
     temp_v1 = FUN_002e786a(temp_v0,&LAB_002e9610,0);
     param_1->field_0x60 = temp_v1;
-    FUN_002e98ea(temp_v1,param_2,temp_v0);
+    libc_wcsncpyShort(temp_v1,param_2,temp_v0);
     *(unsigned short *)(param_1->field_0x60 + (temp_v0 * 2 - 2)) = 0;
     param_1->field_0x65 = 1;
     param_1->field_0x64 = 0;

@@ -36,7 +36,7 @@ int btlReflectCreateKind41(...);
 int __ARM_common_memcpy4_7(...);
 int __aeabi_memcpy4(...);
 
-int FUN_003e8bb0(...);
+int btlEntryBuildSummary(...);
 int FUN_003f21ec(void);
 int FUN_004c2ca8(...);
 int FUN_004c34e0(...);
@@ -239,7 +239,7 @@ extern int FUN_002c7bf4(unsigned int *);
 /* Supplied declaration required: dataTable41FindById. */
 /* Supplied declaration required: FUN_003e77cc. */
 /* Supplied declaration required: btlScriptUnitHasFlags. */
-/* Supplied declaration required: FUN_003e8bb0. */
+/* Supplied declaration required: btlEntryBuildSummary. */
 extern int btlStateHasSelectionGateFlag(unsigned int);
 extern int FUN_003ec668(unsigned int, int, int);
 extern int FUN_003eca48(unsigned int, unsigned short);
@@ -287,7 +287,7 @@ extern int btlUnitGetSkillValue(int);
 /* Supplied declaration required: btlEffectFindSlotId. */
 extern int FUN_004f6478(int);
 /* Supplied declaration required: resolveBattleValue. */
-extern int FUN_004f7aa4(int, unsigned int);
+extern int btlEffectFindPreferredName(int, unsigned int);
 extern int btlFindEffectValueByNamePrefix(int);
 /* Supplied declaration required: btlSelectionGetUsableUnit. */
 extern int FUN_004f9a20(int);
@@ -679,7 +679,7 @@ LAB_004e2728:
     temp_v48 = (unsigned int)(unsigned short)temp_v99[0x278];
   }
   temp_v98 = temp_v47;
-  FUN_003e8bb0(temp_v40,*param_1,param_2[8]);
+  btlEntryBuildSummary(temp_v40,*param_1,param_2[8]);
   temp_v52 = 0;
   temp_v49 = param_7 * 0x1d;
   temp_v77 = param_7 * 0x1d0 + 0x6a;
@@ -1011,7 +1011,7 @@ LAB_004e34b8:
         temp_v100 = 1;
       }
     }
-    temp_v5 = FUN_004f7aa4(g_btlAux,temp_v100);
+    temp_v5 = btlEffectFindPreferredName(g_btlAux,temp_v100);
     if ((temp_v5 == 0) || (temp_v106 = temp_v85, *(short *)(temp_v5 + 0x12) != 4)) {
       temp_v106 = 0;
     }

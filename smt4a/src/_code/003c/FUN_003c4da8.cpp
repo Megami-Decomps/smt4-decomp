@@ -6,7 +6,7 @@
 extern "C" {
 
 EngineUnitRecord *gameGetSlotRecord(void);
-EngineUnitRecord *FUN_003e503c(u16 index);
+EngineUnitRecord *partyGetSlotPreferredFirst(u16 index);
 u8 flagAt4IsClearOrMissing(void);
 u32 uiSelectedRecordGetFirst(void);
 
@@ -32,7 +32,7 @@ u32 FUN_003c4da8(void)
                 if (index < 0) {
                     index = 0;
                 }
-                record = FUN_003e503c(index);
+                record = partyGetSlotPreferredFirst(index);
             } else {
                 record = gameGetSlotRecord();
             }

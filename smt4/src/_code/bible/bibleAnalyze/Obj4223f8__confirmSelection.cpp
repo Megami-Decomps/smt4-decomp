@@ -48,7 +48,7 @@ void textFormatBuffer(char *buffer, const char *format, ...);
 void buttonHelpSetText(const char *text, u32 color);
 u32 flaggedValueHolderGetTotal(const void *holder);
 void FUN_0029da34(s32 a, s32 b, u32 id);
-void FUN_00233670(void *selection, s32 a, s32 b, s32 count);
+void messageIdListInit(void *selection, s32 a, s32 b, s32 count);
 }
 
 /* State handler: the highlighted entry changed; refreshes the cursor, the help line and the detail text. */
@@ -88,8 +88,8 @@ void Obj4223f8::confirmSelection()
         shown = 10;
     }
     if (flag5A4 == 0) {
-        FUN_00233670(&touchSelection, 0x1D, 0x40E, shown);
+        messageIdListInit(&touchSelection, 0x1D, 0x40E, shown);
     } else {
-        FUN_00233670(&touchSelection, 0x1C, 0x1030, shown);
+        messageIdListInit(&touchSelection, 0x1C, 0x1030, shown);
     }
 }

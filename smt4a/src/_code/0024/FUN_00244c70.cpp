@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0018a924(float *, float [12]);
+int mathSinCos(float *, float [12]);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ extern int g_mapIf; /* 0x58103c */
 extern unsigned int *DAT_00581040; /* 0x581040 */
 extern int g_gameState; /* 0x5f15fc */
 
-/* Supplied declaration required: FUN_0018a924. */
+/* Supplied declaration required: mathSinCos. */
 
 
 int FUN_00244c70(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -81,13 +81,13 @@ int FUN_00244c70(unsigned int param_1,int param_2,unsigned int param_3,unsigned 
                     if (param_2 != 0x1f) {
                       if (param_2 != 0x2b) {
                         if (param_2 != 0xb) {
-                          FUN_0018a924(&temp_v13,temp_v14);
+                          mathSinCos(&temp_v13,temp_v14);
                           *(float *)(temp_v1 + 0x238) = *(float *)(temp_v1 + 0x238) + temp_v13 * 50.0f;
                           *(float *)(temp_v1 + 0x240) = *(float *)(temp_v1 + 0x240) + temp_v14[0] * 50.0f
                           ;
                           goto LAB_00244db8;
                         }
-                        FUN_0018a924(&temp_v13,temp_v14);
+                        mathSinCos(&temp_v13,temp_v14);
                         *(float *)(temp_v1 + 0x238) = *(float *)(temp_v1 + 0x238) + temp_v13 * 15.0f;
                         *(float *)(temp_v1 + 0x240) = *(float *)(temp_v1 + 0x240) + temp_v14[0] * 15.0f;
 LAB_00244fac:

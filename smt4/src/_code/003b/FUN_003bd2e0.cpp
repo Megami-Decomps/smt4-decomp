@@ -9,9 +9,9 @@ extern "C" {
 int CONCAT44(...);
 int btlGetPassiveAffinityOverride(unsigned int, unsigned int);
 int selectionCopySupportedValue(...);
-int FUN_0022abe0(void);
+int btlEntryGetPassiveSkillIds(void);
 int FUN_00246134(unsigned int, unsigned int, int, unsigned int);
-int FUN_00247478(...);
+int btlEntryBuildSummary(...);
 int btlFindEntryBlockByMemberId(unsigned int *, unsigned int);
 int btlMainFindEntryByListedId(...);
 int passiveSkillLookupRecord(void);
@@ -66,12 +66,12 @@ typedef struct {
 #endif
 /* Supplied declaration required: btlGetPassiveAffinityOverride. */
 /* Supplied declaration required: selectionCopySupportedValue. */
-/* Supplied declaration required: FUN_0022abe0. */
+/* Supplied declaration required: btlEntryGetPassiveSkillIds. */
 extern int FUN_0023ea94(void);
 extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00246134. */
 extern unsigned int FUN_002463e8(unsigned int);
-/* Supplied declaration required: FUN_00247478. */
+/* Supplied declaration required: btlEntryBuildSummary. */
 extern unsigned int FUN_00255de0(unsigned int, unsigned int);
 /* Supplied declaration required: btlFindEntryBlockByMemberId. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
@@ -161,7 +161,7 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
   puVar7 = temp_v32;
   btlMainFindEntryByListedId(temp_v32,param_5);
   temp_v34 = puVar7;
-  FUN_00247478(temp_v23,temp_v32,puVar3);
+  btlEntryBuildSummary(temp_v23,temp_v32,puVar3);
   temp_v3 = temp_v40;
   temp_v1 = (unsigned int)temp_v25;
   if (temp_v1 == 0) {
@@ -181,7 +181,7 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
   temp_v2 = reinterpret_cast<int>(btlGetMainState());
   btlMainFindEntryByListedId(temp_v2,temp_v3);
   temp_v3 = reinterpret_cast<int>(btlGetMainState());
-  FUN_00247478(temp_v20,temp_v3,temp_v2);
+  btlEntryBuildSummary(temp_v20,temp_v3,temp_v2);
   reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v28), 0x48));
   reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v31), 0x48));
   temp_v27[0] = 0;
@@ -341,7 +341,7 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
               temp_v34 = (unsigned int *)0x0;
               temp_v35 = 0;
               temp_v36 = 0;
-              FUN_0022abe0();
+              btlEntryGetPassiveSkillIds();
               temp_v9 = 0;
               temp_v22 = 0;
               do {

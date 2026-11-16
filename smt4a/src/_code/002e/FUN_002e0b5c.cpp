@@ -32,7 +32,7 @@ u32 FUN_002e0b5c()
     if (DAT_005b40c8)
         return 2;
     result = FUN_00429d98(globalBlockGetFirst());
-    FUN_0013ebd8(result);
+    processResultSetValue(result);
     u32 failed = result & 0x80000000;
     if ((s32)failed >= 0) {
         DAT_005b40c8 = 1;

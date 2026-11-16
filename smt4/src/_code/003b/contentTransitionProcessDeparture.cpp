@@ -15,7 +15,7 @@ extern "C" {
 extern GameState g_gameState;
 s32 screenFadeIsBusy();
 void FUN_00249b18(u32 party, s32 force);
-void FUN_002a03d8(u32 slot, u32 value);
+void titleSetSlotValueState2(u32 slot, u32 value);
 void mapDepartSetTarget(s32 map, s32 area, u32 place);
 void __ARM_common_memcpy4_6(void *destination, const void *source);
 void mikadoLoadSceneResources(ContentTransition *transition);
@@ -44,7 +44,7 @@ void contentTransitionProcessDeparture(ContentTransition *transition)
         ++work->delayFrames;
         if (work->delayFrames >= 30) {
             FUN_00249b18(0, 1);
-            FUN_002a03d8(0, 10);
+            titleSetSlotValueState2(0, 10);
             transition->flags &= ~0x400000u;
             transition->state = 5;
             transition->phase = 0;

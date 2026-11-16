@@ -19,7 +19,7 @@ typedef struct QuadRecord {
     /* 0x4C */ PhaseVector edge[4];
 } QuadRecord;
 
-extern const PhaseTrigEntry DAT_00407ed0[];
+extern const PhaseTrigEntry g_sinCosTable[];
 extern QuadRecord DAT_004c14a0[];
 extern s32 DAT_004c2420;
 
@@ -43,9 +43,9 @@ void FUN_0020e738(u16 idA, u16 idB, f32 x, f32 y, f32 width, f32 height, f32 deg
     quad->bottom = y + height;
     quad->idA = idA;
     quad->idB = idB;
-    PhaseSinCos a = samplePhase(DAT_00407ed0, 0.0f);
-    PhaseSinCos b = samplePhase(DAT_00407ed0, degrees * 0.71111107f);
-    PhaseSinCos c = samplePhase(DAT_00407ed0, 0.0f);
+    PhaseSinCos a = samplePhase(g_sinCosTable, 0.0f);
+    PhaseSinCos b = samplePhase(g_sinCosTable, degrees * 0.71111107f);
+    PhaseSinCos c = samplePhase(g_sinCosTable, 0.0f);
 
     matrix[0] = c.cosine * b.cosine;
     matrix[1] = a.sine * c.cosine * b.sine - a.cosine * c.sine;

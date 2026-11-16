@@ -24,7 +24,7 @@ u32 FUN_0022b238(Obj *obj, s32 index);
 
 int FUN_00227630(Owner *owner);
 
-void FUN_0022abe0(Obj *obj, Target *target);
+void btlEntryGetPassiveSkillIds(Obj *obj, Target *target);
 
 void FUN_0022afc4(ModelController *controller, u32 a, u32 b);
 

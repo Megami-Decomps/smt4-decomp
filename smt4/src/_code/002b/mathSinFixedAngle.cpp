@@ -11,7 +11,7 @@ struct WaveEntry {
     /* 0x0c */ f32 unk0c;
 };
 
-extern WaveEntry DAT_00407ed0[256];
+extern WaveEntry g_sinCosTable[256];
 
 /* Table-driven periodic wave with period 65536 and odd symmetry, linearly interpolated between 256 entries. */
 f32 mathSinFixedAngle(f32 x)
@@ -22,7 +22,7 @@ f32 mathSinFixedAngle(f32 x)
         phase -= 65536.0f;
     }
     u16 index = (u32)phase;
-    WaveEntry *table = DAT_00407ed0;
+    WaveEntry *table = g_sinCosTable;
     f32 fraction = phase - (f32)index;
     const WaveEntry *entry = &table[index & 0xff];
     if (x < 0.0f)

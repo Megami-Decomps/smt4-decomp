@@ -53,7 +53,7 @@ void setFlag10(void);
 s32 lmapMainGetUnk74(void);
 s32 gameStateIsFlagSetAndLarge(void);
 void soundChannelStopAll(s32 mask);
-void FUN_003d54f8(s32 a, s32 b);
+void titleSetSlotValueState2(s32 a, s32 b);
 void asdSequenceRequest(s32 type, s32 *args, s32 size);
 void textFormatBuffer(char *out, const char *format, s32 a, u32 b);
 
@@ -142,11 +142,11 @@ s32 FUN_0027dda4(u32 process)
             }
             asdSequenceRequest(type, args, size);
         } else if (shop->silentExit != 0) {
-            FUN_003d54f8(0, 1);
-            FUN_003d54f8(1, 0);
+            titleSetSlotValueState2(0, 1);
+            titleSetSlotValueState2(1, 0);
         } else {
-            FUN_003d54f8(0, 1);
-            FUN_003d54f8(1, 0);
+            titleSetSlotValueState2(0, 1);
+            titleSetSlotValueState2(1, 0);
             soundChannelStopAll(0xF);
         }
         return -1;

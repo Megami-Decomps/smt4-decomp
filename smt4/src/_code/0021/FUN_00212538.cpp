@@ -10,7 +10,7 @@ int fadeObjectResetIfActive(...);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
 int textFormatBuffer(...);
-int FUN_002c0944(...);
+int gxSubmitDrawZeroExtraParams(...);
 int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
 int renderCtxSelectTexture(...);
@@ -61,7 +61,7 @@ extern int FUN_00252180(unsigned int);
 /* Supplied declaration required: fadeObjectResetIfActive. */
 extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: objectPartRunUnlessLocked. */
-extern int FUN_0029efa8(int);
+extern int listCursorGetRowIfUnblocked(int);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -72,7 +72,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: texDrawCompositeSprite. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_002c0944. */
+/* Supplied declaration required: gxSubmitDrawZeroExtraParams. */
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectTexture. */
@@ -207,7 +207,7 @@ unsigned int FUN_00212538(void)
           } while (temp_v2 < 4);
         }
         temp_v2 = objectPartRunUnlessLocked();
-        temp_v3 = FUN_0029efa8(temp_v1 + 0x9a4);
+        temp_v3 = listCursorGetRowIfUnblocked(temp_v1 + 0x9a4);
         temp_v2 = temp_v2 + temp_v3 * 4 + 4;
         FUN_0025117c(temp_v2,temp_v4,temp_v5,0x79,1);
         break;
@@ -250,7 +250,7 @@ unsigned int FUN_00212538(void)
           } while (temp_v2 < 4);
         }
         temp_v2 = objectPartRunUnlessLocked();
-        temp_v3 = FUN_0029efa8(temp_v1 + 0xa6c);
+        temp_v3 = listCursorGetRowIfUnblocked(temp_v1 + 0xa6c);
         FUN_0025117c(temp_v2 + temp_v3 * 4,temp_v4,temp_v5,0x79,1);
         break;
       case 10:
@@ -643,7 +643,7 @@ unsigned int FUN_00212538(void)
           } while (temp_v2 < 4);
         }
         temp_v2 = objectPartRunUnlessLocked(temp_v1 + 0x940);
-        temp_v3 = FUN_0029efa8(temp_v1 + 0x940);
+        temp_v3 = listCursorGetRowIfUnblocked(temp_v1 + 0x940);
         temp_v3 = temp_v2 + temp_v3 * 4 + 4;
         FUN_002512c4(temp_v3,0,0,0xab,1);
         break;
@@ -684,7 +684,7 @@ unsigned int FUN_00212538(void)
           } while (temp_v2 < 4);
         }
         temp_v3 = objectPartRunUnlessLocked();
-        temp_v2 = FUN_0029efa8(temp_v1 + 0xa08);
+        temp_v2 = listCursorGetRowIfUnblocked(temp_v1 + 0xa08);
         temp_v3 = temp_v3 + temp_v2 * 4;
         FUN_002512c4(temp_v3,0,0,0xab,1);
         break;
@@ -752,7 +752,7 @@ unsigned int FUN_00212538(void)
     }
     renderCtxSelectTexture(g_titleScene,0);
     temp_v4 = VectorFloatToUnsigned(temp_v13 * 255.0f,3);
-    FUN_002c0944(temp_v4,temp_v4);
+    gxSubmitDrawZeroExtraParams(temp_v4,temp_v4);
     temp_v2 = g_titleScene;
     if (*(int *)(temp_v1 + 0x18) >= 9) {
       temp_v3 = packNibblesAndByte(6,1,0);

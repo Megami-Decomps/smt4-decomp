@@ -3,12 +3,12 @@
 extern "C" {
 
 extern CecProcess *g_cecProcess;
-extern u32 FUN_004bb31c(u32 handle);
+extern u32 cecCardMessageBoxOpenIfAllowed(u32 handle);
 
 void cecProcessCall4(void)
 {
     if (g_cecProcess != NULL) {
-        FUN_004bb31c(g_cecProcess->handle);
+        cecCardMessageBoxOpenIfAllowed(g_cecProcess->handle);
     }
 }
 

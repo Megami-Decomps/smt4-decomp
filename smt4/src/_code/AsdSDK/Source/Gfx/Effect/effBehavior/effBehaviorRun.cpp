@@ -15,7 +15,7 @@ struct EffectBehaviorElement {
     u8 unk14[0x14];
 };
 
-extern EffectBehaviorRunEntry DAT_00473590[];
+extern EffectBehaviorRunEntry g_effBehaviorTable[];
 
 /* Runs one frame of a behavior block; on its first frame every element's marker is reset. */
 void effBehaviorRun(EffectBehaviorBlock *block)
@@ -27,7 +27,7 @@ void effBehaviorRun(EffectBehaviorBlock *block)
             elements[i].marker = -1;
         }
     }
-    DAT_00473590[block->type].run(block);
+    g_effBehaviorTable[block->type].run(block);
     block->state++;
 }
 

@@ -3,7 +3,7 @@
 
 extern "C" {
 
-extern const char DAT_00410408[]; /* "c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Effect\\effPolygonFlash.cpp": __FILE__ */
+extern const char g_effPolygonFlashSourceFileName[]; /* "c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Effect\\effPolygonFlash.cpp": __FILE__ */
 
 void *memAlloc(int, int, int, int size, int align, int);
 PolyGeom *effGeomCreateRepeatedIndexList(u32 count, int w, int h, u8 *table, int tableSize);
@@ -16,7 +16,7 @@ PolyGeomBlock *effPolyFlashGeomCreate3(PolyParams *params)
     u32 size = segments * 0x2c;
     PolyGeomBlock *block;
 
-    asdDebugTrace(DAT_00410408, 857);
+    asdDebugTrace(g_effPolygonFlashSourceFileName, 857);
     block = (PolyGeomBlock *)memAlloc(0x10000, 0x100, 0, size + 0x10, 0x10, 1);
 
     u8 *payload = block->payload;

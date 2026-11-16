@@ -17,18 +17,18 @@ typedef struct BtlUi {
 extern BtlUi g_btlUi;
 
 u8 menu32ModeIsNot6(u8 *menu);
-s32 FUN_0039ebcc(u8 *panel);
+s32 spriteOperationGetModeThreeCompletion(u8 *panel);
 u8 *FUN_00502754(u8 *subobject); /* returns the subobject's panel (+0xBC) */
 s32 FUN_00321500(u8 *menu);
 s32 uiSpriteSetKeyframeThree(u8 *panel);
 
-/* Refreshes the battle UI menu and panel when the menu is not in mode 6 and FUN_0039ebcc succeeds. */
+/* Refreshes the battle UI menu and panel when the menu is not in mode 6 and spriteOperationGetModeThreeCompletion succeeds. */
 void FUN_004ab734(void)
 {
     BtlUiData *data = g_btlUi.data;
 
     if (menu32ModeIsNot6(data->menu) != 0) {
-        if (FUN_0039ebcc(FUN_00502754(data->subobject)) != 0) {
+        if (spriteOperationGetModeThreeCompletion(FUN_00502754(data->subobject)) != 0) {
             FUN_00321500(data->menu);
             uiSpriteSetKeyframeThree(data->panel);
         }

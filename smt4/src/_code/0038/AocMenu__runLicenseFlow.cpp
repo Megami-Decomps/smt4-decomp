@@ -28,7 +28,7 @@ extern int g_aocMain; /* 0x432fc8 */
 /* Supplied declaration required: FUN_00233e70. */
 /* Supplied declaration required: FUN_00233fcc. */
 /* Supplied declaration required: FUN_00234124. */
-extern int FUN_0026b564(void);
+extern int buttonHelpStateIsNot3(void);
 extern int strIsEmpty(unsigned int *);
 extern int byteIsAtLeast100(unsigned int *);
 /* Supplied declaration required: memClear. */
@@ -61,7 +61,7 @@ void AocMenu::runLicenseFlow()
   if (temp_v0 != 4) {
     if ((int)temp_v0 < 4) {
       if (temp_v0 == 0) {
-        temp_v1 = FUN_0026b564();
+        temp_v1 = buttonHelpStateIsNot3();
         if (temp_v1 == 0) {
           return;
         }

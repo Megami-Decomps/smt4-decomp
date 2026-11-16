@@ -35,7 +35,7 @@ extern const char DAT_00531a78[];
 s32 gameFlagIsSet(s32 flag);
 void *asdMemoryAllocTraced(u32 bytes, const char *file, s32 line);
 MapGimicResource *modelListInit(void *memory);
-void FUN_0040aad4(MapGimicResource *resource, s32 index);
+void moriModelContentLoadBody(MapGimicResource *resource, s32 index);
 void controllerSetDestination(void *controller, const MapVector *position);
 void controllerSetRotationEulerDegrees(void *controller, f32 x, f32 y, f32 z);
 void modelPlayClip(void *controller, s32 mode, s32 flags, f32 first, f32 second);
@@ -67,7 +67,7 @@ void FUN_003b51a4(void)
             void *memory = asdMemoryAllocTraced(0x20, DAT_00531a48, 0xa04);
             entry->resource = memory ? modelListInit(memory) : NULL;
             resourceOwnerLoadFileSync(entry->resource, DAT_00531a78);
-            FUN_0040aad4(entry->resource, 0);
+            moriModelContentLoadBody(entry->resource, 0);
             void *controller = entry->resource->object;
             controllerSetDestination(controller, &entry->position);
             controllerSetRotationEulerDegrees(controller, 0.0f, entry->heading, 0.0f);

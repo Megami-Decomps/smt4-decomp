@@ -2,14 +2,14 @@
 
 extern "C" {
 extern AvailabilityState DAT_004d9758;
-extern AvailabilityState DAT_004d976c;
+extern AvailabilityState g_screenFadeAvailability;
 
 u32 screenFadeIsBusy(void)
 {
     if (!availabilityStateReady(&DAT_004d9758)) {
         return 1;
     }
-    if (!availabilityStateReady(&DAT_004d976c)) {
+    if (!availabilityStateReady(&g_screenFadeAvailability)) {
         return 1;
     }
     return 0;

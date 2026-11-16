@@ -11,6 +11,6 @@ typedef struct Sys4650a0 {
     /* 0x10 */ s32 unk10;
 } Sys4650a0;
 
-extern Sys4650a0 DAT_004650a0;
+extern Sys4650a0 g_padInputState;
 
 #endif

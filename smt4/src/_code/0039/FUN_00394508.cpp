@@ -14,7 +14,7 @@ const MapJumpRequest *gameJumpRequestGet(void);
 s32 gameStateIsFlagSetAndLarge(void);
 u32 FUN_002080e8(void);
 s32 FUN_00287304(void);
-void FUN_002a03d8(s32 screen, s32 frames);
+void titleSetSlotValueState2(s32 screen, s32 frames);
 void mapDepartSetTarget(s32 map, s32 area, s32 object);
 void gameJumpRequestClear(void);
 void sequenceRequestClearDeferred(void);
@@ -61,8 +61,8 @@ extern "C" void FUN_00394508(AocObjC *controller)
     } else if (FUN_00287304() != 0) {
         asdSequenceRequest(6, NULL, 0);
     }
-    FUN_002a03d8(0, 10);
-    FUN_002a03d8(1, 10);
+    titleSetSlotValueState2(0, 10);
+    titleSetSlotValueState2(1, 10);
     mapDepartSetTarget(-1, -1, -1);
     gameJumpRequestClear();
     reinterpret_cast<AocJumpExitControlView *>(controller)->complete = 1;

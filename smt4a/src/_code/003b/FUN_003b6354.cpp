@@ -23,7 +23,7 @@ typedef struct ListMenuWork {
 
 s32 objectApplyIfUnblocked(void *list);
 s32 resourceRunOperationIfUnblocked(void *list);
-s32 FUN_002a4894(void *list);
+s32 listCursorGetRowIfUnblocked(void *list);
 s32 vec2GetXInt(const void *vector);
 s32 vec2GetYInt(const void *vector);
 void efctSetSpeed(f32 speed);
@@ -60,7 +60,7 @@ void FUN_003b6354(f32 scale, ListMenuWork *work, s32 row, s32 mode, s32 selected
             }
         } else if (work->scroll < 6) {
             s32 base = resourceRunOperationIfUnblocked(work->list);
-            s32 index = FUN_002a4894(work->list);
+            s32 index = listCursorGetRowIfUnblocked(work->list);
 
             if (*shifted != 0) {
                 *y = work->scroll * -3 + *y;
@@ -71,7 +71,7 @@ void FUN_003b6354(f32 scale, ListMenuWork *work, s32 row, s32 mode, s32 selected
         }
     } else if (work->scroll > 0) {
         s32 base = resourceRunOperationIfUnblocked(work->list);
-        s32 index = FUN_002a4894(work->list);
+        s32 index = listCursorGetRowIfUnblocked(work->list);
 
         if (work->pageIds[row] == work->slotIds[index + base]) {
             *x = vec2GetXInt(work->slide) + *x;

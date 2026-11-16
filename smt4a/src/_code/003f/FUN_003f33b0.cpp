@@ -33,7 +33,7 @@ void qsort(void* base, u32 count, u32 size, s32 (*compare)(const void*, const vo
 s32 FUN_002c2bf4(const void* a, const void* b);
 u32 getUnlockedSlotCount(void* record);
 void unitRecomputeDerivedStats(void* record);
-void FUN_004bd6b0(void* record, u32 skill, s32 slot);
+void partyRecordSetEquippedItemClampRank(void* record, u32 skill, s32 slot);
 
 // Merges the member image `source` into its slot record, collecting the skills
 // that could not be merged into `outSkills`; returns 1 when some do not fit.
@@ -86,7 +86,7 @@ u32 FUN_003f33b0(MemberRecord* source, u32 arg, u16* outSkills)
         if (skill != 0) {
             for (s32 j = duplicates; j < 8; j++) {
                 if (member->skills[j] == 0) {
-                    FUN_004bd6b0(record, skill, j);
+                    partyRecordSetEquippedItemClampRank(record, skill, j);
                     break;
                 }
             }

@@ -7,7 +7,7 @@ extern "C" {
 extern SceneResourceWork *g_sceneResourceWork;
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 mode, u32 size, u32 tracked);
 u32 taskCreateDraw(const char *, s32, s32, s32, TaskFunc, TaskFunc, void *, u32);
-void FUN_0022677c(s32 channel, s32 value);
+void titleRestartSlotState3(s32 channel, s32 value);
 void FUN_0024b5ac(void *work);
 void sceneResourceShutdownAoc(void *work);
 void sceneUpdateOptionalResource(void *work);
@@ -25,8 +25,8 @@ void FUN_00240a84(s32 mode)
     work->state.pending = 0;
     if (mode == 0) {
         work->state.resetChannels = 1;
-        FUN_0022677c(0, 0xff);
-        FUN_0022677c(1, 0xff);
+        titleRestartSlotState3(0, 0xff);
+        titleRestartSlotState3(1, 0xff);
     }
     work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("AOCMainProc"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_0024b5ac), reinterpret_cast<AsdProcFunc>(sceneResourceShutdownAoc), reinterpret_cast<u32>(g_sceneResourceWork));
     taskCreateDraw("AOCDrawUp L", 0x81, 1, 0, sceneUpdateOptionalResource, NULL,

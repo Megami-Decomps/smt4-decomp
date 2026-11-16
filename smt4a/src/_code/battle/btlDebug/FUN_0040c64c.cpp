@@ -79,7 +79,7 @@ s32 FUN_004c9b38(UnitRecordView *unit);
 void btlPopulateSelectedSlot(s32 mode, s32 slot, s32 unit, s32 secondUnit);
 void FUN_004cae0c(void *context, void *state, s32 pending, u32 target);
 void nameEntriesRegisterVerNames(void *work);
-void FUN_004fd204(s32 x, u32 id, UnitRecordView *unit, s32 alpha, s32 y, s32 flag);
+void btlReflectQueueKind44(s32 x, u32 id, UnitRecordView *unit, s32 alpha, s32 y, s32 flag);
 void FUN_004fe764(s32 x, u32 id, UnitRecordView *unit, u32 style, s32 flag);
 
 // One step of the debug unit selection: phase 0 prepares the slot, phase 1 selects the unit and starts its marker, phase 2
@@ -125,7 +125,7 @@ void FUN_0040c64c(u32 unused, UnitSelectStep *step)
             s16 b = DAT_0057a634.offset;
             u16 c = DAT_0057a634.top;
             FUN_004cae0c(state, unit, 0, 0);
-            FUN_004fd204(b + a, step->id, unit, 0xff, c, 0);
+            btlReflectQueueKind44(b + a, step->id, unit, 0xff, c, 0);
             u32 style = 6;
             if ((unit->status & 0x10) != 0) {
                 style = 7;

@@ -26,7 +26,7 @@ void scrScriptProcessDestroy(void);
 void asdMemFree(void *p);
 void asdOperatorDelete(void *p);
 void *ptrTable44FreeAll(void *p);
-void FUN_00333f6c(void);
+void gameGlobalsReleaseReference(void);
 void jobStop(u32 job, int arg);
 
 /* Destroys the object: frees its buffers and resources, stops its job and clears the global. */
@@ -59,7 +59,7 @@ void partyPanelDestroy(void)
         asdOperatorDelete(ptrTable44FreeAll(obj->resourceC));
     }
     obj->resourceC = NULL;
-    FUN_00333f6c();
+    gameGlobalsReleaseReference();
     jobStop(obj->job, 0);
     asdMemFree(obj);
     g_partyPanel = NULL;

@@ -15,8 +15,8 @@ typedef struct RenderCtx {
 } RenderCtx;
 
 extern RenderCtx *g_renderCtx;
-extern u32 *DAT_005b3fe4; /* model command buffer */
-extern int DAT_005b3fe8;  /* words used in the buffer */
+extern u32 *g_modelCommandBuffer; /* model command buffer */
+extern int g_modelCommandWordCount;  /* words used in the buffer */
 
 void cursorResetFromParam(void);
 void asdModelCommandBlockRelease(void);
@@ -25,16 +25,16 @@ void asdModelCommandBlockRelease(void);
 void FUN_0037a8bc(u32 enable)
 {
     cursorResetFromParam();
-    DAT_005b3fe4[DAT_005b3fe8] = enable;
-    DAT_005b3fe4[DAT_005b3fe8 + 1] = 0xF0065;
-    DAT_005b3fe8 += 2;
+    g_modelCommandBuffer[g_modelCommandWordCount] = enable;
+    g_modelCommandBuffer[g_modelCommandWordCount + 1] = 0xF0065;
+    g_modelCommandWordCount += 2;
     if (enable) {
-        DAT_005b3fe4[DAT_005b3fe8] = g_renderCtx->buffers[10].addresses[g_renderCtx->buffers[10].current];
-        DAT_005b3fe4[DAT_005b3fe8 + 1] = 0xF0066;
-        DAT_005b3fe8 += 2;
-        DAT_005b3fe4[DAT_005b3fe8] = g_renderCtx->buffers[11].addresses[g_renderCtx->buffers[11].current];
-        DAT_005b3fe4[DAT_005b3fe8 + 1] = 0xF0067;
-        DAT_005b3fe8 += 2;
+        g_modelCommandBuffer[g_modelCommandWordCount] = g_renderCtx->buffers[10].addresses[g_renderCtx->buffers[10].current];
+        g_modelCommandBuffer[g_modelCommandWordCount + 1] = 0xF0066;
+        g_modelCommandWordCount += 2;
+        g_modelCommandBuffer[g_modelCommandWordCount] = g_renderCtx->buffers[11].addresses[g_renderCtx->buffers[11].current];
+        g_modelCommandBuffer[g_modelCommandWordCount + 1] = 0xF0067;
+        g_modelCommandWordCount += 2;
     }
     asdModelCommandBlockRelease();
 }

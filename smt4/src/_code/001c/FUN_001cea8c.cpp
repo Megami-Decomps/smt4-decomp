@@ -93,7 +93,7 @@ extern int FUN_0029c48c(void);
 /* Supplied declaration required: flaggedEntrySetValueA. */
 extern int FUN_0029ee54(int);
 /* Supplied declaration required: buttonHelpSetText. */
-extern int FUN_0029efa8(int);
+extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: gridNavigationConfigure. */
@@ -107,7 +107,7 @@ extern int infoWindowIsActive(void);
 extern unsigned short ifTouchRegionAddRequested(unsigned int, int);
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int buttonHelpGetStatus(void);
-extern int FUN_002b8ee0(int, unsigned int);
+extern int uiSlidingSpriteAdvance(int, unsigned int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
@@ -445,7 +445,7 @@ void FUN_001cea8c(int param_1)
     whisperEffectStart(*(unsigned short *)(temp_v5 + 0x46));
     return;
   case 1:
-    temp_v15 = FUN_002b8ee0(param_1 + 0xac,0);
+    temp_v15 = uiSlidingSpriteAdvance(param_1 + 0xac,0);
     if (temp_v15 == 0) {
       return;
     }
@@ -487,7 +487,7 @@ void FUN_001cea8c(int param_1)
     temp_v11 = FUN_0029aafc();
     gridNavigationConfigure(temp_v9,temp_v11,temp_v11,1,1,1);
     gridNavigationConfigure(temp_v10,temp_v15,8,1,1,1);
-    temp_v15 = FUN_0029efa8(temp_v10);
+    temp_v15 = listCursorGetRowIfUnblocked(temp_v10);
     buttonHelpShowSkillDetails(*(unsigned short *)(temp_v5 + temp_v15 * 2 + 0x34));
     temp_v8 = 0;
     temp_v15 = FUN_0029ee54(temp_v9);
@@ -682,7 +682,7 @@ LAB_001cfdfc:
         buttonHelpSetPreset(temp_v11);
       }
     }
-    temp_v6 = FUN_0029efa8(temp_v10);
+    temp_v6 = listCursorGetRowIfUnblocked(temp_v10);
     temp_v4 = temp_v10;
     uiScrollHandleActionsOrTouch(temp_v10,0,param_1 + 0x358e,0xffffffff,0xffffffff,0xffffffff,temp_v25,0,1);
     if ((temp_v4 == 0) && (temp_v4 = temp_v10, FUN_0029efd8(temp_v10,0), temp_v4 == 0)) {
@@ -729,7 +729,7 @@ LAB_001cfdfc:
           *piVar9 = 10;
         }
         else {
-          temp_v4 = FUN_0029efa8(temp_v9);
+          temp_v4 = listCursorGetRowIfUnblocked(temp_v9);
           buttonHelpShowSkillDetails(*(unsigned short *)(param_1 + temp_v4 * 2 + 0xd114));
           *piVar9 = *piVar9 + 1;
         }
@@ -779,11 +779,11 @@ LAB_001cf28c:
       eventQueueAddUniqueIfValid(temp_v11);
       return;
     }
-    temp_v4 = FUN_0029efa8(temp_v10);
+    temp_v4 = listCursorGetRowIfUnblocked(temp_v10);
     if (temp_v4 != temp_v6) {
       eventQueueAddUniqueIfValid(0x100016c);
     }
-    temp_v4 = FUN_0029efa8(temp_v10);
+    temp_v4 = listCursorGetRowIfUnblocked(temp_v10);
     buttonHelpShowSkillDetails(*(unsigned short *)(temp_v5 + temp_v4 * 2 + 0x34));
     return;
   case 3:
@@ -802,15 +802,15 @@ LAB_001cf28c:
         buttonHelpSetPreset(temp_v11);
       }
     }
-    temp_v6 = FUN_0029efa8(temp_v9);
+    temp_v6 = listCursorGetRowIfUnblocked(temp_v9);
     temp_v4 = temp_v9;
     uiScrollHandleActionsOrTouch(temp_v9,0,param_1 + 0x357e,0xffffffff,0xffffffff,0xffffffff,temp_v25,0,1);
     if ((temp_v4 != 0) || (temp_v4 = temp_v9, FUN_0029efd8(temp_v9,0), temp_v4 != 0)) {
-      temp_v4 = FUN_0029efa8(temp_v9);
+      temp_v4 = listCursorGetRowIfUnblocked(temp_v9);
       if (temp_v4 != temp_v6) {
         eventQueueAddUniqueIfValid(0x100016c);
       }
-      temp_v4 = FUN_0029efa8(temp_v9);
+      temp_v4 = listCursorGetRowIfUnblocked(temp_v9);
       buttonHelpShowSkillDetails(*(unsigned short *)(param_1 + temp_v4 * 2 + 0xd114));
     }
     else {
@@ -844,13 +844,13 @@ LAB_001cf28c:
     }
     temp_v4 = *piVar9;
     if (temp_v4 == 2) {
-      temp_v4 = FUN_0029efa8(temp_v10);
+      temp_v4 = listCursorGetRowIfUnblocked(temp_v10);
       buttonHelpShowSkillDetails(*(unsigned short *)(temp_v5 + temp_v4 * 2 + 0x34));
       return;
     }
     break;
   case 4:
-    temp_v4 = FUN_0029efa8(temp_v9);
+    temp_v4 = listCursorGetRowIfUnblocked(temp_v9);
     if (*piVar27 == 1) {
       temp_v15 = param_1 + temp_v4 * 2;
       if (*(short *)(temp_v15 + 0xd114) != 0) {
@@ -865,7 +865,7 @@ LAB_001cf28c:
               *(unsigned short *)(temp_v15 + 0xd124) = 0;
               temp_v9 = FUN_0026b738(*(unsigned short *)(temp_v15 + 0xd114));
               if (temp_v9 != 0) {
-                temp_v9 = FUN_0029efa8(temp_v10);
+                temp_v9 = listCursorGetRowIfUnblocked(temp_v10);
                 temp_v9 = FUN_0026b738(*(unsigned short *)(temp_v5 + temp_v9 * 2 + 0x34));
                 if (temp_v9 == 0) {
                   *(int *)(param_1 + 0xd2c8) = *(int *)(param_1 + 0xd2c8) - 1;
@@ -937,14 +937,14 @@ LAB_001cf6b0:
         spriteStartAnimationByIndex(param_1 + 0x7c8,0);
         FUN_002b7bca(temp_v7,8,2,&LAB_002c6e64);
         *piVar9 = 2;
-        temp_v4 = FUN_0029efa8(temp_v10);
+        temp_v4 = listCursorGetRowIfUnblocked(temp_v10);
         buttonHelpShowSkillDetails(*(unsigned short *)(temp_v5 + temp_v4 * 2 + 0x34));
         return;
       }
     }
     temp_v4 = *piVar9;
     if (temp_v4 == 2) {
-      temp_v4 = FUN_0029efa8(temp_v10);
+      temp_v4 = listCursorGetRowIfUnblocked(temp_v10);
       buttonHelpShowSkillDetails(*(unsigned short *)(temp_v5 + temp_v4 * 2 + 0x34));
       return;
     }

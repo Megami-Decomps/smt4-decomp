@@ -1,4 +1,4 @@
-/* NON_MATCHING: near-structure (172 rows against 203): same skip test, special-row cases, member/row loops and index maths from the asm; retail has extra armcc nops around calls (inlined stubs) and re-tests `target < 0` before the second special case, with the row pointer reloaded (ldr/rsb/str order) after each FUN_004bcbb4, which ours schedules differently */
+/* NON_MATCHING: near-structure (172 rows against 203): same skip test, special-row cases, member/row loops and index maths from the asm; retail has extra armcc nops around calls (inlined stubs) and re-tests `target < 0` before the second special case, with the row pointer reloaded (ldr/rsb/str order) after each skillGetAdjustedCost, which ours schedules differently */
 #include "battle/BtlMainAccess.h"
 #include "network/DataStore/DataStoreMain.h"
 #include "code/Code002a.h"
@@ -52,10 +52,10 @@ extern u32 g_btlScriptUnit;        /* 0x57113c */
 s32 gameGetSlotTable(void);
 UnitState *btlUnitGet(u32 unit);
 u32 gameGetSlotRecord(u32 slot);
-s32 FUN_004bcbb4(u32 record, u32 skillId);
+s32 skillGetAdjustedCost(u32 record, u32 skillId);
 s32 FUN_003df57c(u32 skillId, s32 flag);
 u32 btlMainGetUnk14(void);
-s32 FUN_002a4894(u32 id);
+s32 listCursorGetRowIfUnblocked(u32 id);
 s32 FUN_002c7bb0(s32 target, s32 slot, u32 skillId, u32 *out);
 
 /* Refreshes the skill-cost preview of the party panel rows for the current skill/target and the
@@ -80,19 +80,19 @@ void FUN_0028c2ec(u32 id, s32 direct)
         } else if (panel->target < 0 && panel->cursor->slot == (u32)-2) {
             u32 unit = btlMainGetUnk14();
             if (unit != 0) {
-                panel->cursor->value = -FUN_004bcbb4(unit, panel->skillId);
+                panel->cursor->value = -skillGetAdjustedCost(unit, panel->skillId);
             }
         } else {
             for (s32 i = 0; i < 3; i++) {
                 if (slots->byIndex[i + 1] == panel->target) {
                     u32 record = gameGetSlotRecord(panel->member[i]->slot);
-                    panel->member[i]->value = -FUN_004bcbb4(record, panel->skillId);
+                    panel->member[i]->value = -skillGetAdjustedCost(record, panel->skillId);
                 }
             }
             for (s32 i = 0; i < 24; i++) {
                 if (panel->rowTarget[i][0] == panel->target) {
                     u32 record = gameGetSlotRecord(panel->row[i]->slot);
-                    panel->row[i]->value = -FUN_004bcbb4(record, panel->skillId);
+                    panel->row[i]->value = -skillGetAdjustedCost(record, panel->skillId);
                 }
             }
         }
@@ -100,14 +100,14 @@ void FUN_0028c2ec(u32 id, s32 direct)
 
     if (direct != 0) {
         if (panel->compactLayout != 0) {
-            index = FUN_002a4878((void *)(id)) + FUN_002a4894(id) * 4;
+            index = listCursorGetRowOfChildIfUnblocked((void *)(id)) + listCursorGetRowIfUnblocked(id) * 4;
         } else {
-            index = FUN_002a4894(id) * 4 + panel->page * 12 + FUN_002a4878((void *)(id));
+            index = listCursorGetRowIfUnblocked(id) * 4 + panel->page * 12 + listCursorGetRowOfChildIfUnblocked((void *)(id));
         }
     } else {
-        s32 count = FUN_002a4894(id);
+        s32 count = listCursorGetRowIfUnblocked(id);
         if (count < 1) {
-            s32 position = FUN_002a4878((void *)(id));
+            s32 position = listCursorGetRowOfChildIfUnblocked((void *)(id));
             s32 slot;
             if (position != 0) {
                 slot = slots->byIndex[position];
@@ -120,9 +120,9 @@ void FUN_0028c2ec(u32 id, s32 direct)
             return;
         }
         if (panel->compactLayout != 0) {
-            index = FUN_002a4878((void *)(id)) + count * 4;
+            index = listCursorGetRowOfChildIfUnblocked((void *)(id)) + count * 4;
         } else {
-            index = FUN_002a4878((void *)(id)) + count * 4 + panel->page * 12;
+            index = listCursorGetRowOfChildIfUnblocked((void *)(id)) + count * 4 + panel->page * 12;
         }
         index = index - 4;
     }

@@ -30,7 +30,7 @@ struct CommandBufferSet {
 void rangeOffsetAdd(CommandRange *range, s32 amount);
 s32 rangeGetEnd(CommandRange *range);
 void gfxCommandBufferSubmit(CommandRange *range, u32 size);
-void FUN_0016d338(StreamCursor *cursor, u32 end);
+void gfxCommandVectorResetAt(StreamCursor *cursor, u32 end);
 
 /* Flushes the bytes the cursor has advanced past into the active range and submits them. */
 void gfxCommandSetFlushCursor(CommandBufferSet *set)
@@ -48,7 +48,7 @@ void gfxCommandSetFlushCursor(CommandBufferSet *set)
     if (size != 0) {
         gfxCommandBufferSubmit(range, size);
     }
-    FUN_0016d338(cursor, rangeGetEnd(range));
+    gfxCommandVectorResetAt(cursor, rangeGetEnd(range));
 }
 
 } /* extern "C" */

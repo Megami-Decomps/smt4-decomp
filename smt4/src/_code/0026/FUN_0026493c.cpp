@@ -18,7 +18,7 @@ int partyApplyStatusMask(int, int, int);
 int partyApplyPercentHealthDamage(int, int);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int soundPlaySeUnpanned(int);
-int FUN_002bff50(void);
+int messageSetConfirmDisplayMode(void);
 int FUN_002dfea4(void);
 int mapIfResetCounter(void);
 int naviMainStartStateTimer(void);
@@ -68,7 +68,7 @@ extern int scrRunOpcodesStub(unsigned int);
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned int *);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: soundPlaySeUnpanned. */
-/* Supplied declaration required: FUN_002bff50. */
+/* Supplied declaration required: messageSetConfirmDisplayMode. */
 extern int FUN_002c8684(unsigned int);
 /* Supplied declaration required: FUN_002dfea4. */
 /* Supplied declaration required: mapIfResetCounter. */
@@ -328,7 +328,7 @@ LAB_00264b84:
       *(unsigned int *)(g_lmapScene + 0x28) = *(unsigned int *)(g_lmapScene + 0x1c);
       *(unsigned int *)(temp_v7 + 0x2c) = *puVar11;
       *(unsigned int *)(temp_v7 + 0x30) = temp_v4;
-      FUN_002bff50();
+      messageSetConfirmDisplayMode();
       mapDepartSetTarget(0xffffffff,0xffffffff);
       DAT_0049f970 = 0;
       DAT_0049f980 = 0x747331;

@@ -66,7 +66,7 @@ MessageWindow *FUN_00145280(void)
     raw[0x19C5] = 0x15;
     FUN_001692d4();
     window->sprite = spriteHandleCreate(0);
-    FUN_001527d8(window->sprite, -1);
+    uiObjectSetColorRgb(window->sprite, -1);
     asdTextSetValueFlagsAndScalar(window->sprite, 3, 255, 0.0f);
     positionStateSet(window->sprite, 0, -1, 0.0f);
     window->unk08 = 0;

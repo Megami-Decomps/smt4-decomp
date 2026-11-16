@@ -12,7 +12,7 @@ int FUN_002a8ac4(...);
 int quadSetOrderedVectors(...);
 int phaseCosInterpolate(void);
 int mathSinFixedAngle(void);
-int FUN_002b76d0(...);
+int gfxDrawQuadFourColors(...);
 int renderCtxCalculateStereoParallax(...);
 int efctSetSpeed(void);
 int renderCtxSelectTexture(...);
@@ -78,7 +78,7 @@ extern int asdSoundGetOption2(void);
 /* Supplied declaration required: quadSetOrderedVectors. */
 /* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: mathSinFixedAngle. */
-/* Supplied declaration required: FUN_002b76d0. */
+/* Supplied declaration required: gfxDrawQuadFourColors. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: renderCtxSelectTexture. */
@@ -403,7 +403,7 @@ LAB_00393954:
         VectorUnsignedToFloat(param_3[5],(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(param_3[2],(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(param_3[1],(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_002b76d0(&DAT_004d46ac,&DAT_004d46bc,&DAT_004d46cc,&DAT_004d46dc);
+        gfxDrawQuadFourColors(&DAT_004d46ac,&DAT_004d46bc,&DAT_004d46cc,&DAT_004d46dc);
         if (temp_v1) {
           renderCtxCallB();
         }

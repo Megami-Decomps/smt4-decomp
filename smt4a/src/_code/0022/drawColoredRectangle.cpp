@@ -4,7 +4,7 @@
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 s32 renderCtxPackPassFlags(u32, u32);
-void FUN_0014e314(u32, u32, u32, u32, f32, f32, f32, f32, f32);
+void gxSubmitDrawZeroExtraParams(u32, u32, u32, u32, f32, f32, f32, f32, f32);
 
 /* Draws the rectangle in its colour at `depth` under a temporary render-state preset. */
 static __inline void drawColoredRectangle(const ColoredRectangle *box, f32 depth)
@@ -13,7 +13,7 @@ static __inline void drawColoredRectangle(const ColoredRectangle *box, f32 depth
     renderCtxSelectTexture(g_renderCtx, 0);
     RenderCtxA *context = g_renderCtx;
     renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
-    FUN_0014e314(color, color, color, color,
+    gxSubmitDrawZeroExtraParams(color, color, color, color,
                 box->left, box->top, box->right - box->left, box->bottom - box->top, depth);
     renderStackPop(&g_renderCtx->stackA);
 }

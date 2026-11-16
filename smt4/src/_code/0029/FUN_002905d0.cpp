@@ -6,8 +6,8 @@ extern "C" {
 
 extern void buttonHelpSetPreset(s32 preset);
 extern void FUN_002b8454(s32 a, s32 b, s32 c, s32 d);
-extern u8 FUN_0029022c(void);
-extern s32 FUN_0029efa8(UiQuestCursor *cursor);
+extern u8 rosterHasLeader(void);
+extern s32 listCursorGetRowIfUnblocked(UiQuestCursor *cursor);
 extern s32 resourceRunOperationIfUnblocked(UiQuestCursor *cursor);
 
 /* Refreshes the quest menu's button help for the current page/selection and queues the matching cursor sounds. */
@@ -57,13 +57,13 @@ void FUN_002905d0(void)
         FUN_002b8454(5, 1, 0x32, 1);
         FUN_002b8454(2, 0x12, 0, 1);
     }
-    current = menu->list[resourceRunOperationIfUnblocked(&menu->cursor) + FUN_0029efa8(&menu->cursor)];
-    if (FUN_002903f0() == current) {
+    current = menu->list[resourceRunOperationIfUnblocked(&menu->cursor) + listCursorGetRowIfUnblocked(&menu->cursor)];
+    if (rosterGetLeaderId() == current) {
         FUN_002b8454(5, 1, 0x33, 1);
     } else if (panel->confirming == 0) {
         FUN_002b8454(5, 1, 0x31, 1);
     }
-    if (FUN_0029022c() == 0) {
+    if (rosterHasLeader() == 0) {
         FUN_002b8454(2, 0x12, 0, 1);
     } else {
         FUN_002b8454(2, 4, 0x33, 1);

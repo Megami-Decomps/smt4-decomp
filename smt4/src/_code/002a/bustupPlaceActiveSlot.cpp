@@ -26,7 +26,7 @@ extern BustupCutAnim *g_bustupCutAnim;
 extern u32 DAT_0043e048[];
 struct ModelBoneAttachmentRoot;
 s32 modelHasLoadedAttachment(const ModelBoneAttachmentRoot *object);
-u32 FUN_002adde8(u32 handle, u32 mode, Placement *placement);
+u32 modelGetBoneTranslationByName(u32 handle, u32 mode, Placement *placement);
 
 /* Applies the bust-up animation `mode` to a placement (adding the cut offset in mode 0); 1 if unavailable. */
 u32 bustupPlaceActiveSlot(Placement *placement, s32 mode)
@@ -40,7 +40,7 @@ u32 bustupPlaceActiveSlot(Placement *placement, s32 mode)
     if (cut->anim == NULL || modelHasLoadedAttachment(reinterpret_cast<const ModelBoneAttachmentRoot *>(cut->anim)) == 0) {
         return 1;
     }
-    result = FUN_002adde8(cut->anim->handle, DAT_0043e048[mode], placement);
+    result = modelGetBoneTranslationByName(cut->anim->handle, DAT_0043e048[mode], placement);
     if (mode == 0) {
         placement->y += cut->offset;
     }

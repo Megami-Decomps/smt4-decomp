@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00193038(unsigned char **, int *);
 int sysMemClear(int *, int);
-int FUN_0030fc80(int *);
+int clockGetTicksAsMicroseconds(int *);
 int FUN_0042d5b4(int);
 int FUN_0042e870(int *, int);
 int nn_cec_CTR_MessageBox_GetMessageBoxNum(int *, int);
@@ -28,7 +28,7 @@ extern signed char DAT_005b448c; /* 0x5b448c */
 
 /* Supplied declaration required: FUN_00193038. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0030fc80. */
+/* Supplied declaration required: clockGetTicksAsMicroseconds. */
 /* Supplied declaration required: FUN_0042d5b4. */
 extern unsigned int moduleStartOnce(void);
 /* Supplied declaration required: FUN_0042e870. */
@@ -146,7 +146,7 @@ unsigned int FUN_0042ed58(int *param_1,unsigned int param_2,int param_3,int para
             param_1[0x69] = temp_v9;
             *(unsigned char *)(param_1 + 0x6a) = 1;
             rt_memcpy(param_1 + 0x6b,temp_v10,0x20);
-            FUN_0030fc80(&temp_v8);
+            clockGetTicksAsMicroseconds(&temp_v8);
             temp_v5 = temp_v8;
             uStack_4c = uStack_3c;
             FUN_00193038(&temp_v3,&temp_v5);

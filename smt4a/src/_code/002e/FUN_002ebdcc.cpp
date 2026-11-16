@@ -104,8 +104,8 @@ extern unsigned int btlTalkBustUpGetId(void);
 /* Supplied declaration required: FUN_00417a60. */
 /* Supplied declaration required: FUN_00417c24. */
 /* Supplied declaration required: gameFlagSlotSetEnableBit. */
-extern int FUN_004186a4(void);
-extern unsigned int FUN_004186e0(void);
+extern int rosterHasLeader(void);
+extern unsigned int rosterGetLeaderId(void);
 /* Supplied declaration required: flagValueSub. */
 /* Supplied declaration required: FUN_004d0d70. */
 /* Supplied declaration required: optionsClearFlag1. */
@@ -252,8 +252,8 @@ unsigned int FUN_002ebdcc(void)
         }
         btlTalkBustUpSetUnk2F4(1);
       }
-      temp_v2 = FUN_004186a4();
-      if ((temp_v2 != 0) && (temp_v4 = FUN_004186e0(), temp_v4 == temp_v1)) {
+      temp_v2 = rosterHasLeader();
+      if ((temp_v2 != 0) && (temp_v4 = rosterGetLeaderId(), temp_v4 == temp_v1)) {
         optionsClearFlag1();
       }
       FUN_00417a60(temp_v1);

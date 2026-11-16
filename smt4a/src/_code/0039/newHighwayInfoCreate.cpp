@@ -73,7 +73,7 @@ void newHighwayInfoCreate(u32 owner)
     for (s32 i = 0; i < 2; ++i)
         asdTMTexLoadMainHeap(0x31, i);
     info->sprite = spriteHandleCreate(0);
-    FUN_001527d8(info->sprite, -1);
+    uiObjectSetColorRgb(info->sprite, -1);
     positionStateSet(info->sprite, 0, 0x646464ff, 0.0f);
     FUN_003f84e8(info);
     info->active = 1;

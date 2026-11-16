@@ -76,8 +76,8 @@ void statsSetSecondBankFlag(s32 index, s32 value);
 void statsSetFirstBankFlag(s32 index, s32 value);
 s32 bgmGetStateById(u32 id);
 void soundChannelRequestIfEnabled(u32 id, s32 a, s32 frames);
-void FUN_0022677c(s32 channel, s32 value);
-void FUN_003d54f8(s32 a, s32 b);
+void titleRestartSlotState3(s32 channel, s32 value);
+void titleSetSlotValueState2(s32 a, s32 b);
 void saveFlagBytesSetOneBased(u32 id, s32 value);
 void gameCounterAddSaturating(s32 a, s32 b);
 
@@ -139,8 +139,8 @@ SelectionScene *FUN_0049c3c0(SelectionScene *scene, u32 mode, s32 kind, s32 subK
         scene->buttonSprite = 0x83;
         FUN_0049a9a8();
         scene->shown = 1;
-        FUN_003d54f8(0, 1);
-        FUN_003d54f8(1, 0);
+        titleSetSlotValueState2(0, 1);
+        titleSetSlotValueState2(1, 0);
         return scene;
     }
     scene->buttonSprite = 0x1F;
@@ -148,8 +148,8 @@ SelectionScene *FUN_0049c3c0(SelectionScene *scene, u32 mode, s32 kind, s32 subK
     scene->stepA = 0;
     scene->stepB = 0;
     FUN_0049669c(scene);
-    FUN_0022677c(0, 0xFF);
-    FUN_0022677c(1, 0xFF);
+    titleRestartSlotState3(0, 0xFF);
+    titleRestartSlotState3(1, 0xFF);
     u32 music = 0x1000047;
     if (kind == 0) {
         statsSetFirstBankFlag(subKind, 1);

@@ -17,11 +17,11 @@ typedef struct SortKey {
 
 s32 idIsAbove400(u32 id);
 s32 itemGetSortCategory(u32 id);
-s32 FUN_00257568(SortKey *a, SortKey *b);
+s32 itemSortCompareRankThenKey(SortKey *a, SortKey *b);
 }
 
 /* Orders two keys by rank, then by descending item order (ids above 400 rank 99 with order 0);
- * ties go to FUN_00257568. */
+ * ties go to itemSortCompareRankThenKey. */
 static __inline s32 sortKeyCompare(SortKey &a, SortKey &b)
 {
     s32 rankA;
@@ -48,7 +48,7 @@ static __inline s32 sortKeyCompare(SortKey &a, SortKey &b)
         diff = orderB - orderA;
     if (diff != 0)
         return diff;
-    return FUN_00257568(&a, &b);
+    return itemSortCompareRankThenKey(&a, &b);
 }
 
 extern "C" {

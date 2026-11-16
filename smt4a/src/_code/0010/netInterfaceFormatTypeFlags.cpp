@@ -10,7 +10,7 @@ typedef struct Interface {
 } Interface;
 
 extern void sysMemClear(void *buffer, s32 size);
-extern void FUN_002e98ea(u16 *dest, void *buffer, s32 count);
+extern void libc_wcsncpyShort(u16 *dest, void *buffer, s32 count);
 extern void wstrcatU16(void *buffer, const u16 *text);
 
 u32 netInterfaceFormatTypeFlags(Interface *iface, u16 *dest, s32 count)
@@ -27,7 +27,7 @@ u32 netInterfaceFormatTypeFlags(Interface *iface, u16 *dest, s32 count)
     if ((s32)(iface->flags << 30) < 0) {
         wstrcatU16(buffer, (const u16 *)L"BROADCAST");
     }
-    FUN_002e98ea(dest, buffer, count);
+    libc_wcsncpyShort(dest, buffer, count);
     dest[count - 1] = 0;
     return 1;
 }

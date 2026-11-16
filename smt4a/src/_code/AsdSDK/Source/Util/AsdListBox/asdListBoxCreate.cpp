@@ -7,7 +7,7 @@ extern "C" {
 s32 FUN_002bda9c(u32 handle);
 void asdListBoxDestroy(u32 handle);
 
-extern const char DAT_0053d960[]; /* AsdListBox.cpp: __FILE__ */
+extern const char g_asdListBoxSourceFileName[]; /* AsdListBox.cpp: __FILE__ */
 extern const s8 DAT_0053d994[]; /* "AsdListBox" */
 s32 jobIsValid(void *parent);
 void jobSetParent(void *parent, u32 handle);
@@ -20,7 +20,7 @@ u32 asdListBoxCreate(void *parent, s32 group, s32 x, s32 y, u8 flag)
     AsdListBox *box;
     u32 handle;
 
-    asdDebugTrace(DAT_0053d960, 748);
+    asdDebugTrace(g_asdListBoxSourceFileName, 748);
     box = (AsdListBox *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(AsdListBox), 1);
     if (box == NULL) {
         return 0;

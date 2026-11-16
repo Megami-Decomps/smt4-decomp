@@ -26,8 +26,8 @@ struct ModelModeRegistry {
 extern "C" {
 extern ModelModeRegistry *g_handleRegistry;
 void modelPlayClip(SceneModeObject *, s32 mode, s32 enabled, f32 start, f32 end);
-void FUN_003fd8dc(SceneModeObject *, s32 slot, u32 color);
-void FUN_00406768(void *renderer, s32 slot, u32 color);
+void elementListSetShaderColor(SceneModeObject *, s32 slot, u32 color);
+void modelOwnerSetSlotValueAndActivate(void *renderer, s32 slot, u32 color);
 
 // Change the controller and the scene's draw-mode/color treatment.
 void modelSetDrawMode(ModelModeState *state, s32 mode)
@@ -45,16 +45,16 @@ void modelSetDrawMode(ModelModeState *state, s32 mode)
         ModelModeRegistry *registry = g_handleRegistry;
         if (mode == 0) {
             modelPlayClip(object, mode, 0, 0.0f, 0.0f);
-            FUN_003fd8dc(object, 8, 0xffffffff);
-            FUN_00406768(registry->renderer, 0, 0x4c4c4cff);
+            elementListSetShaderColor(object, 8, 0xffffffff);
+            modelOwnerSetSlotValueAndActivate(registry->renderer, 0, 0x4c4c4cff);
         } else if (mode == 1) {
             modelPlayClip(object, mode, 0, 0.0f, 0.0f);
-            FUN_003fd8dc(object, 8, 0x999999ff);
-            FUN_00406768(registry->renderer, 0, 0x191919ff);
+            elementListSetShaderColor(object, 8, 0x999999ff);
+            modelOwnerSetSlotValueAndActivate(registry->renderer, 0, 0x191919ff);
         } else if (mode == 2) {
             modelPlayClip(object, mode, 1, 0.0f, 0.0f);
-            FUN_003fd8dc(object, 8, 0xffffffff);
-            FUN_00406768(registry->renderer, 0, 0x4c4c4cff);
+            elementListSetShaderColor(object, 8, 0xffffffff);
+            modelOwnerSetSlotValueAndActivate(registry->renderer, 0, 0x4c4c4cff);
         }
     }
 }

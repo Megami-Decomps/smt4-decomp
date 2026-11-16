@@ -59,7 +59,7 @@ u8 byteIsAtLeast100(u32 *record);
 void jobStopAndClearFlags(AocMenuProcess *process);
 void messageMainFinishWindow(void);
 u32 flaggedValueHolderGetTotal(void *holder);
-u8 FUN_0026b564(void);
+u8 buttonHelpStateIsNot3(void);
 u8 sys43e188GetState(void);
 u8 messageBannerIsIdle(void);
 u32 buttonHelpHasEnabledEntryForId(u32 id);
@@ -81,7 +81,7 @@ void AocMenu::runScriptMenu()
         aocMenuSetButtonHelp(process, -1, 0);
         return;
     case 1:
-        if (FUN_0026b564() != 0 && (process->flags & 0x200) != 0) {
+        if (buttonHelpStateIsNot3() != 0 && (process->flags & 0x200) != 0) {
             scrRunOpcodesStub(process->script);
             AocMenuObject *object = (AocMenuObject *)&process->unk20C;
             FUN_00233fcc(object, 3);

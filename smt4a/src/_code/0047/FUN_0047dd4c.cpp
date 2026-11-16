@@ -19,7 +19,7 @@ extern GameStateA g_gameState;
 const MapSavedReturnPacket *gameBlockGetArea27E98();
 s32 gameStateIsFlagSetAndLarge();
 s32 lmapMainGetUnk74();
-void FUN_003d54f8(s32, s32);
+void titleSetSlotValueState2(s32, s32);
 void mapPlaceSet(u32, u32, u32);
 void FUN_004731d8();
 void sysClearCachedFlag();
@@ -73,8 +73,8 @@ void FUN_0047dd4c(void *work)
         }
         break;
     }
-    FUN_003d54f8(0, 10);
-    FUN_003d54f8(1, 10);
+    titleSetSlotValueState2(0, 10);
+    titleSetSlotValueState2(1, 10);
     mapPlaceSet(-1, -1, -1);
     FUN_004731d8();
     ((DepartureCompletionView *)work)->complete = true;

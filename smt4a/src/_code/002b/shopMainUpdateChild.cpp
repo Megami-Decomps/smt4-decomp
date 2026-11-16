@@ -4,9 +4,9 @@ extern "C" {
 
 extern ShopWork *g_shop;
 
-int FUN_004990e4(void *child);
+int hintWindowDrawArrows(void *child);
 
-/* Runs FUN_004990e4 on the shop entity's child when its kind is 0, 1 or 2; always returns 0. */
+/* Runs hintWindowDrawArrows on the shop entity's child when its kind is 0, 1 or 2; always returns 0. */
 s32 shopMainUpdateChild(u32 process)
 {
     ShopWork *entity = g_shop;
@@ -16,7 +16,7 @@ s32 shopMainUpdateChild(u32 process)
     case 1:
     case 2:
         if (entity != NULL && entity->result != 0) {
-            FUN_004990e4((void *)entity->result);
+            hintWindowDrawArrows((void *)entity->result);
         }
         break;
     }

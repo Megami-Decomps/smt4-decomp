@@ -20,14 +20,14 @@ typedef struct BtlHelpWork {
     /* 0x4C */ u32 job;
 } BtlHelpWork;
 
-extern BtlList *DAT_00435d78;
+extern BtlList *g_btlHelpList;
 s32 jobIsValid(u32 job);
 void jobStop(u32 job, s32 arg);
 void asdMemFree(void *block);
 
 static inline void btlListUnlink(BtlNode *node)
 {
-    BtlList *list = DAT_00435d78;
+    BtlList *list = g_btlHelpList;
     if (node->prev == NULL) {
         list->first = node->next;
     } else {
@@ -45,15 +45,15 @@ static inline void btlListUnlink(BtlNode *node)
 void btlHelpFreeNodeListAndStopJob(u32 job)
 {
     BtlHelpWork *work = (BtlHelpWork *)jobGetWork(job);
-    BtlList *list = DAT_00435d78;
+    BtlList *list = g_btlHelpList;
     if (list != NULL) {
         while (list->first != NULL) {
             BtlNode *node = list->first;
             btlListUnlink(node);
             asdMemFree(node);
         }
-        asdMemFree(DAT_00435d78);
-        DAT_00435d78 = NULL;
+        asdMemFree(g_btlHelpList);
+        g_btlHelpList = NULL;
     }
     if (jobIsValid(work->job)) {
         jobStop(work->job, 0);

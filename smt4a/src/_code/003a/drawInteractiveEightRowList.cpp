@@ -24,7 +24,7 @@ void drawInteractiveEightRowList(EightRowListDraw *work, u32 style, s32 interact
 {
     resourceRunOperationIfUnblocked(&work->grid);
     s32 base = resourceRunOperationIfUnblocked(&work->grid);
-    s32 selected = FUN_002a4894(reinterpret_cast<const Object *>(&work->grid));
+    s32 selected = listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(&work->grid));
     bool headerSelected = false;
     if (interactive && (base + selected >= work->selectionLimit || work->headerOverride)) {
         FUN_003b6250(x, y, scale);
@@ -34,8 +34,8 @@ void drawInteractiveEightRowList(EightRowListDraw *work, u32 style, s32 interact
     }
     for (s32 row = 0; row < 8; ++row) {
         bool valid = resourceRunOperationIfUnblocked(&work->grid) + row < work->entryCount;
-        if (!interactive || FUN_002a4894(reinterpret_cast<const Object *>(&work->grid)) != row || headerSelected || !work->selectionActive) {
-            bool highlighted = FUN_002a4894(reinterpret_cast<const Object *>(&work->grid)) == row && !work->selectionActive && interactive;
+        if (!interactive || listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(&work->grid)) != row || headerSelected || !work->selectionActive) {
+            bool highlighted = listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(&work->grid)) == row && !work->selectionActive && interactive;
             FUN_003cbd04(work, row, style, valid, x, y, highlighted, scale);
             efctSetSpeed(1.0f);
         }

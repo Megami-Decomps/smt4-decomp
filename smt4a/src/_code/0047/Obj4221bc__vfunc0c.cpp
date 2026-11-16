@@ -17,7 +17,7 @@ extern Obj4221bcManager *g_aocMain;
 void FUN_00514aa4();
 void FUN_00514b94();
 void FUN_00514b44();
-s32 FUN_0047d754(void *queue);
+s32 threadTryJoinAndClose(void *queue);
 s32 legacyResourceIdRemap(const WindowStatusResult *result);
 u32 FUN_002fb0d4(void *queue, const u32 *descriptor, void (*callback)(), Obj4221bc **owner);
 void FUN_004733cc();
@@ -28,7 +28,7 @@ WindowStatusOperationResult Obj4221bc::vfunc0c(const void *)
     WindowStatusOperationResult output(1);
     Obj4221bcManager *manager = g_aocMain;
     if (reserved != 0) {
-        if (reserved == 1 && FUN_0047d754(&manager->queue) != 0) {
+        if (reserved == 1 && threadTryJoinAndClose(&manager->queue) != 0) {
             bool succeeded = !nnResultIsFailureBool(legacyResourceIdRemap(&result));
             if (succeeded) {
                 output.status = 0;

@@ -13,7 +13,7 @@ int sysMemClear(...);
 int FUN_003e7840(...);
 int controllerSetPositionXyz(...);
 int modelPlayClip(...);
-int FUN_0040aad4(...);
+int moriModelContentLoadBody(...);
 int FUN_0040ab7c(...);
 int handleRegistryRegisterObject(...);
 int btlCameraFinishTransition(...);
@@ -36,7 +36,7 @@ extern int g_btlCamera; /* 0x571508 */
 extern unsigned int g_btlAux; /* 0x573808 */
 
 /* Supplied declaration required: textFormatBuffer. */
-extern int FUN_00100d60(unsigned char *, unsigned int);
+extern int libc_strrchr(unsigned char *, unsigned int);
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: effectColorInitDefault. */
@@ -47,7 +47,7 @@ extern int findRecordByKey(int);
 /* Supplied declaration required: FUN_003e7840. */
 /* Supplied declaration required: controllerSetPositionXyz. */
 /* Supplied declaration required: modelPlayClip. */
-/* Supplied declaration required: FUN_0040aad4. */
+/* Supplied declaration required: moriModelContentLoadBody. */
 /* Supplied declaration required: FUN_0040ab7c. */
 extern int FUN_0040ab8c(unsigned int);
 /* Supplied declaration required: handleRegistryRegisterObject. */
@@ -173,7 +173,7 @@ unsigned int FUN_004fa828(int param_1,unsigned int param_2,unsigned int param_3,
       }
       if (temp_v8 && temp_v1 != 0) {
         FUN_0040ab7c(temp_v1,0);
-        FUN_0040aad4(*puVar8,0);
+        moriModelContentLoadBody(*puVar8,0);
         temp_v3 = *(int *)(*puVar8 + 4);
         controllerSetPositionXyz(temp_v3);
         *(int *)(temp_v3 + 0x1fc) = (int)temp_v9;
@@ -233,7 +233,7 @@ LAB_004fab24:
       textFormatBuffer(temp_v10,"battle/effect/%s.eft","ef_e_ref" + temp_v4 * 0x20);
       libc_strcpy(temp_v12,temp_v10);
       temp_v2 = param_1 + temp_v4 * 0x8c;
-      temp_v3 = FUN_00100d60(temp_v12,0x2f);
+      temp_v3 = libc_strrchr(temp_v12,0x2f);
       libc_strcpy(temp_v2 + 0x2824,temp_v3 + 1);
       temp_v3 = findRecordByKey(temp_v2 + 0x2824);
       if (temp_v3 == 0xff) {

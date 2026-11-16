@@ -19,7 +19,7 @@ int asdTMTexTableEntryAt(...);
 int fontMeasureLineAdvance(...);
 int configDrawRowFrame(...);
 int resourceRunOperationIfUnblocked(int);
-int FUN_002a4894(int);
+int listCursorGetRowIfUnblocked(int);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -54,7 +54,7 @@ extern int dataTableGetEntries(void);
 /* Supplied declaration required: configDrawRowFrame. */
 extern int recordGetModeForId(int);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
-/* Supplied declaration required: FUN_002a4894. */
+/* Supplied declaration required: listCursorGetRowIfUnblocked. */
 extern int uiSearchPrimary(int);
 
 
@@ -102,7 +102,7 @@ void FUN_002027fc(void)
     *(unsigned char *)(temp_v5 + 0x1270) = 0;
   }
   resourceRunOperationIfUnblocked(temp_v0);
-  FUN_002a4894(temp_v0);
+  listCursorGetRowIfUnblocked(temp_v0);
   temp_v3 = vec2GetXInt(reinterpret_cast<const void *>(temp_v0 + 0xe8));
   temp_v4 = vec2GetYInt(temp_v0 + 0xe8);
   efctSetSpeed();

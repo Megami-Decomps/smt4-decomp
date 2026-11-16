@@ -15,7 +15,7 @@ struct AsdSoundSystemAView {
 
 extern "C" {
 extern AsdSoundSystemAView g_asdSoundSystem;
-s32 FUN_001787a8(SoundLoader* loader, u32 id, u32 flags);
+s32 soundArchiveLoaderIsItemLoaded(SoundLoader* loader, u32 id, u32 flags);
 s32 FUN_001753d4(SoundLoader* loader, u32 id, void* heap, u32 flags, u32 blockSize);
 
 u32 asdSoundEnsureArchiveItemLoaded(u32 id)
@@ -24,7 +24,7 @@ u32 asdSoundEnsureArchiveItemLoaded(u32 id)
     u32 result = 0;
     AsdSndSlotA* slot = g_asdSoundSystem.handles.currentSlotA;
     if (slot != NULL && slot->hasHeap) {
-        if (FUN_001787a8(&system->loader, id, 0xffffffff)) {
+        if (soundArchiveLoaderIsItemLoaded(&system->loader, id, 0xffffffff)) {
             result = 1;
         } else {
             result = FUN_001753d4(&system->loader, id, slot->heap, 0xffffffff, 0);

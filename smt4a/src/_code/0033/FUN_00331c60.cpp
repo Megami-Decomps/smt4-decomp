@@ -46,7 +46,7 @@ s32 FUN_0022fd80(s32 experience, s32 level);
 SlotRecord *gameGetSlotRecord(s32 slot);
 s32 bitsAt60Test(SlotRecord *record, u32 bit);
 s32 dataTable9Type3GetClamped(u32 growthType, s32 level);
-void *FUN_003e503c(u32 index);
+void *partyGetSlotPreferredFirst(u32 index);
 s32 partySlotMatchesSelected(void *actor);
 
 /* Distribute the battle's experience to the pool and to every party member that is in the fight. */
@@ -83,7 +83,7 @@ void FUN_00331c60(RewardSource *source)
         totals->entries[1 + record->unk66].total += share;
     }
     for (u32 i = 0; i < 12; i++) {
-        void *actor = FUN_003e503c(static_cast<u16>(i));
+        void *actor = partyGetSlotPreferredFirst(static_cast<u16>(i));
         if (actorIsActive(actor) == 0)
             continue;
         s32 matches = partySlotMatchesSelected(actor);

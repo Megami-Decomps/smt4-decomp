@@ -42,11 +42,11 @@ namespace {
 inline s32 getPanelGridIndex(void* selector, PanelValueView* panel)
 {
     if (panel->alternateLayout != 0) {
-        const s32 row = FUN_002a4878(selector);
-        return row + FUN_002a4894(selector) * 4;
+        const s32 row = listCursorGetRowOfChildIfUnblocked(selector);
+        return row + listCursorGetRowIfUnblocked(selector) * 4;
     }
-    s32 index = FUN_002a4894(selector) * 4 + panel->page * 12;
-    index += FUN_002a4878(selector);
+    s32 index = listCursorGetRowIfUnblocked(selector) * 4 + panel->page * 12;
+    index += listCursorGetRowOfChildIfUnblocked(selector);
     return index;
 }
 }
@@ -59,8 +59,8 @@ extern "C" void partyPanelRefreshSelectedItemValues(void* selector, s32 gridSele
     PanelValuePair values = {0, 0};
     s32 index;
     u32 valueSource;
-    if (gridSelection == 0 && FUN_002a4894(selector) < 1) {
-        index = FUN_002a4878(selector);
+    if (gridSelection == 0 && listCursorGetRowIfUnblocked(selector) < 1) {
+        index = listCursorGetRowOfChildIfUnblocked(selector);
         if (index != 0) {
             btlItemComputeValues(static_cast<u32>(slots->owners[index]), panel->itemId,
                          &values.first, &values.second);

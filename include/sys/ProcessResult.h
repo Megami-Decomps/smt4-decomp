@@ -5,8 +5,8 @@
 
 extern "C" {
 /* Record the result of the completed process or filesystem operation. */
-void FUN_002c3510(u32 value);
-void FUN_0013ebd8(u32 value);
+void processResultSetValue(u32 value);
+void processResultSetValue(u32 value);
 }
 
 #ifdef __cplusplus

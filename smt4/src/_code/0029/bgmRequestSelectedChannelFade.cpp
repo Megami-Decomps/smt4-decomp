@@ -2,7 +2,7 @@
 
 extern "C" {
 extern BgmChannelSelection g_titleConfigModeFlag;
-extern BgmRequestChannel DAT_004c53c4;
+extern BgmRequestChannel g_bgmRequestChannels;
 extern BgmRequestChannel DAT_004c53e4;
 int jyoucyuGetTableEntry(u32 index);
 
@@ -13,7 +13,7 @@ void bgmRequestSelectedChannelFade(u32 frames)
     }
     BgmRequestChannel* channel = NULL;
     if (g_titleConfigModeFlag.selected == 0) {
-        channel = &DAT_004c53c4;
+        channel = &g_bgmRequestChannels;
     } else if (g_titleConfigModeFlag.selected == 1) {
         channel = &DAT_004c53e4;
     }

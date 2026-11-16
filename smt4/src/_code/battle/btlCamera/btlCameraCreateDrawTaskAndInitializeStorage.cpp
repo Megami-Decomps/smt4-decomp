@@ -17,7 +17,7 @@ void scrDestroyActive();
 void* taskCreateDraw(const char* name, s32 priority, s32 arg2, s32 arg3,
                      void (*update)(), void (*destroy)(),
                      BattleCameraOwnerView* owner, u32 ownerValue);
-void FUN_003d5830(void* storage, BattleCameraOwnerView* owner);
+void eventCameraInitialize(void* storage, BattleCameraOwnerView* owner);
 
 // Create the camera draw task, allocate shared storage if needed, then initialize it.
 void btlCameraCreateDrawTaskAndInitializeStorage(BattleCameraOwnerView* owner)
@@ -31,6 +31,6 @@ void btlCameraCreateDrawTaskAndInitializeStorage(BattleCameraOwnerView* owner)
         g_btlMain = asdMemAlloc(0x100, 0x100, 0, 0x848, 1);
     }
 
-    FUN_003d5830(g_btlMain, owner);
+    eventCameraInitialize(g_btlMain, owner);
 }
 }

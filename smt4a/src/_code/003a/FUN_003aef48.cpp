@@ -14,7 +14,7 @@ int gameDataToggleFlagSet(...);
 int progressUnlockFindNthEarnedIndex(...);
 int controllerApplyPreset(...);
 int screenStartOrClear(...);
-int FUN_00387ad8(int, int);
+int slideFadeWindowStep(int, int);
 int characterInfoPanelPopulate(...);
 int sysPlayVoice(...);
 int SBORROW4(...);
@@ -47,7 +47,7 @@ extern int gameDataToggleFlagIsSet(void);
 /* Supplied declaration required: progressUnlockFindNthEarnedIndex. */
 /* Supplied declaration required: controllerApplyPreset. */
 /* Supplied declaration required: screenStartOrClear. */
-/* Supplied declaration required: FUN_00387ad8. */
+/* Supplied declaration required: slideFadeWindowStep. */
 /* Supplied declaration required: characterInfoPanelPopulate. */
 /* Supplied declaration required: sysPlayVoice. */
 
@@ -97,7 +97,7 @@ unsigned int FUN_003aef48(int param_1)
   *(unsigned char *)(param_1 + 0x138) = 0;
   asdTMTexTableEntryAt(0x2e,*(int *)(param_1 + 0x128) + 0xe6);
   temp_v1 = param_1;
-  FUN_00387ad8(param_1,1);
+  slideFadeWindowStep(param_1,1);
   if (temp_v1 != 0) {
     temp_v1 = (int)asdTMTexTableEntryAt(0x2e,0x42);
     temp_v17 = 0;

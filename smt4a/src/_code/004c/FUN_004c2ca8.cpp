@@ -11,7 +11,7 @@ int dataTable8FindRecord(void);
 int dataTable08Sub2GetRecord(void);
 int gameGetSlotRecord(...);
 int dataTable04FindById(void);
-int FUN_003e8bb0(...);
+int btlEntryBuildSummary(...);
 int btlMainFindEntryByListedId(...);
 int FUN_004bd098(...);
 int FUN_004c4178(unsigned int, unsigned int, int, int, int);
@@ -62,7 +62,7 @@ extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: gameGetSlotRecord. */
 /* Supplied declaration required: dataTable04FindById. */
-/* Supplied declaration required: FUN_003e8bb0. */
+/* Supplied declaration required: btlEntryBuildSummary. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_004bd098. */
 extern int bitsAt60Test(unsigned int, unsigned int);
@@ -125,7 +125,7 @@ unsigned int FUN_004c2ca8(int param_1,unsigned int param_2,int param_3,int param
   btlMainFindEntryByListedId(puVar4,param_5);
   puVar6 = puVar4;
   btlMainFindEntryByListedId(puVar4,param_6);
-  FUN_003e8bb0(temp_v14,puVar4,puVar5);
+  btlEntryBuildSummary(temp_v14,puVar4,puVar5);
   temp_v7 = 0xffffffff;
   temp_v8 = 0xffffffff;
   temp_v9 = 1;
@@ -141,7 +141,7 @@ unsigned int FUN_004c2ca8(int param_1,unsigned int param_2,int param_3,int param
     temp_v4 = temp_v3;
     btlMainFindEntryByListedId(temp_v3,param_5);
     if ((((temp_v3 != 0) && (temp_v13 = temp_v4, btlMainFindEntryByListedId(temp_v4,param_6), temp_v4 != 0)) &&
-        (FUN_003e8bb0(temp_v23,temp_v13,temp_v3), temp_v24 != 0)) &&
+        (btlEntryBuildSummary(temp_v23,temp_v13,temp_v3), temp_v24 != 0)) &&
        ((temp_v4 = flagsCountSelectedBits(*(unsigned short *)(temp_v4 + 0x274)), temp_v4 != 0 &&
         (temp_v0 = (unsigned int)temp_v24 * temp_v4, temp_v0 != 0)))) {
       VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);

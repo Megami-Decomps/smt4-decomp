@@ -18,7 +18,7 @@ typedef char RenderContextStorageSize[sizeof(RenderContextStorage) == 0x13a8 ? 1
 extern "C" {
 extern RenderContextStorage *g_renderCtx;
 void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
-void FUN_00145adc(RenderContextStorage *context);
+void asdRenderContextInitialize(RenderContextStorage *context);
 
 /* Allocates and constructs the global render context. */
 void asdRenderContextCreate(void)
@@ -33,6 +33,6 @@ void asdRenderContextCreate(void)
         scale[3] = 1.0f;
     }
     g_renderCtx = context;
-    FUN_00145adc(context);
+    asdRenderContextInitialize(context);
 }
 }

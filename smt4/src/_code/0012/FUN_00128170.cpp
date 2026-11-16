@@ -45,7 +45,7 @@ unsigned int FUN_00128170(void)
   FUN_002ad888();
   FUN_002ad80c(uVar4,extraout_r1,0x14,0);
   if ((int)uVar4 >= 0) {
-    FUN_002c567c(&uStack_a8);
+    clockGetTicksAsMicroseconds(&uStack_a8);
     uStack_18 = uStack_a8;
     uStack_14 = uStack_a4;
     FUN_002ad66c(&uStack_6c,&uStack_18);

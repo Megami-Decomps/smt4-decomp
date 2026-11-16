@@ -15,7 +15,7 @@ int scrollOwnerSelectIndex(int, int);
 int scrollListSetSelectionTracked(int, int);
 int statusPanelSetOpen(...);
 int FUN_0032d0c8(...);
-int FUN_003343f0(int);
+int gameGlobalsSetMenuOpenFlag(int);
 int screenShowMessage(...);
 int FUN_0035d03c(int);
 int partyGetSlot(...);
@@ -44,14 +44,14 @@ extern int FUN_0022e714(void);
 extern int FUN_0023b3b8(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int recordGetModeForId(int);
-extern int FUN_002a4878(int);
-extern int FUN_002a4894(int);
+extern int listCursorGetRowOfChildIfUnblocked(int);
+extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: scrollOwnerSelectIndex. */
 /* Supplied declaration required: scrollListSetSelectionTracked. */
 /* Supplied declaration required: statusPanelSetOpen. */
 extern int gameGetMode(void);
 /* Supplied declaration required: FUN_0032d0c8. */
-/* Supplied declaration required: FUN_003343f0. */
+/* Supplied declaration required: gameGlobalsSetMenuOpenFlag. */
 /* Supplied declaration required: screenShowMessage. */
 extern int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_0035d03c. */
@@ -98,8 +98,8 @@ void FUN_004bea0c(int param_1)
     }
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 0xc);
-  temp_v0 = FUN_002a4878(param_1 + 0x260);
-  temp_v3 = FUN_002a4894(param_1 + 0x260);
+  temp_v0 = listCursorGetRowOfChildIfUnblocked(param_1 + 0x260);
+  temp_v3 = listCursorGetRowIfUnblocked(param_1 + 0x260);
   temp_v0 = temp_v0 + temp_v3 * 4;
   *(int *)(param_1 + 0x2f4) = temp_v0;
   *(int *)(param_1 + 0x32c) = temp_v0;
@@ -153,7 +153,7 @@ void FUN_004bea0c(int param_1)
         eventQueueAddUniqueIfValid(0x100020e);
         sysPlaySe(0xf2);
         FUN_0035d03c(1);
-        FUN_003343f0(1);
+        gameGlobalsSetMenuOpenFlag(1);
         *(unsigned int *)(param_1 + 8) = 5;
         temp_v4 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x31c),&LAB_004bee70);
         if (temp_v4 < 0) {
@@ -167,7 +167,7 @@ void FUN_004bea0c(int param_1)
       if (temp_v4 != 0) {
         eventQueueAddUniqueIfValid(0x100020f);
         *(unsigned int *)(param_1 + 8) = 0xd;
-        FUN_003343f0(1);
+        gameGlobalsSetMenuOpenFlag(1);
       }
       else {
         temp_v4 = 10;

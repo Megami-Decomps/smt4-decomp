@@ -23,7 +23,7 @@ void FUN_00191df4(void)
         struct { u8 unk0000[0x6670]; u32 count; } list;
     };
     FusionSortView *work = reinterpret_cast<FusionSortView *>(g_unite);
-    u8 *preference = work->base.menu.mode == 1 ? FUN_002a0d0c() + 0x12 : FUN_002a0d0c() + 0x11;
+    u8 *preference = work->base.menu.mode == 1 ? gameDataGetSortPreferences() + 0x12 : gameDataGetSortPreferences() + 0x11;
     bool ascending = (*preference & 0x80) == 0;
     if ((*preference & 0x7f) == 1) {
         if (ascending)

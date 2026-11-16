@@ -46,7 +46,7 @@ extern AocRecordSystem *g_aocSystem;
 void *dataTable08Sub0FindById(AocRecordSystem *system, u32 id);
 void *idEntryTableFindById(AocRecordSystem *system, u32 id);
 void *keyedEntryListFindByKey(AocRecordSystem *system, u32 id);
-void *FUN_002b4504(AocRecordSystem *system, u32 id);
+void *aocTable8Type5FindRecord(AocRecordSystem *system, u32 id);
 int itemCategoryFindByItemId(void);
 void *dataTable08Sub1GetRecord(u32 id);
 void *dataTable08Sub2GetRecord(u32 id);
@@ -113,7 +113,7 @@ static inline u8 *getTable08Sub5Record(u32 id)
     DataRecord2C key;
     u8 *record;
     key.id = id;
-    if (g_aocSystem->cache3DC == 0 || (record = (u8 *)FUN_002b4504(g_aocSystem, id)) == NULL) {
+    if (g_aocSystem->cache3DC == 0 || (record = (u8 *)aocTable8Type5FindRecord(g_aocSystem, id)) == NULL) {
         void *table = dataTableGet(8, 5);
         if (table == 0) {
             return NULL;

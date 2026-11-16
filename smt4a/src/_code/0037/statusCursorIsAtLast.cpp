@@ -14,14 +14,14 @@ typedef struct Holder {
 
 extern Holder *g_statusDown;
 
-extern s32 FUN_002a4894(Cursor *cursor);
+extern s32 listCursorGetRowIfUnblocked(Cursor *cursor);
 extern s32 objectApplyIfUnblocked(Cursor *cursor);
 
 u32 statusCursorIsAtLast(void)
 {
     Holder *holder = g_statusDown;
     if (holder != NULL) {
-        s32 position = FUN_002a4894(&holder->cursor);
+        s32 position = listCursorGetRowIfUnblocked(&holder->cursor);
         Cursor *cursor = &holder->cursor;
         s32 count = objectApplyIfUnblocked(cursor);
 

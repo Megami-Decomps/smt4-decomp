@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00233670(void *block, int a, int b, int c);
+int messageIdListInit(void *block, int a, int b, int c);
 
 typedef struct Obj {
     /* 0x00 */ u8 unk00[0x74];
@@ -12,7 +12,7 @@ typedef struct Obj {
 
 void objBlockInitAndMark(Obj *obj)
 {
-    FUN_00233670(obj->block, 0x2a, 5, 10);
+    messageIdListInit(obj->block, 0x2a, 5, 10);
     obj->unk84 = 1;
 }
 

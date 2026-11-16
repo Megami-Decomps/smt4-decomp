@@ -14,7 +14,7 @@ typedef struct ObjectOwner3 {
 } ObjectOwner3;
 
 extern GlobalObj *g_handleRegistry;
-extern void FUN_0040af70(GlobalObj *obj);
+extern void linkedItemOwnerReleaseItems(GlobalObj *obj);
 extern void resourceOwnerReleaseAndReset(GlobalObj *obj);
 
 /* Shuts down the global object (if started) and releases the three objects the owner holds. */
@@ -24,7 +24,7 @@ void objectOwner3Release(ObjectOwner3 *owner)
     Object *object;
 
     if (g_handleRegistry->unk04 != 0) {
-        FUN_0040af70(g_handleRegistry);
+        linkedItemOwnerReleaseItems(g_handleRegistry);
         resourceOwnerReleaseAndReset(g_handleRegistry);
     }
     for (i = 0; i < 3; i++) {

@@ -29,7 +29,7 @@ typedef struct {
     s32 unkC;
 } TouchReader;
 
-extern TouchInput DAT_004e3cd4;
+extern TouchInput g_touchInput;
 
 u32 FUN_0011c448(void);
 u8 nn_hid_CTR_TouchPanelReader_ReadLatest(TouchReader *reader, TouchStatus *status);
@@ -43,39 +43,39 @@ s32 FUN_00108b6c(void)
     reader.unk4 = -1;
     reader.unk8 = -1;
     reader.unkC = -1;
-    DAT_004e3cd4.prev = DAT_004e3cd4.cur;
-    DAT_004e3cd4.prevHeld = DAT_004e3cd4.held;
-    if (DAT_004e3cd4.cur.touch == 1) {
-        DAT_004e3cd4.held = 1;
-        DAT_004e3cd4.trigger = 0;
-        DAT_004e3cd4.holdFrames++;
-        if (DAT_004e3cd4.repeating) {
-            if (DAT_004e3cd4.holdFrames >= DAT_004e3cd4.repeatDelay) {
-                DAT_004e3cd4.holdFrames = 0;
-                DAT_004e3cd4.trigger = 1;
+    g_touchInput.prev = g_touchInput.cur;
+    g_touchInput.prevHeld = g_touchInput.held;
+    if (g_touchInput.cur.touch == 1) {
+        g_touchInput.held = 1;
+        g_touchInput.trigger = 0;
+        g_touchInput.holdFrames++;
+        if (g_touchInput.repeating) {
+            if (g_touchInput.holdFrames >= g_touchInput.repeatDelay) {
+                g_touchInput.holdFrames = 0;
+                g_touchInput.trigger = 1;
             }
         } else {
-            if (DAT_004e3cd4.holdFrames == 1) {
-                DAT_004e3cd4.trigger = 1;
+            if (g_touchInput.holdFrames == 1) {
+                g_touchInput.trigger = 1;
             }
-            if (DAT_004e3cd4.holdFrames >= DAT_004e3cd4.firstDelay) {
-                DAT_004e3cd4.repeating = 1;
-                DAT_004e3cd4.holdFrames = 0;
-                DAT_004e3cd4.trigger = 1;
+            if (g_touchInput.holdFrames >= g_touchInput.firstDelay) {
+                g_touchInput.repeating = 1;
+                g_touchInput.holdFrames = 0;
+                g_touchInput.trigger = 1;
             }
         }
     } else {
-        DAT_004e3cd4.holdFrames = 0;
-        DAT_004e3cd4.trigger = 0;
-        DAT_004e3cd4.repeating = 0;
-        if (DAT_004e3cd4.cur.touch == 0) {
-            DAT_004e3cd4.held = 0;
+        g_touchInput.holdFrames = 0;
+        g_touchInput.trigger = 0;
+        g_touchInput.repeating = 0;
+        if (g_touchInput.cur.touch == 0) {
+            g_touchInput.held = 0;
         }
     }
-    nn_hid_CTR_TouchPanelReader_ReadLatest(&reader, &DAT_004e3cd4.cur);
-    if (DAT_004e3cd4.cur.touch == 0) {
-        DAT_004e3cd4.cur.x = DAT_004e3cd4.prev.x;
-        DAT_004e3cd4.cur.y = DAT_004e3cd4.prev.y;
+    nn_hid_CTR_TouchPanelReader_ReadLatest(&reader, &g_touchInput.cur);
+    if (g_touchInput.cur.touch == 0) {
+        g_touchInput.cur.x = g_touchInput.prev.x;
+        g_touchInput.cur.y = g_touchInput.prev.y;
     }
     return 1;
 }

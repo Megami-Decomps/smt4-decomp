@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_00147918(u32 address, u32 size);
+void gxFlushDataCacheCurrentProcess(u32 address, u32 size);
 
-/* Forwards to FUN_00147918, the function that follows it. */
+/* Forwards to gxFlushDataCacheCurrentProcess, the function that follows it. */
 void FUN_00147914(u32 address, u32 size)
 {
-    FUN_00147918(address, size);
+    gxFlushDataCacheCurrentProcess(address, size);
 }
 
 } /* extern "C" */

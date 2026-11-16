@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_00431e90(void *node);
+void nnFndDetailRemoveBlockFromRegion(void *node);
 
-/* Forwards to FUN_00431e90, the function that follows it. */
+/* Forwards to nnFndDetailRemoveBlockFromRegion, the function that follows it. */
 void nn_fnd_detail_DestroyHeap(void *node)
 {
-    FUN_00431e90(node);
+    nnFndDetailRemoveBlockFromRegion(node);
 }
 
 } /* extern "C" */

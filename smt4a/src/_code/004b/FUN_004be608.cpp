@@ -33,7 +33,7 @@ extern s8 g_callbackOwnerSlots;
 s32 FUN_004be1c8(PartnerMenuFull *menu);
 s32 FUN_004bea0c(PartnerMenuFull *menu);
 s32 FUN_004bf174(PartnerMenuFull *menu);
-void FUN_003343f0(s32 owner);
+void gameGlobalsSetMenuOpenFlag(s32 owner);
 void uiSpriteAdvanceAnimation(void *panel);
 s32 scrRunOpcodesStub(u32 script);
 void messageBannerRestartOrClear(void);
@@ -61,10 +61,10 @@ u32 FUN_004be608(PartnerMenuFull *menu)
         FUN_004be1c8(menu);
         break;
     case 2:
-        FUN_003343f0(1);
+        gameGlobalsSetMenuOpenFlag(1);
         uiSpriteAdvanceAnimation(menu->panel);
         if (menu->panelClosed != 0) {
-            FUN_003343f0(0);
+            gameGlobalsSetMenuOpenFlag(0);
             menu->state = menu->returnState;
             if (menu->state == 3)
                 menu->mode = 1;
@@ -88,7 +88,7 @@ u32 FUN_004be608(PartnerMenuFull *menu)
         if (messageMainGetValue() != 0) {
             if (menu->fromTitle != 1) {
                 menu->state = 3;
-                FUN_003343f0(0);
+                gameGlobalsSetMenuOpenFlag(0);
                 sysPlaySe(0xF0);
                 return 0;
             }
@@ -108,7 +108,7 @@ u32 FUN_004be608(PartnerMenuFull *menu)
         if (menu->fromTitle == 1) {
             menu->state = 11;
         } else {
-            FUN_003343f0(0);
+            gameGlobalsSetMenuOpenFlag(0);
             sysPlaySe(0x11B);
             menu->state = 3;
         }
@@ -133,7 +133,7 @@ u32 FUN_004be608(PartnerMenuFull *menu)
         break;
     case 9:
         FUN_00228b04(menu->list, 1);
-        menu->selection = FUN_002a4894(reinterpret_cast<const Object *>(menu->list));
+        menu->selection = listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(menu->list));
         menu->cursor = menu->selection;
         if (padQueryLogicalKey(0, 1) != 0) {
             dialogClose(1);
@@ -161,7 +161,7 @@ u32 FUN_004be608(PartnerMenuFull *menu)
             scrScriptProcessDestroy(menu->script);
             menu->script = 0;
         }
-        FUN_003343f0(g_callbackOwnerSlots);
+        gameGlobalsSetMenuOpenFlag(g_callbackOwnerSlots);
         menu->state = 0;
         break;
     }

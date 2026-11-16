@@ -12,9 +12,9 @@ void textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_00180310(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const char *format, ...);
 void FUN_00185e84(s16 id, s32 x, s32 y, u32 layer, u32 a, u32 b);
 void statDrawClampedDelta(u32 unit, s16 id, s32 x, s32 y, u32 layer, u32 a);
-void FUN_004bd6b0(u32 unit, u16 id, s32 index);
+void partyRecordSetEquippedItemClampRank(u32 unit, u16 id, s32 index);
 s32 recordContainsPairedId(u32 unit, u16 id);
-u32 FUN_004bcbb4(u32 unit, u16 id);
+u32 skillGetAdjustedCost(u32 unit, u16 id);
 
 /* Draws one skill row of the skill screen: the skill's name, icon and cost, or the empty-slot label. */
 void FUN_003c33e8(SkillSlotScreen *screen, s32 index, u32 unit, s32 count, s32 x, s32 y, f32 effect)
@@ -40,11 +40,11 @@ void FUN_003c33e8(SkillSlotScreen *screen, s32 index, u32 unit, s32 count, s32 x
     const SpriteInfo *icon = reinterpret_cast<const SpriteInfo *>(asdTMTexTableEntryAt(0x1a, 0x177));
     FUN_00185e84(screen->slots[index], icon->x + x, icon->y + y, 0x74, 0, 0);
     if (recordContainsPairedId(unit, screen->slots[index]) == 0) {
-        FUN_004bd6b0(unit, screen->slots[index], index);
+        partyRecordSetEquippedItemClampRank(unit, screen->slots[index], index);
     }
     statDrawClampedDelta(unit, screen->slots[index], icon->x + x, icon->y + y, 0x74, 0);
     const SpriteInfo *cost = reinterpret_cast<const SpriteInfo *>(asdTMTexTableEntryAt(0x1a, 0x17c));
-    FUN_00180310(1, cost->x + x, cost->y + y, 1, 4, 0x79, "%d", FUN_004bcbb4(unit, screen->slots[index]));
+    FUN_00180310(1, cost->x + x, cost->y + y, 1, 4, 0x79, "%d", skillGetAdjustedCost(unit, screen->slots[index]));
 }
 
 } /* extern "C" */

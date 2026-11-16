@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e59f8(int, int, int);
+int memcpySrcFirst(int, int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_3: 3 slot(s), 12 byte(s) */
@@ -17,7 +17,7 @@ typedef struct {
 extern romwright_code *DAT_005b3d8c; /* 0x5b3d8c */
 extern romwright_code *DAT_005b3d90; /* 0x5b3d90 */
 
-/* Supplied declaration required: FUN_002e59f8. */
+/* Supplied declaration required: memcpySrcFirst. */
 
 
 void FUN_00341968(short *param_1,int param_2,int param_3)
@@ -69,7 +69,7 @@ void FUN_00341968(short *param_1,int param_2,int param_3)
         for (temp_v3 = 0; *(short *)(temp_v2 + temp_v3 * 2) != 0; temp_v3 = temp_v3 + 1) {
         }
         if (param_3 == 0) {
-          FUN_002e59f8(temp_v2,param_2 + temp_v6 * 2,temp_v3 << 1);
+          memcpySrcFirst(temp_v2,param_2 + temp_v6 * 2,temp_v3 << 1);
         }
         temp_v6 = temp_v6 + temp_v3;
       }
@@ -81,7 +81,7 @@ void FUN_00341968(short *param_1,int param_2,int param_3)
         for (temp_v3 = 0; *(short *)(temp_v2 + temp_v3 * 2) != 0; temp_v3 = temp_v3 + 1) {
         }
         if (param_3 == 0) {
-          FUN_002e59f8(temp_v2,param_2 + temp_v6 * 2,temp_v3 << 1);
+          memcpySrcFirst(temp_v2,param_2 + temp_v6 * 2,temp_v3 << 1);
         }
         temp_v6 = temp_v6 + temp_v3;
       }

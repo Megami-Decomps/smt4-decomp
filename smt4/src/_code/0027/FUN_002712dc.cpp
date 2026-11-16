@@ -74,7 +74,7 @@ int FUN_002562e4(...);
 int partyApplyNonlethalAilmentDamage(...);
 int FUN_0027f48c(...);
 int FUN_0027f848(void);
-int FUN_0027f958(...);
+int padGetNormalizedAnalogStick(...);
 int lmapSetSceneId(...);
 int mapSelectContainingRegions(void);
 int FUN_002804ec(...);
@@ -106,7 +106,7 @@ extern unsigned char DAT_00404504; /* 0x404504 */
 extern unsigned char DAT_004045a4; /* 0x4045a4 */
 extern unsigned char DAT_00404644; /* 0x404644 */
 extern unsigned char DAT_004046e4; /* 0x4046e4 */
-extern unsigned int DAT_00407ed0; /* 0x407ed0 */
+extern unsigned int g_sinCosTable; /* 0x407ed0 */
 extern unsigned int DAT_00407ed4; /* 0x407ed4 */
 extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
@@ -243,7 +243,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_0027f48c. */
 /* Supplied declaration required: FUN_0027f848. */
 /* Supplied declaration required: FUN_0027f94c. */
-/* Supplied declaration required: FUN_0027f958. */
+/* Supplied declaration required: padGetNormalizedAnalogStick. */
 /* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: FUN_0027fae4. */
 /* Supplied declaration required: FUN_0027fc14. */
@@ -462,7 +462,7 @@ void FUN_002712dc(void)
       }
       temp_v30 = *(unsigned long long *)(g_lmapScene + 10);
       temp_v32 = CONCAT44(temp_v35,g_lmapScene[0xc]);
-      FUN_0027f958(&fStack_64,&fStack_68,0);
+      padGetNormalizedAnalogStick(&fStack_64,&fStack_68,0);
       piVar22 = g_lmapScene;
       *(unsigned char *)(g_lmapScene + 0x1b) = 0;
       if (DAT_0049fc84 == 0 || DAT_0049fc84 == 3) {
@@ -865,7 +865,7 @@ void FUN_002712dc(void)
             lmapSetSceneId(temp_v6);
           }
           else {
-            FUN_0027f958(&fStack_5c,&fStack_58,0);
+            padGetNormalizedAnalogStick(&fStack_5c,&fStack_58,0);
             if (DAT_0049fb34 != 0) {
               if (DAT_0049fb34 == 1) {
                 if (g_lmapScene[2] == 5) {
@@ -2361,7 +2361,7 @@ LAB_002e94f0:
       temp_v7 = g_lmapScene[2];
       g_lmapScene[2] = temp_v7 + 1;
       if ((temp_v7 + 1 < 0x12) ||
-         ((((FUN_0027f958((int)&uStack_54 + 4,&uStack_4c,0), (*(unsigned int *)((unsigned char *)&uStack_54 + 4)) < 0xbf000001 &&
+         ((((padGetNormalizedAnalogStick((int)&uStack_54 + 4,&uStack_4c,0), (*(unsigned int *)((unsigned char *)&uStack_54 + 4)) < 0xbf000001 &&
             ((int)(*(unsigned int *)((unsigned char *)&uStack_54 + 4)) < 0x3f000001)) && ((unsigned int)uStack_4c < 0xbf000001)) &&
           (((int)(unsigned int)uStack_4c < 0x3f000001 && (g_lmapScene[2] < 0x1f)))))) {
         FUN_002804ec(g_lmapScene + 10);
@@ -3819,7 +3819,7 @@ LAB_002d472c:
       }
       else if (temp_v7 == 0x14) {
         g_lmapScene[2] = g_lmapScene[2] + 1;
-        FUN_0027f958(&uStack_198,temp_v40,0);
+        padGetNormalizedAnalogStick(&uStack_198,temp_v40,0);
         if ((((0xbf000000 < uStack_198) || ((int)uStack_198 >= 0x3f000001)) ||
             (0xbf000000 < temp_v40[0])) ||
            (((int)temp_v40[0] >= 0x3f000001 ||
@@ -3905,7 +3905,7 @@ LAB_002d472c:
           g_lmapScene[2] = g_lmapScene[2] + 1;
           fStack_28 = temp_v35;
           fStack_24 = temp_v20;
-          FUN_0027f958(afStack_1a4,&uStack_1ac,0);
+          padGetNormalizedAnalogStick(afStack_1a4,&uStack_1ac,0);
           if ((((0xbf000000 < (unsigned int)afStack_1a4[0]) || ((int)afStack_1a4[0] >= 0x3f000001)) ||
               (0xbf000000 < uStack_1ac)) || ((int)uStack_1ac >= 0x3f000001)) {
             __hardfp_atan2f();
@@ -5053,15 +5053,15 @@ LAB_0027142c:
       temp_v26 = (float)VectorUnsignedToFloat(temp_v24 & 0xffff,(unsigned char)(temp_v5 >> 0x16) & 3);
       temp_v24 = temp_v25 & 0xff;
       temp_v21 = (float)VectorUnsignedToFloat(temp_v25 & 0xffff,(unsigned char)(temp_v5 >> 0x16) & 3);
-      temp_v28 = (float)(&DAT_00407ed0)[temp_v12 * 4] +
+      temp_v28 = (float)(&g_sinCosTable)[temp_v12 * 4] +
                (184.8889f - temp_v27) * (float)(&DAT_00407ed8)[temp_v12 * 4];
       temp_v22 = (float)(&DAT_00407ed4)[temp_v12 * 4] +
                (184.8889f - temp_v27) * (float)(&DAT_00407edc)[temp_v12 * 4];
-      temp_v27 = (float)(&DAT_00407ed0)[temp_v23 * 4] +
+      temp_v27 = (float)(&g_sinCosTable)[temp_v23 * 4] +
                (temp_v20 - temp_v26) * (float)(&DAT_00407ed8)[temp_v23 * 4];
       temp_v26 = (float)(&DAT_00407ed4)[temp_v23 * 4] +
                (temp_v20 - temp_v26) * (float)(&DAT_00407edc)[temp_v23 * 4];
-      temp_v20 = (float)(&DAT_00407ed0)[temp_v24 * 4] +
+      temp_v20 = (float)(&g_sinCosTable)[temp_v24 * 4] +
                (temp_v29 - temp_v21) * (float)(&DAT_00407ed8)[temp_v24 * 4];
       temp_v29 = (float)(&DAT_00407ed4)[temp_v24 * 4] +
                (temp_v29 - temp_v21) * (float)(&DAT_00407edc)[temp_v24 * 4];
@@ -5097,15 +5097,15 @@ LAB_0027142c:
       temp_v22 = (float)VectorUnsignedToFloat(temp_v24 & 0xffff,(unsigned char)(temp_v5 >> 0x16) & 3);
       temp_v24 = temp_v25 & 0xff;
       temp_v21 = (float)VectorUnsignedToFloat(temp_v25 & 0xffff,(unsigned char)(temp_v5 >> 0x16) & 3);
-      temp_v26 = (float)(&DAT_00407ed0)[temp_v12 * 4] +
+      temp_v26 = (float)(&g_sinCosTable)[temp_v12 * 4] +
                (temp_v27 - temp_v28) * (float)(&DAT_00407ed8)[temp_v12 * 4];
       temp_v28 = (float)(&DAT_00407ed4)[temp_v12 * 4] +
                (temp_v27 - temp_v28) * (float)(&DAT_00407edc)[temp_v12 * 4];
-      temp_v27 = (float)(&DAT_00407ed0)[temp_v23 * 4] +
+      temp_v27 = (float)(&g_sinCosTable)[temp_v23 * 4] +
                (temp_v20 - temp_v22) * (float)(&DAT_00407ed8)[temp_v23 * 4];
       temp_v22 = (float)(&DAT_00407ed4)[temp_v23 * 4] +
                (temp_v20 - temp_v22) * (float)(&DAT_00407edc)[temp_v23 * 4];
-      temp_v20 = (float)(&DAT_00407ed0)[temp_v24 * 4] +
+      temp_v20 = (float)(&g_sinCosTable)[temp_v24 * 4] +
                (temp_v29 - temp_v21) * (float)(&DAT_00407ed8)[temp_v24 * 4];
       temp_v29 = (float)(&DAT_00407ed4)[temp_v24 * 4] +
                (temp_v29 - temp_v21) * (float)(&DAT_00407edc)[temp_v24 * 4];

@@ -11,19 +11,19 @@ typedef struct GameDataFlags {
 } GameDataFlags;
 
 extern GameDataFlags g_gameDataBlocks;
-extern void FUN_002c411c(void);
+extern void sleepModeSetEnabled(void);
 
-/* Clears the given bits of the flag word at +0x14, records whether any is left and refreshes through FUN_002c411c. */
+/* Clears the given bits of the flag word at +0x14, records whether any is left and refreshes through sleepModeSetEnabled. */
 void gameDataFlagsClearAndRefresh(u32 mask)
 {
     g_gameDataBlocks.flags &= ~mask;
     if (g_gameDataBlocks.flags != 0) {
         g_gameDataBlocks.noFlags = 0;
-        FUN_002c411c();
+        sleepModeSetEnabled();
         return;
     }
     g_gameDataBlocks.noFlags = 1;
-    FUN_002c411c();
+    sleepModeSetEnabled();
 }
 
 } /* extern "C" */

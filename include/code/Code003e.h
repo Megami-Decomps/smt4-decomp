@@ -12,6 +12,6 @@ void FUN_003e7840(void);
 
 u32 FUN_003ecd94(u8 *owner);
 
-void FUN_003ee0c0(void *manager);
+void btlSlotManagerResetStates(void *manager);
 
 } /* extern "C" */

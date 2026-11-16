@@ -11,7 +11,7 @@ struct WaveEntry {
     /* 0x0c */ f32 unk0c;
 };
 
-extern WaveEntry DAT_00536d14[256];
+extern WaveEntry g_sinCosTable[256];
 
 f32 FUN_001b4030(f32 value, f32 period);
 
@@ -24,7 +24,7 @@ f32 FUN_001a1ee0(f32 x)
         phase = FUN_001b4030(phase, 65536.0f);
     }
     u16 index = (u32)phase;
-    const WaveEntry *table = DAT_00536d14;
+    const WaveEntry *table = g_sinCosTable;
     f32 fraction = phase - (f32)index;
     const WaveEntry *entry = &table[index & 0xff];
     if (x < 0.0f)

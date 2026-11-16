@@ -15,7 +15,7 @@ struct BattleResourceLookupView { u8 unk00[0x28]; u32 attributes; };
 struct BattleItemResourceView { u8 unk00[0x62]; u16 resourceId; };
 extern "C" {
 extern BattleResourceOwner *DAT_00435d18;
-BattleActionDescription FUN_00247478(BtlMainState *, BtlEntry *);
+BattleActionDescription btlEntryBuildSummary(BtlMainState *, BtlEntry *);
 BattleItemResourceView *dataTable08Sub1GetRecord(u32);
 void aocEntryBlockStore(BattleResourceOwner *, u32, u32, s32, u32);
 void objectSetResultFromLookup(BattleResourceOwner *, u32, u32, u32);
@@ -30,8 +30,8 @@ void FUN_003cee94(BtlMainState **battle, ActionKindSelection *selection)
     if (kind == 1) {
         if (reinterpret_cast<BtlEntry *>(selection->entry)->flags & 0x2A)
             enabled = 0;
-        u16 id = FUN_00247478(*battle, reinterpret_cast<BtlEntry *>(selection->entry)).id;
-        u8 category = FUN_00247478(*battle, reinterpret_cast<BtlEntry *>(selection->entry)).category;
+        u16 id = btlEntryBuildSummary(*battle, reinterpret_cast<BtlEntry *>(selection->entry)).id;
+        u8 category = btlEntryBuildSummary(*battle, reinterpret_cast<BtlEntry *>(selection->entry)).category;
         aocEntryBlockStore(DAT_00435d18, category, enabled, 0, id);
         return;
     }

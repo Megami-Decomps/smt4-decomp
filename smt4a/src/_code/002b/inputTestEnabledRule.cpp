@@ -15,7 +15,7 @@ struct InputState {
 
 extern "C" {
 extern InputRule DAT_0053d740[31];
-extern InputMode DAT_005b4000;
+extern InputMode g_padInputState;
 extern InputState DAT_0063fff0;
 extern InputState DAT_0063ffd0;
 
@@ -32,9 +32,9 @@ bool inputTestEnabledRule(u32 index)
         return false;
     }
     InputState *input;
-    if ((DAT_005b4000.flags & 1) != 0) {
+    if ((g_padInputState.flags & 1) != 0) {
         input = &DAT_0063fff0;
-    } else if ((DAT_005b4000.flags & 2) != 0) {
+    } else if ((g_padInputState.flags & 2) != 0) {
         input = &DAT_0063fff0;
     } else {
         input = &DAT_0063ffd0;

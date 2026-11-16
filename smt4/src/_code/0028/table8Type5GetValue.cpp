@@ -9,7 +9,7 @@ typedef struct AocSystemView {
     /* 0x3DC */ s32 lookupEnabled;
 } AocSystemView;
 
-Table8Type5Record *FUN_002b4504(AocSystemView *system, u32 id);
+Table8Type5Record *aocTable8Type5FindRecord(AocSystemView *system, u32 id);
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 compareLookupKey(const void *left, const void *right);
 
@@ -22,7 +22,7 @@ static __inline Table8Type5Record *table8Type5Lookup(u32 id)
     Table8Type5Record key;
     key.id = id;
     if (g_aocSystem->lookupEnabled != 0) {
-        Table8Type5Record *record = FUN_002b4504(g_aocSystem, id);
+        Table8Type5Record *record = aocTable8Type5FindRecord(g_aocSystem, id);
         if (record != NULL) {
             return record;
         }

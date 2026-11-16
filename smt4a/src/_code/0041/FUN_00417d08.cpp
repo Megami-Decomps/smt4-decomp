@@ -9,7 +9,7 @@ struct PartyModeOwner {
 
 extern "C" {
 s32 gameFlagEntryGetBit(u16 id, u32 bit);
-s32 FUN_001bd100(u16 id);
+s32 dataTable1bOr1cRecordHasFlag1(u16 id);
 s32 partyEntryGetBit5(u16 id);
 s32 partyEntryGetBit6(u16 id);
 s32 idIsAtLeast350(u16 id);
@@ -19,7 +19,7 @@ void gameFlagClearModeBits(u16 id);
 void FUN_00417d08(PartyModeOwner *owner)
 {
     if (owner->inParty) {
-        if (gameFlagEntryGetBit(owner->unitId, 0) && FUN_001bd100(owner->unitId) &&
+        if (gameFlagEntryGetBit(owner->unitId, 0) && dataTable1bOr1cRecordHasFlag1(owner->unitId) &&
             (partyEntryGetBit5(owner->unitId) || partyEntryGetBit6(owner->unitId))) {
             gameFlagClearModeBits(owner->unitId);
         }
@@ -28,7 +28,7 @@ void FUN_00417d08(PartyModeOwner *owner)
             gameFlagClearModeBits(owner->unitId);
         }
     } else {
-        if (gameFlagEntryGetBit(owner->unitId, 0) && !FUN_001bd100(owner->unitId) &&
+        if (gameFlagEntryGetBit(owner->unitId, 0) && !dataTable1bOr1cRecordHasFlag1(owner->unitId) &&
             (partyEntryGetBit5(owner->unitId) || partyEntryGetBit6(owner->unitId))) {
             gameFlagClearModeBits(owner->unitId);
         }

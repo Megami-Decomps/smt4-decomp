@@ -5,7 +5,7 @@
 
 extern "C" {
 BtlEntry* btlMainFindEntryByListedId(BtlMainState* battle, u32 id);
-void FUN_0022abe0(const BtlEntry* entry, u16* skills);
+void btlEntryGetPassiveSkillIds(const BtlEntry* entry, u16* skills);
 
 // Apply the unit's passive percentage total when the target has the corresponding flag.
 f32 FUN_003be670(u32 sourceId, u32 targetId)
@@ -19,7 +19,7 @@ f32 FUN_003be670(u32 sourceId, u32 targetId)
         BtlEntry* target = btlMainFindEntryByListedId(btlGetMainState(), targetId);
         if (target != NULL && (target->flags & 0x100) != 0) {
             u16 skills[10] = {0};
-            FUN_0022abe0(source, skills);
+            btlEntryGetPassiveSkillIds(source, skills);
             u16 total = 0;
             for (s32 i = 0; i < 9; ++i) {
                 if (skills[i] != 0) {

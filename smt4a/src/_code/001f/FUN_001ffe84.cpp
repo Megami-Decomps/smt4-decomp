@@ -16,7 +16,7 @@ int buttonHelpScriptStart(...);
 int FUN_0031f208(...);
 int sortMenuAcquire(...);
 int flagBanksResetPendingState(...);
-int FUN_003343f0(...);
+int gameGlobalsSetMenuOpenFlag(...);
 int FUN_003450d4(...);
 int FUN_003da8f4(...);
 
@@ -38,7 +38,7 @@ int FUN_003344b4(...);
 int FUN_0035dbd4(...);
 int FUN_003d386c(int);
 int FUN_003df57c(...);
-int FUN_004bcbb4(...);
+int skillGetAdjustedCost(...);
 
 /* stack frame of void: 4 slot(s), 13 byte(s) */
 typedef struct {
@@ -72,8 +72,8 @@ extern int FUN_0022e714(void);
 extern int FUN_002684d0(int, int);
 /* Supplied declaration required: campShowSelectedEntryHelp. */
 extern int resourceRunOperationIfUnblocked(int);
-extern unsigned int FUN_002a4878(int);
-extern int FUN_002a4894(int);
+extern unsigned int listCursorGetRowOfChildIfUnblocked(int);
+extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: statusPanelSetOpen. */
 extern int FUN_002a7410(void);
 /* Supplied declaration required: campTouchRegionsRemoveGroup. */
@@ -87,7 +87,7 @@ extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: FUN_0031f718. */
 /* Supplied declaration required: flagBanksResetPendingState. */
 /* Supplied declaration required: statusDisplayBindUnitRecord. */
-/* Supplied declaration required: FUN_003343f0. */
+/* Supplied declaration required: gameGlobalsSetMenuOpenFlag. */
 /* Supplied declaration required: FUN_003344b4. */
 /* Supplied declaration required: FUN_003450d4. */
 extern int uiSearchPrimary(int);
@@ -96,7 +96,7 @@ extern int FUN_0035db94(void);
 /* Supplied declaration required: FUN_003d386c. */
 /* Supplied declaration required: FUN_003da8f4. */
 /* Supplied declaration required: FUN_003df57c. */
-/* Supplied declaration required: FUN_004bcbb4. */
+/* Supplied declaration required: skillGetAdjustedCost. */
 
 
 void FUN_001ffe84(void)
@@ -125,18 +125,18 @@ void FUN_001ffe84(void)
       return;
     }
     temp_v4 = resourceRunOperationIfUnblocked(g_camp + 0x1ec);
-    temp_v5 = FUN_002a4894(temp_v3 + 0x1ec);
+    temp_v5 = listCursorGetRowIfUnblocked(temp_v3 + 0x1ec);
     temp_v3 = temp_v3 + (temp_v5 + temp_v4) * 8;
     if (*(int *)(temp_v3 + 0x1b74) < 0) {
       temp_v3 = FUN_003df57c(*(unsigned int *)(temp_v3 + 0x1b70),1);
     }
     else {
       temp_v7 = gameGetSlotRecord();
-      temp_v3 = FUN_004bcbb4(temp_v7,*(unsigned int *)(temp_v3 + 0x1b70));
+      temp_v3 = skillGetAdjustedCost(temp_v7,*(unsigned int *)(temp_v3 + 0x1b70));
     }
     FUN_003344b4(0,-temp_v3);
     temp_v3 = resourceRunOperationIfUnblocked(temp_v8 + 0x1ec);
-    temp_v4 = FUN_002a4894(temp_v8 + 0x1ec);
+    temp_v4 = listCursorGetRowIfUnblocked(temp_v8 + 0x1ec);
     if (g_camp != 0) {
       *(int *)(g_camp + 0xbc) = temp_v3 + temp_v4;
     }
@@ -171,7 +171,7 @@ void FUN_001ffe84(void)
   }
   FUN_003d386c(0);
   temp_v3 = resourceRunOperationIfUnblocked(temp_v8 + 0x1ec);
-  temp_v4 = FUN_002a4894(temp_v8 + 0x1ec);
+  temp_v4 = listCursorGetRowIfUnblocked(temp_v8 + 0x1ec);
   temp_v3 = temp_v3 + temp_v4;
   temp_v0 = 0;
   if ((*(char *)(temp_v8 + 0x24d) != '\0') || (*(char *)(temp_v8 + 0x24c) != '\0')) {
@@ -193,14 +193,14 @@ void FUN_001ffe84(void)
     temp_v4 = g_camp;
     if (temp_v5 == 0) {
       temp_v5 = resourceRunOperationIfUnblocked(g_camp + 0x1ec);
-      temp_v6 = FUN_002a4894(temp_v4 + 0x1ec);
+      temp_v6 = listCursorGetRowIfUnblocked(temp_v4 + 0x1ec);
       temp_v4 = temp_v4 + (temp_v6 + temp_v5) * 8;
       if (*(int *)(temp_v4 + 0x1b74) < 0) {
         temp_v4 = FUN_003df57c(*(unsigned int *)(temp_v4 + 0x1b70),1);
       }
       else {
         temp_v7 = gameGetSlotRecord();
-        temp_v4 = FUN_004bcbb4(temp_v7,*(unsigned int *)(temp_v4 + 0x1b70));
+        temp_v4 = skillGetAdjustedCost(temp_v7,*(unsigned int *)(temp_v4 + 0x1b70));
       }
       FUN_003344b4(0,-temp_v4);
       if (g_camp != 0) {
@@ -256,7 +256,7 @@ void FUN_001ffe84(void)
   FUN_003450d4(temp_v4,temp_v7,temp_v8 + 0x1b3e,(int)*(short *)(temp_v8 + 0x1b34),
                (int)*(short *)(temp_v8 + 0x1b36),(int)*(short *)(temp_v8 + 0x1b38),temp_v9,0,1);
   if (temp_v4 != 0) {
-    temp_v7 = FUN_002a4878(temp_v8 + 0x40);
+    temp_v7 = listCursorGetRowOfChildIfUnblocked(temp_v8 + 0x40);
     FUN_003da8f4((int)*(char *)(temp_v8 + 0xa4),temp_v7);
     campShowSelectedEntryHelp();
     return;
@@ -264,7 +264,7 @@ void FUN_001ffe84(void)
   temp_v4 = temp_v8 + 0x1ec;
   FUN_00228b04(temp_v4,1);
   if (temp_v4 != 0) {
-    temp_v7 = FUN_002a4878(temp_v8 + 0x40);
+    temp_v7 = listCursorGetRowOfChildIfUnblocked(temp_v8 + 0x40);
     FUN_003da8f4((int)*(char *)(temp_v8 + 0xa4),temp_v7);
     campShowSelectedEntryHelp();
     return;
@@ -310,7 +310,7 @@ void FUN_001ffe84(void)
         }
         else {
           temp_v8 = gameGetSlotRecord();
-          temp_v1 = FUN_004bcbb4(temp_v8,*piVar11);
+          temp_v1 = skillGetAdjustedCost(temp_v8,*piVar11);
           temp_v1 = *(short *)(temp_v8 + 0x2c) - temp_v1;
           *(short *)(temp_v8 + 0x2c) = temp_v1;
         }
@@ -330,7 +330,7 @@ void FUN_001ffe84(void)
         buttonHelpScriptStart(0);
         campChangeState(0x47);
         sysPlaySe(0xa0);
-        FUN_003343f0(1);
+        gameGlobalsSetMenuOpenFlag(1);
         return;
       }
       if (*piVar11 == 0x93) {
@@ -343,7 +343,7 @@ void FUN_001ffe84(void)
         }
         else {
           temp_v8 = gameGetSlotRecord();
-          temp_v1 = FUN_004bcbb4(temp_v8,*piVar11);
+          temp_v1 = skillGetAdjustedCost(temp_v8,*piVar11);
           temp_v1 = *(short *)(temp_v8 + 0x2c) - temp_v1;
           *(short *)(temp_v8 + 0x2c) = temp_v1;
         }
@@ -363,7 +363,7 @@ void FUN_001ffe84(void)
         buttonHelpScriptStart(4);
         campChangeState(0x47);
         sysPlaySe(0xa0);
-        FUN_003343f0(1);
+        gameGlobalsSetMenuOpenFlag(1);
         return;
       }
       campTouchRegionsRemoveGroup(temp_v8 + 0x1ec,1);

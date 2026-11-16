@@ -9,7 +9,7 @@ typedef struct FlagRecord {
 } FlagRecord;
 
 u32 scrGetArg(u32 index);
-s32 FUN_002c2758(u16 id);
+s32 gameDataStatusFlagGet(u16 id);
 FlagRecord *FUN_003de92c(u16 id);
 s32 gameDataSetStatusFlag(u16 id, s32 state);
 
@@ -21,7 +21,7 @@ u32 FUN_0038b21c(void)
     FlagRecord *record;
     s32 i;
 
-    if (FUN_002c2758(id) == 1) {
+    if (gameDataStatusFlagGet(id) == 1) {
         record = FUN_003de92c(id);
         if (record != NULL) {
             gameDataSetStatusFlag(id, 2);

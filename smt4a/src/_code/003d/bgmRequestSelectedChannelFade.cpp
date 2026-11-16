@@ -2,7 +2,7 @@
 
 extern "C" {
 extern BgmChannelSelection g_resourceSharedFlag;
-extern BgmRequestChannel DAT_0061951c;
+extern BgmRequestChannel g_bgmRequestChannels;
 extern BgmRequestChannel DAT_0061953c;
 int jyoucyuGetTableEntry(u32 index);
 
@@ -13,7 +13,7 @@ void bgmRequestSelectedChannelFade(u32 frames)
     }
     BgmRequestChannel* channel = NULL;
     if (g_resourceSharedFlag.selected == 0) {
-        channel = &DAT_0061951c;
+        channel = &g_bgmRequestChannels;
     } else if (g_resourceSharedFlag.selected == 1) {
         channel = &DAT_0061953c;
     }

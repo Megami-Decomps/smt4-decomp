@@ -6,12 +6,12 @@ extern "C" {
 
 int transferQueueForwardNext(int);
 int FUN_0050cc3c(int, unsigned int *, unsigned int *);
-int FUN_0050d2cc(void);
+int resourceManagerGetValueByIndex(void);
 
 /* Supplied declaration required: transferQueueForwardNext. */
 /* Supplied declaration required: FUN_0050cc3c. */
 extern unsigned int *FUN_0050cf94(int);
-/* Supplied declaration required: FUN_0050d2cc. */
+/* Supplied declaration required: resourceManagerGetValueByIndex. */
 
 
 unsigned int
@@ -29,7 +29,7 @@ FUN_00514088(int param_1,unsigned int param_2,unsigned int *param_3,unsigned int
     return 1;
   }
   temp_v0 = *(int *)(param_1 + 4);
-  FUN_0050d2cc();
+  resourceManagerGetValueByIndex();
   temp_v2 = *(int *)(temp_v0 + 0x10);
   if (temp_v2 != 0) {
     temp_v0 = *(int *)(temp_v2 + 0x38);

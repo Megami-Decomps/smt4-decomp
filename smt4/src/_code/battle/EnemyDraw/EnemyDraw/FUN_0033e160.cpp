@@ -70,11 +70,11 @@ typedef struct {
     unsigned int sp120; /* 0x120: local_120 */
 } param_6_stack;
 
-extern unsigned int DAT_00407ed0; /* 0x407ed0 */
+extern unsigned int g_sinCosTable; /* 0x407ed0 */
 extern unsigned int DAT_00407ed4; /* 0x407ed4 */
 extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
-extern float DAT_00433d98; /* 0x433d98 */
+extern float g_enemyDrawVerticalOffset; /* 0x433d98 */
 extern int g_titleScene; /* 0x44ea00 */
 extern unsigned int _ZGVZN2nw4math5MTX448IdentityEvE8identity; /* 0x476638 */
 extern unsigned int _ZZN2nw4math5MTX448IdentityEvE8identity; /* 0x4efd9c */
@@ -199,7 +199,7 @@ void FUN_0033e160(fn_0033e160_arg0 *param_1,int param_2,int param_3,unsigned int
   if (param_1->field_0x10 != 0) {
     temp_v50 = *param_4;
     temp_v52 = param_4[2];
-    temp_v51 = (float)param_4[1] + DAT_00433d98;
+    temp_v51 = (float)param_4[1] + g_enemyDrawVerticalOffset;
     temp_v1 = (unsigned int)*(unsigned short *)(param_1->field_0x24 + param_2 * 4);
     temp_v5 = (temp_v1 - 1) + (unsigned int)*(unsigned short *)(param_1->field_0x24 + param_2 * 4 + 2);
     temp_v2 = temp_v1;
@@ -254,13 +254,13 @@ void FUN_0033e160(fn_0033e160_arg0 *param_1,int param_2,int param_3,unsigned int
     temp_v1 = temp_v10 & 0xff;
     temp_v15 = (float)VectorUnsignedToFloat(temp_v10 & 0xffff,(unsigned char)(temp_v2 >> 0x16) & 3);
     temp_v12 = (float)VectorUnsignedToFloat(temp_v11 & 0xffff,(unsigned char)(temp_v2 >> 0x16) & 3);
-    temp_v13 = (float)(&DAT_00407ed0)[temp_v3 * 4] + (0.0f - temp_v16) * (float)(&DAT_00407ed8)[temp_v3 * 4];
-    temp_v14 = (float)(&DAT_00407ed0)[temp_v1 * 4] +
+    temp_v13 = (float)(&g_sinCosTable)[temp_v3 * 4] + (0.0f - temp_v16) * (float)(&DAT_00407ed8)[temp_v3 * 4];
+    temp_v14 = (float)(&g_sinCosTable)[temp_v1 * 4] +
              (temp_v9 - temp_v15) * (float)(&DAT_00407ed8)[temp_v1 * 4];
     temp_v16 = (float)(&DAT_00407ed4)[temp_v3 * 4] + (0.0f - temp_v16) * (float)(&DAT_00407edc)[temp_v3 * 4];
     temp_v42 = (float)(&DAT_00407ed4)[temp_v1 * 4] +
                (temp_v9 - temp_v15) * (float)(&DAT_00407edc)[temp_v1 * 4];
-    temp_v9 = (float)(&DAT_00407ed0)[temp_v7 * 4] +
+    temp_v9 = (float)(&g_sinCosTable)[temp_v7 * 4] +
              (0.0f - temp_v12) * (float)(&DAT_00407ed8)[temp_v7 * 4];
     temp_v12 = (float)(&DAT_00407ed4)[temp_v7 * 4] +
              (0.0f - temp_v12) * (float)(&DAT_00407edc)[temp_v7 * 4];

@@ -7,8 +7,8 @@
 
 extern "C" {
 
-int FUN_003fd8dc(...);
-int FUN_00406768(...);
+int elementListSetShaderColor(...);
+int modelOwnerSetSlotValueAndActivate(...);
 
 int asdSequenceRequest(...);
 int messageSetScriptDisplayMode(void);
@@ -20,9 +20,9 @@ int messageSetMode(...);
 int asdCameraInitAreas(void);
 int ptrListRemoveClearOwner(...);
 int resourceOwnerReleaseAndReset(...);
-int FUN_001f3eec(...);
+int floatInterpolateOverDuration(...);
 int FUN_00214da4(void);
-int FUN_0022677c(...);
+int titleRestartSlotState3(...);
 int gameStateClearFlag(void);
 int naviMainSetFlagsAndActivate(...);
 int mapPlaceSet(...);
@@ -54,7 +54,7 @@ int campCommonBgAcquire(void);
 int placeWinCreate(void);
 int campButtonHelpAcquire(void);
 int soundChannelRequestIfEnabled(...);
-int FUN_003d54f8(...);
+int titleSetSlotValueState2(...);
 int controllerGetSourceValue(...);
 int controllerTargetNodeStart(...);
 int linkHolderApplyFirst(...);
@@ -77,7 +77,7 @@ int controllerSetPosition(...);
 int controllerSetPositionXyz(...);
 int modelPlayClip(...);
 int resourceOwnerLoadFileSync(void);
-int FUN_0040aad4(unsigned int, int);
+int moriModelContentLoadBody(unsigned int, int);
 int FUN_0040ab7c(unsigned int, int);
 int handleRegistryRegisterObject(int, unsigned int);
 int FUN_0040ae70(...);
@@ -149,14 +149,14 @@ extern int pairedAvailabilityGetState(unsigned int);
 /* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: resourceOwnerReleaseAndReset. */
 /* Supplied declaration required: FUN_001b4eb8. */
-/* Supplied declaration required: FUN_001f3eec. */
+/* Supplied declaration required: floatInterpolateOverDuration. */
 /* Supplied declaration required: slotSetRequest. */
 extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: placeWinStartText. */
 /* Supplied declaration required: FUN_00214da4. */
 extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: FUN_0022677c. */
+/* Supplied declaration required: titleRestartSlotState3. */
 /* Supplied declaration required: scrScriptProcessCreate. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int screenFadeIsBusy(void);
@@ -177,7 +177,7 @@ extern int FUN_00323bc4(unsigned int);
 /* Supplied declaration required: FUN_003d2158. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: soundChannelStopAll. */
-/* Supplied declaration required: FUN_003d54f8. */
+/* Supplied declaration required: titleSetSlotValueState2. */
 /* Supplied declaration required: controllerSelectionSetMode. */
 extern int linkHolderCallFirst(unsigned int);
 /* Supplied declaration required: controllerGetSourceValue. */
@@ -197,11 +197,11 @@ extern unsigned int *_ZN9Obj557ae8C1Ev(void);
 /* Supplied declaration required: _ZN9Obj557af8C1EPK21AsdAnimCameraResource. */
 /* Supplied declaration required: controllerSetPosition. */
 /* Supplied declaration required: controllerSetPositionXyz. */
-/* Supplied declaration required: FUN_003fd8dc. */
+/* Supplied declaration required: elementListSetShaderColor. */
 /* Supplied declaration required: modelPlayClip. */
-/* Supplied declaration required: FUN_00406768. */
+/* Supplied declaration required: modelOwnerSetSlotValueAndActivate. */
 /* Supplied declaration required: resourceOwnerLoadFileSync. */
-/* Supplied declaration required: FUN_0040aad4. */
+/* Supplied declaration required: moriModelContentLoadBody. */
 /* Supplied declaration required: FUN_0040ab7c. */
 extern unsigned int modelListInit(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
@@ -315,7 +315,7 @@ unsigned int FUN_00328838(void)
     }
     *(unsigned int *)(temp_v4 + 0x2c) = temp_v3;
     resourceOwnerLoadFileSync();
-    FUN_0040aad4(*(unsigned int *)(temp_v4 + 0x2c),0);
+    moriModelContentLoadBody(*(unsigned int *)(temp_v4 + 0x2c),0);
     FUN_0040ab7c(*(unsigned int *)(temp_v4 + 0x2c),0);
     FUN_0045b538(*(int *)(*(int *)(temp_v4 + 0x2c) + 0xc) + 0xc);
     temp_v3 = *(unsigned int *)(*(int *)(temp_v4 + 0x2c) + 4);
@@ -514,7 +514,7 @@ unsigned int FUN_00328838(void)
                                                 (unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v4 = (int)temp_v7;
             if ((temp_v4 >= 6) && (temp_v6 = pairedAvailabilityGetState(0), temp_v6 == 3)) {
-              FUN_003d54f8(0,8);
+              titleSetSlotValueState2(0,8);
             }
             if (temp_v4 != 0xb4) {
               if (temp_v4 != 0x13f) {
@@ -585,16 +585,16 @@ unsigned int FUN_00328838(void)
       *(unsigned char *)(temp_v0 + 0x550) = 1;
       *(unsigned int *)(temp_v0 + 0x554) = 0x88;
       controllerTargetNodeStart(*(unsigned int *)(temp_v0 + 0x28),0x1a);
-      FUN_003d54f8(0,10);
-      FUN_003d54f8(1,10);
+      titleSetSlotValueState2(0,10);
+      titleSetSlotValueState2(1,10);
     }
     else {
       controllerSelectionSetMode(temp_v0,1);
       *(unsigned char *)(temp_v0 + 0x550) = 1;
       *(unsigned int *)(temp_v0 + 0x554) = 0;
       controllerTargetNodeStart(*(unsigned int *)(temp_v0 + 0x28),0x1a);
-      FUN_003d54f8(0,0x14);
-      FUN_003d54f8(1,0x14);
+      titleSetSlotValueState2(0,0x14);
+      titleSetSlotValueState2(1,0x14);
     }
     *(unsigned int *)(temp_v0 + 8) = 10;
     *(unsigned int *)(temp_v0 + 0xc) = 0;
@@ -651,7 +651,7 @@ unsigned int FUN_00328838(void)
       linkHolderApplyFirst(*(unsigned int *)(temp_v0 + 0x28),0x13);
       *(unsigned char *)(temp_v0 + 0x550) = 0;
     }
-    FUN_0022677c(0,0xff);
+    titleRestartSlotState3(0,0xff);
     *(unsigned char *)(temp_v0 + 0x56c) = 0;
     *(unsigned char *)(temp_v0 + 0x578) = 0;
     *(unsigned char *)(temp_v0 + 0x584) = 0;
@@ -753,16 +753,16 @@ unsigned int FUN_00328838(void)
       temp_v4 = *(int *)(temp_v0 + 0x554) - 0x1e;
       VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v7 = 0.6f;
-      FUN_001f3eec(temp_v4);
+      floatInterpolateOverDuration(temp_v4);
       temp_v8 = 255.0f;
       temp_v4 = VectorFloatToUnsigned(temp_v7 * 255.0f,3);
-      FUN_003fd8dc(*(unsigned int *)(*(int *)(temp_v0 + 0x2c) + 4),8,temp_v4 * 0x1010100 + 0xff);
+      elementListSetShaderColor(*(unsigned int *)(*(int *)(temp_v0 + 0x2c) + 4),8,temp_v4 * 0x1010100 + 0xff);
       temp_v4 = *(int *)(temp_v0 + 0x554) - 0x1e;
       VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v7 = 0.1f;
-      FUN_001f3eec(temp_v4);
+      floatInterpolateOverDuration(temp_v4);
       temp_v4 = VectorFloatToUnsigned(temp_v7 * temp_v8,3);
-      FUN_00406768(*(unsigned int *)(g_handleRegistry + 4),0,temp_v4 * 0x1010100 + 0xff);
+      modelOwnerSetSlotValueAndActivate(*(unsigned int *)(g_handleRegistry + 4),0,temp_v4 * 0x1010100 + 0xff);
     }
     if (*(int *)(temp_v0 + 0x554) == 0x28) {
       sysPlayVoice(0x10000c6);

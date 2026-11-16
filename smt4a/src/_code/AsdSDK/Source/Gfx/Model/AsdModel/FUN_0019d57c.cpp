@@ -42,7 +42,7 @@ void FUN_0019d57c(AsdModelAttrModel *model, u8 *data)
                 if (rt_memcmp(cursor, DAT_0053d1a0, 7) != 0) {
                     break;
                 }
-                FUN_002e59f8(cursor, &block, sizeof(block));
+                memcpySrcFirst(cursor, &block, sizeof(block));
                 entry = (AsdEplEntry *)(cursor + sizeof(block));
                 if (i == j) {
                     break;
@@ -76,7 +76,7 @@ void FUN_0019d57c(AsdModelAttrModel *model, u8 *data)
                 if (rt_memcmp(cursor, DAT_0053d1a0, 7) != 0) {
                     break;
                 }
-                FUN_002e59f8(cursor, &block, sizeof(block));
+                memcpySrcFirst(cursor, &block, sizeof(block));
                 entry = (AsdEplEntry *)(cursor + sizeof(block));
                 if (i == j) {
                     break;

@@ -22,8 +22,8 @@ extern void statusDownSwitchTab(u32 value);
 extern void FUN_0023b45c(s32 flag);
 extern void FUN_002c8538(u8 value);
 extern void FUN_0033449c(s32 value);
-extern void FUN_00333f6c(void);
-extern void FUN_002bf4f4(u8 value);
+extern void gameGlobalsReleaseReference(void);
+extern void buttonHelpSetPanelState(u8 value);
 extern void sysPlaySe(u32 id);
 extern void campButtonHelpRelease(void);
 extern void scrScriptProcessDestroy(u32 process);
@@ -40,8 +40,8 @@ void sceneObjDestroy(SceneObj *scene)
     FUN_0023b45c(0);
     FUN_002c8538(0);
     FUN_0033449c(0);
-    FUN_00333f6c();
-    FUN_002bf4f4(0);
+    gameGlobalsReleaseReference();
+    buttonHelpSetPanelState(0);
     sysPlaySe(scene->unk42);
     campButtonHelpRelease();
     if (scene->proc1C != 0) {

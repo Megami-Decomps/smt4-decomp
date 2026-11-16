@@ -66,7 +66,7 @@ void campButtonHelpAcquire(void);
 void FUN_004930e4(s32 mode);
 void dataTable33Load(void *table);
 void resetFlagGroup1F(void *selection);
-void FUN_0022677c(u32 index, u32 value);
+void titleRestartSlotState3(u32 index, u32 value);
 void soundResetSpatialState(void);
 void placeWinCreate(void);
 
@@ -108,8 +108,8 @@ void FUN_004b6fc4(MikadoCameraWork *camera)
     camera->unk48[1] = 0;
     camera->unk48[2] = 0;
     camera->unk48[3] = 0;
-    FUN_0022677c(0, 0xFF);
-    FUN_0022677c(1, 0xFF);
+    titleRestartSlotState3(0, 0xFF);
+    titleRestartSlotState3(1, 0xFF);
     camera->cache = new (owner) MikadoImageCache;
     soundResetSpatialState();
     placeWinCreate();

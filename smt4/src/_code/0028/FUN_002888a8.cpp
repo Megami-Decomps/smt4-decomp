@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b0750(...);
+int uiDrawTableTextureSized(...);
 int gxResetColorQuadToWhite(void);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
@@ -26,7 +26,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002b0750. */
+/* Supplied declaration required: uiDrawTableTextureSized. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -108,10 +108,10 @@ void FUN_002888a8(int param_1,int param_2,int param_3,int param_4,unsigned int p
       }
       if (param_11 == 0) {
         if (temp_v5 < 1) {
-          FUN_002b0750(2,param_5,param_6,param_9,temp_v10,temp_v1 - 1,(int)psVar2[1],temp_v11);
+          uiDrawTableTextureSized(2,param_5,param_6,param_9,temp_v10,temp_v1 - 1,(int)psVar2[1],temp_v11);
         }
         else {
-          FUN_002b0750(2,param_5,param_6,param_9,temp_v10,temp_v1,(int)psVar2[1],temp_v11);
+          uiDrawTableTextureSized(2,param_5,param_6,param_9,temp_v10,temp_v1,(int)psVar2[1],temp_v11);
         }
       }
       temp_v5 = g_titleScene;
@@ -131,11 +131,11 @@ void FUN_002888a8(int param_1,int param_2,int param_3,int param_4,unsigned int p
       }
       temp_v10 = (unsigned int)((unsigned long long)param_10 >> 0x20);
       if (param_1 < 1) {
-        FUN_002b0750(2,param_5,param_7,(param_9 + temp_v1) - 1,(int)param_10,temp_v4 + 1,
+        uiDrawTableTextureSized(2,param_5,param_7,(param_9 + temp_v1) - 1,(int)param_10,temp_v4 + 1,
                      (int)*(short *)(*(int *)(temp_v0 + 0xc) + 2),temp_v10);
       }
       else {
-        FUN_002b0750(2,param_5,param_7,param_9 + temp_v1,(int)param_10,temp_v4,
+        uiDrawTableTextureSized(2,param_5,param_7,param_9 + temp_v1,(int)param_10,temp_v4,
                      (int)*(short *)(*(int *)(temp_v0 + 0xc) + 2),temp_v10);
       }
       temp_v1 = g_titleScene;
@@ -161,10 +161,10 @@ void FUN_002888a8(int param_1,int param_2,int param_3,int param_4,unsigned int p
       }
       if (param_11 == 0) {
         if (temp_v5 < 1) {
-          FUN_002b0750(2,param_5,param_6,param_9,temp_v10,temp_v7 - 1,(int)psVar2[1],temp_v11);
+          uiDrawTableTextureSized(2,param_5,param_6,param_9,temp_v10,temp_v7 - 1,(int)psVar2[1],temp_v11);
         }
         else {
-          FUN_002b0750(2,param_5,param_6,param_9,temp_v10,temp_v7,(int)psVar2[1],temp_v11);
+          uiDrawTableTextureSized(2,param_5,param_6,param_9,temp_v10,temp_v7,(int)psVar2[1],temp_v11);
         }
       }
       temp_v2 = g_titleScene;
@@ -184,11 +184,11 @@ void FUN_002888a8(int param_1,int param_2,int param_3,int param_4,unsigned int p
       }
       temp_v10 = (unsigned int)((unsigned long long)param_10 >> 0x20);
       if (temp_v5 < 1) {
-        FUN_002b0750(2,param_5,param_8,(param_9 + temp_v7) - 1,(int)param_10,temp_v1 + 1,
+        uiDrawTableTextureSized(2,param_5,param_8,(param_9 + temp_v7) - 1,(int)param_10,temp_v1 + 1,
                      (int)*(short *)(*(int *)(temp_v0 + 0xc) + 2),temp_v10);
       }
       else {
-        FUN_002b0750(2,param_5,param_8,param_9 + temp_v7,(int)param_10,temp_v1,
+        uiDrawTableTextureSized(2,param_5,param_8,param_9 + temp_v7,(int)param_10,temp_v1,
                      (int)*(short *)(*(int *)(temp_v0 + 0xc) + 2),temp_v10);
       }
       temp_v1 = g_titleScene;
@@ -208,7 +208,7 @@ void FUN_002888a8(int param_1,int param_2,int param_3,int param_4,unsigned int p
     if (param_1 == 0) {
       temp_v1 = 0;
     }
-    FUN_002b0750(2,param_5,param_6,param_9,temp_v10,temp_v1,(int)psVar2[1],temp_v11);
+    uiDrawTableTextureSized(2,param_5,param_6,param_9,temp_v10,temp_v1,(int)psVar2[1],temp_v11);
   }
   gxResetColorQuadToWhite();
   return;

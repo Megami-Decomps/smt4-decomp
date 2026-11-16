@@ -19,7 +19,7 @@ static const u32 sPlaceWinPacketC[28] = {
     1, 0, 0xfffffffd, 0, 0, 0xfffffffd, 0, 0xffffffff, 0, 0xffffffff, 0xffffffff, 0, 0xffffffff, 0,
     0, 0, 0xfffffffd, 1, 0, 0xfffffffd, 0, 0xffffffff, 0, 0xffffffff, 0xffffffff, 0, 0xffffffff, 0,
 };
-s32 FUN_0032a9fc(u32);
+s32 placeWinUpdate(u32);
 void placeWindowDrawLabel(void *);
 u32 taskCreateDraw(const char *, s32, s32, s32, TaskFunc, TaskFunc, void *, u32);
 void drawParameterBlockClear(void *);
@@ -36,7 +36,7 @@ void placeWinCreate()
     }
     PlaceWindow *window = g_placeWin;
     memClear(window, sizeof(PlaceWindow));
-    window->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("PlaceWin Calc"), 1, 0, 0, FUN_0032a9fc, NULL, NULL);
+    window->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("PlaceWin Calc"), 1, 0, 0, placeWinUpdate, NULL, NULL);
     taskCreateDraw("PlaceWin DrawUpLeft", 0x81, 0, 0, placeWindowDrawLabel, NULL, NULL, window->job);
     taskCreateDraw("PlaceWin DrawUpRight", 0xdf, 0, 0, placeWindowDrawLabel, NULL, NULL, window->job);
     window = g_placeWin;

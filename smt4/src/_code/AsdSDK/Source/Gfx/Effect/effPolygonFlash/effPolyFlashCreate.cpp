@@ -23,14 +23,14 @@ void rt_memcpy(void *dst, const void *src, int size);
 
 extern PolyFlashKind g_polyFlashKinds[];
 extern PolyVec4 g_polyDefaultColor;
-extern const char DAT_00410408[];
+extern const char g_effPolygonFlashSourceFileName[];
 
 /* Creates a flash polygon object of the given kind: allocates the object and its work area,
  * copies the parameter block into the work area, builds the kind's state and starts it. */
 PolyObject *effPolyFlashCreate(u32 kind, void *params, s32 arg)
 {
     s32 workSize = g_polyFlashKinds[kind].workSize;
-    asdDebugTrace(DAT_00410408, 3402);
+    asdDebugTrace(g_effPolygonFlashSourceFileName, 3402);
     PolyObject *obj = (PolyObject *)memAlloc(0x10000, 0x100, 0, workSize + 0x50, 0x10, 1);
 
     obj->unk30 = -1;

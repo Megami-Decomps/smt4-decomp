@@ -25,7 +25,7 @@ void FUN_002e3378(u16 id)
         IdRecord *record = dataTableFindRecordWord(i);
 
         if (record != NULL && record->id == id) {
-            u8 *byte = &reinterpret_cast<BitFlags *>(FUN_002a0d0c())->bits[i / 8];
+            u8 *byte = &reinterpret_cast<BitFlags *>(gameDataGetSortPreferences())->bits[i / 8];
             s32 current = *byte;
             s32 mask = 1 << (i % 8);
 

@@ -11,7 +11,7 @@ void FUN_0016f3a8(void)
   unsigned int in_lr;
   unsigned char bVar2;
   
-  if ((DAT_005894e4 & DAT_005894e5) == 0) {
+  if ((g_sndSystemState & DAT_005894e5) == 0) {
     return;
   }
   DAT_005894e7 = 1;

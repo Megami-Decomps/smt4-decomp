@@ -36,7 +36,7 @@ extern unsigned char g_messageMain; /* 0x43e188 */
 /* Supplied declaration required: uiStoreTextureEntryCenter. */
 /* Supplied declaration required: FUN_002a9fdc. */
 /* Supplied declaration required: sentinelLookupGetValue. */
-extern int FUN_002ae424(unsigned int);
+extern int charCodeIsPrivateUseGlyph(unsigned int);
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: uiSpriteStateInitFromSource. */
@@ -256,7 +256,7 @@ LAB_0028e528:
               temp_v5 = temp_v5 + temp_v8;
             } else {
               if (temp_v4 == temp_v1) break;
-              temp_v6 = FUN_002ae424(temp_v8);
+              temp_v6 = charCodeIsPrivateUseGlyph(temp_v8);
               if (temp_v6 != 0) {
                 if (temp_v8 != 0xf801) {
                   if (temp_v8 != 0xf802) goto LAB_0028e528;

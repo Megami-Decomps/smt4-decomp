@@ -6,7 +6,7 @@
 extern "C" {
 extern PartyPanelState *g_partyPanel;
 s32 objectPartRunUnlessLocked(void *part);
-s32 FUN_0029efa8(void *part);
+s32 listCursorGetRowIfUnblocked(void *part);
 PartyDamageSlotsIV *gameGetSlotTable(void);
 StatBlock *gameGetUnitRecord(s32 slot);
 }
@@ -29,9 +29,9 @@ extern "C" s32 FUN_00282ccc(void)
         if (panel->unk42 != 0) {
             void *part = panel->transitionParts.stateSixParts.secondary;
             s32 cursor = objectPartRunUnlessLocked(part);
-            index = cursor + FUN_0029efa8(part) * 4;
+            index = cursor + listCursorGetRowIfUnblocked(part) * 4;
         } else {
-            index = FUN_0029efa8(panel->transitionParts.stateSixParts.primary) * 4 + panel->unk2C * 12;
+            index = listCursorGetRowIfUnblocked(panel->transitionParts.stateSixParts.primary) * 4 + panel->unk2C * 12;
             index += objectPartRunUnlessLocked(panel->transitionParts.stateSixParts.primary);
         }
         slot = (s32)panel->previewUnits[index].packedIndex;
@@ -42,15 +42,15 @@ extern "C" s32 FUN_00282ccc(void)
         if (panel->unk42 != 0) {
             part = panel->transitionParts.secondaryPart;
         }
-        if (FUN_0029efa8(part) < 1) {
+        if (listCursorGetRowIfUnblocked(part) < 1) {
             slot = selectedPartyPositionToSlot(objectPartRunUnlessLocked(part));
         } else {
             s32 index;
             if (panel->unk42 != 0) {
                 s32 cursor = objectPartRunUnlessLocked(part);
-                index = cursor + FUN_0029efa8(part) * 4;
+                index = cursor + listCursorGetRowIfUnblocked(part) * 4;
             } else {
-                index = FUN_0029efa8(part) * 4 + panel->unk2C * 12;
+                index = listCursorGetRowIfUnblocked(part) * 4 + panel->unk2C * 12;
                 index += objectPartRunUnlessLocked(part);
             }
             index -= 4;

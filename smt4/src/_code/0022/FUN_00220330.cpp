@@ -15,7 +15,7 @@ void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(u32 handle);
 /* Records `result` as the process result and hands it back. */
 static __inline nn::Result fileRecordResult(nn::Result result)
 {
-    FUN_002c3510(result);
+    processResultSetValue(result);
     return result;
 }
 
@@ -38,12 +38,12 @@ nn::Result FUN_00220330(RomFileOpenState *state, const void *path, u32 size)
     nn::Result result;
     if (!pathBuildWide(static_cast<const char *>(path), reinterpret_cast<s16 *>(normalized), 1)) {
         result = 0xe0e046bc;
-        FUN_002c3510(result);
+        processResultSetValue(result);
         return result;
     }
     FUN_002ad888();
     result = FUN_002ad80c(reinterpret_cast<const u16 *>(normalized), size);
-    FUN_002c3510(result);
+    processResultSetValue(result);
     u32 failed = result & 0x80000000;
     if ((s32)failed < 0) {
         FUN_00254824(result, failed);
@@ -54,7 +54,7 @@ nn::Result FUN_00220330(RomFileOpenState *state, const void *path, u32 size)
     state->file.unk04 = 0;
     state->file.unk08 = 0;
     result = archivePathDeviceOpen(&state->file, normalized, 2);
-    FUN_002c3510(result);
+    processResultSetValue(result);
     failed = result & 0x80000000;
     if ((s32)failed < 0) {
         FUN_00254824(result, failed);

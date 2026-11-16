@@ -41,7 +41,7 @@ void playerPadSetBit(u32 bit);
 void objectFlagSetBit(EffectUnit *unit, u32 bit);
 PassiveSkill *passiveSkillLookupRecord(u32 id);
 u32 dataTable9EntryOrZero(u32 tier);
-u32 FUN_00295c60(u32 id, u32 level);
+u32 devilCalcLevelScaledCost(u32 id, u32 level);
 s32 FUN_00295cec(void);
 void FUN_0026e630(void);
 
@@ -105,7 +105,7 @@ u32 FUN_002e33f4(s32 index, EffectRecord *effect, s32 previewOnly, s32 dryRun)
     }
     if (effect->percentGain != 0
         && ((player != NULL && dataTable9EntryOrZero(player->tier) != player->gauge)
-            || (unit != NULL && FUN_00295c60(unit->id, unit->level) != unit->gauge))) {
+            || (unit != NULL && devilCalcLevelScaledCost(unit->id, unit->level) != unit->gauge))) {
         if (dryRun == 0) {
             if (player != NULL) {
                 player->gauge += (s32)(effect->percentGain * dataTable9EntryOrZero(player->tier)) / 100;
@@ -113,9 +113,9 @@ u32 FUN_002e33f4(s32 index, EffectRecord *effect, s32 previewOnly, s32 dryRun)
                     player->gauge = dataTable9EntryOrZero(player->tier);
                 }
             } else if (unit != NULL) {
-                unit->gauge += (s32)(effect->percentGain * FUN_00295c60(unit->id, unit->level)) / 100;
-                if (FUN_00295c60(unit->id, unit->level) < unit->gauge) {
-                    unit->gauge = FUN_00295c60(unit->id, unit->level);
+                unit->gauge += (s32)(effect->percentGain * devilCalcLevelScaledCost(unit->id, unit->level)) / 100;
+                if (devilCalcLevelScaledCost(unit->id, unit->level) < unit->gauge) {
+                    unit->gauge = devilCalcLevelScaledCost(unit->id, unit->level);
                 }
             }
         }

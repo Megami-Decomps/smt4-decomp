@@ -50,7 +50,7 @@ s32 partySlotMatchesSelected(void);
 void FUN_003e4e4c(u32 id);
 s32 recordContainsPairedId(SaveSlot *slot, u16 skillId);
 u32 FUN_004bd068(SaveSlot *slot);
-void FUN_004bd6b0(SaveSlot *slot, u16 skillId, u32 value);
+void partyRecordSetEquippedItemClampRank(SaveSlot *slot, u16 skillId, u32 value);
 
 /* Step the "learn a skill" event: wait for the fade, grant or confirm the skill, run the prompt scripts. */
 u32 FUN_0041774c(SkillLearnTask *task)
@@ -74,7 +74,7 @@ u32 FUN_0041774c(SkillLearnTask *task)
             } else {
                 SaveSlot *slot = saveSlotFindById(task->slotId & 0xffff);
                 if (recordContainsPairedId(slot, task->skillId) == 0) {
-                    FUN_004bd6b0(slot, task->skillId, FUN_004bd068(slot));
+                    partyRecordSetEquippedItemClampRank(slot, task->skillId, FUN_004bd068(slot));
                 }
                 task->step = 2;
             }

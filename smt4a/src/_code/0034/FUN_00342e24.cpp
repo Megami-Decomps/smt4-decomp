@@ -340,7 +340,7 @@ code_r0x00343274:
     else {
       iVar4 = *(int *)(param_1 + 8);
       uVar6 = FUN_003fd528();
-      FUN_002e59f8(uVar6,iVar4 + 0xe,0x12);
+      memcpySrcFirst(uVar6,iVar4 + 0xe,0x12);
       characterInfoPanelPopulate(*(unsigned int *)(param_1 + 0xc),*(unsigned int *)(param_1 + 8),
                    *(unsigned int *)(param_1 + 0x58));
       FUN_002e264c(*(unsigned int *)(param_1 + 8));
@@ -410,7 +410,7 @@ code_r0x00343274:
         uStack_24 = puVar5[1];
         uStack_20 = puVar5[2];
         uStack_1c = puVar5[3];
-        FUN_002e59f8(&uStack_28,uVar6,0xe);
+        memcpySrcFirst(&uStack_28,uVar6,0xe);
         *(unsigned int *)(param_1 + 0xe8) = 0xffffffff;
         *(unsigned int *)(param_1 + 0xf8) = 4;
         *(unsigned int *)(param_1 + 0xec) = 0xffffffff;

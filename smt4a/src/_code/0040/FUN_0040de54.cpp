@@ -199,7 +199,7 @@ extern unsigned int FUN_003e82d4(int);
 /* Supplied declaration required: btlScriptUnitHasFlags. */
 extern int btlSlotStateIsNot456(unsigned int, unsigned int);
 /* Supplied declaration required: stateFinishIfPresent. */
-extern int FUN_003ec77c(int);
+extern int btlStateIsDefeatSuppressed(int);
 extern int FUN_003ec7b0(int);
 /* Supplied declaration required: FUN_003edfd4. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
@@ -1393,7 +1393,7 @@ LAB_0040fb78:
     FUN_004f56cc(g_btlAux,*(unsigned int *)(psVar2 + 0x14));
     break;
   case '@':
-    temp_v3 = FUN_003ec77c(*param_1);
+    temp_v3 = btlStateIsDefeatSuppressed(*param_1);
     if (temp_v3 == 0) {
       temp_v5 = FUN_003e53ec();
       partyAdjustCounterIfEnoughActive(*(unsigned int *)(psVar2 + 0x14));

@@ -27,7 +27,7 @@ void timerStart(void *, s32, s32);
 void slotPlacementAssignSlotAndPosition(PartyPanelWidget *, u32);
 void FUN_002937e0();
 void scrollOwnerSelectIndex(ScrollSelectionOwner *, s32);
-void FUN_0029eb5c(ScrollSelection *, s32);
+void scrollListSetSelectionMarkChanged(ScrollSelection *, s32);
 }
 
 /* Flips the page flag, plays animation 5 and refreshes every character and demon widget. */
@@ -83,7 +83,7 @@ extern "C" u32 partyPanelFocusSelectedPartyMember(s32 force)
                     s32 state;
                     if (fields->cursorOnly != 0) {
                         scrollOwnerSelectIndex(&fields->alternate, i % 4);
-                        FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(&fields->alternate), i / 4);
+                        scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(&fields->alternate), i / 4);
                         break;
                     }
                     if (i < 12) {
@@ -98,7 +98,7 @@ extern "C" u32 partyPanelFocusSelectedPartyMember(s32 force)
                             partyPanelCollapse();
                         }
                         scrollOwnerSelectIndex(&fields->regular, i % 4);
-                        FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(&fields->regular), i / 4);
+                        scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(&fields->regular), i / 4);
                         break;
                     }
                     if (force == 0) {
@@ -115,7 +115,7 @@ extern "C" u32 partyPanelFocusSelectedPartyMember(s32 force)
                     }
                     i -= 12;
                     scrollOwnerSelectIndex(&fields->regular, i % 4);
-                    FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(&fields->regular), i / 4);
+                    scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(&fields->regular), i / 4);
                     break;
                 }
             }

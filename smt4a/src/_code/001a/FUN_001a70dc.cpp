@@ -39,7 +39,7 @@ extern "C" AsdHashPackEntry *FUN_001a70dc(AsdFileHashPack *index, const char *pa
     }
     char normalized[256];
     rt_aeabi_memclr(normalized, sizeof(normalized));
-    FUN_002e59f8(path, normalized, libc_strlen(path));
+    memcpySrcFirst(path, normalized, libc_strlen(path));
     pathStripScheme(index, normalized, libc_strlen(normalized));
     s32 length = libc_strlen(normalized);
     for (s32 position = 0; position < length; ++position) {

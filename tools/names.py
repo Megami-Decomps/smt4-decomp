@@ -227,6 +227,11 @@ def main():
             continue
         old = state.by_address.get(address)
         section = state.section_of(address)
+        if old is not None and old.startswith("_Z") and not new.startswith("_Z"):
+            # A member function: its declaration in the class is what armcc names; a plain name would
+            # leave the class's member (and so the compiled symbol) behind.
+            errors.append(f"{where}: {what} is the member function {old}; give the mangled name of the renamed member")
+            continue
         if old is not None and section and "x" in section[3]:
             state.rename_function(old, new)
         elif old is None:

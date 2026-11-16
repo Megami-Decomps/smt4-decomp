@@ -49,7 +49,7 @@ extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: positionStateSet. */
 /* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: FUN_001527d8. */
+/* Supplied declaration required: uiObjectSetColorRgb. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: sysPlaySe. */
 extern unsigned int gameGetPlayerData(void);
@@ -190,7 +190,7 @@ void FUN_0034280c(unsigned char param_1)
   }
   temp_v3 = spriteHandleCreate(0);
   puVar3[0x17] = temp_v3;
-  FUN_001527d8(temp_v3,0xffffffff);
+  uiObjectSetColorRgb(temp_v3,0xffffffff);
   positionStateSet(puVar3[0x17],0,0x646464ff);
   sysPlaySe(0xb3);
   temp_v2 = 0;

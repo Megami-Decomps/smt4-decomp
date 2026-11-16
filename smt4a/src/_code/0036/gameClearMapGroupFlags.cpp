@@ -2,7 +2,7 @@
 
 extern "C" {
 void gameFlagSetIndexedBit(s32 flag, s32 value);
-void FUN_0037c7a8(s32 flag);
+void mapCollisionMarkEntriesById(s32 flag);
 s32 dataTable2CType0Count(void);
 s32 gameFlagBitsTest(s32 flag);
 MapFlagRule *dataTable2CGetEntry(s32 index);
@@ -17,7 +17,7 @@ void gameClearMapGroupFlags(s32 group)
         }
         if (rule->group == group && rule->type == 2 && gameFlagBitsTest(rule->flag)) {
             gameFlagSetIndexedBit(rule->flag, 0);
-            FUN_0037c7a8(rule->flag);
+            mapCollisionMarkEntriesById(rule->flag);
         }
     }
 }

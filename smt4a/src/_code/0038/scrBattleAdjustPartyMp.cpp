@@ -37,7 +37,7 @@ u32 scrBattleAdjustPartyMp()
             case 1: amountToApply = target->mp * amount / 100; break;
             case 2: amountToApply = amount; break;
             }
-            FUN_003ee0c0(battle);
+            btlSlotManagerResetStates(battle);
             FUN_004fc094(0, source, 0, &((ResourceUnit *)battle->unk1ED4)[target->unitIndex], 0, -1, amountToApply,
                           -1, target->hp, target->maxHp, 0, 0, 0, 0, 1, 0,
                           slot << 3, slot << 3, slot << 3, slot << 3, 1, 0, 1, 1, 0, 1);

@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_001223ac(void);
-int FUN_002f651c(unsigned char *, unsigned int);
+int randMtNextBelow(unsigned char *, unsigned int);
 int FUN_002f6650(void);
 
 extern unsigned char g_flagBlock; /* 0x594958 */
 extern unsigned char DAT_0062db8c; /* 0x62db8c */
 
 /* Supplied declaration required: FUN_001223ac. */
-/* Supplied declaration required: FUN_002f651c. */
+/* Supplied declaration required: randMtNextBelow. */
 /* Supplied declaration required: FUN_002f6650. */
 
 
@@ -24,7 +24,7 @@ void FUN_002eb5c0(unsigned int param_1)
     FUN_002f6650();
     FUN_001223ac();
   }
-  FUN_002f651c(&DAT_0062db8c,param_1);
+  randMtNextBelow(&DAT_0062db8c,param_1);
   return;
 }
 

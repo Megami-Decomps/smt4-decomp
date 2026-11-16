@@ -24,7 +24,7 @@ int uiFadeRelease(void);
 int soundChannelStopAll(...);
 int slotSetRequest(...);
 int asdModelSlotRelease(...);
-int FUN_002b827c(...);
+int buttonHelpSetContext(...);
 int ifTouchRegionRemove(void);
 int jobStop(...);
 int titleConfigCreate(void);
@@ -33,14 +33,14 @@ int FUN_0030a9d8(void);
 int FUN_00210194(...);
 int commonBgBeginExit(void);
 int commonBgReset(void);
-int FUN_002898e4(void);
+int commonBgAcquire(void);
 int buttonHelpCreate(void);
 int fileSlotLoad(int);
 int modelSetScale(void);
 int asdMdlManagerCreateLoaded(...);
 int buttonHelpSetText(...);
 int soundChannelRequestIfEnabled(int, int, int);
-int FUN_002a03d8(...);
+int titleSetSlotValueState2(...);
 int lightOwnerRegister(...);
 int modelSlotAttachChild(...);
 int FUN_002a09b4(...);
@@ -113,7 +113,7 @@ extern int jobWorkerPollAndFree(void);
 /* Supplied declaration required: FUN_0028703c. */
 /* Supplied declaration required: FUN_00287c34. */
 extern int screenFadesAllReady(void);
-/* Supplied declaration required: FUN_002898e4. */
+/* Supplied declaration required: commonBgAcquire. */
 /* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: uiFadeRelease. */
 /* Supplied declaration required: fileSlotLoad. */
@@ -126,7 +126,7 @@ extern int screenFadesAllReady(void);
 extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
-/* Supplied declaration required: FUN_002a03d8. */
+/* Supplied declaration required: titleSetSlotValueState2. */
 /* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: modelSlotAttachChild. */
 /* Supplied declaration required: FUN_002a09b4. */
@@ -135,7 +135,7 @@ extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: FUN_002a8638. */
 extern int modelHasLoadedAttachment(unsigned int);
 /* Supplied declaration required: sndObjectForwardField8. */
-/* Supplied declaration required: FUN_002b827c. */
+/* Supplied declaration required: buttonHelpSetContext. */
 extern unsigned short ifTouchRegionAddRequested(unsigned int, unsigned int);
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: ifTouchRegionRemove. */
@@ -218,8 +218,8 @@ int FUN_001e9990(unsigned int handle)
     if (*(char *)((int)puVar13 + 0x95) == '\0') {
       temp_v4 = FUN_002c2a04(0);
       if (temp_v4 != 0) {
-        FUN_002a03d8(0,4);
-        FUN_002a03d8(1,4);
+        titleSetSlotValueState2(0,4);
+        titleSetSlotValueState2(1,4);
       }
       temp_v4 = puVar13[0x27] + 1;
       break;
@@ -234,7 +234,7 @@ int FUN_001e9990(unsigned int handle)
   case 2:
     *(unsigned char *)(g_titleMain + 4) = 0;
     soundChannelRequestIfEnabled(0x1000001,0,0x3c);
-    FUN_002898e4();
+    commonBgAcquire();
     if (*(char *)(puVar13 + 0x18) != '\0') {
       puVar13[2] = 1;
       puVar13[3] = 1;
@@ -319,8 +319,8 @@ int FUN_001e9990(unsigned int handle)
     puVar10 = (unsigned int *)puVar13[0x24];
     *puVar10 = *puVar10 | 2;
     *(unsigned char *)(*(int *)(puVar10[2] + 0x2c) + 0x1f6) = 0;
-    FUN_002a03d8(0,10);
-    FUN_002a03d8(1,10);
+    titleSetSlotValueState2(0,10);
+    titleSetSlotValueState2(1,10);
     temp_v4 = puVar13[0x27] + 1;
     break;
   case 5:
@@ -583,7 +583,7 @@ LAB_001ea4cc:
     if (temp_v4 != 0) {
       uiFadeRelease();
       jobStop(*g_titleMain,0);
-      FUN_002b827c(3);
+      buttonHelpSetContext(3);
       temp_v4 = puVar13[2];
       if (temp_v4 != 1) {
         if (temp_v4 != 0) {

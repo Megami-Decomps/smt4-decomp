@@ -18,7 +18,7 @@ typedef struct CecCameraHolder {
 } CecCameraHolder;
 
 void statusCameraSelectPreset(s32 preset);
-void FUN_0034a3b4(void);
+void statusCameraInitialize(void);
 s32 linkHolderCallFirst(u32 link);
 void linkHolderApplyFirst(u32 link, s32 flag, f32 first, f32 second);
 
@@ -42,7 +42,7 @@ void campCecResetCameraHolder(CecCameraHolder *holder)
         holder->linkApplied = 0;
         linkHolderApplyFirst(holder->link, 0, 0.0f, 0.0f);
     }
-    FUN_0034a3b4();
+    statusCameraInitialize();
 }
 
 } /* extern "C" */

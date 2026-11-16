@@ -3,7 +3,7 @@
 extern "C" {
 
 s32 scrGetArg(u32 index);
-u32 FUN_0039c840(s32 id, s32 mode);
+u32 bustupTextureStart(s32 id, s32 mode);
 void bustupCutAnimSetJobParam(u32 handle);
 void scrSetResult(u32 value);
 
@@ -13,7 +13,7 @@ s32 scrCommCreateBustupCut(void)
     if (id >= 428) {
         id = 0;
     }
-    u32 handle = FUN_0039c840(id, 0);
+    u32 handle = bustupTextureStart(id, 0);
     if (handle != 0) {
         bustupCutAnimSetJobParam(handle);
     }

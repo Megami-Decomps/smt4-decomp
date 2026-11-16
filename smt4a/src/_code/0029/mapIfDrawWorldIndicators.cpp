@@ -533,7 +533,7 @@ joined_r0x0029e2d8:
               fVar29 = (float)VectorSignedToFloat((int)*(short *)(iVar17 + 0x74),
                                                   (unsigned char)(in_fpscr >> 0x16) & 3);
               *(float *)(iVar17 + 0x1c8) = fVar29 * fVar36;
-              FUN_0018a924(&fStack_4c8,&fStack_4c4);
+              mathSinCos(&fStack_4c8,&fStack_4c4);
               *(unsigned int *)(iVar17 + 0xd4) = uVar26;
               in_s0 = (float)VectorSignedToFloat((int)*(short *)(iVar17 + 0x74),
                                                  (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -685,7 +685,7 @@ joined_r0x0029e2d8:
             fVar25 = (float)VectorSignedToFloat((int)*(short *)(iVar17 + 0x74),
                                                 (unsigned char)(in_fpscr >> 0x16) & 3);
             *(float *)(iVar17 + 0x1c8) = fVar25 * fVar36;
-            FUN_0018a924(&fStack_508,&fStack_504);
+            mathSinCos(&fStack_508,&fStack_504);
             if (DAT_005f15fc >= 0x65) {
               *(int *)(iVar17 + 0xd4) = (int)uVar28;
               in_s0 = (float)VectorSignedToFloat((int)*(short *)(iVar17 + 0x74),
@@ -753,13 +753,13 @@ joined_r0x0029e2d8:
         uVar3 = uVar22 & 0xff;
         fVar34 = (float)VectorUnsignedToFloat(uVar21 & 0xffff,(unsigned char)(uVar6 >> 0x16) & 3);
         fVar36 = (float)VectorUnsignedToFloat(uVar22 & 0xffff,(unsigned char)(uVar6 >> 0x16) & 3);
-        fVar37 = (float)(&DAT_00536d14)[uVar13 * 4] +
+        fVar37 = (float)(&g_sinCosTable)[uVar13 * 4] +
                  (fVar24 - fVar34) * (float)(&DAT_00536d1c)[uVar13 * 4];
         fVar34 = (float)(&DAT_00536d18)[uVar13 * 4] +
                  (fVar24 - fVar34) * (float)(&DAT_00536d20)[uVar13 * 4];
-        fVar24 = (float)(&DAT_00536d14)[uVar10 * 4] +
+        fVar24 = (float)(&g_sinCosTable)[uVar10 * 4] +
                  (fVar32 - fVar35) * (float)(&DAT_00536d1c)[uVar10 * 4];
-        fVar29 = (float)(&DAT_00536d14)[uVar3 * 4] +
+        fVar29 = (float)(&g_sinCosTable)[uVar3 * 4] +
                  (fVar33 - fVar36) * (float)(&DAT_00536d1c)[uVar3 * 4];
         fVar33 = (float)(&DAT_00536d18)[uVar3 * 4] +
                  (fVar33 - fVar36) * (float)(&DAT_00536d20)[uVar3 * 4];

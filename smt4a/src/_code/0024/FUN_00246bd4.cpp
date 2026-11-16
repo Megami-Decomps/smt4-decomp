@@ -50,7 +50,7 @@ int naviMainApplyRequestValue(...);
 int FUN_00365c94(...);
 int naviMainSetRequestTriple(...);
 int uiPlayGatedActionFeedback(...);
-int FUN_003d54f8(...);
+int titleSetSlotValueState2(...);
 int playerSetClampedValue(...);
 int linkedTargetSetFloat(...);
 int flagValueSub(...);
@@ -132,7 +132,7 @@ int mathAngleDeltaDegrees(...);
 int FUN_002b80b8(...);
 int FUN_002e364c(...);
 int mapSetSceneState(...);
-int FUN_00317af8(...);
+int padGetNormalizedAnalogStick(...);
 int FUN_00325998(...);
 int FUN_00327ee8(...);
 void lmapSceneStartMovement(signed char);
@@ -170,7 +170,7 @@ extern unsigned char DAT_00531c18; /* 0x531c18 */
 extern unsigned char DAT_00531cb8; /* 0x531cb8 */
 extern unsigned char DAT_00531d58; /* 0x531d58 */
 extern unsigned char DAT_00531df8; /* 0x531df8 */
-extern unsigned int DAT_00536d14; /* 0x536d14 */
+extern unsigned int g_sinCosTable; /* 0x536d14 */
 extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
@@ -348,7 +348,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: FUN_002de104. */
 extern int pairedAvailabilityBothReady(void);
 /* Supplied declaration required: FUN_002e364c. */
-extern int FUN_002e5db4(void);
+extern int saveSlotSelectedIsId175(void);
 /* Supplied declaration required: FUN_003024a0. */
 /* Supplied declaration required: FUN_0030250c. */
 /* Supplied declaration required: FUN_003026d8. */
@@ -364,7 +364,7 @@ extern int mapJobIsDone(void);
 /* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: mapTrapGetUnk38. */
 /* Supplied declaration required: naviMainSetFlagsAndActivate. */
-/* Supplied declaration required: FUN_00317af8. */
+/* Supplied declaration required: padGetNormalizedAnalogStick. */
 /* Supplied declaration required: scrSetStringSlot. */
 /* Supplied declaration required: lmapSceneRestoreEntryPosition. */
 /* Supplied declaration required: mathVec3Dot. */
@@ -397,7 +397,7 @@ extern unsigned int asdModelGetStatic38(void);
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d2158. */
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
-/* Supplied declaration required: FUN_003d54f8. */
+/* Supplied declaration required: titleSetSlotValueState2. */
 extern unsigned int FUN_003e0034(void);
 /* Supplied declaration required: playerSetClampedValue. */
 /* Supplied declaration required: gameDataFlagTestBit. */
@@ -633,7 +633,7 @@ LAB_002b82a8:
     FUN_00354098();
     temp_v33 = *(unsigned long long *)(g_lmapScene + 10);
     temp_v36 = CONCAT44(temp_v37,g_lmapScene[0xc]);
-    FUN_00317af8(&fStack_6c,&uStack_70,0);
+    padGetNormalizedAnalogStick(&fStack_6c,&uStack_70,0);
     temp_v14 = 0;
     *(unsigned char *)(g_lmapScene + 0x1b) = 0;
     temp_v32 = gameFlagIsSet(0xc);
@@ -964,7 +964,7 @@ LAB_002b82a8:
       if (!(unsigned char)((temp_v1 >> 6) & 1) && temp_v1 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
         sysPlayVoice(0x10000d1);
         temp_v4 = gameFlagIsSet(0x4c9);
-        if ((temp_v4 == 0) || (temp_v4 = FUN_002e5db4(), temp_v4 != 0)) {
+        if ((temp_v4 == 0) || (temp_v4 = saveSlotSelectedIsId175(), temp_v4 != 0)) {
           g_lmapScene[0x74] = 0xf;
         }
         else {
@@ -979,12 +979,12 @@ LAB_002b82a8:
         *(unsigned int *)(temp_v6 + 0x109c) = 0;
         *(unsigned int *)(temp_v6 + 0x10a4) = 1;
         temp_v32 = gameFlagIsSet(0x4c9);
-        if ((temp_v32 == 0) || (temp_v32 = FUN_002e5db4(), temp_v32 != 0)) {
+        if ((temp_v32 == 0) || (temp_v32 = saveSlotSelectedIsId175(), temp_v32 != 0)) {
           g_lmapScene[0x8e] = 6;
         }
         *(unsigned char *)(g_lmapScene + 0x8f) = 1;
         temp_v32 = gameFlagIsSet(0x4c9);
-        if ((temp_v32 == 0) || (temp_v32 = FUN_002e5db4(), temp_v32 != 0)) {
+        if ((temp_v32 == 0) || (temp_v32 = saveSlotSelectedIsId175(), temp_v32 != 0)) {
           moriModelUnitStartMaterialAnimation(*(unsigned int *)(g_lmapScene[99] + 4),0,2);
         }
       }
@@ -1307,7 +1307,7 @@ LAB_002b82a8:
           piVar18[0x69] = 0x14;
         }
         if ((temp_v19 <= (float)g_lmapScene[0x57]) || (temp_v32 = gameDataFlagTestBit(0x85), temp_v32 != 0)) {
-          FUN_00317af8(&uStack_64,&uStack_60,0);
+          padGetNormalizedAnalogStick(&uStack_64,&uStack_60,0);
           if (DAT_005f1848 != 0) {
             if (DAT_005f1848 == 1) {
               if (g_lmapScene[2] == 5) {
@@ -1530,7 +1530,7 @@ LAB_00326fcc:
         else if (*(float *)(temp_v32 + 0x15c0) < temp_v18) {
           sysPlayVoice(0x10000d1);
           temp_v6 = gameFlagIsSet(0x4c9);
-          if ((temp_v6 == 0) || (temp_v6 = FUN_002e5db4(), temp_v6 != 0)) {
+          if ((temp_v6 == 0) || (temp_v6 = saveSlotSelectedIsId175(), temp_v6 != 0)) {
             g_lmapScene[0x74] = 0xf;
           }
           else {
@@ -1545,12 +1545,12 @@ LAB_00326fcc:
           *(unsigned int *)(temp_v32 + 0x109c) = 0;
           *(unsigned int *)(temp_v32 + 0x10a4) = 1;
           temp_v6 = gameFlagIsSet(0x4c9);
-          if ((temp_v6 == 0) || (temp_v6 = FUN_002e5db4(), temp_v6 != 0)) {
+          if ((temp_v6 == 0) || (temp_v6 = saveSlotSelectedIsId175(), temp_v6 != 0)) {
             g_lmapScene[0x8e] = 6;
           }
           *(unsigned char *)(g_lmapScene + 0x8f) = 1;
           temp_v6 = gameFlagIsSet(0x4c9);
-          if ((temp_v6 == 0) || (temp_v6 = FUN_002e5db4(), temp_v6 != 0)) {
+          if ((temp_v6 == 0) || (temp_v6 = saveSlotSelectedIsId175(), temp_v6 != 0)) {
             moriModelUnitStartMaterialAnimation(*(unsigned int *)(g_lmapScene[99] + 4),0,2);
           }
         }
@@ -1784,7 +1784,7 @@ LAB_00326a10:
         piVar18[2] = 0;
         goto LAB_003270a0;
       }
-      FUN_00317af8(&uStack_64,&uStack_60,0);
+      padGetNormalizedAnalogStick(&uStack_64,&uStack_60,0);
       piVar18 = g_lmapScene;
       if (((((0xbf000000 < uStack_64) || ((int)uStack_64 >= 0x3f000001)) || (0xbf000000 < uStack_60))
           || ((int)uStack_60 >= 0x3f000001)) && (g_lmapScene[2] >= 0xe)) {
@@ -1865,7 +1865,7 @@ LAB_00326cc4:
       DAT_005f17bc = piVar18[0x13];
       DAT_005f17c0 = 0;
       DAT_005f17c2 = 0;
-      FUN_00317af8(afStack_2f4,&uStack_2f8,0);
+      padGetNormalizedAnalogStick(afStack_2f4,&uStack_2f8,0);
       if ((((0xbeffffff < (unsigned int)afStack_2f4[0]) || ((int)afStack_2f4[0] >= 0x3f000000)) ||
           (0xbeffffff < uStack_2f8)) || ((int)uStack_2f8 >= 0x3f000000)) {
         __hardfp_atan2f();
@@ -3027,7 +3027,7 @@ LAB_00366704:
         FUN_00327ee8();
         return;
       }
-      FUN_00317af8(&uStack_54,(int)&uStack_54 + 4,0);
+      padGetNormalizedAnalogStick(&uStack_54,(int)&uStack_54 + 4,0);
       if (((((unsigned int)uStack_54 < 0xbf000001) && ((int)(unsigned int)uStack_54 < 0x3f000001)) &&
           ((*(unsigned int *)((unsigned char *)&uStack_54 + 4)) < 0xbf000001)) &&
          (((int)(*(unsigned int *)((unsigned char *)&uStack_54 + 4)) < 0x3f000001 && (g_lmapScene[2] < 0x1f)))) {
@@ -4447,7 +4447,7 @@ LAB_0033eae8:
       }
       else if (temp_v6 == 0x14) {
         g_lmapScene[2] = g_lmapScene[2] + 1;
-        FUN_00317af8(&uStack_190,temp_v44,0);
+        padGetNormalizedAnalogStick(&uStack_190,temp_v44,0);
         if ((((0xbf000000 < uStack_190) || ((int)uStack_190 >= 0x3f000001)) ||
             (0xbf000000 < temp_v44[0])) ||
            (((int)temp_v44[0] >= 0x3f000001 ||
@@ -4971,8 +4971,8 @@ LAB_002da3cc:
               if (g_lmapScene[2] >= 0x1f) {
 LAB_002dad8c:
                 g_lmapScene[2] = 0;
-                FUN_003d54f8(0,10);
-                FUN_003d54f8(1,10);
+                titleSetSlotValueState2(0,10);
+                titleSetSlotValueState2(1,10);
                 piVar18 = g_lmapScene;
                 g_lmapScene[1] = 8;
                 piVar18[0x15] = 0x23;
@@ -7803,13 +7803,13 @@ joined_r0x00397538:
       temp_v28 = (float)VectorUnsignedToFloat(temp_v22 & 0xffff,(unsigned char)(temp_v5 >> 0x16) & 3);
       temp_v22 = temp_v23 & 0xff;
       temp_v24 = (float)VectorUnsignedToFloat(temp_v23 & 0xffff,(unsigned char)(temp_v5 >> 0x16) & 3);
-      temp_v29 = (float)(&DAT_00536d14)[temp_v10 * 4] +
+      temp_v29 = (float)(&g_sinCosTable)[temp_v10 * 4] +
                (184.8889f - temp_v26) * (float)(&DAT_00536d1c)[temp_v10 * 4];
       temp_v30 = (float)(&DAT_00536d18)[temp_v10 * 4] +
                (184.8889f - temp_v26) * (float)(&DAT_00536d20)[temp_v10 * 4];
-      fStack_80 = (float)(&DAT_00536d14)[temp_v21 * 4] +
+      fStack_80 = (float)(&g_sinCosTable)[temp_v21 * 4] +
                   (temp_v20 - temp_v28) * (float)(&DAT_00536d1c)[temp_v21 * 4];
-      temp_v26 = (float)(&DAT_00536d14)[temp_v22 * 4] +
+      temp_v26 = (float)(&g_sinCosTable)[temp_v22 * 4] +
                (temp_v31 - temp_v24) * (float)(&DAT_00536d1c)[temp_v22 * 4];
       temp_v31 = (float)(&DAT_00536d18)[temp_v22 * 4] +
                (temp_v31 - temp_v24) * (float)(&DAT_00536d20)[temp_v22 * 4];
@@ -7847,18 +7847,18 @@ joined_r0x00397538:
       temp_v28 = (float)VectorUnsignedToFloat(temp_v22 & 0xffff,(unsigned char)(temp_v5 >> 0x16) & 3);
       temp_v22 = temp_v23 & 0xff;
       temp_v26 = (float)VectorUnsignedToFloat(temp_v23 & 0xffff,(unsigned char)(temp_v5 >> 0x16) & 3);
-      temp_v30 = (float)(&DAT_00536d14)[temp_v10 * 4] +
+      temp_v30 = (float)(&g_sinCosTable)[temp_v10 * 4] +
                (temp_v20 - temp_v29) * (float)(&DAT_00536d1c)[temp_v10 * 4];
       temp_v20 = (float)(&DAT_00536d18)[temp_v10 * 4] +
                (temp_v20 - temp_v29) * (float)(&DAT_00536d20)[temp_v10 * 4];
       if (g_localCameraPosition * 0.7111111f < temp_v37) {
         temp_v30 = -temp_v30;
       }
-      fStack_80 = (float)(&DAT_00536d14)[temp_v21 * 4] +
+      fStack_80 = (float)(&g_sinCosTable)[temp_v21 * 4] +
                   (temp_v31 - temp_v28) * (float)(&DAT_00536d1c)[temp_v21 * 4];
       fStack_78 = (float)(&DAT_00536d18)[temp_v21 * 4] +
                   (temp_v31 - temp_v28) * (float)(&DAT_00536d20)[temp_v21 * 4];
-      temp_v31 = (float)(&DAT_00536d14)[temp_v22 * 4] +
+      temp_v31 = (float)(&g_sinCosTable)[temp_v22 * 4] +
                (temp_v24 - temp_v26) * (float)(&DAT_00536d1c)[temp_v22 * 4];
       temp_v24 = (float)(&DAT_00536d18)[temp_v22 * 4] +
                (temp_v24 - temp_v26) * (float)(&DAT_00536d20)[temp_v22 * 4];

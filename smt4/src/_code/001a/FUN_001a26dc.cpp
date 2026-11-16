@@ -49,7 +49,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_0029a17c. */
 extern int ifTouchGetSelectionModeForRegion(int);
 extern int FUN_0029ee54(int);
-extern int FUN_0029efa8(int);
+extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: libc_bsearch. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
@@ -149,7 +149,7 @@ unsigned int FUN_001a26dc(void)
   temp_v12 = temp_v2 + 0x788;
   temp_v3 = 0;
   do {
-    if ((temp_v4 == 1) || (temp_v7 = FUN_0029efa8(temp_v12), temp_v7 != temp_v3)) {
+    if ((temp_v4 == 1) || (temp_v7 = listCursorGetRowIfUnblocked(temp_v12), temp_v7 != temp_v3)) {
       efctSetSpeed();
       if (*(char *)(temp_v2 + 0x74e) != '\x02') {
         temp_v7 = asdTMTexTableEntryAt(0x1e,temp_v3 + 7);
@@ -235,7 +235,7 @@ unsigned int FUN_001a26dc(void)
     }
   } while (temp_v3 < temp_v7);
   if (temp_v4 != 1) {
-    temp_v4 = FUN_0029efa8(temp_v12);
+    temp_v4 = listCursorGetRowIfUnblocked(temp_v12);
     if (*(char *)(temp_v2 + 0x74e) != '\x02') {
       temp_v3 = asdTMTexTableEntryAt(0x1e,temp_v4 + 0x18);
     }
@@ -247,7 +247,7 @@ unsigned int FUN_001a26dc(void)
     efctSetSpeed();
     texDrawTableEntryAtStoredOrigin(2,0x1e,0x13,(int)*(short *)(temp_v3 + 8),(int)*(short *)(temp_v3 + 10),0xe2);
     if (*(int *)(temp_v2 + 0x744) != 3) {
-      temp_v7 = FUN_0029efa8(temp_v12);
+      temp_v7 = listCursorGetRowIfUnblocked(temp_v12);
       temp_v7 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v2 + temp_v7 * 2 + 0x772));
       if (!((temp_v7 == 1 || temp_v7 == 2) || temp_v7 == 6)) {
         texDrawTableEntryAtStoredOrigin(2,0x1e,0x14,(int)*(short *)(temp_v3 + 8),(int)*(short *)(temp_v3 + 10),0xe7);

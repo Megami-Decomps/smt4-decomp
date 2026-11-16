@@ -30,7 +30,7 @@ static __inline void setSavedRecord(u32 index, const SavedRecord100 *record)
         return;
     }
     SavedRecordBody *body = (SavedRecordBody *)&g_gameDataBlocks.saveBlock->save.sub;
-    FUN_002e59f8(record, &body->records[index], sizeof(SavedRecord100));
+    memcpySrcFirst(record, &body->records[index], sizeof(SavedRecord100));
 }
 
 /* Remove one saved record, shifting later records down and clearing the last. */

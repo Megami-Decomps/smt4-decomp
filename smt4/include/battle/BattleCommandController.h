@@ -62,7 +62,7 @@ struct EntryDataBlock {
     /* 0xfe */ u16 secondCounter;
 };
 
-/* What FUN_00247478 reports about the current command. */
+/* What btlEntryBuildSummary reports about the current command. */
 struct CommandInfo {
     /* 0x00 */ u8 unk00[4];
     /* 0x04 */ s16 kind;

@@ -13,7 +13,7 @@ extern const char DAT_005314ec[];
 s32 gameFlagIsSet(u32 flag);
 BattleViewOwner* asdMemoryAllocTraced(u32 size, const char* sourceFile, u32 sourceLine);
 BattleViewOwner* modelListInit(BattleViewOwner* storage);
-void FUN_001cd3ec(BattleViewOwner* object, const char* name);
+void modelLoadFileAsyncByName(BattleViewOwner* object, const char* name);
 
 void FUN_002440f4(void)
 {
@@ -24,42 +24,42 @@ void FUN_002440f4(void)
             object = modelListInit(object);
         }
         view->attachments.primary[0] = object;
-        FUN_001cd3ec(object, DAT_00531478);
+        modelLoadFileAsyncByName(object, DAT_00531478);
 
         object = asdMemoryAllocTraced(0x20, DAT_00531448, 0x236);
         if (object) {
             object = modelListInit(object);
         }
         view->attachments.primary[1] = object;
-        FUN_001cd3ec(object, DAT_0053148c);
+        modelLoadFileAsyncByName(object, DAT_0053148c);
 
         object = asdMemoryAllocTraced(0x20, DAT_00531448, 0x239);
         if (object) {
             object = modelListInit(object);
         }
         view->attachments.primary[2] = object;
-        FUN_001cd3ec(object, DAT_005314a4);
+        modelLoadFileAsyncByName(object, DAT_005314a4);
 
         object = asdMemoryAllocTraced(0x20, DAT_00531448, 0x23C);
         if (object) {
             object = modelListInit(object);
         }
         view->children[0] = object;
-        FUN_001cd3ec(object, DAT_005314bc);
+        modelLoadFileAsyncByName(object, DAT_005314bc);
 
         object = asdMemoryAllocTraced(0x20, DAT_00531448, 0x23F);
         if (object) {
             object = modelListInit(object);
         }
         view->children[1] = object;
-        FUN_001cd3ec(object, DAT_005314d4);
+        modelLoadFileAsyncByName(object, DAT_005314d4);
 
         object = asdMemoryAllocTraced(0x20, DAT_00531448, 0x242);
         if (object) {
             object = modelListInit(object);
         }
         view->children[2] = object;
-        FUN_001cd3ec(object, DAT_005314ec);
+        modelLoadFileAsyncByName(object, DAT_005314ec);
     }
 }
 }

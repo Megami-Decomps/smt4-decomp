@@ -87,7 +87,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: campRebuildEnabledFlagList. */
 /* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
-extern int FUN_002a4894(int);
+extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: statusPanelSetOpen. */
 extern int widgetSubCallIfVisible(int);
 extern int objectApplyIfUnblocked(int);
@@ -98,7 +98,7 @@ extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: FUN_0031f718. */
 extern int itemSelectionCanUse(int, int);
 /* Supplied declaration required: FUN_003343c0. */
-/* Supplied declaration required: FUN_003343f0. */
+/* Supplied declaration required: gameGlobalsSetMenuOpenFlag. */
 /* Supplied declaration required: FUN_0033449c. */
 /* Supplied declaration required: FUN_003450d4. */
 /* Supplied declaration required: gameGlobalsQueueValues. */
@@ -181,7 +181,7 @@ void FUN_0020dc1c(void)
                 gridNavigationConfigure(temp_v6,temp_v5,temp_v5,1);
                 flaggedEntrySetValueA(temp_v6,temp_v2);
                 temp_v5 = resourceRunOperationIfUnblocked(temp_v6);
-                temp_v6 = FUN_002a4894(temp_v6);
+                temp_v6 = listCursorGetRowIfUnblocked(temp_v6);
                 temp_v6 = itemSelectionCanUse(temp_v4,temp_v5 + temp_v6);
                 if (temp_v6 == 0) {
                   temp_v2 = 0x118;
@@ -193,7 +193,7 @@ void FUN_0020dc1c(void)
                 FUN_002c85b0(0);
                 FUN_002c8538(1);
                 FUN_00215bd0();
-                FUN_003343f0(1);
+                gameGlobalsSetMenuOpenFlag(1);
                 *(unsigned int *)(temp_v4 + 0x20) = 1;
                 goto LAB_0020de28;
               }
@@ -233,7 +233,7 @@ LAB_0020de28:
       FUN_002c85b0(0);
       FUN_0031f718(0xffffffff,0);
       temp_v6 = resourceRunOperationIfUnblocked();
-      temp_v5 = FUN_002a4894(temp_v4 + 0x32b8);
+      temp_v5 = listCursorGetRowIfUnblocked(temp_v4 + 0x32b8);
       temp_v6 = *(int *)(temp_v4 + (temp_v5 + temp_v6) * 4 + 0x3338);
       temp_v2 = gameGetPlayerData();
       temp_v13 = 0;
@@ -267,7 +267,7 @@ LAB_0020de28:
     FUN_003450d4(temp_v3,temp_v2,temp_v4 + 0x1b3e,0);
     if (temp_v6 != 0) {
       temp_v6 = resourceRunOperationIfUnblocked(temp_v3);
-      temp_v5 = FUN_002a4894(temp_v3);
+      temp_v5 = listCursorGetRowIfUnblocked(temp_v3);
       temp_v3 = *(int *)(temp_v4 + (temp_v6 + temp_v5) * 4 + 0x3338);
       temp_v2 = gameGetPlayerData();
       temp_v18 = 0;
@@ -303,7 +303,7 @@ LAB_0020de28:
           return;
         }
         temp_v6 = resourceRunOperationIfUnblocked(temp_v3);
-        temp_v5 = FUN_002a4894(temp_v3);
+        temp_v5 = listCursorGetRowIfUnblocked(temp_v3);
         temp_v3 = itemSelectionCanUse(temp_v4,temp_v6 + temp_v5);
         if (temp_v3 == 0) {
           return;
@@ -331,7 +331,7 @@ LAB_0020de28:
         objBSetRecord2000(&temp_v7);
         FUN_003343c0(1);
         temp_v6 = resourceRunOperationIfUnblocked(temp_v4 + 0xc0);
-        temp_v5 = FUN_002a4894(temp_v4 + 0xc0);
+        temp_v5 = listCursorGetRowIfUnblocked(temp_v4 + 0xc0);
         temp_v0 = *(unsigned short *)(temp_v4 + (temp_v5 + temp_v6) * 2 + 0x21b0);
         flagValueSub(temp_v0,1);
         temp_v6 = flagValueIsPositive(temp_v0);
@@ -346,7 +346,7 @@ LAB_0020de28:
       }
       eventQueueAddUniqueIfValid(0x100020d);
       temp_v6 = resourceRunOperationIfUnblocked(temp_v3);
-      temp_v5 = FUN_002a4894(temp_v3);
+      temp_v5 = listCursorGetRowIfUnblocked(temp_v3);
       temp_v3 = *(int *)(temp_v4 + (temp_v6 + temp_v5) * 4 + 0x3338);
       temp_v2 = gameGetPlayerData();
       temp_v18 = 0;
@@ -414,7 +414,7 @@ LAB_0020de28:
       }
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 7);
-    FUN_003343f0(0);
+    gameGlobalsSetMenuOpenFlag(0);
     FUN_0033449c(0);
     temp_v6 = flagValueIsPositive(*(unsigned int *)(temp_v4 + 0x33b8));
     if (temp_v6 == 0) {

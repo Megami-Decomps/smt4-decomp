@@ -31,7 +31,7 @@ typedef struct {
     unsigned int sp17C; /* 0x17c: local_17c */
 } param_1_stack;
 
-extern unsigned int DAT_00407ed0; /* 0x407ed0 */
+extern unsigned int g_sinCosTable; /* 0x407ed0 */
 extern unsigned int DAT_00407ed4; /* 0x407ed4 */
 extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
@@ -160,15 +160,15 @@ int FUN_0021c694(int param_1)
       temp_v14 = (float)VectorUnsignedToFloat(temp_v11 & 0xffff,(unsigned char)(temp_v1 >> 0x16) & 3);
       temp_v11 = temp_v13 & 0xff;
       temp_v16 = (float)VectorUnsignedToFloat(temp_v13 & 0xffff,(unsigned char)(temp_v1 >> 0x16) & 3);
-      temp_v49 = (float)((unsigned long long)*(unsigned long long *)(&DAT_00407ed0 + temp_v3 * 4) >> 0x20) +
+      temp_v49 = (float)((unsigned long long)*(unsigned long long *)(&g_sinCosTable + temp_v3 * 4) >> 0x20) +
                   (temp_v8 - temp_v15) * (float)(&DAT_00407edc)[temp_v3 * 4];
-      temp_v8 = (float)*(unsigned long long *)(&DAT_00407ed0 + temp_v3 * 4) +
+      temp_v8 = (float)*(unsigned long long *)(&g_sinCosTable + temp_v3 * 4) +
                (temp_v8 - temp_v15) * (float)(&DAT_00407ed8)[temp_v3 * 4];
-      temp_v15 = (float)(&DAT_00407ed0)[temp_v12 * 4] +
+      temp_v15 = (float)(&g_sinCosTable)[temp_v12 * 4] +
                (0.0f - temp_v14) * (float)(&DAT_00407ed8)[temp_v12 * 4];
       temp_v14 = (float)(&DAT_00407ed4)[temp_v12 * 4] +
                (0.0f - temp_v14) * (float)(&DAT_00407edc)[temp_v12 * 4];
-      temp_v17 = (float)(&DAT_00407ed0)[temp_v11 * 4] +
+      temp_v17 = (float)(&g_sinCosTable)[temp_v11 * 4] +
                (0.0f - temp_v16) * (float)(&DAT_00407ed8)[temp_v11 * 4];
       temp_v16 = (float)(&DAT_00407ed4)[temp_v11 * 4] +
                (0.0f - temp_v16) * (float)(&DAT_00407edc)[temp_v11 * 4];
@@ -385,17 +385,17 @@ int FUN_0021c694(int param_1)
     temp_v11 = temp_v10 & 0xff;
     temp_v22 = (float)VectorUnsignedToFloat(temp_v13 & 0xffff,(unsigned char)(temp_v1 >> 0x16) & 3);
     temp_v15 = (float)VectorUnsignedToFloat(temp_v10 & 0xffff,(unsigned char)(temp_v1 >> 0x16) & 3);
-    temp_v16 = (float)(&DAT_00407ed0)[temp_v12 * 4] +
+    temp_v16 = (float)(&g_sinCosTable)[temp_v12 * 4] +
              (0.0f - temp_v22) * (float)(&DAT_00407ed8)[temp_v12 * 4];
     temp_v25 = (float)(&DAT_00407ed4)[temp_v12 * 4] +
              (0.0f - temp_v22) * (float)(&DAT_00407edc)[temp_v12 * 4];
-    temp_v22 = (float)*(unsigned long long *)(&DAT_00407ed0 + temp_v3 * 4) +
+    temp_v22 = (float)*(unsigned long long *)(&g_sinCosTable + temp_v3 * 4) +
              (temp_v28 - temp_v14) * (float)(&DAT_00407ed8)[temp_v3 * 4];
-    temp_v17 = (float)(&DAT_00407ed0)[temp_v11 * 4] +
+    temp_v17 = (float)(&g_sinCosTable)[temp_v11 * 4] +
              (0.0f - temp_v15) * (float)(&DAT_00407ed8)[temp_v11 * 4];
     temp_v15 = (float)(&DAT_00407ed4)[temp_v11 * 4] +
              (0.0f - temp_v15) * (float)(&DAT_00407edc)[temp_v11 * 4];
-    temp_v49 = (float)((unsigned long long)*(unsigned long long *)(&DAT_00407ed0 + temp_v3 * 4) >> 0x20) +
+    temp_v49 = (float)((unsigned long long)*(unsigned long long *)(&g_sinCosTable + temp_v3 * 4) >> 0x20) +
                 (temp_v28 - temp_v14) * (float)(&DAT_00407edc)[temp_v3 * 4];
     if (!romwright_subpiece_4_1_0(temp_v1 >> 0x1d,0)) {
       temp_v22 = -temp_v22;

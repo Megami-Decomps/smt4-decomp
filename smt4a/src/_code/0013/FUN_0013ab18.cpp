@@ -35,7 +35,7 @@ struct SoundShared {
     u32 current;       /* 0x588FB0: handle of the shared channel */
 };
 
-extern SoundChannel DAT_0061951c[2];   /* 0x61951c */
+extern SoundChannel g_bgmRequestChannels[2];   /* 0x61951c */
 extern SoundShared g_resourceSharedFlag;
 extern const char DAT_0053621c[8];
 
@@ -54,12 +54,12 @@ void FUN_0013ab18(void)
 {
     if (jyoucyuGetTableEntry(1) == 0) {
         for (s32 i = 0; i < 2; i++) {
-            SoundChannel *channel = &DAT_0061951c[i];
+            SoundChannel *channel = &g_bgmRequestChannels[i];
             SoundChannel *other = 0;
             if (i == 0) {
-                other = &DAT_0061951c[1];
+                other = &g_bgmRequestChannels[1];
             } else if (i == 1) {
-                other = &DAT_0061951c[0];
+                other = &g_bgmRequestChannels[0];
             }
 
             u32 flags = channel->flags;

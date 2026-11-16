@@ -40,7 +40,7 @@ s32 partyFindFirstUnusedEntry(void);
 void dispatchIfFound(s32 target, u32 id, s32 alternate);
 s32 FUN_004a8750(u16 id, u8 alternate, s32 arg2, bool highLevel, s32 arg4);
 void gameCounterAddSaturating(s32 kind, s32 amount);
-void FUN_003343f0(s32 arg);
+void gameGlobalsSetMenuOpenFlag(s32 arg);
 u16 shopListItemGetId(const PanelListItem *item);
 
 /* Buys the entry under the cursor: notifies the target, pays its price and moves the panel to state 2. */
@@ -67,7 +67,7 @@ void Obj55c89c::shopPurchaseConfirmSelected()
     price = FUN_004a8750(id, panel->alternate, 0, panel->level >= 100, 0);
     partyAddMoneyClampedForward(-price);
     gameCounterAddSaturating(40, price);
-    FUN_003343f0(0);
+    gameGlobalsSetMenuOpenFlag(0);
     panel->state = 2;
     panel->timer = 0;
 }

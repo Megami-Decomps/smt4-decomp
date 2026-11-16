@@ -46,7 +46,7 @@ void uiQuestSortListByEntryKind(s32 mode)
     QuestMenu *menu = g_uiQuest;
 
     if (mode == 0) {
-        QuestEntry *entry = reinterpret_cast<QuestEntry *>(FUN_002a0d0c());
+        QuestEntry *entry = reinterpret_cast<QuestEntry *>(gameDataGetSortPreferences());
         u8 *info = &entry->kindAndAlternate;
         QuestCursor *cursor = &menu->cursor;
         u8 *list = menu->list;

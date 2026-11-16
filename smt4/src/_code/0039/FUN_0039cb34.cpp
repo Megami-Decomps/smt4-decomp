@@ -27,8 +27,8 @@ extern GameState g_gameState;
 
 void pointConvertToFloat(void *out, s32 x, s32 y);
 void FUN_00233240(void *animation, s32 mode);
-void FUN_002b827c(s32 sound);
-s32 FUN_0026b564(void);
+void buttonHelpSetContext(s32 sound);
+s32 buttonHelpStateIsNot3(void);
 s32 vec2GetYInt(Vec2Point *point);
 s32 vec2GetXInt(Vec2Point *point);
 s32 uiSpriteAdvanceAnimation(Vec2Point *point);
@@ -39,14 +39,14 @@ void FUN_0039cb34(CursorPanel *panel)
     if (panel->state == 0) {
         FUN_00233240(panel->animation, 1);
         if (g_gameState.muted == 0) {
-            FUN_002b827c(0x1b);
+            buttonHelpSetContext(0x1b);
         }
         panel->flags |= 0x1000000;
         panel->state = 1;
     } else if (panel->state == 1) {
         Vec2Point *pointer = &panel->pointer;
 
-        if (uiSpriteAdvanceAnimation(pointer) != 0 && FUN_0026b564() != 0) {
+        if (uiSpriteAdvanceAnimation(pointer) != 0 && buttonHelpStateIsNot3() != 0) {
             panel->state = 2;
             panel->flags |= 2;
         }

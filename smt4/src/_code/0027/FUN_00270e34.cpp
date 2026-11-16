@@ -9,7 +9,7 @@ extern MapMain *g_mapMain;
 extern AocSystem *g_aocSystem;
 extern const char DAT_004044ec[];
 extern const char DAT_004044d4[];
-void FUN_002bff50(void);
+void messageSetConfirmDisplayMode(void);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 s32 aocPackageGrantsItem(AocSystem *system, u32 event, u32 kind);
 void *FUN_00289de4(AocSystem *system, u32 event, u32 kind);
@@ -37,7 +37,7 @@ u32 FUN_00270e34(void)
     MapEventNameView *event = reinterpret_cast<MapEventNameView *>(map);
     char scriptPath[128];
     char messagePath[128];
-    FUN_002bff50();
+    messageSetConfirmDisplayMode();
     textFormatBuffer(scriptPath, DAT_004044ec, event->event, event->event);
     textFormatBuffer(messagePath, DAT_004044d4, event->event, event->event);
     void *messages;

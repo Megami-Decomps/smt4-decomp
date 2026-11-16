@@ -5,7 +5,7 @@
 extern "C" {
 
 int dataTable04FindById(void);
-int FUN_00321a98(int *, int *);
+int itemSortCompareRankThenKey(int *, int *);
 int dataTable41FindById(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ typedef struct {
 extern int idIsAbove400(int);
 extern int gameGetSlotRecord(void);
 /* Supplied declaration required: dataTable04FindById. */
-/* Supplied declaration required: FUN_00321a98. */
+/* Supplied declaration required: itemSortCompareRankThenKey. */
 /* Supplied declaration required: dataTable41FindById. */
 
 
@@ -65,7 +65,7 @@ void FUN_002fd824(int *param_1,int *param_2)
       temp_v0 = *(short *)(temp_v1 + 0x62);
     }
     if (temp_v3 == temp_v0) {
-      FUN_00321a98(param_1,param_2);
+      itemSortCompareRankThenKey(param_1,param_2);
       return;
     }
   }

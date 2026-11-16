@@ -6,7 +6,7 @@ extern BustupCutAnimA *g_bustupCutAnim;
 
 s32 jobIsValid(u32 job);
 s32 jobGetWorkId(u32 job);
-void FUN_00164ce0(u32 job, u8 value);
+void jobSetSelectedFlag(u32 job, u8 value);
 u32 jobRecordGetTableValue(u32 job, u32 index);
 void messageMainSetMode(u8 value);
 
@@ -25,7 +25,7 @@ s32 bustupCutAnimSelectSlotsByWorkId(s32 workId)
     for (i = 1; i < BUSTUP_CUT_SLOTS; i++) {
         if (jobIsValid(anim->slots[i]) != 0) {
             if (jobGetWorkId(anim->slots[i]) == workId) {
-                FUN_00164ce0(anim->slots[i], 1);
+                jobSetSelectedFlag(anim->slots[i], 1);
                 index = 1;
                 if (anim->unk608 <= 14) {
                     index = 2;
@@ -33,7 +33,7 @@ s32 bustupCutAnimSelectSlotsByWorkId(s32 workId)
                 messageMainSetMode(jobRecordGetTableValue(anim->slots[i], index));
                 found = 1;
             } else {
-                FUN_00164ce0(anim->slots[i], 0);
+                jobSetSelectedFlag(anim->slots[i], 0);
             }
         }
     }

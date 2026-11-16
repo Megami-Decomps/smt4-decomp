@@ -4,7 +4,7 @@ extern "C" {
 void FUN_00234cd8(DummyAttachmentSource *, s32, s32);
 void FUN_00341a3c(DummyAttachmentSource *);
 void textFormatBuffer(char *, const char *, ...);
-void FUN_002adde8(AsdMdlNode *, const char *, f32 *);
+void modelGetBoneTranslationByName(AsdMdlNode *, const char *, f32 *);
 void nodeSetTranslation(AsdMdlNode *, s32, const f32 *);
 
 /* Run the active member callback, update source playback and bind both sets of dummy markers. */
@@ -37,7 +37,7 @@ void dummyAttachmentUpdate(DummyAttachmentWork *work)
         work->initialized = 1;
         for (u32 index = 0; index < 6; ++index) {
             textFormatBuffer(name, "dummy_npc%d", index + 1);
-            FUN_002adde8(work->source->model->node, name, position);
+            modelGetBoneTranslationByName(work->source->model->node, name, position);
             nodeSetTranslation(work->primary[index]->node, 0, position);
             nodeSetTranslation(work->secondary[index]->node, 0, position);
         }

@@ -21,7 +21,7 @@ typedef struct BgmSlot {
 
 extern "C" {
 
-extern BgmSlot DAT_0061951c[BGM_SLOT_COUNT];
+extern BgmSlot g_bgmRequestChannels[BGM_SLOT_COUNT];
 
 s32 jyoucyuGetTableEntry(u32 index);
 void handlerFinishById(s32 slot, s32 frames);
@@ -49,7 +49,7 @@ void bgmStop(s32 id, u32 fadeFrames, s32 force)
         return;
     }
     for (i = 0; i < BGM_SLOT_COUNT; i++) {
-        BgmSlot *slot = &DAT_0061951c[i];
+        BgmSlot *slot = &g_bgmRequestChannels[i];
         u32 flags = slot->flags;
 
         if ((flags & BGM_SLOT_PLAYING) != 0 && (flags & BGM_SLOT_SWITCHING) == 0) {

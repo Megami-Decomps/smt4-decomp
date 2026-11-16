@@ -41,7 +41,7 @@ struct SinCosEntry {
 #define XPOLY_SOURCE "c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\Filter\\FilterXPoly.cpp"
 
 extern "C" {
-extern SinCosEntry DAT_00536d14[256];
+extern SinCosEntry g_sinCosTable[256];
 
 void btlFilterLoadTexture(XPolyFilter *filter, u32 argument, u32 base);
 void *asdMemoryAlloc(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);
@@ -55,7 +55,7 @@ static __inline void sinCosUnits(f32 units, f32 *sinOut, f32 *cosOut)
     while (magnitude >= 65536.0f)
         magnitude -= 65536.0f;
     u32 whole = (u32)magnitude;
-    const SinCosEntry *entry = &DAT_00536d14[(u8)whole];
+    const SinCosEntry *entry = &g_sinCosTable[(u8)whole];
     f32 fraction = magnitude - (f32)(whole & 0xFFFF);
     *sinOut = entry->sinValue + fraction * entry->sinSlope;
     *cosOut = entry->cosValue + fraction * entry->cosSlope;

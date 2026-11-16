@@ -5,7 +5,7 @@ extern "C" {
 PartyDamageSlotsIV *gameGetSlotTable(void);
 PartyUnit *gameGetUnitRecord(s32 slot);
 s32 FUN_003bc9b8(const PartyUnit *unit);
-bool FUN_00295d7c(PartyUnit *unit);
+bool slotUnitIsInActiveParty(PartyUnit *unit);
 u8 flagWordTestBit(PartyUnit *unit, u32 bit);
 void __aeabi_memset4(void *destination, u32 size, s32 value);
 
@@ -31,7 +31,7 @@ u32 FUN_0033fc50(void)
     }
     for (i = 0; i < count; i++) {
         PartyUnit *unit = gameGetUnitRecord(slots[i]);
-        if (unit != NULL && FUN_003bc9b8(unit) != 0 && !FUN_00295d7c(unit) &&
+        if (unit != NULL && FUN_003bc9b8(unit) != 0 && !slotUnitIsInActiveParty(unit) &&
             flagWordTestBit(unit, 1) == 0 && flagWordTestBit(unit, 10) == 0 &&
             flagWordTestBit(unit, 2) == 0) {
             return 1;

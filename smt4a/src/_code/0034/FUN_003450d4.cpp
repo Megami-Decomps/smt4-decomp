@@ -50,8 +50,8 @@ u32 FUN_003450d4(FlaggedEntry *entry, const TouchRectangleRequest *rectangle,
             }
         }
     }
-    s32 primaryBefore = resourceRunEmbeddedOperationIfUnblocked(entry) + FUN_002a4878(entry);
-    s32 secondaryBefore = resourceRunOperationIfUnblocked(entry) + FUN_002a4894(reinterpret_cast<const Object *>(entry));
+    s32 primaryBefore = resourceRunEmbeddedOperationIfUnblocked(entry) + listCursorGetRowOfChildIfUnblocked(entry);
+    s32 secondaryBefore = resourceRunOperationIfUnblocked(entry) + listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(entry));
     if (accepted >= 0) {
         if (secondary)
             flaggedEntrySetValueB(entry, accepted);
@@ -66,11 +66,11 @@ u32 FUN_003450d4(FlaggedEntry *entry, const TouchRectangleRequest *rectangle,
     }
     if (notify) {
         s32 primaryAfter = resourceRunEmbeddedOperationIfUnblocked(entry);
-        primaryAfter += FUN_002a4878(entry);
+        primaryAfter += listCursorGetRowOfChildIfUnblocked(entry);
         bool changed = primaryAfter != primaryBefore;
         if (!changed) {
             s32 secondaryAfter = resourceRunOperationIfUnblocked(entry);
-            secondaryAfter += FUN_002a4894(reinterpret_cast<const Object *>(entry));
+            secondaryAfter += listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(entry));
             changed = secondaryAfter != secondaryBefore;
         }
         if (changed)

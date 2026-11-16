@@ -10,7 +10,7 @@ int btlFindEntryBlockByMemberId(...);
 int dataTable04FindById(void);
 int FUN_00243d30(...);
 int FUN_0028cb6c(void);
-int FUN_003e8bb0(...);
+int btlEntryBuildSummary(...);
 int btlMainFindEntryByListedId(...);
 int FUN_004bf6e0(int);
 int btlCalcAilmentRateScale(...);
@@ -61,7 +61,7 @@ extern unsigned int DAT_0057149c; /* 0x57149c */
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_00243d30. */
 /* Supplied declaration required: FUN_0028cb6c. */
-/* Supplied declaration required: FUN_003e8bb0. */
+/* Supplied declaration required: btlEntryBuildSummary. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_004bf6e0. */
 /* Supplied declaration required: btlCalcAilmentRateScale. */
@@ -186,7 +186,7 @@ int FUN_004c4178(fn_004c4178_arg0 *param_1,int param_2,unsigned int param_3,int 
     if (temp_v2 != 0) {
       temp_v0 = *(char *)(temp_v2 + 0x239);
     }
-    if ((temp_v2 != 0 && temp_v0 != '\0') && (FUN_003e8bb0(&uStack_cc,temp_v1,temp_v4), temp_v24 != 0)) {
+    if ((temp_v2 != 0 && temp_v0 != '\0') && (btlEntryBuildSummary(&uStack_cc,temp_v1,temp_v4), temp_v24 != 0)) {
       if (temp_v24 == 1) {
         temp_v8 = 1.5f;
       }
@@ -200,7 +200,7 @@ int FUN_004c4178(fn_004c4178_arg0 *param_1,int param_2,unsigned int param_3,int 
   pbVar6 = temp_v21;
   btlMainFindEntryByListedId(temp_v21,param_2);
   temp_v17 = (float)((unsigned long long)temp_v16 >> 0x20);
-  FUN_003e8bb0(temp_v22,temp_v21,pbVar6);
+  btlEntryBuildSummary(temp_v22,temp_v21,pbVar6);
   uStack_120 = uStack_d0;
   uStack_11c = uStack_cc;
   uStack_118 = uStack_c8;

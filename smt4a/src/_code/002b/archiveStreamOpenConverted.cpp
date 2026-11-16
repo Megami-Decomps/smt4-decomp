@@ -37,7 +37,7 @@ nn::Result archiveStreamOpenConverted(ArchiveOpenWork *work, const char *path, s
 
     if (pathBuildWide(path, convertedPath, 1) == 0) {
         result = 0xE0E046BC;
-        FUN_0013ebd8(result);
+        processResultSetValue(result);
         return result;
     }
     if (mode == 1) {
@@ -45,7 +45,7 @@ nn::Result archiveStreamOpenConverted(ArchiveOpenWork *work, const char *path, s
     } else {
         result = archiveOpen(&work->stream, convertedPath, 1);
     }
-    FUN_0013ebd8(result);
+    processResultSetValue(result);
     return result;
 }
 

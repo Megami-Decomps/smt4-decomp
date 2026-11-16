@@ -37,7 +37,7 @@ typedef struct StatusCameraWorkA {
 } StatusCameraWorkA;
 
 extern "C" {
-u8 *FUN_002a0d0c(void);
+u8 *gameDataGetSortPreferences(void);
 }
 
 extern "C" {

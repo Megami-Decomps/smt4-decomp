@@ -8,7 +8,7 @@ struct TitleConfigValues {
 };
 
 extern "C" {
-extern TitleConfigValues DAT_00588fc0;
+extern TitleConfigValues g_titleConfigValues;
 
 void FUN_0013c874(u32 value);
 void soundVolumeSettingSet(u32 value);
@@ -17,9 +17,9 @@ void soundSetVolumeSetting(u32 value);
 
 void titleConfigApply()
 {
-    FUN_0013c874(DAT_00588fc0.first);
-    soundVolumeSettingSet(DAT_00588fc0.second);
-    FUN_0013dee0(DAT_00588fc0.third);
-    soundSetVolumeSetting(DAT_00588fc0.fourth);
+    FUN_0013c874(g_titleConfigValues.first);
+    soundVolumeSettingSet(g_titleConfigValues.second);
+    FUN_0013dee0(g_titleConfigValues.third);
+    soundSetVolumeSetting(g_titleConfigValues.fourth);
 }
 }

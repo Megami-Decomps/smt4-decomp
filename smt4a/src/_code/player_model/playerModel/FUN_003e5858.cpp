@@ -14,7 +14,7 @@ ModelList *modelListInit(ModelList *list);
 void ptrListRemoveClearOwner(u32 registry, ControllerModel *model);
 void FUN_003e573c(Obj557ae8 *object, s32 index, const char *name, u16 kind);
 void controllerSetPositionXyz(ControllerModel *model, f32 x, f32 y, f32 z);
-void FUN_0040aad4(Obj557ae8Child *child, ControllerModel *parent);
+void moriModelContentLoadBody(Obj557ae8Child *child, ControllerModel *parent);
 void FUN_0040ab7c(Obj557ae8Child *child, s32 mode);
 s32 FUN_0040ab8c(Obj557ae8Child *child);
 void handleRegistryRegisterObject(u32 registry, ControllerModel *model);
@@ -27,7 +27,7 @@ void FUN_003e5858(Obj557ae8 *object)
         if (object->owned != NULL) {
             if (FUN_0040ab8c(object->owned) != 0) {
                 FUN_0040ab7c(object->owned, 2);
-                FUN_0040aad4(object->owned, NULL);
+                moriModelContentLoadBody(object->owned, NULL);
                 ControllerModel *model = object->owned->model;
                 controllerSetPositionXyz(model, 0.0f, 0.0f, 0.0f);
                 modelPlayClip(model, 0, 2, 0.0f, 0.0f);
@@ -46,7 +46,7 @@ void FUN_003e5858(Obj557ae8 *object)
         case 1:
             if (FUN_0040ab8c(slot->child) != 0) {
                 FUN_0040ab7c(slot->child, 2);
-                FUN_0040aad4(slot->child, object->owned->model);
+                moriModelContentLoadBody(slot->child, object->owned->model);
                 ControllerModel *model = slot->child->model;
                 controllerSetPositionXyz(model, 0.0f, 0.0f, 0.0f);
                 handleRegistryRegisterObject(g_handleRegistry, model);

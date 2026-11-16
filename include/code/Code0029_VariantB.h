@@ -5,6 +5,6 @@
 extern "C" {
 
 /* Reads or updates the state of an object (0 when its disabled flag at 0x62 is set). */
-u32 FUN_0029efa8(const void *object);
+u32 listCursorGetRowIfUnblocked(const void *object);
 
 } /* extern "C" */

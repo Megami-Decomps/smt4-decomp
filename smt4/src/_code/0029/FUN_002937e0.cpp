@@ -12,7 +12,7 @@ extern "C" {
 extern PartyPanelState *g_partyPanel;
 SlotTable *gameGetSlotTable(void);
 s32 objectPartRunUnlessLocked(GridNavigation *grid);
-s32 FUN_0029efa8(const GridNavigation *grid);
+s32 listCursorGetRowIfUnblocked(const GridNavigation *grid);
 void gridNavigationConfigure(GridNavigation *grid, s32 count, s32 visibleRows, s32 columns, s32 wrap, s32 alternateKeys);
 void scrollOwnerSelectIndex(GridNavigation *grid, s32 index);
 void scrollSelectionClampToCount(GridNavigation *grid);
@@ -22,9 +22,9 @@ void FUN_002937e0(void)
     PartyPanelState *panel = g_partyPanel;
     const PartyCapacityView *party = reinterpret_cast<const PartyCapacityView *>(gameGetSlotTable());
     s32 firstRow = objectPartRunUnlessLocked(&panel->capacityGrids.base);
-    s32 firstColumn = FUN_0029efa8(&panel->capacityGrids.base);
+    s32 firstColumn = listCursorGetRowIfUnblocked(&panel->capacityGrids.base);
     s32 secondRow = objectPartRunUnlessLocked(&panel->capacityGrids.expanded);
-    s32 secondColumn = FUN_0029efa8(&panel->capacityGrids.expanded);
+    s32 secondColumn = listCursorGetRowIfUnblocked(&panel->capacityGrids.expanded);
     u8 capacity = party->capacity;
     u32 rows = capacity >> 2;
     if (capacity & 3)
@@ -42,9 +42,9 @@ void FUN_002937e0(void)
         gridNavigationConfigure(&panel->capacityGrids.expanded, party->capacity - 8, 4, 4, 1, 1);
     }
     scrollOwnerSelectIndex(&panel->capacityGrids.base, firstRow);
-    FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(&panel->capacityGrids.base), firstColumn);
+    scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(&panel->capacityGrids.base), firstColumn);
     scrollOwnerSelectIndex(&panel->capacityGrids.expanded, secondRow);
-    FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(&panel->capacityGrids.expanded), secondColumn);
+    scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(&panel->capacityGrids.expanded), secondColumn);
     scrollSelectionClampToCount(&panel->capacityGrids.base);
     scrollSelectionClampToCount(&panel->capacityGrids.expanded);
 }

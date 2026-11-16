@@ -31,7 +31,7 @@ u32 scriptHolderUpdateSimple(ScriptHolder *holder)
         break;
     case 2:
         if (scrRunOpcodesStub(holder->process) == 2) {
-            FUN_00418070(FUN_004186e0(), 0);
+            FUN_00418070(rosterGetLeaderId(), 0);
             optionsClearFlag1();
             FUN_003a36b4();
             FUN_004731d8();

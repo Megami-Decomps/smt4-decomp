@@ -14,7 +14,7 @@ s32 contentGetEntryKind(u32);
 void FUN_0029963c(u32, u16);
 const PlayerEquipmentPreview *gameGetPlayerData();
 void *__aeabi_memcpy4(void *, const void *, u32);
-void FUN_00299370(PlayerEquipmentPreview *);
+void playerRecalcStatsFromEquipment(PlayerEquipmentPreview *);
 void FUN_0029a0cc(PlayerEquipmentPreview *);
 
 void equipmentPreviewUpdateSelection(Scene3a *scene)
@@ -57,7 +57,7 @@ void equipmentPreviewUpdateSelection(Scene3a *scene)
             case 8: player.equipment[2] = item; break;
             }
         }
-        FUN_00299370(&player);
+        playerRecalcStatsFromEquipment(&player);
         FUN_0029a0cc(&player);
     }
 }

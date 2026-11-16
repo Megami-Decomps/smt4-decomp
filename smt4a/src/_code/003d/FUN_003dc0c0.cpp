@@ -9,7 +9,7 @@ void uiSpriteSetImageKeyframe(GauntletSprite *sprite, s32 keyframe, s32 flags);
 void FUN_00202400(void);
 void gridNavigationConfigure(void *controller, u32 count, u32 visibleRows, u32 enabled, u32 wrap, u32 reset);
 void FUN_00212724(void);
-s32 FUN_002a4894(void *controller);
+s32 listCursorGetRowIfUnblocked(void *controller);
 void uiStoreTextureEntryCenter(GauntletSprite *sprite, s32 owner, s32 id);
 void gauntletAppBuildAvailableEntries(GauntletAppMenuWork *menu);
 s32 shopGetEntryAvailability(u32 id);
@@ -65,7 +65,7 @@ u32 FUN_003dc0c0(GauntletAppMenuWork *menu, u32 mode)
         break;
     case 5:
         uiSpriteSelectAnim(&menu->list.sprites[3], 1);
-        uiStoreTextureEntryCenter(&menu->list.sprites[3], 0x14, FUN_002a4894(menu->list.controller) + 0x40E);
+        uiStoreTextureEntryCenter(&menu->list.sprites[3], 0x14, listCursorGetRowIfUnblocked(menu->list.controller) + 0x40E);
         menu->list.sprites[3].unk18 = 0xA0;
         break;
     case 7:

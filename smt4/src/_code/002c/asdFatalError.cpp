@@ -3,11 +3,11 @@
 
 extern "C" {
 
-int FUN_002ad61c(int arg);
+int sysBreakWithCallback(int arg);
 
 void asdFatalError(void)
 {
-    FUN_002ad61c(0);
+    sysBreakWithCallback(0);
 }
 
 } /* extern "C" */

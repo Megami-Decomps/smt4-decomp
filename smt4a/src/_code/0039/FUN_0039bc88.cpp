@@ -9,12 +9,12 @@ extern "C" {
 
 extern GameStateSlot g_gameState;
 
-void FUN_003d4c68(s32 value);
+void bgmResumeOrRequestTrack(s32 value);
 
-/* Script command: hands the game-state word at 0x2c to FUN_003d4c68. */
+/* Script command: hands the game-state word at 0x2c to bgmResumeOrRequestTrack. */
 u32 FUN_0039bc88(void)
 {
-    FUN_003d4c68(g_gameState.value);
+    bgmResumeOrRequestTrack(g_gameState.value);
     return 1;
 }
 

@@ -8,7 +8,7 @@ int controllerSetDestination(int, int *);
 int controllerSetRotationEulerDegrees(int);
 
 int ptrListRemoveClearOwner(unsigned int);
-int FUN_001f3eec(void);
+int floatInterpolateOverDuration(void);
 int FUN_00281b94(int);
 int FUN_00294854(void);
 int distSpatial(void);
@@ -21,7 +21,7 @@ int moriModelUnitStartMaterialAnimation(...);
 int FUN_003fd924(...);
 int modelPlayClip(...);
 int candidateGetPreferredValue(int);
-int FUN_004ff98c(...);
+int itemListGetCurrentIdOrInvalid(...);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
@@ -42,7 +42,7 @@ extern int gameFlagsGetBlock(void);
 extern int querySlotHasHandle(void);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: ptrListRemoveClearOwner. */
-/* Supplied declaration required: FUN_001f3eec. */
+/* Supplied declaration required: floatInterpolateOverDuration. */
 /* Supplied declaration required: FUN_00281b94. */
 /* Supplied declaration required: FUN_00294854. */
 /* Supplied declaration required: distSpatial. */
@@ -62,7 +62,7 @@ extern int gameTestFlagBlockBit(int);
 extern int FUN_0040ab8c(int);
 /* Supplied declaration required: candidateGetPreferredValue. */
 extern int FUN_004ff970(unsigned int);
-/* Supplied declaration required: FUN_004ff98c. */
+/* Supplied declaration required: itemListGetCurrentIdOrInvalid. */
 extern int animationIsClipComplete(unsigned int);
 extern int FUN_004ffa14(int);
 extern int slots4FGetActiveValue(int);
@@ -187,7 +187,7 @@ void FUN_002737a8(void)
               case 3:
                 VectorSignedToFloat(piVar1[0x1c],(unsigned char)(in_fpscr >> 0x16) & 3);
                 temp_v8 = -255.0f;
-                FUN_001f3eec();
+                floatInterpolateOverDuration();
                 in_s0 = (int)temp_v8;
                 g_mapGimic[0x1c] = g_mapGimic[0x1c] + 1;
                 mapTableValueSet(in_s0);
@@ -331,7 +331,7 @@ void FUN_002737a8(void)
               }
             }
             if ((((short)piVar1[temp_v4 * 0xf + 0x29] == 1) &&
-                (temp_v2 = FUN_004ff98c(temp_v1), temp_v2 == 1)) &&
+                (temp_v2 = itemListGetCurrentIdOrInvalid(temp_v1), temp_v2 == 1)) &&
                (temp_v2 = FUN_004ffa14(temp_v1), temp_v2 != 0)) {
               in_s0 = (int)temp_v9;
               modelPlayClip(temp_v1,2);
@@ -551,14 +551,14 @@ LAB_00274348:
               *(unsigned char *)(piVar1 + temp_v0 * 6 + 0x236) = 1;
               temp_v1 = querySlotHasHandle();
               if (temp_v1 != 0) {
-                temp_v1 = FUN_004ff98c(temp_v4);
+                temp_v1 = itemListGetCurrentIdOrInvalid(temp_v4);
                 if (temp_v1 != 2) {
                   FUN_003fd924(temp_v4,2);
                   moriModelUnitStartMaterialAnimation(temp_v4,0,2);
                 }
               }
               else {
-                temp_v1 = FUN_004ff98c(temp_v4);
+                temp_v1 = itemListGetCurrentIdOrInvalid(temp_v4);
                 if (temp_v1 == 2) {
                   FUN_003fd924(temp_v4,0,2);
                   moriModelUnitStartMaterialAnimation(temp_v4,0,2);
@@ -570,7 +570,7 @@ LAB_00274348:
                    (temp_v4 = FUN_0040ab8c(piVar1[temp_v0 * 6 + 0x233]), temp_v4 != 0)) &&
                   (temp_v7 = *(unsigned int *)(piVar1[temp_v0 * 6 + 0x233] + 4),
                   (char)piVar1[temp_v0 * 6 + 0x236] != '\0')) {
-            temp_v4 = FUN_004ff98c(temp_v7);
+            temp_v4 = itemListGetCurrentIdOrInvalid(temp_v7);
             if (temp_v4 == 2) {
               FUN_003fd924(temp_v7,0,2);
               moriModelUnitStartMaterialAnimation(temp_v7,0,2);

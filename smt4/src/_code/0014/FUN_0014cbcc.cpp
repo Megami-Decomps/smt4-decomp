@@ -5,7 +5,7 @@
 extern "C" {
 
 int aocTexExpandCompressedData(int, unsigned int, int);
-int FUN_002a4584(int, unsigned char [128], unsigned char [128], int *, unsigned int, int, unsigned int);
+int fileQueueRequestAndWait(int, unsigned char [128], unsigned char [128], int *, unsigned int, int, unsigned int);
 int libc_strcat(...);
 int asdTextureCreate(void);
 int libc_strcpy(...);
@@ -23,7 +23,7 @@ extern unsigned char LAB_0014ce24; /* 0x14ce24 */
 extern int g_aocDisplay; /* 0x433130 */
 
 /* Supplied declaration required: aocTexExpandCompressedData. */
-/* Supplied declaration required: FUN_002a4584. */
+/* Supplied declaration required: fileQueueRequestAndWait. */
 /* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: asdTextureCreate. */
 /* Supplied declaration required: libc_strcpy. */
@@ -81,7 +81,7 @@ unsigned int FUN_0014cbcc(unsigned int param_1,int *param_2,unsigned int param_3
         }
       }
       temp_v2 = g_aocDisplay;
-      FUN_002a4584(g_aocDisplay,temp_v6,temp_v5,&temp_v4,temp_v0,0x80,param_3);
+      fileQueueRequestAndWait(g_aocDisplay,temp_v6,temp_v5,&temp_v4,temp_v0,0x80,param_3);
       if (temp_v2 != 0) {
         if (*(char *)(param_2[1] + 0xd) != '\0') {
           aocTexExpandCompressedData(temp_v2,temp_v3,0x80);

@@ -48,7 +48,7 @@ void *resourceResolveHeaderPointer(EffectSelectionBlock *);
 void effPartSetData(EffectSelectionBlock *, void *, u32, u16);
 void *effBlockCreateFromBlock(EffectSelectionBlock *);
 void objectRegistryInsert(void *, s32);
-u32 FUN_003c378c(EffectEditorSnapshot *, s32);
+u32 effectEditorEditPositionVector(EffectEditorSnapshot *, s32);
 void FUN_00390038(const EffectPositionControl *);
 void resourceRunHandlerCallback(EffectHandlerRequest *, const EffMenuPosition *);
 void FUN_002f8794();
@@ -255,7 +255,7 @@ void FUN_002b3ed8(const EffMenuPosition *first, const EffMenuPosition *second,
 
 /* NON_MATCHING: aggregate copy shapes and vector temporary allocation differ. */
 // Edit the position vector, then draw its height, ground radius and transformed endpoint.
-u32 FUN_003c378c(EffectEditorSnapshot *record, s32 relative)
+u32 effectEditorEditPositionVector(EffectEditorSnapshot *record, s32 relative)
 {
     u32 result = 1;
     if (!(DAT_0059ea50.flags & 2)) {

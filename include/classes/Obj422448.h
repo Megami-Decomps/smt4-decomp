@@ -21,7 +21,7 @@ public:
     typedef void (Obj422448::*Handler)();
     typedef s32 (Obj422448::*EnterHandler)();
     typedef void (Obj42247c::*LeaveHandler)();
-    void FUN_003abad4();
+    void bibleScreenEnableAndResetValue();
     void bibleScreenStartScript();
     void FUN_003ab348();
     void FUN_003abed8();
@@ -31,7 +31,7 @@ public:
     void sceneScriptDoneSetState();
     void FUN_003ab128();
     void FUN_003ab7c8();
-    void FUN_003ab948();
+    void bibleScreenClearListedFlags();
 
     /* 0x5A4 */ u8 unk5A4[0xA5B8 - 0x5A4];
     /* 0xA5B8 */ Handler handlers[13];

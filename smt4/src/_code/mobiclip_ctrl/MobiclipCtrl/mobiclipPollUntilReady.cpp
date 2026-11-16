@@ -12,7 +12,7 @@ struct MoviePlaybackControl {
 extern "C" {
 extern MoviePlaybackControl g_mobiclipCtrl;
 extern MovieReadHandle DAT_004c3af8;
-extern MovieSync DAT_004c3b20;
+extern MovieSync g_mobiclipPlayer;
 void mobiclipPlayerReleaseHandle(MovieReadHandle *);
 void timedJobBeginStop(MovieSync *);
 void FUN_0011b788(MovieSync *);
@@ -39,39 +39,39 @@ u8 mobiclipPollUntilReady(void)
     do {
         if (mobiclipReadIsComplete(&DAT_004c3af8)) {
             mobiclipPlayerReleaseHandle(&DAT_004c3af8);
-            timedJobBeginStop(&DAT_004c3b20);
-            FUN_0011b788(&DAT_004c3b20);
+            timedJobBeginStop(&g_mobiclipPlayer);
+            FUN_0011b788(&g_mobiclipPlayer);
             asdSndApplyPendingVoiceState(&DAT_004c3af8);
         }
-        if (!FUN_00350e18(&DAT_004c3b20)) {
-            s64 elapsed = FUN_00350ff8(&DAT_004c3b20);
+        if (!FUN_00350e18(&g_mobiclipPlayer)) {
+            s64 elapsed = FUN_00350ff8(&g_mobiclipPlayer);
             if (elapsed >= g_mobiclipCtrl.interval) {
-                FUN_0034fc50(&DAT_004c3b20, g_mobiclipCtrl.interval);
-            } else if (FUN_00350c98(&DAT_004c3b20, g_mobiclipCtrl.interval)) {
-                FUN_0034fe14(&DAT_004c3b20);
+                FUN_0034fc50(&g_mobiclipPlayer, g_mobiclipCtrl.interval);
+            } else if (FUN_00350c98(&g_mobiclipPlayer, g_mobiclipCtrl.interval)) {
+                FUN_0034fe14(&g_mobiclipPlayer);
             }
         }
-        if (FUN_00350854(&DAT_004c3b20)) {
-            s64 elapsed = FUN_00350ff8(&DAT_004c3b20);
+        if (FUN_00350854(&g_mobiclipPlayer)) {
+            s64 elapsed = FUN_00350ff8(&g_mobiclipPlayer);
             if (elapsed >= g_mobiclipCtrl.interval * 6) {
                 FUN_0034f5f8(&DAT_004c3af8);
-                movieSyncDrainSourcePositions(&DAT_004c3b20);
-                FUN_0034fbc8(&DAT_004c3b20);
+                movieSyncDrainSourcePositions(&g_mobiclipPlayer);
+                FUN_0034fbc8(&g_mobiclipPlayer);
             } else if (elapsed >= 0) {
                 ready = true;
-                FUN_00350e30(&DAT_004c3b20);
+                FUN_00350e30(&g_mobiclipPlayer);
                 FUN_0034f630(&DAT_004c3af8);
             }
         }
         if (g_mobiclipCtrl.stop) {
             interrupted = true;
         }
-        mobiclipYieldPlaybackThread(&DAT_004c3b20);
-    } while (!ready && !interrupted && DAT_004c3b20.state != 7 && DAT_004c3b20.state != 1);
+        mobiclipYieldPlaybackThread(&g_mobiclipPlayer);
+    } while (!ready && !interrupted && g_mobiclipPlayer.state != 7 && g_mobiclipPlayer.state != 1);
     if (ready) {
         return 1;
     }
-    FUN_00350320(&DAT_004c3b20);
+    FUN_00350320(&g_mobiclipPlayer);
     return 0;
 }
 }

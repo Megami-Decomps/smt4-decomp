@@ -17,7 +17,7 @@ int partyApplyNonlethalAilmentDamage(int, int);
 int FUN_0025bc80(void);
 int FUN_0027f48c(...);
 int FUN_0027f848(void);
-int FUN_0027f958(unsigned int *, unsigned int [13], int);
+int padGetNormalizedAnalogStick(unsigned int *, unsigned int [13], int);
 int lmapSetSceneId(unsigned int);
 int FUN_0027fca0(...);
 int VectorSignedToFloat(...);
@@ -60,7 +60,7 @@ extern int unitGroupHasFlag(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0025bc80. */
 /* Supplied declaration required: FUN_0027f48c. */
 /* Supplied declaration required: FUN_0027f848. */
-/* Supplied declaration required: FUN_0027f958. */
+/* Supplied declaration required: padGetNormalizedAnalogStick. */
 /* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: FUN_0027fca0. */
 /* Supplied declaration required: mapSelectContainingRegions. */
@@ -151,7 +151,7 @@ void FUN_002c8ce4(void)
           lmapSetSceneId(temp_v3);
         }
         else {
-          FUN_0027f958(&temp_v16,temp_v17,0);
+          padGetNormalizedAnalogStick(&temp_v16,temp_v17,0);
           if (DAT_0049fb34 != 0) {
             if (DAT_0049fb34 == 1) {
               if (*(int *)(g_lmapScene + 8) == 5) {

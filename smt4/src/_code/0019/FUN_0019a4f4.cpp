@@ -30,7 +30,7 @@ int messageDismissNumericBanner(...);
 int buttonHelpSetText(...);
 int uiSpriteSetImageKeyframe(...);
 int dataTable08Sub1GetRecord(...);
-int FUN_002b8ee0(...);
+int uiSlidingSpriteAdvance(...);
 int timerStart(...);
 struct BtlMainState;
 void FUN_00338c38(BtlMainState *script);
@@ -45,7 +45,7 @@ int useCounterRelease(void);
 int useCounterStart(void);
 int FUN_0029e328(...);
 int sortMenuCreate(...);
-int FUN_0029efa8(...);
+int listCursorGetRowIfUnblocked(...);
 int resourceRunOperationIfUnblocked(...);
 int gameGetUnitRecord(...);
 int dataTable40FindById(void);
@@ -60,7 +60,7 @@ int FUN_00297ca4(...);
 int playSceneSetState(...);
 int scrollOwnerSelectIndex(...);
 int objectPartRunUnlessLocked(...);
-int FUN_0029eb5c(char *, int);
+int scrollListSetSelectionMarkChanged(char *, int);
 int FUN_0029efd8(...);
 int uiScrollHandleActionsOrTouch(...);
 int gridNavigationConfigure(...);
@@ -148,10 +148,10 @@ extern int useCounterIsFinished(void);
 /* Supplied declaration required: scrollOwnerSelectIndex. */
 /* Supplied declaration required: objectPartRunUnlessLocked. */
 extern int FUN_0029e958(int);
-/* Supplied declaration required: FUN_0029eb5c. */
+/* Supplied declaration required: scrollListSetSelectionMarkChanged. */
 extern int flagWordTestBit(unsigned int *, unsigned int);
 /* Supplied declaration required: buttonHelpSetText. */
-/* Supplied declaration required: FUN_0029efa8. */
+/* Supplied declaration required: listCursorGetRowIfUnblocked. */
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
@@ -166,7 +166,7 @@ extern int FUN_002b6ad0(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int ifTouchGetSelectionMode(void);
 extern int ifTouchGetSelectedRegion(void);
-/* Supplied declaration required: FUN_002b8ee0. */
+/* Supplied declaration required: uiSlidingSpriteAdvance. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 extern short vec2GetYInt(int);
@@ -254,7 +254,7 @@ void FUN_0019a4f4(int param_1,unsigned int param_2,unsigned int param_3)
           temp_v31 = (unsigned int *)0x1;
           temp_v32 = 1;
           gridNavigationConfigure(temp_v33,0x191);
-          FUN_0029eb5c(temp_v33,DAT_00435de8 + 2);
+          scrollListSetSelectionMarkChanged(temp_v33,DAT_00435de8 + 2);
           goto LAB_0019a5e0;
         }
       }
@@ -262,7 +262,7 @@ void FUN_0019a4f4(int param_1,unsigned int param_2,unsigned int param_3)
       temp_v31 = (unsigned int *)0x1;
       temp_v32 = 1;
       gridNavigationConfigure(temp_v33,400,6,1);
-      FUN_0029eb5c(temp_v33,DAT_00435de8 + 1);
+      scrollListSetSelectionMarkChanged(temp_v33,DAT_00435de8 + 1);
     }
 LAB_0019a5e0:
     g_partyMenuListState = 1;
@@ -580,7 +580,7 @@ LAB_0019aebc:
       temp_v33 = (char *)0x0;
       temp_v19 = 0;
       temp_v5 = resourceRunOperationIfUnblocked(*temp_v31);
-      temp_v17 = FUN_0029efa8(*temp_v31);
+      temp_v17 = listCursorGetRowIfUnblocked(*temp_v31);
       temp_v5 = temp_v5 + temp_v17;
       temp_v17 = FUN_00297ca4(param_1,1);
       if (temp_v17 == 1) {
@@ -845,7 +845,7 @@ LAB_0019b58c:
           if (temp_v7 != 0) goto LAB_0019b58c;
         }
         temp_v5 = resourceRunOperationIfUnblocked(*(unsigned int *)(param_1 + 0x340c));
-        temp_v17 = FUN_0029efa8(*(unsigned int *)(param_1 + 0x340c));
+        temp_v17 = listCursorGetRowIfUnblocked(*(unsigned int *)(param_1 + 0x340c));
         piVar14 = (int *)(param_1 + 0x3504);
         temp_v6 = temp_v5 + temp_v17;
         *(unsigned int *)(param_1 + *(int *)(param_1 + 0x305c) * 4 + 0x3470) = 0;
@@ -1003,7 +1003,7 @@ LAB_0019b924:
         break;
       }
       temp_v5 = resourceRunOperationIfUnblocked(*piVar14);
-      temp_v17 = FUN_0029efa8(*piVar14);
+      temp_v17 = listCursorGetRowIfUnblocked(*piVar14);
       temp_v10 = (unsigned int)*(unsigned short *)(param_1 + (temp_v17 + temp_v5) * 2 + 0x3480);
       temp_v6 = temp_v10;
       FUN_0028cfd8();
@@ -1203,7 +1203,7 @@ LAB_0019be74:
     temp_v5 = 0;
     do {
       if ((temp_v5 * 3 <= *(int *)(param_1 + 0x3044)) &&
-         (FUN_002b8ee0(param_1 + temp_v5 * 0x8c + 0x73c,0), temp_v5 == 3)) {
+         (uiSlidingSpriteAdvance(param_1 + temp_v5 * 0x8c + 0x73c,0), temp_v5 == 3)) {
         if ((*(char *)(param_1 + 0x96a) != '\0') && (temp_v17 != 0)) {
           playSceneSetState(param_1,0xf,1);
           puVar13 = (unsigned int *)(*(int *)(param_1 + 0x3040) + 0x44a0);
@@ -1220,13 +1220,13 @@ LAB_0019be74:
     }
     break;
   case 0x10:
-    FUN_002b8ee0(param_1 + 0x20,0);
+    uiSlidingSpriteAdvance(param_1 + 0x20,0);
     temp_v5 = FUN_0028cfbc(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
     temp_v17 = FUN_0029d644(temp_v33);
     temp_v7 = 0;
     do {
       if ((temp_v5 <= temp_v7) || (temp_v7 <= *(int *)(param_1 + 0x3044) - 1)) {
-        FUN_002b8ee0(param_1 + temp_v7 * 0x8c + 0x138,0);
+        uiSlidingSpriteAdvance(param_1 + temp_v7 * 0x8c + 0x138,0);
       }
       temp_v7 = temp_v7 + 1;
     } while (temp_v7 < 8);
@@ -1244,7 +1244,7 @@ LAB_0019be74:
     break;
   case 0x12:
     FUN_001990d4(param_1);
-    temp_v5 = FUN_002b8ee0(param_1 + 0x11a0,0);
+    temp_v5 = uiSlidingSpriteAdvance(param_1 + 0x11a0,0);
     if (temp_v5 == 0) break;
     playSceneSetState(param_1,0x13,0);
     temp_v9 = 0x38;
@@ -1330,7 +1330,7 @@ joined_r0x0019c3c8:
   case 0x1f:
     if (*(char *)(param_1 + 0x3081) == '\0') {
       if (*(int *)(param_1 + 0x3044) < 0x26) {
-        FUN_002b8ee0(param_1 + 0x1344,0);
+        uiSlidingSpriteAdvance(param_1 + 0x1344,0);
         break;
       }
       if (*(int *)(param_1 + 0x3044) == 0x26) {

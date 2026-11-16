@@ -39,7 +39,7 @@ void Obj55c8d0::FUN_004a4d70()
     s32 x = vec2GetXInt(selection);
     pointConvertToFloat(screen->cursor.position, x, y);
     if (uiSpriteGetCompletionState(selection) && buttonHelpIsNotActive()) {
-        FUN_003343f0(0);
+        gameGlobalsSetMenuOpenFlag(0);
         screen->state = 2;
         screen->unk18 = 0;
         pointConvertToFloat(screen->cursor.position, 0, 0);

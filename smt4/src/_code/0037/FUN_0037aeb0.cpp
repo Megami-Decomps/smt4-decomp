@@ -15,7 +15,7 @@ typedef struct {
 
 /* Supplied declaration required: listAppendNode. */
 /* Supplied declaration required: FUN_002b4f64. */
-extern int FUN_002baed8(void);
+extern int soundRequestQueueGetInstance(void);
 /* Supplied declaration required: FUN_0037bd50. */
 
 
@@ -38,7 +38,7 @@ void FUN_0037aeb0(int param_1,unsigned int *param_2,unsigned int *param_3)
   unsigned int temp_v12;
   
   FUN_0037bd50(temp_v11,*param_2);
-  temp_v1 = FUN_002baed8();
+  temp_v1 = soundRequestQueueGetInstance();
   temp_v8 = temp_v1;
   FUN_002b4f64(temp_v1,0x10);
   *(unsigned int *)(temp_v8 + 0xc) = *(unsigned int *)(temp_v1 + 0x184);
@@ -62,7 +62,7 @@ void FUN_0037aeb0(int param_1,unsigned int *param_2,unsigned int *param_3)
   temp_v8 = param_3[2];
   if (0 < temp_v8) {
     temp_v0 = *(unsigned char *)(param_3 + 1);
-    temp_v2 = FUN_002baed8();
+    temp_v2 = soundRequestQueueGetInstance();
     temp_v1 = temp_v2;
     FUN_002b4f64(temp_v2,7);
     *(unsigned int *)(temp_v1 + 0xc) = *(unsigned int *)(temp_v2 + 0x184);

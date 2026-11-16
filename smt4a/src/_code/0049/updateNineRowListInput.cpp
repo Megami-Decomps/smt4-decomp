@@ -24,10 +24,10 @@ void updateNineRowListInput(NineRowListInput *list)
             resourceRunOperationIfUnblocked(&list->grid);
             while (resourceRunOperationIfUnblocked(&list->grid) == previousTop) {
                 if (resourceRunOperationIfUnblocked(&list->grid) == 0 &&
-                    FUN_002a4894(reinterpret_cast<const Object *>(&list->grid)) == 0)
+                    listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(&list->grid)) == 0)
                     break;
                 if (resourceRunOperationIfUnblocked(&list->grid) == objectApplyIfUnblocked(&list->grid) - 9 &&
-                    FUN_002a4894(reinterpret_cast<const Object *>(&list->grid)) == 8)
+                    listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(&list->grid)) == 8)
                     break;
                 FUN_00228b04(&list->grid, 0);
             }

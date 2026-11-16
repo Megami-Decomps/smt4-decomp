@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match6_PhaseTrig.h"
 
 extern "C" {
-extern const PhaseTrigEntry DAT_00536d14[];
+extern const PhaseTrigEntry g_sinCosTable[];
 void nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20(f32 *, const f32 *, const PhaseVector *);
 void FUN_001b4a00(f32 *, const PhaseVector *, const f32 *);
 
@@ -11,9 +11,9 @@ void mathMatrixBuildInversePlanarTransform(f32 *matrix, f32 angle, f32 x, f32 y)
 {
     PhaseVector origin = { x, y, 0.0f };
     PhaseVector inverseOrigin = { -x, -y, 0.0f };
-    PhaseSinCos xRotation = samplePhase(DAT_00536d14, 0.0f);
-    PhaseSinCos yRotation = samplePhase(DAT_00536d14, 0.0f);
-    PhaseSinCos zRotation = samplePhase(DAT_00536d14, 256.0f - angle);
+    PhaseSinCos xRotation = samplePhase(g_sinCosTable, 0.0f);
+    PhaseSinCos yRotation = samplePhase(g_sinCosTable, 0.0f);
+    PhaseSinCos zRotation = samplePhase(g_sinCosTable, 256.0f - angle);
     matrix[3] = 0.0f;
     matrix[7] = 0.0f;
     matrix[8] = -yRotation.sine;

@@ -5,12 +5,12 @@
 extern "C" {
 
 extern MapEpl *g_mapEpl;
-extern const char DAT_0040442c[];
+extern const char g_mapEplSourceFileName[];
 
 /* Allocates the EPL table and clears its state and all entries. */
 void MapEpl_InitState(void)
 {
-    asdDebugTrace(DAT_0040442c, 67);
+    asdDebugTrace(g_mapEplSourceFileName, 67);
     MapEpl *work = (MapEpl *)asdMemAlloc(0x100, 0x100, 0, sizeof(MapEpl), 1);
 
     g_mapEpl = work;

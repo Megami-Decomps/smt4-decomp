@@ -22,7 +22,7 @@ int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
 int FUN_00184b90(...);
 int __aeabi_memset4(...);
-int FUN_001cd3ec(...);
+int modelLoadFileAsyncByName(...);
 int asdLoadFileSyncDefault(...);
 int rebuildFusionCatalogLists(...);
 int scrScriptProcessCreate(...);
@@ -91,7 +91,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: dataTableGetEntries. */
 extern int gameGetSlotRecord(void);
 /* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: FUN_001cd3ec. */
+/* Supplied declaration required: modelLoadFileAsyncByName. */
 /* Supplied declaration required: asdLoadFileSyncDefault. */
 extern int saveGetUserSettingsBlock(void);
 /* Supplied declaration required: rebuildFusionCatalogLists. */
@@ -107,7 +107,7 @@ extern int lmapSceneGetScript(void);
 /* Supplied declaration required: _ZN9Obj557af8C1EPK21AsdAnimCameraResource. */
 extern int modelListInit(void);
 extern int bitsAt60Test(int, unsigned int);
-extern int FUN_004dad8c(void);
+extern int histogramFindHighestSupportedValue(void);
 /* Supplied declaration required: fusionListAvailableSpecialRecipes. */
 /* Supplied declaration required: fusionRaceSelectionInitialize. */
 /* Supplied declaration required: paramsClearPacket. */
@@ -154,7 +154,7 @@ void FUN_002ab804(void)
     fusionRaceSelectionInitialize();
   }
   *piVar2 = temp_v1;
-  temp_v1 = FUN_004dad8c();
+  temp_v1 = histogramFindHighestSupportedValue();
   piVar2[0x2429] = temp_v1;
   *(unsigned char *)(piVar2 + 0x2499) = 0;
   temp_v1 = 0x100;
@@ -277,7 +277,7 @@ void FUN_002ab804(void)
     temp_v1 = modelListInit();
   }
   piVar2[0x2482] = temp_v1;
-  FUN_001cd3ec();
+  modelLoadFileAsyncByName();
   temp_v2 = 0x20;
   asdMemoryAllocTraced(0x20,&LAB_002abbd8,0x1d18);
   temp_v1 = 0;
@@ -285,7 +285,7 @@ void FUN_002ab804(void)
     temp_v1 = modelListInit();
   }
   piVar2[0x2483] = temp_v1;
-  FUN_001cd3ec();
+  modelLoadFileAsyncByName();
   *(unsigned int *)(g_handleRegistry + 0x34) = *(unsigned int *)(g_handleRegistry + 0x34) | 1;
   piVar2[0x2497] = 0;
   piVar2[0x2498] = 0;

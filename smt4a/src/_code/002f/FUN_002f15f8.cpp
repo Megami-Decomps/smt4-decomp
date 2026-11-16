@@ -15,7 +15,7 @@ typedef char QuestFocusAnimationViewOffsetsCheck[
     offsetof(QuestFocusAnimationView, reposition) == 0x93C ? 1 : -1];
 
 extern "C" {
-u8 FUN_001bd100(u32 questId);
+u8 dataTable1bOr1cRecordHasFlag1(u32 questId);
 void uiSpriteSetKeyframe(void *sprite, s32 frame, s32 flags);
 void uiSpriteSetImageKeyframe(void *sprite, s32 image, s32 flags);
 s32 objectApplyIfUnblocked(void *cursor);
@@ -30,7 +30,7 @@ void FUN_002f15f8(u32 questId, s32 reposition)
     UiQuestApoc *quest = g_uiQuest;
     QuestFocusAnimationView *animation = (QuestFocusAnimationView *)quest;
     quest->questId = questId;
-    quest->unk90c = FUN_001bd100(questId);
+    quest->unk90c = dataTable1bOr1cRecordHasFlag1(questId);
     animation->speed = 0.2088f;
     uiSpriteSetKeyframe(animation->sprite, 0, 0);
     uiSpriteSetImageKeyframe(animation->sprite, 8, 0);

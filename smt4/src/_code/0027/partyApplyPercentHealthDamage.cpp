@@ -25,7 +25,7 @@ extern "C" {
 DamagePlayer *gameGetPlayerData();
 DamageUnit *gameGetUnitRecord(s32 slot);
 DamageUnit *gameGetSupportUnitData();
-u16 FUN_002903f0();
+u16 rosterGetLeaderId();
 s32 table1bOr1cGetRecordValue(u32 id);
 }
 
@@ -115,7 +115,7 @@ extern "C" void partyApplyPercentHealthDamage(s32 group, s32 percentage)
     s32 maximum = support->maximumHealth;
     s32 reduction = healthReduction(maximum, percentage);
     s32 remaining = support->currentHealth - reduction;
-    bool permitsZero = table1bOr1cGetRecordValue(FUN_002903f0()) == 4;
+    bool permitsZero = table1bOr1cGetRecordValue(rosterGetLeaderId()) == 4;
     if (remaining <= 0 && !permitsZero)
         remaining = 1;
     if (remaining > maximum)

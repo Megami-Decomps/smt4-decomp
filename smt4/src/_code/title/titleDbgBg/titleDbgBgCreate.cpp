@@ -19,7 +19,7 @@ struct DebugBackgroundWork {
 };
 typedef char DebugBackgroundWorkSizeCheck[sizeof(DebugBackgroundWork) == 0x90 ? 1 : -1];
 extern "C" {
-extern DebugBackgroundWork *DAT_0044e2e8;
+extern DebugBackgroundWork *g_titleDbgBg;
 void titleDbgBgDestroy();
 void FUN_001251d8();
 void FUN_00125e64();
@@ -35,10 +35,10 @@ static const char s_buildTime[] = "14:15:50";
 extern "C" void titleDbgBgCreate()
 {
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\title\\titleDbgBg.cpp", 56);
-    DAT_0044e2e8 = static_cast<DebugBackgroundWork *>(asdMemAlloc(0x100, 0x100, 0, 0x90, 1));
-    DAT_0044e2e8->texture = 0;
-    DebugBackgroundWork *work = DAT_0044e2e8;
-    DebugBackgroundLabel *label = &DAT_0044e2e8->label;
+    g_titleDbgBg = static_cast<DebugBackgroundWork *>(asdMemAlloc(0x100, 0x100, 0, 0x90, 1));
+    g_titleDbgBg->texture = 0;
+    DebugBackgroundWork *work = g_titleDbgBg;
+    DebugBackgroundLabel *label = &g_titleDbgBg->label;
     label->frame = 0;
     textFormatBuffer(label->text, "%s %s", s_buildDate, s_buildTime);
     work->visible = 0;

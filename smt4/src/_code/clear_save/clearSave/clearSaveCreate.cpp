@@ -8,7 +8,7 @@ extern "C" {
 extern ClearSaveWork *g_clearSave;
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 option);
 void fileSlotLoad(u32 slot);
-void FUN_002898e4();
+void commonBgAcquire();
 void buttonHelpCreate();
 void commonBgStopChildAndBeginTransition();
 void *asdLoadFileSyncDefault(const char *path);
@@ -31,7 +31,7 @@ void clearSaveCreate(s32 mode)
         g_clearSave->active = 1;
     ClearSaveWork *work = g_clearSave;
     fileSlotLoad(0x3C);
-    FUN_002898e4();
+    commonBgAcquire();
     buttonHelpCreate();
     commonBgStopChildAndBeginTransition();
     work->heapA = asdLoadFileSyncDefault("clear_save/clearSave.bf");

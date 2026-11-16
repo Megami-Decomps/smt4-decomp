@@ -7,9 +7,9 @@ extern "C" {
 s32 scrWorkGetValue(s32 index);
 int scrWorkSetValue(s32 index, s32 value);
 void *fileSlotGetBuffer(u32 slot);
-void *FUN_002903f0(void);
+void *rosterGetLeaderId(void);
 int uiBindRecordRewardText(void *object, s32 arg0, s32 arg1);
-int FUN_002bff50(void);
+int messageSetConfirmDisplayMode(void);
 s32 messageForwardDefaultMode(void *buffer, s32 arg1, s32 step, s32 arg3, s32 arg4);
 int FUN_0029016c(void *object, s32 arg);
 int FUN_00290248(void *object);
@@ -22,7 +22,7 @@ u32 scrComm_Message_ConfirmAndApplySimple(void)
     s32 result;
 
     if (scrGetCommandFrame() == 0) {
-        if (FUN_0029022c() == 0) {
+        if (rosterHasLeader() == 0) {
             return 1;
         }
         scrWorkSetValue(0, 0);
@@ -30,9 +30,9 @@ u32 scrComm_Message_ConfirmAndApplySimple(void)
     }
     buffer = fileSlotGetBuffer(30);
     if (scrWorkGetValue(0) == 0) {
-        object = FUN_002903f0();
+        object = rosterGetLeaderId();
         uiBindRecordRewardText(object, 0, 1);
-        FUN_002bff50();
+        messageSetConfirmDisplayMode();
         result = messageForwardDefaultMode(buffer, 2, scrWorkGetValue(1), 6, 0);
         scrWorkSetValue(1, scrWorkGetValue(1) + 1);
         if (result == 1) {

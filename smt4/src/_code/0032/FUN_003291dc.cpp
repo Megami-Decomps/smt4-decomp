@@ -24,7 +24,7 @@ int FUN_00248738(...);
 unsigned int appTryPurchase(unsigned int, int, int);
 int appCheckPurchaseRequirements(void);
 int textEncodeFontSlot(...);
-int FUN_0029eb5c(int, int);
+int scrollListSetSelectionMarkChanged(int, int);
 int resourceRunOperationIfUnblocked(...);
 int FUN_0029efd8(...);
 int uiScrollHandleActionsOrTouch(...);
@@ -65,7 +65,7 @@ extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_0029e328. */
 /* Supplied declaration required: sortMenuCreate. */
-/* Supplied declaration required: FUN_0029eb5c. */
+/* Supplied declaration required: scrollListSetSelectionMarkChanged. */
 /* Supplied declaration required: FUN_0029ede8. */
 extern int FUN_0029ee54(int);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
@@ -78,7 +78,7 @@ extern int sys43e188GetState(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int padIsButtonRepeat(unsigned int);
 /* Supplied declaration required: eventQueueAddUnique. */
-extern int FUN_002b8ee0(int, unsigned int);
+extern int uiSlidingSpriteAdvance(int, unsigned int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
@@ -113,7 +113,7 @@ unsigned int FUN_003291dc(int *param_1)
   temp_v10 = 0x100016e;
   switch(*(unsigned int *)(temp_v7 + 8)) {
   case 0:
-    temp_v6 = FUN_002b8ee0(temp_v7 + 0x2d8,0);
+    temp_v6 = uiSlidingSpriteAdvance(temp_v7 + 0x2d8,0);
     if (temp_v6 != 0) {
       buttonHelpSetPreset(0x19);
       FUN_00242000(temp_v7);
@@ -152,7 +152,7 @@ unsigned int FUN_003291dc(int *param_1)
           temp_v6 = 0xa0;
           uiPointerHitsRect(0xa0,0x30,200,0x20,2);
           if (temp_v6 != 0) {
-            temp_v4 = FUN_0029efa8((const void *)(temp_v7 + 0x10));
+            temp_v4 = listCursorGetRowIfUnblocked((const void *)(temp_v7 + 0x10));
             temp_v6 = temp_v4 - 1;
             if (temp_v4 - 1 < 0) {
               temp_v6 = 0;
@@ -164,14 +164,14 @@ unsigned int FUN_003291dc(int *param_1)
             if (temp_v6 == 0) {
               return 0;
             }
-            temp_v4 = FUN_0029efa8((const void *)(temp_v7 + 0x10));
+            temp_v4 = listCursorGetRowIfUnblocked((const void *)(temp_v7 + 0x10));
             temp_v2 = FUN_0029ee54(temp_v7 + 0x10);
             temp_v6 = temp_v4 + 1;
             if (temp_v2 <= temp_v4 + 1) {
               temp_v6 = temp_v4;
             }
           }
-          FUN_0029eb5c(temp_v7 + 0x10,temp_v6);
+          scrollListSetSelectionMarkChanged(temp_v7 + 0x10,temp_v6);
           FUN_0029efd8(temp_v7 + 0x10,1);
           return 0;
         }
@@ -226,7 +226,7 @@ unsigned int FUN_003291dc(int *param_1)
       return 0;
     }
     temp_v6 = resourceRunOperationIfUnblocked(temp_v7 + 0x10);
-    temp_v4 = FUN_0029efa8((const void *)(temp_v7 + 0x10));
+    temp_v4 = listCursorGetRowIfUnblocked((const void *)(temp_v7 + 0x10));
     temp_v6 = *(int *)(temp_v7 + (temp_v4 + temp_v6) * 4 + 0x74);
     temp_v6 = appTryPurchase(temp_v6,0,0);
     if (temp_v6 == 0) {
@@ -296,7 +296,7 @@ unsigned int FUN_003291dc(int *param_1)
     FUN_002c1658(0,1);
     if (temp_v6 != 0 || temp_v12[0] != '\0') {
       temp_v6 = resourceRunOperationIfUnblocked(temp_v7 + 0x10);
-      temp_v4 = FUN_0029efa8((const void *)(temp_v7 + 0x10));
+      temp_v4 = listCursorGetRowIfUnblocked((const void *)(temp_v7 + 0x10));
       temp_v4 = *(int *)(temp_v7 + (temp_v4 + temp_v6) * 4 + 0x74);
       temp_v6 = appTryPurchase(temp_v4,0,1);
       if (temp_v6 == 0) {
@@ -361,7 +361,7 @@ unsigned int FUN_003291dc(int *param_1)
       }
       else {
         temp_v6 = resourceRunOperationIfUnblocked(temp_v7 + 0x10);
-        temp_v4 = FUN_0029efa8((const void *)(temp_v7 + 0x10));
+        temp_v4 = listCursorGetRowIfUnblocked((const void *)(temp_v7 + 0x10));
         appTryPurchase(*(unsigned int *)(temp_v7 + (temp_v4 + temp_v6) * 4 + 0x74),0,0);
         eventQueueAddUnique(0x100025c);
         FUN_00248738(temp_v7,5);

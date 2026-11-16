@@ -61,7 +61,7 @@ typedef char ResetSubEntrySizeCheck[sizeof(ResetSubEntry) == 0x2c ? 1 : -1];
 typedef char ResetEntryWorkSizeCheck[sizeof(ResetEntryWork) == 0x1324 ? 1 : -1];
 
 extern "C" {
-extern ResetEntryWork *DAT_00447e10;
+extern ResetEntryWork *g_modelGroups;
 extern ResetEntryGameState g_gameState;
 }
 
@@ -86,7 +86,7 @@ static __inline void resetSubEntry(ResetSubEntry *entry)
 extern "C" void FUN_001e3284()
 {
     g_gameState.unk214 = 0;
-    ResetEntryWork *work = DAT_00447e10;
+    ResetEntryWork *work = g_modelGroups;
     work->unk0000 = 0;
     work->unk000c = 0;
     work->unk000e = 0;
@@ -113,7 +113,7 @@ extern "C" void FUN_001e3284()
         entry->unk30 = 0;
     }
     for (s32 index = 0; index < 9; ++index)
-        resetSubEntry(&DAT_00447e10->secondary[index]);
+        resetSubEntry(&g_modelGroups->secondary[index]);
     for (s32 index = 0; index < 3; ++index)
-        resetSubEntry(&DAT_00447e10->tertiary[index]);
+        resetSubEntry(&g_modelGroups->tertiary[index]);
 }

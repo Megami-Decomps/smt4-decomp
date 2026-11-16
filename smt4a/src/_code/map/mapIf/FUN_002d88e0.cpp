@@ -11,7 +11,7 @@ s32 textFormatBuffer(char *output, const char *format, ...);
 void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 MapIfResource *modelListInit(void *memory);
 void resourceOwnerLoadFileSync(MapIfResource *, const char *path);
-void FUN_0040aad4(MapIfResource *, s32 mode);
+void moriModelContentLoadBody(MapIfResource *, s32 mode);
 void handleRegistryRegisterObject(void *registry, u32 handle);
 void controllerSetDestination(u32 handle, const f32 *position);
 void controllerSetRotationEulerDegrees(u32 handle, f32 x, f32 y, f32 z);
@@ -40,7 +40,7 @@ void FUN_002d88e0(MapIfSpawnPose pose)
         resource = modelListInit(resource);
     slot->resource = resource;
     resourceOwnerLoadFileSync(resource, path);
-    FUN_0040aad4(slot->resource, 0);
+    moriModelContentLoadBody(slot->resource, 0);
     u32 handle = slot->resource->handle;
     handleRegistryRegisterObject(g_handleRegistry, handle);
     controllerSetDestination(handle, state->position);

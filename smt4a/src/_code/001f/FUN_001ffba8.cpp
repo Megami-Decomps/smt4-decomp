@@ -21,7 +21,7 @@ struct OrbitScreen {
 
 extern "C" {
 
-void FUN_0018a924(f32* sine, f32* cosine);
+void mathSinCos(f32* sine, f32* cosine);
 void uiSetFloatPair(void* camera);
 void FUN_0014f0dc(void* camera, Vec3f* position, Vec3f* target, s32* result);
 void FUN_001523b8(void* camera, s32 flag);
@@ -47,7 +47,7 @@ void FUN_001ffba8(OrbitScreen* screen)
     axis.x = 0.0f * screen->direction.x + 0.0f * screen->direction.y + 1.0f * screen->direction.z;
     axis.y = -1.0f * screen->direction.x + 0.0f * screen->direction.y + 0.0f * screen->direction.z;
     axis.z = 0.0f * screen->direction.x + 1.0f * screen->direction.y + 0.0f * screen->direction.z;
-    FUN_0018a924(&sine, &cosine);
+    mathSinCos(&sine, &cosine);
 
     f32 complement = 1.0f - cosine;
     f32 length = sqrtf(axis.x * axis.x + axis.z * axis.z + axis.y * axis.y);

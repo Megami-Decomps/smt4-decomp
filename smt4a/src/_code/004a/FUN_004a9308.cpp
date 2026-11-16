@@ -6,14 +6,14 @@ void uiSpriteSetKeyframeThree(BtlUiObjBA *sprite);
 void FUN_00231cdc(BtlUiObjCA *widget, u32 selection, u32 mode, u32 flags);
 void FUN_002cc96c(BtlUiObjCA *widget);
 void FUN_00321500(BtlUiObjAA *widget);
-s32 FUN_0039ebcc(BtlUiObjBA *widget);
+s32 spriteOperationGetModeThreeCompletion(BtlUiObjBA *widget);
 s32 menu32ModeIsNot6(BtlUiObjAA *widget);
 extern BtlUiGlobalsA g_btlUi;
 
 /* Refreshes the menu and sprite when the menu is not in mode 6 and the sprite accepts. */
 static __inline void refreshMenuSprite(BtlUiA *ui)
 {
-    if (menu32ModeIsNot6(&ui->objA) != 0 && FUN_0039ebcc(&ui->objB) != 0) {
+    if (menu32ModeIsNot6(&ui->objA) != 0 && spriteOperationGetModeThreeCompletion(&ui->objB) != 0) {
         FUN_00321500(&ui->objA);
         uiSpriteSetKeyframeThree(&ui->objB);
     }

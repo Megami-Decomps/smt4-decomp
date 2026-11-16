@@ -46,7 +46,7 @@ int FUN_0013bb34(...);
 int FUN_0013be20(...);
 int FUN_00140ba4(...);
 int FUN_00161a10(...);
-int FUN_0030fc80(...);
+int clockGetTicksAsMicroseconds(...);
 int VectorSignedToFloat(...);
 int software_interrupt(...);
 
@@ -395,7 +395,7 @@ extern unsigned long long FUN_00170390(unsigned int);
 /* Supplied declaration required: FUN_001703b0. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
-/* Supplied declaration required: FUN_0030fc80. */
+/* Supplied declaration required: clockGetTicksAsMicroseconds. */
 extern void nn_cfg_CTR_Initialize(void);
 extern void nn_pl_CTR_InitializeGameCoin(void);
 extern int nngxIsStereoVisionAllowed(void);
@@ -660,7 +660,7 @@ void FUN_00135c30(void)
   gameDataFlagsClearBits(7);
   gameDataBlocksMaskClearBits(1);
   DAT_0057ffd3 = 0;
-  FUN_0030fc80(&temp_v22);
+  clockGetTicksAsMicroseconds(&temp_v22);
   temp_v3 = (unsigned int)(romwright_zext_4_8(temp_v22) * 1000000);
   randSetLcgState(temp_v3,(int)(romwright_zext_4_8(temp_v22) * 1000000 >> 0x20));
   temp_v19 = randSetSeed(temp_v3);

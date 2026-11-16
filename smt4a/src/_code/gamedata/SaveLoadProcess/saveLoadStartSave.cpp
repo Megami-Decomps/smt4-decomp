@@ -34,12 +34,12 @@ void* asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 cl
 u8* gameDataBlocksGetSaveData(void);
 void gameDataAddHomeButtonHold(u32 bits);
 void gameDataBlocksAddFlags(u32 bits);
-void FUN_00333574(u32 bits);
+void gameDataBlocksOrFlagsClearUnk02(u32 bits);
 u32 taskCreateDraw(const s8* name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc update, AsdProcFunc end, u32 work, void* owner);
 s32 FUN_00371750(u32 process);
 void work8BufDestroy(u32 process);
-s32 FUN_003a7938(u32 process);
+s32 saveLoadDrawActivityIcon(u32 process);
 void asdProcessClearSelectedFlags(u32 process, u32 mask, u32 mode);
 }
 
@@ -51,7 +51,7 @@ extern "C" u32 saveLoadStartSave(s32 slot, u8 option)
         asdMemoryAllocTracked(ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, sizeof(SaveLoadWork), 1));
     gameDataAddHomeButtonHold(1);
     gameDataBlocksAddFlags(1);
-    FUN_00333574(1);
+    gameDataBlocksOrFlagsClearUnk02(1);
     work->buffer = NULL;
     work->slot = reinterpret_cast<const SavedSlotPrefix*>(gameDataBlocksGetSaveData())->lastSlot;
     if (work->slot == 0) {
@@ -78,8 +78,8 @@ extern "C" u32 saveLoadStartSave(s32 slot, u8 option)
     work->phase = 0;
     work->option = option;
     taskCreateDraw(reinterpret_cast<const s8*>("Boot UpDraw"), 0x86, 0, 0,
-                   FUN_003a7938, NULL, 0, reinterpret_cast<void*>(work->process));
+                   saveLoadDrawActivityIcon, NULL, 0, reinterpret_cast<void*>(work->process));
     taskCreateDraw(reinterpret_cast<const s8*>("Boot UpDraw_R"), 0xe2, 0, 0,
-                   FUN_003a7938, NULL, 0, reinterpret_cast<void*>(work->process));
+                   saveLoadDrawActivityIcon, NULL, 0, reinterpret_cast<void*>(work->process));
     return work->process;
 }

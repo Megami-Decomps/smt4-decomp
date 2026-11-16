@@ -34,7 +34,7 @@ extern SoundVoice DAT_004c5634[4];
 extern u8 DAT_004c581a;
 
 s32 jyoucyuGetTableEntry(s32 index);
-s32 FUN_002c1850(u32 handle);
+s32 objectGetFlagBit1(u32 handle);
 s32 FUN_002c1d5c(void);
 s32 FUN_002c1658(s32 a, s32 b);
 u32 asdSoundWaveVoiceCreate(void *data, u32 sourceId, s32 flag);
@@ -94,7 +94,7 @@ void FUN_00106708(void)
                 bool busy = false;
                 for (s32 j = 0; j < 4; j++) {
                     SoundVoice *other = voiceAt(j);
-                    if (FUN_002c1850(other->handle) != 0) {
+                    if (objectGetFlagBit1(other->handle) != 0) {
                         busy = true;
                         break;
                     }
@@ -102,7 +102,7 @@ void FUN_00106708(void)
                 if (busy) {
                     for (s32 k = 0; k < 4; k++) {
                         SoundVoice *other = voiceAt(k);
-                        if (FUN_002c1850(other->handle) != 0 && other->mode != 4) {
+                        if (objectGetFlagBit1(other->handle) != 0 && other->mode != 4) {
                             other->flags |= VOICE_STOP_REQUESTED;
                             other->fade = 0;
                         }
@@ -131,14 +131,14 @@ void FUN_00106708(void)
                 voice->fade = 3;
                 FUN_0010b91c(voice->handle);
                 voice->flags = (voice->flags & ~(VOICE_PLAYING | VOICE_STOP_REQUESTED)) | VOICE_STOPPING;
-            } else if (FUN_002c1850(voice->handle) == 0 && voice->waitFrames > 0) {
+            } else if (objectGetFlagBit1(voice->handle) == 0 && voice->waitFrames > 0) {
                 voice->repeat = 1;
                 voice->flags = (voice->flags & ~(VOICE_PLAYING | VOICE_STOP_REQUESTED)) | VOICE_STOPPING;
             } else {
                 voice->waitFrames++;
             }
         }
-        if ((voice->flags & VOICE_STOPPING) && FUN_002c1850(voice->handle) == 0) {
+        if ((voice->flags & VOICE_STOPPING) && objectGetFlagBit1(voice->handle) == 0) {
             s8 repeat = voice->repeat;
             if (voice->options & 4)
                 repeat = 0;

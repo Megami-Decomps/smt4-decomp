@@ -25,7 +25,7 @@ struct QuestEntryView {
 
 extern "C" {
 extern QuestStateView* g_uiQuest;
-u8 FUN_001bd100(void);
+u8 dataTable1bOr1cRecordHasFlag1(void);
 void uiQuestSpritesCreate(void);
 void FUN_003d498c(s32 questId, s32 mode);
 void uiSpriteSetKeyframe(void* sprite, s32 keyframe, s32 option);
@@ -37,7 +37,7 @@ void FUN_002f1554(s32 questId)
 {
     QuestStateView* questState = g_uiQuest;
     questState->unk93E = 1;
-    questState->unk90C = FUN_001bd100();
+    questState->unk90C = dataTable1bOr1cRecordHasFlag1();
     questState->unkCCA = (s16)questId;
 
     uiQuestSpritesCreate();

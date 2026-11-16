@@ -9,7 +9,7 @@ ScaledRecordValues* gameGetSlotRecord(s32 slot);
 PartyStatusSlots* gameGetSlotTable(void);
 s32 gameSlotTableFindFree(void);
 s32 randRange(u32 maximum);
-void FUN_003dfad4(u16* affinities, const PlayerStatusViewA* player);
+void demonBuildAffinitySlots(u16* affinities, const PlayerStatusViewA* player);
 void affinityResolveUnitSlot(u16* output, ScaledRecordValues* unit, s32 affinity);
 
 static inline s32 statusAffinityAllows(u16 affinity)
@@ -38,7 +38,7 @@ void FUN_0049fc88(u32 group, u32 statusBit, f32 chance)
         !(gameGetPlayerData()->status & mask) && static_cast<f32>(randRange(99)) < chance) {
         s32 canApply = 1;
         if (statusBit == 5) {
-            FUN_003dfad4(affinities, gameGetPlayerData());
+            demonBuildAffinitySlots(affinities, gameGetPlayerData());
             canApply = statusAffinityAllows(affinities[11]);
         }
         if (canApply) {

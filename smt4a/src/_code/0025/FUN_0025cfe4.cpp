@@ -87,7 +87,7 @@ void FUN_0025cfe4(int param_1,int param_2)
                        (int)*(short *)(iVar3 + 10) + *(int *)(param_2 + 8) + iVar10,0x65);
           FUN_001677c0();
         }
-        FUN_001527d8(*(unsigned int *)(param_1 + iVar11 * 4),0xffffffff);
+        uiObjectSetColorRgb(*(unsigned int *)(param_1 + iVar11 * 4),0xffffffff);
         FUN_0025cc78(*(unsigned int *)(param_1 + iVar11 * 4),
                      *(int *)(param_2 + 4) + (int)*(short *)(iVar2 + 8) + (int)*(short *)(iVar4 + 8)
                      ,*(short *)(iVar4 + 10) + iVar10 +

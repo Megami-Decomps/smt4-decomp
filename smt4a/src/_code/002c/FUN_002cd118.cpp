@@ -19,7 +19,7 @@ struct StatusPanel {
 
 extern "C" {
 void uiSpriteSelectAnim(SpriteWidget *widget, s32 animation);
-s32 FUN_00291e14(void);
+s32 btlIsDefeatSuppressed(void);
 
 /* Reset the party panel's rows and set each row's sprites for the current display variant. */
 void FUN_002cd118(StatusPanel *panel, s32 variant, u16 rowCount, u16 selected)
@@ -46,7 +46,7 @@ void FUN_002cd118(StatusPanel *panel, s32 variant, u16 rowCount, u16 selected)
                     pairSetFirstResetSecond(header, 0xBD);
                 pairSetFirstResetSecond(WIDGET(panel, 0x2208, i), 0xBC - i);
             }
-        } else if (FUN_00291e14() != 0) {
+        } else if (btlIsDefeatSuppressed() != 0) {
             pairSetFirstResetSecond(WIDGET(panel, 0x20, i), 0xA3);
             pairSetFirstResetSecond(WIDGET(panel, 0xB10, i), 0xA5);
             pairSetFirstResetSecond(WIDGET(panel, 0x1088, i), 0xA4);

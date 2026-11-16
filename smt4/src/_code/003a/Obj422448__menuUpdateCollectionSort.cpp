@@ -36,7 +36,7 @@ void Obj422448::menuUpdateCollectionSort()
         return;
     }
     CollectionSortMode* setting =
-        &reinterpret_cast<GameModeFlags*>(FUN_002a0d0c())->sortSettings.collection;
+        &reinterpret_cast<GameModeFlags*>(gameDataGetSortPreferences())->sortSettings.collection;
     s8 mode;
     switch (setting->order) {
     case 11: mode = 28; break;

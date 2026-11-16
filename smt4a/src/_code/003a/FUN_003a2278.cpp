@@ -13,7 +13,7 @@ extern "C" {
 extern PauseGameState g_gameState;
 
 void sysPlaySe(u32 id);
-void FUN_00183f58(s32 a, s32 b, s32 c, s32 d);
+void buttonHelpSelectSlot(s32 a, s32 b, s32 c, s32 d);
 s32 gameFlagIsSet(u32 flag);
 s32 sub68OwnerCall2(void);
 void sub68OwnerCall3(void);
@@ -56,12 +56,12 @@ void FUN_003a2278(s32 open)
         } else if (FUN_004a0404()) {
             if (g_gameState.mode != 0x65) {
                 sysPlaySe(0x104);
-                FUN_00183f58(0, 0x13, 0x59, 1);
-                FUN_00183f58(1, 0, 0, 1);
+                buttonHelpSelectSlot(0, 0x13, 0x59, 1);
+                buttonHelpSelectSlot(1, 0, 0, 1);
             } else {
                 sysPlaySe(0x105);
-                FUN_00183f58(0, 0x13, 0x59, 1);
-                FUN_00183f58(1, 0, 0, 1);
+                buttonHelpSelectSlot(0, 0x13, 0x59, 1);
+                buttonHelpSelectSlot(1, 0, 0, 1);
             }
         } else {
             sysPlaySe(g_gameState.mode >= 100 ? 0xD2 : 0x41);

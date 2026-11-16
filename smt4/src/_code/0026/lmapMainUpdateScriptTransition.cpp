@@ -9,7 +9,7 @@ void FUN_002897d0(s32 enabled);
 s32 FUN_002897c0();
 void FUN_002897b0(s32 enabled);
 s32 FUN_002c1d5c();
-void FUN_002a03d8(u32 channel, u32 duration);
+void titleSetSlotValueState2(u32 channel, u32 duration);
 s32 scrRunOpcodesStub(void *script);
 
 void messageSlotSet(u32 slot);
@@ -43,8 +43,8 @@ u32 lmapMainUpdateScriptTransition()
             FUN_002897d0(0);
         }
         if (FUN_002897e0() && !FUN_002c1d5c()) {
-            FUN_002a03d8(0, 5);
-            FUN_002a03d8(1, 5);
+            titleSetSlotValueState2(0, 5);
+            titleSetSlotValueState2(1, 5);
             FUN_002897d0(0);
             work->state = 2;
             return 0;

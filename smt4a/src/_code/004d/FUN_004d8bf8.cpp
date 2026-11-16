@@ -8,7 +8,7 @@ struct StageColorRegistry {
 };
 extern "C" {
 extern StageColorRegistry *g_handleRegistry;
-void FUN_00406768(void *context, s32 handle, u32 color);
+void modelOwnerSetSlotValueAndActivate(void *context, s32 handle, u32 color);
 }
 
 static __inline f32 clampStageColor(f32 value)
@@ -33,5 +33,5 @@ extern "C" void FUN_004d8bf8(BtlStage *stage, f32 red, f32 green, f32 blue)
     u32 packed = (static_cast<u32>(color.rgba.r) << 24) |
                  (static_cast<u32>(color.rgba.g) << 16) |
                  (static_cast<u32>(color.rgba.b) << 8) | color.rgba.a;
-    FUN_00406768(g_handleRegistry->context, stage->apocalypse.selection, packed);
+    modelOwnerSetSlotValueAndActivate(g_handleRegistry->context, stage->apocalypse.selection, packed);
 }

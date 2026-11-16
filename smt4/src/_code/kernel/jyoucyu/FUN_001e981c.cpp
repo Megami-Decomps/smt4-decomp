@@ -17,7 +17,7 @@ extern TitleScene *g_titleScene;
 s32 renderCtxPackPassFlags(u32 first, u32 second);
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite(void);
-void FUN_002c0944(u32 firstColor, u32 secondColor, u32 thirdColor, u32 fourthColor, f32 x, f32 y, f32 width, f32 height, f32 depth);
+void gxSubmitDrawZeroExtraParams(u32 firstColor, u32 secondColor, u32 thirdColor, u32 fourthColor, f32 x, f32 y, f32 width, f32 height, f32 depth);
 
 // Draw the startup background and resident sprite until the resident status reaches completion.
 u32 FUN_001e981c(void)
@@ -31,7 +31,7 @@ u32 FUN_001e981c(void)
     efctSetSpeed(1.0f);
     gxResetColorQuadToWhite();
     renderCtxSelectTexture(g_titleScene, 0);
-    FUN_002c0944(255, 255, 255, 255, 0.0f, 0.0f, 400.0f, 240.0f, 0.0f);
+    gxSubmitDrawZeroExtraParams(255, 255, 255, 255, 0.0f, 0.0f, 400.0f, 240.0f, 0.0f);
     if (resident->status < 100)
         texDrawTableEntryAtStoredOrigin(2, 14, 394, 0, 0, 11);
     renderStackPop(&g_titleScene->stackA);

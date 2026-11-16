@@ -11,17 +11,17 @@ static __inline void behaviorVectorSetIdentity(EffectBehaviorVector *vector)
 }
 
 extern "C" {
-extern EffectBehaviorType DAT_00473590[];
+extern EffectBehaviorType g_effBehaviorTable[];
 extern const char DAT_004148c8[];
 void *memAlloc(u32, u32, u32, u32, u32, u32);
 void *rt_memcpy(void *, const void *, u32);
 
 EffectBehaviorBlock *effBehaviorCreate(s32 type, s32 count, const EffectBehaviorParameters *parameters)
 {
-    u32 parameterSize = DAT_00473590[type].parameterSize;
+    u32 parameterSize = g_effBehaviorTable[type].parameterSize;
     s32 elementCount = count * (parameters->rows * parameters->columns) + count;
     u32 elementsSize = elementCount * 0x28;
-    u32 elementsBytes = DAT_00473590[type].elementSize * count;
+    u32 elementsBytes = g_effBehaviorTable[type].elementSize * count;
     u32 allocationSize = elementsBytes + elementsSize + parameterSize * 2 + sizeof(EffectBehaviorBlock);
     asdDebugTrace(DAT_004148c8, 4032);
     EffectBehaviorBlock *block = static_cast<EffectBehaviorBlock *>(memAlloc(0x10000, 0x100, 0, allocationSize, 16, 1));

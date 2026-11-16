@@ -9,7 +9,7 @@ typedef struct MessageWindow {
 } MessageWindow;
 
 extern MessageWindow *g_messageMain[4]; /* 0x57f588 */
-extern MessageWindow *DAT_005e2010[12]; /* 0x5e2010 */
+extern MessageWindow *g_messageWindows[12]; /* 0x5e2010 */
 
 extern u32 scrGetArg(s32 index);
 
@@ -22,7 +22,7 @@ u32 FUN_0033049c(void)
     g_messageMain[2]->scriptValue = value;
     g_messageMain[3]->scriptValue = value;
     for (s32 i = 0; i < 12; i++) {
-        DAT_005e2010[i]->scriptValue = value;
+        g_messageWindows[i]->scriptValue = value;
     }
     return 1;
 }

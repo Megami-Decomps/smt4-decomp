@@ -78,7 +78,7 @@ extern u32 g_btlUiBlock;
 void FUN_004e8454(BtlActorView *actor);
 s32 FUN_004e933c(BtlActorView *actor, BtlCommandView *command);
 void FUN_004e7c04(BtlActorView *actor, s32 flag);
-void FUN_003e8bb0(BtlTargetModeView *out, BtlMainView *main, BtlSideMask *target);
+void btlEntryBuildSummary(BtlTargetModeView *out, BtlMainView *main, BtlSideMask *target);
 void btlUnitMarkTargetCandidates(BtlActorView *actor, s32 flag, s32 mode);
 void btlActionMarkRandomTargetableUnit(BtlActorView *actor);
 void FUN_004eb838(BtlActorView *actor, BtlCommandView *command);
@@ -110,7 +110,7 @@ void FUN_004e5c10(BtlActorView *actor, BtlCommandView *command)
             BtlEffectView *effect = command->effect;
             effect->phase = 1;
             BtlTargetModeView mode;
-            FUN_003e8bb0(&mode, actor->main, command->target);
+            btlEntryBuildSummary(&mode, actor->main, command->target);
             effect->mode = (mode.selector == 1) ? 2 : 1;
             if (mode.targetKind == 0)
                 btlActionMarkRandomTargetableUnit(actor);

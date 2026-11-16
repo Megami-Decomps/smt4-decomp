@@ -63,7 +63,7 @@ void msgWindowReset(void);
 void messageBannerBeginClose(void);
 void messageClearObjectFlags(void);
 void ifTouchRegionRemove(void);
-s32 FUN_0026b564(void);
+s32 buttonHelpStateIsNot3(void);
 
 /* Switches the menu to the given state and releases its handler. */
 static __inline void closeConfirmation(AocConfirmMenu *menu, s32 state)
@@ -82,7 +82,7 @@ void AocMenu::runConfirmation()
     AocConfirmMenu * menu = reinterpret_cast<AocConfirmMenu *>(this);
     switch (menu->step) {
     case 2:
-        if (FUN_0026b564() == 0) {
+        if (buttonHelpStateIsNot3() == 0) {
             return;
         }
         closeConfirmation(menu, 4);

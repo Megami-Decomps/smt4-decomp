@@ -60,7 +60,7 @@ EffObjectParticle *FUN_003aa6c0(ObjectParticleResourceView *resource)
                 if (data[0] == 'C' && data[1] == 'G' && data[2] == 'F' && data[3] == 'X') {
                     asdDebugTrace(DAT_00544af8, 0x279);
                     particle->creation.modelData = memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
-                    FUN_002e59f8(data, particle->creation.modelData, size);
+                    memcpySrcFirst(data, particle->creation.modelData, size);
                     AsdMdlObject *model = asdMdlManagerCreateFromSource(particle->creation.modelData, size, 7);
                     particle->creation.model = model;
                     model->node->resource->state->flags->flags = 1;

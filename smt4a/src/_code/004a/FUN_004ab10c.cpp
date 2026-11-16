@@ -8,7 +8,7 @@
 extern "C" {
 
 int qsort(...);
-int FUN_003eebf4(int, int);
+int btlFindSelectionIndexByOrdinal(int, int);
 int btlMainFindEntryByListedId(unsigned int *, int);
 
 /* stack frame of param_2: 4 slot(s), 16 byte(s) */
@@ -33,8 +33,8 @@ extern unsigned int DAT_0057a9ec; /* 0x57a9ec */
 /* Supplied declaration required: btlGetMainState. */
 extern int gameGetSaveSlotData(int);
 extern int btlMainGetUnk14(void);
-extern int FUN_00291e14(void);
-/* Supplied declaration required: FUN_003eebf4. */
+extern int btlIsDefeatSuppressed(void);
+/* Supplied declaration required: btlFindSelectionIndexByOrdinal. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlFindEntryValue. */
 
@@ -80,7 +80,7 @@ int FUN_004ab10c(unsigned int param_1,int param_2)
          ) {
         temp_v7 = 0;
         temp_v2 = (int)btlGetMainState();
-        FUN_003eebf4(temp_v2,1);
+        btlFindSelectionIndexByOrdinal(temp_v2,1);
         if ((temp_v2 < 0) && ((char)piVar10[0xf] != '\x02')) {
           temp_v7 = 1;
         }
@@ -150,7 +150,7 @@ int FUN_004ab10c(unsigned int param_1,int param_2)
               }
               temp_v4 = temp_v4 + 1;
             } while ((int)temp_v4 < 4);
-            temp_v3 = FUN_00291e14();
+            temp_v3 = btlIsDefeatSuppressed();
             if (((temp_v3 != 0) && (temp_v3 = btlMainGetUnk14(), temp_v3 != 0)) &&
                ((unsigned int)*(unsigned short *)(temp_v3 + 0x62) == *puVar11)) {
               temp_v4 = 0;
@@ -183,7 +183,7 @@ int FUN_004ab10c(unsigned int param_1,int param_2)
             }
             else {
               temp_v3 = (int)btlGetMainState();
-              FUN_003eebf4(temp_v3,1);
+              btlFindSelectionIndexByOrdinal(temp_v3,1);
               if ((temp_v3 < 0) && (*(char *)(temp_v7 + 0x3c) != '\x02')) {
                 puVar11[2] = 1;
               }

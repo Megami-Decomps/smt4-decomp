@@ -53,7 +53,7 @@ void statusBuildFlaggedDemonList(const u8 *flags)
     }
     gridNavigationConfigure(list->controller, list->count, 11, 1, 0, 1);
     FlaggedDemonList *sorting = g_statusDown;
-    const FlaggedDemonSortFlags *options = &reinterpret_cast<const FlaggedDemonSortOptions *>(FUN_002a0d0c())->sort;
+    const FlaggedDemonSortFlags *options = &reinterpret_cast<const FlaggedDemonSortOptions *>(gameDataGetSortPreferences())->sort;
     if (options->mode == 1) {
         if (!options->reverse)
             FUN_002b7bca(sorting->entries, sorting->count, 4, FUN_00206d4c);

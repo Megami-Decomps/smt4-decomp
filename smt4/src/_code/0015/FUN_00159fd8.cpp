@@ -4,7 +4,7 @@
 
 extern "C" {
 
-void FUN_00146e40(unsigned char *, signed char);
+void nnSndMasterManagerSetMode(unsigned char *, signed char);
 int FUN_0015d254(unsigned char *);
 int FUN_002a208c(void);
 
@@ -16,7 +16,7 @@ extern unsigned char g_nnSndMasterManager; /* 0x4e6f14 */
 extern unsigned char g_dspsndState; /* 0x4e6f64 */
 extern unsigned char uRam1ff810c0; /* 0x1ff810c0 */
 
-/* Supplied declaration required: FUN_00146e40. */
+/* Supplied declaration required: nnSndMasterManagerSetMode. */
 /* Supplied declaration required: FUN_0015d254. */
 /* Supplied declaration required: FUN_002a208c. */
 
@@ -30,7 +30,7 @@ void FUN_00159fd8(void)
       FUN_002a208c();
     }
     DAT_0044e7c4 = uRam1ff810c0;
-    FUN_00146e40(&g_nnSndMasterManager, (signed char)uRam1ff810c0);
+    nnSndMasterManagerSetMode(&g_nnSndMasterManager, (signed char)uRam1ff810c0);
     FUN_0015d254(&g_dspsndState);
     DAT_0044e7c5 = '\x01';
   }

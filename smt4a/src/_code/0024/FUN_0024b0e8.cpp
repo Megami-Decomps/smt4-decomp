@@ -23,7 +23,7 @@ void FUN_0024b0e8()
     // A word-aligned cursor cannot enter the odd-sized shared padding beginning at +0x26.
     struct CursorView { u8 prefix[0xf0]; u8 cursor[0x64]; };
     const CursorView *view = reinterpret_cast<const CursorView *>(menu);
-    const SpriteInfo *anchor = asdTMTexTableEntryAt(36, FUN_002a4894(reinterpret_cast<const Object *>(view->cursor)) + 31);
+    const SpriteInfo *anchor = asdTMTexTableEntryAt(36, listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(view->cursor)) + 31);
     const SpriteInfo *image = asdTMTexTableEntryAt(36, 27);
     menu->touchRegions[0] = ifTouchRegionAdd(static_cast<s16>(anchor->x + image->x),
         static_cast<s16>(anchor->y + image->y), image->bounds.width & 0x7fff, image->bounds.height & 0x7fff);

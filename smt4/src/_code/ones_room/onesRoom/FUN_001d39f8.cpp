@@ -11,7 +11,7 @@ struct RoomScriptProcess {
 
 extern "C" {
 void *asdMemoryAlloc(u32, u32, u32, u32, u32);
-void FUN_002898e4(void);
+void commonBgAcquire(void);
 void buttonHelpCreate(void);
 void commonBgStopChildAndBeginTransition(void);
 void buttonHelpSetPreset(s32);
@@ -56,7 +56,7 @@ void FUN_001d39f8(s32 inactive)
     if (inactive == 0) {
         room->flags.bytes.active = 1;
     }
-    FUN_002898e4();
+    commonBgAcquire();
     buttonHelpCreate();
     commonBgStopChildAndBeginTransition();
     buttonHelpSetPreset(0xA2);

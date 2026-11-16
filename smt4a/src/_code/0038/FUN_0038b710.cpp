@@ -13,7 +13,7 @@ void FUN_0038b710(u32 questId)
 {
     UiQuestApoc *quest = g_uiQuest;
     quest->unk93E = 1;
-    quest->unk90c = FUN_001bd100(questId);
+    quest->unk90c = dataTable1bOr1cRecordHasFlag1(questId);
     quest->questId = (s16)questId;
     uiQuestSpritesCreate();
     FUN_003d498c(questId, 1);

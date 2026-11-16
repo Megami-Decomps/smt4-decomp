@@ -40,7 +40,7 @@ PlayerUnit *gameGetPlayerData(void);
 SlotUnit *gameGetSlotRecord(s32 index);
 SlotUnit *gameGetSaveSlotData(void);
 SlotUnit *btlMainGetUnk14(void);
-s32 FUN_00291e14(void);
+s32 btlIsDefeatSuppressed(void);
 s16 FUN_002b4dcc(SlotUnit *unit);
 s16 FUN_002b4e7c(void);
 void FUN_003ff524(u32 *mask, s32 kind);
@@ -73,10 +73,10 @@ u32 FUN_00400284(s32 unit, s32 fromSave, UseItem *item, u32 statusMask)
     }
     u32 mask = statusMask;
 
-    if (unit >= 0 || FUN_00291e14() != 0) {
+    if (unit >= 0 || btlIsDefeatSuppressed() != 0) {
         SlotUnit *target;
 
-        if (unit < 0 && FUN_00291e14() != 0) {
+        if (unit < 0 && btlIsDefeatSuppressed() != 0) {
             target = btlMainGetUnk14();
         } else if (fromSave != 0) {
             target = gameGetSaveSlotData();

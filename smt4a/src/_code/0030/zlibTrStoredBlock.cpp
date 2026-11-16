@@ -18,7 +18,7 @@ typedef struct deflate_state {
 
 extern "C" {
 
-void FUN_00125a34(deflate_state *s, u8 *buf, u32 len, s32 header);
+void zlibCopyBlock(deflate_state *s, u8 *buf, u32 len, s32 header);
 
 void zlibTrStoredBlock(deflate_state *s, u8 *buf, u32 stored_len, s32 last)
 {
@@ -36,7 +36,7 @@ void zlibTrStoredBlock(deflate_state *s, u8 *buf, u32 stored_len, s32 last)
         s->bi_buf |= (last << s->bi_valid);
         s->bi_valid += length;
     }
-    FUN_00125a34(s, buf, stored_len, 1);
+    zlibCopyBlock(s, buf, stored_len, 1);
 }
 
 } /* extern "C" */

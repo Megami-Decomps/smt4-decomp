@@ -22,7 +22,7 @@ void slotSetRequest(s32 a, s32 b, s32 c);
 void buttonHelpSetPreset(s32 preset);
 s32 FUN_002c1658(s32 value, s32 mode);
 s32 scrRunOpcodesStub(u32 handle);
-s32 FUN_0026b564(void);
+s32 buttonHelpStateIsNot3(void);
 s32 screenFadeIsBusy(void);
 s32 messageMainIsWindowActive(void);
 
@@ -38,7 +38,7 @@ void qcEndSceneStep(Scene003849d0 *scene)
         return;
     }
     if (step != 1) {
-        if (step == 2 && screenFadeIsBusy() == 0 && FUN_0026b564() != 0) {
+        if (step == 2 && screenFadeIsBusy() == 0 && buttonHelpStateIsNot3() != 0) {
             scene->state = 0x10;
             scene->step = 0;
         }

@@ -19,7 +19,7 @@ typedef struct MotionMode {
     u8 alternate : 1;
 } MotionMode;
 
-/* The state FUN_002a0d0c returns. */
+/* The state gameDataGetSortPreferences returns. */
 typedef struct MotionModeState {
     /* 0x00 */ u8 unk00[0xC];
     /* 0x0C */ MotionMode mode;
@@ -37,7 +37,7 @@ void motionPlayForMode(MotionOwner *owner, s32 allowAlternate)
     if (owner->motion.id == 0) {
         return;
     }
-    mode = &reinterpret_cast<MotionModeState *>(FUN_002a0d0c())->mode;
+    mode = &reinterpret_cast<MotionModeState *>(gameDataGetSortPreferences())->mode;
     switch (mode->mode) {
     case 2:
         motion = 2;

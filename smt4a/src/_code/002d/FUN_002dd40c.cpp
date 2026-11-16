@@ -59,7 +59,7 @@ typedef struct {
     unsigned int sp120; /* 0x120: local_120 */
 } void_stack;
 
-extern unsigned int DAT_00536d14; /* 0x536d14 */
+extern unsigned int g_sinCosTable; /* 0x536d14 */
 extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
@@ -255,13 +255,13 @@ void FUN_002dd40c(void)
     temp_v11 = (float)VectorUnsignedToFloat(temp_v8 & 0xffff,(unsigned char)(temp_v6 >> 0x16) & 3);
     temp_v8 = temp_v9 & 0xff;
     temp_v16 = (float)VectorUnsignedToFloat(temp_v9 & 0xffff,(unsigned char)(temp_v6 >> 0x16) & 3);
-    temp_v42 = (float)(&DAT_00536d14)[temp_v7 * 4] +
+    temp_v42 = (float)(&g_sinCosTable)[temp_v7 * 4] +
                (temp_v13 - temp_v11) * (float)(&DAT_00536d1c)[temp_v7 * 4];
     temp_v44 = (float)(&DAT_00536d18)[temp_v7 * 4] +
                (temp_v13 - temp_v11) * (float)(&DAT_00536d20)[temp_v7 * 4];
     temp_v11 = (float)(&DAT_00536d18)[temp_v4 * 4] + (0.0f - temp_v10) * (float)(&DAT_00536d20)[temp_v4 * 4];
-    temp_v13 = (float)(&DAT_00536d14)[temp_v4 * 4] + (0.0f - temp_v10) * (float)(&DAT_00536d1c)[temp_v4 * 4];
-    temp_v10 = (float)(&DAT_00536d14)[temp_v8 * 4] +
+    temp_v13 = (float)(&g_sinCosTable)[temp_v4 * 4] + (0.0f - temp_v10) * (float)(&DAT_00536d1c)[temp_v4 * 4];
+    temp_v10 = (float)(&g_sinCosTable)[temp_v8 * 4] +
              (0.0f - temp_v16) * (float)(&DAT_00536d1c)[temp_v8 * 4];
     temp_v16 = (float)(&DAT_00536d18)[temp_v8 * 4] +
              (0.0f - temp_v16) * (float)(&DAT_00536d20)[temp_v8 * 4];
@@ -291,13 +291,13 @@ void FUN_002dd40c(void)
     temp_v10 = (float)VectorUnsignedToFloat(temp_v8 & 0xffff,(unsigned char)(temp_v6 >> 0x16) & 3);
     temp_v8 = temp_v9 & 0xff;
     temp_v16 = (float)VectorUnsignedToFloat(temp_v9 & 0xffff,(unsigned char)(temp_v6 >> 0x16) & 3);
-    temp_v42 = (float)(&DAT_00536d14)[temp_v7 * 4] +
+    temp_v42 = (float)(&g_sinCosTable)[temp_v7 * 4] +
                (temp_v13 - temp_v10) * (float)(&DAT_00536d1c)[temp_v7 * 4];
     temp_v44 = (float)(&DAT_00536d18)[temp_v7 * 4] +
                (temp_v13 - temp_v10) * (float)(&DAT_00536d20)[temp_v7 * 4];
     temp_v12 = (float)(&DAT_00536d18)[temp_v4 * 4] + (0.0f - temp_v11) * (float)(&DAT_00536d20)[temp_v4 * 4];
-    temp_v13 = (float)(&DAT_00536d14)[temp_v4 * 4] + (0.0f - temp_v11) * (float)(&DAT_00536d1c)[temp_v4 * 4];
-    temp_v10 = (float)(&DAT_00536d14)[temp_v8 * 4] +
+    temp_v13 = (float)(&g_sinCosTable)[temp_v4 * 4] + (0.0f - temp_v11) * (float)(&DAT_00536d1c)[temp_v4 * 4];
+    temp_v10 = (float)(&g_sinCosTable)[temp_v8 * 4] +
              (0.0f - temp_v16) * (float)(&DAT_00536d1c)[temp_v8 * 4];
     temp_v16 = (float)(&DAT_00536d18)[temp_v8 * 4] +
              (0.0f - temp_v16) * (float)(&DAT_00536d20)[temp_v8 * 4];

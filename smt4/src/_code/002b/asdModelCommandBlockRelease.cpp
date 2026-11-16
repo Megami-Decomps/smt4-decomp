@@ -7,13 +7,13 @@ int asdModelAdvanceCommandCursor(int bytes);
 extern struct {
     u32 unk0;
     int count;
-} DAT_004729e0;
+} g_modelCommandBuffer;
 
 void asdModelCommandBlockRelease(void)
 {
-    asdModelAdvanceCommandCursor(DAT_004729e0.count << 2);
-    DAT_004729e0.unk0 = 0;
-    DAT_004729e0.count = 0;
+    asdModelAdvanceCommandCursor(g_modelCommandBuffer.count << 2);
+    g_modelCommandBuffer.unk0 = 0;
+    g_modelCommandBuffer.count = 0;
 }
 
 } /* extern "C" */

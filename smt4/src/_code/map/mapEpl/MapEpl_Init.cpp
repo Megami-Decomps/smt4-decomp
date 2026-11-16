@@ -15,7 +15,7 @@ typedef char MapEffectPlacementRecordSize[sizeof(MapEffectPlacementRecord) == 0x
 
 extern "C" {
 extern MapEpl *g_mapEpl;
-extern const char DAT_0040442c[];
+extern const char g_mapEplSourceFileName[];
 void textFormatBuffer(char *buffer, const char *format, ...);
 void *asdLoadFileSync(const char *path, u32 *size, u32 heap, u32 alignment);
 void *FUN_002a4e98(void *data);
@@ -26,7 +26,7 @@ MapEffectPlacementRecord *aocDataTable2dGetEntryKind3(u32 index);
 void MapEpl_Init(s32 map, s32 area)
 {
     if (g_mapEpl == NULL) {
-        asdDebugTrace(DAT_0040442c, 67);
+        asdDebugTrace(g_mapEplSourceFileName, 67);
         MapEpl *work = (MapEpl *)asdMemAlloc(0x100, 0x100, 0, sizeof(MapEpl), 1);
         g_mapEpl = work;
         work->state[0] = 0;

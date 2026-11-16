@@ -5,14 +5,14 @@ extern "C" {
 extern struct {
     u8 unk00;
     s8 unk01;
-} DAT_00465198;
+} g_appletEventState;
 
 /* Sets the flag byte and returns its previous value. */
 int appletSetHomeButtonHeld(s8 value)
 {
-    int old = DAT_00465198.unk01;
+    int old = g_appletEventState.unk01;
 
-    DAT_00465198.unk01 = value;
+    g_appletEventState.unk01 = value;
     return old;
 }
 

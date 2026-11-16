@@ -30,7 +30,7 @@ extern int g_camp; /* 0x57f108 */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0023d150. */
 extern int resourceRunOperationIfUnblocked(int);
-extern int FUN_002a4894(int);
+extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: FUN_002ac470. */
 extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: FUN_0034cfc0. */
@@ -233,9 +233,9 @@ LAB_0023ce68:
   FUN_0023d150(temp_v9,temp_v11,param_3,0);
   if (temp_v12 != 0) {
     temp_v3 = resourceRunOperationIfUnblocked(temp_v9);
-    temp_v1 = FUN_002a4894(temp_v9);
+    temp_v1 = listCursorGetRowIfUnblocked(temp_v9);
     temp_v0 = *(unsigned short *)(temp_v6 + (temp_v1 + temp_v3) * 2);
-    temp_v6 = FUN_002a4894(temp_v9);
+    temp_v6 = listCursorGetRowIfUnblocked(temp_v9);
     FUN_0034cfc0(temp_v10,temp_v6 + 2,temp_v0,temp_v11,param_3);
   }
   return;

@@ -56,7 +56,7 @@ void textFormatBuffer(u8 *buffer, const char *format, s32 a, s32 b);
 void asdSequenceRequest(s32 kind, s32 *arguments, s32 flag);
 s32 FUN_00287304(void);
 s32 gameStateIsFlagSetAndLarge(void);
-void FUN_002a03d8(s32 a, s32 b);
+void titleSetSlotValueState2(s32 a, s32 b);
 void soundChannelStopAll(s32 channel);
 
 /* The shop sequence singleton, allocated on first use. */
@@ -149,11 +149,11 @@ u32 FUN_001d9634(void)
                 asdSequenceRequest(6, NULL, 0);
             }
         } else if (shop->silent != 0) {
-            FUN_002a03d8(0, 1);
-            FUN_002a03d8(1, 0);
+            titleSetSlotValueState2(0, 1);
+            titleSetSlotValueState2(1, 0);
         } else {
-            FUN_002a03d8(0, 1);
-            FUN_002a03d8(1, 0);
+            titleSetSlotValueState2(0, 1);
+            titleSetSlotValueState2(1, 0);
             soundChannelStopAll(15);
         }
         return 0xFFFFFFFF;

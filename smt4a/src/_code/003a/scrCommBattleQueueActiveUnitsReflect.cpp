@@ -4,7 +4,7 @@
 
 extern "C" {
 
-void FUN_004fd204(s32 actor, u32 flags, u32 target, u32 parameter, u32 payload, s32 enabled);
+void btlReflectQueueKind44(s32 actor, u32 flags, u32 target, u32 parameter, u32 payload, s32 enabled);
 s32 scrGetArg(u32 index);
 
 /* Script command: queues reflection action 44 for every active roster unit, with parameter 0xFF when argument 0 is set. */
@@ -20,9 +20,9 @@ u32 scrCommBattleQueueActiveUnitsReflect(void)
         if ((flags & 1) && (flags & 0x80) && (flags & 0x400) &&
             (!(flags & 0x10) || !(unit->liveFlags.unk10C & 2))) {
             if (enable == 0) {
-                FUN_004fd204(0, 0, (u32)unit, 0, 20, 0);
+                btlReflectQueueKind44(0, 0, (u32)unit, 0, 20, 0);
             } else {
-                FUN_004fd204(0, 0, (u32)unit, 0xFF, 20, 0);
+                btlReflectQueueKind44(0, 0, (u32)unit, 0xFF, 20, 0);
             }
         }
     }

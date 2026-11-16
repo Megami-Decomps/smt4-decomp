@@ -3,7 +3,7 @@
 #include "common.h"
 #include <stddef.h>
 
-/* FUN_00247478 copies exactly 0x22 bytes into this halfword-aligned summary. */
+/* btlEntryBuildSummary copies exactly 0x22 bytes into this halfword-aligned summary. */
 struct BattleEntrySummary {
     /* 0x00 */ u16 unk00;
     /* 0x02 */ u16 value;

@@ -13,14 +13,14 @@ typedef struct StepObj {
     /* 0x114 */ u8 unk114;
 } StepObj;
 
-extern s32 FUN_00387ad8(StepObj *obj, s32 value);
+extern s32 slideFadeWindowStep(StepObj *obj, s32 value);
 
-/* Starts the step when FUN_00387ad8 allows it; returns the next state (3) or 0. */
+/* Starts the step when slideFadeWindowStep allows it; returns the next state (3) or 0. */
 u32 stepObjStart(StepObj *obj)
 {
     u32 next = 0;
 
-    if (FUN_00387ad8(obj, 0) != 0) {
+    if (slideFadeWindowStep(obj, 0) != 0) {
         obj->unkF8 = 4;
         obj->unkEC = 3;
         obj->unk112 = 1;

@@ -10,7 +10,7 @@ int btlEntryHasSkillCategory(...);
 int selectionCopySupportedValue(...);
 int FUN_0023cd08(...);
 int FUN_00246134(...);
-int FUN_00247478(...);
+int btlEntryBuildSummary(...);
 int btlFindEntryBlockByMemberId(int, int);
 int btlMainFindEntryByListedId(...);
 int targetSelectChangeDisplayMode(...);
@@ -42,7 +42,7 @@ extern unsigned int g_btlAction; /* 0x434278 */
 /* Supplied declaration required: selectionCopySupportedValue. */
 /* Supplied declaration required: FUN_0023cd08. */
 /* Supplied declaration required: FUN_00246134. */
-/* Supplied declaration required: FUN_00247478. */
+/* Supplied declaration required: btlEntryBuildSummary. */
 extern int battleGetEntryHalfword(unsigned int, unsigned int);
 /* Supplied declaration required: btlFindEntryBlockByMemberId. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
@@ -100,7 +100,7 @@ void FUN_00229118(int *param_1,int param_2,unsigned int param_3,int param_4)
     temp_v3 = __aeabi_idivmod(*(short *)(temp_v0 + 0xe8) * 100,(int)*(short *)(temp_v0 + 0xea));
     temp_v13[0] = (unsigned int)(temp_v3 < 0x14);
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    FUN_00247478(temp_v13 + 5,temp_v1,*(unsigned int *)(param_4 + 0x20));
+    btlEntryBuildSummary(temp_v13 + 5,temp_v1,*(unsigned int *)(param_4 + 0x20));
     switch(*(unsigned short *)(*(int *)(param_4 + 0x28) + 0x14c)) {
     case 7:
     case 9:
@@ -214,7 +214,7 @@ LAB_002292ac:
       temp_v8 = temp_v9;
       temp_v15 = (unsigned int)(temp_v3 < 0x14);
       temp_v1 = reinterpret_cast<int>(btlGetMainState());
-      FUN_00247478(&temp_v16,temp_v1,*(unsigned int *)(param_4 + 0x20));
+      btlEntryBuildSummary(&temp_v16,temp_v1,*(unsigned int *)(param_4 + 0x20));
       switch(*(unsigned short *)(*(int *)(param_4 + 0x28) + 0x14c)) {
       case 7:
       case 9:

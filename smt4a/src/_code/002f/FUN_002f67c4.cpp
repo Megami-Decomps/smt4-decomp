@@ -35,7 +35,7 @@ extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00185e84. */
 /* Supplied declaration required: statDrawClampedDelta. */
 extern unsigned int FUN_003df57c(short, unsigned int);
-extern unsigned int FUN_004bcbb4(unsigned int, short);
+extern unsigned int skillGetAdjustedCost(unsigned int, short);
 
 
 void FUN_002f67c4(int param_1,int param_2,int param_3,int param_4)
@@ -84,7 +84,7 @@ void FUN_002f67c4(int param_1,int param_2,int param_3,int param_4)
                    param_4 + 10,0,0);
       statDrawClampedDelta(*(unsigned int *)(temp_v2 + 0x24fc),(int)temp_v0,*(short *)(temp_v4 + 8) + param_2,
                    *(short *)(temp_v4 + 10) + param_3,param_4 + 10,0);
-      temp_v1 = FUN_004bcbb4(*(unsigned int *)(temp_v2 + 0x24fc),temp_v0);
+      temp_v1 = skillGetAdjustedCost(*(unsigned int *)(temp_v2 + 0x24fc),temp_v0);
     }
     temp_v2 = asdTMTexTableEntryAt(0x12,0x561);
     temp_v3 = FUN_0014bd84(temp_v0);

@@ -204,7 +204,7 @@ s32 FUN_00287800();
 s32 FUN_00287304();
 s32 tmnlHasSelection();
 void tmnlResetSelection();
-void FUN_002a03d8(u32 screen, u32 duration);
+void titleSetSlotValueState2(u32 screen, u32 duration);
 void jyoucyuGetSecondTableEntry();
 void FUN_001fc6e8(s32 state);
 void battleUpdateScreenFade(BattleTaskContext *work, u32 screen);
@@ -377,8 +377,8 @@ static inline void completeBattleTask(BattleTaskContext *work)
     if (fade) {
         if (work->result == 2 && work->resultMode == 1)
             restoreBattleTaskData();
-        FUN_002a03d8(0, 10);
-        FUN_002a03d8(1, 10);
+        titleSetSlotValueState2(0, 10);
+        titleSetSlotValueState2(1, 10);
     } else {
         FUN_00208be8();
         if (work->result == 2) {

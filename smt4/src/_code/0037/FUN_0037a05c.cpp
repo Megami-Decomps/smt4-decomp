@@ -22,7 +22,7 @@ extern "C" void FUN_0037a05c(SoundVoiceOwner *owner, u32 first, u32 second, u16 
                              SoundFloatPair pair)
 {
     owner->changedMask = mask;
-    Obj421aa4Manager *manager = FUN_002baed8();
+    Obj421aa4Manager *manager = soundRequestQueueGetInstance();
     Obj421aa4NodeVoice *node = (Obj421aa4NodeVoice *)soundRequestBegin(manager, 10);
     node->type = 0x28;
     node->id = (u32)&owner->params;

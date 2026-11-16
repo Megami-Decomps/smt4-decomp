@@ -20,7 +20,7 @@ int FUN_0020d3d4(...);
 int FUN_0021a9e8(...);
 int FUN_0022e774(void);
 int FUN_0023f328(...);
-int FUN_00333f6c(void);
+int gameGlobalsReleaseReference(void);
 int statusBustUpPortraitAcquire(...);
 int messageDismissNumericBanner(...);
 int statusIconSetKind(...);
@@ -51,7 +51,7 @@ int FUN_003eb200(void);
 int FUN_003eed44(...);
 int FUN_0040082c(void);
 int btlItemComputeValues(...);
-int FUN_004bcbb4(...);
+int skillGetAdjustedCost(...);
 int bitsAt60Test(...);
 
 int padQueryLogicalKey(...);
@@ -64,7 +64,7 @@ int touchMenuClose(void);
 int FUN_00270104(...);
 int btlMainGetUnk14(void);
 int resourceRunOperationIfUnblocked(...);
-int FUN_002a4894(...);
+int listCursorGetRowIfUnblocked(...);
 int scrollOwnerSelectIndex(...);
 int FUN_0031f208(...);
 int sortMenuAcquire(...);
@@ -79,7 +79,7 @@ int rangeSelectionSelectEndpoint(int, int, int);
 int gameGetSlotTable(void);
 int gridNavigationConfigure(...);
 int FUN_00228b04(...);
-int FUN_002a4878(...);
+int listCursorGetRowOfChildIfUnblocked(...);
 int scrollListSetSelectionTracked(int *, int);
 int screenSetContextHint(...);
 int FUN_002cc9e0(...);
@@ -180,10 +180,10 @@ extern int FUN_0026c3a0(void);
 extern int recordGetModeForId(int);
 /* Supplied declaration required: btlCommandResolveSelectedTarget. */
 /* Supplied declaration required: btlMainGetUnk14. */
-extern int FUN_00291e14(void);
+extern int btlIsDefeatSuppressed(void);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
-/* Supplied declaration required: FUN_002a4878. */
-/* Supplied declaration required: FUN_002a4894. */
+/* Supplied declaration required: listCursorGetRowOfChildIfUnblocked. */
+/* Supplied declaration required: listCursorGetRowIfUnblocked. */
 /* Supplied declaration required: scrollOwnerSelectIndex. */
 /* Supplied declaration required: scrollListSetSelectionTracked. */
 /* Supplied declaration required: infoWinSetText. */
@@ -197,7 +197,7 @@ extern int useCounterGetCurrentValue(void);
 /* Supplied declaration required: FUN_0031f208. */
 /* Supplied declaration required: sortMenuAcquire. */
 extern int buttonHelpGetPanelMode(void);
-/* Supplied declaration required: FUN_00333f6c. */
+/* Supplied declaration required: gameGlobalsReleaseReference. */
 /* Supplied declaration required: FUN_003450d4. */
 extern int uiSearchSecondary(int);
 extern int uiSearchPrimary(int *);
@@ -231,7 +231,7 @@ extern unsigned int halfTableGet(unsigned int, int);
 /* Supplied declaration required: FUN_0047f4cc. */
 extern int FUN_0047fbb4(unsigned int);
 /* Supplied declaration required: btlItemComputeValues. */
-/* Supplied declaration required: FUN_004bcbb4. */
+/* Supplied declaration required: skillGetAdjustedCost. */
 /* Supplied declaration required: bitsAt60Test. */
 extern int btlFindEntryValue(int, unsigned int);
 extern int btlGetPropertyMaximum(unsigned int);
@@ -441,7 +441,7 @@ LAB_0021d1f4:
   uiSpriteAdvanceAnimation(param_1 + 0x624);
   uiSpriteAdvanceAnimation(param_1 + 0x6b0);
   uiSpriteAdvanceAnimation(param_1 + 0x122c);
-  temp_v4 = FUN_00291e14();
+  temp_v4 = btlIsDefeatSuppressed();
   if (temp_v4 == 0) {
     temp_v5 = FUN_003e53ec();
     temp_v6 = (unsigned int)*(unsigned short *)(param_1 + 0x4b9c);
@@ -582,7 +582,7 @@ LAB_0021d964:
   case 1:
     if ((*(int *)(param_1 + 0x4b98) == 0) || (*(char *)(param_1 + 0x38b0) != '\0'))
     goto LAB_00220474;
-    temp_v4 = FUN_002a4878(param_1 + *piVar16 * 100 + 0x38bc);
+    temp_v4 = listCursorGetRowOfChildIfUnblocked(param_1 + *piVar16 * 100 + 0x38bc);
     temp_v27 = (int *)temp_v31;
     temp_v26 = (int *)0xffffffff;
     temp_v28 = 1;
@@ -595,10 +595,10 @@ LAB_0021d964:
       screenSetContextHint(param_1,temp_v8,*piVar16);
       temp_v7 = param_1 + *piVar16 * 100 + 0x38bc;
       if (temp_v4 == 0) {
-        temp_v4 = FUN_002a4878(temp_v7);
+        temp_v4 = listCursorGetRowOfChildIfUnblocked(temp_v7);
         goto joined_r0x0021db60;
       }
-      temp_v4 = FUN_002a4878(temp_v7);
+      temp_v4 = listCursorGetRowOfChildIfUnblocked(temp_v7);
       if (temp_v4 != 0) break;
       temp_v8 = 1;
       FUN_003756c8(temp_v8);
@@ -611,13 +611,13 @@ LAB_0021d964:
       screenSetContextHint(param_1,temp_v8,*piVar16);
       temp_v7 = param_1 + *piVar16 * 100 + 0x38bc;
       if (temp_v4 != 0) {
-        temp_v4 = FUN_002a4878(temp_v7);
+        temp_v4 = listCursorGetRowOfChildIfUnblocked(temp_v7);
         if (temp_v4 == 0) {
           FUN_003756c8(1);
         }
         break;
       }
-      temp_v4 = FUN_002a4878(temp_v7);
+      temp_v4 = listCursorGetRowOfChildIfUnblocked(temp_v7);
 joined_r0x0021db60:
       if (temp_v4 == 0) break;
       temp_v8 = 0;
@@ -641,7 +641,7 @@ joined_r0x0021db60:
           eventQueueAddUniqueIfValid(temp_v8);
           break;
         }
-        temp_v4 = FUN_002a4878(param_1 + *piVar16 * 100 + 0x38bc);
+        temp_v4 = listCursorGetRowOfChildIfUnblocked(param_1 + *piVar16 * 100 + 0x38bc);
         if (temp_v4 < 1) break;
         scrollOwnerSelectIndex(param_1 + *piVar16 * 100 + 0x38bc,0);
         temp_v8 = FUN_002cc9e0(param_1,1);
@@ -684,7 +684,7 @@ joined_r0x0021db60:
     btlCommandMenuEnterMode(param_1,4,0);
     sortMenuAcquire(0xffffffff,1);
     FUN_0031f208(10);
-    temp_v4 = FUN_00291e14();
+    temp_v4 = btlIsDefeatSuppressed();
     if (temp_v4 == 0) {
       temp_v8 = 9;
     }
@@ -765,7 +765,7 @@ LAB_0021e058:
           temp_v29 = 0;
           temp_v32 = (short *)0x0;
           temp_v4 = resourceRunOperationIfUnblocked(*(unsigned int *)(param_1 + 0x3c40));
-          temp_v7 = FUN_002a4894(*(unsigned int *)(param_1 + 0x3c40));
+          temp_v7 = listCursorGetRowIfUnblocked(*(unsigned int *)(param_1 + 0x3c40));
           temp_v4 = temp_v4 + temp_v7;
           temp_v7 = FUN_002cc9e0(param_1,1);
           temp_v10 = (unsigned int)temp_v23;
@@ -857,7 +857,7 @@ LAB_0021e5b0:
             if (temp_v32 != (short *)0x0) {
               puVar18 = (unsigned int *)(param_1 + 0x3c84);
               *puVar18 = 0x1010101;
-              temp_v4 = FUN_00291e14();
+              temp_v4 = btlIsDefeatSuppressed();
               if (temp_v4 == 0) {
                 temp_v4 = 0;
                 do {
@@ -929,7 +929,7 @@ LAB_0021e5b0:
                 if ((temp_v11 == -2) || (-1 < temp_v11)) {
                   temp_v7 = *temp_v34;
                   if ((temp_v4 == 0) ||
-                     ((temp_v13 = FUN_004bcbb4(temp_v4,temp_v7), *(short *)(temp_v4 + 0x2c) < temp_v13 ||
+                     ((temp_v13 = skillGetAdjustedCost(temp_v4,temp_v7), *(short *)(temp_v4 + 0x2c) < temp_v13 ||
                       (FUN_004009d0(temp_v7,0), temp_v7 != 0)))) {
                     temp_v16 = 0;
                   }
@@ -939,7 +939,7 @@ LAB_0021e5b0:
                 }
                 temp_v36 = (int *)(param_1 + 0x3dac);
                 *temp_v36 = 0;
-                temp_v7 = FUN_004bcbb4(temp_v4,*temp_v34);
+                temp_v7 = skillGetAdjustedCost(temp_v4,*temp_v34);
                 *(int *)(param_1 + *piVar16 * 4 + 0x3c98) = -temp_v7;
                 if ((*(unsigned int *)(temp_v9 + 0x3c) & 0x200) != 0) {
                   *temp_v36 = -(int)*(short *)(temp_v4 + 0x2a);
@@ -1052,7 +1052,7 @@ LAB_0021e5b0:
             temp_v4 = gameDataFlagTestBit(0x7f);
             if (temp_v4 == 0) {
 LAB_0021e880:
-              temp_v4 = FUN_002a4878(param_1 + *piVar16 * 100 + 0x38bc);
+              temp_v4 = listCursorGetRowOfChildIfUnblocked(param_1 + *piVar16 * 100 + 0x38bc);
               temp_v27 = (int *)temp_v31;
               temp_v28 = 1;
               temp_v29 = 1;
@@ -1061,7 +1061,7 @@ LAB_0021e880:
               temp_v7 = param_1 + *piVar16 * 100 + 0x38bc;
               FUN_003450d4(temp_v7,0,param_1 + 0x480e,0xffffffff);
               if (temp_v7 != 0) {
-                temp_v7 = FUN_002a4878(param_1 + *piVar16 * 100 + 0x38bc);
+                temp_v7 = listCursorGetRowOfChildIfUnblocked(param_1 + *piVar16 * 100 + 0x38bc);
                 if (temp_v7 != temp_v4) {
 LAB_0021e950:
                   *(unsigned int *)(param_1 + *piVar16 * 4 + 0x3c98) = 0;
@@ -1083,7 +1083,7 @@ LAB_0021e950:
                 if (temp_v4 != 0) goto LAB_0021e950;
               }
               temp_v4 = resourceRunOperationIfUnblocked(*(unsigned int *)(param_1 + 0x3c40));
-              temp_v7 = FUN_002a4894(*(unsigned int *)(param_1 + 0x3c40));
+              temp_v7 = listCursorGetRowIfUnblocked(*(unsigned int *)(param_1 + 0x3c40));
               piVar19 = (int *)(param_1 + 0x3dac);
               *(unsigned int *)(param_1 + *piVar16 * 4 + 0x3c98) = 0;
               temp_v5 = temp_v4 + temp_v7;
@@ -1108,7 +1108,7 @@ LAB_0021e950:
                     else {
                       temp_v4 = btlMainGetUnk14();
                     }
-                    temp_v7 = FUN_004bcbb4(temp_v4,temp_v5);
+                    temp_v7 = skillGetAdjustedCost(temp_v4,temp_v5);
                     *(int *)(param_1 + *piVar16 * 4 + 0x3c98) = -temp_v7;
                     if ((*(unsigned int *)(temp_v28 + 0x3c) & 0x200) != 0) {
                       temp_v11 = *(short *)(temp_v4 + 0x2a);
@@ -1273,7 +1273,7 @@ LAB_0021ed20:
         break;
       }
       temp_v4 = resourceRunOperationIfUnblocked(*piVar19);
-      temp_v7 = FUN_002a4894(*piVar19);
+      temp_v7 = listCursorGetRowIfUnblocked(*piVar19);
       temp_v6 = (unsigned int)*(unsigned short *)(param_1 + (temp_v7 + temp_v4) * 2 + 0x3ca8);
       temp_v5 = temp_v6;
       FUN_0040082c();
@@ -1333,7 +1333,7 @@ LAB_0021ed20:
           break;
         }
       }
-      temp_v4 = FUN_002a4878(param_1 + *piVar16 * 100 + 0x38bc);
+      temp_v4 = listCursorGetRowOfChildIfUnblocked(param_1 + *piVar16 * 100 + 0x38bc);
       temp_v27 = (int *)temp_v31;
       temp_v28 = 1;
       temp_v29 = 1;
@@ -1347,7 +1347,7 @@ LAB_0021ed20:
         if (temp_v9 != 0) goto LAB_0021f098;
         break;
       }
-      temp_v7 = FUN_002a4878();
+      temp_v7 = listCursorGetRowOfChildIfUnblocked();
       if (temp_v7 == temp_v4) break;
 LAB_0021f098:
       btlCommandMenuEnterMode(param_1,1);
@@ -1418,7 +1418,7 @@ LAB_0021f10c:
           break;
         }
 LAB_0021f28c:
-        temp_v4 = FUN_002a4878(param_1 + *piVar16 * 100 + 0x38bc);
+        temp_v4 = listCursorGetRowOfChildIfUnblocked(param_1 + *piVar16 * 100 + 0x38bc);
         temp_v27 = (int *)temp_v31;
         temp_v26 = (int *)0xffffffff;
         temp_v28 = 1;
@@ -1432,7 +1432,7 @@ LAB_0021f28c:
           if (temp_v9 != 0) goto LAB_0021f338;
           break;
         }
-        temp_v7 = FUN_002a4878();
+        temp_v7 = listCursorGetRowOfChildIfUnblocked();
         if (temp_v7 == temp_v4) break;
 LAB_0021f338:
         btlCommandMenuEnterMode(param_1,1);
@@ -1765,7 +1765,7 @@ LAB_0021fbdc:
       }
     }
     temp_v7 = param_1 + 0x3bdc;
-    temp_v9 = FUN_002a4878();
+    temp_v9 = listCursorGetRowOfChildIfUnblocked();
     temp_v28 = 1;
     temp_v29 = 1;
     temp_v27 = (int *)temp_v30;
@@ -1775,7 +1775,7 @@ LAB_0021fbdc:
     FUN_003450d4(temp_v7,0,param_1 + 0x4846,0xffffffff);
     temp_v10 = (unsigned int)temp_v23;
     if (temp_v4 != 0) {
-      temp_v4 = FUN_002a4878(temp_v7);
+      temp_v4 = listCursorGetRowOfChildIfUnblocked(temp_v7);
       if (temp_v4 != temp_v9) {
         uiSpriteSelectAnim(param_1 + 0xac,1);
         temp_v4 = FUN_002cc9e0(param_1,1);
@@ -1794,7 +1794,7 @@ LAB_0021fbdc:
           temp_v34 = (int *)((unsigned int)temp_v34 & 0xffff0000);
           temp_v27 = (int *)((unsigned int)temp_v27 & 0xffff0000);
           FUN_002ccde8(param_1,&temp_v34,&temp_v27);
-          temp_v4 = FUN_002a4878(temp_v7);
+          temp_v4 = listCursorGetRowOfChildIfUnblocked(temp_v7);
           if (temp_v4 != 0) {
             temp_v7 = gameGetSlotTable();
             temp_v9 = param_1 + temp_v4 * 4;
@@ -1819,9 +1819,9 @@ LAB_0021fbdc:
         *puVar20 = 0;
       }
       if (!(temp_v4 == 0 && temp_v30[0] == '\0')) {
-        temp_v4 = FUN_002a4878(temp_v7);
+        temp_v4 = listCursorGetRowOfChildIfUnblocked(temp_v7);
         if (*(char *)(temp_v4 + param_1 + 0x3c84) != '\0') {
-          temp_v8 = FUN_002a4878(temp_v7);
+          temp_v8 = listCursorGetRowOfChildIfUnblocked(temp_v7);
           *(unsigned int *)(param_1 + 0x3898) = temp_v8;
           temp_v4 = FUN_002cc9e0(param_1,1);
           goto joined_r0x0022027c;
@@ -1871,7 +1871,7 @@ LAB_0021fbdc:
               temp_v28 = temp_v28 & 0xffff0000;
               temp_v25 = (short **)((unsigned int)temp_v25 & 0xffff0000);
               FUN_002ccde8(param_1,&temp_v28,&temp_v25);
-              temp_v4 = FUN_002a4878(temp_v7);
+              temp_v4 = listCursorGetRowOfChildIfUnblocked(temp_v7);
               temp_v10 = (unsigned int)temp_v23;
               if (temp_v4 == 0) {
                 btlItemComputeValues(0xffffffff,(int)(short)(int)temp_v25,param_1 + 0x3c88,param_1 + 0x3c98);
@@ -1968,7 +1968,7 @@ joined_r0x0022027c:
       *puVar20 = 0;
     }
     if (temp_v4 != 0 || temp_v30[0] != '\0') {
-      temp_v8 = FUN_002a4878(param_1 + 0x3bdc);
+      temp_v8 = listCursorGetRowOfChildIfUnblocked(param_1 + 0x3bdc);
       *(unsigned int *)(param_1 + 0x3898) = temp_v8;
       temp_v4 = FUN_002cc9e0(param_1,1);
       if (temp_v4 != 2) {
@@ -2032,14 +2032,14 @@ joined_r0x0022027c:
   case 0x2c:
     temp_v4 = FUN_0026c3a0();
     if (temp_v4 != 0) {
-      FUN_00333f6c();
+      gameGlobalsReleaseReference();
       statusIconSetKind(param_1,0);
       btlCommandMenuEnterMode(param_1,1);
     }
     break;
   case 0x2d:
     temp_v7 = param_1 + 0x3bdc;
-    temp_v9 = FUN_002a4878();
+    temp_v9 = listCursorGetRowOfChildIfUnblocked();
     temp_v28 = 1;
     temp_v29 = 1;
     temp_v27 = (int *)temp_v30;
@@ -2049,10 +2049,10 @@ joined_r0x0022027c:
     FUN_003450d4(temp_v7,0,param_1 + 0x4846,0xffffffff);
     temp_v10 = (unsigned int)temp_v23;
     if (temp_v4 != 0) {
-      temp_v4 = FUN_002a4878(temp_v7);
+      temp_v4 = listCursorGetRowOfChildIfUnblocked(temp_v7);
       if (temp_v4 != temp_v9) {
         uiSpriteSelectAnim(param_1 + 0xac,1);
-        temp_v4 = FUN_002a4878(temp_v7);
+        temp_v4 = listCursorGetRowOfChildIfUnblocked(temp_v7);
         *piVar16 = temp_v4;
         FUN_0020d3d4(param_1);
       }
@@ -2063,7 +2063,7 @@ joined_r0x0022027c:
       temp_v10 = (unsigned int)temp_v23;
       if (temp_v4 != 0) {
         uiSpriteSelectAnim(param_1 + 0xac,1);
-        temp_v4 = FUN_002a4878(temp_v7);
+        temp_v4 = listCursorGetRowOfChildIfUnblocked(temp_v7);
         *piVar16 = temp_v4;
         FUN_0020d3d4(param_1);
         break;
@@ -2075,7 +2075,7 @@ joined_r0x0022027c:
         *puVar20 = 0;
       }
       if (temp_v4 != 0 || temp_v30[0] != '\0') {
-        temp_v4 = FUN_002a4878(temp_v7);
+        temp_v4 = listCursorGetRowOfChildIfUnblocked(temp_v7);
         temp_v10 = (unsigned int)temp_v23;
         if (temp_v4 != 0) {
           temp_v7 = gameGetSlotTable();

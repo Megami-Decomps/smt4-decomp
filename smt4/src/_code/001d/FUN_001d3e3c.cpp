@@ -121,7 +121,7 @@ int scrScriptProcessStartEntry(...);
 int buttonHelpSetPresetDefault(void);
 int eventQueueAddUnique(...);
 int libc_strcpy(...);
-int FUN_002bff50(void);
+int messageSetConfirmDisplayMode(void);
 int gameMapBitSet(...);
 int FUN_00316de4(...);
 int FUN_00396370(void);
@@ -156,7 +156,7 @@ int questClassifyCompletionNotification(void);
 int mapMarkVisitedAndUpdateRegionFlags(unsigned int, unsigned int);
 int FUN_00277b5c(...);
 int navigationSetArguments(...);
-int FUN_0027d5ac(...);
+int mapSetDepartureIndex(...);
 int actorApplyAlpha(void);
 int dataTableGetRecord23(void);
 int table23FindRecordByKey(...);
@@ -440,7 +440,7 @@ extern int questMapSetCursor(unsigned int, unsigned int);
 /* Supplied declaration required: navigationSetArguments. */
 /* Supplied declaration required: mapEntryTriggerForScene. */
 /* Supplied declaration required: mapSkyTableLoad. */
-/* Supplied declaration required: FUN_0027d5ac. */
+/* Supplied declaration required: mapSetDepartureIndex. */
 /* Supplied declaration required: actorApplyAlpha. */
 /* Supplied declaration required: dataTableGetRecord23. */
 /* Supplied declaration required: table23FindRecordByKey. */
@@ -477,7 +477,7 @@ extern unsigned int scrScriptProcessGetEntry(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0028a420. */
 /* Supplied declaration required: FUN_0028d664. */
 extern int gameJumpRequestIsPending(void);
-extern int FUN_002903f0(void);
+extern int rosterGetLeaderId(void);
 /* Supplied declaration required: tableGroupFindEntryIndex. */
 /* Supplied declaration required: helpResourcesRelease. */
 /* Supplied declaration required: textEncodeFontSlot. */
@@ -511,7 +511,7 @@ extern int FUN_002b8694(void);
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: soundPlaySeUnpanned. */
-/* Supplied declaration required: FUN_002bff50. */
+/* Supplied declaration required: messageSetConfirmDisplayMode. */
 extern int gameDataBlocksGetSaveData(void);
 extern int gameFlagIsSet(unsigned int);
 extern unsigned int randNextInRange(unsigned int);
@@ -626,7 +626,7 @@ unsigned int FUN_001d3e3c(void)
       switch(temp_v7) {
       case 0:
       case 3:
-        temp_v6 = FUN_002903f0();
+        temp_v6 = rosterGetLeaderId();
         if ((temp_v6 != 0) && (temp_v6 = table1bOr1cGetRecordValue(), temp_v6 == 6)) {
           puVar7[0x265] = 1;
         }
@@ -767,7 +767,7 @@ unsigned int FUN_001d3e3c(void)
     textFormatBuffer(temp_v29,&LAB_001d47f4,puVar7[0x10] - 100);
     FUN_002a09b4(temp_v29,0);
     DAT_0049f942 = 0;
-    FUN_0027d5ac();
+    mapSetDepartureIndex();
     FUN_0028527c(0);
     DAT_0049f928 = puVar7[0x10];
     DAT_0049f92c = puVar7[0x12];
@@ -1156,7 +1156,7 @@ unsigned int FUN_001d3e3c(void)
                             buttonHelpSetPresetDefault();
                             puVar7[3] = 0x3b;
                             puVar7[4] = 0;
-                            FUN_002bff50();
+                            messageSetConfirmDisplayMode();
                             scrScriptProcessStartEntry(puVar7[0x26e],0);
                             return 0;
                           }
@@ -1164,7 +1164,7 @@ unsigned int FUN_001d3e3c(void)
                           DAT_0049f920 = temp_v6;
                           puVar7[3] = 0x49;
                           puVar7[4] = 0;
-                          FUN_002bff50();
+                          messageSetConfirmDisplayMode();
                           return 0;
                         }
                       }
@@ -1672,7 +1672,7 @@ LAB_001d61bc:
       scrLoaderReset(g_aocMain + 0xa8);
       lmapSetSceneId(2);
       buttonHelpSetPresetDefault();
-      FUN_002bff50();
+      messageSetConfirmDisplayMode();
       temp_v4 = puVar7[4] + 1;
       puVar7[4] = temp_v4;
       break;
@@ -1750,7 +1750,7 @@ joined_r0x001d6448:
     gameCopyPersistentSave();
     mapDepartSetTarget(0xffffffff,0xffffffff);
     puVar17 = g_lmapMainState;
-    FUN_002bff50();
+    messageSetConfirmDisplayMode();
     textFormatBuffer(temp_v30,"event/e%03d/e%03d.bf",DAT_0049f970,DAT_0049f970);
     temp_v7 = asdLoadFileSyncDefault(temp_v30);
     puVar17[0x279] = temp_v7;
@@ -1816,7 +1816,7 @@ LAB_001d6bd0:
       DAT_0049f974 = tableGroupFindEntryIndex(puVar7[0x26c],&DAT_0049f978);
     }
     mapDepartSetTarget(0xffffffff,0xffffffff);
-    FUN_002bff50();
+    messageSetConfirmDisplayMode();
     scrScriptProcessStartEntry(puVar7[0x26e],DAT_0049f974);
     DAT_0049f970 = 0;
     puVar7[3] = puVar7[3] + 1;
@@ -1861,7 +1861,7 @@ LAB_001d6bd0:
       DAT_0049f974 = tableGroupFindEntryIndex(puVar7[0x26c],&DAT_0049f978);
     }
     mapDepartSetTarget(0xffffffff,0xffffffff);
-    FUN_002bff50();
+    messageSetConfirmDisplayMode();
     scrScriptProcessStartEntry(puVar7[0x26e],DAT_0049f974);
     DAT_0049f970 = 0;
     puVar7[3] = puVar7[3] + 1;
@@ -1904,7 +1904,7 @@ LAB_001d6bd0:
     if (DAT_0049f974 == -1) {
       DAT_0049f974 = tableGroupFindEntryIndex(puVar7[0x26c],&DAT_0049f978);
     }
-    FUN_002bff50();
+    messageSetConfirmDisplayMode();
     scrScriptProcessStartEntry(puVar7[0x26e],DAT_0049f974);
     FUN_00265f50(puVar7);
     FUN_0026493c(puVar7);
@@ -1946,7 +1946,7 @@ LAB_001d6bd0:
     DAT_0049f970 = 0;
     temp_v7 = tableGroupFindEntryIndex(puVar7[0x269],&DAT_0049f978);
     puVar7[0x267] = temp_v7;
-    FUN_002bff50();
+    messageSetConfirmDisplayMode();
     scrScriptProcessStartEntry(puVar7[0x26b],puVar7[0x267]);
     FUN_00265f50(puVar7);
     FUN_0026493c(puVar7);
@@ -2022,7 +2022,7 @@ LAB_001d6bd0:
       DAT_0049f970 = 0;
       temp_v7 = tableGroupFindEntryIndex(puVar7[0x269],&LAB_001d6fac);
       puVar7[0x267] = temp_v7;
-      FUN_002bff50();
+      messageSetConfirmDisplayMode();
       scrScriptProcessStartEntry(puVar7[0x26b],puVar7[0x267]);
       puVar7[3] = puVar7[3] + 1;
       puVar7[4] = 0;
@@ -2104,7 +2104,7 @@ LAB_001d6bd0:
       }
     }
     puVar17 = g_lmapMainState;
-    FUN_002bff50();
+    messageSetConfirmDisplayMode();
     textFormatBuffer(temp_v30,"event/e%03d/e%03d.bf",DAT_0049f970,DAT_0049f970);
     temp_v7 = asdLoadFileSyncDefault(temp_v30);
     puVar17[0x279] = temp_v7;
@@ -2164,7 +2164,7 @@ LAB_001d6bd0:
       DAT_0049f970 = 0;
       temp_v7 = tableGroupFindEntryIndex(puVar7[0x269],&LAB_001d73cc);
       puVar7[0x267] = temp_v7;
-      FUN_002bff50();
+      messageSetConfirmDisplayMode();
       scrScriptProcessStartEntry(puVar7[0x26b],puVar7[0x267]);
       puVar7[3] = puVar7[3] + 1;
       puVar7[4] = 0;
@@ -2195,7 +2195,7 @@ LAB_001d6bd0:
     break;
   case 0x30:
     *(unsigned char *)(puVar7 + 0x264) = 0;
-    FUN_002bff50();
+    messageSetConfirmDisplayMode();
     buttonHelpSetPresetDefault();
     temp_v7 = asdLoadFileSyncDefault(&LAB_001d73dc);
     puVar7[0x27d] = temp_v7;
@@ -2231,7 +2231,7 @@ LAB_001d6bd0:
     FUN_00264794();
     mapDepartSetTarget(0xffffffff,0xffffffff);
     puVar17 = g_lmapMainState;
-    FUN_002bff50();
+    messageSetConfirmDisplayMode();
     textFormatBuffer(temp_v30,&LAB_001d7420,puVar17[0x26f],puVar17[0x26f]);
     temp_v7 = asdLoadFileSyncDefault(temp_v30);
     puVar17[0x279] = temp_v7;
@@ -2309,20 +2309,20 @@ LAB_001d6bd0:
     if (temp_v3 != 1) {
       if (temp_v3 == 2) {
         temp_v6 = 0;
-        FUN_0027d5ac(temp_v6);
+        mapSetDepartureIndex(temp_v6);
         temp_v6 = 0x5d;
         puVar7[3] = temp_v6;
         puVar7[4] = 0;
         break;
       }
       if (temp_v3 == 3) {
-        FUN_0027d5ac(0);
+        mapSetDepartureIndex(0);
       }
     }
     else {
       temp_v6 = dataTable2fSub0GetRecord((int)*(short *)(temp_v4 + 0x2a));
       temp_v6 = (int)*(short *)(temp_v6 + 8);
-      FUN_0027d5ac(temp_v6);
+      mapSetDepartureIndex(temp_v6);
     }
     temp_v6 = 0x5d;
     puVar7[3] = temp_v6;
@@ -2355,7 +2355,7 @@ LAB_001d6bd0:
         dataFindKindRecordWithAocOverrides(DAT_0049fa5c,1);
         FUN_002bd158();
         textEncodeFontSlot(0,temp_v30);
-        FUN_002bff50();
+        messageSetConfirmDisplayMode();
         temp_v7 = tableGroupFindEntryIndex(puVar7[0x269],&LAB_001d7978);
         puVar7[0x267] = temp_v7;
         scrScriptProcessStartEntry(puVar7[0x26b],temp_v7);
@@ -3316,7 +3316,7 @@ joined_r0x001d8c24:
       }
     }
     if (*(char *)((int)puVar7 + 9) != '\0') {
-      temp_v6 = FUN_002903f0();
+      temp_v6 = rosterGetLeaderId();
       if ((temp_v6 != 0) && (temp_v4 = table1bOr1cGetRecordValue(), temp_v4 == 6)) {
         dataTable1bOr1cGetRecord();
         FUN_0026f960(*(unsigned short *)(temp_v6 + 0x148));

@@ -22,7 +22,7 @@ extern "C" void questCenterBeginConversation(QuestInteraction *object)
 {
     s32 activeQuest = 0;
     for (u16 index = 0; index < 32; ++index) {
-        if (FUN_002c2758(index) == 1) {
+        if (gameDataStatusFlagGet(index) == 1) {
             activeQuest = index;
             break;
         }

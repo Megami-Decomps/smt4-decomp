@@ -2,7 +2,7 @@
 
 extern "C" {
 void dataTableFree(u32 table);
-void FUN_00471890(void *system);
+void aocRowOwnerFreeRows(void *system);
 extern void *g_aocSystem;
 }
 
@@ -10,5 +10,5 @@ extern void *g_aocSystem;
 extern "C" void aocScriptReleaseTableAndReset()
 {
     dataTableFree(69);
-    FUN_00471890(g_aocSystem);
+    aocRowOwnerFreeRows(g_aocSystem);
 }

@@ -70,7 +70,7 @@ typedef struct {
     unsigned int sp138; /* 0x138: local_138 */
 } param_3_stack;
 
-extern unsigned int DAT_00536d14; /* 0x536d14 */
+extern unsigned int g_sinCosTable; /* 0x536d14 */
 extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
@@ -513,11 +513,11 @@ LAB_0050674c:
                     temp_v16 = (float)VectorUnsignedToFloat
                                               (temp_v13 & 0xffff,(unsigned char)(in_fpscr >> 0x16) & 3);
                     temp_v13 = temp_v13 & 0xff;
-                    temp_v14 = (float)(&DAT_00536d14)[temp_v5 * 4] +
+                    temp_v14 = (float)(&g_sinCosTable)[temp_v5 * 4] +
                              (temp_v8 - temp_v18) * (float)(&DAT_00536d1c)[temp_v5 * 4];
-                    temp_v7 = (float)(&DAT_00536d14)[temp_v2 * 4] +
+                    temp_v7 = (float)(&g_sinCosTable)[temp_v2 * 4] +
                              (temp_v21 - temp_v17) * (float)*(unsigned long long *)(&DAT_00536d1c + temp_v2 * 4);
-                    temp_v15 = (float)(&DAT_00536d14)[temp_v13 * 4] +
+                    temp_v15 = (float)(&g_sinCosTable)[temp_v13 * 4] +
                              (temp_v19 - temp_v16) * (float)(&DAT_00536d1c)[temp_v13 * 4];
                     temp_v8 = (float)(&DAT_00536d18)[temp_v5 * 4] +
                              (temp_v8 - temp_v18) * (float)(&DAT_00536d20)[temp_v5 * 4];

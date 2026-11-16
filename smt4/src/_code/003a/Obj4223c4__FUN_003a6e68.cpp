@@ -14,7 +14,7 @@ s32 vec2GetXInt(const TimerSlot *);
 void pointConvertToFloat(FloatPoint *, s32, s32);
 void buttonHelpSetPreset(s32);
 void FUN_0029d960(void *);
-void FUN_00233670(MessageIdList *, u32, s32, s32);
+void messageIdListInit(MessageIdList *, u32, s32, s32);
 }
 void Obj4223c4::FUN_003a6e68()
 {
@@ -78,6 +78,6 @@ void Obj4223c4::FUN_003a6e68()
     view->window->initialize(&view->cursor);
     view->window->state |= 0x1000;
     s32 count = view->cursor.count < 10 ? view->cursor.count : 10;
-    FUN_00233670(&view->messages, 0x1D, 0x40E, count);
+    messageIdListInit(&view->messages, 0x1D, 0x40E, count);
     view->messages.unk10 = 1;
 }

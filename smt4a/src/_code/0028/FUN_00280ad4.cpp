@@ -18,18 +18,18 @@ s32 FUN_00280ad4(s32 titleIdLow, u32 titleIdHigh, u32 option3,
     void *preparedData = asdLoadFileWithSize(input, info, 0);
     u32 result = FUN_0042a068(titleIdLow, titleIdHigh, preparedData,
                              info[0], option4, option3);
-    FUN_0013ebd8(result);
+    processResultSetValue(result);
 
     if (result >= 0) {
         const unsigned long long titleId =
             (static_cast<unsigned long long>(titleIdHigh) << 32) |
             titleIdLow;
         result = FUN_00429fcc(FUN_00142b04(), titleId);
-        FUN_0013ebd8(result);
+        processResultSetValue(result);
         if (result >= 0) {
             DAT_005b40c9 = 1;
         }
-        FUN_0013ebd8(result);
+        processResultSetValue(result);
     }
 
     if (preparedData != 0) {

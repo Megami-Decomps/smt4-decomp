@@ -19,7 +19,7 @@ typedef struct NgwordState {
     /* 0x30 */ u8 idle;
 } NgwordState;
 
-extern const char DAT_0040b770[]; /* "ngword:" */
+extern const char g_ngwordMountName[]; /* "ngword:" */
 
 void fsUnmountByName(const char *text);
 void registerObj8Holder(void *holder);
@@ -28,7 +28,7 @@ void registerObj8Holder(void *holder);
 void ngwordStateReset(NgwordState *state)
 {
     if (state->pending != 0) {
-        fsUnmountByName(DAT_0040b770);
+        fsUnmountByName(g_ngwordMountName);
     }
     if (state->registered != 0) {
         registerObj8Holder(state->holder);

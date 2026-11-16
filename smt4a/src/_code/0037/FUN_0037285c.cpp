@@ -17,7 +17,7 @@ struct BtlUnitParametersView {
 extern "C" {
 
 BtlUnit *btlUnitGet(u32 id);
-BattleActionInfo FUN_003e8bb0(BtlMainStateA *state, BtlCombatantEntryA *parameters);
+BattleActionInfo btlEntryBuildSummary(BtlMainStateA *state, BtlCombatantEntryA *parameters);
 
 // Select the unit command argument from the queried action's target kind.
 u32 FUN_0037285c(void)
@@ -27,7 +27,7 @@ u32 FUN_0037285c(void)
     BtlUnit *unit = btlUnitGet(g_btlScriptUnit);
     BtlCombatantEntryA *parameters =
         reinterpret_cast<BtlUnitParametersView *>(unit)->parameters;
-    BattleActionInfo info = FUN_003e8bb0(btlGetMainState(), parameters);
+    BattleActionInfo info = btlEntryBuildSummary(btlGetMainState(), parameters);
     if (info.targetKind == 1)
         work->commandArg = 2;
     else

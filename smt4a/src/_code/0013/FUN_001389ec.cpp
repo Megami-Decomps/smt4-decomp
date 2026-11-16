@@ -6,7 +6,7 @@ extern "C" {
 u8 FUN_001389ec(s32 value)
 {
     if (value != 0) {
-        DAT_005b4000.unk10 = value;
+        g_padInputState.unk10 = value;
     }
     return value != 0;
 }

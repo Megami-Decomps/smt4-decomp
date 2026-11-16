@@ -23,7 +23,7 @@ void Obj421aa4::shutdown()
 {
     if (active != 0) {
         if (unk85[1] != 0) {
-            Obj421aa4Manager *manager = FUN_002baed8();
+            Obj421aa4Manager *manager = soundRequestQueueGetInstance();
             Obj421aa4Node *node = soundRequestBegin(manager, 6);
             node->type = 6;
             node->id = vfunc20();
@@ -58,7 +58,7 @@ void Obj421aa4::shutdown()
         }
         unk85[1] = 0;
         unk85[3] = 0;
-        Obj421aa4Manager *manager = FUN_002baed8();
+        Obj421aa4Manager *manager = soundRequestQueueGetInstance();
         Obj421aa4Node *node = soundRequestBegin(manager, 6);
         node->type = 4;
         node->id = vfunc20();

@@ -64,7 +64,7 @@ typedef struct {
     unsigned int sp1A0; /* 0x1a0: local_1a0 */
 } param_1_stack;
 
-extern unsigned int DAT_00407ed0; /* 0x407ed0 */
+extern unsigned int g_sinCosTable; /* 0x407ed0 */
 extern unsigned int DAT_00407ed4; /* 0x407ed4 */
 extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
@@ -201,12 +201,12 @@ void FUN_002d2efc(fn_002d2efc_arg0 *param_1)
   temp_v8 = (float)VectorUnsignedToFloat(temp_v4 & 0xffff,(unsigned char)(temp_v1 >> 0x16) & 3);
   temp_v4 = temp_v5 & 0xff;
   temp_v6 = (float)VectorUnsignedToFloat(temp_v5 & 0xffff,(unsigned char)(temp_v1 >> 0x16) & 3);
-  temp_v9 = (float)(&DAT_00407ed0)[temp_v0 * 4] + (0.0f - temp_v10) * (float)(&DAT_00407ed8)[temp_v0 * 4];
+  temp_v9 = (float)(&g_sinCosTable)[temp_v0 * 4] + (0.0f - temp_v10) * (float)(&DAT_00407ed8)[temp_v0 * 4];
   temp_v10 = (float)(&DAT_00407ed4)[temp_v0 * 4] + (0.0f - temp_v10) * (float)(&DAT_00407edc)[temp_v0 * 4];
   temp_v32 = (float)(&DAT_00407ed4)[temp_v3 * 4] +
               (temp_v2 - temp_v8) * (float)(&DAT_00407edc)[temp_v3 * 4];
-  temp_v2 = (float)(&DAT_00407ed0)[temp_v3 * 4] + (temp_v2 - temp_v8) * (float)(&DAT_00407ed8)[temp_v3 * 4];
-  temp_v8 = (float)(&DAT_00407ed0)[temp_v4 * 4] + (0.0f - temp_v6) * (float)(&DAT_00407ed8)[temp_v4 * 4];
+  temp_v2 = (float)(&g_sinCosTable)[temp_v3 * 4] + (temp_v2 - temp_v8) * (float)(&DAT_00407ed8)[temp_v3 * 4];
+  temp_v8 = (float)(&g_sinCosTable)[temp_v4 * 4] + (0.0f - temp_v6) * (float)(&DAT_00407ed8)[temp_v4 * 4];
   temp_v6 = (float)(&DAT_00407ed4)[temp_v4 * 4] + (0.0f - temp_v6) * (float)(&DAT_00407edc)[temp_v4 * 4];
   if (!romwright_subpiece_4_1_0(temp_v1 >> 0x1d,0)) {
     temp_v2 = -temp_v2;
@@ -259,13 +259,13 @@ void FUN_002d2efc(fn_002d2efc_arg0 *param_1)
   temp_v11 = (float)VectorUnsignedToFloat(temp_v4 & 0xffff,(unsigned char)(temp_v1 >> 0x16) & 3);
   temp_v4 = temp_v5 & 0xff;
   temp_v8 = (float)VectorUnsignedToFloat(temp_v5 & 0xffff,(unsigned char)(temp_v1 >> 0x16) & 3);
-  temp_v10 = (float)(&DAT_00407ed0)[temp_v3 * 4] + (temp_v2 - temp_v11) * (float)(&DAT_00407ed8)[temp_v3 * 4];
+  temp_v10 = (float)(&g_sinCosTable)[temp_v3 * 4] + (temp_v2 - temp_v11) * (float)(&DAT_00407ed8)[temp_v3 * 4];
   temp_v33 = (float)(&DAT_00407ed4)[temp_v3 * 4] +
               (temp_v2 - temp_v11) * (float)(&DAT_00407edc)[temp_v3 * 4];
-  temp_v2 = (float)(&DAT_00407ed0)[temp_v0 * 4] + (temp_v14 - temp_v9) * (float)(&DAT_00407ed8)[temp_v0 * 4];
+  temp_v2 = (float)(&g_sinCosTable)[temp_v0 * 4] + (temp_v14 - temp_v9) * (float)(&DAT_00407ed8)[temp_v0 * 4];
   temp_v9 = (float)(&DAT_00407ed4)[temp_v0 * 4] + (temp_v14 - temp_v9) * (float)(&DAT_00407edc)[temp_v0 * 4]
   ;
-  temp_v11 = (float)(&DAT_00407ed0)[temp_v4 * 4] + (temp_v6 - temp_v8) * (float)(&DAT_00407ed8)[temp_v4 * 4];
+  temp_v11 = (float)(&g_sinCosTable)[temp_v4 * 4] + (temp_v6 - temp_v8) * (float)(&DAT_00407ed8)[temp_v4 * 4];
   temp_v6 = (float)(&DAT_00407ed4)[temp_v4 * 4] + (temp_v6 - temp_v8) * (float)(&DAT_00407edc)[temp_v4 * 4];
   if (!romwright_subpiece_4_1_0(temp_v1 >> 0x1d,0)) {
     temp_v10 = -temp_v10;
@@ -328,12 +328,12 @@ void FUN_002d2efc(fn_002d2efc_arg0 *param_1)
   temp_v11 = (float)VectorUnsignedToFloat(temp_v5 & 0xffff,(unsigned char)(temp_v1 >> 0x16) & 3);
   temp_v3 = temp_v7 & 0xff;
   temp_v8 = (float)VectorUnsignedToFloat(temp_v7 & 0xffff,(unsigned char)(temp_v1 >> 0x16) & 3);
-  temp_v10 = (float)(&DAT_00407ed0)[temp_v0 * 4] + (temp_v14 - temp_v9) * (float)(&DAT_00407ed8)[temp_v0 * 4]
+  temp_v10 = (float)(&g_sinCosTable)[temp_v0 * 4] + (temp_v14 - temp_v9) * (float)(&DAT_00407ed8)[temp_v0 * 4]
   ;
   temp_v12 = (float)(&DAT_00407ed4)[temp_v0 * 4] + (temp_v14 - temp_v9) * (float)(&DAT_00407edc)[temp_v0 * 4]
   ;
-  temp_v9 = (float)(&DAT_00407ed0)[temp_v4 * 4] + (temp_v2 - temp_v11) * (float)(&DAT_00407ed8)[temp_v4 * 4];
-  temp_v13 = (float)(&DAT_00407ed0)[temp_v3 * 4] + (temp_v6 - temp_v8) * (float)(&DAT_00407ed8)[temp_v3 * 4];
+  temp_v9 = (float)(&g_sinCosTable)[temp_v4 * 4] + (temp_v2 - temp_v11) * (float)(&DAT_00407ed8)[temp_v4 * 4];
+  temp_v13 = (float)(&g_sinCosTable)[temp_v3 * 4] + (temp_v6 - temp_v8) * (float)(&DAT_00407ed8)[temp_v3 * 4];
   temp_v6 = (float)(&DAT_00407ed4)[temp_v3 * 4] + (temp_v6 - temp_v8) * (float)(&DAT_00407edc)[temp_v3 * 4];
   temp_v33 = (float)(&DAT_00407ed4)[temp_v4 * 4] +
               (temp_v2 - temp_v11) * (float)(&DAT_00407edc)[temp_v4 * 4];
@@ -400,13 +400,13 @@ void FUN_002d2efc(fn_002d2efc_arg0 *param_1)
   temp_v3 = temp_v3 & 0xff;
   temp_v0 = temp_v0 & 0xff;
   temp_v4 = temp_v4 & 0xff;
-  temp_v6 = (float)(&DAT_00407ed0)[temp_v0 * 4] + (temp_v14 - temp_v17) * (float)(&DAT_00407ed8)[temp_v0 * 4];
+  temp_v6 = (float)(&g_sinCosTable)[temp_v0 * 4] + (temp_v14 - temp_v17) * (float)(&DAT_00407ed8)[temp_v0 * 4];
   temp_v10 = (float)(&DAT_00407ed4)[temp_v0 * 4] + (temp_v14 - temp_v17) * (float)(&DAT_00407edc)[temp_v0 * 4]
   ;
-  temp_v17 = (float)(&DAT_00407ed0)[temp_v3 * 4] + (temp_v20 - temp_v8) * (float)(&DAT_00407ed8)[temp_v3 * 4];
+  temp_v17 = (float)(&g_sinCosTable)[temp_v3 * 4] + (temp_v20 - temp_v8) * (float)(&DAT_00407ed8)[temp_v3 * 4];
   temp_v33 = (float)(&DAT_00407ed4)[temp_v3 * 4] +
               (temp_v20 - temp_v8) * (float)(&DAT_00407edc)[temp_v3 * 4];
-  temp_v20 = (float)(&DAT_00407ed0)[temp_v4 * 4] + (temp_v2 - temp_v9) * (float)(&DAT_00407ed8)[temp_v4 * 4];
+  temp_v20 = (float)(&g_sinCosTable)[temp_v4 * 4] + (temp_v2 - temp_v9) * (float)(&DAT_00407ed8)[temp_v4 * 4];
   temp_v2 = (float)(&DAT_00407ed4)[temp_v4 * 4] + (temp_v2 - temp_v9) * (float)(&DAT_00407edc)[temp_v4 * 4];
   if (!romwright_subpiece_4_1_0(temp_v1 >> 0x1d,0)) {
     temp_v17 = -temp_v17;

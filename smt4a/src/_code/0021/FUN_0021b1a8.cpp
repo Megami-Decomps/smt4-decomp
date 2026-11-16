@@ -30,7 +30,7 @@ void FUN_0021b1a8(HelpMenu *menu)
     u32 id;
     u32 i;
     int first = resourceRunOperationIfUnblocked(menu->list);
-    int count = FUN_002a4894(reinterpret_cast<const Object *>(menu->list));
+    int count = listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(menu->list));
 
     id = menu->ids[first + count];
     if (id == 0x8B) {

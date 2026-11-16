@@ -14,7 +14,7 @@ void FUN_0049d048(unsigned int param_1,unsigned int param_2);
 
 s32 shopGetEntryPrice(const ShopEntry *entry);
 
-void FUN_004934ac(ScreenRect *rect, u32 id, s32 dx, s32 dy, u32 extra);
+void uiDrawTableTextureAtRectCorner(ScreenRect *rect, u32 id, s32 dx, s32 dy, u32 extra);
 
 u32 FUN_004954e8(SubmenuWork *work);
 

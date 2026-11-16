@@ -4,12 +4,12 @@
 
 extern "C" {
 extern PartyPanelStateA *g_partyPanel;
-s32 FUN_002a4894(const GridNavigation *navigation);
-s32 FUN_002a4878(const GridNavigation *navigation);
+s32 listCursorGetRowIfUnblocked(const GridNavigation *navigation);
+s32 listCursorGetRowOfChildIfUnblocked(const GridNavigation *navigation);
 }
 static __inline bool gridAtOrigin(const GridNavigation *navigation)
 {
-    return !FUN_002a4894(navigation) && !FUN_002a4878(navigation);
+    return !listCursorGetRowIfUnblocked(navigation) && !listCursorGetRowOfChildIfUnblocked(navigation);
 }
 
 // Allow an empty/origin selection only in the party modes that support it.

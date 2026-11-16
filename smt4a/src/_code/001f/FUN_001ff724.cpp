@@ -33,7 +33,7 @@ void *sysMemClear(void *destination, u32 size);
 void rt_memclr(void *destination, u32 size);
 void qsort(void *elements, u32 count, u32 elementSize, int (*compare)(const void *, const void *));
 int dataTable1bOr1cCompareRecordKeys(const void *first, const void *second);
-u32 FUN_001bd100(u32 id);
+u32 dataTable1bOr1cRecordHasFlag1(u32 id);
 s32 FUN_003df004(u32 quest, s32 index, QuestRequirementProgress *progress);
 u32 partyEntryFlagsBit1(s32 index);
 u32 partyEntryFlagsBit3(s32 index);
@@ -73,7 +73,7 @@ void FUN_001ff724(void)
         if (id < 0x15E && gameFlagEntryGetBit(id, 0) == 0)
             continue;
         if (id < 0x15E || dataTable1bOr1cGetRecord(id) != NULL) {
-            if (FUN_001bd100(id) != 0) {
+            if (dataTable1bOr1cRecordHasFlag1(id) != 0) {
                 menu->primaryList[primaryCount++] = id;
             } else {
                 bool include = true;

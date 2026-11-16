@@ -2,14 +2,14 @@
 
 extern "C" {
 
-extern Obj4207c0Registry DAT_005cc508;
+extern Obj4207c0Registry g_resourceCache;
 void gfxResourceTableReleaseTexturesAndBuffers(Obj4207c0Resource *resource);
 
 /* Drops one reference to a shared resource; the last reference releases it and removes it from
  * the registry. */
 void resourceReleaseReference(Obj4207c0Resource *resource)
 {
-    Obj4207c0Registry *registry = &DAT_005cc508;
+    Obj4207c0Registry *registry = &g_resourceCache;
 
     if (resource->refCount == 1) {
         u32 id = resource->id;

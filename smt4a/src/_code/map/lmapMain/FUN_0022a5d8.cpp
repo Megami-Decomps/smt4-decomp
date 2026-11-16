@@ -66,7 +66,7 @@ extern unsigned int dataTableGetEntries(void);
 /* Supplied declaration required: gameDataGetPlayerName. */
 extern int recordGetModeForId(int);
 extern int resourceRunOperationIfUnblocked(int);
-extern int FUN_002a4894(int);
+extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: textGetNameToken. */
 extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: uiDrawListScrollBar. */
@@ -164,7 +164,7 @@ unsigned int FUN_0022a5d8(void)
     temp_v19 = temp_v1 + 0x788;
     temp_v2 = 0;
     do {
-      if ((temp_v8 == 1) || (temp_v6 = FUN_002a4894(temp_v19), temp_v6 != temp_v2)) {
+      if ((temp_v8 == 1) || (temp_v6 = listCursorGetRowIfUnblocked(temp_v19), temp_v6 != temp_v2)) {
         efctSetSpeed();
         if (*(char *)(temp_v1 + 0x74e) != '\x02') {
           temp_v6 = asdTMTexTableEntryAt(0x15,temp_v2 + 7);
@@ -310,7 +310,7 @@ unsigned int FUN_0022a5d8(void)
       }
     } while (temp_v2 < temp_v6);
     if (temp_v8 != 1) {
-      temp_v2 = FUN_002a4894(temp_v19);
+      temp_v2 = listCursorGetRowIfUnblocked(temp_v19);
       temp_v8 = -0x60180001;
       if (*(char *)(temp_v1 + 0x74e) != '\x02') {
         temp_v6 = asdTMTexTableEntryAt(0x15,temp_v2 + 0x18);
@@ -322,7 +322,7 @@ unsigned int FUN_0022a5d8(void)
       texDrawCompositeSprite(2,0x15,2,(int)*(short *)(temp_v6 + 8),(int)*(short *)(temp_v6 + 10),0xdd);
       efctSetSpeed();
       texDrawTableEntryAtStoredOrigin(2,0x15,0x13,(int)*(short *)(temp_v6 + 8),(int)*(short *)(temp_v6 + 10),0xe2);
-      temp_v7 = FUN_002a4894(temp_v19);
+      temp_v7 = listCursorGetRowIfUnblocked(temp_v19);
       temp_v7 = recordGetModeForId((int)*(short *)(temp_v1 + temp_v7 * 2 + 0x772));
       temp_v3 = -0xa006001;
       if (((temp_v7 == 1 || temp_v7 == 2) || temp_v7 == 6) && (*(int *)(temp_v1 + 0x744) != 3)) {

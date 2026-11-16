@@ -46,7 +46,7 @@ typedef struct {
     unsigned int sp138; /* 0x138: local_138 */
 } void_stack;
 
-extern unsigned int DAT_00536d14; /* 0x536d14 */
+extern unsigned int g_sinCosTable; /* 0x536d14 */
 extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
@@ -247,17 +247,17 @@ void FUN_002dfba0(void)
       temp_v4 = temp_v8;
       temp_v9 = (float)VectorUnsignedToFloat(temp_v8 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
       temp_v15 = (float)VectorUnsignedToFloat(temp_v7 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
-      temp_v10 = (float)(&DAT_00536d14)[temp_v4 * 4] +
+      temp_v10 = (float)(&g_sinCosTable)[temp_v4 * 4] +
                (0.0f - temp_v9) * (float)(&DAT_00536d1c)[temp_v4 * 4];
       temp_v12 = (float)(&DAT_00536d18)[temp_v3 * 4] +
                (32.0f - temp_v11) * (float)(&DAT_00536d20)[temp_v3 * 4];
       temp_v9 = (float)(&DAT_00536d18)[temp_v4 * 4] +
                (0.0f - temp_v9) * (float)(&DAT_00536d20)[temp_v4 * 4];
-      temp_v43 = (float)(&DAT_00536d14)[temp_v6 * 4] +
+      temp_v43 = (float)(&g_sinCosTable)[temp_v6 * 4] +
                  (temp_v17 - temp_v15) * (float)(&DAT_00536d1c)[temp_v6 * 4];
       temp_v44 = (float)(&DAT_00536d18)[temp_v6 * 4] +
                  (temp_v17 - temp_v15) * (float)(&DAT_00536d20)[temp_v6 * 4];
-      temp_v17 = -((float)(&DAT_00536d14)[temp_v3 * 4] +
+      temp_v17 = -((float)(&g_sinCosTable)[temp_v3 * 4] +
                 (32.0f - temp_v11) * (float)(&DAT_00536d1c)[temp_v3 * 4]);
       if (!romwright_subpiece_4_1_0(temp_v0 >> 0x1d,0)) {
         temp_v43 = -temp_v43;
@@ -285,13 +285,13 @@ void FUN_002dfba0(void)
       temp_v10 = (float)VectorUnsignedToFloat(temp_v7 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
       temp_v3 = temp_v8 & 0xff;
       temp_v15 = (float)VectorUnsignedToFloat(temp_v8 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
-      temp_v11 = (float)(&DAT_00536d14)[temp_v6 * 4] +
+      temp_v11 = (float)(&g_sinCosTable)[temp_v6 * 4] +
                (0.0f - temp_v9) * (float)(&DAT_00536d1c)[temp_v6 * 4];
       temp_v12 = (float)(&DAT_00536d18)[temp_v6 * 4] +
                (0.0f - temp_v9) * (float)(&DAT_00536d20)[temp_v6 * 4];
-      temp_v43 = (float)(&DAT_00536d14)[temp_v4 * 4] +
+      temp_v43 = (float)(&g_sinCosTable)[temp_v4 * 4] +
                  (temp_v17 - temp_v10) * (float)(&DAT_00536d1c)[temp_v4 * 4];
-      temp_v9 = (float)(&DAT_00536d14)[temp_v3 * 4] +
+      temp_v9 = (float)(&g_sinCosTable)[temp_v3 * 4] +
                (0.0f - temp_v15) * (float)(&DAT_00536d1c)[temp_v3 * 4];
       temp_v15 = (float)(&DAT_00536d18)[temp_v3 * 4] +
                (0.0f - temp_v15) * (float)(&DAT_00536d20)[temp_v3 * 4];

@@ -15,7 +15,7 @@ void vcallSlot12IfValid(u32 handle);
 /* Records `result` as the process result and hands it back. */
 static __inline nn::Result fileRecordResult(nn::Result result)
 {
-    FUN_0013ebd8(result);
+    processResultSetValue(result);
     return result;
 }
 
@@ -38,12 +38,12 @@ nn::Result FUN_00317d48(RomFileOpenState *state, const void *path, u32 size)
     nn::Result result;
     if (!pathBuildWide(static_cast<const char *>(path), reinterpret_cast<s16 *>(normalized), 1)) {
         result = 0xe0e046bc;
-        FUN_0013ebd8(result);
+        processResultSetValue(result);
         return result;
     }
     FUN_001886bc();
     result = FUN_00158844(reinterpret_cast<const u16 *>(normalized), size);
-    FUN_0013ebd8(result);
+    processResultSetValue(result);
     u32 failed = result & 0x80000000;
     if ((s32)failed < 0) {
         FUN_0032ca54(result, failed);
@@ -54,7 +54,7 @@ nn::Result FUN_00317d48(RomFileOpenState *state, const void *path, u32 size)
     state->file.unk04 = 0;
     state->file.unk08 = 0;
     result = archivePathDeviceOpen(&state->file, normalized, 2);
-    FUN_0013ebd8(result);
+    processResultSetValue(result);
     failed = result & 0x80000000;
     if ((s32)failed < 0) {
         FUN_0032ca54(result, failed);

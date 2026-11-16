@@ -172,7 +172,7 @@ int __aeabi_memcpy4(...);
 
 int asdCameraInitializeDefaults(...);
 int asdMemoryAllocTraced(...);
-int FUN_001cd3ec(...);
+int modelLoadFileAsyncByName(...);
 int asdLoadFileAsyncWrap(...);
 int asdLoadFileSyncDefault(void);
 int mapGimmickResetControllers(void);
@@ -180,7 +180,7 @@ int scrScriptProcessCreate(...);
 void mapIfInitializeSceneControllers(void);
 int navigationSetArguments(...);
 int lmapUpdateMapBgm(void);
-int FUN_00314bf8(...);
+int naviMainSetSelectionResetProgress(...);
 int lmapInitializeActorHandles(void);
 int FUN_0033e014(...);
 int FUN_00356674(void);
@@ -192,7 +192,7 @@ int moriModelUnitStartMaterialAnimation(...);
 int FUN_0040a908(...);
 int FUN_0040a918(...);
 int resourceOwnerLoadFileSync(void);
-int FUN_0040aad4(...);
+int moriModelContentLoadBody(...);
 int FUN_0040ab8c(...);
 int handleRegistryRegisterObject(...);
 int FUN_0024ad50(void);
@@ -419,7 +419,7 @@ extern int gameSlotTableFindFree(void);
 /* Supplied declaration required: gameDataTableGetFlag. */
 extern int FUN_001ba570(void);
 extern int FUN_001bd118(void);
-/* Supplied declaration required: FUN_001cd3ec. */
+/* Supplied declaration required: modelLoadFileAsyncByName. */
 /* Supplied declaration required: asdLoadFileAsyncWrap. */
 /* Supplied declaration required: asdEnvResetModelBank. */
 /* Supplied declaration required: slotSetRequest. */
@@ -495,7 +495,7 @@ extern unsigned int FUN_002e5c2c(void);
 /* Supplied declaration required: FUN_00311b74. */
 /* Supplied declaration required: popupStart. */
 /* Supplied declaration required: mapSetSceneState. */
-/* Supplied declaration required: FUN_00314bf8. */
+/* Supplied declaration required: naviMainSetSelectionResetProgress. */
 /* Supplied declaration required: naviMainSetFlagsAndActivate. */
 /* Supplied declaration required: scrSetStringSlot. */
 extern int FUN_0031d230(void);
@@ -574,14 +574,14 @@ extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
 /* Supplied declaration required: resourceOwnerLoadFileSync. */
-/* Supplied declaration required: FUN_0040aad4. */
+/* Supplied declaration required: moriModelContentLoadBody. */
 /* Supplied declaration required: FUN_0040ab8c. */
 extern unsigned int modelListInit(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: FUN_0040ae70. */
 extern int FUN_0040af60(unsigned int);
 /* Supplied declaration required: resourceOwnerLoadNamed. */
-extern int FUN_004186e0(void);
+extern int rosterGetLeaderId(void);
 /* Supplied declaration required: aocSelectedRecordIsUnavailable. */
 /* Supplied declaration required: gameDataSaveSetValues. */
 /* Supplied declaration required: FUN_004731d8. */
@@ -731,7 +731,7 @@ unsigned int FUN_00276264(void)
       switch(temp_v22) {
       case 0:
       case 3:
-        temp_v8 = FUN_004186e0();
+        temp_v8 = rosterGetLeaderId();
         if ((temp_v8 != 0) && (temp_v8 = FUN_001bd118(), temp_v8 == 6)) {
           puVar2[0x277] = 1;
         }
@@ -938,7 +938,7 @@ unsigned int FUN_00276264(void)
     DAT_005f1608 = puVar2[0x10];
     DAT_005f160c = puVar2[0x12];
     FUN_003de188(0);
-    FUN_00314bf8(puVar2[0x10]);
+    naviMainSetSelectionResetProgress(puVar2[0x10]);
     navigationSetArguments(puVar2[0x10],puVar2[0x12],DAT_005f1604);
     if ((DAT_005f1634 != '\0') || (*(char *)(puVar2 + 0x278) != '\0')) {
       FUN_0033e014(g_gameState,DAT_005f1600);
@@ -962,7 +962,7 @@ unsigned int FUN_00276264(void)
     puVar2[0x2b8] = temp_v22;
     FUN_0040a908();
     FUN_0040a918(puVar2[0x2b8],0x20000);
-    FUN_001cd3ec(puVar2[0x2b8],temp_v27);
+    modelLoadFileAsyncByName(puVar2[0x2b8],temp_v27);
     textFormatBuffer(temp_v27,0x276dc4);
     asdLoadFileAsyncWrap(temp_v27,puVar2 + 0x13bd,1,0x80);
     textFormatBuffer(temp_v27,0x276ddc);
@@ -976,7 +976,7 @@ unsigned int FUN_00276264(void)
     *puVar19 = temp_v22;
     FUN_0040a908();
     FUN_0040a918(*puVar19,0x20000);
-    FUN_001cd3ec(*puVar19,temp_v27);
+    modelLoadFileAsyncByName(*puVar19,temp_v27);
     temp_v10 = 0;
     if (0 < *(int *)(puVar2[0x10] * 4 + 0x5800ac)) {
       do {
@@ -990,7 +990,7 @@ unsigned int FUN_00276264(void)
             temp_v22 = modelListInit();
           }
           puVar19[*(unsigned char *)(puVar19 + 0x2b5) + 0x295] = temp_v22;
-          FUN_001cd3ec();
+          modelLoadFileAsyncByName();
           *(char *)(puVar19 + 0x2b5) = *(char *)(puVar19 + 0x2b5) + '\x01';
         }
         temp_v10 = temp_v10 + 1;
@@ -1084,7 +1084,7 @@ LAB_00276f5c:
           resourceOwnerLoadFileSync();
           FUN_0040a908(puVar2[0x2f],0x10000);
           FUN_0040a918(puVar2[0x2f],0x30000);
-          FUN_0040aad4(puVar2[0x2f],0);
+          moriModelContentLoadBody(puVar2[0x2f],0);
           temp_v8 = *(int *)(puVar2[0x2f] + 4);
           handleRegistryRegisterObject(g_handleRegistry,temp_v8);
           *(unsigned int *)(temp_v8 + 4) = *(unsigned int *)(temp_v8 + 4) | 3;
@@ -1098,7 +1098,7 @@ LAB_00276f5c:
           resourceOwnerLoadFileSync();
           FUN_0040a908(puVar2[0x36],0x10000);
           FUN_0040a918(puVar2[0x36],0x30000);
-          FUN_0040aad4(puVar2[0x36],0);
+          moriModelContentLoadBody(puVar2[0x36],0);
           temp_v8 = *(int *)(puVar2[0x36] + 4);
           handleRegistryRegisterObject(g_handleRegistry,temp_v8);
           *(unsigned int *)(temp_v8 + 4) = *(unsigned int *)(temp_v8 + 4) | 3;
@@ -3776,7 +3776,7 @@ LAB_0027a030:
             temp_v22 = modelListInit();
           }
           puVar19[*(unsigned char *)(puVar19 + 0x2b5) + 0x295] = temp_v22;
-          FUN_001cd3ec();
+          modelLoadFileAsyncByName();
           *(char *)(puVar19 + 0x2b5) = *(char *)(puVar19 + 0x2b5) + '\x01';
         }
         temp_v10 = temp_v10 + 1;
@@ -4081,7 +4081,7 @@ LAB_0027a030:
             temp_v22 = modelListInit();
           }
           puVar19[*(unsigned char *)(puVar19 + 0x2b5) + 0x295] = temp_v22;
-          FUN_001cd3ec();
+          modelLoadFileAsyncByName();
           *(char *)(puVar19 + 0x2b5) = *(char *)(puVar19 + 0x2b5) + '\x01';
         }
         temp_v10 = temp_v10 + 1;
@@ -4570,7 +4570,7 @@ joined_r0x0027ce58:
       puVar17 = (unsigned int *)0x0;
     }
     else if (*(char *)((int)puVar2 + 9) != '\0') {
-      temp_v8 = FUN_004186e0();
+      temp_v8 = rosterGetLeaderId();
       if ((temp_v8 != 0) && (temp_v5 = FUN_001bd118(), temp_v5 == 6)) {
         dataTable1bOr1cGetRecord();
         FUN_00270c58(*(unsigned short *)(temp_v8 + 0xd4));

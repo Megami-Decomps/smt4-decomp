@@ -64,7 +64,7 @@ void Obj55c89c::FUN_004a15a0()
     else
         sysPlaySe(block->variant == 1 ? 0x4E : 0x4F);
     FUN_0032cfe0(menu);
-    FUN_003343f0(0);
+    gameGlobalsSetMenuOpenFlag(0);
     state->pair = StatePair(2, 0);
     pointConvertToFloat(&menu->rectangle, 0, 0);
     BibleSelectionTarget *target = reinterpret_cast<BibleSelectionTarget *>(menu->touchSelection.unk34);

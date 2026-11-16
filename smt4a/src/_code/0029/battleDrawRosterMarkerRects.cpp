@@ -16,7 +16,7 @@ extern BattleEffectGlobals g_battleEffectSettings;
 extern RenderCtxA *g_renderCtx;
 BattleMarkerLookup *btlFindEntryBlockByMemberId(BtlMainStateA *state, s16 group);
 BattleFrameSprite *stateEntryFindById(BtlMainStateA *state, s32 id);
-void FUN_0014e314(u32 color0, u32 color1, u32 color2, u32 color3,
+void gxSubmitDrawZeroExtraParams(u32 color0, u32 color1, u32 color2, u32 color3,
     f32 x, f32 y, f32 width, f32 height, f32 depth);
 }
 
@@ -32,7 +32,7 @@ static __inline u64 battleMarkerMask(const BtlMainStateA *state)
 
 static __inline void battleDrawMarker(f32 x, f32 y, f32 width, f32 height, u32 color)
 {
-    FUN_0014e314(color, color, color, color, x, y, width, height, 1.0f);
+    gxSubmitDrawZeroExtraParams(color, color, color, color, x, y, width, height, 1.0f);
 }
 
 extern "C" u32 battleDrawRosterMarkerRects(u32 job)

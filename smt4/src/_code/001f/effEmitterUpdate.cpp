@@ -19,7 +19,7 @@ int entryListSetPhase(...);
 int mtx44TransformPosition(...);
 int FUN_00269508(...);
 int FUN_00269694(unsigned int, int, int, int);
-int FUN_002ad314(...);
+int mathSinCos(...);
 int mtx44Copy(...);
 int FUN_002f81b0(...);
 int nn_math_ARMv6_MTX44MultAsm(...);
@@ -128,7 +128,7 @@ extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 /* Supplied declaration required: refCountIncrement. */
 /* Supplied declaration required: FUN_00269508. */
 /* Supplied declaration required: FUN_00269694. */
-/* Supplied declaration required: FUN_002ad314. */
+/* Supplied declaration required: mathSinCos. */
 /* Supplied declaration required: mtx44Copy. */
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_002f81b0. */
@@ -378,7 +378,7 @@ void effEmitterUpdate(EffectEmitter *emitter)
   temp_v82 = temp_v18;
   matrixScaleRows(temp_v34,&temp_v80);
   temp_v9 = -1.0f;
-  FUN_002ad314(&temp_v70,temp_v74);
+  mathSinCos(&temp_v70,temp_v74);
   temp_v33 = (float)temp_v19;
   temp_v8 = temp_v33 - temp_v74[0];
   temp_v20 = temp_v74[0] + temp_v8 * temp_v7;

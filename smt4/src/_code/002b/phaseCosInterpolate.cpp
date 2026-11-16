@@ -2,14 +2,14 @@
 #include "shard/W6_W6Match6_PhaseTrig.h"
 
 extern "C" {
-extern const PhaseTrigEntry DAT_00407ed0[256];
+extern const PhaseTrigEntry g_sinCosTable[256];
 
 // Sample the cosine component of the linearly interpolated phase table.
 f32 phaseCosInterpolate(f32 angle)
 {
     f32 magnitude = wrapPhase(fabsf(angle));
     u16 whole = (u32)magnitude;
-    const PhaseTrigEntry *table = DAT_00407ed0;
+    const PhaseTrigEntry *table = g_sinCosTable;
     const PhaseTrigEntry *entry = &table[(u8)whole];
     f32 fraction = magnitude - (f32)whole;
     return entry->cosine + fraction * entry->cosineDelta;

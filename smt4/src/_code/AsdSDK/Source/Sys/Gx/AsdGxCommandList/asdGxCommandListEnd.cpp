@@ -6,10 +6,10 @@ extern AsdGxCommandList *g_asdGxCommandListStack[];
 
 void gxGetCommandListParameter(u32 param, u32 *out);
 void asdGxCommandBufferTerminateAndSubmit(void);
-void FUN_001376d8(u32 *a, u32 *b, u32 *c, u32 *d);
+void asdGxCommandBufferPadAndGetRanges(u32 *a, u32 *b, u32 *c, u32 *d);
 void asdGxCommandListRefreshCopy(AsdGxCommandList *list);
 void nngxBindCmdlist(u32 cmdList);
-void FUN_0013764c(void);
+void asdGxCommandBufferPadAndRecordSize(void);
 void nngxGetError(void);
 void asdModelResetCommandBuffer(void);
 void FUN_001373f0(u32 cmdList, void *copy, u32 copySize);
@@ -22,7 +22,7 @@ void asdGxCommandListEnd(AsdGxCommandList *list, s32 restoreCopy, u32 unk08, u32
     u32 bound;
 
     asdGxCommandBufferTerminateAndSubmit();
-    FUN_001376d8(&list->entries[list->entryCount].values[0], &list->entries[list->entryCount].values[1],
+    asdGxCommandBufferPadAndGetRanges(&list->entries[list->entryCount].values[0], &list->entries[list->entryCount].values[1],
                  &list->entries[list->entryCount].values[2], &list->entries[list->entryCount].values[3]);
     list->state = ASD_GX_CMDLIST_SUSPENDED;
     asdGxCommandListRefreshCopy(list);
@@ -33,7 +33,7 @@ void asdGxCommandListEnd(AsdGxCommandList *list, s32 restoreCopy, u32 unk08, u32
         outer = g_asdGxCommandListStack[depth - 1];
         list->entries[outer->entryCount].values[0] = list->entries[list->entryCount].values[0];
         list->entries[outer->entryCount].values[1] = list->entries[list->entryCount].values[1];
-        FUN_0013764c();
+        asdGxCommandBufferPadAndRecordSize();
         outer->state = ASD_GX_CMDLIST_ACTIVE;
     } else {
         asdModelResetCommandBuffer();

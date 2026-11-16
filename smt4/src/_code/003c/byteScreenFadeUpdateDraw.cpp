@@ -4,7 +4,7 @@
 
 extern "C" {
 extern RenderCtx* g_titleScene;
-void FUN_002c0944(u32 color0, u32 color1, u32 color2, u32 color3,
+void gxSubmitDrawZeroExtraParams(u32 color0, u32 color1, u32 color2, u32 color3,
                   f32 x, f32 y, f32 width, f32 height, f32 depth);
 
 // Advances the screen fade by one frame and draws its overlay; does nothing while it is idle.
@@ -48,6 +48,6 @@ void byteScreenFadeUpdateDraw(ByteScreenFade* fade)
     if (fade->screen == 1) {
         width = 320.0f;
     }
-    FUN_002c0944(color, color, color, color, 0.0f, 0.0f, width, height, 0.0f);
+    gxSubmitDrawZeroExtraParams(color, color, color, color, 0.0f, 0.0f, width, height, 0.0f);
 }
 }

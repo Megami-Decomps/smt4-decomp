@@ -12,7 +12,7 @@ typedef struct RestartObj {
 } RestartObj;
 
 extern s32 pairedAvailabilityBothReady(void);
-extern void FUN_003d54f8(s32 a, u32 b);
+extern void titleSetSlotValueState2(s32 a, u32 b);
 
 /* Once the previous run finished (state 1 and pairedAvailabilityBothReady), frees the object at +0x208 and starts. */
 void AocMenu::restartPreviousRun()
@@ -29,8 +29,8 @@ void AocMenu::restartPreviousRun()
         }
         return;
     }
-    FUN_003d54f8(0, 10);
-    FUN_003d54f8(1, 10);
+    titleSetSlotValueState2(0, 10);
+    titleSetSlotValueState2(1, 10);
     obj->unk08 = 1;
 }
 

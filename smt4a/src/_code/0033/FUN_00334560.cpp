@@ -4,7 +4,7 @@
 extern "C" {
 void uiQuestSpritesCreate(void);
 s32 resourceRunOperationIfUnblocked(void *cursor);
-s32 FUN_002a4894(void *cursor);
+s32 listCursorGetRowIfUnblocked(void *cursor);
 void FUN_003d498c(u32 id, u32 mode);
 u32 partyEntryBitsBit4(s32 id);
 s32 questHasSpecialDetailPage(u32 id);
@@ -30,7 +30,7 @@ void FUN_00334560(void)
     quest->unk90c = 1;
     uiQuestSpritesCreate();
     u16 id = quest->alternateView()->list[resourceRunOperationIfUnblocked(quest->alternateView()->cursor) +
-                                            FUN_002a4894(quest->alternateView()->cursor)];
+                                            listCursorGetRowIfUnblocked(quest->alternateView()->cursor)];
     FUN_003d498c(id, 1);
     u16 selected = quest->selectedId = id;
     UiQuestApoc *current = g_uiQuest;

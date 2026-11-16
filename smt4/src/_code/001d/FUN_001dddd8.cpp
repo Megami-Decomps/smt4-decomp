@@ -43,9 +43,9 @@ extern unsigned char LAB_001de11c; /* 0x1de11c */
 extern int uniteGetWork(void);
 extern int FUN_0029d644(int);
 extern unsigned int FUN_0029dde0(void);
-extern int FUN_0029efa8(int);
+extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
-extern int FUN_002a0d0c(void);
+extern int gameDataGetSortPreferences(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -81,7 +81,7 @@ void FUN_001dddd8(int param_1,int param_2,int param_3)
   iStack_2c = param_2;
   temp_v14 = param_3;
   temp_v0 = uniteGetWork();
-  temp_v1 = FUN_002a0d0c();
+  temp_v1 = gameDataGetSortPreferences();
   if (temp_v0 != 0) {
     temp_v11 = 0;
     temp_v12 = 0;
@@ -103,7 +103,7 @@ void FUN_001dddd8(int param_1,int param_2,int param_3)
     temp_v10 = 0;
     if (temp_v10 < temp_v5) {
       do {
-        temp_v6 = FUN_0029efa8(temp_v2);
+        temp_v6 = listCursorGetRowIfUnblocked(temp_v2);
         if (temp_v6 != temp_v10) {
           efctSetSpeed();
           temp_v6 = temp_v4 + temp_v10;
@@ -113,8 +113,8 @@ void FUN_001dddd8(int param_1,int param_2,int param_3)
             if (temp_v14 != 1) {
               if (temp_v14 == 2) {
                 if ((4 >= *(int *)(temp_v0 + 0x3fc)) &&
-                   (temp_v11 = FUN_0029efa8(temp_v2), temp_v10 > temp_v11)) {
-                  temp_v11 = FUN_0029efa8(temp_v2);
+                   (temp_v11 = listCursorGetRowIfUnblocked(temp_v2), temp_v10 > temp_v11)) {
+                  temp_v11 = listCursorGetRowIfUnblocked(temp_v2);
                   temp_v9 = asdTMTexTableEntryAt(0x24,temp_v11 + 0xa9);
                   temp_v11 = ((int)*(short *)(temp_v9 + 8) - (int)*(short *)(temp_v8 + 8)) * 0x1000;
                   temp_v11 = (int)*(short *)(temp_v8 + 8) +
@@ -132,8 +132,8 @@ void FUN_001dddd8(int param_1,int param_2,int param_3)
               }
             }
             else if ((*(int *)(temp_v0 + 0x3fc) < 5) &&
-                    (temp_v11 = FUN_0029efa8(temp_v2), temp_v11 < temp_v10)) {
-              temp_v11 = FUN_0029efa8(temp_v2);
+                    (temp_v11 = listCursorGetRowIfUnblocked(temp_v2), temp_v11 < temp_v10)) {
+              temp_v11 = listCursorGetRowIfUnblocked(temp_v2);
               temp_v9 = asdTMTexTableEntryAt(0x24,temp_v11 + 0xa9);
               temp_v11 = ((int)*(short *)(temp_v8 + 8) - (int)*(short *)(temp_v9 + 8)) * 0x1000;
               temp_v11 = (int)*(short *)(temp_v9 + 8) +
@@ -186,10 +186,10 @@ void FUN_001dddd8(int param_1,int param_2,int param_3)
       } while (temp_v10 < temp_v5);
     }
     temp_v4 = resourceRunOperationIfUnblocked(temp_v2);
-    temp_v5 = FUN_0029efa8(temp_v2);
+    temp_v5 = listCursorGetRowIfUnblocked(temp_v2);
     temp_v4 = temp_v4 + temp_v5;
     temp_v5 = dataTable24Sub0GetRecord(temp_v4);
-    temp_v2 = FUN_0029efa8(temp_v2);
+    temp_v2 = listCursorGetRowIfUnblocked(temp_v2);
     temp_v2 = asdTMTexTableEntryAt(0x24,temp_v2 + 0xa9);
     if (temp_v5 != 0) {
       if (temp_v5 != 1) {

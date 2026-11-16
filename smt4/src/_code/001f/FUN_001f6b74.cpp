@@ -9,7 +9,7 @@ int FUN_00257374(...);
 int FUN_002573d8(void);
 int forwardRecoveredCallback(void);
 int renderGetCameraViewMatrix(...);
-int FUN_002ad314(...);
+int mathSinCos(...);
 int FUN_002aff70(...);
 int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
@@ -137,7 +137,7 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002573d8. */
 /* Supplied declaration required: forwardRecoveredCallback. */
 /* Supplied declaration required: renderGetCameraViewMatrix. */
-/* Supplied declaration required: FUN_002ad314. */
+/* Supplied declaration required: mathSinCos. */
 /* Supplied declaration required: FUN_002aff70. */
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
@@ -323,7 +323,7 @@ void FUN_001f6b74(fn_001f6b74_arg0 *param_1)
       temp_v20 = temp_v18;
       temp_v21 = temp_v13;
       temp_v22 = temp_v5;
-      FUN_002ad314(&temp_v70,temp_v71);
+      mathSinCos(&temp_v70,temp_v71);
       temp_v62 = (float)temp_v4;
       temp_v1 = temp_v62 - temp_v71[0];
       temp_v48 = temp_v71[0] + temp_v1 * temp_v5;

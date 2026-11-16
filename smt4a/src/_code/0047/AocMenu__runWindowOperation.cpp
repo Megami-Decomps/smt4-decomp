@@ -55,7 +55,7 @@ void AocMenu::runWindowOperation()
         job[2] = 1;
         return;
     case 1:
-        if (FUN_002e19f8() != 0) {
+        if (buttonHelpStateIsNot3() != 0) {
             releaseEntriesB(job + 0xba);
             releaseEntriesA(job + 0xad);
             aocLoadingTaskStart(job, 0);

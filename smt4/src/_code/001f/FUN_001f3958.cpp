@@ -38,7 +38,7 @@ extern int statusGetAvailableChoiceCount(void);
 /* Supplied declaration required: FUN_0028f694. */
 /* Supplied declaration required: FUN_0028f870. */
 extern int FUN_00298848(unsigned int, unsigned int);
-extern int FUN_0029efa8(int);
+extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(int);
 extern int *gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002b6c34. */
@@ -151,11 +151,11 @@ void FUN_001f3958(int param_1,int param_2,int param_3)
     return;
   }
   temp_v6 = resourceRunOperationIfUnblocked(temp_v0);
-  temp_v1 = FUN_0029efa8(temp_v0);
+  temp_v1 = listCursorGetRowIfUnblocked(temp_v0);
   temp_v7 = (unsigned int)*(unsigned short *)(temp_v5 + (temp_v1 + temp_v6) * 2 + 0x1db4);
-  temp_v6 = FUN_0029efa8(temp_v0);
+  temp_v6 = listCursorGetRowIfUnblocked(temp_v0);
   temp_v6 = asdTMTexTableEntryAt(0x1d,temp_v6 + 0x42e);
-  temp_v0 = FUN_0029efa8(temp_v0);
+  temp_v0 = listCursorGetRowIfUnblocked(temp_v0);
   FUN_0028f694(*(short *)(temp_v6 + 8) + param_1,*(short *)(temp_v6 + 10) + param_2,
                (int)*(short *)(temp_v5 + temp_v0 * 2 + 0xe0c));
   if ((temp_v7 == 0) || (table8Type5GetValue(), temp_v7 == 0)) {

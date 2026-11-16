@@ -12,7 +12,7 @@ typedef struct CommandListDesc {
 } CommandListDesc;
 
 u32 *asdGxGetCommandCursor(void);
-void FUN_002af390(u32 *begin, u32 *end);
+void asdModelAdvanceCommandCursorBetween(u32 *begin, u32 *end);
 void nngxBindCmdlist(u32 handle);
 
 /* Records one GPU register write into the current command list and binds the list. */
@@ -27,7 +27,7 @@ void FUN_00138c94(CommandListDesc *list)
     }
     *cmd++ = 1;
     *cmd++ = 0xF023D;
-    FUN_002af390(start, cmd);
+    asdModelAdvanceCommandCursorBetween(start, cmd);
     list->size = (u32)asdGxGetCommandCursor() - (u32)list->start;
     list->state = 2;
     nngxBindCmdlist(list->handle);

@@ -44,7 +44,7 @@ extern SoundPlayer g_buttonHelp;
 SoundSceneEntry *dataTableGetEntry0e(u32 id);
 void buttonHelpBeginExit(s32 mode);
 void FUN_00183e58(void);
-void FUN_00183f58(u32 channel, u32 kind, u32 value, u32 arg);
+void buttonHelpSelectSlot(u32 channel, u32 kind, u32 value, u32 arg);
 void FUN_00183c0c(void);
 void FUN_00182084(void);
 
@@ -85,9 +85,9 @@ void sysPlaySe(u32 id)
     u8 kinds[8] = { 5, 6, 4, 3, 2, 1, 0, 0 };   /* volume kind of each channel */
     for (s32 i = 0; i < 6; i++) {
         if (to->channel[i] != 0) {
-            FUN_00183f58(i & 0xff, kinds[i], to->channel[i] & 0xff, 0);
+            buttonHelpSelectSlot(i & 0xff, kinds[i], to->channel[i] & 0xff, 0);
         } else {
-            FUN_00183f58(i & 0xff, 0x12, 0x51, 0);
+            buttonHelpSelectSlot(i & 0xff, 0x12, 0x51, 0);
         }
     }
     u32 pairA = 0;
@@ -107,14 +107,14 @@ void sysPlaySe(u32 id)
     u32 lowA = pairA & 0xffff;
     u32 highA = pairA >> 16;
     if (lowA != 0 && highA != 0 && lowA == highA) {
-        FUN_00183f58(5, 0, 0, 0);
-        FUN_00183f58(4, 0x14, highA & 0xff, 0);
+        buttonHelpSelectSlot(5, 0, 0, 0);
+        buttonHelpSelectSlot(4, 0x14, highA & 0xff, 0);
     }
     u32 lowB = pairB & 0xffff;
     u32 highB = pairB >> 16;
     if (lowB != 0 && highB != 0 && lowB == highB) {
-        FUN_00183f58(1, 0, 0, 0);
-        FUN_00183f58(0, 0x15, lowB & 0xff, 0);
+        buttonHelpSelectSlot(1, 0, 0, 0);
+        buttonHelpSelectSlot(0, 0x15, lowB & 0xff, 0);
     }
     if (from->isLayered != 0) {
         if (to->isLayered == 0) {

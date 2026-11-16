@@ -12,7 +12,7 @@ void renderCtxPopState(RenderCtx *context, s32 stack);
 void gxResetColorQuadToWhite(void);
 void drawSetColorFromRGBA8(u32 color);
 void effectSetByteSpeed(u32 alpha);
-void FUN_002b0750(s32 layer, u32 resource, u32 sprite, s32 x, s32 y,
+void uiDrawTableTextureSized(s32 layer, u32 resource, u32 sprite, s32 x, s32 y,
                   u32 scaleX, u32 scaleY, s32 tag);
 
 /* Draw the visible entries relative to the list's copied origin. */
@@ -26,7 +26,7 @@ void uiDrawTransientSprites(TransientSpriteList *list)
         if (entry->visible != 0 || g_gameState.spriteVisibility.forceVisible != 0) {
             drawSetColorFromRGBA8(entry->color);
             effectSetByteSpeed(entry->color & 0xFF);
-            FUN_002b0750(9, entry->resource, entry->sprite,
+            uiDrawTableTextureSized(9, entry->resource, entry->sprite,
                 static_cast<s32>(static_cast<f32>(entry->x) + origin.x),
                 static_cast<s32>(static_cast<f32>(entry->y) + origin.y),
                 entry->scaleX, entry->scaleY, 11);

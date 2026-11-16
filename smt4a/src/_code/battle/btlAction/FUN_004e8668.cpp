@@ -37,7 +37,7 @@ extern int itemIsCollectedWithRelated(unsigned short);
 extern int gameProgressIsAdvanced(void);
 extern int FUN_003df57c(unsigned short, unsigned int);
 extern int valueAtF0IsReady(int);
-extern int FUN_004bcbb4(unsigned int, unsigned short);
+extern int skillGetAdjustedCost(unsigned int, unsigned short);
 /* Supplied declaration required: source4CCopyHalves. */
 /* Supplied declaration required: btlAiMarkLowestHpTarget. */
 /* Supplied declaration required: FUN_004e9bd0. */
@@ -112,7 +112,7 @@ LAB_004e8820:
           }
         }
         else {
-          temp_v4 = FUN_004bcbb4(puVar2[0xff],*puVar7);
+          temp_v4 = skillGetAdjustedCost(puVar2[0xff],*puVar7);
           if (temp_v4 <= *(int *)(*(int *)(param_2 + 0x28) + 0xfc)) goto LAB_004e8820;
         }
       }
@@ -139,7 +139,7 @@ LAB_004e8904:
             }
           }
           else {
-            temp_v4 = FUN_004bcbb4(puVar2[0xff],*puVar7);
+            temp_v4 = skillGetAdjustedCost(puVar2[0xff],*puVar7);
             if (temp_v4 <= *(int *)(*(int *)(param_2 + 0x28) + 0xfc)) goto LAB_004e8904;
           }
         }
@@ -163,7 +163,7 @@ LAB_004e89c4:
             }
           }
           else {
-            temp_v4 = FUN_004bcbb4(puVar2[0xff],*puVar7);
+            temp_v4 = skillGetAdjustedCost(puVar2[0xff],*puVar7);
             if (temp_v4 <= *(int *)(*(int *)(param_2 + 0x28) + 0xfc)) goto LAB_004e89c4;
           }
         }

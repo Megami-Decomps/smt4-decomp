@@ -17,7 +17,7 @@ extern int DAT_0062d3b4; /* 0x62d3b4 */
 extern unsigned int DAT_0062d3b8; /* 0x62d3b8 */
 
 /* Supplied declaration required: FUN_0042c130. */
-extern unsigned int FUN_0050096c(int *);
+extern unsigned int fileGetHandleChecked(int *);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -30,7 +30,7 @@ void FUN_0042b774(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
   
   temp_v0 = param_4;
   if (param_1[1] != 0) {
-    temp_v0 = FUN_0050096c(param_1);
+    temp_v0 = fileGetHandleChecked(param_1);
     FUN_0042c130(&temp_v0);
   }
   (**(romwright_code **)(*param_1 + 0x34))(param_1);

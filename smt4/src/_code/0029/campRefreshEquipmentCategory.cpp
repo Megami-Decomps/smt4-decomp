@@ -17,7 +17,7 @@ const CampPlayerEquipment *gameGetPlayerData();
 s32 flagValueIsPositive(u32);
 void gridNavigationConfigure(CampEquipmentGrid *, s32, s32, s32, s32, s32);
 void FUN_00282f80(u32);
-void FUN_0029eb5c(CampEquipmentGrid *, s32);
+void scrollListSetSelectionMarkChanged(CampEquipmentGrid *, s32);
 void objClearFlagPair(CampEquipmentGrid *);
 
 void campRefreshEquipmentCategory(u32 category)
@@ -82,7 +82,7 @@ void campRefreshEquipmentCategory(u32 category)
         if (items[i] == equipped)
             selected = i;
     }
-    FUN_0029eb5c(grid, selected);
+    scrollListSetSelectionMarkChanged(grid, selected);
     objClearFlagPair(grid);
 }
 }

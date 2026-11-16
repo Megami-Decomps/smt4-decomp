@@ -8,7 +8,7 @@ extern "C" {
 int FUN_00238f4c(int *, int);
 int FUN_0024ee68(int);
 int FUN_002ad66c(unsigned char **, int *);
-int FUN_002c567c(int *);
+int clockGetTicksAsMicroseconds(int *);
 int nn_cec_CTR_MessageBox_GetMessageBoxNum(int *, int);
 int rt_memcpy(int *, int, int);
 
@@ -30,7 +30,7 @@ extern signed char DAT_004656d1; /* 0x4656d1 */
 /* Supplied declaration required: FUN_0024ee68. */
 /* Supplied declaration required: FUN_002ad66c. */
 /* Supplied declaration required: memClear. */
-/* Supplied declaration required: FUN_002c567c. */
+/* Supplied declaration required: clockGetTicksAsMicroseconds. */
 extern unsigned int moduleStartOnce(void);
 extern unsigned int nn_cec_CTR_Base64Str2CecTitleId(unsigned char *);
 /* Supplied declaration required: nn_cec_CTR_MessageBox_GetMessageBoxNum. */
@@ -146,7 +146,7 @@ unsigned int FUN_003580a4(int *param_1,unsigned int param_2,int param_3,int para
             param_1[0x69] = temp_v9;
             *(unsigned char *)(param_1 + 0x6a) = 1;
             rt_memcpy(param_1 + 0x6b,temp_v10,0x20);
-            FUN_002c567c(&temp_v8);
+            clockGetTicksAsMicroseconds(&temp_v8);
             temp_v5 = temp_v8;
             uStack_4c = uStack_3c;
             FUN_002ad66c(&temp_v3,&temp_v5);

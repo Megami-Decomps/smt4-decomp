@@ -5,7 +5,7 @@
 extern "C" {
 
 int uiSpriteSetKeyframe(...);
-int FUN_00317af8(float *, float [3], int);
+int padGetNormalizedAnalogStick(float *, float [3], int);
 int naviRequestSelectedMap(void);
 int FUN_003a35a4(void);
 int sysPlayVoice(...);
@@ -76,7 +76,7 @@ extern int gameFlagsGetBlock(void);
 extern int padButtonIsPressed(unsigned int);
 extern int FUN_00167c0c(unsigned int *, unsigned int *);
 /* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: FUN_00317af8. */
+/* Supplied declaration required: padGetNormalizedAnalogStick. */
 /* Supplied declaration required: naviRequestSelectedMap. */
 extern int FUN_00384cf4(void);
 /* Supplied declaration required: FUN_003a35a4. */
@@ -137,7 +137,7 @@ void FUN_0048c394(int param_1)
   temp_v11 = param_1 + 0x4cc;
   puVar6 = (unsigned char *)(param_1 + 0x7b91);
   if (DAT_005f161d != '\0') {
-    FUN_00317af8(&temp_v13,temp_v19,0);
+    padGetNormalizedAnalogStick(&temp_v13,temp_v19,0);
     naviMainGetValue(temp_v11);
     pfVar2 = (float *)sub68OwnerGetBlock60(temp_v11);
     temp_v13 = -(temp_v13 * 13.0f);

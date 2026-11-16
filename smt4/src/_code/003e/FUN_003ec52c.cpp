@@ -18,7 +18,7 @@ extern unsigned char LAB_0034b144; /* 0x34b144 */
 extern unsigned int DAT_0044cdc0; /* 0x44cdc0 */
 extern unsigned int DAT_0044cdc4; /* 0x44cdc4 */
 extern unsigned char DAT_004be698; /* 0x4be698 */
-extern unsigned char DAT_004bf89c; /* 0x4bf89c */
+extern unsigned char g_regionTable; /* 0x4bf89c */
 extern unsigned char DAT_004c14a0; /* 0x4c14a0 */
 extern unsigned char DAT_004c2424; /* 0x4c2424 */
 
@@ -38,7 +38,7 @@ unsigned char * FUN_003ec52c(unsigned int param_1,unsigned int param_2,unsigned 
   DAT_0044cdc0 = 0;
   DAT_0044cdc4 = 0;
   __aeabi_vec_ctor_nocookie_nodtor(&DAT_004be698,&LAB_0034b144,0x20,0x90);
-  __aeabi_vec_ctor_nocookie_nodtor(&DAT_004bf89c,&LAB_00349fbc,0x1c,0x100);
+  __aeabi_vec_ctor_nocookie_nodtor(&g_regionTable,&LAB_00349fbc,0x1c,0x100);
   __aeabi_vec_ctor_nocookie_nodtor(&DAT_004c14a0,&LAB_0034ad90,0x7c,0x20);
   temp_v0 = 0x80;
   puVar2 = &DAT_004c2424;

@@ -20,7 +20,7 @@ typedef char DebugMapBoxesLayoutCheck[sizeof(DebugMapBox) == 0x1C &&
 }
 
 extern "C" {
-extern DebugMapBoxes DAT_00613178;
+extern DebugMapBoxes g_regionTable;
 extern const DebugMapBoxPalette DAT_00532240;
 extern RenderCtxA *g_renderCtx;
 s32 renderCtxPackPassFlags(u32 kind, u32 enabled);
@@ -33,7 +33,7 @@ void FUN_003578a0(f32 height)
 {
     u32 colors[12];
     memcpy(colors, DAT_00532240.colors, sizeof(colors));
-    DebugMapBoxes *map = &DAT_00613178;
+    DebugMapBoxes *map = &g_regionTable;
     if (map->count != 0) {
         RenderCtxA *context = g_renderCtx;
         renderCtxPushA(context, renderCtxPackPassFlags(5, 1));

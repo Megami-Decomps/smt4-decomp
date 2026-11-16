@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern u32 DAT_004651c0;
+extern u32 g_lcgSeed;
 
 void FUN_00103d38(u32 value)
 {
-    DAT_004651c0 = value;
+    g_lcgSeed = value;
 }
 
 } /* extern "C" */

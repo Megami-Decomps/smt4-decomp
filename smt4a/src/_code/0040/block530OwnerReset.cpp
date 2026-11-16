@@ -11,12 +11,12 @@ typedef struct Block530Owner {
     /* 0x1198 */ u8 block1198[4];
 } Block530Owner;
 
-extern void FUN_00187a84(Block530Owner *owner);
+extern void cameraComposeMatrices(Block530Owner *owner);
 extern void gpuWriteVertexUniformMatrix(u32 handle, u8 *block);
 
 void block530OwnerReset(Block530Owner *owner)
 {
-    FUN_00187a84(owner);
+    cameraComposeMatrices(owner);
     gpuWriteVertexUniformMatrix(owner->handle530, owner->block1198);
     owner->unk5F8 = 0;
 }

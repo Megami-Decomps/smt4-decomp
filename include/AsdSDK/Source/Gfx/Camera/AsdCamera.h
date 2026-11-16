@@ -9,7 +9,7 @@
 #include "classes/FloatState.h"
 #include "gfx/CameraVector3.h"
 
-/* The stereo pair's parameters (0x6C bytes); initialized by FUN_0015a0e0. */
+/* The stereo pair's parameters (0x6C bytes); initialized by asdCameraInitializeStereo. */
 struct AsdCameraStereo {
     /* 0x00 */ FloatState state;
     /* 0x60 */ f32 offset5;

@@ -5,7 +5,7 @@
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
-extern const char DAT_00409d40[];
+extern const char g_asdListBoxSourceFileName[];
 extern const s8 DAT_00409d80[]; /* "AsdListBox" */
 s32 FUN_001fe640(u32 handle);
 void asdListBoxDestroy(u32 handle);
@@ -20,7 +20,7 @@ u32 asdListBoxCreate(void *parent, s32 group, s32 x, s32 y, u8 flag)
     AsdListBox *box;
     u32 handle;
 
-    asdDebugTrace(DAT_00409d40, 748);
+    asdDebugTrace(g_asdListBoxSourceFileName, 748);
     box = (AsdListBox *)asdMemAlloc(0x100, 0x100, 0, sizeof(AsdListBox), 1);
     if (box == NULL) {
         return 0;

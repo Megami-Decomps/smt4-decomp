@@ -20,7 +20,7 @@ void _ZN9Obj55c89c12FUN_004a2404Ev(Screen4A *screen)
     s32 x = vec2GetXInt(selection);
     pointConvertToFloat(screen->cursor.position, x, y);
     if (uiSpriteGetCompletionState((const UiAnimatedSprite *)selection) != 0 && buttonHelpIsNotActive()) {
-        FUN_003343f0(0);
+        gameGlobalsSetMenuOpenFlag(0);
         screen->state = 2;
         screen->unk18 = 0;
         pointConvertToFloat(screen->cursor.position, 0, 0);

@@ -30,7 +30,7 @@ void uiMenuActivateAndCountEntries(MenuState *menu)
         }
     }
     if (FUN_002a21c8() == 0) {
-        FUN_003756c8(FUN_002a4878(&menu->items[menu->selectedIndex]) == 0);
+        FUN_003756c8(listCursorGetRowOfChildIfUnblocked(&menu->items[menu->selectedIndex]) == 0);
     }
     btlCommandMenuEnterMode(menu, 14, 1);
 }

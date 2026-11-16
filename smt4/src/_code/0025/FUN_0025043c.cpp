@@ -26,7 +26,7 @@ typedef char BattleActionDefinitionOffsetsCheck[sizeof(BattleActionDefinition) =
 extern "C" {
 BattleActionDefinition *dataTable08Sub1GetRecord(u16 id);
 s32 FUN_0033fe6c(s32 side, s32 mode, BattleActionDefinition *action, s32 enabled);
-s32 FUN_0023d9b8(s32 side, s32 mode, Table04Record *skill);
+s32 itemEffectCheckApplicable(s32 side, s32 mode, Table04Record *skill);
 
 // Dispatch supported table-eight actions and skill targets unless the battle suppresses them.
 u32 FUN_0025043c(s32 side, u16 actionId)
@@ -66,7 +66,7 @@ u32 FUN_0025043c(s32 side, u16 actionId)
                         return 0;
                     }
                 }
-                u32 result = FUN_0023d9b8(side, 1, skill);
+                u32 result = itemEffectCheckApplicable(side, 1, skill);
                 if (result != 0)
                     result = 3;
                 return result;

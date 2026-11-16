@@ -12,7 +12,7 @@ extern "C" {
 s32 playerPadTestBit(u32 bit);
 s32 flagWordTestBit(void* unit, u32 bit);
 void* gameGetPlayerData(void);
-void FUN_00299370(s32 arg);
+void playerRecalcStatsFromEquipment(s32 arg);
 void unitRecalculateEffectiveStats(void* unit);
 
 static s16* statAt(void* base, u32 offset)
@@ -91,7 +91,7 @@ u8 FUN_0031c344(s32 member, ItemEffect* item, s32 dryRun)
     }
     if (dryRun == 0 && noEffect == 0) {
         if (player != NULL) {
-            FUN_00299370(0);
+            playerRecalcStatsFromEquipment(0);
         } else {
             unitRecalculateEffectiveStats(unit);
         }

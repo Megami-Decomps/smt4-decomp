@@ -17,7 +17,7 @@ struct GameStateMusicView {
 extern GameStateMusicView g_gameState;
 s32 gameFlagIsSet(u32 flag);
 s32 bgmGetStateById(u32 id);
-void FUN_003d4c68(u32 id);
+void bgmResumeOrRequestTrack(u32 id);
 
 // Select the map music variant from story flags, avoiding restarts while it is active.
 void lmapUpdateMapBgm()
@@ -37,7 +37,7 @@ void lmapUpdateMapBgm()
         } else if (state == 1 || state == 2) {
             return;
         }
-        FUN_003d4c68(g_gameState.mapBgm);
+        bgmResumeOrRequestTrack(g_gameState.mapBgm);
     } else {
         bgmReleaseStopped();
         g_gameState.musicPending = 1;

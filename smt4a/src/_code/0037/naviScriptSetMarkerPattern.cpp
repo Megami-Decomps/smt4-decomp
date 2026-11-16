@@ -1,7 +1,7 @@
 #include "common.h"
 
 extern "C" {
-void FUN_00314bf8(u32 selection);
+void naviMainSetSelectionResetProgress(u32 selection);
 s32 scrGetArg(u32 index);
 void sub68OwnerCall11(u32 value, f32 x, f32 y);
 void naviMainFinishRequest(void);
@@ -9,7 +9,7 @@ void naviMainFinishRequest(void);
 // Select the navigation marker set and populate one of four scripted coordinate patterns.
 u32 naviScriptSetMarkerPattern(void)
 {
-    FUN_00314bf8(101);
+    naviMainSetSelectionResetProgress(101);
     s32 pattern = scrGetArg(0);
     if (pattern == 0) {
         sub68OwnerCall11(101, 6.0f, 3.0f);

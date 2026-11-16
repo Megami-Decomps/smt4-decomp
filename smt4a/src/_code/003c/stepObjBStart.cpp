@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void *FUN_00387ad8(...);
+void *slideFadeWindowStep(...);
 
 typedef struct fn_003cc670_arg0 fn_003cc670_arg0;
 struct fn_003cc670_arg0 {
@@ -16,7 +16,7 @@ struct fn_003cc670_arg0 {
     undefined4 field_0x14c; /* +0x14c */
 };
 
-/* Supplied declaration required: FUN_00387ad8. */
+/* Supplied declaration required: slideFadeWindowStep. */
 
 
 unsigned int stepObjBStart(fn_003cc670_arg0 *param_1)
@@ -27,7 +27,7 @@ unsigned int stepObjBStart(fn_003cc670_arg0 *param_1)
   unsigned int temp_v0;
   
   temp_v0 = 0;
-  pfVar1 = (fn_003cc670_arg0 *)FUN_00387ad8(param_1,0);
+  pfVar1 = (fn_003cc670_arg0 *)slideFadeWindowStep(param_1,0);
   if (pfVar1 != (fn_003cc670_arg0 *)0x0) {
     param_1->field_0x14c = 0;
     param_1->field_0xf8 = 1;

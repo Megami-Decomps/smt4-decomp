@@ -25,7 +25,7 @@ u32 FUN_0039e21c(void)
     }
     BattleRosterRecordA *record = &state->roster[entry->unitIndex];
     u32 unit = btlUnitGet(g_btlScriptUnit);
-    FUN_003ee0c0(state);
+    btlSlotManagerResetStates(state);
     FUN_004fc094(0, unit, 0, record, 0, entry->maxHp, -1, -1, entry->hp, entry->maxHp, 0, 0, 1, 0, 0, 0, 0,
                  0, 0, 0, 1, 0, 1, 1, 0, 1);
     btlQueueKeyedScalarReflectAction(0x19, unit, record, 0);

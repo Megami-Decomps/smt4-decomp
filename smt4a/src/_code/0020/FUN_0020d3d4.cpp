@@ -38,7 +38,7 @@ BtlDebugEntry *FUN_002cc228(u8 index, s32 empty);
 s32 gameFlagIsSet(u32 flag);
 s32 gameDataFlagTestBit(u32 flag);
 s32 FUN_002b24fc(void);
-s32 FUN_00291e14(void);
+s32 btlIsDefeatSuppressed(void);
 s8 *gameGetSlotTable(void);
 BtlDebugUnitRecord *gameGetSlotRecord(s32 slot);
 s32 idListHasFlaggedRecord(BtlDebugUnitRecord *record);
@@ -75,7 +75,7 @@ void FUN_0020d3d4(BtlDebugMenuLists *menu)
         if (entry->kind != 6 && entry->kind != 8 && entry->kind == 9 && FUN_002b24fc() == 0) {
             continue;
         }
-        if ((entry->flags & 1) != 0 && FUN_00291e14() != 0) {
+        if ((entry->flags & 1) != 0 && btlIsDefeatSuppressed() != 0) {
             continue;
         }
         count++;
@@ -110,7 +110,7 @@ void FUN_0020d3d4(BtlDebugMenuLists *menu)
                     } else if (entry->kind == 3 && idListHasFlaggedRecord(record) == 0) {
                         BtlDebugDemon *demon;
 
-                        if ((entry->flags & 1) != 0 || FUN_00291e14() == 0 || FUN_00291e14() == 0) {
+                        if ((entry->flags & 1) != 0 || btlIsDefeatSuppressed() == 0 || btlIsDefeatSuppressed() == 0) {
                             continue;
                         }
                         demon = devilGetRecord(record->demonId);
@@ -118,7 +118,7 @@ void FUN_0020d3d4(BtlDebugMenuLists *menu)
                             continue;
                         }
                     }
-                    if ((entry->flags & 1) != 0 && FUN_00291e14() != 0) {
+                    if ((entry->flags & 1) != 0 && btlIsDefeatSuppressed() != 0) {
                         continue;
                     }
                     count++;

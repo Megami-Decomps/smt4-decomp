@@ -33,7 +33,7 @@ s32 partyEntryFlagsBit1(u32 id);
 s32 partyEntryFlagsBit3(u32 id);
 s32 partyEntryBitsBit4(u32 id);
 u32 questHasSpecialDetailPage(u32 id);
-u32 FUN_004186e0(void);
+u32 rosterGetLeaderId(void);
 QuestRecord *dataTable1bOr1cGetRecord(u32 id);
 s32 FUN_003de75c(u32 id);
 s32 FUN_00284dbc(u32 id); /* a `mov r0, #0` stub armlink inlines */
@@ -52,17 +52,17 @@ void FUN_003d474c(void)
 
     if (screen->mode != 0) {
         s32 operation = resourceRunOperationIfUnblocked(screen->entryList);
-        id = screen->entryIds[FUN_002a4894(screen->entryList) + operation];
+        id = screen->entryIds[listCursorGetRowIfUnblocked(screen->entryList) + operation];
     } else {
         s32 operation = resourceRunOperationIfUnblocked(screen->questList);
-        id = ((QuestScreenView *)screen)->questIds[FUN_002a4894(screen->questList) + operation];
+        id = ((QuestScreenView *)screen)->questIds[listCursorGetRowIfUnblocked(screen->questList) + operation];
     }
     if (id == 0) {
         return;
     }
     if (screen->mode != 0) {
         if (partyEntryFlagsBit1(id) != 0) {
-            state = FUN_004186e0() == 0 ? 0 : 6;
+            state = rosterGetLeaderId() == 0 ? 0 : 6;
         } else {
             state = partyEntryFlagsBit3(id) != 0 ? 3 : 6;
         }
@@ -80,7 +80,7 @@ void FUN_003d474c(void)
                 } else {
                     state = 3;
                 }
-            } else if (FUN_004186e0() == id) {
+            } else if (rosterGetLeaderId() == id) {
                 state = 0;
             } else if (partyEntryFlagsBit3(id) != 0) {
                 state = 2;

@@ -3,7 +3,7 @@
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
-extern const char DAT_0052730c[];
+extern const char g_asdFilterSourceFileName[];
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 u32 resourceApplyNodeFlag(u32 kind, u32 source);
 u32 asdTMTexNodeSetMode(u32 kind, u32 source);
@@ -16,9 +16,9 @@ void mtx44Copy(void *dest, u32 source);
 void Obj420990::initialize(Obj420990Rects *config, u32 flags)
 {
     rects = config;
-    asdDebugTrace(DAT_0052730c, 814);
+    asdDebugTrace(g_asdFilterSourceFileName, 814);
     buffer = asdMemoryAlloc(0x100, 0x100, 0, 0xA0, 1);
-    asdDebugTrace(DAT_0052730c, 815);
+    asdDebugTrace(g_asdFilterSourceFileName, 815);
     handles = (Obj420990Handle *)asdMemoryAlloc(0x100, 0x100, 0, 0x88, 1);
     for (s32 i = 0; i < 2; i++) {
         if ((flags & 8) != 0) {

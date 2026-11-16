@@ -1,0 +1,15 @@
+#include "shard/Shard0038.h"
+
+extern "C" {
+
+extern void scrCommMessageSetMode(s32 value);
+extern u32 scrGetCommandFrame(void);
+extern void messageWindowShowOrPoll(u32 a, s32 b, u32 c, s32 d, s32 e, u32 f);
+
+void questCenterShowDisplayMessage(u32 a, u32 b)
+{
+    scrCommMessageSetMode(0);
+    messageWindowShowOrPoll(a, 0, scrGetCommandFrame(), 0x10, 0, b);
+}
+
+} /* extern "C" */

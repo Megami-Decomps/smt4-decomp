@@ -12,7 +12,7 @@ int dataTable04FindById(void);
 int sysMemClear(unsigned int *, int);
 int FUN_003ece9c(...);
 int btlResetEntryCounters(int);
-int FUN_003eebf4(int, int);
+int btlFindSelectionIndexByOrdinal(int, int);
 int btlMainFindEntryByListedId(int, int);
 int FUN_003f2498(...);
 int FUN_0047f08c(...);
@@ -49,7 +49,7 @@ extern int FUN_003e7adc(int);
 extern int btlScriptUnitHasFlags(int);
 /* Supplied declaration required: FUN_003ece9c. */
 /* Supplied declaration required: btlResetEntryCounters. */
-/* Supplied declaration required: FUN_003eebf4. */
+/* Supplied declaration required: btlFindSelectionIndexByOrdinal. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_003f2498. */
 /* Supplied declaration required: FUN_0047f08c. */
@@ -62,7 +62,7 @@ extern int FUN_004ab594(unsigned int);
 /* Supplied declaration required: FUN_004f5f90. */
 /* Supplied declaration required: FUN_004f6e68. */
 /* Supplied declaration required: obj4FSlots28Reset. */
-extern int FUN_004f7aa4(unsigned int, unsigned char);
+extern int btlEffectFindPreferredName(unsigned int, unsigned char);
 /* Supplied declaration required: runFourUpdates. */
 /* Supplied declaration required: entryTableInvalidate. */
 /* Supplied declaration required: FUN_004fbeac. */
@@ -133,8 +133,8 @@ void FUN_004ee5b4(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
   dispatchBattleCommandUiVariant((BattleUiOwner *)param_1,(BattleUiContext *)param_2);
   runFourUpdates(g_btlAux);
   temp_v3 = *param_1;
-  FUN_003eebf4(temp_v3,1);
-  temp_v3 = FUN_004f7aa4(g_btlAux,-1 < temp_v3);
+  btlFindSelectionIndexByOrdinal(temp_v3,1);
+  temp_v3 = btlEffectFindPreferredName(g_btlAux,-1 < temp_v3);
   if (temp_v3 != 0) {
     FUN_004e638c(param_1,param_2,*(unsigned short *)(temp_v3 + 0x12),*(unsigned short *)(temp_v3 + 0x14));
   }

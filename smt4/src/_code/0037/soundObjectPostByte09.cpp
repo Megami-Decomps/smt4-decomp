@@ -3,7 +3,7 @@
 // Enqueues a type-9 sound request for the object, carrying one byte.
 extern "C" void soundObjectPostByte09(Obj421aa4 *object, u8 value)
 {
-    Obj421aa4Manager *manager = FUN_002baed8();
+    Obj421aa4Manager *manager = soundRequestQueueGetInstance();
     Obj421aa4Node *node = soundRequestBegin(manager, 6);
     node->type = 9;
     node->id = object->vfunc20();

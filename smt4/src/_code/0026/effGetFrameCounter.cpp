@@ -3,11 +3,11 @@
 
 extern "C" {
 
-extern u32 DAT_004640d0;
+extern u32 g_effFrameCounter;
 
 u32 effGetFrameCounter(void)
 {
-    return DAT_004640d0;
+    return g_effFrameCounter;
 }
 
 } /* extern "C" */

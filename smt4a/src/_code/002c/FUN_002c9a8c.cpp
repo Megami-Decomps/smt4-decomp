@@ -22,7 +22,7 @@ int dialogOpen(...);
 int FUN_00228b04(...);
 int scrScriptProcessStartEntry(...);
 int ifTouchRegionAdd(int, int, int, int);
-int FUN_002a4894(...);
+int listCursorGetRowIfUnblocked(...);
 int infoWinSetTimer(...);
 int flaggedEntrySetValueA(...);
 int FUN_003450d4(...);
@@ -71,7 +71,7 @@ extern int dialogIsActive(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int recordGetModeForId(int);
 /* Supplied declaration required: ifTouchRegionAdd. */
-/* Supplied declaration required: FUN_002a4894. */
+/* Supplied declaration required: listCursorGetRowIfUnblocked. */
 /* Supplied declaration required: infoWinSetText. */
 extern int messageGetChoiceResult(void);
 /* Supplied declaration required: infoWinSetTimer. */
@@ -180,7 +180,7 @@ void FUN_002c9a8c(int param_1)
     break;
   case 2:
     sysPlaySe(0x65);
-    temp_v15 = FUN_002a4894(temp_v20);
+    temp_v15 = listCursorGetRowIfUnblocked(temp_v20);
     temp_v16 = dataTableGet(0x25,1);
     temp_v19 = dataTableGetEntries();
     temp_v17 = dataTableGetCount(temp_v16);
@@ -201,10 +201,10 @@ LAB_002c9da8:
     temp_v10 = 0;
     temp_v22 = 0;
     temp_v23[0] = 0;
-    temp_v24 = FUN_002a4894(temp_v20);
+    temp_v24 = listCursorGetRowIfUnblocked(temp_v20);
     psVar24 = (short *)0x0;
     psVar26 = (short *)0x0;
-    temp_v16 = FUN_002a4894(temp_v20);
+    temp_v16 = listCursorGetRowIfUnblocked(temp_v20);
     switch(temp_v16) {
     case 0:
       temp_v19 = gameGetPlayerData();
@@ -256,8 +256,8 @@ LAB_002c9da8:
       }
       temp_v19 = temp_v19 + 1;
     } while (temp_v19 < 5);
-    if ((temp_v22 || temp_v10) || (temp_v19 = FUN_002a4894(temp_v20), temp_v19 != temp_v24)) {
-      temp_v15 = FUN_002a4894(temp_v20);
+    if ((temp_v22 || temp_v10) || (temp_v19 = listCursorGetRowIfUnblocked(temp_v20), temp_v19 != temp_v24)) {
+      temp_v15 = listCursorGetRowIfUnblocked(temp_v20);
       temp_v16 = dataTableGet(0x25,1);
       temp_v19 = dataTableGetEntries();
       temp_v17 = dataTableGetCount(temp_v16);
@@ -273,14 +273,14 @@ LAB_002c9da8:
 LAB_002ca008:
       buttonHelpSetText(temp_v19,0xf4f4f4ff);
     }
-    temp_v19 = FUN_002a4894(temp_v20);
+    temp_v19 = listCursorGetRowIfUnblocked(temp_v20);
     if (temp_v19 != temp_v24) {
       eventQueueAddUniqueIfValid(0x100020d);
     }
     temp_v19 = temp_v20;
     FUN_003450d4(temp_v20,0,param_1 + 0x43b6,0xffffffff,0xffffffff,0xffffffff,temp_v23,0,1);
     if ((temp_v19 != 0) || (temp_v19 = temp_v20, FUN_00228b04(temp_v20,0), temp_v19 != 0)) {
-      temp_v15 = FUN_002a4894(temp_v20);
+      temp_v15 = listCursorGetRowIfUnblocked(temp_v20);
       temp_v16 = dataTableGet(0x25,1);
       temp_v19 = dataTableGetEntries();
       temp_v17 = dataTableGetCount(temp_v16);
@@ -295,7 +295,7 @@ LAB_002ca008:
       temp_v19 = 0;
 LAB_002ca0e0:
       buttonHelpSetText(temp_v19,0xf4f4f4ff);
-      temp_v19 = FUN_002a4894(temp_v20);
+      temp_v19 = listCursorGetRowIfUnblocked(temp_v20);
       if (temp_v19 != temp_v24) {
         eventQueueAddUniqueIfValid(0x100020d);
       }
@@ -420,7 +420,7 @@ LAB_002ca354:
       *(unsigned int *)(param_1 + 0x436c) = 3;
       scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x43a0),0);
       sysPlaySe(0x65);
-      temp_v15 = FUN_002a4894(temp_v20);
+      temp_v15 = listCursorGetRowIfUnblocked(temp_v20);
       temp_v16 = dataTableGet(0x25,1);
       temp_v19 = dataTableGetEntries();
       temp_v17 = dataTableGetCount(temp_v16);
@@ -436,7 +436,7 @@ LAB_002ca354:
 LAB_002ca524:
       buttonHelpSetText(temp_v19,0xf4f4f4ff);
       psVar24 = (short *)0x0;
-      temp_v16 = FUN_002a4894(temp_v20);
+      temp_v16 = listCursorGetRowIfUnblocked(temp_v20);
       switch(temp_v16) {
       case 0:
         temp_v19 = gameGetPlayerData();

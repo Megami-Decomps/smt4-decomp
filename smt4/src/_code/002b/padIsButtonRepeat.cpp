@@ -8,8 +8,8 @@ struct PadRepeatConfig {
 };
 
 extern "C" {
-extern PadRepeatConfig DAT_004650a0;
-extern u32 DAT_004e3c58[31];
+extern PadRepeatConfig g_padInputState;
+extern u32 g_padHeldFrames[31];
 
 // Report the initial press and each configured repeat after the hold delay.
 u32 padIsButtonRepeat(u32 button)
@@ -18,16 +18,16 @@ u32 padIsButtonRepeat(u32 button)
         return 0;
 
     u32 heldFrames;
-    if (!(DAT_004650a0.flags & 1)) {
-        heldFrames = DAT_004e3c58[button];
+    if (!(g_padInputState.flags & 1)) {
+        heldFrames = g_padHeldFrames[button];
         if (heldFrames == 1)
             return 1;
     } else {
         heldFrames = 0;
     }
-    if (heldFrames <= DAT_004650a0.delay)
+    if (heldFrames <= g_padInputState.delay)
         return 0;
-    if ((heldFrames - DAT_004650a0.delay) % DAT_004650a0.interval == 0)
+    if ((heldFrames - g_padInputState.delay) % g_padInputState.interval == 0)
         return 1;
     return 0;
 }

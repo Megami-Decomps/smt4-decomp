@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rewrite; the axis is derived from the global matrix at DAT_00407ed0 in retail but is folded to the draft's constants here, and the scheduling of the float math differs. */
+/* NON_MATCHING: readable rewrite; the axis is derived from the global matrix at g_sinCosTable in retail but is folded to the draft's constants here, and the scheduling of the float math differs. */
 #include "common.h"
 #include <math.h>
 #include "script/scrScriptProcess.h"
@@ -21,7 +21,7 @@ struct OrbitScreen {
 
 extern "C" {
 
-void FUN_002ad314(f32* sine, f32* cosine);
+void mathSinCos(f32* sine, f32* cosine);
 void FUN_002c159c(void* camera);
 void FUN_002c1edc(void* camera, Vec3f* position, Vec3f* target, s32* result);
 void FUN_002c1e30(void* camera, s32 flag);
@@ -47,7 +47,7 @@ void FUN_0018a104(OrbitScreen* screen)
     axis.x = 0.0f * screen->direction.x + 0.0f * screen->direction.y + 1.0f * screen->direction.z;
     axis.y = -1.0f * screen->direction.x + 0.0f * screen->direction.y + 0.0f * screen->direction.z;
     axis.z = 0.0f * screen->direction.x + 1.0f * screen->direction.y + 0.0f * screen->direction.z;
-    FUN_002ad314(&sine, &cosine);
+    mathSinCos(&sine, &cosine);
 
     f32 complement = 1.0f - cosine;
     f32 length = sqrtf(axis.x * axis.x + axis.z * axis.z + axis.y * axis.y);

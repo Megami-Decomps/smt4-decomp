@@ -61,7 +61,7 @@ CommandEntry *FUN_002cc228(u32 index, s32 first);
 s32 gameFlagIsSet(u32 flag);
 s32 gameDataFlagTestBit(u32 flag);
 s32 idListHasFlaggedRecord(MemberRecord *member);
-s32 FUN_00291e14(void);
+s32 btlIsDefeatSuppressed(void);
 EquipmentInfo *devilGetRecord(u32 equipment);
 s32 FUN_002b24fc(void);
 
@@ -69,7 +69,7 @@ s32 FUN_002b24fc(void);
  * flagged record applies. */
 static bool targetCommandAllowed(CommandEntry *entry, MemberRecord *member)
 {
-    if ((entry->attributes & 1) || FUN_00291e14() == 0 || FUN_00291e14() == 0)
+    if ((entry->attributes & 1) || btlIsDefeatSuppressed() == 0 || btlIsDefeatSuppressed() == 0)
         return false;
     EquipmentInfo *info = devilGetRecord(member->equipment);
     return info != NULL && (info->flags & 4) != 0;
@@ -109,9 +109,9 @@ u32 FUN_002cc9e0(CommandWork *work, s32 inBattle)
             continue;
         if (entry->kind == 9 && FUN_002b24fc() == 0)
             continue;
-        if ((entry->attributes & 1) && FUN_00291e14() != 0)
+        if ((entry->attributes & 1) && btlIsDefeatSuppressed() != 0)
             continue;
-        if (FUN_002a4878(reinterpret_cast<Object *>(work->lists + work->selected * 100)) == count)
+        if (listCursorGetRowOfChildIfUnblocked(reinterpret_cast<Object *>(work->lists + work->selected * 100)) == count)
             break;
         count++;
     }

@@ -29,7 +29,7 @@ extern s32 FUN_0035db94(void);
 extern u32 partyGetSlot(u32 item);
 extern void statusPanelSetOpen(s32 arg);
 extern void FUN_0023b45c(s32 arg);
-extern void FUN_00183f58(s32 a, s32 b, s32 c, s32 d);
+extern void buttonHelpSelectSlot(s32 a, s32 b, s32 c, s32 d);
 extern void FUN_004be990(PickMenu *menu, s32 a, s32 b, s32 c);
 extern void flaggedEntrySetValueA(void *entry, s32 value);
 extern void flaggedEntrySetValueB(void *entry, s32 value);
@@ -70,7 +70,7 @@ void FUN_004bf174(PickMenu *menu)
         menu->nextState = 3;
         if (menu->type == 2 && menu->itemCount > 0) {
             sysPlaySe(0xF0);
-            FUN_00183f58(5, 1, 1, 1);
+            buttonHelpSelectSlot(5, 1, 1, 1);
         } else {
             u32 selectedItem = menu->items[menu->selected];
             u32 markedItem = menu->items[menu->markedItem];

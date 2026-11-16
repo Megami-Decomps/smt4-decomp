@@ -8,7 +8,7 @@ extern "C" {
 int FUN_0019af70(...);
 int renderCtxBindTextureMode(unsigned int, unsigned int, int);
 int materialUploadChangedParameters(...);
-int FUN_001a64f4(unsigned char [4]);
+int nwFontGlyphInit(unsigned char [4]);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
@@ -46,7 +46,7 @@ extern unsigned int *DAT_005b3bc4; /* 0x5b3bc4 */
 /* Supplied declaration required: FUN_0019af70. */
 /* Supplied declaration required: renderCtxBindTextureMode. */
 /* Supplied declaration required: materialUploadChangedParameters. */
-/* Supplied declaration required: FUN_001a64f4. */
+/* Supplied declaration required: nwFontGlyphInit. */
 /* Supplied declaration required: callbackBindingInitFromKind. */
 extern int __aeabi_uidivmod(unsigned int, int);
 
@@ -115,7 +115,7 @@ void FUN_00181ae0(unsigned int param_1,unsigned int *param_2,int param_3,int par
   temp_v32 = param_1;
   temp_v33 = param_1;
   temp_v34 = param_1;
-  FUN_001a64f4(temp_v23);
+  nwFontGlyphInit(temp_v23);
   temp_v7 = (unsigned int)((unsigned long long)temp_v16 >> 0x20);
   piVar13 = *(int **)(temp_v6 + 8);
   temp_v2 = temp_v7;

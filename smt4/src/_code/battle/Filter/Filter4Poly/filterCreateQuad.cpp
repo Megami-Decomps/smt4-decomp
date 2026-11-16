@@ -15,7 +15,7 @@ struct Filter4PolySource : Obj42080cRect {
 };
 
 extern "C" {
-extern const char DAT_003ff7fc[];
+extern const char g_asdFilterSourceFileName[];
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void texturedQuadSetCentered(Obj42080c *filter);
 u32 _ZN2nw4math5MTX448IdentityEv(void);
@@ -36,7 +36,7 @@ extern "C" Obj42080c *filterCreateQuad(Filter4PolySource *source, u32 flags, s32
     u32 owner; /* never set: retail passes whatever r4 held */
     Obj42080c *filter = new (owner) Obj42080c(child);
     filter->setRect(source);
-    asdDebugTrace(DAT_003ff7fc, 49);
+    asdDebugTrace(g_asdFilterSourceFileName, 49);
     filter->setBuffer(asdMemoryAlloc(0x100, 0x100, 0, 0x50, 1));
     texturedQuadSetCentered(filter);
     filter->refreshTextureCoordinates();

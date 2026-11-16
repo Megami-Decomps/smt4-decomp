@@ -8,7 +8,7 @@ struct ChordFlagState {
 };
 
 extern "C" {
-extern ChordFlagState DAT_0061951c[2];
+extern ChordFlagState g_bgmRequestChannels[2];
 
 /* Whether a state has both chord flags (bits 2 and 0x20) set. */
 static __inline bool chordFlagsHeld(const ChordFlagState *state)
@@ -24,7 +24,7 @@ u32 FUN_003ddfd8(void)
     }
     u32 result = 0;
     for (s32 i = 0; i < 2; i++) {
-        if (chordFlagsHeld(&DAT_0061951c[i])) {
+        if (chordFlagsHeld(&g_bgmRequestChannels[i])) {
             result = 1;
             break;
         }

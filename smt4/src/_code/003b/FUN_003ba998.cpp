@@ -23,7 +23,7 @@ int frameTexApplyMode(...);
 int FUN_00275dec(void);
 int dialogOpen(...);
 int infoWinSetMessage(...);
-int FUN_002a03d8(int, int);
+int titleSetSlotValueState2(int, int);
 int objModelCreateFromSource(...);
 int eventQueueAddUnique(...);
 int textFormatBuffer(...);
@@ -117,7 +117,7 @@ extern int screenFadeIsBusy(void);
 /* Supplied declaration required: infoWinStartTimer. */
 /* Supplied declaration required: messageMainFinishWindow. */
 /* Supplied declaration required: slotSetRequest. */
-/* Supplied declaration required: FUN_002a03d8. */
+/* Supplied declaration required: titleSetSlotValueState2. */
 /* Supplied declaration required: objModelCreateFromSource. */
 /* Supplied declaration required: FUN_002a4bac. */
 /* Supplied declaration required: asdMemFreeNonNull. */
@@ -309,7 +309,7 @@ void FUN_003ba998(int param_1)
       temp_v1 = *(char *)(param_1 + 0xdac);
     }
     if (temp_v8 && temp_v1 == '\0') {
-      FUN_002a03d8(1,10);
+      titleSetSlotValueState2(1,10);
     }
     *(int *)(param_1 + 0x2c) = *(int *)(param_1 + 0x2c) + 1;
     if (*(char *)(param_1 + 0xe58) != '\0') {

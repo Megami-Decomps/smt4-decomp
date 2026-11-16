@@ -14,15 +14,15 @@ typedef struct Mode {
 } Mode;
 
 extern Slot DAT_0053d740[31];
-extern Mode DAT_005b4000;
+extern Mode g_padInputState;
 extern u32 DAT_0063fff0;
 extern u32 DAT_0063ffd0;
 
 static inline bool usesAlternateMask()
 {
-    if (DAT_005b4000.flags & 1)
+    if (g_padInputState.flags & 1)
         return true;
-    if (DAT_005b4000.flags & 2)
+    if (g_padInputState.flags & 2)
         return true;
     return false;
 }

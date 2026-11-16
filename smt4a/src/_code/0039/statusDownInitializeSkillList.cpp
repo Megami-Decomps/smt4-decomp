@@ -56,7 +56,7 @@ u8 FUN_002c7e3c();
 void gridNavigationConfigure(void *controller, s32 items, s32 visible, s32 columns,
                   s32 option, s32 secondOption);
 s32 FUN_002857b8();
-void FUN_003343f0(u8 value);
+void gameGlobalsSetMenuOpenFlag(u8 value);
 
 void statusDownInitializeSkillList()
 {
@@ -99,7 +99,7 @@ void statusDownInitializeSkillList()
     gridNavigationConfigure(menu->controller, items, items, 1, 1, 1);
     menu->activatedSession = 0;
     if (FUN_002857b8() == 0) {
-        FUN_003343f0(1);
+        gameGlobalsSetMenuOpenFlag(1);
         menu->activatedSession = 1;
     }
     menu->state = 0;

@@ -14,7 +14,7 @@ u8 FUN_002cc08c(u32 soundId, u32 actorIndex)
     SpatialSoundPlayback *playback = reinterpret_cast<SpatialSoundPlayback *>(g_asdSound.unk784);
     u8 started = 0;
     if (playback->enabled && g_asdSound.currentSlotB->heapBase && actorIndex < 16 &&
-        FUN_002bf684(&g_asdSound) && nw_snd_SoundArchive_GetSoundType(&g_asdSound, soundId) &&
+        nw_snd_SoundArchive_IsAvailable(&g_asdSound) && nw_snd_SoundArchive_GetSoundType(&g_asdSound, soundId) &&
         !asd3dSoundActorIsPlaying(actorIndex) && asdSndEnsureCurrentSlotData(soundId)) {
         SpatialSoundActor *actor = &playback->actors[actorIndex];
         started = static_cast<u8>(nw_snd_SoundStartable_StartSound(actor, &playback->handles[actorIndex], soundId, 0)) == 0;

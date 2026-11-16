@@ -33,10 +33,10 @@ void FUN_0026fa30()
     PartyCapacityGridsView *grids = reinterpret_cast<PartyCapacityGridsView *>(panel);
     if (grids->mode == 1)
         return;
-    s32 primaryColumn = FUN_002a4878(&grids->primary);
-    s32 primaryRow = FUN_002a4894(&grids->primary);
-    s32 secondaryColumn = FUN_002a4878(&grids->secondary);
-    s32 secondaryRow = FUN_002a4894(&grids->secondary);
+    s32 primaryColumn = listCursorGetRowOfChildIfUnblocked(&grids->primary);
+    s32 primaryRow = listCursorGetRowIfUnblocked(&grids->primary);
+    s32 secondaryColumn = listCursorGetRowOfChildIfUnblocked(&grids->secondary);
+    s32 secondaryRow = listCursorGetRowIfUnblocked(&grids->secondary);
     u8 count = party->count;
     u32 rows = count >> 2;
     if (count & 3)

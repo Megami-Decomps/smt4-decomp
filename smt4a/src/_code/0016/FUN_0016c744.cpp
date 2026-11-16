@@ -12,8 +12,8 @@ struct ModelStateResetPacket {
 };
 }
 extern "C" {
-extern u32 *DAT_005b3fe4;
-extern u32 DAT_005b3fe8;
+extern u32 *g_modelCommandBuffer;
+extern u32 g_modelCommandWordCount;
 extern const ModelStateResetPacket DAT_00544d30;
 u32 *FUN_00177e6c(const void *source, u32 *cursor);
 void asdModelCommitCommandRange(u32 *begin, u32 *end);
@@ -28,27 +28,27 @@ void FUN_0016c744(ModelCommandSourceView *source)
     u32 *end = FUN_00177e6c(source->commands, begin);
     asdModelCommitCommandRange(begin, end);
     cursorResetFromParam();
-    u32 *packet = DAT_005b3fe4;
-    packet[DAT_005b3fe8] = 0x210;
-    packet[DAT_005b3fe8 + 1] = 0xF02BB;
-    DAT_005b3fe8 += 2;
-    packet[DAT_005b3fe8] = 0;
-    packet[DAT_005b3fe8 + 1] = 0xF02BC;
-    DAT_005b3fe8 += 2;
+    u32 *packet = g_modelCommandBuffer;
+    packet[g_modelCommandWordCount] = 0x210;
+    packet[g_modelCommandWordCount + 1] = 0xF02BB;
+    g_modelCommandWordCount += 2;
+    packet[g_modelCommandWordCount] = 0;
+    packet[g_modelCommandWordCount + 1] = 0xF02BC;
+    g_modelCommandWordCount += 2;
     asdModelCommandBlockRelease();
     ModelStateResetPacket reset = DAT_00544d30;
     FUN_001b4128(reset.values, sizeof(reset), 1);
     cursorResetFromParam();
-    packet = DAT_005b3fe4;
-    packet[DAT_005b3fe8] = 1;
-    packet[DAT_005b3fe8 + 1] = 0xF0111;
-    DAT_005b3fe8 += 2;
-    packet[DAT_005b3fe8] = 1;
-    packet[DAT_005b3fe8 + 1] = 0xF0110;
-    DAT_005b3fe8 += 2;
-    packet[DAT_005b3fe8] = 0;
-    packet[DAT_005b3fe8 + 1] = 0x100E0;
-    DAT_005b3fe8 += 2;
+    packet = g_modelCommandBuffer;
+    packet[g_modelCommandWordCount] = 1;
+    packet[g_modelCommandWordCount + 1] = 0xF0111;
+    g_modelCommandWordCount += 2;
+    packet[g_modelCommandWordCount] = 1;
+    packet[g_modelCommandWordCount + 1] = 0xF0110;
+    g_modelCommandWordCount += 2;
+    packet[g_modelCommandWordCount] = 0;
+    packet[g_modelCommandWordCount + 1] = 0x100E0;
+    g_modelCommandWordCount += 2;
     asdModelCommandBlockRelease();
 }
 }

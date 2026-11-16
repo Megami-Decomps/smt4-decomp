@@ -7,7 +7,7 @@ extern "C" {
 
 int gameGetPlayerData(void);
 int dataTable41FindById(void);
-int FUN_003e503c(void);
+int partyGetSlotPreferredFirst(void);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(unsigned int, int);
 
@@ -30,7 +30,7 @@ extern int FUN_0022fd80(int, unsigned int);
 /* Supplied declaration required: dataTable41FindById. */
 extern int actorIsActive(void);
 extern int partySlotMatchesSelected(unsigned int);
-/* Supplied declaration required: FUN_003e503c. */
+/* Supplied declaration required: partyGetSlotPreferredFirst. */
 extern int bitsAt60Test(int, unsigned int);
 extern int dataTable9Type3GetClamped(unsigned short, unsigned int);
 
@@ -160,7 +160,7 @@ void FUN_002ed428(int param_1)
       temp_v4 = 0;
       do {
         temp_v5 = temp_v4 & 0xffff;
-        FUN_003e503c();
+        partyGetSlotPreferredFirst();
         temp_v2 = actorIsActive();
         if (temp_v2 != 0) {
           temp_v2 = partySlotMatchesSelected(temp_v5);

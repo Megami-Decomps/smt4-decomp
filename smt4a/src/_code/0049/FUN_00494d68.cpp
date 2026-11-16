@@ -13,7 +13,7 @@ int FUN_001ba3d0(...);
 int FUN_0047fc38(void);
 int FUN_0049339c(...);
 int drawTextAtRelativePosition(...);
-int FUN_004934ac(...);
+int uiDrawTableTextureAtRectCorner(...);
 int FUN_0049368c(...);
 int shopGetEntryPrice(...);
 int VectorSignedToFloat(...);
@@ -43,7 +43,7 @@ extern int FUN_0047fe44(unsigned int);
 extern int equipmentHasPositiveUpgrade(unsigned int);
 /* Supplied declaration required: FUN_0049339c. */
 /* Supplied declaration required: drawTextAtRelativePosition. */
-/* Supplied declaration required: FUN_004934ac. */
+/* Supplied declaration required: uiDrawTableTextureAtRectCorner. */
 /* Supplied declaration required: FUN_0049368c. */
 extern int FUN_00498408(int, unsigned int);
 extern int itemGetNameOrFallback(unsigned int, unsigned int);
@@ -102,25 +102,25 @@ void FUN_00494d68(int param_1,int param_2,int param_3,unsigned short *param_4)
   temp_v3 = (int)*(short *)(temp_v3 + 10);
   if (param_3 != 0) {
     efctSetSpeed();
-    FUN_004934ac(param_1 + 0x3a4,0x47,temp_v11,temp_v3,temp_v9);
-    FUN_004934ac(param_1 + 0x3a4,0x48,temp_v11,temp_v3,temp_v9);
-    FUN_004934ac(param_1 + 0x3a4,0x49,temp_v11,temp_v3,temp_v9);
+    uiDrawTableTextureAtRectCorner(param_1 + 0x3a4,0x47,temp_v11,temp_v3,temp_v9);
+    uiDrawTableTextureAtRectCorner(param_1 + 0x3a4,0x48,temp_v11,temp_v3,temp_v9);
+    uiDrawTableTextureAtRectCorner(param_1 + 0x3a4,0x49,temp_v11,temp_v3,temp_v9);
     efctSetSpeed();
     FUN_0049368c(param_1 + 0x3a4,0x4a,temp_v11,temp_v3,temp_v9,1);
     if (*(char *)(param_1 + 0xb19) != '\0') {
-      FUN_004934ac(param_1 + 0x3a4,0x108,temp_v11,temp_v3,temp_v9);
-      FUN_004934ac(param_1 + 0x3a4,0x109,temp_v11,temp_v3,temp_v9);
-      FUN_004934ac(param_1 + 0x3a4,0x10a,temp_v11,temp_v3,temp_v9);
+      uiDrawTableTextureAtRectCorner(param_1 + 0x3a4,0x108,temp_v11,temp_v3,temp_v9);
+      uiDrawTableTextureAtRectCorner(param_1 + 0x3a4,0x109,temp_v11,temp_v3,temp_v9);
+      uiDrawTableTextureAtRectCorner(param_1 + 0x3a4,0x10a,temp_v11,temp_v3,temp_v9);
       efctSetSpeed();
-      FUN_004934ac(param_1 + 0x3a4,0x10b,temp_v11,temp_v3,temp_v9);
+      uiDrawTableTextureAtRectCorner(param_1 + 0x3a4,0x10b,temp_v11,temp_v3,temp_v9);
       efctSetSpeed();
     }
     else {
-      FUN_004934ac(param_1 + 0x3a4,0x4b,temp_v11,temp_v3,temp_v9);
-      FUN_004934ac(param_1 + 0x3a4,0x4c,temp_v11,temp_v3,temp_v9);
-      FUN_004934ac(param_1 + 0x3a4,0x4d,temp_v11,temp_v3,temp_v9);
+      uiDrawTableTextureAtRectCorner(param_1 + 0x3a4,0x4b,temp_v11,temp_v3,temp_v9);
+      uiDrawTableTextureAtRectCorner(param_1 + 0x3a4,0x4c,temp_v11,temp_v3,temp_v9);
+      uiDrawTableTextureAtRectCorner(param_1 + 0x3a4,0x4d,temp_v11,temp_v3,temp_v9);
       efctSetSpeed();
-      FUN_004934ac(param_1 + 0x3a4,0x105,temp_v11,temp_v3,temp_v9);
+      uiDrawTableTextureAtRectCorner(param_1 + 0x3a4,0x105,temp_v11,temp_v3,temp_v9);
       efctSetSpeed();
     }
     temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0xac);

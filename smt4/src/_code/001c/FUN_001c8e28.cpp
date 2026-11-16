@@ -454,7 +454,7 @@ code_r0x001c9900:
     __ARM_common_memcpy4_8(uVar9,puVar2[0xe0]);
     uVar9 = FUN_002c09bc();
     FUN_002bcd68(uVar9,puVar2[0xe1],0x24d28);
-    FUN_002b827c(3);
+    buttonHelpSetContext(3);
     uVar9 = 0x10;
     DAT_0044de30 = DAT_0044de34;
     puVar2[2] = uVar9;
@@ -519,13 +519,13 @@ code_r0x001c9900:
     }
     if ((DAT_0044de28 != '\0') && (*(char *)((int)puVar2 + 0x355) == '\0')) {
       FUN_0029ca58();
-      FUN_002b827c(3);
+      buttonHelpSetContext(3);
       puVar2[2] = 6;
       puVar2[3] = 0;
     }
     break;
   case 6:
-    iVar8 = FUN_0026b564();
+    iVar8 = buttonHelpStateIsNot3();
     if ((iVar8 != 0) && (iVar8 = FUN_00295618(), iVar8 != 0)) {
       FUN_0029c3c0(0,0xc,0xff);
       FUN_0029c3c0(1,0xc,0xff);

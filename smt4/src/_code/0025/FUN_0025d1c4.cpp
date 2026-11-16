@@ -74,7 +74,7 @@ extern unsigned int FUN_0029a9d4(int, unsigned int);
 extern int FUN_0029d644(unsigned int);
 extern int ifTouchGetSelectionModeForRegion(int);
 extern int FUN_0029ee54(unsigned int);
-extern int FUN_0029efa8(unsigned int);
+extern int listCursorGetRowIfUnblocked(unsigned int);
 extern int resourceRunOperationIfUnblocked(unsigned int);
 extern int gameGetUnitRecord(int);
 extern int gameGetSlotTable(void);
@@ -176,7 +176,7 @@ void FUN_0025d1c4(int param_1)
   temp_v16 = 0;
   if (temp_v16 < temp_v4) {
     do {
-      if ((temp_v24 == 0) || (temp_v9 = FUN_0029efa8(*temp_v20), temp_v9 != temp_v16)) {
+      if ((temp_v24 == 0) || (temp_v9 = listCursorGetRowIfUnblocked(*temp_v20), temp_v9 != temp_v16)) {
         efctSetSpeed();
         temp_v9 = asdTMTexTableEntryAt(0x15,temp_v3 + temp_v16);
         texDrawTableEntryAtStoredOrigin(2,0x15,0x72,*(short *)(temp_v9 + 8) + temp_v6,*(short *)(temp_v9 + 10) + temp_v7,0x3d
@@ -454,7 +454,7 @@ void FUN_0025d1c4(int param_1)
     return;
   }
   temp_v3 = resourceRunOperationIfUnblocked(*temp_v20);
-  temp_v4 = FUN_0029efa8(*temp_v20);
+  temp_v4 = listCursorGetRowIfUnblocked(*temp_v20);
   temp_v15 = temp_v3 + temp_v4;
   if (*(int *)(temp_v2 + 0x5c) == 1) {
     temp_v3 = 0xd5;
@@ -465,7 +465,7 @@ void FUN_0025d1c4(int param_1)
   else {
     temp_v3 = 0xc9;
   }
-  temp_v4 = FUN_0029efa8(*temp_v20);
+  temp_v4 = listCursorGetRowIfUnblocked(*temp_v20);
   temp_v3 = asdTMTexTableEntryAt(0x15,temp_v4 + temp_v3);
   efctSetSpeed();
   texDrawTableEntryAtStoredOrigin(2,0x15,0x96,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x3d);
@@ -474,7 +474,7 @@ void FUN_0025d1c4(int param_1)
   efctSetSpeed();
   texDrawTableEntryAtStoredOrigin(2,0x15,0x99,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x5b);
   if (temp_v23 == 0) {
-    temp_v4 = FUN_0029efa8(*temp_v20);
+    temp_v4 = listCursorGetRowIfUnblocked(*temp_v20);
     temp_v4 = ifTouchGetSelectionModeForRegion((int)*(short *)(param_1 + temp_v4 * 2 + 0x572c));
     if ((temp_v4 != 1) && (temp_v4 != 2 && temp_v4 != 6)) {
       texDrawTableEntryAtStoredOrigin(2,0x15,0x9a,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x65);

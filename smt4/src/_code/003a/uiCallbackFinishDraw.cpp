@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern UiCallbackContext *DAT_0043d9f8;
+extern UiCallbackContext *g_uiCallbackContext;
 
 /* Runs the UI object's finishDraw callback. */
 s32 uiCallbackFinishDraw()
 {
-    DAT_0043d9f8->object->finishDraw();
+    g_uiCallbackContext->object->finishDraw();
     return 0;
 }
 

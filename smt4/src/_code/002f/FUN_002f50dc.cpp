@@ -3,8 +3,8 @@
 
 extern "C" {
 extern void* g_titleScene;
-extern u32* DAT_004729e0;
-extern u32 DAT_004729e4;
+extern u32* g_modelCommandBuffer;
+extern u32 g_modelCommandWordCount;
 void asdModelCommandBlockRelease(void);
 void cursorResetFromParam(u32 mode);
 
@@ -17,19 +17,19 @@ void FUN_002f50dc(u32 mode)
         /* 0x132C */ RenderStateStack stacks[2];
     };
     cursorResetFromParam(mode);
-    u32* commands = DAT_004729e0;
-    commands[DAT_004729e4] = mode;
-    commands[DAT_004729e4 + 1] = 0xF0065;
-    DAT_004729e4 += 2;
+    u32* commands = g_modelCommandBuffer;
+    commands[g_modelCommandWordCount] = mode;
+    commands[g_modelCommandWordCount + 1] = 0xF0065;
+    g_modelCommandWordCount += 2;
     if (mode != 0) {
         TitleRenderStates* title = static_cast<TitleRenderStates*>(g_titleScene);
-        commands[DAT_004729e4] = title->stacks[0].entries[title->stacks[0].count];
-        commands[DAT_004729e4 + 1] = 0xF0066;
-        DAT_004729e4 += 2;
+        commands[g_modelCommandWordCount] = title->stacks[0].entries[title->stacks[0].count];
+        commands[g_modelCommandWordCount + 1] = 0xF0066;
+        g_modelCommandWordCount += 2;
         title = static_cast<TitleRenderStates*>(g_titleScene);
-        commands[DAT_004729e4] = title->stacks[1].entries[title->stacks[1].count];
-        commands[DAT_004729e4 + 1] = 0xF0067;
-        DAT_004729e4 += 2;
+        commands[g_modelCommandWordCount] = title->stacks[1].entries[title->stacks[1].count];
+        commands[g_modelCommandWordCount + 1] = 0xF0067;
+        g_modelCommandWordCount += 2;
     }
     asdModelCommandBlockRelease();
 }

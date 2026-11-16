@@ -39,7 +39,7 @@ void FUN_0016c744(u32 target);
 void gpuWriteVertexUniformVec4(u32 target, f32 *colorScale);
 void modelCmdAppendPacked(s32 a, s32 b, s32 c, s32 d);
 void mathCopyIdentityMatrix(MTX44 *matrix);
-void FUN_00187a84(GxResetContext *context, MTX44 *destinationB, MTX44 *destinationA, const MTX44 *projection);
+void cameraComposeMatrices(GxResetContext *context, MTX44 *destinationB, MTX44 *destinationA, const MTX44 *projection);
 void gpuWriteVertexUniformMatrix(u32 target, MTX44 *matrix);
 void FUN_00158b88(CombinerState *state);
 void FUN_00158b2c(CombinerStage *stage);
@@ -98,7 +98,7 @@ s32 renderCtxResetFrameState(GxResetContext *context)
     if (context->projectionDirty != 0 || !isIdentity(&context->projection)) {
         mathCopyIdentityMatrix(&context->projection);
         mathCopyIdentityMatrix(&context->projectionPrevious);
-        FUN_00187a84(context, &context->transformB, &context->transformA, &context->projection);
+        cameraComposeMatrices(context, &context->transformB, &context->transformA, &context->projection);
         gpuWriteVertexUniformMatrix(context->colorTarget, &context->transformC);
         context->projectionDirty = 0;
     }

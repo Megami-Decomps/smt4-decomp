@@ -27,7 +27,7 @@ u32 FUN_0020ee0c(u32 process)
     jobGetWork(process);
     EffectOverlayView *effect = (EffectOverlayView *)g_btlEffect.data;
     if (effect != NULL && (effect->flags & 2) && effect->object != NULL) {
-        renderCtxPushC(g_titleScene, FUN_002865c0(6, 0.0f));
+        renderCtxPushC(g_titleScene, gxPackFadeKindAlphaWord(6, 0.0f));
         effect->object->methods->draw(effect->object);
         renderStackPop(&g_titleScene->additional.stackC);
         renderCtxApplyTransforms(g_titleScene);

@@ -19,7 +19,7 @@ extern "C" nn::Result romFileStreamOpen(RomFileOpenState *state, const char *pat
 
     if (!pathBuildWide(path, reinterpret_cast<s16 *>(resolvedPath), 0)) {
         result = 0xe0e046bc;
-        FUN_002c3510(result);
+        processResultSetValue(result);
         return result;
     }
     if (mode == 1) {
@@ -27,6 +27,6 @@ extern "C" nn::Result romFileStreamOpen(RomFileOpenState *state, const char *pat
     } else {
         result = romFileOpen(&state->file, resolvedPath, 1);
     }
-    FUN_002c3510(result);
+    processResultSetValue(result);
     return result;
 }

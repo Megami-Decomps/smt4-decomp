@@ -26,7 +26,7 @@ s8 uiSpriteGetCompletionState(const Cursor *cursor);
 int buttonHelpIsNotActive(void);
 int pointConvertToFloat(void *layout, u32 a, u32 b);
 int FUN_0029d960(Menu *menu);
-int FUN_002b8ee0(Cursor *cursor, int arg);
+int uiSlidingSpriteAdvance(Cursor *cursor, int arg);
 u32 vec2GetYInt(Cursor *cursor);
 u32 vec2GetXInt(Cursor *cursor);
 
@@ -40,7 +40,7 @@ void Obj4223c4::FUN_003a7834()
     u32 width;
     u32 height;
 
-    FUN_002b8ee0(cursor, 0);
+    uiSlidingSpriteAdvance(cursor, 0);
     width = vec2GetYInt(cursor);
     height = vec2GetXInt(cursor);
     pointConvertToFloat(menu->layout, height, width);

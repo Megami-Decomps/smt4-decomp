@@ -59,7 +59,7 @@ DemonRecord *gameGetSlotRecord(void);
 s32 FUN_0022fd80(s32 experience, u32 flag);
 s32 bitsAt60Test(DemonRecord *record, u32 bit);
 s32 dataTable9Type3GetClamped(u16 type, u32 flag);
-DemonRecord *FUN_003e503c(u32 slot);
+DemonRecord *partyGetSlotPreferredFirst(u32 slot);
 s32 partySlotMatchesSelected(u32 slot);
 
 /* Experience share of `base` for the slot's growth type, at least 1 when there is any base. */
@@ -130,7 +130,7 @@ void FUN_0031e6f4(BattleRewards *rewards)
 
     for (u32 slot = 0; (s32)slot < REWARD_PARTY_SLOTS; slot++) {
         u32 index = slot & 0xFFFF;
-        DemonRecord *partyRecord = FUN_003e503c(index);
+        DemonRecord *partyRecord = partyGetSlotPreferredFirst(index);
         if (actorIsActive(partyRecord) == 0)
             continue;
         s32 selected = partySlotMatchesSelected(index);

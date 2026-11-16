@@ -16,7 +16,7 @@ void Obj55c89c::screen4AFinish()
     Screen4A * obj = reinterpret_cast<Screen4A *>(this);
     if (scrRunOpcodesStub(obj->job) == 2) {
         messageMainSetTargetFlags(0);
-        FUN_003343f0(0);
+        gameGlobalsSetMenuOpenFlag(0);
         obj->unk18 = 0;
         obj->state = 2;
         obj->unkA870 = 0;

@@ -5,10 +5,10 @@
 extern "C" {
 
 
-/* 1 when bit `index` of the bitset at +0x51 of FUN_002a0d0c's block is clear. */
+/* 1 when bit `index` of the bitset at +0x51 of gameDataGetSortPreferences's block is clear. */
 u8 FUN_00200574(u32 index)
 {
-    u8 *block = FUN_002a0d0c();
+    u8 *block = gameDataGetSortPreferences();
 
     if (((u32)block[(index >> 3) + 0x51] & (1 << (index & 7))) != 0) {
         return 0;

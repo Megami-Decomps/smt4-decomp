@@ -28,7 +28,7 @@ struct LookAtCamera {
 };
 
 extern "C" {
-extern const PhaseTrigEntry DAT_00536d14[];
+extern const PhaseTrigEntry g_sinCosTable[];
 
 void nn_math_ARMv6_MTX34CopyAsm(nw::math::MTX34 *destination, const nw::math::MTX34 *source);
 void nn_math_ARMv6_VEC3TransformAsm_2AD44C(f32 *vector, f32 *matrix);
@@ -42,7 +42,7 @@ void FUN_00407598(LookAtCamera *camera)
     CameraAngles angles = camera->angles;
     Matrix34Data matrix;
     nn_math_ARMv6_MTX34CopyAsm(reinterpret_cast<nw::math::MTX34 *>(&matrix), &nw::math::MTX34::Identity());
-    buildEulerPhaseRotation(&matrix, 1, DAT_00536d14, angles.values[0] * 40.764328f, angles.values[1] * 40.764328f,
+    buildEulerPhaseRotation(&matrix, 1, g_sinCosTable, angles.values[0] * 40.764328f, angles.values[1] * 40.764328f,
                             angles.values[2] * 40.764328f);
     CameraPoint forward;
     forward.x = 0.0f;

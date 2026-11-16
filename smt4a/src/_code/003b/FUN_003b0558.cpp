@@ -18,7 +18,7 @@ extern PartySelectionRollbackView *g_partyPanel;
 PartyStatusSlots *gameGetSlotTable(void);
 BattleSlotSourceRecordA *gameGetSlotRecord(s32 slot);
 void FUN_002ade88(void);
-void FUN_0020b718(s32 mode, s32 enabled);
+void partyPanelChangeState(s32 mode, s32 enabled);
 void FUN_0020d934(void);
 void FUN_0023fc38(void);
 
@@ -49,7 +49,7 @@ void FUN_003b0558(void)
     }
     FUN_002ade88();
     work->panel.unk20 = 8;
-    FUN_0020b718(0, 1);
+    partyPanelChangeState(0, 1);
     FUN_0020d934();
     FUN_0023fc38();
 }

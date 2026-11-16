@@ -9,7 +9,7 @@ PartyStatusSlots *gameGetSlotTable(void);
 BitsAt60 *gameGetSlotRecord(s32 slot);
 s32 gameSlotTableFindFree(void);
 s32 randRange(s32 maximum);
-void FUN_003dfad4(u16 *affinities, const PlayerData *player);
+void demonBuildAffinitySlots(u16 *affinities, const PlayerData *player);
 void affinityResolveUnitSlot(u16 *affinity, const BitsAt60 *unit, u32 element);
 
 static inline s32 statusAffinityAllows(u16 affinity)
@@ -41,7 +41,7 @@ void partyTryInflictCondition(u32 group, u32 condition, s32 chance)
         randRange(99) < chance) {
         s32 canApply = 1;
         if (condition == 5) {
-            FUN_003dfad4(affinities, gameGetPlayerData());
+            demonBuildAffinitySlots(affinities, gameGetPlayerData());
             canApply = statusAffinityAllows(affinities[11]);
         }
         if (canApply) {

@@ -9,7 +9,7 @@ struct BattleUiTaskOwner {
     u32 uiTask; // 0x54
 };
 extern "C" {
-void FUN_002898e4(void);
+void commonBgAcquire(void);
 u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, void *, u32);
 void FUN_003ad76c(BtlUi *, BattleUiTaskOwner *);
 s32 FUN_0019e138(u32 job);
@@ -22,7 +22,7 @@ extern BtlUiGlobals g_btlUi;
 // Allocate battle UI storage and register its calculation and screen draw passes.
 void btlUiCreateTasks(BattleUiTaskOwner *owner)
 {
-    FUN_002898e4();
+    commonBgAcquire();
     if (!g_btlUi.ui) {
         asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\btlUI.cpp", 0xb52);
         g_btlUi.ui = static_cast<BtlUi *>(asdMemAlloc(0x100, 0x100, 0, sizeof(BtlUi), 1));

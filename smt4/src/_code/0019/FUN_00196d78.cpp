@@ -37,7 +37,7 @@ void FUN_0027f3dc(void *base, u32 count, u32 size, s32 (*compare)(const void *, 
 void FUN_00196d78(void)
 {
     UniteWork *work = g_unite;
-    const u8 *setting = &reinterpret_cast<FusionSortPreferences *>(FUN_002a0d0c())->setting;
+    const u8 *setting = &reinterpret_cast<FusionSortPreferences *>(gameDataGetSortPreferences())->setting;
     bool ascending = (*setting & 0x80) == 0;
     if ((*setting & 0x7f) == 1) {
         if (ascending) {

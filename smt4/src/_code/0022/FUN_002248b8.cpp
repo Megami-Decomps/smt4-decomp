@@ -21,7 +21,7 @@ s32 FUN_002248b8(u32 job)
     DrawWork *work = (DrawWork *)jobGetWork(job);
     if (work->enabled) {
         RenderCtx *context = g_titleScene;
-        s32 state = FUN_002865c0(6, 0.0f);
+        s32 state = gxPackFadeKindAlphaWord(6, 0.0f);
         renderStackPush(&context->additional.stackC, state);
         context = g_titleScene;
         state = renderCtxPackPassFlags(1, 0);

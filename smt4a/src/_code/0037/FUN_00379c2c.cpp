@@ -5,7 +5,7 @@ extern "C" {
 s32 FUN_00203d74(void);
 s32 FUN_00162ea4(void);
 void screenFadeSlotReset(u32 channel);
-void FUN_003d54f8(u32 channel, s32 steps);
+void titleSetSlotValueState2(u32 channel, s32 steps);
 
 // Script command: fade channel 0, 1 or both (steps clamped to 4 while FUN_00203d74 is true).
 u32 FUN_00379c2c(void)
@@ -20,8 +20,8 @@ u32 FUN_00379c2c(void)
             screenFadeSlotReset(0);
             screenFadeSlotReset(1);
         } else {
-            FUN_003d54f8(0, steps);
-            FUN_003d54f8(1, steps);
+            titleSetSlotValueState2(0, steps);
+            titleSetSlotValueState2(1, steps);
         }
     }
     return 1;

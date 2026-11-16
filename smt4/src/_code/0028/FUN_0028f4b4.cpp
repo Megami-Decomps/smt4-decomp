@@ -2,7 +2,7 @@
 #include "font/FontStringReader.h"
 extern "C" {
 extern FontRecordPool DAT_00464a70;
-void FUN_002aea44(NwFontGlyph *glyph);
+void nwFontGlyphInit(NwFontGlyph *glyph);
 u32 libc_strlen(const char *text);
 
 // Measure the decoded text, adding spacing for characters present in the selected font.
@@ -11,7 +11,7 @@ f32 FUN_0028f4b4(const char *text, u32 fontIndex, f32 spacing)
     f32 width = 0.0f;
     f32 minimum = 0.0f;
     NwFontGlyph glyph;
-    FUN_002aea44(&glyph);
+    nwFontGlyphInit(&glyph);
     FontRegisteredRecord *record = NULL;
     if (DAT_00464a70.records != NULL && fontIndex < DAT_00464a70.count)
         record = &DAT_00464a70.records[fontIndex];

@@ -11,7 +11,7 @@ bool gameFlagIsSet(u32);
 void messageSetMode(u32);
 void questSetPackedFlag(u32, u32);
 void gameCounterAddSaturating(u32, u32);
-void FUN_0022677c(u32, u32);
+void titleRestartSlotState3(u32, u32);
 void FUN_0027e0d8(void);
 void terminalSignalComplete(void);
 void FUN_002bd4f8(void);
@@ -83,7 +83,7 @@ void FUN_0027fdb8(const u32* destination)
     } else {
         work->transition = 0;
         work->openingMode = 1;
-        FUN_0022677c(0, 0xFF);
+        titleRestartSlotState3(0, 0xFF);
     }
     work->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("TMNL C"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_0027e0d8), reinterpret_cast<AsdProcFunc>(terminalSignalComplete), 0);
     taskCreateDraw("TMNL UD", 0x77, 0, 0, FUN_002bd4f8, 0, 0, work->task);

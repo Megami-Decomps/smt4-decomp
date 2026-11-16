@@ -119,7 +119,7 @@ u8 *FUN_00239200(void);
 extern "C" {
 #endif
 
-void FUN_00333574(u32 bits);
+void gameDataBlocksOrFlagsClearUnk02(u32 bits);
 
 #ifdef __cplusplus
 }

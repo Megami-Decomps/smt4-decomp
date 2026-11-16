@@ -10,7 +10,7 @@ struct InterpolationSample {
 };
 
 extern "C" {
-extern const InterpolationSample DAT_00536d14[256];
+extern const InterpolationSample g_sinCosTable[256];
 f32 FUN_001b4030(f32 value, f32 divisor);
 
 // Interpolate the absolute input through the periodic 256-sample lookup table.
@@ -21,7 +21,7 @@ f32 FUN_001b63b0(f32 value)
         phase = FUN_001b4030(phase, 65536.0f);
     }
     u16 index = (u32)phase;
-    const InterpolationSample *sample = &DAT_00536d14[index & 0xff];
+    const InterpolationSample *sample = &g_sinCosTable[index & 0xff];
     f32 fraction = phase - (f32)index;
     return sample->value + fraction * sample->slope;
 }

@@ -14,7 +14,7 @@ int FUN_001f8290(...);
 int btlGameOverCreateTasks(...);
 int gameDataEntrySetLevel(...);
 int messageForwardDefaultMode(...);
-int FUN_002903f0(void);
+int rosterGetLeaderId(void);
 int textEncodeFontSlot(...);
 int infoWinStartTimer(...);
 int asdLoadFileAsyncSimple(...);
@@ -32,7 +32,7 @@ int FUN_0033a670(...);
 int FUN_0033b3c4(...);
 int FUN_00348c10(...);
 int btlHelpFreeEntries(void);
-int FUN_003d9be4(...);
+int btlEffectReleaseResources(...);
 
 int FUN_001d2628(...);
 int btlEventTaskStart(...);
@@ -55,7 +55,7 @@ void bgmRequestSelectedChannelFade(unsigned int frames);
 int btlTalkBustUpCreate(void);
 int gameCounterAddSaturating(...);
 int soundChannelRequestIfEnabled(...);
-int FUN_002bff50(void);
+int messageSetConfirmDisplayMode(void);
 int battleInitializeEnemyFormation(...);
 int FUN_003ae134(...);
 int FUN_003c7c84(...);
@@ -155,8 +155,8 @@ extern int FUN_0027e3b8(unsigned int *);
 /* Supplied declaration required: FUN_0027e760. */
 extern int table1bOr1cGetRecordValue(void);
 /* Supplied declaration required: gameOptionsEnableAndReset. */
-extern int FUN_0029022c(void);
-/* Supplied declaration required: FUN_002903f0. */
+extern int rosterHasLeader(void);
+/* Supplied declaration required: rosterGetLeaderId. */
 /* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: btlTalkBustUpCreate. */
 /* Supplied declaration required: infoWinStartTimer. */
@@ -175,7 +175,7 @@ extern int gameGetOptionProgressStatus(void);
 /* Supplied declaration required: dataTable01FindByIdWithAoc. */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_002bff50. */
+/* Supplied declaration required: messageSetConfirmDisplayMode. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: memClear. */
@@ -198,7 +198,7 @@ extern int FUN_003bf0a4(void);
 /* Supplied declaration required: FUN_003c7f20. */
 /* Supplied declaration required: FUN_003c8428. */
 /* Supplied declaration required: FUN_003c86bc. */
-/* Supplied declaration required: FUN_003d9be4. */
+/* Supplied declaration required: btlEffectReleaseResources. */
 
 
 void FUN_001fc6e8(unsigned int param_1)
@@ -354,7 +354,7 @@ void FUN_001fc6e8(unsigned int param_1)
     FUN_0021ae40(temp_v4);
     FUN_001d2628(temp_v4);
     btlTalkBustUpCreate();
-    FUN_002bff50();
+    messageSetConfirmDisplayMode();
     bgmRequestSelectedChannelFade(0x1e);
     temp_v3 = *(int *)(temp_v4 + 0xec);
     *(int *)(temp_v4 + 0x49dc) = temp_v3;
@@ -631,9 +631,9 @@ void FUN_001fc6e8(unsigned int param_1)
     return;
   case 0xf:
     if (*(int *)(temp_v4 + 0x88) == 0) {
-      temp_v3 = FUN_0029022c();
+      temp_v3 = rosterHasLeader();
       if (temp_v3 != 0) {
-        FUN_002903f0();
+        rosterGetLeaderId();
         temp_v3 = table1bOr1cGetRecordValue();
         if (temp_v3 != 0 && temp_v3 != 3) {
           temp_v3 = gameGetSupportUnitData();
@@ -728,7 +728,7 @@ LAB_001fd348:
         dataTable01FindByIdWithAoc(temp_v6);
         libc_strcpy(&temp_v16,temp_v6);
         textEncodeFontSlot(0xd,&temp_v16);
-        FUN_002bff50();
+        messageSetConfirmDisplayMode();
         messageForwardDefaultMode(*(unsigned int *)(temp_v4 + 0x2230),0,0,6,0);
         *(unsigned int *)(temp_v4 + 0x44a0) = *(unsigned int *)(temp_v4 + 0x44a0) | 0x100000;
         buttonHelpSetPreset(0x90);
@@ -738,7 +738,7 @@ LAB_001fd348:
     break;
   case 0x14:
     soundChannelStopAll(0xf);
-    FUN_003d9be4(DAT_00435d18,temp_v4);
+    btlEffectReleaseResources(DAT_00435d18,temp_v4);
     temp_v3 = dialogIsActive();
     if (temp_v3 != 0) {
       infoWinStartTimer(1);

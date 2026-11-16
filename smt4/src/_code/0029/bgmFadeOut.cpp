@@ -2,7 +2,7 @@
 
 extern "C" {
 extern BgmChannelSelection g_titleConfigModeFlag;
-extern BgmRequestChannel DAT_004c53c4;
+extern BgmRequestChannel g_bgmRequestChannels;
 extern BgmRequestChannel DAT_004c53e4;
 int jyoucyuGetTableEntry(u32 index);
 }
@@ -26,7 +26,7 @@ static __inline void bgmFadeChannel(BgmRequestChannel *channel, u32 parameter)
 extern "C" void bgmFadeOut(u32 parameter)
 {
     if (jyoucyuGetTableEntry(1) == 0) {
-        bgmFadeChannel(&DAT_004c53c4, parameter);
+        bgmFadeChannel(&g_bgmRequestChannels, parameter);
         bgmFadeChannel(&DAT_004c53e4, parameter);
     }
 }

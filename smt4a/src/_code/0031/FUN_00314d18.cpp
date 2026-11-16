@@ -8,7 +8,7 @@ s32 scrGetCommandFrame(void);
 s32 frameTextureGetState(void);
 void slotSetRequest(u32 screen, s32 duration, u32 color);
 s32 FUN_00162ea4(void);
-void FUN_0022677c(u32 screen, u32 color);
+void titleRestartSlotState3(u32 screen, u32 color);
 
 u32 FUN_00314d18(void)
 {
@@ -44,13 +44,13 @@ u32 FUN_00314d18(void)
             switch (colorMode) {
             case 0:
                 if (!frameTextureGetState())
-                    FUN_0022677c(0, 0xFF);
-                FUN_0022677c(1, 0xFF);
+                    titleRestartSlotState3(0, 0xFF);
+                titleRestartSlotState3(1, 0xFF);
                 break;
             case 1:
                 if (!frameTextureGetState())
-                    FUN_0022677c(0, 0xFFFFFFFF);
-                FUN_0022677c(1, 0xFFFFFFFF);
+                    titleRestartSlotState3(0, 0xFFFFFFFF);
+                titleRestartSlotState3(1, 0xFFFFFFFF);
                 break;
             }
         }

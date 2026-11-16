@@ -11,13 +11,13 @@ struct NavigationMapWork {
     u32 field;
 };
 extern NavigationMapWork *g_naviMain;
-void FUN_002314e8(u32 *field, u32 map);
+void naviFieldSetCurrentMap(u32 *field, u32 map);
 
 /* Select the current navigation map and reset its counter. */
 void NaviMain_SetCurrentMap(u32 map)
 {
     MapCounter current = {map, 0};
     g_naviMain->current = current;
-    FUN_002314e8(&g_naviMain->field, map);
+    naviFieldSetCurrentMap(&g_naviMain->field, map);
 }
 }

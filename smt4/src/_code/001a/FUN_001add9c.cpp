@@ -51,7 +51,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_00215d68. */
 /* Supplied declaration required: uiDrawListScrollBar. */
 /* Supplied declaration required: debugDrawText. */
-extern int FUN_002a0d0c(void);
+extern int gameDataGetSortPreferences(void);
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: texDrawCompositeSprite. */
@@ -218,7 +218,7 @@ unsigned int FUN_001add9c(void)
     temp_v8 = vec2GetYInt(temp_v3 + 0x1c8);
     FUN_00215d68(temp_v7,temp_v8);
   }
-  temp_v5 = FUN_002a0d0c();
+  temp_v5 = gameDataGetSortPreferences();
   temp_v9 = temp_v5 + 0x1c;
   if (*(int *)(temp_v3 + 0x400) == 5 || *(int *)(temp_v3 + 0x400) == 6) {
     temp_v14 = *(char *)(temp_v3 + 0x9450) != '\0';

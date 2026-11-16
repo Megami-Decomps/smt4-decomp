@@ -4,9 +4,9 @@ extern "C" {
 extern void *g_camp;
 PlayerInitialRecordIV *gameGetPlayerData();
 u32 resourceRunOperationIfUnblocked(const void *selector);
-u32 FUN_0029efa8(const void *selector);
+u32 listCursorGetRowIfUnblocked(const void *selector);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
-void FUN_00299370(PlayerInitialRecordIV *player);
+void playerRecalcStatsFromEquipment(PlayerInitialRecordIV *player);
 void FUN_0029a0cc(PlayerInitialRecordIV *player);
 void FUN_0029c4ac(s32 mode);
 
@@ -37,7 +37,7 @@ void campPreviewSelectedEquipment(s32 category)
     else if (category == 22) { selector = camp->selectors[5]; choices = camp->legs; }
     else if (category == 23) { selector = camp->selectors[6]; choices = camp->accessories; }
     u32 selected = resourceRunOperationIfUnblocked(selector);
-    selected += FUN_0029efa8(selector);
+    selected += listCursorGetRowIfUnblocked(selector);
     PlayerInitialRecordIV preview;
     __aeabi_memcpy4(&preview, player, sizeof(preview));
     if (category == 17) preview.equipment[0] = choices[selected];
@@ -47,7 +47,7 @@ void campPreviewSelectedEquipment(s32 category)
     else if (category == 21) preview.equipment[4] = choices[selected];
     else if (category == 22) preview.equipment[5] = choices[selected];
     else if (category == 23) preview.equipment[6] = choices[selected];
-    FUN_00299370(&preview);
+    playerRecalcStatsFromEquipment(&preview);
     FUN_0029a0cc(&preview);
     FUN_0029c4ac(0);
 }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0017dd84(void);
+int asdGxCommandBufferTerminateAndSubmit(void);
 int asdGfxCmdBufferForward8(...);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -28,7 +28,7 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-/* Supplied declaration required: FUN_0017dd84. */
+/* Supplied declaration required: asdGxCommandBufferTerminateAndSubmit. */
 /* Supplied declaration required: asdGfxCmdBufferForward8. */
 
 
@@ -193,7 +193,7 @@ void FUN_00177684(unsigned int *param_1,unsigned int param_2,int param_3)
   }
   if ((param_2 & 3) != 0) {
     if (param_3 != 0) {
-      FUN_0017dd84();
+      asdGxCommandBufferTerminateAndSubmit();
     }
     temp_v2 = 0;
     if ((param_2 & 6) != 0) {

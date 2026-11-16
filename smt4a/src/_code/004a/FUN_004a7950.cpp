@@ -20,7 +20,7 @@ s32 textFormatBuffer(char *output, const char *format, ...);
 LayoutPart *layoutFindTableEntry(void *layout, u32 partId);
 void drawTextAtRelativePosition(void *layout, u32 drawContext, s32 x, s32 y, u32 option0, u32 option1,
                   u32 color, u32 alpha, const char *text);
-void FUN_004934ac(void *layout, u32 partId, u32 option0, u32 option1, u32 alpha);
+void uiDrawTableTextureAtRectCorner(void *layout, u32 partId, u32 option0, u32 option1, u32 alpha);
 
 /* Draws the window's frame and the value as a three-digit percentage. */
 void FUN_004a7950(PercentWindow *window, s32 value, u32 alpha)
@@ -29,7 +29,7 @@ void FUN_004a7950(PercentWindow *window, s32 value, u32 alpha)
     u32 color = 0xffffffff;
     LayoutPart *part;
 
-    FUN_004934ac(window->layout, 0x407, 0, 0, alpha);
+    uiDrawTableTextureAtRectCorner(window->layout, 0x407, 0, 0, alpha);
     textFormatBuffer(text, "%3d", value);
     if (window->style == 'd') {
         color = 0x72e027ff;

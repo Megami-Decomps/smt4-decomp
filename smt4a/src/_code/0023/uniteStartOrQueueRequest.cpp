@@ -4,7 +4,7 @@ extern "C" {
 
 void sysPlaySe(s32 id);
 s32 scrRunOpcodesStub(u32 handle);
-s32 FUN_003343f0(s32 value);
+s32 gameGlobalsSetMenuOpenFlag(s32 value);
 s32 scrScriptProcessStartEntry(u32 handle, s32 request);
 
 typedef struct Record {
@@ -35,10 +35,10 @@ u32 uniteStartOrQueueRequest(s32 request)
                 if (((!(request == 8 || request == 9)) && (!(request == 10 || request == 0xB))) &&
                     (!(request == 0xC || request == 0xE))) {
                     if (request == 0xD) {
-                        FUN_003343f0(1);
+                        gameGlobalsSetMenuOpenFlag(1);
                     }
                 } else {
-                    FUN_003343f0(1);
+                    gameGlobalsSetMenuOpenFlag(1);
                     sysPlaySe(0xA0);
                 }
                 record->pending = 0xFFFFFFFF;

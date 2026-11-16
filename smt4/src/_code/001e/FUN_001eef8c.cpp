@@ -59,7 +59,7 @@ extern int uniteGetWork(void);
 extern int ifTouchGetSelectionModeForRegion(int);
 extern unsigned int FUN_0029dde0(void);
 /* Supplied declaration required: FUN_0029e6f0. */
-extern int FUN_0029efa8(int);
+extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int *gameGetSlotTable(void);
 /* Supplied declaration required: partyMemberFindById. */
@@ -317,12 +317,12 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
       } while (temp_v4 < temp_v8);
     }
     temp_v4 = resourceRunOperationIfUnblocked(temp_v18);
-    temp_v6 = FUN_0029efa8(temp_v18);
+    temp_v6 = listCursorGetRowIfUnblocked(temp_v18);
     temp_v8 = temp_v21;
     temp_v9 = temp_v20;
     if (temp_v22 != 0) {
       temp_v1 = *(unsigned short *)(temp_v2 + (temp_v6 + temp_v4) * 2 + 0x6ce2);
-      temp_v4 = FUN_0029efa8(temp_v18);
+      temp_v4 = listCursorGetRowIfUnblocked(temp_v18);
       temp_v4 = asdTMTexTableEntryAt(0x24,temp_v4 + 0x146);
       efctSetSpeed();
       texDrawTableEntryAtStoredOrigin(2,0x24,0x12a,*(short *)(temp_v4 + 8) + temp_v9,*(short *)(temp_v4 + 10) + temp_v8,0x79)
@@ -332,7 +332,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
       efctSetSpeed();
       texDrawTableEntryAtStoredOrigin(2,0x24,0x12d,*(short *)(temp_v4 + 8) + temp_v9,*(short *)(temp_v4 + 10) + temp_v8,0x7e)
       ;
-      temp_v6 = FUN_0029efa8(temp_v18);
+      temp_v6 = listCursorGetRowIfUnblocked(temp_v18);
       temp_v6 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v2 + temp_v6 * 2 + 0x438));
       temp_v13 = *(short *)(temp_v4 + 10) + temp_v8;
       temp_v10 = *(short *)(temp_v4 + 8) + temp_v9;

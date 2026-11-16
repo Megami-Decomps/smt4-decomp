@@ -14,7 +14,7 @@ extern "C" {
 void pairSetSecondResetFirst(EventPanelSprite *, u32);
 void uiSpriteSelectAnim(EventPanelSprite *, u32);
 void uiSpriteSetKeyframe(EventPanelSprite *, u32, u32);
-s32 FUN_00291e14();
+s32 btlIsDefeatSuppressed();
 
 void eventPanelSelectSpritePreset(EventPanelPresetWork *work, s32 mode, u8 optionB, u8 optionA, u8 animated)
 {
@@ -24,7 +24,7 @@ void eventPanelSelectSpritePreset(EventPanelPresetWork *work, s32 mode, u8 optio
     work->optionB = optionB;
     work->animated = animated;
     if (mode == 0) {
-        if (FUN_00291e14()) {
+        if (btlIsDefeatSuppressed()) {
             pairSetFirstResetSecond(&work->sprites[0], 41);
             uiSpriteSelectAnim(&work->sprites[0], 0);
             pairSetSecondResetFirst(&work->sprites[3], 9);

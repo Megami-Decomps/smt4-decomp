@@ -48,7 +48,7 @@ u8 gaugePercent(CompendiumEntryListIV *list, u32 scale);
 void *jyoucyuGetTableEntry(s32 index);
 void *FUN_0023a1b8(void *object);
 void FUN_003a9bb4(void *screen);
-void FUN_00233670(Obj55ca08 *selection, u32 table, u32 first, s32 count);
+void messageIdListInit(Obj55ca08 *selection, u32 table, u32 first, s32 count);
 
 // Populate registered compendium entries and synchronize its list window and touch regions.
 void FUN_003a8aa0(Obj42247c *screen)
@@ -89,10 +89,10 @@ void FUN_003a8aa0(Obj42247c *screen)
     window = reinterpret_cast<Obj4221a4 *>(screen->touchSelection.unk34);
     window->state |= 0x1000;
     if (block->mode != 0) {
-        FUN_00233670(&screen->touchSelection, 0x1c, 0x1030, work->visibleCount >= 10 ? 10 : work->visibleCount);
+        messageIdListInit(&screen->touchSelection, 0x1c, 0x1030, work->visibleCount >= 10 ? 10 : work->visibleCount);
         screen->touchSelection.soundEnabled = 1;
     } else {
-        FUN_00233670(&screen->touchSelection, 0x1d, 0x40e, work->visibleCount >= 10 ? 10 : work->visibleCount);
+        messageIdListInit(&screen->touchSelection, 0x1d, 0x40e, work->visibleCount >= 10 ? 10 : work->visibleCount);
         screen->touchSelection.soundEnabled = 1;
     }
 }

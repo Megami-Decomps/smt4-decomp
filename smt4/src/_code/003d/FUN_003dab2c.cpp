@@ -35,7 +35,7 @@ void memClear(void *block, s32 size);
 s32 keyedRecordFindByName(const char *name);
 void FUN_002276f8(EffectWork *work);
 u32 FUN_00246644(u32 index, u32 kind, u32 flag);
-char *FUN_002522e0(const char *text, s32 character);
+char *libc_strrchr(const char *text, s32 character);
 void asdLoadFileAsyncSimple(const char *path, u32 *file, s32 flag);
 
 /* Prepares the four effect names: names naming a reference model select it, and every other name that is
@@ -103,7 +103,7 @@ u32 FUN_003dab2c(EffectWork *work)
             }
         }
         EffectSlot *slot = &work->slots[i];
-        libc_strcpy(slot->name, FUN_002522e0(path, '/') + 1);
+        libc_strcpy(slot->name, libc_strrchr(path, '/') + 1);
         if (keyedRecordFindByName(slot->name) == 0xff) {
             asdLoadFileAsyncSimple(path, &slot->file, 0);
             slot->flags |= 1;

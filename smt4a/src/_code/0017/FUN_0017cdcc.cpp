@@ -15,7 +15,7 @@ extern "C" {
 
 extern s32 g_commandBufferCursor;
 
-void FUN_0017dd84(void);
+void asdGxCommandBufferTerminateAndSubmit(void);
 void globalCriticalSectionEnterForward(void);
 void globalCriticalSectionLeaveForward(void);
 void FUN_001963e0(void);
@@ -28,7 +28,7 @@ void FUN_0017cdcc(u32 first, u32 second)
 
     pool->unk0C = g_commandBufferCursor - pool->start;
     if (pool->unk14 != pool->unk0C) {
-        FUN_0017dd84();
+        asdGxCommandBufferTerminateAndSubmit();
     }
     if (pool->unk14 != pool->unk0C) {
         return;

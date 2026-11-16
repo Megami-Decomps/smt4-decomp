@@ -17,7 +17,7 @@ struct ListTransitionWork {
 extern "C" {
 s32 rangeLimitMin(ListTransitionWork *);
 void uiSpriteAdvanceAnimation(UiSpriteState *);
-void FUN_002b8ee0(UiSpriteState *, s32);
+void uiSlidingSpriteAdvance(UiSpriteState *, s32);
 s8 uiSpriteGetCompletionState(const UiSpriteState *);
 }
 
@@ -37,7 +37,7 @@ extern "C" s32 listUpdateRevealTransition(ListTransitionWork *work)
     }
     ++work->revealed;
     UiSpriteState *slide = &work->slide;
-    FUN_002b8ee0(slide, 0);
+    uiSlidingSpriteAdvance(slide, 0);
     if (uiSpriteGetCompletionState(slide) && work->revealed > count &&
         uiSpriteGetCompletionState(&work->rows[count - 1])) {
         work->complete = 1;

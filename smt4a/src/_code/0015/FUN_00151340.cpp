@@ -31,9 +31,9 @@ struct AsdSoundSystemLoadView {
 extern "C" {
 
 extern AsdSoundSystemLoadView g_asdSoundSystem;
-s32 FUN_00178400(void *archive, u32 soundId, SoundInfo *info);
+s32 soundArchiveReadSoundInfoWithExtension(void *archive, u32 soundId, SoundInfo *info);
 s32 FUN_00178458(void *archive, u32 playerId, PlayerInfo *info);
-s32 FUN_001787a8(SoundLoader *loader, u32 id, u32 flags);
+s32 soundArchiveLoaderIsItemLoaded(SoundLoader *loader, u32 id, u32 flags);
 s32 FUN_001753d4(SoundLoader *loader, u32 id, void *heap, u32 flags, u32 blockSize);
 
 /* Make sure a sound's data is loaded: sounds whose player has its own heap need nothing, others load into the shared heap. */
@@ -45,13 +45,13 @@ s32 FUN_00151340(u32 soundId)
     SoundInfo sound;
     PlayerInfo player = {0, 0};
 
-    FUN_00178400(system->archive, soundId, &sound);
+    soundArchiveReadSoundInfoWithExtension(system->archive, soundId, &sound);
     FUN_00178458(system->archive, sound.playerId, &player);
     if (player.playerHeapSize != 0) {
         return 1;
     }
     if (heap != NULL) {
-        if (FUN_001787a8(&system->loader, soundId, 0xffffffff)) {
+        if (soundArchiveLoaderIsItemLoaded(&system->loader, soundId, 0xffffffff)) {
             return 1;
         }
         result = FUN_001753d4(&system->loader, soundId, heap, 0xffffffff, 0);

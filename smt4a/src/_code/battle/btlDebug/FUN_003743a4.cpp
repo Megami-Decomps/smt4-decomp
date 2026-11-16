@@ -76,7 +76,7 @@ extern int flagValueRead(int);
 extern int recordGetModeForId(int);
 extern unsigned char *btlMainGetUnk14(void);
 extern int resourceRunOperationIfUnblocked(unsigned int);
-extern int FUN_002a4894(unsigned int);
+extern int listCursorGetRowIfUnblocked(unsigned int);
 extern int FUN_002cc9e0(int, unsigned int);
 extern unsigned int FUN_002f8e98(unsigned int);
 extern int FUN_002fa75c(void);
@@ -88,7 +88,7 @@ extern int FUN_00372794(int, int, unsigned char *);
 extern int FUN_003df57c(int, unsigned int);
 extern int gameDataFlagTestBit(int);
 extern short halfTableGet(unsigned int, unsigned int);
-extern int FUN_004bcbb4(unsigned char *, int);
+extern int skillGetAdjustedCost(unsigned char *, int);
 
 
 void FUN_003743a4(int param_1)
@@ -332,7 +332,7 @@ void FUN_003743a4(int param_1)
   }
   temp_v8 = 0;
   temp_v3 = resourceRunOperationIfUnblocked(*(unsigned int *)(param_1 + 0x3c40));
-  temp_v6 = FUN_002a4894(*(unsigned int *)(param_1 + 0x3c40));
+  temp_v6 = listCursorGetRowIfUnblocked(*(unsigned int *)(param_1 + 0x3c40));
   temp_v5 = temp_v3 + temp_v6;
   temp_v3 = FUN_002cc9e0(param_1,1);
   if (temp_v3 != 1) {
@@ -510,13 +510,13 @@ void FUN_003743a4(int param_1)
           temp_v8 = (int)(short)temp_v5;
           temp_v9 = FUN_0014bd84(temp_v8);
           textFormatBuffer(temp_v19,"%s",temp_v9);
-          temp_v3 = FUN_004bcbb4(temp_v17,temp_v8);
+          temp_v3 = skillGetAdjustedCost(temp_v17,temp_v8);
         }
         else {
           temp_v8 = (int)*(short *)(param_1 + *piVar15 * 0x10 + temp_v5 * 2 + 0x3c42);
           temp_v9 = FUN_0014bd84(temp_v8);
           textFormatBuffer(temp_v19,"%s",temp_v9);
-          temp_v3 = FUN_004bcbb4(temp_v17,temp_v8);
+          temp_v3 = skillGetAdjustedCost(temp_v17,temp_v8);
         }
         temp_v14 = 1;
       }

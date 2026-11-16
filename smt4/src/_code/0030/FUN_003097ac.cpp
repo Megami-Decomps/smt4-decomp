@@ -6,8 +6,8 @@ s32 asdGxGetCurrentPresetKind(void);
 u32 FUN_002ae1e8(u32 kind);
 void cursorResetFromParam(void);
 void asdModelCommandBlockRelease(void);
-extern u32 *DAT_004729e0;
-extern u32 DAT_004729e4;
+extern u32 *g_modelCommandBuffer;
+extern u32 g_modelCommandWordCount;
 
 void FUN_003097ac(u32 extent)
 {
@@ -42,10 +42,10 @@ void FUN_003097ac(u32 extent)
         }
         command |= bottom;
     }
-    u32 *buffer = DAT_004729e0;
-    DAT_004729e0[DAT_004729e4] = command;
-    buffer[DAT_004729e4 + 1] = 0xF0067;
-    DAT_004729e4 += 2;
+    u32 *buffer = g_modelCommandBuffer;
+    g_modelCommandBuffer[g_modelCommandWordCount] = command;
+    buffer[g_modelCommandWordCount + 1] = 0xF0067;
+    g_modelCommandWordCount += 2;
     asdModelCommandBlockRelease();
 }
 }

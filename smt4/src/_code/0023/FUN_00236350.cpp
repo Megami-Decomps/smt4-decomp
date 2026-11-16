@@ -16,7 +16,7 @@ struct TransformBlock {
 struct TranslationBits { u32 x, y, z; };
 
 extern "C" {
-extern const PhaseTrigEntry DAT_00407ed0[];
+extern const PhaseTrigEntry g_sinCosTable[];
 
 /* Builds a rotation matrix from XYZ Euler angles and sets its translation. */
 void FUN_00236350(TransformBlock *matrix, const PhaseVector *angles, const TranslationBits *translation)
@@ -36,9 +36,9 @@ void FUN_00236350(TransformBlock *matrix, const PhaseVector *angles, const Trans
     u16 xWhole = (u32)xMagnitude;
     u16 yWhole = (u32)yMagnitude;
     u16 zWhole = (u32)zMagnitude;
-    const PhaseTrigEntry *xEntry = &DAT_00407ed0[(u8)xWhole];
-    const PhaseTrigEntry *yEntry = &DAT_00407ed0[(u8)yWhole];
-    const PhaseTrigEntry *zEntry = &DAT_00407ed0[(u8)zWhole];
+    const PhaseTrigEntry *xEntry = &g_sinCosTable[(u8)xWhole];
+    const PhaseTrigEntry *yEntry = &g_sinCosTable[(u8)yWhole];
+    const PhaseTrigEntry *zEntry = &g_sinCosTable[(u8)zWhole];
     f32 xFraction = xMagnitude - (f32)xWhole;
     f32 yFraction = yMagnitude - (f32)yWhole;
     f32 zFraction = zMagnitude - (f32)zWhole;

@@ -18,7 +18,7 @@ extern "C" nn::Result FUN_00317e50(const char *path)
 
     if (!pathBuildWide(path, reinterpret_cast<s16 *>(resolved), 1)) {
         result = 0xe0e046bc;
-        FUN_0013ebd8(result);
+        processResultSetValue(result);
         return result;
     }
     u32 length = libc_strlen(path);
@@ -29,6 +29,6 @@ extern "C" nn::Result FUN_00317e50(const char *path)
         FUN_001886bc();
         result = FUN_00188444(resolved);
     }
-    FUN_0013ebd8(result);
+    processResultSetValue(result);
     return result;
 }

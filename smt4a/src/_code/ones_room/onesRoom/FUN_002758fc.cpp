@@ -15,7 +15,7 @@ void sysPlaySe(s32 sound);
 void *asdLoadFileSyncDefault(const char *path);
 ScriptRunState *scrScriptProcessCreate(void *script, void *messages);
 void scrScriptProcessStartEntry(void *process, s32 entry);
-void FUN_0022677c(s32 screen, s32 alpha);
+void titleRestartSlotState3(s32 screen, s32 alpha);
 s32 onesRoomTeardown(u32 job);
 void onesRoomRequestTransition();
 
@@ -41,8 +41,8 @@ void FUN_002758fc(s32 inactive)
     scrScriptProcessStartEntry(room->process, 0);
     room->freeOnEnd = 0;
     if (room->active) {
-        FUN_0022677c(0, 0xff);
-        FUN_0022677c(1, 0xff);
+        titleRestartSlotState3(0, 0xff);
+        titleRestartSlotState3(1, 0xff);
     }
     g_onesRoom->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("onesRoom C"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(onesRoomTeardown), reinterpret_cast<AsdProcFunc>(onesRoomRequestTransition), reinterpret_cast<u32>(g_onesRoom));
 }

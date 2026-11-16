@@ -6,10 +6,10 @@ extern "C" {
 extern s32 scrGetArg(s32 index);
 extern Unit3FC *btlMainFindEntryByListedId(void *state, s32 id);
 extern u32 gameGetSlotRecord(s32 index);
-extern void FUN_004bcd1c(u32 unit, u32 value);
+extern void unitSetGrowthRankAndRaiseStats(u32 unit, u32 value);
 extern void recordRestoreScaledMaximumPair(u32 unit);
 
-/* Script command: for unit `argument 0` (battle roster below 0x6D, else party) runs FUN_004bcd1c with argument 1 and recordRestoreScaledMaximumPair. */
+/* Script command: for unit `argument 0` (battle roster below 0x6D, else party) runs unitSetGrowthRankAndRaiseStats with argument 1 and recordRestoreScaledMaximumPair. */
 u32 scrCommUnitApply(void)
 {
     s32 id = scrGetArg(0);
@@ -22,7 +22,7 @@ u32 scrCommUnitApply(void)
     } else {
         unit = gameGetSlotRecord(id - 0x6D);
     }
-    FUN_004bcd1c(unit, value);
+    unitSetGrowthRankAndRaiseStats(unit, value);
     recordRestoreScaledMaximumPair(unit);
     return 1;
 }

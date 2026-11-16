@@ -4,9 +4,9 @@
 
 extern "C" {
 
-void FUN_00152c00(AsdMdlNode *node);
+void asdMdlLightBatchRemove(AsdMdlNode *node);
 void asdMdlListDestroyModels(AsdMdlObject *obj);
-void FUN_00152894(AsdMdlNode *node, void *data);
+void asdMdlManagerReleaseResources(AsdMdlNode *node, void *data);
 s32 asdMdlNodeGetCount(const AsdMdlNode *node);
 LookupListNode *lookupListFindByKey(const LookupList *list, u32 key);
 IndexedNode *indexedListErase(IndexedList *list, IndexedNode *node);
@@ -22,7 +22,7 @@ void asdMdlManagerDestroy(AsdMdlObject *obj)
 
     if (obj->node->unk0c >= 0) {
         obj->flags |= 0x200000;
-        FUN_00152c00(obj->node);
+        asdMdlLightBatchRemove(obj->node);
     }
     asdMdlListDestroyModels(obj);
     if (obj->records != NULL) {
@@ -38,7 +38,7 @@ void asdMdlManagerDestroy(AsdMdlObject *obj)
         asdMemFree(obj->records);
         obj->records = NULL;
     }
-    FUN_00152894(obj->node, obj->request);
+    asdMdlManagerReleaseResources(obj->node, obj->request);
     removed = lookupListFindByKey(reinterpret_cast<const LookupList *>(&g_asdMdlList), reinterpret_cast<u32>(obj));
     if (removed != NULL) {
         indexedListErase(&g_asdMdlList, reinterpret_cast<IndexedNode *>(removed));

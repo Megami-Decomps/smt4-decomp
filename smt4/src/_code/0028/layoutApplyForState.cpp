@@ -16,7 +16,7 @@ typedef struct Object002880a8 {
 } Object002880a8;
 
 void gpuWriteVertexUniformMatrix(u32 handle, void *target);
-void FUN_002bbbc8(Object002880a8 *object, void *set, s32 zero, void *args);
+void cameraComposeMatrices(Object002880a8 *object, void *set, s32 zero, void *args);
 
 /* Applies the layout the object's state asks for (3 for states 0/1, 4 for state 2, otherwise none), if it changed. */
 void layoutApplyForState(Object002880a8 *object)
@@ -39,7 +39,7 @@ void layoutApplyForState(Object002880a8 *object)
         break;
     }
     if (object->kind != kind) {
-        FUN_002bbbc8(object, set, 0, object->args);
+        cameraComposeMatrices(object, set, 0, object->args);
         gpuWriteVertexUniformMatrix(object->handle, object->target);
         object->kind = kind;
     }

@@ -19,7 +19,7 @@ typedef struct Camera {
     /* 0x1198 */ Mtx44 out3;
 } Camera;
 
-extern void FUN_00187a84(Camera *camera, Mtx44 *a, Mtx44 *b, Mtx44 *c);
+extern void cameraComposeMatrices(Camera *camera, Mtx44 *a, Mtx44 *b, Mtx44 *c);
 extern void gpuWriteVertexUniformMatrix(u32 owner, Mtx44 *out);
 extern void mtx44Copy(Mtx44 *dest, const Mtx44 *src);
 extern void nn_math_ARMv6_MTX44TransposeAsm(Mtx44 *dest, const Mtx44 *src);
@@ -30,7 +30,7 @@ void camSetMatrixA(Camera *camera, const Mtx44 *matrix)
     if (camera->dirty != 0 || rt_memcmp(matrix, &camera->matrixA, sizeof(Mtx44)) != 0) {
         mtx44Copy(&camera->matrixA, matrix);
         nn_math_ARMv6_MTX44TransposeAsm(&camera->matrixB, &camera->matrixA);
-        FUN_00187a84(camera, &camera->out2, &camera->out1, &camera->matrixA);
+        cameraComposeMatrices(camera, &camera->out2, &camera->out1, &camera->matrixA);
         gpuWriteVertexUniformMatrix(camera->owner, &camera->out3);
         camera->dirty = 0;
     }

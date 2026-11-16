@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern UiCallbackContext *DAT_0043d9f8;
+extern UiCallbackContext *g_uiCallbackContext;
 
 /* Runs the UI object's update callback. */
 s32 FUN_003ace14()
 {
-    DAT_0043d9f8->object->update();
+    g_uiCallbackContext->object->update();
     return 0;
 }
 

@@ -32,7 +32,7 @@ extern SoundTestRequestWork *g_requestWork;
 void jobStop(u32 job, s32 flags);
 u32 padButtonIsPressed(u32 button);
 u32 padButtonRepeat(u32 button);
-void FUN_003d4c68(u32 sound);
+void bgmResumeOrRequestTrack(u32 sound);
 void bgmRequestSelectedChannelFade(u32 frames);
 void soundChannelRequestIfEnabled(u32 sound, u32 channel, u32 frames);
 void soundChannelStopAll(u32 frames);
@@ -61,7 +61,7 @@ u32 soundTestActionMenuUpdate()
         if (padButtonIsPressed(0)) {
             switch (work->selection) {
             case 0:
-                FUN_003d4c68(0x100000f);
+                bgmResumeOrRequestTrack(0x100000f);
                 break;
             case 1:
                 bgmRequestSelectedChannelFade(30);

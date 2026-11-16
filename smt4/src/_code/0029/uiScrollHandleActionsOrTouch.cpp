@@ -11,7 +11,7 @@ s32 FUN_0028cfbc(FlaggedEntry *);
 s32 resourceRunEmbeddedOperationIfUnblocked(FlaggedEntry *);
 s32 objectPartRunUnlessLocked(FlaggedEntry *);
 s32 resourceRunOperationIfUnblocked(FlaggedEntry *);
-s32 FUN_0029efa8(FlaggedEntry *);
+s32 listCursorGetRowIfUnblocked(FlaggedEntry *);
 void flaggedEntrySetValueA(FlaggedEntry *, s32);
 void flaggedEntrySetValueB(FlaggedEntry *, s32);
 void eventQueueAddUnique(u32);
@@ -45,7 +45,7 @@ u32 uiScrollHandleActionsOrTouch(FlaggedEntry *owner, const SpriteInfo *sprite, 
     s32 previousX = resourceRunEmbeddedOperationIfUnblocked(owner);
     previousX += objectPartRunUnlessLocked(owner);
     s32 previousY = resourceRunOperationIfUnblocked(owner);
-    previousY += FUN_0029efa8(owner);
+    previousY += listCursorGetRowIfUnblocked(owner);
     if (selected >= 0) {
         if (alternateAxis)
             flaggedEntrySetValueB(owner, selected);
@@ -65,7 +65,7 @@ u32 uiScrollHandleActionsOrTouch(FlaggedEntry *owner, const SpriteInfo *sprite, 
         bool changed = currentX != previousX;
         if (!changed) {
             s32 currentY = resourceRunOperationIfUnblocked(owner);
-            currentY += FUN_0029efa8(owner);
+            currentY += listCursorGetRowIfUnblocked(owner);
             changed = currentY != previousY;
         }
         if (changed)

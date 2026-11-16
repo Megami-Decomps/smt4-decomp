@@ -11,7 +11,7 @@ int buttonHelpSetPreset(...);
 int questClearOwnerModeBitsIfEligible(...);
 int uiBindRecordRewardText(...);
 int FUN_0028fe0c(unsigned int, int);
-int FUN_002903f0(void);
+int rosterGetLeaderId(void);
 int FUN_00290404(void);
 int FUN_002905d0(void);
 int useCounterStart(void);
@@ -43,8 +43,8 @@ extern int g_uiQuest; /* 0x43dd50 */
 /* Supplied declaration required: uiBindRecordRewardText. */
 extern bool questIsOfferable(unsigned short);
 /* Supplied declaration required: FUN_0028fe0c. */
-extern int FUN_0029022c(void);
-/* Supplied declaration required: FUN_002903f0. */
+extern int rosterHasLeader(void);
+/* Supplied declaration required: rosterGetLeaderId. */
 /* Supplied declaration required: FUN_00290404. */
 /* Supplied declaration required: FUN_002905d0. */
 extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
@@ -56,7 +56,7 @@ extern unsigned int flaggedEntryGetValueA(int);
 /* Supplied declaration required: sortMenuCreate. */
 extern int FUN_0029ee54(int);
 /* Supplied declaration required: buttonHelpSetText. */
-extern int FUN_0029efa8(int);
+extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
@@ -119,7 +119,7 @@ void FUN_001afc0c(void)
   }
   else {
     temp_v2 = resourceRunOperationIfUnblocked(temp_v11);
-    temp_v3 = FUN_0029efa8(temp_v11);
+    temp_v3 = listCursorGetRowIfUnblocked(temp_v11);
     temp_v0 = *(short *)(temp_v9 + (temp_v3 + temp_v2) * 2);
     temp_v14[0] = '\0';
     temp_v6 = asdTMTexTableEntryAt(0x29,0xc1);
@@ -128,10 +128,10 @@ void FUN_001afc0c(void)
                  (int)*(short *)(temp_v1 + 0x9f2),(int)*(short *)(temp_v1 + 0x9f4),temp_v14,0,1);
     if (temp_v2 != 0) {
       temp_v2 = resourceRunOperationIfUnblocked(temp_v11);
-      temp_v3 = FUN_0029efa8(temp_v11);
+      temp_v3 = listCursorGetRowIfUnblocked(temp_v11);
       if (*(short *)(temp_v9 + (temp_v3 + temp_v2) * 2) != temp_v0) {
         temp_v2 = resourceRunOperationIfUnblocked(temp_v11);
-        temp_v3 = FUN_0029efa8(temp_v11);
+        temp_v3 = listCursorGetRowIfUnblocked(temp_v11);
         temp_v8 = *(unsigned short *)(temp_v9 + (temp_v3 + temp_v2) * 2);
         temp_v10 = (unsigned int)temp_v8;
         if (*(int *)(temp_v1 + 0x5e0) != 0) {
@@ -164,7 +164,7 @@ void FUN_001afc0c(void)
       FUN_0029efd8(temp_v11,1);
       if (temp_v2 != 0) {
         temp_v2 = resourceRunOperationIfUnblocked(temp_v11);
-        temp_v3 = FUN_0029efa8(temp_v11);
+        temp_v3 = listCursorGetRowIfUnblocked(temp_v11);
         temp_v8 = *(unsigned short *)(temp_v9 + (temp_v3 + temp_v2) * 2);
         temp_v10 = (unsigned int)temp_v8;
         if (*(int *)(temp_v1 + 0x5e0) != 0) {
@@ -260,9 +260,9 @@ void FUN_001afc0c(void)
                 temp_v2 = 10;
                 FUN_002c1658(10,1);
                 if (temp_v2 != 0) {
-                  temp_v9 = FUN_002903f0();
+                  temp_v9 = rosterGetLeaderId();
                   if (temp_v9 != 0) {
-                    temp_v6 = FUN_002903f0();
+                    temp_v6 = rosterGetLeaderId();
                     uiBindRecordRewardText(temp_v6,0,1);
                     temp_v9 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x5b4),1);
                     if (temp_v9 != 0) {
@@ -284,7 +284,7 @@ void FUN_001afc0c(void)
               FUN_002c1658(0,1);
               if (temp_v2 == 0 && temp_v14[0] == '\0') goto LAB_001b02f8;
               temp_v2 = resourceRunOperationIfUnblocked(temp_v11);
-              temp_v3 = FUN_0029efa8(temp_v11);
+              temp_v3 = listCursorGetRowIfUnblocked(temp_v11);
               temp_v10 = (unsigned int)*(unsigned short *)(temp_v9 + (temp_v3 + temp_v2) * 2);
               if (*(char *)(temp_v1 + 0x5f1) != '\0') {
                 temp_v5 = 0xd;
@@ -295,9 +295,9 @@ void FUN_001afc0c(void)
                 *(unsigned int *)(temp_v9 + 0x10) = 0;
               }
               else {
-                temp_v4 = FUN_002903f0();
+                temp_v4 = rosterGetLeaderId();
                 if (temp_v4 == temp_v10) {
-                  temp_v5 = FUN_002903f0();
+                  temp_v5 = rosterGetLeaderId();
                   uiBindRecordRewardText(temp_v5,0,1);
                   temp_v9 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x5b4),1);
                   if (temp_v9 == 0) goto LAB_001b0364;
@@ -332,7 +332,7 @@ void FUN_001afc0c(void)
                         }
                       }
                       else {
-                        temp_v9 = FUN_0029022c();
+                        temp_v9 = rosterHasLeader();
                         if (temp_v9 != 0) {
                           temp_v9 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x5b4),2);
                           if (temp_v9 != 0) {

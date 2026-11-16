@@ -6,7 +6,7 @@ typedef struct Global5b408c {
     /* 0x00 */ u8 unk00;
     /* 0x01 */ s8 homeButtonHeld;
 } Global5b408c;
-extern Global5b408c DAT_005b408c;
+extern Global5b408c g_appletEventState;
 extern u8 g_appletHomeButtonEvent[];
 extern u8 g_nnAppletCriticalSection[];
 
@@ -24,7 +24,7 @@ u32 appletProcessHomeButton(void)
     result = 0;
     expected = nn_applet_CTR_IsExpectedToProcessHomeButton();
     if (expected) {
-        if (DAT_005b408c.homeButtonHeld != 0) {
+        if (g_appletEventState.homeButtonHeld != 0) {
             nn_os_LightEvent_ClearSignal(g_appletHomeButtonEvent);
             expected = nn_os_CriticalSection_TryEnter(g_nnAppletCriticalSection);
             result = (expected == 0) ? 2 : 3;

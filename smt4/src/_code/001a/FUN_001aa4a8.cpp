@@ -3,7 +3,7 @@
 
 extern "C" {
 extern RenderCtx *g_titleScene;
-s32 FUN_002865c0(u32 mode, f32 alpha);
+s32 gxPackFadeKindAlphaWord(u32 mode, f32 alpha);
 s32 renderCtxPackPassFlags(u32 first, u32 second);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);
 void taskRunPhase(u32 phase);
@@ -13,7 +13,7 @@ s32 FUN_001aa4a8(u32 job)
 {
     jobGetWork(job);
     RenderCtx *context = g_titleScene;
-    renderCtxPushC(context, FUN_002865c0(6, 0.0f));
+    renderCtxPushC(context, gxPackFadeKindAlphaWord(6, 0.0f));
     context = g_titleScene;
     renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
     context = g_titleScene;

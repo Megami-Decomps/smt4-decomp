@@ -23,7 +23,7 @@ const GrowDefinition *devilGetRecord(u32);
 s32 randRange(u32);
 s32 uiCompareHalfwordKeysDescending(const void *, const void *);
 void qsort(void *, u32, u32, s32 (*)(const void *, const void *));
-void FUN_004bd6b0(GrowDemon *, u16);
+void partyRecordSetEquippedItemClampRank(GrowDemon *, u16);
 void unitRecomputeDerivedStats(GrowDemon *);
 void recordRestoreScaledMaximumPair(GrowDemon *);
 
@@ -84,7 +84,7 @@ u16 nkmGrowthLearnRandomSkill(GrowDemon *demon)
             ++i;
         if (i < 8) {
             selected = candidates[index];
-            FUN_004bd6b0(demon, selected);
+            partyRecordSetEquippedItemClampRank(demon, selected);
         }
     }
     unitRecomputeDerivedStats(demon);

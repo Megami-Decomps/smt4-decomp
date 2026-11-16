@@ -4,7 +4,7 @@
 extern "C" {
 s32 uiSpriteAdvanceAnimation(UiSpriteState *sprite);
 s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
-void FUN_002b8ee0(UiSpriteState *sprite, s32 mode);
+void uiSlidingSpriteAdvance(UiSpriteState *sprite, s32 mode);
 s32 vec2GetXInt(const UiSpriteState *sprite);
 s32 vec2GetYInt(const UiSpriteState *sprite);
 void pointConvertToFloat(f32 *point, s32 x, s32 y);
@@ -47,7 +47,7 @@ void FUN_0039c3fc(MapNaviDisplay *display)
             uiSpriteAdvanceAnimation(indicator);
             uiSpriteAdvanceAnimation(&work->overlay);
             UiSpriteState *outgoing = &work->outgoing;
-            FUN_002b8ee0(outgoing, 0);
+            uiSlidingSpriteAdvance(outgoing, 0);
             if (uiSpriteGetCompletionState(outgoing) != 0) {
                 pointConvertToFloat(work->origin, 0, 0);
                 work->flags &= ~0x1008u;

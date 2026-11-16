@@ -4,7 +4,7 @@ extern "C" {
 
 int nn_snd_CTR_Voice_SetPriority(int sdkVoice, int priority);
 int nw_snd_internal_driver_VoiceManager_ChangeVoicePriority(u32 manager, void *voice);
-extern u32 FUN_002baf30(void);
+extern u32 nw_snd_internal_driver_VoiceManager_GetInstance(void);
 
 typedef struct Voice {
     /* 0x00 */ int sdkVoices[2];
@@ -27,7 +27,7 @@ void nw_snd_internal_driver_Voice_SetPriority(Voice *voice, u32 priority)
     int i;
 
     voice->priority = priority;
-    manager = FUN_002baf30();
+    manager = nw_snd_internal_driver_VoiceManager_GetInstance();
     nw_snd_internal_driver_VoiceManager_ChangeVoicePriority(manager, voice);
     if ((voice->priority == 1) && (i = 0, 0 < voice->count)) {
         do {

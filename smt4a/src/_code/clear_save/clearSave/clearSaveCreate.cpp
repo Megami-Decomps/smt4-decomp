@@ -14,7 +14,7 @@ void campButtonHelpAcquire();
 void commonBgStopChildAndBeginTransition();
 void *asdLoadFileSyncDefault(const char *path);
 ScriptRunState *scrScriptProcessCreate(void *scriptFile, void *messageFile);
-void FUN_0022677c(s32 screen, s32 alpha);
+void titleRestartSlotState3(s32 screen, s32 alpha);
 u32 FUN_00241058();
 u32 FUN_00290688();
 void clearSaveDestroy();
@@ -42,8 +42,8 @@ void clearSaveCreate(s32 mode)
     script->mode = 2;
     asdTMTexTablePrepareNodeImage(0, 0x83);
     if (work->initialization.active != 0) {
-        FUN_0022677c(0, 0xFF);
-        FUN_0022677c(1, 0xFF);
+        titleRestartSlotState3(0, 0xFF);
+        titleRestartSlotState3(1, 0xFF);
     }
     u32 process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("clearSave C"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_00241058), reinterpret_cast<AsdProcFunc>(clearSaveDestroy), reinterpret_cast<u32>(g_clearSave));
     work = g_clearSave;

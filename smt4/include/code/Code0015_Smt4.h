@@ -5,6 +5,6 @@
 struct ObjFUN_001565e4;
 extern "C" {
 
-void FUN_001565e4(ObjFUN_001565e4 *obj);
+void nn_snd_CTR_Voice_AppendWaveBuffer(ObjFUN_001565e4 *obj);
 
 } /* extern "C" */

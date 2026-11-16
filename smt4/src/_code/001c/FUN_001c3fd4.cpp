@@ -70,7 +70,7 @@ int pair40Set(...);
 int slotPlacementAssignSlotAndPosition(...);
 int menuSetModeAndResetTransitions(...);
 int FUN_0029e890(...);
-int FUN_0029eb5c(...);
+int scrollListSetSelectionMarkChanged(...);
 
 int FUN_0026d5a4(void);
 int FUN_0026d654(...);
@@ -101,7 +101,7 @@ int scrScriptProcessCreate(unsigned int, unsigned int);
 int FUN_0029acb0(void);
 int gameGetSlotTable(...);
 int ifTouchRegionRemove(void);
-int FUN_002b8ee0(...);
+int uiSlidingSpriteAdvance(...);
 int timerStart(...);
 int uiSpriteAdvanceAnimation(...);
 int __aeabi_memset4(...);
@@ -212,9 +212,9 @@ extern int useCounterIsFinished(void);
 /* Supplied declaration required: scrollOwnerSelectIndex. */
 /* Supplied declaration required: objectPartRunUnlessLocked. */
 extern int itemGetFlagBit1(unsigned short);
-/* Supplied declaration required: FUN_0029eb5c. */
+/* Supplied declaration required: scrollListSetSelectionMarkChanged. */
 /* Supplied declaration required: buttonHelpSetText. */
-extern int FUN_0029efa8(int);
+extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: buttonHelpGetMode. */
 /* Supplied declaration required: FUN_002a0cc8. */
@@ -229,7 +229,7 @@ extern int buttonHelpGetStatus(void);
 /* Supplied declaration required: ifTouchRegionRemove. */
 extern int ifTouchGetSelectionMode(void);
 /* Supplied declaration required: eventQueueAddUnique. */
-/* Supplied declaration required: FUN_002b8ee0. */
+/* Supplied declaration required: uiSlidingSpriteAdvance. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
@@ -360,7 +360,7 @@ unsigned int FUN_001c3fd4(void)
     do {
       temp_v4 = temp_v1 + temp_v6 * 0x8c + 0x298;
       if (*(short *)(temp_v1 + 0x2e8) != 5) {
-        FUN_002b8ee0(temp_v4,0);
+        uiSlidingSpriteAdvance(temp_v4,0);
         if (temp_v6 == 3) {
           temp_v0 = *(char *)(temp_v1 + 0x4c6);
 joined_r0x001c43a0:
@@ -390,7 +390,7 @@ joined_r0x001c43a0:
         }
       }
       else {
-        FUN_002b8ee0(temp_v4,1);
+        uiSlidingSpriteAdvance(temp_v4,1);
         if (temp_v6 == 3) {
           temp_v0 = *(char *)(temp_v1 + 0x4c6);
           goto joined_r0x001c43a0;
@@ -427,10 +427,10 @@ joined_r0x001c43a0:
     break;
   case 3:
     if (*(short *)(temp_v1 + 0x1d0) != 5) {
-      temp_v6 = FUN_002b8ee0(temp_v1 + 0x180,0);
+      temp_v6 = uiSlidingSpriteAdvance(temp_v1 + 0x180,0);
     }
     else {
-      temp_v6 = FUN_002b8ee0(temp_v1 + 0x180,1);
+      temp_v6 = uiSlidingSpriteAdvance(temp_v1 + 0x180,1);
     }
     if (temp_v6 != 0) {
       partyPanelSetState(*(unsigned int *)(temp_v1 + 0x24),1);
@@ -620,11 +620,11 @@ LAB_001c4748:
     temp_v8 = 0;
     if (!temp_v22) {
       temp_v16 = objectPartRunUnlessLocked();
-      temp_v11 = FUN_0029efa8(temp_v24);
+      temp_v11 = listCursorGetRowIfUnblocked(temp_v24);
       temp_v16 = temp_v16 + temp_v11 * 4;
     }
     else {
-      temp_v11 = FUN_0029efa8(temp_v24);
+      temp_v11 = listCursorGetRowIfUnblocked(temp_v24);
       temp_v9 = *(int *)(temp_v1 + 0x2c);
       temp_v16 = objectPartRunUnlessLocked(temp_v24);
       temp_v16 = temp_v11 * 4 + temp_v9 * 0xc + temp_v16;
@@ -640,11 +640,11 @@ LAB_001c4748:
       if (temp_v11 == 0) {
         if (*(char *)(temp_v1 + 0x42) != '\0') {
           temp_v9 = objectPartRunUnlessLocked();
-          temp_v11 = FUN_0029efa8(temp_v24);
+          temp_v11 = listCursorGetRowIfUnblocked(temp_v24);
           temp_v9 = temp_v9 + temp_v11 * 4;
         }
         else {
-          temp_v11 = FUN_0029efa8(temp_v24);
+          temp_v11 = listCursorGetRowIfUnblocked(temp_v24);
           temp_v12 = *(int *)(temp_v1 + 0x2c);
           temp_v9 = objectPartRunUnlessLocked(temp_v24);
           temp_v9 = temp_v9 + temp_v11 * 4 + temp_v12 * 0xc;
@@ -669,11 +669,11 @@ LAB_001c4748:
       if (temp_v6 != 0) {
         if (*(char *)(temp_v1 + 0x42) != '\0') {
           temp_v4 = objectPartRunUnlessLocked();
-          temp_v16 = FUN_0029efa8(temp_v24);
+          temp_v16 = listCursorGetRowIfUnblocked(temp_v24);
           temp_v4 = temp_v4 + temp_v16 * 4;
         }
         else {
-          temp_v16 = FUN_0029efa8(temp_v24);
+          temp_v16 = listCursorGetRowIfUnblocked(temp_v24);
           temp_v11 = *(int *)(temp_v1 + 0x2c);
           temp_v4 = objectPartRunUnlessLocked(temp_v24);
           temp_v4 = temp_v16 * 4 + temp_v11 * 0xc + temp_v4;
@@ -696,19 +696,19 @@ LAB_001c4748:
           if (*(char *)(temp_v1 + 0x42) != '\0') {
             *(unsigned int *)(temp_v1 + 0x2c) = 0;
             scrollOwnerSelectIndex(temp_v24,temp_v16 % 4);
-            FUN_0029eb5c(temp_v24,(int)(temp_v16 + ((unsigned int)(temp_v16 >> 0x1f) >> 0x1e)) >> 2);
+            scrollListSetSelectionMarkChanged(temp_v24,(int)(temp_v16 + ((unsigned int)(temp_v16 >> 0x1f) >> 0x1e)) >> 2);
           }
           else {
             if (temp_v16 >= 0xc) {
               *(unsigned int *)(temp_v1 + 0x2c) = 1;
               temp_v16 = temp_v16 - 0xc;
               scrollOwnerSelectIndex(temp_v24,temp_v16 % 4);
-              FUN_0029eb5c(temp_v24,(int)(temp_v16 + ((unsigned int)(temp_v16 >> 0x1f) >> 0x1e)) >> 2);
+              scrollListSetSelectionMarkChanged(temp_v24,(int)(temp_v16 + ((unsigned int)(temp_v16 >> 0x1f) >> 0x1e)) >> 2);
             }
             else {
               *(unsigned int *)(temp_v1 + 0x2c) = 0;
               scrollOwnerSelectIndex(temp_v24,temp_v16 % 4);
-              FUN_0029eb5c(temp_v24,(int)(temp_v16 + ((unsigned int)(temp_v16 >> 0x1f) >> 0x1e)) >> 2);
+              scrollListSetSelectionMarkChanged(temp_v24,(int)(temp_v16 + ((unsigned int)(temp_v16 >> 0x1f) >> 0x1e)) >> 2);
             }
             temp_v6 = 0;
             do {
@@ -730,10 +730,10 @@ LAB_001c4748:
     else if (((temp_v6 == 1) || (temp_v6 == 2)) && (temp_v15 = temp_v10 - 4, temp_v15 < 0x18)) {
       if ((int)temp_v15 < *(int *)(temp_v24 + 0x50)) {
         temp_v6 = objectPartRunUnlessLocked(temp_v24);
-        temp_v4 = FUN_0029efa8(temp_v24);
+        temp_v4 = listCursorGetRowIfUnblocked(temp_v24);
         temp_v16 = temp_v10 - 4;
         scrollOwnerSelectIndex(temp_v24,temp_v16 % 4);
-        FUN_0029eb5c(temp_v24,(int)(temp_v16 + ((unsigned int)(temp_v16 >> 0x1f) >> 0x1e)) >> 2);
+        scrollListSetSelectionMarkChanged(temp_v24,(int)(temp_v16 + ((unsigned int)(temp_v16 >> 0x1f) >> 0x1e)) >> 2);
         FUN_0029dfc0(0);
         if (temp_v6 + temp_v4 * 4 != temp_v15) {
           temp_v7 = 0x100016c;
@@ -770,11 +770,11 @@ LAB_001c4df0:
       if (temp_v11 != 0) {
         if (*(char *)(temp_v1 + 0x42) != '\0') {
           temp_v11 = objectPartRunUnlessLocked();
-          temp_v6 = FUN_0029efa8(temp_v24);
+          temp_v6 = listCursorGetRowIfUnblocked(temp_v24);
           temp_v11 = temp_v11 + temp_v6 * 4;
         }
         else {
-          temp_v6 = FUN_0029efa8(temp_v24);
+          temp_v6 = listCursorGetRowIfUnblocked(temp_v24);
           temp_v4 = *(int *)(temp_v1 + 0x2c);
           temp_v11 = objectPartRunUnlessLocked(temp_v24);
           temp_v11 = temp_v11 + temp_v6 * 4 + temp_v4 * 0xc;
@@ -789,11 +789,11 @@ LAB_001c4df0:
         if ((temp_v16 != 0) || ((temp_v6 == 6 && (0x17 >= temp_v10 - 4)))) {
           if (*(char *)(temp_v1 + 0x42) != '\0') {
             temp_v4 = objectPartRunUnlessLocked();
-            temp_v6 = FUN_0029efa8(temp_v24);
+            temp_v6 = listCursorGetRowIfUnblocked(temp_v24);
             temp_v4 = temp_v4 + temp_v6 * 4;
           }
           else {
-            temp_v6 = FUN_0029efa8(temp_v24);
+            temp_v6 = listCursorGetRowIfUnblocked(temp_v24);
             temp_v16 = *(int *)(temp_v1 + 0x2c);
             temp_v4 = objectPartRunUnlessLocked(temp_v24);
             temp_v4 = temp_v4 + temp_v6 * 4 + temp_v16 * 0xc;
@@ -893,7 +893,7 @@ LAB_001c5040:
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 0x18);
     temp_v6 = objectPartRunUnlessLocked(temp_v24);
-    temp_v4 = FUN_0029efa8(temp_v24);
+    temp_v4 = listCursorGetRowIfUnblocked(temp_v24);
     *(unsigned char *)(*(int *)(temp_v1 + (temp_v6 + temp_v4 * 4) * 4 + 0x6d8) + 0x25) = 1;
     FUN_0026cf4c();
     break;
@@ -936,7 +936,7 @@ LAB_001c538c:
             goto LAB_001c538c;
           }
         }
-        temp_v16 = FUN_0029efa8(temp_v8);
+        temp_v16 = listCursorGetRowIfUnblocked(temp_v8);
         if (temp_v16 < 1) {
           temp_v16 = objectPartRunUnlessLocked(temp_v8);
           if (temp_v16 != 0) {
@@ -975,11 +975,11 @@ LAB_001c538c:
         else {
           if (*(char *)(temp_v1 + 0x42) != '\0') {
             temp_v11 = objectPartRunUnlessLocked();
-            temp_v16 = FUN_0029efa8(temp_v8);
+            temp_v16 = listCursorGetRowIfUnblocked(temp_v8);
             temp_v11 = temp_v11 + temp_v16 * 4;
           }
           else {
-            temp_v16 = FUN_0029efa8(temp_v8);
+            temp_v16 = listCursorGetRowIfUnblocked(temp_v8);
             temp_v9 = *(int *)(temp_v1 + 0x2c);
             temp_v11 = objectPartRunUnlessLocked(temp_v8);
             temp_v11 = temp_v11 + temp_v16 * 4 + temp_v9 * 0xc;
@@ -1014,7 +1014,7 @@ LAB_001c545c:
       temp_v6 = objectPartRunUnlessLocked(temp_v8);
       temp_v4 = FUN_0029ae44();
       if (temp_v4 != 0) {
-        temp_v24 = FUN_0029efa8(temp_v8);
+        temp_v24 = listCursorGetRowIfUnblocked(temp_v8);
         if (temp_v24 < 1) {
           temp_v24 = objectPartRunUnlessLocked(temp_v8);
           temp_v16 = 0;
@@ -1051,11 +1051,11 @@ LAB_001c545c:
         else {
           if (*(char *)(temp_v1 + 0x42) != '\0') {
             temp_v24 = objectPartRunUnlessLocked();
-            temp_v6 = FUN_0029efa8(temp_v8);
+            temp_v6 = listCursorGetRowIfUnblocked(temp_v8);
             temp_v24 = temp_v24 + temp_v6 * 4;
           }
           else {
-            temp_v6 = FUN_0029efa8(temp_v8);
+            temp_v6 = listCursorGetRowIfUnblocked(temp_v8);
             temp_v16 = *(int *)(temp_v1 + 0x2c);
             temp_v24 = objectPartRunUnlessLocked(temp_v8);
             temp_v24 = temp_v24 + temp_v6 * 4 + temp_v16 * 0xc;
@@ -1079,20 +1079,20 @@ LAB_001c545c:
               temp_v4 = temp_v6 + 4;
               *(unsigned int *)(temp_v1 + 0x2c) = 0;
               scrollOwnerSelectIndex(temp_v8,temp_v4 % 4);
-              FUN_0029eb5c(temp_v8,(int)(temp_v4 + ((unsigned int)(temp_v4 >> 0x1f) >> 0x1e)) >> 2);
+              scrollListSetSelectionMarkChanged(temp_v8,(int)(temp_v4 + ((unsigned int)(temp_v4 >> 0x1f) >> 0x1e)) >> 2);
             }
             else {
               if (temp_v6 >= 0xc) {
                 *(unsigned int *)(temp_v1 + 0x2c) = 1;
                 temp_v4 = temp_v6 - 8;
                 scrollOwnerSelectIndex(temp_v8,temp_v4 % 4);
-                FUN_0029eb5c(temp_v8,(int)(temp_v4 + ((unsigned int)(temp_v4 >> 0x1f) >> 0x1e)) >> 2);
+                scrollListSetSelectionMarkChanged(temp_v8,(int)(temp_v4 + ((unsigned int)(temp_v4 >> 0x1f) >> 0x1e)) >> 2);
               }
               else {
                 temp_v4 = temp_v6 + 4;
                 *(unsigned int *)(temp_v1 + 0x2c) = 0;
                 scrollOwnerSelectIndex(temp_v8,temp_v4 % 4);
-                FUN_0029eb5c(temp_v8,(int)(temp_v4 + ((unsigned int)(temp_v4 >> 0x1f) >> 0x1e)) >> 2);
+                scrollListSetSelectionMarkChanged(temp_v8,(int)(temp_v4 + ((unsigned int)(temp_v4 >> 0x1f) >> 0x1e)) >> 2);
               }
               temp_v4 = 0;
               do {
@@ -1129,7 +1129,7 @@ LAB_001c545c:
         FUN_002932d8(temp_v8);
       }
       FUN_002937e0();
-      temp_v6 = FUN_0029efa8(temp_v8);
+      temp_v6 = listCursorGetRowIfUnblocked(temp_v8);
       if ((0 < temp_v6) && (*(char *)(temp_v1 + 0x66c) != '\v')) {
         FUN_0029dfc0(0);
       }
@@ -1138,7 +1138,7 @@ LAB_001c545c:
     }
     else {
 LAB_001c589c:
-      temp_v16 = FUN_0029efa8(temp_v8);
+      temp_v16 = listCursorGetRowIfUnblocked(temp_v8);
       if ((temp_v16 >= 1) && (temp_v16 = partyPanelHandleCursorEdgeInput(temp_v8,0), temp_v16 != 0)) {
         if (*(char *)(temp_v1 + 0x66c) != '\v') {
           FUN_0029dfc0(0);
@@ -1159,9 +1159,9 @@ LAB_001c659c:
         if (!(temp_v16 == 0 && !temp_v22)) {
           if (temp_v22) {
             temp_v6 = objectPartRunUnlessLocked(temp_v8);
-            temp_v4 = FUN_0029efa8(temp_v8);
+            temp_v4 = listCursorGetRowIfUnblocked(temp_v8);
             scrollOwnerSelectIndex(temp_v8,(int)temp_v10 % 4);
-            FUN_0029eb5c(temp_v8,(int)(temp_v10 + ((unsigned int)((int)temp_v10 >> 0x1f) >> 0x1e)) >> 2);
+            scrollListSetSelectionMarkChanged(temp_v8,(int)(temp_v10 + ((unsigned int)((int)temp_v10 >> 0x1f) >> 0x1e)) >> 2);
             if (temp_v6 + temp_v4 * 4 != temp_v10) {
               eventQueueAddUniqueIfValid();
             }
@@ -1192,7 +1192,7 @@ LAB_001c659c:
               temp_v16 = 0;
               FUN_002c1658(0,1);
               if ((temp_v16 != 0) || ((temp_v6 == 6 && (temp_v10 < 0x1c)))) {
-                temp_v6 = FUN_0029efa8(temp_v8);
+                temp_v6 = listCursorGetRowIfUnblocked(temp_v8);
                 if (temp_v6 < 1) {
                   temp_v6 = objectPartRunUnlessLocked(temp_v8);
                   temp_v24 = temp_v1 + temp_v6;
@@ -1426,11 +1426,11 @@ LAB_001c6598:
                 else {
                   if (*(char *)(temp_v1 + 0x42) != '\0') {
                     temp_v4 = objectPartRunUnlessLocked();
-                    temp_v6 = FUN_0029efa8(temp_v8);
+                    temp_v6 = listCursorGetRowIfUnblocked(temp_v8);
                     temp_v4 = temp_v4 + temp_v6 * 4;
                   }
                   else {
-                    temp_v6 = FUN_0029efa8(temp_v8);
+                    temp_v6 = listCursorGetRowIfUnblocked(temp_v8);
                     temp_v16 = *(int *)(temp_v1 + 0x2c);
                     temp_v4 = objectPartRunUnlessLocked(temp_v8);
                     temp_v4 = temp_v4 + temp_v6 * 4 + temp_v16 * 0xc;
@@ -1731,7 +1731,7 @@ LAB_001c6680:
         *(unsigned char *)(*(int *)(temp_v1 + temp_v6 * 4 + 0x6d8) + 0x25) = 0;
         temp_v6 = temp_v6 + 1;
       } while (temp_v6 < 0x18);
-      temp_v6 = FUN_0029efa8(temp_v8);
+      temp_v6 = listCursorGetRowIfUnblocked(temp_v8);
       if (temp_v6 < 1) {
         temp_v6 = objectPartRunUnlessLocked(temp_v8);
         *(unsigned char *)(*(int *)(temp_v1 + temp_v6 * 4 + 0x6c8) + 0x25) = 1;
@@ -1739,11 +1739,11 @@ LAB_001c6680:
       else {
         if (*(char *)(temp_v1 + 0x42) != '\0') {
           temp_v4 = objectPartRunUnlessLocked();
-          temp_v6 = FUN_0029efa8(temp_v8);
+          temp_v6 = listCursorGetRowIfUnblocked(temp_v8);
           temp_v4 = temp_v4 + temp_v6 * 4;
         }
         else {
-          temp_v6 = FUN_0029efa8(temp_v8);
+          temp_v6 = listCursorGetRowIfUnblocked(temp_v8);
           temp_v24 = *(int *)(temp_v1 + 0x2c);
           temp_v4 = objectPartRunUnlessLocked(temp_v8);
           temp_v4 = temp_v4 + temp_v6 * 4 + temp_v24 * 0xc;
@@ -2306,7 +2306,7 @@ LAB_001c7b60:
           goto LAB_001c7b60;
         }
       }
-      temp_v4 = FUN_0029efa8(temp_v6);
+      temp_v4 = listCursorGetRowIfUnblocked(temp_v6);
       if (temp_v4 < 1) {
         temp_v6 = objectPartRunUnlessLocked(temp_v6);
         if (temp_v6 != 0) {
@@ -2329,11 +2329,11 @@ LAB_001c7b60:
       else {
         if (*(char *)(temp_v1 + 0x42) != '\0') {
           temp_v24 = objectPartRunUnlessLocked();
-          temp_v6 = FUN_0029efa8(temp_v6);
+          temp_v6 = listCursorGetRowIfUnblocked(temp_v6);
           temp_v24 = temp_v24 + temp_v6 * 4;
         }
         else {
-          temp_v4 = FUN_0029efa8(temp_v6);
+          temp_v4 = listCursorGetRowIfUnblocked(temp_v6);
           temp_v8 = *(int *)(temp_v1 + 0x2c);
           temp_v24 = objectPartRunUnlessLocked(temp_v6);
           temp_v24 = temp_v24 + temp_v4 * 4 + temp_v8 * 0xc;
@@ -2394,12 +2394,12 @@ LAB_001c7c50:
           FUN_0029dfc0(0);
           temp_v7 = objectPartRunUnlessLocked();
           temp_v6 = objectPartRunUnlessLocked(temp_v1 + 0x940);
-          temp_v4 = FUN_0029efa8(temp_v1 + 0x940);
+          temp_v4 = listCursorGetRowIfUnblocked(temp_v1 + 0x940);
           temp_v6 = temp_v6 + temp_v4 * 4;
           FUN_0028a924(0xf,0);
           scrollOwnerSelectIndex(temp_v1 + 0x8dc,temp_v7);
           scrollOwnerSelectIndex(temp_v1 + 0x940,temp_v6 % 4);
-          FUN_0029eb5c(temp_v1 + 0x940,(int)(temp_v6 + ((unsigned int)(temp_v6 >> 0x1f) >> 0x1e)) >> 2);
+          scrollListSetSelectionMarkChanged(temp_v1 + 0x940,(int)(temp_v6 + ((unsigned int)(temp_v6 >> 0x1f) >> 0x1e)) >> 2);
           eventQueueAddUniqueIfValid(0x100017f);
         }
       }
@@ -2432,7 +2432,7 @@ LAB_001c7c50:
           if (*(char *)(temp_v1 + 0x42) != '\0') {
             temp_v6 = temp_v1 + 0xa6c;
           }
-          temp_v24 = FUN_0029efa8(temp_v6);
+          temp_v24 = listCursorGetRowIfUnblocked(temp_v6);
           if (temp_v24 < 1) {
             temp_v24 = objectPartRunUnlessLocked(temp_v6);
             if (temp_v24 != 0) {
@@ -2448,11 +2448,11 @@ LAB_001c7c50:
           else {
             if (*(char *)(temp_v1 + 0x42) != '\0') {
               temp_v24 = objectPartRunUnlessLocked();
-              temp_v4 = FUN_0029efa8(temp_v6);
+              temp_v4 = listCursorGetRowIfUnblocked(temp_v6);
               temp_v24 = temp_v24 + temp_v4 * 4;
             }
             else {
-              temp_v4 = FUN_0029efa8(temp_v6);
+              temp_v4 = listCursorGetRowIfUnblocked(temp_v6);
               temp_v8 = *(int *)(temp_v1 + 0x2c);
               temp_v24 = objectPartRunUnlessLocked(temp_v6);
               temp_v24 = temp_v24 + temp_v4 * 4 + temp_v8 * 0xc;
@@ -2487,7 +2487,7 @@ LAB_001c7c50:
           if (*(char *)(temp_v1 + 0x42) != '\0') {
             temp_v6 = temp_v1 + 0xa6c;
           }
-          temp_v24 = FUN_0029efa8(temp_v6);
+          temp_v24 = listCursorGetRowIfUnblocked(temp_v6);
           if (temp_v24 < 1) {
             temp_v24 = objectPartRunUnlessLocked(temp_v6);
             if (temp_v24 != 0) {
@@ -2502,11 +2502,11 @@ LAB_001c7c50:
           else {
             if (*(char *)(temp_v1 + 0x42) != '\0') {
               temp_v24 = objectPartRunUnlessLocked();
-              temp_v4 = FUN_0029efa8(temp_v6);
+              temp_v4 = listCursorGetRowIfUnblocked(temp_v6);
               temp_v24 = temp_v24 + temp_v4 * 4;
             }
             else {
-              temp_v4 = FUN_0029efa8(temp_v6);
+              temp_v4 = listCursorGetRowIfUnblocked(temp_v6);
               temp_v8 = *(int *)(temp_v1 + 0x2c);
               temp_v24 = objectPartRunUnlessLocked(temp_v6);
               temp_v24 = temp_v24 + temp_v4 * 4 + temp_v8 * 0xc;
@@ -2741,7 +2741,7 @@ LAB_001c7c50:
       }
     }
     else {
-      temp_v4 = FUN_0029efa8(temp_v6);
+      temp_v4 = listCursorGetRowIfUnblocked(temp_v6);
       if (temp_v4 < 1) {
         temp_v6 = objectPartRunUnlessLocked(temp_v6);
         if (temp_v6 != 0) {
@@ -2763,11 +2763,11 @@ LAB_001c7c50:
       else {
         if (*(char *)(temp_v1 + 0x42) != '\0') {
           temp_v24 = objectPartRunUnlessLocked();
-          temp_v6 = FUN_0029efa8(temp_v6);
+          temp_v6 = listCursorGetRowIfUnblocked(temp_v6);
           temp_v24 = temp_v24 + temp_v6 * 4;
         }
         else {
-          temp_v4 = FUN_0029efa8(temp_v6);
+          temp_v4 = listCursorGetRowIfUnblocked(temp_v6);
           temp_v8 = *(int *)(temp_v1 + 0x2c);
           temp_v24 = objectPartRunUnlessLocked(temp_v6);
           temp_v24 = temp_v24 + temp_v4 * 4 + temp_v8 * 0xc;

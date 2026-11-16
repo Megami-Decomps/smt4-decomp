@@ -50,7 +50,7 @@ s32 gameFlagIsSet(s32 flag);
 void naviMainSetFlagsAndActivate(s32 a, s32 b, s32 c, s32 d, s32 e, s32 f);
 void navigationSetOrQueueRequest(s32 x, s32 y, s32 z, f32 pitch, f32 yaw);
 s32 naviMainIsInactive(void);
-void FUN_00314bf8(s32 id);
+void naviMainSetSelectionResetProgress(s32 id);
 
 // Rebuilds the list of active navigation entries from the story flags and
 // starts the first of them.
@@ -103,7 +103,7 @@ void FUN_00384e0c(void)
     GameFlagsBlock* active = gameFlagsGetBlock();
     u8* firstSlot = NULL;
     if (active != NULL) firstSlot = &active->active[0].entry;
-    FUN_00314bf8(dataTableGetEntry49(*firstSlot)->x);
+    naviMainSetSelectionResetProgress(dataTableGetEntry49(*firstSlot)->x);
 }
 
 } /* extern "C" */

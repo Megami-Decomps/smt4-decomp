@@ -12,12 +12,12 @@ struct HandlerEntry {
 
 extern "C" {
 
-extern HandlerEntry DAT_005c1d60[];
+extern HandlerEntry g_effBehaviorTable[];
 
 /* Calls the handler registered for the record's id. */
 void FUN_002fe4dc(HandlerRecord *record)
 {
-    DAT_005c1d60[record->id].handler(record);
+    g_effBehaviorTable[record->id].handler(record);
 }
 
 } /* extern "C" */

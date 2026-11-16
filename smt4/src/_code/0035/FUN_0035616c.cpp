@@ -8,13 +8,13 @@ typedef struct FsFile {
     u32 handle; /* 0x00 */
 } FsFile;
 
-extern u64 FUN_00239ab8(void);
+extern u64 fileGetHandleChecked(void);
 extern void FUN_00356bbc(FsFile *file, u32 aux, u32 arg0, u32 arg1);
 
 /* Gets a handle (low word) and its companion value (high word) and passes both on with the arguments. */
 void FUN_0035616c(u32 unused0, u32 unused1, u32 arg0, u32 arg1)
 {
-    u64 opened = FUN_00239ab8();
+    u64 opened = fileGetHandleChecked();
     FsFile file;
 
     file.handle = (u32)opened;

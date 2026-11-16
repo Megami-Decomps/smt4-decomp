@@ -48,7 +48,7 @@ extern "C" void cecCardDrawBackgroundAndLabel(CecCardLabel *label, const CecCard
     texDrawCompositeSprite(2, 46, 14, placement->x + x, placement->y + y, 101);
     const TextureTableEntryIV *labelSprite = asdTMTexTableEntryAt(46, 158);
     s32 center = 6 + (labelSprite->placement->width - label->width) / 2;
-    FUN_001527d8(label->text, 0xffffff00);
+    uiObjectSetColorRgb(label->text, 0xffffff00);
     FUN_0025cc78(reinterpret_cast<const void *>(label->text), labelSprite->x + placement->x + (x + center),
                   placement->y + labelSprite->y + y, 102, placement->scale);
 }

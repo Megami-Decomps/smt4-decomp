@@ -46,7 +46,7 @@ typedef struct {
     unsigned int sp110; /* 0x110: local_110 */
 } void_stack;
 
-extern unsigned int DAT_00536d14; /* 0x536d14 */
+extern unsigned int g_sinCosTable; /* 0x536d14 */
 extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
@@ -158,15 +158,15 @@ void FUN_002443e4(void)
       temp_v8 = temp_v8 & 0xff;
       temp_v18 = CONCAT44((&DAT_00536d20)[temp_v8 * 4],temp_v5);
       temp_v14 = -temp_v13;
-      temp_v7 = (float)(&DAT_00536d14)[temp_v4 * 4] +
+      temp_v7 = (float)(&g_sinCosTable)[temp_v4 * 4] +
               (temp_v16 - temp_v9) * (float)(&DAT_00536d1c)[temp_v4 * 4];
-      temp_v5 = (float)(&DAT_00536d14)[temp_v2 * 4] +
+      temp_v5 = (float)(&g_sinCosTable)[temp_v2 * 4] +
               (temp_v3 - temp_v10) * (float)(&DAT_00536d1c)[temp_v2 * 4];
       temp_v9 = (float)(&DAT_00536d18)[temp_v4 * 4] +
                (temp_v16 - temp_v9) * (float)(&DAT_00536d20)[temp_v4 * 4];
       fStack_a0 = (float)(&DAT_00536d18)[temp_v2 * 4] +
                   (temp_v3 - temp_v10) * (float)(&DAT_00536d20)[temp_v2 * 4];
-      temp_v3 = (float)(&DAT_00536d14)[temp_v8 * 4] +
+      temp_v3 = (float)(&g_sinCosTable)[temp_v8 * 4] +
               (temp_v12 - temp_v11) * (float)(&DAT_00536d1c)[temp_v8 * 4];
       temp_v12 = (float)(&DAT_00536d18)[temp_v8 * 4] +
                (temp_v12 - temp_v11) * (float)(&DAT_00536d20)[temp_v8 * 4];

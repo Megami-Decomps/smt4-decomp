@@ -23,7 +23,7 @@ u32 vec2GetYInt(Placement *placement);
 u32 vec2GetXInt(Placement *placement);
 void pointConvertToFloat(u8 *target, u32 x, u32 y);
 s8 uiSpriteGetCompletionState(const Placement *placement);
-s32 FUN_0026b564(void);
+s32 buttonHelpStateIsNot3(void);
 s32 FUN_00241a44(void);
 s32 FUN_00295618(void);
 
@@ -41,7 +41,7 @@ void Obj422448::FUN_003ab7c8()
     y = vec2GetYInt(placement);
     x = vec2GetXInt(placement);
     pointConvertToFloat(entity->target, x, y);
-    if (uiSpriteGetCompletionState(placement) != 0 && FUN_0026b564() != 0 && FUN_00241a44() != 0 && FUN_00295618() != 0) {
+    if (uiSpriteGetCompletionState(placement) != 0 && buttonHelpStateIsNot3() != 0 && FUN_00241a44() != 0 && FUN_00295618() != 0) {
         entity->state = 11;
         entity->stateArg = 0;
     }

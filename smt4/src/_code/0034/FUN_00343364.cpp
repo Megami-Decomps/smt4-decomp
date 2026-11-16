@@ -33,7 +33,7 @@ void FUN_00343364(RenderCtx *context, u32 color, u32 alpha, u32 flags, f32 scale
     }
     renderCtxSelectTexture(context, 0);
     renderCtxPushA(context, renderCtxPackPassFlags(1, second));
-    renderCtxPushC(context, FUN_002865c0(1, 0.0f));
+    renderCtxPushC(context, gxPackFadeKindAlphaWord(1, 0.0f));
     renderCtxPushG(context, flagsPackFourBooleans(first, first, first, first));
     renderCtxPushB(context, packNibblesAndByte(1, 0, 0));
     renderCtxPushE(context, FUN_00310578(1, alpha, 0xff));

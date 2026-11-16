@@ -13,7 +13,7 @@ struct PartOwner {
 
 extern "C" {
 
-s32 FUN_002b8ee0(UiSpriteState *part, s32 value);
+s32 uiSlidingSpriteAdvance(UiSpriteState *part, s32 value);
 s32 uiSpriteAdvanceAnimation(UiSpriteState *part);
 s8 uiSpriteGetCompletionState(const UiSpriteState *part);
 void messageOwnerSetState(PartOwner *owner, s32 mode);
@@ -21,7 +21,7 @@ void messageOwnerSetState(PartOwner *owner, s32 mode);
 // Advance the first sprite's slide and the second's keyframe, then enter mode2 when both finish.
 void FUN_00398964(PartOwner *owner)
 {
-    FUN_002b8ee0(&owner->parts[0], 0);
+    uiSlidingSpriteAdvance(&owner->parts[0], 0);
     uiSpriteAdvanceAnimation(&owner->parts[1]);
     owner->xA4 = vec2GetXInt(&owner->parts[0]);
     owner->xAC = owner->xA4;

@@ -47,7 +47,7 @@ extern unsigned int FUN_00295cec(void);
 /* Supplied declaration required: fadeObjectResetIfActive. */
 extern int FUN_0029d644(int);
 extern int ifTouchGetSelectionModeForRegion(int);
-extern int FUN_0029efa8(int);
+extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_002b6b8c. */
 /* Supplied declaration required: FUN_002bdf94. */
@@ -102,7 +102,7 @@ void FUN_0033149c(int param_1)
   if (0 < temp_v2) {
     do {
       if ((*(int *)(param_1 + 8) != 2 && *(int *)(param_1 + 8) != 3) ||
-         (temp_v2 = FUN_0029efa8(param_1 + 0x10), temp_v2 != temp_v9)) {
+         (temp_v2 = listCursorGetRowIfUnblocked(param_1 + 0x10), temp_v2 != temp_v9)) {
         temp_v2 = resourceRunOperationIfUnblocked(param_1 + 0x10);
         temp_v10 = *(unsigned int *)(param_1 + (temp_v2 + temp_v9) * 4 + 0x74);
         temp_v2 = asdTMTexTableEntryAt(0x1d,temp_v9 + 0x40e);
@@ -169,15 +169,15 @@ void FUN_0033149c(int param_1)
   }
   if (*(int *)(param_1 + 8) == 2 || *(int *)(param_1 + 8) == 3) {
     temp_v2 = resourceRunOperationIfUnblocked(param_1 + 0x10);
-    temp_v9 = FUN_0029efa8(param_1 + 0x10);
+    temp_v9 = listCursorGetRowIfUnblocked(param_1 + 0x10);
     temp_v10 = *(unsigned int *)(param_1 + (temp_v9 + temp_v2) * 4 + 0x74);
-    temp_v2 = FUN_0029efa8(param_1 + 0x10);
+    temp_v2 = listCursorGetRowIfUnblocked(param_1 + 0x10);
     temp_v2 = asdTMTexTableEntryAt(0x1d,temp_v2 + 0x42f);
     efctSetSpeed();
     texDrawCompositeSprite(2,0x1d,6,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x79);
     efctSetSpeed();
     texDrawTableEntryAtStoredOrigin(2,0x1d,0x429,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x7e);
-    temp_v9 = FUN_0029efa8(param_1 + 0x10);
+    temp_v9 = listCursorGetRowIfUnblocked(param_1 + 0x10);
     temp_v9 = ifTouchGetSelectionModeForRegion((int)*(short *)(param_1 + temp_v9 * 2 + 0x508));
     temp_v4 = *(short *)(temp_v2 + 10) + temp_v1;
     temp_v8 = *(short *)(temp_v2 + 8) + temp_v0;

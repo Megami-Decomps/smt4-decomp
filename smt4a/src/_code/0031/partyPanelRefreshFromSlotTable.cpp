@@ -32,10 +32,10 @@ void partyPanelRefreshFromSlotTable()
         ++rows;
     }
     GridNavigation *primary = &panel->primary;
-    s32 primarySelection = FUN_002a4878(primary);
-    s32 primaryScroll = FUN_002a4894(primary);
-    s32 expandedSelection = FUN_002a4878(&panel->expanded);
-    s32 expandedScroll = FUN_002a4894(&panel->expanded);
+    s32 primarySelection = listCursorGetRowOfChildIfUnblocked(primary);
+    s32 primaryScroll = listCursorGetRowIfUnblocked(primary);
+    s32 expandedSelection = listCursorGetRowOfChildIfUnblocked(&panel->expanded);
+    s32 expandedScroll = listCursorGetRowIfUnblocked(&panel->expanded);
     if (panel->fixedCapacity == 0) {
         if (slots->capacity < 12) {
             gridNavigationConfigure(primary, slots->capacity, rows, 4, 1, 1);
@@ -56,11 +56,11 @@ void partyPanelRefreshFromSlotTable()
     scrollListSetSelectionTracked(&panel->expanded, expandedScroll);
 
     GridNavigation *secondary = &panel->secondary;
-    primarySelection = FUN_002a4878(secondary);
-    primaryScroll = FUN_002a4894(secondary);
+    primarySelection = listCursorGetRowOfChildIfUnblocked(secondary);
+    primaryScroll = listCursorGetRowIfUnblocked(secondary);
     GridNavigation *secondaryExpanded = &panel->secondaryExpanded;
-    expandedSelection = FUN_002a4878(secondaryExpanded);
-    expandedScroll = FUN_002a4894(secondaryExpanded);
+    expandedSelection = listCursorGetRowOfChildIfUnblocked(secondaryExpanded);
+    expandedScroll = listCursorGetRowIfUnblocked(secondaryExpanded);
     gridNavigationConfigure(secondary, slots->capacity, rows, 4, 1, 1);
     gridNavigationConfigure(secondaryExpanded, slots->capacity + 4, rows + 1, 4, 1, 1);
     scrollOwnerSelectIndex(secondary, primarySelection);

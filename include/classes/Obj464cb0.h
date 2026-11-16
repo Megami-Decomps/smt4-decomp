@@ -5,7 +5,7 @@
 
 /* The object whose vtable is at 0x464cb0 (named after it until its real name is known). Its
  * methods each post the object and a message id to the command queue (a pointer array and an entry
- * count, DAT_004729e0/DAT_004729e4 in smt4); the ids are in the method names. The vtable is stored
+ * count, g_modelCommandBuffer/g_modelCommandWordCount in smt4); the ids are in the method names. The vtable is stored
  * by FUN_0011b468. The methods are pure here only so that no unit emits the vtable: the functions
  * exist and the constructor is still C-form. */
 class Obj464cb0 {

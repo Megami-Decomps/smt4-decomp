@@ -19,7 +19,7 @@ void sysMemClear(void *memory, u32 size);
 void asdMemFree(void *memory);
 void textFormatBuffer(char *output, const char *format, ...);
 char *libc_strcpy(char *output, const char *input);
-const char *FUN_00100d60(const char *text, u32 character);
+const char *libc_strrchr(const char *text, u32 character);
 
 // Reset the two assist-effect slots and asynchronously load resources absent from the effect cache.
 u32 FUN_004f9c40(AssistEffectOwner *owner)
@@ -38,7 +38,7 @@ u32 FUN_004f9c40(AssistEffectOwner *owner)
         sysMemClear(formatted, sizeof(formatted));
         textFormatBuffer(formatted, DAT_005284c0, DAT_00528480[i]);
         libc_strcpy(path, formatted);
-        const char *name = FUN_00100d60(path, '/');
+        const char *name = libc_strrchr(path, '/');
         libc_strcpy(slot->name, name + 1);
         if (findRecordByKey(slot->name) == 0xff) {
             asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&slot->data), 1);

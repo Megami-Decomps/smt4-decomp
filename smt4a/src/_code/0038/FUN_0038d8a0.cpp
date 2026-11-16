@@ -22,7 +22,7 @@ u32 FUN_0038d8a0(void)
     u32 effectValue = scrGetArg(1);
     BtlUnitA *unit = btlUnitGet(g_btlScriptUnit);
     BtlSkillA *skill = btlMainFindEntryByListedId(btlGetMainState(), skillId);
-    FUN_003ee0c0(btlGetMainState());
+    btlSlotManagerResetStates(btlGetMainState());
     BtlMainStateA *battle = btlGetMainState();
     BattleRosterRecordA *record = &battle->roster[skill->effect.rosterIndex];
     FUN_004fc094(0, unit, 0, record,

@@ -57,7 +57,7 @@ void FUN_003e573c(NamedResourceTable *table, s32 index, const char *name, u16 ki
             ptrListRemoveClearOwner(g_handleRegistry, object);
         }
     } else if (table->busy == 0 && FUN_0040ab8c(table->handle) != 0) {
-        FUN_001cd3ec(slot->handle, name);
+        modelLoadFileAsyncByName(slot->handle, name);
         slot->state = 4;
         return;
     } else {

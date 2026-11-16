@@ -316,7 +316,7 @@ LAB_004689f8:
     if (temp_v2 != 0) {
       return;
     }
-    temp_v2 = FUN_002e19f8();
+    temp_v2 = buttonHelpStateIsNot3();
     if (temp_v2 == 0) {
       return;
     }

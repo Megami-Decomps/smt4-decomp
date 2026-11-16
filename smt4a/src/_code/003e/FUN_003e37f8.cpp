@@ -79,7 +79,7 @@ extern "C" void FUN_003e37f8(ShopScene *scene)
         if (!padButtonIsPressed(0))
             return;
         eventQueueAddUniqueIfValid(0x100020E);
-        FUN_003343f0(1);
+        gameGlobalsSetMenuOpenFlag(1);
         FUN_00333dc8(1);
         if (state->cost > state->funds) {
             s32 entry = tableGroupFindEntryIndex(scene->tableGroup, DAT_00533214);
@@ -114,7 +114,7 @@ extern "C" void FUN_003e37f8(ShopScene *scene)
     case 11:
         if (!FUN_0026c3a0())
             return;
-        FUN_003343f0(0);
+        gameGlobalsSetMenuOpenFlag(0);
         FUN_00333dc8(0);
         FUN_002c8538(0);
         buttonHelpSetText(0, 0xF4F4F4FF);

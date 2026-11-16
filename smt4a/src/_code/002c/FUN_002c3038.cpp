@@ -22,7 +22,7 @@ void renderCtxResetColorScale(RenderCtxA *context);
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 u32 renderCtxPackPassFlags(u32 kind, bool enabled);
 void mobiclipRenderCurrentScreen(void);
-void FUN_00167618(const f32 *topLeft, const f32 *topRight, const f32 *bottomLeft, const f32 *bottomRight, f32 x, f32 y,
+void gfxDrawQuadFourColors(const f32 *topLeft, const f32 *topRight, const f32 *bottomLeft, const f32 *bottomRight, f32 x, f32 y,
                   f32 width, f32 height, f32 depth);
 int FUN_00102bbc(void *destination, const void *source, u32 size);
 
@@ -44,7 +44,7 @@ u32 FUN_002c3038(u32 handle)
             color[2] = 0.0f;
             color[3] = 1.0f;
             renderCtxSelectTexture(g_renderCtx, NULL);
-            FUN_00167618(color, color, color, color, 0.0f, 0.0f, 400.0f, 240.0f, 0.9375f);
+            gfxDrawQuadFourColors(color, color, color, color, 0.0f, 0.0f, 400.0f, 240.0f, 0.9375f);
         }
         if (work->fade != 0.0f) {
             f32 color[4];
@@ -56,7 +56,7 @@ u32 FUN_002c3038(u32 handle)
             renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, false));
             color[3] = work->fade;
             renderCtxSelectTexture(g_renderCtx, NULL);
-            FUN_00167618(color, color, color, color, 0.0f, 0.0f, 400.0f, 240.0f, 0.9375f);
+            gfxDrawQuadFourColors(color, color, color, color, 0.0f, 0.0f, 400.0f, 240.0f, 0.9375f);
             renderStackPop(&g_renderCtx->stackA);
         }
     } else {

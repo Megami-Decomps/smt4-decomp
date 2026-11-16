@@ -33,7 +33,7 @@ void FUN_002a1850(f32 *screen, s32 display, const ProjectionMatrices *camera, co
 PartnerMessageOffset FUN_00416388(PartnerMessageOwnerView *owner, s32 index, UiSpriteState *sprite);
 void pairSetHalves(UiSpriteState *sprite, s32 x, s32 y);
 TextMeasureState *spriteHandleCreate(u32 kind);
-void FUN_001527d8(TextMeasureState *text, u32 color);
+void uiObjectSetColorRgb(TextMeasureState *text, u32 color);
 void positionStateSet(TextMeasureState *text, u32 first, u32 second, f32 scale);
 void objFlagsSetBits(TextMeasureState *text, u32 flags);
 void asdTextDrawDirectoryEntry(TextMeasureState *text, s32 type, u32 color, s32 first, s32 second, void *directory, u32 entry);
@@ -70,7 +70,7 @@ void FUN_00416960(PartnerMessageOwnerView *owner, s32 index, u32 message, Vector
     PartnerMessageBattleView *battle = (PartnerMessageBattleView *)btlGetMainState();
     if (slot->text == NULL)
         slot->text = spriteHandleCreate(0);
-    FUN_001527d8(slot->text, 0x320202FF);
+    uiObjectSetColorRgb(slot->text, 0x320202FF);
     positionStateSet(slot->text, 0, 0x646464FF, 0.0f);
     objFlagsSetBits(slot->text, 8);
     objFlagsSetBits(slot->text, 0x100);

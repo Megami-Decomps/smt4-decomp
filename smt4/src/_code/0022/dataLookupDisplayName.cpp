@@ -2,7 +2,7 @@
 #include "bible/bibleAnalyze.h"
 
 extern "C" {
-extern DisplayNameOverride DAT_0044ce08[999];
+extern DisplayNameOverride g_displayNameOverrides[999];
 extern NaviNameStateView g_naviMain;
 s32 dataTable2eSub2GetCount(void);
 DisplayNameRecord *dataTable2eSub2GetRecord(s32);
@@ -12,10 +12,10 @@ const char *dataLookupDisplayName(s32 unused, s32 id)
 {
     if (id >= 100) {
         for (s32 index = 0; index < 999; ++index) {
-            if (DAT_0044ce08[index].id == -1)
+            if (g_displayNameOverrides[index].id == -1)
                 break;
-            if (DAT_0044ce08[index].id == id)
-                return DAT_0044ce08[index].text;
+            if (g_displayNameOverrides[index].id == id)
+                return g_displayNameOverrides[index].text;
         }
     } else {
         for (s32 index = 0; index < dataTable2eSub2GetCount(); ++index) {

@@ -35,7 +35,7 @@ void FUN_004cd4b8(UnitRecord *record, s16 levelDelta);
 void unitRecomputeDerivedStats(UnitRecord *record);
 s32 FUN_004cc8d8(u16 id, u16 level);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
-void FUN_004bd6b0(UnitRecord *record, u16 skill, s32 slot);
+void partyRecordSetEquippedItemClampRank(UnitRecord *record, u16 skill, s32 slot);
 void statusDisplayBindUnitRecord(const UnitRecord *record, u32 option, u32 mode, u32 flags);
 void objBInitBlock19D0(const UnitRecord *record, u32 option, u32 flags);
 void statusPanelSetOpen(u32 open);
@@ -60,13 +60,13 @@ void FUN_003e3a20(InheritancePreviewWork *work, const InheritanceTargetStats *ta
     s32 unlocked = getUnlockedSlotCount(0);
     u32 count = 0;
     for (s32 index = 0; index < 8; ++index)
-        FUN_004bd6b0(&preview, 0, index);
+        partyRecordSetEquippedItemClampRank(&preview, 0, index);
     for (s32 index = 0; index < 8; ++index) {
         s16 skill = choice.skills[index];
         if (skill) {
             inherited[count] = skill;
             if (count < unlocked)
-                FUN_004bd6b0(&preview, skill, count);
+                partyRecordSetEquippedItemClampRank(&preview, skill, count);
             ++count;
         }
     }

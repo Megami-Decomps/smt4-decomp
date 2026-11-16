@@ -60,7 +60,7 @@ extern int dataTableGetEntries(void);
 /* Supplied declaration required: jobGetScalarValue. */
 extern int recordGetModeForId(int);
 extern int resourceRunOperationIfUnblocked(int);
-extern int FUN_002a4894(int);
+extern int listCursorGetRowIfUnblocked(int);
 extern int uiSearchPrimary(int);
 
 
@@ -125,7 +125,7 @@ unsigned int FUN_0032ba8c(void)
   efctSetSpeed();
   texDrawCompositeSprite(2,0x24,0xc,temp_v2,temp_v3,0xb);
   temp_v4 = resourceRunOperationIfUnblocked(temp_v1 + 0xf0);
-  temp_v28 = FUN_002a4894(temp_v1 + 0xf0);
+  temp_v28 = listCursorGetRowIfUnblocked(temp_v1 + 0xf0);
   temp_v28 = temp_v28 + temp_v4;
   temp_v8 = 0;
   temp_v4 = uiSearchPrimary(temp_v1 + 0xf0);

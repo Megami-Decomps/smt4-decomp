@@ -61,7 +61,7 @@ extern "C" {
 void FUN_001dd930(void);
 void playerSkillInsertFirstFree(u32 skill);
 void FUN_00295a18(u32 id, u32 count);
-void FUN_00299370(s32 arg);
+void playerRecalcStatsFromEquipment(s32 arg);
 void libc_strcpy(char* dst, const char* src);
 void rt_memclr(void* block, u32 size);
 void __aeabi_memset4(void* block, u32 size, s32 value);
@@ -94,7 +94,7 @@ void FUN_0033adf8(BattleMainBlock* battle, u32 row)
 
     PlayerData* player = gameGetPlayerData();
     for (s32 i = 0; i < 5; i++) player->stats[i] = scenario->stats[i];
-    FUN_00299370(0);
+    playerRecalcStatsFromEquipment(0);
     if (scenario->hp > 0) {
         player->hp = scenario->hp;
         player->hpMax = scenario->hp;

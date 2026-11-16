@@ -27,7 +27,7 @@ BtlDebugEntry *FUN_002cc228(u8 index, s32 empty);
 s32 gameFlagIsSet(u32 flag);
 u8 gameDataFlagTestBit(u32 bit);
 s32 idListHasFlaggedRecord(u32 record);
-s32 FUN_00291e14(void);
+s32 btlIsDefeatSuppressed(void);
 s32 btlObjectHasEntryFlag(u32 record);
 s32 FUN_002b24fc(void);
 
@@ -70,7 +70,7 @@ u8 FUN_003da6ac(BtlDebugMenu *menu, s32 which)
             continue;
         } else if (entry->kind == 3) {
             if (menu->entryTable[menu->selection] != -1 && record != 0 && idListHasFlaggedRecord(record) == 0) {
-                if ((entry->flags & 1) != 0 || FUN_00291e14() == 0 || btlObjectHasEntryFlag(record) == 0) {
+                if ((entry->flags & 1) != 0 || btlIsDefeatSuppressed() == 0 || btlObjectHasEntryFlag(record) == 0) {
                     continue;
                 }
             }
@@ -80,7 +80,7 @@ u8 FUN_003da6ac(BtlDebugMenu *menu, s32 which)
                 continue;
             }
         }
-        if ((entry->flags & 1) != 0 && FUN_00291e14() != 0) {
+        if ((entry->flags & 1) != 0 && btlIsDefeatSuppressed() != 0) {
             continue;
         }
         if (found == which) {

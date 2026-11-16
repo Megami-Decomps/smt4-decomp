@@ -31,7 +31,7 @@ struct SceneState {
 
 extern "C" {
 
-extern TrigEntry DAT_00407ed0[];
+extern TrigEntry g_sinCosTable[];
 extern FieldCameraSetup g_gameState;
 extern SceneState* DAT_004474f4;
 
@@ -48,7 +48,7 @@ static inline SinCos lookupSinCos(f32 angle, bool negate)
     while (a >= 65536.0f) a -= 65536.0f;
     u32 whole = (u32)a;
     f32 fraction = a - (f32)(whole & 0xffff);
-    const TrigEntry* entry = &DAT_00407ed0[whole & 0xff];
+    const TrigEntry* entry = &g_sinCosTable[whole & 0xff];
     SinCos result;
     result.sine = entry->sine + fraction * entry->sineSlope;
     result.cosine = entry->cosine + fraction * entry->cosineSlope;

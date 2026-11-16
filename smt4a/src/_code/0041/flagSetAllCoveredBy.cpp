@@ -17,7 +17,7 @@ typedef struct FlagBlock00418768 {
 } FlagBlock00418768;
 
 FlagBlock00418768 *gameFlagBlockGet(void);
-u32 FUN_001bd100(u32 index);
+u32 dataTable1bOr1cRecordHasFlag1(u32 index);
 
 /* The entry's flag bit, as 0 or 1. */
 static u32 entryFlag(u32 index, u32 flag, u32 shift)
@@ -25,15 +25,15 @@ static u32 entryFlag(u32 index, u32 flag, u32 shift)
     return (gameFlagBlockGet()->entries[index].flags & flag) >> shift;
 }
 
-/* Returns 0 when some defined, unblocked entry has exactly the bit set `mask` (FUN_001bd100); 1 when none does. */
+/* Returns 0 when some defined, unblocked entry has exactly the bit set `mask` (dataTable1bOr1cRecordHasFlag1); 1 when none does. */
 u32 flagSetAllCoveredBy(u32 mask)
 {
     u16 i;
 
     for (i = 0; i < 400; i++) {
         if (entryFlag(i, ENTRY_DEFINED, 3) != 0
-            && (FUN_001bd100(i) & ~mask) == 0
-            && (mask & ~FUN_001bd100(i)) == 0
+            && (dataTable1bOr1cRecordHasFlag1(i) & ~mask) == 0
+            && (mask & ~dataTable1bOr1cRecordHasFlag1(i)) == 0
             && entryFlag(i, ENTRY_BLOCKED, 4) == 0) {
             return 0;
         }

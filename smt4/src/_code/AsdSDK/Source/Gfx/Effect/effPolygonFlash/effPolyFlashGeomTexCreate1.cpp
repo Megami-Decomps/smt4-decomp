@@ -4,18 +4,18 @@
 
 extern "C" {
 
-extern const char DAT_00410408[]; /* effPolygonFlash.cpp: __FILE__ */
+extern const char g_effPolygonFlashSourceFileName[]; /* effPolygonFlash.cpp: __FILE__ */
 
 void *memAlloc(int, int, int, int size, int align, int);
 PolyGeom *effGeomCreateRepeatedIndexList(u32 count, int w, int h, u8 *table, int tableSize);
 void textureSlotReplace(PolyGeom *geom, void *texture);
 u32 sysGetTableWord(int id);
-extern u8 DAT_004737c2;
+extern u8 g_effQuadIndexList;
 
 /* Allocates a geometry block (16-byte header plus `payloadBytes`), recording the allocation site first. */
 static PolyGeomBlock *allocGeomBlock(u32 payloadBytes, s32 line)
 {
-    asdDebugTrace(DAT_00410408, line);
+    asdDebugTrace(g_effPolygonFlashSourceFileName, line);
     PolyGeomBlock *block = (PolyGeomBlock *)memAlloc(0x10000, 0x100, 0, payloadBytes + 0x10, 0x10, 1);
     block->data = block->payload;
     block->self = block;
@@ -28,7 +28,7 @@ PolyGeomBlock *effPolyFlashGeomTexCreate1(PolyParams *params, void *texture)
     PolyGeom *geom;
     PolyGeomBlock *block = allocGeomBlock(params->segments * 0x18, 1638);
 
-    geom = effGeomCreateRepeatedIndexList(params->segments & 0xffff, 2, 4, &DAT_004737c2, 76);
+    geom = effGeomCreateRepeatedIndexList(params->segments & 0xffff, 2, 4, &g_effQuadIndexList, 76);
     block->geom = geom;
     if (texture == NULL) {
         geom->unk04 = sysGetTableWord(19);

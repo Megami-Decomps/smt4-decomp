@@ -25,7 +25,7 @@ static __inline void textHistoryWriteUnit(RenderChannelTable *table, u32 codepoi
 extern "C" {
 #endif
 
-u8 FUN_0019be8c(s32 value);
+u8 charCodeIsPrivateUseGlyph(s32 value);
 
 #ifdef __cplusplus
 }

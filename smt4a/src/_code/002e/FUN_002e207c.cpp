@@ -17,7 +17,7 @@ struct LinkController {
 
 s32 linkHolderCallFirst(u32 holder);
 void linkHolderApplyFirst(u32 holder, s32 arg, f32 x, f32 y);
-void FUN_0034a3b4(void);
+void statusCameraInitialize(void);
 
 /* Resets the controller's scale for the holder's kind, cancels a pending link and finishes. */
 void FUN_002e207c(LinkController *controller)
@@ -38,7 +38,7 @@ void FUN_002e207c(LinkController *controller)
         controller->pending = 0;
         linkHolderApplyFirst(controller->holder, 0, 0.0f, 0.0f);
     }
-    FUN_0034a3b4();
+    statusCameraInitialize();
 }
 
 } /* extern "C" */

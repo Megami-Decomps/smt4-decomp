@@ -12,7 +12,7 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned char LAB_002e4184; /* 0x2e4184 */
-extern unsigned char DAT_0064c004; /* 0x64c004 */
+extern unsigned char g_rwEmptyStringRep; /* 0x64c004 */
 
 extern unsigned int *_ZN4__rw13__rw_allocateEji(int, unsigned int);
 /* Supplied declaration required: _ZN4__rw10__rw_throwEiz. */
@@ -47,7 +47,7 @@ unsigned int * __rw_string_rep_allocate(unsigned int param_1,unsigned int param_
     }
     return puVar1;
   }
-  return (unsigned int *)&DAT_0064c004;
+  return (unsigned int *)&g_rwEmptyStringRep;
 }
 
 } /* extern "C" */

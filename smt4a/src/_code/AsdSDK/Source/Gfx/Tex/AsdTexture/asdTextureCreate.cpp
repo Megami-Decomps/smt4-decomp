@@ -3,7 +3,7 @@
 
 extern "C" {
 
-extern const char DAT_0053d290[];
+extern const char g_asdTextureSourceFileName[];
 
 void *asdMemoryAlloc(int, int, int, s32 size, int flag);
 void sysMemClear(void *block, s32 size);
@@ -19,10 +19,10 @@ AsdTexture *asdTextureCreate(s32 shared)
     AsdTexture *tex;
 
     if (shared != 0) {
-        asdDebugTrace(DAT_0053d290, 43);
+        asdDebugTrace(g_asdTextureSourceFileName, 43);
         tex = (AsdTexture *)asdMemoryAlloc(0x10000, 0x100, 0, 0x48, 0);
     } else {
-        asdDebugTrace(DAT_0053d290, 47);
+        asdDebugTrace(g_asdTextureSourceFileName, 47);
         tex = (AsdTexture *)asdMemoryAlloc(0x10000, 0x100, 0, 0x48, 1);
     }
     sysMemClear(tex, 0x48);

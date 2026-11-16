@@ -13,7 +13,7 @@ static __inline void copyVector(AsdCameraVec3 *destination, const AsdCameraVec3 
 extern "C" {
 void FUN_0014f0dc(void *owner);
 void FUN_001aff14(MTX34 *matrix, s32 mode, f32 x, f32 y, f32 z);
-void FUN_0018a924(f32 *first, f32 *second, f32 angle);
+void mathSinCos(f32 *first, f32 *second, f32 angle);
 void FUN_00162330(void *destination, const MTX34 *source);
 void FUN_0015a1b4(AsdCamera *camera, const MTX34 *view);
 void nn_math_ARMv6_MTX34CopyAsm(MTX34 *dest, const MTX34 *source);
@@ -75,7 +75,7 @@ void FUN_004f112c(void *owner, AsdCamera *camera, const AsdCameraVec3 *eye, cons
             f32 upX = forwardZ * sideX - forwardX * sideZ;
             f32 upY = forwardX * 0.0f - forwardY * sideX;
             f32 upZ = forwardY * sideZ - forwardZ * 0.0f;
-            FUN_0018a924(&sine, &cosine, rotation->z * (256.0f / 360.0f));
+            mathSinCos(&sine, &cosine, rotation->z * (256.0f / 360.0f));
             f32 rowX0 = sine * upZ + cosine * sideX;
             f32 rowX1 = cosine * upZ - sine * sideX;
             f32 rowZ0 = sine * upY + cosine * sideZ;

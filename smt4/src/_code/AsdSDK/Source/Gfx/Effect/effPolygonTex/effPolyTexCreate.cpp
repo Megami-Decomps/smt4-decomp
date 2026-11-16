@@ -23,7 +23,7 @@ u32 sysGetTableWord(int id);
 void refCountIncrement(u32 texture);
 void *effTlpCreate(u32 *resource);
 
-extern u8 DAT_004737c2;
+extern u8 g_effQuadIndexList;
 extern const char DAT_00410498[]; /* effPolygonTex.cpp: __FILE__ */
 
 /* Creates a textured polygon object from an effect description: zeroed object, one-segment
@@ -43,7 +43,7 @@ PolyTexObject *effPolyTexCreate(PolyTexDesc *desc)
     obj->unk24 = -1;
     obj->scale = 1.0f;
     if (desc != NULL) {
-        obj->geom = effGeomCreateRepeatedIndexList(1, 2, 4, &DAT_004737c2, 0x4c);
+        obj->geom = effGeomCreateRepeatedIndexList(1, 2, 4, &g_effQuadIndexList, 0x4c);
         obj->kind = desc->kind;
         rt_memcpy(obj->params, resourceResolveHeaderPointer(desc), 152);
         resource = resourceResolveDataPointer(desc);

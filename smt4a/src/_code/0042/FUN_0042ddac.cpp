@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00193038(int *, int **);
 int __ARM_common_memcpy4_8(...);
-int FUN_0030fc80(int **);
+int clockGetTicksAsMicroseconds(int **);
 int FUN_0042f79c(void);
 int FUN_00430e58(int *);
 int _ZN12CecMessageIdC1Ev(unsigned char [8]);
@@ -40,7 +40,7 @@ extern unsigned int g_asdCecMessageBoxCriticalSection; /* 0x6426c0 */
 
 /* Supplied declaration required: FUN_00193038. */
 /* Supplied declaration required: __ARM_common_memcpy4_8. */
-/* Supplied declaration required: FUN_0030fc80. */
+/* Supplied declaration required: clockGetTicksAsMicroseconds. */
 /* Supplied declaration required: FUN_0042f79c. */
 /* Supplied declaration required: FUN_00430e58. */
 extern unsigned int releaseOrCopyHandle2(unsigned int *, unsigned int *);
@@ -142,7 +142,7 @@ int * FUN_0042ddac(int *param_1,int param_2,int param_3,unsigned int param_4,int
   copy0x70Bytes(param_2,temp_v10);
   temp_v0 = nn_cec_CTR_MessageId_IsEmpty((unsigned int)temp_v12);
   if (temp_v0) {
-    FUN_0030fc80(&temp_v21);
+    clockGetTicksAsMicroseconds(&temp_v21);
     temp_v19 = temp_v21;
     temp_v20 = temp_v22;
     FUN_00193038(&temp_v9,&temp_v19);

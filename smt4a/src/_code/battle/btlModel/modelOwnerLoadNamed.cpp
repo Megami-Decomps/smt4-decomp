@@ -7,7 +7,7 @@ extern "C" {
 char *libc_strcpy(char *destination, const char *source);
 void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 void *modelListInit(void *allocation);
-void FUN_001cd3ec(void *model, const char *name);
+void modelLoadFileAsyncByName(void *model, const char *name);
 
 /* Copies the model name and creates its model-list object. */
 void modelOwnerLoadNamed(ModelOwner *owner, const char *name)
@@ -18,7 +18,7 @@ void modelOwnerLoadNamed(ModelOwner *owner, const char *name)
         model = modelListInit(model);
     }
     owner->model = model;
-    FUN_001cd3ec(model, name);
+    modelLoadFileAsyncByName(model, name);
 }
 
 } /* extern "C" */

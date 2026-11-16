@@ -33,10 +33,10 @@ void useCounterStart(void)
     work->state = 1;
     work->frame = 0;
     if (work->valueOffset >= 0) {
-        const u8 *value = FUN_002a0d0c() + work->valueOffset;
+        const u8 *value = gameDataGetSortPreferences() + work->valueOffset;
         for (s32 index = 0; index < work->count; ++index) {
             if (work->values[index] == (*value & 0x7f)) {
-                FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(work->selection), index);
+                scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(work->selection), index);
                 break;
             }
         }

@@ -14,16 +14,16 @@ void uiQuestSpritesCreate(void)
 
     quest->messages = asdLoadFileSyncDefault("event/quest/QuestSys.mbm");
     quest->sprites[0] = spriteHandleCreate(0);
-    FUN_001527d8(quest->sprites[0], 0xffffffff);
+    uiObjectSetColorRgb(quest->sprites[0], 0xffffffff);
     positionStateSet(quest->sprites[0], 0, 0x646464ff, 0.0f);
     quest->sprites[1] = spriteHandleCreate(0);
-    FUN_001527d8(quest->sprites[1], 0x5eaabaff);
+    uiObjectSetColorRgb(quest->sprites[1], 0x5eaabaff);
     positionStateSet(quest->sprites[1], 0, 0x646464ff, 0.0f);
     quest->sprites[2] = spriteHandleCreate(0);
-    FUN_001527d8(quest->sprites[2], 0xffffffff);
+    uiObjectSetColorRgb(quest->sprites[2], 0xffffffff);
     positionStateSet(quest->sprites[2], 0, 0x646464ff, 0.0f);
     quest->sprites[3] = spriteHandleCreate(0);
-    FUN_001527d8(quest->sprites[3], 0xffffffff);
+    uiObjectSetColorRgb(quest->sprites[3], 0xffffffff);
     positionStateSet(quest->sprites[3], 0, 0x646464ff, 0.0f);
 }
 

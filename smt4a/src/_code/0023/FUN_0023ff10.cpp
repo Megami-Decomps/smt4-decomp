@@ -51,12 +51,12 @@ extern QuestUi *g_uiQuest;
 extern GameStateView g_gameState;
 
 void sysPlaySe(u32 id);
-void FUN_00183f58(s32 a, s32 b, s32 c, s32 d);
+void buttonHelpSelectSlot(s32 a, s32 b, s32 c, s32 d);
 EntryKindRecord *dataTable1bOr1cGetRecord(u32 id);
 s32 resourceRunOperationIfUnblocked(void *list);
 void *questUiGetList(QuestUiLower *lower);
 s32 partyEntryFlagsBit3(u32 id);
-u32 FUN_004186e0(void);
+u32 rosterGetLeaderId(void);
 
 /* Plays the cursor sound for the quest screen's current page/column and sets up the help buttons for the
  * selected entry. */
@@ -133,12 +133,12 @@ void FUN_0023ff10(void)
     void *list = questUiGetList(&ui->lower);
 
     pageOffset = resourceRunOperationIfUnblocked(list);
-    row = FUN_002a4894(reinterpret_cast<const Object *>(list));
+    row = listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(list));
     id = ui->ids[pageOffset + row];
     record = dataTable1bOr1cGetRecord(id);
     if (flags->locked != 0) {
-        FUN_00183f58(5, 1, 0x32, 1);
-        FUN_00183f58(2, 0x12, 0, 1);
+        buttonHelpSelectSlot(5, 1, 0x32, 1);
+        buttonHelpSelectSlot(2, 0x12, 0, 1);
     } else {
         if (record != NULL && (record->kind == 6 || record->kind == 9 || record->kind == 11)) {
             s32 hasBit = partyEntryFlagsBit3(id);
@@ -147,15 +147,15 @@ void FUN_0023ff10(void)
             if (hasBit != 0) {
                 kind = record->kind;
             }
-            if ((hasBit == 0 || kind == 9) && FUN_004186e0() != id) {
-                FUN_00183f58(5, 1, 0x31, 1);
-                FUN_00183f58(2, 0x12, 0, 1);
+            if ((hasBit == 0 || kind == 9) && rosterGetLeaderId() != id) {
+                buttonHelpSelectSlot(5, 1, 0x31, 1);
+                buttonHelpSelectSlot(2, 0x12, 0, 1);
                 return;
             }
         }
-        FUN_00183f58(5, 0x12, 0, 1);
+        buttonHelpSelectSlot(5, 0x12, 0, 1);
     }
-    FUN_00183f58(2, 0x12, 0, 1);
+    buttonHelpSelectSlot(2, 0x12, 0, 1);
 }
 
 } /* extern "C" */

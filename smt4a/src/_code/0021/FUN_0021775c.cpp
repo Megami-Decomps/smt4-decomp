@@ -54,7 +54,7 @@ extern unsigned int flagValueRead(unsigned int);
 /* Supplied declaration required: FUN_0026ec00. */
 extern int recordGetModeForId(int);
 extern int resourceRunOperationIfUnblocked(int);
-extern int FUN_002a4894(int);
+extern int listCursorGetRowIfUnblocked(int);
 extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: FUN_0048144c. */
 
@@ -197,17 +197,17 @@ void FUN_0021775c(int param_1,int param_2)
       FUN_0023d150(temp_v12,temp_v2,temp_v3,1);
       if (temp_v16 != 0) {
         temp_v7 = resourceRunOperationIfUnblocked(temp_v12);
-        temp_v4 = FUN_002a4894(temp_v12);
+        temp_v4 = listCursorGetRowIfUnblocked(temp_v12);
         temp_v0 = *(unsigned short *)(temp_v8 + (temp_v4 + temp_v7) * 2);
         temp_v9 = (unsigned int)temp_v0;
-        temp_v8 = FUN_002a4894(temp_v12);
+        temp_v8 = listCursorGetRowIfUnblocked(temp_v12);
         temp_v1 = recordGetModeForId((int)*(short *)(temp_v1 + temp_v8 * 2 + 0x1b3e));
         temp_v11 = 0x9fe7ffff;
         if ((temp_v1 == 1 || temp_v1 == 2) || temp_v1 == 6) {
           temp_v11 = 0xf5ff9fff;
           temp_v14 = 1;
         }
-        temp_v1 = FUN_002a4894(temp_v12);
+        temp_v1 = listCursorGetRowIfUnblocked(temp_v12);
         temp_v1 = (int)asdTMTexTableEntryAt(0x14,temp_v1 + 0x42e);
         FUN_0026ec00(*(short *)(temp_v1 + 8) + temp_v2,*(short *)(temp_v1 + 10) + temp_v3,temp_v14);
         temp_v8 = (int)asdTMTexTableEntryAt(0x14,0x477);

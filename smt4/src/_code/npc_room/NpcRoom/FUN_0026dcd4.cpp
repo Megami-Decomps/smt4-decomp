@@ -7,7 +7,7 @@ extern "C" {
 
 int FUN_00252190(...);
 int FUN_00285e44(...);
-int FUN_002898e4(...);
+int commonBgAcquire(...);
 int buttonHelpCreate(...);
 int FUN_00290d5c(...);
 int scrScriptProcessCreate(...);
@@ -44,7 +44,7 @@ extern unsigned int *g_npcRoom; /* 0x44d198 */
 /* Supplied declaration required: FUN_00252190. */
 /* Supplied declaration required: FUN_00285e44. */
 /* Supplied declaration required: commonBgStopChildAndBeginTransition. */
-/* Supplied declaration required: FUN_002898e4. */
+/* Supplied declaration required: commonBgAcquire. */
 /* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: FUN_00290d5c. */
 /* Supplied declaration required: scrScriptProcessCreate. */
@@ -263,7 +263,7 @@ LAB_0026e0ac:
   *(unsigned short *)((int)puVar6 + 0x102) =
        *(unsigned short *)((temp_v6 + (unsigned int)*(unsigned short *)(puVar6[9] + 0x22) * 2) - 2);
   asdTMTexTablePrepareNodeImage(2);
-  FUN_002898e4();
+  commonBgAcquire();
   commonBgStopChildAndBeginTransition();
   buttonHelpCreate();
   FUN_00290d5c(0xa0);

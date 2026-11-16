@@ -15,7 +15,7 @@ int FUN_0026f824(int);
 int gameCopyPersistentSave(void);
 int FUN_00287c34(int);
 
-int FUN_00299370(...);
+int playerRecalcStatsFromEquipment(...);
 int FUN_0029c1c8(...);
 int unitRecalculateEffectiveStats(...);
 int gameFlagIsSet(...);
@@ -72,7 +72,7 @@ extern int gameDataGetWorkBlock(void);
 /* Supplied declaration required: gameCopyPersistentSave. */
 /* Supplied declaration required: FUN_00287c34. */
 extern int flagBitIsSet(unsigned int);
-/* Supplied declaration required: FUN_00299370. */
+/* Supplied declaration required: playerRecalcStatsFromEquipment. */
 /* Supplied declaration required: FUN_0029c1c8. */
 /* Supplied declaration required: unitRecalculateEffectiveStats. */
 extern int flagWordTestBit(int, unsigned int);
@@ -372,7 +372,7 @@ void FUN_001c36d8(int param_1)
                     temp_v9 = *(unsigned int *)(temp_v3 + 0x50);
                     *(unsigned int *)(temp_v2 + 0x4c) = *(unsigned int *)(temp_v3 + 0x4c);
                     *(unsigned int *)(temp_v2 + 0x50) = temp_v9;
-                    FUN_00299370(0);
+                    playerRecalcStatsFromEquipment(0);
                     FUN_00333edc();
                     temp_v22 = 1;
                     break;

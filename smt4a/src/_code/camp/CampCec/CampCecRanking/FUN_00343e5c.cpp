@@ -8,7 +8,7 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_001527d8(...);
+int uiObjectSetColorRgb(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
 int FUN_00169a1c(...);
@@ -35,7 +35,7 @@ typedef struct {
 extern int g_campCecRanking; /* 0x57f11c */
 
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_001527d8. */
+/* Supplied declaration required: uiObjectSetColorRgb. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
@@ -185,7 +185,7 @@ int FUN_00343e5c(void)
             temp_v0 = *(short *)(temp_v12 + 8);
             temp_v1 = *(short *)(temp_v12 + 10);
             temp_v12 = temp_v2 + temp_v8 * 4;
-            FUN_001527d8(*(unsigned int *)(temp_v12 + 600),temp_v14);
+            uiObjectSetColorRgb(*(unsigned int *)(temp_v12 + 600),temp_v14);
             FUN_0025cc78(*(unsigned int *)(temp_v12 + 600),temp_v5 + temp_v0 + temp_v11,temp_v4 + temp_v1 + temp_v9
                          ,0x65);
             if (temp_v10 < 4) {

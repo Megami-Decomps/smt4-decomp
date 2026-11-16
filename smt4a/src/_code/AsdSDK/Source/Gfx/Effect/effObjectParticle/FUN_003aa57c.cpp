@@ -7,7 +7,7 @@ extern "C" {
 extern const char DAT_00544af8[];
 EffParticleSource *effBehaviorCreate(u32 id, u32 owner, u32 flags);
 void *memAlloc(u32 pool, u32 category, u32 flags, u32 size, u32 alignment, u32 tracked);
-void FUN_00390368(EffObjectParticle *object, EffObjectParticleState *state);
+void effObjectParticleInitMotion(EffObjectParticle *object, EffObjectParticleState *state);
 
 /* Replace the particle source and allocate one initialized state per source entry. */
 void FUN_003aa57c(EffObjectParticle *object, u32 sourceId, u32 flags)
@@ -27,7 +27,7 @@ void FUN_003aa57c(EffObjectParticle *object, u32 sourceId, u32 flags)
     u32 index = 0;
     object->states = state;
     for (; index < count; ++index, ++state) {
-        FUN_00390368(object, state);
+        effObjectParticleInitMotion(object, state);
     }
 }
 }

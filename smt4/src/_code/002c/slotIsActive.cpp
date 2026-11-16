@@ -14,7 +14,7 @@ typedef struct InputState {
 } InputState;
 
 extern MaskEntry DAT_00409ab0[31];
-extern InputState DAT_004650a0;
+extern InputState g_padInputState;
 extern u32 DAT_004e3c28;
 extern u32 DAT_004e3c48;
 
@@ -28,7 +28,7 @@ u8 slotIsActive(u32 index)
     if (index < 31) {
         entry = &DAT_00409ab0[index];
         if (entry->disabled == 0) {
-            if ((DAT_004650a0.flags & 1) != 0) {
+            if ((g_padInputState.flags & 1) != 0) {
                 source = &DAT_004e3c48;
             } else {
                 source = &DAT_004e3c28;

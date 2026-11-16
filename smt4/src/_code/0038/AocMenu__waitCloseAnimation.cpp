@@ -2,7 +2,7 @@
 #include "ui/SceneWindowWork.h"
 
 extern "C" {
-void FUN_0027ea28(void *job, u32 message, s32 argument, s32 flags);
+void aocEntryPanelCreateText(void *job, u32 message, s32 argument, s32 flags);
 void aocMenuSetButtonHelp(SceneWindowWork *, s32, s32);
 void FUN_0027e9c0(void *job);
 void jobOwnerFreeSlotAndStop(void *job);
@@ -18,7 +18,7 @@ void AocMenu::waitCloseAnimation()
     void *job = &work->dialogJob;
     switch (work->transition.phase) {
     case 0:
-        FUN_0027ea28(job, 0x67, 0, 0);
+        aocEntryPanelCreateText(job, 0x67, 0, 0);
         aocMenuSetButtonHelp(work, 3, 1);
         work->transition.phase = 1;
         break;

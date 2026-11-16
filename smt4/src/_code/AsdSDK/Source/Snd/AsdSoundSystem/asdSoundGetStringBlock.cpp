@@ -15,7 +15,7 @@ void soundArchiveLoadStringBlock(void *archive, void *buffer, u32 size);
 void *asdSoundGetStringBlock(void)
 {
     AsdSoundSystem *sound = &g_asdSound;
-    s32 available = FUN_002bf684(sound->archive);
+    s32 available = nw_snd_SoundArchive_IsAvailable(sound->archive);
     void **stringBlock = &DAT_004e23e0;
     if (!available) {
         return sound->stringBlock;

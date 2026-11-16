@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_002f4f20(int, int);
+int atomicAddS32(int, int);
 
-/* Supplied declaration required: FUN_002f4f20. */
+/* Supplied declaration required: atomicAddS32. */
 
 
 int sharedRefAddRef(int param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_002f4f20(param_1 + 4,1);
+  atomicAddS32(param_1 + 4,1);
   return param_1;
 }
 

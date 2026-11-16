@@ -100,7 +100,7 @@ extern int FUN_001584f8(unsigned int, unsigned int);
 /* Supplied declaration required: linkListEraseObject. */
 /* Supplied declaration required: FUN_002a2164. */
 extern unsigned int FUN_002a2174(void);
-extern unsigned int FUN_002baf30(void);
+extern unsigned int nw_snd_internal_driver_VoiceManager_GetInstance(void);
 extern unsigned int FUN_002bb020(void);
 /* Supplied declaration required: nw_snd_internal_TaskManager_AppendTask. */
 /* Supplied declaration required: nw_snd_internal_driver_HardwareManager_ClearEffect. */
@@ -313,7 +313,7 @@ void FUN_001546c0(int *param_1)
                 (&DAT_004ea168,*(unsigned char *)(param_1 + 4),param_1[6]);
       break;
     case 0x39:
-      temp_v1 = FUN_002baf30();
+      temp_v1 = nw_snd_internal_driver_VoiceManager_GetInstance();
       nw_snd_internal_driver_VoiceManager_UpdateAllVoicesSync(temp_v1,param_1[4]);
       break;
     case 0x3a:

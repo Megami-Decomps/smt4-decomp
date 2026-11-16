@@ -3,10 +3,10 @@ extern "C" {
 struct Entry { u8 unk00[0xADC]; u8 member[0x214]; u32 argument; };
 Entry *QuestCenter_GetActiveEntry(void);
 void buttonHelpSetText(u32, u32);
-void FUN_0038892c(void *, u32);
+void questCenterShowDisplayMessage(void *, u32);
 void questCenterInitializeDisplay(void) {
     void *member = QuestCenter_GetActiveEntry()->member;
     buttonHelpSetText(0, 0xF4F4F4FF);
-    FUN_0038892c(member, QuestCenter_GetActiveEntry()->argument);
+    questCenterShowDisplayMessage(member, QuestCenter_GetActiveEntry()->argument);
 }
 }

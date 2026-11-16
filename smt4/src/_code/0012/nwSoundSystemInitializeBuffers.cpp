@@ -12,14 +12,14 @@ extern SoundSystemInitFlags g_nwSoundSystemInitFlags;
 extern SoundInitStack g_nwSoundTaskStack;
 extern u8 DAT_004ea168;
 void FUN_001310d4(void *);
-SoundBufferPool *FUN_002baed8();
+SoundBufferPool *soundRequestQueueGetInstance();
 SoundBufferPool *FUN_002bae7c();
 void FUN_00130df4(SoundBufferPool *, u8 *, u32);
 SoundThread *_ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
 void FUN_00130eec(SoundThread *);
 SoundTaskManager *FUN_002bb020();
 void nw_snd_internal_TaskManager_Initialize(SoundTaskManager *);
-SoundDriverManager *FUN_002baf30();
+SoundDriverManager *nw_snd_internal_driver_VoiceManager_GetInstance();
 u32 FUN_0013127c(SoundDriverManager *, u32);
 void FUN_00131204(SoundDriverManager *, u8 *, u32);
 SoundChannelManager *FUN_002bafb0();
@@ -39,7 +39,7 @@ void nwSoundSystemInitializeBuffers(const SoundSystemInitParameters *parameters,
     if (!g_nwSoundSystemInitFlags.poolsInitialized) {
         u32 sizeA = parameters->poolSizeA;
         u32 sizeB = parameters->poolSizeB;
-        FUN_00130df4(FUN_002baed8(), buffer, parameters->poolSizeA);
+        FUN_00130df4(soundRequestQueueGetInstance(), buffer, parameters->poolSizeA);
         FUN_00130df4(FUN_002bae7c(), buffer + sizeA, parameters->poolSizeB);
         buffer += sizeA + sizeB;
         g_nwSoundSystemInitFlags.poolsInitialized = 1;
@@ -60,9 +60,9 @@ void nwSoundSystemInitializeBuffers(const SoundSystemInitParameters *parameters,
     g_nwSoundTaskStack.buffer = buffer;
     g_nwSoundTaskStack.size = parameters->taskStackSize;
     u8 *driverMemory = buffer + taskStackSize;
-    u8 *channelMemory = driverMemory + FUN_0013127c(FUN_002baf30(), g_nwSoundSystemInitFlags.driverMode);
-    u32 driverSize = FUN_0013127c(FUN_002baf30(), g_nwSoundSystemInitFlags.driverMode);
-    FUN_00131204(FUN_002baf30(), driverMemory, driverSize);
+    u8 *channelMemory = driverMemory + FUN_0013127c(nw_snd_internal_driver_VoiceManager_GetInstance(), g_nwSoundSystemInitFlags.driverMode);
+    u32 driverSize = FUN_0013127c(nw_snd_internal_driver_VoiceManager_GetInstance(), g_nwSoundSystemInitFlags.driverMode);
+    FUN_00131204(nw_snd_internal_driver_VoiceManager_GetInstance(), driverMemory, driverSize);
     u8 *profileMemory = channelMemory + FUN_001310c4(FUN_002bafb0(), g_nwSoundSystemInitFlags.driverMode);
     u32 channelSize = FUN_001310c4(FUN_002bafb0(), g_nwSoundSystemInitFlags.driverMode);
     nw_snd_internal_driver_ChannelManager_Initialize(FUN_002bafb0(), channelMemory, channelSize);

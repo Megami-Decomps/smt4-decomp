@@ -52,7 +52,7 @@ s32 gameFlagIsSet(u32 id);
 s32 recordGetModeForId(s32 id);
 void gameSetStatusCameraHeightMode(s32 mode);
 s32 FUN_0040ab8c(ShopCursorObject *object);
-void FUN_0040aad4(ShopCursorObject *object, s32 mode);
+void moriModelContentLoadBody(ShopCursorObject *object, s32 mode);
 void handleRegistryRegisterObject(u32 registry, void *model);
 void controllerSetPositionXyz(void *model, f32 x, f32 y, f32 z);
 void FUN_004954e8(ShopScreen *shop);
@@ -105,7 +105,7 @@ void _ZN9Obj53604412FUN_00497290Ev(ShopScreen *shop)
             if (shop->cursor->model == NULL) {
                 void *model;
 
-                FUN_0040aad4(shop->cursor, 0);
+                moriModelContentLoadBody(shop->cursor, 0);
                 model = shop->cursor->model;
                 handleRegistryRegisterObject(g_handleRegistry, model);
                 controllerSetPositionXyz(model, 0.0f, -32000.0f, 0.0f);

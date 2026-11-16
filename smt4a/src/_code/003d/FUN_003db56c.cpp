@@ -52,7 +52,7 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: fadeObjectResetIfActive. */
 extern int recordGetModeForId(int);
 extern int resourceRunOperationIfUnblocked(int);
-extern int FUN_002a4894(int);
+extern int listCursorGetRowIfUnblocked(int);
 extern unsigned int FUN_002e5c2c(void);
 /* Supplied declaration required: uiDrawListScrollBar. */
 extern int uiSearchPrimary(int);
@@ -101,7 +101,7 @@ void FUN_003db56c(int param_1)
   if (0 < temp_v2) {
     do {
       if ((*(int *)(param_1 + 8) != 2 && *(int *)(param_1 + 8) != 3) ||
-         (temp_v2 = FUN_002a4894(param_1 + 0x10), temp_v2 != temp_v5)) {
+         (temp_v2 = listCursorGetRowIfUnblocked(param_1 + 0x10), temp_v2 != temp_v5)) {
         temp_v2 = resourceRunOperationIfUnblocked(param_1 + 0x10);
         temp_v7 = *(unsigned int *)(param_1 + (temp_v2 + temp_v5) * 4 + 0x74);
         temp_v2 = asdTMTexTableEntryAt(0x14,temp_v5 + 0x40e);
@@ -171,15 +171,15 @@ void FUN_003db56c(int param_1)
   }
   if (*(int *)(param_1 + 8) == 2 || *(int *)(param_1 + 8) == 3) {
     temp_v2 = resourceRunOperationIfUnblocked(param_1 + 0x10);
-    temp_v5 = FUN_002a4894(param_1 + 0x10);
+    temp_v5 = listCursorGetRowIfUnblocked(param_1 + 0x10);
     temp_v7 = *(unsigned int *)(param_1 + (temp_v5 + temp_v2) * 4 + 0x74);
-    temp_v2 = FUN_002a4894(param_1 + 0x10);
+    temp_v2 = listCursorGetRowIfUnblocked(param_1 + 0x10);
     temp_v2 = asdTMTexTableEntryAt(0x14,temp_v2 + 0x42f);
     efctSetSpeed();
     texDrawCompositeSprite(2,0x14,6,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x79);
     efctSetSpeed();
     texDrawTableEntryAtStoredOrigin(2,0x14,0x429,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x7e);
-    temp_v5 = FUN_002a4894(param_1 + 0x10);
+    temp_v5 = listCursorGetRowIfUnblocked(param_1 + 0x10);
     temp_v5 = recordGetModeForId((int)*(short *)(param_1 + temp_v5 * 2 + 0x508));
     temp_v8 = temp_v5 == 1;
     temp_v9 = temp_v5 == 2;

@@ -44,7 +44,7 @@ extern int uniteGetWork(void);
 /* Supplied declaration required: FUN_0022f9c8. */
 /* Supplied declaration required: FUN_0023dcec. */
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
-extern int FUN_002a4894(int);
+extern int listCursorGetRowIfUnblocked(int);
 extern unsigned int computeCountLimit(void);
 extern int dataTableGetEntry24Byte1(int);
 extern int uiSearchPrimary(int);
@@ -124,7 +124,7 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
     if (temp_v9 < temp_v4) {
       do {
         temp_v5 = uniteIsStateTwentyTwo();
-        if ((temp_v5 != 0) || (temp_v5 = FUN_002a4894(temp_v1), temp_v5 != temp_v9)) {
+        if ((temp_v5 != 0) || (temp_v5 = listCursorGetRowIfUnblocked(temp_v1), temp_v5 != temp_v9)) {
           temp_v5 = temp_v14 + temp_v9;
           if (*(int *)(temp_v0 + temp_v5 * 4 + 0x927c) < 0) break;
           efctSetSpeed();
@@ -134,8 +134,8 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
             if (temp_v15 != 1) {
               if (temp_v15 == 2) {
                 if ((4 >= *(int *)(temp_v0 + 0x3fc)) &&
-                   (temp_v10 = FUN_002a4894(temp_v1), temp_v9 > temp_v10)) {
-                  temp_v10 = FUN_002a4894(temp_v1);
+                   (temp_v10 = listCursorGetRowIfUnblocked(temp_v1), temp_v9 > temp_v10)) {
+                  temp_v10 = listCursorGetRowIfUnblocked(temp_v1);
                   temp_v8 = (int)asdTMTexTableEntryAt(0x1a,temp_v10 + 0xa9);
                   temp_v10 = ((int)*(short *)(temp_v8 + 8) - (int)*(short *)(temp_v7 + 8)) * 0x1000;
                   temp_v10 = (int)*(short *)(temp_v7 + 8) +
@@ -153,8 +153,8 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
               }
             }
             else if ((*(int *)(temp_v0 + 0x3fc) < 5) &&
-                    (temp_v10 = FUN_002a4894(temp_v1), temp_v10 < temp_v9)) {
-              temp_v10 = FUN_002a4894(temp_v1);
+                    (temp_v10 = listCursorGetRowIfUnblocked(temp_v1), temp_v10 < temp_v9)) {
+              temp_v10 = listCursorGetRowIfUnblocked(temp_v1);
               temp_v8 = (int)asdTMTexTableEntryAt(0x1a,temp_v10 + 0xa9);
               temp_v10 = ((int)*(short *)(temp_v7 + 8) - (int)*(short *)(temp_v8 + 8)) * 0x1000;
               temp_v10 = (int)*(short *)(temp_v8 + 8) +
@@ -207,12 +207,12 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
       } while (temp_v9 < temp_v4);
     }
     temp_v10 = resourceRunOperationIfUnblocked(temp_v1);
-    temp_v4 = FUN_002a4894(temp_v1);
+    temp_v4 = listCursorGetRowIfUnblocked(temp_v1);
     temp_v10 = temp_v10 + temp_v4;
     temp_v4 = uniteIsStateTwentyTwo();
     if (temp_v4 == 0) {
       temp_v4 = dataTableGetEntry24Byte1(temp_v10);
-      temp_v1 = FUN_002a4894(temp_v1);
+      temp_v1 = listCursorGetRowIfUnblocked(temp_v1);
       temp_v1 = (int)asdTMTexTableEntryAt(0x1a,temp_v1 + 0xa9);
       if (temp_v4 != 0) {
         if (temp_v4 != 1) {

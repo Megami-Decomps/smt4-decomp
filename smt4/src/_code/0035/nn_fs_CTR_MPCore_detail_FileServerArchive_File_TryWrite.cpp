@@ -10,7 +10,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_6_stack;
 
-extern unsigned int FUN_00239ab8(void);
+extern unsigned int fileGetHandleChecked(void);
 extern unsigned int nn_fs_ipc_File_Write(unsigned int *, int *, unsigned int, unsigned int, long long, unsigned int);
 
 
@@ -22,7 +22,7 @@ unsigned int nn_fs_CTR_MPCore_detail_FileServerArchive_File_TryWrite
   unsigned int temp_v0;
   unsigned int temp_v1 [2];
   
-  temp_v1[0] = FUN_00239ab8();
+  temp_v1[0] = fileGetHandleChecked();
   temp_v0 = nn_fs_ipc_File_Write
                     (temp_v1,param_2,param_4,param_5,param_3,
                      (unsigned int)param_6 | ((unsigned int)param_6 << 0x10));

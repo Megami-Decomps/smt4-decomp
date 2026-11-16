@@ -6,7 +6,7 @@
 extern "C" {
 
 int dataTable41FindById(void);
-int FUN_003e8bb0(unsigned int [9], int, int);
+int btlEntryBuildSummary(unsigned int [9], int, int);
 int btlMainFindEntryByListedId(...);
 int source4CCopyHalves(void);
 int kindIdStore(unsigned int, int [2]);
@@ -26,7 +26,7 @@ typedef struct {
 
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: dataTable41FindById. */
-/* Supplied declaration required: FUN_003e8bb0. */
+/* Supplied declaration required: btlEntryBuildSummary. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: source4CCopyHalves. */
 /* Supplied declaration required: kindIdStore. */
@@ -197,7 +197,7 @@ unsigned int FUN_004c8340(int param_1,unsigned int param_2,unsigned int param_3,
     }
   }
   if (((temp_v1 != 0) && (*(char *)(temp_v1 + 0x239) != '\0')) &&
-     (FUN_003e8bb0(temp_v13,temp_v12,temp_v9), temp_v14 != 0)) {
+     (btlEntryBuildSummary(temp_v13,temp_v12,temp_v9), temp_v14 != 0)) {
     temp_v6 = (temp_v6 & 0xfef0ffff) | 0x800000;
   }
   if ((temp_v6 & 0x80000) != 0) {

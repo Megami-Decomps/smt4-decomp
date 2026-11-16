@@ -9,7 +9,7 @@ extern "C" {
 int dataTable01GetRecordWithAocOverride(unsigned int);
 int gameGetSlotRecord(...);
 int FUN_003df57c(int, int);
-int FUN_004bcbb4(int, int);
+int skillGetAdjustedCost(int, int);
 
 /* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
 extern int gameGetPlayerData(void);
@@ -19,7 +19,7 @@ extern int gameSlotTableFindFree(void);
 /* Supplied declaration required: FUN_002b5c88. */
 /* Supplied declaration required: FUN_003df57c. */
 extern int FUN_004a0404(void);
-/* Supplied declaration required: FUN_004bcbb4. */
+/* Supplied declaration required: skillGetAdjustedCost. */
 
 
 unsigned int FUN_004a0f5c(void)
@@ -59,7 +59,7 @@ unsigned int FUN_004a0f5c(void)
             in_r3 = (unsigned int)*(unsigned short *)(temp_v7 + 0x36);
           }
           if (temp_v10 || in_r3 == 0x8c) {
-            temp_v6 = FUN_004bcbb4(temp_v3,0x8c);
+            temp_v6 = skillGetAdjustedCost(temp_v3,0x8c);
             if (temp_v6 < *(short *)(temp_v3 + 0x2c)) {
               acStack_a8[temp_v9] = *(char *)(temp_v2 + 0x1c88 + temp_v8);
               temp_v9 = temp_v9 + 1;
@@ -118,7 +118,7 @@ LAB_004a1070:
     } while (temp_v2 < temp_v9);
     if (temp_v1 != 0) {
       FUN_002b5c88();
-      temp_v0 = FUN_004bcbb4(temp_v1,0x8c);
+      temp_v0 = skillGetAdjustedCost(temp_v1,0x8c);
       temp_v0 = *(short *)(temp_v1 + 0x2c) - temp_v0;
       *(short *)(temp_v1 + 0x2c) = temp_v0;
       if (temp_v0 < 0) {
@@ -174,7 +174,7 @@ LAB_004a11b0:
     } while (temp_v2 < temp_v9);
     if (temp_v1 != 0) {
       FUN_002b5c88();
-      temp_v0 = FUN_004bcbb4(temp_v1,0x8c);
+      temp_v0 = skillGetAdjustedCost(temp_v1,0x8c);
       temp_v0 = *(short *)(temp_v1 + 0x2c) - temp_v0;
       *(short *)(temp_v1 + 0x2c) = temp_v0;
       if (temp_v0 < 0) {

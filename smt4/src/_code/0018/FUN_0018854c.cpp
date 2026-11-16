@@ -17,7 +17,7 @@ int timerStart(...);
 int campReleaseScreenTouchRegions(...);
 int flaggedEntrySetValueB(...);
 int FUN_002992e0(...);
-int FUN_00299370(...);
+int playerRecalcStatsFromEquipment(...);
 int FUN_0029e328(...);
 int sortMenuCreate(...);
 int objectPartRunUnlessLocked(...);
@@ -59,7 +59,7 @@ extern int g_camp; /* 0x43da90 */
 extern unsigned int dataTable15GetUnlockedEntryId(int, unsigned int);
 /* Supplied declaration required: flaggedEntrySetValueB. */
 /* Supplied declaration required: FUN_002992e0. */
-/* Supplied declaration required: FUN_00299370. */
+/* Supplied declaration required: playerRecalcStatsFromEquipment. */
 extern int recordAcceptsStickDirection(short);
 extern unsigned int FUN_0029963c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002996d8. */
@@ -88,7 +88,7 @@ extern int FUN_0029e0f8(void);
 /* Supplied declaration required: objectPartRunUnlessLocked. */
 extern int FUN_0029e958(int);
 /* Supplied declaration required: buttonHelpSetText. */
-extern int FUN_0029efa8(int);
+extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
@@ -211,7 +211,7 @@ void FUN_0018854c(unsigned int param_1)
     FUN_0029a0cc(psVar3);
     statusPanelSetOpen(1);
     temp_v4 = resourceRunOperationIfUnblocked(temp_v11);
-    temp_v11 = FUN_0029efa8(temp_v11);
+    temp_v11 = listCursorGetRowIfUnblocked(temp_v11);
     temp_v8 = *(short *)(temp_v9 + (temp_v11 + temp_v4) * 2);
     if (param_1 != 0x14) {
       if (param_1 != 0x15) {
@@ -283,7 +283,7 @@ void FUN_0018854c(unsigned int param_1)
     }
     else if (*(char *)(temp_v5 + 0x32) != '\0') {
       temp_v4 = resourceRunOperationIfUnblocked(temp_v11);
-      temp_v6 = FUN_0029efa8(temp_v11);
+      temp_v6 = listCursorGetRowIfUnblocked(temp_v11);
       temp_v3 = (unsigned int)*(unsigned short *)(temp_v9 + (temp_v6 + temp_v4) * 2);
       if (param_1 != 0x14) {
         if (param_1 == 0x15) {
@@ -330,7 +330,7 @@ void FUN_0018854c(unsigned int param_1)
     FUN_002c1658(0,1);
     if (temp_v4 != 0 || temp_v13[0] != '\0') {
       temp_v5 = resourceRunOperationIfUnblocked(temp_v11);
-      temp_v11 = FUN_0029efa8(temp_v11);
+      temp_v11 = listCursorGetRowIfUnblocked(temp_v11);
       psVar14 = (short *)(temp_v9 + (temp_v11 + temp_v5) * 2);
       temp_v5 = recordAcceptsStickDirection(*psVar14);
       if (temp_v5 == 0) {
@@ -390,7 +390,7 @@ void FUN_0018854c(unsigned int param_1)
         *psVar3 = temp_v8;
         temp_v12 = temp_v0 != temp_v8;
       }
-      FUN_00299370(0);
+      playerRecalcStatsFromEquipment(0);
       if (!temp_v12) {
         return;
       }
@@ -487,7 +487,7 @@ void FUN_0018854c(unsigned int param_1)
           return;
         }
         temp_v4 = resourceRunOperationIfUnblocked(temp_v11);
-        temp_v6 = FUN_0029efa8(temp_v11);
+        temp_v6 = listCursorGetRowIfUnblocked(temp_v11);
         temp_v6 = temp_v6 + temp_v4;
         if (param_1 != 0x14) {
           if (param_1 != 0x15) {
@@ -603,7 +603,7 @@ joined_r0x00188f3c:
       }
       else {
         temp_v4 = resourceRunOperationIfUnblocked(temp_v11);
-        temp_v6 = FUN_0029efa8(temp_v11);
+        temp_v6 = listCursorGetRowIfUnblocked(temp_v11);
         temp_v6 = temp_v6 + temp_v4;
         if (param_1 != 0x14) {
           if (param_1 != 0x15) {

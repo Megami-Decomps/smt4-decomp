@@ -10,8 +10,8 @@ struct PadRepeatSettings {
 };
 
 extern "C" {
-extern PadRepeatSettings DAT_005b4000;
-extern u32 DAT_00640000[31];
+extern PadRepeatSettings g_padInputState;
+extern u32 g_padHeldFrames[31];
 
 u32 padButtonRepeat(u32 button)
 {
@@ -19,9 +19,9 @@ u32 padButtonRepeat(u32 button)
         return 0;
     }
     u32 frames;
-    bool blocked = (DAT_005b4000.flags & 1) != 0;
-    if (!blocked && (DAT_005b4000.flags & 2) == 0) {
-        frames = DAT_00640000[button];
+    bool blocked = (g_padInputState.flags & 1) != 0;
+    if (!blocked && (g_padInputState.flags & 2) == 0) {
+        frames = g_padHeldFrames[button];
         if (frames == 1) {
             return 1;
         }
@@ -29,8 +29,8 @@ u32 padButtonRepeat(u32 button)
     else {
         frames = 0;
     }
-    if (frames > DAT_005b4000.delay &&
-        (frames - DAT_005b4000.delay) % DAT_005b4000.interval == 0) {
+    if (frames > g_padInputState.delay &&
+        (frames - g_padInputState.delay) % g_padInputState.interval == 0) {
         return 1;
     }
     return 0;

@@ -17,7 +17,7 @@ int FUN_002562e4(int, int);
 int partyApplyNonlethalAilmentDamage(int, int);
 int FUN_0027f48c(int, int);
 int FUN_0027f848(void);
-int FUN_0027f958(float *, unsigned int *, int);
+int padGetNormalizedAnalogStick(float *, unsigned int *, int);
 int lmapSetSceneId(...);
 int mapSelectContainingRegions(void);
 int FUN_002804ec(...);
@@ -64,7 +64,7 @@ extern unsigned int FUN_00256540(void);
 extern int unitGroupHasFlag(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0027f48c. */
 /* Supplied declaration required: FUN_0027f848. */
-/* Supplied declaration required: FUN_0027f958. */
+/* Supplied declaration required: padGetNormalizedAnalogStick. */
 /* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: FUN_002804ec. */
@@ -155,7 +155,7 @@ void FUN_001fa8e4(void)
     }
     temp_v15 = *(unsigned long long *)(g_lmapScene + 0x28);
     temp_v16 = CONCAT44(temp_v21,*(unsigned int *)(g_lmapScene + 0x30));
-    FUN_0027f958(&temp_v24,&temp_v23,0);
+    padGetNormalizedAnalogStick(&temp_v24,&temp_v23,0);
     temp_v8 = g_lmapScene;
     *(unsigned char *)(g_lmapScene + 0x6c) = 0;
     if (DAT_0049fc84 == 0 || DAT_0049fc84 == 3) {

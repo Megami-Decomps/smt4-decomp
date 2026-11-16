@@ -14,7 +14,7 @@ int FUN_00356470(void);
 int FUN_0040a908(...);
 int FUN_0040a918(...);
 int resourceOwnerLoadFileSync(void);
-int FUN_0040aad4(...);
+int moriModelContentLoadBody(...);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -41,7 +41,7 @@ extern int dataTableCountWithAoc(void);
 /* Supplied declaration required: FUN_0040a918. */
 /* Supplied declaration required: resourceOwnerLoadFileSync. */
 /* Supplied declaration required: moriModelContentCopyBody. */
-/* Supplied declaration required: FUN_0040aad4. */
+/* Supplied declaration required: moriModelContentLoadBody. */
 extern unsigned int modelListInit(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
 
@@ -85,7 +85,7 @@ unsigned int FUN_0033d6c0(void)
                      0x10000);
         FUN_0040a918(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x20),
                      0x20000);
-        FUN_0040aad4(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x20),0);
+        moriModelContentLoadBody(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x20),0);
       }
       if (*(int *)(g_mapHakai + 0x5a0) != 0) {
         temp_v1 = 0x20;
@@ -100,7 +100,7 @@ unsigned int FUN_0033d6c0(void)
                      0x10000);
         FUN_0040a918(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x24),
                      0x20000);
-        FUN_0040aad4(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x24),0);
+        moriModelContentLoadBody(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x24),0);
       }
       if (*(int *)(g_mapHakai + 0x5a4) != 0) {
         temp_v1 = 0x20;
@@ -115,7 +115,7 @@ unsigned int FUN_0033d6c0(void)
                      0x10000);
         FUN_0040a918(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x28),
                      0x20000);
-        FUN_0040aad4(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x28),0);
+        moriModelContentLoadBody(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x28),0);
       }
       if (*(int *)(g_mapHakai + 0x5a8) != 0) {
         temp_v1 = 0x20;
@@ -130,7 +130,7 @@ unsigned int FUN_0033d6c0(void)
                      0x10000);
         FUN_0040a918(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x2c),
                      0x20000);
-        FUN_0040aad4(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x2c),0);
+        moriModelContentLoadBody(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x2c),0);
       }
       if (*(int *)(g_mapHakai + 0x5b0) != 0) {
         temp_v1 = 0x20;
@@ -145,7 +145,7 @@ unsigned int FUN_0033d6c0(void)
                      0x10000);
         FUN_0040a918(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x34),
                      0x20000);
-        FUN_0040aad4(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x34),0);
+        moriModelContentLoadBody(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x34),0);
       }
       if (*(int *)(g_mapHakai + 0x5b4) != 0) {
         temp_v1 = 0x20;
@@ -156,7 +156,7 @@ unsigned int FUN_0033d6c0(void)
         }
         *(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x38) = temp_v4;
         resourceOwnerLoadFileSync();
-        FUN_0040aad4(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x38),0);
+        moriModelContentLoadBody(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x38),0);
       }
       *(short *)(g_mapHakai + 8) = *(short *)(g_mapHakai + 8) + 1;
     }

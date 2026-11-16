@@ -7,7 +7,7 @@ typedef struct Object {
     /* 0x00 */ const void *vtbl;
 } Object;
 
-extern u8 DAT_0055af54;
+extern u8 g_strVtable;
 
 extern Object *_ZN9Obj5593b8C1Ev(void);
 extern u32 FUN_00121234(void);
@@ -17,7 +17,7 @@ Object *strInit(void)
 {
     Object *obj = _ZN9Obj5593b8C1Ev();
 
-    obj->vtbl = &DAT_0055af54;
+    obj->vtbl = &g_strVtable;
     _ZN9Obj55af4c4initEjh(obj, FUN_00121234(), 0);
     return obj;
 }

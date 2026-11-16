@@ -9,7 +9,7 @@ int entryCollectionSortByMode(int, int);
 int recordAppendFloatEntry(int, unsigned char [8]);
 int FUN_0022e17c(unsigned char [8], int, int);
 void entryTableClear(void *table);
-int FUN_00233670(...);
+int messageIdListInit(...);
 int listScrollerInitialize(...);
 int FUN_00233818(void);
 int ifTouchRegionClearAll(unsigned int);
@@ -35,7 +35,7 @@ extern unsigned char gaugePercent(int, unsigned int);
 /* Supplied declaration required: recordAppendFloatEntry. */
 /* Supplied declaration required: FUN_0022e17c. */
 /* Supplied declaration required: entryTableClear. */
-/* Supplied declaration required: FUN_00233670. */
+/* Supplied declaration required: messageIdListInit. */
 /* Supplied declaration required: listScrollerInitialize. */
 /* Supplied declaration required: FUN_00233818. */
 /* Supplied declaration required: ifTouchRegionClearAll. */
@@ -95,7 +95,7 @@ void FUN_0022d434(int param_1)
     } while (temp_v9 < 0x4ff);
     *(short *)(param_1 + 0xa5ae) = temp_v10;
     if (*(short *)(param_1 + 0x5a8) != 0) {
-      temp_v9 = reinterpret_cast<int>(FUN_002a0d0c());
+      temp_v9 = reinterpret_cast<int>(gameDataGetSortPreferences());
       pbVar7 = (unsigned char *)(temp_v9 + 0xf);
       temp_v8 = *pbVar7 & 0x7f;
       if (temp_v8 == 1) {
@@ -182,7 +182,7 @@ void FUN_0022d434(int param_1)
   if (temp_v2 >= 10) {
     temp_v2 = 10;
   }
-  FUN_00233670(param_1 + 0x55c,0x1d,0x40e,temp_v2);
+  messageIdListInit(param_1 + 0x55c,0x1d,0x40e,temp_v2);
   *(unsigned char *)(param_1 + 0x56c) = 1;
   jyoucyuGetTableEntry(0);
   return;

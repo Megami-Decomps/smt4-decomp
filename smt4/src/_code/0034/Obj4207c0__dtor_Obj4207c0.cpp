@@ -1,7 +1,7 @@
 #include "classes/Obj4207c0.h"
 
 extern "C" int textureContentRelease(Obj4207c0Resource *resource);
-extern Obj4207c0Registry DAT_0047e508;
+extern Obj4207c0Registry g_resourceCache;
 
 /* Drops each held resource: one reference less, and when it was the last, the registry's entry for
  * it is torn down and deleted. */
@@ -13,7 +13,7 @@ Obj4207c0::~Obj4207c0()
         if (resource == NULL) {
             continue;
         }
-        Obj4207c0Registry *registry = &DAT_0047e508;
+        Obj4207c0Registry *registry = &g_resourceCache;
         if (resource->refCount == 1) {
             u32 id = resource->id;
 

@@ -14,7 +14,7 @@ s32 libc_strncmp(const char *a, const char *b, u32 count);
 char *libc_strcpy(char *destination, const char *source);
 void memClear(void *buffer, s32 size);
 void textFormatBuffer(char *buffer, const char *format, ...);
-char *FUN_002522e0(char *text, s32 character);
+char *libc_strrchr(char *text, s32 character);
 s32 keyedRecordFindByName(const char *key);
 void FUN_002276f8(BtlEffectWork *work);
 u32 FUN_00246644(u32 first, u32 second, u32 third);
@@ -64,7 +64,7 @@ u32 FUN_003da5e8(BtlEffectWork *work)
                     libc_strcpy(path, file);
                     if (libc_strlen(path) != 0) {
                         BtlEffectSlot *slot = &work->slots[i];
-                        libc_strcpy(slot->name, FUN_002522e0(path, '/') + 1);
+                        libc_strcpy(slot->name, libc_strrchr(path, '/') + 1);
                         if (keyedRecordFindByName(slot->name) == 0xff) {
                             asdLoadFileAsyncSimple(path, &slot->file, 0);
                             slot->flags |= 1;

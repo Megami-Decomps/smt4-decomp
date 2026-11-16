@@ -8,7 +8,7 @@ int FUN_001db388(...);
 int effectSetPrimaryPosition(...);
 int effectSetSecondaryPosition(...);
 int effectSetProcessScalar(void);
-int FUN_002ad314(...);
+int mathSinCos(...);
 int FUN_002c159c(...);
 int FUN_003d5af0(...);
 
@@ -119,7 +119,7 @@ extern int rangeIsValid(float *);
 /* Supplied declaration required: eventCommandGetPendingCleanup. */
 /* Supplied declaration required: FUN_002929d8. */
 extern unsigned int randBetween(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002ad314. */
+/* Supplied declaration required: mathSinCos. */
 /* Supplied declaration required: mathSinFixedAngle. */
 /* Supplied declaration required: FUN_002c159c. */
 /* Supplied declaration required: FUN_003d5698. */
@@ -543,7 +543,7 @@ LAB_003d7d90:
   temp_v7 = temp_v15 * temp_v5 + temp_v16 * temp_v4 + temp_v17 * temp_v2;
   temp_v6 = temp_v19 * temp_v5 + temp_v20 * temp_v4 + temp_v21 * temp_v2;
   temp_v2 = temp_v23 * temp_v5 + temp_v24 * temp_v4 + temp_v25 * temp_v2;
-  FUN_002ad314(&temp_v31,&temp_v44);
+  mathSinCos(&temp_v31,&temp_v44);
   temp_v4 = temp_v0 - romwright_u2f((unsigned int)(temp_v44));
   temp_v0 = temp_v0 / romwright_sqrt_4(temp_v7 * temp_v7 + temp_v6 * temp_v6 + temp_v2 * temp_v2);
   temp_v7 = temp_v7 * temp_v0;

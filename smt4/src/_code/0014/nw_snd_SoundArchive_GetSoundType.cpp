@@ -2,12 +2,12 @@
 
 extern "C" {
 
-s32 FUN_00141fd8(SoundArchiveRef *ref);
+s32 nwSndSoundArchiveRefGetSoundType(SoundArchiveRef *ref);
 
-/* Passes the wrapper's ref on to FUN_00141fd8, the function that follows it. */
+/* Passes the wrapper's ref on to nwSndSoundArchiveRefGetSoundType, the function that follows it. */
 s32 nw_snd_SoundArchive_GetSoundType(SoundArchiveWrapper *wrapper)
 {
-    return FUN_00141fd8(wrapper->ref);
+    return nwSndSoundArchiveRefGetSoundType(wrapper->ref);
 }
 
 } /* extern "C" */

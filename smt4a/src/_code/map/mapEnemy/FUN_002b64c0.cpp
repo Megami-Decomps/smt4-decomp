@@ -48,7 +48,7 @@ void textFormatBuffer(char *, const char *, ...);
 void *asdMemoryAllocTraced(u32, const char *, u32);
 ModelList *modelListInit(ModelList *);
 void resourceOwnerLoadFileSync(ModelList *, const char *);
-void FUN_0040aad4(ModelList *, u32);
+void moriModelContentLoadBody(ModelList *, u32);
 void modelPlayClip(MoriModelBody *, u32, u8, f32, f32);
 void handleRegistryRegisterObject(void *, MoriModelBody *);
 s32 FUN_004bc2dc(s32 kind, s32 flag);
@@ -76,7 +76,7 @@ static __inline void ensureEnemyModel(EnemyOwner *owner, s32 slotIndex)
     }
     slot->model = model;
     resourceOwnerLoadFileSync(slot->model, resourceName);
-    FUN_0040aad4(slot->model, 0);
+    moriModelContentLoadBody(slot->model, 0);
     MoriModelBody *body = slot->model->content.body;
     modelPlayClip(body, 0, 2, 0.0f, 0.0f);
     handleRegistryRegisterObject(g_handleRegistry, body);

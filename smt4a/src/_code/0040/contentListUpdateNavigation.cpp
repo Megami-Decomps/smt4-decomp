@@ -8,7 +8,7 @@ struct ContentNavigation {
 };
 extern "C" {
 s32 resourceRunOperationIfUnblocked(ContentGrid *);
-s32 FUN_002a4894(ContentGrid *);
+s32 listCursorGetRowIfUnblocked(ContentGrid *);
 s32 objectApplyIfUnblocked(ContentGrid *);
 s32 FUN_00228b04(ContentGrid *, u32);
 s32 padQueryLogicalKey(u32, u32);
@@ -22,13 +22,13 @@ void contentListUpdateNavigation(ContentNavigation *screen)
     if (FUN_00228b04(&screen->grid, 0)) {
         if (objectApplyIfUnblocked(&screen->grid) > 8) {
             resourceRunOperationIfUnblocked(&screen->grid);
-            if (FUN_002a4894(&screen->grid) != 7 && FUN_002a4894(&screen->grid) != 0)
+            if (listCursorGetRowIfUnblocked(&screen->grid) != 7 && listCursorGetRowIfUnblocked(&screen->grid) != 0)
                 eventQueueAddUniqueIfValid(0x100020d);
             while (resourceRunOperationIfUnblocked(&screen->grid) == previousRow) {
-                if (resourceRunOperationIfUnblocked(&screen->grid) == 0 && FUN_002a4894(&screen->grid) == 0)
+                if (resourceRunOperationIfUnblocked(&screen->grid) == 0 && listCursorGetRowIfUnblocked(&screen->grid) == 0)
                     break;
                 if (resourceRunOperationIfUnblocked(&screen->grid) == objectApplyIfUnblocked(&screen->grid) - 8 &&
-                    FUN_002a4894(&screen->grid) == 7)
+                    listCursorGetRowIfUnblocked(&screen->grid) == 7)
                     break;
                 FUN_00228b04(&screen->grid, 0);
             }

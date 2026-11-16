@@ -11,7 +11,7 @@ extern void *g_handleRegistry;
 s32 gameFlagIsSet(u32 flag);
 s32 FUN_0040ab8c(BattleViewOwner *owner);
 void FUN_0040ab7c(BattleViewOwner *owner, s32 mode);
-void FUN_0040aad4(BattleViewOwner *owner, BattleViewObject *parent);
+void moriModelContentLoadBody(BattleViewOwner *owner, BattleViewObject *parent);
 void controllerSetPositionXyz(BattleViewObject *object, f32 x, f32 y, f32 z);
 void modelPlayClip(BattleViewObject *object, s32 first, s32 second, f32 x, f32 y);
 void handleRegistryRegisterObject(void *registry, BattleViewObject *object);
@@ -19,7 +19,7 @@ void handleRegistryRegisterObject(void *registry, BattleViewObject *object);
 
 static inline void activateBattleView(BattleViewOwner **slot)
 {
-    FUN_0040aad4(*slot, NULL);
+    moriModelContentLoadBody(*slot, NULL);
     BattleViewObject *object = (*slot)->object;
     controllerSetPositionXyz(object, 0.0f, 0.0f, 0.0f);
     modelPlayClip(object, 0, 2, 0.0f, 0.0f);
@@ -30,7 +30,7 @@ static inline void activateBattleView(BattleViewOwner **slot)
 static inline void attachBattleView(BattleViewState *state, BattleViewOwner **slot)
 {
     FUN_0040ab7c(*slot, 2);
-    FUN_0040aad4(*slot, state->attachments.primary[0]->object);
+    moriModelContentLoadBody(*slot, state->attachments.primary[0]->object);
     handleRegistryRegisterObject(g_handleRegistry, (*slot)->object);
 }
 

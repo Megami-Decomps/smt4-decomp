@@ -11,7 +11,7 @@ extern "C" void effectSpawnAheadOfScene(f32 headingOffset, f32 distance);
 extern "C" {
 #endif
 
-void FUN_0025921c(u32 a, u32 b);
+void scrCommMessageShowText(u32 a, u32 b);
 
 #ifdef __cplusplus
 }

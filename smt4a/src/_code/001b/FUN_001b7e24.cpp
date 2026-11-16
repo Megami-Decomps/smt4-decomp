@@ -21,7 +21,7 @@ typedef struct PlacementTransform {
     /* 0x3C */ u32 flags;
 } PlacementTransform;
 
-extern const PhaseTrigEntry DAT_00536d14[];
+extern const PhaseTrigEntry g_sinCosTable[];
 
 /* Builds the placement transform from `source`: the rotation matrix from the three angles
  * (65536 steps per turn, sampled from the phase table), the offset and the flag bits. */
@@ -31,9 +31,9 @@ void FUN_001b7e24(PlacementTransform *transform, const PlacementSource *source)
     f32 angleX = source->rotation.x * 40.743664f;
     f32 angleY = source->rotation.y * 40.743664f;
     f32 angleZ = source->rotation.z * 40.743664f;
-    PhaseSinCos x = samplePhase(DAT_00536d14, angleX);
-    PhaseSinCos y = samplePhase(DAT_00536d14, angleY);
-    PhaseSinCos z = samplePhase(DAT_00536d14, angleZ);
+    PhaseSinCos x = samplePhase(g_sinCosTable, angleX);
+    PhaseSinCos y = samplePhase(g_sinCosTable, angleY);
+    PhaseSinCos z = samplePhase(g_sinCosTable, angleZ);
 
     transform->m[8] = -y.sine;
     transform->m[4] = z.sine * y.cosine;

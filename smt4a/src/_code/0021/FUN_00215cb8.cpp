@@ -15,7 +15,7 @@ int dataTable1bOr1cGetRecord(void);
 int FUN_0021a4b0(void);
 int uiFadeRequestHalf(void);
 int resourceRunOperationIfUnblocked(...);
-int FUN_002a4894(...);
+int listCursorGetRowIfUnblocked(...);
 int rt_aeabi_memclr(...);
 int FUN_002f15f8(...);
 int sysPlayVoice(...);
@@ -23,7 +23,7 @@ int FUN_003d498c(...);
 void uiQuestRefreshDetailPages(int);
 int FUN_00417a60(...);
 int FUN_00418070(...);
-int FUN_004186e0(void);
+int rosterGetLeaderId(void);
 int gameStateResetRecord(...);
 int flagValueAdd(int, unsigned int);
 int FUN_004d9de0(void);
@@ -70,7 +70,7 @@ extern int useCounterIsFinished(void);
 extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
 /* Supplied declaration required: uiFadeRequestHalf. */
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
-/* Supplied declaration required: FUN_002a4894. */
+/* Supplied declaration required: listCursorGetRowIfUnblocked. */
 extern int messageGetChoiceResult(void);
 /* Supplied declaration required: questMarkSelectedSpecialDetail. */
 extern int objectApplyIfUnblocked(int);
@@ -87,8 +87,8 @@ extern int FUN_00335384(int);
 /* Supplied declaration required: FUN_003d498c. */
 /* Supplied declaration required: FUN_00417a60. */
 /* Supplied declaration required: FUN_00418070. */
-extern int FUN_004186a4(void);
-/* Supplied declaration required: FUN_004186e0. */
+extern int rosterHasLeader(void);
+/* Supplied declaration required: rosterGetLeaderId. */
 extern unsigned char partyEntryIsAvailable(unsigned short);
 extern int gameBlockByte27E98Is1To3(void);
 /* Supplied declaration required: gameStateResetRecord. */
@@ -323,7 +323,7 @@ unsigned int FUN_00215cb8(void)
       return 0;
     }
     temp_v9 = resourceRunOperationIfUnblocked();
-    temp_v5 = FUN_002a4894(temp_v1 + 0x9ac);
+    temp_v5 = listCursorGetRowIfUnblocked(temp_v1 + 0x9ac);
     temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + (temp_v5 + temp_v9) * 2 + 0xad6);
     temp_v9 = messageGetChoiceResult();
     if (temp_v9 == 0) {
@@ -355,7 +355,7 @@ unsigned int FUN_00215cb8(void)
       return 0;
     }
     resourceRunOperationIfUnblocked();
-    FUN_002a4894(temp_v1 + 0x9ac);
+    listCursorGetRowIfUnblocked(temp_v1 + 0x9ac);
     temp_v9 = messageGetChoiceResult();
     if (temp_v9 != 0) {
       FUN_003d474c();
@@ -363,12 +363,12 @@ unsigned int FUN_00215cb8(void)
       temp_v7 = 2;
       break;
     }
-    temp_v9 = FUN_004186e0();
+    temp_v9 = rosterGetLeaderId();
     dataTable1bOr1cGetRecord();
     if ((*(char *)(temp_v9 + 6) != '\t') || (temp_v9 = gameBlockByte27E98Is1To3(), temp_v9 == 0)) {
-      temp_v3 = FUN_004186e0();
+      temp_v3 = rosterGetLeaderId();
       *(unsigned short *)(temp_v1 + 0xccc) = temp_v3;
-      temp_v7 = FUN_004186e0();
+      temp_v7 = rosterGetLeaderId();
       FUN_002f15f8(temp_v7,0);
       *(unsigned char *)(temp_v1 + 0x93f) = 1;
       temp_v2 = partyEntryIsAvailable(*(unsigned short *)(temp_v1 + 0xccc));
@@ -390,7 +390,7 @@ unsigned int FUN_00215cb8(void)
       return 0;
     }
     resourceRunOperationIfUnblocked();
-    FUN_002a4894(temp_v1 + 0x9ac);
+    listCursorGetRowIfUnblocked(temp_v1 + 0x9ac);
     temp_v9 = messageGetChoiceResult();
     if (temp_v9 != 0) {
       FUN_003d474c();
@@ -398,12 +398,12 @@ unsigned int FUN_00215cb8(void)
       temp_v7 = 2;
       break;
     }
-    temp_v9 = FUN_004186e0();
+    temp_v9 = rosterGetLeaderId();
     dataTable1bOr1cGetRecord();
     if ((*(char *)(temp_v9 + 6) != '\t') || (temp_v9 = gameBlockByte27E98Is1To3(), temp_v9 == 0)) {
-      temp_v3 = FUN_004186e0();
+      temp_v3 = rosterGetLeaderId();
       *(unsigned short *)(temp_v1 + 0xccc) = temp_v3;
-      temp_v7 = FUN_004186e0();
+      temp_v7 = rosterGetLeaderId();
       FUN_002f15f8(temp_v7,0);
       *(unsigned char *)(temp_v1 + 0x93f) = 1;
       temp_v2 = partyEntryIsAvailable(*(unsigned short *)(temp_v1 + 0xccc));
@@ -426,7 +426,7 @@ unsigned int FUN_00215cb8(void)
       return 0;
     }
     resourceRunOperationIfUnblocked();
-    FUN_002a4894(temp_v1 + 0x9ac);
+    listCursorGetRowIfUnblocked(temp_v1 + 0x9ac);
     temp_v9 = messageGetChoiceResult();
     if (temp_v9 != 0) {
       FUN_003d474c();
@@ -434,9 +434,9 @@ unsigned int FUN_00215cb8(void)
       temp_v7 = 2;
       break;
     }
-    temp_v3 = FUN_004186e0();
+    temp_v3 = rosterGetLeaderId();
     *(unsigned short *)(temp_v1 + 0xccc) = temp_v3;
-    temp_v7 = FUN_004186e0();
+    temp_v7 = rosterGetLeaderId();
     FUN_002f15f8(temp_v7,0);
     temp_v2 = 1;
     *(unsigned char *)(temp_v1 + 0x93f) = 1;
@@ -467,11 +467,11 @@ unsigned int FUN_00215cb8(void)
       break;
     }
     temp_v9 = resourceRunOperationIfUnblocked();
-    temp_v5 = FUN_002a4894(temp_v1 + 0x9ac);
+    temp_v5 = listCursorGetRowIfUnblocked(temp_v1 + 0x9ac);
     temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + (temp_v5 + temp_v9) * 2 + 0xad6);
     dataTable1bOr1cGetRecord();
     sysPlaySe(0xe4);
-    temp_v9 = FUN_004186a4();
+    temp_v9 = rosterHasLeader();
     if (temp_v9 != 0) {
       temp_v9 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x8fc),2);
       if (temp_v9 == 0) {
@@ -507,7 +507,7 @@ unsigned int FUN_00215cb8(void)
       return 0;
     }
     temp_v9 = resourceRunOperationIfUnblocked();
-    temp_v5 = FUN_002a4894(temp_v1 + 0x9ac);
+    temp_v5 = listCursorGetRowIfUnblocked(temp_v1 + 0x9ac);
     temp_v8 = (unsigned int)*(unsigned short *)(temp_v1 + (temp_v5 + temp_v9) * 2 + 0xad6);
     temp_v4 = temp_v8;
     dataTable1bOr1cGetRecord();
@@ -561,7 +561,7 @@ unsigned int FUN_00215cb8(void)
       return 0;
     }
     resourceRunOperationIfUnblocked();
-    FUN_002a4894(temp_v1 + 0x9ac);
+    listCursorGetRowIfUnblocked(temp_v1 + 0x9ac);
     temp_v9 = messageGetChoiceResult();
     if (temp_v9 == 0) {
       FUN_0021a4b0();
@@ -589,7 +589,7 @@ joined_r0x002167bc:
       return 0;
     }
     resourceRunOperationIfUnblocked();
-    FUN_002a4894(temp_v1 + 0x9ac);
+    listCursorGetRowIfUnblocked(temp_v1 + 0x9ac);
     temp_v9 = messageGetChoiceResult();
     if (temp_v9 == 0) {
       FUN_0021a4b0();
@@ -611,12 +611,12 @@ joined_r0x002167bc:
       return 0;
     }
     resourceRunOperationIfUnblocked();
-    FUN_002a4894(temp_v1 + 0x9ac);
+    listCursorGetRowIfUnblocked(temp_v1 + 0x9ac);
     temp_v9 = messageGetChoiceResult();
     if (temp_v9 == 0) {
-      temp_v3 = FUN_004186e0();
+      temp_v3 = rosterGetLeaderId();
       *(unsigned short *)(temp_v1 + 0xccc) = temp_v3;
-      temp_v7 = FUN_004186e0();
+      temp_v7 = rosterGetLeaderId();
       FUN_002f15f8(temp_v7,0);
       *(unsigned char *)(temp_v1 + 0x93f) = 1;
       *(unsigned char *)(temp_v1 + 0x941) = 1;
@@ -705,7 +705,7 @@ joined_r0x002167bc:
           temp_v5 = temp_v1 + 0xad6;
         }
         temp_v6 = resourceRunOperationIfUnblocked(temp_v9);
-        temp_v9 = FUN_002a4894(temp_v9);
+        temp_v9 = listCursorGetRowIfUnblocked(temp_v9);
         temp_v3 = *(unsigned short *)(temp_v5 + (temp_v9 + temp_v6) * 2);
         if (*(char *)(temp_v1 + 0x93e) != '\0') {
           temp_v3 = *(unsigned short *)(temp_v1 + 0xcca);
@@ -772,7 +772,7 @@ joined_r0x002167bc:
         break;
       }
       temp_v9 = resourceRunOperationIfUnblocked();
-      temp_v5 = FUN_002a4894(temp_v1 + 0x9ac);
+      temp_v5 = listCursorGetRowIfUnblocked(temp_v1 + 0x9ac);
       temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + (temp_v5 + temp_v9) * 2 + 0xad6);
       dataTable1bOr1cGetRecord();
       if (*(char *)(temp_v4 + 6) == '\t') {
@@ -1026,7 +1026,7 @@ LAB_00217264:
           temp_v5 = temp_v1 + 0xad6;
         }
         temp_v6 = resourceRunOperationIfUnblocked(temp_v9);
-        temp_v9 = FUN_002a4894(temp_v9);
+        temp_v9 = listCursorGetRowIfUnblocked(temp_v9);
         temp_v3 = *(unsigned short *)(temp_v5 + (temp_v9 + temp_v6) * 2);
         if (*(int *)(temp_v1 + 0x92c) != 0) {
           if (*(char *)(temp_v1 + 0x943) == '\0') {

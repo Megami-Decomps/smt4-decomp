@@ -96,7 +96,7 @@ typedef struct AsdVramHeap {
 } AsdVramHeap;
 
 extern "C" {
-u8 FUN_004186a4(void);
+u8 rosterHasLeader(void);
 }
 
 extern "C" {

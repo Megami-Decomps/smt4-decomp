@@ -18,7 +18,7 @@ typedef struct Panel {
 } Panel;
 
 extern s8 uiSpriteGetCompletionState(const Widget *widget);
-extern int FUN_002b8ee0(Widget *widget, int arg);
+extern int uiSlidingSpriteAdvance(Widget *widget, int arg);
 extern int pointConvertToFloat(u8 *cursor, u32 x, u32 y);
 extern int buttonHelpIsNotActive(void);
 extern int FUN_00241a44(void);
@@ -36,7 +36,7 @@ void Obj422448::FUN_003ab348()
     u32 y;
     u32 x;
 
-    FUN_002b8ee0(widget, 0);
+    uiSlidingSpriteAdvance(widget, 0);
     y = vec2GetYInt(widget);
     x = vec2GetXInt(widget);
     pointConvertToFloat(panel->cursor, x, y);

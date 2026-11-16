@@ -21,7 +21,7 @@ typedef struct {
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: pairSetFirstResetSecond. */
-extern int FUN_00291e14(void);
+extern int btlIsDefeatSuppressed(void);
 
 
 void FUN_002b1838(int param_1)
@@ -448,7 +448,7 @@ LAB_002b2058:
               temp_v2 = param_1 + temp_v9 * 0x8c + 0x20;
             }
             else {
-              temp_v2 = FUN_00291e14();
+              temp_v2 = btlIsDefeatSuppressed();
               if (temp_v2 == 0) {
                 temp_v5 = 4000;
               }
@@ -466,7 +466,7 @@ LAB_002b2058:
             temp_v2 = param_1 + temp_v9 * 0x8c + 0x20;
           }
           else {
-            temp_v2 = FUN_00291e14();
+            temp_v2 = btlIsDefeatSuppressed();
             if (temp_v2 == 0) {
               temp_v5 = 0;
             }

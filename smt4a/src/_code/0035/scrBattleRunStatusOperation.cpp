@@ -17,7 +17,7 @@ s32 stateHolderIsMissingOrState0(void);
 s32 statusDownGetValue(void);
 void FUN_0022e774(s32 value);
 s32 FUN_0026c3a0(void);
-void FUN_00333f6c(void);
+void gameGlobalsReleaseReference(void);
 void FUN_0038e4c4(BtlUiObjCA *widget);
 
 // Suspend the battle widget while the requested status-screen operation runs.
@@ -50,7 +50,7 @@ u32 scrBattleRunStatusOperation(void)
         break;
     case 3:
         if (FUN_0026c3a0() != 0) {
-            FUN_00333f6c();
+            gameGlobalsReleaseReference();
             FUN_0038e4c4(&g_btlUiBlock->objC);
             scrWorkSetValue(0, 4);
             return 1;

@@ -26,7 +26,7 @@ extern const char DAT_00405df0[];
 extern const char DAT_00405ddc[];
 extern const char DAT_00405dc8[];
 extern const char DAT_00405db8[];
-void FUN_002898e4(void);
+void commonBgAcquire(void);
 s32 FUN_0018c0ec(u32 process);
 void scrResultDestroy(u32 process);
 s32 FUN_001a16c0(u32 process);
@@ -40,7 +40,7 @@ void resultSetMenuState(ResultProcessWorkIV *work, s32 state);
 void resultCreate(u8 kind)
 {
     if (!g_result) {
-        FUN_002898e4();
+        commonBgAcquire();
         asdDebugTrace(DAT_00405dfc, 4708);
         g_result = (ResultProcessWorkIV *)asdMemAlloc(0x100, 0x100, 0, sizeof(ResultProcessWorkIV), 1);
         ResultProcessWorkIV *work = g_result;

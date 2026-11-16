@@ -7,8 +7,8 @@ extern u32 g_eventQueueEntries[32]; // sound ids queued for this frame, 0 when f
 
 s32 jyoucyuGetTableEntry(u32 index);
 s32 FUN_002c1d5c(void);
-s32 FUN_00126850(u32 id, u8 volumeSetting, u32 flags);
-s32 FUN_0012655c(u32 id, u8 volumeSetting, u32 flags, f32 volume, f32 pan);
+s32 asdSndPlaySlotA(u32 id, u8 volumeSetting, u32 flags);
+s32 asdSndPlaySlotB(u32 id, u8 volumeSetting, u32 flags, f32 volume, f32 pan);
 void asdSndStopCurrentSlotSounds(void);
 
 /* Plays a sound effect, panned by the source position for the positional ids. */
@@ -16,7 +16,7 @@ static __inline void soundPlaySe(u32 id, u32 position)
 {
     if (jyoucyuGetTableEntry(1) == 0 && FUN_002c1d5c() == 0) {
         if (id >= 0x100006C && id <= 0x100016B) {
-            FUN_00126850(id, g_soundVolumeSetting, 0);
+            asdSndPlaySlotA(id, g_soundVolumeSetting, 0);
         } else if (id >= 0x100016C && id <= 0x1000267) {
             f32 pan = 0.0f;
 
@@ -37,7 +37,7 @@ static __inline void soundPlaySe(u32 id, u32 position)
                 pan = -0.8f;
                 break;
             }
-            FUN_0012655c(id, g_soundVolumeSetting, 0, 1.0f, pan);
+            asdSndPlaySlotB(id, g_soundVolumeSetting, 0, 1.0f, pan);
         }
     }
 }

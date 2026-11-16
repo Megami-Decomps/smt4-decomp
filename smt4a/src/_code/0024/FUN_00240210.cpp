@@ -46,7 +46,7 @@ extern "C" {
 StockSlotTable *gameGetSlotTable(void);
 StockUnitA *gameGetSlotRecord(s32 slot);
 s32 bitsAt60Test(StockUnitA *unit, u32 bit);
-void FUN_0021b390(FilterMenuA *menu, s32 kind, s32 index, char *label);
+void contentFormatEntryName(FilterMenuA *menu, s32 kind, s32 index, char *label);
 
 /* Formats the label of entry `entry` of filter kind `kind` into `label` and tells whether it is
    the entry the settings currently have selected. */
@@ -63,7 +63,7 @@ u8 FUN_00240210(FilterMenuA *menu, s32 kind, char *label, s32 entry)
                     StockUnitA *unit = gameGetSlotRecord(gameGetSlotTable()->order[i]);
                     if (!bitsAt60Test(unit, 10)) {
                         if (count == entry - 1) {
-                            FUN_0021b390(menu, kind, unit->id, label);
+                            contentFormatEntryName(menu, kind, unit->id, label);
                             selected = gameGetSlotTable()->order[i] == settings->partyFilter;
                             break;
                         }
@@ -72,7 +72,7 @@ u8 FUN_00240210(FilterMenuA *menu, s32 kind, char *label, s32 entry)
                 }
             }
         } else {
-            FUN_0021b390(menu, kind, -1, label);
+            contentFormatEntryName(menu, kind, -1, label);
             if (settings->partyFilter < 0) {
                 return 1;
             }
@@ -86,7 +86,7 @@ u8 FUN_00240210(FilterMenuA *menu, s32 kind, char *label, s32 entry)
                     StockUnitA *unit = gameGetSlotRecord(gameGetSlotTable()->order[i]);
                     if (!bitsAt60Test(unit, 10)) {
                         if (count == entry - 1) {
-                            FUN_0021b390(menu, kind, unit->id, label);
+                            contentFormatEntryName(menu, kind, unit->id, label);
                             selected = gameGetSlotTable()->order[i] == settings->allyFilter;
                             break;
                         }
@@ -95,7 +95,7 @@ u8 FUN_00240210(FilterMenuA *menu, s32 kind, char *label, s32 entry)
                 }
             }
         } else {
-            FUN_0021b390(menu, kind, -1, label);
+            contentFormatEntryName(menu, kind, -1, label);
             if (settings->allyFilter < 0) {
                 return 1;
             }
@@ -105,13 +105,13 @@ u8 FUN_00240210(FilterMenuA *menu, s32 kind, char *label, s32 entry)
 
     if (kind == 1) {
         if (entry != 0) {
-            FUN_0021b390(menu, kind, menu->firstIds[entry], label);
+            contentFormatEntryName(menu, kind, menu->firstIds[entry], label);
             if (settings->firstFilter == (s16)menu->firstIds[entry]) {
                 return 1;
             }
             return selected;
         }
-        FUN_0021b390(menu, kind, -1, label);
+        contentFormatEntryName(menu, kind, -1, label);
         if (settings->firstFilter == 0) {
             return 1;
         }
@@ -119,13 +119,13 @@ u8 FUN_00240210(FilterMenuA *menu, s32 kind, char *label, s32 entry)
     }
     if (kind == 2) {
         if (entry != 0) {
-            FUN_0021b390(menu, kind, entry, label);
+            contentFormatEntryName(menu, kind, entry, label);
             if (settings->secondFilter == entry) {
                 return 1;
             }
             return selected;
         }
-        FUN_0021b390(menu, kind, -1, label);
+        contentFormatEntryName(menu, kind, -1, label);
         if (settings->secondFilter <= 0) {
             return 1;
         }
@@ -133,13 +133,13 @@ u8 FUN_00240210(FilterMenuA *menu, s32 kind, char *label, s32 entry)
     }
     if (kind == 3) {
         if (entry != 0) {
-            FUN_0021b390(menu, kind, menu->thirdIds[entry], label);
+            contentFormatEntryName(menu, kind, menu->thirdIds[entry], label);
             if (settings->secondFilter == menu->thirdIds[entry]) {
                 return 1;
             }
             return selected;
         }
-        FUN_0021b390(menu, kind, -1, label);
+        contentFormatEntryName(menu, kind, -1, label);
         if (settings->secondFilter == 0) {
             return 1;
         }
@@ -147,13 +147,13 @@ u8 FUN_00240210(FilterMenuA *menu, s32 kind, char *label, s32 entry)
     }
     if (kind == 4) {
         if (entry != 0) {
-            FUN_0021b390(menu, kind, menu->fourthIds[entry], label);
+            contentFormatEntryName(menu, kind, menu->fourthIds[entry], label);
             if (settings->fourthFilter == (s16)menu->fourthIds[entry]) {
                 return 1;
             }
             return selected;
         }
-        FUN_0021b390(menu, kind, -1, label);
+        contentFormatEntryName(menu, kind, -1, label);
         if (settings->fourthFilter == 0) {
             return 1;
         }
@@ -161,13 +161,13 @@ u8 FUN_00240210(FilterMenuA *menu, s32 kind, char *label, s32 entry)
     }
     if (kind == 5) {
         if (entry != 0) {
-            FUN_0021b390(menu, kind, entry - 1, label);
+            contentFormatEntryName(menu, kind, entry - 1, label);
             if (settings->fifthFilter == entry - 1) {
                 return 1;
             }
             return selected;
         }
-        FUN_0021b390(menu, kind, -1, label);
+        contentFormatEntryName(menu, kind, -1, label);
         if (settings->fifthFilter < 0) {
             return 1;
         }
@@ -175,13 +175,13 @@ u8 FUN_00240210(FilterMenuA *menu, s32 kind, char *label, s32 entry)
     }
     if (kind == 6) {
         if (entry != 0) {
-            FUN_0021b390(menu, kind, entry - 1, label);
+            contentFormatEntryName(menu, kind, entry - 1, label);
             if (settings->sixthFilter == entry - 1) {
                 return 1;
             }
             return selected;
         }
-        FUN_0021b390(menu, kind, -1, label);
+        contentFormatEntryName(menu, kind, -1, label);
         if (settings->sixthFilter < 0) {
             return 1;
         }

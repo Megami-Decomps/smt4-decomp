@@ -40,7 +40,7 @@ void _ZN9Obj53230012FUN_0048bd2cEv(EnemyPopup *popup)
         break;
     case 1:
         sprite = popup->sprite;
-        if (uiSpriteAdvanceAnimation(sprite, 1.0f) != 0 && FUN_002e19f8() != 0) {
+        if (uiSpriteAdvanceAnimation(sprite, 1.0f) != 0 && buttonHelpStateIsNot3() != 0) {
             popup->state = 2;
             popup->flags |= 2;
         }

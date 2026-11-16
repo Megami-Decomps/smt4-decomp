@@ -47,7 +47,7 @@ u32 FUN_002736e8(QuestScriptRun *run)
     case 2:
         if (scrRunOpcodesStub(run->process) != 2)
             break;
-        FUN_0029016c(FUN_002903f0(), 0);
+        FUN_0029016c(rosterGetLeaderId(), 0);
         FUN_002900d0();
         gameJumpRequestClear();
         run->state = 4;

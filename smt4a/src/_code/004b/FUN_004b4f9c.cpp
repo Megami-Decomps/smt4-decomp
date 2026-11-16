@@ -37,7 +37,7 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 extern int recordGetModeForId(int);
-extern int FUN_002a4894(int);
+extern int listCursorGetRowIfUnblocked(int);
 
 
 void FUN_004b4f9c(int param_1,int param_2,int param_3)
@@ -109,7 +109,7 @@ void FUN_004b4f9c(int param_1,int param_2,int param_3)
   gxResetColorQuadToWhite();
   temp_v4 = 0;
   do {
-    temp_v5 = FUN_002a4894(param_1 + 0x7560);
+    temp_v5 = listCursorGetRowIfUnblocked(param_1 + 0x7560);
     if (temp_v5 != temp_v4) {
       switch(temp_v4) {
       case 0:
@@ -170,7 +170,7 @@ void FUN_004b4f9c(int param_1,int param_2,int param_3)
     }
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 5);
-  temp_v4 = FUN_002a4894(param_1 + 0x7560);
+  temp_v4 = listCursorGetRowIfUnblocked(param_1 + 0x7560);
   temp_v5 = asdTMTexTableEntryAt(0x1d,temp_v4 + 0xba);
   switch(temp_v4) {
   case 0:

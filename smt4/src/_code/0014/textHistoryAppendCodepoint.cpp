@@ -24,7 +24,7 @@ void textHistoryAppendCodepoint(u16 codepoint)
     if (static_cast<s16>(g_textRendererSettings.table->unk4E02) >= 126) {
         return;
     }
-    if (FUN_002ae424(codepoint)) {
+    if (charCodeIsPrivateUseGlyph(codepoint)) {
         switch (codepoint) {
         case 0xf801:
         case 0xf816:

@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern u32 DAT_00433d10;
+extern u32 g_eventCommandPendingCleanup;
 
 void eventCommandSetPendingCleanup(u32 value)
 {
-    DAT_00433d10 = value;
+    g_eventCommandPendingCleanup = value;
 }
 
 } /* extern "C" */

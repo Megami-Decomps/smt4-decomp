@@ -4,15 +4,15 @@ extern "C" {
 void cursorResetFromParam(void);
 void asdModelCommandBlockRelease(void);
 void FUN_00248ae8(s32 arg);
-extern u32 *DAT_004729e0;
-extern s32 DAT_004729e4;
+extern u32 *g_modelCommandBuffer;
+extern s32 g_modelCommandWordCount;
 }
 
 static void commandQueuePushPair(u32 first, u32 second)
 {
-    DAT_004729e0[DAT_004729e4] = first;
-    DAT_004729e0[DAT_004729e4 + 1] = second;
-    DAT_004729e4 += 2;
+    g_modelCommandBuffer[g_modelCommandWordCount] = first;
+    g_modelCommandBuffer[g_modelCommandWordCount + 1] = second;
+    g_modelCommandWordCount += 2;
 }
 
 /* Posts the value 0xe40100 with id 0x20100, then this object and id 0xf0101. */

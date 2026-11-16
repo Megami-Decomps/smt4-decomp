@@ -6,7 +6,7 @@ extern "C" {
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size,
                    s32 (*compare)(const void *, const void *));
 s32 FUN_0038e29c(const void *left, const void *right);
-u8 FUN_0029022c(void);
+u8 rosterHasLeader(void);
 s32 objGetFlagBit16(AocMain *main);
 extern AocMain *g_aocMain;
 extern AocSystem *g_aocSystem;
@@ -14,10 +14,10 @@ extern AocSystem *g_aocSystem;
 /* Reports a missing or disabled add-on record for the current selection. */
 u32 aocSelectedRecordIsUnavailable(AocSystem *system)
 {
-    if (FUN_0029022c() == 0) {
+    if (rosterHasLeader() == 0) {
         return 0;
     }
-    u16 id = FUN_002903f0();
+    u16 id = rosterGetLeaderId();
     if (id < 0x15e) {
         return 0;
     }

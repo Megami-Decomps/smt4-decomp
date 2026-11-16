@@ -42,7 +42,7 @@ void asdFsIsSdCardDetected(void);
 void jyoucyuGetTableEntry(u32 id);
 void aocResetOperationState(AocSystemA *system);
 void flagObjAdvance(void *owner);
-void FUN_0047306c(void *owner, s32 a, s32 b, s32 c);
+void aocEntryPanelCreateText(void *owner, s32 a, s32 b, s32 c);
 RequestParameters FUN_0046f3ac(AocSystemA *system);
 u8 startsWithH(const void *value);
 u8 isEmptyString(const void *value);
@@ -95,7 +95,7 @@ u32 FUN_0024b280(void)
         request = FUN_0046f3ac(g_aocSystem);
         if (boot->dialogOpen == 0 && reinterpret_cast<AocSystemBootView *>(g_aocSystem)->packageHandle != 0) {
             reinterpret_cast<AocSystemBootView *>(g_aocSystem)->phase = 6;
-            FUN_0047306c(boot->dialog, 0xBE, 2, 0);
+            aocEntryPanelCreateText(boot->dialog, 0xBE, 2, 0);
             boot->dialogOpen = 1;
         }
         flags = g_aocMain->flags;
@@ -106,7 +106,7 @@ u32 FUN_0024b280(void)
         }
         if (startsWithH(&request) != 0) {
             boot->state = AOC_BOOT_STATE_CHECK;
-            FUN_0047306c(boot->dialog, 0xBE, 2, 0);
+            aocEntryPanelCreateText(boot->dialog, 0xBE, 2, 0);
             boot->dialogOpen = 1;
             return 0;
         }

@@ -72,7 +72,7 @@ extern int *gameGetSlotTable(void);
 /* Supplied declaration required: gameDataCopySaveEntry. */
 extern int recordGetModeForId(int);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
-extern int FUN_002a4894(int);
+extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: FUN_002f3a90. */
 extern int uniteSelectedFusionIsEnabled(void);
 /* Supplied declaration required: uiDrawListScrollBar. */
@@ -357,7 +357,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
     } while (temp_v4 < temp_v8);
   }
   temp_v4 = resourceRunOperationIfUnblocked(temp_v21);
-  temp_v6 = FUN_002a4894(temp_v21);
+  temp_v6 = listCursorGetRowIfUnblocked(temp_v21);
   temp_v8 = temp_v24;
   temp_v9 = temp_v23;
   if (temp_v25 == 0) {
@@ -368,7 +368,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
     return;
   }
   temp_v5 = (unsigned int)*(unsigned short *)(temp_v2 + (temp_v6 + temp_v4) * 2 + 0x6832);
-  temp_v4 = FUN_002a4894(temp_v21);
+  temp_v4 = listCursorGetRowIfUnblocked(temp_v21);
   temp_v4 = asdTMTexTableEntryAt(0x1a,temp_v4 + 0x146);
   efctSetSpeed();
   texDrawTableEntryAtStoredOrigin(2,0x1a,0x12a,*(short *)(temp_v4 + 8) + temp_v9,*(short *)(temp_v4 + 10) + temp_v8,0x79);
@@ -376,11 +376,11 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
   texDrawTableEntryAtStoredOrigin(2,0x1a,300,*(short *)(temp_v4 + 8) + temp_v9,*(short *)(temp_v4 + 10) + temp_v8,0x79);
   efctSetSpeed();
   texDrawTableEntryAtStoredOrigin(2,0x1a,0x12d,*(short *)(temp_v4 + 8) + temp_v9,*(short *)(temp_v4 + 10) + temp_v8,0x7e);
-  temp_v6 = FUN_002a4894(temp_v21);
+  temp_v6 = listCursorGetRowIfUnblocked(temp_v21);
   temp_v6 = recordGetModeForId((int)*(short *)(temp_v2 + temp_v6 * 2 + 0x438));
-  temp_v14 = FUN_002a4894(temp_v21);
+  temp_v14 = listCursorGetRowIfUnblocked(temp_v21);
   temp_v14 = recordGetModeForId((int)*(short *)(temp_v2 + temp_v14 * 4 + 0x45e));
-  temp_v10 = FUN_002a4894(temp_v21);
+  temp_v10 = listCursorGetRowIfUnblocked(temp_v21);
   temp_v10 = recordGetModeForId((int)*(short *)(temp_v2 + temp_v10 * 4 + 0x460));
   if ((((!(temp_v6 == 1 || temp_v6 == 2)) && (!(temp_v6 == 6 || temp_v14 == 1))) &&
       (!(temp_v14 == 2 || temp_v14 == 6))) && (!((temp_v10 == 1 || temp_v10 == 2) || temp_v10 == 6))) {

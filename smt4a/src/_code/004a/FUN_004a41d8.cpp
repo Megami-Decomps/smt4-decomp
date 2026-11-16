@@ -63,7 +63,7 @@ void sendEvent100020F(void);
 void sendEvent100020E(void);
 void sysPlaySe(s32 id);
 void messageMainSetTargetFlags(s32 flags);
-void FUN_003343f0(s32 arg);
+void gameGlobalsSetMenuOpenFlag(s32 arg);
 void screen4AEnter(StatusScreen* screen);
 void uniteCreatePreviewModel(void);
 void sortMenuAcquire(s32 a, s32 b);
@@ -136,7 +136,7 @@ void FUN_004a41d8(StatusScreen* screen)
             sysPlaySe(0xa0);
         }
         messageMainSetTargetFlags(1);
-        FUN_003343f0(1);
+        gameGlobalsSetMenuOpenFlag(1);
         sendEvent100020E();
         return;
     }
@@ -153,7 +153,7 @@ void FUN_004a41d8(StatusScreen* screen)
         FUN_0031f208(7);
         FUN_0031f208(3);
         useCounterStart();
-        FUN_003343f0(1);
+        gameGlobalsSetMenuOpenFlag(1);
         screen->state = 7;
         screen->stateArg = 0;
         buttonHelpSetText(0, 0xf4f4f4ff);

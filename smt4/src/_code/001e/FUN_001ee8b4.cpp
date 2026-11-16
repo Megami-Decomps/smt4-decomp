@@ -35,10 +35,10 @@ void FUN_001ee8b4(const u8 *quantities)
     if (count > 0 && status->inventory.column + status->inventory.row * 4 >= count) {
         status->inventory.row = (count - 1) / 4;
         status->inventory.column = status->inventory.count - status->inventory.row * 4 - 1;
-        FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(navigation), status->inventory.row);
+        scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(navigation), status->inventory.row);
         scrollOwnerSelectIndex(navigation, status->inventory.column);
     } else {
-        FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(navigation), status->inventory.row);
+        scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(navigation), status->inventory.row);
         scrollOwnerSelectIndex(navigation, status->inventory.column);
     }
     statusInventorySort();

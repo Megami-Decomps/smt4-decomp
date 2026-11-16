@@ -40,7 +40,7 @@ void Obj55c89c::FUN_004a40f4()
     if (useCounterIsFinished()) {
         useCounterRelease();
         sysPlaySe(0x2f);
-        FUN_003343f0(0);
+        gameGlobalsSetMenuOpenFlag(0);
         ItemListFlowView *flow = (ItemListFlowView *)owner;
         flow->state = 2;
         flow->step = 0;

@@ -16,10 +16,10 @@ int efctSetSpeed(...);
 int FUN_00180310(...);
 int FUN_00185e84(...);
 int FUN_002685cc(void);
-int FUN_002a4894(...);
+int listCursorGetRowIfUnblocked(...);
 int arrayContainsU16(...);
 int resultDrawRewardDetails(...);
-int FUN_004bcbb4(...);
+int skillGetAdjustedCost(...);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -74,13 +74,13 @@ extern int padGetMappedValue(unsigned short);
 extern int gameGetSlotRecord(int);
 /* Supplied declaration required: FUN_002685cc. */
 extern int recordGetModeForId(int);
-/* Supplied declaration required: FUN_002a4894. */
+/* Supplied declaration required: listCursorGetRowIfUnblocked. */
 extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: arrayContainsU16. */
 extern int countUnlockedSlots(void);
 extern int FUN_003dfed4(unsigned short, int);
 /* Supplied declaration required: resultDrawRewardDetails. */
-/* Supplied declaration required: FUN_004bcbb4. */
+/* Supplied declaration required: skillGetAdjustedCost. */
 extern int getUnlockedSlotCount(int);
 
 
@@ -180,7 +180,7 @@ void FUN_004b1a00(int param_1,int param_2,int param_3)
   temp_v15 = 0;
   temp_v26 = param_1 + 0x7640;
   if (temp_v20 != 0) {
-    temp_v1 = FUN_002a4894();
+    temp_v1 = listCursorGetRowIfUnblocked();
     temp_v3 = objectApplyIfUnblocked(temp_v26);
     if (temp_v3 - 1 <= temp_v1) {
       temp_v15 = 1;
@@ -223,13 +223,13 @@ LAB_004b1d78:
   temp_v29 = param_1 + 0x75dc;
   temp_v30 = param_1 + 0x7c8;
   do {
-    if (((temp_v11 == 0) || (temp_v3 = FUN_002a4894(temp_v29), temp_v3 != temp_v1)) || (temp_v15 != 0)) {
+    if (((temp_v11 == 0) || (temp_v3 = listCursorGetRowIfUnblocked(temp_v29), temp_v3 != temp_v1)) || (temp_v15 != 0)) {
       temp_v4 = (int)asdTMTexTableEntryAt(temp_v22,temp_v1 + 0xe4);
       temp_v17 = 0xffffffff;
       temp_v3 = temp_v4;
       temp_v8 = param_2;
       temp_v5 = param_3;
-      if ((temp_v21 != 0) && (temp_v3 = FUN_002a4894(temp_v29), temp_v3 == temp_v1)) {
+      if ((temp_v21 != 0) && (temp_v3 = listCursorGetRowIfUnblocked(temp_v29), temp_v3 == temp_v1)) {
         if (*(int *)(temp_v28 + 0x37c) < 1) {
           VectorSignedToFloat(1 - *(int *)(temp_v28 + 0x37c),(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v3 = temp_v28;
@@ -332,10 +332,10 @@ LAB_004b1d78:
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 8);
   if ((temp_v11 & ~temp_v15) != 0) {
-    temp_v1 = FUN_002a4894(temp_v29);
+    temp_v1 = listCursorGetRowIfUnblocked(temp_v29);
     temp_v3 = (int)asdTMTexTableEntryAt(temp_v22,temp_v1 + 0x103);
     efctSetSpeed();
-    temp_v8 = FUN_002a4894(temp_v29);
+    temp_v8 = listCursorGetRowIfUnblocked(temp_v29);
     temp_v8 = recordGetModeForId((int)*(short *)(param_1 + temp_v8 * 2 + 0x43b6));
     if ((temp_v8 == 1 || temp_v8 == 2) || (temp_v8 == 6)) {
       temp_v10 = 0xf5ff9fff;
@@ -393,7 +393,7 @@ LAB_004b1d78:
   temp_v18 = getUnlockedSlotCount(temp_v13);
   temp_v1 = 0;
   do {
-    if (((temp_v19 == 0) || (temp_v3 = FUN_002a4894(temp_v26), temp_v3 != temp_v1)) || (temp_v15 != 0)) {
+    if (((temp_v19 == 0) || (temp_v3 = listCursorGetRowIfUnblocked(temp_v26), temp_v3 != temp_v1)) || (temp_v15 != 0)) {
       temp_v17 = 0xffffffff;
       efctSetSpeed();
       temp_v3 = (int)asdTMTexTableEntryAt(temp_v22,temp_v1 + 0xec);
@@ -404,7 +404,7 @@ LAB_004b1d78:
                      *(short *)(temp_v3 + 10) + param_3,0x9c);
       }
       else {
-        if ((temp_v11 != 0) && (temp_v8 = FUN_002a4894(temp_v26), temp_v8 == temp_v1)) {
+        if ((temp_v11 != 0) && (temp_v8 = listCursorGetRowIfUnblocked(temp_v26), temp_v8 == temp_v1)) {
           texDrawTableEntryAtStoredOrigin(2,temp_v22,0xda,*(short *)(temp_v3 + 8) + param_2,
                        *(short *)(temp_v3 + 10) + param_3,0x9a);
         }
@@ -431,7 +431,7 @@ LAB_004b1d78:
           if (temp_v8 != 0) {
             temp_v17 = 0x9b9b9bff;
           }
-          if ((temp_v11 != 0) && (temp_v8 = FUN_002a4894(temp_v26), temp_v8 == temp_v1)) {
+          if ((temp_v11 != 0) && (temp_v8 = listCursorGetRowIfUnblocked(temp_v26), temp_v8 == temp_v1)) {
             temp_v17 = 0xff;
           }
           temp_v24 = (int)asdTMTexTableEntryAt(temp_v22,0xdf);
@@ -442,7 +442,7 @@ LAB_004b1d78:
           VectorSignedToFloat((int)*(short *)(temp_v24 + 8) + (int)*(short *)(temp_v3 + 8) + param_2,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           textDrawString(2,temp_v17,temp_v12,(int)*(short *)(temp_v3 + 8));
-          temp_v25 = FUN_004bcbb4(temp_v13,*(unsigned short *)(temp_v25 + 0x34));
+          temp_v25 = skillGetAdjustedCost(temp_v13,*(unsigned short *)(temp_v25 + 0x34));
           temp_v8 = (int)asdTMTexTableEntryAt(temp_v22,0xe3);
           FUN_00180310(1,(int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v3 + 8) + param_2,
                        (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v8 + 10) + param_3,1,4,0xab
@@ -486,10 +486,10 @@ LAB_004b1d78:
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 8);
   if ((temp_v20 & ~temp_v15) != 0) {
-    temp_v1 = FUN_002a4894(temp_v26);
+    temp_v1 = listCursorGetRowIfUnblocked(temp_v26);
     temp_v3 = (int)asdTMTexTableEntryAt(temp_v22,temp_v1 + 0x10b);
     efctSetSpeed();
-    temp_v8 = FUN_002a4894(temp_v26);
+    temp_v8 = listCursorGetRowIfUnblocked(temp_v26);
     temp_v8 = recordGetModeForId((int)*(short *)(param_1 + temp_v8 * 2 + 0x43c6));
     if ((temp_v8 == 1 || temp_v8 == 2) || (temp_v8 == 6)) {
       temp_v10 = 0xf5ff9fff;
@@ -525,7 +525,7 @@ LAB_004b1d78:
     FUN_00185e84((int)*(short *)(temp_v1 + 0x34),
                  (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v8 + 8) + param_2,
                  (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v3 + 10) + param_3,0xc9,0,0);
-    temp_v10 = FUN_004bcbb4(temp_v13,*(unsigned short *)(temp_v1 + 0x34));
+    temp_v10 = skillGetAdjustedCost(temp_v13,*(unsigned short *)(temp_v1 + 0x34));
     temp_v1 = (int)asdTMTexTableEntryAt(temp_v22,0x102);
     FUN_00180310(1,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v3 + 8) + param_2,
                  (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v1 + 10) + param_3,1,4,0xc9,

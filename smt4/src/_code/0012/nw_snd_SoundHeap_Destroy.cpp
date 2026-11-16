@@ -14,8 +14,8 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_002b4b94. */
-extern unsigned int FUN_002bad74(unsigned int, unsigned int);
-extern unsigned int FUN_002baed8(void);
+extern unsigned int soundRequestQueueFlush(unsigned int, unsigned int);
+extern unsigned int soundRequestQueueGetInstance(void);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 /* Supplied declaration required: nw_snd_internal_FrameHeap_Clear. */
@@ -36,8 +36,8 @@ void nw_snd_SoundHeap_Destroy(int param_1)
     nn_os_CriticalSection_Enter(param_1 + 4);
     nw_snd_internal_FrameHeap_Clear(param_1 + 0x10);
     nn_os_CriticalSection_Leave(param_1 + 4);
-    temp_v0 = FUN_002baed8();
-    temp_v1 = FUN_002bad74(temp_v0,1);
+    temp_v0 = soundRequestQueueGetInstance();
+    temp_v1 = soundRequestQueueFlush(temp_v0,1);
     FUN_002b4b94(temp_v0,temp_v1);
     nw_snd_internal_FrameHeap_Destroy(param_1 + 0x10);
     nn_os_CriticalSection_Leave(temp_v2);

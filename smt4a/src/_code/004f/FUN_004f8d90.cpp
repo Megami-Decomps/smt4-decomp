@@ -87,7 +87,7 @@ extern "C" void FUN_004f8d90(BattleCacheWork *work, s32 kind)
             model = modelListInit(model);
         }
         entry->model = model;
-        FUN_001cd3ec(model, name);
+        modelLoadFileAsyncByName(model, name);
         entry->first = source->first;
         entry->second = source->second;
         entry->third = source->third;

@@ -10,7 +10,7 @@ struct AocSystem;
 extern AocSystem *g_aocSystem;
 
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
-s32 FUN_001ac8dc(const void *a, const void *b);
+s32 recordSortEntryCompareByKey(const void *a, const void *b);
 Table04ExtraRecord *FUN_001b2e78(AocSystem *system, u32 id);
 u32 dataTableGet(u32 table, u32 index);
 u32 dataTableGetCount(u32 table);
@@ -29,7 +29,7 @@ Table04ExtraRecord *dataTable41FindById(u32 id)
     u32 count = dataTableGetCount(table);
     Table04ExtraRecord key;
     key.id = id;
-    return (Table04ExtraRecord *)libc_bsearch(&key, entries, count, sizeof(Table04ExtraRecord), FUN_001ac8dc);
+    return (Table04ExtraRecord *)libc_bsearch(&key, entries, count, sizeof(Table04ExtraRecord), recordSortEntryCompareByKey);
 }
 
 } /* extern "C" */

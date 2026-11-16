@@ -8,7 +8,7 @@ struct LmapActorHandles {
 extern "C" {
 extern LmapActorHandles *g_lmapMainState;
 extern void *g_handleRegistry;
-void FUN_0040aad4(RegisteredHandle *object, u32 flags);
+void moriModelContentLoadBody(RegisteredHandle *object, u32 flags);
 void handleRegistryRegisterObject(void *registry, u32 handle);
 void FUN_003fd924(u32 handle, u32 mode, u32 flags, f32 first, f32 second);
 void moriModelUnitStartMaterialAnimation(u32 handle, u32 mode, u32 flags, f32 value);
@@ -23,7 +23,7 @@ void lmapInitializeActorHandles()
         RegisteredHandle *object = work->actors[index];
         if (object) {
             if (!object->id) {
-                FUN_0040aad4(object, 0);
+                moriModelContentLoadBody(object, 0);
             }
             u32 handle = work->actors[index]->id;
             handleRegistryRegisterObject(g_handleRegistry, handle);

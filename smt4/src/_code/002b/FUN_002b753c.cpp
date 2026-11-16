@@ -7,7 +7,7 @@ extern "C" {
 int sentinelLookupGetValue(void);
 
 /* Supplied declaration required: sentinelLookupGetValue. */
-extern int FUN_002ae424(unsigned int);
+extern int charCodeIsPrivateUseGlyph(unsigned int);
 
 
 unsigned int FUN_002b753c(int *param_1)
@@ -27,7 +27,7 @@ unsigned int FUN_002b753c(int *param_1)
       if (temp_v2 == 0xffff) {
         return temp_v3;
       }
-      temp_v0 = FUN_002ae424(temp_v2);
+      temp_v0 = charCodeIsPrivateUseGlyph(temp_v2);
       if (temp_v0 != 0) {
         if (temp_v2 == 0xf801) {
           temp_v3 = temp_v3 + 1;

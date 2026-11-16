@@ -11,7 +11,7 @@ struct SoundLoader {
 };
 
 extern "C" {
-s32 FUN_002bf684(void);
+s32 nw_snd_SoundArchive_IsAvailable(void);
 u32 FUN_002ac780(void *archive, u32 id);
 s32 nw_snd_SoundArchive_GetSoundType(void *archive, u32 id);
 s32 FUN_001308dc(SoundLoader *loader, s32 impl, s32 arg, u32 extra);
@@ -25,7 +25,7 @@ s32 nw_snd_internal_SoundArchiveLoader_LoadWaveSound(SoundLoader *loader, u32 id
  * whether it loaded; nested calls while a load is running are refused. */
 s32 FUN_002af3b4(SoundLoader *loader, u32 id, s32 arg, u32 flags, u32 extra)
 {
-    if (loader->archive == NULL || FUN_002bf684() == 0 || id == 0xFFFFFFFF || arg == 0)
+    if (loader->archive == NULL || nw_snd_SoundArchive_IsAvailable() == 0 || id == 0xFFFFFFFF || arg == 0)
         return 0;
     s32 result;
     loader->depth++;

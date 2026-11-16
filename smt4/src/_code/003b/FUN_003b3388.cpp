@@ -6,7 +6,7 @@
 
 extern "C" {
 
-int FUN_002b0750(...);
+int uiDrawTableTextureSized(...);
 int pairSetHalves(...);
 int effectRenderTransformedInstance(...);
 int itemDrawCategoryBadge(...);
@@ -64,12 +64,12 @@ extern int g_titleScene; /* 0x44ea00 */
 extern int unlockFlagTest(int);
 /* Supplied declaration required: messageKindForward. */
 /* Supplied declaration required: FUN_00288844. */
-extern int FUN_00295c60(unsigned short, int);
+extern int devilCalcLevelScaledCost(unsigned short, int);
 extern int dataTable9EntryOrZero(int);
 /* Supplied declaration required: gameGetUnitRecord. */
 extern int gameGetSlotTable(void);
 extern int categoryGetColor(int);
-/* Supplied declaration required: FUN_002b0750. */
+/* Supplied declaration required: uiDrawTableTextureSized. */
 /* Supplied declaration required: pairSetHalves. */
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: fontMeasureLineAdvance. */
@@ -427,7 +427,7 @@ LAB_003b35ac:
           temp_v5 = 0;
         }
         else {
-          temp_v5 = FUN_00295c60(*(unsigned short *)(temp_v5 + 0x46),
+          temp_v5 = devilCalcLevelScaledCost(*(unsigned short *)(temp_v5 + 0x46),
                                (unsigned int)*(unsigned char *)(temp_v5 + 0x48) +
                                (int)*(short *)(param_1 + temp_v8 * 2 + 0xd49a));
           temp_v8 = param_1 + temp_v8 * 8;
@@ -479,7 +479,7 @@ LAB_003b35ac:
         efctSetSpeed();
       }
       else {
-        FUN_002b0750(2,0x28,0x11,aiStack_108[temp_v21] + temp_v8,aiStack_f8[temp_v21] + param_3,
+        uiDrawTableTextureSized(2,0x28,0x11,aiStack_108[temp_v21] + temp_v8,aiStack_f8[temp_v21] + param_3,
                      (int)*(short *)(param_1 + temp_v5 * 2 + 0xd468),
                      (int)*(short *)(*(int *)(temp_v14 + 0xc) + 2),0x79);
       }

@@ -67,7 +67,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: statusDownDrawIndicatorPairs. */
 extern int itemIsCollectedWithRelated(unsigned short);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
-extern int FUN_002a4894(int);
+extern int listCursorGetRowIfUnblocked(int);
 extern unsigned short *FUN_002c7e24(void);
 extern int FUN_002c7e3c(void);
 /* Supplied declaration required: uiDrawListScrollBar. */
@@ -153,7 +153,7 @@ unsigned int FUN_0026b0e4(void)
     break;
   case 0x13:
     puVar16 = (unsigned char *)0x0;
-    temp_v19 = FUN_002a4894(g_statusDown + 0x67c);
+    temp_v19 = listCursorGetRowIfUnblocked(g_statusDown + 0x67c);
     temp_v18 = 0;
     temp_v17 = (unsigned char *)0x0;
     efctSetSpeed();
@@ -333,8 +333,8 @@ LAB_0026b644:
     temp_v11 = g_statusDown + 0x2354;
     temp_v23 = temp_v11;
     temp_v2 = resourceRunOperationIfUnblocked();
-    temp_v10 = FUN_002a4894(temp_v11);
-    temp_v11 = FUN_002a4878((void *)(temp_v11));
+    temp_v10 = listCursorGetRowIfUnblocked(temp_v11);
+    temp_v11 = listCursorGetRowOfChildIfUnblocked((void *)(temp_v11));
     efctSetSpeed();
     texDrawCompositeSprite(2,0x12,0x10,temp_v0,temp_v1,0xb3);
     statusDownDrawIndicatorPairs(temp_v0,temp_v1);
@@ -410,8 +410,8 @@ LAB_0026b644:
     } while (temp_v11 < 9);
     efctSetSpeed();
     if ((*(int *)(temp_v4 + 0x518) == 0x16) && (0 < *(short *)(temp_v24 + 0x4a))) {
-      temp_v11 = FUN_002a4878((void *)(temp_v23));
-      temp_v2 = FUN_002a4894(temp_v23);
+      temp_v11 = listCursorGetRowOfChildIfUnblocked((void *)(temp_v23));
+      temp_v2 = listCursorGetRowIfUnblocked(temp_v23);
       temp_v2 = asdTMTexTableEntryAt(0x12,temp_v11 + temp_v2 * 4 + 0x4ae);
       efctSetSpeed();
       temp_v11 = g_renderCtx;

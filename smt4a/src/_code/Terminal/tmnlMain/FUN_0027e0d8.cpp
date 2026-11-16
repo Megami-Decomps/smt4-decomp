@@ -6,10 +6,10 @@
 
 extern "C" {
 
-int FUN_001f3eec(...);
+int floatInterpolateOverDuration(...);
 int FUN_003e5858(void);
-int FUN_003fd8dc(...);
-int FUN_00406768(...);
+int elementListSetShaderColor(...);
+int modelOwnerSetSlotValueAndActivate(...);
 int VectorFloatToUnsigned(double, int);
 
 int asdSequenceRequest(...);
@@ -47,13 +47,13 @@ int useCounterStart(void);
 int touchMenuClose(void);
 int tmnlFindSlotForItem(...);
 int msgWindowReset(void);
-int FUN_002bf4f4(...);
+int buttonHelpSetPanelState(...);
 int sortMenuAcquire(...);
 int obj7ECSetPair(...);
 int useCounterRelease(void);
 int FUN_003d2158(...);
 int soundChannelStopAll(...);
-int FUN_003d54f8(...);
+int titleSetSlotValueState2(...);
 int controllerGetSourceValue(...);
 int linkHolderApplyFirst(...);
 int slotTargetApplyActiveValue(...);
@@ -70,7 +70,7 @@ int FUN_001abbc4(void);
 int FUN_001b4eb8(void);
 int asdLoadFileSyncDefault(void);
 int placeWinStartText(...);
-int FUN_0022677c(...);
+int titleRestartSlotState3(...);
 int scrScriptProcessCreate(...);
 int scrScriptProcessStartEntry(...);
 int scrSetStringSlot(...);
@@ -96,7 +96,7 @@ int cameraAnimationSampleAndAdvance(...);
 int _ZN9Obj557af8C1EPK21AsdAnimCameraResource(void);
 int modelPlayClip(...);
 int resourceOwnerLoadFileSync(void);
-int FUN_0040aad4(...);
+int moriModelContentLoadBody(...);
 int FUN_0040ab7c(...);
 int handleRegistryRegisterObject(...);
 int resourceOwnerLoadNamed(...);
@@ -193,7 +193,7 @@ extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: resourceOwnerReleaseAndReset. */
 /* Supplied declaration required: FUN_001b4eb8. */
-/* Supplied declaration required: FUN_001f3eec. */
+/* Supplied declaration required: floatInterpolateOverDuration. */
 /* Supplied declaration required: slotSetRequest. */
 extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: asdLoadFileSyncDefault. */
@@ -201,7 +201,7 @@ extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: FUN_00214da4. */
 /* Supplied declaration required: FUN_0021b6ec. */
 /* Supplied declaration required: scrRunOpcodesStub. */
-/* Supplied declaration required: FUN_0022677c. */
+/* Supplied declaration required: titleRestartSlotState3. */
 extern int messageMainIsWindowActive(void);
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
@@ -212,7 +212,7 @@ extern unsigned int gameDataGetPlayerName(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int screenFadeIsBusy(void);
 /* Supplied declaration required: msgWindowReset. */
-/* Supplied declaration required: FUN_002bf4f4. */
+/* Supplied declaration required: buttonHelpSetPanelState. */
 extern int useCounterGetCurrentValue(void);
 /* Supplied declaration required: gameStateClearFlag. */
 /* Supplied declaration required: naviMainSetFlagsAndActivate. */
@@ -236,7 +236,7 @@ extern int FUN_00323bc4(unsigned int);
 /* Supplied declaration required: FUN_003d2158. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: soundChannelStopAll. */
-/* Supplied declaration required: FUN_003d54f8. */
+/* Supplied declaration required: titleSetSlotValueState2. */
 extern int linkHolderCallFirst(unsigned int);
 /* Supplied declaration required: controllerGetSourceValue. */
 /* Supplied declaration required: controllerTargetNodeStart. */
@@ -253,12 +253,12 @@ extern unsigned int *_ZN9Obj557ae8C1Ev(void);
 /* Supplied declaration required: controllerApplyAtUnitScale. */
 /* Supplied declaration required: cameraAnimationSampleAndAdvance. */
 /* Supplied declaration required: _ZN9Obj557af8C1EPK21AsdAnimCameraResource. */
-/* Supplied declaration required: FUN_003fd8dc. */
+/* Supplied declaration required: elementListSetShaderColor. */
 /* Supplied declaration required: modelPlayClip. */
-/* Supplied declaration required: FUN_00406768. */
+/* Supplied declaration required: modelOwnerSetSlotValueAndActivate. */
 /* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: resourceOwnerLoadFileSync. */
-/* Supplied declaration required: FUN_0040aad4. */
+/* Supplied declaration required: moriModelContentLoadBody. */
 /* Supplied declaration required: FUN_0040ab7c. */
 extern int FUN_0040ab8c(unsigned int);
 extern unsigned int modelListInit(void);
@@ -378,7 +378,7 @@ unsigned int FUN_0027e0d8(void)
       }
       puVar8[0x11] = temp_v4;
       resourceOwnerLoadFileSync();
-      FUN_0040aad4(puVar8[0x11],0);
+      moriModelContentLoadBody(puVar8[0x11],0);
       FUN_0045b538(*(int *)(puVar8[0x11] + 0xc) + 0xc);
       temp_v4 = *(unsigned int *)(puVar8[0x11] + 4);
       handleRegistryRegisterObject(g_handleRegistry,temp_v4);
@@ -394,7 +394,7 @@ unsigned int FUN_0027e0d8(void)
       puVar8[0x10] = temp_v4;
       resourceOwnerLoadFileSync();
       FUN_0040ab7c(puVar8[0x10],0);
-      FUN_0040aad4(puVar8[0x10],0);
+      moriModelContentLoadBody(puVar8[0x10],0);
       FUN_0045b538(*(int *)(puVar8[0x10] + 0xc) + 0xc);
       temp_v4 = *(unsigned int *)(puVar8[0x10] + 4);
       handleRegistryRegisterObject(g_handleRegistry,temp_v4);
@@ -534,8 +534,8 @@ unsigned int FUN_0027e0d8(void)
     if (temp_v7 != 0) {
       puVar3[4] = 0;
       puVar3[5] = 0;
-      FUN_0022677c(0,0xff);
-      FUN_0022677c(1,0xff);
+      titleRestartSlotState3(0,0xff);
+      titleRestartSlotState3(1,0xff);
     }
     break;
   case 2:
@@ -711,7 +711,7 @@ LAB_0027edcc:
             temp_v8 = (float)VectorSignedToFloat(puVar3[0x15],(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v7 = (int)temp_v8;
             if ((temp_v7 >= 6) && (temp_v3 = pairedAvailabilityGetState(0), temp_v3 == 3)) {
-              FUN_003d54f8(0,8);
+              titleSetSlotValueState2(0,8);
             }
             if (temp_v7 != 0xb4) {
               if (temp_v7 != 0x13f) {
@@ -774,7 +774,7 @@ LAB_0027edcc:
     if (temp_v7 != 0) break;
     touchMenuClose();
     useCounterRelease();
-    FUN_002bf4f4(0);
+    buttonHelpSetPanelState(0);
     linkHolderSetFlag(puVar3[0xf]);
     *(unsigned char *)(puVar3 + 0x160) = 0;
     *(unsigned char *)(puVar3 + 0x163) = 0;
@@ -820,7 +820,7 @@ LAB_0027edcc:
       }
       puVar3[0x11] = temp_v4;
       resourceOwnerLoadFileSync();
-      FUN_0040aad4(puVar3[0x11],0);
+      moriModelContentLoadBody(puVar3[0x11],0);
       FUN_0045b538(*(int *)(puVar3[0x11] + 0xc) + 0xc);
     }
     else {
@@ -832,7 +832,7 @@ LAB_0027edcc:
       }
       puVar3[0x10] = temp_v4;
       resourceOwnerLoadFileSync();
-      FUN_0040aad4(puVar3[0x10],0);
+      moriModelContentLoadBody(puVar3[0x10],0);
       FUN_0045b538(*(int *)(puVar3[0x10] + 0xc) + 0xc);
     }
     puVar3[4] = 9;
@@ -845,16 +845,16 @@ LAB_0027edcc:
         *(unsigned char *)(puVar3 + 0x15a) = 1;
         puVar3[0x15b] = 0x88;
         controllerTargetNodeStart(puVar3[0xf],0x1a);
-        FUN_003d54f8(0,10);
-        FUN_003d54f8(1,10);
+        titleSetSlotValueState2(0,10);
+        titleSetSlotValueState2(1,10);
       }
       else {
         modelSetDrawMode(puVar3,1);
         *(unsigned char *)(puVar3 + 0x15a) = 1;
         puVar3[0x15b] = 0;
         controllerTargetNodeStart(puVar3[0xf],0x1a);
-        FUN_003d54f8(0,0x14);
-        FUN_003d54f8(1,0x14);
+        titleSetSlotValueState2(0,0x14);
+        titleSetSlotValueState2(1,0x14);
       }
       puVar3[4] = 10;
       puVar3[5] = 0;
@@ -881,7 +881,7 @@ LAB_0027edcc:
     break;
   case 0xb:
     sysPlaySe(0xbf);
-    FUN_002bf4f4(0);
+    buttonHelpSetPanelState(0);
     puVar3[5] = 0;
     slotSetRequest(0,0x14,0xff);
     slotSetRequest(1,0x14,0xff);
@@ -919,7 +919,7 @@ LAB_0027edcc:
       linkHolderApplyFirst(puVar3[0xf],0x13);
       *(unsigned char *)(puVar3 + 0x15a) = 0;
     }
-    FUN_0022677c(0,0xff);
+    titleRestartSlotState3(0,0xff);
     *(unsigned char *)(puVar3 + 0x160) = 0;
     *(unsigned char *)(puVar3 + 0x163) = 0;
     *(unsigned char *)(puVar3 + 0x166) = 0;
@@ -942,7 +942,7 @@ LAB_0027edcc:
       linkHolderApplyFirst(puVar3[0xf],0x13);
       *(unsigned char *)(puVar3 + 0x15a) = 0;
     }
-    FUN_0022677c(0,0xff);
+    titleRestartSlotState3(0,0xff);
     *(unsigned char *)(puVar3 + 0x160) = 0;
     *(unsigned char *)(puVar3 + 0x163) = 0;
     *(unsigned char *)(puVar3 + 0x166) = 0;
@@ -1063,8 +1063,8 @@ LAB_0027edcc:
       }
       messageSetMode(1);
       if (*(char *)((int)puVar3 + 5) != '\0') {
-        FUN_003d54f8(0,1);
-        FUN_003d54f8(1);
+        titleSetSlotValueState2(0,1);
+        titleSetSlotValueState2(1);
         soundChannelStopAll(0xf);
         puVar3 = g_tmnl;
         temp_v7 = jobIsValid(*g_tmnl);
@@ -1150,15 +1150,15 @@ LAB_0027edcc:
     if (temp_v7 + 1 < 0x33) {
       VectorSignedToFloat(puVar3[0x15b] - 0x1e,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v8 = 0.6f;
-      FUN_001f3eec(puVar3[0x15b] - 0x1e);
+      floatInterpolateOverDuration(puVar3[0x15b] - 0x1e);
       temp_v9 = 255.0f;
       temp_v7 = VectorFloatToUnsigned(temp_v8 * 255.0f,3);
-      FUN_003fd8dc(*(unsigned int *)(puVar3[puVar3[0x15d] + 0x10] + 4),8,temp_v7 * 0x1010100 + 0xff);
+      elementListSetShaderColor(*(unsigned int *)(puVar3[puVar3[0x15d] + 0x10] + 4),8,temp_v7 * 0x1010100 + 0xff);
       VectorSignedToFloat(puVar3[0x15b] - 0x1e,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v8 = 0.1f;
-      FUN_001f3eec(puVar3[0x15b] - 0x1e);
+      floatInterpolateOverDuration(puVar3[0x15b] - 0x1e);
       temp_v7 = VectorFloatToUnsigned(temp_v8 * temp_v9,3);
-      FUN_00406768(*(unsigned int *)(g_handleRegistry + 4),0,temp_v7 * 0x1010100 + 0xff);
+      modelOwnerSetSlotValueAndActivate(*(unsigned int *)(g_handleRegistry + 4),0,temp_v7 * 0x1010100 + 0xff);
     }
     if (puVar3[0x15b] == 0x28) {
       sysPlayVoice(0x10000c6);

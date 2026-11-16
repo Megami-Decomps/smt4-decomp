@@ -45,8 +45,8 @@ void asdTMTexTableReleaseNode(s32 category, s32 id);
 void packageFileDisableByKindName(void *system, s32 category, s32 id);
 void asdTextureRelease(void *);
 void asdMemFree(void *);
-void FUN_00389f54(void *system, u32 fileId);
-void FUN_0038a134(void *system, u32 fileId);
+void aocPackageClearFileRefFlagType0C(void *system, u32 fileId);
+void aocPackageClearFileRefFlagType10(void *system, u32 fileId);
 
 // Release shared or private textures before freeing the containing file.
 void textureContentRelease(TextureContent *content)
@@ -68,9 +68,9 @@ void textureContentRelease(TextureContent *content)
     }
     if (content->image) {
         if (content->category == 12)
-            FUN_0038a134(g_aocSystem, content->fileId);
+            aocPackageClearFileRefFlagType10(g_aocSystem, content->fileId);
         else
-            FUN_00389f54(g_aocSystem, content->fileId);
+            aocPackageClearFileRefFlagType0C(g_aocSystem, content->fileId);
         asdMemFree(content->image);
         content->header = NULL;
         content->textures = NULL;

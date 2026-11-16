@@ -97,7 +97,7 @@ void FUN_003d386c(s32 useSelector)
         selected = selection->selection;
     } else {
         s32 first = resourceRunOperationIfUnblocked(selection->selector);
-        selected = first + FUN_002a4894(selection->selector);
+        selected = first + listCursorGetRowIfUnblocked(selection->selector);
     }
     s32 slot = static_cast<s32>(cycles->entries[selected].packedIndex);
     mapBlockSetRequest(cycles->colors[slot + 1]);

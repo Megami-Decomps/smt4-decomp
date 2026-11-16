@@ -6,7 +6,7 @@
 extern "C" {
 
 int FUN_0026b9bc(void);
-int FUN_002a03d8(...);
+int titleSetSlotValueState2(...);
 
 int FUN_002595e0(...);
 int cecProcessForward(...);
@@ -78,7 +78,7 @@ extern int randBetween(unsigned int, int);
 extern int flagCountUnlockedSlots(int);
 /* Supplied declaration required: dataTable06Sub1GetRecord. */
 extern int itemGetFlagBit1(unsigned short);
-/* Supplied declaration required: FUN_002a03d8. */
+/* Supplied declaration required: titleSetSlotValueState2. */
 extern int gameGetUnitRecord(int);
 extern int gameGetSlotTable(void);
 extern int FUN_002b89a4(unsigned int);
@@ -380,7 +380,7 @@ LAB_001ec4d0:
     temp_v7 = btlTalkBustupMatchesDevil(temp_v1);
     if (temp_v7 != 0) {
       btlTalkBustUpSetUnk2F4(1);
-      FUN_002a03d8(0,0x1e);
+      titleSetSlotValueState2(0,0x1e);
       break;
     }
     return temp_v18;

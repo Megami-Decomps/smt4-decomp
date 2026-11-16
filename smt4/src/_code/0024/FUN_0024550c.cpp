@@ -11,7 +11,7 @@ extern const char DAT_004008c4[];
 char *libc_strcpy(char *destination, const char *source);
 void memClear(void *buffer, s32 size);
 void textFormatBuffer(char *buffer, const char *format, ...);
-char *FUN_002522e0(char *text, s32 character);
+char *libc_strrchr(char *text, s32 character);
 s32 keyedRecordFindByName(const char *key);
 u32 keyedRecordRegisterName(const char *key);
 u32 FUN_00249e54(u32 handle, const void *file);
@@ -70,7 +70,7 @@ u32 FUN_0024550c(MoveOutEffectWork *loader)
             memClear(formatted, sizeof(formatted));
             textFormatBuffer(formatted, DAT_004008c4, DAT_00400804 + i * 0x20);
             libc_strcpy(path, formatted);
-            libc_strcpy(slot->name, FUN_002522e0(path, '/') + 1);
+            libc_strcpy(slot->name, libc_strrchr(path, '/') + 1);
             if (keyedRecordFindByName(slot->name) == 0xFF) {
                 asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&slot->file), 0);
                 slot->flags |= 1;

@@ -15,16 +15,16 @@ s32 FUN_001db820(u64 id, u32 directories, u32 files, const char *iconPath)
     u32 size;
     void *icon = fileLoadSync(iconPath, &size, 0);
     s32 result = FUN_00354e48(id, icon, size, files, directories);
-    FUN_002c3510(result);
+    processResultSetValue(result);
     if (nnResultIsFailure(result)) {
         return result;
     }
     result = FUN_00354dac(FUN_002c3520(), id);
-    FUN_002c3510(result);
+    processResultSetValue(result);
     if (nnResultIsSuccess(result)) {
         g_appletBusyFlag = 1;
     }
-    FUN_002c3510(result);
+    processResultSetValue(result);
     return result;
 }
 }

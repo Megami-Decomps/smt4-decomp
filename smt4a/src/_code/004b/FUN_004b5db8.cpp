@@ -11,7 +11,7 @@ int FUN_00180310(...);
 int uiDrawItemOrStatusIcon(...);
 int drawSetColorFromRGBA8(...);
 int texDrawTableEntrySized(...);
-int FUN_003e503c(void);
+int partyGetSlotPreferredFirst(void);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
 
@@ -33,7 +33,7 @@ extern int DAT_00588c50; /* 0x588c50 */
 /* Supplied declaration required: uiDrawItemOrStatusIcon. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: texDrawTableEntrySized. */
-/* Supplied declaration required: FUN_003e503c. */
+/* Supplied declaration required: partyGetSlotPreferredFirst. */
 
 
 void FUN_004b5db8(unsigned int param_1,unsigned int param_2,unsigned int param_3,int param_4,int param_5,
@@ -50,7 +50,7 @@ void FUN_004b5db8(unsigned int param_1,unsigned int param_2,unsigned int param_3
   unsigned long long temp_v5;
   
   param_3 = param_3 & 0xffff;
-  FUN_003e503c();
+  partyGetSlotPreferredFirst();
   temp_v5 = (int)asdTMTexTableEntryAt(0x1d,param_4 + 0x152);
   temp_v1 = (unsigned int)((unsigned long long)temp_v5 >> 0x20);
   temp_v0 = (int)temp_v5;

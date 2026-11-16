@@ -23,7 +23,7 @@ void questInteractionChooseEntry(QuestInteraction *object)
     FUN_003a7630(1);
     s32 activeQuest = 0;
     for (u16 index = 0; index < 32; ++index) {
-        if (FUN_002c2758(index) == 1) {
+        if (gameDataStatusFlagGet(index) == 1) {
             activeQuest = index;
             break;
         }

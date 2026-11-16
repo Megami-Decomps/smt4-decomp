@@ -12,7 +12,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_0042c1f4. */
-extern unsigned long long FUN_0050096c(void);
+extern unsigned long long fileGetHandleChecked(void);
 
 
 void FUN_0042b70c(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -23,7 +23,7 @@ void FUN_0042b70c(unsigned int param_1,unsigned int param_2,unsigned int param_3
   int temp_v1;
   
   temp_v1 = param_4;
-  temp_v0 = FUN_0050096c();
+  temp_v0 = fileGetHandleChecked();
   temp_v1 = (unsigned int)temp_v0;
   FUN_0042c1f4(&temp_v1,(int)((unsigned long long)temp_v0 >> 0x20),param_3,param_4);
   return;

@@ -24,7 +24,7 @@ typedef struct Handle {
     /* 0x04 */ s32 ownerId;
 } Handle;
 
-extern Owner *FUN_00225c1c(s32 ownerId);
+extern Owner *resourceManagerGetValueByIndex(s32 ownerId);
 extern Record *FUN_003ea930(Node *node);
 
 u32 FUN_0023a488(Handle *handle, u32 unused, u32 *out)
@@ -37,7 +37,7 @@ u32 FUN_0023a488(Handle *handle, u32 unused, u32 *out)
         *out = 0;
         return 1;
     }
-    owner = FUN_00225c1c(handle->ownerId);
+    owner = resourceManagerGetValueByIndex(handle->ownerId);
     node = owner->node;
     if (node != NULL && node->value != 0) {
         record = FUN_003ea930(node);

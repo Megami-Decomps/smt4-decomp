@@ -5,7 +5,7 @@
 extern "C" {
 
 int sysMemClear(...);
-int FUN_003e8bb0(...);
+int btlEntryBuildSummary(...);
 int btlActionMarkRandomTargetableUnit(...);
 int FUN_004e7080(...);
 int FUN_004e7c04(...);
@@ -15,7 +15,7 @@ int FUN_004eb838(...);
 
 int btlScriptUnitHasFlags(...);
 int btlFindFirstEntryMatchingCategoryAndRequiredMask(void);
-int FUN_003ee0c0(int);
+int btlSlotManagerResetStates(int);
 int FUN_003f1244(void);
 int btlUIClearWorkTables(void);
 int FUN_004abfd0(...);
@@ -99,9 +99,9 @@ extern int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: btlScriptUnitHasFlags. */
-/* Supplied declaration required: FUN_003e8bb0. */
+/* Supplied declaration required: btlEntryBuildSummary. */
 /* Supplied declaration required: btlFindFirstEntryMatchingCategoryAndRequiredMask. */
-/* Supplied declaration required: FUN_003ee0c0. */
+/* Supplied declaration required: btlSlotManagerResetStates. */
 /* Supplied declaration required: FUN_003f1244. */
 /* Supplied declaration required: btlUIClearWorkTables. */
 extern int FUN_004abac8(int);
@@ -188,7 +188,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
   *(unsigned int *)(temp_v19 + 0x45a0) = temp_v20 & *(unsigned int *)(temp_v19 + 0x45a0);
   *(unsigned char *)(*param_1 + 0xa0) = 0xff;
   *(unsigned char *)(*param_1 + 0xa1) = 0xff;
-  FUN_003ee0c0(*param_1);
+  btlSlotManagerResetStates(*param_1);
   *(unsigned short *)(param_2 + 0x16c) = 0xffff;
   *(unsigned short *)((int)param_2 + 0x5b2) = 0xffff;
   *(unsigned short *)(param_2 + 0x16d) = 0xffff;
@@ -529,7 +529,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
         temp_v26 = (((unsigned int *)param_2[8])[1] & DAT_0057116c) == 0 &&
                  (DAT_00571168 & *(unsigned int *)param_2[8]) == 0;
         FUN_004e7c04(param_1,temp_v26);
-        FUN_003e8bb0(temp_v27,*param_1,param_2[8]);
+        btlEntryBuildSummary(temp_v27,*param_1,param_2[8]);
         if (temp_v28 != '\0') {
           if (temp_v28 != '\x01') {
             if (temp_v28 == '\x02') {

@@ -32,7 +32,7 @@ typedef char CombatantAffinityPreviewLayout[sizeof(CombatantAffinityPreview) == 
     offsetof(CombatantAffinityPreview, skill) == 0x16 && offsetof(CombatantAffinityPreview, enabled) == 0x2B ? 1 : -1];
 
 extern "C" {
-CombatantAffinityPreview FUN_003e8bb0(BtlMainStateA *battle, BtlCombatantEntryA *entry);
+CombatantAffinityPreview btlEntryBuildSummary(BtlMainStateA *battle, BtlCombatantEntryA *entry);
 void source4CCopyHalves(BtlCombatantEntryA *entry, u16 *skills);
 s32 FUN_004bd098(u32 source, s32 skill);
 void kindIdStore(u32 kind, u32 *value);
@@ -41,7 +41,7 @@ extern u32 DAT_005713f0[8];
 
 u32 FUN_004c0f74(BtlCombatantEntryA *entry, u32 element)
 {
-    CombatantAffinityPreview action = FUN_003e8bb0(btlGetMainState(), entry);
+    CombatantAffinityPreview action = btlEntryBuildSummary(btlGetMainState(), entry);
     if (action.skill != 0) {
         AffinitySkillTailView *skill = (AffinitySkillTailView *)dataTable04FindById(action.skill);
         if (skill != NULL && skill->element != 0 && skill->element - 1 == element)

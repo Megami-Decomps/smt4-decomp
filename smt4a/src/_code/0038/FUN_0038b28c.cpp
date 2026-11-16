@@ -3,8 +3,8 @@
 extern "C" {
 
 extern s32 scrGetCommandFrame(void);
-extern s32 FUN_004186a4(void);
-extern u16 FUN_004186e0(void);
+extern s32 rosterHasLeader(void);
+extern u16 rosterGetLeaderId(void);
 extern void FUN_00418070(u32 value, s32 arg);
 extern void partyEntryIsAvailable(u32 value);
 extern void optionsClearFlag1(void);
@@ -20,7 +20,7 @@ s32 FUN_0038b28c(void)
     s32 run = 1;
 
     if (scrGetCommandFrame() == 0) {
-        if (FUN_004186a4() == 0) {
+        if (rosterHasLeader() == 0) {
             run = 0;
         } else {
             scrWorkSetValue(0, 0);
@@ -32,7 +32,7 @@ s32 FUN_0038b28c(void)
         if (scrWorkGetValue(0) != 0) {
             return 0;
         }
-        value = FUN_004186e0();
+        value = rosterGetLeaderId();
         FUN_00418070(value, 0);
         partyEntryIsAvailable(value);
         optionsClearFlag1();

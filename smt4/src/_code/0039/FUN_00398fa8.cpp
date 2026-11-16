@@ -60,7 +60,7 @@ void flaggedEntrySetValueA(PickList *list, s32 value);
 void flaggedEntrySetValueB(PickList *list, s32 value);
 void eventQueueAddUniqueIfValid(u32 event);
 s32 FUN_0029ee54(PickList *list);
-s32 FUN_0029efa8(PickList *list);
+s32 listCursorGetRowIfUnblocked(PickList *list);
 s32 resourceRunOperationIfUnblocked(PickList *list);
 PickSliderInfo *asdTMTexTableEntryAt(u32 group, u32 id);
 s32 FUN_001c36a0(void);
@@ -133,18 +133,18 @@ void FUN_00398fa8(PickScreen *screen)
 
     if (screen->paged != 0 && screen->sliderWidth >= PICK_SCROLL_MIN_WIDTH) {
         if (screen->regions[PICK_REGION_SCROLL_UP] == region) {
-            if (FUN_0029efa8(pagedList) + resourceRunOperationIfUnblocked(pagedList) - 1 >= 0)
-                FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(pagedList), 0);
+            if (listCursorGetRowIfUnblocked(pagedList) + resourceRunOperationIfUnblocked(pagedList) - 1 >= 0)
+                scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(pagedList), 0);
         } else if (screen->regions[PICK_REGION_SCROLL_DOWN] == region) {
-            s32 next = FUN_0029efa8(pagedList) + resourceRunOperationIfUnblocked(pagedList) + 1;
+            s32 next = listCursorGetRowIfUnblocked(pagedList) + resourceRunOperationIfUnblocked(pagedList) + 1;
             if (next < FUN_0029ee54(pagedList))
-                FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(pagedList), next);
+                scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(pagedList), next);
         } else if (screen->regions[PICK_REGION_SLIDER] == region) {
             s32 total = FUN_0029ee54(pagedList);
             PickSliderInfo *slider = asdTMTexTableEntryAt(0x2E, 0x14E);
             s32 offset = (s16)(FUN_001c36a0() - slider->first);
             if (offset >= 0 && offset < slider->range->count)
-                FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(pagedList), __aeabi_idivmod(offset * total, slider->range->count));
+                scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(pagedList), __aeabi_idivmod(offset * total, slider->range->count));
         }
     }
 }

@@ -16,7 +16,7 @@ typedef struct ScenePart00469e1c {
 } ScenePart00469e1c;
 
 s32 scrRunOpcodesStub(u32 handle);
-void FUN_003d54f8(s32 index, s32 value);
+void titleSetSlotValueState2(s32 index, s32 value);
 void FUN_003c1060(void);
 
 /* Once the handle reports 2, picks the next state (0x10 for kinds 1 and 2, else 3 and resets finished slots), then refreshes. */
@@ -32,10 +32,10 @@ void scenePartAdvanceState(ScenePart00469e1c *part)
         part->state = 3;
         part->unk008 = 0;
         if (pairedAvailabilityGetState(0) == 3) {
-            FUN_003d54f8(0, 10);
+            titleSetSlotValueState2(0, 10);
         }
         if (pairedAvailabilityGetState(1) == 3) {
-            FUN_003d54f8(1, 10);
+            titleSetSlotValueState2(1, 10);
         }
     }
     messageSetMode(0);

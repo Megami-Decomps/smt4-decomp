@@ -19,7 +19,7 @@ int FUN_002bd158(...);
 int textFormatBuffer(...);
 int dataFindKindRecordWithAocOverrides(...);
 int libc_strcpy(...);
-int FUN_002bff50(void);
+int messageSetConfirmDisplayMode(void);
 int memClear(unsigned char [128], int);
 
 /* stack frame of param_6: 1 slot(s), 4 byte(s) */
@@ -53,7 +53,7 @@ extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: messageSetDisplayMode. */
-/* Supplied declaration required: FUN_002bff50. */
+/* Supplied declaration required: messageSetConfirmDisplayMode. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
@@ -206,7 +206,7 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
       temp_v1 = *(short *)(param_2 + (temp_v9 + 1) * 2);
       wstrBufferPutChar(param_3,param_5,temp_v1,param_6);
       if (temp_v1 == 0) {
-        FUN_002bff50();
+        messageSetConfirmDisplayMode();
         return 1;
       }
       temp_v9 = bustupCutAnimSelectSlotsById(temp_v1);

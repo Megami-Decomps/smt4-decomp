@@ -7,13 +7,13 @@ int naviReleaseTextureNode(u32 *block);
 int buttonHelpRelease(void);
 int uiFadeRelease(void);
 int soundRequestEnd(void);
-int FUN_002b827c(int a);
+int buttonHelpSetContext(int a);
 int asdMemFree(void *ptr);
 int jobStop(u32 job, int mode);
 
 void NaviMain_Destroy(void)
 {
-    FUN_002b827c(3);
+    buttonHelpSetContext(3);
     soundRequestEnd();
     uiFadeRelease();
     buttonHelpRelease();

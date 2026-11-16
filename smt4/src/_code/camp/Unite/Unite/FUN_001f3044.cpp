@@ -72,7 +72,7 @@ extern int FUN_0029aef0(void);
 extern int flagWordTestBit(int, unsigned int);
 /* Supplied declaration required: uniteRebuildFusionCatalog. */
 extern int lmapSceneGetScript(void);
-extern int FUN_002a0d0c(void);
+extern int gameDataGetSortPreferences(void);
 extern int gameGetUnitRecord(void);
 extern int lmapMainIsRunning(void);
 /* Supplied declaration required: FUN_002bcc60. */
@@ -164,7 +164,7 @@ void FUN_001f3044(void)
   }
   temp_v0 = gameFlagIsSet(0x418);
   if (temp_v0 == 0) {
-    temp_v0 = FUN_002a0d0c();
+    temp_v0 = gameDataGetSortPreferences();
     *(unsigned short *)(temp_v0 + 0x1c) = 0xffff;
     *(unsigned short *)(temp_v0 + 0x1e) = 0xffff;
     *(unsigned short *)(temp_v0 + 0x20) = 0;
@@ -180,7 +180,7 @@ void FUN_001f3044(void)
     *(unsigned char *)(temp_v0 + 0x33) = 0;
     uniteRebuildFusionCatalog();
   }
-  temp_v0 = FUN_002a0d0c();
+  temp_v0 = gameDataGetSortPreferences();
   if (-1 < *(short *)(temp_v0 + 0x1c)) {
     if (*(short *)(temp_v0 + 0x20) == 0) {
       *(unsigned short *)(temp_v0 + 0x1c) = 0xffff;

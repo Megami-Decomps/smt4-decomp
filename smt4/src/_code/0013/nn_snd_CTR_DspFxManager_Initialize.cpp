@@ -4,7 +4,7 @@
 extern "C" {
 
 DspFxState *FUN_002b5954(void);
-void FUN_0013a6f8(DspFxState *fx);
+void dspFxResetAllBuses(DspFxState *fx);
 
 /* Clears the 12 DSP effect state bytes, then resets the effect table. */
 void nn_snd_CTR_DspFxManager_Initialize(u8 *state)
@@ -21,7 +21,7 @@ void nn_snd_CTR_DspFxManager_Initialize(u8 *state)
     state[3] = 0;
     state[7] = 0;
     state[11] = 0;
-    FUN_0013a6f8(FUN_002b5954());
+    dspFxResetAllBuses(FUN_002b5954());
 }
 
 } /* extern "C" */

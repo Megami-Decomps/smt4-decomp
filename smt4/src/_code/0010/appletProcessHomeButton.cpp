@@ -10,7 +10,7 @@ void nn_os_LightEvent_ClearSignal(void *event);
 extern struct {
     u8 unk00;
     s8 unk01;
-} DAT_00465198;
+} g_appletEventState;
 extern u8 g_appletHomeButtonEvent[];
 extern u8 g_nnAppletCriticalSection[];
 
@@ -20,7 +20,7 @@ u32 appletProcessHomeButton(void)
     u32 result = 0;
 
     if (nn_applet_CTR_IsExpectedToProcessHomeButton()) {
-        if (DAT_00465198.unk01 != 0) {
+        if (g_appletEventState.unk01 != 0) {
             nn_os_LightEvent_ClearSignal(g_appletHomeButtonEvent);
             result = (nn_os_CriticalSection_TryEnter(g_nnAppletCriticalSection) == 0) ? 2 : 3;
         } else {

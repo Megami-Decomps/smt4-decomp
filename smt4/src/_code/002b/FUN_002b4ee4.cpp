@@ -13,7 +13,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_002b4f64. */
-extern unsigned int *FUN_002baed8(void);
+extern unsigned int *soundRequestQueueGetInstance(void);
 
 
 unsigned int FUN_002b4ee4(int *param_1,unsigned char param_2)
@@ -24,7 +24,7 @@ unsigned int FUN_002b4ee4(int *param_1,unsigned char param_2)
   unsigned int *puVar2;
   unsigned int temp_v0;
   
-  puVar1 = (unsigned int *)FUN_002baed8();
+  puVar1 = (unsigned int *)soundRequestQueueGetInstance();
   puVar2 = puVar1;
   FUN_002b4f64(puVar1,6);
   puVar2[3] = puVar1[0x61];

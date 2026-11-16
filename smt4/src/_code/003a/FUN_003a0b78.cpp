@@ -21,7 +21,7 @@ typedef struct PopupTask {
 
 extern int pointConvertToFloat(void *panel, u32 x, u32 y);
 extern int FUN_00233240(void *intro, int arg);
-extern int FUN_002b8ee0(PopupCursor *cursor, int arg);
+extern int uiSlidingSpriteAdvance(PopupCursor *cursor, int arg);
 extern int FUN_0029e0f8(void);
 extern u32 vec2GetYInt(PopupCursor *cursor);
 extern u32 vec2GetXInt(PopupCursor *cursor);
@@ -41,7 +41,7 @@ void FUN_003a0b78(PopupTask *task)
     }
     if (task->step == 1) {
         cursor = &task->cursor;
-        FUN_002b8ee0(cursor, 0);
+        uiSlidingSpriteAdvance(cursor, 0);
         y = vec2GetYInt(cursor);
         x = vec2GetXInt(cursor);
         pointConvertToFloat(task->panel, x, y);

@@ -28,8 +28,8 @@ int FUN_0035ad50(int, unsigned char [300]);
 int statDrawClampedDelta(...);
 int recordFindAcceptedById(int);
 int recordContainsPairedId(...);
-int FUN_004bcbb4(...);
-int FUN_004bd6b0(...);
+int skillGetAdjustedCost(...);
+int partyRecordSetEquippedItemClampRank(...);
 int VectorSignedToFloat(...);
 int __aeabi_memcpy4(unsigned char [300], unsigned char *, int);
 
@@ -73,7 +73,7 @@ extern unsigned char *slotRecordFindById(void);
 /* Supplied declaration required: fadeObjectResetIfActive. */
 extern int itemIsCollectedWithRelated(unsigned short);
 /* Supplied declaration required: FUN_00288b20. */
-extern int FUN_002a4894(void);
+extern int listCursorGetRowIfUnblocked(void);
 extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: FUN_002c7e24. */
 extern int FUN_002c7e3c(void);
@@ -86,9 +86,9 @@ extern int uiSearchPrimary(int);
 extern unsigned int FUN_003df57c(unsigned short, unsigned int);
 extern int countUnlockedSlots(void);
 /* Supplied declaration required: recordContainsPairedId. */
-/* Supplied declaration required: FUN_004bcbb4. */
+/* Supplied declaration required: skillGetAdjustedCost. */
 extern int getUnlockedSlotCount(unsigned char *);
-/* Supplied declaration required: FUN_004bd6b0. */
+/* Supplied declaration required: partyRecordSetEquippedItemClampRank. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
@@ -135,7 +135,7 @@ void FUN_001fc720(int param_1,int param_2)
   
   temp_v2 = g_statusDown;
   temp_v23 = g_statusDown + 0x5ec;
-  temp_v21 = FUN_002a4894();
+  temp_v21 = listCursorGetRowIfUnblocked();
   temp_v27 = 0;
   temp_v24 = 0;
   psVar4 = (short *)FUN_002c7e24();
@@ -309,7 +309,7 @@ LAB_001fca00:
       if ((-1 < *(short *)(temp_v25 + 0x98)) && (temp_v22 != 4)) {
         temp_v17 = recordContainsPairedId(temp_v19,*(unsigned short *)(temp_v7 + 0x59c));
         if (temp_v17 == 0) {
-          FUN_004bd6b0(temp_v19,*(unsigned short *)(temp_v7 + 0x59c),temp_v11);
+          partyRecordSetEquippedItemClampRank(temp_v19,*(unsigned short *)(temp_v7 + 0x59c),temp_v11);
         }
         statDrawClampedDelta(temp_v19,(int)*(short *)(temp_v7 + 0x59c),
                      temp_v29 + (int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v4 + 8),
@@ -322,7 +322,7 @@ LAB_001fca00:
         else {
           temp_v5 = (unsigned int)*(unsigned short *)(temp_v7 + 0x59c);
           if (temp_v22 != 7) {
-            temp_v27 = FUN_004bcbb4(temp_v19);
+            temp_v27 = skillGetAdjustedCost(temp_v19);
           }
           else {
             dataTable04FindById();
@@ -491,14 +491,14 @@ LAB_001fd80c:
                 if ((-1 < *(short *)(temp_v25 + 0x98)) && (temp_v22 != 4)) {
                   temp_v17 = recordContainsPairedId(temp_v19,*(unsigned short *)(temp_v25 + 0xbc));
                   if (temp_v17 == 0) {
-                    FUN_004bd6b0(temp_v19,*(unsigned short *)(temp_v25 + 0xbc),0);
+                    partyRecordSetEquippedItemClampRank(temp_v19,*(unsigned short *)(temp_v25 + 0xbc),0);
                   }
                   statDrawClampedDelta(temp_v19,(int)*(short *)(temp_v25 + 0xbc),
                                (int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v12 + 8) + param_1,
                                (int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v12 + 10) + param_2
                                ,0xc9,0);
                 }
-                temp_v14 = FUN_004bcbb4(temp_v19,*(unsigned short *)(temp_v25 + 0xbc));
+                temp_v14 = skillGetAdjustedCost(temp_v19,*(unsigned short *)(temp_v25 + 0xbc));
                 temp_v12 = asdTMTexTableEntryAt(0x12,0x508);
                 FUN_00180310(0,(int)*(short *)(temp_v12 + 8) + (int)*(short *)(temp_v7 + 8) + param_1,
                              (int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v12 + 10) + param_2,1
@@ -515,7 +515,7 @@ LAB_001fd80c:
                 if ((-1 < *(short *)(temp_v25 + 0x98)) && (temp_v22 != 4)) {
                   temp_v8 = recordContainsPairedId(temp_v19,*(unsigned short *)(temp_v25 + 0xbc));
                   if (temp_v8 == 0) {
-                    FUN_004bd6b0(temp_v19,*(unsigned short *)(temp_v25 + 0xbc),0);
+                    partyRecordSetEquippedItemClampRank(temp_v19,*(unsigned short *)(temp_v25 + 0xbc),0);
                   }
                   statDrawClampedDelta(temp_v19,(int)*(short *)(temp_v25 + 0xbc),
                                *(short *)(temp_v12 + 8) + temp_v17,*(short *)(temp_v12 + 10) + param_2,
@@ -527,7 +527,7 @@ LAB_001fd80c:
                 VectorSignedToFloat(*(short *)(temp_v12 + 8) + temp_v17,(unsigned char)(in_fpscr >> 0x16) & 3);
                 VectorSignedToFloat(*(short *)(temp_v12 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
                 textDrawString(2,0xffffffff,temp_v20);
-                temp_v14 = FUN_004bcbb4(temp_v19,*(unsigned short *)(temp_v25 + 0xbc));
+                temp_v14 = skillGetAdjustedCost(temp_v19,*(unsigned short *)(temp_v25 + 0xbc));
                 temp_v12 = asdTMTexTableEntryAt(0x12,0x4fb);
                 FUN_00180310(0,*(short *)(temp_v12 + 8) + temp_v17,*(short *)(temp_v12 + 10) + param_2,1,4
                              ,0xc9,"%d",temp_v14);
@@ -623,13 +623,13 @@ LAB_001fcee8:
     if ((-1 < *(short *)(temp_v25 + 0x98)) && (temp_v22 != 4)) {
       temp_v7 = recordContainsPairedId(temp_v19,*(unsigned int *)(temp_v2 + 0x658));
       if (temp_v7 == 0) {
-        FUN_004bd6b0(temp_v19,*(unsigned int *)(temp_v2 + 0x658),0);
+        partyRecordSetEquippedItemClampRank(temp_v19,*(unsigned int *)(temp_v2 + 0x658),0);
       }
       statDrawClampedDelta(temp_v19,(int)(short)*(unsigned int *)(temp_v2 + 0x658),
                    (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v12,
                    (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v3 + 10) + param_2,0xb5,0);
     }
-    temp_v14 = FUN_004bcbb4(temp_v19,*(unsigned int *)(temp_v2 + 0x658));
+    temp_v14 = skillGetAdjustedCost(temp_v19,*(unsigned int *)(temp_v2 + 0x658));
     texDrawCompositeSprite(2,0x12,7,*(short *)(temp_v3 + 8) + temp_v12,*(short *)(temp_v3 + 10) + param_2,0xb5);
     temp_v11 = asdTMTexTableEntryAt(0x12,0x413);
     FUN_00180310(0,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v12,

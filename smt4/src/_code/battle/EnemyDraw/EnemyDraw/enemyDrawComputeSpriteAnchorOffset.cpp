@@ -4,7 +4,7 @@
 
 extern "C" {
 extern const f32 g_enemySpriteVerticalBaseline;
-extern f32 DAT_00433d98;
+extern f32 g_enemyDrawVerticalOffset;
 
 // Anchor the enemy sprite around its image bounds or the supplied geometry bounds.
 void enemyDrawComputeSpriteAnchorOffset(const BattleSpritePlacement *placement, BattleVector3 *output, f32 scale)
@@ -38,7 +38,7 @@ void enemyDrawComputeSpriteAnchorOffset(const BattleSpritePlacement *placement, 
         output->y += placement->offsetY * 2.0f;
     }
     output->y *= scale;
-    output->y += DAT_00433d98;
+    output->y += g_enemyDrawVerticalOffset;
     output->x = 0.0f;
     s32 horizontalAnchor = frame->anchorX - (frame->left + (frame->width >> 1));
     output->x -= (f32)horizontalAnchor;

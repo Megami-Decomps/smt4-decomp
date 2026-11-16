@@ -18,7 +18,7 @@ struct ExtendedLabelledRecord {
 extern "C" {
 const char *dataTable01GetRecordWithAocOverride(u16 message);
 void textFormatBuffer(char *output, const char *format, ...);
-f32 FUN_00168594(const char *text, u32 mode, f32 spacing);
+f32 fontMeasureTextWidth(const char *text, u32 mode, f32 spacing);
 extern const char DAT_0052c008[];
 }
 
@@ -38,7 +38,7 @@ extern "C" s32 uiDrawExtendedRecordLabel(ExtendedRecordLabels *labels, const Ext
     asdTextFormatStream(labels->handles[2], 2, -1, 0, 0, text);
     textFormatBuffer(text, DAT_0052c008);
     asdTextFormatStream(labels->description, 2, -1, 0, 0, text);
-    labels->descriptionWidth = static_cast<s32>(FUN_00168594(text, 2, 0.0f));
+    labels->descriptionWidth = static_cast<s32>(fontMeasureTextWidth(text, 2, 0.0f));
     labels->active = 1;
     return 1;
 }

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_00164ce0(u32 job, s32 flag);
+void jobSetSelectedFlag(u32 job, s32 flag);
 void messageMainSetMode(s32 mode);
 s32 jobIsValid(u32 job);
 
@@ -25,7 +25,7 @@ u32 FUN_002e5724(void)
         do {
             valid = jobIsValid(jobs->jobs[i]);
             if (valid != 0) {
-                FUN_00164ce0(jobs->jobs[i], 1);
+                jobSetSelectedFlag(jobs->jobs[i], 1);
             }
             i = i + 1;
         } while (i < 4);

@@ -35,7 +35,7 @@ void _ZN9Obj53230012FUN_0048d358Ev(PresetCursorView *view)
         break;
     case 1: {
         void *cursor = view->cursor;
-        if (uiSpriteAdvanceAnimation(cursor, 1.0f) && FUN_002e19f8()) {
+        if (uiSpriteAdvanceAnimation(cursor, 1.0f) && buttonHelpStateIsNot3()) {
             view->state = 2;
             view->flags |= 2;
         }

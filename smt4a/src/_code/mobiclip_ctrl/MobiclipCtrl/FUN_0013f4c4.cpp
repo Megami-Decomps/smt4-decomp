@@ -1,7 +1,7 @@
 #include "mobiclip_ctrl/MobiclipCtrl.h"
 
 extern "C" {
-extern S4Player DAT_00617f40;
+extern S4Player g_mobiclipPlayer;
 void registerBlockRequestGroups(u32 mask);
 void FUN_0016182c(u32 mask, s32 enabled);
 u32 nngxGetError(void);
@@ -12,7 +12,7 @@ void asdSndApplyPendingVoiceState(void);
 // Restore display request groups and normal shared-frame processing.
 void FUN_0013f4c4(s32 mode)
 {
-    S4Player *player = &DAT_00617f40;
+    S4Player *player = &g_mobiclipPlayer;
     switch (mode) {
     case 2:
         gxLcdClearForceBlack();

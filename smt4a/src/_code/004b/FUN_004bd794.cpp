@@ -50,7 +50,7 @@ void gridNavigationConfigure(void *list, s32 count, s32 rows, s32 columns, s32 a
 void FUN_002c8538(s32 arg);
 void FUN_00215bd0(void);
 void sysPlaySe(u32 id);
-void FUN_00183f58(s32 a, s32 b, s32 c);
+void buttonHelpSelectSlot(s32 a, s32 b, s32 c);
 void paramsClearPacket(void *packet);
 
 void uiSpriteStateInitFromSource(void *sprite, s32 a, s32 b, void *packet, s32 c);
@@ -118,7 +118,7 @@ void FUN_004bd794(PartnerScreen *screen, u8 mode)
             }
         } else if (screen->partnerCount >= 1) {
             sysPlaySe(0xF0);
-            FUN_00183f58(5, 1, 1);
+            buttonHelpSelectSlot(5, 1, 1);
         } else {
             sysPlaySe(0x118);
         }

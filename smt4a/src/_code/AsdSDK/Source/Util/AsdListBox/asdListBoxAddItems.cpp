@@ -5,7 +5,7 @@
 
 extern "C" {
 extern u8 asdListBoxFreeItem; /* item callback */
-extern const char DAT_0053d960[]; /* AsdListBox.cpp: __FILE__ */
+extern const char g_asdListBoxSourceFileName[]; /* AsdListBox.cpp: __FILE__ */
 
 void *asdMemoryAllocTracked(int heap, int alignClass, int unk08, u32 size, int fromFront);
 AsdListBoxItem *asdListBoxFindItem(u32 listBox, u32 id);
@@ -21,7 +21,7 @@ static __inline u32 listBoxAppendItem(u32 listBox, const char *label)
     AsdListBoxModel *model = reinterpret_cast<AsdListBoxModel *>(jobGetWork(listBox));
     AsdListBoxItem *item;
 
-    asdDebugTrace(DAT_0053d960, 1011);
+    asdDebugTrace(g_asdListBoxSourceFileName, 1011);
     item = (AsdListBoxItem *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(AsdListBoxItem), 1);
     strncpy(item->label, label, ASD_LISTBOX_PATH_LEN);
     item->type = 0;

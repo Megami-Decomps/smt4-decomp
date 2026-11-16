@@ -9,7 +9,7 @@ int FUN_002b4e7c(void);
 int libc_strcpy(unsigned short *, unsigned int);
 int sysMemClear(unsigned short *, int);
 int FUN_003df7c4(unsigned short *);
-int FUN_003dfad4(unsigned char *, unsigned short *);
+int demonBuildAffinitySlots(unsigned char *, unsigned short *);
 int recordGetPercentageScaledBase(void);
 int __aeabi_memcpy4(unsigned short *, unsigned short *, int);
 
@@ -31,7 +31,7 @@ extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003df7c4. */
-/* Supplied declaration required: FUN_003dfad4. */
+/* Supplied declaration required: demonBuildAffinitySlots. */
 extern int countUnlockedSlots(void);
 /* Supplied declaration required: recordGetPercentageScaledBase. */
 extern int levelGetExpRequirement(unsigned short);
@@ -135,7 +135,7 @@ void FUN_002cb55c(unsigned short *param_1,unsigned short *param_2,unsigned int *
     temp_v3 = recordGetPercentageScaledBase();
     param_1[0xd] = temp_v3 + param_1[0xd];
   }
-  FUN_003dfad4(&temp_v7,param_2);
+  demonBuildAffinitySlots(&temp_v7,param_2);
   *(unsigned char *)(param_1 + 0x1d) = bStack_3f >> 2;
   *(unsigned char *)((int)param_1 + 0x3b) = bStack_3d >> 2;
   *(unsigned char *)(param_1 + 0x1e) = bStack_3b >> 2;

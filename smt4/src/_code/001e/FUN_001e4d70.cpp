@@ -12,7 +12,7 @@ int FUN_00282bfc(int, int);
 int screenFadeSlotReset(int);
 int msgWindowReset(void);
 int commonBgStopChildAndBeginTransition(void);
-int FUN_002898e4(void);
+int commonBgAcquire(void);
 int aocBufferQueueDisplay(int, unsigned int, int);
 int FUN_00289de4(int, unsigned int, int);
 int buttonHelpCreate(void);
@@ -24,7 +24,7 @@ int soundChannelStopAll(int);
 int scrScriptProcessDestroy(void);
 int buttonHelpSetPreset(int);
 int textFormatBuffer(unsigned char [128], unsigned char *, unsigned int, unsigned int);
-int FUN_002bff50(void);
+int messageSetConfirmDisplayMode(void);
 int gameFlagIsSet(void);
 int asdMemFree(void);
 int jobStop(unsigned int, int);
@@ -50,7 +50,7 @@ extern int asdLoadFileGetUseRawPaths(void);
 /* Supplied declaration required: FUN_002897f0. */
 extern unsigned int scrScriptProcessGetEntry(unsigned int, unsigned int);
 /* Supplied declaration required: commonBgStopChildAndBeginTransition. */
-/* Supplied declaration required: FUN_002898e4. */
+/* Supplied declaration required: commonBgAcquire. */
 /* Supplied declaration required: aocBufferQueueDisplay. */
 /* Supplied declaration required: FUN_00289de4. */
 extern int aocPackageGrantsItem(int, unsigned int, unsigned int);
@@ -66,7 +66,7 @@ extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
 extern int padIsButtonRepeat(unsigned int);
 /* Supplied declaration required: textFormatBuffer. */
 extern int padIsButtonPressed(unsigned int);
-/* Supplied declaration required: FUN_002bff50. */
+/* Supplied declaration required: messageSetConfirmDisplayMode. */
 /* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: jobStop. */
@@ -125,7 +125,7 @@ unsigned int FUN_001e4d70(void)
     }
     uiFadeRelease();
     buttonHelpRelease();
-    FUN_002bff50();
+    messageSetConfirmDisplayMode();
     msgWindowReset();
     bustupCutAnimStopJob();
     eventTexReleaseJobs();
@@ -211,7 +211,7 @@ unsigned int FUN_001e4d70(void)
       temp_v3 = asdLoadFileSyncDefault(temp_v6);
       puVar1[0xd] = temp_v3;
     }
-    FUN_002898e4();
+    commonBgAcquire();
     buttonHelpCreate();
     commonBgStopChildAndBeginTransition();
     buttonHelpSetPreset(0x90);

@@ -35,7 +35,7 @@ extern GameStateBgmView g_gameState;
 
 s32 bgmGetStateById(u32 id);
 s32 FUN_00287328(u32 id);
-u16 FUN_002903f0(void);
+u16 rosterGetLeaderId(void);
 
 /* Selects the map music from the area, or a story override, and starts it unless it is already
  * playing; releases the music while a script is pending, the music is held or the map suppresses it. */
@@ -61,7 +61,7 @@ void lmapUpdateMapBgm(void)
     }
 
     u32 id;
-    if (map->mode != 1 && map->mode != 2 && (id = FUN_002903f0()) != 0) {
+    if (map->mode != 1 && map->mode != 2 && (id = rosterGetLeaderId()) != 0) {
         const s32 overrideState = table1bOr1cGetRecordValue(id);
         if (overrideState == 1) {
             g_gameState.bgmId = 0x01000037;

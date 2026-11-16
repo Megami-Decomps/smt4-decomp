@@ -7,7 +7,7 @@ struct LazyValue {
 };
 
 extern s32 g_moduleValue;        /* the ready word */
-extern LazyValue DAT_0058938c;  /* the same words seen as a record */
+extern LazyValue g_fsUserMount;  /* the same words seen as a record */
 void sysReportCheckFailure(u32 key, u32 address);
 
 /* Returns the lazily initialised value, reporting a fault (the not-initialised result and the address of the check) when it is not ready yet. */
@@ -17,6 +17,6 @@ s32 fsGetUserMountHandle(void)
         nn::Result result(0xE0A046DB);
         sysReportCheckFailure(result, __current_pc());
     }
-    return DAT_0058938c.value;
+    return g_fsUserMount.value;
 }
 }

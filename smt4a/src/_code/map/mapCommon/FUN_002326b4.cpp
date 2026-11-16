@@ -15,7 +15,7 @@ int mapIfLoadWidgets(void);
 int FUN_00363c58(int);
 int FUN_0037b150(void);
 int resourceOwnerLoadFileSync(...);
-int FUN_0040aad4(...);
+int moriModelContentLoadBody(...);
 
 extern unsigned char *DAT_005f1b08; /* 0x5f1b08 */
 extern unsigned char *DAT_005f1b0c; /* 0x5f1b0c */
@@ -46,7 +46,7 @@ extern unsigned int DAT_005f1b6c; /* 0x5f1b6c */
 /* Supplied declaration required: FUN_00363c58. */
 /* Supplied declaration required: FUN_0037b150. */
 /* Supplied declaration required: resourceOwnerLoadFileSync. */
-/* Supplied declaration required: FUN_0040aad4. */
+/* Supplied declaration required: moriModelContentLoadBody. */
 extern unsigned int modelListInit(void);
 
 
@@ -80,7 +80,7 @@ void FUN_002326b4(void)
   DAT_005f1b10 = temp_v1;
   textFormatBuffer(temp_v2,"map/all/damage.bam");
   resourceOwnerLoadFileSync(DAT_005f1b10,temp_v2);
-  FUN_0040aad4(DAT_005f1b10,0);
+  moriModelContentLoadBody(DAT_005f1b10,0);
   temp_v0 = 0x20;
   asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x27f);
   temp_v1 = 0;
@@ -90,7 +90,7 @@ void FUN_002326b4(void)
   DAT_005f1b14 = temp_v1;
   textFormatBuffer(temp_v2,"player_arms/arm00.bam");
   resourceOwnerLoadFileSync(DAT_005f1b14,temp_v2);
-  FUN_0040aad4(DAT_005f1b14,0);
+  moriModelContentLoadBody(DAT_005f1b14,0);
   temp_v0 = 0x20;
   asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x284);
   temp_v1 = 0;
@@ -100,7 +100,7 @@ void FUN_002326b4(void)
   DAT_005f1b18 = temp_v1;
   textFormatBuffer(temp_v2,"player_arms/arm01.bam");
   resourceOwnerLoadFileSync(DAT_005f1b18,temp_v2);
-  FUN_0040aad4(DAT_005f1b18,0);
+  moriModelContentLoadBody(DAT_005f1b18,0);
   temp_v0 = 0x20;
   asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x289);
   temp_v1 = 0;
@@ -110,7 +110,7 @@ void FUN_002326b4(void)
   DAT_005f1b1c = temp_v1;
   textFormatBuffer(temp_v2,"player_arms/arm02.bam");
   resourceOwnerLoadFileSync(DAT_005f1b1c,temp_v2);
-  FUN_0040aad4(DAT_005f1b1c,0);
+  moriModelContentLoadBody(DAT_005f1b1c,0);
   temp_v0 = 0x20;
   asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x28e);
   temp_v1 = 0;
@@ -120,7 +120,7 @@ void FUN_002326b4(void)
   DAT_005f1b20 = temp_v1;
   textFormatBuffer(temp_v2,"player_arms/arm03.bam");
   resourceOwnerLoadFileSync(DAT_005f1b20,temp_v2);
-  FUN_0040aad4(DAT_005f1b20,0);
+  moriModelContentLoadBody(DAT_005f1b20,0);
   temp_v0 = 0x20;
   asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x293);
   temp_v1 = 0;
@@ -130,7 +130,7 @@ void FUN_002326b4(void)
   DAT_005f1b2c = temp_v1;
   textFormatBuffer(temp_v2,"player_arms/arm00.bam");
   resourceOwnerLoadFileSync(DAT_005f1b2c,temp_v2);
-  FUN_0040aad4(DAT_005f1b2c,0);
+  moriModelContentLoadBody(DAT_005f1b2c,0);
   temp_v0 = 0x20;
   asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x299);
   temp_v1 = 0;
@@ -140,7 +140,7 @@ void FUN_002326b4(void)
   DAT_005f1b24 = temp_v1;
   textFormatBuffer(temp_v2,"map/all/pl_ring_in.bam");
   resourceOwnerLoadFileSync(DAT_005f1b24,temp_v2);
-  FUN_0040aad4(DAT_005f1b24,0);
+  moriModelContentLoadBody(DAT_005f1b24,0);
   temp_v0 = 0x20;
   asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x29e);
   temp_v1 = 0;
@@ -150,7 +150,7 @@ void FUN_002326b4(void)
   DAT_005f1b28 = temp_v1;
   textFormatBuffer(temp_v2,"map/all/pl_ring_out.bam");
   resourceOwnerLoadFileSync(DAT_005f1b28,temp_v2);
-  FUN_0040aad4(DAT_005f1b28,0);
+  moriModelContentLoadBody(DAT_005f1b28,0);
   temp_v0 = 0x20;
   asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x2a4);
   temp_v1 = 0;
@@ -160,7 +160,7 @@ void FUN_002326b4(void)
   DAT_005f1b30 = temp_v1;
   textFormatBuffer(temp_v2,"map/all/area_next.bam");
   resourceOwnerLoadFileSync(DAT_005f1b30,temp_v2);
-  FUN_0040aad4(DAT_005f1b30,0);
+  moriModelContentLoadBody(DAT_005f1b30,0);
   temp_v0 = 0x20;
   asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x2a9);
   temp_v1 = 0;
@@ -170,7 +170,7 @@ void FUN_002326b4(void)
   DAT_005f1b34 = temp_v1;
   textFormatBuffer(temp_v2,"map/all/ar_hit.bam");
   resourceOwnerLoadFileSync(DAT_005f1b34,temp_v2);
-  FUN_0040aad4(DAT_005f1b34,0);
+  moriModelContentLoadBody(DAT_005f1b34,0);
   temp_v0 = 0x20;
   asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x2af);
   temp_v1 = 0;
@@ -180,7 +180,7 @@ void FUN_002326b4(void)
   DAT_005f1b38 = temp_v1;
   textFormatBuffer(temp_v2,"map/all/area_next_s.bam");
   resourceOwnerLoadFileSync(DAT_005f1b38,temp_v2);
-  FUN_0040aad4(DAT_005f1b38,0);
+  moriModelContentLoadBody(DAT_005f1b38,0);
   temp_v0 = 0x20;
   asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x2d2);
   temp_v1 = 0;
@@ -190,7 +190,7 @@ void FUN_002326b4(void)
   DAT_005f1b4c = temp_v1;
   textFormatBuffer(temp_v2,"map/all/navarre.bam");
   resourceOwnerLoadFileSync(DAT_005f1b4c,temp_v2);
-  FUN_0040aad4(DAT_005f1b4c,0);
+  moriModelContentLoadBody(DAT_005f1b4c,0);
   temp_v0 = 0x20;
   asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x2eb);
   temp_v1 = 0;
@@ -200,7 +200,7 @@ void FUN_002326b4(void)
   DAT_005f1b60 = temp_v1;
   textFormatBuffer(temp_v2,"map/all/estm.bam");
   resourceOwnerLoadFileSync(DAT_005f1b60,temp_v2);
-  FUN_0040aad4(DAT_005f1b60,0);
+  moriModelContentLoadBody(DAT_005f1b60,0);
   temp_v0 = 0x20;
   asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x2f1);
   temp_v1 = 0;
@@ -210,7 +210,7 @@ void FUN_002326b4(void)
   DAT_005f1b64 = temp_v1;
   textFormatBuffer(temp_v2,"map/all/lestm.bam");
   resourceOwnerLoadFileSync(DAT_005f1b64,temp_v2);
-  FUN_0040aad4(DAT_005f1b64,0);
+  moriModelContentLoadBody(DAT_005f1b64,0);
   temp_v0 = 0x20;
   asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x2fe);
   temp_v1 = 0;
@@ -220,7 +220,7 @@ void FUN_002326b4(void)
   DAT_005f1b6c = temp_v1;
   textFormatBuffer(temp_v2,"map/all/jade_knife.bam");
   resourceOwnerLoadFileSync(DAT_005f1b6c,temp_v2);
-  FUN_0040aad4(DAT_005f1b6c,0);
+  moriModelContentLoadBody(DAT_005f1b6c,0);
   FUN_00244220();
   return;
 }

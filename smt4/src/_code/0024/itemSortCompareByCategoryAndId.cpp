@@ -15,7 +15,7 @@ typedef struct SortItem {
 } SortItem;
 
 extern int idIsAbove400(int id);
-extern int FUN_0024c5a0(int id);
+extern int itemSortCategoryFromKindRecord(int id);
 extern int recordKindRank(int id);
 extern SlotRecord *gameGetUnitRecord(int slot);
 
@@ -37,7 +37,7 @@ int itemSortCompareByCategoryAndId(SortItem *a, SortItem *b)
         subA = 99;
         orderA = 0;
     } else {
-        rankA = FUN_0024c5a0(a->id);
+        rankA = itemSortCategoryFromKindRecord(a->id);
         subA = recordKindRank(a->id);
         orderA = reinterpret_cast<const ItemSortRecord *>(dataTable40FindById(a->id))->secondaryKey;
     }
@@ -46,7 +46,7 @@ int itemSortCompareByCategoryAndId(SortItem *a, SortItem *b)
         subB = 99;
         orderB = 0;
     } else {
-        rankB = FUN_0024c5a0(b->id);
+        rankB = itemSortCategoryFromKindRecord(b->id);
         subB = recordKindRank(b->id);
         orderB = reinterpret_cast<const ItemSortRecord *>(dataTable40FindById(b->id))->secondaryKey;
     }

@@ -13,7 +13,7 @@ struct EnemyDrawObject {
 struct EnemyDrawVector { f32 x, y, z; };
 
 extern "C" {
-extern f32 DAT_00433d98;
+extern f32 g_enemyDrawVerticalOffset;
 
 // Calculate the scaled vertical offset from the enemy's image metrics.
 void enemyDrawCalcVerticalOffset(EnemyDrawObject *object, EnemyDrawVector *offset, f32 scale)
@@ -23,6 +23,6 @@ void enemyDrawCalcVerticalOffset(EnemyDrawObject *object, EnemyDrawVector *offse
     offset->z = 0.0f;
     EnemyImageMetrics *image = object->image;
     offset->y += ((143.0f - (f32)image->unk14) - (f32)image->unk18) * scale;
-    offset->y += DAT_00433d98;
+    offset->y += g_enemyDrawVerticalOffset;
 }
 }

@@ -42,7 +42,7 @@ u32 FUN_0027398c(QuestAddonScriptWork *work)
     switch (work->state) {
     case 0: {
         const ScriptDefinitionView *definition = reinterpret_cast<const ScriptDefinitionView *>(
-            dataTable1bOr1cGetRecord(FUN_002903f0()));
+            dataTable1bOr1cGetRecord(rosterGetLeaderId()));
         if (!definition || !definition->package) {
             work->state = 3;
             return 0;
@@ -67,7 +67,7 @@ u32 FUN_0027398c(QuestAddonScriptWork *work)
             return 0;
         }
         const ScriptDefinitionView *definition = reinterpret_cast<const ScriptDefinitionView *>(
-            dataTable1bOr1cGetRecord(FUN_002903f0()));
+            dataTable1bOr1cGetRecord(rosterGetLeaderId()));
         if (!definition) {
             work->state = 3;
         }

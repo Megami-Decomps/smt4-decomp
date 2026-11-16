@@ -32,7 +32,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: FUN_0024d5bc. */
 /* Supplied declaration required: renderCtxCallB. */
-extern int FUN_002865c0(unsigned int);
+extern int gxPackFadeKindAlphaWord(unsigned int);
 /* Supplied declaration required: texTableRecordCallWithParams. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
@@ -78,7 +78,7 @@ unsigned int FUN_0022413c(void)
     efctSetSpeed();
     temp_v3 = g_titleScene;
     temp_v8 = 0.0f;
-    temp_v2 = FUN_002865c0(6);
+    temp_v2 = gxPackFadeKindAlphaWord(6);
     piVar7 = (int *)(temp_v3 + 0x126c);
     temp_v4 = *piVar7;
     temp_v5 = piVar7[temp_v4 + 2];

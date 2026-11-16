@@ -39,7 +39,7 @@ extern unsigned int DAT_00435d18; /* 0x435d18 */
 /* Supplied declaration required: asdModelClearSlotColors. */
 /* Supplied declaration required: modelSetAnimationChannels. */
 extern int keyedRecordFindByName(int);
-extern int FUN_002522e0(unsigned char *, unsigned int);
+extern int libc_strrchr(unsigned char *, unsigned int);
 /* Supplied declaration required: animPlayerSetLoopPolicy. */
 /* Supplied declaration required: modelPartSetRotationDegrees. */
 /* Supplied declaration required: btlGetMainState. */
@@ -218,7 +218,7 @@ LAB_003dd4ac:
       textFormatBuffer(temp_v10,"battle/effect/%s.eft","ef_e_ref" + temp_v2 * 0x20);
       libc_strcpy(temp_v8,temp_v10);
       temp_v3 = param_1 + temp_v2 * 0x8c;
-      temp_v4 = FUN_002522e0(temp_v8,0x2f);
+      temp_v4 = libc_strrchr(temp_v8,0x2f);
       libc_strcpy(temp_v3 + 0x25c8,temp_v4 + 1);
       temp_v4 = keyedRecordFindByName(temp_v3 + 0x25c8);
       if (temp_v4 == 0xff) {

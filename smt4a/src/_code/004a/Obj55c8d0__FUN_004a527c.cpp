@@ -42,7 +42,7 @@ void Obj55c8d0::FUN_004a527c()
     work->mode = 9;
     uiSpriteAdvanceAnimation(motion, 1.0f);
     pointConvertToFloat(work->position, vec2GetXInt(motion), vec2GetYInt(motion));
-    if (FUN_0026c3a0() && uiSpriteGetCompletionState(motion) != 0 && FUN_002e19f8() && !utilityReturnSuccess(work->unk0096)) {
+    if (FUN_0026c3a0() && uiSpriteGetCompletionState(motion) != 0 && buttonHelpStateIsNot3() && !utilityReturnSuccess(work->unk0096)) {
         work->state = 7;
         work->substate = 0;
     }

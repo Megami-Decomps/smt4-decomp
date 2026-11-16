@@ -9,7 +9,7 @@ struct BattleEntry;
 
 extern "C" {
 BattleEntry *btlMainFindEntryByListedId(BtlMainState *, s32);
-void FUN_00247478(void *, BtlMainState *, BattleEntry *);
+void btlEntryBuildSummary(void *, BtlMainState *, BattleEntry *);
 u32 FUN_00246134(u32, u32, s32, u32);
 void selectionCopySupportedValue(u32, u32 *);
 s32 btlEntryHasSkillCategory(BattleEntry *, u32);
@@ -34,7 +34,7 @@ f32 FUN_003bd1d8(u32 listedId, u32 request)
     BtlMainState *mainState = btlGetMainState();
     BattleEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), listedId);
     QueryStorageIV query;
-    FUN_00247478(&query, btlGetMainState(), entry);
+    btlEntryBuildSummary(&query, btlGetMainState(), entry);
 
     if (static_cast<u32>(static_cast<s32>(query.category) - 3) <= 7u)
         return 1.0f;

@@ -21,7 +21,7 @@ extern int FUN_00153254(void);
 extern int trackIsInRange(void);
 /* Supplied declaration required: FUN_002a3178. */
 /* Supplied declaration required: FUN_002b4cd4. */
-extern unsigned int FUN_002baf30(void);
+extern unsigned int nw_snd_internal_driver_VoiceManager_GetInstance(void);
 /* Supplied declaration required: nw_snd_SoundSystem_SetMasterVolume. */
 /* Supplied declaration required: nw_snd_internal_driver_VoiceManager_UpdateAllVoicesSync. */
 
@@ -126,12 +126,12 @@ LAB_001510cc:
     if ((int)temp_v8 >= 2) {
       if (*(int *)(param_1 + 0x10) < *(int *)(param_1 + 0xc)) {
         *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) + 1;
-        temp_v5 = FUN_002baf30();
+        temp_v5 = nw_snd_internal_driver_VoiceManager_GetInstance();
         nw_snd_internal_driver_VoiceManager_UpdateAllVoicesSync(temp_v5,0x40);
       }
       if (*(int *)(param_1 + 0x20) < *(int *)(param_1 + 0x1c)) {
         *(int *)(param_1 + 0x20) = *(int *)(param_1 + 0x20) + 1;
-        temp_v5 = FUN_002baf30();
+        temp_v5 = nw_snd_internal_driver_VoiceManager_GetInstance();
         nw_snd_internal_driver_VoiceManager_UpdateAllVoicesSync(temp_v5,0x40);
       }
       if (*(int *)(param_1 + 0x20) < *(int *)(param_1 + 0x1c)) {

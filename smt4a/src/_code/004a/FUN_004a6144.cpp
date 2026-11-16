@@ -12,7 +12,7 @@ int layoutFindTableEntry(...);
 int dataTable00FindById(void);
 int devilDrawIconRelative(...);
 int drawTextAtRelativePosition(...);
-int FUN_004934ac(int, int, int, int, int);
+int uiDrawTableTextureAtRectCorner(int, int, int, int, int);
 int FUN_0049368c(...);
 void renderSetClippedScissor(int, int, int, int);
 int VectorSignedToFloat(...);
@@ -42,7 +42,7 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: devilDrawIconRelative. */
 /* Supplied declaration required: drawTextAtRelativePosition. */
-/* Supplied declaration required: FUN_004934ac. */
+/* Supplied declaration required: uiDrawTableTextureAtRectCorner. */
 /* Supplied declaration required: FUN_0049368c. */
 extern int curveEvaluateStandard(unsigned int, unsigned int);
 /* Supplied declaration required: renderSetClippedScissor. */
@@ -86,9 +86,9 @@ void FUN_004a6144(int param_1,int param_2,int param_3,unsigned int param_4)
   temp_v2 = (int)*(short *)(temp_v2 + 10);
   if (param_3 != 0) {
     efctSetSpeed();
-    FUN_004934ac(param_1 + 200,0x103a,temp_v10,temp_v2,temp_v9);
-    FUN_004934ac(param_1 + 200,0x103b,temp_v10,temp_v2,temp_v9);
-    FUN_004934ac(param_1 + 200,0x103c,temp_v10,temp_v2,temp_v9);
+    uiDrawTableTextureAtRectCorner(param_1 + 200,0x103a,temp_v10,temp_v2,temp_v9);
+    uiDrawTableTextureAtRectCorner(param_1 + 200,0x103b,temp_v10,temp_v2,temp_v9);
+    uiDrawTableTextureAtRectCorner(param_1 + 200,0x103c,temp_v10,temp_v2,temp_v9);
     efctSetSpeed();
     FUN_0049368c(param_1 + 200,0x103d,temp_v10,temp_v2,temp_v9,1);
     FUN_0049368c(param_1 + 200,0x103e,temp_v10,temp_v2,temp_v9,1);

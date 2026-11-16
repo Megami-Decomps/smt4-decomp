@@ -16,7 +16,7 @@ void uiDrawAnimatedMessage(AnimatedMessageWork *work)
     TextureTableEntryIV *info = asdTMTexTableEntryAt(0x13, 0x111b);
     char text[64];
     __aeabi_memcpy4(text, DAT_005326f8, 45);
-    s32 textWidth = static_cast<s32>(FUN_00168594(text, 2, 0.0f));
+    s32 textWidth = static_cast<s32>(fontMeasureTextWidth(text, 2, 0.0f));
     f32 center = static_cast<f32>((info->placement->width - textWidth) / 2);
     f32 x = static_cast<f32>(vec2GetXInt(&work->sprites[1]) + info->x) + center + position.x;
     textDrawString(2, g_uiTextFontSettings.font, text, x, static_cast<f32>(info->y) + position.y, 0.0f, 0.0f, 1.0f);

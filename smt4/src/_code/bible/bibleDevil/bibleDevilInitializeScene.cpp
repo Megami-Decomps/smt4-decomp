@@ -49,7 +49,7 @@ void partyIdsReset(u16 *);
 void devilListMarkOrInsertQualifiedEntry(u16 *, u16);
 s32 rangeLimitMin(FlaggedEntry *);
 void uiInitializeEightTimerSet(void *);
-void FUN_00233670(void *, u32, u32, s32);
+void messageIdListInit(void *, u32, u32, s32);
 void buttonHelpSetText(u32, u32);
 void uniteReleaseModel();
 void FUN_0022d1a8(BibleScreen *);
@@ -89,7 +89,7 @@ void bibleDevilInitializeScene(BibleScreen *screen)
     s32 visible = fields->selection.list.count;
     if (visible >= 10)
         visible = 10;
-    FUN_00233670(fields->scroll, 29, 1038, visible);
+    messageIdListInit(fields->scroll, 29, 1038, visible);
     fields->scrollEnabled = 1;
     buttonHelpSetText(0, 0x323232ff);
     screen->state = 0;

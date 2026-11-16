@@ -3,7 +3,7 @@
 #include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 extern "C" {
-extern BgmRequestChannel DAT_004c53c4[2];
+extern BgmRequestChannel g_bgmRequestChannels[2];
 extern BgmChannelSelection g_titleConfigModeFlag;
 void soundChannelRequest(u32, s32, s32);
 }
@@ -28,11 +28,11 @@ void FUN_00287328(u32 track)
 {
     if (jyoucyuGetTableEntry(1) == NULL) {
         if (jyoucyuGetTableEntry(1) == NULL &&
-            (((DAT_004c53c4[0].flags & 2) && (DAT_004c53c4[0].flags & 0x20)) ||
-             ((DAT_004c53c4[1].flags & 2) && (DAT_004c53c4[1].flags & 0x20)))) {
+            (((g_bgmRequestChannels[0].flags & 2) && (g_bgmRequestChannels[0].flags & 0x20)) ||
+             ((g_bgmRequestChannels[1].flags & 2) && (g_bgmRequestChannels[1].flags & 0x20)))) {
             if (jyoucyuGetTableEntry(1) == NULL) {
-                bgmResumeChannel(&DAT_004c53c4[0]);
-                bgmResumeChannel(&DAT_004c53c4[1]);
+                bgmResumeChannel(&g_bgmRequestChannels[0]);
+                bgmResumeChannel(&g_bgmRequestChannels[1]);
             }
         } else {
             if (jyoucyuGetTableEntry(1) == NULL) {

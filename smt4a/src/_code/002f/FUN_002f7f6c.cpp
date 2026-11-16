@@ -27,7 +27,7 @@ typedef struct {
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_00228b04. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_002a4894(int);
+extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: flaggedEntrySetValueA. */
 /* Supplied declaration required: FUN_003450d4. */
 
@@ -41,7 +41,7 @@ void FUN_002f7f6c(int param_1)
   char temp_v2 [4];
   
   temp_v2[0] = '\0';
-  temp_v0 = FUN_002a4894(param_1 + 0x2500);
+  temp_v0 = listCursorGetRowIfUnblocked(param_1 + 0x2500);
   temp_v1 = param_1 + 0x2500;
   FUN_00228b04(temp_v1,1);
   if (temp_v1 == 0) {

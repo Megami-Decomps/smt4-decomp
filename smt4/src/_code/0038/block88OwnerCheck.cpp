@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern int FUN_002348a8(void *block);
+extern int threadTryJoinAndClose(void *block);
 
 typedef struct Obj {
     /* 0x00 */ u8 unk00[0x88];
@@ -11,7 +11,7 @@ typedef struct Obj {
 
 u8 block88OwnerCheck(Obj *obj)
 {
-    return FUN_002348a8(obj->block) != 0;
+    return threadTryJoinAndClose(obj->block) != 0;
 }
 
 } /* extern "C" */

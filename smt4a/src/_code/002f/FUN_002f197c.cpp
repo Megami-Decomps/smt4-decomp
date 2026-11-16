@@ -96,7 +96,7 @@ extern unsigned int *uniteGetWork(void);
 /* Supplied declaration required: FUN_0026c4f0. */
 extern char recordGetModeForId(int);
 extern int resourceRunOperationIfUnblocked(unsigned int *);
-extern int FUN_002a4894(unsigned int *);
+extern int listCursorGetRowIfUnblocked(unsigned int *);
 /* Supplied declaration required: contentEntryFindById. */
 extern int fusionClassifyRecipeAvailability(unsigned int, unsigned short, unsigned char *);
 
@@ -150,7 +150,7 @@ void FUN_002f197c(fn_002f197c_arg0 *param_1,int param_2)
       temp_v1 = (unsigned int)*(unsigned short *)((int)puVar2 + temp_v7 * 2 + 0x8f7c);
       contentEntryFindById();
       temp_v2 = resourceRunOperationIfUnblocked(puVar8);
-      temp_v3 = FUN_002a4894(puVar8);
+      temp_v3 = listCursorGetRowIfUnblocked(puVar8);
       if (*(short *)((int)puVar2 + (temp_v2 + temp_v3) * 2 + 0x62a0) == *(short *)(temp_v1 + 0x1a)) {
         temp_v10 = *(unsigned short *)((int)puVar2 + temp_v7 * 2 + 0x8f7c);
         break;
@@ -253,7 +253,7 @@ void FUN_002f197c(fn_002f197c_arg0 *param_1,int param_2)
   temp_v15[0] = recordGetModeForId((int)*(short *)(puVar2 + 0x10e));
   temp_v7 = 1;
   do {
-    temp_v2 = FUN_002a4894(puVar2 + 0x19f3);
+    temp_v2 = listCursorGetRowIfUnblocked(puVar2 + 0x19f3);
     temp_v0 = recordGetModeForId((int)*(short *)((int)puVar2 + (temp_v7 + temp_v2 * 4) * 2 + 0x45c));
     temp_v15[temp_v7] = temp_v0;
     temp_v7 = temp_v7 + 1;

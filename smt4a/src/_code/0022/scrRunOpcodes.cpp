@@ -3,13 +3,13 @@
 extern "C" {
 
 typedef int (*OpcodeHandler)(ScriptVmProcess *process);
-extern OpcodeHandler DAT_00588e60[];  /* opcode handler table */
+extern OpcodeHandler g_scriptOpcodeHandlers[];  /* opcode handler table */
 
 /* Runs opcode handlers until one yields (1) or finishes the script (0 -> 2). */
 u32 scrRunOpcodes(ScriptVmProcess *process)
 {
     while (1) {
-        int result = DAT_00588e60[process->code[process->pc].decoded.opcode](process);
+        int result = g_scriptOpcodeHandlers[process->code[process->pc].decoded.opcode](process);
 
         if (result == 0) {
             process->commandFrame = 0;

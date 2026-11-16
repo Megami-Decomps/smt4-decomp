@@ -24,7 +24,7 @@ s32 FUN_0035dbb0(void);
 s32 flaggedValueHolderGetTotal(void *holder);
 s32 partyFindFirstUnusedEntry(void);
 void dispatchIfFound(s32 index, u32 id, bool flag);
-void FUN_003343f0(s32 value);
+void gameGlobalsSetMenuOpenFlag(s32 value);
 
 u32 shopListItemGetId(const MenuEntry *entry);
 
@@ -45,7 +45,7 @@ void Obj55c89c::itemMenuDispatchSelectedEntry()
                 useAlternate = true;
             dispatchIfFound(index, id, useAlternate);
         }
-        FUN_003343f0(0);
+        gameGlobalsSetMenuOpenFlag(0);
         task->state = 2;
         task->stateTimer = 0;
     }

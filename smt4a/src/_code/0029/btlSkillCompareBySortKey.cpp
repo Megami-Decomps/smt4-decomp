@@ -19,7 +19,7 @@ typedef struct BtlActionState {
 } BtlActionState;
 
 s32 FUN_003df574(u16 id);
-s32 FUN_004bcbb4(void *order, u16 id);
+s32 skillGetAdjustedCost(void *order, u16 id);
 BtlUnit *btlUnitGet(u32 id);
 
 extern BtlActionState g_btlAction;
@@ -46,8 +46,8 @@ s32 btlSkillCompareBySortKey(const u16 *a, const u16 *b)
     s16 keyA;
     s16 keyB;
     if (order != NULL) {
-        keyA = FUN_004bcbb4(order, *a);
-        keyB = FUN_004bcbb4(order, *b);
+        keyA = skillGetAdjustedCost(order, *a);
+        keyB = skillGetAdjustedCost(order, *b);
     } else {
         keyA = FUN_003df574(*a);
         keyB = FUN_003df574(*b);

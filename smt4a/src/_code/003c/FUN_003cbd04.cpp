@@ -14,7 +14,7 @@ int FUN_00180310(...);
 int FUN_00185e84(...);
 int arrayContainsU16(...);
 int statDrawClampedDelta(...);
-int FUN_004bd6b0(...);
+int partyRecordSetEquippedItemClampRank(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_7: 5 slot(s), 20 byte(s) */
@@ -39,8 +39,8 @@ extern int resourceRunOperationIfUnblocked(void);
 /* Supplied declaration required: arrayContainsU16. */
 extern int uiSearchPrimary(int);
 /* Supplied declaration required: statDrawClampedDelta. */
-extern unsigned int FUN_004bcbb4(unsigned int, unsigned short);
-/* Supplied declaration required: FUN_004bd6b0. */
+extern unsigned int skillGetAdjustedCost(unsigned int, unsigned short);
+/* Supplied declaration required: partyRecordSetEquippedItemClampRank. */
 
 
 void FUN_003cbd04(int param_1,int param_2,unsigned int param_3,int param_4,int param_5,int param_6,
@@ -135,13 +135,13 @@ void FUN_003cbd04(int param_1,int param_2,unsigned int param_3,int param_4,int p
     FUN_00185e84((int)*(short *)(param_1 + 0x8b70),
                  (int)*(short *)(temp_v0 + 8) + (int)*(short *)(temp_v2 + 8) + param_5,
                  (int)*(short *)(temp_v0 + 10) + (int)*(short *)(temp_v2 + 10) + param_6,0x74,0,0);
-    FUN_004bd6b0(temp_v8,*(unsigned short *)(param_1 + 0x8b70),param_2);
+    partyRecordSetEquippedItemClampRank(temp_v8,*(unsigned short *)(param_1 + 0x8b70),param_2);
     statDrawClampedDelta(temp_v8,(int)*(short *)(param_1 + 0x8b70),
                  (int)*(short *)(temp_v0 + 8) + (int)*(short *)(temp_v2 + 8) + param_5,
                  (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v0 + 10) + param_6,0x74,0);
     if (param_4 != 0) {
       temp_v0 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x17c));
-      temp_v6 = FUN_004bcbb4(temp_v8,*(unsigned short *)(param_1 + 0x8b70));
+      temp_v6 = skillGetAdjustedCost(temp_v8,*(unsigned short *)(param_1 + 0x8b70));
       FUN_00180310(1,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v0 + 8) + param_5,
                    (int)*(short *)(temp_v0 + 10) + (int)*(short *)(temp_v2 + 10) + param_6,1,4,0x79,
                    &LAB_003cc19c,temp_v6);

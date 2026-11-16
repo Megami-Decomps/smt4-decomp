@@ -16,13 +16,13 @@ typedef struct SaveLoadThread {
 
 extern SaveLoadThread g_saveLoadThread;
 
-s32 FUN_0035d83c(void);
+s32 jobHandleIsReady(void);
 
-/* Returns 1 when the save/load job exists, is active, and is in state 2 (and FUN_0035d83c reports 0). */
+/* Returns 1 when the save/load job exists, is active, and is in state 2 (and jobHandleIsReady reports 0). */
 u32 saveLoadJobIsReady(void)
 {
     if (g_saveLoadThread.job != NULL) {
-        if (FUN_0035d83c() == 0 && g_saveLoadThread.job->active != 0 && g_saveLoadThread.job->state == 2) {
+        if (jobHandleIsReady() == 0 && g_saveLoadThread.job->active != 0 && g_saveLoadThread.job->state == 2) {
             return 1;
         }
         return 0;

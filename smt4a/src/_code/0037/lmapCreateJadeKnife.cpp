@@ -6,7 +6,7 @@ struct Scene { u8 unk000[0x190]; void *object; };
 extern Scene *g_lmapScene;
 void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 void *modelListInit(void *memory);
-void FUN_001cd3ec(void *object, const char *name);
+void modelLoadFileAsyncByName(void *object, const char *name);
 
 void lmapCreateJadeKnife(void)
 {
@@ -15,7 +15,7 @@ void lmapCreateJadeKnife(void)
         object = modelListInit(object);
     }
     g_lmapScene->object = object;
-    FUN_001cd3ec(object, "map/all/jade_knife_e.bam");
+    modelLoadFileAsyncByName(object, "map/all/jade_knife_e.bam");
 }
 
 } /* extern "C" */

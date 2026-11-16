@@ -5,7 +5,7 @@ extern "C" {
 
 void resourceListDestroy(void *handle);
 void asdMemFree(void *ptr);
-void FUN_0014edd0(AsdModelAttrModel *model, u8 *data, s32 key);
+void asdModelBuildAttributeRecordsForKey(AsdModelAttrModel *model, u8 *data, s32 key);
 
 /* Releases the model's attribute records, then rebuilds them for `key`. */
 void asdModelRebuildAttributeRecords(AsdModelAttrModel *model, s32 key)
@@ -23,7 +23,7 @@ void asdModelRebuildAttributeRecords(AsdModelAttrModel *model, s32 key)
         model->records.items = NULL;
     }
     model->records.count = 0;
-    FUN_0014edd0(model, model->file->data, key);
+    asdModelBuildAttributeRecordsForKey(model, model->file->data, key);
 }
 
 } /* extern "C" */

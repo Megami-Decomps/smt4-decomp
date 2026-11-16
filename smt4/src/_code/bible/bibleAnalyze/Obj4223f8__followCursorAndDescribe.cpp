@@ -40,7 +40,7 @@ typedef char BibleAnalyzeNameOffset[offsetof(BibleAnalyzeWorkView, nameId) == 0x
 extern "C" {
 u16 shopListItemGetId(const BibleAnalyzeEntryView *entry);
 s8 uiSpriteGetCompletionState(const BibleAnalyzeCursorView *record);
-void FUN_002b8ee0(BibleAnalyzeCursorView *, s32);
+void uiSlidingSpriteAdvance(BibleAnalyzeCursorView *, s32);
 s32 vec2GetYInt(BibleAnalyzeCursorView *);
 s32 vec2GetXInt(BibleAnalyzeCursorView *);
 void pointConvertToFloat(void *, s32, s32);
@@ -62,7 +62,7 @@ void Obj4223f8::followCursorAndDescribe()
     char text[64];
     u8 nameBuffer[8];
     BibleAnalyzeCursorView *cursor = &work->cursor;
-    FUN_002b8ee0(cursor, 0);
+    uiSlidingSpriteAdvance(cursor, 0);
     s32 y = vec2GetYInt(cursor);
     s32 x = vec2GetXInt(cursor);
     pointConvertToFloat(work->position, x, y);

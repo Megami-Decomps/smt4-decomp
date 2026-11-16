@@ -31,7 +31,7 @@ void FUN_003537c8(s32 unitId)
     MapGimicObj *storage = (MapGimicObj *)asdMemoryAllocTraced(
         32, "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapGimic.cpp", 0x9C6);
     slot->obj = storage != NULL ? modelListInit(storage) : NULL;
-    FUN_001cd3ec(slot->obj, path);
+    modelLoadFileAsyncByName(slot->obj, path);
     if (unitId == 0x6A || unitId == 0xD2 || unitId == 0xD3 || unitId == 0xD4) {
         FUN_0040a908(slot->obj, 0x10000);
         FUN_0040a918(slot->obj, 0x20000);

@@ -8,7 +8,7 @@ extern RenderCtx *g_titleScene;
 s32 renderCtxPackPassFlags(u32, u32);
 u32 asdGxPresetsGetByKind(u32);
 u32 asdGxPresetsGetHeightByKind(u32);
-void FUN_002c0944(u32 topLeft, u32 topRight, u32 bottomLeft, u32 bottomRight,
+void gxSubmitDrawZeroExtraParams(u32 topLeft, u32 topRight, u32 bottomLeft, u32 bottomRight,
                   f32 x, f32 y, f32 width, f32 height, f32 depth);
 
 /* Draw the selected screen-fade color with its current interpolated opacity. */
@@ -27,7 +27,7 @@ void FUN_00107784(s32 index)
     renderCtxSelectTexture(g_titleScene, 0);
     f32 height = static_cast<f32>(asdGxPresetsGetByKind(g_titleScene->unk0528));
     f32 width = static_cast<f32>(asdGxPresetsGetHeightByKind(g_titleScene->unk0528));
-    FUN_002c0944(color, color, color, color, 0.0f, 0.0f, width, height, 0.0f);
+    gxSubmitDrawZeroExtraParams(color, color, color, color, 0.0f, 0.0f, width, height, 0.0f);
     renderStackPop(&g_titleScene->stackA);
 }
 }

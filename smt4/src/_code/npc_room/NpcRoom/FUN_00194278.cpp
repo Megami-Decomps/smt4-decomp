@@ -32,12 +32,12 @@ int scrScriptProcessCreate(...);
 int soundChannelStopAll(int);
 int slotSetRequest(...);
 int soundChannelRequestIfEnabled(int, int, int);
-int FUN_002a03d8(...);
+int titleSetSlotValueState2(...);
 int fileSlotFree(int);
 int scrScriptProcessDestroy(...);
 int asdTMTexTableReleaseNode(int, int);
 int jobSetIntensity(unsigned int, int);
-int FUN_002b827c(...);
+int buttonHelpSetContext(...);
 int buttonHelpSetPreset(...);
 int textFormatBuffer(...);
 int asdMemFree(...);
@@ -85,12 +85,12 @@ extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
-/* Supplied declaration required: FUN_002a03d8. */
+/* Supplied declaration required: titleSetSlotValueState2. */
 /* Supplied declaration required: fileSlotFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: jobSetIntensity. */
-/* Supplied declaration required: FUN_002b827c. */
+/* Supplied declaration required: buttonHelpSetContext. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: textFormatBuffer. */
 extern int gameFlagIsSet(void);
@@ -135,8 +135,8 @@ unsigned int FUN_00194278(void)
     psVar7 = (short *)(g_npcRoom + 0x40);
     temp_v5 = asdTMTexTableNodeIsLoaded(2,*(unsigned short *)((int)g_npcRoom + 0x102));
     if (temp_v5 != 0) {
-      FUN_002a03d8(0,1);
-      FUN_002a03d8(1);
+      titleSetSlotValueState2(0,1);
+      titleSetSlotValueState2(1);
       temp_v5 = 0;
       do {
         if (((*(short *)(puVar3[9] + temp_v5 * 0x18 + 0x24) != 0) &&
@@ -304,7 +304,7 @@ LAB_001945e8:
     puVar2 = g_npcRoom;
     g_npcRoom[0x3b] = 0;
     puVar2[0x3c] = 4;
-    FUN_002b827c(0xa2);
+    buttonHelpSetContext(0xa2);
     buttonHelpSetPreset(0xa2);
     break;
   case 4:
@@ -366,7 +366,7 @@ LAB_001945e8:
       if (!temp_v8 || temp_v5 != 1) {
         g_npcRoom[0x3b] = 0;
         puVar2[0x3c] = 1;
-        FUN_002b827c(0xa0);
+        buttonHelpSetContext(0xa0);
         FUN_00290d5c(0xa0);
         break;
       }
@@ -403,8 +403,8 @@ LAB_001945e8:
       }
     }
     else {
-      FUN_002a03d8(0,1);
-      FUN_002a03d8(1);
+      titleSetSlotValueState2(0,1);
+      titleSetSlotValueState2(1);
     }
     npcRoomDestroy();
     return 0xffffffff;

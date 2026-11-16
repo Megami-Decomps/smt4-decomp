@@ -28,7 +28,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_0014c3b8. */
-extern int FUN_002bad74(fn_002b4f64_arg0 *, unsigned int);
+extern int soundRequestQueueFlush(fn_002b4f64_arg0 *, unsigned int);
 /* Supplied declaration required: nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_Dequeue. */
 extern int nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_TryDequeue(void **, int **);
 
@@ -77,7 +77,7 @@ joined_r0x002b4fec:
     if (pfVar6 == (fn_002b4f64_arg0 *)0x0) {
       do {
         do {
-          temp_v0 = FUN_002bad74(param_1,1);
+          temp_v0 = soundRequestQueueFlush(param_1,1);
           do {
             ppvVar3 = &param_1->field_0xb4;
             nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_Dequeue();

@@ -5,7 +5,7 @@
 
 extern "C" {
 extern MapObjectState *g_mapObj;
-void FUN_002ad314(f32 *sine, f32 *cosine, f32 angle);
+void mathSinCos(f32 *sine, f32 *cosine, f32 angle);
 s32 FUN_00263cb8(u32 resource, u32 kind, u32 owner, u32 appearanceResource,
     u32 first, u32 second, u8 red, u8 green, u8 blue, u8 secondaryRed, u8 secondaryGreen,
     u8 secondaryBlue, u8 channel, u8 mode, u8 flags, MapEffectFloatWord scaleX,
@@ -23,7 +23,7 @@ void FUN_00277bdc(void)
             /* Keep the shared scalar aliases while treating their contiguous storage as a position. */
             Vec3f position = *reinterpret_cast<const Vec3f *>(&slot->unk10);
             f32 sine, cosine;
-            FUN_002ad314(&sine, &cosine, slot->unk1c * (256.0f / 360.0f));
+            mathSinCos(&sine, &cosine, slot->unk1c * (256.0f / 360.0f));
             position.x += sine * 60.0f;
             position.z += cosine * 60.0f;
             MapEffectFloatWord scale = { 0 };

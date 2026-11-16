@@ -3,7 +3,7 @@
 extern "C" {
 
 int nw_snd_internal_driver_VoiceManager_FreeVoice(u32 manager, void *voice);
-extern u32 FUN_002baf30(void);
+extern u32 nw_snd_internal_driver_VoiceManager_GetInstance(void);
 
 typedef struct Voice {
     /* 0x00 */ u32 unk00;
@@ -24,7 +24,7 @@ void nw_snd_internal_driver_Voice_SdkVoiceDropCallbackFunc(u32 sdkVoice, Voice *
     voice->unk17 = 0;
     voice->unk15 = 0;
     voice->unk08 = 0;
-    nw_snd_internal_driver_VoiceManager_FreeVoice(FUN_002baf30(), voice);
+    nw_snd_internal_driver_VoiceManager_FreeVoice(nw_snd_internal_driver_VoiceManager_GetInstance(), voice);
     voice->unk14 = 0;
     if (voice->callback != NULL) {
         voice->callback(voice, 3, voice->callbackData);

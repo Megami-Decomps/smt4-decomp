@@ -74,7 +74,7 @@ extern unsigned int DAT_004efd34; /* 0x4efd34 */
 /* Supplied declaration required: FUN_00121824. */
 /* Supplied declaration required: FUN_0012201c. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
-extern int FUN_002bf684(unsigned char *);
+extern int nw_snd_SoundArchive_IsAvailable(unsigned char *);
 /* Supplied declaration required: libc_strcpy. */
 extern int __cxa_guard_acquire(unsigned int *);
 extern int rt_memcmp(unsigned char *, unsigned char *, unsigned int);
@@ -108,7 +108,7 @@ unsigned int FUN_001096ec(unsigned int param_1,int param_2,unsigned char *param_
   if (temp_v0 != 0) {
     DAT_004e3184 = 1;
   }
-  temp_v0 = FUN_002bf684(&g_asdSound);
+  temp_v0 = nw_snd_SoundArchive_IsAvailable(&g_asdSound);
   if (temp_v0 != 0) {
     FUN_001177e0();
   }

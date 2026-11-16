@@ -61,7 +61,7 @@ extern int FUN_004083a8(int);
 /* Supplied declaration required: uiDrawAnimatedMessage. */
 /* Supplied declaration required: FUN_0048b260. */
 /* Supplied declaration required: FUN_0048b514. */
-extern int FUN_0048e40c(int);
+extern int naviMainConditionsHold(int);
 extern unsigned int lmapSceneGetObj(void);
 extern int naviMainSelectPair(int);
 /* Supplied declaration required: naviMainGetRequestedMap. */
@@ -303,7 +303,7 @@ LAB_004925c8:
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 9);
   }
-  temp_v3 = FUN_0048e40c(temp_v33);
+  temp_v3 = naviMainConditionsHold(temp_v33);
   if (((temp_v3 != 0) && (*(int *)(temp_v33 + 4) != 0)) &&
      (words2Copy(temp_v33 + 0x4d0,temp_v20), (unsigned int)temp_v20[0] < 0xc39f8001)) {
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);

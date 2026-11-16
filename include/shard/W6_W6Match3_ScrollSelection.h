@@ -30,7 +30,7 @@ extern "C" {
 #endif
 
 void scrollListSetSelectionTracked(ScrollSelection* list, s32 index);
-void FUN_0029eb5c(ScrollSelection* list, s32 index);
+void scrollListSetSelectionMarkChanged(ScrollSelection* list, s32 index);
 
 #ifdef __cplusplus
 }

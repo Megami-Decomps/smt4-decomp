@@ -58,7 +58,7 @@ const char *dataLookupDisplayName(u32 *key, u32 id);
 s32 textFormatBuffer(char *output, const char *format, ...);
 void buttonHelpSetText(const char *text, u32 color);
 void FUN_0032d0c8(s32 first, s32 second, u16 id, s32 fourth);
-void FUN_003343f0(u8 value);
+void gameGlobalsSetMenuOpenFlag(u8 value);
 void messageIdListSetRange(void *controls, s32 kind, u32 flags, s32 count);
 
 }
@@ -95,7 +95,7 @@ void Obj55c8d0::FUN_004a4658()
         u16 id = shopListItemGetId(&entries[index]);
         FUN_0032d0c8(0, 1, id, 0);
     }
-    FUN_003343f0(0);
+    gameGlobalsSetMenuOpenFlag(0);
     screen->state = 2;
     screen->unk18 = 0;
     pointConvertToFloat(screen->cursor.position, 0, 0);

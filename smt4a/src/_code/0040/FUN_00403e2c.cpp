@@ -47,7 +47,7 @@ void FUN_00404974(ListMenu *menu);
 s32 ifTouchGetSelectionMode(void);
 u32 asdTMTexTableEntryAt(u32 a, u32 b);
 s32 resourceRunOperationIfUnblocked(void *list);
-s32 FUN_002a4894(void *list);
+s32 listCursorGetRowIfUnblocked(void *list);
 
 /* Updates the list menu: scrolls its panels, reads the page and cursor, and handles the touch list
  * and the back/confirm/sort buttons. */
@@ -57,7 +57,7 @@ void FUN_00403e2c(ListMenu *menu)
     uiSpriteAdvanceAnimation(menu->scrollB, 1.0f);
     FUN_00228b04(menu->list, 1);
     menu->cursor = resourceRunOperationIfUnblocked(menu->list);
-    menu->pageCount = FUN_002a4894(menu->list);
+    menu->pageCount = listCursorGetRowIfUnblocked(menu->list);
     menu->selectedId = menu->ids[menu->pageCount + menu->cursor];
     ((ListMenuTail *)((u8 *)menu + 0x664))->selectedCopy = contentFindRecordById();
     u8 touched = 0;

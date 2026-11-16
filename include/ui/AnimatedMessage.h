@@ -34,7 +34,7 @@ void gxResetColorQuadToWhite();
 s32 vec2GetXInt(UiAnimatedSprite *sprite);
 void texDrawCompositeSprite(s32 layer, s32 group, s32 frame, s32 x, s32 y, s32 flags);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
-f32 FUN_00168594(const char *text, s32 font, f32 spacing);
+f32 fontMeasureTextWidth(const char *text, s32 font, f32 spacing);
 s32 uiSpriteAdvanceAnimation(UiAnimatedSprite *sprite, f32 delta);
 }
 

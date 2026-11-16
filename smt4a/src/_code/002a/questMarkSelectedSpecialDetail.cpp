@@ -4,7 +4,7 @@ extern "C" {
 u32 questHasSpecialDetailPage(u32 id);
 void partyEntrySetBitsBit4(u32 id);
 s32 resourceRunOperationIfUnblocked(void *cursor);
-s32 FUN_002a4894(void *cursor);
+s32 listCursorGetRowIfUnblocked(void *cursor);
 s32 FUN_002f7730(u32 selection, u32 id);
 
 // Mark the selected special quest when its detail-page state permits it.
@@ -21,7 +21,7 @@ void questMarkSelectedSpecialDetail(void)
         list = quest->list;
     }
     s32 scroll = resourceRunOperationIfUnblocked(cursor);
-    s32 selection = FUN_002a4894(cursor);
+    s32 selection = listCursorGetRowIfUnblocked(cursor);
     u32 id = list[selection + scroll];
     if (questHasSpecialDetailPage(id) &&
         FUN_002f7730(quest->listState.selection, id) == 3)

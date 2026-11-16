@@ -10,7 +10,7 @@ int nn_math_ARMv6_VEC3TransformAsm_2AD44C(...);
 int libm_cosf(void);
 int libm_sinf(void);
 
-extern unsigned int DAT_00536d14; /* 0x536d14 */
+extern unsigned int g_sinCosTable; /* 0x536d14 */
 extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
@@ -104,13 +104,13 @@ void FUN_00397aa4(void)
     temp_v17 = (float)VectorUnsignedToFloat(temp_v13 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
     temp_v13 = temp_v14 & 0xff;
     temp_v15 = (float)VectorUnsignedToFloat(temp_v14 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
-    temp_v18 = (float)(&DAT_00536d14)[temp_v8 * 4] +
+    temp_v18 = (float)(&g_sinCosTable)[temp_v8 * 4] +
              (184.8889f - temp_v16) * (float)(&DAT_00536d1c)[temp_v8 * 4];
     temp_v19 = (float)(&DAT_00536d18)[temp_v8 * 4] +
              (184.8889f - temp_v16) * (float)(&DAT_00536d20)[temp_v8 * 4];
-    temp_v41 = (float)(&DAT_00536d14)[temp_v12 * 4] +
+    temp_v41 = (float)(&g_sinCosTable)[temp_v12 * 4] +
                (temp_v11 - temp_v17) * (float)(&DAT_00536d1c)[temp_v12 * 4];
-    temp_v16 = (float)(&DAT_00536d14)[temp_v13 * 4] +
+    temp_v16 = (float)(&g_sinCosTable)[temp_v13 * 4] +
              (temp_v20 - temp_v15) * (float)(&DAT_00536d1c)[temp_v13 * 4];
     temp_v20 = (float)(&DAT_00536d18)[temp_v13 * 4] +
              (temp_v20 - temp_v15) * (float)(&DAT_00536d20)[temp_v13 * 4];
@@ -148,18 +148,18 @@ void FUN_00397aa4(void)
     temp_v17 = (float)VectorUnsignedToFloat(temp_v13 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
     temp_v13 = temp_v14 & 0xff;
     temp_v16 = (float)VectorUnsignedToFloat(temp_v14 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
-    temp_v19 = (float)(&DAT_00536d14)[temp_v8 * 4] +
+    temp_v19 = (float)(&g_sinCosTable)[temp_v8 * 4] +
              (temp_v11 - temp_v18) * (float)(&DAT_00536d1c)[temp_v8 * 4];
     temp_v11 = (float)(&DAT_00536d18)[temp_v8 * 4] +
              (temp_v11 - temp_v18) * (float)(&DAT_00536d20)[temp_v8 * 4];
     if (g_localCameraPosition * 0.7111111f < temp_v25) {
       temp_v19 = -temp_v19;
     }
-    temp_v41 = (float)(&DAT_00536d14)[temp_v12 * 4] +
+    temp_v41 = (float)(&g_sinCosTable)[temp_v12 * 4] +
                (temp_v20 - temp_v17) * (float)(&DAT_00536d1c)[temp_v12 * 4];
     fStack_78 = (float)(&DAT_00536d18)[temp_v12 * 4] +
                 (temp_v20 - temp_v17) * (float)(&DAT_00536d20)[temp_v12 * 4];
-    temp_v20 = (float)(&DAT_00536d14)[temp_v13 * 4] +
+    temp_v20 = (float)(&g_sinCosTable)[temp_v13 * 4] +
              (temp_v15 - temp_v16) * (float)(&DAT_00536d1c)[temp_v13 * 4];
     temp_v15 = (float)(&DAT_00536d18)[temp_v13 * 4] +
              (temp_v15 - temp_v16) * (float)(&DAT_00536d20)[temp_v13 * 4];

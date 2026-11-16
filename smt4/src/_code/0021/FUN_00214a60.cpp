@@ -11,7 +11,7 @@ int FUN_0025090c(...);
 float FUN_0028f4b4(const char *, unsigned int, float);
 int FUN_002907c4(...);
 int buttonHelpSetText(int, int);
-int FUN_002ae038(...);
+int gxSetUniformQuadColors(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int drawSetColorFromRGBA8(...);
 int textDrawString(...);
@@ -74,7 +74,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_0028f4b4. */
 /* Supplied declaration required: FUN_002907c4. */
 /* Supplied declaration required: buttonHelpSetText. */
-/* Supplied declaration required: FUN_002ae038. */
+/* Supplied declaration required: gxSetUniformQuadColors. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -427,7 +427,7 @@ unsigned int FUN_00214a60(void)
       temp_v25 = (unsigned int)((unsigned long long)temp_v22 >> 0x20);
       temp_v23 = (int)afStack_11c[1];
       temp_v24 = afStack_11c[1];
-      FUN_002ae038(afStack_11c + 1);
+      gxSetUniformQuadColors(afStack_11c + 1);
       screenDrawShadedRect(0,0,0x140,0xf0,0xd3);
       temp_v4 = g_titleScene;
       piVar14 = (int *)(g_titleScene + 0x124c);

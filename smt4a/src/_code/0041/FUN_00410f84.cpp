@@ -75,7 +75,7 @@ u32 saveSlotFindSelected(void);
 s32 FUN_003ecfb4(BtlMainView *mainState, void *unit, u32 record, s32 flag);
 s32 FUN_004fe7e4(s32 a, s32 b, s32 c);
 s32 FUN_003f14a0(BtlMainView *mainState);
-u32 FUN_003e503c(u32 index);
+u32 partyGetSlotPreferredFirst(u32 index);
 s32 FUN_004fef44(s32 a, s32 b, s32 c);
 s32 FUN_00412488(StageState *state);
 s32 FUN_00411cec(StageState *state);
@@ -150,7 +150,7 @@ void FUN_00410f84(StageState *state)
         s16 sumA = 0;
         s16 sumB = 0;
         for (s32 i = 1; i < 12; i++) {
-            u8 *slot = (u8 *)FUN_003e503c((u16)i);
+            u8 *slot = (u8 *)partyGetSlotPreferredFirst((u16)i);
             if (partySlotIsOccupied((const void *)((u32)slot)) != 0) {
                 sumA = (s16)(*(u16 *)(slot + 0x12) + sumA);
                 sumB = (s16)(*(u16 *)(slot + 0x14) + sumB);

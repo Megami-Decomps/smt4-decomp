@@ -11,7 +11,7 @@ int FUN_0038a7dc(int, int, unsigned int, int);
 int FUN_003e3188(unsigned int *, int);
 int FUN_003eba0c(int, int);
 int FUN_003edaf0(int, int);
-int FUN_003eebf4(int, int);
+int btlFindSelectionIndexByOrdinal(int, int);
 int FUN_0050dda4(void);
 int __aeabi_memcpy4(...);
 
@@ -49,7 +49,7 @@ extern unsigned int DAT_0057aa1c; /* 0x57aa1c */
 /* Supplied declaration required: FUN_003e3188. */
 /* Supplied declaration required: FUN_003eba0c. */
 /* Supplied declaration required: FUN_003edaf0. */
-/* Supplied declaration required: FUN_003eebf4. */
+/* Supplied declaration required: btlFindSelectionIndexByOrdinal. */
 extern int idSetFindSubjectIndex(int, int);
 /* Supplied declaration required: FUN_0050dda4. */
 /* Supplied declaration required: __aeabi_memcpy4. */
@@ -106,7 +106,7 @@ void FUN_003e0510(unsigned int *param_1,int param_2)
   temp_v33 = param_2;
   FUN_0038a7dc(temp_v3,0x32,*(unsigned int *)(param_2 + 0x1ec4),param_2 + 0x10b0);
   temp_v9 = temp_v33;
-  FUN_003eebf4(temp_v33,1);
+  btlFindSelectionIndexByOrdinal(temp_v33,1);
   piVar12 = (int *)(temp_v33 + 0x1ffc);
   temp_v4 = (unsigned int)*(unsigned short *)(*piVar12 + temp_v9 * 0x408 + 0x166);
   temp_v18[3] = temp_v9;

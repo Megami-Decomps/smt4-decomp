@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00257568(void *a, void *b);
+int itemSortCompareRankThenKey(void *a, void *b);
 extern int appGetRemainingCapacity(u32 id);
 extern int FUN_0029a9d4(u32 id, int flag);
 
@@ -11,7 +11,7 @@ typedef struct Entry {
     /* 0x4 */ s32 key;
 } Entry;
 
-/* Compares two entries by the value appGetRemainingCapacity/FUN_0029a9d4 gives their id; falls back to FUN_00257568 on a tie. */
+/* Compares two entries by the value appGetRemainingCapacity/FUN_0029a9d4 gives their id; falls back to itemSortCompareRankThenKey on a tie. */
 int FUN_001f5f20(Entry *a, Entry *b)
 {
     int valueA;
@@ -29,7 +29,7 @@ int FUN_001f5f20(Entry *a, Entry *b)
     }
     valueB = valueB - valueA;
     if (valueB == 0) {
-        return FUN_00257568(a, b);
+        return itemSortCompareRankThenKey(a, b);
     }
     return valueB;
 }

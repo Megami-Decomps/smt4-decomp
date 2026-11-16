@@ -38,7 +38,7 @@ extern BtlUiGlobalsA g_btlUi;
 extern u32 g_btlScriptUnit;        /* 0x57113c */
 
 s32 resourceRunOperationIfUnblocked(u8 *list);
-s32 FUN_002a4894(u8 *list);
+s32 listCursorGetRowIfUnblocked(u8 *list);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 s32 playerPrimaryGetKindValue(void);
 s32 playerSecondaryGetKindValue(void);
@@ -78,7 +78,7 @@ void FUN_004aa3d4(u32 unused, s32 kind, s32 value, s32 partyMember, u32 recordId
     switch (ui->helpKind) {
     case 1:
         if (partyMember != 0) {
-            s32 count = resourceRunOperationIfUnblocked(ui->skillList) + FUN_002a4894(ui->skillList);
+            s32 count = resourceRunOperationIfUnblocked(ui->skillList) + listCursorGetRowIfUnblocked(ui->skillList);
             if (count == 0) {
                 textFormatBuffer(text, "\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b");
                 kindValue = playerPrimaryGetKindValue();

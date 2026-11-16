@@ -11,7 +11,7 @@ const UniteDescriptionEntry *dataTableGetEntries(const void *table);
 u32 dataTableGetCount(const void *table);
 void buttonHelpSetText(const char *text, u32 color);
 s32 resourceRunOperationIfUnblocked(const void *cursor);
-s32 FUN_0029efa8(const void *cursor);
+s32 listCursorGetRowIfUnblocked(const void *cursor);
 void FUN_0029dc74(u32 id, void *member);
 void unitInitializeFromSavedRecord(u32 id, void *member);
 const void *partyMemberFindById(u32 id);
@@ -41,7 +41,7 @@ void uniteMenuChangeState(u32 state, s32 preservePrevious)
     case 0x0D: {
         buttonHelpSetPreset(0x54);
         s32 selected = resourceRunOperationIfUnblocked(work->firstListIV.cursor);
-        selected += FUN_0029efa8(work->firstListIV.cursor);
+        selected += listCursorGetRowIfUnblocked(work->firstListIV.cursor);
         u32 index = work->firstListIV.indices[selected];
         const UnitePairEntryIV *pair = &work->pairListIV.pairs[index];
         if (work->firstListIV.kind == 0) {
@@ -70,7 +70,7 @@ void uniteMenuChangeState(u32 state, s32 preservePrevious)
         if (work->state != 0x10 && work->state != 0x11 && work->state != 0x12) {
             buttonHelpSetPreset(0x55);
             s32 selected = resourceRunOperationIfUnblocked(work->secondListIV.cursor);
-            selected += FUN_0029efa8(work->secondListIV.cursor);
+            selected += listCursorGetRowIfUnblocked(work->secondListIV.cursor);
             buttonHelpShowSkillDetails(work->secondListIV.indices[selected]);
             menuSetModeAndResetTransitions(0x0E);
         }

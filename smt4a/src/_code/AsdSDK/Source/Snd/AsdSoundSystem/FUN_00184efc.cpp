@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00167618(...);
+int gfxDrawQuadFourColors(...);
 int efctSetSpeed(void);
 int renderCtxSelectTexture(...);
 int quadSetOrderedVectors(...);
@@ -72,7 +72,7 @@ extern unsigned int DAT_0063098c; /* 0x63098c */
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00167618. */
+/* Supplied declaration required: gfxDrawQuadFourColors. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: quadSetOrderedVectors. */
@@ -421,7 +421,7 @@ LAB_00185068:
           VectorSignedToFloat(param_3[1],(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorUnsignedToFloat(param_3[5],(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorUnsignedToFloat(param_3[6],(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_00167618(&DAT_00630724,&DAT_00630734,&DAT_00630744,&DAT_00630754);
+          gfxDrawQuadFourColors(&DAT_00630724,&DAT_00630734,&DAT_00630744,&DAT_00630754);
         }
         if (temp_v2) {
           camSetMatrixA(g_renderCtx,temp_v33);

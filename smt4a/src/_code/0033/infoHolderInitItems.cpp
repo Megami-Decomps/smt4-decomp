@@ -3,9 +3,9 @@
 extern "C" {
 
 extern void effBehaviorRun(InfoTable *info);
-extern void FUN_00390368(InfoHolder *holder, Item1C *item);
+extern void effObjectParticleInitMotion(InfoHolder *holder, Item1C *item);
 
-/* After effBehaviorRun, calls FUN_00390368 for each kind-3 item whose table entry has unk10 == 0. */
+/* After effBehaviorRun, calls effObjectParticleInitMotion for each kind-3 item whose table entry has unk10 == 0. */
 void infoHolderInitItems(InfoHolder *holder)
 {
     InfoTable *info;
@@ -23,7 +23,7 @@ void infoHolderInitItems(InfoHolder *holder)
         if (holder->kind == 3) {
             for (i = 0; i < count; i++, entries++, items++) {
                 if (entries->unk10 == 0) {
-                    FUN_00390368(holder, items);
+                    effObjectParticleInitMotion(holder, items);
                 }
             }
         }

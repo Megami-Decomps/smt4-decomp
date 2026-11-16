@@ -10,7 +10,7 @@ void messageSetMode(s32);
 void FUN_003c3e14(void);
 void sysPlaySe(s32);
 void pickObjStart(PickObjectResources *, const char *);
-void FUN_003d54f8(s32, s32);
+void titleSetSlotValueState2(s32, s32);
 void scriptProcessSetMode(PickObjectResource *process, s32 mode);
 
 /* Wait for both resource pairs, instantiate them, then select the initial state. */
@@ -35,10 +35,10 @@ void FUN_00468574(PickObjectResources *work)
             work->phase = 0;
             if (work->mode != 1 && work->mode != 2) {
                 if (pairedAvailabilityGetState(0) == 3) {
-                    FUN_003d54f8(0, 10);
+                    titleSetSlotValueState2(0, 10);
                 }
                 if (pairedAvailabilityGetState(1) == 3) {
-                    FUN_003d54f8(1, 10);
+                    titleSetSlotValueState2(1, 10);
                 }
             }
         }

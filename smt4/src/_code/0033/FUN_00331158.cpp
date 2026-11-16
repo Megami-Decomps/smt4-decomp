@@ -56,7 +56,7 @@ void messageDismissNumericBanner(s32 arg);
 void FUN_0029e328(s32 id);
 void sortMenuCreate(s32 id, s32 arg);
 void buttonHelpSetText(s32 a, u32 color);
-s32 FUN_0029efa8(CampList *list);
+s32 listCursorGetRowIfUnblocked(CampList *list);
 s32 resourceRunOperationIfUnblocked(CampList *list);
 s32 FUN_0029efd8(CampList *list, s32 flag);
 s32 uiScrollHandleActionsOrTouch(CampList *list, u32 text, u8 *state, s32 top, s32 lines, s32 spacing, s8 *touched, s32 a, s32 b);
@@ -112,7 +112,7 @@ void FUN_00331158(s32 kind)
     }
 
     if ((FUN_002c1658(0, 1) | touched) != 0 && kind == CAMP_LIST_A) {
-        s32 index = resourceRunOperationIfUnblocked(list) + FUN_0029efa8(list);
+        s32 index = resourceRunOperationIfUnblocked(list) + listCursorGetRowIfUnblocked(list);
         u32 id = camp->idTable[index];
         if (FUN_0028fc60(id) != 0) {
             camp->selectedId = camp->idTable[index];

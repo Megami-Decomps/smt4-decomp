@@ -2,7 +2,7 @@
 
 extern "C" {
 extern RunWinWork *g_runWin;
-s32 FUN_002b8ee0(void *window, s32 mode);
+s32 uiSlidingSpriteAdvance(void *window, s32 mode);
 s32 uiSpriteAdvanceAnimation(void *window);
 s32 FUN_002c1d5c(void);
 
@@ -14,7 +14,7 @@ s32 runWindowUpdate(void *)
     case 0:
         break;
     case 1:
-        if (FUN_002b8ee0(work->ui, 0) != 0) {
+        if (uiSlidingSpriteAdvance(work->ui, 0) != 0) {
             work->state = 2;
             work->counter = 0;
         }

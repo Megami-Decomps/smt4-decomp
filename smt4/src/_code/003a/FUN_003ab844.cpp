@@ -15,7 +15,7 @@ typedef struct BibleScreen {
     /* 0x59C */ void *file1;
 } BibleScreen;
 
-int FUN_002898e4(void);
+int commonBgAcquire(void);
 s32 campButtonHelpIsActive(void);
 int buttonHelpAcquireResources(void);
 int buttonHelpCreate(void);
@@ -32,7 +32,7 @@ void FUN_003ab844(BibleScreen *screen)
 {
     s32 i;
 
-    FUN_002898e4();
+    commonBgAcquire();
     screen->buttonHelpOwned = 0;
     if (campButtonHelpIsActive() == 0) {
         screen->buttonHelpOwned = 1;

@@ -18,7 +18,7 @@ int FUN_002c982c(...);
 int FUN_002f0420(...);
 int FUN_0032d0c8(...);
 int statusDisplayBindUnitRecord(...);
-int FUN_003343f0(...);
+int gameGlobalsSetMenuOpenFlag(...);
 int unitInitializeFromTemplate(...);
 int FUN_00371edc(...);
 int FUN_0037e09c(int);
@@ -58,7 +58,7 @@ extern int ifTouchGetActiveCounter(void);
 /* Supplied declaration required: FUN_002f0420. */
 /* Supplied declaration required: FUN_0032d0c8. */
 /* Supplied declaration required: statusDisplayBindUnitRecord. */
-/* Supplied declaration required: FUN_003343f0. */
+/* Supplied declaration required: gameGlobalsSetMenuOpenFlag. */
 extern int FUN_0035db94(void);
 /* Supplied declaration required: unitInitializeFromTemplate. */
 /* Supplied declaration required: FUN_00371edc. */
@@ -296,7 +296,7 @@ LAB_002f9458:
       else {
         *puVar14 = 1;
         *puVar15 = 4;
-        FUN_003343f0();
+        gameGlobalsSetMenuOpenFlag();
       }
       temp_v2 = ifTouchGetSelectionMode();
       if (((temp_v2 == 1) && (temp_v2 = ifTouchGetActiveCounter(), temp_v2 < 1)) && (temp_v8 != 0x11)) {
@@ -316,7 +316,7 @@ LAB_002f9924:
         if (temp_v8 != 0) {
           *puVar14 = 1;
           *puVar15 = 4;
-          FUN_003343f0(1);
+          gameGlobalsSetMenuOpenFlag(1);
         }
       }
     }

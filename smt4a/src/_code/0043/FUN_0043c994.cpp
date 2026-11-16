@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e98ea(int, int, int);
+int libc_wcsncpyShort(int, int, int);
 int nn_applet_CTR_detail_SendMessage(unsigned int, int, unsigned int, unsigned int);
 
 typedef int romwright_code(...);
@@ -18,7 +18,7 @@ extern int DAT_005891c8; /* 0x5891c8 */
 extern unsigned int DAT_005891cc; /* 0x5891cc */
 extern romwright_code *DAT_00589500; /* 0x589500 */
 
-/* Supplied declaration required: FUN_002e98ea. */
+/* Supplied declaration required: libc_wcsncpyShort. */
 /* Supplied declaration required: nn_applet_CTR_detail_SendMessage. */
 
 
@@ -47,7 +47,7 @@ void FUN_0043c994(int param_1,unsigned int param_2,int param_3,unsigned int para
         *(unsigned short *)(param_3 + 0x150) = 0;
       }
       else {
-        FUN_002e98ea(param_3 + 0x150,temp_v0,0x100);
+        libc_wcsncpyShort(param_3 + 0x150,temp_v0,0x100);
         *(unsigned short *)(param_3 + 0x350) = 0;
       }
     }

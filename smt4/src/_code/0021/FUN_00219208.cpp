@@ -13,9 +13,9 @@ typedef struct Record {
     /* 0x46 */ u16 slot;
 } Record;
 
-extern int FUN_00257568(Entry *a, Entry *b);
+extern int itemSortCompareRankThenKey(Entry *a, Entry *b);
 
-/* If both entries have the same slot (0 for a negative handle), forwards them to FUN_00257568. */
+/* If both entries have the same slot (0 for a negative handle), forwards them to itemSortCompareRankThenKey. */
 void FUN_00219208(Entry *a, Entry *b)
 {
     u16 slotA;
@@ -34,7 +34,7 @@ void FUN_00219208(Entry *a, Entry *b)
     }
     diff = slotA - slotB;
     if (diff == 0) {
-        FUN_00257568(a, b);
+        itemSortCompareRankThenKey(a, b);
     }
 }
 

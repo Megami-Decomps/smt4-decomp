@@ -9,7 +9,7 @@ extern HandleRegistry *g_handleRegistry;
 void *gameFlagsGetBlock(void);
 EngineRecordModelList *asdMemoryAllocTraced(u32 bytes, const char *file, s32 line);
 EngineRecordModelList *modelListInit(EngineRecordModelList *models);
-void FUN_0040aad4(EngineRecordModelList *models, s32 index);
+void moriModelContentLoadBody(EngineRecordModelList *models, s32 index);
 void handleRegistryRegisterObject(HandleRegistry *registry, u32 handle);
 
 static __inline s32 findFreeRecord(EngineRecordList *list)
@@ -37,7 +37,7 @@ void FUN_003276f0(s32 delay, s32 alternate, f32 x, f32 y, f32 z, f32 w)
     models = models != NULL ? modelListInit(models) : NULL;
     g_engineRecordList->models[g_engineRecordList->modelSlot].models = models;
     resourceOwnerLoadFileSync(models, "map/unit/u007.bam");
-    FUN_0040aad4(g_engineRecordList->models[g_engineRecordList->modelSlot].models, 0);
+    moriModelContentLoadBody(g_engineRecordList->models[g_engineRecordList->modelSlot].models, 0);
     list = g_engineRecordList;
     s32 index = findFreeRecord(list);
     list->selectedRecord = static_cast<s16>(index);

@@ -15,7 +15,7 @@ extern AocSystem *g_aocSystem;
 
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 recordCompareUnsignedValue(const void *a, const void *b);
-DataTable54Record *FUN_002c9df8(AocSystem *system, u32 id);
+DataTable54Record *callbackNoPendingWork(AocSystem *system, u32 id);
 u32 dataTableGet(u32 table, u32 index);
 u32 dataTableGetCount(u32 table);
 void *dataTableGetEntries(u32 table);
@@ -23,7 +23,7 @@ void *dataTableGetEntries(u32 table);
 /* Finds the record with `id` in data table 5/4 (the add-on override stub finds nothing in this build). */
 DataTable54Record *dataTable54FindById(u32 id)
 {
-    DataTable54Record *record = FUN_002c9df8(g_aocSystem, id);
+    DataTable54Record *record = callbackNoPendingWork(g_aocSystem, id);
 
     if (record != NULL) {
         return record;

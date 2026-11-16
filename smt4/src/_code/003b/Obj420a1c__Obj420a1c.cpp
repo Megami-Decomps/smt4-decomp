@@ -4,7 +4,7 @@ extern "C" {
 s32 cecInitializeSupport(void);
 void asdCecInit(void);
 u32 asdLoadFileSyncDefault(const char *path);
-u32 FUN_00357818(u32 id);
+u32 cecMakeResourceId(u32 id);
 void asdCecSetBoxArgs(u32 unk00, u32 unk04);
 extern u32 g_cecCardBox;
 }
@@ -16,5 +16,5 @@ Obj420a1c::Obj420a1c() : icon48(0), icon40(0)
     asdCecInit();
     icon48 = asdLoadFileSyncDefault("cec_icon/CecIcon48.ctpk");
     icon40 = asdLoadFileSyncDefault("cec_icon/CecIcon40.ctpk");
-    asdCecSetBoxArgs(FUN_00357818(0xe5c), g_cecCardBox);
+    asdCecSetBoxArgs(cecMakeResourceId(0xe5c), g_cecCardBox);
 }

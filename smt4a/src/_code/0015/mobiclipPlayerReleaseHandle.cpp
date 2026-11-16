@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_0016cb50(s32 handle, s32 state);
+void soundVoiceSetStateStopped(s32 handle, s32 state);
 
 typedef struct Holder {
     /* 0x00 */ u8 unk00[0x0C];
@@ -16,7 +16,7 @@ typedef struct Holder {
 void mobiclipPlayerReleaseHandle(Holder *object)
 {
     if (object->handle != -1 && object->state == 1) {
-        FUN_0016cb50(object->handle, object->state);
+        soundVoiceSetStateStopped(object->handle, object->state);
         object->state = 0;
         object->released = 1;
     }

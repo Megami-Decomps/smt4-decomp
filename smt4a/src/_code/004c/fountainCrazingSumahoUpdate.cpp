@@ -24,7 +24,7 @@ u32 bgmGetStateById(s32 trackId);
 s32 soundChannelRequestIfEnabled(s32 a, s32 b, s32 c);
 void soundChannelStopAll(u32 value);
 u8 pairedAvailabilityGetState(s32 index);
-void FUN_003d54f8(u32 index, u32 value);
+void titleSetSlotValueState2(u32 index, u32 value);
 void slotSetRequest(u32 index, u32 value, u32 extra);
 u32 padButtonIsPressed(u32 button);
 
@@ -54,10 +54,10 @@ s32 fountainCrazingSumahoUpdate(CrazingSumahoWork *work)
     }
     if (work->state == 1) {
         if (pairedAvailabilityGetState(0) == 3) {
-            FUN_003d54f8(0, 30);
+            titleSetSlotValueState2(0, 30);
         }
         if (pairedAvailabilityGetState(1) == 3) {
-            FUN_003d54f8(1, 30);
+            titleSetSlotValueState2(1, 30);
         }
         if (pairedAvailabilityGetState(0) != 2) {
             union {

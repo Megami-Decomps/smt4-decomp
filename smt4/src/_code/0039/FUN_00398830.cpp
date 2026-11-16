@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern int FUN_002b8ee0(void *block, u32 a);
+extern int uiSlidingSpriteAdvance(void *block, u32 a);
 extern u32 vec2GetXInt(void *block);
 
 typedef struct Obj {
@@ -20,7 +20,7 @@ void FUN_00398830(Obj *obj)
 {
     u32 value;
 
-    if (FUN_002b8ee0(obj->block, 0) != 0) {
+    if (uiSlidingSpriteAdvance(obj->block, 0) != 0) {
         obj->unk001 = 2;
         obj->unk00C = 0;
     }

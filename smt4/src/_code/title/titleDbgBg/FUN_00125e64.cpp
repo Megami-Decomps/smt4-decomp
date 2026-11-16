@@ -13,7 +13,7 @@ struct TitleDebugBackgroundView {
 };
 }
 extern "C" {
-extern TitleDebugBackgroundView *DAT_0044e2e8;
+extern TitleDebugBackgroundView *g_titleDbgBg;
 extern RenderCtx *g_titleScene;
 u32 renderCtxPackPassFlags(u32 mode, u32 option);
 void efctSetSpeed(f32 speed);
@@ -23,7 +23,7 @@ f32 FUN_002aed34(s32 layer, void *parameters, f32 x, f32 y);
 // Draw the title debug background, PC/ROM loading indicator and the game title label.
 u32 FUN_00125e64()
 {
-    TitleDebugBackgroundView *work = DAT_0044e2e8;
+    TitleDebugBackgroundView *work = g_titleDbgBg;
     if (work->state == 1) {
         RenderCtx *context = g_titleScene;
         renderCtxPushA(context, renderCtxPackPassFlags(1, 0));

@@ -42,7 +42,7 @@ void statusDownOpenList(u32 first, u32 second)
     status->unk544 = first;
     status->unk540 = second;
     gridNavigationConfigure(statusGetList(status), FUN_0029ee54(statusGetList(status)) + 1, 9, 1, 0, 1);
-    FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(statusGetList(status)), FUN_0029ee54(statusGetList(status)) - 1);
+    scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(statusGetList(status)), FUN_0029ee54(statusGetList(status)) - 1);
     status->unk410 = 1;
     current = g_statusDown;
     for (s32 i = 0; i < current->regionCount; i++) {

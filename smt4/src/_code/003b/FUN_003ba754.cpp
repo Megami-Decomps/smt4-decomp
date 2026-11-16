@@ -45,7 +45,7 @@ void gameRestoreWorkSave(s32 kind);
 ScriptProcessWork *scrScriptProcessCreate(ScriptFile *file, u32 owner);
 void scriptProcessSetMode(ScriptRunState *process, s32 mode);
 void soundChannelRequestIfEnabled(s32 id, s32 flag, s32 frames);
-void FUN_002a03d8(s32 channel, s32 frames);
+void titleSetSlotValueState2(s32 channel, s32 frames);
 s32 gameFlagIsSet(u32 flag);
 s32 FUN_002c2a04(s32 channel);
 
@@ -59,7 +59,7 @@ void FUN_003ba754(MapSceneView *scene)
     scriptProcessSetMode(process, 2);
     s32 mode = scene->mode;
     u8 restoreFlag = 0;
-    u32 quest = FUN_002903f0();
+    u32 quest = rosterGetLeaderId();
     if (quest != 0 && table1bOr1cGetRecordValue(quest) == 6) {
         restoreFlag = 1;
     }
@@ -67,10 +67,10 @@ void FUN_003ba754(MapSceneView *scene)
     scene->cursorX = 400.0f;
     scene->cursorY = 240.0f;
     if (FUN_002c2a04(0) == 3) {
-        FUN_002a03d8(0, 10);
+        titleSetSlotValueState2(0, 10);
     }
     if (FUN_002c2a04(1) == 3) {
-        FUN_002a03d8(1, 10);
+        titleSetSlotValueState2(1, 10);
     }
     scene->result = 0;
     bgmReleaseStopped();

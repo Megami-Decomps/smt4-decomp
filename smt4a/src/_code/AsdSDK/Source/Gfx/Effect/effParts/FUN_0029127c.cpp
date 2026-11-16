@@ -63,7 +63,7 @@ typedef struct EffPartsFile {
 
 void sysMemClear(void *block, s32 size);
 void effPartInitDefaults(void *part);
-EffPartNode *FUN_003007a0(void);
+EffPartNode *effPartCreateDefault(void);
 void linkedItemsRedirectToReplacement(EffPartList *list, EffPartNode *node, EffPartNode *parent);
 EffBlock *effBlockCloneDeep(EffBlock *src);
 void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
@@ -107,7 +107,7 @@ EffPartList *FUN_0029127c(const char *path)
         if ((entry->flags & 1) != 0) {
             EffPartNode *source = effPartListNth(list, (s32)entry->block);
 
-            node = FUN_003007a0();
+            node = effPartCreateDefault();
             __aeabi_memcpy4(node, source, 0xC0);
             sysMemClear(node, 0x90);
             node->unk84 = 1;
@@ -130,7 +130,7 @@ EffPartList *FUN_0029127c(const char *path)
         } else {
             void *block = effBlockCloneDeep((EffBlock *)((u8 *)file + (u32)entry->block));
 
-            node = FUN_003007a0();
+            node = effPartCreateDefault();
             node->block = block;
             node->next = NULL;
             if (list->tail != NULL) {

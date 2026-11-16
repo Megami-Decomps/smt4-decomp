@@ -27,11 +27,11 @@ void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(u32 handle);
 nn::Result FUN_002d5f90(FileView* file, u32 offset, void* buffer, u32 size)
 {
     u64 position = offset;
-    FUN_002c3510(file->vtable->unk18(file, position));
+    processResultSetValue(file->vtable->unk18(file, position));
 
     u32 transferred;
     nn::Result result = file->vtable->unk34(file, &transferred, buffer, size, 1);
-    FUN_002c3510(result);
+    processResultSetValue(result);
 
     u32 failed = result & 0x80000000;
     if ((s32)failed < 0) {

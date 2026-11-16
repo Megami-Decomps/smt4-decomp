@@ -9,14 +9,14 @@ typedef struct {
     u32 resource;     /* 0x0c */
 } ResourceOwner;
 
-extern u8 DAT_0055af54;
+extern u8 g_strVtable;
 
 void asdOperatorDeleteArray(u32 resource);
 void _ZN9Obj5593b8D1Ev(ResourceOwner *self);
 
 void strDestroy(ResourceOwner *self)
 {
-    self->vtbl = &DAT_0055af54;
+    self->vtbl = &g_strVtable;
     asdOperatorDeleteArray(self->resource);
     _ZN9Obj5593b8D1Ev(self);
 }

@@ -36,7 +36,7 @@ extern StickDirectionTable DAT_00465278;   /* 0x465278 */
 s32 padIsButtonPressed(s32 button);
 s32 padIsButtonRepeat(s32 button);
 s32 slotIsActive(s32 button);
-s32 FUN_0027f958(f32 *x, f32 *y, s32 flag);
+s32 padGetNormalizedAnalogStick(f32 *x, f32 *y, s32 flag);
 f32 __hardfp_atan2f(f32 x, f32 y);
 
 static s32 isStickDirection(s32 button)
@@ -95,7 +95,7 @@ u32 padGetCombinedButtonState(s32 buttonA, s32 buttonB, s32 mode)
          slotIsActive(BUTTON_STICK_DOWN) != 0 || slotIsActive(BUTTON_STICK_RIGHT) != 0)) {
         f32 x;
         f32 y;
-        FUN_0027f958(&x, &y, 0);
+        padGetNormalizedAnalogStick(&x, &y, 0);
         f32 angle = __hardfp_atan2f(x, y) * 57.295776f;
         if (angle < 0.0f) {
             angle += 360.0f;

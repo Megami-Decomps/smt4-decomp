@@ -4,7 +4,7 @@
 extern "C" {
 extern AllocationTracking DAT_00465120;
 AllocationHeader *FUN_002b24d8(u32, u32, u32, u32, u32);
-void FUN_002b23f4(AllocationHeader *);
+void asdMemoryTrackAllocation(AllocationHeader *);
 void rt_memclr(void *, u32);
 void nn_os_CriticalSection_Enter(void *);
 void nn_os_CriticalSection_Leave(void *);
@@ -22,7 +22,7 @@ static __inline void *allocationHeaderInit(AllocationHeader *header, u32 size, u
     u8 *data = (u8 *)header + padding;
     ((AllocationHeader *)data)->owner = header;  /* the word just before the payload */
     data += sizeof(AllocationHeader);
-    FUN_002b23f4(header);
+    asdMemoryTrackAllocation(header);
     return data;
 }
 

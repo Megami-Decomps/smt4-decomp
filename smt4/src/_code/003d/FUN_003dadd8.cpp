@@ -25,7 +25,7 @@ void memClear(void *dest, u32 size);
 void asdMemFree(void *ptr);
 s32 textFormatBuffer(char *output, const char *format, ...);
 char *libc_strcpy(char *dest, const char *src);
-char *FUN_002522e0(const char *text, s32 character);
+char *libc_strrchr(const char *text, s32 character);
 s32 keyedRecordFindByName(const char *name);
 
 /* Resets the five battle effect slots and starts loading each effect file not already registered. */
@@ -50,7 +50,7 @@ u32 FUN_003dadd8(BattleEffectOwner *owner)
         textFormatBuffer(formatted, DAT_004008c4, effectName);
         libc_strcpy(path, formattedPath);
         char *fullPath = path;
-        libc_strcpy(slot->name, FUN_002522e0(fullPath, '/') + 1);
+        libc_strcpy(slot->name, libc_strrchr(fullPath, '/') + 1);
         if (keyedRecordFindByName(slot->name) == 0xff) {
             asdLoadFileAsyncSimple(fullPath, reinterpret_cast<u32 *>(&slot->data), 0);
             slot->flags |= 1;

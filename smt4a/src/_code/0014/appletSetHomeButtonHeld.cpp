@@ -6,14 +6,14 @@ typedef struct Global5b408c {
     /* 0x00 */ u8 unk00;
     /* 0x01 */ s8 homeButtonHeld;
 } Global5b408c;
-extern Global5b408c DAT_005b408c;
+extern Global5b408c g_appletEventState;
 
 /* Sets the home-button-held flag to `held` and returns its previous value. */
 s32 appletSetHomeButtonHeld(s8 held)
 {
-    s32 previous = DAT_005b408c.homeButtonHeld;
+    s32 previous = g_appletEventState.homeButtonHeld;
 
-    DAT_005b408c.homeButtonHeld = held;
+    g_appletEventState.homeButtonHeld = held;
     return previous;
 }
 

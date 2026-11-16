@@ -7,11 +7,11 @@
 extern "C" {
 
 int CONCAT44(double, double);
-int FUN_0014e314(...);
+int gxSubmitDrawZeroExtraParams(...);
 int renderCtxSelectDisplayAreaForStereoMode(int);
 int textDrawString(...);
 int efctSetSpeed(...);
-float FUN_00168594(const char *, unsigned int, float);
+float fontMeasureTextWidth(const char *, unsigned int, float);
 int renderCtxSelectTexture(...);
 int gxResetColorQuadToWhite(void);
 int dataTableGet(int, int);
@@ -31,11 +31,11 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-/* Supplied declaration required: FUN_0014e314. */
+/* Supplied declaration required: gxSubmitDrawZeroExtraParams. */
 /* Supplied declaration required: renderCtxSelectDisplayAreaForStereoMode. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_00168594. */
+/* Supplied declaration required: fontMeasureTextWidth. */
 extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxSelectTexture. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
@@ -139,7 +139,7 @@ unsigned int FUN_0032b0d4(void)
         temp_v5 = dataTableGetEntries();
         temp_v5 = temp_v5 + temp_v3 * 100;
         temp_v10 = temp_v9;
-        temp_v9 = FUN_00168594(reinterpret_cast<const char *>(temp_v5), 4, 0.0f);
+        temp_v9 = fontMeasureTextWidth(reinterpret_cast<const char *>(temp_v5), 4, 0.0f);
         temp_v6 = (int)temp_v0 - (int)temp_v9;
         temp_v9 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v9 = temp_v9 * (float)temp_v12;
@@ -207,7 +207,7 @@ unsigned int FUN_0032b0d4(void)
     }
     else {
       renderCtxSelectTexture(g_renderCtx,0);
-      FUN_0014e314(0xff,0xff,0xff);
+      gxSubmitDrawZeroExtraParams(0xff,0xff,0xff);
     }
   }
   return 0;

@@ -25,7 +25,7 @@ extern "C" {
 extern u32 g_btlScriptUnit;
 SlotTableCount *gameGetSlotTable(void);
 s32 FUN_0023d488(BtlEntry *unit, SkillTargetRecord *skill, s32 mode);
-s32 FUN_0023d9b8(s32 slot, s32 flag, SkillTargetRecord *skill);
+s32 itemEffectCheckApplicable(s32 slot, s32 flag, SkillTargetRecord *skill);
 
 /* Checks a skill against everything it could target: 0 = unusable, 1 = no skill, 2 = not checked, 3 = usable. */
 u32 FUN_0028d320(u32 skillId)
@@ -110,7 +110,7 @@ u32 FUN_0028d320(u32 skillId)
     if (slots) {
         SlotTableCount *table = gameGetSlotTable();
         for (i = -1; i < table->partyCount; i++) {
-            if (FUN_0023d9b8(i, 0, skill) == 0) {
+            if (itemEffectCheckApplicable(i, 0, skill) == 0) {
                 return 0;
             }
         }

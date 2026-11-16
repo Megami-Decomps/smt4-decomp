@@ -61,7 +61,7 @@ void textFormatBuffer(char *out, const char *format, ...);
 void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 McModelList *modelListInit(void *memory);
 void resourceOwnerLoadFileSync(void);
-void FUN_0040aad4(McModelList *list, s32 flag);
+void moriModelContentLoadBody(McModelList *list, s32 flag);
 void FUN_0040ab7c(McModelList *list, s32 flag);
 void handleRegistryRegisterObject(u32 registry, u32 object);
 void modelPlayClip(u32 object, s32 a, s32 b);
@@ -99,7 +99,7 @@ void FUN_00407ab0(MoveCameraCtrl *ctrl, const char *cameraName, const char *data
     textFormatBuffer(path, "%s.bam", dataName);
     ctrl->cameraModel = mcCreateModelList(0xF5);
     resourceOwnerLoadFileSync();
-    FUN_0040aad4(ctrl->cameraModel, 0);
+    moriModelContentLoadBody(ctrl->cameraModel, 0);
     FUN_0045b538(ctrl->cameraModel->data + 0xC);
     u32 object = ctrl->cameraModel->object;
     handleRegistryRegisterObject(g_handleRegistry, object);
@@ -145,7 +145,7 @@ void FUN_00407ab0(MoveCameraCtrl *ctrl, const char *cameraName, const char *data
         ctrl->arrowModel = mcCreateModelList(0x15E);
         resourceOwnerLoadFileSync();
         FUN_0040ab7c(ctrl->arrowModel, 0);
-        FUN_0040aad4(ctrl->arrowModel, 0);
+        moriModelContentLoadBody(ctrl->arrowModel, 0);
         u32 arrow = ctrl->arrowModel->object;
         handleRegistryRegisterObject(g_handleRegistry, arrow);
         modelPlayClip(arrow, 0, 1);
@@ -156,7 +156,7 @@ void FUN_00407ab0(MoveCameraCtrl *ctrl, const char *cameraName, const char *data
         ctrl->pointModel = mcCreateModelList(0x16C);
         resourceOwnerLoadFileSync();
         FUN_0040ab7c(ctrl->pointModel, 0);
-        FUN_0040aad4(ctrl->pointModel, 0);
+        moriModelContentLoadBody(ctrl->pointModel, 0);
         u32 marker = ctrl->pointModel->object;
         handleRegistryRegisterObject(g_handleRegistry, marker);
         modelPlayClip(marker, 0, 1);

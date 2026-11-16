@@ -1,7 +1,7 @@
 #include "mobiclip_ctrl/MobiclipCtrl.h"
 
 extern "C" {
-extern S4Player DAT_004c3b20;
+extern S4Player g_mobiclipPlayer;
 void registerBlockRequestGroups(u32 mask);
 void FUN_00123750(u32 mask, s32 enabled);
 u32 nngxGetError(void);
@@ -12,7 +12,7 @@ void asdSndApplyPendingVoiceState(u32 handle);
 // Restore display command groups and the movie player's active state.
 void mobiclipRestoreDisplayState(s32 mode)
 {
-    S4Player* player = &DAT_004c3b20;
+    S4Player* player = &g_mobiclipPlayer;
     switch (mode) {
     case 2:
         gxLcdClearForceBlack();

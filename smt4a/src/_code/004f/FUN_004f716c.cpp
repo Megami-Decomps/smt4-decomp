@@ -36,7 +36,7 @@ s32 textFormatBuffer(char *buffer, const char *format, ...);
 void sysMemClear(void *block, s32 size);
 void btlCameraFinishTransition(EffectWork *work);
 u32 FUN_002282c8(u32 index, u32 kind, u32 flag);
-char *FUN_00100d60(const char *text, s32 character);
+char *libc_strrchr(const char *text, s32 character);
 
 /* Prepares the four effect names: names naming a reference model select it, and every other name that is
  * not special starts loading its battle/effect file unless the record already exists. Returns 1 when the table exists. */
@@ -103,7 +103,7 @@ u32 FUN_004f716c(EffectWork *work)
             }
         }
         EffectSlot *slot = &work->slots[i];
-        libc_strcpy(slot->name, FUN_00100d60(path, '/') + 1);
+        libc_strcpy(slot->name, libc_strrchr(path, '/') + 1);
         if (findRecordByKey(slot->name) == 0xff) {
             asdLoadFileAsyncSimple(path, &slot->file, 1);
             slot->flags |= 1;

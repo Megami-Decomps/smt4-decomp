@@ -7,7 +7,7 @@
 extern "C" {
 BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *, u32);
 void source4CCopyHalves(const BtlCombatantEntryA *, u16 *);
-s32 FUN_003ec77c(BtlMainStateA *);
+s32 btlStateIsDefeatSuppressed(BtlMainStateA *);
 s32 lcgRandomRange(u32);
 
 /* Pick the first source's triggered skill that passes the action and chance gates. */
@@ -41,7 +41,7 @@ s32 btlSelectSourceTriggeredSkill(u32 id, s32 randomize)
         if (sources[i]) {
             SourceMetadataFlags *metadata = reinterpret_cast<SourceMetadataFlags *>(dataTable41FindById(sources[i]));
             if (metadata != NULL && metadata->trigger.skill != 0 &&
-                !FUN_003ec77c(state)) {
+                !btlStateIsDefeatSuppressed(state)) {
                 s32 chance = metadata->trigger.chance;
                 if (chance != 0 &&
                     (!randomize || chance * chanceMultiplier > lcgRandomRange(99)))

@@ -6,7 +6,7 @@ extern "C" {
 
 
 int _ZN9Obj4221d4D1Ev(...);
-int FUN_00191f68(AocPackageOwner *owner);
+int aocPackageOwnerFreeTables(AocPackageOwner *owner);
 int __aeabi_vec_delete(void *handle, int (*callback)(...));
 
 extern AocMainA *g_aocMain;
@@ -21,7 +21,7 @@ void aocReleasePackageOwner(AocPackageOwner *owner)
         __aeabi_vec_delete(owner->handle, _ZN9Obj4221d4D1Ev);
         owner->handle = NULL;
     }
-    FUN_00191f68(owner);
+    aocPackageOwnerFreeTables(owner);
     g_aocMain->flags = g_aocMain->flags & ~0x10000;
 }
 

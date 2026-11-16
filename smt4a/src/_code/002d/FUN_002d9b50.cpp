@@ -11,7 +11,7 @@ int FUN_002e364c(...);
 int lmapSceneRestoreEntryPosition(...);
 int FUN_00327ee8(...);
 int naviMainApplyRequestValue(...);
-int FUN_003d54f8(...);
+int titleSetSlotValueState2(...);
 int linkedTargetSetFloat(...);
 
 int dataFindKindRecordWithAocOverrides(...);
@@ -127,7 +127,7 @@ extern int dataTableGetRecord23(void);
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d2158. */
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
-/* Supplied declaration required: FUN_003d54f8. */
+/* Supplied declaration required: titleSetSlotValueState2. */
 extern unsigned int FUN_003e0034(void);
 /* Supplied declaration required: playerSetClampedValue. */
 extern int linkHolderCallFirst(unsigned int);
@@ -596,8 +596,8 @@ LAB_002da3cc:
             if (*(int *)(g_lmapScene + 8) >= 0x1f) {
 LAB_002dad8c:
               *(unsigned int *)(g_lmapScene + 8) = 0;
-              FUN_003d54f8(0,10);
-              FUN_003d54f8(1,10);
+              titleSetSlotValueState2(0,10);
+              titleSetSlotValueState2(1,10);
               temp_v6 = g_lmapScene;
               *(unsigned int *)(g_lmapScene + 4) = 8;
               *(unsigned int *)(temp_v6 + 0x54) = 0x23;

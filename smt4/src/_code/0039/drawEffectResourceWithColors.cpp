@@ -5,7 +5,7 @@
 extern "C" {
 
 int jobGetScalarValue(void);
-int FUN_002b0750(int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+int uiDrawTableTextureSized(int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 int quadSetOrderedVectors(int *, int *, int *, int *, int, int);
 int gxResetColorQuadToWhite(void);
 int efctSetSpeed(void);
@@ -35,7 +35,7 @@ extern unsigned char vectorSetAllOne; /* 0x141adc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: jobGetScalarValue. */
-/* Supplied declaration required: FUN_002b0750. */
+/* Supplied declaration required: uiDrawTableTextureSized. */
 /* Supplied declaration required: quadSetOrderedVectors. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
@@ -101,7 +101,7 @@ void drawEffectResourceWithColors(unsigned int param_1,unsigned int param_2,unsi
   temp_v0 = asdTMTexTableEntryAt(0x1c,param_1);
   temp_v1 = *(int *)(temp_v0 + 0xc);
   if ((temp_v1 != 0) && (*(short *)(temp_v1 + 4) == 1)) {
-    FUN_002b0750(2,0x1c,param_1,param_2,param_3,temp_v2,temp_v3,param_4);
+    uiDrawTableTextureSized(2,0x1c,param_1,param_2,param_3,temp_v2,temp_v3,param_4);
     return;
   }
   if (param_6 != 0 && temp_v1 != 0) {

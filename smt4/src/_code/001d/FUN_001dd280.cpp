@@ -155,8 +155,8 @@ unsigned int FUN_001dd280(void)
     FUN_0032b3c4();
     *(int *)(iVar1 + 0x14) = iVar6;
     if (iVar6 != 7) {
-      FUN_002a03d8(0,10);
-      FUN_002a03d8(1,10);
+      titleSetSlotValueState2(0,10);
+      titleSetSlotValueState2(1,10);
       iVar6 = *(int *)(iVar1 + 0x10) + 1;
     }
     else {

@@ -37,7 +37,7 @@ extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00228b04. */
 extern unsigned int mapGetDisplayName(unsigned char);
 extern int resourceRunOperationIfUnblocked(int);
-extern int FUN_002a4894(int);
+extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: objectApplyIfUnblocked. */
 /* Supplied declaration required: buttonHelpSetHelpState. */
 /* Supplied declaration required: FUN_003450d4. */
@@ -115,7 +115,7 @@ unsigned int FUN_0022a0a0(void)
             }
           }
           temp_v6 = resourceRunOperationIfUnblocked(temp_v5);
-          temp_v4 = FUN_002a4894(temp_v5);
+          temp_v4 = listCursorGetRowIfUnblocked(temp_v5);
           temp_v7 = mapGetDisplayName(*(unsigned char *)(temp_v4 + temp_v6 + temp_v0 + 0x758));
           buttonHelpSetText(temp_v7,0xf4f4f4ff);
           temp_v6 = objectApplyIfUnblocked(temp_v5);
@@ -144,13 +144,13 @@ unsigned int FUN_0022a0a0(void)
       uiSpriteAdvanceAnimation(temp_v0 + 0x6b8);
     }
     temp_v5 = resourceRunOperationIfUnblocked(temp_v8);
-    temp_v6 = FUN_002a4894(temp_v8);
+    temp_v6 = listCursorGetRowIfUnblocked(temp_v8);
     temp_v7 = asdTMTexTableEntryAt(0x15,0x48);
     temp_v9 = temp_v8;
     FUN_003450d4(temp_v8,temp_v7,temp_v0 + 0x772,(int)*(short *)(temp_v0 + 0x770),
                  (int)*(short *)(temp_v0 + 0x76c),(int)*(short *)(temp_v0 + 0x76e),temp_v10,0,1);
     if (temp_v9 != 0) {
-      temp_v9 = FUN_002a4894(temp_v8);
+      temp_v9 = listCursorGetRowIfUnblocked(temp_v8);
       if (temp_v9 != temp_v5 + temp_v6) {
         *(unsigned char *)(temp_v0 + 0x74d) = 1;
       }
@@ -168,7 +168,7 @@ unsigned int FUN_0022a0a0(void)
             temp_v9 = reinterpret_cast<int>(saveGetUserSettingsBlock());
             pbVar11 = (unsigned char *)(temp_v9 + *(int *)(temp_v0 + 0x750));
             temp_v9 = resourceRunOperationIfUnblocked(temp_v8);
-            temp_v8 = FUN_002a4894(temp_v8);
+            temp_v8 = listCursorGetRowIfUnblocked(temp_v8);
             temp_v2 = *(unsigned char *)(temp_v9 + temp_v8 + temp_v0 + 0x758) & 0x7f;
             temp_v1 = temp_v2 | (*pbVar11 & 0x80);
             *pbVar11 = temp_v1;
@@ -215,7 +215,7 @@ unsigned int FUN_0022a0a0(void)
       *(unsigned char *)(temp_v0 + 0x74d) = 1;
     }
     temp_v9 = resourceRunOperationIfUnblocked(temp_v8);
-    temp_v8 = FUN_002a4894(temp_v8);
+    temp_v8 = listCursorGetRowIfUnblocked(temp_v8);
     temp_v7 = mapGetDisplayName(*(unsigned char *)(temp_v8 + temp_v9 + temp_v0 + 0x758));
     buttonHelpSetText(temp_v7,0xf4f4f4ff);
     break;

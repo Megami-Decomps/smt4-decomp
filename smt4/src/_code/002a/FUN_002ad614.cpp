@@ -2,12 +2,12 @@
 
 extern "C" {
 
-u32 FUN_002ad61c(u32 value);
+u32 sysBreakWithCallback(u32 value);
 
-/* Calls FUN_002ad61c with 0 (placed right after, so the call is a linker NOP). */
+/* Calls sysBreakWithCallback with 0 (placed right after, so the call is a linker NOP). */
 u32 FUN_002ad614(void)
 {
-    return FUN_002ad61c(0);
+    return sysBreakWithCallback(0);
 }
 
 } /* extern "C" */

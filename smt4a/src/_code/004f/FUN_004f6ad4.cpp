@@ -16,7 +16,7 @@ s32 libc_strncmp(const char *a, const char *b, u32 count);
 char *libc_strcpy(char *destination, const char *source);
 void sysMemClear(void *buffer, s32 size);
 void textFormatBuffer(char *buffer, const char *format, ...);
-char *FUN_00100d60(char *text, s32 character);
+char *libc_strrchr(char *text, s32 character);
 void btlCameraFinishTransition(BtlEffectWorkA *work);
 u32 FUN_002282c8(u32 first, u32 second, u32 third);
 
@@ -64,7 +64,7 @@ u32 FUN_004f6ad4(BtlEffectWorkA *work)
                     libc_strcpy(path, file);
                     if (libc_strlen(path) != 0) {
                         BtlEffectSlot *slot = &work->slots[i];
-                        libc_strcpy(slot->name, FUN_00100d60(path, '/') + 1);
+                        libc_strcpy(slot->name, libc_strrchr(path, '/') + 1);
                         if (findRecordByKey(slot->name) == 0xff) {
                             asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&slot->file), 1);
                             slot->flags |= 1;

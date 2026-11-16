@@ -5,7 +5,7 @@
 #include "shard/W6_W6Match6_PhaseTrig.h"
 
 extern "C" {
-extern const PhaseTrigEntry DAT_00536d14[256];
+extern const PhaseTrigEntry g_sinCosTable[256];
 extern LmapExtraA *g_lmapView;
 extern GameStateA g_gameState;
 
@@ -26,9 +26,9 @@ u32 FUN_003702b4(void)
     f32 distance = 500.0f;
 
     f32 phase = heading * (256.0f / 360.0f);
-    PhaseSinCos pitch = samplePhase(DAT_00536d14, 0.0f);
-    PhaseSinCos yaw = samplePhase(DAT_00536d14, phase);
-    PhaseSinCos roll = samplePhase(DAT_00536d14, 0.0f);
+    PhaseSinCos pitch = samplePhase(g_sinCosTable, 0.0f);
+    PhaseSinCos yaw = samplePhase(g_sinCosTable, phase);
+    PhaseSinCos roll = samplePhase(g_sinCosTable, 0.0f);
     Matrix34Data rotation;
     rotation.values[8] = -yaw.sine;
     rotation.values[0] = roll.cosine * yaw.cosine;

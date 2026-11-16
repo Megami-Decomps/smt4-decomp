@@ -8,7 +8,7 @@ int btlFindEntryBlockByMemberId(...);
 
 int dataTable04FindById(int);
 int sysMemClear(int *, int);
-int FUN_003e8bb0(unsigned char [28], int, unsigned int);
+int btlEntryBuildSummary(unsigned char [28], int, unsigned int);
 int btlMainFindEntryByListedId(int, int);
 int FUN_0047fa50(...);
 int btlUIClearWorkTables(...);
@@ -51,7 +51,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: dataTable04FindById. */
 extern int FUN_002a7410(void);
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_003e8bb0. */
+/* Supplied declaration required: btlEntryBuildSummary. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_0047fa50. */
 /* Supplied declaration required: btlUIClearWorkTables. */
@@ -123,7 +123,7 @@ int FUN_004e15fc(int *param_1,unsigned int *param_2)
   temp_v13 = 0;
   temp_v19 = (int)*(short *)(param_2[10] + 0x1be);
   dataTable04FindById((int)*(short *)(param_2[10] + 0x1c0));
-  FUN_003e8bb0(temp_v17,*param_1,param_2[8]);
+  btlEntryBuildSummary(temp_v17,*param_1,param_2[8]);
   temp_v0 = DAT_0057117c;
   temp_v12 = DAT_00571178;
   temp_v4 = DAT_0057114c;

@@ -19,7 +19,7 @@ struct RowTransitionSprites {
 };
 
 extern "C" {
-s32 FUN_00291e14(void);
+s32 btlIsDefeatSuppressed(void);
 }
 
 // Select opening and closing animations for the active rows and their markers.
@@ -44,7 +44,7 @@ extern "C" void FUN_00321378(RowTransitionSprites* sprites, s16 addedRows, s16 c
         if (sprites->immediate) {
             pairSetFirstResetSecond(&sprites->primary[index], 1);
         } else {
-            pairSetFirstResetSecond(&sprites->primary[index], FUN_00291e14() ? 0xFB0 : 0);
+            pairSetFirstResetSecond(&sprites->primary[index], btlIsDefeatSuppressed() ? 0xFB0 : 0);
         }
     }
     for (s32 index = 0; index < sprites->closingCount; ++index) {

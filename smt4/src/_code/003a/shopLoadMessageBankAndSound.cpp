@@ -20,7 +20,7 @@ typedef char ShopResourceSetupOffsets[
     offsetof(ShopResourceSetupViewIV, soundHandle) == 0x15D44 ? 1 : -1];
 
 extern "C" {
-void FUN_002898e4(void);
+void commonBgAcquire(void);
 void commonBgStopChildAndBeginTransition(void);
 void buttonHelpAcquireResources(void);
 void buttonHelpCreate(void);
@@ -39,7 +39,7 @@ extern const char DAT_00407618[]; // shop/shop_mkditm.mbm
 void shopLoadMessageBankAndSound(ShopCreateWork *shop)
 {
     ShopResourceSetupViewIV *resources = (ShopResourceSetupViewIV *)shop;
-    FUN_002898e4();
+    commonBgAcquire();
     commonBgStopChildAndBeginTransition();
     buttonHelpAcquireResources();
     buttonHelpCreate();

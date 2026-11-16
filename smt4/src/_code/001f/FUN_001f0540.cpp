@@ -74,7 +74,7 @@ extern int FUN_0029d644(int);
 extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: FUN_0029dc74. */
 extern int FUN_0029ee54(int);
-extern int FUN_0029efa8(int);
+extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_002b6c34. */
 /* Supplied declaration required: devilGetRecord. */
@@ -269,7 +269,7 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
               }
               else if (*(int *)(temp_v1 + 0x3fc) < 6) {
                 temp_v14 = resourceRunOperationIfUnblocked(temp_v17);
-                temp_v10 = FUN_0029efa8(temp_v17);
+                temp_v10 = listCursorGetRowIfUnblocked(temp_v17);
                 if (temp_v20 != 0) {
                   temp_v2 = temp_v2 + *(int *)(temp_v1 + 0x3fc) * -3;
                 }
@@ -284,7 +284,7 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
             }
             else if (0 < *(int *)(temp_v1 + 0x3fc)) {
               temp_v14 = resourceRunOperationIfUnblocked(temp_v17);
-              temp_v10 = FUN_0029efa8(temp_v17);
+              temp_v10 = listCursorGetRowIfUnblocked(temp_v17);
               if (*(short *)(temp_v1 + temp_v12 * 2 + 0x9010) ==
                   *(short *)(temp_v1 + (temp_v10 + temp_v14) * 2 + 0x9020)) {
                 temp_v14 = vec2GetXInt(temp_v1 + 0x2e0);
@@ -343,7 +343,7 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
         }
         if ((temp_v24 == 1) && (*(int *)(temp_v1 + 0x3fc) >= 5)) {
           temp_v10 = resourceRunOperationIfUnblocked(temp_v17);
-          temp_v7 = FUN_0029efa8(temp_v17);
+          temp_v7 = listCursorGetRowIfUnblocked(temp_v17);
           if (*(short *)(temp_v14 + 0x9010) == *(short *)(temp_v1 + (temp_v7 + temp_v10) * 2 + 0x9020)) {
             efctSetSpeed();
             temp_v14 = g_titleScene;
@@ -429,7 +429,7 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
     temp_v14 = 0;
     do {
       temp_v10 = temp_v4;
-      if ((param_5 == 0) || (temp_v7 = FUN_0029efa8(temp_v17), temp_v10 = temp_v4, temp_v7 != temp_v14)) {
+      if ((param_5 == 0) || (temp_v7 = listCursorGetRowIfUnblocked(temp_v17), temp_v10 = temp_v4, temp_v7 != temp_v14)) {
         temp_v7 = asdTMTexTableEntryAt(0x24,temp_v14 + 0x185);
         texDrawTableEntryAtStoredOrigin(2,0x24,0x16f,*(short *)(temp_v7 + 8) + temp_v13,*(short *)(temp_v7 + 10) + temp_v2,0x65
                     );
@@ -475,9 +475,9 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
       temp_v14 = temp_v14 + 1;
     } while (temp_v14 < 8);
     temp_v5 = resourceRunOperationIfUnblocked(temp_v17);
-    temp_v14 = FUN_0029efa8(temp_v17);
+    temp_v14 = listCursorGetRowIfUnblocked(temp_v17);
     if (param_5 != 0) {
-      temp_v10 = FUN_0029efa8(temp_v17);
+      temp_v10 = listCursorGetRowIfUnblocked(temp_v17);
       temp_v10 = asdTMTexTableEntryAt(0x24,temp_v10 + 0x1a7);
       efctSetSpeed();
       texDrawTableEntryAtStoredOrigin(2,0x24,0x198,*(short *)(temp_v10 + 8) + temp_v13,*(short *)(temp_v10 + 10) + temp_v2,0x79
@@ -489,7 +489,7 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
       efctSetSpeed();
       texDrawTableEntryAtStoredOrigin(2,0x24,0x19b,*(short *)(temp_v10 + 8) + temp_v13,*(short *)(temp_v10 + 10) + temp_v2,0x7e
                   );
-      temp_v7 = FUN_0029efa8(temp_v17);
+      temp_v7 = listCursorGetRowIfUnblocked(temp_v17);
       temp_v7 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v1 + temp_v7 * 2 + 0x438));
       temp_v8 = *(short *)(temp_v10 + 10) + temp_v2;
       temp_v11 = *(short *)(temp_v10 + 8) + temp_v13;

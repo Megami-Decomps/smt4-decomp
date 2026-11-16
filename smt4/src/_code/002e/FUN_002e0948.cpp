@@ -29,7 +29,7 @@ u32 FUN_002e0948(void)
     TerminalScreen *screen = g_tmnl;
     if ((u32)(screen->page - 1) < 98) {
         RenderCtx *context = g_titleScene;
-        s32 state = FUN_002865c0(6, 0.0f);
+        s32 state = gxPackFadeKindAlphaWord(6, 0.0f);
         renderStackPushCounted(&context->additional.stackC, state);
         renderCtxPushACountedDirect(g_titleScene, renderCtxPackPassFlags(1, 0));
         renderCtxPushB(g_titleScene, packNibblesAndByte(6, 1, 0));

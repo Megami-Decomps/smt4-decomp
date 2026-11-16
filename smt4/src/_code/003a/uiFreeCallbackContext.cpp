@@ -2,15 +2,15 @@
 
 extern "C" {
 
-extern UiCallbackContext *DAT_0043d9f8;
+extern UiCallbackContext *g_uiCallbackContext;
 s32 asdMemFree(void *memory);
 
 /* Releases the UI callback context if it exists. */
 void uiFreeCallbackContext()
 {
-    if (DAT_0043d9f8 != NULL) {
-        asdMemFree(DAT_0043d9f8);
-        DAT_0043d9f8 = NULL;
+    if (g_uiCallbackContext != NULL) {
+        asdMemFree(g_uiCallbackContext);
+        g_uiCallbackContext = NULL;
     }
 }
 

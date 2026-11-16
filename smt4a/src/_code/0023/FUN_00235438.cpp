@@ -63,7 +63,7 @@ extern int FUN_001bd118(unsigned int);
 /* Supplied declaration required: FUN_002466a8. */
 /* Supplied declaration required: FUN_00295024. */
 /* Supplied declaration required: FUN_00295108. */
-extern int FUN_002c2758(unsigned short);
+extern int gameDataStatusFlagGet(unsigned short);
 /* Supplied declaration required: gameDataSetStatusFlag. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: mapIfDispatchCommand. */
@@ -134,7 +134,7 @@ int FUN_00235438(void)
   do {
     temp_v2 = gameUnlockRecordRequirementsMet(temp_v10);
     if (temp_v2 != 0) {
-      temp_v2 = FUN_001bd100(temp_v10);
+      temp_v2 = dataTable1bOr1cRecordHasFlag1(temp_v10);
       if ((temp_v2 == 0) && (temp_v2 = partyEntryFlagsBit3(temp_v10), temp_v2 != 0)) {
         temp_v20 = temp_v20 + 1;
       }
@@ -385,7 +385,7 @@ LAB_002359c4:
         temp_v1 = 0;
         do {
           temp_v2 = FUN_003de92c(temp_v1);
-          if (((temp_v2 != 0) && (temp_v8 = FUN_002c2758(temp_v1), temp_v8 == 0)) &&
+          if (((temp_v2 != 0) && (temp_v8 = gameDataStatusFlagGet(temp_v1), temp_v8 == 0)) &&
              ((int)(unsigned int)*(unsigned short *)(temp_v2 + 2) <= temp_v20)) {
             gameDataSetStatusFlag(temp_v1,1);
             FUN_002466a8();

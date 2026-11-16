@@ -104,7 +104,7 @@ extern u32 DAT_00636eac;   /* number of arena slots */
 
 void *FUN_0015cccc(GfxPoolRequest *request, GfxAllocator *allocator);
 void *FUN_0015aeb0(GfxAllocator *allocator);
-void FUN_0015a0e0(FloatState *state);
+void asdCameraInitializeStereo(FloatState *state);
 
 GfxContext *FUN_00148880(GfxAllocator *allocator)
 {
@@ -153,7 +153,7 @@ GfxContext *FUN_00148880(GfxAllocator *allocator)
 
     void *block = allocator->allocate(0x64, 4);
     FloatState *floatState = block != NULL ? new (block) FloatState() : NULL;
-    FUN_0015a0e0(floatState);
+    asdCameraInitializeStereo(floatState);
     context->floatState = floatState;
     context->allocator = allocator;
     return context;

@@ -53,7 +53,7 @@ s32 bgmGetStateById(u32 id);
 void soundChannelRequestIfEnabled(u32 id, s32 a, s32 b);
 void soundChannelStopAll(u32 mask);
 void slotSetRequest(s32 slot, s32 frames, s32 value);
-void FUN_003d54f8(s32 a, s32 b);
+void titleSetSlotValueState2(s32 a, s32 b);
 
 u32 FUN_003e71a8(SplashWork *splash)
 {
@@ -123,9 +123,9 @@ u32 FUN_003e71a8(SplashWork *splash)
         if (asdTMTexTableNodeIsLoaded(SPLASH_TEXTURE_TABLE, 6) == 0)
             return 0;
         if (pairedAvailabilityGetState(0) == 3)
-            FUN_003d54f8(0, 0x1E);
+            titleSetSlotValueState2(0, 0x1E);
         if (pairedAvailabilityGetState(1) == 3)
-            FUN_003d54f8(1, 0x1E);
+            titleSetSlotValueState2(1, 0x1E);
         if (pairedAvailabilityGetState(0) == 2)
             return 0;
         if (splash->alpha < 1.0f)

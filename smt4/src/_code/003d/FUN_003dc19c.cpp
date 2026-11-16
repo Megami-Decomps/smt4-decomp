@@ -9,7 +9,7 @@ char *libc_strcpy(char *destination, const char *source);
 void memClear(void *destination, u32 size);
 void asdMemFree(void *memory);
 void textFormatBuffer(char *destination, const char *format, ...);
-char *FUN_002522e0(char *path, u32 separator);
+char *libc_strrchr(char *path, u32 separator);
 u32 keyedRecordFindByName(const char *name);
 void asdLoadFileAsyncSimple(const char *path, void **destination, s32 flags);
 extern const char DAT_004008c4[];
@@ -58,7 +58,7 @@ u32 FUN_003dc19c(ActionController *controller)
         memClear(formatted, sizeof(formatted));
         textFormatBuffer(formatted, DAT_004008c4, effectName);
         libc_strcpy(path, formatted);
-        char *separator = FUN_002522e0(path, '/');
+        char *separator = libc_strrchr(path, '/');
         libc_strcpy(load->name, separator + 1);
         if (keyedRecordFindByName(load->name) == 0xff) {
             asdLoadFileAsyncSimple(path, &load->file, 0);

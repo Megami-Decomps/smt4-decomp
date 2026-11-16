@@ -5,7 +5,7 @@
 
 extern "C" {
 extern MapObjectState *g_mapObj;
-void FUN_0018a924(f32 *sine, f32 *cosine, f32 angle);
+void mathSinCos(f32 *sine, f32 *cosine, f32 angle);
 s32 sceneRegisterBoxEffect(u32 id, u32 value, const char *name, u32 resource,
     u32 effect, s32 variant, u8 option0, u8 option1, u8 option2,
     u8 option3, u8 option4, u8 option5, u8 flag0, u8 flag1, u8 option,
@@ -22,7 +22,7 @@ void FUN_00313440(void)
             /* Keep the shared scalar aliases while treating their contiguous storage as a position. */
             Vec3f position = *reinterpret_cast<const Vec3f *>(&slot->unk10);
             f32 sine, cosine;
-            FUN_0018a924(&sine, &cosine, slot->unk1c * (256.0f / 360.0f));
+            mathSinCos(&sine, &cosine, slot->unk1c * (256.0f / 360.0f));
             position.x += sine * 60.0f;
             position.z += cosine * 60.0f;
             u32 effect = sceneRegisterBoxEffect(0, 0, "KANBAN", 30, 12, slot->id + 0x1000,

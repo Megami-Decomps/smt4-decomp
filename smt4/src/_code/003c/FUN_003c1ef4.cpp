@@ -3,7 +3,7 @@
 #include "gamedata/PlayerDataBlock.h"
 
 extern "C" {
-void FUN_00299370(s32 mode);
+void playerRecalcStatsFromEquipment(s32 mode);
 
 /* Table 9 record: byte data, so the id bytes sit unaligned at offset 5. */
 typedef struct Table09Record {
@@ -96,7 +96,7 @@ void FUN_003c1ef4(void)
     // The base HP and MP words (0x0E, 0x10) are the growth output pair.
     FUN_003c1ab4(player->enabled, reinterpret_cast<GrowthValues *>(&player->baseStats),
                  reinterpret_cast<const GrowthParameters *>(&info));
-    FUN_00299370(0);
+    playerRecalcStatsFromEquipment(0);
     player->hp = player->maximumHp;
     player->mp = player->maximumMp;
 }

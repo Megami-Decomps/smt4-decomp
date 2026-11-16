@@ -24,7 +24,7 @@ void rt_memcpy(void *dst, const void *src, int size);
 
 extern PolyFlashKind g_polyFlashKinds[];
 extern PolyVec4 g_polyDefaultColor;
-extern const char DAT_00544ba8[];
+extern const char g_effPolygonFlashSourceFileName[];
 
 /* Copies a flash polygon object: kinds with a clone callback get a fresh object with the source's
  * work area and cloned state, the others are rebuilt from the source's work area as parameters. */
@@ -39,7 +39,7 @@ PolyObject *effPolyFlashClone(PolyObject *src)
         u16 kind = src->kind;
         s32 workSize = g_polyFlashKinds[kind].workSize;
 
-        asdDebugTrace(DAT_00544ba8, 3409);
+        asdDebugTrace(g_effPolygonFlashSourceFileName, 3409);
         obj = (PolyObject *)memAlloc(0x10000, 0x100, 0, workSize + 0x50, 0x10, 1);
         obj->unk30 = -1;
         obj->work = obj->workData;

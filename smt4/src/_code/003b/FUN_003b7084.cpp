@@ -107,7 +107,7 @@ void FUN_003b7084(int param_1,int param_2,int param_3)
   gxResetColorQuadToWhite();
   temp_v2 = 0;
   do {
-    temp_v3 = FUN_0029efa8((const void *)(param_1 + 0xcfd4));
+    temp_v3 = listCursorGetRowIfUnblocked((const void *)(param_1 + 0xcfd4));
     if (temp_v3 != temp_v2) {
       switch(temp_v2) {
       case 0:
@@ -168,7 +168,7 @@ void FUN_003b7084(int param_1,int param_2,int param_3)
     }
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 5);
-  temp_v2 = FUN_0029efa8((const void *)(param_1 + 0xcfd4));
+  temp_v2 = listCursorGetRowIfUnblocked((const void *)(param_1 + 0xcfd4));
   temp_v3 = asdTMTexTableEntryAt(0x28,temp_v2 + 0xba);
   switch(temp_v2) {
   case 0:

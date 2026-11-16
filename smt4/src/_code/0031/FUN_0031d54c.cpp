@@ -12,7 +12,7 @@ int FUN_00273358(unsigned int);
 int FUN_00273840(...);
 int mapMainEnterScene(void);
 int battlePrepareEncounter(void);
-int FUN_00275e4c(void);
+int mapSaveReturnSnapshot(void);
 int navigationApplyOptionalValue(...);
 int navigationApplyArguments(...);
 int navigationSetFieldValue(...);
@@ -75,7 +75,7 @@ extern int FUN_0026f950(void);
 /* Supplied declaration required: FUN_00273840. */
 /* Supplied declaration required: mapMainEnterScene. */
 /* Supplied declaration required: battlePrepareEncounter. */
-/* Supplied declaration required: FUN_00275e4c. */
+/* Supplied declaration required: mapSaveReturnSnapshot. */
 /* Supplied declaration required: navigationApplyOptionalValue. */
 /* Supplied declaration required: navigationApplyArguments. */
 /* Supplied declaration required: navigationSetFieldValue. */
@@ -162,7 +162,7 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
     return;
   }
   if (DAT_0049f970 != 0) {
-    FUN_00275e4c();
+    mapSaveReturnSnapshot();
     *(unsigned int *)(temp_v2 + 0x28) = 0;
     *(unsigned int *)(temp_v2 + 0x24) = 0x6f;
     *(unsigned char *)(temp_v2 + 0x14) = 1;
@@ -177,7 +177,7 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
         temp_v1 = DAT_0049f920;
       }
       if (g_gameState != 5 || temp_v1 != 6) {
-        FUN_00275e4c();
+        mapSaveReturnSnapshot();
         *(unsigned int *)(temp_v2 + 0x38) = DAT_0049f990;
         *(unsigned char *)(temp_v2 + 0xe) = 1;
         *(unsigned int *)(temp_v2 + 0x24) = 0x6f;
@@ -198,9 +198,9 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
   if (DAT_0049fd14 != -1) {
     temp_v3 = *(int *)(temp_v2 + 0x30);
     DAT_0049fb44 = DAT_0049f964 != 0;
-    temp_v1 = FUN_00285574();
+    temp_v1 = mapGetDepartureIndex();
     if (temp_v1 != 0) {
-      temp_v3 = FUN_00285574();
+      temp_v3 = mapGetDepartureIndex();
     }
     temp_v1 = *(int *)(temp_v2 + 0x2c);
     temp_v4 = temp_v1 == DAT_0049fd14;

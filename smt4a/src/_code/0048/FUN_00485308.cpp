@@ -45,7 +45,7 @@ void FUN_00485308(StateSetterSpriteWork* work)
     ConfirmationView* confirmation = reinterpret_cast<ConfirmationView*>(work);
     if (confirmation->scriptStarted != 0) {
         if (FUN_00318dc4() != 0) {
-            FUN_002bf4f4(0);
+            buttonHelpSetPanelState(0);
         }
         if (scrRunOpcodesStub(confirmation->script) == 2) {
             if (messageGetChoiceResult() != 0) {

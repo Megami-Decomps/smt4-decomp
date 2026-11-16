@@ -6,7 +6,7 @@ extern "C" {
 int CONCAT44(double, double);
 int renderCtxCalculateStereoParallax(unsigned int);
 int FUN_0019aee4(...);
-int FUN_0019be8c(...);
+int charCodeIsPrivateUseGlyph(...);
 int sentinelLookupGetValue(void);
 int renderCtxBindTextureMode(...);
 int VectorFloatToUnsigned(double, int);
@@ -63,7 +63,7 @@ extern unsigned int DAT_0063af94; /* 0x63af94 */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_0019aee4. */
-/* Supplied declaration required: FUN_0019be8c. */
+/* Supplied declaration required: charCodeIsPrivateUseGlyph. */
 /* Supplied declaration required: sentinelLookupGetValue. */
 extern unsigned int FUN_0019e120(unsigned short);
 extern unsigned int FUN_0019ea4c(unsigned short);
@@ -223,7 +223,7 @@ void FUN_00180998(int *param_1, int arg1, int arg2)
 LAB_00180bc0:
       temp_v39 = 1;
       temp_v17 = (unsigned int)*(unsigned short *)(*param_1 + temp_v9 * 0x20);
-      temp_v6 = FUN_0019be8c(temp_v17);
+      temp_v6 = charCodeIsPrivateUseGlyph(temp_v17);
       temp_v19 = (float)(temp_v25 >> 0x20);
       temp_v18 = (float)temp_v24;
       temp_v21 = (float)temp_v22;
@@ -237,7 +237,7 @@ LAB_00180bc0:
           temp_v21 = temp_v20;
           do {
             temp_v1 = *(short *)(*param_1 + (temp_v9 + temp_v6) * 0x20);
-            temp_v8 = FUN_0019be8c(temp_v1);
+            temp_v8 = charCodeIsPrivateUseGlyph(temp_v1);
             if (temp_v8 != 0) {
               if (temp_v1 == -0x7e9) goto LAB_00180f28;
             }
@@ -425,7 +425,7 @@ LAB_00180f28:
       temp_v6 = temp_v6 + 1;
       temp_v10 = temp_v9 + temp_v6;
       temp_v1 = *(short *)(*param_1 + temp_v10 * 0x20);
-      temp_v8 = FUN_0019be8c(temp_v1);
+      temp_v8 = charCodeIsPrivateUseGlyph(temp_v1);
       if (temp_v8 != 0) break;
       temp_v3 = *(char *)(temp_v10 * 0x20 + *param_1 + 10);
       aiStack_138[temp_v11] = temp_v10;

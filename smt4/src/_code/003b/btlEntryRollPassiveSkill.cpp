@@ -6,7 +6,7 @@
 extern "C" {
 
 BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, u32 id);
-void FUN_0022abe0(BtlEntry *entry, u16 *skills);
+void btlEntryGetPassiveSkillIds(BtlEntry *entry, u16 *skills);
 s32 randRange(u32 range);
 
 /* Rolls the listed entry's passive skills in order and returns the first that triggers, or 0. */
@@ -17,7 +17,7 @@ u16 btlEntryRollPassiveSkill(u32 id)
     u16 skills[10] = {0};
     s32 i;
 
-    FUN_0022abe0(entry, skills);
+    btlEntryGetPassiveSkillIds(entry, skills);
     u16 triggered = 0;
     for (i = 0; i < 9; i++) {
         if (skills[i] == 0) {

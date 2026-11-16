@@ -21,7 +21,7 @@ struct InfoWindowUpdateState {
 extern "C" InfoWindowUpdateState *g_infoWin;
 extern "C" s32 uiSpriteAdvanceAnimation(TimerSlot *timer);
 extern "C" void timerStart(TimerSlot *timer, s32 animation, s32 flags);
-extern "C" void FUN_002b8ee0(TimerSlot *timer, s32 value);
+extern "C" void uiSlidingSpriteAdvance(TimerSlot *timer, s32 value);
 
 /* Advance opening, scrolling and timed closing of the information window. */
 extern "C" s32 infoWindowUpdate(u32 job)
@@ -40,7 +40,7 @@ extern "C" s32 infoWindowUpdate(u32 job)
         }
         break;
     case 2:
-        FUN_002b8ee0(&window->slide, 0);
+        uiSlidingSpriteAdvance(&window->slide, 0);
         window->firstX = vec2GetXInt(&window->slide);
         if (window->firstX <= 0) {
             window->firstX = 0;

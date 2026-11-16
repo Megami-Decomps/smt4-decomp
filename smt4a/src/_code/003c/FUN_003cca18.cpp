@@ -55,7 +55,7 @@ u32 FUN_003cca18(UniteWork *work, s8 blocked, u32 *selected)
     FusionInheritanceInputView *input = reinterpret_cast<FusionInheritanceInputView *>(work);
     if (FUN_003450d4(&input->primary, NULL, input->modeKeys, -1, -1, -1,
             reinterpret_cast<bool *>(&blocked), 0, 1) != 0 || FUN_00228b04(&input->primary, 1) != 0) {
-        const s32 index = resourceRunOperationIfUnblocked(&input->primary) + FUN_002a4894(reinterpret_cast<const Object *>(&input->primary));
+        const s32 index = resourceRunOperationIfUnblocked(&input->primary) + listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(&input->primary));
         const u16 id = input->primaryIds[index];
         if (id != 0) {
             skillHelpUpdateAttributeAndTarget(id);
@@ -67,7 +67,7 @@ u32 FUN_003cca18(UniteWork *work, s8 blocked, u32 *selected)
         if (work->history.previous == 30) {
             *selected = 0;
         } else {
-            const s32 index = resourceRunOperationIfUnblocked(&input->candidates) + FUN_002a4894(reinterpret_cast<const Object *>(&input->candidates));
+            const s32 index = resourceRunOperationIfUnblocked(&input->candidates) + listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(&input->candidates));
             *selected = input->candidateIndices[index];
         }
         const FusionPairSelectionBitsA *pair = reinterpret_cast<const FusionPairSelectionBitsA *>(
@@ -79,7 +79,7 @@ u32 FUN_003cca18(UniteWork *work, s8 blocked, u32 *selected)
     } else if (padQueryLogicalKey(1, 1) != 0) {
         eventQueueAddUniqueIfValid(0x100020F);
         input->accepted = 1;
-        const s32 index = resourceRunOperationIfUnblocked(&input->secondary) + FUN_002a4894(reinterpret_cast<const Object *>(&input->secondary));
+        const s32 index = resourceRunOperationIfUnblocked(&input->secondary) + listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(&input->secondary));
         skillHelpUpdateAttributeAndTarget(input->secondaryIds[index]);
     }
     return 0;

@@ -11,7 +11,7 @@ extern "C" {
 
 bool idIsAbove400(u32 id);
 const SkillSortUnitRecord *gameGetUnitRecord(s32 unit);
-s32 FUN_00257568(const SkillListEntry *a, const SkillListEntry *b);
+s32 itemSortCompareRankThenKey(const SkillListEntry *a, const SkillListEntry *b);
 
 /* The skill's sort key: passive skills (ids above 400) and active skills keep it in their records. */
 static u16 skillSortKey(const SkillListEntry *entry)
@@ -22,7 +22,7 @@ static u16 skillSortKey(const SkillListEntry *entry)
     return reinterpret_cast<const ActiveSkillRecord *>(dataTable40FindById(entry->skillId))->sortKey;
 }
 
-/* Tie-break by the holding units' sort keys (0 without a unit), then FUN_00257568 (FUN_00219208's body). */
+/* Tie-break by the holding units' sort keys (0 without a unit), then itemSortCompareRankThenKey (FUN_00219208's body). */
 static __inline s32 compareUnitSortKeys(const SkillListEntry *a, const SkillListEntry *b)
 {
     u16 keyA;
@@ -43,10 +43,10 @@ static __inline s32 compareUnitSortKeys(const SkillListEntry *a, const SkillList
     if (diff != 0) {
         return diff;
     }
-    return FUN_00257568(a, b);
+    return itemSortCompareRankThenKey(a, b);
 }
 
-/* Skill list sort comparator: by skill sort key, then by unit sort key, then FUN_00257568. */
+/* Skill list sort comparator: by skill sort key, then by unit sort key, then itemSortCompareRankThenKey. */
 s32 FUN_00219148(const SkillListEntry *a, const SkillListEntry *b)
 {
     s32 diff = skillSortKey(a) - skillSortKey(b);

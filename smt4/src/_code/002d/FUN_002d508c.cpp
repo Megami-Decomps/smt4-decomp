@@ -41,7 +41,7 @@ extern s8 DAT_0049fc64;
 extern s8 DAT_0049fce8;
 
 MapBlock* gameGetMapBlock(void);
-void FUN_0027f958(f32* stickX, f32* stickY, s32 arg);
+void padGetNormalizedAnalogStick(f32* stickX, f32* stickY, s32 arg);
 void FUN_0026413c(void);
 f32 __hardfp_atan2f(f32 y, f32 x);
 s32 FUN_002ed094(Vec3f* candidate, Vec3f* previous);
@@ -67,7 +67,7 @@ void FUN_002d508c(PlayerController* player)
     if (boost > 1.0f) speedScale = boost;
 
     f32 stickX, stickY;
-    FUN_0027f958(&stickX, &stickY, 0);
+    padGetNormalizedAnalogStick(&stickX, &stickY, 0);
     FUN_0026413c();
     player->moving = 0;
     if (stickX > -0.5f && stickX < 0.5f && stickY > -0.5f && stickY < 0.5f) {

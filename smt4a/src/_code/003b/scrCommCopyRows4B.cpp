@@ -14,7 +14,7 @@ extern s32 scrGetArg(s32 index);
 extern void loadSlotEnsureLoaded(u32 id);
 extern void *dataTableGet(u32 index, u32 type);
 extern Row64 *dataTableGetEntries(void *table);
-extern void FUN_00333474(Row64 *row);
+extern void savedRecordInsertAtFront(Row64 *row);
 extern void dataTableFree(u32 id);
 
 /* Script command: for each row from argument 0 to argument 1 of table 0x4B copies the value at +0x60 to +0x34. */
@@ -29,7 +29,7 @@ u32 scrCommCopyRows4B(void)
         row = dataTableGetEntries(dataTableGet(0x4B, 0)) + first;
         if (row != NULL) {
             row->unk34 = row->unk60;
-            FUN_00333474(row);
+            savedRecordInsertAtFront(row);
         }
     }
     dataTableFree(0x4B);

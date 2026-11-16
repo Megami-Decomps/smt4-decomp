@@ -24,7 +24,7 @@ extern u32 g_btlScriptUnit;
 PartyDamageSlotsIV *gameGetSlotTable();
 s32 appGetRemainingCapacity(u16 item);
 s32 FUN_0029a9d4(u16 item, u32 flag);
-s32 FUN_0029efa8(void *selection);
+s32 listCursorGetRowIfUnblocked(void *selection);
 s32 objectPartRunUnlessLocked(void *selection);
 void partyWidgetSetValue(PartyPanelWidget *widget, s32 value);
 void partyWidgetSetCost(PartyPanelWidget *widget, s32 cost);
@@ -64,13 +64,13 @@ void FUN_0026d144(void *selection, s32 stockOnly)
     if (stockOnly) {
         if (panel->unk42) {
             index = objectPartRunUnlessLocked(selection);
-            index += FUN_0029efa8(selection) * 4;
+            index += listCursorGetRowIfUnblocked(selection) * 4;
         } else {
-            index = FUN_0029efa8(selection) * 4 + panel->unk2C * 12;
+            index = listCursorGetRowIfUnblocked(selection) * 4 + panel->unk2C * 12;
             index += objectPartRunUnlessLocked(selection);
         }
     } else {
-        if (FUN_0029efa8(selection) < 1) {
+        if (listCursorGetRowIfUnblocked(selection) < 1) {
             index = objectPartRunUnlessLocked(selection);
             s32 unit;
             if (index != 0) {
@@ -85,9 +85,9 @@ void FUN_0026d144(void *selection, s32 stockOnly)
         }
         if (panel->unk42) {
             index = objectPartRunUnlessLocked(selection);
-            index += FUN_0029efa8(selection) * 4;
+            index += listCursorGetRowIfUnblocked(selection) * 4;
         } else {
-            index = FUN_0029efa8(selection) * 4 + panel->unk2C * 12;
+            index = listCursorGetRowIfUnblocked(selection) * 4 + panel->unk2C * 12;
             index += objectPartRunUnlessLocked(selection);
         }
         index -= 4;

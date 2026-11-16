@@ -31,7 +31,7 @@ void FUN_003115b4(u32 questId)
     quest->panel.unkF2 = 1;
     for (s32 index = 0; index < FUN_0029ee54(cursor); ++index) {
         if (ids[index] == questId) {
-            FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(cursor), index);
+            scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(cursor), index);
             break;
         }
     }

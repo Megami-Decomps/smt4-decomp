@@ -9,7 +9,7 @@ typedef struct Jyoucyu {
     /* 0x1C */ u32 flags;
 } Jyoucyu; /* 0x20 */
 
-extern Jyoucyu DAT_004c53c4[2];
+extern Jyoucyu g_bgmRequestChannels[2];
 
 
 /* Whether an entry has both flag bits 2 and 0x20 set. */
@@ -26,7 +26,7 @@ u32 FUN_0033361c(void)
     }
     u32 result = 0;
     for (s32 i = 0; i < 2; i++) {
-        if (jyoucyuIsReady(&DAT_004c53c4[i])) {
+        if (jyoucyuIsReady(&g_bgmRequestChannels[i])) {
             result = 1;
             break;
         }

@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern u32 DAT_005e2194[];
+extern u32 g_scrCommGlobalTable[];
 
 void FUN_0037d038(u32 index, u32 value)
 {
     if (index < 0x20) {
-        DAT_005e2194[index] = value;
+        g_scrCommGlobalTable[index] = value;
     }
 }
 

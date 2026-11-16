@@ -43,7 +43,7 @@ extern "C" {
 extern ObjBRef g_gameGlobals;
 s32 gameProgressIsAdvanced();
 s32 btlMainIsRunning();
-s32 FUN_00291e14();
+s32 btlIsDefeatSuppressed();
 void FUN_0026fd50(StatusDisplayPane *pane, StatusUnitRecord *record, s32 mode, const u32 *parameters);
 void FUN_0034dae0(StatusDisplayPane *pane, u16 id);
 s32 FUN_002b4dcc(StatusUnitRecord *record);
@@ -74,7 +74,7 @@ extern "C" void statusDisplayBindUnitRecord(StatusUnitRecord *record, s32 useBas
             record->skillPairs[3] = 0;
         }
     } else {
-        flags->mode = btlMainIsRunning() && FUN_00291e14() ? 17 : 2;
+        flags->mode = btlMainIsRunning() && btlIsDefeatSuppressed() ? 17 : 2;
     }
     StatusDisplayPane *pane = &statusDisplayPaneView(object)->pane;
     FUN_0026fd50(pane, record, 0, parameters);

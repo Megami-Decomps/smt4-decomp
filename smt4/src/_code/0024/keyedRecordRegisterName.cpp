@@ -4,7 +4,7 @@
 
 extern "C" {
 s32 FUN_002522f8(u8*, u32, const char*, ...);
-const u8* FUN_002522e0(const u8*, u32);
+const u8* libc_strrchr(const u8*, u32);
 extern u32 g_keyedRecordCount;
 extern KeyedRecordStorage g_keyedRecords[];
 
@@ -13,7 +13,7 @@ u32 keyedRecordRegisterName(const char* name)
     memClear(&g_keyedRecords[g_keyedRecordCount], sizeof(KeyedRecordStorage));
     u8* storedName = g_keyedRecords[g_keyedRecordCount].name;
     FUN_002522f8(storedName, sizeof(g_keyedRecords[0].name), "%s", name);
-    const u8* extension = FUN_002522e0(storedName, '.');
+    const u8* extension = libc_strrchr(storedName, '.');
     if (extension != NULL) {
         *const_cast<u8*>(extension) = 0;
     }

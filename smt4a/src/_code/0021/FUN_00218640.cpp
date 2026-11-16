@@ -74,7 +74,7 @@ extern int idIsAtLeast350(unsigned int);
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 extern short *dataTableGetEntry37(unsigned int);
 extern int resourceRunOperationIfUnblocked(int);
-extern int FUN_002a4894(int);
+extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: FUN_002c0940. */
 /* Supplied declaration required: FUN_002ebda8. */
 /* Supplied declaration required: FUN_002f7730. */
@@ -84,7 +84,7 @@ extern int recordIsAvailable(unsigned int);
 extern unsigned int aocGetEntryData(unsigned short);
 extern int FUN_003df004(unsigned int, int, unsigned char **);
 extern int partyEntryFlagsBit3(unsigned int);
-extern unsigned int FUN_004186e0(void);
+extern unsigned int rosterGetLeaderId(void);
 
 
 void FUN_00218640(void)
@@ -149,7 +149,7 @@ void FUN_00218640(void)
   temp_v20 = (unsigned long long)temp_v19 << 0x20;
   efctSetSpeed();
   temp_v6 = resourceRunOperationIfUnblocked(temp_v13);
-  temp_v13 = FUN_002a4894(temp_v13);
+  temp_v13 = listCursorGetRowIfUnblocked(temp_v13);
   temp_v1 = *(unsigned short *)(temp_v12 + (temp_v13 + temp_v6) * 2);
   if (*(char *)(temp_v30 + 0x3e) != '\0') {
     temp_v1 = *(unsigned short *)(temp_v3 + 0xcca);
@@ -365,7 +365,7 @@ LAB_00218d20:
     else {
       temp_v9 = FUN_003de75c(temp_v25);
       if (temp_v9 != 0) {
-        temp_v19 = FUN_004186e0();
+        temp_v19 = rosterGetLeaderId();
         if (temp_v19 == temp_v25) {
           if (*(int *)(temp_v3 + 4) != 0xc) {
             texDrawTableEntryAtStoredOrigin(2,0x1e,0x2a,temp_v6,temp_v13,0x68);

@@ -7,7 +7,7 @@ Table04ExtraRecord *FUN_001b2e78(void *system, u32 id);
 void *dataTableGet(u32 type, u32 group);
 u32 dataTableGetCount(void *table);
 const void *dataTableGetEntries(void *table);
-s32 FUN_001ac8dc(const void *key, const void *entry);
+s32 recordSortEntryCompareByKey(const void *key, const void *entry);
 void *libc_bsearch(const void *key, const void *entries, u32 count, u32 stride,
                   s32 (*compare)(const void *, const void *));
 
@@ -20,7 +20,7 @@ static __inline Table04ExtraRecord *findExtraTable04Record(u32 id)
         u32 count = dataTableGetCount(table);
         Table04ExtraRecord key;
         key.id = (u16)id;
-        record = (Table04ExtraRecord *)libc_bsearch(&key, entries, count, sizeof(key), FUN_001ac8dc);
+        record = (Table04ExtraRecord *)libc_bsearch(&key, entries, count, sizeof(key), recordSortEntryCompareByKey);
     }
     return record;
 }

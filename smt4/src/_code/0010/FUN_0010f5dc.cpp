@@ -13,7 +13,7 @@ struct FsMount {
 
 extern "C" {
 
-extern FsMount DAT_0044e640;
+extern FsMount g_fsUserMount;
 extern u32 g_fsArchiveHandleWords; /* the mount's handle, as the first mount check sees it */
 extern const char DAT_00407ec3[]; /* "fs:USER" */
 
@@ -37,9 +37,9 @@ void FUN_0010f5dc(void)
     }
     result = asdModelForwardChecked(&g_fsArchiveHandleWords, DAT_00407ec3, libc_strlen(DAT_00407ec3), 0);
     checkPlatformResult(result, __current_pc());
-    FUN_0011bb34(DAT_0044e640.handle);
-    DAT_0044e640.self = &DAT_0044e640;
-    FUN_0011bb90(&DAT_0044e640.self);
+    FUN_0011bb34(g_fsUserMount.handle);
+    g_fsUserMount.self = &g_fsUserMount;
+    FUN_0011bb90(&g_fsUserMount.self);
     u32 session = fsGetUserMountHandle();
     result = nn_fs_ipc_FileSystem_SetPriority(&session, 0);
     checkPlatformResult(result, __current_pc());

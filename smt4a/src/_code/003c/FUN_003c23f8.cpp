@@ -36,7 +36,7 @@ u32 FUN_003c23f8(void)
             }
             if (damage >= entry->hp)
                 damage = entry->hp - 1;
-            FUN_003ee0c0(btlGetMainState());
+            btlSlotManagerResetStates(btlGetMainState());
             battle = btlGetMainState();
             BattleRosterRecordA *target = &battle->roster[entry->unitIndex];
             FUN_004fc094(0, actor, 0, target, 0, damage, -1, ~0u,

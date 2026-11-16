@@ -70,7 +70,7 @@ void FUN_0037c988(SlotScreen *screen, u32 argument, s32 drawExtra, s32 mode, u32
             FUN_003c33e8(screen, slot, argument, flags, scale, icon->x + position.x, icon->y + position.y);
             if (mode == 1 && screen->phase >= 5) {
                 s32 base = resourceRunOperationIfUnblocked(&screen->cursor);
-                if (screen->currentIds[slot] == screen->targetIds[base + FUN_002a4894(&screen->cursor)]) {
+                if (screen->currentIds[slot] == screen->targetIds[base + listCursorGetRowIfUnblocked(&screen->cursor)]) {
                     efctSetSpeed(screen->effectSpeed * scale);
                     RenderCtxA *context = g_renderCtx;
                     renderStackSet(&context->stackB, packNibblesAndByte(6, 1, 0));

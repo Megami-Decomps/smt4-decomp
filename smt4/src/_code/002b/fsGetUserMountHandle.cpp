@@ -9,7 +9,7 @@ struct FsMount {
 
 extern "C" {
 
-extern FsMount DAT_0044e640;
+extern FsMount g_fsUserMount;
 extern u32 g_fsArchiveHandleWords; /* the mount's handle, as the mount check sees it */
 void sysReportCheckFailure(u32 key, u32 address);
 
@@ -21,6 +21,6 @@ u32 fsGetUserMountHandle(void)
         nn::Result result(0xE0A046DB);
         sysReportCheckFailure(result, __current_pc());
     }
-    return DAT_0044e640.handle;
+    return g_fsUserMount.handle;
 }
 }

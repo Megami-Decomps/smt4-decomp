@@ -13,7 +13,7 @@ extern const char g_mikadoCheckMbmPath[];  /* g_mikadoCheckMbmPath */
 void contentTransitionInstallDispatch(ContentTransition *transition);
 void FUN_003bb1f0(SelectionFlags *panel);
 void asdTMTexTableLoadTmx(u32 kind, u32 arg);
-void FUN_002898e4(void);
+void commonBgAcquire(void);
 void commonBgStopChildAndBeginTransition(void);
 void buttonHelpAcquireResources(void);
 void buttonHelpCreate(void);
@@ -32,7 +32,7 @@ void MikadoCamera::initialize()
     FUN_003bb1f0(&selectionFlags);
     unk34 = -1;
     asdTMTexTableLoadTmx(0x21, 0);
-    FUN_002898e4();
+    commonBgAcquire();
     commonBgStopChildAndBeginTransition();
     buttonHelpAcquireResources();
     buttonHelpCreate();

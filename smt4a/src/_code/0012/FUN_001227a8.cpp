@@ -9,7 +9,7 @@ int onlineContextGetInstance(void);
 int _ZN9Obj55b28cD1Ev(unsigned char **);
 int sharedRefRelease(void);
 int FUN_002e78d0(unsigned int, unsigned int, int);
-int FUN_002f4f20(int, int);
+int atomicAddS32(int, int);
 
 /* stack frame of param_4: 3 slot(s), 9 byte(s) */
 typedef struct {
@@ -32,7 +32,7 @@ extern int FUN_00105c54(int, unsigned int, int);
 extern int _Znwj(unsigned int);
 extern int FUN_002e789a(unsigned char *);
 /* Supplied declaration required: FUN_002e78d0. */
-/* Supplied declaration required: FUN_002f4f20. */
+/* Supplied declaration required: atomicAddS32. */
 extern int onlineMutexNeedsLock(void);
 extern int onlineOwnerHasPendingJob2(int);
 
@@ -71,7 +71,7 @@ void FUN_001227a8(int param_1,unsigned char *param_2,unsigned int param_3,unsign
       temp_v0 = FUN_00105c54(temp_v1,*(unsigned int *)(param_2 + 0x44),param_1);
     }
     *(int *)(param_1 + 0x120) = temp_v0;
-    FUN_002f4f20(temp_v0 + 4,1);
+    atomicAddS32(temp_v0 + 4,1);
     temp_v2 = onlineContextGetInstance();
     FUN_002e78d0(temp_v2,*(unsigned int *)(param_1 + 0x120),0);
   }

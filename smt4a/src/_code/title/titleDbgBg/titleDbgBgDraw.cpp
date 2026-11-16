@@ -11,7 +11,7 @@ struct TitleDebugBackground {
 };
 
 extern "C" {
-extern TitleDebugBackground *DAT_00589168;
+extern TitleDebugBackground *g_titleDbgBg;
 extern RenderCtxA *g_renderCtx;
 s32 renderCtxPackPassFlags(s32 mode, s32 flags);
 void efctSetSpeed(f32 speed);
@@ -27,7 +27,7 @@ static __inline void drawDebugLabel(const char *text, f32 x, f32 y)
 // Draw the debug title background, loading-source label and game title.
 u32 titleDbgBgDraw(void)
 {
-    TitleDebugBackground *background = DAT_00589168;
+    TitleDebugBackground *background = g_titleDbgBg;
     if (background->state != 1) {
         return 0;
     }

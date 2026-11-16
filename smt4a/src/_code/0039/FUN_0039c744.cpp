@@ -23,7 +23,7 @@ extern UniteWork *g_unite;
 void soundChannelStopAll(s32 arg);
 void soundChannelRequestIfEnabled(u32 channel, s32 arg, s32 fade);
 UniteSlotRecord *gameGetSlotRecord(s32 slot);
-u32 FUN_004dad8c(void *context);
+u32 histogramFindHighestSupportedValue(void *context);
 void FUN_002a7b74(void);
 void uniteStartOrQueueRequest(s32 request);
 void FUN_0020b908(s32 id, s32 arg);
@@ -52,7 +52,7 @@ void FUN_0039c744(void)
             remembered->ids[1] = 0;
         }
     }
-    unite->returnState.unk90A4 = FUN_004dad8c(unite->context);
+    unite->returnState.unk90A4 = histogramFindHighestSupportedValue(unite->context);
     unite->returnState.unk91B0 = 0;
     FUN_002a7b74();
     uniteStartOrQueueRequest(0x12);

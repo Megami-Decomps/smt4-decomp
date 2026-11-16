@@ -58,7 +58,7 @@ int commonBgStopChildAndReset(void);
 int FUN_00363c58(int);
 int clearFlags310To31F(void);
 int FUN_003b5064(void);
-int FUN_003d54f8(int, int);
+int titleSetSlotValueState2(int, int);
 int FUN_004b6bc4(int, int, unsigned int);
 int FUN_004b75d0(void);
 int FUN_004b7d88(int);
@@ -116,7 +116,7 @@ extern int screenFadeIsBusy(void);
 /* Supplied declaration required: FUN_003b5064. */
 /* Supplied declaration required: commonBgStopChildAndBeginTransition. */
 /* Supplied declaration required: FUN_003c91e8. */
-/* Supplied declaration required: FUN_003d54f8. */
+/* Supplied declaration required: titleSetSlotValueState2. */
 /* Supplied declaration required: moveCameraCtrlCreateEntry. */
 /* Supplied declaration required: linkSlotSetFlag1C. */
 /* Supplied declaration required: linkSlotSetFlag20. */
@@ -306,7 +306,7 @@ void FUN_004b990c(int param_1)
       temp_v1 = *(char *)(param_1 + 0x1168);
     }
     if (temp_v8 && temp_v1 == '\0') {
-      FUN_003d54f8(1,10);
+      titleSetSlotValueState2(1,10);
     }
     *(int *)(param_1 + 0x2c) = *(int *)(param_1 + 0x2c) + 1;
     if (*(char *)(param_1 + 0x1214) != '\0') {

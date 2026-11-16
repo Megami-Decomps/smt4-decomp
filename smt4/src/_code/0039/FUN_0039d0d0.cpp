@@ -6,12 +6,12 @@ extern "C" {
 
 int pairCopy(int, float *);
 int effectSetByteSpeed(...);
-int FUN_002b0750(...);
+int uiDrawTableTextureSized(...);
 int drawSetColorFromRGBA8(...);
 int gxResetColorQuadToWhite(void);
 int renderCtxPopState(...);
 int renderStackPushIndexed(...);
-int FUN_002c0944(...);
+int gxSubmitDrawZeroExtraParams(...);
 int renderCtxSelectTexture(...);
 int renderCtxPackPassFlags(...);
 int VectorSignedToFloat(...);
@@ -35,12 +35,12 @@ extern signed char DAT_0049fd00; /* 0x49fd00 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: pairCopy. */
 /* Supplied declaration required: effectSetByteSpeed. */
-/* Supplied declaration required: FUN_002b0750. */
+/* Supplied declaration required: uiDrawTableTextureSized. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
-/* Supplied declaration required: FUN_002c0944. */
+/* Supplied declaration required: gxSubmitDrawZeroExtraParams. */
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: renderCtxPackPassFlags. */
 
@@ -79,7 +79,7 @@ void FUN_0039d0d0(int param_1)
           VectorSignedToFloat(*(unsigned int *)(temp_v2 + 0x61d0),(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorUnsignedToFloat(*(unsigned int *)(temp_v2 + 0x61d8),(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorUnsignedToFloat(*(unsigned int *)(temp_v2 + 0x61dc),(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_002c0944(0xf0808000);
+          gxSubmitDrawZeroExtraParams(0xf0808000);
         }
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < *(int *)(param_1 + 0x121b4));
@@ -99,7 +99,7 @@ void FUN_0039d0d0(int param_1)
                                            (unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v6 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v2 + 0x5ac8),
                                            (unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_002b0750(9,*(unsigned int *)(temp_v2 + 0x5a90),*(unsigned short *)(temp_v2 + 0x5ac6),
+        uiDrawTableTextureSized(9,*(unsigned int *)(temp_v2 + 0x5a90),*(unsigned short *)(temp_v2 + 0x5ac6),
                      (int)(temp_v6 + temp_v7),(int)(temp_v5 + temp_v8),*(unsigned int *)(temp_v2 + 0x5ad0)
                      ,*(unsigned int *)(temp_v2 + 0x5ad4),temp_v3 * 2 + 0xb);
       }
@@ -129,7 +129,7 @@ void FUN_0039d0d0(int param_1)
           if (*(int *)(temp_v2 + 0x61bc) == -1) {
             temp_v1 = 0x8080ff80;
           }
-          FUN_002c0944(temp_v1,temp_v1);
+          gxSubmitDrawZeroExtraParams(temp_v1,temp_v1);
         }
         else if ((int)*(short *)(temp_v2 + 0x61ba) == (int)*(char *)(param_1 + 0x60)) {
           VectorSignedToFloat(*(unsigned int *)(temp_v2 + 0x61d0),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -140,7 +140,7 @@ void FUN_0039d0d0(int param_1)
             temp_v1 = 0x8080ff40;
           }
           VectorUnsignedToFloat(*(unsigned int *)(temp_v2 + 0x61d8),(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_002c0944(temp_v1,temp_v1);
+          gxSubmitDrawZeroExtraParams(temp_v1,temp_v1);
         }
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < *(int *)(param_1 + 0x121b4));
@@ -160,7 +160,7 @@ void FUN_0039d0d0(int param_1)
                                            (unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v6 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v2 + 0xec0),
                                            (unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_002b0750(9,*(unsigned int *)(temp_v2 + 0xe88),*(unsigned short *)(temp_v2 + 0xebe),
+        uiDrawTableTextureSized(9,*(unsigned int *)(temp_v2 + 0xe88),*(unsigned short *)(temp_v2 + 0xebe),
                      (int)(temp_v6 + temp_v7),(int)(temp_v5 + temp_v8),*(unsigned int *)(temp_v2 + 0xec8),
                      *(unsigned int *)(temp_v2 + 0xecc),0xb);
       }

@@ -26,11 +26,11 @@ void sysFatalBreak(void);
 // Positions the file, transfers data, and releases a valid handle on failure.
 nn::Result FUN_00341824(FileView* file, u32 offset, void* buffer, u32 size)
 {
-    FUN_0013ebd8(file->vtable->unk18(file, offset));
+    processResultSetValue(file->vtable->unk18(file, offset));
 
     u32 transferred;
     nn::Result result = file->vtable->unk34(file, &transferred, buffer, size, 1);
-    FUN_0013ebd8(result);
+    processResultSetValue(result);
 
     if (!nnResultIsSuccess(result)) {
         if ((file->unk08 & ~1U) != 0) {

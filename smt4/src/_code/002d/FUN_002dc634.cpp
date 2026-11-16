@@ -28,7 +28,7 @@ extern "C" {
 s32 idIsAbove400(u32 id);
 PassiveSkillRecord *passiveSkillLookupRecord(u32 id);
 UnitRecord *gameGetUnitRecord(s32 unit);
-s32 FUN_00257568(SkillSortKey *first, SkillSortKey *second);
+s32 itemSortCompareRankThenKey(SkillSortKey *first, SkillSortKey *second);
 
 /* Orders skills by ascending sort key, then by their unit's key, then by the final tie-break. */
 static __inline s32 skillSortCompare(SkillSortKey &a, SkillSortKey &b)
@@ -65,7 +65,7 @@ static __inline s32 skillSortCompare(SkillSortKey &a, SkillSortKey &b)
     if (difference != 0) {
         return difference;
     }
-    return FUN_00257568(&a, &b);
+    return itemSortCompareRankThenKey(&a, &b);
 }
 
 /* Compares two skills for sorting: by their sort keys, then by their unit's key, then by the final tie-break. */

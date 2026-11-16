@@ -14,7 +14,7 @@ int messageSetMode(...);
 int dialogOpen(...);
 int dialogClose(int);
 int scrScriptProcessStartEntry(...);
-int FUN_002bf4f4(...);
+int buttonHelpSetPanelState(...);
 int moveCameraCtrlCreateEntry(unsigned int, unsigned char *, int);
 int linkSlotSetFlag1C(unsigned int, int);
 void FUN_0040738c(unsigned int owner, float frame);
@@ -41,7 +41,7 @@ extern int DAT_0058800c; /* 0x58800c */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: infoWinSetText. */
-/* Supplied declaration required: FUN_002bf4f4. */
+/* Supplied declaration required: buttonHelpSetPanelState. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: moveCameraCtrlCreateEntry. */
 /* Supplied declaration required: linkSlotSetFlag1C. */
@@ -50,7 +50,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: listSelectItem. */
 /* Supplied declaration required: FUN_00407a80. */
 /* Supplied declaration required: FUN_004080bc. */
-extern int FUN_004186e0(void);
+extern int rosterGetLeaderId(void);
 /* Supplied declaration required: FUN_004b726c. */
 /* Supplied declaration required: FUN_004b7d88. */
 extern int menu4CGetEntry(int, int);
@@ -101,7 +101,7 @@ void FUN_004b7e20(int param_1)
             else {
               messageSetMode(1);
               if ((*(char *)(*(int *)(param_1 + 0x111c) + 0x7c) != '\0') &&
-                 (temp_v2 = FUN_004186e0(), temp_v2 != 0)) {
+                 (temp_v2 = rosterGetLeaderId(), temp_v2 != 0)) {
                 scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x1158),0x3b);
                 if (*(char *)(param_1 + 0xa88) == '\0') {
                   *(unsigned char *)(param_1 + 0xa88) = 1;
@@ -196,7 +196,7 @@ void FUN_004b7e20(int param_1)
       menu4CReset(param_1 + 0x9c);
       *(unsigned char *)(param_1 + 0xa88) = 0;
       DAT_0058800c = 0;
-      FUN_002bf4f4(1);
+      buttonHelpSetPanelState(1);
       dialogOpen(0);
       infoWinSetText(reinterpret_cast<const char *>(*(unsigned int *)(param_1 + 0x113c)), *(unsigned char *)(*(int *)(param_1 + 0x1118) + 0x3f));
       return;

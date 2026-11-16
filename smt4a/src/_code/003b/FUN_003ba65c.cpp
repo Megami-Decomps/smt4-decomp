@@ -28,7 +28,7 @@ extern s32 DAT_0057f6b8;      /* progress through the sequence */
 s32 slotIsActive(u32 button);
 s32 padButtonRepeat(u32 button);
 s32 padButtonIsPressed(u32 button);
-void FUN_00317af8(f32 *angle, u8 buffer[16], s32 flag);
+void padGetNormalizedAnalogStick(f32 *angle, u8 buffer[16], s32 flag);
 void __hardfp_atan2f(void);
 void sysPlayVoice(u32 voice);
 
@@ -71,7 +71,7 @@ u8 FUN_003ba65c(void)
     if (DAT_0057f6b8 < SEQ_STICK_STEPS) {
         f32 angle;
         u8 buffer[16];
-        FUN_00317af8(&angle, buffer, 0);
+        padGetNormalizedAnalogStick(&angle, buffer, 0);
         __hardfp_atan2f();
         angle *= SEQ_RAD_TO_DEG;
         if (angle < 0.0f)

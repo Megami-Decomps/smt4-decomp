@@ -2,16 +2,16 @@
 
 extern "C" {
 
-extern InitialRequestState DAT_004e3cd4;
+extern InitialRequestState g_touchInput;
 
 /* Clears pending requests and installs the default request kind and size. */
 s32 FUN_0010a780(void)
 {
     for (s32 i = 0; i < 6; i++) {
-        DAT_004e3cd4.values[i] = 0;
+        g_touchInput.values[i] = 0;
     }
-    DAT_004e3cd4.first = 15;
-    DAT_004e3cd4.second = 4;
+    g_touchInput.first = 15;
+    g_touchInput.second = 4;
     return 1;
 }
 

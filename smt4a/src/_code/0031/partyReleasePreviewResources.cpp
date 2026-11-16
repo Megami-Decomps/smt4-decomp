@@ -4,7 +4,7 @@
 
 extern "C" {
 void asdMemFree(void *);
-void FUN_002cc220(void);
+void dataTableFree16(void);
 void statusBustUpPortraitRelease(s32, s32);
 PartyTextureSlot *partyGetSlot(u32);
 s32 partySlotIsOccupied(const PartyTextureSlot *);
@@ -19,7 +19,7 @@ void partyReleasePreviewResources(PartyResourceWork *work)
         asdMemFree(work->data);
         work->data = NULL;
     }
-    FUN_002cc220();
+    dataTableFree16();
     for (s32 i = 0; i < 4; ++i) {
         if (work->loadedTextures[i] != 0) {
             statusBustUpPortraitRelease((s16)work->loadedTextures[i], 1);

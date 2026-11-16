@@ -22,7 +22,7 @@ struct TextMeasureState {
 };
 
 extern "C" {
-u8 FUN_0019be8c(s32 code);
+u8 charCodeIsPrivateUseGlyph(s32 code);
 u32 sentinelLookupGetValue(u32 code);
 
 /* Skip control-code parameters to the requested line, then sum glyph advances. */
@@ -42,7 +42,7 @@ s32 textMeasureLineWidth(TextMeasureState *text, s32 line)
         } else {
             if (currentLine == line)
                 break;
-            if (FUN_0019be8c(code)) {
+            if (charCodeIsPrivateUseGlyph(code)) {
                 switch (code) {
                 case 0xf801:
                     ++currentLine;

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0050d2cc(void);
+int resourceManagerGetValueByIndex(void);
 
-/* Supplied declaration required: FUN_0050d2cc. */
+/* Supplied declaration required: resourceManagerGetValueByIndex. */
 
 
 void FUN_0051415c(int param_1,unsigned int param_2,unsigned int *param_3)
@@ -20,7 +20,7 @@ void FUN_0051415c(int param_1,unsigned int param_2,unsigned int *param_3)
     return;
   }
   temp_v0 = *(int *)(param_1 + 4);
-  FUN_0050d2cc();
+  resourceManagerGetValueByIndex();
   if (temp_v0 == 0) {
     return;
   }

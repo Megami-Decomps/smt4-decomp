@@ -11,7 +11,7 @@ extern void *g_handleRegistry;
 void mapTrapClearState();
 void *asdMemoryAllocTraced(u32 size, const char *source, s32 line);
 ModelList *modelListInit(ModelList *model);
-void FUN_0040aad4(ModelList *model, s32 index);
+void moriModelContentLoadBody(ModelList *model, s32 index);
 void handleRegistryRegisterObject(void *registry, ModelResourceItem *model);
 }
 
@@ -42,7 +42,7 @@ void FUN_00224498(s32 area, s32 map)
             first = modelListInit(first);
         display->models[0] = first;
         resourceOwnerLoadFileSync(first, "map/unit/u006.bam");
-        FUN_0040aad4(display->models[0], 0);
+        moriModelContentLoadBody(display->models[0], 0);
         ModelResourceItem *firstBody = reinterpret_cast<ModelResourceItem *>(display->models[0]->content.body);
         handleRegistryRegisterObject(g_handleRegistry, firstBody);
         enableTrapModel(firstBody);
@@ -53,7 +53,7 @@ void FUN_00224498(s32 area, s32 map)
             second = modelListInit(second);
         display->models[1] = second;
         resourceOwnerLoadFileSync(second, "map/unit/u061.bam");
-        FUN_0040aad4(display->models[1], 0);
+        moriModelContentLoadBody(display->models[1], 0);
         ModelResourceItem *secondBody = reinterpret_cast<ModelResourceItem *>(display->models[1]->content.body);
         handleRegistryRegisterObject(g_handleRegistry, secondBody);
         enableTrapModel(secondBody);
@@ -67,7 +67,7 @@ void FUN_00224498(s32 area, s32 map)
             extra = modelListInit(extra);
         display->models[2] = extra;
         resourceOwnerLoadFileSync(extra, "map/unit/u097.bam");
-        FUN_0040aad4(display->models[2], 0);
+        moriModelContentLoadBody(display->models[2], 0);
         ModelResourceItem *extraBody = reinterpret_cast<ModelResourceItem *>(display->models[2]->content.body);
         handleRegistryRegisterObject(g_handleRegistry, extraBody);
         enableTrapModel(extraBody);

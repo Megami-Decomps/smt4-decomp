@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002bad74(unsigned int, int);
+int soundRequestQueueFlush(unsigned int, int);
 int nn_os_LightEvent_Wait(int);
 int _ZN9Obj421aa44initEv(int *);
 int FUN_0037c294(int *);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002bad74. */
-extern unsigned int FUN_002baed8(void);
+/* Supplied declaration required: soundRequestQueueFlush. */
+extern unsigned int soundRequestQueueGetInstance(void);
 /* Supplied declaration required: nn_os_LightEvent_Wait. */
 /* Supplied declaration required: _ZN9Obj421aa44initEv. */
 /* Supplied declaration required: FUN_0037c294. */
@@ -28,10 +28,10 @@ void FUN_00379d54(int *param_1)
   int temp_v3;
   
   temp_v1 = (**(romwright_code **)(*param_1 + 0x20))(param_1);
-  temp_v2 = FUN_002baed8();
+  temp_v2 = soundRequestQueueGetInstance();
   temp_v0 = nn_os_LightEvent_TryWait(temp_v1 + 4);
   if (!temp_v0) {
-    FUN_002bad74(temp_v2,1);
+    soundRequestQueueFlush(temp_v2,1);
     nn_os_LightEvent_Wait(temp_v1 + 4);
   }
   _ZN9Obj421aa44initEv(param_1);

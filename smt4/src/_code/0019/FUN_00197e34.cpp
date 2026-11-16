@@ -56,7 +56,7 @@ extern int idIsAtLeast350(unsigned int);
 /* Supplied declaration required: questIsCompleted. */
 extern int FUN_00298e40(unsigned int, int, unsigned char **);
 /* Supplied declaration required: drawSkillCategoryLabel. */
-extern int FUN_0029efa8(int);
+extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(int);
 extern int gameGetFlagBlock(void);
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
@@ -138,7 +138,7 @@ void FUN_00197e34(void)
     temp_v11 = temp_v3 + 0x78a;
   }
   temp_v6 = resourceRunOperationIfUnblocked(temp_v13);
-  temp_v13 = FUN_0029efa8(temp_v13);
+  temp_v13 = listCursorGetRowIfUnblocked(temp_v13);
   temp_v1 = *(unsigned short *)(temp_v11 + (temp_v13 + temp_v6) * 2);
   if (*(char *)(temp_v28[0] + 0xf2) != '\0') {
     temp_v1 = *(unsigned short *)(temp_v3 + 0x97e);
@@ -338,7 +338,7 @@ LAB_00198518:
   else if (*(char *)(temp_v7 + 6) != '\0') {
     temp_v8 = questIsOfferable(temp_v25);
     if (temp_v8 != 0) {
-      temp_v12 = FUN_002903f0();
+      temp_v12 = rosterGetLeaderId();
       if (temp_v12 == temp_v25) {
         if (*(int *)(temp_v3 + 4) != 0xc) {
           texDrawTableEntryAtStoredOrigin(2,0x29,0x2a,temp_v11,temp_v13,0x68);

@@ -11,9 +11,9 @@ int uiQuestCountDetailPages(...);
 int FUN_002900d0(void);
 int FUN_0029016c(...);
 int FUN_002902a0(...);
-int FUN_002903f0(void);
+int rosterGetLeaderId(void);
 int useCounterRelease(void);
-int FUN_0029efa8(...);
+int listCursorGetRowIfUnblocked(...);
 int resourceRunOperationIfUnblocked(...);
 int dataTable1bOr1cGetRecord(void);
 int eventQueueAddUniqueIfValid(...);
@@ -35,7 +35,7 @@ int buttonHelpGetMode(void);
 int asdMemFreeSlot(unsigned int);
 int ifTouchRegionAddRequested(int, int);
 int buttonHelpSetPreset(...);
-int FUN_002b8ee0(...);
+int uiSlidingSpriteAdvance(...);
 int timerStart(...);
 int uiSpriteAdvanceAnimation(...);
 int asdMemFree(...);
@@ -55,11 +55,11 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: uiQuestCountDetailPages. */
 /* Supplied declaration required: FUN_002900d0. */
 /* Supplied declaration required: FUN_0029016c. */
-extern int FUN_0029022c(void);
+extern int rosterHasLeader(void);
 extern unsigned char FUN_00290248(unsigned short);
 /* Supplied declaration required: FUN_002902a0. */
 extern int gameJumpRequestIsPending(void);
-/* Supplied declaration required: FUN_002903f0. */
+/* Supplied declaration required: rosterGetLeaderId. */
 /* Supplied declaration required: FUN_00290404. */
 /* Supplied declaration required: FUN_002905d0. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -69,14 +69,14 @@ extern int useCounterGetCurrentValue(void);
 /* Supplied declaration required: useCounterRelease. */
 extern int useCounterIsFinished(void);
 extern int FUN_0029ee54(int);
-/* Supplied declaration required: FUN_0029efa8. */
+/* Supplied declaration required: listCursorGetRowIfUnblocked. */
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: buttonHelpGetMode. */
 /* Supplied declaration required: asdMemFreeSlot. */
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 /* Supplied declaration required: ifTouchRegionAddRequested. */
 /* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: FUN_002b8ee0. */
+/* Supplied declaration required: uiSlidingSpriteAdvance. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
@@ -128,7 +128,7 @@ unsigned int FUN_001956c4(void)
     *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
     return 0;
   case 1:
-    temp_v6 = FUN_002b8ee0(temp_v1 + 0x34,0);
+    temp_v6 = uiSlidingSpriteAdvance(temp_v1 + 0x34,0);
     temp_v5 = g_uiQuest;
     if (temp_v6 == 0) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
@@ -285,10 +285,10 @@ unsigned int FUN_001956c4(void)
     return 0;
   case 4:
     if (*(short *)(temp_v1 + 0x228) != 0) {
-      temp_v11 = FUN_002b8ee0(temp_v1 + 0x1d8,1);
+      temp_v11 = uiSlidingSpriteAdvance(temp_v1 + 0x1d8,1);
     }
     else {
-      temp_v11 = FUN_002b8ee0(temp_v1 + 0x1d8,0);
+      temp_v11 = uiSlidingSpriteAdvance(temp_v1 + 0x1d8,0);
     }
     if (temp_v11 == 0) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
@@ -392,7 +392,7 @@ unsigned int FUN_001956c4(void)
       return 0;
     }
     temp_v11 = resourceRunOperationIfUnblocked(temp_v1 + 0x660);
-    temp_v5 = FUN_0029efa8(temp_v1 + 0x660);
+    temp_v5 = listCursorGetRowIfUnblocked(temp_v1 + 0x660);
     temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + (temp_v5 + temp_v11) * 2 + 0x78a);
     temp_v11 = messageMainGetChoiceResult();
     if (temp_v11 != 0) {
@@ -436,7 +436,7 @@ unsigned int FUN_001956c4(void)
       return 0;
     }
     resourceRunOperationIfUnblocked(temp_v1 + 0x660);
-    FUN_0029efa8(temp_v1 + 0x660);
+    listCursorGetRowIfUnblocked(temp_v1 + 0x660);
     temp_v11 = messageMainGetChoiceResult();
     if (temp_v11 != 0) {
       FUN_00290404();
@@ -444,12 +444,12 @@ unsigned int FUN_001956c4(void)
       temp_v7 = 2;
       break;
     }
-    temp_v11 = FUN_002903f0();
+    temp_v11 = rosterGetLeaderId();
     dataTable1bOr1cGetRecord();
     if ((*(char *)(temp_v11 + 6) != '\t') || (temp_v11 = gameJumpRequestIsPending(), temp_v11 == 0)) {
-      temp_v3 = FUN_002903f0();
+      temp_v3 = rosterGetLeaderId();
       *(unsigned short *)(temp_v1 + 0x980) = temp_v3;
-      temp_v7 = FUN_002903f0();
+      temp_v7 = rosterGetLeaderId();
       FUN_002902a0(temp_v7,0);
       *(unsigned char *)(temp_v1 + 0x5f3) = 1;
       temp_v2 = FUN_00290248(*(unsigned short *)(temp_v1 + 0x980));
@@ -471,7 +471,7 @@ unsigned int FUN_001956c4(void)
       return 0;
     }
     resourceRunOperationIfUnblocked(temp_v1 + 0x660);
-    FUN_0029efa8(temp_v1 + 0x660);
+    listCursorGetRowIfUnblocked(temp_v1 + 0x660);
     temp_v11 = messageMainGetChoiceResult();
     if (temp_v11 != 0) {
       FUN_00290404();
@@ -479,12 +479,12 @@ unsigned int FUN_001956c4(void)
       temp_v7 = 2;
       break;
     }
-    temp_v11 = FUN_002903f0();
+    temp_v11 = rosterGetLeaderId();
     dataTable1bOr1cGetRecord();
     if ((*(char *)(temp_v11 + 6) != '\t') || (temp_v11 = gameJumpRequestIsPending(), temp_v11 == 0)) {
-      temp_v3 = FUN_002903f0();
+      temp_v3 = rosterGetLeaderId();
       *(unsigned short *)(temp_v1 + 0x980) = temp_v3;
-      temp_v7 = FUN_002903f0();
+      temp_v7 = rosterGetLeaderId();
       FUN_002902a0(temp_v7,0);
       *(unsigned char *)(temp_v1 + 0x5f3) = 1;
       temp_v2 = FUN_00290248(*(unsigned short *)(temp_v1 + 0x980));
@@ -507,12 +507,12 @@ unsigned int FUN_001956c4(void)
       return 0;
     }
     resourceRunOperationIfUnblocked(temp_v1 + 0x660);
-    FUN_0029efa8(temp_v1 + 0x660);
+    listCursorGetRowIfUnblocked(temp_v1 + 0x660);
     temp_v11 = messageMainGetChoiceResult();
     if (temp_v11 == 0) {
-      temp_v3 = FUN_002903f0();
+      temp_v3 = rosterGetLeaderId();
       *(unsigned short *)(temp_v1 + 0x980) = temp_v3;
-      temp_v7 = FUN_002903f0();
+      temp_v7 = rosterGetLeaderId();
       FUN_002902a0(temp_v7,0);
       temp_v2 = 1;
       *(unsigned char *)(temp_v1 + 0x5f3) = 1;
@@ -548,7 +548,7 @@ unsigned int FUN_001956c4(void)
       break;
     }
     buttonHelpSetPreset(0xe2);
-    temp_v11 = FUN_0029022c();
+    temp_v11 = rosterHasLeader();
     if (temp_v11 != 0) {
       temp_v11 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x5b4),2);
       if (temp_v11 == 0) {
@@ -578,7 +578,7 @@ unsigned int FUN_001956c4(void)
       FUN_00290404();
       FUN_002905d0();
       temp_v11 = resourceRunOperationIfUnblocked(temp_v1 + 0x660);
-      temp_v5 = FUN_0029efa8(temp_v1 + 0x660);
+      temp_v5 = listCursorGetRowIfUnblocked(temp_v1 + 0x660);
       temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + (temp_v5 + temp_v11) * 2 + 0x78a);
       dataTable1bOr1cGetRecord();
       if (*(char *)(temp_v4 + 6) == '\x06') {
@@ -612,7 +612,7 @@ unsigned int FUN_001956c4(void)
       return 0;
     }
     resourceRunOperationIfUnblocked(temp_v1 + 0x660);
-    FUN_0029efa8(temp_v1 + 0x660);
+    listCursorGetRowIfUnblocked(temp_v1 + 0x660);
     temp_v11 = messageMainGetChoiceResult();
     if (temp_v11 == 0) {
       uiQuestStartSelected();
@@ -639,7 +639,7 @@ joined_r0x0019627c:
       return 0;
     }
     resourceRunOperationIfUnblocked(temp_v1 + 0x660);
-    FUN_0029efa8(temp_v1 + 0x660);
+    listCursorGetRowIfUnblocked(temp_v1 + 0x660);
     temp_v11 = messageMainGetChoiceResult();
     if (temp_v11 == 0) {
       uiQuestStartSelected();
@@ -660,12 +660,12 @@ joined_r0x0019627c:
       return 0;
     }
     resourceRunOperationIfUnblocked(temp_v1 + 0x660);
-    FUN_0029efa8(temp_v1 + 0x660);
+    listCursorGetRowIfUnblocked(temp_v1 + 0x660);
     temp_v11 = messageMainGetChoiceResult();
     if (temp_v11 == 0) {
-      temp_v3 = FUN_002903f0();
+      temp_v3 = rosterGetLeaderId();
       *(unsigned short *)(temp_v1 + 0x980) = temp_v3;
-      temp_v7 = FUN_002903f0();
+      temp_v7 = rosterGetLeaderId();
       FUN_002902a0(temp_v7,0);
       *(unsigned char *)(temp_v1 + 0x5f3) = 1;
       *(unsigned char *)(temp_v1 + 0x5f5) = 1;
@@ -681,7 +681,7 @@ joined_r0x0019627c:
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
-    FUN_002b8ee0(temp_v1 + 0x34,1);
+    uiSlidingSpriteAdvance(temp_v1 + 0x34,1);
     uiSpriteAdvanceAnimation(temp_v1 + 0x2f0);
     if ((*(char *)(temp_v1 + 0x37a) == '\0') ||
        (temp_v11 = *(int *)(temp_v1 + 0x5e8) + 1, *(int *)(temp_v1 + 0x5e8) = temp_v11, temp_v11 < 2)) {
@@ -767,9 +767,9 @@ joined_r0x0019627c:
     break;
   case 0x14:
     if (*(char *)(temp_v1 + 0x5f0) != '\0') {
-      FUN_002b8ee0(temp_v1 + 0x34,0);
+      uiSlidingSpriteAdvance(temp_v1 + 0x34,0);
     }
-    FUN_002b8ee0(temp_v1 + 0x408,0);
+    uiSlidingSpriteAdvance(temp_v1 + 0x408,0);
     temp_v12 = *(char *)(temp_v1 + 0x492) != '\0';
     temp_v11 = 0;
     temp_v5 = 0;
@@ -802,7 +802,7 @@ joined_r0x0019627c:
           temp_v5 = temp_v1 + 0x78a;
         }
         temp_v6 = resourceRunOperationIfUnblocked(temp_v11);
-        temp_v11 = FUN_0029efa8(temp_v11);
+        temp_v11 = listCursorGetRowIfUnblocked(temp_v11);
         temp_v3 = *(unsigned short *)(temp_v5 + (temp_v11 + temp_v6) * 2);
         if (*(char *)(temp_v1 + 0x5f2) != '\0') {
           temp_v3 = *(unsigned short *)(temp_v1 + 0x97e);
@@ -853,7 +853,7 @@ joined_r0x0019627c:
       FUN_00290404();
       if (*(char *)(temp_v1 + 0x5f6) != '\0') {
         temp_v11 = resourceRunOperationIfUnblocked(temp_v1 + 0x660);
-        temp_v5 = FUN_0029efa8(temp_v1 + 0x660);
+        temp_v5 = listCursorGetRowIfUnblocked(temp_v1 + 0x660);
         temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + (temp_v5 + temp_v11) * 2 + 0x78a);
         dataTable1bOr1cGetRecord();
         if (*(char *)(temp_v4 + 6) != '\x06') {
@@ -907,7 +907,7 @@ joined_r0x0019627c:
     temp_v7 = 0;
     break;
   case 0x17:
-    temp_v11 = FUN_002b8ee0(temp_v1 + 0x34,0);
+    temp_v11 = uiSlidingSpriteAdvance(temp_v1 + 0x34,0);
     temp_v12 = temp_v11 == 0;
     temp_v11 = 0;
     temp_v5 = 0;
@@ -936,7 +936,7 @@ joined_r0x0019627c:
     temp_v7 = 0x18;
     break;
   case 0x18:
-    temp_v11 = FUN_002b8ee0(temp_v1 + 0x494,0);
+    temp_v11 = uiSlidingSpriteAdvance(temp_v1 + 0x494,0);
     if ((temp_v11 == 0) || (temp_v11 = uiSpriteAdvanceAnimation(temp_v1 + 0x520), temp_v11 == 0)) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -1108,7 +1108,7 @@ joined_r0x0019627c:
           temp_v5 = temp_v1 + 0x78a;
         }
         temp_v6 = resourceRunOperationIfUnblocked(temp_v11);
-        temp_v11 = FUN_0029efa8(temp_v11);
+        temp_v11 = listCursorGetRowIfUnblocked(temp_v11);
         temp_v3 = *(unsigned short *)(temp_v5 + (temp_v11 + temp_v6) * 2);
         if (*(int *)(temp_v1 + 0x5e0) != 0) {
           if (*(char *)(temp_v1 + 0x5f7) == '\0') {

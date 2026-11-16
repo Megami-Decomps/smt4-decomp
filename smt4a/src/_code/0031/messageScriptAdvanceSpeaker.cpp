@@ -15,8 +15,8 @@ s32 dataTableValueOrZero(u32 index);
 void FUN_003dea6c(u16 id, s32 mode, s32 enabled);
 void messageSetScriptDisplayMode(void);
 s32 messageForwardDefaultMode(s32 message, s32 mode, s32 frame, s32 flags, s32 unused);
-s32 FUN_004186a4(void);
-u32 FUN_004186e0(void);
+s32 rosterHasLeader(void);
+u32 rosterGetLeaderId(void);
 MessageSpeaker *dataTable1bOr1cGetRecord(u32 id);
 void optionsSetFlag1(void);
 
@@ -37,8 +37,8 @@ u32 messageScriptAdvanceSpeaker(void)
         scrWorkSetValue(1, scrWorkGetValue(1) + 1);
         if (result == 1) {
             scrWorkSetValue(1, 0);
-            if (FUN_004186a4()) {
-                MessageSpeaker *previous = dataTable1bOr1cGetRecord(FUN_004186e0());
+            if (rosterHasLeader()) {
+                MessageSpeaker *previous = dataTable1bOr1cGetRecord(rosterGetLeaderId());
                 MessageSpeaker *current = dataTable1bOr1cGetRecord(speakerId);
                 if (previous && current &&
                     ((previous->kind != 5 && previous->kind != 4 && previous->kind != 1) ||

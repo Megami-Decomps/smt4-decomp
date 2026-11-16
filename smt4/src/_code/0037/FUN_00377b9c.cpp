@@ -56,7 +56,7 @@ extern int FUN_0014d3fc(unsigned int, unsigned int, unsigned char *);
 extern int FUN_0014d478(unsigned int, unsigned int, unsigned char *);
 extern int FUN_0014d530(unsigned int, unsigned int, unsigned int *);
 /* Supplied declaration required: basicSoundStopOrFadeOut. */
-extern int FUN_002bf684(void);
+extern int nw_snd_SoundArchive_IsAvailable(void);
 /* Supplied declaration required: FUN_00377a10. */
 /* Supplied declaration required: FUN_003784a4. */
 /* Supplied declaration required: FUN_00378698. */
@@ -128,7 +128,7 @@ unsigned int FUN_00377b9c(unsigned int param_1,int *param_2,unsigned int param_3
   
   if ((*(int *)(param_1 + 4) == 0) ||
      (uStack_34 = param_1, temp_v31 = param_2, temp_v32 = param_3, temp_v33 = param_4,
-     temp_v1 = FUN_002bf684(), temp_v1 == 0)) {
+     temp_v1 = nw_snd_SoundArchive_IsAvailable(), temp_v1 == 0)) {
     return 0xb;
   }
   if (*temp_v31 != 0) {

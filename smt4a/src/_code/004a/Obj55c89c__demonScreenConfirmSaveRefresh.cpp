@@ -77,7 +77,7 @@ void gameDataStoreSavedRecord(u16, SavedDemon *);
 void FUN_004a1958(DemonScreen *);
 u32 buttonHelpGetValue();
 void sysPlaySe(u32);
-void FUN_003343f0(u32);
+void gameGlobalsSetMenuOpenFlag(u32);
 void screen4AEnter(DemonScreen *);
 void uniteCreatePreviewModel();
 
@@ -119,7 +119,7 @@ extern "C" void _ZN9Obj55c89c29demonScreenConfirmSaveRefreshEv(DemonScreen *scre
         FUN_004a1958(screen);
     }
     sysPlaySe(buttonHelpGetValue());
-    FUN_003343f0(0);
+    gameGlobalsSetMenuOpenFlag(0);
     if (screen->list.count <= 0) {
         screen4AEnter(screen);
         uniteCreatePreviewModel();

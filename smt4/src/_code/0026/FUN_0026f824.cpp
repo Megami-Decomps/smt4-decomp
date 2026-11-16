@@ -22,7 +22,7 @@ InitialPlayerSlotsView *gameGetSlotTable(void);
 PlayerInitialRecordIV *gameGetPlayerData(void);
 void FUN_00295a18(u32 item, u32 count);
 void FUN_003c1ef4(u32 mode);
-void FUN_00299370(u32 slot);
+void playerRecalcStatsFromEquipment(u32 slot);
 void FUN_001dd930(void);
 char *gameDataGetPlayerName(void);
 void textFormatBuffer(char *destination, const char *format, ...);
@@ -63,7 +63,7 @@ void FUN_0026f824(s32 mode)
         player->equipment[4] = equipment.ids[4];
         player->equipment[5] = equipment.ids[5];
         player->equipment[6] = equipment.ids[6];
-        FUN_00299370(0);
+        playerRecalcStatsFromEquipment(0);
         player->hp = player->maximumHp;
         player->mp = player->maximumMp;
         FUN_001dd930();

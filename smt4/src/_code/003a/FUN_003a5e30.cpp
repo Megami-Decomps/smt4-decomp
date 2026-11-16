@@ -55,7 +55,7 @@ void shopLoadMessageBankAndSound(SelectionScene *scene);
 void FUN_003a45fc(void);
 void placeWinCreate(void);
 void FUN_00282bfc(s32 channel, s32 value);
-void FUN_002a03d8(s32 a, s32 b);
+void titleSetSlotValueState2(s32 a, s32 b);
 s16 *statisticsGetCounter(u8 kind, u32 sub);
 void uiInitializeEightTimerSet(void *timers);
 void rectangleInitializeSelection(SelectionRectangle *rectangle, s32 width, s32 a, s32 b);
@@ -118,8 +118,8 @@ SelectionScene *FUN_003a5e30(SelectionScene *scene, u32 mode, s32 kind, s32 subK
         scene->buttonSprite = 0x83;
         FUN_003a45fc();
         scene->shown = 1;
-        FUN_002a03d8(0, 1);
-        FUN_002a03d8(1, 0);
+        titleSetSlotValueState2(0, 1);
+        titleSetSlotValueState2(1, 0);
         return scene;
     }
     scene->buttonSprite = 0x1F;

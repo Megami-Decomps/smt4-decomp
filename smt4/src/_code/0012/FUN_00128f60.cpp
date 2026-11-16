@@ -13,7 +13,7 @@ void FUN_00128f60(void)
   unsigned char *puStack_24;
   unsigned int uStack_20;
   
-  if ((DAT_0044e7c0 & DAT_0044e7c1) != 0) {
+  if ((g_sndSystemState & DAT_0044e7c1) != 0) {
     DAT_0044e7c3 = 1;
     DAT_0044e7c1 = 0;
     DAT_0044e7c2 = 0;

@@ -5,7 +5,7 @@ extern "C" {
 
 extern RenderCtx *g_titleScene;
 extern QuadVectorState DAT_004d4680;
-void FUN_002b76d0(const QuadVector *first, const QuadVector *second, const QuadVector *third,
+void gfxDrawQuadFourColors(const QuadVector *first, const QuadVector *second, const QuadVector *third,
                   const QuadVector *fourth, f32 x, f32 y, f32 width, f32 height, f32 depth);
 
 /* Draws a screen rectangle with the shared corner colors when they were set (the default color
@@ -24,7 +24,7 @@ void screenDrawShadedRect(s32 x, s32 y, s32 width, s32 height, s32 fade)
         fourth = &DAT_004d4680.corners[3];
     }
     renderCtxSelectTexture(g_titleScene, 0);
-    FUN_002b76d0(first, second, third, fourth, (f32)x, (f32)y, (f32)width, (f32)height,
+    gfxDrawQuadFourColors(first, second, third, fourth, (f32)x, (f32)y, (f32)width, (f32)height,
                  (f32)(0x100 - fade) / 256.0f);
 }
 

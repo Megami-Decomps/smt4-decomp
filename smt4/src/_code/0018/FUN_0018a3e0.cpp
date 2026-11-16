@@ -79,7 +79,7 @@ extern int FUN_0029e02c(void);
 extern unsigned int objectPartRunUnlessLocked(int);
 extern int FUN_0029ee54(int);
 /* Supplied declaration required: buttonHelpSetText. */
-extern int FUN_0029efa8(int);
+extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
@@ -119,7 +119,7 @@ void FUN_0018a3e0(void)
   }
   else {
     temp_v3 = resourceRunOperationIfUnblocked(g_camp + 0x1dc);
-    temp_v4 = FUN_0029efa8(temp_v6 + 0x1dc);
+    temp_v4 = listCursorGetRowIfUnblocked(temp_v6 + 0x1dc);
     temp_v3 = temp_v6 + (temp_v4 + temp_v3) * 8;
     temp_v5 = *(unsigned int *)(temp_v3 + 0xe3c);
     if (*(int *)(temp_v3 + 0xe40) < 0) {
@@ -161,7 +161,7 @@ void FUN_0018a3e0(void)
   }
   campUpdateCategoryHighlightColors();
   temp_v3 = resourceRunOperationIfUnblocked(temp_v6 + 0x1dc);
-  temp_v4 = FUN_0029efa8(temp_v6 + 0x1dc);
+  temp_v4 = listCursorGetRowIfUnblocked(temp_v6 + 0x1dc);
   temp_v3 = temp_v3 + temp_v4;
   temp_v7 = 0;
   if ((*(char *)(temp_v6 + 0x23d) != '\0') || (*(char *)(temp_v6 + 0x23c) != '\0')) {
@@ -237,7 +237,7 @@ void FUN_0018a3e0(void)
     FUN_00299900();
     temp_v6 = g_camp;
     temp_v3 = resourceRunOperationIfUnblocked(g_camp + 0x1dc);
-    temp_v4 = FUN_0029efa8(temp_v6 + 0x1dc);
+    temp_v4 = listCursorGetRowIfUnblocked(temp_v6 + 0x1dc);
     temp_v6 = temp_v6 + (temp_v4 + temp_v3) * 8;
     temp_v3 = *(int *)(temp_v6 + 0xe40);
     if (temp_v3 < 0) {
@@ -257,7 +257,7 @@ void FUN_0018a3e0(void)
     FUN_00299900();
     temp_v6 = g_camp;
     temp_v3 = resourceRunOperationIfUnblocked(g_camp + 0x1dc);
-    temp_v4 = FUN_0029efa8(temp_v6 + 0x1dc);
+    temp_v4 = listCursorGetRowIfUnblocked(temp_v6 + 0x1dc);
     temp_v6 = temp_v6 + (temp_v4 + temp_v3) * 8;
     temp_v3 = *(int *)(temp_v6 + 0xe40);
     if (temp_v3 < 0) {

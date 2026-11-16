@@ -24,7 +24,7 @@ typedef struct {
     unsigned int sp88; /* 0x88: local_88 */
 } param_3_stack;
 
-extern unsigned char DAT_0055af54; /* 0x55af54 */
+extern unsigned char g_strVtable; /* 0x55af54 */
 
 /* Supplied declaration required: strAssign. */
 /* Supplied declaration required: streamReaderReadU32. */
@@ -66,7 +66,7 @@ void FUN_0010d6d4(unsigned int *param_1,int param_2,int *param_3)
   }
   else {
     puVar1 = (unsigned int *)_ZN9Obj5593b8C1Ev(temp_v9,param_3[1],param_3 + 2);
-    *puVar1 = (unsigned int)&DAT_0055af54;
+    *puVar1 = (unsigned int)&g_strVtable;
     _ZN9Obj55af4c4initEjh(puVar1,temp_v2,0);
     strAssign(temp_v9,*param_3,param_3[1] - *param_3,0xffffffff);
     FUN_002f4e90(temp_v3,temp_v9);

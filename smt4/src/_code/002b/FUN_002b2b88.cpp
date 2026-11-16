@@ -8,7 +8,7 @@ extern "C" {
 int lightSetIntensity(...);
 int FUN_002aa18c(...);
 int renderCtxBindTextureMode(unsigned int, unsigned int, int);
-int FUN_002aea44(unsigned char [4]);
+int nwFontGlyphInit(unsigned char [4]);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
@@ -46,7 +46,7 @@ extern unsigned int *DAT_00464a74; /* 0x464a74 */
 /* Supplied declaration required: lightSetIntensity. */
 /* Supplied declaration required: FUN_002aa18c. */
 /* Supplied declaration required: renderCtxBindTextureMode. */
-/* Supplied declaration required: FUN_002aea44. */
+/* Supplied declaration required: nwFontGlyphInit. */
 /* Supplied declaration required: callbackBindingInitFromKind. */
 extern int __aeabi_uidivmod(unsigned int, int);
 
@@ -115,7 +115,7 @@ void FUN_002b2b88(unsigned int param_1,unsigned int *param_2,int param_3,int par
   temp_v32 = param_1;
   temp_v33 = param_1;
   temp_v34 = param_1;
-  FUN_002aea44(temp_v23);
+  nwFontGlyphInit(temp_v23);
   temp_v7 = (unsigned int)((unsigned long long)temp_v16 >> 0x20);
   piVar13 = *(int **)(temp_v6 + 8);
   temp_v2 = temp_v7;

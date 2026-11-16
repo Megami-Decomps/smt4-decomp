@@ -8,13 +8,13 @@ struct TitleConfigBytes {
 };
 
 extern "C" {
-extern TitleConfigBytes DAT_00588fc0;
+extern TitleConfigBytes g_titleConfigValues;
 
 void titleConfigSetDefaults(void)
 {
-    DAT_00588fc0.unk00 = 0x32;
-    DAT_00588fc0.unk01 = 0x50;
-    DAT_00588fc0.unk02 = 0x32;
-    DAT_00588fc0.unk03 = 0x30;
+    g_titleConfigValues.unk00 = 0x32;
+    g_titleConfigValues.unk01 = 0x50;
+    g_titleConfigValues.unk02 = 0x32;
+    g_titleConfigValues.unk03 = 0x30;
 }
 }

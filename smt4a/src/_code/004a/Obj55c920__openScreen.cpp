@@ -26,7 +26,7 @@ void FUN_002c7e6c(void);
 void FUN_002c85b0(s32 arg);
 void FUN_002c8538(s32 arg);
 void FUN_00215bd0(void);
-void FUN_003343f0(s32 arg);
+void gameGlobalsSetMenuOpenFlag(s32 arg);
 s32 FUN_002e2afc(void);
 void objBInitBlock12DC(void);
 void asdLoadFileAsyncSimple(const char *path, void **dst, s32 flags);
@@ -59,7 +59,7 @@ void Obj55c920::openScreen()
     FUN_002c85b0(2);
     FUN_002c8538(1);
     FUN_00215bd0();
-    FUN_003343f0(1);
+    gameGlobalsSetMenuOpenFlag(1);
     if (screen->unk95 == 0 && FUN_002e2afc() != 0x2f) {
         objBInitBlock12DC();
     }

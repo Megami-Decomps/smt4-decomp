@@ -15,14 +15,14 @@ struct NnDateTime {
 
 extern "C" {
 extern GameDataBlocksA g_gameDataBlocks;
-NnDateTime FUN_0030fc80(void);
+NnDateTime clockGetTicksAsMicroseconds(void);
 s32 nn_fnd_DateTime_GetDay(const NnDateTime *dateTime);
 s32 nn_fnd_DateTime_GetMonth(const NnDateTime *dateTime);
 s32 nn_fnd_DateTime_GetYear(const NnDateTime *dateTime);
 s32 nn_fnd_DateTime_DateToDays(s32 year, s32 month, s32 day);
 s32 FUN_005020c0(const NnDateTime *dateTime);
-s32 FUN_005021d8(const NnDateTime *dateTime);
-s32 FUN_00502244(const NnDateTime *dateTime);
+s32 dateTimeGetMinute(const NnDateTime *dateTime);
+s32 dateTimeGetSecond(const NnDateTime *dateTime);
 
 /* Seconds elapsed on the clock since the recorded start time (0 if the clock is behind it, -1
  * when no start time is recorded). */
@@ -35,15 +35,15 @@ s32 clockGetSecondsSinceStart(void)
     if (block->startSeconds == 0) {
         return -1;
     }
-    now = FUN_0030fc80();
+    now = clockGetTicksAsMicroseconds();
     seconds = nn_fnd_DateTime_DateToDays(nn_fnd_DateTime_GetYear(&now), nn_fnd_DateTime_GetMonth(&now),
                                          nn_fnd_DateTime_GetDay(&now));
     seconds *= 24;
     seconds += FUN_005020c0(&now);
     seconds *= 60;
-    seconds += FUN_005021d8(&now);
+    seconds += dateTimeGetMinute(&now);
     seconds *= 60;
-    seconds += FUN_00502244(&now);
+    seconds += dateTimeGetSecond(&now);
     block = (GameDataSmallBlock *)g_gameDataBlocks.smallBlock;
     if (seconds >= block->startSeconds) {
         return seconds - block->startSeconds;

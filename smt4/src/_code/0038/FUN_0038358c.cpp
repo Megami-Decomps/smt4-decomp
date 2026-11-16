@@ -17,7 +17,7 @@ typedef struct QuestRecord1b {
 void eventQueueAddUnique(u32 event);
 void FUN_00275dec(void);
 void frameTexApplyMode(s32 arg);
-u32 FUN_002903f0(void);
+u32 rosterGetLeaderId(void);
 void qcMainSetMode(s32 mode);
 QuestRecord1b *dataTable1bOr1cGetRecord(u32 id);
 void FUN_0026f960(u16 rewardId);
@@ -48,7 +48,7 @@ void FUN_0038358c(QuestClearScene *scene)
         }
         break;
     case 2: {
-        u32 quest = FUN_002903f0();
+        u32 quest = rosterGetLeaderId();
 
         if (quest != 0 && table1bOr1cGetRecordValue(quest) == 6) {
             qcMainSetMode(1);

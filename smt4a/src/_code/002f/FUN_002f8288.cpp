@@ -19,7 +19,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002c7bb0. */
 /* Supplied declaration required: FUN_003344b4. */
 extern int FUN_003df57c(unsigned short, unsigned int);
-extern int FUN_004bcbb4(unsigned int, unsigned short);
+extern int skillGetAdjustedCost(unsigned int, unsigned short);
 
 
 void FUN_002f8288(void)
@@ -45,7 +45,7 @@ void FUN_002f8288(void)
       if ((int)*(char *)(temp_v1 + temp_v4 + 0x1ca0) == (int)*(short *)(temp_v0 + 0x38)) {
         temp_v5 = temp_v0 + temp_v4 * 4;
         temp_v2 = gameGetSlotRecord(*(unsigned int *)(*(int *)(temp_v5 + 0xa14) + 0x34));
-        temp_v3 = FUN_004bcbb4(temp_v2,*(unsigned short *)(temp_v0 + 0x36));
+        temp_v3 = skillGetAdjustedCost(temp_v2,*(unsigned short *)(temp_v0 + 0x36));
         *(int *)(*(int *)(temp_v5 + 0xa14) + 0x44) = -temp_v3;
       }
       temp_v4 = temp_v4 + 1;
@@ -55,7 +55,7 @@ void FUN_002f8288(void)
       if (*(int *)(temp_v0 + temp_v4 * 8 + 0xa80) == (int)*(short *)(temp_v0 + 0x38)) {
         temp_v5 = temp_v0 + temp_v4 * 4;
         temp_v2 = gameGetSlotRecord(*(unsigned int *)(*(int *)(temp_v5 + 0xa20) + 0x34));
-        temp_v3 = FUN_004bcbb4(temp_v2,*(unsigned short *)(temp_v0 + 0x36));
+        temp_v3 = skillGetAdjustedCost(temp_v2,*(unsigned short *)(temp_v0 + 0x36));
         *(int *)(*(int *)(temp_v5 + 0xa20) + 0x44) = -temp_v3;
       }
       temp_v4 = temp_v4 + 1;

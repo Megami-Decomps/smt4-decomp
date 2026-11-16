@@ -8,11 +8,11 @@ int mobiclipPlayerReleaseHandle(u32 handle);
 int timedJobBeginStop(S4Player *player);
 
 extern u8 g_mobiclipCtrl;
-extern S4Player DAT_00617f40;
+extern S4Player g_mobiclipPlayer;
 
 void mobiclipCtrlClosePlayer(int reason)
 {
-    S4Player *player = &DAT_00617f40;
+    S4Player *player = &g_mobiclipPlayer;
 
     if (player->handle != 0) {
         mobiclipPlayerReleaseHandle(player->handle);

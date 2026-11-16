@@ -54,7 +54,7 @@ extern unsigned int *g_partyPanel; /* 0x43dcf0 */
 /* Supplied declaration required: FUN_0029e788. */
 /* Supplied declaration required: gameSetIconDisplayEnabled. */
 /* Supplied declaration required: gridNavigationConfigure. */
-extern int FUN_002a0d0c(void);
+extern int gameDataGetSortPreferences(void);
 /* Supplied declaration required: gameGetSlotTable. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: uiSpriteStateInitFromSource. */
@@ -91,7 +91,7 @@ void FUN_0028b7f8(int param_1)
   }
   puVar2 = g_partyPanel;
   memClear();
-  temp_v1 = FUN_002a0d0c();
+  temp_v1 = gameDataGetSortPreferences();
   *(unsigned char *)((int)puVar2 + 0x42) = *(unsigned char *)(temp_v1 + 0x40);
   asdProcessCreateSimple("TMD CALC",1,0,0,FUN_001c3fd4,&digitsNotifyNoop,0);
   *puVar2 = (unsigned int)puVar4;

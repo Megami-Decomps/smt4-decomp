@@ -5,7 +5,7 @@
 extern "C" {
 
 extern BgmChannelSelection g_titleConfigModeFlag;
-extern BgmRequestChannel DAT_004c53c4[2];
+extern BgmRequestChannel g_bgmRequestChannels[2];
 
 /* Requests track `id` on a channel: queued behind a fade when one is running, else started directly. */
 static __inline void bgmChannelRequest(BgmRequestChannel *channel, s32 id, u32 param, u32 frames)
@@ -33,13 +33,13 @@ void bgmPlay(s32 id, u32 param, u32 frames)
         return;
     }
     if (g_titleConfigModeFlag.selected == 0) {
-        selected = &DAT_004c53c4[0];
-        other = &DAT_004c53c4[1];
+        selected = &g_bgmRequestChannels[0];
+        other = &g_bgmRequestChannels[1];
     } else if (g_titleConfigModeFlag.selected == 1) {
-        selected = &DAT_004c53c4[1];
-        other = &DAT_004c53c4[0];
+        selected = &g_bgmRequestChannels[1];
+        other = &g_bgmRequestChannels[0];
     } else {
-        other = &DAT_004c53c4[1];
+        other = &g_bgmRequestChannels[1];
     }
     if (other->track.nextId != 0) {
         bgmChannelRequest(selected, id, param, frames);

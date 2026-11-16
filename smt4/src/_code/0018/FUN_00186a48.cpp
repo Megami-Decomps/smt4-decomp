@@ -6,7 +6,7 @@
 extern "C" {
 
 void drawSkillCategoryLabel(unsigned short, int, int, unsigned int);
-int FUN_002b0750(int, int, int, int, int, int, int, int);
+int uiDrawTableTextureSized(int, int, int, int, int, int, int, int);
 int effectRenderTransformedInstance(...);
 int renderCtxCalculateStereoParallax(...);
 int textDrawString(...);
@@ -31,7 +31,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: drawSkillCategoryLabel. */
-/* Supplied declaration required: FUN_002b0750. */
+/* Supplied declaration required: uiDrawTableTextureSized. */
 /* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern unsigned int FUN_002bcddc(unsigned short, unsigned int);
@@ -136,7 +136,7 @@ void FUN_00186a48(void)
     temp_v3 = temp_v3 + temp_v5 * 2;
   }
   temp_v5 = temp_v9 + (int)temp_v13;
-  FUN_002b0750(2,0x29,0x4e,temp_v5,temp_v8 + temp_v2,(int)**(short **)(temp_v7 + 0xc),temp_v3,0x97);
+  uiDrawTableTextureSized(2,0x29,0x4e,temp_v5,temp_v8 + temp_v2,(int)**(short **)(temp_v7 + 0xc),temp_v3,0x97);
   texDrawTableEntryAtStoredOrigin(2,0x29,0x4c,temp_v5,temp_v8 + temp_v2,0x9c);
   if (*(int *)(temp_v1 + 4) != 0x13) {
     if ((*(int *)(temp_v1 + 4) == 0x11) && (*(int *)(temp_v1 + 0x10) < 6)) {

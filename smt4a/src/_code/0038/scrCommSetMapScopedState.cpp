@@ -5,7 +5,7 @@ s32 scrGetArg(s32 index);
 void resourceTableReleaseHandles(void);
 s8 FUN_002b950c(void);
 void soundActorQueueStartPending(void);
-void FUN_00249ac4(s32 map, s32 section);
+void mapAmbientSoundActorsSpawn(s32 map, s32 section);
 extern s32 g_gameState[2];
 
 // Switch map-scoped state, creating it for the current map when absent.
@@ -15,7 +15,7 @@ u32 scrCommSetMapScopedState(void)
         if (FUN_002b950c() != 0) {
             soundActorQueueStartPending();
         } else {
-            FUN_00249ac4(g_gameState[0], g_gameState[1]);
+            mapAmbientSoundActorsSpawn(g_gameState[0], g_gameState[1]);
         }
     } else {
         resourceTableReleaseHandles();

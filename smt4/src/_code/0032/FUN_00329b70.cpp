@@ -35,13 +35,13 @@ int scrScriptProcessStartEntry(...);
 int asdMdlManagerCreateLoaded(...);
 void modelRemoveFromSlotList(...);
 int soundChannelRequestIfEnabled(int, int, int);
-int FUN_002a03d8(...);
+int titleSetSlotValueState2(...);
 int lightOwnerRegister(...);
 int modelSlotAttachChild(...);
 int asdMdlManagerDestroy(...);
 int sndObjectForwardField8(void);
 int buttonHelpSetPreset(...);
-int FUN_002b8ee0(int, int);
+int uiSlidingSpriteAdvance(int, int);
 int soundPlaySeUnpanned(...);
 int uiSpriteAdvanceAnimation(...);
 int FUN_002c1658(...);
@@ -101,7 +101,7 @@ extern int FUN_00295618(void);
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
-/* Supplied declaration required: FUN_002a03d8. */
+/* Supplied declaration required: titleSetSlotValueState2. */
 /* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: modelSlotAttachChild. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
@@ -109,7 +109,7 @@ extern int FUN_00295618(void);
 /* Supplied declaration required: sndObjectForwardField8. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int FUN_002b89a4(unsigned int);
-/* Supplied declaration required: FUN_002b8ee0. */
+/* Supplied declaration required: uiSlidingSpriteAdvance. */
 extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: dataTable01FindByIdWithAoc. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
@@ -159,8 +159,8 @@ unsigned int FUN_00329b70(void)
   case 1:
     temp_v7 = FUN_00295618();
     if (temp_v7 == 0) break;
-    FUN_002a03d8(0,10);
-    FUN_002a03d8(1,10);
+    titleSetSlotValueState2(0,10);
+    titleSetSlotValueState2(1,10);
     soundChannelRequestIfEnabled(0x100006b,10,0x3c);
     temp_v0 = *(short *)(temp_v2 + 0x1e);
     *(unsigned int *)(temp_v2 + 0x24) = 0xffffffff;
@@ -190,7 +190,7 @@ unsigned int FUN_00329b70(void)
     temp_v7 = 0;
     do {
       if (temp_v7 <= *(int *)(temp_v2 + 8) - 1) {
-        FUN_002b8ee0(temp_v2 + temp_v7 * 0x8c + 0x2c8,0);
+        uiSlidingSpriteAdvance(temp_v2 + temp_v7 * 0x8c + 0x2c8,0);
       }
       temp_v7 = temp_v7 + 1;
     } while (temp_v7 < 5);
@@ -414,7 +414,7 @@ LAB_0032a1a4:
       FUN_00282bfc(0,0xffffffff);
     }
     if (*(int *)(temp_v2 + 8) == temp_v10 + 5) {
-      FUN_002a03d8(0,0x1e);
+      titleSetSlotValueState2(0,0x1e);
     }
     if (*(char *)(temp_v2 + 0x20) != '\0') {
       temp_v0 = *(short *)(g_screenStateWork + 0x1e);

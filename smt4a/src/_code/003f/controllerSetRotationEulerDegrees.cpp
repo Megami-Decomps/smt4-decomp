@@ -3,7 +3,7 @@
 #include "shard/W5_W5Match7_ControllerPose.h"
 
 extern "C" {
-extern const PhaseTrigEntry DAT_00536d14[];
+extern const PhaseTrigEntry g_sinCosTable[];
 
 // Build the controller's 3x4 rotation matrix from Euler angles in degrees.
 void controllerSetRotationEulerDegrees(u32 controllerAddress, f32 x, f32 y, f32 z)
@@ -14,9 +14,9 @@ void controllerSetRotationEulerDegrees(u32 controllerAddress, f32 x, f32 y, f32 
     x *= degreesToPhase;
     y *= degreesToPhase;
     z *= degreesToPhase;
-    PhaseSinCos xRotation = samplePhase(DAT_00536d14, x);
-    PhaseSinCos yRotation = samplePhase(DAT_00536d14, y);
-    PhaseSinCos zRotation = samplePhase(DAT_00536d14, z);
+    PhaseSinCos xRotation = samplePhase(g_sinCosTable, x);
+    PhaseSinCos yRotation = samplePhase(g_sinCosTable, y);
+    PhaseSinCos zRotation = samplePhase(g_sinCosTable, z);
 
     matrix[8] = -yRotation.sine;
     matrix[0] = zRotation.cosine * yRotation.cosine;

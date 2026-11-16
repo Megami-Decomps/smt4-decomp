@@ -59,7 +59,7 @@ void textFormatBuffer(char *, const char *, ...);
 void *asdMemoryAllocTraced(u32, const char *, u32);
 ModelList *modelListInit(ModelList *);
 u8 FUN_0040ab8c(ModelList *model);
-void FUN_0040aad4(ModelList *model, u32 mode);
+void moriModelContentLoadBody(ModelList *model, u32 mode);
 void handleRegistryRegisterObject(void *, void *);
 char *libc_strcpy(char *, const char *);
 
@@ -109,7 +109,7 @@ u32 FUN_00313138(void)
             model = modelListInit(model);
         }
         slot->model = model;
-        FUN_001cd3ec(model, resourceName);
+        modelLoadFileAsyncByName(model, resourceName);
         g_mapObj->state = 12;
         return 0;
     }
@@ -119,7 +119,7 @@ u32 FUN_00313138(void)
         if (FUN_0040ab8c(slot->model) == 0) {
             return 0;
         }
-        FUN_0040aad4(slot->model, 0);
+        moriModelContentLoadBody(slot->model, 0);
         handleRegistryRegisterObject(g_handleRegistry, *(void **)((u8 *)slot->model + 4));
         slot->x = (f32)record->x;
         slot->y = (f32)record->y;

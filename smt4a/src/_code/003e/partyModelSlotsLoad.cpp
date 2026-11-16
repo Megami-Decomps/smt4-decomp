@@ -29,7 +29,7 @@ typedef struct DevilModelData {
     /* 0x9C */ u16 modelId;
 } DevilModelData;
 
-PartyMember *FUN_003e503c(u16 index);
+PartyMember *partyGetSlotPreferredFirst(u16 index);
 s32 partySlotIsOccupied(PartyMember *member);
 DevilModelData *devilGetRecord(u16 devilId);
 u32 FUN_00409fe8(u32 modelId, s32 a, s32 b);
@@ -44,7 +44,7 @@ void partyModelSlotsLoad(PartyModelWork *work)
         work->slots[slot].unk00 = 0;
     }
     for (i = 0; i < 12; i++) {
-        PartyMember *member = FUN_003e503c(i);
+        PartyMember *member = partyGetSlotPreferredFirst(i);
         DevilModelData *data;
         u16 modelId;
 

@@ -216,7 +216,7 @@ unsigned int FUN_004e05d4(int *param_1,unsigned int *param_2)
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 0x6d);
   *(unsigned int *)(*param_1 + 0x4cf0) = 0;
-  FUN_003ee0c0((void *)(*param_1));
+  btlSlotManagerResetStates((void *)(*param_1));
   if ((param_2[0xc] == 5) && ((*(unsigned short *)(param_2[10] + 0x110) & 0x10) == 0)) {
     puVar7 = (unsigned int *)param_2[8];
     temp_v4 = ~DAT_0057115c;

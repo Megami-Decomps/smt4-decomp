@@ -34,7 +34,7 @@ s32 bgmGetStateById(u32 id);
 void soundChannelRequestIfEnabled(u32 id, u32 channel, u32 duration);
 void FUN_0035d03c(u32 value);
 s32 FUN_0040ab8c(HealingModel *model);
-void FUN_0040aad4(HealingModel *model, u32 value);
+void moriModelContentLoadBody(HealingModel *model, u32 value);
 void modelPlayClip(void *object, u32 animation, u32 mode, f32 speed, f32 blend);
 void handleRegistryRegisterObject(void *registry, void *object);
 ScriptProcess *scrScriptProcessCreate(void *heapA, void *heapB);
@@ -53,7 +53,7 @@ void FUN_002c2610();
 void soundChannelStopAll(u32 channel);
 s32 jobIsValid(u32 job);
 void jobStop(u32 job, u16 option);
-void FUN_003d54f8(u32 index, u32 value);
+void titleSetSlotValueState2(u32 index, u32 value);
 void FUN_00324c48(u32 first, u32 second, u32 third, f32 a, f32 b, f32 c, f32 d, f32 e);
 void gameStateClearFlag();
 void asdSequenceRequest(u32 sequence, u32 first, u32 second);
@@ -61,7 +61,7 @@ void asdSequenceRequest(u32 sequence, u32 first, u32 second);
 
 static __inline void registerHealingModel(HealingModel *model)
 {
-    FUN_0040aad4(model, 0);
+    moriModelContentLoadBody(model, 0);
     void *object = model->object;
     modelPlayClip(object, 0, 2, 1, 1);
     handleRegistryRegisterObject(g_handleRegistry, object);
@@ -141,8 +141,8 @@ extern "C" s32 FUN_004ce3c0(HealingSceneWork *work)
                 HealingFieldJob *field = DAT_0057f658;
                 if (jobIsValid(field->job))
                     jobStop(field->job, 0);
-                FUN_003d54f8(0, 1);
-                FUN_003d54f8(1, 1);
+                titleSetSlotValueState2(0, 1);
+                titleSetSlotValueState2(1, 1);
             } else {
                 FUN_00324c48(g_gameState.first, g_gameState.second, g_gameState.third,
                               DAT_005f1b80[0], DAT_005f1b80[1], DAT_005f1b80[2],

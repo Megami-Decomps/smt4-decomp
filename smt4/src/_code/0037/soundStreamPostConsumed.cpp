@@ -11,7 +11,7 @@ struct SoundStreamCursor {
 // Enqueues a type-0x30 sound request for the bytes consumed since `start`, then rewinds the cursor.
 extern "C" void soundStreamPostConsumed(SoundStreamCursor *stream)
 {
-    Obj421aa4Manager *manager = FUN_002baed8();
+    Obj421aa4Manager *manager = soundRequestQueueGetInstance();
     Obj421aa4Node *node = soundRequestBegin(manager, 6);
     node->type = 0x30;
     node->id = stream->start;

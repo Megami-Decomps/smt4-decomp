@@ -9,10 +9,10 @@ extern "C" {
 int btlGetPassiveAffinityOverride(...);
 int btlEntryHasSkillCategory(unsigned int *, unsigned int);
 int selectionCopySupportedValue(unsigned int, unsigned int *);
-int FUN_0022abe0(...);
+int btlEntryGetPassiveSkillIds(...);
 int FUN_00246134(unsigned int, unsigned int, int, unsigned int);
 int FUN_002463e8(...);
-int FUN_00247478(...);
+int btlEntryBuildSummary(...);
 int btlFindEntryBlockByMemberId(unsigned int *, unsigned int);
 int btlMainFindEntryByListedId(...);
 int passiveSkillLookupRecord(void);
@@ -58,12 +58,12 @@ typedef struct {
 /* Supplied declaration required: btlGetPassiveAffinityOverride. */
 /* Supplied declaration required: btlEntryHasSkillCategory. */
 /* Supplied declaration required: selectionCopySupportedValue. */
-/* Supplied declaration required: FUN_0022abe0. */
+/* Supplied declaration required: btlEntryGetPassiveSkillIds. */
 extern int randRange(unsigned int);
 extern unsigned short FUN_00245cc0(unsigned int);
 /* Supplied declaration required: FUN_00246134. */
 /* Supplied declaration required: FUN_002463e8. */
-/* Supplied declaration required: FUN_00247478. */
+/* Supplied declaration required: btlEntryBuildSummary. */
 /* Supplied declaration required: btlFindEntryBlockByMemberId. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: passiveSkillLookupRecord. */
@@ -177,7 +177,7 @@ FUN_0022899c(int param_1,unsigned int param_2,fn_0022899c_arg2 *param_3,unsigned
   temp_v4 = reinterpret_cast<int>(btlGetMainState());
   btlMainFindEntryByListedId(temp_v4,temp_v5);
   temp_v5 = reinterpret_cast<int>(btlGetMainState());
-  FUN_00247478(&temp_v16,temp_v5,temp_v4);
+  btlEntryBuildSummary(&temp_v16,temp_v5,temp_v4);
   temp_v9 = temp_v16 >> 0x10;
   if (temp_v9 < 2) {
     temp_v30 = 1;
@@ -191,7 +191,7 @@ FUN_0022899c(int param_1,unsigned int param_2,fn_0022899c_arg2 *param_3,unsigned
     temp_v18 = 0;
     temp_v19 = 0;
     temp_v20 = 0;
-    FUN_0022abe0(puVar7,&temp_v16);
+    btlEntryGetPassiveSkillIds(puVar7,&temp_v16);
     temp_v10 = 0;
     do {
       temp_v7 = (unsigned int)*(unsigned short *)((int)&temp_v16 + temp_v10 * 2);
@@ -275,7 +275,7 @@ LAB_00228c48:
           temp_v28[7] = 0;
           temp_v28[8] = 0;
           temp_v28[9] = 0;
-          FUN_0022abe0(puVar7,temp_v28);
+          btlEntryGetPassiveSkillIds(puVar7,temp_v28);
           temp_v11 = 0;
           do {
             temp_v9 = (unsigned int)temp_v28[temp_v11];
@@ -322,7 +322,7 @@ LAB_00228de4:
     }
     else {
       if (temp_v30 != 0) {
-        FUN_00247478(temp_v22,temp_v27,temp_v26);
+        btlEntryBuildSummary(temp_v22,temp_v27,temp_v26);
         temp_v5 = temp_v31;
         temp_v14 = (float)VectorSignedToFloat((int)(short)temp_v29[0x3e] - (int)(short)puVar6[0x3e],
                                             (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -343,7 +343,7 @@ LAB_00228de4:
           temp_v19 = 0;
           temp_v20 = 0;
           temp_v21 = 0;
-          FUN_0022abe0();
+          btlEntryGetPassiveSkillIds();
           temp_v11 = 0;
           temp_v8 = 0;
           do {

@@ -40,7 +40,7 @@ void *recordTableGet(u32 index);
 extern "C" {
 #endif
 
-void FUN_002af390(u32 a, u32 b);
+void asdModelAdvanceCommandCursorBetween(u32 a, u32 b);
 
 #ifdef __cplusplus
 }

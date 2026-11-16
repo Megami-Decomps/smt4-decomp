@@ -55,7 +55,7 @@ void FUN_0028a2e8(s32 resetTouch)
     UniteDraftState *draft = (UniteDraftState *)saveGetUserSettingsBlock();
     void *list = menu->list;
     s32 a = resourceRunOperationIfUnblocked(list);
-    s32 b = FUN_002a4894(list);
+    s32 b = listCursorGetRowIfUnblocked(list);
     s32 count = 0;
     s32 unlocked = 0;
     s32 i;

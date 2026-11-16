@@ -4,7 +4,7 @@
 extern "C" {
 u32 *asdGxGetCommandCursor(void);
 void FUN_0023ae58(u32 *, const f32 *, u32);
-void FUN_002af390(u32 *, u32 *);
+void asdModelAdvanceCommandCursorBetween(u32 *, u32 *);
 
 // Emit the register-selection header and matrix payload into the GPU command buffer.
 void gpuWriteVertexUniformMatrix(MatrixCommandSource *source, const f32 *matrix)
@@ -14,6 +14,6 @@ void gpuWriteVertexUniformMatrix(MatrixCommandSource *source, const f32 *matrix)
     commands[1] = 0xf02c0;
     u32 *payload = commands + 2;
     FUN_0023ae58(payload, matrix, 0xff02c1);
-    FUN_002af390(commands, payload + 18);
+    asdModelAdvanceCommandCursorBetween(commands, payload + 18);
 }
 }

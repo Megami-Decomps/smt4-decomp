@@ -143,7 +143,7 @@ void FUN_004a580c(QuestMenu *menu)
         FUN_0031f208(5);
         FUN_0031f208(3);
         useCounterStart();
-        FUN_003343f0(1);
+        gameGlobalsSetMenuOpenFlag(1);
         menu->state = 3;
         menu->stateTimer = 0;
         buttonHelpSetText(0, QUEST_COLOR_FADE);
@@ -155,7 +155,7 @@ void FUN_004a580c(QuestMenu *menu)
         FUN_00212724();
     buttonHelpSetText(0, QUEST_COLOR_FADE);
     uiSpriteBankApplyPreset((u8 *)menu + 0xDC, 1);
-    FUN_003343f0(1);
+    gameGlobalsSetMenuOpenFlag(1);
     menu->state = 6;
     menu->stateTimer = 0;
     sendEvent100020F();

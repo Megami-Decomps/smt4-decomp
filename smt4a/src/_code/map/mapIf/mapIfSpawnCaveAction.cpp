@@ -9,7 +9,7 @@ extern u32 g_handleRegistry;
 void *asdMemoryAllocTraced(u32 size, const char *file, int line);   /* allocate with source location */
 MoriModelContent *modelListInit(void *mem);                 /* content constructor */
 void resourceOwnerLoadFileSync(MoriModelContent *content, const char *name);
-void FUN_0040aad4(MoriModelContent *content, u32 arg);
+void moriModelContentLoadBody(MoriModelContent *content, u32 arg);
 void handleRegistryRegisterObject(u32 registry, u32 object);
 void controllerSetDestination(u32 object, const f32 *position);
 void controllerSetRotationEulerDegrees(u32 object, f32 x, f32 y, f32 z);
@@ -32,7 +32,7 @@ void mapIfSpawnCaveAction(f32 x, f32 y, f32 z, f32 w)
     }
     block->content = (MoriModelContent *)mem;
     resourceOwnerLoadFileSync(block->content, "map/all/action_cave.bam");
-    FUN_0040aad4(block->content, 0);
+    moriModelContentLoadBody(block->content, 0);
     u32 object = (u32)block->content->body;
     handleRegistryRegisterObject(g_handleRegistry, object);
     controllerSetDestination(object, block->position);

@@ -68,7 +68,7 @@ extern unsigned int *uniteGetWork(void);
 extern int partyClassifyRequestedSources(unsigned int, unsigned short, unsigned char *);
 extern int ifTouchGetSelectionModeForRegion(int);
 extern unsigned int FUN_0029dde0(void);
-extern int FUN_0029efa8(unsigned int *);
+extern int listCursorGetRowIfUnblocked(unsigned int *);
 extern int resourceRunOperationIfUnblocked(unsigned int *);
 /* Supplied declaration required: dataTable54FindById. */
 extern int *gameGetSlotTable(void);
@@ -137,7 +137,7 @@ void FUN_00215d68(fn_00215d68_arg0 *param_1,int param_2)
         temp_v1 = (unsigned int)*(unsigned short *)((int)puVar2 + temp_v8 * 2 + 0x933c);
         dataTable54FindById();
         temp_v2 = resourceRunOperationIfUnblocked(puVar8);
-        temp_v3 = FUN_0029efa8(puVar8);
+        temp_v3 = listCursorGetRowIfUnblocked(puVar8);
         if (*(short *)((int)puVar2 + (temp_v2 + temp_v3) * 2 + 0x6278) == *(short *)(temp_v1 + 0x1a)) {
           temp_v10 = *(unsigned short *)((int)puVar2 + temp_v8 * 2 + 0x933c);
           break;

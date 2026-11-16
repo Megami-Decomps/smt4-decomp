@@ -11,7 +11,7 @@ int recordGetScaledMaximum(...);
 int devilGetRecord(void);
 int slotRecordFindById(...);
 int gameDataCopySaveEntry(...);
-int FUN_002e59f8(int, unsigned int [11], int);
+int memcpySrcFirst(int, unsigned int [11], int);
 int rt_aeabi_memclr(int, int);
 int FUN_0031654c(unsigned int, int);
 int gameSavedItemClearCounter(int);
@@ -37,7 +37,7 @@ extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: slotRecordFindById. */
 /* Supplied declaration required: gameDataCopySaveEntry. */
-/* Supplied declaration required: FUN_002e59f8. */
+/* Supplied declaration required: memcpySrcFirst. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_0031654c. */
 /* Supplied declaration required: gameSavedItemClearCounter. */
@@ -76,7 +76,7 @@ void FUN_0037be64(void)
   unsigned short temp_v21;
   
   temp_v6 = gameDataBlocksGetSaveData();
-  FUN_002e59f8(temp_v6 + 0x28310,temp_v16,0x28);
+  memcpySrcFirst(temp_v6 + 0x28310,temp_v16,0x28);
   rt_aeabi_memclr(temp_v6 + 0x28310,0x50);
   rt_aeabi_memclr(temp_v6 + 0x28360,0x30);
   gameFlagSetValue(0x4c7, 1, 1);

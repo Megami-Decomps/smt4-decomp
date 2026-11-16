@@ -7,7 +7,7 @@ extern "C" {
 
 int gxResetColorQuadToWhite(void);
 
-int FUN_0014e314(...);
+int gxSubmitDrawZeroExtraParams(...);
 int renderCtxPackPassFlags(...);
 int renderCtxSelectTexture(...);
 int renderCtxPopState(...);
@@ -38,7 +38,7 @@ extern unsigned char DAT_00616ee4; /* 0x616ee4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0014e314. */
+/* Supplied declaration required: gxSubmitDrawZeroExtraParams. */
 /* Supplied declaration required: renderCtxPackPassFlags. */
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: renderCtxPopState. */
@@ -136,7 +136,7 @@ void FUN_0048d98c(int param_1)
                   VectorSignedToFloat(*(unsigned int *)(temp_v1 + 0x8518),(unsigned char)(in_fpscr >> 0x16) & 3);
                   VectorUnsignedToFloat
                             (*(unsigned int *)(temp_v1 + 0x851c),(unsigned char)(in_fpscr >> 0x16) & 3);
-                  FUN_0014e314(temp_v12);
+                  gxSubmitDrawZeroExtraParams(temp_v12);
                 }
               }
             }
@@ -246,7 +246,7 @@ LAB_0048ddd4:
         VectorSignedToFloat(*(unsigned int *)(temp_v4 + 0x8514),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(*(unsigned int *)(temp_v4 + 0x8518),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorUnsignedToFloat(*(unsigned int *)(temp_v4 + 0x851c),(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_0014e314(temp_v12);
+        gxSubmitDrawZeroExtraParams(temp_v12);
       }
       else if ((int)*(short *)(temp_v4 + 0x84fe) == (int)*(char *)(param_1 + 100)) {
         temp_v7 = *(int *)(temp_v4 + 0x8500);
@@ -280,7 +280,7 @@ LAB_0048ddd4:
         VectorSignedToFloat(*(unsigned int *)(temp_v4 + 0x8514),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorUnsignedToFloat(*(unsigned int *)(temp_v4 + 0x8520),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorUnsignedToFloat(*(unsigned int *)(temp_v4 + 0x851c),(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_0014e314(temp_v12);
+        gxSubmitDrawZeroExtraParams(temp_v12);
       }
       goto LAB_0048dfb4;
     }
@@ -411,7 +411,7 @@ LAB_0048de78:
   VectorSignedToFloat(*(unsigned int *)(temp_v4 + 0x8514),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(unsigned int *)(temp_v4 + 0x8518),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorUnsignedToFloat(*(unsigned int *)(temp_v4 + 0x851c),(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_0014e314(temp_v12);
+  gxSubmitDrawZeroExtraParams(temp_v12);
 LAB_0048dfb4:
   temp_v6 = temp_v6 + 1;
   if (*piVar9 <= temp_v6) goto LAB_0048dfc4;
@@ -422,7 +422,7 @@ LAB_0048df64:
   VectorSignedToFloat(*(unsigned int *)(temp_v4 + 0x8514),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorUnsignedToFloat(*(unsigned int *)(temp_v4 + 0x8520),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorUnsignedToFloat(*(unsigned int *)(temp_v4 + 0x851c),(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_0014e314(temp_v12);
+  gxSubmitDrawZeroExtraParams(temp_v12);
   goto LAB_0048dfb4;
 }
 

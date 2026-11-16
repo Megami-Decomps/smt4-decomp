@@ -9,7 +9,7 @@ void FUN_002897d0(s32 enabled);
 s32 FUN_002897c0(void);
 void FUN_002897b0(s32 enabled);
 s32 FUN_002c1d5c(void);
-void FUN_002a03d8(s32 channel, s32 mode);
+void titleSetSlotValueState2(s32 channel, s32 mode);
 s32 scrRunOpcodesStub(void *process);
 
 void messageSlotSet(s32 slot);
@@ -30,8 +30,8 @@ u32 mapMainPollScript(void)
             FUN_002897d0(0);
         }
         if (FUN_002897e0() && !FUN_002c1d5c()) {
-            FUN_002a03d8(0, 5);
-            FUN_002a03d8(1, 5);
+            titleSetSlotValueState2(0, 5);
+            titleSetSlotValueState2(1, 5);
             FUN_002897d0(0);
             map->scriptState = 2;
             return 0;

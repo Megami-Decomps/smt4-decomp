@@ -8,7 +8,7 @@ int memCopyDword(int, int);
 int strHolderAssignBytes(int, int, int);
 int bufferAssignByteAlias(...);
 int strHolderAssignU32Alias(int, int *);
-int FUN_002fbb70(int, int);
+int streamWriterSetLengthIfFits(int, int);
 int stringSetValue1(int, int);
 int stringSetValue4(int, int);
 
@@ -25,7 +25,7 @@ typedef struct {
 extern unsigned int byteRefMin(unsigned char *, unsigned char *);
 /* Supplied declaration required: bufferAssignByteAlias. */
 /* Supplied declaration required: strHolderAssignU32Alias. */
-/* Supplied declaration required: FUN_002fbb70. */
+/* Supplied declaration required: streamWriterSetLengthIfFits. */
 /* Supplied declaration required: stringSetValue1. */
 /* Supplied declaration required: stringSetValue4. */
 
@@ -64,10 +64,10 @@ void FUN_0011e36a(int param_1,int param_2)
   strHolderAssignBytes(param_1,param_2 + 0x1a,2);
   if (temp_v0 == '\0') {
     temp_v2 = *(int *)(*(int *)(param_1 + 8) + 0x10);
-    FUN_002fbb70(param_1,temp_v3);
+    streamWriterSetLengthIfFits(param_1,temp_v3);
     temp_v5 = (temp_v2 - temp_v3) - 4;
     strHolderAssignU32Alias(param_1,&temp_v5);
-    FUN_002fbb70(param_1,temp_v2);
+    streamWriterSetLengthIfFits(param_1,temp_v2);
   }
   return;
 }

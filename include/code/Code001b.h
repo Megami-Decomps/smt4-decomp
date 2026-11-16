@@ -6,7 +6,7 @@ extern "C" {
 
 void FUN_001ba3d0(void);
 
-u32 FUN_001bd100(u32 id);
+u32 dataTable1bOr1cRecordHasFlag1(u32 id);
 
 s32 FUN_001bd118(u32 id);
 

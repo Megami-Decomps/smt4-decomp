@@ -28,7 +28,7 @@ extern int FUN_0029c4c8(int);
 extern int FUN_0029dfc0(int);
 extern int gameSetIconDisplayEnabled(int);
 extern int buttonHelpSetText(int, u32);
-extern int FUN_002b827c(int);
+extern int buttonHelpSetContext(int);
 extern int buttonHelpSetPreset(u8 preset);
 extern int ifTouchRegionRemove(void);
 
@@ -102,7 +102,7 @@ done:
         }
     }
     FUN_00295214(0);
-    FUN_002b827c(3);
+    buttonHelpSetContext(3);
 }
 
 } /* extern "C" */

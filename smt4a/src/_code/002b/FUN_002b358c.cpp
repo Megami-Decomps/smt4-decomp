@@ -9,7 +9,7 @@ int renderCtxSelectTexture(unsigned int, unsigned int);
 int skinObjectUpdateMatrices(...);
 int FUN_00184c4c(...);
 int FUN_00186940(void);
-int FUN_0018a924(...);
+int mathSinCos(...);
 int nn_math_ARMv6_MTX44MultAsm(...);
 int renderGetCameraViewMatrix(...);
 int mtx44TransformPosition(...);
@@ -137,7 +137,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_00184c4c. */
 /* Supplied declaration required: FUN_00186940. */
-/* Supplied declaration required: FUN_0018a924. */
+/* Supplied declaration required: mathSinCos. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
 /* Supplied declaration required: renderGetCameraViewMatrix. */
 /* Supplied declaration required: mtx44TransformPosition. */
@@ -323,7 +323,7 @@ void FUN_002b358c(fn_002b358c_arg0 *param_1)
       temp_v20 = temp_v18;
       temp_v21 = temp_v13;
       temp_v22 = temp_v5;
-      FUN_0018a924(&temp_v70,temp_v71);
+      mathSinCos(&temp_v70,temp_v71);
       temp_v62 = (float)temp_v4;
       temp_v1 = temp_v62 - temp_v71[0];
       temp_v48 = temp_v71[0] + temp_v1 * temp_v5;

@@ -40,7 +40,7 @@ extern const char DAT_00533f34[];
 extern void *g_handleRegistry;
 void FUN_002c7e6c(void);
 void FUN_002c85b0(s32 value);
-void FUN_003343f0(s32 value);
+void gameGlobalsSetMenuOpenFlag(s32 value);
 void FUN_0033449c(s32 value);
 void FUN_0023b45c(s32 value);
 void FUN_002c8538(s32 value);
@@ -50,7 +50,7 @@ void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 SaveLoadScreenModels *modelListInit(SaveLoadScreenModels *list);
 void resourceOwnerLoadFileSync(SaveLoadScreenModels *list, const char *name);
 void FUN_0040ab7c(SaveLoadScreenModels *list, s32 value);
-void FUN_0040aad4(SaveLoadScreenModels *list, s32 mode);
+void moriModelContentLoadBody(SaveLoadScreenModels *list, s32 mode);
 void FUN_0045b538(void *object);
 void handleRegistryRegisterObject(void *registry, SaveLoadScreenObject *object);
 void modelPlayClip(SaveLoadScreenObject *object, s32 index, s32 mode, f32 first, f32 second);
@@ -62,7 +62,7 @@ void saveLoadUIStart(SaveLoadScreen *screen)
 {
     FUN_002c7e6c();
     FUN_002c85b0(10);
-    FUN_003343f0(1);
+    gameGlobalsSetMenuOpenFlag(1);
     FUN_0033449c(0);
     FUN_0023b45c(1);
     FUN_002c8538(1);
@@ -77,7 +77,7 @@ void saveLoadUIStart(SaveLoadScreen *screen)
         screen->models = list;
         resourceOwnerLoadFileSync(list, DAT_00533f34);
         FUN_0040ab7c(screen->models, 0);
-        FUN_0040aad4(screen->models, 0);
+        moriModelContentLoadBody(screen->models, 0);
         FUN_0045b538(reinterpret_cast<u8 *>(reinterpret_cast<void **>(screen->models)[3]) + 0xc);
         SaveLoadScreenObject *object = screen->models->object;
         handleRegistryRegisterObject(g_handleRegistry, object);

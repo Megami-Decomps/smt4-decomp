@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern signed char DAT_005b4486; /* 0x5b4486 */
+extern signed char g_cecState; /* 0x5b4486 */
 extern signed char DAT_005b4487; /* 0x5b4487 */
 extern signed char DAT_005b4488; /* 0x5b4488 */
 extern unsigned int g_moduleCriticalSection6; /* 0x6426b4 */
@@ -46,7 +46,7 @@ int FUN_0042d3d8(int param_1,int param_2)
   int temp_v7;
   
   temp_v5 = -0x375ef410;
-  if ((DAT_005b4486 != '\0') || (temp_v0 = FUN_0042fbd4(), temp_v0 != 0)) {
+  if ((g_cecState != '\0') || (temp_v0 = FUN_0042fbd4(), temp_v0 != 0)) {
     nn_os_CriticalSection_Enter((unsigned int)&g_moduleCriticalSection6);
     if (DAT_005b4487 == '\0') {
       nn_os_CriticalSection_Leave((unsigned int)&g_moduleCriticalSection6);

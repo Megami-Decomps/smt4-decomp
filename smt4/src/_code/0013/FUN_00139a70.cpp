@@ -8,7 +8,7 @@ int nnResultCheckReport00128d98(...);
 int FUN_001398dc(void);
 int FUN_0013a5b0(unsigned int *, unsigned int *);
 int FUN_002ad66c(unsigned int *, int *);
-int FUN_002c567c(int *);
+int clockGetTicksAsMicroseconds(int *);
 int SBORROW4(...);
 int nn_fnd_DateTime_FromParameters(unsigned int *, int, int, int);
 
@@ -55,7 +55,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001398dc. */
 /* Supplied declaration required: FUN_0013a5b0. */
 /* Supplied declaration required: FUN_002ad66c. */
-/* Supplied declaration required: FUN_002c567c. */
+/* Supplied declaration required: clockGetTicksAsMicroseconds. */
 /* Supplied declaration required: nn_fnd_DateTime_FromParameters. */
 
 
@@ -98,7 +98,7 @@ void FUN_00139a70(fn_00139a70_arg0 *param_1)
   int temp_v27;
   unsigned int uStack_2c;
   
-  FUN_002c567c(&temp_v14);
+  clockGetTicksAsMicroseconds(&temp_v14);
   temp_v27 = temp_v14;
   uStack_2c = uStack_8c;
   FUN_002ad66c(&temp_v10,&temp_v27);

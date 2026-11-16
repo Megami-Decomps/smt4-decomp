@@ -11,7 +11,7 @@ s32 FUN_0025cb5c(u64 titleId)
 {
     void *context = FUN_00142b04();
     s32 result = FUN_00429fcc((const char *)context, titleId);
-    FUN_0013ebd8(result);
+    processResultSetValue(result);
 
     if (nnResultIsSuccess(result)) {
         DAT_005b40c9 = 1;

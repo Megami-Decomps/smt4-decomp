@@ -16,7 +16,7 @@ struct UnitRequestView {
 
 extern "C" {
 extern u32 g_btlScriptUnit;
-void FUN_00247478(UnitSummary *out, BtlMainState *state, const s16 *params);
+void btlEntryBuildSummary(UnitSummary *out, BtlMainState *state, const s16 *params);
 
 u32 scrCommSelectUnitRequestMode()
 {
@@ -25,7 +25,7 @@ u32 scrCommSelectUnitRequestMode()
     const s16 *params = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->params;
     BtlMainState *state = btlGetMainState();
     UnitSummary summary;
-    FUN_00247478(&summary, state, params);
+    btlEntryBuildSummary(&summary, state, params);
     if (summary.kind == 1) {
         request->mode = 2;
     }

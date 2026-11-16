@@ -37,8 +37,8 @@ void slotPlacementStartTransition(void *widget, u8 mode);
 void FUN_0023e908(void);
 void useCounterStart(void);
 void sortMenuAcquire(u32 owner, u8 option);
-void FUN_0020b718(s32 state, s32 rememberPrevious);
-s32 FUN_003343f0(s32 value);
+void partyPanelChangeState(s32 state, s32 rememberPrevious);
+s32 gameGlobalsSetMenuOpenFlag(s32 value);
 
 /* The party panel's help-view toggle: flips the alternate layout, reselects the matching list entry in
  * the list that takes over and restarts the widget placement transitions. Without the toggle key it opens
@@ -57,47 +57,47 @@ u32 partyPanelHandleLayoutToggle(s32 enabled)
         switch (panel->state) {
         case 6:
             if (panel->alternate != 0) {
-                scrollOwnerSelectIndex(&panel->lists[1], FUN_002a4878(&panel->lists[0]));
-                scrollListSetSelectionTracked(&panel->lists[1], panel->columns * 3 + FUN_002a4894(&panel->lists[0]));
+                scrollOwnerSelectIndex(&panel->lists[1], listCursorGetRowOfChildIfUnblocked(&panel->lists[0]));
+                scrollListSetSelectionTracked(&panel->lists[1], panel->columns * 3 + listCursorGetRowIfUnblocked(&panel->lists[0]));
             } else {
-                if (FUN_002a4894(&panel->lists[1]) >= 3 && panel->pages > 1)
+                if (listCursorGetRowIfUnblocked(&panel->lists[1]) >= 3 && panel->pages > 1)
                     panel->columns = 1;
                 else
                     panel->columns = 0;
                 FUN_0026fa30();
-                scrollOwnerSelectIndex(&panel->lists[0], FUN_002a4878(&panel->lists[1]));
-                if (FUN_002a4894(&panel->lists[1]) >= 3) {
+                scrollOwnerSelectIndex(&panel->lists[0], listCursorGetRowOfChildIfUnblocked(&panel->lists[1]));
+                if (listCursorGetRowIfUnblocked(&panel->lists[1]) >= 3) {
                     if (panel->pages > 1)
-                        scrollListSetSelectionTracked(&panel->lists[0], FUN_002a4894(&panel->lists[1]) - panel->columns * 3);
+                        scrollListSetSelectionTracked(&panel->lists[0], listCursorGetRowIfUnblocked(&panel->lists[1]) - panel->columns * 3);
                     else
                         scrollListSetSelectionTracked(&panel->lists[0], 2);
                 } else {
-                    scrollListSetSelectionTracked(&panel->lists[0], FUN_002a4894(&panel->lists[1]));
+                    scrollListSetSelectionTracked(&panel->lists[0], listCursorGetRowIfUnblocked(&panel->lists[1]));
                 }
                 objClearFlagPair(&panel->lists[0]);
             }
             break;
         case 8:
             if (panel->alternate != 0) {
-                scrollOwnerSelectIndex(&panel->lists[3], FUN_002a4878(&panel->lists[2]));
-                if (FUN_002a4894(&panel->lists[2]) < 1)
+                scrollOwnerSelectIndex(&panel->lists[3], listCursorGetRowOfChildIfUnblocked(&panel->lists[2]));
+                if (listCursorGetRowIfUnblocked(&panel->lists[2]) < 1)
                     scrollListSetSelectionTracked(&panel->lists[3], 0);
                 else
-                    scrollListSetSelectionTracked(&panel->lists[3], panel->columns * 3 + FUN_002a4894(&panel->lists[2]));
+                    scrollListSetSelectionTracked(&panel->lists[3], panel->columns * 3 + listCursorGetRowIfUnblocked(&panel->lists[2]));
             } else {
-                if (FUN_002a4894(&panel->lists[3]) >= 4 && panel->pages > 1)
+                if (listCursorGetRowIfUnblocked(&panel->lists[3]) >= 4 && panel->pages > 1)
                     panel->columns = 1;
                 else
                     panel->columns = 0;
                 FUN_0026fa30();
-                scrollOwnerSelectIndex(&panel->lists[2], FUN_002a4878(&panel->lists[3]));
-                if (FUN_002a4894(&panel->lists[3]) >= 4) {
+                scrollOwnerSelectIndex(&panel->lists[2], listCursorGetRowOfChildIfUnblocked(&panel->lists[3]));
+                if (listCursorGetRowIfUnblocked(&panel->lists[3]) >= 4) {
                     if (panel->pages > 1)
-                        scrollListSetSelectionTracked(&panel->lists[2], FUN_002a4894(&panel->lists[3]) - panel->columns * 3);
+                        scrollListSetSelectionTracked(&panel->lists[2], listCursorGetRowIfUnblocked(&panel->lists[3]) - panel->columns * 3);
                     else
                         scrollListSetSelectionTracked(&panel->lists[2], 3);
                 } else {
-                    scrollListSetSelectionTracked(&panel->lists[2], FUN_002a4894(&panel->lists[3]));
+                    scrollListSetSelectionTracked(&panel->lists[2], listCursorGetRowIfUnblocked(&panel->lists[3]));
                 }
                 objClearFlagPair(&panel->lists[2]);
             }
@@ -123,8 +123,8 @@ u32 partyPanelHandleLayoutToggle(s32 enabled)
         FUN_0031f208(0x1f);
         FUN_0031f208(3);
         useCounterStart();
-        FUN_0020b718(0xf, 1);
-        FUN_003343f0(1);
+        partyPanelChangeState(0xf, 1);
+        gameGlobalsSetMenuOpenFlag(1);
         eventQueueAddUniqueIfValid(0x100020e);
         result = 1;
     }

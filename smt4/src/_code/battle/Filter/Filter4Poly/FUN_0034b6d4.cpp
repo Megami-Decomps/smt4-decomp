@@ -6,7 +6,7 @@
 #include <new>
 
 extern "C" {
-extern const char DAT_003ff7fc[];
+extern const char g_asdFilterSourceFileName[];
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void FUN_0034b884(Obj42094c *filter);
 u32 _ZN2nw4math5MTX448IdentityEv(void);
@@ -28,9 +28,9 @@ extern "C" Obj42094c *FUN_0034b6d4(Filter4PolyConfig *config, u32 flags, s32 fad
     Obj42094c *filter = memory != NULL ? ::new (memory) Obj42094c(child) : NULL;
     filter->setConfig(config);
     btlFilterLoadTexture(filter, flags, config->unk1c);
-    asdDebugTrace(DAT_003ff7fc, 296);
+    asdDebugTrace(g_asdFilterSourceFileName, 296);
     filter->setBuffer(asdMemoryAlloc(0x100, 0x100, 0, 0x50, 1));
-    asdDebugTrace(DAT_003ff7fc, 297);
+    asdDebugTrace(g_asdFilterSourceFileName, 297);
     filter->setMotions(asdMemoryAlloc(0x100, 0x100, 0, filter->getConfig()->count * 0x50, 1));
     FUN_0034b884(filter);
     filter->refreshTextureCoordinates();

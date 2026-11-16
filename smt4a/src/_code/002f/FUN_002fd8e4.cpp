@@ -13,7 +13,7 @@ typedef struct Entry {
 } Entry;
 
 int gameGetSlotRecord(void);
-int FUN_00321a98(Entry *a, Entry *b);
+int itemSortCompareRankThenKey(Entry *a, Entry *b);
 
 static __inline u16 entryGroup(Entry *entry)
 {
@@ -23,7 +23,7 @@ static __inline u16 entryGroup(Entry *entry)
     return ((Table *)gameGetSlotRecord())->group;
 }
 
-/* Runs FUN_00321a98 on two entries when they belong to the same group. */
+/* Runs itemSortCompareRankThenKey on two entries when they belong to the same group. */
 void FUN_002fd8e4(Entry *a, Entry *b)
 {
     u16 groupA = entryGroup(a);
@@ -34,7 +34,7 @@ void FUN_002fd8e4(Entry *a, Entry *b)
     if (diff != 0) {
         return;
     }
-    FUN_00321a98(a, b);
+    itemSortCompareRankThenKey(a, b);
 }
 
 } /* extern "C" */

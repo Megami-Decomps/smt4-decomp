@@ -17,7 +17,7 @@ typedef struct Player {
 } Player;
 
 void asdModelAdvanceCommandCursor(void);
-void FUN_0016d338(Queue *queue, s32 value);
+void gfxCommandVectorResetAt(Queue *queue, s32 value);
 void FUN_0017d43c(void);
 void FUN_0017d5f8(void);
 s32 asdGxGetCommandCursor(void);
@@ -36,7 +36,7 @@ void FUN_00157be4(Player *player)
             player->current = current;
             if (current != 0) {
                 FUN_0017d5f8();
-                FUN_0016d338(queue, asdGxGetCommandCursor());
+                gfxCommandVectorResetAt(queue, asdGxGetCommandCursor());
             }
         }
         FUN_0017d43c();

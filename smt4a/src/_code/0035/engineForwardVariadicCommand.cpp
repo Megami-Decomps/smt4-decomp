@@ -4,13 +4,13 @@
 
 extern "C" {
 
-void FUN_002e59f8(va_list args, u32 value, s32 kind);
+void memcpySrcFirst(va_list args, u32 value, s32 kind);
 
 void engineForwardVariadicCommand(u32 value, ...)
 {
     va_list arguments;
     va_start(arguments, value);
-    FUN_002e59f8(arguments, value, 14);
+    memcpySrcFirst(arguments, value, 14);
     va_end(arguments);
 }
 

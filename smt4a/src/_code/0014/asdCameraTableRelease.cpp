@@ -13,7 +13,7 @@ typedef struct Owner {
     /* 0x04 */ Table *table;
 } Owner;
 
-void FUN_001524cc(u32 handle);
+void asdCameraMatrixCacheUpdate(u32 handle);
 
 extern Owner g_asdCamera;
 
@@ -27,12 +27,12 @@ s32 asdCameraTableRelease(u32 process)
     table = g_asdCamera.table;
     do {
         if (table->entries[i] != 0) {
-            FUN_001524cc(table->entries[i]);
+            asdCameraMatrixCacheUpdate(table->entries[i]);
         }
         i = i + 1;
     } while (i < 0x20);
-    FUN_001524cc(table->extraA);
-    FUN_001524cc(table->extraB);
+    asdCameraMatrixCacheUpdate(table->extraA);
+    asdCameraMatrixCacheUpdate(table->extraB);
     return 0;
 }
 

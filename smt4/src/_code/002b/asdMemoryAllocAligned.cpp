@@ -20,7 +20,7 @@ extern AsdMemoryLock DAT_00465120;
 void nn_os_CriticalSection_Enter(u32 section);
 void nn_os_CriticalSection_Leave(u32 section);
 AsdMemoryBlock *FUN_002b24d8(u32 heap, u32 kind, u32 flags, u32 size, s32 tag);
-void FUN_002b23f4(AsdMemoryBlock *block);
+void asdMemoryTrackAllocation(AsdMemoryBlock *block);
 void rt_memclr(void *dest, u32 size);
 
 /* Fills in the block's header and returns its user data: the first `alignment` boundary past the
@@ -36,7 +36,7 @@ static __inline void *asdMemoryBlockInit(AsdMemoryBlock *block, u32 size, u16 al
     u8 *data = (u8 *)block + padding;
     data += sizeof(AsdMemoryBlock);
     ((AsdMemoryBlock **)data)[-1] = block;
-    FUN_002b23f4(block);
+    asdMemoryTrackAllocation(block);
     return data;
 }
 

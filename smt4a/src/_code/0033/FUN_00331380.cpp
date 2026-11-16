@@ -9,7 +9,7 @@ struct PartyPanelLocalView {
 
 extern "C" {
 extern PartyPanelLocalView* g_partyPanel;
-s32 FUN_00183f58(s32 group, s32 command, s32 value, s32 enabled);
+s32 buttonHelpSelectSlot(s32 group, s32 command, s32 value, s32 enabled);
 
 // Update the panel flag and issue the corresponding group-3 command.
 void FUN_00331380(s32 active)
@@ -18,9 +18,9 @@ void FUN_00331380(s32 active)
     if (panel != 0) {
         g_partyPanel->unk1210 = (active == 0);
         if (panel->unk1210 != 0) {
-            FUN_00183f58(3, 0x12, 0, 1);
+            buttonHelpSelectSlot(3, 0x12, 0, 1);
         } else if (buttonHelpGetEntryValue(3) == 0) {
-            FUN_00183f58(3, 3, 0x0b, 1);
+            buttonHelpSelectSlot(3, 3, 0x0b, 1);
         }
     }
 }

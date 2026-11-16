@@ -11,7 +11,7 @@ s32 FUN_0028809c(s32 source, s32 target, const ActiveSkillRecord *skill, s32 pre
 BtlEquip *gameGetSlotRecord(s32 index);
 SlotTable *gameGetSlotTable();
 s32 FUN_003df57c(u32 costParameter, s32 mode);
-s32 FUN_004bcbb4(const ItemRankRecord *unit, u32 costParameter);
+s32 skillGetAdjustedCost(const ItemRankRecord *unit, u32 costParameter);
 
 // Apply a skill to the player and all occupied demon slots, charging MP once if it succeeds.
 u32 FUN_002a690c(s32 source, u32 skillId, s32 preview)
@@ -38,7 +38,7 @@ u32 FUN_002a690c(s32 source, u32 skillId, s32 preview)
                         unit->mp = 0;
                 } else {
                     BtlEquip *unit = gameGetSlotRecord(source);
-                    unit->mp -= FUN_004bcbb4((const ItemRankRecord *)unit, skill->cost.costParameter);
+                    unit->mp -= skillGetAdjustedCost((const ItemRankRecord *)unit, skill->cost.costParameter);
                     if (unit->mp < 0)
                         unit->mp = 0;
                 }

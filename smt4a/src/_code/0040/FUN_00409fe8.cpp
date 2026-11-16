@@ -6,7 +6,7 @@
 extern "C" {
 
 /* The model cache: a word, then 16 entries. */
-extern Obj557b08 *DAT_005cc508[17];
+extern Obj557b08 *g_resourceCache[17];
 extern u32 g_aocSystem;
 extern const char DAT_00527250[];
 extern const char DAT_0052726c[];
@@ -26,7 +26,7 @@ Obj557b08 *FUN_00409fe8(s32 id, s32 load, s32 synchronous, u32 allocOption)
 {
     char path[64];
     s32 i;
-    Obj557b08 **cache = DAT_005cc508;
+    Obj557b08 **cache = g_resourceCache;
 
     for (i = 0; i < 16; i++) {
         Obj557b08 **entry = &cache[i];

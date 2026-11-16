@@ -134,7 +134,7 @@ void FUN_002f0c18(void)
   temp_v0 = 0;
   do {
     temp_v2 = gameFlagEntryGetBit(temp_v0,2);
-    if (((temp_v2 != 0) && (temp_v2 = FUN_001bd100(temp_v0), temp_v2 != 0)) &&
+    if (((temp_v2 != 0) && (temp_v2 = dataTable1bOr1cRecordHasFlag1(temp_v0), temp_v2 != 0)) &&
        ((temp_v2 = partyEntryGetBit5(temp_v0), temp_v2 != 0 || (temp_v2 = partyEntryGetBit6(temp_v0), temp_v2 != 0)))) {
       gameFlagClearModeBits(temp_v0);
     }
@@ -143,7 +143,7 @@ void FUN_002f0c18(void)
   temp_v0 = 0;
   do {
     temp_v2 = gameFlagEntryGetBit(temp_v0,2);
-    if (((temp_v2 != 0) && (temp_v2 = FUN_001bd100(temp_v0), temp_v2 == 0)) &&
+    if (((temp_v2 != 0) && (temp_v2 = dataTable1bOr1cRecordHasFlag1(temp_v0), temp_v2 == 0)) &&
        ((temp_v2 = partyEntryGetBit5(temp_v0), temp_v2 != 0 || (temp_v2 = partyEntryGetBit6(temp_v0), temp_v2 != 0)))) {
       gameFlagClearModeBits(temp_v0);
     }

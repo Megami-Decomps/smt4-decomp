@@ -17,7 +17,7 @@ extern Obj422248Manager *g_aocMain;
 void FUN_003f6f24();
 void FUN_003f700c();
 void FUN_003f6fc8();
-s32 FUN_002348a8(Obj422248RequestQueue *queue);
+s32 threadTryJoinAndClose(Obj422248RequestQueue *queue);
 s32 legacyResourceIdRemap(const WindowStatusResult *result);
 u32 FUN_002bcc60(Obj422248RequestQueue *queue, const u32 *descriptor, void (*callback)(), Obj422248 **owner);
 void FUN_0038cbdc();
@@ -48,7 +48,7 @@ WindowStatusOperationResult Obj422248::vfunc0c(const void *)
             }
         }
     } else {
-        if (reserved == 1 && FUN_002348a8(&manager->queue) != 0) {
+        if (reserved == 1 && threadTryJoinAndClose(&manager->queue) != 0) {
             bool succeeded = !nnResultIsFailureBool(legacyResourceIdRemap(&result));
             if (succeeded) {
                 output.status = 0;

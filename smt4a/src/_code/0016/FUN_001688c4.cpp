@@ -21,7 +21,7 @@ struct TextLine {
 #define TEXT_CODE_SET 0xf81a
 
 extern "C" {
-s32 FUN_0019be8c(u32 code);
+s32 charCodeIsPrivateUseGlyph(u32 code);
 s32 sentinelLookupGetValue(u32 code);
 
 /* Scans the line's control codes up to a stop: counts 0xf801 codes, or takes the parameter of the last 0xf81a code. */
@@ -38,7 +38,7 @@ s32 FUN_001688c4(TextLine *line)
         if (code == TEXT_CODE_END) {
             break;
         }
-        if (FUN_0019be8c(code) != 0) {
+        if (charCodeIsPrivateUseGlyph(code) != 0) {
             switch (code) {
             case TEXT_CODE_COUNT:
                 result++;

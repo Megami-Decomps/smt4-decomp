@@ -59,7 +59,7 @@ void partyCaptureEligibleSkills(PartyMenu *menu);
 s32 gameFlagIsSet(u32 flag);
 PlayerData *gameGetPlayerData(void);
 void gridNavigationConfigure(ListBox *box, s32 count, s32 a, s32 b, s32 c, s32 d);
-void FUN_0029eb5c(ListBox *box, s32 value);
+void scrollListSetSelectionMarkChanged(ListBox *box, s32 value);
 s32 flagValueIsPositive(u32 id);
 s32 FUN_0028e9a0(u32 id);
 UnitRecord *gameGetUnitRecord(s32 index);
@@ -90,10 +90,10 @@ void FUN_00199424(PartyMenu *menu)
     if ((btlGetMainState()->editorControl.flags & 0x40) != 0) {
         if (menu->page == 0 && captureEntryAvailable()) {
             gridNavigationConfigure(&menu->pageBox, 0x191, 6, 1, 1, 1);
-            FUN_0029eb5c(&menu->pageBox, g_partyMenuListState.captureBase + 2);
+            scrollListSetSelectionMarkChanged(&menu->pageBox, g_partyMenuListState.captureBase + 2);
         } else {
             gridNavigationConfigure(&menu->pageBox, 400, 6, 1, 1, 1);
-            FUN_0029eb5c(&menu->pageBox, g_partyMenuListState.captureBase + 1);
+            scrollListSetSelectionMarkChanged(&menu->pageBox, g_partyMenuListState.captureBase + 1);
         }
     } else {
         s32 total;
@@ -119,7 +119,7 @@ void FUN_00199424(PartyMenu *menu)
     }
     if ((btlGetMainState()->editorControl.flags & 0x40) != 0) {
         gridNavigationConfigure(&menu->headerBox, btlMainStateGetPartyCaptureId(btlGetMainState()), 6, 1, 1, 1);
-        FUN_0029eb5c(&menu->headerBox, g_partyMenuListState.headerBase);
+        scrollListSetSelectionMarkChanged(&menu->headerBox, g_partyMenuListState.headerBase);
     } else {
         gridNavigationConfigure(&menu->headerBox, 1, 6, 1, 0, 1);
     }

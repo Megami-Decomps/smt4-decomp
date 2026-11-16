@@ -20,7 +20,7 @@ int FUN_00187114(int, int);
 int uiDrawListScrollBar(...);
 int FUN_0029a17c(...);
 int FUN_0029ab54(...);
-int FUN_0029efa8(...);
+int listCursorGetRowIfUnblocked(...);
 int resourceRunOperationIfUnblocked(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002bdf94(...);
@@ -74,7 +74,7 @@ extern unsigned long long statusGetAvailableChoiceCount(void);
 extern unsigned short *FUN_0029acb0(void);
 extern int objectPartRunUnlessLocked(int);
 extern int FUN_0029e9cc(unsigned short);
-/* Supplied declaration required: FUN_0029efa8. */
+/* Supplied declaration required: listCursorGetRowIfUnblocked. */
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: FUN_002b75ec. */
@@ -163,7 +163,7 @@ unsigned int FUN_001cca14(void)
   case 0x10:
     puVar18 = (unsigned char *)0x0;
     temp_v19 = g_statusDown;
-    temp_v10 = FUN_0029efa8(g_statusDown + 0x564);
+    temp_v10 = listCursorGetRowIfUnblocked(g_statusDown + 0x564);
     temp_v18 = 0;
     temp_v17 = (unsigned char *)0x0;
     texDrawCompositeSprite(2,0x1a,0xc,temp_v1,temp_v2,0xb3);
@@ -308,7 +308,7 @@ LAB_001ccb9c:
     temp_v12 = g_statusDown + 0x223c;
     temp_v24 = temp_v12;
     temp_v13 = resourceRunOperationIfUnblocked();
-    temp_v7 = FUN_0029efa8(temp_v12);
+    temp_v7 = listCursorGetRowIfUnblocked(temp_v12);
     temp_v12 = objectPartRunUnlessLocked(temp_v12);
     texDrawCompositeSprite(2,0x1a,0x10,temp_v1,temp_v2,0xb3);
     FUN_0029ab54(temp_v1,temp_v2);
@@ -388,7 +388,7 @@ LAB_001ccb9c:
     efctSetSpeed();
     if ((*(int *)(temp_v10 + 0x400) == 0x13) && (0 < *(short *)(temp_v25 + 0x32))) {
       temp_v12 = objectPartRunUnlessLocked(temp_v24);
-      temp_v10 = FUN_0029efa8(temp_v24);
+      temp_v10 = listCursorGetRowIfUnblocked(temp_v24);
       temp_v10 = asdTMTexTableEntryAt(0x1a,temp_v12 + temp_v10 * 4 + 0x4ae);
       efctSetSpeed();
       temp_v12 = g_titleScene;
@@ -515,7 +515,7 @@ LAB_001ccb9c:
           temp_v14 = 0xff;
           if (temp_v13 != 0x17) {
             if (temp_v13 == 0x1a) {
-              temp_v16 = FUN_0029efa8(temp_v19);
+              temp_v16 = listCursorGetRowIfUnblocked(temp_v19);
               temp_v15 = temp_v16 & 0xffffffff00000000;
               if ((int)temp_v16 == temp_v12) {
                 if (*(int *)(temp_v10 + 0x40c) < 9) {
@@ -529,7 +529,7 @@ LAB_001ccb9c:
             }
           }
           else {
-            temp_v16 = FUN_0029efa8(temp_v19);
+            temp_v16 = listCursorGetRowIfUnblocked(temp_v19);
             temp_v15 = temp_v16 & 0xffffffff00000000;
             if ((int)temp_v16 == temp_v12) {
               if (*(int *)(temp_v10 + 0x40c) < 9) {
@@ -543,7 +543,7 @@ LAB_001ccb9c:
           }
         }
         else {
-          temp_v15 = FUN_0029efa8(temp_v19);
+          temp_v15 = listCursorGetRowIfUnblocked(temp_v19);
           if ((int)temp_v15 == temp_v12) goto LAB_001cdb08;
           temp_v15 = temp_v15 & 0xffffffff00000000;
           temp_v14 = 0xff;
@@ -561,7 +561,7 @@ LAB_001cdb08:
     } while (temp_v12 < 8);
     if (!(temp_v13 == 0x18 || temp_v13 == 0x1b)) {
       if ((temp_v13 != 0x16 && temp_v13 != 0x17) && temp_v13 != 0x1a) {
-        temp_v12 = FUN_0029efa8(temp_v19);
+        temp_v12 = listCursorGetRowIfUnblocked(temp_v19);
         temp_v7 = FUN_0029ee54((const void *)(temp_v19));
         if (temp_v12 == temp_v7 - 1) goto LAB_001cdd1c;
       }
@@ -586,7 +586,7 @@ LAB_001cdb08:
       VectorSignedToFloat(*(short *)(temp_v12 + 8) + temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
       textDrawString(2,0x323232ff,&temp_v21);
       if (temp_v13 == 0x18 || temp_v13 == 0x1b) {
-        temp_v12 = FUN_0029efa8(temp_v19);
+        temp_v12 = listCursorGetRowIfUnblocked(temp_v19);
         temp_v9 = (unsigned int)*(unsigned short *)(temp_v10 + temp_v12 * 2 + 0x2370);
         temp_v8 = 0;
         if (temp_v9 != 0) {
@@ -623,7 +623,7 @@ LAB_001cdd1c:
       }
     }
     else {
-      temp_v12 = FUN_0029efa8(temp_v19);
+      temp_v12 = listCursorGetRowIfUnblocked(temp_v19);
       temp_v13 = FUN_0029ee54((const void *)(temp_v19));
       if (temp_v13 - 1 == temp_v12) {
         temp_v8 = (unsigned int)*(unsigned short *)(temp_v10 + 0x2380);

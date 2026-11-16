@@ -38,7 +38,7 @@ u32 scrBattleDamagePartyNonlethal()
             }
             if (damage >= target->hp)
                 damage = target->hp - 1;
-            FUN_003ee0c0(btlGetMainState());
+            btlSlotManagerResetStates(btlGetMainState());
             battle = btlGetMainState();
             ResourceUnit *unit = &((ResourceUnit *)battle->unk1ED4)[target->unitIndex];
             FUN_004fc094(0, source, 0, unit, 0, damage, -1,

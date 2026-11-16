@@ -46,7 +46,7 @@ typedef struct {
     unsigned int sp138; /* 0x138: local_138 */
 } void_stack;
 
-extern unsigned int DAT_00407ed0; /* 0x407ed0 */
+extern unsigned int g_sinCosTable; /* 0x407ed0 */
 extern unsigned int DAT_00407ed4; /* 0x407ed4 */
 extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
@@ -247,11 +247,11 @@ void FUN_0020f6c8(void)
     temp_v15 = (float)VectorUnsignedToFloat(temp_v7 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
     temp_v12 = (float)(&DAT_00407ed4)[temp_v3 * 4] + (32.0f - temp_v9) * (float)(&DAT_00407edc)[temp_v3 * 4]
     ;
-    temp_v11 = -((float)(&DAT_00407ed0)[temp_v3 * 4] +
+    temp_v11 = -((float)(&g_sinCosTable)[temp_v3 * 4] +
               (32.0f - temp_v9) * (float)(&DAT_00407ed8)[temp_v3 * 4]);
-    temp_v43 = (float)(&DAT_00407ed0)[temp_v5 * 4] +
+    temp_v43 = (float)(&g_sinCosTable)[temp_v5 * 4] +
                (temp_v17 - temp_v10) * (float)(&DAT_00407ed8)[temp_v5 * 4];
-    temp_v9 = (float)(&DAT_00407ed0)[temp_v6 * 4] + (0.0f - temp_v15) * (float)(&DAT_00407ed8)[temp_v6 * 4];
+    temp_v9 = (float)(&g_sinCosTable)[temp_v6 * 4] + (0.0f - temp_v15) * (float)(&DAT_00407ed8)[temp_v6 * 4];
     temp_v15 = (float)(&DAT_00407ed4)[temp_v6 * 4] + (0.0f - temp_v15) * (float)(&DAT_00407edc)[temp_v6 * 4];
     temp_v44 = (float)(&DAT_00407ed4)[temp_v5 * 4] +
                (temp_v17 - temp_v10) * (float)(&DAT_00407edc)[temp_v5 * 4];
@@ -281,13 +281,13 @@ void FUN_0020f6c8(void)
     temp_v9 = (float)VectorUnsignedToFloat(temp_v7 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
     temp_v3 = temp_v8 & 0xff;
     temp_v15 = (float)VectorUnsignedToFloat(temp_v8 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
-    temp_v11 = (float)(&DAT_00407ed0)[temp_v5 * 4] + (0.0f - temp_v10) * (float)(&DAT_00407ed8)[temp_v5 * 4];
+    temp_v11 = (float)(&g_sinCosTable)[temp_v5 * 4] + (0.0f - temp_v10) * (float)(&DAT_00407ed8)[temp_v5 * 4];
     temp_v10 = (float)(&DAT_00407ed4)[temp_v5 * 4] + (0.0f - temp_v10) * (float)(&DAT_00407edc)[temp_v5 * 4];
-    temp_v43 = (float)(&DAT_00407ed0)[temp_v6 * 4] +
+    temp_v43 = (float)(&g_sinCosTable)[temp_v6 * 4] +
                (temp_v17 - temp_v9) * (float)(&DAT_00407ed8)[temp_v6 * 4];
     temp_v44 = (float)(&DAT_00407ed4)[temp_v6 * 4] +
                (temp_v17 - temp_v9) * (float)(&DAT_00407edc)[temp_v6 * 4];
-    temp_v17 = (float)(&DAT_00407ed0)[temp_v3 * 4] + (0.0f - temp_v15) * (float)(&DAT_00407ed8)[temp_v3 * 4];
+    temp_v17 = (float)(&g_sinCosTable)[temp_v3 * 4] + (0.0f - temp_v15) * (float)(&DAT_00407ed8)[temp_v3 * 4];
     temp_v15 = (float)(&DAT_00407ed4)[temp_v3 * 4] + (0.0f - temp_v15) * (float)(&DAT_00407edc)[temp_v3 * 4];
     if (!romwright_subpiece_4_1_0(temp_v0 >> 0x1d,0)) {
       temp_v43 = -temp_v43;

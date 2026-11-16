@@ -2,7 +2,7 @@
 
 extern "C" {
 extern s8 DAT_0063d008[];                /* default 0x100-byte output buffer */
-extern const u8 DAT_0053d2e8[][2];       /* two-byte code of each single-byte character */
+extern const u8 g_singleByteGlyphTable[][2];       /* two-byte code of each single-byte character */
 
 /* Expands single-byte glyphs into two-byte codes, keeping multibyte characters (the body of
  * textExpandSingleByteGlyphs). */
@@ -24,8 +24,8 @@ static __inline void expandGlyphs(const u8 *source, s8 *destination, s32 capacit
             destination[written] = -8;
             destination[written + 1] = 1;
         } else {
-            destination[written] = DAT_0053d2e8[character][0];
-            destination[written + 1] = DAT_0053d2e8[character][1];
+            destination[written] = g_singleByteGlyphTable[character][0];
+            destination[written + 1] = g_singleByteGlyphTable[character][1];
         }
         written += 2;
         if (written >= capacity) {

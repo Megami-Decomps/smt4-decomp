@@ -11,7 +11,7 @@
 extern "C" {
 extern BtlEncounterGlobalsA g_btlEncount;
 extern AocSystemA *g_aocSystem;
-s32 FUN_003eebf4(BtlMainStateA *battle, s32 kind);
+s32 btlFindSelectionIndexByOrdinal(BtlMainStateA *battle, s32 kind);
 Table00Record *dataTable00FindById(u32 id);
 void sysMemClear(void *destination, u32 size);
 s32 textFormatBuffer(char *destination, const char *format, ...);
@@ -24,7 +24,7 @@ void FUN_003e03b0(BattleArrangementLoadState *load, BtlMainStateA *battle)
 {
     // This pointer lies inside padding beginning at an unaligned offset in BtlMainStateA.
     struct ArrangementFileView { u8 prefix[0x1EC4]; void *file; };
-    s32 index = FUN_003eebf4(battle, 1);
+    s32 index = btlFindSelectionIndexByOrdinal(battle, 1);
     if (index >= 0) {
         battle->stateFlags64.bits |= g_btlEncount.queuedStateMask;
         Table00Record *record = dataTable00FindById(battle->entries[index].id);

@@ -16,7 +16,7 @@ void* sysMemClear(void* destination, u32 size);
 void asdMemFree(void* memory);
 s32 textFormatBuffer(char* destination, const char* format, ...);
 char* libc_strcpy(char* destination, const char* source);
-char* FUN_00100d60(char* text, s32 character);
+char* libc_strrchr(char* text, s32 character);
 
 // Reset the auxiliary effect slots and enqueue uncached files from the fixed effect-name table.
 u32 FUN_004f741c(BtlAuxA* auxiliary)
@@ -37,7 +37,7 @@ u32 FUN_004f741c(BtlAuxA* auxiliary)
         sysMemClear(formatted, sizeof(formatted));
         textFormatBuffer(formatted, DAT_005284c0, DAT_00528380[index]);
         libc_strcpy(path, formatted);
-        libc_strcpy(slot->name, FUN_00100d60(path, '/') + 1);
+        libc_strcpy(slot->name, libc_strrchr(path, '/') + 1);
         if (findRecordByKey(slot->name) == 0xFF) {
             asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&slot->data), 1);
             slot->readiness.flags |= 1;

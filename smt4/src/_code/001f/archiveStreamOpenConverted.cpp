@@ -37,7 +37,7 @@ nn::Result archiveStreamOpenConverted(SaveStreamOwner *owner, u32 id, s32 mode)
 
     if (pathBuildWide(id, buffer, 1) == NULL) {
         result = 0xE0E046BC;
-        FUN_002c3510(result);
+        processResultSetValue(result);
         return result;
     }
     if (mode == 1) {
@@ -45,7 +45,7 @@ nn::Result archiveStreamOpenConverted(SaveStreamOwner *owner, u32 id, s32 mode)
     } else {
         result = saveStreamOpen(&owner->stream, buffer, 1);
     }
-    FUN_002c3510(result);
+    processResultSetValue(result);
     return result;
 }
 

@@ -37,8 +37,8 @@ typedef struct ShiftRange {
 extern const ShiftRange DAT_005297d4[7]; /* the shift ranges (-6..6 mapped to -0.3..0.3) */
 void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 u8 pairedAvailabilityGetState(s32 index);
-void FUN_003d54f8(s32 arg, s32 value);
-PartySlotA *FUN_003e503c(u32 index);
+void titleSetSlotValueState2(s32 arg, s32 value);
+PartySlotA *partyGetSlotPreferredFirst(u32 index);
 u32 partySlotIsOccupied(PartySlotA *slot);
 void FUN_003f1b3c(BtlMainStateA *state, s32 section, s32 kind, u32 *info, u32 *effectId);
 void FUN_0047f4cc(u32 effectId, f32 scale, f32 alphaA, f32 alphaB);
@@ -55,7 +55,7 @@ void FUN_00410d44(ShiftEffectWork *work)
     case 0:
         if (FUN_00163e84(0) != 0) {
             if (pairedAvailabilityGetState(0) != 0) {
-                FUN_003d54f8(0, 10);
+                titleSetSlotValueState2(0, 10);
             }
             work->step++;
         }
@@ -65,7 +65,7 @@ void FUN_00410d44(ShiftEffectWork *work)
             s32 member = 0;
 
             for (u32 i = 0; i < 12; i++) {
-                PartySlotA *slot = FUN_003e503c((u16)i);
+                PartySlotA *slot = partyGetSlotPreferredFirst((u16)i);
 
                 if (((SelectedSlotView *)state)->selected == slot) {
                     u32 info;

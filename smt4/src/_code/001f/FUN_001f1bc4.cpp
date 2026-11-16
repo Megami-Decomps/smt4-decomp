@@ -33,7 +33,7 @@ extern int uniteGetWork(void);
 extern unsigned int dataTable24Sub0GetRecordS90X(int);
 /* Supplied declaration required: FUN_0029a17c. */
 extern int ifTouchGetSelectionModeForRegion(int);
-extern int FUN_0029efa8(int);
+extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: textDrawString. */
 extern int vec2GetYInt(int);
@@ -67,9 +67,9 @@ void FUN_001f1bc4(int param_1,int param_2)
   if (temp_v0 != 0) {
     temp_v1 = temp_v0 + 0x4e8;
     temp_v2 = resourceRunOperationIfUnblocked();
-    temp_v3 = FUN_0029efa8(temp_v1);
+    temp_v3 = listCursorGetRowIfUnblocked(temp_v1);
     temp_v4 = dataTable24Sub0GetRecordS90X(temp_v3 + temp_v2);
-    temp_v2 = FUN_0029efa8(temp_v1);
+    temp_v2 = listCursorGetRowIfUnblocked(temp_v1);
     temp_v2 = asdTMTexTableEntryAt(0x24,temp_v2 + 0xb6);
     if (*(int *)(temp_v0 + 0x3fc) >= 4) {
       texDrawTableEntryAtStoredOrigin(2,0x24,0xb5,param_1,param_2,0x97);
@@ -113,11 +113,11 @@ void FUN_001f1bc4(int param_1,int param_2)
       }
       temp_v11 = temp_v11 + 1;
     } while (temp_v11 < 8);
-    temp_v1 = FUN_0029efa8(temp_v1);
+    temp_v1 = listCursorGetRowIfUnblocked(temp_v1);
     temp_v1 = asdTMTexTableEntryAt(0x24,temp_v1 + 200);
     temp_v2 = resourceRunOperationIfUnblocked(temp_v13);
-    temp_v3 = FUN_0029efa8(temp_v13);
-    temp_v11 = FUN_0029efa8(temp_v13);
+    temp_v3 = listCursorGetRowIfUnblocked(temp_v13);
+    temp_v11 = listCursorGetRowIfUnblocked(temp_v13);
     temp_v11 = asdTMTexTableEntryAt(0x24,temp_v11 + 200);
     temp_v5 = *(int *)(temp_v0 + 0x3fc);
     if (temp_v5 >= 4) {
@@ -140,7 +140,7 @@ void FUN_001f1bc4(int param_1,int param_2)
     texDrawTableEntryAtStoredOrigin(2,0x24,0xc0,param_1,temp_v1,0xab);
     efctSetSpeed();
     texDrawTableEntryAtStoredOrigin(2,0x24,0xc1,param_1,temp_v1,0xb5);
-    temp_v11 = FUN_0029efa8(temp_v13);
+    temp_v11 = listCursorGetRowIfUnblocked(temp_v13);
     temp_v11 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v0 + temp_v11 * 2 + 0x44c));
     if (!((temp_v11 == 1 || temp_v11 == 2) || temp_v11 == 6)) {
       texDrawTableEntryAtStoredOrigin(2,0x24,0xc2,param_1,temp_v1,0xba);

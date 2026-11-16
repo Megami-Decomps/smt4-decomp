@@ -6,7 +6,7 @@ extern "C" {
 
 void FUN_002cf3b4(void)
 {
-    GameModeFlags *settings = reinterpret_cast<GameModeFlags *>(FUN_002a0d0c());
+    GameModeFlags *settings = reinterpret_cast<GameModeFlags *>(gameDataGetSortPreferences());
     settings->sortModes[20].order = 0;
     settings->sortModes[23].order = 0;
     settings->sortModes[0].order = 2;

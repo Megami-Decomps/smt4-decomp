@@ -1,14 +1,14 @@
 #include "gfx/ModelGroups.h"
 
 extern "C" {
-extern ModelGroups *DAT_00447e10;
+extern ModelGroups *g_modelGroups;
 void asdMdlManagerMarkDestroy(AsdMdlObject *model);
 
 /* Marks active models in both groups for destruction and clears their pending flags. */
 void modelGroupsMarkActiveDestroy(void)
 {
     for (s32 i = 8; i >= 0; --i) {
-        ModelGroups *groups = DAT_00447e10;
+        ModelGroups *groups = g_modelGroups;
         ModelGroupSlot *slot = &groups->primary[i];
         AsdMdlObject *model = NULL;
         if (slot->active) {
@@ -20,7 +20,7 @@ void modelGroupsMarkActiveDestroy(void)
         }
     }
     for (s32 i = 2; i >= 0; --i) {
-        ModelGroups *groups = DAT_00447e10;
+        ModelGroups *groups = g_modelGroups;
         ModelGroupSlot *slot = &groups->secondary[i];
         AsdMdlObject *model = NULL;
         if (slot->active) {

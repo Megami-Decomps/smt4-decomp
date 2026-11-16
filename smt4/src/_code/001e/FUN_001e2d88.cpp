@@ -7,7 +7,7 @@ extern "C" {
 
 int mathDistanceBetweenPoints(void);
 
-extern int DAT_00447e10; /* 0x447e10 */
+extern int g_modelGroups; /* 0x447e10 */
 extern int g_lmapScene; /* 0x447e88 */
 extern signed char DAT_0049f934; /* 0x49f934 */
 extern signed char DAT_0049f93e; /* 0x49f93e */
@@ -37,7 +37,7 @@ void FUN_001e2d88(void)
     temp_v7 = 0;
     temp_v10 = 0x3c23d70a;
     do {
-      temp_v5 = DAT_00447e10 + temp_v7 * 0x44;
+      temp_v5 = g_modelGroups + temp_v7 * 0x44;
       pcVar7 = (char *)(temp_v5 + 0x14);
       if (*pcVar7 != '\0') {
         switch(*(int *)(temp_v5 + 0x18)) {
@@ -46,7 +46,7 @@ void FUN_001e2d88(void)
             temp_v2 = 0;
             do {
               if (pcVar7[temp_v2 + 0x2c] == DAT_0049fb30) {
-                if (*(char *)(DAT_00447e10 + 0x10) != '\0') {
+                if (*(char *)(g_modelGroups + 0x10) != '\0') {
                   temp_v2 = *(int *)(temp_v5 + 0x54);
                   *(unsigned char *)(temp_v5 + 0x15) = 1;
                   *(unsigned char *)(temp_v5 + 0x24) = 1;
@@ -57,13 +57,13 @@ void FUN_001e2d88(void)
                     temp_v1 = *(int *)(temp_v5 + 0x3c);
 joined_r0x001e2fa8:
                     if (temp_v1 == 1) {
-                      temp_v2 = DAT_00447e10 + temp_v2 * 0x2c;
+                      temp_v2 = g_modelGroups + temp_v2 * 0x2c;
                       temp_v2 = temp_v2 + 0x1114;
                       *(unsigned char *)(temp_v2 + 1) = 1;
                       *(unsigned int *)(temp_v2 + 0x14) = *(unsigned int *)(temp_v5 + 0x38);
                     }
                     else {
-                      temp_v2 = DAT_00447e10 + temp_v2 * 0x2c;
+                      temp_v2 = g_modelGroups + temp_v2 * 0x2c;
                       temp_v2 = temp_v2 + 0x12a0;
                       *(unsigned char *)(temp_v2 + 1) = 1;
                       *(unsigned int *)(temp_v2 + 0x14) = *(unsigned int *)(temp_v5 + 0x38);
@@ -82,11 +82,11 @@ joined_r0x001e2fa8:
                     *(unsigned int *)(temp_v5 + 0x18) = 3;
                     if (temp_v2 != -1) {
                       if (*(int *)(temp_v5 + 0x3c) == 1) {
-                        temp_v2 = DAT_00447e10 + temp_v2 * 0x2c;
+                        temp_v2 = g_modelGroups + temp_v2 * 0x2c;
                         temp_v2 = temp_v2 + 0x1114;
                       }
                       else {
-                        temp_v2 = DAT_00447e10 + temp_v2 * 0x2c;
+                        temp_v2 = g_modelGroups + temp_v2 * 0x2c;
                         temp_v2 = temp_v2 + 0x12a0;
                       }
                       *(unsigned char *)(temp_v2 + 1) = 1;
@@ -154,7 +154,7 @@ LAB_001e2fd0:
           *(unsigned char *)(temp_v5 + 0x15) = 1;
           *(unsigned int *)(temp_v5 + 0x38) = 2;
           if (*(int *)(temp_v5 + 0x54) != -1) {
-            temp_v2 = DAT_00447e10 + *(int *)(temp_v5 + 0x54) * 0x2c;
+            temp_v2 = g_modelGroups + *(int *)(temp_v5 + 0x54) * 0x2c;
             if (*(int *)(temp_v5 + 0x3c) != 1) {
               temp_v2 = temp_v2 + 0x12a0;
               *(unsigned char *)(temp_v2 + 1) = 1;
@@ -182,10 +182,10 @@ LAB_001e3070:
     } while (temp_v7 < 0x40);
     temp_v7 = 0;
     do {
-      temp_v5 = DAT_00447e10 + temp_v7 * 0x44;
+      temp_v5 = g_modelGroups + temp_v7 * 0x44;
       if (((*(char *)(temp_v5 + 0x14) != '\0') && (*(char *)(temp_v5 + 0x24) == '\0')) &&
          (*(int *)(temp_v5 + 0x54) != -1)) {
-        temp_v2 = DAT_00447e10 + *(int *)(temp_v5 + 0x54) * 0x2c;
+        temp_v2 = g_modelGroups + *(int *)(temp_v5 + 0x54) * 0x2c;
         if (*(int *)(temp_v5 + 0x3c) == 1) {
           temp_v2 = temp_v2 + 0x1114;
         }
@@ -201,8 +201,8 @@ LAB_001e3070:
     } while (temp_v7 < 0x40);
     temp_v7 = 0;
     do {
-      temp_v5 = DAT_00447e10;
-      temp_v2 = DAT_00447e10 + temp_v7 * 0x44;
+      temp_v5 = g_modelGroups;
+      temp_v2 = g_modelGroups + temp_v7 * 0x44;
       temp_v8 = *(char *)(temp_v2 + 0x14) != '\0';
       temp_v0 = '\0';
       if (temp_v8) {
@@ -212,7 +212,7 @@ LAB_001e3070:
         if (*(int *)(temp_v2 + 0x3c) == 1) {
           temp_v1 = 0;
           do {
-            temp_v3 = DAT_00447e10 + temp_v1 * 0x2c;
+            temp_v3 = g_modelGroups + temp_v1 * 0x2c;
             if ((*(char *)(temp_v3 + 0x1114) != '\0') && (*(int *)(temp_v3 + 0x113c) == -1)) {
               *(int *)(temp_v3 + 0x113c) = temp_v7;
               goto LAB_001e3208;
@@ -221,19 +221,19 @@ LAB_001e3070:
           } while (temp_v1 < 9);
           temp_v1 = -1;
         }
-        else if ((*(char *)(DAT_00447e10 + 0x12a0) != '\0') &&
-                (*(int *)(DAT_00447e10 + 0x12c8) == -1)) {
-          *(int *)(DAT_00447e10 + 0x12c8) = temp_v7;
+        else if ((*(char *)(g_modelGroups + 0x12a0) != '\0') &&
+                (*(int *)(g_modelGroups + 0x12c8) == -1)) {
+          *(int *)(g_modelGroups + 0x12c8) = temp_v7;
           temp_v1 = 0;
         }
-        else if ((*(char *)(DAT_00447e10 + 0x12cc) != '\0') &&
-                (*(int *)(DAT_00447e10 + 0x12f4) == -1)) {
-          *(int *)(DAT_00447e10 + 0x12f4) = temp_v7;
+        else if ((*(char *)(g_modelGroups + 0x12cc) != '\0') &&
+                (*(int *)(g_modelGroups + 0x12f4) == -1)) {
+          *(int *)(g_modelGroups + 0x12f4) = temp_v7;
           temp_v1 = 1;
         }
-        else if ((*(char *)(DAT_00447e10 + 0x12f8) != '\0') &&
-                (*(int *)(DAT_00447e10 + 0x1320) == -1)) {
-          *(int *)(DAT_00447e10 + 0x1320) = temp_v7;
+        else if ((*(char *)(g_modelGroups + 0x12f8) != '\0') &&
+                (*(int *)(g_modelGroups + 0x1320) == -1)) {
+          *(int *)(g_modelGroups + 0x1320) = temp_v7;
           temp_v1 = 2;
         }
         else {
@@ -262,7 +262,7 @@ LAB_001e3208:
       }
       temp_v7 = temp_v7 + 1;
     } while (temp_v7 < 0x40);
-    *(unsigned char *)(DAT_00447e10 + 0x10) = 0;
+    *(unsigned char *)(g_modelGroups + 0x10) = 0;
   }
   return;
 }

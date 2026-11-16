@@ -3,7 +3,7 @@
 #include "shard/W5_W5Match2_PlainData.h"
 
 extern "C" {
-void FUN_0018a924(f32 *, f32 *, f32);
+void mathSinCos(f32 *, f32 *, f32);
 void FUN_0018ee0c(void *, u32, f32, f32, f32, f32, f32, f32);
 void FUN_0018ab54(Matrix44 *, const Matrix44 *);
 void FUN_0018f0ac(void *, u32, const Matrix44 *, f32, f32, f32, f32, f32);
@@ -22,7 +22,7 @@ void FUN_0016ae94(RenderUpdateStatePrefixA *state, const RenderUpdateContextPref
     } else {
         f32 sine, cosine;
         f32 phase = context->projection.fieldOfView * 0.017453292f * 0.5f * 40.743664f;
-        FUN_0018a924(&sine, &cosine, phase);
+        mathSinCos(&sine, &cosine, phase);
         f32 focalScale = cosine / sine;
         f32 inverseRange = 1.0f / (farClip - nearClip);
         Matrix44 projection = {};

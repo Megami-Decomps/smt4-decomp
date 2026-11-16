@@ -16,7 +16,7 @@ void mobiclipYieldPlaybackThread(MovieSync *);
 extern u8 DAT_004c3a38[0x18];
 extern u8 DAT_004c3a50[0xa8];
 extern u8 DAT_004c3af8[0x28];
-extern MovieSync DAT_004c3b20;
+extern MovieSync g_mobiclipPlayer;
 extern u8 DAT_004c4080[0x60];
 extern u32 DAT_004c40e0;
 extern MovieOpenFile DAT_004c40e4;
@@ -48,11 +48,11 @@ void FUN_0032b3c4(const char *filename)
     FUN_0034dddc(DAT_004c4080, &DAT_004c40e0, DAT_004c3a38);
     u32 stream = FUN_0034e134(DAT_004c4080);
     FUN_003f66f0(&DAT_0044d024, stream, DAT_004c4080);
-    FUN_00351498(&DAT_004c3b20, DAT_004c3a38,
+    FUN_00351498(&g_mobiclipPlayer, DAT_004c3a38,
                 DAT_0044d024.reader, DAT_0044d024.player,
                 DAT_004c3a50, DAT_004c3af8);
     do {
-        mobiclipYieldPlaybackThread(&DAT_004c3b20);
-    } while (DAT_004c3b20.state != 7 && DAT_004c3b20.state != 1);
+        mobiclipYieldPlaybackThread(&g_mobiclipPlayer);
+    } while (g_mobiclipPlayer.state != 7 && g_mobiclipPlayer.state != 1);
 }
 }

@@ -15,7 +15,7 @@ void scrScriptProcessStartEntry(ScriptRunState *script, s32 entry);
 void statusDownSwitchTab(u8 value);
 void FUN_002c8538(u8 value);
 void FUN_002c85b0(u8 value);
-void FUN_00333f6c(void);
+void gameGlobalsReleaseReference(void);
 void FUN_0033449c(u8 value);
 void FUN_00371f18(void);
 void buttonHelpSetMode(s32 mode);
@@ -75,7 +75,7 @@ void FUN_0020b490(EngineUnits *result, s32 mode)
             FUN_0023b45c(0);
             FUN_002c8538(0);
             FUN_0033449c(0);
-            FUN_00333f6c();
+            gameGlobalsReleaseReference();
             u32 required = gameDataBlocksGetWord();
             if (required != 0 && required <= *reinterpret_cast<const u32 *>(gameGetSlotTable())) {
                 work->mode = 22;

@@ -11,7 +11,7 @@ typedef char NavigationPollingSceneCheck[offsetof(NavigationPollingWork, scene) 
 extern "C" {
 extern GameStateA g_gameState;
 void FUN_0031879c(void);
-u32 FUN_0048e40c(NavigationPollingWork *work);
+u32 naviMainConditionsHold(NavigationPollingWork *work);
 u32 FUN_00488ce8(NavigationPollingWork *work);
 u32 setFullScreenRect(void);
 void naviMainSetValuePair(void *scene, const NavigationPoint *position);
@@ -41,7 +41,7 @@ u32 FUN_00485d1c(NavigationPollingWork *work)
             FUN_00489480(work);
             FUN_0048981c(work);
         }
-    } else if (FUN_0048e40c(work)) {
+    } else if (naviMainConditionsHold(work)) {
         result = FUN_00488ce8(work);
     }
     if (g_gameState.navigation.alternateNaviMap)

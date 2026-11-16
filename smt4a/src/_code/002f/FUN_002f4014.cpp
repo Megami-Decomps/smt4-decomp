@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002e59f8(...);
+int memcpySrcFirst(...);
 int bitsAt60Set(...);
 int bitsAt60Clear(int, int);
 
 extern unsigned char g_gameDataBlocks; /* 0x57f698 */
 
-/* Supplied declaration required: FUN_002e59f8. */
+/* Supplied declaration required: memcpySrcFirst. */
 extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: bitsAt60Set. */
 /* Supplied declaration required: bitsAt60Clear. */
@@ -36,10 +36,10 @@ void FUN_002f4014(int param_1)
   *(unsigned char *)(temp_v3 + 0x27e96) = *(unsigned char *)(param_1 + 0x21);
   *puVar6 = *(unsigned int *)(param_1 + 0x24);
   *(unsigned int *)(temp_v3 + 0x27e90) = *(unsigned int *)(param_1 + 0x30);
-  FUN_002e59f8(param_1,temp_v3 + 0x27e98,0xe);
+  memcpySrcFirst(param_1,temp_v3 + 0x27e98,0xe);
   *(unsigned char *)(temp_v3 + 0x27ea6) = *(unsigned char *)(param_1 + 0x22);
   *(unsigned char *)(temp_v3 + 0x27ea7) = *(unsigned char *)(param_1 + 0x23);
-  FUN_002e59f8(param_1 + 0xe,temp_v3 + 0x27ea8);
+  memcpySrcFirst(param_1 + 0xe,temp_v3 + 0x27ea8);
   *(unsigned char *)(temp_v3 + 0x27eba) = *(unsigned char *)(param_1 + 0x42);
   if ((int)*(short *)(temp_v3 + 0x27e94) == 0) {
     temp_v3 = 0;

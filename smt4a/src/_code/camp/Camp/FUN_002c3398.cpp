@@ -19,7 +19,7 @@ int FUN_0020d934(...);
 int partyPanelHasSlotValue(...);
 int scrollOwnerSelectIndex(...);
 int scrollListSetSelectionTracked(...);
-int FUN_003343f0(...);
+int gameGlobalsSetMenuOpenFlag(...);
 int slotPlacementAssignSlotPosition(...);
 
 int uiSpriteStateInitFromSource(...);
@@ -36,7 +36,7 @@ int campSelectorRebuildList(...);
 int FUN_0026f7f0(...);
 void campSetSpriteAnimationPreset(int, int, int, unsigned int);
 int FUN_002a2cb4(...);
-int FUN_002a4878(...);
+int listCursorGetRowOfChildIfUnblocked(...);
 int FUN_002c8538(...);
 int FUN_002e5c48(...);
 int sysMemClear(...);
@@ -93,8 +93,8 @@ extern unsigned char DAT_005e1eba; /* 0x5e1eba */
 /* Supplied declaration required: campSelectorRebuildList. */
 /* Supplied declaration required: FUN_0026f7f0. */
 /* Supplied declaration required: FUN_002a2cb4. */
-/* Supplied declaration required: FUN_002a4878. */
-extern unsigned int FUN_002a4894(int);
+/* Supplied declaration required: listCursorGetRowOfChildIfUnblocked. */
+extern unsigned int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: scrollOwnerSelectIndex. */
 /* Supplied declaration required: scrollListSetSelectionTracked. */
 /* Supplied declaration required: FUN_002c8538. */
@@ -104,7 +104,7 @@ extern int FUN_002e27b8(void);
 extern int FUN_002ef9f0(void);
 /* Supplied declaration required: FUN_002f78a0. */
 /* Supplied declaration required: campCommonBgAcquire. */
-/* Supplied declaration required: FUN_003343f0. */
+/* Supplied declaration required: gameGlobalsSetMenuOpenFlag. */
 /* Supplied declaration required: FUN_003344b4. */
 /* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: FUN_003423e8. */
@@ -295,8 +295,8 @@ void FUN_002c3398(void)
   if (*(int *)(temp_v6 + 0x20) == 8) {
     if (*(char *)(temp_v6 + 0x42) != '\0') {
       temp_v5 = temp_v6 + 0xdb4;
-      temp_v3 = FUN_002a4878();
-      temp_v4 = FUN_002a4894(temp_v5);
+      temp_v3 = listCursorGetRowOfChildIfUnblocked();
+      temp_v4 = listCursorGetRowIfUnblocked(temp_v5);
       temp_v1 = 0;
       partyPanelHasSlotValue(0,temp_v3,temp_v4,*(unsigned int *)(temp_v6 + 0x2c));
       if (temp_v1 == 0) {
@@ -360,8 +360,8 @@ LAB_002c4664:
       }
     }
     else {
-      temp_v3 = FUN_002a4878(temp_v6 + 0xd50);
-      temp_v4 = FUN_002a4894(temp_v6 + 0xd50);
+      temp_v3 = listCursorGetRowOfChildIfUnblocked(temp_v6 + 0xd50);
+      temp_v4 = listCursorGetRowIfUnblocked(temp_v6 + 0xd50);
       temp_v1 = 0;
       partyPanelHasSlotValue(0,temp_v3,temp_v4,*(unsigned int *)(temp_v6 + 0x2c));
       if (temp_v1 == 0) {
@@ -501,7 +501,7 @@ LAB_002c4a2c:
     }
     temp_v6 = FUN_002ef9f0();
     if (temp_v6 == 0) {
-      FUN_003343f0();
+      gameGlobalsSetMenuOpenFlag();
     }
     temp_v6 = *(int *)(temp_v1 + 0x1c);
   }

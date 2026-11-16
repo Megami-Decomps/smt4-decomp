@@ -31,7 +31,7 @@ void FUN_00306cb4(RecordWriteStream *stream, const SerializedHandleRecord *recor
 void bufferAssignByteAlias(RecordWriteStream *stream, const u8 *value);
 void strHolderAssignU32Alias(RecordWriteStream *stream, const u32 *value);
 void FUN_002fbb92(RecordWriteStream *stream, const SerializedString *value);
-s32 FUN_002fbb70(RecordWriteStream *stream, u32 position);
+s32 streamWriterSetLengthIfFits(RecordWriteStream *stream, u32 position);
 }
 
 static inline const u8 &supportedRecordVersion(const u8 &requested, const u8 &supported)
@@ -59,9 +59,9 @@ extern "C" void FUN_00119da2(RecordWriteStream *stream, const SerializedHandleRe
     strHolderAssignU32Alias(stream, &record->value);
     if (!headerless) {
         u32 end = stream->buffer->position;
-        FUN_002fbb70(stream, start);
+        streamWriterSetLengthIfFits(stream, start);
         u32 size = end - start - sizeof(u32);
         strHolderAssignU32Alias(stream, &size);
-        FUN_002fbb70(stream, end);
+        streamWriterSetLengthIfFits(stream, end);
     }
 }

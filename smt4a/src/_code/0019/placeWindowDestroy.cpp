@@ -18,7 +18,7 @@ static __inline PlaceWindowResource *placeWindowResourceFromSub(void *sub)
 }
 
 extern "C" {
-void FUN_004b7a54(PlaceWindow* window);
+void campScriptPanelResourcesRelease(PlaceWindow* window);
 void owner4DDestroy(PlaceWindow* window);
 void asdOperatorDelete(void* allocation);
 void placeWinRelease(void);
@@ -26,7 +26,7 @@ void placeWinRelease(void);
 // Releases the place window's owned allocation, then destroys its global window state.
 void placeWindowDestroy(PlaceWindow* window)
 {
-    FUN_004b7a54(window);
+    campScriptPanelResourcesRelease(window);
     owner4DDestroy(window);
     asdDebugHookPtr(window->resource);
     if (window->resource != NULL) {

@@ -20,7 +20,7 @@ u32 statusCursorIsAtLast(void)
 {
     Holder *holder = g_statusDown;
     if (holder != NULL) {
-        s32 position = FUN_0029efa8(&holder->cursor);
+        s32 position = listCursorGetRowIfUnblocked(&holder->cursor);
         Cursor *cursor = &holder->cursor;
         s32 count = FUN_0029ee54(cursor);
 

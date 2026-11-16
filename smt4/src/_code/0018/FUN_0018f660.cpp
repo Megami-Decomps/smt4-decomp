@@ -9,7 +9,7 @@ int statusDownRestoreTabForMode(void);
 int FUN_00296284(...);
 int statusCameraApply(void);
 int eventQueueAddUnique(...);
-int FUN_002b8ee0(...);
+int uiSlidingSpriteAdvance(...);
 int eventQueueAddUniqueIfValid(...);
 int timerStart(...);
 int spriteStartAnimationByIndex(...);
@@ -119,7 +119,7 @@ extern unsigned int categoryGetColor(unsigned int);
 /* Supplied declaration required: dataTable00FindById. */
 extern int lmapMainIsRunning(void);
 /* Supplied declaration required: eventQueueAddUnique. */
-/* Supplied declaration required: FUN_002b8ee0. */
+/* Supplied declaration required: uiSlidingSpriteAdvance. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 extern unsigned int vec2GetXInt(char *);
@@ -801,15 +801,15 @@ joined_r0x00190660:
   if (pcVar4[0x1e67] != '\t') {
     if (*(int *)(pcVar4 + 0x12dc) >= 4) {
       if ((*(int *)(pcVar4 + 0x18) >= 10) && (pcVar4[0xd62] != '\0')) {
-        FUN_002b8ee0(pcVar4 + 0x7ec,1);
-        FUN_002b8ee0(pcVar4 + 0xd64,0);
+        uiSlidingSpriteAdvance(pcVar4 + 0x7ec,1);
+        uiSlidingSpriteAdvance(pcVar4 + 0xd64,0);
       }
       else {
         temp_v7 = 0;
         do {
           if (temp_v7 <= *(int *)(pcVar4 + 0x18)) {
-            FUN_002b8ee0(pcVar4 + temp_v7 * 0x8c + 0x7ec,1);
-            FUN_002b8ee0(pcVar4 + temp_v7 * 0x8c + 0xd64,0);
+            uiSlidingSpriteAdvance(pcVar4 + temp_v7 * 0x8c + 0x7ec,1);
+            uiSlidingSpriteAdvance(pcVar4 + temp_v7 * 0x8c + 0xd64,0);
           }
           temp_v7 = temp_v7 + 1;
         } while (temp_v7 < 10);
@@ -827,15 +827,15 @@ joined_r0x00190660:
       *(int *)(pcVar4 + 0x1c) = *(int *)(pcVar4 + 0x1c) + 1;
     }
     if ((*(int *)(pcVar4 + 0x18) >= 10) && (pcVar4[0xd62] != '\0')) {
-      FUN_002b8ee0(pcVar4 + 0x7ec,1);
-      FUN_002b8ee0(pcVar4 + 0xd64,0);
+      uiSlidingSpriteAdvance(pcVar4 + 0x7ec,1);
+      uiSlidingSpriteAdvance(pcVar4 + 0xd64,0);
     }
     else {
       temp_v7 = 0;
       do {
         if (temp_v7 <= *(int *)(pcVar4 + 0x18)) {
-          FUN_002b8ee0(pcVar4 + temp_v7 * 0x8c + 0x7ec,1);
-          FUN_002b8ee0(pcVar4 + temp_v7 * 0x8c + 0xd64,0);
+          uiSlidingSpriteAdvance(pcVar4 + temp_v7 * 0x8c + 0x7ec,1);
+          uiSlidingSpriteAdvance(pcVar4 + temp_v7 * 0x8c + 0xd64,0);
         }
         temp_v7 = temp_v7 + 1;
       } while (temp_v7 < 10);

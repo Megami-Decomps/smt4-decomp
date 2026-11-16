@@ -24,7 +24,7 @@ int FUN_0037a898(...);
 int gfxObjectDestroy(...);
 int FUN_003ba560(...);
 int FUN_003d502c(...);
-int FUN_003d54f8(...);
+int titleSetSlotValueState2(...);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -58,7 +58,7 @@ extern unsigned int FUN_00387350(char *);
 extern int floatOwnerIsDone(unsigned int);
 /* Supplied declaration required: FUN_003ba560. */
 /* Supplied declaration required: FUN_003d502c. */
-/* Supplied declaration required: FUN_003d54f8. */
+/* Supplied declaration required: titleSetSlotValueState2. */
 
 
 unsigned int FUN_002caea0(void)
@@ -113,7 +113,7 @@ unsigned int FUN_002caea0(void)
       FUN_0014f0dc(temp_v0 + 4,temp_v0 + 0x510,temp_v0 + 0x51c,temp_v0 + 0x528);
       FUN_001523b8(temp_v0 + 4,1);
       screenFadeSlotReset(0);
-      FUN_003d54f8(1,10);
+      titleSetSlotValueState2(1,10);
       *(unsigned int *)(temp_v0 + 0x568) = 2;
       *(unsigned int *)(temp_v0 + 0x56c) = 0;
     }

@@ -34,7 +34,7 @@ struct DriftEffect {
 };
 
 extern "C" {
-extern SinCosEntry DAT_00407ed0[];
+extern SinCosEntry g_sinCosTable[];
 extern MapScene *g_lmapScene;
 u32 randNextInRange(u32 maximum);
 void nn_math_ARMv6_VEC3TransformAsm_2AD44C(f32 *vector, f32 (*matrix)[4]);
@@ -44,7 +44,7 @@ void nn_math_ARMv6_VEC3TransformAsm_2AD44C(f32 *vector, f32 (*matrix)[4]);
 static __inline void lookupSinCos(f32 angle, f32 *sine, f32 *cosine)
 {
     u32 whole = static_cast<u32>(angle);
-    const SinCosEntry *entry = &DAT_00407ed0[whole & 0xFF];
+    const SinCosEntry *entry = &g_sinCosTable[whole & 0xFF];
     f32 fraction = angle - static_cast<f32>(whole & 0xFFFF);
     *sine = entry->sine + fraction * entry->sineSlope;
     *cosine = entry->cosine + fraction * entry->cosineSlope;

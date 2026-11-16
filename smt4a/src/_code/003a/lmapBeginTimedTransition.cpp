@@ -11,7 +11,7 @@ struct LmapTransitionState {
 
 extern "C" {
 void mapSetSceneState(u32 event);
-void FUN_003d54f8(u32 index, s32 frames);
+void titleSetSlotValueState2(u32 index, s32 frames);
 void FUN_00303460(u32 state);
 
 // Start the scene transition, configure both delays and queue its next state.
@@ -21,8 +21,8 @@ void lmapBeginTimedTransition()
     LmapTransitionState* scene = (LmapTransitionState*)g_lmapScene;
     scene->state = 8;
     scene->substate = 0;
-    FUN_003d54f8(0, 10);
-    FUN_003d54f8(1, 10);
+    titleSetSlotValueState2(0, 10);
+    titleSetSlotValueState2(1, 10);
     scene = (LmapTransitionState*)g_lmapScene;
     scene->transition = 35;
     scene->timer = 0.0f;

@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_001527d8(...);
+int uiObjectSetColorRgb(...);
 int effectRenderTransformedInstance(...);
 int FUN_00163ec4(...);
 int FUN_00164034(...);
@@ -24,7 +24,7 @@ int vec2GetXInt(...);
 int vec2GetYInt(...);
 int FUN_00165b08(void);
 int efctSetSpeed(void);
-float FUN_00168594(const char *, unsigned int, float);
+float fontMeasureTextWidth(const char *, unsigned int, float);
 int renderCtxSelectTexture(...);
 int renderCtxPopState(...);
 int renderStackPushIndexed(...);
@@ -52,7 +52,7 @@ extern signed char DAT_005e204c; /* 0x5e204c */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_001527d8. */
+/* Supplied declaration required: uiObjectSetColorRgb. */
 /* Supplied declaration required: renderCtxSelectDisplayAreaForStereoMode. */
 /* Supplied declaration required: textDrawString. */
 extern int FUN_00162848(unsigned int);
@@ -69,7 +69,7 @@ extern int jobGetWork(void);
 extern int ifTouchIsActive(void);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001678a8. */
-/* Supplied declaration required: FUN_00168594. */
+/* Supplied declaration required: fontMeasureTextWidth. */
 extern int entryListCurrentIsUsable(unsigned int);
 extern int FUN_001688c4(unsigned int);
 extern int gameGetIndexedSlotMember(unsigned int);
@@ -148,7 +148,7 @@ char FUN_0014f3f4(void)
       if (temp_v8 != 0) {
         temp_v22 = asdTMTexTableEntryAt(0x13,0x11f1);
         temp_v23 = asdTMTexTableEntryAt(0x13,0x11f2);
-        temp_v14 = FUN_00168594(reinterpret_cast<const char *>(temp_v8), 3, 0.0f);
+        temp_v14 = fontMeasureTextWidth(reinterpret_cast<const char *>(temp_v8), 3, 0.0f);
         temp_v21 = 0xb;
         temp_v20 = temp_v6;
         texDrawCompositeSprite(2,0x13);
@@ -499,7 +499,7 @@ LAB_0014fe60:
         VectorSignedToFloat((int)**(short **)(temp_v12 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_00164034(&temp_v20);
       }
-      FUN_001527d8(*(unsigned int *)(temp_v5 + 4),*(unsigned int *)(temp_v5 + 0x10));
+      uiObjectSetColorRgb(*(unsigned int *)(temp_v5 + 4),*(unsigned int *)(temp_v5 + 0x10));
       temp_v12 = 0;
       if (temp_v12 < temp_v8) {
         do {

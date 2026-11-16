@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_0018b080(void);
+void gxlowReadHardwareRegisters(void);
 
-/* Runs FUN_0018b080 (placed right after, so the call is a linker NOP). */
+/* Runs gxlowReadHardwareRegisters (placed right after, so the call is a linker NOP). */
 void gpuReadHardwareRegisters(void)
 {
-    FUN_0018b080();
+    gxlowReadHardwareRegisters();
 }
 
 } /* extern "C" */

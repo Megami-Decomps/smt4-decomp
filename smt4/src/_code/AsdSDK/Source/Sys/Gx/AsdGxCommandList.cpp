@@ -16,14 +16,14 @@ u32 g_asdGxCommandLists[2];
 
 void gxGetCommandListParameter(u32 param, u32 *out);
 void asdGxCommandBufferTerminateAndSubmit(void);
-void FUN_001376d8(u32 *a, u32 *b, u32 *c, u32 *d);
+void asdGxCommandBufferPadAndGetRanges(u32 *a, u32 *b, u32 *c, u32 *d);
 void asdGxCommandListRefreshCopy(AsdGxCommandList *list);
 void nngxBindCmdlist(u32 cmdList);
-void FUN_0013764c(void);
+void asdGxCommandBufferPadAndRecordSize(void);
 void nngxGetError(void);
 void asdModelResetCommandBuffer(void);
 u32 asdGxGetCommandCursor(void);
-void FUN_002af390(u32 begin, u32 end);
+void asdModelAdvanceCommandCursorBetween(u32 begin, u32 end);
 
 /* Flips between the two command lists. */
 void asdGxCommandListFlip(void)
@@ -58,7 +58,7 @@ void asdGxCommandListStartRecord(AsdGxCommandList *list)
     nngxBindCmdlist(g_asdGxCommandLists[g_asdGxState]);
     list->entries[0].values[2] = 1;
     u32 cursor = asdGxGetCommandCursor();
-    FUN_002af390(cursor, cursor);
+    asdModelAdvanceCommandCursorBetween(cursor, cursor);
     list->id = asdGxGetCommandCursor();
 }
 
@@ -82,7 +82,7 @@ void asdGxCommandListBegin(AsdGxCommandList *list)
     if (g_asdGxListDepth != 0) {
         outer = g_asdGxCommandListStack[g_asdGxListDepth - 1];
         asdGxCommandBufferTerminateAndSubmit();
-        FUN_001376d8(&outer->entries[outer->entryCount].values[0], &outer->entries[outer->entryCount].values[1],
+        asdGxCommandBufferPadAndGetRanges(&outer->entries[outer->entryCount].values[0], &outer->entries[outer->entryCount].values[1],
                      &outer->entries[outer->entryCount].values[2], &outer->entries[outer->entryCount].values[3]);
         outer->state = ASD_GX_CMDLIST_SUSPENDED;
         asdGxCommandListRefreshCopy(outer);
@@ -90,7 +90,7 @@ void asdGxCommandListBegin(AsdGxCommandList *list)
     }
     list->entryCount = 0;
     nngxBindCmdlist(list->id);
-    FUN_0013764c();
+    asdGxCommandBufferPadAndRecordSize();
     list->state = ASD_GX_CMDLIST_ACTIVE;
     g_asdGxCommandListStack[g_asdGxListDepth] = list;
     g_asdGxListDepth++;

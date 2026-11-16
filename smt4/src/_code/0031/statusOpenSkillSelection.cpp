@@ -62,7 +62,7 @@ void statusOpenSkillSelection(u16 selectedId, u8 mode)
         screen->nextState = 25;
     } else {
         gridNavigationConfigure(screen->selector, statusGetAvailableChoiceCount(), 9, 1, 1, 1);
-        FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(screen->selector), count);
+        scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(screen->selector), count);
         screen->nextState = 22;
     }
     statusSkillSelectionEnter(g_statusDown, 1);

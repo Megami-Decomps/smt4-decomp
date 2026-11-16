@@ -32,7 +32,7 @@ struct CameraOut {
 }
 
 extern "C" {
-void FUN_0018a924(f32 angle, f32 *sine, f32 *cosine);
+void mathSinCos(f32 angle, f32 *sine, f32 *cosine);
 
 /* Rebuilds the camera's look-at view matrix (from eye and target, looking down the eye-to-target axis with no
    roll), copies it to the render side and rebuilds the perspective matrix. */
@@ -77,7 +77,7 @@ void FUN_00156bfc(CameraState *camera, CameraOut *out)
         f32 uz = fy * rz - fz * 0.0f;
         f32 sine;
         f32 cosine;
-        FUN_0018a924(0.0f, &sine, &cosine);
+        mathSinCos(0.0f, &sine, &cosine);
         f32 ex = camera->eye[0];
         f32 ey = camera->eye[1];
         f32 ez = camera->eye[2];
@@ -107,7 +107,7 @@ void FUN_00156bfc(CameraState *camera, CameraOut *out)
     f32 aspect = camera->aspect;
     f32 sine;
     f32 cosine;
-    FUN_0018a924(camera->fieldOfView * 0.5f * 40.743664f, &sine, &cosine);
+    mathSinCos(camera->fieldOfView * 0.5f * 40.743664f, &sine, &cosine);
     f32 cotangent = cosine / sine;
     f32 range = 1.0f / (farPlane - nearPlane);
     f32 *projection = camera->projection;

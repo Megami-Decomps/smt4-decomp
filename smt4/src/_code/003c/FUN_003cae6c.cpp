@@ -25,7 +25,7 @@ void btlUiCopyStatePairs(u32 block, char *valid, u64 *mask, u64 *pair);
 SkillLinkRecord *dataTable08Sub1GetRecord(s32 id);
 s32 btlFindEntrySelectionByKey(BtlMainState *block, s32 index);
 s32 playerPadTestBit(u32 bit);
-void FUN_00247478(CommandInfo *info, BtlMainState *block, BtlEntry *entry);
+void btlEntryBuildSummary(CommandInfo *info, BtlMainState *block, BtlEntry *entry);
 void FUN_003d0d1c(BtlMainState **block, CommandState *state);
 void FUN_00229a24(u32 block);
 void FUN_00229b10(BtlMainState **block, CommandState *state);
@@ -127,7 +127,7 @@ u32 FUN_003cae6c(BtlMainState **block, CommandState *state)
                         state->targetMarks[0] = 1;
                         if (playerPadTestBit(1) != 0) {
                             CommandInfo command;
-                            FUN_00247478(&command, *block, state->entry);
+                            btlEntryBuildSummary(&command, *block, state->entry);
                             if (command.kind == 3) {
                                 if (!(command.value == 0xe || command.value == 0x11)) {
                                     if (command.value == 1) {

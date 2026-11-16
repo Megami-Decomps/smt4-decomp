@@ -53,7 +53,7 @@ void slotPlacementSetSlot(SlotPlacement *placement, s32 slot);
 void slotPlacementStartTransition(SlotPlacement *placement, s32 immediate);
 void slotPlacementAssignSlotAndPosition(SlotPlacement *placement, u32 arg);
 UnitRecord *gameGetUnitRecord(s32 id);
-s32 FUN_00295d7c(void);
+s32 slotUnitIsInActiveParty(void);
 void FUN_0026c9c0(void);
 void slotPlacementSetEmpty(SlotPlacement *placement, u8 value);
 void slotPlacementSetUnitId(SlotPlacement *placement, s32 value);
@@ -104,7 +104,7 @@ void FUN_001d13b0(void)
             slotPlacementSetEmpty(panel->placements[4 + i], 0);
             slotPlacementSetUnitId(*placement, panel->reserve[i].unitId);
             UnitRecord *unit = gameGetUnitRecord(panel->reserve[i].unitId);
-            slotPlacementSetFlagA(panel->placements[4 + i], FUN_00295d7c() != 0);
+            slotPlacementSetFlagA(panel->placements[4 + i], slotUnitIsInActiveParty() != 0);
             s32 flagB;
             if (unit->flags & 0x400) {
                 flagB = 1;

@@ -38,7 +38,7 @@ extern unsigned char DAT_0063af98; /* 0x63af98 */
 #define ROMWRIGHT_PIECE_2_2_DEFINED
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
-extern int FUN_0019be8c(short);
+extern int charCodeIsPrivateUseGlyph(short);
 /* Supplied declaration required: FUN_0019bea4. */
 /* Supplied declaration required: textHistoryAppendCodepoint. */
 /* Supplied declaration required: gfxSetSelectedChannelActive. */
@@ -188,7 +188,7 @@ LAB_00182db8:
     temp_v9 = *(short *)(*param_1 + (temp_v3 + 1) * 0x20);
     if (temp_v9 != -1) {
       temp_v3 = 0;
-      temp_v8 = FUN_0019be8c(temp_v9);
+      temp_v8 = charCodeIsPrivateUseGlyph(temp_v9);
       do {
         if (temp_v8 == 0) {
           return temp_v3;
@@ -266,7 +266,7 @@ LAB_00182db8:
               param_1[2] = temp_v8 + 1;
               param_1[4] = param_1[4] + 1;
               temp_v9 = *(short *)(*param_1 + (temp_v8 + 1) * 0x20);
-              temp_v8 = FUN_0019be8c(temp_v9);
+              temp_v8 = charCodeIsPrivateUseGlyph(temp_v9);
             } while (temp_v8 == 0);
           } while (temp_v9 != -0x7e8);
           break;
@@ -339,7 +339,7 @@ LAB_00183248:
           FUN_0019bea4();
           return temp_v3;
         }
-        temp_v8 = FUN_0019be8c(temp_v9);
+        temp_v8 = charCodeIsPrivateUseGlyph(temp_v9);
       } while( 1 );
     }
     *(unsigned char *)(param_1 + 0x11) = 2;

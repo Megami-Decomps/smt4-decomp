@@ -3,7 +3,7 @@
 #include "nw/math/MTX44.h"
 
 extern "C" {
-void FUN_0018a924(f32 *sine, f32 *cosine, f32 angle);
+void mathSinCos(f32 *sine, f32 *cosine, f32 angle);
 void mtx44Copy(nw::math::MTX44 *dest, const nw::math::MTX44 *source);
 
 /* Builds a texture transform from scale, rotation and translation; the mode picks the order they apply in
@@ -17,7 +17,7 @@ nw::math::MTX44 *textureCalcSrtMatrix(nw::math::MTX44 *out, s32 mode, f32 scaleX
     f32 sine;
     f32 cosine;
     if (mode == 0) {
-        FUN_0018a924(&sine, &cosine, rotation * 40.743664f);
+        mathSinCos(&sine, &cosine, rotation * 40.743664f);
         out->m[0][0] = scaleX * cosine;
         out->m[1][1] = scaleY * cosine;
         out->m[3][2] = zero;
@@ -35,7 +35,7 @@ nw::math::MTX44 *textureCalcSrtMatrix(nw::math::MTX44 *out, s32 mode, f32 scaleX
         out->m[0][3] = (sine * half - cosine * half + half - translateX) * scaleX;
         out->m[1][3] = (sine * -half - cosine * half + half - translateY) * scaleY;
     } else if (mode == 1) {
-        FUN_0018a924(&sine, &cosine, rotation * 40.743664f);
+        mathSinCos(&sine, &cosine, rotation * 40.743664f);
         out->m[0][0] = scaleX * cosine;
         out->m[1][1] = scaleY * cosine;
         out->m[3][2] = zero;
@@ -53,7 +53,7 @@ nw::math::MTX44 *textureCalcSrtMatrix(nw::math::MTX44 *out, s32 mode, f32 scaleX
         out->m[0][3] = (-(cosine * translateX) - sine * translateY) * scaleX;
         out->m[1][3] = (sine * translateX - cosine * translateY) * scaleY;
     } else if (mode == 2) {
-        FUN_0018a924(&sine, &cosine, rotation * 40.743664f);
+        mathSinCos(&sine, &cosine, rotation * 40.743664f);
         out->m[3][2] = zero;
         out->m[3][3] = one;
         out->m[3][1] = zero;

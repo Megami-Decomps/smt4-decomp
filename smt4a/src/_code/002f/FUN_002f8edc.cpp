@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_003ee0c0(void);
+int btlSlotManagerResetStates(void);
 int btlMainFindEntryByListedId(int, int);
 int bitsAt60Set(...);
 int btlQueueActionMessage(...);
@@ -41,7 +41,7 @@ extern unsigned int g_btlScriptUnit; /* 0x57113c */
 /* Supplied declaration required: btlGetMainState. */
 extern int gameGetSlotRecord(int);
 extern int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_003ee0c0. */
+/* Supplied declaration required: btlSlotManagerResetStates. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: bitsAt60Set. */
 extern unsigned int btlUnitGet(unsigned int);
@@ -69,7 +69,7 @@ unsigned int FUN_002f8edc(void)
     temp_v2 = reinterpret_cast<int>(btlGetMainState());
     btlMainFindEntryByListedId(temp_v2,temp_v0);
     reinterpret_cast<int>(btlGetMainState());
-    FUN_003ee0c0();
+    btlSlotManagerResetStates();
     FUN_004fc094(0,temp_v1,0,temp_v3,0,*(unsigned int *)(temp_v2 + 0x25c),0xffffffff,0xffffffff,
                  *(unsigned int *)(temp_v2 + 600),*(unsigned int *)(temp_v2 + 0x25c),0,0,1,0,0,0,0,0,0,0,1,0
                  ,1,1,0,1);

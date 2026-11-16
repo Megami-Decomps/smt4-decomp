@@ -42,7 +42,7 @@ void buttonHelpSetText(s32 mode, u32 color);
 static __inline u32 selectedIndex(const GridNavigation *grid)
 {
     u32 row = resourceRunOperationIfUnblocked(grid);
-    return FUN_0029efa8(grid) + row;
+    return listCursorGetRowIfUnblocked(grid) + row;
 }
 
 /* Shows the help for the highlighted entry of the camp list identified by `list`. */

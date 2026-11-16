@@ -20,7 +20,7 @@ struct BattleEffectGroup {
 
 extern "C" {
 extern BattleEffectGlobals g_battleEffectSettings;
-s32 FUN_003eebf4(BtlMainStateA *, s32 side);
+s32 btlFindSelectionIndexByOrdinal(BtlMainStateA *, s32 side);
 BattleEffectActorInfo *dataTable00FindById(u16 id);
 void FUN_004cb9d0(BattleEffectSetup *);
 s32 idSetFindSubjectIndex(BtlMainStateA *, BattleEffectSetup *);
@@ -40,10 +40,10 @@ void battleEffectInitializeVariant(BtlMainStateA *battle, BattleEffectSetup *eff
             if (forced < 0) {
                 s8 variant = reinterpret_cast<BattleEffectMainHeader *>(battle)->variant;
                 if (variant < 0) {
-                    if (FUN_003eebf4(battle, 1) < 0) {
+                    if (btlFindSelectionIndexByOrdinal(battle, 1) < 0) {
                         effect->variant = 0;
                     } else {
-                        s32 index = FUN_003eebf4(battle, 1);
+                        s32 index = btlFindSelectionIndexByOrdinal(battle, 1);
                         BattleEffectActorInfo *info = dataTable00FindById(battle->entries[index].id);
                         if (info->variant == 1 || info->variant == 3) {
                             effect->variant = 1;

@@ -39,11 +39,11 @@ const PartySelectionDemon *btlMainGetUnk14();
 static inline s32 selectionGridIndex(PartySelectionScene *panel, PartySelectionGrid *grid)
 {
     if (panel->alternate) {
-        s32 column = FUN_002a4878(grid);
-        return column + FUN_002a4894(grid) * 4;
+        s32 column = listCursorGetRowOfChildIfUnblocked(grid);
+        return column + listCursorGetRowIfUnblocked(grid) * 4;
     }
-    s32 rowBase = FUN_002a4894(grid) * 4 + panel->page * 12;
-    return FUN_002a4878(grid) + rowBase;
+    s32 rowBase = listCursorGetRowIfUnblocked(grid) * 4 + panel->page * 12;
+    return listCursorGetRowOfChildIfUnblocked(grid) + rowBase;
 }
 
 extern "C" s32 partyPanelGetSelectedDemonId()
@@ -55,14 +55,14 @@ extern "C" s32 partyPanelGetSelectedDemonId()
         PartySelectionGrid *grid = panel->alternate ? &panel->modeSixAlternate : &panel->modeSix;
         slot = panel->list.choices[selectionGridIndex(panel, grid)].slot;
     } else if (mode == 4 || panel->previousMode == 4) {
-        s32 column = FUN_002a4878(&panel->modeFour);
+        s32 column = listCursorGetRowOfChildIfUnblocked(&panel->modeFour);
         if (!column)
             return -1;
         slot = gameGetSlotTable()->indices[column];
     } else if (mode == 8 || panel->previousMode == 8) {
         PartySelectionGrid *grid = panel->alternate ? &panel->modeEightAlternate : &panel->modeEight;
-        if (FUN_002a4894(grid) <= 0) {
-            s32 column = FUN_002a4878(grid);
+        if (listCursorGetRowIfUnblocked(grid) <= 0) {
+            s32 column = listCursorGetRowOfChildIfUnblocked(grid);
             if (g_partyPanel && g_partyPanel->listKind == 20) {
                 slot = panel->objects[column]->slot;
             } else {

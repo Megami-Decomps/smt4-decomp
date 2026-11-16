@@ -42,7 +42,7 @@ void bgmStop(s32 id, u32 fadeFrames, s32 force);
 extern "C" {
 #endif
 
-u16 FUN_002903f0(void);
+u16 rosterGetLeaderId(void);
 
 #ifdef __cplusplus
 }
@@ -72,7 +72,7 @@ void nodeTreeReleaseItem(u8 *item);
 extern "C" {
 #endif
 
-void FUN_0021b390(u32 context, s32 category, s32 id, char *destination);
+void contentFormatEntryName(u32 context, s32 category, s32 id, char *destination);
 
 #ifdef __cplusplus
 }

@@ -39,7 +39,7 @@ s32 dataTable1bOr1cCompareRecordKeys(const void *left, const void *right);
 void gridNavigationConfigure(void *list, s32 count, s32 visible, s32 a, s32 b, s32 c);
 void uiQuestSortListByEntryKind(s32 kind);
 u32 FUN_00298dc8(u32 id);
-void FUN_0029eb5c(void *list, s32 index);
+void scrollListSetSelectionMarkChanged(void *list, s32 index);
 SavedListCursor *gameGetSavedRecordOrFallback(u32 index);
 s32 FUN_0029d644(const void *list);
 s32 FUN_0029ee54(const void *list);
@@ -133,7 +133,7 @@ void FUN_00189c24(void)
     uiQuestSortListByEntryKind(0);
     for (s32 i = 0; i < reportCount; i++) {
         if (FUN_00298dc8(quest->cursor.alternate.ids[i]) != 0) {
-            FUN_0029eb5c(reportList, i);
+            scrollListSetSelectionMarkChanged(reportList, i);
             break;
         }
     }
@@ -141,7 +141,7 @@ void FUN_00189c24(void)
         if (FUN_00298dc8(quest->list[i]) != 0) {
             QuestListRecord *record = dataTable1bOr1cGetRecord(quest->list[i]);
             if (record != NULL && record->hidden != 0) {
-                FUN_0029eb5c(quest->cursor.data, i);
+                scrollListSetSelectionMarkChanged(quest->cursor.data, i);
                 break;
             }
         }

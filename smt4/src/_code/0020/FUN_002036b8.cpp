@@ -38,7 +38,7 @@ extern int uniteGetWork(void);
 /* Supplied declaration required: FUN_0029a17c. */
 extern int FUN_0029d644(int);
 extern int ifTouchGetSelectionModeForRegion(int);
-extern int FUN_0029efa8(int);
+extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -76,7 +76,7 @@ void FUN_002036b8(int param_1,int param_2)
     temp_v4 = FUN_0029d644(temp_v2);
     if (0 < temp_v4) {
       do {
-        if ((*(char *)(temp_v1 + 0x252) == '\0') || (temp_v4 = FUN_0029efa8(temp_v2), temp_v4 != temp_v8)) {
+        if ((*(char *)(temp_v1 + 0x252) == '\0') || (temp_v4 = listCursorGetRowIfUnblocked(temp_v2), temp_v4 != temp_v8)) {
           temp_v4 = asdTMTexTableEntryAt(0x24,temp_v8 + 0x2e);
           temp_v5 = temp_v1 + (temp_v3 + temp_v8) * 2;
           temp_v6 = FUN_00254058(*(unsigned short *)(temp_v5 + 0x9468));
@@ -105,11 +105,11 @@ void FUN_002036b8(int param_1,int param_2)
       } while (temp_v8 < temp_v4);
     }
     temp_v3 = resourceRunOperationIfUnblocked(temp_v2);
-    temp_v4 = FUN_0029efa8(temp_v2);
+    temp_v4 = listCursorGetRowIfUnblocked(temp_v2);
     temp_v3 = temp_v1 + (temp_v4 + temp_v3) * 2;
     temp_v4 = FUN_00254058(*(unsigned short *)(temp_v3 + 0x9468));
     if (*(char *)(temp_v1 + 0x252) != '\0' && temp_v4 != 0) {
-      temp_v8 = FUN_0029efa8(temp_v2);
+      temp_v8 = listCursorGetRowIfUnblocked(temp_v2);
       temp_v8 = asdTMTexTableEntryAt(0x24,temp_v8 + 0x3f);
       efctSetSpeed();
       texDrawTableEntryAtStoredOrigin(2,0x24,0x38,*(short *)(temp_v8 + 8) + param_1,*(short *)(temp_v8 + 10) + param_2,0x79
@@ -121,7 +121,7 @@ void FUN_002036b8(int param_1,int param_2)
       efctSetSpeed();
       texDrawTableEntryAtStoredOrigin(2,0x24,0x3b,*(short *)(temp_v8 + 8) + param_1,*(short *)(temp_v8 + 10) + param_2,0x7e
                   );
-      temp_v5 = FUN_0029efa8(temp_v2);
+      temp_v5 = listCursorGetRowIfUnblocked(temp_v2);
       temp_v5 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v1 + temp_v5 * 2 + 0x438));
       temp_v6 = *(short *)(temp_v8 + 10) + param_2;
       temp_v7 = *(short *)(temp_v8 + 8) + param_1;

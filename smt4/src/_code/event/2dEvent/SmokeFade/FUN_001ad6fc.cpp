@@ -18,7 +18,7 @@ extern struct SmokeFadeGlobals {
     SmokeFadeImage images[2];
 } DAT_0043df28;
 s32 FUN_002c1d5c(void);
-void FUN_002a03d8(s32 slot, s32 value);
+void titleSetSlotValueState2(s32 slot, s32 value);
 void slotSetRequest(s32 slot, s32 value, u32 mask);
 f32 mathInterpolateTimed(s32 total, s32 elapsed, f32 from, f32 to);
 }
@@ -61,8 +61,8 @@ extern "C" u32 FUN_001ad6fc(u32 job)
             fade->phase = 2;
             slotSetRequest(1, row->fadeInFrames + 1, 0xFFFFFFFF);
         } else {
-            FUN_002a03d8(0, 0);
-            FUN_002a03d8(1, row->fadeOutFrames + 1);
+            titleSetSlotValueState2(0, 0);
+            titleSetSlotValueState2(1, row->fadeOutFrames + 1);
             fade->scale = 1.0f;
             fade->opacity = 1.0f;
             fade->phase = 1;

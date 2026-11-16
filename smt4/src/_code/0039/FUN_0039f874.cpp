@@ -12,7 +12,7 @@ extern const u32 DAT_0044cf90[3];
 u32 recordCompareKind(const Obj422594 *owner);
 void touchRegisterFirstRegion(Obj422594 *owner, s32 x, s32 y, s32 width, s32 height);
 void touchRegisterSecondRegion(Obj422594 *owner, s32 x, s32 y, s32 width, s32 height);
-void FUN_002346ac(TouchRegionOwner *owner, s32 x, s32 y, s32 width, s32 height);
+void touchRegionOwnerAddRegion(TouchRegionOwner *owner, s32 x, s32 y, s32 width, s32 height);
 
 // Initialize the terminal window's two sprite regions and its table-defined touch rectangle.
 void FUN_0039f874(Obj422594 *owner, const void *source)
@@ -30,7 +30,7 @@ void FUN_0039f874(Obj422594 *owner, const void *source)
         second->size ? second->size->height : secondSize->height & 0x7fff);
     const Obj4221a4Entry *rectangle = (const Obj4221a4Entry *)asdTMTexTableEntryAt(28, DAT_0044cf90[recordCompareKind(owner)]);
     const TouchRegionInlineSize *size = (const TouchRegionInlineSize *)rectangle->unk00;
-    FUN_002346ac((TouchRegionOwner *)owner, rectangle->x, rectangle->y,
+    touchRegionOwnerAddRegion((TouchRegionOwner *)owner, rectangle->x, rectangle->y,
         rectangle->size ? rectangle->size->width : size->width & 0x7fff,
         rectangle->size ? rectangle->size->height : size->height & 0x7fff);
 }

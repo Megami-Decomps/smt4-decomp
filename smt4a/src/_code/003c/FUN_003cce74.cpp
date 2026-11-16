@@ -22,10 +22,10 @@ void largeGridDrawButtonStrip(GridDetailView *view, s32 x, s32 y, s32 slot, f32 
 void statDrawClampedDelta(void *owner, s32 id, s32 x, s32 y, u32 flags, s32 arg);
 u32 FUN_0014bd84(u16 id);
 s32 recordGetModeForId(s32 id);
-s32 FUN_002a4894(void *cursor);
+s32 listCursorGetRowIfUnblocked(void *cursor);
 s32 recordContainsPairedId(void *owner, u16 id);
-u32 FUN_004bcbb4(void *owner, u16 id);
-void FUN_004bd6b0(void *owner, u16 id, s32 slot);
+u32 skillGetAdjustedCost(void *owner, u16 id);
+void partyRecordSetEquippedItemClampRank(void *owner, u16 id, s32 slot);
 
 #define GRID_COLOR_NORMAL 0x9FE7FFFF
 #define GRID_COLOR_SPECIAL 0xF5FF9FFF
@@ -35,9 +35,9 @@ void FUN_004bd6b0(void *owner, u16 id, s32 slot);
 void FUN_003cce74(GridDetailView *view, void *owner, s32 x, s32 y, f32 speed)
 {
     char text[84];
-    s32 slot = FUN_002a4894(view->cursor);
+    s32 slot = listCursorGetRowIfUnblocked(view->cursor);
     TextureTableEntryIV *frame = asdTMTexTableEntryAt(0x1A, slot + 0x23C);
-    s32 button = FUN_002a4894(view->cursor) + 0x20;
+    s32 button = listCursorGetRowIfUnblocked(view->cursor) + 0x20;
     largeGridDrawButtonStrip(view, frame->x + x, frame->y + y, button, speed);
 
     u32 color = GRID_COLOR_NORMAL;
@@ -54,10 +54,10 @@ void FUN_003cce74(GridDetailView *view, void *owner, s32 x, s32 y, f32 speed)
         TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x1A, 0x1A1);
         FUN_00185e84(entry, frame->x + icon->x + x, icon->y + frame->y + y, 0x74, 0, 0);
         if (recordContainsPairedId(owner, entry) == 0)
-            FUN_004bd6b0(owner, entry, slot);
+            partyRecordSetEquippedItemClampRank(owner, entry, slot);
         statDrawClampedDelta(owner, entry, frame->x + icon->x + x, icon->y + frame->y + y, 0x74, 0);
         TextureTableEntryIV *value = asdTMTexTableEntryAt(0x1A, 0x1A6);
-        u32 amount = FUN_004bcbb4(owner, entry);
+        u32 amount = skillGetAdjustedCost(owner, entry);
         FUN_00180310(1, frame->x + value->x + x, value->y + frame->y + y, 1, 4, 0x79, "%d", amount);
     } else {
         s32 mode = recordGetModeForId(view->slotIds[button]);

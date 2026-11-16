@@ -21,21 +21,21 @@ s32 FUN_00359608(RomFileOpenState *owner, u32 id, u32 size)
     s32 result;
     if (pathBuildWide(id, buffer, 2) == NULL) {
         result = 0xE0E046BC;
-        FUN_0013ebd8(result);
+        processResultSetValue(result);
         return result;
     }
     FUN_001886bc();
     result = FUN_00158844(reinterpret_cast<const u16 *>(buffer), size);
     if ((s32)(result & 0x80000000) < 0) {
-        FUN_0013ebd8(result);
+        processResultSetValue(result);
         return result;
     }
     result = saveStreamOpen(&owner->file, buffer, 2);
     if ((s32)(result & 0x80000000) < 0) {
-        FUN_0013ebd8(result);
+        processResultSetValue(result);
         return result;
     }
-    FUN_0013ebd8(0);
+    processResultSetValue(0);
     return 0;
 }
 }

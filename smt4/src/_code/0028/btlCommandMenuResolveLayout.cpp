@@ -51,7 +51,7 @@ void btlCommandMenuResolveLayout(CommandMenu* menu, u16* layout, s16* cursor)
         break;
     case 1: {
         s32 base = resourceRunOperationIfUnblocked(menu->itemList);
-        index = FUN_0029efa8(menu->itemList) + base;
+        index = listCursorGetRowIfUnblocked(menu->itemList) + base;
         u16 page;
         if (menu->hasPlayerList != 0) {
             page = (index != 0) ? 2 : 1;
@@ -78,7 +78,7 @@ void btlCommandMenuResolveLayout(CommandMenu* menu, u16* layout, s16* cursor)
             s32 slotIds[6] = { 0, 1, 2, 3, 4, 5 };
             for (s32 i = 0; i < 6; i++) {
                 if (flagBitIsSet(i + 0x2e)) {
-                    s32 selected = resourceRunOperationIfUnblocked(menu->skillList) + FUN_0029efa8(menu->skillList);
+                    s32 selected = resourceRunOperationIfUnblocked(menu->skillList) + listCursorGetRowIfUnblocked(menu->skillList);
                     if (selected == index) {
                         *cursor = slotIds[i];
                         return;
@@ -88,7 +88,7 @@ void btlCommandMenuResolveLayout(CommandMenu* menu, u16* layout, s16* cursor)
             }
             return;
         }
-        result = resourceRunOperationIfUnblocked(menu) + FUN_0029efa8(menu->skillList);
+        result = resourceRunOperationIfUnblocked(menu) + listCursorGetRowIfUnblocked(menu->skillList);
         break;
     case 4:
         result = 0;
@@ -100,7 +100,7 @@ void btlCommandMenuResolveLayout(CommandMenu* menu, u16* layout, s16* cursor)
         break;
     case 7:
         *layout = 8;
-        result = menu->targetIds[resourceRunOperationIfUnblocked(menu->targetList) + FUN_0029efa8(menu->targetList)];
+        result = menu->targetIds[resourceRunOperationIfUnblocked(menu->targetList) + listCursorGetRowIfUnblocked(menu->targetList)];
         break;
     case 9:
         result = 0;

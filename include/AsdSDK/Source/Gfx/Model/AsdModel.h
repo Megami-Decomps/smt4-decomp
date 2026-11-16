@@ -213,7 +213,7 @@ void FUN_0014de4c(int *arg0, int *arg1, int arg2);
 extern "C" {
 #endif
 
-s32 FUN_00132da4(SoundArchiveLoader *loader, u32 item, u32 flags);
+s32 soundArchiveLoaderIsItemLoaded(SoundArchiveLoader *loader, u32 item, u32 flags);
 
 #ifdef __cplusplus
 }

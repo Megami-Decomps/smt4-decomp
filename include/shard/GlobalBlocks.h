@@ -12,7 +12,7 @@ typedef struct Block5b4000 {
     /* 0x0C */ u32 unk0C;
     /* 0x10 */ u32 unk10;
 } Block5b4000;
-extern Block5b4000 DAT_005b4000;
+extern Block5b4000 g_padInputState;
 
 /* Global at 0x5B40B4. */
 typedef struct Block5b40b4 {

@@ -108,7 +108,7 @@ void FUN_0034a544(void)
     uiSpriteStateInitFromSource(down->sprite7, 0x12, 0x556, down->params, 1, 1.0f);
     uiSpriteStateInitFromSource(down->sprite8, 0x12, 0x556, down->params, 1, 1.0f);
     down->spriteHandle = spriteHandleCreate(0);
-    FUN_001527d8(down->spriteHandle, -1);
+    uiObjectSetColorRgb(down->spriteHandle, -1);
     positionStateSet(down->spriteHandle, 0, 0x91A2A2FF, 0.0f);
     __aeabi_memset4(down->slots, 0x2A, -1);
     down->ready = 1;

@@ -9,7 +9,7 @@ extern ButtonHelpQueuedSelections DAT_0043da50;
 void FUN_00220984(void);
 void FUN_002ae028(u8 *help);
 void FUN_002b8454(u8 slot, u8 kind, u16 value, s32 defer);
-void FUN_002b8ee0(ButtonHelpDisplayUnit *unit, s32 flag);
+void uiSlidingSpriteAdvance(ButtonHelpDisplayUnit *unit, s32 flag);
 void uiSpriteAdvanceAnimation(ButtonHelpDisplayUnit *unit);
 void buttonHelpSetPreset(u32 preset);
 s8 uiSpriteGetCompletionState(const ButtonHelpDisplayUnit *record);
@@ -28,7 +28,7 @@ u32 FUN_001c0c38(void)
                 if (work->mode != 1) {
                     uiSpriteAdvanceAnimation(&work->units[i]);
                 } else if (work->unk04C6[0] != 0) {
-                    FUN_002b8ee0(&work->units[i], 0);
+                    uiSlidingSpriteAdvance(&work->units[i], 0);
                 }
             }
             for (s32 i = 0; i < 6; i++) {

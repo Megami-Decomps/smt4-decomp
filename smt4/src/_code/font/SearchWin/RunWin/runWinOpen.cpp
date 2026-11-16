@@ -17,7 +17,7 @@ int spriteStartAnimationByIndex(void *ui, int arg);
 int memClear(void *ptr, int size);                  /* zero a block */
 u32 taskCreateDraw(const char *name, int priority, int arg2, int arg3, VoidFunc cb, int arg5, int arg6, u32 parent);
 void drawParameterBlockClear(void *player);
-void FUN_0018f278(void);
+void runWinDraw(void);
 void runWindowUpdate(void);
 
 extern RunWinWork *g_runWin;
@@ -44,7 +44,7 @@ void runWinOpen(void)
     run = g_runWin;
     memClear(run, 0xe4);
     run->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("RunWin Calc"), 1, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(runWindowUpdate), 0, 0);
-    taskCreateDraw("RunWin DrawDown", 0xe9, 0, 0, FUN_0018f278, 0, 0, run->task);
+    taskCreateDraw("RunWin DrawDown", 0xe9, 0, 0, runWinDraw, 0, 0, run->task);
     drawParameterBlockClear(run->sound);
     paramsInit(reinterpret_cast<UiResourceParameters *>(run->sound), sRunWinPacketA, 0x24, sRunWinPacketB, 0x24, 0, 0, 0, 0, sRunWinPacketC, 0x70);
     uiSpriteStateInitFromSource(run->ui, 0xe, 0x87, reinterpret_cast<UiResourceParameters *>(run->sound), 1, 1.0f);

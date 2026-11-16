@@ -72,7 +72,7 @@ extern int btlTalkBustUpGetValue(void);
 extern int FUN_00334044(void);
 /* Supplied declaration required: statusDisplayBindUnitRecord. */
 /* Supplied declaration required: FUN_003343c0. */
-/* Supplied declaration required: FUN_003343f0. */
+/* Supplied declaration required: gameGlobalsSetMenuOpenFlag. */
 /* Supplied declaration required: objBInitBlock19D0. */
 /* Supplied declaration required: FUN_0033449c. */
 /* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
@@ -360,7 +360,7 @@ unsigned int FUN_003193a8(int param_1)
         if ((((temp_v6 == 0) && (temp_v6 = FUN_002857b8(), temp_v6 == 0)) &&
             (temp_v6 = statusDownGetFlag(), temp_v6 == 0)) &&
            ((temp_v6 = padButtonIsPressed(0), temp_v6 != 0 || (temp_v6 = buttonHelpIsActionActive(1), temp_v6 != 0)))) {
-          FUN_003343f0(1);
+          gameGlobalsSetMenuOpenFlag(1);
           sysPlayVoice(0x100020e);
           *(int *)(param_1 + 0x3bc) = *(int *)(param_1 + 0x3bc) + 1;
           FUN_0022e774();
@@ -382,7 +382,7 @@ unsigned int FUN_003193a8(int param_1)
         *(unsigned char *)(param_1 + 0x3e6) = 1;
         btlTalkBustUpSetUnk2F4(1);
         sysPlaySe(0x3e);
-        FUN_003343f0(0);
+        gameGlobalsSetMenuOpenFlag(0);
         temp_v8 = 3;
       }
       temp_v7 = gameDataGetRecordValue();
@@ -400,7 +400,7 @@ unsigned int FUN_003193a8(int param_1)
   case 10:
     btlTalkBustUpReleaseTexture();
     *(unsigned int *)(param_1 + 0x3bc) = 0;
-    FUN_003343f0(0);
+    gameGlobalsSetMenuOpenFlag(0);
     temp_v8 = 3;
     *(unsigned int *)(param_1 + 0x3b0) = 9;
   }

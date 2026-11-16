@@ -6,7 +6,7 @@
 
 extern "C" {
 
-extern int FUN_002898e4(void);
+extern int commonBgAcquire(void);
 extern int FUN_0028c040(void);
 extern int buttonHelpCreate(void);
 extern int buttonHelpAcquireResources(void);
@@ -23,7 +23,7 @@ void bibleScreenOpen(BibleScreen *screen)
 {
     int i;
 
-    FUN_002898e4();
+    commonBgAcquire();
     if (campButtonHelpIsActive() == 0) {
         screen->helpCreated = 1;
         buttonHelpAcquireResources();

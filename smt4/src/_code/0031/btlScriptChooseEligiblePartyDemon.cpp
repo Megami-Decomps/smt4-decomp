@@ -8,7 +8,7 @@ u32 scrGetArg(u32 argument);
 PartyDamageSlotsIV *gameGetSlotTable();
 StatBlock *gameGetUnitRecord(s32 index);
 s32 flagWordTestBit(const StatBlock *unit, u32 bit);
-s32 FUN_00295d7c(const StatBlock *unit);
+s32 slotUnitIsInActiveParty(const StatBlock *unit);
 u32 randNextInRange(u32 maximum);
 void scrSetResult(s32 result);
 
@@ -28,7 +28,7 @@ u32 btlScriptChooseEligiblePartyDemon()
             StatBlock *unit = gameGetUnitRecord(index);
             if (!flagWordTestBit(unit, 1) && !flagWordTestBit(unit, 10) &&
                 !flagWordTestBit(unit, 2) && unit->id != excludedId) {
-                if (!FUN_00295d7c(unit)) {
+                if (!slotUnitIsInActiveParty(unit)) {
                     candidates[candidateCount] = index;
                     candidateCount = static_cast<s8>(candidateCount + 1);
                 } else {

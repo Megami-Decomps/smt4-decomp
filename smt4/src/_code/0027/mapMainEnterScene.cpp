@@ -21,7 +21,7 @@ extern "C" {
 
 extern GameStateMapView g_gameState;
 extern MapMainView *g_mapMain;
-s32 FUN_00285574(void);
+s32 mapGetDepartureIndex(void);
 void FUN_00281784(void);
 void FUN_00297a00(void);
 void FUN_0027b65c(u32 area, u32 point);
@@ -36,10 +36,10 @@ void mapMainEnterScene(void)
     MapMainView *map = g_mapMain;
 
     if (g_gameState.returning) {
-        if (FUN_00285574()) {
+        if (mapGetDepartureIndex()) {
             FUN_00281784();
             FUN_00297a00();
-            FUN_0027b65c(map->position.area, FUN_00285574());
+            FUN_0027b65c(map->position.area, mapGetDepartureIndex());
             FUN_002849a4(1);
             FUN_002646d4(1);
         } else {

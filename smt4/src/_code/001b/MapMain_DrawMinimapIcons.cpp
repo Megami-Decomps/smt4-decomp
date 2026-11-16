@@ -46,7 +46,7 @@ typedef struct {
     unsigned int sp110; /* 0x110: local_110 */
 } void_stack;
 
-extern unsigned int DAT_00407ed0; /* 0x407ed0 */
+extern unsigned int g_sinCosTable; /* 0x407ed0 */
 extern unsigned int DAT_00407ed4; /* 0x407ed4 */
 extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
@@ -158,15 +158,15 @@ void MapMain_DrawMinimapIcons(void)
       temp_v8 = temp_v8 & 0xff;
       temp_v18 = CONCAT44((&DAT_00407edc)[temp_v8 * 4],temp_v5);
       temp_v14 = -temp_v13;
-      temp_v7 = (float)(&DAT_00407ed0)[temp_v4 * 4] +
+      temp_v7 = (float)(&g_sinCosTable)[temp_v4 * 4] +
               (temp_v16 - temp_v9) * (float)(&DAT_00407ed8)[temp_v4 * 4];
-      temp_v5 = (float)(&DAT_00407ed0)[temp_v2 * 4] +
+      temp_v5 = (float)(&g_sinCosTable)[temp_v2 * 4] +
               (temp_v3 - temp_v10) * (float)(&DAT_00407ed8)[temp_v2 * 4];
       temp_v9 = (float)(&DAT_00407ed4)[temp_v4 * 4] +
                (temp_v16 - temp_v9) * (float)(&DAT_00407edc)[temp_v4 * 4];
       fStack_a0 = (float)(&DAT_00407ed4)[temp_v2 * 4] +
                   (temp_v3 - temp_v10) * (float)(&DAT_00407edc)[temp_v2 * 4];
-      temp_v3 = (float)(&DAT_00407ed0)[temp_v8 * 4] +
+      temp_v3 = (float)(&g_sinCosTable)[temp_v8 * 4] +
               (temp_v12 - temp_v11) * (float)(&DAT_00407ed8)[temp_v8 * 4];
       temp_v12 = (float)(&DAT_00407ed4)[temp_v8 * 4] +
                (temp_v12 - temp_v11) * (float)(&DAT_00407edc)[temp_v8 * 4];

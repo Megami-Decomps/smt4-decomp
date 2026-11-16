@@ -40,7 +40,7 @@ struct MapMotionScene {
 
 extern "C" {
 u32 gameFlagIsSet(u32);
-u32 FUN_002e5db4();
+u32 saveSlotSelectedIsId175();
 u32 mapHasFacingBreakableInReach();
 void moriModelUnitStartMaterialAnimation(MapMotionActor *, u32, u8, f32);
 void FUN_003fd924(MapMotionActor *, u32, u8, f32, f32);
@@ -60,13 +60,13 @@ void lmapSceneStartMovement(s8 mode)
         scene = (MapMotionScene *)g_lmapScene;
         scene->state = 10;
         scene->mode = mode;
-        if (!gameFlagIsSet(0x4c9) || FUN_002e5db4()) {
+        if (!gameFlagIsSet(0x4c9) || saveSlotSelectedIsId175()) {
             scene = (MapMotionScene *)g_lmapScene;
             scene->animation = 4;
             scene->nextAnimation = 4;
         }
         ((MapMotionScene *)g_lmapScene)->transition = 2.0f;
-        if (gameFlagIsSet(0x4c9) && !FUN_002e5db4()) {
+        if (gameFlagIsSet(0x4c9) && !saveSlotSelectedIsId175()) {
             MapMotionActor *actor = ((MapMotionScene *)g_lmapScene)->binding->actor;
             moriModelUnitStartMaterialAnimation(actor, 4, 2, 0.0f);
             ((MapMotionScene *)g_lmapScene)->nextAnimation = 13;
@@ -77,13 +77,13 @@ void lmapSceneStartMovement(s8 mode)
         scene = (MapMotionScene *)g_lmapScene;
         scene->state = 2;
         scene->mode = mode;
-        if (!gameFlagIsSet(0x4c9) || FUN_002e5db4()) {
+        if (!gameFlagIsSet(0x4c9) || saveSlotSelectedIsId175()) {
             scene = (MapMotionScene *)g_lmapScene;
             scene->animation = 10;
             scene->nextAnimation = 10;
         }
         ((MapMotionScene *)g_lmapScene)->transition = 0.0f;
-        if (gameFlagIsSet(0x4c9) && !FUN_002e5db4()) {
+        if (gameFlagIsSet(0x4c9) && !saveSlotSelectedIsId175()) {
             MapMotionActor *actor = ((MapMotionScene *)g_lmapScene)->binding->actor;
             actor->playbackScale = 1.0f;
             moriModelUnitStartMaterialAnimation(actor, 5, 2, 19.0f);

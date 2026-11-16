@@ -64,7 +64,7 @@ extern int FUN_0029d644(int);
 /* Supplied declaration required: FUN_0029dc74. */
 extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: FUN_0029ee54. */
-extern int FUN_0029efa8(void);
+extern int listCursorGetRowIfUnblocked(void);
 /* Supplied declaration required: dataTable40FindById. */
 extern int partyMemberFindById(unsigned short);
 /* Supplied declaration required: dataTable00FindById. */
@@ -118,7 +118,7 @@ void FUN_00187114(int param_1,int param_2)
   
   temp_v2 = g_statusDown;
   temp_v18 = g_statusDown + 0x4d4;
-  temp_v15 = FUN_0029efa8();
+  temp_v15 = listCursorGetRowIfUnblocked();
   temp_v20 = 0;
   temp_v17 = 0;
   psVar4 = (short *)FUN_0029acb0();

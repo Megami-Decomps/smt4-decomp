@@ -16,7 +16,7 @@ int partyFindActiveSlotById(...);
 int FUN_0029ede8(...);
 int dataFindKindRecordWithAocOverrides(...);
 int libc_strcpy(...);
-int FUN_002bff50(void);
+int messageSetConfirmDisplayMode(void);
 int asdOperatorNewC(void);
 int FUN_00333af8(...);
 int FUN_00348a1c(...);
@@ -75,8 +75,8 @@ extern int scrGetCommandFrame(void);
 /* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: uiBindRecordRewardText. */
 /* Supplied declaration required: FUN_002900d0. */
-extern int FUN_0029022c(void);
-extern unsigned int FUN_002903f0(void);
+extern int rosterHasLeader(void);
+extern unsigned int rosterGetLeaderId(void);
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 /* Supplied declaration required: textEncodeFontSlot. */
@@ -97,7 +97,7 @@ extern int FUN_002b8660(void);
 extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_002bff50. */
+/* Supplied declaration required: messageSetConfirmDisplayMode. */
 extern int gameGetMapBlock(void);
 /* Supplied declaration required: asdOperatorNewC. */
 /* Supplied declaration required: FUN_002cdf2c. */
@@ -242,8 +242,8 @@ unsigned int scrComm_Quest_UpdateObjective(void)
       }
       btlTalkBustUpSetUnk2F4(1);
     }
-    temp_v1 = FUN_0029022c();
-    if ((temp_v1 != 0) && (temp_v3 = FUN_002903f0(), temp_v3 == temp_v0)) {
+    temp_v1 = rosterHasLeader();
+    if ((temp_v1 != 0) && (temp_v3 = rosterGetLeaderId(), temp_v3 == temp_v0)) {
       FUN_002900d0();
       temp_v1 = FUN_00333a38(temp_v0,1);
       if (temp_v1 != 0) {
@@ -293,14 +293,14 @@ unsigned int scrComm_Quest_UpdateObjective(void)
       textEncodeFontSlot(0,&temp_v12);
       FUN_0029ede8(0x18,*(unsigned int *)(temp_v3 + temp_v6 * 8 + 0x170),0xffffffff,0);
     }
-    FUN_002bff50();
+    messageSetConfirmDisplayMode();
     temp_v10 = 1;
     messageForwardDefaultMode(temp_v1,temp_v2,0,6);
     scrWorkSetValue(1,0);
     scrWorkSetValue(0,3);
     break;
   case 3:
-    FUN_002bff50();
+    messageSetConfirmDisplayMode();
     FUN_001a1648();
     temp_v2 = scrWorkGetValue(1);
     temp_v10 = 0;
@@ -350,7 +350,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
     scrWorkSetValue(0);
     break;
   case 4:
-    FUN_002bff50();
+    messageSetConfirmDisplayMode();
     temp_v2 = scrWorkGetValue(1);
     temp_v10 = 0;
     messageForwardDefaultMode(temp_v1,0xc,temp_v2,6);
@@ -370,7 +370,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
     if (temp_v6 >= 2) {
       temp_v5 = 0x3b;
     }
-    FUN_002bff50();
+    messageSetConfirmDisplayMode();
     temp_v2 = scrWorkGetValue(1);
     temp_v10 = 0;
     messageForwardDefaultMode(temp_v1,temp_v5,temp_v2,6);
@@ -394,7 +394,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
     FUN_00333af8(temp_v0,temp_v6,1);
     puVar11 = (unsigned short *)(temp_v6 + temp_v7 * 2);
     uiBindRecordRewardText(*puVar11,0,1);
-    FUN_002bff50();
+    messageSetConfirmDisplayMode();
     temp_v2 = scrWorkGetValue(1);
     temp_v10 = 0;
     messageForwardDefaultMode(temp_v1,0x10,temp_v2,6);

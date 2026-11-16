@@ -53,7 +53,7 @@ void s4LoadDrawProfilePanel(s32 selected)
         }
         const LoadProfileView *view = reinterpret_cast<const LoadProfileView *>(work);
         char name[0x12];
-        FUN_002e59f8(view->profiles[selected].name, name, 0x12);
+        memcpySrcFirst(view->profiles[selected].name, name, 0x12);
         scrSetStringSlot(1, name);
         FUN_00359974(2, view->profiles[selected].enabled, -1, 0); // This profile byte is the displayed level.
         u32 seconds = view->profiles[selected].playSeconds;

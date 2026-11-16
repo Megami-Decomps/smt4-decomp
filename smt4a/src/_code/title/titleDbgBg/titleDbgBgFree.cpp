@@ -6,16 +6,16 @@ struct DebugBackground {
 };
 
 extern "C" {
-extern DebugBackground* DAT_00589168;
+extern DebugBackground* g_titleDbgBg;
 void asdMemFree(void* allocation, u32 flag);
 
 void titleDbgBgFree(void)
 {
-    DebugBackground* background = DAT_00589168;
+    DebugBackground* background = g_titleDbgBg;
     background->unk04 = 1;
     if (background != NULL) {
         asdMemFree(background, 1);
-        DAT_00589168 = NULL;
+        g_titleDbgBg = NULL;
     }
 }
 }

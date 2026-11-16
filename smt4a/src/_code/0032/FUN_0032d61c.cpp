@@ -11,7 +11,7 @@ int FUN_00169a1c(...);
 int devilGetRecord(void);
 
 int textFormatBuffer(...);
-int FUN_001527d8(...);
+int uiObjectSetColorRgb(...);
 int renderCtxSelectDisplayAreaForStereoMode(int);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
@@ -48,7 +48,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_001527d8. */
+/* Supplied declaration required: uiObjectSetColorRgb. */
 /* Supplied declaration required: renderCtxSelectDisplayAreaForStereoMode. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -235,7 +235,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
         temp_v14 = (float)VectorSignedToFloat((int)**(short **)(temp_v8 + 0xc),
                                             (unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v14 = (temp_v14 - temp_v22) * temp_v16;
-        FUN_001527d8(param_1[temp_v5 + 0x14],0xffffff00);
+        uiObjectSetColorRgb(param_1[temp_v5 + 0x14],0xffffff00);
         temp_v22 = *param_3;
         FUN_0025cc78(param_1[temp_v5 + 0x14],
                      *(short *)(temp_v7 + 8) + param_4 + (int)(temp_v15 + temp_v14) + (int)temp_v12,
@@ -263,7 +263,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
             temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0xab));
             temp_v0 = *(short *)(temp_v7 + 8);
             temp_v1 = *(short *)(temp_v7 + 10);
-            FUN_001527d8(param_1[temp_v5 + 2],0xffffff00);
+            uiObjectSetColorRgb(param_1[temp_v5 + 2],0xffffff00);
             FUN_0025cc78(param_1[temp_v5 + 2],(int)temp_v22 + temp_v11 + temp_v0,temp_v1 + temp_v9,0x72);
           }
           temp_v5 = temp_v5 + 1;
@@ -280,14 +280,14 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
         temp_v6 = 0xf33700;
       }
       temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,8));
-      FUN_001527d8(*param_1,temp_v6);
+      uiObjectSetColorRgb(*param_1,temp_v6);
       temp_v7 = param_4 + (int)temp_v13;
       FUN_0025cc78(*param_1,*(short *)(temp_v5 + 8) + temp_v7,*(short *)(temp_v5 + 10) + param_5,0x72);
       temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,9));
-      FUN_001527d8(param_1[1],temp_v18);
+      uiObjectSetColorRgb(param_1[1],temp_v18);
       FUN_0025cc78(param_1[1],*(short *)(temp_v5 + 8) + temp_v7,*(short *)(temp_v5 + 10) + param_5,0x72);
       temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,10));
-      FUN_001527d8(param_1[0xd],0xffffff00);
+      uiObjectSetColorRgb(param_1[0xd],0xffffff00);
       FUN_0025cc78(param_1[0xd],*(short *)(temp_v5 + 8) + temp_v7,*(short *)(temp_v5 + 10) + param_5,0x72)
       ;
       renderCtxCalculateStereoParallax(g_renderCtx);
@@ -299,7 +299,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
       temp_v14 = (float)VectorSignedToFloat((int)*(short *)(temp_v5 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v12 = (float)VectorSignedToFloat((int)**(short **)(temp_v5 + 0xc),
                                           (unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_001527d8(param_1[0xe],0x32323200);
+      uiObjectSetColorRgb(param_1[0xe],0x32323200);
       FUN_0025cc78(param_1[0xe],param_4 + (int)(temp_v14 + (temp_v12 - temp_v22) * temp_v16) + (int)temp_v13,
                    temp_v0 + param_5,0x74);
       temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x25));
@@ -307,7 +307,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
       temp_v0 = **(short **)(temp_v5 + 0xc);
       temp_v1 = *(short *)(temp_v5 + 8);
       temp_v2 = *(short *)(temp_v5 + 10);
-      FUN_001527d8(param_1[0x10],0x32323200);
+      uiObjectSetColorRgb(param_1[0x10],0x32323200);
       FUN_0025cc78(param_1[0x10],param_4 + (temp_v0 - temp_v7) + (int)temp_v1 + (int)temp_v13,
                    param_5 + temp_v2,0x74);
       temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x27));
@@ -345,7 +345,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
           FUN_00180310(0,*(short *)(temp_v5 + 8) + param_4,*(short *)(temp_v5 + 10) + param_5,0,5,0x74,
                        temp_v19);
           temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x107));
-          FUN_001527d8(param_1[0x12],0xffffff00);
+          uiObjectSetColorRgb(param_1[0x12],0xffffff00);
           FUN_0025cc78(param_1[0x12],*(short *)(temp_v5 + 8) + param_4,
                        *(short *)(temp_v5 + 10) + param_5,0x74);
         }

@@ -12,7 +12,7 @@ const PackedRenderParameters *dataTable02GetEntryByIndex(s32 index);
 void FUN_003bbfdc(PackedRenderState *sprite, const PackedRenderParameters *parameters);
 Table03Record *aocGetTableRecordOrFallback(s32 index);
 void FUN_003bc248(PackedRenderState *sprite, s32 index, s32 bank, s32 page);
-u8 FUN_0029022c(void);
+u8 rosterHasLeader(void);
 s32 idIsAtLeast350(u32 id);
 
 void FUN_0027dc24(BtlMainState *battle, PackedRenderState *sprite, s32 allowOverride)
@@ -42,7 +42,7 @@ void FUN_0027dc24(BtlMainState *battle, PackedRenderState *sprite, s32 allowOver
         battle->battleMask |= 0x40000;
     else
         battle->battleMask &= ~0x40000ULL;
-    if (FUN_0029022c() != 0 && idIsAtLeast350(FUN_002903f0()) != 0)
+    if (rosterHasLeader() != 0 && idIsAtLeast350(rosterGetLeaderId()) != 0)
         battle->battleMask |= 4ULL << 32;
     else
         battle->battleMask &= ~(4ULL << 32);

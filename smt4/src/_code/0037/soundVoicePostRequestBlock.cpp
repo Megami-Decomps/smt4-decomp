@@ -5,7 +5,7 @@
 extern "C" void soundVoicePostRequestBlock(SoundVoiceOwner *owner, u32 first, u32 second, u32 value)
 {
     owner->requestValue = value;
-    Obj421aa4Manager *manager = FUN_002baed8();
+    Obj421aa4Manager *manager = soundRequestQueueGetInstance();
     Obj421aa4NodeWide *node = (Obj421aa4NodeWide *)soundRequestBegin(manager, 8);
     node->type = 0x29;
     node->id = (u32)&owner->params;

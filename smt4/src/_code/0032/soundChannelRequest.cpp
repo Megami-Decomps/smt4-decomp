@@ -7,7 +7,7 @@ extern "C" {
 int bgmStop(unsigned int, int, int);
 
 extern int DAT_0044e09c; /* 0x44e09c */
-extern unsigned int DAT_004c53c4; /* 0x4c53c4 */
+extern unsigned int g_bgmRequestChannels; /* 0x4c53c4 */
 extern unsigned int DAT_004c53e4; /* 0x4c53e4 */
 
 /* Supplied declaration required: bgmStop. */
@@ -42,8 +42,8 @@ unsigned int soundChannelRequest(int param_1,int param_2)
   if (temp_v1 != 0) {
     bgmStop(0xffffffff,0,1);
   }
-  piVar6 = (int *)&DAT_004c53c4;
-  if ((DAT_0044e09c != 0) && (piVar3 = (int *)&DAT_004c53c4, piVar6 = (int *)0x0, DAT_0044e09c == 1)) {
+  piVar6 = (int *)&g_bgmRequestChannels;
+  if ((DAT_0044e09c != 0) && (piVar3 = (int *)&g_bgmRequestChannels, piVar6 = (int *)0x0, DAT_0044e09c == 1)) {
     piVar6 = (int *)&DAT_004c53e4;
   }
   else {

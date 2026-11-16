@@ -2,7 +2,7 @@
 
 extern "C" {
 void gfxResourceTableReleaseTexturesAndBuffers(Obj4207c0Resource *resource);
-extern Obj4207c0Registry DAT_005cc508;
+extern Obj4207c0Registry g_resourceCache;
 }
 
 /* Drops every held resource reference; the last reference releases the resource and removes it
@@ -14,7 +14,7 @@ Obj4207c0::~Obj4207c0()
         if (resource == NULL) {
             continue;
         }
-        Obj4207c0Registry *registry = &DAT_005cc508;
+        Obj4207c0Registry *registry = &g_resourceCache;
         if (resource->refCount == 1) {
             u32 id = resource->id;
             for (s32 j = 0; j < 16; j++) {

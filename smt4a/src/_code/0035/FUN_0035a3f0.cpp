@@ -68,12 +68,12 @@ unsigned int FUN_0035a3f0(int param_1)
     *(unsigned int *)(param_1 + 0x3dc) = *(unsigned int *)(param_1 + 0x3dc) & 0xfffffffd;
     if (0 < iVar6) {
       *(int *)(param_1 + 0x3bc) = *(int *)(param_1 + 0x3bc) + 1;
-      FUN_00183f58(5,1,0x25);
-      FUN_00183f58(0,0x12,0,1);
-      FUN_00183f58(1,0x12,0);
-      FUN_00183f58(2,0x12,0,1);
-      FUN_00183f58(3,0x12,0,1);
-      FUN_00183f58(4,0x12,0,1);
+      buttonHelpSelectSlot(5,1,0x25);
+      buttonHelpSelectSlot(0,0x12,0,1);
+      buttonHelpSelectSlot(1,0x12,0);
+      buttonHelpSelectSlot(2,0x12,0,1);
+      buttonHelpSelectSlot(3,0x12,0,1);
+      buttonHelpSelectSlot(4,0x12,0,1);
       *(unsigned int *)(param_1 + 0x7dc) = 0;
       *(unsigned int *)(param_1 + 0x7e4) = 0;
       *(unsigned int *)(param_1 + 0x7e0) = 400;

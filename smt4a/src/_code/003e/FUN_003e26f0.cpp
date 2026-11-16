@@ -4,7 +4,7 @@
 extern "C" {
 void FUN_003e0cd4(BtlStep *step, BtlMainStateA *battle);
 void FUN_003ed6e8(BtlMainStateA *battle);
-s32 FUN_003eebf4(BtlMainStateA *battle, s32 mode);
+s32 btlFindSelectionIndexByOrdinal(BtlMainStateA *battle, s32 mode);
 void FUN_003f26d4(BtlMainStateA *battle);
 void FUN_0047f444(s32 mode);
 void FUN_004aa2e0(void *ui, s32 mode);
@@ -39,7 +39,7 @@ void FUN_003e26f0(BtlStep *step, BtlMainStateA *battle)
         FUN_003ed6e8(battle);
         FUN_003f26d4(battle);
         battle->stateFlags64.bits = g_btlEncount.transition | battle->stateFlags64.bits | g_btlEncount.finished;
-        if (FUN_003eebf4(battle, 1) < 0 && (battle->encounter.controlFlags & 0x20) == 0)
+        if (btlFindSelectionIndexByOrdinal(battle, 1) < 0 && (battle->encounter.controlFlags & 0x20) == 0)
             FUN_0047f444(3);
     }
     btlStepEnter(step, 25);

@@ -12,7 +12,7 @@ void FUN_00167458(ButtonHelpUnit *unit, s32 flag);
 void FUN_0031879c(void);
 void FUN_001a90e0(u8 *help);
 void sysPlaySe(u32 id);
-void FUN_00183f58(u32 index, s32 kind, s32 value, s32 queue);
+void buttonHelpSelectSlot(u32 index, s32 kind, s32 value, s32 queue);
 
 /* Per-frame update of the button help: runs the current state (1 opens, 2 idles, 3 closes), applies
  * a preset that was waiting and the queued selections, then advances the frame counter. */
@@ -74,7 +74,7 @@ u32 FUN_0025ccc0(void)
         if (g_buttonHelp.pending < 0) {
             for (s32 i = 0; i < 6; i++) {
                 if (g_buttonHelpQueuedKinds.kinds[i] >= 0) {
-                    FUN_00183f58(i, g_buttonHelpQueuedKinds.kinds[i], g_buttonHelpQueuedKinds.values[i], 1);
+                    buttonHelpSelectSlot(i, g_buttonHelpQueuedKinds.kinds[i], g_buttonHelpQueuedKinds.values[i], 1);
                 }
             }
         }

@@ -232,7 +232,7 @@ typedef char ButtonHelpTransitionPhaseOffsetCheck[
 extern "C" {
 #endif
 
-u8 FUN_0026b564(void);
+u8 buttonHelpStateIsNot3(void);
 
 #ifdef __cplusplus
 }

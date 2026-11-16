@@ -5,7 +5,7 @@
 
 extern "C" {
 extern AocSystemA *g_aocSystem;
-u16 FUN_004186e0(void);
+u16 rosterGetLeaderId(void);
 void textFormatBuffer(char *, const char *, ...);
 s32 aocPackageGrantsItem(AocSystemA *, u16, u32);
 void aocQueueType07(AocSystemA *, u32, void **, u32);
@@ -23,7 +23,7 @@ u32 FUN_0047e150(ItemEventStartup *work)
     char messagesPath[128];
     switch (work->state) {
     case 0: {
-        ItemDataRecord *item = dataTable1bOr1cGetRecord(FUN_004186e0());
+        ItemDataRecord *item = dataTable1bOr1cGetRecord(rosterGetLeaderId());
         if (!item || item->event.package == 0) {
             work->state = 3;
             return 0;
@@ -43,7 +43,7 @@ u32 FUN_0047e150(ItemEventStartup *work)
     case 1: {
         if (!work->script || !work->messages)
             return 0;
-        ItemDataRecord *item = dataTable1bOr1cGetRecord(FUN_004186e0());
+        ItemDataRecord *item = dataTable1bOr1cGetRecord(rosterGetLeaderId());
         if (!item)
             work->state = 3;
         sysPlaySe(0x92);

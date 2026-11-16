@@ -13,7 +13,7 @@ int FUN_002ad888(void);
 int FUN_002bb648(void);
 int FUN_002bb6c4(unsigned char **, int *);
 int asdFatalError(void);
-int FUN_002c567c(int *);
+int clockGetTicksAsMicroseconds(int *);
 
 /* stack frame of void: 30 slot(s), 85 byte(s) */
 typedef struct {
@@ -61,7 +61,7 @@ extern unsigned char DAT_00471b5c; /* 0x471b5c */
 /* Supplied declaration required: FUN_002bb648. */
 /* Supplied declaration required: FUN_002bb6c4. */
 /* Supplied declaration required: asdFatalError. */
-/* Supplied declaration required: FUN_002c567c. */
+/* Supplied declaration required: clockGetTicksAsMicroseconds. */
 extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
 
 
@@ -107,7 +107,7 @@ void FUN_00128174(void)
   FUN_002ad888();
   temp_v1 = FUN_002ad80c(reinterpret_cast<const u16 *>(temp_v1), 0x14);
   if ((int)temp_v1 >= 0) {
-    FUN_002c567c(&temp_v4);
+    clockGetTicksAsMicroseconds(&temp_v4);
     temp_v28 = temp_v4;
     uStack_14 = uStack_a4;
     FUN_002ad66c(&temp_v15,&temp_v28);

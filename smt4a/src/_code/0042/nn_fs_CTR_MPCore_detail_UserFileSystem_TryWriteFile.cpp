@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001884c8(int);
+int fsCountdownSleep(int);
 int romwright_set_sp(unsigned int);
 
 typedef int romwright_code(...);
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_6_stack;
 
-/* Supplied declaration required: FUN_001884c8. */
+/* Supplied declaration required: fsCountdownSleep. */
 
 
 unsigned int nn_fs_CTR_MPCore_detail_UserFileSystem_TryWriteFile
@@ -33,7 +33,7 @@ unsigned int nn_fs_CTR_MPCore_detail_UserFileSystem_TryWriteFile
     romwright_set_sp((unsigned int)((unsigned int *)0xe0e046bc));
   }
   if ((param_1 != (int *)0x0 && param_2 != (int *)0x0) && (int)param_3 != 0) {
-    FUN_001884c8(0);
+    fsCountdownSleep(0);
     romwright_set_sp((unsigned int)((unsigned int *)(**(romwright_code **)(*param_2 + 4))(param_2,param_1,param_4,param_5,temp_v0,temp_v1)));
   }
   return (unsigned int)(unsigned char *)((unsigned int)__current_sp());

@@ -47,7 +47,7 @@ extern int g_camp; /* 0x43da90 */
 extern unsigned int flagValueRead(unsigned int);
 /* Supplied declaration required: FUN_0028fc60. */
 extern int FUN_0029ee54(int);
-extern int FUN_0029efa8(int);
+extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
@@ -178,12 +178,12 @@ void FUN_0019715c(int param_1,int param_2)
         FUN_0028f870(temp_v12,temp_v2,temp_v3,1);
         if (temp_v15 != 0) {
           temp_v9 = resourceRunOperationIfUnblocked(temp_v12);
-          temp_v4 = FUN_0029efa8(temp_v12);
+          temp_v4 = listCursorGetRowIfUnblocked(temp_v12);
           temp_v0 = *(unsigned short *)(temp_v1 + (temp_v4 + temp_v9) * 2);
           temp_v10 = (unsigned int)temp_v0;
-          temp_v1 = FUN_0029efa8(temp_v12);
+          temp_v1 = listCursorGetRowIfUnblocked(temp_v12);
           temp_v1 = asdTMTexTableEntryAt(0x1d,temp_v1 + 0x42e);
-          temp_v9 = FUN_0029efa8(temp_v12);
+          temp_v9 = listCursorGetRowIfUnblocked(temp_v12);
           FUN_0028f694(*(short *)(temp_v1 + 8) + temp_v2,*(short *)(temp_v1 + 10) + temp_v3,
                        (int)*(short *)(temp_v8 + temp_v9 * 2 + 0xe0c));
           temp_v8 = asdTMTexTableEntryAt(0x1d,0x477);

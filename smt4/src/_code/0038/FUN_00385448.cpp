@@ -212,7 +212,7 @@ void FUN_00385448(unsigned int *param_1)
     break;
   case 6:
     temp_v4 = screenFadeIsBusy();
-    if ((temp_v4 == 0) && (temp_v4 = FUN_0026b564(), temp_v4 != 0)) {
+    if ((temp_v4 == 0) && (temp_v4 = buttonHelpStateIsNot3(), temp_v4 != 0)) {
       param_1[1] = 0x10;
       param_1[2] = 0;
       param_1[0x3ec] = 0;

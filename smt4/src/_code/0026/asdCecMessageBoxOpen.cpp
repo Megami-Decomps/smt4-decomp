@@ -14,7 +14,7 @@ void __aeabi_memcpy4(void* destination, const void* source, u32 bytes);
 s32 FUN_0023959c(AsdCecMessageBox* box, CecMessageIndexHeader* header,
                   AsdCecMessageId* ids, u32 capacity, s32 kind);
 u32 nn_cec_CTR_MessageBox_ReadOutBoxIndex(AsdCecMessageBox* box);
-void FUN_002c567c(u64* clock);
+void clockGetTicksAsMicroseconds(u64* clock);
 void FUN_002ad66c(CecCalendarDate* date, const u64* clock);
 
 s32 asdCecMessageBoxOpen(AsdCecMessageBox* box, u32 id, u32 expectedTag)
@@ -72,7 +72,7 @@ s32 asdCecMessageBoxOpen(AsdCecMessageBox* box, u32 id, u32 expectedTag)
     state->info.infoA = 0;
     state->info.infoB = 0;
     u64 clock;
-    FUN_002c567c(&clock);
+    clockGetTicksAsMicroseconds(&clock);
     u64 now = clock;
     CecCalendarDate date;
     FUN_002ad66c(&date, &now);

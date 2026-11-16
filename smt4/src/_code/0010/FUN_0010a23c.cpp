@@ -26,10 +26,10 @@ struct PadStateView {
 }
 
 extern "C" {
-extern PadGlobalsView DAT_004650a0;
+extern PadGlobalsView g_padInputState;
 extern PadReaderView DAT_004e3be8;
 extern PadStateView DAT_004e3c48;
-extern u8 DAT_004e3c58[0x7C];
+extern u8 g_padHeldFrames[0x7C];
 
 // Data-address literals retained beside linker-removed registration calls.
 extern u8 entry[];
@@ -43,22 +43,22 @@ void nn_hid_CTR_AnalogStickClamper_SetClampParam(PadReaderView* reader, int mini
 // Initialize the shared pad reader and reset its clamp parameters and input state.
 void FUN_0010a23c(void)
 {
-    if ((DAT_004650a0.unk18 & 1) == 0 &&
-        __cxa_guard_acquire(&DAT_004650a0.unk18) != 0) {
+    if ((g_padInputState.unk18 & 1) == 0 &&
+        __cxa_guard_acquire(&g_padInputState.unk18) != 0) {
         nn_hid_CTR_PadReader_PadReader_sub_object(
             &DAT_004e3be8, FUN_0011c6c0());
     }
 
-    DAT_004650a0.reader = &DAT_004e3be8;
+    g_padInputState.reader = &DAT_004e3be8;
     DAT_004e3be8.unk18 = 0;
     nn_hid_CTR_AnalogStickClamper_SetClampParam(
-        DAT_004650a0.reader, 0x28, 0x91);
-    memClear(DAT_004e3c58, 0x7C);
+        g_padInputState.reader, 0x28, 0x91);
+    memClear(g_padHeldFrames, 0x7C);
     DAT_004e3c48.unk00 = 0;
     DAT_004e3c48.unk04 = 0;
     DAT_004e3c48.unk08 = 0;
     DAT_004e3c48.unk0C = 0;
     DAT_004e3c48.unk0E = 0;
-    DAT_004650a0.unk08 = 0;
+    g_padInputState.unk08 = 0;
 }
 }

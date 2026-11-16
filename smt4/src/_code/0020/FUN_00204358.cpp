@@ -5,7 +5,7 @@
 extern "C" {
 
 int resultSetMenuState(...);
-int FUN_00299370(...);
+int playerRecalcStatsFromEquipment(...);
 int FUN_0029a0cc(void);
 int FUN_0029c424(...);
 int SBORROW4(...);
@@ -16,13 +16,13 @@ int flaggedEntrySetValueA(...);
 int ifTouchRegionAdd(int, int, int, int);
 int FUN_0029ede8(int, unsigned int, unsigned int, int);
 int buttonHelpSetText(...);
-int FUN_0029efa8(...);
+int listCursorGetRowIfUnblocked(...);
 int FUN_0029efd8(...);
 int uiScrollHandleActionsOrTouch(...);
 int messageStatesSetFirst(...);
 int gameGetPlayerData(void);
 int buttonHelpSetPreset(...);
-int FUN_002b8ee0(int, int);
+int uiSlidingSpriteAdvance(int, int);
 int eventQueueAddUniqueIfValid(...);
 int timerStart(...);
 int asdTMTexTableEntryAt(int, int);
@@ -51,7 +51,7 @@ extern int FUN_0029563c(void);
 /* Supplied declaration required: resultSetMenuState. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int messageMainGetChoiceResult(void);
-/* Supplied declaration required: FUN_00299370. */
+/* Supplied declaration required: playerRecalcStatsFromEquipment. */
 /* Supplied declaration required: FUN_0029a0cc. */
 /* Supplied declaration required: FUN_0029c424. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
@@ -59,7 +59,7 @@ extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: buttonHelpSetText. */
-/* Supplied declaration required: FUN_0029efa8. */
+/* Supplied declaration required: listCursorGetRowIfUnblocked. */
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: messageStatesSetFirst. */
@@ -67,7 +67,7 @@ extern int ifTouchGetSelectionModeForRegion(int);
 extern unsigned short ifTouchRegionAddRequested(unsigned int, int);
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int buttonHelpGetStatus(void);
-/* Supplied declaration required: FUN_002b8ee0. */
+/* Supplied declaration required: uiSlidingSpriteAdvance. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
@@ -141,7 +141,7 @@ void FUN_00204358(int param_1)
     } while (temp_v10 < 5);
     *piVar16 = *piVar16 + 1;
   case 1:
-    FUN_002b8ee0(temp_v12,0);
+    uiSlidingSpriteAdvance(temp_v12,0);
     temp_v10 = FUN_0029563c();
     if (temp_v10 == 0) {
       return;
@@ -159,7 +159,7 @@ void FUN_00204358(int param_1)
     temp_v12 = scrRunOpcodesStub(*puVar19);
     if (temp_v12 == 2) {
       buttonHelpSetPreset(99);
-      temp_v6 = FUN_0029efa8(temp_v10);
+      temp_v6 = listCursorGetRowIfUnblocked(temp_v10);
       temp_v7 = dataTableGet(0x25,1);
       temp_v10 = dataTableGetEntries();
       temp_v8 = dataTableGetCount(temp_v7);
@@ -186,10 +186,10 @@ void FUN_00204358(int param_1)
     temp_v16 = 0;
     temp_v0 = 0;
     temp_v14[0] = 0;
-    temp_v15 = FUN_0029efa8(temp_v10);
+    temp_v15 = listCursorGetRowIfUnblocked(temp_v10);
     psVar13 = (short *)0x0;
     psVar18 = (short *)0x0;
-    temp_v7 = FUN_0029efa8(temp_v10);
+    temp_v7 = listCursorGetRowIfUnblocked(temp_v10);
     switch(temp_v7) {
     case 0:
       temp_v12 = gameGetPlayerData();
@@ -241,8 +241,8 @@ void FUN_00204358(int param_1)
       }
       temp_v12 = temp_v12 + 1;
     } while (temp_v12 < 5);
-    if ((temp_v13 || temp_v0) || (temp_v12 = FUN_0029efa8(temp_v10), temp_v12 != temp_v15)) {
-      temp_v6 = FUN_0029efa8(temp_v10);
+    if ((temp_v13 || temp_v0) || (temp_v12 = listCursorGetRowIfUnblocked(temp_v10), temp_v12 != temp_v15)) {
+      temp_v6 = listCursorGetRowIfUnblocked(temp_v10);
       temp_v7 = dataTableGet(0x25,1);
       temp_v12 = dataTableGetEntries();
       temp_v8 = dataTableGetCount(temp_v7);
@@ -258,7 +258,7 @@ void FUN_00204358(int param_1)
 LAB_00204838:
       buttonHelpSetText(temp_v12,0x323232ff);
     }
-    temp_v12 = FUN_0029efa8(temp_v10);
+    temp_v12 = listCursorGetRowIfUnblocked(temp_v10);
     if (temp_v12 != temp_v15) {
       eventQueueAddUniqueIfValid(0x100016c);
     }
@@ -424,7 +424,7 @@ LAB_00204d14:
               buttonHelpSetPreset(temp_v7);
             }
           }
-          FUN_00299370(0);
+          playerRecalcStatsFromEquipment(0);
           gameGetPlayerData();
           FUN_0029a0cc();
           return;
@@ -439,7 +439,7 @@ LAB_00204d14:
         goto LAB_002049f0;
       }
     }
-    temp_v6 = FUN_0029efa8(temp_v10);
+    temp_v6 = listCursorGetRowIfUnblocked(temp_v10);
     temp_v7 = dataTableGet(0x25,1);
     temp_v12 = dataTableGetEntries();
     temp_v8 = dataTableGetCount(temp_v7);
@@ -454,7 +454,7 @@ LAB_00204d14:
     temp_v12 = 0;
 LAB_0020491c:
     buttonHelpSetText(temp_v12,0x323232ff);
-    temp_v10 = FUN_0029efa8(temp_v10);
+    temp_v10 = listCursorGetRowIfUnblocked(temp_v10);
     if (temp_v10 == temp_v15) goto LAB_00204cf8;
 LAB_002049f0:
     temp_v7 = 0x100016c;
@@ -475,7 +475,7 @@ LAB_002049f0:
     *piVar16 = 3;
     scrScriptProcessStartEntry(*puVar19,0);
     buttonHelpSetPreset(0xbc);
-    temp_v6 = FUN_0029efa8(temp_v10);
+    temp_v6 = listCursorGetRowIfUnblocked(temp_v10);
     temp_v7 = dataTableGet(0x25,1);
     temp_v10 = dataTableGetEntries();
     temp_v8 = dataTableGetCount(temp_v7);

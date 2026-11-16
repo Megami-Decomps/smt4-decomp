@@ -14,7 +14,7 @@ struct AttachmentNodeView {
 
 extern "C" {
 void nodeSetTranslation(AsdMdlNode *, s32, const f32 *);
-void FUN_002adde8(AsdMdlNode *, const char *, f32 *);
+void modelGetBoneTranslationByName(AsdMdlNode *, const char *, f32 *);
 void textFormatBuffer(char *, const char *, ...);
 void FUN_002c159c(void *camera, f32 first, f32 second);
 u32 asdCameraGetSavedRenderPairs(void);
@@ -35,9 +35,9 @@ void FUN_003846e8(DummyAttachmentWork *work)
     for (u32 index = 0; index < 6; ++index) {
         textFormatBuffer(name, "dummy_npc%d", index + 1);
         if (work->mode != 2) {
-            FUN_002adde8(work->source->model->node, name, position);
+            modelGetBoneTranslationByName(work->source->model->node, name, position);
         } else {
-            FUN_002adde8(work->alternate->node, name, position);
+            modelGetBoneTranslationByName(work->alternate->node, name, position);
             AsdMdlObject *model = work->alternate;
             model->flags &= ~2;
             reinterpret_cast<AttachmentNodeView *>(model->node)->renderer->dirty = 1;

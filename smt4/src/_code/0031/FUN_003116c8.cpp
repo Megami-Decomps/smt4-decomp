@@ -231,7 +231,7 @@ unsigned int FUN_003116c8(void)
         temp_v5 = *piVar3;
         devilIsUnlocked(temp_v5,*puVar5);
         if (temp_v5 != 0) {
-          temp_v5 = reinterpret_cast<int>(FUN_002a0d0c());
+          temp_v5 = reinterpret_cast<int>(gameDataGetSortPreferences());
           pbVar6 = (unsigned char *)(temp_v5 + ((int)(temp_v7 + ((unsigned int)((int)temp_v7 >> 0x1f) >> 0x1d)) >> 3) +
                            0x35);
           temp_v1 = *pbVar6;

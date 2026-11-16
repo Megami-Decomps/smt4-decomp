@@ -10,7 +10,7 @@ extern RenderCtx *g_titleScene;
 extern MenuDrawPoint DAT_004724cc;
 
 u32 renderCtxPackPassFlags(u32 value, bool enabled);
-void FUN_002c0944(u32 color0, u32 color1, u32 color2, u32 color3,
+void gxSubmitDrawZeroExtraParams(u32 color0, u32 color1, u32 color2, u32 color3,
                   f32 x, f32 y, f32 width, f32 height, f32 depth);
 void FUN_0021025c(u32 color0, u32 color1, u32 color2, u32 color3,
                   f32 x, f32 y, f32 width, f32 height, f32 depth, f32 lineWidth);
@@ -35,7 +35,7 @@ extern "C" void menuDrawRectangle(s32 x, s32 y, s32 width, s32 height,
     u32 fillR = fill.rgba.r, fillG = fill.rgba.g, fillB = fill.rgba.b, fillA = fill.rgba.a;
     if (fillA != 0) {
         u32 color = packMenuColor(fillR, fillG, fillB, fillA);
-        FUN_002c0944(color, color, color, color,
+        gxSubmitDrawZeroExtraParams(color, color, color, color,
                      static_cast<f32>(adjustedX), static_cast<f32>(adjustedY),
                      static_cast<f32>(width), static_cast<f32>(height), 0.0f);
     }

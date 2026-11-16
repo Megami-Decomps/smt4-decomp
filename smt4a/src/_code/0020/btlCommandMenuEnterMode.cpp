@@ -62,7 +62,7 @@ u32 FUN_002cc9e0(void *menu, s32 inBattle);
 void screenSetContextHint(void *owner, s32 kind, s32 alternate);
 u8 gameDataFlagTestBit(u32 bit);
 void FUN_003756c8(s32 alternate);
-s32 FUN_002a4878(void *object);
+s32 listCursorGetRowOfChildIfUnblocked(void *object);
 void ifTouchRegionRemove(void);
 void __aeabi_memset4(void *destination, u32 size, u32 value);
 s32 widgetSubCallIfVisible(ScrollSelection *list);
@@ -113,7 +113,7 @@ void btlCommandMenuEnterMode(CommandMenuScreen *work, s32 mode, s32 rememberPrev
     } else if (mode == 9 || mode == 8 || mode == 0xB || mode == 10 || mode == 0xD || mode == 0xC) {
         FUN_003756c8(0);
     } else if (mode == 1) {
-        FUN_003756c8(FUN_002a4878(&work->lists[*selected]) == 0);
+        FUN_003756c8(listCursorGetRowOfChildIfUnblocked(&work->lists[*selected]) == 0);
     }
     if (rememberPrevious != 0)
         *previous = *current;

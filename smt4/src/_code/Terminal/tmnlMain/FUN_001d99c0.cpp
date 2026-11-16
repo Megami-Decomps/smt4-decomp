@@ -8,9 +8,9 @@ extern "C" {
 
 int asdModelSlotSetColor(...);
 int asdModelSlotSetTint(...);
-int FUN_0026e70c(...);
+int floatInterpolateOverDuration(...);
 int FUN_00297684(void);
-int FUN_002b827c(...);
+int buttonHelpSetContext(...);
 int VectorSignedToFloat(...);
 
 int asdMdlManagerMarkDestroy(void);
@@ -34,7 +34,7 @@ int asdModelSlotRelease(...);
 int asdMdlManagerDestroy(...);
 int placeWinRelease(void);
 int soundPlaySeUnpanned(...);
-int FUN_002bff50(void);
+int messageSetConfirmDisplayMode(void);
 int resourceListDestroy(void);
 int asdMemFree(void);
 int jobStop(...);
@@ -55,7 +55,7 @@ int useCounterRelease(void);
 int useCounterStart(void);
 int FUN_0029e328(...);
 int sortMenuCreate(...);
-int FUN_002a03d8(...);
+int titleSetSlotValueState2(...);
 int FUN_002a5704(...);
 int resOwnerRunNodeHandlers(...);
 int buttonHelpSetPreset(...);
@@ -69,7 +69,7 @@ int placeWinCreate(void);
 int FUN_00263988(...);
 int effectNodeUpdateTransform(unsigned int);
 int gameDataGetPlayerName(void);
-int FUN_002898e4(void);
+int commonBgAcquire(void);
 int buttonHelpCreate(void);
 int playerModelLoadPart(unsigned int, unsigned int, int);
 int playerModelListCreate(void);
@@ -140,7 +140,7 @@ extern int effTimelineIsDone(unsigned int);
 /* Supplied declaration required: placeWinCreate. */
 /* Supplied declaration required: FUN_00263988. */
 extern unsigned int asdCameraLoadFromFile(unsigned char *);
-/* Supplied declaration required: FUN_0026e70c. */
+/* Supplied declaration required: floatInterpolateOverDuration. */
 /* Supplied declaration required: mapDepartSetTarget. */
 /* Supplied declaration required: FUN_0027f94c. */
 /* Supplied declaration required: effectNodeUpdateTransform. */
@@ -149,7 +149,7 @@ extern int screenFadeIsBusy(void);
 /* Supplied declaration required: FUN_00287030. */
 extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: gameDataGetPlayerName. */
-/* Supplied declaration required: FUN_002898e4. */
+/* Supplied declaration required: commonBgAcquire. */
 /* Supplied declaration required: touchMenuClose. */
 /* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: buttonHelpRelease. */
@@ -179,7 +179,7 @@ extern int useCounterIsFinished(void);
 /* Supplied declaration required: FUN_0029e328. */
 /* Supplied declaration required: sortMenuCreate. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
-/* Supplied declaration required: FUN_002a03d8. */
+/* Supplied declaration required: titleSetSlotValueState2. */
 /* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: FUN_002a04f0. */
 /* Supplied declaration required: FUN_002a09b4. */
@@ -195,13 +195,13 @@ extern int useCounterIsFinished(void);
 extern int modelHasLoadedAttachment(unsigned int);
 /* Supplied declaration required: cameraExportParameters. */
 /* Supplied declaration required: resOwnerRunNodeHandlers. */
-/* Supplied declaration required: FUN_002b827c. */
+/* Supplied declaration required: buttonHelpSetContext. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int padIsButtonRepeat(unsigned int);
 /* Supplied declaration required: textFormatBuffer. */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: soundPlaySeUnpanned. */
-/* Supplied declaration required: FUN_002bff50. */
+/* Supplied declaration required: messageSetConfirmDisplayMode. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002c159c. */
 /* Supplied declaration required: FUN_002c1658. */
@@ -344,7 +344,7 @@ unsigned int FUN_001d99c0(void)
         FUN_002c1e30(puVar7 + 0x12,1);
         FUN_00298d50(puVar7 + 0x12);
         placeWinCreate();
-        FUN_002898e4();
+        commonBgAcquire();
         buttonHelpCreate();
         temp_v3 = asdLoadFileSync(&LAB_001d9e0c,temp_v11,1,0x80);
         puVar7[0x159] = temp_v3;
@@ -674,7 +674,7 @@ LAB_001da638:
                  ) {
                 temp_v6 = (int)*(float *)(*(int *)(puVar2[puVar2[0x154] + 0xf] + 4) + 0x38);
                 if ((temp_v6 >= 6) && (temp_v2 = FUN_002c2a04(0), temp_v2 == 3)) {
-                  FUN_002a03d8(0,8);
+                  titleSetSlotValueState2(0,8);
                 }
                 if (temp_v6 == 0xb4) {
                   *(unsigned char *)(puVar2 + 0x15b) = 1;
@@ -777,16 +777,16 @@ LAB_001da638:
           *(unsigned char *)(puVar2 + 0x155) = 1;
           puVar2[0x156] = 0x78;
           FUN_002a5704(puVar2[0xc],0x1a);
-          FUN_002a03d8(0,10);
-          FUN_002a03d8(1,10);
+          titleSetSlotValueState2(0,10);
+          titleSetSlotValueState2(1,10);
         }
         else {
           FUN_00263988(puVar2,1);
           *(unsigned char *)(puVar2 + 0x155) = 1;
           puVar2[0x156] = 0;
           FUN_002a5704(puVar2[0xc],0x1a);
-          FUN_002a03d8(0,0x14);
-          FUN_002a03d8(1,0x14);
+          titleSetSlotValueState2(0,0x14);
+          titleSetSlotValueState2(1,0x14);
         }
         puVar2[4] = puVar2[4] + 1;
         puVar2[5] = 0;
@@ -810,7 +810,7 @@ LAB_001da638:
               asdMemFree();
               puVar2[0xb] = 0;
             }
-            FUN_002bff50();
+            messageSetConfirmDisplayMode();
             asdModelSlotRelease(0);
             puVar7 = g_tmnl;
             asdWorkAreaReset();
@@ -860,8 +860,8 @@ LAB_001da638:
             } while (temp_v6 < 4);
             messageStatesSetFirst(1);
             if (*(char *)((int)puVar2 + 5) != '\0') {
-              FUN_002a03d8(0,1);
-              FUN_002a03d8(1);
+              titleSetSlotValueState2(0,1);
+              titleSetSlotValueState2(1);
               soundChannelStopAll(0xf);
               puVar2 = g_tmnl;
               temp_v6 = jobIsValid(*g_tmnl);
@@ -964,7 +964,7 @@ LAB_001da638:
       puVar2[0x158] = (int)*(char *)((unsigned int)*(unsigned char *)((int)puVar2 + 9) * 0x24 + 0x432cfd);
       puVar2[4] = puVar2[4] + 1;
       puVar2[5] = 0;
-      FUN_002b827c(3);
+      buttonHelpSetContext(3);
     }
   }
 LAB_001dacc8:
@@ -978,10 +978,10 @@ LAB_001dacc8:
     if (temp_v6 < 0x65) {
       temp_v2 = temp_v2 - 0x3b;
       VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_0026e70c(temp_v2);
+      floatInterpolateOverDuration(temp_v2);
       asdModelSlotSetTint(0);
       VectorSignedToFloat(puVar2[0x156] - 0x3c,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_0026e70c(puVar2[0x156] - 0x3c);
+      floatInterpolateOverDuration(puVar2[0x156] - 0x3c);
       asdModelSlotSetColor(0);
     }
     if (puVar2[0x156] == 0x5a) {

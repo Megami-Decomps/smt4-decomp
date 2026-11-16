@@ -48,7 +48,7 @@ extern "C" void _ZN9Obj55c89c21uiCursorEnterModeNineEv(CursorOwner *owner)
     if (uiSpriteGetCompletionState(cursor) == 0) {
         return;
     }
-    if (FUN_002e19f8() == 0) {
+    if (buttonHelpStateIsNot3() == 0) {
         return;
     }
     if (utilityReturnSuccess(owner->unk0096) != 0) {

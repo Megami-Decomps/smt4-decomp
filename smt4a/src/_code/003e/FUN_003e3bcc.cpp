@@ -16,7 +16,7 @@ int FUN_002c8538(...);
 int scrSetStringSlot(int, unsigned int);
 int panelSetMode3(int, int);
 int FUN_00333dc8(...);
-int FUN_003343f0(...);
+int gameGlobalsSetMenuOpenFlag(...);
 int FUN_00359974(int, unsigned int, unsigned int, int);
 int panelSetTarget(int, int);
 int FUN_0037c8e4(int, int);
@@ -27,7 +27,7 @@ int messageMainSetTargetFlags(...);
 int partyAddMoneyClamped(int);
 int unitRecomputeDerivedStats(int);
 int dispatchIfFound(unsigned int, int, int);
-int FUN_004bd6b0(int, int, int);
+int partyRecordSetEquippedItemClampRank(int, int, int);
 int FUN_004cd4b8(int, int);
 
 typedef struct fn_003e3bcc_arg0 fn_003e3bcc_arg0;
@@ -76,7 +76,7 @@ extern int messageGetChoiceResult(void);
 /* Supplied declaration required: scrSetStringSlot. */
 /* Supplied declaration required: panelSetMode3. */
 /* Supplied declaration required: FUN_00333dc8. */
-/* Supplied declaration required: FUN_003343f0. */
+/* Supplied declaration required: gameGlobalsSetMenuOpenFlag. */
 extern int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00359974. */
 extern int panelStateIs0(void);
@@ -90,7 +90,7 @@ extern int panelStateIs0(void);
 /* Supplied declaration required: unitRecomputeDerivedStats. */
 extern int getUnlockedSlotCount(unsigned int);
 /* Supplied declaration required: dispatchIfFound. */
-/* Supplied declaration required: FUN_004bd6b0. */
+/* Supplied declaration required: partyRecordSetEquippedItemClampRank. */
 extern int FUN_004cc8d8(unsigned short, unsigned short);
 /* Supplied declaration required: FUN_004cd4b8. */
 extern int gameStockContainsEntry(unsigned int);
@@ -151,14 +151,14 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
     temp_v6 = 0;
     *(int *)(temp_v1 + 0x30) = temp_v2 - 1;
     do {
-      FUN_004bd6b0(temp_v1,0,temp_v6);
+      partyRecordSetEquippedItemClampRank(temp_v1,0,temp_v6);
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 8);
     temp_v2 = getUnlockedSlotCount(0);
     temp_v6 = 0;
     do {
       if (temp_v2 <= temp_v6) break;
-      FUN_004bd6b0(temp_v1,*(unsigned short *)((int)&uStack_38 + temp_v6 * 2),temp_v6);
+      partyRecordSetEquippedItemClampRank(temp_v1,*(unsigned short *)((int)&uStack_38 + temp_v6 * 2),temp_v6);
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 8);
     if (temp_v0 == 0) {
@@ -256,7 +256,7 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
     if (temp_v0 == 0) {
       return;
     }
-    FUN_003343f0(0);
+    gameGlobalsSetMenuOpenFlag(0);
     FUN_00333dc8(0);
     FUN_002c8538(0);
     buttonHelpSetText(0,0xf4f4f4ff);

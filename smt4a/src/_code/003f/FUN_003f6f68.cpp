@@ -28,16 +28,16 @@ void FUN_003f6f68(ScrollPageOwner *owner, s32 pageSize)
     if (FUN_00228b04(&owner->list, 0) != 0) {
         if (objectApplyIfUnblocked(&owner->list) > pageSize) {
             resourceRunOperationIfUnblocked(&owner->list);
-            if (FUN_002a4894(reinterpret_cast<const Object *>(&owner->list)) != pageSize - 1 && FUN_002a4894(reinterpret_cast<const Object *>(&owner->list)) != 0) {
+            if (listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(&owner->list)) != pageSize - 1 && listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(&owner->list)) != 0) {
                 eventQueueAddUniqueIfValid(0x100020D);
             }
             for (s32 top = resourceRunOperationIfUnblocked(&owner->list);
                  top == oldTop &&
-                     (resourceRunOperationIfUnblocked(&owner->list) != 0 || FUN_002a4894(reinterpret_cast<const Object *>(&owner->list)) != 0);
+                     (resourceRunOperationIfUnblocked(&owner->list) != 0 || listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(&owner->list)) != 0);
                  top = resourceRunOperationIfUnblocked(&owner->list)) {
                 top = resourceRunOperationIfUnblocked(&owner->list);
                 s32 count = objectApplyIfUnblocked(&owner->list);
-                if (top == count - pageSize && FUN_002a4894(reinterpret_cast<const Object *>(&owner->list)) == pageSize - 1) {
+                if (top == count - pageSize && listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(&owner->list)) == pageSize - 1) {
                     break;
                 }
                 FUN_00228b04(&owner->list, 0);

@@ -2,7 +2,7 @@
 #include "nn/applet/EventState.h"
 
 extern "C" {
-extern AppletEventState DAT_00465198;
+extern AppletEventState g_appletEventState;
 extern u32 g_appletSleepQueryEvent[2];
 extern u32 g_appletHomeButtonEvent[2];
 extern u32 g_nnAppletCriticalSection[2];
@@ -24,11 +24,11 @@ u32 FUN_00103ec8(void)
     nn_os_LightEvent_Initialize(g_appletSleepQueryEvent, 0);
     nn_os_LightEvent_Initialize(g_appletHomeButtonEvent, 0);
     nn_os_CriticalSection_Initialize(g_nnAppletCriticalSection);
-    DAT_00465198.initialized = 1;
+    g_appletEventState.initialized = 1;
     FUN_002c5434();
-    DAT_00465198.enabled = 1;
-    nn_os_LightEvent_Signal(DAT_00465198.sleepQueryEvent);
-    nn_os_LightEvent_Signal(DAT_00465198.homeButtonEvent);
+    g_appletEventState.enabled = 1;
+    nn_os_LightEvent_Signal(g_appletEventState.sleepQueryEvent);
+    nn_os_LightEvent_Signal(g_appletEventState.homeButtonEvent);
     FUN_00110124(FUN_0010e924, 0);
     FUN_00110110(appletSignalSleepQuery, 0);
     FUN_00110838(1);

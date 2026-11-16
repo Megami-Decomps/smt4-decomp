@@ -17,7 +17,7 @@ void jobFlagsWorkStop(AocMenu *menu);
 void aocReleasePackageOwner(AocSystemA *system);
 void aocResetOperationState(AocSystemA *system);
 s32 sysLightEventTryWait(void *event);
-u8 FUN_002e19f8(void);
+u8 buttonHelpStateIsNot3(void);
 u8 isEmptyString(const void *value);
 u8 byteIsAtLeast100(const void *value);
 }
@@ -61,7 +61,7 @@ void AocMenu::closeMenu()
         menu->substep = 1;
         break;
     case 1:
-        if (FUN_002e19f8() != 0) {
+        if (buttonHelpStateIsNot3() != 0) {
             aocLoadingTaskStart(menu, 1);
             aocResetOperationState(g_aocSystem);
             menu->substep = 2;
@@ -81,7 +81,7 @@ void AocMenu::closeMenu()
         }
         break;
     case 3:
-        if (FUN_002e19f8() != 0) {
+        if (buttonHelpStateIsNot3() != 0) {
             aocClearDisplayFlag(g_aocSystem);
             g_aocSystem->getPendingRequest();
             menu->step = 5;

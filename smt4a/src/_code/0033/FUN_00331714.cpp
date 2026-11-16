@@ -17,7 +17,7 @@ int dataTable41FindById(void);
 int soundChannelRequestIfEnabled(int, int, int);
 int soundChannelStopAll(int);
 void bgmRequestSelectedChannelFade(unsigned int frames);
-int FUN_003e503c(unsigned int);
+int partyGetSlotPreferredFirst(unsigned int);
 int gameCounterAddSaturating(int, int);
 int VectorSignedToFloat(int, int);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -49,7 +49,7 @@ extern int gameGetSlotTable(void);
 extern int FUN_003ddfd8(void);
 extern int actorIsActive(void);
 extern int partySlotMatchesSelected(unsigned int);
-/* Supplied declaration required: FUN_003e503c. */
+/* Supplied declaration required: partyGetSlotPreferredFirst. */
 /* Supplied declaration required: gameCounterAddSaturating. */
 extern int bitsAt60Test(int, unsigned int);
 extern int mapMainIsBusy(void);
@@ -142,7 +142,7 @@ void FUN_00331714(int param_1)
     }
     temp_v15 = temp_v15 + 1;
     if (temp_v15 >= 6) {
-      temp_v15 = FUN_001bd100(*(unsigned short *)(param_1 + 0x38));
+      temp_v15 = dataTable1bOr1cRecordHasFlag1(*(unsigned short *)(param_1 + 0x38));
       if (temp_v15 == 0) {
         gameCounterAddSaturating(0x22,1);
         gameCounterAddSaturating(0x23,temp_v5);
@@ -248,7 +248,7 @@ void FUN_00331714(int param_1)
       temp_v19 = 0x3f4ccccd;
       do {
         temp_v8 = temp_v7 & 0xffff;
-        FUN_003e503c(temp_v8);
+        partyGetSlotPreferredFirst(temp_v8);
         temp_v4 = actorIsActive();
         if (temp_v4 != 0) {
           temp_v5 = partySlotMatchesSelected(temp_v8);

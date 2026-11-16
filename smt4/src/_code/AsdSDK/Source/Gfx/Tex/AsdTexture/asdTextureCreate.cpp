@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern const char DAT_00409594[];
+extern const char g_asdTextureSourceFileName[];
 
 void *asdMemoryAlloc(int, int, int, s32 size, int flag);
 
@@ -19,10 +19,10 @@ AsdTexture *asdTextureCreate(s32 shared)
     AsdTexture *tex;
 
     if (shared != 0) {
-        asdDebugTrace(DAT_00409594, 43);
+        asdDebugTrace(g_asdTextureSourceFileName, 43);
         tex = (AsdTexture *)asdMemoryAlloc(0x10000, 0x100, 0, 0x48, 0);
     } else {
-        asdDebugTrace(DAT_00409594, 47);
+        asdDebugTrace(g_asdTextureSourceFileName, 47);
         tex = (AsdTexture *)asdMemoryAlloc(0x10000, 0x100, 0, 0x48, 1);
     }
     memClear(tex, 0x48);

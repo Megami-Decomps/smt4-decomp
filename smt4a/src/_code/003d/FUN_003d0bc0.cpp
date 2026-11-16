@@ -30,7 +30,7 @@ extern int FUN_002fd8e4(...); /* 0x2fd8e4 */
 extern int FUN_002fdd2c(...); /* 0x2fdd2c */
 extern int uiComparePackedEntryRankAscending(...); /* 0x2fdd80 */
 extern int entryRefCompareByOrder(...); /* 0x2fdec8 */
-extern int FUN_00321a98(...); /* 0x321a98 */
+extern int itemSortCompareRankThenKey(...); /* 0x321a98 */
 extern int entryCompareClassThenDescendingValue(...); /* 0x321b8c */
 extern int kindRefTieBreak(...); /* 0x34f028 */
 extern int itemCompareByNibbles(...); /* 0x34f4f0 */
@@ -101,7 +101,7 @@ void FUN_003d0bc0(int param_1)
           }
           else {
             temp_v2 = objectApplyIfUnblocked(temp_v3);
-            qsort(temp_v1,temp_v2,8,FUN_00321a98);
+            qsort(temp_v1,temp_v2,8,itemSortCompareRankThenKey);
           }
         }
         if ((*pbVar5 & 0x7f) == 0x20) {

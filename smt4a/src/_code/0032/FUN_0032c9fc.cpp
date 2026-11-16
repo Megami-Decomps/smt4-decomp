@@ -17,12 +17,12 @@ nn::Result FUN_0032c9fc(const ResourceRequest* request)
 
     if (pathBuildWide(reinterpret_cast<const char *>(request), reinterpret_cast<s16 *>(scratch), 0) == 0) {
         result = 0xe0e046bc;
-        FUN_0013ebd8(result);
+        processResultSetValue(result);
         return result;
     }
     FUN_001886bc();
     result = FUN_00188444(scratch);
-    FUN_0013ebd8(result);
+    processResultSetValue(result);
     return result;
 }
 }

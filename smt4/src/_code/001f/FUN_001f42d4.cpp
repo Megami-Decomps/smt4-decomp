@@ -45,7 +45,7 @@ s32 FUN_001f42d4(u32 job)
     s32 state = renderCtxPackPassFlags(1, 0);
     renderStackPushCounted(&context->stackA, state);
     context = g_titleScene;
-    state = FUN_002865c0(6, 0.0f);
+    state = gxPackFadeKindAlphaWord(6, 0.0f);
     renderStackPush(&context->additional.stackC, state);
     context = g_titleScene;
     state = packNibblesAndByte(6, 7, 0);

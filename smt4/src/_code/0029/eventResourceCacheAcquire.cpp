@@ -29,7 +29,7 @@ struct ResourceCache {
 };
 
 extern "C" {
-extern ResourceCache DAT_0047e508;
+extern ResourceCache g_resourceCache;
 extern const u32 _ZTV9Obj4206f8[];
 extern const char DAT_003ff7c8[];
 extern const char DAT_003ff7e4[];
@@ -48,18 +48,18 @@ void aocDisplayQueueFormattedEntry(u32 system, s32 id, void **output, const char
 ResourceContent *eventResourceCacheAcquire(s32 id, s32 queueLoad, u32 unused, u32 heap)
 {
     for (s32 i = 0; i < 16; i++) {
-        ResourceContent *cached = DAT_0047e508.slots[i];
+        ResourceContent *cached = g_resourceCache.slots[i];
         if (cached != NULL && cached->id == id) {
             cached->refCount++;
-            return DAT_0047e508.slots[i];
+            return g_resourceCache.slots[i];
         }
     }
 
     s32 slot = 0;
     while (slot < 16) {
-        if (DAT_0047e508.slots[slot] == NULL)
+        if (g_resourceCache.slots[slot] == NULL)
             break;
-        if (DAT_0047e508.slots[slot + 1] == NULL) {
+        if (g_resourceCache.slots[slot + 1] == NULL) {
             slot++;
             break;
         }
@@ -83,7 +83,7 @@ ResourceContent *eventResourceCacheAcquire(s32 id, s32 queueLoad, u32 unused, u3
         content->unk3d = 0;
         content->unk44 = 0;
     }
-    DAT_0047e508.slots[slot] = content;
+    g_resourceCache.slots[slot] = content;
     content->refCount = 1;
 
     if (queueLoad != 0) {

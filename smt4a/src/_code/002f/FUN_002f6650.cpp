@@ -9,7 +9,7 @@ int FUN_001223c8(...);
 int FUN_002ea668(...);
 int FUN_002ea6bc(...);
 int FUN_002ea6cc(...);
-int FUN_0030fc80(...);
+int clockGetTicksAsMicroseconds(...);
 int __aeabi_memcpy4(...);
 
 /* stack frame of void: 17 slot(s), 68 byte(s) */
@@ -44,7 +44,7 @@ extern unsigned long long rt_lmul(int, int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002ea668. */
 /* Supplied declaration required: FUN_002ea6bc. */
 /* Supplied declaration required: FUN_002ea6cc. */
-/* Supplied declaration required: FUN_0030fc80. */
+/* Supplied declaration required: clockGetTicksAsMicroseconds. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
@@ -74,7 +74,7 @@ unsigned int FUN_002f6650(void)
   __aeabi_memcpy4(&temp_v3,
               "킈砹趂ɏ\xf409袞ሷྃ獃襹禇ꬷD:\\home\\jenkins\\workspace\\Manual-Pack\\5129d543\\.\\OnlineCore/src/Core/InstantiationContext.h"
               ,0x18);
-  FUN_0030fc80(&temp_v10);
+  clockGetTicksAsMicroseconds(&temp_v10);
   temp_v9 = rt_lmul(temp_v10 - DAT_00589370,
                           (temp_v11 - DAT_00589374) - (unsigned int)(temp_v10 < DAT_00589370),1000000,0);
   temp_v12 = temp_v9;

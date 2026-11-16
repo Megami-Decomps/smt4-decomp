@@ -14,11 +14,11 @@ u32 FUN_003596e0(const char *path)
     if (pathBuildWide(path, converted, 2) != 0) {
         FUN_001886bc();
         u32 result = FUN_00188444(converted);
-        FUN_0013ebd8(result);
+        processResultSetValue(result);
         return result;
     }
     u32 result = 0xe0e046bc;
-    FUN_0013ebd8(result);
+    processResultSetValue(result);
     return result;
 }
 }

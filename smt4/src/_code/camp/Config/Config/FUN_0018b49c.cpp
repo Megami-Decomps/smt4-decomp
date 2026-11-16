@@ -63,7 +63,7 @@ void FUN_0018b49c(s32 x, s32 y)
 {
     ConfigMenu* menu = g_config;
     resourceRunOperationIfUnblocked(menu);
-    FUN_0029efa8(menu);
+    listCursorGetRowIfUnblocked(menu);
     texDrawCompositeSprite(2, 0x2f, 0, x, y, 0xb);
     u32 color = 0xe09800ff;
     LayoutEntry* frame = asdTMTexTableEntryAt(0x2f, 0x20);

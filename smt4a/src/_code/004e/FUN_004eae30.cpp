@@ -9,7 +9,7 @@ int btlTargetSelectSetMode(...);
 int FUN_00368d74(...);
 int FUN_00368e10(...);
 int FUN_003e7fa4(...);
-int FUN_003e8bb0(...);
+int btlEntryBuildSummary(...);
 int btlMainFindEntryByListedId(...);
 int FUN_004c0f74(...);
 int btlFindEntryValue(...);
@@ -43,7 +43,7 @@ extern unsigned int DAT_0057116c; /* 0x57116c */
 /* Supplied declaration required: FUN_00368d74. */
 /* Supplied declaration required: FUN_00368e10. */
 /* Supplied declaration required: FUN_003e7fa4. */
-/* Supplied declaration required: FUN_003e8bb0. */
+/* Supplied declaration required: btlEntryBuildSummary. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_004c0f74. */
 /* Supplied declaration required: btlFindEntryValue. */
@@ -99,7 +99,7 @@ void FUN_004eae30(unsigned int *param_1,int param_2,int param_3,int param_4)
     temp_v0 = __aeabi_idivmod(*(int *)(temp_v1 + 600) * 100,*(unsigned int *)(temp_v1 + 0x25c));
     temp_v11[2] = (unsigned int)(temp_v0 < 0x14);
     temp_v2 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003e8bb0(temp_v13,temp_v2,*(unsigned int *)(param_4 + 0x20));
+    btlEntryBuildSummary(temp_v13,temp_v2,*(unsigned int *)(param_4 + 0x20));
     switch(*(unsigned short *)(*(int *)(param_4 + 0x28) + 0x1be)) {
     case 7:
     case 9:
@@ -215,7 +215,7 @@ LAB_004eafdc:
       temp_v1 = temp_v9;
       temp_v15 = (unsigned int)(temp_v4 < 0x14);
       temp_v2 = reinterpret_cast<int>(btlGetMainState());
-      FUN_003e8bb0(&temp_v16,temp_v2,*(unsigned int *)(param_4 + 0x20));
+      btlEntryBuildSummary(&temp_v16,temp_v2,*(unsigned int *)(param_4 + 0x20));
       switch(*(unsigned short *)(*(int *)(param_4 + 0x28) + 0x1be)) {
       case 7:
       case 9:

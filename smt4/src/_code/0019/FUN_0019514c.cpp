@@ -20,7 +20,7 @@ extern "C" {
 #define SCREEN_FRAME(s) (*reinterpret_cast<s32*>(reinterpret_cast<u8*>(s) + 0x340))
 #define SCREEN_STATE(s) (*reinterpret_cast<s32*>(reinterpret_cast<u8*>(s) + 0x344))
 
-void FUN_002b8ee0(void* widget, s32 arg);
+void uiSlidingSpriteAdvance(void* widget, s32 arg);
 u16 ifTouchRegionAddRequested(u32 group, u32 index);
 s32 resourceRunOperationIfUnblocked(void* list);
 s32 FUN_0029efd8(void* list, s32 arg);
@@ -44,7 +44,7 @@ void FUN_0019514c(u8** screenRef)
     switch (SCREEN_STATE(screen)) {
     case 0:
         for (s32 i = 0; i < 5; i++) {
-            if (i <= frame) FUN_002b8ee0(&rows[i], 0);
+            if (i <= frame) uiSlidingSpriteAdvance(&rows[i], 0);
         }
         if (ready != 0) {
             *reinterpret_cast<u16*>(screen + 0x348) = ifTouchRegionAddRequested(0x30, 0x1a);
@@ -73,8 +73,8 @@ void FUN_0019514c(u8** screenRef)
             if (FUN_0029efd8(list, 0) != 0) {
                 if ((s32)FUN_0029ee54(list) > 5) {
                     while (resourceRunOperationIfUnblocked(list) == previous) {
-                        if (resourceRunOperationIfUnblocked(list) != 0 && FUN_0029efa8(list) == 0) break;
-                        if (resourceRunOperationIfUnblocked(list) == (s32)FUN_0029ee54(list) - 5 && FUN_0029efa8(list) == 4) break;
+                        if (resourceRunOperationIfUnblocked(list) != 0 && listCursorGetRowIfUnblocked(list) == 0) break;
+                        if (resourceRunOperationIfUnblocked(list) == (s32)FUN_0029ee54(list) - 5 && listCursorGetRowIfUnblocked(list) == 4) break;
                         FUN_0029efd8(list, 0);
                     }
                 }

@@ -8,7 +8,7 @@ char *libc_strcpy(char *, const char *);
 void asdMemFree(const void *);
 void memClear(void *, u32);
 s32 keyedRecordFindByName(const char *);
-char *FUN_002522e0(char *, s32);
+char *libc_strrchr(char *, s32);
 extern const char DAT_004008c4[];
 
 // Replace the pending effect request, reusing a cached effect when its filename is known.
@@ -28,7 +28,7 @@ u32 FUN_003db258(VersionedTextureOwner *owner, const char *effect)
     memClear(formatted, 0x80);
     textFormatBuffer(formatted, DAT_004008c4, effect);
     libc_strcpy(path, formatted);
-    libc_strcpy(request->name, FUN_002522e0(path, '/') + 1);
+    libc_strcpy(request->name, libc_strrchr(path, '/') + 1);
     if (keyedRecordFindByName(request->name) == 0xff) {
         asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&request->format), 0);
         request->flags |= 1;

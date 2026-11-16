@@ -17,7 +17,7 @@ bool FUN_001387c0(void)
     }
     const char *path = reinterpret_cast<const char *>(globalBlockGetFirst());
     u32 status = fsUnmountByName(path);
-    FUN_0013ebd8(status);
+    processResultSetValue(status);
     if (nnResultIsSuccess(status)) {
         DAT_005b40c8 = 0;
         return true;

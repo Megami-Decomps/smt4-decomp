@@ -2,17 +2,17 @@
 #include "camp/RenderCtx.h"
 extern "C" {
 extern RenderCtxA *g_renderCtx;
-extern u32 *DAT_005b3fe4;
-extern u32 DAT_005b3fe8;
+extern u32 *g_modelCommandBuffer;
+extern u32 g_modelCommandWordCount;
 void cursorResetFromParam();
 void asdModelCommandBlockRelease();
 }
 namespace {
 inline void appendRegister(u32 *commands, u32 value, u32 header)
 {
-    commands[DAT_005b3fe8] = value;
-    commands[DAT_005b3fe8 + 1] = header;
-    DAT_005b3fe8 += 2;
+    commands[g_modelCommandWordCount] = value;
+    commands[g_modelCommandWordCount + 1] = header;
+    g_modelCommandWordCount += 2;
 }
 inline u32 renderState(u32 index)
 {
@@ -28,12 +28,12 @@ extern "C" {
 void FUN_003c8538(s32 invalidate)
 {
     cursorResetFromParam();
-    u32 *commands = DAT_005b3fe4;
+    u32 *commands = g_modelCommandBuffer;
     if (invalidate) {
         appendRegister(commands, 1, 0xf0111);
         appendRegister(commands, 1, 0xf0110);
     }
-    commands = DAT_005b3fe4;
+    commands = g_modelCommandBuffer;
     u32 colorMask = renderState(4) & 0xf00;
     appendRegister(commands, colorMask ? 15 : 0, 0xf0112);
     appendRegister(commands, colorMask ? 15 : 0, 0xf0113);

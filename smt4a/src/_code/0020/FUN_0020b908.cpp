@@ -53,18 +53,18 @@ void sysPlaySe(u32 id);
 void buttonHelpSetText(const s8 *text, u32 color);
 s32 buttonHelpGetPanelMode(void);
 s32 resourceRunOperationIfUnblocked(ScrollSelection *list);
-s32 FUN_002a4894(const void *object);
+s32 listCursorGetRowIfUnblocked(const void *object);
 void *slotRecordFindById(u32 id);
 void unitRecordBuild(s32 id, UnitRecord *out);
 void FUN_0035ad50(u32 id, UnitRecord *unit);
 void FUN_0032d0c8(void *directory, u32 index, u16 id, void *record);
 void skillHelpUpdateAttributeAndTarget(s32 id);
 void FUN_002c8550(s32 mode);
-void FUN_00183f58(u32 index, s32 kind, s32 value, s32 queue);
+void buttonHelpSelectSlot(u32 index, s32 kind, s32 value, s32 queue);
 void FUN_00184b90(u8 *owner, s32 direction);
-void FUN_003343f0(u8 value);
+void gameGlobalsSetMenuOpenFlag(u8 value);
 void FUN_00333dc8(u8 value);
-void FUN_002bf4f4(u8 value);
+void buttonHelpSetPanelState(u8 value);
 
 /* Plays the sound of the unite state being entered, shows its help and switches to it. */
 void FUN_0020b908(u32 state, s32 rememberPrevious)
@@ -82,10 +82,10 @@ void FUN_0020b908(u32 state, s32 rememberPrevious)
     case 0x1F: {
         s32 panelMode = buttonHelpGetPanelMode();
         sysPlaySe(0xA0);
-        FUN_003343f0(1);
+        gameGlobalsSetMenuOpenFlag(1);
         FUN_00333dc8(1);
         if (panelMode == 0)
-            FUN_002bf4f4(0);
+            buttonHelpSetPanelState(0);
         break;
     }
     case 3:
@@ -102,7 +102,7 @@ void FUN_0020b908(u32 state, s32 rememberPrevious)
     }
     case 0xD: {
         sysPlaySe(0x56);
-        u32 index = resourceRunOperationIfUnblocked(&unite->pairList) + FUN_002a4894(&unite->pairList);
+        u32 index = resourceRunOperationIfUnblocked(&unite->pairList) + listCursorGetRowIfUnblocked(&unite->pairList);
         u16 pair = unite->sortedPairs[index];
         UnitRecord unit;
         if (unite->pairKind == 0) {
@@ -130,7 +130,7 @@ void FUN_0020b908(u32 state, s32 rememberPrevious)
     case 0xF:
         if (g_unite->state != 0x10 && g_unite->state != 0x11 && g_unite->state != 0x12) {
             sysPlaySe(0x57);
-            u32 index = resourceRunOperationIfUnblocked(&unite->skillList) + FUN_002a4894(&unite->skillList);
+            u32 index = resourceRunOperationIfUnblocked(&unite->skillList) + listCursorGetRowIfUnblocked(&unite->skillList);
             skillHelpUpdateAttributeAndTarget(unite->skills[index]);
             FUN_002c8550(0xF);
         }
@@ -138,8 +138,8 @@ void FUN_0020b908(u32 state, s32 rememberPrevious)
     case 0x13:
         sysPlaySe(0x5F);
         if (unite->helpAvailable != 0) {
-            FUN_00183f58(2, 9, 0x44, 1);
-            FUN_00183f58(3, 0, 0, 1);
+            buttonHelpSelectSlot(2, 9, 0x44, 1);
+            buttonHelpSelectSlot(3, 0, 0, 1);
         }
         break;
     case 0x1B: {
@@ -162,7 +162,7 @@ void FUN_0020b908(u32 state, s32 rememberPrevious)
     case 0x24:
         unite->saved = g_unite->state;
         FUN_00184b90(reinterpret_cast<u8 *>(unite), 3);
-        FUN_003343f0(1);
+        gameGlobalsSetMenuOpenFlag(1);
         break;
     case 0:
     case 1:

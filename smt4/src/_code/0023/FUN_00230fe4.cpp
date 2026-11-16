@@ -7,7 +7,7 @@ extern "C" {
 f32 jobGetScalarValue();
 void efctSetSpeed(f32 scale);
 SpriteInfo *asdTMTexTableEntryAt(u32 table, s32 index);
-void FUN_002b0750(u32 flags, u32 table, s32 index, u32 second, u32 third,
+void uiDrawTableTextureSized(u32 flags, u32 table, s32 index, u32 second, u32 third,
     u32 firstExtra, u32 secondExtra, u32 fourth);
 void vectorSetAllOne(QuadVector *value);
 void *__aeabi_vec_ctor_nocookie_nodtor(QuadVector *values, void (*construct)(QuadVector *), u32 size, u32 count);
@@ -23,7 +23,7 @@ void FUN_00230fe4(u32 flags, u32 table, s32 index, u32 second, u32 third,
     SpriteInfo *sprite = asdTMTexTableEntryAt(table, index);
     ItemSpriteExtension *extension = reinterpret_cast<ItemSpriteExtension *>(sprite->size);
     if (extension != NULL && extension->mode == 1) {
-        FUN_002b0750(flags, table, index, second, third, firstExtra, secondExtra, fourth);
+        uiDrawTableTextureSized(flags, table, index, second, third, firstExtra, secondExtra, fourth);
         return;
     }
     if (useColors && extension != NULL) {

@@ -54,7 +54,7 @@ extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 extern int recordGetModeForId(int);
 /* Supplied declaration required: FUN_00284ee4. */
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
-extern int FUN_002a4894(int);
+extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: scrollOwnerSetValue. */
 /* Supplied declaration required: scrollListSetSelectionTracked. */
 /* Supplied declaration required: FUN_002a7b74. */
@@ -118,9 +118,9 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
   piVar11 = (int *)(param_1 + 0x8e84);
   puVar12 = (unsigned char *)(param_1 + 0x8eac);
   if ((temp_v4 != 0) || (temp_v4 = temp_v14, FUN_00228b04(temp_v14,1), temp_v4 != 0)) {
-    temp_v10 = FUN_002a4894(temp_v14);
+    temp_v10 = listCursorGetRowIfUnblocked(temp_v14);
     temp_v4 = resourceRunOperationIfUnblocked(temp_v14);
-    temp_v5 = FUN_002a4894(temp_v14);
+    temp_v5 = listCursorGetRowIfUnblocked(temp_v14);
     temp_v4 = temp_v4 + temp_v5;
     temp_v5 = resourceRunOperationIfUnblocked(temp_v14);
     if ((*piVar11 >= 9) && ((char)temp_v18 == '\0')) {
@@ -175,7 +175,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
   temp_v16 = param_1 + 0x8b60;
   if (temp_v4 != 0 || (char)temp_v18 != '\0') {
     temp_v4 = resourceRunOperationIfUnblocked(temp_v14);
-    temp_v5 = FUN_002a4894(temp_v14);
+    temp_v5 = listCursorGetRowIfUnblocked(temp_v14);
     temp_v4 = temp_v4 + temp_v5;
     if ((*piVar11 <= temp_v4) || (*(char *)(param_1 + 0x8eac) != '\0')) {
       temp_v4 = 0;
@@ -238,7 +238,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
       eventQueueAddUniqueIfValid(0x100020e);
       *(unsigned char *)(param_1 + 0x8e8a) = 0;
       temp_v4 = resourceRunOperationIfUnblocked();
-      temp_v5 = FUN_002a4894(param_1 + 0x8db0);
+      temp_v5 = listCursorGetRowIfUnblocked(param_1 + 0x8db0);
       if (*(short *)(param_1 + (temp_v5 + temp_v4) * 2 + 0x8b60) != 0) {
         skillHelpUpdateAttributeAndTarget();
         return temp_v15;
@@ -268,7 +268,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
           }
           else {
             temp_v6 = resourceRunOperationIfUnblocked(temp_v17);
-            temp_v8 = FUN_002a4894(temp_v17);
+            temp_v8 = listCursorGetRowIfUnblocked(temp_v17);
             temp_v7 = (unsigned int)*(unsigned short *)(param_1 + (temp_v8 + temp_v6) * 2 + 0x6832);
             *param_3 = temp_v7;
           }

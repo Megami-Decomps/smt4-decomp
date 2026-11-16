@@ -26,7 +26,7 @@ extern MapGimic *g_mapGimic;
 extern u32 g_handleRegistry;
 
 s32 FUN_0040ab8c(GimicObject *object);
-void FUN_0040aad4(GimicObject *object, s32 a);
+void moriModelContentLoadBody(GimicObject *object, s32 a);
 void modelPlayClip(void *model, u32 index, u8 flags, f32 time, f32 blend);
 void animationSelectClip(void *model, u32 index, u8 flags, f32 time);
 void handleRegistryRegisterObject(u32 registry, void *object);
@@ -45,7 +45,7 @@ u32 mapGimicStartById(s32 id)
             if (!FUN_0040ab8c(slot->object)) {
                 return 0;
             }
-            FUN_0040aad4(slot->object, 0);
+            moriModelContentLoadBody(slot->object, 0);
             model = slot->object->model;
             modelPlayClip(model, 0, 2, 0.0f, 0.0f);
             if (id == 42) {

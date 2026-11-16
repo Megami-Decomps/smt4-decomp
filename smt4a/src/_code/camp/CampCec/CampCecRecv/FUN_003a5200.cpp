@@ -18,14 +18,14 @@ int FUN_00280250(void);
 int FUN_002a17d4(...);
 int gameDataGetRecordValue(void);
 int libc_strcpy(...);
-int FUN_002e59f8(void);
+int memcpySrcFirst(void);
 int scrSetStringSlot(...);
 int cecProcessCall1(void);
 int FUN_0031cf00(...);
 int slotNameDisplaySetEntry(...);
 int playerSummaryFill(void);
 int FUN_00330b7c(void);
-int FUN_00333474(...);
+int savedRecordInsertAtFront(...);
 int FUN_00359974(...);
 int dataTable4ACount(void);
 int FUN_0036d41c(void);
@@ -96,7 +96,7 @@ extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002bf520. */
 /* Supplied declaration required: gameDataAddHomeButtonHold. */
 /* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_002e59f8. */
+/* Supplied declaration required: memcpySrcFirst. */
 extern int asdCecInboxGetMessageCount(void);
 /* Supplied declaration required: scrSetStringSlot. */
 extern short *dataTable4AGetEntry(int);
@@ -112,7 +112,7 @@ extern int FUN_0033004c(void);
 /* Supplied declaration required: dataStoreGetProgress. */
 /* Supplied declaration required: FUN_00330b7c. */
 extern int FUN_003316b4(int);
-/* Supplied declaration required: FUN_00333474. */
+/* Supplied declaration required: savedRecordInsertAtFront. */
 extern int gameDataTestFlags(unsigned int);
 extern int dataStoreIsReady(void);
 /* Supplied declaration required: FUN_00359974. */
@@ -358,7 +358,7 @@ joined_r0x003a52e4:
         if (temp_v12 == 0) {
           temp_v11 = temp_v11 + 1;
           *(unsigned short *)(temp_v3 + 0x34) = *(unsigned short *)(temp_v3 + 0x60);
-          FUN_00333474(temp_v3);
+          savedRecordInsertAtFront(temp_v3);
           FUN_002a17d4(temp_v3);
           gameDataAddMoneySaturating(1);
           temp_v3 = gameDataBlocksGetWord27E90();
@@ -494,7 +494,7 @@ joined_r0x003a5980:
       temp_v8 = FUN_0031cee0();
       if (temp_v8 == 1) {
         FUN_0031cf00();
-        FUN_002e59f8();
+        memcpySrcFirst();
         temp_v8 = gameGetSlotTable();
         temp_v19 = temp_v8;
         FUN_0031cf00();

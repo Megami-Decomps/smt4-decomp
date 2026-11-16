@@ -50,7 +50,7 @@ u32 FUN_0046ebf0(u32 arg0, u32 arg1);
 extern "C" {
 #endif
 
-void FUN_0047306c(DirectoryDisplayStateA *state, u32 selection, u32 argument2, u32 argument3);
+void aocEntryPanelCreateText(DirectoryDisplayStateA *state, u32 selection, u32 argument2, u32 argument3);
 
 #ifdef __cplusplus
 }

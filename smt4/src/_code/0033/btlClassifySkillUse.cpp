@@ -6,7 +6,7 @@
 #include "gamedata/DataTable40.h"
 
 extern "C" {
-u32 FUN_0023d9b8(s32 unit, s32 mode, Table04Record *skill);
+u32 itemEffectCheckApplicable(s32 unit, s32 mode, Table04Record *skill);
 
 // Classify an attempted skill use and report resource-related failures.
 u32 btlClassifySkillUse(s32 unit, u32 skillId)
@@ -42,7 +42,7 @@ u32 btlClassifySkillUse(s32 unit, u32 skillId)
             return 0;
         }
     }
-    u32 result = FUN_0023d9b8(unit, 1, skill);
+    u32 result = itemEffectCheckApplicable(unit, 1, skill);
     if (result)
         result = 3;
     return result;

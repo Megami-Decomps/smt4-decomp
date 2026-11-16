@@ -61,7 +61,7 @@ u32 FUN_003450d4(ScrollSelection *list, const TouchRectangleRequest *rectangle, 
                  u32 secondKey, u32 thirdKey, bool *blocked, s32 secondary, s32 notify);
 TouchRectangleRequest *asdTMTexTableEntryAt(u32 file, s32 index);
 s32 resourceRunOperationIfUnblocked(ScrollSelection *list);
-s32 FUN_002a4894(const void *object);
+s32 listCursorGetRowIfUnblocked(const void *object);
 s32 objectApplyIfUnblocked(ScrollSelection *list);
 
 /* One frame of the play log screen: animates the sprites, scrolls the list and moves between states. */
@@ -135,10 +135,10 @@ void FUN_0021545c(void)
             if (objectApplyIfUnblocked(&work->list) > 5) {
                 if (resourceRunOperationIfUnblocked(&work->list) == before) {
                     for (;;) {
-                        if (resourceRunOperationIfUnblocked(&work->list) == 0 && FUN_002a4894(&work->list) == 0)
+                        if (resourceRunOperationIfUnblocked(&work->list) == 0 && listCursorGetRowIfUnblocked(&work->list) == 0)
                             break;
                         if (resourceRunOperationIfUnblocked(&work->list) == objectApplyIfUnblocked(&work->list) - 5 &&
-                            FUN_002a4894(&work->list) == 4)
+                            listCursorGetRowIfUnblocked(&work->list) == 4)
                             break;
                         FUN_00228b04(&work->list, 0);
                         if (resourceRunOperationIfUnblocked(&work->list) != before)

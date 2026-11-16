@@ -42,7 +42,7 @@ extern unsigned int DAT_0064bfa8; /* 0x64bfa8 */
 extern unsigned int DAT_0064bfac; /* 0x64bfac */
 extern unsigned char DAT_0064bfb0; /* 0x64bfb0 */
 
-extern unsigned char *FUN_00100d60(char *, unsigned int);
+extern unsigned char *libc_strrchr(char *, unsigned int);
 /* Supplied declaration required: FUN_00100d88. */
 extern unsigned int FUN_00100dc8(int *);
 /* Supplied declaration required: asdOperatorDelete. */
@@ -83,7 +83,7 @@ unsigned int FUN_0010095c(unsigned int param_1,unsigned int param_2,int param_3,
   temp_v17 = param_3;
   temp_v18 = param_4;
   if (DAT_005c4bd0 == (char *)0x0) {
-    puVar3 = (unsigned char *)FUN_00100d60(s_rwstderr_1_005c4bdc,0x3a);
+    puVar3 = (unsigned char *)libc_strrchr(s_rwstderr_1_005c4bdc,0x3a);
     if (puVar3 != (unsigned char *)0x0) {
       *puVar3 = 0;
       puVar3 = puVar3 + 1;

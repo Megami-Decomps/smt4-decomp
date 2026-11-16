@@ -4,7 +4,7 @@
 #include "script/scrScriptProcess.h"
 #include "code/Code002c.h"
 extern "C" {
-void FUN_002898e4(void);
+void commonBgAcquire(void);
 void buttonHelpCreate(void);
 void commonBgStopChildAndBeginTransition(void);
 void buttonHelpSetPreset(s32 preset);
@@ -19,7 +19,7 @@ u32 FUN_0023ed64(BtlEvent *event);
 u32 FUN_0023f074(BtlEvent *event)
 {
     if (FUN_002c2a04(0) == 3 && FUN_002c2a04(1) == 3) {
-        FUN_002898e4();
+        commonBgAcquire();
         buttonHelpCreate();
         commonBgStopChildAndBeginTransition();
         buttonHelpSetPreset(0xA9);

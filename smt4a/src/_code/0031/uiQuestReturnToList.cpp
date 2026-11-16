@@ -14,7 +14,7 @@ void uiSpriteSetKeyframe(void *sprite, s32 frame, s32 flags);
 void uiSpriteSetImageKeyframe(void *sprite, s32 image, s32 flags);
 void uiQuestSpritesCreate(void);
 s32 resourceRunOperationIfUnblocked(void);
-s32 FUN_002a4894(void *cursor);
+s32 listCursorGetRowIfUnblocked(void *cursor);
 void FUN_003d498c(u32 id, s32 enabled);
 void buttonHelpSetSelectedId(s32 sound);
 s32 partyEntryBitsBit4(u32 id);
@@ -38,7 +38,7 @@ void uiQuestReturnToList(void)
     }
     uiQuestSpritesCreate();
     s32 page = resourceRunOperationIfUnblocked();
-    s32 cursor = FUN_002a4894(quest->cursor);
+    s32 cursor = listCursorGetRowIfUnblocked(quest->cursor);
     u16 id = quest->list[page + cursor];
     FUN_003d498c(id, 1);
     uiSpriteSetKeyframe(quest->mainSprite, 0, 0);

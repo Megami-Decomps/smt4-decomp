@@ -31,7 +31,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
 extern int recordTableGet(unsigned int, int);
-extern int FUN_002a4878(int);
+extern int listCursorGetRowOfChildIfUnblocked(int);
 extern int uiSearchSecondary(int);
 /* Supplied declaration required: FUN_00485108. */
 /* Supplied declaration required: textDrawEncodedGlyph. */
@@ -181,7 +181,7 @@ void FUN_004845ac(int param_1)
       } while (temp_v8 < temp_v10);
     }
     if (*(char *)(param_1 + 0x260) != '\0') {
-      temp_v10 = FUN_002a4878(param_1 + 0x1fc);
+      temp_v10 = listCursorGetRowOfChildIfUnblocked(param_1 + 0x1fc);
       temp_v8 = asdTMTexTableEntryAt(0x23,temp_v10 + 0xc6);
       if (temp_v10 != 3) {
         (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v8 + 10);

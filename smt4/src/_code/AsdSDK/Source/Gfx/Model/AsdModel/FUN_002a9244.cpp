@@ -7,7 +7,7 @@ extern "C" {
 
 int FUN_0014f07c(...);
 int FUN_0015156c(...);
-int FUN_002a55ec(...);
+int asdModelSelectSecondaryMotion(...);
 int modelSelectPrimaryMotion(...);
 int FUN_002a5960(...);
 int _ZN9Obj42111cC1Ej(...);
@@ -109,7 +109,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0014f07c. */
 /* Supplied declaration required: FUN_0015156c. */
-/* Supplied declaration required: FUN_002a55ec. */
+/* Supplied declaration required: asdModelSelectSecondaryMotion. */
 /* Supplied declaration required: modelSelectPrimaryMotion. */
 /* Supplied declaration required: FUN_002a5960. */
 /* Supplied declaration required: _ZN9Obj42111cC1Ej. */
@@ -364,7 +364,7 @@ void FUN_002a9244(fn_002a9244_arg0 *param_1)
     (**(romwright_code **)(*piVar3 + 0x24))(piVar3,**(unsigned int **)&param_1->field_0x54);
     *(unsigned int *)&param_1->field_0x5c = 0;
   }
-  FUN_002a55ec(param_1,0);
+  asdModelSelectSecondaryMotion(param_1,0);
   return;
 }
 

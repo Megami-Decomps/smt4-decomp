@@ -37,7 +37,7 @@ extern u32 DAT_0043e048[];
 void cameraExportParameters(void *block, u32 source);
 s32 jobIsValid(u32 job);
 s32 modelHasLoadedAttachment(u32 *model);
-s32 FUN_002adde8(u32 model, u32 bone, Vec3 *out);
+s32 modelGetBoneTranslationByName(u32 model, u32 bone, Vec3 *out);
 void FUN_002adca0(u32 job, Vec3 *from, Vec3 *to, u32 owner, s32 frames, s32 mode);
 void bustupCutAnimStartMove(u32 job, u32 owner, s32 frames, f32 x, f32 y);
 
@@ -67,7 +67,7 @@ u32 FUN_001269fc(void)
         if (current != NULL) {
             s32 found = 1;
             if (current->model != NULL && modelHasLoadedAttachment(current->model) != 0) {
-                found = FUN_002adde8(current->model[2], DAT_0043e048[i], &position);
+                found = modelGetBoneTranslationByName(current->model[2], DAT_0043e048[i], &position);
                 if (i == 0)
                     position.y += current->headOffsetY;
             }

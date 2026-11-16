@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ad314(float *, float [9]);
+int mathSinCos(float *, float [9]);
 int mtx44Copy(float *, float *);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
@@ -31,7 +31,7 @@ extern float DAT_004efdd0; /* 0x4efdd0 */
 extern float DAT_004efdd4; /* 0x4efdd4 */
 extern float DAT_004efdd8; /* 0x4efdd8 */
 
-/* Supplied declaration required: FUN_002ad314. */
+/* Supplied declaration required: mathSinCos. */
 /* Supplied declaration required: mtx44Copy. */
 extern int __cxa_guard_acquire(unsigned int *);
 
@@ -78,7 +78,7 @@ float * textureCalcSrtMatrix(float *param_1,int param_2)
         mtx44Copy(param_1,&_ZZN2nw4math5MTX448IdentityEvE8identity);
       }
       else {
-        FUN_002ad314(&temp_v4,temp_v5);
+        mathSinCos(&temp_v4,temp_v5);
         param_1[0xe] = temp_v1;
         param_1[0xf] = temp_v2;
         param_1[0xd] = temp_v1;
@@ -100,7 +100,7 @@ float * textureCalcSrtMatrix(float *param_1,int param_2)
       }
     }
     else {
-      FUN_002ad314(&temp_v4,temp_v5);
+      mathSinCos(&temp_v4,temp_v5);
       *param_1 = in_s0 * temp_v5[0];
       param_1[5] = in_s1 * temp_v5[0];
       param_1[0xe] = temp_v1;
@@ -120,7 +120,7 @@ float * textureCalcSrtMatrix(float *param_1,int param_2)
     }
   }
   else {
-    FUN_002ad314(&temp_v4,temp_v5);
+    mathSinCos(&temp_v4,temp_v5);
     *param_1 = in_s0 * temp_v5[0];
     param_1[5] = in_s1 * temp_v5[0];
     param_1[0xe] = temp_v1;

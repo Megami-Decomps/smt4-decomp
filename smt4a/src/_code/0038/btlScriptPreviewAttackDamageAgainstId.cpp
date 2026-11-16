@@ -20,7 +20,7 @@ union BattleAttackPreview {
 extern "C" {
 s32 scrGetArg(u32 index);
 void scrSetResult(s32 value);
-void FUN_003e8bb0(BattleAttackPreview *out, BtlMainStateA *battle, BtlCombatantEntryA *attacker);
+void btlEntryBuildSummary(BattleAttackPreview *out, BtlMainStateA *battle, BtlCombatantEntryA *attacker);
 void kindIdStore(u32 kind, u32 *out);
 s32 FUN_004c58e0(void *context, s32 variant, s32 attacker, s32 target,
     s32 modifier, s32 preview, s32 flags, f32 multiplier, f32 affinity);
@@ -44,7 +44,7 @@ u32 btlScriptPreviewAttackDamageAgainstId(void)
                     entries->attackSelection.kind = 1;
                     entries->attackSelection.variant = 1;
                     BattleAttackPreview attack;
-                    FUN_003e8bb0(&attack, battle, entries);
+                    btlEntryBuildSummary(&attack, battle, entries);
                     u32 statKind = 0;
                     kindIdStore(attack.data.kind, &statKind);
                     s32 sign = attack.data.sign;

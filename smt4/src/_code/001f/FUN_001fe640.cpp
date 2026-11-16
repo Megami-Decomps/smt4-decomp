@@ -7,9 +7,9 @@ extern "C" {
 int CONCAT44(double, double);
 int FUN_001ff474(void);
 int asdListBoxFindItem(...);
-int FUN_0027f958(float *, float *, int);
+int padGetNormalizedAnalogStick(float *, float *, int);
 int FUN_002aed34(...);
-int FUN_002b76d0(...);
+int gfxDrawQuadFourColors(...);
 int textFormatBuffer(...);
 int padIsButtonPressed(...);
 int jobGetWork(...);
@@ -60,9 +60,9 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_001ff474. */
 /* Supplied declaration required: asdListBoxFindItem. */
-/* Supplied declaration required: FUN_0027f958. */
+/* Supplied declaration required: padGetNormalizedAnalogStick. */
 /* Supplied declaration required: FUN_002aed34. */
-/* Supplied declaration required: FUN_002b76d0. */
+/* Supplied declaration required: gfxDrawQuadFourColors. */
 extern int padIsButtonRepeat(unsigned int);
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: padIsButtonPressed. */
@@ -157,7 +157,7 @@ LAB_001ff420:
     if (!(temp_v9 || temp_v3 == 0)) {
       temp_v12 = 2.0f;
       if (((piVar2[0xe] & 4U) != 0) &&
-         (FUN_0027f958(&temp_v15,&temp_v16,0), pfVar4 != (float *)0x0)) {
+         (padGetNormalizedAnalogStick(&temp_v15,&temp_v16,0), pfVar4 != (float *)0x0)) {
         if ((unsigned int)temp_v15 >= 0xbf000001) {
           temp_v10 = (float)piVar2[0x12] - temp_v12;
           piVar2[0x12] = (int)temp_v10;
@@ -192,7 +192,7 @@ LAB_001ff420:
       temp_v16 = temp_v16 * 0.003921569f;
       temp_v18 = temp_v18 * 0.003921569f;
       temp_v17 = temp_v17 * 0.003921569f;
-      FUN_002b76d0(&temp_v15);
+      gfxDrawQuadFourColors(&temp_v15);
       temp_v3 = *(unsigned int *)((unsigned int)*(unsigned char *)(piVar2 + 0xf) * 0x10 + 0x409cfc);
       temp_v18 = (float)VectorUnsignedToFloat(temp_v3 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v17 = (float)VectorUnsignedToFloat((temp_v3 & 0xff00) >> 8,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -204,7 +204,7 @@ LAB_001ff420:
       temp_v17 = temp_v17 * temp_v13;
       temp_v15 = temp_v15 * temp_v13;
       temp_v16 = temp_v16 * temp_v13;
-      FUN_002b76d0(&temp_v15);
+      gfxDrawQuadFourColors(&temp_v15);
       temp_v3 = *(unsigned int *)((unsigned int)*(unsigned char *)(piVar2 + 0xf) * 0x10 + 0x409cf4);
       temp_v11 = romwright_piece_4_4((temp_v3 & 0xff0000) >> 0x10,temp_v3) & 0xffffffff000000ff;
       temp_v16 = (float)VectorUnsignedToFloat((int)(temp_v11 >> 0x20),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -215,10 +215,10 @@ LAB_001ff420:
       temp_v16 = temp_v16 * temp_v13;
       temp_v17 = temp_v17 * temp_v13;
       temp_v18 = temp_v18 * temp_v13;
-      FUN_002b76d0(&temp_v15);
-      FUN_002b76d0(&temp_v15);
-      FUN_002b76d0(&temp_v15);
-      FUN_002b76d0(&temp_v15);
+      gfxDrawQuadFourColors(&temp_v15);
+      gfxDrawQuadFourColors(&temp_v15);
+      gfxDrawQuadFourColors(&temp_v15);
+      gfxDrawQuadFourColors(&temp_v15);
       FUN_002aed34(0,piVar2 + 0x23);
       if ((piVar2[0xe] & 1U) == 0) {
         temp_v15 = temp_v10;
@@ -241,7 +241,7 @@ LAB_001ff420:
         temp_v16 = temp_v16 * temp_v13;
         temp_v18 = temp_v18 * temp_v13;
         temp_v17 = temp_v17 * temp_v13;
-        FUN_002b76d0(&temp_v15);
+        gfxDrawQuadFourColors(&temp_v15);
       }
       temp_v7 = 0xffffffff;
       temp_v21 = 0xffffffff;

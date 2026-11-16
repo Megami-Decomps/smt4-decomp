@@ -8,7 +8,7 @@ extern "C" {
 
 int mapIfActivateRecord(...);
 int table23FindRecordByKey(unsigned int, unsigned int, unsigned int);
-int FUN_0027f958(...);
+int padGetNormalizedAnalogStick(...);
 int FUN_0027fca0(...);
 int FUN_002879dc(...);
 int buttonHelpSetPreset(int);
@@ -56,7 +56,7 @@ extern int inputIsQuestMenuPressed(void);
 extern int dataTableGetRecord23(void);
 /* Supplied declaration required: table23FindRecordByKey. */
 extern int FUN_0027ee9c(void);
-/* Supplied declaration required: FUN_0027f958. */
+/* Supplied declaration required: padGetNormalizedAnalogStick. */
 /* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: FUN_0027fae4. */
 /* Supplied declaration required: FUN_0027fc14. */
@@ -537,7 +537,7 @@ LAB_002e9794:
     temp_v0 = *(int *)(g_lmapScene + 8) + 1;
     *(int *)(g_lmapScene + 8) = temp_v0;
     if ((temp_v0 < 0x12) ||
-       ((((FUN_0027f958(&temp_v9,temp_v10,0), temp_v9 < 0xbf000001 && ((int)temp_v9 < 0x3f000001)
+       ((((padGetNormalizedAnalogStick(&temp_v9,temp_v10,0), temp_v9 < 0xbf000001 && ((int)temp_v9 < 0x3f000001)
           ) && (temp_v10[0] < 0xbf000001)) &&
         (((int)temp_v10[0] < 0x3f000001 && (*(int *)(g_lmapScene + 8) < 0x1f)))))) {
       FUN_002804ec(g_lmapScene + 0x28);

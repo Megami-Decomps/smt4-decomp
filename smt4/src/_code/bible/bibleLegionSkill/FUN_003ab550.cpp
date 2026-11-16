@@ -33,7 +33,7 @@ typedef char BibleLegionSkillViewLayout[
     offsetof(BibleLegionSkillView, selectedSlot) == 0xA5B0 ? 1 : -1];
 
 extern "C" {
-extern u32 *DAT_0043d9f8;
+extern u32 *g_uiCallbackContext;
 
 void entryTableClear(void *table);
 void spriteTable22Acquire(void);
@@ -41,7 +41,7 @@ u32 taskCreateDraw(const char *name, s32 priority, u32 first, u32 second, void *
 void rectangleInitializeSelection(void *rectangle, s32 width, s32 a, s32 b);
 void uiInitializeEightTimerSet(void *timers);
 void FUN_00233240(void *timers, s32 index);
-void FUN_00233670(void *list, s32 a, s32 b, s32 count);
+void messageIdListInit(void *list, s32 a, s32 b, s32 count);
 void buttonHelpSetText(s32 a, u32 color);
 void FUN_003ace14(void);
 void uiFreeCallbackContext(void);
@@ -65,11 +65,11 @@ extern "C" void FUN_003ab550(Obj422448 *screen)
 
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\bible\\bibleLegionSkill.cpp", 173);
     u32 **work = static_cast<u32 **>(asdMemAlloc(0x100, 0x100, 0, 4, 1));
-    DAT_0043d9f8 = reinterpret_cast<u32 *>(work);
+    g_uiCallbackContext = reinterpret_cast<u32 *>(work);
     *work = reinterpret_cast<u32 *>(screen);
     view->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("BIBLE LEGIONSKILL CALC"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>((void *)FUN_003ace14), reinterpret_cast<AsdProcFunc>((void *)uiFreeCallbackContext), reinterpret_cast<u32>(work));
-    view->drawTask = taskCreateDraw("BIBLE LEGIONSKILL UP", 0x6F, 1, 0, (void *)FUN_003ad068, NULL, DAT_0043d9f8, view->job);
-    view->fadeTask = taskCreateDraw("BIBLE LEGIONSKILL DOWN", 0xE6, 1, 0, (void *)uiCallbackFinishDraw, NULL, DAT_0043d9f8, view->job);
+    view->drawTask = taskCreateDraw("BIBLE LEGIONSKILL UP", 0x6F, 1, 0, (void *)FUN_003ad068, NULL, g_uiCallbackContext, view->job);
+    view->fadeTask = taskCreateDraw("BIBLE LEGIONSKILL DOWN", 0xE6, 1, 0, (void *)uiCallbackFinishDraw, NULL, g_uiCallbackContext, view->job);
     rectangleInitializeSelection(view->rectangle, 0x140, 0, 0x1D);
     uiInitializeEightTimerSet(view->timers);
     FUN_00233240(view->timers, 0);
@@ -80,7 +80,7 @@ extern "C" void FUN_003ab550(Obj422448 *screen)
     view->controller = controller;
     controller->rectangle = view->rectangle;
     screen->buildList();
-    FUN_00233670(view->listView, 0x1D, 0x40E, 10);
+    messageIdListInit(view->listView, 0x1D, 0x40E, 10);
     view->listReady = 1;
     buttonHelpSetText(0, 0x323232FF);
     FUN_003ad0e0();

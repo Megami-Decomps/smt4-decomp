@@ -58,7 +58,7 @@ extern unsigned short ifTouchRegionAddRequested(unsigned int, unsigned int);
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int ifTouchGetSelectionMode(void);
 extern int ifTouchGetSelectedRegion(void);
-extern int FUN_002b8ee0(int, unsigned int);
+extern int uiSlidingSpriteAdvance(int, unsigned int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
@@ -117,7 +117,7 @@ LAB_002179dc:
   case 1:
     FUN_001990d4(param_1);
     timerStart(temp_v18,0);
-    temp_v6 = FUN_002b8ee0(param_1 + 0x11a0,0);
+    temp_v6 = uiSlidingSpriteAdvance(param_1 + 0x11a0,0);
     if (temp_v6 != 0) {
       *puVar12 = 2;
       *piVar13 = 0;
@@ -167,12 +167,12 @@ LAB_002179dc:
   case 2:
     if (*(short *)(param_1 + 0x1308) != 0xb) {
       if (*(short *)(param_1 + 0x1308) == 0xc) {
-        temp_v1 = FUN_002b8ee0(temp_v18,0);
+        temp_v1 = uiSlidingSpriteAdvance(temp_v18,0);
         goto joined_r0x00217be4;
       }
     }
     else {
-      temp_v1 = FUN_002b8ee0(temp_v18,1);
+      temp_v1 = uiSlidingSpriteAdvance(temp_v18,1);
 joined_r0x00217be4:
       if (temp_v1 == 0) break;
     }

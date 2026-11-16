@@ -3,7 +3,7 @@
 
 extern "C" {
 void mathCopyIdentityMatrix(Matrix44 *matrix);
-void FUN_002bbbc8(RenderTransformState *context, Matrix44 *projection, Matrix44 *view, Matrix44 *transform);
+void cameraComposeMatrices(RenderTransformState *context, Matrix44 *projection, Matrix44 *view, Matrix44 *transform);
 void gpuWriteVertexUniformMatrix(u32 mode, Matrix44 *combined);
 
 // Rebuild nonidentity or dirty transform matrices and apply the combined render matrix.
@@ -23,7 +23,7 @@ void renderCtxApplyTransforms(RenderCtx *renderCtx)
     }
     mathCopyIdentityMatrix(&context->transform);
     mathCopyIdentityMatrix(&context->inverse);
-    FUN_002bbbc8(context, &context->projection, &context->view, &context->transform);
+    cameraComposeMatrices(context, &context->projection, &context->view, &context->transform);
     gpuWriteVertexUniformMatrix(context->mode, &context->combined);
     context->dirty = 0;
 }

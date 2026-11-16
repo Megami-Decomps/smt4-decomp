@@ -7,8 +7,8 @@ void nw_snd_SoundPlayer_Update(SoundPlayer *player);
 void nw_ut_internal_LinkListImpl_erase_2BAE30(LinkList *list, ListNode *node);
 void nw_ut_internal_LinkListImpl_insert(LinkList *list, ListNode *pos, ListNode *node);
 void FUN_00140e78(void);
-u32 FUN_002baed8(void);
-void FUN_002bad74(u32 value, s32 flag);
+u32 soundRequestQueueGetInstance(void);
+void soundRequestQueueFlush(u32 value, s32 flag);
 
 enum { PRIORITY_BUCKETS = 128 };
 
@@ -77,9 +77,9 @@ void FUN_00110a04(SoundSystem *system)
     sortByPriority(&system->voiceList);
     sortByPriority(&system->streamList);
     sortByPriority(&system->effectList);
-    u32 value = FUN_002baed8();
+    u32 value = soundRequestQueueGetInstance();
     FUN_00140e78();
-    FUN_002bad74(value, 0);
+    soundRequestQueueFlush(value, 0);
 }
 
 } /* extern "C" */

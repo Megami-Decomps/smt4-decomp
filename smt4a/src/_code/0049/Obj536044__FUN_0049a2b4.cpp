@@ -29,7 +29,7 @@ extern "C" {
 u8 useCounterIsFinished(void);
 void useCounterRelease(void);
 s32 useCounterGetValue(void);
-void FUN_003343f0(u8 value);
+void gameGlobalsSetMenuOpenFlag(u8 value);
 void FUN_00498ff0(SortMenu *menu);
 u32 flaggedValueHolderGetTotal(const void *holder);
 u8 useCounterGetCurrentValue(void);
@@ -117,7 +117,7 @@ void _ZN9Obj53604412FUN_0049a2b4Ev(SortMenu *menu)
         }
     } else {
         useCounterRelease();
-        FUN_003343f0(0);
+        gameGlobalsSetMenuOpenFlag(0);
         FUN_00498ff0(menu);
         s32 page = menu->page;
         if (menu->reentered == 1) {

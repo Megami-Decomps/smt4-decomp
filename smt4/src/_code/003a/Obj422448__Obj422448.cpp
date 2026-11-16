@@ -7,7 +7,7 @@ Obj422448::Obj422448()
         enterHandlers[i] = NULL;
         leaveHandlers[i] = NULL;
     }
-    handlers[0] = &Obj422448::FUN_003abad4;
+    handlers[0] = &Obj422448::bibleScreenEnableAndResetValue;
     handlers[1] = &Obj422448::bibleScreenStartScript;
     handlers[2] = &Obj422448::FUN_003ab348;
     handlers[3] = &Obj422448::FUN_003abed8;
@@ -18,7 +18,7 @@ Obj422448::Obj422448()
     handlers[8] = &Obj422448::sceneScriptDoneSetState;
     handlers[9] = &Obj422448::FUN_003ab128;
     handlers[10] = &Obj422448::FUN_003ab7c8;
-    handlers[11] = &Obj422448::FUN_003ab948;
+    handlers[11] = &Obj422448::bibleScreenClearListedFlags;
     leaveHandlers[2] = &Obj42247c::FUN_003ab3dc;
     leaveHandlers[3] = &Obj42247c::FUN_003ab3dc;
     leaveHandlers[4] = &Obj42247c::FUN_003ab3dc;

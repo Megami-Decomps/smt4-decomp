@@ -50,7 +50,7 @@ extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: positionStateSet. */
 /* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: FUN_001527d8. */
+/* Supplied declaration required: uiObjectSetColorRgb. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
@@ -117,7 +117,7 @@ void FUN_002c7e6c(void)
     puVar5 = DAT_00588fd4;
     temp_v0 = spriteHandleCreate(0);
     puVar5[0x82d] = temp_v0;
-    FUN_001527d8(temp_v0,0xffffffff);
+    uiObjectSetColorRgb(temp_v0,0xffffffff);
     positionStateSet(puVar5[0x82d],0,0x646464ff);
     paramsClearPacket(puVar1 + 9);
     paramsInit(reinterpret_cast<UiResourceParameters *>(puVar1 + 9), &DAT_005362a8,0xe4,&DAT_0053638c,0xcc,0,0,0,0,&DAT_00536458,0x3f0);

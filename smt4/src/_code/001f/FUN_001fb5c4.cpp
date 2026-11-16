@@ -14,7 +14,7 @@ extern GameStateView g_gameState;
 int CONCAT44(double, double);
 int mapTableStepWave(void);
 int FUN_002aa18c(unsigned int);
-int FUN_002c0944(...);
+int gxSubmitDrawZeroExtraParams(...);
 int renderCtxSelectTexture(...);
 int VectorSignedToFloat(...);
 
@@ -72,7 +72,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: mapTableStepWave. */
 /* Supplied declaration required: FUN_002aa18c. */
-/* Supplied declaration required: FUN_002c0944. */
+/* Supplied declaration required: gxSubmitDrawZeroExtraParams. */
 /* Supplied declaration required: renderCtxSelectTexture. */
 extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -408,7 +408,7 @@ void FUN_001fb5c4(void)
         }
         VectorSignedToFloat(temp_v43 * 0x23,(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(temp_v1 * 0x32,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_002c0944(temp_v2 | (temp_v34 << 0x18) | (temp_v35 << 0x10) | (temp_v36 << 8),
+        gxSubmitDrawZeroExtraParams(temp_v2 | (temp_v34 << 0x18) | (temp_v35 << 0x10) | (temp_v36 << 8),
                      (temp_v39 << 0x18) | (temp_v41 << 0x10) | (temp_v42 << 8) | temp_v13,
                      (temp_v37 << 0x18) | (temp_v32 << 0x10) | (temp_v30 << 8) | temp_v10,
                      (temp_v38 << 0x18) | (temp_v33 << 0x10) | (temp_v40 << 8) | temp_v12);

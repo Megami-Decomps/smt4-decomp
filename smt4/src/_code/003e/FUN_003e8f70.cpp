@@ -12,7 +12,7 @@ int nn_math_ARMv6_MTX34CopyAsm(float *, float *);
 int nw_gfx_CalculatedTransform_UpdateRotateFlags(float *);
 int nw_gfx_CalculatedTransform_UpdateTranslateFlags(float *);
 
-extern unsigned int DAT_00407ed0; /* 0x407ed0 */
+extern unsigned int g_sinCosTable; /* 0x407ed0 */
 extern unsigned int DAT_00407ed4; /* 0x407ed4 */
 extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
@@ -318,12 +318,12 @@ unsigned int FUN_003e8f70(int *param_1,float *param_2,unsigned int param_3,unsig
   temp_v6 = temp_v2 & 0xff;
   temp_v13 = (float)VectorUnsignedToFloat(temp_v3 & 0xffff,(unsigned char)(temp_v5 >> 0x16) & 3);
   temp_v12 = (float)VectorUnsignedToFloat(temp_v2 & 0xffff,(unsigned char)(temp_v5 >> 0x16) & 3);
-  temp_v14 = (float)(&DAT_00407ed0)[temp_v1 * 4] + (temp_v7 - temp_v15) * (float)(&DAT_00407ed8)[temp_v1 * 4];
+  temp_v14 = (float)(&g_sinCosTable)[temp_v1 * 4] + (temp_v7 - temp_v15) * (float)(&DAT_00407ed8)[temp_v1 * 4];
   temp_v15 = (float)(&DAT_00407ed4)[temp_v1 * 4] + (temp_v7 - temp_v15) * (float)(&DAT_00407edc)[temp_v1 * 4];
-  temp_v7 = (float)(&DAT_00407ed0)[temp_v6 * 4] + (temp_v11 - temp_v12) * (float)(&DAT_00407ed8)[temp_v6 * 4];
+  temp_v7 = (float)(&g_sinCosTable)[temp_v6 * 4] + (temp_v11 - temp_v12) * (float)(&DAT_00407ed8)[temp_v6 * 4];
   temp_v12 = (float)(&DAT_00407ed4)[temp_v6 * 4] + (temp_v11 - temp_v12) * (float)(&DAT_00407edc)[temp_v6 * 4]
   ;
-  temp_v11 = (float)(&DAT_00407ed0)[temp_v4 * 4] + (temp_v21 - temp_v13) * (float)(&DAT_00407ed8)[temp_v4 * 4]
+  temp_v11 = (float)(&g_sinCosTable)[temp_v4 * 4] + (temp_v21 - temp_v13) * (float)(&DAT_00407ed8)[temp_v4 * 4]
   ;
   temp_v21 = (float)(&DAT_00407ed4)[temp_v4 * 4] + (temp_v21 - temp_v13) * (float)(&DAT_00407edc)[temp_v4 * 4]
   ;

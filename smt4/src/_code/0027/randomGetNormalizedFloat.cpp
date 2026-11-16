@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern u32 DAT_004651c0;
+extern u32 g_lcgSeed;
 
 static __inline u32 randomNext(void)
 {
-    return DAT_004651c0 = DAT_004651c0 * 0x41C64E6D + 12345;
+    return g_lcgSeed = g_lcgSeed * 0x41C64E6D + 12345;
 }
 
 /* Advance the linear-congruential generator and scale its high halfword to [0, 1]. */

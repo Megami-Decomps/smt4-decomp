@@ -54,7 +54,7 @@ struct SoundObjectTable {
 extern SoundObjectTable DAT_0061978c;
 
 s32 jyoucyuGetTableEntry(u32 index);
-s32 FUN_001681a4(AsdSndObject *handle);
+s32 objectGetFlagBit1(AsdSndObject *handle);
 AsdSndObject *asdSoundObjectCreate(u32 data, u32 option, u32 kind, f32 gain0, f32 gain1);
 s32 asdSoundObjectRegister(AsdSndObject *handle, s32 id, s32 flag);
 s32 asdSoundObjectFadeOut(AsdSndObject *handle);
@@ -100,7 +100,7 @@ void FUN_0013af10(void)
                 s32 anyPlaying = 0;
                 for (s32 j = 0; j < SOUND_OBJECTS; j++) {
                     SoundObject *other = DAT_0061978c.at(j);
-                    if (FUN_001681a4(other->handle) != 0) {
+                    if (objectGetFlagBit1(other->handle) != 0) {
                         anyPlaying = other != 0;
                         break;
                     }
@@ -108,7 +108,7 @@ void FUN_0013af10(void)
                 if (anyPlaying) {
                     for (s32 k = 0; k < SOUND_OBJECTS; k++) {
                         SoundObject *other = DAT_0061978c.at(k);
-                        if (FUN_001681a4(other->handle) != 0 && other->mode != 4) {
+                        if (objectGetFlagBit1(other->handle) != 0 && other->mode != 4) {
                             other->flags = other->flags | OBJ_FADE_REQ;
                             other->fadeKind = 0;
                         }
@@ -149,14 +149,14 @@ void FUN_0013af10(void)
                 object->fadeKind = 3;
                 asdSoundObjectFadeOut(object->handle);
                 object->flags = (object->flags & ~(OBJ_STARTED | OBJ_FADE_REQ)) | OBJ_FADING;
-            } else if (FUN_001681a4(object->handle) == 0 && object->delay > 0) {
+            } else if (objectGetFlagBit1(object->handle) == 0 && object->delay > 0) {
                 object->loop = 1;
                 object->flags = (object->flags & ~(OBJ_STARTED | OBJ_FADE_REQ)) | OBJ_FADING;
             } else {
                 object->delay = object->delay + 1;
             }
         }
-        if ((object->flags & OBJ_FADING) != 0 && FUN_001681a4(object->handle) == 0) {
+        if ((object->flags & OBJ_FADING) != 0 && objectGetFlagBit1(object->handle) == 0) {
             s32 loop = object->loop;
             if ((object->options & 4) != 0) {
                 loop = 0;

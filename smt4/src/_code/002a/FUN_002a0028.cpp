@@ -26,7 +26,7 @@ extern "C" {
 extern UniteTouchWork *g_unite;
 s32 resourceRunOperationIfUnblocked(const ScrollSelection *selection);
 void gridNavigationConfigure(ScrollSelection *selection, u32 count, u32 visible, u32 option, u32 first, u32 second);
-void FUN_0029eb5c(ScrollSelection *selection, s32 index);
+void scrollListSetSelectionMarkChanged(ScrollSelection *selection, s32 index);
 void ifTouchRegionRemove();
 u16 ifTouchRegionAddRequested(u32 table, u32 index);
 }
@@ -35,10 +35,10 @@ u16 ifTouchRegionAddRequested(u32 table, u32 index);
 extern "C" void FUN_002a0028(s32 refreshRegions)
 {
     UniteTouchWork *work = g_unite;
-    UniteMenuAvailability *available = reinterpret_cast<UniteMenuAvailability *>(FUN_002a0d0c());
+    UniteMenuAvailability *available = reinterpret_cast<UniteMenuAvailability *>(gameDataGetSortPreferences());
     ScrollSelection *selection = &work->selection;
     s32 top = resourceRunOperationIfUnblocked(selection);
-    s32 offset = FUN_0029efa8(selection);
+    s32 offset = listCursorGetRowIfUnblocked(selection);
     u32 count = 3;
     if (available->first) {
         count = 6;
@@ -49,7 +49,7 @@ extern "C" void FUN_002a0028(s32 refreshRegions)
         }
     }
     gridNavigationConfigure(selection, count, 8, 1, 0, 1);
-    FUN_0029eb5c(selection, top + offset);
+    scrollListSetSelectionMarkChanged(selection, top + offset);
     if (refreshRegions) {
         for (s32 index = 0; index < 8; ++index) {
             work->itemRegions[index] = 0xffff;

@@ -60,13 +60,13 @@ void FUN_0036cb0c(u32 text, u32 name, s32 base, s32 offset, s32 row, s32 selecte
     }
     texDrawTableEntryAtStoredOrigin(2, 0x2e, 0xe3, frame->x, frame->y, 0xd);
     if (selected != 0) {
-        FUN_001527d8(text, 0xf5ff9fff);
+        uiObjectSetColorRgb(text, 0xf5ff9fff);
     } else {
-        FUN_001527d8(text, 0x9fe7ffff);
+        uiObjectSetColorRgb(text, 0x9fe7ffff);
     }
     FUN_0025cc78(reinterpret_cast<const void *>(text), frame->x + caption->x,
                  frame->y + caption->y, 0x15, 1.0f);
-    FUN_001527d8(text, 0xffffffff);
+    uiObjectSetColorRgb(text, 0xffffffff);
     if (mode == 1) {
         s32 bit = progressUnlockFindNthEarnedIndex(index);
         if (gameDataToggleFlagIsSet(bit) != 0) {

@@ -33,7 +33,7 @@ struct TitleConfig {
 };
 
 extern "C" {
-extern SoundChannel DAT_004c53c4[2];
+extern SoundChannel g_bgmRequestChannels[2];
 extern TitleConfig g_titleConfigModeFlag;
 extern const char DAT_004076bd[];
 
@@ -67,8 +67,8 @@ void FUN_0010633c(void)
     if (jyoucyuGetTableEntry(1) != 0)
         return;
     for (s32 i = 0; i < 2; i++) {
-        SoundChannel *channel = &DAT_004c53c4[i];
-        SoundChannel *partner = &DAT_004c53c4[1 - i];
+        SoundChannel *channel = &g_bgmRequestChannels[i];
+        SoundChannel *partner = &g_bgmRequestChannels[1 - i];
         u32 flags = channel->flags;
         if (flags & CHANNEL_ACTIVE) {
             if (flags & CHANNEL_STARTED) {

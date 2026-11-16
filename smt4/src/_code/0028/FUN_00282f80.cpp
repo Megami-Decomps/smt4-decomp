@@ -32,7 +32,7 @@ extern int dataTable08CompareSecondaryKeyAscending(...); /* 0x2194dc */
 extern int FUN_00219530(...); /* 0x219530 */
 extern int dataTable08Sub1CompareRank(...); /* 0x21963c */
 extern int itemSortCompareByCategoryAndId(...); /* 0x2497f8 */
-extern int FUN_00257568(...); /* 0x257568 */
+extern int itemSortCompareRankThenKey(...); /* 0x257568 */
 extern int entryCompareClassThenDescendingValue(...); /* 0x2c6d30 */
 extern int FUN_002dc594(...); /* 0x2dc594 */
 extern int FUN_002dc634(...); /* 0x2dc634 */
@@ -95,7 +95,7 @@ void FUN_00282f80(int param_1)
   int temp_v6;
   
   temp_v3 = g_camp;
-  temp_v1 = reinterpret_cast<int>(FUN_002a0d0c());
+  temp_v1 = reinterpret_cast<int>(gameDataGetSortPreferences());
   pbVar4 = (unsigned char *)0x0;
   temp_v4 = 0;
   temp_v5 = 0;
@@ -111,7 +111,7 @@ void FUN_00282f80(int param_1)
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v1,temp_v2,8,FUN_00257568);
+        FUN_002b7bca(temp_v1,temp_v2,8,itemSortCompareRankThenKey);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x20) {

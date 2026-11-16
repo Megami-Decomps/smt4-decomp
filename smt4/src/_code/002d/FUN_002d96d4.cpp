@@ -82,7 +82,7 @@ extern unsigned int FUN_0029dde0(void);
 extern int objectPartRunUnlessLocked(unsigned int *);
 extern int resourceRunEmbeddedOperationIfUnblocked(unsigned int *);
 /* Supplied declaration required: itemGetFlagBit1. */
-extern int FUN_0029efa8(unsigned int *);
+extern int listCursorGetRowIfUnblocked(unsigned int *);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: dataTable54FindById. */
 /* Supplied declaration required: partyMemberFindById. */
@@ -151,7 +151,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
   temp_v27 = param_4;
   puVar4 = (unsigned int *)uniteGetWork();
   if (puVar4 != (unsigned int *)0x0) {
-    temp_v3 = reinterpret_cast<int>(FUN_002a0d0c());
+    temp_v3 = reinterpret_cast<int>(gameDataGetSortPreferences());
     temp_v22 = puVar4 + 0x1885;
     temp_v18 = 0;
     temp_v21 = puVar4 + 0x186c;
@@ -186,7 +186,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
       temp_v3 = FUN_0029d644(temp_v21);
       if (0 < temp_v3) {
         do {
-          if ((temp_v27 == 0) || (temp_v3 = FUN_0029efa8(temp_v21), temp_v3 != temp_v4)) {
+          if ((temp_v27 == 0) || (temp_v3 = listCursorGetRowIfUnblocked(temp_v21), temp_v3 != temp_v4)) {
             temp_v3 = (int)temp_v22 + temp_v4;
             psVar8 = (short *)(unsigned int)*(unsigned short *)((int)puVar4 + temp_v3 * 2 + 0x6278);
             devilGetRecord();
@@ -287,10 +287,10 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
           temp_v3 = FUN_0029d644(temp_v21);
         } while (temp_v4 < temp_v3);
       }
-      temp_v3 = FUN_0029efa8(temp_v21);
+      temp_v3 = listCursorGetRowIfUnblocked(temp_v21);
       temp_v3 = asdTMTexTableEntryAt(0x24,temp_v3 + 0x3f);
       temp_v4 = resourceRunOperationIfUnblocked(temp_v21);
-      temp_v13 = FUN_0029efa8(temp_v21);
+      temp_v13 = listCursorGetRowIfUnblocked(temp_v21);
       psVar8 = (short *)(unsigned int)*(unsigned short *)((int)puVar4 + (temp_v13 + temp_v4) * 2 + 0x6278);
       devilGetRecord();
       if (temp_v27 != 0) {
@@ -324,7 +324,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
         efctSetSpeed();
         texDrawTableEntryAtStoredOrigin(2,0x24,0x3b,(int)&param_1->field_0x0 + (int)*(short *)(temp_v3 + 8),
                      *(short *)(temp_v3 + 10) + param_2,0x7e);
-        temp_v4 = FUN_0029efa8(temp_v21);
+        temp_v4 = listCursorGetRowIfUnblocked(temp_v21);
         temp_v4 = ifTouchGetSelectionModeForRegion((int)*(short *)((int)puVar4 + temp_v4 * 2 + 0x438));
         temp_v13 = *(short *)(temp_v3 + 10) + param_2;
         temp_v10 = (int)&param_1->field_0x0 + (int)*(short *)(temp_v3 + 8);

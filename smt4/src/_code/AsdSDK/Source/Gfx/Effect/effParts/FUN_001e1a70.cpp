@@ -63,7 +63,7 @@ void *asdLoadFileSync(const char *path, u32 *size, u32 a, u32 b);
 void *memAlloc(int heap, int alignClass, int unk08, u32 size, int align, int fromFront);
 void memClear(void *block, s32 size);
 void effPartInitDefaults(void *part);
-EffPartNode *FUN_0025c870(void);
+EffPartNode *effPartCreateDefault(void);
 void linkedItemsRedirectToReplacement(EffPartList *list, EffPartNode *node, EffPartNode *parent);
 EffBlock *effBlockCloneDeep(EffBlock *src);
 void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
@@ -107,7 +107,7 @@ EffPartList *FUN_001e1a70(const char *path)
         if ((entry->flags & 1) != 0) {
             EffPartNode *source = effPartListNth(list, (s32)entry->block);
 
-            node = FUN_0025c870();
+            node = effPartCreateDefault();
             __aeabi_memcpy4(node, source, 0xC0);
             memClear(node, 0x90);
             node->unk84 = 1;
@@ -130,7 +130,7 @@ EffPartList *FUN_001e1a70(const char *path)
         } else {
             void *block = effBlockCloneDeep((EffBlock *)((u8 *)file + (u32)entry->block));
 
-            node = FUN_0025c870();
+            node = effPartCreateDefault();
             node->block = block;
             node->next = NULL;
             if (list->tail != NULL) {

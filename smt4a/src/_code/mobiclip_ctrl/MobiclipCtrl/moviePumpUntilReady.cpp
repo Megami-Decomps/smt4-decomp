@@ -5,7 +5,7 @@
 extern "C" {
 extern MobiclipStartClock g_mobiclipCtrl;
 extern MovieReadHandle DAT_00617f18;
-extern MovieSync DAT_00617f40;
+extern MovieSync g_mobiclipPlayer;
 s32 mobiclipProcessPollStopEvent();
 void mobiclipPlayerReleaseHandle(MovieReadHandle *read);
 void timedJobBeginStop(MovieSync *sync);
@@ -37,37 +37,37 @@ bool moviePumpUntilReady()
             canceled = true;
         if (mobiclipReadIsComplete(&DAT_00617f18)) {
             mobiclipPlayerReleaseHandle(&DAT_00617f18);
-            timedJobBeginStop(&DAT_00617f40);
-            FUN_0015842c(&DAT_00617f40);
+            timedJobBeginStop(&g_mobiclipPlayer);
+            FUN_0015842c(&g_mobiclipPlayer);
             asdSndApplyPendingVoiceState(&DAT_00617f18);
         }
-        if (!block158OwnerHasRemaining(&DAT_00617f40)) {
-            s64 position = FUN_00425610(&DAT_00617f40);
+        if (!block158OwnerHasRemaining(&g_mobiclipPlayer)) {
+            s64 position = FUN_00425610(&g_mobiclipPlayer);
             if (position >= g_mobiclipCtrl.position)
-                movieSyncConsumeReadyFrame(&DAT_00617f40);
-            else if (FUN_004252b0(&DAT_00617f40))
-                block158OwnerCheck(&DAT_00617f40);
+                movieSyncConsumeReadyFrame(&g_mobiclipPlayer);
+            else if (FUN_004252b0(&g_mobiclipPlayer))
+                block158OwnerCheck(&g_mobiclipPlayer);
         }
-        if (block158OwnerReady(&DAT_00617f40)) {
-            s64 position = FUN_00425610(&DAT_00617f40);
+        if (block158OwnerReady(&g_mobiclipPlayer)) {
+            s64 position = FUN_00425610(&g_mobiclipPlayer);
             if (position >= g_mobiclipCtrl.position * 6) {
                 FUN_00423c0c(&DAT_00617f18);
-                movieSyncDrainSourcePositions(&DAT_00617f40);
-                FUN_004241e0(&DAT_00617f40);
+                movieSyncDrainSourcePositions(&g_mobiclipPlayer);
+                FUN_004241e0(&g_mobiclipPlayer);
             } else if (position >= 0) {
                 started = true;
-                FUN_00425448(&DAT_00617f40);
+                FUN_00425448(&g_mobiclipPlayer);
                 playHandleStart(&DAT_00617f18);
             }
         }
         if (g_mobiclipCtrl.stopRequested)
             canceled = true;
-        FUN_00425aa0(&DAT_00617f40);
-        state = movieSyncGetState(&DAT_00617f40);
+        FUN_00425aa0(&g_mobiclipPlayer);
+        state = movieSyncGetState(&g_mobiclipPlayer);
     } while (!started && !canceled && state != 7 && state != 1);
     if (started)
         return true;
-    FUN_00424938(&DAT_00617f40);
+    FUN_00424938(&g_mobiclipPlayer);
     return false;
 }
 }

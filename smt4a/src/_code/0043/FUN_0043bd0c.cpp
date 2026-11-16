@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e98ea(...);
+int libc_wcsncpyShort(...);
 int FUN_0043c310(...);
 
 /* stack frame of param_5: 8 slot(s), 32 byte(s) */
@@ -32,7 +32,7 @@ extern unsigned char LAB_0043bfb8; /* 0x43bfb8 */
 extern unsigned char DAT_00580020; /* 0x580020 */
 extern unsigned char DAT_00580058; /* 0x580058 */
 
-/* Supplied declaration required: FUN_002e98ea. */
+/* Supplied declaration required: libc_wcsncpyShort. */
 /* Supplied declaration required: FUN_0043c310. */
 
 
@@ -114,7 +114,7 @@ LAB_0043bd4c:
       } while (temp_v0 != 0);
     }
   }
-  FUN_002e98ea(temp_v9,puVar2,temp_v10);
+  libc_wcsncpyShort(temp_v9,puVar2,temp_v10);
   if (((param_3 == 2 || param_3 == 3) || (param_3 == 4 || param_3 == 5)) ||
      (param_3 == 6 || param_3 == 7)) {
     temp_v3 = &DAT_00580058;
@@ -124,7 +124,7 @@ LAB_0043bd4c:
     puStack_d0 = &DAT_00580058;
     temp_v5 = &DAT_00580058;
     puStack_c8 = (unsigned char *)0x0;
-    FUN_002e98ea(temp_v2,temp_v9,0x40);
+    libc_wcsncpyShort(temp_v2,temp_v9,0x40);
     temp_v1 = (unsigned int)*(unsigned short *)((int)&temp_v3 + param_3 * 2);
     puStack_164 = (unsigned char *)param_5;
     FUN_0043c310(temp_v9,temp_v10,&LAB_0043bfb8,temp_v2);

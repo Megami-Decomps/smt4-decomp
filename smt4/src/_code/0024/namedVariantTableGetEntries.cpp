@@ -2,7 +2,7 @@
 #include <string.h>
 
 extern "C" {
-extern const NamedVariantTableKey DAT_00439d20[455];
+extern const NamedVariantTableKey g_namedVariantTableKeys[455];
 void *fileSlotGetBuffer(u32 table);
 u32 binFileGetValue(void *file);
 void *fbinGetFile(void *file, u32 block);
@@ -24,7 +24,7 @@ static inline NamedVariantTableEntry *namedVariantResolve(u32 blockIndex, u32 ta
 
 static inline const NamedVariantTableKey *namedVariantFind(const char *name)
 {
-    const NamedVariantTableKey *key = DAT_00439d20;
+    const NamedVariantTableKey *key = g_namedVariantTableKeys;
     for (s32 index = 0; index < 455; ++index, ++key) {
         if (strcmp(name, key->name) == 0)
             return key;

@@ -164,12 +164,12 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
   temp_v24 = param_1 + 0xd04c;
   piVar11 = (int *)0x0;
   do {
-    if ((!temp_v9) || (piVar4 = (int *)FUN_0029efa8((const void *)(temp_v24)), piVar4 != piVar11)) {
+    if ((!temp_v9) || (piVar4 = (int *)listCursorGetRowIfUnblocked((const void *)(temp_v24)), piVar4 != piVar11)) {
       piVar5 = (int *)asdTMTexTableEntryAt(temp_v11,piVar11 + 0x39);
       piVar4 = piVar5;
       temp_v1 = param_2;
       temp_v3 = param_3;
-      if ((temp_v16 != 0) && (piVar4 = (int *)FUN_0029efa8((const void *)(temp_v24)), piVar4 == piVar11)) {
+      if ((temp_v16 != 0) && (piVar4 = (int *)listCursorGetRowIfUnblocked((const void *)(temp_v24)), piVar4 == piVar11)) {
         if (*temp_v25 < 1) {
           VectorSignedToFloat(1 - *temp_v25,(unsigned char)(in_fpscr >> 0x16) & 3);
           piVar4 = temp_v25;
@@ -270,7 +270,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
     piVar11 = (int *)((int)piVar11 + 1);
   } while ((int)piVar11 < 8);
   if (temp_v9) {
-    temp_v15 = FUN_0029efa8((const void *)(temp_v24));
+    temp_v15 = listCursorGetRowIfUnblocked((const void *)(temp_v24));
     temp_v1 = asdTMTexTableEntryAt(temp_v11,temp_v15 + 0x103);
     efctSetSpeed();
     efctSetSpeed();
@@ -279,7 +279,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
     efctSetSpeed();
     texDrawTableEntryAtStoredOrigin(2,temp_v11,0xf7,*(short *)(temp_v1 + 8) + param_2,*(short *)(temp_v1 + 10) + param_3,
                  0xc4);
-    temp_v3 = FUN_0029efa8((const void *)(temp_v24));
+    temp_v3 = listCursorGetRowIfUnblocked((const void *)(temp_v24));
     temp_v3 = ifTouchGetSelectionModeForRegion((int)*(short *)(param_1 + temp_v3 * 2 + 0x357e));
     temp_v5 = *(short *)(temp_v1 + 10) + param_3;
     temp_v6 = *(short *)(temp_v1 + 8) + param_2;
@@ -361,7 +361,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
   temp_v21 = param_1 + 0xd0b0;
   temp_v1 = 0;
   do {
-    if ((temp_v19 == 0) || (temp_v3 = FUN_0029efa8((const void *)(temp_v21)), temp_v3 != temp_v1)) {
+    if ((temp_v19 == 0) || (temp_v3 = listCursorGetRowIfUnblocked((const void *)(temp_v21)), temp_v3 != temp_v1)) {
       temp_v3 = asdTMTexTableEntryAt(temp_v11,temp_v1 + 0xec);
       efctSetSpeed();
       texDrawCompositeSprite(2,temp_v11,9,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,
@@ -371,7 +371,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
                      *(short *)(temp_v3 + 10) + param_3,0x9c);
       }
       else {
-        if ((temp_v9) && (temp_v5 = FUN_0029efa8((const void *)(temp_v21)), temp_v5 == temp_v1)) {
+        if ((temp_v9) && (temp_v5 = listCursorGetRowIfUnblocked((const void *)(temp_v21)), temp_v5 == temp_v1)) {
           texDrawTableEntryAtStoredOrigin(2,temp_v11,0xda,*(short *)(temp_v3 + 8) + param_2,
                        *(short *)(temp_v3 + 10) + param_3,0x9a);
         }
@@ -399,7 +399,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
           if (temp_v5 != 0) {
             temp_v2 = 0x5a5a5aff;
           }
-          if ((temp_v9) && (temp_v5 = FUN_0029efa8((const void *)(temp_v21)), temp_v5 == temp_v1)) {
+          if ((temp_v9) && (temp_v5 = listCursorGetRowIfUnblocked((const void *)(temp_v21)), temp_v5 == temp_v1)) {
             temp_v2 = 0xff;
           }
           temp_v12 = asdTMTexTableEntryAt(temp_v11,0xdf);
@@ -454,7 +454,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 8);
   if (temp_v20 != 0 || temp_v19 != 0) {
-    temp_v1 = FUN_0029efa8((const void *)(temp_v21));
+    temp_v1 = listCursorGetRowIfUnblocked((const void *)(temp_v21));
     temp_v3 = asdTMTexTableEntryAt(temp_v11,temp_v1 + 0x10b);
     efctSetSpeed();
     efctSetSpeed();
@@ -463,7 +463,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
     efctSetSpeed();
     texDrawTableEntryAtStoredOrigin(2,temp_v11,0xf7,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,
                  0xc4);
-    temp_v5 = FUN_0029efa8((const void *)(temp_v21));
+    temp_v5 = listCursorGetRowIfUnblocked((const void *)(temp_v21));
     temp_v5 = ifTouchGetSelectionModeForRegion((int)*(short *)(param_1 + temp_v5 * 2 + 0x358e));
     temp_v6 = *(short *)(temp_v3 + 10) + param_3;
     temp_v7 = *(short *)(temp_v3 + 8) + param_2;

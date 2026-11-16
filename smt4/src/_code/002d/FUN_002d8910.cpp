@@ -9,7 +9,7 @@ s32 messageForwardDefaultMode(s32 buffer, s32 message, s32 line, s32 a, s32 b);
 void textEncodeFontSlot(s32 slot, u32 value);
 u8 *gameGetUnitRecord(s32 index);
 u32 dataTable01FindByIdWithAoc(u32 id);
-void FUN_002bff50(void);
+void messageSetConfirmDisplayMode(void);
 s32 scrGetCommandFrame(void);
 s8 *gameGetSlotTable(void);
 s32 gameCountUnits(void);
@@ -34,7 +34,7 @@ s32 FUN_002d8910(s32 phase)
             s32 message = 15;
             if (gameCountUnits() == 0)
                 message = 14;
-            FUN_002bff50();
+            messageSetConfirmDisplayMode();
             result = messageForwardDefaultMode(buffer, message, scrWorkGetValue(1), 6, 0);
             scrWorkSetValue(1, scrWorkGetValue(1) + 1);
             break;

@@ -18,7 +18,7 @@ s32 scrGetArg(s32 index);
 void FUN_0035b404(s32 arg);
 void campButtonHelpRelease(void);
 void FUN_003c607c(s32 arg);
-void FUN_00333f6c(void);
+void gameGlobalsReleaseReference(void);
 void scrScriptProcessDestroy(void *process);
 void asdMemFree(void *block);
 void dataTableFree(s32 table);
@@ -50,7 +50,7 @@ s32 scrCmdTransitionFinish(void)
     if (work != NULL) {
         campButtonHelpRelease();
         FUN_003c607c(0);
-        FUN_00333f6c();
+        gameGlobalsReleaseReference();
         if (work->process != NULL) {
             scrScriptProcessDestroy(work->process);
             work->process = NULL;

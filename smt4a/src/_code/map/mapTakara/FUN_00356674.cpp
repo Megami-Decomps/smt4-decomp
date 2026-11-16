@@ -14,7 +14,7 @@ int FUN_003689d0(void);
 int FUN_0040a908(...);
 int FUN_0040a918(...);
 int resourceOwnerLoadFileSync(void);
-int FUN_0040aad4(...);
+int moriModelContentLoadBody(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -49,7 +49,7 @@ extern int dataTableGetRecordFortyNine(void);
 /* Supplied declaration required: FUN_0040a918. */
 /* Supplied declaration required: resourceOwnerLoadFileSync. */
 /* Supplied declaration required: moriModelContentCopyBody. */
-/* Supplied declaration required: FUN_0040aad4. */
+/* Supplied declaration required: moriModelContentLoadBody. */
 extern int FUN_0040ab8c(unsigned int);
 extern unsigned int modelListInit(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
@@ -215,7 +215,7 @@ unsigned int FUN_00356674(void)
                                             ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                              *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
                                            0x30000);
-                              FUN_0040aad4(*(unsigned int *)
+                              moriModelContentLoadBody(*(unsigned int *)
                                             ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                              *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),0);
                             }
@@ -238,7 +238,7 @@ unsigned int FUN_00356674(void)
                                             ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                              *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
                                            0x10000);
-                              FUN_0040aad4(*(unsigned int *)
+                              moriModelContentLoadBody(*(unsigned int *)
                                             ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                              *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),0);
                             }
@@ -262,7 +262,7 @@ unsigned int FUN_00356674(void)
                                           ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                            *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
                                          0x10000);
-                            FUN_0040aad4(*(unsigned int *)
+                            moriModelContentLoadBody(*(unsigned int *)
                                           ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                            *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),0);
                           }
@@ -286,7 +286,7 @@ unsigned int FUN_00356674(void)
                                         ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                          *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),0x10000)
                           ;
-                          FUN_0040aad4(*(unsigned int *)
+                          moriModelContentLoadBody(*(unsigned int *)
                                         ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                          *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),0);
                         }
@@ -308,7 +308,7 @@ unsigned int FUN_00356674(void)
                         FUN_0040a918(*(unsigned int *)
                                       ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                        *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),0x10000);
-                        FUN_0040aad4(*(unsigned int *)
+                        moriModelContentLoadBody(*(unsigned int *)
                                       ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                        *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),0);
                       }
@@ -330,7 +330,7 @@ unsigned int FUN_00356674(void)
                       FUN_0040a918(*(unsigned int *)
                                     ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                      *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),0x10000);
-                      FUN_0040aad4(*(unsigned int *)
+                      moriModelContentLoadBody(*(unsigned int *)
                                     ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                      *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),0);
                     }
@@ -352,7 +352,7 @@ unsigned int FUN_00356674(void)
                     FUN_0040a918(*(unsigned int *)
                                   ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                    *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),0x10000);
-                    FUN_0040aad4(*(unsigned int *)
+                    moriModelContentLoadBody(*(unsigned int *)
                                   ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                    *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),0);
                   }
@@ -374,7 +374,7 @@ unsigned int FUN_00356674(void)
                   FUN_0040a918(*(unsigned int *)
                                 ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8
                                 + 0x20),0x10000);
-                  FUN_0040aad4(*(unsigned int *)
+                  moriModelContentLoadBody(*(unsigned int *)
                                 ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8
                                 + 0x20),0);
                 }
@@ -396,7 +396,7 @@ unsigned int FUN_00356674(void)
                 FUN_0040a918(*(unsigned int *)
                               ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 +
                               0x20),0x30000);
-                FUN_0040aad4(*(unsigned int *)
+                moriModelContentLoadBody(*(unsigned int *)
                               ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 +
                               0x20),0);
               }
@@ -417,7 +417,7 @@ unsigned int FUN_00356674(void)
               FUN_0040a918(*(unsigned int *)
                             ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 +
                             0x20),0x30000);
-              FUN_0040aad4(*(unsigned int *)
+              moriModelContentLoadBody(*(unsigned int *)
                             ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 +
                             0x20),0);
             }
@@ -439,7 +439,7 @@ joined_r0x00356bb0:
             FUN_0040a918(*(unsigned int *)
                           ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20
                           ),0x10000);
-            FUN_0040aad4(*(unsigned int *)
+            moriModelContentLoadBody(*(unsigned int *)
                           ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20
                           ),0);
           }
@@ -461,7 +461,7 @@ joined_r0x00356b80:
           FUN_0040a918(*(unsigned int *)
                         ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
                        0x20000);
-          FUN_0040aad4(*(unsigned int *)
+          moriModelContentLoadBody(*(unsigned int *)
                         ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
                        0);
         }
@@ -482,7 +482,7 @@ joined_r0x00356b80:
         FUN_0040a918(*(unsigned int *)
                       ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
                      0x20000);
-        FUN_0040aad4(*(unsigned int *)
+        moriModelContentLoadBody(*(unsigned int *)
                       ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),0)
         ;
       }
@@ -503,7 +503,7 @@ joined_r0x00356b80:
       FUN_0040a918(*(unsigned int *)
                     ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
                    0x20000);
-      FUN_0040aad4(*(unsigned int *)
+      moriModelContentLoadBody(*(unsigned int *)
                     ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),0);
     }
   }
@@ -523,7 +523,7 @@ joined_r0x00356b80:
     FUN_0040a918(*(unsigned int *)
                   ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
                  0x20000);
-    FUN_0040aad4(*(unsigned int *)
+    moriModelContentLoadBody(*(unsigned int *)
                   ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),0);
   }
   temp_v2 = (*(unsigned int *)&s__a_a_00587f08.u1[0]);

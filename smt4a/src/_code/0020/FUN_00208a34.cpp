@@ -10,7 +10,7 @@ s32 slotIsActive(u32 state);
 s32 textureIdRecordCompare(const void *key, const void *entry);
 void *libc_bsearch(const void *key, const void *entries, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 aocRunByName(AocSystemA *system, s32 table, s32 node, u32 enabled);
-void FUN_001a6568(AocSystemA *system, s32 table, s32 node, u32 heap);
+void texTableRequestNamedTextureLoad(AocSystemA *system, s32 table, s32 node, u32 heap);
 
 /* Select a new screen-window skin, loading its texture from base or add-on content. */
 void FUN_00208a34(s32 window, u32 flags)
@@ -30,7 +30,7 @@ void FUN_00208a34(s32 window, u32 flags)
         if (record != NULL && record->texture >= 0) {
             s32 node = record->texture;
             if (aocRunByName(g_aocSystem, 0x34, node, 1))
-                FUN_001a6568(g_aocSystem, 0x34, node, 0x10000);
+                texTableRequestNamedTextureLoad(g_aocSystem, 0x34, node, 0x10000);
             else
                 asdTMTexLoadMainHeap(0x34, node);
         }

@@ -4,7 +4,7 @@ extern "C" {
 
 void asdCecSetBoxArgs(u32 box, u32 value);
 s32 asdCecCanOpenMessageBox(u32 box, u32 value);
-u32 FUN_00357818(u32 id);
+u32 cecMakeResourceId(u32 id);
 
 extern u32 g_cecCardBox; /* 0x43ddb8 */
 
@@ -13,15 +13,15 @@ u8 FUN_003bbcf4(void)
 {
     u8 result = 0;
 
-    asdCecSetBoxArgs(FUN_00357818(0x910), 0xabababab);
-    if (asdCecCanOpenMessageBox(FUN_00357818(0x910), 0xabababab) != 0) {
+    asdCecSetBoxArgs(cecMakeResourceId(0x910), 0xabababab);
+    if (asdCecCanOpenMessageBox(cecMakeResourceId(0x910), 0xabababab) != 0) {
         result = 1;
     }
-    asdCecSetBoxArgs(FUN_00357818(0xbd3), 0x112233);
-    if (asdCecCanOpenMessageBox(FUN_00357818(0xbd3), 0x112233) != 0) {
+    asdCecSetBoxArgs(cecMakeResourceId(0xbd3), 0x112233);
+    if (asdCecCanOpenMessageBox(cecMakeResourceId(0xbd3), 0x112233) != 0) {
         result = 2;
     }
-    asdCecSetBoxArgs(FUN_00357818(0xe5c), g_cecCardBox);
+    asdCecSetBoxArgs(cecMakeResourceId(0xe5c), g_cecCardBox);
     return result;
 }
 

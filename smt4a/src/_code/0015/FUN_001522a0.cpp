@@ -12,7 +12,7 @@ struct ColoredRectangle {
 extern "C" {
 extern u32 g_renderCtx;
 void renderCtxSelectTexture(u32 scene, s32 mode);
-void FUN_00167618(const EffectColor *topLeft, const EffectColor *topRight,
+void gfxDrawQuadFourColors(const EffectColor *topLeft, const EffectColor *topRight,
                   const EffectColor *bottomLeft, const EffectColor *bottomRight,
                   f32 x, f32 y, f32 width, f32 height, f32 depth);
 
@@ -49,7 +49,7 @@ void FUN_001522a0(const ColoredRectangle *rectangles, u32 count)
             height += 1.0f;
         else
             height -= 1.0f;
-        FUN_00167618(&color, &color, &color, &color,
+        gfxDrawQuadFourColors(&color, &color, &color, &color,
                       x, y, width, height, 0.0f);
     }
 }

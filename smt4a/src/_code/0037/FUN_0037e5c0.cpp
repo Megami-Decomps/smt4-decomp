@@ -46,7 +46,7 @@ void statusDownCreatePanelEffects(s32 x, s32 y, s32 highlighted);
 void FUN_00185e84(s16 demon, s32 x, s32 y, u32 slot, s32 a, s32 b);
 void statDrawClampedDelta(u32 demon, s32 other, s32 x, s32 y, u32 slot, s32 a);
 u32 FUN_003df57c(u32 demon, u32 flag);
-u32 FUN_004bcbb4(u32 demon, u32 other);
+u32 skillGetAdjustedCost(u32 demon, u32 other);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_00180310(u32 a, s32 x, s32 y, u32 b, u32 c, u32 slot, const char *format, u32 value);
 
@@ -88,7 +88,7 @@ void FUN_0037e5c0(s32 index, s32 x, s32 y, f32 speed)
     } else {
         FUN_00185e84(demon, icon->x + x, icon->y + y, 211, 0, 0);
         statDrawClampedDelta(list->compareDemon, demon, icon->x + x, icon->y + y, 211, 0);
-        power = FUN_004bcbb4(list->compareDemon, demon);
+        power = skillGetAdjustedCost(list->compareDemon, demon);
     }
     LayoutEntry *name = reinterpret_cast<LayoutEntry *>(asdTMTexTableEntryAt(18, 0x579));
     textFormatBuffer(text, "%s", FUN_0014bd84(demon));

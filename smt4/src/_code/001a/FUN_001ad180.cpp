@@ -10,7 +10,7 @@ struct EventTransition {
     u32 transition; // 0x38
 };
 extern "C" EventTransition *DAT_0043e170;
-extern "C" s32 FUN_002b8ee0(u32 *transition, s32 mode);
+extern "C" s32 uiSlidingSpriteAdvance(u32 *transition, s32 mode);
 extern "C" s32 uiSpriteAdvanceAnimation(u32 *transition);
 extern "C" s32 FUN_002c1d5c();
 
@@ -22,7 +22,7 @@ extern "C" s32 FUN_001ad180()
     case 0:
         break;
     case 1:
-        if (FUN_002b8ee0(&work->transition, 0)) {
+        if (uiSlidingSpriteAdvance(&work->transition, 0)) {
             work->state = 2;
             work->elapsed = 0;
         }

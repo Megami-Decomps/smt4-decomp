@@ -503,13 +503,13 @@ LAB_001e8a6c:
         uVar25 = uVar26 & 0xff;
         fVar27 = (float)VectorUnsignedToFloat(uVar24 & 0xffff,(unsigned char)(uVar5 >> 0x16) & 3);
         fVar29 = (float)VectorUnsignedToFloat(uVar26 & 0xffff,(unsigned char)(uVar5 >> 0x16) & 3);
-        fVar30 = (float)(&DAT_00407ed0)[uVar15 * 4] +
+        fVar30 = (float)(&g_sinCosTable)[uVar15 * 4] +
                  (fVar3 - fVar27) * (float)(&DAT_00407ed8)[uVar15 * 4];
         fVar27 = (float)(&DAT_00407ed4)[uVar15 * 4] +
                  (fVar3 - fVar27) * (float)(&DAT_00407edc)[uVar15 * 4];
-        fVar3 = (float)(&DAT_00407ed0)[uVar13 * 4] +
+        fVar3 = (float)(&g_sinCosTable)[uVar13 * 4] +
                 (fVar14 - fVar28) * (float)(&DAT_00407ed8)[uVar13 * 4];
-        fVar32 = (float)(&DAT_00407ed0)[uVar25 * 4] +
+        fVar32 = (float)(&g_sinCosTable)[uVar25 * 4] +
                  (fVar31 - fVar29) * (float)(&DAT_00407ed8)[uVar25 * 4];
         fVar31 = (float)(&DAT_00407ed4)[uVar25 * 4] +
                  (fVar31 - fVar29) * (float)(&DAT_00407edc)[uVar25 * 4];

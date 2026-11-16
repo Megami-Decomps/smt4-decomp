@@ -40,7 +40,7 @@ void asdMdlManagerDestroy(void *model);
 void asdModelSlotRelease(s32 slot);
 void scrScriptProcessDestroy(void *script);
 void asdMemFree(void *memory);
-void FUN_002bff50(void);
+void messageSetConfirmDisplayMode(void);
 void messageStatesSetFirst(u8 value);
 
 /* Frees an allocation and clears the owning pointer. */
@@ -112,7 +112,7 @@ void FUN_002a6fb8(MenuSceneWork *work)
     destroyScript(&work->resources[2].script);
     freeAndClear(&work->resources[2].files[0]);
     freeAndClear(&work->resources[2].files[1]);
-    FUN_002bff50();
+    messageSetConfirmDisplayMode();
     messageStatesSetFirst(1);
 }
 

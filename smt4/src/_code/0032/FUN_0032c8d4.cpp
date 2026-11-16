@@ -56,20 +56,20 @@ unsigned int FUN_0032c8d4(void)
   *(unsigned char *)(puVar2 + 0xc) = uVar4;
   if ((((iVar7 != 7 && iVar7 != 8) && ((iVar7 != 9 && iVar7 != 0x1b) && iVar7 != 0x1c)) &&
       (*(short *)(puVar2 + 0x1a6) != 3)) && (*(short *)(puVar2 + 0x1a6) != 4)) {
-    FUN_002b8ee0(puVar2 + 0x192,0);
+    uiSlidingSpriteAdvance(puVar2 + 0x192,0);
     iVar7 = FUN_0029e958(puVar2 + 0xd);
     iVar19 = 0;
     if (0 < iVar7) {
       do {
         if (iVar19 <= puVar2[5] - 1) {
-          FUN_002b8ee0(puVar2 + iVar19 * 0x23 + 0x241,0);
+          uiSlidingSpriteAdvance(puVar2 + iVar19 * 0x23 + 0x241,0);
         }
         iVar19 = iVar19 + 1;
       } while (iVar19 < iVar7);
     }
     iVar7 = FUN_0028f670();
     if ((iVar7 == 0) && (iVar7 = FUN_001f302c(), iVar7 == 2)) {
-      FUN_002b8ee0(puVar2 + 0x21e,0);
+      uiSlidingSpriteAdvance(puVar2 + 0x21e,0);
     }
   }
   puVar17 = DAT_0043da90;
@@ -263,11 +263,11 @@ unsigned int FUN_0032c8d4(void)
         uiSpriteAdvanceAnimation(puVar17);
       }
       else {
-        FUN_002b8ee0(puVar17,0);
+        uiSlidingSpriteAdvance(puVar17,0);
       }
     }
     else {
-      FUN_002b8ee0(puVar17,1);
+      uiSlidingSpriteAdvance(puVar17,1);
     }
     iVar7 = func_0x00213bf4();
     if (((iVar7 == 0) || (*(char *)((int)puVar2 + 0x6d2) == '\0')) ||
@@ -449,7 +449,7 @@ code_r0x0032d518:
     }
     else {
       iVar7 = resourceRunOperationIfUnblocked(puVar2 + 0x77);
-      iVar19 = FUN_0029efa8(puVar2 + 0x77);
+      iVar19 = listCursorGetRowIfUnblocked(puVar2 + 0x77);
       FUN_0028a924(6,puVar2[(iVar19 + iVar7) * 2 + 0x38f],puVar2[(iVar19 + iVar7) * 2 + 0x390]);
       FUN_0028a368(1);
       puVar9 = DAT_0043da90;
@@ -550,20 +550,20 @@ code_r0x0032d518:
     break;
   case 9:
     if (*(short *)(puVar2 + 0x1a6) != 2) {
-      FUN_002b8ee0(puVar2 + 0x21e,0);
-      FUN_002b8ee0(puVar2 + 0x192,0);
+      uiSlidingSpriteAdvance(puVar2 + 0x21e,0);
+      uiSlidingSpriteAdvance(puVar2 + 0x192,0);
       iVar7 = 0;
       do {
-        FUN_002b8ee0(puVar2 + iVar7 * 0x23 + 0x241,0);
+        uiSlidingSpriteAdvance(puVar2 + iVar7 * 0x23 + 0x241,0);
         iVar7 = iVar7 + 1;
       } while (iVar7 < 8);
     }
     else {
-      FUN_002b8ee0(puVar2 + 0x21e,1);
-      FUN_002b8ee0(puVar2 + 0x192,1);
+      uiSlidingSpriteAdvance(puVar2 + 0x21e,1);
+      uiSlidingSpriteAdvance(puVar2 + 0x192,1);
       iVar7 = 0;
       do {
-        FUN_002b8ee0(puVar2 + iVar7 * 0x23 + 0x241,1);
+        uiSlidingSpriteAdvance(puVar2 + iVar7 * 0x23 + 0x241,1);
         iVar7 = iVar7 + 1;
       } while (iVar7 < 8);
     }
@@ -632,7 +632,7 @@ code_r0x0032d518:
     iVar7 = FUN_0028a318();
     if (iVar7 != 0) {
       iVar7 = resourceRunOperationIfUnblocked(puVar17 + 0x77);
-      iVar19 = FUN_0029efa8(puVar17 + 0x77);
+      iVar19 = listCursorGetRowIfUnblocked(puVar17 + 0x77);
       iVar7 = FUN_002987d8(puVar17[(iVar19 + iVar7) * 2 + 0x390],
                            puVar17[(iVar19 + iVar7) * 2 + 0x38f]);
       if (iVar7 == 0) {
@@ -677,7 +677,7 @@ code_r0x0032d518:
       break;
     }
     iVar7 = resourceRunOperationIfUnblocked(DAT_0043da90 + 0x90);
-    iVar19 = FUN_0029efa8(puVar17 + 0x90);
+    iVar19 = listCursorGetRowIfUnblocked(puVar17 + 0x90);
     acStack_634[0] = '\0';
     uVar18 = asdTMTexTableEntryAt(0x1d,0x56d);
     uStack_654 = (unsigned int)*(short *)((int)puVar17 + 0xe06);
@@ -764,7 +764,7 @@ code_r0x0032d518:
     iVar7 = FUN_0028a318();
     if (iVar7 != 0) {
       resourceRunOperationIfUnblocked(puVar17 + 0x77);
-      FUN_0029efa8(puVar17 + 0x77);
+      listCursorGetRowIfUnblocked(puVar17 + 0x77);
       iVar7 = FUN_0028d1f4(puVar17[0xb]);
       piVar10 = (int *)FUN_002a8764();
       puVar9 = DAT_0043da90;
@@ -1170,7 +1170,7 @@ code_r0x0032d518:
       *puVar9 = 3;
       puVar17[7] = 0;
       puVar17[5] = 0;
-      FUN_002a03d8(0,10);
+      titleSetSlotValueState2(0,10);
       iVar7 = FUN_002b8740();
       if (iVar7 != 0) {
         FUN_0021e150();

@@ -52,10 +52,10 @@ extern MusicSlot g_textEntryTable[];
 
 u8 *dataTable2eSub3FindByKeyPair(s32 area, s32 sub);
 void soundActorQueueStartPending(void);
-void FUN_00249ac4(s32 area, s32 sub);
+void mapAmbientSoundActorsSpawn(s32 area, s32 sub);
 s32 slotFindByPair(s32 area, s32 sub);
 s32 bgmGetStateById(u32 id);
-void FUN_003d4c68(u32 bgm);
+void bgmResumeOrRequestTrack(u32 bgm);
 s32 gameFlagIsSet(s32 flag);
 s32 lmapGetSpawnIndex(void);
 
@@ -78,7 +78,7 @@ void mapSelectRoomMusic(void)
         return;
     }
     if (FUN_002b950c() == 0) {
-        FUN_00249ac4(map->area, map->sub);
+        mapAmbientSoundActorsSpawn(map->area, map->sub);
     } else if (map->mode != 23 && map->mode != 24) {
         soundActorQueueStartPending();
     }
@@ -90,7 +90,7 @@ void mapSelectRoomMusic(void)
             g_gameState.bgm = slot->alternateBgm;
             s32 state = bgmGetStateById(slot->alternateBgm);
             if (state == 0 || state == 3)
-                FUN_003d4c68(g_gameState.bgm);
+                bgmResumeOrRequestTrack(g_gameState.bgm);
             return;
         }
     }
@@ -134,7 +134,7 @@ void mapSelectRoomMusic(void)
         bgmReleaseStopped();
     else if (state != 3)
         return;
-    FUN_003d4c68(g_gameState.bgm);
+    bgmResumeOrRequestTrack(g_gameState.bgm);
 }
 
 } /* extern "C" */

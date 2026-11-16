@@ -5,7 +5,7 @@
 
 extern "C" {
 const void *dataTable00FindById(u32 id);
-s32 FUN_001a6568(u32 system, s32 group, u32 node, s32 flags);
+s32 texTableRequestNamedTextureLoad(u32 system, s32 group, u32 node, s32 flags);
 s32 asdTMTexLoadMainHeap(s32 group, u32 node);
 void uiSpriteScreenSetupForMode(void *portrait);
 void FUN_003d44ac(void *portrait);
@@ -38,7 +38,7 @@ void btlTalkBustUpSetDemonTexture(u32 demonId, s32 deferred)
         portrait->demonId = demonId;
         if (deferred != 0) {
             if (aocRunByName(g_aocSystem, 0x10, portrait->textureNode, 1) != 0) {
-                FUN_001a6568(g_aocSystem, 0x10, portrait->textureNode, 0x10000);
+                texTableRequestNamedTextureLoad(g_aocSystem, 0x10, portrait->textureNode, 0x10000);
             } else {
                 asdTMTexLoadMainHeap(0x10, portrait->textureNode);
             }

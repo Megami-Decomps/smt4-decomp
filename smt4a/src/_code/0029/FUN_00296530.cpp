@@ -77,7 +77,7 @@ extern int gameGetPlayerData(void);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: vec4Forward. */
 /* Supplied declaration required: FUN_002db06c. */
-extern int FUN_002e5db4(void);
+extern int saveSlotSelectedIsId175(void);
 /* Supplied declaration required: FUN_003135bc. */
 /* Supplied declaration required: mapSpawnRandomEventKindEffect. */
 /* Supplied declaration required: FUN_00324e38. */
@@ -209,11 +209,11 @@ void FUN_00296530(void)
         piVar5[0x92] = 0;
         piVar12 = piVar13;
         temp_v3 = gameFlagIsSet(0x4c9);
-        if ((temp_v3 == 0) || (temp_v3 = FUN_002e5db4(), temp_v3 != 0)) {
+        if ((temp_v3 == 0) || (temp_v3 = saveSlotSelectedIsId175(), temp_v3 != 0)) {
           moriModelUnitStartMaterialAnimation(*(unsigned int *)(g_lmapScene[0x60] + 4),0,2);
         }
         temp_v3 = gameFlagIsSet(0x4c9);
-        if ((temp_v3 == 0) || (temp_v3 = FUN_002e5db4(), piVar13 = g_lmapScene, temp_v3 != 0)) {
+        if ((temp_v3 == 0) || (temp_v3 = saveSlotSelectedIsId175(), piVar13 = g_lmapScene, temp_v3 != 0)) {
           piVar6 = g_lmapScene;
           g_lmapScene[0x8e] = 1;
           piVar13 = piVar12;
@@ -232,7 +232,7 @@ void FUN_00296530(void)
       temp_v3 = gameFlagIsSet(0x4c9);
       piVar5 = g_lmapScene;
       if (temp_v3 != 0) {
-        temp_v3 = FUN_002e5db4();
+        temp_v3 = saveSlotSelectedIsId175();
         piVar6 = g_lmapScene;
         if (temp_v3 != 0) {
           piVar5 = (int *)(*(unsigned int *)(*(int *)(g_lmapScene[0x60] + 4) + 4) & 0xfffffffc);
@@ -446,7 +446,7 @@ LAB_00296e98:
   }
   if (DAT_005f1ad4 == '\0') {
     temp_v0 = gameFlagIsSet(0x4c9);
-    if ((temp_v0 == 0) || (temp_v0 = FUN_002e5db4(), temp_v0 != 0)) {
+    if ((temp_v0 == 0) || (temp_v0 = saveSlotSelectedIsId175(), temp_v0 != 0)) {
       FUN_002db06c();
     }
     else {

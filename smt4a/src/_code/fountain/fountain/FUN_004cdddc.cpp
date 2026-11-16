@@ -61,12 +61,12 @@ void FUN_004cdddc(FountainInitializationView *work)
     if (list != NULL)
         list = modelListInit(list);
     work->environment = list;
-    FUN_001cd3ec(list, "fountain/fountain.bam");
+    modelLoadFileAsyncByName(list, "fountain/fountain.bam");
     list = static_cast<ModelList *>(asdMemoryAllocTraced(sizeof(ModelList), file, 0x191));
     if (list != NULL)
         list = modelListInit(list);
     work->character = list;
-    FUN_001cd3ec(list, "fountain/ch001.bam");
+    modelLoadFileAsyncByName(list, "fountain/ch001.bam");
     char name[128];
     for (s32 index = 0; index < 3; ++index) {
         textFormatBuffer(name, "fountain/obj%03d.bam", index + 1);
@@ -74,7 +74,7 @@ void FUN_004cdddc(FountainInitializationView *work)
         if (list != NULL)
             list = modelListInit(list);
         work->objects[index] = list;
-        FUN_001cd3ec(list, name);
+        modelLoadFileAsyncByName(list, name);
     }
     LockedObj *resources = g_handleRegistry;
     work->resources = resources;

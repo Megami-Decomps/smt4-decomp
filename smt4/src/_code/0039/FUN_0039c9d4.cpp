@@ -17,7 +17,7 @@ typedef struct Widget {
 } Widget;
 
 extern s32 uiSpriteAdvanceAnimation(s32 *position);
-extern s32 FUN_0026b564(void);
+extern s32 buttonHelpStateIsNot3(void);
 extern s32 vec2GetXInt(s32 *position);
 extern s32 vec2GetYInt(s32 *position);
 extern void pointConvertToFloat(void *sprite, s32 x, s32 y);
@@ -34,7 +34,7 @@ void FUN_0039c9d4(Widget *widget)
         widget->state = 1;
     } else if (widget->state == 1) {
         position = widget->position;
-        if (uiSpriteAdvanceAnimation(position) != 0 && FUN_0026b564() != 0) {
+        if (uiSpriteAdvanceAnimation(position) != 0 && buttonHelpStateIsNot3() != 0) {
             widget->state = 2;
             widget->flags |= WIDGET_FLAG_READY;
         }

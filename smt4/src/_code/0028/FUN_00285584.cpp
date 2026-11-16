@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0026e70c(void);
+int floatInterpolateOverDuration(void);
 int renderCtxCallB(float *);
 int nn_math_ARMv6_MTX34AddTranslateAsm(float *, float *);
 int nn_math_ARMv6_MTX34MultTranslateAsm_2A3504(float *, float *, float *);
-int FUN_002ae038(...);
+int gxSetUniformQuadColors(...);
 int texTableRecordCallWithParams(...);
 int FUN_002b64b8(void);
 int FUN_002b659c(int, int, int, int);
@@ -76,11 +76,11 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 extern unsigned int FUN_0026e6a0(unsigned int, unsigned int, unsigned int, int);
-/* Supplied declaration required: FUN_0026e70c. */
+/* Supplied declaration required: floatInterpolateOverDuration. */
 /* Supplied declaration required: renderCtxCallB. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34AddTranslateAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultTranslateAsm_2A3504. */
-/* Supplied declaration required: FUN_002ae038. */
+/* Supplied declaration required: gxSetUniformQuadColors. */
 /* Supplied declaration required: texTableRecordCallWithParams. */
 /* Supplied declaration required: FUN_002b64b8. */
 /* Supplied declaration required: FUN_002b659c. */
@@ -203,7 +203,7 @@ void FUN_00285584(fn_00285584_arg0 *param_1,int param_2,int param_3)
           temp_v30 = (unsigned int)((unsigned long long)temp_v11 >> 0x20);
           temp_v29 = temp_v28;
           uStack_58 = temp_v28;
-          FUN_002ae038(&temp_v28);
+          gxSetUniformQuadColors(&temp_v28);
           efctSetSpeed();
           temp_v13 = (float)(piVar2[5] + param_3);
           temp_v14 = piVar2[1] + piVar2[2];
@@ -231,7 +231,7 @@ void FUN_00285584(fn_00285584_arg0 *param_1,int param_2,int param_3)
                        (int)(float)piVar2[0x24]);
           VectorSignedToFloat(piVar2[0x1b],(unsigned char)(temp_v5 >> 0x16) & 3);
           temp_v6 = -10.0f;
-          FUN_0026e70c();
+          floatInterpolateOverDuration();
           temp_v10 = (float)VectorSignedToFloat(piVar2[5] + param_3,(unsigned char)(temp_v5 >> 0x16) & 3);
           temp_v6 = (float)VectorSignedToFloat((int)temp_v6,(unsigned char)(temp_v5 >> 0x16) & 3);
           temp_v14 = piVar2[1] + piVar2[2] + 1;
@@ -270,7 +270,7 @@ void FUN_00285584(fn_00285584_arg0 *param_1,int param_2,int param_3)
           temp_v16 = temp_v6;
           temp_v17 = temp_v6;
           temp_v18 = temp_v10;
-          FUN_002ae038(&temp_v15);
+          gxSetUniformQuadColors(&temp_v15);
           efctSetSpeed();
           temp_v13 = (float)(piVar2[5] + param_3);
           temp_v14 = piVar2[1] + piVar2[2];

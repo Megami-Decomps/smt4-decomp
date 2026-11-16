@@ -7,7 +7,7 @@ typedef struct RandomState {
     /* 0x0 */ u32 word[4];
 } RandomState;
 
-extern RandomState DAT_006357c8;
+extern RandomState g_randomState;
 
 /* Seeds a 4-word random state (the default state when `state` is NULL) by xoring in constants and rotating right by 8. */
 void randomStateSeed(RandomState *state, u32 seed)
@@ -15,7 +15,7 @@ void randomStateSeed(RandomState *state, u32 seed)
     u32 x;
 
     if (state == NULL) {
-        state = &DAT_006357c8;
+        state = &g_randomState;
     }
     x = seed ^ 0x0AED1A0C;
     state->word[0] = x;

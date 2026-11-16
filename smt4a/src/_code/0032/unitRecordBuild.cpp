@@ -5,7 +5,7 @@ extern "C" {
 extern UnitTemplate *devilGetRecord(s32 id);
 extern void sysMemClear(void *ptr, u32 size);
 extern void __aeabi_memcpy4(void *dst, const void *src, u32 size);
-extern void FUN_004bd6b0(UnitRecord *unit, u16 skill, s32 slot);
+extern void partyRecordSetEquippedItemClampRank(UnitRecord *unit, u16 skill, s32 slot);
 extern void unitRecomputeDerivedStats(UnitRecord *unit);
 extern u16 recordGetScaledMaximum(UnitRecord *unit);
 
@@ -34,7 +34,7 @@ void unitRecordBuild(s32 id, UnitRecord *out)
     out->stats2[1] = entry->stat3;
     __aeabi_memcpy4(out->name, entry->name, 0x12);
     for (i = 0; i < 8; i++) {
-        FUN_004bd6b0(out, entry->skills[i], i);
+        partyRecordSetEquippedItemClampRank(out, entry->skills[i], i);
     }
     out->unk30 = 0;
     unitRecomputeDerivedStats(out);

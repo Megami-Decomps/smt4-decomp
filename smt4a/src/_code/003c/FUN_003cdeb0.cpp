@@ -36,9 +36,9 @@ s32 recordGetModeForId(s32 id);
 void textFormatBuffer(char *output, const char *format, ...);
 void FUN_00185e84(s32 id, s32 x, s32 y, s32 style, s32 a, s32 b);
 s32 recordContainsPairedId(u32 argument, u16 id);
-void FUN_004bd6b0(u32 argument, u16 id, s32 value);
+void partyRecordSetEquippedItemClampRank(u32 argument, u16 id, s32 value);
 void statDrawClampedDelta(u32 argument, s32 id, s32 x, s32 y, s32 style, s32 mode);
-u32 FUN_004bcbb4(u32 argument, u16 id);
+u32 skillGetAdjustedCost(u32 argument, u16 id);
 void FUN_00180310(s32 a, s32 x, s32 y, s32 b, s32 c, s32 style, const char *format, u32 value);
 
 /* Draws the highlighted row of the slot list: the button strip and frame, the entry's name in
@@ -47,10 +47,10 @@ void FUN_003cdeb0(SlotListScreen *screen, u32 argument, s32 x, s32 y, f32 scale)
 {
     char text[64];
     s32 base = resourceRunOperationIfUnblocked(&screen->cursor);
-    s32 entry = base + FUN_002a4894(&screen->cursor);
-    SlotIconPosition *frame = reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, FUN_002a4894(&screen->cursor) + 0x1a7));
+    s32 entry = base + listCursorGetRowIfUnblocked(&screen->cursor);
+    SlotIconPosition *frame = reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, listCursorGetRowIfUnblocked(&screen->cursor) + 0x1a7));
     efctSetSpeed(scale);
-    s32 row = FUN_002a4894(&screen->cursor);
+    s32 row = listCursorGetRowIfUnblocked(&screen->cursor);
     largeGridDrawButtonStrip(screen, frame->x + x, frame->y + y, row, scale);
     bool filled = true;
     if (screen->entryCount <= entry) {
@@ -64,7 +64,7 @@ void FUN_003cdeb0(SlotListScreen *screen, u32 argument, s32 x, s32 y, f32 scale)
                       reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x176))->x;
         s32 offsetY = reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x1a7))->y - reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x185))->y + reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x1a0))->y -
                       reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x176))->y;
-        SlotIconPosition *marker = reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, FUN_002a4894(&screen->cursor) + 0x234));
+        SlotIconPosition *marker = reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, listCursorGetRowIfUnblocked(&screen->cursor) + 0x234));
         texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x233, marker->x + x + offsetX, marker->y + y + offsetY, 0x83);
     }
     s32 mode = recordGetModeForId(screen->slotIds[row]);
@@ -82,13 +82,13 @@ void FUN_003cdeb0(SlotListScreen *screen, u32 argument, s32 x, s32 y, f32 scale)
     SlotIconPosition *statBox = reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x1a1));
     FUN_00185e84((s16)screen->entryIds[entry], frame->x + statBox->x + x, frame->y + statBox->y + y, 0x8d, 0, 0);
     if (!recordContainsPairedId(argument, screen->entryIds[entry])) {
-        FUN_004bd6b0(argument, screen->entryIds[entry], FUN_002a4894(&screen->cursor));
+        partyRecordSetEquippedItemClampRank(argument, screen->entryIds[entry], listCursorGetRowIfUnblocked(&screen->cursor));
     }
     statDrawClampedDelta(argument, (s16)screen->entryIds[entry], frame->x + statBox->x + x, frame->y + statBox->y + y, 0x8d, 0);
     if (filled) {
         SlotIconPosition *countBox = reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x1a6));
         FUN_00180310(1, frame->x + countBox->x + x, frame->y + countBox->y + y, 1, 4, 0x8d, "%d",
-                     FUN_004bcbb4(argument, screen->entryIds[entry]));
+                     skillGetAdjustedCost(argument, screen->entryIds[entry]));
     } else {
         asdTMTexTableEntryAt(0x1a, 0x19b);
     }

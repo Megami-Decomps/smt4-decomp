@@ -16,7 +16,7 @@ typedef struct {
     Element *blockEnd;      /* 0x0c */
 } ElementPool;
 
-void FUN_00132aa4(ElementPool *pool, s32 singleElement);
+void blockPool12AddBlock(ElementPool *pool, s32 singleElement);
 
 /* Takes an element from the free list, or from the current block (growing it when full). */
 Element *poolAllocElement12(ElementPool *pool, s32 singleElement)
@@ -28,7 +28,7 @@ Element *poolAllocElement12(ElementPool *pool, s32 singleElement)
         return element;
     }
     if (pool->cursor == pool->blockEnd) {
-        FUN_00132aa4(pool, singleElement);
+        blockPool12AddBlock(pool, singleElement);
     }
     element = pool->cursor;
     pool->cursor = element + 1;

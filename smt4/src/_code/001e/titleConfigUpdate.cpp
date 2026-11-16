@@ -10,7 +10,7 @@ extern TitleConfigValues g_titleConfigValues;
 s32 uiSpriteAdvanceAnimation(const void *window);
 u16 ifTouchRegionAddRequested(u32 group, u32 item);
 s32 resourceRunOperationIfUnblocked(const void *cursor);
-s32 FUN_0029efa8(const void *cursor);
+s32 listCursorGetRowIfUnblocked(const void *cursor);
 const void *dataTableGet(u32 table, u32 group);
 const TitleConfigHelpEntry *dataTableGetEntries(const void *table);
 void buttonHelpSetText(const char *text, u32 color);
@@ -61,7 +61,7 @@ u32 titleConfigUpdate(void)
         work->buttons[2] = ifTouchRegionAddRequested(0x2F, 0x21);
         ++work->countA;
         s32 selected = resourceRunOperationIfUnblocked(g_titleConfig->cursor);
-        selected += FUN_0029efa8(g_titleConfig->cursor);
+        selected += listCursorGetRowIfUnblocked(g_titleConfig->cursor);
         const TitleConfigHelpEntry *help = dataTableGetEntries(dataTableGet(0x3A, 1));
         buttonHelpSetText(help[selected].text, 0x323232FF);
         FUN_00259e98();
@@ -71,7 +71,7 @@ u32 titleConfigUpdate(void)
     }
     case 1: {
         s32 selected = resourceRunOperationIfUnblocked(g_titleConfig->cursor);
-        selected += FUN_0029efa8(work->cursor);
+        selected += listCursorGetRowIfUnblocked(work->cursor);
         dataTableGetEntries(dataTableGet(0x3A, 1));
         s32 &value = work->settings[selected];
         s32 previous = value;
@@ -137,19 +137,19 @@ u32 titleConfigUpdate(void)
         }
         if (FUN_0029efd8(work->cursor, 1)) {
             selected = resourceRunOperationIfUnblocked(g_titleConfig->cursor);
-            selected += FUN_0029efa8(g_titleConfig->cursor);
+            selected += listCursorGetRowIfUnblocked(g_titleConfig->cursor);
             const TitleConfigHelpEntry *help = dataTableGetEntries(dataTableGet(0x3A, 1));
             buttonHelpSetText(help[selected].text, 0x323232FF);
             FUN_00259e98();
             return 0;
         }
-        s32 current = FUN_0029efa8(g_titleConfig->cursor);
+        s32 current = listCursorGetRowIfUnblocked(g_titleConfig->cursor);
         for (s32 index = 0; index < 3; ++index) {
             if (index != current && ifTouchGetSelectionModeForRegion(work->buttons[index]) == 6) {
                 eventQueueAddUnique(0x100016C);
-                FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(work->cursor), index);
+                scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(work->cursor), index);
                 selected = resourceRunOperationIfUnblocked(g_titleConfig->cursor);
-                selected += FUN_0029efa8(g_titleConfig->cursor);
+                selected += listCursorGetRowIfUnblocked(g_titleConfig->cursor);
                 const TitleConfigHelpEntry *help = dataTableGetEntries(dataTableGet(0x3A, 1));
                 buttonHelpSetText(help[selected].text, 0x323232FF);
                 FUN_00259e98();

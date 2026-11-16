@@ -19,7 +19,7 @@ int panelSetTarget(int);
 int gameSetStatusCameraHeightMode(...);
 int FUN_0038b010(int);
 int controllerSetPositionXyz(unsigned int);
-int FUN_0040aad4(int, int);
+int moriModelContentLoadBody(int, int);
 int handleRegistryRegisterObject(unsigned int, unsigned int);
 int FUN_004954e8(int);
 int menuOpenCommandList(...);
@@ -55,7 +55,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_0038b010. */
 /* Supplied declaration required: FUN_0038b57c. */
 /* Supplied declaration required: controllerSetPositionXyz. */
-/* Supplied declaration required: FUN_0040aad4. */
+/* Supplied declaration required: moriModelContentLoadBody. */
 extern int FUN_0040ab8c(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: FUN_004954e8. */
@@ -105,7 +105,7 @@ void _ZN9Obj53604412FUN_0049bd20Ev(int param_1)
       return;
     }
     if (*(int *)(*(int *)(param_1 + 0x16028) + 4) == 0) {
-      FUN_0040aad4(*(int *)(param_1 + 0x16028),0);
+      moriModelContentLoadBody(*(int *)(param_1 + 0x16028),0);
       temp_v2 = *(unsigned int *)(*(int *)(param_1 + 0x16028) + 4);
       handleRegistryRegisterObject(g_handleRegistry,temp_v2);
       controllerSetPositionXyz(temp_v2);

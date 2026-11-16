@@ -26,7 +26,7 @@ extern "C" {
 extern BtlActionGlobals g_btlAction;
 extern void *g_btlAux;
 const BattleUiItem *dataTable8FindRecord(s32);
-void FUN_003e8bb0(BattleUiQueryResult *, BtlMainStateA *, BtlCombatantEntryA *);
+void btlEntryBuildSummary(BattleUiQueryResult *, BtlMainStateA *, BtlCombatantEntryA *);
 void FUN_004f7724(void *, s32, u32, s32);
 void FUN_004f7ea8(void *, s32, u32, s32);
 void obj4FQueryPairB(void *, u32, u32, s32, u32);
@@ -44,9 +44,9 @@ void dispatchBattleCommandUiVariant(BattleUiOwner *owner, BattleUiContext *conte
         u32 variant;
         {
             BattleUiQueryResult result;
-            FUN_003e8bb0(&result, owner->battle, context->entry);
+            btlEntryBuildSummary(&result, owner->battle, context->entry);
             first = result.words[0];
-            FUN_003e8bb0(&result, owner->battle, context->entry);
+            btlEntryBuildSummary(&result, owner->battle, context->entry);
             variant = (result.words[5] >> 8) & 0xff;
         }
         obj4FQueryPairB(g_btlAux, variant, allowed, mode, first);

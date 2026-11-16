@@ -25,7 +25,7 @@ u32 FUN_00119da8(u32 value);
 void rt_aeabi_memclr(void *buffer, u32 size);
 
 extern TitleConfigState g_titleConfigModeFlag;
-extern SoundStreamRecord DAT_004c53c4[2];
+extern SoundStreamRecord g_bgmRequestChannels[2];
 
 /* Opens the sound archive (the development path when table entry 0 exists), creates the sound slots and resets both stream records. */
 void soundSetupArchiveAndSlots(void)
@@ -46,10 +46,10 @@ void soundSetupArchiveAndSlots(void)
         asdSoundSlotBCreate(3, 0x280000);
         asdSoundSlotAActivate(0, 0);
         FUN_00119da8(0);
-        rt_aeabi_memclr(DAT_004c53c4, sizeof(DAT_004c53c4));
+        rt_aeabi_memclr(g_bgmRequestChannels, sizeof(g_bgmRequestChannels));
         g_titleConfigModeFlag.unk04 = 0;
-        DAT_004c53c4[0].state = 0;
-        DAT_004c53c4[1].state = 1;
+        g_bgmRequestChannels[0].state = 0;
+        g_bgmRequestChannels[1].state = 1;
     }
 }
 

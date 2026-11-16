@@ -6,7 +6,7 @@
 #include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
-void FUN_0022708c(MaterialMergeOwner *);
+void screenFadeResetAndRelease(MaterialMergeOwner *);
 void FUN_002276f8(MaterialMergeOwner *);
 void modelManagerReleaseSlots(MaterialMergeOwner *);
 void FUN_00241d58(BattleSpritePlacement *);
@@ -42,7 +42,7 @@ extern "C" void FUN_003d971c(MaterialMergeOwner *owner)
         offsetof(ResourceControl, pending) == 0x3214 ? 1 : -1];
     ResourceControl *control = reinterpret_cast<ResourceControl *>(owner);
     control->state = 0;
-    FUN_0022708c(owner);
+    screenFadeResetAndRelease(owner);
     FUN_002276f8(owner);
     modelManagerReleaseSlots(owner);
 

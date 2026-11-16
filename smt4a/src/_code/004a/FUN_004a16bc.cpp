@@ -87,7 +87,7 @@ void FUN_004a16bc(QuestMenu *menu)
         libc_strcpy(text, FUN_0014bf3c(id, 0));
         scrSetStringSlot(16, text);
         scrScriptProcessStartEntry(menu->job, 7);
-        FUN_003343f0(1);
+        gameGlobalsSetMenuOpenFlag(1);
         menu->state = 8;
         menu->stateArg = 0;
         sendEvent100020E();
@@ -119,7 +119,7 @@ void FUN_004a16bc(QuestMenu *menu)
     }
     if (cancel != 0) {
         g_animatedPageSelection[1] = -1;
-        FUN_003343f0(1);
+        gameGlobalsSetMenuOpenFlag(1);
         menu->state = 9;
         menu->stateArg = 0;
         scrScriptProcessStartEntry(menu->job, 8);

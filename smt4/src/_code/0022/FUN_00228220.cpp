@@ -14,7 +14,7 @@ int FUN_0023ea94(void);
 int randRange(int);
 int FUN_00246134(...);
 int FUN_002463e8(...);
-int FUN_00247478(unsigned char [2], unsigned int, unsigned int *);
+int btlEntryBuildSummary(unsigned char [2], unsigned int, unsigned int *);
 int btlMainFindEntryByListedId(unsigned int *, unsigned int);
 int dataTable40FindById(void);
 int VectorSignedToFloat(...);
@@ -45,7 +45,7 @@ typedef struct {
 /* Supplied declaration required: randRange. */
 /* Supplied declaration required: FUN_00246134. */
 /* Supplied declaration required: FUN_002463e8. */
-/* Supplied declaration required: FUN_00247478. */
+/* Supplied declaration required: btlEntryBuildSummary. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: dataTable40FindById. */
@@ -150,7 +150,7 @@ void FUN_00228220(int param_1,unsigned int param_2,int param_3,unsigned int para
       puVar7 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
       btlMainFindEntryByListedId(puVar7,param_5);
       temp_v5 = reinterpret_cast<int>(btlGetMainState());
-      FUN_00247478(temp_v14,temp_v5,puVar6);
+      btlEntryBuildSummary(temp_v14,temp_v5,puVar6);
       temp_v1 = temp_v15;
       if ((param_1 < 1) && (temp_v19 != 1)) {
         return;

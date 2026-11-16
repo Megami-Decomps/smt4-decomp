@@ -54,7 +54,7 @@ int campChangeState(...);
 int FUN_00215bd0(void);
 int FUN_0026f7f0(void);
 int recordGetModeForId(...);
-int FUN_002a4878(...);
+int listCursorGetRowOfChildIfUnblocked(...);
 int campFusionResultCommand(void);
 int FUN_002c8538(...);
 int FUN_002f78a0(...);
@@ -108,7 +108,7 @@ extern int uniteNotBusy(void);
 /* Supplied declaration required: recordGetModeForId. */
 /* Supplied declaration required: FUN_00284ee4. */
 /* Supplied declaration required: campShowSelectedEntryHelp. */
-/* Supplied declaration required: FUN_002a4878. */
+/* Supplied declaration required: listCursorGetRowOfChildIfUnblocked. */
 /* Supplied declaration required: scrollOwnerSelectIndex. */
 /* Supplied declaration required: FUN_002a4cfc. */
 /* Supplied declaration required: FUN_002a5cf4. */
@@ -293,7 +293,7 @@ void FUN_003dc628(void)
   temp_v4 = *(char *)(temp_v9 + 0xb8);
   if (temp_v5 != 6) {
     if (temp_v5 == 1 || temp_v5 == 2) {
-      temp_v5 = FUN_002a4878(temp_v9 + 0x40);
+      temp_v5 = listCursorGetRowOfChildIfUnblocked(temp_v9 + 0x40);
       temp_v10 = 0;
       temp_v8 = widgetSubCallIfVisible(temp_v9 + 0x40);
       if (0 < temp_v8) {
@@ -305,7 +305,7 @@ void FUN_003dc628(void)
             if (*(short *)(temp_v9 + temp_v10 * 2 + 0x1b22) == temp_v7) {
               temp_v6 = flaggedEntryGetValueB(temp_v9 + 0x40);
               flaggedEntrySetValueB(temp_v9 + 0x40,temp_v10);
-              temp_v7 = FUN_002a4878(temp_v9 + 0x40);
+              temp_v7 = listCursorGetRowOfChildIfUnblocked(temp_v9 + 0x40);
               temp_v13 = temp_v7 == temp_v5;
               if (!temp_v13) {
                 flaggedEntrySetValueB(temp_v9 + 0x40,temp_v6);
@@ -319,7 +319,7 @@ void FUN_003dc628(void)
             flaggedEntrySetValueB(temp_v9 + 0x40,temp_v10);
             *(unsigned char *)(temp_v9 + 0xb9) = 3;
             temp_v13 = 1;
-            temp_v7 = FUN_002a4878(temp_v9 + 0x40);
+            temp_v7 = listCursorGetRowOfChildIfUnblocked(temp_v9 + 0x40);
             if (temp_v7 != temp_v5) {
               eventQueueAddUniqueIfValid(0x100020d);
             }
@@ -348,10 +348,10 @@ void FUN_003dc628(void)
             if (0 < temp_v5) {
               do {
                 if (*(short *)(temp_v9 + temp_v8 * 2 + 0x1b22) == temp_v7) {
-                  temp_v5 = FUN_002a4878(temp_v9 + 0x40);
+                  temp_v5 = listCursorGetRowOfChildIfUnblocked(temp_v9 + 0x40);
                   temp_v16 = flaggedEntryGetValueB(temp_v9 + 0x40);
                   flaggedEntrySetValueB(temp_v9 + 0x40,temp_v8);
-                  temp_v10 = FUN_002a4878(temp_v9 + 0x40);
+                  temp_v10 = listCursorGetRowOfChildIfUnblocked(temp_v9 + 0x40);
                   if (temp_v10 != temp_v5) {
                     flaggedEntrySetValueB(temp_v9 + 0x40,temp_v16);
                     temp_v15 = 0;
@@ -531,7 +531,7 @@ LAB_003dcd84:
     temp_v5 = 0;
     padQueryLogicalKey(0,1);
     if (!(temp_v5 == 0 && !temp_v15)) {
-      temp_v6 = FUN_002a4878(temp_v9 + 0x40);
+      temp_v6 = listCursorGetRowOfChildIfUnblocked(temp_v9 + 0x40);
       temp_v16 = FUN_003da8f4((int)*(char *)(temp_v9 + 0xa4),temp_v6);
       temp_v5 = FUN_002e26c4();
       temp_v7 = idListAnyValid();
@@ -591,7 +591,7 @@ LAB_003dcd84:
               if (!(temp_v7 == 0x46 || temp_v7 == 0x3d)) {
                 partyPanelSetHidden(0);
                 *(unsigned char *)(temp_v9 + 0xa6) = *(unsigned char *)(temp_v5 + 2);
-                temp_v2 = FUN_002a4878(temp_v9 + 0x40);
+                temp_v2 = listCursorGetRowOfChildIfUnblocked(temp_v9 + 0x40);
                 *(unsigned char *)(*(char *)(temp_v9 + 0xa4) + temp_v18) = temp_v2;
                 if ((*(unsigned char *)(temp_v5 + 3) & 0xf) == 0) {
                   FUN_003da8f4((int)*(char *)(temp_v9 + 0xa6),0);
@@ -873,9 +873,9 @@ LAB_003dda0c:
                   temp_v5 = temp_v9 + 0x40;
                   FUN_00228b04(temp_v5,1);
                   if (temp_v5 != 0 || temp_v13) {
-                    temp_v2 = FUN_002a4878(temp_v9 + 0x40);
+                    temp_v2 = listCursorGetRowOfChildIfUnblocked(temp_v9 + 0x40);
                     *(unsigned char *)(*(char *)(temp_v9 + 0xa4) + temp_v18) = temp_v2;
-                    temp_v6 = FUN_002a4878(temp_v9 + 0x40);
+                    temp_v6 = listCursorGetRowOfChildIfUnblocked(temp_v9 + 0x40);
                     temp_v5 = FUN_003da8f4((int)*(char *)(temp_v9 + 0xa4),temp_v6);
                     temp_v6 = dataTable15Sub0FindEntry();
                     buttonHelpSetText(temp_v6,0xf4f4f4ff);
@@ -911,9 +911,9 @@ LAB_003dda0c:
                 temp_v5 = temp_v9 + 0x40;
                 FUN_00228b04(temp_v5,1);
                 if (temp_v5 != 0 || temp_v13) {
-                  temp_v2 = FUN_002a4878(temp_v9 + 0x40);
+                  temp_v2 = listCursorGetRowOfChildIfUnblocked(temp_v9 + 0x40);
                   *(unsigned char *)(*(char *)(temp_v9 + 0xa4) + temp_v18) = temp_v2;
-                  temp_v6 = FUN_002a4878(temp_v9 + 0x40);
+                  temp_v6 = listCursorGetRowOfChildIfUnblocked(temp_v9 + 0x40);
                   temp_v5 = FUN_003da8f4((int)*(char *)(temp_v9 + 0xa4),temp_v6);
                   temp_v6 = dataTable15Sub0FindEntry();
                   buttonHelpSetText(temp_v6,0xf4f4f4ff);
@@ -947,9 +947,9 @@ LAB_003ddbfc:
             temp_v5 = temp_v9 + 0x40;
             FUN_00228b04(temp_v5,1);
             if (temp_v5 != 0 || temp_v13) {
-              temp_v2 = FUN_002a4878(temp_v9 + 0x40);
+              temp_v2 = listCursorGetRowOfChildIfUnblocked(temp_v9 + 0x40);
               *(unsigned char *)(*(char *)(temp_v9 + 0xa4) + temp_v18) = temp_v2;
-              temp_v6 = FUN_002a4878(temp_v9 + 0x40);
+              temp_v6 = listCursorGetRowOfChildIfUnblocked(temp_v9 + 0x40);
               temp_v5 = FUN_003da8f4((int)*(char *)(temp_v9 + 0xa4),temp_v6);
               temp_v6 = dataTable15Sub0FindEntry();
               buttonHelpSetText(temp_v6,0xf4f4f4ff);
@@ -975,7 +975,7 @@ LAB_003ddd08:
         FUN_002a7b74();
         uniteStartOrQueueRequest(0);
         sysPlaySe(0x51);
-        temp_v6 = FUN_002a4878(temp_v9 + 0x40);
+        temp_v6 = listCursorGetRowOfChildIfUnblocked(temp_v9 + 0x40);
         temp_v9 = FUN_003da8f4((int)*(char *)(temp_v9 + 0xa4),temp_v6);
         temp_v6 = dataTable15Sub0FindEntry();
         buttonHelpSetText(temp_v6,0xf4f4f4ff);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_002346ac(u32 target, s32 x, s32 y, s32 w, s32 h);
+extern int touchRegionOwnerAddRegion(u32 target, s32 x, s32 y, s32 w, s32 h);
 extern int touchRegisterSecondRegion(u32 target, s32 x, s32 y, s32 w, s32 h);
 extern int touchRegisterFirstRegion(u32 target, s32 x, s32 y, s32 w, s32 h);
 
@@ -22,7 +22,7 @@ void FUN_003aa9a4(u32 target, const void *source)
     asdTMTexTableGetEntryPlacement(0x1D, 0x574, &x, &y, &w, &h);
     touchRegisterSecondRegion(target, x, y, w, h);
     asdTMTexTableGetEntryPlacement(0x1D, 0x575, &x, &y, &w, &h);
-    FUN_002346ac(target, x, y, w, h);
+    touchRegionOwnerAddRegion(target, x, y, w, h);
 }
 
 }

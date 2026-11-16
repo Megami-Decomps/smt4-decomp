@@ -1,4 +1,4 @@
-/* Returns the table value for the current position (resourceRunOperationIfUnblocked + FUN_002a4894 of the cursor sub-state). */
+/* Returns the table value for the current position (resourceRunOperationIfUnblocked + listCursorGetRowIfUnblocked of the cursor sub-state). */
 #include "common.h"
 
 extern "C" {
@@ -16,14 +16,14 @@ typedef struct Holder {
 extern Holder *g_uiQuest;
 
 extern s32 resourceRunOperationIfUnblocked(Cursor *cursor);
-extern s32 FUN_002a4894(Cursor *cursor);
+extern s32 listCursorGetRowIfUnblocked(Cursor *cursor);
 
 u16 FUN_0031f8cc(void)
 {
     Holder *holder = g_uiQuest;
     s32 base = resourceRunOperationIfUnblocked(&holder->cursor);
     Cursor *cursor = &holder->cursor;
-    s32 offset = FUN_002a4894(cursor);
+    s32 offset = listCursorGetRowIfUnblocked(cursor);
 
     return holder->values[offset + base];
 }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern const char DAT_00544b70[];
+extern const char g_effParticleSourceFileName[];
 
 void resourceListDestroy(void *handle);
 void asdMemFree(void *ptr);
@@ -28,7 +28,7 @@ void effParticleParamRebuildHandles3c(EffParticleParam *param, void *arg)
     }
     size = count * 4;
     if (size != 0) {
-        asdDebugTrace(DAT_00544b70, 629);
+        asdDebugTrace(g_effParticleSourceFileName, 629);
         param->buffer40 = memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
         param->handles3c = (void **)param->buffer40;
         param->handles3c[0] = FUN_001abbc4(arg);

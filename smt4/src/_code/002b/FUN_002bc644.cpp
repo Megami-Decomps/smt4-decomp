@@ -3,7 +3,7 @@
 
 extern "C" {
 u32* asdGxGetCommandCursor(void);
-void FUN_002af390(u32* begin, u32* end);
+void asdModelAdvanceCommandCursorBetween(u32* begin, u32* end);
 
 void FUN_002bc644(u32 x, s32 y, s32 width, s32 height)
 {
@@ -25,6 +25,6 @@ void FUN_002bc644(u32 x, s32 y, s32 width, s32 height)
     *cursor++ = 0xF0044;
     *cursor++ = x | (static_cast<u32>(y) << 16);
     *cursor++ = 0xF0068;
-    FUN_002af390(begin, cursor);
+    asdModelAdvanceCommandCursorBetween(begin, cursor);
 }
 }

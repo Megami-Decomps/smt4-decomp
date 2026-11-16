@@ -43,7 +43,7 @@ extern int questIsCompleted(unsigned int);
 /* Supplied declaration required: drawSkillCategoryLabel. */
 extern int FUN_0029d644(int);
 extern int ifTouchGetSelectionModeForRegion(int);
-extern int FUN_0029efa8(int);
+extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(int);
 extern unsigned int FUN_002bcddc(unsigned int, unsigned int);
 /* Supplied declaration required: textDrawString. */
@@ -105,7 +105,7 @@ void FUN_001a6d98(void)
   temp_v4 = FUN_0029d644(temp_v3);
   if (0 < temp_v4) {
     do {
-      if ((*(int *)(temp_v0 + 4) != 2) || (temp_v4 = FUN_0029efa8(temp_v3), temp_v4 != temp_v10)) {
+      if ((*(int *)(temp_v0 + 4) != 2) || (temp_v4 = listCursorGetRowIfUnblocked(temp_v3), temp_v4 != temp_v10)) {
         temp_v4 = resourceRunOperationIfUnblocked(temp_v3);
         temp_v11 = (unsigned int)*(unsigned short *)(temp_v12 + (temp_v4 + temp_v10) * 2);
         temp_v4 = asdTMTexTableEntryAt(0x29,temp_v10 + 0x9e);
@@ -149,7 +149,7 @@ void FUN_001a6d98(void)
   if ((0 < temp_v4) &&
      (((temp_v4 = *(int *)(temp_v0 + 4), temp_v4 == 2 || temp_v4 == 6 || (temp_v4 == 7 || temp_v4 == 8)) ||
       (temp_v4 == 9 || temp_v4 == 10)))) {
-    temp_v4 = FUN_0029efa8(temp_v3);
+    temp_v4 = listCursorGetRowIfUnblocked(temp_v3);
     temp_v10 = asdTMTexTableEntryAt(0x29,temp_v4 + 0xb5);
     temp_v5 = resourceRunOperationIfUnblocked(temp_v3);
     temp_v11 = (unsigned int)*(unsigned short *)(temp_v12 + (temp_v5 + temp_v4) * 2);

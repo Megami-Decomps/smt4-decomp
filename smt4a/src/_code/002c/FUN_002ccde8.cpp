@@ -74,7 +74,7 @@ void FUN_002ccde8(BtlMenuWork *work, u16 *action, s16 *argument)
         break;
     case 1: {
         s32 entry = resourceRunOperationIfUnblocked(&work->commandCursor);
-        index = FUN_002a4894(&work->commandCursor) + entry;
+        index = listCursorGetRowIfUnblocked(&work->commandCursor) + entry;
         u16 chosen;
         if (work->pageEntries[work->page] != -1) {
             chosen = index != 0 ? 2 : 1;
@@ -106,7 +106,7 @@ void FUN_002ccde8(BtlMenuWork *work, u16 *action, s16 *argument)
             for (s32 i = 0; i < 3; i++) {
                 if (gameDataFlagTestBit(entries.flagBits[i]) != 0) {
                     s32 entry = resourceRunOperationIfUnblocked(&work->skillCursor);
-                    if (FUN_002a4894(&work->skillCursor) + entry == index) {
+                    if (listCursorGetRowIfUnblocked(&work->skillCursor) + entry == index) {
                         *argument = entries.entryArgs[i];
                         return;
                     }
@@ -116,7 +116,7 @@ void FUN_002ccde8(BtlMenuWork *work, u16 *action, s16 *argument)
             return;
         }
         s32 entry = resourceRunOperationIfUnblocked(&work->skillCursor);
-        result = (s16)(FUN_002a4894(&work->skillCursor) + entry);
+        result = (s16)(listCursorGetRowIfUnblocked(&work->skillCursor) + entry);
         break;
     }
     case 4:
@@ -130,7 +130,7 @@ void FUN_002ccde8(BtlMenuWork *work, u16 *action, s16 *argument)
     case 7: {
         *action = 8;
         s32 entry = resourceRunOperationIfUnblocked(&work->itemCursor);
-        result = work->itemIds[FUN_002a4894(&work->itemCursor) + entry];
+        result = work->itemIds[listCursorGetRowIfUnblocked(&work->itemCursor) + entry];
         break;
     }
     case 9:

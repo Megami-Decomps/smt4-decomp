@@ -11,7 +11,7 @@ int gfxObjectDestroy(...);
 int FUN_0028703c(...);
 int modelSetScale(...);
 void modelRemoveFromSlotList(...);
-int FUN_002a03d8(...);
+int titleSetSlotValueState2(...);
 int lightOwnerRegister(...);
 int modelSlotAttachChild(...);
 int FUN_002a04f0(...);
@@ -41,7 +41,7 @@ extern unsigned int asdCameraLoadFromFile(char *);
 extern unsigned int asdMdlManagerCreateSecondList(char *, unsigned int);
 /* Supplied declaration required: modelSetScale. */
 /* Supplied declaration required: modelRemoveFromSlotList. */
-/* Supplied declaration required: FUN_002a03d8. */
+/* Supplied declaration required: titleSetSlotValueState2. */
 /* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: modelSlotAttachChild. */
 /* Supplied declaration required: FUN_002a04f0. */
@@ -113,7 +113,7 @@ unsigned int FUN_00205184(void)
       FUN_002c1edc(temp_v0 + 4,temp_v0 + 0x50c,temp_v0 + 0x518,temp_v0 + 0x524);
       FUN_002c1e30(temp_v0 + 4,1);
       screenFadeSlotReset(0);
-      FUN_002a03d8(1,10);
+      titleSetSlotValueState2(1,10);
       *(unsigned int *)(temp_v0 + 0x564) = 2;
       *(unsigned int *)(temp_v0 + 0x568) = 0;
     }

@@ -6,7 +6,7 @@
 extern "C" {
 struct BtlMainState;
 BtlEntry *btlMainFindEntryByListedId(BtlMainState *, u32);
-void FUN_0022abe0(BtlEntry *, u16 *);
+void btlEntryGetPassiveSkillIds(BtlEntry *, u16 *);
 s32 btlQueryMatchingFlagColumn(BtlMainState *, BtlEntry *, s32);
 
 // Apply the strongest passive affinity that is not already represented by the entry.
@@ -14,7 +14,7 @@ u32 FUN_00227fac(u32 listedId)
 {
     BtlEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), listedId);
     u16 skills[10] = {};
-    FUN_0022abe0(entry, skills);
+    btlEntryGetPassiveSkillIds(entry, skills);
     s32 affinity = 0;
     for (s32 i = 0; i < 9; ++i) {
         if (skills[i] != 0) {

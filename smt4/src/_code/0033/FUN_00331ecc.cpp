@@ -62,7 +62,7 @@ void FUN_00331ecc(void)
         } while (iVar7 < 6);
       }
       DAT_0043da38 = -1;
-      FUN_002b827c(0x9e);
+      buttonHelpSetContext(0x9e);
       iVar7 = FUN_002ae794(*(unsigned char *)(iVar12 + 0x4c9));
       iVar8 = FUN_002ae794(0x9e);
       if (iVar7 != 0 && iVar8 != 0) {

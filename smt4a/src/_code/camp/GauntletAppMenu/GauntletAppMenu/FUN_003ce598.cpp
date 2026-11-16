@@ -71,7 +71,7 @@ extern int useCounterIsFinished(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: msgWindowReset. */
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
-extern int FUN_002a4894(int);
+extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: scrollOwnerSetValue. */
 /* Supplied declaration required: scrollListSetSelectionTracked. */
 extern int messageGetChoiceResult(void);
@@ -167,7 +167,7 @@ unsigned int FUN_003ce598(void)
           temp_v7 = 0xa0;
           uiPointerHitsRect(0xa0,0x30,200,0x20,2);
           if (temp_v7 != 0) {
-            temp_v3 = FUN_002a4894(temp_v6 + 0x10);
+            temp_v3 = listCursorGetRowIfUnblocked(temp_v6 + 0x10);
             temp_v7 = temp_v3 - 1;
             if (temp_v3 - 1 < 0) {
               temp_v7 = 0;
@@ -179,7 +179,7 @@ unsigned int FUN_003ce598(void)
             if (temp_v7 == 0) {
               return 0;
             }
-            temp_v3 = FUN_002a4894(temp_v6 + 0x10);
+            temp_v3 = listCursorGetRowIfUnblocked(temp_v6 + 0x10);
             temp_v2 = objectApplyIfUnblocked(temp_v6 + 0x10);
             temp_v7 = temp_v3 + 1;
             if (temp_v2 <= temp_v3 + 1) {
@@ -241,7 +241,7 @@ unsigned int FUN_003ce598(void)
       return 0;
     }
     temp_v7 = resourceRunOperationIfUnblocked(temp_v6 + 0x10);
-    temp_v3 = FUN_002a4894(temp_v6 + 0x10);
+    temp_v3 = listCursorGetRowIfUnblocked(temp_v6 + 0x10);
     temp_v7 = FUN_003e45bc(*(unsigned int *)(temp_v6 + (temp_v3 + temp_v7) * 4 + 0x74),0);
     if (temp_v7 == 0) {
       return 0;
@@ -298,7 +298,7 @@ unsigned int FUN_003ce598(void)
     return 0;
   case 3:
     temp_v7 = resourceRunOperationIfUnblocked(temp_v6 + 0x10);
-    temp_v3 = FUN_002a4894(temp_v6 + 0x10);
+    temp_v3 = listCursorGetRowIfUnblocked(temp_v6 + 0x10);
     temp_v5 = *(unsigned int *)(temp_v6 + (temp_v3 + temp_v7) * 4 + 0x74);
     temp_v10[0] = '\0';
     temp_v8 = asdTMTexTableEntryAt(0x14,0x575);
@@ -405,7 +405,7 @@ unsigned int FUN_003ce598(void)
       }
       else {
         temp_v7 = resourceRunOperationIfUnblocked(temp_v6 + 0x10);
-        temp_v3 = FUN_002a4894(temp_v6 + 0x10);
+        temp_v3 = listCursorGetRowIfUnblocked(temp_v6 + 0x10);
         FUN_003e45bc(*(unsigned int *)(temp_v6 + (temp_v3 + temp_v7) * 4 + 0x74),0);
         eventQueueAddUnique(0x1000308);
         FUN_003dc0c0(temp_v6,5);

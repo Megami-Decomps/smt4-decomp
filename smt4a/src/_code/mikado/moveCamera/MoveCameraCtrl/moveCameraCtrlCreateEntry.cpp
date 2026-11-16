@@ -33,7 +33,7 @@ extern CameraCtrlEntry *asdMemoryAllocTraced(u32 size, const char *file, s32 lin
 extern CameraCtrlEntry *modelListInit(CameraCtrlEntry *memory);
 extern void resourceOwnerLoadFileSync(CameraCtrlEntry *entry, u32 arg);
 extern void FUN_0040ab7c(CameraCtrlEntry *entry, s32 arg);
-extern void FUN_0040aad4(CameraCtrlEntry *entry, s32 arg);
+extern void moriModelContentLoadBody(CameraCtrlEntry *entry, s32 arg);
 extern void FUN_0045b538(void *position);
 extern void handleRegistryRegisterObject(u32 registry, CameraChild *child);
 extern void modelPlayClip(CameraChild *child, s32 a, s32 b, f32 x, f32 y);
@@ -50,7 +50,7 @@ void moveCameraCtrlCreateEntry(MoveCameraCtrl *ctrl, u32 arg, s32 index)
     ctrl->entries[index] = entry;
     resourceOwnerLoadFileSync(entry, arg);
     FUN_0040ab7c(ctrl->entries[index], 0);
-    FUN_0040aad4(ctrl->entries[index], 0);
+    moriModelContentLoadBody(ctrl->entries[index], 0);
     FUN_0045b538(ctrl->entries[index]->link->position);
     child = ctrl->entries[index]->child;
     handleRegistryRegisterObject(g_handleRegistry, child);

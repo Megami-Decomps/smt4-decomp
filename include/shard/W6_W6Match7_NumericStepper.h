@@ -34,7 +34,7 @@ u32 getMaskB6(s32 includeExtra);
 extern "C" {
 #endif
 
-u32 FUN_0048e40c(void);
+u32 naviMainConditionsHold(void);
 
 #ifdef __cplusplus
 }

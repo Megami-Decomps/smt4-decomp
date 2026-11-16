@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern void FUN_0017dd84(void);
+extern void asdGxCommandBufferTerminateAndSubmit(void);
 
 /* Forwards to the function that follows it in the binary. */
 void FUN_0017dd80(void)
 {
-    FUN_0017dd84();
+    asdGxCommandBufferTerminateAndSubmit();
 }
 
 } /* extern "C" */

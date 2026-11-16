@@ -19,8 +19,8 @@ s32 resourceRunOperationIfUnblocked(ScrollList *list);
 s32 resourceRunEmbeddedOperationIfUnblocked(ScrollList *list);
 s32 objectApplyIfUnblocked(ScrollList *list);
 s32 widgetSubCallIfVisible(ScrollList *list);
-s32 FUN_002a4878(ScrollList *list);
-s32 FUN_002a4894(ScrollList *list);
+s32 listCursorGetRowOfChildIfUnblocked(ScrollList *list);
+s32 listCursorGetRowIfUnblocked(ScrollList *list);
 void scrollOwnerSelectIndex(ScrollList *list, s32 value);
 void scrollListSetSelectionTracked(ScrollList *list, s32 value);
 void eventQueueAddUnique(u32 event);
@@ -37,9 +37,9 @@ u32 FUN_002e2848(ScrollList *list, ScrollPoint touch, ScrollPoint barSize, s32 b
     s32 barMode = recordGetModeForId((s16)barId);
 
     if (previousMode == 6 || previousMode == 2) {
-        s32 position = resourceRunOperationIfUnblocked(list) + FUN_002a4894(list);
+        s32 position = resourceRunOperationIfUnblocked(list) + listCursorGetRowIfUnblocked(list);
         if (horizontal != 0) {
-            position = resourceRunEmbeddedOperationIfUnblocked(list) + FUN_002a4878(list);
+            position = resourceRunEmbeddedOperationIfUnblocked(list) + listCursorGetRowOfChildIfUnblocked(list);
         }
         if (position - 1 < 0) {
             return 1;
@@ -50,9 +50,9 @@ u32 FUN_002e2848(ScrollList *list, ScrollPoint touch, ScrollPoint barSize, s32 b
             scrollListSetSelectionTracked(list, position - 1);
         }
     } else if (nextMode == 6 || nextMode == 2) {
-        s32 position = resourceRunOperationIfUnblocked(list) + FUN_002a4894(list) + 1;
+        s32 position = resourceRunOperationIfUnblocked(list) + listCursorGetRowIfUnblocked(list) + 1;
         if (horizontal != 0) {
-            position = resourceRunEmbeddedOperationIfUnblocked(list) + FUN_002a4878(list) + 1;
+            position = resourceRunEmbeddedOperationIfUnblocked(list) + listCursorGetRowOfChildIfUnblocked(list) + 1;
             if (widgetSubCallIfVisible(list) <= position) {
                 return 1;
             }
@@ -82,7 +82,7 @@ u32 FUN_002e2848(ScrollList *list, ScrollPoint touch, ScrollPoint barSize, s32 b
             return 1;
         }
         s16 target = y * total / barSize.y;
-        if (FUN_002a4894(list) + resourceRunOperationIfUnblocked(list) != target && playSound != 0) {
+        if (listCursorGetRowIfUnblocked(list) + resourceRunOperationIfUnblocked(list) != target && playSound != 0) {
             eventQueueAddUnique(0x100020d);
         }
         scrollListSetSelectionTracked(list, target);

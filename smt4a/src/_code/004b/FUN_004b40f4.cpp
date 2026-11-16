@@ -18,7 +18,7 @@ typedef char PackedNumberPanelValueOffsetCheck[offsetof(PackedNumberPanelView, p
 
 extern "C" {
 void FUN_002c0940(char *, u32);
-f32 FUN_00168594(const char *, u32, f32);
+f32 fontMeasureTextWidth(const char *, u32, f32);
 void gxResetColorQuadToWhite(void);
 
 void FUN_004b40f4(PackedNumberPanelView *panel, s32 x, s32 y)
@@ -35,7 +35,7 @@ void FUN_004b40f4(PackedNumberPanelView *panel, s32 x, s32 y)
         value = 9999;
     const TextureTableEntryIV *number = asdTMTexTableEntryAt(0x1D, 0xCB);
     FUN_002c0940(text, value);
-    s32 width = static_cast<s32>(FUN_00168594(text, 3, 1.0f));
+    s32 width = static_cast<s32>(fontMeasureTextWidth(text, 3, 1.0f));
     s32 textX = anchor->x + number->x + x + (56 - width) / 2;
     s32 textY = anchor->y + number->y + y;
     textDrawString(3, 0x9FDDDDFF, text, static_cast<f32>(textX), static_cast<f32>(textY), 0.0f, 1.0f, 1.0f);

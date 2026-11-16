@@ -14,7 +14,7 @@ unsigned int FUN_0023a2e0(int param_1)
     return 1;
   }
   iVar1 = *(int *)(param_1 + 4);
-  FUN_00225c1c();
+  resourceManagerGetValueByIndex();
   if (iVar1 != 0) {
     unaff_r6 = *(int *)(iVar1 + 0x10);
   }

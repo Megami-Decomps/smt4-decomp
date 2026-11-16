@@ -38,7 +38,7 @@ struct fn_001b7420_arg2 {
     undefined4 field_0xb0; /* +0xb0 */
 };
 
-extern unsigned int DAT_00536d14; /* 0x536d14 */
+extern unsigned int g_sinCosTable; /* 0x536d14 */
 extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
@@ -169,15 +169,15 @@ _ZN9Obj55b680C1EP18AsdAllocatorObjectP12Obj55b680ResPv(unsigned int *param_1,uns
     temp_v15 = temp_v16 & 0xff;
     temp_v20 = (float)VectorUnsignedToFloat(temp_v16 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
     temp_v18 = (float)VectorUnsignedToFloat(temp_v17 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
-    temp_v21 = (float)(&DAT_00536d14)[temp_v15 * 4] +
+    temp_v21 = (float)(&g_sinCosTable)[temp_v15 * 4] +
              (temp_v13 - temp_v20) * (float)(&DAT_00536d1c)[temp_v15 * 4];
     temp_v20 = (float)(&DAT_00536d18)[temp_v15 * 4] +
              (temp_v13 - temp_v20) * (float)(&DAT_00536d20)[temp_v15 * 4];
-    temp_v13 = (float)(&DAT_00536d14)[temp_v5 * 4] +
+    temp_v13 = (float)(&g_sinCosTable)[temp_v5 * 4] +
              (temp_v11 - temp_v19) * (float)(&DAT_00536d1c)[temp_v5 * 4];
     temp_v22 = (float)(&DAT_00536d18)[temp_v5 * 4] +
              (temp_v11 - temp_v19) * (float)(&DAT_00536d20)[temp_v5 * 4];
-    temp_v19 = (float)(&DAT_00536d14)[temp_v8 * 4] +
+    temp_v19 = (float)(&g_sinCosTable)[temp_v8 * 4] +
              (temp_v14 - temp_v18) * (float)(&DAT_00536d1c)[temp_v8 * 4];
     temp_v11 = (float)(&DAT_00536d18)[temp_v8 * 4] +
              (temp_v14 - temp_v18) * (float)(&DAT_00536d20)[temp_v8 * 4];

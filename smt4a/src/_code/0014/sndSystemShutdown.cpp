@@ -11,7 +11,7 @@ struct SoundSystemState {
     /* 0x03 */ u8 dspOwnedElsewhere;
 };
 
-extern SoundSystemState DAT_005894e4;
+extern SoundSystemState g_sndSystemState;
 extern u8 g_nnSndMasterManager;
 extern u8 g_nnSndVoiceManager;
 extern u8 g_dspsndState;
@@ -29,16 +29,16 @@ void nn_snd_CTR_Dspsnd_Finalize(void *state, s32 flag);
 
 s32 sndSystemShutdown(void)
 {
-    if (DAT_005894e4.running == 0) {
+    if (g_sndSystemState.running == 0) {
         return 0;
     }
-    DAT_005894e4.running = 0;
+    g_sndSystemState.running = 0;
     FUN_001590c0(FUN_0016f3e4, dspsndHandlePendingRequest, FUN_0016f3a8);
     FUN_001bd5f8();
     FUN_0016f374();
     sndMasterFinalize(&g_nnSndMasterManager);
     FUN_00159e18(&g_nnSndVoiceManager);
-    if (DAT_005894e4.dspOwnedElsewhere == 0) {
+    if (g_sndSystemState.dspOwnedElsewhere == 0) {
         nn_snd_CTR_Dspsnd_Finalize(&g_dspsndState, 0);
     }
     return 0;

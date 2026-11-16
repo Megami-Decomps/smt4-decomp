@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void FUN_003ee0c0(void);
+void btlSlotManagerResetStates(void);
 BtlSkillA *btlMainFindEntryByListedId(BtlMainStateA *main, s32 index);
 void btlQueueKeyedScalarReflectAction(s32, BtlUnitA *, u32, s32);
 void FUN_004fc094(s32, BtlUnitA *, s32, u32, s32, u32, s32, s32, u32, u32, s32, s32, s32, s32, s32, s32, s32, s32, s32,
@@ -20,7 +20,7 @@ s32 scrComm_Battle_StartUnitAction(void)
     BtlUnitA *unit = btlUnitGet(g_btlScriptUnit);
 
     btlGetMainState();
-    FUN_003ee0c0();
+    btlSlotManagerResetStates();
     FUN_004fc094(0, unit, 0, target, 0, skill->unk25C, -1, -1, skill->unk258, skill->unk25C, 0, 0, 1, 0, 0, 0, 0, 0,
                  0, 0, 1, 0, 1, 1, 0, 1);
     btlQueueKeyedScalarReflectAction(0x19, unit, target, 0);

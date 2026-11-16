@@ -22,7 +22,7 @@ typedef struct FileReader {
 void FUN_0032ca54(u32 result, ...);
 static __inline nn::Result fileRecordResult(nn::Result result)
 {
-    FUN_0013ebd8(result);
+    processResultSetValue(result);
     return result;
 }
 
@@ -35,9 +35,9 @@ nn::Result FUN_002e0c80(FileReader *reader, u32 offset, void *buffer, u32 size)
     nn::Result result;
 
     u64 position = offset;
-    FUN_0013ebd8(reader->vtbl->seek(reader, position));
+    processResultSetValue(reader->vtbl->seek(reader, position));
     result = reader->vtbl->read(reader, &readSize, buffer, size, true);
-    FUN_0013ebd8(result);
+    processResultSetValue(result);
     u32 failed = result & 0x80000000;
     if ((s32)failed < 0) {
         FUN_0032ca54(result, failed);

@@ -8,7 +8,7 @@ s32 sysPlaySe(s32);
 s32 FUN_00183e58(void);
 s32 slotSetRequest(s32, s32, s32);
 s32 msgWindowReset(void);
-s32 FUN_002bf4f4(s32);
+s32 buttonHelpSetPanelState(s32);
 s32 pickObjStart(PickObjectEndPrefixA *, const char *);
 s32 scrRunOpcodesStub(u32);
 s32 messageMainIsWindowActive(void);
@@ -25,7 +25,7 @@ extern "C" void eventUpdatePickedObjectEndScript(PickObjectEndPrefixA *object)
         return;
 
     case 1:
-        FUN_002bf4f4(0);
+        buttonHelpSetPanelState(0);
         if (scrRunOpcodesStub(*object->script) == 2) {
             slotSetRequest(0, 10, 0xff);
             slotSetRequest(1, 10, 0xff);
@@ -40,7 +40,7 @@ extern "C" void eventUpdatePickedObjectEndScript(PickObjectEndPrefixA *object)
         return;
 
     case 2:
-        if (screenFadeIsBusy() == 0 && FUN_002e19f8() != 0) {
+        if (screenFadeIsBusy() == 0 && buttonHelpStateIsNot3() != 0) {
             object->state = 0x12;
             object->phase = 0;
         }

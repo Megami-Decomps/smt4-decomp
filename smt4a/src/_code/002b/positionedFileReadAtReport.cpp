@@ -8,7 +8,7 @@ extern "C" void sysFatalBreak();
 
 static __inline nn::Result fileRecordResult(nn::Result result)
 {
-    FUN_0013ebd8(result);
+    processResultSetValue(result);
     return result;
 }
 
@@ -27,7 +27,7 @@ extern "C" nn::Result positionedFileReadAtReport(PositionedFileStream *stream, u
 {
     u64 position = offset;
     nn::Result result = stream->vtable->seek(stream, position);
-    FUN_0013ebd8(result);
+    processResultSetValue(result);
     u32 failed = result & 0x80000000;
     if ((s32)failed < 0) {
         FUN_0032ca54(result, failed);
@@ -38,7 +38,7 @@ extern "C" nn::Result positionedFileReadAtReport(PositionedFileStream *stream, u
     result = stream->vtable->transfer(stream, &completed, buffer, size);
     if (completed == 0)
         result = 0xd9004586;
-    FUN_0013ebd8(result);
+    processResultSetValue(result);
     failed = result & 0x80000000;
     if ((s32)failed < 0) {
         FUN_0032ca54(result, failed);

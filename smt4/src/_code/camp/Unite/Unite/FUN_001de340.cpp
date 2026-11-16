@@ -179,7 +179,7 @@ void FUN_001de340(int *param_1)
     if ((char)temp_v32[0x38] != '\0') {
       return;
     }
-    temp_v2 = reinterpret_cast<int>(FUN_002a0d0c());
+    temp_v2 = reinterpret_cast<int>(gameDataGetSortPreferences());
     temp_v3 = param_1[0x100];
     temp_v26 = (short *)(temp_v2 + 0x1c);
     if (((temp_v3 == 5) || (temp_v3 == 6 || temp_v3 == 2)) && ((char)temp_v30[0x14] != '\0')) {
@@ -334,7 +334,7 @@ LAB_001dea48:
             param_1[0x16c] = 2000;
           }
           piVar9 = g_unite;
-          temp_v2 = reinterpret_cast<int>(FUN_002a0d0c());
+          temp_v2 = reinterpret_cast<int>(gameDataGetSortPreferences());
           temp_v17 = 1;
           temp_v13 = 0x100;
           asdMemoryAlloc(0x100,0x100,0,0xa00);
@@ -705,11 +705,11 @@ LAB_001df3cc:
           }
           piVar9 = g_unite;
           if ((char)g_unite[0x108] != '\x01') {
-            temp_v2 = reinterpret_cast<int>(FUN_002a0d0c());
+            temp_v2 = reinterpret_cast<int>(gameDataGetSortPreferences());
             pbVar20 = (unsigned char *)(temp_v2 + 0x11);
           }
           else {
-            temp_v2 = reinterpret_cast<int>(FUN_002a0d0c());
+            temp_v2 = reinterpret_cast<int>(gameDataGetSortPreferences());
             pbVar20 = (unsigned char *)(temp_v2 + 0x12);
           }
           temp_v15 = ~(*pbVar20 >> 7) & 1;

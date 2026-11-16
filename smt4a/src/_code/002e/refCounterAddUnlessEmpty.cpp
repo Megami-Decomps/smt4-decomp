@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern u8 DAT_0064c004; /* the shared empty instance, never counted */
+extern u8 g_rwEmptyStringRep; /* the shared empty instance, never counted */
 
 /* Adds a reference unless `counter` is the shared empty instance. */
 void refCounterAddUnlessEmpty(s32 *counter)
 {
-    if (counter != (s32 *)&DAT_0064c004) {
+    if (counter != (s32 *)&g_rwEmptyStringRep) {
         (*counter)++;
     }
 }

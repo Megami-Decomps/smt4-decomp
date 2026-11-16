@@ -31,7 +31,7 @@ extern const u32 DAT_004032e8[];
 void uniteRebuildFusionCatalog(void)
 {
     UniteWork *work = g_unite;
-    const FusionCatalogOptions *options = &reinterpret_cast<const FusionCatalogState *>(FUN_002a0d0c())->options;
+    const FusionCatalogOptions *options = &reinterpret_cast<const FusionCatalogState *>(gameDataGetSortPreferences())->options;
     memClear(work->catalogIV.demons, sizeof(work->catalogIV.demons));
     rt_memclr(work->catalogIV.races, sizeof(work->catalogIV.races));
     rt_memclr(work->catalogIV.skills, sizeof(work->catalogIV.skills));

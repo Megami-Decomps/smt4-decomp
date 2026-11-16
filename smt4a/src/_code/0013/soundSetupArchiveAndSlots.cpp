@@ -25,7 +25,7 @@ u32 FUN_00154890(u32 value);
 void rt_aeabi_memclr(void *buffer, u32 size);
 
 extern ResourceSharedState g_resourceSharedFlag;
-extern SoundStreamRecord DAT_0061951c[2];
+extern SoundStreamRecord g_bgmRequestChannels[2];
 
 /* Opens the sound archive, creates the sound slots and resets both stream records. */
 void soundSetupArchiveAndSlots(void)
@@ -41,10 +41,10 @@ void soundSetupArchiveAndSlots(void)
         asdSoundSlotBCreate(3, 0x2eb000);
         asdSoundSlotAActivate(0, 0);
         FUN_00154890(0);
-        rt_aeabi_memclr(DAT_0061951c, sizeof(DAT_0061951c));
+        rt_aeabi_memclr(g_bgmRequestChannels, sizeof(g_bgmRequestChannels));
         g_resourceSharedFlag.unk04 = 0;
-        DAT_0061951c[0].state = 0;
-        DAT_0061951c[1].state = 1;
+        g_bgmRequestChannels[0].state = 0;
+        g_bgmRequestChannels[1].state = 1;
     }
 }
 

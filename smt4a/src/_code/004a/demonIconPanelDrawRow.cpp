@@ -11,7 +11,7 @@ typedef char DemonIconPanelOffsets[offsetof(DemonIconPanelView, layout) == 0xc8 
 extern "C" {
 const PanelTextLayoutEntryPrefixA *layoutFindTableEntry(void *, s32);
 void devilDrawIconRelative(void *, s32, s32, s32, u32);
-void FUN_004934ac(void *, s32, s32, s32, u32);
+void uiDrawTableTextureAtRectCorner(void *, s32, s32, s32, u32);
 u32 FUN_002a4b28(u16);
 s32 gameStockContainsEntry(u16);
 
@@ -38,10 +38,10 @@ void demonIconPanelDrawRow(DemonIconPanelView *panel, s32 markStock, u32 demon, 
         devilDrawIconRelative(panel->layout, 0, x, y, opacity);
     if (markStock && gameStockContainsEntry(demon)) {
         if (!alternate) {
-            FUN_004934ac(panel->layout, 0x486, baseX, baseY, opacity);
+            uiDrawTableTextureAtRectCorner(panel->layout, 0x486, baseX, baseY, opacity);
             return;
         }
-        FUN_004934ac(panel->layout, 0x494, baseX, baseY, opacity);
+        uiDrawTableTextureAtRectCorner(panel->layout, 0x494, baseX, baseY, opacity);
     }
 }
 }

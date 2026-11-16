@@ -44,7 +44,7 @@ extern int FUN_0029ac94(void);
 extern unsigned short *FUN_0029acb0(void);
 extern int FUN_0029e9cc(unsigned short);
 extern int FUN_0029ee54(int);
-extern int FUN_0029efa8(int);
+extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(void);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -84,7 +84,7 @@ void FUN_0032bc00(int param_1,int param_2)
   temp_v3 = g_statusDown + 0xdcc;
   temp_v15 = temp_v3;
   temp_v4 = resourceRunOperationIfUnblocked();
-  temp_v3 = FUN_0029efa8(temp_v3);
+  temp_v3 = listCursorGetRowIfUnblocked(temp_v3);
   temp_v1 = 0;
   temp_v5 = FUN_0029ac94();
   if (temp_v5 != 0xd) {

@@ -8,7 +8,7 @@ extern "C" void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(u32 handle);
 
 static __inline nn::Result fileRecordResult(nn::Result result)
 {
-    FUN_002c3510(result);
+    processResultSetValue(result);
     return result;
 }
 
@@ -28,7 +28,7 @@ extern "C" nn::Result positionedFileReadAtReport(PositionedFileStream *stream, u
 {
     u64 position = offset;
     nn::Result result = stream->vtable->seek(stream, position);
-    FUN_002c3510(result);
+    processResultSetValue(result);
     u32 failed = result & 0x80000000;
     if ((s32)failed < 0) {
         FUN_00254824(result, failed);
@@ -39,7 +39,7 @@ extern "C" nn::Result positionedFileReadAtReport(PositionedFileStream *stream, u
     result = stream->vtable->transfer(stream, &completed, buffer, size);
     if (completed == 0)
         result = 0xd9004586;
-    FUN_002c3510(result);
+    processResultSetValue(result);
     failed = result & 0x80000000;
     if ((s32)failed < 0) {
         FUN_00254824(result, failed);

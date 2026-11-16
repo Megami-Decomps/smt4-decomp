@@ -19,8 +19,8 @@ extern "C" {
 void scrScriptProcessDestroy(ScriptProcess *script);
 void asdMemFree(void *block);
 void FUN_002c85b0(s32 mode);
-void FUN_003343f0(s32 mode);
-void FUN_00333f6c(void);
+void gameGlobalsSetMenuOpenFlag(s32 mode);
+void gameGlobalsReleaseReference(void);
 void asdTMTexTableReleaseNode(s32 table, s32 node);
 void campButtonHelpRelease(void);
 void helpTexturesRelease(void);
@@ -42,8 +42,8 @@ void _ZN9Obj55c92011closeScreenEv(CampCommonWork *camp)
         camp->secondBuffer = NULL;
     }
     FUN_002c85b0(0);
-    FUN_003343f0(0);
-    FUN_00333f6c();
+    gameGlobalsSetMenuOpenFlag(0);
+    gameGlobalsReleaseReference();
     if (camp->texturesLoaded) {
         for (s32 i = 0; i < 4; i++) {
             asdTMTexTableReleaseNode(20, i);

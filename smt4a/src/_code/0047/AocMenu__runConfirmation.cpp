@@ -81,7 +81,7 @@ void AocMenu::runConfirmation()
     AocConfirmMenu * menu = reinterpret_cast<AocConfirmMenu *>(this);
     switch (menu->step) {
     case 2:
-        if (FUN_002e19f8() == 0) {
+        if (buttonHelpStateIsNot3() == 0) {
             return;
         }
         closeConfirmation(menu, 4);

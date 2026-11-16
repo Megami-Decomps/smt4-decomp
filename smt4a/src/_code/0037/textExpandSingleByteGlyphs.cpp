@@ -1,7 +1,7 @@
 #include "common.h"
 
 extern "C" {
-extern const u8 DAT_0053d2e8[][2];
+extern const u8 g_singleByteGlyphTable[][2];
 
 // Expand single-byte glyphs and preserve multibyte characters in the game encoding.
 void textExpandSingleByteGlyphs(const u8 *source, s8 *destination, s32 capacity)
@@ -22,8 +22,8 @@ void textExpandSingleByteGlyphs(const u8 *source, s8 *destination, s32 capacity)
             destination[written] = -8;
             destination[written + 1] = 1;
         } else {
-            destination[written] = DAT_0053d2e8[character][0];
-            destination[written + 1] = DAT_0053d2e8[character][1];
+            destination[written] = g_singleByteGlyphTable[character][0];
+            destination[written + 1] = g_singleByteGlyphTable[character][1];
         }
         written += 2;
         if (written >= capacity) {

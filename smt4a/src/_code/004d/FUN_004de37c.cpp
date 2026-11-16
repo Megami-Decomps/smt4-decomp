@@ -83,7 +83,7 @@ extern BtlActionTable g_btlAction;
 extern u32 g_btlUiBlock;
 Table8Row *dataTable8FindRecord(s32 id);
 s32 btlFindSelectionIndexByLookupKey(BtlActingState *battle, s32 index);
-void FUN_003e8bb0(BtlTargetInfo *info, BtlActingState *battle, u64 *mask);
+void btlEntryBuildSummary(BtlTargetInfo *info, BtlActingState *battle, u64 *mask);
 void FUN_004ab80c(u32 ui, u8 *confirmed, u64 *selected, u64 *extra);
 void btlUIClearWorkTables(u32 ui);
 void FUN_004e980c(BtlActingTask *task, BtlMenuState *menu);
@@ -211,7 +211,7 @@ scanTargets:
             menu->targetFlags[0] = 1;
             if (playerHasFlagBit(1) != 0) {
                 BtlTargetInfo info;
-                FUN_003e8bb0(&info, task->battle, menu->choiceMask);
+                btlEntryBuildSummary(&info, task->battle, menu->choiceMask);
                 if (info.kind == 3) {
                     if (info.subtype != 24 && info.subtype != 27 && info.subtype != 1) {
                         Table8Row *row = dataTable8FindRecord(info.record);

@@ -33,7 +33,7 @@ u32 FUN_00399c90(u32 root, const char *name)
             ++slashCount;
             if (slashCount != 1) {
                 rt_aeabi_memclr(prefix, 498);
-                FUN_002e59f8(path, prefix, (i + 1) * 2);
+                memcpySrcFirst(path, prefix, (i + 1) * 2);
                 FUN_001886bc();
                 u32 result = FUN_0042b2c0(prefix);
                 if (nnResultIsFailure(result)) {

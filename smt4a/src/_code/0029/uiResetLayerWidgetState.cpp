@@ -63,7 +63,7 @@ typedef char LayerResetEntrySize[sizeof(LayerResetEntry) == 0x44 ? 1 : -1];
 typedef char LayerResetWidgetSize[sizeof(LayerResetWidget) == 0x2c ? 1 : -1];
 typedef char LayerResetWorkSize[sizeof(LayerResetWork) == 0x1324 ? 1 : -1];
 
-extern "C" LayerResetWork *DAT_00581270;
+extern "C" LayerResetWork *g_modelGroups;
 extern "C" LayerResetGameState g_gameState;
 
 static inline void resetLayerWidget(LayerResetWidget *widget)
@@ -87,7 +87,7 @@ static inline void resetLayerWidget(LayerResetWidget *widget)
 extern "C" void uiResetLayerWidgetState(void)
 {
     g_gameState.state = 0;
-    LayerResetWork *work = DAT_00581270;
+    LayerResetWork *work = g_modelGroups;
     work->state = 0;
     work->first = 0;
     work->second = 0;
@@ -114,7 +114,7 @@ extern "C" void uiResetLayerWidgetState(void)
         entry->unk30 = 0;
     }
     for (s32 index = 0; index < 9; ++index)
-        resetLayerWidget(&DAT_00581270->widgets[index]);
+        resetLayerWidget(&g_modelGroups->widgets[index]);
     for (s32 index = 0; index < 3; ++index)
-        resetLayerWidget(&DAT_00581270->overlays[index]);
+        resetLayerWidget(&g_modelGroups->overlays[index]);
 }

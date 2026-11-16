@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void FUN_00138810(u32 a, u32 b, u32 c, u32 d, u32 e, u32 f, u32 g);
+void gpuWriteTextureCommand(u32 a, u32 b, u32 c, u32 d, u32 e, u32 f, u32 g);
 void dataSubmitSelectedPresetBlock(s32 enable);
 
 /* Turns the texture binding on or off, unless it is already in that state. */
@@ -22,7 +22,7 @@ void renderCtxSelectTexture(RenderCtx *context, AsdTexture *texture)
     if (context->depthStacks.selectedTextureDirty != 0 || context->depthStacks.selectedTexture != texture) {
         context->depthStacks.selectedTexture = texture;
         if (texture != NULL) {
-            FUN_00138810(texture->dimensions.width, texture->dimensions.height, texture->image.hardwareFormat,
+            gpuWriteTextureCommand(texture->dimensions.width, texture->dimensions.height, texture->image.hardwareFormat,
                          texture->image.physicalAddress, texture->unk38, texture->unk3c, texture->unk40);
             context->depthStacks.selectedTextureState = 3;
         }

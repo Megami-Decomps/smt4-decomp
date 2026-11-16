@@ -13,7 +13,7 @@ int FUN_002306f8(...);
 int messageMainSetTargetFlags(...);
 int textEncodeFontSlot(...);
 int scrScriptProcessStartEntry(...);
-int FUN_00299370(...);
+int playerRecalcStatsFromEquipment(...);
 int FUN_002996d8(...);
 int FUN_0029a0cc(...);
 int FUN_0029a0e8(...);
@@ -83,7 +83,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: messageMainSetEnabled. */
 extern int messageMainGetChoiceResult(void);
-/* Supplied declaration required: FUN_00299370. */
+/* Supplied declaration required: playerRecalcStatsFromEquipment. */
 /* Supplied declaration required: FUN_002996d8. */
 extern int FUN_00299fc0(void);
 /* Supplied declaration required: FUN_0029a0cc. */
@@ -481,7 +481,7 @@ joined_r0x003a5580:
       case 8:
         puVar5[2] = temp_v0;
       }
-      FUN_00299370(0);
+      playerRecalcStatsFromEquipment(0);
       FUN_0029a0e8(puVar5);
       FUN_0029a0cc(puVar5);
       soundPlaySeUnpanned(0x100025f);

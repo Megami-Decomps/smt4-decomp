@@ -41,7 +41,7 @@ int scrRunOpcodesStub(...);
 int FUN_0022e774(void);
 int FUN_00267d74(int, int, int, int);
 int scrScriptProcessStartEntry(...);
-int FUN_002a4894(...);
+int listCursorGetRowIfUnblocked(...);
 int statusDownRestartTransition(void);
 int flaggedEntrySetValueA(...);
 int arrayContainsU16(...);
@@ -106,7 +106,7 @@ extern int messageMainIsIdle(void);
 extern int FUN_0026c3a0(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int recordGetModeForId(int);
-/* Supplied declaration required: FUN_002a4894. */
+/* Supplied declaration required: listCursorGetRowIfUnblocked. */
 /* Supplied declaration required: infoWinSetText. */
 extern int messageGetChoiceResult(void);
 /* Supplied declaration required: statusDownRestartTransition. */
@@ -380,7 +380,7 @@ void FUN_0026cbb8(int param_1)
         if (*(int *)(param_1 + 0x437c) == 1) {
           *(unsigned int *)(param_1 + 0x7860) = 0;
           *(unsigned int *)(param_1 + 0x7864) = 0;
-          temp_v9 = FUN_002a4894(temp_v26);
+          temp_v9 = listCursorGetRowIfUnblocked(temp_v26);
           temp_v26 = (unsigned int)*(unsigned short *)(temp_v5 + temp_v9 * 2 + 0x34);
           temp_v14 = 0;
           temp_v9 = 0;
@@ -702,7 +702,7 @@ LAB_0026e1e4:
     temp_v8 = countUnlockedSlots();
     gridNavigationConfigure(temp_v30,temp_v8,temp_v8,1,1,1);
     gridNavigationConfigure(temp_v26,temp_v28 + 1,9,1,1,1);
-    temp_v9 = FUN_002a4894(temp_v26);
+    temp_v9 = listCursorGetRowIfUnblocked(temp_v26);
     skillHelpUpdateAttributeAndTarget(*(unsigned short *)(temp_v5 + temp_v9 * 2 + 0x34));
     temp_v14 = 0;
     temp_v9 = objectApplyIfUnblocked(temp_v30);
@@ -904,12 +904,12 @@ LAB_0026e66c:
         sysPlaySe(temp_v8);
       }
     }
-    temp_v28 = FUN_002a4894(temp_v26);
+    temp_v28 = listCursorGetRowIfUnblocked(temp_v26);
     temp_v23 = 1;
     temp_v7 = temp_v26;
     FUN_003450d4(temp_v26,0,param_1 + 0x43c6,0xffffffff,0xffffffff,0xffffffff,temp_v31,0);
     if ((temp_v7 != 0) || (temp_v7 = temp_v26, FUN_00228b04(temp_v26,0), temp_v7 != 0)) {
-      temp_v6 = FUN_002a4894(temp_v26);
+      temp_v6 = listCursorGetRowIfUnblocked(temp_v26);
       if (temp_v6 != temp_v28) {
         eventQueueAddUniqueIfValid(0x100020d);
       }
@@ -918,13 +918,13 @@ LAB_0026e66c:
         temp_v6 = uiSearchPrimary(temp_v26);
         flaggedEntrySetValueA(temp_v26,temp_v6 - 1);
       }
-      temp_v6 = FUN_002a4894(temp_v26);
+      temp_v6 = listCursorGetRowIfUnblocked(temp_v26);
       temp_v9 = objectApplyIfUnblocked(temp_v26);
       if (temp_v9 - 1 <= temp_v6) {
         screenStartOrClear(*(unsigned int *)(param_1 + 0x43a4),700);
         return;
       }
-      temp_v6 = FUN_002a4894(temp_v26);
+      temp_v6 = listCursorGetRowIfUnblocked(temp_v26);
       skillHelpUpdateAttributeAndTarget(*(unsigned short *)(temp_v5 + temp_v6 * 2 + 0x34));
       return;
     }
@@ -1059,7 +1059,7 @@ LAB_0026d4c4:
         temp_v8 = 10;
       }
       else {
-        temp_v5 = FUN_002a4894(temp_v30);
+        temp_v5 = listCursorGetRowIfUnblocked(temp_v30);
         skillHelpUpdateAttributeAndTarget(*(unsigned short *)(param_1 + temp_v5 * 2 + 0x76a4));
         temp_v8 = 4;
       }
@@ -1083,17 +1083,17 @@ LAB_0026d4c4:
         sysPlaySe(temp_v8);
       }
     }
-    temp_v6 = FUN_002a4894(temp_v30);
+    temp_v6 = listCursorGetRowIfUnblocked(temp_v30);
     temp_v23 = 1;
     temp_v7 = temp_v30;
     FUN_003450d4(temp_v30,0,param_1 + 0x43b6,0xffffffff,0xffffffff,0xffffffff,temp_v31,0);
     if ((temp_v7 != 0) || (temp_v7 = temp_v30, FUN_00228b04(temp_v30,0), temp_v7 != 0)) {
-      temp_v9 = FUN_002a4894(temp_v30);
+      temp_v9 = listCursorGetRowIfUnblocked(temp_v30);
       if (temp_v9 != temp_v6) {
         eventQueueAddUniqueIfValid(0x100020d);
       }
-      FUN_002a4894(temp_v30);
-      temp_v6 = FUN_002a4894(temp_v30);
+      listCursorGetRowIfUnblocked(temp_v30);
+      temp_v6 = listCursorGetRowIfUnblocked(temp_v30);
       skillHelpUpdateAttributeAndTarget(*(unsigned short *)(param_1 + temp_v6 * 2 + 0x76a4));
     }
     else {
@@ -1179,13 +1179,13 @@ LAB_0026d4c4:
     }
     temp_v6 = *(int *)(param_1 + 0x436c);
     if (temp_v6 == 3) {
-      temp_v6 = FUN_002a4894(temp_v26);
+      temp_v6 = listCursorGetRowIfUnblocked(temp_v26);
       skillHelpUpdateAttributeAndTarget(*(unsigned short *)(temp_v5 + temp_v6 * 2 + 0x34));
       return;
     }
     break;
   case 5:
-    temp_v28 = FUN_002a4894();
+    temp_v28 = listCursorGetRowIfUnblocked();
     temp_v23 = param_1 + 0x7c8;
     if (*(int *)(param_1 + 0x437c) == 1) {
       temp_v7 = *puVar27;
@@ -1201,7 +1201,7 @@ LAB_0026d4c4:
               *(unsigned short *)(temp_v9 + 0x76b4) = 0;
               temp_v14 = FUN_003df4a4(*(unsigned short *)(temp_v9 + 0x76a4));
               if (temp_v14 != 0) {
-                temp_v14 = FUN_002a4894(temp_v26);
+                temp_v14 = listCursorGetRowIfUnblocked(temp_v26);
                 temp_v14 = FUN_003df4a4(*(unsigned short *)(temp_v5 + temp_v14 * 2 + 0x34));
                 if (temp_v14 == 0) {
                   *piVar22 = *piVar22 - 1;
@@ -1271,14 +1271,14 @@ LAB_0026db30:
       if ((temp_v6 != 0) && (temp_v6 = param_1 + temp_v28 * 0x8c, *(char *)(temp_v6 + 0x96a) != '\0')) {
         uiSpriteSelectAnim(temp_v6 + 0x8e0,0);
         *(unsigned int *)(param_1 + 0x436c) = 3;
-        temp_v6 = FUN_002a4894(temp_v26);
+        temp_v6 = listCursorGetRowIfUnblocked(temp_v26);
         skillHelpUpdateAttributeAndTarget(*(unsigned short *)(temp_v5 + temp_v6 * 2 + 0x34));
         return;
       }
     }
     temp_v6 = *(int *)(param_1 + 0x436c);
     if (temp_v6 == 3) {
-      temp_v6 = FUN_002a4894(temp_v26);
+      temp_v6 = listCursorGetRowIfUnblocked(temp_v26);
       skillHelpUpdateAttributeAndTarget(*(unsigned short *)(temp_v5 + temp_v6 * 2 + 0x34));
       return;
     }

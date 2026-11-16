@@ -3,7 +3,7 @@
 #include "shard/Dspsnd.h"
 
 extern "C" {
-extern NnSndInitialization DAT_005894e4;
+extern NnSndInitialization g_sndSystemState;
 extern NnSndMasterManager g_nnSndMasterManager;
 extern NnSndVoiceManager g_nnSndVoiceManager;
 extern DspsndState g_dspsndState;
@@ -22,7 +22,7 @@ void FUN_0016f3a8(void);
 /* Initializes the DSP, master, voice and effect managers once and installs their callbacks. */
 s32 dspsndInitializeManagers(void)
 {
-    if (DAT_005894e4.initialized != 0) {
+    if (g_sndSystemState.initialized != 0) {
         return 0x0820ABF9;
     }
     s32 result = FUN_0016f864();
@@ -35,17 +35,17 @@ s32 dspsndInitializeManagers(void)
     }
     s8 mode = reinterpret_cast<const SystemSoundInfo *>(0x1FF81000)->mode;
 
-    DAT_005894e4.hardwareMode = mode;
+    g_sndSystemState.hardwareMode = mode;
     FUN_001a167c(&g_nnSndMasterManager, mode);
     nn_snd_CTR_VoiceManager_Initialize(&g_nnSndVoiceManager);
     FUN_0016f25c(&g_nnSndMasterManager);
     nn_snd_CTR_DspFxManager_Initialize(FUN_001bd5f8());
     FUN_0016e700(FUN_0016f3e4, dspsndHandlePendingRequest, FUN_0016f3a8);
-    DAT_005894e4.unk01 = 0;
-    DAT_005894e4.unk02 = 0;
-    DAT_005894e4.unk03 = 0;
-    DAT_005894e4.ready = 1;
-    DAT_005894e4.initialized = 1;
+    g_sndSystemState.unk01 = 0;
+    g_sndSystemState.unk02 = 0;
+    g_sndSystemState.unk03 = 0;
+    g_sndSystemState.ready = 1;
+    g_sndSystemState.initialized = 1;
     return 0;
 }
 }

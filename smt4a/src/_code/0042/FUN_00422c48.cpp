@@ -57,7 +57,7 @@ void nn_os_CriticalSection_Enter(void *section);
 void nn_os_CriticalSection_Leave(void *section);
 void nn_snd_CTR_InitializeWaveBuffer(StreamWaveBuffer *buffer);
 void FUN_001c76b8(void);
-void FUN_001c7c44(u32 voice, StreamWaveBuffer *buffer);
+void nn_snd_CTR_Voice_AppendWaveBuffer(u32 voice, StreamWaveBuffer *buffer);
 void FUN_001cd5ac(void);
 u32 FUN_00439e0c(u32 samples, u32 flag, u32 chunkFrames);
 
@@ -97,7 +97,7 @@ void FUN_00422c48(void)
             voice->sampleCount += size;
             buffer->size = size;
             buffer->queued = 0;
-            FUN_001c7c44(voice->voice, buffer);
+            nn_snd_CTR_Voice_AppendWaveBuffer(voice->voice, buffer);
             voice->queuedCount++;
             voice->writeIndex++;
             if (voice->writeIndex == voice->bufferCount) {

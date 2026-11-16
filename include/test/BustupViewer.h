@@ -10,7 +10,7 @@ typedef struct BustupViewerWork {
 } BustupViewerWork;
 
 extern "C" {
-u8 FUN_002e19f8(void);
+u8 buttonHelpStateIsNot3(void);
 }
 
 #endif

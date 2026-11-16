@@ -144,7 +144,7 @@ extern int messageGetChoiceResult(void);
 extern int popupIsActive(void);
 /* Supplied declaration required: gameDataAddCappedPoints. */
 /* Supplied declaration required: FUN_002e5c2c. */
-extern int FUN_002e5db4(void);
+extern int saveSlotSelectedIsId175(void);
 extern int __aeabi_uldivmod(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: blockResetAxis. */
 /* Supplied declaration required: entryTableSetHalfwordsById. */
@@ -552,7 +552,7 @@ LAB_00299e1c:
             if (temp_v8 == 6) {
               temp_v11 = gameFlagIsSet(0x4c9,temp_v11,*(int *)(temp_v4 + 0x5c) * 0x2aaaaaab);
               if (temp_v11 != 0) {
-                temp_v11 = FUN_002e5db4();
+                temp_v11 = saveSlotSelectedIsId175();
                 if (temp_v11 != 0) {
                   temp_v17[0] = 1;
                   temp_v17[1] = 0;

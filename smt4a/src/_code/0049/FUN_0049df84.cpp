@@ -70,7 +70,7 @@ void gridNavigationConfigure(void *flags, u32 height, s32, s32, s32, s32);
 void FUN_00212724(void);
 void FUN_00228b04(void *listbox, s32 mode);
 u32 resourceRunOperationIfUnblocked(void *listbox);
-s32 FUN_002a4894(void *listbox);
+s32 listCursorGetRowIfUnblocked(void *listbox);
 void flagsSetOrClearBit(void *flags, s32 bit);
 s32 FUN_003450d4(void *listbox, u32 handle, void *position, s32 width, s32 x, s32 y, u8 *result, s32, s32);
 void FUN_003fd690(u16 id, s32 mode);
@@ -89,7 +89,7 @@ void FUN_0049df84(DirectoryScreenWork *work)
     uiSpriteAdvanceAnimation(work->panelB, 1.0f);
     FUN_00228b04(work->listbox, 1);
     work->scroll = resourceRunOperationIfUnblocked(work->listbox);
-    work->cursor = FUN_002a4894(work->listbox);
+    work->cursor = listCursorGetRowIfUnblocked(work->listbox);
     work->index = work->order[work->cursor + work->scroll];
     work->definition = &work->definitions[work->index];
     result = 0;

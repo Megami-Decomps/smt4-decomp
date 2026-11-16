@@ -25,7 +25,7 @@ void efctSetSpeed(f32 speed);
 s32 renderCtxPackPassFlags(u32 kind, u32 arg);
 u32 asdGxPresetsGetByKind(u32 kind);
 u32 asdGxPresetsGetHeightByKind(u32 kind);
-void FUN_002c0944(u32 a, u32 b, u32 c, u32 d, f32 e, f32 f, f32 g, f32 h, f32 i);
+void gxSubmitDrawZeroExtraParams(u32 a, u32 b, u32 c, u32 d, f32 e, f32 f, f32 g, f32 h, f32 i);
 f32 vec2GetSpeed(const void *object);
 void FUN_0038368c(TitleOverlay *overlay);
 void renderCtxResetColorScale(RenderCtx *ctx);
@@ -48,7 +48,7 @@ void FUN_003844a0(TitleOverlay *overlay)
         renderCtxSelectTexture(g_titleScene, 0);
         f32 preset = (f32)asdGxPresetsGetByKind(*(u32 *)((u8 *)g_titleScene + 0x528));
         f32 factor = (f32)asdGxPresetsGetHeightByKind(*(u32 *)((u8 *)g_titleScene + 0x528));
-        FUN_002c0944(alpha, alpha, alpha, alpha, 0.0f, 0.0f, factor, preset, 0.0f);
+        gxSubmitDrawZeroExtraParams(alpha, alpha, alpha, alpha, 0.0f, 0.0f, factor, preset, 0.0f);
         renderStackPop(&g_titleScene->stackA);
     }
     FUN_0038368c(overlay);

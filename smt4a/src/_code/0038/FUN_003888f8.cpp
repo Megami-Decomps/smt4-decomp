@@ -9,7 +9,7 @@ ShopSelectionResult *shopGetResult();
 s32 scrGetCommandFrame();
 void FUN_003c1060();
 s32 selector16038Pick(ShopSelectionResult *shop);
-void FUN_0038892c(void *selection, s32 result);
+void questCenterShowDisplayMessage(void *selection, s32 result);
 void *shopResultGetSelection(ShopSelectionResult *shop);
 }
 
@@ -20,5 +20,5 @@ extern "C" void FUN_003888f8()
     if (scrGetCommandFrame() == 0) {
         FUN_003c1060();
     }
-    FUN_0038892c(selection, selector16038Pick(shopGetResult()));
+    questCenterShowDisplayMessage(selection, selector16038Pick(shopGetResult()));
 }

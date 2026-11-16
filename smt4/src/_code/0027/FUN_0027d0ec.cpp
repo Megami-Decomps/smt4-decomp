@@ -17,7 +17,7 @@ struct GameStateView {
 extern GameStateView g_gameState;
 
 
-int FUN_001b49c0(unsigned int, unsigned int);
+int mapAmbientSoundActorsSpawn(unsigned int, unsigned int);
 int bgmReleaseStopped(void);
 int slotFindByPair(int, unsigned int);
 int soundActorQueueStartPending(void);
@@ -37,17 +37,17 @@ extern int g_mapMain; /* 0x447e28 */
 
 
 
-/* Supplied declaration required: FUN_001b49c0. */
+/* Supplied declaration required: mapAmbientSoundActorsSpawn. */
 extern int FUN_001fb4d8(void);
 extern int gameMapBlockGetValue(void);
 /* Supplied declaration required: bgmReleaseStopped. */
 /* Supplied declaration required: slotFindByPair. */
 /* Supplied declaration required: soundActorQueueStartPending. */
-extern int FUN_00285574(void);
+extern int mapGetDepartureIndex(void);
 /* Supplied declaration required: FUN_00287328. */
 /* Supplied declaration required: bgmGetStateById. */
 extern int table1bOr1cGetRecordValue(void);
-extern int FUN_002903f0(void);
+extern int rosterGetLeaderId(void);
 /* Supplied declaration required: gameFlagIsSet. */
 extern int dataTable2eSub3FindByKeyPair(unsigned int, unsigned int);
 
@@ -80,7 +80,7 @@ void FUN_0027d0ec(void)
     }
   }
   else {
-    FUN_001b49c0(*(unsigned int *)(temp_v2 + 0x2c),*(unsigned int *)(temp_v2 + 0x30));
+    mapAmbientSoundActorsSpawn(*(unsigned int *)(temp_v2 + 0x2c),*(unsigned int *)(temp_v2 + 0x30));
   }
   if (*(int *)(temp_v2 + 0x2c) != 0x18) {
     temp_v0 = gameMapBlockGetValue();
@@ -100,7 +100,7 @@ void FUN_0027d0ec(void)
     }
   }
   else {
-    temp_v0 = FUN_00285574();
+    temp_v0 = mapGetDepartureIndex();
     if ((temp_v0 == 1) && (temp_v0 = gameFlagIsSet(0x2c), temp_v0 == 0)) {
       g_gameState.f0049f944 = 0x1000086;
       temp_v2 = bgmGetStateById();
@@ -128,14 +128,14 @@ void FUN_0027d0ec(void)
   }
   if (*(int *)(temp_v2 + 0x2c) != 0x13) {
     if (*(int *)(temp_v2 + 0x2c) == 0x18) {
-      temp_v0 = FUN_00285574();
+      temp_v0 = mapGetDepartureIndex();
       if (temp_v0 == 5) goto LAB_0027d2cc;
       goto LAB_0027d2f8;
     }
 LAB_0027d324:
     if (((*(int *)(temp_v2 + 0x40) != 1 && *(int *)(temp_v2 + 0x40) != 2) &&
         (temp_v2 = *(int *)(temp_v2 + 0x2c), (temp_v2 != 0x29 && temp_v2 != 0x2a) && temp_v2 != 0x2b)) &&
-       ((temp_v2 = FUN_002903f0(), temp_v2 != 0 && temp_v2 != 0x15f &&
+       ((temp_v2 = rosterGetLeaderId(), temp_v2 != 0 && temp_v2 != 0x15f &&
         ((temp_v2 != 0x160 && temp_v2 != 0x161 && (temp_v2 != 0x164 && temp_v2 != 0x165)))))) {
       temp_v4 = temp_v2 == 0x166 || temp_v2 == 0x167;
       if (temp_v2 != 0x166 && temp_v2 != 0x167) {

@@ -14,7 +14,7 @@ void nn_math_ARMv6_MTX34CopyAsm(MTX34 *dest, const MTX34 *source);
 void eplSlotApplyParameters(s32 slot, const MTX34 *matrix);
 extern LmapSceneA *g_lmapScene;
 extern GameStateA g_gameState;
-extern f32 DAT_00536d14[]; /* sine/cosine table: per entry base sine, base cosine, sine slope, cosine slope */
+extern f32 g_sinCosTable[]; /* sine/cosine table: per entry base sine, base cosine, sine slope, cosine slope */
 
 enum {
     SIN_COS_TABLE_SIZE = 256,
@@ -32,7 +32,7 @@ static void sinCosFromTable(f32 radians, f32 *sine, f32 *cosine)
     }
     u32 whole = (u32)magnitude;
     f32 fraction = magnitude - (f32)(whole & 0xFFFF);
-    const f32 *entry = &DAT_00536d14[(whole & 0xFF) * 4];
+    const f32 *entry = &g_sinCosTable[(whole & 0xFF) * 4];
 
     *sine = entry[0] + fraction * entry[2];
     *cosine = entry[1] + fraction * entry[3];

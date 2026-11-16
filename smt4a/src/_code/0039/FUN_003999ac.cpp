@@ -6,8 +6,8 @@ extern "C" {
 s32 asdGxGetPresetIndex(void);
 void cursorResetFromParam(void);
 void asdModelCommandBlockRelease(void);
-extern u32 *DAT_005b3fe4;
-extern u32 DAT_005b3fe8;
+extern u32 *g_modelCommandBuffer;
+extern u32 g_modelCommandWordCount;
 
 void FUN_003999ac(u32 extent)
 {
@@ -42,10 +42,10 @@ void FUN_003999ac(u32 extent)
         }
         command |= bottom;
     }
-    u32 *buffer = DAT_005b3fe4;
-    DAT_005b3fe4[DAT_005b3fe8] = command;
-    buffer[DAT_005b3fe8 + 1] = 0xF0067;
-    DAT_005b3fe8 += 2;
+    u32 *buffer = g_modelCommandBuffer;
+    g_modelCommandBuffer[g_modelCommandWordCount] = command;
+    buffer[g_modelCommandWordCount + 1] = 0xF0067;
+    g_modelCommandWordCount += 2;
     asdModelCommandBlockRelease();
 }
 }

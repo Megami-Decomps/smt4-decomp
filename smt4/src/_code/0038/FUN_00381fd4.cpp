@@ -9,7 +9,7 @@ extern "C" {
 extern const u8 DAT_00405878[23];
 ScriptRunState *scrScriptProcessCreate(void *buffer, void *arguments);
 void scriptProcessSetMode(ScriptRunState *process, s32 mode);
-void FUN_002a03d8(s32 index, s32 mode);
+void titleSetSlotValueState2(s32 index, s32 mode);
 
 void FUN_00381fd4(SpriteAnchorGroupWork *work)
 {
@@ -41,9 +41,9 @@ void FUN_00381fd4(SpriteAnchorGroupWork *work)
         work->frame = 0;
         if (work->mode != 1 && work->mode != 2) {
             if (FUN_002c2a04(0) == 3)
-                FUN_002a03d8(0, 10);
+                titleSetSlotValueState2(0, 10);
             if (FUN_002c2a04(1) == 3)
-                FUN_002a03d8(1, 10);
+                titleSetSlotValueState2(1, 10);
         }
     }
 }

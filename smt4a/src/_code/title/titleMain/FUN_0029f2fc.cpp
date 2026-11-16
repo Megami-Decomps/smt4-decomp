@@ -52,14 +52,14 @@ int buttonHelpSetText(...);
 int asdTMTexLoadMainHeap(int, int);
 int slotSetRequest(...);
 int FUN_0022258c(...);
-int FUN_0022677c(...);
+int titleRestartSlotState3(...);
 int campCommonBgAcquire(void);
 int campButtonHelpAcquire(void);
 int mobiclipProcessCreate(...);
 int texEntrySpritesLoad(void);
 int mobiclipProcessSetFlag78(...);
 int soundChannelStopAll(...);
-int FUN_003d54f8(...);
+int titleSetSlotValueState2(...);
 int loadSlotEnsureLoaded(int);
 int VectorSignedToFloat(...);
 
@@ -108,7 +108,7 @@ extern int slotIsReady(unsigned int);
 extern int configIsClosed(void);
 /* Supplied declaration required: stateModeDispatch. */
 /* Supplied declaration required: FUN_0022258c. */
-/* Supplied declaration required: FUN_0022677c. */
+/* Supplied declaration required: titleRestartSlotState3. */
 /* Supplied declaration required: configDestroy. */
 extern int s4LoadIsActive(void);
 extern int screenFadeIsBusy(void);
@@ -147,7 +147,7 @@ extern int saveLoadUIHasResult(void);
 /* Supplied declaration required: FUN_003ca7d8. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: soundChannelStopAll. */
-/* Supplied declaration required: FUN_003d54f8. */
+/* Supplied declaration required: titleSetSlotValueState2. */
 /* Supplied declaration required: loadSlotEnsureLoaded. */
 /* Supplied declaration required: aocActivateFileGroupFlags. */
 /* Supplied declaration required: gameFlagsSetFlagsFromTaggedGroupEntries. */
@@ -195,11 +195,11 @@ unsigned int FUN_0029f2fc(void)
     texEntrySpritesLoad();
     temp_v5 = (int)pairedAvailabilityGetState(0);
     if (temp_v5 != 3) {
-      FUN_0022677c(0,0xff);
+      titleRestartSlotState3(0,0xff);
     }
     temp_v5 = (int)pairedAvailabilityGetState(1);
     if (temp_v5 != 3) {
-      FUN_0022677c(1,0xff);
+      titleRestartSlotState3(1,0xff);
     }
     FUN_0022258c(1);
     puVar4[0x1e] = 4;
@@ -248,8 +248,8 @@ unsigned int FUN_0029f2fc(void)
           }
         }
       }
-      FUN_0022677c(0,0xff);
-      FUN_0022677c(1,0xff);
+      titleRestartSlotState3(0,0xff);
+      titleRestartSlotState3(1,0xff);
       puVar4[0x1f] = 0;
       puVar4[0x1e] = 4;
       puVar4[0x20] = 0;
@@ -261,9 +261,9 @@ LAB_0029f580:
       temp_v5 = menuAreModeTexturesLoaded(puVar4);
       if (temp_v5 == 0) break;
       *(unsigned char *)(puVar4 + 0x18) = 1;
-      FUN_0022677c(0,0xff);
-      FUN_0022677c(1,0xff);
-      FUN_003d54f8(0,0xf);
+      titleRestartSlotState3(0,0xff);
+      titleRestartSlotState3(1,0xff);
+      titleSetSlotValueState2(0,0xf);
       puVar4[0x1f] = 1;
     case 1:
       temp_v5 = slotIsReady(0);
@@ -366,8 +366,8 @@ LAB_0029f9fc:
           }
         }
       }
-      FUN_0022677c(0,0xff);
-      FUN_0022677c(1,0xff);
+      titleRestartSlotState3(0,0xff);
+      titleRestartSlotState3(1,0xff);
       temp_v6 = 5;
     }
     else {
@@ -377,7 +377,7 @@ LAB_0029f848:
         temp_v5 = menuAreModeTexturesLoaded(puVar4);
         if (temp_v5 == 0) goto LAB_002a0858;
         *(unsigned char *)(puVar4 + 0x18) = 1;
-        FUN_003d54f8(0,0xf);
+        titleSetSlotValueState2(0,0xf);
         puVar4[0x1f] = 1;
       case 1:
         temp_v5 = slotIsReady(0);
@@ -463,8 +463,8 @@ LAB_0029f848:
           }
         }
       }
-      FUN_0022677c(0,0xff);
-      FUN_0022677c(1,0xff);
+      titleRestartSlotState3(0,0xff);
+      titleRestartSlotState3(1,0xff);
       mobiclipProcessSetFlag78(1);
     }
 LAB_0029fb00:
@@ -624,9 +624,9 @@ LAB_0029fb00:
     *(unsigned char *)((int)DAT_00589170 + 99) = 0;
     temp_v5 = (int)pairedAvailabilityGetState(0);
     if ((temp_v5 != 2) && (temp_v5 = (int)pairedAvailabilityGetState(0), temp_v5 != 0)) {
-      FUN_003d54f8(0,10);
+      titleSetSlotValueState2(0,10);
     }
-    FUN_003d54f8(1,10);
+    titleSetSlotValueState2(1,10);
     puVar4[0x21] = 0x690;
     *(unsigned char *)((int)puVar4 + 0x91) = 0;
     puVar4[0x1e] = 0xb;

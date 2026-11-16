@@ -24,7 +24,7 @@ struct MessageSystem {
 
 extern "C" {
 extern MessageSystem g_messageMain;
-extern MessageWindowWork *DAT_005e2010[12];
+extern MessageWindowWork *g_messageWindows[12];
 
 void asdTMTexTableLoadTmx(s32 table, s32 arg);
 void asdTMTexTableLoadSprites(s32 table);
@@ -53,13 +53,13 @@ void FUN_00137144(void)
     g_messageMain.second = FUN_00145280();
     g_messageMain.third = FUN_00145280();
     for (s32 i = 0; i < 12; i++)
-        DAT_005e2010[i] = FUN_00145280();
+        g_messageWindows[i] = FUN_00145280();
     g_messageMain.main->layer = 1;
     g_messageMain.second->layer = 6;
     g_messageMain.third->layer = 12;
-    FUN_001527d8(g_messageMain.third->handle, 0xFF);
+    uiObjectSetColorRgb(g_messageMain.third->handle, 0xFF);
     for (s32 i = 0; i < 12; i++)
-        DAT_005e2010[i]->layer = 13;
+        g_messageWindows[i]->layer = 13;
     infoWindowInitialize();
     comWinInitialize();
     FUN_001409e4();
@@ -69,12 +69,12 @@ void FUN_00137144(void)
     g_messageMain.second->hidden = 0;
     g_messageMain.third->hidden = 0;
     for (s32 i = 0; i < 12; i++)
-        DAT_005e2010[i]->hidden = 0;
+        g_messageWindows[i]->hidden = 0;
     objFlagsSetBits(main->handle, 0x100);
     objFlagsSetBits(g_messageMain.second->handle, 0x200);
     objFlagsSetBits(g_messageMain.third->handle, 0x100);
     for (s32 i = 0; i < 12; i++)
-        objFlagsSetBits(DAT_005e2010[i]->handle, 0x100);
+        objFlagsSetBits(g_messageWindows[i]->handle, 0x100);
     FUN_00144efc(FUN_001456fc);
     FUN_001445a0(FUN_00145534);
     asdTextSetDefaultValue(msgIsSkipInputActive);

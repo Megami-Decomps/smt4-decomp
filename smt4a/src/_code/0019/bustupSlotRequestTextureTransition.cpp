@@ -1,0 +1,29 @@
+#include "common.h"
+#include "shard/JobWork.h"
+
+struct TextureFrameTable;
+struct TextureFrame {
+    u16 unk00;
+    u16 textureId; // 0x02
+};
+struct TextureTransitionWork {
+    u32 job;
+    TextureFrameTable *frames; // 0x04
+};
+
+extern "C" {
+TextureFrame *dataTable19FindAddonWord(TextureFrameTable *, s32);
+void uiSpriteReplaceTextureEntry(TextureTransitionWork *, u32, s32);
+
+// Resolve a frame's texture and forward the transition request to the work object.
+void bustupSlotRequestTextureTransition(u32 job, s32 frame, s32 enabled, s32 available, s32 transition)
+{
+    TextureTransitionWork *work = (TextureTransitionWork *)jobGetWork(job);
+    if (frame <= 0)
+        frame = 1;
+    u32 texture = 0;
+    if (enabled > 0 && available > 0)
+        texture = dataTable19FindAddonWord(work->frames, frame)->textureId;
+    uiSpriteReplaceTextureEntry(work, texture, transition);
+}
+}

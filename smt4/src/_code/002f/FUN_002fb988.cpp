@@ -27,7 +27,7 @@ int FUN_002562e4(int, int);
 int partyApplyNonlethalAilmentDamage(int, int);
 int FUN_0026413c(void);
 int FUN_0027f48c(int, int);
-int FUN_0027f958(float *, unsigned int [12], int);
+int padGetNormalizedAnalogStick(float *, unsigned int [12], int);
 int __hardfp_atan2f(void);
 int FUN_00282390(void);
 int mathRemPio2f(void);
@@ -68,7 +68,7 @@ extern unsigned int FUN_00256540(void);
 extern int unitGroupHasFlag(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0026413c. */
 /* Supplied declaration required: FUN_0027f48c. */
-/* Supplied declaration required: FUN_0027f958. */
+/* Supplied declaration required: padGetNormalizedAnalogStick. */
 /* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: mathRemPio2f. */
@@ -137,7 +137,7 @@ void FUN_002fb988(int param_1)
     }
     temp_v7 = *(float *)(g_lmapScene + 0x1c);
     temp_v9 = romwright_piece_4_4(*(unsigned int *)(g_lmapScene + 0x20),*(unsigned int *)(g_lmapScene + 0x24));
-    FUN_0027f958(&temp_v15,temp_v16,0);
+    padGetNormalizedAnalogStick(&temp_v15,temp_v16,0);
     if (((((unsigned int)temp_v15 < 0xbf000000) && ((int)temp_v15 < 0x3f000000)) &&
         (temp_v16[0] < 0xbf000000)) && ((int)temp_v16[0] < 0x3f000000)) {
       temp_v5 = 1;

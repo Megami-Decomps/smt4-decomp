@@ -7,7 +7,7 @@ int CONCAT44(double, double);
 int FUN_002aa100(...);
 int renderCtxBindTextureMode(...);
 int sentinelLookupGetValue(void);
-int FUN_002ae424(...);
+int charCodeIsPrivateUseGlyph(...);
 int renderCtxCalculateStereoParallax(unsigned int);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
@@ -66,7 +66,7 @@ extern unsigned int FUN_00145e44(unsigned short);
 /* Supplied declaration required: FUN_002aa100. */
 /* Supplied declaration required: renderCtxBindTextureMode. */
 /* Supplied declaration required: sentinelLookupGetValue. */
-/* Supplied declaration required: FUN_002ae424. */
+/* Supplied declaration required: charCodeIsPrivateUseGlyph. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 
 
@@ -205,7 +205,7 @@ void FUN_002b080c(int *param_1, int arg1, int arg2)
 LAB_002b0a30:
       temp_v32 = 1;
       temp_v6 = (unsigned int)*(unsigned short *)(*param_1 + temp_v9 * 0x20);
-      temp_v5 = FUN_002ae424(temp_v6);
+      temp_v5 = charCodeIsPrivateUseGlyph(temp_v6);
       temp_v17 = (float)(temp_v21 >> 0x20);
       temp_v16 = (float)temp_v20;
       if (temp_v5 != 0) {
@@ -299,7 +299,7 @@ LAB_002b0a30:
               temp_v16 = temp_v17;
               do {
                 temp_v1 = *(short *)(*param_1 + (temp_v9 + temp_v5) * 0x20);
-                temp_v8 = FUN_002ae424(temp_v1);
+                temp_v8 = charCodeIsPrivateUseGlyph(temp_v1);
                 if (temp_v8 != 0) {
                   if (temp_v1 == -0x7e9) goto LAB_002b0dac;
                 }
@@ -403,7 +403,7 @@ LAB_002b0dac:
       temp_v5 = temp_v5 + 1;
       temp_v10 = temp_v9 + temp_v5;
       temp_v1 = *(short *)(*param_1 + temp_v10 * 0x20);
-      temp_v8 = FUN_002ae424(temp_v1);
+      temp_v8 = charCodeIsPrivateUseGlyph(temp_v1);
       if (temp_v8 != 0) break;
       temp_v18 = (float)VectorSignedToFloat((int)*(char *)(temp_v10 * 0x20 + *param_1 + 10),
                                           (unsigned char)(temp_v13 >> 0x16) & 3);

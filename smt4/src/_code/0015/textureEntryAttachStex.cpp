@@ -2,7 +2,7 @@
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 extern "C" {
-extern const char DAT_00409268[]; // STEX signature
+extern const char g_stexSignature[]; // STEX signature
 StexHeader *asdTMSprDecompress(StexHeader *data, u32 mode, u32 alignment);
 s32 rt_memcmp(const void *first, const void *second, u32 bytes);
 void asdMemFree(void *memory);
@@ -27,7 +27,7 @@ static __inline void textureEntryAttachStex(StexHeader *data, u32 size, TextureH
         }
         data = asdTMSprDecompress(data, flags, 128);
     }
-    if (rt_memcmp(data, DAT_00409268, 4) != 0) {
+    if (rt_memcmp(data, g_stexSignature, 4) != 0) {
         asdMemFree(data);
         return;
     }

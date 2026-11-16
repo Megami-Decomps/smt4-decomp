@@ -54,12 +54,12 @@ void saveSlotDrawSummary(const SaveSlotTextObjects *texts, const SaveSlotDisplay
         }
     }
     const MessageDrawPosition *position = asdTMTexTableEntryAt(0x2E, 0x75);
-    FUN_001527d8((u32)texts->name, nameColor);
+    uiObjectSetColorRgb((u32)texts->name, nameColor);
     FUN_0025cc78(texts->name, position->x + x, position->y + y, 0x66, 1.0f);
     if ((record->flags & 2) != 0) {
         position = asdTMTexTableEntryAt(0x2E, 0x76);
         u32 color = record->style == 0 ? 0x006E0000 : 0x00F33700;
-        FUN_001527d8((u32)texts->optional, color);
+        uiObjectSetColorRgb((u32)texts->optional, color);
         FUN_0025cc78(texts->optional, position->x + x, position->y + y, 0x66, 1.0f);
     }
     texDrawTableEntryAtStoredOrigin(2, 0x2E, 0x5A, x, y, 0x66);

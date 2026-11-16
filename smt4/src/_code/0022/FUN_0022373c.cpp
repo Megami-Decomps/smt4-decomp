@@ -11,7 +11,7 @@ MapSpawnGrid *gameGetMapBlock(void);
 void FUN_0022373c(void)
 {
     MapSpawnGrid *grid = gameGetMapBlock();
-    s32 spawn = FUN_00285574();
+    s32 spawn = mapGetDepartureIndex();
     f32 heading = 0.0f;
     LmapScene *scene = g_lmapScene;
     if (spawn != 0) {

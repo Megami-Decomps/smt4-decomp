@@ -59,7 +59,7 @@ typedef struct {
     unsigned int sp130; /* 0x130: local_130 */
 } param_1_stack;
 
-extern unsigned int DAT_00536d14; /* 0x536d14 */
+extern unsigned int g_sinCosTable; /* 0x536d14 */
 extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
@@ -217,7 +217,7 @@ void FUN_002fc0c8(unsigned int param_1)
   temp_v3 = 0;
   temp_v1 = (**(romwright_code **)(*DAT_0057aa08 + 8))();
   if (0 < temp_v1) {
-    unaff_r10 = &DAT_00536d14;
+    unaff_r10 = &g_sinCosTable;
   }
   temp_v22 = 40.743664f;
   temp_v21 = 65536.0f;
@@ -351,13 +351,13 @@ void FUN_002fc0c8(unsigned int param_1)
             temp_v18 = (float)VectorUnsignedToFloat(temp_v9 & 0xffff,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v19 = (float)VectorUnsignedToFloat(temp_v7 & 0xffff,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v7 = temp_v7 & 0xff;
-            temp_v12 = (float)(&DAT_00536d14)[temp_v10 * 4] +
+            temp_v12 = (float)(&g_sinCosTable)[temp_v10 * 4] +
                      (temp_v14 - temp_v16) * (float)(&DAT_00536d1c)[temp_v10 * 4];
-            temp_v8 = (float)(&DAT_00536d14)[temp_v11 * 4] +
+            temp_v8 = (float)(&g_sinCosTable)[temp_v11 * 4] +
                      (temp_v6 - temp_v18) * (float)(&DAT_00536d1c)[temp_v11 * 4];
             temp_v16 = (float)(&DAT_00536d18)[temp_v10 * 4] +
                      (temp_v14 - temp_v16) * (float)(&DAT_00536d20)[temp_v10 * 4];
-            temp_v17 = (float)(&DAT_00536d14)[temp_v7 * 4] +
+            temp_v17 = (float)(&g_sinCosTable)[temp_v7 * 4] +
                      (temp_v15 - temp_v19) * (float)(&DAT_00536d1c)[temp_v7 * 4];
             temp_v14 = (float)(&DAT_00536d18)[temp_v7 * 4] +
                      (temp_v15 - temp_v19) * (float)(&DAT_00536d20)[temp_v7 * 4];
@@ -453,11 +453,11 @@ void FUN_002fc0c8(unsigned int param_1)
             temp_v19 = (float)VectorUnsignedToFloat(temp_v13 & 0xffff,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v10 = temp_v10 & 0xff;
             temp_v20 = CONCAT44(temp_v14,(&DAT_00536d1c)[temp_v10 * 4]);
-            temp_v17 = (float)(&DAT_00536d14)[temp_v11 * 4] +
+            temp_v17 = (float)(&g_sinCosTable)[temp_v11 * 4] +
                      (temp_v14 - temp_v16) * (float)(&DAT_00536d1c)[temp_v11 * 4];
-            temp_v8 = (float)(&DAT_00536d14)[temp_v10 * 4] +
+            temp_v8 = (float)(&g_sinCosTable)[temp_v10 * 4] +
                      (temp_v6 - temp_v18) * (float)(&DAT_00536d1c)[temp_v10 * 4];
-            temp_v12 = (float)(&DAT_00536d14)[temp_v9 * 4] +
+            temp_v12 = (float)(&g_sinCosTable)[temp_v9 * 4] +
                      (temp_v15 - temp_v19) * (float)(&DAT_00536d1c)[temp_v9 * 4];
             temp_v16 = (float)(&DAT_00536d18)[temp_v11 * 4] +
                      (temp_v14 - temp_v16) * (float)(&DAT_00536d20)[temp_v11 * 4];
@@ -556,13 +556,13 @@ void FUN_002fc0c8(unsigned int param_1)
             temp_v18 = (float)VectorUnsignedToFloat(temp_v11 & 0xffff,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v11 = temp_v11 & 0xff;
             temp_v19 = (float)VectorUnsignedToFloat(temp_v9 & 0xffff,(unsigned char)(in_fpscr >> 0x16) & 3);
-            temp_v12 = (float)(&DAT_00536d14)[temp_v10 * 4] +
+            temp_v12 = (float)(&g_sinCosTable)[temp_v10 * 4] +
                      (temp_v14 - temp_v16) * (float)(&DAT_00536d1c)[temp_v10 * 4];
-            temp_v8 = (float)(&DAT_00536d14)[temp_v11 * 4] +
+            temp_v8 = (float)(&g_sinCosTable)[temp_v11 * 4] +
                      (temp_v6 - temp_v18) * (float)(&DAT_00536d1c)[temp_v11 * 4];
             temp_v16 = (float)(&DAT_00536d18)[temp_v10 * 4] +
                      (temp_v14 - temp_v16) * (float)(&DAT_00536d20)[temp_v10 * 4];
-            temp_v17 = (float)(&DAT_00536d14)[temp_v7 * 4] +
+            temp_v17 = (float)(&g_sinCosTable)[temp_v7 * 4] +
                      (temp_v15 - temp_v19) * (float)(&DAT_00536d1c)[temp_v7 * 4];
             temp_v14 = (float)(&DAT_00536d18)[temp_v7 * 4] +
                      (temp_v15 - temp_v19) * (float)(&DAT_00536d20)[temp_v7 * 4];

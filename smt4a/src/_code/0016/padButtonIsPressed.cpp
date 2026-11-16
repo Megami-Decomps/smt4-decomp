@@ -7,15 +7,15 @@ struct PadInputState {
 };
 
 extern "C" {
-extern PadInputState DAT_005b4000;
-extern s32 DAT_00640000[31]; /* frames each button has been held */
+extern PadInputState g_padInputState;
+extern s32 g_padHeldFrames[31]; /* frames each button has been held */
 
 /* Returns whether the pad input is locked by either lock flag. */
 static __inline bool padIsLocked(void)
 {
-    if (DAT_005b4000.flags & 1)
+    if (g_padInputState.flags & 1)
         return true;
-    if (DAT_005b4000.flags & 2)
+    if (g_padInputState.flags & 2)
         return true;
     return false;
 }
@@ -30,7 +30,7 @@ u32 padButtonIsPressed(u32 button)
     if (padIsLocked()) {
         frames = 0;
     } else {
-        frames = DAT_00640000[button];
+        frames = g_padHeldFrames[button];
     }
     if (frames == 1) {
         return 1;

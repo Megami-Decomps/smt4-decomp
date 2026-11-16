@@ -14,7 +14,7 @@
 #define ASD_GX_CMDLIST_ACTIVE 1
 #define ASD_GX_CMDLIST_SUSPENDED 2
 
-/* Four state words saved when a list is begun (what FUN_001376d8 reads back) and a heap copy of the
+/* Four state words saved when a list is begun (what asdGxCommandBufferPadAndGetRanges reads back) and a heap copy of the
  * state they describe. */
 typedef struct AsdGxStateEntry {
     /* 0x00 */ u32 values[4];

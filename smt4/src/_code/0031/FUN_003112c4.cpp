@@ -3,11 +3,11 @@
 extern "C" {
 
 int scrSetResult(void);
-int FUN_002903f0(void);
+int rosterGetLeaderId(void);
 
 u32 FUN_003112c4(void)
 {
-    FUN_002903f0();
+    rosterGetLeaderId();
     scrSetResult();
     return 1;
 }

@@ -9,7 +9,7 @@ void textFormatBuffer(char *output, const char *format, ...);
 void asdMemFree(void *);
 char *libc_strcpy(char *output, const char *input);
 void sysMemClear(void *memory, u32 size);
-char *FUN_00100d60(const char *text, s32 character);
+char *libc_strrchr(const char *text, s32 character);
 extern const char DAT_005284c0[];
 
 // Reset the effect file state and load a named effect unless it is already cached.
@@ -46,7 +46,7 @@ u32 FUN_004f7b84(void *context, const char *name)
     sysMemClear(formattedPath, 0x80);
     textFormatBuffer(formattedPath, DAT_005284c0, name);
     libc_strcpy(path, formattedPath);
-    libc_strcpy(state->fileName, FUN_00100d60(path, '/') + 1);
+    libc_strcpy(state->fileName, libc_strrchr(path, '/') + 1);
     if (findRecordByKey(state->fileName) == 0xff) {
         asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&state->file), 1);
         state->flags |= 1;

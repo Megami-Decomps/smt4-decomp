@@ -46,7 +46,7 @@ void uiFormatIndexedDisplayName(FilterMenu *menu, s32 kind, s32 index, char *lab
    the entry the settings currently have selected. */
 u8 FUN_001b079c(FilterMenu *menu, s32 kind, char *label, s32 entry)
 {
-    FilterSelection *settings = &reinterpret_cast<FilterSettings *>(FUN_002a0d0c())->selection;
+    FilterSelection *settings = &reinterpret_cast<FilterSettings *>(gameDataGetSortPreferences())->selection;
     u8 selected = 0;
 
     if (kind == 0) {

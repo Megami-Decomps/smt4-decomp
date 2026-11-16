@@ -7,7 +7,7 @@ struct IndexedResourceQuery {
 };
 extern "C" {
 s32 FUN_00194934(u32 handle);
-s32 FUN_00194b74(void *resource, s32 index);
+s32 indexedResourceGetEntry(void *resource, s32 index);
 }
 
 /* Resolve the owner's handle before querying its optional resource. */
@@ -20,5 +20,5 @@ extern "C" s32 indexedResourceQuery(IndexedResourceQuery *owner)
     if (index == -1) {
         return 0;
     }
-    return FUN_00194b74(owner->resource, index);
+    return indexedResourceGetEntry(owner->resource, index);
 }

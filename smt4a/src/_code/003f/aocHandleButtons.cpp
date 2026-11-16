@@ -5,7 +5,7 @@
 extern "C" {
 
 void resourceApplyNodeFlag(u32 a, u32 b);
-void FUN_001a6568(u32 system, u32 a, u32 b, s32 flags);
+void texTableRequestNamedTextureLoad(u32 system, u32 a, u32 b, s32 flags);
 void* asdTMTexNodeSetMode(s32 a, s32 b);
 s32 aocRunByName(u32 system, u32 a, u32 b, u32 c);
 
@@ -16,7 +16,7 @@ void aocHandleButtons(AocRequest *request, u32 buttons)
     if (request->enabled != 0) {
         if ((buttons & 8) != 0) {
             if (aocRunByName(g_aocSystem, request->idA, request->idB, 1) != 0) {
-                FUN_001a6568(g_aocSystem, request->idA, request->idB, 0x20000);
+                texTableRequestNamedTextureLoad(g_aocSystem, request->idA, request->idB, 0x20000);
                 return;
             }
             resourceApplyNodeFlag(request->idA, request->idB);
@@ -24,7 +24,7 @@ void aocHandleButtons(AocRequest *request, u32 buttons)
         }
         if ((buttons & 0x40) != 0) {
             if (aocRunByName(g_aocSystem, request->idA, request->idB, 1) != 0) {
-                FUN_001a6568(g_aocSystem, request->idA, request->idB, 0x30000);
+                texTableRequestNamedTextureLoad(g_aocSystem, request->idA, request->idB, 0x30000);
                 return;
             }
             asdTMTexNodeSetMode(request->idA, request->idB);
@@ -32,7 +32,7 @@ void aocHandleButtons(AocRequest *request, u32 buttons)
         }
         if ((buttons & 1) != 0) {
             if (aocRunByName(g_aocSystem, request->idA, request->idB, 1) != 0) {
-                FUN_001a6568(g_aocSystem, request->idA, request->idB, 0x10000);
+                texTableRequestNamedTextureLoad(g_aocSystem, request->idA, request->idB, 0x10000);
                 return;
             }
             asdTMTexLoadMainHeap(request->idA, request->idB);

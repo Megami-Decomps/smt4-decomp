@@ -8,8 +8,8 @@ extern MapSelection g_mapSelection;
 s32 screenFadeIsBusy();
 void mapPlaceSet(s32 map, s32 area, s32 place);
 void FUN_004a0bac(s32 option, s32 enabled);
-void FUN_003d54f8(s32 option, s32 frames);
-void FUN_004b7a54(ContentTransition *work);
+void titleSetSlotValueState2(s32 option, s32 frames);
+void campScriptPanelResourcesRelease(ContentTransition *work);
 void mikadoLoadSceneResources(ContentTransition *work);
 void __ARM_common_memcpy4_6(ShortJumpDestination *source, ShortJumpDestination *destination);
 
@@ -53,7 +53,7 @@ void FUN_004b9410(ContentTransition *work)
         ++departure->delay;
         if (departure->delay >= 30) {
             FUN_004a0bac(0, 1);
-            FUN_003d54f8(0, 10);
+            titleSetSlotValueState2(0, 10);
             work->flags &= ~0x400000;
             work->state = 5;
             work->phase = 0;
@@ -74,7 +74,7 @@ void FUN_004b9410(ContentTransition *work)
                 departure->localMapReady = 1;
             }
         } else {
-            FUN_004b7a54(work);
+            campScriptPanelResourcesRelease(work);
             __ARM_common_memcpy4_6(reinterpret_cast<ShortJumpDestination *>(&work->sourceMap), &work->destination);
             mikadoLoadSceneResources(work);
             work->state = 2;

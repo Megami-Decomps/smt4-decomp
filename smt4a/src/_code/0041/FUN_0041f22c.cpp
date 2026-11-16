@@ -75,14 +75,14 @@ extern "C" void FUN_0041f22c(SelectScreen *screen)
             } else {
                 FUN_002f0384(1);
                 screen->opened = 1;
-                FUN_003343f0(1);
+                gameGlobalsSetMenuOpenFlag(1);
             }
         }
         if (!skip && screen->panel.locked == 0 && 0 == screen->opened &&
             screen->entryFlags[screen->selected] != 0) {
             FUN_002f0384(1);
             screen->opened = 1;
-            FUN_003343f0(1);
+            gameGlobalsSetMenuOpenFlag(1);
         }
     }
     screen->pulseTimer--;

@@ -3,7 +3,7 @@
 
 extern "C" {
 extern RenderCtx *g_titleScene;
-s32 FUN_002865c0(u32, f32);
+s32 gxPackFadeKindAlphaWord(u32, f32);
 s32 renderCtxPackPassFlags(u32, u32);
 s32 packNibblesAndByte(u32, u32, u32);
 void taskRunPhase(u32);
@@ -14,7 +14,7 @@ s32 renderScopedTaskPhaseOne(u32 job)
 {
     jobGetWork(job);
     RenderCtx *context = g_titleScene;
-    s32 state = FUN_002865c0(6, 0.0f);
+    s32 state = gxPackFadeKindAlphaWord(6, 0.0f);
     renderStackPush(&context->additional.stackC, state);
     context = g_titleScene;
     state = renderCtxPackPassFlags(1, 0);

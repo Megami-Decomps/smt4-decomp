@@ -61,7 +61,7 @@ extern "C" void FUN_003f5598(PartnerTopicDialog *dialog)
         asdTMTexLoadMainHeap(49, i);
     }
     dialog->sprite = spriteHandleCreate(0);
-    FUN_001527d8(dialog->sprite, -1);
+    uiObjectSetColorRgb(dialog->sprite, -1);
     positionStateSet(dialog->sprite, 0, 0x646464FF, 0.0f);
     FUN_003f84e8(dialog);
     dialogEnterState(dialog, 1, 0);

@@ -35,7 +35,7 @@ struct VisibilityGameFlags {
     u8 hidden; // 0x22
 };
 extern "C" {
-extern VisibilityScene *DAT_00447e10;
+extern VisibilityScene *g_modelGroups;
 extern VisibilityGameFlags g_gameState;
 void FUN_001e2d88();
 void modelSetScale(AsdMdlNode *, f32);
@@ -46,13 +46,13 @@ void modelSelectPrimaryMotion(AsdMdlNode *, f32);
 // Hide active map objects temporarily, then restore their visibility and saved transforms.
 void mapObjectVisibilityRestore()
 {
-    if (DAT_00447e10->kind != 22)
+    if (g_modelGroups->kind != 22)
         return;
     FUN_001e2d88();
     for (s32 group = 0; group < 2; ++group) {
         s32 count = group == 0 ? 9 : 3;
         for (s32 i = 0; i < count; ++i) {
-            VisibilitySnapshot *snapshot = group == 0 ? &DAT_00447e10->primary[i] : &DAT_00447e10->secondary[i];
+            VisibilitySnapshot *snapshot = group == 0 ? &g_modelGroups->primary[i] : &g_modelGroups->secondary[i];
             if (!snapshot->active)
                 continue;
             if (g_gameState.hidden) {

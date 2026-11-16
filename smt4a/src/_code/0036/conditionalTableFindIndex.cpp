@@ -10,14 +10,14 @@ typedef struct ConditionalEntry {
     /* 0x0A */ s16 terminal;       /* -1 = last entry of the id's chain */
 } ConditionalEntry;
 
-extern s32 FUN_003b5620(void);
+extern s32 dataTable23GetCountWithAoc(void);
 extern ConditionalEntry *aocDataTable23GetEntry(s32 index);
 extern s32 gameFlagIsSet(s32 flag);
 
 /* Finds the entry index for `id` whose flag conditions hold: -1 when absent, -2 when its chain ended without a match. */
 s32 conditionalTableFindIndex(s32 id)
 {
-    s32 count = FUN_003b5620();
+    s32 count = dataTable23GetCountWithAoc();
     s32 i;
 
     for (i = 0; i < count; i++) {

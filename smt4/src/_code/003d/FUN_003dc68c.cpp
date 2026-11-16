@@ -44,7 +44,7 @@ void memClear(void *buffer, s32 size);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_002276f8(BtlEffectWork *work);
 u32 FUN_00246644(u32 index, u32 a, u32 b);
-char *FUN_002522e0(const char *text, s32 character);
+char *libc_strrchr(const char *text, s32 character);
 s32 keyedRecordFindByName(const char *name);
 void asdLoadFileAsyncSimple(const char *path, void **file, s32 flags);
 }
@@ -101,7 +101,7 @@ extern "C" u32 FUN_003dc68c(BtlEffectWork *work)
         libc_strcpy(path, buffer);
         if (libc_strlen(path) != 0) {
             EffectSlot *slot = &work->slots[i];
-            libc_strcpy(slot->name, FUN_002522e0(path, '/') + 1);
+            libc_strcpy(slot->name, libc_strrchr(path, '/') + 1);
             if (keyedRecordFindByName(slot->name) == 0xFF) {
                 asdLoadFileAsyncSimple(path, &slot->file, 0);
                 slot->flags |= 1;

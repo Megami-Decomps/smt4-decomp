@@ -10,7 +10,7 @@ int asdMemoryAlloc(int, int, int, int);
 int _ZN9SlotStateC1Ev(unsigned char [24]);
 int FUN_00177abc(float *, unsigned char *);
 int gpuEmitDepthBufferCommands(unsigned char *, unsigned char *, int);
-int FUN_0018a924(float *, unsigned int **);
+int mathSinCos(float *, unsigned int **);
 int asdMemoryAllocAligned(...);
 int FUN_0045af48(unsigned int, unsigned int, unsigned int, int);
 int FUN_005015b0(unsigned char *, unsigned int *);
@@ -102,7 +102,7 @@ extern unsigned int DAT_0056fcc4; /* 0x56fcc4 */
 /* Supplied declaration required: _ZN9SlotStateC1Ev. */
 /* Supplied declaration required: FUN_00177abc. */
 /* Supplied declaration required: gpuEmitDepthBufferCommands. */
-/* Supplied declaration required: FUN_0018a924. */
+/* Supplied declaration required: mathSinCos. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
 extern unsigned int asdGxAppendStateReset(unsigned int, unsigned int);
 extern int FUN_001af0d0(float *, unsigned int);
@@ -207,7 +207,7 @@ void FUN_003fed38(int param_1,fn_003fed38_arg1 *param_2)
   *(int *)(param_1 + 0x1c) = *(int *)(param_1 + 4) + 0x48;
   temp_v6 = *(float *)(param_1 + 0x34);
   param_2->field_0x49 = 0;
-  FUN_0018a924(&temp_v11,&temp_v10);
+  mathSinCos(&temp_v11,&temp_v10);
   temp_v4 = temp_v9 / (temp_v11 / romwright_u2f((unsigned int)(temp_v10)));
   param_2->field_0x4c = (temp_v4 / temp_v6) * temp_v5;
   param_2->field_0x50 = temp_v8;

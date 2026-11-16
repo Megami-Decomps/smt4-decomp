@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0023f410(int, int, int);
 int FUN_00240520(int, unsigned int);
 int FUN_002881bc(void);
-int FUN_002adde8(unsigned int, unsigned char *, float *);
+int modelGetBoneTranslationByName(unsigned int, unsigned char *, float *);
 int dataTable00FindById(void);
 
 /* stack frame of param_1: 9 slot(s), 36 byte(s) */
@@ -37,7 +37,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0023f410. */
 /* Supplied declaration required: FUN_00240520. */
 /* Supplied declaration required: FUN_002881bc. */
-/* Supplied declaration required: FUN_002adde8. */
+/* Supplied declaration required: modelGetBoneTranslationByName. */
 /* Supplied declaration required: dataTable00FindById. */
 
 
@@ -75,7 +75,7 @@ void FUN_003392cc(int param_1)
   *(unsigned int *)(param_1 + 0x43a0) = 0;
   *pfVar7 = 0.0f;
   if (*(int *)(param_1 + 0x4398) != 0) {
-    FUN_002adde8(*(unsigned int *)(*(int *)(param_1 + 0x4398) + 8),&LAB_003396bc,pfVar7);
+    modelGetBoneTranslationByName(*(unsigned int *)(*(int *)(param_1 + 0x4398) + 8),&LAB_003396bc,pfVar7);
   }
   temp_v3 = *(unsigned int *)(param_1 + 0x4390);
   temp_v15[1] = 5.0f;

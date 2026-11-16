@@ -7,13 +7,13 @@ struct ListBoxState {
 
 extern "C" {
 
-void FUN_0022708c(ListBoxState *list);
+void screenFadeResetAndRelease(ListBoxState *list);
 
 /* Clears the selection and releases the list box's active resources. */
 void listBoxClearSelectionAndReset(ListBoxState *list)
 {
     list->selection = 0;
-    FUN_0022708c(list);
+    screenFadeResetAndRelease(list);
 }
 
 }

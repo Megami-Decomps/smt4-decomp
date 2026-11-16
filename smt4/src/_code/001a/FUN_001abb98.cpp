@@ -70,7 +70,7 @@ extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0028527c. */
 /* Supplied declaration required: naviRegisterTransitionsAndRequest. */
 /* Supplied declaration required: FUN_002852f0. */
-extern int FUN_00285574(void);
+extern int mapGetDepartureIndex(void);
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -132,7 +132,7 @@ void FUN_001abb98(void)
   temp_v23[6] = 0;
   temp_v23[2] = (temp_v6 + 1U) & 0xff;
   temp_v23[3] = 0;
-  temp_v6 = FUN_00285574();
+  temp_v6 = mapGetDepartureIndex();
   temp_v7 = FUN_00316ce4();
   if (!(temp_v7 == 1 && temp_v6 == 0)) {
     FUN_002852f0(0);
@@ -715,7 +715,7 @@ LAB_001ac248:;
   do {
     temp_v7 = temp_v6 * 4;
     if (0 < (&DAT_004bd0e0)[temp_v6]) {
-      temp_v15 = FUN_00285574();
+      temp_v15 = mapGetDepartureIndex();
       if (temp_v15 != 0) {
         textFormatBuffer(temp_v24,&LAB_001aca08,temp_v6 + 1);
       }
@@ -769,7 +769,7 @@ LAB_001aca98:
         mapSpawnActiveSlotEffects();
       }
       temp_v6 = gameGetMapBlock();
-      temp_v7 = FUN_00285574();
+      temp_v7 = mapGetDepartureIndex();
       if (temp_v7 != 8) {
         DAT_004bd0cc = 0;
         temp_v23[7] = 0;

@@ -30,7 +30,7 @@ struct GameStateNavBlock {
     u8 alternateNaviMap;
 };
 
-s32 FUN_0048e40c(PulsePanel *panel);
+s32 naviMainConditionsHold(PulsePanel *panel);
 void FUN_0048c394(PulsePanel *panel);
 s32 FUN_00485d1c(PulsePanel *panel);
 s32 uiSpriteAdvanceAnimation(UiSpriteState *sprite, f32 speed);
@@ -51,7 +51,7 @@ void _ZN9Obj53230012FUN_00487124Ev(PulsePanel *panel)
         g_gameState.inputBlocked = 0;
     }
     frozen = (panel->flags & 0x1000) >> 12;
-    if (FUN_0048e40c(panel) != 0 && panel->mode != 0 && g_gameState.controllerFlags.primary != 0) {
+    if (naviMainConditionsHold(panel) != 0 && panel->mode != 0 && g_gameState.controllerFlags.primary != 0) {
         FUN_0048c394(panel);
     }
     if (g_gameState.controllerFlags.primary != 0) {

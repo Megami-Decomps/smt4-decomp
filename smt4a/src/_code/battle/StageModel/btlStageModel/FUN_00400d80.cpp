@@ -111,7 +111,7 @@ void FUN_00400d80(BtlStageModel* model, u32 stage, u32 substage)
     }
     void* memory = asdMemoryAllocTraced(0x20, DAT_00527348, 217);
     model->mapList = memory != NULL ? modelListInit(memory) : NULL;
-    FUN_001cd3ec(model->mapList, name);
+    modelLoadFileAsyncByName(model->mapList, name);
 
     row = findStageRow(model);
     if (row == NULL) return;
@@ -121,7 +121,7 @@ void FUN_00400d80(BtlStageModel* model, u32 stage, u32 substage)
         textFormatBuffer(name, "%s%s.bam", "battle/battle_map/", bam->name);
         void* bamMemory = asdMemoryAllocTraced(0x20, DAT_00527348, 246);
         model->bamList[i] = bamMemory != NULL ? modelListInit(bamMemory) : NULL;
-        FUN_001cd3ec(model->bamList[i], name);
+        modelLoadFileAsyncByName(model->bamList[i], name);
         model->bamPos[i][0] = (f32)bam->x;
         model->bamPos[i][1] = (f32)bam->y;
         model->bamPos[i][2] = (f32)bam->z;

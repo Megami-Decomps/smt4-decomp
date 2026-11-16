@@ -24,7 +24,7 @@ void FUN_003bbafc(void *);
 void soundRequestEnd();
 s32 dialogIsActive();
 void infoWinStartTimer(s32);
-void FUN_002b827c(s32);
+void buttonHelpSetContext(s32);
 void buttonHelpRelease();
 void buttonHelpTexturesUnref();
 void uiFadeRelease();
@@ -62,7 +62,7 @@ extern "C" void FUN_003b980c(ScriptScreenCleanupView *work)
     soundRequestEnd();
     if (dialogIsActive())
         infoWinStartTimer(0);
-    FUN_002b827c(3);
+    buttonHelpSetContext(3);
     buttonHelpRelease();
     buttonHelpTexturesUnref();
     uiFadeRelease();

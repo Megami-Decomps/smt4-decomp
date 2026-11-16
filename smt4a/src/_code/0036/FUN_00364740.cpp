@@ -92,7 +92,7 @@ extern int dataTable23Section5CountWithExtras(void);
 extern unsigned int *dataTable2FType0GetEntry(unsigned char *);
 extern unsigned int *dataTable2FType1GetEntry(unsigned char *);
 extern unsigned int *dataTable2FType2GetEntry(unsigned char *);
-extern unsigned int FUN_003b5620(void);
+extern unsigned int dataTable23GetCountWithAoc(void);
 extern int dataTable23Type0CountWithAoc(void);
 extern int dataTableGetRecordFortyEight(void);
 extern int dataTable23Type4CountWithAoc(void);
@@ -231,7 +231,7 @@ LAB_003647c0:
                           }
 LAB_00364944:
                           temp_v9 = *puVar4;
-                          temp_v5 = FUN_003b5620();
+                          temp_v5 = dataTable23GetCountWithAoc();
                           temp_v8 = 0;
                           temp_v6 = temp_v5;
                           if (0 < (int)temp_v5) {

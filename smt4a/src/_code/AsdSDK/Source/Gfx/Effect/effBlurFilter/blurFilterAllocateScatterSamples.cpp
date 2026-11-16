@@ -2,10 +2,10 @@
 
 struct ScatterParams;
 struct ScatterSample;
-extern "C" ScatterSample *FUN_003aa3ac(ScatterParams *params);
+extern "C" ScatterSample *effBlurFilterCreateScatterSamples(ScatterParams *params);
 
 /* Forward the filter's scatter-parameter subobject to the sample allocator. */
 extern "C" ScatterSample *blurFilterAllocateScatterSamples(BlurParams *filter)
 {
-    return FUN_003aa3ac(reinterpret_cast<ScatterParams *>(&filter->sampleCount));
+    return effBlurFilterCreateScatterSamples(reinterpret_cast<ScatterParams *>(&filter->sampleCount));
 }

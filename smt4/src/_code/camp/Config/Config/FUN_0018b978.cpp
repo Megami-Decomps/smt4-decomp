@@ -45,7 +45,7 @@ extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: gameCounterAddSaturating. */
 extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: buttonHelpSetText. */
-extern int FUN_0029efa8(int);
+extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_0029efd8. */
 extern unsigned short ifTouchRegionAddRequested(unsigned int, unsigned int);
@@ -214,7 +214,7 @@ LAB_0018bf50:
   scrRunOpcodesStub(*(unsigned int *)(temp_v8 + 0xb4));
   temp_v2 = g_config;
   temp_v3 = resourceRunOperationIfUnblocked(g_config);
-  temp_v4 = FUN_0029efa8(temp_v2);
+  temp_v4 = listCursorGetRowIfUnblocked(temp_v2);
   temp_v9 = dataTableGet(0x36,0);
   dataTableGetEntries();
   dataTableGetCount(temp_v9);
@@ -318,7 +318,7 @@ LAB_0018bf50:
   temp_v2 = g_config;
   if (temp_v3 != 0) {
     temp_v8 = resourceRunOperationIfUnblocked(g_config);
-    temp_v2 = FUN_0029efa8(temp_v2);
+    temp_v2 = listCursorGetRowIfUnblocked(temp_v2);
     temp_v9 = dataTableGet(0x36,0);
     temp_v3 = dataTableGetEntries();
     temp_v5 = dataTableGetCount(temp_v9);

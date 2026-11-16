@@ -8,7 +8,7 @@ using nw::math::MTX44;
 extern "C" {
 void FUN_002c1edc(void *owner);
 void FUN_002929d8(MTX34 *matrix, s32 mode, f32 x, f32 y, f32 z);
-void FUN_002ad314(f32 *first, f32 *second, f32 angle);
+void mathSinCos(f32 *first, f32 *second, f32 angle);
 void FUN_002b77f4(void *destination, const MTX34 *source);
 void FUN_0011d084(AsdCamera *camera, const MTX34 *view);
 void nn_math_ARMv6_MTX34CopyAsm(MTX34 *dest, const MTX34 *source);
@@ -70,7 +70,7 @@ void FUN_003d5af0(void *owner, AsdCamera *camera, const AsdCameraVec3 *eye, cons
             f32 upX = forwardZ * sideX - forwardX * sideZ;
             f32 upY = forwardX * 0.0f - forwardY * sideX;
             f32 upZ = forwardY * sideZ - forwardZ * 0.0f;
-            FUN_002ad314(&sine, &cosine, rotation->z * (256.0f / 360.0f));
+            mathSinCos(&sine, &cosine, rotation->z * (256.0f / 360.0f));
             f32 rowX0 = sine * upZ + cosine * sideX;
             f32 rowX1 = cosine * upZ - sine * sideX;
             f32 rowZ0 = sine * upY + cosine * sideZ;

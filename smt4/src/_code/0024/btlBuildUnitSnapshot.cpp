@@ -55,7 +55,7 @@ extern "C" {
 void memClear(void *, u32 bytes);
 void __aeabi_memcpy4(void *, const void *, u32 bytes);
 char *libc_strcpy(char *, const char *);
-s32 FUN_00295c60(u16 id, u8 variant);
+s32 devilCalcLevelScaledCost(u16 id, u8 variant);
 s32 btlLinkGetMaxHp(const SnapshotUnitSource *);
 s32 flagCountUnlockedSlots(const SnapshotUnitSource *);
 const char *dataTable01FindByIdWithAoc(u16 id);
@@ -67,7 +67,7 @@ void btlBuildUnitSnapshot(BattleUnitSnapshot *snapshot, const SnapshotUnitSource
     memClear(snapshot, sizeof(BattleUnitSnapshot));
     snapshot->id = unit->id;
     snapshot->variant = unit->variant;
-    snapshot->experienceRemaining = FUN_00295c60(unit->id, unit->variant) - unit->prefix.experience;
+    snapshot->experienceRemaining = devilCalcLevelScaledCost(unit->id, unit->variant) - unit->prefix.experience;
     snapshot->hp = unit->record.hp;
     snapshot->mp = unit->record.mp;
     snapshot->maxHp = btlLinkGetMaxHp(unit);

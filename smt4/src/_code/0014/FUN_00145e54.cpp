@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match6_ProjectionCamera.h"
 
 extern "C" {
-void FUN_002ad314(f32 *, f32 *, f32);
+void mathSinCos(f32 *, f32 *, f32);
 
 void FUN_00145e54(CameraLookAt *camera)
 {
@@ -24,7 +24,7 @@ void FUN_00145e54(CameraLookAt *camera)
     f32 upY = z * sideX - x * sideZ;
     f32 upZ = x * sideY - sideX * y;
     f32 sine, cosine;
-    FUN_002ad314(&sine, &cosine, camera->rollRadians * 40.743664f);
+    mathSinCos(&sine, &cosine, camera->rollRadians * 40.743664f);
     camera->up[0] = upX * cosine - sine * sideX;
     camera->up[1] = upY * cosine;
     camera->up[2] = upZ * cosine - sine * sideZ;

@@ -4,7 +4,7 @@
 #include "shard/W5_W5Match7_DataRecord.h"
 
 extern "C" {
-u32 FUN_001bd100(u32 id);
+u32 dataTable1bOr1cRecordHasFlag1(u32 id);
 void FUN_004bb6d8(u32 flag, u32 value);
 
 /* Reports a game flag change to FUN_004bb6d8, then sets or clears the flag's bit. */
@@ -46,7 +46,7 @@ u8 FUN_00417a60(u32 id)
     PartyBlockB *block = reinterpret_cast<PartyBlockB *>(gameFlagBlockGet());
     entry->flags = (entry->flags & ~2) | 0x1C;
     entry->bits &= ~4;
-    if (FUN_001bd100(id)) {
+    if (dataTable1bOr1cRecordHasFlag1(id)) {
         if (reinterpret_cast<EntrySortRecord *>(dataTable1bOr1cGetRecord(id))->category == 1) {
             RoleSlotsView *roles = reinterpret_cast<RoleSlotsView *>(block);
             for (s32 index = 0; index < 4; ++index) {

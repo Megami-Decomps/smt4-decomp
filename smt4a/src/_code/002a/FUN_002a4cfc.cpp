@@ -95,8 +95,8 @@ extern unsigned int gameDataBlocksGetTableFlag(void);
 /* Supplied declaration required: bibleOpenMode1. */
 /* Supplied declaration required: FUN_002a4708. */
 extern int resourceRunOperationIfUnblocked(int);
-extern unsigned int FUN_002a4878(int);
-extern int FUN_002a4894(int);
+extern unsigned int listCursorGetRowOfChildIfUnblocked(int);
+extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: FUN_002a5cf4. */
 /* Supplied declaration required: FUN_002a7b74. */
 extern int uniteRequestGet(void);
@@ -166,7 +166,7 @@ void FUN_002a4cfc(void)
   
   temp_v3 = g_camp;
   temp_v6 = 0;
-  temp_v1 = FUN_002a4878(g_camp + 0x40);
+  temp_v1 = listCursorGetRowOfChildIfUnblocked(g_camp + 0x40);
   temp_v2 = FUN_003da8f4((int)*(char *)(temp_v3 + 0xa4),temp_v1);
   switch(temp_v2) {
   case 4:
@@ -187,7 +187,7 @@ void FUN_002a4cfc(void)
     FUN_002a5cf4();
     FUN_003d386c(1);
     temp_v2 = resourceRunOperationIfUnblocked(temp_v3 + 0x1ec);
-    temp_v6 = FUN_002a4894(temp_v3 + 0x1ec);
+    temp_v6 = listCursorGetRowIfUnblocked(temp_v3 + 0x1ec);
     if (g_camp != 0) {
       *(int *)(g_camp + 0xbc) = temp_v2 + temp_v6;
     }

@@ -3,7 +3,7 @@
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
-void FUN_00167618(const EffectColor *topLeft, const EffectColor *topRight,
+void gfxDrawQuadFourColors(const EffectColor *topLeft, const EffectColor *topRight,
                   const EffectColor *bottomLeft, const EffectColor *bottomRight,
                   f32 x, f32 y, f32 width, f32 height, f32 depth);
 
@@ -26,7 +26,7 @@ void gfxDrawSolidRectangle(s32 left, s32 top, s32 right, s32 bottom, u32 color)
         }
         color >>= 8;
     }
-    FUN_00167618(&channels, &channels, &channels, &channels,
+    gfxDrawQuadFourColors(&channels, &channels, &channels, &channels,
                   (f32)left, (f32)top, (f32)(right - left), (f32)(bottom - top), 0.0f);
 }
 }

@@ -4,7 +4,7 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-extern StatusBustUpResources DAT_0044e158;
+extern StatusBustUpResources g_statusBustUpResources;
 extern void *g_aocSystem;
 void packageFileDisableByKindName(void *system, u32 table, u32 node);
 void asdTMTexTableReleaseNode(u32 table, u32 node);
@@ -42,19 +42,19 @@ void statusBustUpPortraitRelease(s32 portrait, s32 isDevil)
                 if (portrait >= 129) {
                     return;
                 }
-                s8 *references = static_cast<s8 *>(DAT_0044e158.workB);
+                s8 *references = static_cast<s8 *>(g_statusBustUpResources.workB);
                 if (--references[portrait] > 0) {
                     return;
                 }
                 if (asdTMTexTableNodeIsLoaded(specialTable, portrait)) {
                     asdTMTexTableReleaseNode(specialTable, portrait);
                 }
-                static_cast<s8 *>(DAT_0044e158.workB)[portrait] = 0;
+                static_cast<s8 *>(g_statusBustUpResources.workB)[portrait] = 0;
                 return;
             }
         }
     }
-    s8 *references = static_cast<s8 *>(DAT_0044e158.workA);
+    s8 *references = static_cast<s8 *>(g_statusBustUpResources.workA);
     if (--references[portrait] > 0) {
         return;
     }
@@ -62,6 +62,6 @@ void statusBustUpPortraitRelease(s32 portrait, s32 isDevil)
         asdTMTexTableReleaseNode(table, portrait);
         packageFileDisableByKindName(g_aocSystem, table, portrait);
     }
-    static_cast<s8 *>(DAT_0044e158.workA)[portrait] = 0;
+    static_cast<s8 *>(g_statusBustUpResources.workA)[portrait] = 0;
 }
 }

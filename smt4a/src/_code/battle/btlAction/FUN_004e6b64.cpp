@@ -5,7 +5,7 @@
 #include "gamedata/Table04Record.h"
 #include "util/Random.h"
 
-/* The action a battle unit is about to use (as FUN_003e8bb0 fills it). */
+/* The action a battle unit is about to use (as btlEntryBuildSummary fills it). */
 struct BattleActionInfo {
     /* 0x00 */ s16 kind;
     /* 0x02 */ u8 unk02[0x14];
@@ -49,7 +49,7 @@ extern u64 DAT_00571178;
 extern u64 DAT_00571188;
 extern u64 DAT_00571260;
 
-void FUN_003e8bb0(BattleActionInfo *info, BtlMainStateA *battle, u64 *unitFlags);
+void btlEntryBuildSummary(BattleActionInfo *info, BtlMainStateA *battle, u64 *unitFlags);
 s32 FUN_004e83ac(EnemyAiContext *context, EnemyTurnWork *work, s32 target);
 s32 FUN_004de7a0(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate *candidates, s32 count);
 
@@ -61,7 +61,7 @@ void FUN_004e6b64(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate 
     BattleActionInfo info;
     TargetCandidate scratch[0x85];
     BtlMainStateA *battle = btlGetMainState();
-    FUN_003e8bb0(&info, battle, work->unitFlags);
+    btlEntryBuildSummary(&info, battle, work->unitFlags);
     for (s32 i = 0; i < 0x85; i++) {
         out[i].id = -1;
         out[i].weight = 0;

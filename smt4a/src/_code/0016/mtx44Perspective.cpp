@@ -6,7 +6,7 @@ struct ProjectionMtx {
 };
 
 extern "C" {
-void FUN_0018a924(f32 *sine, f32 *cosine, f32 angle);
+void mathSinCos(f32 *sine, f32 *cosine, f32 angle);
 
 /* Builds a perspective projection: `fovy` in degrees, `aspect` width over height, clip planes
  * `nearZ` and `farZ` (depth mapped to 0..1 scaled by farZ). */
@@ -19,7 +19,7 @@ ProjectionMtx *mtx44Perspective(ProjectionMtx *mtx, f32 fovy, f32 aspect, f32 ne
 
     /* The sine table angle unit: 256 per turn. */
     f32 halfFovy = fovy * 0.5f;
-    FUN_0018a924(&sine, &cosine, halfFovy * 40.743664f);
+    mathSinCos(&sine, &cosine, halfFovy * 40.743664f);
     cotangent = cosine / sine;
     depthScale = 1.0f / (farZ - nearZ);
     f32 xScale = cotangent / aspect;

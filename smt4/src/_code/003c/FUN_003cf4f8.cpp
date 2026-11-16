@@ -2,7 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlAction.h"
 
-/* The action a battle unit is about to use (as FUN_00247478 fills it). */
+/* The action a battle unit is about to use (as btlEntryBuildSummary fills it). */
 struct BattleActionInfo {
     /* 0x00 */ s16 kind;
     /* 0x02 */ u8 unk02[0x14];
@@ -44,7 +44,7 @@ struct SkillRecord40 {
 };
 
 extern "C" {
-void FUN_00247478(BattleActionInfo *info, BtlMainState *battle, u32 unit);
+void btlEntryBuildSummary(BattleActionInfo *info, BtlMainState *battle, u32 unit);
 SkillRecord40 *dataTable40FindById(s16 id);
 s32 FUN_00229914(EnemyAiContext *context, EnemyTurnWork *work, s32 target);
 s32 randRange(u32 limit);
@@ -57,7 +57,7 @@ void FUN_003cf4f8(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate 
     BattleActionInfo info;
     TargetCandidate scratch[0x85];
     BtlMainState *battle = btlGetMainState();
-    FUN_00247478(&info, battle, work->unit);
+    btlEntryBuildSummary(&info, battle, work->unit);
     for (s32 i = 0; i < 0x85; i++) {
         out[i].id = -1;
         out[i].weight = 0;

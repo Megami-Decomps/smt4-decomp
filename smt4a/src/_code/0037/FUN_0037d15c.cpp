@@ -5,7 +5,7 @@ extern "C" {
 u32 scrGetArg(u32 index);
 f32 scriptReadStackValueAsFloat(u32 index);
 s32 eventTexHasMissingValue(void);
-u32 FUN_003affe8(u32 id, f32 first, f32 second);
+u32 eventCreatePositionedBattleTextureJob(u32 id, f32 first, f32 second);
 void eventTexSetJobParam(void);
 void eventTexStoreHandle(u32 handle);
 void scrSetResult(u32 value);
@@ -19,7 +19,7 @@ u32 FUN_0037d15c(void)
     u32 result;
 
     if (eventTexHasMissingValue() != 0) {
-        id = FUN_003affe8(id, first, second);
+        id = eventCreatePositionedBattleTextureJob(id, first, second);
         eventTexSetJobParam();
         eventTexStoreHandle(id);
         result = id;

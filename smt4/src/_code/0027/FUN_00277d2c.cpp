@@ -55,7 +55,7 @@ typedef struct {
     unsigned int sp120; /* 0x120: local_120 */
 } param_2_stack;
 
-extern unsigned int DAT_00407ed0; /* 0x407ed0 */
+extern unsigned int g_sinCosTable; /* 0x407ed0 */
 extern unsigned int DAT_00407ed4; /* 0x407ed4 */
 extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
@@ -78,7 +78,7 @@ extern unsigned int DAT_0049fb28; /* 0x49fb28 */
 extern unsigned int DAT_0049fb2c; /* 0x49fb2c */
 extern unsigned char DAT_004be698; /* 0x4be698 */
 extern unsigned int *DAT_004bf898; /* 0x4bf898 */
-extern unsigned char DAT_004bf89c; /* 0x4bf89c */
+extern unsigned char g_regionTable; /* 0x4bf89c */
 extern unsigned int DAT_004c149c; /* 0x4c149c */
 extern unsigned int DAT_004c2420; /* 0x4c2420 */
 extern unsigned char DAT_004c2424; /* 0x4c2424 */
@@ -296,11 +296,11 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
               temp_v16 = temp_v16 & 0xff;
               temp_v18 = temp_v18 & 0xff;
               temp_v17 = temp_v17 & 0xff;
-              temp_v20 = (float)(&DAT_00407ed0)[temp_v16 * 4] +
+              temp_v20 = (float)(&g_sinCosTable)[temp_v16 * 4] +
                        (temp_v10 - temp_v24) * (float)(&DAT_00407ed8)[temp_v16 * 4];
-              temp_v8 = (float)(&DAT_00407ed0)[temp_v17 * 4] +
+              temp_v8 = (float)(&g_sinCosTable)[temp_v17 * 4] +
                        (temp_v26 - temp_v23) * (float)(&DAT_00407ed8)[temp_v17 * 4];
-              temp_v12 = (float)(&DAT_00407ed0)[temp_v18 * 4] +
+              temp_v12 = (float)(&g_sinCosTable)[temp_v18 * 4] +
                        (temp_v25 - temp_v19) * (float)(&DAT_00407ed8)[temp_v18 * 4];
               if (temp_v57 != 0) {
                 temp_v20 = -temp_v20;
@@ -371,15 +371,15 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
               temp_v19 = (float)VectorUnsignedToFloat(temp_v17 & 0xffff,(unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v21 = temp_v22 & 0xff;
               temp_v12 = (float)VectorUnsignedToFloat(temp_v22 & 0xffff,(unsigned char)(in_fpscr >> 0x16) & 3);
-              temp_v20 = (float)(&DAT_00407ed0)[temp_v18 * 4] +
+              temp_v20 = (float)(&g_sinCosTable)[temp_v18 * 4] +
                        (temp_v8 - temp_v25) * (float)(&DAT_00407ed8)[temp_v18 * 4];
               temp_v25 = (float)(&DAT_00407ed4)[temp_v18 * 4] +
                        (temp_v8 - temp_v25) * (float)(&DAT_00407edc)[temp_v18 * 4];
-              temp_v8 = (float)(&DAT_00407ed0)[temp_v16 * 4] +
+              temp_v8 = (float)(&g_sinCosTable)[temp_v16 * 4] +
                        (temp_v10 - temp_v19) * (float)(&DAT_00407ed8)[temp_v16 * 4];
               temp_v42 = (float)(&DAT_00407ed4)[temp_v16 * 4] +
                          (temp_v10 - temp_v19) * (float)(&DAT_00407edc)[temp_v16 * 4];
-              temp_v10 = (float)(&DAT_00407ed0)[temp_v21 * 4] +
+              temp_v10 = (float)(&g_sinCosTable)[temp_v21 * 4] +
                        (temp_v26 - temp_v12) * (float)(&DAT_00407ed8)[temp_v21 * 4];
               temp_v26 = (float)(&DAT_00407ed4)[temp_v21 * 4] +
                        (temp_v26 - temp_v12) * (float)(&DAT_00407edc)[temp_v21 * 4];
@@ -483,7 +483,7 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
           temp_v0 = pcVar4[1];
           temp_v2 = *temp_v61 * 0x1c;
           temp_v5 = *(unsigned short *)(pcVar4 + 0x12);
-          *(unsigned int *)(&DAT_004bf89c + temp_v2) = temp_v7;
+          *(unsigned int *)(&g_regionTable + temp_v2) = temp_v7;
           *(float *)(temp_v2 + 0x4bf8a0) = temp_v28;
           *(float *)(temp_v2 + 0x4bf8ac) = temp_v28;
           *(unsigned int *)(temp_v2 + 0x4bf8b0) = temp_v15;
@@ -578,14 +578,14 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
             temp_v23 = (float)VectorUnsignedToFloat(temp_v22 & 0xffff,(unsigned char)(temp_v21 >> 0x16) & 3);
             temp_v19 = (float)VectorUnsignedToFloat(temp_v13 & 0xffff,(unsigned char)(temp_v21 >> 0x16) & 3);
             temp_v12 = (float)VectorUnsignedToFloat(temp_v14 & 0xffff,(unsigned char)(temp_v21 >> 0x16) & 3);
-            temp_v20 = (float)(&DAT_00407ed0)[temp_v16 * 4] +
+            temp_v20 = (float)(&g_sinCosTable)[temp_v16 * 4] +
                      (temp_v10 - temp_v23) * (float)(&DAT_00407ed8)[temp_v16 * 4];
-            temp_v8 = (float)(&DAT_00407ed0)[temp_v18 * 4] +
+            temp_v8 = (float)(&g_sinCosTable)[temp_v18 * 4] +
                      (temp_v26 - temp_v19) * (float)(&DAT_00407ed8)[temp_v18 * 4];
             if (temp_v58 != 0) {
               temp_v20 = -temp_v20;
             }
-            temp_v24 = (float)(&DAT_00407ed0)[temp_v17 * 4] +
+            temp_v24 = (float)(&g_sinCosTable)[temp_v17 * 4] +
                      (temp_v25 - temp_v12) * (float)(&DAT_00407ed8)[temp_v17 * 4];
             temp_v23 = (float)(&DAT_00407ed4)[temp_v16 * 4] +
                      (temp_v10 - temp_v23) * (float)(&DAT_00407edc)[temp_v16 * 4];
@@ -649,13 +649,13 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
             temp_v25 = (float)VectorUnsignedToFloat(temp_v13 & 0xffff,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v20 = (float)(&DAT_00407ed4)[temp_v18 * 4] +
                      (temp_v8 - temp_v12) * (float)(&DAT_00407edc)[temp_v18 * 4];
-            temp_v12 = (float)(&DAT_00407ed0)[temp_v18 * 4] +
+            temp_v12 = (float)(&g_sinCosTable)[temp_v18 * 4] +
                      (temp_v8 - temp_v12) * (float)(&DAT_00407ed8)[temp_v18 * 4];
-            temp_v8 = (float)(&DAT_00407ed0)[temp_v21 * 4] +
+            temp_v8 = (float)(&g_sinCosTable)[temp_v21 * 4] +
                      (temp_v10 - temp_v19) * (float)(&DAT_00407ed8)[temp_v21 * 4];
             temp_v42 = (float)(&DAT_00407ed4)[temp_v21 * 4] +
                        (temp_v10 - temp_v19) * (float)(&DAT_00407edc)[temp_v21 * 4];
-            temp_v10 = (float)(&DAT_00407ed0)[temp_v16 * 4] +
+            temp_v10 = (float)(&g_sinCosTable)[temp_v16 * 4] +
                      (temp_v26 - temp_v25) * (float)(&DAT_00407ed8)[temp_v16 * 4];
             temp_v26 = (float)(&DAT_00407ed4)[temp_v16 * 4] +
                      (temp_v26 - temp_v25) * (float)(&DAT_00407edc)[temp_v16 * 4];
@@ -826,13 +826,13 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
               temp_v17 = temp_v13 & 0xff;
               temp_v20 = (float)VectorUnsignedToFloat(temp_v22 & 0xffff,(unsigned char)(temp_v21 >> 0x16) & 3);
               temp_v24 = (float)VectorUnsignedToFloat(temp_v13 & 0xffff,(unsigned char)(temp_v21 >> 0x16) & 3);
-              temp_v26 = (float)(&DAT_00407ed0)[temp_v18 * 4] +
+              temp_v26 = (float)(&g_sinCosTable)[temp_v18 * 4] +
                        (temp_v25 - temp_v23) * (float)(&DAT_00407ed8)[temp_v18 * 4];
-              temp_v19 = (float)(&DAT_00407ed0)[temp_v16 * 4] +
+              temp_v19 = (float)(&g_sinCosTable)[temp_v16 * 4] +
                        (temp_v28 - temp_v20) * (float)(&DAT_00407ed8)[temp_v16 * 4];
               temp_v20 = (float)(&DAT_00407ed4)[temp_v16 * 4] +
                        (temp_v28 - temp_v20) * (float)(&DAT_00407edc)[temp_v16 * 4];
-              temp_v27 = (float)(&DAT_00407ed0)[temp_v17 * 4] +
+              temp_v27 = (float)(&g_sinCosTable)[temp_v17 * 4] +
                        (temp_v12 - temp_v24) * (float)(&DAT_00407ed8)[temp_v17 * 4];
               temp_v28 = (float)(&DAT_00407ed4)[temp_v17 * 4] +
                        (temp_v12 - temp_v24) * (float)(&DAT_00407edc)[temp_v17 * 4];
@@ -895,15 +895,15 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
               temp_v12 = (float)VectorUnsignedToFloat(temp_v18 & 0xffff,(unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v18 = temp_v17 & 0xff;
               temp_v20 = (float)VectorUnsignedToFloat(temp_v17 & 0xffff,(unsigned char)(in_fpscr >> 0x16) & 3);
-              temp_v25 = (float)(&DAT_00407ed0)[temp_v21 * 4] +
+              temp_v25 = (float)(&g_sinCosTable)[temp_v21 * 4] +
                        (temp_v8 - temp_v12) * (float)(&DAT_00407ed8)[temp_v21 * 4];
               temp_v12 = (float)(&DAT_00407ed4)[temp_v21 * 4] +
                        (temp_v8 - temp_v12) * (float)(&DAT_00407edc)[temp_v21 * 4];
-              temp_v8 = (float)(&DAT_00407ed0)[temp_v16 * 4] +
+              temp_v8 = (float)(&g_sinCosTable)[temp_v16 * 4] +
                        (temp_v28 - temp_v19) * (float)(&DAT_00407ed8)[temp_v16 * 4];
               temp_v42 = (float)(&DAT_00407ed4)[temp_v16 * 4] +
                          (temp_v28 - temp_v19) * (float)(&DAT_00407edc)[temp_v16 * 4];
-              temp_v19 = (float)(&DAT_00407ed0)[temp_v18 * 4] +
+              temp_v19 = (float)(&g_sinCosTable)[temp_v18 * 4] +
                        (temp_v26 - temp_v20) * (float)(&DAT_00407ed8)[temp_v18 * 4];
               temp_v28 = (float)(&DAT_00407ed4)[temp_v18 * 4] +
                        (temp_v26 - temp_v20) * (float)(&DAT_00407edc)[temp_v18 * 4];
@@ -1013,13 +1013,13 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
             temp_v17 = temp_v13 & 0xff;
             temp_v20 = (float)VectorUnsignedToFloat(temp_v22 & 0xffff,(unsigned char)(temp_v21 >> 0x16) & 3);
             temp_v24 = (float)VectorUnsignedToFloat(temp_v13 & 0xffff,(unsigned char)(temp_v21 >> 0x16) & 3);
-            temp_v26 = (float)(&DAT_00407ed0)[temp_v18 * 4] +
+            temp_v26 = (float)(&g_sinCosTable)[temp_v18 * 4] +
                      (temp_v25 - temp_v23) * (float)(&DAT_00407ed8)[temp_v18 * 4];
-            temp_v19 = (float)(&DAT_00407ed0)[temp_v16 * 4] +
+            temp_v19 = (float)(&g_sinCosTable)[temp_v16 * 4] +
                      (temp_v28 - temp_v20) * (float)(&DAT_00407ed8)[temp_v16 * 4];
             temp_v28 = (float)(&DAT_00407ed4)[temp_v16 * 4] +
                      (temp_v28 - temp_v20) * (float)(&DAT_00407edc)[temp_v16 * 4];
-            temp_v20 = (float)(&DAT_00407ed0)[temp_v17 * 4] +
+            temp_v20 = (float)(&g_sinCosTable)[temp_v17 * 4] +
                      (temp_v12 - temp_v24) * (float)(&DAT_00407ed8)[temp_v17 * 4];
             temp_v12 = (float)(&DAT_00407ed4)[temp_v17 * 4] +
                      (temp_v12 - temp_v24) * (float)(&DAT_00407edc)[temp_v17 * 4];
@@ -1082,15 +1082,15 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
             temp_v12 = (float)VectorUnsignedToFloat(temp_v18 & 0xffff,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v18 = temp_v17 & 0xff;
             temp_v20 = (float)VectorUnsignedToFloat(temp_v17 & 0xffff,(unsigned char)(in_fpscr >> 0x16) & 3);
-            temp_v25 = (float)(&DAT_00407ed0)[temp_v21 * 4] +
+            temp_v25 = (float)(&g_sinCosTable)[temp_v21 * 4] +
                      (temp_v8 - temp_v12) * (float)(&DAT_00407ed8)[temp_v21 * 4];
             temp_v12 = (float)(&DAT_00407ed4)[temp_v21 * 4] +
                      (temp_v8 - temp_v12) * (float)(&DAT_00407edc)[temp_v21 * 4];
-            temp_v8 = (float)(&DAT_00407ed0)[temp_v16 * 4] +
+            temp_v8 = (float)(&g_sinCosTable)[temp_v16 * 4] +
                      (temp_v28 - temp_v19) * (float)(&DAT_00407ed8)[temp_v16 * 4];
             temp_v42 = (float)(&DAT_00407ed4)[temp_v16 * 4] +
                        (temp_v28 - temp_v19) * (float)(&DAT_00407edc)[temp_v16 * 4];
-            temp_v19 = (float)(&DAT_00407ed0)[temp_v18 * 4] +
+            temp_v19 = (float)(&g_sinCosTable)[temp_v18 * 4] +
                      (temp_v26 - temp_v20) * (float)(&DAT_00407ed8)[temp_v18 * 4];
             temp_v28 = (float)(&DAT_00407ed4)[temp_v18 * 4] +
                      (temp_v26 - temp_v20) * (float)(&DAT_00407edc)[temp_v18 * 4];
@@ -1237,11 +1237,11 @@ LAB_0027907c:
                 temp_v16 = temp_v16 & 0xff;
                 temp_v24 = (float)VectorUnsignedToFloat(temp_v22 & 0xffff,(unsigned char)(temp_v21 >> 0x16) & 3);
                 temp_v18 = temp_v18 & 0xff;
-                temp_v19 = (float)(&DAT_00407ed0)[temp_v16 * 4] +
+                temp_v19 = (float)(&g_sinCosTable)[temp_v16 * 4] +
                          (temp_v10 - temp_v20) * (float)(&DAT_00407ed8)[temp_v16 * 4];
-                temp_v8 = (float)(&DAT_00407ed0)[temp_v18 * 4] +
+                temp_v8 = (float)(&g_sinCosTable)[temp_v18 * 4] +
                          (temp_v26 - temp_v23) * (float)(&DAT_00407ed8)[temp_v18 * 4];
-                temp_v12 = (float)(&DAT_00407ed0)[temp_v17 * 4] +
+                temp_v12 = (float)(&g_sinCosTable)[temp_v17 * 4] +
                          (temp_v25 - temp_v24) * (float)(&DAT_00407ed8)[temp_v17 * 4];
                 temp_v20 = (float)(&DAT_00407ed4)[temp_v16 * 4] +
                          (temp_v10 - temp_v20) * (float)(&DAT_00407edc)[temp_v16 * 4];
@@ -1306,11 +1306,11 @@ LAB_0027907c:
                 temp_v23 = (float)VectorUnsignedToFloat(temp_v21 & 0xffff,(unsigned char)(in_fpscr >> 0x16) & 3);
                 temp_v24 = (float)VectorUnsignedToFloat(temp_v17 & 0xffff,(unsigned char)(in_fpscr >> 0x16) & 3);
                 temp_v21 = temp_v21 & 0xff;
-                temp_v19 = (float)(&DAT_00407ed0)[temp_v18 * 4] +
+                temp_v19 = (float)(&g_sinCosTable)[temp_v18 * 4] +
                          (temp_v8 - temp_v20) * (float)(&DAT_00407ed8)[temp_v18 * 4];
-                temp_v25 = (float)(&DAT_00407ed0)[temp_v21 * 4] +
+                temp_v25 = (float)(&g_sinCosTable)[temp_v21 * 4] +
                          (temp_v10 - temp_v23) * (float)(&DAT_00407ed8)[temp_v21 * 4];
-                temp_v12 = (float)(&DAT_00407ed0)[temp_v16 * 4] +
+                temp_v12 = (float)(&g_sinCosTable)[temp_v16 * 4] +
                          (temp_v26 - temp_v24) * (float)(&DAT_00407ed8)[temp_v16 * 4];
                 temp_v20 = (float)(&DAT_00407ed4)[temp_v18 * 4] +
                          (temp_v8 - temp_v20) * (float)(&DAT_00407edc)[temp_v18 * 4];
@@ -1457,15 +1457,15 @@ LAB_00279850:
                 temp_v18 = temp_v18 & 0xff;
                 temp_v20 = (float)VectorUnsignedToFloat(temp_v17 & 0xffff,(unsigned char)(temp_v21 >> 0x16) & 3);
                 temp_v17 = temp_v17 & 0xff;
-                temp_v12 = (float)(&DAT_00407ed0)[temp_v16 * 4] +
+                temp_v12 = (float)(&g_sinCosTable)[temp_v16 * 4] +
                          (temp_v10 - temp_v8) * (float)(&DAT_00407ed8)[temp_v16 * 4];
                 temp_v19 = (float)(&DAT_00407ed4)[temp_v16 * 4] +
                          (temp_v10 - temp_v8) * (float)(&DAT_00407edc)[temp_v16 * 4];
-                temp_v10 = (float)(&DAT_00407ed0)[temp_v18 * 4] +
+                temp_v10 = (float)(&g_sinCosTable)[temp_v18 * 4] +
                          (temp_v26 - temp_v23) * (float)(&DAT_00407ed8)[temp_v18 * 4];
                 temp_v36 = (float)(&DAT_00407ed4)[temp_v18 * 4] +
                             (temp_v26 - temp_v23) * (float)(&DAT_00407edc)[temp_v18 * 4];
-                temp_v8 = (float)(&DAT_00407ed0)[temp_v17 * 4] +
+                temp_v8 = (float)(&g_sinCosTable)[temp_v17 * 4] +
                          (temp_v25 - temp_v20) * (float)(&DAT_00407ed8)[temp_v17 * 4];
                 temp_v26 = (float)(&DAT_00407ed4)[temp_v17 * 4] +
                          (temp_v25 - temp_v20) * (float)(&DAT_00407edc)[temp_v17 * 4];
@@ -1526,11 +1526,11 @@ LAB_00279850:
                 temp_v21 = temp_v17 & 0xff;
                 temp_v24 = (float)VectorUnsignedToFloat(temp_v17 & 0xffff,(unsigned char)(in_fpscr >> 0x16) & 3);
                 temp_v18 = temp_v18 & 0xff;
-                temp_v19 = (float)(&DAT_00407ed0)[temp_v16 * 4] +
+                temp_v19 = (float)(&g_sinCosTable)[temp_v16 * 4] +
                          (temp_v8 - temp_v20) * (float)(&DAT_00407ed8)[temp_v16 * 4];
-                temp_v25 = (float)(&DAT_00407ed0)[temp_v18 * 4] +
+                temp_v25 = (float)(&g_sinCosTable)[temp_v18 * 4] +
                          (temp_v10 - temp_v23) * (float)(&DAT_00407ed8)[temp_v18 * 4];
-                temp_v12 = (float)(&DAT_00407ed0)[temp_v21 * 4] +
+                temp_v12 = (float)(&g_sinCosTable)[temp_v21 * 4] +
                          (temp_v26 - temp_v24) * (float)(&DAT_00407ed8)[temp_v21 * 4];
                 temp_v8 = (float)(&DAT_00407ed4)[temp_v16 * 4] +
                          (temp_v8 - temp_v20) * (float)(&DAT_00407edc)[temp_v16 * 4];

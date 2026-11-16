@@ -27,7 +27,7 @@ extern "C" void FUN_00259e98(void)
     }
     memFill8(&panel->resetButton, 0xffffffff);
     panel->countB = 0;
-    SpriteInfo *anchor = asdTMTexTableEntryAt(0x2f, FUN_0029efa8(panel->cursor) + 0x1f);
+    SpriteInfo *anchor = asdTMTexTableEntryAt(0x2f, listCursorGetRowIfUnblocked(panel->cursor) + 0x1f);
     panel->resetButton = addSpriteTouchRegion(anchor, asdTMTexTableEntryAt(0x2f, 0x1b));
     ++panel->countB;
     panel->leftButton = addSpriteTouchRegion(anchor, asdTMTexTableEntryAt(0x2f, 0x34));

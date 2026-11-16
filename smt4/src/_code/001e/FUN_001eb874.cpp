@@ -141,7 +141,7 @@ LAB_001ebcbc:
       FUN_002bdf94(0,*(short *)(iVar1 + 8) + param_4,*(short *)(iVar1 + 10) + param_5,0,5,0x71,
                    auStack_58);
       iVar1 = asdTMTexTableEntryAt(0x39,0x89);
-      FUN_00210d08(*(unsigned int *)(param_2 + 0x30),*(short *)(iVar1 + 8) + param_4,
+      uiDrawSevenDigitNumber(*(unsigned int *)(param_2 + 0x30),*(short *)(iVar1 + 8) + param_4,
                    *(short *)(iVar1 + 10) + param_5,0x71);
       gxResetColorQuadToWhite();
       FUN_002bf538();

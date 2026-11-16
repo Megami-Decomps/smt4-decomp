@@ -101,7 +101,7 @@ u32 FUN_001af84c(s32 quest, u32 x, u32 y, u32 flags, s32 full)
                     texDrawTableEntryAtStoredOrigin(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_LOCKED, x, y, flags);
                 return questColorDim(full);
             }
-            if (FUN_002903f0() == quest) {
+            if (rosterGetLeaderId() == quest) {
                 texDrawCompositeSprite(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_SELECTED, x, y, flags);
                 return questColorSelected(full);
             }
@@ -113,7 +113,7 @@ u32 FUN_001af84c(s32 quest, u32 x, u32 y, u32 flags, s32 full)
     }
 
     if (FUN_00298dc8() != 0) {
-        if (FUN_002903f0() == 0) {
+        if (rosterGetLeaderId() == 0) {
             texDrawCompositeSprite(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_ACTIVE, x, y, flags);
             return questColorSelected(full);
         }

@@ -13,7 +13,7 @@ struct IntroWork {
 
 extern "C" {
 
-s32 FUN_002b8ee0(u8 *loader, s32 mode);
+s32 uiSlidingSpriteAdvance(u8 *loader, s32 mode);
 u32 FUN_002aa024(s32 group, s32 id);
 s32 uiAnimationAdvanceChannel(u8 *animation, s32 channel);
 
@@ -26,7 +26,7 @@ u32 FUN_00391000(u32 job)
     switch (work->state) {
     case 0:
         u8 *loader = work->loader;
-        if (FUN_002b8ee0(loader, 0) != 0) {
+        if (uiSlidingSpriteAdvance(loader, 0) != 0) {
             work->state = 1;
             work->flags |= 0x2000;
             work->sound = FUN_002aa024(0x3a, 0x45);

@@ -30,7 +30,7 @@ struct BtlHelpList {
 
 extern "C" {
 
-extern BtlHelpList *DAT_00435d78;
+extern BtlHelpList *g_btlHelpList;
 
 void jobGetWork(void);
 void asdMemFree(void *block);
@@ -54,11 +54,11 @@ u32 FUN_001b5498(void)
     BtlHelpEntry *next;
 
     jobGetWork();
-    if (DAT_00435d78 == NULL) {
+    if (g_btlHelpList == NULL) {
         return 0;
     }
     u32 result = 0;
-    entry = DAT_00435d78->head;
+    entry = g_btlHelpList->head;
     while (entry != NULL) {
         next = entry->next;
         if (entry->timer >= 0) {
@@ -109,7 +109,7 @@ u32 FUN_001b5498(void)
             entry->shownCount++;
             return result;
         }
-        BtlHelpList *list = DAT_00435d78;
+        BtlHelpList *list = g_btlHelpList;
 
         if (entry->prev == NULL) {
             list->head = next;

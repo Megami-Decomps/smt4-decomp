@@ -19,12 +19,12 @@ extern "C" nn::Result FUN_0032cab4(RomFileOpenState *state, const void *path, s3
 
     if (!pathBuildWide(static_cast<const char *>(path), reinterpret_cast<s16 *>(normalized), 2)) {
         result = 0xe0e046bc;
-        FUN_0013ebd8(result);
+        processResultSetValue(result);
         return result;
     }
     if (mode == 1) {
         result = romFileOpen(&state->file, normalized, 2);
     }
-    FUN_0013ebd8(result);
+    processResultSetValue(result);
     return result;
 }

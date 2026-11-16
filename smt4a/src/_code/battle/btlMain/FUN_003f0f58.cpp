@@ -1,4 +1,4 @@
-/* NON_MATCHING: everything matches except that retail predicates the zero timeout (movne r2, #0; movne r3, r2) above the thread-handle branch, where the build sets it after (same as FUN_0035d83c). */
+/* NON_MATCHING: everything matches except that retail predicates the zero timeout (movne r2, #0; movne r3, r2) above the thread-handle branch, where the build sets it after (same as jobHandleIsReady). */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "nn/os/ThreadLaunch.h"

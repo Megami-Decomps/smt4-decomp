@@ -52,7 +52,7 @@ void ifTouchGetButtonHelpValue(void);
 void sysPlaySe(void);
 void listCursorStepForward(void* list);
 void listCursorStepBack(void* list);
-void FUN_00183f58(s32 a, s32 b, s32 c, s32 d);
+void buttonHelpSelectSlot(s32 a, s32 b, s32 c, s32 d);
 
 #define MENU_BYTE(menu, offset) (*(reinterpret_cast<u8*>(menu) + (offset)))
 
@@ -115,9 +115,9 @@ void FUN_004a1db4(StatusMenu* menu)
     }
     if (MENU_BYTE(menu, 0x860) == 1) {
         if (MENU_BYTE(menu, 0x861) == 1) {
-            FUN_00183f58(2, 4, 0x40, 1);
+            buttonHelpSelectSlot(2, 4, 0x40, 1);
         } else {
-            FUN_00183f58(2, 4, 0x41, 1);
+            buttonHelpSelectSlot(2, 4, 0x41, 1);
         }
     }
     if (FUN_002a482c(menu->list) == cursor && FUN_0031d174(menu->list) == page) return;

@@ -6,7 +6,7 @@ extern "C" {
 
 void FUN_00333dc8(u8 value);
 
-void FUN_003343f0(u8 value);
+void gameGlobalsSetMenuOpenFlag(u8 value);
 
 void FUN_0033449c(u8 value);
 

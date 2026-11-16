@@ -42,7 +42,7 @@ int FUN_0010b5e8(...);
 int FUN_00123934(...);
 int mobiclipCloseSlot(...);
 int asdProcessSetGroupEnabled(...);
-int FUN_002c567c(...);
+int clockGetTicksAsMicroseconds(...);
 int gameDataFlagsClear(...);
 int VectorSignedToFloat(...);
 int software_interrupt(...);
@@ -377,7 +377,7 @@ extern unsigned long long FUN_002c5434(unsigned int);
 /* Supplied declaration required: mobiclipCloseSlot. */
 extern unsigned long long jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: asdProcessSetGroupEnabled. */
-/* Supplied declaration required: FUN_002c567c. */
+/* Supplied declaration required: clockGetTicksAsMicroseconds. */
 /* Supplied declaration required: gameDataFlagsClear. */
 /* Supplied declaration required: gameDataFlagsClearAndRefresh. */
 /* Supplied declaration required: gameDataRemoveHomeButtonHold. */
@@ -700,7 +700,7 @@ void FUN_00101308(void)
   gameDataFlagsClearAndRefresh(7);
   gameDataFlagsClear(1);
   DAT_00446db3 = 0;
-  FUN_002c567c(&temp_v26);
+  clockGetTicksAsMicroseconds(&temp_v26);
   temp_v3 = (unsigned int)(romwright_zext_4_8(temp_v26) * 1000000);
   randSetSeed(temp_v3,(int)(romwright_zext_4_8(temp_v26) * 1000000 >> 0x20));
   temp_v23 = FUN_00103d38(temp_v3);

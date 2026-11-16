@@ -58,7 +58,7 @@ unsigned int FUN_002a0b58(void)
         *(short *)(iVar6 + 0x1a) = *(short *)(iVar6 + 0x1a) + 1;
         iVar2 = DAT_00589164;
         iVar3 = resourceRunOperationIfUnblocked(DAT_00589164 + 0xf0);
-        iVar2 = FUN_002a4894(iVar2 + 0xf0);
+        iVar2 = listCursorGetRowIfUnblocked(iVar2 + 0xf0);
         FUN_00187180(0x3a,1);
         iVar4 = FUN_00192798();
         buttonHelpSetText(iVar4 + (iVar3 + iVar2) * 0x94 + 0x14,0xf4f4f4ff);
@@ -72,7 +72,7 @@ unsigned int FUN_002a0b58(void)
     break;
   case 1:
     iVar2 = resourceRunOperationIfUnblocked(iVar6 + 0xf0);
-    iVar3 = FUN_002a4894(iVar6 + 0xf0);
+    iVar3 = listCursorGetRowIfUnblocked(iVar6 + 0xf0);
     uVar9 = iVar2 + iVar3;
     FUN_00187180(0x3a,1);
     FUN_00192798();
@@ -101,7 +101,7 @@ unsigned int FUN_002a0b58(void)
         }
       }
       else {
-        DAT_00588fc0 = 0x32;
+        g_titleConfigValues = 0x32;
         uVar8 = categoryGetThresholdIndex();
         *(unsigned int *)(iVar6 + 0x28) = uVar8;
       }
@@ -182,7 +182,7 @@ code_r0x002a0ee4:
       uVar8 = 4;
       padQueryLogicalKey(uVar8,0);
     }
-    DAT_00588fc0 = func_0x002bd718(*(unsigned int *)(iVar6 + 0x28));
+    g_titleConfigValues = func_0x002bd718(*(unsigned int *)(iVar6 + 0x28));
     DAT_00588fc1 = func_0x002a0a20(*(unsigned int *)(iVar6 + 0x2c));
     DAT_00588fc2 = func_0x00316508(*(unsigned int *)(iVar6 + 0x30));
     DAT_00588fc3 = func_0x002e0780(*(unsigned int *)(iVar6 + 0x2c));
@@ -209,14 +209,14 @@ code_r0x002a0ee4:
       iVar2 = DAT_00589164;
       if (iVar3 != 0) {
         iVar6 = resourceRunOperationIfUnblocked(DAT_00589164 + 0xf0);
-        iVar2 = FUN_002a4894(iVar2 + 0xf0);
+        iVar2 = listCursorGetRowIfUnblocked(iVar2 + 0xf0);
         FUN_00187180(0x3a,1);
         iVar3 = FUN_00192798();
         buttonHelpSetText(iVar3 + (iVar6 + iVar2) * 0x94 + 0x14,0xf4f4f4ff);
         func_0x0024b0e8();
       }
       else {
-        iVar3 = FUN_002a4894(DAT_00589164 + 0xf0);
+        iVar3 = listCursorGetRowIfUnblocked(DAT_00589164 + 0xf0);
         iVar4 = 0;
         do {
           if ((iVar4 != iVar3) &&
@@ -225,7 +225,7 @@ code_r0x002a0ee4:
             scrollListSetSelectionTracked(iVar2 + 0xf0,iVar4);
             iVar6 = DAT_00589164;
             iVar2 = resourceRunOperationIfUnblocked(DAT_00589164 + 0xf0);
-            iVar6 = FUN_002a4894(iVar6 + 0xf0);
+            iVar6 = listCursorGetRowIfUnblocked(iVar6 + 0xf0);
             FUN_00187180(0x3a,1);
             iVar3 = FUN_00192798();
             buttonHelpSetText(iVar3 + (iVar2 + iVar6) * 0x94 + 0x14,0xf4f4f4ff);
@@ -250,7 +250,7 @@ code_r0x002a0ee4:
           FUN_001641b4(0x100020f);
           FUN_00184758(iVar6 + 0x5c,3,0);
           FUN_00184c00(iVar6 + 0x5c,1,0);
-          FUN_001a9110(&DAT_00588fc0,iVar6 + 0x34);
+          FUN_001a9110(&g_titleConfigValues,iVar6 + 0x34);
           FUN_00138718();
           uVar8 = func_0x003de09c();
           func_0x0032ccf8(0,uVar8,1);

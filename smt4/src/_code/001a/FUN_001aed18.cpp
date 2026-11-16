@@ -46,7 +46,7 @@ extern int FUN_00298848(unsigned int, int);
 extern unsigned int appGetRemainingCapacity(unsigned int);
 extern unsigned int FUN_0029a9d4(unsigned int, unsigned int);
 extern int FUN_0029ee54(int);
-extern int FUN_0029efa8(int);
+extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: gameGetUnitRecord. */
 extern int gameGetPlayerData(void);
@@ -184,15 +184,15 @@ void FUN_001aed18(int param_1,int param_2,int param_3)
   FUN_0028f870(temp_v11,param_1,param_2,1);
   if ((temp_v15 != 0) && (temp_v7 = FUN_0029ee54(temp_v5 + 0x1dc), temp_v7 >= 1)) {
     temp_v7 = resourceRunOperationIfUnblocked(temp_v11);
-    temp_v1 = FUN_0029efa8(temp_v11);
+    temp_v1 = listCursorGetRowIfUnblocked(temp_v11);
     temp_v9 = *(unsigned int *)(temp_v5 + (temp_v1 + temp_v7) * 8 + 0xe3c);
     temp_v7 = resourceRunOperationIfUnblocked(temp_v11);
-    temp_v1 = FUN_0029efa8(temp_v11);
+    temp_v1 = listCursorGetRowIfUnblocked(temp_v11);
     temp_v8 = *(unsigned int *)(temp_v5 + (temp_v1 + temp_v7) * 8 + 0xe40);
     temp_v13 = temp_v8 >> 0x1f;
-    temp_v7 = FUN_0029efa8(temp_v11);
+    temp_v7 = listCursorGetRowIfUnblocked(temp_v11);
     temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d, temp_v7 + 0x42e));
-    temp_v1 = FUN_0029efa8(temp_v11);
+    temp_v1 = listCursorGetRowIfUnblocked(temp_v11);
     FUN_0028f694(*(short *)(temp_v7 + 8) + param_1,*(short *)(temp_v7 + 10) + param_2,
                  (int)*(short *)(temp_v5 + temp_v1 * 2 + 0xe0c));
     temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d, 0x449));
@@ -200,11 +200,11 @@ void FUN_001aed18(int param_1,int param_2,int param_3)
     if (temp_v12 != 0) {
       temp_v4 = 0xffffffff;
       temp_v2 = resourceRunOperationIfUnblocked(temp_v11);
-      temp_v3 = FUN_0029efa8(temp_v11);
+      temp_v3 = listCursorGetRowIfUnblocked(temp_v11);
       temp_v2 = FUN_00298848(temp_v9,(int)(short)*(unsigned int *)(temp_v5 + (temp_v3 + temp_v2) * 8 + 0xe40));
       if ((temp_v2 != 0) && (temp_v2 = FUN_002987d8(temp_v8,temp_v9), temp_v2 != 0)) {
         temp_v2 = resourceRunOperationIfUnblocked(temp_v11);
-        temp_v3 = FUN_0029efa8(temp_v11);
+        temp_v3 = listCursorGetRowIfUnblocked(temp_v11);
         if (*(int *)(temp_v5 + (temp_v3 + temp_v2) * 8 + 0xe40) < 0) {
           temp_v2 = gameGetPlayerData();
           if ((*(unsigned short *)(temp_v2 + 0x72) & 2) != 0) {

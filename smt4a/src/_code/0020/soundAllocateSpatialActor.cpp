@@ -3,13 +3,13 @@
 extern "C" {
 void asd3dSoundActorSetPosition(s32, const Vector4 *);
 void FUN_00359768(u32, s32, u32);
-void FUN_0036bca0(u32, s32);
+void asd3dSoundActorStart(u32, s32);
 s32 asd3dSoundActorIsPlaying(s32);
 s32 asdSoundGetPlayerPriority(void *);
 u32 FUN_0014af98(void);
 s32 FUN_00162ea4(void);
 void *jyoucyuGetTableEntry(u32);
-void *FUN_0036bc6c(s32);
+void *asd3dSoundActorGetSlotValue(s32);
 
 // Choose a free spatial sound actor or replace the highest-priority fallback candidate.
 s32 soundAllocateSpatialActor(u32 sound, Vector4 position)
@@ -25,7 +25,7 @@ s32 soundAllocateSpatialActor(u32 sound, Vector4 position)
                 selected = actor;
                 asd3dSoundActorSetPosition(selected, &position);
                 if (sound - 0x100007cu <= 400) {
-                    FUN_0036bca0(sound, selected);
+                    asd3dSoundActorStart(sound, selected);
                     selected += 100000;
                 } else if (sound - 0x100020du <= 261) {
                     FUN_00359768(sound, selected, context);
@@ -36,7 +36,7 @@ s32 soundAllocateSpatialActor(u32 sound, Vector4 position)
         }
         if (!allocated) {
             for (s32 actor = 0; actor < 16; ++actor) {
-                s32 priority = asdSoundGetPlayerPriority(FUN_0036bc6c(actor));
+                s32 priority = asdSoundGetPlayerPriority(asd3dSoundActorGetSlotValue(actor));
                 if (highestPriority < priority) {
                     highestPriority = priority;
                     replacement = actor;

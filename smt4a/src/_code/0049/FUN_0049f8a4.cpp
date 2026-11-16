@@ -31,7 +31,7 @@ MemberRecord *gameGetOptions(void);
 s32 gameOptionsClassifyMode(void);
 s32 unitHasRankingBonus(u16 equipment);
 void gameCounterAddSaturating(s32 sound);
-void FUN_004186e0(void);
+void rosterGetLeaderId(void);
 s32 FUN_001bd118(void);
 
 /* The percentage of `max`, at least 1. */
@@ -119,7 +119,7 @@ void FUN_0049f8a4(u32 target, s32 percent)
     MemberRecord *options = gameGetOptions();
     s32 max = options->maxHp;
     s32 newHp = options->hp - percentOf(max, percent);
-    FUN_004186e0();
+    rosterGetLeaderId();
     bool fourth = FUN_001bd118() == 4;
     if (newHp <= 0 && !fourth)
         newHp = 1;

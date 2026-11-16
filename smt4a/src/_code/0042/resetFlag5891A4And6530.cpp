@@ -4,7 +4,7 @@ extern "C" {
 
 extern s8 DAT_005891a4;
 extern void FUN_00432084(void);
-extern void FUN_00432104(void);
+extern void ipcServiceSessionRelease(void);
 extern void FUN_00426530(void);
 
 void resetFlag5891A4And6530(void)
@@ -12,7 +12,7 @@ void resetFlag5891A4And6530(void)
     if (DAT_005891a4 != 0) {
         FUN_00432084();
         DAT_005891a4 = 0;
-        FUN_00432104();
+        ipcServiceSessionRelease();
     }
     FUN_00426530();
 }

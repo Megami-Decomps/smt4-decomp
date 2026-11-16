@@ -11,8 +11,8 @@ int renderCtxApplyTransforms(...);
 int campMenuEntryDraw(...);
 int FUN_00247f0c(void);
 int effectSpawnDefaultArguments(...);
-int FUN_0026e70c(...);
-int FUN_002b0750(...);
+int floatInterpolateOverDuration(...);
+int uiDrawTableTextureSized(...);
 int FUN_002b0800(...);
 int texDrawCompositeSprite(...);
 int asdTMTexTableEntryAt(...);
@@ -38,8 +38,8 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_00247f0c. */
 /* Supplied declaration required: effectSpawnDefaultArguments. */
 extern unsigned int FUN_0026e6a0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0026e70c. */
-/* Supplied declaration required: FUN_002b0750. */
+/* Supplied declaration required: floatInterpolateOverDuration. */
+/* Supplied declaration required: uiDrawTableTextureSized. */
 /* Supplied declaration required: FUN_002b0800. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
@@ -137,7 +137,7 @@ int FUN_002ed628(unsigned int handle)
       temp_v12 = -16.0f;
       FUN_00247f0c();
       VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x1c),(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_0026e70c();
+      floatInterpolateOverDuration();
       efctSetSpeed();
       temp_v12 = (float)(int)temp_v12;
       texDrawCompositeSprite(2,0x2d,0,0,temp_v12,0xc);
@@ -153,25 +153,25 @@ int FUN_002ed628(unsigned int handle)
       temp_v3 = (int)*(short *)(*(int *)(temp_v3 + 0xc) + 2);
       VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_0026e70c(temp_v3);
+      floatInterpolateOverDuration(temp_v3);
       temp_v3 = asdTMTexTableEntryAt(0x2d,0xb);
       temp_v7 = VectorFloatToUnsigned(temp_v12,3);
       temp_v9 = (float)VectorSignedToFloat((int)(*(short **)(temp_v3 + 0xc))[1],
                                           (unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v2 = VectorSignedToFloat((int)**(short **)(temp_v3 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v2 = VectorFloatToUnsigned(temp_v2,3);
-      FUN_002b0750(2,0x2d,0xb,0,(int)((temp_v9 - temp_v12) * temp_v8),temp_v2,temp_v7,0xc);
+      uiDrawTableTextureSized(2,0x2d,0xb,0,(int)((temp_v9 - temp_v12) * temp_v8),temp_v2,temp_v7,0xc);
       temp_v3 = asdTMTexTableEntryAt(0x2d,0xc);
       temp_v9 = (float)VectorSignedToFloat((int)(*(short **)(temp_v3 + 0xc))[1],
                                           (unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v2 = VectorSignedToFloat((int)**(short **)(temp_v3 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v2 = VectorFloatToUnsigned(temp_v2,3);
-      FUN_002b0750(2,0x2d,0xc,0,(int)((temp_v9 - temp_v12) * temp_v8),temp_v2,temp_v7,0xc);
+      uiDrawTableTextureSized(2,0x2d,0xc,0,(int)((temp_v9 - temp_v12) * temp_v8),temp_v2,temp_v7,0xc);
       break;
     case 2:
       texDrawCompositeSprite(2,0x2d,2,0,0,0xc);
       VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x1c),(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_0026e70c();
+      floatInterpolateOverDuration();
       efctSetSpeed();
       texDrawTableEntryAtStoredOrigin(2,0x2d,0xd,0,0,0xd);
       texDrawTableEntryAtStoredOrigin(2,0x2d,0x10,0,0,0xd);
@@ -182,7 +182,7 @@ int FUN_002ed628(unsigned int handle)
       texDrawTableEntryAtStoredOrigin(2,0x2d,0xd,0,0,0xd);
       texDrawTableEntryAtStoredOrigin(2,0x2d,0x10,0,0,0xd);
       VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x1c),(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_0026e70c();
+      floatInterpolateOverDuration();
       efctSetSpeed();
       texDrawTableEntryAtStoredOrigin(2,0x2d,0xe,0,0,0xd);
       texDrawTableEntryAtStoredOrigin(2,0x2d,0xf,0,0,0xd);
@@ -190,7 +190,7 @@ int FUN_002ed628(unsigned int handle)
       break;
     case 4:
       VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x1c),(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_0026e70c();
+      floatInterpolateOverDuration();
       efctSetSpeed();
       temp_v3 = g_titleScene;
       temp_v1 = packNibblesAndByte(6,1,0);
@@ -225,21 +225,21 @@ int FUN_002ed628(unsigned int handle)
       temp_v3 = (int)*(short *)(*(int *)(temp_v3 + 0xc) + 2);
       VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_0026e70c(temp_v3);
+      floatInterpolateOverDuration(temp_v3);
       temp_v3 = asdTMTexTableEntryAt(0x2d,0x17);
       temp_v7 = VectorFloatToUnsigned(temp_v12,3);
       temp_v10 = (float)VectorSignedToFloat((int)(*(short **)(temp_v3 + 0xc))[1],
                                           (unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v2 = VectorSignedToFloat((int)**(short **)(temp_v3 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v2 = VectorFloatToUnsigned(temp_v2,3);
-      FUN_002b0750(2,0x2d,0x17,0,(int)((temp_v10 - temp_v12) * temp_v8),temp_v2,temp_v7,0xc);
+      uiDrawTableTextureSized(2,0x2d,0x17,0,(int)((temp_v10 - temp_v12) * temp_v8),temp_v2,temp_v7,0xc);
       temp_v3 = asdTMTexTableEntryAt(0x2d,0x18);
       temp_v10 = (float)VectorSignedToFloat((int)(*(short **)(temp_v3 + 0xc))[1],
                                           (unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v2 = VectorSignedToFloat((int)**(short **)(temp_v3 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v2 = VectorFloatToUnsigned(temp_v2,3);
       temp_v12 = (float)(int)((temp_v10 - temp_v12) * temp_v8);
-      FUN_002b0750(2,0x2d,0x18,0,temp_v12,temp_v2,temp_v7,0xc);
+      uiDrawTableTextureSized(2,0x2d,0x18,0,temp_v12,temp_v2,temp_v7,0xc);
       effectSpawnDefaultArguments(*(unsigned int *)(temp_v0 + 0x10));
       temp_v3 = asdTMTexTableEntryAt(0x2d,0x19);
       VectorSignedToFloat((int)*(short *)(temp_v3 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -291,7 +291,7 @@ int FUN_002ed628(unsigned int handle)
   case 4:
     temp_v11 = 0;
     VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x1c),(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_0026e70c();
+    floatInterpolateOverDuration();
     efctSetSpeed();
     campMenuEntryDraw(temp_v0,0xb);
     texDrawCompositeSprite(2,0x2d,4,0,0,0xc);
@@ -306,13 +306,13 @@ int FUN_002ed628(unsigned int handle)
     texDrawTableEntryAtStoredOrigin(2,0x2d,0x1f,(int)*(short *)(temp_v3 + 8),(int)*(short *)(temp_v3 + 10),0xd);
     efctSetSpeed();
     VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x1c),(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_0026e70c();
+    floatInterpolateOverDuration();
     efctSetSpeed();
     temp_v3 = asdTMTexTableEntryAt(0x2d,0x2f);
     temp_v1 = (int)*(short *)(*(int *)(temp_v3 + 0xc) + 2);
     VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x1c),(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_0026e70c(temp_v1);
+    floatInterpolateOverDuration(temp_v1);
     temp_v3 = (int)*(short *)(*(int *)(temp_v3 + 0xc) + 2);
     temp_v12 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v10 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -324,12 +324,12 @@ int FUN_002ed628(unsigned int handle)
     temp_v2 = VectorSignedToFloat((int)**(short **)(temp_v3 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v7 = VectorFloatToUnsigned(temp_v2,3);
     temp_v2 = VectorFloatToUnsigned((temp_v8 - temp_v10) + temp_v9,3);
-    FUN_002b0750(2,0x2d,0x2e,0,temp_v0,temp_v7,temp_v2,0x10);
+    uiDrawTableTextureSized(2,0x2d,0x2e,0,temp_v0,temp_v7,temp_v2,0x10);
     temp_v3 = asdTMTexTableEntryAt(0x2d,0x2f);
     temp_v2 = VectorFloatToUnsigned(temp_v9,3);
     temp_v7 = VectorSignedToFloat((int)**(short **)(temp_v3 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v7 = VectorFloatToUnsigned(temp_v7,3);
-    FUN_002b0750(2,0x2d,0x2f,0,temp_v0,temp_v7,temp_v2,0x11);
+    uiDrawTableTextureSized(2,0x2d,0x2f,0,temp_v0,temp_v7,temp_v2,0x11);
     efctSetSpeed();
     break;
   case 5:

@@ -5,7 +5,7 @@
 extern "C" {
 
 int dataTable08Sub2GetRecord(void);
-int FUN_003e8bb0(unsigned short [26], int, unsigned int);
+int btlEntryBuildSummary(unsigned short [26], int, unsigned int);
 int FUN_004bfcfc(int, int, int, unsigned int *, int, int, int);
 int FUN_004c4604(int, int, int, unsigned int *, int, int, int, unsigned char [8]);
 
@@ -35,7 +35,7 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 extern int itemIsCollectedWithRelated(unsigned short);
 extern int gameProgressIsAdvanced(void);
-/* Supplied declaration required: FUN_003e8bb0. */
+/* Supplied declaration required: btlEntryBuildSummary. */
 extern int valueAtF0IsReady(int);
 /* Supplied declaration required: FUN_004bfcfc. */
 /* Supplied declaration required: FUN_004c4604. */
@@ -84,7 +84,7 @@ unsigned int FUN_004ea200(int *param_1,int param_2,int param_3,unsigned int para
     temp_v1 = 0;
     *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x1be) = 1;
     *(short *)(*(int *)(param_2 + 0x28) + 0x1c0) = (short)temp_v8[temp_v7];
-    FUN_003e8bb0(temp_v9,*param_1,*(unsigned int *)(param_2 + 0x20));
+    btlEntryBuildSummary(temp_v9,*param_1,*(unsigned int *)(param_2 + 0x20));
     switch(temp_v9[0]) {
     case 1:
     case 6:

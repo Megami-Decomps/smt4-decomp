@@ -14,7 +14,7 @@ u32 FUN_002ac780(ArchiveView *archive);
 
 u8 objGetFlagBit0(Obj *obj);
 
-void FUN_002aea44(Obj *obj);
+void nwFontGlyphInit(Obj *obj);
 
 u32 bustupPlaceActiveSlot(Placement *placement, s32 mode);
 

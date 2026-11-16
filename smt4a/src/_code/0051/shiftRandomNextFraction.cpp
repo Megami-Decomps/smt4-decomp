@@ -2,7 +2,7 @@
 #include "code/Code0051_Smt4a.h"
 
 extern "C" {
-extern ShiftRandomState DAT_006357c8;
+extern ShiftRandomState g_randomState;
 
 static __inline u32 shiftRandomAdvance(ShiftRandomState *state)
 {
@@ -23,7 +23,7 @@ static __inline u32 shiftRandomAdvance(ShiftRandomState *state)
 f32 shiftRandomNextFraction(ShiftRandomState* state)
 {
     if (state == NULL) {
-        state = &DAT_006357c8;
+        state = &g_randomState;
     }
     return static_cast<f32>(shiftRandomAdvance(state) & 0xffffff) * (1.0f / 16777216.0f);
 }

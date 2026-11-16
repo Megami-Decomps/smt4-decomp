@@ -1,7 +1,7 @@
 #include "shard/ResourceRegistration.h"
 
 extern "C" {
-extern ResourceRegistration DAT_004d92f0[64];
+extern ResourceRegistration g_deferredResources[64];
 extern ResourceRegistration g_registrationEntries[64];
 void resourceDestroy(void *resource);
 void resourceListDestroy(void *resource);
@@ -11,7 +11,7 @@ void FUN_00105970()
     ResourceRegistration *entry;
 
     for (s32 index = 0; index < 64; ++index) {
-        entry = &DAT_004d92f0[index];
+        entry = &g_deferredResources[index];
         if (entry->resource) {
             if (entry->referenceCount > 0) {
                 --entry->referenceCount;

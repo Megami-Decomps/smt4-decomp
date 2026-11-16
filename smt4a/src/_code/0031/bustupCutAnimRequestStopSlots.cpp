@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void FUN_00164ce0(u32 handle, s32 arg);
+void jobSetSelectedFlag(u32 handle, s32 arg);
 s32 jobIsValid(u32 handle);
 
 extern BustupCutAnimA *g_bustupCutAnim;
@@ -16,7 +16,7 @@ void bustupCutAnimRequestStopSlots(s32 arg0)
     if (g_bustupCutAnim != NULL) {
         for (i = 1; i < BUSTUP_CUT_SLOTS; i++) {
             if (jobIsValid(anim->slots[i]) != 0) {
-                FUN_00164ce0(anim->slots[i], 1);
+                jobSetSelectedFlag(anim->slots[i], 1);
             }
         }
     }

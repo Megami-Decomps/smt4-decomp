@@ -7,7 +7,7 @@
 extern "C" void FUN_00379e18(SoundVoiceOwner *owner)
 {
     owner->Obj421aa4::updateParameters();
-    Obj421aa4Manager *manager = FUN_002baed8();
+    Obj421aa4Manager *manager = soundRequestQueueGetInstance();
     u32 mask = owner->changedMask;
     for (u32 i = 0; i < 4; i++) {
         if ((mask & 1) != 0) {

@@ -18,7 +18,7 @@ u32 FUN_00298e00(u32 quest);
 u32 questIsCompleted(s32 quest);
 bool questIsOfferable(u16 quest);
 u32 resourceRunOperationIfUnblocked(const void *cursor);
-u32 FUN_0029efa8(const void *cursor);
+u32 listCursorGetRowIfUnblocked(const void *cursor);
 void buttonHelpSetText(const u8 *text, u32 color);
 
 void FUN_00290404()
@@ -29,11 +29,11 @@ void FUN_00290404()
     if (panel->detailMode) {
         const void *cursor = panel->alternate.cursor;
         u32 row = resourceRunOperationIfUnblocked(cursor);
-        row += FUN_0029efa8(cursor);
+        row += listCursorGetRowIfUnblocked(cursor);
         quest = menu->cursor.alternate.ids[row];
     } else {
         u32 row = resourceRunOperationIfUnblocked(&menu->cursor);
-        row += FUN_0029efa8(&menu->cursor);
+        row += listCursorGetRowIfUnblocked(&menu->cursor);
         quest = menu->list[row];
     }
     if (quest == 0) {
@@ -43,7 +43,7 @@ void FUN_00290404()
     u32 status;
     if (panel->detailMode) {
         if (FUN_00298dc8(quest)) {
-            status = FUN_002903f0() ? 6 : 0;
+            status = rosterGetLeaderId() ? 6 : 0;
         } else {
             if (!questIsCompleted(quest)) {
                 return;
@@ -52,7 +52,7 @@ void FUN_00290404()
         }
     } else if (dataTable1bOr1cGetRecord(quest)->classification.kind) {
         if (questIsOfferable(quest)) {
-            if (FUN_002903f0() == quest) {
+            if (rosterGetLeaderId() == quest) {
                 status = 0;
             } else {
                 status = questIsCompleted(quest) ? 2 : 1;

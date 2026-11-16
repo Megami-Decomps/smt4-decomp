@@ -9,7 +9,7 @@ int dataTable8FindRecord(...);
 int dataTable04FindById(...);
 int sysMemClear(...);
 int dataTable41FindById(...);
-int FUN_003e8bb0(...);
+int btlEntryBuildSummary(...);
 int counterIncrementSaturating(...);
 int btlMainFindEntryByListedId(...);
 int FUN_004bf9a0(...);
@@ -76,7 +76,7 @@ extern int lcgRandomRange(unsigned int);
 extern int FUN_0028cb6c(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: dataTable41FindById. */
-/* Supplied declaration required: FUN_003e8bb0. */
+/* Supplied declaration required: btlEntryBuildSummary. */
 /* Supplied declaration required: counterIncrementSaturating. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_004bf9a0. */
@@ -201,7 +201,7 @@ FUN_004bfcfc(int param_1,unsigned int param_2,fn_004bfcfc_arg2 *param_3,unsigned
   temp_v3 = btlGetMainState();
   btlMainFindEntryByListedId(temp_v3,temp_v8);
   temp_v4 = btlGetMainState();
-  FUN_003e8bb0(temp_v19 + 1,temp_v4,temp_v3);
+  btlEntryBuildSummary(temp_v19 + 1,temp_v4,temp_v3);
   temp_v8 = temp_v19[1] >> 0x10;
   if (temp_v8 < 2) {
     temp_v37 = 1;
@@ -421,7 +421,7 @@ FUN_004bfcfc(int param_1,unsigned int param_2,fn_004bfcfc_arg2 *param_3,unsigned
     }
   }
   else {
-    FUN_003e8bb0(temp_v16,temp_v29,temp_v30);
+    btlEntryBuildSummary(temp_v16,temp_v29,temp_v30);
     puVar7 = (unsigned int *)btlUnitGet(g_btlScriptUnit);
     temp_v8 = temp_v41;
     if ((*puVar7 & 0x200) == 0) {

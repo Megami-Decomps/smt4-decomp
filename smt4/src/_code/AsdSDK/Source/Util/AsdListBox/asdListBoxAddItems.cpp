@@ -7,7 +7,7 @@
 
 extern "C" {
 extern u8 asdListBoxFreeItem; /* item callback */
-extern const char DAT_00409d40[]; /* AsdListBox.cpp: __FILE__ */
+extern const char g_asdListBoxSourceFileName[]; /* AsdListBox.cpp: __FILE__ */
 
 void *asdListAdd(void *list, void *item, void *func);
 void asdListBoxMarkDirty(u32 listBox);
@@ -20,7 +20,7 @@ static __inline u32 listBoxAppendItem(u32 listBox, const char *label)
     AsdListBoxModel *model = reinterpret_cast<AsdListBoxModel *>(jobGetWork(listBox));
     AsdListBoxItem *item;
 
-    asdDebugTrace(DAT_00409d40, 1011);
+    asdDebugTrace(g_asdListBoxSourceFileName, 1011);
     item = (AsdListBoxItem *)asdMemAlloc(0x100, 0x100, 0, sizeof(AsdListBoxItem), 1);
     strncpy(item->label, label, ASD_LISTBOX_PATH_LEN);
     item->type = 0;

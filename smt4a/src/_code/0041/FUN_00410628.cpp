@@ -16,8 +16,8 @@ int __aeabi_memset4(void);
 int slotSetRequest(...);
 int asdOperatorNewD(void);
 int asdOperatorDeleteC(unsigned int *);
-int FUN_003d54f8(...);
-int FUN_003e503c(void);
+int titleSetSlotValueState2(...);
+int partyGetSlotPreferredFirst(void);
 int btlReleaseEntries(...);
 int FUN_003efbac(...);
 int FUN_003f1b3c(int, unsigned int, int, int ***);
@@ -90,8 +90,8 @@ extern unsigned int dataTableGetEntries(void);
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: asdOperatorDeleteC. */
-/* Supplied declaration required: FUN_003d54f8. */
-/* Supplied declaration required: FUN_003e503c. */
+/* Supplied declaration required: titleSetSlotValueState2. */
+/* Supplied declaration required: partyGetSlotPreferredFirst. */
 /* Supplied declaration required: btlReleaseEntries. */
 /* Supplied declaration required: FUN_003efbac. */
 /* Supplied declaration required: FUN_003f1b3c. */
@@ -157,7 +157,7 @@ void FUN_00410628(int param_1)
     }
     temp_v3 = (int)pairedAvailabilityGetState(0);
     if (temp_v3 != 0) {
-      FUN_003d54f8(0,10);
+      titleSetSlotValueState2(0,10);
     }
     break;
   case 1:
@@ -182,7 +182,7 @@ void FUN_00410628(int param_1)
     temp_v5 = 0;
     do {
       temp_v0 = temp_v5;
-      FUN_003e503c();
+      partyGetSlotPreferredFirst();
       temp_v3 = partySlotIsOccupied();
       if (temp_v3 != 0) {
         temp_v2 = FUN_0019acdc(*(unsigned short *)(temp_v0 + 300), 1);
@@ -391,7 +391,7 @@ void FUN_00410628(int param_1)
     temp_v2 = g_btlAux;
     FUN_004f5238(g_btlAux,0,0,10);
     *(unsigned int *)(param_1 + 0x2c) = temp_v2;
-    FUN_003d54f8(0);
+    titleSetSlotValueState2(0);
     FUN_004f41b0(g_btlCamera,0,8);
     break;
   case 6:

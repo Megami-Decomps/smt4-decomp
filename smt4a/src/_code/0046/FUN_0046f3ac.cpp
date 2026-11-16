@@ -8,7 +8,7 @@
 extern "C" {
 
 int jyoucyuGetTableEntry(...);
-int FUN_00191f68(...);
+int aocPackageOwnerFreeTables(...);
 int _ZN18WindowStatusResultC1Ej(...);
 int _ZN7AocMain12queueRequestE17RequestParametersji(...);
 u32 _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(QueuedRequestTokenState*, const RequestParameters*, QueuedRequestHandle);
@@ -47,7 +47,7 @@ extern unsigned char LAB_00514b90; /* 0x514b90 */
 extern int g_aocMain; /* 0x570260 */
 
 /* Supplied declaration required: jyoucyuGetTableEntry. */
-/* Supplied declaration required: FUN_00191f68. */
+/* Supplied declaration required: aocPackageOwnerFreeTables. */
 extern int objGetFlagBit0(int);
 extern int sysLightEventTryWait(int);
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
@@ -68,7 +68,7 @@ extern int *_ZN18WindowStatusResultC1Ev(unsigned char *);
 extern int recordIsEnabledAndPresent(int);
 /* Supplied declaration required: aocEntryBeginBaseLoad. */
 extern int FUN_004743e4(int);
-extern int FUN_0047d754(int);
+extern int threadTryJoinAndClose(int);
 
 
 void FUN_0046f3ac(unsigned char *param_1,int param_2)
@@ -198,7 +198,7 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
       *(unsigned int *)(param_2 + 0x344) = temp_v1;
       return;
     case 2:
-      temp_v3 = FUN_0047d754(g_aocMain + 0x88);
+      temp_v3 = threadTryJoinAndClose(g_aocMain + 0x88);
       if (temp_v3 == 0) {
         return;
       }
@@ -304,7 +304,7 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
     __aeabi_vec_delete(*(int *)(param_2 + 0x318),_ZN9Obj4221d4D1Ev);
     *(unsigned int *)(param_2 + 0x318) = 0;
   }
-  FUN_00191f68(param_2);
+  aocPackageOwnerFreeTables(param_2);
   *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
   jyoucyuGetTableEntry(0);
   temp_v3 = g_aocMain;

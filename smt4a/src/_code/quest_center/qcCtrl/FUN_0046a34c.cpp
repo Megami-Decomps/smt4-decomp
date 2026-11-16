@@ -7,7 +7,7 @@ extern "C" {
 int textFormatBuffer(...);
 int asdOperatorNew(int, int);
 int asdMemoryAllocTraced(int, unsigned char *, int);
-int FUN_0022677c(...);
+int titleRestartSlotState3(...);
 int asdLoadFileAsyncSimple(...);
 int sysMemClear(void);
 int modelPlayClip(...);
@@ -16,7 +16,7 @@ int soundResetSpatialState(void);
 int FUN_00407ab0(...);
 int gameCounterAddSaturating(...);
 int resourceOwnerLoadFileSync(void);
-int FUN_0040aad4(int, int);
+int moriModelContentLoadBody(int, int);
 int modelListInit(void);
 int handleRegistryRegisterObject(...);
 int FUN_0040ae70(unsigned int, int);
@@ -44,7 +44,7 @@ extern int _ZN10FloatStateC1Ev(int);
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: asdMemoryAllocTraced. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_0022677c. */
+/* Supplied declaration required: titleRestartSlotState3. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: modelPlayClip. */
@@ -53,7 +53,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_00407ab0. */
 /* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: resourceOwnerLoadFileSync. */
-/* Supplied declaration required: FUN_0040aad4. */
+/* Supplied declaration required: moriModelContentLoadBody. */
 /* Supplied declaration required: modelListInit. */
 /* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: FUN_0040ae70. */
@@ -138,7 +138,7 @@ LAB_0046a3b0:
       piVar6 = (int *)(temp_v0 + 0xa10);
       *piVar6 = temp_v1;
       resourceOwnerLoadFileSync();
-      FUN_0040aad4(*piVar6,0);
+      moriModelContentLoadBody(*piVar6,0);
       FUN_0045b538(*(int *)(*piVar6 + 0xc) + 0xc);
       temp_v1 = *(int *)(*piVar6 + 4);
       modelPlayClip(temp_v1,0);
@@ -154,7 +154,7 @@ LAB_0046a3b0:
       }
       *(unsigned int *)(temp_v0 + 0xa34) = temp_v2;
       resourceOwnerLoadFileSync();
-      FUN_0040aad4(*(int *)(temp_v0 + 0xa34),0);
+      moriModelContentLoadBody(*(int *)(temp_v0 + 0xa34),0);
       temp_v1 = *(int *)(*(int *)(temp_v0 + 0xa34) + 4);
       handleRegistryRegisterObject(g_handleRegistry,temp_v1);
       modelPlayClip(temp_v1,0,1);
@@ -175,7 +175,7 @@ LAB_0046a3b0:
     piVar6 = (int *)(param_1 + 0xce8);
     *(unsigned int *)(param_1 + 0xce8) = temp_v2;
     resourceOwnerLoadFileSync();
-    FUN_0040aad4(*piVar6,0);
+    moriModelContentLoadBody(*piVar6,0);
     FUN_0045b538(*(int *)(*piVar6 + 0xc) + 0xc);
     temp_v2 = *(unsigned int *)(*piVar6 + 4);
     handleRegistryRegisterObject(g_handleRegistry,temp_v2);
@@ -218,8 +218,8 @@ LAB_0046a3b0:
   }
   asdLoadFileAsyncSimple(temp_v7 + 0x10,param_1 + 0x290,0);
   asdLoadFileAsyncSimple(temp_v6,param_1 + 0x294,0);
-  FUN_0022677c(0,0xff);
-  FUN_0022677c(1,0xff);
+  titleRestartSlotState3(0,0xff);
+  titleRestartSlotState3(1,0xff);
   gameCounterAddSaturating(0x1c,1);
   return;
 }

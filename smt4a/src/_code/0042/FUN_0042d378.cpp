@@ -17,14 +17,14 @@ struct CecState {
     /* 0x4 */ u8 debugMode;
 };
 
-extern CecState DAT_005b4486;
+extern CecState g_cecState;
 
 /* One-time CEC initialization; returns the first failing result, or the service setup's. */
 s32 FUN_0042d378(void)
 {
     s32 result = 0;
 
-    if (!DAT_005b4486.initialized) {
+    if (!g_cecState.initialized) {
         s32 init = nn_cec_CTR_detail_InitializeCecControl();
         if (nnResultIsFailure(init)) {
             return init;
@@ -35,11 +35,11 @@ s32 FUN_0042d378(void)
         if (!nnResultIsSuccess(setup)) {
             return setup;
         }
-        DAT_005b4486.serviceReady = 1;
+        g_cecState.serviceReady = 1;
         nn_cfg_CTR_Initialize();
-        DAT_005b4486.debugMode = nn_cfg_CTR_IsDebugMode();
+        g_cecState.debugMode = nn_cfg_CTR_IsDebugMode();
         FUN_001a0eb0();
-        DAT_005b4486.initialized = 1;
+        g_cecState.initialized = 1;
     }
     return result;
 }

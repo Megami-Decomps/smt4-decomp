@@ -10,7 +10,7 @@ int gfxSetSelectedChannelActive(int);
 int FUN_0014553c(void);
 int FUN_00145628(unsigned int, unsigned int);
 int FUN_00145aa8(int *);
-int FUN_002ae424(int);
+int charCodeIsPrivateUseGlyph(int);
 
 typedef int romwright_code(...);
 extern romwright_code *DAT_00464d5c; /* 0x464d5c */
@@ -27,7 +27,7 @@ extern unsigned char DAT_004def28; /* 0x4def28 */
 /* Supplied declaration required: FUN_0014553c. */
 /* Supplied declaration required: FUN_00145628. */
 /* Supplied declaration required: FUN_00145aa8. */
-/* Supplied declaration required: FUN_002ae424. */
+/* Supplied declaration required: charCodeIsPrivateUseGlyph. */
 
 
 int FUN_002b31b4(int *param_1)
@@ -116,7 +116,7 @@ LAB_002b338c:
     temp_v0 = *(unsigned short *)(*param_1 + (temp_v4 + 1) * 0x20);
     if (temp_v0 != 0xffff) {
       temp_v4 = 0;
-      temp_v8 = FUN_002ae424(temp_v0);
+      temp_v8 = charCodeIsPrivateUseGlyph(temp_v0);
 joined_r0x002b3444:
       if (temp_v8 == 0) {
         return temp_v4;
@@ -184,7 +184,7 @@ joined_r0x002b3444:
                 param_1[2] = temp_v8 + 1;
                 param_1[4] = param_1[4] + 1;
                 temp_v6 = *(short *)(*param_1 + (temp_v8 + 1) * 0x20);
-                temp_v8 = FUN_002ae424(temp_v6);
+                temp_v8 = charCodeIsPrivateUseGlyph(temp_v6);
               } while (temp_v8 == 0);
             } while (temp_v6 != -0x7e8);
             break;
@@ -329,7 +329,7 @@ LAB_002b3880:
     FUN_00145148();
     return temp_v4;
   }
-  temp_v8 = FUN_002ae424(temp_v0);
+  temp_v8 = charCodeIsPrivateUseGlyph(temp_v0);
   goto joined_r0x002b3444;
 }
 

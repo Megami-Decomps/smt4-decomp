@@ -15,14 +15,14 @@ extern ButtonHelpTextures g_buttonHelp;
 
 int asdTMTexTableReleaseNode(int id, int arg);
 int asdMemFree(void *block);
-int FUN_002d661c(void);
+int buttonHelpFreeTextureSlot(void);
 
 /* Drops a reference on the shared button help textures and frees them when the last one goes. */
 void buttonHelpTexturesUnref(void)
 {
     g_buttonHelp.refCount--;
     if (g_buttonHelp.refCount <= 0) {
-        FUN_002d661c();
+        buttonHelpFreeTextureSlot();
         asdMemFree(g_buttonHelp.textureA);
         asdMemFree(g_buttonHelp.textureB);
         asdTMTexTableReleaseNode(0x12, 0);

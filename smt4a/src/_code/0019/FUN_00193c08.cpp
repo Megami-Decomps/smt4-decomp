@@ -31,7 +31,7 @@ struct PoseBuffer {
 };
 
 extern "C" {
-extern const PhaseTrigEntry DAT_00536d14[256];
+extern const PhaseTrigEntry g_sinCosTable[256];
 void nn_math_ARMv6_MTX34MultAsm(Matrix34Data *destination, const Matrix34Data *first, const Matrix34Data *second);
 
 /* Builds the node matrices of the pose buffer: the Euler rotation of each source (a full turn is 256 phase units),
@@ -45,7 +45,7 @@ void FUN_00193c08(PoseOwner *owner, PoseBuffer *buffer)
         node->origin[1] = source->origin[1];
         node->origin[2] = source->origin[2];
         const f32 radiansToPhase = 40.743664f;
-        buildEulerPhaseRotation(&node->matrix, 1, DAT_00536d14, source->angles[0] * radiansToPhase,
+        buildEulerPhaseRotation(&node->matrix, 1, g_sinCosTable, source->angles[0] * radiansToPhase,
                                 source->angles[1] * radiansToPhase, source->angles[2] * radiansToPhase);
         Matrix34Data translate;
         translate.values[0] = 1.0f;

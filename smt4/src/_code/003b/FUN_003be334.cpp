@@ -20,7 +20,7 @@ struct ValueRecord {
     /* 0x69 */ u8 percent;         /* percent of the target's stat */
 };
 
-/* The action a battle entry is about to use, as FUN_00247478 fills it. */
+/* The action a battle entry is about to use, as btlEntryBuildSummary fills it. */
 struct ActionInfo {
     /* 0x00 */ u8 unk00[0x1D];
     /* 0x1D */ u8 flagA;
@@ -51,7 +51,7 @@ struct UnitRecord {
 extern "C" {
 ValueRecord *dataTable08Sub1GetRecord(s32 id);
 BattleEntry *btlMainFindEntryByListedId(BtlMainState *battle, s32 id);
-void FUN_00247478(ActionInfo *info, BtlMainState *battle, BattleEntry *entry);
+void btlEntryBuildSummary(ActionInfo *info, BtlMainState *battle, BattleEntry *entry);
 s32 FUN_003be918(s32 skill, s32 attacker, s32 target, s32 column, s32 row, f32 power, f32 multiplier);
 UnitStats *btlFindEntryBlockByMemberId(BtlMainState *battle, s32 id);
 UnitRecord *gameGetUnitRecord(s32 index);
@@ -69,7 +69,7 @@ s32 FUN_003be334(s32 wantDamage, s32 skillId, u32 unused, s32 recordId, f32 mult
     BattleEntry *attackerEntry = btlMainFindEntryByListedId(battle, attacker);
     BattleEntry *targetEntry = btlMainFindEntryByListedId(battle, target);
     ActionInfo info;
-    FUN_00247478(&info, battle, attackerEntry);
+    btlEntryBuildSummary(&info, battle, attackerEntry);
     s32 damage = -1;
     s32 value = -1;
     bool scaled = true;

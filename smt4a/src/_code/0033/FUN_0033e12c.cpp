@@ -11,12 +11,12 @@ struct RequestState {
 }
 
 extern "C" {
-extern RequestState *DAT_00581270;
+extern RequestState *g_modelGroups;
 
 /* Initializes the request, selecting the special state for kind 22. */
 void FUN_0033e12c(u32 kind, u16 value)
 {
-    RequestState *request = DAT_00581270;
+    RequestState *request = g_modelGroups;
     request->kind = kind;
     request->value = value;
     request->progress = 0;

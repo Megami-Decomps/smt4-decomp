@@ -12,7 +12,7 @@ void FUN_0032ae80(void);
 u32 taskCreateDraw(const char *name, s32 priority, u32 argument, u32 owner,
                    void (*draw)(void), void (*release)(void), u32 flags, u32 parent);
 void btlTalkBustUpCreate(void);
-void FUN_002bff50(void);
+void messageSetConfirmDisplayMode(void);
 void fileSlotLoad(u32 slot);
 
 void uniteStartEffectProcesses(void)
@@ -28,7 +28,7 @@ void uniteStartEffectProcesses(void)
     taskCreateDraw("TMD DDRAW", 0xE7, 0, 0, FUN_00330ac8, NULL, 0, work->process);
     taskCreateDraw("TMD DDRAW", 0x6F, 0, 0, FUN_0032ae80, NULL, 0, work->process);
     btlTalkBustUpCreate();
-    FUN_002bff50();
+    messageSetConfirmDisplayMode();
     fileSlotLoad(0x25);
 }
 }

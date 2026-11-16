@@ -47,7 +47,7 @@ s32 libc_strncmp(const char *a, const char *b, u32 count);
 char *libc_strcpy(char *dest, const char *src);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void sysMemClear(void *buffer, u32 bytes);
-char *FUN_00100d60(const char *text, s32 character);
+char *libc_strrchr(const char *text, s32 character);
 void btlCameraFinishTransition(BtlEffectWork *work);
 u32 FUN_002282c8(u32 effect, u32 a, u32 b);
 
@@ -97,7 +97,7 @@ u32 FUN_004f9764(BtlEffectWork *work)
                 if (libc_strlen(path) != 0) {
                     BtlEffectLoad *load = &work->loads[i];
 
-                    libc_strcpy(load->name, FUN_00100d60(path, '/') + 1);
+                    libc_strcpy(load->name, libc_strrchr(path, '/') + 1);
                     if (findRecordByKey(load->name) == 0xff) {
                         asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&load->file), 1);
                         load->flags |= 1;

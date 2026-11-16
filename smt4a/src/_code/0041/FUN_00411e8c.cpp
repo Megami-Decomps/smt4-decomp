@@ -27,7 +27,7 @@ typedef struct OrbitCamera {
     /* 0x18 */ f32 distance;
 } OrbitCamera;
 
-extern const f32 DAT_00536d14[]; /* sine/cosine table: per entry base sine, base cosine, sine slope, cosine slope */
+extern const f32 g_sinCosTable[]; /* sine/cosine table: per entry base sine, base cosine, sine slope, cosine slope */
 
 f32 mathRemPio2f(f32 value);
 f32 FUN_0050dda4(f32 value);
@@ -59,10 +59,10 @@ void FUN_00411e8c(void *unused, OrbitCamera *out)
             out->yaw = -out->yaw;
         }
     }
-    f32 sinA = DAT_00536d14[0] + dy * DAT_00536d14[2];
-    f32 cosA = DAT_00536d14[1] + dy * DAT_00536d14[3];
-    f32 sinB = DAT_00536d14[256] + dy * DAT_00536d14[258];
-    f32 cosB = DAT_00536d14[257] + dy * DAT_00536d14[259];
+    f32 sinA = g_sinCosTable[0] + dy * g_sinCosTable[2];
+    f32 cosA = g_sinCosTable[1] + dy * g_sinCosTable[3];
+    f32 sinB = g_sinCosTable[256] + dy * g_sinCosTable[258];
+    f32 cosB = g_sinCosTable[257] + dy * g_sinCosTable[259];
 
     out->position[0] = look->toX;
     out->position[1] = dy;

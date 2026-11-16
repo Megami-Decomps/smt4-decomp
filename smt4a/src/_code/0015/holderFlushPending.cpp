@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_0016cae0(void);
+void holderFlushItemHandles(void);
 
 typedef struct Holder {
     /* 0x000 */ u8 unk000[4];
@@ -11,11 +11,11 @@ typedef struct Holder {
     /* 0x25C */ s32 pending;
 } Holder;
 
-/* Calls FUN_0016cae0 when bit 0 of `flags` is clear and there is something pending. */
+/* Calls holderFlushItemHandles when bit 0 of `flags` is clear and there is something pending. */
 void holderFlushPending(Holder *object)
 {
     if ((object->flags & 1) == 0 && object->pending != 0) {
-        FUN_0016cae0();
+        holderFlushItemHandles();
         return;
     }
 }

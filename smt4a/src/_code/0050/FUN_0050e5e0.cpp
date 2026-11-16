@@ -13,7 +13,7 @@ typedef struct {
 
 extern unsigned char LAB_0041ac24; /* 0x41ac24 */
 extern unsigned char LAB_0041bb28; /* 0x41bb28 */
-extern unsigned char DAT_00613178; /* 0x613178 */
+extern unsigned char g_regionTable; /* 0x613178 */
 extern unsigned char DAT_00614d7c; /* 0x614d7c */
 extern unsigned char DAT_006160e0; /* 0x6160e0 */
 
@@ -29,7 +29,7 @@ unsigned char * FUN_0050e5e0(void)
   unsigned char temp_v1;
   
   __aeabi_vec_ctor_nocookie_nodtor();
-  __aeabi_vec_ctor_nocookie_nodtor(&DAT_00613178,&LAB_0041ac24,0x1c,0x100);
+  __aeabi_vec_ctor_nocookie_nodtor(&g_regionTable,&LAB_0041ac24,0x1c,0x100);
   __aeabi_vec_ctor_nocookie_nodtor(&DAT_00614d7c,&LAB_0041bb28,0x7c,0x28);
   temp_v0 = 0x80;
   puVar2 = &DAT_006160e0;

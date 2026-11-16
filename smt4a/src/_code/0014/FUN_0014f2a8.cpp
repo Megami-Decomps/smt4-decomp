@@ -4,7 +4,7 @@
 #include "common.h"
 
 extern "C" {
-void FUN_002e59f8(const void *source, void *destination, u32 bytes);
+void memcpySrcFirst(const void *source, void *destination, u32 bytes);
 
 s32 FUN_0014f2a8(u16 *buffer, s32 *position, const u16 *text, s32 measureOnly)
 {
@@ -16,7 +16,7 @@ s32 FUN_0014f2a8(u16 *buffer, s32 *position, const u16 *text, s32 measureOnly)
     for (length = 0; text[length] != 0; length++) {
     }
     if (measureOnly == 0) {
-        FUN_002e59f8(text, buffer + *position, length * 2);
+        memcpySrcFirst(text, buffer + *position, length * 2);
     }
     *position += length;
     return length;

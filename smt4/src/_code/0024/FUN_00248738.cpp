@@ -92,7 +92,7 @@ u32 FUN_00248738(AppMenu* menu, u32 newState)
         break;
     case 5:
         spriteStartAnimationByIndex(menu->cursorSprite, 1);
-        uiStoreTextureEntryCenter(menu->cursorSprite, 0x1d, FUN_0029efa8(menu->list) + 0x40e);
+        uiStoreTextureEntryCenter(menu->cursorSprite, 0x1d, listCursorGetRowIfUnblocked(menu->list) + 0x40e);
         menu->cursorWidth = 0xa0;
         break;
     case 7:

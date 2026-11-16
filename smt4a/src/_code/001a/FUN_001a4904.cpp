@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0018a924(...);
+int mathSinCos(...);
 int mtx44Copy(float [7], float *);
 int nn_math_ARMv6_MTX34CopyAsm(...);
 int nn_math_ARMv6_MTX34MultAsm(...);
@@ -80,7 +80,7 @@ extern float DAT_0064c0b8; /* 0x64c0b8 */
 extern float DAT_0064c0bc; /* 0x64c0bc */
 extern float DAT_0064c0c0; /* 0x64c0c0 */
 
-/* Supplied declaration required: FUN_0018a924. */
+/* Supplied declaration required: mathSinCos. */
 /* Supplied declaration required: mtx44Copy. */
 extern unsigned int FUN_001a1e28(void);
 extern int __cxa_guard_acquire(unsigned int *);
@@ -199,7 +199,7 @@ LAB_001a49b8:
             temp_v11 = *(float *)(temp_v7 + 0xa4);
             temp_v14 = *(unsigned long long *)(temp_v7 + 0x98);
             temp_v10 = *(float *)(temp_v7 + 0xa8);
-            FUN_0018a924(&temp_v46,&temp_v47);
+            mathSinCos(&temp_v46,&temp_v47);
             temp_v17 = (float)((unsigned long long)temp_v16 >> 0x20);
             temp_v9 = (float)temp_v14;
             temp_v19[5] = (float)((unsigned long long)temp_v14 >> 0x20);
@@ -226,7 +226,7 @@ LAB_001a49b8:
         else {
           temp_v14 = *(unsigned long long *)(temp_v7 + 0x98);
           temp_v15 = *(unsigned long long *)(temp_v7 + 0xa4);
-          FUN_0018a924(&temp_v51,temp_v52);
+          mathSinCos(&temp_v51,temp_v52);
           temp_v9 = (float)temp_v14;
           temp_v10 = (float)((unsigned long long)temp_v14 >> 0x20);
           temp_v19[0] = temp_v9 * temp_v52[0];
@@ -251,7 +251,7 @@ LAB_001a49b8:
       else {
         temp_v14 = *(unsigned long long *)(temp_v7 + 0x98);
         temp_v15 = *(unsigned long long *)(temp_v7 + 0xa4);
-        FUN_0018a924(&temp_v49,&temp_v50);
+        mathSinCos(&temp_v49,&temp_v50);
         temp_v9 = (float)temp_v14;
         temp_v10 = (float)((unsigned long long)temp_v14 >> 0x20);
         temp_v19[0] = temp_v9 * temp_v50;

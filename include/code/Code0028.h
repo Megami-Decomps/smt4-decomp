@@ -9,7 +9,7 @@ u8 FUN_002857dc(void);
 /* Canonical prototypes of small helpers whose definitions take only primitive types; the definitions
  * include this header so callers and callee cannot drift apart. */
 
-u32 FUN_002865c0(u32 kind, f32 value);
+u32 gxPackFadeKindAlphaWord(u32 kind, f32 value);
 
 u32 FUN_00287800(void);
 

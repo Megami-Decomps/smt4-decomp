@@ -20,7 +20,7 @@ u32 FUN_00121030(AsdSndDataManagerView *manager, void *archive, void *buffer, u3
         manager->tableState.fileTable->files[i] = NULL;
     manager->loader.archive = archive;
 
-    Obj421aa4Manager *queue = FUN_002baed8();
+    Obj421aa4Manager *queue = soundRequestQueueGetInstance();
     Obj421aa4Node *command = soundRequestBegin(queue, 5);
     command->type = 0x31;
     command->id = reinterpret_cast<u32>(manager); /* this command's payload is a manager pointer */

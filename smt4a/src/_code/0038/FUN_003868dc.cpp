@@ -24,7 +24,7 @@ int FUN_00294c28(void);
 int FUN_00295108(int);
 int distSpatial(void);
 int FUN_002b80b8(void);
-int FUN_00317af8(float *, unsigned int [12], int);
+int padGetNormalizedAnalogStick(float *, unsigned int [12], int);
 int FUN_00325998(int, int);
 int FUN_0033f8a4(void);
 int FUN_0033f9f4(void);
@@ -67,7 +67,7 @@ extern unsigned int FUN_0029202c(void);
 /* Supplied declaration required: FUN_00295108. */
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_002b80b8. */
-/* Supplied declaration required: FUN_00317af8. */
+/* Supplied declaration required: padGetNormalizedAnalogStick. */
 /* Supplied declaration required: FUN_00325998. */
 /* Supplied declaration required: FUN_0033f8a4. */
 /* Supplied declaration required: FUN_0033f9f4. */
@@ -136,7 +136,7 @@ void FUN_003868dc(int param_1)
     }
     temp_v7 = *(float *)(g_lmapScene + 0x1c);
     temp_v9 = *(unsigned long long *)(g_lmapScene + 0x20);
-    FUN_00317af8(&temp_v15,temp_v16,0);
+    padGetNormalizedAnalogStick(&temp_v15,temp_v16,0);
     if (((((unsigned int)temp_v15 < 0xbf000000) && ((int)temp_v15 < 0x3f000000)) &&
         (temp_v16[0] < 0xbf000000)) && ((int)temp_v16[0] < 0x3f000000)) {
       temp_v5 = 1;

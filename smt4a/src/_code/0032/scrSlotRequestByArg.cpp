@@ -7,7 +7,7 @@ s32 FUN_00203d74(void);
 s32 scrGetCommandFrame(void);
 s32 FUN_00163e84(s32 a);
 s32 FUN_00162ea4(void);
-void FUN_0022677c(s32 a, s32 value);
+void titleRestartSlotState3(s32 a, s32 value);
 void slotSetRequest(s32 slot, s32 count, s32 value);
 
 /* Script command: on its first frame requests slot 0 with argument 1's count (at most 4 when capped), argument 0 choosing the fill;
@@ -37,10 +37,10 @@ u32 scrSlotRequestByArg(void)
         if (FUN_00162ea4() != 0) {
             switch (scrGetArg(0)) {
             case 0:
-                FUN_0022677c(0, 0xff);
+                titleRestartSlotState3(0, 0xff);
                 break;
             case 1:
-                FUN_0022677c(0, -1);
+                titleRestartSlotState3(0, -1);
                 break;
             }
         }

@@ -104,7 +104,7 @@ void campButtonHelpAcquire(void)
         panel->unk5E2[1] = 0;
         panel->count = 0;
         work->unk678 = spriteHandleCreate(0);
-        FUN_001527d8(work->unk678, 0xf4f4f4ff);
+        uiObjectSetColorRgb(work->unk678, 0xf4f4f4ff);
         positionStateSet(work->unk678, 0, 0x646464ff, 0.0f);
         work->process = scrScriptProcessCreate(g_buttonHelp.bf, g_buttonHelp.mbm);
     }

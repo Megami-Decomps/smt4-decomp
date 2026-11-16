@@ -14,7 +14,7 @@ u32 FUN_00291310(u32 a, u32 b, u32 c, u32 d, const void *data, u32 flags, u32 e,
 extern "C" {
 #endif
 
-u8 FUN_0029022c(void);
+u8 rosterHasLeader(void);
 
 #ifdef __cplusplus
 }

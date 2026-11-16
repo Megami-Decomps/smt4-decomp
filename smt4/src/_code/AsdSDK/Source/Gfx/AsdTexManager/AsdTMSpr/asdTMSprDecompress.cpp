@@ -10,7 +10,7 @@ void huffmanDecompress(u8 *src, u8 *dst);
 void rleDecompress(u8 *src, u8 *dst);
 void *asdMemoryAllocAligned(int, int, int, s32 size, u32 align, int);
 void asdMemFree(void *block);
-extern const char DAT_00409220[]; /* AsdTMSpr.cpp: __FILE__ */
+extern const char g_asdTMSprSourceFileName[]; /* AsdTMSpr.cpp: __FILE__ */
 
 /* Decompresses sprite data (format 0x10, 0x20 or 0x30 in the high nibble of its first byte) into
  * a newly allocated buffer and frees the compressed data. Heap choice comes from bit 0 of
@@ -24,17 +24,17 @@ u8 *asdTMSprDecompress(u8 *data, u32 flags, u32 align)
     if ((format == 0x10 || format == 0x20 || format == 0x30) && (size = lzGetAdvertisedSize(data)) != 0) {
         if (flags & 1) {
             if (flags & 2) {
-                asdDebugTrace(DAT_00409220, 200);
+                asdDebugTrace(g_asdTMSprSourceFileName, 200);
                 out = (u8 *)asdMemoryAllocAligned(0x10000, 0x100, 0, size, align, 0);
             } else {
-                asdDebugTrace(DAT_00409220, 204);
+                asdDebugTrace(g_asdTMSprSourceFileName, 204);
                 out = (u8 *)asdMemoryAllocAligned(0x10000, 0x100, 0, size, align, 1);
             }
         } else if (flags & 2) {
-            asdDebugTrace(DAT_00409220, 211);
+            asdDebugTrace(g_asdTMSprSourceFileName, 211);
             out = (u8 *)asdMemoryAllocAligned(0x100, 0x100, 0, size, align, 0);
         } else {
-            asdDebugTrace(DAT_00409220, 215);
+            asdDebugTrace(g_asdTMSprSourceFileName, 215);
             out = (u8 *)asdMemoryAllocAligned(0x100, 0x100, 0, size, align, 1);
         }
         if (format == 0x10) {

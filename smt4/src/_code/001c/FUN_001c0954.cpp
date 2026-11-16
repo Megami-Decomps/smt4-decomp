@@ -14,7 +14,7 @@ s32 FUN_001c0954(u64 key)
 {
     s32 result = FUN_00354dac(FUN_002c3520(), key);
 
-    FUN_002c3510(result);
+    processResultSetValue(result);
     if (nnResultIsSuccess(result)) {
         g_appletBusyFlag = 1;
     }

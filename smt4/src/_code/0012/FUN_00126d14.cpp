@@ -11,12 +11,12 @@ struct ModelStateResetPacket {
 };
 }
 extern "C" {
-extern u32 *DAT_004729e0;
-extern u32 DAT_004729e4;
+extern u32 *g_modelCommandBuffer;
+extern u32 g_modelCommandWordCount;
 extern const ModelStateResetPacket DAT_00410668;
 u32 *asdGxGetCommandCursor(void);
 u32 *FUN_002b5cf0(const void *source, u32 *cursor);
-void FUN_002af390(u32 *begin, u32 *end);
+void asdModelAdvanceCommandCursorBetween(u32 *begin, u32 *end);
 void cursorResetFromParam(void);
 void asdModelCommandBlockRelease(void);
 void gpuSubmitCommandBlock(const u32 *commands, u32 bytes, u32 mode);
@@ -26,29 +26,29 @@ void FUN_00126d14(ModelCommandSourceView *source)
 {
     u32 *begin = asdGxGetCommandCursor();
     u32 *end = FUN_002b5cf0(source->commands, begin);
-    FUN_002af390(begin, end);
+    asdModelAdvanceCommandCursorBetween(begin, end);
     cursorResetFromParam();
-    u32 *packet = DAT_004729e0;
-    packet[DAT_004729e4] = 0x210;
-    packet[DAT_004729e4 + 1] = 0xF02BB;
-    DAT_004729e4 += 2;
-    packet[DAT_004729e4] = 0;
-    packet[DAT_004729e4 + 1] = 0xF02BC;
-    DAT_004729e4 += 2;
+    u32 *packet = g_modelCommandBuffer;
+    packet[g_modelCommandWordCount] = 0x210;
+    packet[g_modelCommandWordCount + 1] = 0xF02BB;
+    g_modelCommandWordCount += 2;
+    packet[g_modelCommandWordCount] = 0;
+    packet[g_modelCommandWordCount + 1] = 0xF02BC;
+    g_modelCommandWordCount += 2;
     asdModelCommandBlockRelease();
     ModelStateResetPacket reset = DAT_00410668;
     gpuSubmitCommandBlock(reset.values, sizeof(reset), 1);
     cursorResetFromParam();
-    packet = DAT_004729e0;
-    packet[DAT_004729e4] = 1;
-    packet[DAT_004729e4 + 1] = 0xF0111;
-    DAT_004729e4 += 2;
-    packet[DAT_004729e4] = 1;
-    packet[DAT_004729e4 + 1] = 0xF0110;
-    DAT_004729e4 += 2;
-    packet[DAT_004729e4] = 0;
-    packet[DAT_004729e4 + 1] = 0x100E0;
-    DAT_004729e4 += 2;
+    packet = g_modelCommandBuffer;
+    packet[g_modelCommandWordCount] = 1;
+    packet[g_modelCommandWordCount + 1] = 0xF0111;
+    g_modelCommandWordCount += 2;
+    packet[g_modelCommandWordCount] = 1;
+    packet[g_modelCommandWordCount + 1] = 0xF0110;
+    g_modelCommandWordCount += 2;
+    packet[g_modelCommandWordCount] = 0;
+    packet[g_modelCommandWordCount + 1] = 0x100E0;
+    g_modelCommandWordCount += 2;
     asdModelCommandBlockRelease();
 }
 }

@@ -25,7 +25,7 @@ struct SlotNameDisplay {
 };
 extern "C" {
 DisplaySlotTable *gameGetSlotTable();
-void FUN_002e59f8(const u16 *source, u16 *destination, u32 bytes);
+void memcpySrcFirst(const u16 *source, u16 *destination, u32 bytes);
 
 // Fill a display name and sort key from the selected party record, or from the default entry.
 void slotNameDisplaySetEntry(SlotNameDisplay *display, s32 entryId)
@@ -36,7 +36,7 @@ void slotNameDisplaySetEntry(SlotNameDisplay *display, s32 entryId)
         display->entryId = 536;
         DisplaySlotInfo *info = (DisplaySlotInfo *)devilGetRecord(536);
         display->sortKey = info->sortKey;
-        FUN_002e59f8(info->name, display->name, 16);
+        memcpySrcFirst(info->name, display->name, 16);
         return;
     }
     u16 selectedId = (u16)entryId;
@@ -52,6 +52,6 @@ void slotNameDisplaySetEntry(SlotNameDisplay *display, s32 entryId)
     }
     display->entryId = selectedId;
     display->sortKey = record->sortKey;
-    FUN_002e59f8(((DisplaySlotRecord *)record)->name, display->name, 16);
+    memcpySrcFirst(((DisplaySlotRecord *)record)->name, display->name, 16);
 }
 }

@@ -54,7 +54,7 @@ void uiQuestStartSelected(void)
 
     quest->busy = 1;
     base = resourceRunOperationIfUnblocked(quest->list);
-    offset = FUN_0029efa8(quest->list);
+    offset = listCursorGetRowIfUnblocked(quest->list);
     id = quest->ids[offset + base];
     FUN_0028eeb8(id);
     gameGetOptionProgressStatus();

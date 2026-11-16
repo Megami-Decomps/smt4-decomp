@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b0750(...);
+int uiDrawTableTextureSized(...);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -41,7 +41,7 @@ extern unsigned int DAT_004d4704; /* 0x4d4704 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002b0750. */
+/* Supplied declaration required: uiDrawTableTextureSized. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
@@ -96,7 +96,7 @@ void FUN_002be90c(int param_1,int param_2,int param_3,int param_4,unsigned int p
     if ((unsigned int)((int)(short)param_1 << 0xc) <= temp_v2) {
       param_6 = param_9;
     }
-    FUN_002b0750(2,param_5,param_6,param_10,temp_v11,temp_v9,(int)psVar4[1],temp_v12);
+    uiDrawTableTextureSized(2,param_5,param_6,param_10,temp_v11,temp_v9,(int)psVar4[1],temp_v12);
     DAT_004d46ac = 0x3f800000;
     DAT_004d46b0 = 0x3f800000;
     DAT_004d46b4 = 0x3f800000;
@@ -155,7 +155,7 @@ void FUN_002be90c(int param_1,int param_2,int param_3,int param_4,unsigned int p
       temp_v9 = temp_v7;
     }
     if (param_12 == 0) {
-      FUN_002b0750(2,param_5,param_6,param_10,temp_v11,temp_v9,(int)psVar4[1],temp_v12);
+      uiDrawTableTextureSized(2,param_5,param_6,param_10,temp_v11,temp_v9,(int)psVar4[1],temp_v12);
     }
     temp_v1 = g_titleScene;
     if (temp_v5 == 0) {
@@ -187,7 +187,7 @@ void FUN_002be90c(int param_1,int param_2,int param_3,int param_4,unsigned int p
         *(unsigned char *)(temp_v1 + 0x12c4) = 0;
       }
     }
-    FUN_002b0750(2,param_5,param_7,param_10 + temp_v9,(int)param_11,temp_v5,
+    uiDrawTableTextureSized(2,param_5,param_7,param_10 + temp_v9,(int)param_11,temp_v5,
                  (int)*(short *)(*(int *)(temp_v0 + 0xc) + 2),(int)((unsigned long long)param_11 >> 0x20));
     temp_v1 = g_titleScene;
     temp_v0 = packNibblesAndByte(6,7,0);
@@ -230,7 +230,7 @@ void FUN_002be90c(int param_1,int param_2,int param_3,int param_4,unsigned int p
       temp_v5 = 0;
     }
     if (param_12 == 0) {
-      FUN_002b0750(2,param_5,param_6,param_10,temp_v11,temp_v7,(int)psVar4[1],temp_v12);
+      uiDrawTableTextureSized(2,param_5,param_6,param_10,temp_v11,temp_v7,(int)psVar4[1],temp_v12);
     }
     temp_v1 = g_titleScene;
     if (temp_v5 == 0) {
@@ -262,7 +262,7 @@ void FUN_002be90c(int param_1,int param_2,int param_3,int param_4,unsigned int p
         *(unsigned char *)(temp_v1 + 0x12c4) = 0;
       }
     }
-    FUN_002b0750(2,param_5,param_8,param_10 + temp_v7,(int)param_11,temp_v5,
+    uiDrawTableTextureSized(2,param_5,param_8,param_10 + temp_v7,(int)param_11,temp_v5,
                  (int)*(short *)(*(int *)(temp_v0 + 0xc) + 2),(int)((unsigned long long)param_11 >> 0x20));
     temp_v1 = g_titleScene;
     temp_v0 = packNibblesAndByte(6,7,0);

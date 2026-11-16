@@ -3,7 +3,7 @@
 
 extern "C" {
 void mapDepartSetTarget(s32 area, u32 map, u32 entrance);
-void FUN_0027d5ac(u32 map);
+void mapSetDepartureIndex(u32 map);
 s32 scrGetArg(u32 index);
 extern GameState g_gameState;
 
@@ -15,7 +15,7 @@ u32 scrCommMapDepart(void)
     u32 entrance = scrGetArg(2);
     if (area == 0x18) {
         mapDepartSetTarget(area, 1, entrance);
-        FUN_0027d5ac(map);
+        mapSetDepartureIndex(map);
         g_gameState.unk27 = 1;
     } else {
         mapDepartSetTarget(area, map, entrance);

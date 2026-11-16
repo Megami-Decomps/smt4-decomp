@@ -6,7 +6,7 @@
 
 extern "C" {
 __value_in_regs LongDivisionResult ll_sdiv(s64 dividend, s64 divisor);
-extern MobiclipStartTable DAT_00617f40;
+extern MobiclipStartTable g_mobiclipPlayer;
 extern Obj420a2c DAT_00617e70;
 extern u32 DAT_00617e64;
 extern Obj557f00 DAT_00617f18;
@@ -24,20 +24,20 @@ u32 FUN_004241e0(ThreadControl *control);
 // Initialize the primary movie decoder and optional audio stream, then start at the computed clock position.
 void FUN_00229104()
 {
-    FUN_004251e8(&DAT_00617f40, 0, 0);
-    FUN_004250dc(&DAT_00617f40, 0);
-    const MobiclipStartRecord *record = FUN_00424c2c(&DAT_00617f40, table46COwnerGet(&DAT_00617f40, 0));
+    FUN_004251e8(&g_mobiclipPlayer, 0, 0);
+    FUN_004250dc(&g_mobiclipPlayer, 0);
+    const MobiclipStartRecord *record = FUN_00424c2c(&g_mobiclipPlayer, table46COwnerGet(&g_mobiclipPlayer, 0));
     if (!DAT_00617e70.Obj420a2c::buildEntries((Obj420a2cOwner *)&DAT_00617e64,
                                            (Obj420a2cSource *)record, NULL))
         FUN_0043128c(1);
-    if (DAT_00617f40.audioIndex != -1) {
-        const void *audioRecord = tableRecordGetChecked(&DAT_00617f40, DAT_00617f40.audioIndex);
+    if (g_mobiclipPlayer.audioIndex != -1) {
+        const void *audioRecord = tableRecordGetChecked(&g_mobiclipPlayer, g_mobiclipPlayer.audioIndex);
         if (!DAT_00617f18.Obj557f00::open((u32)&DAT_00617e64, audioRecord, 1, 16))
             FUN_0043128c(1);
     }
     g_mobiclipCtrl.position = ll_sdiv((s64)((u64)record->ticks * 1000000), record->timeScale).quotient;
-    s64 count = stateObjectClassify(&DAT_00617f40, record);
+    s64 count = stateObjectClassify(&g_mobiclipPlayer, record);
     g_mobiclipCtrl.position *= count;
-    FUN_004241e0(&DAT_00617f40.thread);
+    FUN_004241e0(&g_mobiclipPlayer.thread);
 }
 }

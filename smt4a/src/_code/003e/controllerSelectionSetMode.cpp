@@ -28,8 +28,8 @@ struct SelectionRegistry {
 extern "C" {
 extern SelectionRegistry *g_handleRegistry;
 void modelPlayClip(SelectionVisual *, s32 mode, s32 flags, f32 x, f32 y);
-void FUN_003fd8dc(SelectionVisual *, s32 slot, u32 color);
-void FUN_00406768(void *background, s32 slot, u32 color);
+void elementListSetShaderColor(SelectionVisual *, s32 slot, u32 color);
+void modelOwnerSetSlotValueAndActivate(void *background, s32 slot, u32 color);
 
 // Switch the active controller and refresh the selection and background colors.
 void controllerSelectionSetMode(ControllerSelection *selection, s32 mode)
@@ -46,20 +46,20 @@ void controllerSelectionSetMode(ControllerSelection *selection, s32 mode)
         SelectionRegistry *registry = g_handleRegistry;
         if (mode == 0) {
             modelPlayClip(visual, mode, 0, 0.0f, 0.0f);
-            FUN_003fd8dc(visual, 8, 0xffffffff);
-            FUN_00406768(registry->background, 0, 0x4c4c4cff);
+            elementListSetShaderColor(visual, 8, 0xffffffff);
+            modelOwnerSetSlotValueAndActivate(registry->background, 0, 0x4c4c4cff);
             return;
         }
         if (mode == 1) {
             modelPlayClip(visual, mode, 0, 0.0f, 0.0f);
-            FUN_003fd8dc(visual, 8, 0x999999ff);
-            FUN_00406768(registry->background, 0, 0x191919ff);
+            elementListSetShaderColor(visual, 8, 0x999999ff);
+            modelOwnerSetSlotValueAndActivate(registry->background, 0, 0x191919ff);
             return;
         }
         if (mode == 2) {
             modelPlayClip(visual, mode, 1, 0.0f, 0.0f);
-            FUN_003fd8dc(visual, 8, 0xffffffff);
-            FUN_00406768(registry->background, 0, 0x4c4c4cff);
+            elementListSetShaderColor(visual, 8, 0xffffffff);
+            modelOwnerSetSlotValueAndActivate(registry->background, 0, 0x4c4c4cff);
         }
     }
 }

@@ -81,7 +81,7 @@ void FUN_00258618(TitleLogoRequest *request)
     FUN_00343324(g_titleScene, &projection, 0);
 
     renderCtxPushB(g_titleScene, packNibblesAndByte(6, 7, 0));
-    renderCtxPushC(g_titleScene, FUN_002865c0(6, 0.0f));
+    renderCtxPushC(g_titleScene, gxPackFadeKindAlphaWord(6, 0.0f));
     renderCtxPushA(g_titleScene, renderCtxPackPassFlags(5, 1));
     renderCtxPushG(g_titleScene, flagsPackFourBooleans(1, 1, 1, 1));
 

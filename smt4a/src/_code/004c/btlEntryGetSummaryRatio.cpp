@@ -12,14 +12,14 @@ struct BattleEntrySummaryA {
 
 extern "C" {
 BattleEntry* btlMainFindEntryByListedId(BattleMain* state, u32 listedId);
-void FUN_003e8bb0(BattleEntrySummaryA* summary, BattleMain* state, const BattleEntry* entry);
+void btlEntryBuildSummary(BattleEntrySummaryA* summary, BattleMain* state, const BattleEntry* entry);
 
 // Return the selected entry's summary percentage as a unit-scale float.
 f32 btlEntryGetSummaryRatio(u32 listedId)
 {
     BattleEntry* entry = btlMainFindEntryByListedId(reinterpret_cast<BattleMain *>(btlGetMainState()), listedId);
     BattleEntrySummaryA summary;
-    FUN_003e8bb0(&summary, reinterpret_cast<BattleMain *>(btlGetMainState()), entry);
+    btlEntryBuildSummary(&summary, reinterpret_cast<BattleMain *>(btlGetMainState()), entry);
     return (f32)summary.percentage * 0.01f;
 }
 }

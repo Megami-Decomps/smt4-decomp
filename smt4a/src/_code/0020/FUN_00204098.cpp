@@ -47,7 +47,7 @@ int FUN_003a62e8(...);
 int roundObjFinish(...);
 int unitRecomputeDerivedStats(...);
 int getUnlockedSlotCount(...);
-int FUN_004bd6b0(...);
+int partyRecordSetEquippedItemClampRank(...);
 
 int textFormatBuffer(...);
 int dataTable01GetRecordWithAocOverride(...);
@@ -65,7 +65,7 @@ int libc_strcpy(...);
 int scrSetStringSlot(...);
 int FUN_00333dc8(...);
 int statusDisplayBindUnitRecord(...);
-int FUN_003343f0(...);
+int gameGlobalsSetMenuOpenFlag(...);
 int objBInitBlock19D0(...);
 int FUN_0033449c(...);
 int gameGlobalsQueueValues(...);
@@ -134,7 +134,7 @@ int FUN_003982f4(void);
 int lmapMainCallIfActive2(void);
 int soundChannelRequestIfEnabled(...);
 int actorIsActive(void);
-int FUN_003e503c(...);
+int partyGetSlotPreferredFirst(...);
 int __aeabi_idivmod(...);
 
 /* stack frame of void: 17 slot(s), 66 byte(s) */
@@ -249,7 +249,7 @@ extern long long __aeabi_uldivmod(int, unsigned int, unsigned int, unsigned int)
 extern int btlTalkBustUpGetValue(void);
 /* Supplied declaration required: FUN_00333dc8. */
 /* Supplied declaration required: statusDisplayBindUnitRecord. */
-/* Supplied declaration required: FUN_003343f0. */
+/* Supplied declaration required: gameGlobalsSetMenuOpenFlag. */
 /* Supplied declaration required: objBInitBlock19D0. */
 /* Supplied declaration required: FUN_0033449c. */
 /* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
@@ -304,7 +304,7 @@ extern int statusDownGetCursorPosition(void);
 /* Supplied declaration required: engineGetFloatTableValue. */
 /* Supplied declaration required: actorIsActive. */
 extern int partySlotMatchesSelected(unsigned int);
-/* Supplied declaration required: FUN_003e503c. */
+/* Supplied declaration required: partyGetSlotPreferredFirst. */
 /* Supplied declaration required: FUN_003f2fb0. */
 /* Supplied declaration required: FUN_003f3048. */
 extern unsigned int FUN_003f3104(int);
@@ -319,7 +319,7 @@ extern int recordContainsPairedId(unsigned int, unsigned int);
 /* Supplied declaration required: unitRecomputeDerivedStats. */
 /* Supplied declaration required: getUnlockedSlotCount. */
 /* Supplied declaration required: bitsAt60Test. */
-/* Supplied declaration required: FUN_004bd6b0. */
+/* Supplied declaration required: partyRecordSetEquippedItemClampRank. */
 /* Supplied declaration required: playerAdvanceLevelsAndRecover. */
 extern int FUN_004cc8d8(unsigned short, unsigned short);
 extern int FUN_004cc9dc(unsigned short, unsigned short, int);
@@ -460,7 +460,7 @@ unsigned int FUN_00204098(void)
     temp_v13 = 0;
     do {
       temp_v26 = temp_v13 & 0xffff;
-      FUN_003e503c();
+      partyGetSlotPreferredFirst();
       temp_v7 = temp_v13 + 0x19;
       if (temp_v7 >= 0x25) {
         temp_v7 = 0x24;
@@ -493,7 +493,7 @@ unsigned int FUN_00204098(void)
     temp_v13 = 0;
     do {
       temp_v26 = temp_v13 & 0xffff;
-      FUN_003e503c();
+      partyGetSlotPreferredFirst();
       temp_v7 = partySlotIsOccupied();
       if (temp_v7 != 0) {
         temp_v7 = temp_v13 + 0x19;
@@ -805,7 +805,7 @@ LAB_00204688:
         temp_v13 = 0;
       }
       temp_v13 = temp_v13 & 0xffff;
-      FUN_003e503c();
+      partyGetSlotPreferredFirst();
       temp_v51 = temp_v13;
       temp_v35 = actorIsActive();
       temp_v13 = (unsigned int)((unsigned long long)temp_v35 >> 0x20);
@@ -1120,7 +1120,7 @@ LAB_00205528:
               temp_v13 = 0;
             }
             temp_v13 = temp_v13 & 0xffff;
-            FUN_003e503c();
+            partyGetSlotPreferredFirst();
             temp_v8 = actorIsActive();
             if (temp_v8 != 0) {
               *(int *)(temp_v13 + 0x30) = *(int *)(temp_v16 + 0x7870) + *(int *)(temp_v13 + 0x30);
@@ -1178,7 +1178,7 @@ LAB_00205528:
           temp_v13 = 0;
           do {
             temp_v26 = temp_v13 & 0xffff;
-            FUN_003e503c();
+            partyGetSlotPreferredFirst();
             temp_v7 = temp_v13 + 0x19;
             if (temp_v7 >= 0x25) {
               temp_v7 = 0x24;
@@ -1337,7 +1337,7 @@ LAB_00205528:
             temp_v13 = 0;
           }
           temp_v13 = temp_v13 & 0xffff;
-          FUN_003e503c(temp_v13);
+          partyGetSlotPreferredFirst(temp_v13);
           FUN_002c85b0(7);
           FUN_0033449c(1);
           statusRequestUnitDetails((const UnitCategoryRecord*)(temp_v6 + *piVar25 * 0x150 + 0x4430),0,0);
@@ -1377,7 +1377,7 @@ LAB_00205528:
     case 0:
       btlTalkBustUpCreate();
       FUN_00333dc8(1);
-      FUN_003343f0(1);
+      gameGlobalsSetMenuOpenFlag(1);
       temp_v13 = (unsigned int)*(unsigned short *)(temp_v7 + 0x62);
       dataTable01GetRecordWithAocOverride(temp_v13);
       libc_strcpy(temp_v39,temp_v13);
@@ -1458,7 +1458,7 @@ LAB_00206230:
         if (temp_v7 == 0) break;
       }
       FUN_00333dc8(1);
-      FUN_003343f0(0);
+      gameGlobalsSetMenuOpenFlag(0);
       temp_v13 = 0;
       temp_v7 = 3;
       psVar12 = temp_v39;
@@ -1646,7 +1646,7 @@ joined_r0x002075ac:
         if (0 < (int)temp_v13) {
           do {
             if (*(short *)(temp_v7 + temp_v27 * 2 + 0x34) == 0) {
-              FUN_004bd6b0(temp_v7,*(unsigned short *)(temp_v16 + 0x4564),temp_v27);
+              partyRecordSetEquippedItemClampRank(temp_v7,*(unsigned short *)(temp_v16 + 0x4564),temp_v27);
               break;
             }
             temp_v27 = temp_v27 + 1;
@@ -1805,7 +1805,7 @@ joined_r0x002075ac:
         temp_v16 = getUnlockedSlotCount(temp_v13);
         temp_v27 = FUN_003a7b74();
         if (temp_v27 < temp_v16) {
-          FUN_004bd6b0(temp_v13,*(unsigned short *)(temp_v7 + 0x4564));
+          partyRecordSetEquippedItemClampRank(temp_v13,*(unsigned short *)(temp_v7 + 0x4564));
         }
         *(unsigned short *)(temp_v7 + 0x4564) = 0;
         do {
@@ -2314,7 +2314,7 @@ joined_r0x002073c8:
             temp_v13 = 0;
           }
           temp_v13 = temp_v13 & 0xffff;
-          FUN_003e503c(temp_v13);
+          partyGetSlotPreferredFirst(temp_v13);
           FUN_002c85b0(7);
           FUN_0033449c(1);
           statusRequestUnitDetails((const UnitCategoryRecord*)(temp_v6 + *piVar25 * 0x150 + 0x4430),0,0);
@@ -2340,12 +2340,12 @@ joined_r0x002073c8:
       temp_v13 = 0;
     }
     temp_v13 = temp_v13 & 0xffff;
-    FUN_003e503c();
+    partyGetSlotPreferredFirst();
     switch(*(unsigned int *)(temp_v6 + 0x436c)) {
     case 0:
       btlTalkBustUpCreate();
       FUN_00333dc8(1);
-      FUN_003343f0(1);
+      gameGlobalsSetMenuOpenFlag(1);
       temp_v26 = (unsigned int)*(unsigned short *)(temp_v13 + 300);
       dataTable25FindById(temp_v26);
       libc_strcpy(&temp_v41,temp_v26);
@@ -2429,7 +2429,7 @@ LAB_00207d0c:
         if (temp_v16 == 0) break;
       }
       FUN_00333dc8(1);
-      FUN_003343f0(0);
+      gameGlobalsSetMenuOpenFlag(0);
       temp_v16 = 3;
       psVar12 = (short *)&temp_v41;
       *(int *)(temp_v6 + 0x436c) = *(int *)(temp_v6 + 0x436c) + 1;
@@ -2555,7 +2555,7 @@ LAB_00207d0c:
       temp_v13 = 0;
     }
     temp_v13 = temp_v13 & 0xffff;
-    FUN_003e503c();
+    partyGetSlotPreferredFirst();
     switch(*(unsigned int *)(temp_v6 + 0x436c)) {
     case 0:
       scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x43ac),5);

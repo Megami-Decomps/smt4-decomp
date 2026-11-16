@@ -6,7 +6,7 @@ extern "C" {
 
 int onlineTimeGetNow(unsigned int [2]);
 int constructObj00559344(...);
-int FUN_002efb80(...);
+int seq16IsEqual(...);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned short FUN_002eb5c0(unsigned int);
 /* Supplied declaration required: constructObj00559344. */
 extern int FUN_002ef00c(unsigned char *, int);
-/* Supplied declaration required: FUN_002efb80. */
+/* Supplied declaration required: seq16IsEqual. */
 
 
 void FUN_002f0ab8(int param_1,int param_2)
@@ -38,7 +38,7 @@ void FUN_002f0ab8(int param_1,int param_2)
   temp_v4 = param_1 + 0xe8;
   if (*(char *)(param_2 + 0x24) != '\0') {
     constructObj00559344(temp_v6,0);
-    temp_v2 = FUN_002efb80(temp_v4,temp_v6);
+    temp_v2 = seq16IsEqual(temp_v4,temp_v6);
     if (temp_v2 != 0) {
       temp_v0 = 1;
     }
@@ -55,7 +55,7 @@ void FUN_002f0ab8(int param_1,int param_2)
     temp_v2 = constructObj00559344(temp_v7,(temp_v5[0] & 0xffff) + (unsigned int)temp_v1);
     *(unsigned short *)(param_1 + 0xec) = *(unsigned short *)(temp_v2 + 4);
     temp_v3 = constructObj00559344(temp_v8,0);
-    temp_v2 = FUN_002efb80(temp_v4,temp_v3);
+    temp_v2 = seq16IsEqual(temp_v4,temp_v3);
     if (temp_v2 != 0) {
       temp_v2 = constructObj00559344(temp_v9,1);
       *(unsigned short *)(param_1 + 0xec) = *(unsigned short *)(temp_v2 + 4);

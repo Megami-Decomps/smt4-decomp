@@ -6,7 +6,7 @@ struct ButtonHelpPresetRecord { u16 buttons[6]; u8 shown; };
 extern "C" {
 extern ButtonHelpPresetGlobals g_buttonHelp;
 const ButtonHelpPresetRecord *dataTableGetEntry0e(u32 preset);
-void FUN_002b827c(u32 preset);
+void buttonHelpSetContext(u32 preset);
 void FUN_002b8454(u8 slot, u8 kind, u8 value, s32 sound);
 void FUN_001385f8();
 void FUN_002ae5e0();
@@ -27,7 +27,7 @@ void buttonHelpSetPreset(u32 preset)
         }
     }
     g_buttonHelp.pending = -1;
-    FUN_002b827c(preset);
+    buttonHelpSetContext(preset);
     const ButtonHelpPresetRecord *previous = dataTableGetEntry0e(work->unk4C9);
     const ButtonHelpPresetRecord *next = dataTableGetEntry0e(preset);
     if (previous == NULL || next == NULL) {

@@ -147,7 +147,7 @@ u32 flaggedValueHolderGetTotal(const FlaggedValueHolder *holder);
 extern "C" {
 #endif
 /* Canonical declaration (matches the definition). */
-void FUN_003343f0(u8 value);
+void gameGlobalsSetMenuOpenFlag(u8 value);
 #ifdef __cplusplus
 }
 #endif

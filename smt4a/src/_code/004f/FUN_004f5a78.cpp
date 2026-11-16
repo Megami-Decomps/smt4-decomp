@@ -12,7 +12,7 @@ void sysMemClear(void *, u32);
 void asdMemFree(void *);
 void textFormatBuffer(char *, const char *, ...);
 char *libc_strcpy(char *, const char *);
-char *FUN_00100d60(char *, s32);
+char *libc_strrchr(char *, s32);
 void __aeabi_memcpy4(void *, const void *, u32);
 u32 keyedRecordRegisterName(const char *);
 u32 FUN_003478dc(u32, const void *);
@@ -39,7 +39,7 @@ u32 FUN_004f5a78(BattleMovementEffects *work)
             sysMemClear(formatted, 128);
             textFormatBuffer(formatted, DAT_005284c0, DAT_00528380[i]);
             libc_strcpy(path, formatted);
-            libc_strcpy(resource->key, FUN_00100d60(path, '/') + 1);
+            libc_strcpy(resource->key, libc_strrchr(path, '/') + 1);
             if (findRecordByKey(resource->key) == 0xFF) {
                 asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&resource->file), 1);
                 resource->flags |= 1;

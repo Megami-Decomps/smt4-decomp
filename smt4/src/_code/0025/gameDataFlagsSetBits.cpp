@@ -12,14 +12,14 @@ typedef struct GameDataFlags {
 
 extern GameDataFlags g_gameDataBlocks;
 
-s32 FUN_002c411c(s32 arg);
+s32 sleepModeSetEnabled(s32 arg);
 
 /* Clears the byte at +1 of the game data table and ORs `flags` into its flag word. */
 void gameDataFlagsSetBits(u32 flags)
 {
     g_gameDataBlocks.clear = 0;
     g_gameDataBlocks.flags |= flags;
-    FUN_002c411c(0);
+    sleepModeSetEnabled(0);
 }
 
 }

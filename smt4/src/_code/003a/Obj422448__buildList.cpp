@@ -99,7 +99,7 @@ void Obj422448::buildList()
     } while (id <= 0x802);
     self->scanned = scanned;
     if (self->listCount != 0) {
-        u8 *kind = &reinterpret_cast<Obj422448Mode *>(FUN_002a0d0c())->kind;
+        u8 *kind = &reinterpret_cast<Obj422448Mode *>(gameDataGetSortPreferences())->kind;
         s8 line;
         switch (*kind & 0x7F) {
         case 11:

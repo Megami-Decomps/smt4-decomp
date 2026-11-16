@@ -46,7 +46,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int ifTouchGetSelectionModeForRegion(int);
-extern int FUN_0029efa8(int);
+extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -118,7 +118,7 @@ unsigned int FUN_002cb054(void)
   temp_v25 = 0;
   texDrawCompositeSprite(2,0x2f,0xc,temp_v2,temp_v3,0xb);
   temp_v4 = resourceRunOperationIfUnblocked(temp_v1 + 0xe8);
-  temp_v28 = FUN_0029efa8(temp_v1 + 0xe8);
+  temp_v28 = listCursorGetRowIfUnblocked(temp_v1 + 0xe8);
   temp_v28 = temp_v28 + temp_v4;
   temp_v8 = 0;
   temp_v4 = FUN_0029d644((const void *)(temp_v1 + 0xe8));

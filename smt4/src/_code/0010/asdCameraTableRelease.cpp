@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002bc9cc(s32 resource);
+int asdCameraMatrixCacheUpdate(s32 resource);
 
 typedef struct ResourceTable {
     /* 0x00 */ s32 slots[0x20];
@@ -25,12 +25,12 @@ s32 asdCameraTableRelease(void)
 
     do {
         if (table->slots[i] != 0) {
-            FUN_002bc9cc(table->slots[i]);
+            asdCameraMatrixCacheUpdate(table->slots[i]);
         }
         i++;
     } while (i < 0x20);
-    FUN_002bc9cc(table->unk80);
-    FUN_002bc9cc(table->unk84);
+    asdCameraMatrixCacheUpdate(table->unk80);
+    asdCameraMatrixCacheUpdate(table->unk84);
     return 0;
 }
 

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0018a924(float *, float [10]);
+int mathSinCos(float *, float [10]);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -19,7 +19,7 @@ static float romwright_sqrt_4(float value)
     return (float)sqrt((double)value);
 }
 #endif
-/* Supplied declaration required: FUN_0018a924. */
+/* Supplied declaration required: mathSinCos. */
 
 
 float * FUN_00467be4(float *param_1,float *param_2,float *param_3)
@@ -54,7 +54,7 @@ float * FUN_00467be4(float *param_1,float *param_2,float *param_3)
     temp_v8 = temp_v6 * temp_v0 - temp_v3 * temp_v5;
     temp_v9 = temp_v3 * temp_v2 * 0.0f - temp_v1 * temp_v0;
     temp_v7 = temp_v1 * temp_v5 - temp_v6 * temp_v2 * 0.0f;
-    FUN_0018a924(&temp_v10,afStack_34);
+    mathSinCos(&temp_v10,afStack_34);
     temp_v2 = temp_v7 * temp_v10 + afStack_34[0] * temp_v0;
     temp_v4 = temp_v9 * temp_v10 + afStack_34[0] * temp_v5;
     temp_v0 = temp_v7 * afStack_34[0] - temp_v10 * temp_v0;

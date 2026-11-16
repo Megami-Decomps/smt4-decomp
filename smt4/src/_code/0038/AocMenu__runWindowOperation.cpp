@@ -37,7 +37,7 @@ void jobStopAndClearFlags(u32 *job);
 void aocLoadingTaskStart(u32 *job, s32 mode);
 void aocMenuSetButtonHelp(u32 *job, s32 a, s32 b);
 void FUN_00234124(u32 *job, RequestParameters *event);
-s32 FUN_0026b564(void);
+s32 buttonHelpStateIsNot3(void);
 void ifTouchRegionClearAll(u32 *regions);
 void FUN_00233818(u32 *entries);
 void FUN_00233e70(u32 *job, s32 a, s32 b);
@@ -45,9 +45,9 @@ void listScrollerInitialize(u32 *range, s32 a, s32 entry, s32 b, s32 c, s32 d);
 RegionRecord *asdTMTexTableEntryAt(u32 group, u32 id);
 void touchRegisterFirstRegion(Obj422594 *object, s32 x, s32 y, s32 width, s32 height);
 void touchRegisterSecondRegion(Obj422594 *object, s32 x, s32 y, s32 width, s32 height);
-void FUN_002346ac(Obj422594 *object, s32 x, s32 y, s32 width, s32 height);
+void touchRegionOwnerAddRegion(Obj422594 *object, s32 x, s32 y, s32 width, s32 height);
 s32 rangeLimitMin(u32 *range);
-void FUN_00233670(u32 *entries, u32 group, u32 id, s32 value);
+void messageIdListInit(u32 *entries, u32 group, u32 id, s32 value);
 
 /* Runs the job's window-operation state machine: starts the operation, waits for its event, and
    either completes (event 0x66/0x67 or an empty event) or stores the event and parks in state 9999. */
@@ -63,7 +63,7 @@ void AocMenu::runWindowOperation()
         job[2] = 1;
         return;
     case 1:
-        if (FUN_0026b564() != 0) {
+        if (buttonHelpStateIsNot3() != 0) {
             ifTouchRegionClearAll(job + 0xba);
             FUN_00233818(job + 0xad);
             aocLoadingTaskStart(job, 0);
@@ -128,11 +128,11 @@ void AocMenu::runWindowOperation()
                 record = asdTMTexTableEntryAt(0x3a, 0x50);
                 touchRegisterSecondRegion(object, record->x, record->y, record->size[0], record->size[1]);
                 record = asdTMTexTableEntryAt(0x3a, 0x4e);
-                FUN_002346ac(object, record->x, record->y, record->size[0], record->size[1]);
+                touchRegionOwnerAddRegion(object, record->x, record->y, record->size[0], record->size[1]);
                 reinterpret_cast<u8 *>(job)[0x34c] = 1;
                 reinterpret_cast<u16 *>(job)[0xbb * 2] = reinterpret_cast<u16 *>(job)[0xbb * 2] | 0x1000;
                 s32 limit = rangeLimitMin(job + 0x90);
-                FUN_00233670(job + 0xad, 0x3a, 0x88, limit);
+                messageIdListInit(job + 0xad, 0x3a, 0x88, limit);
                 reinterpret_cast<u8 *>(job)[0x2c4] = 1;
                 reinterpret_cast<u8 *>(job)[0x2e6] = 0;
                 aocMenuSetButtonHelp(job, 2, 1);

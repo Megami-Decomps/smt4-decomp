@@ -74,7 +74,7 @@ void messageTargetSetValue(u32 value, s32 arg);
 s32 sys43e188GetState(void);
 void buttonHelpSetPreset(u32 preset);
 void ifTouchRegionRemove(void);
-void FUN_002b8ee0(TimerSlot *timer, s32 value);
+void uiSlidingSpriteAdvance(TimerSlot *timer, s32 value);
 void FUN_002328b4(void);
 void sceneApplyTransaction(AppraiseScene *scene);
 s32 vec2GetXInt(const void *object);
@@ -126,7 +126,7 @@ void FUN_003a2c48(AppraiseScene *scene)
     case 3:
         {
         TimerSlot *slide = &scene->slide;
-        FUN_002b8ee0(slide, 0);
+        uiSlidingSpriteAdvance(slide, 0);
         pointConvertToFloat(scene->point, vec2GetXInt(slide), vec2GetYInt(slide));
         scrRunOpcodesStub(scene->script);
         if (uiSpriteGetCompletionState(slide)) {

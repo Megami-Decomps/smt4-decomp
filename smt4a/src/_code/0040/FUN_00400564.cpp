@@ -35,7 +35,7 @@ PlayerRecord *gameGetPlayerData(void);
 MemberRecord *gameGetSlotRecord(s32 slot);
 MemberRecord *gameGetSaveSlotData(s32 slot);
 MemberRecord *btlMainGetUnk14(void);
-u32 FUN_00291e14(void);
+u32 btlIsDefeatSuppressed(void);
 s32 FUN_002b4e7c(PlayerRecord *record);
 s32 FUN_002b4dcc(MemberRecord *record);
 void FUN_003ff524(u16 *flags, s32 kind);
@@ -63,7 +63,7 @@ u32 FUN_00400564(s32 slot, s32 fromSave, EffectDefinition *effect)
         wanted |= 0x4000000;
     }
     u16 curable;
-    if (slot < 0 && FUN_00291e14() == 0) {
+    if (slot < 0 && btlIsDefeatSuppressed() == 0) {
         PlayerRecord *player = gameGetPlayerData();
         if ((wanted & 1) != 0 && (player->status & 2) == 0 && FUN_002b4e7c(player) != player->hp) {
             useful = 1;
@@ -93,7 +93,7 @@ u32 FUN_00400564(s32 slot, s32 fromSave, EffectDefinition *effect)
         }
     } else {
         MemberRecord *member;
-        if (slot < 0 && FUN_00291e14() != 0) {
+        if (slot < 0 && btlIsDefeatSuppressed() != 0) {
             member = btlMainGetUnk14();
         } else if (fromSave != 0) {
             member = gameGetSaveSlotData(slot);

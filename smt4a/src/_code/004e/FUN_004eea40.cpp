@@ -104,7 +104,7 @@ void FUN_004eea40(int *param_1,unsigned int *param_2)
   param_2[6] = 0;
   *(unsigned int *)(*piStack_30 + 0x4bc0) = 0;
   iStack_68 = (int)*(short *)(param_2[10] + 0x1be);
-  FUN_003e8bb0(&sStack_4d0,*piStack_30,param_2[8]);
+  btlEntryBuildSummary(&sStack_4d0,*piStack_30,param_2[8]);
   uStack_74 = (unsigned int)sStack_4ba;
   iVar6 = (int)sStack_4b8;
   uStack_64 = (unsigned int)sStack_4b6;
@@ -821,7 +821,7 @@ LAB_004f054c:
     else if (uVar17 != 0) {
       if ((*(unsigned int *)(uVar17 + 0x3c) & 0x400) != 0) {
         iVar29 = *(int *)(uVar20 + 0xf4) - 1;
-        FUN_003ee0c0(iVar23);
+        btlSlotManagerResetStates(iVar23);
         FUN_004fc094(uStack_288,param_2,0,param_2[9],0,iVar29,0xffffffff,0xffffffff,
                      *(unsigned int *)(param_2[10] + 0xf4),*(unsigned int *)(param_2[10] + 0xf8),0,0,0,0
                      ,0,0,0,0,0,0xffffffff,1,0,1,0,0,1);
@@ -833,7 +833,7 @@ LAB_004f054c:
       }
       if ((*(unsigned int *)(uVar17 + 0x3c) & 0x200) != 0) {
         iVar29 = *(int *)(param_2[10] + 0xf8);
-        FUN_003ee0c0(*piStack_30);
+        btlSlotManagerResetStates(*piStack_30);
         FUN_004fc094(uStack_288,param_2,0,param_2[9],0,iVar29,0xffffffff,0xffffffff,
                      *(unsigned int *)(param_2[10] + 0xf4),*(unsigned int *)(param_2[10] + 0xf8),0,0,0,0
                      ,0,0,0,0,0,0xffffffff,1,0,1,0,0,1);
@@ -849,7 +849,7 @@ LAB_004f054c:
             iVar29 = FUN_004c3a98((int)*(short *)(param_2[9] + 0x6a),0x24);
           }
           else {
-            uVar17 = FUN_004bcbb4(puVar25[0xff],uStack_74);
+            uVar17 = skillGetAdjustedCost(puVar25[0xff],uStack_74);
             iVar29 = FUN_004c3a98((int)*(short *)(param_2[9] + 0x6a),0x24);
           }
           if (0 < iVar29) {

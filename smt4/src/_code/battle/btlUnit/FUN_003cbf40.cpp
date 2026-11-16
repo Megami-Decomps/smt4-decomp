@@ -42,7 +42,7 @@ void btlMarkLowestHpUnit(BtlMainState **block);
 void FUN_00229a24(u32 ui);
 void FUN_00229b10(BtlMainState **block, CommandState *work);
 void bgmSwitchCurrent(BtlMainState *state, u32 value);
-void FUN_00247478(CommandInfo *info, BtlMainState *state, BtlEntry *entry);
+void btlEntryBuildSummary(CommandInfo *info, BtlMainState *state, BtlEntry *entry);
 BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 id);
 void gameCounterAddSaturating(s32 counter, s32 amount);
 s32 battleUiIsFadeAndFieldReady(u32 ui);
@@ -108,7 +108,7 @@ u32 FUN_003cbf40(BtlMainState **block, CommandState *work)
     s32 kind = work->selection->kind;
     const CostedSkill *skill = reinterpret_cast<const CostedSkill *>(dataTable40FindById(value));
     CommandInfo info;
-    FUN_00247478(&info, *block, work->entry);
+    btlEntryBuildSummary(&info, *block, work->entry);
     u32 scope = info.scope;
 
     if ((work->flags & 0x1080) == 0) {

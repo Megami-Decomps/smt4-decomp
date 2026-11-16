@@ -3,15 +3,15 @@
 
 extern "C" {
 
-void *FUN_003ec77c(void *battle);
+void *btlStateIsDefeatSuppressed(void *battle);
 void scrSetResult(s32 result);
 
-/* Script command: returns 1 when FUN_003ec77c finds no entry for the battle. */
+/* Script command: returns 1 when btlStateIsDefeatSuppressed finds no entry for the battle. */
 u32 FUN_00380098(void)
 {
     s32 result;
 
-    if (FUN_003ec77c(static_cast<void *>(btlGetMainState())) != NULL) {
+    if (btlStateIsDefeatSuppressed(static_cast<void *>(btlGetMainState())) != NULL) {
         result = 0;
     } else {
         result = 1;

@@ -12,7 +12,7 @@ extern void *g_aocSystem;
 extern void *dataTableGet(s32 group, s32 index);
 extern u32 dataTableGetCount(void *table);
 extern u32 groupedFileTablesCountRecordsOfKind(void *aoc, s32 type, s32 flag);
-extern TableEntry *FUN_00389948(void *aoc, u32 index);
+extern TableEntry *aocPackagesGetHashTable3Entry(void *aoc, u32 index);
 
 /* Returns table entry `index` of table 0x29/3, continuing into the AOC content entries after the base ones; NULL when out of range. */
 TableEntry *dataTable29GetEntryWithAoc(u32 index)
@@ -25,7 +25,7 @@ TableEntry *dataTable29GetEntryWithAoc(u32 index)
         return &entries[index];
     }
     if (index < groupedFileTablesCountRecordsOfKind(g_aocSystem, 0x23, 3) + count) {
-        return FUN_00389948(g_aocSystem, index - count);
+        return aocPackagesGetHashTable3Entry(g_aocSystem, index - count);
     }
     return NULL;
 }

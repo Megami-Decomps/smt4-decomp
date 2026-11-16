@@ -53,8 +53,8 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
     if (iVar4 == 0) {
       return 0;
     }
-    FUN_003d54f8(0,10);
-    FUN_003d54f8(1,10);
+    titleSetSlotValueState2(0,10);
+    titleSetSlotValueState2(1,10);
     uVar5 = 3;
     break;
   case 3:
@@ -75,7 +75,7 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
     FUN_00268250(2,0,99,iVar2 + 0xa6);
     gameDataAddHomeButtonHold(8);
     FUN_002684ac(1);
-    FUN_00333574(1);
+    gameDataBlocksOrFlagsClearUnk02(1);
     uVar5 = 5;
     break;
   case 5:
@@ -196,7 +196,7 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
       *(unsigned char *)(*(int *)(iVar2 + 0xa0) + iVar2 + 0xa4) = 0;
     }
     else {
-      FUN_002e59f8(*(unsigned int *)(iVar2 + 0x14),iVar2 + *(int *)(iVar2 + 0xa0) * 0x80 + 700,0x80);
+      memcpySrcFirst(*(unsigned int *)(iVar2 + 0x14),iVar2 + *(int *)(iVar2 + 0xa0) * 0x80 + 700,0x80);
       *(unsigned char *)(*(int *)(iVar2 + 0xa0) + iVar2 + 0xa4) = 1;
     }
     iVar4 = *(int *)(iVar2 + 0xa0);
@@ -360,11 +360,11 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
     }
     iVar4 = messageGetChoiceResult();
     if (iVar4 != 0) goto code_r0x00236f38;
-    FUN_002e59f8(iVar2 + *(int *)(iVar2 + 0xa0) * 0x80 + 700,*(unsigned int *)(iVar2 + 0x14),0x80);
+    memcpySrcFirst(iVar2 + *(int *)(iVar2 + 0xa0) * 0x80 + 700,*(unsigned int *)(iVar2 + 0x14),0x80);
     auStack_108[0] = *(unsigned int *)(iVar2 + 0x18);
     FUN_00268250(2,0,0,*(unsigned int *)(iVar2 + 0x14));
     FUN_002684ac(1);
-    FUN_00333574(1);
+    gameDataBlocksOrFlagsClearUnk02(1);
     uVar5 = 0x18;
     break;
   case 0x17:
@@ -422,8 +422,8 @@ code_r0x00236f38:
     if (iVar4 == 0) {
       return 0;
     }
-    FUN_003d54f8(0,10);
-    FUN_003d54f8(1,10);
+    titleSetSlotValueState2(0,10);
+    titleSetSlotValueState2(1,10);
     *(unsigned int *)(iVar2 + 8) = 0x1f;
     FUN_001681cc(0xa1);
     FUN_003d2d34(0x1000001,0,0x3c);

@@ -57,7 +57,7 @@ void Obj55c89c::FUN_004a39bc()
         u16 raw = entries[index].id;
         s16 id = raw;
         panelSetMode3(-FUN_004a8750(id, details->mode, 0, details->rank >= 100, 0), 0);
-        FUN_003343f0(1);
+        gameGlobalsSetMenuOpenFlag(1);
         screen->state = 4;
         screen->unk18 = 0;
         objBInitBlocks274300();
@@ -65,20 +65,20 @@ void Obj55c89c::FUN_004a39bc()
     }
     case 2:
         messageMainSetTargetFlags(0);
-        FUN_003343f0(0);
+        gameGlobalsSetMenuOpenFlag(0);
         screen->state = 2;
         screen->unk18 = 0;
         sysPlaySe(47);
         return;
     case 3:
         flagValueSub(0x7C3, 1);
-        FUN_003343f0(0);
+        gameGlobalsSetMenuOpenFlag(0);
         screen->state = 5;
         screen->unk18 = 0;
         objBInitBlocks274300();
         break;
     default:
-        FUN_003343f0(0);
+        gameGlobalsSetMenuOpenFlag(0);
         screen->state = 2;
         screen->unk18 = 0;
         break;

@@ -25,7 +25,7 @@ RegisteredHandle *modelListInit(RegisteredHandle *list);
 void resourceOwnerLoadFileSync(RegisteredHandle *list, const char *name);
 void FUN_0040a908(RegisteredHandle *list, u32 bytes);
 void FUN_0040a918(RegisteredHandle *list, u32 bytes);
-void FUN_0040aad4(RegisteredHandle *list, s32 mode);
+void moriModelContentLoadBody(RegisteredHandle *list, s32 mode);
 void handleRegistryRegisterObject(void *registry, FusionPreviewObject *object);
 void modelPlayClip(FusionPreviewObject *object, s32 index, s32 mode, f32 first, f32 second);
 }
@@ -53,7 +53,7 @@ extern "C" void uniteCreatePreviewModel()
         resourceOwnerLoadFileSync(list, DAT_0052f298);
         FUN_0040a908(work->registered.handle, budget);
         FUN_0040a918(work->registered.handle, budget);
-        FUN_0040aad4(work->registered.handle, 0);
+        moriModelContentLoadBody(work->registered.handle, 0);
         FusionPreviewObject *object = reinterpret_cast<FusionPreviewObject *>(work->registered.handle->id);
         handleRegistryRegisterObject(g_handleRegistry, object);
         modelPlayClip(object, 0, 2, 0.0f, 0.0f);

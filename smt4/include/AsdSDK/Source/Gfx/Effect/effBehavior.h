@@ -3,7 +3,7 @@
 
 extern "C" {
 
-u8 FUN_002ae424(int code);
+u8 charCodeIsPrivateUseGlyph(int code);
 
 void refCountIncrement(int *counter);
 

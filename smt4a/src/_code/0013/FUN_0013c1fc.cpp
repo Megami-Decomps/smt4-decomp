@@ -3,25 +3,25 @@
 
 extern "C" {
 s32 FUN_00159814(s32 device, u32 *buttons);
-void *FUN_002e59f8(void *destination, const void *source, u32 bytes);
-extern InputHoldGlobals DAT_005b4000;
+void *memcpySrcFirst(void *destination, const void *source, u32 bytes);
+extern InputHoldGlobals g_padInputState;
 extern u32 DAT_0063ffd0;
-extern u32 DAT_00640000[31];
+extern u32 g_padHeldFrames[31];
 extern u32 DAT_0064007c[31];
 extern const InputCounterBinding DAT_0053d740[31];
 
 // Update each mapped input's hold duration and consume the pending-reset flag.
 void FUN_0013c1fc(void)
 {
-    if (FUN_00159814(DAT_005b4000.device, &DAT_0063ffd0) != 0) {
-        DAT_005b4000.available = 1;
-        FUN_002e59f8(DAT_00640000, DAT_0064007c, sizeof(DAT_00640000));
+    if (FUN_00159814(g_padInputState.device, &DAT_0063ffd0) != 0) {
+        g_padInputState.available = 1;
+        memcpySrcFirst(g_padHeldFrames, DAT_0064007c, sizeof(g_padHeldFrames));
     } else {
-        DAT_005b4000.available = 0;
+        g_padInputState.available = 0;
     }
     const InputCounterBinding *binding = DAT_0053d740;
-    s32 available = DAT_005b4000.available;
-    u32 *counter = DAT_00640000;
+    s32 available = g_padInputState.available;
+    u32 *counter = g_padHeldFrames;
     for (s32 index = 0; index < 31; ++index, ++binding, ++counter) {
         u32 buttons;
         if (binding->sourceSelector != 0) {
@@ -38,8 +38,8 @@ void FUN_0013c1fc(void)
             *counter = 0;
         }
     }
-    if ((DAT_005b4000.flags & 2) != 0) {
-        DAT_005b4000.flags &= ~2u;
+    if ((g_padInputState.flags & 2) != 0) {
+        g_padInputState.flags &= ~2u;
     }
 }
 }

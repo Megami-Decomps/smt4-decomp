@@ -15,7 +15,7 @@ FUN_0023a3b4(int param_1,unsigned int param_2,unsigned int *param_3,unsigned int
     return 1;
   }
   iVar1 = *(int *)(param_1 + 4);
-  FUN_00225c1c();
+  resourceManagerGetValueByIndex();
   iVar4 = *(int *)(iVar1 + 0x10);
   if (iVar4 != 0) {
     iVar1 = *(int *)(iVar4 + 0x48);

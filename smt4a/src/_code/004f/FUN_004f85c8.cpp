@@ -10,7 +10,7 @@ extern const char DAT_005284c0[];
 void sysMemClear(void *memory, u32 size);
 void textFormatBuffer(char *destination, const char *format, ...);
 char *libc_strcpy(char *destination, const char *source);
-char *FUN_00100d60(const char *string, s32 character);
+char *libc_strrchr(const char *string, s32 character);
 }
 
 namespace {
@@ -28,7 +28,7 @@ inline void requestAssistEffect(PendingResourceRecord *record, const char *stem,
     sysMemClear(formatted, sizeof(formatted));
     textFormatBuffer(formatted, DAT_005284c0, stem);
     libc_strcpy(path, formatted);
-    libc_strcpy(record->name, FUN_00100d60(path, '/') + 1);
+    libc_strcpy(record->name, libc_strrchr(path, '/') + 1);
     if (findRecordByKey(record->name) == 0xFF) {
         asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&record->resource), 1);
         record->flags |= 1;

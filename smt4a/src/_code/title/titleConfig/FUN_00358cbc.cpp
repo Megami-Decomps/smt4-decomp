@@ -13,30 +13,30 @@ struct SavedTitleConfigA {
 };
 
 extern "C" {
-extern TitleConfigState DAT_00588fc0;
+extern TitleConfigState g_titleConfigValues;
 
 // Exchange the four title options with saved data, preferring unsaved local changes.
 void FUN_00358cbc(void)
 {
     SavedTitleConfigA *save = reinterpret_cast<SavedTitleConfigA *>(gameDataBlocksGetSaveData());
     if (save) {
-        if (DAT_00588fc0.dirty) {
-            save->options[0] = DAT_00588fc0.options[0];
-            save->options[1] = DAT_00588fc0.options[1];
-            save->options[2] = DAT_00588fc0.options[2];
-            save->options[3] = DAT_00588fc0.options[3];
+        if (g_titleConfigValues.dirty) {
+            save->options[0] = g_titleConfigValues.options[0];
+            save->options[1] = g_titleConfigValues.options[1];
+            save->options[2] = g_titleConfigValues.options[2];
+            save->options[3] = g_titleConfigValues.options[3];
             save->initialized = 1;
-            DAT_00588fc0.dirty = 0;
+            g_titleConfigValues.dirty = 0;
         } else if (save->initialized) {
-            DAT_00588fc0.options[0] = save->options[0];
-            DAT_00588fc0.options[1] = save->options[1];
-            DAT_00588fc0.options[2] = save->options[2];
-            DAT_00588fc0.options[3] = save->options[3];
+            g_titleConfigValues.options[0] = save->options[0];
+            g_titleConfigValues.options[1] = save->options[1];
+            g_titleConfigValues.options[2] = save->options[2];
+            g_titleConfigValues.options[3] = save->options[3];
         } else {
-            save->options[0] = DAT_00588fc0.options[0];
-            save->options[1] = DAT_00588fc0.options[1];
-            save->options[2] = DAT_00588fc0.options[2];
-            save->options[3] = DAT_00588fc0.options[3];
+            save->options[0] = g_titleConfigValues.options[0];
+            save->options[1] = g_titleConfigValues.options[1];
+            save->options[2] = g_titleConfigValues.options[2];
+            save->options[3] = g_titleConfigValues.options[3];
             save->initialized = 1;
         }
     }

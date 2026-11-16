@@ -31,7 +31,7 @@ void useCounterRelease(void);
 s32 flaggedValueHolderGetTotal(void *cursor);
 ItemRecord *devilGetRecord(u16 itemId);
 void sysPlaySe(s32 se);
-void FUN_003343f0(s32 value);
+void gameGlobalsSetMenuOpenFlag(s32 value);
 s32 useCounterGetCurrentValue(void);
 
 /* Wait for the use counter; once it finishes, play the confirm sound and move to state 2. */
@@ -52,7 +52,7 @@ void Obj55c8d0::itemListMenuWaitUseCounter()
         } else {
             sysPlaySe(0x48);
         }
-        FUN_003343f0(0);
+        gameGlobalsSetMenuOpenFlag(0);
         menu->state = 2;
         menu->timer = 0;
     } else if (useCounterGetCurrentValue() != 0x69) {

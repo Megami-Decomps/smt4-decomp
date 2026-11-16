@@ -30,7 +30,7 @@ int libm_sinf(void);
 int mapEaseSceneHeading(void);
 int FUN_003135bc(...);
 int mapSetSceneState(...);
-int FUN_00317af8(...);
+int padGetNormalizedAnalogStick(...);
 int mapSpawnRandomEventKindEffect(void);
 int FUN_00324e38(...);
 int FUN_00325998(int, int);
@@ -95,10 +95,10 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002d1f40. */
 /* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: FUN_002e364c. */
-extern int FUN_002e5db4(void);
+extern int saveSlotSelectedIsId175(void);
 /* Supplied declaration required: FUN_003135bc. */
 /* Supplied declaration required: mapSetSceneState. */
-/* Supplied declaration required: FUN_00317af8. */
+/* Supplied declaration required: padGetNormalizedAnalogStick. */
 /* Supplied declaration required: mapSpawnRandomEventKindEffect. */
 /* Supplied declaration required: FUN_00324e38. */
 /* Supplied declaration required: FUN_00325998. */
@@ -189,7 +189,7 @@ void FUN_00325d08(void)
       }
       if ((temp_v13 <= *(float *)(g_lmapScene + 0x15c)) || (temp_v3 = gameDataFlagTestBit(0x85), temp_v3 != 0))
       {
-        FUN_00317af8(&temp_v22,temp_v23,0);
+        padGetNormalizedAnalogStick(&temp_v22,temp_v23,0);
         if (DAT_005f1848 != 0) {
           if (DAT_005f1848 == 1) {
             if (*(int *)(g_lmapScene + 8) == 5) {
@@ -409,7 +409,7 @@ LAB_00326fcc:
       else if (*(float *)(temp_v0 + 0x15c0) < temp_v11) {
         sysPlayVoice(0x10000d1);
         temp_v3 = gameFlagIsSet(0x4c9);
-        if ((temp_v3 == 0) || (temp_v3 = FUN_002e5db4(), temp_v3 != 0)) {
+        if ((temp_v3 == 0) || (temp_v3 = saveSlotSelectedIsId175(), temp_v3 != 0)) {
           *(unsigned int *)(g_lmapScene + 0x1d0) = 0xf;
         }
         else {
@@ -424,12 +424,12 @@ LAB_00326fcc:
         *(unsigned int *)(temp_v0 + 0x109c) = 0;
         *(unsigned int *)(temp_v0 + 0x10a4) = 1;
         temp_v3 = gameFlagIsSet(0x4c9);
-        if ((temp_v3 == 0) || (temp_v3 = FUN_002e5db4(), temp_v3 != 0)) {
+        if ((temp_v3 == 0) || (temp_v3 = saveSlotSelectedIsId175(), temp_v3 != 0)) {
           *(unsigned int *)(g_lmapScene + 0x238) = 6;
         }
         *(unsigned char *)(g_lmapScene + 0x23c) = 1;
         temp_v3 = gameFlagIsSet(0x4c9);
-        if ((temp_v3 == 0) || (temp_v3 = FUN_002e5db4(), temp_v3 != 0)) {
+        if ((temp_v3 == 0) || (temp_v3 = saveSlotSelectedIsId175(), temp_v3 != 0)) {
           moriModelUnitStartMaterialAnimation(*(unsigned int *)(*(int *)(g_lmapScene + 0x18c) + 4),0,2);
         }
       }
@@ -667,7 +667,7 @@ LAB_00326a10:
       *(unsigned int *)(temp_v3 + 8) = 0;
       goto LAB_003270a0;
     }
-    FUN_00317af8(&temp_v22,temp_v23,0);
+    padGetNormalizedAnalogStick(&temp_v22,temp_v23,0);
     temp_v3 = g_lmapScene;
     if (((((0xbf000000 < temp_v22) || ((int)temp_v22 >= 0x3f000001)) || (0xbf000000 < temp_v23[0]))
         || ((int)temp_v23[0] >= 0x3f000001)) && (*(int *)(g_lmapScene + 8) >= 0xe)) {
@@ -748,7 +748,7 @@ LAB_00326cc4:
     DAT_005f17bc = *(unsigned int *)(temp_v3 + 0x4c);
     DAT_005f17c0 = 0;
     DAT_005f17c2 = 0;
-    FUN_00317af8(temp_v20,&temp_v19,0);
+    padGetNormalizedAnalogStick(temp_v20,&temp_v19,0);
     if ((((0xbeffffff < (unsigned int)temp_v20[0]) || ((int)temp_v20[0] >= 0x3f000000)) ||
         (0xbeffffff < temp_v19)) || ((int)temp_v19 >= 0x3f000000)) {
       __hardfp_atan2f();

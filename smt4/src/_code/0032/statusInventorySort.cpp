@@ -32,7 +32,7 @@ void statusInventorySort(void)
 {
     StatusSortInventory* status = reinterpret_cast<StatusSortInventory*>(g_statusDown);
     const u8* options =
-        &reinterpret_cast<const StatusSortOptions*>(FUN_002a0d0c())->inventory;
+        &reinterpret_cast<const StatusSortOptions*>(gameDataGetSortPreferences())->inventory;
     if ((*options & 0x7F) == 1) {
         if (*options >> 7) {
             FUN_002b7bca(status->entries, status->count, sizeof(status->entries[0]), devilSlotCompareRaceThenLevel);

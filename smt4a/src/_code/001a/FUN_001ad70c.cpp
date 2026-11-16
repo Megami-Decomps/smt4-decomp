@@ -22,7 +22,7 @@ void *FUN_001ad70c(const AsdAtbcHeader *container, s32 index)
                     break;
                 }
                 AsdEplBlockHeader header;
-                FUN_002e59f8(block, &header, sizeof(header));
+                memcpySrcFirst(block, &header, sizeof(header));
                 payload = (void *)(block + 1);
                 if (index == current) {
                     break;

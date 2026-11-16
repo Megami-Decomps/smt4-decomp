@@ -14,7 +14,7 @@ struct MapAngleOwner {
     /* 0x0C */ MapAngleTarget *target;
 };
 extern "C" {
-extern const AngleSample DAT_00536d14[];
+extern const AngleSample g_sinCosTable[];
 void nn_math_ARMv6_VEC3TransformAsm_2AD44C(AngleVector *, const AngleMatrix *, const AngleVector *);
 void FUN_00481dd8(MapAngleOwner *);
 }
@@ -26,7 +26,7 @@ static AnglePair interpolateAngle(f32 angle)
     f32 magnitude = fabsf(angle);
     while (magnitude >= 65536.0f) magnitude -= 65536.0f;
     u32 integral = static_cast<u16>(static_cast<u32>(magnitude));
-    const AngleSample *sample = &DAT_00536d14[integral & 255];
+    const AngleSample *sample = &g_sinCosTable[integral & 255];
     f32 fraction = magnitude - static_cast<f32>(integral);
     AnglePair result;
     result.sine = sample->sine + fraction * sample->sineStep;

@@ -3,7 +3,7 @@
 
 extern "C" {
 
-extern f32 DAT_00407ed0[]; /* sine/cosine table: per entry base sine, base cosine, sine slope, cosine slope */
+extern f32 g_sinCosTable[]; /* sine/cosine table: per entry base sine, base cosine, sine slope, cosine slope */
 
 Vec3f *FUN_002a86a4(MovedPart *part);
 void FUN_002a8638(MovedPart *part, f32 *a, f32 *b, f32 *c, f32 *d);
@@ -28,7 +28,7 @@ static void sinCosFromTable(f32 radians, f32 *sine, f32 *cosine)
     }
     u32 whole = (u32)magnitude;
     f32 fraction = magnitude - (f32)(whole & 0xFFFF);
-    const f32 *entry = &DAT_00407ed0[(whole & 0xFF) * 4];
+    const f32 *entry = &g_sinCosTable[(whole & 0xFF) * 4];
 
     *sine = entry[0] + fraction * entry[2];
     *cosine = entry[1] + fraction * entry[3];

@@ -18,10 +18,10 @@ extern AocSlotTableView *g_aocMain;
 void sysPlaySe(u32 id);
 void FUN_00182084(void);
 void buttonHelpBeginExit(s32 clearKinds);
-void FUN_00183f58(u32 index, u32 kind, u32 value, u32 queue);
+void buttonHelpSelectSlot(u32 index, u32 kind, u32 value, u32 queue);
 void ifTouchDecrementTimer(void);
 void buttonHelpSetText(const s8 *text, u32 color);
-void FUN_002bf4f4(u8 value);
+void buttonHelpSetPanelState(u8 value);
 void buttonHelpSetSelectedId(u16 value);
 u8 countOwnerIsValidIndex(const AocSlotTableView *owner, u32 index);
 u32 statusDecodeActivityState(const StatusBytes *status);
@@ -53,8 +53,8 @@ static __inline Obj422214Owner *selectedRecord(AocSlotTableView *main, const Aoc
 /* Clears the last unit and applies the prompt text and its color. */
 static __inline void finishFooter(AocMenu *menu)
 {
-    FUN_00183f58(5, 0, 0, 0);
-    FUN_002bf4f4(1);
+    buttonHelpSelectSlot(5, 0, 0, 0);
+    buttonHelpSetPanelState(1);
     buttonHelpSetText(reinterpret_cast<const s8 *>(menu->prompt), AOC_HELP_COLOR);
 }
 
@@ -83,12 +83,12 @@ void aocMenuSetButtonHelp(AocMenu *menu, u32 selection, s32 mode)
             releaseTouchRegistrations();
             FUN_00182084();
         }
-        FUN_00183f58(0, 0x11, 0, 1);
-        FUN_00183f58(1, 0, 0, 1);
-        FUN_00183f58(2, 0xb, 0x4b, 1);
-        FUN_00183f58(3, 0, 0, 1);
-        FUN_00183f58(4, 0x10, 0x4f, 1);
-        FUN_00183f58(5, 0, 0, 1);
+        buttonHelpSelectSlot(0, 0x11, 0, 1);
+        buttonHelpSelectSlot(1, 0, 0, 1);
+        buttonHelpSelectSlot(2, 0xb, 0x4b, 1);
+        buttonHelpSelectSlot(3, 0, 0, 1);
+        buttonHelpSelectSlot(4, 0x10, 0x4f, 1);
+        buttonHelpSelectSlot(5, 0, 0, 1);
         return;
     case 2: {
         menu->flags |= AOC_MENU_HELP_SHOWN;
@@ -99,31 +99,31 @@ void aocMenuSetButtonHelp(AocMenu *menu, u32 selection, s32 mode)
             releaseTouchRegistrations();
             FUN_00182084();
         }
-        FUN_00183f58(0, 0xa, 0x4a, 1);
-        FUN_00183f58(1, 0, 0, 1);
-        FUN_00183f58(2, 0xb, 0x4b, 1);
-        FUN_00183f58(3, 0, 0, 1);
+        buttonHelpSelectSlot(0, 0xa, 0x4a, 1);
+        buttonHelpSelectSlot(1, 0, 0, 1);
+        buttonHelpSelectSlot(2, 0xb, 0x4b, 1);
+        buttonHelpSelectSlot(3, 0, 0, 1);
         if (countOwnerIsValidIndex(main, selectedSlot(menu))) {
             if (selectedRecord(main, menu)->flags[7] != 0) {
-                FUN_00183f58(4, 0xf, 0x4f, 0);
+                buttonHelpSelectSlot(4, 0xf, 0x4f, 0);
             } else {
                 switch (statusDecodeActivityState(reinterpret_cast<const StatusBytes *>(selectedRecord(main, menu)))) {
                 case 0:
-                    FUN_00183f58(4, 0xc, 0x4c, 0);
+                    buttonHelpSelectSlot(4, 0xc, 0x4c, 0);
                     break;
                 case 1:
-                    FUN_00183f58(4, 0xd, 0x4d, 0);
+                    buttonHelpSelectSlot(4, 0xd, 0x4d, 0);
                     break;
                 case 2:
-                    FUN_00183f58(4, 0xe, 0x4e, 0);
+                    buttonHelpSelectSlot(4, 0xe, 0x4e, 0);
                     break;
                 case 3:
-                    FUN_00183f58(4, 0x11, 0, 0);
+                    buttonHelpSelectSlot(4, 0x11, 0, 0);
                     break;
                 }
             }
         } else {
-            FUN_00183f58(4, 0x11, 0, 0);
+            buttonHelpSelectSlot(4, 0x11, 0, 0);
         }
         finishFooter(menu);
         return;
@@ -135,13 +135,13 @@ void aocMenuSetButtonHelp(AocMenu *menu, u32 selection, s32 mode)
             releaseTouchRegistrations();
             FUN_00182084();
         }
-        FUN_00183f58(0, 0x11, 0, 1);
-        FUN_00183f58(1, 0, 0, 1);
-        FUN_00183f58(2, 0x11, 0, 1);
-        FUN_00183f58(3, 0, 0, 1);
-        FUN_00183f58(4, 0x10, 0x4f, 1);
-        FUN_00183f58(5, 0, 0, 1);
-        FUN_002bf4f4(0);
+        buttonHelpSelectSlot(0, 0x11, 0, 1);
+        buttonHelpSelectSlot(1, 0, 0, 1);
+        buttonHelpSelectSlot(2, 0x11, 0, 1);
+        buttonHelpSelectSlot(3, 0, 0, 1);
+        buttonHelpSelectSlot(4, 0x10, 0x4f, 1);
+        buttonHelpSelectSlot(5, 0, 0, 1);
+        buttonHelpSetPanelState(0);
         buttonHelpSetText(NULL, AOC_HELP_COLOR);
         return;
     case 4:

@@ -36,7 +36,7 @@ extern LmapSceneGlobals g_lmapScene;
 extern void *g_handleRegistry;
 
 f32 libm_sinf(f32 value);
-f32 FUN_001f3eec(f32 start, f32 end, f32 duration, f32 time);
+f32 floatInterpolateOverDuration(f32 start, f32 end, f32 duration, f32 time);
 void controllerSetDestination(EffectController *controller, const Vec3F *destination);
 void ptrListRemoveClearOwner(void *registry, EffectController *controller);
 
@@ -49,7 +49,7 @@ void lmapEffectModelUpdate(void)
         g_lmapScene.scene->frame++;
         Vec3F destination = g_lmapScene.scene->effectPosition;
         destination.y += libm_sinf(g_lmapScene.phase) * 2.0f;
-        f32 scale = FUN_001f3eec(1.0f, 7.0f, 60.0f, (f32)g_lmapScene.scene->frame);
+        f32 scale = floatInterpolateOverDuration(1.0f, 7.0f, 60.0f, (f32)g_lmapScene.scene->frame);
         EffectController *controller = g_lmapScene.scene->model->controller;
         controllerSetDestination(controller, &destination);
         controller->scale = scale;

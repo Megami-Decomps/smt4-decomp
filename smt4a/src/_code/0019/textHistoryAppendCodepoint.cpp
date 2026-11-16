@@ -23,7 +23,7 @@ void textHistoryAppendCodepoint(u16 codepoint)
     if (static_cast<s16>(g_inputResetState.table->unk4E02) >= 126) {
         return;
     }
-    if (FUN_0019be8c(codepoint)) {
+    if (charCodeIsPrivateUseGlyph(codepoint)) {
         switch (codepoint) {
         case 0xf801:
         case 0xf816:

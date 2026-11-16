@@ -12,7 +12,7 @@ s32 FUN_002197a0(const void *a, const void *b);
 s32 unitCompareByPriorityValue(const void *a, const void *b);
 void FUN_002b7bca(void *array, s32 count, s32 elementSize, s32 (*compare)(const void *, const void *));
 s32 FUN_003d10a0(BtlMainState **block, CommandState *state, BtlEntry **units, s32 count, s32 mode);
-void FUN_0022abe0(BtlEntry *entry, u16 *skills);
+void btlEntryGetPassiveSkillIds(BtlEntry *entry, u16 *skills);
 s32 FUN_0029a9d4(u32 id, s32 arg);
 s32 appGetRemainingCapacity(u32 id);
 s32 FUN_002277d4(BtlMainState **block, CommandState *state, SkillInfo *info, BtlEntry **units, s32 count, s32 a, s32 b);
@@ -38,7 +38,7 @@ void FUN_003d06e4(BtlMainState **block, CommandState *state)
         return;
     }
     u16 skills[10] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    FUN_0022abe0(state->entry, skills);
+    btlEntryGetPassiveSkillIds(state->entry, skills);
     if ((state->entry->flags & 2) != 0) {
         FUN_002b7bca(skills, 9, 2, FUN_002197a0);
     } else {

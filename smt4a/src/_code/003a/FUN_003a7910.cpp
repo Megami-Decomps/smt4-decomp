@@ -2,13 +2,13 @@
 
 extern "C" {
 
-extern s32 FUN_004186e0(void);
+extern s32 rosterGetLeaderId(void);
 extern void scrSetResult(s32 value);
 
-/* Script command: result is FUN_004186e0(). */
+/* Script command: result is rosterGetLeaderId(). */
 u32 FUN_003a7910(void)
 {
-    scrSetResult(FUN_004186e0());
+    scrSetResult(rosterGetLeaderId());
     return 1;
 }
 

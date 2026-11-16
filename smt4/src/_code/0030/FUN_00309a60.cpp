@@ -17,18 +17,18 @@ nn::Result FUN_00309a60(nn::Result result, u64 id, u32 directories, u32 files, c
             recreate = description < 130;
         } else if (module == 17 && description >= 340 && description < 360) {
             result = nn_fs_DeleteExtSaveData(id);
-            FUN_002c3510(result);
+            processResultSetValue(result);
             recreate = (s32)(result & 0x80000000) >= 0;
         } else if (module == 17 && description >= 360 && description < 390) {
             /* These errors are returned unchanged. */
         } else if (module == 17 && description >= 390 && description < 400) {
             result = nn_fs_DeleteExtSaveData(id);
-            FUN_002c3510(result);
+            processResultSetValue(result);
             recreate = (s32)(result & 0x80000000) >= 0;
         }
         if (recreate) {
             result = FUN_001db820(id, directories, files, iconPath);
-            FUN_002c3510(result);
+            processResultSetValue(result);
         }
     }
     return result;

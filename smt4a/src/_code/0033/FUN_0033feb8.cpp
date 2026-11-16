@@ -47,7 +47,7 @@ extern LmapScene* g_lmapScene;
 extern s8 DAT_005f1bc4;
 extern s8 DAT_005f1c48;
 
-void FUN_00317af8(f32* stickX, f32* stickY, s32 arg);
+void padGetNormalizedAnalogStick(f32* stickX, f32* stickY, s32 arg);
 void FUN_0033f9f4(void);
 f32 __hardfp_atan2f(f32 y, f32 x);
 f32 libm_sinf(f32 angle);
@@ -75,7 +75,7 @@ void FUN_0033feb8(PlayerController* player)
     if (boost > 1.0f) speedScale = boost;
 
     f32 stickX, stickY;
-    FUN_00317af8(&stickX, &stickY, 0);
+    padGetNormalizedAnalogStick(&stickX, &stickY, 0);
     FUN_0033f9f4();
     player->moving = 0;
     if (stickX > -0.5f && stickX < 0.5f && stickY > -0.5f && stickY < 0.5f) {

@@ -4,7 +4,7 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_0018a924(...);
+int mathSinCos(...);
 int mtx44Copy(...);
 int nn_math_ARMv6_MTX44MultAsm(...);
 int FUN_001d3e14(...);
@@ -134,7 +134,7 @@ static float romwright_sqrt_4(float value)
     return (float)sqrt((double)value);
 }
 #endif
-/* Supplied declaration required: FUN_0018a924. */
+/* Supplied declaration required: mathSinCos. */
 /* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
 /* Supplied declaration required: FUN_001d3e14. */
@@ -431,7 +431,7 @@ void FUN_003516e4(int param_1)
   FUN_001d3e14(temp_v27,&temp_v86);
   temp_v10 = (float)temp_v26;
   temp_v23 = CONCAT44(temp_v9,0xbf800000);
-  FUN_0018a924(&temp_v72,temp_v73);
+  mathSinCos(&temp_v72,temp_v73);
   temp_v25 = CONCAT44(0x3f800000,temp_v24);
   temp_v9 = 1.0f - temp_v73[0];
   temp_v11 = (float)temp_v23;

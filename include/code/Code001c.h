@@ -5,6 +5,6 @@
 extern "C" {
 
 /* Starts loading the file `name` into the resource list `model` (its slot at +0x10). */
-void FUN_001cd3ec(void *model, const char *name);
+void modelLoadFileAsyncByName(void *model, const char *name);
 
 } /* extern "C" */

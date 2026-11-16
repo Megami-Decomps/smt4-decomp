@@ -29,7 +29,7 @@ void partyPanelSortEntries(void)
   u8 ascending;
   
   panel = g_partyPanel;
-  sortMode = reinterpret_cast<unsigned char *>(FUN_002a0d0c());
+  sortMode = reinterpret_cast<unsigned char *>(gameDataGetSortPreferences());
   ascending = ~(*sortMode >> 7) & 1;
   if ((*sortMode & 0x7f) == 2) {
     if (ascending != 0) {

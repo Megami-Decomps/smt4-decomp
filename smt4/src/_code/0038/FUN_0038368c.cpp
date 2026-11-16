@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00235368(...);
 int effectSpawnDefaultArguments(...);
-int FUN_002ae038(...);
+int gxSetUniformQuadColors(...);
 int texTableRecordCallWithParams(...);
 int libc_strcat(...);
 int FUN_002b75ec(...);
@@ -46,7 +46,7 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 extern int dataTable26GroupGetRecord(unsigned int *, unsigned char, unsigned int);
 /* Supplied declaration required: effectSpawnDefaultArguments. */
 extern int FUN_00287704(unsigned char);
-/* Supplied declaration required: FUN_002ae038. */
+/* Supplied declaration required: gxSetUniformQuadColors. */
 /* Supplied declaration required: texTableRecordCallWithParams. */
 /* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: FUN_002b75ec. */
@@ -228,7 +228,7 @@ void FUN_0038368c(unsigned int *param_1)
     temp_v27 = temp_v27 * 0.003921569f;
     fStack_6c = fStack_6c * 0.003921569f;
     fStack_68 = fStack_68 * 0.003921569f;
-    FUN_002ae038(&temp_v27);
+    gxSetUniformQuadColors(&temp_v27);
     temp_v6 = 0;
     do {
       temp_v11 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -260,7 +260,7 @@ void FUN_0038368c(unsigned int *param_1)
     temp_v27 = temp_v27 * temp_v11;
     fStack_6c = fStack_6c * temp_v11;
     fStack_68 = fStack_68 * temp_v11;
-    FUN_002ae038(&temp_v27);
+    gxSetUniformQuadColors(&temp_v27);
     temp_v6 = 0;
     do {
       temp_v11 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);

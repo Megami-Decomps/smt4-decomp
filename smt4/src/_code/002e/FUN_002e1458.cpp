@@ -14,11 +14,11 @@ nn::Result FUN_002e1458(const char *path)
     if (pathBuildWide(path, reinterpret_cast<s16 *>(converted), 2) != 0) {
         FUN_002ad888();
         nn::Result result = FUN_002a84e8(converted);
-        FUN_002c3510(result);
+        processResultSetValue(result);
         return result;
     }
     nn::Result result = 0xe0e046bc;
-    FUN_002c3510(result);
+    processResultSetValue(result);
     return result;
 }
 }

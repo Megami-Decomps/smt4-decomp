@@ -26,7 +26,7 @@ extern unsigned char LAB_0015c7dc; /* 0x15c7dc */
 /* Supplied declaration required: FUN_0015d240. */
 /* Supplied declaration required: FUN_002a1f84. */
 /* Supplied declaration required: __aeabi_uldivmod. */
-extern int FUN_002baf30(void);
+extern int nw_snd_internal_driver_VoiceManager_GetInstance(void);
 extern unsigned int __aeabi_uidivmod(unsigned int);
 /* Supplied declaration required: nw_snd_internal_driver_StreamBufferPool_Free. */
 /* Supplied declaration required: nw_snd_internal_driver_Voice_Free. */
@@ -152,7 +152,7 @@ unsigned int FUN_00157b18(int *param_1,int param_2,unsigned int param_3,int para
         temp_v7 = 0;
         if (temp_v7 < (unsigned int)param_1[0x34]) {
           do {
-            temp_v6 = FUN_002baf30();
+            temp_v6 = nw_snd_internal_driver_VoiceManager_GetInstance();
             FUN_0015c6bc(temp_v6,1,0x7fff,&LAB_0015c7dc,param_1 + temp_v7 * 0xd0 + 0x36);
             if (temp_v6 == 0) {
               temp_v4 = 0;

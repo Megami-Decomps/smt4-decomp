@@ -1,6 +1,6 @@
 #include "nn/svc.h"
 
-/* The sound engine's flags (at DAT_005894e4): the event that signals the DSP thread is at +8. */
+/* The sound engine's flags (at g_sndSystemState): the event that signals the DSP thread is at +8. */
 struct DspSoundFlags {
     s8 enabled;
     s8 pending;
@@ -18,7 +18,7 @@ struct DspRegisters {
 };
 
 extern "C" {
-extern DspSoundFlags DAT_005894e4;
+extern DspSoundFlags g_sndSystemState;
 extern u8 g_dspsndState;
 extern u8 g_nnSndMasterManager;
 void FUN_0016f574(u8 *state, s32 flag);
@@ -28,15 +28,15 @@ void nn_os_LightEvent_Signal(u8 *event);
 /* When the DSP sound engine is enabled and has a pending request: runs it, latches the DSP status, clears the pending and busy flags and signals the DSP event. */
 void dspsndHandlePendingRequest(void)
 {
-    if ((DAT_005894e4.enabled & DAT_005894e4.pending) != 0) {
+    if ((g_sndSystemState.enabled & g_sndSystemState.pending) != 0) {
         FUN_0016f574(&g_dspsndState, 1);
         s8 status = ((DspRegisters *)0x1ff81000)->status;
-        DAT_005894e4.status = status;
+        g_sndSystemState.status = status;
         FUN_001a167c(&g_nnSndMasterManager, status);
-        DAT_005894e4.pending = 0;
-        DAT_005894e4.busy = 0;
+        g_sndSystemState.pending = 0;
+        g_sndSystemState.busy = 0;
         nn::os::DataSynchronizationBarrier();
-        nn_os_LightEvent_Signal(DAT_005894e4.event);
+        nn_os_LightEvent_Signal(g_sndSystemState.event);
     }
 }
 }

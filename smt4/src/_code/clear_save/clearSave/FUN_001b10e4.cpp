@@ -42,7 +42,7 @@ s32 scrScriptProcessStartEntry(void *process, s32 entry);
 s32 messageMainGetChoiceResult(void);
 u32 messageTargetGetValue(void);
 void slotSetRequest(s32 slot, s32 value, u32 mask);
-void FUN_002a03d8(s32 slot, s32 value);
+void titleSetSlotValueState2(s32 slot, s32 value);
 u32 screenFadesAllReady(void);
 void buttonHelpSetPreset(u32 preset);
 void buttonHelpSetText(void *record, u32 color);
@@ -78,8 +78,8 @@ s32 FUN_001b10e4(u32 job)
         break;
     case 1:
         work->state = 2;
-        FUN_002a03d8(0, 0x14);
-        FUN_002a03d8(1, 0x14);
+        titleSetSlotValueState2(0, 0x14);
+        titleSetSlotValueState2(1, 0x14);
         break;
     case 2:
         if (screenFadesAllReady() != 0) {

@@ -5,7 +5,7 @@
 
 extern "C" {
 SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 sprite);
-void FUN_002b0750(s32 layer, s32 group, u32 sprite, s32 x, s32 y, s32 width, s32 height, s32 priority);
+void uiDrawTableTextureSized(s32 layer, s32 group, u32 sprite, s32 x, s32 y, s32 width, s32 height, s32 priority);
 
 static __inline void indicatorDraw(UiControlDrawPosition *position, s32 x, s32 y, u32 sprite, s32 priority)
 {
@@ -26,7 +26,7 @@ void FUN_00309ec8(UiControlDrawPosition *position, s32 x, s32 y,
     SpriteInfo *track = asdTMTexTableEntryAt(0x39, trackSprite);
     s32 height = track->size[1];
     s32 rowHeight = height / 16;
-    FUN_002b0750(2, 0x39, trackSprite, position->x + x,
+    uiDrawTableTextureSized(2, 0x39, trackSprite, position->x + x,
                  rowHeight * firstRow + y, track->size[0],
                  height - rowHeight * hiddenRows, 0x6f);
 }

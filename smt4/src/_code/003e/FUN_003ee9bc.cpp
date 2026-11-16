@@ -72,7 +72,7 @@ void FUN_003573a0(void *);
 void _ZN10NnOsThreadD1Ev(void *);
 void entry(void);
 void __aeabi_vec_ctor_nocookie_nodtor(void *, void (*ctor)(void *), u32 elementSize, u32 count);
-void FUN_002ad314(f32 *numerator, f32 *denominator, u32 mode);
+void mathSinCos(f32 *numerator, f32 *denominator, u32 mode);
 s32 __aeabi_atexit(void *object, void (*destructor)(void *), void *handle);
 
 // Initialises the timing globals: limits, parameter records, the atomic registry and its slots, two vtable objects and
@@ -140,7 +140,7 @@ void FUN_003ee9bc(void)
 
     f32 counts[2];
     f32 base;
-    FUN_002ad314(&base, counts, 0x100000);
+    mathSinCos(&base, counts, 0x100000);
     DAT_00473888.ticksPerFrame = (s32)((base / counts[0]) * 256.0f);
 }
 }

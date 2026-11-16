@@ -13,7 +13,7 @@ int sysMemClear(...);
 int FUN_002efc44(...);
 int dataTable41FindById(void);
 int FUN_0034a304(...);
-int FUN_003e8bb0(...);
+int btlEntryBuildSummary(...);
 int btlMainFindEntryByListedId(...);
 int FUN_003f21ec(void);
 int FUN_004bd098(...);
@@ -123,7 +123,7 @@ extern int FUN_0028cb6c(void);
 /* Supplied declaration required: dataTable41FindById. */
 /* Supplied declaration required: FUN_0034a304. */
 extern unsigned int FUN_0034ef58(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_003e8bb0. */
+/* Supplied declaration required: btlEntryBuildSummary. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_003f21ec. */
 /* Supplied declaration required: FUN_004bd098. */
@@ -227,7 +227,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
   temp_v47 = puVar5 + 0x59;
   temp_v49 = temp_v43 + 0x59;
   temp_v50 = puVar5;
-  FUN_003e8bb0(&temp_v38,temp_v45,temp_v43);
+  btlEntryBuildSummary(&temp_v38,temp_v45,temp_v43);
   temp_v2 = (unsigned int)temp_v40;
   if (temp_v2 == 0) {
     if (temp_v1 != 0) {
@@ -274,7 +274,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
   temp_v5 = reinterpret_cast<int>(btlGetMainState());
   btlMainFindEntryByListedId(temp_v5,temp_v3);
   temp_v6 = reinterpret_cast<int>(btlGetMainState());
-  FUN_003e8bb0(&temp_v31,temp_v6,temp_v5);
+  btlEntryBuildSummary(&temp_v31,temp_v6,temp_v5);
   temp_v46 = (unsigned int *)(int)temp_v32;
   if ((temp_v1 != 0) && (*(short *)(temp_v1 + 0x86) == 1)) {
     if (((*temp_v43 & DAT_00571408) != 0 || (temp_v43[1] & DAT_0057140c) != 0) &&

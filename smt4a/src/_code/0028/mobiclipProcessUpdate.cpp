@@ -70,7 +70,7 @@ s32 asdFsIsSdCardDetected();
 s32 FUN_0022655c(const char *path);
 void FUN_00213bc8(const char *path);
 u32 FUN_003d2eec(const char *path);
-void FUN_003d54f8(u32 screen, u32 duration);
+void titleSetSlotValueState2(u32 screen, u32 duration);
 u32 sysLightEventTryWait(AocObjB *event);
 void FUN_00229104();
 s32 moviePumpUntilReady();
@@ -216,8 +216,8 @@ extern "C" s32 mobiclipProcessUpdate()
             work->state = 7;
             return 0;
         }
-        FUN_003d54f8(0, 10);
-        FUN_003d54f8(1, 10);
+        titleSetSlotValueState2(0, 10);
+        titleSetSlotValueState2(1, 10);
         ++work->state;
         return 0;
     case 4:
@@ -294,8 +294,8 @@ extern "C" s32 mobiclipProcessUpdate()
         if (work->special)
             FUN_0025c864();
         if (work->error) {
-            FUN_003d54f8(0, 10);
-            FUN_003d54f8(1, 10);
+            titleSetSlotValueState2(0, 10);
+            titleSetSlotValueState2(1, 10);
         }
         work->state = 12;
         return 0;

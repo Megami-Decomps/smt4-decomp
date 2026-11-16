@@ -21,8 +21,8 @@ extern "C" {
 extern void *g_aocSystem;
 
 void asdMemFree(void *allocation);
-void FUN_00389f54(void *system, s32 value);
-void FUN_0038a134(void *system, s32 value);
+void aocPackageClearFileRefFlagType0C(void *system, s32 value);
+void aocPackageClearFileRefFlagType10(void *system, s32 value);
 void FUN_0033f2b8(ResourceLocalView *resource, s32 value);
 void FUN_0033e7c4(ResourceLocalView *resource, s32 value);
 
@@ -44,11 +44,11 @@ void resourceReleaseAllocationAndDispatchUpdate(ResourceLocalView *resource)
 
     switch (resource->unk08) {
     case 12:
-        FUN_0038a134(g_aocSystem, resource->unk04);
+        aocPackageClearFileRefFlagType10(g_aocSystem, resource->unk04);
         FUN_0033e7c4(resource, resource->unk04);
         break;
     default:
-        FUN_00389f54(g_aocSystem, resource->unk04);
+        aocPackageClearFileRefFlagType0C(g_aocSystem, resource->unk04);
         FUN_0033f2b8(resource, -resource->unk04);
         break;
     }

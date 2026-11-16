@@ -3,7 +3,7 @@
 extern "C" {
 extern PartyPanelNavigationView *g_partyPanel;
 s32 FUN_0029e958(PartyPanelCursorView *cursor);
-s32 FUN_0029efa8(PartyPanelCursorView *cursor);
+s32 listCursorGetRowIfUnblocked(PartyPanelCursorView *cursor);
 s32 FUN_0029ee54(PartyPanelCursorView *cursor);
 s32 objectPartRunUnlessLocked(PartyPanelCursorView *cursor);
 s32 FUN_002c1658(u32 direction, u32 repeat);
@@ -20,7 +20,7 @@ u32 partyPanelHandleCursorEdgeInput(PartyPanelCursorView *cursor, s32 force)
         return 0;
     s32 lastColumn = 3;
     if (cursor->count % FUN_0029e958(cursor)) {
-        s32 page = FUN_0029efa8(cursor);
+        s32 page = listCursorGetRowIfUnblocked(cursor);
         s32 pages = FUN_0029ee54(cursor);
         if (page == pages - 1)
             lastColumn = cursor->count % FUN_0029e958(cursor) - 1;

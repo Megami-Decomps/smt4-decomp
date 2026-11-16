@@ -19,7 +19,7 @@ extern GameStateView g_gameState;
 int jobStop(...);
 int asdMemFree(...);
 int dataTableFree(...);
-int FUN_002bf4f4(...);
+int buttonHelpSetPanelState(...);
 int FUN_002e26a4(void);
 int FUN_0031d088(void);
 int FUN_00330b74(void);
@@ -80,7 +80,7 @@ int lmapMainCallIfActive(void);
 int gauntletAppMenuKillTask(void);
 int FUN_003b078c(void);
 int soundChannelStopAll(...);
-int FUN_003d54f8(...);
+int titleSetSlotValueState2(...);
 
 int eventQueueAddUniqueIfValid(...);
 int dataTable8FindRecord(void);
@@ -140,7 +140,7 @@ int rt_memclr(...);
 int FUN_002f3bc4(...);
 int FUN_002f78a0(...);
 int FUN_00331380(...);
-int FUN_003343f0(...);
+int gameGlobalsSetMenuOpenFlag(...);
 int screenSetColor670(int, int, int, int);
 int FUN_0035a094(...);
 int FUN_0037c8e4(...);
@@ -235,8 +235,8 @@ extern int FUN_00284e94(void);
 extern int FUN_002a21e8(void);
 extern int FUN_002a2814(void);
 extern int resourceRunOperationIfUnblocked(unsigned int *);
-extern unsigned int FUN_002a4878(unsigned int *);
-extern int FUN_002a4894(unsigned int *);
+extern unsigned int listCursorGetRowOfChildIfUnblocked(unsigned int *);
+extern int listCursorGetRowIfUnblocked(unsigned int *);
 extern int messageGetChoiceResult(void);
 /* Supplied declaration required: statusPanelSetOpen. */
 extern int FUN_002a73f8(void);
@@ -248,7 +248,7 @@ extern int uniteGetState(void);
 /* Supplied declaration required: FUN_002ab804. */
 /* Supplied declaration required: uniteSetMode. */
 /* Supplied declaration required: campFusionResultCommand. */
-/* Supplied declaration required: FUN_002bf4f4. */
+/* Supplied declaration required: buttonHelpSetPanelState. */
 extern int campCecEditIsOpen(void);
 /* Supplied declaration required: FUN_002bf534. */
 extern int FUN_002bfd04(void);
@@ -297,7 +297,7 @@ extern int FUN_003309e0(void);
 extern int gameGlobalsGetState(void);
 /* Supplied declaration required: statusDisplayBindUnitRecord. */
 /* Supplied declaration required: FUN_003343c0. */
-/* Supplied declaration required: FUN_003343f0. */
+/* Supplied declaration required: gameGlobalsSetMenuOpenFlag. */
 /* Supplied declaration required: objBInitBlock19D0. */
 /* Supplied declaration required: FUN_0033449c. */
 extern int uiQuestGetActive(void);
@@ -364,7 +364,7 @@ extern int sceneHolderUpdate(void);
 /* Supplied declaration required: FUN_003d0bc0. */
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003d386c. */
-/* Supplied declaration required: FUN_003d54f8. */
+/* Supplied declaration required: titleSetSlotValueState2. */
 /* Supplied declaration required: FUN_003da8f4. */
 /* Supplied declaration required: FUN_003daf0c. */
 /* Supplied declaration required: FUN_003dc628. */
@@ -419,10 +419,10 @@ unsigned int FUN_003d56dc(void)
     temp_v4 = g_camp[7];
     if (!((temp_v4 == 4 || temp_v4 == 5) || temp_v4 == 0x47)) {
       temp_v4 = useCounterIsFinished();
-      FUN_003343f0(temp_v4 == 0);
+      gameGlobalsSetMenuOpenFlag(temp_v4 == 0);
     }
     else {
-      FUN_003343f0(1);
+      gameGlobalsSetMenuOpenFlag(1);
     }
   }
   uiSpriteAdvanceAnimation(puVar2 + 0x1dc);
@@ -507,7 +507,7 @@ unsigned int FUN_003d56dc(void)
   case 2:
     temp_v4 = FUN_00163e84(0);
     if (temp_v4 != 0) {
-      temp_v6 = FUN_002a4878(puVar2 + 0x10);
+      temp_v6 = listCursorGetRowOfChildIfUnblocked(puVar2 + 0x10);
       temp_v4 = FUN_003da8f4((int)*(char *)(puVar2 + 0x29),temp_v6);
       if ((((temp_v4 != 0x48 && temp_v4 != 0x49) && (temp_v4 != 0x4a && temp_v4 != 0x4b)) &&
           ((temp_v4 != 0x4c && temp_v4 != 0x4d) && temp_v4 != 0x4e)) ||
@@ -708,7 +708,7 @@ unsigned int FUN_003d56dc(void)
     temp_v4 = FUN_002ebce4();
     if (((temp_v4 == 0) || (*(char *)((int)puVar2 + 0x6e2) == '\0')) ||
        (*(char *)((int)puVar2 + 0x76e) == '\0')) break;
-    temp_v6 = FUN_002a4878(puVar2 + 0x10);
+    temp_v6 = listCursorGetRowOfChildIfUnblocked(puVar2 + 0x10);
     temp_v6 = FUN_003da8f4((int)*(char *)(puVar2 + 0x29),temp_v6);
     temp_v4 = puVar2[9];
     if (temp_v4 == 0x11) {
@@ -790,9 +790,9 @@ unsigned int FUN_003d56dc(void)
       if (temp_v4 < 0x13) {
         switch(temp_v4) {
         case 6:
-          temp_v6 = FUN_002a4878(puVar2 + 0x10);
+          temp_v6 = listCursorGetRowOfChildIfUnblocked(puVar2 + 0x10);
           temp_v4 = FUN_003da8f4((int)*(char *)(puVar2 + 0x29),temp_v6);
-          temp_v6 = FUN_002a4878(puVar2 + 0x10);
+          temp_v6 = listCursorGetRowOfChildIfUnblocked(puVar2 + 0x10);
           FUN_003da8f4((int)*(char *)(puVar2 + 0x29),temp_v6);
           temp_v10 = FUN_002e26c4();
           if ((((temp_v4 != 0x48 && temp_v4 != 0x49) && (temp_v4 != 0x4a && temp_v4 != 0x4b)) &&
@@ -840,7 +840,7 @@ unsigned int FUN_003d56dc(void)
       break;
     }
     temp_v4 = resourceRunOperationIfUnblocked(puVar2 + 0x7b);
-    temp_v10 = FUN_002a4894(puVar2 + 0x7b);
+    temp_v10 = listCursorGetRowIfUnblocked(puVar2 + 0x7b);
     FUN_002c39dc(6,puVar2[(temp_v10 + temp_v4) * 2 + 0x6dc],puVar2[(temp_v10 + temp_v4) * 2 + 0x6dd]);
     FUN_00284ee4(1);
     temp_v4 = puVar2[9];
@@ -1037,7 +1037,7 @@ LAB_003d6870:
     temp_v4 = FUN_00284e94();
     if (temp_v4 != 0) {
       temp_v4 = resourceRunOperationIfUnblocked(puVar12 + 0x7b);
-      temp_v10 = FUN_002a4894(puVar12 + 0x7b);
+      temp_v10 = listCursorGetRowIfUnblocked(puVar12 + 0x7b);
       temp_v4 = FUN_0022a030(puVar12[(temp_v10 + temp_v4) * 2 + 0x6dd],
                            puVar12[(temp_v10 + temp_v4) * 2 + 0x6dc]);
       if (temp_v4 == 0) {
@@ -1124,7 +1124,7 @@ LAB_003d6870:
   case 0x18:
     FUN_003d386c(1);
     temp_v4 = resourceRunOperationIfUnblocked(puVar2 + 0x7b);
-    temp_v10 = FUN_002a4894(puVar2 + 0x7b);
+    temp_v10 = listCursorGetRowIfUnblocked(puVar2 + 0x7b);
     if (g_camp != (unsigned int *)0x0) {
       g_camp[0x2f] = temp_v4 + temp_v10;
     }
@@ -1276,7 +1276,7 @@ LAB_003d6870:
     }
     break;
   case 0x1d:
-    temp_v6 = FUN_002a4878(puVar2 + 0x10);
+    temp_v6 = listCursorGetRowOfChildIfUnblocked(puVar2 + 0x10);
     FUN_003da8f4((int)*(char *)(puVar2 + 0x29),temp_v6);
     FUN_001fdde8();
     break;
@@ -1363,7 +1363,7 @@ LAB_003d6870:
         workCommandRefreshActiveSlots();
       }
       campChangeState(3);
-      FUN_003d54f8(0,10);
+      titleSetSlotValueState2(0,10);
       temp_v4 = mapMainIsBusy();
       if (temp_v4 != 0) {
         mapSelectRoomMusicIfActive();
@@ -1582,13 +1582,13 @@ LAB_003d6870:
     puVar2[7] = temp_v6;
     break;
   case 0x2c:
-    temp_v6 = FUN_002a4878(puVar2 + 0x10);
+    temp_v6 = listCursorGetRowOfChildIfUnblocked(puVar2 + 0x10);
     temp_v6 = FUN_003da8f4((int)*(char *)(puVar2 + 0x29),temp_v6);
     puVar12 = g_camp;
     temp_v4 = useCounterIsFinished();
     if (temp_v4 != 0) {
       useCounterRelease();
-      temp_v6 = FUN_002a4878(puVar12 + 0x10);
+      temp_v6 = listCursorGetRowOfChildIfUnblocked(puVar12 + 0x10);
       FUN_003da8f4((int)*(char *)(puVar12 + 0x29),temp_v6);
       campShowSelectedEntryHelp();
       sysPlaySe(*(unsigned short *)((int)puVar12 + 0x3a));
@@ -1805,13 +1805,13 @@ LAB_003d801c:
           temp_v4 = campCecGet();
           if (temp_v4 != 0) {
             campCecSetValue(0);
-            FUN_003343f0(0);
+            gameGlobalsSetMenuOpenFlag(0);
             temp_v6 = 0x34;
             puVar2[7] = temp_v6;
             break;
           }
           puVar2[7] = 0x34;
-          FUN_003343f0(0);
+          gameGlobalsSetMenuOpenFlag(0);
           FUN_002e2404(3);
         }
       }
@@ -2093,7 +2093,7 @@ LAB_003d801c:
     }
     break;
   case 0x4d:
-    FUN_002bf4f4(0);
+    buttonHelpSetPanelState(0);
     messageDismissNumericBanner(1);
     slotSetRequest(0,10,0xff);
     slotSetRequest(1,10,0xff);
@@ -2103,7 +2103,7 @@ LAB_003d801c:
   case 0x4f:
     temp_v4 = pairedAvailabilityBothReady();
     if (temp_v4 != 0) {
-      FUN_002bf4f4(1);
+      buttonHelpSetPanelState(1);
       temp_v4 = 0x55;
       campChangeState(temp_v4);
     }

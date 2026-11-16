@@ -60,7 +60,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_001c08ec. */
 /* Supplied declaration required: flagsPackFourBooleans. */
 /* Supplied declaration required: FUN_0023e024. */
-extern int FUN_002865c0(unsigned int);
+extern int gxPackFadeKindAlphaWord(unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectTexture. */
@@ -158,7 +158,7 @@ void FUN_00340c90(fn_00340c90_arg0 *param_1)
     *(unsigned char *)(temp_v0 + 0x12c4) = 0;
   }
   temp_v0 = g_titleScene;
-  temp_v1 = FUN_002865c0(6);
+  temp_v1 = gxPackFadeKindAlphaWord(6);
   piVar5 = (int *)(temp_v0 + 0x126c);
   temp_v2 = *piVar5;
   temp_v3 = piVar5[temp_v2 + 2];

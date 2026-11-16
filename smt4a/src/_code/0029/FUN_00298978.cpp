@@ -6,7 +6,7 @@
 extern "C" {
 
 int sysPlaySe(int);
-int FUN_0022677c(...);
+int titleRestartSlotState3(...);
 int scrScriptProcessGetEntry(...);
 int scrScriptProcessCreate(...);
 
@@ -57,7 +57,7 @@ extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: screenFadeSlotReset. */
 extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: FUN_0022677c. */
+/* Supplied declaration required: titleRestartSlotState3. */
 /* Supplied declaration required: asdLoadFileSetUseRawPaths. */
 extern int messageAnyWindowActive(void);
 /* Supplied declaration required: scrScriptProcessGetEntry. */
@@ -254,8 +254,8 @@ unsigned int FUN_00298978(void)
       *(unsigned char *)((int)puVar2 + 0x21) = 0;
     }
     if (*(char *)((int)puVar2 + 0x23) != '\0') {
-      FUN_0022677c(0,0xff);
-      FUN_0022677c(1,0xff);
+      titleRestartSlotState3(0,0xff);
+      titleRestartSlotState3(1,0xff);
     }
     temp_v1 = puVar2[0xb];
     scrScriptProcessCreate(temp_v1,puVar2[0xd]);

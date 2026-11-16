@@ -7,7 +7,7 @@ extern "C" {
 u8 FUN_002240b4(u32 mode)
 {
     GameModeFlagGroup *flags =
-        &reinterpret_cast<GameModeFlags *>(FUN_002a0d0c())->modes;
+        &reinterpret_cast<GameModeFlags *>(gameDataGetSortPreferences())->modes;
     switch (mode) {
     case 0:
     case 1:

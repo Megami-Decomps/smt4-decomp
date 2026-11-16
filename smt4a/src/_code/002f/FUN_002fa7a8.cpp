@@ -38,7 +38,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: btlCommandMenuEnterMode. */
 /* Supplied declaration required: btlCommandResolveSelectedTarget. */
-extern int FUN_002a4878(int);
+extern int listCursorGetRowOfChildIfUnblocked(int);
 /* Supplied declaration required: FUN_002c7bb0. */
 /* Supplied declaration required: FUN_002ccde8. */
 /* Supplied declaration required: flaggedEntrySetValueB. */
@@ -255,7 +255,7 @@ void FUN_002fa7a8(int param_1)
         temp_v15[0] = 0;
         temp_v10[0] = 0;
         FUN_002ccde8(param_1,temp_v15,temp_v10);
-        temp_v3 = FUN_002a4878(temp_v12);
+        temp_v3 = listCursorGetRowOfChildIfUnblocked(temp_v12);
         if (temp_v3 != 0) {
           temp_v5 = gameGetSlotTable();
           temp_v6 = param_1 + temp_v3 * 4;

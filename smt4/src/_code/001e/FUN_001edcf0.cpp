@@ -39,7 +39,7 @@ void gameDataFlagsSet(s32 mask);
 void gameDataBlocksAddFlags(u32 flags);
 void gameDataRemoveHomeButtonHold(s32 mask);
 void commonBgStopChildAndBeginTransition(void);
-void FUN_002898e4(void);
+void commonBgAcquire(void);
 void messageMainFinishWindow(void);
 s32 messageMainIsWindowActive(void);
 void buttonHelpSetPreset(s32 preset);
@@ -95,7 +95,7 @@ u32 FUN_001edcf0(u32 unused, s32 enabled)
         saveLoadClearFlags();
         buttonHelpSetPreset(0xE6);
         if (DAT_0043e313 == 0) {
-            FUN_002898e4();
+            commonBgAcquire();
             commonBgStopChildAndBeginTransition();
             DAT_0043e313 = 1;
         }

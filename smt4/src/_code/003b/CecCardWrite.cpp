@@ -17,7 +17,7 @@ char s__SHIN_MEGAMITENSEI_4_0043ddd0[34] = "-SHIN-MEGAMITENSEI-4-23456789012";
 u16 g_cecCardMessage[37] = {'M', 'a', 's', 't', 'e', 'r', ',', ' ', 'I', ' ', 'g', 'o', 't', ' ', 'a', ' ', 'c', 'a', 'r', 'd', ' ', 'f', 'r', 'o', 'm', ' ', 'a', ' ', 'S', 'a', 'm', 'u', 'r', 'a', 'i', '.', 0};
 u16 g_cecCardTitle[22] = {'S', 'h', 'i', 'n', ' ', 'M', 'e', 'g', 'a', 'm', 'i', ' ', 'T', 'e', 'n', 's', 'e', 'i', ' ', 'I', 'V', 0};
 
-u32 FUN_00357818(u32 resourceId);
+u32 cecMakeResourceId(u32 resourceId);
 u32 FUN_003103e4(u32 resource, u32 applicationId, const char *applicationName, u32 messageData,
                  u32 messageSize, const char *messageBoxName, u32 parameter6, u32 parameter7);
 s32 cecWriteMessageBoxNameAndData(u32, u32, const char *, const void *, u32);
@@ -29,7 +29,7 @@ u32 cecSendCardData(CecCardOwner *owner, u32 argument)
 {
     u32 status = 0;
     cecSettingsSet(2, 3, 255, 0);
-    u32 box = FUN_00357818(0xe5c);
+    u32 box = cecMakeResourceId(0xe5c);
     const char *title = reinterpret_cast<const char *>(g_cecCardTitle);
     cecWriteMessageBoxNameAndData(box, g_cecCardBox.id, title, owner->data, 0x1200);
     s32 result = FUN_0021f57c(reinterpret_cast<const char *>(g_cecCardMessage), owner->metadata, 0xc80, argument, 0x4c);
@@ -53,7 +53,7 @@ u32 cecSendCardData(CecCardOwner *owner, u32 argument)
 
 u32 FUN_003bbd88(CecMessageBoxRequestPrefixIV *request)
 {
-    const u32 resource = FUN_00357818(0xe5c);
+    const u32 resource = cecMakeResourceId(0xe5c);
     const u32 result = FUN_003103e4(
         resource, g_cecCardBox.id, s__SHIN_MEGAMITENSEI_4_0043ddd0,
         request->messageData, 0x1200, reinterpret_cast<const char *>(g_cecCardTitle), 12, 99);
@@ -76,7 +76,7 @@ u32 FUN_003bbd88(CecMessageBoxRequestPrefixIV *request)
     }
 
     cecSettingsSet(2, 3, 0xff, 0);
-    const u32 writeResource = FUN_00357818(0xe5c);
+    const u32 writeResource = cecMakeResourceId(0xe5c);
     const char *title = reinterpret_cast<const char *>(g_cecCardTitle);
     const u32 writeResult = cecWriteMessageBoxNameAndData(
         writeResource, g_cecCardBox.id, title,

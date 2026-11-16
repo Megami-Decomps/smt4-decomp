@@ -30,7 +30,7 @@ u32 FUN_0035f700(void)
         damage = entry->hp - 1;
     }
     if (entry->unitIndex >= 0) {
-        FUN_003ee0c0(battle);
+        btlSlotManagerResetStates(battle);
         FUN_004fc094(0, source, 0, &battle->roster[entry->unitIndex],
             0, damage, -1, -1, entry->hp, entry->maxHp,
             0, 0, defeated, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1);

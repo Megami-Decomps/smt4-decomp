@@ -25,7 +25,7 @@ void FUN_004a1958(PreviewMenuWork *work);
 void setListWindow(PreviewMenuWindow *window, s32 first, s32 second);
 u32 buttonHelpGetValue();
 void sysPlaySe(u32 id);
-void FUN_003343f0(s32 mode);
+void gameGlobalsSetMenuOpenFlag(s32 mode);
 void screen4AEnter(PreviewMenuWork *work);
 void uniteCreatePreviewModel();
 
@@ -52,7 +52,7 @@ void Obj55c89c::FUN_004a38bc()
         setListWindow(&work->window, first, count);
     }
     sysPlaySe(buttonHelpGetValue());
-    FUN_003343f0(0);
+    gameGlobalsSetMenuOpenFlag(0);
     if (work->entries[0].previewState <= 0) {
         screen4AEnter(work);
         uniteCreatePreviewModel();

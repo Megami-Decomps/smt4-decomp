@@ -39,22 +39,22 @@ nn::Result FUN_002e1380(SaveStreamOwner *owner, u32 id, u32 size)
     nn::Result result;
     if (pathBuildWide(id, buffer, 2) == NULL) {
         result = 0xE0E046BC;
-        FUN_002c3510(result);
+        processResultSetValue(result);
         return result;
     }
     u64 fileSize = size;
     FUN_002ad888();
     result = FUN_002ad80c(reinterpret_cast<const u16 *>(buffer), fileSize);
     if (result & 0x80000000) {
-        FUN_002c3510(result);
+        processResultSetValue(result);
         return result;
     }
     result = saveStreamOpen(&owner->stream, buffer, 2);
     if ((s32)(result & 0x80000000) < 0) {
-        FUN_002c3510(result);
+        processResultSetValue(result);
         return result;
     }
-    FUN_002c3510(nn::Result(0));
+    processResultSetValue(nn::Result(0));
     return nn::Result(0);
 }
 

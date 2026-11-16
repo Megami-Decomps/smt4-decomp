@@ -12,7 +12,7 @@ extern "C" {
 u32 FUN_004962e4(SceneResourceWaitState *state);
 ScriptProcess *scrScriptProcessCreate(void *source, u32 size);
 void scriptProcessSetMode(ScriptProcess *process, s32 mode);
-void FUN_003d54f8(s32 screen, s32 frames);
+void titleSetSlotValueState2(s32 screen, s32 frames);
 const PlaceTextRecord *dataTable17Type1GetEntry(PlaceTextTableCursor *cursor, s32 index);
 s32 dataTable17Count(PlaceTextTableCursor *cursor);
 s32 gameFlagIsSet(u16 flag);
@@ -29,8 +29,8 @@ void _ZN9Obj53604412FUN_0049569cEv(PlaceTextTransition *transition)
         process = scrScriptProcessCreate(transition->layoutSource, transition->layoutSize);
         transition->second = process;
         scriptProcessSetMode(process, 2);
-        FUN_003d54f8(0, 10);
-        FUN_003d54f8(1, 10);
+        titleSetSlotValueState2(0, 10);
+        titleSetSlotValueState2(1, 10);
         u8 area = transition->area;
         s32 location = transition->location;
         PlaceTextTableCursor cursor;

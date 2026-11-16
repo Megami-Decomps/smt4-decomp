@@ -7,7 +7,7 @@
 extern "C" {
 
 int btlMarkLowestHpUnit(int *);
-int FUN_00247478(unsigned int [110], int, unsigned int);
+int btlEntryBuildSummary(unsigned int [110], int, unsigned int);
 int dataTable08Sub1GetRecord(void);
 int btlSelectRandomMarkedUnit(int *);
 int btlMarkHighestHpUnit(int *);
@@ -25,7 +25,7 @@ typedef struct {
 
 /* Supplied declaration required: btlMarkLowestHpUnit. */
 extern int randRange(unsigned int);
-/* Supplied declaration required: FUN_00247478. */
+/* Supplied declaration required: btlEntryBuildSummary. */
 /* Supplied declaration required: btlUnitGet. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 extern unsigned int FUN_003c83e0(void);
@@ -67,7 +67,7 @@ void btlUnitSetParam(int *param_1,unsigned int param_2,unsigned int param_3)
     temp_v2 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(param_1)));
     temp_v11 = (unsigned int)((**(unsigned int **)(temp_v2 + 0x20) & 0x10) == 0);
     temp_v2 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(param_1)));
-    FUN_00247478(temp_v12,*param_1,*(unsigned int *)(temp_v2 + 0x20));
+    btlEntryBuildSummary(temp_v12,*param_1,*(unsigned int *)(temp_v2 + 0x20));
     if ((short)temp_v12[0] == 0) {
       temp_v10 = 0;
     }

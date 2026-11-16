@@ -12,7 +12,7 @@ struct BattleEntryView {
     /* 0x14b */ u8 resistanceSlot;   // index into the attack info's resistance bytes
 };
 
-// What FUN_00247478 collects about an attack (0x24 bytes).
+// What btlEntryBuildSummary collects about an attack (0x24 bytes).
 struct AttackInfo {
     /* 0x00 */ u8 unk00[2];
     /* 0x02 */ u16 supportedValue;
@@ -27,7 +27,7 @@ BattleEntryView *btlFindEntryBlockByMemberId(BtlMainState *state, s32 id);
 void *btlMainFindEntryByListedId(BtlMainState *state, s32 id);
 f32 FUN_0022a690(s32 kind, f32 value);
 f32 FUN_003be670(s32 attacker, s32 target);
-AttackInfo FUN_00247478(BtlMainState *state, void *entry);
+AttackInfo btlEntryBuildSummary(BtlMainState *state, void *entry);
 void selectionCopySupportedValue(u16 value, u32 *output);
 void *dataTable40FindById(void *player);
 u32 playerGetSkillRank(void *player);
@@ -50,7 +50,7 @@ s32 FUN_003be918(void *player, s32 attackerId, s32 targetId, s32 first, f32 base
     f32 targetStat = FUN_0022a690(10, (f32)targetId);
     f32 stats = attackerStat * targetStat * FUN_003be670(attackerId, targetId);
 
-    AttackInfo info = FUN_00247478(state, btlMainFindEntryByListedId(state, attackerId));
+    AttackInfo info = btlEntryBuildSummary(state, btlMainFindEntryByListedId(state, attackerId));
     u32 supported = 0;
     selectionCopySupportedValue(info.supportedValue, &supported);
 

@@ -17,7 +17,7 @@ int _ZN18OnlineResultRecordaSERKS_(int, unsigned int);
 int FUN_002ea12c(void);
 int FUN_002ea704(void);
 int FUN_002f3378(unsigned char [36]);
-int FUN_002f4f20(int, int);
+int atomicAddS32(int, int);
 int FUN_002fd784(unsigned int, unsigned char [36]);
 int FUN_00442100(void);
 
@@ -48,7 +48,7 @@ extern int FUN_002e789a(int);
 /* Supplied declaration required: FUN_002ea12c. */
 /* Supplied declaration required: FUN_002ea704. */
 /* Supplied declaration required: FUN_002f3378. */
-/* Supplied declaration required: FUN_002f4f20. */
+/* Supplied declaration required: atomicAddS32. */
 extern int onlineOwnerHasPendingJob(int);
 extern unsigned int FUN_002f815c(void);
 /* Supplied declaration required: FUN_002fd784. */
@@ -146,7 +146,7 @@ void FUN_0012284c(unsigned int param_1,int param_2,int param_3,char *param_4,int
                 iStack_6c = param_7;
                 uStack_68 = param_9;
                 FUN_00122250(temp_v0,*(unsigned int *)(param_3 + 0x44),temp_v9,param_2);
-                FUN_002f4f20(*(int *)(param_2 + 0x11c) + 4,1);
+                atomicAddS32(*(int *)(param_2 + 0x11c) + 4,1);
                 temp_v0 = onlineContextGetInstance();
                 FUN_002e78d0(temp_v0,*(unsigned int *)(param_2 + 0x11c),0);
                 piVar5 = &temp_v5;

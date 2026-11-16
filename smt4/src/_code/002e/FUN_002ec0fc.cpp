@@ -3,7 +3,7 @@
 #include "shard/TextureDrawCall.h"
 
 extern "C" {
-void FUN_002b0750(s32 layer, s32 group, u32 sprite, s32 x, s32 y, s32 width, s32 height, s32 order);
+void uiDrawTableTextureSized(s32 layer, s32 group, u32 sprite, s32 x, s32 y, s32 width, s32 height, s32 order);
 
 // Draw a twelve-part vertical indicator with independent cap and fill variants.
 void FUN_002ec0fc(const SegmentedTextureBarOrigin *origin, s32 x, s32 y, u32 firstVariant,
@@ -20,7 +20,7 @@ void FUN_002ec0fc(const SegmentedTextureBarOrigin *origin, s32 x, s32 y, u32 fir
         const TexSprite *texture = reinterpret_cast<TexSprite *>(asdTMTexTableEntryAt(0x39, sprite));
         const SegmentedTextureBarSize *size = reinterpret_cast<const SegmentedTextureBarSize *>(texture->frames);
         s32 segmentHeight = size->height / 12;
-        FUN_002b0750(2, 0x39, sprite, origin->x + x, firstSegment * segmentHeight + y,
+        uiDrawTableTextureSized(2, 0x39, sprite, origin->x + x, firstSegment * segmentHeight + y,
                      size->width, size->height - segmentHeight * fillSegments, 0x6f);
     }
 }

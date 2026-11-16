@@ -17,7 +17,7 @@ typedef struct Object {
 
 extern void scrScriptProcessDestroy(void *buffer);
 extern void campButtonHelpAcquire(u8 flag);
-extern void FUN_003d54f8(s32 slot, s32 mode);
+extern void titleSetSlotValueState2(s32 slot, s32 mode);
 
 void FUN_0047e430(Object *obj, u8 flag)
 {
@@ -42,10 +42,10 @@ void FUN_0047e430(Object *obj, u8 flag)
     obj->state = 13;
     s32 firstState = pairedAvailabilityGetState(0);
     if (firstState == 3) {
-        FUN_003d54f8(0, 5);
+        titleSetSlotValueState2(0, 5);
     }
     if (pairedAvailabilityGetState(1) == 3) {
-        FUN_003d54f8(1, 5);
+        titleSetSlotValueState2(1, 5);
     }
 }
 

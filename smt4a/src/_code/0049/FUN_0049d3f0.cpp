@@ -56,7 +56,7 @@ void FUN_0049d3f0(HowToScreenWork *work)
     for (s32 i = 0; i < 3; ++i) {
         u32 handle = spriteHandleCreate(0);
         work->display.handles[i] = handle;
-        FUN_001527d8(handle, ~0u);
+        uiObjectSetColorRgb(handle, ~0u);
     }
     FUN_0049dd74(work);
     asdLoadFileAsyncSimple(DAT_0052cf04, &work->messages[0], 0);

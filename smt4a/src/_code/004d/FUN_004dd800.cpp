@@ -9,7 +9,7 @@ extern "C" {
 int FUN_004a9308(...);
 
 int dataTable04FindById(void);
-int FUN_003e8bb0(...);
+int btlEntryBuildSummary(...);
 int FUN_004c9160(...);
 int btlActionMarkRandomStatusTarget(...);
 int btlActionMarkRandomTargetableUnit(...);
@@ -40,7 +40,7 @@ extern unsigned int DAT_00571174; /* 0x571174 */
 extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: dataTable04FindById. */
-/* Supplied declaration required: FUN_003e8bb0. */
+/* Supplied declaration required: btlEntryBuildSummary. */
 /* Supplied declaration required: FUN_004a9308. */
 /* Supplied declaration required: FUN_004c9160. */
 /* Supplied declaration required: btlActionMarkRandomStatusTarget. */
@@ -121,7 +121,7 @@ LAB_004ddb40:
       temp_v2 = param_2[10];
       *(unsigned short *)(temp_v2 + 0x1be) = 2;
       *(short *)(temp_v2 + 0x1c0) = (short)(int)piVar3;
-      FUN_003e8bb0(temp_v8,*param_1,param_2[8]);
+      btlEntryBuildSummary(temp_v8,*param_1,param_2[8]);
       if (temp_v7 != 0) {
         if (temp_v7 == 1 || temp_v7 == 2) {
           btlUnitMarkTargetCandidates(param_1,temp_v6);
@@ -181,7 +181,7 @@ LAB_004ddb48:
       FUN_004e7c04(param_1,temp_v0);
       temp_v2 = param_2[10];
       *(unsigned short *)(temp_v2 + 0x1be) = 1;
-      FUN_003e8bb0(&temp_v6,*param_1,param_2[8]);
+      btlEntryBuildSummary(&temp_v6,*param_1,param_2[8]);
       if ((*(unsigned short *)((unsigned char *)&temp_v6 + 2)) == 1) {
         *(unsigned short *)(temp_v2 + 0x1c0) = 2;
       }

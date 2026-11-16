@@ -41,7 +41,7 @@ u32 scriptHolderUpdate(ScriptHolder *holder)
         if (scrRunOpcodesStub(holder->process) != 2) {
             return 0;
         }
-        u32 owner = FUN_004186e0();
+        u32 owner = rosterGetLeaderId();
         if (partyEntryFlagsBit1()) {
             FUN_00418070(owner, 0);
         }

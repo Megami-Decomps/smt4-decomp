@@ -22,7 +22,7 @@ struct ModelBindingOwner {
 };
 extern "C" {
 s32 gxIsStereoscopic3dEnabled(ModelBindingOwner *owner, ModelBindingResource *resource);
-void FUN_00187a84(ModelBindingOwner *owner, const void *configuration,
+void cameraComposeMatrices(ModelBindingOwner *owner, const void *configuration,
                    const void *transform, void *binding);
 void gpuWriteVertexUniformMatrix(u32 handle, void *script);
 }
@@ -54,7 +54,7 @@ extern "C" void effectRestoreSavedRenderPairs(ModelBindingOwner *owner, ModelBin
         configuration = resource->defaultConfiguration;
         transform = resource->defaultTransform;
     }
-    FUN_00187a84(owner, configuration, transform, owner->binding);
+    cameraComposeMatrices(owner, configuration, transform, owner->binding);
     gpuWriteVertexUniformMatrix(owner->handle, owner->script);
     owner->resource = resource;
     owner->state = 5;

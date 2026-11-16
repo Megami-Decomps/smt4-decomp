@@ -4,17 +4,17 @@ extern "C" {
 void cursorResetFromParam(void);
 void asdModelCommandBlockRelease(void);
 void FUN_003c8538(s32 arg);
-extern u32 *DAT_005b3fe4;
-extern s32 DAT_005b3fe8;
+extern u32 *g_modelCommandBuffer;
+extern s32 g_modelCommandWordCount;
 }
 
 /* Posts this object and message id 0xf0105 to the command queue. */
 void Obj464cb0::post0f0105()
 {
     cursorResetFromParam();
-    DAT_005b3fe4[DAT_005b3fe8] = (u32)this;
-    DAT_005b3fe4[DAT_005b3fe8 + 1] = 0xf0105;
-    DAT_005b3fe8 += 2;
+    g_modelCommandBuffer[g_modelCommandWordCount] = (u32)this;
+    g_modelCommandBuffer[g_modelCommandWordCount + 1] = 0xf0105;
+    g_modelCommandWordCount += 2;
     asdModelCommandBlockRelease();
     FUN_003c8538(0);
 }

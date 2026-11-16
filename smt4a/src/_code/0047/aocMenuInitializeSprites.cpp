@@ -59,7 +59,7 @@ void aocMenuInitializeSprites(AocMenuSprites *menu)
     menu->ready = 0;
     aocMenuSetReadyFlag(g_aocMain, 0);
     menu->background = spriteHandleCreate(0);
-    FUN_001527d8(menu->background, 0xffffffff);
+    uiObjectSetColorRgb(menu->background, 0xffffffff);
     positionStateSet(menu->background, 0, 0x646464ff, 0.0f);
     FUN_004cf7cc(menu->control);
 }

@@ -33,11 +33,11 @@ extern "C" {
 void *asdMemoryAllocTracked(u32 size, u32 alignment, s32 heap, s32 category, s32 clear);
 void gameDataAddHomeButtonHold(s32 enabled);
 void gameDataBlocksAddFlags(u32 flags);
-void FUN_00333574(s32 enabled);
+void gameDataBlocksOrFlagsClearUnk02(s32 enabled);
 SaveHeader *gameDataBlocksGetSaveData(void);
 void FUN_003712a4(void *);
 void work8BufDestroy(void *);
-void FUN_003a7938(void *);
+void saveLoadDrawActivityIcon(void *);
 void asdProcessClearSelectedFlags(void *, u32, u32);
 void *taskCreateDraw(const char *, s32, s32, s32, ProcessCallback, void *, void *, void *);
 extern SaveLoadState g_saveLoadProcess;
@@ -49,7 +49,7 @@ void *saveLoadProcessCreate(s32 selection, u8 option)
     SaveLoadWork *work = static_cast<SaveLoadWork *>(asdMemoryAllocTracked(0x100, 0x100, 0, 0x1c, 1));
     gameDataAddHomeButtonHold(1);
     gameDataBlocksAddFlags(1);
-    FUN_00333574(1);
+    gameDataBlocksOrFlagsClearUnk02(1);
     work->unk08 = 0;
     work->slot = gameDataBlocksGetSaveData()->slot;
     if (work->slot == 0)
@@ -68,8 +68,8 @@ void *saveLoadProcessCreate(s32 selection, u8 option)
         work->mode = 1;
     }
     work->option = option;
-    taskCreateDraw("Boot UpDraw", 0x86, 0, 0, FUN_003a7938, NULL, NULL, work->process);
-    taskCreateDraw("Boot UpDraw_R", 0xe2, 0, 0, FUN_003a7938, NULL, NULL, work->process);
+    taskCreateDraw("Boot UpDraw", 0x86, 0, 0, saveLoadDrawActivityIcon, NULL, NULL, work->process);
+    taskCreateDraw("Boot UpDraw_R", 0xe2, 0, 0, saveLoadDrawActivityIcon, NULL, NULL, work->process);
     g_saveLoadProcess.active = 0;
     g_saveLoadProcess.unk01 = 0;
     g_saveLoadProcess.unk02 = 0;

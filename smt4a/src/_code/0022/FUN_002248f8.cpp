@@ -22,8 +22,8 @@ int FUN_0031db84(...);
 int menu32PlayCursorSeAndSelect(...);
 int FUN_00321338(...);
 int FUN_00321500(...);
-int FUN_00333f6c(void);
-int FUN_003343f0(...);
+int gameGlobalsReleaseReference(void);
+int gameGlobalsSetMenuOpenFlag(...);
 int FUN_00336aec(...);
 int campCommonBgRelease(void);
 int partyPanelDestroy(void);
@@ -39,7 +39,7 @@ int VectorSignedToFloat(...);
 int padQueryLogicalKey(void);
 int dataTable00FindById(void);
 int FUN_00284ee4(...);
-int FUN_00291e14(void);
+int btlIsDefeatSuppressed(void);
 int FUN_002c39dc(...);
 int FUN_002ccde8(int, unsigned int *, unsigned int *);
 int btlTalkBustUpSetDemonTexture(int, int);
@@ -47,7 +47,7 @@ int FUN_003493dc(...);
 int FUN_0035d0e4(void);
 int btlTalkBustUpReleaseTexture(void);
 int btlTalkBustUpSetUnk2F4(int);
-int FUN_0039ebcc(void);
+int spriteOperationGetModeThreeCompletion(void);
 int uiMenuRequestStateNine(...);
 
 int uiSpriteAdvanceAnimation(...);
@@ -122,7 +122,7 @@ extern int FUN_00270bfc(int);
 /* Supplied declaration required: FUN_00280030. */
 extern int FUN_00284e94(void);
 /* Supplied declaration required: FUN_00284ee4. */
-/* Supplied declaration required: FUN_00291e14. */
+/* Supplied declaration required: btlIsDefeatSuppressed. */
 /* Supplied declaration required: partySelectionExpandMask. */
 /* Supplied declaration required: FUN_002b1838. */
 /* Supplied declaration required: FUN_002b24dc. */
@@ -143,8 +143,8 @@ extern int FUN_002fc0a4(int);
 extern int menu32ModeIsNot2(int);
 /* Supplied declaration required: FUN_00321500. */
 extern unsigned int partyPanelValueGet(void);
-/* Supplied declaration required: FUN_00333f6c. */
-/* Supplied declaration required: FUN_003343f0. */
+/* Supplied declaration required: gameGlobalsReleaseReference. */
+/* Supplied declaration required: gameGlobalsSetMenuOpenFlag. */
 extern int menu32State387CIs6(int);
 /* Supplied declaration required: FUN_00336aec. */
 extern int menu32ModeIsNot4(int);
@@ -169,7 +169,7 @@ extern int menu32State387CNotIn22To25(void);
 extern int menu32ModeIsNot5(int);
 /* Supplied declaration required: statusBustUpPortraitRelease. */
 extern int menu32ModeIsNot6(int);
-/* Supplied declaration required: FUN_0039ebcc. */
+/* Supplied declaration required: spriteOperationGetModeThreeCompletion. */
 /* Supplied declaration required: devilIsTextureLoaded. */
 extern int btlTalkBustUpIsUnk2F8(unsigned int);
 /* Supplied declaration required: uiMenuRequestStateNine. */
@@ -478,7 +478,7 @@ unsigned int FUN_002248f8(void)
       if (temp_v4 != 0) {
         FUN_003493dc(1);
         FUN_002c39dc(0xe,0,0xffffffff);
-        FUN_00291e14();
+        btlIsDefeatSuppressed();
         FUN_0035d0e4();
         FUN_00284ee4(1);
       }
@@ -518,7 +518,7 @@ unsigned int FUN_002248f8(void)
           }
           FUN_003493dc(1);
           FUN_002c39dc(5,(int)(short)temp_v16,temp_v4);
-          FUN_00291e14();
+          btlIsDefeatSuppressed();
           FUN_0035d0e4();
           FUN_00284ee4(1);
         }
@@ -533,7 +533,7 @@ unsigned int FUN_002248f8(void)
         }
         FUN_003493dc(1);
         FUN_002c39dc(8,(int)(short)temp_v16,temp_v4);
-        FUN_00291e14();
+        btlIsDefeatSuppressed();
         FUN_0035d0e4();
         FUN_00284ee4(1);
       }
@@ -545,7 +545,7 @@ unsigned int FUN_002248f8(void)
     temp_v4 = g_btlUiBlock;
     if ((temp_v10 != 0) && (temp_v10 = menu32ModeIsNot6(g_btlUiBlock + 8), temp_v10 != 0)) {
       temp_v4 = temp_v4 + 0x24bc;
-      FUN_0039ebcc();
+      spriteOperationGetModeThreeCompletion();
       if (temp_v4 == 0) goto LAB_00225054;
     }
     else {
@@ -561,7 +561,7 @@ LAB_00225054:
     temp_v10 = menu32ModeIsNot6(g_btlUiBlock + 8);
     if (temp_v10 != 0) {
       temp_v10 = temp_v4 + 0x24bc;
-      FUN_0039ebcc();
+      spriteOperationGetModeThreeCompletion();
       if (temp_v10 != 0) {
         FUN_00321500(temp_v4 + 8);
         uiSpriteSetKeyframeThree(temp_v4 + 0x24bc);
@@ -578,13 +578,13 @@ LAB_00225054:
     else {
       temp_v7 = 0;
     }
-    FUN_003343f0(temp_v7);
+    gameGlobalsSetMenuOpenFlag(temp_v7);
     break;
   case 0xf:
     temp_v4 = FUN_0026c3a0();
     if (temp_v4 == 0) break;
-    FUN_00333f6c();
-    FUN_003343f0(0);
+    gameGlobalsReleaseReference();
+    gameGlobalsSetMenuOpenFlag(0);
     temp_v4 = 0xb;
     piVar9 = (int *)(temp_v0 + 0x74a0);
     *piVar9 = temp_v4;
@@ -632,7 +632,7 @@ LAB_00225054:
         temp_v10 = menu32ModeIsNot6(g_btlUiBlock + 8);
         if (temp_v10 != 0) {
           temp_v10 = temp_v4 + 0x24bc;
-          FUN_0039ebcc();
+          spriteOperationGetModeThreeCompletion();
           if (temp_v10 != 0) {
             FUN_00321500(temp_v4 + 8);
             uiSpriteSetKeyframeThree(temp_v4 + 0x24bc);

@@ -15,7 +15,7 @@ extern RenderCtx *g_titleScene;
 void gxResetColorQuadToWhite();
 s32 renderCtxPackPassFlags(u32 mode, u32 option);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
-void FUN_002b76d0(const EffectColor *first, const EffectColor *second,
+void gfxDrawQuadFourColors(const EffectColor *first, const EffectColor *second,
                   const EffectColor *third, const EffectColor *fourth,
                   f32 x, f32 y, f32 width, f32 height, f32 depth);
 void efctSetSpeed(f32 alpha);
@@ -47,7 +47,7 @@ u32 campCecDrawDimmingOverlay()
             color.alpha = 0.5f;
             renderCtxSelectTexture(g_titleScene, 0);
             f32 offset = renderCtxCalculateStereoParallax(g_titleScene, 0.35f);
-            FUN_002b76d0(&color, &color, &color, &color,
+            gfxDrawQuadFourColors(&color, &color, &color, &color,
                           (f32)(s32)offset, 0.0f, 400.0f, 240.0f, 0.95703125f);
             efctSetSpeed(1.0f);
             renderStackPop(&g_titleScene->stackA);

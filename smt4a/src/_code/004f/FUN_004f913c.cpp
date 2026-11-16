@@ -13,7 +13,7 @@ char *libc_strcpy(char *destination, const char *source);
 void sysMemClear(void *memory, u32 size);
 void asdMemFree(void *memory);
 s32 textFormatBuffer(char *destination, const char *format, ...);
-char *FUN_00100d60(char *text, u32 character);
+char *libc_strrchr(char *text, u32 character);
 void asdLoadFileAsyncSimple(const char *path, char **output, u32 flags);
 extern const char DAT_005284c0[];
 
@@ -50,7 +50,7 @@ u32 FUN_004f913c(RangeAnimationOwner *owner)
         sysMemClear(formatted, sizeof(formatted));
         textFormatBuffer(formatted, DAT_005284c0, name);
         libc_strcpy(path, formatted);
-        libc_strcpy(resource->key, FUN_00100d60(path, '/') + 1);
+        libc_strcpy(resource->key, libc_strrchr(path, '/') + 1);
         if (findRecordByKey(resource->key) == 0xff) {
             asdLoadFileAsyncSimple(path, &resource->file, 1);
             resource->flags |= 1;

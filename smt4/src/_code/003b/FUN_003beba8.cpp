@@ -31,7 +31,7 @@ BattleCombatant* btlFindEntryBlockByMemberId(BtlMainState* main, s32 id);
 BattleListEntry* btlMainFindEntryByListedId(BtlMainState* main, s32 id);
 f32 FUN_0022a690(s32 kind, f32 value);
 f32 FUN_003be670(s32 attacker, s32 defender);
-AffinityRates FUN_00247478(BtlMainState* main, BattleListEntry* entry);
+AffinityRates btlEntryBuildSummary(BtlMainState* main, BattleListEntry* entry);
 void selectionCopySupportedValue(u32 id, u32* out);
 u32* dataTable40FindById(s32 id);
 s32 playerGetSkillRank(s32 id);
@@ -55,7 +55,7 @@ s32 FUN_003beba8(s32 partyId, s32 mode, s32 attackerId, s32 defenderId, f32 powe
     f32 rateB = FUN_0022a690(10, (f32)defenderId);
     f32 base = rateA * rateB * FUN_003be670(attackerId, defenderId);
 
-    AffinityRates rates = FUN_00247478(main, btlMainFindEntryByListedId(main, attackerId));
+    AffinityRates rates = btlEntryBuildSummary(main, btlMainFindEntryByListedId(main, attackerId));
     u32 supported = 0;
     selectionCopySupportedValue(rates.skillId, &supported);
 

@@ -11,7 +11,7 @@ void nn_os_CriticalSection_Leave(void *lock);
 void FUN_002a208c();
 void nn_snd_CTR_InitializeWaveBuffer(WaveBuffer *buffer);
 u32 FUN_00360060(u32 bytes, s32 format, s32 channels);
-void FUN_001565e4(u32 voice, WaveBuffer *buffer);
+void nn_snd_CTR_Voice_AppendWaveBuffer(u32 voice, WaveBuffer *buffer);
 void FUN_00159fd8();
 void threadSleepDuration(s64 duration);
 }
@@ -48,7 +48,7 @@ extern "C" void FUN_0034e718()
                 stream->submittedSamples = stream->submittedSamples + samples;
                 stream->buffers[stream->writeIndex].looping = 0;
                 stream->buffers[stream->writeIndex].sampleCount = samples;
-                FUN_001565e4(stream->voice, &stream->buffers[stream->writeIndex]);
+                nn_snd_CTR_Voice_AppendWaveBuffer(stream->voice, &stream->buffers[stream->writeIndex]);
                 ++stream->queued;
                 ++stream->writeIndex;
                 if (stream->writeIndex == stream->capacity)

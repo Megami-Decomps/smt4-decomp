@@ -16,16 +16,16 @@ static __inline u32 bgmQueryChannelTrackState(const BgmRequestChannel *channel, 
 }
 
 extern "C" {
-extern BgmRequestChannel DAT_004c53c4[2];
+extern BgmRequestChannel g_bgmRequestChannels[2];
 
 // Report whether a track is playing or pending on either BGM channel.
 u32 bgmGetStateById(s32 trackId)
 {
     u32 state = 0;
     if (jyoucyuGetTableEntry(1) == 0) {
-        state = bgmQueryChannelTrackState(&DAT_004c53c4[0], trackId);
+        state = bgmQueryChannelTrackState(&g_bgmRequestChannels[0], trackId);
         if (state == 0) {
-            state = bgmQueryChannelTrackState(&DAT_004c53c4[1], trackId);
+            state = bgmQueryChannelTrackState(&g_bgmRequestChannels[1], trackId);
         }
     }
     return state;

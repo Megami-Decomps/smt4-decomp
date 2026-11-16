@@ -22,7 +22,7 @@ extern "C" {
 extern PartyPanelSounds *g_partyPanel;
 
 void sysPlaySe(u32 sound);
-void FUN_00183f58(s32 a, s32 b, s32 c, s32 d);
+void buttonHelpSelectSlot(s32 a, s32 b, s32 c, s32 d);
 s32 FUN_002cad18(void);
 s32 partyPanelGetSelectedDemonId(void);
 s8 FUN_0022e714(void);
@@ -107,12 +107,12 @@ void FUN_0023fc38(void)
         }
     }
     if (panel->holding != 0) {
-        FUN_00183f58(3, 0x12, 0, 1);
+        buttonHelpSelectSlot(3, 0x12, 0, 1);
         return;
     }
     if (buttonHelpGetEntryValue(3) != 0) {
         return;
     }
-    FUN_00183f58(3, 3, 0xb, 1);
+    buttonHelpSelectSlot(3, 3, 0xb, 1);
 }
 }

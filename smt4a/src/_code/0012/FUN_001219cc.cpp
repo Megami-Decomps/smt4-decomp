@@ -6,12 +6,12 @@ extern "C" {
 
 int streamReaderSeek(int, int);
 int streamReset(void);
-int FUN_002fbb70(int, int);
+int streamWriterSetLengthIfFits(int, int);
 int streamWriterPatchSizePrefix(int);
 
 /* Supplied declaration required: streamReaderSeek. */
 /* Supplied declaration required: streamReset. */
-/* Supplied declaration required: FUN_002fbb70. */
+/* Supplied declaration required: streamWriterSetLengthIfFits. */
 /* Supplied declaration required: streamWriterPatchSizePrefix. */
 
 
@@ -23,7 +23,7 @@ void FUN_001219cc(int param_1)
   *(unsigned int *)(param_1 + 0x20) = 0;
   *(unsigned int *)(param_1 + 0x24) = 0;
   *(unsigned char *)(param_1 + 0x38) = 0;
-  FUN_002fbb70(param_1,4);
+  streamWriterSetLengthIfFits(param_1,4);
   streamWriterPatchSizePrefix(param_1);
   streamReaderSeek(param_1,4);
   return;

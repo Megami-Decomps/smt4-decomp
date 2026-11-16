@@ -72,7 +72,7 @@ void selectionPanelDrawMarkers(SelectionPanelWork *work, int drawAll)
                 slot = slot + 1;
             } while (slot < 4);
         } else {
-            s32 chosen = FUN_002a4878(work->slotObject);
+            s32 chosen = listCursorGetRowOfChildIfUnblocked(work->slotObject);
             TextureTableEntryIV *marker = asdTMTexTableEntryAt(0xd, chosen + 0x52);
             renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
             efctSetSpeed(opacity);

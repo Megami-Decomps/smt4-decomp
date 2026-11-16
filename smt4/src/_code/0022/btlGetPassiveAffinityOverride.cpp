@@ -5,7 +5,7 @@
 struct BtlEntry;
 extern "C" {
 BtlEntry *btlMainFindEntryByListedId(BtlMainState *, u32);
-void FUN_0022abe0(const BtlEntry *, u16 *);
+void btlEntryGetPassiveSkillIds(const BtlEntry *, u16 *);
 
 /* Accumulate the special affinity override supplied by learned passive skills. */
 u32 btlGetPassiveAffinityOverride(u32 listedId, u32 affinity)
@@ -13,7 +13,7 @@ u32 btlGetPassiveAffinityOverride(u32 listedId, u32 affinity)
     u32 result = 0;
     BtlEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), listedId);
     u16 skills[10] = {};
-    FUN_0022abe0(entry, skills);
+    btlEntryGetPassiveSkillIds(entry, skills);
     for (s32 i = 0; i < 9; ++i) {
         if (skills[i] == 0) {
             continue;

@@ -24,7 +24,7 @@ extern int gameGetSlotRecord(void);
 extern int FUN_0023ad2c(int);
 /* Supplied declaration required: FUN_0023e6d8. */
 extern int btlMainGetUnk14(void);
-extern int FUN_00291e14(void);
+extern int btlIsDefeatSuppressed(void);
 extern int FUN_002b4dcc(void);
 /* Supplied declaration required: FUN_002b4e7c. */
 extern unsigned int FUN_003d2c20(int, unsigned short);
@@ -51,7 +51,7 @@ unsigned int FUN_0028809c(unsigned int param_1,int param_2,int param_3,int param
   temp_v6 = 0;
   if (param_2 < 0) {
     temp_v2 = btlMainIsRunning();
-    if ((temp_v2 != 0) && (temp_v2 = FUN_00291e14(), temp_v2 != 0)) {
+    if ((temp_v2 != 0) && (temp_v2 = btlIsDefeatSuppressed(), temp_v2 != 0)) {
       temp_v6 = btlMainGetUnk14();
     }
     else {

@@ -8,7 +8,7 @@
 extern "C" {
 
 BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, u32 id);
-void FUN_0022abe0(BtlEntry *entry, u16 *skillIds);
+void btlEntryGetPassiveSkillIds(BtlEntry *entry, u16 *skillIds);
 s32 randRange(s32 max);
 
 /* Rolls the listed unit's passive skills in order and returns the first one whose chance hits
@@ -21,7 +21,7 @@ u16 btlRollPassiveSkill(u32 listedId)
     u16 result;
     s32 i;
 
-    FUN_0022abe0(entry, skillIds);
+    btlEntryGetPassiveSkillIds(entry, skillIds);
     result = 0;
     for (i = 0; i < 9; i++) {
         if (skillIds[i] != 0) {

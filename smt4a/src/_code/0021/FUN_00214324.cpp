@@ -39,7 +39,7 @@ int campCommonBgRelease(void);
 int campButtonHelpRelease(void);
 int eventTexAddHandle(...);
 int soundChannelStopAll(int);
-int FUN_003d54f8(...);
+int titleSetSlotValueState2(...);
 
 /* stack frame of void: 6 slot(s), 22 byte(s) */
 typedef struct {
@@ -98,7 +98,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
 /* Supplied declaration required: FUN_003c3e14. */
 /* Supplied declaration required: eventTexAddHandle. */
 /* Supplied declaration required: soundChannelStopAll. */
-/* Supplied declaration required: FUN_003d54f8. */
+/* Supplied declaration required: titleSetSlotValueState2. */
 
 
 unsigned int FUN_00214324(void)
@@ -133,8 +133,8 @@ unsigned int FUN_00214324(void)
   case 0:
     temp_v7 = asdTMTexTableNodeIsLoaded(0,*(unsigned short *)((int)g_npcRoom + 0x102));
     if (temp_v7 != 0) {
-      FUN_003d54f8(0,1);
-      FUN_003d54f8(1);
+      titleSetSlotValueState2(0,1);
+      titleSetSlotValueState2(1);
       temp_v7 = 0;
       do {
         if (((*(short *)(puVar2[9] + temp_v7 * 0x18 + 0x24) != 0) &&
@@ -439,8 +439,8 @@ LAB_00214b50:
       }
     }
     else {
-      FUN_003d54f8(0,1);
-      FUN_003d54f8(1);
+      titleSetSlotValueState2(0,1);
+      titleSetSlotValueState2(1);
     }
     temp_v7 = gameFlagIsSet(0x295);
     if ((temp_v7 != 0) && (temp_v7 = gameFlagIsSet(0x296), temp_v7 == 0)) {

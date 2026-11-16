@@ -18,7 +18,7 @@ struct TitleDebugBackground {
     /* 0x0C */ TitleDebugText text;
 };
 extern "C" {
-extern TitleDebugBackground *DAT_00589168;
+extern TitleDebugBackground *g_titleDbgBg;
 void taskRunInitializationState();
 void titleDbgBgFree();
 u32 titleDbgBgDraw();
@@ -34,11 +34,11 @@ static const char s_buildTime[] = "15:06:54";
 extern "C" void titleDbgBgCreate()
 {
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\title\\titleDbgBg.cpp", 75);
-    DAT_00589168 = static_cast<TitleDebugBackground *>(
+    g_titleDbgBg = static_cast<TitleDebugBackground *>(
         asdMemoryAllocTracked(256, 256, 0, sizeof(TitleDebugBackground), 1));
-    DAT_00589168->state = 0;
-    TitleDebugBackground *background = DAT_00589168;
-    TitleDebugText *text = &DAT_00589168->text;
+    g_titleDbgBg->state = 0;
+    TitleDebugBackground *background = g_titleDbgBg;
+    TitleDebugText *text = &g_titleDbgBg->text;
     text->mode = 0;
     textFormatBuffer(text->display, "%s %s", s_buildDate, s_buildTime);
     background->freeOnEnd = 0;

@@ -41,7 +41,7 @@ extern unsigned int appGetRemainingCapacity(void);
 extern unsigned int FUN_0029a9d4(int, unsigned int);
 extern int FUN_0029ac94(void);
 extern int FUN_0029ee54(int);
-extern int FUN_0029efa8(void);
+extern int listCursorGetRowIfUnblocked(void);
 /* Supplied declaration required: dataTable40FindById. */
 /* Supplied declaration required: FUN_002b6c34. */
 extern unsigned int aocIndexValueOrDefault(int);
@@ -80,7 +80,7 @@ void FUN_0029a284(int param_1,int param_2,int param_3,unsigned int param_4,unsig
   temp_v3 = g_statusDown;
   temp_v1 = asdTMTexTableEntryAt(0x1a,param_4);
   temp_v13 = temp_v3 + 0x4d4;
-  temp_v12 = FUN_0029efa8();
+  temp_v12 = listCursorGetRowIfUnblocked();
   temp_v7 = 0;
   efctSetSpeed();
   texDrawCompositeSprite(2,0x1a,8,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,0xbf);

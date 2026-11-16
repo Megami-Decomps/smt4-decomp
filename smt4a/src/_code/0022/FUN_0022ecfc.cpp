@@ -46,7 +46,7 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: FUN_0023dedc. */
 extern int recordGetModeForId(int);
 extern int resourceRunOperationIfUnblocked(int);
-extern int FUN_002a4894(int);
+extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: uiDrawListScrollBar. */
 extern int uiSearchPrimary(int);
 /* Supplied declaration required: FUN_0035ae58. */
@@ -111,7 +111,7 @@ void FUN_0022ecfc(void)
   temp_v4 = uiSearchPrimary(temp_v3);
   if (0 < temp_v4) {
     do {
-      if ((*(int *)(temp_v0 + 4) != 2) || (temp_v4 = FUN_002a4894(temp_v3), temp_v4 != temp_v10)) {
+      if ((*(int *)(temp_v0 + 4) != 2) || (temp_v4 = listCursorGetRowIfUnblocked(temp_v3), temp_v4 != temp_v10)) {
         temp_v4 = resourceRunOperationIfUnblocked(temp_v3);
         temp_v11 = (unsigned int)*(unsigned short *)(temp_v12 + (temp_v4 + temp_v10) * 2);
         temp_v4 = asdTMTexTableEntryAt(0x1e,temp_v10 + 0x9e);
@@ -164,7 +164,7 @@ void FUN_0022ecfc(void)
   if ((0 < temp_v4) &&
      (((temp_v4 = *(int *)(temp_v0 + 4), temp_v4 == 2 || temp_v4 == 6 || (temp_v4 == 7 || temp_v4 == 8)) ||
       (temp_v4 == 9 || temp_v4 == 10)))) {
-    temp_v4 = FUN_002a4894(temp_v3);
+    temp_v4 = listCursorGetRowIfUnblocked(temp_v3);
     temp_v10 = asdTMTexTableEntryAt(0x1e,temp_v4 + 0xb5);
     temp_v5 = resourceRunOperationIfUnblocked(temp_v3);
     temp_v11 = (unsigned int)*(unsigned short *)(temp_v12 + (temp_v5 + temp_v4) * 2);

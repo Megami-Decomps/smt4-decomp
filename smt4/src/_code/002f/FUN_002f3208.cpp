@@ -20,13 +20,13 @@ typedef struct EffList {
 } EffList;
 
 extern void *effBlockCloneDeep(void *block);
-extern EffNode *FUN_0025c870(void);
+extern EffNode *effPartCreateDefault(void);
 
 /* Appends a node holding a deep copy of `block` to the list. */
 void FUN_002f3208(EffList *list, void *block)
 {
     void *clone = effBlockCloneDeep(block);
-    EffNode *node = FUN_0025c870();
+    EffNode *node = effPartCreateDefault();
 
     node->next = NULL;
     node->block = clone;

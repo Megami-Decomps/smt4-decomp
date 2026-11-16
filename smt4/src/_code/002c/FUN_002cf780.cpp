@@ -17,7 +17,7 @@ void FUN_002cf780(void)
     quest->panel.detailMode = 1;
     uiQuestLoadResources();
     s32 base = resourceRunOperationIfUnblocked(quest->panel.alternate.cursor);
-    s32 offset = FUN_0029efa8(quest->panel.alternate.cursor);
+    s32 offset = listCursorGetRowIfUnblocked(quest->panel.alternate.cursor);
     FUN_0028fe0c(quest->cursor.alternate.ids[offset + base], 1);
     timerStart(quest->mainSprite, 0, 0);
     quest = g_uiQuest;

@@ -22,7 +22,7 @@ extern "C" {
 
 u32 FUN_001581dc(const ModelResourceRequest *request);
 
-extern char DAT_00526000[];     /* "c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelContent.cpp" */
+extern char g_moriModelContentSourcePath[];     /* "c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelContent.cpp" */
 
 /* Content constructor: loads the model resource with the content's request options, then creates its binding object (MoriModelContent.cpp line 251). */
 void FUN_0040a884(MoriModelContentLoad *content, u32 id)
@@ -35,7 +35,7 @@ void FUN_0040a884(MoriModelContentLoad *content, u32 id)
     u32 resource = FUN_001581dc(&request);
     content->unk0C = resource;
 
-    Obj557b58 *binding = new (DAT_00526000, 0xfb) Obj557b58(resource);
+    Obj557b58 *binding = new (g_moriModelContentSourcePath, 0xfb) Obj557b58(resource);
     content->binding = reinterpret_cast<MoriModelBinding *>(binding);
 }
 

@@ -48,7 +48,7 @@ void scrScriptProcessStartEntry(s32 process, s32 entry);
 void scrScriptProcessDestroy(void);
 void obj04Finish(void);
 void FUN_0031ed60(LazyScriptTask *task, s32 value);
-s32 FUN_0035d83c(LazyScriptTask *task);
+s32 jobHandleIsReady(LazyScriptTask *task);
 void FUN_0035d7bc(LazyScriptTask *task);
 void gameDataBlocksReleaseHold(s32 mask);
 void gameDataFlagsClearBits(s32 mask);
@@ -104,7 +104,7 @@ u32 FUN_00229c9c(u32 unused, s32 enabled)
         task->scriptRunning = 0;
         break;
     case LAZY_STATE_WAIT:
-        if (FUN_0035d83c(task) != 0) {
+        if (jobHandleIsReady(task) != 0) {
             FUN_0035d7bc(task);
             if (DAT_0057f6c9 != 0) {
                 task->closing = 1;
@@ -129,7 +129,7 @@ u32 FUN_00229c9c(u32 unused, s32 enabled)
         next = LAZY_STATE_AFTER_BRANCH;
         break;
     case LAZY_STATE_AFTER_BRANCH:
-        if (FUN_0035d83c(task) == 0) {
+        if (jobHandleIsReady(task) == 0) {
             task->frame++;
             return 0;
         }

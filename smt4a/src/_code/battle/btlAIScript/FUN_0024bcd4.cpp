@@ -13,7 +13,7 @@ int FUN_002d2000(void);
 int tmnlResetSelection(void);
 int sequenceRequestFlushDeferred(void);
 int FUN_003848a4(void);
-int FUN_003d54f8(...);
+int titleSetSlotValueState2(...);
 int FUN_003e785c(...);
 int FUN_003ebad4(...);
 int FUN_003fda64(...);
@@ -60,7 +60,7 @@ int FUN_003756c8(void);
 int stateAtCIs4(...);
 int btlFindFirstEntryMatchingCategoryAndRequiredMask(void);
 int FUN_003ebca0(void);
-int FUN_003eebf4(unsigned int, int);
+int btlFindSelectionIndexByOrdinal(unsigned int, int);
 int FUN_003f034c(...);
 int FUN_003f26d4(unsigned int);
 int chainCountIdUnflagged(...);
@@ -212,7 +212,7 @@ extern int sequenceRequestIsPending(void);
 /* Supplied declaration required: FUN_003848a4. */
 /* Supplied declaration required: sysClearCachedFlag. */
 /* Supplied declaration required: soundChannelStopAll. */
-/* Supplied declaration required: FUN_003d54f8. */
+/* Supplied declaration required: titleSetSlotValueState2. */
 /* Supplied declaration required: stateAtCIs4. */
 /* Supplied declaration required: FUN_003e785c. */
 extern int FUN_003e9964(unsigned int);
@@ -222,7 +222,7 @@ extern int FUN_003e9964(unsigned int);
 /* Supplied declaration required: FUN_003ebca0. */
 extern int FUN_003ed878(unsigned int);
 /* Supplied declaration required: FUN_003ee734. */
-/* Supplied declaration required: FUN_003eebf4. */
+/* Supplied declaration required: btlFindSelectionIndexByOrdinal. */
 /* Supplied declaration required: FUN_003ef1e4. */
 /* Supplied declaration required: FUN_003f034c. */
 /* Supplied declaration required: FUN_003f26d4. */
@@ -390,11 +390,11 @@ unsigned int FUN_0024bcd4(void)
         break;
       }
       temp_v5 = temp_v2;
-      FUN_003eebf4(temp_v2,1);
+      btlFindSelectionIndexByOrdinal(temp_v2,1);
       if (((int)temp_v5 >= 0) &&
          (!((*(unsigned int *)(temp_v2 + 0x45a4) & DAT_005739ec) != 0 || (DAT_005739e8 & *puVar16) != 0))) {
         temp_v5 = temp_v2;
-        FUN_003eebf4(temp_v2,1);
+        btlFindSelectionIndexByOrdinal(temp_v2,1);
         temp_v0 = *(short *)(*(int *)(temp_v2 + 0x1ffc) + temp_v5 * 0x408 + 0x166);
         if (*(int *)(temp_v2 + 0x2284) != 0) {
           temp_v6 = dataTableFileGetTable(*(int *)(temp_v2 + 0x2284),0);
@@ -431,12 +431,12 @@ joined_r0x0024c078:
   case 5:
     chainCountIdUnflagged(g_btlActionReflect,0);
     temp_v5 = temp_v2;
-    FUN_003eebf4(temp_v2,1);
+    btlFindSelectionIndexByOrdinal(temp_v2,1);
     if ((-1 < (int)temp_v5) &&
        ((*(unsigned int *)(temp_v2 + 0x45a4) & DAT_005739ec) == 0 &&
         (DAT_005739e8 & *(unsigned int *)(temp_v2 + 0x45a0)) == 0)) {
       temp_v5 = temp_v2;
-      FUN_003eebf4(temp_v2,1);
+      btlFindSelectionIndexByOrdinal(temp_v2,1);
       temp_v0 = *(short *)(*(int *)(temp_v2 + 0x1ffc) + temp_v5 * 0x408 + 0x166);
       if (*(int *)(temp_v2 + 0x2284) != 0) {
         temp_v6 = dataTableFileGetTable(*(int *)(temp_v2 + 0x2284),0);
@@ -472,7 +472,7 @@ joined_r0x0024c078:
     temp_v6 = 8;
     break;
   case 7:
-    if (((*(int *)(temp_v2 + 0x94) == 0x1e) && (temp_v5 = temp_v2, FUN_003eebf4(temp_v2,1), -1 < (int)temp_v5)
+    if (((*(int *)(temp_v2 + 0x94) == 0x1e) && (temp_v5 = temp_v2, btlFindSelectionIndexByOrdinal(temp_v2,1), -1 < (int)temp_v5)
         ) && ((*(unsigned int *)(temp_v2 + 0x45a4) & DAT_005739ec) == 0 &&
               (DAT_005739e8 & *(unsigned int *)(temp_v2 + 0x45a0)) == 0)) {
       if (*(char *)(temp_v2 + 0x188) == '\x01') {
@@ -484,7 +484,7 @@ joined_r0x0024c078:
       scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x228c),temp_v6);
       sysPlaySe(0x123);
     }
-    if (((*(int *)(temp_v2 + 0x94) < 0x1f) || (temp_v5 = temp_v2, FUN_003eebf4(temp_v2,1), (int)temp_v5 < 0))
+    if (((*(int *)(temp_v2 + 0x94) < 0x1f) || (temp_v5 = temp_v2, btlFindSelectionIndexByOrdinal(temp_v2,1), (int)temp_v5 < 0))
        || (((*(unsigned int *)(temp_v2 + 0x45a4) & DAT_005739ec) != 0 ||
             (DAT_005739e8 & *(unsigned int *)(temp_v2 + 0x45a0)) != 0 ||
            (temp_v3 = scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x228c)), temp_v3 != 2)))) goto LAB_0024d75c;
@@ -1114,8 +1114,8 @@ LAB_0024d284:
           rt_memcpy(temp_v6,DAT_00573928,0x10b8);
         }
       }
-      FUN_003d54f8(0,10);
-      FUN_003d54f8(1,10);
+      titleSetSlotValueState2(0,10);
+      titleSetSlotValueState2(1,10);
     }
     callJyoucyuGetTableEntry1();
     return 0xffffffff;

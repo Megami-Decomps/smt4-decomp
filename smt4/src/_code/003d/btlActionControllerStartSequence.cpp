@@ -19,14 +19,14 @@ struct ActionControllerEffects {
 };
 
 extern "C" {
-void FUN_0022708c(ScreenOwner *owner);
+void screenFadeResetAndRelease(ScreenOwner *owner);
 ActionSequence *FUN_00337ba0(BtlMainState *battle, u32 firstId, u32 secondId);
 ActionTrack *FUN_003383a4(BtlMainState *battle, s16 kind);
 u32 shakeEffectAlloc();
 
 void btlActionControllerStartSequence(ActionControllerEffects *work, u32 firstId, u32 secondId)
 {
-    FUN_0022708c(reinterpret_cast<ScreenOwner *>(work));
+    screenFadeResetAndRelease(reinterpret_cast<ScreenOwner *>(work));
     work->ids.firstId = firstId;
     work->ids.secondId = secondId;
     work->controller.flags |= 0x4000;

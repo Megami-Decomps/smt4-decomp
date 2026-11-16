@@ -71,7 +71,7 @@ struct BustupCutAnim {
 extern "C" {
 extern BustupCutAnim *g_bustupCutAnim;
 
-s32 FUN_0026e70c();
+s32 floatInterpolateOverDuration();
 s32 FUN_00247f0c();
 s32 FUN_001241a8();
 
@@ -140,7 +140,7 @@ void FUN_002205a4(s32 id, s32 easeKind, s32 frames)
     FUN_0028703c((u32)anim->node->extra);
     modelSetScale((u32)anim->node->extra);
 
-    s32 (*ease)() = FUN_0026e70c;
+    s32 (*ease)() = floatInterpolateOverDuration;
     if (easeKind == CUT_EASE_A)
         ease = FUN_00247f0c;
     else if (easeKind == CUT_EASE_B)

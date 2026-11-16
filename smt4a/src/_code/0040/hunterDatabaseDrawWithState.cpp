@@ -9,7 +9,7 @@ extern "C" {
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *);
 void efctSetSpeed(f32);
 void renderCtxResetColorScale(RenderCtxA *);
-void FUN_004058b0(HunterDatabaseDrawView *);
+void spriteDetailPanelDraw(HunterDatabaseDrawView *);
 extern RenderCtxA *g_renderCtx;
 u32 renderCtxPackPassFlags(u32, u32);
 
@@ -21,7 +21,7 @@ u32 hunterDatabaseDrawWithState(HunterDatabaseDrawView *work)
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     RenderCtxA *context = g_renderCtx;
     renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
-    FUN_004058b0(work);
+    spriteDetailPanelDraw(work);
     efctSetSpeed(1.0f);
     renderStackPop(&g_renderCtx->stackA);
     context = g_renderCtx;

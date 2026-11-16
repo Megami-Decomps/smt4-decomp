@@ -17,7 +17,7 @@ typedef struct Portrait {
 
 extern BustUp *g_btlTalkBustUp;
 
-extern Portrait *FUN_0031bbc4(u32 handle);
+extern Portrait *portraitFindRecordById(u32 handle);
 
 /* Maps the talk bust-up's portrait kind to a code; 0x14 when there is no portrait. */
 u32 btlTalkGetPortraitCode(void)
@@ -26,7 +26,7 @@ u32 btlTalkGetPortraitCode(void)
 
     if (bustUp != NULL) {
         if (bustUp->hasPortrait != 0 && bustUp->portraitHandle != 0) {
-            Portrait *portrait = FUN_0031bbc4((u16)bustUp->portraitHandle);
+            Portrait *portrait = portraitFindRecordById((u16)bustUp->portraitHandle);
             if (portrait != NULL) {
                 switch (portrait->kind) {
                 case 1:

@@ -23,7 +23,7 @@ extern "C" {
 
 AffinityEntry* btlMainFindEntryByListedId(void* main, u32 id);
 void selectionCopySupportedValue(u32 skill, s32* out);
-void FUN_0022abe0(AffinityEntry* entry, u16* passiveIds);
+void btlEntryGetPassiveSkillIds(AffinityEntry* entry, u16* passiveIds);
 PassiveSkill* passiveSkillLookupRecord(u16 id);
 
 static __inline AffinityEntry* findEntry(u32 unitId)
@@ -84,7 +84,7 @@ u32 FUN_00246134(u32 unitId, u32 skillId, s32 mode, s32 target)
     u32 passiveFlags = 0;
     u16 passiveIds[10];
     for (s32 i = 0; i < 10; i++) passiveIds[i] = 0;
-    FUN_0022abe0(current, passiveIds);
+    btlEntryGetPassiveSkillIds(current, passiveIds);
     for (s32 i = 0; i < 9; i++) {
         u32 id = passiveIds[i];
         if (id == 0) continue;

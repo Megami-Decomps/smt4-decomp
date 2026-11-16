@@ -8,7 +8,7 @@ s32 gameFlagIsSet(u32 flag);
 SlotRecord *gameGetSlotRecord(s32 slot);
 s32 FUN_004bd0d8(SlotRecord *record);
 s32 bitsAt60Test(SlotRecord *record, u32 bit);
-s32 FUN_004bd730(SlotRecord *record);
+s32 slotTableEntryIsActive(SlotRecord *record);
 void __aeabi_memset4(void *destination, u32 size, s32 value);
 
 /* Searches the occupied roster for a record allowed by the current feature and status flags. */
@@ -35,7 +35,7 @@ s32 FUN_003ff888(void)
     }
     for (i = 0; i < occupiedCount; i++) {
         SlotRecord *record = gameGetSlotRecord(occupiedSlots[i]);
-        if (record != NULL && FUN_004bd730(record) != 0 &&
+        if (record != NULL && slotTableEntryIsActive(record) != 0 &&
             FUN_004bd0d8(record) == 0 && bitsAt60Test(record, 1) == 0 &&
             bitsAt60Test(record, 10) == 0) {
             return 1;

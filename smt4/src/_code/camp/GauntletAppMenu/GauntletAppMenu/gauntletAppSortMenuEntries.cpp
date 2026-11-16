@@ -19,7 +19,7 @@ void gauntletAppSortMenuEntries()
 {
     GauntletAppMenuWork *menu = g_gauntletAppMenu;
     struct SortSettings { u8 prefix[13]; u8 mode; };
-    const u8 &sortMode = static_cast<const SortSettings *>(reinterpret_cast<const void *>(FUN_002a0d0c()))->mode;
+    const u8 &sortMode = static_cast<const SortSettings *>(reinterpret_cast<const void *>(gameDataGetSortPreferences()))->mode;
     u8 ascending = (sortMode & 0x80) == 0;
     if ((sortMode & 0x7f) == 0x21) {
         if (ascending != 0) {

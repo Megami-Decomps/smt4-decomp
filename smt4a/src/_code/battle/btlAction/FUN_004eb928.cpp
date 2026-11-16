@@ -35,7 +35,7 @@ int btlReflectQueueValueAction(...);
 
 int gameSavedFlagSet(...);
 int dataTable41FindById(void);
-int FUN_003ee0c0(...);
+int btlSlotManagerResetStates(...);
 int FUN_003efb18(...);
 int FUN_003f2594(...);
 int flagValueSub(...);
@@ -77,7 +77,7 @@ int FUN_00222488(unsigned int *);
 int sysMemClear(int, int);
 int FUN_003756c8(int);
 int messageDismissNumericBanner(...);
-int FUN_003e8bb0(...);
+int btlEntryBuildSummary(...);
 int btlMainFindEntryByListedId(...);
 int FUN_003f2aac(...);
 int FUN_004a92d0(int, int, int);
@@ -182,11 +182,11 @@ extern unsigned int FUN_003df57c(unsigned int, unsigned int);
 extern short partyCountActiveSlots(void);
 extern unsigned int words3Clear(void);
 extern int btlScriptUnitHasFlags(int);
-/* Supplied declaration required: FUN_003e8bb0. */
+/* Supplied declaration required: btlEntryBuildSummary. */
 extern int FUN_003ec668(int, int, int);
 extern int FUN_003eca48(int, unsigned short);
 /* Supplied declaration required: halfRecClear. */
-/* Supplied declaration required: FUN_003ee0c0. */
+/* Supplied declaration required: btlSlotManagerResetStates. */
 /* Supplied declaration required: FUN_003efb18. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_003f20f0. */
@@ -202,7 +202,7 @@ extern int FUN_003eca48(int, unsigned short);
 /* Supplied declaration required: btlUiSelectCommandTargetState. */
 /* Supplied declaration required: FUN_004ac0bc. */
 extern unsigned short partySlotFindIndex(void);
-extern unsigned int FUN_004bcbb4(unsigned int, unsigned int);
+extern unsigned int skillGetAdjustedCost(unsigned int, unsigned int);
 extern unsigned int btlCalcDiscountedMoneyCost(unsigned int);
 extern int btlFindEntryValue(int, unsigned int);
 /* Supplied declaration required: btlSlotSetStoreValue. */
@@ -474,7 +474,7 @@ LAB_004ebd00:
     *(unsigned int *)(temp_v20 + 0x1c) = 0;
     *(unsigned int *)(*piStack_30 + 0x4bc0) = 0;
     iStack_68 = (int)*(short *)(*(int *)(temp_v20 + 0x2c) + 0x1be);
-    FUN_003e8bb0(&sStack_4d0,*piStack_30,*(unsigned int *)(temp_v20 + 0x24));
+    btlEntryBuildSummary(&sStack_4d0,*piStack_30,*(unsigned int *)(temp_v20 + 0x24));
     uStack_74 = (unsigned int)sStack_4ba;
     temp_v7 = (int)sStack_4b8;
     uStack_64 = (unsigned int)sStack_4b6;
@@ -1198,7 +1198,7 @@ code_r0x004f054c:
       else if (temp_v17 != 0) {
         if ((*(unsigned int *)(temp_v17 + 0x3c) & 0x400) != 0) {
           temp_v3 = *(int *)(temp_v5 + 0xf4) - 1;
-          FUN_003ee0c0(temp_v22);
+          btlSlotManagerResetStates(temp_v22);
           FUN_004fc094(uStack_288,puVar25,0,*(unsigned int *)(temp_v20 + 0x28),0,temp_v3,0xffffffff,
                        0xffffffff,*(unsigned int *)(*(int *)(temp_v20 + 0x2c) + 0xf4),
                        *(unsigned int *)(*(int *)(temp_v20 + 0x2c) + 0xf8),0,0,0,0,0,0,0,0,0,0xffffffff,
@@ -1211,7 +1211,7 @@ code_r0x004f054c:
         }
         if ((*(unsigned int *)(temp_v17 + 0x3c) & 0x200) != 0) {
           temp_v3 = *(int *)(*(int *)(temp_v20 + 0x2c) + 0xf8);
-          FUN_003ee0c0(*piStack_30);
+          btlSlotManagerResetStates(*piStack_30);
           FUN_004fc094(uStack_288,puVar25,0,*(unsigned int *)(temp_v20 + 0x28),0,temp_v3,0xffffffff,
                        0xffffffff,*(unsigned int *)(*(int *)(temp_v20 + 0x2c) + 0xf4),
                        *(unsigned int *)(*(int *)(temp_v20 + 0x2c) + 0xf8),0,0,0,0,0,0,0,0,0,0xffffffff,
@@ -1228,7 +1228,7 @@ code_r0x004f054c:
               temp_v3 = btlFindEntryValue((int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),0x24);
             }
             else {
-              temp_v17 = FUN_004bcbb4(puVar29[0xff],uStack_74);
+              temp_v17 = skillGetAdjustedCost(puVar29[0xff],uStack_74);
               temp_v3 = btlFindEntryValue((int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),0x24);
             }
             if (0 < temp_v3) {
@@ -1368,7 +1368,7 @@ code_r0x004f054c:
     return;
   case 0x12:
     if (((*puVar25 & 0x1080) == 0) && (temp_v3 = FUN_003efb18(), temp_v3 == 0)) {
-      FUN_003e8bb0(&uStack_58,*param_1,*(unsigned int *)(temp_v20 + 0x24));
+      btlEntryBuildSummary(&uStack_58,*param_1,*(unsigned int *)(temp_v20 + 0x24));
       temp_v27 = (unsigned int)*(unsigned short *)(*(int *)(temp_v20 + 0x2c) + 2);
       temp_v28 = 0;
       FUN_004aa3d4(g_btlUiBlock,(int)*(short *)(*(int *)(temp_v20 + 0x2c) + 0x1be),temp_v29,

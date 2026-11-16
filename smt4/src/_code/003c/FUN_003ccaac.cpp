@@ -33,7 +33,7 @@ int FUN_00229a3c(...);
 int btlTargetSetFlag10(...);
 int btlReflectInitKind9(...);
 int FUN_00246080(...);
-int FUN_00247478(...);
+int btlEntryBuildSummary(...);
 int btlQueueKeyedScalarReflectAction(...);
 int btlAdjustPropertyClamped(...);
 int btlMainFindEntryByListedId(...);
@@ -153,7 +153,7 @@ extern int FUN_0023dcfc(void);
 /* Supplied declaration required: btlReflectInitKind9. */
 extern int FUN_00245cc0(void);
 /* Supplied declaration required: FUN_00246080. */
-/* Supplied declaration required: FUN_00247478. */
+/* Supplied declaration required: btlEntryBuildSummary. */
 extern int btlMainFindActiveEntry(int, int);
 /* Supplied declaration required: btlQueueKeyedScalarReflectAction. */
 /* Supplied declaration required: btlAdjustPropertyClamped. */
@@ -451,7 +451,7 @@ void FUN_003ccaac(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
 LAB_003cd124:
     temp_v26 = 1;
     temp_v21 = temp_v20;
-    FUN_00247478(temp_v27,*param_1,param_2[8]);
+    btlEntryBuildSummary(temp_v27,*param_1,param_2[8]);
     temp_v18 = (temp_v59 & 2) != 0;
     temp_v4 = 1;
     FUN_003bdab0(1,temp_v71,param_5,param_6,param_7,param_8,param_9,temp_v33);

@@ -33,7 +33,7 @@ extern const f32 DAT_0057a6a8[7];       /* damage scale by affinity step, attack
 extern const f32 DAT_0057a6c4[7];       /* damage scale by affinity step, defender side */
 extern u32 g_btlScriptUnit;
 BtlUnitView *btlMainFindEntryByListedId(void *state, s32 unit);
-void FUN_003e8bb0(BtlCommandView *command, void *state, BtlUnitView *unit);
+void btlEntryBuildSummary(BtlCommandView *command, void *state, BtlUnitView *unit);
 
 /* The damage multiplier of attack kind `kind` (7..11) against `unit`: the affinity step scale combined with
    the attacker's and defender's buffs. */
@@ -101,7 +101,7 @@ f32 FUN_004bf6e0(s32 kind, f32 unitValue)
             other = btlMainFindEntryByListedId(btlGetMainState(), unit);
             if (other != NULL && other->buff11C > 0) {
                 BtlCommandView command;
-                FUN_003e8bb0(&command, btlGetMainState(), target);
+                btlEntryBuildSummary(&command, btlGetMainState(), target);
                 if (command.kind == 2 || command.kind == 3 || command.kind == 20) {
                     scale *= 2.2f;
                 }

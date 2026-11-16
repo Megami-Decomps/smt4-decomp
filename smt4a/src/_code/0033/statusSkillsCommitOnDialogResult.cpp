@@ -85,7 +85,7 @@ void statusSkillsCommitOnDialogResult(void* object)
         statusReplaceSkills(data->skills.ids, static_cast<u8>(getUnlockedSlotCount(demon)));
     }
     if (work->refreshNeeded != 0) {
-        FUN_003343f0(0);
+        gameGlobalsSetMenuOpenFlag(0);
         work->refreshNeeded = 0;
     }
     work->state = 5;

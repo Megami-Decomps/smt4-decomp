@@ -19,7 +19,7 @@ void efctSetSpeed(f32 speed);
 void texDrawCompositeSprite(s32 layer, s32 sheet, s32 part, s32 x, s32 y, s32 priority);
 void drawSetColorFromRGBA8(u32 color);
 SpritePartInfo *asdTMTexTableEntryAt(s32 sheet, s32 part);
-void FUN_00210d08(u32 value, s32 x, s32 y, s32 priority);
+void uiDrawSevenDigitNumber(u32 value, s32 x, s32 y, s32 priority);
 
 // Draw the panel frame (highlighted or not) and its number at an offset from the panel position.
 void uiDrawPanelWithValue(PanelDrawPos *pos, s32 dx, s32 dy, u32 value, s32 highlighted)
@@ -35,7 +35,7 @@ void uiDrawPanelWithValue(PanelDrawPos *pos, s32 dx, s32 dy, u32 value, s32 high
     }
     drawSetColorFromRGBA8(0xb4ff8200);
     SpritePartInfo *part = asdTMTexTableEntryAt(0x39, 0x53);
-    FUN_00210d08(value, part->x + x, part->y + y, 0x71);
+    uiDrawSevenDigitNumber(value, part->x + x, part->y + y, 0x71);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
 }

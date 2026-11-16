@@ -4,7 +4,7 @@ extern "C" {
 
 int sndVoiceFree(u32 sdkVoice);
 int nw_snd_internal_driver_VoiceManager_FreeVoice(u32 manager, void *voice);
-extern u32 FUN_002baf30(void);
+extern u32 nw_snd_internal_driver_VoiceManager_GetInstance(void);
 
 typedef struct Voice {
     /* 0x00 */ u32 sdkVoices[2];
@@ -34,7 +34,7 @@ void nw_snd_internal_driver_Voice_Free(Voice *voice)
             } while (i < voice->count);
         }
         voice->count = 0;
-        manager = FUN_002baf30();
+        manager = nw_snd_internal_driver_VoiceManager_GetInstance();
         nw_snd_internal_driver_VoiceManager_FreeVoice(manager, voice);
         voice->allocated = 0;
     }

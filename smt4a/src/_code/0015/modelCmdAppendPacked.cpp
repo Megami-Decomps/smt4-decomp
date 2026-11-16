@@ -2,8 +2,8 @@
 
 extern "C" {
 
-extern u32 *DAT_005b3fe4; /* model command buffer */
-extern int DAT_005b3fe8;  /* words used in the buffer */
+extern u32 *g_modelCommandBuffer; /* model command buffer */
+extern int g_modelCommandWordCount;  /* words used in the buffer */
 
 extern void cursorResetFromParam(void);
 extern void asdModelCommandBlockRelease(void);
@@ -15,9 +15,9 @@ void modelCmdAppendPacked(u32 a, int b, int c, int d)
 
     cursorResetFromParam();
     command = a | (b << 8) | (c << 16) | (d << 24);
-    DAT_005b3fe4[DAT_005b3fe8] = command;
-    DAT_005b3fe4[DAT_005b3fe8 + 1] = 0xF00C3;
-    DAT_005b3fe8 += 2;
+    g_modelCommandBuffer[g_modelCommandWordCount] = command;
+    g_modelCommandBuffer[g_modelCommandWordCount + 1] = 0xF00C3;
+    g_modelCommandWordCount += 2;
     asdModelCommandBlockRelease();
 }
 

@@ -8,7 +8,7 @@ int uiSpriteSetKeyframe(...);
 
 int sysPlaySe(...);
 int FUN_00183e58(void);
-int FUN_00317af8(...);
+int padGetNormalizedAnalogStick(...);
 int naviRequestSelectedMap(void);
 int FUN_003a35a4(void);
 int sysPlayVoice(...);
@@ -78,7 +78,7 @@ extern int FUN_00167c0c(unsigned int **, int *);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183e58. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: FUN_00317af8. */
+/* Supplied declaration required: padGetNormalizedAnalogStick. */
 /* Supplied declaration required: naviRequestSelectedMap. */
 /* Supplied declaration required: FUN_003a35a4. */
 /* Supplied declaration required: sysPlayVoice. */
@@ -247,7 +247,7 @@ unsigned int FUN_00488ce8(int param_1)
     }
   }
   if ((DAT_005f161d != '\0') && ((*(unsigned int *)(param_1 + 0x10) & 0x20000) == 0)) {
-    FUN_00317af8(&temp_v10,temp_v15,0);
+    padGetNormalizedAnalogStick(&temp_v10,temp_v15,0);
     naviMainGetValue(temp_v14);
     pfVar4 = (float *)sub68OwnerGetBlock60(temp_v14);
     temp_v10 = -(temp_v10 * 13.0f);

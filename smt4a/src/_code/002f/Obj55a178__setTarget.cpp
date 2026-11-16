@@ -2,7 +2,7 @@
 #include "classes/Obj55a178.h"
 
 extern "C" void sharedRefRelease(void *);
-extern "C" void FUN_002f4f20(void *, s32);
+extern "C" void atomicAddS32(void *, s32);
 
 void Obj55a178::setTarget(void *object)
 {
@@ -12,6 +12,6 @@ void Obj55a178::setTarget(void *object)
     }
     if (object != NULL) {
         reference = object;
-        FUN_002f4f20((u8 *)object + 4, 1);
+        atomicAddS32((u8 *)object + 4, 1);
     }
 }

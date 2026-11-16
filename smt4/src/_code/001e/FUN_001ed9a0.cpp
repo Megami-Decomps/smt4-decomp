@@ -73,7 +73,7 @@ f32 renderCtxCalculateStereoParallax(TitleScene *scene, f32 scale);
 s32 texDrawCompositeSprite(s32 a, s32 b, s32 c, s32 d, s32 e, s32 f);
 s32 libc_strlen(const u8 *text);
 s32 textDrawString(s32 a, s32 b, const u8 *text, f32 x, f32 y, f32 z, f32 w, f32 speed);
-s32 FUN_002ae038(f32 *color);
+s32 gxSetUniformQuadColors(f32 *color);
 s32 screenDrawShadedRect(s32 x, s32 y, s32 w, s32 h, s32 depth);
 
 /* Pushes `value` onto the render-target stack, re-applying it when it changed. */
@@ -142,7 +142,7 @@ u8 FUN_001ed9a0(void)
             color[1] = 0.0f;
             color[2] = 0.0f;
             color[3] = 1.0f;
-            FUN_002ae038(color);
+            gxSetUniformQuadColors(color);
             screenDrawShadedRect(0, 0, 400, 240, 245);
             renderTargetPop(g_titleScene);
             efctSetSpeed(1.0f);

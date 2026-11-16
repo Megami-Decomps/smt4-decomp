@@ -8,7 +8,7 @@ extern "C" {
 int partyPanelHasSlotValue(...);
 int slotPlacementAssignSlotAndPosition(...);
 int scrollOwnerSelectIndex(...);
-int FUN_0029eb5c(...);
+int scrollListSetSelectionMarkChanged(...);
 int timerStart(...);
 
 int FUN_001d13b0(void);
@@ -56,8 +56,8 @@ extern int g_partyPanel; /* 0x43dcf0 */
 /* Supplied declaration required: gameSetIconDisplayEnabled. */
 /* Supplied declaration required: scrollOwnerSelectIndex. */
 extern unsigned int objectPartRunUnlessLocked(void);
-/* Supplied declaration required: FUN_0029eb5c. */
-extern unsigned int FUN_0029efa8(int);
+/* Supplied declaration required: scrollListSetSelectionMarkChanged. */
+extern unsigned int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: gameGetUnitRecord. */
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: dataTable40FindById. */
@@ -504,7 +504,7 @@ LAB_0028b264:
     if (*(char *)(temp_v0 + 0x42) != '\0') {
       temp_v3 = temp_v0 + 0xa6c;
       temp_v7 = objectPartRunUnlessLocked();
-      temp_v8 = FUN_0029efa8(temp_v3);
+      temp_v8 = listCursorGetRowIfUnblocked(temp_v3);
       temp_v2 = 0;
       partyPanelHasSlotValue(0,temp_v7,temp_v8,*(unsigned int *)(temp_v0 + 0x2c));
       if (temp_v2 == 0) {
@@ -516,7 +516,7 @@ LAB_0028b264:
               if (*(short *)(g_partyPanel + (temp_v2 % 4 + (temp_v9 * 4 - 4)) * 8 + 0x73c) != 0) {
 LAB_0028b308:
                 scrollOwnerSelectIndex(temp_v3,temp_v2 % 4);
-                FUN_0029eb5c(temp_v3,((int)(temp_v2 + ((unsigned int)(temp_v2 >> 0x1f) >> 0x1e)) >> 2) + 1);
+                scrollListSetSelectionMarkChanged(temp_v3,((int)(temp_v2 + ((unsigned int)(temp_v2 >> 0x1f) >> 0x1e)) >> 2) + 1);
                 if (temp_v2 < 0x18) goto LAB_0028b6d0;
                 break;
               }
@@ -529,7 +529,7 @@ LAB_0028b308:
             if (*(char *)(g_partyPanel + temp_v2 + 0x678) != '\0') {
               scrollOwnerSelectIndex(temp_v3);
               temp_v2 = 0;
-              FUN_0029eb5c(temp_v3,temp_v2);
+              scrollListSetSelectionMarkChanged(temp_v3,temp_v2);
               break;
             }
             temp_v2 = temp_v2 + 1;
@@ -539,7 +539,7 @@ LAB_0028b308:
           do {
             if (*(char *)(g_partyPanel + temp_v2 + 0x678) != '\0') {
               scrollOwnerSelectIndex(temp_v3,temp_v2);
-              FUN_0029eb5c(temp_v3,0);
+              scrollListSetSelectionMarkChanged(temp_v3,0);
               if (temp_v2 < 4) goto LAB_0028b6d0;
               break;
             }
@@ -552,14 +552,14 @@ LAB_0028b308:
               if (*(short *)(g_partyPanel + (temp_v2 % 4 + (temp_v9 * 4 - 4)) * 8 + 0x73c) != 0) {
                 scrollOwnerSelectIndex(temp_v3,temp_v2 % 4);
                 temp_v2 = ((int)(temp_v2 + ((unsigned int)(temp_v2 >> 0x1f) >> 0x1e)) >> 2) + 1;
-                FUN_0029eb5c(temp_v3,temp_v2);
+                scrollListSetSelectionMarkChanged(temp_v3,temp_v2);
                 break;
               }
             }
             else if (*(char *)(temp_v2 % 4 + g_partyPanel + 0x678) != '\0') {
               scrollOwnerSelectIndex(temp_v3,temp_v2 % 4);
               temp_v2 = ((int)(temp_v2 + ((unsigned int)(temp_v2 >> 0x1f) >> 0x1e)) >> 2) + 1;
-              FUN_0029eb5c(temp_v3,temp_v2);
+              scrollListSetSelectionMarkChanged(temp_v3,temp_v2);
               break;
             }
             temp_v2 = temp_v2 + 1;
@@ -570,7 +570,7 @@ LAB_0028b308:
     else {
       temp_v3 = temp_v0 + 0xa08;
       temp_v7 = objectPartRunUnlessLocked();
-      temp_v8 = FUN_0029efa8(temp_v3);
+      temp_v8 = listCursorGetRowIfUnblocked(temp_v3);
       temp_v2 = 0;
       partyPanelHasSlotValue(0,temp_v7,temp_v8,*(unsigned int *)(temp_v0 + 0x2c));
       if (temp_v2 == 0) {
@@ -586,13 +586,13 @@ LAB_0028b50c:
                 if (temp_v9 < 0xc) {
                   *(unsigned int *)(temp_v0 + 0x2c) = 0;
                   scrollOwnerSelectIndex(temp_v3,temp_v2 % 4);
-                  FUN_0029eb5c(temp_v3,((int)(temp_v2 + ((unsigned int)(temp_v2 >> 0x1f) >> 0x1e)) >> 2) + 1);
+                  scrollListSetSelectionMarkChanged(temp_v3,((int)(temp_v2 + ((unsigned int)(temp_v2 >> 0x1f) >> 0x1e)) >> 2) + 1);
                 }
                 else {
                   temp_v9 = temp_v9 - 0xc;
                   *(unsigned int *)(temp_v0 + 0x2c) = 1;
                   scrollOwnerSelectIndex(temp_v3,temp_v9 % 4);
-                  FUN_0029eb5c(temp_v3,((int)(temp_v9 + ((unsigned int)(temp_v9 >> 0x1f) >> 0x1e)) >> 2) + 1);
+                  scrollListSetSelectionMarkChanged(temp_v3,((int)(temp_v9 + ((unsigned int)(temp_v9 >> 0x1f) >> 0x1e)) >> 2) + 1);
                 }
                 if (temp_v2 < 0x18) goto LAB_0028b6d0;
                 break;
@@ -606,7 +606,7 @@ LAB_0028b50c:
             if (*(char *)(g_partyPanel + temp_v2 + 0x678) != '\0') {
               scrollOwnerSelectIndex(temp_v3);
               temp_v2 = 0;
-              FUN_0029eb5c(temp_v3,temp_v2);
+              scrollListSetSelectionMarkChanged(temp_v3,temp_v2);
               break;
             }
             temp_v2 = temp_v2 + 1;
@@ -616,7 +616,7 @@ LAB_0028b50c:
           do {
             if (*(char *)(g_partyPanel + temp_v2 + 0x678) != '\0') {
               scrollOwnerSelectIndex(temp_v3,temp_v2);
-              FUN_0029eb5c(temp_v3,0);
+              scrollListSetSelectionMarkChanged(temp_v3,0);
               if (temp_v2 < 4) goto LAB_0028b6d0;
               break;
             }
@@ -651,7 +651,7 @@ LAB_0028b668:
                   } while (temp_v4 < 0x18);
                 }
                 scrollOwnerSelectIndex(temp_v3,temp_v9 % 4);
-                FUN_0029eb5c(temp_v3,((int)(temp_v9 + ((unsigned int)(temp_v9 >> 0x1f) >> 0x1e)) >> 2) + 1);
+                scrollListSetSelectionMarkChanged(temp_v3,((int)(temp_v9 + ((unsigned int)(temp_v9 >> 0x1f) >> 0x1e)) >> 2) + 1);
                 break;
               }
               if (*(int *)(temp_v0 + 0x2c) != 0) {
@@ -676,7 +676,7 @@ LAB_0028b668:
               temp_v9 = temp_v9 - 0xc;
               scrollOwnerSelectIndex(temp_v3,temp_v9 % 4);
               temp_v2 = ((int)(temp_v9 + ((unsigned int)(temp_v9 >> 0x1f) >> 0x1e)) >> 2) + 1;
-              FUN_0029eb5c(temp_v3,temp_v2);
+              scrollListSetSelectionMarkChanged(temp_v3,temp_v2);
               break;
             }
             if (*(char *)(g_partyPanel + temp_v9 % 4 + 0x678) != '\0') goto LAB_0028b668;

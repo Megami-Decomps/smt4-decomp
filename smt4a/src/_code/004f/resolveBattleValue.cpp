@@ -10,7 +10,7 @@ typedef struct HalfAt10Rec {
 
 extern u32 btlScriptUnitHasFlags(void);
 extern s32 btlGetMaxSlotMetric(u32 a);
-extern HalfAt10Rec *FUN_004f7aa4(u32 a, u32 b);
+extern HalfAt10Rec *btlEffectFindPreferredName(u32 a, u32 b);
 
 s32 resolveBattleValue(u32 a, u32 b)
 {
@@ -21,7 +21,7 @@ s32 resolveBattleValue(u32 a, u32 b)
     if (btlScriptUnitHasFlags() != 0) {
         result = 5;
     } else {
-        rec = FUN_004f7aa4(a, b);
+        rec = btlEffectFindPreferredName(a, b);
         result = 0;
         if (rec != NULL) {
             result = rec->unk10;

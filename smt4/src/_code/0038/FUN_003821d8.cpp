@@ -23,7 +23,7 @@ int slotSetRequest(...);
 int buttonHelpSetText(int, int);
 int dataTable1bOr1cGetRecord(void);
 int buttonHelpSetPreset(int);
-int FUN_002bff50(void);
+int messageSetConfirmDisplayMode(void);
 int FUN_002cdf2c(int *);
 int FUN_00333b74(int *, int);
 int FUN_0034888c(int);
@@ -77,7 +77,7 @@ extern int questReadRuntimeFlag(unsigned int, unsigned int);
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 extern int FUN_002b8660(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: FUN_002bff50. */
+/* Supplied declaration required: messageSetConfirmDisplayMode. */
 extern int gameFlagIsSet(void);
 /* Supplied declaration required: FUN_002cdf2c. */
 extern int FUN_002e31b0(void);
@@ -281,7 +281,7 @@ LAB_003822fc:
       return;
     }
     scrResultStopJobAndReleaseUi();
-    FUN_002bff50();
+    messageSetConfirmDisplayMode();
     puVar5 = (unsigned short *)(param_1[0x343] & 0xffff);
     dataTable1bOr1cGetRecord();
     FUN_0034888c(*puVar5);
@@ -336,7 +336,7 @@ LAB_003827bc:
     if (temp_v2 != 0) {
       return;
     }
-    temp_v2 = FUN_0026b564();
+    temp_v2 = buttonHelpStateIsNot3();
     if (temp_v2 == 0) {
       return;
     }

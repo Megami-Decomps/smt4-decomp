@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(int, double);
-int FUN_0018a924(float *, float [9]);
+int mathSinCos(float *, float [9]);
 int FUN_00467be4(float *, float *, int);
 int nn_math_ARMv6_MTX34ToMTX33Asm(unsigned char [36], unsigned int);
 int nn_math_ARMv6_VEC3TransformAsm_2A87B4(float *, unsigned char [36]);
@@ -31,7 +31,7 @@ static float romwright_sqrt_4(float value)
 }
 #endif
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-/* Supplied declaration required: FUN_0018a924. */
+/* Supplied declaration required: mathSinCos. */
 /* Supplied declaration required: FUN_00467be4. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34ToMTX33Asm. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2A87B4. */
@@ -81,7 +81,7 @@ void nw_gfx_AimTargetViewUpdater_Update
       temp_v11 = temp_v5 * temp_v3 * temp_v6 - temp_v7 * temp_v3 * temp_v2;
       temp_v7 = temp_v7 * temp_v3 * temp_v10 * temp_v4 - temp_v8 * temp_v3 * temp_v6;
       temp_v9 = CONCAT44(0x3f800000,temp_v8 * temp_v3 * temp_v2 - temp_v5 * temp_v3 * temp_v10 * temp_v4);
-      FUN_0018a924(&temp_v19,temp_v20);
+      mathSinCos(&temp_v19,temp_v20);
       temp_v16 = temp_v11 * temp_v20[0];
       temp_v15 = (float)temp_v9 * temp_v20[0] - temp_v19 * temp_v6;
       temp_v17 = temp_v7 * temp_v20[0] - temp_v19 * temp_v2;

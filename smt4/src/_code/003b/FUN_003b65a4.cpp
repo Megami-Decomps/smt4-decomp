@@ -7,7 +7,7 @@
 extern "C" {
 
 int gameGetUnitRecord(...);
-int FUN_002b0750(...);
+int uiDrawTableTextureSized(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
@@ -34,7 +34,7 @@ extern int DAT_0044dc3c; /* 0x44dc3c */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: gameGetUnitRecord. */
-/* Supplied declaration required: FUN_002b0750. */
+/* Supplied declaration required: uiDrawTableTextureSized. */
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -156,7 +156,7 @@ void FUN_003b65a4(int param_1,unsigned int param_2,int param_3,int param_4,int p
                   );
     }
     else {
-      FUN_002b0750(2,0x28,0x5f,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,
+      uiDrawTableTextureSized(2,0x28,0x5f,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,
                    param_7,(int)*(short *)(*(int *)(DAT_0044dc38 + 0xc) + 2),0x83);
     }
     break;

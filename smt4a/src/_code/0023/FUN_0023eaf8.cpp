@@ -58,7 +58,7 @@ extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0023ff10. */
 extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
-extern int FUN_002a4894(int);
+extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: questMarkSelectedSpecialDetail. */
 extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: slotBlockSetPair. */
@@ -74,8 +74,8 @@ extern int FUN_003de75c(unsigned int);
 extern int recordCategoryNineIsActiveInMode24(unsigned int);
 /* Supplied declaration required: FUN_00417d08. */
 extern int partyEntryFlagsBit3(unsigned int);
-extern int FUN_004186a4(void);
-extern unsigned int FUN_004186e0(void);
+extern int rosterHasLeader(void);
+extern unsigned int rosterGetLeaderId(void);
 extern int partyEntryBitsBit4(unsigned int);
 
 
@@ -127,7 +127,7 @@ void FUN_0023eaf8(void)
   }
   else {
     temp_v3 = resourceRunOperationIfUnblocked(temp_v11);
-    temp_v4 = FUN_002a4894(temp_v11);
+    temp_v4 = listCursorGetRowIfUnblocked(temp_v11);
     temp_v1 = *(short *)(temp_v8 + (temp_v4 + temp_v3) * 2);
     temp_v15[0] = '\0';
     temp_v5 = asdTMTexTableEntryAt(0x1e,0xc1);
@@ -136,10 +136,10 @@ void FUN_0023eaf8(void)
                  (int)*(short *)(temp_v2 + 0xd3e),(int)*(short *)(temp_v2 + 0xd40),temp_v15,0,1);
     if (temp_v3 != 0) {
       temp_v3 = resourceRunOperationIfUnblocked(temp_v11);
-      temp_v4 = FUN_002a4894(temp_v11);
+      temp_v4 = listCursorGetRowIfUnblocked(temp_v11);
       if (*(short *)(temp_v8 + (temp_v4 + temp_v3) * 2) != temp_v1) {
         temp_v3 = resourceRunOperationIfUnblocked(temp_v11);
-        temp_v4 = FUN_002a4894(temp_v11);
+        temp_v4 = listCursorGetRowIfUnblocked(temp_v11);
         temp_v9 = *(unsigned short *)(temp_v8 + (temp_v4 + temp_v3) * 2);
         temp_v10 = (unsigned int)temp_v9;
         if (*(int *)(temp_v2 + 0x92c) != 0) {
@@ -192,7 +192,7 @@ void FUN_0023eaf8(void)
       FUN_00228b04(temp_v11,1);
       if (temp_v3 != 0) {
         temp_v3 = resourceRunOperationIfUnblocked(temp_v11);
-        temp_v4 = FUN_002a4894(temp_v11);
+        temp_v4 = listCursorGetRowIfUnblocked(temp_v11);
         temp_v9 = *(unsigned short *)(temp_v8 + (temp_v4 + temp_v3) * 2);
         temp_v10 = (unsigned int)temp_v9;
         if (*(int *)(temp_v2 + 0x92c) != 0) {
@@ -318,7 +318,7 @@ LAB_0023f080:
                 padQueryLogicalKey(0,1);
                 if (temp_v3 != 0 || temp_v15[0] != '\0') {
                   temp_v4 = resourceRunOperationIfUnblocked(temp_v11);
-                  temp_v7 = FUN_002a4894(temp_v11);
+                  temp_v7 = listCursorGetRowIfUnblocked(temp_v11);
                   temp_v3 = g_uiQuest;
                   temp_v10 = (unsigned int)*(unsigned short *)(temp_v8 + (temp_v7 + temp_v4) * 2);
                   if (*(char *)(temp_v2 + 0x93d) != '\0') {
@@ -342,9 +342,9 @@ LAB_0023f080:
                         temp_v0 = *(char *)(temp_v6 + 6);
                       }
                       if (temp_v8 == 0 || temp_v0 == '\t') {
-                        temp_v8 = FUN_004186a4();
+                        temp_v8 = rosterHasLeader();
                         if (temp_v8 != 0) {
-                          temp_v6 = FUN_004186e0();
+                          temp_v6 = rosterGetLeaderId();
                           if ((temp_v6 != temp_v10) &&
                              (temp_v8 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x8fc),4), temp_v8 != 0)) {
                             sysPlaySe(0xb2);

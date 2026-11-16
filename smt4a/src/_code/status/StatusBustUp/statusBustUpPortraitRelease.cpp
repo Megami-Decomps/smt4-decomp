@@ -1,10 +1,10 @@
-/* NON_MATCHING: control flow and constants now match; the saved registers are permuted (retail: zero r7, &g_aocSystem r8, DAT_00588fd8 r6, table 15 r9). */
+/* NON_MATCHING: control flow and constants now match; the saved registers are permuted (retail: zero r7, &g_aocSystem r8, g_statusBustUpResources r6, table 15 r9). */
 #include "status/StatusBustUp.h"
 #include "gamedata/DevilRecordA.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "gamedata/Table00Lookup.h"
 extern "C" {
-extern StatusBustUpResources DAT_00588fd8;
+extern StatusBustUpResources g_statusBustUpResources;
 extern void *g_aocSystem;
 s32 gameFlagIsSet(u32 flag);
 void asdTMTexTableReleaseNode(u32 table, u32 node);
@@ -40,25 +40,25 @@ void statusBustUpPortraitRelease(s32 id, s32 resolveRecord)
                 id = alternate->portrait;
                 if (id >= 154)
                     return;
-                s8 *references = (s8 *)DAT_00588fd8.workB;
+                s8 *references = (s8 *)g_statusBustUpResources.workB;
                 if (--references[id] > 0)
                     return;
                 if (asdTMTexTableNodeIsLoaded(alternateTable, id)) {
                     asdTMTexTableReleaseNode(alternateTable, id);
                     packageFileDisableByKindName(g_aocSystem, alternateTable, id);
                 }
-                ((s8 *)DAT_00588fd8.workB)[id] = 0;
+                ((s8 *)g_statusBustUpResources.workB)[id] = 0;
                 return;
             }
         }
     }
-    s8 *references = (s8 *)DAT_00588fd8.workA;
+    s8 *references = (s8 *)g_statusBustUpResources.workA;
     if (--references[id] > 0)
         return;
     if (asdTMTexTableNodeIsLoaded(table, id)) {
         asdTMTexTableReleaseNode(table, id);
         packageFileDisableByKindName(g_aocSystem, table, id);
     }
-    ((s8 *)DAT_00588fd8.workA)[id] = 0;
+    ((s8 *)g_statusBustUpResources.workA)[id] = 0;
 }
 }

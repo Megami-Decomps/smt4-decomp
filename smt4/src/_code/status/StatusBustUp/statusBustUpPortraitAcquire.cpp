@@ -5,11 +5,11 @@
 #include "gamedata/DevilRecord.h"
 
 extern "C" {
-extern StatusBustUpResources DAT_0044e158;
+extern StatusBustUpResources g_statusBustUpResources;
 extern AocSystem *g_aocSystem;
 DevilModelOverride *dataTable00FindById(u16 id);
 void asdTMTexTableLoadEntryAsync(s32 table, s32 entry);
-void FUN_002a5ee4(AocSystem *system, s32 table, s32 entry, u32 options);
+void texTableRequestNamedTextureLoad(AocSystem *system, s32 table, s32 entry, u32 options);
 
 /* Acquires a bust-up portrait (texture table 0x17) by index, or by demon id: the demon's alternate
  * model in table 0x23 when its override flag is set, else its normal portrait. Counts the users of
@@ -33,21 +33,21 @@ void statusBustUpPortraitAcquire(s32 id, s32 byDevilId)
                 id = override->model;
                 if (id >= 0x81)
                     return;
-                if (((s8 *)DAT_0044e158.workB)[id] <= 0 && !asdTMTexTableNodeIsLoaded(overrideTable, id))
+                if (((s8 *)g_statusBustUpResources.workB)[id] <= 0 && !asdTMTexTableNodeIsLoaded(overrideTable, id))
                     asdTMTexTableLoadEntryAsync(overrideTable, id);
-                ++((s8 *)DAT_0044e158.workB)[id];
+                ++((s8 *)g_statusBustUpResources.workB)[id];
                 return;
             }
         } else {
             id = 0;
         }
     }
-    if (((s8 *)DAT_0044e158.workA)[id] <= 0 && !asdTMTexTableNodeIsLoaded(table, id)) {
+    if (((s8 *)g_statusBustUpResources.workA)[id] <= 0 && !asdTMTexTableNodeIsLoaded(table, id)) {
         if (aocRunByName(reinterpret_cast<u32>(g_aocSystem), table, id, 1))
-            FUN_002a5ee4(g_aocSystem, table, id, 0x10000);
+            texTableRequestNamedTextureLoad(g_aocSystem, table, id, 0x10000);
         else
             asdTMTexTableLoadEntryAsync(table, id);
     }
-    ++((s8 *)DAT_0044e158.workA)[id];
+    ++((s8 *)g_statusBustUpResources.workA)[id];
 }
 }

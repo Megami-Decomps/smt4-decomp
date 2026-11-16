@@ -14,7 +14,7 @@ extern GameStateEventView g_gameState;
 void FUN_0022b778(EventScriptScene *scene);
 void scrScriptProcessDestroy(ScriptRunState *process);
 void asdMemFree(void *allocation);
-void FUN_002bff50();
+void messageSetConfirmDisplayMode();
 s32 textFormatBuffer(char *destination, const char *format, ...);
 void *asdLoadFileSyncDefault(const char *path);
 ScriptRunState *scrScriptProcessCreate(void *script, void *messages);
@@ -42,7 +42,7 @@ void FUN_003b992c(EventScriptScene *scene)
     }
     EventScriptGlobals *event = &g_gameState.event;
     event->state = 0;
-    FUN_002bff50();
+    messageSetConfirmDisplayMode();
     textFormatBuffer(path, "event/e%03d/e%03d.bf", event->eventId, event->eventId);
     scene->scriptData = asdLoadFileSyncDefault(path);
     textFormatBuffer(path, "event/e%03d/e%03d.mbm", event->eventId, event->eventId);

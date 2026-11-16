@@ -13,7 +13,7 @@ typedef struct GxBufferDesc {
 } GxBufferDesc;
 
 u32 *asdGxGetCommandCursor(void);
-void FUN_002af390(u32 *start, u32 *end);
+void asdModelAdvanceCommandCursorBetween(u32 *start, u32 *end);
 
 /* Queue the GPU register writes that bind `color` and `depth` as render buffers. */
 void FUN_0011a258(GxBufferDesc *color, GxBufferDesc *depth, u32 format, s32 levels)
@@ -43,7 +43,7 @@ void FUN_0011a258(GxBufferDesc *color, GxBufferDesc *depth, u32 format, s32 leve
     *cmd++ = 0xF0111;
     *cmd++ = 1;
     *cmd++ = 0xF0110;
-    FUN_002af390(start, cmd);
+    asdModelAdvanceCommandCursorBetween(start, cmd);
 }
 
 } /* extern "C" */

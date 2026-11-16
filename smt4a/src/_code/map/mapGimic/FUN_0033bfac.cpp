@@ -7,7 +7,7 @@ extern "C" {
 int textFormatBuffer(...);
 int asdMemoryAllocTraced(...);
 int gameFlagIsSet(...);
-int FUN_001cd3ec(...);
+int modelLoadFileAsyncByName(...);
 int FUN_003563fc(void);
 int moriModelUnitStartMaterialAnimation(...);
 int animationSelectClip(unsigned int, int, int);
@@ -15,7 +15,7 @@ int modelPlayClip(unsigned int, int, int);
 int FUN_0040a908(...);
 int FUN_0040a918(...);
 int moriModelContentCopyBody(...);
-int FUN_0040aad4(int, int);
+int moriModelContentLoadBody(int, int);
 int handleRegistryRegisterObject(unsigned int, unsigned int);
 int VectorSignedToFloat(int, int);
 
@@ -27,7 +27,7 @@ extern unsigned int g_mapGimic; /* 0x580ca0 */
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: asdMemoryAllocTraced. */
 /* Supplied declaration required: gameFlagIsSet. */
-/* Supplied declaration required: FUN_001cd3ec. */
+/* Supplied declaration required: modelLoadFileAsyncByName. */
 /* Supplied declaration required: FUN_003563fc. */
 extern int FUN_003a3238(void);
 /* Supplied declaration required: moriModelUnitStartMaterialAnimation. */
@@ -36,7 +36,7 @@ extern int FUN_003a3238(void);
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
 /* Supplied declaration required: moriModelContentCopyBody. */
-/* Supplied declaration required: FUN_0040aad4. */
+/* Supplied declaration required: moriModelContentLoadBody. */
 extern int FUN_0040ab8c(unsigned int);
 extern unsigned int modelListInit(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
@@ -114,7 +114,7 @@ unsigned int FUN_0033bfac(void)
       *(int *)(temp_v5 + 0x18) = (int)*(short *)(temp_v5 + 0xe);
     }
     if (*(int *)(*(int *)(temp_v3 + 0xa8) + 4) == 0) {
-      FUN_0040aad4(*(int *)(temp_v3 + 0xa8),0);
+      moriModelContentLoadBody(*(int *)(temp_v3 + 0xa8),0);
     }
     temp_v8 = 0;
     temp_v6 = *(unsigned int *)(*(int *)(temp_v3 + 0xa8) + 4);
@@ -266,7 +266,7 @@ unsigned int FUN_0033bfac(void)
                 temp_v6 = modelListInit();
               }
               *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
-              FUN_001cd3ec();
+              modelLoadFileAsyncByName();
               temp_v5 = g_mapGimic;
               *(int *)((g_mapGimic + *(short *)(temp_v2 + 0xa6) * 4) - 0x90) =
                    (int)*(short *)(g_mapGimic + 0xe);
@@ -291,7 +291,7 @@ unsigned int FUN_0033bfac(void)
             temp_v6 = modelListInit();
           }
           *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
-          FUN_001cd3ec();
+          modelLoadFileAsyncByName();
         }
         else {
           temp_v1 = 0x20;
@@ -301,7 +301,7 @@ unsigned int FUN_0033bfac(void)
             temp_v6 = modelListInit();
           }
           *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
-          FUN_001cd3ec();
+          modelLoadFileAsyncByName();
           FUN_0040a908(*(unsigned int *)(temp_v2 + 0xa8),0x10000);
           FUN_0040a918(*(unsigned int *)(temp_v2 + 0xa8),0x20000);
         }
@@ -334,7 +334,7 @@ unsigned int FUN_0033bfac(void)
         *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
         FUN_0040a908();
         FUN_0040a918(*(unsigned int *)(temp_v2 + 0xa8),0x30000);
-        FUN_001cd3ec(*(unsigned int *)(temp_v2 + 0xa8),temp_v9);
+        modelLoadFileAsyncByName(*(unsigned int *)(temp_v2 + 0xa8),temp_v9);
         temp_v5 = g_mapGimic;
         *(int *)(g_mapGimic + 0x30) = (int)*(short *)(g_mapGimic + 0xe);
         *(unsigned char *)(temp_v5 + 0x2c) = 1;
@@ -367,7 +367,7 @@ unsigned int FUN_0033bfac(void)
       *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
       FUN_0040a908();
       FUN_0040a918(*(unsigned int *)(temp_v2 + 0xa8),0x30000);
-      FUN_001cd3ec(*(unsigned int *)(temp_v2 + 0xa8),temp_v9);
+      modelLoadFileAsyncByName(*(unsigned int *)(temp_v2 + 0xa8),temp_v9);
       temp_v5 = g_mapGimic;
       *(int *)(g_mapGimic + 0x28) = (int)*(short *)(g_mapGimic + 0xe);
       *(unsigned char *)(temp_v5 + 0x24) = 1;
@@ -400,7 +400,7 @@ unsigned int FUN_0033bfac(void)
     *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
     FUN_0040a908();
     FUN_0040a918(*(unsigned int *)(temp_v2 + 0xa8),0x30000);
-    FUN_001cd3ec(*(unsigned int *)(temp_v2 + 0xa8),temp_v9);
+    modelLoadFileAsyncByName(*(unsigned int *)(temp_v2 + 0xa8),temp_v9);
     temp_v5 = g_mapGimic;
     *(int *)(g_mapGimic + 0x20) = (int)*(short *)(g_mapGimic + 0xe);
     *(unsigned char *)(temp_v5 + 0x1c) = 1;

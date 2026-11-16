@@ -6,7 +6,7 @@ extern "C" {
 
 int textFormatBuffer(...);
 int asdMemoryAllocTraced(...);
-int FUN_001cd3ec(...);
+int modelLoadFileAsyncByName(...);
 int controllerSetDestination(...);
 int moriModelUnitStartMaterialAnimation(...);
 int FUN_003fd924(...);
@@ -16,7 +16,7 @@ int FUN_0040a908(...);
 int FUN_0040a918(...);
 int moriModelContentCreateBody(...);
 int FUN_0040a9fc(...);
-int FUN_0040aad4(...);
+int moriModelContentLoadBody(...);
 int FUN_0040ab7c(...);
 int FUN_0040ab8c(...);
 int FUN_0040ab9c(...);
@@ -42,7 +42,7 @@ extern int DAT_005f1bdc; /* 0x5f1bdc */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdMemoryAllocTraced. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_001cd3ec. */
+/* Supplied declaration required: modelLoadFileAsyncByName. */
 extern int mapTableGetValue(int);
 /* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: moriModelUnitStartMaterialAnimation. */
@@ -53,7 +53,7 @@ extern int mapTableGetValue(int);
 /* Supplied declaration required: FUN_0040a918. */
 /* Supplied declaration required: moriModelContentCreateBody. */
 /* Supplied declaration required: FUN_0040a9fc. */
-/* Supplied declaration required: FUN_0040aad4. */
+/* Supplied declaration required: moriModelContentLoadBody. */
 /* Supplied declaration required: FUN_0040ab7c. */
 /* Supplied declaration required: FUN_0040ab8c. */
 /* Supplied declaration required: FUN_0040ab9c. */
@@ -160,7 +160,7 @@ LAB_002d0a48:
       FUN_0040ab7c(*(unsigned int *)(g_mapDepartWork + 0x10),2);
       FUN_0040a908(*(unsigned int *)(g_mapDepartWork + 0x10),0x10000);
       FUN_0040a918(*(unsigned int *)(g_mapDepartWork + 0x10),0x30000);
-      FUN_0040aad4(*(unsigned int *)(g_mapDepartWork + 0x10),0);
+      moriModelContentLoadBody(*(unsigned int *)(g_mapDepartWork + 0x10),0);
       temp_v3 = *(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 4);
       modelPlayClip(temp_v3,0,2);
       if ((*(int *)(g_mapDepartWork + 0x1c) == 0xd) && (temp_v2 = gameFlagIsSet(0x184), temp_v2 != 0)) {
@@ -237,7 +237,7 @@ LAB_002d0a48:
         FUN_0040a908();
         FUN_0040a918(*(unsigned int *)(g_mapDepartWork + 0x10),0x30000);
         textFormatBuffer(temp_v8,&LAB_002d0b08,*(unsigned int *)(g_mapDepartWork + 0x1c));
-        FUN_001cd3ec(*(unsigned int *)(g_mapDepartWork + 0x10),temp_v8);
+        modelLoadFileAsyncByName(*(unsigned int *)(g_mapDepartWork + 0x10),temp_v8);
         *(short *)(g_mapDepartWork + 8) = *(short *)(g_mapDepartWork + 8) + 1;
         goto LAB_002d0a48;
       }
@@ -246,7 +246,7 @@ LAB_002d0a48:
         FUN_0040ab7c(*(unsigned int *)(g_mapDepartWork + 0x10),2);
         FUN_0040a908(*(unsigned int *)(g_mapDepartWork + 0x10),0x10000);
         FUN_0040a918(*(unsigned int *)(g_mapDepartWork + 0x10),0x30000);
-        FUN_0040aad4(*(unsigned int *)(g_mapDepartWork + 0x10),0);
+        moriModelContentLoadBody(*(unsigned int *)(g_mapDepartWork + 0x10),0);
         temp_v3 = *(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 4);
         modelPlayClip(temp_v3,0,2);
         if ((*(int *)(g_mapDepartWork + 0x1c) == 0xd) && (temp_v2 = gameFlagIsSet(0x184), temp_v2 != 0)) {
@@ -404,7 +404,7 @@ LAB_002d0a48:
       textFormatBuffer(temp_v8,&LAB_002d13d0,0x2b,0x2b,1);
     }
   }
-  FUN_001cd3ec(*(unsigned int *)(g_mapDepartWork + 0xc),temp_v8);
+  modelLoadFileAsyncByName(*(unsigned int *)(g_mapDepartWork + 0xc),temp_v8);
   FUN_0040a908(*(unsigned int *)(g_mapDepartWork + 0xc),0x10000);
   FUN_0040a918(*(unsigned int *)(g_mapDepartWork + 0xc),0x10000);
   temp_v2 = 0x20;
@@ -432,7 +432,7 @@ LAB_002d0a48:
       (textFormatBuffer(temp_v8,&LAB_002d13ec,0x27,0x27,0x12),
       *(short *)(g_mapDepartWork + 0x20) == 0x27)))) {
     if (*(short *)(g_mapDepartWork + 0x22) != 5) {
-      FUN_001cd3ec(*(unsigned int *)(g_mapDepartWork + 0x14),temp_v8);
+      modelLoadFileAsyncByName(*(unsigned int *)(g_mapDepartWork + 0x14),temp_v8);
       FUN_0040a908(*(unsigned int *)(g_mapDepartWork + 0x14),0x10000);
       FUN_0040a918(*(unsigned int *)(g_mapDepartWork + 0x14),0x20000);
       *(short *)(g_mapDepartWork + 8) = *(short *)(g_mapDepartWork + 8) + 1;
@@ -446,7 +446,7 @@ LAB_002d0a48:
   if (*(short *)(g_mapDepartWork + 0x20) == 0x2d || *(short *)(g_mapDepartWork + 0x20) == 0x2e) {
     textFormatBuffer(temp_v8,&LAB_002d13ec,0x2b,0x2b,1);
   }
-  FUN_001cd3ec(*(unsigned int *)(g_mapDepartWork + 0x14),temp_v8);
+  modelLoadFileAsyncByName(*(unsigned int *)(g_mapDepartWork + 0x14),temp_v8);
   FUN_0040a908(*(unsigned int *)(g_mapDepartWork + 0x14),0x10000);
   FUN_0040a918(*(unsigned int *)(g_mapDepartWork + 0x14),0x20000);
   *(short *)(g_mapDepartWork + 8) = *(short *)(g_mapDepartWork + 8) + 1;

@@ -5,13 +5,13 @@ namespace {
 struct InterpolationEntry { f32 base; f32 unused; f32 step; f32 tail; };
 }
 extern "C" {
-extern InterpolationEntry DAT_00536d14[];
+extern InterpolationEntry g_sinCosTable[];
 
 /* Interpolates within the selected table entry using the packed low-byte fraction. */
 f32 mathInterpolatePackedTable(u32 packed)
 {
     f32 fraction = (f32)(packed & 0xff) / 256.0f;
-    InterpolationEntry *entry = &DAT_00536d14[packed >> 8];
+    InterpolationEntry *entry = &g_sinCosTable[packed >> 8];
     return entry->base + entry->step * fraction;
 }
 }

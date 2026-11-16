@@ -24,7 +24,7 @@ void uiSpriteAdvanceAnimation(UiSpriteState* position);
 s32 vec2GetYInt(const UiSpriteState* position);
 s32 vec2GetXInt(const UiSpriteState* position);
 s8 uiSpriteGetCompletionState(const UiSpriteState* position);
-s32 FUN_0026b564(void);
+s32 buttonHelpStateIsNot3(void);
 s32 utilityReturnSuccess(void* state);
 
 }
@@ -49,7 +49,7 @@ void Obj4223f8::updatePointerTransition()
     if (uiSpriteGetCompletionState(position) == 0) {
         return;
     }
-    if (FUN_0026b564() == 0) {
+    if (buttonHelpStateIsNot3() == 0) {
         return;
     }
     if (utilityReturnSuccess(state->unk96) != 0) {

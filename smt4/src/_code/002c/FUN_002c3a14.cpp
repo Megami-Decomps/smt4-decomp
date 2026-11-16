@@ -37,14 +37,14 @@ extern "C" {
 void FUN_00126d14(u32 shader);
 void gpuWriteVertexUniformVec4(u32 shader, void *colors);
 void mathCopyIdentityMatrix(void *matrix);
-void FUN_002bbbc8(RenderCtx *ctx, void *a, void *b, void *matrix);
+void cameraComposeMatrices(RenderCtx *ctx, void *a, void *b, void *matrix);
 void gpuWriteVertexUniformMatrix(u32 shader, void *block);
 void FUN_002b612c(CombinerStage *stages);
 void nn_gr_CTR_Combiner_Stage_SetupPrimaryModulateTexture0(CombinerStage *stage);
 void nn_gr_CTR_Combiner_Stage_SetupPrevious(CombinerStage *stage);
 u32 asdGxGetCommandCursor(void);
 u32 nn_gr_CTR_Combiner_MakeCommand(CombinerStage *stages, u32 buffer);
-void FUN_002af390(u32 buffer, u32 command);
+void asdModelAdvanceCommandCursorBetween(u32 buffer, u32 command);
 
 /* Prepares the draw context for a frame: resets the colour scale and the model matrices when they changed,
    rebuilds the six-stage texture combiner (primary modulated by texture 0, the rest passing the previous stage
@@ -78,7 +78,7 @@ void FUN_002c3a14(RenderCtx *ctx)
     if (ctxByte(ctx, 0x5b0) != 0 || !isIdentity(&ctxFloat(ctx, 0x530))) {
         mathCopyIdentityMatrix(reinterpret_cast<u8 *>(ctx) + 0x530);
         mathCopyIdentityMatrix(reinterpret_cast<u8 *>(ctx) + 0x570);
-        FUN_002bbbc8(ctx, reinterpret_cast<u8 *>(ctx) + 0x114c, reinterpret_cast<u8 *>(ctx) + 0x110c,
+        cameraComposeMatrices(ctx, reinterpret_cast<u8 *>(ctx) + 0x114c, reinterpret_cast<u8 *>(ctx) + 0x110c,
                      reinterpret_cast<u8 *>(ctx) + 0x530);
         gpuWriteVertexUniformMatrix(ctxWord(ctx, 0x52c), reinterpret_cast<u8 *>(ctx) + 0x118c);
         ctxByte(ctx, 0x5b0) = 0;
@@ -121,7 +121,7 @@ void FUN_002c3a14(RenderCtx *ctx)
         nn_gr_CTR_Combiner_Stage_SetupPrevious(&stages[i]);
     }
     u32 buffer = asdGxGetCommandCursor();
-    FUN_002af390(buffer, nn_gr_CTR_Combiner_MakeCommand(stages, buffer));
+    asdModelAdvanceCommandCursorBetween(buffer, nn_gr_CTR_Combiner_MakeCommand(stages, buffer));
     RenderStateStack *stacks = reinterpret_cast<RenderStateStack *>(reinterpret_cast<u8 *>(ctx) + 0x11ec);
     for (s32 i = 0; i < 12; i++) {
         renderStackSet(&stacks[i], ctxWord(ctx, 0x136c + i * 4));

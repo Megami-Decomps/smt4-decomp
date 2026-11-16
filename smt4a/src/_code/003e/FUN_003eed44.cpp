@@ -7,7 +7,7 @@
 extern "C" {
 extern BtlMainGlobalsA g_btlMain;
 u32 hasFlag80Or1000(u32 unit, u32 *flags);
-s32 FUN_003eebf4(const BtlMainStateA *battle, s32 ordinal);
+s32 btlFindSelectionIndexByOrdinal(const BtlMainStateA *battle, s32 ordinal);
 bool FUN_0047f78c();
 BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
 void FUN_003f1b3c(BtlMainStateA *battle, u32 category, s32 kind, u32 *entry, u32 *sound);
@@ -19,7 +19,7 @@ void FUN_003eed44(BtlMainStateA *battle)
     if (battle->voiceGate.blocked == 0 && battle->encounterGate.disabled == 0) {
         ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
         if ((unit == NULL || !hasFlag80Or1000(g_btlScriptUnit, reinterpret_cast<u32 *>(unit))) &&
-            FUN_003eebf4(battle, 1) < 0) {
+            btlFindSelectionIndexByOrdinal(battle, 1) < 0) {
             if ((battle->stateFlags64.bits & g_btlMain.voiceBlocking.blocked) == 0 &&
                 (battle->stateFlags64.bits & g_btlMain.voiceState.attempted) == 0) {
                 if (FUN_0047f78c()) {

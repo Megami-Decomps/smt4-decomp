@@ -57,7 +57,7 @@ extern int btlMainIsRunning(void);
 extern int gameGetPlayerData(void);
 extern int gameGetSlotRecord(void);
 extern int btlMainGetUnk14(void);
-extern int FUN_00291e14(void);
+extern int btlIsDefeatSuppressed(void);
 /* Supplied declaration required: FUN_002b4dcc. */
 /* Supplied declaration required: FUN_002b4e7c. */
 /* Supplied declaration required: FUN_0035e03c. */
@@ -110,7 +110,7 @@ int itemApplyToMember(fn_00287790_arg0 *param_1,fn_00287790_arg1 *param_2,int pa
   puStack_28 = param_4;
   if ((int)param_1 < 0) {
     temp_v3 = btlMainIsRunning();
-    if ((temp_v3 != 0) && (temp_v3 = FUN_00291e14(), temp_v3 != 0)) {
+    if ((temp_v3 != 0) && (temp_v3 = btlIsDefeatSuppressed(), temp_v3 != 0)) {
       temp_v7 = btlMainGetUnk14();
     }
     else {

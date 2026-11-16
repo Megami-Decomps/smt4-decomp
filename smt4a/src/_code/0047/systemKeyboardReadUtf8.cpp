@@ -5,7 +5,7 @@
 extern "C" {
 void nn_swkbd_CTR_InitializeConfig(SoftwareKeyboardConfig *);
 u32 nn_swkbd_CTR_GetSharedMemorySize(const SoftwareKeyboardConfig *, u32, u32);
-void FUN_002e98ea(u16 *, const u16 *, u32);
+void libc_wcsncpyShort(u16 *, const u16 *, u32);
 void FUN_001a1f5c(void);
 void FUN_0043c958(void);
 void FUN_0043c988(void);
@@ -30,7 +30,7 @@ u32 systemKeyboardReadUtf8(u32 unused, char *output, const u16 *hint, u32 capaci
     config.options[1] = 1;
     if (filter)
         config.filterFlags |= 1;
-    FUN_002e98ea(config.hintText, hint, 65);
+    libc_wcsncpyShort(config.hintText, hint, 65);
     u32 sharedSize = nn_swkbd_CTR_GetSharedMemorySize(&config, 0, 0);
     FUN_001a1f5c();
     FUN_0043c958();

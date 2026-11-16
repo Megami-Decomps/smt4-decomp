@@ -8,12 +8,12 @@ int CONCAT44(double, double);
 int textFormatBuffer(...);
 int jobGetWork(...);
 int padButtonIsPressed(...);
-int FUN_00167618(...);
+int gfxDrawQuadFourColors(...);
 int renderCtxSelectTexture(...);
 int FUN_00182884(...);
 int FUN_002be8d0(void);
 int asdListBoxFindItem(...);
-int FUN_00317af8(float *, float *, int);
+int padGetNormalizedAnalogStick(float *, float *, int);
 int SBORROW4(unsigned int, int);
 int SUB84(double, int);
 int VectorSignedToFloat(...);
@@ -63,13 +63,13 @@ extern int slotIsActive(unsigned int);
 /* Supplied declaration required: jobGetWork. */
 extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: padButtonIsPressed. */
-/* Supplied declaration required: FUN_00167618. */
+/* Supplied declaration required: gfxDrawQuadFourColors. */
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: FUN_00182884. */
 /* Supplied declaration required: FUN_002be8d0. */
 extern int libc_strlen(void);
 /* Supplied declaration required: asdListBoxFindItem. */
-/* Supplied declaration required: FUN_00317af8. */
+/* Supplied declaration required: padGetNormalizedAnalogStick. */
 
 
 unsigned int FUN_002bda9c(unsigned int param_1)
@@ -157,7 +157,7 @@ LAB_002be87c:
     if (!(temp_v9 || temp_v3 == 0)) {
       temp_v12 = 2.0f;
       if (((piVar2[0xe] & 4U) != 0) &&
-         (FUN_00317af8(&temp_v15,&temp_v16,0), pfVar4 != (float *)0x0)) {
+         (padGetNormalizedAnalogStick(&temp_v15,&temp_v16,0), pfVar4 != (float *)0x0)) {
         if ((unsigned int)temp_v15 >= 0xbf000001) {
           temp_v10 = (float)piVar2[0x12] - temp_v12;
           piVar2[0x12] = (int)temp_v10;
@@ -192,7 +192,7 @@ LAB_002be87c:
       temp_v16 = temp_v16 * 0.003921569f;
       temp_v18 = temp_v18 * 0.003921569f;
       temp_v17 = temp_v17 * 0.003921569f;
-      FUN_00167618(&temp_v15);
+      gfxDrawQuadFourColors(&temp_v15);
       temp_v3 = *(unsigned int *)("ჿတ胿肀⃿₀胿" + (unsigned int)*(unsigned char *)(piVar2 + 0xf) * 0x10 + 0xc);
       temp_v18 = (float)VectorUnsignedToFloat(temp_v3 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v17 = (float)VectorUnsignedToFloat((temp_v3 & 0xff00) >> 8,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -204,7 +204,7 @@ LAB_002be87c:
       temp_v17 = temp_v17 * temp_v13;
       temp_v15 = temp_v15 * temp_v13;
       temp_v16 = temp_v16 * temp_v13;
-      FUN_00167618(&temp_v15);
+      gfxDrawQuadFourColors(&temp_v15);
       temp_v3 = *(unsigned int *)("ჿတ胿肀⃿₀胿" + (unsigned int)*(unsigned char *)(piVar2 + 0xf) * 0x10 + 4);
       temp_v11 = romwright_piece_4_4((temp_v3 & 0xff0000) >> 0x10,temp_v3) & 0xffffffff000000ff;
       temp_v16 = (float)VectorUnsignedToFloat((int)(temp_v11 >> 0x20),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -215,10 +215,10 @@ LAB_002be87c:
       temp_v16 = temp_v16 * temp_v13;
       temp_v17 = temp_v17 * temp_v13;
       temp_v18 = temp_v18 * temp_v13;
-      FUN_00167618(&temp_v15);
-      FUN_00167618(&temp_v15);
-      FUN_00167618(&temp_v15);
-      FUN_00167618(&temp_v15);
+      gfxDrawQuadFourColors(&temp_v15);
+      gfxDrawQuadFourColors(&temp_v15);
+      gfxDrawQuadFourColors(&temp_v15);
+      gfxDrawQuadFourColors(&temp_v15);
       FUN_00182884(0,piVar2 + 0x23);
       if ((piVar2[0xe] & 1U) == 0) {
         temp_v15 = temp_v10;
@@ -241,7 +241,7 @@ LAB_002be87c:
         temp_v16 = temp_v16 * temp_v13;
         temp_v18 = temp_v18 * temp_v13;
         temp_v17 = temp_v17 * temp_v13;
-        FUN_00167618(&temp_v15);
+        gfxDrawQuadFourColors(&temp_v15);
       }
       temp_v7 = 0xffffffff;
       temp_v21 = 0xffffffff;

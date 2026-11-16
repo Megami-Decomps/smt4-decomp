@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern u32 DAT_005e2194[32]; /* 0x5e2194 */
+extern u32 g_scrCommGlobalTable[32]; /* 0x5e2194 */
 
 extern u32 scrGetArg(u32 index);
 extern int scrSetResult(u32 value);
@@ -15,7 +15,7 @@ u32 scrComm_GetGlobalTableEntry(void)
     if (index >= 32) {
         return 1;
     }
-    scrSetResult(DAT_005e2194[index]);
+    scrSetResult(g_scrCommGlobalTable[index]);
     return 1;
 }
 

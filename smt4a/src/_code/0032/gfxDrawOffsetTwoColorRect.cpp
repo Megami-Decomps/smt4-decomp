@@ -18,7 +18,7 @@ extern "C" {
 extern RenderCtxA* g_renderCtx;
 extern DrawOffset g_uiDrawOffset;
 u32 renderCtxPackPassFlags(u32 value, bool enabled);
-void FUN_0014e314(u32 first, u32 second, u32 third, u32 fourth,
+void gxSubmitDrawZeroExtraParams(u32 first, u32 second, u32 third, u32 fourth,
                  f32 x, f32 y, f32 width, f32 height, f32 depth);
 
 /* Draw a two-color rectangle after offsetting and truncating its integer origin. */
@@ -33,7 +33,7 @@ void gfxDrawOffsetTwoColorRect(s32 x, s32 y, s32 width, s32 height, u32 firstCol
     const u32 state = renderCtxPackPassFlags(1, true);
     renderStackPush(&context->stackA, state);
     renderCtxSelectTexture(g_renderCtx, 0);
-    FUN_0014e314(first, first, second, second,
+    gxSubmitDrawZeroExtraParams(first, first, second, second,
                  static_cast<f32>(screenX), static_cast<f32>(screenY),
                  static_cast<f32>(width), static_cast<f32>(height), 0.0f);
     renderStackPop(&g_renderCtx->stackA);

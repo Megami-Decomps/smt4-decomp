@@ -37,7 +37,7 @@ extern unsigned char DAT_0063afa8; /* 0x63afa8 */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_00182a9c. */
 /* Supplied declaration required: asdMemFree. */
-extern int FUN_0019be8c(unsigned int);
+extern int charCodeIsPrivateUseGlyph(unsigned int);
 /* Supplied declaration required: recordTableGet. */
 /* Supplied declaration required: FUN_002a1970. */
 /* Supplied declaration required: FUN_002a1cec. */
@@ -162,7 +162,7 @@ LAB_0036c070:
             temp_v1 = 0x8260;
           }
 LAB_0036c0b8:
-          temp_v2 = FUN_0019be8c(temp_v1);
+          temp_v2 = charCodeIsPrivateUseGlyph(temp_v1);
           if (temp_v2 != 0) {
             if (temp_v1 == 0xf816) {
               temp_v4 = 1;

@@ -26,7 +26,7 @@ void gxResetColorQuadToWhite(void);
 s32 vec2GetXInt(const void *vector);
 s32 vec2GetYInt(const void *vector);
 void FUN_002c0940(u8 text[64], s32 value);
-f32 FUN_00168594(u8 text[64], u32 style, f32 scale);
+f32 fontMeasureTextWidth(u8 text[64], u32 style, f32 scale);
 
 /* Draws the departure screen's counter panel under a temporary render-state preset. */
 u32 FUN_003581bc(void)
@@ -55,7 +55,7 @@ u32 FUN_003581bc(void)
             TextureTableEntryIV *digits = asdTMTexTableEntryAt(29, 203);
             u8 text[64];
             FUN_002c0940(text, counter);
-            f32 width = FUN_00168594(text, 3, 1.0f);
+            f32 width = fontMeasureTextWidth(text, 3, 1.0f);
             textDrawString(3, 0x57d8ffff, (const char *)text,
                          panel->x + digits->x + x + (56 - (s32)width) / 2,
                          panel->y + digits->y + y, 1.0f, 1.0f, 1.0f);

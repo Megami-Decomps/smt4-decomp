@@ -54,7 +54,7 @@ extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 extern int messageMainIsIdle(void);
 /* Supplied declaration required: campShowSelectedEntryHelp. */
 extern int resourceRunOperationIfUnblocked(int);
-extern int FUN_002a4894(int);
+extern int listCursorGetRowIfUnblocked(int);
 extern int messageGetChoiceResult(void);
 /* Supplied declaration required: campTouchRegionsRemoveGroup. */
 /* Supplied declaration required: FUN_002cb278. */
@@ -110,7 +110,7 @@ void FUN_003daf0c(int param_1)
     FUN_003450d4(temp_v7,temp_v2,temp_v5 + 0x1b3e,(int)*(short *)(temp_v5 + 0x1b34),
                  (int)*(short *)(temp_v5 + 0x1b36),(int)*(short *)(temp_v5 + 0x1b38),temp_v8,0,1);
     if ((temp_v6 != 0) || (temp_v6 = temp_v7, FUN_00228b04(temp_v7,1), temp_v6 != 0)) {
-      temp_v2 = FUN_002a4878((void *)(temp_v5 + 0x40));
+      temp_v2 = listCursorGetRowOfChildIfUnblocked((void *)(temp_v5 + 0x40));
       FUN_003da8f4((int)*(char *)(temp_v5 + 0xa4),temp_v2);
       campShowSelectedEntryHelp();
       return;
@@ -161,7 +161,7 @@ void FUN_003daf0c(int param_1)
       return;
     }
     temp_v6 = resourceRunOperationIfUnblocked(temp_v7);
-    temp_v3 = FUN_002a4894(temp_v7);
+    temp_v3 = listCursorGetRowIfUnblocked(temp_v7);
     temp_v6 = temp_v5 + (temp_v3 + temp_v6) * 2;
     temp_v4 = (unsigned int)*(unsigned short *)(temp_v6 + 0x21b0);
     FUN_0048144c();

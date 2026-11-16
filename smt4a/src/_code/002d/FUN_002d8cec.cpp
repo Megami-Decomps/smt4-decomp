@@ -22,7 +22,7 @@ struct ModelResumeNode {
 };
 typedef char ModelGroupResumeOffsets[(sizeof(ModelGroupResumeSlot) == 0x2C && offsetof(ModelGroupResumeSlot, animation) == 0x14 && offsetof(ModelResumeNode, animation) == 0x38) ? 1 : -1];
 extern "C" {
-extern ModelGroups *DAT_00581270;
+extern ModelGroups *g_modelGroups;
 extern GameStateA g_gameState;
 void FUN_0029570c(void);
 void faderSetValue(AsdMdlNode *node, f32 value);
@@ -50,13 +50,13 @@ static inline void showModelGroupSlot(ModelGroupResumeSlot *slot)
 }
 extern "C" void FUN_002d8cec(void)
 {
-    if (reinterpret_cast<const ModelGroupsModeView *>(DAT_00581270)->mode != 22)
+    if (reinterpret_cast<const ModelGroupsModeView *>(g_modelGroups)->mode != 22)
         return;
     FUN_0029570c();
     for (s32 group = 0; group < 2; ++group) {
         s32 count = group == 0 ? 9 : 3;
         for (s32 i = 0; i < count; ++i) {
-            ModelGroupSlot *storage = group == 0 ? &DAT_00581270->primary[i] : &DAT_00581270->secondary[i];
+            ModelGroupSlot *storage = group == 0 ? &g_modelGroups->primary[i] : &g_modelGroups->secondary[i];
             ModelGroupResumeSlot *slot = reinterpret_cast<ModelGroupResumeSlot *>(storage);
             if (slot->active) {
                 if (g_gameState.controllerFlags.secondary) {

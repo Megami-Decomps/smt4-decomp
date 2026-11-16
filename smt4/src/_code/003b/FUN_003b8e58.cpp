@@ -82,7 +82,7 @@ void FUN_0023d344(NodeEnableOwner *model);
 void FUN_002636d0(s32 flag);
 void dialogOpen(s32 flag);
 void infoWinSetMessage(u32 infoWin, u8 message);
-s32 FUN_002903f0(void);
+s32 rosterGetLeaderId(void);
 u32 tableGroupFindEntryIndex(u32 group, u8 *name);
 void infoWinStartTimer(s32 flag);
 void scrScriptProcessStartEntry(u32 script, u32 entry);
@@ -158,7 +158,7 @@ void FUN_003b8e58(GateScene *scene)
             next = GATE_STEP_WAIT_CLOSE;
         } else {
             messageStatesSetFirst(1);
-            if (scene->text->hasScript != 0 && FUN_002903f0() != 0) {
+            if (scene->text->hasScript != 0 && rosterGetLeaderId() != 0) {
                 scrScriptProcessStartEntry(scene->scriptB, GATE_ENTRY_EXIT);
                 if (scene->marked == 0)
                     scene->marked = 1;

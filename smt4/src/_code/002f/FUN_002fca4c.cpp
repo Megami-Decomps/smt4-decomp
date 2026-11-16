@@ -18,7 +18,7 @@ u32 FUN_002fca4c(void)
         if (flagValueIsPositive(flag) != 0) {
             value = flagValueRead(flag);
             FUN_00250d84(flag, value);
-            bitset = FUN_002a0d0c();
+            bitset = gameDataGetSortPreferences();
             bitset = bitset + (flag >> 3);
             bitset[0x44] = bitset[0x44] | (u8)(1 << (flag & 7));
         }

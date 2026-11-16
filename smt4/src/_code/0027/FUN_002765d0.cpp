@@ -44,7 +44,7 @@ extern GameStateBlock g_gameState;           /* 0x49f91c */
 
 MapBlock *gameGetMapBlock(void);
 s32 mapEnemyHasAvailableSecondaryState(void);
-u32 FUN_00285574(void);
+u32 mapGetDepartureIndex(void);
 s32 gameFlagIsSet(s32 flag);
 s32 FUN_00298dc8(u16 entry);
 
@@ -104,7 +104,7 @@ EventEntry *FUN_002765d0(void)
     s32 hasSpecial = mapEnemyHasAvailableSecondaryState();
 
     if (g_gameState.spawnMode != 0) {
-        u32 spawn = FUN_00285574();
+        u32 spawn = mapGetDepartureIndex();
         if (spawn != 0) {
             for (s32 i = 0; i < (s32)(tableSectionCount(0x23, 7) + g_aocSystem->extraCount); i++) {
                 EventEntry *entry = eventTableEntry(i);

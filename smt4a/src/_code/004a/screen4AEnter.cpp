@@ -19,7 +19,7 @@ void screen4AEnter(Screen4A *obj)
     u16 *page = (u16 *)((u8 *)obj + 0xA874);
     *page = 9;
     uiSpriteBankApplyPreset(obj->block0DC);
-    FUN_003343f0(1);
+    gameGlobalsSetMenuOpenFlag(1);
     obj->state = 0xD;
     obj->unk18 = 0;
     sendEvent100020F();

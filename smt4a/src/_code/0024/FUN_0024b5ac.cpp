@@ -19,7 +19,7 @@ void campButtonHelpLoad(void);
 void campButtonHelpAcquire(void);
 void FUN_003a7644(AocMenu *menu);
 void FUN_0047c36c(AocMenu *menu);
-void FUN_003d54f8(s32 channel, s32 value);
+void titleSetSlotValueState2(s32 channel, s32 value);
 void soundChannelStopAll(s32 mask);
 void aocMainShutdown(void);
 void campButtonHelpRelease(void);
@@ -48,8 +48,8 @@ u32 FUN_0024b5ac(void)
         break;
     case 2:
         if (screen->skipSequence != 0) {
-            FUN_003d54f8(0, 1);
-            FUN_003d54f8(1, 1);
+            titleSetSlotValueState2(0, 1);
+            titleSetSlotValueState2(1, 1);
             soundChannelStopAll(0xF);
         } else {
             u8 request = 1;

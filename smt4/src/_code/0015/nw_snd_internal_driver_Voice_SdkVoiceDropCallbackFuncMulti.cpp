@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern unsigned int FUN_002baf30(void);
+extern unsigned int nw_snd_internal_driver_VoiceManager_GetInstance(void);
 /* Supplied declaration required: sndVoiceFree. */
 extern void nn_snd_CTR_Voice_SetState(unsigned int, int);
 /* Supplied declaration required: nw_snd_internal_driver_VoiceManager_FreeVoice. */
@@ -59,7 +59,7 @@ void nw_snd_internal_driver_Voice_SdkVoiceDropCallbackFuncMulti(int param_1,int 
   *(unsigned char *)(param_2 + 0x17) = 0;
   *(unsigned char *)(param_2 + 0x15) = 0;
   *(unsigned int *)(param_2 + 8) = 0;
-  temp_v1 = FUN_002baf30();
+  temp_v1 = nw_snd_internal_driver_VoiceManager_GetInstance();
   nw_snd_internal_driver_VoiceManager_FreeVoice(temp_v1,param_2);
   *(unsigned char *)(param_2 + 0x14) = 0;
   if (*(romwright_code **)(param_2 + 0xc) == (romwright_code *)0x0) {

@@ -38,7 +38,7 @@ extern "C" {
 extern BtlActionGlobals g_btlAction;
 extern void *g_btlUiBlock;
 s32 randRange(u32);
-void FUN_0022abe0(AlternateActionActor *, u16 *);
+void btlEntryGetPassiveSkillIds(AlternateActionActor *, u16 *);
 void FUN_002b7bca(void *, s32, s32, s32 (*)(const void *, const void *));
 s32 FUN_00333670(const void *, const void *);
 s32 halfwordKeyDescendingCompare(const void *, const void *);
@@ -53,7 +53,7 @@ u32 btlChooseAlternateSkillOrFallback(AlternateActionContext *context, Alternate
     s32 count = 0;
     if (!(context->battle->flags & 0x40000) && roll == 1) {
         u16 skills[10] = {0};
-        FUN_0022abe0(choice->actor, skills);
+        btlEntryGetPassiveSkillIds(choice->actor, skills);
         for (s32 i = 0; i < 9; ++i) {
             if (skills[i]) {
                 const AlternateActionSkill *skill = reinterpret_cast<const AlternateActionSkill *>(dataTable40FindById(skills[i]));

@@ -7,8 +7,8 @@ u32 FUN_00169db4(s32 preset);
 void cursorResetFromParam(void);
 void asdModelCommandBlockRelease(void);
 extern RenderCtxScissorA *g_renderCtx;
-extern u32 *DAT_005b3fe4;
-extern u32 DAT_005b3fe8;
+extern u32 *g_modelCommandBuffer;
+extern u32 g_modelCommandWordCount;
 
 /* Emit the scissor origin and inclusive maximum, clamped to the active viewport. */
 void FUN_00399ab4(u32 origin)
@@ -16,7 +16,7 @@ void FUN_00399ab4(u32 origin)
     u32 width = FUN_00169d8c(asdGxGetPresetIndex());
     u32 height = FUN_00169db4(asdGxGetPresetIndex());
     cursorResetFromParam();
-    u32 *buffer = DAT_005b3fe4;
+    u32 *buffer = g_modelCommandBuffer;
     u32 minimum;
     u32 maximum;
     if (g_renderCtx->scissor.entries[g_renderCtx->scissor.count] != 0) {
@@ -50,12 +50,12 @@ void FUN_00399ab4(u32 origin)
         minimum = 0;
         maximum = (height - 1) | ((width - 1) << 16);
     }
-    DAT_005b3fe4[DAT_005b3fe8] = minimum;
-    buffer[DAT_005b3fe8 + 1] = 0xF0066;
-    DAT_005b3fe8 += 2;
-    buffer[DAT_005b3fe8] = maximum;
-    buffer[DAT_005b3fe8 + 1] = 0xF0067;
-    DAT_005b3fe8 += 2;
+    g_modelCommandBuffer[g_modelCommandWordCount] = minimum;
+    buffer[g_modelCommandWordCount + 1] = 0xF0066;
+    g_modelCommandWordCount += 2;
+    buffer[g_modelCommandWordCount] = maximum;
+    buffer[g_modelCommandWordCount + 1] = 0xF0067;
+    g_modelCommandWordCount += 2;
     asdModelCommandBlockRelease();
 }
 }

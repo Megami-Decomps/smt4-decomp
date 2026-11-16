@@ -6,7 +6,7 @@ extern "C" {
 
 extern SoundSystemInitFlags g_nwSoundSystemInitFlags;
 
-u32 FUN_002baf30(void);
+u32 nw_snd_internal_driver_VoiceManager_GetInstance(void);
 u32 FUN_002bafb0(void);
 s32 FUN_0013127c(u32 a, u32 value);
 s32 FUN_001310c4(u32 a, u32 value);
@@ -15,7 +15,7 @@ s32 FUN_001310c4(u32 a, u32 value);
 u32 nw_snd_SoundSystem_GetRequiredMemSize(const SoundSystemInitParameters *parameters)
 {
     u32 base = parameters->poolSizeA + parameters->poolSizeB + parameters->taskStackSize;
-    u32 first = FUN_0013127c(FUN_002baf30(), g_nwSoundSystemInitFlags.driverMode);
+    u32 first = FUN_0013127c(nw_snd_internal_driver_VoiceManager_GetInstance(), g_nwSoundSystemInitFlags.driverMode);
     u32 second = FUN_001310c4(FUN_002bafb0(), g_nwSoundSystemInitFlags.driverMode);
     u32 total = second + first + base;
     u8 hasItems;

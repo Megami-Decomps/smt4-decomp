@@ -59,12 +59,12 @@ extern s32 DAT_0049fd14;
 
 s32 spriteTableFreeLoaded(void *sprites);
 void asdSequenceRequest(u32 kind, void *payload, u32 size);
-void FUN_002a03d8(s32 a, s32 b);
+void titleSetSlotValueState2(s32 a, s32 b);
 void gameCopyPersistentSave(void);
 char *libc_strcpy(char *destination, const char *source);
 void bgmReleaseStopped(void);
 void soundChannelStopAll(s32 channel);
-void *FUN_002903f0(void);
+void *rosterGetLeaderId(void);
 SceneRecord *FUN_0022b8c0(void *sprites);
 void gameSynchronizeMapState(SceneWork *work);
 u8 *dataTable1bOr1cGetRecord(void *entry);
@@ -89,8 +89,8 @@ void FUN_003b92b4(SceneWork *work)
     } else if ((flags & 0x8000000) != 0) {
         u16 payload = work->record->id;
         asdSequenceRequest(0x12, &payload, sizeof(payload));
-        FUN_002a03d8(0, 10);
-        FUN_002a03d8(1, 10);
+        titleSetSlotValueState2(0, 10);
+        titleSetSlotValueState2(1, 10);
     } else if ((flags & 0x4000000) != 0) {
         SceneSequenceOptions payload = {work->record->id, 0, 0};
         asdSequenceRequest(16, &payload, sizeof(payload));
@@ -122,7 +122,7 @@ void FUN_003b92b4(SceneWork *work)
         u32 payload = DAT_0049fd14 - 200;
         asdSequenceRequest(14, &payload, sizeof(payload));
     } else if (work->returnToMap != 0) {
-        void *entry = FUN_002903f0();
+        void *entry = rosterGetLeaderId();
 
         if (entry != NULL && table1bOr1cGetRecordValue(reinterpret_cast<u32>(entry)) == 6) {
             work->record = FUN_0022b8c0(work->sprites);

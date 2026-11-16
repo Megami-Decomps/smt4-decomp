@@ -57,7 +57,7 @@ const char *dataTable01GetRecordWithAocOverride(u32 demon);
 const char *FUN_0014bf3c(u32 demon, u32 flags);
 void FUN_001a90f0(char *destination, const char *source);
 void textFormatBuffer(char *destination, const char *format, ...);
-f32 FUN_00168594(const char *text, u32 font, f32 spacing);
+f32 fontMeasureTextWidth(const char *text, u32 font, f32 spacing);
 void statusBustUpPortraitRelease(s32 id, u32 kind);
 void statusBustUpPortraitAcquire(s32 id, u32 kind);
 u16 FUN_0036fcd0(void *item, u32 flags);
@@ -119,22 +119,22 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanelA *panel, const Cha
     else
         strcpy(buffer, "\x81\x7c\x81\x7c\x81\x7c");
     asdTextFormatStream(panel->demonName, 1, -1u, 0, 0, buffer);
-    panel->demonNameWidth = (s32)FUN_00168594(buffer, 1, 0.0f);
+    panel->demonNameWidth = (s32)fontMeasureTextWidth(buffer, 1, 0.0f);
     if (record->owner)
         textExpandGlyphsToBuffer(FUN_0014bf3c(record->demon, 0), buffer, 0);
     else
         FUN_001a90f0(buffer, "\x81\x7c\x81\x7c");
     asdTextFormatStream(panel->race, 2, -1u, 0, 0, buffer);
-    panel->raceWidth = (s32)FUN_00168594(buffer, 2, 0.0f);
+    panel->raceWidth = (s32)fontMeasureTextWidth(buffer, 2, 0.0f);
     for (s32 slot = 0; slot < 8; ++slot) {
         if (record->skills[slot] && record->owner) {
             textExpandGlyphsToBuffer(reinterpret_cast<const char *>(FUN_0014bd84(record->skills[slot])), buffer, 0);
             asdTextFormatStream(panel->skillLabels[slot], 1, -1u, 0, 0, buffer);
-            panel->skillWidths[slot] = (s32)FUN_00168594(buffer, 1, 0.0f);
+            panel->skillWidths[slot] = (s32)fontMeasureTextWidth(buffer, 1, 0.0f);
         } else {
             textFormatBuffer(buffer, "\x81\x7c\x81\x7c\x81\x7c");
             asdTextFormatStream(panel->skillLabels[slot], 2, -1u, 0, 0, buffer);
-            panel->skillWidths[slot] = (s32)FUN_00168594(buffer, 2, 0.0f);
+            panel->skillWidths[slot] = (s32)fontMeasureTextWidth(buffer, 2, 0.0f);
         }
     }
     if (panel->previewId != record->demon) {
@@ -156,7 +156,7 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanelA *panel, const Cha
         u16 id = FUN_0036fcd0(item, 0);
         textExpandGlyphsToBuffer(dataTable01GetRecordWithAocOverride(dataTable10FindValue(id)), buffer, 0);
         asdTextFormatStream(panel->specialItemName, 2, -1u, 0, 0, buffer);
-        panel->specialItemWidth = (s32)FUN_00168594(buffer, 2, 0.0f);
+        panel->specialItemWidth = (s32)fontMeasureTextWidth(buffer, 2, 0.0f);
     } else {
         rt_aeabi_memclr(buffer, sizeof(buffer));
         asdTextFormatStream(panel->specialItemName, 2, -1u, 0, 0, buffer);

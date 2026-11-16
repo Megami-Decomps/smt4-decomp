@@ -45,7 +45,7 @@ void FUN_00312af0(void)
             if (!work->popup.state) {
                 work->popup.state = 16;
                 work->popup.phase = 0;
-                if (FUN_002c2758(6) != 1) {
+                if (gameDataStatusFlagGet(6) != 1) {
                     s32 content = popupSelectWeightedMessage(17, 0);
                     g_popupState->popup.contentValue = content;
                 } else {

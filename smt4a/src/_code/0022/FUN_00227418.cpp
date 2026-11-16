@@ -46,7 +46,7 @@ void renderCtxResetColorScale(RenderCtxA *context);
 /* The id of the item under the cursor. */
 static __inline s32 campCursorItem(CampDetail *camp)
 {
-    return FUN_003da8f4(camp->cursor, FUN_002a4878(camp->listState));
+    return FUN_003da8f4(camp->cursor, listCursorGetRowOfChildIfUnblocked(camp->listState));
 }
 
 static __inline void campDrawBar(CampDetail *camp)

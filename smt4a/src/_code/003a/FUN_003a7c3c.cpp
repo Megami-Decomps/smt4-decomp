@@ -17,7 +17,7 @@ void FUN_003a7c3c(u32 quest)
 {
     UiQuestApoc *work = g_uiQuest;
     work->questId = quest;
-    s32 alternate = FUN_001bd100(quest);
+    s32 alternate = dataTable1bOr1cRecordHasFlag1(quest);
     void *cursor = alternate != 0 ? work->alternateView()->cursor : work->cursor;
     work->unk90c = alternate;
     u16 *ids = alternate != 0 ? work->alternateView()->list : work->list;

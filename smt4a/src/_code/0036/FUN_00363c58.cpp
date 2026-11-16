@@ -425,7 +425,7 @@ extern unsigned int DAT_005f1ca4; /* 0x5f1ca4 */
 extern int gameFlagsGetBlock(unsigned int *);
 /* Supplied declaration required: mapRndMazeResetHandles. */
 /* Supplied declaration required: sysMemClear. */
-extern unsigned long long FUN_00324f74(int);
+extern unsigned long long gameObjectKindGetCategory(int);
 
 
 void FUN_00363c58(int param_1)
@@ -841,7 +841,7 @@ void FUN_00363c58(int param_1)
   temp_v0 = gameFlagsGetBlock(&g_gameState);
   temp_v2 = 0;
   do {
-    temp_v5 = FUN_00324f74(temp_v2);
+    temp_v5 = gameObjectKindGetCategory(temp_v2);
     temp_v2 = (int)((unsigned long long)temp_v5 >> 0x20);
     temp_v1 = (int)temp_v5;
     if (temp_v1 == 0) {

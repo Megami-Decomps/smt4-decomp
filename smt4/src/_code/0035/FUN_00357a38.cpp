@@ -8,7 +8,7 @@ int FUN_002399ec(int *);
 int _ZN12CecMessageIdC1Ev(unsigned char [8]);
 int FUN_002ad66c(int *, int **);
 int __ARM_common_memcpy4_8(...);
-int FUN_002c567c(int **);
+int clockGetTicksAsMicroseconds(int **);
 int FUN_003588fc(void);
 int FUN_003e0578(...);
 int recordCopy70(int, unsigned char [96]);
@@ -44,7 +44,7 @@ extern int *handlerRefForward(unsigned int, unsigned int);
 /* Supplied declaration required: _ZN12CecMessageIdC1Ev. */
 /* Supplied declaration required: FUN_002ad66c. */
 /* Supplied declaration required: __ARM_common_memcpy4_8. */
-/* Supplied declaration required: FUN_002c567c. */
+/* Supplied declaration required: clockGetTicksAsMicroseconds. */
 /* Supplied declaration required: FUN_003588fc. */
 /* Supplied declaration required: FUN_003e0578. */
 /* Supplied declaration required: recordCopy70. */
@@ -142,7 +142,7 @@ int * FUN_00357a38(int *param_1,int param_2,int param_3,unsigned int param_4,int
   recordCopy70(param_2,temp_v10);
   temp_v0 = nn_cec_CTR_MessageId_IsEmpty((unsigned int)temp_v12);
   if (temp_v0) {
-    FUN_002c567c(&temp_v21);
+    clockGetTicksAsMicroseconds(&temp_v21);
     temp_v19 = temp_v21;
     temp_v20 = temp_v22;
     FUN_002ad66c(&temp_v9,&temp_v19);

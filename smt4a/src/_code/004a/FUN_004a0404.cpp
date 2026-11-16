@@ -19,7 +19,7 @@ s32 gameFlagIsSet(u32 flag);
 s32 FUN_003df57c(u32 skill, u32 mode);
 s32 gameSlotTableFindFree();
 UnitRecord *gameGetSlotRecord(s32 slot);
-s32 FUN_004bcbb4(UnitRecord *unit, u32 skill);
+s32 skillGetAdjustedCost(UnitRecord *unit, u32 skill);
 
 // Check whether the player or a usable party demon can afford the recovery skill.
 u32 FUN_004a0404()
@@ -41,7 +41,7 @@ u32 FUN_004a0404()
         if (!unit)
             continue;
         if (recoveryUnitHasSkill(unit, 0x8c) &&
-            FUN_004bcbb4(unit, 0x8c) < static_cast<s16>(unit->unk2C)) {
+            skillGetAdjustedCost(unit, 0x8c) < static_cast<s16>(unit->unk2C)) {
             const ScaledRecordValues *values = reinterpret_cast<const ScaledRecordValues *>(unit);
             if (values->flags & 2)
                 return 0;

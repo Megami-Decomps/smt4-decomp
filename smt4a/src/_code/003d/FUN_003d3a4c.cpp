@@ -49,7 +49,7 @@ extern int vec2GetYInt(int);
 extern int itemIsCollectedWithRelated(unsigned short);
 /* Supplied declaration required: dataTable0cFindByKey. */
 extern int resourceRunOperationIfUnblocked(void);
-extern int FUN_002a4894(int);
+extern int listCursorGetRowIfUnblocked(int);
 extern int objectApplyIfUnblocked(int);
 extern unsigned short *FUN_002c7e24(void);
 extern int FUN_002c7e3c(void);
@@ -85,7 +85,7 @@ void FUN_003d3a4c(int param_1,int param_2)
   temp_v2 = g_statusDown;
   temp_v3 = g_statusDown + 0xee4;
   temp_v4 = resourceRunOperationIfUnblocked();
-  temp_v5 = FUN_002a4894(temp_v3);
+  temp_v5 = listCursorGetRowIfUnblocked(temp_v3);
   temp_v1 = 0;
   temp_v6 = FUN_002c7e3c();
   if (temp_v6 != 0xe) {

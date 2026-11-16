@@ -6,7 +6,7 @@ struct AocSystemA;
 extern "C" {
 extern AocSystemA *g_aocSystem;
 Table04ExtraRecord *FUN_001b2e78(AocSystemA *system, u32 id);
-s32 FUN_001ac8dc(const void *left, const void *right);
+s32 recordSortEntryCompareByKey(const void *left, const void *right);
 void *libc_bsearch(const void *key, const void *entries, u32 count, u32 size,
                    s32 (*compare)(const void *, const void *));
 
@@ -19,7 +19,7 @@ static inline Table04ExtraRecord *findExtraRecord(u32 id)
         u32 count = dataTableGetCount(section);
         Table04ExtraRecord key;
         key.id = (u16)id;
-        record = (Table04ExtraRecord *)libc_bsearch(&key, entries, count, sizeof(key), FUN_001ac8dc);
+        record = (Table04ExtraRecord *)libc_bsearch(&key, entries, count, sizeof(key), recordSortEntryCompareByKey);
     }
     return record;
 }

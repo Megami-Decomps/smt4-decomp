@@ -29,7 +29,7 @@ void uiSpriteStateInitFromSource(UiSpriteState*, u32 group, u32 id, const UiReso
 void uiSpriteSetKeyframe(UiSpriteState*, u32 keyframe, u32 flags);
 void uiSpriteSetImageKeyframe(UiSpriteState*, u32 keyframe, u32 flags);
 void* spriteHandleCreate(u32 flags);
-void FUN_001527d8(void* sprite, s32 value);
+void uiObjectSetColorRgb(void* sprite, s32 value);
 void positionStateSet(void* sprite, u32 first, u32 second, f32 scale);
 
 void infoWindowInitialize(void)
@@ -55,7 +55,7 @@ void infoWindowInitialize(void)
     uiSpriteSetKeyframe(&window->sprites.content, 3, 0);
     uiSpriteSetImageKeyframe(&window->sprites.content, 0, 0);
     window->text = spriteHandleCreate(0);
-    FUN_001527d8(window->text, -1);
+    uiObjectSetColorRgb(window->text, -1);
     positionStateSet(window->text, 0, 0x646464FF, 0.0f);
     window->timer = 30;
     window->active = 0;

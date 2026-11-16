@@ -7,11 +7,11 @@ extern "C" {
 
 int asdTMTexTableReleaseNode(unsigned int);
 int uiSpriteReplaceTextureEntry(int, int, unsigned int);
-int FUN_001a6568(int, unsigned int, unsigned int, int);
+int texTableRequestNamedTextureLoad(int, unsigned int, unsigned int, int);
 int asdTMTexLoadMainHeap(void);
 int bustupPlaceActiveSlot(int, unsigned int);
 int packageFileDisableByKindName(int, unsigned int, unsigned int);
-int FUN_001f3eec(void);
+int floatInterpolateOverDuration(void);
 
 typedef int romwright_code(...);
 extern int g_aocSystem; /* 0x570280 */
@@ -21,11 +21,11 @@ extern int jobGetWork(void);
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: uiSpriteReplaceTextureEntry. */
 extern int aocRunByName(int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001a6568. */
+/* Supplied declaration required: texTableRequestNamedTextureLoad. */
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: bustupPlaceActiveSlot. */
 /* Supplied declaration required: packageFileDisableByKindName. */
-/* Supplied declaration required: FUN_001f3eec. */
+/* Supplied declaration required: floatInterpolateOverDuration. */
 
 
 unsigned int FUN_0026c568(void)
@@ -49,7 +49,7 @@ unsigned int FUN_0026c568(void)
     ;
     if (temp_v1 != 0) {
       temp_v1 = g_aocSystem;
-      FUN_001a6568(g_aocSystem,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14),0x10000)
+      texTableRequestNamedTextureLoad(g_aocSystem,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14),0x10000)
       ;
       *(int *)(temp_v0 + 0xc) = temp_v1;
     }
@@ -105,11 +105,11 @@ unsigned int FUN_0026c568(void)
            (temp_v5 - temp_v5 * 0.33333334f <= *(float *)(temp_v0 + 0x6c))) {
           *(float *)(temp_v0 + 0x70) = *(float *)(temp_v0 + 0x70) + temp_v7;
           temp_v5 = temp_v6;
-          FUN_001f3eec();
+          floatInterpolateOverDuration();
           *(float *)(temp_v0 + 0x28) = temp_v6;
           temp_v4 = *(unsigned int *)(temp_v0 + 0x5c);
           temp_v6 = temp_v5;
-          FUN_001f3eec();
+          floatInterpolateOverDuration();
           *(unsigned int *)(temp_v0 + 0x58) = temp_v4;
           if (*(float *)(temp_v0 + 0x68) * temp_v8 <= *(float *)(temp_v0 + 0x70)) {
             *(float *)(temp_v0 + 0x28) = temp_v7;
@@ -122,11 +122,11 @@ unsigned int FUN_0026c568(void)
       else if ((temp_v6 < *(float *)(temp_v0 + 0x28)) && (*(int *)(temp_v0 + 0x24) != 1)) {
         *(float *)(temp_v0 + 0x70) = *(float *)(temp_v0 + 0x70) + temp_v7;
         temp_v5 = temp_v7;
-        FUN_001f3eec();
+        floatInterpolateOverDuration();
         *(float *)(temp_v0 + 0x28) = temp_v7;
         temp_v4 = *(unsigned int *)(temp_v0 + 0x5c);
         temp_v7 = temp_v5;
-        FUN_001f3eec();
+        floatInterpolateOverDuration();
         *(unsigned int *)(temp_v0 + 0x58) = temp_v4;
         if (*(float *)(temp_v0 + 0x68) * temp_v8 <= *(float *)(temp_v0 + 0x70)) {
           *(float *)(temp_v0 + 0x28) = temp_v6;
@@ -162,7 +162,7 @@ unsigned int FUN_0026c568(void)
     case 1:
       *(float *)(temp_v0 + 0x70) = *(float *)(temp_v0 + 0x70) + temp_v7;
       temp_v5 = temp_v7;
-      FUN_001f3eec();
+      floatInterpolateOverDuration();
       *(float *)(temp_v0 + 0x28) = temp_v7;
       temp_v7 = temp_v5;
       break;
@@ -171,7 +171,7 @@ unsigned int FUN_0026c568(void)
       *(float *)(temp_v0 + 0x70) = temp_v5;
       if ((int)temp_v5 >= 0x41000001) {
         temp_v5 = temp_v6;
-        FUN_001f3eec();
+        floatInterpolateOverDuration();
         *(float *)(temp_v0 + 0x28) = temp_v6;
         temp_v6 = temp_v5;
       }
@@ -181,7 +181,7 @@ unsigned int FUN_0026c568(void)
       if (temp_v1 != 0) {
         *(float *)(temp_v0 + 0x70) = *(float *)(temp_v0 + 0x70) + temp_v7;
         temp_v5 = temp_v7;
-        temp_v1 = FUN_001f3eec();
+        temp_v1 = floatInterpolateOverDuration();
         *(float *)(temp_v0 + 0x88) = temp_v7;
         *(float *)(temp_v0 + 0x28) = temp_v5;
         temp_v3 = temp_v7 <= temp_v6;
@@ -206,12 +206,12 @@ unsigned int FUN_0026c568(void)
     case 4:
       *(float *)(temp_v0 + 0x70) = *(float *)(temp_v0 + 0x70) + temp_v7;
       temp_v5 = temp_v7;
-      FUN_001f3eec();
+      floatInterpolateOverDuration();
       *(float *)(temp_v0 + 0x88) = temp_v7;
       temp_v7 = temp_v5;
       if (*(int *)(temp_v0 + 0x70) >= 0x41000000) {
         temp_v7 = temp_v6;
-        FUN_001f3eec();
+        floatInterpolateOverDuration();
         *(float *)(temp_v0 + 0x28) = temp_v6;
         temp_v6 = temp_v7;
         temp_v7 = temp_v5;
@@ -220,36 +220,36 @@ unsigned int FUN_0026c568(void)
     case 5:
       *(float *)(temp_v0 + 0x70) = *(float *)(temp_v0 + 0x70) + temp_v7;
       temp_v4 = *(unsigned int *)(temp_v0 + 0x4c);
-      FUN_001f3eec();
+      floatInterpolateOverDuration();
       *(unsigned int *)(temp_v0 + 0x34) = temp_v4;
       temp_v4 = *(unsigned int *)(temp_v0 + 0x50);
-      FUN_001f3eec();
+      floatInterpolateOverDuration();
       *(unsigned int *)(temp_v0 + 0x38) = temp_v4;
       temp_v4 = *(unsigned int *)(temp_v0 + 0x54);
-      FUN_001f3eec();
+      floatInterpolateOverDuration();
       *(unsigned int *)(temp_v0 + 0x3c) = temp_v4;
       break;
     case 6:
       *(float *)(temp_v0 + 0x70) = *(float *)(temp_v0 + 0x70) + temp_v7;
       temp_v5 = temp_v6;
-      FUN_001f3eec();
+      floatInterpolateOverDuration();
       *(float *)(temp_v0 + 0x28) = temp_v6;
       temp_v4 = *(unsigned int *)(temp_v0 + 0x5c);
-      FUN_001f3eec();
+      floatInterpolateOverDuration();
       *(unsigned int *)(temp_v0 + 0x58) = temp_v4;
       temp_v6 = temp_v5;
       break;
     case 7:
       *(float *)(temp_v0 + 0x70) = *(float *)(temp_v0 + 0x70) + temp_v7;
       temp_v5 = temp_v6;
-      FUN_001f3eec();
+      floatInterpolateOverDuration();
       *(float *)(temp_v0 + 0x28) = temp_v6;
       temp_v6 = temp_v5;
       break;
     case 8:
       *(float *)(temp_v0 + 0x70) = *(float *)(temp_v0 + 0x70) + temp_v7;
       temp_v5 = temp_v6;
-      FUN_001f3eec();
+      floatInterpolateOverDuration();
       *(float *)(temp_v0 + 0x28) = temp_v6;
       if ((int)temp_v6 >= 0x3f800001) {
         temp_v6 = temp_v7;
@@ -260,7 +260,7 @@ unsigned int FUN_0026c568(void)
     case 9:
       *(float *)(temp_v0 + 0x70) = *(float *)(temp_v0 + 0x70) + temp_v7;
       temp_v5 = temp_v6;
-      FUN_001f3eec();
+      floatInterpolateOverDuration();
       *(float *)(temp_v0 + 0x2c) = temp_v6;
       if (temp_v6 <= temp_v5) {
         temp_v6 = temp_v5;

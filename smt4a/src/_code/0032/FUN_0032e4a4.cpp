@@ -126,7 +126,7 @@ unsigned int FUN_0032e4a4(int param_1)
       do {
         uVar2 = *(unsigned short *)((int)aiStack_48 + iVar12 * 2);
         *(unsigned short *)(iVar9 + iVar12 * 2 + 0x34) = uVar2;
-        FUN_004bd6b0(iVar9,uVar2,iVar12);
+        partyRecordSetEquippedItemClampRank(iVar9,uVar2,iVar12);
         iVar12 = iVar12 + 1;
       } while (iVar12 < 8);
       FUN_002e71b4(param_1 + 0x218,iVar9,300);
@@ -139,7 +139,7 @@ unsigned int FUN_0032e4a4(int param_1)
       iVar14 = 0;
       do {
         if ((iVar14 < iVar12) && (sVar1 = *(short *)(uVar4 + iVar3 * 2 + 0x40), sVar1 != 0)) {
-          FUN_004bd6b0(iVar9,sVar1,iVar14);
+          partyRecordSetEquippedItemClampRank(iVar9,sVar1,iVar14);
           iVar14 = iVar14 + 1;
         }
         iVar3 = iVar3 + 1;
@@ -155,7 +155,7 @@ unsigned int FUN_0032e4a4(int param_1)
               iVar3 = iVar3 + 1;
             } while (iVar3 < 8);
           }
-          FUN_004bd6b0(iVar9,uVar4,iVar14);
+          partyRecordSetEquippedItemClampRank(iVar9,uVar4,iVar14);
           iVar14 = iVar14 + 1;
         }
       }
@@ -209,7 +209,7 @@ code_r0x0032e870:
           FUN_003c3f1c();
           if ((*(unsigned char *)(uVar4 + 3) & 0x20) != 0) {
             *(unsigned short *)(iVar9 + iVar14 * 2 + 0x34) = *(unsigned short *)(iVar6 + 0x120);
-            FUN_004bd6b0(iVar9,*(unsigned short *)(iVar6 + 0x120),iVar14);
+            partyRecordSetEquippedItemClampRank(iVar9,*(unsigned short *)(iVar6 + 0x120),iVar14);
             iVar14 = iVar14 + 1;
           }
 code_r0x0032e99c:
@@ -272,7 +272,7 @@ code_r0x0032ea88:
     iVar9 = FUN_0035fd00(uVar2);
     if (iVar9 != 0) {
       FUN_0035fd38(1);
-      FUN_003d54f8(0,0x1e);
+      titleSetSlotValueState2(0,0x1e);
       break;
     }
     return uStack_50;

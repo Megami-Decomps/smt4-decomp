@@ -15,7 +15,7 @@ typedef struct AcmpHeader {
     /* 0x14 */ u32 guard[3];       /* ACMP_GUARD */
 } AcmpHeader;
 
-void FUN_002e59f8(void *src, void *dst, u32 size);
+void memcpySrcFirst(void *src, void *dst, u32 size);
 void FUN_0019fb60(void *data, u32 packedSize, u32 capacity);
 
 /* Unpacks an ACMP blob in place: drops its header, then decompresses into the `capacity`-byte buffer. */
@@ -28,7 +28,7 @@ void acmpUnpackInPlace(u32 unused, AcmpHeader *header, u32 capacity)
         && header->guard[2] == ACMP_GUARD) {
         u32 packedSize = header->packedSize;
 
-        FUN_002e59f8(header + 1, header, packedSize);
+        memcpySrcFirst(header + 1, header, packedSize);
         FUN_0019fb60(header, packedSize, capacity);
     }
 }

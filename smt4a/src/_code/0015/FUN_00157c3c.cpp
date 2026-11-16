@@ -6,7 +6,7 @@
 
 extern "C" {
 void FUN_00177684(u32 program, u32 mode, u32 enabled);
-void FUN_0016d338(ModelCommandWriter *writer, u32 *begin);
+void gfxCommandVectorResetAt(ModelCommandWriter *writer, u32 *begin);
 void FUN_0019a2ac(u32 *commands, const f32 *matrix, u32 header);
 void FUN_0019a270(u32 *commands, const f32 *matrix, u32 header);
 
@@ -18,7 +18,7 @@ void FUN_00157c3c(ModelMatrixUploadOwner *owner, ModelMatrixUploadSource *source
     const f32 *model = source->model;
     ModelCommandWriter *writer = owner->writer;
     FUN_00177684(source->program, 1, 1);
-    FUN_0016d338(writer, reinterpret_cast<u32 *>(asdGxGetCommandCursor()));
+    gfxCommandVectorResetAt(writer, reinterpret_cast<u32 *>(asdGxGetCommandCursor()));
     u32 *commands = writer->cursor;
     *commands++ = owner->projectionRegister | 0x80000000u;
     *commands++ = 0xF02C0;

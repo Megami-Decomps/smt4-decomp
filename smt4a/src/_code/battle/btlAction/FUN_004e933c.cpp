@@ -11,7 +11,7 @@ int asdMemFree(void);
 int __ARM_common_memcpy4_8(...);
 int dataTable04FindById(void);
 int sysMemClear(int [109], int);
-int FUN_003e8bb0(...);
+int btlEntryBuildSummary(...);
 int FUN_004c8340(...);
 int FUN_004c9160(...);
 int FUN_004e7c04(...);
@@ -47,7 +47,7 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: __ARM_common_memcpy4_8. */
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_003e8bb0. */
+/* Supplied declaration required: btlEntryBuildSummary. */
 extern int isOutsideRange4To53(int);
 /* Supplied declaration required: FUN_004c8340. */
 /* Supplied declaration required: FUN_004c9160. */
@@ -107,7 +107,7 @@ unsigned int FUN_004e933c(int *param_1,int param_2)
           dataTable04FindById();
           if (temp_v3 != 0) {
             *(unsigned short *)(temp_v4 + 0x324) = *(unsigned short *)(temp_v2 + 0x118);
-            FUN_003e8bb0(temp_v10,*param_1,*(unsigned int *)(param_2 + 0x20));
+            btlEntryBuildSummary(temp_v10,*param_1,*(unsigned int *)(param_2 + 0x20));
             temp_v3 = (unsigned int)*(short *)(*(int *)(param_2 + 0x20) + 0x6e);
             FUN_004c8340(temp_v3,(int)*(short *)((int)puVar6 + 0x6e),temp_v10[0] >> 0x10,
                          (int)(short)temp_v10[1],0xffffffff);
@@ -124,7 +124,7 @@ unsigned int FUN_004e933c(int *param_1,int param_2)
         } while (temp_v1 < 8);
         *(unsigned short *)(temp_v4 + 0x322) = 1;
         *(unsigned short *)(temp_v4 + 0x324) = 1;
-        FUN_003e8bb0(temp_v10,*param_1,*(unsigned int *)(param_2 + 0x20));
+        btlEntryBuildSummary(temp_v10,*param_1,*(unsigned int *)(param_2 + 0x20));
         temp_v3 = (unsigned int)*(short *)(*(int *)(param_2 + 0x20) + 0x6e);
         FUN_004c8340(temp_v3,(int)*(short *)((int)puVar6 + 0x6e),temp_v10[0] >> 0x10,
                      (int)(short)temp_v10[1],0xffffffff);
@@ -143,7 +143,7 @@ unsigned int FUN_004e933c(int *param_1,int param_2)
           dataTable08Sub2GetRecord();
           if (temp_v3 != 0) {
             *(unsigned short *)(temp_v4 + 0x324) = 2;
-            FUN_003e8bb0(temp_v10,*param_1,*(unsigned int *)(param_2 + 0x20));
+            btlEntryBuildSummary(temp_v10,*param_1,*(unsigned int *)(param_2 + 0x20));
             temp_v3 = (unsigned int)*(short *)(*(int *)(param_2 + 0x20) + 0x6e);
             FUN_004c8340(temp_v3,(int)*(short *)((int)puVar6 + 0x6e),temp_v10[0] >> 0x10,
                          (int)(short)temp_v10[1],0xffffffff);
@@ -165,7 +165,7 @@ LAB_004e960c:
       temp_v1 = randRange((temp_v6 - 1U) & 0xffff);
       __ARM_common_memcpy4_8(temp_v9,temp_v7 + temp_v1 * 8);
       temp_v1 = aiStack_220[temp_v1];
-      FUN_003e8bb0(&temp_v8,*param_1,*(unsigned int *)(param_2 + 0x20));
+      btlEntryBuildSummary(&temp_v8,*param_1,*(unsigned int *)(param_2 + 0x20));
       temp_v0 = (**(unsigned int **)(param_2 + 0x20) & DAT_00571168) == 0 &&
               ((*(unsigned int **)(param_2 + 0x20))[1] & DAT_0057116c) == 0;
       FUN_004e7c04(param_1,temp_v0);

@@ -20,7 +20,7 @@ void asdMemFree(void *buffer);
 void FUN_001177e0()
 {
     AsdSoundSystem *sound = &g_asdSound;
-    if (FUN_002bf684(sound) == 0) {
+    if (nw_snd_SoundArchive_IsAvailable(sound) == 0) {
         return;
     }
     AsdSndSelectionViewIV *selected = reinterpret_cast<AsdSndSelectionViewIV *>(sound);

@@ -19,7 +19,7 @@ typedef char FloorRectangleLayoutCheck[(sizeof(FloorRectangle) == 0x1C && offset
 }
 extern "C" {
 extern const FloorPaletteStorage DAT_0040490c;
-extern FloorRectangleList DAT_004bf89c;
+extern FloorRectangleList g_regionTable;
 extern RenderCtx *g_titleScene;
 u32 renderCtxPackPassFlags(u32 mode, u32 option);
 void gxEmitColoredQuad(u32 color0, u32 color1, u32 color2, u32 color3,
@@ -30,7 +30,7 @@ void gxEmitColoredQuad(u32 color0, u32 color1, u32 color2, u32 color3,
 void FUN_002e0460(f32 height)
 {
     FloorOverlayPalette palette = DAT_0040490c.palette;
-    FloorRectangleList *list = &DAT_004bf89c;
+    FloorRectangleList *list = &g_regionTable;
     if (list->count != 0) {
         RenderCtx *context = g_titleScene;
         u32 state = renderCtxPackPassFlags(5, 1);

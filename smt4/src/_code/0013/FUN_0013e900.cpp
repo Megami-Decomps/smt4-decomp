@@ -23,7 +23,7 @@ struct fn_0013e900_arg1 {
     float field_0x40; /* +0x40 */
 };
 
-extern unsigned int DAT_00407ed0; /* 0x407ed0 */
+extern unsigned int g_sinCosTable; /* 0x407ed0 */
 extern unsigned int DAT_00407ed4; /* 0x407ed4 */
 extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
@@ -92,13 +92,13 @@ void FUN_0013e900(float *param_1,fn_0013e900_arg1 *param_2)
   temp_v10 = temp_v11 & 0xff;
   temp_v14 = (float)VectorUnsignedToFloat(temp_v11 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
   temp_v13 = (float)VectorUnsignedToFloat(temp_v12 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
-  temp_v16 = (float)(&DAT_00407ed0)[temp_v1 * 4] + (temp_v2 - temp_v15) * (float)(&DAT_00407ed8)[temp_v1 * 4];
+  temp_v16 = (float)(&g_sinCosTable)[temp_v1 * 4] + (temp_v2 - temp_v15) * (float)(&DAT_00407ed8)[temp_v1 * 4];
   temp_v15 = (float)(&DAT_00407ed4)[temp_v1 * 4] + (temp_v2 - temp_v15) * (float)(&DAT_00407edc)[temp_v1 * 4];
-  temp_v2 = (float)(&DAT_00407ed0)[temp_v10 * 4] + (temp_v4 - temp_v14) * (float)(&DAT_00407ed8)[temp_v10 * 4]
+  temp_v2 = (float)(&g_sinCosTable)[temp_v10 * 4] + (temp_v4 - temp_v14) * (float)(&DAT_00407ed8)[temp_v10 * 4]
   ;
   temp_v4 = (float)(&DAT_00407ed4)[temp_v10 * 4] + (temp_v4 - temp_v14) * (float)(&DAT_00407edc)[temp_v10 * 4]
   ;
-  temp_v14 = (float)(&DAT_00407ed0)[temp_v3 * 4] + (temp_v9 - temp_v13) * (float)(&DAT_00407ed8)[temp_v3 * 4]
+  temp_v14 = (float)(&g_sinCosTable)[temp_v3 * 4] + (temp_v9 - temp_v13) * (float)(&DAT_00407ed8)[temp_v3 * 4]
   ;
   temp_v9 = (float)(&DAT_00407ed4)[temp_v3 * 4] + (temp_v9 - temp_v13) * (float)(&DAT_00407edc)[temp_v3 * 4]
   ;

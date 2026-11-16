@@ -5,9 +5,9 @@
 #include "battle/BtlMainAccess.h"
 
 extern "C" {
-void FUN_00247478(BattleEntrySummary *summary, BtlMainState *state, const BtlEntry *entry);
+void btlEntryBuildSummary(BattleEntrySummary *summary, BtlMainState *state, const BtlEntry *entry);
 const ActiveSkillRecord *dataTable40FindById(s32 skillId);
-void FUN_0022abe0(const BtlEntry *entry, u16 *skills);
+void btlEntryGetPassiveSkillIds(const BtlEntry *entry, u16 *skills);
 
 /* Test the active skill and learned passive skills for a zero-based category. */
 u32 btlEntryHasSkillCategory(const BtlEntry *entry, s32 category)
@@ -18,7 +18,7 @@ u32 btlEntryHasSkillCategory(const BtlEntry *entry, s32 category)
     };
     u32 found = 0;
     BattleEntrySummary summary;
-    FUN_00247478(&summary, btlGetMainState(), entry);
+    btlEntryBuildSummary(&summary, btlGetMainState(), entry);
     if (summary.skill.skillId) {
         const ActiveSkillRecord *skill = dataTable40FindById(summary.skill.skillId);
         if (skill) {
@@ -30,7 +30,7 @@ u32 btlEntryHasSkillCategory(const BtlEntry *entry, s32 category)
     }
     if (!found) {
         u16 skills[10] = {0};
-        FUN_0022abe0(entry, skills);
+        btlEntryGetPassiveSkillIds(entry, skills);
         for (s32 index = 0; index < 9; ++index) {
             if (skills[index]) {
                 const PassiveSkillRecord *skill = passiveSkillLookupRecord(skills[index]);

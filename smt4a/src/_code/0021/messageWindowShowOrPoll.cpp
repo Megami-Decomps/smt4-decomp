@@ -34,7 +34,7 @@ extern "C" {
 extern MessageBox* DAT_0057f58c;
 extern MessageBox* DAT_0057f590;
 extern MessageBox* DAT_0057f594;
-extern MessageBox* DAT_005e2010[];
+extern MessageBox* g_messageWindows[];
 extern s16 DAT_005e205a[];
 
 s32 objFlagsSetBits(u32 object, s32 bits);
@@ -73,7 +73,7 @@ u32 messageWindowShowOrPoll(u32 owner, s32 index, s32 poll, s32 kind, s32 lockIn
                         box = DAT_0057f590;
                         if (kind != 0xb && kind != 0x14) box = DAT_0057f58c;
                     } else {
-                        box = DAT_005e2010[index];
+                        box = g_messageWindows[index];
                         index = DAT_005e205a[index];
                     }
                 }

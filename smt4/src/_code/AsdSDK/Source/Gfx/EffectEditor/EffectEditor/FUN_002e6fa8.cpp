@@ -11,7 +11,7 @@ void namedObjectFormatFullName(EffMenuNode* node, char* dest);
 void namedObjectFormatName(EffMenuNode* node, char* dest);
 void textFormatBuffer(char* dest, const char* format, ...);
 __weak void FUN_002e6fa8_hook(void* list, const char* path);
-s32 FUN_002c9df8(EffMenuNode* node, const char* dir); // platform stub: `mov r0, #0; bx lr`
+s32 callbackNoPendingWork(EffMenuNode* node, const char* dir); // platform stub: `mov r0, #0; bx lr`
 
 struct EffectEditorNameResult {
     char fullName[50];
@@ -39,7 +39,7 @@ u32 FUN_002e6fa8(void)
         namedObjectFormatName(g_effectEditor.label, input.name);
         input.state = g_effectEditor.label->unk08;
         if (input.state == 1) {
-            if (FUN_002c9df8(g_effectEditor.label, dir)) {
+            if (callbackNoPendingWork(g_effectEditor.label, dir)) {
                 asdMemoryFreeLocked(g_effectEditor.label);
                 g_effectEditor.label = NULL;
             } else {

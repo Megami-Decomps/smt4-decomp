@@ -4,7 +4,7 @@
 // Enqueues a type-0x12 sound request carrying one byte.
 extern "C" void soundVoicePostByte12(Obj421f18 *owner, u8 value)
 {
-    Obj421aa4Manager *manager = FUN_002baed8();
+    Obj421aa4Manager *manager = soundRequestQueueGetInstance();
     Obj421aa4Node *node = soundRequestBegin(manager, 6);
     node->type = 0x12;
     node->id = (u32)&owner->params;

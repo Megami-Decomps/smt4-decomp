@@ -41,7 +41,7 @@ extern int uniteGetWork(void);
 extern int recordGetModeForId(int);
 extern int FUN_002861fc(unsigned short);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
-extern int FUN_002a4894(int);
+extern int listCursorGetRowIfUnblocked(int);
 extern int bitTableIndexIsClear(unsigned short);
 /* Supplied declaration required: uiDrawListScrollBar. */
 extern int uiSearchPrimary(int);
@@ -76,7 +76,7 @@ void FUN_002c8940(int param_1,int param_2)
   temp_v4 = uiSearchPrimary(temp_v2);
   if (0 < temp_v4) {
     do {
-      if ((*(char *)(temp_v1 + 0x252) == '\0') || (temp_v4 = FUN_002a4894(temp_v2), temp_v4 != temp_v8)) {
+      if ((*(char *)(temp_v1 + 0x252) == '\0') || (temp_v4 = listCursorGetRowIfUnblocked(temp_v2), temp_v4 != temp_v8)) {
         temp_v4 = asdTMTexTableEntryAt(0x1a,temp_v8 + 0x2e);
         temp_v5 = temp_v1 + (temp_v3 + temp_v8) * 2;
         temp_v6 = FUN_002861fc(*(unsigned short *)(temp_v5 + 0x90a8));
@@ -103,7 +103,7 @@ void FUN_002c8940(int param_1,int param_2)
     } while (temp_v8 < temp_v4);
   }
   temp_v3 = resourceRunOperationIfUnblocked(temp_v2);
-  temp_v4 = FUN_002a4894(temp_v2);
+  temp_v4 = listCursorGetRowIfUnblocked(temp_v2);
   temp_v3 = temp_v1 + (temp_v4 + temp_v3) * 2;
   temp_v4 = FUN_002861fc(*(unsigned short *)(temp_v3 + 0x90a8));
   if (*(char *)(temp_v1 + 0x252) == '\0' || temp_v4 == 0) {
@@ -114,7 +114,7 @@ void FUN_002c8940(int param_1,int param_2)
     efctSetSpeed();
     return;
   }
-  temp_v8 = FUN_002a4894(temp_v2);
+  temp_v8 = listCursorGetRowIfUnblocked(temp_v2);
   temp_v8 = asdTMTexTableEntryAt(0x1a,temp_v8 + 0x3f);
   efctSetSpeed();
   texDrawTableEntryAtStoredOrigin(2,0x1a,0x38,*(short *)(temp_v8 + 8) + param_1,*(short *)(temp_v8 + 10) + param_2,0x79);
@@ -122,7 +122,7 @@ void FUN_002c8940(int param_1,int param_2)
   texDrawTableEntryAtStoredOrigin(2,0x1a,0x3a,*(short *)(temp_v8 + 8) + param_1,*(short *)(temp_v8 + 10) + param_2,0x79);
   efctSetSpeed();
   texDrawTableEntryAtStoredOrigin(2,0x1a,0x3b,*(short *)(temp_v8 + 8) + param_1,*(short *)(temp_v8 + 10) + param_2,0x7e);
-  temp_v5 = FUN_002a4894(temp_v2);
+  temp_v5 = listCursorGetRowIfUnblocked(temp_v2);
   temp_v5 = recordGetModeForId((int)*(short *)(temp_v1 + temp_v5 * 2 + 0x438));
   temp_v6 = *(short *)(temp_v8 + 10) + param_2;
   temp_v7 = *(short *)(temp_v8 + 8) + param_1;

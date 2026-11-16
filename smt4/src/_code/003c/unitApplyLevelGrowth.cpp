@@ -39,7 +39,7 @@ struct LevelGrowthUnit {
 
 extern "C" u32 FUN_003c219c(LevelGrowthStats *stats, LevelGrowthParameters *parameters, u32 flags);
 extern "C" void FUN_0026e630(u32 value);
-extern "C" void FUN_00299370(u32 value);
+extern "C" void playerRecalcStatsFromEquipment(u32 value);
 
 /* Apply up to the requested levels, optionally granting five growth points per level. */
 extern "C" void unitApplyLevelGrowth(LevelGrowthUnit *unit, s32 levels, bool growStats)
@@ -63,7 +63,7 @@ extern "C" void unitApplyLevelGrowth(LevelGrowthUnit *unit, s32 levels, bool gro
         ++unit->level;
         FUN_0026e630(10);
     }
-    FUN_00299370(0);
+    playerRecalcStatsFromEquipment(0);
     unit->hp = unit->base.maxHp;
     unit->mp = unit->base.maxMp;
     unit->pending = 0;

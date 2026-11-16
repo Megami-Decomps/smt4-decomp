@@ -74,7 +74,7 @@ void AocMenu::runLicenseFlow()
     AocLicenseMain *aocMain = g_aocMain;
     switch (menu->step) {
     case 0:
-        if (FUN_002e19f8() == 0) {
+        if (buttonHelpStateIsNot3() == 0) {
             return;
         }
         if ((menu->flags & 0x200) == 0) {

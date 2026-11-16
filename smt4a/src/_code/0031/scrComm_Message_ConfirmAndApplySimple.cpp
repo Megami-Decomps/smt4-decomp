@@ -19,14 +19,14 @@ void optionsClearFlag1();
 u32 scrComm_Message_ConfirmAndApplySimple()
 {
     if (scrGetCommandFrame() == 0) {
-        if (!FUN_004186a4())
+        if (!rosterHasLeader())
             return 1;
         scrWorkSetValue(0, 0);
         scrWorkSetValue(1, 0);
     }
     s32 message = dataTableValueOrZero(30);
     if (scrWorkGetValue(0) == 0) {
-        u32 member = FUN_004186e0();
+        u32 member = rosterGetLeaderId();
         FUN_003dea6c(member, 0, 1);
         messageSetScriptDisplayMode();
         u32 frame = scrWorkGetValue(1);

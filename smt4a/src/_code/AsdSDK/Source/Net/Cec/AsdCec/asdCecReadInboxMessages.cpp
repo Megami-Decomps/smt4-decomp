@@ -12,7 +12,7 @@ void FUN_0042f318(AsdCecMessageBox *box, s32 unk);
 void FUN_0042e388(AsdCecMessageBox *box, s32 kind, AsdCecMessageId *id);
 void _ZN12CecMessageIdC1Ev(AsdCecMessageId *id);
 void asdCecMessageGetBody(AsdCecMessage *message, void **body, u32 *bodySize);
-void FUN_002e59f8(const void *src, void *dst, u32 size);
+void memcpySrcFirst(const void *src, void *dst, u32 size);
 u32 asdCecMessageBoxGetMessageSize(AsdCecMessageBox *box, s32 kind, u32 index);
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void asdMemFree(void *block);
@@ -63,7 +63,7 @@ s32 asdCecReadInboxMessages(u32 first, s32 count, u8 *out, s32 deleteRead)
             }
         } else {
             asdCecMessageGetBody(&message, &body, &bodySize);
-            FUN_002e59f8(body, out + read * bodySize, bodySize);
+            memcpySrcFirst(body, out + read * bodySize, bodySize);
             read++;
         }
         asdMemFree(buffer);

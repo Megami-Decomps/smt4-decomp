@@ -81,7 +81,7 @@ void AocMenu::runScriptMenu()
         aocMenuSetButtonHelp(process, -1, 0);
         return;
     case 1:
-        if (FUN_002e19f8() != 0 && (process->flags & 0x200) != 0) {
+        if (buttonHelpStateIsNot3() != 0 && (process->flags & 0x200) != 0) {
             scrRunOpcodesStub(process->script);
             AocMenuObject *object = windowCreateStatusOperation((AocMenuObject *)&process->unk20C, 3);
             process->active = object;

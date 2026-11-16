@@ -25,7 +25,7 @@ int sysPlaySe(...);
 int dataTable01GetRecordWithAocOverride(...);
 int ptrListRemoveClearOwner(...);
 int FUN_001fc348(...);
-int FUN_0022677c(...);
+int titleRestartSlotState3(...);
 int scrScriptProcessStartEntry(...);
 int libc_strcpy(...);
 int uniteCameraDestroy(void);
@@ -43,11 +43,11 @@ int uniteCameraInitialize(...);
 int FUN_002c8894(void);
 int sysPlayVoice(...);
 int soundChannelRequestIfEnabled(int, int, int);
-int FUN_003d54f8(...);
+int titleSetSlotValueState2(...);
 int _ZN9Obj557af8C1EPK21AsdAnimCameraResource(void);
 int modelPlayClip(...);
 int resourceOwnerLoadFileSync(...);
-int FUN_0040aad4(...);
+int moriModelContentLoadBody(...);
 int FUN_0040ab7c(...);
 int handleRegistryRegisterObject(...);
 int asdAnimGetTrackLastFrame(unsigned int, int);
@@ -95,7 +95,7 @@ extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: FUN_001fc348. */
 extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: FUN_0022677c. */
+/* Supplied declaration required: titleRestartSlotState3. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: uniteCameraInitialize. */
 /* Supplied declaration required: FUN_002c8894. */
@@ -111,13 +111,13 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_003d2a00. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: soundChannelStopAll. */
-/* Supplied declaration required: FUN_003d54f8. */
+/* Supplied declaration required: titleSetSlotValueState2. */
 /* Supplied declaration required: _ZN9Obj557af8C1EPK21AsdAnimCameraResource. */
 /* Supplied declaration required: modelPlayClip. */
 /* Supplied declaration required: workOwnerRelease. */
 /* Supplied declaration required: resourceReleaseReference. */
 /* Supplied declaration required: resourceOwnerLoadFileSync. */
-/* Supplied declaration required: FUN_0040aad4. */
+/* Supplied declaration required: moriModelContentLoadBody. */
 /* Supplied declaration required: FUN_0040ab7c. */
 extern unsigned int modelListInit(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
@@ -171,8 +171,8 @@ unsigned int FUN_003cf02c(void)
   case 1:
     temp_v6 = FUN_0026c3a0();
     if (temp_v6 == 0) break;
-    FUN_003d54f8(0,10);
-    FUN_003d54f8(1,10);
+    titleSetSlotValueState2(0,10);
+    titleSetSlotValueState2(1,10);
     soundChannelRequestIfEnabled(0x1000052,10,0x3c);
     temp_v0 = *(short *)(temp_v2 + 0x1e);
     *(unsigned int *)(temp_v2 + 0x24) = 0xffffffff;
@@ -330,7 +330,7 @@ unsigned int FUN_003cf02c(void)
         if (*(char *)(temp_v2 + 0x20) != '\0') {
           resourceOwnerLoadFileSync();
           FUN_0040ab7c(*(unsigned int *)(temp_v2 + 0x94),0);
-          FUN_0040aad4(*(unsigned int *)(temp_v2 + 0x94),0);
+          moriModelContentLoadBody(*(unsigned int *)(temp_v2 + 0x94),0);
           asdLoadFileWithSize(&LAB_003cf7b8,temp_v17,1);
           temp_v6 = 0x48;
           asdMemoryAllocTraced(0x48,&LAB_003cf760,0x309);
@@ -338,7 +338,7 @@ unsigned int FUN_003cf02c(void)
         else {
           resourceOwnerLoadFileSync();
           FUN_0040ab7c(*(unsigned int *)(temp_v2 + 0x94),0);
-          FUN_0040aad4(*(unsigned int *)(temp_v2 + 0x94),0);
+          moriModelContentLoadBody(*(unsigned int *)(temp_v2 + 0x94),0);
           asdLoadFileWithSize(&LAB_003cf7f8,temp_v17,1);
           temp_v6 = 0x48;
           asdMemoryAllocTraced(0x48,&LAB_003cf760,0x310);
@@ -351,7 +351,7 @@ unsigned int FUN_003cf02c(void)
       if (*(short *)(temp_v2 + 0x1e) == 3) {
         resourceOwnerLoadFileSync(*(unsigned int *)(temp_v2 + 0x94),&LAB_003cf814);
         FUN_0040ab7c(*(unsigned int *)(temp_v2 + 0x94),0);
-        FUN_0040aad4(*(unsigned int *)(temp_v2 + 0x94),0);
+        moriModelContentLoadBody(*(unsigned int *)(temp_v2 + 0x94),0);
         asdLoadFileWithSize(&LAB_003cf830,temp_v17,1);
         temp_v6 = 0x48;
         asdMemoryAllocTraced(0x48,&LAB_003cf760,0x319);
@@ -363,7 +363,7 @@ unsigned int FUN_003cf02c(void)
       if (*(short *)(temp_v2 + 0x1e) == 4) {
         resourceOwnerLoadFileSync(*(unsigned int *)(temp_v2 + 0x94),&LAB_003cf850);
         FUN_0040ab7c(*(unsigned int *)(temp_v2 + 0x94),0);
-        FUN_0040aad4(*(unsigned int *)(temp_v2 + 0x94),0);
+        moriModelContentLoadBody(*(unsigned int *)(temp_v2 + 0x94),0);
         asdLoadFileWithSize(&LAB_003cf86c,temp_v17,1);
         temp_v6 = 0x48;
         asdMemoryAllocTraced(0x48,&LAB_003cf760,0x321);
@@ -541,10 +541,10 @@ LAB_003cf9bc:
       }
     }
     if (*(int *)(temp_v2 + 8) == temp_v10) {
-      FUN_0022677c(0,0xffffffff);
+      titleRestartSlotState3(0,0xffffffff);
     }
     if (*(int *)(temp_v2 + 8) == temp_v10 + 5) {
-      FUN_003d54f8(0,0x1e);
+      titleSetSlotValueState2(0,0x1e);
     }
     if (*(char *)(temp_v2 + 0x20) != '\0') {
       temp_v0 = *(short *)(DAT_0057f2c4 + 0x1e);

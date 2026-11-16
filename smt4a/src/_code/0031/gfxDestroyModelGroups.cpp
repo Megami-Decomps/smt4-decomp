@@ -1,14 +1,14 @@
 #include "gfx/ModelGroups.h"
 
 extern "C" {
-extern ModelGroups* DAT_00581270;
+extern ModelGroups* g_modelGroups;
 void asdMdlManagerDestroy(AsdMdlObject* model);
 
 // Tear down both model groups in reverse order, then clear all entry activation bits.
 void gfxDestroyModelGroups(void)
 {
     for (s32 i = 8; i >= 0; --i) {
-        ModelGroupSlot* slot = &DAT_00581270->primary[i];
+        ModelGroupSlot* slot = &g_modelGroups->primary[i];
         if (slot->active != 0) {
             slot->active = 0;
             if (slot->model != NULL) {
@@ -18,7 +18,7 @@ void gfxDestroyModelGroups(void)
         }
     }
     for (s32 i = 2; i >= 0; --i) {
-        ModelGroupSlot* slot = &DAT_00581270->secondary[i];
+        ModelGroupSlot* slot = &g_modelGroups->secondary[i];
         if (slot->active != 0) {
             slot->active = 0;
             if (slot->model != NULL) {
@@ -27,7 +27,7 @@ void gfxDestroyModelGroups(void)
             }
         }
     }
-    ModelGroups* groups = DAT_00581270;
+    ModelGroups* groups = g_modelGroups;
     for (s32 i = 0; i < 64; ++i) {
         groups->entries.records[i].active = 0;
     }

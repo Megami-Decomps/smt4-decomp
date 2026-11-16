@@ -6,9 +6,9 @@ extern "C" {
 void FUN_002c41d0(int set)
 {
     if (set != 0) {
-        DAT_004650a0.unk08 = DAT_004650a0.unk08 | 1;
+        g_padInputState.unk08 = g_padInputState.unk08 | 1;
     } else {
-        DAT_004650a0.unk08 = DAT_004650a0.unk08 & 0xfffffffe;
+        g_padInputState.unk08 = g_padInputState.unk08 & 0xfffffffe;
     }
 }
 

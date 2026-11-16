@@ -13,7 +13,7 @@ int devilCreateRaceEffect(...);
 int gameSavedFlagSet(...);
 int messageMainFinishWindow(void);
 int FUN_0029bed8(...);
-int FUN_002b827c(...);
+int buttonHelpSetContext(...);
 int statusDownOpenList(...);
 int FUN_002f6728(void);
 int FUN_0030aacc(void);
@@ -70,7 +70,7 @@ int infoWinStartTimer(...);
 int gameMoneyAdd(...);
 int FUN_00295cec(...);
 int soundSlotStopById(...);
-int FUN_00295d7c(...);
+int slotUnitIsInActiveParty(...);
 int uiStoreTextureEntryCenter(...);
 int FUN_002b7bca(...);
 int eventQueueAddUnique(...);
@@ -106,7 +106,7 @@ int uiSpriteSetImageKeyframe(...);
 int pairSetHalves(int, int, int);
 int gameGetPlayerData(void);
 int pairSetFirstResetSecond(...);
-int FUN_002b8ee0(...);
+int uiSlidingSpriteAdvance(...);
 int asdTMTexTableEntryAt(...);
 int uiSpriteAdvanceAnimation(...);
 int mapMainCallIfActive2(void);
@@ -165,11 +165,11 @@ extern int FUN_0029563c(void);
 /* Supplied declaration required: infoWinStartTimer. */
 extern int dialogIsActive(void);
 /* Supplied declaration required: gameMoneyAdd. */
-extern int FUN_00295c60(unsigned short, unsigned char);
+extern int devilCalcLevelScaledCost(unsigned short, unsigned char);
 /* Supplied declaration required: FUN_00295cec. */
 extern int playerPadTestBit(unsigned int);
 /* Supplied declaration required: soundSlotStopById. */
-/* Supplied declaration required: FUN_00295d7c. */
+/* Supplied declaration required: slotUnitIsInActiveParty. */
 extern unsigned int devilCalculateRankCost(unsigned short, int, int);
 /* Supplied declaration required: uiStoreTextureEntryCenter. */
 extern int dataTable9EntryOrZero(int);
@@ -221,11 +221,11 @@ extern int sys43e188GetState(void);
 /* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: FUN_002b7bca. */
-/* Supplied declaration required: FUN_002b827c. */
+/* Supplied declaration required: buttonHelpSetContext. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: eventQueueAddUnique. */
-/* Supplied declaration required: FUN_002b8ee0. */
+/* Supplied declaration required: uiSlidingSpriteAdvance. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
@@ -447,7 +447,7 @@ LAB_0018c354:
     temp_v4 = 0;
     do {
       if (temp_v4 < *(int *)(temp_v2 + 0x3544)) {
-        FUN_002b8ee0(temp_v2 + temp_v4 * 0x8c + 0xac,0);
+        uiSlidingSpriteAdvance(temp_v2 + temp_v4 * 0x8c + 0xac,0);
       }
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 6);
@@ -706,7 +706,7 @@ LAB_0018c354:
                     *temp_v36 = 1;
                   }
                   *temp_v33 = 1;
-                  temp_v17 = FUN_00295d7c(temp_v18);
+                  temp_v17 = slotUnitIsInActiveParty(temp_v18);
                   if (temp_v17 == 0) {
                     temp_v18 = 0;
                   }
@@ -731,7 +731,7 @@ LAB_0018c354:
                       if (-1 < *(char *)(temp_v17 + temp_v5 + 0x90f0)) {
                         temp_v17 = gameGetSlotTable();
                         gameGetUnitRecord((int)*(char *)(temp_v17 + temp_v5 + 0x90f0));
-                        temp_v17 = FUN_00295d7c();
+                        temp_v17 = slotUnitIsInActiveParty();
                         if (temp_v17 == 0) {
                           temp_v17 = gameGetSlotTable();
                           if (*(char *)(temp_v17 + temp_v5 + 0x90f0) == temp_v8) break;
@@ -855,7 +855,7 @@ LAB_0018d058:
               if (temp_v6 == 0) {
                 if ((*temp_v33 != '\0') || (*temp_v34 != '\0')) {
                   *(int *)(temp_v17 + 0x30) = *(int *)(temp_v17 + 0x30) - *temp_v37;
-                  temp_v5 = FUN_00295c60(*(unsigned short *)(temp_v17 + 0x46),*(unsigned char *)(temp_v17 + 0x48)
+                  temp_v5 = devilCalcLevelScaledCost(*(unsigned short *)(temp_v17 + 0x46),*(unsigned char *)(temp_v17 + 0x48)
                                       );
                   *(int *)(temp_v17 + 0x30) = *(int *)(temp_v17 + 0x30) + temp_v5;
                   temp_v6 = devilLevelUpsAffordable(*(unsigned short *)(temp_v17 + 0x46),*(unsigned char *)(temp_v17 + 0x48)
@@ -1861,7 +1861,7 @@ joined_r0x0018edf0:
       timerStart(temp_v2 + 0x598,0);
       *piVar17 = *piVar17 + 1;
     case 1:
-      FUN_002b8ee0(temp_v2 + 0x598,0);
+      uiSlidingSpriteAdvance(temp_v2 + 0x598,0);
       if ((*(char *)(temp_v2 + 0x622) != '\0') &&
          (temp_v4 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x3568),1), temp_v4 != 0)) {
         *piVar17 = *piVar17 + 1;
@@ -1930,7 +1930,7 @@ joined_r0x0018edf0:
     temp_v4 = scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x3568));
     if (temp_v4 == 2) {
       FUN_00295214(0);
-      FUN_002b827c(3);
+      buttonHelpSetContext(3);
       *(unsigned int *)(temp_v2 + 0x352c) = 0x14;
     }
   }

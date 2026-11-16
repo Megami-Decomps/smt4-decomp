@@ -36,8 +36,8 @@ u32 scrCommGetPartyEntryValue(void)
     if (obj->unk04 == 1) {
         index = obj->unk32C;
     } else {
-        index = FUN_002a4878(obj->block260);
-        index = index + FUN_002a4894(reinterpret_cast<const Object *>(obj->block260)) * 4;
+        index = listCursorGetRowOfChildIfUnblocked(obj->block260);
+        index = index + listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(obj->block260)) * 4;
     }
     entry = partyGetSlot(obj->ids[index] & 0xFFFF);
     scrSetResult(dataTable10FindValue(entry->unk12C));

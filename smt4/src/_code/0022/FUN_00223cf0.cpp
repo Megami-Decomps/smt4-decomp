@@ -29,7 +29,7 @@ void FUN_00223cf0(void)
     quest->panel.detailMode = 0;
     if (quest->state != 13) {
         uiQuestLoadResources();
-        FUN_0028fe0c(quest->list[resourceRunOperationIfUnblocked(quest->cursor.data) + FUN_0029efa8(quest->cursor.data)], 1);
+        FUN_0028fe0c(quest->list[resourceRunOperationIfUnblocked(quest->cursor.data) + listCursorGetRowIfUnblocked(quest->cursor.data)], 1);
         timerStart(quest->mainSprite, 0, 0);
         uiQuestChangeState(1);
         return;

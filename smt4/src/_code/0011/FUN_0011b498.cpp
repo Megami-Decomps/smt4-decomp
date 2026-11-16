@@ -19,7 +19,7 @@ typedef struct {
 u32 asdGxGetCommandCursor(void);
 void nn_gr_CTR_Shader_SetupBinary(NativeShaderPrefix *shader, const void *binary, s32 size, s32 index);
 u32 *FUN_002b5cf0(NativeShaderPrefix *shader, u32 *cursor);
-void FUN_002af390(u32 begin, u32 end);
+void asdModelAdvanceCommandCursorBetween(u32 begin, u32 end);
 void FUN_00126d14(ModelShader *owner);
 
 extern const char DAT_00410688[]; /* "uMatrix" */
@@ -44,7 +44,7 @@ s32 FUN_0011b498(ModelShader *owner, const void *binary, u32 unused, s32 size)
     u32 *cursor = reinterpret_cast<u32 *>(asdGxGetCommandCursor());
     begin = reinterpret_cast<u32>(cursor);
     end = FUN_002b5cf0(&owner->shader, cursor);
-    FUN_002af390(begin, reinterpret_cast<u32>(end));
+    asdModelAdvanceCommandCursorBetween(begin, reinterpret_cast<u32>(end));
     FUN_00126d14(owner);
     return 1;
 }

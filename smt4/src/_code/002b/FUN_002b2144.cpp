@@ -3,14 +3,14 @@
 #include "shard/W6_W6Match6_PhaseTrig.h"
 
 extern "C" {
-extern const PhaseTrigEntry DAT_00407ed0[256];
+extern const PhaseTrigEntry g_sinCosTable[256];
 
 /* Builds Rz * Ry * Rx, with a full turn represented by 256 phase units. */
 void FUN_002b2144(Matrix44 *matrix, f32 xAngle, f32 yAngle, f32 zAngle)
 {
-    PhaseSinCos x = samplePhase(DAT_00407ed0, xAngle);
-    PhaseSinCos y = samplePhase(DAT_00407ed0, yAngle);
-    PhaseSinCos z = samplePhase(DAT_00407ed0, zAngle);
+    PhaseSinCos x = samplePhase(g_sinCosTable, xAngle);
+    PhaseSinCos y = samplePhase(g_sinCosTable, yAngle);
+    PhaseSinCos z = samplePhase(g_sinCosTable, zAngle);
     matrix->values[0] = z.cosine * y.cosine;
     matrix->values[1] = x.sine * z.cosine * y.sine - x.cosine * z.sine;
     matrix->values[2] = x.sine * z.sine + x.cosine * z.cosine * y.sine;

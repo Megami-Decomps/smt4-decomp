@@ -5,7 +5,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 extern "C" {
 BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, u32 actor);
-void FUN_003e8bb0(BattleActionEvaluation *result, BtlMainStateA *state, BtlCombatantEntryA *actor);
+void btlEntryBuildSummary(BattleActionEvaluation *result, BtlMainStateA *state, BtlCombatantEntryA *actor);
 u32 FUN_004c8340(u32 actor, u32 target, u32 skill, s32 kind, s32 flags);
 void kindIdStore(u32 skill, u32 *kind);
 s32 FUN_004c0f74(BtlCombatantEntryA *actor, u32 kind);
@@ -18,7 +18,7 @@ f32 FUN_004c1598(u32 actorId, u32 targetId)
     BtlMainStateA *state = btlGetMainState();
     BtlCombatantEntryA *actor = btlMainFindEntryByListedId(btlGetMainState(), actorId);
     BattleActionEvaluation evaluation;
-    FUN_003e8bb0(&evaluation, btlGetMainState(), actor);
+    btlEntryBuildSummary(&evaluation, btlGetMainState(), actor);
     u16 skill = evaluation.skill;
     if ((u32)(evaluation.kind - 3) <= 7)
         return multiplier;

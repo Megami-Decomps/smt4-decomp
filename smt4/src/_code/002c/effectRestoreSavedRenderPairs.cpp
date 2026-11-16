@@ -8,7 +8,7 @@ typedef char CheckRestoreCompletionOffset[offsetof(EffRenderState, completion) =
 typedef char CheckRestoreStateSize[sizeof(EffRenderState) == 0x1190 ? 1 : -1];
 
 extern "C" s32 gxIsStereoscopic3dEnabled(EffRenderState *state, EffRenderRestoreSource *source);
-extern "C" void FUN_002bbbc8(EffRenderState *state, const void *second, const void *first, void *snapshot);
+extern "C" void cameraComposeMatrices(EffRenderState *state, const void *second, const void *first, void *snapshot);
 extern "C" void gpuWriteVertexUniformMatrix(u32 resource, u32 *completion);
 
 // Select the appropriate saved render pair and prepare the effect's restore state.
@@ -33,7 +33,7 @@ extern "C" void effectRestoreSavedRenderPairs(EffRenderState *state, EffRenderRe
         second = source->primary.second;
         first = source->primary.first;
     }
-    FUN_002bbbc8(state, second, first, state->restore.snapshot);
+    cameraComposeMatrices(state, second, first, state->restore.snapshot);
     gpuWriteVertexUniformMatrix(state->restore.resource, &state->completion);
     state->restoreSource = source;
     state->mode = 5;

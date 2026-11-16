@@ -6,7 +6,7 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_0014e314(...);
+int gxSubmitDrawZeroExtraParams(...);
 int renderCtxResetColorScale(...);
 int renderCtxSelectTexture(...);
 int skinObjectUpdateMatrices(...);
@@ -25,7 +25,7 @@ int vec2GetYInt(...);
 int efctSetSpeed(void);
 int gxResetColorQuadToWhite(void);
 int partyPanelDrawHighlight(...);
-int FUN_002a4878(...);
+int listCursorGetRowOfChildIfUnblocked(...);
 int FUN_003f3fe4(...);
 int FUN_003f4cc0(...);
 
@@ -50,7 +50,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_0014e314. */
+/* Supplied declaration required: gxSubmitDrawZeroExtraParams. */
 /* Supplied declaration required: renderCtxSelectDisplayAreaForStereoMode. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: vec2GetXInt. */
@@ -70,8 +70,8 @@ extern int gameGetSlotTable(void);
 extern int FUN_002618f8(void);
 extern int recordGetModeForId(int);
 /* Supplied declaration required: partyPanelDrawHighlight. */
-/* Supplied declaration required: FUN_002a4878. */
-extern int FUN_002a4894(int);
+/* Supplied declaration required: listCursorGetRowOfChildIfUnblocked. */
+extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: FUN_002ace4c. */
 extern int valueIs1(unsigned int);
 /* Supplied declaration required: FUN_003f3fe4. */
@@ -200,7 +200,7 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
                 temp_v3 = temp_v3 + 1;
               } while (temp_v3 < 4);
             }
-            temp_v3 = FUN_002a4878(temp_v2 + 0xc24);
+            temp_v3 = listCursorGetRowOfChildIfUnblocked(temp_v2 + 0xc24);
             partyPanelDrawHighlight(temp_v3,temp_v5,temp_v6,0x79,1);
             break;
           case 6:
@@ -217,8 +217,8 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
                 temp_v3 = temp_v3 + 1;
               } while (temp_v3 < 4);
             }
-            temp_v3 = FUN_002a4878();
-            temp_v4 = FUN_002a4894(temp_v2 + 0xcec);
+            temp_v3 = listCursorGetRowOfChildIfUnblocked();
+            temp_v4 = listCursorGetRowIfUnblocked(temp_v2 + 0xcec);
             temp_v3 = temp_v3 + temp_v4 * 4 + 4;
             partyPanelDrawHighlight(temp_v3,temp_v5,temp_v6,0x79,1);
           }
@@ -311,8 +311,8 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
           temp_v3 = temp_v3 + 1;
         } while (temp_v3 < 4);
       }
-      temp_v3 = FUN_002a4878();
-      temp_v4 = FUN_002a4894(temp_v2 + 0xdb4);
+      temp_v3 = listCursorGetRowOfChildIfUnblocked();
+      temp_v4 = listCursorGetRowIfUnblocked(temp_v2 + 0xdb4);
       partyPanelDrawHighlight(temp_v3 + temp_v4 * 4,temp_v5,temp_v6,0x79,1);
     }
   }
@@ -696,7 +696,7 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
               temp_v3 = temp_v3 + 1;
             } while (temp_v3 < 4);
           }
-          temp_v4 = FUN_002a4878(temp_v2 + 0xc24);
+          temp_v4 = listCursorGetRowOfChildIfUnblocked(temp_v2 + 0xc24);
           FUN_002ace4c(temp_v4,0,0,0xab,1);
           break;
         case 6:
@@ -713,8 +713,8 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
               temp_v3 = temp_v3 + 1;
             } while (temp_v3 < 4);
           }
-          temp_v3 = FUN_002a4878();
-          temp_v4 = FUN_002a4894(temp_v2 + 0xc88);
+          temp_v3 = listCursorGetRowOfChildIfUnblocked();
+          temp_v4 = listCursorGetRowIfUnblocked(temp_v2 + 0xc88);
           temp_v4 = temp_v3 + temp_v4 * 4 + 4;
           FUN_002ace4c(temp_v4,0,0,0xab,1);
         }
@@ -755,8 +755,8 @@ LAB_002e87e0:
             temp_v3 = temp_v3 + 1;
           } while (temp_v3 < 4);
         }
-        temp_v4 = FUN_002a4878(temp_v2 + 0xd50);
-        temp_v3 = FUN_002a4894(temp_v2 + 0xd50);
+        temp_v4 = listCursorGetRowOfChildIfUnblocked(temp_v2 + 0xd50);
+        temp_v3 = listCursorGetRowIfUnblocked(temp_v2 + 0xd50);
         temp_v4 = temp_v4 + temp_v3 * 4;
         FUN_002ace4c(temp_v4,0,0,0xab,1);
       }
@@ -782,7 +782,7 @@ LAB_002e90ec:
     }
     renderCtxSelectTexture(g_renderCtx,0);
     temp_v5 = VectorFloatToUnsigned(temp_v19 * 255.0f,3);
-    FUN_0014e314(temp_v5,temp_v5);
+    gxSubmitDrawZeroExtraParams(temp_v5,temp_v5);
     temp_v3 = g_renderCtx;
     if (*(int *)(temp_v2 + 0x18) >= 9) {
       temp_v4 = packNibblesAndByte(6,1,0);
