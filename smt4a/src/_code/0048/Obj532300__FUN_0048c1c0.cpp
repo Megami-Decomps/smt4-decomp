@@ -69,8 +69,8 @@ void _ZN9Obj53230012FUN_0048c1c0Ev(NaviCategorySelectionWork *work)
         ButtonHelpDisplayUnit *cursor = &((NaviCategoryTransitionView *)work)->cursor;
         if (FUN_00163aa4(cursor, 1.0f) && FUN_002e19f8()) {
             work->selection = work->selectedIcon;
-            work->refreshFirst = 1;
-            work->refreshSecond = 1;
+            work->refresh[0] = 1;
+            work->refresh[1] = 1;
             work->discovered = 1;
             work->unk07B93[0] = 1;
             g_gameState.controllerFlags.primary = 0;

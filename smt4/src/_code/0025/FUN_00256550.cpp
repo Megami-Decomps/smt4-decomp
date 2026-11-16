@@ -35,7 +35,7 @@ s32 FUN_00256550(u32 index)
     char path[36];
     textFormatBuffer(path, "map/all/sym%03d.bam", DAT_00448ca8[index].modelId);
     entry->model = asdMdlManagerCreateLoaded(path, 0x1C0);
-    FUN_002a0428(entry->model, 1);
+    lightOwnerRegister(entry->model, 1);
     AsdMdlObject *model = entry->model;
     model->flags |= 2;
     reinterpret_cast<ModelNodeView *>(model->node)->state->enabled = 0;

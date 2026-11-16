@@ -1,4 +1,3 @@
-/* NON_MATCHING: only quotient argument moves differ (retail moves count into r0 before columns into r1); navigation setup and final stores agree. */
 #include "ui/GridNavigation.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
@@ -20,8 +19,8 @@ void FUN_0029f848(GridNavigation *work, s32 count, s32 visibleRows, s32 columns,
         visibleRows = count;
     work->count = count;
     work->empty = 0;
-    s32 rows = count / columns;
-    if (count % columns > 0)
+    s32 rows = work->count / columns;
+    if (work->count % columns > 0)
         ++rows;
     if (wrap != 0) {
         rowWidgetInit(&work->rows, visibleRows, rows);

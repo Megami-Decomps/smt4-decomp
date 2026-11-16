@@ -1,12 +1,12 @@
-/* NON_MATCHING: kind-load predication and release-vtable load scheduling differ. */
 #include "map/ControllerPool.h"
 
+/* Deletes the controller in the slot and counts it out of the pool. */
 static __inline void controllerPoolReleaseSlot(ControllerPool *pool, s32 index)
 {
     Controller *controller = pool->slots[index];
     if (controller != NULL) {
         s32 kind = controller->lifecycle.kind;
-        controller->vtable->lifetime.release(controller);
+        controllerDelete(controller);
         pool->slots[index] = NULL;
         if (kind == 0)
             --pool->firstKindCount;
@@ -15,7 +15,7 @@ static __inline void controllerPoolReleaseSlot(ControllerPool *pool, s32 index)
 }
 
 // Update active controllers and release every controller that has finished.
-extern "C" void FUN_00482f20(ControllerPool *pool)
+extern "C" void controllerPoolUpdate(ControllerPool *pool)
 {
     for (s32 i = 0; i < 32; ++i) {
         Controller *controller = pool->slots[i];

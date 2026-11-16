@@ -72,7 +72,7 @@ u32 FUN_002d400c(void)
             g_lmapScene->modelSwap.model = asdMdlManagerCreateFromSource(g_gameState.sceneModels.stageModels[3].source, g_gameState.sceneModels.stageModels[3].argument, 0x1c0);
             break;
         }
-        FUN_002a0428(g_lmapScene->modelSwap.model, 1);
+        lightOwnerRegister(g_lmapScene->modelSwap.model, 1);
         {
             AsdMdlObject *model = g_lmapScene->modelSwap.model;
             model->flags |= 2;

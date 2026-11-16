@@ -1,4 +1,4 @@
-/* NON_MATCHING: timeout-description predicate lowering, descriptor stores and retained worker/result registers differ. */
+/* NON_MATCHING: the zero-timeout poll and its bool test now match; r4/r6 are swapped (queue vs wait result) and the thread descriptor/argument stores are scheduled differently. */
 #include "sys/FileWorkerQueue.h"
 #include "nn/Result.h"
 #include "code/Code002b.h"
@@ -15,11 +15,13 @@ void fileWorkerInvokeEntry(ThreadEntryPoint entry, void *argument);
 void FUN_002a2e08(FileQueue *queue)
 {
     FileQueueWorker *thread = &queue->thread;
+    bool running = false;
     if (thread->handle != 0) {
         s32 result = handleWait(thread->handle, 0);
-        if (!nnResultIsNotTimeout(result))
-            return;
+        running = nnResultIsNotTimeout(result) != 1;
     }
+    if (running)
+        return;
     kernelThreadJoinAndClose(thread);
     FileQueue *argument = queue;
     ThreadArgumentDescriptor descriptor;

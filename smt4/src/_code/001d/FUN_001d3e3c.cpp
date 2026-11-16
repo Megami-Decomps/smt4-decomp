@@ -144,7 +144,7 @@ int mapIfClose(void);
 int FUN_00280ccc(void);
 int naviRegisterTransitionsAndRequest(...);
 int textEncodeFontSlot(...);
-int FUN_002a0428(...);
+int lightOwnerRegister(...);
 int FUN_002a04f0(...);
 int FUN_002bd158(void);
 int FUN_002be650(...);
@@ -491,7 +491,7 @@ extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int)
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: slotSetRequest. */
-/* Supplied declaration required: FUN_002a0428. */
+/* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: FUN_002a04f0. */
 /* Supplied declaration required: FUN_002a09b4. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
@@ -829,7 +829,7 @@ unsigned int FUN_001d3e3c(void)
         do {
           piVar18 = (int *)(puVar17 + temp_v6 + 0x284);
           if (*piVar18 != 0) {
-            FUN_002a0428(*piVar18,1);
+            lightOwnerRegister(*piVar18,1);
             FUN_002e1230(*piVar18,1);
             *(unsigned char *)(*(int *)(*(int *)(*piVar18 + 8) + 0x2c) + 500) = 0;
           }
@@ -2612,7 +2612,7 @@ LAB_001d6bd0:
       do {
         piVar18 = (int *)(puVar17 + temp_v6 + 0x284);
         if (*piVar18 != 0) {
-          FUN_002a0428(*piVar18,1);
+          lightOwnerRegister(*piVar18,1);
           FUN_002e1230(*piVar18,1);
           *(unsigned char *)(*(int *)(*(int *)(*piVar18 + 8) + 0x2c) + 500) = 0;
         }
@@ -2647,11 +2647,11 @@ LAB_001d6bd0:
     puVar8 = &LAB_001d486c;
     asdMdlManagerCreateLoaded(&LAB_001d486c,0x1c0);
     puVar7[0x2f] = (unsigned int)puVar8;
-    FUN_002a0428();
+    lightOwnerRegister();
     puVar8 = &LAB_001d4884;
     asdMdlManagerCreateLoaded(&LAB_001d4884,0x1c0);
     puVar7[0x36] = (unsigned int)puVar8;
-    FUN_002a0428();
+    lightOwnerRegister();
     FUN_00297a00();
     puVar17 = g_lmapMainState;
     temp_v6 = gameFlagIsSet(0x261);
@@ -2937,7 +2937,7 @@ LAB_001d6bd0:
       do {
         piVar18 = (int *)(puVar17 + temp_v6 + 0x284);
         if (*piVar18 != 0) {
-          FUN_002a0428(*piVar18,1);
+          lightOwnerRegister(*piVar18,1);
           FUN_002e1230(*piVar18,1);
           *(unsigned char *)(*(int *)(*(int *)(*piVar18 + 8) + 0x2c) + 500) = 0;
         }
@@ -2965,11 +2965,11 @@ LAB_001d6bd0:
     puVar8 = &LAB_001d486c;
     asdMdlManagerCreateLoaded(&LAB_001d486c,0x1c0);
     puVar7[0x2f] = (unsigned int)puVar8;
-    FUN_002a0428();
+    lightOwnerRegister();
     puVar8 = &LAB_001d4884;
     asdMdlManagerCreateLoaded(&LAB_001d4884,0x1c0);
     puVar7[0x36] = (unsigned int)puVar8;
-    FUN_002a0428();
+    lightOwnerRegister();
     objSetBaseAndValue(puVar7 + 0x3b,puVar7[0x10] - 100,puVar7[0x12]);
     lmapCreateEnemyMarkerModels((MapMarkerModels*)(puVar7 + 0x3b));
     if (g_lmapMainState[0x10] != 100) {
@@ -3480,11 +3480,11 @@ LAB_001d4774:
   puVar8 = &LAB_001d486c;
   asdMdlManagerCreateLoaded(&LAB_001d486c,0x1c0);
   puVar7[0x2f] = (unsigned int)puVar8;
-  FUN_002a0428();
+  lightOwnerRegister();
   puVar8 = &LAB_001d4884;
   asdMdlManagerCreateLoaded(&LAB_001d4884,0x1c0);
   puVar7[0x36] = (unsigned int)puVar8;
-  FUN_002a0428();
+  lightOwnerRegister();
   temp_v7 = 0;
   puVar7[0x14] = 0x43340000;
   temp_v10 = 0x3f800000;

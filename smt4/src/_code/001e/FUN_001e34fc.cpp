@@ -9,9 +9,9 @@ int FUN_0021e16c(void);
 int nodeSetScale(unsigned int, int);
 int FUN_0025bed8(...);
 int FUN_00266f30(void);
-int FUN_002a0428(int, int);
+int lightOwnerRegister(int, int);
 int textFormatBuffer(unsigned char [68], unsigned char *);
-int FUN_002e004c(void);
+int vectorQueuePushPosition(void);
 int FUN_002f479c(void);
 int FUN_002fb4a4(void);
 int SBORROW4(int, int);
@@ -30,10 +30,10 @@ extern int *g_deferredMapModels; /* 0x447e58 */
 /* Supplied declaration required: FUN_00266f30. */
 extern int asdMdlManagerClone(int, unsigned int);
 extern int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_002a0428. */
+/* Supplied declaration required: lightOwnerRegister. */
 extern int modelHasLoadedAttachment(int);
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002e004c. */
+/* Supplied declaration required: vectorQueuePushPosition. */
 /* Supplied declaration required: FUN_002f479c. */
 /* Supplied declaration required: FUN_002fb4a4. */
 extern int FUN_00316d64(int, int);
@@ -74,7 +74,7 @@ unsigned int FUN_001e34fc(int param_1,unsigned int param_2,int param_3)
         piVar10 = g_deferredMapModels + temp_v4 * 0xe + 3;
         if ((!temp_v5 && temp_v3 < 0 == (param_1 < 0x65 && SBORROW4(param_1,100))) ||
            (temp_v3 = modelHasLoadedAttachment(g_deferredMapModels[temp_v4 * 0xe + 0xf]), temp_v3 != 0)) {
-          FUN_002a0428(piVar9[temp_v4 * 0xe + 0xf],1);
+          lightOwnerRegister(piVar9[temp_v4 * 0xe + 0xf],1);
           temp_v3 = g_deferredMapModels[1];
           FUN_00266f30();
           FUN_002fb4a4();
@@ -203,7 +203,7 @@ LAB_001e3758:
             VectorSignedToFloat(piVar2[1],(unsigned char)(in_fpscr >> 0x16) & 3);
             VectorSignedToFloat(*piVar2,(unsigned char)(in_fpscr >> 0x16) & 3);
             VectorSignedToFloat(piVar2[2],(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_002e004c();
+            vectorQueuePushPosition();
             piVar9 = (int *)((int)piVar9 + 1);
           }
           FUN_001e33e4();

@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only: retail reuses r4/r5 for the previous-entry address arithmetic (no r6 there) and forms the vector store address in r6 earlier. */
+/* NON_MATCHING: register allocation only: in the row search retail reuses r5 (the dead `count - 1`) for the row offset where the build takes r6. */
 #include "battle/btlUI.h"
 
 extern "C" {
@@ -34,8 +34,8 @@ u32 FUN_004aa0b0(u32 request, u8 flags, u8 mode, f32 x, f32 y, f32 z)
         return -1;
     }
     s32 index = ui->availabilityCounts.counts[row];
-    ui->positionRequests.rows[row].entries[index].mode = mode;
     ui->positionRequests.rows[row].entries[index].active = 1;
+    ui->positionRequests.rows[row].entries[index].mode = mode;
     ui->positionRequests.rows[row].entries[index].x = x;
     ui->positionRequests.rows[row].entries[index].y = y;
     ui->positionRequests.rows[row].entries[index].z = z;

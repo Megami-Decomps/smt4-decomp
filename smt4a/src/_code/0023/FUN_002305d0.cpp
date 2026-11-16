@@ -1,4 +1,4 @@
-/* NON_MATCHING: corrected master growth offset0xA0, preserved unboosted HP, widened IDs and restored switch; affinity array base/zero register lifetime still differ. */
+/* NON_MATCHING: the skill-affinity pass is now an inline helper as in retail and its loop matches; remaining: retail keeps the HP accumulator's 0 in r7 and stores it for unk1c/unk1e, armcc materializes a separate zero (r5) and copies it. */
 #include "common.h"
 #include "gamedata/DevilRecordA.h"
 #include "font/SWin/SWin.h"
@@ -75,6 +75,23 @@ void FUN_004bcd90(DemonRecord* record);
 s32 unitHasRankingBonus(u32 id);
 void FUN_002a6894(DemonRecord* record);
 
+/* Adds each skill's affinity growth to its affinity bonus, clamped to [-9, 9]. */
+static __inline void demonApplySkillAffinities(DemonRecord *record)
+{
+    if (record == NULL || record->id == 0 || FUN_00184310(record->id) == NULL)
+        return;
+    for (s32 i = 0; i < 8; i++) {
+        if (record->skills[i] == 0) continue;
+        SkillRecord *skill = (SkillRecord *)dataTable04FindById(record->skills[i]);
+        if (skill == NULL || skill->affinity >= 18) continue;
+        u32 affinity = skill->affinity;
+        s8 sum = record->growth[affinity] + record->affinityBonus[i];
+        record->affinityBonus[i] = sum;
+        if (sum > 9) record->affinityBonus[i] = 9;
+        else if (sum < -9) record->affinityBonus[i] = -9;
+    }
+}
+
 // Builds a demon record for `id` in slot `slot`: kind 0/3 copies the master data, kind 1 the
 // saved entry; kinds other than 3 also claim a free party slot and flag the demon as owned.
 void FUN_002305d0(DemonRecord* record, u32 slot, u32 id, s32 kind)
@@ -115,17 +132,7 @@ void FUN_002305d0(DemonRecord* record, u32 slot, u32 id, s32 kind)
         record->curStat3 = info->header.initialization.stats[4];
         for (s32 i = 0; i < 8; i++) record->skills[i] = info->initializationSkills[i];
         __aeabi_memcpy4(record->growth, info->categoryModifiers.values, 18);
-        if (record != NULL && record->id != 0 && FUN_00184310(record->id) != NULL) {
-            for (s32 i = 0; i < 8; i++) {
-                if (record->skills[i] == 0) continue;
-                SkillRecord *skill = (SkillRecord *)dataTable04FindById(record->skills[i]);
-                if (skill == NULL || skill->affinity >= 18) continue;
-                s8 sum = record->growth[skill->affinity] + record->affinityBonus[i];
-                record->affinityBonus[i] = sum;
-                if (sum > 9) record->affinityBonus[i] = 9;
-                else if (sum < -9) record->affinityBonus[i] = -9;
-            }
-        }
+        demonApplySkillAffinities(record);
         FUN_0031f190((u16)id, 0);
         break;
     case 1: {

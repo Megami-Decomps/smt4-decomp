@@ -28,7 +28,7 @@ struct SoundCursorBlock {
     /* 0x50 */ u32 first;
     /* 0x54 */ u32 second;
     /* 0x58 */ u8 unk58[4];
-    /* 0x5C */ u8 state;
+    /* 0x5C */ volatile u8 state; /* polled by the sound task: retail reloads it for each compare */
     /* 0x5D */ u8 unk5D;
     /* 0x5E */ u8 sent;
 };

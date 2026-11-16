@@ -30,7 +30,7 @@ extern "C" {
 extern MapIf *g_mapIf; /* 0x447a78 */
 
 MapModel *asdMdlManagerCreateLoaded(const char *path, s32 heap);
-void FUN_002a0428(MapModel *model, s32 mode);
+void lightOwnerRegister(MapModel *model, s32 mode);
 void nodeSetTranslation(void *node, s32 index, const Vec3 *translation);
 void FUN_0028c618(void *node, s32 index, Vec3 scale);
 
@@ -45,7 +45,7 @@ void FUN_00248114(MapMarkerPosition position)
     block->unk08 = 0;
     block->position = position;
     block->model = asdMdlManagerCreateLoaded("map/all/action_down.bam", 7);
-    FUN_002a0428(block->model, 1);
+    lightOwnerRegister(block->model, 1);
     nodeSetTranslation(block->model->node, 0, (const Vec3 *)&block->position);
     scale.x = 0.0f;
     scale.y = block->position.w;

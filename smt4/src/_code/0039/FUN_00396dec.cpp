@@ -1,23 +1,28 @@
-/* NON_MATCHING: retail decrements the counts through r1 (the build reuses r0). */
 #include "sys/ObjectPool.h"
 
-/* Updates active pool objects and removes inactive objects, maintaining category counts. */
+/* Counts a removed object out of the pool, and out of the primary count for kind 0. */
+static __inline void poolNoteRemoved(ObjectPool *pool, s32 kind)
+{
+    if (kind == 0) {
+        --pool->primaryCount;
+    }
+    --pool->count;
+}
+
+/* Updates active pool objects and deletes finished ones, maintaining the pool's counts. */
 extern "C" void FUN_00396dec(ObjectPool *pool)
 {
-    if (!(pool->flags & 1)) {
-        for (s32 i = 0; i < 32; ++i) {
-            PoolObject *object = pool->objects[i];
+    if ((pool->flags & 1) == 0) {
+        for (s32 index = 0; index < 32; ++index) {
+            PoolObject *object = pool->objects[index];
             if (object != NULL) {
-                s32 kind = object->kind;
-                if (object->flags & 1) {
+                if ((object->flags & 1) != 0) {
                     object->vfunc10();
                 } else {
-                    object->vfunc04();
-                    pool->objects[i] = NULL;
-                    if (kind == 0) {
-                        --pool->primaryCount;
-                    }
-                    --pool->count;
+                    s32 kind = object->kind;
+                    delete object;
+                    pool->objects[index] = NULL;
+                    poolNoteRemoved(pool, kind);
                 }
             }
         }

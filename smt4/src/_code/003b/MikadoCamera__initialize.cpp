@@ -10,7 +10,7 @@ extern const char g_mikadoTalkBfPath[];    /* g_mikadoTalkBfPath */
 extern const char g_mikadoTalkMbmPath[];   /* g_mikadoTalkMbmPath */
 extern const char g_mikadoCheckBfPath[];   /* g_mikadoCheckBfPath */
 extern const char g_mikadoCheckMbmPath[];  /* g_mikadoCheckMbmPath */
-void FUN_003bb0ac(ContentTransition *transition);
+void contentTransitionInstallDispatch(ContentTransition *transition);
 void FUN_003bb1f0(SelectionFlags *panel);
 void asdTMTexTableLoadTmx(u32 kind, u32 arg);
 void FUN_002898e4(void);
@@ -28,7 +28,7 @@ void MikadoCamera::initialize()
 {
     ready = 0;
     flags = 0;
-    FUN_003bb0ac(reinterpret_cast<ContentTransition *>(this));
+    contentTransitionInstallDispatch(reinterpret_cast<ContentTransition *>(this));
     FUN_003bb1f0(&selectionFlags);
     unk34 = -1;
     asdTMTexTableLoadTmx(0x21, 0);

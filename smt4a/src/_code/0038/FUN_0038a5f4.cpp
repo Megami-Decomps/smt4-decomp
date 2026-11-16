@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail loads/stores the 64-bit counters with ldrd/strd (8-byte aligned pair accesses) and reads the limit as two words; the build uses ldm/stm. Arithmetic and svc 0x18 (nn::svc::SignalEvent) match. */
+/* NON_MATCHING: the 64-bit limit compare now matches (sbcs/movlt); retail reads the limit as two ldr and updates `used` then `total` with ldrd/strd through r2:r3 and r4:r5, the build reads both with ldm and hoists the `total` load above the `used` store. */
 #include "common.h"
 #include "nn/Result.h"
 #include "nn/svc.h"
@@ -18,7 +18,7 @@ extern "C" {
 /* Adds `count` to the event's counters and signals it; returns 0 when the count does not fit the limit. */
 u32 FUN_0038a5f4(EventCounters *counters, u32 count)
 {
-    if (counters->limit - counters->used - count < 0) {
+    if (counters->limit - counters->used < (s64)count) {
         return 0;
     }
     counters->used += count;

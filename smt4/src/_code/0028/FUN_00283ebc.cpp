@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail merges the limit clamp with the loop-entry test (cmple r3, #0) and keeps the element pointer in r4 and the kind in ip; the build swaps r4/ip and tests the limit separately. */
+/* NON_MATCHING: loop body matches; retail folds the loop-entry test into the clamp (`movgt r3, #8; cmple r3, #0`) where armcc tests the limit separately. */
 #include "common.h"
 
 extern "C" {
@@ -27,10 +27,11 @@ s32 FUN_00283ebc(AmountRecord *record, s32 slotCount, u32 kind)
         }
         s32 total = 0;
         for (s32 i = 0; i < limit; i++) {
-            if (record->entries[i].kind == 0) {
+            u8 entryKind = record->entries[i].kind;
+            if (entryKind == 0) {
                 break;
             }
-            if (record->entries[i].kind == kind) {
+            if (entryKind == kind) {
                 total += record->entries[i].amount;
             }
         }

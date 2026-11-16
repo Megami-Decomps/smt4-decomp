@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00267074(...);
+int naviSetActiveMapSlot(...);
 int contentEntryGetE(void);
 int naviSetMapSlotDefault(int);
 
@@ -17,7 +17,7 @@ typedef struct {
 
 extern int g_mapEnemy; /* 0x447600 */
 
-/* Supplied declaration required: FUN_00267074. */
+/* Supplied declaration required: naviSetActiveMapSlot. */
 /* Supplied declaration required: contentEntryGetE. */
 extern int gameGetMapBlock(void);
 /* Supplied declaration required: naviSetMapSlotDefault. */
@@ -167,22 +167,22 @@ void FUN_002f3c28(void)
               }
               if ((temp_v10 && temp_v9 != 0x13) && (*(int *)(temp_v3 + 0x88) == temp_v7)) {
                 if ((*(int *)(temp_v3 + 0xb8) == 3) && (*(int *)(temp_v3 + 0xbc) < 2)) {
-                  FUN_00267074(temp_v7);
+                  naviSetActiveMapSlot(temp_v7);
                 }
                 else {
-                  FUN_00267074(temp_v7);
+                  naviSetActiveMapSlot(temp_v7);
                 }
                 goto LAB_002f3ff0;
               }
               temp_v6 = temp_v6 + 1;
             } while (temp_v6 < 0x20);
           }
-          FUN_00267074(temp_v7,(int)*(char *)(temp_v8 + 0xf21),(int)*(char *)(temp_v8 + 0xf22),
+          naviSetActiveMapSlot(temp_v7,(int)*(char *)(temp_v8 + 0xf21),(int)*(char *)(temp_v8 + 0xf22),
                        (int)*(short *)(temp_v8 + 0xf2c),(int)*(short *)(temp_v8 + 0xf2e),
                        (int)*(short *)(temp_v8 + 0xf30),1);
         }
         else {
-          FUN_00267074(temp_v7,(int)*(char *)(temp_v8 + 0xf21),(int)*(char *)(temp_v8 + 0xf22),
+          naviSetActiveMapSlot(temp_v7,(int)*(char *)(temp_v8 + 0xf21),(int)*(char *)(temp_v8 + 0xf22),
                        (int)*(short *)(temp_v8 + 0xf2c),(int)*(short *)(temp_v8 + 0xf2e),
                        (int)*(short *)(temp_v8 + 0xf30),0);
         }

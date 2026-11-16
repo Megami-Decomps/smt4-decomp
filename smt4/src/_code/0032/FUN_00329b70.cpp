@@ -36,7 +36,7 @@ int asdMdlManagerCreateLoaded(...);
 void FUN_0029c2cc(...);
 int soundChannelRequestIfEnabled(int, int, int);
 int FUN_002a03d8(...);
-int FUN_002a0428(...);
+int lightOwnerRegister(...);
 int modelSlotAttachChild(...);
 int asdMdlManagerDestroy(...);
 int sndObjectForwardField8(void);
@@ -102,7 +102,7 @@ extern int FUN_00295618(void);
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: FUN_002a03d8. */
-/* Supplied declaration required: FUN_002a0428. */
+/* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: modelSlotAttachChild. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
@@ -198,7 +198,7 @@ unsigned int FUN_00329b70(void)
     temp_v7 = FUN_002b89a4(0);
     if (((temp_v7 != 0) && (temp_v7 = FUN_002b89a4(1), temp_v7 != 0)) &&
        (*(char *)(temp_v2 + 0x582) != '\0')) {
-      FUN_002a0428(*(unsigned int *)(temp_v2 + 0x84),1);
+      lightOwnerRegister(*(unsigned int *)(temp_v2 + 0x84),1);
       modelSlotAttachChild(*(unsigned int *)(temp_v2 + 0x8c),0);
       temp_v7 = g_screenStateWork;
       *(unsigned int *)(g_screenStateWork + 4) = 3;
@@ -299,7 +299,7 @@ unsigned int FUN_00329b70(void)
       FUN_0029c2cc(*(unsigned int *)(temp_v2 + 0x8c),0);
       gfxObjectDestroy(*(unsigned int *)(temp_v2 + 0x8c));
       *(unsigned int *)(temp_v2 + 0x8c) = 0;
-      FUN_002a0428(*(unsigned int *)(temp_v2 + 0x88),1);
+      lightOwnerRegister(*(unsigned int *)(temp_v2 + 0x88),1);
       modelSlotAttachChild(*(unsigned int *)(temp_v2 + 0x90),0);
       asdMdlManagerMarkDestroy(*(unsigned int *)(temp_v2 + 0x84));
       asdMdlManagerDestroy(*(unsigned int *)(temp_v2 + 0x84));

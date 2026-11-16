@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_002a0428(...);
+int lightOwnerRegister(...);
 int FUN_002a5960(...);
 int _ZN9Obj42111cC1Ej(...);
 
@@ -80,7 +80,7 @@ extern int FUN_00246708(void);
 extern unsigned int keyedRecordRegisterName(int);
 /* Supplied declaration required: FUN_002505c0. */
 /* Supplied declaration required: FUN_00257e74. */
-/* Supplied declaration required: FUN_002a0428. */
+/* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: FUN_002a5960. */
 /* Supplied declaration required: _ZN9Obj42111cC1Ej. */
 extern int __cxa_guard_acquire(unsigned int *);
@@ -693,7 +693,7 @@ code_r0x0034ca74:
         }
         temp_v7 = temp_v7 + 1;
       } while (temp_v7 < 3);
-      FUN_002a0428(*(unsigned int *)(temp_v22 + 8),1);
+      lightOwnerRegister(*(unsigned int *)(temp_v22 + 8),1);
       if (*(int *)(temp_v22 + 8) != 0) {
         *(unsigned char *)(**(int **)(*(int *)(*(int *)(temp_v22 + 8) + 8) + 0x24) + 0x1f6) = 0;
         *(unsigned char *)(*(int *)(*(int *)(*(int *)(*(int *)(temp_v22 + 8) + 8) + 0x24) + 4) + 0x1f6)

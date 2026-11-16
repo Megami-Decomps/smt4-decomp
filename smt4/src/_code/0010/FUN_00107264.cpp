@@ -19,7 +19,7 @@ extern int gameTestFlagBit32(char);
 extern unsigned short *dataTableFindCategoryVariant(char, char, short);
 extern int gameFlagIsSet(unsigned int);
 extern unsigned int randNextInRange(unsigned int);
-extern unsigned short *FUN_002c0a2c(char, char, short);
+extern unsigned short *statisticsGetCounter(char, char, short);
 extern int FUN_002c0a84(void);
 /* Supplied declaration required: dataTable24Sub0Get. */
 /* Supplied declaration required: dataTable24Sub0GetEntries. */
@@ -69,7 +69,7 @@ void FUN_00107264(int param_1)
         temp_v11 = 6;
       }
       temp_v7 = FUN_002c0a84();
-      puVar7 = (unsigned short *)FUN_002c0a2c(temp_v2,temp_v1,temp_v11);
+      puVar7 = (unsigned short *)statisticsGetCounter(temp_v2,temp_v1,temp_v11);
       if (temp_v7 == 0) {
         *(unsigned char *)(puVar7 + 1) = 0;
       }

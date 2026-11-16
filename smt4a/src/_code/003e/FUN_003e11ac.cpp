@@ -1,4 +1,3 @@
-/* NON_MATCHING: pending-slot accessor matches; state/counter stores remain reversed in steps 4 and 5. */
 #include "common.h"
 #include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 #include "battle/btlDebug.h"
@@ -48,9 +47,13 @@ u32 FUN_003e11ac(LoadStepMachine *machine, LoadStepOwner *owner)
         return FUN_003e2470(machine, owner);
     }
     if (valueAtF0IsReady(owner)) {
-        loadStepEnter(machine, 4);
+        machine->state = 4;
+        machine->unk10 = 0;
+        machine->unk0C = 0;
         FUN_003f1334(owner);
-        loadStepEnter(machine, 5);
+        machine->state = 5;
+        machine->unk10 = 0;
+        machine->unk0C = 0;
         if (!loadSlotMainIsLoaded(owner)) {
             return 0;
         }

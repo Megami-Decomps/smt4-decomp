@@ -30,7 +30,7 @@ int FUN_00253c70(...);
 int FUN_0025b4b0(...);
 int FUN_00281e34(void);
 int mathDistanceBetweenPoints(void);
-int FUN_002a0428(...);
+int lightOwnerRegister(...);
 int randNextInRange(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -110,7 +110,7 @@ extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: mathGetShortestAngleDelta. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
-/* Supplied declaration required: FUN_002a0428. */
+/* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
 /* Supplied declaration required: dataTable00FindById. */
 extern int gameFlagIsSet(unsigned int);
@@ -471,7 +471,7 @@ LAB_002096e8:
               if (*(char *)(temp_v6 + 0x3051) != '\0') {
                 temp_v19 = asdMdlManagerClone(*(unsigned int *)(temp_v6 + 0x304c),0);
                 *(unsigned int *)(temp_v3 + 0x1ac) = temp_v19;
-                FUN_002a0428(temp_v19,1);
+                lightOwnerRegister(temp_v19,1);
                 *(unsigned char *)(temp_v3 + 0x1b1) = 1;
               }
               else {
@@ -2402,7 +2402,7 @@ LAB_0020a934:
           if (temp_v7 != '\0') {
             temp_v19 = asdMdlManagerClone(*(unsigned int *)(temp_v6 + 0x304c),0);
             *(unsigned int *)(temp_v3 + 0x1ac) = temp_v19;
-            FUN_002a0428(temp_v19,1);
+            lightOwnerRegister(temp_v19,1);
             *(unsigned char *)(temp_v3 + 0x1b1) = 1;
           }
           else {
@@ -2429,7 +2429,7 @@ LAB_0020a934:
           if (!temp_v16) {
             temp_v19 = asdMdlManagerClone(*(unsigned int *)(temp_v6 + 0x304c),0);
             *(unsigned int *)(temp_v3 + 0x1ac) = temp_v19;
-            FUN_002a0428(temp_v19,1);
+            lightOwnerRegister(temp_v19,1);
           }
           else {
             *(unsigned int *)(temp_v3 + 0x1ac) = *(unsigned int *)(temp_v6 + 0x304c);
@@ -2475,7 +2475,7 @@ LAB_0020a934:
           if (!temp_v16) {
             temp_v19 = asdMdlManagerClone(*(unsigned int *)(temp_v6 + 0x304c),0);
             *(unsigned int *)(temp_v3 + 0x1ac) = temp_v19;
-            FUN_002a0428(temp_v19,1);
+            lightOwnerRegister(temp_v19,1);
           }
           else {
             *(unsigned int *)(temp_v3 + 0x1ac) = *(unsigned int *)(temp_v6 + 0x304c);

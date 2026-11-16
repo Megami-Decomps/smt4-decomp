@@ -26,7 +26,7 @@ extern unsigned char DAT_00558024; /* 0x558024 */
 /* Supplied declaration required: fileHandleClose. */
 extern int archiveStreamOpenConverted(unsigned char **);
 extern int FUN_002befc0(void);
-extern int FUN_002e09b4(unsigned char **, unsigned int, unsigned int);
+extern int romFileStreamOpen(unsigned char **, unsigned int, unsigned int);
 /* Supplied declaration required: holderReleaseObject. */
 /* Supplied declaration required: taggedObjectRelease. */
 /* Supplied declaration required: taggedOwnerRelease. */
@@ -71,7 +71,7 @@ unsigned int FUN_003416a0(int param_1,unsigned int param_2)
     }
   }
   else {
-    temp_v0 = FUN_002e09b4(&temp_v1,param_2,2);
+    temp_v0 = romFileStreamOpen(&temp_v1,param_2,2);
   }
   if (temp_v0 < 0) {
     fileHandleClose(&temp_v1,0);

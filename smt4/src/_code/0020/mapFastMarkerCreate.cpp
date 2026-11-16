@@ -20,7 +20,7 @@ extern "C" {
 extern MapIfGlobals g_mapIf;
 void textFormatBuffer(char *output, const char *format, ...);
 AsdMdlObject *asdMdlManagerCreateLoaded(const char *path, u32 group);
-void FUN_002a0428(AsdMdlObject *model, u32 enabled);
+void lightOwnerRegister(AsdMdlObject *model, u32 enabled);
 void nodeSetTranslation(AsdMdlNode *node, s32 index, const TransformVec3 *position);
 void FUN_0028c618(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
 void nodeSetScale(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
@@ -41,7 +41,7 @@ void mapFastMarkerCreate(f32 x, f32 y, f32 z, f32 heading)
     char path[128];
     textFormatBuffer(path, "map/all/lmap_fast.bam");
     pose->model = asdMdlManagerCreateLoaded(path, 7);
-    FUN_002a0428(pose->model, 1);
+    lightOwnerRegister(pose->model, 1);
     nodeSetTranslation(pose->model->node, 0, &pose->position);
     FUN_0028c618(pose->model->node, 0, 0.0f, pose->heading, 0.0f);
     nodeSetScale(pose->model->node, 0, 50.0f, 50.0f, 50.0f);

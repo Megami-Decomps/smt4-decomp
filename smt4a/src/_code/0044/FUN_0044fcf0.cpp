@@ -1,70 +1,105 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0044fcf0` (_code @ 0x44fcf0, 0xf8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: rewritten from the draft (nw::gfx::Fog::Initialize); same flow, checks and updater swap, but retail keeps the result in r5, the allocator in r6 and rematerialises the clearing zero in r4. */
+#include "common.h"
+#include <new>
 
-extern "C" {
+/* nw::os::IAllocator: slot 2 allocates, slot 3 frees. */
+class FogAllocator {
+public:
+    virtual void unk00();
+    virtual void unk04();
+    virtual void *allocate(u32 size, u32 alignment);   /* +0x08 */
+    virtual void free(void *block);                    /* +0x0C */
+};
 
-typedef int romwright_code(...);
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
+/* A graphics result: the top bit marks failure; results accumulate with |=. */
+struct GfxResult {
+    GfxResult() : value(0) {}
+    GfxResult(u32 code) : value(code) {}
+    GfxResult &operator|=(GfxResult other)
+    {
+        value |= other.value;
+        return *this;
+    }
+    bool isFailure() const { return (s32)(value & 0x80000000) < 0; }
+    u32 value;
+};
 
-extern unsigned int nw_gfx_Fog_CreateAnimGroup(int, int *);
-extern unsigned int nw_gfx_Fog_CreateOriginalValue(int, int *);
-extern unsigned int nw_gfx_TransformNode_Initialize(void);
+/* The fog's 16-byte updater block. */
+struct FogUpdater {
+    u8 bytes[16];
+};
 
+/* An owning pointer that frees through the allocator it came from (nw::ut::MovePtr). */
+template <typename T>
+struct FogMovePtr {
+    FogMovePtr(T *pointer, FogAllocator *allocator) : pointer(pointer), allocator(allocator) {}
+    ~FogMovePtr()
+    {
+        if (pointer != NULL) {
+            allocator->free(pointer);
+        }
+    }
+    FogMovePtr &operator=(FogMovePtr &other)
+    {
+        if (this != &other) {
+            T *newPointer = other.pointer;
+            FogAllocator *newAllocator = other.allocator;
+            other.pointer = pointer;
+            other.allocator = allocator;
+            pointer = newPointer;
+            allocator = newAllocator;
+        }
+        return *this;
+    }
 
-unsigned int FUN_0044fcf0(int param_1,int *param_2)
+    T *pointer;
+    FogAllocator *allocator;
+};
 
+/* Clears `size` bytes one at a time. */
+static __inline void clearBytes(void *memory, u32 size)
 {
-  unsigned int temp_v0;
-  unsigned char *puVar2;
-  unsigned char *puVar3;
-  unsigned int *puVar4;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned char *temp_v3;
-  int *temp_v4;
-  
-  temp_v0 = nw_gfx_TransformNode_Initialize();
-  if ((temp_v0 & 0x80000000) == 0) {
-    puVar2 = (unsigned char *)(**(romwright_code **)(*param_2 + 8))(param_2,0x10,4);
-    temp_v2 = 0x10;
-    puVar3 = puVar2;
-    do {
-      temp_v2 = temp_v2 - 1;
-      *puVar3 = 0;
-      puVar3 = puVar3 + 1;
-    } while (temp_v2 != 0);
-    if (puVar2 == (unsigned char *)0x0) {
-      temp_v0 = temp_v0 | 0x80000000;
+    u8 *bytes = static_cast<u8 *>(memory);
+    for (; size != 0; --size) {
+        *bytes++ = 0;
     }
-    else {
-      puVar4 = (unsigned int *)(param_1 + 0x150);
-      temp_v3 = puVar2;
-      temp_v4 = param_2;
-      if ((unsigned char **)puVar4 != &temp_v3) {
-        temp_v3 = (unsigned char *)*puVar4;
-        temp_v4 = *(int **)(param_1 + 0x154);
-        *puVar4 = (unsigned int)puVar2;
-        *(int **)(param_1 + 0x154) = param_2;
-      }
-      if (temp_v3 != (unsigned char *)0x0) {
-        (**(romwright_code **)(*temp_v4 + 0xc))(temp_v4,temp_v3);
-      }
-    }
-    if (-1 < (int)temp_v0) {
-      temp_v1 = nw_gfx_Fog_CreateOriginalValue(param_1,param_2);
-      temp_v0 = temp_v1 | temp_v0;
-      if (-1 < (int)temp_v0) {
-        temp_v1 = nw_gfx_Fog_CreateAnimGroup(param_1,param_2);
-        temp_v0 = temp_v1 | temp_v0;
-      }
-    }
-  }
-  return temp_v0;
 }
 
-} /* extern "C" */
+struct Fog {
+    /* 0x000 */ u8 unk000[0x150];
+    /* 0x150 */ FogMovePtr<FogUpdater> updater;
+};
+
+extern "C" {
+GfxResult nw_gfx_TransformNode_Initialize(Fog *fog, FogAllocator *allocator);
+GfxResult nw_gfx_Fog_CreateOriginalValue(Fog *fog, FogAllocator *allocator);
+GfxResult nw_gfx_Fog_CreateAnimGroup(Fog *fog, FogAllocator *allocator);
+
+/* nw::gfx::Fog::Initialize: the transform node, a cleared updater block, the original values and
+ * the animation group, stopping at the first failure. */
+GfxResult FUN_0044fcf0(Fog *fog, FogAllocator *allocator)
+{
+    GfxResult result;
+    result |= nw_gfx_TransformNode_Initialize(fog, allocator);
+    if (result.isFailure()) {
+        return result;
+    }
+    FogUpdater *updater = static_cast<FogUpdater *>(allocator->allocate(sizeof(FogUpdater), 4));
+    clearBytes(updater, sizeof(FogUpdater));
+    if (updater == NULL) {
+        result |= 0x80000000;
+    } else {
+        FogMovePtr<FogUpdater> pointer(updater, allocator);
+        fog->updater = pointer;
+    }
+    if (result.isFailure()) {
+        return result;
+    }
+    result |= nw_gfx_Fog_CreateOriginalValue(fog, allocator);
+    if (result.isFailure()) {
+        return result;
+    }
+    result |= nw_gfx_Fog_CreateAnimGroup(fog, allocator);
+    return result;
+}
+}

@@ -1,13 +1,15 @@
-/* NON_MATCHING: shape and preloaded s0/s1 match retail; only the order of the 1.0f and 2.5f preloads (and pool words) is swapped. */
 #include "common.h"
 
 extern "C" {
-// Select the scale factor associated with a category.
+/* The scale factor of a category (1.0 for category 0 and any unknown one). */
 f32 FUN_00243d30(u32 category)
 {
     f32 scale = 1.0f;
 
     switch (category) {
+    case 0:
+        scale = 1.0f;
+        break;
     case 1:
         scale = 1.8f;
         break;

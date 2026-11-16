@@ -1,4 +1,3 @@
-/* NON_MATCHING: the final offset/top stores are merged into one stm (after add r0, r0, #32); retail stores offset then top separately. */
 #include "common.h"
 
 extern "C" {
@@ -39,7 +38,7 @@ u32 scrollListSetSelection(ScrollList *list, s32 index)
         maxOffset = count - (list->visible <= count ? list->visible : count);
         if (offset > maxOffset) {
             list->offset = maxOffset;
-            list->top = index - maxOffset;
+            list->top = index - list->offset;
         }
     }
     return 1;

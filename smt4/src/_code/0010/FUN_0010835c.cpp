@@ -1,68 +1,91 @@
-/* NON_MATCHING: retail minimum-pass clamp is recovered; capture-flag addressing, early return layout and surface size-update scheduling differ. */
-#include "ui/FrameTex.h"
-#include "shard/JobWork.h"
-#include "shard/S1ListPanel.h"
+/* NON_MATCHING: only the first downsample level's two dimension copies (and the second level's height copy) load the source pointer into r1 and the destination into r0, where retail uses r0/r1; FUN_0010854c is the same job with the opposite tie-break. */
+#include "shard/FrameWork.h"
 #include "camp/RenderCtx.h"
-extern "C" {
-extern RenderCtx *g_titleScene;
-u8 FUN_002bfadc(u32 screen, JobSurface *surface);
-s32 stateValuesGetBySelector(u32 screen);
-void surfaceCopy(JobSurface *source, JobSurface *destination);
 
+extern "C" {
+
+/* Additional copy controls inside the flags group's recovered padding. */
+struct FrameCopyControlView {
+    u8 unk00[0x90];
+    s32 levels; // 0x90
+    u8 result;  // 0x94
+    u8 busy;    // 0x95
+};
+
+/* The two downsample surfaces follow FrameWork's known prefix. */
+struct FrameCopyWork : FrameWork {
+    JobSurface *second; // 0xFE4
+    JobSurface *third;  // 0xFE8
+};
+
+typedef char FrameCopyLayoutCheck[
+    offsetof(FrameCopyControlView, levels) == 0x90 &&
+    offsetof(FrameCopyWork, second) == 0xFE4 &&
+    offsetof(FrameCopyWork, third) == 0xFE8 && sizeof(FrameCopyWork) == 0xFEC ? 1 : -1];
+
+s32 stateValuesGetBySelector(u32 arg);
+s32 FUN_002bfadc(u32 arg, JobSurface *surface);
+void surfaceCopy(JobSurface *src, JobSurface *dst);
+
+extern u32 g_titleScene;
+
+/* Builds the successive half-size copies of the work's source surface (a chain through two further surfaces when `chained`). */
 s32 FUN_0010835c(u32 job)
 {
-    // The extra source and ping-pong surfaces lie beyond FrameWork's recovered end.
-    struct DownsampleView {
-        FrameWork frame;
-        JobSurface *source;
-        u8 separateSurfaces;
-        u8 unkFE1[3];
-        JobSurface *first;
-        JobSurface *second;
-    };
-    typedef char DownsampleSurfaceOffsets[offsetof(DownsampleView, source) == 0xFDC &&
-        offsetof(DownsampleView, first) == 0xFE4 && offsetof(DownsampleView, second) == 0xFE8 ? 1 : -1];
-    DownsampleView *work = (DownsampleView *)jobGetWork(job);
-    work->frame.unkE95 = 0;
-    if (!work->frame.unkE8C || !work->frame.quadActive || !work->source || work->frame.unkFD8)
+    FrameCopyWork *work = (FrameCopyWork *)jobGetWork(job);
+    reinterpret_cast<FrameCopyControlView *>(&work->flags)->busy = 0;
+    FrameReadyFlags *flags = &work->flags;
+    if (flags->active == 0) {
         return 0;
-    renderCtxSelectStereoLayout(g_titleScene);
-    work->source->width = 512;
-    work->source->height = 512;
-    work->frame.unkE94 = FUN_002bfadc(0, work->source);
-    s32 ready = stateValuesGetBySelector(0);
-    s32 passes = (s32)work->frame.unkE90;
-    if (!ready && passes > 1) {
-        --passes;
-        if (passes < 1) {
-            passes = 1;
+    }
+    if (flags->ready == 0) {
+        return 0;
+    }
+    if (work->frame.surface == NULL) {
+        return 0;
+    }
+    FrameSurfaceState *frame = &work->frame;
+    if (work->frame.blocked != 0) {
+        return 0;
+    }
+    renderCtxSelectStereoLayout(reinterpret_cast<RenderCtx *>(g_titleScene));
+    work->frame.surface->width = 0x200;
+    work->frame.surface->height = 0x200;
+    reinterpret_cast<FrameCopyControlView *>(&work->flags)->result = FUN_002bfadc(0, work->frame.surface);
+    s32 skipped = stateValuesGetBySelector(0);
+    s32 levels = reinterpret_cast<FrameCopyControlView *>(&work->flags)->levels;
+    if (skipped == 0 && levels > 1) {
+        levels--;
+        if (levels < 1) {
+            levels = 1;
         }
     }
-    if (work->separateSurfaces) {
-        for (s32 pass = 0; pass < passes; ++pass) {
-            if (pass == 0) {
-                surfaceCopy(work->source, work->first);
-                work->first->width = work->source->width >> 1;
-                work->first->height = work->source->height >> 1;
-            } else if (pass == 1) {
-                surfaceCopy(work->first, work->second);
-                work->second->width = work->first->width >> 1;
-                work->second->height = work->first->height >> 1;
+    if (frame->unkE0 != 0) {
+        for (s32 i = 0; i < levels; i++) {
+            if (i == 0) {
+                surfaceCopy(work->frame.surface, work->second);
+                work->second->width = work->frame.surface->width >> 1;
+                work->second->height = work->frame.surface->height >> 1;
+            } else if (i == 1) {
+                surfaceCopy(work->second, work->third);
+                work->third->width = work->second->width >> 1;
+                work->third->height = work->second->height >> 1;
             } else {
-                surfaceCopy(work->second, work->second);
-                work->second->width >>= 1;
-                work->second->height >>= 1;
+                surfaceCopy(work->third, work->third);
+                work->third->width >>= 1;
+                work->third->height >>= 1;
             }
         }
     } else {
-        for (s32 pass = 0; pass < passes; ++pass) {
-            surfaceCopy(work->source, work->source);
-            work->source->width >>= 1;
-            work->source->height >>= 1;
+        for (s32 i = 0; i < levels; i++) {
+            surfaceCopy(work->frame.surface, work->frame.surface);
+            work->frame.surface->width >>= 1;
+            work->frame.surface->height >>= 1;
         }
     }
-    work->frame.unkE95 = 1;
-    work->frame.unkE96 = 0;
+    reinterpret_cast<FrameCopyControlView *>(&work->flags)->busy = 1;
+    work->flags.surfaceReady = 0;
     return 0;
 }
-}
+
+} /* extern "C" */

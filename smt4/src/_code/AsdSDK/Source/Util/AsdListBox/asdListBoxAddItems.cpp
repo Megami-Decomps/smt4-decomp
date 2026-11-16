@@ -1,4 +1,3 @@
-/* NON_MATCHING: the inlined asdListBoxAddItem/SetText/SetToggle/SetInt/SetFloat bodies and the stripped asdDebugTrace now match retail's code; only register assignment differs (retail keeps entries in fp and leaves count in its argument home [sp,#32] instead of spilling entries). */
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/JobWork.h"
@@ -87,14 +86,12 @@ static __inline void listBoxSetFloat(u32 listBox, u32 id, s32 minimum, s32 maxim
     }
 }
 
-/* Stores a nonzero callback in an existing row. */
+/* Stores a callback in an existing row. */
 static __inline void listBoxSetCallback(u32 listBox, u32 id, u32 callback)
 {
-    if (callback != 0) {
-        AsdListBoxItem *item = asdListBoxFindItem(listBox, id);
-        if (item != NULL) {
-            item->callback = callback;
-        }
+    AsdListBoxItem *item = asdListBoxFindItem(listBox, id);
+    if (item != NULL) {
+        item->callback = callback;
     }
 }
 
@@ -126,7 +123,9 @@ void asdListBoxAddItems(u32 listBox, const AsdListBoxEntry *entries, s32 count)
             listBoxSetFloat(listBox, id, entry->min.i, entry->max.i, (f32)entry->value);
         }
 
-        listBoxSetCallback(listBox, id, entry->callback);
+        u32 callback = entry->callback;
+        if (callback != 0)
+            listBoxSetCallback(listBox, id, callback);
     }
 }
 

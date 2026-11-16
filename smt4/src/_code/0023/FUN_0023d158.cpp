@@ -1,4 +1,3 @@
-/* NON_MATCHING: Retail strb r0, [sp, #88] differs from recovered strb r0, [sp, #124]. */
 #include "common.h"
 
 // Private views of the source settings and the SDK texture command object.
@@ -51,9 +50,9 @@ extern "C" u32 *FUN_0023d158(u32 *commands, const TextureSettingsView *settings)
     texture.unk09 = static_cast<u8>(settings->unk38);
     texture.unk0A = static_cast<u8>(settings->unk38);
     texture.unk0B = settings->unk40 != 0;
+    texture.unk0C = settings->unk3C != 0 ? 3 : 0;
     texture.unk58 = 0;
     texture.unk7C = 0;
-    texture.unk0C = settings->unk3C != 0 ? 3 : 0;
     texture.unkA0 = 0;
     return nn_gr_CTR_Texture_MakeCommand(&texture, commands, true);
 }

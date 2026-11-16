@@ -8,7 +8,7 @@ extern "C" {
 extern ModelRequestWork *g_mapModelWork;
 extern GameState g_gameState;
 NodeEnableNode *asdMdlManagerCreateLoaded(const char *path, s32 kind);
-void FUN_002a0428(NodeEnableNode *model, s32 enabled);
+void lightOwnerRegister(NodeEnableNode *model, s32 enabled);
 
 void FUN_0019dde4(void)
 {
@@ -55,7 +55,7 @@ void FUN_0019dde4(void)
     if (resourceId > 0) {
         Placement *placement = &work->placement;
         placement->model = asdMdlManagerCreateLoaded("map/unit/u006.bam", 7);
-        FUN_002a0428(placement->model, 1);
+        lightOwnerRegister(placement->model, 1);
         NodeEnableNode *model = placement->model;
         model->flags |= 2;
         model->resource->target->enabled = 0;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail reads slotFlags through an add-based pointer and keeps a zero in r5 for the final clear; built uses a plain offset load and a fresh zero. */
+/* NON_MATCHING: slotFlags is now read through its own pointer as in retail, but the build forms it before the enable test (retail after the light count test) and materialises the final zero late (retail keeps it in r5). */
 #include "shard/Sys464af0.h"
 
 extern "C" {
@@ -14,7 +14,8 @@ void registerBlockRequestGroups(u32 groups);
 // Refresh the title scene when the graphics settings are enabled and lights or the first model slot are active.
 void FUN_0011891c(void)
 {
-    if (g_gfxSettings.unk00[0] != 0 && (g_asdLightCount > 0 || (g_gfxSettings.slotFlags & 1) != 0)) {
+    const u32 *flags = &g_gfxSettings.slotFlags;
+    if (g_gfxSettings.unk00[0] != 0 && (g_asdLightCount > 0 || (*flags & 1) != 0)) {
         FUN_0013290c(g_asdModelSlotArray3, g_gfxSettings.unk28);
         if (sceneQueryFalse() != 0) {
             registerBlockRequestGroups(0x3fff);

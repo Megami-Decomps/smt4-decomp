@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler loads a literal 0x1204 and indexes the current-slot field; retail forms sound+0x1000 then loads at0x204. All other default-flag instructions match. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 struct SoundDataResolver;
@@ -13,7 +12,7 @@ bool asdSndEnsureCurrentSlotData(u32 soundId)
 {
     AsdSoundSystem* sound = &g_asdSound;
     bool loaded = false;
-    AsdSndSlotB* slot = sound->currentSlotB;
+    AsdSndSlotB* slot = g_asdSound.currentSlotB;
     if (slot != NULL) {
         if (FUN_00132da4(reinterpret_cast<SoundDataResolver*>(sound->dataManager + 0x0c), soundId, -1) != NULL) {
             loaded = true;

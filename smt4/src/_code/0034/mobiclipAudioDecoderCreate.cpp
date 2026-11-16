@@ -1,16 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00423e14` (_code @ 0x423e14, 0xdc bytes) from smt4a.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `mobiclipAudioDecoderCreate` (_code @ 0x34f800, 0xdc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
 
 typedef int romwright_code(...);
-extern unsigned char DAT_00557f34; /* 0x557f34 */
-extern unsigned char DAT_00557f58; /* 0x557f58 */
-extern unsigned char DAT_00557fb0; /* 0x557fb0 */
+extern unsigned char DAT_00420a88; /* 0x420a88 */
+extern unsigned char DAT_00420aac; /* 0x420aac */
+extern unsigned char DAT_00420b04; /* 0x420b04 */
 
 
-unsigned int FUN_00423e14(unsigned int param_1,unsigned int *param_2,int param_3,unsigned int *param_4)
+unsigned int mobiclipAudioDecoderCreate(unsigned int param_1,unsigned int *param_2,int param_3,unsigned int *param_4)
 
 {
   int *piVar1;
@@ -28,14 +28,14 @@ unsigned int FUN_00423e14(unsigned int param_1,unsigned int *param_2,int param_3
       }
       piVar1 = (int *)(**(romwright_code **)*param_2)(param_2,8,4);
       if (piVar1 != (int *)0x0) {
-        *piVar1 = (int)&DAT_00557f34;
+        *piVar1 = (int)&DAT_00420a88;
         piVar1[1] = 0;
       }
     }
     else {
       piVar1 = (int *)(**(romwright_code **)*param_2)(param_2,8,4);
       if (piVar1 != (int *)0x0) {
-        *piVar1 = (int)&DAT_00557f58;
+        *piVar1 = (int)&DAT_00420aac;
         piVar1[1] = 0;
       }
     }
@@ -43,7 +43,7 @@ unsigned int FUN_00423e14(unsigned int param_1,unsigned int *param_2,int param_3
   else {
     piVar1 = (int *)(**(romwright_code **)*param_2)(param_2,8,4);
     if (piVar1 != (int *)0x0) {
-      *piVar1 = (int)&DAT_00557fb0;
+      *piVar1 = (int)&DAT_00420b04;
       piVar1[1] = 0;
     }
   }

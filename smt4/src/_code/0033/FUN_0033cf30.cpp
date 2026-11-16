@@ -1,4 +1,3 @@
-/* NON_MATCHING: only final reset registers and the 4.0f literal load differ; all coordinate lookups, conversions and extrapolation match. */
 #include "shard/W6_W6Match3_PointDifference.h"
 #include "shard/W6_W6Match7_TextureTransform.h"
 #include <stddef.h>
@@ -31,6 +30,15 @@ typedef char BattleUiLayoutOffsetsCheck[offsetof(BattleUiLayoutWork, pairedAncho
 extern "C" {
 const PointLookupRecord *asdTMTexTableEntryAt(s32 group, s32 index);
 
+/* Sets the layout's three offset components. */
+static __inline void battleUiLayoutSetOffset(BattleUiLayoutWork *work, f32 x, f32 y, f32 z)
+{
+    work->offset[0] = x;
+    work->offset[1] = y;
+    work->offset[2] = z;
+}
+
+/* Reads the layout's anchor points from texture table 0x14 and resets its state, offset, scale and count. */
 void FUN_0033cf30(BattleUiLayoutWork *work)
 {
     for (s32 i = 0; i < 4; ++i) {
@@ -62,9 +70,7 @@ void FUN_0033cf30(BattleUiLayoutWork *work)
     work->firstIndex = -1;
     work->state = 0;
     work->secondIndex = -1;
-    work->offset[0] = 0.0f;
-    work->offset[1] = 0.0f;
-    work->offset[2] = 0.0f;
+    battleUiLayoutSetOffset(work, 0.0f, 0.0f, 0.0f);
     work->scale = 4.0f;
     work->visibleCount = 4;
 }

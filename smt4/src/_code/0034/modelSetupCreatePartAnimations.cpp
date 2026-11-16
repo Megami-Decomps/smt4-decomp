@@ -182,7 +182,7 @@ DictionaryEntry *nw_ut_ResDicPatricia_Get(DictionaryView *, const char *,
 Animation *_ZN9Obj42111cC1Ej(void *, Allocator *);
 void FUN_002a5960(Animation *, SecondaryParameters *, u32,
                   u32, int);
-void FUN_002a0428(Model *, int);
+void lightOwnerRegister(Model *, int);
 void nn_math_ARMv6_MTX34CopyAsm(Matrix34 *, const Matrix34 *);
 int __cxa_guard_acquire(u64 *);
 
@@ -474,7 +474,7 @@ extern "C" void modelSetupCreatePartAnimations(ModelSetup *setup)
         }
     }
 
-    FUN_002a0428(setup->model, 1);
+    lightOwnerRegister(setup->model, 1);
     if (setup->model) {
         setup->model->data->parts[0]->visible = 0;
         setup->model->data->parts[1]->visible = 0;

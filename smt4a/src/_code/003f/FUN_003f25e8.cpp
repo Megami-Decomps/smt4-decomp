@@ -1,4 +1,3 @@
-/* NON_MATCHING: canonical accessor and form guards match; result normalization branches to the shared zero return instead of MOVNE. */
 #include "battle/BattleUnitSlot.h"
 #include "code/Code0019.h"
 
@@ -25,7 +24,9 @@ s32 FUN_003f25e8()
 {
     ScriptBattleUnit* unit = reinterpret_cast<ScriptBattleUnit *>(
         btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
-    if (unit == NULL || unit->data == NULL)
+    if (unit == NULL)
+        return 0;
+    if (unit->data == NULL)
         return 0;
     ScriptUnitForm* form = unit->data->form;
     if (form == NULL)

@@ -1,73 +1,71 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e1a00` (_code @ 0x2e1a00, 0xe8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: rewritten from the draft; the thread start block is built in a different stack and register order (retail: parameter-ops at sp+16, argument at sp+32, stack top computed last into r4). */
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "nn/Result.h"
+#include "sys/ResultReport.h"
 #include "shard/W6_W6Match3_OnlineValueCompletion.h"
 
+/* The memory a thread runs on: base and size of the block. */
+struct CecThreadStack {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 base;
+    /* 0x0C */ u32 size;
+};
+
+
+/* The CEC inbox reader as its initialisation sees it. */
+struct CecInboxReader {
+    /* 0x000 */ u8 unk000[0x6c];
+    /* 0x06C */ s32 nextMessageIndex;
+    /* 0x070 */ s32 messageCount;
+    /* 0x074 */ u32 unk74;
+    /* 0x078 */ u32 writeCount;
+    /* 0x07C */ u32 readCount;
+    /* 0x080 */ u8 unk080[0x3a0];
+    /* 0x420 */ u8 lock[0xc];
+    /* 0x42C */ u8 thread[8];
+    /* 0x434 */ CecThreadStack stack;
+    /* 0x444 */ u8 unk444[8];
+    /* 0x44C */ void *stackMemory;
+};
+
 extern "C" {
+/* How a thread start copies, destroys and calls its one-word parameter (the SDK's typed start). */
+struct ThreadParameterOps {
+    /* 0x00 */ u32 size;
+    /* 0x04 */ void (*copy)(const u32 *source, u32 *destination);
+    /* 0x08 */ void (*destroy)(void);
+    /* 0x0C */ u32 (*invoke)(u32 (*callback)(u32), const u32 *value);
+};
 
-int FUN_002bcc60(...);
-int resultReportIfFailed(...);
-int memAlloc(...);
-int nn_os_CriticalSection_Initialize(...);
-int FUN_002c526c(...);
+extern const char DAT_00403530[];
+void nn_os_CriticalSection_Initialize(void *section);
+void resultReportIfFailed(void *stack, void *memory, u32 size);
+nn::Result FUN_002bcc60(void *thread, const ThreadParameterOps *ops, void (*entry)(CecInboxReader *),
+                        CecInboxReader **argument, u32 stackTop, s32 priority, s32 affinity, s32 flag);
+void FUN_001dc684(CecInboxReader *reader);
+void FUN_003f6e94(const u32 *source, u32 *destination);
+void FUN_003f6fe8(void);
+u32 FUN_003f6f5c(u32 (*callback)(u32), const u32 *value);
 
-/* stack frame of param_1: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
-
-extern int FUN_001dc684(...); /* 0x1dc684 */
-extern unsigned char LAB_003f6e94; /* 0x3f6e94 */
-extern unsigned char LAB_003f6f5c; /* 0x3f6f5c */
-extern unsigned char LAB_003f6fe8; /* 0x3f6fe8 */
-
-/* Supplied declaration required: FUN_002bcc60. */
-/* Supplied declaration required: resultReportIfFailed. */
-/* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
-/* Supplied declaration required: FUN_002c526c. */
-
-
-void FUN_002e1a00(int param_1)
-
+/* Sets up the CEC inbox reader and starts its worker thread on a fresh 4 KB stack. */
+void FUN_002e1a00(CecInboxReader *reader)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned char *temp_v3;
-  unsigned char *temp_v4;
-  unsigned char *temp_v5;
-  int temp_v6;
-  
-  nn_os_CriticalSection_Initialize(param_1 + 0x420);
-  *(unsigned int *)(param_1 + 0x6c) = 0;
-  temp_v0 = asdCecInboxGetMessageCount();
-  *(unsigned int *)(param_1 + 0x70) = temp_v0;
-  *(unsigned int *)(param_1 + 0x78) = 0;
-  *(unsigned int *)(param_1 + 0x7c) = 0;
-  temp_v0 = 0x100;
-  memAlloc(0x100,0x100,0,0x1000,0x1000,1);
-  *(unsigned int *)(param_1 + 0x44c) = temp_v0;
-  resultReportIfFailed(param_1 + 0x434,temp_v0,0x1000);
-  temp_v2 = 4;
-  temp_v3 = &LAB_003f6e94;
-  temp_v4 = &LAB_003f6fe8;
-  temp_v5 = &LAB_003f6f5c;
-  temp_v1 = param_1 + 0x42c;
-  temp_v6 = param_1;
-  FUN_002bcc60(temp_v1,&temp_v2,FUN_001dc684,&temp_v6,
-               *(int *)(param_1 + 0x43c) + *(int *)(param_1 + 0x440),0x11,0xfffffffe,0);
-  if ((temp_v1 & 0x7e00000) != 0x600000 && (int)temp_v1 < 0) {
-    FUN_002c526c();
-  }
-  return;
+    nn_os_CriticalSection_Initialize(reader->lock);
+    reader->nextMessageIndex = 0;
+    reader->messageCount = asdCecInboxGetMessageCount();
+    reader->writeCount = 0;
+    reader->readCount = 0;
+    asdDebugTrace(DAT_00403530, 202);
+    reader->stackMemory = memAlloc(0x100, 0x100, 0, 0x1000, 0x1000, 1);
+    resultReportIfFailed(&reader->stack, reader->stackMemory, 0x1000);
+    ThreadParameterOps ops = {4, FUN_003f6e94, FUN_003f6fe8, FUN_003f6f5c};
+    CecInboxReader *argument = reader;
+    nn::Result result = FUN_002bcc60(reader->thread, &ops, FUN_001dc684, &argument,
+                                     reader->stack.base + reader->stack.size, 17, -2, 0);
+    if ((result & 0x7e00000) != 0x600000 && nnResultIsFailure(result)) {
+        FUN_002c526c(result);
+    }
 }
-
-} /* extern "C" */
+}

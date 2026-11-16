@@ -1,4 +1,4 @@
-/* NON_MATCHING: pending-loop conditional initialization recovered; mode flag and sprite argument scheduling differ. */
+/* NON_MATCHING: only the mode flag's argument scheduling differs: retail forms &bank->first[i] between the mode compare and the conditional moves, the build after them. */
 #include "common.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include <stddef.h>
@@ -41,9 +41,8 @@ extern "C" void FUN_00225238(SpriteBankUpdate *bank, s32 added, s32 removed)
     if (bank->pending > 0) {
         for (s32 i = 0; i < bank->pending; ++i) {
             s32 index = bank->active - i - 1;
-            UiAnimatedSprite *sprite = &bank->second[index];
-            pairSetFirstResetSecond(sprite, 6);
-            spriteStartAnimationByIndex(sprite, 1);
+            pairSetFirstResetSecond(&bank->second[index], 6);
+            spriteStartAnimationByIndex(&bank->second[index], 1);
             spriteStartAnimationByIndex(&bank->third[index], 6);
             spriteStartAnimationByIndex(&bank->fourth[index], 4);
         }

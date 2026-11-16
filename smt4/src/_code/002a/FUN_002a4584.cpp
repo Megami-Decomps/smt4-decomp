@@ -6,7 +6,7 @@ extern "C" {
 u32 libc_strlen(const char *text);
 void _ZN9Obj422224C1Ev(FileQueueRequest *request);
 char *FUN_002ba81c(char *destination, const char *source, u32 capacity);
-FileQueueRequest *FUN_002a2f08(FileQueue *queue, const FileQueueRequest *request);
+FileQueueRequest *fileQueuePush(FileQueue *queue, const FileQueueRequest *request);
 void FUN_002a2e08(FileQueue *queue);
 void threadSleepDuration(s64 nanoseconds);
 
@@ -26,7 +26,7 @@ u32 FUN_002a4584(FileQueue *queue, const char *path, const char *secondPath, u32
         request.bytes = bytes;
         request.context = context;
         request.flags |= 2;
-        operation = FUN_002a2f08(queue, &request);
+        operation = fileQueuePush(queue, &request);
         FUN_002a2e08(queue);
         while (operation->operation.state != 3)
             threadSleepDuration(3000000);
@@ -38,7 +38,7 @@ u32 FUN_002a4584(FileQueue *queue, const char *path, const char *secondPath, u32
         request.mode = mode;
         request.bytes = bytes;
         request.context = 0;
-        operation = FUN_002a2f08(queue, &request);
+        operation = fileQueuePush(queue, &request);
         FUN_002a2e08(queue);
         while (operation->operation.state != 3)
             threadSleepDuration(3000000);

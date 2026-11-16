@@ -1,4 +1,3 @@
-/* NON_MATCHING: canonical job/surface/context contracts recovered; state-base formation and captured/ready guard exits differ. */
 #include "shard/JobWork.h"
 #include "camp/RenderCtx.h"
 
@@ -33,23 +32,29 @@ s32 stateValuesGetBySelector(s32 arg);
 s32 FUN_0010b2d0(u32 job)
 {
     TitleWork *work = (TitleWork *)jobGetWork(job);
-    TitleState *state;
 
     if (stateValuesGetBySelector(0) != 0) {
         work->state.busy = 1;
-    } else if (work->state.active != 0) {
-        state = &work->state;
-        if (state->captured == 0 && state->busy == 0 && state->ready != 0) {
-            renderCtxSelectStereoLayout(g_titleScene);
-            work->surface->width = 0x200;
-            work->surface->height = 0x200;
-            work->state.unk62 = FUN_002bfadc(0, work->surface);
-            surfaceCopy(work->surface, work->surface);
-            work->surface->width >>= 1;
-            work->surface->height >>= 1;
-            work->state.captured = 1;
-        }
+        return 0;
     }
+    TitleState *state = &work->state;
+    if (state->active == 0) {
+        return 0;
+    }
+    if (state->captured != 0 || state->busy != 0) {
+        return 0;
+    }
+    if (state->ready == 0) {
+        return 0;
+    }
+    renderCtxSelectStereoLayout(g_titleScene);
+    work->surface->width = 0x200;
+    work->surface->height = 0x200;
+    work->state.unk62 = FUN_002bfadc(0, work->surface);
+    surfaceCopy(work->surface, work->surface);
+    work->surface->width >>= 1;
+    work->surface->height >>= 1;
+    work->state.captured = 1;
     return 0;
 }
 

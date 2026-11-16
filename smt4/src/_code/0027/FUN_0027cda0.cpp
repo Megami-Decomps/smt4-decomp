@@ -52,7 +52,7 @@ void textFormatBuffer(char *buffer, const char *format, ...);
 u32 asdMdlManagerCreateSecondList(const char *name, u32 flags);
 u32 asdMdlManagerClone(u32 model, u32 flags);
 s32 modelHasLoadedAttachment(u32 model);
-void FUN_002a0428(u32 model, s32 flag);
+void lightOwnerRegister(u32 model, s32 flag);
 
 /* Runs the step after the model exists: marks the slot live with the row's position and advances. */
 static void finishSlot(UnitSpawner *spawner)
@@ -65,7 +65,7 @@ static void finishSlot(UnitSpawner *spawner)
         spawner->cloneAvailable = 1;
         spawner->cloneSlot = spawner->slot;
     }
-    FUN_002a0428(slot->model, 1);
+    lightOwnerRegister(slot->model, 1);
     slot->active = 1;
     slot->visible = 1;
     slot->position[0] = (f32)row->position[0];

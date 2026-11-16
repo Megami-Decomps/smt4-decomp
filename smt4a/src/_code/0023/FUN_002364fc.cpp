@@ -325,7 +325,7 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
     if (iVar4 != *(int *)(iVar2 + 0x9c)) {
       uVar5 = FUN_002a4b60();
       *(unsigned int *)(iVar2 + 0x9c) = uVar5;
-      FUN_0021b4e0();
+      s4LoadDrawProfilePanel();
     }
     iVar4 = FUN_00224880(*(unsigned int *)(iVar2 + 0x2b0));
     if (iVar4 != 2) {
@@ -337,7 +337,7 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
       *(unsigned int *)(iVar2 + 0xc) = 0x15;
       *(unsigned int *)(iVar2 + 0x10) = 0xb;
       func_0x002a4b88();
-      FUN_0021b4e0(0);
+      s4LoadDrawProfilePanel(0);
       FUN_00275f44(*(unsigned int *)(iVar2 + 0x2b0),4);
       *(unsigned int *)(iVar2 + 8) = 7;
       return 0;
@@ -379,7 +379,7 @@ code_r0x00236f38:
     *(unsigned int *)(iVar2 + 8) = 0x15;
     *(unsigned int *)(iVar2 + 0x9c) = 0;
     func_0x002a4b88();
-    FUN_0021b4e0(0);
+    s4LoadDrawProfilePanel(0);
     return 0;
   case 0x18:
     iVar4 = FUN_00229c9c();

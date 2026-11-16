@@ -64,7 +64,7 @@ MapRangeDefinition *dataTable2dGetEntryWithAoc(s32 index);
 s32 FUN_002df7d4(s16 index);
 u32 asdMdlManagerCreateFromSource(const void *source, u32 parameter, u32 flags);
 u32 asdMdlManagerClone(u32 model, s32 flags);
-void FUN_002a0428(u32 model, s32 enabled);
+void lightOwnerRegister(u32 model, s32 enabled);
 void mapRangeUpdateModelVisibilityAndTransforms();
 }
 
@@ -130,13 +130,13 @@ extern "C" s32 FUN_002d3b20()
                 instance->clone = 0;
                 instance->cloneEnabled = 0;
                 instance->baseModel = g_mapRangeWork->modelIndex;
-                FUN_002a0428(g_mapRangeWork->models[g_mapRangeWork->modelIndex].handle, 1);
+                lightOwnerRegister(g_mapRangeWork->models[g_mapRangeWork->modelIndex].handle, 1);
             } else {
                 instance->cloned = 1;
                 instance->clone = asdMdlManagerClone(g_mapRangeWork->models[g_mapRangeWork->modelIndex].handle, 0);
                 instance->cloneEnabled = 1;
                 instance->baseModel = 0;
-                FUN_002a0428(instance->clone, 1);
+                lightOwnerRegister(instance->clone, 1);
             }
             ++created;
         }

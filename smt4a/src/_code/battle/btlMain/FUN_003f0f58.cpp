@@ -1,4 +1,4 @@
-/* NON_MATCHING: svc 0x24 (through the wrapper) and the (result, failed) fatal-error calls match; retail materializes the timeout test as a bool (movne/moveq/teq) before branching, predicates the wait arguments ahead of the branch, and keeps the thread argument at sp+32 after the descriptor. */
+/* NON_MATCHING: everything matches except that retail predicates the zero timeout (movne r2, #0; movne r3, r2) above the thread-handle branch, where the build sets it after (same as FUN_0035d83c). */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "nn/os/ThreadLaunch.h"
@@ -39,12 +39,6 @@ struct BattleWorkerState {
     /* 0x4d0c */ u8 lock[0x14];
 };
 
-/* What the thread entry receives: its argument descriptor and the pointer it copies. */
-struct WorkerStartContext {
-    ThreadArgumentDescriptor descriptor;
-    BattleWorkerState *state;
-};
-
 extern "C" {
 extern const char DAT_00528898[]; /* the source file name for the allocation trace */
 
@@ -59,6 +53,22 @@ void FUN_00514a24(void);
 void FUN_00514b74(void);
 void FUN_00514ae4(void);
 
+/* Starts a thread running entry(argument) on the stack, the argument copied by value; a failure is reported. */
+static __inline void workerThreadStart(WorkerThread *thread, void (*entry)(void *), BattleWorkerState *argument,
+                                      WorkerStack *stack, s32 priority)
+{
+    ThreadArgumentDescriptor descriptor;
+    descriptor.argumentSize = sizeof(argument);
+    descriptor.callbacks[0] = FUN_00514a24;
+    descriptor.callbacks[1] = FUN_00514b74;
+    descriptor.callbacks[2] = FUN_00514ae4;
+    s32 result = FUN_002fb0d4(thread, &descriptor, entry, &argument, stack->address + stack->size, priority, 0, 0);
+    bool failed = nnResultIsFailure(result);
+    if (failed) {
+        FUN_002e3140(result, failed);
+    }
+}
+
 /* Starts the battle state's worker thread on its own 4 KiB stack, unless it is still running. */
 void FUN_003f0f58(BattleWorkerState *state)
 {
@@ -71,30 +81,19 @@ void FUN_003f0f58(BattleWorkerState *state)
         state->stack = new WorkerStack();
         resultReportIfFailed(state->stack, state->stackMemory, 0x1000);
     }
+    bool timedOut = false;
     if (state->thread.handle != 0) {
         s32 result = svcWaitSynchronization1(state->thread.handle, 0);
         bool failed = nnResultIsFailure(result);
         if (failed) {
             FUN_002e3140(result, failed);
         }
-        nnResultFields code;
-        code.value = result;
-        if (code.fields.description == 0x3fe) {
-            return;
-        }
+        timedOut = !nnResultIsNotTimeout(result);
     }
-    WorkerStartContext context;
-    context.descriptor.argumentSize = sizeof(state);
-    context.descriptor.callbacks[0] = FUN_00514a24;
-    context.descriptor.callbacks[1] = FUN_00514b74;
-    context.descriptor.callbacks[2] = FUN_00514ae4;
-    context.state = state;
-    s32 result = FUN_002fb0d4(&state->thread, &context.descriptor, FUN_003f0794, &context.state,
-                              state->stack->address + state->stack->size, 0x11, 0, 0);
-    bool failed = nnResultIsFailure(result);
-    if (failed) {
-        FUN_002e3140(result, failed);
+    if (timedOut) {
+        return;
     }
+    workerThreadStart(&state->thread, FUN_003f0794, state, state->stack, 0x11);
 }
 
 } /* extern "C" */

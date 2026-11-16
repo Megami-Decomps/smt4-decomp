@@ -1,4 +1,3 @@
-/* NON_MATCHING: enclosing-list lookup and current-entry address calculation are scheduled in the opposite order. */
 #include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 extern "C" {
@@ -30,7 +29,8 @@ void asdGxCommandListEnd(AsdGxCommandList *list, s32 restoreCopy, u32 unk08, u32
     list->entryCount++;
     g_asdGxState.depth--;
     if (g_asdGxState.depth != 0) {
-        outer = g_asdGxCommandListStack[g_asdGxState.depth - 1];
+        s32 depth = g_asdGxState.depth;
+        outer = g_asdGxCommandListStack[depth - 1];
         list->entries[outer->entryCount].values[0] = list->entries[list->entryCount].values[0];
         list->entries[outer->entryCount].values[1] = list->entries[list->entryCount].values[1];
         FUN_0017df1c();

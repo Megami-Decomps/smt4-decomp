@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the null-model readiness branch differs: compiler skips the redundant second null check that retail preserves. */
 #include "battle/BattleStageLoadWork.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "shard/JobWork.h"
@@ -11,7 +10,6 @@ s32 FUN_00162ea4(void);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 void asdEnvResetModelBank(const char *file, s32 bank);
 s32 modelHasLoadedAttachment(AsdMdlObject *model);
-void lightOwnerRegister(AsdMdlObject *model, s32 enabled);
 void nodeSetTranslation3f(AsdMdlNode *node, s32 mode, f32 x, f32 y, f32 z);
 void animPlayerSetLoopPolicy(AsdMdlNode *node, s32 loop);
 void FUN_003d502c(s32 bank);
@@ -40,9 +38,9 @@ s32 FUN_0031bd24(u32 handle)
     case 1:
         if (work->model != NULL && !modelHasLoadedAttachment(work->model))
             break;
-        if (work->model != NULL) {
-            if (work->model->node->unk0c < 0) {
-                lightOwnerRegister(work->model, 1);
+        if (AsdMdlObject *model = work->model) {
+            if (model->node->unk0c < 0) {
+                lightOwnerRegister(model, 1);
             }
             nodeSetTranslation3f(work->model->node, 0, 0.0f, 0.0f, 0.0f);
             animPlayerSetLoopPolicy(work->model->node, 1);

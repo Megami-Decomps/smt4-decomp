@@ -9,32 +9,41 @@ struct TitleJobSurface {
     /* 0x18 */ s32 height;
 };
 
+/* The title-surface job's readiness flags and results (0xE00 in its work). */
+struct TitleJobFlags {
+    /* 0x00 */ u8 unk00[0xDC];
+    /* 0xDC */ u8 active;
+    /* 0xDD */ u8 ready;
+    /* 0xDE */ u8 unkDE[6];
+    /* 0xE4 */ u8 surfaceResult;
+    /* 0xE5 */ u8 surfaceUpdated;
+    /* 0xE6 */ u8 overlayUpdated;
+    /* 0xE7 */ u8 unkE7[0x19];
+};
+
+/* The title-surface job's surfaces and the state that blocks redrawing them (0xF00 in its work). */
+struct TitleJobFrame {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ TitleJobSurface *surface;
+    /* 0x24 */ TitleJobSurface *overlaySurface;
+    /* 0x28 */ u8 overlayShown;
+    /* 0x29 */ u8 unk29[0xAF];
+    /* 0xD8 */ u8 blocked;
+    /* 0xD9 */ u8 unkD9[3];
+    /* 0xDC */ void *source;
+};
+
 /* Partial work view of the title-surface job, not the title scene global. */
 struct TitleJobWork {
-    /* 0x000 */ u8 unk000[0xEDC];
-    /* 0xEDC */ u8 unkEDC;
-    /* 0xEDD */ u8 unkEDD;
-    /* 0xEDE */ u8 unkEDE[6];
-    /* 0xEE4 */ u8 surfaceResult;
-    /* 0xEE5 */ u8 surfaceUpdated;
-    union {
-        /* 0xEE6 */ u8 unkEE6[0x3A];
-        /* 0xEE6 */ u8 overlayUpdated;
-    };
-    /* 0xF20 */ TitleJobSurface *surface;
-    union {
-        /* 0xF24 */ u8 unkF24[4];
-        /* 0xF24 */ TitleJobSurface *overlaySurface;
-    };
-    /* 0xF28 */ u8 overlayShown;
-    /* 0xF29 */ u8 unkF29[0xAF];
-    /* 0xFD8 */ u8 unkFD8;
-    /* 0xFD9 */ u8 unkFD9[3];
-    /* 0xFDC */ void *unkFDC;
+    /* 0x000 */ u8 unk000[0xE00];
+    /* 0xE00 */ TitleJobFlags flags;
+    /* 0xF00 */ TitleJobFrame frame;
 };
-typedef char TitleJobWorkSurfaceCheck[offsetof(TitleJobWork, surface) == 0xF20 ? 1 : -1];
-typedef char TitleJobWorkTailCheck[offsetof(TitleJobWork, unkFDC) == 0xFDC ? 1 : -1];
-typedef char TitleJobWorkSizeCheck[sizeof(TitleJobWork) == 0xFE0 ? 1 : -1];
-typedef char TitleJobWorkOverlayCheck[offsetof(TitleJobWork, overlayUpdated) == 0xEE6 &&
-    offsetof(TitleJobWork, overlaySurface) == 0xF24 ? 1 : -1];
+typedef char TitleJobWorkLayoutCheck[
+    offsetof(TitleJobWork, flags.active) == 0xEDC &&
+    offsetof(TitleJobWork, flags.overlayUpdated) == 0xEE6 &&
+    offsetof(TitleJobWork, frame.surface) == 0xF20 &&
+    offsetof(TitleJobWork, frame.overlayShown) == 0xF28 &&
+    offsetof(TitleJobWork, frame.source) == 0xFDC &&
+    sizeof(TitleJobWork) == 0xFE0 ? 1 : -1];
 #endif

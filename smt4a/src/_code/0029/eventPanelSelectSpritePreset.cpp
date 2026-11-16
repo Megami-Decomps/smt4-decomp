@@ -1,4 +1,4 @@
-/* NON_MATCHING: initial mode/option stores and final animated-state/delay stores are scheduled differently; -O2 candidate. */
+/* NON_MATCHING: `animated` is a byte argument (its store now follows the option stores as in retail); remaining: armcc stores `initialized` before `mode`, and stores the delay after the writeback frame/state stores where retail stores it first. */
 #include "common.h"
 #include "sys/RuntimeObjects.h"
 
@@ -16,7 +16,7 @@ void uiSpriteSelectAnim(EventPanelSprite *, u32);
 void uiSpriteSetKeyframe(EventPanelSprite *, u32, u32);
 s32 FUN_00291e14();
 
-void eventPanelSelectSpritePreset(EventPanelPresetWork *work, s32 mode, u8 optionB, u8 optionA, s32 animated)
+void eventPanelSelectSpritePreset(EventPanelPresetWork *work, s32 mode, u8 optionB, u8 optionA, u8 animated)
 {
     work->mode = mode;
     work->initialized = 1;

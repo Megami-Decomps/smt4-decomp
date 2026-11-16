@@ -1,17 +1,17 @@
-/* NON_MATCHING: retail uses `ldm r2, {r1, r2}` where armcc emits `mov r1, r0`. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
 
-extern u32 DAT_00570dc8[2];
+/* The battle-state bits this command sets (g_battleMaskPresets + 0x50; the object has no size yet). */
+extern u64 DAT_00570dc8;
 void sysPlaySe(s32 sound);
 
+/* Script command: sets the preset bits in the battle state's flags and plays sound effect 223. */
 s32 FUN_0035f5a8(void)
 {
     BtlMainStateA *state = btlGetMainState();
-    state->stateFlags.words[0] |= DAT_00570dc8[0];
-    state->stateFlags.words[1] |= DAT_00570dc8[1];
+    state->stateFlags64.bits |= DAT_00570dc8;
     sysPlaySe(223);
     return 1;
 }

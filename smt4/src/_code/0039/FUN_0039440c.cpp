@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail loads the sequence before clearing pending and uses STRD for the argument header; armcc reorders and uses separate stores. */
+/* NON_MATCHING: retail materialises the zero for `pending` before the ~0 and clears it (strb) before the strd of the argument header; ours stores in the opposite order. */
 #include "common.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
 
@@ -28,9 +28,9 @@ s32 FUN_0039440c(SequenceRequestState *request)
     if (!request->pending)
         return 0;
     SequenceArguments arguments;
-    request->pending = 0;
     arguments.sequence = request->sequence;
     arguments.flags = ~0u;
+    request->pending = 0;
     for (u32 index = 0; index < 6; ++index)
         arguments.values[index] = request->arguments[index];
     sequenceRequestClearDeferred();

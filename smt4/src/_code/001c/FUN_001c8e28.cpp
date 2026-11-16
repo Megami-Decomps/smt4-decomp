@@ -115,7 +115,7 @@ unsigned int FUN_001c8e28(void)
         puVar4 = DAT_0044de2c;
         iVar8 = iVar8 + 1;
       } while (iVar8 < 2);
-      FUN_002a0428(DAT_0044de2c[0xd8],1);
+      lightOwnerRegister(DAT_0044de2c[0xd8],1);
       FUN_0029a014(*(unsigned int *)(puVar4[0xd8] + 8),0);
       iVar3 = DAT_0044de30;
       puVar11 = (unsigned int *)puVar4[0xd4];

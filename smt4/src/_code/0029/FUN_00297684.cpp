@@ -10,7 +10,7 @@ int modelSetAnglesDegrees(unsigned int, int, unsigned char [20]);
 int animPlayerSetLoopPolicy(unsigned int, int);
 int nodeSetTranslation(unsigned int, int, unsigned char [12]);
 int nodeSetTranslation3f(unsigned int, int);
-int FUN_002a0428(int, unsigned int);
+int lightOwnerRegister(int, unsigned int);
 int modelSelectPrimaryMotion(unsigned int, int);
 int asdMdlManagerDestroy(unsigned int);
 int FUN_002b2ae8(unsigned int, int, unsigned char [12]);
@@ -30,7 +30,7 @@ extern unsigned int FUN_0019df10(void);
 /* Supplied declaration required: animPlayerSetLoopPolicy. */
 /* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: nodeSetTranslation3f. */
-/* Supplied declaration required: FUN_002a0428. */
+/* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: modelSelectPrimaryMotion. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
 struct ModelBoneAttachmentRoot;
@@ -67,7 +67,7 @@ void FUN_00297684(int param_1)
       temp_v0 = modelHasLoadedAttachment((const ModelBoneAttachmentRoot *)*(int *)(param_1 + 8));
       if (temp_v0 != 0) {
         if (*(int *)(*(int *)(*(int *)(param_1 + 8) + 8) + 0xc) < 0) {
-          FUN_002a0428(*(int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc));
+          lightOwnerRegister(*(int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc));
         }
         nodeSetTranslation3f(*(unsigned int *)(*(int *)(param_1 + 8) + 8),0);
         animPlayerSetLoopPolicy(*(unsigned int *)(*(int *)(param_1 + 8) + 8),1);
@@ -123,7 +123,7 @@ void FUN_00297684(int param_1)
         FUN_002b2ae8(*(unsigned int *)(*(int *)(param_1 + 8) + 8),0,temp_v9);
         objectValueGetChecked(*(unsigned int *)(*(int *)(param_1 + 8) + 8),0,temp_v10);
         if (*(int *)(*(int *)(*(int *)(temp_v3 + 0x18) + 8) + 0xc) < 0) {
-          FUN_002a0428(*(int *)(temp_v3 + 0x18),*(unsigned int *)(param_1 + 0xc));
+          lightOwnerRegister(*(int *)(temp_v3 + 0x18),*(unsigned int *)(param_1 + 0xc));
         }
         nodeSetTranslation(*(unsigned int *)(*(int *)(temp_v3 + 0x18) + 8),0,temp_v9);
         modelSetAnglesDegrees(*(unsigned int *)(*(int *)(temp_v3 + 0x18) + 8),0,temp_v10);

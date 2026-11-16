@@ -1,4 +1,4 @@
-/* NON_MATCHING: scrGetArg(0) and the prologue match; retail loads the 64-bit flag pair with ldm (lo r1, hi r2) after `mov r3, #1`, armcc loads the halves singly (hi first) */
+/* NON_MATCHING: the ldm of the 64-bit flag pair now matches; retail folds the mask's sign extension into `and r0, r2, r0, asr #31`, armcc computes it with a separate asr. */
 #include "common.h"
 #include "script/ScriptArgs.h"
 #include "battle/BtlMainAccess.h"
@@ -9,8 +9,7 @@ extern "C" {
 u32 FUN_002f78dc(void)
 {
     u32 bit = scrGetArg(0);
-    u64 flags = btlGetMainState()->flags49D0;
-    scrSetResult((flags & (s64)(1 << bit)) != 0);
+    scrSetResult((btlGetMainState()->flags49D0 & (s64)(1 << bit)) != 0);
     return 1;
 }
 }

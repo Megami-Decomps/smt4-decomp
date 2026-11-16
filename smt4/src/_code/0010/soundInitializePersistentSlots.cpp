@@ -3,7 +3,7 @@
 
 extern "C" {
 void FUN_0010e5a4(f32 duration);
-void FUN_0010e8e8(f32 duration);
+void asdSnd3dSetOutputVolume(f32 duration);
 void FUN_0010edbc(f32 duration);
 void soundApplyVolumeToSlots(u32 volume);
 void asdSndEnsureCurrentSlotData(u32 resource);
@@ -24,7 +24,7 @@ void soundInitializePersistentSlots(void)
         asdSoundSelectSlotB(3);
         asdSndEnsureCurrentSlotData(0x6000001);
         FUN_0010e5a4(200.0f);
-        FUN_0010e8e8(800.0f);
+        asdSnd3dSetOutputVolume(800.0f);
         FUN_0010edbc(250.0f);
         soundApplyVolumeToSlots(g_soundVolumeSetting.volume);
         memClear(g_eventQueueEntries, sizeof(g_eventQueueEntries));

@@ -1,4 +1,3 @@
-/* NON_MATCHING: code, frame layout and row count match retail; only callee-saved numbering differs (retail: r5 request, r6 semaphore address computed before the queue copy; here r5 semaphore, r6 request). */
 #include "sys/FileWorkerQueue.h"
 #include "nn/Result.h"
 #include "sys/ResultReport.h"
@@ -18,17 +17,31 @@ static __inline FileQueueRequest *fileQueueStore(FileQueue *queue, const FileQue
     return inserted;
 }
 
-// Append a copied request to the fixed ring and link it after the previous queued request.
-FileQueueRequest *FUN_002a2f08(FileQueue *queue, const FileQueueRequest *request)
+// Wait on the queue's semaphore and report a failure.
+static __inline void semaphoreAcquire(u32 *semaphore)
 {
-
-    u32 *semaphore = &queue->semaphore;
     u32 handle = *semaphore;
     s32 index;
     s32 result = FUN_002c40f8(&index, &handle, 1, 0, -1);
     bool failed = nnResultIsFailure(result);
     if (failed)
         FUN_002c526c(result, failed);
+}
+
+// Release the queue's semaphore once and report a failure.
+static __inline void semaphoreRelease(u32 *semaphore)
+{
+    u32 previousCount;
+    s32 result = FUN_002c5254(&previousCount, *semaphore, 1);
+    bool failed = nnResultIsFailure(result);
+    if (failed)
+        FUN_002c526c(result, failed);
+}
+
+// Append a copied request to the fixed ring and link it after the previous queued request.
+FileQueueRequest *fileQueuePush(FileQueue *queue, const FileQueueRequest *request)
+{
+    semaphoreAcquire(&queue->semaphore);
     FileQueueRequest *inserted;
     if (queue->readIndex == queue->writeIndex) {
         inserted = fileQueueStore(queue, request);
@@ -37,13 +50,7 @@ FileQueueRequest *FUN_002a2f08(FileQueue *queue, const FileQueueRequest *request
         inserted = fileQueueStore(queue, request);
         previous->next = inserted;
     }
-    {
-        u32 previousCount;
-        result = FUN_002c5254(&previousCount, *semaphore, 1);
-        failed = nnResultIsFailure(result);
-        if (failed)
-            FUN_002c526c(result, failed);
-    }
+    semaphoreRelease(&queue->semaphore);
     return inserted;
 }
 }

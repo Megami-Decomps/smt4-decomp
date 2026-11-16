@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002a2e08(unsigned int);
-int FUN_002a2f08(unsigned int, unsigned char [4]);
+int fileQueuePush(unsigned int, unsigned char [4]);
 int _ZN9Obj422224C1Ev(unsigned char [4]);
 int FUN_002ba81c(...);
 int libc_strlen(...);
@@ -29,7 +29,7 @@ typedef struct {
 } param_8_stack;
 
 /* Supplied declaration required: FUN_002a2e08. */
-/* Supplied declaration required: FUN_002a2f08. */
+/* Supplied declaration required: fileQueuePush. */
 /* Supplied declaration required: _ZN9Obj422224C1Ev. */
 /* Supplied declaration required: FUN_002ba81c. */
 /* Supplied declaration required: libc_strlen. */
@@ -76,7 +76,7 @@ void FUN_00151b98(unsigned int param_1,unsigned int param_2,int param_3,unsigned
     temp_v13 = param_6;
     temp_v15 = param_7;
     temp_v18 = param_8;
-    FUN_002a2f08(param_1,temp_v9);
+    fileQueuePush(param_1,temp_v9);
     FUN_002a2e08(param_1);
     return;
   }
@@ -93,7 +93,7 @@ void FUN_00151b98(unsigned int param_1,unsigned int param_2,int param_3,unsigned
   temp_v2 = param_4;
   temp_v4 = param_6;
   temp_v6 = param_7;
-  FUN_002a2f08(param_1,temp_v0);
+  fileQueuePush(param_1,temp_v0);
   FUN_002a2e08(param_1);
   return;
 }

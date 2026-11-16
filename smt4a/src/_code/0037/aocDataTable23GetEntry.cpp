@@ -1,4 +1,3 @@
-/* NON_MATCHING: canonical table receiver and additional-entry snapshot recovered; paired count/entries load and sum register differ. */
 #include "common.h"
 #include "gamedata/DataTable.h"
 
@@ -30,9 +29,10 @@ AocEntry *aocDataTable23GetEntry(u32 index)
     if (index < count) {
         return &entries[index];
     }
-    const AocExtra extra = g_aocSystem->extra;
-    if (index < extra.count + count) {
-        return &extra.entries[index - count];
+    s32 extraCount = g_aocSystem->extra.count;
+    AocEntry *extraEntries = g_aocSystem->extra.entries;
+    if (index < extraCount + count) {
+        return &extraEntries[index - count];
     }
     return NULL;
 }

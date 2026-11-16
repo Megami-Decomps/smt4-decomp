@@ -1,4 +1,3 @@
-/* NON_MATCHING: canonical data-table arguments and add-on header snapshot recovered; header fields use scalar loads instead of retail LDM. */
 #include "gamedata/DataTable.h"
 
 extern "C" {
@@ -28,9 +27,10 @@ AocEntry *aocDataTable23GetEntry(u32 index)
     if (index < count) {
         return &entries[index];
     }
-    const AocExtra extra = g_aocSystem->extra;
-    if (index < extra.count + count) {
-        return &extra.entries[index - count];
+    s32 extraCount = g_aocSystem->extra.count;
+    AocEntry *extraEntries = g_aocSystem->extra.entries;
+    if (index < extraCount + count) {
+        return &extraEntries[index - count];
     }
     return NULL;
 }

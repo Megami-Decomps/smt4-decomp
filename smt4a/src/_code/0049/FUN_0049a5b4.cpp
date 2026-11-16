@@ -58,7 +58,7 @@ extern "C" {
 extern u8 sortCompareKeyPair;
 
 void sysMemClear(void *block, u32 bytes);
-u16 *FUN_00145f04(u8 rank, u32 seed, s32 column);
+u16 *statisticsGetCounter(u8 rank, u32 seed, s32 column);
 s32 FUN_001ba3d0(u32 flag);
 void aocRecordLookup83(u32 flag);
 u32 resolveWeightedItemChoice(u32 a, u32 b, u32 c, u32 d);
@@ -106,7 +106,7 @@ void FUN_0049a5b4(SaleMenu *menu)
     *count = 0;
     *total = 0;
     sysMemClear(entries, 0xC000);
-    u16 *discount = FUN_00145f04(menu->rank, menu->seed, menu->rank == 0 ? 6 : 1);
+    u16 *discount = statisticsGetCounter(menu->rank, menu->seed, menu->rank == 0 ? 6 : 1);
     for (u32 flag = 0x3B7; flag < 0x47F; flag++) {
         if (!flagValueIsPositiveForward(flag))
             continue;

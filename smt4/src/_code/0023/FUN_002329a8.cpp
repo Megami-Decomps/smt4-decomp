@@ -27,7 +27,7 @@ void nodeSetScale(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
 void FUN_002329a8(ModelCloneOwner *owner, u32 source)
 {
     owner->model = asdMdlManagerClone(source, 0);
-    FUN_002a0428(owner->model, 1);
+    lightOwnerRegister(owner->model, 1);
     AsdMdlObject *model = owner->model;
     model->flags &= ~2u;
     ((CloneNode *)model->node)->render->enabled = 1;

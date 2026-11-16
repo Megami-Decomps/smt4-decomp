@@ -86,17 +86,17 @@ void FUN_0020db10(void)
         g_lmapScene->sceneModel = asdMdlManagerCreateFromSource(g_gameState.models[3].source, g_gameState.models[3].param, 0x1c0);
         break;
     }
-    FUN_002a0428(g_lmapScene->sceneModel, 1);
+    lightOwnerRegister(g_lmapScene->sceneModel, 1);
     prepareModel(g_lmapScene->sceneModel);
     g_lmapScene->unk168 = 0;
     g_lmapScene->unk16C = -1;
 
     g_lmapScene->modelB = asdMdlManagerCreateFromSource(g_gameState.models[4].source, g_gameState.models[4].param, 0x1c0);
-    FUN_002a0428(g_lmapScene->modelB, 1);
+    lightOwnerRegister(g_lmapScene->modelB, 1);
     prepareModel(g_lmapScene->modelB);
 
     g_lmapScene->modelC = asdMdlManagerCreateFromSource(g_gameState.models[5].source, g_gameState.models[5].param, 0x1c0);
-    FUN_002a0428(g_lmapScene->modelC, 1);
+    lightOwnerRegister(g_lmapScene->modelC, 1);
     prepareModel(g_lmapScene->modelC);
 
     for (j = 0; j < dataTable2eSub1GetCount(); j++) {

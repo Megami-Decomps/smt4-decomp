@@ -27,7 +27,7 @@ extern "C" {
 
 VariantRequest* dataTable24Sub0GetEntries(void);
 s32 dataTable24Sub0Get(void);
-VariantState* FUN_002c0a2c(u8 group, u8 kind, s16 variant);
+VariantState* statisticsGetCounter(u8 group, u8 kind, s16 variant);
 s32 FUN_002c0a84(VariantState* state);
 u16* dataTableFindCategoryVariant(u8 group, u8 kind, s16 variant);
 s32 gameFlagIsSet(u32 flag);
@@ -49,12 +49,12 @@ void FUN_003c25f0(void)
             variant = 6;
         }
 
-        VariantState* state = FUN_002c0a2c(group, kind, variant);
+        VariantState* state = statisticsGetCounter(group, kind, variant);
         state->id = 0;
         state->rolledGroups = 0;
         state->timerAndFlags &= 0xc0;
         s32 index = FUN_002c0a84(state);
-        state = FUN_002c0a2c(group, kind, variant);
+        state = statisticsGetCounter(group, kind, variant);
         if (index == 0) state->rolledGroups = 0;
 
         u8 timer = state->timerAndFlags;

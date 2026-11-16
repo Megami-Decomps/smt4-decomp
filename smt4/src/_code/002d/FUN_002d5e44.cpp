@@ -29,7 +29,7 @@ extern int requestSubmitRecordById(void);
 /* Supplied declaration required: fileOwnerCloseB. */
 /* Supplied declaration required: fileOwnerCloseC. */
 /* Supplied declaration required: fileOwnerCloseD. */
-extern int FUN_0024ab94(unsigned char **, unsigned int, unsigned int);
+extern int romFileStreamOpen(unsigned char **, unsigned int, unsigned int);
 /* Supplied declaration required: fileHandleClose. */
 extern int FUN_002cbfe8(unsigned char **);
 
@@ -71,7 +71,7 @@ unsigned int FUN_002d5e44(int param_1,unsigned int param_2)
     }
   }
   else {
-    temp_v0 = FUN_0024ab94(&temp_v1,param_2,2);
+    temp_v0 = romFileStreamOpen(&temp_v1,param_2,2);
   }
   if (temp_v0 < 0) {
     fileHandleClose(&temp_v1,0);

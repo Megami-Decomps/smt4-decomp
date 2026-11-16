@@ -49,6 +49,7 @@ extern DepartingEnemyTable *g_mapEnemy;
 void FUN_001d2f48(void)
 {
     DepartingEnemyTable *table = g_mapEnemy;
+    s32 index = 0;
     g_gameState.active = 0;
     g_gameState.position[0] = 0.0f;
     g_gameState.position[1] = 0.0f;
@@ -64,7 +65,7 @@ void FUN_001d2f48(void)
     g_gameState.target[1] = 0.0f;
     g_gameState.target[2] = 0.0f;
     g_gameState.target[3] = 0.0f;
-    for (s32 index = 0; index < 32; ++index) {
+    for (; index < 32; ++index) {
         DepartingEnemy *enemy = &table->enemies[index];
         if (enemy->active != 0 && enemy->kind != 0 && enemy->kind < 11 &&
             enemy->locked == 0 && enemy->state == 16) {

@@ -6,7 +6,7 @@ extern "C" {
 extern MapIfState *g_mapIf;
 extern GameState g_gameState;
 NodeEnableNode *asdMdlManagerCreateFromSource(u32 source, u32 size, u32 flags);
-void FUN_002a0428(NodeEnableNode *model, s32 enabled);
+void lightOwnerRegister(NodeEnableNode *model, s32 enabled);
 void mapMarkerSynchronizeModelState(MapIfModelMarker *marker);
 
 // A local view avoids raising alignment inside GameState's byte padding.
@@ -27,7 +27,7 @@ void FUN_0020d6b0()
     MapIfState *interfaceState = g_mapIf;
     MapIfModelMarker *first = &interfaceState->modelMarkers[0];
     first->model = asdMdlManagerCreateFromSource(markerSources()->firstSource, markerSources()->firstSize, 7);
-    FUN_002a0428(first->model, 1);
+    lightOwnerRegister(first->model, 1);
     NodeEnableNode *firstModel = first->model;
     firstModel->flags |= 2;
     firstModel->resource->target->enabled = 0;
@@ -44,7 +44,7 @@ void FUN_0020d6b0()
     mapMarkerSynchronizeModelState(first);
     MapIfModelMarker *second = &interfaceState->modelMarkers[1];
     second->model = asdMdlManagerCreateFromSource(markerSources()->secondSource, markerSources()->secondSize, 7);
-    FUN_002a0428(second->model, 1);
+    lightOwnerRegister(second->model, 1);
     NodeEnableNode *secondModel = second->model;
     secondModel->flags |= 2;
     secondModel->resource->target->enabled = 0;

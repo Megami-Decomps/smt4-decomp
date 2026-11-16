@@ -59,7 +59,7 @@ s32 mapTableGetValue(s32 mapId);
 DepartModel *asdMdlManagerCreateFromSource(void *source, u32 size, u32 flags);
 DepartModel *asdMdlManagerCreateSecondList(const char *path, u32 flags);
 s32 modelHasLoadedAttachment(DepartModel *model);
-void FUN_002a0428(DepartModel *model, s32 flag);
+void lightOwnerRegister(DepartModel *model, s32 flag);
 void modelSelectPrimaryMotion(DepartMotion *motion, u32 index, f32 blend);
 void modelSelectSecondaryMotion(DepartMotion *motion, u32 index, f32 blend);
 void nodeSetTranslation(DepartMotion *motion, s32 node, DepartVec3 *translation);
@@ -68,7 +68,7 @@ void textFormatBuffer(char *out, const char *format, ...);
 /* Starts the loaded model with its first motions. */
 static __inline void departModelStart(DepartModel *model)
 {
-    FUN_002a0428(model, 1);
+    lightOwnerRegister(model, 1);
     modelSelectPrimaryMotion(model->motion, 0, 0.0f);
     modelSelectSecondaryMotion(model->motion, 0, 0.0f);
 }

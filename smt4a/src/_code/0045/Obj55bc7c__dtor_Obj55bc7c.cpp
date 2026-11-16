@@ -1,56 +1,14 @@
-/* NON_MATCHING: The decompiled container-cleanup arithmetic folds away retail iterator-distance logic and uses different material iteration offsets. */
-#include "romwright_types.h"
+/* NON_MATCHING: the material loop, the array reset and the allocator release match; retail guards the emptied element-destroy loop with an unsigned pointer compare and counts it from 1 (count + 1 bound), armcc counts from 0 against the signed size. */
 #include "classes/Obj55bc7c.h"
 
-extern "C" {
+extern "C" void nw_gfx_Material_DestroyResMaterial(u32 owner, u32 material);
 
-int nw_gfx_Material_DestroyResMaterial(unsigned int, unsigned int);
-
-typedef int romwright_code(...);
-
-/* Supplied declaration required: nw_gfx_Material_DestroyResMaterial. */
-
-
-} /* extern "C" */
-
+/* Destroys every material resource of the array, then releases the array. */
 Obj55bc7c::~Obj55bc7c()
-
 {
-    unsigned int *param_1 = (unsigned int *)this;
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int *puVar6;
-  unsigned int *puVar7;
-  unsigned int temp_v5;
-  
-  temp_v5 = param_1[1];
-  puVar7 = (unsigned int *)param_1[5];
-  for (puVar6 = (unsigned int *)param_1[4]; puVar6 != puVar7; puVar6 = puVar6 + 1) {
-    nw_gfx_Material_DestroyResMaterial(temp_v5,*puVar6);
-  }
-  temp_v3 = param_1[4];
-  temp_v1 = param_1[5];
-  if (temp_v3 >= temp_v1) {
-    temp_v4 = 0;
-  }
-  else {
-    temp_v4 = ((temp_v1 - temp_v3) & 7) >> 2;
-  }
-  temp_v2 = temp_v4 + 1;
-  temp_v0 = (int)(temp_v1 - temp_v3) >> 2;
-  if (temp_v2 < temp_v0 + 1) {
-    do {
-      temp_v2 = temp_v2 + 2;
-    } while (temp_v2 < temp_v0 + 1);
-  }
-  param_1[5] = temp_v3;
-  if ((int *)param_1[3] != (int *)0x0 && temp_v3 != 0) {
-    (**(romwright_code **)(*(int *)param_1[3] + 0xc))();
-  }
-  return;
+    u32 owner = this->owner;
+    MaterialHandle *end = materials.end;
+    for (MaterialHandle *material = materials.begin; material != end; ++material) {
+        nw_gfx_Material_DestroyResMaterial(owner, material->value);
+    }
 }
-

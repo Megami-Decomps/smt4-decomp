@@ -57,7 +57,7 @@ extern BattleVector3 DAT_006309b8;
 extern ScreenCameraGlobals g_asdCamera;
 void FUN_0014f0dc(DefaultScreenCamera*, const BattleVector3* eye,
                  const BattleVector3* target, const BattleVector3* up);
-GfxTransform* FUN_0016fba0(GfxTransform*, f32 fieldOfView, f32 aspect, f32 nearClip, f32 farClip);
+GfxTransform* mtx44Perspective(GfxTransform*, f32 fieldOfView, f32 aspect, f32 nearClip, f32 farClip);
 void nn_math_ARMv6_MTX44PivotC_FAST(GfxTransform*, s32 mode);
 void nn_math_ARMv6_MTX44TransposeAsm(GfxTransform* output, const GfxTransform* input);
 void nn_ulcd_CTR_StereoCamera_SetBaseFrustum(void* stereo, const GfxTransform* frustum);
@@ -89,11 +89,11 @@ void asdCameraResetScreenDefaults(s32 mode, s32 enabled, f32 period)
         camera->nearClip = slot->nearClip;
         camera->farClip = slot->farClip;
         camera->aspect = screen == 0 ? 5.0f / 3.0f : 4.0f / 3.0f;
-        FUN_0016fba0(&camera->projection, 18.267f * 0.017453292f,
+        mtx44Perspective(&camera->projection, 18.267f * 0.017453292f,
                       camera->aspect, camera->nearClip, camera->farClip);
         nn_math_ARMv6_MTX44PivotC_FAST(&camera->projection, 1);
         nn_math_ARMv6_MTX44TransposeAsm(&camera->transposedProjection, &camera->projection);
-        FUN_0016fba0(&camera->stereoProjection, camera->fieldOfView * 0.017453292f,
+        mtx44Perspective(&camera->stereoProjection, camera->fieldOfView * 0.017453292f,
                       camera->aspect, camera->nearClip, camera->farClip);
         nn_math_ARMv6_MTX44PivotC_FAST(&camera->stereoProjection, 0);
         if (camera->enabled) {

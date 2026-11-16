@@ -9,7 +9,7 @@ int dataTable2fSub0GetCount(void);
 int dataTable29Sub0GetEntryWithAoc(void);
 int FUN_002533f4(int, int, int);
 int mathDistanceBetweenPoints(void);
-int FUN_002a0428(unsigned int, int);
+int lightOwnerRegister(unsigned int, int);
 int dataTable00FindById(void);
 int gameFlagIsSet(...);
 int randNextInRange(int);
@@ -77,7 +77,7 @@ extern int *dataTable2fSub0GetRecord(int);
 extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 extern int FUN_00285574(void);
 /* Supplied declaration required: mathDistanceBetweenPoints. */
-/* Supplied declaration required: FUN_002a0428. */
+/* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: dataTable00FindById. */
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: gameFlagIsSet. */
@@ -306,7 +306,7 @@ LAB_0021c1e4:
             if (*(char *)(temp_v1 + 0x3051) != '\0') {
               temp_v8 = asdMdlManagerClone(*(unsigned int *)(temp_v1 + 0x304c),0);
               *(unsigned int *)(temp_v2 + 0x1ac) = temp_v8;
-              FUN_002a0428(temp_v8,1);
+              lightOwnerRegister(temp_v8,1);
               *(unsigned char *)(temp_v2 + 0x1b1) = 1;
             }
             else {

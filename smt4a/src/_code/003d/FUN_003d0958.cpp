@@ -1,39 +1,25 @@
 /* NON_MATCHING: case 1's closing stores are tail-merged with case 3's (strne/strne then b), retail keeps all three stores in place */
-#include "gamedata/DataTable.h"
+#include "gamedata/TextureIdTable.h"
 #include "ui/SpriteWindow.h"
 #include "StaffRoll/StaffRollMain.h"
 
 extern "C" {
 
 extern SpriteWindow *g_sWin; /* 0x57f57c */
-s32 FUN_0028520c(s16 id);
+s32 textureIdIsLoaded(s16 id);
 s32 FUN_001517b4(s32 first, s32 second);
 s32 FUN_00163aa4(ByteStateWork *sprite, f32 speed);
 void uiSpriteSetImageKeyframe(ByteStateWork *sprite, s32 keyframe, s32 frame);
 void FUN_0019e330(ByteStateWork *sprite, s32 keyframe, s32 frame);
 void workSetStateByte(ByteStateWork *work, u8 state);
 void asdTMTexTableReleaseNode(s32 table, s32 index);
-void *libc_bsearch(const void *key, const void *entries, u32 count, u32 size,
-                   s32 (*compare)(const void *, const void *));
-s32 FUN_002321f8(const void *key, const void *record);
-
-struct TextureIndexMapping {
-    u16 id;
-    s16 resource;
-};
-
 /* Releases the downloadable texture resource mapped to a window texture id, if it has one. */
 static __inline void releaseMappedTexture(s32 id)
 {
-    void *table = dataTableGet(0x47, 0);
-    const void *entries = dataTableGetEntries(table);
-    u32 count = dataTableGetCount(table);
-    u16 key = (u16)id;
-    const TextureIndexMapping *mapping = static_cast<const TextureIndexMapping *>(
-        libc_bsearch(&key, entries, count, sizeof(TextureIndexMapping), FUN_002321f8));
+    const TextureIdRecord *mapping = textureIdTableFind(id);
 
-    if (mapping != NULL && mapping->resource >= 0) {
-        asdTMTexTableReleaseNode(52, mapping->resource);
+    if (mapping != NULL && mapping->textureIndex >= 0) {
+        asdTMTexTableReleaseNode(52, mapping->textureIndex);
     }
 }
 
@@ -47,7 +33,7 @@ s32 FUN_003d0958(void)
     case 2:
         break;
     case 1:
-        if (FUN_0028520c((s16)window->textureId)) {
+        if (textureIdIsLoaded((s16)window->textureId)) {
             if (window->phase == 0) {
                 if (FUN_001517b4(9, 2) != 0 || slotIsActive(6) != 0) {
                     workSetStateByte(&window->sprite, 1);
@@ -65,7 +51,7 @@ s32 FUN_003d0958(void)
         }
         break;
     case 3:
-        if (FUN_0028520c((s16)window->textureId) && FUN_00163aa4(&window->sprite, 1.0f)) {
+        if (textureIdIsLoaded((s16)window->textureId) && FUN_00163aa4(&window->sprite, 1.0f)) {
             releaseMappedTexture(window->textureId);
             window->state = 0;
             window->phase = 0;
@@ -73,7 +59,7 @@ s32 FUN_003d0958(void)
         }
         break;
     case 4:
-        if (FUN_0028520c((s16)window->textureId) && ++window->holdTimer >= window->holdLimit) {
+        if (textureIdIsLoaded((s16)window->textureId) && ++window->holdTimer >= window->holdLimit) {
             releaseMappedTexture(window->holdTextureId);
             window->phase = 0;
             window->state = 2;

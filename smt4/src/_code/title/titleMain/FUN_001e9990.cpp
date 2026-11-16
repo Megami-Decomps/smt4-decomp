@@ -41,7 +41,7 @@ int asdMdlManagerCreateLoaded(...);
 int FUN_0029ee6c(...);
 int soundChannelRequestIfEnabled(int, int, int);
 int FUN_002a03d8(...);
-int FUN_002a0428(...);
+int lightOwnerRegister(...);
 int modelSlotAttachChild(...);
 int FUN_002a09b4(...);
 int FUN_002a5eb4(void);
@@ -127,7 +127,7 @@ extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: FUN_002a03d8. */
-/* Supplied declaration required: FUN_002a0428. */
+/* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: modelSlotAttachChild. */
 /* Supplied declaration required: FUN_002a09b4. */
 /* Supplied declaration required: FUN_002a5eb4. */
@@ -300,8 +300,8 @@ int FUN_001e9990(unsigned int handle)
     in_s0 = 5.0f;
     FUN_002c159c(temp_v6);
     FUN_00298d50(temp_v6);
-    FUN_002a0428(puVar13[0x23],1);
-    FUN_002a0428(puVar13[0x24],1);
+    lightOwnerRegister(puVar13[0x23],1);
+    lightOwnerRegister(puVar13[0x24],1);
     puVar10 = (unsigned int *)puVar13[0x23];
     if ((*puVar10 & 4) != 0) {
       *puVar10 = *puVar10 & 0xfffffffb;

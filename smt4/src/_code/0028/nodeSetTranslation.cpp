@@ -1,10 +1,15 @@
-/* NON_MATCHING: compiler groups translation loads and reorders independent component stores differently. */
 #include "common.h"
 
 namespace {
-struct Node { u8 padding[0x58]; u32 z; u8 gap[0xc]; u32 x; u8 gap2[0xc]; u32 y; u8 gap3[0xc]; u32 flags; };
+/* A node's 3x4 transform (row-major, translation in the last column) and its dirty flags. */
+struct Node {
+    /* 0x00 */ u8 padding[0x4c];
+    /* 0x4c */ u32 transform[3][4];
+    /* 0x7c */ u32 unk7c[3];
+    /* 0x88 */ u32 flags; /* 0x800: transform changed */
+};
 struct Owner { u8 padding[0x2c]; Node *node; };
-struct Translation { u32 z, x, y; };
+struct Translation { u32 x, y, z; };
 }
 extern "C" {
 /* Applies the supplied translation to the node and marks its transform dirty. */
@@ -12,9 +17,9 @@ void nodeSetTranslation(Owner *owner, u32 kind, const Translation *translation)
 {
     Node *node = owner->node;
     Translation value = *translation;
-    node->x = value.x;
-    node->y = value.y;
-    node->z = value.z;
+    node->transform[0][3] = value.x;
+    node->transform[2][3] = value.z;
+    node->transform[1][3] = value.y;
     node->flags |= 0x800;
 }
 }

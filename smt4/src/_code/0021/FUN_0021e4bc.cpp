@@ -66,7 +66,7 @@ MapObjEntry *mapObjGetCombinedEntry(s32 index);
 void textFormatBuffer(char buffer[128], const char *format, s32 kind);
 u32 asdMdlManagerCreateSecondList(const char *path, u32 flags);
 s32 modelHasLoadedAttachment(u32 model);
-void FUN_002a0428(u32 model, s32 flag);
+void lightOwnerRegister(u32 model, s32 flag);
 char *libc_strcpy(char *destination, const char *source);
 
 /* Loads the map's object table one step per call: scans for the next entry placed on this map (state 10),
@@ -113,7 +113,7 @@ u32 FUN_0021e4bc(void)
         MapObjEntry *entry = mapObjGetCombinedEntry(g_mapObj->entryIndex);
         MapObjSlot *slot = &g_mapObj->slots[g_mapObj->slot];
         if (modelHasLoadedAttachment(slot->model) != 0) {
-            FUN_002a0428(slot->model, 1);
+            lightOwnerRegister(slot->model, 1);
             slot->x = entry->x;
             slot->y = entry->y;
             slot->z = entry->z;

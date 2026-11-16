@@ -1,8 +1,15 @@
-/* NON_MATCHING: compiler uses literal offsets rather than retail split pointer additions. */
-#include "common.h"
-struct MenuState {u8 unk0000[16];u32 flags;u8 unk0014[31612];u8 first;u8 second;};
+#include "ui/NaviCategorySelection.h"
+
 extern "C" {
-void FUN_0048c09c(MenuState *menu);
-/* Resets the menu and activates both terminal flags. */
-void FUN_0048b86c(MenuState *menu){FUN_0048c09c(menu);menu->flags&=~16u;menu->first=1;menu->second=1;}
+void FUN_0048c09c(NaviCategorySelectionWork *work, u32 category);
+
+/* Selects the category, clears the 0x10 flag and requests a redraw of both screens. */
+void FUN_0048b86c(NaviCategorySelectionWork *work, u32 category)
+{
+    FUN_0048c09c(work, category);
+    work->flags &= ~0x10u;
+    for (s32 screen = 0; screen < 2; screen++) {
+        work->refresh[screen] = 1;
+    }
+}
 }

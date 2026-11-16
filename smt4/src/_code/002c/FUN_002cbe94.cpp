@@ -1,28 +1,40 @@
-/* NON_MATCHING: open-result lifetime, resize argument order and constant result materialization differ. */
 #include "shard/RomFileOpenState.h"
 
 extern "C" s32 FUN_002bb5a4(RomOpenFile *file, const char *path, u32 mode);
 #include "sys/ProcessResult.h"
 #include "sys/FilePaths.h"
+#include "nn/Result.h"
 extern "C" void asdFatalError();
 extern "C" void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(u32 handle);
 
-static __inline u32 fileRecordResult(u32 result)
+static __inline nn::Result fileRecordResult(nn::Result result)
 {
     FUN_002c3510(result);
     return result;
 }
 
+static __inline s32 romFileOpen(RomOpenFile *file, const char *path, u32 mode)
+{
+    romOpenFileInitialize(file);
+    return FUN_002bb5a4(file, path, mode);
+}
+
 // Create a file at the requested length, closing it if setting the length fails.
-extern "C" s32 FUN_002cbe94(RomFileOpenState *state, const char *path, u32 size)
+extern "C" nn::Result FUN_002cbe94(RomFileOpenState *state, const char *path, u32 size)
 {
     char resolvedPath[500];
-    if (!pathBuildWide(path, reinterpret_cast<s16 *>(resolvedPath), 0))
-        return fileRecordResult(0xe0e046bc);
-    romOpenFileInitialize(&state->file);
-    s32 result = FUN_002bb5a4(&state->file, resolvedPath, 6);
-    if ((s32)(result & 0x80000000) < 0)
-        return fileRecordResult(result);
+    nn::Result result;
+
+    if (!pathBuildWide(path, reinterpret_cast<s16 *>(resolvedPath), 0)) {
+        result = 0xe0e046bc;
+        FUN_002c3510(result);
+        return result;
+    }
+    result = romFileOpen(&state->file, resolvedPath, 6);
+    if ((s32)(result & 0x80000000) < 0) {
+        FUN_002c3510(result);
+        return result;
+    }
     const PositionedResizeVtable *vtable = static_cast<PositionedResizeVtable *>(state->interface.vtable);
     result = vtable->resize(reinterpret_cast<PositionedStream *>(state), (u64)size);
     FUN_002c3510(result);

@@ -62,7 +62,7 @@ extern "C" {
 void nodeOwnerSetEnabled(NodeEnableOwner *owner, s32 enabled);
 void textFormatBuffer(char *out, const char *format, ...);
 QuestModel *asdMdlManagerCreateLoaded(const char *path, s32 flags);
-void FUN_002a0428(QuestModel *model, s32 flag);
+void lightOwnerRegister(QuestModel *model, s32 flag);
 void FUN_002a09b4(const char *path, s32 flag);
 void modelSetAnimationChannels(QuestModel *model, s32 channels);
 void animOwnerSetScale(QuestModel *model, f32 scale);
@@ -112,14 +112,14 @@ void FUN_003840f4(QuestCounterScene *scene, s32 questId, u8 unused, u8 mode)
     for (u32 i = 0; i < QUEST_NPC_COUNT; i++) {
         textFormatBuffer(path, "%s_npc%d.bam", areaNames[scene->area], i + 1);
         scene->npcModels[i] = asdMdlManagerCreateLoaded(path, 7);
-        FUN_002a0428(scene->npcModels[i], 1);
+        lightOwnerRegister(scene->npcModels[i], 1);
         modelSetAnimationChannels(scene->npcModels[i], 0);
         animOwnerSetScale(scene->npcModels[i], 0.0f);
         FUN_002e1230(scene->npcModels[i], 0);
 
         textFormatBuffer(path, "%s_npc%d_add1.bam", areaNames[scene->area], i + 1);
         scene->npcModelsAdd[i] = asdMdlManagerCreateLoaded(path, 7);
-        FUN_002a0428(scene->npcModelsAdd[i], 1);
+        lightOwnerRegister(scene->npcModelsAdd[i], 1);
         modelSetAnimationChannels(scene->npcModelsAdd[i], 0);
         animOwnerSetScale(scene->npcModelsAdd[i], 1.0f);
         FUN_002e1230(scene->npcModels[i], 1);
@@ -132,7 +132,7 @@ void FUN_003840f4(QuestCounterScene *scene, s32 questId, u8 unused, u8 mode)
     if (scene->mode == QUEST_MODE_BACKGROUND) {
         textFormatBuffer(path, "%s.bam", areaNames[scene->area]);
         scene->background = asdMdlManagerCreateLoaded(path, 7);
-        FUN_002a0428(scene->background, 1);
+        lightOwnerRegister(scene->background, 1);
         textFormatBuffer(path, "%s.bcenv", areaNames[scene->area]);
         FUN_002a09b4(path, 0);
     }

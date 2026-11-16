@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail repeats fallback record lookups through comparator stages that this source expresses as separate helpers. */
+/* NON_MATCHING: only the prologue differs: retail copies left to r5 before right to r4 and loads *left through r5; the build copies right first and loads *left through r0. */
 /* Orders valid unit slots by demon priority/race, slot rank, then descending demon ID. */
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "gamedata/UnitRecordAccess.h"
@@ -10,7 +10,10 @@ static inline s32 compareRaceThenRank(const s32 *left, const s32 *right)
 {
     s32 result;
     if (*left < 0) {
-        result = *right < 0 ? 0 : 1;
+        if (*right < 0) {
+            return 0;
+        }
+        return 1;
     } else if (*right < 0) {
         result = -1;
     } else {

@@ -10,7 +10,7 @@ extern AocSystemA* g_aocSystem;
 TexTableNamedEntry* textureGetIndexedResource(u32 index);
 void* libc_bsearch(const void* key, const void* entries, u32 count, u32 size,
                    s32 (*compare)(const void*, const void*));
-s32 FUN_002321f8(const void* key, const void* record);
+s32 textureIdRecordCompare(const void* key, const void* record);
 u32 aocRunByName(AocSystemA* system, u32 slot, s32 resource, u32 flags);
 void FUN_001a6568(AocSystemA* system, u32 slot, s32 resource, u32 heap);
 
@@ -52,7 +52,7 @@ void sWinRequestMappedTexture(s32 id, u32 options)
     {
         const u16 key = (u16)id;
         const TextureIndexMapping* mapping = static_cast<const TextureIndexMapping*>(
-            libc_bsearch(&key, entries, count, sizeof(TextureIndexMapping), FUN_002321f8));
+            libc_bsearch(&key, entries, count, sizeof(TextureIndexMapping), textureIdRecordCompare));
         if (mapping == NULL) {
             return;
         }

@@ -4856,3 +4856,16 @@
 00388f3c aocEnumerateContentRecords
 003c8c2c fusionClassifyPair
 002bd808 ARM_common_memcpy4_6
+003bb0ac contentTransitionInstallDispatch
+002b72dc mtx44Perspective
+002c0a2c statisticsGetCounter
+0024ab94 romFileStreamOpen
+002a2f08 fileQueuePush
+00267074 naviSetActiveMapSlot
+0010e8e8 asdSnd3dSetOutputVolume
+001087f4 titleJobRefreshOverlaySurface
+00108754 titleJobRefreshSurface
+002e14e4 asdSoundGetSlotBSavedState
+002e004c vectorQueuePushPosition
+002a0428 lightOwnerRegister
+0034f800 mobiclipAudioDecoderCreate

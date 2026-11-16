@@ -38,7 +38,7 @@ unsigned int FUN_002169cc(void)
           uVar4 = 0;
           do {
             iVar5 = iVar2 + uVar4 * 4;
-            FUN_002a0428(*(unsigned int *)(iVar5 + 0x658),1);
+            lightOwnerRegister(*(unsigned int *)(iVar5 + 0x658),1);
             puVar3 = *(unsigned int **)(iVar5 + 0x658);
             *puVar3 = *puVar3 | 2;
             *(unsigned char *)(*(int *)(puVar3[2] + 0x2c) + 0x1f6) = 0;

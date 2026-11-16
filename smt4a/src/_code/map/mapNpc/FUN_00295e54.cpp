@@ -10,7 +10,7 @@ int FUN_001cd3ec(void);
 int FUN_00295d40(void);
 int FUN_00312de8(void);
 int dataTable2aGetEntryWithAoc(void);
-int FUN_00353cd4(void);
+int vectorQueuePushPosition(void);
 int FUN_0037976c(void);
 int FUN_00385964(void);
 int controllerSetPosition(...);
@@ -37,7 +37,7 @@ extern int *DAT_00581280; /* 0x581280 */
 /* Supplied declaration required: FUN_00312de8. */
 /* Supplied declaration required: dataTable2aGetEntryWithAoc. */
 extern unsigned int asdVramBGetFreeBytes(void);
-/* Supplied declaration required: FUN_00353cd4. */
+/* Supplied declaration required: vectorQueuePushPosition. */
 /* Supplied declaration required: FUN_0037976c. */
 /* Supplied declaration required: FUN_00385964. */
 extern int flagPairCondition(int, int);
@@ -102,7 +102,7 @@ unsigned int FUN_00295e54(int param_1,int param_2,int param_3)
             VectorSignedToFloat(piVar4[1],(unsigned char)(in_fpscr >> 0x16) & 3);
             VectorSignedToFloat(*piVar4,(unsigned char)(in_fpscr >> 0x16) & 3);
             VectorSignedToFloat(piVar4[2],(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_00353cd4();
+            vectorQueuePushPosition();
             piVar12 = (int *)((int)piVar12 + 1);
           }
           FUN_00295d40();

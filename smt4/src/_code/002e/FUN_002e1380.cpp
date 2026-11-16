@@ -1,6 +1,7 @@
-/* NON_MATCHING: corrected completion values and u64 create-file size; retail retains separate completion exits and tests sign bits with ands, whereas the build merges exits. */
+/* NON_MATCHING: nn::Result and the u64 size taken before FUN_002ad888 restore the frame; retail keeps the create-file failure exit inline (ands r1; bpl) where armcc merges it with the open failure exit, and returns the final 0 through r4. */
 #include "sys/ProcessResult.h"
 #include "common.h"
+#include "nn/Result.h"
 #include "nn/fs/ArchiveCreateFile.h"
 
 extern "C" {
@@ -32,19 +33,19 @@ static s32 saveStreamOpen(SaveStream *stream, u8 *buffer, s32 mode)
 }
 
 /* Create the record `id` with `size` bytes and open the owner's stream on it; returns an nn::Result. */
-s32 FUN_002e1380(SaveStreamOwner *owner, u32 id, u32 size)
+nn::Result FUN_002e1380(SaveStreamOwner *owner, u32 id, u32 size)
 {
     u8 buffer[496];
-    s32 result;
-
+    nn::Result result;
     if (pathBuildWide(id, buffer, 2) == NULL) {
         result = 0xE0E046BC;
         FUN_002c3510(result);
         return result;
     }
+    u64 fileSize = size;
     FUN_002ad888();
-    result = FUN_002ad80c(reinterpret_cast<const u16 *>(buffer), size);
-    if ((s32)(result & 0x80000000) < 0) {
+    result = FUN_002ad80c(reinterpret_cast<const u16 *>(buffer), fileSize);
+    if (result & 0x80000000) {
         FUN_002c3510(result);
         return result;
     }
@@ -53,8 +54,8 @@ s32 FUN_002e1380(SaveStreamOwner *owner, u32 id, u32 size)
         FUN_002c3510(result);
         return result;
     }
-    FUN_002c3510(0);
-    return 0;
+    FUN_002c3510(nn::Result(0));
+    return nn::Result(0);
 }
 
 } /* extern "C" */

@@ -24,7 +24,7 @@ struct ScreenCamera {
 }
 
 extern "C" {
-GfxTransform* FUN_0016fba0(GfxTransform*, f32 fieldOfView, f32 aspect, f32 nearClip, f32 farClip);
+GfxTransform* mtx44Perspective(GfxTransform*, f32 fieldOfView, f32 aspect, f32 nearClip, f32 farClip);
 void nn_math_ARMv6_MTX44PivotC_FAST(GfxTransform*, s32 mode);
 void nn_math_ARMv6_MTX44TransposeAsm(GfxTransform* output, const GfxTransform* input);
 void nn_ulcd_CTR_StereoCamera_SetBaseFrustum(void* stereo, const GfxTransform* frustum);
@@ -36,10 +36,10 @@ void FUN_00280070(ScreenCamera* camera, s32 lowerScreen, f32 fieldOfView, f32 ne
     camera->nearClip = nearClip;
     camera->farClip = farClip;
     camera->aspect = lowerScreen == 0 ? 400.0f / 240.0f : 320.0f / 240.0f;
-    FUN_0016fba0(&camera->projection, camera->fieldOfView * 0.017453292f, camera->aspect, camera->nearClip, camera->farClip);
+    mtx44Perspective(&camera->projection, camera->fieldOfView * 0.017453292f, camera->aspect, camera->nearClip, camera->farClip);
     nn_math_ARMv6_MTX44PivotC_FAST(&camera->projection, 1);
     nn_math_ARMv6_MTX44TransposeAsm(&camera->transposedProjection, &camera->projection);
-    FUN_0016fba0(&camera->stereoProjection, camera->fieldOfView * 0.017453292f, camera->aspect, camera->nearClip, camera->farClip);
+    mtx44Perspective(&camera->stereoProjection, camera->fieldOfView * 0.017453292f, camera->aspect, camera->nearClip, camera->farClip);
     nn_math_ARMv6_MTX44PivotC_FAST(&camera->stereoProjection, 0);
     if (camera->enabled) {
         nn_ulcd_CTR_StereoCamera_SetBaseFrustum(camera->stereo, &camera->stereoProjection);

@@ -6454,3 +6454,17 @@
 00409bc8 materialUploadChangedParameterVector
 004f5e6c btlCameraReleaseTransientResources
 001d1438 ARM_common_memcpy4_6
+0016fba0 mtx44Perspective
+00145f04 statisticsGetCounter
+002e09b4 romFileStreamOpen
+00353cd4 vectorQueuePushPosition
+0026812c textureIdHasTexture
+0028520c textureIdIsLoaded
+0023a55c textureIdRelease
+002321f8 textureIdRecordCompare
+003d02bc sWinDrawItemIcon
+0021b4e0 s4LoadDrawProfilePanel
+00423e14 mobiclipAudioDecoderCreate
+004837ac objectPoolUpdate
+00482f20 controllerPoolUpdate
+00422bf0 movieAudioDeviceRunLoop

@@ -19,8 +19,8 @@ void FUN_0048c09c(NaviCategorySelectionWork *work, u32 category)
         s8 icon = (s8)marker->icon;
         work->selection = icon;
         work->selectedIcon = icon;
-        work->refreshFirst = 1;
-        work->refreshSecond = 1;
+        work->refresh[0] = 1;
+        work->refresh[1] = 1;
     } else {
         work->selection = 0;
         MapNaviTableContext table;
@@ -39,8 +39,8 @@ void FUN_0048c09c(NaviCategorySelectionWork *work, u32 category)
                 s8 icon = (s8)marker->icon;
                 work->selection = icon;
                 work->selectedIcon = icon;
-                work->refreshFirst = 1;
-                work->refreshSecond = 1;
+                work->refresh[0] = 1;
+                work->refresh[1] = 1;
                 break;
             }
         }

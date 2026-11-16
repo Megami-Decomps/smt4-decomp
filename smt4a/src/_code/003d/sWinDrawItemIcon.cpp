@@ -1,20 +1,11 @@
-/* NON_MATCHING: restored table-entry argument, speed accessor and render-context wrapper; icon fallback lifetime and float width/height grouping still differ. */
-#include "common.h"
+#include "gamedata/TextureIdTable.h"
 #include "camp/RenderCtx.h"
 #include "gamedata/DataTable.h"
 #include "shard/TextureDrawCall.h"
 #include "gfx/StereoParallax.h"
-#include "gfx/StereoParallax.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-
-/* One row of the icon table (4 bytes): an item id and the texture it maps to. */
-typedef struct IconTableEntry {
-    s16 id;
-    s16 texture;
-} IconTableEntry;
-
 
 /* The item window (only the fields used here). */
 typedef struct ItemWindow {
@@ -36,31 +27,24 @@ typedef struct ItemWindow {
 extern ItemWindow *g_sWin;
 extern u8 *g_renderCtx;
 
-void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
-s32 FUN_002321f8(const void *a, const void *b);
 s32 FUN_001692ac(s32 a, s32 b);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *motion);
-s32 FUN_0028520c(s16 item);
+s32 textureIdIsLoaded(s16 item);
 u32 FUN_00185dd4(u32 id, u32 table, s32 texture, s32 x, s32 y, s32 width, s32 height, s32 flag);
 
 /* Finds the icon texture of `item` in the item icon table (id * 1000 is its texture id), or -1. */
 static __inline s32 findIconTexture(s32 item)
 {
-    void *table = dataTableGet(0x47, 0);
-    IconTableEntry *entries = static_cast<IconTableEntry *>(dataTableGetEntries(table));
-    u32 count = dataTableGetCount(table);
-    IconTableEntry key;
-
-    key.id = (s16)item;
-    IconTableEntry *found = (IconTableEntry *)libc_bsearch(&key, entries, count, 4, FUN_002321f8);
-
-    return found != NULL ? found->texture : -1;
+    const TextureIdRecord *found = textureIdTableFind(item);
+    if (found == NULL)
+        return -1;
+    return found->textureIndex;
 }
 
 /* Draws the item window's icon (and, while one is pending, the fading second icon) centred on
  * its slot, scaled by the window's scale, inside a pushed render state. Always returns 0. */
-u32 FUN_003d02bc(void)
+u32 sWinDrawItemIcon(void)
 {
     ItemWindow *window = g_sWin;
 
@@ -78,10 +62,10 @@ u32 FUN_003d02bc(void)
     s32 y = frame->y - (s32)(height >> 1);
 
     efctSetSpeed(vec2GetSpeed(&window->motion));
-    if (FUN_0028520c((s16)window->item) != 0) {
+    if (textureIdIsLoaded((s16)window->item) != 0) {
         FUN_00185dd4(2, 0x34, texture, x, y, width, height, 21);
     }
-    if (window->pending != 0 && FUN_0028520c((s16)window->pending) != 0) {
+    if (window->pending != 0 && textureIdIsLoaded((s16)window->pending) != 0) {
         texture = findIconTexture(window->pending) * 1000;
         asdTMTexTableEntryAt(0x34, texture);
         efctSetSpeed((f32)(window->total - window->elapsed) / (f32)window->total);

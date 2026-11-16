@@ -4,7 +4,7 @@ struct AocDisplay;
 
 extern "C" {
 void FUN_002a2e08(AocDisplay *display);
-void FUN_002a2f08(AocDisplay *display, const FileQueueRequest *request);
+void fileQueuePush(AocDisplay *display, const FileQueueRequest *request);
 void _ZN9Obj422224C1Ev(FileQueueRequest *request);
 void FUN_002ba81c(u8 *destination, const char *path, u32 capacity);
 u32 libc_strlen(const char *path);
@@ -24,7 +24,7 @@ void aocQueueFileLoad(AocDisplay *display, const char *path, u32 *completion,
     if (completion != 0) {
         *completion = 0;
     }
-    FUN_002a2f08(display, &request);
+    fileQueuePush(display, &request);
     FUN_002a2e08(display);
 }
 }

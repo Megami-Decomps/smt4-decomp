@@ -39,7 +39,7 @@ extern "C" {
 
 void textFormatBuffer(char* out, const char* format, ...);
 u32 asdMdlManagerCreateLoaded(const char* name, s32 mode);
-void FUN_002a0428(u32 model, s32 arg);
+void lightOwnerRegister(u32 model, s32 arg);
 void FUN_00341340(MikadoScene* scene, const char* name);
 void FUN_002a09b4(const char* name, s32 arg);
 void FUN_002a04f0(s32 arg);
@@ -65,7 +65,7 @@ void FUN_00234f5c(MikadoScene* scene, const char* name, const char* override)
         textFormatBuffer(path, "%s.bam", name);
     }
     scene->model = asdMdlManagerCreateLoaded(path, 7);
-    FUN_002a0428(scene->model, 1);
+    lightOwnerRegister(scene->model, 1);
     textFormatBuffer(path, "%s.bccam", name);
     FUN_00341340(scene, path);
     textFormatBuffer(path, "%s.bcenv", name);
@@ -111,10 +111,10 @@ void FUN_00234f5c(MikadoScene* scene, const char* name, const char* override)
         scene->hasMarkers = 1;
         textFormatBuffer(path, "mikado/yaji.bam");
         scene->arrowModel = asdMdlManagerCreateLoaded(path, 7);
-        FUN_002a0428(scene->arrowModel, 1);
+        lightOwnerRegister(scene->arrowModel, 1);
         textFormatBuffer(path, "mikado/point.bam");
         scene->pointModel = asdMdlManagerCreateLoaded(path, 7);
-        FUN_002a0428(scene->pointModel, 1);
+        lightOwnerRegister(scene->pointModel, 1);
         scene->markerPos = scene->dummies[0];
         nodeSetTranslation(*reinterpret_cast<u32*>(scene->pointModel + 8), 0, &scene->markerPos);
     }

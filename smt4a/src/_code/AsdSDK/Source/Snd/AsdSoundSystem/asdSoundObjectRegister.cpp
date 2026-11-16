@@ -1,4 +1,4 @@
-/* NON_MATCHING: list append now follows retail (tail walk without re-comparing nodes; status pointer); retail copies the scale constant into s1 before the volume branch, keeps `volumeSteps` in ip across the push and orders the tail-call moves differently. */
+/* NON_MATCHING: the list walk now matches retail (it rechecks for the sound itself at every node); remaining: retail places the empty-list arm after the tail call, keeps `volumeSteps` in ip across the push and copies the 1.0 scale into s1 from the volume's initial value. */
 #include "common.h"
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
@@ -15,14 +15,18 @@ void asdSoundObjectRegister(AsdSndObject *sound, u32 volumeSteps, u32 arg)
     AsdSndStatusApoc *status = &g_asdSoundStatus;
     AsdSndObject *node = status->objects;
     if (node != NULL) {
-        if (node != sound) {
-            AsdSndObject *next;
-            while ((next = node->next) != NULL) {
+        for (;;) {
+            if (node == sound)
+                break;
+            AsdSndObject *next = node->next;
+            if (next != NULL) {
                 node = next;
+                continue;
             }
             sound->prev = node;
             node->next = sound;
             ++status->objectCount;
+            break;
         }
     } else {
         status->objects = sound;

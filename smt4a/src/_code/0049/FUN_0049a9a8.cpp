@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_1_stack;
 
-extern unsigned long long FUN_00145f04(unsigned char, unsigned int, unsigned int);
+extern unsigned long long statisticsGetCounter(unsigned char, unsigned int, unsigned int);
 extern unsigned long long aocEntryGetKindForward(short);
 /* Supplied declaration required: gameTestIndexedAuxiliaryFlag. */
 /* Supplied declaration required: cellListAppend. */
@@ -113,7 +113,7 @@ void FUN_0049a9a8(int param_1)
           goto LAB_0049ad3c;
         case 1:
         case 0xc:
-          temp_v13 = FUN_00145f04(*(unsigned char *)(param_1 + 0x18),*(unsigned int *)(param_1 + 0x1c),0);
+          temp_v13 = statisticsGetCounter(*(unsigned char *)(param_1 + 0x18),*(unsigned int *)(param_1 + 0x1c),0);
           temp_v4 = (unsigned int)((unsigned long long)temp_v13 >> 0x20);
           puVar8 = (unsigned short *)temp_v13;
           temp_v12 = puVar8 != (unsigned short *)0x0;
@@ -128,7 +128,7 @@ void FUN_0049a9a8(int param_1)
           temp_v2 = temp_v15;
           break;
         case 2:
-          temp_v13 = FUN_00145f04(*(unsigned char *)(param_1 + 0x18),*(unsigned int *)(param_1 + 0x1c),0);
+          temp_v13 = statisticsGetCounter(*(unsigned char *)(param_1 + 0x18),*(unsigned int *)(param_1 + 0x1c),0);
           temp_v4 = (unsigned int)((unsigned long long)temp_v13 >> 0x20);
           puVar8 = (unsigned short *)temp_v13;
           temp_v12 = puVar8 != (unsigned short *)0x0;
@@ -143,7 +143,7 @@ void FUN_0049a9a8(int param_1)
           temp_v2 = param_1 + 0xf74;
           break;
         case 3:
-          temp_v13 = FUN_00145f04(*(unsigned char *)(param_1 + 0x18),*(unsigned int *)(param_1 + 0x1c),1);
+          temp_v13 = statisticsGetCounter(*(unsigned char *)(param_1 + 0x18),*(unsigned int *)(param_1 + 0x1c),1);
           temp_v4 = (unsigned int)((unsigned long long)temp_v13 >> 0x20);
           puVar8 = (unsigned short *)temp_v13;
           temp_v12 = puVar8 != (unsigned short *)0x0;
@@ -158,7 +158,7 @@ void FUN_0049a9a8(int param_1)
           temp_v2 = param_1 + 0x1f76;
           break;
         case 4:
-          temp_v13 = FUN_00145f04(*(unsigned char *)(param_1 + 0x18),*(unsigned int *)(param_1 + 0x1c),2);
+          temp_v13 = statisticsGetCounter(*(unsigned char *)(param_1 + 0x18),*(unsigned int *)(param_1 + 0x1c),2);
           temp_v4 = (unsigned int)((unsigned long long)temp_v13 >> 0x20);
           puVar8 = (unsigned short *)temp_v13;
           temp_v12 = puVar8 != (unsigned short *)0x0;
@@ -173,7 +173,7 @@ void FUN_0049a9a8(int param_1)
           temp_v2 = param_1 + 0x3f7a;
           break;
         case 5:
-          temp_v13 = FUN_00145f04(*(unsigned char *)(param_1 + 0x18),*(unsigned int *)(param_1 + 0x1c),3);
+          temp_v13 = statisticsGetCounter(*(unsigned char *)(param_1 + 0x18),*(unsigned int *)(param_1 + 0x1c),3);
           temp_v4 = (unsigned int)((unsigned long long)temp_v13 >> 0x20);
           puVar8 = (unsigned short *)temp_v13;
           temp_v12 = puVar8 != (unsigned short *)0x0;
@@ -188,7 +188,7 @@ void FUN_0049a9a8(int param_1)
           temp_v2 = param_1 + 0x4f7c;
           break;
         case 6:
-          temp_v13 = FUN_00145f04(*(unsigned char *)(param_1 + 0x18),*(unsigned int *)(param_1 + 0x1c),4);
+          temp_v13 = statisticsGetCounter(*(unsigned char *)(param_1 + 0x18),*(unsigned int *)(param_1 + 0x1c),4);
           temp_v4 = (unsigned int)((unsigned long long)temp_v13 >> 0x20);
           puVar8 = (unsigned short *)temp_v13;
           temp_v12 = puVar8 != (unsigned short *)0x0;
@@ -203,7 +203,7 @@ void FUN_0049a9a8(int param_1)
           temp_v2 = param_1 + 0x5f7e;
           break;
         case 7:
-          temp_v13 = FUN_00145f04(*(unsigned char *)(param_1 + 0x18),*(unsigned int *)(param_1 + 0x1c),5);
+          temp_v13 = statisticsGetCounter(*(unsigned char *)(param_1 + 0x18),*(unsigned int *)(param_1 + 0x1c),5);
           temp_v4 = (unsigned int)((unsigned long long)temp_v13 >> 0x20);
           puVar8 = (unsigned short *)temp_v13;
           temp_v12 = puVar8 != (unsigned short *)0x0;

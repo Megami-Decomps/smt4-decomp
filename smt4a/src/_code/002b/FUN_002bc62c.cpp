@@ -13,7 +13,7 @@ int FUN_003578a0(void);
 int FUN_00377c60(void);
 int FUN_00379a48(void);
 int FUN_003a3400(void);
-int FUN_004837ac(int);
+int objectPoolUpdate(int);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(int, int);
 
@@ -44,7 +44,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00377c60. */
 /* Supplied declaration required: FUN_00379a48. */
 /* Supplied declaration required: FUN_003a3400. */
-/* Supplied declaration required: FUN_004837ac. */
+/* Supplied declaration required: objectPoolUpdate. */
 
 
 unsigned int FUN_002bc62c(void)
@@ -69,7 +69,7 @@ unsigned int FUN_002bc62c(void)
   if (*(int *)(g_lmapMainState + 0xc) >= 0x70) {
     return 0;
   }
-  FUN_004837ac(g_lmapMainState + 0xf4);
+  objectPoolUpdate(g_lmapMainState + 0xf4);
   temp_v3 = g_renderCtx;
   if (DAT_005f1bc8 != 0) {
     temp_v0 = FUN_001692ac(5,1);

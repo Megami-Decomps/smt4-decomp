@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail shares one state store between states 0 and 1 (case 0 branches to case 1's store); armcc merges case 1 into case 2's store. The process mode store uses the inlined scriptProcessSetMode. */
 #include "common.h"
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
@@ -46,12 +45,12 @@ u32 FUN_002736e8(QuestScriptRun *run)
         }
         break;
     case 2:
-        if (scrRunOpcodesStub(run->process) == 2) {
-            FUN_0029016c(FUN_002903f0(), 0);
-            FUN_002900d0();
-            gameJumpRequestClear();
-            run->state = 4;
-        }
+        if (scrRunOpcodesStub(run->process) != 2)
+            break;
+        FUN_0029016c(FUN_002903f0(), 0);
+        FUN_002900d0();
+        gameJumpRequestClear();
+        run->state = 4;
         break;
     case 4:
         return 1;

@@ -34,8 +34,8 @@ extern int FUN_001081b0(unsigned int job); /* 0x1081b0 */
 extern int FUN_0010821c(...); /* 0x10821c */
 extern int FUN_0010835c(unsigned int job); /* 0x10835c */
 extern int FUN_0010854c(unsigned int job); /* 0x10854c */
-extern int FUN_00108754(...); /* 0x108754 */
-extern int FUN_001087f4(...); /* 0x1087f4 */
+extern int titleJobRefreshSurface(...); /* 0x108754 */
+extern int titleJobRefreshOverlaySurface(...); /* 0x1087f4 */
 extern s32 FUN_0010889c(u32 job);
 extern int FUN_00108b0c(...); /* 0x108b0c */
 extern int FUN_00109348(...); /* 0x109348 */
@@ -116,8 +116,8 @@ void FUN_001043c8(void)
   taskCreateDraw("HDRCR",0xce,0,0,FUN_0010854c,0,g_frameTex,puVar4);
   taskCreateDraw("HDRDL",0x6b,0,0,FUN_001080c0,0,g_frameTex,*puVar2);
   taskCreateDraw("HDRDR",0xcf,0,0,FUN_0010812c,0,g_frameTex,*puVar2);
-  taskCreateDraw("ZanCL",0x6d,0,0,FUN_00108754,0,g_frameTex,*puVar2);
-  taskCreateDraw("ZanCR",0xd1,0,0,FUN_001087f4,0,g_frameTex,*puVar2);
+  taskCreateDraw("ZanCL",0x6d,0,0,titleJobRefreshSurface,0,g_frameTex,*puVar2);
+  taskCreateDraw("ZanCR",0xd1,0,0,titleJobRefreshOverlaySurface,0,g_frameTex,*puVar2);
   taskCreateDraw("ZanDL",0x6c,0,0,FUN_001081b0,0,g_frameTex,*puVar2);
   taskCreateDraw("ZanDR",0xd0,0,0,FUN_0010821c,0,g_frameTex,*puVar2);
   taskCreateDraw("CAMPCL",0x78,0,0,FUN_00109348,0,g_frameTex,*puVar2);

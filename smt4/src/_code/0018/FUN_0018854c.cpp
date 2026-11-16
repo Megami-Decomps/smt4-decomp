@@ -38,7 +38,7 @@ int FUN_0029c4c8(...);
 int statusPanelSetOpen(int);
 int FUN_0029efd8(...);
 int uiScrollHandleActionsOrTouch(...);
-int FUN_002a0428(...);
+int lightOwnerRegister(...);
 int eventQueueAddUniqueIfValid(...);
 int FUN_002c1658(...);
 
@@ -92,7 +92,7 @@ extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
-/* Supplied declaration required: FUN_002a0428. */
+/* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
 extern int modelHasLoadedAttachment(int);
 extern short *gameGetPlayerData(void);
@@ -246,7 +246,7 @@ void FUN_0018854c(unsigned int param_1)
     piVar12 = (int *)(temp_v5 + 0x25c0);
     temp_v9 = modelHasLoadedAttachment(*piVar12);
     if ((temp_v9 != 0) && (*(int *)(*(int *)(*piVar12 + 8) + 0xc) < 0)) {
-      FUN_002a0428(*piVar12,1);
+      lightOwnerRegister(*piVar12,1);
       nodeSetTranslation3f(*(unsigned int *)(*piVar12 + 8),0);
     }
     temp_v9 = FUN_00299fc0();

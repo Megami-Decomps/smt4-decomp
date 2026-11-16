@@ -4,7 +4,7 @@
 #include "shard/W6_W6Match7_MaterialAnimationFlags.h"
 
 extern "C" {
-void FUN_002a0428(MaterialMergeModel *model, s32 mode);
+void lightOwnerRegister(MaterialMergeModel *model, s32 mode);
 s32 FUN_0027dab0(BtlMainState *battle, BtlActionRecord *action);
 MaterialMergeVariants *FUN_0027da30(BtlMainState *battle, s32 member);
 void effectComputeScaledImageBounds(const BattleSpritePlacement *placement, f32 *output, f32 scale);
@@ -18,7 +18,7 @@ void FUN_0023c428(MaterialMergeOwner *owner, s32 index)
     MaterialMergeResult *result = &owner->models.results[index];
     if (model != NULL) {
         if (model->pose->state < 0)
-            FUN_002a0428(model, 1);
+            lightOwnerRegister(model, 1);
         BtlActionRecord *action = &btlGetMainState()->actions[index];
         s32 variant = FUN_0027dab0(btlGetMainState(), action);
         if (variant < 0)

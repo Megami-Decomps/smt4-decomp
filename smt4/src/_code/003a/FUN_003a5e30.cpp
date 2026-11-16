@@ -56,7 +56,7 @@ void FUN_003a45fc(void);
 void FUN_002637c8(void);
 void FUN_00282bfc(s32 channel, s32 value);
 void FUN_002a03d8(s32 a, s32 b);
-s16 *FUN_002c0a2c(u8 kind, u32 sub);
+s16 *statisticsGetCounter(u8 kind, u32 sub);
 void uiInitializeEightTimerSet(void *timers);
 void rectangleInitializeSelection(SelectionRectangle *rectangle, s32 width, s32 a, s32 b);
 void buttonHelpAcquireResources(void);
@@ -106,7 +106,7 @@ SelectionScene *FUN_003a5e30(SelectionScene *scene, u32 mode, s32 kind, s32 subK
     Obj4223ac *window = new Obj4223ac;
     scene->touch.unk34 = (u32)window;
     FUN_002637c8();
-    if (*FUN_002c0a2c((u8)scene->kind, scene->subKind) != 0)
+    if (*statisticsGetCounter((u8)scene->kind, scene->subKind) != 0)
         scene->hasProgress = 1;
     if (scene->mode == 1) {
         scene->stepA = 13;

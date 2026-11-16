@@ -34,7 +34,7 @@ struct GameStateView {
 extern GameStateView g_gameState;
 
 
-int FUN_002a0428(...);
+int lightOwnerRegister(...);
 
 int FUN_0025bc80(void);
 int vec4Forward(void);
@@ -84,7 +84,7 @@ extern int asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned in
 /* Supplied declaration required: nodeOwnerSetTranslations. */
 /* Supplied declaration required: playerModelLoadPart. */
 /* Supplied declaration required: FUN_00297684. */
-/* Supplied declaration required: FUN_002a0428. */
+/* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: FUN_002a55ec. */
 /* Supplied declaration required: modelSelectPrimaryMotion. */
 extern int gameGetPlayerData(void);
@@ -322,7 +322,7 @@ LAB_0027461c:
     if ((g_gameState.f0049fac0 == 2 && temp_v0 == 0) && (g_gameState.f0049fc88 != 0)) {
       temp_v2 = asdMdlManagerCreateFromSource(g_gameState.f0049fbac,g_gameState.f0049fbb0,7);
       g_lmapScene[0x5d] = temp_v2;
-      FUN_002a0428(temp_v2,1);
+      lightOwnerRegister(temp_v2,1);
       nodeSetTranslation(*(unsigned int *)(g_lmapScene[0x5d] + 8),0,&g_gameState.f0049fac4);
       FUN_0028c618(*(unsigned int *)(g_lmapScene[0x5d] + 8),0);
       modelSelectPrimaryMotion(*(unsigned int *)(g_lmapScene[0x5d] + 8),0);

@@ -27,7 +27,7 @@ struct RollRow {
 
 extern "C" {
 TableEntry *dataTable18Sub0GetEntries(void);
-RollState *FUN_00145f04(u8 kind, u32 id, u16 variant);
+RollState *statisticsGetCounter(u8 kind, u32 id, u16 variant);
 s32 FUN_00148bb8(u32 id, u8 kind);
 u16 *dataTableFindCategoryVariant(u8 kind, u32 id, u16 variant);
 s32 randRange(u32 maximum);
@@ -49,12 +49,12 @@ void FUN_004cd960(void)
         } else if (variant == 7) {
             variant = 6;
         }
-        RollState *cleared = FUN_00145f04(kind, id, variant);
+        RollState *cleared = statisticsGetCounter(kind, id, variant);
         cleared->current = 0;
         cleared->rolledMask = 0;
         cleared->countdown &= ~0x3F;
         s32 level = FUN_0015fb68();
-        RollState *state = FUN_00145f04(kind, id, variant);
+        RollState *state = statisticsGetCounter(kind, id, variant);
         u32 owned = FUN_00148bb8(id, kind);
         if (owned == 0) {
             state->current = 0;

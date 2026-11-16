@@ -26354,12 +26354,12 @@
     },
     {
       "address": "0x145f04",
-      "function": "FUN_00145f04",
+      "function": "statisticsGetCounter",
       "module": "_code",
-      "object": "build/obj/_code/0014/FUN_00145f04.o",
+      "object": "build/obj/_code/0014/statisticsGetCounter.o",
       "size": 88,
-      "source": "src/_code/0014/FUN_00145f04.cpp",
-      "target": "orig/target/_code/0014/FUN_00145f04.o",
+      "source": "src/_code/0014/statisticsGetCounter.cpp",
+      "target": "orig/target/_code/0014/statisticsGetCounter.o",
       "thumb": false
     },
     {
@@ -33772,12 +33772,12 @@
     },
     {
       "address": "0x16fba0",
-      "function": "FUN_0016fba0",
+      "function": "mtx44Perspective",
       "module": "_code",
-      "object": "build/obj/_code/0016/FUN_0016fba0.o",
+      "object": "build/obj/_code/0016/mtx44Perspective.o",
       "size": 184,
-      "source": "src/_code/0016/FUN_0016fba0.cpp",
-      "target": "orig/target/_code/0016/FUN_0016fba0.o",
+      "source": "src/_code/0016/mtx44Perspective.cpp",
+      "target": "orig/target/_code/0016/mtx44Perspective.o",
       "thumb": false
     },
     {
@@ -55873,12 +55873,12 @@
     {
       "address": "0x21b4e0",
       "file": "title/S4Load",
-      "function": "FUN_0021b4e0",
+      "function": "s4LoadDrawProfilePanel",
       "module": "_code",
-      "object": "build/obj/_code/title/S4Load/FUN_0021b4e0.o",
+      "object": "build/obj/_code/title/S4Load/s4LoadDrawProfilePanel.o",
       "size": 500,
-      "source": "src/_code/title/S4Load/FUN_0021b4e0.cpp",
-      "target": "orig/target/_code/title/S4Load/FUN_0021b4e0.o",
+      "source": "src/_code/title/S4Load/s4LoadDrawProfilePanel.cpp",
+      "target": "orig/target/_code/title/S4Load/s4LoadDrawProfilePanel.o",
       "thumb": false
     },
     {
@@ -57445,12 +57445,12 @@
     },
     {
       "address": "0x2321f8",
-      "function": "FUN_002321f8",
+      "function": "textureIdRecordCompare",
       "module": "_code",
-      "object": "build/obj/_code/0023/FUN_002321f8.o",
+      "object": "build/obj/_code/0023/textureIdRecordCompare.o",
       "size": 16,
-      "source": "src/_code/0023/FUN_002321f8.cpp",
-      "target": "orig/target/_code/0023/FUN_002321f8.o",
+      "source": "src/_code/0023/textureIdRecordCompare.cpp",
+      "target": "orig/target/_code/0023/textureIdRecordCompare.o",
       "thumb": false
     },
     {
@@ -58446,12 +58446,12 @@
     },
     {
       "address": "0x23a55c",
-      "function": "FUN_0023a55c",
+      "function": "textureIdRelease",
       "module": "_code",
-      "object": "build/obj/_code/0023/FUN_0023a55c.o",
+      "object": "build/obj/_code/0023/textureIdRelease.o",
       "size": 120,
-      "source": "src/_code/0023/FUN_0023a55c.cpp",
-      "target": "orig/target/_code/0023/FUN_0023a55c.o",
+      "source": "src/_code/0023/textureIdRelease.cpp",
+      "target": "orig/target/_code/0023/textureIdRelease.o",
       "thumb": false
     },
     {
@@ -60605,12 +60605,12 @@
     },
     {
       "address": "0x26812c",
-      "function": "FUN_0026812c",
+      "function": "textureIdHasTexture",
       "module": "_code",
-      "object": "build/obj/_code/0026/FUN_0026812c.o",
+      "object": "build/obj/_code/0026/textureIdHasTexture.o",
       "size": 128,
-      "source": "src/_code/0026/FUN_0026812c.cpp",
-      "target": "orig/target/_code/0026/FUN_0026812c.o",
+      "source": "src/_code/0026/textureIdHasTexture.cpp",
+      "target": "orig/target/_code/0026/textureIdHasTexture.o",
       "thumb": false
     },
     {
@@ -62904,12 +62904,12 @@
     },
     {
       "address": "0x28520c",
-      "function": "FUN_0028520c",
+      "function": "textureIdIsLoaded",
       "module": "_code",
-      "object": "build/obj/_code/0028/FUN_0028520c.o",
+      "object": "build/obj/_code/0028/textureIdIsLoaded.o",
       "size": 148,
-      "source": "src/_code/0028/FUN_0028520c.cpp",
-      "target": "orig/target/_code/0028/FUN_0028520c.o",
+      "source": "src/_code/0028/textureIdIsLoaded.cpp",
+      "target": "orig/target/_code/0028/textureIdIsLoaded.o",
       "thumb": false
     },
     {
@@ -71238,12 +71238,12 @@
     },
     {
       "address": "0x2e09b4",
-      "function": "FUN_002e09b4",
+      "function": "romFileStreamOpen",
       "module": "_code",
-      "object": "build/obj/_code/002e/FUN_002e09b4.o",
+      "object": "build/obj/_code/002e/romFileStreamOpen.o",
       "size": 180,
-      "source": "src/_code/002e/FUN_002e09b4.cpp",
-      "target": "orig/target/_code/002e/FUN_002e09b4.o",
+      "source": "src/_code/002e/romFileStreamOpen.cpp",
+      "target": "orig/target/_code/002e/romFileStreamOpen.o",
       "thumb": false
     },
     {
@@ -104289,12 +104289,12 @@
     },
     {
       "address": "0x353cd4",
-      "function": "FUN_00353cd4",
+      "function": "vectorQueuePushPosition",
       "module": "_code",
-      "object": "build/obj/_code/0035/FUN_00353cd4.o",
+      "object": "build/obj/_code/0035/vectorQueuePushPosition.o",
       "size": 68,
-      "source": "src/_code/0035/FUN_00353cd4.cpp",
-      "target": "orig/target/_code/0035/FUN_00353cd4.o",
+      "source": "src/_code/0035/vectorQueuePushPosition.cpp",
+      "target": "orig/target/_code/0035/vectorQueuePushPosition.o",
       "thumb": false
     },
     {
@@ -126222,12 +126222,12 @@
     },
     {
       "address": "0x3d02bc",
-      "function": "FUN_003d02bc",
+      "function": "sWinDrawItemIcon",
       "module": "_code",
-      "object": "build/obj/_code/003d/FUN_003d02bc.o",
+      "object": "build/obj/_code/003d/sWinDrawItemIcon.o",
       "size": 724,
-      "source": "src/_code/003d/FUN_003d02bc.cpp",
-      "target": "orig/target/_code/003d/FUN_003d02bc.o",
+      "source": "src/_code/003d/sWinDrawItemIcon.cpp",
+      "target": "orig/target/_code/003d/sWinDrawItemIcon.o",
       "thumb": false
     },
     {
@@ -137414,12 +137414,12 @@
     },
     {
       "address": "0x422bf0",
-      "function": "FUN_00422bf0",
+      "function": "movieAudioDeviceRunLoop",
       "module": "_code",
-      "object": "build/obj/_code/0042/FUN_00422bf0.o",
+      "object": "build/obj/_code/0042/movieAudioDeviceRunLoop.o",
       "size": 80,
-      "source": "src/_code/0042/FUN_00422bf0.cpp",
-      "target": "orig/target/_code/0042/FUN_00422bf0.o",
+      "source": "src/_code/0042/movieAudioDeviceRunLoop.cpp",
+      "target": "orig/target/_code/0042/movieAudioDeviceRunLoop.o",
       "thumb": false
     },
     {
@@ -137755,12 +137755,12 @@
     },
     {
       "address": "0x423e14",
-      "function": "FUN_00423e14",
+      "function": "mobiclipAudioDecoderCreate",
       "module": "_code",
-      "object": "build/obj/_code/0042/FUN_00423e14.o",
+      "object": "build/obj/_code/0042/mobiclipAudioDecoderCreate.o",
       "size": 220,
-      "source": "src/_code/0042/FUN_00423e14.cpp",
-      "target": "orig/target/_code/0042/FUN_00423e14.o",
+      "source": "src/_code/0042/mobiclipAudioDecoderCreate.cpp",
+      "target": "orig/target/_code/0042/mobiclipAudioDecoderCreate.o",
       "thumb": false
     },
     {
@@ -156193,12 +156193,12 @@
     },
     {
       "address": "0x482f20",
-      "function": "FUN_00482f20",
+      "function": "controllerPoolUpdate",
       "module": "_code",
-      "object": "build/obj/_code/0048/FUN_00482f20.o",
+      "object": "build/obj/_code/0048/controllerPoolUpdate.o",
       "size": 180,
-      "source": "src/_code/0048/FUN_00482f20.cpp",
-      "target": "orig/target/_code/0048/FUN_00482f20.o",
+      "source": "src/_code/0048/controllerPoolUpdate.cpp",
+      "target": "orig/target/_code/0048/controllerPoolUpdate.o",
       "thumb": false
     },
     {
@@ -156253,12 +156253,12 @@
     },
     {
       "address": "0x4837ac",
-      "function": "FUN_004837ac",
+      "function": "objectPoolUpdate",
       "module": "_code",
-      "object": "build/obj/_code/0048/FUN_004837ac.o",
+      "object": "build/obj/_code/0048/objectPoolUpdate.o",
       "size": 136,
-      "source": "src/_code/0048/FUN_004837ac.cpp",
-      "target": "orig/target/_code/0048/FUN_004837ac.o",
+      "source": "src/_code/0048/objectPoolUpdate.cpp",
+      "target": "orig/target/_code/0048/objectPoolUpdate.o",
       "thumb": false
     },
     {

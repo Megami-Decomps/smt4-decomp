@@ -7,7 +7,7 @@ extern ScreenWindowTransition *g_sWin;
 extern AocSystemA *g_aocSystem;
 s32 FUN_001517b4(s32 category, s32 mode);
 s32 slotIsActive(u32 state);
-s32 FUN_002321f8(const void *key, const void *entry);
+s32 textureIdRecordCompare(const void *key, const void *entry);
 void *libc_bsearch(const void *key, const void *entries, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 aocRunByName(AocSystemA *system, s32 table, s32 node, u32 enabled);
 void FUN_001a6568(AocSystemA *system, s32 table, s32 node, u32 heap);
@@ -26,7 +26,7 @@ void FUN_00208a34(s32 window, u32 flags)
         u32 count = dataTableGetCount(section);
         u16 id = window;
         const ScreenWindowTextureRecord *record = static_cast<const ScreenWindowTextureRecord *>(
-            libc_bsearch(&id, entries, count, sizeof(ScreenWindowTextureRecord), FUN_002321f8));
+            libc_bsearch(&id, entries, count, sizeof(ScreenWindowTextureRecord), textureIdRecordCompare));
         if (record != NULL && record->texture >= 0) {
             s32 node = record->texture;
             if (aocRunByName(g_aocSystem, 0x34, node, 1))

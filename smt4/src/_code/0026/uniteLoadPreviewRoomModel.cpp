@@ -23,7 +23,7 @@ void uniteLoadPreviewRoomModel(void)
     AsdMdlObject **slot = &work->preview.previewModel;
     if (*slot == NULL) {
         *slot = asdMdlManagerCreateLoaded("camp/jakyou_all_mido.bam", 7);
-        FUN_002a0428(*slot, 1);
+        lightOwnerRegister(*slot, 1);
         AsdMdlObject *model = *slot;
         if (model->flags & 4) {
             model->flags &= ~4;

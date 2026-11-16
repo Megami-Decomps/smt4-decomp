@@ -104,7 +104,7 @@ void FUN_003a099c(Scene3a *scene)
     if (scene->modelManager != NULL &&
         modelHasLoadedAttachment(reinterpret_cast<const ModelBoneAttachmentRoot *>(scene->modelManager)) != 0 &&
         ((PreviewManagerView *)scene->modelManager)->node->state < 0) {
-        FUN_002a0428(reinterpret_cast<AsdMdlObject *>(scene->modelManager), 1);
+        lightOwnerRegister(reinterpret_cast<AsdMdlObject *>(scene->modelManager), 1);
         nodeSetTranslation3f(((PreviewManagerView *)scene->modelManager)->node, 0, 0.0f, -32000.0f, 0.0f);
     }
 }

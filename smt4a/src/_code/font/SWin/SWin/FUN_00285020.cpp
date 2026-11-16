@@ -20,7 +20,7 @@ void *asdMemoryAllocTracked(s32 heap, s32 category, s32 flags, u32 bytes, s32 co
 void sysMemClear(void *work, u32 bytes);
 void asdTMTexTableLoadTmx(s32 table, s32 entry);
 s32 FUN_003d0958(u32 process);
-s32 FUN_003d02bc(u32 process);
+s32 sWinDrawItemIcon(u32 process);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc end, u32 work, void *owner);
 void paramsClearPacket(UiResourceParameters *packet);
@@ -44,8 +44,8 @@ void FUN_00285020(s32 raisedPriority)
     }
     asdTMTexTableLoadTmx(0x34, 0);
     work->process = asdProcessCreateSimple((const s8 *)"SWin Calc", 3, 0, 0, FUN_003d0958, 0, 0);
-    taskCreateDraw((const s8 *)"SWin DrawUpLeft", leftPriority, 0, 0, FUN_003d02bc, 0, 0, (void *)work->process);
-    taskCreateDraw((const s8 *)"SWin DrawUpRight", rightPriority, 0, 0, FUN_003d02bc, 0, 0, (void *)work->process);
+    taskCreateDraw((const s8 *)"SWin DrawUpLeft", leftPriority, 0, 0, sWinDrawItemIcon, 0, 0, (void *)work->process);
+    taskCreateDraw((const s8 *)"SWin DrawUpRight", rightPriority, 0, 0, sWinDrawItemIcon, 0, 0, (void *)work->process);
     work = g_sWin;
     work->values[0] = 0;
     work->values[1] = 0;

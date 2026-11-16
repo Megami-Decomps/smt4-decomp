@@ -1,4 +1,4 @@
-/* NON_MATCHING: global load precedes the prologue; message/script branch registers and process-mode store scheduling differ. */
+/* NON_MATCHING: the g_mapMain literal load is scheduled before the push, and the DLC branch keeps the message pointer in r1 (retail: r0, loading scriptData into r1); everything else matches. */
 #include "map/mapMain.h"
 #include "addon/aocMain.h"
 #include "script/scrScriptProcess.h"
@@ -20,6 +20,7 @@ ScriptRunState *FUN_00297060(void *script, void *messages);
 s32 FUN_002897f0(u32 event, char *entryName);
 s32 tableGroupFindEntryIndex(TableGroupHeader *table, const char *entryName);
 void scrScriptProcessStartEntry(ScriptRunState *process, u32 entry);
+void scriptProcessSetMode(ScriptRunState *process, s32 mode);
 
 // Load a map event's script/messages from DLC or ROM and start its named entry.
 u32 FUN_00270e34(void)
@@ -62,7 +63,7 @@ u32 FUN_00270e34(void)
     }
     ScriptRunState *process = FUN_00297060(map->scriptData, messages);
     map->scriptProcess = process;
-    process->mode = 2;
+    scriptProcessSetMode(process, 2);
     map->completionFlag = FUN_002897f0(event->event, event->entryName);
     u32 entry = tableGroupFindEntryIndex(static_cast<TableGroupHeader *>(map->scriptData), event->entryName);
     scrScriptProcessStartEntry(static_cast<ScriptRunState *>(map->scriptProcess), entry);

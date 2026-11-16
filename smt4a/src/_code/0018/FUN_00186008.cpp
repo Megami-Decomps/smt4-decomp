@@ -1,4 +1,4 @@
-/* NON_MATCHING: guard, buffer clear and the palette/magnitude conditional moves match retail's order; the build shrink-wraps the guard (`cmp; bxeq lr` before the push) where retail pushes first and branches to a shared epilogue. */
+/* NON_MATCHING: only the two `movge` of the palette/magnitude selection are swapped (retail sets the palette first). */
 #include "common.h"
 
 extern "C" {

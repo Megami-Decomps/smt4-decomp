@@ -5,7 +5,7 @@ extern "C" {
 extern MapStateSlots *g_mapStateSlots;
 void *gameGetMapBlock();
 void *asdMdlManagerCreateLoaded(const char *path, u32 flags);
-void FUN_002a0428(void *model, s32 enabled);
+void lightOwnerRegister(void *model, s32 enabled);
 
 // Load the map unit model and initialize its first free state slot.
 void FUN_002e0274(s32 speed, f32 x, f32 y, f32 z)
@@ -47,6 +47,6 @@ void FUN_002e0274(s32 speed, f32 x, f32 y, f32 z)
     slot->motion.pending = 0;
     s32 sourceIndex = (s16)state->unk0A;
     slot->motion.sourceIndex = sourceIndex;
-    FUN_002a0428(state->references.models[sourceIndex].model, 1);
+    lightOwnerRegister(state->references.models[sourceIndex].model, 1);
 }
 }

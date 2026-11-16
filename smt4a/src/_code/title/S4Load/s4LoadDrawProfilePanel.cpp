@@ -1,4 +1,3 @@
-/* NON_MATCHING: instruction-identical to retail (131 rows) except the stack frame: ours reserves 576 bytes against retail's 568 once the hours/minutes/remainder locals exist (armcc keeps slots for them although they sit in r5/r6). */
 #include "title/S4Load.h"
 #include "saveLoadUI/saveLoadUI.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
@@ -15,7 +14,9 @@ extern const LoadProfileLabels DAT_00536bdc;
 void asdTextDrawDirectoryEntry(AsdText *text, u32 font, s32 mode, s32 x, s32 y,
     RelativeDirectory *directory, u32 entry);
 
-void FUN_0021b4e0(s32 selected)
+/* Draws the load screen's profile panel for the selected slot: name, level, play time, location and markers,
+ * or the empty-slot message. */
+void s4LoadDrawProfilePanel(s32 selected)
 {
     struct LoadProfile {
         char name[0x12];
@@ -51,7 +52,7 @@ void FUN_0021b4e0(s32 selected)
             return;
         }
         const LoadProfileView *view = reinterpret_cast<const LoadProfileView *>(work);
-        char name[24];
+        char name[0x12];
         FUN_002e59f8(view->profiles[selected].name, name, 0x12);
         FUN_003180c4(1, name);
         FUN_00359974(2, view->profiles[selected].enabled, -1, 0); // This profile byte is the displayed level.

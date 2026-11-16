@@ -1,4 +1,4 @@
-/* NON_MATCHING: allocation arithmetic and the zero-then-w vector reset match retail; only the scheduling of the block pointer stores (retail delays `mov r4, r0`, the build writes back through r0) differs. */
+/* NON_MATCHING: allocation arithmetic, store order and the vector reset match retail; only registers differ around the block pointer stores (retail reuses r1 for the initial-parameters pointer and delays `mov fp, #0`). */
 #include "AsdSDK/Source/Gfx/Effect/EffectBehaviorBlock.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -29,8 +29,8 @@ EffectBehaviorBlock *FUN_002691d8(s32 type, s32 count, const EffectBehaviorParam
     EffectBehaviorParameters *copy = reinterpret_cast<EffectBehaviorParameters *>(storage + elementsSize);
     block->elements = storage;
     block->initialParameters = reinterpret_cast<EffectBehaviorParameters *>(reinterpret_cast<u8 *>(copy) + parameterSize);
-    block->workspace = reinterpret_cast<u8 *>(block->initialParameters) + parameterSize;
     block->parameters = copy;
+    block->workspace = reinterpret_cast<u8 *>(block->initialParameters) + parameterSize;
     block->type = type;
     block->count = count;
     block->elementCount = elementCount;

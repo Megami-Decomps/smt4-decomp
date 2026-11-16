@@ -34,7 +34,7 @@ void FUN_001a9008(f32 x, f32 y, f32 z, f32 heading)
         textFormatBuffer(path, "map/m%03d/m%03d_fast.bam", g_gameState.unk000, g_gameState.unk000);
     }
     work->model = asdMdlManagerCreateLoaded(path, 7);
-    FUN_002a0428(work->model, 1);
+    lightOwnerRegister(work->model, 1);
     nodeSetTranslation(work->model->node, 0, work->state.position);
     FUN_0028c618(work->model->node, 0, 0.0f, work->state.heading, 0.0f);
 }

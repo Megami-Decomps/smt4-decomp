@@ -1,4 +1,4 @@
-/* NON_MATCHING: readiness branches target the preceding epilogue instruction; first downsample dimension copies reverse r0/r1. */
+/* NON_MATCHING: only the second downsample level's height copy swaps r0/r1 (retail loads the source pointer into r1). */
 #include "shard/FrameWork.h"
 #include "camp/RenderCtx.h"
 
@@ -41,7 +41,10 @@ s32 FUN_0010854c(u32 job)
     if (flags->active == 0) {
         return 0;
     }
-    if (flags->ready == 0 || work->frame.surface == NULL) {
+    if (flags->ready == 0) {
+        return 0;
+    }
+    if (work->frame.surface == NULL) {
         return 0;
     }
     FrameSurfaceState *frame = &work->frame;

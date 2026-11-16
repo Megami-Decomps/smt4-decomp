@@ -77,7 +77,7 @@ int textEncodeFontSlot(...);
 int FUN_00298d50(...);
 int asdMdlManagerCreateLoaded(unsigned char *, int);
 int soundChannelRequestIfEnabled(...);
-int FUN_002a0428(...);
+int lightOwnerRegister(...);
 int FUN_002a04f0(int);
 int FUN_002a09b4(unsigned char *, int);
 int FUN_002a3ab0(void);
@@ -180,7 +180,7 @@ extern int useCounterIsFinished(void);
 /* Supplied declaration required: sortMenuCreate. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: FUN_002a03d8. */
-/* Supplied declaration required: FUN_002a0428. */
+/* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: FUN_002a04f0. */
 /* Supplied declaration required: FUN_002a09b4. */
 /* Supplied declaration required: FUN_002a3ab0. */
@@ -313,7 +313,7 @@ unsigned int FUN_001d99c0(void)
           puVar6 = &LAB_001d9d8c;
           asdMdlManagerCreateLoaded(&LAB_001d9d8c,7);
           puVar7[0xe] = (unsigned int)puVar6;
-          FUN_002a0428();
+          lightOwnerRegister();
           puVar9 = (unsigned int *)puVar7[0xe];
           *puVar9 = *puVar9 & 0xfffffffd;
           *(unsigned char *)(*(int *)(puVar9[2] + 0x2c) + 0x1f6) = 1;
@@ -322,7 +322,7 @@ unsigned int FUN_001d99c0(void)
           puVar6 = &LAB_001da26c;
           asdMdlManagerCreateLoaded(&LAB_001da26c,7);
           puVar7[0xd] = (unsigned int)puVar6;
-          FUN_002a0428();
+          lightOwnerRegister();
           puVar9 = (unsigned int *)puVar7[0xd];
           *puVar9 = *puVar9 & 0xfffffffd;
           *(unsigned char *)(*(int *)(puVar9[2] + 0x2c) + 0x1f6) = 1;
@@ -768,7 +768,7 @@ LAB_001da638:
         }
         temp_v6 = modelHasLoadedAttachment(puVar2[puVar2[0x158] + 0xd]);
         if (temp_v6 == 0) goto LAB_001dacc8;
-        FUN_002a0428(puVar2[puVar2[0x158] + 0xd],1);
+        lightOwnerRegister(puVar2[puVar2[0x158] + 0xd],1);
         puVar9 = (unsigned int *)puVar2[puVar2[0x158] + 0xd];
         *puVar9 = *puVar9 & 0xfffffffd;
         *(unsigned char *)(*(int *)(puVar9[2] + 0x2c) + 0x1f6) = 1;

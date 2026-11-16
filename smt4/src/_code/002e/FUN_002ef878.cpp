@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail keeps the cleared busy value in r5 (mov r5, #0 after the query call) and stores the busy flag after the state compare; the build stores it first and materialises 0 at the end */
 /* Starts the save/load thread's step for a request: marks the thread busy and, for a request in state 1, finishes the
  * pending query; the busy flag is cleared again unless the follow-up reports 1 or 2. */
 #include "common.h"
@@ -24,21 +23,25 @@ s32 FUN_002103dc(s32 query, s32 first, s32 second);
 
 void FUN_002ef878(SaveLoadRequest *request)
 {
-    g_saveLoadThread.busy = 1;
-    if (request->state == 1) {
+    u8 state = request->state;
+    SaveLoadThreadState *thread = &g_saveLoadThread;
+    thread->busy = 1;
+    if (state == 1) {
         if (FUN_001041c8() != 0) {
             FUN_00103d48();
         }
         s32 result = processQueryAndFinish(6, 0, 0);
-
+        /* Whether the follow-up step still runs: the thread stays busy until it finishes. */
+        u8 running = 0;
         if ((s32)(result & 0x80000000) >= 0) {
             s32 status = FUN_002103dc(6, 0, 0);
-
             if (status == 1 || status == 2) {
-                return;
+                running = 1;
             }
         }
-        g_saveLoadThread.busy = 0;
+        if (!running) {
+            thread->busy = running;
+        }
     }
 }
 }

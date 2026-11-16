@@ -741,6 +741,10 @@ typedef struct BtlMainGlobalsA {
             /* 0x190 */ u32 words[2];
         } selectionGate;
         struct {
+            /* 0x140 */ u8 unk140BeforeSelectionGate[0x50];
+            /* 0x190 */ u64 bits;
+        } selectionGate64;
+        struct {
             u8 prefix[0x28];
             /* 0x168 */ u64 attempted;
         } voiceState;

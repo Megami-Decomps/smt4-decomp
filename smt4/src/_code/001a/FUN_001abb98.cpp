@@ -10,7 +10,7 @@ int FUN_0028527c(int);
 int naviRegisterTransitionsAndRequest(int, int, int, int, int, int);
 int FUN_002852f0(int);
 int asdMdlManagerCreateLoaded(unsigned char *, int);
-int FUN_002a0428(unsigned int, int);
+int lightOwnerRegister(unsigned int, int);
 int textFormatBuffer(unsigned char [64], unsigned char *, int);
 int randNextInRange(...);
 int gameGetMapBlock(void);
@@ -72,7 +72,7 @@ extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002852f0. */
 extern int FUN_00285574(void);
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
-/* Supplied declaration required: FUN_002a0428. */
+/* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: textFormatBuffer. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: randNextInRange. */
@@ -738,7 +738,7 @@ LAB_001ac248:;
         asdMdlManagerCreateLoaded(puVar22,0x38);
         *(unsigned char **)(temp_v7 + 0x4bd0f8) = puVar22;
       }
-      FUN_002a0428(*(unsigned int *)(temp_v7 + 0x4bd0f8),1);
+      lightOwnerRegister(*(unsigned int *)(temp_v7 + 0x4bd0f8),1);
       temp_v15 = 0;
       if (0 < (&DAT_004bd0e0)[temp_v6]) {
         do {
@@ -749,7 +749,7 @@ LAB_001ac248:;
             if (temp_v15 == 0) break;
             temp_v9 = asdMdlManagerClone(*(unsigned int *)(temp_v7 + 0x4bd0f8),1);
             *(unsigned int *)(temp_v6 * 0x100 + temp_v15 * 4 + 0x4bd110) = temp_v9;
-            FUN_002a0428(temp_v9,1);
+            lightOwnerRegister(temp_v9,1);
           }
         } while( 1 );
       }

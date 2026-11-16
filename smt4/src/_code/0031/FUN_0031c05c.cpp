@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler merges the two enable calls; retail retains distinct branches and two alignment NOPs. */
 #include "common.h"
 #include "script/ScriptArgs.h"
 
@@ -11,16 +10,16 @@ extern "C" {
 extern BustupCutState* g_bustupCutAnim;
 void FUN_002b7160(u32 job, u8 enabled);
 
-// Apply the script argument to the current bust-up animation job's enable byte.
+// Script command: enables or disables the current bust-up animation job (argument 0).
 u32 FUN_0031c05c(void)
 {
     s32 enabled = scrGetArg(0);
-    u32 job = g_bustupCutAnim->job;
-    if (job != 0) {
-        if (enabled != 0) {
-            FUN_002b7160(job, 1);
+    BustupCutState *anim = g_bustupCutAnim;
+    if (anim->job != 0) {
+        if (enabled == 0) {
+            FUN_002b7160(anim->job, 0);
         } else {
-            FUN_002b7160(job, 0);
+            FUN_002b7160(anim->job, 1);
         }
     }
     return 1;

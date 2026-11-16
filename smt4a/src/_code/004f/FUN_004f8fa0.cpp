@@ -1,11 +1,9 @@
-/* NON_MATCHING: register allocation/addressing only: retail forms the slot address as owner + i*16 and uses the +0x960.. displacements in each access (saving r9/sl); the build folds +0x960 into a slot pointer. */
 #include "common.h"
 
-/* An object released through slot 1 of its vtable. */
+/* An object the owner deletes (its deleting destructor is vtable slot 1). */
 class ReleasableObject {
 public:
-    virtual void slot0();
-    virtual void release();
+    virtual ~ReleasableObject();
     /* 0x04 */ u32 handle;
 };
 
@@ -28,24 +26,22 @@ extern "C" {
 extern u32 g_handleRegistry; /* 0x56fcc0 */
 void ptrListRemoveClearOwner(u32 registry, u32 handle);
 
-/* Releases the objects of all 109 slots and clears them. */
+/* Deletes the objects of all 109 slots and clears them. */
 void FUN_004f8fa0(SlotOwner *owner)
 {
     for (u32 i = 0; i < 109; i++) {
-        ObjectSlot *slot = &owner->slots[i];
-
-        if (slot->owned != NULL) {
-            slot->owned->release();
-            slot->owned = NULL;
+        if (owner->slots[i].owned != NULL) {
+            delete owner->slots[i].owned;
+            owner->slots[i].owned = NULL;
         }
-        if (slot->registered != NULL) {
-            ptrListRemoveClearOwner(g_handleRegistry, slot->registered->handle);
-            if (slot->registered != NULL) {
-                slot->registered->release();
-                slot->registered = NULL;
+        if (owner->slots[i].registered != NULL) {
+            ptrListRemoveClearOwner(g_handleRegistry, owner->slots[i].registered->handle);
+            if (owner->slots[i].registered != NULL) {
+                delete owner->slots[i].registered;
+                owner->slots[i].registered = NULL;
             }
         }
-        slot->unkC = 0;
+        owner->slots[i].unkC = 0;
     }
 }
 

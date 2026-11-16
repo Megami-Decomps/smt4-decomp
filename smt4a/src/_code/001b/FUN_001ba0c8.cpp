@@ -1,4 +1,4 @@
-/* NON_MATCHING: code matches retail instruction for instruction (strd of the ring indices, result in the queue register) except callee-saved register numbering (retail: r6 semaphore address, r5 request, zero for the index wrap hoisted into r9 above the semaphore wait; here r5 semaphore, r6 request, zero loaded after the wait). */
+/* NON_MATCHING: semaphore wait/release helpers (as in the smt4 twin FUN_002a2f08) give retail's registers; only the zero for the ring-index wrap (r9) is set after the semaphore wait here, retail sets it before the svc. */
 #include "sys/FileWorkerQueue.h"
 #include "nn/Result.h"
 #include "sys/ResultReport.h"
@@ -19,14 +19,29 @@ static FileQueueRequest *fileQueueStore(FileQueue *queue, const FileQueueRequest
     return inserted;
 }
 
-// Append a copied request to the fixed ring and link it after the previous queued request.
-FileQueueRequest *FUN_001ba0c8(FileQueue *queue, const FileQueueRequest *request)
+/* Waits on the queue semaphore, reporting a failed wait. */
+static __inline void semaphoreAcquire(u32 *semaphore)
 {
-    u32 *semaphore = &queue->semaphore;
     s32 result = svcWaitSynchronization1(*semaphore, -1);
     bool failed = nnResultIsFailure(result);
     if (failed)
         FUN_002e3140(result, failed);
+}
+
+/* Releases the queue semaphore once, reporting a failed release. */
+static __inline void semaphoreRelease(u32 *semaphore)
+{
+    u32 previousCount;
+    s32 result = FUN_0019a364(&previousCount, *semaphore, 1);
+    bool failed = nnResultIsFailure(result);
+    if (failed)
+        FUN_002e3140(result, failed);
+}
+
+// Append a copied request to the fixed ring and link it after the previous queued request.
+FileQueueRequest *FUN_001ba0c8(FileQueue *queue, const FileQueueRequest *request)
+{
+    semaphoreAcquire(&queue->semaphore);
     FileQueueRequest *inserted;
     if (queue->readIndex == queue->writeIndex) {
         inserted = fileQueueStore(queue, request);
@@ -35,11 +50,7 @@ FileQueueRequest *FUN_001ba0c8(FileQueue *queue, const FileQueueRequest *request
         inserted = fileQueueStore(queue, request);
         previous->next = inserted;
     }
-    u32 previousCount;
-    result = FUN_0019a364(&previousCount, *semaphore, 1);
-    failed = nnResultIsFailure(result);
-    if (failed)
-        FUN_002e3140(result, failed);
+    semaphoreRelease(&queue->semaphore);
     return inserted;
 }
 }

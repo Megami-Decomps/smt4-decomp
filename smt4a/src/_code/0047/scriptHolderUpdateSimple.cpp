@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail merges the state-1 store into the state-0/state-1 tail (case 0 branches to case 1's `str r0, [r4]`); armcc here merges case 1 into case 2's store. Process mode goes through the inlined scriptProcessSetMode. */
 /* Loads the quest script and system images, runs its entry, and finalizes the screen on completion. */
 #include "shard/Shard0047.h"
 #include "script/scrScriptProcess.h"
@@ -38,7 +37,7 @@ u32 scriptHolderUpdateSimple(ScriptHolder *holder)
             FUN_004731d8();
             holder->phase.state = 4;
         }
-        break;
+        return 0;
     case 4:
         return 1;
     }

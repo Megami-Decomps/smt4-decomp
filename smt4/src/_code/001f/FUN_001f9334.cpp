@@ -9,7 +9,7 @@ int contentEntryGetE(void);
 int FUN_00267144(void);
 int FUN_00273f5c(void);
 int mathDistanceBetweenPoints(void);
-int FUN_002a0428(unsigned int, int);
+int lightOwnerRegister(unsigned int, int);
 int gameFlagIsSet(...);
 int FUN_002f3c28(void);
 int VectorSignedToFloat(int, int);
@@ -42,7 +42,7 @@ extern int dataTableGetRecordFifty(void);
 extern int FUN_0027d968(void);
 extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 /* Supplied declaration required: mathDistanceBetweenPoints. */
-/* Supplied declaration required: FUN_002a0428. */
+/* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: gameFlagIsSet. */
 extern int randNextInRange(unsigned int);
 extern int gameGetMapBlock(void);
@@ -244,7 +244,7 @@ LAB_001f9924:
                         if (*(char *)(temp_v6 + 0x3051) != '\0') {
                           temp_v15 = asdMdlManagerClone(temp_v15,0);
                           *(unsigned int *)(temp_v7 + 0x1ac) = temp_v15;
-                          FUN_002a0428(temp_v15,1);
+                          lightOwnerRegister(temp_v15,1);
                           *(unsigned char *)(temp_v7 + 0x1b1) = 1;
                         }
                         else {
@@ -278,7 +278,7 @@ LAB_001f9924:
                         if (*(char *)(temp_v6 + 0x3051) != '\0') {
                           temp_v15 = asdMdlManagerClone(*(unsigned int *)(temp_v6 + 0x304c),0);
                           *(unsigned int *)(temp_v7 + 0x1ac) = temp_v15;
-                          FUN_002a0428(temp_v15,1);
+                          lightOwnerRegister(temp_v15,1);
                           *(unsigned char *)(temp_v7 + 0x1b1) = 1;
                         }
                         else {
@@ -416,7 +416,7 @@ LAB_001f9924:
                   if (*(char *)(temp_v6 + 0x3051) != '\0') {
                     temp_v15 = asdMdlManagerClone(temp_v15,0);
                     *(unsigned int *)(temp_v7 + 0x1ac) = temp_v15;
-                    FUN_002a0428(temp_v15,1);
+                    lightOwnerRegister(temp_v15,1);
                     *(unsigned char *)(temp_v7 + 0x1b1) = 1;
                   }
                   else {

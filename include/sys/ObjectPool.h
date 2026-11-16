@@ -5,8 +5,8 @@
 
 class PoolObject {
 public:
-    virtual void vfunc00();
-    virtual void vfunc04();
+    /* Slots 0/1: the complete and deleting destructors (the pool deletes finished objects). */
+    virtual ~PoolObject();
     virtual void vfunc08();
     virtual void vfunc0C();
     virtual void vfunc10();
@@ -25,8 +25,8 @@ struct ObjectPool {
 
 class PoolObjectA {
 public:
-    virtual void vfunc00();
-    virtual void vfunc04();
+    /* Slots 0/1: the complete and deleting destructors (the pool deletes finished objects). */
+    virtual ~PoolObjectA();
     virtual void vfunc08();
     virtual void vfunc0C();
     virtual void vfunc10();

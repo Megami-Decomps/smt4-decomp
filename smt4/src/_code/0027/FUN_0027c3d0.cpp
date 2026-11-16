@@ -18,7 +18,7 @@ extern GameStateView g_gameState;
 
 int nodeSetScale(unsigned int, int);
 int FUN_0027ee24(void);
-int FUN_002a0428(unsigned int, int);
+int lightOwnerRegister(unsigned int, int);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -47,7 +47,7 @@ extern unsigned int asdMdlManagerCreateFromSource(unsigned int, unsigned int, un
 /* Supplied declaration required: FUN_0027ee24. */
 extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_002a0428. */
+/* Supplied declaration required: lightOwnerRegister. */
 extern int modelHasLoadedAttachment(unsigned int);
 extern int gameFlagIsSet(void);
 extern int gameGetMapBlock(void);
@@ -224,7 +224,7 @@ LAB_0027c7c0:
     temp_v5 = *(short *)(g_mapStateSlots + 10);
   }
   if (temp_v9 && temp_v5 == 3) {
-    FUN_002a0428(*(unsigned int *)(g_mapStateSlots + 0x34),1);
+    lightOwnerRegister(*(unsigned int *)(g_mapStateSlots + 0x34),1);
     temp_v2 = 0;
     puVar5 = *(unsigned int **)(g_mapStateSlots + 0x34);
     *puVar5 = *puVar5 | 2;
@@ -238,7 +238,7 @@ LAB_0027c7c0:
       *(unsigned int *)(temp_v7 + 0xa08) = temp_v3;
       *(unsigned char *)(temp_v7 + 0xa0c) = 1;
       *(unsigned int *)(temp_v7 + 0xa10) = 0;
-      FUN_002a0428(temp_v3,1);
+      lightOwnerRegister(temp_v3,1);
       nodeSetScale(*(unsigned int *)(*(int *)(temp_v7 + 0xa08) + 8),0);
       puVar5 = *(unsigned int **)(temp_v7 + 0xa08);
       temp_v2 = temp_v2 + 1;
@@ -322,7 +322,7 @@ LAB_0027c7c0:
                 *(unsigned int *)(temp_v4 + 0x88) = temp_v3;
                 *(unsigned char *)(temp_v4 + 0x8c) = 1;
                 *(unsigned int *)(temp_v4 + 0x90) = 0;
-                FUN_002a0428(temp_v3,1);
+                lightOwnerRegister(temp_v3,1);
                 if (*(short *)(g_mapStateSlots + 4) >= 100) {
                   nodeSetScale(*(unsigned int *)(*(int *)(temp_v4 + 0x88) + 8),0);
                 }
@@ -333,7 +333,7 @@ LAB_0027c7c0:
                 *(unsigned char *)(temp_v4 + 0x8c) = 0;
                 temp_v5 = *(short *)(temp_v2 + 10);
                 *(int *)(temp_v4 + 0x90) = (int)temp_v5;
-                FUN_002a0428(*(unsigned int *)(temp_v2 + temp_v5 * 8 + 0x1c),1);
+                lightOwnerRegister(*(unsigned int *)(temp_v2 + temp_v5 * 8 + 0x1c),1);
                 if (*(short *)(g_mapStateSlots + 4) >= 100) {
                   nodeSetScale(*(unsigned int *)
                                 (*(int *)(g_mapStateSlots + *(int *)(temp_v4 + 0x90) * 8 + 0x1c) + 8),0);

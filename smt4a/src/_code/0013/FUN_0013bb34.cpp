@@ -16,7 +16,7 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_00145ec8(void);
-extern unsigned short *FUN_00145f04(char, unsigned int, short);
+extern unsigned short *statisticsGetCounter(char, unsigned int, short);
 extern int gameTestFlagBit32(unsigned int);
 /* Supplied declaration required: FUN_00148bb8. */
 extern unsigned short *dataTableFindCategoryVariant(char, unsigned int, short);
@@ -70,7 +70,7 @@ void FUN_0013bb34(int param_1)
         temp_v12 = 6;
       }
       temp_v6 = FUN_0015fb68();
-      puVar6 = (unsigned short *)FUN_00145f04(temp_v0,temp_v4,temp_v12);
+      puVar6 = (unsigned short *)statisticsGetCounter(temp_v0,temp_v4,temp_v12);
       temp_v5 = temp_v4;
       FUN_00148bb8(temp_v4,temp_v0);
       if (temp_v5 == 0) {

@@ -1,4 +1,3 @@
-/* NON_MATCHING: grid navigation behavior restored; quotient argument moves and final mode/selection store scheduling differ. */
 #include "ui/GridNavigation.h"
 
 extern "C" {
@@ -20,8 +19,8 @@ void FUN_00203b40(GridNavigation *work, s32 count, s32 visibleRows, s32 columns,
         visibleRows = count;
     work->count = count;
     work->empty = 0;
-    s32 rows = count / columns;
-    if (count % columns > 0)
+    s32 rows = work->count / columns;
+    if (work->count % columns > 0)
         ++rows;
     if (wrap != 0) {
         rowWidgetInit(&work->rows, visibleRows, rows);

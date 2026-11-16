@@ -47,6 +47,18 @@ struct Controller {
     /* 0x74 */ ControllerChild *child;
 };
 
+/* Controllers are polymorphic objects seen through the C view above: vtable slot 1
+ * (lifetime.release) is the deleting destructor, so the pool frees one with a native delete. */
+class ControllerObject {
+public:
+    virtual ~ControllerObject();
+};
+
+static __inline void controllerDelete(Controller *controller)
+{
+    delete reinterpret_cast<ControllerObject *>(controller);
+}
+
 /* The pool of live controllers: up to 16 in use, 4 of them of the first kind. */
 struct ControllerPool {
     /* 0x00 */ u8 unk00[4];

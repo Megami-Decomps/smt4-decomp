@@ -1,4 +1,4 @@
-/* NON_MATCHING: same dataflow (sine-style table wave: reduce |x| below 65536, 256-entry table with linear interpolation, odd symmetry); armcc schedules the table-base load, the fraction subtract and the compare flags differently */
+/* NON_MATCHING: same dataflow and literal pool; armcc moves the sign-compare vmrs earlier and loads the slope before the fraction subtract (other registers). */
 #include "common.h"
 #include <math.h>
 
@@ -22,8 +22,9 @@ f32 FUN_002b70cc(f32 x)
         phase -= 65536.0f;
     }
     u16 index = (u32)phase;
+    WaveEntry *table = DAT_00407ed0;
     f32 fraction = phase - (f32)index;
-    const WaveEntry *entry = &DAT_00407ed0[index & 0xff];
+    const WaveEntry *entry = &table[index & 0xff];
     if (x < 0.0f)
         return -(entry->base + fraction * entry->slope);
     return entry->base + fraction * entry->slope;

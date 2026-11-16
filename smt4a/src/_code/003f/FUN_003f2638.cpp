@@ -1,4 +1,4 @@
-/* NON_MATCHING: Mask reads use a relocated member address and LDM, with separate state-word addresses instead of retail's shared base. */
+/* NON_MATCHING: the mask test now loads in retail's order; only r2/r3 are swapped between g_btlMain's address and the mask's low word. */
 #include "battle/btlMain.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
 
@@ -18,7 +18,8 @@ void FUN_003f2638(const BtlMainStateA *state, s32 value, ReflectionTargetValue *
         ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
         if (unit != NULL && hasFlag80Or1000(g_btlScriptUnit, reinterpret_cast<u32 *>(unit)) != 0) {
             u64 flags = state->stateFlags64.bits;
-            if ((flags & g_btlMain.suppressionMask) == 0) {
+            u64 mask = g_btlMain.suppressionMask;
+            if ((mask & flags) == 0) {
                 return;
             }
         }

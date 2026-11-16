@@ -12,7 +12,7 @@ int FUN_0028703c(...);
 int FUN_0029bb14(...);
 void FUN_0029c2cc(...);
 int FUN_002a03d8(...);
-int FUN_002a0428(...);
+int lightOwnerRegister(...);
 int modelSlotAttachChild(...);
 int FUN_002a04f0(...);
 int FUN_002a09b4(...);
@@ -42,7 +42,7 @@ extern unsigned int asdMdlManagerCreateSecondList(char *, unsigned int);
 /* Supplied declaration required: FUN_0029bb14. */
 /* Supplied declaration required: FUN_0029c2cc. */
 /* Supplied declaration required: FUN_002a03d8. */
-/* Supplied declaration required: FUN_002a0428. */
+/* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: modelSlotAttachChild. */
 /* Supplied declaration required: FUN_002a04f0. */
 /* Supplied declaration required: FUN_002a09b4. */
@@ -94,7 +94,7 @@ unsigned int FUN_00205184(void)
       temp_v1 = *(int *)(temp_v0 + 0x554);
       *(unsigned int *)(temp_v0 + 0x570) = 1;
       if ((temp_v1 != 0) && (*(int *)(*(int *)(temp_v1 + 8) + 0xc) < 0)) {
-        FUN_002a0428(temp_v1,1);
+        lightOwnerRegister(temp_v1,1);
         animPlayerSetLoopPolicy(*(unsigned int *)(*piVar4 + 8),1);
         modelSelectPrimaryMotion(*(unsigned int *)(*piVar4 + 8),*(unsigned int *)(temp_v0 + 0x570));
         FUN_0028703c(*(unsigned int *)(*piVar4 + 8));

@@ -6,7 +6,7 @@ extern "C" {
 void modelSetAnimationChannels(void *model, s32 channels, f32 blend);
 void animPlayerSetLoopPolicy(void *player, s32 policy);
 void FUN_0028c618(void *player, s32 index, f32 x, f32 y, f32 z);
-void FUN_002a0428(void *model, s32 enabled);
+void lightOwnerRegister(void *model, s32 enabled);
 void animOwnerSetScale(void *model, f32 frame);
 
 void FUN_003d9d9c(void *object)
@@ -48,7 +48,7 @@ void FUN_003d9d9c(void *object)
         SlotView *slot = &owner->slots[i];
         if ((slot->flags & 2) && slot->model != NULL) {
             if (slot->model->player->index < 0) {
-                FUN_002a0428(slot->model, 1);
+                lightOwnerRegister(slot->model, 1);
             }
             FUN_0028c618(slot->model->player, 0, 0.0f, 0.0f, 0.0f);
             modelSetAnimationChannels(slot->model, 0, 0.0f);

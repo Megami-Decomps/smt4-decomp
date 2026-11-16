@@ -12,7 +12,7 @@ int animPlayerSetLoopPolicy(...);
 int FUN_0028c618(...);
 int btlGetMainState(...);
 int asdLoadFileAsyncSimple(...);
-int FUN_002a0428(...);
+int lightOwnerRegister(...);
 int textFormatBuffer(...);
 int libc_strcpy(...);
 int memClear(...);
@@ -44,7 +44,7 @@ extern int FUN_002522e0(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_0028c618. */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: FUN_002a0428. */
+/* Supplied declaration required: lightOwnerRegister. */
 extern int modelHasLoadedAttachment(unsigned int);
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
@@ -169,7 +169,7 @@ unsigned int FUN_003dd1a4(int param_1,unsigned int param_2,unsigned int param_3,
       }
       if (temp_v7 && temp_v1 != 0) {
         if (*(int *)(*(int *)(temp_v1 + 8) + 0xc) < 0) {
-          FUN_002a0428(temp_v1,1);
+          lightOwnerRegister(temp_v1,1);
         }
         FUN_0028c618(*(unsigned int *)(*puVar8 + 8),0);
         modelSetAnimationChannels(*puVar8,0);

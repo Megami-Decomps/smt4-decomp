@@ -1,11 +1,14 @@
-/* NON_MATCHING: retail clears an otherwise unused 256-byte stack buffer; retaining it solely to match would be dead code. */
-#include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 u32 asdLoadFileExists(const char *path);
 
-s32 FUN_00240c34(void* context)
+/* Reports whether the file at the path exists. */
+s32 FUN_00240c34(const char *path)
 {
-    return asdLoadFileExists((const char *)context) != 0;
+    // Retail clears a 256-byte path buffer on entry that nothing reads (a stripped debug-text buffer).
+    char scratch[256];
+    sysMemClear(scratch, sizeof(scratch));
+    return asdLoadFileExists(path) != 0;
 }
 }

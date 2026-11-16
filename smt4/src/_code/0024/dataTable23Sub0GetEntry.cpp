@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail loads the AOC table count and entries pointer as a pair (add #996; ldm); built loads them as two separate ldr (both unconditional now) */
 #include "common.h"
 #include "gamedata/DataTable.h"
 
@@ -32,10 +31,10 @@ Table23Entry *dataTable23Sub0GetEntry(u32 index)
     if (index < count) {
         return &entries[index];
     }
-    const AocTable23 *source = &g_aocSystem->table23;
-    AocTable23 aoc = *source;
-    if (index < aoc.count + count) {
-        return &aoc.entries[index - count];
+    s32 extraCount = g_aocSystem->table23.count;
+    Table23Entry *extraEntries = g_aocSystem->table23.entries;
+    if (index < extraCount + count) {
+        return &extraEntries[index - count];
     }
     return NULL;
 }

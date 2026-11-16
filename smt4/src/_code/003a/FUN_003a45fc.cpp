@@ -40,7 +40,7 @@ struct Table17Handle {
 
 extern "C" {
 
-u16 *FUN_002c0a2c(u8 bank, u32 row, u32 column);
+u16 *statisticsGetCounter(u8 bank, u32 row, u32 column);
 PlaceListRecord *dataTable17Sub1GetRecord(const Table17Handle &ignored, s32 index);
 s32 dataTable17Sub1GetCount(const Table17Handle &ignored);
 const QuestUnlockConditions *dataTable17Sub1ChildGetEntries(const Table17Handle &ignored, s32 index);
@@ -92,7 +92,7 @@ u32 FUN_003a45fc(PlaceListScene *scene)
             u16 *progress;
             switch (contentGetEntryKind(id)) {
             case 2:
-                progress = FUN_002c0a2c(scene->placeKind, scene->placeKey, 0);
+                progress = statisticsGetCounter(scene->placeKind, scene->placeKey, 0);
                 if (progress != NULL && *progress != 0) {
                     active = 1;
                     anyActive = 1;
@@ -100,7 +100,7 @@ u32 FUN_003a45fc(PlaceListScene *scene)
                 cellListAppend(&scene->tabs[0], id, locked, active, *progress & 0xFF);
                 break;
             case 3:
-                progress = FUN_002c0a2c(scene->placeKind, scene->placeKey, 1);
+                progress = statisticsGetCounter(scene->placeKind, scene->placeKey, 1);
                 if (progress != NULL && *progress != 0) {
                     active = 1;
                     anyActive = 1;
@@ -111,7 +111,7 @@ u32 FUN_003a45fc(PlaceListScene *scene)
                 cellListAppend(&scene->tabs[2], id, locked, 0, 0);
                 break;
             case 4:
-                progress = FUN_002c0a2c(scene->placeKind, scene->placeKey, 2);
+                progress = statisticsGetCounter(scene->placeKind, scene->placeKey, 2);
                 if (progress != NULL && *progress != 0) {
                     active = 1;
                     anyActive = 1;
@@ -119,7 +119,7 @@ u32 FUN_003a45fc(PlaceListScene *scene)
                 cellListAppend(&scene->tabs[3], id, locked, active, *progress & 0xFF);
                 break;
             case 5:
-                progress = FUN_002c0a2c(scene->placeKind, scene->placeKey, 3);
+                progress = statisticsGetCounter(scene->placeKind, scene->placeKey, 3);
                 if (progress != NULL && *progress != 0) {
                     active = 1;
                     anyActive = 1;
@@ -127,7 +127,7 @@ u32 FUN_003a45fc(PlaceListScene *scene)
                 cellListAppend(&scene->tabs[4], id, locked, active, *progress & 0xFF);
                 break;
             case 6:
-                progress = FUN_002c0a2c(scene->placeKind, scene->placeKey, 4);
+                progress = statisticsGetCounter(scene->placeKind, scene->placeKey, 4);
                 if (progress != NULL && *progress != 0) {
                     active = 1;
                     anyActive = 1;
@@ -135,7 +135,7 @@ u32 FUN_003a45fc(PlaceListScene *scene)
                 cellListAppend(&scene->tabs[5], id, locked, active, *progress & 0xFF);
                 break;
             case 7:
-                progress = FUN_002c0a2c(scene->placeKind, scene->placeKey, 5);
+                progress = statisticsGetCounter(scene->placeKind, scene->placeKey, 5);
                 if (progress != NULL && *progress != 0) {
                     active = 1;
                     anyActive = 1;
@@ -143,7 +143,7 @@ u32 FUN_003a45fc(PlaceListScene *scene)
                 cellListAppend(&scene->tabs[6], id, locked, active, *progress & 0xFF);
                 break;
             case 1:
-                progress = FUN_002c0a2c(scene->placeKind, scene->placeKey, 0);
+                progress = statisticsGetCounter(scene->placeKind, scene->placeKey, 0);
                 if (progress != NULL && *progress != 0) {
                     active = 1;
                     anyActive = 1;

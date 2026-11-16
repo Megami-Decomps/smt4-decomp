@@ -12,12 +12,12 @@ int jobStop(unsigned int, int);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
 int asdMemFreeSlot(unsigned int);
-int FUN_0023a55c(void);
-int FUN_0026812c(void);
+int textureIdRelease(void);
+int textureIdHasTexture(void);
 int FUN_00275bc8(...);
 int scrScriptProcessStartEntry(...);
 int FUN_00283498(void);
-int FUN_0028520c(void);
+int textureIdIsLoaded(void);
 int FUN_0028c258(void);
 int rt_aeabi_memclr(unsigned char [140], int);
 int taskWindowRelease(void);
@@ -45,12 +45,12 @@ extern int dataTableGet(unsigned int, unsigned char);
 extern int dataTable19FindAddonWord(void);
 extern int scrRunOpcodesStub(void);
 /* Supplied declaration required: asdMemFreeSlot. */
-/* Supplied declaration required: FUN_0023a55c. */
-/* Supplied declaration required: FUN_0026812c. */
+/* Supplied declaration required: textureIdRelease. */
+/* Supplied declaration required: textureIdHasTexture. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00283498. */
-/* Supplied declaration required: FUN_0028520c. */
+/* Supplied declaration required: textureIdIsLoaded. */
 /* Supplied declaration required: FUN_0028c258. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: taskWindowRelease. */
@@ -98,9 +98,9 @@ unsigned int FUN_003150f4(void)
       temp_v1 = 0;
       do {
         temp_v4 = (int)(short)temp_v1;
-        FUN_0028520c();
+        textureIdIsLoaded();
         if (temp_v4 != 0) {
-          FUN_0023a55c();
+          textureIdRelease();
         }
         temp_v1 = temp_v1 + 1;
       } while (temp_v1 < 0x40);
@@ -484,7 +484,7 @@ LAB_0031526c:
           else {
 LAB_00315314:
             temp_v1 = (int)(short)puVar3[8];
-            FUN_0026812c();
+            textureIdHasTexture();
             if (temp_v1 == 1) {
 LAB_0031532c:
               if ((unsigned int)puVar3[3] >= 2) {
@@ -496,9 +496,9 @@ LAB_003153fc:
                   temp_v1 = 0;
                   do {
                     temp_v4 = (int)(short)temp_v1;
-                    FUN_0028520c();
+                    textureIdIsLoaded();
                     if (temp_v4 != 0) {
-                      FUN_0023a55c();
+                      textureIdRelease();
                     }
                     temp_v1 = temp_v1 + 1;
                   } while (temp_v1 < 0x40);

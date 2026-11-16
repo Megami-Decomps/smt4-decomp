@@ -31,7 +31,7 @@ enum {
 
 extern StreamTemplate DAT_00420b20;
 
-u32 FUN_0024ab94(LocalStream *stream, u32 name, u32 mode);
+u32 romFileStreamOpen(LocalStream *stream, u32 name, u32 mode);
 u32 archiveStreamOpenConverted(LocalStream *stream);
 u32 FUN_002cbfe8(LocalStream *stream);
 u32 requestSubmitRecordById(LocalStream *stream);
@@ -55,7 +55,7 @@ u32 FUN_002f5390(s32 kind, u32 name, u32 buffer, u32 size)
     stream.words[1] = DAT_00420b20.second;
 
     if (kind == 0) {
-        result = FUN_0024ab94(&stream, name, 2);
+        result = romFileStreamOpen(&stream, name, 2);
     } else if (kind == 1) {
         result = archiveStreamOpenConverted(&stream);
     } else if (kind == 2) {

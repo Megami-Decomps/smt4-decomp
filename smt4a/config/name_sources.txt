@@ -6926,3 +6926,17 @@
 00409bc8 materialUploadChangedParameterVector inferred [med] Four-float version of materialUploadChangedParameters (same MaterialParameterWork layout).
 004f5e6c btlCameraReleaseTransientResources inferred [med] Resets 11 panel slots, releases the backend, finishes the transition, frees keyed records and texture cache, clears camera flag 0x08000000, resets 50 resource slots.
 001d1438 ARM_common_memcpy4_6 inferred [high] armcc's 6-byte struct-copy helper; twin of smt4 FUN_002bd808 (same bytes).
+0016fba0 mtx44Perspective inferred [high] Twin of smt4 FUN_002b72dc.
+00145f04 statisticsGetCounter inferred [med] Twin of smt4 FUN_002c0a2c.
+002e09b4 romFileStreamOpen inferred [med] Twin of smt4 FUN_0024ab94.
+00353cd4 vectorQueuePushPosition inferred [med] Twin of smt4 FUN_002e004c.
+0026812c textureIdHasTexture inferred [med] Returns 1 when id is in 1..63 and data table 0x47 has a row with a non-negative texture index.
+0028520c textureIdIsLoaded inferred [med] Looks the id up in data table 0x47 and returns asdTMTexTableNodeIsLoaded(0x34, textureIndex) when texture table 0x34 exists.
+0023a55c textureIdRelease inferred [med] Looks the id up in data table 0x47 and calls asdTMTexTableReleaseNode(0x34, textureIndex).
+002321f8 textureIdRecordCompare inferred [high] The bsearch comparator for data table 0x47 rows (compares the s16 key) in textureIdHasTexture, textureIdIsLoaded, textureIdRelease and FUN_003d02bc.
+003d02bc sWinDrawItemIcon inferred [med] Uses g_sWin and draws the item icon (texture table 0x34, index = table-0x47 texture * 1000) scaled by the window, plus the fading pending icon.
+0021b4e0 s4LoadDrawProfilePanel inferred [med] Uses g_s4Load and draws the selected slot name, level, play time, location and marker labels, or text entry 0x65 for an empty slot.
+00423e14 mobiclipAudioDecoderCreate inferred [med] Creates the audio decoder object of the request kind (vtables 0x557fa8, 0x557f50 IMA-ADPCM, 0x557f2c) and calls its initialize slot.
+004837ac objectPoolUpdate inferred [med] Walks 32 pool slots: updates live objects (vtable +0x10), deletes finished ones, decrements the count and primary-kind count.
+00482f20 controllerPoolUpdate inferred [med] Same shape as objectPoolUpdate over ControllerPool: updates controllers with flag bit 0, deletes the rest, adjusts count/firstKindCount.
+00422bf0 movieAudioDeviceRunLoop inferred [med] Sets the audio device run byte, then loops FUN_00422c48 + FUN_001c76b8 + a 0.5 ms sleep until another thread clears it.

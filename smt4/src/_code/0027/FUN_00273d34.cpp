@@ -60,7 +60,7 @@ LocationRecord *FUN_00267144(s32 index);
 s32 FUN_0027d968(void);
 s32 FUN_00326e44(void);
 ContentEntry *contentEntryGetE(s32 index);
-void FUN_00267074(u32 kind, u32 argument, u32 first, u32 second, u32 third, u32 fourth, u32 fifth);
+void naviSetActiveMapSlot(u32 kind, u32 argument, u32 first, u32 second, u32 third, u32 fourth, u32 fifth);
 
 // Fills the map's location markers from the records that belong to the current map.
 void FUN_00273d34(void)
@@ -120,7 +120,7 @@ void FUN_00273d34(void)
             used++;
             continue;
         }
-        FUN_00267074(used, marker->first, marker->second, marker->v0, marker->v1, marker->v2, 0);
+        naviSetActiveMapSlot(used, marker->first, marker->second, marker->v0, marker->v1, marker->v2, 0);
         used++;
     }
 }

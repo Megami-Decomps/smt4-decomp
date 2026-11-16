@@ -50,7 +50,7 @@ struct PackedItem {
 extern "C" {
 s32 sortCompareKeyPair(const void *left, const void *right);
 
-u16 *FUN_002c0a2c(u8 rank, u32 seed);
+u16 *statisticsGetCounter(u8 rank, u32 seed);
 s32 FUN_0028e9d0(u32 flag);
 s32 FUN_0028fb3c(u32 flag);
 void aocRecordLookup83(u32 flag);
@@ -71,7 +71,7 @@ void FUN_003a4210(SaleMenu *menu)
     menu->entryCount = 0;
     menu->total = 0;
     memClear(menu->entries, 0xC000);
-    u16 *discount = FUN_002c0a2c(menu->rank, menu->seed);
+    u16 *discount = statisticsGetCounter(menu->rank, menu->seed);
     for (u32 flag = 0x3B7; flag < 0x47F; flag++) {
         if (!FUN_0028e9d0(flag))
             continue;

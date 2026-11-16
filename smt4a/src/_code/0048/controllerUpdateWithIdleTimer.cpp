@@ -8,7 +8,7 @@ struct TimedController {
 };
 
 extern "C" {
-void FUN_00482f20(TimedController *controller);
+void controllerPoolUpdate(TimedController *controller);
 void FUN_004834b0(TimedController *controller, s32 mode);
 
 static __inline void advanceControllerTimer(TimedController *controller)
@@ -27,7 +27,7 @@ void controllerUpdateWithIdleTimer(TimedController *controller)
 {
     if (g_gameState.controllerFlags.primary == 0 && !(controller->flags & 1)) {
         advanceControllerTimer(controller);
-        FUN_00482f20(controller);
+        controllerPoolUpdate(controller);
     }
 }
 }

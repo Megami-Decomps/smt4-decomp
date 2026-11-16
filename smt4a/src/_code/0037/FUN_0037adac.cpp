@@ -15,7 +15,7 @@ extern "C" {
 extern u8 DAT_00557fcc;
 extern u8 DAT_005b40b4;
 
-FileResult FUN_002e09b4(FileObject *file, s32 path, u32 mode);
+FileResult romFileStreamOpen(FileObject *file, s32 path, u32 mode);
 FileResult archiveStreamOpenConverted(FileObject *file);
 FileResult FUN_0032cab4(FileObject *file);
 FileResult FUN_002befc0(void);
@@ -55,7 +55,7 @@ u32 FUN_0037adac(s32 media, s32 path, u32 buffer, u32 size)
     FileResult result = FILE_INVALID_MEDIA;
     switch (media) {
     case 0:
-        result = FUN_002e09b4(&file, path, 1);
+        result = romFileStreamOpen(&file, path, 1);
         break;
     case 1:
         result = archiveStreamOpenConverted(&file);

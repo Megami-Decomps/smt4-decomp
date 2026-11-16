@@ -27,7 +27,7 @@ typedef struct StereoCameraView {
     /* 0x4A0 */ u8 stereoCamera[1];
 } StereoCameraView;
 
-void FUN_002b72dc(f32 (*mtx)[4], f32 fovy, f32 aspect, f32 nearZ, f32 farZ);
+void mtx44Perspective(f32 (*mtx)[4], f32 fovy, f32 aspect, f32 nearZ, f32 farZ);
 void nn_math_ARMv6_MTX44PivotC_FAST(f32 (*mtx)[4], u32 pivot);
 void nn_math_ARMv6_MTX44TransposeAsm(f32 (*dst)[4], f32 (*src)[4]);
 void nn_ulcd_CTR_StereoCamera_SetBaseFrustum(void *stereoCamera, f32 (*projection)[4]);
@@ -35,11 +35,11 @@ void nn_ulcd_CTR_StereoCamera_SetBaseFrustum(void *stereoCamera, f32 (*projectio
 void FUN_002c1e30(StereoCameraView *view, u32 pivot, CameraPerspective perspective)
 {
     view->perspective = perspective;
-    FUN_002b72dc(view->projection, perspective.fovy * DEG_TO_RAD, perspective.aspect,
+    mtx44Perspective(view->projection, perspective.fovy * DEG_TO_RAD, perspective.aspect,
                  perspective.nearZ, perspective.farZ);
     nn_math_ARMv6_MTX44PivotC_FAST(view->projection, pivot);
     nn_math_ARMv6_MTX44TransposeAsm(view->projectionTransposed, view->projection);
-    FUN_002b72dc(view->baseProjection, view->perspective.fovy * DEG_TO_RAD, view->perspective.aspect,
+    mtx44Perspective(view->baseProjection, view->perspective.fovy * DEG_TO_RAD, view->perspective.aspect,
                  view->perspective.nearZ, view->perspective.farZ);
     nn_math_ARMv6_MTX44PivotC_FAST(view->baseProjection, 0);
     if (view->stereoEnabled) {

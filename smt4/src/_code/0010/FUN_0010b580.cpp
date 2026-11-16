@@ -1,6 +1,3 @@
-/* NON_MATCHING: retail walks the flag byte and the timer with two separate pointers advanced by 0x14 each (base+0xF20 and base+0xF28); armcc merges them into one slot pointer */
-/* Counts down the timers of the map's timed slots that are fully armed (flags 1, 2 and 4 set) and marks a slot
- * expired (flag 8) when its timer reaches zero. */
 #include "common.h"
 #include "shard/SaveWork.h"
 
@@ -19,25 +16,22 @@ struct MapTimedSlots {
     /* 0xF20 */ TimedSlot slots[16];
 };
 
-
+/* Counts down the timers of the map's timed slots that are fully armed (flags 1, 2 and 4 set) and marks a slot
+ * expired (flag 8) when its timer reaches zero. */
 void FUN_0010b580(void)
 {
     MapTimedSlots *block = reinterpret_cast<MapTimedSlots *>(gameGetMapBlock());
-    TimedSlot *slot = block->slots;
-    s32 remaining = 16;
-
-    do {
-        u8 flags = slot->flags;
+    for (s32 i = 0; i < 16; i++) {
+        u8 flags = block->slots[i].flags;
 
         if ((flags & 1) && (flags & 4) && (flags & 2) && !(flags & 8)) {
-            if (slot->timer > 0) {
-                slot->timer--;
+            if (block->slots[i].timer > 0) {
+                block->slots[i].timer--;
             }
-            if (slot->timer == 0) {
-                slot->flags = flags | 8;
+            if (block->slots[i].timer == 0) {
+                block->slots[i].flags = flags | 8;
             }
         }
-        slot++;
-    } while (--remaining != 0);
+    }
 }
 }

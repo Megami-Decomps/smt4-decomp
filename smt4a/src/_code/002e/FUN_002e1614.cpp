@@ -17,8 +17,8 @@ typedef struct Holder002e1614 {
 void asdMemFree(void *block);
 void asdMemFreeSlot(u32 slot);
 void bustupCutAnimStopJob(void);
-s32 FUN_0028520c(s16 index);
-void FUN_0023a55c(s16 index);
+s32 textureIdIsLoaded(s16 index);
+void textureIdRelease(s16 index);
 void taskWindowRelease(void);
 void eventTexReleaseJobs(void);
 void jobStop(void *job, s32 arg);
@@ -34,8 +34,8 @@ void FUN_002e1614(Holder002e1614 *holder)
     eventTexReleaseJobs();
     bustupCutAnimStopJob();
     for (i = 0; i < 64; i++) {
-        if (FUN_0028520c((s16)i) != 0) {
-            FUN_0023a55c((s16)i);
+        if (textureIdIsLoaded((s16)i) != 0) {
+            textureIdRelease((s16)i);
         }
     }
     taskWindowRelease();

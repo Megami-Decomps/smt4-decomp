@@ -1,4 +1,3 @@
-/* NON_MATCHING: selection-gate scalar mask loads and AND operands are scheduled in the opposite word order. */
 #include "battle/btlMain.h"
 #include "battle/btlUnit.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
@@ -22,10 +21,7 @@ void FUN_003ece9c(BtlMainStateA *state)
     if (FUN_003eaf20(state) == NULL) {
         return;
     }
-    u64 flags = state->stateFlags64.bits;
-    u64 blocked = g_btlMain.selectionGate.words[0] |
-                  ((u64)g_btlMain.selectionGate.words[1] << 32);
-    if (flags & blocked) {
+    if (state->stateFlags64.bits & g_btlMain.selectionGate64.bits) {
         return;
     }
     if (btlUiHasSelection(g_btlUiBlock)) {

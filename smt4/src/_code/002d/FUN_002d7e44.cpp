@@ -1,4 +1,3 @@
-/* NON_MATCHING: cached-state push/pop scheduling and final float/integer literal-pool order differ. */
 #include "title/titleMain.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include "shard/S1ListPanel.h"
@@ -27,7 +26,11 @@ void FUN_002d7e44()
         enabled = 0;
     effMenuCallHandler(0, enabled);
     renderStackPop(&g_titleScene->stackA);
-    if (reinterpret_cast<EditorDrawView *>(&g_effectEditor)->debugBackdrop != 0)
-        FUN_001db658(30, 0x606060FF, 0x909090FF, 0.0f, 0.0f, 0.0f, 17.5f);
+    if (reinterpret_cast<EditorDrawView *>(&g_effectEditor)->debugBackdrop != 0) {
+        // A 30-line debug grid at the origin.
+        u32 lightColor = 0x909090FF;
+        u32 darkColor = 0x606060FF;
+        FUN_001db658(30, darkColor, lightColor, 0.0f, 0.0f, 0.0f, 17.5f);
+    }
 }
 }

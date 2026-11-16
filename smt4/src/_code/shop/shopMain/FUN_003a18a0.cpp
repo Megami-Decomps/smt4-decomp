@@ -20,7 +20,7 @@ int FUN_002996d8(int);
 int gameSetStatusCameraHeightMode(...);
 int nodeSetTranslation3f(unsigned int, int);
 int beginStatusPanelClose(void);
-int FUN_002a0428(int, int);
+int lightOwnerRegister(int, int);
 int asdMdlManagerDestroy(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -54,7 +54,7 @@ extern int FUN_00299fc0(void);
 /* Supplied declaration required: nodeSetTranslation3f. */
 /* Supplied declaration required: beginStatusPanelClose. */
 extern int ifTouchGetSelectionModeForRegion(int);
-/* Supplied declaration required: FUN_002a0428. */
+/* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
 struct ModelBoneAttachmentRoot;
 extern int modelHasLoadedAttachment(const ModelBoneAttachmentRoot *object);
@@ -82,7 +82,7 @@ void FUN_003a18a0(int param_1)
         return;
       }
       if (*(int *)(*(int *)(*piVar3 + 8) + 0xc) < 0) {
-        FUN_002a0428(*piVar3,1);
+        lightOwnerRegister(*piVar3,1);
         nodeSetTranslation3f(*(unsigned int *)(*piVar3 + 8),0);
       }
     }

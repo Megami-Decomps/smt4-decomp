@@ -1,7 +1,8 @@
-/* NON_MATCHING: register numbering and the argument/stack-initialisation scheduling differ (retail stores the zero arguments and the completion word with one stm and keeps the drain flag in r5) */
+/* NON_MATCHING: wait and timeout test match; r5/r6 (drained flag, wait result) are swapped and armcc rotates the drain loop (ldrd, bottom test) where retail reloads `consumed` at the top. */
 #include "common.h"
 #include "nn/Result.h"
 #include "sys/ResultReport.h"
+#include "sys/HandleWait.h"
 
 struct CecCompletionQueue {
     u8 unk000[0x78];
@@ -14,7 +15,6 @@ struct CecCompletionQueue {
 };
 extern "C" {
 extern CecCompletionQueue *g_cecProcess;
-s32 FUN_002c40f8(s32 *, const u32 *, s32, s32, u32, u32);
 bool nn_os_CriticalSection_TryEnter(void *);
 void nn_os_CriticalSection_Leave(void *);
 }
@@ -26,20 +26,11 @@ extern "C" u32 FUN_002cd680(void)
     CecCompletionQueue *queue = g_cecProcess;
 
     if (queue != NULL) {
-        u32 completion = queue->completion;
         bool timedOut = false;
 
-        if (completion != 0) {
-            s32 index;
-            s32 result = FUN_002c40f8(&index, &completion, 1, 0, 0, 0);
-            bool failed = nnResultIsFailure(result);
-            if (failed) {
-                FUN_002c526c(result, failed);
-            }
-            nnResultFields fields;
-            fields.value = result;
-            bool differs = fields.fields.description != 0x3FE;
-            timedOut = differs != 1;
+        if (queue->completion != 0) {
+            s32 result = handleWait(queue->completion, 0);
+            timedOut = nnResultIsNotTimeout(result) != 1;
         }
         if (timedOut) {
             if (nn_os_CriticalSection_TryEnter(queue->lock)) {
@@ -49,10 +40,10 @@ extern "C" u32 FUN_002cd680(void)
                 nn_os_CriticalSection_Leave(queue->lock);
             }
         } else {
+            drained = 1;
             while (queue->consumed != queue->produced) {
                 ++queue->consumed;
             }
-            drained = 1;
         }
     }
     return drained;

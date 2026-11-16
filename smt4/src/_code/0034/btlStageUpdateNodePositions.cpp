@@ -25,7 +25,7 @@ static __inline NodeVec3 nodeVec3Splat(f32 value)
 }
 
 s32 modelHasLoadedAttachment(BattleStageNode *node);
-void FUN_002a0428(BattleStageNode *node, s32 enable);
+void lightOwnerRegister(BattleStageNode *node, s32 enable);
 void FUN_002e1230(BattleStageNode *node, s32 enable);
 void animOwnerSetScale(BattleStageNode *node, f32 scale);
 void FUN_002a04f0(s32 value);
@@ -42,7 +42,7 @@ u32 FUN_00340558(BattleStageModel *stage)
     }
     for (index = 0; index < 3; ++index) {
         if (stage->scene.nodes[index] != NULL) {
-            FUN_002a0428(stage->scene.nodes[index], 1);
+            lightOwnerRegister(stage->scene.nodes[index], 1);
             FUN_002e1230(stage->scene.nodes[index], 1);
             animOwnerSetScale(stage->scene.nodes[index], 1.0f);
         }

@@ -20,7 +20,7 @@ typedef struct ModelOwner {
 
 void animPlayerSetLoopPolicy(AnimPlayer *player, s32 policy);
 void nodeSetScale(AnimPlayer *player, s32 flag, f32 x, f32 y, f32 z);
-void FUN_002a0428(ModelObject *model, s32 mode);
+void lightOwnerRegister(ModelObject *model, s32 mode);
 void animOwnerSetScale(ModelObject *model, f32 value);
 s32 modelHasLoadedAttachment(ModelObject *model);
 
@@ -31,7 +31,7 @@ u32 modelOwnerResetPlayerIfReady(ModelOwner *owner)
         return 0;
     }
     if (owner->model->player->loopPolicy < 0) {
-        FUN_002a0428(owner->model, 1);
+        lightOwnerRegister(owner->model, 1);
         nodeSetScale(owner->model->player, 0, 1.0f, 1.0f, 1.0f);
         animPlayerSetLoopPolicy(owner->model->player, 1);
         animOwnerSetScale(owner->model, 1.0f);
