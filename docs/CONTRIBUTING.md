@@ -294,13 +294,36 @@ that retail compiled against an opaque copy (it keeps a dead store into the copi
 
 ## Shared declarations
 
+### One struct per object
+
+Every object the game reaches through a global, a getter or a table (the game state, a devil record,
+a battle unit, a package entry) has exactly one declaration, in a header under `include/`, and every
+unit that touches it includes that header. A unit does not define its own partial struct for a
+shared object, does not cast the object to a local view, and does not redeclare its getter.
+
+- **Where the games differ, declare each game's layout** under its own name, the smt4a one with an
+  `A` suffix (`GameState` / `GameStateA`), in the same header when the two share most fields.
+- **Unknown bytes stay padding** named by offset (`u8 unk024[0x8];`), so every known field sits at
+  its real offset. Check the offsets of the fields you rely on with the existing compile-time
+  pattern (`typedef char GameStateACheck[offsetof(GameStateA, mode) == 0x0 ? 1 : -1];`).
+- **Merging views**: `python -B tools/layout.py GAME --anchor SYMBOL` lays out, with the unit's own
+  compiler and flags, every struct a unit declares the object as, and lists the names each offset
+  has been given; `tools/layout.py GAME FILE TYPE` shows one view. Pick the name that says what the
+  field is, and the type the code needs (signedness and width change the generated loads).
+- **A sub-object with its own users** (a work area, a table inside the state) is its own struct,
+  embedded at its offset, not a union of every unit's guess.
+- Converting a unit to the shared struct must keep it IDENTICAL (or, for a near miss, no worse).
+
+### Contracts
+
 These headers own a type or a calling contract for both games. Include them instead of writing a
 local view or prototype, and keep the contract.
 
 - **`shard/JobWork.h`**: the canonical `JobWork *jobGetWork(u32 job)` accessor. Pass the incoming
   handle explicitly, use `s32 (u32 job)` for process and draw updates and `void (u32 job)` for
-  destruction callbacks, and keep the registrar's declarations in sync. Callers keep their own typed
-  view of the work area with a cast (`MyWork *work = (MyWork *)jobGetWork(job);`). For registered
+  destruction callbacks, and keep the registrar's declarations in sync. Each job type's work area is
+  its own object: declare its struct once, in the job's header, and cast to it
+  (`UniteWork *work = (UniteWork *)jobGetWork(job);`) in every callback of that job. For registered
   process or draw callbacks, compare the body with its registrar and recover the callback's parameter
   and result types too.
 - **`text/TextDraw.h`**: `f32 FUN_00162790(layer, color, text, x, y, z, width, height)` (smt4's

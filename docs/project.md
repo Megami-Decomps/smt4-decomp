@@ -28,6 +28,8 @@ tools/similar.py      finds, for each unproven function, the proven functions wh
 tools/triage.py       sorts the unproven functions by what their fdiff shows (order, operands, registers, shape)
 tools/worktrees.py    git worktrees for parallel work: each links orig/ and build/tools/ to this checkout,
                       builds and relinks on its own, and hands back its changes as a patch
+tools/layout.py       field offsets of struct views from the compiler, and every view of one object merged
+                      by offset (--anchor SYMBOL): the input for one declaration per object
 tools/permuter.py     searches source rewrites (statement order, operand order, comparison direction, condition
                       spelling, int types, a constant held in a local) of near-miss functions for one that
                       compiles to the retail bytes; runs unattended on Linux or Windows, results to review
