@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00188c28(int);
 int FUN_0018b0a8(int);
 int nn_os_Thread_FinalizeImpl(int);
-int FUN_002e3140(void);
+int resultHandleFailure(void);
 int software_interrupt(int);
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
@@ -15,7 +15,7 @@ int software_interrupt(int);
 /* Supplied declaration required: FUN_0018b0a8. */
 /* Supplied declaration required: nn_os_Thread_FinalizeImpl. */
 extern unsigned int nn_gxlow_CTR_GetGpu(void);
-/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: resultHandleFailure. */
 extern unsigned int nn_gxlow_CTR_Gpu_UnregisterInterruptRelayQueue(unsigned int);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -30,11 +30,11 @@ void FUN_001701c0(int param_1)
   *(unsigned char *)(param_1 + 0x77) = 1;
   software_interrupt(0x18);
   if (*(int *)(param_1 + 0x2c) < 0) {
-    FUN_002e3140();
+    resultHandleFailure();
   }
   software_interrupt(0x24);
   if (*(int *)(param_1 + 0x6c) < 0) {
-    FUN_002e3140();
+    resultHandleFailure();
   }
   *(unsigned char *)(param_1 + 0x70) = 1;
   nn_os_Thread_FinalizeImpl(param_1 + 0x6c);

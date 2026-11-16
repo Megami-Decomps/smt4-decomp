@@ -18,7 +18,7 @@ void FUN_0034dc3c(ClippedSprite *sprite)
     bool suspended = renderCtxSuspendScissor(g_renderCtx);
     FUN_00168e00(info->x + sprite->clipX + parallax, info->y + sprite->clipY,
                  sprite->clipWidth, sprite->clipHeight);
-    FUN_001835b4(2, sprite->group, sprite->image, sprite->x + parallax, sprite->y, 21);
+    texDrawTableEntryAtStoredOrigin(2, sprite->group, sprite->image, sprite->x + parallax, sprite->y, 21);
     if (suspended)
         renderCtxResumeScissor(g_renderCtx);
     renderPopStateStacks();

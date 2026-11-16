@@ -9,8 +9,8 @@ int asdMdlManagerMarkDestroy(...);
 int animPlayerSetLoopPolicy(...);
 int gfxObjectDestroy(...);
 int FUN_0028703c(...);
-int FUN_0029bb14(...);
-void FUN_0029c2cc(...);
+int modelSetScale(...);
+void modelRemoveFromSlotList(...);
 int FUN_002a03d8(...);
 int lightOwnerRegister(...);
 int modelSlotAttachChild(...);
@@ -37,10 +37,10 @@ extern int nw_anim_PlayPolicy_Loop(...); /* 0x151500 */
 extern int effTimelineIsDone(unsigned int);
 extern unsigned int asdCameraLoadFromFile(char *);
 /* Supplied declaration required: FUN_0028703c. */
-/* Supplied declaration required: FUN_00287728. */
+/* Supplied declaration required: screenFadeSlotReset. */
 extern unsigned int asdMdlManagerCreateSecondList(char *, unsigned int);
-/* Supplied declaration required: FUN_0029bb14. */
-/* Supplied declaration required: FUN_0029c2cc. */
+/* Supplied declaration required: modelSetScale. */
+/* Supplied declaration required: modelRemoveFromSlotList. */
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: modelSlotAttachChild. */
@@ -98,7 +98,7 @@ unsigned int FUN_00205184(void)
         animPlayerSetLoopPolicy(*(unsigned int *)(*piVar4 + 8),1);
         modelSelectPrimaryMotion(*(unsigned int *)(*piVar4 + 8),*(unsigned int *)(temp_v0 + 0x570));
         FUN_0028703c(*(unsigned int *)(*piVar4 + 8));
-        FUN_0029bb14(*(unsigned int *)(*piVar4 + 8));
+        modelSetScale(*(unsigned int *)(*piVar4 + 8));
       }
       FUN_002a04f0(0);
       temp_v2 = *(unsigned int *)(temp_v0 + *(int *)(temp_v0 + 0x570) * 4 + 0x55c);
@@ -112,7 +112,7 @@ unsigned int FUN_00205184(void)
       FUN_002c159c(temp_v0 + 4);
       FUN_002c1edc(temp_v0 + 4,temp_v0 + 0x50c,temp_v0 + 0x518,temp_v0 + 0x524);
       FUN_002c1e30(temp_v0 + 4,1);
-      FUN_00287728(0);
+      screenFadeSlotReset(0);
       FUN_002a03d8(1,10);
       *(unsigned int *)(temp_v0 + 0x564) = 2;
       *(unsigned int *)(temp_v0 + 0x568) = 0;
@@ -127,7 +127,7 @@ unsigned int FUN_00205184(void)
       FUN_002f50b8(*(unsigned int *)(*piVar5 + 8));
       piVar4 = (int *)(temp_v0 + 0x570);
       modelSelectPrimaryMotion(*(unsigned int *)(*piVar5 + 8),*(unsigned int *)(temp_v0 + 0x570));
-      FUN_0029c2cc(*(unsigned int *)(temp_v0 + 0x558),0);
+      modelRemoveFromSlotList(*(unsigned int *)(temp_v0 + 0x558),0);
       VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
       *piVar4 = 0;
       modelSelectPrimaryMotion(*(unsigned int *)(*piVar5 + 8),0);
@@ -152,7 +152,7 @@ unsigned int FUN_00205184(void)
   case 4:
     if (*(int *)(temp_v0 + 0x568) != 0) {
       if (*(char *)(temp_v0 + 0x56c) != '\0') {
-        FUN_0029c2cc(*(unsigned int *)(temp_v0 + 0x558),0);
+        modelRemoveFromSlotList(*(unsigned int *)(temp_v0 + 0x558),0);
       }
       gfxObjectDestroy(*(unsigned int *)(temp_v0 + 0x55c));
       gfxObjectDestroy(*(unsigned int *)(temp_v0 + 0x560));

@@ -7,7 +7,7 @@
 extern "C" void sysFatalBreak(void);
 
 class Obj55813cFile;
-extern "C" s32 FUN_001883b0(Obj55813cFile *file, const wchar_t *path, s32 mode);
+extern "C" s32 archivePathDeviceOpen(Obj55813cFile *file, const wchar_t *path, s32 mode);
 
 /* The file handle the stream owns, with its bookkeeping words; closing it is part of destroying it
  * (the low bit of the handle is an error mark). */
@@ -36,7 +36,7 @@ public:
         unk10 = 0;
         unk04 = 0;
         unk08 = 0;
-        return FUN_001883b0(this, path, mode);
+        return archivePathDeviceOpen(this, path, mode);
     }
 
     /* 0x00 */ u32 handle;

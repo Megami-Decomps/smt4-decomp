@@ -83,7 +83,7 @@ void FUN_003ca5a4(void)
         void *source = state->sources->source;
         if (DAT_005f0c54[i] != 1) {
             if (g_lmapMainState != NULL && g_lmapMainState->slots[i].registered != 0) {
-                ptrListRemoveClearOwner(g_handleRegistry, FUN_0040619c(source, i));
+                ptrListRemoveClearOwner(g_handleRegistry, ptrVectorAt(source, i));
                 if (g_lmapMainState != NULL && g_lmapMainState->slots[i].registered != 0) {
                     g_lmapMainState->slots[i].registered = 0;
                 }
@@ -91,7 +91,7 @@ void FUN_003ca5a4(void)
             FUN_003b5c54(i, 0);
         } else {
             if (g_lmapMainState == NULL || g_lmapMainState->slots[i].registered == 0) {
-                handleRegistryRegisterObject(g_handleRegistry, FUN_0040619c(source, i));
+                handleRegistryRegisterObject(g_handleRegistry, ptrVectorAt(source, i));
                 if (g_lmapMainState != NULL && g_lmapMainState->slots[i].registered == 0) {
                     g_lmapMainState->slots[i].registered = 1;
                 }

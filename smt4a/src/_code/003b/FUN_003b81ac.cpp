@@ -7,14 +7,14 @@
 
 extern "C" {
 s32 FUN_003248e4(BtlCombatantEntryA *entry);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
 void scrSetResult(s32 result);
 
 // Check the requested group and the special combatant against candidate masks and a predicate.
 u32 FUN_003b81ac(void)
 {
     s32 first, count;
-    FUN_00301a08(btlResolveEntryChoice(scrGetArg(0)), &first, &count);
+    btlGetEntryChoiceRange(btlResolveEntryChoice(scrGetArg(0)), &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
@@ -25,7 +25,7 @@ u32 FUN_003b81ac(void)
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
-        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL && FUN_003248e4(entry) != 0) {
             scrSetResult(1);
             return 1;

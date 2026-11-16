@@ -5,7 +5,7 @@
 extern "C" {
 
 int saveSlotFindSelected(void);
-int FUN_00187168(void);
+int partySlotIsOccupied(void);
 int __aeabi_memset4(unsigned int *, int, unsigned int);
 int FUN_00284fdc(void);
 int libc_strcpy(unsigned char [20], unsigned int);
@@ -53,7 +53,7 @@ extern unsigned int DAT_00573a54; /* 0x573a54 */
 extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: saveSlotFindSelected. */
 extern int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_00187168. */
+/* Supplied declaration required: partySlotIsOccupied. */
 extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 extern unsigned int dataTableFileGetTable(int, unsigned int);
@@ -228,7 +228,7 @@ void FUN_003f1d74(fn_003f1d74_arg0 *param_1,unsigned int param_2)
       } while (temp_v3 < 7);
       if (0 < temp_v4) {
         saveSlotFindSelected();
-        FUN_00187168();
+        partySlotIsOccupied();
       }
       FUN_003e49e8();
       partyAdjustCounterIfEnoughActive(puVar10[0x40]);

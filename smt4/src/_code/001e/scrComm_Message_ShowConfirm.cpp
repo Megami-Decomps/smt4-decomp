@@ -16,7 +16,7 @@ extern MessageMain g_messageMain;
 
 void eventTexRequestStopAll(void);
 void bustupCutAnimRequestStopSlots(void);
-void FUN_002866b4(u32 unit, u32 arg, u32 value, s32 kind, s32 a, s32 b);
+void messageWindowShowOrPoll(u32 unit, u32 arg, u32 value, s32 kind, s32 a, s32 b);
 u32 scrGetCommandOwner(void);
 u32 scrGetCommandFrame(void);
 u32 scrGetArg(u32 index);
@@ -32,7 +32,7 @@ static void showMessage(s32 kind)
     u32 arg = scrGetArg(0);
     u32 value = scrGetCommandFrame();
 
-    FUN_002866b4(unit, arg, value, kind, 0, 0);
+    messageWindowShowOrPoll(unit, arg, value, kind, 0, 0);
 }
 
 void scrComm_Message_ShowConfirm(void)

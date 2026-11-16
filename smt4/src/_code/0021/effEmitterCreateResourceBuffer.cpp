@@ -4,7 +4,7 @@
 extern "C" {
 void polygonTrackRebuildResources(ResourceEmitter* emitter, u32 id, const EmitterArguments* arguments);
 void objectBufferFree(void* buffer);
-void* FUN_002691d8(u16 id, u32 key, void* data);
+void* effBehaviorCreate(u16 id, u32 key, void* data);
 
 // Create the emitter and replace its resource buffer using the current source ID.
 ResourceEmitter* effEmitterCreateResourceBuffer(EmitterResourceRequest* request)
@@ -16,7 +16,7 @@ ResourceEmitter* effEmitterCreateResourceBuffer(EmitterResourceRequest* request)
     if (emitter->buffer != NULL) {
         objectBufferFree(emitter->buffer);
     }
-    emitter->buffer = FUN_002691d8(id, emitter->key, data);
+    emitter->buffer = effBehaviorCreate(id, emitter->key, data);
     return emitter;
 }
 }

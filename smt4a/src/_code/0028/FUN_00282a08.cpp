@@ -6,7 +6,7 @@ extern "C" {
 s32 scrMessageKindGetValue(void);
 u32 scrGetCommandOwner(void);
 u32 scrGetCommandFrame(void);
-u32 FUN_0021bdac(u32 context, s32 argument, s32 frame, s32 kind, s32 enabled, u32 flags);
+u32 messageWindowShowOrPoll(u32 context, s32 argument, s32 frame, s32 kind, s32 enabled, u32 flags);
 
 static __inline s32 messageKind(s32 kind)
 {
@@ -22,6 +22,6 @@ u32 FUN_00282a08(void)
     u32 context = scrGetCommandOwner();
     s32 argument = scrGetArg(0);
     s32 frame = scrGetCommandFrame();
-    return FUN_0021bdac(context, argument, frame, kind, enabled, 0);
+    return messageWindowShowOrPoll(context, argument, frame, kind, enabled, 0);
 }
 }

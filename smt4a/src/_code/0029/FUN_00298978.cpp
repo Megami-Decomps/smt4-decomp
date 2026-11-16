@@ -8,18 +8,18 @@ extern "C" {
 int sysPlaySe(int);
 int FUN_0022677c(...);
 int scrScriptProcessGetEntry(...);
-int FUN_00275bc8(...);
+int scrScriptProcessCreate(...);
 
 int textFormatBuffer(unsigned char [128], unsigned char *, unsigned int, unsigned int);
 int jobStop(unsigned int, int);
 int jobSetIntensity(unsigned int, int);
 unsigned int asdLoadFileExists(const char *);
-int FUN_001695a0(void);
+int messageSetScriptDisplayMode(void);
 int gameFlagIsSet(void);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
 int asdLoadFileSyncDefault(void);
-int FUN_00212204(int);
+int screenFadeSlotReset(int);
 int asdLoadFileSetUseRawPaths(int);
 int msgWindowReset(void);
 int messageSlotSet(int);
@@ -30,7 +30,7 @@ int campCommonBgRelease(void);
 int eventTexReleaseJobs(void);
 int bustupCutAnimStopJob(void);
 int campButtonHelpRelease(void);
-int FUN_003b61ec(void);
+int commonBgStopChildAndBeginTransition(void);
 int eventCommandStop(void);
 int eventOpeningResetValidJob(void);
 int soundChannelStopAll(int);
@@ -49,19 +49,19 @@ extern int padButtonRepeat(unsigned int);
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: jobSetIntensity. */
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_001695a0. */
+/* Supplied declaration required: messageSetScriptDisplayMode. */
 extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdLoadFileSyncDefault. */
-/* Supplied declaration required: FUN_00212204. */
+/* Supplied declaration required: screenFadeSlotReset. */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0022677c. */
 /* Supplied declaration required: asdLoadFileSetUseRawPaths. */
 extern int messageAnyWindowActive(void);
 /* Supplied declaration required: scrScriptProcessGetEntry. */
-/* Supplied declaration required: FUN_00275bc8. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
 extern int asdLoadFileGetUseRawPaths(void);
 /* Supplied declaration required: msgWindowReset. */
@@ -75,7 +75,7 @@ extern int flagBrowserStep(void);
 /* Supplied declaration required: eventTexReleaseJobs. */
 /* Supplied declaration required: bustupCutAnimStopJob. */
 /* Supplied declaration required: campButtonHelpRelease. */
-/* Supplied declaration required: FUN_003b61ec. */
+/* Supplied declaration required: commonBgStopChildAndBeginTransition. */
 /* Supplied declaration required: eventCommandStop. */
 /* Supplied declaration required: eventOpeningResetValidJob. */
 /* Supplied declaration required: soundChannelStopAll. */
@@ -159,7 +159,7 @@ unsigned int FUN_00298978(void)
     }
     campCommonBgRelease();
     campButtonHelpRelease();
-    FUN_001695a0();
+    messageSetScriptDisplayMode();
     msgWindowReset();
     bustupCutAnimStopJob();
     eventTexReleaseJobs();
@@ -179,8 +179,8 @@ unsigned int FUN_00298978(void)
     }
     puVar2[2] = 1;
     messageSlotSet(0);
-    FUN_00212204(0);
-    FUN_00212204(1);
+    screenFadeSlotReset(0);
+    screenFadeSlotReset(1);
     soundChannelStopAll(0xf);
     gameFlagSetValue(0x522,0,1);
     return 0;
@@ -247,7 +247,7 @@ unsigned int FUN_00298978(void)
     }
     campCommonBgAcquire();
     campButtonHelpAcquire();
-    FUN_003b61ec();
+    commonBgStopChildAndBeginTransition();
     sysPlaySe(0x92);
     if (*(char *)((int)puVar2 + 0x21) != '\0') {
       asdLoadFileSetUseRawPaths(0);
@@ -258,7 +258,7 @@ unsigned int FUN_00298978(void)
       FUN_0022677c(1,0xff);
     }
     temp_v1 = puVar2[0xb];
-    FUN_00275bc8(temp_v1,puVar2[0xd]);
+    scrScriptProcessCreate(temp_v1,puVar2[0xd]);
     puVar2[0xc] = temp_v1;
     *(unsigned int *)(temp_v1 + 0x108) = 2;
     temp_v1 = scrScriptProcessStartEntry(puVar2[0xc],puVar2[6]);

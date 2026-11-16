@@ -9,7 +9,7 @@ int nnosInitAddressSpaceApplication(void);
 int nnosInitAddressSpaceHeap(void);
 int FUN_00146cbc(void);
 int FUN_0017fc74(void);
-int FUN_002e3140(void);
+int resultHandleFailure(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -23,7 +23,7 @@ extern unsigned int DAT_005c1be8; /* 0x5c1be8 */
 /* Supplied declaration required: nnosInitAddressSpaceHeap. */
 /* Supplied declaration required: FUN_00146cbc. */
 /* Supplied declaration required: FUN_0017fc74. */
-/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: resultHandleFailure. */
 extern unsigned int FUN_001623b4(unsigned int *, unsigned int, unsigned int);
 
 
@@ -41,7 +41,7 @@ void FUN_00146c34(void)
   FUN_0017fc74();
   temp_v0 = FUN_001623b4(temp_v1,0xffff8001,0x14);
   if ((temp_v0 & 0x80000000) != 0) {
-    FUN_002e3140();
+    resultHandleFailure();
   }
   DAT_005c1be8 = temp_v1[0];
                     /* WARNING: Treating indirect jump as return */

@@ -54,7 +54,7 @@ void asdOperatorDelete(void *block);
 void asdMemFree(void *block);
 void gameDataBlocksReleaseHold(u32 mask);
 void gameDataFlagsClearBits(u32 mask);
-ScriptProcess *FUN_00275bc8(void *data, u32 size);
+ScriptProcess *scrScriptProcessCreate(void *data, u32 size);
 void rt_aeabi_memclr(void *memory, u32 size);
 void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 void gameDataAddHomeButtonHold(u32 mask);
@@ -82,7 +82,7 @@ extern "C" u32 FUN_0035a840(ScriptLoadState *state)
         s32 result = svcWaitSynchronization1(state->thread.handle, -1);
         bool failed = nnResultIsFailure(result);
         if (failed) {
-            FUN_002e3140(result, failed);
+            resultHandleFailure(result, failed);
         }
         state->thread.joined = 1;
         state->thread.~NnOsThread();
@@ -93,7 +93,7 @@ extern "C" u32 FUN_0035a840(ScriptLoadState *state)
         state->threadStack = NULL;
         gameDataBlocksReleaseHold(2);
         gameDataFlagsClearBits(2);
-        ScriptProcess *process = FUN_00275bc8(state->scriptData, state->scriptSize);
+        ScriptProcess *process = scrScriptProcessCreate(state->scriptData, state->scriptSize);
         state->process = process;
         process->state = 2;
         state->running = 1;

@@ -9,7 +9,7 @@ int FUN_002b75ec(...);
 int effectRenderTransformedInstance(unsigned int *);
 int renderCtxCalculateStereoParallax(int);
 int textDrawString(...);
-int FUN_002bed3c(void);
+int gxResetColorQuadToWhite(void);
 int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int renderCtxResetColorScale(...);
@@ -36,7 +36,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: FUN_002bed3c. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 extern int vec2GetYInt(unsigned int *);
 extern int vec2GetXInt(void);
 /* Supplied declaration required: asdTMTexTableEntryAt. */
@@ -44,7 +44,7 @@ extern int vec2GetXInt(void);
 extern unsigned int *jobGetWork(void);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: __aeabi_memcpy4. */
 
@@ -76,7 +76,7 @@ unsigned int FUN_0038a478(void)
     renderCtxCalculateStereoParallax(g_titleScene);
     temp_v4 = g_titleScene;
     temp_v11 = (int)temp_v10;
-    temp_v1 = FUN_002c5d80(1,0);
+    temp_v1 = renderCtxPackPassFlags(1,0);
     piVar11 = (int *)(temp_v4 + 0x124c);
     temp_v2 = *piVar11;
     temp_v3 = piVar11[temp_v2 + 2];
@@ -87,7 +87,7 @@ unsigned int FUN_0038a478(void)
       *(unsigned char *)(temp_v4 + 0x1264) = 0;
     }
     efctSetSpeed();
-    FUN_002bf288(2,0xe,0x106,0,0,6);
+    texDrawTableEntryAtStoredOrigin(2,0xe,0x106,0,0,6);
     efctSetSpeed();
     temp_v4 = g_titleScene;
     temp_v1 = packNibblesAndByte(6,1,0);
@@ -126,7 +126,7 @@ unsigned int FUN_0038a478(void)
       temp_v4 = temp_v4 + temp_v11;
       temp_v2 = vec2GetYInt(puVar2 + 0x133);
       temp_v1 = g_titleScene;
-      temp_v3 = FUN_002c5d80(1,0);
+      temp_v3 = renderCtxPackPassFlags(1,0);
       piVar11 = (int *)(temp_v1 + 0x124c);
       temp_v7 = *piVar11;
       temp_v8 = piVar11[temp_v7 + 2];
@@ -158,7 +158,7 @@ unsigned int FUN_0038a478(void)
               temp_v8 = (int)*(short *)(temp_v1 + 8) + aiStack_78[temp_v5 * 2];
               temp_v7 = aiStack_78[temp_v5 * 2 + 1] + (int)*(short *)(temp_v1 + 10);
               if (temp_v9 == temp_v5 || temp_v6 == temp_v5) {
-                FUN_002bf288(2,0xe,0x155,temp_v8,temp_v7,0x15);
+                texDrawTableEntryAtStoredOrigin(2,0xe,0x155,temp_v8,temp_v7,0x15);
               }
               else {
                 temp_v0 = (int)*(short *)(temp_v1 + 10);
@@ -166,10 +166,10 @@ unsigned int FUN_0038a478(void)
                   temp_v0 = (temp_v6 + 7) % 8;
                 }
                 if (!(aiStack_78[0x12] != temp_v5 && temp_v0 != temp_v5)) {
-                  FUN_002bf288(2,0xe,0x156,temp_v8,temp_v7,0x15);
+                  texDrawTableEntryAtStoredOrigin(2,0xe,0x156,temp_v8,temp_v7,0x15);
                 }
                 else {
-                  FUN_002bf288(2,0xe,0x154,temp_v8,temp_v7,0x15);
+                  texDrawTableEntryAtStoredOrigin(2,0xe,0x154,temp_v8,temp_v7,0x15);
                 }
               }
               temp_v3 = temp_v3 + 1;
@@ -179,8 +179,8 @@ unsigned int FUN_0038a478(void)
         }
       }
       else {
-        FUN_002bf288(2,0xe,0xdf,*(short *)(temp_v1 + 8) + temp_v4,*(short *)(temp_v1 + 10) + temp_v2,0x13);
-        FUN_002bf288(2,0xe,0xde,*(short *)(temp_v1 + 8) + temp_v4,*(short *)(temp_v1 + 10) + temp_v2,0x15);
+        texDrawTableEntryAtStoredOrigin(2,0xe,0xdf,*(short *)(temp_v1 + 8) + temp_v4,*(short *)(temp_v1 + 10) + temp_v2,0x13);
+        texDrawTableEntryAtStoredOrigin(2,0xe,0xde,*(short *)(temp_v1 + 8) + temp_v4,*(short *)(temp_v1 + 10) + temp_v2,0x15);
       }
       temp_v6 = puVar2[4];
       if ((int)temp_v6 < 5) {
@@ -225,7 +225,7 @@ unsigned int FUN_0038a478(void)
         (**(romwright_code **)(temp_v4 + 0x1268))();
         *(unsigned char *)(temp_v4 + 0x1264) = 0;
       }
-      FUN_002bed3c();
+      gxResetColorQuadToWhite();
       efctSetSpeed();
       renderCtxApplyTransforms(g_titleScene);
       renderCtxResetColorScale(g_titleScene);

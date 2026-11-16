@@ -22,7 +22,7 @@ struct IconEntry {
 
 extern "C" {
 IconFrameRecord *asdTMTexTableEntryAt(u32 table, u32 sprite);
-void FUN_002bf380(u32 layer, u32 table, u32 composed);
+void texDrawCompositeSprite(u32 layer, u32 table, u32 composed);
 void efctSetSpeed(f32 speed);
 
 static const IconEntry iconSetMain[0x16] = {
@@ -56,9 +56,9 @@ u16 FUN_00109b08(s32 set, u32 index, s32 skip, f32 x, f32 y)
         IconFrameRecord *frame = asdTMTexTableEntryAt(ICON_TABLE, sprite);
         if (frame != NULL && skip == 0) {
             if (composed >= 0)
-                FUN_002bf380(ICON_LAYER, ICON_TABLE, composed);
+                texDrawCompositeSprite(ICON_LAYER, ICON_TABLE, composed);
             else
-                FUN_002bf288(ICON_LAYER, ICON_TABLE, sprite, (s32)x, (s32)(y + ICON_Y_OFFSET), ICON_FLAGS);
+                texDrawTableEntryAtStoredOrigin(ICON_LAYER, ICON_TABLE, sprite, (s32)x, (s32)(y + ICON_Y_OFFSET), ICON_FLAGS);
             width = frame->width & ICON_WIDTH_MASK;
         }
         efctSetSpeed(1.0f);
@@ -80,7 +80,7 @@ u16 FUN_00109b08(s32 set, u32 index, s32 skip, f32 x, f32 y)
         efctSetSpeed(1.0f);
         return width;
     }
-    FUN_002bf288(ICON_LAYER, ICON_TABLE, sprite, (s32)x, (s32)(y + ICON_Y_OFFSET), ICON_FLAGS);
+    texDrawTableEntryAtStoredOrigin(ICON_LAYER, ICON_TABLE, sprite, (s32)x, (s32)(y + ICON_Y_OFFSET), ICON_FLAGS);
     width = frame->width & ICON_WIDTH_MASK;
     efctSetSpeed(1.0f);
     return width;

@@ -28,9 +28,9 @@ int partyApplyNonlethalAilmentDamage(int, int);
 int FUN_0026413c(void);
 int FUN_0027f48c(int, int);
 int FUN_0027f958(float *, unsigned int [12], int);
-int FUN_00281e34(void);
+int __hardfp_atan2f(void);
 int FUN_00282390(void);
-int FUN_0028250c(void);
+int mathRemPio2f(void);
 int mathDistanceBetweenPoints(void);
 int gameCounterAddSaturating(int, int);
 int FUN_002d4fa0(void);
@@ -69,9 +69,9 @@ extern int unitGroupHasFlag(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0026413c. */
 /* Supplied declaration required: FUN_0027f48c. */
 /* Supplied declaration required: FUN_0027f958. */
-/* Supplied declaration required: FUN_00281e34. */
+/* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: FUN_00282390. */
-/* Supplied declaration required: FUN_0028250c. */
+/* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: gameCounterAddSaturating. */
 extern int padIsButtonRepeat(unsigned int);
@@ -172,7 +172,7 @@ void FUN_002fb988(int param_1)
     *(unsigned int *)(param_1 + 0xc4) = 0x3f800000;
     if (!temp_v5) {
       *(unsigned int *)(temp_v0 + 0xd94) = 0;
-      FUN_00281e34();
+      __hardfp_atan2f();
       temp_v12 = temp_v15 * 57.32484f - *(float *)(param_1 + 0x50);
       if (temp_v12 < temp_v10) {
         temp_v12 = temp_v12 + 360.0f;
@@ -183,7 +183,7 @@ void FUN_002fb988(int param_1)
       temp_v14 = 0.017453292f;
       *(float *)(g_lmapScene + 0x50) = -temp_v12;
       temp_v12 = -temp_v12 * 0.017453292f;
-      FUN_0028250c();
+      mathRemPio2f();
       temp_v2 = g_lmapScene;
       *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + temp_v12 * temp_v8;
       temp_v14 = *(float *)(temp_v2 + 0x50) * temp_v14;
@@ -255,7 +255,7 @@ void FUN_002fb988(int param_1)
         partyApplyNonlethalAilmentDamage(2,5);
         *(unsigned int *)(g_lmapScene + 0x160) = 0x453b8000;
         FUN_002562e4(0xf,0x1e0);
-        FUN_00291e40(0x1000186, soundActorScalePosition(
+        soundActorStartOnFreeChannel(0x1000186, soundActorScalePosition(
             soundActorPositionFromArray(reinterpret_cast<const f32 *>(g_lmapScene + 0x28)), 1.0f / 3.0f));
       }
     }

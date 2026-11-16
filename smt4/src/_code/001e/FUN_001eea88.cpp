@@ -64,7 +64,7 @@ void FUN_0021a374(UniteRenderTarget *target, u32 texture);
 u8 devilRecordGetTone(const DevilRecord *record);
 void statusCameraDestroy(void);
 void statusCameraSelectPreset(s32 preset);
-u32 FUN_00294090(s32 model, s32 mode);
+u32 eventResourceCacheAcquire(s32 model, s32 mode);
 void FUN_0033dcec(u32 texture, s32 a, s32 b);
 u32 asdVramBGetFreeBytes(void);
 void FUN_00343e5c(UniteRenderTarget *target, u32 extent, u32 options, u32 width, u32 height);
@@ -77,17 +77,17 @@ void statusBustUpPortraitAcquire(s32 id, u32 kind);
 u32 asdLoadFileSyncDefault(const char *path);
 const char *FUN_002cdecc(s8 tone);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
-u32 FUN_00297060(u32 script, u32 messages);
+u32 scrScriptProcessCreate(u32 script, u32 messages);
 void drawParameterBlockClear(UiResourceParameters *resources);
 
-void FUN_002bd954(UniteSprite *sprite, s32 kind, s32 count, UiResourceParameters *resources, u16 flags, f32 speed);
+void uiSpriteStateInitFromSource(UniteSprite *sprite, s32 kind, s32 count, UiResourceParameters *resources, u16 flags, f32 speed);
 void uiSpriteInitializeState(UniteSprite *sprite, s32 kind, s32 count, s32 animation, UiResourceParameters *resources, u16 flags, f32 speed);
 void timerStart(UniteSprite *sprite, s32 animation, s32 flags);
 void spriteStartAnimationByIndex(UniteSprite *sprite, s32 animation);
 void FUN_002a9fdc(UniteSprite *sprite, s32 a, s32 b);
 void spriteSetLayer(UniteSprite *sprite, u16 layer);
 void spriteSetVisible(UniteSprite *sprite, u8 visible);
-void FUN_00295eb0(UniteSprite *sprite, s32 kind, s32 count);
+void uiStoreTextureEntryCenter(UniteSprite *sprite, s32 kind, s32 count);
 void buttonHelpSetPreset(s32 preset);
 
 /* Starts the fusion-result screen: loads the result devils' textures, the stage model and camera
@@ -98,7 +98,7 @@ void FUN_001eea88(void)
     statusCameraDestroy();
     statusCameraSelectPreset(2);
     for (s32 i = 0; i < work->materialCount; i++) {
-        work->devilTextures[i] = FUN_00294090(getDevilRecord(work->materialDevils[i])->model, 0);
+        work->devilTextures[i] = eventResourceCacheAcquire(getDevilRecord(work->materialDevils[i])->model, 0);
         FUN_0033dcec(work->devilTextures[i], 7, 1);
     }
     FUN_0021a374(&work->renderTarget, work->devilTextures[0]);
@@ -108,7 +108,7 @@ void FUN_001eea88(void)
         FUN_00343e5c(&work->renderTarget, 0x30000, 0x30000, 0x100, 0x100);
     }
     FUN_00258618(&work->renderTarget);
-    work->resultTexture = FUN_00294090(getDevilRecord(work->resultDevil)->model, 0);
+    work->resultTexture = eventResourceCacheAcquire(getDevilRecord(work->resultDevil)->model, 0);
     FUN_0033dcec(work->resultTexture, 7, 1);
     if (work->materialCount == 2) {
         if (work->sacrifice) {
@@ -141,23 +141,23 @@ void FUN_001eea88(void)
     const DevilRecord *record = getDevilRecord(work->resultDevil);
     textFormatBuffer(path, "battle/DevilMsg/%s.mbm", FUN_002cdecc(devilRecordGetTone(record)) + 1);
     work->messageFile = asdLoadFileSyncDefault(path);
-    work->script = FUN_00297060(work->scriptFile, work->messageFile);
+    work->script = scrScriptProcessCreate(work->scriptFile, work->messageFile);
     drawParameterBlockClear(&work->resources);
     paramsInit(&work->resources, sKeysFirst, 0x24, sKeysSecond, 0x30, sKeysThird, 0xc, NULL, 0, sKeysFourth, 0xe0);
     for (s32 i = 0; i <= 5; i++) {
-        FUN_002bd954(&work->sprites[i], 0x24, 0, &work->resources, 1, 1.0f);
+        uiSpriteStateInitFromSource(&work->sprites[i], 0x24, 0, &work->resources, 1, 1.0f);
         timerStart(&work->sprites[i], 0, 0);
     }
     for (s32 i = 6; i <= 9; i++) {
-        FUN_002bd954(&work->sprites[i], 0x24, 0, &work->resources, 1, 1.0f);
+        uiSpriteStateInitFromSource(&work->sprites[i], 0x24, 0, &work->resources, 1, 1.0f);
         spriteStartAnimationByIndex(&work->sprites[i], 0);
     }
     uiSpriteInitializeState(&work->panel, 0x24, -1, 0x18, &work->resources, 0x65, 1.0f);
     FUN_002a9fdc(&work->panel, 0, 0);
     spriteSetLayer(&work->panel, 2);
-    FUN_00295eb0(&work->panel, 0x24, 0x21c);
+    uiStoreTextureEntryCenter(&work->panel, 0x24, 0x21c);
     spriteSetVisible(&work->panel, 1);
-    FUN_002bd954(&work->cursor, 0x24, 0, &work->resources, 1, 1.0f);
+    uiSpriteStateInitFromSource(&work->cursor, 0x24, 0, &work->resources, 1, 1.0f);
     spriteStartAnimationByIndex(&work->cursor, 2);
     buttonHelpSetPreset(0x61);
     g_screenStateWork->state = 1;

@@ -43,7 +43,7 @@ extern AocMain *g_aocMain;
 extern AocSystem *g_aocSystem;
 
 s32 sysLightEventTryWait(AocObjB *event);
-void FUN_00163aa4(PanelSprite *panel, f32 step);
+void uiSpriteAdvanceAnimation(PanelSprite *panel, f32 step);
 void aocMenuSetButtonHelp(SceneWindowWork *window, s32 value, s32 mode);
 void jobOwnerFreeSlotAndStop(JobOwner *owner);
 void jobFlagsWorkStop(JobFlagsWork *work);
@@ -89,7 +89,7 @@ void FUN_0047c36c(QuestScene *scene)
         return;
     }
     for (s32 index = 0; index < 25; index++) {
-        FUN_00163aa4((PanelSprite *)&scene->panels[index], 1.0f);
+        uiSpriteAdvanceAnimation((PanelSprite *)&scene->panels[index], 1.0f);
     }
     ++scene->slowTick;
     scene->slowTick %= 20;

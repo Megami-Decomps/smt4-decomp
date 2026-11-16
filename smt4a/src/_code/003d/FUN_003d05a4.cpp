@@ -1,4 +1,4 @@
-/* NON_MATCHING: two instructions remain: retail extends the choice with `sxth` (the build's `s16 initial` switched as `(u16)initial` gives `uxth`; the signed forms move the FUN_00203b40 constants to r9/r8) and keeps the icon in r1 (stm {r1, r4}). */
+/* NON_MATCHING: two instructions remain: retail extends the choice with `sxth` (the build's `s16 initial` switched as `(u16)initial` gives `uxth`; the signed forms move the gridNavigationConfigure constants to r9/r8) and keeps the icon in r1 (stm {r1, r4}). */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "ui/ParamsClearPacket.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
@@ -45,9 +45,9 @@ static const u32 sMenuPacketC[28] = {
 };
 
 s32 gameFlagIsSet(s32 flag);
-void FUN_00203b40(ChoiceMenuWork *work, s32 a, s32 b, s32 c, s32 d, s32 e);
+void gridNavigationConfigure(ChoiceMenuWork *work, s32 a, s32 b, s32 c, s32 d, s32 e);
 
-void FUN_0014e188(MenuSprite *sprite, s32 kind, s32 id, UiResourceParameters *resources, u16 flag, f32 scale);
+void uiSpriteStateInitFromSource(MenuSprite *sprite, s32 kind, s32 id, UiResourceParameters *resources, u16 flag, f32 scale);
 void uiSpriteSetKeyframe(MenuSprite *sprite, s32 keyframe, s32 restart);
 void uiSpriteSetImageKeyframe(MenuSprite *sprite, s32 keyframe, s32 initial);
 void uiSpriteSelectAnim(MenuSprite *sprite, s32 animation);
@@ -113,19 +113,19 @@ void FUN_003d05a4(ChoiceMenuWork *work, s16 initial)
     }
     work->selected = selected;
 
-    FUN_00203b40(work, count, count, 1, 0, 1);
-    FUN_002a4964(reinterpret_cast<ScrollSelection *>(work), work->selected);
+    gridNavigationConfigure(work, count, count, 1, 0, 1);
+    scrollListSetSelectionTracked(reinterpret_cast<ScrollSelection *>(work), work->selected);
     paramsClearPacket(&work->resources);
     paramsInit(&work->resources, sMenuPacketA, 0x18, sMenuPacketB, 0x30, NULL, 0, NULL, 0, sMenuPacketC, 0x70);
-    FUN_0014e188(&work->header, 0x24, 0x57, &work->resources, 1, 1.0f);
+    uiSpriteStateInitFromSource(&work->header, 0x24, 0x57, &work->resources, 1, 1.0f);
     uiSpriteSetKeyframe(&work->header, 0, 0);
     uiSpriteSetImageKeyframe(&work->header, 0, 0);
     for (s32 i = 0; i < MENU_CHOICE_COUNT; i++) {
-        FUN_0014e188(&work->entries[i], 0x24, 0x57, &work->resources, 1, 1.0f);
+        uiSpriteStateInitFromSource(&work->entries[i], 0x24, 0x57, &work->resources, 1, 1.0f);
         uiSpriteSetKeyframe(&work->entries[i], 0, 0);
         uiSpriteSetImageKeyframe(&work->entries[i], 0, 0);
     }
-    FUN_0014e188(&work->cursor, 0x24, 1, &work->resources, 1, 1.0f);
+    uiSpriteStateInitFromSource(&work->cursor, 0x24, 1, &work->resources, 1, 1.0f);
     uiSpriteSelectAnim(&work->cursor, 0);
     work->cursorShown = 0;
 }

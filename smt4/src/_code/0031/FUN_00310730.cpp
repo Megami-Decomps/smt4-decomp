@@ -6,7 +6,7 @@ extern "C" {
 extern MessageGlobals g_messageMain;
 
 u32 scrGetArg(u32 index);
-void FUN_002bd954(void *record, u32 value0, u32 value4, const void *source, u16 value38, f32 value20);
+void uiSpriteStateInitFromSource(void *record, u32 value0, u32 value4, const void *source, u16 value38, f32 value20);
 void pairSetFirstResetSecond(void *pair, s32 first);
 void spriteStartAnimationByIndex(void *widget, s32 mode);
 
@@ -25,7 +25,7 @@ u32 FUN_00310730(void)
     panel->unk7F = 0;
     panel->unk80 = 0;
     panel->unkA1 = 0;
-    FUN_002bd954(panel->widget754, 14, -1, panel->textBuffer, 11, 1.0f);
+    uiSpriteStateInitFromSource(panel->widget754, 14, -1, panel->textBuffer, 11, 1.0f);
     pairSetFirstResetSecond(panel->widget754, 0);
     spriteStartAnimationByIndex(panel->widget754, 6);
 

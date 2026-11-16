@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00100348(...);
-int FUN_001835b4(int, int);
+int texDrawTableEntryAtStoredOrigin(int, int);
 
 /* stack frame of param_1: 3 slot(s), 9 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00100348. */
-/* Supplied declaration required: FUN_001835b4. */
+/* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
 
 
 void FUN_00180310(unsigned int param_1)
@@ -130,7 +130,7 @@ LAB_00180540:
         else if (((temp_v0 != '/') && (temp_v0 != ':')) && (temp_v0 != '?')) goto LAB_00180540;
       }
       temp_v2 = (unsigned int)temp_v1;
-      FUN_001835b4(2,7);
+      texDrawTableEntryAtStoredOrigin(2,7);
     }
     pcVar2 = pcVar2 + 1;
     temp_v3[0] = *pcVar2;

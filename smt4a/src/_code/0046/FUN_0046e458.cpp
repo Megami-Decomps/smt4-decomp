@@ -58,9 +58,9 @@ typedef char ResourceSetLayout[offsetof(ResourceSet, tableF) == 0x3D8 ? 1 : -1];
 
 extern "C" {
 
-s32 FUN_001b315c(ModelObject *model);
-u8 *FUN_001b31ac(ModelObject *model);
-u32 FUN_001b31e0(ModelObject *model);
+s32 packageEntryIsLoaded(ModelObject *model);
+u8 *packageEntryGetDirectory(ModelObject *model);
+u32 packageEntryGetFileCount(ModelObject *model);
 
 /* Finds the model of the resource with the given id (searching each table in turn) and returns the value of its
  * first active link whose item is of kind 5, or 0. */
@@ -92,11 +92,11 @@ u32 FUN_0046e458(ResourceSet *set, u16 id)
         }
     }
     model = &set->models[index];
-    if (FUN_001b315c(model) == 0) {
+    if (packageEntryIsLoaded(model) == 0) {
         return 0;
     }
-    items = FUN_001b31ac(model);
-    count = FUN_001b31e0(model);
+    items = packageEntryGetDirectory(model);
+    count = packageEntryGetFileCount(model);
     i = 0;
     while (i < count) {
         if (items[i * 0x40] == 5 && model->links[i].active != 0) {

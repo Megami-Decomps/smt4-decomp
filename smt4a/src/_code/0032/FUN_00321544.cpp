@@ -4,8 +4,8 @@
 extern "C" {
 extern BtlTalkBustUp *g_btlTalkBustUp;
 extern RenderCtxA *g_renderCtx;
-void FUN_00157558(RenderCtxA *context);
-s32 FUN_001692ac(s32 enabled, s32 mode);
+void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
+s32 renderCtxPackPassFlags(s32 enabled, s32 mode);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 s32 aocJobIsValid();
 s32 btlMainIsSecondJobValid();
@@ -19,9 +19,9 @@ u32 FUN_00321544()
     if (portrait == NULL) {
         return 0;
     }
-    FUN_00157558(g_renderCtx);
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     RenderCtxA *context = g_renderCtx;
-    renderCtxPushA(context, FUN_001692ac(1, 0));
+    renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
     if (portrait->unk2F4 != 0 && portrait->state == 2) {
         s32 parallax = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.27f));
         if (aocJobIsValid() != 0 || btlMainIsSecondJobValid() != 0) {

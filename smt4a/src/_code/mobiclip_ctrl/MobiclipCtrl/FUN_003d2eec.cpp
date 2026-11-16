@@ -6,7 +6,7 @@ extern "C" {
 s32 refIsNullOrZero(MoviePathConversionState *state);
 s32 FUN_00100836(const char *text, u32 limit, MoviePathConversionState *state);
 u16 *FUN_002e3c44(u16 *output, const char *text, s32 consumed, MoviePathConversionState *state);
-u32 FUN_001883b0(u32 *handle, const u16 *path, u32 mode);
+u32 archivePathDeviceOpen(u32 *handle, const u16 *path, u32 mode);
 void sysFatalBreak(void);
 void FUN_0042230c(void *stream, void *handle, void *reader);
 u32 FUN_00422648(void *stream);
@@ -43,7 +43,7 @@ void FUN_003d2eec(const char *filename)
         file->sizeHigh = 0;
         file->positionLow = 0;
         file->positionHigh = 0;
-        if (nnResultIsFailure(FUN_001883b0(&file->handle, path, 1))) {
+        if (nnResultIsFailure(archivePathDeviceOpen(&file->handle, path, 1))) {
             sysFatalBreak();
         }
     }

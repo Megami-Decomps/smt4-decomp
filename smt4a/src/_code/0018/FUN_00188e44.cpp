@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0016e2a8(void);
 int FUN_0016e7c0(void);
-int FUN_001883b0(unsigned int, unsigned int, int);
+int archivePathDeviceOpen(unsigned int, unsigned int, int);
 int FUN_00188444(void);
 int FUN_001886bc(void);
 int svcSleepThread(int, int);
@@ -17,7 +17,7 @@ extern unsigned char DAT_005c0adc; /* 0x5c0adc */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_0016e2a8. */
 /* Supplied declaration required: FUN_0016e7c0. */
-/* Supplied declaration required: FUN_001883b0. */
+/* Supplied declaration required: archivePathDeviceOpen. */
 /* Supplied declaration required: FUN_00188444. */
 /* Supplied declaration required: FUN_001886bc. */
 /* Supplied declaration required: svcSleepThread. */
@@ -44,7 +44,7 @@ unsigned int FUN_00188e44(int param_1)
         *(unsigned int *)(param_1 + 0x18) = 0;
         *(unsigned int *)(param_1 + 0xc) = 0;
         *(unsigned int *)(param_1 + 0x10) = 0;
-        FUN_001883b0(temp_v2,temp_v3,3);
+        archivePathDeviceOpen(temp_v2,temp_v3,3);
         temp_v3 = (*(unsigned int *)((unsigned char *)&DAT_005c0adc + 0x4));
         if (-1 < (int)temp_v2) {
           return temp_v4;

@@ -23,7 +23,7 @@ extern "C" {
 extern DebugMapBoxes DAT_00613178;
 extern const DebugMapBoxPalette DAT_00532240;
 extern RenderCtxA *g_renderCtx;
-s32 FUN_001692ac(u32 kind, u32 enabled);
+s32 renderCtxPackPassFlags(u32 kind, u32 enabled);
 void FUN_00280a08(u32 firstColor, u32 secondColor, u32 thirdColor, u32 fourthColor,
     f32 firstX, f32 firstY, f32 firstZ, f32 secondX, f32 secondY, f32 secondZ,
     f32 thirdX, f32 thirdY, f32 thirdZ, f32 fourthX, f32 fourthY, f32 fourthZ);
@@ -36,7 +36,7 @@ void FUN_003578a0(f32 height)
     DebugMapBoxes *map = &DAT_00613178;
     if (map->count != 0) {
         RenderCtxA *context = g_renderCtx;
-        renderCtxPushA(context, FUN_001692ac(5, 1));
+        renderCtxPushA(context, renderCtxPackPassFlags(5, 1));
         renderCtxSelectTexture(g_renderCtx, 0);
         s32 index = 0;
         if (map->count > 0) {

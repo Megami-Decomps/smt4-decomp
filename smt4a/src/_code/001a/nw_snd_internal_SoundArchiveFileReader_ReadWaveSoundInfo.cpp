@@ -15,7 +15,7 @@ typedef struct WaveSoundParams {
     /* 0x09 */ u8 releasePriorityFix;
 } WaveSoundParams;
 
-extern WaveSoundInfo *FUN_001b3c78(SoundInfo *info);
+extern WaveSoundInfo *sndArchiveResolveWaveSoundInfo(SoundInfo *info);
 extern s32 nw_snd_internal_SoundArchiveFile_WaveSoundInfo_GetChannelPriority(WaveSoundInfo *info);
 extern s32 nw_snd_internal_SoundArchiveFile_WaveSoundInfo_GetIsReleasePriorityFix(WaveSoundInfo *info);
 
@@ -30,7 +30,7 @@ u8 nw_snd_internal_SoundArchiveFileReader_ReadWaveSoundInfo(SoundArchiveRef *ref
     if (nw_snd_internal_SoundArchiveFile_SoundInfo_GetSoundType(info) != 3) {
         return 0;
     }
-    wave = FUN_001b3c78(info);
+    wave = sndArchiveResolveWaveSoundInfo(info);
     out->unk00 = wave->unk00;
     out->unk04 = wave->unk04;
     out->channelPriority = nw_snd_internal_SoundArchiveFile_WaveSoundInfo_GetChannelPriority(wave);

@@ -5,7 +5,7 @@
 extern "C" {
 u32 scrGetArg(u32 index);
 u32 btlScriptResolveGroupArg(u32 group);
-void FUN_002499fc(u32 group, s32 *first, s32 *count);
+void btlSideGetEntryRange(u32 group, s32 *first, s32 *count);
 s32 btlCommandOwnerHasSlotId(BtlEntry *entry, u32 slotId);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *battle);
 void scrSetResult(s32 result);
@@ -17,7 +17,7 @@ u32 scrCheckCombatantCommandSlot(void)
     u32 slotId = scrGetArg(1);
     u32 group = btlScriptResolveGroupArg(scrGetArg(2));
     s32 first, count;
-    FUN_002499fc(group, &first, &count);
+    btlSideGetEntryRange(group, &first, &count);
     for (s32 index = first; index < count + first; ++index) {
         BtlEntry *entry = &btlGetMainState()->entries[index];
         u32 flags = entry->flags;

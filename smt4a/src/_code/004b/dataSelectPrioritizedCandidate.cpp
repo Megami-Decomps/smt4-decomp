@@ -16,13 +16,13 @@ struct Table00EntryView {
 
 extern "C" {
 
-CandidateListView* FUN_004bb80c(s32 index);
+CandidateListView* dataTable02GetRecordWithAocPackage(s32 index);
 Table00EntryView* dataTable00FindById(u32 id);
 
 // Select the first flagged candidate, otherwise the candidate with the highest ranking value.
 u32 dataSelectPrioritizedCandidate(s32 index)
 {
-    CandidateListView* candidates = FUN_004bb80c(index);
+    CandidateListView* candidates = dataTable02GetRecordWithAocPackage(index);
     if (candidates == 0) {
         return 0;
     }

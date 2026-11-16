@@ -9,8 +9,8 @@ struct CampStatusTripletView {
 };
 extern "C" {
 extern CampStatusTripletView *g_camp;
-void FUN_001835b4(u32 style, u32 size, u32 glyph, u32 x, u32 y, u32 flags, s32 first, s32 third);
-void FUN_00344cd0(u32 context, u32 x, u32 y, u32 size, u32 firstGlyph, u32 secondGlyph, u32 thirdGlyph,
+void texDrawTableEntryAtStoredOrigin(u32 style, u32 size, u32 glyph, u32 x, u32 y, u32 flags, s32 first, s32 third);
+void uiDrawListScrollBar(u32 context, u32 x, u32 y, u32 size, u32 firstGlyph, u32 secondGlyph, u32 thirdGlyph,
                  u32 leftGlyph, u32 middleGlyph, u32 symbolGlyph, u32 rightGlyph,
                  s32 first, s32 second, s32 third, u32 width, u32 flags);
 
@@ -25,8 +25,8 @@ void FUN_0023d150(u32 context, u32 x, u32 y, s32 mode)
     s32 first = g_camp->first;
     s16 second = g_camp->second;
     s32 third = g_camp->third;
-    FUN_001835b4(2, 20, numberGlyph, x, y, 111, first, third);
-    FUN_00344cd0(context, x, y, 20, firstGlyph, secondGlyph, thirdGlyph,
+    texDrawTableEntryAtStoredOrigin(2, 20, numberGlyph, x, y, 111, first, third);
+    uiDrawListScrollBar(context, x, y, 20, firstGlyph, secondGlyph, thirdGlyph,
                  firstGlyph - 4, firstGlyph - 2, symbolGlyph, firstGlyph - 1,
                  first, second, third, 116, 0);
 }

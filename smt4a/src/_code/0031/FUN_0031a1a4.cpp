@@ -3,7 +3,7 @@
 
 extern "C" {
 
-extern s32 FUN_0021bdac(u32 a, u32 b, u32 c, s32 d, s32 e, s32 f);
+extern s32 messageWindowShowOrPoll(u32 a, u32 b, u32 c, s32 d, s32 e, s32 f);
 extern MessageGlobalsA g_messageMain;
 
 static void showMessage(s32 mode)
@@ -12,7 +12,7 @@ static void showMessage(s32 mode)
     u32 b = scrGetArg(0);
     u32 c = scrGetCommandFrame();
 
-    FUN_0021bdac(a, b, c, mode, 0, 0);
+    messageWindowShowOrPoll(a, b, c, mode, 0, 0);
 }
 
 /* Script command: puts the message state in display mode 0x15 and shows the first argument with mode 8. */

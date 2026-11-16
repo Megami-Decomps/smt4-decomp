@@ -49,7 +49,7 @@ extern "C" {
 s32 dataTable2eSub2GetCount(void);
 const MapNaviTextureRecord* dataTable2eSub2GetRecord(s32 index);
 void asdTMTexTableReleaseNode(s32 table, s32 node);
-TexNode* FUN_002c58c8(s32 table, s32 node);
+TexNode* asdTMTexTablePrepareNodeImage(s32 table, s32 node);
 const MapNaviCategoryRecord* MapNaviTable_GetCategoryRecord(const MapNaviTable* table, s32 index);
 void FUN_0039d69c(MapNaviDisplay* display, s32 map);
 
@@ -71,7 +71,7 @@ void mapNaviDisplayLoadMap(MapNaviDisplay* display, s32 map)
         }
     }
 
-    FUN_002c58c8(0x33, display->textureIndex);
+    asdTMTexTablePrepareNodeImage(0x33, display->textureIndex);
     asdTMTexTableGetNodeTexture(0x33, display->textureIndex)->unk3c = 1;
 
     for (s32 i = 0; i < 32; ++i) {

@@ -13,7 +13,7 @@ int FUN_0024b7bc(int, float *);
 int shiftRandomNextFraction(...);
 int gfxQuaternionWorkspaceBuildMatrix(void);
 int phaseCosInterpolate(void);
-int FUN_002b70cc(void);
+int mathSinFixedAngle(void);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 int __aeabi_uidivmod(void);
@@ -97,7 +97,7 @@ static float romwright_sqrt_4(float value)
 extern int effGetFrameCounter(void);
 /* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: phaseCosInterpolate. */
-/* Supplied declaration required: FUN_002b70cc. */
+/* Supplied declaration required: mathSinFixedAngle. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
 
@@ -351,7 +351,7 @@ void FUN_002e4b84(int param_1)
             phaseCosInterpolate();
             pfVar5[9] = temp_v9 * *(float *)(temp_v5 + 0x11c);
             pfVar5[10] = -*(float *)(temp_v5 + 0x120);
-            FUN_002b70cc();
+            mathSinFixedAngle();
             temp_v1 = temp_v1 * *(float *)(temp_v5 + 0x11c);
             temp_v23 = CONCAT44(temp_v12,temp_v14);
             pfVar5[0xb] = temp_v1;

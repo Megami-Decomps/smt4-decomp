@@ -44,11 +44,11 @@ typedef struct {
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_001692ac(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_0037aa68. */
-extern int FUN_00387580(unsigned int);
+extern int renderCtxPackPassFlagsWithAlpha(unsigned int);
 extern int flagsPackFourBooleans(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: block530OwnerReset. */
 /* Supplied declaration required: FUN_004097b4. */
@@ -145,7 +145,7 @@ void FUN_0040c190(int param_1)
     *(unsigned char *)(temp_v0 + 0x12d0) = 0;
   }
   temp_v0 = g_renderCtx;
-  temp_v2 = FUN_00387580(6);
+  temp_v2 = renderCtxPackPassFlagsWithAlpha(6);
   piVar6 = (int *)(temp_v0 + 0x1278);
   temp_v3 = *piVar6;
   temp_v4 = piVar6[temp_v3 + 2];
@@ -156,7 +156,7 @@ void FUN_0040c190(int param_1)
     *(unsigned char *)(temp_v0 + 0x1290) = 0;
   }
   temp_v0 = g_renderCtx;
-  temp_v2 = FUN_001692ac(5,1);
+  temp_v2 = renderCtxPackPassFlags(5,1);
   piVar6 = (int *)(temp_v0 + 0x1258);
   temp_v3 = *piVar6;
   temp_v4 = piVar6[temp_v3 + 2];

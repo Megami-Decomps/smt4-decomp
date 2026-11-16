@@ -9,7 +9,7 @@ void asdCameraInitAreas(void);
 void ptrListRemoveClearOwner(void *registry, void *object);
 void resourceOwnerReleaseAndReset(void *registry);
 void mapReleaseTableTexture(void);
-void FUN_002c2358(void);
+void frameTexturesRelease(void);
 void campCommonBgRelease(void);
 void campButtonHelpRelease(void);
 void gfxObjectDestroy(void *object);
@@ -17,7 +17,7 @@ void gfxObjectDestroy(void *object);
 /* Tears the Spring of Healing scene down: its models, backdrop, script and heaps. */
 void sceneHealingRelease(HealingSceneWork *work)
 {
-    FUN_002c2358();
+    frameTexturesRelease();
     asdCameraInitAreas();
     mapReleaseTableTexture();
     ptrListRemoveClearOwner(g_handleRegistry, work->primary->object);

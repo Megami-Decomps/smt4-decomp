@@ -25,7 +25,7 @@ static __inline void semaphoreAcquire(u32 *semaphore)
     s32 result = FUN_002c40f8(&index, &handle, 1, 0, -1);
     bool failed = nnResultIsFailure(result);
     if (failed)
-        FUN_002c526c(result, failed);
+        resultHandleFailure(result, failed);
 }
 
 // Release the queue's semaphore once and report a failure.
@@ -35,7 +35,7 @@ static __inline void semaphoreRelease(u32 *semaphore)
     s32 result = FUN_002c5254(&previousCount, *semaphore, 1);
     bool failed = nnResultIsFailure(result);
     if (failed)
-        FUN_002c526c(result, failed);
+        resultHandleFailure(result, failed);
 }
 
 // Append a copied request to the fixed ring and link it after the previous queued request.

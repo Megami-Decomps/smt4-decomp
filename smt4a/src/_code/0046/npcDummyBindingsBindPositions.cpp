@@ -21,7 +21,7 @@ void npcDummyBindingsBindPositions(NpcDummyBindings *bindings)
     MapVector position;
     if (!bindings->initialized) {
         if (bindings->mode == 1) {
-            void *owner = reinterpret_cast<void *>(FUN_00152f54());
+            void *owner = reinterpret_cast<void *>(asdCameraGetSavedRenderPairs());
             uiSetFloatPair(owner, 0.25f, 0.3f);
             FUN_0036b824(reinterpret_cast<u32>(owner));
         }

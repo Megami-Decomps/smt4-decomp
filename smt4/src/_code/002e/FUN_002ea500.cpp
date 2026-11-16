@@ -10,7 +10,7 @@ extern "C" {
 int mapDestroySecondaryModel(void);
 int lmapSetSceneId(...);
 int slotSetRequest(...);
-int FUN_002bf810(...);
+int soundPlaySeUnpanned(...);
 
 int mapIfReleaseSlot2(void);
 int mapIfActivateRecord(int, unsigned int);
@@ -56,14 +56,14 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: FUN_00282390. */
-/* Supplied declaration required: FUN_0028250c. */
+/* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
-extern int FUN_002896bc(void);
-/* Supplied declaration required: FUN_00291e40. */
+extern int screenFadesAllReady(void);
+/* Supplied declaration required: soundActorStartOnFreeChannel. */
 extern int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: FUN_002bf810. */
+/* Supplied declaration required: soundPlaySeUnpanned. */
 extern int padIsButtonPressed(unsigned int);
 
 
@@ -166,7 +166,7 @@ void FUN_002ea500(void)
           *(unsigned int *)(temp_v0 + 0x28) = DAT_0049f9a0;
           *(float *)(temp_v0 + 0x2c) = temp_v4;
           *(unsigned int *)(temp_v0 + 0x30) = temp_v6;
-          *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + FUN_0028250c((temp_v3 + 180.0f) * 0.017453292f) * 110.0f;
+          *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + mathRemPio2f((temp_v3 + 180.0f) * 0.017453292f) * 110.0f;
           temp_v0 = g_lmapScene;
           *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + FUN_00282390((*(float *)(temp_v0 + 0x50) + 180.0f) * 0.017453292f) * 110.0f;
           FUN_0027fc14(10);
@@ -175,7 +175,7 @@ void FUN_002ea500(void)
           mapIfActivateRecord(1,DAT_0049f99c);
           {
           MapMarkerPosition marker;
-          marker.x = *(float *)&DAT_0049f9a0 + FUN_0028250c(*(float *)(g_lmapScene + 0x50) * 0.017453292f) * 20.0f;
+          marker.x = *(float *)&DAT_0049f9a0 + mathRemPio2f(*(float *)(g_lmapScene + 0x50) * 0.017453292f) * 20.0f;
           marker.y = *(float *)&DAT_0049f9a4 + 10.0f;
           marker.z = *(float *)&DAT_0049f9a8 + FUN_00282390(*(float *)(g_lmapScene + 0x50) * 0.017453292f) * 20.0f;
           marker.w = *(float *)(g_lmapScene + 0x50) + 180.0f;
@@ -228,33 +228,33 @@ void FUN_002ea500(void)
         switch(DAT_0049f94a) {
         case 0:
           temp_v6 = 0x100021b;
-          FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+          soundActorStartOnFreeChannel(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
           break;
         case 1:
           temp_v6 = 0x100021d;
-          FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+          soundActorStartOnFreeChannel(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
           break;
         case 2:
           temp_v6 = 0x100021f;
-          FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+          soundActorStartOnFreeChannel(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
           break;
         case 3:
           temp_v6 = 0x1000221;
-          FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+          soundActorStartOnFreeChannel(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
           break;
         case 4:
-          FUN_00291e40(0x1000223, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+          soundActorStartOnFreeChannel(0x1000223, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
         default:
         }
 LAB_002ea9b4:
         FUN_0027fca0(0xffffffff);
         {
         SoundActorQueuePosition position;
-        position.x = *(float *)(g_lmapScene + 0x1c) + FUN_0028250c(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
+        position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
         position.z = *(float *)(g_lmapScene + 0x24) + FUN_00282390(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
         position.y = *(float *)(g_lmapScene + 0x20) + 150.0f;
         temp_v0 = randBetween(0,1);
-        FUN_00291e40(temp_v0 + 0x100023c, position);
+        soundActorStartOnFreeChannel(temp_v0 + 0x100023c, position);
         }
         temp_v0 = g_lmapScene;
         *(unsigned int *)(g_lmapScene + 0x68) = 0x41000000;
@@ -343,13 +343,13 @@ LAB_002ea9b4:
     temp_v1 = *(int *)(temp_v0 + 8) + 1;
     *(int *)(temp_v0 + 8) = temp_v1;
     if (temp_v1 == 10) {
-      FUN_002bf810(0x10000e7);
+      soundPlaySeUnpanned(0x10000e7);
     }
     if (*(int *)(g_lmapScene + 8) == 0x1e) {
       slotSetRequest(0,10,0xff);
       slotSetRequest(1,10,0xff);
     }
-    if ((*(int *)(g_lmapScene + 8) < 0x1f) || (temp_v0 = FUN_002896bc(), temp_v0 == 0)) {
+    if ((*(int *)(g_lmapScene + 8) < 0x1f) || (temp_v0 = screenFadesAllReady(), temp_v0 == 0)) {
       FUN_002804ec(g_lmapScene + 0x28);
       mapSelectContainingRegions();
       return;

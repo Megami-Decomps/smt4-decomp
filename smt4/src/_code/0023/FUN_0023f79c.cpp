@@ -53,7 +53,7 @@ struct BtlMainState {
     ModelEntry *models[MODEL_TABLE_SIZE]; /* 0x2134 */
 };
 
-PartnerRef *FUN_0027da30(BtlMainState *state, s32 id);
+PartnerRef *btlFindEntryBlockByMemberId(BtlMainState *state, s32 id);
 int FUN_003c1964(s32 row);
 int FUN_003364d0(BtlMainState *state, u32 flags);
 void btlAssignGroupedActionOrder(BtlMainState *state, u32 flags);
@@ -61,7 +61,7 @@ void btlAssignGroupedActionOrder(BtlMainState *state, u32 flags);
 /* Width model of the partner behind formation unit `unit`: found in the model table by key. */
 static ModelData *formationUnitModel(BtlMainState *state, const FormationUnit *unit)
 {
-    PartnerRef *partner = FUN_0027da30(state, unit->partnerId);
+    PartnerRef *partner = btlFindEntryBlockByMemberId(state, unit->partnerId);
     for (s32 i = 0; i < MODEL_TABLE_SIZE; i++) {
         ModelEntry *entry = state->models[i];
         if (entry != 0 && entry->key == partner->key) {

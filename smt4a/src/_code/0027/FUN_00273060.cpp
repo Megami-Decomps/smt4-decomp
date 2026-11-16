@@ -21,8 +21,8 @@ extern GameStateView g_gameState;
 
 
 int CONCAT44(double, double);
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
+int libm_cosf(void);
+int libm_sinf(void);
 int mathAngleDeltaDegrees(void);
 int FUN_002d2834(void);
 int FUN_003281c4(int, unsigned int, unsigned int, int);
@@ -32,7 +32,7 @@ int FUN_003b959c(void);
 int controllerSetDestination(int, int *);
 int controllerSetPosition(int);
 int controllerSetRotationEulerDegrees(int);
-int FUN_003fe86c(int, unsigned int, int);
+int modelPlayClip(int, unsigned int, int);
 int VectorSignedToFloat(unsigned int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -71,8 +71,8 @@ static float romwright_sqrt_4(float value)
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: FUN_002d2834. */
 /* Supplied declaration required: FUN_003281c4. */
@@ -82,7 +82,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: controllerSetPosition. */
 /* Supplied declaration required: controllerSetRotationEulerDegrees. */
-/* Supplied declaration required: FUN_003fe86c. */
+/* Supplied declaration required: modelPlayClip. */
 extern int textureEntryMeetsUnlockRequirements(unsigned int);
 
 
@@ -176,11 +176,11 @@ void FUN_00273060(void)
         temp_v9 = *(float *)(temp_v2 + 0x50);
         *(float *)(temp_v1 + 0x24) = temp_v9;
         temp_v9 = temp_v9 * 0.017453292f;
-        FUN_001bc124();
+        libm_sinf();
         *(float *)(temp_v1 + 0x28) = temp_v9 * *(float *)(temp_v1 + 0x20);
         *(unsigned int *)(temp_v1 + 0x2c) = temp_v16;
         temp_v14 = *(float *)(temp_v1 + 0x24) * temp_v14;
-        FUN_001bbf0c();
+        libm_cosf();
         *(float *)(temp_v1 + 0x30) = temp_v14 * *(float *)(temp_v1 + 0x20);
         if (0 < g_gameState.f005f17f0) {
           g_gameState.f005f17f0 = g_gameState.f005f17f0 - 1;
@@ -311,7 +311,7 @@ void FUN_00273060(void)
               temp_v16 = VectorSignedToFloat(*(unsigned int *)(temp_v3 + 0x6c),
                                            (unsigned char)(in_fpscr >> 0x16) & 3);
               *(unsigned int *)(temp_v6 + 0x1fc) = temp_v16;
-              FUN_003fe86c(temp_v6,*(unsigned int *)(temp_v3 + 100),2);
+              modelPlayClip(temp_v6,*(unsigned int *)(temp_v3 + 100),2);
             }
           }
           else {

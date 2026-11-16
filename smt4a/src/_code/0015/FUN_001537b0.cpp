@@ -24,7 +24,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int stateValuesGetBySelector(unsigned int);
-extern int FUN_001692ac(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: FUN_0019e3d0. */
 /* Supplied declaration required: FUN_001a9698. */
@@ -58,7 +58,7 @@ void FUN_001537b0(void)
   if (((temp_v1 == 0) && (temp_v5 >= 2)) && (temp_v5 = temp_v5 - 1, temp_v5 < 1)) {
     temp_v5 = 1;
   }
-  temp_v1 = FUN_001692ac(1,0);
+  temp_v1 = renderCtxPackPassFlags(1,0);
   piVar6 = (int *)(temp_v6 + 0x1258);
   temp_v2 = *piVar6;
   temp_v3 = piVar6[temp_v2 + 2];

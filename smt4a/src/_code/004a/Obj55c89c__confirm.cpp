@@ -47,7 +47,7 @@ extern struct { u32 unk0; s32 selected; } g_animatedPageSelection;
 void sysPlaySe(s32 id);
 void uiSpriteBankApplyPreset(SpritePresetBank *bank, u32 preset);
 u32 slotRecordFindById(u16 id);
-u8 *FUN_00275bc8(u32 a, u32 b);
+u8 *scrScriptProcessCreate(u32 a, u32 b);
 void scriptProcessSetMode(u8 *script, s32 mode);
 void FUN_0032d0c8(s32 a, s32 b, u16 id, const void *record);
 void FUN_0035ad50(u16 id, u8 *out);
@@ -66,7 +66,7 @@ void Obj55c89c::confirm()
     if (menu->isScreenReady() == 0 || utilityReturnSuccess(&menu->successArg) != 0) {
         return;
     }
-    menu->entry = FUN_00275bc8(menu->resourceA, menu->resourceB);
+    menu->entry = scrScriptProcessCreate(menu->resourceA, menu->resourceB);
     scriptProcessSetMode(menu->entry, 2);
     menu->state = 1;
     menu->substate = 0;

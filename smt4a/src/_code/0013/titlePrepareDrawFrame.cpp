@@ -14,16 +14,16 @@ extern TitleDraw g_titleFlags;
 extern u32 g_renderCtx;
 
 extern void effectRestoreSavedRenderPairs(u32 scene, u32 arg);
-extern s32 FUN_001696f4(void);
+extern s32 gxIsStereoscopic3dEnabled(void);
 extern void asdGxCommandListBegin(u32 commandList);
 
-/* Per-frame title step: forwards FUN_00152f54's value to the scene and begins the draw command list when enabled; returns 0. */
+/* Per-frame title step: forwards asdCameraGetSavedRenderPairs's value to the scene and begins the draw command list when enabled; returns 0. */
 u32 titlePrepareDrawFrame(void)
 {
-    if (FUN_00152f54() != 0) {
-        effectRestoreSavedRenderPairs(g_renderCtx, FUN_00152f54());
+    if (asdCameraGetSavedRenderPairs() != 0) {
+        effectRestoreSavedRenderPairs(g_renderCtx, asdCameraGetSavedRenderPairs());
     }
-    if (g_titleFlags.hidden == 0 && g_titleFlags.enabled != 0 && FUN_001696f4() == 1) {
+    if (g_titleFlags.hidden == 0 && g_titleFlags.enabled != 0 && gxIsStereoscopic3dEnabled() == 1) {
         asdGxCommandListBegin(g_titleFlags.commandList);
     }
     return 0;

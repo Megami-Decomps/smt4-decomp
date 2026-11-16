@@ -12,10 +12,10 @@ struct ChoiceCaptionWork {
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 void efctSetSpeed(f32 alpha);
-void FUN_00183bb0(void);
-s32 FUN_001692ac(s32 first, s32 second);
+void gxResetColorQuadToWhite(void);
+s32 renderCtxPackPassFlags(s32 first, s32 second);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
-void FUN_00164b5c(s32 layer, u32 texture, u32 frame, s32 x, s32 y, u32 mode);
+void texDrawCompositeSprite(s32 layer, u32 texture, u32 frame, s32 x, s32 y, u32 mode);
 f32 FUN_00168594(const char *text, s32 font, f32 initialWidth);
 
 /* Draws the frame and the centred caption at full speed. */
@@ -24,7 +24,7 @@ static void choiceCaptionDrawBody(ChoiceCaptionWork *work, s32 first)
     asdTMTexTableEntryAt(0x2B, 0x56);
     TextureTableEntryIV *metrics = asdTMTexTableEntryAt(0x2B, 0x59);
     s32 offset = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
-    FUN_00164b5c(2, 0x2B, 7, offset, 0, 0xF1);
+    texDrawCompositeSprite(2, 0x2B, 7, offset, 0, 0xF1);
     s32 availableWidth = metrics->placement->width;
     s32 width = (s32)FUN_00168594(first != 0 ? work->first : work->second, 4, 0.0f);
     f32 x = (f32)(offset + (availableWidth - width) / 2 + metrics->x);
@@ -37,9 +37,9 @@ static void choiceCaptionDrawBody(ChoiceCaptionWork *work, s32 first)
 void FUN_004087d8(ChoiceCaptionWork *work, s32 first)
 {
     efctSetSpeed(work->alpha);
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
     RenderCtxA *context = g_renderCtx;
-    renderCtxPushA(context, FUN_001692ac(1, 0));
+    renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
     efctSetSpeed(1.0f);
     choiceCaptionDrawBody(work, first);
     renderStackPop(&g_renderCtx->stackA);

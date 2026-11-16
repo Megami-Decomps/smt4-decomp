@@ -47,7 +47,7 @@ u32 playerGetMappedCategory();
 u32 gameGetSelectedSupportUnitTableId(void);
 s32 textFormatBuffer(char *output, const char *format, ...);
 u32 aocIndexValueOrDefault(u32 index);
-u32 FUN_002be650(u32 value, s32 mode);
+u32 dataFindKindRecordWithAocOverrides(u32 value, s32 mode);
 void FUN_002cd750(s16 value);
 void communicationSetResultPointer(void);
 void communicationBeginTransition(s32 mode);
@@ -101,7 +101,7 @@ void FUN_00227334(u32 unused, u32 kind, s32 value, s32 isSupport, s32 devilId, s
         FUN_00211868(work->value, isSupport != 0);
         break;
     case 8:
-        textFormatBuffer(label, "%s", FUN_002be650(work->value, 0));
+        textFormatBuffer(label, "%s", dataFindKindRecordWithAocOverrides(work->value, 0));
         FUN_002009c4(work->value);
         break;
     case 9:

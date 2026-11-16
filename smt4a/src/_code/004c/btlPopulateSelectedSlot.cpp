@@ -47,7 +47,7 @@ u16 recordGetScaledMaximum(RecoverableSlot *);
 void bitsAt60Clear(RecoverableSlot *, u32);
 void FUN_003e9cec(BattleSlotState *, BattleSlotCore *, RecoverableSlot *, u32);
 BattleSlotVisual *FUN_003e83b4(BattleSlotState *, s32, u32);
-void FUN_004fb43c(s32, s32, u32, s32, s32, s32, s32);
+void btlQueueActionMessage(s32, s32, u32, s32, s32, s32, s32);
 void FUN_004a9c24(void *, s32, s32, s32);
 void FUN_004ca63c(BattleSlotState *, BattleSlotCore *, s32, s32, s32);
 
@@ -71,7 +71,7 @@ void btlPopulateSelectedSlot(s32 kind, s32 slot, s32 destination, s32 animate)
             s32 immediate = 1;
             if (animate > 0) {
                 immediate = 0;
-                FUN_004fb43c(0, 0, 0x1000271, 0, 0, 0, 0);
+                btlQueueActionMessage(0, 0, 0x1000271, 0, 0, 0, 0);
             }
             FUN_004a9c24(g_btlUiBlock, unit->unitIndex, party->selected[slot], immediate);
         }

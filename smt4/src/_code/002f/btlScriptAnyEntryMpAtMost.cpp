@@ -6,7 +6,7 @@
 extern "C" {
 s32 scrGetArg(s32 index);
 s32 btlScriptResolveGroupArg(s32 group);
-void FUN_002499fc(u32 group, s32 *first, s32 *count);
+void btlSideGetEntryRange(u32 group, s32 *first, s32 *count);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *);
 
 // Test whether the requested combatant has at most the given MP percentage.
@@ -15,7 +15,7 @@ u32 btlScriptAnyEntryMpAtMost(void)
     u32 id = scrGetArg(0);
     s32 percent = scrGetArg(1);
     s32 first, count;
-    FUN_002499fc(btlScriptResolveGroupArg(scrGetArg(2)), &first, &count);
+    btlSideGetEntryRange(btlScriptResolveGroupArg(scrGetArg(2)), &first, &count);
     for (s32 i = first; i < first + count; ++i) {
         BtlEntry *entry = &btlGetMainState()->entries[i];
         if (!(entry->flags & BTL_ENTRY_FLAG_PRESENT) &&

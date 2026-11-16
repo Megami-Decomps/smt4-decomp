@@ -65,8 +65,8 @@ void FUN_0037e8a4(SaveSlotHud* hud, f32 alpha)
     s32 baseY = vec2GetYInt(titleSprite);
     s32 x = baseX + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
     efctSetSpeed(reinterpret_cast<UiSprite*>(titleSprite)->scale * alpha);
-    for (s32 i = 0; i < 3; i++) FUN_001835b4(2, 0x14, 0xc08 + i, x, baseY, 0xbf);
-    FUN_001835b4(2, 0x14, 0xbe1, baseX + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f), baseY, 0xc4);
+    for (s32 i = 0; i < 3; i++) texDrawTableEntryAtStoredOrigin(2, 0x14, 0xc08 + i, x, baseY, 0xbf);
+    texDrawTableEntryAtStoredOrigin(2, 0x14, 0xbe1, baseX + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f), baseY, 0xc4);
 
     void* cardSprite = hud->cardSprite;
     if (hud->cardVisible == 0 || saveSlotFindSelected() == NULL) return;
@@ -77,13 +77,13 @@ void FUN_0037e8a4(SaveSlotHud* hud, f32 alpha)
     s32 frameX = cardX + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f) + frame->x;
     s32 frameY = cardY + frame->y;
     setDrawState(packNibblesAndByte(6, 1, 0));
-    for (s32 i = 0; i < 3; i++) FUN_001835b4(2, 0x14, 0xbe2 + i, frameX, frameY, 0xbf);
+    for (s32 i = 0; i < 3; i++) texDrawTableEntryAtStoredOrigin(2, 0x14, 0xbe2 + i, frameX, frameY, 0xbf);
 
     TextureTableEntryIV* marker = asdTMTexTableEntryAt(0x14, 0xc16);
     s32 markerX = marker->x + cardX + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
     s32 markerY = marker->y + cardY;
     efctSetSpeed(hud->haloSprite.scale * alpha);
-    for (s32 i = 0; i < 3; i++) FUN_001835b4(2, 0x14, 0xc01 + i, markerX, markerY, 0xc4);
+    for (s32 i = 0; i < 3; i++) texDrawTableEntryAtStoredOrigin(2, 0x14, 0xc01 + i, markerX, markerY, 0xc4);
     efctSetSpeed(alpha);
     setDrawState(packNibblesAndByte(6, 7, 0));
 }

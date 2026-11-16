@@ -6,9 +6,9 @@ extern "C" {
 
 int renderCtxSelectTexture(...);
 int FUN_0019e3d0(...);
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
-int FUN_0050d8e4(void);
+int libm_cosf(void);
+int libm_sinf(void);
+int __hardfp_atan2f(void);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(unsigned int, int);
 int nn_math_ARMv6_VEC3TransformAsm_2AD44C(...);
@@ -76,10 +76,10 @@ static float romwright_fabs_4(float value)
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: FUN_0019e3d0. */
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 extern int lmapMainIsAtLeastHalf(void);
-/* Supplied declaration required: FUN_0050d8e4. */
+/* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
 
@@ -179,14 +179,14 @@ void FUN_002dfba0(void)
       temp_v15 = *(float *)(g_lmapScene + 0x20);
       temp_v14 = *(float *)(g_lmapScene + 0x24);
       temp_v17 = *(float *)(g_lmapView + 0x18) * temp_v18;
-      FUN_001bc124();
+      libm_sinf();
       temp_v13 = temp_v13 + temp_v17 * temp_v16;
       temp_v18 = *(float *)(g_lmapView + 0x18) * temp_v18;
-      FUN_001bbf0c();
+      libm_cosf();
       temp_v14 = temp_v14 + temp_v18 * temp_v16;
       temp_v15 = temp_v15 + 400.0f;
       temp_v18 = DAT_00581048;
-      FUN_001bc124();
+      libm_sinf();
       temp_v13 = temp_v13 + *(float *)(temp_v1 + 0xccfc);
       temp_v14 = temp_v14 + *(float *)(temp_v1 + 0xcd04);
       temp_v18 = temp_v15 + temp_v18 * 25.0f + *(float *)(temp_v1 + 0xcd00);
@@ -198,15 +198,15 @@ void FUN_002dfba0(void)
       if (*(char *)(temp_v2 + 0x1d) != '\x02') {
         temp_v10 = 90.0f;
         temp_v17 = (*(float *)(g_lmapView + 0x18) + 90.0f) * 0.017453292f;
-        FUN_001bc124();
+        libm_sinf();
         temp_v9 = 50.0f;
         temp_v13 = temp_v13 + temp_v17 * 50.0f;
         temp_v18 = (*(float *)(g_lmapView + 0x18) + temp_v10) * temp_v18;
-        FUN_001bbf0c();
+        libm_cosf();
         temp_v14 = temp_v14 + temp_v18 * temp_v9;
         temp_v15 = temp_v15 + temp_v16;
         temp_v18 = DAT_00581048;
-        FUN_001bc124();
+        libm_sinf();
         temp_v13 = temp_v13 + *(float *)(temp_v1 + 0xccfc);
         temp_v16 = 13.0f;
         temp_v14 = temp_v14 + *(float *)(temp_v1 + 0xcd04);
@@ -215,15 +215,15 @@ void FUN_002dfba0(void)
       else {
         temp_v10 = 130.0f;
         temp_v16 = (*(float *)(g_lmapView + 0x18) + 130.0f) * 0.017453292f;
-        FUN_001bc124();
+        libm_sinf();
         temp_v9 = 30.0f;
         temp_v13 = temp_v13 + temp_v16 * 30.0f;
         temp_v18 = (*(float *)(g_lmapView + 0x18) + temp_v10) * temp_v18;
-        FUN_001bbf0c();
+        libm_cosf();
         temp_v14 = temp_v14 + temp_v18 * temp_v9;
         temp_v15 = temp_v15 + 150.0f;
         temp_v18 = DAT_00581048;
-        FUN_001bc124();
+        libm_sinf();
         temp_v16 = 8.0f;
         temp_v13 = temp_v13 + *(float *)(temp_v1 + 0xccfc) * temp_v17;
         temp_v14 = temp_v14 + *(float *)(temp_v1 + 0xcd04) * temp_v17;
@@ -231,7 +231,7 @@ void FUN_002dfba0(void)
       }
     }
     temp_v17 = *(float *)(g_lmapView + 0x50) - temp_v13;
-    FUN_0050d8e4();
+    __hardfp_atan2f();
     temp_v19 = 0;
     if (g_gameState >= 100) {
       temp_v17 = temp_v17 * 57.32484f * 0.7111111f;

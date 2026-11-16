@@ -46,7 +46,7 @@ void frameRangeExtend(s32* battle, ActionContext* ctx, s32 id, s32 a, s32 b, s32
 s32 FUN_00229914(s32* battle, ActionContext* ctx, s32 id);
 void FUN_0023c0d0(s32* battle, ActionContext* ctx, s32 id, s32 amount);
 void actionCreateKindSeventeen(s32 kind, ActionContext* ctx, s32 arg);
-void FUN_002505c0(s32 a, ActionContext* ctx, s32 b, s32 c, s32 d, s32 e, s32 f);
+void btlQueueKeyedScalarReflectAction(s32 a, ActionContext* ctx, s32 b, s32 c, s32 d, s32 e, s32 f);
 void FUN_002551ac(s32 kind, ActionContext* ctx, ActionTarget* target, s32 a, s32 amount, s32 b, s32 c, s32 d, s32 e,
                   s32 f, s32 g, u8 h, s32 i, s32 j, s32 k, s32 l, s32 m, s32 n, s32 o, s32 p, s32 q, s32 r, s32 s, s32 t, s32 u);
 void FUN_0027df30(s32 kind, ActionContext* ctx, ActionTarget* target, s32 a, u32 value, s32 b, s32 c, s32 d, u32 e, u32 f, u32 g, s32 h, s32 i);
@@ -89,10 +89,10 @@ u8 FUN_003cfe14(s32* battle, ActionContext* ctx, s32 amount)
     FUN_002551ac(10, ctx, ctx->target, 0, amount, -1, -1,
                  reinterpret_cast<ActionSlotRow*>(reinterpret_cast<u8*>(ctx) + ctx->target->listedId * 10 + 0x9d4)->minPower,
                  *reinterpret_cast<s16*>(ctx->source + 0xea), 0, 0, result, 0, 1, 0, 0x1e, 0, a, c, b, -1, 1, 0, 1, 1);
-    FUN_002505c0(10, ctx, 0x1000185, 0, 0, 0, 0);
+    btlQueueKeyedScalarReflectAction(10, ctx, 0x1000185, 0, 0, 0, 0);
     if ((s32)value >= 0) {
         FUN_0027df30(0x1e, ctx, ctx->target, 0, value, -1, -1, 0, a, c, b, 0, 1);
-        FUN_002505c0(0x1e, ctx, 0x10001c5, 0, 1, 0, 0);
+        btlQueueKeyedScalarReflectAction(0x1e, ctx, 0x10001c5, 0, 1, 0, 0);
     }
     if (result != 0) {
         if ((ctx->target->flags & 0x400) != 0) {

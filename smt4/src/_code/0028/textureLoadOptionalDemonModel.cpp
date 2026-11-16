@@ -5,7 +5,7 @@
 extern "C" {
 DevilModelOverride* dataTable00FindById(u16 id);
 s32 recordPrepareLinkedOwner(AocSystem*, u32 table, s32 node);
-void FUN_002ae9ec(u32 kind, u32 table, u32 file, s32 x, s32 y, u32 layer);
+void texTableRecordCallWithParams(u32 kind, u32 table, u32 file, s32 x, s32 y, u32 layer);
 void FUN_00388eb4(AocSystem*, s32 id, u32 kind, s32 node, s32 x, s32 y, u32 layer);
 extern AocSystem* g_aocSystem;
 
@@ -66,7 +66,7 @@ void textureLoadOptionalDemonModel(s32 id, s32 x, s32 y, u32 layer, s32 mapped)
         if (recordPrepareLinkedOwner(g_aocSystem, category, resource)) {
             FUN_00388eb4(g_aocSystem, id, 2, resource, x, y, layer);
         } else {
-            FUN_002ae9ec(2, category, resource * 1000 + 1, x, y, layer);
+            texTableRecordCallWithParams(2, category, resource * 1000 + 1, x, y, layer);
         }
     }
 }

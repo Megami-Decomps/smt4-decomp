@@ -9,7 +9,7 @@ extern "C" {
 extern StaffRollWork *g_staffRoll;
 
 void asdTMTexTableLoadTmx(s32 type, s32 index);
-void FUN_002c58c8(s32 type, s32 index);
+void asdTMTexTablePrepareNodeImage(s32 type, s32 index);
 void uiGetEntrySize(s32 type, s32 index, s32 *outWidth, s32 *outHeight);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work, u32 parent);
@@ -39,7 +39,7 @@ void FUN_002cac54(s32 skipFade)
 
     asdTMTexTableLoadTmx(0x34, 0);
     for (u32 i = 0; i < 12; i++)
-        FUN_002c58c8(0x34, i);
+        asdTMTexTablePrepareNodeImage(0x34, i);
 
     for (s32 i = 0; i < 12; i++) {
         s32 width, height;

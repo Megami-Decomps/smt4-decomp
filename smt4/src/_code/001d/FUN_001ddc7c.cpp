@@ -3,7 +3,7 @@
 
 extern "C" {
 extern RenderCtx *g_titleScene;
-s32 FUN_002c5d80(u32 mode, u32 flags);
+s32 renderCtxPackPassFlags(u32 mode, u32 flags);
 void FUN_001a6d98();
 
 u32 FUN_001ddc7c()
@@ -11,7 +11,7 @@ u32 FUN_001ddc7c()
     UiQuest *quest = g_uiQuest;
     if (!quest->panel.unkF2) {
         RenderCtx *render = g_titleScene;
-        renderCtxPushA(render, FUN_002c5d80(1, 0));
+        renderCtxPushA(render, renderCtxPackPassFlags(1, 0));
         switch (quest->state) {
         case 1:
         case 2:

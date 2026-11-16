@@ -38,7 +38,7 @@ typedef char TitleScreenViewLayoutCheck[sizeof(TitleSprite) == 0x38 &&
 
 extern "C" {
 
-u32 FUN_001692ac(u32 value, bool enabled);
+u32 renderCtxPackPassFlags(u32 value, bool enabled);
 void efctSetSpeed(f32 alpha);
 void FUN_0034dc3c(void *menu);
 u32 packNibblesAndByte(s32 a, s32 b, u32 byte);
@@ -64,7 +64,7 @@ static __inline void titleDrawSprite(TitleSprite *sprite, u32 order)
     }
     offset = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
     efctSetSpeed(sprite->alpha);
-    FUN_001835b4(2, sprite->texture, sprite->frame, sprite->x + offset, sprite->y, order);
+    texDrawTableEntryAtStoredOrigin(2, sprite->texture, sprite->frame, sprite->x + offset, sprite->y, order);
     efctSetSpeed(1.0f);
 }
 
@@ -78,9 +78,9 @@ u32 FUN_0036b21c(void)
     s32 width;
     s32 height;
 
-    FUN_00157558(g_renderCtx);
-    renderCtxPushA(g_renderCtx, FUN_001692ac(1, false));
-    FUN_001835b4(2, 0x2a, 5000, (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.27f), 0, 0xb);
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
+    renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, false));
+    texDrawTableEntryAtStoredOrigin(2, 0x2a, 5000, (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.27f), 0, 0xb);
     titleDrawSprite(&title->sprites[3], 6);
     titleDrawSprite(&title->sprites[4], 6);
     FUN_0034dc3c(title->menuA);

@@ -12,7 +12,7 @@ int FUN_002bdf94(int, int, int, int);
 int drawSetColorFromRGBA8(unsigned int);
 int textDrawString(int, unsigned int, int [2]);
 int textFormatBuffer(...);
-int FUN_002bf288(...);
+int texDrawTableEntryAtStoredOrigin(...);
 int efctSetSpeed(void);
 int VectorSignedToFloat(int, int);
 
@@ -56,7 +56,7 @@ extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002bf288. */
+/* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 
@@ -210,7 +210,7 @@ void FUN_00251d98(fn_00251d98_arg0 *param_1,int param_2,int param_3,int param_4)
       else {
         temp_v10[1] = 0x65;
         temp_v10[0] = param_4;
-        FUN_002bf288(2,0x19,2,param_3);
+        texDrawTableEntryAtStoredOrigin(2,0x19,2,param_3);
         temp_v8 = 3;
         temp_v10[1] = 0x6f;
       }
@@ -225,7 +225,7 @@ void FUN_00251d98(fn_00251d98_arg0 *param_1,int param_2,int param_3,int param_4)
       temp_v8 = !temp_v9 || temp_v7 != 0;
     }
     temp_v10[0] = param_4;
-    FUN_002bf288(2,0x19,temp_v8,param_3);
+    texDrawTableEntryAtStoredOrigin(2,0x19,temp_v8,param_3);
   }
   return;
 }

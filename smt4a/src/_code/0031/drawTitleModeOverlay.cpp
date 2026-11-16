@@ -13,7 +13,7 @@ struct TitleRenderState {
 extern "C" {
 extern TitleMainGlobals g_titleMain;
 extern RenderCtxA *g_renderCtx;
-s32 FUN_001692ac(u32, u32);
+s32 renderCtxPackPassFlags(u32, u32);
 void FUN_0036b21c();
 
 u32 drawTitleModeOverlay()
@@ -25,13 +25,13 @@ u32 drawTitleModeOverlay()
         return 0;
     switch (state->mode) {
     case 3:
-        renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
-        FUN_001835b4(2, 0x2a, 6000, 0, 0, 0xb);
+        renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
+        texDrawTableEntryAtStoredOrigin(2, 0x2a, 6000, 0, 0, 0xb);
         renderStackPop(&g_renderCtx->stackA);
         break;
     case 4:
-        renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
-        FUN_001835b4(2, 0x2a, 7000, 0, 0, 0xb);
+        renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
+        texDrawTableEntryAtStoredOrigin(2, 0x2a, 7000, 0, 0, 0xb);
         renderStackPop(&g_renderCtx->stackA);
         break;
     case 6:

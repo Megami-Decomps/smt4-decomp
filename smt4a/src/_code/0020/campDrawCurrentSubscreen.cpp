@@ -12,8 +12,8 @@ struct CampDrawView {
 extern "C" {
 extern CampDrawView *g_camp;
 extern RenderCtxA *g_renderCtx;
-void FUN_00157558(RenderCtxA *context);
-s32 FUN_001692ac(u32 kind, bool enabled);
+void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
+s32 renderCtxPackPassFlags(u32 kind, bool enabled);
 u32 FUN_002a4878(void *list);
 s32 FUN_003da8f4(s32 category, u32 selection);
 s32 partyCountOccupiedSlots(void);
@@ -40,8 +40,8 @@ static __inline void drawPartySubscreen()
 u32 campDrawCurrentSubscreen(void)
 {
     CampDrawView *camp = g_camp;
-    FUN_00157558(g_renderCtx);
-    renderCtxPushA(g_renderCtx, FUN_001692ac(1, false));
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
+    renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, false));
     s32 entryKind = FUN_003da8f4(camp->category, FUN_002a4878(camp->list));
     switch (camp->screen) {
     case 1: case 2: case 3: case 4: case 5: case 6: case 7:

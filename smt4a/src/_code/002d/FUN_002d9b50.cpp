@@ -14,7 +14,7 @@ int naviMainApplyRequestValue(...);
 int FUN_003d54f8(...);
 int linkedTargetSetFloat(...);
 
-int FUN_0015f858(...);
+int dataFindKindRecordWithAocOverrides(...);
 int slotSetRequest(...);
 int popupStateClose(...);
 int mapTrapGetUnk3C(...);
@@ -23,7 +23,7 @@ int FUN_00303460(...);
 int FUN_00303bd4(...);
 int mapSetSceneState(...);
 int naviMainSetFlagsAndActivate(...);
-int FUN_003180c4(...);
+int scrSetStringSlot(...);
 int mapTrapEnable(...);
 int FUN_00365c94(...);
 int naviMainSetRequestTriple(...);
@@ -39,8 +39,8 @@ int soundVolumeSettingSet(...);
 int FUN_0014af98(...);
 int FUN_001628c0(...);
 int sysPlaySe(...);
-int FUN_001bbf0c(...);
-int FUN_001bc124(...);
+int libm_cosf(...);
+int libm_sinf(...);
 void FUN_00297f00(int value, int count);
 int mapTrapArm(...);
 int FUN_002c2d44(...);
@@ -51,7 +51,7 @@ int mapTrapGetUnk38(...);
 int mapSpawnRandomEventKindEffect(...);
 int FUN_00324e38(...);
 int sysPlayVoice(...);
-int FUN_003d4ed8(...);
+int soundActorStartOnFreeChannel(...);
 int slotTargetApplyActiveValue(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
@@ -84,15 +84,15 @@ extern int DAT_005f1c94; /* 0x5f1c94 */
 extern unsigned int soundVolumeSettingGet(void);
 /* Supplied declaration required: FUN_0014af98. */
 extern unsigned int FUN_00152f44(void);
-/* Supplied declaration required: FUN_0015f858. */
+/* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: FUN_001628c0. */
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_001681c4. */
 /* Supplied declaration required: sysPlaySe. */
 extern int randBetween(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: popupStateClose. */
 /* Supplied declaration required: FUN_002950a8. */
@@ -102,7 +102,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002c2d44. */
 /* Supplied declaration required: FUN_002d1f40. */
 /* Supplied declaration required: FUN_002de104. */
-extern int FUN_002e07f4(void);
+extern int pairedAvailabilityBothReady(void);
 /* Supplied declaration required: FUN_002e364c. */
 /* Supplied declaration required: FUN_003024a0. */
 /* Supplied declaration required: FUN_00303460. */
@@ -112,7 +112,7 @@ extern int mapJobIsDone(void);
 /* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: mapTrapGetUnk38. */
 /* Supplied declaration required: naviMainSetFlagsAndActivate. */
-/* Supplied declaration required: FUN_003180c4. */
+/* Supplied declaration required: scrSetStringSlot. */
 /* Supplied declaration required: lmapSceneRestoreEntryPosition. */
 /* Supplied declaration required: mapSpawnRandomEventKindEffect. */
 /* Supplied declaration required: FUN_00324e38. */
@@ -126,7 +126,7 @@ extern int dataTableGetRecord23(void);
 /* Supplied declaration required: table23FindRecordByKey. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d2158. */
-/* Supplied declaration required: FUN_003d4ed8. */
+/* Supplied declaration required: soundActorStartOnFreeChannel. */
 /* Supplied declaration required: FUN_003d54f8. */
 extern unsigned int FUN_003e0034(void);
 /* Supplied declaration required: playerSetClampedValue. */
@@ -184,8 +184,8 @@ void FUN_002d9b50(void)
         *(unsigned int *)(temp_v6 + 0x2c) = *(unsigned int *)(temp_v6 + 0x20);
         *(unsigned int *)(temp_v6 + 0x30) = *(unsigned int *)(temp_v6 + 0x24);
         *(unsigned char *)(temp_v6 + 0x6c) = 0;
-        FUN_001bc124();
-        FUN_001bbf0c();
+        libm_sinf();
+        libm_cosf();
         temp_v11 = FUN_00152f44();
         temp_v1 = FUN_0014af98();
         FUN_001628c0("I001019",temp_v1,temp_v11,1);
@@ -271,16 +271,16 @@ void FUN_002d9b50(void)
         if (DAT_005f1848 != 0) {
           if (DAT_005f1848 == 1) {
             if (*(int *)(g_lmapScene + 0x270) == 3) {
-              FUN_001bc124();
-              FUN_001bbf0c();
-              FUN_003d4ed8(0x100029c);
+              libm_sinf();
+              libm_cosf();
+              soundActorStartOnFreeChannel(0x100029c);
               if (*(short *)(g_lmapScene + 0x19c) >= 1) {
                 *(short *)(g_lmapScene + 0x19c) = *(short *)(g_lmapScene + 0x19c) - 1;
               }
               else {
                 *(unsigned short *)(g_lmapScene + 0x19c) = 1;
-                FUN_001bc124();
-                FUN_001bbf0c();
+                libm_sinf();
+                libm_cosf();
                 temp_v6 = randBetween(0,1);
                 FUN_0014af98();
                 soundVolumeSettingSet();
@@ -303,8 +303,8 @@ void FUN_002d9b50(void)
               temp_v7 = *(short *)(g_lmapScene + 0x19c);
               if (0 < temp_v7) goto LAB_002da2b0;
               *(unsigned short *)(g_lmapScene + 0x19c) = 1;
-              FUN_001bc124();
-              FUN_001bbf0c();
+              libm_sinf();
+              libm_cosf();
               temp_v6 = randBetween(0,1);
               FUN_0014af98();
               soundVolumeSettingSet();
@@ -312,9 +312,9 @@ void FUN_002d9b50(void)
               soundVolumeSettingSet(temp_v1);
             }
             if (*(int *)(g_lmapScene + 0x270) == 3) {
-              FUN_001bc124();
-              FUN_001bbf0c();
-              FUN_003d4ed8(0x100029e);
+              libm_sinf();
+              libm_cosf();
+              soundActorStartOnFreeChannel(0x100029e);
               FUN_00324e38(0xffffffff);
             }
             if ((*(int *)(g_lmapScene + 0x270) == 6) &&
@@ -329,8 +329,8 @@ void FUN_002d9b50(void)
             temp_v7 = *(short *)(g_lmapScene + 0x19c);
             if (temp_v7 < 1) {
               *(unsigned short *)(g_lmapScene + 0x19c) = 1;
-              FUN_001bc124();
-              FUN_001bbf0c();
+              libm_sinf();
+              libm_cosf();
               temp_v6 = randBetween(0,1);
               FUN_0014af98();
               soundVolumeSettingSet();
@@ -344,9 +344,9 @@ LAB_002da2b0:
           else {
 LAB_002da1e4:
             if (*(int *)(g_lmapScene + 0x270) == 3) {
-              FUN_001bc124();
-              FUN_001bbf0c();
-              FUN_003d4ed8(0x100029d);
+              libm_sinf();
+              libm_cosf();
+              soundActorStartOnFreeChannel(0x100029d);
               FUN_00324e38(0xffffffff);
             }
             if (*(int *)(g_lmapScene + 0x270) == 4) {
@@ -379,16 +379,16 @@ LAB_002da3cc:
         }
         else {
           if (*(int *)(g_lmapScene + 0x270) == 3) {
-            FUN_001bc124();
-            FUN_001bbf0c();
-            FUN_003d4ed8(0x100029b);
+            libm_sinf();
+            libm_cosf();
+            soundActorStartOnFreeChannel(0x100029b);
             if (*(short *)(g_lmapScene + 0x19c) >= 1) {
               *(short *)(g_lmapScene + 0x19c) = *(short *)(g_lmapScene + 0x19c) - 1;
             }
             else {
               *(unsigned short *)(g_lmapScene + 0x19c) = 1;
-              FUN_001bc124();
-              FUN_001bbf0c();
+              libm_sinf();
+              libm_cosf();
               temp_v6 = randBetween(0,1);
               FUN_0014af98();
               soundVolumeSettingSet();
@@ -488,8 +488,8 @@ LAB_002da3cc:
           FUN_00303bd4();
           if (temp_v3 != 0) {
             temp_v2 = temp_v3;
-            FUN_0015f858();
-            FUN_003180c4(0,temp_v2);
+            dataFindKindRecordWithAocOverrides();
+            scrSetStringSlot(0,temp_v2);
             flagValueSub(temp_v3,1);
             mapMainStartEntry("scr_trap_faild_1");
           }
@@ -524,8 +524,8 @@ LAB_002da3cc:
           }
           else {
             temp_v2 = temp_v3;
-            FUN_0015f858(temp_v3,0);
-            FUN_003180c4(0,temp_v2);
+            dataFindKindRecordWithAocOverrides(temp_v3,0);
+            scrSetStringSlot(0,temp_v2);
             flagValueSub(temp_v3,1);
             temp_v11 = 0x2dab4c;
           }
@@ -549,7 +549,7 @@ LAB_002da3cc:
         }
         break;
       case 7:
-        temp_v6 = FUN_002e07f4();
+        temp_v6 = pairedAvailabilityBothReady();
         if (temp_v6 != 0) {
           temp_v6 = mapTrapGetUnk38();
           *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
@@ -664,7 +664,7 @@ LAB_002dad8c:
               }
             }
             else {
-              temp_v6 = FUN_002e07f4();
+              temp_v6 = pairedAvailabilityBothReady();
               if (temp_v6 != 0) {
                 mapTrapGetUnk38();
                 *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
@@ -784,13 +784,13 @@ LAB_002dad8c:
   else {
     temp_v6 = linkHolderCheckFirst(*(unsigned int *)(g_lmapScene + 0x1a8));
     if (temp_v6 != 0) {
-      temp_v6 = FUN_002e07f4();
+      temp_v6 = pairedAvailabilityBothReady();
       if (temp_v6 != 0) {
         temp_v6 = (int)DAT_005f19d0;
         if (temp_v6 != 0) {
           temp_v0 = temp_v6;
-          FUN_0015f858(temp_v6,0);
-          FUN_003180c4(0,temp_v0);
+          dataFindKindRecordWithAocOverrides(temp_v6,0);
+          scrSetStringSlot(0,temp_v0);
           flagValueSub(temp_v6,1);
           mapMainStartEntry("scr_trap_faild_3");
           FUN_001681c4();

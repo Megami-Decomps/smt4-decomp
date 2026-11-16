@@ -19,8 +19,8 @@ typedef struct GridOwner0034d884 {
 } GridOwner0034d884;
 
 s32 idSetFindSubjectIndex(Grid0034d884 *grid, GridCell0034d884 *cell);
-Grid0034d884 *FUN_0027da30(Grid0034d884 *grid, s32 id);
-void FUN_0027d9e8(Grid0034d884 *grid, u32 slot);
+Grid0034d884 *btlFindEntryBlockByMemberId(Grid0034d884 *grid, s32 id);
+void idSlotsFindEntryById(Grid0034d884 *grid, u32 slot);
 
 /* Finds a cell by index, resolves its slot, then applies the selected slot. */
 void gridCellSlotApply(GridOwner0034d884 *owner, s32 index)
@@ -28,7 +28,7 @@ void gridCellSlotApply(GridOwner0034d884 *owner, s32 index)
     GridCell0034d884 *cell = (GridCell0034d884 *)(owner->grid->cells + index * 0x114);
     s32 slot = idSetFindSubjectIndex(owner->grid, cell);
 
-    FUN_0027d9e8(owner->grid, FUN_0027da30(owner->grid, cell->id)->slots[slot]);
+    idSlotsFindEntryById(owner->grid, btlFindEntryBlockByMemberId(owner->grid, cell->id)->slots[slot]);
 }
 
 } /* extern "C" */

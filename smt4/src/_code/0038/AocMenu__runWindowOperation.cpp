@@ -34,7 +34,7 @@ extern AocBlock *g_aocMain;
 s32 strIsEmpty(RequestParameters *event);
 s32 byteIsAtLeast100(RequestParameters *event);
 void jobStopAndClearFlags(u32 *job);
-void FUN_00233db8(u32 *job, s32 mode);
+void aocLoadingTaskStart(u32 *job, s32 mode);
 void aocMenuSetButtonHelp(u32 *job, s32 a, s32 b);
 void FUN_00234124(u32 *job, RequestParameters *event);
 s32 FUN_0026b564(void);
@@ -66,7 +66,7 @@ void AocMenu::runWindowOperation()
         if (FUN_0026b564() != 0) {
             ifTouchRegionClearAll(job + 0xba);
             FUN_00233818(job + 0xad);
-            FUN_00233db8(job, 0);
+            aocLoadingTaskStart(job, 0);
             FUN_00233fcc(job + 0x83, 0);
             job[2] = 2;
             job[0x82] = reinterpret_cast<u32>(job + 0x83);
@@ -110,7 +110,7 @@ void AocMenu::runWindowOperation()
         FUN_00233fcc(job + 0x83, 1);
         job[2] = 4;
         job[0x82] = reinterpret_cast<u32>(job + 0x83);
-        FUN_00233db8(job, 1);
+        aocLoadingTaskStart(job, 1);
         return;
     case 4: {
         RequestParameters polled = operation->getEvent();

@@ -14,7 +14,7 @@ struct PositionedMenuDrawWork {
     UiSpriteState position;
 };
 extern "C" {
-s32 FUN_001692ac(u32 first, u32 second);
+s32 renderCtxPackPassFlags(u32 first, u32 second);
 s32 vec2GetYInt(const UiSpriteState *position);
 void FUN_003f66dc(PositionedMenuDrawWork *work, s32 x, s32 y, f32 speed);
 void efctSetSpeed(f32 speed);
@@ -25,9 +25,9 @@ s32 FUN_003f7f90(PositionedMenuDrawWork *work, s32 value)
 {
     if (work->state == 0 || work->state == 1)
         return 0;
-    FUN_00157558(g_renderCtx);
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     RenderCtxA *context = g_renderCtx;
-    renderCtxPushA(context, FUN_001692ac(1, 0));
+    renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
     s32 x = vec2GetXInt(&work->position);
     s32 y = vec2GetYInt(&work->position);
     f32 speed = vec2GetSpeed(&work->position);
@@ -37,7 +37,7 @@ s32 FUN_003f7f90(PositionedMenuDrawWork *work, s32 value)
         break;
     default:
         efctSetSpeed(speed);
-        FUN_001835b4(2, 0x31, 0xAC, x, y, 0x33);
+        texDrawTableEntryAtStoredOrigin(2, 0x31, 0xAC, x, y, 0x33);
         efctSetSpeed(1.0f);
         break;
     }

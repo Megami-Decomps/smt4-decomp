@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00164b5c(int, int, int, unsigned int, unsigned int, unsigned int);
-int FUN_001835b4(...);
+int texDrawCompositeSprite(int, int, int, unsigned int, unsigned int, unsigned int);
+int texDrawTableEntryAtStoredOrigin(...);
 int dataTable1bOr1cGetRecord(void);
 
 /* stack frame of param_6: 4 slot(s), 16 byte(s) */
@@ -18,8 +18,8 @@ typedef struct {
 
 extern int g_uiQuest; /* 0x57f28c */
 
-/* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: FUN_001835b4. */
+/* Supplied declaration required: texDrawCompositeSprite. */
+/* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 extern int FUN_003de75c(void);
 extern int recordIsAvailable(int);
@@ -61,7 +61,7 @@ FUN_0023dedc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
     if (temp_v0 != 0) {
       temp_v0 = FUN_004186e0();
       if (temp_v0 == 0) {
-        FUN_00164b5c(2,0x1e,0xc,temp_v6,param_3,param_4);
+        texDrawCompositeSprite(2,0x1e,0xc,temp_v6,param_3,param_4);
         if (param_6 != 0) {
           return 0xf5ff9fff;
         }
@@ -70,14 +70,14 @@ FUN_0023dedc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
         }
         return 0x57d8ffff;
       }
-      FUN_001835b4(2,0x1e,0x92);
+      texDrawTableEntryAtStoredOrigin(2,0x1e,0x92);
     }
     else {
       temp_v0 = partyEntryFlagsBit3(temp_v5);
       if (temp_v0 == 0) {
         return temp_v2;
       }
-      FUN_001835b4(2,0x1e,0x93,temp_v6,param_3,param_4);
+      texDrawTableEntryAtStoredOrigin(2,0x1e,0x93,temp_v6,param_3,param_4);
     }
   }
   else {
@@ -91,7 +91,7 @@ FUN_0023dedc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
         if (temp_v0 != 0) {
           temp_v0 = FUN_004186e0();
           if (temp_v0 == temp_v5) {
-            FUN_00164b5c(2,0x1e,0xd,temp_v6,param_3,param_4);
+            texDrawCompositeSprite(2,0x1e,0xd,temp_v6,param_3,param_4);
             if (param_6 != 0) {
               return 0xf5ff9fff;
             }
@@ -104,20 +104,20 @@ FUN_0023dedc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
           if (temp_v0 == 0) {
             return temp_v2;
           }
-          FUN_001835b4(2,0x1e,0x93,temp_v6,param_3,param_4);
+          texDrawTableEntryAtStoredOrigin(2,0x1e,0x93,temp_v6,param_3,param_4);
           return temp_v2;
         }
         temp_v0 = recordCategoryNineIsActiveInMode24(temp_v5);
         if (temp_v0 != 0) {
-          FUN_001835b4(2,0x1e,0x91,temp_v6,param_3,param_4);
+          texDrawTableEntryAtStoredOrigin(2,0x1e,0x91,temp_v6,param_3,param_4);
         }
         else {
           temp_v0 = partyEntryFlagsBit3(temp_v5);
           if (temp_v0 != 0) {
-            FUN_001835b4(2,0x1e,0x93,temp_v6,param_3,param_4);
+            texDrawTableEntryAtStoredOrigin(2,0x1e,0x93,temp_v6,param_3,param_4);
           }
           else {
-            FUN_001835b4(2,0x1e,0x91,temp_v6,param_3,param_4);
+            texDrawTableEntryAtStoredOrigin(2,0x1e,0x91,temp_v6,param_3,param_4);
           }
         }
       }
@@ -126,7 +126,7 @@ FUN_0023dedc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
         if (temp_v0 == 0) {
           return temp_v2;
         }
-        FUN_001835b4(2,0x1e,0x93,temp_v6,param_3,param_4);
+        texDrawTableEntryAtStoredOrigin(2,0x1e,0x93,temp_v6,param_3,param_4);
       }
     }
     else {
@@ -144,21 +144,21 @@ FUN_0023dedc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
       if (temp_v0 == 0) {
         temp_v0 = partyEntryFlagsBit3(temp_v5);
         if (temp_v0 == 0) {
-          FUN_001835b4(2,0x1e,0xc2,temp_v6,param_3,param_4);
+          texDrawTableEntryAtStoredOrigin(2,0x1e,0xc2,temp_v6,param_3,param_4);
           return temp_v2;
         }
-        FUN_001835b4(2,0x1e,0x93,temp_v6,param_3,param_4);
+        texDrawTableEntryAtStoredOrigin(2,0x1e,0x93,temp_v6,param_3,param_4);
         return temp_v2;
       }
       if (temp_v3 != 0) {
-        FUN_00164b5c(2,0x1e,0xe,temp_v6,param_3,param_4);
+        texDrawCompositeSprite(2,0x1e,0xe,temp_v6,param_3,param_4);
         return temp_v2;
       }
       temp_v0 = partyEntryFlagsBit3(temp_v5);
       if (temp_v0 == 0) {
         return temp_v2;
       }
-      FUN_001835b4(2,0x1e,0x93,temp_v6,param_3,param_4);
+      texDrawTableEntryAtStoredOrigin(2,0x1e,0x93,temp_v6,param_3,param_4);
     }
   }
   if (param_6 != 0) {

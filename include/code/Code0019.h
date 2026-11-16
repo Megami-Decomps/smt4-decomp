@@ -9,6 +9,6 @@ extern "C" {
 
 s32 FUN_0019acdc(s32 id, s32 flag);
 
-u16 FUN_0019e52c(u32 key);
+u16 dataTable10FindValue(u32 key);
 
 } /* extern "C" */

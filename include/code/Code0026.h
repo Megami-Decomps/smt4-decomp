@@ -4,7 +4,7 @@
 /* Functions in the 0x00260000 code block whose subsystem is not known yet; each declaration matches its definition. */
 extern "C" {
 
-int FUN_002613f0(int index);
+int saveGetSelectedRecordSlot(int index);
 
 s32 FUN_002621b4(u32 user, s32 target, u32 id, s32 *result);
 

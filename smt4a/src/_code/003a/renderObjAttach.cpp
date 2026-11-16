@@ -13,7 +13,7 @@ extern u32 g_renderCtx;
 extern void jobGetWork(u32 job);
 extern RenderRes *asdTMTexTableGetNode(s32 a, s32 b);
 extern void renderCtxSelectTexture(u32 ctx, u32 value);
-extern void FUN_00157558(u32 ctx);
+extern void renderCtxSelectDisplayAreaForStereoMode(u32 ctx);
 extern void FUN_00416664(void *p);
 
 u32 renderObjAttach(u32 job)
@@ -26,7 +26,7 @@ u32 renderObjAttach(u32 job)
     if (obj != NULL && obj->entries != NULL) {
         res = asdTMTexTableGetNode(8, 0);
         renderCtxSelectTexture(g_renderCtx, res->unk08);
-        FUN_00157558(g_renderCtx);
+        renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         FUN_00416664(obj->entries);
     }
     return 0;

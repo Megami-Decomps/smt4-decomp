@@ -27,8 +27,8 @@ struct RenderJobWork {
 extern "C" {
 
 extern u32 g_renderCtx; /* 0x59dbb4 */
-void FUN_00157558(u32 context);
-u8 FUN_00154edc(s32 mode, RenderTargetSize *target);
+void renderCtxSelectDisplayAreaForStereoMode(u32 context);
+u8 gxCopyFramebufferToSurface(s32 mode, RenderTargetSize *target);
 
 /* Job step: when a render is pending and not done, sizes the target 512x512, renders it and marks the job done. */
 u32 FUN_0013e7c4(u32 job)
@@ -36,10 +36,10 @@ u32 FUN_0013e7c4(u32 job)
     RenderJobWork *work = (RenderJobWork *)jobGetWork(job);
 
     if (work->flags.pending != 0 && work->flags.done == 0) {
-        FUN_00157558(g_renderCtx);
+        renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         work->target->width = 0x200;
         work->target->height = 0x200;
-        work->flags.result = FUN_00154edc(0, work->target);
+        work->flags.result = gxCopyFramebufferToSurface(0, work->target);
         work->flags.done = 1;
         return 0;
     }

@@ -22,7 +22,7 @@ struct GimicTable {
 
 extern "C" {
 extern GimicTable *g_mapGimic;
-void FUN_003fd7c0(u32 controller, u32 motion, s32 mode, f32 blend);
+void moriModelUnitStartMaterialAnimation(u32 controller, u32 motion, s32 mode, f32 blend);
 
 // Start motion on every active map gimmick with the requested id.
 void FUN_003a2818(s32 id, u32 motion)
@@ -31,7 +31,7 @@ void FUN_003a2818(s32 id, u32 motion)
         GimicTable *table = g_mapGimic;
         GimicSlot *slot = &table->slots[index];
         if (slot->active != 0 && slot->id == id) {
-            FUN_003fd7c0(slot->obj->handle, motion, 2, 0.0f);
+            moriModelUnitStartMaterialAnimation(slot->obj->handle, motion, 2, 0.0f);
         }
     }
 }

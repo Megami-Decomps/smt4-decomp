@@ -2,8 +2,8 @@
 #include "gamedata/Table04Record.h"
 
 extern "C" {
-s32 FUN_003811ec(const s32 *left, const s32 *right);
-s32 FUN_003a6868(s32 id);
+s32 itemSortCompareByCategoryAndId(const s32 *left, const s32 *right);
+s32 itemGetSortCategory(s32 id);
 s32 idIsAbove400(s32 id);
 
 // Compare by descending category rank, ascending record key, then the existing tie break.
@@ -15,7 +15,7 @@ s32 itemCompareCategoryDescendingValueAscending(const s32 *left, const s32 *righ
         leftRank = 99;
         leftKey = 0;
     } else {
-        leftRank = FUN_003a6868(*left);
+        leftRank = itemGetSortCategory(*left);
         leftKey = dataTable04FindById(*left)->listing.sortKey;
     }
     s32 rightRank;
@@ -24,7 +24,7 @@ s32 itemCompareCategoryDescendingValueAscending(const s32 *left, const s32 *righ
         rightRank = 99;
         rightKey = 0;
     } else {
-        rightRank = FUN_003a6868(*right);
+        rightRank = itemGetSortCategory(*right);
         rightKey = dataTable04FindById(*right)->listing.sortKey;
     }
     s32 difference = rightRank - leftRank;
@@ -32,6 +32,6 @@ s32 itemCompareCategoryDescendingValueAscending(const s32 *left, const s32 *righ
         difference = leftKey - rightKey;
     if (difference != 0)
         return difference;
-    return FUN_003811ec(left, right);
+    return itemSortCompareByCategoryAndId(left, right);
 }
 }

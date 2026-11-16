@@ -25,7 +25,7 @@ extern "C" void FUN_0048821c(NaviMainA *navigation, s32 mapId)
     if (mapId >= 100) {
         view->localMap = 0;
         if (FUN_004931c4() == 0 && view->specialTexturesLoaded == 0) {
-            FUN_0014afd0(19, 6);
+            asdTMTexTablePrepareNodeImage(19, 6);
             view->specialTexturesLoaded = 1;
         }
         FUN_0049105c(navigation, mapId);

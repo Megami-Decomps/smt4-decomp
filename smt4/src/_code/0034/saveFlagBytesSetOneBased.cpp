@@ -1,13 +1,13 @@
 #include "common.h"
 
 extern "C" {
-u8* FUN_001c35e8(void);
+u8* saveGetIndexedFlagBytes(void);
 
 // Sets or clears the one-based flag in the saved bit array.
 void saveFlagBytesSetOneBased(s32 id, s32 enabled)
 {
     s32 index = id - 1;
-    u8* flags = FUN_001c35e8();
+    u8* flags = saveGetIndexedFlagBytes();
     u8* byte = &flags[index / 8];
     s32 bit = (id - 1) % 8;
     if (enabled != 0) {

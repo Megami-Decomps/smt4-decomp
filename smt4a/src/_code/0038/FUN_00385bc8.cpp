@@ -5,7 +5,7 @@ extern "C" {
 u32 scrGetCommandFrame(void);
 s32 scrGetArg(u32 index);
 s32 FUN_00162ea4(void);
-void FUN_00212204(s32 arg);
+void screenFadeSlotReset(s32 arg);
 s32 FUN_00163e84(s32 arg);
 void slotSetRequest(s32 slot, s32 value, s32 arg);
 
@@ -20,7 +20,7 @@ s32 FUN_00385bc8(void)
         return 0;
     }
     if (FUN_00162ea4() != 0) {
-        FUN_00212204(0);
+        screenFadeSlotReset(0);
         return 1;
     }
     if (FUN_00163e84(0) != 0) {

@@ -11,10 +11,10 @@ int buttonHelpSetText(...);
 int FUN_0029efd8(...);
 int uiScrollHandleActionsOrTouch(int, unsigned int, int, int, int, int, char [4], int, int);
 int libc_bsearch(...);
-int FUN_002b8584(int, int);
+int ifTouchRegionAddRequested(int, int);
 int ifTouchRegionRemove(void);
 int eventQueueAddUniqueIfValid(...);
-int FUN_002bf818(...);
+int uiSpriteAdvanceAnimation(...);
 int FUN_002c1658(...);
 
 /* stack frame of void: 7 slot(s), 23 byte(s) */
@@ -41,11 +41,11 @@ extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: libc_bsearch. */
-/* Supplied declaration required: FUN_002b8584. */
+/* Supplied declaration required: ifTouchRegionAddRequested. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002bf818. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
@@ -97,14 +97,14 @@ unsigned int FUN_001a1f8c(void)
     do {
       if (temp_v5 <= *(int *)(temp_v0 + 0x748)) {
         temp_v6 = temp_v0 + temp_v5 * 0x8c;
-        FUN_002bf818(temp_v6 + 0x28);
+        uiSpriteAdvanceAnimation(temp_v6 + 0x28);
         if ((temp_v9 - 1 <= temp_v5) && (*(char *)(temp_v6 + 0xb2) != '\0')) {
           *(unsigned int *)(temp_v0 + 0x744) = 2;
           if (*(char *)(temp_v0 + 0x74e) != '\x02') {
             temp_v6 = 0;
             if (temp_v6 < temp_v9) {
               do {
-                temp_v3 = FUN_002b8584(0x1e,temp_v6 + 7);
+                temp_v3 = ifTouchRegionAddRequested(0x1e,temp_v6 + 7);
                 temp_v4 = temp_v6 * 2;
                 temp_v6 = temp_v6 + 1;
                 *(unsigned short *)(temp_v0 + temp_v4 + 0x772) = temp_v3;
@@ -121,7 +121,7 @@ unsigned int FUN_001a1f8c(void)
             temp_v6 = 0;
             if (temp_v6 < temp_v9) {
               do {
-                temp_v3 = FUN_002b8584(0x1e,temp_v6 + 0x2b);
+                temp_v3 = ifTouchRegionAddRequested(0x1e,temp_v6 + 0x2b);
                 temp_v4 = temp_v6 * 2;
                 temp_v6 = temp_v6 + 1;
                 *(unsigned short *)(temp_v0 + temp_v4 + 0x772) = temp_v3;
@@ -149,11 +149,11 @@ LAB_001a2150:
           temp_v6 = FUN_0029ee54(temp_v10);
           temp_v4 = FUN_0029d644(temp_v10);
           if (temp_v4 < temp_v6) {
-            temp_v3 = FUN_002b8584(0x1e,0x46);
+            temp_v3 = ifTouchRegionAddRequested(0x1e,0x46);
             *(unsigned short *)(temp_v0 + 0x76c) = temp_v3;
-            temp_v3 = FUN_002b8584(0x1e,0x47);
+            temp_v3 = ifTouchRegionAddRequested(0x1e,0x47);
             *(unsigned short *)(temp_v0 + 0x76e) = temp_v3;
-            temp_v3 = FUN_002b8584(0x1e,0x48);
+            temp_v3 = ifTouchRegionAddRequested(0x1e,0x48);
             *(unsigned short *)(temp_v0 + 0x770) = temp_v3;
             *(short *)(temp_v0 + 0x786) = *(short *)(temp_v0 + 0x786) + 3;
           }
@@ -163,13 +163,13 @@ LAB_001a2150:
     } while (temp_v5 < temp_v9);
     break;
   case 2:
-    FUN_002bf818(DAT_0043dd24 + 0x5a0);
-    FUN_002bf818(temp_v0 + 0x62c);
+    uiSpriteAdvanceAnimation(DAT_0043dd24 + 0x5a0);
+    uiSpriteAdvanceAnimation(temp_v0 + 0x62c);
     temp_v9 = temp_v0 + 0x788;
     temp_v10 = FUN_0029ee54();
     temp_v5 = FUN_0029d644(temp_v9);
     if (temp_v5 < temp_v10) {
-      FUN_002bf818(temp_v0 + 0x6b8);
+      uiSpriteAdvanceAnimation(temp_v0 + 0x6b8);
     }
     temp_v5 = resourceRunOperationIfUnblocked(temp_v9);
     temp_v6 = FUN_0029efa8(temp_v9);
@@ -308,12 +308,12 @@ LAB_001a2150:
     buttonHelpSetText(puVar13,0x323232ff);
     break;
   case 3:
-    FUN_002bf818(DAT_0043dd24 + 0x5a0);
-    FUN_002bf818(temp_v0 + 0x62c);
+    uiSpriteAdvanceAnimation(DAT_0043dd24 + 0x5a0);
+    uiSpriteAdvanceAnimation(temp_v0 + 0x62c);
     temp_v9 = FUN_0029ee54();
     temp_v10 = FUN_0029d644(temp_v0 + 0x788);
     if (temp_v10 < temp_v9) {
-      FUN_002bf818(temp_v0 + 0x6b8);
+      uiSpriteAdvanceAnimation(temp_v0 + 0x6b8);
     }
     temp_v9 = DAT_0043dd24;
     if (*(char *)(temp_v0 + 0x74e) != '\x02') {

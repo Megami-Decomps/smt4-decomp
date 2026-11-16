@@ -7,8 +7,8 @@ extern "C" {
 int FUN_001e33e4(void);
 int FUN_0021e16c(void);
 int nodeSetScale(unsigned int, int);
-int FUN_0025bed8(...);
-int FUN_00266f30(void);
+int groupedFileTablesCountRecordsOfKind(...);
+int dataTable2AGetEntryWithAoc(void);
 int lightOwnerRegister(int, int);
 int textFormatBuffer(unsigned char [68], unsigned char *);
 int vectorQueuePushPosition(void);
@@ -26,8 +26,8 @@ extern int *g_deferredMapModels; /* 0x447e58 */
 /* Supplied declaration required: FUN_001e33e4. */
 /* Supplied declaration required: FUN_0021e16c. */
 /* Supplied declaration required: nodeSetScale. */
-/* Supplied declaration required: FUN_0025bed8. */
-/* Supplied declaration required: FUN_00266f30. */
+/* Supplied declaration required: groupedFileTablesCountRecordsOfKind. */
+/* Supplied declaration required: dataTable2AGetEntryWithAoc. */
 extern int asdMdlManagerClone(int, unsigned int);
 extern int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: lightOwnerRegister. */
@@ -76,7 +76,7 @@ unsigned int FUN_001e34fc(int param_1,unsigned int param_2,int param_3)
            (temp_v3 = modelHasLoadedAttachment(g_deferredMapModels[temp_v4 * 0xe + 0xf]), temp_v3 != 0)) {
           lightOwnerRegister(piVar9[temp_v4 * 0xe + 0xf],1);
           temp_v3 = g_deferredMapModels[1];
-          FUN_00266f30();
+          dataTable2AGetEntryWithAoc();
           FUN_002fb4a4();
           if (*(char *)(temp_v3 + 0x33) == '\x13') {
             nodeSetScale(*(unsigned int *)(piVar9[temp_v4 * 0xe + 0xf] + 8),0);
@@ -114,13 +114,13 @@ unsigned int FUN_001e34fc(int param_1,unsigned int param_2,int param_3)
       for (psVar8 = (short *)g_deferredMapModels[1]; (int)psVar8 < temp_v3;
           psVar8 = (short *)((int)psVar8 + 1)) {
         psVar3 = psVar8;
-        FUN_00266f30();
+        dataTable2AGetEntryWithAoc();
         temp_v4 = g_aocSystem;
-        FUN_0025bed8(g_aocSystem,0x24);
+        groupedFileTablesCountRecordsOfKind(g_aocSystem,0x24);
         if (temp_v4 != 0) {
           if (*psVar3 != -1) goto LAB_001e36a4;
           temp_v4 = g_aocSystem;
-          FUN_0025bed8(g_aocSystem,0x24,0);
+          groupedFileTablesCountRecordsOfKind(g_aocSystem,0x24,0);
           if (temp_v3 - temp_v4 <= (int)psVar8) {
             piVar9 = g_deferredMapModels;
             *g_deferredMapModels = 0;
@@ -165,7 +165,7 @@ LAB_001e3758:
       piVar9 = g_deferredMapModels;
       temp_v4 = g_deferredMapModels[2];
       temp_v3 = g_deferredMapModels[1];
-      FUN_00266f30();
+      dataTable2AGetEntryWithAoc();
       *(unsigned short *)(piVar9 + temp_v4 * 0xe + 0xd) = *(unsigned short *)(temp_v3 + 4);
       *(unsigned short *)((int)piVar9 + temp_v4 * 0x38 + 0x36) = *(unsigned short *)(temp_v3 + 6);
       *(unsigned char *)((int)piVar9 + temp_v4 * 0x38 + 0xf) = 0;

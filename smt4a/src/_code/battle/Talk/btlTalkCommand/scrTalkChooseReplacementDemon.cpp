@@ -11,7 +11,7 @@ const TalkReplacementPlayer *gameGetPlayerData();
 s32 gameStockContainsEntry(u16);
 void *asdMemoryAllocTracked(u32, u32, u32, u32, u32);
 s32 randBetween(s32, s32);
-void FUN_00180118(u16);
+void dataTable01GetRecordWithAocOverride(u16);
 s32 randRange(u32);
 void scrSetResult(s32);
 void asdMemFree(void *);
@@ -46,7 +46,7 @@ u32 scrTalkChooseReplacementDemon()
                 const Table00Record *definition = dataTable00FindById((u16)id);
                 if (lower <= demon->level && demon->level <= upper && (definition->flags & 0x80) &&
                     !gameStockContainsEntry(demon->id)) {
-                    FUN_00180118(demon->id);
+                    dataTable01GetRecordWithAocOverride(demon->id);
                     candidates[count++] = demon->id;
                 }
             }

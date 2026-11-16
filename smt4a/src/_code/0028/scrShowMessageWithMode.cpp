@@ -17,7 +17,7 @@ extern MessageMain g_messageMain;
 u32 scrGetCommandOwner(void);
 u32 scrGetArg(u32 index);
 u32 scrGetCommandFrame(void);
-s32 FUN_0021bdac(u32 a, u32 b, u32 c, s32 d, s32 e, s32 f);
+s32 messageWindowShowOrPoll(u32 a, u32 b, u32 c, s32 d, s32 e, s32 f);
 
 static void showMessage(s32 mode)
 {
@@ -25,10 +25,10 @@ static void showMessage(s32 mode)
     u32 b = scrGetArg(0);
     u32 c = scrGetCommandFrame();
 
-    FUN_0021bdac(a, b, c, mode, 0, 0);
+    messageWindowShowOrPoll(a, b, c, mode, 0, 0);
 }
 
-/* Script command: puts the message state in mode 0x15 and starts FUN_0021bdac with the first argument. */
+/* Script command: puts the message state in mode 0x15 and starts messageWindowShowOrPoll with the first argument. */
 void scrShowMessageWithMode(void)
 {
     if (g_messageMain.state != NULL) {

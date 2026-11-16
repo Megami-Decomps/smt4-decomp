@@ -76,10 +76,10 @@ s32 FUN_00247f0c();
 s32 FUN_001241a8();
 
 void cameraExportParameters(void *camera, CutRef *ref);
-void FUN_0029c2cc(CutRef *ref, s32 flag);
+void modelRemoveFromSlotList(CutRef *ref, s32 flag);
 void FUN_0024edd4(CutNodeHead *node, s32 index);
 void FUN_0028703c(u32 object);
-void FUN_0029bb14(u32 object);
+void modelSetScale(u32 object);
 s32 jobIsValid(u32 job);
 void jobSavePositionSnapshot(u32 job);
 void bustupCutAnimAssignSlot(u32 job, s32 index);
@@ -135,10 +135,10 @@ void FUN_002205a4(s32 id, s32 easeKind, s32 frames)
 
     cameraExportParameters(anim->camera, anim->ref);
     if (anim->dirty != 0)
-        FUN_0029c2cc(anim->ref, 0);
+        modelRemoveFromSlotList(anim->ref, 0);
     cutRefreshNodes(anim->ref->nodes);
     FUN_0028703c((u32)anim->node->extra);
-    FUN_0029bb14((u32)anim->node->extra);
+    modelSetScale((u32)anim->node->extra);
 
     s32 (*ease)() = FUN_0026e70c;
     if (easeKind == CUT_EASE_A)
@@ -174,7 +174,7 @@ void FUN_002205a4(s32 id, s32 easeKind, s32 frames)
     anim->dirty = 0;
     cutRefreshNodes(anim->ref->nodes);
     FUN_0028703c((u32)anim->node->extra);
-    FUN_0029bb14((u32)anim->node->extra);
+    modelSetScale((u32)anim->node->extra);
     cutRefreshNodes(anim->node->extra->first);
     cutRefreshNodes(anim->node->extra->second);
     anim->state = CUT_STATE_SWITCHING;

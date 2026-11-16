@@ -25,7 +25,7 @@ extern "C" {
 extern RenderCtx *g_titleScene;
 void camSetMatrixB(RenderCtx *context, const Matrix44 *matrix);
 void renderCtxSelectBlendPreset(u32 mode);
-s32 FUN_002c5d80(u32 kind, u32 value);
+s32 renderCtxPackPassFlags(u32 kind, u32 value);
 void FUN_00347198(TiledIndexMesh *mesh);
 void FUN_00346f2c(TiledIndexMesh *mesh);
 void FUN_00343778(RenderCtx *context, const TiledMeshRowDrawState *row);
@@ -44,9 +44,9 @@ void FUN_0024f5ec(TiledMeshDrawWork *work, u32 mode)
     renderCtxSelectBlendPreset(mode);
     RenderCtx *context = g_titleScene;
     if ((work->flags & 0x100) != 0) {
-        renderCtxPushA(context, FUN_002c5d80(5, 0));
+        renderCtxPushA(context, renderCtxPackPassFlags(5, 0));
     } else {
-        renderCtxPushA(context, FUN_002c5d80(1, 0));
+        renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
     }
     if (work->dirty != 0) {
         FUN_00347198(work->mesh);

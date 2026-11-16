@@ -8,12 +8,12 @@ extern "C" {
 
 int textFormatBuffer(...);
 int textDrawString(...);
-int FUN_00164b5c(...);
+int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
 int asdTMTexTableEntryAt(...);
 int fontMeasureLineAdvance(...);
 int FUN_002c0940(...);
-int FUN_00344cd0(...);
+int uiDrawListScrollBar(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of void: 10 slot(s), 40 byte(s) */
@@ -36,7 +36,7 @@ extern int g_playLog; /* 0x57f278 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: FUN_00164b5c. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
@@ -45,7 +45,7 @@ extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_002c0940. */
-/* Supplied declaration required: FUN_00344cd0. */
+/* Supplied declaration required: uiDrawListScrollBar. */
 extern int uiSearchPrimary(int);
 
 
@@ -80,27 +80,27 @@ void FUN_00214dc4(void)
       efctSetSpeed();
       if (temp_v8 == 0) {
         if (*(char *)(temp_v13 + 0x88) != '\0') {
-          FUN_001835b4(2,0x25,0,temp_v1,0,0xb);
-          FUN_001835b4(2,0x25,1,temp_v1,0,0xb);
+          texDrawTableEntryAtStoredOrigin(2,0x25,0,temp_v1,0,0xb);
+          texDrawTableEntryAtStoredOrigin(2,0x25,1,temp_v1,0,0xb);
           if (*(char *)(temp_v0 + 0x489) != '\0') {
-            FUN_001835b4(2,0x25,0x1e,temp_v1,0,0x10);
+            texDrawTableEntryAtStoredOrigin(2,0x25,0x1e,temp_v1,0,0x10);
           }
           else {
-            FUN_001835b4(2,0x25,0x1f,temp_v1,0,0x10);
+            texDrawTableEntryAtStoredOrigin(2,0x25,0x1f,temp_v1,0,0x10);
           }
         }
         else {
-          FUN_00164b5c(2,0x25,0,temp_v1,0,0xb);
+          texDrawCompositeSprite(2,0x25,0,temp_v1,0,0xb);
         }
       }
       temp_v2 = uiSearchPrimary(temp_v0 + 0x2dc);
       if (temp_v2 - 1 == temp_v8) {
-        FUN_001835b4(2,0x25,0x1d,temp_v1,0,0xb);
-        FUN_00344cd0(temp_v0 + 0x2dc,temp_v1,0,0x25,7,8,9,3,5,4,6,(int)*(short *)(temp_v0 + 0x34c),
+        texDrawTableEntryAtStoredOrigin(2,0x25,0x1d,temp_v1,0,0xb);
+        uiDrawListScrollBar(temp_v0 + 0x2dc,temp_v1,0,0x25,7,8,9,3,5,4,6,(int)*(short *)(temp_v0 + 0x34c),
                      (int)*(short *)(temp_v0 + 0x348),(int)*(short *)(temp_v0 + 0x34a),0xb,0);
       }
       temp_v2 = asdTMTexTableEntryAt(0x25,temp_v8 + 0x15);
-      FUN_00164b5c(2,0x25,1,*(short *)(temp_v2 + 8) + temp_v1,(int)*(short *)(temp_v2 + 10),0xb);
+      texDrawCompositeSprite(2,0x25,1,*(short *)(temp_v2 + 8) + temp_v1,(int)*(short *)(temp_v2 + 10),0xb);
       temp_v3 = resourceRunOperationIfUnblocked(temp_v0 + 0x2dc);
       temp_v9 = (unsigned int)*(short *)(temp_v0 + (temp_v3 + temp_v8) * 2 + 0x424);
       temp_v4 = dataTableGet(0x37,0);

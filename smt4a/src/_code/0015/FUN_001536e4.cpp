@@ -2,7 +2,7 @@
 #include "common.h"
 
 extern "C" {
-void FUN_00163aa4(void *, f32);
+void uiSpriteAdvanceAnimation(void *, f32);
 void FUN_00169b30(void *);
 
 void FUN_001536e4(void *owner)
@@ -20,7 +20,7 @@ void FUN_001536e4(void *owner)
         Envelope channels[24];
     };
     EnvelopeOwnerView *state = static_cast<EnvelopeOwnerView *>(owner);
-    FUN_00163aa4(state->animation, 1.0f);
+    uiSpriteAdvanceAnimation(state->animation, 1.0f);
     for (s32 index = 0; index < 24; ++index) {
         Envelope &channel = state->channels[index];
         f32 value = static_cast<f32>(channel.level) * 0.01f;

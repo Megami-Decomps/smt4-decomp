@@ -51,7 +51,7 @@ extern GameStateView g_gameState;
 void controllerSetDestination(MapObjModel *model, Vec3f *position);
 void controllerSetRotationEulerDegrees(MapObjModel *model, f32 x, f32 y, f32 z);
 s32 slots4FGetActiveValue(MapObjModel *model);
-void FUN_003fe86c(MapObjModel *model, u32 index, u8 flags, f32 time, f32 blend);
+void modelPlayClip(MapObjModel *model, u32 index, u8 flags, f32 time, f32 blend);
 
 /* Updates the 24 map objects: applies visibility, then for changed ones their placement and clip. */
 void FUN_0023534c(void)
@@ -79,7 +79,7 @@ void FUN_0023534c(void)
                 controllerSetRotationEulerDegrees(model, 0.0f, slot->yaw, 0.0f);
             }
             if (slots4FGetActiveValue(model) != slot->clip) {
-                FUN_003fe86c(model, slot->clip, 2, 0.0f, 0.0f);
+                modelPlayClip(model, slot->clip, 2, 0.0f, 0.0f);
                 model->speed = 1.0f;
             }
             slot->dirty = 0;

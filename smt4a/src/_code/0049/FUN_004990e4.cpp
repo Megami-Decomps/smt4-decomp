@@ -29,13 +29,13 @@ typedef struct HintWindow {
 } HintWindow;
 
 
-void FUN_00183bb0(void);
-s32 FUN_001692ac(u32 kind, u32 arg);
+void gxResetColorQuadToWhite(void);
+s32 renderCtxPackPassFlags(u32 kind, u32 arg);
 void shopMainDrawPairedJobs(HintWindow *window);
 s32 placeWinGetValue(void);
 s32 FUN_00284f70(void);
 HintLayout *asdTMTexTableEntryAt(u32 kind, u32 index);
-void FUN_00164b5c(s32 a, s32 b, s32 c, s32 x, s32 y, s32 z);
+void texDrawCompositeSprite(s32 a, s32 b, s32 c, s32 x, s32 y, s32 z);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *ctx, f32 depth);
 f32 asdAnimGetTrackLastFrame(u32 animation, s32 track);
 void skinObjectUpdateMatrices(RenderCtxA *ctx);
@@ -44,9 +44,9 @@ void renderCtxResetColorScale(RenderCtxA *ctx);
 /* Draws the hint window's arrows and, when shown, the stepping arrow animation. */
 void FUN_004990e4(HintWindow *window)
 {
-    FUN_00157558(g_renderCtx);
-    FUN_00183bb0();
-    renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
+    gxResetColorQuadToWhite();
+    renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
     if (window->mode != 1) {
         shopMainDrawPairedJobs(window);
         if (placeWinGetValue() != 0) {
@@ -58,13 +58,13 @@ void FUN_004990e4(HintWindow *window)
             if (window->firstArrow != 0) {
                 HintLayout *layout = asdTMTexTableEntryAt(0x20, arrowIds[0]);
 
-                FUN_00164b5c(2, 0x20, 6, layout->x + x, layout->y + y, 13);
+                texDrawCompositeSprite(2, 0x20, 6, layout->x + x, layout->y + y, 13);
                 used = 1;
             }
             if (window->secondArrow != 0) {
                 HintLayout *layout = asdTMTexTableEntryAt(0x20, arrowIds[used]);
 
-                FUN_00164b5c(2, 0x20, 7, layout->x + x, layout->y + y, 13);
+                texDrawCompositeSprite(2, 0x20, 7, layout->x + x, layout->y + y, 13);
             }
         }
         if ((window->flags & 0x2000) != 0 && window->step > 0 && window->step < 20) {

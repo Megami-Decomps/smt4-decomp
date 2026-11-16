@@ -10,14 +10,14 @@ int dataTableGetCount(...);
 int dataTableGetEntries(...);
 
 int asdLoadFileWithSize(...);
-int FUN_0014e188(...);
+int uiSpriteStateInitFromSource(...);
 int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdOperatorNew(...);
 int asdMemoryAllocTracked(...);
 int memAlloc(...);
 int resultReportIfFailed(...);
-int FUN_00178b04(...);
+int asdMemoryAllocTraced(...);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
 int FUN_00184b90(...);
@@ -25,8 +25,8 @@ int __aeabi_memset4(...);
 int FUN_001cd3ec(...);
 int asdLoadFileSyncDefault(...);
 int rebuildFusionCatalogLists(...);
-int FUN_00275bc8(...);
-int FUN_002e3140(...);
+int scrScriptProcessCreate(...);
+int resultHandleFailure(...);
 int sysMemClear(...);
 int FUN_002fb0d4(...);
 int FUN_0031416c(...);
@@ -72,7 +72,7 @@ extern int g_handleRegistry; /* 0x56fcc0 */
 extern int *g_unite; /* 0x57f290 */
 
 /* Supplied declaration required: asdLoadFileWithSize. */
-/* Supplied declaration required: FUN_0014e188. */
+/* Supplied declaration required: uiSpriteStateInitFromSource. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -81,7 +81,7 @@ extern int *g_unite; /* 0x57f290 */
 extern int lmapMainIsRunning(void);
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: resultReportIfFailed. */
-/* Supplied declaration required: FUN_00178b04. */
+/* Supplied declaration required: asdMemoryAllocTraced. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: FUN_00184b90. */
@@ -93,10 +93,10 @@ extern int gameGetSlotRecord(void);
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_001cd3ec. */
 /* Supplied declaration required: asdLoadFileSyncDefault. */
-extern int FUN_0026140c(void);
+extern int saveGetUserSettingsBlock(void);
 /* Supplied declaration required: rebuildFusionCatalogLists. */
-/* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: scrScriptProcessCreate. */
+/* Supplied declaration required: resultHandleFailure. */
 extern int FUN_002e50d4(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002fb0d4. */
@@ -180,11 +180,11 @@ void FUN_002ab804(void)
   FUN_002fb0d4(piVar6,&temp_v8,FUN_0028625c,&temp_v6,
                *(int *)(piVar2[0x249a] + 0xc) + *(int *)(piVar2[0x249a] + 8),0x11,0xfffffffe,0);
   if (((unsigned int)piVar6 & 0x7e00000) != 0x600000 && (int)piVar6 < 0) {
-    FUN_002e3140();
+    resultHandleFailure();
   }
   temp_v1 = gameFlagIsSet(0x418);
   if (temp_v1 == 0) {
-    temp_v1 = FUN_0026140c();
+    temp_v1 = saveGetUserSettingsBlock();
     *(unsigned short *)(temp_v1 + 0x20) = 0xffff;
     *(unsigned short *)(temp_v1 + 0x22) = 0xffff;
     *(unsigned short *)(temp_v1 + 0x24) = 0;
@@ -201,7 +201,7 @@ void FUN_002ab804(void)
     *(unsigned char *)(temp_v1 + 0x36) = *(unsigned char *)(temp_v1 + 0x36) & 0xfc;
     rebuildFusionCatalogLists();
   }
-  temp_v1 = FUN_0026140c();
+  temp_v1 = saveGetUserSettingsBlock();
   if (-1 < *(short *)(temp_v1 + 0x20)) {
     if (*(short *)(temp_v1 + 0x24) == 0) {
       *(unsigned short *)(temp_v1 + 0x20) = 0xffff;
@@ -231,19 +231,19 @@ void FUN_002ab804(void)
   rebuildFusionCatalogLists();
   paramsClearPacket(piVar2 + 1);
   paramsInit(reinterpret_cast<UiResourceParameters *>(piVar2 + 1),&DAT_0052ef50,0x84,&DAT_0052efd4,0x60,0,0,0,0,&DAT_0052f034,0x1dc);
-  FUN_0014e188(piVar2 + 9,0x1a,0,piVar2 + 1,1);
+  uiSpriteStateInitFromSource(piVar2 + 9,0x1a,0,piVar2 + 1,1);
   uiSpriteSelectAnim(piVar2 + 9,0);
-  FUN_0014e188(piVar2 + 0x2c,0x1a,0,piVar2 + 1,1);
+  uiSpriteStateInitFromSource(piVar2 + 0x2c,0x1a,0,piVar2 + 1,1);
   uiSpriteSelectAnim(piVar2 + 0x2c,4);
-  FUN_0014e188(piVar2 + 0x4f,0x1a,0,piVar2 + 1,1);
+  uiSpriteStateInitFromSource(piVar2 + 0x4f,0x1a,0,piVar2 + 1,1);
   uiSpriteSelectAnim(piVar2 + 0x4f,1);
-  FUN_0014e188(piVar2 + 0x72,0x1a,0,piVar2 + 1,1);
+  uiSpriteStateInitFromSource(piVar2 + 0x72,0x1a,0,piVar2 + 1,1);
   FUN_00184b90(piVar2,1);
-  FUN_0014e188(piVar2 + 0x95,0x1a,0,piVar2 + 1,1);
+  uiSpriteStateInitFromSource(piVar2 + 0x95,0x1a,0,piVar2 + 1,1);
   uiSpriteSetKeyframe(piVar2 + 0x95,5,0);
-  FUN_0014e188(piVar2 + 0xb8,0x1a,0,piVar2 + 1,1);
+  uiSpriteStateInitFromSource(piVar2 + 0xb8,0x1a,0,piVar2 + 1,1);
   uiSpriteSelectAnim(piVar2 + 0xb8,2);
-  FUN_0014e188(piVar2 + 0xdb,0x1a,0,piVar2 + 1,1);
+  uiSpriteStateInitFromSource(piVar2 + 0xdb,0x1a,0,piVar2 + 1,1);
   uiSpriteSelectAnim(piVar2 + 0xdb,3);
   loadSlotEnsureLoaded(0x24);
   loadSlotEnsureLoaded(0x22);
@@ -255,7 +255,7 @@ void FUN_002ab804(void)
   puVar3 = &LAB_002abf74;
   asdLoadFileSyncDefault();
   piVar2[0x10a] = (int)puVar3;
-  FUN_00275bc8();
+  scrScriptProcessCreate();
   piVar2[0x10b] = (int)puVar3;
   temp_v1 = lmapSceneGetScript();
   if ((temp_v1 != 0) || (temp_v1 = lmapMainIsRunning(), temp_v1 != 0)) {
@@ -265,13 +265,13 @@ void FUN_002ab804(void)
   }
   asdLoadFileWithSize(&LAB_002abfa0,temp_v12,1);
   temp_v1 = 0x48;
-  FUN_00178b04(0x48,&LAB_002abbd8,0x1d13);
+  asdMemoryAllocTraced(0x48,&LAB_002abbd8,0x1d13);
   if (temp_v1 != 0) {
     _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
   }
   piVar2[0x2484] = temp_v1;
   temp_v2 = 0x20;
-  FUN_00178b04(0x20,&LAB_002abbd8,0x1d15);
+  asdMemoryAllocTraced(0x20,&LAB_002abbd8,0x1d15);
   temp_v1 = 0;
   if (temp_v2 != 0) {
     temp_v1 = modelListInit();
@@ -279,7 +279,7 @@ void FUN_002ab804(void)
   piVar2[0x2482] = temp_v1;
   FUN_001cd3ec();
   temp_v2 = 0x20;
-  FUN_00178b04(0x20,&LAB_002abbd8,0x1d18);
+  asdMemoryAllocTraced(0x20,&LAB_002abbd8,0x1d18);
   temp_v1 = 0;
   if (temp_v2 != 0) {
     temp_v1 = modelListInit();

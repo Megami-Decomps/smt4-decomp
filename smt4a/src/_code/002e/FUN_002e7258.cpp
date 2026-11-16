@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0016e800(void);
+int sysReportCheckFailure(void);
 
-/* Supplied declaration required: FUN_0016e800. */
+/* Supplied declaration required: sysReportCheckFailure. */
 
 
 void FUN_002e7258(int param_1)
@@ -14,7 +14,7 @@ void FUN_002e7258(int param_1)
 {
 /* irregular: 1 native warning(s); review required */
   if (param_1 < 0) {
-    FUN_0016e800();
+    sysReportCheckFailure();
   }
   return;
 }

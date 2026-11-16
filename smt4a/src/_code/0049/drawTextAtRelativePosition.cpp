@@ -11,7 +11,7 @@ extern "C" {
 void drawSetColorFromRGBA8(u32 color);
 void FUN_00180310(u32 drawContext, s32 x, s32 y, u32 option0,
                   u32 option1, u32 option2, const char* format, u32 value);
-void FUN_00183bb0(void);
+void gxResetColorQuadToWhite(void);
 
 // Draw at the combined position plus integer offsets, then finalize the draw.
 void drawTextAtRelativePosition(const DrawPositionView* position, u32 drawContext,
@@ -25,6 +25,6 @@ void drawTextAtRelativePosition(const DrawPositionView* position, u32 drawContex
 
     FUN_00180310(drawContext, drawX, drawY, option0, option1, option2,
                   "%s", value);
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
 }
 }

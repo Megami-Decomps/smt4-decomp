@@ -5,7 +5,7 @@ extern "C" {
 
 void jobStop(u32 job, s32 arg);
 void asdMemFree(void *block);
-void FUN_002c2358(void);
+void frameTexturesRelease(void);
 void objectOwner3Release(BtlStage *stage);
 s32 jobIsValid(u32 job);
 
@@ -21,7 +21,7 @@ void btlStageDestroy(u32 job)
         if (g_btlStage.stage->context != NULL) {
             g_btlStage.stage->context = NULL;
         }
-        FUN_002c2358();
+        frameTexturesRelease();
         objectOwner3Release(stage);
         stage->state = 0;
         asdMemFree(g_btlStage.stage);

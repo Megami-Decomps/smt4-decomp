@@ -10,7 +10,7 @@ extern "C" {
 s32 scrGetArg(s32);
 void scrSetResult(s32);
 s32 btlResolveEntryChoice(s32);
-BtlCombatantEntryA* FUN_003eaf20(BtlMainStateA*);
+BtlCombatantEntryA* btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA*);
 
 /* Test eligible combatants, then the optional special combatant, for an accepted affinity. */
 u32 scrAnyEligibleAffinityClass0Or2(void)
@@ -18,7 +18,7 @@ u32 scrAnyEligibleAffinityClass0Or2(void)
     const s32 stat = scrGetArg(0);
     const s32 kind = btlResolveEntryChoice(scrGetArg(1));
     s32 first, count;
-    FUN_00301a08(kind, reinterpret_cast<s32 *>(reinterpret_cast<u32*>(&first)), reinterpret_cast<s32 *>(reinterpret_cast<u32*>(&count)));
+    btlGetEntryChoiceRange(kind, reinterpret_cast<s32 *>(reinterpret_cast<u32*>(&first)), reinterpret_cast<s32 *>(reinterpret_cast<u32*>(&count)));
     for (s32 index = first; index < first + count; ++index) {
         const BtlCombatantEntryA* entry = &btlGetMainState()->entries[index];
         const u64 flags = entry->flags;
@@ -32,7 +32,7 @@ u32 scrAnyEligibleAffinityClass0Or2(void)
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
-        const BtlCombatantEntryA* entry = FUN_003eaf20(btlGetMainState());
+        const BtlCombatantEntryA* entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL) {
             const u16 encoded = entry->encodedStats.values[stat];
             if ((encoded & 0xFC00) == 0 || (encoded >> 10) == 2) {

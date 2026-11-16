@@ -8,7 +8,7 @@ extern StatusBustUpResources DAT_00588fd8;
 extern void *g_aocSystem;
 s32 gameFlagIsSet(u32 flag);
 void asdTMTexTableReleaseNode(u32 table, u32 node);
-void FUN_001b2d54(void *system, u32 table, u32 node);
+void packageFileDisableByKindName(void *system, u32 table, u32 node);
 
 // Release one portrait reference and unload its texture when the last user leaves.
 void statusBustUpPortraitRelease(s32 id, s32 resolveRecord)
@@ -45,7 +45,7 @@ void statusBustUpPortraitRelease(s32 id, s32 resolveRecord)
                     return;
                 if (asdTMTexTableNodeIsLoaded(alternateTable, id)) {
                     asdTMTexTableReleaseNode(alternateTable, id);
-                    FUN_001b2d54(g_aocSystem, alternateTable, id);
+                    packageFileDisableByKindName(g_aocSystem, alternateTable, id);
                 }
                 ((s8 *)DAT_00588fd8.workB)[id] = 0;
                 return;
@@ -57,7 +57,7 @@ void statusBustUpPortraitRelease(s32 id, s32 resolveRecord)
         return;
     if (asdTMTexTableNodeIsLoaded(table, id)) {
         asdTMTexTableReleaseNode(table, id);
-        FUN_001b2d54(g_aocSystem, table, id);
+        packageFileDisableByKindName(g_aocSystem, table, id);
     }
     ((s8 *)DAT_00588fd8.workA)[id] = 0;
 }

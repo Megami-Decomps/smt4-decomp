@@ -37,7 +37,7 @@ void FUN_00404dd0(CenteredSpriteWork *work, s32 x, s32 y, f32 speed)
     s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
     s32 drawX = reference->x + x + parallax + dx + work->offsets->x;
     s32 drawY = reference->y + work->offsets->y + y + dy;
-    FUN_001835b4(2, work->group, work->index * 1000, drawX, drawY, 0x65);
+    texDrawTableEntryAtStoredOrigin(2, work->group, work->index * 1000, drawX, drawY, 0x65);
     efctSetSpeed(1.0f);
 }
 }

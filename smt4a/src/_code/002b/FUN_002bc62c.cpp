@@ -35,7 +35,7 @@ extern int DAT_005f1c00; /* 0x5f1c00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 extern unsigned int asdTMTexTableGetHeaderValue(unsigned int, unsigned int);
-extern int FUN_001692ac(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: FUN_0019e3d0. */
 /* Supplied declaration required: mathInterpolatePackedTable. */
@@ -72,7 +72,7 @@ unsigned int FUN_002bc62c(void)
   objectPoolUpdate(g_lmapMainState + 0xf4);
   temp_v3 = g_renderCtx;
   if (DAT_005f1bc8 != 0) {
-    temp_v0 = FUN_001692ac(5,1);
+    temp_v0 = renderCtxPackPassFlags(5,1);
     piVar7 = (int *)(temp_v3 + 0x1258);
     temp_v4 = *piVar7;
     temp_v5 = piVar7[temp_v4 + 2];
@@ -96,7 +96,7 @@ unsigned int FUN_002bc62c(void)
   }
   temp_v3 = g_renderCtx;
   if (DAT_005f1c00 != 0) {
-    temp_v0 = FUN_001692ac(5,0);
+    temp_v0 = renderCtxPackPassFlags(5,0);
     piVar7 = (int *)(temp_v3 + 0x1258);
     temp_v4 = *piVar7;
     temp_v5 = piVar7[temp_v4 + 2];
@@ -131,7 +131,7 @@ unsigned int FUN_002bc62c(void)
     temp_v7 = VectorFloatToUnsigned(temp_v6 * 2184.5f,3);
     mathInterpolatePackedTable(temp_v7 & 0xffff);
     temp_v1 = g_renderCtx;
-    temp_v0 = FUN_001692ac(5,0);
+    temp_v0 = renderCtxPackPassFlags(5,0);
     piVar7 = (int *)(temp_v1 + 0x1258);
     temp_v4 = *piVar7;
     temp_v5 = piVar7[temp_v4 + 2];

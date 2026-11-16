@@ -3,11 +3,11 @@
 
 extern "C" {
 
-extern s32 FUN_001ba3d4(s32 index);
+extern s32 flagValueRead(s32 index);
 
 u8 flagValueIsPositive(s32 index)
 {
-    return 0 < FUN_001ba3d4(index);
+    return 0 < flagValueRead(index);
 }
 
 } /* extern "C" */

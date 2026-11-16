@@ -17,8 +17,8 @@ extern GameStateView g_gameState;
 
 
 int CONCAT44(...);
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
+int libm_cosf(void);
+int libm_sinf(void);
 int calcHeadingRoundedToCardinalDirection(void);
 int distSpatial(void);
 int mathAngleDeltaDegrees(void);
@@ -49,8 +49,8 @@ extern int g_lmapScene; /* 0x581288 */
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: calcHeadingRoundedToCardinalDirection. */
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: mathAngleDeltaDegrees. */
@@ -118,10 +118,10 @@ void FUN_002750d8(int param_1,int param_2)
     if (*(short *)(temp_v0 + 0x10) != 2) {
       temp_v3 = temp_v6 * 0.017453292f;
       temp_v9 = temp_v3;
-      FUN_001bc124();
+      libm_sinf();
       g_gameState.f005f1718 = *(float *)(temp_v0 + 0x1c) + temp_v3 * (float)temp_v12;
       g_gameState.f005f171c = *(float *)(temp_v0 + 0x20) + temp_v10;
-      FUN_001bbf0c();
+      libm_cosf();
       temp_v14 = *(float *)(temp_v0 + 0x24) + temp_v9 * (float)temp_v12;
     }
     else {
@@ -138,12 +138,12 @@ void FUN_002750d8(int param_1,int param_2)
       temp_v1 = (int)temp_v9;
       temp_v9 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v9 = temp_v9 * (float)((unsigned long long)temp_v12 >> 0x20);
-      FUN_001bc124();
+      libm_sinf();
       g_gameState.f005f1718 = *(float *)(temp_v0 + 0x1c) + temp_v9 * (float)temp_v12;
       g_gameState.f005f171c = *(float *)(temp_v0 + 0x20) + temp_v10;
       temp_v9 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v9 = temp_v9 * (float)((unsigned long long)temp_v12 >> 0x20);
-      FUN_001bbf0c();
+      libm_cosf();
       temp_v14 = *(float *)(temp_v0 + 0x24) + temp_v9 * (float)temp_v12;
     }
     g_gameState.f005f1720 = temp_v14;
@@ -176,9 +176,9 @@ void FUN_002750d8(int param_1,int param_2)
         temp_v5 = CONCAT44(temp_v4,temp_v6);
         temp_v6 = temp_v6 * (float)((unsigned long long)temp_v12 >> 0x20);
         temp_v4 = temp_v6;
-        FUN_001bc124();
+        libm_sinf();
         g_gameState.f005f1718 = *(float *)(temp_v0 + 0x1c) + temp_v6 * (float)temp_v12;
-        FUN_001bbf0c();
+        libm_cosf();
         temp_v14 = *(float *)(temp_v0 + 0x24) + temp_v4 * (float)temp_v12;
         temp_v15 = g_gameState.f005f170c;
         fStack_60 = g_gameState.f005f1710;
@@ -207,11 +207,11 @@ void FUN_002750d8(int param_1,int param_2)
       if (*(short *)(temp_v0 + 0x10) != 2) {
         temp_v6 = (float)temp_v8 * (float)((unsigned long long)temp_v12 >> 0x20);
         temp_v4 = temp_v6;
-        FUN_001bc124();
+        libm_sinf();
         temp_v11 = (float)temp_v12;
         g_gameState.f005f1718 = *(float *)(temp_v0 + 0x1c) + temp_v6 * temp_v11;
         g_gameState.f005f171c = *(float *)(temp_v0 + 0x20) + temp_v10;
-        FUN_001bbf0c();
+        libm_cosf();
         g_gameState.f005f1720 = *(float *)(temp_v0 + 0x24) + temp_v4 * temp_v11;
       }
       else {
@@ -228,12 +228,12 @@ void FUN_002750d8(int param_1,int param_2)
         temp_v0 = (int)temp_v4;
         temp_v4 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(temp_v2 >> 0x16) & 3);
         temp_v4 = temp_v4 * (float)((unsigned long long)temp_v12 >> 0x20);
-        FUN_001bc124();
+        libm_sinf();
         g_gameState.f005f1718 = *(float *)(g_lmapScene + 0x1c) + temp_v4 * (float)temp_v12;
         g_gameState.f005f171c = *(float *)(g_lmapScene + 0x1c) + temp_v10;
         temp_v4 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(temp_v2 >> 0x16) & 3);
         temp_v4 = temp_v4 * (float)((unsigned long long)temp_v12 >> 0x20);
-        FUN_001bbf0c();
+        libm_cosf();
         g_gameState.f005f1720 = *(float *)(g_lmapScene + 0x1c) + temp_v4 * (float)temp_v12;
       }
     }

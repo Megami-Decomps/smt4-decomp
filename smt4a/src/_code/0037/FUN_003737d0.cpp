@@ -7,7 +7,7 @@
 extern "C" {
 u32 scrGetArg(u32 index);
 u32 btlResolveEntryChoice(u32 choice);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
 void scrSetResult(s32 result);
 
 // Check an encoded statistic's state on eligible combatants or the active override.
@@ -16,7 +16,7 @@ u32 FUN_003737d0(void)
     s32 statistic = scrGetArg(0);
     u32 choice = btlResolveEntryChoice(scrGetArg(1));
     s32 first, count;
-    FUN_00301a08(choice, &first, &count);
+    btlGetEntryChoiceRange(choice, &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         if ((g_btlCandidateMasks.unavailable & entry->flags) == 0 &&
@@ -28,7 +28,7 @@ u32 FUN_003737d0(void)
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
-        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL && (entry->encodedStats.values[statistic] >> 10) == 2) {
             scrSetResult(1);
             return 1;

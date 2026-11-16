@@ -8,7 +8,7 @@ extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
 s32 btlResolveEntryChoice(s32 kind);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
 
 u32 scrCheckUnitStatStageThree()
 {
@@ -16,7 +16,7 @@ u32 scrCheckUnitStatStageThree()
     s32 stat = scrGetArg(1);
     s32 kind = btlResolveEntryChoice(scrGetArg(2));
     s32 first, count;
-    FUN_00301a08(kind, reinterpret_cast<s32 *>((u32 *)&first), reinterpret_cast<s32 *>((u32 *)&count));
+    btlGetEntryChoiceRange(kind, reinterpret_cast<s32 *>((u32 *)&first), reinterpret_cast<s32 *>((u32 *)&count));
     for (s32 index = first; index < first + count; ++index) {
         const BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
@@ -27,7 +27,7 @@ u32 scrCheckUnitStatStageThree()
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
-        const BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        const BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL && entry->id == id &&
             (entry->encodedStats.values[stat] >> 10) == 3) {
             scrSetResult(1);

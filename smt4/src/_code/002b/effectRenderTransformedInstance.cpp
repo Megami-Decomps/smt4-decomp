@@ -205,10 +205,10 @@ extern "C" void effectRenderTransformedInstance(EffectInstance* effect, float ho
     const s32 secondaryIndex = effect->secondaryIndex;
     const s32 parameter = effect->drawParameter;
     if (secondaryIndex >= 0) {
-        FUN_002bf380(
+        texDrawCompositeSprite(
             drawFlags, effect->resource, secondaryIndex, 0, 0, parameter);
     } else {
-        FUN_002bf288(
+        texDrawTableEntryAtStoredOrigin(
             drawFlags, effect->resource, effect->primaryIndex, 0, 0, parameter);
     }
 

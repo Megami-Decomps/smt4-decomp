@@ -58,7 +58,7 @@ void FUN_0035af44(CecProcess* process)
     s32 result = FUN_002fb0d4(&worker->thread, &descriptor, FUN_0028196c, &argument,
                              worker->stack.base + worker->stack.size, 17, -2, 0);
     if ((u32(result) & 0x07E00000) != 0x00600000 && nnResultIsFailure(result)) {
-        FUN_002e3140(result);
+        resultHandleFailure(result);
     }
 }
 }

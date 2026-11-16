@@ -24,8 +24,8 @@ extern "C" {
 AocDrawWork *jobGetWork(u32 job);
 s32 vec2GetXInt(const AocDrawPosition *position);
 s32 vec2GetYInt(const AocDrawPosition *position);
-u32 FUN_001692ac(s32 mode, s32 option);
-void FUN_00164b5c(s32 layer, s32 group, s32 sprite, s32 x, s32 y, u32 flags);
+u32 renderCtxPackPassFlags(s32 mode, s32 option);
+void texDrawCompositeSprite(s32 layer, s32 group, s32 sprite, s32 x, s32 y, u32 flags);
 s32 FUN_00473910(AocMainA *main, s32 id);
 s32 FUN_00473754(AocMainA *main, s32 id, AocDrawText *text);
 SpriteInfo *asdTMTexTableEntryAt(s32 group, s32 sprite);
@@ -46,10 +46,10 @@ extern "C" s32 FUN_0047a298(u32 job)
             return 0;
         s32 x = vec2GetXInt(position);
         s32 y = vec2GetYInt(position);
-        FUN_00157558(g_renderCtx);
+        renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         RenderCtxA *context = g_renderCtx;
-        renderCtxPushA(context, FUN_001692ac(1, 0));
-        FUN_00164b5c(2, 47, 6, x, y, 0x81);
+        renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
+        texDrawCompositeSprite(2, 47, 6, x, y, 0x81);
         AocDrawText text[8];
         u32 color = 0xfc4f46ff;
         s32 count = FUN_00473754(main, FUN_00473910(main, 101), text);

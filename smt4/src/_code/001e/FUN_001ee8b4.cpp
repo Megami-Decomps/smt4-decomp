@@ -6,7 +6,7 @@
 
 extern "C" {
 extern StatusDownState *g_statusDown;
-void FUN_0029f848(GridNavigation *navigation, s32 count, s32 rows, s32 columns, s32 firstPolicy, s32 secondPolicy);
+void gridNavigationConfigure(GridNavigation *navigation, s32 count, s32 rows, s32 columns, s32 firstPolicy, s32 secondPolicy);
 void scrollOwnerSelectIndex(GridNavigation *navigation, s32 column);
 void statusInventorySort();
 
@@ -29,7 +29,7 @@ void FUN_001ee8b4(const u8 *quantities)
             status->inventory.count = count + 1;
         }
     }
-    FUN_0029f848(&status->inventory.navigation, status->inventory.count, 9, 4, 1, 1);
+    gridNavigationConfigure(&status->inventory.navigation, status->inventory.count, 9, 4, 1, 1);
     GridNavigation *navigation = &status->inventory.navigation;
     s32 count = status->inventory.count;
     if (count > 0 && status->inventory.column + status->inventory.row * 4 >= count) {

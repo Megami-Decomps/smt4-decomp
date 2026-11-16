@@ -7,8 +7,8 @@
 extern "C" {
 void handleSlotRelease(MaterialMergeOwner *owner, s32 slot);
 s32 idSetFindSubjectIndex(BtlMainStateA *battle, const BattleRosterRecordA *record);
-const MaterialMergeVariants *FUN_001568f8(BtlMainStateA *battle, s32 group);
-MaterialMergeModel *FUN_00178b04(u32 bytes, const char *file, u32 line);
+const MaterialMergeVariants *btlFindEntryBlockByMemberId(BtlMainStateA *battle, s32 group);
+MaterialMergeModel *asdMemoryAllocTraced(u32 bytes, const char *file, u32 line);
 MaterialMergeModel *modelListInit(MaterialMergeModel *model);
 void moriModelContentCopyBody(MaterialMergeModel *destination, const MaterialMergeModel *source, u32 flags);
 
@@ -28,7 +28,7 @@ void battleCloneRoutedMaterialChannels(MaterialMergeOwner *owner, u32 kind, s32 
     if (variant < 0) {
         variant = 0;
     }
-    const MaterialMergeVariants *variants = FUN_001568f8(btlGetMainState(), group);
+    const MaterialMergeVariants *variants = btlFindEntryBlockByMemberId(btlGetMainState(), group);
     if (variants == NULL) {
         return;
     }
@@ -38,7 +38,7 @@ void battleCloneRoutedMaterialChannels(MaterialMergeOwner *owner, u32 kind, s32 
             btlGetMainState()->roster[slot].modelMatch.key != original->context) {
             continue;
         }
-        MaterialMergeModel *model = FUN_00178b04(sizeof(MaterialMergeModel),
+        MaterialMergeModel *model = asdMemoryAllocTraced(sizeof(MaterialMergeModel),
             "c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlEffect.cpp", 0x65C);
         if (model != NULL) {
             model = modelListInit(model);

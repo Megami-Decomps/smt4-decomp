@@ -30,7 +30,7 @@ void Obj4209cc::destroyResources()
     }
     s32 count = models()->items->count;
     for (s32 i = 0; i < count; ++i) {
-        ModelResourceItem *item = reinterpret_cast<ModelResourceItem *>(FUN_0040619c(models()->items, i));
+        ModelResourceItem *item = reinterpret_cast<ModelResourceItem *>(ptrVectorAt(models()->items, i));
         if (item != NULL) {
             ptrListRemoveClearOwner(g_handleRegistry, item);
         }

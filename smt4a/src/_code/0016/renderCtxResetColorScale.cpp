@@ -1,6 +1,6 @@
 #include "camp/RenderCtx.h"
 
-extern "C" int FUN_0019f828(void *target, const f32 *scale);
+extern "C" int gpuWriteVertexUniformVec4(void *target, const f32 *scale);
 
 /* Stores and uploads the RGBA modulation when it differs or an upload is forced, then clears the
  * force flag (the body of materialUploadChangedParameterVector). */
@@ -15,7 +15,7 @@ static __inline void colorScaleUpdate(RenderCtxA *context, const f32 *scale)
         context->color.colorScale[1] = scale[1];
         context->color.colorScale[2] = scale[2];
         context->color.colorScale[3] = scale[3];
-        FUN_0019f828(context->colorTarget.colorScaleTarget, context->color.colorScale);
+        gpuWriteVertexUniformVec4(context->colorTarget.colorScaleTarget, context->color.colorScale);
     }
     context->color.colorScaleDirty = 0;
 }

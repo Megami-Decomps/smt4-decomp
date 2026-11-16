@@ -7,7 +7,7 @@ extern BtlEntry *btlMainFindActiveEntry(void);
 extern s32 scrGetArg(u32 index);
 extern s32 scrSetResult(s32 value);
 extern s32 btlScriptResolveGroupArg(s32 group);
-extern s32 FUN_002499fc(u32 group, s32 *start, s32 *count);
+extern s32 btlSideGetEntryRange(u32 group, s32 *start, s32 *count);
 
 /* Script command: pushes whether the average level of the present, non-excluded units of the current group (and the
  * active entry) is at most argument 0. */
@@ -24,7 +24,7 @@ u32 scrCommBtlGroupAverageLevelWithin(void)
     group = btlScriptResolveGroupArg(scrGetArg(1));
     sum = 0;
     units = 0;
-    FUN_002499fc(group, &start, &count);
+    btlSideGetEntryRange(group, &start, &count);
     index = start;
     if (index < count + start) {
         do {

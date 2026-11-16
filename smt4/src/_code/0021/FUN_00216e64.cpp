@@ -21,7 +21,7 @@ int btlTalkBustUpSetUnk2F4(...);
 int btlTalkBustUpSetDemonTexture(...);
 int textEncodeFontSlot(int, unsigned char [32]);
 int scrScriptProcessStartEntry(...);
-int FUN_00297060(...);
+int scrScriptProcessCreate(...);
 int FUN_0029bd4c(void);
 int FUN_0029bed8(...);
 int FUN_0029c424(...);
@@ -32,9 +32,9 @@ int scrScriptProcessDestroy(unsigned int);
 int gameGetPlayerData(void);
 int FUN_002b7bca(int, int, int, unsigned char *);
 int devilGetRecord(...);
-int FUN_002bd06c(unsigned int);
+int dataTable01FindByIdWithAoc(unsigned int);
 int textFormatBuffer(...);
-int FUN_002bf818(int);
+int uiSpriteAdvanceAnimation(int);
 int asdMemFree(unsigned int);
 int FUN_0033bb94(int, unsigned int);
 
@@ -71,7 +71,7 @@ extern int FUN_00295618(void);
 /* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: resultSetMenuState. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_00297060. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: FUN_0029bd4c. */
 /* Supplied declaration required: FUN_0029bed8. */
@@ -90,11 +90,11 @@ extern int gameGetUnitRecord(int);
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: devilGetRecord. */
 extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_002bd06c. */
+/* Supplied declaration required: dataTable01FindByIdWithAoc. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_002bf818. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
@@ -147,7 +147,7 @@ void FUN_00216e64(int param_1)
     if (*piVar17 < 8) {
       return;
     }
-    FUN_002bf818(temp_v14);
+    uiSpriteAdvanceAnimation(temp_v14);
     if (*piVar17 == 0x10) {
       btlTalkBustUpSetUnk2F4(0);
       btlTalkBustUpReleaseTexture();
@@ -243,7 +243,7 @@ void FUN_00216e64(int param_1)
       }
       FUN_001ddbbc();
       temp_v6 = (unsigned int)*(unsigned short *)(temp_v2 + 0x46);
-      FUN_002bd06c(temp_v6);
+      dataTable01FindByIdWithAoc(temp_v6);
       libc_strcpy(reinterpret_cast<unsigned int *>(temp_v16), reinterpret_cast<unsigned int *>(temp_v6));
       textEncodeFontSlot(8,temp_v16);
       temp_v4 = demonGetRaceLabel(*(unsigned short *)(temp_v2 + 0x46),1);
@@ -271,7 +271,7 @@ LAB_002174ac:
       temp_v4 = asdLoadFileSyncDefault(temp_v17);
       *(unsigned int *)(param_1 + 0x3578) = temp_v4;
       temp_v8 = *(unsigned int *)(param_1 + 0x3570);
-      FUN_00297060(temp_v8,temp_v4);
+      scrScriptProcessCreate(temp_v8,temp_v4);
       *puVar16 = temp_v8;
       unitRecalculateEffectiveStats(temp_v2);
       FUN_002954bc(temp_v2);

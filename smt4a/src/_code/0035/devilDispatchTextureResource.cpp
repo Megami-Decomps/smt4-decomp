@@ -10,7 +10,7 @@ s32 gameFlagIsSet(u32);
 struct AocSystem;
 extern AocSystem *g_aocSystem;
 s32 recordPrepareLinkedOwner(AocSystem *, u32, s32);
-void FUN_0017ffa8(s32, u32, s32, u32, u32, u32);
+void texTableRecordCallWithParams(s32, u32, s32, u32, u32, u32);
 void texBindBindTableNode(AocSystem *, u32, s32, u32, s32, u32, u32, u32);
 
 /* Resolve the demon's texture resource and dispatch or request its operation. */
@@ -58,7 +58,7 @@ void devilDispatchTextureResource(u32 id, u32 argument, u32 first, u32 second, s
     }
     if (devilIsTextureLoaded(id, resolveDemon)) {
         if (!recordPrepareLinkedOwner(g_aocSystem, category, resource)) {
-            FUN_0017ffa8(2, category, resource * 1000 + 1, argument, first, second);
+            texTableRecordCallWithParams(2, category, resource * 1000 + 1, argument, first, second);
             return;
         }
         texBindBindTableNode(g_aocSystem, id, 2, category, resource, argument, first, second);

@@ -14,7 +14,7 @@ void FUN_002a1850(f32 *screen, s32 display, const ProjectionMatrices *camera, co
 /* Saves the camera target, projects it through the current camera and returns the resulting z. */
 f32 FUN_002cf548(void)
 {
-    const ProjectionMatrices *camera = reinterpret_cast<const ProjectionMatrices *>(FUN_00152f54());
+    const ProjectionMatrices *camera = reinterpret_cast<const ProjectionMatrices *>(asdCameraGetSavedRenderPairs());
     g_effectRingScratchColor = DAT_006471dc.direction;
     f32 world[3] = {g_effectRingScratchColor.x, g_effectRingScratchColor.y, g_effectRingScratchColor.z};
     Vector4 projected;

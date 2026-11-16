@@ -24,7 +24,7 @@ extern "C" {
 ImagePlacement *asdTMTexTableEntryAt(s32 group, s32 image);
 void textFormatFullWidthTwoDigits(u32 digit, char *text);
 void textDrawString(s32 layer, u32 color, const char *text, f32 x, f32 y, f32 a, f32 b, f32 c);
-void FUN_002bed3c(void);
+void gxResetColorQuadToWhite(void);
 
 /* Draws the counter frame at (x, y) and the work's value (clamped to 9999) as four digit images,
  * leaving out leading zeros. */
@@ -38,11 +38,11 @@ void FUN_003b6a5c(CounterWork *work, s32 x, s32 y)
     u32 hundreds;
     u32 tens;
 
-    FUN_002bf288(2, COUNTER_GROUP, 0xC2, frame->x + x, frame->y + y, 0x65);
-    FUN_002bf288(2, COUNTER_GROUP, 0xC3, frame->x + x, frame->y + y, 0x6A);
-    FUN_002bf288(2, COUNTER_GROUP, 0xC4, frame->x + x, frame->y + y, 0x6F);
-    FUN_002bf288(2, COUNTER_GROUP, 0xC5, frame->x + x, frame->y + y, 0x74);
-    FUN_002bf288(2, COUNTER_GROUP, 0xC6, frame->x + x, frame->y + y, 0x79);
+    texDrawTableEntryAtStoredOrigin(2, COUNTER_GROUP, 0xC2, frame->x + x, frame->y + y, 0x65);
+    texDrawTableEntryAtStoredOrigin(2, COUNTER_GROUP, 0xC3, frame->x + x, frame->y + y, 0x6A);
+    texDrawTableEntryAtStoredOrigin(2, COUNTER_GROUP, 0xC4, frame->x + x, frame->y + y, 0x6F);
+    texDrawTableEntryAtStoredOrigin(2, COUNTER_GROUP, 0xC5, frame->x + x, frame->y + y, 0x74);
+    texDrawTableEntryAtStoredOrigin(2, COUNTER_GROUP, 0xC6, frame->x + x, frame->y + y, 0x79);
     value = work->value >> 12;
     if (value > COUNTER_MAX) {
         value = COUNTER_MAX;
@@ -74,7 +74,7 @@ void FUN_003b6a5c(CounterWork *work, s32 x, s32 y)
     textFormatFullWidthTwoDigits(value % 10, text);
     textDrawString(3, COUNTER_TEXT_COLOR, text, (f32)(frame->x + digit->x + x), (f32)(frame->y + digit->y + y),
                  0.0f, 0.0f, 1.0f);
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
 }
 
 } /* extern "C" */

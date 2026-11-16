@@ -11,7 +11,7 @@ struct EventTransition {
 };
 extern "C" EventTransition *DAT_0043e170;
 extern "C" s32 FUN_002b8ee0(u32 *transition, s32 mode);
-extern "C" s32 FUN_002bf818(u32 *transition);
+extern "C" s32 uiSpriteAdvanceAnimation(u32 *transition);
 extern "C" s32 FUN_002c1d5c();
 
 // Advance the transition through its request, wait and completion states.
@@ -32,7 +32,7 @@ extern "C" s32 FUN_001ad180()
             work->state = work->result;
         break;
     case 3:
-        if (FUN_002bf818(&work->transition)) {
+        if (uiSpriteAdvanceAnimation(&work->transition)) {
             work->active = 0;
             work->state = 4;
         }

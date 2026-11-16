@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(unsigned int, double);
-int FUN_00281e34(void);
+int __hardfp_atan2f(void);
 int FUN_002ba1e0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 int renderCtxSelectTexture(unsigned int, unsigned int);
 int VectorFloatToUnsigned(double, int);
@@ -68,7 +68,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-/* Supplied declaration required: FUN_00281e34. */
+/* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: FUN_002ba1e0. */
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
@@ -140,7 +140,7 @@ void MapMain_DrawMinimapIcons(void)
     if (0 < (int)g_activeTextureSlot[temp_v1 + 1]) {
       temp_v13 = (float)g_activeTextureSlot[temp_v1 + 0x101];
       temp_v3 = *(float *)(DAT_004474f4 + 0x4c) - (float)g_activeTextureSlot[temp_v1 * 3 + 0x41];
-      FUN_00281e34();
+      __hardfp_atan2f();
       temp_v3 = temp_v3 * temp_v17 * temp_v5;
       in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v16 <= temp_v3) << 0x1d);
       for (temp_v3 = romwright_fabs_4(temp_v3); temp_v12 = temp_v16, (int)temp_v3 >= 0x47800000; temp_v3 = temp_v3 - temp_v15) {

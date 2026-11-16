@@ -85,7 +85,7 @@ struct MarkedPart {
 
 s32 FUN_004019c0(ParallaxOwner *owner, u8 buffer[28]);
 s32 FUN_00401a74(ParallaxOwner *owner, f32 *a, f32 *b);
-SceneNode *FUN_0040619c(SceneList *list, s32 index);
+SceneNode *ptrVectorAt(SceneList *list, s32 index);
 s32 tripleOwnerSetValue(SceneNode *node, u8 buffer[28]);
 s32 FUN_00102c30(u32 name, const char *key);
 
@@ -103,7 +103,7 @@ void FUN_00421514(MarkOwner *self, ParallaxOwner *owner, f32 value)
         for (s32 n = 0; n < nodeCount; n++) {
             MarkedPart marked[MAX_MARKED_PARTS];
             s32 markedCount = 0;
-            SceneNode *node = FUN_0040619c(self->scene->list, n);
+            SceneNode *node = ptrVectorAt(self->scene->list, n);
             if (node != 0) {
                 tripleOwnerSetValue(node, buffer);
             }

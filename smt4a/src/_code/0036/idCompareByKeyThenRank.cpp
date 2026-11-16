@@ -7,14 +7,14 @@ typedef struct Record {
     /* 0x43 */ u8 rank;
 } Record;
 
-int FUN_001ba3d4(u16 id);
+int flagValueRead(u16 id);
 Record *dataTable8FindRecord(u16 id);
 
-/* Comparator on two u16 ids: orders by FUN_001ba3d4(id), then by the records' rank (second minus first). */
+/* Comparator on two u16 ids: orders by flagValueRead(id), then by the records' rank (second minus first). */
 int idCompareByKeyThenRank(u16 *a, u16 *b)
 {
-    int keyA = FUN_001ba3d4(*a);
-    int keyB = FUN_001ba3d4(*b);
+    int keyA = flagValueRead(*a);
+    int keyB = flagValueRead(*b);
     int result = keyA - keyB;
 
     if (result == 0) {

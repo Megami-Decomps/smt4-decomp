@@ -33,12 +33,12 @@ typedef char SpriteJobWorkOffsets[
     sizeof(JobSprite) == 0x8C ? 1 : -1];
 
 extern "C" {
-void FUN_0014e188(JobSprite *sprite, s32 mode, u32 id, void *shared, s32 priority, f32 scale);
-void FUN_00163aa4(JobSprite *sprite, f32 delta);
+void uiSpriteStateInitFromSource(JobSprite *sprite, s32 mode, u32 id, void *shared, s32 priority, f32 scale);
+void uiSpriteAdvanceAnimation(JobSprite *sprite, f32 delta);
 void pairSetSecondResetFirst(JobSprite *sprite, u32 second);
 void pairSetFirstResetSecond(JobSprite *sprite, u32 first);
 void uiSpriteSelectAnim(JobSprite *sprite, s32 group);
-void FUN_00387240(JobSprite *sprite, s32 mode, s32 id);
+void uiStoreTextureEntryCenter(JobSprite *sprite, s32 mode, s32 id);
 s8 uiSpriteGetCompletionState(const JobSprite *sprite);
 void spriteSetVisible(JobSprite *sprite, u8 visible);
 
@@ -51,47 +51,47 @@ s32 FUN_00472568(u32 job)
     case 0:
         work->flags &= ~0x20u;
         work->state = 1;
-        FUN_0014e188(&work->first, 8, 0xFFFFFFFF, work->shared, 11, 1.0f);
-        FUN_0014e188(&work->middle, 8, 0xFFFFFFFF, work->shared, 11, 1.0f);
-        FUN_0014e188(&work->last, 8, 0xFFFFFFFF, work->shared, 11, 1.0f);
+        uiSpriteStateInitFromSource(&work->first, 8, 0xFFFFFFFF, work->shared, 11, 1.0f);
+        uiSpriteStateInitFromSource(&work->middle, 8, 0xFFFFFFFF, work->shared, 11, 1.0f);
+        uiSpriteStateInitFromSource(&work->last, 8, 0xFFFFFFFF, work->shared, 11, 1.0f);
         if (work->variant <= 4) {
             pairSetSecondResetFirst(&work->first, 6);
             uiSpriteSelectAnim(&work->first, 3);
-            FUN_00387240(&work->first, 8, 54);
+            uiStoreTextureEntryCenter(&work->first, 8, 54);
             pairSetSecondResetFirst(&work->last, 7);
             uiSpriteSelectAnim(&work->last, 3);
-            FUN_00387240(&work->last, 8, 54);
+            uiStoreTextureEntryCenter(&work->last, 8, 54);
         } else {
             pairSetSecondResetFirst(&work->first, 4);
             uiSpriteSelectAnim(&work->first, 3);
-            FUN_00387240(&work->first, 8, 34);
+            uiStoreTextureEntryCenter(&work->first, 8, 34);
             pairSetSecondResetFirst(&work->last, 5);
             uiSpriteSelectAnim(&work->last, 3);
-            FUN_00387240(&work->last, 8, 34);
+            uiStoreTextureEntryCenter(&work->last, 8, 34);
         }
         spriteSetVisible(&work->first, 1);
         spriteSetVisible(&work->last, 1);
         pairSetFirstResetSecond(&work->middle, 7);
         uiSpriteSelectAnim(&work->middle, 4);
-        FUN_00387240(&work->middle, 8, 71);
-        FUN_00163aa4(&work->first, 1.0f);
+        uiStoreTextureEntryCenter(&work->middle, 8, 71);
+        uiSpriteAdvanceAnimation(&work->first, 1.0f);
         break;
     case 1:
-        FUN_00163aa4(&work->first, 1.0f);
-        FUN_00163aa4(&work->last, 1.0f);
+        uiSpriteAdvanceAnimation(&work->first, 1.0f);
+        uiSpriteAdvanceAnimation(&work->last, 1.0f);
         if (uiSpriteGetCompletionState(&work->first) != 0) {
             work->flags |= 0x20;
             work->state = 2;
         }
         break;
     case 2:
-        FUN_00163aa4(&work->first, 1.0f);
-        FUN_00163aa4(&work->last, 1.0f);
-        FUN_00163aa4(&work->middle, 1.0f);
+        uiSpriteAdvanceAnimation(&work->first, 1.0f);
+        uiSpriteAdvanceAnimation(&work->last, 1.0f);
+        uiSpriteAdvanceAnimation(&work->middle, 1.0f);
         break;
     case 3:
-        FUN_00163aa4(&work->first, 1.0f);
-        FUN_00163aa4(&work->last, 1.0f);
+        uiSpriteAdvanceAnimation(&work->first, 1.0f);
+        uiSpriteAdvanceAnimation(&work->last, 1.0f);
         if (uiSpriteGetCompletionState(&work->first) != 0)
             work->state = 4;
         break;

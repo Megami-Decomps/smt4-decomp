@@ -181,7 +181,7 @@ extern "C" void FUN_0042021c(SaveLoadUi *ui)
             slotSetRequest(1, 12, 255);
             ui->step++;
         case 1:
-            if (FUN_002e07f4() == 0) {
+            if (pairedAvailabilityBothReady() == 0) {
                 return;
             }
             if (gameDataBlocksGetTable()->mode == 2) {

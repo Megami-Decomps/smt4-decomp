@@ -3,7 +3,7 @@
 
 extern "C" {
 s32 idIsAbove400(s32 id);
-s32 FUN_003a6868(s32 id);
+s32 itemGetSortCategory(s32 id);
 s32 FUN_00321a98(s32 *left, s32 *right);
 
 // Compare classification and record fields before delegating tied entries.
@@ -15,7 +15,7 @@ s32 entryCompareClassThenDescendingValue(s32 *left, s32 *right)
         leftClass = 99;
         leftField = 0;
     } else {
-        leftClass = FUN_003a6868(*left);
+        leftClass = itemGetSortCategory(*left);
         leftField = dataTable04FindById(*left)->listing.sortKey;
     }
 
@@ -25,7 +25,7 @@ s32 entryCompareClassThenDescendingValue(s32 *left, s32 *right)
         rightClass = 99;
         rightField = 0;
     } else {
-        rightClass = FUN_003a6868(*right);
+        rightClass = itemGetSortCategory(*right);
         rightField = dataTable04FindById(*right)->listing.sortKey;
     }
 

@@ -3,7 +3,7 @@
 extern "C" {
 extern RenderCtx *g_titleScene;
 void renderCtxSelectStereoLayout(RenderCtx *);
-s32 FUN_002c5d80(u32, u32);
+s32 renderCtxPackPassFlags(u32, u32);
 void renderCtxResetColorScale(RenderCtx *);
 }
 
@@ -11,7 +11,7 @@ void renderCtxResetColorScale(RenderCtx *);
 extern "C" u32 FUN_0018b2a4(void)
 {
     renderCtxSelectStereoLayout(g_titleScene);
-    renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
+    renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
     renderStackPop(&g_titleScene->stackA);
     renderCtxApplyTransforms(g_titleScene);
     renderCtxResetColorScale(g_titleScene);

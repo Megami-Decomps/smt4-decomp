@@ -14,7 +14,7 @@ void tmSpriteTableAcquire(void)
             if (sprite == 6) {
                 continue; // sprite six is not part of this table
             }
-            FUN_0014afd0(11, sprite);
+            asdTMTexTablePrepareNodeImage(11, sprite);
         }
     }
     ++DAT_0057f234;

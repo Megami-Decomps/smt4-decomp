@@ -5,8 +5,8 @@
 
 extern "C" {
 
-int FUN_0015f858(...);
-int FUN_00180118(...);
+int dataFindKindRecordWithAocOverrides(...);
+int dataTable01GetRecordWithAocOverride(...);
 int asdMemFree(void);
 int dialogOpen(...);
 int infoWinExpandAndSetText(...);
@@ -15,7 +15,7 @@ int infoWinSetTimer(void);
 int libc_strcpy(...);
 int FUN_002e5c6c(...);
 int sysMemClear(unsigned char [104], int);
-int FUN_003180c4(...);
+int scrSetStringSlot(...);
 int FUN_0047f8ac(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -29,9 +29,9 @@ extern unsigned int uRam005738f4; /* 0x5738f4 */
 
 extern unsigned int FUN_0014bd84(int);
 extern unsigned int gameGetPlayerName(void);
-/* Supplied declaration required: FUN_0015f858. */
+/* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 extern int infoWinHasValue(void);
-/* Supplied declaration required: FUN_00180118. */
+/* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: infoWinExpandAndSetText. */
@@ -42,7 +42,7 @@ extern int dialogIsActive(void);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002e5c6c. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_003180c4. */
+/* Supplied declaration required: scrSetStringSlot. */
 /* Supplied declaration required: FUN_0047f8ac. */
 
 
@@ -119,10 +119,10 @@ unsigned int FUN_0023173c(unsigned int *param_1)
         }
         else {
           temp_v1 = (unsigned int)(unsigned short)puVar1[0xbb];
-          FUN_00180118(temp_v1);
+          dataTable01GetRecordWithAocOverride(temp_v1);
           libc_strcpy(temp_v4,temp_v1);
         }
-        FUN_003180c4(*(unsigned int *)(puVar1 + 0x412),temp_v4);
+        scrSetStringSlot(*(unsigned int *)(puVar1 + 0x412),temp_v4);
       }
       infoWinSetText(reinterpret_cast<const char *>(*(unsigned int *)(puVar1 + 6)), *(unsigned int *)(puVar1 + 4) & 0xffff);
       dialogOpen((int)*(char *)(puVar1 + 0x410),1);
@@ -156,10 +156,10 @@ joined_r0x002318b0:
           }
           else {
             temp_v1 = (unsigned int)(unsigned short)puVar1[0xbb];
-            FUN_00180118(temp_v1);
+            dataTable01GetRecordWithAocOverride(temp_v1);
             libc_strcpy(temp_v4,temp_v1);
           }
-          FUN_003180c4(*(unsigned int *)(puVar1 + 0x412),temp_v4);
+          scrSetStringSlot(*(unsigned int *)(puVar1 + 0x412),temp_v4);
           if (!((*(unsigned int *)(puVar1 + 0x20c) & uRam005738f0) == 0 &&
                (*(unsigned int *)(puVar1 + 0x20e) & uRam005738f4) == 0)) {
             temp_v0 = gameGetPlayerName();
@@ -167,10 +167,10 @@ joined_r0x002318b0:
           }
           else {
             temp_v1 = (unsigned int)(unsigned short)puVar1[0x2bf];
-            FUN_00180118(temp_v1);
+            dataTable01GetRecordWithAocOverride(temp_v1);
             libc_strcpy(temp_v4,temp_v1);
           }
-          FUN_003180c4(*(unsigned int *)(puVar1 + 0x414),temp_v4);
+          scrSetStringSlot(*(unsigned int *)(puVar1 + 0x414),temp_v4);
         }
       }
       infoWinSetText(reinterpret_cast<const char *>(*(unsigned int *)(puVar1 + 6)), *(unsigned int *)(puVar1 + 4) & 0xffff);
@@ -187,19 +187,19 @@ joined_r0x002318b0:
         }
         else {
           temp_v1 = (unsigned int)(unsigned short)puVar1[0xbb];
-          FUN_00180118(temp_v1);
+          dataTable01GetRecordWithAocOverride(temp_v1);
           libc_strcpy(temp_v4,temp_v1);
         }
-        FUN_003180c4(*(unsigned int *)(puVar1 + 0x412),temp_v4);
+        scrSetStringSlot(*(unsigned int *)(puVar1 + 0x412),temp_v4);
       }
       FUN_002e5c6c(puVar1[2]);
       temp_v2 = *(int *)(puVar1 + 0x436);
       break;
     case 4:
       temp_v2 = (int)(short)puVar1[2];
-      FUN_0015f858(temp_v2,0);
+      dataFindKindRecordWithAocOverrides(temp_v2,0);
       libc_strcpy(temp_v4,temp_v2);
-      FUN_003180c4(*(unsigned int *)(puVar1 + 0x412),temp_v4);
+      scrSetStringSlot(*(unsigned int *)(puVar1 + 0x412),temp_v4);
       infoWinSetText(reinterpret_cast<const char *>(*(unsigned int *)(puVar1 + 6)), *(unsigned int *)(puVar1 + 4) & 0xffff);
       dialogOpen((int)*(char *)(puVar1 + 0x410),1);
       temp_v2 = *(int *)(puVar1 + 0x436);
@@ -207,7 +207,7 @@ joined_r0x002318b0:
     case 5:
       temp_v0 = FUN_0014bd84((int)(short)puVar1[2]);
       libc_strcpy(temp_v4,temp_v0);
-      FUN_003180c4(*(unsigned int *)(puVar1 + 0x412),temp_v4);
+      scrSetStringSlot(*(unsigned int *)(puVar1 + 0x412),temp_v4);
       infoWinSetText(reinterpret_cast<const char *>(*(unsigned int *)(puVar1 + 6)), *(unsigned int *)(puVar1 + 4) & 0xffff);
       dialogOpen((int)*(char *)(puVar1 + 0x410),1);
       temp_v2 = *(int *)(puVar1 + 0x436);
@@ -232,11 +232,11 @@ joined_r0x002318b0:
           }
           else {
             temp_v1 = (unsigned int)(unsigned short)puVar1[0xbb];
-            FUN_00180118(temp_v1);
+            dataTable01GetRecordWithAocOverride(temp_v1);
             libc_strcpy(temp_v4,temp_v1);
           }
-          FUN_003180c4(*(unsigned int *)(puVar1 + 0x412),temp_v4);
-          FUN_003180c4(*(unsigned int *)(puVar1 + 0x414),puVar1 + 0x416);
+          scrSetStringSlot(*(unsigned int *)(puVar1 + 0x412),temp_v4);
+          scrSetStringSlot(*(unsigned int *)(puVar1 + 0x414),puVar1 + 0x416);
         }
       }
       infoWinSetText(reinterpret_cast<const char *>(*(unsigned int *)(puVar1 + 6)), *(unsigned int *)(puVar1 + 4) & 0xffff);

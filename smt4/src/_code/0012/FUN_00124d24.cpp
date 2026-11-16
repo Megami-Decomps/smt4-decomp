@@ -16,13 +16,13 @@ s32 gameFlagIsSet(u32 flag);
 s32 vec2GetXInt(void *vec);
 s32 vec2GetYInt(void *vec);
 f32 vec2GetSpeed(void *vec);
-u32 FUN_002c5d80(u32 slot, u32 flags);
+u32 renderCtxPackPassFlags(u32 slot, u32 flags);
 void renderStackPushIndexed(RenderCtx *context, s32 stack, u32 value);
 void efctSetSpeed(f32 speed);
-void FUN_002bed3c();
+void gxResetColorQuadToWhite();
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 scale);
 TitlePartInfo *asdTMTexTableEntryAt(s32 sheet, s32 part);
-void FUN_002bf380(s32 layer, s32 sheet, s32 part, s32 x, s32 y, s32 priority);
+void texDrawCompositeSprite(s32 layer, s32 sheet, s32 part, s32 x, s32 y, s32 priority);
 void FUN_002bdce0(s32 value, s32 x, s32 y, s32 flag);
 s32 renderCtxPopState(RenderCtx *context, s32 stack);
 
@@ -37,9 +37,9 @@ void FUN_00124d24(s32 wide)
             x += vec2GetXInt(g_messageMain.banner->widget7E0);
             y += vec2GetYInt(g_messageMain.banner->widget7E0);
         }
-        renderStackPushIndexed(g_titleScene, 3, FUN_002c5d80(1, 0));
+        renderStackPushIndexed(g_titleScene, 3, renderCtxPackPassFlags(1, 0));
         efctSetSpeed(speed);
-        FUN_002bed3c();
+        gxResetColorQuadToWhite();
 
         TitlePartInfo *part;
         if (wide) {
@@ -48,7 +48,7 @@ void FUN_00124d24(s32 wide)
         } else {
             part = asdTMTexTableEntryAt(14, 192);
         }
-        FUN_002bf380(2, 14, 0, part->x + x, part->y + y, 11);
+        texDrawCompositeSprite(2, 14, 0, part->x + x, part->y + y, 11);
         FUN_002bdce0(g_messageMain.banner->unk6C, part->x + x, part->y + y, 0);
 
         if (g_messageMain.banner->unk80) {
@@ -56,7 +56,7 @@ void FUN_00124d24(s32 wide)
                 part = asdTMTexTableEntryAt(14, 256);
             else
                 part = asdTMTexTableEntryAt(14, 287);
-            FUN_002bf380(2, 14, 12, part->x + x, part->y + y, 11);
+            texDrawCompositeSprite(2, 14, 12, part->x + x, part->y + y, 11);
             FUN_002bdce0(g_messageMain.banner->unk74, part->x + x, part->y + y, 1);
         }
 
@@ -66,11 +66,11 @@ void FUN_00124d24(s32 wide)
             s32 by = vec2GetYInt(banner->widget754);
             s32 px = static_cast<s32>(renderCtxCalculateStereoParallax(g_titleScene, 0.27f) + bx);
             part = asdTMTexTableEntryAt(14, 256);
-            FUN_002bf380(2, 14, 22, part->x + px, part->y + by, 11);
+            texDrawCompositeSprite(2, 14, 22, part->x + px, part->y + by, 11);
             FUN_002bdce0(-banner->unk9C, part->x + px, part->y + by, 1);
         }
         efctSetSpeed(1.0f);
-        FUN_002bed3c();
+        gxResetColorQuadToWhite();
         renderCtxPopState(g_titleScene, 3);
     }
 }

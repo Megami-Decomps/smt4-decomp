@@ -25,7 +25,7 @@ extern u8 DAT_0060a198; /* 0x60a198 */
 extern int textFormatBuffer(u8 *dst, u8 *src);
 extern FlagBlock *gameFlagsGetBlock(void);
 extern int gameFlagIsSet(u32 flag);
-extern int FUN_003e4230(u32 id);
+extern int shopGetEntryAvailability(u32 id);
 
 /* Marks every id 1-0x8C whose data flag is set (or whose check does not return 2) as seen; when something new was marked outside a popup, opens popup type 0x18. */
 void FUN_00353b00(int popupOpen)
@@ -42,7 +42,7 @@ void FUN_00353b00(int popupOpen)
         if ((block->seen[(int)id / 8] & mask) == 0) {
             if ((int)gameDataFlagTestBit(id) != 0) {
                 gameFlagsGetBlock()->seen[(int)id / 8] |= mask;
-            } else if (FUN_003e4230(id) != 2) {
+            } else if (shopGetEntryAvailability(id) != 2) {
                 gameFlagsGetBlock()->seen[(int)id / 8] |= mask;
                 marked = 1;
             }

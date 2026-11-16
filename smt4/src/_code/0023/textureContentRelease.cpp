@@ -42,7 +42,7 @@ struct TextureContent {
 extern "C" {
 extern void *g_aocSystem;
 void asdTMTexTableReleaseNode(s32 category, s32 id);
-void FUN_002a60cc(void *system, s32 category, s32 id);
+void packageFileDisableByKindName(void *system, s32 category, s32 id);
 void asdTextureRelease(void *);
 void asdMemFree(void *);
 void FUN_00389f54(void *system, u32 fileId);
@@ -57,7 +57,7 @@ void textureContentRelease(TextureContent *content)
             if (entry->texture) {
                 if (entry->sharedId >= 0) {
                     asdTMTexTableReleaseNode(content->category, entry->sharedId);
-                    FUN_002a60cc(g_aocSystem, content->category, entry->sharedId);
+                    packageFileDisableByKindName(g_aocSystem, content->category, entry->sharedId);
                 } else {
                     asdTextureRelease(entry->texture);
                 }

@@ -11,8 +11,8 @@ int drawSetColorFromRGBA8(...);
 int itemDrawCategoryBadge(...);
 int textDrawString(...);
 int textFormatBuffer(...);
-int FUN_002be650(int, int);
-int FUN_002bed3c(void);
+int dataFindKindRecordWithAocOverrides(int, int);
+int gxResetColorQuadToWhite(void);
 int asdTMTexTableEntryAt(...);
 int VectorSignedToFloat(...);
 
@@ -42,7 +42,7 @@ extern unsigned char LAB_00284814; /* 0x284814 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: messageKindForward. */
-extern unsigned int FUN_0028fb40(int);
+extern unsigned int flagValueRead(int);
 extern int recordAcceptsStickDirection(int);
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 extern unsigned short *gameGetPlayerData(void);
@@ -51,8 +51,8 @@ extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002be650. */
-/* Supplied declaration required: FUN_002bed3c. */
+/* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 
 
@@ -94,7 +94,7 @@ void FUN_00283f80(int param_1,int param_2,int param_3,int param_4,int param_5)
   temp_v2 = asdTMTexTableEntryAt(0x1d,param_2 + 0x40d);
   temp_v3 = asdTMTexTableEntryAt(0x1d,0x514);
   temp_v5 = temp_v13;
-  FUN_002be650(temp_v13,0);
+  dataFindKindRecordWithAocOverrides(temp_v13,0);
   if (temp_v5 != 0) {
     temp_v11 = 0xff;
     temp_v4 = recordAcceptsStickDirection(temp_v13);
@@ -108,13 +108,13 @@ void FUN_00283f80(int param_1,int param_2,int param_3,int param_4,int param_5)
     textDrawString(2,temp_v11,temp_v5,(int)*(short *)(temp_v3 + 8));
   }
   temp_v5 = asdTMTexTableEntryAt(0x1d,0x520);
-  temp_v11 = FUN_0028fb40(temp_v13);
+  temp_v11 = flagValueRead(temp_v13);
   textFormatBuffer(temp_v12,&LAB_002843d8,temp_v11);
   drawSetColorFromRGBA8(0xff);
   FUN_002bdf94(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v2 + 8) + param_4,
                (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v2 + 10) + param_5,1,2,0x6f,
                temp_v12);
-  FUN_002bed3c();
+  gxResetColorQuadToWhite();
   temp_v5 = asdTMTexTableEntryAt(0x1d,0x513);
   itemDrawCategoryBadge((int)(short)temp_v13,
                (int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v2 + 8) + param_4,
@@ -158,7 +158,7 @@ LAB_00284174:
     FUN_002bdf94(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v2 + 8) + param_4,
                  (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v5 + 10) + param_5,1,4,0x6f,
                  temp_v12);
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     if (*(unsigned int *)(temp_v7 + 0x54) >> 0x14 == 0) {
       textFormatBuffer(temp_v12,&LAB_002843ec);
     }
@@ -225,7 +225,7 @@ LAB_00284174:
     FUN_002bdf94(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v5 + 8) + param_4,
                  (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v5 + 10) + param_5,1,4,0x6f,
                  temp_v12);
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     if (*(char *)(temp_v7 + 0x59) == '\0') {
       textFormatBuffer(temp_v12,&LAB_002847ec);
     }
@@ -253,7 +253,7 @@ LAB_00284174:
     FUN_002bdf94(0,(int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v2 + 8) + param_4,
                  (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v7 + 10) + param_5,1,3,0x6f,
                  temp_v12);
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     break;
   case 0x14:
   case 0x15:
@@ -299,7 +299,7 @@ LAB_00284174:
     FUN_002bdf94(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v5 + 8) + param_4,
                  (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v2 + 10) + param_5,1,5,0x6f,
                  temp_v12);
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     drawSetColorFromRGBA8(0xff);
     temp_v4 = (int)*(short *)(temp_v7 + 0x68);
     temp_v5 = temp_v4;
@@ -317,7 +317,7 @@ LAB_00284174:
     FUN_002bdf94(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v5 + 8) + param_4,
                  (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v2 + 10) + param_5,1,5,0x6f,
                  temp_v12);
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
   }
   return;
 }

@@ -35,14 +35,14 @@ void FUN_003b6354(f32 scale, ListMenuWork *work, s32 row, s32 mode, s32 selected
                   s32 *y, s8 *shifted)
 {
     if (selectedRow - work->selected > row) {
-        FUN_001835b4(2, 0x1A, 0x172, *x + offsetX, *y + offsetY, 0x65);
+        texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x172, *x + offsetX, *y + offsetY, 0x65);
         return;
     }
     if (work->selected < objectApplyIfUnblocked(work->list) && row == selectedRow) {
         if (mode != 1) {
             if ((mode == 2 || mode == 3) && *shifted != 0) {
                 *y = work->scroll * -3 + *y;
-                FUN_001835b4(2, 0x1A, 0x171, *x + offsetX, *y + offsetY, 0x65);
+                texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x171, *x + offsetX, *y + offsetY, 0x65);
                 return;
             }
         } else if (work->scroll < 1) {
@@ -79,7 +79,7 @@ void FUN_003b6354(f32 scale, ListMenuWork *work, s32 row, s32 mode, s32 selected
             efctSetSpeed(work->slideSpeed * scale);
         }
     }
-    FUN_001835b4(2, 0x1A, 0x171, *x + offsetX, *y + offsetY, 0x65);
+    texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x171, *x + offsetX, *y + offsetY, 0x65);
 }
 
 }

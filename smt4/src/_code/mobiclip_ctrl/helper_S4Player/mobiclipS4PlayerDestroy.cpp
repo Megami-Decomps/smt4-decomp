@@ -9,7 +9,7 @@ int FUN_002c3f5c(...);
 int nn_os_LightEvent_Signal(int);
 int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
 int asdMemFree(unsigned int);
-int FUN_002c526c(void);
+int resultHandleFailure(void);
 int mobiclipDeblockerRelease(int);
 int FUN_0035053c(int);
 int software_interrupt(int);
@@ -28,7 +28,7 @@ extern unsigned int DAT_0044d158; /* 0x44d158 */
 /* Supplied declaration required: nn_os_LightEvent_Signal. */
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002c526c. */
+/* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: mobiclipDeblockerRelease. */
 /* Supplied declaration required: FUN_0035053c. */
 extern void nn_os_Thread_FinalizeImpl(unsigned int);
@@ -51,7 +51,7 @@ void mobiclipS4PlayerDestroy(int param_1)
     puVar1 = temp_v2;
     FUN_002c40f8(puVar1,&uStack_20,1,0,0xffffffff,0xffffffff);
     if ((int)puVar1 < 0) {
-      FUN_002c526c();
+      resultHandleFailure();
     }
     *(unsigned char *)(param_1 + 0x2c) = 1;
     nn_os_Thread_FinalizeImpl(param_1 + 0x28);

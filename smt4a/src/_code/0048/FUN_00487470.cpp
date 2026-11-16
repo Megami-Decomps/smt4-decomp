@@ -372,7 +372,7 @@ LAB_00487744:
         if ((int)temp_v30 != 0) {
           temp_v18 = (float)VectorSignedToFloat(unaff_r8,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v20 = (float)VectorSignedToFloat(unaff_r6,(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_001835b4(2,0x13,0x1774,(int)(temp_v35 + temp_v20),(int)(temp_v36 + temp_v18),DAT_00587f20)
+          texDrawTableEntryAtStoredOrigin(2,0x13,0x1774,(int)(temp_v35 + temp_v20),(int)(temp_v36 + temp_v18),DAT_00587f20)
           ;
           temp_v2 = temp_v8;
         }
@@ -383,7 +383,7 @@ LAB_00487744:
               if (temp_v5 == 2) {
                 temp_v18 = (float)VectorSignedToFloat(unaff_r8,(unsigned char)(in_fpscr >> 0x16) & 3);
                 temp_v20 = (float)VectorSignedToFloat(unaff_r6,(unsigned char)(in_fpscr >> 0x16) & 3);
-                FUN_001835b4(2,0x13,0x1773,(int)(temp_v35 + temp_v20),(int)(temp_v36 + temp_v18),
+                texDrawTableEntryAtStoredOrigin(2,0x13,0x1773,(int)(temp_v35 + temp_v20),(int)(temp_v36 + temp_v18),
                              DAT_00587f20);
                 temp_v2 = temp_v11;
               }
@@ -391,7 +391,7 @@ LAB_00487744:
             else {
               temp_v18 = (float)VectorSignedToFloat(unaff_r8,(unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v20 = (float)VectorSignedToFloat(unaff_r6,(unsigned char)(in_fpscr >> 0x16) & 3);
-              FUN_001835b4(2,0x13,0x1772,(int)(temp_v35 + temp_v20),(int)(temp_v36 + temp_v18),
+              texDrawTableEntryAtStoredOrigin(2,0x13,0x1772,(int)(temp_v35 + temp_v20),(int)(temp_v36 + temp_v18),
                            DAT_00587f20);
               temp_v2 = temp_v10;
             }
@@ -399,7 +399,7 @@ LAB_00487744:
           else {
             temp_v18 = (float)VectorSignedToFloat(unaff_r8,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v20 = (float)VectorSignedToFloat(unaff_r6,(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_001835b4(2,0x13,0x1771,(int)(temp_v35 + temp_v20),(int)(temp_v36 + temp_v18),
+            texDrawTableEntryAtStoredOrigin(2,0x13,0x1771,(int)(temp_v35 + temp_v20),(int)(temp_v36 + temp_v18),
                          DAT_00587f20);
             temp_v2 = temp_v9;
           }

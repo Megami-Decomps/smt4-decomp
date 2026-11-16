@@ -9,9 +9,9 @@ extern void *g_handleRegistry;
 void *gameFlagsGetBlock();
 f32 mathPositionHeadingDegrees(f32 x, f32 y, f32 z, f32 targetX, f32 targetY, f32 targetZ);
 f32 calcHeadingRoundedToCardinalDirection(f32 heading);
-f32 FUN_001bc124(f32 radians);
-f32 FUN_001bbf0c(f32 radians);
-void *FUN_00178b04(u32 size, const char *file, s32 line);
+f32 libm_sinf(f32 radians);
+f32 libm_cosf(f32 radians);
+void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 ModelList *modelListInit(ModelList *model);
 void FUN_0040aad4(ModelList *model, s32 mode);
 void handleRegistryRegisterObject(void *registry, MoriModelBody *controller);
@@ -47,9 +47,9 @@ void FUN_002ef048()
     }
     f32 position[3] = {(f32)(saved->x * 700 + 350), 0.0f, (f32)(saved->z * 700 + 350)};
     f32 radians = heading * 0.017453292f;
-    position[0] -= FUN_001bc124(radians) * 330.0f;
-    position[2] -= FUN_001bbf0c(radians) * 330.0f;
-    ModelList *marker = static_cast<ModelList *>(FUN_00178b04(sizeof(ModelList),
+    position[0] -= libm_sinf(radians) * 330.0f;
+    position[2] -= libm_cosf(radians) * 330.0f;
+    ModelList *marker = static_cast<ModelList *>(asdMemoryAllocTraced(sizeof(ModelList),
         "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapRndMaze.cpp", 0x12E1));
     if (marker != NULL)
         marker = modelListInit(marker);
@@ -57,7 +57,7 @@ void FUN_002ef048()
     struct MarkerOwner { u8 prefix[0x9D4]; ModelList *marker; };
     MarkerOwner *maze = reinterpret_cast<MarkerOwner *>(&g_mapRndMaze);
     maze->marker = marker;
-    FUN_0040aa6c(maze->marker, "map/unit/u025.bam");
+    resourceOwnerLoadFileSync(maze->marker, "map/unit/u025.bam");
     FUN_0040aad4(maze->marker, 0);
     MoriModelBody *controller = maze->marker->content.body;
     handleRegistryRegisterObject(g_handleRegistry, controller);

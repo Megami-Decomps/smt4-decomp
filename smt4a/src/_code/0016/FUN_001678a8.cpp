@@ -34,11 +34,11 @@ typedef char MessageSpriteDrawOffsetsA[
     offsetof(MessageSpriteDrawViewA, modeExtra) == 0x18AC ? 1 : -1];
 extern "C" {
 extern RenderCtxA *g_renderCtx;
-s32 FUN_001692ac(u32, u32);
+s32 renderCtxPackPassFlags(u32, u32);
 void renderStackPushIndexed(RenderCtxA *, s32, s32);
 s32 renderCtxPopState(RenderCtxA *, s32);
 void efctSetSpeed(f32);
-void FUN_00183bb0();
+void gxResetColorQuadToWhite();
 f32 renderCtxCalculateStereoParallax(RenderCtxA *, f32);
 void effectRenderTransformedInstance(UiSpriteState *, f32);
 void pairSetSecondResetFirst(UiSpriteState *, u32);
@@ -48,9 +48,9 @@ void FUN_001678a8(MessageWorkA *message)
     MessageSpriteDrawViewA *work = reinterpret_cast<MessageSpriteDrawViewA *>(message);
     if (!message->state)
         return;
-    renderStackPushIndexed(g_renderCtx, 3, FUN_001692ac(1, 0));
+    renderStackPushIndexed(g_renderCtx, 3, renderCtxPackPassFlags(1, 0));
     efctSetSpeed(1.0f);
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
     s32 parallax = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.25f));
     if (work->mode == 7 || work->mode == 8 || work->mode == 9) {
         RenderCtxA *context = g_renderCtx;

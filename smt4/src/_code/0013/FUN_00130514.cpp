@@ -9,7 +9,7 @@ int FUN_002bb020(...);
 int FUN_002bcc60(...);
 int nn_os_CriticalSection_Initialize(...);
 int FUN_002c40f8(...);
-int FUN_002c526c(...);
+int resultHandleFailure(...);
 int software_interrupt(...);
 
 /* stack frame of param_3: 7 slot(s), 28 byte(s) */
@@ -34,7 +34,7 @@ extern unsigned char LAB_00152604; /* 0x152604 */
 /* Supplied declaration required: FUN_002bcc60. */
 /* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 /* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: FUN_002c526c. */
+/* Supplied declaration required: resultHandleFailure. */
 extern void nn_os_Thread_FinalizeImpl(unsigned int);
 
 
@@ -60,7 +60,7 @@ unsigned char FUN_00130514(int *param_1,unsigned int param_2,int *param_3)
     puVar1 = temp_v1;
     FUN_002c40f8(puVar1,&temp_v0,1,0,0xffffffff,0xffffffff);
     if ((int)puVar1 < 0) {
-      FUN_002c526c();
+      resultHandleFailure();
     }
     *(unsigned char *)(param_1 + 1) = 1;
     nn_os_Thread_FinalizeImpl((unsigned int)param_1);
@@ -83,7 +83,7 @@ unsigned char FUN_00130514(int *param_1,unsigned int param_2,int *param_3)
   FUN_002bcc60(param_1,&uStack_30,nw_snd_internal_TaskThread_ThreadFunc,&temp_v2,
                *param_3 + param_3[1],param_2,0xfffffffe);
   if ((((unsigned int)piVar2 & 0x7e00000) != 0x600000) && ((int)piVar2 < 0)) {
-    FUN_002c526c(piVar2);
+    resultHandleFailure(piVar2);
   }
   if (-1 < (int)piVar2) {
     *(unsigned char *)((int)param_1 + 0x15) = 1;

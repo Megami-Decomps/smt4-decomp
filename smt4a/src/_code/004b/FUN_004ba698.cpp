@@ -5,7 +5,7 @@
 
 extern "C" {
 s32 rangeGetMinimumLimit(SequentialAnimationPrefixA *state);
-void FUN_00163aa4(UiSpriteState *sprite, f32 step);
+void uiSpriteAdvanceAnimation(UiSpriteState *sprite, f32 step);
 void FUN_00167458(UiSpriteState *sprite, s32 mode);
 s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 
@@ -21,7 +21,7 @@ s32 FUN_004ba698(SequentialAnimationPrefixA *state)
     s32 count = rangeGetMinimumLimit(state);
     for (s32 i = 0; i < count; ++i) {
         if (i <= state->progress) {
-            FUN_00163aa4(&state->rows[i], 1.0f);
+            uiSpriteAdvanceAnimation(&state->rows[i], 1.0f);
         }
     }
     ++state->progress;

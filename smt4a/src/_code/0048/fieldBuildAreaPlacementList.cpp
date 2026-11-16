@@ -4,7 +4,7 @@ extern "C" {
 void rt_memclr(void *memory, u32 size);
 const FieldPlacementRecord *FUN_00356308(s32 index);
 void FUN_00482fe8(FieldPlacementList *list);
-void FUN_004834b0(FieldPlacementList *list, s32 mode);
+void enemySpawnChooseCandidates(FieldPlacementList *list, s32 mode);
 s32 gameFlagIsSet(s32 flag);
 s32 dataTableGetRecordFortyOne(void);
 
@@ -24,9 +24,9 @@ void fieldBuildAreaPlacementList(FieldPlacementList *list)
             ++list->count;
         }
     }
-    FUN_004834b0(list, 3);
+    enemySpawnChooseCandidates(list, 3);
     for (s32 index = 0; index < 4; ++index)
-        FUN_004834b0(list, 1);
+        enemySpawnChooseCandidates(list, 1);
     rt_memclr(list->pending, sizeof(list->pending));
     FUN_00482fe8(list);
 }

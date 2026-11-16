@@ -6,10 +6,10 @@
 extern "C" {
 
 int panelSetupButtons(int);
-int FUN_002a60cc(...);
+int packageFileDisableByKindName(...);
 int asdTMTexTableReleaseNode(int);
 int spriteStartAnimationByIndex(int, int);
-int FUN_002bf818(int);
+int uiSpriteAdvanceAnimation(int);
 int objectSetPosition(int);
 int FUN_0032c3fc(...);
 int VectorSignedToFloat(int, int);
@@ -19,10 +19,10 @@ extern int g_btlTalkBustUp; /* 0x434210 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: panelSetupButtons. */
-/* Supplied declaration required: FUN_002a60cc. */
+/* Supplied declaration required: packageFileDisableByKindName. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
-/* Supplied declaration required: FUN_002bf818. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 extern int randNextInRange(unsigned int);
 /* Supplied declaration required: objectSetPosition. */
 /* Supplied declaration required: FUN_0032c3fc. */
@@ -60,7 +60,7 @@ unsigned int FUN_00206528(void)
       case 0:
       case 1:
         temp_v1 = g_btlTalkBustUp + 0x20;
-        FUN_002bf818(temp_v1);
+        uiSpriteAdvanceAnimation(temp_v1);
         break;
       case 2:
       case 6:
@@ -74,13 +74,13 @@ unsigned int FUN_00206528(void)
       case 0x11:
       case 0x12:
       case 0x13:
-        FUN_002bf818(g_btlTalkBustUp + 0x20);
+        uiSpriteAdvanceAnimation(g_btlTalkBustUp + 0x20);
         temp_v1 = temp_v0 + 0xac;
-        FUN_002bf818(temp_v1);
+        uiSpriteAdvanceAnimation(temp_v1);
         break;
       case 3:
-        FUN_002bf818(g_btlTalkBustUp + 0x20);
-        FUN_002bf818(temp_v0 + 0xac);
+        uiSpriteAdvanceAnimation(g_btlTalkBustUp + 0x20);
+        uiSpriteAdvanceAnimation(temp_v0 + 0xac);
         temp_v3 = *(unsigned int *)(temp_v0 + 0x2ec);
         temp_v1 = (int)(((long long)(int)temp_v3 * -0x77777777 + ((unsigned long long)temp_v3 << 0x20)) >> 0x20);
         temp_v1 = temp_v3 + ((temp_v1 >> 5) - (temp_v1 >> 0x1f)) * -0x3c;
@@ -124,12 +124,12 @@ unsigned int FUN_00206528(void)
         objectSetPosition(temp_v0 + 0xac);
         break;
       case 4:
-        FUN_002bf818(g_btlTalkBustUp + 0x20);
+        uiSpriteAdvanceAnimation(g_btlTalkBustUp + 0x20);
         temp_v1 = 0;
         do {
           temp_v4 = temp_v0 + temp_v1;
           if (*(char *)(temp_v4 + 0x2dc) != '\0') {
-            temp_v2 = FUN_002bf818(temp_v0 + temp_v1 * 0x8c + 0xac);
+            temp_v2 = uiSpriteAdvanceAnimation(temp_v0 + temp_v1 * 0x8c + 0xac);
             if (temp_v2 != 0) {
               *(unsigned char *)(temp_v4 + 0x2dc) = 0;
             }
@@ -143,12 +143,12 @@ unsigned int FUN_00206528(void)
         } while (temp_v1 < 4);
         break;
       case 5:
-        FUN_002bf818(temp_v0 + 0xac);
+        uiSpriteAdvanceAnimation(temp_v0 + 0xac);
         temp_v1 = temp_v0 + 0x138;
-        FUN_002bf818(temp_v1);
+        uiSpriteAdvanceAnimation(temp_v1);
         break;
       case 8:
-        FUN_002bf818(g_btlTalkBustUp + 0x20);
+        uiSpriteAdvanceAnimation(g_btlTalkBustUp + 0x20);
         temp_v3 = *(unsigned int *)(temp_v0 + 0x2ec);
         temp_v1 = (int)(((long long)(int)temp_v3 * -0x77777777 + ((unsigned long long)temp_v3 << 0x20)) >> 0x20);
         temp_v1 = temp_v3 + ((temp_v1 >> 7) - (temp_v1 >> 0x1f)) * -0xf0;
@@ -191,14 +191,14 @@ unsigned int FUN_00206528(void)
         break;
       case 0xc:
       case 0x10:
-        FUN_002bf818(g_btlTalkBustUp + 0x20);
-        FUN_002bf818(temp_v0 + 0xac);
+        uiSpriteAdvanceAnimation(g_btlTalkBustUp + 0x20);
+        uiSpriteAdvanceAnimation(temp_v0 + 0xac);
         temp_v1 = temp_v0 + 0x138;
-        FUN_002bf818(temp_v1);
+        uiSpriteAdvanceAnimation(temp_v1);
       }
     }
     else {
-      FUN_002bf818(g_btlTalkBustUp + 0x20);
+      uiSpriteAdvanceAnimation(g_btlTalkBustUp + 0x20);
       temp_v1 = g_btlTalkBustUp;
       if (*(char *)(temp_v0 + 0xaa) != '\0') {
         if (*(short *)(temp_v0 + 0x7c) != 10) {
@@ -211,7 +211,7 @@ unsigned int FUN_00206528(void)
             if (g_btlTalkBustUp != 0) {
               *(unsigned char *)(g_btlTalkBustUp + 0x2f4) = 0;
             }
-            FUN_002a60cc(g_aocSystem,0x18,*(unsigned int *)(temp_v1 + 0x2f8));
+            packageFileDisableByKindName(g_aocSystem,0x18,*(unsigned int *)(temp_v1 + 0x2f8));
             *(unsigned int *)(temp_v1 + 0x2f8) = 0xffffffff;
           }
           *(unsigned int *)(temp_v1 + 0x2e8) = 3;

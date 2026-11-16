@@ -27,12 +27,12 @@ extern "C" {
 extern RenderCtx *g_titleScene;
 
 void renderCtxSelectStereoLayout(RenderCtx *context);
-void FUN_002bed3c(void);
+void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *vector);
-s32 FUN_002c5d80(u32 first, u32 second);
+s32 renderCtxPackPassFlags(u32 first, u32 second);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);
-void FUN_002bf380(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 size);
+void texDrawCompositeSprite(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 size);
 void FUN_00397db0(TitlePanel *panel, u8 frame, f32 speed);
 void renderCtxResetColorScale(RenderCtx *context);
 
@@ -40,18 +40,18 @@ void renderCtxResetColorScale(RenderCtx *context);
 void titlePanelDraw(TitlePanel *panel)
 {
     renderCtxSelectStereoLayout(g_titleScene);
-    FUN_002bed3c();
-    renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
+    gxResetColorQuadToWhite();
+    renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
     renderCtxSelectTexture(g_titleScene, 0);
     f32 speed = vec2GetSpeed(&panel->effect);
     efctSetSpeed(speed);
-    FUN_002bf380(2, 0x2e, 0, panel->frameX, 0, 0xb);
+    texDrawCompositeSprite(2, 0x2e, 0, panel->frameX, 0, 0xb);
     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
     if (panel->compact != 0) {
-        FUN_002bf288(2, 0x2e, 0x3f, panel->elementX, 0, 0xb);
+        texDrawTableEntryAtStoredOrigin(2, 0x2e, 0x3f, panel->elementX, 0, 0xb);
     } else {
-        FUN_002bf288(2, 0x2e, 0x3d, panel->elementX, 0, 0xb);
-        FUN_002bf288(2, 0x2e, 0x3e, panel->elementX, 0, 0xb);
+        texDrawTableEntryAtStoredOrigin(2, 0x2e, 0x3d, panel->elementX, 0, 0xb);
+        texDrawTableEntryAtStoredOrigin(2, 0x2e, 0x3e, panel->elementX, 0, 0xb);
     }
     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
     s8 frame = panel->frame;

@@ -33,12 +33,12 @@ extern void *g_handleRegistry;
 extern const char DAT_00531a48[];
 extern const char DAT_00531a78[];
 s32 gameFlagIsSet(s32 flag);
-void *FUN_00178b04(u32 bytes, const char *file, s32 line);
+void *asdMemoryAllocTraced(u32 bytes, const char *file, s32 line);
 MapGimicResource *modelListInit(void *memory);
 void FUN_0040aad4(MapGimicResource *resource, s32 index);
 void controllerSetDestination(void *controller, const MapVector *position);
 void controllerSetRotationEulerDegrees(void *controller, f32 x, f32 y, f32 z);
-void FUN_003fe86c(void *controller, s32 mode, s32 flags, f32 first, f32 second);
+void modelPlayClip(void *controller, s32 mode, s32 flags, f32 first, f32 second);
 void handleRegistryRegisterObject(void *registry, void *object);
 
 /* Find the map's matching gimmick, create its model and register the controller. */
@@ -64,14 +64,14 @@ void FUN_003b51a4(void)
                 mode = 2;
             entry->mode = mode;
             entry->active = 1;
-            void *memory = FUN_00178b04(0x20, DAT_00531a48, 0xa04);
+            void *memory = asdMemoryAllocTraced(0x20, DAT_00531a48, 0xa04);
             entry->resource = memory ? modelListInit(memory) : NULL;
-            FUN_0040aa6c(entry->resource, DAT_00531a78);
+            resourceOwnerLoadFileSync(entry->resource, DAT_00531a78);
             FUN_0040aad4(entry->resource, 0);
             void *controller = entry->resource->object;
             controllerSetDestination(controller, &entry->position);
             controllerSetRotationEulerDegrees(controller, 0.0f, entry->heading, 0.0f);
-            FUN_003fe86c(controller, entry->mode, 2, 0.0f, 0.0f);
+            modelPlayClip(controller, entry->mode, 2, 0.0f, 0.0f);
             handleRegistryRegisterObject(g_handleRegistry, controller);
             return;
         }

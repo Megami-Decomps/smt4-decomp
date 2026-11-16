@@ -21,7 +21,7 @@ struct ModelDrawJob {
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 
-s32 FUN_001692ac(u32 first, u32 second);
+s32 renderCtxPackPassFlags(u32 first, u32 second);
 void FUN_002b358c(u32 shape);
 void camSetMatrixB(RenderCtxA *context, CameraMatrix *matrix);
 void FUN_00409c60(RenderCtxA *context, u32 third, u32 second, u32 first, f32 firstScale, f32 secondScale, f32 thirdScale,
@@ -36,9 +36,9 @@ void skinObjectUpdateMatrices(RenderCtxA *context);
 void FUN_002b3c9c(ModelDrawJob *job, u32 argument)
 {
     if ((job->flags & 0x100) != 0) {
-        renderCtxPushA(g_renderCtx, FUN_001692ac(5, 0));
+        renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(5, 0));
     } else {
-        renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
+        renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
     }
     if ((job->flags & 0x200) != 0) {
         FUN_002b358c(job->shape);

@@ -9,7 +9,7 @@ int FUN_00126058(void);
 int msgBoxFlagsSetBit7(...);
 
 int FUN_001269fc(void);
-int FUN_002b8244(...);
+int buttonHelpSetEnabled(...);
 int FUN_002b827c(...);
 int FUN_002b8454(...);
 int buttonHelpSetPreset(...);
@@ -28,7 +28,7 @@ int recordPackedValue(unsigned int);
 int eventQueueAddUnique(int);
 int FUN_002b8ee0(...);
 int eventQueueAddUniqueIfValid(...);
-int FUN_002bf818(...);
+int uiSpriteAdvanceAnimation(...);
 int FUN_002c1658(...);
 int objFlagsSetBits(unsigned int, int);
 int VectorFloatToUnsigned(double, int);
@@ -58,10 +58,10 @@ extern signed char DAT_0049382a; /* 0x49382a */
 extern int msgBoxIsState2(unsigned int);
 /* Supplied declaration required: FUN_001269fc. */
 /* Supplied declaration required: msgBoxFlagsSetBit7. */
-/* Supplied declaration required: FUN_002b8244. */
+/* Supplied declaration required: buttonHelpSetEnabled. */
 /* Supplied declaration required: FUN_002b827c. */
 /* Supplied declaration required: FUN_002b8454. */
-extern unsigned short FUN_002b8584(unsigned int, unsigned int);
+extern unsigned short ifTouchRegionAddRequested(unsigned int, unsigned int);
 extern int FUN_002b8660(void);
 extern int FUN_002b8694(void);
 extern int lmapMainIsRunning(void);
@@ -84,7 +84,7 @@ extern int msgBoxFlagsTestAny(unsigned int, unsigned int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: workCommandRefreshActiveSlots. */
 extern int querySlotHasHandle(void);
-/* Supplied declaration required: FUN_002bf818. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 extern int jobGetWork(void);
 extern int slotIsActive(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
@@ -128,14 +128,14 @@ unsigned int FUN_00114474(void)
     if (!temp_v10 || temp_v7 != '\0') {
       if (*(char *)(temp_v3 + 0x82) != '\x01') {
         if (*(char *)(temp_v3 + 0x82) == '\x02') {
-          temp_v6 = FUN_002bf818(temp_v3 + 0x7e0);
+          temp_v6 = uiSpriteAdvanceAnimation(temp_v3 + 0x7e0);
           if (temp_v6 != 0) {
             *(unsigned char *)(temp_v3 + 0x82) = 3;
           }
         }
       }
       else {
-        temp_v6 = FUN_002bf818(temp_v3 + 0x7e0);
+        temp_v6 = uiSpriteAdvanceAnimation(temp_v3 + 0x7e0);
         if (temp_v6 != 0) {
           *(unsigned char *)(temp_v3 + 0x82) = 3;
         }
@@ -231,7 +231,7 @@ unsigned int FUN_00114474(void)
         *(int *)(temp_v3 + 100) = *(int *)(temp_v3 + 100) + 1;
         break;
       case 4:
-        temp_v6 = FUN_002bf818(temp_v3 + 0x754);
+        temp_v6 = uiSpriteAdvanceAnimation(temp_v3 + 0x754);
         if (temp_v6 != 0) {
           *(unsigned char *)(temp_v3 + 0x7d) = 0;
           *(unsigned char *)(temp_v3 + 0x7e) = 0;
@@ -268,7 +268,7 @@ unsigned int FUN_00114474(void)
       }
       break;
     case 4:
-      temp_v4 = FUN_002bf818(DAT_0043e190 + 0x984);
+      temp_v4 = uiSpriteAdvanceAnimation(DAT_0043e190 + 0x984);
       if (temp_v4 != 0) {
         *(unsigned char *)(temp_v6 + 0x88) = 2;
       }
@@ -345,7 +345,7 @@ LAB_001149c8:
       temp_v6 = *(int *)(temp_v3 + 0x18);
       temp_v10 = 0;
       if (temp_v7 == '\v') {
-        FUN_002bf818(temp_v3 + 0x380);
+        uiSpriteAdvanceAnimation(temp_v3 + 0x380);
         if (0 < *(int *)(temp_v3 + 0x60)) {
           *(int *)(temp_v3 + 0x60) = *(int *)(temp_v3 + 0x60) - 1;
         }
@@ -546,7 +546,7 @@ LAB_00114ee0:
       }
       break;
     }
-    FUN_002bf818(temp_v3 + 0x2f4);
+    uiSpriteAdvanceAnimation(temp_v3 + 0x2f4);
     temp_v6 = msgBoxFlagsTestAny(*(unsigned int *)(temp_v3 + 4),0x20);
     if ((temp_v6 != 0) && (temp_v6 = msgBoxFlagsTestAny(*(unsigned int *)(temp_v3 + 4),0x40), temp_v6 != 0)) {
       temp_v1 = 4;
@@ -576,34 +576,34 @@ joined_r0x00114a10:
            (!((temp_v7 == '\x10' || temp_v7 == '\x11') || temp_v7 == '\x12'))) {
           if (temp_v7 != '\x13') {
             if ((temp_v7 == '\a' || temp_v7 == '\b') || temp_v7 == '\t') {
-              FUN_002bf818(temp_v3 + 0x40c);
+              uiSpriteAdvanceAnimation(temp_v3 + 0x40c);
             }
-            temp_v6 = FUN_002bf818(temp_v3 + 0xc4);
+            temp_v6 = uiSpriteAdvanceAnimation(temp_v3 + 0xc4);
             if (temp_v6 != 0) goto LAB_00115134;
           }
           else {
             FUN_002b8ee0(temp_v3 + 0xc4,0);
             if (*(char *)(temp_v3 + 0x14e) != '\0') {
               *(unsigned char *)(temp_v3 + 8) = 1;
-              temp_v2 = FUN_002b8584(0x3a,0x98);
+              temp_v2 = ifTouchRegionAddRequested(0x3a,0x98);
               *(unsigned short *)(temp_v3 + 0x56) = temp_v2;
-              temp_v2 = FUN_002b8584(0x3a,0x99);
+              temp_v2 = ifTouchRegionAddRequested(0x3a,0x99);
               *(unsigned short *)(temp_v3 + 0x58) = temp_v2;
               *(unsigned int *)(temp_v3 + 0x60) = 0;
             }
           }
         }
         else {
-          FUN_002bf818(temp_v3 + 0x1dc);
-          temp_v6 = FUN_002bf818(temp_v3 + 0xc4);
-          if ((temp_v6 != 0) && (temp_v6 = FUN_002bf818(temp_v3 + 0x150), temp_v6 != 0)) {
+          uiSpriteAdvanceAnimation(temp_v3 + 0x1dc);
+          temp_v6 = uiSpriteAdvanceAnimation(temp_v3 + 0xc4);
+          if ((temp_v6 != 0) && (temp_v6 = uiSpriteAdvanceAnimation(temp_v3 + 0x150), temp_v6 != 0)) {
             temp_v7 = *(char *)(temp_v3 + 0x266);
             goto joined_r0x001159d0;
           }
         }
         break;
       }
-      FUN_002bf818(DAT_0043e18c + 0x2f4);
+      uiSpriteAdvanceAnimation(DAT_0043e18c + 0x2f4);
       temp_v6 = 0;
       FUN_002c1658(0,1);
       if (temp_v6 == 0) {
@@ -720,28 +720,28 @@ LAB_001151e4:
         if (temp_v6 != 2) {
           if (temp_v6 != 3) {
             if (temp_v6 != 4) goto LAB_001159f0;
-            temp_v2 = FUN_002b8584(0xe,0xb8);
+            temp_v2 = ifTouchRegionAddRequested(0xe,0xb8);
             *(unsigned short *)(temp_v3 + 0x56) = temp_v2;
-            temp_v2 = FUN_002b8584(0xe,0xb9);
+            temp_v2 = ifTouchRegionAddRequested(0xe,0xb9);
             *(unsigned short *)(temp_v3 + 0x58) = temp_v2;
-            temp_v2 = FUN_002b8584(0xe,0xba);
+            temp_v2 = ifTouchRegionAddRequested(0xe,0xba);
             *(unsigned short *)(temp_v3 + 0x5a) = temp_v2;
-            temp_v2 = FUN_002b8584(0xe,0xbb);
+            temp_v2 = ifTouchRegionAddRequested(0xe,0xbb);
             *(unsigned short *)(temp_v3 + 0x5c) = temp_v2;
           }
           else {
-            temp_v2 = FUN_002b8584(0xe,0xa2);
+            temp_v2 = ifTouchRegionAddRequested(0xe,0xa2);
             *(unsigned short *)(temp_v3 + 0x56) = temp_v2;
-            temp_v2 = FUN_002b8584(0xe,0xa3);
+            temp_v2 = ifTouchRegionAddRequested(0xe,0xa3);
             *(unsigned short *)(temp_v3 + 0x58) = temp_v2;
-            temp_v2 = FUN_002b8584(0xe,0xa4);
+            temp_v2 = ifTouchRegionAddRequested(0xe,0xa4);
             *(unsigned short *)(temp_v3 + 0x5a) = temp_v2;
           }
         }
         else {
-          temp_v2 = FUN_002b8584(0xe,0xac);
+          temp_v2 = ifTouchRegionAddRequested(0xe,0xac);
           *(unsigned short *)(temp_v3 + 0x56) = temp_v2;
-          temp_v2 = FUN_002b8584(0xe,0xad);
+          temp_v2 = ifTouchRegionAddRequested(0xe,0xad);
           *(unsigned short *)(temp_v3 + 0x58) = temp_v2;
         }
       }
@@ -770,7 +770,7 @@ LAB_001151e4:
         temp_v4 = temp_v3 + temp_v6;
         if (*(char *)(temp_v4 + 0x37) != '\0') {
           temp_v8 = temp_v3 + temp_v6 * 0x8c;
-          FUN_002bf818(temp_v8 + 0x498);
+          uiSpriteAdvanceAnimation(temp_v8 + 0x498);
           if ((*(unsigned char *)(temp_v8 + 0x520) & *(unsigned char *)(temp_v8 + 0x51f)) != 0) {
             temp_v7 = *(char *)(temp_v4 + 0x41) + '\x01';
             *(char *)(temp_v4 + 0x41) = temp_v7;
@@ -801,7 +801,7 @@ LAB_00115134:
           if (((!(temp_v7 == '\x02' || temp_v7 == '\x03')) && (!(temp_v7 == '\x04' || temp_v7 == '\x05')))
              && (!((temp_v7 == '\x10' || temp_v7 == '\x11') || temp_v7 == '\x12'))) {
             if (((temp_v7 == '\a' || temp_v7 == '\b') || temp_v7 == '\t') &&
-               (FUN_002bf818(temp_v3 + 0x40c), *(char *)(temp_v3 + 0xa12) != '\0')) {
+               (uiSpriteAdvanceAnimation(temp_v3 + 0x40c), *(char *)(temp_v3 + 0xa12) != '\0')) {
               if (*(char *)(temp_v3 + 0xa26) != '\0') {
                 buttonHelpSetPreset();
                 temp_v5 = 0;
@@ -814,7 +814,7 @@ LAB_00115134:
               }
               *(unsigned char *)(temp_v3 + 0xa12) = 0;
             }
-            temp_v6 = FUN_002bf818(temp_v3 + 0xc4);
+            temp_v6 = uiSpriteAdvanceAnimation(temp_v3 + 0xc4);
             if (temp_v6 != 0) {
               *(unsigned char *)(temp_v3 + 8) = 0;
               msgBoxFlagsClearBit7(*(unsigned int *)(temp_v3 + 4));
@@ -823,8 +823,8 @@ LAB_00115134:
             }
           }
           else {
-            FUN_002bf818(temp_v3 + 0xc4);
-            FUN_002bf818(temp_v3 + 0x1dc);
+            uiSpriteAdvanceAnimation(temp_v3 + 0xc4);
+            uiSpriteAdvanceAnimation(temp_v3 + 0x1dc);
             if ((*(char *)(temp_v3 + 0x14e) != '\0') && (*(char *)(temp_v3 + 0x266) != '\0')) {
               *(unsigned char *)(temp_v3 + 8) = 0;
               msgBoxFlagsClearBit7(*(unsigned int *)(temp_v3 + 4));
@@ -834,18 +834,18 @@ LAB_00115134:
           }
         }
         else {
-          FUN_002bf818(temp_v3 + 0xc4);
+          uiSpriteAdvanceAnimation(temp_v3 + 0xc4);
           if (*(char *)(temp_v3 + 0x14e) != '\0') {
             *(unsigned char *)(temp_v3 + 8) = 0;
             msgBoxFlagsClearBit7(*(unsigned int *)(temp_v3 + 4));
             *(unsigned char *)(temp_v3 + 0xa12) = 0;
-            FUN_002b8244(0);
+            buttonHelpSetEnabled(0);
           }
         }
       }
       else {
-        FUN_002bf818(temp_v3 + 0xc4);
-        FUN_002bf818(temp_v3 + 0x268);
+        uiSpriteAdvanceAnimation(temp_v3 + 0xc4);
+        uiSpriteAdvanceAnimation(temp_v3 + 0x268);
         if ((*(char *)(temp_v3 + 0x14e) != '\0') && (*(char *)(temp_v3 + 0x2f2) != '\0')) {
           *(unsigned char *)(temp_v3 + 8) = 0;
           msgBoxFlagsClearBit7(*(unsigned int *)(temp_v3 + 4));
@@ -875,7 +875,7 @@ LAB_00115134:
       if (0 < *(int *)(temp_v3 + 0x24)) {
         do {
           temp_v4 = temp_v3 + temp_v6 * 0x8c;
-          FUN_002bf818(temp_v4 + 0x498);
+          uiSpriteAdvanceAnimation(temp_v4 + 0x498);
           if (*(char *)(temp_v4 + 0x51f) != '\0') {
             *(unsigned char *)(temp_v3 + temp_v6 + 0x37) = 0;
           }
@@ -954,9 +954,9 @@ LAB_00114fc0:
   case 7:
     if ((*(char *)(temp_v3 + 9) != '\v') || (*(char *)(DAT_0043e190 + 0x5f) != '\0'))
     goto LAB_00115ab4;
-    FUN_002bf818(temp_v3 + 0xc4);
-    FUN_002bf818(temp_v3 + 0x268);
-    FUN_002bf818(temp_v3 + 0x380);
+    uiSpriteAdvanceAnimation(temp_v3 + 0xc4);
+    uiSpriteAdvanceAnimation(temp_v3 + 0x268);
+    uiSpriteAdvanceAnimation(temp_v3 + 0x380);
     break;
   case 8:
     if (*(char *)(temp_v3 + 9) != '\v') goto LAB_00115ab4;

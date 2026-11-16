@@ -17,6 +17,6 @@ void FUN_00425f68()
     conversionReplaceEventHandle(&g_y2rTransferEvent);
     s32 result = nn::svc::ClearEvent(g_y2rTransferEvent);
     if (nnResultIsFailure(result))
-        FUN_002e3140(result);
+        resultHandleFailure(result);
 }
 }

@@ -36,7 +36,7 @@ void btlTalkBustUpReleaseTexture(void)
         if (bustUp->slot >= 0) {
             asdTMTexTableReleaseNode(0x18, bustUp->slot);
             btlTalkBustUpSetLoaded(0);
-            FUN_002a60cc(g_aocSystem, 0x18, bustUp->slot);
+            packageFileDisableByKindName(g_aocSystem, 0x18, bustUp->slot);
             bustUp->slot = -1;
         }
         bustUp->unk2EC = 0;

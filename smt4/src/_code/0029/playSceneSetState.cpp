@@ -11,10 +11,10 @@ int FUN_00292f4c(void);
 int FUN_00297b94(int, unsigned int, unsigned int);
 int objectPartRunUnlessLocked(int);
 int FUN_0029e958(...);
-int FUN_0029f848(int, int, int, int, int, int);
+int gridNavigationConfigure(int, int, int, int, int, int);
 int buttonHelpGetMode(void);
 int dataTable00FindById(void);
-int FUN_002b8584(...);
+int ifTouchRegionAddRequested(...);
 int buttonHelpSetPreset(void);
 int ifTouchRegionRemove(void);
 int __aeabi_memset4(int, int, unsigned int);
@@ -35,10 +35,10 @@ extern int FUN_0029d644(unsigned int);
 /* Supplied declaration required: objectPartRunUnlessLocked. */
 /* Supplied declaration required: FUN_0029e958. */
 extern int FUN_0029ee54(unsigned int);
-/* Supplied declaration required: FUN_0029f848. */
+/* Supplied declaration required: gridNavigationConfigure. */
 /* Supplied declaration required: buttonHelpGetMode. */
 /* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: FUN_002b8584. */
+/* Supplied declaration required: ifTouchRegionAddRequested. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int buttonHelpGetStatus(void);
 /* Supplied declaration required: ifTouchRegionRemove. */
@@ -59,7 +59,7 @@ void playSceneSetState(int param_1,int param_2,int param_3)
   unsigned char temp_v6;
   
   if (*(int *)(param_1 + 0x3048) == 0x22) {
-    FUN_0029f848(param_1 + 0x33a8,4,1,4,1,1);
+    gridNavigationConfigure(param_1 + 0x33a8,4,1,4,1,1);
   }
   if (*(int *)(param_1 + 0x3048) == 0x13 || *(int *)(param_1 + 0x3048) == 0x16) {
     buttonHelpGetMode();
@@ -131,7 +131,7 @@ LAB_002983fc:
         else {
           temp_v4 = temp_v1 + (int)(7 - temp_v3) / 2 + 0xff;
         }
-        temp_v0 = FUN_002b8584(0x15,temp_v4);
+        temp_v0 = ifTouchRegionAddRequested(0x15,temp_v4);
         temp_v4 = temp_v1 * 2;
         temp_v1 = temp_v1 + 1;
         *(unsigned short *)(param_1 + temp_v4 + 0x5716) = temp_v0;
@@ -152,7 +152,7 @@ LAB_002983fc:
         else {
           temp_v1 = 0xb3;
         }
-        temp_v0 = FUN_002b8584(0x15,temp_v1 + temp_v4);
+        temp_v0 = ifTouchRegionAddRequested(0x15,temp_v1 + temp_v4);
         temp_v1 = temp_v4 * 2;
         temp_v4 = temp_v4 + 1;
         *(unsigned short *)(param_1 + temp_v1 + 0x572c) = temp_v0;
@@ -165,28 +165,28 @@ LAB_002983fc:
     if (temp_v4 < temp_v1) {
       if (*(int *)(param_1 + 0x305c) != 1) {
         if (*(int *)(param_1 + 0x305c) != 2) {
-          temp_v0 = FUN_002b8584(0x15,0x196);
+          temp_v0 = ifTouchRegionAddRequested(0x15,0x196);
           *(unsigned short *)(param_1 + 0x5726) = temp_v0;
-          temp_v0 = FUN_002b8584(0x15,0x194);
+          temp_v0 = ifTouchRegionAddRequested(0x15,0x194);
           *(unsigned short *)(param_1 + 0x5728) = temp_v0;
-          temp_v0 = FUN_002b8584(0x15,0x195);
+          temp_v0 = ifTouchRegionAddRequested(0x15,0x195);
           *(unsigned short *)(param_1 + 0x572a) = temp_v0;
         }
         else {
-          temp_v0 = FUN_002b8584(0x15,0x193);
+          temp_v0 = ifTouchRegionAddRequested(0x15,0x193);
           *(unsigned short *)(param_1 + 0x5726) = temp_v0;
-          temp_v0 = FUN_002b8584(0x15,0x191);
+          temp_v0 = ifTouchRegionAddRequested(0x15,0x191);
           *(unsigned short *)(param_1 + 0x5728) = temp_v0;
-          temp_v0 = FUN_002b8584(0x15,0x192);
+          temp_v0 = ifTouchRegionAddRequested(0x15,0x192);
           *(unsigned short *)(param_1 + 0x572a) = temp_v0;
         }
       }
       else {
-        temp_v0 = FUN_002b8584(0x15,0x199);
+        temp_v0 = ifTouchRegionAddRequested(0x15,0x199);
         *(unsigned short *)(param_1 + 0x5726) = temp_v0;
-        temp_v0 = FUN_002b8584(0x15,0x197);
+        temp_v0 = ifTouchRegionAddRequested(0x15,0x197);
         *(unsigned short *)(param_1 + 0x5728) = temp_v0;
-        temp_v0 = FUN_002b8584(0x15,0x198);
+        temp_v0 = ifTouchRegionAddRequested(0x15,0x198);
         *(unsigned short *)(param_1 + 0x572a) = temp_v0;
       }
       *(short *)(param_1 + 0x5714) = *(short *)(param_1 + 0x5714) + 3;
@@ -205,7 +205,7 @@ LAB_002983fc:
       else {
         temp_v4 = temp_v1 + (int)(7 - temp_v3) / 2 + 0xff;
       }
-      temp_v0 = FUN_002b8584(0x15,temp_v4);
+      temp_v0 = ifTouchRegionAddRequested(0x15,temp_v4);
       temp_v4 = temp_v1 * 2;
       temp_v1 = temp_v1 + 1;
       *(unsigned short *)(param_1 + temp_v4 + 0x5716) = temp_v0;
@@ -222,7 +222,7 @@ LAB_00298368:
     }
   }
   else {
-    temp_v0 = FUN_002b8584(0x15,0x1b3);
+    temp_v0 = ifTouchRegionAddRequested(0x15,0x1b3);
     *(unsigned short *)(param_1 + 0x5738) = temp_v0;
     temp_v1 = 0;
     *(short *)(param_1 + 0x5714) = *(short *)(param_1 + 0x5714) + 1;
@@ -236,7 +236,7 @@ LAB_00298368:
         dataTable00FindById();
         if ((*(unsigned char *)(temp_v3 + 3) & 1) != 0) {
           if (*(char *)(param_1 + 0x575f) != '\0') {
-            temp_v0 = FUN_002b8584(0x15,0x1a0);
+            temp_v0 = ifTouchRegionAddRequested(0x15,0x1a0);
             *(unsigned short *)(param_1 + temp_v1 * 2 + 0x573a) = temp_v0;
           }
           else {
@@ -249,17 +249,17 @@ LAB_00298368:
               temp_v5 = temp_v3 == 3;
             }
             if (!(temp_v6 && !temp_v5)) {
-              temp_v0 = FUN_002b8584(0x15,0x19f);
+              temp_v0 = ifTouchRegionAddRequested(0x15,0x19f);
               *(unsigned short *)(param_1 + temp_v1 * 2 + 0x573a) = temp_v0;
             }
             else {
-              temp_v0 = FUN_002b8584(0x15,0x19e);
+              temp_v0 = ifTouchRegionAddRequested(0x15,0x19e);
               *(unsigned short *)(param_1 + temp_v1 * 2 + 0x573a) = temp_v0;
             }
           }
         }
         else {
-          temp_v0 = FUN_002b8584(0x15,*(unsigned int *)(temp_v4 + 0x5780));
+          temp_v0 = ifTouchRegionAddRequested(0x15,*(unsigned int *)(temp_v4 + 0x5780));
           *(unsigned short *)(param_1 + temp_v1 * 2 + 0x573a) = temp_v0;
         }
         *(short *)(param_1 + 0x5714) = *(short *)(param_1 + 0x5714) + 1;
@@ -275,7 +275,7 @@ LAB_00298368:
   if (0 < temp_v1) {
     do {
       if (*(char *)(param_1 + temp_v4 + 0x38d1) == '\0') {
-        temp_v0 = FUN_002b8584(0x15,temp_v4 + 0x36);
+        temp_v0 = ifTouchRegionAddRequested(0x15,temp_v4 + 0x36);
         *(unsigned short *)(param_1 + temp_v4 * 2 + 0x574e) = temp_v0;
         *(short *)(param_1 + 0x5714) = *(short *)(param_1 + 0x5714) + 1;
       }

@@ -10,9 +10,9 @@ void *__aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 void textFormatBuffer(char *destination, const char *format, ...);
 void *FUN_001b2ebc(AocDisplay *display, const char *path, s32 option,
                    void *size, s32 enabled, s32 alignment, s32 flags);
-s32 FUN_001b315c(FileTableGroup *group);
-FileTableKindRecord *FUN_001b31ac(FileTableGroup *group);
-s32 FUN_001b31e0(FileTableGroup *group);
+s32 packageEntryIsLoaded(FileTableGroup *group);
+FileTableKindRecord *packageEntryGetDirectory(FileTableGroup *group);
+s32 packageEntryGetFileCount(FileTableGroup *group);
 
 // Open matching package files into the caller's slots and mark the owner's request slots.
 void FUN_004701d8(GroupedFileTables *owner, s32 kind, s32 capacity, FileTableSlot *output)
@@ -31,10 +31,10 @@ void FUN_004701d8(GroupedFileTables *owner, s32 kind, s32 capacity, FileTableSlo
     s32 outputIndex = 0;
     for (s32 groupIndex = 0; groupIndex < owner->count; ++groupIndex) {
         FileTableGroup *group = &owner->groups[groupIndex];
-        if (!FUN_001b315c(group))
+        if (!packageEntryIsLoaded(group))
             continue;
-        FileTableKindRecord *records = FUN_001b31ac(group);
-        u32 count = FUN_001b31e0(group);
+        FileTableKindRecord *records = packageEntryGetDirectory(group);
+        u32 count = packageEntryGetFileCount(group);
         const char *directory = reinterpret_cast<const DirectoryGroupView *>(group)->directory;
         for (u32 index = 0; index < count; ++index) {
             FileTableKindRecord *record = &records[index];

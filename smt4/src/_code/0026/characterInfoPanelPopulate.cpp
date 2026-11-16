@@ -39,7 +39,7 @@ char *libc_strcpy(char *destination, const char *source);
 void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 void asdTextDrawFormatted(void *label, u32 font, u32 color, s32 x, s32 y, const char *format, ...);
 const char *fileSectionGetData(void *file, u32 entry, u32 table);
-const char *FUN_002be650(u32 id, u32 flags);
+const char *dataFindKindRecordWithAocOverrides(u32 id, u32 flags);
 void textConvertToGlyphPairs(const char *source, char *destination);
 const char *demonGetRaceLabel(u32 demon, u32 flags);
 void FUN_002a7c80(char *destination, const char *source);
@@ -54,7 +54,7 @@ extern const char DAT_00402898[];
 static __forceinline void setCharacterEquipmentLabel(CharacterInfoPanel *panel, const CharacterInfoRecord *record, u32 slot, char *buffer)
 {
     if (record->equipment[slot]) {
-        textConvertToGlyphPairs(FUN_002be650(record->equipment[slot], 0), buffer);
+        textConvertToGlyphPairs(dataFindKindRecordWithAocOverrides(record->equipment[slot], 0), buffer);
         asdTextDrawFormatted(panel->equipmentLabels[slot], 2, -1u, 0, 0, buffer);
         panel->equipmentIds[slot] = record->equipment[slot];
     } else {
@@ -99,7 +99,7 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanel *panel, const Char
     setCharacterEquipmentLabel(panel, record, 6, buffer);
 
     if (record->demon)
-        textConvertToGlyphPairs(reinterpret_cast<const char *>(FUN_002bd06c(record->demon)), buffer);
+        textConvertToGlyphPairs(reinterpret_cast<const char *>(dataTable01FindByIdWithAoc(record->demon)), buffer);
     else
         strcpy(buffer, "\x81\x7c\x81\x7c\x81\x7c");
     asdTextDrawFormatted(panel->demonName, 1, -1u, 0, 0, buffer);

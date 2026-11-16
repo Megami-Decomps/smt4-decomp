@@ -14,7 +14,7 @@ extern AllocatorLock g_allocationAddressRanges;
 
 void asdAllocatorLock(void);
 void *asdMemoryAllocImpl(u32 a, u32 b, u32 c, u32 size, u32 extra);
-void *FUN_001844ac(void *block, u32 size, u32 alignment, u32 flags);
+void *asdMemInitAllocationHeader(void *block, u32 size, u32 alignment, u32 flags);
 void rt_memclr(void *memory, u32 size);
 
 // Allocates `size` zeroed bytes aligned to `alignment` (at least 0x80) under the allocator lock.
@@ -28,12 +28,12 @@ void *memAlloc(u32 a, u32 b, u32 c, u32 size, u32 alignment, u32 extra)
     u32 mask = -alignment;
     paddedSize = (paddedSize + 0x3f) & mask;
     void *block = asdMemoryAllocImpl(a, b, c, paddedSize, extra);
-    void *memory = FUN_001844ac(block, paddedSize, alignment, 0);
+    void *memory = asdMemInitAllocationHeader(block, paddedSize, alignment, 0);
     rt_memclr(memory, size);
     u32 result = nn::svc::ReleaseMutex(*g_allocationAddressRanges.mutex);
     bool failed = nnResultIsFailure(result);
     if (failed) {
-        FUN_002e3140(result, failed);
+        resultHandleFailure(result, failed);
     }
     return memory;
 }

@@ -18,7 +18,7 @@ extern "C" {
 extern BtlAuxA *g_btlAux;
 extern BtlUiA *g_btlUiBlock;
 extern StageHeightRecord DAT_00529780[];
-s32 FUN_0013def0(u32 slot);
+s32 pairedAvailabilityGetState(u32 slot);
 s32 FUN_00163e84(u32 slot);
 s32 btlStageGetModeIndex(u32 context);
 void FUN_004f5238(BtlAuxA *context, u32 first, u32 second, u32 kind,
@@ -36,7 +36,7 @@ s32 btlStartEntries(BtlMainStateA *battle);
 void battleAdvanceEntryStartup(EntryStartupStep *step)
 {
     if (step->phase == 0) {
-        if (FUN_0013def0(0) == 3) {
+        if (pairedAvailabilityGetState(0) == 3) {
             f32 height = 0.0f;
             s32 index = btlStageGetModeIndex(reinterpret_cast<u32>(step));
             if (index >= 0)

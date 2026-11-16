@@ -17,11 +17,11 @@ void FUN_003aa9a4(u32 target, const void *source)
     s32 h;
 
     ((Obj422594 *)target)->Obj422594::initialize(source);
-    FUN_00231434(0x1D, 0x573, &x, &y, &w, &h);
+    asdTMTexTableGetEntryPlacement(0x1D, 0x573, &x, &y, &w, &h);
     touchRegisterFirstRegion(target, x, y, w, h);
-    FUN_00231434(0x1D, 0x574, &x, &y, &w, &h);
+    asdTMTexTableGetEntryPlacement(0x1D, 0x574, &x, &y, &w, &h);
     touchRegisterSecondRegion(target, x, y, w, h);
-    FUN_00231434(0x1D, 0x575, &x, &y, &w, &h);
+    asdTMTexTableGetEntryPlacement(0x1D, 0x575, &x, &y, &w, &h);
     FUN_002346ac(target, x, y, w, h);
 }
 

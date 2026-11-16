@@ -11,8 +11,8 @@ int effectColorInitDefault(...);
 int libc_strcpy(...);
 int sysMemClear(...);
 int FUN_003e7840(...);
-int FUN_003fd7b4(...);
-int FUN_003fe86c(...);
+int controllerSetPositionXyz(...);
+int modelPlayClip(...);
 int FUN_0040aad4(...);
 int FUN_0040ab7c(...);
 int handleRegistryRegisterObject(...);
@@ -45,8 +45,8 @@ extern int FUN_00100d60(unsigned char *, unsigned int);
 extern int gameObjectFlagIsSet(void);
 extern int findRecordByKey(int);
 /* Supplied declaration required: FUN_003e7840. */
-/* Supplied declaration required: FUN_003fd7b4. */
-/* Supplied declaration required: FUN_003fe86c. */
+/* Supplied declaration required: controllerSetPositionXyz. */
+/* Supplied declaration required: modelPlayClip. */
 /* Supplied declaration required: FUN_0040aad4. */
 /* Supplied declaration required: FUN_0040ab7c. */
 extern int FUN_0040ab8c(unsigned int);
@@ -175,9 +175,9 @@ unsigned int FUN_004fa828(int param_1,unsigned int param_2,unsigned int param_3,
         FUN_0040ab7c(temp_v1,0);
         FUN_0040aad4(*puVar8,0);
         temp_v3 = *(int *)(*puVar8 + 4);
-        FUN_003fd7b4(temp_v3);
+        controllerSetPositionXyz(temp_v3);
         *(int *)(temp_v3 + 0x1fc) = (int)temp_v9;
-        FUN_003fe86c(temp_v3,0,2);
+        modelPlayClip(temp_v3,0,2);
         handleRegistryRegisterObject(g_handleRegistry,temp_v3);
         *(unsigned int *)(temp_v3 + 4) = *(unsigned int *)(temp_v3 + 4) | 1;
         if (-1 < *(int *)(temp_v2 + 0x1ac)) {

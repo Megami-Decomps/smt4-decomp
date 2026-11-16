@@ -30,9 +30,9 @@ struct IconRecord {
 };
 
 LayoutPart *asdTMTexTableEntryAt(s32 bank, s32 id);
-void FUN_001835b4(s32 layer, s32 bank, s32 id, s32 x, s32 y, s32 depth);
+void texDrawTableEntryAtStoredOrigin(s32 layer, s32 bank, s32 id, s32 x, s32 y, s32 depth);
 void efctSetSpeed(f32 speed);
-IconRecord *FUN_0019e52c(s32 id);
+IconRecord *dataTable10FindValue(s32 id);
 void devilGetRecord(void);
 void FUN_00169a1c(s32 layout, s32 x, s32 y, s32 depth);
 s32 FUN_003f74a8(u32 id, CardEntry *entry, s32 x, s32 y);
@@ -49,10 +49,10 @@ void FUN_003f7164(u32 id, CardEntry *entry, s32 index, u32 arg, s32 offsetX, s32
     s32 x = base->x + offsetX;
     s32 y = base->y + offsetY;
     efctSetSpeed(speed);
-    FUN_001835b4(2, LAYOUT_BANK, 0x7B, x, y, depth);
-    FUN_001835b4(2, LAYOUT_BANK, 0x7C, x, y, depth);
+    texDrawTableEntryAtStoredOrigin(2, LAYOUT_BANK, 0x7B, x, y, depth);
+    texDrawTableEntryAtStoredOrigin(2, LAYOUT_BANK, 0x7C, x, y, depth);
     LayoutPart *part = asdTMTexTableEntryAt(LAYOUT_BANK, index + 0x91);
-    FUN_001835b4(2, LAYOUT_BANK, 0x90, part->x + offsetX, part->y + offsetY, depth);
+    texDrawTableEntryAtStoredOrigin(2, LAYOUT_BANK, 0x90, part->x + offsetX, part->y + offsetY, depth);
 
     part = asdTMTexTableEntryAt(LAYOUT_BANK, 0x7D);
     s32 iconY = part->y + base->y + offsetY;
@@ -79,7 +79,7 @@ void FUN_003f7164(u32 id, CardEntry *entry, s32 index, u32 arg, s32 offsetX, s32
         } else if (type == 9) {
             record = (IconRecord *)0x29D;
         } else {
-            record = FUN_0019e52c(iconId);
+            record = dataTable10FindValue(iconId);
         }
         devilGetRecord();
         s16 layout = 0;
@@ -89,10 +89,10 @@ void FUN_003f7164(u32 id, CardEntry *entry, s32 index, u32 arg, s32 offsetX, s32
         if (record != 0 && layout != 0) {
             FUN_00169a1c(layout, iconX, iconY, depth + 5);
         } else {
-            FUN_001835b4(2, LAYOUT_BANK, 4, iconX, iconY, depth + 5);
+            texDrawTableEntryAtStoredOrigin(2, LAYOUT_BANK, 4, iconX, iconY, depth + 5);
         }
     } else {
-        FUN_001835b4(2, LAYOUT_BANK, 4, iconX, iconY, depth + 5);
+        texDrawTableEntryAtStoredOrigin(2, LAYOUT_BANK, 4, iconX, iconY, depth + 5);
     }
 
     part = asdTMTexTableEntryAt(LAYOUT_BANK, 0x7E);

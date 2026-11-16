@@ -76,18 +76,18 @@ void FUN_0026e8b8(s32 menu, s32 x, s32 y, u32 flags, s32 plain)
 
     if (plain != 0) {
         TextureTableEntryIV *frame = asdTMTexTableEntryAt(CAMP_NOTICE_HEADER, CAMP_NOTICE_FRAME_PLAIN);
-        FUN_001835b4(2, CAMP_NOTICE_HEADER, CAMP_NOTICE_ICON, frame->x + x, frame->y + y, flags);
+        texDrawTableEntryAtStoredOrigin(2, CAMP_NOTICE_HEADER, CAMP_NOTICE_ICON, frame->x + x, frame->y + y, flags);
         return;
     }
 
     TextureTableEntryIV *frame = asdTMTexTableEntryAt(CAMP_NOTICE_HEADER, CAMP_NOTICE_FRAME_ANIMATED);
-    FUN_001835b4(2, CAMP_NOTICE_HEADER, CAMP_NOTICE_ICON, frame->x + x, frame->y + y, flags);
+    texDrawTableEntryAtStoredOrigin(2, CAMP_NOTICE_HEADER, CAMP_NOTICE_ICON, frame->x + x, frame->y + y, flags);
     u32 active = jobGetScalarValue() != 0.0f;
     efctSetSpeed(g_camp->iconSpeed * (f32)active);
     RenderCtxA *context = g_renderCtx;
     s32 state = packNibblesAndByte(6, 1, 0);
     renderStackSet(&context->stackB, state);
-    FUN_001835b4(2, CAMP_NOTICE_HEADER, CAMP_NOTICE_GLOW, frame->x + x, frame->y + y, flags);
+    texDrawTableEntryAtStoredOrigin(2, CAMP_NOTICE_HEADER, CAMP_NOTICE_GLOW, frame->x + x, frame->y + y, flags);
     context = g_renderCtx;
     state = packNibblesAndByte(6, 7, 0);
     renderStackSet(&context->stackB, state);

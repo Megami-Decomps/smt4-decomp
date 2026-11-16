@@ -5,13 +5,13 @@ struct ItemSlot;
 extern "C" {
 
 s32 FUN_00230e04(ItemSlot *slot);
-u16 FUN_00230f44(const u16 *slot);
+u16 aocEntryGetSortOrder(const u16 *slot);
 
 /* Orders two slots by their record's order key. */
 static s32 compareOrder(ItemSlot *a, ItemSlot *b)
 {
-    s32 rankA = FUN_00230f44(reinterpret_cast<const u16 *>(a));
-    s32 rankB = FUN_00230f44(reinterpret_cast<const u16 *>(b));
+    s32 rankA = aocEntryGetSortOrder(reinterpret_cast<const u16 *>(a));
+    s32 rankB = aocEntryGetSortOrder(reinterpret_cast<const u16 *>(b));
     return rankA - rankB;
 }
 

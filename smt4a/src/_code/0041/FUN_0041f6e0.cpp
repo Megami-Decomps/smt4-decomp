@@ -63,7 +63,7 @@ extern void sysMemClear(void *block, s32 size);
 extern void __ARM_common_memcpy4_8(void *dest, void *src);
 extern s32 FUN_0040ab8c(u32 request);
 extern void saveLoadProcessCreate(s32 step, s32 arg);
-extern void FUN_00275bc8(void);
+extern void scrScriptProcessCreate(void);
 extern void statusPanelSetOpen(s32 arg);
 extern void FUN_0023b45c(s32 arg);
 extern void FUN_002f0384(s32 arg);
@@ -142,7 +142,7 @@ void FUN_0041f6e0(SaveLoadTask *task)
                 u8 previous;
 
                 if (task->handleC == 0) {
-                    FUN_00275bc8();
+                    scrScriptProcessCreate();
                     task->handleC = handle;
                 }
                 __aeabi_memcpy4(gameDataBlocksGetTable(), task->snapshotTable, 0x80);

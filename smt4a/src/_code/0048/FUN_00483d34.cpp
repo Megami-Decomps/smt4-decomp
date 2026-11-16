@@ -43,7 +43,7 @@ extern "C" {
 extern const s16 DAT_00532b5c[];
 
 void scrRunOpcodesStub(u32 process);
-void FUN_00163aa4(void* tabBar, f32 amount);
+void uiSpriteAdvanceAnimation(void* tabBar, f32 amount);
 s32 largeGridHandleTouchSelection(NameEntryScreen* screen);
 s32 inputIsQuestConfirmPressed(void);
 s32 inputIsQuestMenuPressed(void);
@@ -73,7 +73,7 @@ static inline void typeCharacter(NameEntryScreen* screen, s32 character)
 void FUN_00483d34(NameEntryScreen* screen)
 {
     scrRunOpcodesStub(screen->process);
-    FUN_00163aa4(screen->tabBar, 1.0f);
+    uiSpriteAdvanceAnimation(screen->tabBar, 1.0f);
     s32 touch = largeGridHandleTouchSelection(screen);
     screen->touchResult = touch;
     if (touch == 1 || touch == 2) return;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001d3edc(void);
-int FUN_002e3140(void);
+int resultHandleFailure(void);
 
 /* stack frame of param_3: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_001d3edc. */
-/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: resultHandleFailure. */
 
 
 void nn_os_TransferMemoryBlock_Initialize(int param_1,unsigned int param_2,unsigned int param_3)
@@ -47,7 +47,7 @@ void nn_os_TransferMemoryBlock_Initialize(int param_1,unsigned int param_2,unsig
   if (-1 < (int)puVar1) {
     return;
   }
-  FUN_002e3140();
+  resultHandleFailure();
   return;
 }
 

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e3140(...);
+int resultHandleFailure(...);
 int FUN_002fb0b4(...);
 int FUN_002fb0d4(...);
 int FUN_002fb1c4(...);
@@ -39,7 +39,7 @@ extern unsigned char LAB_00110440; /* 0x110440 */
 extern signed char DAT_00594959; /* 0x594959 */
 
 extern unsigned int FUN_00128ce0(unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: resultHandleFailure. */
 extern int FUN_002e784e(int, unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002fb0b4. */
 /* Supplied declaration required: FUN_002fb0d4. */
@@ -100,7 +100,7 @@ unsigned char FUN_00110334(fn_00110334_arg0 *param_1)
                  puVar5[2] + ((puVar5[1] + 0xfff) & 0xfffff000),temp_v1,temp_v0,0);
   }
   if ((((unsigned int)pfVar4 & 0x7ffffff) >> 0x15 != 3) && ((int)pfVar4 < 0)) {
-    FUN_002e3140();
+    resultHandleFailure();
   }
   temp_v1 = *param_1->field_0xc;
   if (-1 >= (int)pfVar4) {

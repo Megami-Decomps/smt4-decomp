@@ -15,7 +15,7 @@ u32 FUN_002f7528(void)
     s32 count;
     s32 i;
 
-    FUN_002499fc(btlScriptResolveGroupArg(scrGetArg(1)), &first, &count);
+    btlSideGetEntryRange(btlScriptResolveGroupArg(scrGetArg(1)), &first, &count);
     for (i = first; i < first + count; i++) {
         BtlEntry *unit = &btlGetMainState()->entries[i];
 

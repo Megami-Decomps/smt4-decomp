@@ -14,7 +14,7 @@ u32 FUN_001860e4(const char *);
 s32 refIsNullOrZero(FileProbeConversionState *);
 u32 FUN_00100836(const char *, u32, FileProbeConversionState *);
 u32 FUN_002e3c44(u16 *, const char *, u32, FileProbeConversionState *);
-u32 FUN_001883b0(FileProbeHandle *, const u16 *, u32);
+u32 archivePathDeviceOpen(FileProbeHandle *, const u16 *, u32);
 void sysFatalBreak();
 void vcallSlot12IfValid(u32);
 }
@@ -40,7 +40,7 @@ struct FileProbeHandle {
     u32 open(const u16 *path)
     {
         state[0] = state[1] = state[2] = state[3] = 0;
-        return FUN_001883b0(this, path, 1);
+        return archivePathDeviceOpen(this, path, 1);
     }
     ~FileProbeHandle() { close(); }
 };

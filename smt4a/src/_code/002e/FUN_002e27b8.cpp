@@ -2,10 +2,10 @@
 
 extern "C" {
 
-int FUN_002613f0(int);
+int saveGetSelectedRecordSlot(int);
 
 extern int gameGetSlotRecord(int);
-/* Supplied declaration required: FUN_002613f0. */
+/* Supplied declaration required: saveGetSelectedRecordSlot. */
 
 
 int FUN_002e27b8(void)
@@ -22,7 +22,7 @@ int FUN_002e27b8(void)
   temp_v3 = 0;
   temp_v2 = 0;
   do {
-    psVar1 = (unsigned short *)FUN_002613f0(temp_v2);
+    psVar1 = (unsigned short *)saveGetSelectedRecordSlot(temp_v2);
     if (*psVar1 != 0) {
       temp_v1 = 0;
       do {
@@ -33,7 +33,7 @@ int FUN_002e27b8(void)
         }
         temp_v1 = temp_v1 + 1;
       } while (temp_v1 < 0x18);
-      puVar3 = (unsigned short *)FUN_002613f0(temp_v2);
+      puVar3 = (unsigned short *)saveGetSelectedRecordSlot(temp_v2);
       *puVar3 = 0;
       puVar3[1] = 0;
       puVar3[2] = 0;

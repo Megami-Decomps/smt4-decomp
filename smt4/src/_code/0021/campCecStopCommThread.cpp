@@ -38,7 +38,7 @@ void linkHolderApplyFlag(void *scene, u32 flag);
 void gameDataRemoveHomeButtonHold(u32 reason);
 void gameDataFlagsClearAndRefresh(u32 reason);
 void asdMemFree(void *block);
-ScriptRunState *FUN_00297060(void *file, void *buffer);
+ScriptRunState *scrScriptProcessCreate(void *file, void *buffer);
 }
 
 /* Waits for the communication thread to end, then finalizes it and closes its handle. */
@@ -49,7 +49,7 @@ static __inline void campCecStopThread(CampCecThreadWork *work)
     s32 result = FUN_002c40f8(&signaled, handles, 1, 0, -1);
     bool failed = nnResultIsFailure(result);
     if (failed) {
-        FUN_002c526c(result, failed);
+        resultHandleFailure(result, failed);
     }
     work->thread.joined = 1;
     work->thread.finalize();
@@ -75,7 +75,7 @@ s32 campCecStopCommThread(CampCecThreadWork *work)
         gameDataFlagsClearAndRefresh(2);
         campCecResetViewState(g_campCec->modelScene);
         linkHolderApplyFlag(g_campCec->modelScene, 0);
-        work->script = FUN_00297060(work->scriptFile, work->scriptBuffer);
+        work->script = scrScriptProcessCreate(work->scriptFile, work->scriptBuffer);
         work->script->mode = 2;
         result = 2;
         work->nextState = 1;

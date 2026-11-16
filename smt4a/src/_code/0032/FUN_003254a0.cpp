@@ -10,7 +10,7 @@ int nameTableFind(int, int);
 int infoWindowShow(int, int, int);
 int infoWinSetTimer(unsigned int);
 int mapIfControllerApply(...);
-int FUN_003d4ed8(int);
+int soundActorStartOnFreeChannel(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -54,7 +54,7 @@ extern int popupIsActive(void);
 /* Supplied declaration required: mapIfControllerApply. */
 extern int dataTable23FindIndexByValue(unsigned int);
 extern int gameFlagIsSetByBlockAt14f8(int);
-/* Supplied declaration required: FUN_003d4ed8. */
+/* Supplied declaration required: soundActorStartOnFreeChannel. */
 extern int linkHolderCallFirst(unsigned int);
 extern int gameDataEntryGetBit6(int, int);
 
@@ -158,7 +158,7 @@ LAB_003256e4:
       temp_v1 = DAT_005f1614;
     }
     if ((temp_v0 == '\0' && temp_v1 == '\0') && (*(char *)(temp_v2 + 0xcd10) == '\0')) {
-      FUN_003d4ed8(0x10002ab);
+      soundActorStartOnFreeChannel(0x10002ab);
     }
     *(unsigned char *)(temp_v2 + 0xcc7d) = 1;
     *(unsigned char *)(temp_v2 + 0xcc7e) = 1;
@@ -248,7 +248,7 @@ LAB_00325868:
       temp_v1 = DAT_005f1614;
     }
     if ((temp_v0 == '\0' && temp_v1 == '\0') && (*(char *)(temp_v2 + 0xcd10) == '\0')) {
-      FUN_003d4ed8(0x10002ab);
+      soundActorStartOnFreeChannel(0x10002ab);
     }
     *(unsigned char *)(temp_v2 + 0xccc5) = 1;
     *(unsigned char *)(temp_v2 + 0xccc6) = 1;

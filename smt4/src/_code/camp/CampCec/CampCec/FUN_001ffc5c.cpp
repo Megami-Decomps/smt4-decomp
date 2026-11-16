@@ -153,7 +153,7 @@ void FUN_001ffc5c(void)
         s32 info = 4;
         u32 result = FUN_002bcc60(work->thread, &info, FUN_001ec6e0, work, 0, 0x11, -2, 0);
         if (((result & 0x7E00000) != 0x600000) && (s32)result < 0) {
-            FUN_002c526c(result);
+            resultHandleFailure(result);
         }
     }
 }

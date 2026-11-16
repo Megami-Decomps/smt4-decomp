@@ -27,7 +27,7 @@ unsigned int FUN_0023a2e0(int param_1)
     if (0 < iVar4) {
       do {
         iVar3 = unaff_r6;
-        FUN_003afd18();
+        transferQueueForwardNext();
         if (iVar3 == 0) {
           return 0x14;
         }

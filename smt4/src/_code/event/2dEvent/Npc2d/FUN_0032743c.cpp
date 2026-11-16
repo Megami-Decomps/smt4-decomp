@@ -26,7 +26,7 @@ void memClear(void *, u32);
 NpcTextureSource *dataTable25FindById(s32);
 NpcTextureImage *asdTMTexTableEntryAt(u32, s32);
 s32 FUN_002c1d5c();
-void FUN_002c58c8(s32, s32);
+void asdTMTexTablePrepareNodeImage(s32, s32);
 s32 FUN_001dfc64(u32);
 void FUN_002db92c(u32);
 
@@ -68,8 +68,8 @@ void FUN_0032743c(s32 npcId)
     work->y = (s32)work->npc.sizes[1][1];
     if (!FUN_002c1d5c()) {
         work->deferred = 0;
-        FUN_002c58c8(work->textureTable, work->textureNode);
-        FUN_002c58c8(0x32, 0);
+        asdTMTexTablePrepareNodeImage(work->textureTable, work->textureNode);
+        asdTMTexTablePrepareNodeImage(0x32, 0);
     } else {
         work->deferred = 1;
     }

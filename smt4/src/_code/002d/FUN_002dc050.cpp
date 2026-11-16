@@ -3,13 +3,13 @@
 
 extern "C" {
 
-s32 FUN_0028fb40(s32 value);
+s32 flagValueRead(s32 value);
 s32 scrGetArg(s32 index);
 
-/* Script command: reports FUN_0028fb40 of the first argument. */
+/* Script command: reports flagValueRead of the first argument. */
 u32 FUN_002dc050(void)
 {
-    scrSetResult(FUN_0028fb40(scrGetArg(0)));
+    scrSetResult(flagValueRead(scrGetArg(0)));
     return 1;
 }
 

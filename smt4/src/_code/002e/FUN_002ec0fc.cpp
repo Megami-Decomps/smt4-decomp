@@ -11,11 +11,11 @@ void FUN_002ec0fc(const SegmentedTextureBarOrigin *origin, s32 x, s32 y, u32 fir
 {
     s32 fillSegments = segmentCount - 3;
     if (fillSegments > 0) {
-        FUN_002bf288(2, 0x39, 0x3e, origin->x + x, y, 0x6e);
+        texDrawTableEntryAtStoredOrigin(2, 0x39, 0x3e, origin->x + x, y, 0x6e);
         s32 firstCap = firstVariant != 0 ? 0x3c : 0x3a;
-        FUN_002bf288(2, 0x39, firstCap, origin->x + x, y, 0x6f);
+        texDrawTableEntryAtStoredOrigin(2, 0x39, firstCap, origin->x + x, y, 0x6f);
         s32 secondCap = secondVariant != 0 ? 0x3d : 0x3b;
-        FUN_002bf288(2, 0x39, secondCap, origin->x + x, y, 0x6f);
+        texDrawTableEntryAtStoredOrigin(2, 0x39, secondCap, origin->x + x, y, 0x6f);
         u32 sprite = fillVariant != 0 ? 0x40 : 0x3f;
         const TexSprite *texture = reinterpret_cast<TexSprite *>(asdTMTexTableEntryAt(0x39, sprite));
         const SegmentedTextureBarSize *size = reinterpret_cast<const SegmentedTextureBarSize *>(texture->frames);

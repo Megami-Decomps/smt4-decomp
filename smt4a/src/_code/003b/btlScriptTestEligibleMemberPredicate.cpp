@@ -6,7 +6,7 @@
 extern "C" {
 u32 scrGetArg(u32 index);
 void scrSetResult(s32 result);
-s32 FUN_002b54a0(BtlCombatantEntryA *entry, u32 value);
+s32 btlCombatantHasSkillAction(BtlCombatantEntryA *entry, u32 value);
 
 // Report whether an eligible combatant with the requested id satisfies the supplied predicate.
 u32 btlScriptTestEligibleMemberPredicate()
@@ -18,7 +18,7 @@ u32 btlScriptTestEligibleMemberPredicate()
         u64 flags = entry->flags;
         if ((flags & g_btlCandidateMasks.unavailable) &&
             (flags & g_btlCandidateMasks.required) && !(flags & g_btlCandidateMasks.excluded) &&
-            entry->id == id && FUN_002b54a0(entry, value)) {
+            entry->id == id && btlCombatantHasSkillAction(entry, value)) {
             scrSetResult(1);
             return 1;
         }

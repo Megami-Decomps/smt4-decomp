@@ -51,14 +51,14 @@ extern u64 DAT_00573890;
 
 void qsort(void* base, s32 count, s32 size, s32 (*compare)(const void*, const void*));
 s32 FUN_00221a94(const void* a, const void* b);
-SideRecord* FUN_001568f8(BattleState* state, s32 id);
+SideRecord* btlFindEntryBlockByMemberId(BattleState* state, s32 id);
 s32 pairedEntryTableContains(BattleState* state, u16 id);
 void nameEntriesRegisterVerNames(void *work);
 s32 FUN_004f8264(u8* aux);
 void FUN_004cae0c(void *context, void *state, s32 pending, u32 target);
 void FUN_004fd204(s32 offset, StateObject* object, BattleUnitEntry* unit, s32 a, s32 b, s32 c);
 void FUN_004fe764(s32 offset, StateObject* object, BattleUnitEntry* unit, u32 kind, s32 arg);
-void FUN_004fb43c(s32 offset, StateObject* object, s32 id, s32 a, s32 b, s32 c, s32 d);
+void btlQueueActionMessage(s32 offset, StateObject* object, s32 id, s32 a, s32 b, s32 c, s32 d);
 void FUN_004f1c5c(s32 camera, s32 arg);
 void FUN_003ed6e8(BattleState* state);
 void FUN_003f26d4(BattleState* state);
@@ -90,7 +90,7 @@ void FUN_003e16cc(StateObject* object, BattleState* state)
         if ((unit->flags & 1) != 0 && (unit->flags & 2) != 0 && (unit->flags2 & 8) != 0) {
             unit->flags2 &= 0xfffffff7;
             if ((unit->status & 0x800) == 0) {
-                SideRecord* record = FUN_001568f8(state, unit->listedId);
+                SideRecord* record = btlFindEntryBlockByMemberId(state, unit->listedId);
                 if (pairedEntryTableContains(state, record->id) == 0) {
                     unit->status |= 0x800;
                     s16 stride, base, extra;
@@ -109,7 +109,7 @@ void FUN_003e16cc(StateObject* object, BattleState* state)
                     u32 kind = ((unit->flags & 0x10) != 0) ? 7 : 6;
                     FUN_004fe764(offset, object, unit, kind, 0xd);
                     if (!announced) {
-                        FUN_004fb43c(shown * stride, object, 0x1000276, 0, 0, 0, 0);
+                        btlQueueActionMessage(shown * stride, object, 0x1000276, 0, 0, 0, 0);
                         announced = true;
                     }
                     shown++;

@@ -6,7 +6,7 @@ extern "C" {
 int aocThreadAllocateStorage(...);
 int FUN_00126fb8(...);
 int FUN_001270f8(...);
-int FUN_002ba78c(...);
+int uiResourceParametersInitDefault(...);
 int FUN_002ba81c(...);
 int _ZN18WindowStatusResultC1Ej(...);
 int memClear(...);
@@ -30,7 +30,7 @@ extern int FUN_00121fa0(int);
 extern int FUN_00121fb4(int);
 /* Supplied declaration required: FUN_00126fb8. */
 /* Supplied declaration required: FUN_001270f8. */
-/* Supplied declaration required: FUN_002ba78c. */
+/* Supplied declaration required: uiResourceParametersInitDefault. */
 /* Supplied declaration required: FUN_002ba81c. */
 extern int FUN_002ba8e4(int);
 extern int clearWord(int);
@@ -120,7 +120,7 @@ unsigned int * FUN_00111184(int param_1)
   memClear(puVar2 + -0x22,0x80);
   aocThreadAllocateStorage(puVar2 + -0x1b5,0x8000);
   FUN_001270f8(puVar2 + -0x1b1);
-  FUN_002ba78c(puVar2 + 4);
+  uiResourceParametersInitDefault(puVar2 + 4);
   temp_v3 = FUN_00121e5c;
   uStack_1c = 0;
   puVar5 = &LAB_00111398;

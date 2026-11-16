@@ -54,8 +54,8 @@ GameFlagsBlock* gameFlagsGetBlock(void);
 void controllerSetDestination(ControllerNode* node, const void* destination);
 void controllerSetPosition(ControllerNode* node);
 s32 slots4FGetActiveValue(ControllerNode* node);
-void FUN_003fe86c(ControllerNode* node, s32 a, s32 b);
-void FUN_003fd7c0(ControllerNode* node, s32 a, s32 b);
+void modelPlayClip(ControllerNode* node, s32 a, s32 b);
+void moriModelUnitStartMaterialAnimation(ControllerNode* node, s32 a, s32 b);
 
 static const u32 kHiddenBits = 3;
 
@@ -93,7 +93,7 @@ void FUN_0036aa04(FollowerDisplay* display)
     }
     controllerSetDestination(near, &g_lmapScene->position);
     controllerSetPosition(near);
-    if (slots4FGetActiveValue(near) != 0) FUN_003fe86c(near, 0, 2);
+    if (slots4FGetActiveValue(near) != 0) modelPlayClip(near, 0, 2);
 
     GameFlagsBlock* block = gameFlagsGetBlock();
     if (display->far == NULL) return;
@@ -109,23 +109,23 @@ void FUN_0036aa04(FollowerDisplay* display)
     controllerSetPosition(far);
     s32 state = block->followState;
     if (state == 0) {
-        FUN_003fe86c(far, 0, 2);
+        modelPlayClip(far, 0, 2);
         block->followState = 1;
         display->delay = 0;
     } else if (state == 1) {
         if (++display->delay >= 11) {
-            FUN_003fd7c0(far, 1, 2);
+            moriModelUnitStartMaterialAnimation(far, 1, 2);
             block->followState = 2;
             display->flag93ca = 1;
             display->delay = 0;
         }
     } else if (state == 2) {
         if (display->flag93ca == 0) {
-            FUN_003fd7c0(far, 1, 2);
+            moriModelUnitStartMaterialAnimation(far, 1, 2);
             display->flag93ca = 1;
         }
     } else if (state == 3) {
-        FUN_003fe86c(far, 2, 0);
+        modelPlayClip(far, 2, 0);
         block->followState = 4;
         display->delay = 0;
     } else if (state == 4) {

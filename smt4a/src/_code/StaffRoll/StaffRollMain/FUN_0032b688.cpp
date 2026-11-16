@@ -39,7 +39,7 @@ void FUN_0032b688(s32 skipFade)
 
     asdTMTexTableLoadTmx(0x29, 0);
     for (u32 i = 0; i < 12; i++)
-        FUN_0014afd0(0x29, i);
+        asdTMTexTablePrepareNodeImage(0x29, i);
 
     for (s32 i = 0; i < 12; i++) {
         s32 width, height;

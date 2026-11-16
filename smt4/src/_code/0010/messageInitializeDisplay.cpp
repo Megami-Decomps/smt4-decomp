@@ -13,7 +13,7 @@ typedef char MessageDisplayEnableOffset[offsetof(MessageDisplayEnableView, enabl
 extern "C" {
 extern MessageGlobals g_messageMain;
 void asdTMTexTableLoadTmx(u32 table, u32 variant);
-void FUN_002c58c8(u32 table, s32 index);
+void asdTMTexTablePrepareNodeImage(u32 table, s32 index);
 void *FUN_002c4a34(void);
 void infoWindowCreate(void);
 void FUN_0010a7bc(void);
@@ -33,9 +33,9 @@ void messageInitializeDisplay(void)
 {
     asdTMTexTableLoadTmx(5, 0);
     asdTMTexTableLoadSprites(14);
-    FUN_002c58c8(5, 0);
+    asdTMTexTablePrepareNodeImage(5, 0);
     for (s32 index = 0; index < 3; ++index)
-        FUN_002c58c8(14, index);
+        asdTMTexTablePrepareNodeImage(14, index);
     g_messageMain.state = (MessageWork *)FUN_002c4a34();
     g_messageMain.banner = (MessagePanel *)FUN_002c4a34();
     g_messageMain.unk0C = (MessagePanel *)FUN_002c4a34();

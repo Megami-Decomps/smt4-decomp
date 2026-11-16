@@ -13,7 +13,7 @@ s32 scrGetArg(u32 index);
 void commonBgReset(void);
 void FUN_002757a8(void);
 void FUN_00275bc8(void);
-void FUN_00289880(void);
+void commonBgStopChildAndBeginTransition(void);
 void buttonHelpSetPreset(s32 preset);
 
 /* Script command (called with r0 = 0, which reaches scrGetArg unchanged): switches the common background on (arg != 0) or off (arg == 0), only when it changes. */
@@ -32,7 +32,7 @@ s32 FUN_002fe960(void)
     } else if (active == 0) {
         g_gameState.bgActive = 1;
         FUN_00275bc8();
-        FUN_00289880();
+        commonBgStopChildAndBeginTransition();
         buttonHelpSetPreset(0x90);
     }
     return 1;

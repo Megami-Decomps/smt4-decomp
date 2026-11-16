@@ -1,6 +1,6 @@
 #include "ui/SelectionNotification.h"
 
-extern "C" void FUN_00163aa4(UiSpriteState *sprite, f32 delta);
+extern "C" void uiSpriteAdvanceAnimation(UiSpriteState *sprite, f32 delta);
 extern "C" void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 key, s32 frame);
 extern "C" void FUN_0048a378(SelectionNotificationState *work);
 extern "C" s32 buttonHelpIsNotActive(void);
@@ -18,10 +18,10 @@ extern "C" void _ZN9Obj53230043selectionNotificationAdvanceEntryAnimationsEv(Sel
     }
     if (work->phase == 1) {
         for (s32 index = 0; index < 6; ++index) {
-            FUN_00163aa4(&work->entries[index], 1.0f);
+            uiSpriteAdvanceAnimation(&work->entries[index], 1.0f);
         }
-        FUN_00163aa4(&work->auxiliary[1], 1.0f);
-        FUN_00163aa4(&work->auxiliary[0], 1.0f);
+        uiSpriteAdvanceAnimation(&work->auxiliary[1], 1.0f);
+        uiSpriteAdvanceAnimation(&work->auxiliary[0], 1.0f);
         if (uiSpriteGetCompletionState(reinterpret_cast<const ObjectFlagState *>(&work->entries[5])) && buttonHelpIsNotActive()) {
             work->state = 2;
             work->phase = 0;

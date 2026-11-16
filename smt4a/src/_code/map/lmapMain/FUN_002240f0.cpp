@@ -12,7 +12,7 @@ extern GameStateA g_gameState;
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(u32 range);
 
-s32 FUN_002d8b58(u32 group, u32 entry);
+s32 popupSelectWeightedMessage(u32 group, u32 entry);
 
 void FUN_002240f0(void)
 {
@@ -43,7 +43,7 @@ void FUN_002240f0(void)
     if (!suppressPopup) {
         g_popupState->state = 0x15;
         g_popupState->phase = 0;
-        s32 contentValue = FUN_002d8b58(0x16, 0xbb);
+        s32 contentValue = popupSelectWeightedMessage(0x16, 0xbb);
         g_popupState->contentValue = contentValue;
     }
 }

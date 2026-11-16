@@ -14,7 +14,7 @@ struct BattleMarkerLookup {
 extern "C" {
 extern BattleEffectGlobals g_battleEffectSettings;
 extern RenderCtxA *g_renderCtx;
-BattleMarkerLookup *FUN_001568f8(BtlMainStateA *state, s16 group);
+BattleMarkerLookup *btlFindEntryBlockByMemberId(BtlMainStateA *state, s16 group);
 BattleFrameSprite *stateEntryFindById(BtlMainStateA *state, s32 id);
 void FUN_0014e314(u32 color0, u32 color1, u32 color2, u32 color3,
     f32 x, f32 y, f32 width, f32 height, f32 depth);
@@ -53,7 +53,7 @@ extern "C" u32 battleDrawRosterMarkerRects(u32 job)
                 if ((flags & 1) && (flags & 2) && !(flags & 0x200000) &&
                     (flags & 0x80) && !(flags & 0x4000) && (record->marker.flags & 0x800) &&
                     !(flags & 0x10) && record->marker.group == group) {
-                    BattleMarkerLookup *lookup = FUN_001568f8(state, record->render.group);
+                    BattleMarkerLookup *lookup = btlFindEntryBlockByMemberId(state, record->render.group);
                     BattleSpriteFrame *frame = stateEntryFindById(state, lookup->id)->frame;
                     f32 scale = record->marker.scale;
                     u32 width = frame->width;

@@ -7,10 +7,10 @@
 
 extern "C" {
 extern RenderCtx *g_titleScene;
-u32 FUN_002c5d80(u32 slot, u32 flags);
+u32 renderCtxPackPassFlags(u32 slot, u32 flags);
 void renderStackPushIndexed(RenderCtx *context, s32 stack, u32 value);
 void efctSetSpeed(f32 speed);
-void FUN_002bed3c();
+void gxResetColorQuadToWhite();
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 scale);
 void effectRenderTransformedInstance(TitleDrawElement *element, f32 value);
 s32 renderCtxPopState(RenderCtx *context, s32 stack);
@@ -31,10 +31,10 @@ static __inline void setTitleRenderState(RenderCtx *context, s32 state)
 extern "C" void titleOverlayDraw(TitleOverlay *overlay)
 {
     if (overlay->visible) {
-        u32 value = FUN_002c5d80(1, 0);
+        u32 value = renderCtxPackPassFlags(1, 0);
         renderStackPushIndexed(g_titleScene, 3, value);
         efctSetSpeed(1.0f);
-        FUN_002bed3c();
+        gxResetColorQuadToWhite();
         s32 frame = static_cast<s32>(renderCtxCalculateStereoParallax(g_titleScene, 0.27f));
         if (overlay->mode == 7 || overlay->mode == 8 || overlay->mode == 9) {
             RenderCtx *context = g_titleScene;

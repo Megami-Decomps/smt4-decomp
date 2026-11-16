@@ -39,26 +39,26 @@ void FUN_002fa1b0(IconPanel *panel, u32 kind, s32 x, s32 y, f32 speed, s32 alter
         }
         offsetX += x;
         offsetY += y;
-        FUN_001835b4(2, 13, 170, offsetX, offsetY, 52);
-        FUN_001835b4(2, 13, 171, offsetX, offsetY, 52);
-        FUN_001835b4(2, 13, 222, offsetX, offsetY, 53);
+        texDrawTableEntryAtStoredOrigin(2, 13, 170, offsetX, offsetY, 52);
+        texDrawTableEntryAtStoredOrigin(2, 13, 171, offsetX, offsetY, 52);
+        texDrawTableEntryAtStoredOrigin(2, 13, 222, offsetX, offsetY, 53);
         if (panel->styled == 1) {
             efctSetSpeed(panel->position.scale * speed);
             RenderCtxA *render = g_renderCtx;
             u32 blend = packNibblesAndByte(6, 1, 0);
             renderCtxSetB(render, blend);
-            FUN_001835b4(2, 13, 222, offsetX, offsetY, 54);
+            texDrawTableEntryAtStoredOrigin(2, 13, 222, offsetX, offsetY, 54);
             render = g_renderCtx;
             blend = packNibblesAndByte(6, 7, 0);
             renderCtxSetB(render, blend);
             efctSetSpeed(speed);
         }
-        FUN_001835b4(2, 13, background, x, y, 55);
-        FUN_001835b4(2, 13, foreground, offsetX, offsetY, 56);
+        texDrawTableEntryAtStoredOrigin(2, 13, background, x, y, 55);
+        texDrawTableEntryAtStoredOrigin(2, 13, foreground, offsetX, offsetY, 56);
     } else {
-        FUN_001835b4(2, 13, 221, x, y, 44);
-        FUN_001835b4(2, 13, background, x, y, 45);
-        FUN_001835b4(2, 13, foreground, x, y, 46);
+        texDrawTableEntryAtStoredOrigin(2, 13, 221, x, y, 44);
+        texDrawTableEntryAtStoredOrigin(2, 13, background, x, y, 45);
+        texDrawTableEntryAtStoredOrigin(2, 13, foreground, x, y, 46);
     }
     efctSetSpeed(1.0f);
 }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: packed-color float24 behavior restored; exponent extraction, argument spills and word-store scheduling differ (same family as FUN_002aff74). */
+/* NON_MATCHING: packed-color float24 behavior restored; exponent extraction, argument spills and word-store scheduling differ (same family as gpuSubmitPositionColorTexCoord). */
 #include "shard/W6_W6Match8_GpuDepth.h"
 #include "shard/Shard0036.h"
 

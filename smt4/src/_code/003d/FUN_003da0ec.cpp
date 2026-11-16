@@ -16,7 +16,7 @@ int FUN_0023aa28(unsigned int, unsigned int *, int);
 int animationSelectThirdPart(...);
 int textureCachePollReady(void);
 int FUN_00249e54(unsigned int, char *);
-int FUN_002505c0(...);
+int btlQueueKeyedScalarReflectAction(...);
 int FUN_00257e74(unsigned int);
 int asdOperatorNew(void);
 int FUN_0034c7a8(unsigned int, float *);
@@ -78,7 +78,7 @@ extern int FUN_00246708(void);
 /* Supplied declaration required: textureCachePollReady. */
 /* Supplied declaration required: FUN_00249e54. */
 extern unsigned int keyedRecordRegisterName(int);
-/* Supplied declaration required: FUN_002505c0. */
+/* Supplied declaration required: btlQueueKeyedScalarReflectAction. */
 /* Supplied declaration required: FUN_00257e74. */
 /* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: FUN_002a5960. */
@@ -294,10 +294,10 @@ void FUN_003da0ec(int param_1)
     temp_v20 = 0.0f;
     temp_v21 = 0;
     if (!(temp_v1 == 0xf || temp_v1 == 0x10)) {
-      FUN_002505c0(0,0,0x1000108,0);
+      btlQueueKeyedScalarReflectAction(0,0,0x1000108,0);
     }
     else {
-      FUN_002505c0(0,0,0x1000106,0);
+      btlQueueKeyedScalarReflectAction(0,0,0x1000106,0);
     }
     break;
   case 8:
@@ -320,10 +320,10 @@ void FUN_003da0ec(int param_1)
     temp_v20 = 0.0f;
     temp_v21 = 0;
     if (!(temp_v1 == 0xf || temp_v1 == 0x10)) {
-      FUN_002505c0(0,0,0x1000109,0);
+      btlQueueKeyedScalarReflectAction(0,0,0x1000109,0);
     }
     else {
-      FUN_002505c0(0,0,0x1000107,0);
+      btlQueueKeyedScalarReflectAction(0,0,0x1000107,0);
     }
     break;
   case 0xc:

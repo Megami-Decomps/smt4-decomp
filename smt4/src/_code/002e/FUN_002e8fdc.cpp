@@ -65,9 +65,9 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: FUN_00282390. */
-/* Supplied declaration required: FUN_0028250c. */
+/* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: FUN_002879dc. */
-/* Supplied declaration required: FUN_00291e40. */
+/* Supplied declaration required: soundActorStartOnFreeChannel. */
 extern int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int padIsButtonPressed(unsigned int);
@@ -160,22 +160,22 @@ void FUN_002e8fdc(void)
           FUN_0027fae4();
           switch(DAT_0049f94a) {
           case 0:
-            FUN_00291e40(temp_v3, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+            soundActorStartOnFreeChannel(temp_v3, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
             break;
           case 1:
             temp_v3 = 0x100021d;
-            FUN_00291e40(temp_v3, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+            soundActorStartOnFreeChannel(temp_v3, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
             break;
           case 2:
             temp_v3 = 0x100021f;
-            FUN_00291e40(temp_v3, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+            soundActorStartOnFreeChannel(temp_v3, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
             break;
           case 3:
             temp_v3 = 0x1000221;
-            FUN_00291e40(temp_v3, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+            soundActorStartOnFreeChannel(temp_v3, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
             break;
           case 4:
-            FUN_00291e40(0x1000223, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+            soundActorStartOnFreeChannel(0x1000223, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
           }
           goto LAB_002e94f0;
         }
@@ -280,7 +280,7 @@ void FUN_002e8fdc(void)
       mapIfActivateRecord(1,DAT_0049f99c);
       {
       MapMarkerPosition marker;
-      marker.x = *(float *)&DAT_0049f9a0 + FUN_0028250c(*(float *)&DAT_0049f9ac * 0.017453292f) * 150.0f;
+      marker.x = *(float *)&DAT_0049f9a0 + mathRemPio2f(*(float *)&DAT_0049f9ac * 0.017453292f) * 150.0f;
       marker.y = *(float *)&DAT_0049f9a4;
       marker.z = *(float *)&DAT_0049f9a8 + FUN_00282390(*(float *)&DAT_0049f9ac * 0.017453292f) * 150.0f;
       marker.w = DAT_0049f9bc;
@@ -312,7 +312,7 @@ void FUN_002e8fdc(void)
         temp_v1 = dataTableGetRecord23();
         temp_v0 = g_lmapScene;
         if (DAT_0049f968 != 0) {
-          *(float *)(g_lmapScene + 0xa0) = *(float *)(g_lmapScene + 0x28) + FUN_0028250c(*(float *)(g_lmapScene + 0x50) * 0.017453292f) * 250.0f;
+          *(float *)(g_lmapScene + 0xa0) = *(float *)(g_lmapScene + 0x28) + mathRemPio2f(*(float *)(g_lmapScene + 0x50) * 0.017453292f) * 250.0f;
           temp_v0 = g_lmapScene;
           *(float *)(temp_v0 + 0xa4) = *(float *)(temp_v0 + 0x2c) - 500.0f;
           *(float *)(g_lmapScene + 0xa8) = *(float *)(g_lmapScene + 0x30) + FUN_00282390(*(float *)(temp_v0 + 0x50) * 0.017453292f) * 250.0f;
@@ -377,33 +377,33 @@ void FUN_002e8fdc(void)
       FUN_0027fae4();
       switch(DAT_0049f94a) {
       case 0:
-        FUN_00291e40(temp_v3, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+        soundActorStartOnFreeChannel(temp_v3, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
         break;
       case 1:
         temp_v3 = 0x100021d;
-        FUN_00291e40(temp_v3, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+        soundActorStartOnFreeChannel(temp_v3, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
         break;
       case 2:
         temp_v3 = 0x100021f;
-        FUN_00291e40(temp_v3, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+        soundActorStartOnFreeChannel(temp_v3, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
         break;
       case 3:
         temp_v3 = 0x1000221;
-        FUN_00291e40(temp_v3, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+        soundActorStartOnFreeChannel(temp_v3, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
         break;
       case 4:
-        FUN_00291e40(0x1000223, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+        soundActorStartOnFreeChannel(0x1000223, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
       default:
       }
 LAB_002e94f0:
       FUN_0027fca0(0xffffffff);
       {
       SoundActorQueuePosition position;
-      position.x = *(float *)(g_lmapScene + 0x1c) + FUN_0028250c(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
+      position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
       position.z = *(float *)(g_lmapScene + 0x24) + FUN_00282390(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
       position.y = *(float *)(g_lmapScene + 0x20) + 150.0f;
       temp_v0 = randBetween(0,1);
-      FUN_00291e40(temp_v0 + 0x100023c, position);
+      soundActorStartOnFreeChannel(temp_v0 + 0x100023c, position);
       }
       temp_v0 = g_lmapScene;
       *(float *)(g_lmapScene + 0x68) = temp_v6;
@@ -481,33 +481,33 @@ LAB_002e94f0:
         switch(DAT_0049f94a) {
         case 0:
           temp_v3 = 0x100021c;
-          FUN_00291e40(temp_v3, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+          soundActorStartOnFreeChannel(temp_v3, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
           break;
         case 1:
           temp_v3 = 0x100021e;
-          FUN_00291e40(temp_v3, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+          soundActorStartOnFreeChannel(temp_v3, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
           break;
         case 2:
           temp_v3 = 0x1000220;
-          FUN_00291e40(temp_v3, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+          soundActorStartOnFreeChannel(temp_v3, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
           break;
         case 3:
           temp_v3 = 0x1000222;
-          FUN_00291e40(temp_v3, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+          soundActorStartOnFreeChannel(temp_v3, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
           break;
         case 4:
-          FUN_00291e40(0x1000224, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+          soundActorStartOnFreeChannel(0x1000224, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
         default:
         }
 LAB_002e9794:
         FUN_0027fca0(0xffffffff);
         {
         SoundActorQueuePosition position;
-        position.x = *(float *)(g_lmapScene + 0x1c) + FUN_0028250c(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
+        position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
         position.z = *(float *)(g_lmapScene + 0x24) + FUN_00282390(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
         position.y = *(float *)(g_lmapScene + 0x20) + 100.0f;
         temp_v0 = randBetween(0,1);
-        FUN_00291e40(temp_v0 + 0x100023e, position);
+        soundActorStartOnFreeChannel(temp_v0 + 0x100023e, position);
         }
       }
       if (*(int *)(g_lmapScene + 8) != 6) break;

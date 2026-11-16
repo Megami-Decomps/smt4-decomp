@@ -77,8 +77,8 @@ void FUN_003f931c(PanelWork *panel)
     efctSetSpeed(fadeOut);
     f32 slide = (4.0f - fade->slide) * 24.5f;
     s32 offset = (s32)(0.0f + slide);
-    FUN_001835b4(2, 0xc, 0x54, 0, offset, 0x23);
-    FUN_001835b4(2, 0xc, 0x55, 0, offset, 0x23);
+    texDrawTableEntryAtStoredOrigin(2, 0xc, 0x54, 0, offset, 0x23);
+    texDrawTableEntryAtStoredOrigin(2, 0xc, 0x55, 0, offset, 0x23);
     f32 scrollBase = FUN_001f3f34(30.0f, 0.0f, 8.0f, fade->scroll);
     f32 rowZ = fade->scroll * 0.03125f * fadeOut;
     for (s32 i = 0; i < panel->rowCount; i++) {

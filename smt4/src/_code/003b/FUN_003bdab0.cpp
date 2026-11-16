@@ -6,7 +6,7 @@
 extern "C" {
 
 int FUN_00247478(unsigned char [2], unsigned int *, unsigned int *);
-int FUN_0027da30(...);
+int btlFindEntryBlockByMemberId(...);
 int btlMainFindEntryByListedId(...);
 int FUN_00283ebc(unsigned int, unsigned int, int);
 int gameGetUnitRecord(...);
@@ -45,7 +45,7 @@ typedef struct {
 #endif
 extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00247478. */
-/* Supplied declaration required: FUN_0027da30. */
+/* Supplied declaration required: btlFindEntryBlockByMemberId. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_00283ebc. */
 extern int flagWordTestBit(unsigned int, unsigned int);
@@ -358,7 +358,7 @@ LAB_003be1d4:
       temp_v12 = 0.01f;
       if (param_6 < 0x6d) {
         puVar6 = puVar3;
-        FUN_0027da30(puVar3,param_6);
+        btlFindEntryBlockByMemberId(puVar3,param_6);
         temp_v11 = (float)VectorSignedToFloat((int)*(short *)((int)puVar6 + 0xea) *
                                             (int)(short)(unsigned short)*(unsigned char *)(param_4 + 0x68),
                                             (unsigned char)(in_fpscr >> 0x16) & 3);

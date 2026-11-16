@@ -25,10 +25,10 @@ void FUN_0025f300(PlayScene* work)
             asdTMTexTableEntryAt(0x15, static_cast<s32>(work->unk305C) + 0x52));
         RenderCtx* context = g_titleScene;
         renderCtxSetB(context, packNibblesAndByte(6, 1, 0));
-        FUN_002bf288(2, 0x15, 0x4B, sprite->x + x, sprite->y + y, 0x29);
-        FUN_002bf288(2, 0x15, 0x4A, sprite->x + x, sprite->y + y, 0x29);
-        FUN_002bf288(2, 0x15, 0x4C, sprite->x + x, sprite->y + y, 0x29);
-        FUN_002bf288(2, 0x15, 0x4D, sprite->x + x, sprite->y + y, 0x29);
+        texDrawTableEntryAtStoredOrigin(2, 0x15, 0x4B, sprite->x + x, sprite->y + y, 0x29);
+        texDrawTableEntryAtStoredOrigin(2, 0x15, 0x4A, sprite->x + x, sprite->y + y, 0x29);
+        texDrawTableEntryAtStoredOrigin(2, 0x15, 0x4C, sprite->x + x, sprite->y + y, 0x29);
+        texDrawTableEntryAtStoredOrigin(2, 0x15, 0x4D, sprite->x + x, sprite->y + y, 0x29);
         context = g_titleScene;
         renderCtxSetB(context, packNibblesAndByte(6, 7, 0));
         efctSetSpeed(1.0f);

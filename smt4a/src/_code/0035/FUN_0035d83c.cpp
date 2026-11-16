@@ -20,7 +20,7 @@ u32 FUN_0035d83c(Object0035d83c *object)
         s32 result = svcWaitSynchronization1(object->handle, 0);
         bool failed = nnResultIsFailure(result);
         if (failed)
-            FUN_002e3140(result, failed);
+            resultHandleFailure(result, failed);
         timedOut = !nnResultIsNotTimeout(result);
     }
     if (timedOut)

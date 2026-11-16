@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0050d8e4(void);
+int __hardfp_atan2f(void);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(unsigned int, int);
 int nn_math_ARMv6_VEC3TransformAsm_2AD44C(...);
@@ -103,7 +103,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0050d8e4. */
+/* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
 
@@ -205,7 +205,7 @@ void FUN_003a3e60(fn_003a3e60_arg0 *param_1,int param_2)
   }
   else {
     temp_v6 = *(float *)(g_lmapView + 0x50) - param_1->field_0x68;
-    FUN_0050d8e4();
+    __hardfp_atan2f();
     temp_v13 = temp_v6 * 57.32484f * temp_v13;
     temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v11 <= temp_v13) << 0x1d);
     for (temp_v13 = romwright_fabs_4(temp_v13); temp_v6 = temp_v11, (int)temp_v13 >= 0x47800000; temp_v13 = temp_v13 - temp_v12) {

@@ -59,7 +59,7 @@ void FUN_00407598(LookAtCamera *camera)
     up.z = 0.0f;
     nn_math_ARMv6_VEC3TransformAsm_2AD44C(&up.x, matrix.values);
     camera->up = up;
-    u32 handle = FUN_00152f54();
+    u32 handle = asdCameraGetSavedRenderPairs();
     FUN_0014f0dc(handle, &camera->eye.x, &camera->target.x, &camera->up.x);
     FUN_001523b8(handle, 1);
 }

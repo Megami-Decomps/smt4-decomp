@@ -16,7 +16,7 @@ s32 gameFlagIsSet(u32 flag);
 void controllerSetDestination(ControllerPose *controller, const f32 *position);
 void controllerSetRotationEulerDegrees(ControllerPose *controller, f32 x, f32 y, f32 z);
 s32 slots4FGetActiveValue(ControllerPose *controller);
-void FUN_003fe86c(ControllerPose *controller, u32 value, s32 mode, f32 first, f32 second);
+void modelPlayClip(ControllerPose *controller, u32 value, s32 mode, f32 first, f32 second);
 
 /* Apply a marker's visibility, destination, heading and selected animation. */
 void mapIfControllerApply(MapIfModelMarker *marker)
@@ -38,7 +38,7 @@ void mapIfControllerApply(MapIfModelMarker *marker)
             controllerSetDestination(controller, marker->position);
             controllerSetRotationEulerDegrees(controller, 0.0f, marker->heading, 0.0f);
             if (slots4FGetActiveValue(controller) != marker->elapsed)
-                FUN_003fe86c(controller, marker->elapsed, 2, 0.0f, 0.0f);
+                modelPlayClip(controller, marker->elapsed, 2, 0.0f, 0.0f);
         }
     }
 }

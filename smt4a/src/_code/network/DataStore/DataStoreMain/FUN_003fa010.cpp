@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00122a10(...);
 int asdOperatorNew(...);
-int FUN_00178b04(...);
+int asdMemoryAllocTraced(...);
 int FUN_002e9ff4(...);
 int FUN_003fa6a4(...);
 
@@ -23,7 +23,7 @@ extern unsigned char DAT_0055cb28; /* 0x55cb28 */
 /* Supplied declaration required: FUN_00122a10. */
 extern unsigned int FUN_00122a60(void);
 /* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: FUN_00178b04. */
+/* Supplied declaration required: asdMemoryAllocTraced. */
 extern int _Znwj(unsigned int);
 extern int _ZN9Obj55aff4C1EPKt(int, char *);
 /* Supplied declaration required: FUN_002e9ff4. */
@@ -47,7 +47,7 @@ void FUN_003fa010(unsigned int *param_1)
   case 1:
     if (param_1[0xc] == 0) {
       temp_v0 = 8;
-      FUN_00178b04(8,"c:\\SMT4F\\SMT4F\\sdds4\\program\\network\\DataStore\\DataStoreMain.cpp",0x147
+      asdMemoryAllocTraced(8,"c:\\SMT4F\\SMT4F\\sdds4\\program\\network\\DataStore\\DataStoreMain.cpp",0x147
                   );
       temp_v1 = 0;
       if (temp_v0 != 0) {

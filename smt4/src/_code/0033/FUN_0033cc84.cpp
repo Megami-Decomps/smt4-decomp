@@ -64,8 +64,8 @@ void FUN_0033cc84(int param_1)
     FUN_002bc0e0();
     efctSetSpeed();
     temp_v7 = (int)(temp_v6 + (4.0f - *(float *)(param_1 + 0x39c)) * 20.0f);
-    FUN_002bf288(2,0x14,0x54,0,temp_v7,0x23);
-    FUN_002bf288(2,0x14,0x55,0,temp_v7,0x23);
+    texDrawTableEntryAtStoredOrigin(2,0x14,0x54,0,temp_v7,0x23);
+    texDrawTableEntryAtStoredOrigin(2,0x14,0x55,0,temp_v7,0x23);
     FUN_00247f0c();
     temp_v5 = 0;
     temp_v7 = temp_v1;

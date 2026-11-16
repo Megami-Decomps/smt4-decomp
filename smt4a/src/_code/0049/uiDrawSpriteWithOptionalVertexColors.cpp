@@ -8,12 +8,12 @@
 extern "C" {
 f32 jobGetScalarValue();
 void efctSetSpeed(f32);
-void FUN_00183bb0();
+void gxResetColorQuadToWhite();
 void vectorSetAllOne(QuadVector *);
 void *__aeabi_vec_ctor_nocookie_nodtor(QuadVector *, void (*)(QuadVector *), u32, u32);
 void quadSetOrderedVectors(const QuadVector *, const QuadVector *, const QuadVector *,
                   const QuadVector *, s32, s32);
-void FUN_00185dd4(u32, u32, s32, u32, u32, u32, u32, u32);
+void texDrawTableEntrySized(u32, u32, s32, u32, u32, u32, u32, u32);
 
 void uiDrawSpriteWithOptionalVertexColors(s32 spriteId, s32 x, s32 y, u32 layer, s32 alpha, s32 useColors)
 {
@@ -31,7 +31,7 @@ void uiDrawSpriteWithOptionalVertexColors(s32 spriteId, s32 x, s32 y, u32 layer,
     sprite = asdTMTexTableEntryAt(0x13, spriteId);
     extension = reinterpret_cast<ItemSpriteExtension *>(sprite->placement);
     if (extension != NULL && extension->mode == 1) {
-        FUN_00185dd4(2, 0x13, spriteId, x, y, width, height, layer);
+        texDrawTableEntrySized(2, 0x13, spriteId, x, y, width, height, layer);
         return;
     }
     if (useColors && extension != NULL) {
@@ -46,6 +46,6 @@ void uiDrawSpriteWithOptionalVertexColors(s32 spriteId, s32 x, s32 y, u32 layer,
     efctSetSpeed((f32)alpha * (1.0f / 255.0f));
     texTableRecordCallExtended(2, 0x13, spriteId, x, y, width, height, layer);
     efctSetSpeed(previousAlpha);
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
 }
 }

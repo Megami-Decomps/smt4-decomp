@@ -6,7 +6,7 @@
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
 extern "C" {
-BattleMotionSubject *FUN_001568f8(BtlMainStateA *state, s32 group);
+BattleMotionSubject *btlFindEntryBlockByMemberId(BtlMainStateA *state, s32 group);
 void halfRecClear(BtlMainStateA *state, BattleMotionSubject *source);
 void flagSelectionRebuild(void *selection, u32 flags);
 extern u64 g_battleMotionCombatantClearMask;
@@ -14,7 +14,7 @@ extern u64 g_battleMotionCombatantClearMask;
 void FUN_004cab9c(BattleRosterRecordA *record)
 {
     BattleRosterMotionA &motion = record->motion;
-    BattleMotionSubject *source = FUN_001568f8(btlGetMainState(), motion.group);
+    BattleMotionSubject *source = btlFindEntryBlockByMemberId(btlGetMainState(), motion.group);
     if (source == NULL) {
         return;
     }

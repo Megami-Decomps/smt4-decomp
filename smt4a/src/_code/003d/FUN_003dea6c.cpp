@@ -17,8 +17,8 @@ struct DefinitionMessageDescriptor {
 };
 extern "C" {
 DefinitionMessageRecord* dataTable1bOr1cGetRecord(u16 id);
-const char* FUN_0015f858(u16 id, s32 converted);
-const char* FUN_00180118(u16 id);
+const char* dataFindKindRecordWithAocOverrides(u16 id, s32 converted);
+const char* dataTable01GetRecordWithAocOverride(u16 id);
 const char* dataTable0cFindByKey(u16 id);
 char* libc_strcpy(char* destination, const char* source);
 s32 FUN_002ebda8(void);
@@ -34,7 +34,7 @@ void FUN_003dea6c(u16 definitionId, s32 includeArguments, s32 convertTitle)
         if (definition) {
             title = definition->title;
         }
-        FUN_003180c4(40, title);
+        scrSetStringSlot(40, title);
     } else {
         DefinitionMessageRecord* definition = dataTable1bOr1cGetRecord(definitionId);
         if (definition) {
@@ -42,7 +42,7 @@ void FUN_003dea6c(u16 definitionId, s32 includeArguments, s32 convertTitle)
         }
         libc_strcpy(text, title);
         FUN_001654f0(text, converted);
-        FUN_003180c4(40, converted);
+        scrSetStringSlot(40, converted);
     }
     if (includeArguments) {
         DefinitionMessageRecord* definition = dataTable1bOr1cGetRecord(definitionId);
@@ -52,17 +52,17 @@ void FUN_003dea6c(u16 definitionId, s32 includeArguments, s32 convertTitle)
                 switch (argument->kind) {
                 case 1:
                 case 7:
-                    libc_strcpy(text, FUN_0015f858(argument->id, convertTitle));
-                    FUN_003180c4(index, text);
+                    libc_strcpy(text, dataFindKindRecordWithAocOverrides(argument->id, convertTitle));
+                    scrSetStringSlot(index, text);
                     FUN_00359974(index + 24, argument->count, -1, 0);
                     break;
                 case 2:
-                    libc_strcpy(text, FUN_00180118(argument->id));
-                    FUN_003180c4(index + 8, text);
+                    libc_strcpy(text, dataTable01GetRecordWithAocOverride(argument->id));
+                    scrSetStringSlot(index + 8, text);
                     FUN_00359974(index + 24, argument->count, -1, 0);
                     break;
                 case 5:
-                    FUN_003180c4(index + 41, dataTable0cFindByKey(argument->id));
+                    scrSetStringSlot(index + 41, dataTable0cFindByKey(argument->id));
                     break;
                 case 6:
                     FUN_00359974(index + 24, argument->count, -1, 0);
@@ -74,9 +74,9 @@ void FUN_003dea6c(u16 definitionId, s32 includeArguments, s32 convertTitle)
                         // The retail lookup compares the key before checking the returned pointer.
                         if (descriptor->id == static_cast<s16>(argument->id)) {
                             if (descriptor) {
-                                FUN_003180c4(index + 41, descriptor->name);
+                                scrSetStringSlot(index + 41, descriptor->name);
                                 FUN_00359974(index + 42, argument->count, -1, 0);
-                                FUN_003180c4(index + 43, descriptor->suffix[0] == '0' ? "" : descriptor->suffix);
+                                scrSetStringSlot(index + 43, descriptor->suffix[0] == '0' ? "" : descriptor->suffix);
                             }
                             break;
                         }

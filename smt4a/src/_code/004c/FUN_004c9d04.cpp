@@ -21,7 +21,7 @@ int FUN_004a9c24(...);
 int recordSetClampedCurrent(...);
 int bitsAt60Clear(...);
 int objectRefRelease(...);
-int FUN_004fb43c(...);
+int btlQueueActionMessage(...);
 
 typedef struct fn_004c9d04_arg0 fn_004c9d04_arg0;
 struct fn_004c9d04_arg0 {
@@ -85,7 +85,7 @@ extern int bitsAt60Test(unsigned int, unsigned int);
 /* Supplied declaration required: recordSetClampedCurrent. */
 /* Supplied declaration required: bitsAt60Clear. */
 /* Supplied declaration required: objectRefRelease. */
-/* Supplied declaration required: FUN_004fb43c. */
+/* Supplied declaration required: btlQueueActionMessage. */
 
 
 void FUN_004c9d04(fn_004c9d04_arg0 *param_1,unsigned int param_2,unsigned int param_3,int param_4)
@@ -265,7 +265,7 @@ void FUN_004c9d04(fn_004c9d04_arg0 *param_1,unsigned int param_2,unsigned int pa
                 }
                 else {
                   FUN_004a9c24(g_btlUiBlock,param_1,0xffffffff,1);
-                  FUN_004fb43c(0,0,0x1000213,0,0,0,0);
+                  btlQueueActionMessage(0,0,0x1000213,0,0,0,0);
                 }
               }
             }

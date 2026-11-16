@@ -7,14 +7,14 @@ extern "C" {
 
 int positionStateSet(...);
 int FUN_00164168(...);
-int FUN_00164b5c(int, int, int, int, int, int);
+int texDrawCompositeSprite(int, int, int, int, int, int);
 int efctSetSpeed(void);
 int FUN_00168bec(...);
 int FUN_001696d4(void *, int);
 int renderCtxPopState(...);
 int renderStackPushIndexed(unsigned int, int, unsigned int);
 int asdTMTexTableEntryAt(...);
-int FUN_00183bb0(void);
+int gxResetColorQuadToWhite(void);
 int VectorSignedToFloat(...);
 
 typedef struct fn_00151e4c_arg0 fn_00151e4c_arg0;
@@ -48,18 +48,18 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 #endif
 /* Supplied declaration required: positionStateSet. */
 /* Supplied declaration required: FUN_00164168. */
-/* Supplied declaration required: FUN_00164b5c. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 extern int npcRoomGetEntryValue(unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00168bec. */
 extern int FUN_00168d38(unsigned int);
 extern int FUN_001691a8(void);
-extern unsigned int FUN_001692ac(unsigned int, unsigned int);
+extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001696d4. */
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
-/* Supplied declaration required: FUN_00183bb0. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 
 
 void FUN_00151e4c(fn_00151e4c_arg0 *param_1)
@@ -83,7 +83,7 @@ void FUN_00151e4c(fn_00151e4c_arg0 *param_1)
   if (param_1->field_0x8 != 1 && param_1->field_0x8 != 5) {
     return;
   }
-  temp_v0 = FUN_001692ac(1,0);
+  temp_v0 = renderCtxPackPassFlags(1,0);
   renderStackPushIndexed(g_renderCtx,3,temp_v0);
   temp_v8 = 0x3f800000;
   if (param_1->field_0x9 != 0xb) {
@@ -97,12 +97,12 @@ void FUN_00151e4c(fn_00151e4c_arg0 *param_1)
       do {
         temp_v2 = asdTMTexTableEntryAt(0x2f,temp_v3 + 0x98);
         if (param_1->field_0x18 == temp_v3) {
-          FUN_00164b5c(2,0x2f,0x12,(int)*(short *)(temp_v2 + 8),(int)*(short *)(temp_v2 + 10),0xb);
+          texDrawCompositeSprite(2,0x2f,0x12,(int)*(short *)(temp_v2 + 8),(int)*(short *)(temp_v2 + 10),0xb);
           pvVar4 = param_1->field_0x4;
           temp_v0 = 0xf;
         }
         else {
-          FUN_00164b5c(2,0x2f,0x11,(int)*(short *)(temp_v2 + 8),(int)*(short *)(temp_v2 + 10),0xb);
+          texDrawCompositeSprite(2,0x2f,0x11,(int)*(short *)(temp_v2 + 8),(int)*(short *)(temp_v2 + 10),0xb);
           pvVar4 = param_1->field_0x4;
           temp_v0 = 0xe;
         }
@@ -161,9 +161,9 @@ void FUN_00151e4c(fn_00151e4c_arg0 *param_1)
             if ((temp_v4 < 4) && (*(char *)((int)param_1 + temp_v4 + 0x1a11) != '\0')) {
 LAB_00151ff8:
               efctSetSpeed();
-              FUN_00183bb0();
+              gxResetColorQuadToWhite();
               temp_v5 = (int)(temp_v6 + (float)((unsigned long long)temp_v8 >> 0x20));
-              FUN_001835b4(2,8,0x18d,0xf0,temp_v5,0x33);
+              texDrawTableEntryAtStoredOrigin(2,8,0x18d,0xf0,temp_v5,0x33);
               temp_v2 = 0;
               temp_v7 = romwright_piece_4_4((int)(float)temp_v8,temp_v5);
               do {
@@ -171,11 +171,11 @@ LAB_00151ff8:
                   FUN_00168bec(temp_v2);
                 }
                 efctSetSpeed();
-                FUN_001835b4(2,8,temp_v2 + 0x18e,(int)((unsigned long long)temp_v7 >> 0x20),(int)temp_v7,0x33);
+                texDrawTableEntryAtStoredOrigin(2,8,temp_v2 + 0x18e,(int)((unsigned long long)temp_v7 >> 0x20),(int)temp_v7,0x33);
                 temp_v2 = temp_v2 + 1;
               } while (temp_v2 < 3);
               efctSetSpeed();
-              FUN_00183bb0();
+              gxResetColorQuadToWhite();
             }
           }
           else {
@@ -188,12 +188,12 @@ LAB_00151ff8:
         temp_v1 = FUN_00168d38(temp_v4);
         if (temp_v1 != 0) {
           efctSetSpeed();
-          FUN_00183bb0();
+          gxResetColorQuadToWhite();
           temp_v1 = (int)temp_v6;
-          FUN_001835b4(2,8,0x1a6,0,temp_v1,0x33);
-          FUN_001835b4(2,8,0x1a7,0,temp_v1,0x33);
+          texDrawTableEntryAtStoredOrigin(2,8,0x1a6,0,temp_v1,0x33);
+          texDrawTableEntryAtStoredOrigin(2,8,0x1a7,0,temp_v1,0x33);
           efctSetSpeed();
-          FUN_00183bb0();
+          gxResetColorQuadToWhite();
         }
         temp_v4 = temp_v4 + 1;
       } while ((int)temp_v4 < param_1->field_0x20);

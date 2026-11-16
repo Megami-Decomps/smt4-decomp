@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002bbb2c(int, int);
+int sysReportCheckFailure(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ extern unsigned int DAT_004d42d8; /* 0x4d42d8 */
 
 extern int FUN_00129584(unsigned int *, unsigned int);
 extern int FUN_0013af84(unsigned int);
-/* Supplied declaration required: FUN_002bbb2c. */
+/* Supplied declaration required: sysReportCheckFailure. */
 
 
 void FUN_001270a8(unsigned int param_1)
@@ -28,11 +28,11 @@ void FUN_001270a8(unsigned int param_1)
   DAT_004d42d8 = param_1;
   temp_v0 = FUN_00129584(&g_fsWaitNotification3,0x209);
   if (temp_v0 < 0) {
-    FUN_002bbb2c(temp_v0,0x1270cc);
+    sysReportCheckFailure(temp_v0,0x1270cc);
   }
   temp_v0 = FUN_0013af84(0x209);
   if (temp_v0 < 0) {
-    FUN_002bbb2c(temp_v0,0x1270e0);
+    sysReportCheckFailure(temp_v0,0x1270e0);
     return;
   }
   return;

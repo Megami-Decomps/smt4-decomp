@@ -5,10 +5,10 @@
 
 extern "C" {
 
-int FUN_00157558(int);
+int renderCtxSelectDisplayAreaForStereoMode(int);
 int efctSetSpeed(void);
 int renderCtxSelectTexture(int);
-int FUN_001835b4(...);
+int texDrawTableEntryAtStoredOrigin(...);
 int renderCtxCalculateStereoParallax(int);
 int FUN_0019e3d0(unsigned int);
 int FUN_001a9698(void);
@@ -27,13 +27,13 @@ extern int g_frameTex; /* 0x57f65c */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00157558. */
+/* Supplied declaration required: renderCtxSelectDisplayAreaForStereoMode. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int mapMainIsIdle(void);
-extern int FUN_001692ac(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxSelectTexture. */
 extern int asdTMTexTableEntryAt(unsigned int, int);
-/* Supplied declaration required: FUN_001835b4. */
+/* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_0019e3d0. */
 /* Supplied declaration required: FUN_001a9698. */
@@ -62,7 +62,7 @@ void FUN_0014aa9c(unsigned int param_1)
     temp_v3 = (unsigned int)*(unsigned char *)(g_frameTex + 0x25);
   }
   if (g_frameTex != 0 && temp_v3 != 0) {
-    temp_v4 = FUN_001692ac(1,0);
+    temp_v4 = renderCtxPackPassFlags(1,0);
     piVar9 = (int *)(temp_v6 + 0x1258);
     temp_v5 = *piVar9;
     temp_v7 = piVar9[temp_v5 + 2];
@@ -83,7 +83,7 @@ void FUN_0014aa9c(unsigned int param_1)
       (**(romwright_code **)(temp_v6 + 0x12d4))(temp_v4);
       *(unsigned char *)(temp_v6 + 0x12d0) = 0;
     }
-    FUN_00157558(g_renderCtx);
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     temp_v8 = *(float *)(temp_v2 + 0x28);
     renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v4 = mapMainIsIdle();
@@ -105,7 +105,7 @@ void FUN_0014aa9c(unsigned int param_1)
       FUN_0019e3d0(0xffffffff);
     }
     efctSetSpeed();
-    FUN_001835b4(2,0x14,2000,(int)temp_v8,0,0xb);
+    texDrawTableEntryAtStoredOrigin(2,0x14,2000,(int)temp_v8,0,0xb);
     efctSetSpeed();
     temp_v8 = *(float *)(temp_v2 + 0x2c);
     renderCtxCalculateStereoParallax(g_renderCtx);
@@ -115,15 +115,15 @@ void FUN_0014aa9c(unsigned int param_1)
     do {
       temp_v5 = 0;
       do {
-        FUN_001835b4(2,0x14,0x7f2,temp_v4 + temp_v5 * 0x20,temp_v6 << 5,0xb);
+        texDrawTableEntryAtStoredOrigin(2,0x14,0x7f2,temp_v4 + temp_v5 * 0x20,temp_v6 << 5,0xb);
         temp_v5 = temp_v5 + 1;
       } while (temp_v5 < 0xd);
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 9);
-    FUN_001835b4(2,0x14,0x7f3,temp_v4,0,0xb);
+    texDrawTableEntryAtStoredOrigin(2,0x14,0x7f3,temp_v4,0,0xb);
     temp_v6 = 0;
     do {
-      FUN_001835b4(2,0x14,temp_v6 + 0x7f4,temp_v4,0,0xb);
+      texDrawTableEntryAtStoredOrigin(2,0x14,temp_v6 + 0x7f4,temp_v4,0,0xb);
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 0xb);
     efctSetSpeed();
@@ -134,7 +134,7 @@ void FUN_0014aa9c(unsigned int param_1)
       temp_v0 = *(short *)(temp_v7 + 8);
       temp_v1 = *(short *)(temp_v7 + 10);
       efctSetSpeed();
-      FUN_001835b4(2,0x14,*(unsigned int *)(temp_v2 + temp_v5 * 4 + 0x10d8),(int)temp_v0 + temp_v4 * 2,
+      texDrawTableEntryAtStoredOrigin(2,0x14,*(unsigned int *)(temp_v2 + temp_v5 * 4 + 0x10d8),(int)temp_v0 + temp_v4 * 2,
                    (int)temp_v1,0xb,temp_v6);
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 0x18);

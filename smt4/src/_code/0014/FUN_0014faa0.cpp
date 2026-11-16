@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002bcc60(...);
 int nn_os_CriticalSection_Initialize(...);
-int FUN_002c526c(...);
+int resultHandleFailure(...);
 
 /* stack frame of param_7: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -27,7 +27,7 @@ extern unsigned char DAT_004e8510; /* 0x4e8510 */
 extern int FUN_002bb0e0(void);
 /* Supplied declaration required: FUN_002bcc60. */
 /* Supplied declaration required: nn_os_CriticalSection_Initialize. */
-/* Supplied declaration required: FUN_002c526c. */
+/* Supplied declaration required: resultHandleFailure. */
 
 
 unsigned int *
@@ -61,7 +61,7 @@ FUN_0014faa0(unsigned int *param_1,unsigned int param_2,unsigned int param_3,int
     temp_v5[0] = 0;
     FUN_002bcc60(puVar1,&temp_v1,FUN_001560c4,temp_v5,param_4 + param_5,param_6,param_7,0);
     if ((((unsigned int)puVar1 & 0x7e00000) != 0x600000) && ((int)puVar1 < 0)) {
-      FUN_002c526c(puVar1);
+      resultHandleFailure(puVar1);
     }
     if (((unsigned int)puVar1 & 0x80000000) != 0) {
       param_1[0xf] = 0xffffffff;

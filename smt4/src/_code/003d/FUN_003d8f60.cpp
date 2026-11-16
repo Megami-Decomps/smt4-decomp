@@ -77,7 +77,7 @@ const char *btlPosArrangeGetFilePath(BtlMainState *state);
 char *libc_strcpy(char *destination, const char *source);
 s32 asdLoadFileGetUseRawPaths(void);
 void asdLoadFileSetUseRawPaths(s32 enabled);
-EditorUnitPosition *FUN_0027da30(BtlMainState *state, s32 unit);
+EditorUnitPosition *btlFindEntryBlockByMemberId(BtlMainState *state, s32 unit);
 EditorUnitPosition *FUN_0033a5ec(BtlMainState *state, s32 unit);
 void FUN_003d8a18(BattleDebugEditorJob *job, BtlMainState *state);
 void FUN_003d8b34(BattleDebugEditorJob *job, BtlMainState *state, u32 parent);
@@ -239,7 +239,7 @@ u32 FUN_003d8f60(BattleDebugEditorJob *job, BtlMainState *state)
             u32 list = job->list;
             EditorUnitPosition *record = reinterpret_cast<EditorUnitPosition *>(
                 reinterpret_cast<EnemyEditorRecords *>(state)->records + job->selection * 0x114);
-            FUN_0027da30(state, job->selection);
+            btlFindEntryBlockByMemberId(state, job->selection);
             EditorUnitPosition *unit = FUN_0033a5ec(state, job->selection);
             record->position.x = *reinterpret_cast<const u32 *>(asdListBoxGetItemText(reinterpret_cast<void *>(list), 1));
             record->position.y = *reinterpret_cast<const u32 *>(asdListBoxGetItemText(reinterpret_cast<void *>(list), 2));

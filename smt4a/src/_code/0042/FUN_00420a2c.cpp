@@ -8,7 +8,7 @@ struct PositionSnapshot { s32 x, y; f32 depth; };
 struct SpriteSnapshot { PositionSnapshot position; u8 unk0c[0x38]; };
 
 extern "C" {
-void FUN_00163aa4(void *sprite, f32 delta);
+void uiSpriteAdvanceAnimation(void *sprite, f32 delta);
 s32 vec2GetYInt(const void *sprite);
 f32 vec2GetSpeed(const void *sprite);
 
@@ -35,13 +35,13 @@ void FUN_00420a2c(void *context)
     };
     // Local overlapping views avoid growing the shared prefix or changing sprite alignment.
     CaptureView *work = static_cast<CaptureView *>(context);
-    FUN_00163aa4(&work->sprites.header, 1.0f);
+    uiSpriteAdvanceAnimation(&work->sprites.header, 1.0f);
     for (s32 index = 0; index < work->state.spriteCount; ++index) {
         if (static_cast<s32>(work->state.transitionCounter) < index) {
             ++work->state.transitionCounter;
             break;
         }
-        FUN_00163aa4(&work->sprites.entries[index], 1.0f);
+        uiSpriteAdvanceAnimation(&work->sprites.entries[index], 1.0f);
     }
     s32 x = vec2GetXInt(&work->sprites.header);
     s32 y = vec2GetYInt(&work->sprites.header);

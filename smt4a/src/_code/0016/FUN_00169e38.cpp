@@ -6,7 +6,7 @@
 extern "C" {
 
 
-void FUN_00183bb0(void);
+void gxResetColorQuadToWhite(void);
 void drawSetColorFromRGBA8(u32 packed);
 s32 __aeabi_idivmod(s32 numerator, s32 denominator);
 
@@ -39,14 +39,14 @@ void FUN_00169e38(s32 value, s32 x, s32 y, s32 signedDisplay)
                 }
                 s32 glyph = remaining / divisor;
                 sprite = asdTMTexTableEntryAt(8, 100 - digit);
-                FUN_001835b4(2, 7, glyph, sprite->x + x, sprite->y + y, 16);
+                texDrawTableEntryAtStoredOrigin(2, 7, glyph, sprite->x + x, sprite->y + y, 16);
                 remaining -= divisor * glyph;
                 if (digit == 2) {
                     sprite = asdTMTexTableEntryAt(8, 0x67);
-                    FUN_001835b4(2, 7, 12, sprite->x + x, sprite->y + y, 16);
+                    texDrawTableEntryAtStoredOrigin(2, 7, 12, sprite->x + x, sprite->y + y, 16);
                 } else if (digit == 5) {
                     sprite = asdTMTexTableEntryAt(8, 0x66);
-                    FUN_001835b4(2, 7, 12, sprite->x + x, sprite->y + y, 16);
+                    texDrawTableEntryAtStoredOrigin(2, 7, 12, sprite->x + x, sprite->y + y, 16);
                 }
             }
             digit++;
@@ -54,19 +54,19 @@ void FUN_00169e38(s32 value, s32 x, s32 y, s32 signedDisplay)
         } while (divisor > 0);
     } else {
         sprite = asdTMTexTableEntryAt(8, 0x5C);
-        FUN_001835b4(2, 7, 0, sprite->x + x, sprite->y + y, 16);
+        texDrawTableEntryAtStoredOrigin(2, 7, 0, sprite->x + x, sprite->y + y, 16);
     }
     if (signedDisplay != 0) {
         if (firstDigit >= 0) {
             sprite = asdTMTexTableEntryAt(8, 0x65 - firstDigit);
         }
         if (value < 0) {
-            FUN_001835b4(2, 7, 11, sprite->x + x, sprite->y + y, 16);
+            texDrawTableEntryAtStoredOrigin(2, 7, 11, sprite->x + x, sprite->y + y, 16);
         } else if (value > 0) {
-            FUN_001835b4(2, 7, 10, sprite->x + x, sprite->y + y, 16);
+            texDrawTableEntryAtStoredOrigin(2, 7, 10, sprite->x + x, sprite->y + y, 16);
         }
     }
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
 }
 
 } /* extern "C" */

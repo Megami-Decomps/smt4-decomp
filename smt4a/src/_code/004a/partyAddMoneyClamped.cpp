@@ -4,7 +4,7 @@
 
 
 extern "C" {
-void FUN_00408184(s32 index, u32 amount);
+void gameCounterAddSaturating(s32 index, u32 amount);
 void countersRaiseA(s32 index, u32 value);
 
 s32 partyAddMoneyClamped(s32 amount)
@@ -13,7 +13,7 @@ s32 partyAddMoneyClamped(s32 amount)
     s32 money = wallet->money + amount;
     wallet->money = money;
     if (amount > 0) {
-        FUN_00408184(0, amount);
+        gameCounterAddSaturating(0, amount);
         money = wallet->money;
     }
     wallet->money = money > 0 ? money : 0;

@@ -9,7 +9,7 @@ extern "C" {
 
 int FUN_0017fa3c(...);
 int refIsNullOrZero(...);
-int FUN_002bb5a4(...);
+int archivePathDeviceOpen(...);
 int asdTextureCreate(...);
 int textFormatBuffer(...);
 int asdMemFree(...);
@@ -53,13 +53,13 @@ extern unsigned int g_aocSystem; /* 0x433158 */
 extern int aocRunByName(unsigned int, void *, unsigned int, unsigned int);
 extern int FUN_002b90c8(unsigned char *, unsigned int, unsigned int *);
 /* Supplied declaration required: refIsNullOrZero. */
-/* Supplied declaration required: FUN_002bb5a4. */
+/* Supplied declaration required: archivePathDeviceOpen. */
 /* Supplied declaration required: asdTextureCreate. */
 /* Supplied declaration required: textFormatBuffer. */
 extern unsigned int fileLoadSync(unsigned char *, unsigned int *, unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdFatalError. */
-extern int FUN_002c58c8(void *, unsigned int);
+extern int asdTMTexTablePrepareNodeImage(void *, unsigned int);
 /* Supplied declaration required: FUN_002c618c. */
 extern int FUN_002e151c(void *, unsigned int);
 extern int asdTMTexTableActivateImage(void *, unsigned int);
@@ -126,7 +126,7 @@ void FUN_0033dcec(fn_0033dcec_arg0 *param_1,unsigned int param_2,int param_3)
         temp_v4 = FUN_002ae8e4(g_aocSystem,reinterpret_cast<u32>(param_1->field_0x8),param_1->field_0xc,0x10000);
       }
       else {
-        temp_v4 = FUN_002c58c8(param_1->field_0x8,param_1->field_0xc);
+        temp_v4 = asdTMTexTablePrepareNodeImage(param_1->field_0x8,param_1->field_0xc);
       }
     }
     temp_v0 = aocTextureRequestHasNewContent(param_1);
@@ -170,7 +170,7 @@ void FUN_0033dcec(fn_0033dcec_arg0 *param_1,unsigned int param_2,int param_3)
         temp_v7[4] = 0;
         temp_v7[1] = 0;
         temp_v7[2] = 0;
-        FUN_002bb5a4(puVar4,temp_v5,1);
+        archivePathDeviceOpen(puVar4,temp_v5,1);
         if ((temp_v7[0] & 0xfffffffe) != 0) {
           if ((temp_v7[0] & 1) != 0) {
             asdFatalError();

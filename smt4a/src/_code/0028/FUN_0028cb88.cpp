@@ -8,7 +8,7 @@ extern "C" {
 
 int renderCtxResetColorScale(...);
 int skinObjectUpdateMatrices(...);
-int FUN_00183bb0(void);
+int gxResetColorQuadToWhite(void);
 int FUN_0028d270(int);
 int FUN_0028f740(...);
 int FUN_002ae5cc(...);
@@ -28,7 +28,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
-/* Supplied declaration required: FUN_00183bb0. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: FUN_0028d270. */
 /* Supplied declaration required: FUN_0028f740. */
 /* Supplied declaration required: FUN_002ae5cc. */
@@ -49,8 +49,8 @@ void FUN_0028cb88(int param_1)
   int *piVar4;
   int *piVar5;
   
-  FUN_00157558(reinterpret_cast<RenderCtxA *>(g_renderCtx));
-  FUN_00183bb0();
+  renderCtxSelectDisplayAreaForStereoMode(reinterpret_cast<RenderCtxA *>(g_renderCtx));
+  gxResetColorQuadToWhite();
   piVar5 = (int *)(param_1 + 0x387c);
   if (*piVar5 == 6) {
     if (*(int *)(param_1 + 0x4ad8) == 3) {

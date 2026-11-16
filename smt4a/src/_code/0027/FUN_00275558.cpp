@@ -6,7 +6,7 @@ extern "C" {
 f32 distSpatial(MapVector first, SoundActorQueuePosition second);
 s32 asd3dSoundActorIsPlaying(u32 handle);
 void FUN_003d5000(u32 handle);
-u32 FUN_003d4ed8(u32 soundId, SoundActorQueuePosition position);
+u32 soundActorStartOnFreeChannel(u32 soundId, SoundActorQueuePosition position);
 extern LmapExtraA *g_lmapView;
 
 // Start nearby ambient sounds, with distance hysteresis and a short stopped-actor grace period.
@@ -39,7 +39,7 @@ void FUN_00275558(void)
                     }
                 }
             } else if (distance < radius) {
-                entry->handle = FUN_003d4ed8(entry->soundId, entry->position);
+                entry->handle = soundActorStartOnFreeChannel(entry->soundId, entry->position);
                 entry->unk0c = 1;
                 entry->inactiveFrames = 0;
             }

@@ -14,7 +14,7 @@ struct RenderReadinessWork {
 
 extern "C" {
 s32 stateValuesGetBySelector(u32);
-void FUN_00157558(RenderCtxA *);
+void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *);
 void FUN_0014a960(u32);
 extern RenderCtxA *g_renderCtx;
 
@@ -28,7 +28,7 @@ u8 frameTexDrawWhenReady(u32 job)
         return 0;
     if (stateValuesGetBySelector(0) != 0)
         return 0;
-    FUN_00157558(g_renderCtx);
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     FUN_0014a960(0);
     return 0;
 }

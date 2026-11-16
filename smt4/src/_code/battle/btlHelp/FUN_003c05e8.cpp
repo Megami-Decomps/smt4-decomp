@@ -22,7 +22,7 @@ typedef struct BtlList {
 } BtlList;
 
 extern BtlList *DAT_00435d78;
-s32 FUN_002b6b04(void);
+s32 infoWindowIsActive(void);
 void infoWinStartTimer(s32 mode);
 void asdMemFree(void *memory);
 
@@ -44,7 +44,7 @@ static __inline BtlNode *btlListRemove(BtlList *list, BtlNode *node)
 }
 
 /* Frees every node of the list, starting the info window timer for each ready one that belongs to
- * `owner` (valid index, kind 1, flag 0 clear, FUN_002b6b04 passing). */
+ * `owner` (valid index, kind 1, flag 0 clear, infoWindowIsActive passing). */
 void FUN_003c05e8(s32 owner)
 {
     BtlNode *node = DAT_00435d78->first;
@@ -53,7 +53,7 @@ void FUN_003c05e8(s32 owner)
         BtlNode *next = node->next;
 
         if (node->owner == owner && node->index >= 0 && node->kind == 1 && (node->flags & 1) == 0 &&
-            FUN_002b6b04() != 0) {
+            infoWindowIsActive() != 0) {
             infoWinStartTimer(1);
         }
         asdMemFree(btlListRemove(DAT_00435d78, node));

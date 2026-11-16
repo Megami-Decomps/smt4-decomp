@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00103f54(int, unsigned int *, int, int);
 int holderSetFlagBits(int, int);
 int FUN_0017fd20(unsigned int *, int);
-int FUN_002e3140(void);
+int resultHandleFailure(void);
 int onlineContextGetInstance(void);
 int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
@@ -31,7 +31,7 @@ extern unsigned char DAT_0055cae4; /* 0x55cae4 */
 /* Supplied declaration required: FUN_00103f54. */
 /* Supplied declaration required: holderSetFlagBits. */
 /* Supplied declaration required: FUN_0017fd20. */
-/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: onlineContextGetInstance. */
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
@@ -97,7 +97,7 @@ unsigned int * FUN_004d95e8(int param_1,unsigned int param_2,unsigned int param_
       puVar3[0x1b] = temp_v5;
     }
     if ((int)puVar5 < 0) {
-      FUN_002e3140();
+      resultHandleFailure();
     }
     puVar3[0x1c] = 0xe7e3ffff;
     puVar3[0x1d] = 0;

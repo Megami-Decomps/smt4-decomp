@@ -9,7 +9,7 @@ int asdTMTexTableReleaseNode(...);
 int FUN_002ae8e4(...);
 int eventQueueAddUnique(...);
 int jobStop(...);
-int FUN_002c58c8(...);
+int asdTMTexTablePrepareNodeImage(...);
 int VectorSignedToFloat(...);
 
 typedef struct fn_001dfc64_arg0 fn_001dfc64_arg0;
@@ -54,7 +54,7 @@ static float romwright_fabs_4(float value)
 #endif
 extern int asdAnimGetTrackLastFrame(int, unsigned int);
 /* Supplied declaration required: aocHandleButtons. */
-extern unsigned int FUN_00294090(int, unsigned int);
+extern unsigned int eventResourceCacheAcquire(int, unsigned int);
 extern int FUN_00294fe0(unsigned int);
 extern int nkdwHeaderParse(unsigned int);
 extern int randBetween(unsigned int, unsigned int);
@@ -66,7 +66,7 @@ extern int FUN_002b8660(void);
 extern int jobGetWork(void);
 extern int FUN_002c1d5c(void);
 /* Supplied declaration required: jobStop. */
-/* Supplied declaration required: FUN_002c58c8. */
+/* Supplied declaration required: asdTMTexTablePrepareNodeImage. */
 
 
 unsigned int FUN_001dfc64(fn_001dfc64_arg0 *param_1)
@@ -93,7 +93,7 @@ unsigned int FUN_001dfc64(fn_001dfc64_arg0 *param_1)
         return 0;
       }
       if (*(int *)(temp_v0 + 0x4c) != 0) {
-        temp_v7 = FUN_00294090(*(int *)(temp_v0 + 0x4c),1);
+        temp_v7 = eventResourceCacheAcquire(*(int *)(temp_v0 + 0x4c),1);
         *(unsigned int *)(temp_v0 + 0xc) = 2;
         *(unsigned int *)(temp_v0 + 0x48) = temp_v7;
         return 0;
@@ -105,13 +105,13 @@ unsigned int FUN_001dfc64(fn_001dfc64_arg0 *param_1)
                      0x10000);
       }
       else {
-        FUN_002c58c8(*(unsigned int *)(temp_v0 + 0x3c),*(unsigned int *)(temp_v0 + 0x40));
+        asdTMTexTablePrepareNodeImage(*(unsigned int *)(temp_v0 + 0x3c),*(unsigned int *)(temp_v0 + 0x40));
       }
       *(unsigned int *)(temp_v0 + 0xc) = 0;
       if (*(char *)(temp_v0 + 100) == '\0') {
         return 0;
       }
-      FUN_002c58c8(0x32,0);
+      asdTMTexTablePrepareNodeImage(0x32,0);
       return 0;
     }
     if (temp_v1 == 2) {

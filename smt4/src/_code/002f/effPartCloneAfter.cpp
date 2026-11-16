@@ -20,7 +20,7 @@ static inline void linkedItemsInsertAfter(LinkedItems *owner, LinkedItem *source
 extern "C" {
 EffPart *FUN_0025c870(void);
 void __aeabi_memcpy4(void* destination, const void* source, u32 size);
-void FUN_002a3d58(EffPart *record);
+void effPartInitDefaults(EffPart *record);
 
 // Allocate and initialize a copy, insert it after the source, and update the owner's count.
 LinkedItem *effPartCloneAfter(LinkedItems *owner, LinkedItem *source)
@@ -33,7 +33,7 @@ LinkedItem *effPartCloneAfter(LinkedItems *owner, LinkedItem *source)
     part->unk88 = 8;
     part->unk89 = 0;
     part->unk8a = 0;
-    FUN_002a3d58(part);
+    effPartInitDefaults(part);
     record->reference.flags |= 1;
     record->value = source->value;
 

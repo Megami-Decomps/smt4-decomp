@@ -24,7 +24,7 @@ s32 FUN_003eebf4(BtlMainStateA *, s32 side);
 BattleEffectActorInfo *dataTable00FindById(u16 id);
 void FUN_004cb9d0(BattleEffectSetup *);
 s32 idSetFindSubjectIndex(BtlMainStateA *, BattleEffectSetup *);
-BattleEffectGroup *FUN_001568f8(BtlMainStateA *, s32 group);
+BattleEffectGroup *btlFindEntryBlockByMemberId(BtlMainStateA *, s32 group);
 u32 stateEntryFindById(BtlMainStateA *, u32 handle);
 f32 asdAnimGetTrackLastFrame(u32 handle, s32 index);
 u16 randRange(u16 maximum);
@@ -77,7 +77,7 @@ void battleEffectInitializeVariant(BtlMainStateA *battle, BattleEffectSetup *eff
         if (index < 0) {
             index = 0;
         }
-        BattleEffectGroup *group = FUN_001568f8(battle, effect->group);
+        BattleEffectGroup *group = btlFindEntryBlockByMemberId(battle, effect->group);
         u32 handle = stateEntryFindById(battle, group->handles[index]);
         f32 frames = asdAnimGetTrackLastFrame(handle, 0);
         effect->frame = randRange(static_cast<u16>(static_cast<s32>(frames) - 1));

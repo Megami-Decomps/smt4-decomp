@@ -1,5 +1,5 @@
 /* NON_MATCHING: retail shares the "step = 0/1" store between cases 0 and 2, reloads g_gameState
- * for the flag write and places the FUN_00289880 arm last; armcc here keeps case 2 separate */
+ * for the flag write and places the commonBgStopChildAndBeginTransition arm last; armcc here keeps case 2 separate */
 #include "map/mapDepart.h"
 #include "bible/bibleAnalyze.h"
 
@@ -20,7 +20,7 @@ extern GameState g_gameState;
 
 s32 gameFlagIsSet(u32 flag);
 void commonBgReset(void);
-void FUN_00289880(void);
+void commonBgStopChildAndBeginTransition(void);
 void buttonHelpSelectMapPreset(void);
 
 /* Steps the phase: rebuilds the background if requested, waits for the button help to close,
@@ -34,7 +34,7 @@ void FUN_0039ca70(Unk39ca70Phase *phase)
             if (gameFlagIsSet(22)) {
                 commonBgReset();
             } else {
-                FUN_00289880();
+                commonBgStopChildAndBeginTransition();
             }
         }
         buttonHelpSelectMapPreset();

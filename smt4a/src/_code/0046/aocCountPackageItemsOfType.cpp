@@ -1,6 +1,5 @@
 #include "addon/aocMain.h"
 #include "shard/W4_Match3_AocMainA.h"
-#include "shard/W8X15_PackageList.h"
 
 extern "C" {
 
@@ -17,9 +16,9 @@ typedef struct AocPackageItem {
 
 s32 asdFsIsSdCardDetected(void);
 s32 objGetFlagBit16(AocMainA *main);
-s32 FUN_001b315c(AocPackageRecord *package);
-AocPackageItem *FUN_001b31ac(AocPackageRecord *package);
-u32 FUN_001b31e0(AocPackageRecord *package);
+s32 packageEntryIsLoaded(AocPackageRecord *package);
+AocPackageItem *packageEntryGetDirectory(AocPackageRecord *package);
+u32 packageEntryGetFileCount(AocPackageRecord *package);
 
 /* Counts the items of the given type across all valid packages; without an SD card clears AOC flag 0x10000 and returns 0. */
 s32 aocCountPackageItemsOfType(AocSystemA *system, s32 type)
@@ -38,9 +37,9 @@ s32 aocCountPackageItemsOfType(AocSystemA *system, s32 type)
     for (i = 0; i < system->packages.count; i++) {
         AocPackageRecord *package = &((AocPackageRecord *)system->packages.entries)[i];
 
-        if (FUN_001b315c(package)) {
-            AocPackageItem *items = FUN_001b31ac(package);
-            u32 itemCount = FUN_001b31e0(package);
+        if (packageEntryIsLoaded(package)) {
+            AocPackageItem *items = packageEntryGetDirectory(package);
+            u32 itemCount = packageEntryGetFileCount(package);
             u32 j;
 
             for (j = 0; j < itemCount; j++) {

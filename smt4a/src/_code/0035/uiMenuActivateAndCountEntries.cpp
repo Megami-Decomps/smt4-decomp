@@ -17,7 +17,7 @@ struct MenuState {
     /* 0x38bc */ MenuItem items[1];
 };
 void FUN_003756c8(s32 enabled);
-void FUN_0020ad6c(MenuState *menu, s32 kind, s32 enabled);
+void btlCommandMenuEnterMode(MenuState *menu, s32 kind, s32 enabled);
 
 /* Activates the menu, counts its used entries, refreshes the button help and switches to state 14. */
 void uiMenuActivateAndCountEntries(MenuState *menu)
@@ -32,7 +32,7 @@ void uiMenuActivateAndCountEntries(MenuState *menu)
     if (FUN_002a21c8() == 0) {
         FUN_003756c8(FUN_002a4878(&menu->items[menu->selectedIndex]) == 0);
     }
-    FUN_0020ad6c(menu, 14, 1);
+    btlCommandMenuEnterMode(menu, 14, 1);
 }
 
 } /* extern "C" */

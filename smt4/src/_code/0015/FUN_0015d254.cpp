@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0015de30(unsigned char *);
 int FUN_0015dfdc(unsigned char *);
 int FUN_002a2a94(unsigned char *, int, unsigned int);
-int FUN_002c526c(void);
+int resultHandleFailure(void);
 int nn_snd_CTR_MasterManager_ExecuteEffect(unsigned char *, int, unsigned int);
 int software_interrupt(int);
 
@@ -21,7 +21,7 @@ extern int FUN_0015e010(unsigned char *);
 /* Supplied declaration required: FUN_002a2a94. */
 extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
 extern unsigned int FUN_002bb470(void);
-/* Supplied declaration required: FUN_002c526c. */
+/* Supplied declaration required: resultHandleFailure. */
 extern int nn_snd_CTR_DspFxManager_GetDspCycles(unsigned int);
 /* Supplied declaration required: nn_snd_CTR_MasterManager_ExecuteEffect. */
 extern void nn_snd_CTR_VoiceManager_AdjustVoicePlayState(unsigned int, int);
@@ -61,7 +61,7 @@ void FUN_0015d254(int param_1)
     *(short *)(param_1 + 0x131a) = *(short *)(param_1 + 0x131a) + 1;
     software_interrupt(0x18);
     if (*(int *)(param_1 + 4) < 0) {
-      FUN_002c526c();
+      resultHandleFailure();
     }
     *(unsigned short *)(param_1 + 0x131e) = *(unsigned short *)(param_1 + 0x131a) & 1;
     *(char *)(param_1 + 0x1319) = *(char *)(param_1 + 0x1319) + '\x01';

@@ -15,7 +15,7 @@ s32 scrRunOpcodesStub(void *script);
 void messageSlotSet(u32 slot);
 void scrScriptProcessDestroy(void *script);
 void asdMemFree(void *allocation);
-s32 FUN_002896bc();
+s32 screenFadesAllReady();
 
 u32 lmapMainUpdateScriptTransition()
 {
@@ -66,7 +66,7 @@ u32 lmapMainUpdateScriptTransition()
     case 1: /* nothing to do while the transition runs */
         break;
     case 2:
-        if (FUN_002896bc()) {
+        if (screenFadesAllReady()) {
             work->state = 0;
         }
         break;

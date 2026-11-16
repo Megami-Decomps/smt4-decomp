@@ -9,7 +9,7 @@ static __inline void vector4Copy(const Vector4 *source, Vector4 *destination)
 
 extern "C" {
 void FUN_002075d0(u32 source, f32 *direction);
-f32 FUN_0028836c(f32 value);
+f32 libm_sinf(f32 value);
 f32 FUN_0024c418(f32 first, f32 second);
 void FUN_003f6b88(f32 pitch, f32 yaw, f32 roll);
 void FUN_002a2c00(void);
@@ -24,7 +24,7 @@ void FUN_0025c8f0(RenderVectorOverride *override, u32 source, Vector4 *output)
         if (override->flags & 0x40) {
             pitch = 0.0f;
         } else {
-            pitch = FUN_0028836c(-direction[1]);
+            pitch = libm_sinf(-direction[1]);
         }
         f32 yaw = FUN_0024c418(direction[0], direction[2]);
         FUN_003f6b88(pitch, yaw * 0.02454369328916073f, 0.0f);

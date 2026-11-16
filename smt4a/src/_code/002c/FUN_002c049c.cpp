@@ -9,7 +9,7 @@ extern "C" {
 
 extern CampCecSetting *g_campCecSetting;
 
-u32 FUN_00275bc8(void *fileA, void *fileB);
+u32 scrScriptProcessCreate(void *fileA, void *fileB);
 s32 scrRunOpcodesStub(u32 script);
 void scrScriptProcessStartEntry(u32 script, s32 entry);
 void scriptProcessSetMode(ScriptRunState *script, s32 mode);
@@ -39,7 +39,7 @@ u32 FUN_002c049c(void)
 
     if (setting->started == 0) {
         if (setting->heapA != NULL && setting->heapB != NULL) {
-            u32 script = FUN_00275bc8(setting->heapA, setting->heapB);
+            u32 script = scrScriptProcessCreate(setting->heapA, setting->heapB);
 
             setting->resource = script;
             scriptProcessSetMode(reinterpret_cast<ScriptRunState *>(script), 2);

@@ -14,7 +14,7 @@ u32 mapSavePointRegisterCurrent(void)
     FlagWorkBanks* flags = gameFlagsGetBlock();
     FUN_00376fb8(flags->savePointMap.handle + 100);
     mapPlaceSet(24, 1, 0);
-    FUN_002b945c(flags->savePointMap.handle);
+    gameFlagsLoadTable4cEntry(flags->savePointMap.handle);
     g_gameState.progressEnabled = 1;
     g_gameState.transitionActive = 0;
     flags->savePoint.scale = (s16)(s32)g_gameState.point.scale;

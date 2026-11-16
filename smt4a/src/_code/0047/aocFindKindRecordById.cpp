@@ -4,9 +4,9 @@
 #include "gamedata/DataTable.h"
 
 extern "C" {
-s32 FUN_001b315c(AocPackage *package);
-const AocPackageFileDescription *FUN_001b31ac(AocPackage *package);
-u32 FUN_001b31e0(AocPackage *package);
+s32 packageEntryIsLoaded(AocPackage *package);
+const AocPackageFileDescription *packageEntryGetDirectory(AocPackage *package);
+u32 packageEntryGetFileCount(AocPackage *package);
 void *dataTableFileGetTable(void *file, u32 section);
 
 // Find a matching id in section one of any loaded package file of kind 0x29.
@@ -14,9 +14,9 @@ PackageKind29Record *aocFindKindRecordById(AocSystemA *system, u32 id)
 {
     for (s32 packageIndex = 0; packageIndex < system->packages.count; ++packageIndex) {
         AocPackage *package = &system->packages.entries[packageIndex];
-        if (FUN_001b315c(package)) {
-            const AocPackageFileDescription *descriptions = FUN_001b31ac(package);
-            u32 fileCount = FUN_001b31e0(package);
+        if (packageEntryIsLoaded(package)) {
+            const AocPackageFileDescription *descriptions = packageEntryGetDirectory(package);
+            u32 fileCount = packageEntryGetFileCount(package);
             for (u32 fileIndex = 0; fileIndex < fileCount; ++fileIndex) {
                 if (descriptions[fileIndex].kind == 0x29) {
                     void *section = dataTableFileGetTable(package->fileTable.files[fileIndex].data, 1);

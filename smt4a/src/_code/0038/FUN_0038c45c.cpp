@@ -6,7 +6,7 @@
 #include "gamedata/GameDataAccess_VariantI.h"
 
 extern "C" {
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
 void scrSetResult(s32 value);
 
 /* Report an eligible combatant whose maximum HP does not exceed its source maximum. */
@@ -30,7 +30,7 @@ u32 FUN_0038c45c(void)
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
-        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL && entry->maxHp <= recordGetScaledMaximum(entry->specialMaximum.record)) {
             scrSetResult(1);
             return 1;

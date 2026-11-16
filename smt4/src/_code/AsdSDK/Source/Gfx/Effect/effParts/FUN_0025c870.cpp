@@ -7,7 +7,7 @@ extern "C" {
 extern const char g_effPartsSourcePath[]; /* "c:\SMT4\XRD686\sdds4\Patch\AsdSDK\Source\Gfx\Effect\effParts.cpp": __FILE__ */
 
 void *memAlloc(int, int, int, int size, int align, int);
-void FUN_002a3d58(EffPart *part);
+void effPartInitDefaults(EffPart *part);
 
 /* Allocates a cleared 0xC0-byte part. */
 static __inline EffPart *effPartAlloc(void)
@@ -30,7 +30,7 @@ EffPart *FUN_0025c870(void)
     part->unk88 = 8;
     part->unk89 = 0;
     part->unk8a = 0;
-    FUN_002a3d58(part);
+    effPartInitDefaults(part);
     return part;
 }
 

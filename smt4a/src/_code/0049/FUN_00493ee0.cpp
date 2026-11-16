@@ -48,8 +48,8 @@ static __inline u32 equipmentGetTypeSortValue(u32 id)
 /* Orders two entries by their secondary key. */
 static s32 compareOrder(const u16 *left, const u16 *right)
 {
-    s32 leftOrder = FUN_0049c9a0(left);
-    s32 rightOrder = FUN_0049c9a0(right);
+    s32 leftOrder = recordGetCompareValue(left);
+    s32 rightOrder = recordGetCompareValue(right);
     return leftOrder - rightOrder;
 }
 

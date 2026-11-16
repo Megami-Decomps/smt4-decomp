@@ -3,7 +3,7 @@
 extern "C" {
 
 int sysMemClear(u8 *buffer, int size);
-int FUN_001b2bd8(u32 owner, u32 kind, u32 key, u8 *outBuffer);
+int packageFindFileByTypeAndId(u32 owner, u32 kind, u32 key, u8 *outBuffer);
 int aocDisplayQueueRecord(u32 context, u8 *buffer, u32 arg0, u32 arg1, int flag0, int flag1, int flag2);
 
 extern u32 g_aocDisplay;
@@ -14,7 +14,7 @@ void aocQueueType20(u32 owner, u32 key, u32 arg1, u32 arg0)
     u8 buffer[128];
 
     sysMemClear(buffer, 0x80);
-    if (FUN_001b2bd8(owner, 0x20, key, buffer) != 0) {
+    if (packageFindFileByTypeAndId(owner, 0x20, key, buffer) != 0) {
         aocDisplayQueueRecord(g_aocDisplay, buffer, arg0, arg1, 0, 4, 0);
     }
 }

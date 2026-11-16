@@ -8,12 +8,12 @@ extern "C" {
 
 int CONCAT44(double, double);
 int FUN_0014e314(...);
-int FUN_00157558(int);
+int renderCtxSelectDisplayAreaForStereoMode(int);
 int textDrawString(...);
 int efctSetSpeed(...);
 float FUN_00168594(const char *, unsigned int, float);
 int renderCtxSelectTexture(...);
-int FUN_00183bb0(void);
+int gxResetColorQuadToWhite(void);
 int dataTableGet(int, int);
 int FUN_002027fc(void);
 int VectorSignedToFloat(...);
@@ -32,14 +32,14 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: FUN_0014e314. */
-/* Supplied declaration required: FUN_00157558. */
+/* Supplied declaration required: renderCtxSelectDisplayAreaForStereoMode. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00168594. */
-extern int FUN_001692ac(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxSelectTexture. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00183bb0. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: dataTableGet. */
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_002027fc. */
@@ -75,7 +75,7 @@ unsigned int FUN_0032b0d4(void)
     if (!((temp_v2 == 3 || temp_v2 == 4) || temp_v2 == 6)) {
       FUN_002027fc();
       temp_v2 = DAT_00589170;
-      FUN_00157558(g_renderCtx);
+      renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
       temp_v1 = g_renderCtx;
       temp_v3 = packNibblesAndByte(6, 1, 0);
       piVar9 = (int *)(temp_v1 + 0x12b8);
@@ -88,7 +88,7 @@ unsigned int FUN_0032b0d4(void)
         *(unsigned char *)(temp_v1 + 0x12d0) = 0;
       }
       efctSetSpeed();
-      FUN_00183bb0();
+      gxResetColorQuadToWhite();
       temp_v1 = g_renderCtx;
       temp_v3 = packNibblesAndByte(6, 7, 0);
       piVar9 = (int *)(temp_v1 + 0x12b8);
@@ -100,7 +100,7 @@ unsigned int FUN_0032b0d4(void)
       }
       temp_v1 = 0;
       do {
-        FUN_001835b4(2,0x2a,temp_v1 + 8000,0,0,2);
+        texDrawTableEntryAtStoredOrigin(2,0x2a,temp_v1 + 8000,0,0,2);
         temp_v3 = g_renderCtx;
         temp_v1 = temp_v1 + 1;
       } while (temp_v1 < 3);
@@ -113,7 +113,7 @@ unsigned int FUN_0032b0d4(void)
         *(unsigned char *)(temp_v3 + 0x12d0) = 0;
       }
       temp_v1 = g_renderCtx;
-      temp_v3 = FUN_001692ac(1,0);
+      temp_v3 = renderCtxPackPassFlags(1,0);
       piVar9 = (int *)(temp_v1 + 0x1258);
       temp_v5 = *piVar9;
       temp_v6 = piVar9[temp_v5 + 2];
@@ -124,7 +124,7 @@ unsigned int FUN_0032b0d4(void)
         *(unsigned char *)(temp_v1 + 0x1270) = 0;
       }
       efctSetSpeed();
-      FUN_00183bb0();
+      gxResetColorQuadToWhite();
       temp_v13 = 0xffffffff;
       if (*(char *)(temp_v2 + 0x3c) == '\0') {
         temp_v13 = 0x787878ff;
@@ -157,7 +157,7 @@ unsigned int FUN_0032b0d4(void)
           temp_v8 = 0;
           temp_v6 = temp_v2 + temp_v3 * 8;
           do {
-            FUN_001835b4(2,0x2a,temp_v8 + 0x1f43,(int)*(float *)(temp_v6 + 0x14),
+            texDrawTableEntryAtStoredOrigin(2,0x2a,temp_v8 + 0x1f43,(int)*(float *)(temp_v6 + 0x14),
                          (int)*(float *)(temp_v6 + 0x18),2);
             temp_v8 = temp_v8 + 1;
           } while (temp_v8 < 7);
@@ -173,7 +173,7 @@ unsigned int FUN_0032b0d4(void)
           }
           temp_v8 = 0;
           do {
-            FUN_001835b4(2,0x2a,temp_v8 + 0x1f43,(int)*(float *)(temp_v6 + 0x14),
+            texDrawTableEntryAtStoredOrigin(2,0x2a,temp_v8 + 0x1f43,(int)*(float *)(temp_v6 + 0x14),
                          (int)*(float *)(temp_v6 + 0x18),2);
             temp_v4 = g_renderCtx;
             temp_v8 = temp_v8 + 1;

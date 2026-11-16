@@ -12,7 +12,7 @@ int randomAdvanceShiftRegister(...);
 int shiftRandomNextFraction(int);
 int gfxQuaternionWorkspaceBuildMatrix(void);
 int phaseCosInterpolate(void);
-int FUN_002b70cc(void);
+int mathSinFixedAngle(void);
 int VectorUnsignedToFloat(unsigned int, int);
 int __aeabi_uidivmod(void);
 
@@ -98,7 +98,7 @@ static float romwright_sqrt_4(float value)
 extern int effGetFrameCounter(void);
 /* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: phaseCosInterpolate. */
-/* Supplied declaration required: FUN_002b70cc. */
+/* Supplied declaration required: mathSinFixedAngle. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
 
@@ -237,10 +237,10 @@ void FUN_0031a9f4(fn_0031a9f4_arg0 *param_1)
               shiftRandomNextFraction(0);
               temp_v22 = (temp_v8 * 0.9f + 0.100000024f) * temp_v10;
               temp_v8 = temp_v14 * temp_v21;
-              FUN_002b70cc();
+              mathSinFixedAngle();
               temp_v16 = CONCAT44(temp_v14 + temp_v37,temp_v8 * temp_v22);
               temp_v8 = (temp_v14 + temp_v37) * temp_v21;
-              FUN_002b70cc();
+              mathSinFixedAngle();
               temp_v18 = (unsigned long long)(unsigned int)(temp_v8 * temp_v22);
               temp_v14 = temp_v8 * temp_v22 - (float)temp_v16;
               temp_v14 = temp_v14 / romwright_sqrt_4(temp_v14 * temp_v14 + temp_v17 * temp_v17);
@@ -353,7 +353,7 @@ void FUN_0031a9f4(fn_0031a9f4_arg0 *param_1)
                   }
                   temp_v41 = (float)((unsigned long long)temp_v15 >> 0x20);
                   temp_v8 = temp_v41 * temp_v21;
-                  FUN_002b70cc();
+                  mathSinFixedAngle();
                   temp_v8 = temp_v8 * temp_v22;
                   temp_v12 = temp_v8 - temp_v12;
                   temp_v14 = romwright_sqrt_4(temp_v12 * temp_v12 + temp_v17 * temp_v17);
@@ -384,7 +384,7 @@ void FUN_0031a9f4(fn_0031a9f4_arg0 *param_1)
                        temp_v12 * (float)puVar10[0x53] + temp_v9 * (float)puVar10[0x57] +
                        temp_v11 * (float)puVar10[0x5b];
                   temp_v12 = temp_v41;
-                  FUN_002b70cc();
+                  mathSinFixedAngle();
                   phaseCosInterpolate();
                   temp_v24 = temp_v24 + temp_v25;
                   temp_v18 = (unsigned long long)(unsigned int)temp_v8;

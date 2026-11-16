@@ -117,7 +117,7 @@ void FUN_004eea40(int *param_1,unsigned int *param_2)
   }
   FUN_004e6b64(piStack_30,param_2,asStack_49c);
   iVar8 = 0;
-  iVar9 = FUN_004f59b0(DAT_00573808);
+  iVar9 = btlGetMaxSlotMetric(DAT_00573808);
   iVar28 = 0;
   param_2[7] = iVar9 + iVar4;
   iStack_48 = 0;
@@ -174,7 +174,7 @@ void FUN_004eea40(int *param_1,unsigned int *param_2)
         func_0x004fb5a8(uVar20 + 1,param_2,*(int *)(*piVar14 + 0x1ed4) + iVar13 * 0x1d0);
       }
       iVar13 = *piVar14;
-      FUN_001568f8(iVar13,iVar12);
+      btlFindEntryBlockByMemberId(iVar13,iVar12);
       if ((iVar13 != 0) && ((*(unsigned short *)(iVar13 + 0x110) & 0x10) == 0)) {
         FUN_003f2aac(*piVar14,iVar12,0);
       }
@@ -288,7 +288,7 @@ void FUN_004eea40(int *param_1,unsigned int *param_2)
       break;
     case 0xe:
       iVar9 = (int)*psVar15;
-      iVar12 = FUN_004f59b0(DAT_00573808);
+      iVar12 = btlGetMaxSlotMetric(DAT_00573808);
       uVar20 = iVar12 + iVar4;
       iVar12 = FUN_004bf67c(uVar17);
       func_0x004fb574(uVar20,param_2,-iVar12);
@@ -355,7 +355,7 @@ void FUN_004eea40(int *param_1,unsigned int *param_2)
       if (uStack_70 != 1 && uStack_70 != 2) {
         iVar9 = 0;
         do {
-          iVar12 = FUN_004f59b0(DAT_00573808);
+          iVar12 = btlGetMaxSlotMetric(DAT_00573808);
           if (-1 < iVar12) {
             sVar3 = *(short *)(iVar22 + iVar9 * 0x16 + 0x6a);
             iVar12 = FUN_004f5d2c(DAT_00573808);
@@ -504,7 +504,7 @@ LAB_004ef7f0:
   if (iVar22 != 0) {
     iVar6 = 0;
     do {
-      iVar9 = FUN_004f59b0(DAT_00573808);
+      iVar9 = btlGetMaxSlotMetric(DAT_00573808);
       if (-1 < iVar9) {
         iVar9 = iVar22 + iVar6 * 0x16;
         if (*(unsigned short *)(iVar9 + 0x6a) - 6 < 6) {
@@ -837,7 +837,7 @@ LAB_004f054c:
         FUN_004fc094(uStack_288,param_2,0,param_2[9],0,iVar29,0xffffffff,0xffffffff,
                      *(unsigned int *)(param_2[10] + 0xf4),*(unsigned int *)(param_2[10] + 0xf8),0,0,0,0
                      ,0,0,0,0,0,0xffffffff,1,0,1,0,0,1);
-        FUN_004fbc30(uStack_288 + 0x19,param_2,param_2[9],0);
+        btlQueueKeyedScalarReflectAction(uStack_288 + 0x19,param_2,param_2[9],0);
       }
       FUN_004e5f2c(piStack_30,param_2,(int)*(short *)(param_2[9] + 0x6a),-iVar29);
       uVar17 = (unsigned int)*(unsigned char *)(uVar17 + 0x22);

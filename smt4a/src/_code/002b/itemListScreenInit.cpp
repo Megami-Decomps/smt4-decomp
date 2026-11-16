@@ -130,9 +130,9 @@ static const u8 listScreenResource4[0x40c] = {
 
 void paramsClearPacket(void* screen);
 
-void FUN_0014e188(void* sprite, s32 a, s32 b, void* owner, s32 c, f32 scale);
-void FUN_00387240(void* sprite, s32 a, s32 index);
-void FUN_0019e330(void* sprite, s32 a, s32 b);
+void uiSpriteStateInitFromSource(void* sprite, s32 a, s32 b, void* owner, s32 c, f32 scale);
+void uiStoreTextureEntryCenter(void* sprite, s32 a, s32 index);
+void rangeSelectionSelectEndpoint(void* sprite, s32 a, s32 b);
 void uiSpriteSelectAnim(void* sprite, s32 anim);
 
 // Initialises the list screen: clears its row state and creates its sprite banks.
@@ -155,38 +155,38 @@ void itemListScreenInit(ListScreen* screen)
                listScreenResource4, 0x40c);
 
     for (s32 i = 0; i <= 9; i++) {
-        FUN_0014e188(&screen->sprites[i], 0xc, 0, screen, 2, 1.0f);
-        FUN_00387240(&screen->sprites[i], 0xc, i + 0xb);
-        FUN_0019e330(&screen->sprites[i], 5, 0);
+        uiSpriteStateInitFromSource(&screen->sprites[i], 0xc, 0, screen, 2, 1.0f);
+        uiStoreTextureEntryCenter(&screen->sprites[i], 0xc, i + 0xb);
+        rangeSelectionSelectEndpoint(&screen->sprites[i], 5, 0);
     }
     for (s32 i = 10; i <= 19; i++) {
-        FUN_0014e188(&screen->sprites[i], 0xc, 4, screen, 2, 1.0f);
-        FUN_00387240(&screen->sprites[i], 0xc, i + 0x15);
+        uiSpriteStateInitFromSource(&screen->sprites[i], 0xc, 4, screen, 2, 1.0f);
+        uiStoreTextureEntryCenter(&screen->sprites[i], 0xc, i + 0x15);
         uiSpriteSelectAnim(&screen->sprites[i], 2);
     }
     for (s32 i = 20; i <= 29; i++) {
-        FUN_0014e188(&screen->sprites[i], 0xc, 7, screen, 2, 1.0f);
-        FUN_00387240(&screen->sprites[i], 0xc, i + 1);
+        uiSpriteStateInitFromSource(&screen->sprites[i], 0xc, 7, screen, 2, 1.0f);
+        uiStoreTextureEntryCenter(&screen->sprites[i], 0xc, i + 1);
         uiSpriteSelectAnim(&screen->sprites[i], 5);
     }
     for (s32 i = 30; i <= 39; i++) {
-        FUN_0014e188(&screen->sprites[i], 0xc, 2, screen, 2, 1.0f);
-        FUN_00387240(&screen->sprites[i], 0xc, i - 9);
+        uiSpriteStateInitFromSource(&screen->sprites[i], 0xc, 2, screen, 2, 1.0f);
+        uiStoreTextureEntryCenter(&screen->sprites[i], 0xc, i - 9);
         uiSpriteSelectAnim(&screen->sprites[i], 3);
     }
     for (s32 i = 40; i <= 49; i++) {
-        FUN_0014e188(&screen->sprites[i], 0xc, 4000, screen, 2, 1.0f);
-        FUN_00387240(&screen->sprites[i], 0xc, i - 0x13);
+        uiSpriteStateInitFromSource(&screen->sprites[i], 0xc, 4000, screen, 2, 1.0f);
+        uiStoreTextureEntryCenter(&screen->sprites[i], 0xc, i - 0x13);
         uiSpriteSelectAnim(&screen->sprites[i], 0xb);
     }
     for (s32 i = 50; i <= 59; i++) {
-        FUN_0014e188(&screen->sprites[i], 0xc, 0xfa6, screen, 2, 1.0f);
-        FUN_00387240(&screen->sprites[i], 0xc, i - 0x1d);
+        uiSpriteStateInitFromSource(&screen->sprites[i], 0xc, 0xfa6, screen, 2, 1.0f);
+        uiStoreTextureEntryCenter(&screen->sprites[i], 0xc, i - 0x1d);
         uiSpriteSelectAnim(&screen->sprites[i], 10);
     }
-    FUN_0014e188(&screen->sprites[0x3c], 0xc, 0, screen, 1, 1.0f);
+    uiSpriteStateInitFromSource(&screen->sprites[0x3c], 0xc, 0, screen, 1, 1.0f);
     for (s32 i = 0x3d; i <= 0x41; i++) {
-        FUN_0014e188(&screen->sprites[i], 0xc, 0xf5 - i, screen, 1, 1.0f);
+        uiSpriteStateInitFromSource(&screen->sprites[i], 0xc, 0xf5 - i, screen, 1, 1.0f);
     }
 }
 

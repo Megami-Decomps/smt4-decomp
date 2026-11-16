@@ -7,7 +7,7 @@
 extern "C" {
 extern u64 g_btlTargetableMask;
 u32 lcgRandomRange(u16 maximum);
-u16 FUN_004e9ae8(BtlMainStateA **context, s32 *candidates, s32 count, u32 mode);
+u16 btlAiFilterCandidatesByExclusionChance(BtlMainStateA **context, s32 *candidates, s32 count, u32 mode);
 
 /* Chooses one eligible combatant matching the requested ailment group and marks it selected. */
 void FUN_004e6880(BtlMainStateA **context, u32 status)
@@ -35,7 +35,7 @@ void FUN_004e6880(BtlMainStateA **context, u32 status)
             }
         }
     }
-    u16 eligibleCount = FUN_004e9ae8(context, candidates, count, 1);
+    u16 eligibleCount = btlAiFilterCandidatesByExclusionChance(context, candidates, count, 1);
     u32 chosen = lcgRandomRange((u16)(eligibleCount - 1));
     BattleActionUnit *unit = reinterpret_cast<BattleActionUnit *>(btlUnitGet(context));
     unit->selectedUnits[candidates[chosen]] = 1;

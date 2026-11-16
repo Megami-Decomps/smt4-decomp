@@ -25,7 +25,7 @@ int buttonHelpRelease(void);
 int uiFadeRelease(void);
 int FUN_0029ae60(...);
 int gameCounterAddSaturating(...);
-void FUN_0029c2cc(...);
+void modelRemoveFromSlotList(...);
 int soundChannelStopAll(...);
 int asdWorkAreaReset(void);
 int messageStatesSetFirst(...);
@@ -33,7 +33,7 @@ int scrScriptProcessDestroy(void);
 int asdModelSlotRelease(...);
 int asdMdlManagerDestroy(...);
 int placeWinRelease(void);
-int FUN_002bf810(...);
+int soundPlaySeUnpanned(...);
 int FUN_002bff50(void);
 int resourceListDestroy(void);
 int asdMemFree(void);
@@ -47,7 +47,7 @@ int FUN_0027f94c(...);
 int FUN_00282bfc(...);
 int FUN_00287030(...);
 int scrScriptProcessStartEntry(...);
-int FUN_00297060(...);
+int scrScriptProcessCreate(...);
 int FUN_0029b8ec(...);
 int FUN_0029bb08(...);
 int slotSetRequest(...);
@@ -67,7 +67,7 @@ int FUN_002fc008(...);
 
 int placeWinCreate(void);
 int FUN_00263988(...);
-int FUN_00281bb0(unsigned int);
+int effectNodeUpdateTransform(unsigned int);
 int gameDataGetPlayerName(void);
 int FUN_002898e4(void);
 int buttonHelpCreate(void);
@@ -143,7 +143,7 @@ extern unsigned int asdCameraLoadFromFile(unsigned char *);
 /* Supplied declaration required: FUN_0026e70c. */
 /* Supplied declaration required: mapDepartSetTarget. */
 /* Supplied declaration required: FUN_0027f94c. */
-/* Supplied declaration required: FUN_00281bb0. */
+/* Supplied declaration required: effectNodeUpdateTransform. */
 extern int screenFadeIsBusy(void);
 /* Supplied declaration required: FUN_00282bfc. */
 /* Supplied declaration required: FUN_00287030. */
@@ -160,7 +160,7 @@ extern int objSlotsAllEmpty(unsigned int);
 extern unsigned int *_ZN9Obj4206e8C1Ev(void);
 /* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_00297060. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 /* Supplied declaration required: FUN_00297684. */
 /* Supplied declaration required: FUN_00298d50. */
 extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
@@ -169,7 +169,7 @@ extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int)
 /* Supplied declaration required: FUN_0029bb08. */
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: gameCounterAddSaturating. */
-/* Supplied declaration required: FUN_0029c2cc. */
+/* Supplied declaration required: modelRemoveFromSlotList. */
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: slotSetRequest. */
 extern int useCounterGetCurrentValue(void);
@@ -200,7 +200,7 @@ extern int modelHasLoadedAttachment(unsigned int);
 extern int padIsButtonRepeat(unsigned int);
 /* Supplied declaration required: textFormatBuffer. */
 extern int jobIsValid(unsigned int);
-/* Supplied declaration required: FUN_002bf810. */
+/* Supplied declaration required: soundPlaySeUnpanned. */
 /* Supplied declaration required: FUN_002bff50. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002c159c. */
@@ -278,7 +278,7 @@ unsigned int FUN_001d99c0(void)
     in_s0 = temp_v10;
     do {
       if (*(char *)(puVar2 + temp_v6 * 3 + 0x15b) != '\0') {
-        FUN_00281bb0(puVar2[temp_v6 * 3 + 0x15a]);
+        effectNodeUpdateTransform(puVar2[temp_v6 * 3 + 0x15a]);
         temp_v2 = FUN_002c79c4(puVar2[temp_v6 * 3 + 0x15a]);
         if (temp_v2 != 0) {
           *(unsigned char *)(puVar2 + temp_v6 * 3 + 0x15b) = 0;
@@ -459,7 +459,7 @@ unsigned int FUN_001d99c0(void)
           temp_v3 = asdLoadFileSyncDefault(&LAB_001da2b0);
           puVar2[9] = temp_v3;
           temp_v6 = puVar2[8];
-          FUN_00297060(temp_v6,temp_v3);
+          scrScriptProcessCreate(temp_v6,temp_v3);
           puVar2[10] = temp_v6;
           *(unsigned int *)(temp_v6 + 0x108) = 2;
           if (*(unsigned char *)((int)puVar2 + 9) != 0) {
@@ -836,7 +836,7 @@ LAB_001da638:
             do {
               if (puVar7[temp_v6 + 0xf] != 0) {
                 if (puVar7[0x154] == temp_v6) {
-                  FUN_0029c2cc(puVar7[temp_v6 + 0xf],0);
+                  modelRemoveFromSlotList(puVar7[temp_v6 + 0xf],0);
                 }
                 gfxObjectDestroy(puVar7[temp_v6 + 0xf]);
                 puVar7[temp_v6 + 0xf] = 0;
@@ -897,7 +897,7 @@ LAB_001da638:
           if (temp_v6 == 2) {
             gameCounterAddSaturating(0x21,1);
             *(unsigned char *)(puVar2 + 0x157) = 0;
-            FUN_002bf810(0x10000a8);
+            soundPlaySeUnpanned(0x10000a8);
             FUN_002636b0();
             buttonHelpSetPreset(0x57);
             puVar2[4] = 8;
@@ -985,12 +985,12 @@ LAB_001dacc8:
       asdModelSlotSetColor(0);
     }
     if (puVar2[0x156] == 0x5a) {
-      FUN_002bf810(0x10001fc);
+      soundPlaySeUnpanned(0x10001fc);
       *(unsigned char *)(puVar2 + 0x161) = 1;
       resOwnerRunNodeHandlers(puVar2[0x160]);
     }
     if (puVar2[0x156] == 0x7b) {
-      FUN_002bf810(0x10000a9);
+      soundPlaySeUnpanned(0x10000a9);
       *(unsigned char *)(puVar2 + 0x164) = 1;
       resOwnerRunNodeHandlers(puVar2[0x163]);
     }

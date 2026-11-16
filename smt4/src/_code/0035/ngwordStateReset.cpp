@@ -21,14 +21,14 @@ typedef struct NgwordState {
 
 extern const char DAT_0040b770[]; /* "ngword:" */
 
-void FUN_002c3dfc(const char *text);
+void fsUnmountByName(const char *text);
 void registerObj8Holder(void *holder);
 
 /* Resets the ngword check state, releasing its holder if one is registered. */
 void ngwordStateReset(NgwordState *state)
 {
     if (state->pending != 0) {
-        FUN_002c3dfc(DAT_0040b770);
+        fsUnmountByName(DAT_0040b770);
     }
     if (state->registered != 0) {
         registerObj8Holder(state->holder);

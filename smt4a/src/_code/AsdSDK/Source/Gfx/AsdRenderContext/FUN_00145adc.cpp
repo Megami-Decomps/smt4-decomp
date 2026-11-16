@@ -11,7 +11,7 @@ int FUN_00156fd8(...);
 int FUN_001579dc(...);
 int FUN_0015a050(...);
 int asdLoadFileSyncNoContext(...);
-int FUN_00178b04(...);
+int asdMemoryAllocTraced(...);
 int mathCopyIdentityMatrix(...);
 int VectorUnsignedToFloat(...);
 int nn_math_ARMv6_MTX44PivotC_FAST(...);
@@ -39,7 +39,7 @@ extern unsigned int FUN_00157acc(void);
 /* Supplied declaration required: FUN_0015a050. */
 /* Supplied declaration required: asdLoadFileSyncNoContext. */
 extern unsigned int asdGxPresetsGetByKind(unsigned int);
-/* Supplied declaration required: FUN_00178b04. */
+/* Supplied declaration required: asdMemoryAllocTraced. */
 extern unsigned int asdGxPresetsGetHeightByKind(unsigned int);
 /* Supplied declaration required: mathCopyIdentityMatrix. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44PivotC_FAST. */
@@ -83,7 +83,7 @@ void FUN_00145adc(int param_1)
     *(unsigned char *)(param_1 + temp_v3 * 0x20 + 0x1210) = 1;
   } while (temp_v1 < 0xc);
   temp_v1 = 0x12a48;
-  FUN_00178b04(0x12a48,"c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\AsdRenderContext.cpp",0x264);
+  asdMemoryAllocTraced(0x12a48,"c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\AsdRenderContext.cpp",0x264);
   temp_v0 = 0;
   if (temp_v1 != 0) {
     temp_v0 = FUN_00157acc();

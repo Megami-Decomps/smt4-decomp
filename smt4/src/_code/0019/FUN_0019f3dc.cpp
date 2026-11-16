@@ -24,7 +24,7 @@ extern GameStateView g_gameState;
 
 int mapConsumePendingJumpRequest(...);
 int gameJumpRequestClear(void);
-int FUN_00289574(...);
+int gameStateSetJumpRequest(...);
 int FUN_002895a8(...);
 int jobStop(...);
 int asdSequenceRequest(...);
@@ -34,7 +34,7 @@ int msgWindowReset(void);
 int FUN_002897b0(int);
 int FUN_002897d0(...);
 int FUN_002897f0(unsigned int, unsigned int);
-int FUN_00289880(void);
+int commonBgStopChildAndBeginTransition(void);
 int FUN_002898e4(void);
 int FUN_00289c98(int);
 int aocBufferQueueDisplay(int, unsigned int, int);
@@ -44,7 +44,7 @@ int messageSlotSet(...);
 int buttonHelpRelease(void);
 int uiFadeRelease(void);
 int scrScriptProcessStartEntry(unsigned int, int);
-int FUN_00297060(int, unsigned int);
+int scrScriptProcessCreate(int, unsigned int);
 int FUN_002a03d8(...);
 int scrScriptProcessDestroy(void);
 int buttonHelpSetPreset(int);
@@ -81,11 +81,11 @@ extern int scrRunOpcodesStub(unsigned int);
 extern int questSysUpdateLoad(int);
 /* Supplied declaration required: mapConsumePendingJumpRequest. */
 /* Supplied declaration required: gameJumpRequestClear. */
-/* Supplied declaration required: FUN_00289574. */
+/* Supplied declaration required: gameStateSetJumpRequest. */
 extern char *gameJumpRequestGet(void);
 /* Supplied declaration required: FUN_002895a8. */
 /* Supplied declaration required: FUN_00289608. */
-extern int FUN_002896bc(void);
+extern int screenFadesAllReady(void);
 /* Supplied declaration required: msgWindowReset. */
 /* Supplied declaration required: FUN_002897b0. */
 extern int FUN_002897c0(void);
@@ -93,7 +93,7 @@ extern int FUN_002897c0(void);
 extern int FUN_002897e0(void);
 /* Supplied declaration required: FUN_002897f0. */
 extern unsigned int scrScriptProcessGetEntry(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00289880. */
+/* Supplied declaration required: commonBgStopChildAndBeginTransition. */
 /* Supplied declaration required: FUN_002898e4. */
 /* Supplied declaration required: FUN_00289c98. */
 extern int campButtonHelpIsActive(void);
@@ -107,7 +107,7 @@ extern int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: buttonHelpRelease. */
 /* Supplied declaration required: uiFadeRelease. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_00297060. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: buttonHelpSetPreset. */
@@ -146,7 +146,7 @@ unsigned int FUN_0019f3dc(void)
   }
   temp_v3 = g_aocJob[2];
   if (temp_v3 == 0x5f) {
-    temp_v2 = FUN_002896bc();
+    temp_v2 = screenFadesAllReady();
     temp_v3 = g_aocMain;
     if (temp_v2 == 0) {
       return 0;
@@ -202,10 +202,10 @@ unsigned int FUN_0019f3dc(void)
       }
       FUN_002898e4();
       buttonHelpCreate();
-      FUN_00289880();
+      commonBgStopChildAndBeginTransition();
       buttonHelpSetPreset(0x90);
       temp_v3 = puVar2[0xb];
-      FUN_00297060(temp_v3,puVar2[0xd]);
+      scrScriptProcessCreate(temp_v3,puVar2[0xd]);
       puVar2[0xc] = temp_v3;
       *(unsigned int *)(temp_v3 + 0x108) = 2;
       temp_v3 = puVar2[6];
@@ -229,7 +229,7 @@ unsigned int FUN_0019f3dc(void)
       if (temp_v3 != 0xb) {
         return 0;
       }
-      temp_v3 = FUN_002896bc();
+      temp_v3 = screenFadesAllReady();
       if (temp_v3 == 0) {
         return 0;
       }
@@ -351,14 +351,14 @@ unsigned int FUN_0019f3dc(void)
         }
       }
       else {
-        FUN_00289574((unsigned char)pcVar5[1] + 100,pcVar5[2],0xffffffff);
+        gameStateSetJumpRequest((unsigned char)pcVar5[1] + 100,pcVar5[2],0xffffffff);
         g_gameState.f0049f924 = 0xffffffff;
         temp_v1 = 8;
         asdSequenceRequest(temp_v1,0);
       }
     }
     else {
-      FUN_00289574(pcVar5[1],pcVar5[2],pcVar5[3]);
+      gameStateSetJumpRequest(pcVar5[1],pcVar5[2],pcVar5[3]);
       temp_v1 = 6;
       asdSequenceRequest(temp_v1,0);
     }

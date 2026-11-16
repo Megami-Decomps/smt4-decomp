@@ -4,8 +4,8 @@
 extern "C" {
 u32 lzGetAdvertisedSize(const u8 *source);
 void lzDecompressBytes(const u8 *source, u8 *destination);
-void FUN_0014f408(const u8 *source, u8 *destination);
-void FUN_0014f2c8(const u8 *source, u8 *destination);
+void huffmanDecompress(const u8 *source, u8 *destination);
+void rleDecompress(const u8 *source, u8 *destination);
 void *asdMemoryAllocAligned(s32 heap, s32 category, s32 flags, u32 bytes, u32 alignment, s32 clear);
 void asdMemFree(void *);
 
@@ -35,9 +35,9 @@ u8 *aocTexExpandCompressedData(u8 *source, u32 flags, u32 alignment)
             if (kind == 0x10) {
                 lzDecompressBytes(source, result);
             } else if (kind == 0x20) {
-                FUN_0014f408(source, result);
+                huffmanDecompress(source, result);
             } else if (kind == 0x30) {
-                FUN_0014f2c8(source, result);
+                rleDecompress(source, result);
             }
             asdMemFree(source);
         }

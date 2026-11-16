@@ -57,12 +57,12 @@ void FUN_0032d0c8(RelativeDirectory *directory, u32 index, u16 skillId, u32 extr
         FUN_002c0940(low, skill->power);
         FUN_002c0940(high, skill->maxPower);
         textFormatBuffer(text, "%s\x81\x60%s", low, high);
-        FUN_003180c4(37, text);
+        scrSetStringSlot(37, text);
     }
     battleAttributeFormatName(text, skill->attribute);
-    FUN_003180c4(38, text);
+    scrSetStringSlot(38, text);
     skillFormatTargetLabel(text, skill->target);
-    FUN_003180c4(39, text);
+    scrSetStringSlot(39, text);
     if (skill->ailment == 0) {
         textFormatBuffer(text, "\x82\x6d\x82\x8f\x82\x8e\x82\x85");
     }
@@ -93,9 +93,9 @@ void FUN_0032d0c8(RelativeDirectory *directory, u32 index, u16 skillId, u32 extr
     if (skill->ailment == 13) {
         textFormatBuffer(text, "\x82\x6c\x82\x95\x82\x94\x82\x85");
     }
-    FUN_003180c4(40, text);
+    scrSetStringSlot(40, text);
     FUN_002ad414(0, extra, skillId, text);
-    FUN_003180c4(41, text);
+    scrSetStringSlot(41, text);
     if (directory == NULL) {
         directory = g_buttonHelp.defaultDirectory;
     }

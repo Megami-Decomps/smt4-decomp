@@ -5,7 +5,7 @@
 struct ReflectTargetA { u8 unk00[0x6a]; s16 entryIndex; };
 struct ReflectedMemberStatusA { u8 unk00[0x110]; u16 flags; };
 extern "C" {
-ReflectedMemberStatusA *FUN_001568f8(void *battle, s32 member);
+ReflectedMemberStatusA *btlFindEntryBlockByMemberId(void *battle, s32 member);
 
 
 // Queue a status clear followed by recovery actions when no blocking status remains.
@@ -14,7 +14,7 @@ u32 FUN_004fcffc(s32 actor, u32 options, ReflectTargetA *target, u32 mask)
     u32 flags = 0;
     bool rosterMember = target->entryIndex < 109;
     if (rosterMember) {
-        ReflectedMemberStatusA *member = FUN_001568f8(btlGetMainState(), target->entryIndex);
+        ReflectedMemberStatusA *member = btlFindEntryBlockByMemberId(btlGetMainState(), target->entryIndex);
         if (member)
             flags = member->flags;
     }

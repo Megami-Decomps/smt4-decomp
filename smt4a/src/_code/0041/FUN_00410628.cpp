@@ -31,7 +31,7 @@ void FUN_004f1edc(BtlCameraA *camera);
 int cameraBeginScalarTransition(...);
 int FUN_004f41b0(...);
 int FUN_004f5238(...);
-int FUN_004fb43c(...);
+int btlQueueActionMessage(...);
 void btlReflectCreateKind43(int, unsigned int, unsigned int, unsigned int, unsigned int);
 int btlReflectCreateKind42(unsigned int, int, unsigned int, int **);
 int fillThreeWordsWithByte(...);
@@ -82,7 +82,7 @@ extern unsigned int g_btlStageModel; /* 0x57a4f8 */
 extern int lcgRandomRange(unsigned int);
 extern int FUN_00163e84(unsigned int);
 extern int padButtonIsPressed(unsigned int);
-extern int FUN_00187168(void);
+extern int partySlotIsOccupied(void);
 extern unsigned int dataTableGetEntries(void);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: dataTableFileGetTable. */
@@ -105,7 +105,7 @@ extern int chainCountIdUnflagged(unsigned int, unsigned int);
 /* Supplied declaration required: cameraBeginScalarTransition. */
 /* Supplied declaration required: FUN_004f41b0. */
 /* Supplied declaration required: FUN_004f5238. */
-/* Supplied declaration required: FUN_004fb43c. */
+/* Supplied declaration required: btlQueueActionMessage. */
 /* Supplied declaration required: btlReflectCreateKind43. */
 /* Supplied declaration required: btlReflectCreateKind42. */
 /* Supplied declaration required: fillThreeWordsWithByte. */
@@ -155,7 +155,7 @@ void FUN_00410628(int param_1)
     if (temp_v3 == 0) {
       return;
     }
-    temp_v3 = (int)FUN_0013def0(0);
+    temp_v3 = (int)pairedAvailabilityGetState(0);
     if (temp_v3 != 0) {
       FUN_003d54f8(0,10);
     }
@@ -183,7 +183,7 @@ void FUN_00410628(int param_1)
     do {
       temp_v0 = temp_v5;
       FUN_003e503c();
-      temp_v3 = FUN_00187168();
+      temp_v3 = partySlotIsOccupied();
       if (temp_v3 != 0) {
         temp_v2 = FUN_0019acdc(*(unsigned short *)(temp_v0 + 300), 1);
         temp_v12 = (unsigned int ***)&temp_v14;
@@ -351,7 +351,7 @@ void FUN_00410628(int param_1)
     temp_v12 = (unsigned int ***)0x0;
     temp_v13 = (int **)0x0;
     temp_v14 = (unsigned int ***)0x0;
-    FUN_004fb43c(0,0,0x1000232,1);
+    btlQueueActionMessage(0,0,0x1000232,1);
     break;
   case 3:
     if (*(int *)(*(int *)(param_1 + 0x2c) + 4) < *(int *)(*(int *)(param_1 + 0x2c) + 8)) {

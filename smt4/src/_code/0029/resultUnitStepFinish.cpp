@@ -18,7 +18,7 @@ extern "C" {
 void btlTalkBustUpDestroy(void);
 void resultSetMenuState(ResultScreenExit *result, s32 state);
 void FUN_0029e788(void);
-void FUN_0029e874(s32 value);
+void gameSetIconDisplayEnabled(s32 value);
 void scrScriptProcessDestroy(void *script);
 
 // Ends the current unit's result step: moves on to the next unit or to the closing menu state.
@@ -33,7 +33,7 @@ u32 resultUnitStepFinish(ResultScreenExit *result)
         resultSetMenuState(result, 0x14);
         return 0;
     }
-    FUN_0029e874(1);
+    gameSetIconDisplayEnabled(1);
     FUN_0029e788();
     resultSetMenuState(result, 9);
     return 1;

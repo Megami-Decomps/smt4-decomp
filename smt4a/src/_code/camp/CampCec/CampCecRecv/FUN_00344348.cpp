@@ -172,7 +172,7 @@ void FUN_00344348(u8 fromMenu)
     } handlers = { 4, FUN_00514a64, FUN_00514b84, FUN_00514b14 };
     u32 result = FUN_002fb0d4(&recv->result, &handlers, FUN_002a28c0, &recv, recv->list->size + recv->list->begin, 0x11, -2, 0);
     if ((result & 0x7e00000) != 0x600000 && (s32)nnResultIsFailure(result)) {
-        FUN_002e3140(result);
+        resultHandleFailure(result);
     }
 }
 

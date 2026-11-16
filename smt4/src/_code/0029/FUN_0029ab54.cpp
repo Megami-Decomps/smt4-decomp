@@ -16,19 +16,19 @@ void FUN_0029ab54(s32 x, s32 y)
     StatusIndicatorView *status = reinterpret_cast<StatusIndicatorView *>(g_statusDown);
     if (FUN_00288498()) {
         if (status->first == 1 || status->first == 2) {
-            FUN_002bf288(2, 0x1A, 0x4D5, x, y, 0xBA);
-            FUN_002bf288(2, 0x1A, 0x4D9, x, y, 0xBA);
+            texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x4D5, x, y, 0xBA);
+            texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x4D9, x, y, 0xBA);
         } else {
-            FUN_002bf288(2, 0x1A, 0x4D3, x, y, 0xBA);
-            FUN_002bf288(2, 0x1A, 0x4D7, x, y, 0xBA);
+            texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x4D3, x, y, 0xBA);
+            texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x4D7, x, y, 0xBA);
         }
         if (status->second == 1 || status->second == 2) {
-            FUN_002bf288(2, 0x1A, 0x4D4, x, y, 0xBA);
-            FUN_002bf288(2, 0x1A, 0x4D8, x, y, 0xBA);
+            texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x4D4, x, y, 0xBA);
+            texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x4D8, x, y, 0xBA);
             return;
         }
-        FUN_002bf288(2, 0x1A, 0x4D2, x, y, 0xBA);
-        FUN_002bf288(2, 0x1A, 0x4D6, x, y, 0xBA);
+        texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x4D2, x, y, 0xBA);
+        texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x4D6, x, y, 0xBA);
     }
 }
 }

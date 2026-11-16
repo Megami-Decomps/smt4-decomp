@@ -25,7 +25,7 @@ void *dataTableGet(s32 table, s32 slot);
 u32 dataTableGetCount(void *table);
 Entry0026a794 *libc_bsearch(const Entry0026a794 *key, const Entry0026a794 *base, u32 count, u32 size, Compare0026a794 *compare);
 
-s32 FUN_00145a98(const Entry0026a794 *first, const Entry0026a794 *second);
+s32 passiveSkillCompareById(const Entry0026a794 *first, const Entry0026a794 *second);
 
 extern AocSystem0026a794 *g_aocSystem; /* 0x433158 */
 
@@ -38,7 +38,7 @@ static inline Entry0026a794 *findContentFlagEntry(u32 id)
         u32 count = dataTableGetCount(table);
         Entry0026a794 key;
         key.id = id;
-        entry = libc_bsearch(&key, entries, count, sizeof(Entry0026a794), FUN_00145a98);
+        entry = libc_bsearch(&key, entries, count, sizeof(Entry0026a794), passiveSkillCompareById);
     }
     return entry;
 }

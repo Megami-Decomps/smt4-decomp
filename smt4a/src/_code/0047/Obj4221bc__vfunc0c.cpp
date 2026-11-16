@@ -52,7 +52,7 @@ WindowStatusOperationResult Obj4221bc::vfunc0c(const void *)
         u32 status = FUN_002fb0d4(&manager->queue, &request.size, FUN_004733cc, &owner);
         if ((status & 0x7e00000) != 0x600000) {
             if (nnResultIsFailure(status)) {
-                FUN_002e3140(status);
+                resultHandleFailure(status);
             }
         }
     }

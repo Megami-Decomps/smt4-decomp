@@ -5,7 +5,7 @@
 extern "C" {
 
 int btlGetMainState(...);
-int FUN_001568f8(...);
+int btlFindEntryBlockByMemberId(...);
 int dataTable8FindRecord(void);
 int gameGetSlotRecord(...);
 int dataTable04FindById(void);
@@ -46,7 +46,7 @@ extern unsigned int DAT_005714fc; /* 0x5714fc */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_001568f8. */
+/* Supplied declaration required: btlFindEntryBlockByMemberId. */
 extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: gameGetSlotRecord. */
@@ -201,7 +201,7 @@ unsigned int FUN_004c34e0(int param_1,unsigned int param_2,unsigned int param_3,
     temp_v9 = 0.01f;
     if (param_6 < 0x6d) {
       puVar3 = puVar2;
-      FUN_001568f8(puVar2,param_6);
+      btlFindEntryBlockByMemberId(puVar2,param_6);
       temp_v8 = (float)VectorSignedToFloat(puVar3[0x40] * (unsigned int)*(unsigned char *)(param_4 + 0x39),
                                           (unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v6 = (unsigned int)(temp_v8 * temp_v9);
@@ -241,7 +241,7 @@ unsigned int FUN_004c34e0(int param_1,unsigned int param_2,unsigned int param_3,
     temp_v3 = gameGetSlotRecord(param_6 - 0x6d);
     return (int)*(short *)(temp_v3 + 0x10);
   }
-  FUN_001568f8(puVar2,param_6);
+  btlFindEntryBlockByMemberId(puVar2,param_6);
   return puVar2[0x40];
 }
 

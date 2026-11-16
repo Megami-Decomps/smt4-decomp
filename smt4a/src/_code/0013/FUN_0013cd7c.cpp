@@ -12,7 +12,7 @@ struct SurfaceReductionWork {
 typedef char SurfaceReductionOffsets[(offsetof(SurfaceReductionWork, halfSurface) == 0x1498 && offsetof(SurfaceReductionWork, quarterSurface) == 0x149C) ? 1 : -1];
 extern "C" {
 s32 stateValuesGetBySelector(u32 selector);
-u8 FUN_00154edc(u32 target, JobSurface *surface);
+u8 gxCopyFramebufferToSurface(u32 target, JobSurface *surface);
 void surfaceCopy(JobSurface *source, JobSurface *destination);
 }
 static inline void reduceSurface(JobSurface *&source, JobSurface *&destination)
@@ -35,10 +35,10 @@ extern "C" s32 FUN_0013cd7c(u32 job)
     if (frame->unk148C)
         return 0;
     JobSurface *&surface = reinterpret_cast<JobSurface *&>(frame->unk1490);
-    FUN_00157558(g_renderCtx);
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     surface->width = 512;
     surface->height = 512;
-    frame->unkFAC[0] = FUN_00154edc(0, surface);
+    frame->unkFAC[0] = gxCopyFramebufferToSurface(0, surface);
     s32 selector = stateValuesGetBySelector(0);
     s32 levels = static_cast<s32>(frame->mode);
     if (!selector && levels > 1) {

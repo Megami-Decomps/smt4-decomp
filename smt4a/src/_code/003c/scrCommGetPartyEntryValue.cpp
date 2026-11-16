@@ -21,12 +21,12 @@ typedef struct PartyOwner {
     /* 0x04 */ PartyObj *obj;
 } PartyOwner;
 
-extern Rec12C *FUN_003e4d68(u32 index);
-extern s32 FUN_0019e52c(u32 value);
+extern Rec12C *partyGetSlot(u32 index);
+extern s32 dataTable10FindValue(u32 value);
 extern void scrSetResult(s32 value);
 extern PartyOwner g_callbackOwnerSlots;
 
-/* Script command: result is FUN_0019e52c of the +0x12C halfword of the currently selected party entry. */
+/* Script command: result is dataTable10FindValue of the +0x12C halfword of the currently selected party entry. */
 u32 scrCommGetPartyEntryValue(void)
 {
     PartyObj *obj = g_callbackOwnerSlots.obj;
@@ -39,8 +39,8 @@ u32 scrCommGetPartyEntryValue(void)
         index = FUN_002a4878(obj->block260);
         index = index + FUN_002a4894(reinterpret_cast<const Object *>(obj->block260)) * 4;
     }
-    entry = FUN_003e4d68(obj->ids[index] & 0xFFFF);
-    scrSetResult(FUN_0019e52c(entry->unk12C));
+    entry = partyGetSlot(obj->ids[index] & 0xFFFF);
+    scrSetResult(dataTable10FindValue(entry->unk12C));
     return 1;
 }
 

@@ -30,7 +30,7 @@ struct FusionSkillSortKey {
 extern "C" {
 extern UniteWork *g_unite;
 const FusionSkillDefinition *devilGetRecord(u32);
-void FUN_0029f848(void *, s32, s32, s32, s32, s32);
+void gridNavigationConfigure(void *, s32, s32, s32, s32, s32);
 void FUN_0029b130(u16 *, s32, const FusionSkillSortKey *, u32);
 }
 
@@ -54,7 +54,7 @@ extern "C" void uniteBuildInheritedSkillCandidates(u32 resultId, const FusionSki
         work->inherited[i] = 0;
     s32 count = appendInheritedSkills(work, first, result, 0);
     count = appendInheritedSkills(work, second, result, count);
-    FUN_0029f848(work->selector, count, 8, 1, 1, 1);
+    gridNavigationConfigure(work->selector, count, 8, 1, 1, 1);
     FusionSkillSortKey key;
     key.first = first->id;
     key.second = second->id;

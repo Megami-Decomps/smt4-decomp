@@ -3,7 +3,7 @@
 extern "C" {
 QuestRequirementDefinition *dataTable1bOr1cGetRecord(s32 quest);
 s32 unlockFlagTest(u16 id);
-s32 FUN_0028fb40(u16 id);
+s32 flagValueRead(u16 id);
 s32 partyFindActiveSlotById(u16 id);
 s32 aocEntryGetKind(u16 id);
 QuestRequirementSavedProgress *FUN_00348b7c(s32 quest);
@@ -26,7 +26,7 @@ u32 FUN_00298e40(s32 quest, s32 index, QuestRequirementProgress *progress)
     switch (definition->requirements[index].kind) {
     case 1:
         handled = 1;
-        progress->current = FUN_0028fb40(definition->requirements[index].id);
+        progress->current = flagValueRead(definition->requirements[index].id);
         progress->isItem = 1;
         progress->id = definition->requirements[index].id;
         setRemaining(progress, definition->requirements[index].count - progress->current);

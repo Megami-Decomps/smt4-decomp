@@ -41,7 +41,7 @@ int vec4Forward(void);
 f32 FUN_0027f94c(int);
 int FUN_0027fca0(unsigned int);
 int modelSelectSecondaryMotion(...);
-int FUN_0028c618(...);
+int modelPartSetRotationDegrees(...);
 int nodeSetTranslation(...);
 int nodeGroupSetScale(int);
 int nodeOwnerSetTranslations(int, int *);
@@ -78,7 +78,7 @@ extern int asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned in
 /* Supplied declaration required: FUN_0027f94c. */
 /* Supplied declaration required: FUN_0027fca0. */
 /* Supplied declaration required: modelSelectSecondaryMotion. */
-/* Supplied declaration required: FUN_0028c618. */
+/* Supplied declaration required: modelPartSetRotationDegrees. */
 /* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: nodeGroupSetScale. */
 /* Supplied declaration required: nodeOwnerSetTranslations. */
@@ -249,7 +249,7 @@ LAB_002741d4:
     temp_v4 = (int *)g_lmapScene[8];
     temp_v5 = g_lmapScene[9];
     nodeSetTranslation(*(unsigned int *)(g_lmapScene[0x5e] + 8),0,&temp_v3);
-    FUN_0028c618(*(unsigned int *)(g_lmapScene[0x5e] + 8),0);
+    modelPartSetRotationDegrees(*(unsigned int *)(g_lmapScene[0x5e] + 8),0);
     if (*(char *)((int)g_lmapScene + 0x183) != '\0') {
       modelSelectPrimaryMotion(*(unsigned int *)(g_lmapScene[0x5e] + 8),1);
       modelSelectSecondaryMotion(*(unsigned int *)(g_lmapScene[0x5e] + 8),1);
@@ -275,7 +275,7 @@ LAB_002741d4:
       temp_v4 = (int *)g_lmapScene[8];
       temp_v5 = g_lmapScene[9];
       nodeSetTranslation(*(unsigned int *)(g_lmapScene[0x5f] + 8),0,&temp_v3);
-      FUN_0028c618(*(unsigned int *)(g_lmapScene[0x5f] + 8),0);
+      modelPartSetRotationDegrees(*(unsigned int *)(g_lmapScene[0x5f] + 8),0);
       piVar3 = g_lmapScene;
       if (*(char *)((int)g_lmapScene + 0x181) != '\0') {
         *(unsigned char *)((int)g_lmapScene + 0x181) = 0;
@@ -294,7 +294,7 @@ LAB_002741d4:
       }
 LAB_0027461c:
       nodeSetTranslation(*(unsigned int *)(g_lmapScene[0x59] + 8),0,g_lmapScene + 7);
-      FUN_0028c618(*(unsigned int *)(g_lmapScene[0x59] + 8),0);
+      modelPartSetRotationDegrees(*(unsigned int *)(g_lmapScene[0x59] + 8),0);
       temp_v1 = g_lmapScene[0x5a];
       piVar3 = g_lmapScene;
       if (temp_v1 != g_lmapScene[0x5b]) {
@@ -324,7 +324,7 @@ LAB_0027461c:
       g_lmapScene[0x5d] = temp_v2;
       lightOwnerRegister(temp_v2,1);
       nodeSetTranslation(*(unsigned int *)(g_lmapScene[0x5d] + 8),0,&g_gameState.f0049fac4);
-      FUN_0028c618(*(unsigned int *)(g_lmapScene[0x5d] + 8),0);
+      modelPartSetRotationDegrees(*(unsigned int *)(g_lmapScene[0x5d] + 8),0);
       modelSelectPrimaryMotion(*(unsigned int *)(g_lmapScene[0x5d] + 8),0);
       modelSelectSecondaryMotion(*(unsigned int *)(g_lmapScene[0x5d] + 8),0);
     }

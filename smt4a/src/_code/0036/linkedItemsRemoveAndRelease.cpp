@@ -2,7 +2,7 @@
 #include "shard/Resource.h"
 
 extern "C" {
-void FUN_003c2df0(LinkedItems *items, LinkedItem *item, LinkedItem *replacement);
+void linkedItemsRedirectToReplacement(LinkedItems *items, LinkedItem *item, LinkedItem *replacement);
 int asdMemFree(void *block);
 
 static LinkedItem *findSharer(LinkedItems *items, void *resource)
@@ -51,10 +51,10 @@ void linkedItemsRemoveAndRelease(LinkedItems *items, LinkedItem *item)
             if (replacement != NULL) {
                 replacement->reference.flags &= ~2u;
                 replacement->reference.source = NULL;
-                FUN_003c2df0(items, replacement, replacement);
+                linkedItemsRedirectToReplacement(items, replacement, replacement);
                 for (LinkedItem *reference = findReference(items, item->resource); reference != NULL;
                      reference = findReference(items, item->resource))
-                    FUN_003c2df0(items, reference, replacement);
+                    linkedItemsRedirectToReplacement(items, reference, replacement);
             }
         }
         if (!(item->reference.flags & 1)) {

@@ -1,4 +1,4 @@
-/* Staff roll: once FUN_002896bc reports ready, moves to state 5. */
+/* Staff roll: once screenFadesAllReady reports ready, moves to state 5. */
 #include "common.h"
 #include "StaffRoll/StaffRollMain.h"
 
@@ -6,7 +6,7 @@ extern "C" {
 
 extern StaffRollWork *g_staffRoll;
 
-extern int FUN_002896bc(void);
+extern int screenFadesAllReady(void);
 
 static __inline void staffRollSetState(StaffRollWork *work, s32 state)
 {
@@ -15,7 +15,7 @@ static __inline void staffRollSetState(StaffRollWork *work, s32 state)
 
 void staffRollEnterState5(void)
 {
-    if (FUN_002896bc() != 0) {
+    if (screenFadesAllReady() != 0) {
         staffRollSetState(g_staffRoll, 5);
     }
 }

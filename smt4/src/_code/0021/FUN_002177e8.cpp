@@ -17,7 +17,7 @@ void FUN_00250680(s32 action, ScriptUnit *unit, BtlActionRecord *record, s32 fla
 BtlEquip *gameGetUnitRecord(s32 index);
 void objectFlagSetBit(BtlEquip *record, u32 bit);
 void FUN_003ddc70(s32 channel, ScriptUnit *unit, s32 action, f32 duration);
-void FUN_002505c0(s32 channel, ScriptUnit *unit, u32 resource, s32 a4, s32 a5, s32 a6, s32 a7);
+void btlQueueKeyedScalarReflectAction(s32 channel, ScriptUnit *unit, u32 resource, s32 a4, s32 a5, s32 a6, s32 a7);
 void FUN_003ddbcc(s32 channel, ScriptUnit *unit, s32 a3, s32 a4, s32 a5, s32 frames, s32 a7);
 
 // Defeat a battle or reserve unit and queue its sound and visual action sequence.
@@ -38,7 +38,7 @@ u32 FUN_002177e8(void)
         objectFlagSetBit(record, 1);
         FUN_003ddc70(0, unit, 15, 8.0f);
     }
-    FUN_002505c0(0, unit, 0x1000178, 0, 0, 0, 0);
+    btlQueueKeyedScalarReflectAction(0, unit, 0x1000178, 0, 0, 0, 0);
     FUN_003ddbcc(0, unit, 0, 1, 2, 180, 3);
     return 1;
 }

@@ -74,7 +74,7 @@ void FUN_00402ab8(CaptionPanel* panel, s32 x, s32 y, f32 speed)
     SpriteRect* suffix = asdTMTexTableEntryAt(50, 10);
     s32 suffixOffset = *suffix->extra;
     textDrawString(2, color, text, (f32)(frame->x - nameWidth - suffixOffset - suffixWidth + x + shift), (f32)(frame->y + y), 0.21484375f, 0.0f, speed);
-    FUN_001835b4(2, 50, 10, frame->x - nameWidth - suffixOffset + x + shift, frame->y + y, 201);
+    texDrawTableEntryAtStoredOrigin(2, 50, 10, frame->x - nameWidth - suffixOffset + x + shift, frame->y + y, 201);
 
     s32 baseX = shift + x;
     for (s32 i = 0; i < 8; i++) {
@@ -100,7 +100,7 @@ void FUN_00402ab8(CaptionPanel* panel, s32 x, s32 y, f32 speed)
         s32 iconShift;
         if (found) {
             SpriteRect* markRect = asdTMTexTableEntryAt(50, 58 + i);
-            FUN_001835b4(2, 50, 57, markRect->x + baseX, markRect->y + y, 201);
+            texDrawTableEntryAtStoredOrigin(2, 50, 57, markRect->x + baseX, markRect->y + y, 201);
             iconRect = asdTMTexTableEntryAt(50, 66 + i);
             iconShift = 6;
         } else {

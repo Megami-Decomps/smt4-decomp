@@ -18,7 +18,7 @@ struct SlideIcon {
 
 extern "C" {
 void uiSpriteBankApplyPreset(void *sprites, s32 preset);
-s32 FUN_00163aa4(void *tween, f32 step);
+s32 uiSpriteAdvanceAnimation(void *tween, f32 step);
 s32 vec2GetXInt(void *tween);
 s32 vec2GetYInt(void *tween);
 void pointConvertToFloat(void *point, s32 x, s32 y);
@@ -33,7 +33,7 @@ void _ZN9Obj53230012FUN_0048d11cEv(SlideIcon *icon)
         icon->state = 1;
     } else if (icon->state == 1) {
         void *tween = icon->tween;
-        if (FUN_00163aa4(tween, 1.0f) != 0) {
+        if (uiSpriteAdvanceAnimation(tween, 1.0f) != 0) {
             icon->state = 2;
         }
         s32 y = vec2GetYInt(tween);

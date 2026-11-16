@@ -7,8 +7,8 @@
 
 struct EffPartList;
 extern "C" {
-void *FUN_00178b04(u32 bytes, const char *file, u32 line);
-EffPartList *FUN_00291038(EffPartList *source);
+void *asdMemoryAllocTraced(u32 bytes, const char *file, u32 line);
+EffPartList *effPartClone(EffPartList *source);
 }
 
 /* One effect entry (16 bytes). */

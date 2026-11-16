@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002bbb2c(...);
+int sysReportCheckFailure(...);
 int builtin_strncpy(...);
 int nw_io_FileStream_FilePosition_Seek(...);
 
@@ -18,7 +18,7 @@ extern unsigned char DAT_00421b2c; /* 0x421b2c */
 
 /* Unsupported intrinsic, declaration required: builtin_strncpy (CALLOTHER). */
 extern int FUN_00130320(unsigned int *, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002bbb2c. */
+/* Supplied declaration required: sysReportCheckFailure. */
 extern unsigned int nn_fs_detail_FileBase_TryGetSize(unsigned int, long long *);
 /* Supplied declaration required: nw_io_FileStream_FilePosition_Seek. */
 
@@ -87,7 +87,7 @@ FUN_0037a540(unsigned int *param_1,unsigned int param_2,unsigned int param_3,int
     temp_v1 = nn_fs_detail_FileBase_TryGetSize((unsigned int)(param_1 + 6),(long long *)&temp_v3);
     temp_v2 = temp_v3;
     if ((int)temp_v1 < 0) {
-      FUN_002bbb2c(temp_v1,0x37a664);
+      sysReportCheckFailure(temp_v1,0x37a664);
       temp_v2 = temp_v3;
     }
   }

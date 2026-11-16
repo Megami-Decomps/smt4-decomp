@@ -33,7 +33,7 @@ u32 naviUpdateDragCapture(NavigationDrag *drag)
     s32 a, b, c, d;
     s32 x, y;
     if (!(drag->flags & 0x2000000)) {
-        FUN_00231434(0x1c, 0xfa4, &a, &b, &c, &d);
+        asdTMTexTableGetEntryPlacement(0x1c, 0xfa4, &a, &b, &c, &d);
         if (effectForwardModeOne(a, b, c, d) && !g_gameState.inputBlocked) {
             FUN_003c2e0c(&x, &y);
             drag->flags |= 0x10000;

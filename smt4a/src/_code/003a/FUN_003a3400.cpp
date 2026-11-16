@@ -8,7 +8,7 @@ extern "C" {
 extern DebugBoundsRegistry DAT_006160e0;
 extern const DebugBoundsPalette DAT_00532240;
 extern RenderCtxA *g_renderCtx;
-s32 FUN_001692ac(s32 mode, s32 enabled);
+s32 renderCtxPackPassFlags(s32 mode, s32 enabled);
 void FUN_00280a08(f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1,
     f32 x2, f32 y2, f32 z2, f32 x3, f32 y3, f32 z3,
     u32 firstColor, u32 secondColor, u32 thirdColor, u32 fourthColor);
@@ -20,7 +20,7 @@ void FUN_003a3400(f32 height)
     DebugBoundsRegistry *registry = &DAT_006160e0;
     if (registry->count != 0) {
         RenderCtxA *context = g_renderCtx;
-        renderCtxPushA(context, FUN_001692ac(5, 1));
+        renderCtxPushA(context, renderCtxPackPassFlags(5, 1));
         renderCtxSelectTexture(g_renderCtx, 0);
         s32 index = 0;
         if (registry->count > 0) {

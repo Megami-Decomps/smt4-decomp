@@ -2,7 +2,7 @@
 #include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 extern "C" {
-void FUN_002505c0(s32 index, u32 value, void *resource, u32 mode, u32 unique, u32 options, u32 target);
+void btlQueueKeyedScalarReflectAction(s32 index, u32 value, void *resource, u32 mode, u32 unique, u32 options, u32 target);
 extern BtlActionResourceEntry DAT_00435ea0[14];
 }
 
@@ -26,7 +26,7 @@ extern "C" u32 FUN_0023c1bc(u32 id, u32 value, s32 offset)
     if (jyoucyuGetTableEntry(1) == NULL) {
         BtlActionResourceEntry *entry = findResourceEntry(id);
         if (entry != 0 && entry->resource != 0) {
-            FUN_002505c0(entry->baseIndex + offset, value, entry->resource, 0, 1, 0, 0);
+            btlQueueKeyedScalarReflectAction(entry->baseIndex + offset, value, entry->resource, 0, 1, 0, 0);
         }
     }
     return 0;

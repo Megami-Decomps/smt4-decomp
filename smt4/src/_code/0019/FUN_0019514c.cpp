@@ -21,16 +21,16 @@ extern "C" {
 #define SCREEN_STATE(s) (*reinterpret_cast<s32*>(reinterpret_cast<u8*>(s) + 0x344))
 
 void FUN_002b8ee0(void* widget, s32 arg);
-u16 FUN_002b8584(u32 group, u32 index);
+u16 ifTouchRegionAddRequested(u32 group, u32 index);
 s32 resourceRunOperationIfUnblocked(void* list);
 s32 FUN_0029efd8(void* list, s32 arg);
-u32 FUN_002907a8(void);
+u32 saveBlockGetPlaySeconds(void);
 u32 asdTMTexTableEntryAt(u32 group, u32 index);
 s32 uiScrollHandleActionsOrTouch(void* list, u32 a, s32 b, s32 c, s32 d, s32 e, u8* flags, s32 f, s32 g);
 s32 eventQueueAddUniqueIfValid(u32 event);
 s32 FUN_002c1658(s32 a, s32 b);
 void timerStart(void* widget, s32 a, s32 b);
-void FUN_002bf818(void* widget);
+void uiSpriteAdvanceAnimation(void* widget);
 
 // Per-frame update of the animated scroll list: row fade-in, list input handling with
 // cursor events, then row fade-out when the list is dismissed.
@@ -47,9 +47,9 @@ void FUN_0019514c(u8** screenRef)
             if (i <= frame) FUN_002b8ee0(&rows[i], 0);
         }
         if (ready != 0) {
-            *reinterpret_cast<u16*>(screen + 0x348) = FUN_002b8584(0x30, 0x1a);
-            *reinterpret_cast<u16*>(screen + 0x34a) = FUN_002b8584(0x30, 0x1b);
-            *reinterpret_cast<u16*>(screen + 0x34c) = FUN_002b8584(0x30, 0x1c);
+            *reinterpret_cast<u16*>(screen + 0x348) = ifTouchRegionAddRequested(0x30, 0x1a);
+            *reinterpret_cast<u16*>(screen + 0x34a) = ifTouchRegionAddRequested(0x30, 0x1b);
+            *reinterpret_cast<u16*>(screen + 0x34c) = ifTouchRegionAddRequested(0x30, 0x1c);
             *reinterpret_cast<u16*>(screen + 0x358) += 3;
             SCREEN_STATE(screen) = 1;
         }
@@ -61,7 +61,7 @@ void FUN_0019514c(u8** screenRef)
             void *table = dataTableGet(0x37, 0);
             TableRecord* entries = static_cast<TableRecord*>(dataTableGetEntries(table));
             if (id < dataTableGetCount(table) && &entries[id] != NULL && entries[id].id < 0) {
-                reinterpret_cast<u32*>(screen + 0x35c)[i] = FUN_002907a8();
+                reinterpret_cast<u32*>(screen + 0x35c)[i] = saveBlockGetPlaySeconds();
             }
         }
         u8 flags = 0;
@@ -91,7 +91,7 @@ void FUN_0019514c(u8** screenRef)
         break;
     }
     case 2:
-        for (s32 i = 0; i < 5; i++) FUN_002bf818(&rows[i]);
+        for (s32 i = 0; i < 5; i++) uiSpriteAdvanceAnimation(&rows[i]);
         if (ready != 0) SCREEN_STATE(screen) = 3;
         break;
     default:

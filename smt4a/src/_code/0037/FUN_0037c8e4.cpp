@@ -29,7 +29,7 @@ struct MessageMainView {
 extern "C" {
 extern MessageMainView g_messageMain;
 u32 gameDataBlocks2GetWord4(void);
-void FUN_0014e188(void* sprite, s32 kind, u32 flags, void* data,
+void uiSpriteStateInitFromSource(void* sprite, s32 kind, u32 flags, void* data,
                   s32 count, f32 scale);
 void pairSetFirstResetSecond(void* pair, s32 first);
 void uiSpriteSelectAnim(void* sprite, s32 animation);
@@ -56,7 +56,7 @@ extern "C" u32 FUN_0037c8e4(u8 messageId, s32 useDataBlock)
     state->unk17D = 0;
     state->unk16D = 0;
     state->unk91 = messageId;
-    FUN_0014e188(state->unkB00, 8, 0xFFFFFFFFu, state->unk194, 11, 1.0f);
+    uiSpriteStateInitFromSource(state->unkB00, 8, 0xFFFFFFFFu, state->unk194, 11, 1.0f);
     pairSetFirstResetSecond(state->unkB00, 0);
     uiSpriteSelectAnim(state->unkB00, 6);
     return 1;

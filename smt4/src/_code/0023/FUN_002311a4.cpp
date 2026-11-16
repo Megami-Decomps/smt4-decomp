@@ -19,7 +19,7 @@ struct PositionedTransition {
 };
 extern "C" {
 void FUN_00233240(void *transition, s32 value);
-s32 FUN_002bf818(void *motion);
+s32 uiSpriteAdvanceAnimation(void *motion);
 s32 vec2GetYInt(void *motion);
 s32 vec2GetXInt(void *motion);
 void pointConvertToFloat(FloatPoint *point, s32 x, s32 y);
@@ -34,7 +34,7 @@ void FUN_002311a4(PositionedTransition *work)
         work->state = 1;
     } else if (work->state == 1) {
         u8 *motion = work->motion;
-        if (FUN_002bf818(motion) != 0) {
+        if (uiSpriteAdvanceAnimation(motion) != 0) {
             work->state = 2;
         }
         s32 y = vec2GetYInt(motion);

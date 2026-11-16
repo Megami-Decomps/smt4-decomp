@@ -38,7 +38,7 @@ void campFillUnitComparison(CampUnitComparison *row, u32 id, s32 compareParty)
     row->race = metadata->race;
     row->category = metadata->unk08[0];
     row->kind = metadata->categoryView.category;
-    row->description = FUN_00180118(metadata->id);
+    row->description = dataTable01GetRecordWithAocOverride(metadata->id);
     row->flags = 0;
     UnitRecord saved;
     if (compareParty) {

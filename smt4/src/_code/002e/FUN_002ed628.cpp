@@ -14,7 +14,7 @@ int effectSpawnDefaultArguments(...);
 int FUN_0026e70c(...);
 int FUN_002b0750(...);
 int FUN_002b0800(...);
-int FUN_002bf380(...);
+int texDrawCompositeSprite(...);
 int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int renderCtxSelectStereoLayout(int);
@@ -41,14 +41,14 @@ extern unsigned int FUN_0026e6a0(unsigned int, unsigned int, unsigned int, unsig
 /* Supplied declaration required: FUN_0026e70c. */
 /* Supplied declaration required: FUN_002b0750. */
 /* Supplied declaration required: FUN_002b0800. */
-/* Supplied declaration required: FUN_002bf380. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern unsigned int jobGetWork(unsigned int handle);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
@@ -76,7 +76,7 @@ int FUN_002ed628(unsigned int handle)
   temp_v0 = jobGetWork(handle);
   renderCtxSelectStereoLayout(g_titleScene);
   temp_v3 = g_titleScene;
-  temp_v1 = FUN_002c5d80(1,0);
+  temp_v1 = renderCtxPackPassFlags(1,0);
   piVar7 = (int *)(temp_v3 + 0x124c);
   temp_v4 = *piVar7;
   temp_v5 = piVar7[temp_v4 + 2];
@@ -100,7 +100,7 @@ int FUN_002ed628(unsigned int handle)
       *(unsigned char *)(temp_v3 + 0x12c4) = 0;
     }
     efctSetSpeed();
-    FUN_002bf380(2,0x2d,1,0,0,0xb);
+    texDrawCompositeSprite(2,0x2d,1,0,0,0xb);
     efctSetSpeed();
   }
   temp_v3 = g_titleScene;
@@ -120,7 +120,7 @@ int FUN_002ed628(unsigned int handle)
     temp_v3 = *(int *)(temp_v0 + 8);
   }
   if (!temp_v6 || temp_v3 != 0) {
-    FUN_002bf380(2,0x2d,0,0,0,0xc);
+    texDrawCompositeSprite(2,0x2d,0,0,0,0xc);
     effectSpawnDefaultArguments(*(unsigned int *)(temp_v0 + 0xc));
     temp_v3 = asdTMTexTableEntryAt(0x2d,2);
     VectorSignedToFloat((int)*(short *)(temp_v3 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -140,7 +140,7 @@ int FUN_002ed628(unsigned int handle)
       FUN_0026e70c();
       efctSetSpeed();
       temp_v12 = (float)(int)temp_v12;
-      FUN_002bf380(2,0x2d,0,0,temp_v12,0xc);
+      texDrawCompositeSprite(2,0x2d,0,0,temp_v12,0xc);
       effectSpawnDefaultArguments(*(unsigned int *)(temp_v0 + 0xc));
       temp_v3 = asdTMTexTableEntryAt(0x2d,2);
       VectorSignedToFloat((int)*(short *)(temp_v3 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -169,23 +169,23 @@ int FUN_002ed628(unsigned int handle)
       FUN_002b0750(2,0x2d,0xc,0,(int)((temp_v9 - temp_v12) * temp_v8),temp_v2,temp_v7,0xc);
       break;
     case 2:
-      FUN_002bf380(2,0x2d,2,0,0,0xc);
+      texDrawCompositeSprite(2,0x2d,2,0,0,0xc);
       VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x1c),(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_0026e70c();
       efctSetSpeed();
-      FUN_002bf288(2,0x2d,0xd,0,0,0xd);
-      FUN_002bf288(2,0x2d,0x10,0,0,0xd);
+      texDrawTableEntryAtStoredOrigin(2,0x2d,0xd,0,0,0xd);
+      texDrawTableEntryAtStoredOrigin(2,0x2d,0x10,0,0,0xd);
       efctSetSpeed();
       break;
     case 3:
-      FUN_002bf380(2,0x2d,2,0,0,0xc);
-      FUN_002bf288(2,0x2d,0xd,0,0,0xd);
-      FUN_002bf288(2,0x2d,0x10,0,0,0xd);
+      texDrawCompositeSprite(2,0x2d,2,0,0,0xc);
+      texDrawTableEntryAtStoredOrigin(2,0x2d,0xd,0,0,0xd);
+      texDrawTableEntryAtStoredOrigin(2,0x2d,0x10,0,0,0xd);
       VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x1c),(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_0026e70c();
       efctSetSpeed();
-      FUN_002bf288(2,0x2d,0xe,0,0,0xd);
-      FUN_002bf288(2,0x2d,0xf,0,0,0xd);
+      texDrawTableEntryAtStoredOrigin(2,0x2d,0xe,0,0,0xd);
+      texDrawTableEntryAtStoredOrigin(2,0x2d,0xf,0,0,0xd);
       efctSetSpeed();
       break;
     case 4:
@@ -201,7 +201,7 @@ int FUN_002ed628(unsigned int handle)
         (**(romwright_code **)(temp_v3 + 0x12c8))();
         *(unsigned char *)(temp_v3 + 0x12c4) = 0;
       }
-      FUN_002bf380(2,0x2d,1,0,0,0xb);
+      texDrawCompositeSprite(2,0x2d,1,0,0,0xb);
       temp_v3 = g_titleScene;
       temp_v1 = packNibblesAndByte(6,7,0);
       piVar7 = (int *)(temp_v3 + 0x12ac);
@@ -212,15 +212,15 @@ int FUN_002ed628(unsigned int handle)
         *(unsigned char *)(temp_v3 + 0x12c4) = 0;
       }
       efctSetSpeed();
-      FUN_002bf380(2,0x2d,2,0,0,0xc);
-      FUN_002bf288(2,0x2d,0xd,0,0,0xd);
-      FUN_002bf288(2,0x2d,0xe,0,0,0xd);
-      FUN_002bf288(2,0x2d,0xf,0,0,0xd);
-      FUN_002bf288(2,0x2d,0x10,0,0,0xd);
+      texDrawCompositeSprite(2,0x2d,2,0,0,0xc);
+      texDrawTableEntryAtStoredOrigin(2,0x2d,0xd,0,0,0xd);
+      texDrawTableEntryAtStoredOrigin(2,0x2d,0xe,0,0,0xd);
+      texDrawTableEntryAtStoredOrigin(2,0x2d,0xf,0,0,0xd);
+      texDrawTableEntryAtStoredOrigin(2,0x2d,0x10,0,0,0xd);
       efctSetSpeed();
-      FUN_002bf288(2,0x2d,0x11,0,0,0xd);
-      FUN_002bf288(2,0x2d,0x13,0,0,0xf);
-      FUN_002bf288(2,0x2d,0x14,0,0,0x10);
+      texDrawTableEntryAtStoredOrigin(2,0x2d,0x11,0,0,0xd);
+      texDrawTableEntryAtStoredOrigin(2,0x2d,0x13,0,0,0xf);
+      texDrawTableEntryAtStoredOrigin(2,0x2d,0x14,0,0,0x10);
       temp_v3 = asdTMTexTableEntryAt(0x2d,0x17);
       temp_v3 = (int)*(short *)(*(int *)(temp_v3 + 0xc) + 2);
       VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -252,7 +252,7 @@ int FUN_002ed628(unsigned int handle)
     break;
   case 1:
     campMenuEntryDraw(temp_v0,0xb);
-    FUN_002bf380(2,0x2d,3,0,0,0xc);
+    texDrawCompositeSprite(2,0x2d,3,0,0,0xc);
     effectSpawnDefaultArguments(*(unsigned int *)(temp_v0 + 0x10));
     temp_v3 = asdTMTexTableEntryAt(0x2d,0x19);
     VectorSignedToFloat((int)*(short *)(temp_v3 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -261,7 +261,7 @@ int FUN_002ed628(unsigned int handle)
     break;
   case 2:
     campMenuEntryDraw(temp_v0,0xb);
-    FUN_002bf380(2,0x2d,3,0,0,0xc);
+    texDrawCompositeSprite(2,0x2d,3,0,0,0xc);
     effectSpawnDefaultArguments(*(unsigned int *)(temp_v0 + 0x10));
     temp_v3 = asdTMTexTableEntryAt(0x2d,0x19);
     VectorSignedToFloat((int)*(short *)(temp_v3 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -269,16 +269,16 @@ int FUN_002ed628(unsigned int handle)
     FUN_002b0800(*(unsigned int *)(temp_v0 + 0x10),(int)*(short *)(temp_v3 + 10));
     VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00247f0c();
-    FUN_002bf380(2,0x2d,4,(int)temp_v9,0,0xe);
+    texDrawCompositeSprite(2,0x2d,4,(int)temp_v9,0,0xe);
     break;
   case 3:
     campMenuEntryDraw(temp_v0,0xb);
-    FUN_002bf380(2,0x2d,4,0,0,0xc);
+    texDrawCompositeSprite(2,0x2d,4,0,0,0xc);
     temp_v3 = 0;
     do {
       temp_v1 = *(int *)(temp_v0 + 0x18);
       temp_v4 = asdTMTexTableEntryAt(0x2d,0x29 - temp_v3);
-      FUN_002bf288(2,0x2d,*(unsigned char *)((temp_v1 + temp_v3) % 8 + 0x43dc2c) + 0x1f,
+      texDrawTableEntryAtStoredOrigin(2,0x2d,*(unsigned char *)((temp_v1 + temp_v3) % 8 + 0x43dc2c) + 0x1f,
                    (int)*(short *)(temp_v4 + 8),(int)*(short *)(temp_v4 + 10),0xd);
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 8);
@@ -286,7 +286,7 @@ int FUN_002ed628(unsigned int handle)
     temp_v3 = (int)*(short *)(temp_v0 + 10);
     temp_v2 = 0x1f;
     temp_v0 = (int)*(short *)(temp_v0 + 8);
-    FUN_002bf288(2,0x2d,temp_v2,temp_v0,temp_v3,0xd);
+    texDrawTableEntryAtStoredOrigin(2,0x2d,temp_v2,temp_v0,temp_v3,0xd);
     break;
   case 4:
     temp_v11 = 0;
@@ -294,16 +294,16 @@ int FUN_002ed628(unsigned int handle)
     FUN_0026e70c();
     efctSetSpeed();
     campMenuEntryDraw(temp_v0,0xb);
-    FUN_002bf380(2,0x2d,4,0,0,0xc);
+    texDrawCompositeSprite(2,0x2d,4,0,0,0xc);
     temp_v3 = 0;
     do {
       temp_v1 = asdTMTexTableEntryAt(0x2d,0x29 - temp_v3);
-      FUN_002bf288(2,0x2d,0x1f,(int)*(short *)(temp_v1 + 8),(int)*(short *)(temp_v1 + 10),0xd);
+      texDrawTableEntryAtStoredOrigin(2,0x2d,0x1f,(int)*(short *)(temp_v1 + 8),(int)*(short *)(temp_v1 + 10),0xd);
       temp_v9 = (float)((unsigned long long)temp_v11 >> 0x20);
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 8);
     temp_v3 = asdTMTexTableEntryAt(0x2d,0x2a);
-    FUN_002bf288(2,0x2d,0x1f,(int)*(short *)(temp_v3 + 8),(int)*(short *)(temp_v3 + 10),0xd);
+    texDrawTableEntryAtStoredOrigin(2,0x2d,0x1f,(int)*(short *)(temp_v3 + 8),(int)*(short *)(temp_v3 + 10),0xd);
     efctSetSpeed();
     VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x1c),(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_0026e70c();
@@ -333,10 +333,10 @@ int FUN_002ed628(unsigned int handle)
     efctSetSpeed();
     break;
   case 5:
-    FUN_002bf380(2,0x2d,5,0,0,0xc);
+    texDrawCompositeSprite(2,0x2d,5,0,0,0xc);
     VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00247f0c();
-    FUN_002bf288(2,0x2d,0x30,(int)temp_v9,0,0xd);
+    texDrawTableEntryAtStoredOrigin(2,0x2d,0x30,(int)temp_v9,0,0xd);
     temp_v2 = FUN_0026e6a0(0,100,0xc,*(unsigned int *)(temp_v0 + 0x1c),0);
     temp_v3 = g_titleScene;
     VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -349,7 +349,7 @@ int FUN_002ed628(unsigned int handle)
       *(unsigned char *)(temp_v3 + 0x12c4) = 0;
     }
     efctSetSpeed();
-    FUN_002bf288(2,0x2d,0x31,0,0,0xe);
+    texDrawTableEntryAtStoredOrigin(2,0x2d,0x31,0,0,0xe);
     efctSetSpeed();
     temp_v3 = g_titleScene;
     temp_v0 = packNibblesAndByte(6,7,0);
@@ -362,11 +362,11 @@ int FUN_002ed628(unsigned int handle)
     }
     break;
   case 6:
-    FUN_002bf380(2,0x2d,5,0,0,0xc);
+    texDrawCompositeSprite(2,0x2d,5,0,0,0xc);
     temp_v0 = 0;
     temp_v2 = 0x30;
     temp_v3 = 0;
-    FUN_002bf288(2,0x2d,temp_v2,temp_v0,temp_v3,0xd);
+    texDrawTableEntryAtStoredOrigin(2,0x2d,temp_v2,temp_v0,temp_v3,0xd);
   }
   temp_v3 = g_titleScene;
   piVar7 = (int *)(g_titleScene + 0x124c);

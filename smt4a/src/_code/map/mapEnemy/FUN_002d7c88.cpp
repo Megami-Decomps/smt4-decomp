@@ -8,13 +8,13 @@ extern u8 DAT_005f17fc[];
 extern EnemyExtraModelSource DAT_00582204[];
 extern void *g_handleRegistry;
 void textFormatBuffer(char *, const char *, ...);
-void *FUN_00178b04(u32, const char *, u32);
+void *asdMemoryAllocTraced(u32, const char *, u32);
 ModelList *modelListInit(ModelList *);
-void FUN_0040aa6c(ModelList *, const char *);
+void resourceOwnerLoadFileSync(ModelList *, const char *);
 void FUN_0040a908(ModelList *, s32);
 void FUN_0040a918(ModelList *, s32);
 void FUN_0040aad4(ModelList *, u32);
-void FUN_003fe86c(MoriModelBody *, u32, u8, f32, f32);
+void modelPlayClip(MoriModelBody *, u32, u8, f32, f32);
 void handleRegistryRegisterObject(void *, MoriModelBody *);
 }
 
@@ -54,17 +54,17 @@ extern "C" u32 FUN_002d7c88(s32 index)
 
     char resourceName[32];
     textFormatBuffer(resourceName, "map/all/sym%03d.bam", DAT_00582204[index].modelId);
-    ModelList *model = static_cast<ModelList *>(FUN_00178b04(
+    ModelList *model = static_cast<ModelList *>(asdMemoryAllocTraced(
         sizeof(ModelList), "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapEnemy.cpp", 948));
     if (model != NULL)
         model = modelListInit(model);
     slot->model = model;
-    FUN_0040aa6c(slot->model, resourceName);
+    resourceOwnerLoadFileSync(slot->model, resourceName);
     FUN_0040a908(slot->model, 0x10000);
     FUN_0040a918(slot->model, 0x20000);
     FUN_0040aad4(slot->model, 0);
     MoriModelBody *body = slot->model->content.body;
-    FUN_003fe86c(body, 0, 2, 0.0f, 0.0f);
+    modelPlayClip(body, 0, 2, 0.0f, 0.0f);
     handleRegistryRegisterObject(g_handleRegistry, body);
     reinterpret_cast<ModelFlags *>(body)->flags |= 3;
     owner->slots[index].registered = 1;

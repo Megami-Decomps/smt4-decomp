@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002499fc(u32 a, int *first, int *count);
+int btlSideGetEntryRange(u32 a, int *first, int *count);
 int scrGetArg(int index);
 extern BtlEntry *btlMainFindActiveEntry(void);
 extern s32 btlScriptResolveGroupArg(s32 group);
@@ -21,7 +21,7 @@ u32 scrCommBattleHasAffectedGroupUnit(void)
     BtlEntry *extra;
 
     group = btlScriptResolveGroupArg(scrGetArg(1));
-    FUN_002499fc(group, &first, &count);
+    btlSideGetEntryRange(group, &first, &count);
     i = first;
     if (first < count + first) {
         do {

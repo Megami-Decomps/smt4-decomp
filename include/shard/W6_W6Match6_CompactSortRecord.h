@@ -16,7 +16,7 @@ extern "C" CompactSortRecord *findSkillMetadataById(u16 id);
 extern "C" {
 #endif
 
-void FUN_003c2df0(LinkedItems *items, LinkedItem *item, LinkedItem *replacement);
+void linkedItemsRedirectToReplacement(LinkedItems *items, LinkedItem *item, LinkedItem *replacement);
 
 #ifdef __cplusplus
 }

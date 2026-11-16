@@ -45,7 +45,7 @@ int textEncodeFontSlot(...);
 int btlTalkBustUpCreate(void);
 int statusBustUpPortraitRelease(...);
 int scrScriptProcessStartEntry(...);
-int FUN_00297060(...);
+int scrScriptProcessCreate(...);
 int FUN_0029a0cc(void);
 int FUN_0029a0e8(...);
 int gameGlobalsSetSelected(...);
@@ -56,12 +56,12 @@ int messageDismissNumericBanner(...);
 int statusPanelSetOpen(...);
 int FUN_0029d8f4(...);
 int FUN_0029e788(void);
-int FUN_0029e874(...);
+int gameSetIconDisplayEnabled(...);
 int FUN_0029ede8(...);
-int FUN_0029f848(...);
+int gridNavigationConfigure(...);
 int devilGetRecord(void);
 int eventQueueAddUniqueIfValid(...);
-int FUN_002bd06c(...);
+int dataTable01FindByIdWithAoc(...);
 int textFormatBuffer(...);
 int libc_strcpy(...);
 
@@ -71,12 +71,12 @@ int gameMoneyAdd(...);
 int FUN_00295cec(...);
 int soundSlotStopById(...);
 int FUN_00295d7c(...);
-int FUN_00295eb0(...);
+int uiStoreTextureEntryCenter(...);
 int FUN_002b7bca(...);
 int eventQueueAddUnique(...);
 int timerStart(...);
 int spriteStartAnimationByIndex(...);
-int FUN_002bf810(...);
+int soundPlaySeUnpanned(...);
 int FUN_002c1658(...);
 int rt_memclr(...);
 int memClear(...);
@@ -108,7 +108,7 @@ int gameGetPlayerData(void);
 int pairSetFirstResetSecond(...);
 int FUN_002b8ee0(...);
 int asdTMTexTableEntryAt(...);
-int FUN_002bf818(...);
+int uiSpriteAdvanceAnimation(...);
 int mapMainCallIfActive2(void);
 int lmapMainCallIfActive2(void);
 
@@ -171,7 +171,7 @@ extern int playerPadTestBit(unsigned int);
 /* Supplied declaration required: soundSlotStopById. */
 /* Supplied declaration required: FUN_00295d7c. */
 extern unsigned int devilCalculateRankCost(unsigned short, int, int);
-/* Supplied declaration required: FUN_00295eb0. */
+/* Supplied declaration required: uiStoreTextureEntryCenter. */
 extern int dataTable9EntryOrZero(int);
 /* Supplied declaration required: FUN_00295f54. */
 /* Supplied declaration required: FUN_002960ec. */
@@ -183,7 +183,7 @@ extern int dataTable9EntryOrZero(int);
 extern int modelPairTryBind(int);
 /* Supplied declaration required: messageMainFinishWindow. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_00297060. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: FUN_0029a0cc. */
 /* Supplied declaration required: FUN_0029a0e8. */
@@ -206,11 +206,11 @@ extern int FUN_0029e0f8(void);
 /* Supplied declaration required: messageTargetSetValue. */
 /* Supplied declaration required: messageBannerInitSelection. */
 /* Supplied declaration required: FUN_0029e788. */
-/* Supplied declaration required: FUN_0029e874. */
+/* Supplied declaration required: gameSetIconDisplayEnabled. */
 extern int flagWordTestBit(int, unsigned int);
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: buttonHelpSetText. */
-/* Supplied declaration required: FUN_0029f848. */
+/* Supplied declaration required: gridNavigationConfigure. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: FUN_002a0cc8. */
 extern int sys43e188GetState(void);
@@ -229,14 +229,14 @@ extern int sys43e188GetState(void);
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_002bd06c. */
+/* Supplied declaration required: dataTable01FindByIdWithAoc. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_002bf810. */
-/* Supplied declaration required: FUN_002bf818. */
+/* Supplied declaration required: soundPlaySeUnpanned. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 extern unsigned int dataTableGetCount(unsigned int);
 extern char *dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
@@ -337,8 +337,8 @@ unsigned int FUN_0018c0ec(void)
   if (temp_v4 == 0) {
     return 0;
   }
-  FUN_002bf818(temp_v2 + 0x3f4);
-  FUN_002bf818(temp_v2 + 0x480);
+  uiSpriteAdvanceAnimation(temp_v2 + 0x3f4);
+  uiSpriteAdvanceAnimation(temp_v2 + 0x480);
   switch(*(unsigned int *)(temp_v2 + 0x352c)) {
   case 0:
     temp_v4 = FUN_00203610();
@@ -465,7 +465,7 @@ LAB_0018c354:
     do {
       temp_v8 = 0;
       do {
-        FUN_002bf818(temp_v2 + (temp_v4 * 7 + temp_v8 + 0x1e) * 0x8c + 0x20);
+        uiSpriteAdvanceAnimation(temp_v2 + (temp_v4 * 7 + temp_v8 + 0x1e) * 0x8c + 0x20);
         temp_v8 = temp_v8 + 1;
       } while (temp_v8 < 7);
       temp_v4 = temp_v4 + 1;
@@ -491,7 +491,7 @@ LAB_0018c354:
     do {
       temp_v8 = 0;
       do {
-        FUN_002bf818(temp_v2 + (temp_v4 * 7 + temp_v8 + 0x1e) * 0x8c + 0x20);
+        uiSpriteAdvanceAnimation(temp_v2 + (temp_v4 * 7 + temp_v8 + 0x1e) * 0x8c + 0x20);
         temp_v8 = temp_v8 + 1;
       } while (temp_v8 < 7);
       temp_v4 = temp_v4 + 1;
@@ -514,7 +514,7 @@ LAB_0018c354:
     *temp_v32 = '\0';
     if (*(char *)(temp_v2 + 0xd4fe) != '\0') {
       *(short *)(temp_v2 + 0xd4cc) = *(short *)(temp_v2 + 0xd4cc) + 1;
-      FUN_002bf818(temp_v2 + 0x1fd8);
+      uiSpriteAdvanceAnimation(temp_v2 + 0x1fd8);
       puVar12 = temp_v10;
       if (*(short *)(temp_v2 + 0xd4cc) >= 0x1f) {
         *(unsigned char *)(temp_v2 + 0xd4fe) = 0;
@@ -585,7 +585,7 @@ LAB_0018c354:
             temp_v4 = temp_v2 + 0x1fd8;
             spriteStartAnimationByIndex(temp_v4,2);
             pairSetFirstResetSecond(temp_v4,0x1a);
-            FUN_00295eb0(temp_v4,0x28,0x2f);
+            uiStoreTextureEntryCenter(temp_v4,0x28,0x2f);
             temp_v8 = asdTMTexTableEntryAt(0x28,0x30);
             FUN_002963ec(temp_v4,(int)*(short *)(temp_v8 + 8),(int)*(short *)(temp_v8 + 10));
             puVar12 = temp_v11;
@@ -629,7 +629,7 @@ LAB_0018c354:
             *(unsigned int *)(temp_v18 + 0xd3a8) = temp_v16 << 0xc;
             *(unsigned int *)(temp_v18 + 0xd3ac) = temp_v16 >> 0x14;
             *(short *)(temp_v5 + 0xd4ce) = *(short *)(temp_v5 + 0xd4ce) + 1;
-            FUN_002bf818(temp_v2 + temp_v8 * 0x8c + 0x2064);
+            uiSpriteAdvanceAnimation(temp_v2 + temp_v8 * 0x8c + 0x2064);
             puVar12 = temp_v12;
             if (*(short *)(temp_v5 + 0xd4ce) >= 0x1f) {
               puVar12 = (unsigned char *)0x0;
@@ -720,7 +720,7 @@ LAB_0018c354:
                     temp_v17 = temp_v2 + temp_v8 * 0x8c + 0x2064;
                     spriteStartAnimationByIndex(temp_v17,2);
                     pairSetFirstResetSecond(temp_v17,0x1a);
-                    FUN_00295eb0(temp_v17,0x28,0x2f);
+                    uiStoreTextureEntryCenter(temp_v17,0x28,0x2f);
                     temp_v8 = asdTMTexTableEntryAt(0x28,temp_v5 + 0x31);
                     temp_v19 = *(short *)(temp_v8 + 10);
                     temp_v3 = *(short *)(temp_v8 + 8);
@@ -743,7 +743,7 @@ LAB_0018c354:
                     temp_v17 = temp_v2 + temp_v8 * 0x8c + 0x2064;
                     spriteStartAnimationByIndex(temp_v17,3);
                     pairSetFirstResetSecond(temp_v17,0x62);
-                    FUN_00295eb0(temp_v17,0x28,0x67);
+                    uiStoreTextureEntryCenter(temp_v17,0x28,0x67);
                     temp_v8 = asdTMTexTableEntryAt(0x28,temp_v18 + 0x68);
                     temp_v19 = *(short *)(temp_v8 + 10);
                     temp_v3 = *(short *)(temp_v8 + 8);
@@ -771,7 +771,7 @@ LAB_0018c354:
     } while (temp_v4 != 0);
     temp_v31 = temp_v2 + 0xd500;
     if (*(char *)(temp_v2 + 0xd55d) == '\0') {
-      temp_v9 = FUN_002bf810(0x100017d);
+      temp_v9 = soundPlaySeUnpanned(0x100017d);
       *(unsigned int *)(temp_v2 + 0xd558) = temp_v9;
       *(unsigned char *)(temp_v2 + 0xd55d) = 1;
     }
@@ -989,10 +989,10 @@ LAB_0018d058:
     }
     break;
   case 7:
-    FUN_002bf818(temp_v2 + 0x20);
+    uiSpriteAdvanceAnimation(temp_v2 + 0x20);
     temp_v4 = 0;
     do {
-      FUN_002bf818(temp_v2 + temp_v4 * 0x8c + 0xac);
+      uiSpriteAdvanceAnimation(temp_v2 + temp_v4 * 0x8c + 0xac);
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 6);
     if (*(char *)(temp_v2 + 0xaa) != '\0') {
@@ -1007,7 +1007,7 @@ LAB_0018d058:
         temp_v8 = temp_v8 + 1;
       } while (temp_v8 < 3);
       if (*(int *)(temp_v2 + 0xcf74) != *(int *)(temp_v2 + 0xcf78)) {
-        FUN_0029e874(1);
+        gameSetIconDisplayEnabled(1);
         FUN_0029e788();
         resultSetMenuState(temp_v2,9);
       }
@@ -1037,7 +1037,7 @@ LAB_0018d058:
         FUN_0029a0cc();
         statusPanelSetOpen(1);
         resultSetMenuState(temp_v2,10);
-        FUN_0029f848(temp_v2 + 0xcfd4,5,5,1,0,1);
+        gridNavigationConfigure(temp_v2 + 0xcfd4,5,5,1,0,1);
       }
     }
     break;
@@ -1053,7 +1053,7 @@ LAB_0018d058:
       FUN_0029c424(1);
       FUN_002a0cc8(1);
       temp_v16 = (unsigned int)*(unsigned short *)(temp_v4 + 0x46);
-      FUN_002bd06c(temp_v16);
+      dataTable01FindByIdWithAoc(temp_v16);
       libc_strcpy(temp_v26,temp_v16);
       textEncodeFontSlot(8,temp_v26);
       temp_v9 = demonGetRaceLabel(*(unsigned short *)(temp_v4 + 0x46),1);
@@ -1080,7 +1080,7 @@ LAB_0018da7c:
       temp_v9 = asdLoadFileSyncDefault(&temp_v35);
       *(unsigned int *)(temp_v2 + 0x3578) = temp_v9;
       temp_v15 = *(unsigned int *)(temp_v2 + 0x3570);
-      FUN_00297060(temp_v15,temp_v9);
+      scrScriptProcessCreate(temp_v15,temp_v9);
       *(unsigned int *)(temp_v2 + 0x3574) = temp_v15;
       FUN_0029ede8(0x18,(unsigned int)*(unsigned char *)(temp_v4 + 0x48) - (unsigned int)*(unsigned char *)(temp_v8 + 0x36a0),0xffffffff,
                    0);
@@ -1281,7 +1281,7 @@ joined_r0x0018edf0:
       temp_v4 = scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x3574));
       if (temp_v4 == 2) {
         statusDownEnterState4();
-        FUN_002bf810(0x1000179);
+        soundPlaySeUnpanned(0x1000179);
         *piVar20 = *piVar20 + 1;
       }
       break;
@@ -1679,7 +1679,7 @@ joined_r0x0018edf0:
             messageMainFinishWindow();
             buttonHelpSetPreset(0x9a);
             scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x3568),7);
-            temp_v9 = FUN_002bf810(0x100016d);
+            temp_v9 = soundPlaySeUnpanned(0x100016d);
             *(unsigned int *)(temp_v2 + 0xd048) = temp_v9;
             *piVar17 = 0x14;
           }
@@ -1691,7 +1691,7 @@ joined_r0x0018edf0:
               messageMainFinishWindow();
               buttonHelpSetPreset(0x9a);
               scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x3568),8);
-              temp_v9 = FUN_002bf810(0x100016e);
+              temp_v9 = soundPlaySeUnpanned(0x100016e);
               *(unsigned int *)(temp_v2 + 0xd048) = temp_v9;
               *piVar17 = 0x15;
             }
@@ -1865,7 +1865,7 @@ joined_r0x0018edf0:
       if ((*(char *)(temp_v2 + 0x622) != '\0') &&
          (temp_v4 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x3568),1), temp_v4 != 0)) {
         *piVar17 = *piVar17 + 1;
-        temp_v9 = FUN_002bf810(0x100017d);
+        temp_v9 = soundPlaySeUnpanned(0x100017d);
         *(unsigned int *)(temp_v2 + 0xd558) = temp_v9;
         *(unsigned char *)(temp_v2 + 0xd55d) = 1;
       }
@@ -1901,7 +1901,7 @@ joined_r0x0018edf0:
       }
       break;
     case 3:
-      temp_v4 = FUN_002bf818(temp_v2 + 0x598);
+      temp_v4 = uiSpriteAdvanceAnimation(temp_v2 + 0x598);
       if (temp_v4 != 0) {
         temp_v4 = *(int *)(temp_v2 + 0x3534) + 1;
         *(int *)(temp_v2 + 0x3534) = temp_v4;

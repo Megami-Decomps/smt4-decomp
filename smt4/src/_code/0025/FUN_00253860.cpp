@@ -29,9 +29,9 @@ void FUN_00253860(MapSoundOwner *owner, s32 variant)
     case 10: case 20: soundId = 0x1000257 + variant; break;
     }
     if (variant == 1) {
-        owner->soundHandle = FUN_00291e40(soundId, position);
+        owner->soundHandle = soundActorStartOnFreeChannel(soundId, position);
     } else {
-        FUN_00291e40(soundId, position);
+        soundActorStartOnFreeChannel(soundId, position);
     }
 }
 }

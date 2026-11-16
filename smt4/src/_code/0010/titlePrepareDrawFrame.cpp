@@ -12,18 +12,18 @@ typedef struct TitleDraw {
 extern TitleDraw g_titleFlags;
 extern u32 g_titleScene;
 
-extern s32 FUN_002c501c(void);
+extern s32 asdCameraGetSavedRenderPairs(void);
 extern void effectRestoreSavedRenderPairs(u32 scene, u32 arg);
-extern s32 FUN_002c5210(void);
+extern s32 gxIsStereoscopic3dEnabled(void);
 extern void asdGxCommandListBegin(u32 commandList);
 
-/* Per-frame title step: forwards FUN_002c501c's value to the scene and begins the draw command list when enabled; returns 0. */
+/* Per-frame title step: forwards asdCameraGetSavedRenderPairs's value to the scene and begins the draw command list when enabled; returns 0. */
 u32 titlePrepareDrawFrame(void)
 {
-    if (FUN_002c501c() != 0) {
-        effectRestoreSavedRenderPairs(g_titleScene, FUN_002c501c());
+    if (asdCameraGetSavedRenderPairs() != 0) {
+        effectRestoreSavedRenderPairs(g_titleScene, asdCameraGetSavedRenderPairs());
     }
-    if (g_titleFlags.hidden == 0 && g_titleFlags.enabled != 0 && FUN_002c5210() == 1) {
+    if (g_titleFlags.hidden == 0 && g_titleFlags.enabled != 0 && gxIsStereoscopic3dEnabled() == 1) {
         asdGxCommandListBegin(g_titleFlags.commandList);
     }
     return 0;

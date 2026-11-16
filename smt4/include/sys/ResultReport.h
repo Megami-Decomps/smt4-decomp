@@ -10,7 +10,7 @@ extern "C" {
    Retail call sites prove both shapes: sites that keep the tested failure flag pass it as a second argument
    (`lsrs r1, r0, #31` before the call); summary-guarded sites and constant-code sites pass only the result.
    The definition itself reads only the first argument. */
-void FUN_002c526c(u32 result, ...);
+void resultHandleFailure(u32 result, ...);
 /* Maps/reports the thread stack memory of `stack`: reports the failed result of the mapping. */
 void resultReportIfFailed(void *stack, void *memory, u32 size);
 

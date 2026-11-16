@@ -21,7 +21,7 @@ extern void __aeabi_memset4(u8 *block, u32 size, u32 value);
 extern void asdTMTexTableReleaseNode(s32 a, s32 b);
 extern void scrScriptProcessDestroy(u32 process);
 extern void asdMemFree(u32 ptr);
-extern void FUN_001695a0(void);
+extern void messageSetScriptDisplayMode(void);
 
 /* Closes the screen: plays the closing sound, releases the entries, textures, script process and buffers. */
 void screenCloseDestroy(ScreenClose *obj)
@@ -42,7 +42,7 @@ void screenCloseDestroy(ScreenClose *obj)
     scrScriptProcessDestroy(obj->proc26C);
     asdMemFree(obj->buf268);
     asdMemFree(obj->buf264);
-    FUN_001695a0();
+    messageSetScriptDisplayMode();
 }
 
 } /* extern "C" */

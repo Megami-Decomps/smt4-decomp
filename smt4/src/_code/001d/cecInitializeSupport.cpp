@@ -3,13 +3,13 @@
 extern "C" {
 
 extern void *asdMemoryGetAllocatorC(void);
-extern s32 FUN_0035777c(void *allocator);
+extern s32 cecInitializeServices(void *allocator);
 
 /* Reports whether the allocator operation returned a nonnegative status. */
 bool cecInitializeSupport(void)
 {
     bool success = false;
-    s32 failure = FUN_0035777c(asdMemoryGetAllocatorC()) & 0x80000000;
+    s32 failure = cecInitializeServices(asdMemoryGetAllocatorC()) & 0x80000000;
     if (failure >= 0) {
         success = true;
     }

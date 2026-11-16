@@ -35,8 +35,8 @@ typedef struct DrawEntrySource {
 
 extern RenderCtxA *g_renderCtx;
 
-s32 FUN_001692ac(u32 kind, u32 arg);
-s32 FUN_00387580(u32 kind);
+s32 renderCtxPackPassFlags(u32 kind, u32 arg);
+s32 renderCtxPackPassFlagsWithAlpha(u32 kind);
 void FUN_003fba4c(u32 model, u32 variant, u32 motion, DrawPlacement *placement, u32 color, u32 flags, f32 x, f32 y);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
@@ -61,9 +61,9 @@ void FUN_00411458(DrawGroup *group, DrawEntrySource *source)
     if (group->mode == 1 || group->mode == 2) {
         return;
     }
-    renderCtxPushA(context, FUN_001692ac(5, 1));
+    renderCtxPushA(context, renderCtxPackPassFlags(5, 1));
     context = g_renderCtx;
-    renderStackPush(&context->additional.stackC, FUN_00387580(6));
+    renderStackPush(&context->additional.stackC, renderCtxPackPassFlagsWithAlpha(6));
 
     s32 drawn = 0;
     for (s32 i = 0; i < 12; i++) {

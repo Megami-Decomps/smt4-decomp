@@ -7,7 +7,7 @@ s16 windowRegionGetWidth(const Obj4221a4 *window);
 s16 windowRegionGetLeft(const Obj4221a4 *window);
 s16 windowRegionGetTop(const Obj4221a4 *window);
 
-void FUN_00344cd0(u32 target, s32 x, s32 y, s32 center, s32 topLeft, s32 top, s32 topRight,
+void uiDrawListScrollBar(u32 target, s32 x, s32 y, s32 center, s32 topLeft, s32 top, s32 topRight,
                   s32 left, s32 right, s32 bottomLeft, s32 bottom, s32 colorC, s32 colorA,
                   s32 colorB, u32 alpha, s32 flags);
 
@@ -25,7 +25,7 @@ void Obj4221a4::vfunc10(u32 alpha)
         colorA = -1;
         colorB = -1;
     }
-    FUN_00344cd0((u32)region.screen, 0, 0, 0x2f, 0x4b, 0x4c, 0x4d, 0x47, 0x49, 0x48, 0x4a,
+    uiDrawListScrollBar((u32)region.screen, 0, 0, 0x2f, 0x4b, 0x4c, 0x4d, 0x47, 0x49, 0x48, 0x4a,
                  colorC, colorA, colorB, alpha, 0);
 }
 

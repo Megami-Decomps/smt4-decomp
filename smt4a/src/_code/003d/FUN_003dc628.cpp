@@ -29,7 +29,7 @@ int FUN_0033449c(...);
 int screenSetColor670(...);
 int FUN_003a5094(void);
 
-int FUN_001517b4(...);
+int padQueryLogicalKey(...);
 int campReleaseRegisteredTouchRegions(void);
 int campReleaseSlotTouchRegions(void);
 void campSetSpriteAnimationPreset(int, int, int, unsigned int);
@@ -45,7 +45,7 @@ int FUN_0038800c(...);
 int messageDismissNumericBanner(...);
 int partyPanelSetHidden(...);
 
-int FUN_00163aa4(int);
+int uiSpriteAdvanceAnimation(int);
 int eventQueueAddUniqueIfValid(...);
 int sysPlaySe(...);
 int gameFlagIsSet(...);
@@ -80,8 +80,8 @@ extern int DAT_0057f0c8; /* 0x57f0c8 */
 extern int g_camp; /* 0x57f108 */
 extern int g_campCecEdit; /* 0x57f118 */
 
-/* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_00163aa4. */
+/* Supplied declaration required: padQueryLogicalKey. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int ifTouchGetSelectionMode(void);
 extern int ifTouchGetSelectedRegion(void);
@@ -201,10 +201,10 @@ void FUN_003dc628(void)
   
   temp_v9 = g_camp;
   puVar12 = &temp_v16;
-  FUN_00163aa4(g_camp + 0xd74);
-  FUN_00163aa4(temp_v9 + 0xe00);
+  uiSpriteAdvanceAnimation(g_camp + 0xd74);
+  uiSpriteAdvanceAnimation(temp_v9 + 0xe00);
   temp_v5 = uniteStateIsDone();
-  if ((temp_v5 == 0) && (temp_v5 = (int)FUN_0013def0(0), temp_v5 != 0)) {
+  if ((temp_v5 == 0) && (temp_v5 = (int)pairedAvailabilityGetState(0), temp_v5 != 0)) {
     return;
   }
   temp_v5 = uniteStateIsDone();
@@ -529,7 +529,7 @@ LAB_003dcd84:
       } while (temp_v5 < 3);
     }
     temp_v5 = 0;
-    FUN_001517b4(0,1);
+    padQueryLogicalKey(0,1);
     if (!(temp_v5 == 0 && !temp_v15)) {
       temp_v6 = FUN_002a4878(temp_v9 + 0x40);
       temp_v16 = FUN_003da8f4((int)*(char *)(temp_v9 + 0xa4),temp_v6);
@@ -637,7 +637,7 @@ LAB_003dcd84:
       if (((temp_v5 == 0) && (temp_v5 = gameFlagIsSet(0x521), temp_v5 == 0)) &&
          ((temp_v5 = gameFlagIsSet(0x526), temp_v5 == 0 && (temp_v5 = gameFlagIsSet(0x527), temp_v5 == 0)))) {
         temp_v5 = 1;
-        FUN_001517b4();
+        padQueryLogicalKey();
         if (temp_v5 != 0) {
           temp_v1 = 1;
           temp_v12 = 0;
@@ -780,7 +780,7 @@ LAB_003dcd84:
           temp_v5 = gameFlagIsSet(0x458);
           if (temp_v5 != 0) {
             temp_v5 = 5;
-            FUN_001517b4(5,1);
+            padQueryLogicalKey(5,1);
             if (temp_v5 != 0) {
               temp_v3 = *(char *)(temp_v9 + 0xb9) - '\x01';
               *(char *)(temp_v9 + 0xb9) = temp_v3;
@@ -804,7 +804,7 @@ LAB_003dda0c:
             }
             else {
               temp_v5 = 6;
-              FUN_001517b4(6,1);
+              padQueryLogicalKey(6,1);
               if (temp_v5 != 0) {
                 temp_v3 = *(char *)(temp_v9 + 0xb9) + '\x01';
                 *(char *)(temp_v9 + 0xb9) = temp_v3;
@@ -830,7 +830,7 @@ LAB_003dda0c:
               }
               else {
                 temp_v5 = 4;
-                FUN_001517b4(4,1);
+                padQueryLogicalKey(4,1);
                 if (temp_v5 != 0) {
                   temp_v4 = *(char *)(temp_v9 + 0xb8) - '\x01';
                   *(char *)(temp_v9 + 0xb8) = temp_v4;
@@ -844,7 +844,7 @@ LAB_003dda0c:
                 }
                 else {
                   temp_v5 = 3;
-                  FUN_001517b4(3,1);
+                  padQueryLogicalKey(3,1);
                   if (temp_v5 != 0) {
                     temp_v4 = *(char *)(temp_v9 + 0xb8) + '\x01';
                     *(char *)(temp_v9 + 0xb8) = temp_v4;
@@ -864,11 +864,11 @@ LAB_003dda0c:
         else if (*(char *)(temp_v9 + 0xb9) == '\x03') {
           if (*(char *)(temp_v9 + 0xb7) != '\0') {
             temp_v5 = 5;
-            FUN_001517b4(5,1);
+            padQueryLogicalKey(5,1);
             if (((temp_v5 == 0) || (temp_v13)) || (temp_v15)) {
               if (*(char *)(temp_v9 + 0xb7) != '\0') {
                 temp_v5 = 6;
-                FUN_001517b4(6,1);
+                padQueryLogicalKey(6,1);
                 if (((temp_v5 == 0) || (temp_v13)) || (temp_v15)) {
                   temp_v5 = temp_v9 + 0x40;
                   FUN_00228b04(temp_v5,1);

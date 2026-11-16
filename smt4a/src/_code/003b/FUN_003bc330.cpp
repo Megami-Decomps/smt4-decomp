@@ -6,7 +6,7 @@
 extern "C" {
 u32 scrGetArg(u32 index);
 s32 battleUnitHasElementEntry(BtlCombatantEntryA *entry, u32 first, u32 second);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
 void scrSetResult(s32 result);
 
 // Count eligible combatants satisfying the requested predicate; active override returns one.
@@ -29,7 +29,7 @@ u32 FUN_003bc330(void)
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
-        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL && battleUnitHasElementEntry(entry, first, second)) {
             scrSetResult(1);
             return 1;

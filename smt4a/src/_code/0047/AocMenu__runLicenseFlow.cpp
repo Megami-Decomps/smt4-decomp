@@ -48,7 +48,7 @@ void FUN_00476e58(AocLicenseMenu *menu, s32 first, s32 second);
 void aocMenuSetButtonHelp(AocLicenseMenu *menu, s32 selection, s32 mode);
 void jobFlagsWorkStop(AocLicenseMenu *menu);
 void FUN_0047bc90(AocLicenseMenu *menu, RequestParameters *parameters);
-void FUN_0047bcdc(AocLicenseMenu *menu, s32 value);
+void aocLoadingTaskStart(AocLicenseMenu *menu, s32 value);
 s32 isEmptyString(const RequestParameters *result);
 
 /* Releases the polled operation, if any. */
@@ -101,13 +101,13 @@ void AocMenu::runLicenseFlow()
         releaseHandler(menu);
         startHandler(menu, 6);
         menu->step = 3;
-        FUN_0047bcdc(menu, 1);
+        aocLoadingTaskStart(menu, 1);
         return;
     case 3:
         result = menu->handler->poll();
         if (isEmptyString(&result) != 0) {
             releaseHandler(menu);
-            FUN_0047bcdc(menu, 0);
+            aocLoadingTaskStart(menu, 0);
             startHandler(menu, 0);
             menu->step = 4;
             return;
@@ -126,7 +126,7 @@ void AocMenu::runLicenseFlow()
         result = menu->handler->poll();
         if (isEmptyString(&result) != 0) {
             menu->step = 5;
-            FUN_0047bcdc(menu, 1);
+            aocLoadingTaskStart(menu, 1);
             return;
         }
         if (byteIsAtLeast100(reinterpret_cast<const u8 *>(&result)) == 0) {

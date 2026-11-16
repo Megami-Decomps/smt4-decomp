@@ -6,8 +6,8 @@ extern "C" {
 void asdMemFree(void *);
 void FUN_002cc220(void);
 void statusBustUpPortraitRelease(s32, s32);
-PartyTextureSlot *FUN_003e4d68(u32);
-s32 FUN_00187168(const PartyTextureSlot *);
+PartyTextureSlot *partyGetSlot(u32);
+s32 partySlotIsOccupied(const PartyTextureSlot *);
 void ifTouchRegionRemove(void);
 void campButtonHelpRelease(void);
 void helpTexturesRelease(void);
@@ -27,8 +27,8 @@ void partyReleasePreviewResources(PartyResourceWork *work)
         }
     }
     for (s32 i = 0; i < 12; ++i) {
-        PartyTextureSlot *slot = FUN_003e4d68((u16)i);
-        if (FUN_00187168(slot)) {
+        PartyTextureSlot *slot = partyGetSlot((u16)i);
+        if (partySlotIsOccupied(slot)) {
             /* The canonical DevilRecordA is only the 0x40-byte prefix. */
             const DevilTableRecordA *record = (const DevilTableRecordA *)devilGetRecord(slot->id);
             statusBustUpPortraitRelease((s16)(record->unk9C + 1), 0);

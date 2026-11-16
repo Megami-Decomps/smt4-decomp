@@ -6,18 +6,18 @@ extern "C" {
 
 int eventTexCallIfIdle(...);
 int bustupRequestOwnedTextureFrame(...);
-int FUN_002bff38(...);
+int messageSetDisplayMode(...);
 int __aeabi_memcpy4(...);
 
 int FUN_002bcf10(...);
 int wstrBufferPutChar(...);
 int FUN_002bcf4c(int);
 int textConvertToGlyphPairs(...);
-int FUN_002bd06c(...);
+int dataTable01FindByIdWithAoc(...);
 int FUN_002bd0f8(...);
 int FUN_002bd158(...);
 int textFormatBuffer(...);
-int FUN_002be650(...);
+int dataFindKindRecordWithAocOverrides(...);
 int libc_strcpy(...);
 int FUN_002bff50(void);
 int memClear(unsigned char [128], int);
@@ -45,14 +45,14 @@ extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: wstrBufferPutChar. */
 /* Supplied declaration required: FUN_002bcf4c. */
 /* Supplied declaration required: textConvertToGlyphPairs. */
-/* Supplied declaration required: FUN_002bd06c. */
+/* Supplied declaration required: dataTable01FindByIdWithAoc. */
 /* Supplied declaration required: FUN_002bd0f8. */
 /* Supplied declaration required: FUN_002bd158. */
 extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002be650. */
+/* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_002bff38. */
+/* Supplied declaration required: messageSetDisplayMode. */
 /* Supplied declaration required: FUN_002bff50. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: __aeabi_memcpy4. */
@@ -136,7 +136,7 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
       }
       if (param_1 == 0xf841) {
         temp_v7 = (unsigned int)*(unsigned short *)(param_2 + *param_4 * 2 + 2);
-        FUN_002be650(temp_v7,1);
+        dataFindKindRecordWithAocOverrides(temp_v7,1);
         libc_strcpy(temp_v11,temp_v7);
         FUN_002bd158(temp_v11,temp_v12);
         FUN_002bd0f8(param_3,param_5,temp_v12,param_6);
@@ -166,7 +166,7 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
         }
       }
       else {
-        FUN_002bd06c(*(unsigned short *)(param_2 + *param_4 * 2 + 2));
+        dataTable01FindByIdWithAoc(*(unsigned short *)(param_2 + *param_4 * 2 + 2));
         textConvertToGlyphPairs();
       }
       FUN_002bd0f8(param_3,param_5,temp_v11,param_6);
@@ -217,7 +217,7 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
       if (temp_v9 != 0) {
         return 1;
       }
-      FUN_002bff38(2);
+      messageSetDisplayMode(2);
       return 1;
     case 0xf87b:
       wstrBufferPutChar(param_3,param_5,*(unsigned short *)(param_2 + *param_4 * 2),param_6);

@@ -12,7 +12,7 @@ void guestWinUpdate(void);
 void FUN_00155840(void);
 void paramsClearPacket(void *);
 
-void FUN_0014e188(UiSpriteState *, u32, u32, void *, u32, f32);
+void uiSpriteStateInitFromSource(UiSpriteState *, u32, u32, void *, u32, f32);
 static const u32 guestWindowTextureParameters[] = { 0, 0, 0, 0x140, 0, 8 };
 static const u32 guestWindowTransformParameters[] = { 0x3f800000, 0x3f800000, 0, 0x3f800000, 0, 4 };
 static const s32 guestWindowAnimationParameters[] = {
@@ -46,7 +46,7 @@ void FUN_001409e4(void)
     work = reinterpret_cast<GuestWindowView *>(g_guestWin);
     paramsClearPacket(work->parameters);
     paramsInit(reinterpret_cast<UiResourceParameters *>(work->parameters), guestWindowTextureParameters, 0x18, guestWindowTransformParameters, 0x18, 0, 0, 0, 0, guestWindowAnimationParameters, 0x70);
-    FUN_0014e188(&work->sprite, 8, 0x87, work->parameters, 1, 1.0f);
+    uiSpriteStateInitFromSource(&work->sprite, 8, 0x87, work->parameters, 1, 1.0f);
     uiSpriteSelectAnim(&work->sprite, 0);
 }
 }

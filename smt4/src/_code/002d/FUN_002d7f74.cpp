@@ -8,21 +8,21 @@ extern RenderCtx *g_titleScene;
 
 void effMenuCallHandler(s32 handler, s32 flag);
 void requestDispatch(void *request);
-void FUN_0028186c(EffectNode *node);
+void effectNodeUpdatePlacedChildren(EffectNode *node);
 void layoutApplyForState(RenderCtx *context);
 void renderCtxResetColorScale(RenderCtx *context);
-u32 FUN_002c501c(void);
-s32 FUN_002c5d80(u32 first, u32 second);
+u32 asdCameraGetSavedRenderPairs(void);
+s32 renderCtxPackPassFlags(u32 first, u32 second);
 void effectRestoreSavedRenderPairs(RenderCtx *context, u32 value);
 
 /* Draws the effect editor's menu with its own render states pushed, then pops them again. */
 void FUN_002d7f74(void)
 {
     renderCtxPushD(g_titleScene, 0);
-    renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
+    renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
     renderCtxPushB(g_titleScene, g_titleScene->stackB.entries[g_titleScene->stackB.count]);
     if (g_effectEditor.dispatch.unk00 == 0) {
-        effectRestoreSavedRenderPairs(g_titleScene, FUN_002c501c());
+        effectRestoreSavedRenderPairs(g_titleScene, asdCameraGetSavedRenderPairs());
     } else {
         layoutApplyForState(g_titleScene);
     }
@@ -31,7 +31,7 @@ void FUN_002d7f74(void)
         requestDispatch(g_effectEditor.selection.resource);
     }
     if (g_effectEditor.dispatch.node != NULL) {
-        FUN_0028186c(g_effectEditor.dispatch.node);
+        effectNodeUpdatePlacedChildren(g_effectEditor.dispatch.node);
     }
     if (g_effectEditor.dispatch.cachedEvent != 0) {
         requestDispatch(reinterpret_cast<void *>(g_effectEditor.dispatch.cachedEvent));

@@ -21,10 +21,10 @@ typedef struct StatListWork {
 
 f32 jobGetScalarValue(void);
 StatLayout *asdTMTexTableEntryAt(s32 kind, s32 index);
-s32 FUN_0026264c(u32 selection);
+s32 itemIsCollectedWithRelated(u32 selection);
 void FUN_00180310(s32 a, s32 x, s32 y, s32 b, s32 c, s32 d, const char *format, ...);
 void efctSetSpeed(f32 speed);
-void FUN_00183bb0(void);
+void gxResetColorQuadToWhite(void);
 
 /* Draws a stat value at its row: the value itself ("999" for big values, "??" when hidden by the
  * mode), and, when comparing, the signed difference with a "+" or "-" mark. */
@@ -34,7 +34,7 @@ void statRowDrawValue(StatListWork *work, s32 row, s32 x, s32 y, s32 value, s32 
     StatLayout *offset = asdTMTexTableEntryAt(18, row + 0x7B);
     StatLayout *base = asdTMTexTableEntryAt(18, 0x7A);
 
-    if (work->mode == 14 || (work->mode == 7 && FUN_0026264c(work->selection) == 0) || work->mode == 16) {
+    if (work->mode == 14 || (work->mode == 7 && itemIsCollectedWithRelated(work->selection) == 0) || work->mode == 16) {
         FUN_00180310(0, base->x + x, offset->y + base->y + y, 1, 3, 0xDD, "??");
     } else if (value >= 1000) {
         FUN_00180310(0, base->x + x, offset->y + base->y + y, 1, 3, 0xDD, "999");
@@ -59,7 +59,7 @@ void statRowDrawValue(StatListWork *work, s32 row, s32 x, s32 y, s32 value, s32 
         }
     }
     efctSetSpeed(savedSpeed);
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
 }
 
 }

@@ -6,7 +6,7 @@
 
 extern "C" {
 
-int FUN_00290994(...);
+int uiDrawListScrollBar(...);
 int FUN_0029a17c(...);
 int vec2GetYInt(...);
 int vec2GetXInt(...);
@@ -18,7 +18,7 @@ int libc_bsearch(...);
 int fontMeasureLineAdvance(...);
 int textDrawString(...);
 int textFormatBuffer(...);
-int FUN_002bf380(...);
+int texDrawCompositeSprite(...);
 int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int renderCtxSelectStereoLayout(int);
@@ -45,7 +45,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: gameDataGetPlayerName. */
-/* Supplied declaration required: FUN_00290994. */
+/* Supplied declaration required: uiDrawListScrollBar. */
 /* Supplied declaration required: FUN_0029a17c. */
 extern int ifTouchGetSelectionModeForRegion(int);
 extern int FUN_0029ee54(int);
@@ -57,7 +57,7 @@ extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: vec2GetXInt. */
-/* Supplied declaration required: FUN_002bf380. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int gameFlagIsSet(unsigned int);
@@ -67,7 +67,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern int terminalGetCharacterDisplayName(unsigned int);
 /* Supplied declaration required: tmnlGetEntryText. */
 
@@ -102,7 +102,7 @@ unsigned int FUN_001a26dc(void)
   }
   renderCtxSelectStereoLayout(g_titleScene);
   temp_v4 = g_titleScene;
-  temp_v3 = FUN_002c5d80(1,0);
+  temp_v3 = renderCtxPackPassFlags(1,0);
   piVar13 = (int *)(temp_v4 + 0x124c);
   temp_v7 = *piVar13;
   temp_v8 = piVar13[temp_v7 + 2];
@@ -114,23 +114,23 @@ unsigned int FUN_001a26dc(void)
   }
   temp_v4 = *(int *)(temp_v2 + 0x744);
   if (*(char *)(temp_v2 + 0x74e) != '\x02') {
-    FUN_002bf380(2,0x1e,0,0,0,0xc9);
-    FUN_002bf380(2,0x1e,3,0,0,0xd3);
+    texDrawCompositeSprite(2,0x1e,0,0,0,0xc9);
+    texDrawCompositeSprite(2,0x1e,3,0,0,0xd3);
     if (*(char *)(temp_v2 + 0x74e) == '\0') {
       temp_v10 = 0x23;
     }
     else if (*(char *)(temp_v2 + 0x74e) == '\x01') {
       temp_v10 = 0x24;
     }
-    FUN_002bf288(2,0x1e,temp_v10,0,0,0xd8);
+    texDrawTableEntryAtStoredOrigin(2,0x1e,temp_v10,0,0,0xd8);
   }
   else {
     temp_v3 = 0;
     if ((temp_v4 == 1) && (temp_v3 = *(int *)(temp_v2 + 0x748) * 2 - 0xc, 0 < temp_v3)) {
       temp_v3 = 0;
     }
-    FUN_002bf288(2,0x1e,0x28,0,temp_v3,0xc9);
-    FUN_002bf288(2,0x1e,0x29,0,temp_v3,0xc9);
+    texDrawTableEntryAtStoredOrigin(2,0x1e,0x28,0,temp_v3,0xc9);
+    texDrawTableEntryAtStoredOrigin(2,0x1e,0x29,0,temp_v3,0xc9);
     temp_v7 = asdTMTexTableEntryAt(0x1e,0x2a);
     temp_v8 = terminalGetCharacterDisplayName(*(unsigned int *)(temp_v2 + 0x7ec));
     if (temp_v8 != 0) {
@@ -157,7 +157,7 @@ unsigned int FUN_001a26dc(void)
       else {
         temp_v7 = asdTMTexTableEntryAt(0x1e,temp_v3 + 0x2b);
       }
-      FUN_002bf380(2,0x1e,1,(int)*(short *)(temp_v7 + 8),(int)*(short *)(temp_v7 + 10),0xd3);
+      texDrawCompositeSprite(2,0x1e,1,(int)*(short *)(temp_v7 + 8),(int)*(short *)(temp_v7 + 10),0xd3);
       temp_v10 = 0xff;
       temp_v8 = resourceRunOperationIfUnblocked(temp_v12);
       if ((*(char *)(temp_v8 + temp_v3 + temp_v2 + 0x758) == 'B') &&
@@ -243,21 +243,21 @@ unsigned int FUN_001a26dc(void)
       temp_v3 = asdTMTexTableEntryAt(0x1e,temp_v4 + 0x35);
     }
     efctSetSpeed();
-    FUN_002bf380(2,0x1e,2,(int)*(short *)(temp_v3 + 8),(int)*(short *)(temp_v3 + 10),0xdd);
+    texDrawCompositeSprite(2,0x1e,2,(int)*(short *)(temp_v3 + 8),(int)*(short *)(temp_v3 + 10),0xdd);
     efctSetSpeed();
-    FUN_002bf288(2,0x1e,0x13,(int)*(short *)(temp_v3 + 8),(int)*(short *)(temp_v3 + 10),0xe2);
+    texDrawTableEntryAtStoredOrigin(2,0x1e,0x13,(int)*(short *)(temp_v3 + 8),(int)*(short *)(temp_v3 + 10),0xe2);
     if (*(int *)(temp_v2 + 0x744) != 3) {
       temp_v7 = FUN_0029efa8(temp_v12);
       temp_v7 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v2 + temp_v7 * 2 + 0x772));
       if (!((temp_v7 == 1 || temp_v7 == 2) || temp_v7 == 6)) {
-        FUN_002bf288(2,0x1e,0x14,(int)*(short *)(temp_v3 + 8),(int)*(short *)(temp_v3 + 10),0xe7);
+        texDrawTableEntryAtStoredOrigin(2,0x1e,0x14,(int)*(short *)(temp_v3 + 8),(int)*(short *)(temp_v3 + 10),0xe7);
       }
       else {
-        FUN_002bf288(2,0x1e,0x15,(int)*(short *)(temp_v3 + 8),(int)*(short *)(temp_v3 + 10),0xe7);
+        texDrawTableEntryAtStoredOrigin(2,0x1e,0x15,(int)*(short *)(temp_v3 + 8),(int)*(short *)(temp_v3 + 10),0xe7);
       }
     }
     else {
-      FUN_002bf288(2,0x1e,0x15,(int)*(short *)(temp_v3 + 8),(int)*(short *)(temp_v3 + 10),0xe7);
+      texDrawTableEntryAtStoredOrigin(2,0x1e,0x15,(int)*(short *)(temp_v3 + 8),(int)*(short *)(temp_v3 + 10),0xe7);
     }
     temp_v7 = resourceRunOperationIfUnblocked(temp_v12);
     temp_v10 = 0xffffffff;
@@ -327,7 +327,7 @@ unsigned int FUN_001a26dc(void)
     temp_v4 = vec2GetYInt();
     temp_v1 = *(short *)(temp_v3 + 10);
     temp_v7 = vec2GetXInt(temp_v2 + 0x62c);
-    FUN_002bf288(2,0x1e,0x16,temp_v7 + *(short *)(temp_v3 + 8),temp_v4 + temp_v1,0xec);
+    texDrawTableEntryAtStoredOrigin(2,0x1e,0x16,temp_v7 + *(short *)(temp_v3 + 8),temp_v4 + temp_v1,0xec);
     temp_v4 = g_titleScene;
     piVar13 = (int *)(g_titleScene + 0x130c);
     temp_v3 = piVar13[*piVar13 + 2];
@@ -343,7 +343,7 @@ unsigned int FUN_001a26dc(void)
     efctSetSpeed();
     temp_v10 = vec2GetYInt(temp_v2 + 0x6b8);
     temp_v5 = vec2GetXInt(temp_v2 + 0x6b8);
-    FUN_00290994(temp_v12,temp_v5,temp_v10,0x1e,0x43,0x44,0x45,0x3f,0x41,0x40,0x42,
+    uiDrawListScrollBar(temp_v12,temp_v5,temp_v10,0x1e,0x43,0x44,0x45,0x3f,0x41,0x40,0x42,
                  (int)*(short *)(temp_v2 + 0x770),(int)*(short *)(temp_v2 + 0x76c),
                  (int)*(short *)(temp_v2 + 0x76e),0xfb,0);
     efctSetSpeed();

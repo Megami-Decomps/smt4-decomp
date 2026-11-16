@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0028c618(...);
+int modelPartSetRotationDegrees(...);
 int nodeSetTranslation(...);
-int FUN_0029bb14(...);
+int modelSetScale(...);
 int lightOwnerRegister(...);
 int modelSelectPrimaryMotion(...);
 int __ARM_common_memcpy4_8(...);
@@ -18,10 +18,10 @@ extern int *DAT_00447e10; /* 0x447e10 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int asdMdlManagerClone(int, unsigned int);
-/* Supplied declaration required: FUN_0028c618. */
+/* Supplied declaration required: modelPartSetRotationDegrees. */
 /* Supplied declaration required: nodeSetTranslation. */
 extern int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_0029bb14. */
+/* Supplied declaration required: modelSetScale. */
 /* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: modelSelectPrimaryMotion. */
 /* Supplied declaration required: __ARM_common_memcpy4_8. */
@@ -74,10 +74,10 @@ unsigned int FUN_002f400c(void)
           lightOwnerRegister(piVar3[temp_v2 * 0xb + 0x44d],1);
           nodeSetTranslation(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8),0,
                        piVar3 + temp_v2 * 0xb + 0x446);
-          FUN_0028c618(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8),0);
+          modelPartSetRotationDegrees(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8),0);
           modelSelectPrimaryMotion(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8),piVar3[temp_v2 * 0xb + 0x44a])
           ;
-          FUN_0029bb14(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8));
+          modelSetScale(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8));
           puVar2 = (unsigned int *)piVar3[temp_v2 * 0xb + 0x44d];
           *puVar2 = *puVar2 | 2;
           *(unsigned char *)(*(int *)(puVar2[2] + 0x2c) + 0x1f6) = 0;
@@ -120,10 +120,10 @@ unsigned int FUN_002f400c(void)
           lightOwnerRegister(temp_v3,1);
           nodeSetTranslation(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8),0,
                        piVar3 + temp_v1 * 0xb + 0x446);
-          FUN_0028c618(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8),0);
+          modelPartSetRotationDegrees(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8),0);
           modelSelectPrimaryMotion(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8),piVar3[temp_v1 * 0xb + 0x44a])
           ;
-          FUN_0029bb14(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8));
+          modelSetScale(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8));
           puVar2 = (unsigned int *)piVar3[temp_v1 * 0xb + 0x44d];
           temp_v1 = temp_v1 + 1;
           *puVar2 = *puVar2 | 2;
@@ -173,9 +173,9 @@ unsigned int FUN_002f400c(void)
         lightOwnerRegister(temp_v3,1);
         nodeSetTranslation(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8),0,piVar3 + temp_v1 * 0xb + 0x4a9
                     );
-        FUN_0028c618(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8),0);
+        modelPartSetRotationDegrees(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8),0);
         modelSelectPrimaryMotion(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8),piVar3[temp_v1 * 0xb + 0x4ad]);
-        FUN_0029bb14(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8));
+        modelSetScale(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8));
         puVar2 = (unsigned int *)piVar3[temp_v1 * 0xb + 0x4b0];
         temp_v1 = temp_v1 + 1;
         *puVar2 = *puVar2 | 2;
@@ -255,9 +255,9 @@ LAB_002f45c4:
       *(unsigned char *)(piVar3 + temp_v2 * 0xb + 0x4b1) = 1;
       lightOwnerRegister(piVar3[temp_v2 * 0xb + 0x4b0],1);
       nodeSetTranslation(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8),0,piVar3 + temp_v2 * 0xb + 0x4a9);
-      FUN_0028c618(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8),0);
+      modelPartSetRotationDegrees(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8),0);
       modelSelectPrimaryMotion(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8),piVar3[temp_v2 * 0xb + 0x4ad]);
-      FUN_0029bb14(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8));
+      modelSetScale(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8));
       puVar2 = (unsigned int *)piVar3[temp_v2 * 0xb + 0x4b0];
       *puVar2 = *puVar2 | 2;
       *(unsigned char *)(*(int *)(puVar2[2] + 0x2c) + 0x1f6) = 0;

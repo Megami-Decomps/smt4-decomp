@@ -4,7 +4,7 @@
 extern "C" {
 void FUN_00348e88(u16 flag);
 SavedCounterRange *itemCategoryFindByItemId(u32 flag);
-SavedCounterBanks *FUN_00282be4();
+SavedCounterBanks *saveGetUnlockFlagBlock();
 u32 recordPackedValue(u32 flag);
 }
 
@@ -17,7 +17,7 @@ extern "C" void FUN_00295a18(u32 flag, u32 amount)
     SavedCounterRange *range = itemCategoryFindByItemId(flag);
     if (range != NULL) {
         u8 bankIndex = range->bank;
-        SavedCounterBanks *save = FUN_00282be4();
+        SavedCounterBanks *save = saveGetUnlockFlagBlock();
         u8 *bank = savedCounterBank(save, bankIndex);
         s32 index = flag - range->first;
         switch (range->elementType) {
@@ -37,7 +37,7 @@ extern "C" void FUN_00295a18(u32 flag, u32 amount)
             break;
         }
         }
-        save = FUN_00282be4();
+        save = saveGetUnlockFlagBlock();
         s32 discovery = flag - 1;
         if ((u32)(discovery >> 3) <= 256)
             save->seenFlags[discovery >> 3] |= 1u << (discovery & 7);

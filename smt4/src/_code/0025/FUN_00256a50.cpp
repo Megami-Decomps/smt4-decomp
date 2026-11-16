@@ -19,7 +19,7 @@ typedef struct DrawPacket {
 
 extern RenderCtx *g_titleScene;
 
-s32 FUN_002c5d80(u32 kind, u32 arg);
+s32 renderCtxPackPassFlags(u32 kind, u32 arg);
 void FUN_001f6b74(u32 aux);
 void camSetMatrixB(RenderCtx *ctx, const f32 *matrix);
 void modelApplyChangedCachedVector(RenderCtx *ctx, f32 a, f32 b, f32 c, f32 d);
@@ -35,9 +35,9 @@ void FUN_00256a50(DrawPacket *packet, u32 mode)
     RenderCtx *ctx = g_titleScene;
 
     if ((packet->flags & 0x100) != 0) {
-        renderCtxPushA(ctx, FUN_002c5d80(5, 0));
+        renderCtxPushA(ctx, renderCtxPackPassFlags(5, 0));
     } else {
-        renderCtxPushA(ctx, FUN_002c5d80(1, 0));
+        renderCtxPushA(ctx, renderCtxPackPassFlags(1, 0));
     }
     if ((packet->flags & 0x200) != 0) {
         FUN_001f6b74(packet->aux);

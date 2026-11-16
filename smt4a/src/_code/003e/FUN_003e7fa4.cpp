@@ -53,7 +53,7 @@ struct BattlePositionRecord {
 struct EnemyDrawObject;
 
 extern "C" {
-BattleRosterEntry* FUN_001568f8(BattleWorldView* world, s32 index);
+BattleRosterEntry* btlFindEntryBlockByMemberId(BattleWorldView* world, s32 index);
 BattleSlotList* btlMainFindEntryByListedId(BattleWorldView* world, s32 slotId);
 void* dataTableFileGetTable(void* file, u32 section);
 BattleVec3* FUN_00348ee8(void* anchor);
@@ -83,7 +83,7 @@ BattleVec3 FUN_003e7fa4(BattleWorldView* world, s32 index, s32 force)
     BattleActor* actor = &world->actors[index];
     BattleVec3 position;
     if (actor->flags & 0x200000) {
-        u16 id = FUN_001568f8(world, index)->id;
+        u16 id = btlFindEntryBlockByMemberId(world, index)->id;
         BattlePositionRecord* found = NULL;
         if (world->dataFile != NULL) {
             void* section = dataTableFileGetTable(world->dataFile, 0);
@@ -105,7 +105,7 @@ BattleVec3 FUN_003e7fa4(BattleWorldView* world, s32 index, s32 force)
             if (slot < 0) {
                 slot = 0;
             }
-            EnemyDrawObject* object = stateEntryFindById(world, FUN_001568f8(world, index)->drawIds[slot]);
+            EnemyDrawObject* object = stateEntryFindById(world, btlFindEntryBlockByMemberId(world, index)->drawIds[slot]);
             enemyDrawCalcVerticalOffset(object, &position, actor->scale);
             position.x += actor->position.x;
             position.y += actor->position.y;
@@ -115,7 +115,7 @@ BattleVec3 FUN_003e7fa4(BattleWorldView* world, s32 index, s32 force)
             position = *FUN_00348ee8(world->anchor);
             position.z += lift;
             f32 height = 0.0f;
-            switch (dataTable00FindById(FUN_001568f8(world, index)->id)->height.value) {
+            switch (dataTable00FindById(btlFindEntryBlockByMemberId(world, index)->id)->height.value) {
             case 0:
                 height = 15.0f;
                 break;

@@ -8,7 +8,7 @@ void uiFadeRequestClear(void);
 void FUN_0029eb5c(void *cursor, s32 index);
 void buttonHelpSetPreset(s32 preset);
 void timerStart(void *timer, s32 start, s32 mode);
-void FUN_002bf810(u32 event);
+void soundPlaySeUnpanned(u32 event);
 
 /* Opens a quest detail panel, optionally restoring its selected list entry. */
 void FUN_002902a0(u32 questId, s32 restoreSelection)
@@ -55,6 +55,6 @@ void FUN_002902a0(u32 questId, s32 restoreSelection)
     quest->state = 20;
     quest->timer = 0;
     buttonHelpSetPreset(26);
-    FUN_002bf810(0x100025E);
+    soundPlaySeUnpanned(0x100025E);
 }
 }

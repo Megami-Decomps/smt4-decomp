@@ -5,13 +5,13 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_00178b04(...);
+int asdMemoryAllocTraced(...);
 int FUN_001cd3ec(...);
 int controllerSetDestination(...);
-int FUN_003fd7c0(...);
+int moriModelUnitStartMaterialAnimation(...);
 int FUN_003fd924(...);
 int animationSelectClip(...);
-int FUN_003fe86c(...);
+int modelPlayClip(...);
 int FUN_0040a908(...);
 int FUN_0040a918(...);
 int moriModelContentCreateBody(...);
@@ -40,15 +40,15 @@ extern int g_mapDepartWork; /* 0x58069c */
 extern int DAT_005f1bdc; /* 0x5f1bdc */
 
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_00178b04. */
+/* Supplied declaration required: asdMemoryAllocTraced. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001cd3ec. */
 extern int mapTableGetValue(int);
 /* Supplied declaration required: controllerSetDestination. */
-/* Supplied declaration required: FUN_003fd7c0. */
+/* Supplied declaration required: moriModelUnitStartMaterialAnimation. */
 /* Supplied declaration required: FUN_003fd924. */
 /* Supplied declaration required: animationSelectClip. */
-/* Supplied declaration required: FUN_003fe86c. */
+/* Supplied declaration required: modelPlayClip. */
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
 /* Supplied declaration required: moriModelContentCreateBody. */
@@ -109,7 +109,7 @@ unsigned int FUN_002d06f8(void)
       temp_v3 = *(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 4);
       handleRegistryRegisterObject(g_handleRegistry,temp_v3);
       FUN_003fd924(temp_v3,0,2);
-      FUN_003fd7c0(temp_v3,0,2);
+      moriModelUnitStartMaterialAnimation(temp_v3,0,2);
       temp_v2 = gameFlagIsSet(0x8a);
       if (((temp_v2 != 0) && (*(short *)(g_mapDepartWork + 0x20) == 0x27)) &&
          ((temp_v0 = *(short *)(g_mapDepartWork + 0x22), temp_v0 == 6 || temp_v0 == 7 ||
@@ -125,21 +125,21 @@ unsigned int FUN_002d06f8(void)
       temp_v2 = gameFlagIsSet(0x184);
       if ((((((temp_v2 == 0) || (*(short *)(g_mapDepartWork + 0x20) != 0x1a)) ||
             ((*(short *)(g_mapDepartWork + 0x22) == 2 &&
-             (FUN_003fd7c0(temp_v3,1,2), *(short *)(g_mapDepartWork + 0x20) != 0x1a)))) ||
+             (moriModelUnitStartMaterialAnimation(temp_v3,1,2), *(short *)(g_mapDepartWork + 0x20) != 0x1a)))) ||
            ((*(short *)(g_mapDepartWork + 0x22) == 4 &&
-            (FUN_003fd7c0(temp_v3,1,2), *(short *)(g_mapDepartWork + 0x20) != 0x1a)))) ||
+            (moriModelUnitStartMaterialAnimation(temp_v3,1,2), *(short *)(g_mapDepartWork + 0x20) != 0x1a)))) ||
           ((*(short *)(g_mapDepartWork + 0x22) == 7 &&
-           (FUN_003fd7c0(temp_v3,1,2), *(short *)(g_mapDepartWork + 0x20) != 0x1a)))) ||
+           (moriModelUnitStartMaterialAnimation(temp_v3,1,2), *(short *)(g_mapDepartWork + 0x20) != 0x1a)))) ||
          (((*(short *)(g_mapDepartWork + 0x22) == 9 &&
-           (FUN_003fd7c0(temp_v3,1,2), *(short *)(g_mapDepartWork + 0x20) != 0x1a)) ||
+           (moriModelUnitStartMaterialAnimation(temp_v3,1,2), *(short *)(g_mapDepartWork + 0x20) != 0x1a)) ||
           ((*(short *)(g_mapDepartWork + 0x22) == 0xb &&
-           (FUN_003fd7c0(temp_v3,1,2), *(short *)(g_mapDepartWork + 0x20) != 0x1a)))))) {
+           (moriModelUnitStartMaterialAnimation(temp_v3,1,2), *(short *)(g_mapDepartWork + 0x20) != 0x1a)))))) {
         *(unsigned short *)(g_mapDepartWork + 8) = 99;
         return 0;
       }
       temp_v0 = *(short *)(g_mapDepartWork + 0x22);
       if (temp_v0 == 0xf) {
-        FUN_003fd7c0(temp_v3,1,2);
+        moriModelUnitStartMaterialAnimation(temp_v3,1,2);
       }
       *(unsigned short *)(g_mapDepartWork + 8) = 99;
       return 0;
@@ -162,9 +162,9 @@ LAB_002d0a48:
       FUN_0040a918(*(unsigned int *)(g_mapDepartWork + 0x10),0x30000);
       FUN_0040aad4(*(unsigned int *)(g_mapDepartWork + 0x10),0);
       temp_v3 = *(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 4);
-      FUN_003fe86c(temp_v3,0,2);
+      modelPlayClip(temp_v3,0,2);
       if ((*(int *)(g_mapDepartWork + 0x1c) == 0xd) && (temp_v2 = gameFlagIsSet(0x184), temp_v2 != 0)) {
-        FUN_003fd7c0(temp_v3,1,2);
+        moriModelUnitStartMaterialAnimation(temp_v3,1,2);
       }
       handleRegistryRegisterObject(g_handleRegistry,temp_v3);
       if (*(short *)(g_mapDepartWork + 4) == 0x1a) {
@@ -228,7 +228,7 @@ LAB_002d0a48:
           return 0;
         }
         temp_v2 = 0x20;
-        FUN_00178b04(0x20,&LAB_002d0adc,0x113);
+        asdMemoryAllocTraced(0x20,&LAB_002d0adc,0x113);
         temp_v3 = 0;
         if (temp_v2 != 0) {
           temp_v3 = modelListInit();
@@ -248,9 +248,9 @@ LAB_002d0a48:
         FUN_0040a918(*(unsigned int *)(g_mapDepartWork + 0x10),0x30000);
         FUN_0040aad4(*(unsigned int *)(g_mapDepartWork + 0x10),0);
         temp_v3 = *(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 4);
-        FUN_003fe86c(temp_v3,0,2);
+        modelPlayClip(temp_v3,0,2);
         if ((*(int *)(g_mapDepartWork + 0x1c) == 0xd) && (temp_v2 = gameFlagIsSet(0x184), temp_v2 != 0)) {
-          FUN_003fd7c0(temp_v3,1,2);
+          moriModelUnitStartMaterialAnimation(temp_v3,1,2);
         }
         handleRegistryRegisterObject(g_handleRegistry,temp_v3);
       }
@@ -324,7 +324,7 @@ LAB_002d0a48:
     temp_v3 = *(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 4);
     handleRegistryRegisterObject(g_handleRegistry,temp_v3);
     FUN_003fd924(temp_v3,0,2);
-    FUN_003fd7c0(temp_v3,0,2);
+    moriModelUnitStartMaterialAnimation(temp_v3,0,2);
     temp_v2 = gameFlagIsSet(0x8a);
     if (((temp_v2 != 0) && (*(short *)(g_mapDepartWork + 0x20) == 0x27)) &&
        ((((temp_v0 = *(short *)(g_mapDepartWork + 0x22), temp_v0 == 6 || temp_v0 == 7 ||
@@ -340,21 +340,21 @@ LAB_002d0a48:
     temp_v2 = gameFlagIsSet(0x184);
     if ((((temp_v2 == 0) || (*(short *)(g_mapDepartWork + 0x20) != 0x1a)) ||
         (((*(short *)(g_mapDepartWork + 0x22) == 2 &&
-          (FUN_003fd7c0(temp_v3,1,2), *(short *)(g_mapDepartWork + 0x20) != 0x1a)) ||
+          (moriModelUnitStartMaterialAnimation(temp_v3,1,2), *(short *)(g_mapDepartWork + 0x20) != 0x1a)) ||
          ((*(short *)(g_mapDepartWork + 0x22) == 4 &&
-          (FUN_003fd7c0(temp_v3,1,2), *(short *)(g_mapDepartWork + 0x20) != 0x1a)))))) ||
+          (moriModelUnitStartMaterialAnimation(temp_v3,1,2), *(short *)(g_mapDepartWork + 0x20) != 0x1a)))))) ||
        (((*(short *)(g_mapDepartWork + 0x22) == 7 &&
-         (FUN_003fd7c0(temp_v3,1,2), *(short *)(g_mapDepartWork + 0x20) != 0x1a)) ||
+         (moriModelUnitStartMaterialAnimation(temp_v3,1,2), *(short *)(g_mapDepartWork + 0x20) != 0x1a)) ||
         (((*(short *)(g_mapDepartWork + 0x22) == 9 &&
-          (FUN_003fd7c0(temp_v3,1,2), *(short *)(g_mapDepartWork + 0x20) != 0x1a)) ||
+          (moriModelUnitStartMaterialAnimation(temp_v3,1,2), *(short *)(g_mapDepartWork + 0x20) != 0x1a)) ||
          ((*(short *)(g_mapDepartWork + 0x22) == 0xb &&
-          (FUN_003fd7c0(temp_v3,1,2), *(short *)(g_mapDepartWork + 0x20) != 0x1a)))))))) {
+          (moriModelUnitStartMaterialAnimation(temp_v3,1,2), *(short *)(g_mapDepartWork + 0x20) != 0x1a)))))))) {
       *(unsigned short *)(g_mapDepartWork + 8) = 99;
       return 0;
     }
     temp_v0 = *(short *)(g_mapDepartWork + 0x22);
     if (temp_v0 == 0xf) {
-      FUN_003fd7c0(temp_v3,1,2);
+      moriModelUnitStartMaterialAnimation(temp_v3,1,2);
     }
     *(unsigned short *)(g_mapDepartWork + 8) = 99;
     return 0;
@@ -363,7 +363,7 @@ LAB_002d0a48:
   *(unsigned short *)(g_mapDepartWork + 0x20) = *(unsigned short *)(g_mapDepartWork + 4);
   *(unsigned short *)(temp_v2 + 0x22) = *puVar1;
   temp_v2 = 0x20;
-  FUN_00178b04(0x20,&LAB_002d0adc,0x268);
+  asdMemoryAllocTraced(0x20,&LAB_002d0adc,0x268);
   temp_v3 = 0;
   if (temp_v2 != 0) {
     temp_v3 = modelListInit();
@@ -408,7 +408,7 @@ LAB_002d0a48:
   FUN_0040a908(*(unsigned int *)(g_mapDepartWork + 0xc),0x10000);
   FUN_0040a918(*(unsigned int *)(g_mapDepartWork + 0xc),0x10000);
   temp_v2 = 0x20;
-  FUN_00178b04(0x20,&LAB_002d0adc,0x294);
+  asdMemoryAllocTraced(0x20,&LAB_002d0adc,0x294);
   temp_v3 = 0;
   if (temp_v2 != 0) {
     temp_v3 = modelListInit();

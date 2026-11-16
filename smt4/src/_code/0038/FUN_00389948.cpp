@@ -9,9 +9,9 @@ typedef struct DataRecord {
 } DataRecord;
 
 extern u32 dataTableFileGetTable(u32 file, u32 arg);
-extern int FUN_002ac12c(DataEntry *entry);
-extern DataRow *FUN_002ac0f8(DataEntry *entry);
-extern u32 FUN_002ac0c4(DataEntry *entry);
+extern int packageEntryIsLoaded(DataEntry *entry);
+extern DataRow *packageEntryGetDirectory(DataEntry *entry);
+extern u32 packageEntryGetFileCount(DataEntry *entry);
 extern int dataTableGetCount(u32 table);
 extern DataRecord *dataTableGetEntries(u32 table);
 
@@ -27,9 +27,9 @@ DataRecord *FUN_00389948(DataSet *set, s32 index)
     for (i = 0; i < set->entryCount; i++) {
         DataEntry *entry = &set->entries[i];
 
-        if (FUN_002ac12c(entry) != 0) {
-            DataRow *rows = FUN_002ac0f8(entry);
-            u32 rowCount = FUN_002ac0c4(entry);
+        if (packageEntryIsLoaded(entry) != 0) {
+            DataRow *rows = packageEntryGetDirectory(entry);
+            u32 rowCount = packageEntryGetFileCount(entry);
 
             for (j = 0; j < rowCount; j++) {
                 if (rows[j].type == DATA_ROW_TABLE) {

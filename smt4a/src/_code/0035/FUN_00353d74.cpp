@@ -5,8 +5,8 @@
 extern "C" {
 extern MapObjectState *g_mapObj;
 extern GameState g_gameState;
-f32 FUN_001bc124(f32 radians);
-f32 FUN_001bbf0c(f32 radians);
+f32 libm_sinf(f32 radians);
+f32 libm_cosf(f32 radians);
 void FUN_00281b94(s32 slot, MapVector position, f32 heading, f32 a, f32 b, f32 c);
 }
 
@@ -21,8 +21,8 @@ static __inline void spawnOffsetEffect(const MapObjectSlot *object, f32 height, 
 {
     MapVector position = mapObjectPosition(object);
     position.y -= height;
-    position.x += FUN_001bc124(object->unk1c * 0.017453292f) * distance;
-    position.z += FUN_001bbf0c(object->unk1c * 0.017453292f) * distance;
+    position.x += libm_sinf(object->unk1c * 0.017453292f) * distance;
+    position.z += libm_cosf(object->unk1c * 0.017453292f) * distance;
     FUN_00281b94(0, position, object->unk1c, a, b, c);
 }
 

@@ -6,7 +6,7 @@ extern "C" {
 
 int pairCopy(...);
 int FUN_00231dec(...);
-int FUN_002bed3c(void);
+int gxResetColorQuadToWhite(void);
 int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
 int renderCtxSelectStereoLayout(...);
@@ -52,7 +52,7 @@ extern unsigned int lmapSceneGetObj(void);
 extern int FUN_00288f78(int);
 extern int flagBitIsSet(unsigned int);
 extern int FUN_002b8694(void);
-/* Supplied declaration required: FUN_002bed3c. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
@@ -306,7 +306,7 @@ LAB_0039f450:
     if ((temp_v6 != 0 && temp_v4 != 0) &&
        (pairCopy(param_1 + 0x164,temp_v22), (unsigned int)temp_v22[0] < 0xc39f8001)) {
       renderCtxSelectStereoLayout(g_titleScene);
-      FUN_002bed3c();
+      gxResetColorQuadToWhite();
       if ((g_gameState != 0x13) ||
          ((DAT_0049f920 != 6 && (!(DAT_0049f920 == 7 || DAT_0049f920 == 8))))) {
         if (*(char *)(param_1 + 0xc) != '\0') {

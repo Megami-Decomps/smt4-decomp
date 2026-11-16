@@ -5,7 +5,7 @@
 extern "C" {
 
 extern const char DAT_00544ba8[]; /* effect source file name (__FILE__) */
-PolyGeom *FUN_002b3b58(u32 count, int w, int h, u8 *table, int tableSize);
+PolyGeom *effGeomCreateRepeatedIndexList(u32 count, int w, int h, u8 *table, int tableSize);
 void textureSlotReplace(PolyGeom *geom, void *texture);
 u32 sysGetTableWord(int id);
 void refCountIncrement(u32 texture);
@@ -27,7 +27,7 @@ PolyGeomBlock *effPolyFlashGeomTexCreate3(PolyParams *params, void *texture)
     PolyGeom *geom;
     PolyGeomBlock *block = allocGeomBlock(params->segments * 0x20, 2899);
 
-    geom = FUN_002b3b58(params->segments & 0xffff, 2, 4, &DAT_005c1f82, 76);
+    geom = effGeomCreateRepeatedIndexList(params->segments & 0xffff, 2, 4, &DAT_005c1f82, 76);
     block->geom = geom;
     if (texture == NULL) {
         geom->unk04 = sysGetTableWord(19);

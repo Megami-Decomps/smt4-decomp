@@ -7,7 +7,7 @@
 extern "C" {
 extern GameState g_gameState;
 void nodeSetTranslation(NodeEnableResource *, s32, const f32 *);
-void FUN_0028c618(NodeEnableResource *, s32, f32, f32, f32);
+void modelPartSetRotationDegrees(NodeEnableResource *, s32, f32, f32, f32);
 u32 modelGetCurrentMotion(void *model);
 void modelSelectPrimaryMotion(NodeEnableResource *, u32 motionIndex, f32 blend);
 void modelSelectSecondaryMotion(NodeEnableResource *, u32, f32);
@@ -34,7 +34,7 @@ void mapMarkerSynchronizeModelState(MapIfModelMarker *marker)
                 node->resource->target->enabled = 0;
             }
             nodeSetTranslation(marker->model->resource, 0, marker->position);
-            FUN_0028c618(marker->model->resource, 0, 0.0f, marker->heading, 0.0f);
+            modelPartSetRotationDegrees(marker->model->resource, 0, 0.0f, marker->heading, 0.0f);
             if (modelGetCurrentMotion(marker->model->resource) != marker->motionIndex) {
                 modelSelectPrimaryMotion(marker->model->resource, marker->motionIndex, 0.0f);
                 modelSelectSecondaryMotion(marker->model->resource, marker->motionIndex, 0.0f);

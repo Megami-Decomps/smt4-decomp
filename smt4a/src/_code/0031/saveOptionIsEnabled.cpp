@@ -23,7 +23,7 @@ extern "C" {
 /* Whether the saved option with the given index is on. */
 s32 saveOptionIsEnabled(s32 option)
 {
-    SaveOptionFlags *flags = &reinterpret_cast<SaveOptionBlock *>(FUN_0026140c())->flags;
+    SaveOptionFlags *flags = &reinterpret_cast<SaveOptionBlock *>(saveGetUserSettingsBlock())->flags;
     switch (option) {
     case 0:
     case 1:

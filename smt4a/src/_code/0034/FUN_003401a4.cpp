@@ -21,7 +21,7 @@ int sub68OwnerCall7(void);
 int sub68OwnerCall9(void);
 int FUN_003868dc(int);
 int sysPlayVoice(int);
-int FUN_003d4ed8(int);
+int soundActorStartOnFreeChannel(int);
 int controllerUpdateWithIdleTimer(int);
 int partyTryInflictCondition(int, int, int);
 int FUN_0049f8a4(int, int);
@@ -55,7 +55,7 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-/* Supplied declaration required: FUN_001695a0. */
+/* Supplied declaration required: messageSetScriptDisplayMode. */
 /* Supplied declaration required: FUN_002237a0. */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00234b30. */
@@ -74,7 +74,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned int *);
 /* Supplied declaration required: sub68OwnerCall9. */
 /* Supplied declaration required: FUN_003868dc. */
 /* Supplied declaration required: sysPlayVoice. */
-/* Supplied declaration required: FUN_003d4ed8. */
+/* Supplied declaration required: soundActorStartOnFreeChannel. */
 extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: controllerUpdateWithIdleTimer. */
 /* Supplied declaration required: partyTryInflictCondition. */
@@ -218,7 +218,7 @@ void FUN_003401a4(int param_1)
     temp_v14[3] = 0.6f;
     temp_v14[4] = 0.6f;
     if (*(int *)(param_1 + 0xd0) == 0) {
-      FUN_003d4ed8(0x1000224);
+      soundActorStartOnFreeChannel(0x1000224);
       temp_v12 = 3.0f;
       temp_v9 = 15.0f;
       temp_v7 = gameDataFlagTestBit(0x84);
@@ -334,7 +334,7 @@ void FUN_003401a4(int param_1)
       *(unsigned int *)(g_lmapScene + 0x28) = *(unsigned int *)(g_lmapScene + 0x1c);
       *(unsigned int *)(temp_v7 + 0x2c) = *puVar10;
       *(unsigned int *)(temp_v7 + 0x30) = temp_v4;
-      FUN_001695a0();
+      messageSetScriptDisplayMode();
       mapPlaceSet(0xffffffff,0xffffffff);
       DAT_005f1658 = 0;
       DAT_005f1668 = 0x747331;

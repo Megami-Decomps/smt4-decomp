@@ -9,7 +9,7 @@
 extern "C" {
 
 int asdMemFreeNonNull(...);
-int FUN_002b70cc(void);
+int mathSinFixedAngle(void);
 int asdMemFree(void);
 int jobStop(...);
 
@@ -21,7 +21,7 @@ int FUN_00287188(...);
 int FUN_00289f18(...);
 int FUN_00289fa8(...);
 int FUN_0028a0d0(...);
-int FUN_0028a22c(void);
+int partyPanelReleaseResources(void);
 int playSceneTimerSubStart(...);
 int uiFadeRelease(void);
 int gameReleaseDataReference(void);
@@ -41,10 +41,10 @@ int FUN_0028a368(...);
 int FUN_0028a924(...);
 int FUN_0028b7f8(...);
 int playSceneFadeInStart(...);
-int FUN_0028be84(void);
+int uiSpriteOperationIsComplete(void);
 int btlTalkBustUpReleaseAllSlots(void);
 int btlTalkBustUpReleaseTexture(void);
-int FUN_0028cb40(...);
+int btlCommandMenuResolveLayout(...);
 int btlTalkBustUpSetUnk2F4(int);
 int btlTalkBustUpSetDemonTexture(int, int);
 int dataTable00FindById(void);
@@ -66,7 +66,7 @@ int FUN_0028c028(...);
 int FUN_0028c040(void);
 int gameGlobalsSetSelected(int);
 int spriteStartAnimationByIndex(int, int);
-int FUN_002bf818(...);
+int uiSpriteAdvanceAnimation(...);
 int uiSpriteOperationGetCompletion(void);
 int targetStateClear(unsigned int);
 int FUN_0033d0f0(unsigned int);
@@ -113,13 +113,13 @@ extern int battleTalkGetBustState(void);
 /* Supplied declaration required: FUN_00289f18. */
 /* Supplied declaration required: FUN_00289fa8. */
 /* Supplied declaration required: FUN_0028a0d0. */
-/* Supplied declaration required: FUN_0028a22c. */
+/* Supplied declaration required: partyPanelReleaseResources. */
 /* Supplied declaration required: FUN_0028a368. */
 /* Supplied declaration required: FUN_0028a924. */
 /* Supplied declaration required: FUN_0028b7f8. */
 /* Supplied declaration required: playSceneTimerSubStart. */
 /* Supplied declaration required: playSceneFadeInStart. */
-/* Supplied declaration required: FUN_0028be84. */
+/* Supplied declaration required: uiSpriteOperationIsComplete. */
 extern int playSceneIsFadeOutDone(int);
 /* Supplied declaration required: btlTalkBustUpReleaseAllSlots. */
 /* Supplied declaration required: btlTalkBustUpReleaseTexture. */
@@ -130,7 +130,7 @@ extern int playSceneIsFadeOutDone(int);
 /* Supplied declaration required: FUN_0028c040. */
 extern int playSceneIsFadeInDone(int);
 extern int FUN_0028c600(int);
-/* Supplied declaration required: FUN_0028cb40. */
+/* Supplied declaration required: btlCommandMenuResolveLayout. */
 /* Supplied declaration required: uiFadeRelease. */
 /* Supplied declaration required: gameReleaseDataReference. */
 extern int FUN_00293230(void);
@@ -147,12 +147,12 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: asdMemFreeNonNull. */
-/* Supplied declaration required: FUN_002b70cc. */
+/* Supplied declaration required: mathSinFixedAngle. */
 extern int padIsButtonRepeat(unsigned int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
-/* Supplied declaration required: FUN_002bf818. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 extern int jobGetWork(unsigned int job);
 /* Supplied declaration required: randNextInRange. */
 /* Supplied declaration required: FUN_002c1658. */
@@ -258,7 +258,7 @@ int FUN_0019e138(unsigned int job)
               *(unsigned char *)(temp_v11 + 0xe1cc) = 1;
               **(unsigned int **)(temp_v11 + 0xe1f4) = **(unsigned int **)(temp_v11 + 0xe1f4) | 0x2000000;
             }
-            temp_v5 = FUN_002bf818(temp_v11 + 0xe0ac);
+            temp_v5 = uiSpriteAdvanceAnimation(temp_v11 + 0xe0ac);
             if (temp_v5 != 0) {
               *(unsigned short *)(temp_v11 + 0xe1c4) = 0;
             }
@@ -277,12 +277,12 @@ int FUN_0019e138(unsigned int job)
             }
           }
           else {
-            FUN_002bf818(temp_v17);
+            uiSpriteAdvanceAnimation(temp_v17);
           }
         }
       }
       else {
-        temp_v5 = FUN_002bf818(temp_v11 + 0xe0ac);
+        temp_v5 = uiSpriteAdvanceAnimation(temp_v11 + 0xe0ac);
         if (temp_v5 != 0) {
           *(unsigned short *)(temp_v11 + 0xe1c4) = 3;
         }
@@ -291,7 +291,7 @@ int FUN_0019e138(unsigned int job)
     temp_v12 = temp_v12 + 1;
   } while (temp_v12 < 0xc);
   FUN_0033d0f0(*(unsigned int *)(temp_v0 + 0x7e20));
-  if (((*(char *)(temp_v0 + 0x7e4b) != '\0') && (temp_v12 = FUN_002bf818(), temp_v12 != 0)) &&
+  if (((*(char *)(temp_v0 + 0x7e4b) != '\0') && (temp_v12 = uiSpriteAdvanceAnimation(), temp_v12 != 0)) &&
      (*(short *)(temp_v0 + 0x7f1c) == 0xe)) {
     *(unsigned char *)(temp_v0 + 0x7e4b) = 0;
   }
@@ -428,7 +428,7 @@ int FUN_0019e138(unsigned int job)
       *(unsigned int *)(temp_v0 + 0x7e38) = 0xc;
       temp_v18 = temp_v18 & 0xffff0000;
       temp_v17 = temp_v17 & 0xffff0000;
-      FUN_0028cb40(temp_v0 + 0x2460,&temp_v18,&temp_v17);
+      btlCommandMenuResolveLayout(temp_v0 + 0x2460,&temp_v18,&temp_v17);
       temp_v4 = FUN_0028c028(temp_v0 + 0x2460);
       if (temp_v4 != 0) {
         FUN_0028b7f8(1);
@@ -494,7 +494,7 @@ int FUN_0019e138(unsigned int job)
     temp_v8 = g_btlUiBlock;
     if ((temp_v4 != 0) && (temp_v4 = playSceneIsFadeOutDone(g_btlUiBlock + 8), temp_v4 != 0)) {
       temp_v4 = temp_v8 + 0x2200;
-      FUN_0028be84();
+      uiSpriteOperationIsComplete();
       if (temp_v4 == 0) goto LAB_0019e7b8;
     }
     else {
@@ -510,7 +510,7 @@ LAB_0019e7b8:
     temp_v4 = playSceneIsFadeOutDone(g_btlUiBlock + 8);
     if (temp_v4 != 0) {
       temp_v4 = temp_v8 + 0x2200;
-      FUN_0028be84();
+      uiSpriteOperationIsComplete();
       if (temp_v4 != 0) {
         playSceneFadeInStart(temp_v8 + 8);
         playSceneTimerSubStart(temp_v8 + 0x2200);
@@ -570,7 +570,7 @@ LAB_0019e7b8:
             objectEntryAppend(temp_v4,temp_v6,temp_v7);
           }
         }
-        FUN_0028a22c();
+        partyPanelReleaseResources();
         *(unsigned int *)(temp_v0 + 0x7e38) = 7;
         temp_v4 = FUN_0028c028();
         if (temp_v4 != 0) {
@@ -580,7 +580,7 @@ LAB_0019e7b8:
         temp_v4 = playSceneIsFadeOutDone(g_btlUiBlock + 8);
         if (temp_v4 != 0) {
           temp_v4 = temp_v8 + 0x2200;
-          FUN_0028be84();
+          uiSpriteOperationIsComplete();
           if (temp_v4 != 0) {
             playSceneFadeInStart(temp_v8 + 8);
             playSceneTimerSubStart(temp_v8 + 0x2200);
@@ -833,7 +833,7 @@ LAB_0019ef1c:
     temp_v14 = (float)VectorSignedToFloat(*(int *)(temp_v0 + 0x5cf8) - temp_v8,
                                         (unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v14 = ((temp_v14 * 1.5707964f) / temp_v15) * 40.743664f;
-    FUN_002b70cc();
+    mathSinFixedAngle();
     *(float *)(temp_v0 + 0x5cec) = (1.0f - temp_v14) * *(float *)(temp_v0 + 0x5cf4);
     *puVar14 = *puVar14 - 1;
   }

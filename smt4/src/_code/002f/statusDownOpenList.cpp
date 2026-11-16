@@ -23,7 +23,7 @@ typedef struct StatusDown {
 extern StatusDown *g_statusDown;
 
 s32 FUN_0029ee54(void *list);
-void FUN_0029f848(void *list, s32 count, s32 a, s32 b, s32 c, s32 d);
+void gridNavigationConfigure(void *list, s32 count, s32 a, s32 b, s32 c, s32 d);
 void ifTouchRegionRemove(void);
 void *__aeabi_memset4(void *dest, s32 size, s32 value);
 void FUN_0026ae68(void);
@@ -41,7 +41,7 @@ void statusDownOpenList(u32 first, u32 second)
 
     status->unk544 = first;
     status->unk540 = second;
-    FUN_0029f848(statusGetList(status), FUN_0029ee54(statusGetList(status)) + 1, 9, 1, 0, 1);
+    gridNavigationConfigure(statusGetList(status), FUN_0029ee54(statusGetList(status)) + 1, 9, 1, 0, 1);
     FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(statusGetList(status)), FUN_0029ee54(statusGetList(status)) - 1);
     status->unk410 = 1;
     current = g_statusDown;

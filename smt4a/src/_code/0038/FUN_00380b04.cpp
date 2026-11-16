@@ -11,7 +11,7 @@ void bitsAt60Set(SlotRecord *, u16);
 s32 bitsAt60Test(SlotRecord *, u16);
 void FUN_004fcffc(u32, ScriptUnit *, BattleRosterRecordA *, u32);
 void FUN_004fdb18(u32, ScriptUnit *, BattleRosterRecordA *, u32, u32);
-void FUN_004fb43c(u32, ScriptUnit *, u32, u32, u32, u32, u32);
+void btlQueueActionMessage(u32, ScriptUnit *, u32, u32, u32, u32, u32);
 
 u32 FUN_00380b04(void)
 {
@@ -36,7 +36,7 @@ u32 FUN_00380b04(void)
         if (status != 4 && bitsAt60Test(record, 4))
             bitsAt60Clear(record, 0x10);
     }
-    FUN_004fb43c(0, unit, 0x100025F, 0, 0, 0, 0);
+    btlQueueActionMessage(0, unit, 0x100025F, 0, 0, 0, 0);
     return 1;
 }
 }

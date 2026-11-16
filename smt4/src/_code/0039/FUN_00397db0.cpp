@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_0028cfbc(...);
 int textDrawString(int, int, unsigned char [4]);
-int FUN_002bf288(...);
-int FUN_002bf380(...);
+int texDrawTableEntryAtStoredOrigin(...);
+int texDrawCompositeSprite(...);
 int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int uiDrawEncodedGlyph(...);
@@ -30,8 +30,8 @@ extern int g_titleScene; /* 0x44ea00 */
 extern int objectPartRunUnlessLocked(int);
 extern int recordTableGet(unsigned int, int);
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: FUN_002bf380. */
+/* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -92,7 +92,7 @@ void FUN_00397db0(int param_1)
         }
         (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v5 + 10);
         temp_v13 = 0x15;
-        FUN_002bf380(2,0x2e,1,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v5 + 8));
+        texDrawCompositeSprite(2,0x2e,1,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v5 + 8));
         temp_v6 = asdTMTexTableEntryAt(0x2e,0x1a);
         temp_v7 = *(int *)(param_1 + 0xa4);
         temp_v0 = *(short *)(temp_v6 + 8);
@@ -135,7 +135,7 @@ void FUN_00397db0(int param_1)
           }
           (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v9 + 10);
           temp_v13 = 0x15;
-          FUN_002bf380(2,0x2e,2,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v9 + 8));
+          texDrawCompositeSprite(2,0x2e,2,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v9 + 8));
           temp_v8 = asdTMTexTableEntryAt(0x2e,0x22);
           temp_v13 = 1;
           (*(unsigned int *)temp_v12) = 0x0;
@@ -156,11 +156,11 @@ void FUN_00397db0(int param_1)
             }
             (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v9 + 10);
             temp_v13 = 0x1f;
-            FUN_002bf380(2,0x2e,3,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v9 + 8));
+            texDrawCompositeSprite(2,0x2e,3,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v9 + 8));
             if (0 < *(short *)(param_1 + 0x942)) {
               (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v9 + 10);
               temp_v13 = 0x1f;
-              FUN_002bf288(2,0x2e,0x21,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v9 + 8));
+              texDrawTableEntryAtStoredOrigin(2,0x2e,0x21,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v9 + 8));
             }
             temp_v9 = g_titleScene;
             temp_v8 = packNibblesAndByte(6,7,0);
@@ -183,10 +183,10 @@ void FUN_00397db0(int param_1)
               temp_v9 = asdTMTexTableEntryAt(0x2e,temp_v8 + 0xc6);
               (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v9 + 10);
               temp_v13 = 0x15;
-              FUN_002bf380(2,0x2e,4,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v9 + 8));
+              texDrawCompositeSprite(2,0x2e,4,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v9 + 8));
               (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v9 + 10);
               temp_v13 = 0x1a;
-              FUN_002bf288(2,0x2e,temp_v8 + 0x29,
+              texDrawTableEntryAtStoredOrigin(2,0x2e,temp_v8 + 0x29,
                            *(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v9 + 8));
               efctSetSpeed();
               temp_v8 = temp_v8 + 1;
@@ -198,10 +198,10 @@ void FUN_00397db0(int param_1)
             temp_v8 = asdTMTexTableEntryAt(0x2e,temp_v9 + 0xc6);
             (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v8 + 10);
             temp_v13 = 0x1f;
-            FUN_002bf380(2,0x2e,5,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v8 + 8));
+            texDrawCompositeSprite(2,0x2e,5,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v8 + 8));
             (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v8 + 10);
             temp_v13 = 0x24;
-            FUN_002bf288(2,0x2e,temp_v9 + 0x32,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v8 + 8))
+            texDrawTableEntryAtStoredOrigin(2,0x2e,temp_v9 + 0x32,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v8 + 8))
             ;
             efctSetSpeed();
             efctSetSpeed();
@@ -216,7 +216,7 @@ void FUN_00397db0(int param_1)
             }
             (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v8 + 10);
             temp_v13 = 0x29;
-            FUN_002bf380(2,0x2e,6,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v8 + 8));
+            texDrawCompositeSprite(2,0x2e,6,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v8 + 8));
             temp_v9 = g_titleScene;
             temp_v5 = packNibblesAndByte(6,7,0);
             piVar10 = (int *)(temp_v9 + 0x12ac);
@@ -229,7 +229,7 @@ void FUN_00397db0(int param_1)
             if (0 < *(short *)(param_1 + 0x942)) {
               (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v8 + 10);
               temp_v13 = 0x29;
-              FUN_002bf288(2,0x2e,0x39,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v8 + 8));
+              texDrawTableEntryAtStoredOrigin(2,0x2e,0x39,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v8 + 8));
             }
             efctSetSpeed();
             return;

@@ -31,10 +31,10 @@ void scenePartAdvanceState(ScenePart00469e1c *part)
     } else {
         part->state = 3;
         part->unk008 = 0;
-        if (FUN_0013def0(0) == 3) {
+        if (pairedAvailabilityGetState(0) == 3) {
             FUN_003d54f8(0, 10);
         }
-        if (FUN_0013def0(1) == 3) {
+        if (pairedAvailabilityGetState(1) == 3) {
             FUN_003d54f8(1, 10);
         }
     }

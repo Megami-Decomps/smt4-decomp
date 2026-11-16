@@ -38,11 +38,11 @@ extern "C" {
 extern AocSystemA* g_aocSystem;
 s32 gameFlagIsSet(u32 flag);
 void asdTMTexTableReleaseNode(u32 table, s32 node);
-void FUN_001b2d54(AocSystemA* system, u32 table, s32 node);
+void packageFileDisableByKindName(AocSystemA* system, u32 table, s32 node);
 void aocSlotRelease(AocSlot* slot);
 s32 bustupCutAnimAssignSlot(u32 job, s32 slot);
 void bustupSpriteStartTransition(BustupPlacementWork* work, s32 operation, s32 duration);
-u32 FUN_001ad1ac(Vec3f* position, s32 slot);
+u32 bustupPlaceActiveSlot(Vec3f* position, s32 slot);
 
 void bustupCutAnimSetPlacement(u32 job, s32 slot, s32 snap, s32 x, s32 y)
 {
@@ -53,7 +53,7 @@ void bustupCutAnimSetPlacement(u32 job, s32 slot, s32 snap, s32 x, s32 y)
     BustupPlacementWork* work = (BustupPlacementWork*)jobGetWork(job);
     if (work->textureIndex != -1 && work->textureActive != 0) {
         asdTMTexTableReleaseNode(work->textureTable, work->textureIndex);
-        FUN_001b2d54(g_aocSystem, work->textureTable, work->textureIndex);
+        packageFileDisableByKindName(g_aocSystem, work->textureTable, work->textureIndex);
         work->textureIndex = -1;
         work->textureActive = 0;
     }
@@ -87,7 +87,7 @@ void bustupCutAnimSetPlacement(u32 job, s32 slot, s32 snap, s32 x, s32 y)
             BustupPlacementWork* active = (BustupPlacementWork*)jobGetWork(job);
             active->state = 1;
             active->startPosition = active->basePosition;
-            FUN_001ad1ac(&work->position, work->slot);
+            bustupPlaceActiveSlot(&work->position, work->slot);
             return;
         }
     } else {

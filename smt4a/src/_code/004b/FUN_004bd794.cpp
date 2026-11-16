@@ -44,16 +44,16 @@ void fillThreeWordsWithByte(u32 *words, u8 value);
 PartnerUnit *saveSlotFindSelected(void);
 void __aeabi_memset4(void *destination, u32 size, s32 value);
 PartnerUnit *FUN_00187068(s32 index);
-PartnerUnit *FUN_003e4d68(u16 index);
+PartnerUnit *partyGetSlot(u16 index);
 void asdLoadFileAsyncSimple(const char *path, u32 *out, s32 arg);
-void FUN_00203b40(void *list, s32 count, s32 rows, s32 columns, s32 a, s32 b);
+void gridNavigationConfigure(void *list, s32 count, s32 rows, s32 columns, s32 a, s32 b);
 void FUN_002c8538(s32 arg);
 void FUN_00215bd0(void);
 void sysPlaySe(u32 id);
 void FUN_00183f58(s32 a, s32 b, s32 c);
 void paramsClearPacket(void *packet);
 
-void FUN_0014e188(void *sprite, s32 a, s32 b, void *packet, s32 c);
+void uiSpriteStateInitFromSource(void *sprite, s32 a, s32 b, void *packet, s32 c);
 void FUN_004be990(PartnerScreen *screen, s32 a, s32 b);
 u8 FUN_002857b8(void);
 
@@ -86,7 +86,7 @@ void FUN_004bd794(PartnerScreen *screen, u8 mode)
         s32 slot = 0;
 
         for (s32 j = 0; j < 12; j++) {
-            if (FUN_003e4d68((u16)j)->id == unit->id) {
+            if (partyGetSlot((u16)j)->id == unit->id) {
                 slot = j;
                 break;
             }
@@ -103,7 +103,7 @@ void FUN_004bd794(PartnerScreen *screen, u8 mode)
         if (count % 4 > 0) {
             rows++;
         }
-        FUN_00203b40(screen->list, count, rows, 4, 1, 1);
+        gridNavigationConfigure(screen->list, count, rows, 4, 1, 1);
         FUN_002c8538(1);
         FUN_00215bd0();
         if (screen->mode != 2) {
@@ -125,12 +125,12 @@ void FUN_004bd794(PartnerScreen *screen, u8 mode)
         paramsClearPacket(screen->params);
         paramsInit(reinterpret_cast<UiResourceParameters *>(screen->params), DAT_0052d780, 0x60, DAT_0052d7e0, 0x18, NULL, 0, 0, 0, NULL, 0);
         for (s32 i = 0; i < 4; i++) {
-            FUN_0014e188((u8 *)screen + 0x30 + i * 0x8C, 0x11, 0, screen->params, 0x6A);
+            uiSpriteStateInitFromSource((u8 *)screen + 0x30 + i * 0x8C, 0x11, 0, screen->params, 0x6A);
         }
         FUN_004be990(screen, 0, -1);
         screen->unk344 = 0;
     } else {
-        FUN_00203b40(screen->list, count, count, 1, 1, 1);
+        gridNavigationConfigure(screen->list, count, count, 1, 1, 1);
         sysPlaySe(0x11F);
     }
     screen->state = 1;

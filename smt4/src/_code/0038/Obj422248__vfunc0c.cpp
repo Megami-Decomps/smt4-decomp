@@ -44,7 +44,7 @@ WindowStatusOperationResult Obj422248::vfunc0c(const void *)
         if ((status & 0x7e00000) != 0x600000) {
             bool failed = nnResultIsFailure(status);
             if (failed) {
-                FUN_002c526c(status, failed);
+                resultHandleFailure(status, failed);
             }
         }
     } else {

@@ -68,7 +68,7 @@ void FUN_0049cd18(PackedItem *item, s32 count, s32 charge);
 void qsort(void *base, u32 count, u32 size, void *compare);
 void listScrollerInitialize(void *list, s32 a, u32 b, s32 c);
 void listCursorSetPage(void *list, s32 page);
-void FUN_004d05c4(void *p, s32 a, s32 b, s32 c);
+void messageIdListSetRange(void *p, s32 a, s32 b, s32 c);
 
 /* Builds the sale list: every owned item between flags 0x3B7 and 0x47E is turned into a resolved
  * choice (counting duplicates), priced and removed from the inventory, then the list is sorted and
@@ -138,7 +138,7 @@ void FUN_0049a5b4(SaleMenu *menu)
     menu->window->attach(menu->list);
     menu->window->flags |= 0x1000;
     menu->window->owner = (u8 *)menu + 0x3A4;
-    FUN_004d05c4((u8 *)menu + 0xB08, 0x20, 0x28, 10);
+    messageIdListSetRange((u8 *)menu + 0xB08, 0x20, 0x28, 10);
     menu->unk0B18 = 1;
 }
 

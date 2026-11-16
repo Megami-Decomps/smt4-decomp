@@ -39,7 +39,7 @@ extern TitleScene* g_titleScene;
 extern QuestUi* g_uiQuest;
 
 void renderCtxSelectStereoLayout(TitleScene* scene);
-u32 FUN_002c5d80(u32 a, u32 b);
+u32 renderCtxPackPassFlags(u32 a, u32 b);
 void FUN_00197e34(void);
 void FUN_00186a48(void);
 f32 renderCtxCalculateStereoParallax(TitleScene* scene, f32 amount);
@@ -100,7 +100,7 @@ u32 FUN_001ad9f0(void)
 {
     QuestUi* quest = g_uiQuest;
     renderCtxSelectStereoLayout(g_titleScene);
-    ringPush(&g_titleScene->stateRing, FUN_002c5d80(1, 0));
+    ringPush(&g_titleScene->stateRing, renderCtxPackPassFlags(1, 0));
     switch (quest->state) {
     case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9: case 10:
     case 11: case 12: case 13: case 14: case 15: case 16:
@@ -120,10 +120,10 @@ u32 FUN_001ad9f0(void)
         u16 category = quest->category;
         if (quest->revealed == 0) uiFadeDraw(0x92);
         x += shift;
-        FUN_002bf288(2, 0x29, 0x57, x, y, 0x97);
-        FUN_002bf288(2, 0x29, 0x58, x, y, 0x97);
-        FUN_002bf288(2, 0x29, 0x59, x, y, 0x97);
-        FUN_002bf288(2, 0x29, 0x51, x, y, 0xa1);
+        texDrawTableEntryAtStoredOrigin(2, 0x29, 0x57, x, y, 0x97);
+        texDrawTableEntryAtStoredOrigin(2, 0x29, 0x58, x, y, 0x97);
+        texDrawTableEntryAtStoredOrigin(2, 0x29, 0x59, x, y, 0x97);
+        texDrawTableEntryAtStoredOrigin(2, 0x29, 0x51, x, y, 0xa1);
         SpriteRect* labelRect = static_cast<SpriteRect*>(asdTMTexTableEntryAt(0x29, 0x54));
         drawSkillCategoryLabel(category, labelRect->x + x, labelRect->y + y, 0xa6);
         SpriteRect* nameRect = static_cast<SpriteRect*>(asdTMTexTableEntryAt(0x29, 0x55));

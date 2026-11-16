@@ -14,7 +14,7 @@ extern "C" {
 BtlEntry *btlMainFindEntryByListedId(BtlMainState *, s32);
 void FUN_0027df30(s32, u32, BtlActionRecord *, s32, s32, s32, s32, u32,
                  s32, s32, s32, s32, s32);
-void FUN_002505c0(s32, u32, u32, s32, s32, s32, s32);
+void btlQueueKeyedScalarReflectAction(s32, u32, u32, s32, s32, s32, s32);
 extern u32 g_btlScriptUnit;
 }
 
@@ -31,6 +31,6 @@ extern "C" u32 FUN_002f7794(void)
     BattleActionView *state = reinterpret_cast<BattleActionView *>(btlGetMainState());
     FUN_0027df30(0, unit, &state->actions[targetId], 0, amount, -1, -1, 0x3E0,
                  0, 0, 9, 0, 0);
-    FUN_002505c0(0, unit, 0x10001C1, 0, 0, 0, 0);
+    btlQueueKeyedScalarReflectAction(0, unit, 0x10001C1, 0, 0, 0, 0);
     return 1;
 }

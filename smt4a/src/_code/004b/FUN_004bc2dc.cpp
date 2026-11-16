@@ -6,7 +6,7 @@ extern "C" {
 extern void *g_aocSystem;
 s32 randRange(u16 maximum);
 WeightedEncounterTable *resourceFindType27Record(void *system, u32 index);
-WeightedEncounterGroup *FUN_004bb80c(u32 id);
+WeightedEncounterGroup *dataTable02GetRecordWithAocPackage(u32 id);
 Table00Record *dataTable00FindById(u32 id);
 
 // Select an encounter by weight, excluding special portrait groups from the total when requested.
@@ -25,7 +25,7 @@ u32 FUN_004bc2dc(s32 tableIndex, s32 excludeSpecial)
         if (entry->id != 0) {
             bool excluded = false;
             if (excludeSpecial) {
-                WeightedEncounterGroup *group = FUN_004bb80c(entry->id);
+                WeightedEncounterGroup *group = dataTable02GetRecordWithAocPackage(entry->id);
                 for (s32 member = 0; member < 6; ++member) {
                     if (group->members[member] != 0) {
                         Table00Record *record = dataTable00FindById(group->members[member]);

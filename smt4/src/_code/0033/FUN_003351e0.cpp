@@ -17,11 +17,11 @@ struct ScaleGroup {
 
 extern "C" {
 
-void FUN_0028c618(NodeOwner *owner, s32 unused, NodeVec3 scale);
+void modelPartSetRotationDegrees(NodeOwner *owner, s32 unused, NodeVec3 scale);
 
 static void setScaleNode(ScaleNode *node, NodeVec3 scale)
 {
-    FUN_0028c618(node->owner, 0, scale);
+    modelPartSetRotationDegrees(node->owner, 0, scale);
 }
 
 // Apply the scale to the group's root node and to each of its three child nodes.

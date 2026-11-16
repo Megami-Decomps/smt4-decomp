@@ -58,7 +58,7 @@ void FUN_0048cee0(NaviLayoutWork *work, s32 map)
             break;
         }
     }
-    FUN_0014afd0(0x28, work->textureIndex);
+    asdTMTexTablePrepareNodeImage(0x28, work->textureIndex);
     *(u32 *)(asdTMTexTableGetHeaderValue(0x28, work->textureIndex) + 0x3c) = 1;
     for (i = 0; i < 32; i++) {
         work->origins[i].x = 0;

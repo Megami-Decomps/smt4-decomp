@@ -6,12 +6,12 @@
 extern "C" {
 
 int FUN_003df7c4(int);
-int FUN_004bcd90(short *);
+int unitRecomputeDerivedStats(short *);
 
 extern int gameGetPlayerData(void);
 extern short *gameGetSlotRecord(void);
 /* Supplied declaration required: FUN_003df7c4. */
-/* Supplied declaration required: FUN_004bcd90. */
+/* Supplied declaration required: unitRecomputeDerivedStats. */
 extern int bitsAt60Test(short *, unsigned int);
 
 
@@ -367,7 +367,7 @@ LAB_003b7610:
       FUN_003df7c4(0);
     }
     else {
-      FUN_004bcd90(psVar4);
+      unitRecomputeDerivedStats(psVar4);
     }
   }
   return temp_v4;

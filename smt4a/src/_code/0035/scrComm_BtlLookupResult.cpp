@@ -9,7 +9,7 @@ typedef struct UnitRecord {
 } UnitRecord;
 
 extern u32 scrGetArg(u32 index);
-extern UnitRecord *FUN_001568f8(UnitRecord *state, u32 index);
+extern UnitRecord *btlFindEntryBlockByMemberId(UnitRecord *state, u32 index);
 extern int scrSetResult(u32 value);
 
 /* Script command: looks up the entry for argument 0 and pushes its result word. */
@@ -18,7 +18,7 @@ u32 scrComm_BtlLookupResult(void)
     u32 index = scrGetArg(0);
     UnitRecord *state = reinterpret_cast<UnitRecord *>(btlGetMainState());
 
-    scrSetResult(FUN_001568f8(state, index)->result);
+    scrSetResult(btlFindEntryBlockByMemberId(state, index)->result);
     return 1;
 }
 

@@ -9,7 +9,7 @@ extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
 s32 btlResolveEntryChoice(s32 kind);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
 
 u32 scrCommBattleGroupHpPercentAtMost()
 {
@@ -18,7 +18,7 @@ u32 scrCommBattleGroupHpPercentAtMost()
     s32 totalHp = 0;
     s32 totalMaxHp = 0;
     struct { s32 count; s32 first; } range;
-    FUN_00301a08(kind, &range.first, &range.count);
+    btlGetEntryChoiceRange(kind, &range.first, &range.count);
     for (s32 index = range.first; index < range.count + range.first; ++index) {
         const BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         if ((g_btlCandidateMasks.unavailable & entry->flags) == 0 &&
@@ -31,7 +31,7 @@ u32 scrCommBattleGroupHpPercentAtMost()
         }
     }
     if (btlGetMainState()->unk4cd1) {
-        const BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        const BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL) {
             s32 hp = entry->hp;
             s32 maxHp = entry->maxHp;

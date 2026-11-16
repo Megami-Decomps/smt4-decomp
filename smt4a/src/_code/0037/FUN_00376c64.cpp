@@ -75,8 +75,8 @@ s32 FUN_003033d4(void);
 s32 FUN_0033a374(MapView *view);
 void FUN_00303460(s32 arg);
 f32 mathPositionHeadingDegrees(MapVec3 position, MapVec3 focus);
-f32 FUN_001bc124(f32 radians);
-f32 FUN_001bbf0c(f32 radians);
+f32 libm_sinf(f32 radians);
+f32 libm_cosf(f32 radians);
 s32 FUN_00330108(MapVec3 *from, MapVec3 *to, MapVec3 *out);
 void FUN_002d1e44(CameraMoveRequest *request);
 
@@ -128,14 +128,14 @@ void FUN_00376c64(void)
     f32 turned = (view->heading - 90.0f) * 0.017453292f;
     f32 facing = view->heading * 0.017453292f;
 
-    corner.x = g_lmapScene->anchor.x + FUN_001bc124(turned) * view->side[index];
+    corner.x = g_lmapScene->anchor.x + libm_sinf(turned) * view->side[index];
     corner.y = g_lmapScene->anchor.y + view->lift[index];
-    corner.z = g_lmapScene->anchor.z + FUN_001bbf0c(turned) * view->side[index];
-    stop.x = g_lmapScene->anchor.x - FUN_001bc124(facing) * view->back[index];
-    stop.z = g_lmapScene->anchor.z - FUN_001bbf0c(facing) * view->back[index];
+    corner.z = g_lmapScene->anchor.z + libm_cosf(turned) * view->side[index];
+    stop.x = g_lmapScene->anchor.x - libm_sinf(facing) * view->back[index];
+    stop.z = g_lmapScene->anchor.z - libm_cosf(facing) * view->back[index];
     stop.y = g_lmapScene->anchor.y + view->lowerLift[index] + view->heightOffset;
-    stop.x += FUN_001bc124(turned) * view->side[index];
-    stop.z += FUN_001bbf0c(turned) * view->side[index];
+    stop.x += libm_sinf(turned) * view->side[index];
+    stop.z += libm_cosf(turned) * view->side[index];
     FUN_00330108(&corner, &stop, &hit);
     request.destination = hit;
     request.unk48 = 0;

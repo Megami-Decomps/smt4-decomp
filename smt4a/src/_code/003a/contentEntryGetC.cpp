@@ -11,7 +11,7 @@ typedef struct AocSystem003a3070 AocSystem003a3070;
 void *dataTableGet(s32 table, s32 slot);
 Entry003a3070 *dataTableGetEntries(void *table);
 u32 dataTableGetCount(void *table);
-s32 FUN_0046c35c(AocSystem003a3070 *aoc, s32 kind, s32 slot);
+s32 groupedFileTablesCountRecordsOfKind(AocSystem003a3070 *aoc, s32 kind, s32 slot);
 Entry003a3070 *contentEntryGetFromFiles2(AocSystem003a3070 *aoc, u32 index);
 
 extern AocSystem003a3070 *g_aocSystem; /* 0x570280 */
@@ -26,7 +26,7 @@ Entry003a3070 *contentEntryGetC(u32 index)
     if (index < count) {
         return &entries[index];
     }
-    if (index < FUN_0046c35c(g_aocSystem, 0x23, 2) + count) {
+    if (index < groupedFileTablesCountRecordsOfKind(g_aocSystem, 0x23, 2) + count) {
         return contentEntryGetFromFiles2(g_aocSystem, index - count);
     }
     return NULL;

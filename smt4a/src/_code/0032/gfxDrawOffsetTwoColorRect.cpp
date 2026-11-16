@@ -17,7 +17,7 @@ inline u32 swapColorBytes(u32 color)
 extern "C" {
 extern RenderCtxA* g_renderCtx;
 extern DrawOffset g_uiDrawOffset;
-u32 FUN_001692ac(u32 value, bool enabled);
+u32 renderCtxPackPassFlags(u32 value, bool enabled);
 void FUN_0014e314(u32 first, u32 second, u32 third, u32 fourth,
                  f32 x, f32 y, f32 width, f32 height, f32 depth);
 
@@ -30,7 +30,7 @@ void gfxDrawOffsetTwoColorRect(s32 x, s32 y, s32 width, s32 height, u32 firstCol
     const s32 screenY = static_cast<s32>(static_cast<f32>(y) + offset.y);
     const u32 first = swapColorBytes(firstColor);
     const u32 second = swapColorBytes(secondColor);
-    const u32 state = FUN_001692ac(1, true);
+    const u32 state = renderCtxPackPassFlags(1, true);
     renderStackPush(&context->stackA, state);
     renderCtxSelectTexture(g_renderCtx, 0);
     FUN_0014e314(first, first, second, second,

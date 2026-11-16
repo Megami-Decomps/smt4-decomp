@@ -118,7 +118,7 @@ void FUN_002f6048(int param_1)
   temp_v6 = vec2GetYInt(temp_v14);
   temp_v6 = temp_v6 + *(short *)(temp_v2 + 10);
   efctSetSpeed();
-  FUN_001835b4(2,0x1e,0x51,temp_v15,temp_v6,0xa6);
+  texDrawTableEntryAtStoredOrigin(2,0x1e,0x51,temp_v15,temp_v6,0xa6);
   partyDrawCategorySelectionIcon(temp_v13,temp_v15 + 1,temp_v6 + 1,0xa6);
   temp_v6 = vec2GetXInt(temp_v14);
   temp_v1 = *(short *)(temp_v2 + 8);

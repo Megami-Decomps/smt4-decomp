@@ -2,13 +2,13 @@
 
 extern "C" {
 
-extern void FUN_00312d6c(void);
+extern void mapSelectRoomMusicIfActive(void);
 extern void lmapMainCallIfActive(void);
 
-/* Script command: runs FUN_00312d6c and lmapMainCallIfActive. */
+/* Script command: runs mapSelectRoomMusicIfActive and lmapMainCallIfActive. */
 u32 scrCommLmapRefresh(void)
 {
-    FUN_00312d6c();
+    mapSelectRoomMusicIfActive();
     lmapMainCallIfActive();
     return 1;
 }

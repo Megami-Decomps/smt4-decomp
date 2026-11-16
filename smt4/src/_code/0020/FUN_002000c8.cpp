@@ -14,7 +14,7 @@ int FUN_002597c0(void);
 int objectFlagsClear(unsigned int, int);
 int saveGetMapFlag(int, int);
 int scrScriptProcessStartEntry(...);
-int FUN_00297060(void);
+int scrScriptProcessCreate(void);
 int gameGetUnitRecord(...);
 int buttonHelpSetPreset(int);
 int FUN_002bd2b4(unsigned int, int, int);
@@ -35,7 +35,7 @@ extern int cecQueryOptionalProcess(void);
 /* Supplied declaration required: objectFlagsClear. */
 /* Supplied declaration required: saveGetMapFlag. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_00297060. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 extern int messageMainGetChoiceResult(void);
 extern int flagWordTestBit(unsigned int, unsigned int);
 /* Supplied declaration required: gameGetUnitRecord. */
@@ -67,7 +67,7 @@ unsigned int FUN_002000c8(int *param_1,int param_2)
       param_2 = *(int *)(temp_v4 + 0xc);
     }
     if (temp_v3 != 0 && param_2 != 0) {
-      FUN_00297060();
+      scrScriptProcessCreate();
       *(int *)(temp_v4 + 4) = temp_v3;
       *(unsigned int *)(temp_v3 + 0x108) = 2;
       *(unsigned char *)(temp_v4 + 0x3d) = 1;

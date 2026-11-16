@@ -22,7 +22,7 @@ s32 widgetSubCallIfVisible(ScrollList *list);
 s32 FUN_002a4878(ScrollList *list);
 s32 FUN_002a4894(ScrollList *list);
 void scrollOwnerSelectIndex(ScrollList *list, s32 value);
-void FUN_002a4964(ScrollList *list, s32 value);
+void scrollListSetSelectionTracked(ScrollList *list, s32 value);
 void eventQueueAddUnique(u32 event);
 
 /* Handles a touch on a scrolling list: the previous/next controls move one step, a touch on the
@@ -47,7 +47,7 @@ u32 FUN_002e2848(ScrollList *list, ScrollPoint touch, ScrollPoint barSize, s32 b
         if (horizontal != 0) {
             scrollOwnerSelectIndex(list, position - 1);
         } else {
-            FUN_002a4964(list, position - 1);
+            scrollListSetSelectionTracked(list, position - 1);
         }
     } else if (nextMode == 6 || nextMode == 2) {
         s32 position = resourceRunOperationIfUnblocked(list) + FUN_002a4894(list) + 1;
@@ -61,7 +61,7 @@ u32 FUN_002e2848(ScrollList *list, ScrollPoint touch, ScrollPoint barSize, s32 b
             if (objectApplyIfUnblocked(list) <= position) {
                 return 1;
             }
-            FUN_002a4964(list, position);
+            scrollListSetSelectionTracked(list, position);
         }
     } else {
         if (barMode == 0) {
@@ -85,7 +85,7 @@ u32 FUN_002e2848(ScrollList *list, ScrollPoint touch, ScrollPoint barSize, s32 b
         if (FUN_002a4894(list) + resourceRunOperationIfUnblocked(list) != target && playSound != 0) {
             eventQueueAddUnique(0x100020d);
         }
-        FUN_002a4964(list, target);
+        scrollListSetSelectionTracked(list, target);
         return 1;
     }
     if (playSound != 0) {

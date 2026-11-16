@@ -26,8 +26,8 @@ typedef struct PlayerSelections {
 extern CampSelectors *g_camp; /* 0x57f108 */
 
 extern PlayerSelections *gameGetPlayerData(void);
-extern void FUN_00203b40(u8 *widget, s32 count, s32 columns, s32 a, s32 b, s32 c);
-extern void FUN_002a4964(u8 *widget, s32 index);
+extern void gridNavigationConfigure(u8 *widget, s32 count, s32 columns, s32 a, s32 b, s32 c);
+extern void scrollListSetSelectionTracked(u8 *widget, s32 index);
 extern void FUN_003d0bc0(s32 id);
 extern void objClearFlagPair(u8 *widget);
 
@@ -115,7 +115,7 @@ void campSelectorRebuildList(s32 id)
             list[count++] = i;
         }
     }
-    FUN_00203b40(widget, count, 9, 1, 1, 0);
+    gridNavigationConfigure(widget, count, 9, 1, 1, 0);
     FUN_003d0bc0(id);
     index = 0;
     for (i = 0; i < count + 1; i++) {
@@ -123,7 +123,7 @@ void campSelectorRebuildList(s32 id)
             index = i;
         }
     }
-    FUN_002a4964(widget, index);
+    scrollListSetSelectionTracked(widget, index);
     objClearFlagPair(widget);
 }
 

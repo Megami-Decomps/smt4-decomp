@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern void FUN_002ae9ec(s32 a, s32 b, s32 kind, u32 arg1, u32 arg2, u32 arg3);
+extern void texTableRecordCallWithParams(s32 a, s32 b, s32 kind, u32 arg1, u32 arg2, u32 arg3);
 
 /* Maps a request id (1..10) to its code and forwards it; id 0 does nothing. */
 void requestForward(s32 id, u32 arg1, u32 arg2, u32 arg3)
@@ -45,7 +45,7 @@ void requestForward(s32 id, u32 arg1, u32 arg2, u32 arg3)
         kind = 0x23;
         break;
     }
-    FUN_002ae9ec(2, 0x13, kind, arg1, arg2, arg3);
+    texTableRecordCallWithParams(2, 0x13, kind, arg1, arg2, arg3);
 }
 
 } /* extern "C" */

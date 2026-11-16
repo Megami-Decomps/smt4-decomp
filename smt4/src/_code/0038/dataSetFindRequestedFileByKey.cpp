@@ -2,9 +2,9 @@
 #include <stddef.h>
 
 extern "C" {
-bool FUN_002ac12c(DataEntry *entry);
-DataRow *FUN_002ac0f8(DataEntry *entry);
-u32 FUN_002ac0c4(DataEntry *entry);
+bool packageEntryIsLoaded(DataEntry *entry);
+DataRow *packageEntryGetDirectory(DataEntry *entry);
+u32 packageEntryGetFileCount(DataEntry *entry);
 
 u32 dataSetFindRequestedFileByKey(DataSet *set, u32 key)
 {
@@ -17,9 +17,9 @@ u32 dataSetFindRequestedFileByKey(DataSet *set, u32 key)
     typedef char KeyedDataRowLayoutCheck[sizeof(KeyedDataRowView) == 0x40 && offsetof(KeyedDataRowView, key) == 0x3c ? 1 : -1];
     for (s32 entryIndex = 0; entryIndex < set->entryCount; ++entryIndex) {
         DataEntry *entry = &set->entries[entryIndex];
-        if (FUN_002ac12c(entry)) {
-            const KeyedDataRowView *rows = (const KeyedDataRowView *)FUN_002ac0f8(entry);
-            u32 count = FUN_002ac0c4(entry);
+        if (packageEntryIsLoaded(entry)) {
+            const KeyedDataRowView *rows = (const KeyedDataRowView *)packageEntryGetDirectory(entry);
+            u32 count = packageEntryGetFileCount(entry);
             for (u32 row = 0; row < count; ++row) {
                 const KeyedDataRowView *candidate = &rows[row];
                 if (candidate->type == 3 && candidate->key == key && entry->files[row].status.requested != 0) {

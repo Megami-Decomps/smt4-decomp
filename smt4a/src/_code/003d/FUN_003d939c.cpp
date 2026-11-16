@@ -156,7 +156,7 @@ void FUN_003d939c(int param_1)
                                               (unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v13 = (float)VectorSignedToFloat((int)*(short *)(temp_v9 + 8),
                                               (unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_001835b4(2,0x10,temp_v6 + 0x4269,(int)(temp_v12 + (float)temp_v14 + temp_v13),
+          texDrawTableEntryAtStoredOrigin(2,0x10,temp_v6 + 0x4269,(int)(temp_v12 + (float)temp_v14 + temp_v13),
                        *(short *)(temp_v9 + 10) + temp_v8,0xc9);
           temp_v9 = g_renderCtx;
           temp_v3 = packNibblesAndByte(6,7,0);
@@ -237,7 +237,7 @@ void FUN_003d939c(int param_1)
     }
     temp_v12 = (float)VectorSignedToFloat((int)((unsigned long long)temp_v14 >> 0x20),
                                         (unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_001835b4(2,0x10,temp_v11,(int)(temp_v12 + (float)temp_v14),temp_v5,0xc9);
+    texDrawTableEntryAtStoredOrigin(2,0x10,temp_v11,(int)(temp_v12 + (float)temp_v14),temp_v5,0xc9);
     temp_v8 = g_renderCtx;
     temp_v6 = packNibblesAndByte(6,7,0);
     piVar11 = (int *)(temp_v8 + 0x12b8);
@@ -365,7 +365,7 @@ void FUN_003d939c(int param_1)
     }
     temp_v12 = (float)VectorSignedToFloat((int)((unsigned long long)temp_v14 >> 0x20),
                                         (unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_001835b4(2,0x10,temp_v11,(int)(temp_v12 + (float)temp_v14),temp_v5,0xc9);
+    texDrawTableEntryAtStoredOrigin(2,0x10,temp_v11,(int)(temp_v12 + (float)temp_v14),temp_v5,0xc9);
     temp_v8 = g_renderCtx;
     temp_v6 = packNibblesAndByte(6,7,0);
     piVar11 = (int *)(temp_v8 + 0x12b8);
@@ -386,7 +386,7 @@ LAB_003d9da8:
     temp_v11 = vec2GetYInt(param_1 + 0x20);
     efctSetSpeed();
     temp_v12 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_001835b4(2,0x10,temp_v10,(int)(temp_v12 + in_s0),temp_v11,0xc9);
+    texDrawTableEntryAtStoredOrigin(2,0x10,temp_v10,(int)(temp_v12 + in_s0),temp_v11,0xc9);
     efctSetSpeed();
     break;
   case 0x13:
@@ -406,7 +406,7 @@ LAB_003d9da8:
       }
       temp_v12 = (float)VectorSignedToFloat((int)((unsigned long long)temp_v14 >> 0x20),
                                           (unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_001835b4(2,0x10,temp_v11,(int)(temp_v12 + (float)temp_v14),temp_v5,0xc9);
+      texDrawTableEntryAtStoredOrigin(2,0x10,temp_v11,(int)(temp_v12 + (float)temp_v14),temp_v5,0xc9);
       temp_v8 = g_renderCtx;
       temp_v6 = packNibblesAndByte(6,7,0);
       piVar11 = (int *)(temp_v8 + 0x12b8);

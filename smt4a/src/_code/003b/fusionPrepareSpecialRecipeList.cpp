@@ -38,7 +38,7 @@ extern "C" {
 extern UniteWork *g_unite;
 void soundChannelRequestIfEnabled(u32 channel, u32 mode, u32 duration);
 u32 fusionListAvailableSpecialRecipes(void *context, u16 *recipes);
-void FUN_00203b40(ScrollSelection *list, s32 count, s32 visible, s32 columns,
+void gridNavigationConfigure(ScrollSelection *list, s32 count, s32 visible, s32 columns,
                   s32 enable, s32 colors);
 FusionRecipeEntry *contentEntryFindById(u32 id);
 u32 FUN_004dad8c(void *context);
@@ -55,7 +55,7 @@ void fusionPrepareSpecialRecipeList()
 {
     UniteWork *work = g_unite;
     FusionRecipeWorkView *recipes = reinterpret_cast<FusionRecipeWorkView *>(work);
-    FusionSavedSelection *selection = &reinterpret_cast<FusionSavedPreferences *>(FUN_0026140c())->selection;
+    FusionSavedSelection *selection = &reinterpret_cast<FusionSavedPreferences *>(saveGetUserSettingsBlock())->selection;
     soundChannelRequestIfEnabled(recipes->soundChannel, 0, 60);
     if (selection->slots[0] >= 0) {
         const SlotRecord *slot = gameGetSlotRecord(selection->slots[0]);
@@ -73,8 +73,8 @@ void fusionPrepareSpecialRecipeList()
     }
     u32 count = fusionListAvailableSpecialRecipes(work->context, recipes->recipeIds);
     recipes->count = (u16)count;
-    FUN_00203b40(&recipes->list, count, 10, 1, 1, 1);
-    FUN_00203b40(&recipes->pages, recipes->count, 1, 4, 1, 1);
+    gridNavigationConfigure(&recipes->list, count, 10, 1, 1, 1);
+    gridNavigationConfigure(&recipes->pages, recipes->count, 1, 4, 1, 1);
     work->candidates.count = 0;
     for (s32 index = 0; index < recipes->count; ++index) {
         work->candidates.devilIds[index] =

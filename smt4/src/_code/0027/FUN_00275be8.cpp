@@ -24,11 +24,11 @@ struct TiledFrameView {
 }
 extern "C" {
 extern FrameWork *g_frameTex;
-void FUN_002bd954(UiSpriteState *sprite, s32 group, s32 image, UiResourceParameters *parameters, s32 flags, f32 scale);
+void uiSpriteStateInitFromSource(UiSpriteState *sprite, s32 group, s32 image, UiResourceParameters *parameters, s32 flags, f32 scale);
 void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 key, s32 mode);
 void FUN_002a9fdc(UiSpriteState *sprite, s32 key, s32 mode);
-void FUN_00295eb0(UiSpriteState *sprite, s32 group, s32 image);
-void FUN_002bf810(u32 sound);
+void uiStoreTextureEntryCenter(UiSpriteState *sprite, s32 group, s32 image);
+void soundPlaySeUnpanned(u32 sound);
 
 // Reset, open or close the tiled frame-texture transition and initialize its 24 animated tiles.
 void FUN_00275be8(s32 mode)
@@ -55,21 +55,21 @@ void FUN_00275be8(s32 mode)
         work->scaleY = 0.25f;
         work->duration = 20.0f;
         work->active = 1;
-        FUN_002bd954(&work->frame, 0x1D, 2000, &work->parameters, 0xB, 1.0f);
+        uiSpriteStateInitFromSource(&work->frame, 0x1D, 2000, &work->parameters, 0xB, 1.0f);
         uiSpriteSetImageKeyframe(&work->frame, 0, 0);
-        FUN_002bd954(&work->overlay, 0x1D, 2000, &work->parameters, 0xB, 1.0f);
+        uiSpriteStateInitFromSource(&work->overlay, 0x1D, 2000, &work->parameters, 0xB, 1.0f);
         spriteStartAnimationByIndex(&work->overlay, 0);
         s8 tileKinds[24] = {0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0,
                             0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0};
         for (s32 index = 0; index < 24; ++index) {
-            FUN_002bd954((&work->tiles[index]), 0x1D, tileKinds[index] + 0x7D1, &work->parameters, 0xB, 1.0f);
+            uiSpriteStateInitFromSource((&work->tiles[index]), 0x1D, tileKinds[index] + 0x7D1, &work->parameters, 0xB, 1.0f);
             FUN_002a9fdc((&work->tiles[index]), 0, 0);
-            FUN_00295eb0((&work->tiles[index]), 0x1D, index + 0x7D5);
+            uiStoreTextureEntryCenter((&work->tiles[index]), 0x1D, index + 0x7D5);
         }
         break;
     }
     case 2:
-        FUN_002bf810(0x100025B);
+        soundPlaySeUnpanned(0x100025B);
         work->elapsed = 0;
         work->closing = 1;
         work->duration = 7.0f;

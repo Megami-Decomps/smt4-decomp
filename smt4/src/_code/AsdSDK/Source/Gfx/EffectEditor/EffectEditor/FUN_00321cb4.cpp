@@ -11,10 +11,10 @@ int FUN_00249678(void);
 int FUN_0024c418(void);
 int asdDebugLog(...);
 int padAlternateButtonIndex(...);
-int FUN_0028836c(void);
+int libm_sinf(void);
 int FUN_002a2c00(void);
 int phaseCosInterpolate(void);
-int FUN_002b70cc(void);
+int mathSinFixedAngle(void);
 int padIsButtonRepeat(...);
 int padIsButtonPressed(...);
 int memAlloc(int, int, int, int, int, int);
@@ -101,10 +101,10 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: asdDebugLog. */
 /* Supplied declaration required: padAlternateButtonIndex. */
 /* Supplied declaration required: effMenuListAppend. */
-/* Supplied declaration required: FUN_0028836c. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_002a2c00. */
 /* Supplied declaration required: phaseCosInterpolate. */
-/* Supplied declaration required: FUN_002b70cc. */
+/* Supplied declaration required: mathSinFixedAngle. */
 /* Supplied declaration required: padIsButtonRepeat. */
 /* Supplied declaration required: padIsButtonPressed. */
 /* Supplied declaration required: memAlloc. */
@@ -308,7 +308,7 @@ LAB_00321f54:
     temp_v17 = (float)in_d9;
     temp_v18 = temp_v15 * temp_v20 * temp_v19;
     temp_v15 = temp_v18;
-    FUN_002b70cc();
+    mathSinFixedAngle();
     temp_v30 = temp_v16 + temp_v18 * temp_v21;
     phaseCosInterpolate();
     if (DAT_0044ea82 == temp_v10) {
@@ -387,14 +387,14 @@ LAB_00321f54:
   temp_v29 = temp_v26 - temp_v19 * temp_v24;
   temp_v30 = temp_v27;
   temp_v19 = temp_v20;
-  FUN_002b70cc();
+  mathSinFixedAngle();
   temp_v31 = temp_v28 - temp_v20 * temp_v24;
   FUN_00243224(&temp_v29,&temp_v26,0xff00c0c0,0);
   temp_v20 = temp_v19;
   phaseCosInterpolate();
   temp_v29 = temp_v21 + temp_v19 * temp_v24;
   temp_v30 = (float)((unsigned long long)in_d10 >> 0x20);
-  FUN_002b70cc();
+  mathSinFixedAngle();
   temp_v31 = (float)in_d10 + temp_v20 * temp_v24;
   DAT_004ea92c = (float)temp_v25;
   DAT_004ea934 = (float)temp_v23;
@@ -418,7 +418,7 @@ LAB_00321f54:
   DAT_004ea930 = temp_v16;
   if ((temp_v12 & 2) != 0) {
     FUN_0024c418();
-    FUN_0028836c();
+    libm_sinf();
     FUN_003f6b88();
     VectorSignedToFloat((int)DAT_0044ea84,(unsigned char)(temp_v14 >> 0x16) & 3);
     temp_v24 = DAT_004ea91c;

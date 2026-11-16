@@ -16,7 +16,7 @@ bool aocRunByName(u32 arg0, u32 name, u32 arg2, int checked);
 Table00Record *dataTable00FindById(s32 id);
 DevilModelView *devilGetRecord(u32 id);
 s32 FUN_002a5ee4(AocSystem *system, s32 table, u32 entry, s32 flags);
-s32 FUN_002c58c8(s32 table, u32 entry);
+s32 asdTMTexTablePrepareNodeImage(s32 table, u32 entry);
 s32 FUN_0032c3fc(BattleTalkBustUpPrefixIV *bustUp);
 s32 panelSetupButtons(BattleTalkBustUpPrefixIV *bustUp);
 
@@ -45,7 +45,7 @@ void btlTalkBustUpSetDemonTexture(s32 devilId, s32 asynchronous)
         if (aocRunByName(reinterpret_cast<u32>(g_aocSystem), 0x18, bustUp->textureEntry, 1) != 0)
             FUN_002ae8e4(reinterpret_cast<u32>(g_aocSystem), 0x18, bustUp->textureEntry, 0x10000);
         else
-            FUN_002c58c8(0x18, bustUp->textureEntry);
+            asdTMTexTablePrepareNodeImage(0x18, bustUp->textureEntry);
 
         FUN_0032c3fc(bustUp);
         panelSetupButtons(bustUp);

@@ -10,7 +10,7 @@ extern "C" {
 
 int textFormatBuffer(...);
 int textDrawString(...);
-int FUN_00164b5c(int, int, int, unsigned int, unsigned int, int);
+int texDrawCompositeSprite(int, int, int, unsigned int, unsigned int, int);
 int vec2GetYInt(int);
 int efctSetSpeed(void);
 int renderCtxResetColorScale(...);
@@ -39,11 +39,11 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: FUN_00164b5c. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: efctSetSpeed. */
-extern int FUN_001692ac(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
@@ -89,9 +89,9 @@ void FUN_002027fc(void)
   if (g_config == 0) {
     return;
   }
-  FUN_00157558(reinterpret_cast<RenderCtxA *>(g_renderCtx));
+  renderCtxSelectDisplayAreaForStereoMode(reinterpret_cast<RenderCtxA *>(g_renderCtx));
   temp_v5 = g_renderCtx;
-  temp_v1 = FUN_001692ac(1,0);
+  temp_v1 = renderCtxPackPassFlags(1,0);
   piVar15 = (int *)(temp_v5 + 0x1258);
   temp_v2 = *piVar15;
   temp_v10 = piVar15[temp_v2 + 2];
@@ -106,8 +106,8 @@ void FUN_002027fc(void)
   temp_v3 = vec2GetXInt(reinterpret_cast<const void *>(temp_v0 + 0xe8));
   temp_v4 = vec2GetYInt(temp_v0 + 0xe8);
   efctSetSpeed();
-  FUN_00164b5c(2,0x24,0,temp_v3,temp_v4,0xb);
-  FUN_00164b5c(2,0x24,0xd,temp_v3,temp_v4,0xb);
+  texDrawCompositeSprite(2,0x24,0,temp_v3,temp_v4,0xb);
+  texDrawCompositeSprite(2,0x24,0xd,temp_v3,temp_v4,0xb);
   efctSetSpeed();
   temp_v3 = dataTableGet(0x36,0);
   temp_v5 = dataTableGetEntries();
@@ -155,14 +155,14 @@ void FUN_002027fc(void)
           temp_v11 = 0;
           if ((temp_v14 || temp_v15) || temp_v16) {
             do {
-              FUN_001835b4(2,0x24,temp_v11 + 0x91,*(short *)(temp_v8 + 8) + temp_v7,
+              texDrawTableEntryAtStoredOrigin(2,0x24,temp_v11 + 0x91,*(short *)(temp_v8 + 8) + temp_v7,
                            *(short *)(temp_v8 + 10) + temp_v13,0x15);
               temp_v11 = temp_v11 + 1;
             } while (temp_v11 < 4);
           }
           else {
             do {
-              FUN_001835b4(2,0x24,temp_v11 + 0x70,*(short *)(temp_v8 + 8) + temp_v7,
+              texDrawTableEntryAtStoredOrigin(2,0x24,temp_v11 + 0x70,*(short *)(temp_v8 + 8) + temp_v7,
                            *(short *)(temp_v8 + 10) + temp_v13,0x15);
               temp_v11 = temp_v11 + 1;
             } while (temp_v11 < 4);

@@ -6,7 +6,7 @@
 
 extern "C" {
 s32 idSetFindSubjectIndex(BtlMainState *state, BtlActionRecord *action);
-MaterialMergeVariants *FUN_0027da30(BtlMainState *state, s32 member);
+MaterialMergeVariants *btlFindEntryBlockByMemberId(BtlMainState *state, s32 member);
 u32 FUN_00337ba0(BtlMainState *state, s16 selection, u16 kind);
 void FUN_00340ad4(BattleSpritePlacement *placement, u32 mask, u32 flags, u32 variant);
 void FUN_00340c90(BattleSpritePlacement *placement);
@@ -21,7 +21,7 @@ u32 FUN_003db0c0(MaterialMergeOwner *owner, BtlActionRecord *action)
     if (variantIndex < 0) {
         variantIndex = 0;
     }
-    MaterialMergeVariants *variants = FUN_0027da30(state, action->memberId);
+    MaterialMergeVariants *variants = btlFindEntryBlockByMemberId(state, action->memberId);
     u16 kind = variants->identity.kind;
     s32 key = variants->keys[variantIndex];
     for (s32 i = 0; i < 50; ++i) {

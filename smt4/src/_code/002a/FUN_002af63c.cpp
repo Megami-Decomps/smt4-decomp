@@ -8,7 +8,7 @@ int FUN_002a8a58(float *, unsigned int);
 int FUN_002a8ac4(...);
 int quadSetOrderedVectors(...);
 int phaseCosInterpolate(void);
-int FUN_002b70cc(void);
+int mathSinFixedAngle(void);
 int FUN_002b76d0(...);
 int cameraSetViewMatrix(...);
 int renderCtxCalculateStereoParallax(...);
@@ -78,7 +78,7 @@ extern unsigned int DAT_004d4914; /* 0x4d4914 */
 /* Supplied declaration required: FUN_002a8ac4. */
 /* Supplied declaration required: quadSetOrderedVectors. */
 /* Supplied declaration required: phaseCosInterpolate. */
-/* Supplied declaration required: FUN_002b70cc. */
+/* Supplied declaration required: mathSinFixedAngle. */
 /* Supplied declaration required: FUN_002b76d0. */
 /* Supplied declaration required: cameraSetViewMatrix. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
@@ -395,7 +395,7 @@ LAB_002af7a0:
           if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1e,0)) {
             temp_v17 = temp_v16 * 2.0f * -3.1415927f * temp_v17 * 40.743664f;
             temp_v16 = temp_v17;
-            FUN_002b70cc();
+            mathSinFixedAngle();
             temp_v18 = (float)VectorSignedToFloat(param_3[2],(unsigned char)(in_fpscr >> 0x16) & 3);
             param_3[2] = (int)(temp_v18 - temp_v17 * temp_v15);
             phaseCosInterpolate();

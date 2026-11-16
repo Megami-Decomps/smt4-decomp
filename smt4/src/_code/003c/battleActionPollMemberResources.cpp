@@ -15,9 +15,9 @@ extern "C" {
 extern void *g_btlUiBlock;
 extern BattleVersionResources *DAT_00435d18;
 s32 idSetFindSubjectIndex(BtlMainState *state, const BtlActionRecord *action);
-BattleMemberResources *FUN_0027da30(BtlMainState *state, s32 memberId);
+BattleMemberResources *btlFindEntryBlockByMemberId(BtlMainState *state, s32 memberId);
 s32 entryContainsIdentifier(BtlMainState *state, u32 id);
-u32 FUN_00294090(u32 id, s32 mode);
+u32 eventResourceCacheAcquire(u32 id, s32 mode);
 void resourceSlotsInsert(BtlMainState *state, u32 handle);
 void entryAddUniqueIdentifier(BtlMainState *state, s16 id);
 s32 nkdwHeaderParse(u32 handle);
@@ -46,12 +46,12 @@ void battleActionPollMemberResources(BtlMainState *state, BtlActionRecord *actio
             s32 index = idSetFindSubjectIndex(state, action);
             if (index < 0)
                 index = 0;
-            BattleMemberResources *resources = FUN_0027da30(state, action->memberId);
+            BattleMemberResources *resources = btlFindEntryBlockByMemberId(state, action->memberId);
             if (entryContainsIdentifier(state, resources->identifiers[index])) {
                 action->flags |= 0x300;
             } else {
                 action->flags &= ~0x300u;
-                u32 handle = FUN_00294090(resources->identifiers[index], 1);
+                u32 handle = eventResourceCacheAcquire(resources->identifiers[index], 1);
                 resourceSlotsInsert(state, handle);
                 entryAddUniqueIdentifier(state, (s16)resources->identifiers[index]);
             }
@@ -60,8 +60,8 @@ void battleActionPollMemberResources(BtlMainState *state, BtlActionRecord *actio
         s32 index = idSetFindSubjectIndex(state, action);
         if (index < 0)
             index = 0;
-        BattleMemberResources *resources = FUN_0027da30(state, action->memberId);
-        u32 handle = (u32)FUN_0027d9e8(state, resources->identifiers[index]);
+        BattleMemberResources *resources = btlFindEntryBlockByMemberId(state, action->memberId);
+        u32 handle = (u32)idSlotsFindEntryById(state, resources->identifiers[index]);
         bool ready = true;
         if (!(action->flags & 0x100)) {
             if (nkdwHeaderParse(handle)) {

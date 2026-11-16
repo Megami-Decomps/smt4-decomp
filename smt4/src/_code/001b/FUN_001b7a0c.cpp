@@ -7,11 +7,11 @@ extern "C" {
 
 int CONCAT44(...);
 int randomGetNormalizedFloat(void);
-int FUN_0027da30(...);
-int FUN_00281e34(void);
+int btlFindEntryBlockByMemberId(...);
+int __hardfp_atan2f(void);
 int btlMainFindEntryByListedId(unsigned char *, int);
 int asdAnimGetTrackLastFrame(unsigned int, int);
-int FUN_002b70cc(void);
+int mathSinFixedAngle(void);
 int FUN_003c14e8(...);
 int battleActionPollMemberResources(unsigned char *, int);
 int VectorFloatToUnsigned(...);
@@ -35,16 +35,16 @@ extern int g_btlMain; /* 0x4342c8 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: randomGetNormalizedFloat. */
-extern unsigned int FUN_0027d9e8(unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_0027da30. */
+extern unsigned int idSlotsFindEntryById(unsigned char *, unsigned int);
+/* Supplied declaration required: btlFindEntryBlockByMemberId. */
 extern int idSetFindSubjectIndex(unsigned char *, int);
 extern int FUN_0027db08(unsigned int);
-/* Supplied declaration required: FUN_00281e34. */
+/* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: asdAnimGetTrackLastFrame. */
 extern int randBetween(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002b70cc. */
+/* Supplied declaration required: mathSinFixedAngle. */
 extern unsigned char *jobGetWork(void);
 /* Supplied declaration required: FUN_003c14e8. */
 /* Supplied declaration required: battleActionPollMemberResources. */
@@ -99,7 +99,7 @@ unsigned int FUN_001b7a0c(void)
       temp_v18 = temp_v16;
     }
     if (!temp_v13) {
-      FUN_00281e34();
+      __hardfp_atan2f();
       temp_v18 = temp_v14;
     }
     in_s0 = 3.1415927f;
@@ -117,7 +117,7 @@ unsigned int FUN_001b7a0c(void)
         temp_v1 = 0;
       }
       pbVar4 = pbVar1;
-      FUN_0027da30(pbVar1,(int)*(short *)(temp_v10 + 0x62));
+      btlFindEntryBlockByMemberId(pbVar1,(int)*(short *)(temp_v10 + 0x62));
       if ((pbVar4 != (unsigned char *)0x0) && ((*(unsigned short *)(pbVar4 + 0xfa) & 0x10) != 0)) {
         temp_v2 = *(int *)(temp_v10 + 0x98) + 1;
         *(unsigned int *)(temp_v10 + 0x98) = temp_v2;
@@ -133,7 +133,7 @@ unsigned int FUN_001b7a0c(void)
         if ((*(unsigned int *)(temp_v10 + 0x50) & 2) != 0) {
           *(unsigned int *)(temp_v10 + 0xa0) = 0;
           *(int *)(temp_v10 + 0xa4) = (int)((unsigned long long)temp_v17 >> 0x20);
-          temp_v4 = FUN_0027d9e8(pbVar1,*(unsigned int *)(pbVar4 + temp_v1 * 4 + 0xc));
+          temp_v4 = idSlotsFindEntryById(pbVar1,*(unsigned int *)(pbVar4 + temp_v1 * 4 + 0xc));
           *(short *)(temp_v10 + 0x5a) = *(short *)(temp_v10 + 0x5a) + 2;
           asdAnimGetTrackLastFrame(temp_v4,0);
           in_s0 = (float)(int)in_s0;
@@ -152,7 +152,7 @@ unsigned int FUN_001b7a0c(void)
           *(unsigned int *)(temp_v10 + 0x110) = 0;
           *(unsigned int *)(temp_v10 + 0x4c) = 0;
           temp_v1 = reinterpret_cast<int>(btlGetMainState());
-          FUN_0027da30(temp_v1,(int)*(short *)(temp_v10 + 0x62));
+          btlFindEntryBlockByMemberId(temp_v1,(int)*(short *)(temp_v10 + 0x62));
           if (temp_v1 != 0) {
             if ((*(unsigned short *)(temp_v1 + 0xfa) & 0x180) != 0) {
               reinterpret_cast<int>(btlGetMainState());
@@ -305,7 +305,7 @@ unsigned int FUN_001b7a0c(void)
         temp_v16 = (float)VectorUnsignedToFloat(*(unsigned int *)(temp_v10 + 0xa0),(unsigned char)(in_fpscr >> 0x16) & 3)
         ;
         temp_v18 = ((temp_v18 * (float)temp_v20) / temp_v16) * (float)((unsigned long long)temp_v19 >> 0x20);
-        FUN_002b70cc();
+        mathSinFixedAngle();
         in_s0 = ((float)temp_v17 - temp_v18) * *(float *)(temp_v10 + 0xdc);
         *(float *)(temp_v10 + 0xa4) = in_s0;
         if ((int)in_s0 < 0x3d4ccccd) {

@@ -48,7 +48,7 @@ int FUN_00275dc4(void);
 int mapClearPendingEntries(void);
 int naviClearObjectBlock(void);
 int FUN_00287c34(int);
-int FUN_00289880(void);
+int commonBgStopChildAndBeginTransition(void);
 int FUN_0028a420(int);
 int infoWinStartTimer(int);
 int messageMainFinishWindow(void);
@@ -112,7 +112,7 @@ extern unsigned short flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: infoWinSetMessage. */
 extern int screenFadeIsBusy(void);
 /* Supplied declaration required: FUN_00287c34. */
-/* Supplied declaration required: FUN_00289880. */
+/* Supplied declaration required: commonBgStopChildAndBeginTransition. */
 /* Supplied declaration required: FUN_0028a420. */
 /* Supplied declaration required: infoWinStartTimer. */
 /* Supplied declaration required: messageMainFinishWindow. */
@@ -297,7 +297,7 @@ void FUN_003ba998(int param_1)
       *(unsigned short *)(param_1 + 0x4c) = temp_v2;
     }
     FUN_00275be8(0);
-    FUN_00289880();
+    commonBgStopChildAndBeginTransition();
     objBlockInitAndMark(param_1 + 0x9c);
     FUN_0022b6c4(param_1 + 0x9c);
     *(unsigned char *)(param_1 + 0x6cc) = 0;

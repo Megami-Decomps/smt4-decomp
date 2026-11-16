@@ -6,7 +6,7 @@ extern "C" {
 u32 scrGetArg(u32 index);
 void scrSetResult(s32 result);
 s32 btlScriptResolveGroupArg(s32 kind);
-void FUN_002499fc(s32 kind, u32 *first, u32 *count);
+void btlSideGetEntryRange(s32 kind, u32 *first, u32 *count);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 
 u32 scrCommBattleGroupHasNegativeStat()
@@ -23,7 +23,7 @@ u32 scrCommBattleGroupHasNegativeStat()
     }
     s32 group = btlScriptResolveGroupArg((s32)scrGetArg(2));
     s32 first, count;
-    FUN_002499fc(group, (u32 *)&first, (u32 *)&count);
+    btlSideGetEntryRange(group, (u32 *)&first, (u32 *)&count);
     for (s32 index = first; index < first + count; ++index) {
         const BtlEntry *entry = &btlGetMainState()->entries[index];
         u32 flags = entry->flags;

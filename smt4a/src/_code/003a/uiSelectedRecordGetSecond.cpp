@@ -11,7 +11,7 @@ u32 uiSelectedRecordGetSecond(void)
     if (owner->index < 0) {
         return 0;
     }
-    return FUN_002613f0(owner->index)->values[1];
+    return saveGetSelectedRecordSlot(owner->index)->values[1];
 }
 
 } /* extern "C" */

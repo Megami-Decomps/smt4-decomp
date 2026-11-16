@@ -27,8 +27,8 @@ struct CaptureJobWork {
 
 extern "C" {
 extern void *g_renderCtx;
-void FUN_00157558(void *context);
-u8 FUN_00154edc(u32 mode, CaptureSurface *surface);
+void renderCtxSelectDisplayAreaForStereoMode(void *context);
+u8 gxCopyFramebufferToSurface(u32 mode, CaptureSurface *surface);
 void surfaceCopy(CaptureSurface *destination, CaptureSurface *source);
 
 static __inline bool captureIsPending(const CaptureState *capture)
@@ -45,10 +45,10 @@ u32 FUN_0013ee80(u32 job)
     if (!captureIsPending(&work->capture)) {
         return 0;
     }
-    FUN_00157558(g_renderCtx);
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     work->surface->width = 0x200;
     work->surface->height = 0x200;
-    work->capture.result = FUN_00154edc(0, work->surface);
+    work->capture.result = gxCopyFramebufferToSurface(0, work->surface);
     surfaceCopy(work->surface, work->surface);
     work->surface->width >>= 1;
     work->surface->height >>= 1;

@@ -16,7 +16,7 @@ extern "C" {
 
 extern GameStateA g_gameState;
 
-s32 FUN_00163aa4(u8 *sprite, f32 speed);
+s32 uiSpriteAdvanceAnimation(u8 *sprite, f32 speed);
 s32 vec2GetXInt(u8 *sprite);
 s32 vec2GetYInt(u8 *sprite);
 void pointConvertToFloat(u8 *point, s32 x, s32 y);
@@ -40,7 +40,7 @@ void _ZN9Obj53230012FUN_0048bd2cEv(EnemyPopup *popup)
         break;
     case 1:
         sprite = popup->sprite;
-        if (FUN_00163aa4(sprite, 1.0f) != 0 && FUN_002e19f8() != 0) {
+        if (uiSpriteAdvanceAnimation(sprite, 1.0f) != 0 && FUN_002e19f8() != 0) {
             popup->state = 2;
             popup->flags |= 2;
         }

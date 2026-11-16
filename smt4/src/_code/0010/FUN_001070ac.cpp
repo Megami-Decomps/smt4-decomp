@@ -6,7 +6,7 @@ extern "C" {
 
 int aocThreadAllocateStorage(...);
 int asdOperatorNew(...);
-int FUN_002c526c(...);
+int resultHandleFailure(...);
 int FUN_002c52dc(...);
 int asdProcessCreateSimple(...);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
@@ -25,7 +25,7 @@ extern int g_aocDisplay; /* 0x433130 */
 /* Supplied declaration required: aocThreadAllocateStorage. */
 extern int FUN_00121fa0(int);
 /* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: FUN_002c526c. */
+/* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: FUN_002c52dc. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
@@ -72,7 +72,7 @@ void FUN_001070ac(void)
         *(romwright_code **)(temp_v1 + 0x10) = temp_v2;
       }
       if ((int)ppcVar4 < 0) {
-        FUN_002c526c();
+        resultHandleFailure();
       }
     }
   }

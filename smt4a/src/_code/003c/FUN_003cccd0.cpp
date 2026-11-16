@@ -8,7 +8,7 @@ extern "C" {
 s32 scrGetArg(s32 index);
 s32 btlResolveEntryChoice(s32 choice);
 void scrSetResult(s32 value);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
 }
 
 static inline bool candidateHasPendingCounter(BtlCombatantEntryA *entry)
@@ -31,7 +31,7 @@ extern "C" u32 FUN_003cccd0(void)
 {
     u32 id = scrGetArg(0);
     s32 first, count;
-    FUN_00301a08(btlResolveEntryChoice(scrGetArg(1)), &first, &count);
+    btlGetEntryChoiceRange(btlResolveEntryChoice(scrGetArg(1)), &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
@@ -44,7 +44,7 @@ extern "C" u32 FUN_003cccd0(void)
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
-        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL && entry->id == id && candidateHasPendingCounter(entry)) {
             scrSetResult(1);
             return 1;

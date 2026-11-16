@@ -3,7 +3,7 @@
 
 extern "C" {
 s32 FUN_00130320(NativeFileReader *reader, const s8 *path, s32 suppressErrors);
-s32 FUN_002b4e00(NativeFileReader *reader, void *buffer, u32 bytes, u32 *readBytes);
+s32 fileHandleRead(NativeFileReader *reader, void *buffer, u32 bytes, u32 *readBytes);
 void FUN_00130e50(ArchiveFileHeader *header, const void *buffer);
 void FUN_0012f5ac(SoundArchiveDiskIV *archive, const ArchiveFileHeader *header);
 u32 libc_strlen(const s8 *path);
@@ -25,7 +25,7 @@ u32 FUN_00121824(SoundArchiveDiskIV *archive, const s8 *path)
     {
         void *header = reinterpret_cast<void *>((reinterpret_cast<u32>(scratch.header.storage) + 31) & ~31u);
         scratch.header.readBytes = 0;
-        if (!FUN_002b4e00(&archive->reader, header, 64, &scratch.header.readBytes)) {
+        if (!fileHandleRead(&archive->reader, header, 64, &scratch.header.readBytes)) {
             archive->result = archive->reader.result;
             return 0;
         }

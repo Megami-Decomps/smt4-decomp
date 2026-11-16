@@ -25,7 +25,7 @@ typedef char CaptureWorkViewOffsetsCheck[offsetof(CaptureWorkViewA, surface) == 
 
 extern "C" {
 void *stateValuesGetBySelector(u32 selector);
-u8 FUN_00154edc(u32 selector, JobSurface *surface);
+u8 gxCopyFramebufferToSurface(u32 selector, JobSurface *surface);
 void surfaceCopy(JobSurface *destination, JobSurface *source);
 
 s32 FUN_00140618(u32 job)
@@ -47,10 +47,10 @@ s32 FUN_00140618(u32 job)
     if (!work->available) {
         return 0;
     }
-    FUN_00157558(g_renderCtx);
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     work->surface->width = 512;
     work->surface->height = 512;
-    work->result = FUN_00154edc(0, work->surface);
+    work->result = gxCopyFramebufferToSurface(0, work->surface);
     surfaceCopy(work->surface, work->surface);
     work->surface->width >>= 1;
     work->surface->height >>= 1;

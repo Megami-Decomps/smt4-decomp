@@ -38,13 +38,13 @@ typedef struct DialogWorkView {
     s16 panelA;
 } DialogWorkView;
 
-void FUN_00163aa4(void *state, f32 scale);
+void uiSpriteAdvanceAnimation(void *state, f32 scale);
 void FUN_00228b04(void *list, s32 arg);
 s32 resourceRunOperationIfUnblocked(void *list);
 s32 ifTouchGetSelectionMode(void);
 u32 asdTMTexTableEntryAt(u32 kind, u32 index);
 s32 FUN_003450d4(void *list, u32 layout, void *panel, s32 a, s32 b, s32 c, u8 *flag, s32 d, s32 e);
-s32 FUN_001517b4(s32 which, s32 arg);
+s32 padQueryLogicalKey(s32 which, s32 arg);
 void eventQueueAddUniqueIfValid(u32 event);
 void FUN_003f6abc(DialogWork *work);
 void uiSpriteSetKeyframe(void *sprite, s32 a, s32 b);
@@ -55,9 +55,9 @@ void dialogEnterState(DialogWork *work, s32 state, s32 arg);
  * of ids around the cursor, and reacts to confirm (accept the entry) or cancel. */
 void FUN_003f5ed8(DialogWork *work)
 {
-    FUN_00163aa4(work->pulseA, 1.0f);
-    FUN_00163aa4(work->pulseB, 1.0f);
-    FUN_00163aa4(work->pulseC, 1.0f);
+    uiSpriteAdvanceAnimation(work->pulseA, 1.0f);
+    uiSpriteAdvanceAnimation(work->pulseB, 1.0f);
+    uiSpriteAdvanceAnimation(work->pulseC, 1.0f);
     work->blinkTimer--;
     if (work->blinkTimer <= 0) {
         work->blinkTimer = 30;
@@ -91,7 +91,7 @@ void FUN_003f5ed8(DialogWork *work)
     if (FUN_003450d4(work->list, asdTMTexTableEntryAt(0x31, 0xAB), work->panel, view->panelA, view->panelB, view->panelC, &flag, 0, 1) != 0) {
         return;
     }
-    if ((FUN_001517b4(0, 1) != 0 || touchMode == 6) && *work->selected != 0) {
+    if ((padQueryLogicalKey(0, 1) != 0 || touchMode == 6) && *work->selected != 0) {
         eventQueueAddUniqueIfValid(0x100020E);
         FUN_003f6abc(work);
         uiSpriteSetKeyframe((u8 *)work + 0x1F8, 1, 0);
@@ -102,7 +102,7 @@ void FUN_003f5ed8(DialogWork *work)
             gameFlagsSetAlternateMode(work->selectedId, 0);
         }
         dialogEnterState(work, 5, 0);
-    } else if (FUN_001517b4(1, 1) != 0) {
+    } else if (padQueryLogicalKey(1, 1) != 0) {
         eventQueueAddUniqueIfValid(0x100020F);
         uiSpriteSetKeyframe((u8 *)work + 0x16C, 2, 0);
         uiSpriteSetImageKeyframe((u8 *)work + 0x16C, 1, 0);

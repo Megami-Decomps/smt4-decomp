@@ -6,7 +6,7 @@
 extern "C" {
 u32 FUN_004a8750(u32 id, u32 mode, s32 first, s32 special, s32 second);
 u32 FUN_004d05b4();
-s32 FUN_001ba3d4(u32 flag);
+s32 flagValueRead(u32 flag);
 s32 gameStockContainsEntry(u32 id);
 s32 partyFindFirstUnusedEntry();
 
@@ -36,7 +36,7 @@ u32 FUN_004a34a0(Screen4A *screen, u32 id)
     u8 reason;
     if (!FUN_002a4b28(id)) {
         reason = 6;
-    } else if (FUN_004d05b4() < cost && FUN_001ba3d4(0x7c3) <= 0) {
+    } else if (FUN_004d05b4() < cost && flagValueRead(0x7c3) <= 0) {
         reason = 1;
     } else if (gameStockContainsEntry(id)) {
         reason = 2;
@@ -49,7 +49,7 @@ u32 FUN_004a34a0(Screen4A *screen, u32 id)
         }
         reason = screen->unkA870;
         if (reason == 0) {
-            if (FUN_004d05b4() < cost && FUN_001ba3d4(0x7c3) > 0) {
+            if (FUN_004d05b4() < cost && flagValueRead(0x7c3) > 0) {
                 screen->unkA870 = 7;
                 return 1;
             }

@@ -4,7 +4,7 @@
 extern "C" {
 
 int FUN_0017fd20(unsigned int *, int);
-int FUN_002e3140(void);
+int resultHandleFailure(void);
 int FUN_00426204(void);
 int resetFlag5891A4And6530(void);
 int FUN_004262e4(unsigned int *);
@@ -17,7 +17,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0017fd20. */
-/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: FUN_00426204. */
 extern int FUN_00426264(unsigned char *, unsigned int *);
 /* Supplied declaration required: resetFlag5891A4And6530. */
@@ -42,7 +42,7 @@ unsigned int FUN_0047d904(unsigned int *param_1,int *param_2,unsigned int *param
     temp_v0 = *param_1;
     software_interrupt(0x24);
     if ((int)temp_v0 < 0) {
-      FUN_002e3140();
+      resultHandleFailure();
     }
     temp_v1 = -0x800000;
     if ((temp_v0 & 0x3ff) == 0x3fe) {
@@ -75,7 +75,7 @@ unsigned int FUN_0047d904(unsigned int *param_1,int *param_2,unsigned int *param
       }
     }
     if ((int)puVar3 < 0) {
-      FUN_002e3140();
+      resultHandleFailure();
     }
     temp_v1 = FUN_0042632c(temp_v2);
     *param_2 = temp_v1;

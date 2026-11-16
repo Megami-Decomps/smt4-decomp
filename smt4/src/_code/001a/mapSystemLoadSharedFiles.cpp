@@ -23,7 +23,7 @@ void FUN_00287c34(s32 value);
 void mapFilterLoad(void);
 void mapIfLoadWidgets(void);
 void FUN_002f58e0(void);
-void FUN_002c58c8(s32 a, s32 b);
+void asdTMTexTablePrepareNodeImage(s32 a, s32 b);
 void *asdLoadFileSyncDefault(const char *path);
 void *asdLoadFileSync(const char *path, u32 *buffer, s32 a, s32 size);
 
@@ -35,8 +35,8 @@ void mapSystemLoadSharedFiles(void)
     mapIfLoadWidgets();
     FUN_002f58e0();
     asdTMTexTableLoadSprites(0x1C);
-    FUN_002c58c8(0x1C, 3);
-    FUN_002c58c8(0x1C, 4);
+    asdTMTexTablePrepareNodeImage(0x1C, 3);
+    asdTMTexTablePrepareNodeImage(0x1C, 4);
     g_gameState.scriptFile = asdLoadFileSyncDefault("map/all/mapsys_scr.bf");
     g_gameState.messageFile = asdLoadFileSyncDefault("map/all/mapsys_mes.mbm");
     g_gameState.files[0].handle = asdLoadFileSync("map/all/damage.bam", &g_gameState.files[0].buffer, 1, 0x10);

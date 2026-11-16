@@ -18,6 +18,6 @@ void FUN_0035196c()
     s32 result = nn::svc::ClearEvent(g_y2rTransferEvent);
     bool failed = nnResultIsFailure(result);
     if (failed)
-        FUN_002c526c(result, failed);
+        resultHandleFailure(result, failed);
 }
 }

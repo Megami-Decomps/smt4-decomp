@@ -13,7 +13,7 @@ u32 FUN_0019f30c(AsdMdlNode *node, const char *name, RotationQuaternion *rotatio
 void FUN_001b4eb8(void *effect, const EffectAttachmentPosition *position);
 void FUN_001acb48(void *effect, const RotationQuaternion *rotation);
 void FUN_001ac8ec(void *effect, f32 scale);
-void FUN_0019c0e0(void *effect);
+void effectNodeUpdateTransform(void *effect);
 
 // Place each effect at its named model joint, with conjugate rotation and model scale.
 void FUN_001881e8(AsdMdlObject *model, NamedEffectAttachment *attachments)
@@ -48,7 +48,7 @@ void FUN_001881e8(AsdMdlObject *model, NamedEffectAttachment *attachments)
                 FUN_001acb48(effect, &inverse);
                 const NodeScaleView *scaledNode = reinterpret_cast<const NodeScaleView *>(node);
                 FUN_001ac8ec(effect, scaledNode->scale);
-                FUN_0019c0e0(effect);
+                effectNodeUpdateTransform(effect);
             }
         }
     }

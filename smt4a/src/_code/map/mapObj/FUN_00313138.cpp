@@ -56,7 +56,7 @@ extern void *g_handleRegistry;
 s32 dataTableGetRecordFortyFive(void);
 MapObjRecord *mapObjGetCombinedEntry(s32 index);
 void textFormatBuffer(char *, const char *, ...);
-void *FUN_00178b04(u32, const char *, u32);
+void *asdMemoryAllocTraced(u32, const char *, u32);
 ModelList *modelListInit(ModelList *);
 u8 FUN_0040ab8c(ModelList *model);
 void FUN_0040aad4(ModelList *model, u32 mode);
@@ -104,7 +104,7 @@ u32 FUN_00313138(void)
         char resourceName[0x80];
         textFormatBuffer(resourceName, "map/obj/obj_%02d.bam", record->kind);
         ModelList *model = static_cast<ModelList *>(
-            FUN_00178b04(32, "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapObj.cpp", 0x16f));
+            asdMemoryAllocTraced(32, "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapObj.cpp", 0x16f));
         if (model != NULL) {
             model = modelListInit(model);
         }

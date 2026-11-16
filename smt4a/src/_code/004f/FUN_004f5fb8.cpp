@@ -8,11 +8,11 @@
 
 extern "C" {
 extern void *g_handleRegistry;
-void FUN_003fd7b4(u32 controller, f32 x, f32 y, f32 z);
-void FUN_003fe86c(u32 controller, u32 argument, s32 mode, f32 first, f32 second);
+void controllerSetPositionXyz(u32 controller, f32 x, f32 y, f32 z);
+void modelPlayClip(u32 controller, u32 argument, s32 mode, f32 first, f32 second);
 void handleRegistryRegisterObject(void *registry, u32 controller);
 s32 idSetFindSubjectIndex(BtlMainStateA *battle, BattleRosterRecordA *record);
-JobPool *FUN_001568f8(BtlMainStateA *battle, s32 group);
+JobPool *btlFindEntryBlockByMemberId(BtlMainStateA *battle, s32 group);
 void FUN_004019c0(void *transform, Vec3 *value, f32 scale);
 void tripleOwnerSetValue(u32 controller, const Vec3 *value);
 void FUN_00401b50(void *transform, Vec3 *position, f32 scale);
@@ -24,8 +24,8 @@ void FUN_004f5fb8(HandlePools *work, s32 index)
     SmallPoolSlot *slot = &work->small[index];
     if (slot->controller != NULL) {
         u32 controller = slot->controller->handle;
-        FUN_003fd7b4(controller, 0.0f, 0.0f, 0.0f);
-        FUN_003fe86c(controller, 0, 2, 0.0f, 0.0f);
+        controllerSetPositionXyz(controller, 0.0f, 0.0f, 0.0f);
+        modelPlayClip(controller, 0, 2, 0.0f, 0.0f);
         handleRegistryRegisterObject(g_handleRegistry, controller);
         BattleRosterRecordA *record = &btlGetMainState()->roster[index];
         s32 subject = idSetFindSubjectIndex(btlGetMainState(), record);
@@ -46,7 +46,7 @@ void FUN_004f5fb8(HandlePools *work, s32 index)
             offsetof(Attachment, transform) == 8 &&
             offsetof(AttachmentPoolView, attachments) == 0x1398 ? 1 : -1];
         Attachment *attachment = NULL;
-        JobPool *jobs = FUN_001568f8(btlGetMainState(), record->motion.group);
+        JobPool *jobs = btlFindEntryBlockByMemberId(btlGetMainState(), record->motion.group);
         u32 job = jobs->jobs[subject];
         for (s32 i = 0; i < 50; ++i) {
             Attachment *candidate = &((AttachmentPoolView *)work)->attachments[i];

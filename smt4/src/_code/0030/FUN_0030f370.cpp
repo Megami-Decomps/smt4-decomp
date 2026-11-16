@@ -18,7 +18,7 @@ extern "C" {
 s32 resourceResolveDataPointer(EmitterResource *resource);
 EmitterHeader *resourceResolveHeaderPointer(EmitterResource *resource);
 void polygonTrackRebuildResources(ResourceEmitter *emitter, u32 id, const EmitterArguments *arguments);
-void *FUN_002691d8(u16 id, u32 key, void *data);
+void *effBehaviorCreate(u16 id, u32 key, void *data);
 void effEmitterReplaceResourceByKind(ResourceEmitter *owner, u32 kind, const u32 *resource);
 
 static inline void replaceEmitterBuffer(ResourceEmitter *emitter, u32 kind, void *data)
@@ -26,7 +26,7 @@ static inline void replaceEmitterBuffer(ResourceEmitter *emitter, u32 kind, void
     if (emitter->buffer != NULL) {
         objectBufferFree(emitter->buffer);
     }
-    emitter->buffer = FUN_002691d8((u16)kind, emitter->key, data);
+    emitter->buffer = effBehaviorCreate((u16)kind, emitter->key, data);
 }
 
 /* Creates the emitter for a resource and replaces its buffer (as effPolygonTrackCreateFromResource does). */

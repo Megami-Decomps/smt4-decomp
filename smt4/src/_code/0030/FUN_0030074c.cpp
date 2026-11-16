@@ -10,7 +10,7 @@ extern u32 g_btlScriptUnit;
 void FUN_00250720(BtlMainState *);
 u32 FUN_002551ac(s32, u32, BtlActionRecord *, s32, s32, s32, s32, s32, s32,
     s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s16, s32, u32, u32, s32);
-void FUN_002505c0(s32, u32, u32, s32, s32, u32, s32);
+void btlQueueKeyedScalarReflectAction(s32, u32, u32, s32, s32, u32, s32);
 
 /* Queue the requested fixed/current/max-MP amount for each active party member. */
 u32 FUN_0030074c()
@@ -38,7 +38,7 @@ u32 FUN_0030074c()
             FUN_002551ac(0, actor, &state->actions[entry->members.ids[0]], 0,
                 -1, amount, -1, entry->hp, entry->maxHp, 0, 0, 0, 0,
                 1, 0, i << 3, i << 3, i << 3, i << 3, 1, 0, 1, 1, 0, 1);
-            FUN_002505c0(0, actor, 0x10001B5, 0, 0, 0, 0);
+            btlQueueKeyedScalarReflectAction(0, actor, 0x10001B5, 0, 0, 0, 0);
         }
     }
     return 1;

@@ -9,7 +9,7 @@ extern MapTrapA *g_mapTrap;
 extern GameStateA g_gameState;
 extern void *g_handleRegistry;
 void mapTrapClearState();
-void *FUN_00178b04(u32 size, const char *source, s32 line);
+void *asdMemoryAllocTraced(u32 size, const char *source, s32 line);
 ModelList *modelListInit(ModelList *model);
 void FUN_0040aad4(ModelList *model, s32 index);
 void handleRegistryRegisterObject(void *registry, ModelResourceItem *model);
@@ -36,23 +36,23 @@ void FUN_00224498(s32 area, s32 map)
     if (g_mapTrap->setup.count > 0) {
         DisplayModels *display = reinterpret_cast<DisplayModels *>(&g_mapTrap->display.phase);
         display->phase = 0;
-        ModelList *first = static_cast<ModelList *>(FUN_00178b04(sizeof(ModelList),
+        ModelList *first = static_cast<ModelList *>(asdMemoryAllocTraced(sizeof(ModelList),
             "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTrap.cpp", 0x7E));
         if (first != NULL)
             first = modelListInit(first);
         display->models[0] = first;
-        FUN_0040aa6c(first, "map/unit/u006.bam");
+        resourceOwnerLoadFileSync(first, "map/unit/u006.bam");
         FUN_0040aad4(display->models[0], 0);
         ModelResourceItem *firstBody = reinterpret_cast<ModelResourceItem *>(display->models[0]->content.body);
         handleRegistryRegisterObject(g_handleRegistry, firstBody);
         enableTrapModel(firstBody);
 
-        ModelList *second = static_cast<ModelList *>(FUN_00178b04(sizeof(ModelList),
+        ModelList *second = static_cast<ModelList *>(asdMemoryAllocTraced(sizeof(ModelList),
             "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTrap.cpp", 0x87));
         if (second != NULL)
             second = modelListInit(second);
         display->models[1] = second;
-        FUN_0040aa6c(second, "map/unit/u061.bam");
+        resourceOwnerLoadFileSync(second, "map/unit/u061.bam");
         FUN_0040aad4(display->models[1], 0);
         ModelResourceItem *secondBody = reinterpret_cast<ModelResourceItem *>(display->models[1]->content.body);
         handleRegistryRegisterObject(g_handleRegistry, secondBody);
@@ -61,12 +61,12 @@ void FUN_00224498(s32 area, s32 map)
     }
     if (area == 0x1A && (map == 0xB || map == 0xD)) {
         DisplayModels *display = reinterpret_cast<DisplayModels *>(&g_mapTrap->display.phase);
-        ModelList *extra = static_cast<ModelList *>(FUN_00178b04(sizeof(ModelList),
+        ModelList *extra = static_cast<ModelList *>(asdMemoryAllocTraced(sizeof(ModelList),
             "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTrap.cpp", 0x99));
         if (extra != NULL)
             extra = modelListInit(extra);
         display->models[2] = extra;
-        FUN_0040aa6c(extra, "map/unit/u097.bam");
+        resourceOwnerLoadFileSync(extra, "map/unit/u097.bam");
         FUN_0040aad4(display->models[2], 0);
         ModelResourceItem *extraBody = reinterpret_cast<ModelResourceItem *>(display->models[2]->content.body);
         handleRegistryRegisterObject(g_handleRegistry, extraBody);

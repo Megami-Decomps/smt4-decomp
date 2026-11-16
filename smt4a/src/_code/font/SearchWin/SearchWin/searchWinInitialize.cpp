@@ -22,7 +22,7 @@ u32 taskCreateDraw(const char *name, u32 priority, u32 flags, void *work,
     u32 (*callback)(void *), u32 argument, u32 target, u32 parent);
 void paramsClearPacket(void *packet);
 
-void FUN_0014e188(UiAnimatedSprite *sprite, u32 kind, u32 priority, void *packet, f32 scale, u32 enabled);
+void uiSpriteStateInitFromSource(UiAnimatedSprite *sprite, u32 kind, u32 priority, void *packet, f32 scale, u32 enabled);
 void uiSpriteSelectAnim(UiAnimatedSprite *sprite, s32 animation);
 
 // Create the search window's update task, stereo draw tasks and animated sprite.
@@ -48,7 +48,7 @@ void searchWinInitialize(void)
     paramsInit(reinterpret_cast<UiResourceParameters *>(render->packet), DAT_0052fcb4, sizeof(DAT_0052fcb4),
         DAT_0052fcd8, sizeof(DAT_0052fcd8),
         NULL, 0, NULL, 0, DAT_0052fcfc, sizeof(DAT_0052fcfc));
-    FUN_0014e188(&render->sprite, 8, 0x87, render->packet, 1.0f, 1);
+    uiSpriteStateInitFromSource(&render->sprite, 8, 0x87, render->packet, 1.0f, 1);
     uiSpriteSelectAnim(&render->sprite, 0);
 }
 }

@@ -2,7 +2,7 @@
 extern "C" {
 ItemEligibilityStateA* gameGetPlayerData(void);
 s32 goalConditionsSatisfied(s32);
-s32 FUN_003df390(s32);
+s32 gameUnlockRecordRequirementsMet(s32);
 s32 partyEntryFlagsBit3(s32);
 s32 partyEntryFlagsBit1(s32);
 
@@ -15,7 +15,7 @@ u32 FUN_003ded68(s32 id)
     if (partyEntryFlagsBit1(id) != 0 && goalConditionsSatisfied(id) != 0) {
         return 0;
     }
-    if (FUN_003df390(id) != 0) {
+    if (gameUnlockRecordRequirementsMet(id) != 0) {
         ItemDataRecord* record = dataTable1bOr1cGetRecord(id);
         if (record != NULL) {
             u32 value = gameGetPlayerData()->value;

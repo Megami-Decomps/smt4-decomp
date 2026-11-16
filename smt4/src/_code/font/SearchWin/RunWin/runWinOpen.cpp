@@ -11,7 +11,7 @@ extern "C" {
 
 typedef void (*VoidFunc)(void);
 
-void FUN_002bd954(void *ui, s32 kind, s32 count, UiResourceParameters *resources, u16 flags, f32 speed);
+void uiSpriteStateInitFromSource(void *ui, s32 kind, s32 count, UiResourceParameters *resources, u16 flags, f32 speed);
 int spriteStartAnimationByIndex(void *ui, int arg);
 
 int memClear(void *ptr, int size);                  /* zero a block */
@@ -47,7 +47,7 @@ void runWinOpen(void)
     taskCreateDraw("RunWin DrawDown", 0xe9, 0, 0, FUN_0018f278, 0, 0, run->task);
     drawParameterBlockClear(run->sound);
     paramsInit(reinterpret_cast<UiResourceParameters *>(run->sound), sRunWinPacketA, 0x24, sRunWinPacketB, 0x24, 0, 0, 0, 0, sRunWinPacketC, 0x70);
-    FUN_002bd954(run->ui, 0xe, 0x87, reinterpret_cast<UiResourceParameters *>(run->sound), 1, 1.0f);
+    uiSpriteStateInitFromSource(run->ui, 0xe, 0x87, reinterpret_cast<UiResourceParameters *>(run->sound), 1, 1.0f);
     spriteStartAnimationByIndex(run->ui, 0);
 }
 

@@ -7,8 +7,8 @@ extern "C" {
 int textFormatBuffer(...);
 int dataTableFileGetTable(...);
 int FUN_001b2ebc(...);
-int FUN_001b31ac(...);
-int FUN_001b31e0(...);
+int packageEntryGetDirectory(...);
+int packageEntryGetFileCount(...);
 int asdOperatorDeleteB(...);
 int sysMemClear(...);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
@@ -50,9 +50,9 @@ extern int dataTableGetCount(void);
 extern unsigned int dataTableGetEntries(unsigned int);
 /* Supplied declaration required: dataTableFileGetTable. */
 /* Supplied declaration required: FUN_001b2ebc. */
-extern int FUN_001b315c(void);
-/* Supplied declaration required: FUN_001b31ac. */
-/* Supplied declaration required: FUN_001b31e0. */
+extern int packageEntryIsLoaded(void);
+/* Supplied declaration required: packageEntryGetDirectory. */
+/* Supplied declaration required: packageEntryGetFileCount. */
 extern int objGetFlagBit16(void);
 /* Supplied declaration required: asdOperatorDeleteB. */
 /* Supplied declaration required: sysMemClear. */
@@ -122,12 +122,12 @@ void FUN_00470e64(fn_00470e64_arg0 *param_1)
     if (temp_v15 < param_1->field_0x310) {
       do {
         temp_v14 = param_1->field_0x318 + temp_v15 * 0x50;
-        temp_v1 = FUN_001b315c();
+        temp_v1 = packageEntryIsLoaded();
         if (temp_v1 != 0) {
           temp_v2 = temp_v14;
-          FUN_001b31ac();
+          packageEntryGetDirectory();
           temp_v3 = temp_v14;
-          FUN_001b31e0();
+          packageEntryGetFileCount();
           temp_v5 = 0;
           if (temp_v3 != 0) {
             temp_v10 = temp_v14 + 0x24;

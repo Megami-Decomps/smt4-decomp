@@ -1,7 +1,7 @@
 #include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
 
-extern "C" u32 FUN_001ba3d4(u16 id);
+extern "C" u32 flagValueRead(u16 id);
 
 /* Script command: when the argument is set, finds the battle member with the highest value (the first one on a tie) and returns its id; 0 when none. */
 extern "C" u32 scrBattleFindHighestValueMember(void)
@@ -13,7 +13,7 @@ extern "C" u32 scrBattleFindHighestValueMember(void)
     if (enabled != 0) {
         for (std::vector<u16>::iterator member = battle->members.begin(); member != battle->members.end(); ++member) {
             u16 id = *member;
-            u16 value = FUN_001ba3d4(id);
+            u16 value = flagValueRead(id);
             if (value > bestValue) {
                 bestValue = value;
                 bestId = id;

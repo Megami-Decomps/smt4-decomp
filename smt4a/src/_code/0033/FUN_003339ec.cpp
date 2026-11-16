@@ -13,7 +13,7 @@ extern "C" {
 // Install default low-seven-bit priorities while preserving each entry's enabled flag.
 void FUN_003339ec(void)
 {
-    UiPriorityEntry *priority = (UiPriorityEntry *)FUN_0026140c();
+    UiPriorityEntry *priority = (UiPriorityEntry *)saveGetUserSettingsBlock();
     priority[0x14].value = 0;
     priority[0x17].value = 0;
     priority[0x1C].value = 0;

@@ -42,7 +42,7 @@ void asdLoadFileAsyncSimple(const char *path, void **result, u32 flags);
 void asdTMTexTableLoadTmx(u32 table, u32 mode);
 void paramsClearPacket(UiResourceParameters *parameters);
 
-void FUN_0014e188(UiSpriteState *sprite, u32 table, u32 argument, UiResourceParameters *parameters, u32 order, f32 scale);
+void uiSpriteStateInitFromSource(UiSpriteState *sprite, u32 table, u32 argument, UiResourceParameters *parameters, u32 order, f32 scale);
 
 // Load tutorial message/texture resources and initialize the four tutorial UI sprites.
 void FUN_0049d3f0(HowToScreenWork *work)
@@ -65,13 +65,13 @@ void FUN_0049d3f0(HowToScreenWork *work)
     asdTMTexLoadMainHeap(51, 0);
     paramsClearPacket(&work->parameters);
     paramsInit(&work->parameters, DAT_0052cd2c.first, 36, DAT_0052cd2c.second, 72, 0, 0, 0, 0, DAT_0052cd2c.last, 336);
-    FUN_0014e188(&work->sprites[0], 51, 0, &work->parameters, 201, 1.0f);
+    uiSpriteStateInitFromSource(&work->sprites[0], 51, 0, &work->parameters, 201, 1.0f);
     uiSpriteSelectAnim(&work->sprites[0], 0);
-    FUN_0014e188(&work->sprites[1], 51, 0, &work->parameters, 201, 1.0f);
+    uiSpriteStateInitFromSource(&work->sprites[1], 51, 0, &work->parameters, 201, 1.0f);
     uiSpriteSelectAnim(&work->sprites[1], 0);
-    FUN_0014e188(&work->sprites[2], 51, 0, &work->parameters, 201, 1.0f);
+    uiSpriteStateInitFromSource(&work->sprites[2], 51, 0, &work->parameters, 201, 1.0f);
     uiSpriteSelectAnim(&work->sprites[2], 2);
-    FUN_0014e188(&work->sprites[3], 51, 0, &work->parameters, 201, 1.0f);
+    uiSpriteStateInitFromSource(&work->sprites[3], 51, 0, &work->parameters, 201, 1.0f);
     uiSpriteSelectAnim(&work->sprites[3], 3);
 }
 }

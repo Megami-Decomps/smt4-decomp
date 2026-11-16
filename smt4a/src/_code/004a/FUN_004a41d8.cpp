@@ -55,7 +55,7 @@ s32 gameGetMode(void);
 void FUN_004d0680(StatusScreen* screen);
 void FUN_00359974(s32 a, s32 b, s32 c, s32 d);
 s32 FUN_004a34a0(StatusScreen* screen, u32 id);
-u32 FUN_00180118(u32 id);
+u32 dataTable01GetRecordWithAocOverride(u32 id);
 u32 FUN_0014bf3c(u32 id, s32 arg);
 void libc_strcpy(char* dst, u32 src);
 void scrScriptProcessStartEntry(u32 process, s32 entry);
@@ -109,10 +109,10 @@ void FUN_004a41d8(StatusScreen* screen)
         u8* mode = &SCREEN_BYTE(screen, 0xa870);
         if (FUN_004a34a0(screen, (u16)id) != 0) {
             char text[128];
-            libc_strcpy(text, FUN_00180118((u16)id));
-            FUN_003180c4(8, text);
+            libc_strcpy(text, dataTable01GetRecordWithAocOverride((u16)id));
+            scrSetStringSlot(8, text);
             libc_strcpy(text, FUN_0014bf3c((u16)id, 0));
-            FUN_003180c4(0x10, text);
+            scrSetStringSlot(0x10, text);
             scrScriptProcessStartEntry(screen->process, *mode == 7);
             screen->state = 3;
             screen->stateArg = 0;

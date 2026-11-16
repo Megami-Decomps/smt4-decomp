@@ -2,7 +2,7 @@
 #include "ui/UiSpriteState.h"
 
 extern "C" {
-s32 FUN_001517b4(u32 button, s32 repeat);
+s32 padQueryLogicalKey(u32 button, s32 repeat);
 void eventQueueAddUniqueIfValid(u32 event);
 void uiSpriteSetKeyframe(UiSpriteState *sprite, s32 frame, s32 initial);
 void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 frame, s32 initial);
@@ -25,14 +25,14 @@ void FUN_00402f58(void *work)
     ContentListInputView *view = static_cast<ContentListInputView *>(work);
     contentListUpdateNavigation();
     if (view->pagesEnabled != 0) {
-        if (FUN_001517b4(8, 1) != 0) {
+        if (padQueryLogicalKey(8, 1) != 0) {
             eventQueueAddUniqueIfValid(0x1000210);
             uiSpriteSetKeyframe(&view->pageButton, 6, 0);
             uiSpriteSetImageKeyframe(&view->pageButton, 1, 0);
             view->previousPage = 1;
             FUN_004029f4(work, 6, 7);
         }
-        if (FUN_001517b4(7, 1) != 0) {
+        if (padQueryLogicalKey(7, 1) != 0) {
             eventQueueAddUniqueIfValid(0x1000210);
             uiSpriteSetKeyframe(&view->pageButton, 7, 0);
             uiSpriteSetImageKeyframe(&view->pageButton, 1, 0);
@@ -40,7 +40,7 @@ void FUN_00402f58(void *work)
             FUN_004029f4(work, 6, 7);
         }
     }
-    if (FUN_001517b4(1, 1) != 0) {
+    if (padQueryLogicalKey(1, 1) != 0) {
         eventQueueAddUniqueIfValid(0x100020F);
         uiSpriteSetKeyframe(&view->cancelButton, 2, 0);
         uiSpriteSetImageKeyframe(&view->cancelButton, 1, 0);

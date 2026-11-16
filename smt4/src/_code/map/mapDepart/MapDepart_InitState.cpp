@@ -44,7 +44,7 @@ extern "C" {
 extern GameState g_gameState;
 
 MapDepartSavePoint *gameGetMapBlock(void);
-void FUN_00270f70(MapVector *position);
+void mapAdjustPositionToGround(MapVector *position);
 void mapBlockLoadTableRecord(void);
 
 // Reset the departure state; when `save` is set, record the current position in the map block.
@@ -64,7 +64,7 @@ void MapDepart_InitState(MapDepartState *state, s32 save)
     state->unk3C = 0;
     state->unk40 = 0;
     state->unk44 = 0;
-    FUN_00270f70(&g_gameState.position);
+    mapAdjustPositionToGround(&g_gameState.position);
     if (save) {
         point->scale = (s16)g_gameState.unk90Scalar;
         point->mapId = g_gameState.unk000;

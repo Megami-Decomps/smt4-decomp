@@ -9,14 +9,14 @@ extern "C" {
 int countersRaiseA(...);
 
 int qsort(int [5], int, int, unsigned char *);
-int FUN_001568f8(int, int);
+int btlFindEntryBlockByMemberId(int, int);
 int btlMainFindEntryByListedId(unsigned int *, int);
-int FUN_00408184(...);
+int gameCounterAddSaturating(...);
 
 int btlCombatantGetSummaryValues(...);
 int btlAdjustPropertyClamped(...);
 int FUN_004c8340(...);
-int FUN_004fb43c(...);
+int btlQueueActionMessage(...);
 int FUN_004fd0ec(...);
 int FUN_004fd3f0(int, unsigned int, int);
 int FUN_004fde5c(int, unsigned int, int, int);
@@ -58,12 +58,12 @@ extern unsigned char DAT_0057a574; /* 0x57a574 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_001568f8. */
+/* Supplied declaration required: btlFindEntryBlockByMemberId. */
 extern int btlScriptUnitHasFlags(unsigned int *);
-extern int FUN_003eb1cc(void);
+extern int btlStateHasSelectionGateFlag(void);
 extern int idSetFindSubjectIndex(unsigned int, int);
 /* Supplied declaration required: btlMainFindEntryByListedId. */
-/* Supplied declaration required: FUN_00408184. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: countersRaiseA. */
 extern int btlStatusFlagsHaveAilment(int);
 extern short btlFindEntryValue(int, unsigned int);
@@ -71,7 +71,7 @@ extern short btlFindEntryValue(int, unsigned int);
 /* Supplied declaration required: btlAdjustPropertyClamped. */
 /* Supplied declaration required: FUN_004c8340. */
 extern int btlUnitGet(unsigned int);
-/* Supplied declaration required: FUN_004fb43c. */
+/* Supplied declaration required: btlQueueActionMessage. */
 /* Supplied declaration required: FUN_004fd0ec. */
 /* Supplied declaration required: FUN_004fd3f0. */
 /* Supplied declaration required: FUN_004fde5c. */
@@ -281,7 +281,7 @@ FUN_004fc094(int param_1,unsigned int param_2,int param_3,int param_4,int param_
                       temp_v5 = reinterpret_cast<int>(btlQueueReflectAction(g_btlActionReflect, (int)(short)((short)*(int *)(temp_v4 + 100) + (short)temp_v21),0,param_2));
                       temp_v14[0] = temp_v5;
                       temp_v5 = reinterpret_cast<int>(btlGetMainState());
-                      FUN_001568f8(temp_v5,(int)*(short *)(temp_v4 + 0x6a));
+                      btlFindEntryBlockByMemberId(temp_v5,(int)*(short *)(temp_v4 + 0x6a));
                       temp_v14[4] = temp_v5;
                       temp_v13 = reinterpret_cast<int>(btlGetMainState());
                       temp_v5 = idSetFindSubjectIndex(temp_v13,temp_v4);
@@ -360,7 +360,7 @@ FUN_004fc094(int param_1,unsigned int param_2,int param_3,int param_4,int param_
         temp_v14[0] = 1;
         temp_v14[1] = 0;
         temp_v14[2] = 0;
-        FUN_004fb43c(0,0,0x1000242,0);
+        btlQueueActionMessage(0,0,0x1000242,0);
       }
     }
     puVar5 = temp_v19;
@@ -475,7 +475,7 @@ LAB_004fca64:
   }
   if (((param_23 != 0) && (param_6 >= 0)) && (temp_v19 != (unsigned int *)0x0)) {
     if (!((DAT_00573c18 & *temp_v19) == 0 && (DAT_00573c1c & temp_v19[1]) == 0)) {
-      FUN_00408184(6,param_6);
+      gameCounterAddSaturating(6,param_6);
       if (param_5 != 2) {
         if (param_5 == 1) {
           temp_v14[1] = 0;
@@ -485,18 +485,18 @@ LAB_004fca64:
           temp_v6 = (unsigned int)*(short *)(temp_v24 + 0x6a);
           FUN_004c8340(temp_v6,(int)*(short *)(param_4 + 0x6a),temp_v14[1],temp_v14[2]);
           if ((temp_v6 & 0x800000) != 0) {
-            FUN_00408184(0x2d,1);
+            gameCounterAddSaturating(0x2d,1);
           }
         }
       }
       else {
-        FUN_00408184(0x2d,1);
+        gameCounterAddSaturating(0x2d,1);
       }
       countersRaiseA(0xe,param_6);
     }
     else if ((*temp_v19 & (DAT_00573c08 | DAT_00573c10)) != 0 ||
              (temp_v19[1] & (DAT_00573c0c | DAT_00573c14)) != 0) {
-      FUN_00408184(7,param_6);
+      gameCounterAddSaturating(7,param_6);
     }
   }
   if ((temp_v24 != 0) && ((*(unsigned int *)(temp_v24 + 0x50) & 0x800) != 0)) {
@@ -504,7 +504,7 @@ LAB_004fca64:
       temp_v3 = reinterpret_cast<int>(btlQueueReflectAction(g_btlActionReflect,0,0,0));
       *(unsigned char *)(temp_v3 + 4) = 0x41;
       reinterpret_cast<int>(btlGetMainState());
-      temp_v4 = FUN_003eb1cc();
+      temp_v4 = btlStateHasSelectionGateFlag();
       if (temp_v4 == 0) {
         *(unsigned int *)(temp_v3 + 0x28) = 1;
       }
@@ -513,7 +513,7 @@ LAB_004fca64:
       temp_v3 = reinterpret_cast<int>(btlQueueReflectAction(g_btlActionReflect,0,0,0));
       *(unsigned char *)(temp_v3 + 4) = 0x41;
       reinterpret_cast<int>(btlGetMainState());
-      temp_v4 = FUN_003eb1cc();
+      temp_v4 = btlStateHasSelectionGateFlag();
       if (temp_v4 == 0) {
         *(unsigned int *)(temp_v3 + 0x28) = 1;
       }

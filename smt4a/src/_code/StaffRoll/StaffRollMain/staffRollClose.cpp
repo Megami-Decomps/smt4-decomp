@@ -5,7 +5,6 @@
 
 extern "C" {
 
-int FUN_00212204(int layer);
 int soundChannelStopAll(int id);
 int asdTMTexTableReleaseNode(int type, int index);
 int asdMemFree(void *ptr);               /* heap free */
@@ -20,8 +19,8 @@ void staffRollClose(void)
 
     work->closing = 1;
     if (work->active) {
-        FUN_00212204(0);
-        FUN_00212204(1);
+        screenFadeSlotReset(0);
+        screenFadeSlotReset(1);
     }
     for (i = 0; i < 12; i++) {
         asdTMTexTableReleaseNode(0x29, i);

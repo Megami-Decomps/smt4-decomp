@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern u32 FUN_002907a8(void);
+extern u32 saveBlockGetPlaySeconds(void);
 
 typedef struct Obj {
     /* 0x0 */ u8 unk0[4];
@@ -15,7 +15,7 @@ void sysResetTimestampState(Obj *obj)
 {
     obj->unk9 = 0;
     obj->unk8 = 0;
-    obj->timestamp = FUN_002907a8();
+    obj->timestamp = saveBlockGetPlaySeconds();
 }
 
 } /* extern "C" */

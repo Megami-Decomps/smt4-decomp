@@ -41,7 +41,7 @@ u32 aocEntryGetKind(u32 id);
 s32 gameDataBlocksGetTableFlag(void);
 void flagValueAdd(u32 id, s32 count);
 void flagValueSub(u32 id, s32 count);
-void FUN_00408184(s32 kind, s32 amount);
+void gameCounterAddSaturating(s32 kind, s32 amount);
 
 #define PRICE_MISSING 99999999
 
@@ -136,9 +136,9 @@ void FUN_0049cd18(ItemStack *stack, s32 count, s32 charge)
     }
     partyAddMoneyClampedForward(total);
     if (total < 0)
-        FUN_00408184(30, -total);
+        gameCounterAddSaturating(30, -total);
     else
-        FUN_00408184(31, total);
+        gameCounterAddSaturating(31, total);
 }
 
 } /* extern "C" */

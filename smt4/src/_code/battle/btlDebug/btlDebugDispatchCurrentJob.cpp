@@ -4,9 +4,9 @@ extern "C" {
 
 
 u32 jobGetWork(void);
-int FUN_003c64ec(void *handler, u32 context);
+int btlDebugMenuUpdate(void *handler, u32 context);
 
-/* Runs FUN_003c64ec for the global handler with the current context; 0 when no handler is installed. */
+/* Runs btlDebugMenuUpdate for the global handler with the current context; 0 when no handler is installed. */
 s32 btlDebugDispatchCurrentJob(u32 unusedHandle)
 {
     u32 context = jobGetWork();
@@ -14,7 +14,7 @@ s32 btlDebugDispatchCurrentJob(u32 unusedHandle)
     if (g_btlDebugState.work == NULL) {
         return 0;
     }
-    return FUN_003c64ec(g_btlDebugState.work, context);
+    return btlDebugMenuUpdate(g_btlDebugState.work, context);
 }
 
 } /* extern "C" */

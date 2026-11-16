@@ -41,7 +41,7 @@ void FUN_003d498c(u32 id, u32 mode)
     FUN_003dea6c(id, 1, 0);
     s32 detail = FUN_003de464(id, mode);
     if (detail < 0) {
-        const char *name = FUN_001654f8(dataTable1bOr1cGetRecord(id)->name.encoded, 0, 0);
+        const char *name = textExpandGlyphsToBuffer(dataTable1bOr1cGetRecord(id)->name.encoded, 0, 0);
         asdTextFormatStream(work->sprites[1], 3, 0xFFFFFFFF, 0, 3, "%s", name);
     } else {
         asdTextDrawDirectoryEntry(work->sprites[1], 3, 0xFFFFFFFF, 0, 3, reinterpret_cast<const void *>(work->messages), detail);

@@ -63,7 +63,7 @@ void FUN_002c8858(void)
     MapIfMarker *marker = &mapIf->destinationMarker;
     if (g_gameState.destinationSet) {
         if (marker->shown == 0 && g_gameState.indoors == 0 && *((u8 *)g_mapIf + 0xCCE0) == 0)
-            FUN_00291e40(0x10001FF, g_gameState.destination);
+            soundActorStartOnFreeChannel(0x10001FF, g_gameState.destination);
         marker->shown = 1;
         marker->dirty = 1;
         marker->position = g_gameState.destination;

@@ -36,7 +36,7 @@ u32 FUN_00394230(AsyncRequest *request, s32 *result, u32 *error)
         s32 waited = FUN_002c40f8(&index, &handle, 1, 0, 0);
         bool failed = nnResultIsFailure(waited);
         if (failed) {
-            FUN_002c526c(waited, failed);
+            resultHandleFailure(waited, failed);
         }
         nnResultFields code;
         code.value = waited;
@@ -62,7 +62,7 @@ u32 FUN_00394230(AsyncRequest *request, s32 *result, u32 *error)
         }
         bool failed = nnResultIsFailure(created);
         if (failed) {
-            FUN_002c526c(created, failed);
+            resultHandleFailure(created, failed);
         }
         s32 prepared = FUN_00351cd0(buffer);
         *result = prepared;

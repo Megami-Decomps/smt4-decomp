@@ -15,10 +15,10 @@ struct FrameMenu {
 };
 
 extern "C" {
-void FUN_00164b5c(s32 a, s32 b, s32 c, s32 x, s32 y, s32 alpha);
+void texDrawCompositeSprite(s32 a, s32 b, s32 c, s32 x, s32 y, s32 alpha);
 void efctSetSpeed(f32 speed);
-void FUN_001835b4(s32 a, s32 b, s32 c, s32 x, s32 y, s32 alpha, ...);
-void FUN_00183bb0(void);
+void texDrawTableEntryAtStoredOrigin(s32 a, s32 b, s32 c, s32 x, s32 y, s32 alpha, ...);
+void gxResetColorQuadToWhite(void);
 s32 FUN_002e5d88(u16 id);
 
 /* Draws a menu frame: the background part chosen by `style`, its two edge sprites, then the
@@ -36,22 +36,22 @@ void FUN_004ba354(FrameMenu *menu, s32 slot, s32 itemIndex, s32 style, s32 alpha
         y = base->y;
         s32 edgeAlpha = alpha + 1;
         if (menu->wide) {
-            FUN_00164b5c(2, 0x1F, 0x23, x, y, alpha);
+            texDrawCompositeSprite(2, 0x1F, 0x23, x, y, alpha);
             efctSetSpeed(menu->speed);
-            FUN_001835b4(2, 0x1F, 0x31, x, y, edgeAlpha);
-            FUN_001835b4(2, 0x1F, 0x32, x, y, edgeAlpha);
+            texDrawTableEntryAtStoredOrigin(2, 0x1F, 0x31, x, y, edgeAlpha);
+            texDrawTableEntryAtStoredOrigin(2, 0x1F, 0x32, x, y, edgeAlpha);
         } else {
-            FUN_00164b5c(2, 0x1F, 1, x, y, alpha);
+            texDrawCompositeSprite(2, 0x1F, 1, x, y, alpha);
             efctSetSpeed(menu->speed);
-            FUN_001835b4(2, 0x1F, 0x27, x, y, edgeAlpha);
-            FUN_001835b4(2, 0x1F, 0x28, x, y, edgeAlpha);
+            texDrawTableEntryAtStoredOrigin(2, 0x1F, 0x27, x, y, edgeAlpha);
+            texDrawTableEntryAtStoredOrigin(2, 0x1F, 0x28, x, y, edgeAlpha);
         }
         efctSetSpeed(menu->speed);
     } else {
         base = asdTMTexTableEntryAt(0x1F, slot + 5);
         x = base->x;
         y = base->y;
-        FUN_00164b5c(2, 0x1F, 0, x, y, alpha);
+        texDrawCompositeSprite(2, 0x1F, 0, x, y, alpha);
     }
     f32 fade = (f32)(0x100 - alpha) * (1.0f / 256.0f);
 
@@ -86,8 +86,8 @@ void FUN_004ba354(FrameMenu *menu, s32 slot, s32 itemIndex, s32 style, s32 alpha
             if (!FUN_002e5d88(id))
                 effectSetByteSpeed(0x66);
         }
-        FUN_001835b4(2, 0xB, itemId, x + offset->x, y + offset->y, alpha, icon->y);
-        FUN_00183bb0();
+        texDrawTableEntryAtStoredOrigin(2, 0xB, itemId, x + offset->x, y + offset->y, alpha, icon->y);
+        gxResetColorQuadToWhite();
     }
     textDrawString(mode, mask, (const char *)item, (f32)(icon->x + x), (f32)(icon->y + y), fade, 0.0f, menu->speed);
 }

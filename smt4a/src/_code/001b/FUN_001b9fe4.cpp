@@ -21,7 +21,7 @@ void FUN_001b9fe4(FileQueue *queue)
         s32 result = svcWaitSynchronization1(thread->handle, 0);
         bool failed = nnResultIsFailure(result);
         if (failed) {
-            FUN_002e3140(result, failed);
+            resultHandleFailure(result, failed);
         }
         if (!nnResultIsNotTimeout(result))
             return;
@@ -36,6 +36,6 @@ void FUN_001b9fe4(FileQueue *queue)
     u32 result = FUN_002fb0d4(thread, &descriptor, FUN_001c3864, &argument,
         reinterpret_cast<void *>(thread->stack->address + thread->stack->size), 0x11, -2, 0);
     if (nnResultIsFailureExceptSummary(result, 3))
-        FUN_002e3140(result);
+        resultHandleFailure(result);
 }
 }

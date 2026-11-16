@@ -52,7 +52,7 @@ void FUN_0025cfe4(int param_1,int param_2)
       iVar10 = asdTMTexTableEntryAt(0x2e,0x14d);
       iVar10 = (int)*(short *)(iVar10 + 10) - (int)*(short *)(iVar11 + 10);
     }
-    FUN_00164b5c(2,0x2e,0x24,*(unsigned int *)(param_2 + 4),*(int *)(param_2 + 8) + iVar10,0x65);
+    texDrawCompositeSprite(2,0x2e,0x24,*(unsigned int *)(param_2 + 4),*(int *)(param_2 + 8) + iVar10,0x65);
     uVar13 = 0x3f80000000000000;
     iVar11 = 0;
     do {
@@ -83,7 +83,7 @@ void FUN_0025cfe4(int param_1,int param_2)
             VectorSignedToFloat(iVar5,(unsigned char)(in_fpscr >> 0x16) & 3);
           }
           FUN_001677c0(iVar5);
-          FUN_00164b5c(2,0x2e,0xd,*(int *)(param_2 + 4) + (int)*(short *)(iVar3 + 8),
+          texDrawCompositeSprite(2,0x2e,0xd,*(int *)(param_2 + 4) + (int)*(short *)(iVar3 + 8),
                        (int)*(short *)(iVar3 + 10) + *(int *)(param_2 + 8) + iVar10,0x65);
           FUN_001677c0();
         }
@@ -93,17 +93,17 @@ void FUN_0025cfe4(int param_1,int param_2)
                      ,*(short *)(iVar4 + 10) + iVar10 +
                       *(int *)(param_2 + 8) + (int)*(short *)(iVar2 + 10),0x65);
         iVar12 = *(int *)(iVar12 + 0x3c);
-        FUN_001835b4(2,0x2e,0x131,*(int *)(param_2 + 4) + (int)*(short *)(iVar2 + 8),
+        texDrawTableEntryAtStoredOrigin(2,0x2e,0x131,*(int *)(param_2 + 4) + (int)*(short *)(iVar2 + 8),
                      *(int *)(param_2 + 8) + (int)*(short *)(iVar2 + 10) + iVar10,0x65);
-        FUN_001835b4(2,7,0xd,(int)*(short *)(iVar2 + 8) + *(int *)(param_2 + 4) +
+        texDrawTableEntryAtStoredOrigin(2,7,0xd,(int)*(short *)(iVar2 + 8) + *(int *)(param_2 + 4) +
                              (int)*(short *)(iVar6 + 8),
                      *(short *)(iVar6 + 10) + iVar10 +
                      (int)*(short *)(iVar2 + 10) + *(int *)(param_2 + 8),0x65);
-        FUN_001835b4(2,7,iVar12 / 10,
+        texDrawTableEntryAtStoredOrigin(2,7,iVar12 / 10,
                      (int)*(short *)(iVar2 + 8) + *(int *)(param_2 + 4) + (int)*(short *)(iVar8 + 8)
                      ,*(short *)(iVar8 + 10) + iVar10 +
                       (int)*(short *)(iVar2 + 10) + *(int *)(param_2 + 8),0x65);
-        FUN_001835b4(2,7,iVar12 % 10,
+        texDrawTableEntryAtStoredOrigin(2,7,iVar12 % 10,
                      (int)*(short *)(iVar7 + 8) + *(int *)(param_2 + 4) + (int)*(short *)(iVar2 + 8)
                      ,(int)*(short *)(iVar2 + 10) + *(int *)(param_2 + 8) +
                       *(short *)(iVar7 + 10) + iVar10,0x65);

@@ -71,7 +71,7 @@ void mobiclipAudioDeviceFinalize()
     s32 result = FUN_002c40f8(&index, &handle, 1, 0, -1);
     bool failed = nnResultIsFailure(result);
     if (failed)
-        FUN_002c526c(result, failed);
+        resultHandleFailure(result, failed);
     DAT_0044d128.unk04 = 1; // Finalization requested.
     nn_os_Thread_FinalizeImpl(&DAT_0044d128);
     if (DAT_0044d128.handle) {

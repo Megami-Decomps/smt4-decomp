@@ -18,7 +18,7 @@ int FUN_002bb378(void);
 int FUN_002c131c(...);
 int nn_os_LightEvent_Signal(unsigned int *);
 int FUN_002c40f8(unsigned int *, int *, int, int);
-int FUN_002c526c(void);
+int resultHandleFailure(void);
 int asdFatalError(void);
 int __aeabi_vec_ctor_nocookie_nodtor(int *, unsigned char *, int, int);
 int software_interrupt(int);
@@ -61,7 +61,7 @@ extern unsigned int FUN_002bb100(void);
 /* Supplied declaration required: FUN_002c131c. */
 /* Supplied declaration required: nn_os_LightEvent_Signal. */
 /* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: FUN_002c526c. */
+/* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: asdFatalError. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 extern unsigned char nn_os_LightEvent_TryWait(unsigned int);
@@ -107,7 +107,7 @@ void FUN_0012a37c(void)
     if (!temp_v0) {
       software_interrupt(0x19);
       if ((int)(&DAT_004e5290)[temp_v5] < 0) {
-        FUN_002c526c();
+        resultHandleFailure();
       }
       if (temp_v5 == 2) {
         temp_v1 = 0xc;
@@ -204,7 +204,7 @@ joined_r0x0012a634:
     threadSleepDuration(10000000,0);
     software_interrupt(0x18);
     if ((int)(&DAT_004e5290)[temp_v5] < 0) {
-      FUN_002c526c();
+      resultHandleFailure();
     }
   } while( 1 );
 }

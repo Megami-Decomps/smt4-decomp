@@ -35,7 +35,7 @@ u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work, void *owner);
 void drawParameterBlockClear(UiResourceParameters *);
 
-void FUN_002bd954(TargetSelectDrawState *, u32 first, u32 second,
+void uiSpriteStateInitFromSource(TargetSelectDrawState *, u32 first, u32 second,
                    UiResourceParameters *, s32 flag, f32 scalar);
 void FUN_002eb76c(TargetSelectDrawState *, u32 mode);
 }
@@ -65,6 +65,6 @@ extern "C" void btlTargetSelectCreate(BtlMainState *owner)
 
     drawParameterBlockClear(&work->parameters);
     paramsInit(&work->parameters, 0, 0, 0, 0, 0, 0, &DAT_004017f4, 0x10, 0, 0);
-    FUN_002bd954(&work->draw, 0x14, 0x71, &work->parameters, 1, 1.0f);
+    uiSpriteStateInitFromSource(&work->draw, 0x14, 0x71, &work->parameters, 1, 1.0f);
     FUN_002eb76c(&work->draw, 0);
 }

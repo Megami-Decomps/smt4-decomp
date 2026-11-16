@@ -15,9 +15,9 @@ struct TitleDebugBackgroundView {
 extern "C" {
 extern TitleDebugBackgroundView *DAT_0044e2e8;
 extern RenderCtx *g_titleScene;
-u32 FUN_002c5d80(u32 mode, u32 option);
+u32 renderCtxPackPassFlags(u32 mode, u32 option);
 void efctSetSpeed(f32 speed);
-void FUN_002bed3c();
+void gxResetColorQuadToWhite();
 f32 FUN_002aed34(s32 layer, void *parameters, f32 x, f32 y);
 
 // Draw the title debug background, PC/ROM loading indicator and the game title label.
@@ -26,10 +26,10 @@ u32 FUN_00125e64()
     TitleDebugBackgroundView *work = DAT_0044e2e8;
     if (work->state == 1) {
         RenderCtx *context = g_titleScene;
-        renderCtxPushA(context, FUN_002c5d80(1, 0));
+        renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
         efctSetSpeed(1.0f);
-        FUN_002bed3c();
-        FUN_002bf288(2, 0, 0, 0, 0, 0xB);
+        gxResetColorQuadToWhite();
+        texDrawTableEntryAtStoredOrigin(2, 0, 0, 0, 0, 0xB);
         renderStackPop(&g_titleScene->stackA);
         if (jyoucyuGetTableEntry(0) != NULL) {
             // Shift-JIS: full-width "PC load".

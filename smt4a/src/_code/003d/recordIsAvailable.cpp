@@ -9,7 +9,7 @@ typedef struct Record {
 } Record;
 
 extern Record *dataTable1bOr1cGetRecord(s32 id);
-extern s32 FUN_003df390(s32 id);
+extern s32 gameUnlockRecordRequirementsMet(s32 id);
 extern s32 gameFlagIsSet(u32 flag);
 
 /* 1 when the id has a record that is available; 0 if there is none, or flag A is set while flag B is not. */
@@ -20,7 +20,7 @@ u32 recordIsAvailable(s32 id)
     if (record == NULL) {
         return 0;
     }
-    if (FUN_003df390(id) == 0) {
+    if (gameUnlockRecordRequirementsMet(id) == 0) {
         return 0;
     }
     if (record->flagA != 0 && gameFlagIsSet(record->flagA) != 0 && (record->flagB == 0 || gameFlagIsSet(record->flagB) == 0)) {

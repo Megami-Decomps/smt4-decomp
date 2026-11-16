@@ -1,7 +1,7 @@
 #include "shard/W8Match1_PositionRequests.h"
 extern "C" {
 extern PositionRequestPool* DAT_005821a0;
-u32 FUN_003d4ed8(void);
+u32 soundActorStartOnFreeChannel(void);
 
 // Initializes the first free positional request and increments the live request count.
 void FUN_002dd380(u32 id, s32 kind, f32 x, f32 y, f32 z)
@@ -17,7 +17,7 @@ void FUN_002dd380(u32 id, s32 kind, f32 x, f32 y, f32 z)
             request->position[2] = z;
             request->id = id;
             if (kind == 0) {
-                request->timer = FUN_003d4ed8();
+                request->timer = soundActorStartOnFreeChannel();
                 request->state = 1;
             } else {
                 request->timer = 0;

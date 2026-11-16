@@ -6,7 +6,7 @@ extern "C" {
 
 u8 FUN_00152f44(void);
 
-u32 FUN_00152f54(void);
+u32 asdCameraGetSavedRenderPairs(void);
 
 u8 FUN_0015fb68(void);
 

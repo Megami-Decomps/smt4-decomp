@@ -1,9 +1,6 @@
 #include "shard/W8X15_PackageList.h"
 
 extern "C" {
-s32 FUN_001b315c(PackageEntry *entry);
-const PackageRecord *FUN_001b31ac(PackageEntry *entry);
-u32 FUN_001b31e0(PackageEntry *entry);
 
 /* Find an indexed triple-word record in the loaded packages' hash-marked tables. */
 u32 *packageFindIndexedTripleRecord(PackageList *packages, s32 index)
@@ -11,9 +8,9 @@ u32 *packageFindIndexedTripleRecord(PackageList *packages, s32 index)
     s32 skipped = 0;
     for (s32 packageIndex = 0; packageIndex < packages->count; ++packageIndex) {
         PackageEntry *package = &packages->entries[packageIndex];
-        if (FUN_001b315c(package)) {
-            const PackageRecord *records = FUN_001b31ac(package);
-            u32 count = FUN_001b31e0(package);
+        if (packageEntryIsLoaded(package)) {
+            const PackageRecord *records = reinterpret_cast<const PackageRecord *>(packageEntryGetDirectory(package));
+            u32 count = packageEntryGetFileCount(package);
             for (u32 recordIndex = 0; recordIndex < count; ++recordIndex) {
                 if (records[recordIndex].kind == '#') {
                     void *table = dataTableFileGetTable(package->files[recordIndex].fileId, 0);

@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
+int libm_cosf(void);
+int libm_sinf(void);
 int FUN_00281b94(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -16,8 +16,8 @@ typedef struct {
 extern int g_mapGimic; /* 0x580ca0 */
 
 extern int gameFlagsGetBlock(void);
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_00281b94. */
 
 
@@ -91,10 +91,10 @@ void FUN_00378000(void)
         *(unsigned int *)(temp_v1 + 0xb8) = *(unsigned int *)(temp_v1 + 0x94);
         *(unsigned int *)(temp_v1 + 0xc0) = *(unsigned int *)(temp_v1 + 0x9c);
         temp_v3 = *(float *)(temp_v1 + 0xc4) * (float)((unsigned long long)temp_v4 >> 0x20);
-        FUN_001bc124();
+        libm_sinf();
         *(float *)(temp_v1 + 0xb8) = *(float *)(temp_v1 + 0xb8) - temp_v3 * (float)temp_v5;
         temp_v3 = *(float *)(temp_v1 + 0xc4) * (float)((unsigned long long)temp_v4 >> 0x20);
-        FUN_001bbf0c();
+        libm_cosf();
         *(float *)(temp_v1 + 0xc0) = *(float *)(temp_v1 + 0xc0) - temp_v3 * (float)temp_v5;
         FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
@@ -135,10 +135,10 @@ void FUN_00378000(void)
         *(unsigned int *)(temp_v1 + 0xc0) = *(unsigned int *)(temp_v1 + 0x9c);
         *(unsigned int *)(temp_v1 + 0xb8) = *(unsigned int *)(temp_v1 + 0x94);
         temp_v3 = *(float *)(temp_v1 + 0xc4) * (float)((unsigned long long)temp_v4 >> 0x20);
-        FUN_001bc124();
+        libm_sinf();
         *(float *)(temp_v1 + 0xb8) = *(float *)(temp_v1 + 0xb8) - temp_v3 * (float)temp_v5;
         temp_v3 = *(float *)(temp_v1 + 0xc4) * (float)((unsigned long long)temp_v4 >> 0x20);
-        FUN_001bbf0c();
+        libm_cosf();
         *(float *)(temp_v1 + 0xc0) = *(float *)(temp_v1 + 0xc0) - temp_v3 * (float)temp_v5;
         FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }

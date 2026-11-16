@@ -29,7 +29,7 @@ typedef char StatusDownListIVSizeCheck[sizeof(StatusDownListIV) == 0x54c ? 1 : -
 extern "C" {
 #endif
 
-void FUN_002a4964(ScrollSelection* list, s32 index);
+void scrollListSetSelectionTracked(ScrollSelection* list, s32 index);
 void FUN_0029eb5c(ScrollSelection* list, s32 index);
 
 #ifdef __cplusplus

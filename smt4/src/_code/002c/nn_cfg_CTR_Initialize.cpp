@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002bbb2c(int, int);
+int sysReportCheckFailure(int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -12,7 +12,7 @@ typedef struct {
 } void_stack;
 
 extern int FUN_00128334(void);
-/* Supplied declaration required: FUN_002bbb2c. */
+/* Supplied declaration required: sysReportCheckFailure. */
 
 
 void nn_cfg_CTR_Initialize(void)
@@ -23,7 +23,7 @@ void nn_cfg_CTR_Initialize(void)
   
   temp_v0 = FUN_00128334();
   if ((temp_v0 < 0) && (temp_v0 < 0)) {
-    FUN_002bbb2c(temp_v0,0x2c5dd8);
+    sysReportCheckFailure(temp_v0,0x2c5dd8);
     return;
   }
   return;

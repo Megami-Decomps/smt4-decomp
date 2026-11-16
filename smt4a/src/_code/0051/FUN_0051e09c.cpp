@@ -2,14 +2,14 @@
 #include "shard/AnimCurve.h"
 
 extern "C" {
-const PackedAnimKeyNarrow *FUN_0051d730(const QuantizedAnimCurve *, f32);
+const PackedAnimKeyNarrow *frameCurveFindKeyAtTime(const QuantizedAnimCurve *, f32);
 
 // Interpolate the 12-bit values of a four-byte quantized key stream.
 f32 FUN_0051e09c(const QuantizedAnimCurve *curve, f32 time)
 {
-    FUN_0051d730(curve, time);
+    frameCurveFindKeyAtTime(curve, time);
     const PackedAnimKeyNarrow *last = reinterpret_cast<const PackedAnimKeyNarrow *>(curve->keys) + curve->keyCount - 1;
-    const PackedAnimKeyNarrow *key = FUN_0051d730(curve, time);
+    const PackedAnimKeyNarrow *key = frameCurveFindKeyAtTime(curve, time);
     f32 keyTime = curve->timeScale * static_cast<f32>(key->frame);
     u32 firstValue = key->valueLow + ((key->valueHigh & 15) << 8);
     if (keyTime == time || key == last)

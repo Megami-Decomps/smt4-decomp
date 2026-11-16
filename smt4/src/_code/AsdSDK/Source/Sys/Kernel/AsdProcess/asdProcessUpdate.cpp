@@ -42,11 +42,11 @@ static __inline s32 procRunUpdate(AsdProcess *proc)
 {
     s32 result;
 
-    if (g_asdProcess.cmdListsEnabled != 0 && FUN_002c5210() == 1 && proc->unk64 == 0) {
+    if (g_asdProcess.cmdListsEnabled != 0 && gxIsStereoscopic3dEnabled() == 1 && proc->unk64 == 0) {
         asdGxCommandListBegin(proc->cmdList);
     }
     result = proc->onUpdate(proc->handle);
-    if (g_asdProcess.cmdListsEnabled != 0 && FUN_002c5210() == 1 && proc->unk64 == 0) {
+    if (g_asdProcess.cmdListsEnabled != 0 && gxIsStereoscopic3dEnabled() == 1 && proc->unk64 == 0) {
         asdGxCommandListEnd(proc->cmdList, 0);
     }
     return result;

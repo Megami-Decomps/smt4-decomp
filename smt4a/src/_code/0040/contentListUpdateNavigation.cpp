@@ -11,7 +11,7 @@ s32 resourceRunOperationIfUnblocked(ContentGrid *);
 s32 FUN_002a4894(ContentGrid *);
 s32 objectApplyIfUnblocked(ContentGrid *);
 s32 FUN_00228b04(ContentGrid *, u32);
-s32 FUN_001517b4(u32, u32);
+s32 padQueryLogicalKey(u32, u32);
 s32 flaggedEntryGetValueA(ContentGrid *);
 void eventQueueAddUniqueIfValid(u32);
 void scrollOwnerSetValue(ContentGrid *, s32);
@@ -35,13 +35,13 @@ void contentListUpdateNavigation(ContentNavigation *screen)
         }
         screen->topRow = resourceRunOperationIfUnblocked(&screen->grid);
     }
-    if (FUN_001517b4(9, 0)) {
+    if (padQueryLogicalKey(9, 0)) {
         if (resourceRunOperationIfUnblocked(&screen->grid) == 0)
             return;
         eventQueueAddUniqueIfValid(0x100020d);
         scrollOwnerSetValue(&screen->grid, --screen->topRow);
     }
-    if (FUN_001517b4(10, 0) && objectApplyIfUnblocked(&screen->grid) >= 8) {
+    if (padQueryLogicalKey(10, 0) && objectApplyIfUnblocked(&screen->grid) >= 8) {
         s32 row = resourceRunOperationIfUnblocked(&screen->grid);
         s32 count = objectApplyIfUnblocked(&screen->grid);
         if (row != count - 8 &&

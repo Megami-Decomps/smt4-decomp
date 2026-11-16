@@ -3,7 +3,7 @@
 extern "C" {
 extern RunWinWork *g_runWin;
 s32 FUN_00167458(void *ui, s32 mode);
-s32 FUN_00163aa4(void *ui, f32 amount);
+s32 uiSpriteAdvanceAnimation(void *ui, f32 amount);
 s32 FUN_00162ea4(void);
 }
 
@@ -27,7 +27,7 @@ extern "C" s32 FUN_00208984(void)
         }
         break;
     case 3:
-        if (FUN_00163aa4(work->ui, 1.0f)) {
+        if (uiSpriteAdvanceAnimation(work->ui, 1.0f)) {
             work->active = 0;
             work->state = 4;
         }

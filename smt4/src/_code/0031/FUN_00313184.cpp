@@ -11,8 +11,8 @@ struct ItemSortKey {
 
 extern "C" {
 s32 idIsAbove400(u32 id);
-s32 FUN_0024c52c(u32 id);
-s32 FUN_002497f8(const ItemSortKey *left, const ItemSortKey *right);
+s32 itemGetSortCategory(u32 id);
+s32 itemSortCompareByCategoryAndId(const ItemSortKey *left, const ItemSortKey *right);
 }
 
 /* Compare by descending category rank, ascending record key, then the existing tie break. */
@@ -24,7 +24,7 @@ static __inline s32 itemSortCompareCategory(const ItemSortKey *left, const ItemS
         leftRank = 99;
         leftKey = 0;
     } else {
-        leftRank = FUN_0024c52c(left->id);
+        leftRank = itemGetSortCategory(left->id);
         leftKey = reinterpret_cast<ItemSortRecord *>(dataTable40FindById(left->id))->secondaryKey;
     }
     s32 rightRank;
@@ -33,7 +33,7 @@ static __inline s32 itemSortCompareCategory(const ItemSortKey *left, const ItemS
         rightRank = 99;
         rightKey = 0;
     } else {
-        rightRank = FUN_0024c52c(right->id);
+        rightRank = itemGetSortCategory(right->id);
         rightKey = reinterpret_cast<ItemSortRecord *>(dataTable40FindById(right->id))->secondaryKey;
     }
     s32 difference = rightRank - leftRank;
@@ -41,7 +41,7 @@ static __inline s32 itemSortCompareCategory(const ItemSortKey *left, const ItemS
         difference = leftKey - rightKey;
     if (difference != 0)
         return difference;
-    return FUN_002497f8(left, right);
+    return itemSortCompareByCategoryAndId(left, right);
 }
 
 extern "C" {

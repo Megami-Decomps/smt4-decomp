@@ -14,7 +14,7 @@ typedef struct Work00321298 {
     /* 0x3dac */ u32 unk3dac;
 } Work00321298;
 
-void FUN_0020ad6c(Work00321298 *work, s32 a, s32 b);
+void btlCommandMenuEnterMode(Work00321298 *work, s32 a, s32 b);
 
 /* Leaves the state: clears the whole second table and switches to 0x1c, unless the state is 0x28, which clears only the current entry. */
 void workTablesClear(Work00321298 *work)
@@ -25,7 +25,7 @@ void workTablesClear(Work00321298 *work)
         for (i = 0; i < 4; i++) {
             work->secondTable[i] = 0;
         }
-        FUN_0020ad6c(work, 0x1c, 0);
+        btlCommandMenuEnterMode(work, 0x1c, 0);
         return;
     }
     work->secondTable[work->index] = 0;

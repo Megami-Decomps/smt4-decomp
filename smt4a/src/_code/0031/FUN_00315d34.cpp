@@ -46,7 +46,7 @@ struct MapInterface {
 extern "C" {
 extern MapInterface *g_mapIf;
 
-s32 FUN_001692ac(u32 a, u32 b);
+s32 renderCtxPackPassFlags(u32 a, u32 b);
 void FUN_0014e314(u32 first, u32 second, u32 third, u32 fourth,
                   f32 x, f32 y, f32 width, f32 height, f32 depth);
 void FUN_002371b0(void);
@@ -63,9 +63,9 @@ s32 FUN_00315d34(u32 handle)
     if (screen->overlayShown != 0) {
         u32 overlay = screen->overlayId;
         RenderCtxA *context = g_renderCtx;
-        s32 state = FUN_001692ac(5, 1);
+        s32 state = renderCtxPackPassFlags(5, 1);
         renderCtxPushA(context, state);
-        FUN_00157558(g_renderCtx);
+        renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         renderCtxSelectTexture(g_renderCtx, NULL);
         FUN_0014e314(overlay, overlay, overlay, overlay, 0.0f, 0.0f, 400.0f, 240.0f, 0.0f);
         FUN_002371b0();
@@ -125,10 +125,10 @@ s32 FUN_00315d34(u32 handle)
 
     if (screen->entryId == NOTICE_ENTRY_SPECIAL || findKeyedRecord(screen->entryId, screen->entrySub) != 0) {
         RenderCtxA *context = g_renderCtx;
-        s32 state = FUN_001692ac(1, 0);
+        s32 state = renderCtxPackPassFlags(1, 0);
         renderCtxPushA(context, state);
         for (s32 sprite = NOTICE_FRAME_FIRST; sprite <= NOTICE_FRAME_LAST; sprite++)
-            FUN_001835b4(2, 8, sprite, (s32)offset, 0, 0xB);
+            texDrawTableEntryAtStoredOrigin(2, 8, sprite, (s32)offset, 0, 0xB);
         char text[128];
         FUN_003849cc(screen->entryId, screen->entrySub, 0, text, -1);
         textDrawString(3, 0xFFFFFFFF, text, (f32)frame->x + offset, (f32)frame->y,

@@ -7,7 +7,7 @@
 extern "C" {
 s32 scrGetArg(u32 index);
 u32 btlResolveEntryChoice(u32 choice);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
 void scrSetResult(s32 value);
 
 /* Compare the eligible candidates' average threshold value to the script argument. */
@@ -18,7 +18,7 @@ u32 FUN_00373684(void)
     s32 sum = 0;
     s32 candidates = 0;
     s32 first, count;
-    FUN_00301a08(choice, &first, &count);
+    btlGetEntryChoiceRange(choice, &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
@@ -29,7 +29,7 @@ u32 FUN_00373684(void)
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
-        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL) {
             candidates++;
             sum += entry->thresholdView.unk27A;

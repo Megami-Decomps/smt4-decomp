@@ -13,7 +13,7 @@ struct WindowTransitionProcess {
 extern "C" {
 extern WindowTransitionProcess *DAT_0057f584;
 s32 FUN_00167458(void *window, u32 option);
-s32 FUN_00163aa4(void *window, f32 speed);
+s32 uiSpriteAdvanceAnimation(void *window, f32 speed);
 s32 FUN_00162ea4();
 }
 
@@ -35,7 +35,7 @@ extern "C" s32 FUN_0023a9a0(void *context)
             work->state = work->result;
         break;
     case 3:
-        if (FUN_00163aa4(work->window, 1)) {
+        if (uiSpriteAdvanceAnimation(work->window, 1)) {
             work->active = 0;
             work->state = 4;
         }

@@ -25,7 +25,7 @@ u32 FUN_002f4a74(void)
         }
         return 1;
     }
-    FUN_00287728(0);
+    screenFadeSlotReset(0);
     return 1;
 }
 

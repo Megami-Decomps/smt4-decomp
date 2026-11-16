@@ -11,7 +11,7 @@ struct SoundOutputTail {
 };
 extern SoundOutputTail DAT_004e2f68;
 
-void FUN_002bda30(s32 handle, s32 unk);
+void basicSoundStopOrFadeOut(s32 handle, s32 unk);
 
 /* Selects slots `first` and `second` of the one-sound kind: each one's running sound is stopped and
  * the slot is reset. An out-of-range index (or -1) selects none. */
@@ -22,7 +22,7 @@ void asdSoundSlotCSelect(u32 first, u32 second)
     if (first != 0xffffffff && first < 2) {
         slot = &g_asdSound.slotsC[first];
         if (slot->handle != 0) {
-            FUN_002bda30(slot->handle, 0);
+            basicSoundStopOrFadeOut(slot->handle, 0);
         }
         slot->unk08 = 0;
         slot->volume = ASD_SND_VOLUME_DEFAULT;
@@ -35,7 +35,7 @@ void asdSoundSlotCSelect(u32 first, u32 second)
     if (second != 0xffffffff && second < 2) {
         slot = &g_asdSound.slotsC[second];
         if (slot->handle != 0) {
-            FUN_002bda30(slot->handle, 0);
+            basicSoundStopOrFadeOut(slot->handle, 0);
         }
         slot->unk08 = 0;
         slot->volume = ASD_SND_VOLUME_DEFAULT;

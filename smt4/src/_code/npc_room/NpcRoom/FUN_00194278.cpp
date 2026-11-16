@@ -28,7 +28,7 @@ int buttonHelpRelease(void);
 int uiFadeRelease(void);
 int messageMainFinishWindow(void);
 int scrScriptProcessStartEntry(...);
-int FUN_00297060(...);
+int scrScriptProcessCreate(...);
 int soundChannelStopAll(int);
 int slotSetRequest(...);
 int soundChannelRequestIfEnabled(int, int, int);
@@ -80,7 +80,7 @@ extern int messageWindowIsState1(void);
 /* Supplied declaration required: uiFadeRelease. */
 /* Supplied declaration required: messageMainFinishWindow. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_00297060. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: slotSetRequest. */
@@ -261,7 +261,7 @@ LAB_001945e8:
     }
     scrRunOpcodesStub(puVar3[0x14]);
     scrRunOpcodesStub(puVar3[0x15]);
-    temp_v5 = FUN_00290e78();
+    temp_v5 = messageBannerIsIdle();
     if (temp_v5 == 0) break;
     messageMainFinishWindow();
     temp_v5 = messageMainGetChoiceResult();
@@ -297,7 +297,7 @@ LAB_001945e8:
                  *(unsigned short *)puVar3[puVar3[0x3e] + 10]);
     temp_v3 = asdLoadFileSyncDefault(&temp_v9);
     puVar3[0x17] = temp_v3;
-    FUN_00297060(temp_v3,puVar3[0x16]);
+    scrScriptProcessCreate(temp_v3,puVar3[0x16]);
     puVar3[0x18] = temp_v3;
     temp_v3 = tableGroupFindEntryIndex(puVar3[0x17],puVar3[puVar3[0x3e] + 10] + 0x16);
     scrScriptProcessStartEntry(puVar3[0x18],temp_v3);

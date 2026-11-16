@@ -3,14 +3,14 @@
 extern "C" {
 
 extern void *g_aocSystem;
-s32 FUN_0025bed8(void *system, s32 kind, s32 slot);
+s32 groupedFileTablesCountRecordsOfKind(void *system, s32 kind, s32 slot);
 
 /* Adds installed and downloadable table counts. */
 s32 FUN_00323538(void)
 {
     s32 count = dataTableGetCount(dataTableGetSection(41, 3));
 
-    return FUN_0025bed8(g_aocSystem, 35, 3) + count;
+    return groupedFileTablesCountRecordsOfKind(g_aocSystem, 35, 3) + count;
 }
 
 } /* extern "C" */

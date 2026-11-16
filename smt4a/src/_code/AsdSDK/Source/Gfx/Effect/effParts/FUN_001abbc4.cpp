@@ -9,7 +9,7 @@ int FUN_001ac8ec(...);
 int FUN_001acb48(...);
 int FUN_001b4ba4(int);
 int FUN_001b4c1c(...);
-int FUN_001b4ddc(...);
+int effPartInitDefaults(...);
 int FUN_001b4e80(void);
 int FUN_001b4eb8(...);
 int libc_strcpy(...);
@@ -37,7 +37,7 @@ extern char s______________________005b3274[113]; /* 0x5b3274 */
 /* Supplied declaration required: FUN_001acb48. */
 /* Supplied declaration required: FUN_001b4ba4. */
 /* Supplied declaration required: FUN_001b4c1c. */
-/* Supplied declaration required: FUN_001b4ddc. */
+/* Supplied declaration required: effPartInitDefaults. */
 /* Supplied declaration required: FUN_001b4e80. */
 /* Supplied declaration required: FUN_001b4eb8. */
 /* Supplied declaration required: libc_strcpy. */
@@ -76,7 +76,7 @@ unsigned int * FUN_001abbc4(unsigned int *param_1)
   sysMemClear();
   puVar2[0x20] = 0;
   puVar2[0x21] = 0;
-  FUN_001b4ddc(puVar2);
+  effPartInitDefaults(puVar2);
   temp_v4 = param_1[1];
   temp_v6 = param_1[2];
   temp_v8 = param_1[3];
@@ -105,7 +105,7 @@ unsigned int * FUN_001abbc4(unsigned int *param_1)
       *(unsigned char *)(temp_v1 + 0x88) = 8;
       *(unsigned char *)(temp_v1 + 0x89) = 0;
       *(unsigned char *)(temp_v1 + 0x8a) = 0;
-      FUN_001b4ddc(temp_v1);
+      effPartInitDefaults(temp_v1);
       if ((*(unsigned int *)(temp_v9 + 0x98) & 1) != 0) {
         temp_v2 = param_1[0x23];
         for (temp_v3 = temp_v2;
@@ -203,7 +203,7 @@ unsigned int * FUN_001abbc4(unsigned int *param_1)
         *(unsigned char *)(temp_v3 + 0x88) = 8;
         *(unsigned char *)(temp_v3 + 0x89) = 0;
         *(unsigned char *)(temp_v3 + 0x8a) = 0;
-        FUN_001b4ddc(temp_v3);
+        effPartInitDefaults(temp_v3);
         if ((*(unsigned int *)(temp_v10 + 0x98) & 1) != 0) {
           temp_v2 = puVar2[0x23];
           temp_v5 = *(int *)(temp_v10 + 0x90);

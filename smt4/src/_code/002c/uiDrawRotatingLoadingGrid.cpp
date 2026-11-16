@@ -17,11 +17,11 @@ void uiDrawRotatingLoadingGrid(s32 firstPosition, s32 frame)
             s32 index = row * 3 + column;
             const SpriteInfo *position = asdTMTexTableEntryAt(0x24, firstPosition + index);
             if (first == index || second == index)
-                FUN_002bf288(2, 0x24, 0x1de, position->x, position->y, 0xfb);
+                texDrawTableEntryAtStoredOrigin(2, 0x24, 0x1de, position->x, position->y, 0xfb);
             else if (firstTrail == index || secondTrail == index)
-                FUN_002bf288(2, 0x24, 0x1df, position->x, position->y, 0xfb);
+                texDrawTableEntryAtStoredOrigin(2, 0x24, 0x1df, position->x, position->y, 0xfb);
             else
-                FUN_002bf288(2, 0x24, 0x1dd, position->x, position->y, 0xfb);
+                texDrawTableEntryAtStoredOrigin(2, 0x24, 0x1dd, position->x, position->y, 0xfb);
         }
     }
 }

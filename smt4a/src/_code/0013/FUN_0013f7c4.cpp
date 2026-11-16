@@ -15,16 +15,16 @@ int SBORROW4(...);
 
 int textFormatBuffer(...);
 int FUN_00151e4c(int);
-int FUN_0015f858(...);
+int dataFindKindRecordWithAocOverrides(...);
 int textDrawString(...);
 int FUN_00164490(int);
-int FUN_00164b5c(...);
+int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
 int FUN_001678a8(int);
 int renderCtxPopState(...);
 int renderStackPushIndexed(...);
 int FUN_00180310(...);
-int FUN_00183bb0(void);
+int gxResetColorQuadToWhite(void);
 int drawSetColorFromRGBA8(...);
 int VectorSignedToFloat(...);
 
@@ -48,19 +48,19 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: messageCreatePanelEffects. */
 /* Supplied declaration required: messageDrawPairedFrameSprites. */
 /* Supplied declaration required: FUN_00151e4c. */
-/* Supplied declaration required: FUN_0015f858. */
+/* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: FUN_00164490. */
-/* Supplied declaration required: FUN_00164b5c. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001678a8. */
-extern unsigned int FUN_001692ac(unsigned int, unsigned int);
+extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00169e38. */
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
 /* Supplied declaration required: FUN_00180310. */
-/* Supplied declaration required: FUN_00183bb0. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 
 
@@ -88,9 +88,9 @@ unsigned int FUN_0013f7c4(void)
     if (*(char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 9) == '\x14') {
       if (*(char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 8) != '\0') {
         efctSetSpeed();
-        temp_v3 = FUN_001692ac(1,0);
+        temp_v3 = renderCtxPackPassFlags(1,0);
         renderStackPushIndexed(g_renderCtx,3,temp_v3);
-        FUN_001835b4(2,0x2f,0x8d,0,0,6);
+        texDrawTableEntryAtStoredOrigin(2,0x2f,0x8d,0,0,6);
         renderCtxPopState(g_renderCtx,3);
         efctSetSpeed();
       }
@@ -101,9 +101,9 @@ unsigned int FUN_0013f7c4(void)
   else {
     if (*(char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 8) != '\0') {
       efctSetSpeed();
-      temp_v3 = FUN_001692ac(1,0);
+      temp_v3 = renderCtxPackPassFlags(1,0);
       renderStackPushIndexed(g_renderCtx,3,temp_v3);
-      FUN_001835b4(2,8,0x101,0,0,6);
+      texDrawTableEntryAtStoredOrigin(2,8,0x101,0,0,6);
       renderCtxPopState(g_renderCtx,3);
       efctSetSpeed();
     }
@@ -116,14 +116,14 @@ unsigned int FUN_0013f7c4(void)
   if (*(char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x8f) != '\0') {
     temp_v1 = vec2GetXInt(reinterpret_cast<const void *>((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0xb00));
     temp_v2 = vec2GetYInt((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0xb00);
-    temp_v3 = FUN_001692ac(1,0);
+    temp_v3 = renderCtxPackPassFlags(1,0);
     renderStackPushIndexed(g_renderCtx,3,temp_v3);
     efctSetSpeed();
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
     temp_v4 = (int)asdTMTexTableEntryAt(8,200);
-    FUN_00164b5c(2,8,10,*(short *)(temp_v4 + 8) + temp_v1,*(short *)(temp_v4 + 10) + temp_v2,0xb);
+    texDrawCompositeSprite(2,8,10,*(short *)(temp_v4 + 8) + temp_v1,*(short *)(temp_v4 + 10) + temp_v2,0xb);
     temp_v3 = *(unsigned int *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x78);
-    FUN_0015f858(temp_v3,0);
+    dataFindKindRecordWithAocOverrides(temp_v3,0);
     textFormatBuffer(temp_v9,&LAB_0013fbb4,temp_v3);
     temp_v5 = (int)asdTMTexTableEntryAt(8,0xc2);
     VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,
@@ -144,7 +144,7 @@ unsigned int FUN_0013f7c4(void)
     FUN_00180310(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                  (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0,1,0x10,
                  &LAB_0013fbc0);
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
     efctSetSpeed();
     renderCtxPopState(g_renderCtx,3);
   }
@@ -152,12 +152,12 @@ unsigned int FUN_0013f7c4(void)
   if (*(int *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x158) != 0) {
     temp_v2 = vec2GetXInt(reinterpret_cast<const void *>((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0xd30));
     temp_v4 = vec2GetYInt(temp_v1 + 0xd30);
-    temp_v3 = FUN_001692ac(1,0);
+    temp_v3 = renderCtxPackPassFlags(1,0);
     renderStackPushIndexed(g_renderCtx,3,temp_v3);
     efctSetSpeed();
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
     temp_v5 = (int)asdTMTexTableEntryAt(8,0xc0);
-    FUN_00164b5c(2,8,0x11,*(short *)(temp_v5 + 8) + temp_v2,*(short *)(temp_v5 + 10) + temp_v4,0xb);
+    texDrawCompositeSprite(2,8,0x11,*(short *)(temp_v5 + 8) + temp_v2,*(short *)(temp_v5 + 10) + temp_v4,0xb);
     FUN_00169e38(*(unsigned short *)(temp_v1 + 0x15c),*(short *)(temp_v5 + 8) + temp_v2,
                  *(short *)(temp_v5 + 10) + temp_v4,0);
     temp_v6 = 100000000;
@@ -185,7 +185,7 @@ unsigned int FUN_0013f7c4(void)
     FUN_00180310(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v1 + 8) + temp_v2,
                  (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v4,0,0xf,0x10,
                  &LAB_0013fbc0);
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
     renderCtxPopState(g_renderCtx,3);
   }
   if ((*(char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x19fb) != '\0') &&
@@ -194,13 +194,13 @@ unsigned int FUN_0013f7c4(void)
       if (temp_v1 != 2) {
         if (temp_v1 == 3) {
           efctSetSpeed();
-          FUN_001835b4(2,4,0xac0f,0,0,0xf1);
-          FUN_001835b4(2,4,0xac10,0,0,0xf1);
+          texDrawTableEntryAtStoredOrigin(2,4,0xac0f,0,0,0xf1);
+          texDrawTableEntryAtStoredOrigin(2,4,0xac10,0,0,0xf1);
           if (*(char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x19f9) == '\x03') {
             efctSetSpeed();
             temp_v1 = 0;
             do {
-              FUN_001835b4(2,4,temp_v1 + 0xac11,0,0,0xf1);
+              texDrawTableEntryAtStoredOrigin(2,4,temp_v1 + 0xac11,0,0,0xf1);
               temp_v1 = temp_v1 + 1;
             } while (temp_v1 < 4);
             efctSetSpeed();
@@ -209,7 +209,7 @@ unsigned int FUN_0013f7c4(void)
           efctSetSpeed();
           temp_v1 = 0;
           do {
-            FUN_001835b4(2,4,temp_v1 + 0xac1c,0,0,0xf1);
+            texDrawTableEntryAtStoredOrigin(2,4,temp_v1 + 0xac1c,0,0,0xf1);
             temp_v1 = temp_v1 + 1;
           } while (temp_v1 < 6);
           efctSetSpeed();
@@ -219,12 +219,12 @@ unsigned int FUN_0013f7c4(void)
       }
       else {
         efctSetSpeed();
-        FUN_001835b4(2,4,0xabf9,0,0,0xf1);
+        texDrawTableEntryAtStoredOrigin(2,4,0xabf9,0,0,0xf1);
         if (*(char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x19f9) == '\x03') {
           efctSetSpeed();
           temp_v1 = 0;
           do {
-            FUN_001835b4(2,4,temp_v1 + 0xabfa,0,0,0xf1);
+            texDrawTableEntryAtStoredOrigin(2,4,temp_v1 + 0xabfa,0,0,0xf1);
             temp_v1 = temp_v1 + 1;
           } while (temp_v1 < 4);
           efctSetSpeed();
@@ -236,12 +236,12 @@ unsigned int FUN_0013f7c4(void)
     }
     else {
       efctSetSpeed();
-      FUN_001835b4(2,4,0xac2c,0,0,0xf1);
+      texDrawTableEntryAtStoredOrigin(2,4,0xac2c,0,0,0xf1);
       if (*(char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x19f9) == '\x03') {
         efctSetSpeed();
         temp_v1 = 0;
         do {
-          FUN_001835b4(2,4,temp_v1 + 0xac2d,0,0,0xf1);
+          texDrawTableEntryAtStoredOrigin(2,4,temp_v1 + 0xac2d,0,0,0xf1);
           temp_v1 = temp_v1 + 1;
         } while (temp_v1 < 4);
         efctSetSpeed();

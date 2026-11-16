@@ -6,7 +6,7 @@
 extern "C" {
 
 int FUN_00126468(void);
-int FUN_002b6480(unsigned char [64], int, int, unsigned char *, unsigned char *);
+int asdLoadFileAsyncDefault(unsigned char [64], int, int, unsigned char *, unsigned char *);
 int libc_strcat(unsigned char [64], unsigned char [72]);
 int textFormatBuffer(...);
 int rt_aeabi_memclr(...);
@@ -24,7 +24,7 @@ extern unsigned char DAT_004c5634; /* 0x4c5634 */
 extern signed char DAT_004c581a; /* 0x4c581a */
 
 /* Supplied declaration required: FUN_00126468. */
-/* Supplied declaration required: FUN_002b6480. */
+/* Supplied declaration required: asdLoadFileAsyncDefault. */
 /* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
@@ -84,7 +84,7 @@ unsigned int FUN_002bfc24(unsigned int param_1,unsigned int param_2,int param_3,
         *(int *)(temp_v0 + 0x4c5690) = (int)((unsigned long long)in_d0 >> 0x20);
         *(char *)(temp_v0 + 0x4c56a9) = (char)param_3;
         libc_strcpy(reinterpret_cast<unsigned int *>(temp_v0 + 0x4c5635), reinterpret_cast<unsigned int *>(temp_v2));
-        FUN_002b6480(temp_v2,0,3,&LAB_00126484,puVar3);
+        asdLoadFileAsyncDefault(temp_v2,0,3,&LAB_00126484,puVar3);
         return temp_v1;
       }
       temp_v1 = temp_v1 + 1;

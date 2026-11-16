@@ -6,7 +6,7 @@
 extern "C" {
 
 int btlGetMainState(...);
-int FUN_001568f8(...);
+int btlFindEntryBlockByMemberId(...);
 int FUN_003f0254(...);
 int FUN_003f06b4(...);
 int btlMainFindEntryByListedId(...);
@@ -50,7 +50,7 @@ extern unsigned int DAT_00573c38; /* 0x573c38 */
 extern unsigned int DAT_00573c3c; /* 0x573c3c */
 
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_001568f8. */
+/* Supplied declaration required: btlFindEntryBlockByMemberId. */
 extern int idSetFindSubjectIndex(unsigned int, int);
 /* Supplied declaration required: FUN_003f0254. */
 /* Supplied declaration required: FUN_003f06b4. */
@@ -236,7 +236,7 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
                 if (temp_v6 == 0) {
                   temp_v6 = reinterpret_cast<int>(btlQueueReflectAction(g_btlActionReflect,(int)(short)((short)*(int *)(temp_v7 + 100) + temp_v0),0,param_2));
                   temp_v3 = btlGetMainState();
-                  FUN_001568f8(temp_v3,(int)*(short *)(temp_v7 + 0x6a));
+                  btlFindEntryBlockByMemberId(temp_v3,(int)*(short *)(temp_v7 + 0x6a));
                   temp_v4 = btlGetMainState();
                   temp_v5 = idSetFindSubjectIndex(temp_v4,temp_v7);
                   if (temp_v5 < 0) {

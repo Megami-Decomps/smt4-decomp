@@ -98,7 +98,7 @@ extern "C" {
 extern SceneRecords DAT_005f1cbc;
 void FUN_00352eec(void);
 
-void FUN_0014e188(SceneSprite *sprite, u32 group, u32 image, UiResourceParameters *owner, u16 id, f32 scale);
+void uiSpriteStateInitFromSource(SceneSprite *sprite, u32 group, u32 image, UiResourceParameters *owner, u16 id, f32 scale);
 void uiSpriteSetKeyframe(SceneSprite *sprite, s32 keyframe, s32 restart);
 void uiSpriteSelectAnim(SceneSprite *sprite, s32 animation);
 
@@ -183,10 +183,10 @@ void FUN_0029a794(SceneWork *work, s32 savePoint)
                sKeysThird, sizeof(sKeysThird), sKeysFourth, sizeof(sKeysFourth),
                sKeysFifth, sizeof(sKeysFifth));
     work->unk490 = 0;
-    FUN_0014e188(&work->sprite, 0x1d, 0, &work->packet, 1, 1.0f);
+    uiSpriteStateInitFromSource(&work->sprite, 0x1d, 0, &work->packet, 1, 1.0f);
     uiSpriteSetKeyframe(&work->sprite, 0, 0);
     for (i = 0; i < 5; i++) {
-        FUN_0014e188(&work->sprites[i], 0x13, 0x11d4, &work->packet, 0xb, 1.0f);
+        uiSpriteStateInitFromSource(&work->sprites[i], 0x13, 0x11d4, &work->packet, 0xb, 1.0f);
         uiSpriteSelectAnim(&work->sprites[i], 0);
     }
 }

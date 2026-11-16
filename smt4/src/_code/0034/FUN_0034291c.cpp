@@ -129,7 +129,7 @@ void FUN_0034291c(int param_1)
                *(unsigned int *)(param_1 + (unsigned int)(*(char *)(param_1 + 0x55) != '\0') * 4 + 0xdc),0x41)
   ;
   temp_v10 = (float)VectorSignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002bf288(2,0x14,0x36,(int)(temp_v9 + temp_v10),(int)temp_v6,0x41);
+  texDrawTableEntryAtStoredOrigin(2,0x14,0x36,(int)(temp_v9 + temp_v10),(int)temp_v6,0x41);
   efctSetSpeed();
   temp_v10 = (float)VectorSignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_002bdf94(0,(int)(*(float *)(param_1 + 0x80) + temp_v9 + temp_v10),
@@ -228,22 +228,22 @@ void FUN_0034291c(int param_1)
     }
   }
   temp_v10 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002bf288(2,0x14,temp_v2,(int)(*(float *)(param_1 + 0x68) + temp_v10),
+  texDrawTableEntryAtStoredOrigin(2,0x14,temp_v2,(int)(*(float *)(param_1 + 0x68) + temp_v10),
                (int)*(float *)(param_1 + 0x6c),0x42);
   if (temp_v1 == 4 || temp_v1 == 8) {
     temp_v10 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002bf288(2,0x14,0x77,(int)(*(float *)(param_1 + 0x68) + temp_v10),
+    texDrawTableEntryAtStoredOrigin(2,0x14,0x77,(int)(*(float *)(param_1 + 0x68) + temp_v10),
                  (int)*(float *)(param_1 + 0x6c),0x43);
   }
   if (temp_v1 == 5) {
     temp_v10 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002bf288(2,0x14,0x78,(int)(*(float *)(param_1 + 0x68) + temp_v10),
+    texDrawTableEntryAtStoredOrigin(2,0x14,0x78,(int)(*(float *)(param_1 + 0x68) + temp_v10),
                  (int)*(float *)(param_1 + 0x6c),0x43);
     return;
   }
   if (temp_v1 == 6 || temp_v1 == 9) {
     temp_v10 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002bf288(2,0x14,0x79,(int)(*(float *)(param_1 + 0x68) + temp_v10),
+    texDrawTableEntryAtStoredOrigin(2,0x14,0x79,(int)(*(float *)(param_1 + 0x68) + temp_v10),
                  (int)*(float *)(param_1 + 0x6c),0x43);
   }
   return;

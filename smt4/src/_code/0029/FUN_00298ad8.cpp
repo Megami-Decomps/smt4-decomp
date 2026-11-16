@@ -14,7 +14,7 @@ CampMenuEntry *FUN_00292844(u32 id);
 CampMenuEntry *dataTable15Sub0GetEntries(u32 index);
 u32 dataTable15Sub0GetCount(void);
 u8 flagBitIsSet(u32 bit);
-void FUN_0029f848(void *list, s32 a, s32 b, s32 c, s32 d, s32 e);
+void gridNavigationConfigure(void *list, s32 a, s32 b, s32 c, s32 d, s32 e);
 void scrollOwnerSelectIndex(void *list, s32 index);
 
 extern CampMenuState *g_camp;
@@ -46,7 +46,7 @@ void FUN_00298ad8(void)
             }
         }
     }
-    FUN_0029f848(camp->list, visible, 1, visible, 1, 1);
+    gridNavigationConfigure(camp->list, visible, 1, visible, 1, 1);
     scrollOwnerSelectIndex(camp->list, camp->selection[camp->group]);
 }
 

@@ -7,7 +7,7 @@ extern "C" {
 
 int FUN_0029a17c(int, int, int, int, int);
 int effectRenderTransformedInstance(int);
-int FUN_002bed3c(void);
+int gxResetColorQuadToWhite(void);
 int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int FUN_003b65a4(int, int, int, int, int, int, int, int, int, int);
@@ -35,7 +35,7 @@ extern int g_titleScene; /* 0x44ea00 */
 extern int gameGetUnitRecord(void);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: effectRenderTransformedInstance. */
-/* Supplied declaration required: FUN_002bed3c. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
 /* Supplied declaration required: asdTMTexTableEntryAt. */
@@ -172,7 +172,7 @@ void FUN_003b5f30(int param_1,int param_2,int param_3)
         }
       }
       else {
-        FUN_002bed3c();
+        gxResetColorQuadToWhite();
       }
     }
     else {
@@ -248,7 +248,7 @@ void FUN_003b5f30(int param_1,int param_2,int param_3)
               VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
               efctSetSpeed();
             }
-            FUN_002bf288(2,0x28,99,*(short *)(temp_v3 + 8) + temp_v5,
+            texDrawTableEntryAtStoredOrigin(2,0x28,99,*(short *)(temp_v3 + 8) + temp_v5,
                          temp_v1 + temp_v8 + (int)*(short *)(temp_v3 + 10),0xce);
             efctSetSpeed();
           }
@@ -256,7 +256,7 @@ void FUN_003b5f30(int param_1,int param_2,int param_3)
                   ((int)*(char *)(param_1 + temp_v8 + 0xd530) < (int)(unsigned int)*(unsigned char *)(temp_v2 + 0x48)))
           {
             temp_v2 = asdTMTexTableEntryAt(0x28,temp_v7 + 0x68);
-            FUN_002bf288(2,0x28,99,*(short *)(temp_v2 + 8) + temp_v5,*(short *)(temp_v2 + 10) + temp_v1,0xce
+            texDrawTableEntryAtStoredOrigin(2,0x28,99,*(short *)(temp_v2 + 8) + temp_v5,*(short *)(temp_v2 + 10) + temp_v1,0xce
                         );
           }
           temp_v7 = temp_v7 + 1;

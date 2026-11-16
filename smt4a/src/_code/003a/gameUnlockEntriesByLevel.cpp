@@ -15,7 +15,7 @@ typedef struct UnlockRecord {
 
 PlayerLevelData *gameGetPlayerData(void);
 s32 gameFlagEntryGetBit(u16 id, u32 bit);
-s32 FUN_003df390(u16 id);
+s32 gameUnlockRecordRequirementsMet(u16 id);
 UnlockRecord *dataTable1bOr1cGetRecord(u16 id);
 u32 itemDataGetValue(u16 id);
 
@@ -28,7 +28,7 @@ s32 gameUnlockEntriesByLevel(void)
     s32 id;
 
     for (id = 100; id < 400; id++) {
-        if (gameFlagEntryGetBit(id, 0) == 0 && FUN_003df390(id) != 0) {
+        if (gameFlagEntryGetBit(id, 0) == 0 && gameUnlockRecordRequirementsMet(id) != 0) {
             UnlockRecord *record = dataTable1bOr1cGetRecord(id);
             if (record != NULL && record->requiredLevel != 0 && record->requiredLevel <= level) {
                 u32 flag = itemDataGetValue(id);

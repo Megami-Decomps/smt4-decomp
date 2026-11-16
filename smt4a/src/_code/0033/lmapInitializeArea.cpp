@@ -43,7 +43,7 @@ Table23Record *dataTableGetRecord23(u32 index);
 void mapPlaceSet(s32, s32, s32);
 void FUN_00227a70();
 void FUN_002a2e98(s32, u32, u32, u32);
-void FUN_002df914();
+void lmapUpdateMapBgm();
 void lmapApplyMapAndArea();
 void FUN_00378000();
 void FUN_00483acc(LmapObj *);
@@ -82,7 +82,7 @@ void lmapInitializeArea(u32 area, u32 spawnId)
     } else {
         FUN_002a2e98(state->map, state->area, 0, 0);
     }
-    FUN_002df914();
+    lmapUpdateMapBgm();
     lmapApplyMapAndArea();
     FUN_00378000();
     FUN_00483acc(&state->setter);

@@ -9,7 +9,7 @@ s32 scrGetArg(u32 index);
 void FUN_0027df30(s32 mode, BtlEntry *unit, BtlActionRecord *records, s32 target,
                   s32 hp, s32 mp, u32 color, u32 flags, s32 first, s32 second,
                   s32 kind, s32 third, s32 fourth);
-void FUN_002505c0(s32 mode, BtlEntry *unit, u32 effect, s32 first, s32 second, s32 third, s32 fourth);
+void btlQueueKeyedScalarReflectAction(s32 mode, BtlEntry *unit, u32 effect, s32 first, s32 second, s32 third, s32 fourth);
 
 /* Apply percentage-based HP/MP amounts to the script unit and enqueue its effect. */
 u32 btlScriptApplyPercentHpMpEffect(void)
@@ -34,7 +34,7 @@ u32 btlScriptApplyPercentHpMpEffect(void)
         mp = -1;
     FUN_0027df30(0, unit, btlGetMainState()->actions, 0,
                   hp, mp, ~0u, flags, 0, 0, 9, 0, 0);
-    FUN_002505c0(0, unit, 0x10001c1, 0, 0, 0, 0);
+    btlQueueKeyedScalarReflectAction(0, unit, 0x10001c1, 0, 0, 0, 0);
     return 1;
 }
 }

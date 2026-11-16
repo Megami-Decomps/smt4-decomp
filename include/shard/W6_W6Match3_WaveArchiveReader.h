@@ -38,7 +38,7 @@ const u8* FUN_001a8d40(const WaveArchiveReader* reader, u32 index);
 extern "C" {
 #endif
 
-void FUN_002a60cc(u32 owner, u32 group, u32 id);
+void packageFileDisableByKindName(u32 owner, u32 group, u32 id);
 
 #ifdef __cplusplus
 }

@@ -4,7 +4,7 @@
 #include "common.h"
 
 extern "C" {
-void FUN_0029e874(u8 value);
+void gameSetIconDisplayEnabled(u8 value);
 }
 
 #endif

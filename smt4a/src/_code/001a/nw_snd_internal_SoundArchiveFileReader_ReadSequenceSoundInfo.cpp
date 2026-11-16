@@ -4,7 +4,7 @@
 
 extern "C" {
 
-SequenceSoundInfo *FUN_001b3c84(SoundInfo *info);
+SequenceSoundInfo *sndArchiveResolveSequenceSoundInfo(SoundInfo *info);
 
 s32 nw_snd_internal_SoundArchiveFileReader_ReadSequenceSoundInfo(SoundArchiveRef *ref, u32 unused, SequenceSoundParams *out)
 {
@@ -17,7 +17,7 @@ s32 nw_snd_internal_SoundArchiveFileReader_ReadSequenceSoundInfo(SoundArchiveRef
     if (nw_snd_internal_SoundArchiveFile_SoundInfo_GetSoundType(info) != 1) {
         return 0;
     }
-    seq = FUN_001b3c84(info);
+    seq = sndArchiveResolveSequenceSoundInfo(info);
     out->startOffset = nw_snd_internal_SoundArchiveFile_SequenceSoundInfo_GetStartOffset(seq);
     out->unk14 = seq->unk08;
     out->channelPriority = nw_snd_internal_SoundArchiveFile_SequenceSoundInfo_GetChannelPriority(seq);

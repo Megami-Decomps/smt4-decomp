@@ -4,7 +4,7 @@
 extern "C" {
 
 GuestWinOptionsA *gameGetOptions(void);
-s32 FUN_00163aa4(u8 *ui, f32 speed);
+s32 uiSpriteAdvanceAnimation(u8 *ui, f32 speed);
 extern GuestWinWorkA *g_guestWin;
 
 u16 guestWinUpdate(void)
@@ -18,7 +18,7 @@ u16 guestWinUpdate(void)
     case 0:
         break;
     case 1:
-        if (FUN_00163aa4(guest->ui, 1.0f) != 0) {
+        if (uiSpriteAdvanceAnimation(guest->ui, 1.0f) != 0) {
             guest->state = 2;
             guest->frames = 0;
         }
@@ -26,7 +26,7 @@ u16 guestWinUpdate(void)
     case 2:
         break;
     case 3:
-        if (FUN_00163aa4(guest->ui, 1.0f) != 0) {
+        if (uiSpriteAdvanceAnimation(guest->ui, 1.0f) != 0) {
             guest->state = 0;
         }
         break;

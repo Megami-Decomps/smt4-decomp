@@ -15,7 +15,7 @@ union MapScriptCompletion {
 
 extern "C" {
 extern MapMainState* g_mapMain;
-s32 FUN_0013def0(u32 channel);
+s32 pairedAvailabilityGetState(u32 channel);
 s32 getByteTableAValue();
 void byteTableASetValue(s32 enabled);
 s32 byteTableAGetValue3();
@@ -27,14 +27,14 @@ s32 scrRunOpcodesStub(MapScriptProcess* process);
 void messageSlotSet(s32 slot);
 void scrScriptProcessDestroy(MapScriptProcess* process);
 void asdMemFree(void* allocation);
-s32 FUN_002e07f4();
+s32 pairedAvailabilityBothReady();
 
 u32 mapScriptPollAndRelease()
 {
     MapScriptCompletion* map = reinterpret_cast<MapScriptCompletion*>(g_mapMain);
     switch (map->control.state) {
     case 0:
-        if ((FUN_0013def0(0) != 3 || FUN_0013def0(1) != 3) && getByteTableAValue())
+        if ((pairedAvailabilityGetState(0) != 3 || pairedAvailabilityGetState(1) != 3) && getByteTableAValue())
             byteTableASetValue(0);
         if (byteTableAGetValue3()) {
             byteTableASetValue3(0);
@@ -63,7 +63,7 @@ u32 mapScriptPollAndRelease()
     case 1:
         break;
     case 2:
-        if (FUN_002e07f4())
+        if (pairedAvailabilityBothReady())
             map->control.state = 0;
         break;
     }

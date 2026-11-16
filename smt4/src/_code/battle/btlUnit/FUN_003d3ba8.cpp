@@ -150,7 +150,7 @@ extern int battleGetEntryHalfword(int, unsigned int);
 extern int FUN_0028299c(int);
 /* Supplied declaration required: passiveSkillLookupRecord. */
 /* Supplied declaration required: gameSavedFlagSet. */
-extern unsigned int FUN_0029a924(unsigned int);
+extern unsigned int appGetRemainingCapacity(unsigned int);
 extern unsigned int FUN_0029a9d4(unsigned int, unsigned int);
 /* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: dataTable40FindById. */
@@ -886,7 +886,7 @@ LAB_003d444c:
             temp_v2 = battleGetEntryHalfword((int)*(short *)(param_2[9] + 0x62),0x1b);
           }
           else {
-            temp_v3 = FUN_0029a924(temp_v27);
+            temp_v3 = appGetRemainingCapacity(temp_v27);
             temp_v2 = battleGetEntryHalfword((int)*(short *)(param_2[9] + 0x62),0x1b);
           }
           if (0 < temp_v2) {

@@ -12,14 +12,14 @@ int devilGetRecord(void);
 
 int textFormatBuffer(...);
 int FUN_001527d8(...);
-int FUN_00157558(int);
-int FUN_00164b5c(...);
+int renderCtxSelectDisplayAreaForStereoMode(int);
+int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
 int renderPopStateStacks(void);
 int FUN_00168e00(int, int, int, int);
 int FUN_00180310(...);
 
-int FUN_00183bb0(void);
+int gxResetColorQuadToWhite(void);
 int drawSetColorFromRGBA8(...);
 int renderCtxCalculateStereoParallax(...);
 int FUN_0025cc78(...);
@@ -49,21 +49,21 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_001527d8. */
-/* Supplied declaration required: FUN_00157558. */
-/* Supplied declaration required: FUN_00164b5c. */
+/* Supplied declaration required: renderCtxSelectDisplayAreaForStereoMode. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: renderPopStateStacks. */
 /* Supplied declaration required: FUN_00168e00. */
-extern int FUN_001692ac(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00169a1c. */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
-/* Supplied declaration required: FUN_00183bb0. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern unsigned int FUN_0019acdc(short, unsigned int);
-extern unsigned int FUN_0019e52c(unsigned short);
+extern unsigned int dataTable10FindValue(unsigned short);
 /* Supplied declaration required: FUN_0025cc78. */
 extern unsigned int requestIdToCode(unsigned char);
 /* Supplied declaration required: effectSpawnDefaultArguments. */
@@ -121,10 +121,10 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
       uStack_38 = 4;
       uStack_34 = 4;
       temp_v21 = 4;
-      FUN_00183bb0();
-      FUN_00157558(g_renderCtx);
+      gxResetColorQuadToWhite();
+      renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
       temp_v5 = g_renderCtx;
-      temp_v7 = FUN_001692ac(1,0);
+      temp_v7 = renderCtxPackPassFlags(1,0);
       piVar12 = (int *)(temp_v5 + 0x1258);
       temp_v8 = *piVar12;
       temp_v9 = piVar12[temp_v8 + 2];
@@ -142,12 +142,12 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
       if ((*(unsigned char *)(param_2 + 0x20) & 4) != 0) {
         temp_v5 = 0;
         do {
-          FUN_001835b4(2,0x2e,temp_v5 + 0x163,param_4 + (int)temp_v22,param_5,0x71);
+          texDrawTableEntryAtStoredOrigin(2,0x2e,temp_v5 + 0x163,param_4 + (int)temp_v22,param_5,0x71);
           temp_v13 = (float)((unsigned long long)temp_v17 >> 0x20);
           temp_v5 = temp_v5 + 1;
         } while (temp_v5 < 2);
       }
-      FUN_00164b5c(2,0x2e,3,param_4 + (int)temp_v22,param_5,0x71);
+      texDrawCompositeSprite(2,0x2e,3,param_4 + (int)temp_v22,param_5,0x71);
       temp_v5 = g_renderCtx;
       if (*(short *)(param_1 + 0x24) != 0) {
         temp_v3 = 0;
@@ -186,14 +186,14 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
       else {
         temp_v22 = temp_v13;
         renderCtxCalculateStereoParallax(g_renderCtx);
-        FUN_001835b4(2,0x2e,0x21,param_4 + (int)temp_v13,param_5,0x72);
+        texDrawTableEntryAtStoredOrigin(2,0x2e,0x21,param_4 + (int)temp_v13,param_5,0x72);
       }
       temp_v12 = temp_v22;
       renderCtxCalculateStereoParallax(g_renderCtx);
-      FUN_00164b5c(2,0x2e,temp_v20[*(unsigned char *)(param_2 + 0x22)],param_4 + (int)temp_v22,param_5,0x73);
+      texDrawCompositeSprite(2,0x2e,temp_v20[*(unsigned char *)(param_2 + 0x22)],param_4 + (int)temp_v22,param_5,0x73);
       temp_v13 = temp_v12;
       renderCtxCalculateStereoParallax(g_renderCtx);
-      FUN_00164b5c(2,0x2e,6,param_4 + (int)temp_v12,param_5,0x71);
+      texDrawCompositeSprite(2,0x2e,6,param_4 + (int)temp_v12,param_5,0x71);
       temp_v22 = temp_v13;
       renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v5 = (int)temp_v13;
@@ -201,11 +201,11 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
         temp_v6 = 0xd;
       }
       else {
-        FUN_001835b4(2,0x2e,0x115,param_4 + temp_v5,param_5,0x72);
+        texDrawTableEntryAtStoredOrigin(2,0x2e,0x115,param_4 + temp_v5,param_5,0x72);
         temp_v6 = 0x116;
       }
-      FUN_001835b4(2,0x2e,temp_v6,param_4 + temp_v5,param_5,0x72);
-      FUN_001835b4(2,0x2e,0xe,param_4 + temp_v5,param_5,0x73);
+      texDrawTableEntryAtStoredOrigin(2,0x2e,temp_v6,param_4 + temp_v5,param_5,0x72);
+      texDrawTableEntryAtStoredOrigin(2,0x2e,0xe,param_4 + temp_v5,param_5,0x73);
       temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x10));
       if (*(unsigned short *)(param_2 + 0x36) >= 10) {
         textFormatBuffer(temp_v19,"%d");
@@ -216,7 +216,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
       drawSetColorFromRGBA8(0xffffff00);
       FUN_00180310(0,(int)*(short *)(temp_v7 + 8) + param_4 + temp_v5,*(short *)(temp_v7 + 10) + param_5,0
                    ,5,0x73,temp_v19);
-      FUN_00183bb0();
+      gxResetColorQuadToWhite();
       temp_v13 = temp_v22;
       renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v12 = (float)(int)temp_v22;
@@ -225,7 +225,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
       temp_v22 = temp_v12;
       do {
         temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,temp_v5 + 0x2f));
-        FUN_001835b4(2,0x2e,0x2d,(int)*(short *)(temp_v7 + 8) + (int)temp_v12 + param_4,
+        texDrawTableEntryAtStoredOrigin(2,0x2e,0x2d,(int)*(short *)(temp_v7 + 8) + (int)temp_v12 + param_4,
                      *(short *)(temp_v7 + 10) + param_5,0x71);
         temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x2e));
         effectSpawnDefaultArguments(param_1[temp_v5 + 0x14]);
@@ -245,8 +245,8 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
       if (param_6 != 0) {
         temp_v22 = temp_v13;
         renderCtxCalculateStereoParallax(g_renderCtx);
-        FUN_00164b5c(2,0x2e,0xf,(int)param_3[1] + param_4 + (int)temp_v13,param_5,0x71);
-        FUN_00164b5c(2,0x2e,0x10,(int)param_3[1] + param_4 + (int)temp_v13,param_5,0x71);
+        texDrawCompositeSprite(2,0x2e,0xf,(int)param_3[1] + param_4 + (int)temp_v13,param_5,0x71);
+        texDrawCompositeSprite(2,0x2e,0x10,(int)param_3[1] + param_4 + (int)temp_v13,param_5,0x71);
         temp_v13 = temp_v22;
         renderCtxCalculateStereoParallax(g_renderCtx);
         temp_v5 = 0;
@@ -256,7 +256,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
             temp_v9 = *(short *)(temp_v7 + 10) + param_5;
             temp_v11 = (int)*(short *)(temp_v7 + 8) + (int)param_3[1] + param_4;
             temp_v8 = temp_v11 + (int)temp_v22;
-            FUN_00164b5c(2,0x2e,0x11,temp_v8,temp_v9,0x71);
+            texDrawCompositeSprite(2,0x2e,0x11,temp_v8,temp_v9,0x71);
             temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0xaa));
             uiDrawItemCategoryIcon((int)*(short *)((int)param_1 + temp_v5 * 2 + 0x24),
                          *(short *)(temp_v7 + 8) + temp_v8,*(short *)(temp_v7 + 10) + temp_v9,0x72,0);
@@ -321,19 +321,19 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
       param_4 = (int)temp_v13 + param_4;
       FUN_00180310(0,*(short *)(temp_v5 + 8) + param_4,*(short *)(temp_v5 + 10) + param_5,0,5,0x74,
                    temp_v19);
-      FUN_00183bb0();
+      gxResetColorQuadToWhite();
       efctSetSpeed();
-      FUN_001835b4(2,0x2e,0x101,param_4,param_5,0x74);
+      texDrawTableEntryAtStoredOrigin(2,0x2e,0x101,param_4,param_5,0x74);
       temp_v0 = *(short *)(param_2 + 0x38);
       if (((temp_v0 != 0) || (*(short *)(param_2 + 0x44) != 0)) && (temp_v0 != 0)) {
         temp_v6 = FUN_0019acdc(temp_v0,0);
         temp_v4 = FUN_0036fcd0(temp_v6,0);
-        temp_v10 = FUN_0019e52c(temp_v4);
+        temp_v10 = dataTable10FindValue(temp_v4);
         if (temp_v10 != 0) {
-          FUN_001835b4(2,0x2e,0x103,param_4,param_5,0x74);
-          FUN_001835b4(2,0x2e,0x102,param_4,param_5,0x74);
+          texDrawTableEntryAtStoredOrigin(2,0x2e,0x103,param_4,param_5,0x74);
+          texDrawTableEntryAtStoredOrigin(2,0x2e,0x102,param_4,param_5,0x74);
           if (*(unsigned short *)(param_2 + 0x3a) >= 100) {
-            FUN_001835b4(2,0x2e,0x11d,param_4,param_5,0x74);
+            texDrawTableEntryAtStoredOrigin(2,0x2e,0x11d,param_4,param_5,0x74);
           }
           temp_v10 = temp_v10 & 0xffff;
           devilGetRecord();
@@ -350,7 +350,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
                        *(short *)(temp_v5 + 10) + param_5,0x74);
         }
       }
-      FUN_00183bb0();
+      gxResetColorQuadToWhite();
       efctSetSpeed();
       temp_v5 = g_renderCtx;
       piVar12 = (int *)(g_renderCtx + 0x1258);

@@ -66,7 +66,7 @@ void recordClampCurrentCount(void *record);
 void objectFlagsClear(void *object, u32 flags);
 s32 flagWordTestBit(void *object, u32 bit);
 void FUN_003ae2d0(u32 ui, s32 index, s32 value, s32 flag);
-void FUN_002505c0(s32 a, s32 b, u32 resource, s32 a4, s32 a5, s32 a6, s32 a7);
+void btlQueueKeyedScalarReflectAction(s32 a, s32 b, u32 resource, s32 a4, s32 a5, s32 a6, s32 a7);
 void FUN_00394b0c(void);
 void __aeabi_memset4(void *block, u32 size, s32 value);
 void rt_memclr(void *block, u32 size);
@@ -156,7 +156,7 @@ void FUN_003c0d70(s32 index, s32 unused, s32 removeLinked, s32 keepLink)
                     *mark = -1;
                     if (removeLinked == 0) {
                         FUN_003ae2d0(g_btlUiBlock, index, -1, 1);
-                        FUN_002505c0(0, 0, 0x1000172, 0, 0, 0, 0);
+                        btlQueueKeyedScalarReflectAction(0, 0, 0x1000172, 0, 0, 0, 0);
                     }
                     if (link != NULL) {
                         link->state &= ~0x10;

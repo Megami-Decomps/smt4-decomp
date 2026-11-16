@@ -12,7 +12,7 @@ extern "C" {
 s32 scrGetArg(s32 argument);
 void scrSetResult(s32 value);
 s32 btlResolveEntryChoice(s32 choice);
-BtlCombatantEntryA* FUN_003eaf20(BtlMainStateA* battle);
+BtlCombatantEntryA* btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA* battle);
 
 // Test selected eligible combatants, then the special combatant, for a parameter equal to argument 2.
 s32 FUN_0037308c(void)
@@ -31,7 +31,7 @@ s32 FUN_0037308c(void)
     }
     u32 expected = scrGetArg(2);
     s32 first, count;
-    FUN_00301a08(choice, &first, &count);
+    btlGetEntryChoiceRange(choice, &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlCombatantEntryA* entry = &btlGetMainState()->entries[index];
         if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
@@ -43,7 +43,7 @@ s32 FUN_0037308c(void)
         }
     }
     if (btlGetMainState()->unk4cd1) {
-        BtlCombatantEntryA* entry = FUN_003eaf20(btlGetMainState());
+        BtlCombatantEntryA* entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry && reinterpret_cast<BattleQueryParametersViewA*>(entry)->parameters[parameter] == expected) {
             scrSetResult(1);
             return 1;

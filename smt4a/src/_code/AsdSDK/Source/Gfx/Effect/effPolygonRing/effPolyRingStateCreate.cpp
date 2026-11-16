@@ -6,7 +6,7 @@
 extern "C" {
 
 void *memAlloc(int, int, int, int size, int align, int);
-PolyGeom *FUN_002b3b58(u32 segments, int w, int h, u8 *table, int tableSize);
+PolyGeom *effGeomCreateRepeatedIndexList(u32 segments, int w, int h, u8 *table, int tableSize);
 PolyObject *effPolyRingCreate(u32 kind, void *params);
 f32 shiftRandomNextFraction(int arg);
 void __aeabi_memcpy4(void *dst, const void *src, int size);
@@ -35,7 +35,7 @@ PolyRingState *effPolyRingStateCreate(PolyParams *params)
     state->values = values;
     __aeabi_memcpy4((u8 *)params + 0x5c, params, 0x5c);
     state->obj = effPolyRingCreate(1, (u8 *)params + 0x5c);
-    geom = FUN_002b3b58(segments & 0xffff, 2, 4, &DAT_005c1f1c, 0x48);
+    geom = effGeomCreateRepeatedIndexList(segments & 0xffff, 2, 4, &DAT_005c1f1c, 0x48);
     state->geom = geom;
     vertices = (PackedColorBytes *)geom->buf->colors;
     geom->flags |= 0x20;

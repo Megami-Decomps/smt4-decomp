@@ -13,8 +13,8 @@ int slotSetRequest(int, int, int);
 int uiSpriteSetImageKeyframe(...);
 int buttonHelpSetPreset(...);
 int eventQueueAddUnique(...);
-int FUN_002bd954(...);
-int FUN_002bf818(...);
+int uiSpriteStateInitFromSource(...);
+int uiSpriteAdvanceAnimation(...);
 int FUN_00382878(unsigned int *);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -41,8 +41,8 @@ extern unsigned int FUN_002950e8(unsigned int *, unsigned int);
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: eventQueueAddUnique. */
-/* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: FUN_002bf818. */
+/* Supplied declaration required: uiSpriteStateInitFromSource. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 extern int gameFlagIsSet(void);
 extern int slotGroupFindFree(unsigned int, unsigned char);
 extern int questResetEligibleEntriesMatchingValue(int);
@@ -109,10 +109,10 @@ void FUN_00385448(unsigned int *param_1)
       buttonHelpSetPreset(0xa4);
       param_1[2] = param_1[2] + 1;
       FUN_00382878(param_1);
-      FUN_002bd954(param_1 + 0x11,0x31,0xffffffff,param_1 + 9,0xb);
-      FUN_002bd954(param_1 + 0x34,0x31,0xffffffff,param_1 + 9,0xb);
-      FUN_002bd954(param_1 + 0x57,0x31,0xffffffff,param_1 + 9,0xb);
-      FUN_002bd954(param_1 + 0x7a,0x31,0,param_1 + 9,0xb);
+      uiSpriteStateInitFromSource(param_1 + 0x11,0x31,0xffffffff,param_1 + 9,0xb);
+      uiSpriteStateInitFromSource(param_1 + 0x34,0x31,0xffffffff,param_1 + 9,0xb);
+      uiSpriteStateInitFromSource(param_1 + 0x57,0x31,0xffffffff,param_1 + 9,0xb);
+      uiSpriteStateInitFromSource(param_1 + 0x7a,0x31,0,param_1 + 9,0xb);
       uiSpriteSetImageKeyframe(param_1 + 0x7a,0);
       param_1[0x356] = 6;
       param_1[0x9d] = 0x43c80000;
@@ -128,7 +128,7 @@ void FUN_00385448(unsigned int *param_1)
     param_1[2] = temp_v5;
     return;
   case 2:
-    FUN_002bf818(param_1 + 0x7a);
+    uiSpriteAdvanceAnimation(param_1 + 0x7a);
     if (*(char *)((int)param_1 + 0x272) != '\0') {
       *param_1 = *param_1 | 0x10;
       temp_v5 = FUN_002950e8(param_1 + 0x11,0);
@@ -183,7 +183,7 @@ void FUN_00385448(unsigned int *param_1)
     }
     break;
   case 3:
-    FUN_002bf818(param_1 + 0x7a);
+    uiSpriteAdvanceAnimation(param_1 + 0x7a);
     if (*(char *)((int)param_1 + 0x272) != '\0') {
       *param_1 = *param_1 & 0xffffff6f;
       param_1[2] = param_1[2] + 1;

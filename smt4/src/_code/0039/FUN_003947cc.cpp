@@ -29,7 +29,7 @@ extern BtlEffectEntry s_ef_e_atk01_00436028[];
 extern BtlMainPosition *g_btlMain;
 
 void textFormatBuffer(char *destination, const char *format, ...);
-void FUN_002505c0(u32 handle, s32 owner, s32 count, s32 a, s32 b, s32 side, s32 c);
+void btlQueueKeyedScalarReflectAction(u32 handle, s32 owner, s32 count, s32 a, s32 b, s32 side, s32 c);
 
 /* Starts the named battle effect for `owner`: finds its table entry by file name and plays its sub-effects
  * on the side (1-5) the horizontal position `x` falls on. */
@@ -97,10 +97,10 @@ u32 FUN_003947cc(const char *effectName, s32 owner, u32 kind, f32 x)
         return 0;
     }
     if (entry->firstCount != 0) {
-        FUN_002505c0(entry->firstHandle, owner, entry->firstCount, 0, 0, side, 0);
+        btlQueueKeyedScalarReflectAction(entry->firstHandle, owner, entry->firstCount, 0, 0, side, 0);
     }
     if (entry->secondCount != 0) {
-        FUN_002505c0(entry->secondHandle, owner, entry->secondCount, 0, 0, side, 0);
+        btlQueueKeyedScalarReflectAction(entry->secondHandle, owner, entry->secondCount, 0, 0, side, 0);
     }
     state->effectValue = entry->value;
     return 1;

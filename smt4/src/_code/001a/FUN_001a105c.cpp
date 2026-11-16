@@ -4,7 +4,7 @@ extern "C" {
 
 int jobBlendSetRate(u32 job, int arg);
 int jobSetIntensity(u32 job, int arg);
-int FUN_002bff38(int arg);
+int messageSetDisplayMode(int arg);
 extern int jobGetStatus(u32 job);
 extern int jobIsValid(u32 job);
 
@@ -45,7 +45,7 @@ u32 FUN_001a105c(void)
             i++;
         } while (i < 10);
     }
-    FUN_002bff38(2);
+    messageSetDisplayMode(2);
     return 1;
 }
 

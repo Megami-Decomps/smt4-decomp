@@ -4,10 +4,10 @@
 extern "C" {
 
 int FUN_00241d58(int);
-int FUN_0027da30(int, int);
+int btlFindEntryBlockByMemberId(int, int);
 
 /* Supplied declaration required: FUN_00241d58. */
-/* Supplied declaration required: FUN_0027da30. */
+/* Supplied declaration required: btlFindEntryBlockByMemberId. */
 extern int FUN_00336e44(int, int);
 
 
@@ -26,7 +26,7 @@ void FUN_003dc02c(int param_1)
   do {
     temp_v1 = *(int *)(temp_v0 + 0x1e98) + temp_v4 * 0x114;
     if (((*(unsigned int *)(temp_v1 + 0x50) & 1) != 0) &&
-       (temp_v2 = FUN_0027da30(temp_v0,(int)*(short *)(temp_v1 + 0x62)), temp_v2 != 0)) {
+       (temp_v2 = btlFindEntryBlockByMemberId(temp_v0,(int)*(short *)(temp_v1 + 0x62)), temp_v2 != 0)) {
       temp_v1 = 0;
       do {
         if (((0 < *(int *)(temp_v2 + 0xc)) && (temp_v3 = FUN_00336e44(temp_v0,*(int *)(temp_v2 + 0xc)), temp_v3 == 0)) &&

@@ -9,7 +9,7 @@ s32 bgmGetStateById(u32 id);
 s32 FUN_002e2114(u32 *holder);
 void campCecResetCameraHolder(u32 *holder);
 void linkHolderApplyFlag(u32 *holder, s32 flags);
-ScriptRunState *FUN_00275bc8(void *resource, u32 entry);
+ScriptRunState *scrScriptProcessCreate(void *resource, u32 entry);
 void progressConditionsUpdateUnlocks(void);
 s32 gameFlagIsSet(u32 flag);
 void sysPlaySe(u32 id);
@@ -24,7 +24,7 @@ u32 FUN_002e2284(CampCecResumeState *work)
         if (FUN_002e2114(g_campCec.work->holder)) {
             campCecResetCameraHolder(g_campCec.work->holder);
             linkHolderApplyFlag(g_campCec.work->holder, 0);
-            work->launch.script = FUN_00275bc8(work->launch.resource, work->launch.entry);
+            work->launch.script = scrScriptProcessCreate(work->launch.resource, work->launch.entry);
             work->launch.script->mode = 2;
             progressConditionsUpdateUnlocks();
             if (!gameFlagIsSet(0x4AA)) {

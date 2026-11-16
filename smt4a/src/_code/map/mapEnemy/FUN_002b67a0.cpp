@@ -5,7 +5,7 @@
 extern "C" {
 
 int gameFlagsGetBlock(void);
-int FUN_00178b04(int, unsigned char *, int);
+int asdMemoryAllocTraced(int, unsigned char *, int);
 int distSpatial(void);
 int FUN_002d7c88(unsigned int);
 void FUN_00357b18(unsigned int, int, int, int, int, int, int);
@@ -36,7 +36,7 @@ extern int g_lmapScene; /* 0x581288 */
 #endif
 extern int randRange(unsigned int);
 /* Supplied declaration required: gameFlagsGetBlock. */
-/* Supplied declaration required: FUN_00178b04. */
+/* Supplied declaration required: asdMemoryAllocTraced. */
 extern int gameFlagIsSet(void);
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_002d7c88. */
@@ -183,7 +183,7 @@ LAB_002b6ad4:
                     temp_v2 = temp_v0 + *(int *)(temp_v4 + 0x1b0) * 8;
                     if (*(char *)(temp_v2 + 0x3d91) != '\0') {
                       temp_v2 = 0x20;
-                      FUN_00178b04(0x20,&LAB_002b6c7c,0x564);
+                      asdMemoryAllocTraced(0x20,&LAB_002b6c7c,0x564);
                       temp_v9 = 0;
                       if (temp_v2 != 0) {
                         temp_v9 = modelListInit();

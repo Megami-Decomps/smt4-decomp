@@ -15,7 +15,7 @@ typedef struct Object002880a8 {
     /* 0x118c */ u8 target[1];
 } Object002880a8;
 
-void FUN_002bbb74(u32 handle, void *target);
+void gpuWriteVertexUniformMatrix(u32 handle, void *target);
 void FUN_002bbbc8(Object002880a8 *object, void *set, s32 zero, void *args);
 
 /* Applies the layout the object's state asks for (3 for states 0/1, 4 for state 2, otherwise none), if it changed. */
@@ -40,7 +40,7 @@ void layoutApplyForState(Object002880a8 *object)
     }
     if (object->kind != kind) {
         FUN_002bbbc8(object, set, 0, object->args);
-        FUN_002bbb74(object->handle, object->target);
+        gpuWriteVertexUniformMatrix(object->handle, object->target);
         object->kind = kind;
     }
 }

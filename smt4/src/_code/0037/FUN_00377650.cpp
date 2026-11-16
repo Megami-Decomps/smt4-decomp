@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00281e34(void);
+int __hardfp_atan2f(void);
 
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
 #define ROMWRIGHT_SQRT_4_DEFINED
@@ -14,7 +14,7 @@ static float romwright_sqrt_4(float value)
     return (float)sqrt((double)value);
 }
 #endif
-/* Supplied declaration required: FUN_00281e34. */
+/* Supplied declaration required: __hardfp_atan2f. */
 
 
 void FUN_00377650(float *param_1,float *param_2,float *param_3)
@@ -45,7 +45,7 @@ void FUN_00377650(float *param_1,float *param_2,float *param_3)
     temp_v1 = (param_1[2] * temp_v1) / in_s0;
   }
   temp_v2 = temp_v0;
-  FUN_00281e34();
+  __hardfp_atan2f();
   *param_2 = temp_v0;
   *param_3 = romwright_sqrt_4(temp_v2 * temp_v2 + temp_v3 * temp_v3 + temp_v1 * temp_v1) / in_s1;
   return;

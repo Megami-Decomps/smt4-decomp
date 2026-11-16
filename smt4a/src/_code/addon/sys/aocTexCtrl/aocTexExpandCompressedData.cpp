@@ -5,8 +5,8 @@ extern "C" {
 u32 lzGetAdvertisedSize(const u8 *source);
 u8 *asdMemoryAllocAligned(u32 alignment, u32 heap, u32 category, u32 size, u32 argument, s32 clear);
 void lzDecompressBytes(const u8 *source, u8 *destination);
-void FUN_001aeddc(const u8 *source, u8 *destination);
-void FUN_001aec9c(const u8 *source, u8 *destination);
+void huffmanDecompress(const u8 *source, u8 *destination);
+void rleDecompress(const u8 *source, u8 *destination);
 void asdMemFree(void *memory);
 
 // Expand a supported Nintendo compression stream and transfer ownership from source to output.
@@ -37,9 +37,9 @@ u8 *aocTexExpandCompressedData(u8 *source, u32 flags, u32 argument)
             if (kind == 0x10) {
                 lzDecompressBytes(source, output);
             } else if (kind == 0x20) {
-                FUN_001aeddc(source, output);
+                huffmanDecompress(source, output);
             } else if (kind == 0x30) {
-                FUN_001aec9c(source, output);
+                rleDecompress(source, output);
             }
             asdMemFree(source);
         }

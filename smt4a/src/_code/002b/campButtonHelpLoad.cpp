@@ -22,7 +22,7 @@ void campButtonHelpLoad(void)
 {
     if (g_buttonHelp.users <= 0) {
         asdTMTexTableLoadSprites(10);
-        FUN_0014afd0(10, 0);
+        asdTMTexTablePrepareNodeImage(10, 0);
         FUN_00318794();
         if (g_buttonHelp.spriteData == NULL) {
             g_buttonHelp.spriteData = asdLoadFileSyncDefault("camp/camp.mbm");

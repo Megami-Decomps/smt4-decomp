@@ -19,7 +19,7 @@ int FUN_00233240(unsigned int *, int);
 int messageMainFinishWindow(void);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int buttonHelpSetText(...);
-int FUN_002bf818(...);
+int uiSpriteAdvanceAnimation(...);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -49,7 +49,7 @@ extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: buttonHelpSetText. */
 extern unsigned int vec2GetYInt(unsigned int *);
 extern unsigned int vec2GetXInt(unsigned int *);
-/* Supplied declaration required: FUN_002bf818. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 
 
 void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -91,7 +91,7 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
     if (temp_v0 == 3 || temp_v0 == 4) {
       scrRunOpcodesStub(param_1[0x5a]);
       scrRunOpcodesStub(param_1[0x5b]);
-      FUN_002bf818(puVar5);
+      uiSpriteAdvanceAnimation(puVar5);
       temp_v1 = vec2GetYInt(puVar5);
       temp_v2 = vec2GetXInt(puVar5);
       pointConvertToFloat(param_1 + 0xe0,temp_v2,temp_v1);
@@ -102,7 +102,7 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
           temp_v3 = dataTable17Sub0GetRecord(&temp_v4,param_1[temp_v3 + 0x574b] + 4);
           buttonHelpSetText(temp_v3 + 0x40,0x323232ff);
         }
-        temp_v3 = FUN_00290e78();
+        temp_v3 = messageBannerIsIdle();
         if (temp_v3 != 0) {
           messageMainFinishWindow();
           buttonHelpSetText(0,0x323232ff);
@@ -133,7 +133,7 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
   else {
     scrRunOpcodesStub(param_1[0x5a]);
     scrRunOpcodesStub(param_1[0x5b]);
-    FUN_002bf818(puVar5);
+    uiSpriteAdvanceAnimation(puVar5);
     temp_v1 = vec2GetYInt(puVar5);
     temp_v2 = vec2GetXInt(puVar5);
     pointConvertToFloat(param_1 + 0xe0,temp_v2,temp_v1);
@@ -145,7 +145,7 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
         temp_v3 = dataTable17Sub0GetRecord(&temp_v4,param_1[temp_v3 + 0x574b]);
         buttonHelpSetText(temp_v3 + 0x40,0x323232ff);
       }
-      temp_v3 = FUN_00290e78();
+      temp_v3 = messageBannerIsIdle();
       if (temp_v3 != 0) {
         messageMainFinishWindow();
         buttonHelpSetText(0,0x323232ff);

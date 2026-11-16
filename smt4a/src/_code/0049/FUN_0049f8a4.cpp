@@ -30,7 +30,7 @@ s32 gameSlotTableFindFree(void);
 MemberRecord *gameGetOptions(void);
 s32 gameOptionsClassifyMode(void);
 s32 unitHasRankingBonus(u16 equipment);
-void FUN_00408184(s32 sound);
+void gameCounterAddSaturating(s32 sound);
 void FUN_004186e0(void);
 s32 FUN_001bd118(void);
 
@@ -76,7 +76,7 @@ void FUN_0049f8a4(u32 target, s32 percent)
         s16 clamped = (s16)newHp;
         hero->hp = clamped > hero->maxHp ? hero->maxHp : (clamped < 1 ? 1 : clamped);
         if (hp - newHp > 0)
-            FUN_00408184(0x17);
+            gameCounterAddSaturating(0x17);
     }
     s32 count = 0;
     s8 *slots = NULL;
@@ -104,7 +104,7 @@ void FUN_0049f8a4(u32 target, s32 percent)
                 member->hp = clamped > max ? max : (clamped < 1 ? 1 : clamped);
             }
             if (hp - newHp > 0)
-                FUN_00408184(0x17);
+                gameCounterAddSaturating(0x17);
         }
     }
     if (target != 3 && target != 4)

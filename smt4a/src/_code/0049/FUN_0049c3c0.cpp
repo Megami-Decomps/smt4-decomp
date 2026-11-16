@@ -79,7 +79,7 @@ void soundChannelRequestIfEnabled(u32 id, s32 a, s32 frames);
 void FUN_0022677c(s32 channel, s32 value);
 void FUN_003d54f8(s32 a, s32 b);
 void saveFlagBytesSetOneBased(u32 id, s32 value);
-void FUN_00408184(s32 a, s32 b);
+void gameCounterAddSaturating(s32 a, s32 b);
 
 /* Builds the Apocalypse selection scene: constructs its rectangles, entries and pages, clears its
  * state, creates its window and, when opened with `mode` 1, its button help; otherwise starts the
@@ -135,7 +135,7 @@ SelectionScene *FUN_0049c3c0(SelectionScene *scene, u32 mode, s32 kind, s32 subK
         campButtonHelpLoad();
         campButtonHelpAcquire();
         asdTMTexTableLoadSprites(0x20);
-        FUN_0014afd0(0x20, 0);
+        asdTMTexTablePrepareNodeImage(0x20, 0);
         scene->buttonSprite = 0x83;
         FUN_0049a9a8();
         scene->shown = 1;
@@ -181,7 +181,7 @@ SelectionScene *FUN_0049c3c0(SelectionScene *scene, u32 mode, s32 kind, s32 subK
                 saveFlagBytesSetOneBased(*(u16 *)(base + i * 4), 1);
         }
     }
-    FUN_00408184(0x1C, 1);
+    gameCounterAddSaturating(0x1C, 1);
     return scene;
 }
 

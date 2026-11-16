@@ -58,7 +58,7 @@ SlotSortInfo *devilGetRecord(u16 entryId);
 extern "C" {
 #endif
 
-void* FUN_00178b04(u32 memoryType, u32 unusedFirst, u32 unusedSecond);
+void* asdMemoryAllocTraced(u32 memoryType, u32 unusedFirst, u32 unusedSecond);
 
 #ifdef __cplusplus
 }

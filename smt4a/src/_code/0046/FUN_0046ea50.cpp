@@ -30,9 +30,9 @@ struct DataRecord27 {
 
 extern "C" {
 
-s32 FUN_001b315c(DataFile *file);
-DataFileTableHeader *FUN_001b31ac(DataFile *file);
-u32 FUN_001b31e0(DataFile *file);
+s32 packageEntryIsLoaded(DataFile *file);
+DataFileTableHeader *packageEntryGetDirectory(DataFile *file);
+u32 packageEntryGetFileCount(DataFile *file);
 u32 dataTableFileGetTable(u32 table, s32 sub);
 u32 dataTableGetCount(u32 table);
 DataRecord27 *dataTableGetEntries(u32 table);
@@ -45,9 +45,9 @@ DataRecord27 *FUN_0046ea50(DataFileSet *set, s32 index)
 
     for (i = 0; i < set->count; i++) {
         DataFile *file = &set->files[i];
-        if (FUN_001b315c(file) != 0) {
-            DataFileTableHeader *headers = FUN_001b31ac(file);
-            u32 tableCount = FUN_001b31e0(file);
+        if (packageEntryIsLoaded(file) != 0) {
+            DataFileTableHeader *headers = packageEntryGetDirectory(file);
+            u32 tableCount = packageEntryGetFileCount(file);
             u32 j;
             for (j = 0; j < tableCount; j++) {
                 if (headers[j].kind == 0x27) {

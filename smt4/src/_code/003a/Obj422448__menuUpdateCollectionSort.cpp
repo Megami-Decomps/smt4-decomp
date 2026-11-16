@@ -17,7 +17,7 @@ s32 useCounterIsFinished(void);
 s32 useCounterGetCurrentValue(void);
 void useCounterRelease(void);
 void buttonHelpSetPreset(s32 preset);
-void FUN_0022e0fc(EntryCollection* collection, s32 mode);
+void entryCollectionSortByMode(EntryCollection* collection, s32 mode);
 
 // Apply the saved ordering while the collection's counter menu remains active.
 }
@@ -52,5 +52,5 @@ void Obj422448::menuUpdateCollectionSort()
     if (setting->descending) {
         ++mode;
     }
-    FUN_0022e0fc(&work->collection, mode);
+    entryCollectionSortByMode(&work->collection, mode);
 }

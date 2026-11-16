@@ -13,15 +13,15 @@ struct ItemDetailDrawView {
 }
 extern "C" {
 void FUN_00169a1c(u32 sprite, s32 x, s32 y, s32 layer);
-void FUN_0018152c(s32 id, s32 x, s32 y, s32 style, s32 option);
+void uiDrawItemOrStatusIcon(s32 id, s32 x, s32 y, s32 style, s32 option);
 
 // Draw item detail framing, the ownership indicator and up to three attached icons.
 void FUN_0041b204(u32 unused, const ItemDetailDrawView *item, const s32 position[2])
 {
     for (s32 index = 0; index < 4; ++index)
-        FUN_001835b4(2, 0x2B, index + 0x12, position[0], position[1], 0xB);
+        texDrawTableEntryAtStoredOrigin(2, 0x2B, index + 0x12, position[0], position[1], 0xB);
     TextureTableEntryIV *anchor = asdTMTexTableEntryAt(0x2B, 0x18);
-    FUN_001835b4(2, 0x2B, 0x16, position[0] + anchor->x, anchor->y + position[1], 0x15);
+    texDrawTableEntryAtStoredOrigin(2, 0x2B, 0x16, position[0] + anchor->x, anchor->y + position[1], 0x15);
     s32 indicatorX = position[0] + anchor->x;
     s32 indicatorY = position[1] + anchor->y;
     if (item->owned != 0)
@@ -31,8 +31,8 @@ void FUN_0041b204(u32 unused, const ItemDetailDrawView *item, const s32 position
     for (s32 index = 0; index < 3; ++index) {
         if (item->ids[index] != 0) {
             TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x2B, index + 0x19);
-            FUN_001835b4(2, 0x2B, 0x16, position[0] + icon->x, icon->y + position[1], 0xB);
-            FUN_0018152c(item->ids[index], position[0] + icon->x, icon->y + position[1], 0x15, 0);
+            texDrawTableEntryAtStoredOrigin(2, 0x2B, 0x16, position[0] + icon->x, icon->y + position[1], 0xB);
+            uiDrawItemOrStatusIcon(item->ids[index], position[0] + icon->x, icon->y + position[1], 0x15, 0);
         }
     }
 }

@@ -76,7 +76,7 @@ extern unsigned int DAT_005f1ca0; /* 0x5f1ca0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0013cab8. */
-extern int FUN_0013def0(unsigned int);
+extern int pairedAvailabilityGetState(unsigned int);
 /* Supplied declaration required: FUN_00272f54. */
 /* Supplied declaration required: FUN_002750d8. */
 extern int messageGetChoiceResult(void);
@@ -272,11 +272,11 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
       *(unsigned int *)(temp_v2 + 0x2c) = 0;
       FUN_003b5d20();
       mapSelectRoomMusic();
-      temp_v2 = FUN_0013def0(0);
+      temp_v2 = pairedAvailabilityGetState(0);
       if (temp_v2 == 3) {
         FUN_0013cab8(0,10,0xff);
       }
-      temp_v2 = FUN_0013def0(1);
+      temp_v2 = pairedAvailabilityGetState(1);
       if (temp_v2 != 3) {
         return;
       }
@@ -302,11 +302,11 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
       FUN_002750d8(0);
       *(unsigned int *)(temp_v2 + 0x28) = 0x15;
       *(unsigned int *)(temp_v2 + 0x2c) = 0;
-      temp_v2 = FUN_0013def0(0);
+      temp_v2 = pairedAvailabilityGetState(0);
       if (temp_v2 == 3) {
         FUN_0013cab8(0,10,0xff);
       }
-      temp_v2 = FUN_0013def0(1);
+      temp_v2 = pairedAvailabilityGetState(1);
       if (temp_v2 != 3) {
         return;
       }

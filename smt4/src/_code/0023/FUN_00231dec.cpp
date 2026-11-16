@@ -11,10 +11,10 @@ int FUN_0025090c(unsigned int, unsigned int, int, unsigned char [128]);
 int FUN_00288f78(...);
 int textDrawString(...);
 int textFormatBuffer(unsigned char [128], unsigned char *);
-int FUN_002bed3c(void);
+int gxResetColorQuadToWhite(void);
 int renderCtxPopState(...);
 int renderStackPushIndexed(...);
-int FUN_002bf380(int, int, int, int, int, int);
+int texDrawCompositeSprite(int, int, int, int, int, int);
 int efctSetSpeed(void);
 int libc_strcpy(...);
 int drawEffectResourceWithColors(...);
@@ -47,18 +47,18 @@ extern unsigned int curveEvaluateStandard(int, unsigned int);
 /* Supplied declaration required: FUN_00288f78. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002bed3c. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 extern unsigned int vec2GetYInt(int);
 extern unsigned int vec2GetXInt(int);
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
-/* Supplied declaration required: FUN_002bf380. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: libc_strcpy. */
 extern int gameFlagIsSet(unsigned int);
 extern int gameGetMapBlock(void);
-extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
+extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_002e039c(int);
 /* Supplied declaration required: drawEffectResourceWithColors. */
@@ -94,7 +94,7 @@ void FUN_00231dec(int param_1)
   int temp_v18;
   
   temp_v2 = gameGetMapBlock();
-  temp_v3 = FUN_002c5d80(5,1);
+  temp_v3 = renderCtxPackPassFlags(5,1);
   renderStackPushIndexed(g_titleScene,3,temp_v3);
   temp_v18 = param_1 + 0x162;
   VectorSignedToFloat(0x100 - DAT_0044cdd8,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -107,8 +107,8 @@ void FUN_00231dec(int param_1)
     pairCopy(param_1 + 0x164,&temp_v16);
   }
   efctSetSpeed();
-  FUN_002bed3c();
-  FUN_002bf380(2,0x1c,8,(int)temp_v16,(int)temp_v17,DAT_0044cdd8);
+  gxResetColorQuadToWhite();
+  texDrawCompositeSprite(2,0x1c,8,(int)temp_v16,(int)temp_v17,DAT_0044cdd8);
   temp_v9 = param_1 + 0x12268;
   if ((*(unsigned int *)(param_1 + 0x10) & 0x20) == 0) {
     if (*(char *)(param_1 + 0xc) != '\0') {

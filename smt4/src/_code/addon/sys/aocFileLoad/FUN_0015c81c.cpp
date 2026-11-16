@@ -16,7 +16,7 @@ int asdLoadFileAsync(...);
 int refIsNullOrZero(...);
 int _ZN7AocMain12queueRequestE17RequestParametersji(...);
 int _ZN18WindowStatusResultC1Ej(...);
-int FUN_002bb5a4(...);
+int archivePathDeviceOpen(...);
 int asdMemoryAllocAligned(...);
 int asdMemFree(...);
 int asdFatalError(...);
@@ -74,7 +74,7 @@ extern int FUN_002b90c8(int, unsigned int, unsigned int *);
 /* Supplied declaration required: _ZN7AocMain12queueRequestE17RequestParametersji. */
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 extern unsigned int _ZN18WindowStatusResultC1Ev(char *);
-/* Supplied declaration required: FUN_002bb5a4. */
+/* Supplied declaration required: archivePathDeviceOpen. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdFatalError. */
@@ -239,7 +239,7 @@ void FUN_0015c81c(int param_1,int param_2)
           puVar9[4] = 0;
           puVar9[1] = 0;
           puVar9[2] = 0;
-          FUN_002bb5a4(puVar9,&temp_v18,temp_v4);
+          archivePathDeviceOpen(puVar9,&temp_v18,temp_v4);
           pcVar4 = acStack_40;
           _ZN18WindowStatusResultC1Ej(pcVar4,puVar9);
           (*(unsigned int *)temp_v16) = (unsigned int)*(char (*) [4])pcVar4;

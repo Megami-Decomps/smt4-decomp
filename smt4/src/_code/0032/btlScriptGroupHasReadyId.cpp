@@ -6,7 +6,7 @@
 extern "C" {
 s32 scrGetArg(s32 index);
 u32 btlScriptResolveGroupArg(s32 group);
-void FUN_002499fc(u32 group, s32 *range, s32 *count);
+void btlSideGetEntryRange(u32 group, s32 *range, s32 *count);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *battle);
 s32 btlSlotsHaveReadyUnit(BtlEntry *entry);
 
@@ -16,7 +16,7 @@ u32 btlScriptGroupHasReadyId()
     u32 id = scrGetArg(0);
     s32 first;
     s32 count;
-    FUN_002499fc(btlScriptResolveGroupArg(scrGetArg(1)), &first, &count);
+    btlSideGetEntryRange(btlScriptResolveGroupArg(scrGetArg(1)), &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlEntry *entry = &btlGetMainState()->entries[index];
         if (!(entry->flags & BTL_ENTRY_FLAG_PRESENT) &&

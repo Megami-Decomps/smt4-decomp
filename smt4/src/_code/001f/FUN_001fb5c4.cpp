@@ -74,7 +74,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002aa18c. */
 /* Supplied declaration required: FUN_002c0944. */
 /* Supplied declaration required: renderCtxSelectTexture. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
@@ -142,7 +142,7 @@ void FUN_001fb5c4(void)
   }
   temp_v7 = DAT_00448c74;
   temp_v28 = CONCAT44(1.0f - DAT_00448c78,DAT_00448c78);
-  temp_v1 = FUN_002c5d80(1,0);
+  temp_v1 = renderCtxPackPassFlags(1,0);
   piVar11 = (int *)(temp_v3 + 0x124c);
   temp_v4 = *piVar11;
   temp_v5 = piVar11[temp_v4 + 2];

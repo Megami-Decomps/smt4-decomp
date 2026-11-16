@@ -26,7 +26,7 @@ void FUN_002e8a78(f32 x, f32 y, f32 z)
                         position.y *= 1.0f / 3.0f;
                         position.z *= 1.0f / 3.0f;
                     }
-                    FUN_00291e40(0x10001FF, position);
+                    soundActorStartOnFreeChannel(0x10001FF, position);
                 }
                 record->state = 7;
                 record->proximity.timer = 0;

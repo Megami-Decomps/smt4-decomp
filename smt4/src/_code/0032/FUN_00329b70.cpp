@@ -21,7 +21,7 @@ int textEncodeFontSlot(...);
 int soundChannelStopAll(...);
 int slotSetRequest(...);
 int scrScriptProcessDestroy(...);
-int FUN_002bd06c(...);
+int dataTable01FindByIdWithAoc(...);
 int spriteStartAnimationByIndex(...);
 int libc_strcpy(...);
 int asdMemFree(...);
@@ -33,7 +33,7 @@ int asdAnimGetTrackLastFrame(unsigned int, int);
 int soundSlotStopById(void);
 int scrScriptProcessStartEntry(...);
 int asdMdlManagerCreateLoaded(...);
-void FUN_0029c2cc(...);
+void modelRemoveFromSlotList(...);
 int soundChannelRequestIfEnabled(int, int, int);
 int FUN_002a03d8(...);
 int lightOwnerRegister(...);
@@ -42,8 +42,8 @@ int asdMdlManagerDestroy(...);
 int sndObjectForwardField8(void);
 int buttonHelpSetPreset(...);
 int FUN_002b8ee0(int, int);
-int FUN_002bf810(...);
-int FUN_002bf818(...);
+int soundPlaySeUnpanned(...);
+int uiSpriteAdvanceAnimation(...);
 int FUN_002c1658(...);
 int VectorSignedToFloat(...);
 int __aeabi_idivmod(unsigned int, double);
@@ -97,7 +97,7 @@ extern int FUN_00295618(void);
 /* Supplied declaration required: soundSlotStopById. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
-/* Supplied declaration required: FUN_0029c2cc. */
+/* Supplied declaration required: modelRemoveFromSlotList. */
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
@@ -111,12 +111,12 @@ extern int FUN_00295618(void);
 extern int FUN_002b89a4(unsigned int);
 /* Supplied declaration required: FUN_002b8ee0. */
 extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_002bd06c. */
+/* Supplied declaration required: dataTable01FindByIdWithAoc. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_002bf810. */
-/* Supplied declaration required: FUN_002bf818. */
+/* Supplied declaration required: soundPlaySeUnpanned. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: __aeabi_idivmod. */
@@ -149,7 +149,7 @@ unsigned int FUN_00329b70(void)
   int temp_v14 [35];
   
   temp_v2 = g_screenStateWork;
-  FUN_002bf818(g_screenStateWork + 0x8cc);
+  uiSpriteAdvanceAnimation(g_screenStateWork + 0x8cc);
   *(int *)(temp_v2 + 0x7c) = *(int *)(temp_v2 + 0x7c) + 2;
   asdAnimGetTrackLastFrame(*(unsigned int *)(temp_v2 + 0x80),0);
   temp_v11 = (float)(int)in_s0;
@@ -177,10 +177,10 @@ unsigned int FUN_00329b70(void)
         }
         temp_v6 = 0x10000ac;
       }
-      FUN_002bf810(temp_v6);
+      soundPlaySeUnpanned(temp_v6);
     }
     else {
-      FUN_002bf810(0x10000aa);
+      soundPlaySeUnpanned(0x10000aa);
     }
     temp_v7 = g_screenStateWork;
     *(unsigned int *)(g_screenStateWork + 4) = 2;
@@ -194,7 +194,7 @@ unsigned int FUN_00329b70(void)
       }
       temp_v7 = temp_v7 + 1;
     } while (temp_v7 < 5);
-    FUN_002bf818(temp_v2 + 0x840);
+    uiSpriteAdvanceAnimation(temp_v2 + 0x840);
     temp_v7 = FUN_002b89a4(0);
     if (((temp_v7 != 0) && (temp_v7 = FUN_002b89a4(1), temp_v7 != 0)) &&
        (*(char *)(temp_v2 + 0x582) != '\0')) {
@@ -254,7 +254,7 @@ unsigned int FUN_00329b70(void)
             }
             else {
               *(unsigned int *)(temp_v7 + temp_v9 * 4 + 0x58) = 0;
-              FUN_002bf818(temp_v7 + temp_v9 * 0x8c + 0x610);
+              uiSpriteAdvanceAnimation(temp_v7 + temp_v9 * 0x8c + 0x610);
             }
           }
         }
@@ -296,7 +296,7 @@ unsigned int FUN_00329b70(void)
         temp_v6 = asdCameraLoadFromFile(&LAB_0032a12c);
         *(unsigned int *)(temp_v2 + 0x90) = temp_v6;
       }
-      FUN_0029c2cc(*(unsigned int *)(temp_v2 + 0x8c),0);
+      modelRemoveFromSlotList(*(unsigned int *)(temp_v2 + 0x8c),0);
       gfxObjectDestroy(*(unsigned int *)(temp_v2 + 0x8c));
       *(unsigned int *)(temp_v2 + 0x8c) = 0;
       lightOwnerRegister(*(unsigned int *)(temp_v2 + 0x88),1);
@@ -351,7 +351,7 @@ LAB_0032a1a4:
           if (*(int *)(temp_v2 + 0x24) != -1) {
             soundSlotStopById();
             *(unsigned int *)(temp_v2 + 0x24) = 0xffffffff;
-            FUN_002bf810(0x10000ad);
+            soundPlaySeUnpanned(0x10000ad);
           }
         }
       }
@@ -428,7 +428,7 @@ LAB_0032a1a4:
         }
       }
       if (*(int *)(temp_v2 + 8) == temp_v7) {
-        temp_v6 = FUN_002bf810(0x10000ae);
+        temp_v6 = soundPlaySeUnpanned(0x10000ae);
         *(unsigned int *)(temp_v2 + 0x24) = temp_v6;
       }
     }
@@ -438,7 +438,7 @@ LAB_0032a1a4:
         temp_v7 = temp_v9;
       }
       if (*(int *)(temp_v2 + 8) == temp_v7) {
-        FUN_002bf810(0x10000ad);
+        soundPlaySeUnpanned(0x10000ad);
       }
     }
     if (*(short *)(temp_v2 + 0x1e) == 2) {
@@ -484,12 +484,12 @@ LAB_0032a1a4:
     }
     break;
   case 4:
-    FUN_002bf818();
+    uiSpriteAdvanceAnimation();
     temp_v7 = scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x2a0));
     if ((temp_v7 != 2) || (*(char *)(temp_v2 + 0x60e) == '\0')) break;
   case 5:
     temp_v5 = (unsigned int)*(unsigned short *)(temp_v2 + 0xc);
-    FUN_002bd06c(temp_v5);
+    dataTable01FindByIdWithAoc(temp_v5);
     libc_strcpy(temp_v14,temp_v5);
     textEncodeFontSlot(8,temp_v14);
     temp_v6 = demonGetRaceLabel(*(unsigned short *)(temp_v2 + 0xc),1);
@@ -504,7 +504,7 @@ LAB_0032a1a4:
     *(unsigned int *)(temp_v7 + 8) = 0;
     break;
   case 6:
-    FUN_002bf818();
+    uiSpriteAdvanceAnimation();
     temp_v7 = scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x2a0));
     if ((temp_v7 == 2) && (*(char *)(temp_v2 + 0x60e) != '\0')) {
       slotSetRequest(0,10,0xff);
@@ -538,7 +538,7 @@ LAB_0032a1a4:
       asdMdlManagerMarkDestroy(*(unsigned int *)(temp_v2 + 0x88));
       asdMdlManagerDestroy(*(unsigned int *)(temp_v2 + 0x88));
       *(unsigned int *)(temp_v2 + 0x88) = 0;
-      FUN_0029c2cc(*(unsigned int *)(temp_v2 + 0x90),0);
+      modelRemoveFromSlotList(*(unsigned int *)(temp_v2 + 0x90),0);
       gfxObjectDestroy(*(unsigned int *)(temp_v2 + 0x90));
       *(unsigned int *)(temp_v2 + 0x90) = 0;
       statusCameraDestroy();

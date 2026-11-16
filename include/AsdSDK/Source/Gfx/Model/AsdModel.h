@@ -198,7 +198,7 @@ u32 *FUN_001af0d0(u32 *command, s32 alt);
 }
 
 extern "C" {
-void FUN_003180c4(u32 index, const char *value);
+void scrSetStringSlot(u32 index, const char *value);
 }
 
 extern "C" {

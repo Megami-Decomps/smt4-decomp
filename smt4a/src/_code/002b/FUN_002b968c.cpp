@@ -65,7 +65,7 @@ extern int DAT_005f1c10; /* 0x5f1c10 */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0014e314. */
-extern int FUN_001692ac(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: FUN_0019af70. */
 /* Supplied declaration required: mapTableStepWave. */
@@ -135,7 +135,7 @@ void FUN_002b968c(void)
   }
   temp_v7 = DAT_005821e0;
   temp_v28 = CONCAT44(1.0f - DAT_005821e4,DAT_005821e4);
-  temp_v1 = FUN_001692ac(1,0);
+  temp_v1 = renderCtxPackPassFlags(1,0);
   piVar11 = (int *)(temp_v3 + 0x1258);
   temp_v4 = *piVar11;
   temp_v5 = piVar11[temp_v4 + 2];

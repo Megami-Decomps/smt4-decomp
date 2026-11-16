@@ -79,8 +79,8 @@ void FUN_0022258c(u32 group)
             asdTMTexTableLoadSprites(0x27);
             asdTMTexTableLoadSprites(0x1d);
             asdTMTexTableLoadTmx(0xe, 0);
-            FUN_0014afd0(3, 2);
-            FUN_0014afd0(3, 3);
+            asdTMTexTablePrepareNodeImage(3, 2);
+            asdTMTexTablePrepareNodeImage(3, 3);
             tmSpriteTableAcquire();
             g_jyoucyu.textures = 1;
         }

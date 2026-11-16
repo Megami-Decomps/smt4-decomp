@@ -20,7 +20,7 @@ int FUN_003343f0(...);
 int FUN_003450d4(...);
 int FUN_003da8f4(...);
 
-int FUN_001517b4(...);
+int padQueryLogicalKey(...);
 int eventQueueAddUniqueIfValid(...);
 int gameGetSlotRecord(void);
 int campChangeState(...);
@@ -50,7 +50,7 @@ typedef struct {
 
 extern int g_camp; /* 0x57f108 */
 
-/* Supplied declaration required: FUN_001517b4. */
+/* Supplied declaration required: padQueryLogicalKey. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 extern unsigned short ifTouchGetButtonHelpValue(void);
@@ -150,7 +150,7 @@ void FUN_001ffe84(void)
   temp_v3 = objectApplyIfUnblocked(g_camp + 0x1ec);
   if (temp_v3 < 1) {
     temp_v3 = 1;
-    FUN_001517b4();
+    padQueryLogicalKey();
     if (temp_v3 == 0) {
       return;
     }
@@ -270,7 +270,7 @@ void FUN_001ffe84(void)
     return;
   }
   temp_v4 = 0;
-  FUN_001517b4(0,1);
+  padQueryLogicalKey(0,1);
   temp_v7 = 0x100020e;
   if ((!(temp_v4 == 0 && temp_v9[0] == '\0')) && (temp_v4 = FUN_0022e714(), temp_v4 != 0)) {
     temp_v4 = temp_v8 + temp_v3 * 8;
@@ -379,11 +379,11 @@ void FUN_001ffe84(void)
   }
   else {
     temp_v3 = 1;
-    FUN_001517b4();
+    padQueryLogicalKey();
     if ((temp_v3 == 0) || (temp_v3 = FUN_002a7410(), temp_v3 != 0)) {
       if (!temp_v0) {
         temp_v3 = 9;
-        FUN_001517b4(9,1);
+        padQueryLogicalKey(9,1);
         if (temp_v3 != 0) {
           sortMenuAcquire(1,0);
           FUN_0031f208(0xb);

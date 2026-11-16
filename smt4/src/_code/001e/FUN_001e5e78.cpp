@@ -11,7 +11,7 @@ int FUN_0025a1fc(...);
 int FUN_0025a8d8(...);
 int mapFlagIsSet(...);
 int randomGetNormalizedFloat(void);
-int FUN_0028250c(void);
+int mathRemPio2f(void);
 int mathDistanceBetweenPoints(void);
 int mathGetShortestAngleDelta(void);
 int mathPositionHeadingDegrees(void);
@@ -72,7 +72,7 @@ extern int FUN_0025b408(void);
 /* Supplied declaration required: mapFlagIsSet. */
 extern int FUN_0025b4b0(float *, unsigned int *, unsigned int);
 /* Supplied declaration required: randomGetNormalizedFloat. */
-/* Supplied declaration required: FUN_0028250c. */
+/* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: mathGetShortestAngleDelta. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
@@ -337,7 +337,7 @@ LAB_001e6120:
           temp_v16 = temp_v16 + 0.2f;
           *(float *)(temp_v12 + 0x200) = temp_v16;
         }
-        FUN_0028250c();
+        mathRemPio2f();
         *(float *)(temp_v12 + 0x238) =
              *(float *)(temp_v12 + 0x238) +
              (*(float *)(temp_v12 + 0x22c) - *(float *)(temp_v12 + 0x238)) * 0.25f;
@@ -368,7 +368,7 @@ LAB_001e6120:
           temp_v29 = 0;
           if (*(short *)(temp_v12 + 0x1f8) >= 0x1f) {
             if (*(char *)(temp_v4 + 0xcce0) == '\0') {
-              FUN_00291e40(0x10001fe, soundActorPositionFromArray(reinterpret_cast<const f32 *>(temp_v12 + 0x22c)));
+              soundActorStartOnFreeChannel(0x10001fe, soundActorPositionFromArray(reinterpret_cast<const f32 *>(temp_v12 + 0x22c)));
             }
             *(unsigned int *)(temp_v12 + 0x1d4) = 4;
             *(unsigned short *)(temp_v12 + 0x1fa) = 0;
@@ -387,7 +387,7 @@ LAB_001e6120:
         *(unsigned short *)(temp_v12 + 0x1dc) = 2;
         temp_v31 = 1;
         *(float *)(temp_v12 + 0x200) = temp_v16;
-        FUN_0028250c();
+        mathRemPio2f();
         *(float *)(temp_v12 + 0x238) =
              *(float *)(temp_v12 + 0x238) +
              (*(float *)(temp_v12 + 0x22c) - *(float *)(temp_v12 + 0x238)) * 0.25f;
@@ -446,7 +446,7 @@ LAB_001e6120:
           temp_v16 = temp_v16 + 0.2f;
           *(float *)(temp_v12 + 0x200) = temp_v16;
         }
-        FUN_0028250c();
+        mathRemPio2f();
         *(float *)(temp_v12 + 0x238) =
              *(float *)(temp_v12 + 0x238) +
              (*(float *)(temp_v12 + 0x22c) - *(float *)(temp_v12 + 0x238)) * 0.25f;
@@ -466,7 +466,7 @@ LAB_001e6120:
         if (temp_v9 != 0) {
           if (*(int *)(temp_v12 + 0x1e4) >= 0x22) {
             if (*(char *)(temp_v4 + 0xcce0) == '\0') {
-              FUN_00291e40(0x10001fd, soundActorScalePosition(
+              soundActorStartOnFreeChannel(0x10001fd, soundActorScalePosition(
                   soundActorPositionFromArray(reinterpret_cast<const f32 *>(temp_v12 + 0x22c)), 1.0f / 3.0f));
             }
             mapFlagSet(*(unsigned int *)(temp_v12 + 500));
@@ -475,7 +475,7 @@ LAB_001e6120:
             break;
           }
           if (*(char *)(temp_v4 + 0xcce0) == '\0') {
-            FUN_00291e40(0x10001fd, soundActorPositionFromArray(reinterpret_cast<const f32 *>(temp_v12 + 0x22c)));
+            soundActorStartOnFreeChannel(0x10001fd, soundActorPositionFromArray(reinterpret_cast<const f32 *>(temp_v12 + 0x22c)));
           }
           *(unsigned int *)(temp_v12 + 0x1d4) = 3;
           *(unsigned short *)(temp_v12 + 0x1f8) = 0;
@@ -499,7 +499,7 @@ LAB_001e6120:
         }
         temp_v16 = *(float *)(temp_v12 + 0x200);
         if (*(int *)(temp_v12 + 0x1e4) >= 0x22) {
-          FUN_0028250c();
+          mathRemPio2f();
           temp_v16 = *(float *)(temp_v12 + 0x230) + temp_v16 * 35.0f + 200.0f;
           if (*(int *)(temp_v12 + 0x1d8) != 0) {
             *(float *)(temp_v12 + 0x238) = *(float *)(temp_v12 + 0x22c);
@@ -524,7 +524,7 @@ LAB_001e6120:
           }
         }
         else {
-          FUN_0028250c();
+          mathRemPio2f();
           *(float *)(temp_v12 + 0x238) =
                *(float *)(temp_v12 + 0x238) +
                (*(float *)(temp_v12 + 0x22c) - *(float *)(temp_v12 + 0x238)) * 0.25f;
@@ -564,7 +564,7 @@ LAB_001e6120:
         if (*(int *)(temp_v12 + 0x1e4) >= 0x22) {
           *(unsigned short *)(temp_v12 + 0x1dc) = 0x11;
           temp_v16 = *(float *)(temp_v12 + 0x200);
-          FUN_0028250c();
+          mathRemPio2f();
           temp_v9 = (int)*(short *)(temp_v12 + 0x1fc);
           temp_v16 = temp_v16 * 35.0f;
           temp_v14 = *(float *)(temp_v12 + 0x230) + temp_v16;
@@ -615,7 +615,7 @@ LAB_001e6120:
         }
         else {
           temp_v16 = *(float *)(temp_v12 + 0x200);
-          FUN_0028250c();
+          mathRemPio2f();
           temp_v16 = *(float *)(temp_v12 + 0x230) + temp_v16 * 5.0f;
           switch(*(unsigned int *)(temp_v12 + 0x1f0)) {
           case 0:
@@ -690,7 +690,7 @@ LAB_001e6120:
         }
         temp_v16 = *(float *)(temp_v12 + 0x200);
         if (*(int *)(temp_v12 + 0x1e4) >= 0x22) {
-          FUN_0028250c();
+          mathRemPio2f();
           *(float *)(temp_v12 + 0x238) =
                *(float *)(temp_v12 + 0x238) +
                (*(float *)(temp_v12 + 0x22c) - *(float *)(temp_v12 + 0x238)) * 0.25f;
@@ -711,7 +711,7 @@ LAB_001e6120:
           FUN_0025a1fc(pcVar13);
         }
         else {
-          FUN_0028250c();
+          mathRemPio2f();
           temp_v16 = *(float *)(temp_v12 + 0x230) + temp_v16 * 5.0f;
           switch(*(unsigned int *)(temp_v12 + 0x1f0)) {
           case 0:
@@ -753,7 +753,7 @@ LAB_001e6120:
       case 9:
         *(unsigned short *)(temp_v12 + 0x1dc) = 7;
         temp_v16 = *(float *)(temp_v12 + 0x200);
-        FUN_0028250c();
+        mathRemPio2f();
         temp_v16 = *(float *)(temp_v12 + 0x230) + temp_v16 * 5.0f;
         if (*(short *)(temp_v12 + 0x1fc) >= 4) {
           temp_v16 = temp_v16 + 25.0f;
@@ -834,7 +834,7 @@ LAB_001e6120:
           temp_v16 = temp_v16 + 0.2f;
           *(float *)(temp_v12 + 0x200) = temp_v16;
         }
-        FUN_0028250c();
+        mathRemPio2f();
         *(float *)(temp_v12 + 0x238) =
              *(float *)(temp_v12 + 0x238) +
              (*(float *)(temp_v12 + 0x22c) - *(float *)(temp_v12 + 0x238)) * 0.25f;
@@ -872,7 +872,7 @@ LAB_001e6120:
       case 0xb:
         *(unsigned short *)(temp_v12 + 0x1dc) = 9;
         temp_v16 = *(float *)(temp_v12 + 0x200);
-        FUN_0028250c();
+        mathRemPio2f();
         temp_v16 = *(float *)(temp_v12 + 0x230) + temp_v16 * 5.0f;
         if (*(short *)(temp_v12 + 0x1fc) >= 4) {
           temp_v16 = temp_v16 + 35.0f;
@@ -948,7 +948,7 @@ LAB_001e6120:
           temp_v16 = temp_v16 + 0.2f;
           *(float *)(temp_v12 + 0x200) = temp_v16;
         }
-        FUN_0028250c();
+        mathRemPio2f();
         *(float *)(temp_v12 + 0x238) =
              *(float *)(temp_v12 + 0x238) +
              (*(float *)(temp_v12 + 0x22c) - *(float *)(temp_v12 + 0x238)) * 0.25f;
@@ -984,7 +984,7 @@ LAB_001e6120:
       case 0xd:
         *(unsigned short *)(temp_v12 + 0x1dc) = 0xb;
         temp_v16 = *(float *)(temp_v12 + 0x200);
-        FUN_0028250c();
+        mathRemPio2f();
         temp_v14 = (float)temp_v22;
         *(float *)(temp_v12 + 0x238) =
              *(float *)(temp_v12 + 0x238) +
@@ -1050,7 +1050,7 @@ joined_r0x001e7e00:
           temp_v16 = temp_v16 + 0.2f;
           *(float *)(temp_v12 + 0x200) = temp_v16;
         }
-        FUN_0028250c();
+        mathRemPio2f();
         *(float *)(temp_v12 + 0x238) =
              *(float *)(temp_v12 + 0x238) +
              (*(float *)(temp_v12 + 0x22c) - *(float *)(temp_v12 + 0x238)) * 0.25f;
@@ -1080,7 +1080,7 @@ joined_r0x001e7e00:
       case 0xf:
         *(unsigned short *)(temp_v12 + 0x1dc) = 0xd;
         temp_v16 = *(float *)(temp_v12 + 0x200);
-        FUN_0028250c();
+        mathRemPio2f();
         temp_v16 = *(float *)(temp_v12 + 0x230) + temp_v16 * 5.0f;
         switch(*(unsigned int *)(temp_v12 + 0x1f0)) {
         case 0:
@@ -1115,7 +1115,7 @@ joined_r0x001e7e00:
           temp_v16 = temp_v16 + 0.2f;
           *(float *)(temp_v12 + 0x200) = temp_v16;
         }
-        FUN_0028250c();
+        mathRemPio2f();
         temp_v16 = *(float *)(temp_v12 + 0x230) + temp_v16 * 5.0f;
         switch(*(unsigned int *)(temp_v12 + 0x1f0)) {
         case 0:
@@ -1148,7 +1148,7 @@ joined_r0x001e7e00:
         }
         temp_v16 = *(float *)(temp_v12 + 0x200);
         if (*(int *)(temp_v12 + 0x1e4) >= 0x22) {
-          FUN_0028250c();
+          mathRemPio2f();
           *(float *)(temp_v12 + 0x238) =
                *(float *)(temp_v12 + 0x238) +
                (*(float *)(temp_v12 + 0x22c) - *(float *)(temp_v12 + 0x238)) * 0.25f;
@@ -1169,7 +1169,7 @@ joined_r0x001e7e00:
           FUN_0025a8d8(pcVar13);
         }
         else {
-          FUN_0028250c();
+          mathRemPio2f();
           *(float *)(temp_v12 + 0x238) =
                *(float *)(temp_v12 + 0x238) +
                (*(float *)(temp_v12 + 0x22c) - *(float *)(temp_v12 + 0x238)) * 0.25f;

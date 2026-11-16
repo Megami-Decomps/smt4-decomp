@@ -12,7 +12,7 @@ int FUN_001a9698(void);
 int unitRecordBuild(...);
 int FUN_0035ad50(unsigned int, unsigned char [104]);
 int findSkillMetadataById(void);
-int FUN_004bcd90(unsigned char [104]);
+int unitRecomputeDerivedStats(unsigned char [104]);
 int randomGetUpperSixBits(...);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);
@@ -70,7 +70,7 @@ extern int gameDataBlocksGetTableFlag(void);
 /* Supplied declaration required: FUN_0035ad50. */
 /* Supplied declaration required: findSkillMetadataById. */
 extern int gameDataFlagTestBit(unsigned int);
-/* Supplied declaration required: FUN_004bcd90. */
+/* Supplied declaration required: unitRecomputeDerivedStats. */
 /* Supplied declaration required: randomGetUpperSixBits. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
@@ -199,7 +199,7 @@ LAB_004a8864:
         temp_v33 = 0;
         temp_v34 = 0;
         temp_v35 = 0;
-        FUN_004bcd90(temp_v19);
+        unitRecomputeDerivedStats(temp_v19);
         puVar12 = temp_v19;
       }
     }

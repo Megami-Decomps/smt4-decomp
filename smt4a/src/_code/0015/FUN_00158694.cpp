@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016e800(...);
+int sysReportCheckFailure(...);
 int FUN_001885e8(int *, int [2], int, int, int, unsigned int **);
 int software_interrupt(int);
 
@@ -29,7 +29,7 @@ extern int DAT_005893a8; /* 0x5893a8 */
 extern unsigned int DAT_0062d388; /* 0x62d388 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_0016e800. */
+/* Supplied declaration required: sysReportCheckFailure. */
 /* Supplied declaration required: FUN_001885e8. */
 extern int *nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate(unsigned int *);
 
@@ -67,7 +67,7 @@ int FUN_00158694(int param_1,int param_2,int param_3,unsigned int param_4)
   temp_v2[2] = param_4;
   FUN_001885e8(piVar1,temp_v4,0,3,1,temp_v5);
   if ((int)piVar1 < 0) {
-    FUN_0016e800();
+    sysReportCheckFailure();
   }
   temp_v0 = temp_v4[0];
   piVar1 = (int *)nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate
@@ -78,7 +78,7 @@ int FUN_00158694(int param_1,int param_2,int param_3,unsigned int param_4)
   }
   else {
     software_interrupt(0x23);
-    FUN_0016e800(0xf96047a2,&LAB_00158794);
+    sysReportCheckFailure(0xf96047a2,&LAB_00158794);
   }
   temp_v0 = 0;
   if (param_3 != 0) {
@@ -98,7 +98,7 @@ LAB_001587d0:
     }
   }
   software_interrupt(0x23);
-  FUN_0016e800(0xf96047a2,0x1587ec);
+  sysReportCheckFailure(0xf96047a2,0x1587ec);
   (**(romwright_code **)(*piVar1 + 0x30))(piVar1);
   return temp_v1;
 }

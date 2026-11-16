@@ -44,7 +44,7 @@ s32 lmapMainIsRunning(void);
 void FUN_00294834(s32 r0, s32 g0, s32 b0, s32 r1, s32 g1, s32 b1, s32 r2, s32 g2, s32 b2, s32 r3, s32 g3, s32 b3,
                   f32 f0, f32 f1, f32 f2, f32 f3, f32 f4, f32 f5, f32 f6, f32 f7, f32 f8);
 void asdModelSlotRelease(s32 slot);
-void FUN_0029c2cc(s32 object, s32 arg);
+void modelRemoveFromSlotList(s32 object, s32 arg);
 void gfxObjectDestroy(s32 object);
 void statusCameraDestroy(void);
 void asdMdlManagerMarkDestroy(s32 manager);
@@ -64,7 +64,7 @@ static __inline void uniteWaitForThread(u32 thread)
     u32 result = FUN_002c40f8(&signalled, &handle, 1, 0, -1LL);
     bool failed = nnResultIsFailure(result);
     if (failed)
-        FUN_002c526c(result, failed);
+        resultHandleFailure(result, failed);
 }
 
 // Destroys the fusion screen: stops its worker thread, releases its models, scripts and buffers.
@@ -84,13 +84,13 @@ void uniteScreenDestroy(void)
     asdMemFree(screen->threadBuffer);
     screen->threadBuffer = NULL;
 
-    gameCounterAddSaturating(0x25, FUN_002907a8() - screen->startTime);
+    gameCounterAddSaturating(0x25, saveBlockGetPlaySeconds() - screen->startTime);
     if (lmapSceneGetScript() != 0 || lmapMainIsRunning() != 0) {
         FUN_00294834(200, 200, 200, 130, 130, 130, 30, 30, 30, 150, 150, 150, 90.0f, -0.5f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 30.0f, 1.5f);
     } else {
         asdModelSlotRelease(0);
     }
-    FUN_0029c2cc(screen->camera, 0);
+    modelRemoveFromSlotList(screen->camera, 0);
     gfxObjectDestroy(screen->camera);
     screen->camera = 0;
     statusCameraDestroy();

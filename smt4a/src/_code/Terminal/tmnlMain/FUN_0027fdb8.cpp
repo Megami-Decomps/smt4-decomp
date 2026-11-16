@@ -10,7 +10,7 @@ void* asdMemoryAllocTracked(u32, u32, u32, u32, u32);
 bool gameFlagIsSet(u32);
 void messageSetMode(u32);
 void questSetPackedFlag(u32, u32);
-void FUN_00408184(u32, u32);
+void gameCounterAddSaturating(u32, u32);
 void FUN_0022677c(u32, u32);
 void FUN_0027e0d8(void);
 void terminalSignalComplete(void);
@@ -76,7 +76,7 @@ void FUN_0027fdb8(const u32* destination)
         work->initialVisit = 0;
         if (!gameFlagIsSet(0x304)) {
             questSetPackedFlag(work->destination, 1);
-            FUN_00408184(0x1C, 1);
+            gameCounterAddSaturating(0x1C, 1);
         }
         work->openingMode = 0;
         work->transition = 0;

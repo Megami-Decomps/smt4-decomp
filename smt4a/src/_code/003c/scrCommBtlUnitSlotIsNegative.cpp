@@ -9,7 +9,7 @@ typedef struct UnitSlots {
 } UnitSlots;
 
 extern s32 scrGetArg(u32 index);
-extern UnitSlots *FUN_003eaf20(void);
+extern UnitSlots *btlFindFirstEntryMatchingCategoryAndRequiredMask(void);
 extern void scrSetResult(s32 value);
 
 /* Script command: pushes whether the selected slot (0..3 mapped to 7, 8, 10, 11) of the current unit is negative. */
@@ -29,7 +29,7 @@ s32 scrCommBtlUnitSlotIsNegative(void)
         slot = 11;
     }
     static_cast<void *>(btlGetMainState());
-    unit = FUN_003eaf20();
+    unit = btlFindFirstEntryMatchingCategoryAndRequiredMask();
     if (unit != NULL) {
         scrSetResult(unit->slots[slot] <= -1);
     } else {

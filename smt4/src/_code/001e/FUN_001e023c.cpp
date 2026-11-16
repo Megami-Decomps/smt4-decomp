@@ -38,7 +38,7 @@ typedef struct FadeJob {
 extern RenderCtx *g_titleScene;
 FadeJob *jobGetWork(u32 handle);
 void FUN_001a79a8(FadeJob *job);
-s32 FUN_002c5d80(u32 slot, u32 flags);
+s32 renderCtxPackPassFlags(u32 slot, u32 flags);
 void FUN_0033e160(u32 handle, s32 zero, s32 level, u8 *params, u32 color, u32 flag, FadeVec2 origin);
 void renderCtxResetColorScale(RenderCtx *context);
 
@@ -55,7 +55,7 @@ u32 FUN_001e023c(u32 handle)
             job->initialized = 1;
         }
         RenderCtx *context = g_titleScene;
-        s32 state = FUN_002c5d80(5, 1);
+        s32 state = renderCtxPackPassFlags(5, 1);
         renderCtxPushA(context, state);
         context = g_titleScene;
         state = FUN_002865c0(6, 0.0f);

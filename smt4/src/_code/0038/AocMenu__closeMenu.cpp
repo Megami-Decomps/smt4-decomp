@@ -9,9 +9,9 @@ extern AocMain *g_aocMain;
 extern AocSystem *g_aocSystem;
 RequestParameters FUN_003887cc(AocSystem *system);
 void aocMenuSetButtonHelp(AocMenu *menu, s32 request, s32 mode);
-void FUN_00233db8(AocMenu *menu, u32 request);
+void aocLoadingTaskStart(AocMenu *menu, u32 request);
 void FUN_00126fb8(void *query);
-void FUN_002b8244(s32 mode);
+void buttonHelpSetEnabled(s32 mode);
 void jobOwnerFreeSlotAndStop(void *owner);
 void jobStopAndClearFlags(AocMenu *menu);
 void aocReleasePackageOwner(AocSystem *system);
@@ -55,13 +55,13 @@ void AocMenu::closeMenu()
     }
     switch (menu->substep) {
     case 0:
-        FUN_002b8244(0);
+        buttonHelpSetEnabled(0);
         aocMenuSetButtonHelp(menu, -1, 0);
         menu->substep = 1;
         break;
     case 1:
         if (FUN_0026b564() != 0) {
-            FUN_00233db8(menu, 1);
+            aocLoadingTaskStart(menu, 1);
             aocResetOperationState(g_aocSystem);
             menu->substep = 2;
         }

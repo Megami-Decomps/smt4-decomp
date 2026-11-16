@@ -123,7 +123,7 @@ u32 FUN_00203d74(void);
 extern "C" {
 #endif
 /* Canonical declaration (matches the definition). */
-void FUN_00287728(u32 index);
+void screenFadeSlotReset(u32 index);
 #ifdef __cplusplus
 }
 #endif

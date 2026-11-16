@@ -26,7 +26,7 @@ typedef struct SpriteHandle {
     void initialize();
 } SpriteHandle;
 
-extern SpriteHandle *FUN_00163318(u32 size, u32 type);
+extern SpriteHandle *asdMemAllocByHeapFlags(u32 size, u32 type);
 extern void rt_aeabi_memclr(void *block, u32 size);
 
 __inline void SpriteHandle::initialize()
@@ -46,7 +46,7 @@ SpriteHandle *spriteHandleCreate(u32 type)
     SpriteHandle *sprite;
 
     asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Text\\AsdText.cpp", 144);
-    sprite = FUN_00163318(sizeof(SpriteHandle), type);
+    sprite = asdMemAllocByHeapFlags(sizeof(SpriteHandle), type);
     sprite->initialize();
     return sprite;
 }

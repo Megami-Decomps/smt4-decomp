@@ -6,13 +6,13 @@
 extern "C" {
 
 int dataTable0cLookupById(void);
-int FUN_00290994(...);
+int uiDrawListScrollBar(...);
 int FUN_0029a17c(...);
 int FUN_0029ab54(int, int);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int textDrawString(...);
 int textFormatBuffer(unsigned char [64], unsigned char *);
-int FUN_002bf380(...);
+int texDrawCompositeSprite(...);
 int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int FUN_002e1ed4(...);
@@ -37,7 +37,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: dataTable0cLookupById. */
-/* Supplied declaration required: FUN_00290994. */
+/* Supplied declaration required: uiDrawListScrollBar. */
 /* Supplied declaration required: FUN_0029a17c. */
 /* Supplied declaration required: FUN_0029ab54. */
 extern int FUN_0029ac94(void);
@@ -50,7 +50,7 @@ extern int resourceRunOperationIfUnblocked(void);
 /* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
-/* Supplied declaration required: FUN_002bf380. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002e1ed4. */
@@ -99,8 +99,8 @@ void FUN_0032bc00(int param_1,int param_2)
   else {
     temp_v1 = 1;
   }
-  FUN_002bf380(2,0x1a,5,param_1,param_2,0xb3);
-  FUN_002bf380(2,0x1a,0xb,param_1,param_2,0xb5);
+  texDrawCompositeSprite(2,0x1a,5,param_1,param_2,0xb3);
+  texDrawCompositeSprite(2,0x1a,0xb,param_1,param_2,0xb5);
   FUN_0029ab54(param_1,param_2);
   temp_v5 = 0;
   do {
@@ -151,9 +151,9 @@ void FUN_0032bc00(int param_1,int param_2)
      (temp_v4 = temp_v2 + (temp_v3 + temp_v4) * 4, temp_v5 = temp_v4 + 0x500, *(short *)(temp_v4 + 0x5ca) != 0)) {
     temp_v4 = asdTMTexTableEntryAt(0x1a,temp_v3 + 0x42c);
     efctSetSpeed();
-    FUN_002bf380(2,0x1a,8,*(short *)(temp_v4 + 8) + param_1,*(short *)(temp_v4 + 10) + param_2,0xbf);
+    texDrawCompositeSprite(2,0x1a,8,*(short *)(temp_v4 + 8) + param_1,*(short *)(temp_v4 + 10) + param_2,0xbf);
     efctSetSpeed();
-    FUN_002bf288(2,0x1a,0x41f,*(short *)(temp_v4 + 8) + param_1,*(short *)(temp_v4 + 10) + param_2,0xc4)
+    texDrawTableEntryAtStoredOrigin(2,0x1a,0x41f,*(short *)(temp_v4 + 8) + param_1,*(short *)(temp_v4 + 10) + param_2,0xc4)
     ;
     temp_v3 = *(int *)(temp_v2 + 0x418);
     temp_v11 = 0x420;
@@ -175,9 +175,9 @@ void FUN_0032bc00(int param_1,int param_2)
         temp_v11 = 0x421;
       }
     }
-    FUN_002bf288(2,0x1a,temp_v11,*(short *)(temp_v4 + 8) + param_1,*(short *)(temp_v4 + 10) + param_2,0xc4
+    texDrawTableEntryAtStoredOrigin(2,0x1a,temp_v11,*(short *)(temp_v4 + 8) + param_1,*(short *)(temp_v4 + 10) + param_2,0xc4
                 );
-    FUN_002bf288(2,0x1a,0x457,*(short *)(temp_v4 + 8) + param_1,*(short *)(temp_v4 + 10) + param_2,0xc4)
+    texDrawTableEntryAtStoredOrigin(2,0x1a,0x457,*(short *)(temp_v4 + 8) + param_1,*(short *)(temp_v4 + 10) + param_2,0xc4)
     ;
     temp_v6 = asdTMTexTableEntryAt(0x1a,0x420);
     temp_v3 = g_titleScene;
@@ -194,7 +194,7 @@ void FUN_0032bc00(int param_1,int param_2)
     temp_v3 = vec2GetYInt(temp_v2 + 0x1cc);
     temp_v0 = *(short *)(temp_v4 + 10);
     temp_v6 = vec2GetXInt(temp_v2 + 0x1cc);
-    FUN_002bf288(2,0x1a,0x422,temp_v6 + param_1 + (int)*(short *)(temp_v4 + 8),
+    texDrawTableEntryAtStoredOrigin(2,0x1a,0x422,temp_v6 + param_1 + (int)*(short *)(temp_v4 + 8),
                  temp_v3 + param_2 + (int)temp_v0,0xc9);
     temp_v3 = g_titleScene;
     piVar14 = (int *)(g_titleScene + 0x130c);
@@ -223,9 +223,9 @@ void FUN_0032bc00(int param_1,int param_2)
   }
   temp_v3 = FUN_0029ee54(temp_v15);
   if (temp_v3 < 1) {
-    FUN_002bf380(2,0x1a,0x1b,param_1,param_2,0xdd);
+    texDrawCompositeSprite(2,0x1a,0x1b,param_1,param_2,0xdd);
   }
-  FUN_00290994(temp_v15,param_1,param_2,0x1a,0x404,0x405,0x406,0x400,0x402,0x401,0x403,
+  uiDrawListScrollBar(temp_v15,param_1,param_2,0x1a,0x404,0x405,0x406,0x400,0x402,0x401,0x403,
                (int)*(short *)(temp_v2 + 0x474),(int)*(short *)(temp_v2 + 0x476),
                (int)*(short *)(temp_v2 + 0x478),0xc4,0);
   return;

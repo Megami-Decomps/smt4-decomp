@@ -41,7 +41,7 @@ u32 FUN_002dfb48(MapEnemyEncounterView *entry)
                 radius = static_cast<f32>(randNextInRange(50)) + 560.0f;
         }
         heading *= 0.017453292f;
-        candidate.x += FUN_0028250c(heading) * radius;
+        candidate.x += mathRemPio2f(heading) * radius;
         candidate.z += FUN_00282390(heading) * radius;
         ++enemies->unk3044;
         CollisionVector start = g_lmapScene->position;

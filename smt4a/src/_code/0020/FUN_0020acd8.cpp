@@ -7,7 +7,7 @@ struct BattleSelectionTransition {
 };
 }
 extern "C" {
-void FUN_0020ad6c(BattleSelectionTransition *state, s32 nextState, s32 enabled);
+void btlCommandMenuEnterMode(BattleSelectionTransition *state, s32 nextState, s32 enabled);
 s32 btlDebugQueryEnabled(void);
 u32 FUN_002cc9e0(BattleSelectionTransition *state, s32 inBattle);
 void screenSetContextHint(BattleSelectionTransition *state, u32 kind, u32 parameter);
@@ -17,14 +17,14 @@ void FUN_0020acd8(BattleSelectionTransition *state, u32 parameter, s32 enabled)
 {
     state->parameter = parameter;
     if (enabled == 0) {
-        FUN_0020ad6c(state, 0x29, 1);
+        btlCommandMenuEnterMode(state, 0x29, 1);
         return;
     }
     if (parameter == 0 && btlDebugQueryEnabled() != 0) {
-        FUN_0020ad6c(state, 1, 1);
+        btlCommandMenuEnterMode(state, 1, 1);
         screenSetContextHint(state, FUN_002cc9e0(state, 1), state->parameter);
         return;
     }
-    FUN_0020ad6c(state, 9, 1);
+    btlCommandMenuEnterMode(state, 9, 1);
 }
 }

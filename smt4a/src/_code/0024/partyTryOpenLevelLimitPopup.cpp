@@ -19,9 +19,9 @@ s32 gameFlagIsSet(u32 flag);
 s32 randRange(s32 maximum);
 void *dataTable00FindById(u16 id);
 void *gameGetPlayerData(void);
-const char *FUN_002d8b58(u32 kind, u16 slot);
+const char *popupSelectWeightedMessage(u32 kind, u16 slot);
 void rt_memcpy(void *destination, const void *source, u32 bytes);
-u32 FUN_00180118(u32 value);
+u32 dataTable01GetRecordWithAocOverride(u32 value);
 void textFormatBuffer(char *destination, const char *format, u32 value);
 
 void partyTryOpenLevelLimitPopup(void)
@@ -47,12 +47,12 @@ void partyTryOpenLevelLimitPopup(void)
     }
     g_popupState->state = 12;
     g_popupState->timer = 0;
-    const char *message = FUN_002d8b58(14, slot->id);
+    const char *message = popupSelectWeightedMessage(14, slot->id);
     g_popupState->message.text = message;
     g_popupState->slotId = slot->id;
     char format[72];
     rt_memcpy(format, message, sizeof(format));
-    u32 value = FUN_00180118((u16)unitId);
+    u32 value = dataTable01GetRecordWithAocOverride((u16)unitId);
     textFormatBuffer(g_popupState->text, format, value);
     g_popupState->message.text = g_popupState->text;
 }

@@ -43,7 +43,7 @@ struct EquipmentAttributeView {
     u32 unk24 : 20;
     u32 attribute : 12;
 };
-/* What FUN_00301a08 reports about a choice: its first combatant and how many follow. */
+/* What btlGetEntryChoiceRange reports about a choice: its first combatant and how many follow. */
 struct BattleChoiceSpan {
     s32 count[3];
     s32 range[8];
@@ -54,7 +54,7 @@ extern "C" {
 BattleActionItem *dataTable8FindRecord(s32 id);
 u32 scrGetArg(s32 index);
 void scrSetResult(s32 value);
-const BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
+const BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
 s32 battleCountActionsByAttribute(const BtlCombatantEntryA *combatant, u32 attribute);
 
 /* Script command: counts the skills of one attribute (arg 0) among the actions of the chosen combatants,
@@ -65,7 +65,7 @@ s32 FUN_003bc59c(void)
     u32 choice = btlResolveEntryChoice(scrGetArg(1));
     s32 total = 0;
     BattleChoiceSpan span;
-    FUN_00301a08(choice, span.range, span.count);
+    btlGetEntryChoiceRange(choice, span.range, span.count);
     for (s32 index = span.range[0]; index < span.count[0] + span.range[0]; index++) {
         const BtlCombatantEntryA *combatant = &btlGetMainState()->entries[index];
         const BattleActionCountView *actions = reinterpret_cast<const BattleActionCountView *>(combatant);
@@ -120,7 +120,7 @@ s32 FUN_003bc59c(void)
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
-        const BtlCombatantEntryA *selected = FUN_003eaf20(btlGetMainState());
+        const BtlCombatantEntryA *selected = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (selected != NULL) {
             total += battleCountActionsByAttribute(selected, attribute);
         }

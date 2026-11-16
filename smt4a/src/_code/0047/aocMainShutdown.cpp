@@ -10,7 +10,7 @@ typedef struct AocMain {
 
 extern AocMain *g_aocMain;
 
-extern void FUN_00169548(s32 arg);
+extern void buttonHelpSetEnabled(s32 arg);
 extern void messageMainSetFlag(s32 arg);
 extern void gameDataBlocksReleaseHold(s32 arg);
 extern void gameDataFlagsClearBits(s32 arg);
@@ -22,7 +22,7 @@ void aocMainShutdown(void)
 {
     AocMain *aoc;
 
-    FUN_00169548(0);
+    buttonHelpSetEnabled(0);
     messageMainSetFlag(1);
     gameDataBlocksReleaseHold(4);
     gameDataFlagsClearBits(4);

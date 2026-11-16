@@ -19,7 +19,7 @@ int FUN_0029a0cc(...);
 int FUN_0029a0e8(...);
 int FUN_0029c43c(...);
 int FUN_0029ede8(...);
-int FUN_002bf810(...);
+int soundPlaySeUnpanned(...);
 
 int FUN_0022e538(...);
 int equipmentPreviewUpdateSelection(...);
@@ -100,7 +100,7 @@ extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: ifTouchRegionRemove. */
 extern unsigned int vec2GetYInt(unsigned int *);
 extern unsigned int vec2GetXInt(unsigned int *);
-/* Supplied declaration required: FUN_002bf810. */
+/* Supplied declaration required: soundPlaySeUnpanned. */
 
 
 void FUN_003a4a60(unsigned int *param_1)
@@ -484,7 +484,7 @@ joined_r0x003a5580:
       FUN_00299370(0);
       FUN_0029a0e8(puVar5);
       FUN_0029a0cc(puVar5);
-      FUN_002bf810(0x100025f);
+      soundPlaySeUnpanned(0x100025f);
     }
     temp_v5 = gameGlobalsDataExists();
     if (temp_v5 != 0) {

@@ -16,7 +16,7 @@ void FUN_0016ccb4(void *query);
 void aocMenuInitializeSprites(AocMenu *menu);
 void asdTMTexTableLoadSprites(s32 table);
 u32 dataTableValueOrZero(s32 index);
-ScriptProcess *FUN_00275bc8(void *tableFile, u32 tableValue);
+ScriptProcess *scrScriptProcessCreate(void *tableFile, u32 tableValue);
 void sysMemClear(void *buffer, u32 size);
 void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 }
@@ -33,12 +33,12 @@ void AocMenu::openPurchaseList()
     aocMenuInitializeSprites(this);
     asdTMTexTableLoadSprites(0x2f);
     for (s32 i = 0; i < 3; ++i) {
-        FUN_0014afd0(0x2f, i);
+        asdTMTexTablePrepareNodeImage(0x2f, i);
     }
     u32 size;
     tableFile = asdLoadFileWithSize(DAT_00526444, &size, 0);
     tableValue = dataTableValueOrZero(0x40);
-    script = FUN_00275bc8(tableFile, tableValue);
+    script = scrScriptProcessCreate(tableFile, tableValue);
     script->state = 2;
     step = 1;
     substep = 0;

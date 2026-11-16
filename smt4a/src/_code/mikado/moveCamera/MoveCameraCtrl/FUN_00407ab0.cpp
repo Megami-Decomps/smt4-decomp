@@ -58,15 +58,15 @@ extern "C" {
 extern u32 g_handleRegistry;
 
 void textFormatBuffer(char *out, const char *format, ...);
-void *FUN_00178b04(u32 size, const char *file, u32 line);
+void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 McModelList *modelListInit(void *memory);
-void FUN_0040aa6c(void);
+void resourceOwnerLoadFileSync(void);
 void FUN_0040aad4(McModelList *list, s32 flag);
 void FUN_0040ab7c(McModelList *list, s32 flag);
 void handleRegistryRegisterObject(u32 registry, u32 object);
-void FUN_003fe86c(u32 object, s32 a, s32 b);
+void modelPlayClip(u32 object, s32 a, s32 b);
 void controllerSetPosition(u32 object);
-void FUN_003fd7b4(u32 object);
+void controllerSetPositionXyz(u32 object);
 void FUN_00407110(MoveCameraCtrl *ctrl, const char *name);
 void resourceOwnerLoadNamed(u32 registry, const char *name);
 s32 FUN_0040af60(u32 registry);
@@ -80,7 +80,7 @@ void lookupNameEntry(McSceneObject *object, const char *entry, McVec3 *out);
 /* Allocates and constructs one model list. */
 static __inline McModelList *mcCreateModelList(u32 line)
 {
-    void *memory = FUN_00178b04(0x20, MC_SOURCE, line);
+    void *memory = asdMemoryAllocTraced(0x20, MC_SOURCE, line);
     return memory != NULL ? modelListInit(memory) : NULL;
 }
 
@@ -98,14 +98,14 @@ void FUN_00407ab0(MoveCameraCtrl *ctrl, const char *cameraName, const char *data
     char path[128];
     textFormatBuffer(path, "%s.bam", dataName);
     ctrl->cameraModel = mcCreateModelList(0xF5);
-    FUN_0040aa6c();
+    resourceOwnerLoadFileSync();
     FUN_0040aad4(ctrl->cameraModel, 0);
     FUN_0045b538(ctrl->cameraModel->data + 0xC);
     u32 object = ctrl->cameraModel->object;
     handleRegistryRegisterObject(g_handleRegistry, object);
-    FUN_003fe86c(object, 0, 1);
+    modelPlayClip(object, 0, 1);
     controllerSetPosition(object);
-    FUN_003fd7b4(object);
+    controllerSetPositionXyz(object);
 
     textFormatBuffer(path, "%s_cam.bch", cameraName);
     FUN_00407110(ctrl, path);
@@ -143,26 +143,26 @@ void FUN_00407ab0(MoveCameraCtrl *ctrl, const char *cameraName, const char *data
         ctrl->hasPoints = 1;
         textFormatBuffer(path, "mikado/yaji.bam");
         ctrl->arrowModel = mcCreateModelList(0x15E);
-        FUN_0040aa6c();
+        resourceOwnerLoadFileSync();
         FUN_0040ab7c(ctrl->arrowModel, 0);
         FUN_0040aad4(ctrl->arrowModel, 0);
         u32 arrow = ctrl->arrowModel->object;
         handleRegistryRegisterObject(g_handleRegistry, arrow);
-        FUN_003fe86c(arrow, 0, 1);
+        modelPlayClip(arrow, 0, 1);
         controllerSetPosition(arrow);
-        FUN_003fd7b4(arrow);
+        controllerSetPositionXyz(arrow);
 
         textFormatBuffer(path, "mikado/point.bam");
         ctrl->pointModel = mcCreateModelList(0x16C);
-        FUN_0040aa6c();
+        resourceOwnerLoadFileSync();
         FUN_0040ab7c(ctrl->pointModel, 0);
         FUN_0040aad4(ctrl->pointModel, 0);
         u32 marker = ctrl->pointModel->object;
         handleRegistryRegisterObject(g_handleRegistry, marker);
-        FUN_003fe86c(marker, 0, 1);
+        modelPlayClip(marker, 0, 1);
         controllerSetPosition(marker);
         ctrl->pointStart = ctrl->points[0];
-        FUN_003fd7b4(marker);
+        controllerSetPositionXyz(marker);
     }
 }
 

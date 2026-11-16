@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002e3140(...);
+int resultHandleFailure(...);
 int software_interrupt(int);
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: resultHandleFailure. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -24,13 +24,13 @@ unsigned int FUN_001cd8fc(unsigned int *param_1,unsigned int param_2,unsigned in
   temp_v0 = *param_1;
   software_interrupt(0x24);
   if (-((int)temp_v0 >> 0x1f) != 0) {
-    FUN_002e3140(temp_v0,-((int)temp_v0 >> 0x1f),param_3,param_4);
+    resultHandleFailure(temp_v0,-((int)temp_v0 >> 0x1f),param_3,param_4);
   }
   if ((temp_v0 & 0x3ff) != 0x3fe) {
     temp_v1 = 1;
     software_interrupt(0x19);
     if ((int)*param_1 < 0) {
-      FUN_002e3140();
+      resultHandleFailure();
     }
     *(char *)((int)param_1 + 0x1319) = *(char *)((int)param_1 + 0x1319) + '\x01';
   }

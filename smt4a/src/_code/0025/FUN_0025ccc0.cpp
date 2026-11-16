@@ -6,7 +6,7 @@ extern "C" {
 extern ButtonHelpPresetGlobalsA g_buttonHelp;
 extern ButtonHelpQueuedSelections g_buttonHelpQueuedKinds;
 
-void FUN_00163aa4(ButtonHelpUnit *unit, f32 speed);
+void uiSpriteAdvanceAnimation(ButtonHelpUnit *unit, f32 speed);
 s8 uiSpriteGetCompletionState(const ButtonHelpUnit *unit);
 void FUN_00167458(ButtonHelpUnit *unit, s32 flag);
 void FUN_0031879c(void);
@@ -26,7 +26,7 @@ u32 FUN_0025ccc0(void)
             for (s32 i = 0; i < 4; i++) {
                 ButtonHelpUnit *unit = &work->selected[i];
                 if (work->unk5E4 != 1) {
-                    FUN_00163aa4(unit, 1.0f);
+                    uiSpriteAdvanceAnimation(unit, 1.0f);
                 } else if (work->unk5E2[0] != 0) {
                     FUN_00167458(unit, 0);
                 }
@@ -34,7 +34,7 @@ u32 FUN_0025ccc0(void)
             for (s32 i = 0; i < 6; i++) {
                 if (work->kinds[i].kind != 0) {
                     if (i < work->unk0C) {
-                        FUN_00163aa4(&work->units[i], 1.0f);
+                        uiSpriteAdvanceAnimation(&work->units[i], 1.0f);
                     }
                     last = i;
                 }
@@ -46,12 +46,12 @@ u32 FUN_0025ccc0(void)
         } else if (work->state != 2) {
             if (work->state == 3) {
                 for (s32 i = 0; i < 4; i++) {
-                    FUN_00163aa4(&work->selected[i], 1.0f);
+                    uiSpriteAdvanceAnimation(&work->selected[i], 1.0f);
                 }
                 for (s32 i = 0; i < 6; i++) {
                     if (work->kinds[i].kind != 0) {
                         if (i < work->unk0C) {
-                            FUN_00163aa4(&work->units[i], 1.0f);
+                            uiSpriteAdvanceAnimation(&work->units[i], 1.0f);
                         }
                         last = i;
                     }

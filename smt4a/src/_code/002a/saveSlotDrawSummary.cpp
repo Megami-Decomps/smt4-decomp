@@ -7,9 +7,9 @@
 #include "code/Code0019.h"
 
 extern "C" {
-void FUN_00183bb0(void);
+void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 alpha);
-void FUN_00164b5c(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 depth);
+void texDrawCompositeSprite(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 depth);
 const MessageDrawPosition *asdTMTexTableEntryAt(u32 group, u32 index);
 const SaveSlotPortraitResource *devilGetRecord(u32 portrait);
 void FUN_00169a1c(u32 image, s32 x, s32 y, s32 depth);
@@ -26,30 +26,30 @@ void saveSlotDrawSummary(const SaveSlotTextObjects *texts, const SaveSlotDisplay
     if (texts == NULL || record == NULL || transform == NULL || transform->alpha == 0.0f) {
         return;
     }
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
     efctSetSpeed(transform->alpha);
     x += transform->x;
     y += transform->y;
     if (preview != 0) {
-        FUN_001835b4(2, 0x2E, 0x56, x, y, 0x65);
+        texDrawTableEntryAtStoredOrigin(2, 0x2E, 0x56, x, y, 0x65);
         return;
     }
     u32 textColor;
     u32 nameColor;
     if (record->style == 0) {
-        FUN_00164b5c(2, 0x2E, 9, x, y, 0x65);
+        texDrawCompositeSprite(2, 0x2E, 9, x, y, 0x65);
         textColor = 0x32323200;
         nameColor = 0;
         if ((record->flags & 4) != 0) {
-            FUN_001835b4(2, 0x2E, 0x165, x, y, 0x65);
+            texDrawTableEntryAtStoredOrigin(2, 0x2E, 0x165, x, y, 0x65);
             nameColor = 0x896E0000;
         }
     } else if (record->style == 1) {
-        FUN_00164b5c(2, 0x2E, 10, x, y, 0x65);
+        texDrawCompositeSprite(2, 0x2E, 10, x, y, 0x65);
         textColor = 0xC0C0C000;
         nameColor = 0xFFFFFF00;
         if ((record->flags & 4) != 0) {
-            FUN_001835b4(2, 0x2E, 0x166, x, y, 0x65);
+            texDrawTableEntryAtStoredOrigin(2, 0x2E, 0x166, x, y, 0x65);
             nameColor = 0xE6C80000;
         }
     }
@@ -62,7 +62,7 @@ void saveSlotDrawSummary(const SaveSlotTextObjects *texts, const SaveSlotDisplay
         FUN_001527d8((u32)texts->optional, color);
         FUN_0025cc78(texts->optional, position->x + x, position->y + y, 0x66, 1.0f);
     }
-    FUN_001835b4(2, 0x2E, 0x5A, x, y, 0x66);
+    texDrawTableEntryAtStoredOrigin(2, 0x2E, 0x5A, x, y, 0x66);
     if (record->portrait != 0) {
         const SaveSlotPortraitResource *portrait = devilGetRecord(record->portrait);
         position = asdTMTexTableEntryAt(0x2E, 0x78);
@@ -71,7 +71,7 @@ void saveSlotDrawSummary(const SaveSlotTextObjects *texts, const SaveSlotDisplay
     if (record->secondaryPortrait != 0) {
         void *unit = reinterpret_cast<void *>(FUN_0019acdc(record->secondaryPortrait, 0));
         u16 id = FUN_0036fcd0(unit, 0);
-        const SaveSlotPortraitResource *portrait = devilGetRecord(FUN_0019e52c(id));
+        const SaveSlotPortraitResource *portrait = devilGetRecord(dataTable10FindValue(id));
         position = asdTMTexTableEntryAt(0x2E, 0x100);
         FUN_00169a1c(portrait->image, position->x + x, position->y + y, 0x67);
     }
@@ -109,7 +109,7 @@ void saveSlotDrawSummary(const SaveSlotTextObjects *texts, const SaveSlotDisplay
     FUN_00180310(0, position->x + x, position->y + y, 0, 5, 0x67, time);
     position = asdTMTexTableEntryAt(0x2E, 0x89);
     FUN_002e1b64(record->location, position->x + x, position->y + y, 0x67);
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
 }
 }

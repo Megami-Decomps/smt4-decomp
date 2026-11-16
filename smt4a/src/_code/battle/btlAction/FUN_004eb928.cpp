@@ -9,7 +9,7 @@ extern "C" {
 int eventCommandClearPending(void);
 int obj4FSlots28Reset(...);
 
-int FUN_00178b04(...);
+int asdMemoryAllocTraced(...);
 int dialogOpen(...);
 int infoWinSetTimer(...);
 int halfRecClear(...);
@@ -42,7 +42,7 @@ int flagValueSub(...);
 int FUN_004aa3d4(...);
 int FUN_004e5f2c(...);
 int btlReflectCreateKind25(...);
-int FUN_004fbc30(...);
+int btlQueueKeyedScalarReflectAction(...);
 int FUN_004fc094(...);
 unsigned int btlReflectQueuePairedParameters(int actor, unsigned int flags, unsigned int value,
                          unsigned int parameter, unsigned int target, unsigned int first,
@@ -69,7 +69,7 @@ int FUN_004fdcd8(...);
 int btlActionReflectSetStateArg(...);
 int FUN_004fe7b0(...);
 
-int FUN_001568f8(...);
+int btlFindEntryBlockByMemberId(...);
 int sysPlaySe(int);
 int gameGetSlotTable(void);
 int dataTable04FindById(void);
@@ -156,11 +156,11 @@ extern int g_btlAux; /* 0x573808 */
 extern int g_btlEvent; /* 0x573898 */
 extern int g_btlUiBlock; /* 0x57a9c8 */
 
-/* Supplied declaration required: FUN_001568f8. */
+/* Supplied declaration required: btlFindEntryBlockByMemberId. */
 extern int lcgRandomRange(unsigned int);
 extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00178b04. */
+/* Supplied declaration required: asdMemoryAllocTraced. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: gameGetSlotTable. */
@@ -232,7 +232,7 @@ extern int FUN_004ea0c0(int *, unsigned int *);
 /* Supplied declaration required: FUN_004ecee8. */
 /* Supplied declaration required: FUN_004ee5b4. */
 extern int btlEffectNameHasPrefix(int, int);
-extern int FUN_004f59b0(int);
+extern int btlGetMaxSlotMetric(int);
 extern int FUN_004f5a40(int);
 extern int btlUnitGetSkillValue(int);
 /* Supplied declaration required: btlCameraFinishTransition. */
@@ -249,7 +249,7 @@ extern unsigned int FUN_004fa030(int);
 /* Supplied declaration required: FUN_004fb4fc. */
 /* Supplied declaration required: btlReflectCreateKind25. */
 /* Supplied declaration required: btlQueueDuplicateSuppressedAction. */
-/* Supplied declaration required: FUN_004fbc30. */
+/* Supplied declaration required: btlQueueKeyedScalarReflectAction. */
 /* Supplied declaration required: FUN_004fbeac. */
 /* Supplied declaration required: FUN_004fc094. */
 /* Supplied declaration required: FUN_004fcde0. */
@@ -487,7 +487,7 @@ LAB_004ebd00:
     }
     FUN_004e6b64(piStack_30,puVar25,asStack_49c);
     temp_v9 = 0;
-    temp_v10 = FUN_004f59b0(g_btlAux);
+    temp_v10 = btlGetMaxSlotMetric(g_btlAux);
     temp_v26 = 0;
     *(int *)(temp_v20 + 0x20) = temp_v10 + temp_v5;
     iStack_48 = 0;
@@ -544,7 +544,7 @@ LAB_004ebd00:
           FUN_004fb5a8(temp_v14 + 1,puVar25,*(int *)(*piVar16 + 0x1ed4) + temp_v11 * 0x1d0);
         }
         temp_v11 = *piVar16;
-        FUN_001568f8(temp_v11,temp_v13);
+        btlFindEntryBlockByMemberId(temp_v11,temp_v13);
         if ((temp_v11 != 0) && ((*(unsigned short *)(temp_v11 + 0x110) & 0x10) == 0)) {
           FUN_003f2aac(*piVar16,temp_v13,0);
         }
@@ -658,7 +658,7 @@ LAB_004ebd00:
         break;
       case 0xe:
         temp_v13 = (int)*psVar17;
-        temp_v10 = FUN_004f59b0(g_btlAux);
+        temp_v10 = btlGetMaxSlotMetric(g_btlAux);
         temp_v10 = temp_v10 + temp_v5;
         temp_v14 = btlCalcDiscountedMoneyCost(temp_v17);
         btlActionReflectSetStateArg(temp_v10,puVar25,-temp_v14);
@@ -726,7 +726,7 @@ LAB_004ebd00:
         if (uStack_70 != 1 && uStack_70 != 2) {
           temp_v10 = 0;
           do {
-            temp_v13 = FUN_004f59b0(g_btlAux);
+            temp_v13 = btlGetMaxSlotMetric(g_btlAux);
             if (-1 < temp_v13) {
               temp_v2 = *(short *)(temp_v21 + temp_v10 * 0x16 + 0x6a);
               temp_v13 = btlUnitGetSkillValue(g_btlAux);
@@ -875,7 +875,7 @@ code_r0x004ef7f0:
     if (temp_v21 != 0) {
       temp_v7 = 0;
       do {
-        temp_v10 = FUN_004f59b0(g_btlAux);
+        temp_v10 = btlGetMaxSlotMetric(g_btlAux);
         if (-1 < temp_v10) {
           temp_v10 = temp_v21 + temp_v7 * 0x16;
           if (*(unsigned short *)(temp_v10 + 0x6a) - 6 < 6) {
@@ -1216,7 +1216,7 @@ code_r0x004f054c:
                        0xffffffff,*(unsigned int *)(*(int *)(temp_v20 + 0x2c) + 0xf4),
                        *(unsigned int *)(*(int *)(temp_v20 + 0x2c) + 0xf8),0,0,0,0,0,0,0,0,0,0xffffffff,
                        1,0,1,0,0,1);
-          FUN_004fbc30(uStack_288 + 0x19,puVar25,*(unsigned int *)(temp_v20 + 0x28),0);
+          btlQueueKeyedScalarReflectAction(uStack_288 + 0x19,puVar25,*(unsigned int *)(temp_v20 + 0x28),0);
         }
         FUN_004e5f2c(piStack_30,puVar25,(int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),-temp_v3);
         temp_v17 = (unsigned int)*(unsigned char *)(temp_v17 + 0x22);
@@ -1394,7 +1394,7 @@ code_r0x004f054c:
     return;
   case 0x18:
     temp_v3 = 0xc;
-    FUN_00178b04(0xc,"c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlAction.cpp",0x258f);
+    asdMemoryAllocTraced(0xc,"c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlAction.cpp",0x258f);
     temp_v4 = 0;
     if (temp_v3 != 0) {
       temp_v4 = words3Clear();

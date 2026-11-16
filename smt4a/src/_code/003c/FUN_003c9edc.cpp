@@ -6,7 +6,7 @@ extern "C" {
 s32 scrGetArg(s32 index);
 s32 btlResolveEntryChoice(s32 choice);
 void scrSetResult(s32 result);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
 
 /* Tests whether the requested group or the special combatant has a positive property value. */
 s32 FUN_003c9edc(void)
@@ -21,7 +21,7 @@ s32 FUN_003c9edc(void)
     typedef char EntryQueryOffsetsCheck[offsetof(EntryQueryView, value) == 0xC8 &&
         sizeof(EntryQueryView) == 0x408 ? 1 : -1];
     s32 first, count;
-    FUN_00301a08(btlResolveEntryChoice(scrGetArg(0)), &first, &count);
+    btlGetEntryChoiceRange(btlResolveEntryChoice(scrGetArg(0)), &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         EntryQueryView *entry = &((EntryQueryView *)btlGetMainState()->entries)[index];
         if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
@@ -32,7 +32,7 @@ s32 FUN_003c9edc(void)
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
-        EntryQueryView *entry = (EntryQueryView *)FUN_003eaf20(btlGetMainState());
+        EntryQueryView *entry = (EntryQueryView *)btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL && entry->value > 0) {
             scrSetResult(1);
             return 1;

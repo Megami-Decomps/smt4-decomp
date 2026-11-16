@@ -19,15 +19,15 @@ union ProjectedPoint {
 extern "C" {
 extern EffectColorProductState DAT_004ea81c;
 extern ProjectionScratch g_effectProjectionScratch;
-u32 FUN_002c501c(void);
+u32 asdCameraGetSavedRenderPairs(void);
 void FUN_002630e0(Vec3f*, s32, u32, const Vec3f*);
-void FUN_0028c92c(Matrix44*);
+void renderGetCameraViewMatrix(Matrix44*);
 
 /* Project the working point and scale a world-space radius by camera distance. */
 f32 screenEffectProjectWorldRadius(f32 radius)
 {
     const EffectColor original = DAT_004ea81c.color;
-    const u32 camera = FUN_002c501c();
+    const u32 camera = asdCameraGetSavedRenderPairs();
     g_effectProjectionScratch.point = DAT_004ea81c.color;
     const Vec3f input = {
         g_effectProjectionScratch.point.red, g_effectProjectionScratch.point.green, g_effectProjectionScratch.point.blue
@@ -39,7 +39,7 @@ f32 screenEffectProjectWorldRadius(f32 radius)
     DAT_004ea81c.color = screenPoint;
 
     Matrix44 matrix;
-    FUN_0028c92c(&matrix);
+    renderGetCameraViewMatrix(&matrix);
     DAT_004ea81c.color = original;
     g_effectProjectionScratch.point.red = matrix.values[3];
     g_effectProjectionScratch.point.green = matrix.values[7];

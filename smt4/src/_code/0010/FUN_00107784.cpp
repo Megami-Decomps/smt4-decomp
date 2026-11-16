@@ -5,7 +5,7 @@
 extern "C" {
 extern W6Match3SlotState DAT_004d9758[2];
 extern RenderCtx *g_titleScene;
-s32 FUN_002c5d80(u32, u32);
+s32 renderCtxPackPassFlags(u32, u32);
 u32 asdGxPresetsGetByKind(u32);
 u32 asdGxPresetsGetHeightByKind(u32);
 void FUN_002c0944(u32 topLeft, u32 topRight, u32 bottomLeft, u32 bottomRight,
@@ -23,7 +23,7 @@ void FUN_00107784(s32 index)
         alpha = 255;
     color = (color & 0xFFFFFF00) | alpha;
     RenderCtx *context = g_titleScene;
-    renderCtxPushA(context, FUN_002c5d80(1, 0));
+    renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
     renderCtxSelectTexture(g_titleScene, 0);
     f32 height = static_cast<f32>(asdGxPresetsGetByKind(g_titleScene->unk0528));
     f32 width = static_cast<f32>(asdGxPresetsGetHeightByKind(g_titleScene->unk0528));

@@ -61,7 +61,7 @@ int FUN_00368374(int);
 int gameFlagWordSetBit(...);
 int mathAbsHeadingErrorToPoint(void);
 int naviMainFinishRequest(void);
-int FUN_003d4ed8(...);
+int soundActorStartOnFreeChannel(...);
 int countersAddSaturating(...);
 
 typedef int romwright_code(...);
@@ -129,7 +129,7 @@ extern int gameFlagsBitTest(int);
 /* Supplied declaration required: mathAbsHeadingErrorToPoint. */
 /* Supplied declaration required: entryTableFlagTargetsOfId203. */
 /* Supplied declaration required: naviMainFinishRequest. */
-/* Supplied declaration required: FUN_003d4ed8. */
+/* Supplied declaration required: soundActorStartOnFreeChannel. */
 /* Supplied declaration required: countersAddSaturating. */
 extern int gamePackedFlagTest(unsigned int);
 
@@ -208,7 +208,7 @@ unsigned int FUN_002332f4(void)
           if (((temp_v4 < 0x43960000) && (temp_v4 = g_gameState.f005f17b0, mathAbsHeadingErrorToPoint(), temp_v4 < 0x428c0000))
              && (temp_v16 != 0)) {
             *(unsigned int *)(temp_v5 + 0x78) = 1;
-            FUN_003d4ed8(0x10002a6);
+            soundActorStartOnFreeChannel(0x10002a6);
             if (*(int *)(temp_v5 + 0xa8) != 0) {
               *(short *)(temp_v24 + 0x22) = (short)*(int *)(temp_v5 + 0xa8);
               FUN_002b63d0();
@@ -329,7 +329,7 @@ unsigned int FUN_002332f4(void)
             if ((temp_v4 < 0x43960000) && (temp_v4 = g_gameState.f005f17b0, mathAbsHeadingErrorToPoint(), temp_v4 < 0x428c0000))
             {
               *(unsigned int *)(temp_v5 + 0x78) = 1;
-              FUN_003d4ed8(0x10002a6);
+              soundActorStartOnFreeChannel(0x10002a6);
               FUN_00352e54((int)(short)*(unsigned int *)(temp_v5 + 0x80),1);
               gameFlagWordSetBit((int)(short)*(unsigned int *)(temp_v5 + 0x80),0);
               naviMainFinishRequest();
@@ -427,7 +427,7 @@ LAB_00233a04:
         }
         if (*(short *)(temp_v5 + 0xae) >= 0x28) {
           *(unsigned int *)(temp_v5 + 0x78) = 1;
-          FUN_003d4ed8(0x10002a8);
+          soundActorStartOnFreeChannel(0x10002a8);
           FUN_00352e54((int)(short)*(unsigned int *)(temp_v5 + 0x80),1);
           gameFlagWordSetBit((int)(short)*(unsigned int *)(temp_v5 + 0x80),0);
           naviMainFinishRequest();

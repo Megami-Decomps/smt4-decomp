@@ -26,7 +26,7 @@ u32 FUN_00473da0(ThreadLaunchWork *work)
     s32 result = FUN_002fb0d4(work->thread, &descriptor, FUN_00473d54, &argument,
         work->stack->address + work->stack->size, 0x11, -2, 0);
     if ((static_cast<u32>(result) & 0x7E00000) != 0x600000 && nnResultIsFailure(result)) {
-        FUN_002e3140(result);
+        resultHandleFailure(result);
     }
     return 1;
 }

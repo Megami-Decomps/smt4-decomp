@@ -54,7 +54,7 @@ void gameSetStatusCameraHeightMode(s32 mode);
 s32 FUN_0040ab8c(ShopCursorObject *object);
 void FUN_0040aad4(ShopCursorObject *object, s32 mode);
 void handleRegistryRegisterObject(u32 registry, void *model);
-void FUN_003fd7b4(void *model, f32 x, f32 y, f32 z);
+void controllerSetPositionXyz(void *model, f32 x, f32 y, f32 z);
 void FUN_004954e8(ShopScreen *shop);
 void messageChoiceShowCurrent(ShopScreen *shop);
 s32 inputIsQuestRepeatRight(void);
@@ -108,7 +108,7 @@ void _ZN9Obj53604412FUN_00497290Ev(ShopScreen *shop)
                 FUN_0040aad4(shop->cursor, 0);
                 model = shop->cursor->model;
                 handleRegistryRegisterObject(g_handleRegistry, model);
-                FUN_003fd7b4(model, 0.0f, -32000.0f, 0.0f);
+                controllerSetPositionXyz(model, 0.0f, -32000.0f, 0.0f);
             }
         }
         if (shop->tab == 3) {

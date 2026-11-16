@@ -11,15 +11,15 @@ int FUN_00163ec4(...);
 int FUN_00164034(...);
 int FUN_00164168(...);
 int FUN_001678a8(...);
-int FUN_00183bb0(void);
+int gxResetColorQuadToWhite(void);
 int SBORROW4(...);
 
 int CONCAT44(int, double);
 int textFormatBuffer(...);
-int FUN_00157558(...);
+int renderCtxSelectDisplayAreaForStereoMode(...);
 int textDrawString(...);
 int FUN_00164490(int);
-int FUN_00164b5c(int, int);
+int texDrawCompositeSprite(int, int);
 int vec2GetXInt(...);
 int vec2GetYInt(...);
 int FUN_00165b08(void);
@@ -28,9 +28,9 @@ float FUN_00168594(const char *, unsigned int, float);
 int renderCtxSelectTexture(...);
 int renderCtxPopState(...);
 int renderStackPushIndexed(...);
-int FUN_0017ffa8(int, int, int, int);
+int texTableRecordCallWithParams(int, int, int, int);
 int asdTMTexTableEntryAt(...);
-int FUN_001835b4(...);
+int texDrawTableEntryAtStoredOrigin(...);
 int fontMeasureLineAdvance(...);
 int renderCtxCalculateStereoParallax(...);
 int VectorSignedToFloat(...);
@@ -53,7 +53,7 @@ extern signed char DAT_005e204c; /* 0x5e204c */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_001527d8. */
-/* Supplied declaration required: FUN_00157558. */
+/* Supplied declaration required: renderCtxSelectDisplayAreaForStereoMode. */
 /* Supplied declaration required: textDrawString. */
 extern int FUN_00162848(unsigned int);
 /* Supplied declaration required: effectRenderTransformedInstance. */
@@ -62,7 +62,7 @@ extern int FUN_00162848(unsigned int);
 /* Supplied declaration required: FUN_00164168. */
 /* Supplied declaration required: FUN_00164490. */
 extern int jobGetWork(void);
-/* Supplied declaration required: FUN_00164b5c. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: FUN_00165b08. */
@@ -73,14 +73,14 @@ extern int ifTouchIsActive(void);
 extern int entryListCurrentIsUsable(unsigned int);
 extern int FUN_001688c4(unsigned int);
 extern int gameGetIndexedSlotMember(unsigned int);
-extern unsigned int FUN_001692ac(unsigned int, unsigned int);
+extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
-/* Supplied declaration required: FUN_0017ffa8. */
+/* Supplied declaration required: texTableRecordCallWithParams. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00183bb0. */
+/* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 extern int asdTMTexTableGetNode(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
@@ -141,8 +141,8 @@ char FUN_0014f3f4(void)
       temp_v18 = temp_v24;
       renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v16 = (float)VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_00157558(g_renderCtx);
-      temp_v7 = FUN_001692ac(1,0);
+      renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
+      temp_v7 = renderCtxPackPassFlags(1,0);
       renderStackPushIndexed(g_renderCtx,3,temp_v7);
       temp_v8 = gameGetIndexedSlotMember(0);
       if (temp_v8 != 0) {
@@ -151,14 +151,14 @@ char FUN_0014f3f4(void)
         temp_v14 = FUN_00168594(reinterpret_cast<const char *>(temp_v8), 3, 0.0f);
         temp_v21 = 0xb;
         temp_v20 = temp_v6;
-        FUN_00164b5c(2,0x13);
+        texDrawCompositeSprite(2,0x13);
         temp_v12 = (int)(temp_v24 + temp_v16) + (0x18c - (int)temp_v14);
         VectorSignedToFloat(temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(*(short *)(temp_v23 + 10) + temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
         textDrawString(3,0xffffffff,temp_v8);
         temp_v20 = *(short *)(temp_v22 + 10) + temp_v6;
         temp_v21 = 0x74;
-        FUN_0017ffa8(2,0x13,0x1245,temp_v12 - 0x10);
+        texTableRecordCallWithParams(2,0x13,0x1245,temp_v12 - 0x10);
       }
       renderCtxPopState(g_renderCtx,3);
     }
@@ -170,7 +170,7 @@ char FUN_0014f3f4(void)
       temp_v6 = *(int *)(temp_v6 + 0x19f4);
       temp_v20 = 0;
       temp_v21 = 0xb;
-      FUN_001835b4(2,4,44000,0);
+      texDrawTableEntryAtStoredOrigin(2,4,44000,0);
       efctSetSpeed();
       temp_v24 = 0.35f;
       temp_v19 = CONCAT44(0x3eb33333,temp_v18);
@@ -179,7 +179,7 @@ char FUN_0014f3f4(void)
       do {
         temp_v21 = 0x10;
         temp_v20 = temp_v8;
-        FUN_001835b4(2,4,temp_v11 + 0xabe1,temp_v12 + (int)temp_v24);
+        texDrawTableEntryAtStoredOrigin(2,4,temp_v11 + 0xabe1,temp_v12 + (int)temp_v24);
         temp_v11 = temp_v11 + 1;
       } while (temp_v11 < 9);
       temp_v24 = (float)((unsigned long long)temp_v19 >> 0x20);
@@ -187,18 +187,18 @@ char FUN_0014f3f4(void)
       temp_v18 = (float)temp_v19;
       temp_v21 = 0x15;
       temp_v20 = temp_v8;
-      FUN_001835b4(2,4,temp_v6 + 0xabec,temp_v12 + (int)temp_v24);
+      texDrawTableEntryAtStoredOrigin(2,4,temp_v6 + 0xabec,temp_v12 + (int)temp_v24);
       temp_v16 = 0.29f;
       temp_v24 = temp_v16;
       renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v21 = 0x15;
       temp_v20 = temp_v8;
-      FUN_001835b4(2,4,temp_v6 + 0xabee,temp_v12 + (int)temp_v16);
+      texDrawTableEntryAtStoredOrigin(2,4,temp_v6 + 0xabee,temp_v12 + (int)temp_v16);
       renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v15 = (int)temp_v24;
       temp_v21 = 0x15;
       temp_v20 = temp_v8;
-      FUN_001835b4(2,4,0xabea,temp_v12 + temp_v15);
+      texDrawTableEntryAtStoredOrigin(2,4,0xabea,temp_v12 + temp_v15);
       temp_v11 = asdTMTexTableEntryAt(4,0xabeb);
       temp_v20 = -0xff01;
       temp_v21 = temp_v6 * 3;
@@ -245,7 +245,7 @@ char FUN_0014f3f4(void)
   }
   temp_v6 = asdTMTexTableGetNode(8,0);
   renderCtxSelectTexture(g_renderCtx,*(unsigned int *)(temp_v6 + 8));
-  FUN_00157558(g_renderCtx);
+  renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
   switch(*(unsigned char *)(temp_v5 + 9)) {
   case 0:
   case 1:
@@ -266,11 +266,11 @@ char FUN_0014f3f4(void)
     temp_v6 = (int)temp_v18;
     if (*(char *)(temp_v5 + 9) == '\a' || *(char *)(temp_v5 + 9) == '\t') {
       efctSetSpeed();
-      temp_v7 = FUN_001692ac(1,0);
+      temp_v7 = renderCtxPackPassFlags(1,0);
       renderStackPushIndexed(g_renderCtx,3,temp_v7);
       temp_v20 = 0;
       temp_v21 = 6;
-      FUN_001835b4(2,8,0x106,0);
+      texDrawTableEntryAtStoredOrigin(2,8,0x106,0);
       renderCtxPopState(g_renderCtx,3);
       efctSetSpeed();
     }
@@ -287,37 +287,37 @@ char FUN_0014f3f4(void)
         temp_v8 = entryListCurrentIsUsable(*(unsigned int *)(temp_v5 + 4));
         if ((temp_v8 != 0) || ((*(char *)(temp_v5 + 8) == '\x04' && (*(char *)(temp_v5 + 0x6d) != '\0'))))
         {
-          temp_v7 = FUN_001692ac(1,0);
+          temp_v7 = renderCtxPackPassFlags(1,0);
           renderStackPushIndexed(g_renderCtx,3,temp_v7);
           temp_v8 = vec2GetXInt(temp_v5 + 0x3e4);
           temp_v8 = temp_v8 + temp_v6;
           temp_v12 = vec2GetYInt(temp_v5 + 0x3e4);
           efctSetSpeed();
-          FUN_00183bb0();
+          gxResetColorQuadToWhite();
           temp_v0 = *(char *)(temp_v5 + 9);
           if (!(temp_v0 == '\a' || temp_v0 == '\b')) {
             if (temp_v0 != '\t') {
               if ((DAT_005e204c == '\0') || (*(char *)(temp_v5 + 0x6d) != '\0')) {
                 temp_v20 = 0;
                 temp_v21 = 0x15;
-                FUN_001835b4(2,8,6,temp_v8);
+                texDrawTableEntryAtStoredOrigin(2,8,6,temp_v8);
                 efctSetSpeed();
                 temp_v20 = 0;
                 temp_v21 = 0x15;
-                FUN_001835b4(2,8,7,temp_v6);
+                texDrawTableEntryAtStoredOrigin(2,8,7,temp_v6);
                 efctSetSpeed();
               }
               else {
                 efctSetSpeed();
                 temp_v21 = 0x13;
                 temp_v20 = 0;
-                FUN_001835b4(2,8,0x116,temp_v6);
+                texDrawTableEntryAtStoredOrigin(2,8,0x116,temp_v6);
                 temp_v7 = packNibblesAndByte(6, 1, 0);
                 renderStackPushIndexed(g_renderCtx,6,temp_v7);
                 efctSetSpeed();
                 temp_v21 = 0x15;
                 temp_v20 = 0;
-                FUN_001835b4(2,8,0x117,temp_v8);
+                texDrawTableEntryAtStoredOrigin(2,8,0x117,temp_v8);
                 efctSetSpeed();
                 renderCtxPopState(g_renderCtx,6);
               }
@@ -326,20 +326,20 @@ char FUN_0014f3f4(void)
               temp_v11 = asdTMTexTableEntryAt(8,0xe0);
               temp_v20 = (int)*(short *)(temp_v11 + 10);
               temp_v21 = 0x13;
-              FUN_001835b4(2,8,0xdf,*(short *)(temp_v11 + 8) + temp_v6);
+              texDrawTableEntryAtStoredOrigin(2,8,0xdf,*(short *)(temp_v11 + 8) + temp_v6);
               temp_v20 = *(short *)(temp_v11 + 10) + temp_v12;
               temp_v21 = 0x15;
-              FUN_001835b4(2,8,0xde,*(short *)(temp_v11 + 8) + temp_v8);
+              texDrawTableEntryAtStoredOrigin(2,8,0xde,*(short *)(temp_v11 + 8) + temp_v8);
             }
           }
           else {
             temp_v11 = asdTMTexTableEntryAt(8,0xe1);
             temp_v20 = (int)*(short *)(temp_v11 + 10);
             temp_v21 = 0x13;
-            FUN_001835b4(2,8,0xdf,*(short *)(temp_v11 + 8) + temp_v6);
+            texDrawTableEntryAtStoredOrigin(2,8,0xdf,*(short *)(temp_v11 + 8) + temp_v6);
             temp_v20 = *(short *)(temp_v11 + 10) + temp_v12;
             temp_v21 = 0x15;
-            FUN_001835b4(2,8,0xde,*(short *)(temp_v11 + 8) + temp_v8);
+            texDrawTableEntryAtStoredOrigin(2,8,0xde,*(short *)(temp_v11 + 8) + temp_v8);
           }
           renderCtxPopState(g_renderCtx,3);
         }
@@ -351,18 +351,18 @@ char FUN_0014f3f4(void)
          ((*(char *)(DAT_0057f590 + 0x6d) == '\0' && (*(char *)(DAT_0057f58c + 0x6d) == '\0')))) {
         temp_v8 = vec2GetXInt(temp_v5 + 0x3e4);
         vec2GetYInt(temp_v5 + 0x3e4);
-        temp_v7 = FUN_001692ac(1,0);
+        temp_v7 = renderCtxPackPassFlags(1,0);
         renderStackPushIndexed(g_renderCtx,3,temp_v7);
         efctSetSpeed();
         temp_v20 = 0;
         temp_v21 = 0x1a;
-        FUN_001835b4(2,8,0x182,temp_v6);
+        texDrawTableEntryAtStoredOrigin(2,8,0x182,temp_v6);
         temp_v7 = packNibblesAndByte(6, 1, 0);
         renderStackPushIndexed(g_renderCtx,6,temp_v7);
         efctSetSpeed();
         temp_v20 = 0;
         temp_v21 = 0x1a;
-        FUN_001835b4(2,8,0x183,temp_v8 + temp_v6);
+        texDrawTableEntryAtStoredOrigin(2,8,0x183,temp_v8 + temp_v6);
         renderCtxPopState(g_renderCtx,6);
         efctSetSpeed();
         break;
@@ -375,10 +375,10 @@ char FUN_0014f3f4(void)
   default:
     goto LAB_0014fe54;
   case 0xc:
-    temp_v7 = FUN_001692ac(1,0);
+    temp_v7 = renderCtxPackPassFlags(1,0);
     renderStackPushIndexed(g_renderCtx,3,temp_v7);
     efctSetSpeed();
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
     temp_v24 = 0.27f;
     temp_v6 = 0;
     do {
@@ -393,10 +393,10 @@ char FUN_0014f3f4(void)
     } while (temp_v6 < 5);
     break;
   case 0xd:
-    temp_v7 = FUN_001692ac(1,0);
+    temp_v7 = renderCtxPackPassFlags(1,0);
     renderStackPushIndexed(g_renderCtx,3,temp_v7);
     efctSetSpeed();
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
     if (*(char *)(temp_v5 + 0x5c) != '\0') {
       temp_v24 = 0.27f;
       renderCtxCalculateStereoParallax(g_renderCtx);
@@ -449,7 +449,7 @@ LAB_0014fe60:
       temp_v6 = 0x69;
       temp_v8 = 8;
     }
-    temp_v7 = FUN_001692ac(1,0);
+    temp_v7 = renderCtxPackPassFlags(1,0);
     renderStackPushIndexed(g_renderCtx,3,temp_v7);
     if (*(char *)(temp_v5 + 8) == '\x01' || *(char *)(temp_v5 + 8) == '\x04') {
       temp_v12 = ifTouchIsActive();
@@ -540,7 +540,7 @@ LAB_0014fe60:
   default:
     return '\0';
   case 0xc:
-    temp_v7 = FUN_001692ac(1,0);
+    temp_v7 = renderCtxPackPassFlags(1,0);
     renderStackPushIndexed(g_renderCtx,3,temp_v7);
     temp_v18 = 0.27f;
     renderCtxCalculateStereoParallax(g_renderCtx);
@@ -573,7 +573,7 @@ LAB_0014fe60:
     } while (temp_v8 < 5);
     break;
   case 0xd:
-    temp_v7 = FUN_001692ac(1,0);
+    temp_v7 = renderCtxPackPassFlags(1,0);
     renderStackPushIndexed(g_renderCtx,3,temp_v7);
     temp_v18 = 0.27f;
     renderCtxCalculateStereoParallax(g_renderCtx);

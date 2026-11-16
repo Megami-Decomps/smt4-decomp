@@ -30,12 +30,12 @@ struct SpriteTrioWork {
 };
 
 extern "C" {
-void FUN_002bd954(JobSprite *sprite, u32 group, u32 image, JobSpritePacket *owner, u16 id, f32 scale);
+void uiSpriteStateInitFromSource(JobSprite *sprite, u32 group, u32 image, JobSpritePacket *owner, u16 id, f32 scale);
 void pairSetSecondResetFirst(JobSprite *sprite, s32 index);
 void pairSetFirstResetSecond(JobSprite *sprite, s32 index);
 void spriteStartAnimationByIndex(JobSprite *sprite, s32 index);
-void FUN_00295eb0(JobSprite *sprite, u32 group, u32 image);
-void FUN_002bf818(JobSprite *sprite);
+void uiStoreTextureEntryCenter(JobSprite *sprite, u32 group, u32 image);
+void uiSpriteAdvanceAnimation(JobSprite *sprite);
 void spriteSetVisible(JobSprite *sprite, u8 visible);
 s32 uiSpriteGetCompletionState(JobSprite *sprite);
 
@@ -48,47 +48,47 @@ s32 FUN_0038a1e0(u32 job)
     case 0:
         work->flags &= ~0x20;
         work->state = 1;
-        FUN_002bd954(&work->sprites[0], 0xe, -1, &work->packet, 0xb, 1.0f);
-        FUN_002bd954(&work->sprites[1], 0xe, -1, &work->packet, 0xb, 1.0f);
-        FUN_002bd954(&work->sprites[2], 0xe, -1, &work->packet, 0xb, 1.0f);
+        uiSpriteStateInitFromSource(&work->sprites[0], 0xe, -1, &work->packet, 0xb, 1.0f);
+        uiSpriteStateInitFromSource(&work->sprites[1], 0xe, -1, &work->packet, 0xb, 1.0f);
+        uiSpriteStateInitFromSource(&work->sprites[2], 0xe, -1, &work->packet, 0xb, 1.0f);
         if (work->variant <= 4) {
             pairSetSecondResetFirst(&work->sprites[0], 6);
             spriteStartAnimationByIndex(&work->sprites[0], 3);
-            FUN_00295eb0(&work->sprites[0], 0xe, 0x36);
+            uiStoreTextureEntryCenter(&work->sprites[0], 0xe, 0x36);
             pairSetSecondResetFirst(&work->sprites[2], 7);
             spriteStartAnimationByIndex(&work->sprites[2], 3);
-            FUN_00295eb0(&work->sprites[2], 0xe, 0x36);
+            uiStoreTextureEntryCenter(&work->sprites[2], 0xe, 0x36);
         } else {
             pairSetSecondResetFirst(&work->sprites[0], 4);
             spriteStartAnimationByIndex(&work->sprites[0], 3);
-            FUN_00295eb0(&work->sprites[0], 0xe, 0x22);
+            uiStoreTextureEntryCenter(&work->sprites[0], 0xe, 0x22);
             pairSetSecondResetFirst(&work->sprites[2], 5);
             spriteStartAnimationByIndex(&work->sprites[2], 3);
-            FUN_00295eb0(&work->sprites[2], 0xe, 0x22);
+            uiStoreTextureEntryCenter(&work->sprites[2], 0xe, 0x22);
         }
         spriteSetVisible(&work->sprites[0], 1);
         spriteSetVisible(&work->sprites[2], 1);
         pairSetFirstResetSecond(&work->sprites[1], 7);
         spriteStartAnimationByIndex(&work->sprites[1], 4);
-        FUN_00295eb0(&work->sprites[1], 0xe, 0x47);
-        FUN_002bf818(&work->sprites[0]);
+        uiStoreTextureEntryCenter(&work->sprites[1], 0xe, 0x47);
+        uiSpriteAdvanceAnimation(&work->sprites[0]);
         break;
     case 1:
-        FUN_002bf818(&work->sprites[0]);
-        FUN_002bf818(&work->sprites[2]);
+        uiSpriteAdvanceAnimation(&work->sprites[0]);
+        uiSpriteAdvanceAnimation(&work->sprites[2]);
         if (uiSpriteGetCompletionState(&work->sprites[0]) != 0) {
             work->flags |= 0x20;
             work->state = 2;
         }
         break;
     case 2:
-        FUN_002bf818(&work->sprites[0]);
-        FUN_002bf818(&work->sprites[2]);
-        FUN_002bf818(&work->sprites[1]);
+        uiSpriteAdvanceAnimation(&work->sprites[0]);
+        uiSpriteAdvanceAnimation(&work->sprites[2]);
+        uiSpriteAdvanceAnimation(&work->sprites[1]);
         break;
     case 3:
-        FUN_002bf818(&work->sprites[0]);
-        FUN_002bf818(&work->sprites[2]);
+        uiSpriteAdvanceAnimation(&work->sprites[0]);
+        uiSpriteAdvanceAnimation(&work->sprites[2]);
         if (uiSpriteGetCompletionState(&work->sprites[0]) != 0) {
             work->state = 4;
         }

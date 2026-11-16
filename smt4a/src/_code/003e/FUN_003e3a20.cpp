@@ -32,7 +32,7 @@ typedef char InheritancePreviewLayoutCheck[
 extern "C" {
 void unitRecordBuild(u16 id, UnitRecord *record);
 void FUN_004cd4b8(UnitRecord *record, s16 levelDelta);
-void FUN_004bcd90(UnitRecord *record);
+void unitRecomputeDerivedStats(UnitRecord *record);
 s32 FUN_004cc8d8(u16 id, u16 level);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_004bd6b0(UnitRecord *record, u16 skill, s32 slot);
@@ -51,7 +51,7 @@ void FUN_003e3a20(InheritancePreviewWork *work, const InheritanceTargetStats *ta
     FUN_004cd4b8(&original, (s16)(target->level - original.unk64));
     for (s32 index = 0; index < 5; ++index)
         original.stats[index + 2] = target->stats[index];
-    FUN_004bcd90(&original);
+    unitRecomputeDerivedStats(&original);
     original.unk30 = FUN_004cc8d8(original.id, original.unk64) - 1;
     UnitRecord preview;
     __aeabi_memcpy4(&preview, &original, sizeof(preview));

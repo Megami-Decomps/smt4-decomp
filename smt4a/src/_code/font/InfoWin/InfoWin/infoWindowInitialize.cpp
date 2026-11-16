@@ -25,7 +25,7 @@ void FUN_00155ca8(void);
 u32 taskCreateDraw(const char*, u32, u32, u32, void (*)(void), u32, u32, u32);
 void paramsClearPacket(UiResourceParameters* parameters);
 
-void FUN_0014e188(UiSpriteState*, u32 group, u32 id, const UiResourceParameters*, u16 flags, f32 speed);
+void uiSpriteStateInitFromSource(UiSpriteState*, u32 group, u32 id, const UiResourceParameters*, u16 flags, f32 speed);
 void uiSpriteSetKeyframe(UiSpriteState*, u32 keyframe, u32 flags);
 void uiSpriteSetImageKeyframe(UiSpriteState*, u32 keyframe, u32 flags);
 void* spriteHandleCreate(u32 flags);
@@ -47,11 +47,11 @@ void infoWindowInitialize(void)
     paramsClearPacket(&window->parameters);
     paramsInit(&window->parameters, g_infoWindowParameterDefaults.primary, sizeof(g_infoWindowParameterDefaults.primary),
                g_infoWindowParameterDefaults.secondary, sizeof(g_infoWindowParameterDefaults.secondary), NULL, 0, NULL, 0, NULL, 0);
-    FUN_0014e188(&window->sprites.background, 8, 135, &window->parameters, 1, 1.0f);
+    uiSpriteStateInitFromSource(&window->sprites.background, 8, 135, &window->parameters, 1, 1.0f);
     uiSpriteSetKeyframe(&window->sprites.background, 0, 0);
-    FUN_0014e188(&window->labelAnimation, 8, 135, &window->parameters, 1, 1.0f);
+    uiSpriteStateInitFromSource(&window->labelAnimation, 8, 135, &window->parameters, 1, 1.0f);
     uiSpriteSetKeyframe(&window->labelAnimation, 2, 0);
-    FUN_0014e188(&window->sprites.content, 27, 4000, &window->parameters, 1, 1.0f);
+    uiSpriteStateInitFromSource(&window->sprites.content, 27, 4000, &window->parameters, 1, 1.0f);
     uiSpriteSetKeyframe(&window->sprites.content, 3, 0);
     uiSpriteSetImageKeyframe(&window->sprites.content, 0, 0);
     window->text = spriteHandleCreate(0);

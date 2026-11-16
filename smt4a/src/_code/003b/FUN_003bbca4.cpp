@@ -9,7 +9,7 @@ extern "C" {
 s32 scrGetArg(s32 index);
 s32 btlResolveEntryChoice(s32 choice);
 void scrSetResult(s32 value);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
 }
 
 static inline s32 candidateThresholdStat(BtlCombatantEntryA *entry, s32 index)
@@ -38,7 +38,7 @@ extern "C" u32 FUN_003bbca4(void)
     s32 choice = btlResolveEntryChoice(scrGetArg(2));
     s32 first;
     s32 count;
-    FUN_00301a08(choice, &first, &count);
+    btlGetEntryChoiceRange(choice, &first, &count);
     for (s32 index = first; index < count + first; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         if ((g_btlCandidateMasks.unavailable & entry->flags) == 0 &&
@@ -49,7 +49,7 @@ extern "C" u32 FUN_003bbca4(void)
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
-        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL && candidateThresholdStat(entry, stat) < threshold) {
             scrSetResult(1);
             return 1;

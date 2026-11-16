@@ -42,7 +42,7 @@ typedef char ClearSaveWorkAInitializationOffsets[
     offsetof(ClearSaveWorkA, initialization.active) == 8 && sizeof(ClearSaveWorkA) == 0x98 ? 1 : -1];
 
 extern "C" {
-void FUN_00212204(u32 index);
+void screenFadeSlotReset(u32 index);
 }
 
 #endif

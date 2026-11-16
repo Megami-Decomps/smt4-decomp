@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
+int libm_cosf(void);
+int libm_sinf(void);
 int FUN_002227e8(void);
 int FUN_0025ef68(float *, float *, int);
 int FUN_002826dc(float *, float *, int, int);
@@ -15,7 +15,7 @@ int mathPositionHeadingDegrees(void);
 int FUN_0036d984(...);
 int controllerSetDestination(...);
 int controllerSetRotationEulerDegrees(...);
-int FUN_003fe86c(...);
+int modelPlayClip(...);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -68,8 +68,8 @@ static float romwright_sqrt_4(float value)
     return (float)sqrt((double)value);
 }
 #endif
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_002227e8. */
 /* Supplied declaration required: FUN_0025ef68. */
 /* Supplied declaration required: FUN_002826dc. */
@@ -80,7 +80,7 @@ extern int mapCollisionExists(void);
 /* Supplied declaration required: FUN_0036d984. */
 /* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: controllerSetRotationEulerDegrees. */
-/* Supplied declaration required: FUN_003fe86c. */
+/* Supplied declaration required: modelPlayClip. */
 extern int slots4FGetActiveValue(int);
 
 
@@ -312,10 +312,10 @@ void FUN_00292268(void)
         temp_v20 = (float)g_lmapScene[9];
         temp_v11 = (temp_v6 + 180.0f) * temp_v14;
         temp_v6 = temp_v11;
-        FUN_001bc124();
+        libm_sinf();
         temp_v7 = 400.0f;
         temp_v19 = temp_v19 + temp_v11 * 400.0f;
-        FUN_001bbf0c();
+        libm_cosf();
         temp_v20 = temp_v20 + temp_v6 * temp_v7;
         temp_v1 = FUN_0036d984(g_lmapScene + 7,&temp_v19,0);
         if (temp_v1 == -1) {
@@ -375,7 +375,7 @@ LAB_002929b0:
     temp_v1 = DAT_005f0cb0;
   }
   if (temp_v2 != DAT_005f0ca4 || temp_v1 != 0) {
-    FUN_003fe86c(temp_v4,DAT_005f0ca4,2);
+    modelPlayClip(temp_v4,DAT_005f0ca4,2);
     *(float *)(temp_v4 + 0x1fc) = DAT_005f0ce8 + temp_v15;
     DAT_005f0cb0 = 0;
   }
@@ -387,22 +387,22 @@ LAB_002929b0:
     temp_v5 = *(unsigned int *)(DAT_005f0c8c + 4);
     controllerSetDestination(temp_v5,&DAT_005f0c94);
     controllerSetRotationEulerDegrees(temp_v5);
-    FUN_003fe86c(temp_v5,0,2);
+    modelPlayClip(temp_v5,0,2);
     DAT_005f0cf1 = 0;
     temp_v19 = DAT_005f0c94;
     fStack_64 = DAT_005f0c98;
     temp_v20 = DAT_005f0c9c;
     temp_v5 = *(unsigned int *)(DAT_005f0c90 + 4);
     temp_v16 = DAT_005f0ca0 * temp_v14;
-    FUN_001bc124();
+    libm_sinf();
     temp_v15 = 200.0f;
     temp_v19 = temp_v19 + temp_v16 * 200.0f;
     temp_v14 = DAT_005f0ca0 * temp_v14;
-    FUN_001bbf0c();
+    libm_cosf();
     temp_v20 = temp_v20 + temp_v14 * temp_v15;
     controllerSetDestination(temp_v5,&temp_v19);
     controllerSetRotationEulerDegrees(temp_v5);
-    FUN_003fe86c(temp_v5,0,2);
+    modelPlayClip(temp_v5,0,2);
     DAT_005f0cf1 = '\0';
   }
   temp_v1 = 0;

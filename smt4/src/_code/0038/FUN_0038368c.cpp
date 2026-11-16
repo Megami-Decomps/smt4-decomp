@@ -7,15 +7,15 @@ extern "C" {
 int FUN_00235368(...);
 int effectSpawnDefaultArguments(...);
 int FUN_002ae038(...);
-int FUN_002ae9ec(...);
+int texTableRecordCallWithParams(...);
 int libc_strcat(...);
 int FUN_002b75ec(...);
 int renderCtxCalculateStereoParallax(unsigned int);
 int FUN_002bcf4c(void);
 int textDrawString(...);
-int FUN_002bed3c(void);
+int gxResetColorQuadToWhite(void);
 int vec2GetXInt(...);
-int FUN_002bf380(...);
+int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
 int dataTable26GroupGetRecordS2(unsigned int *, int, int);
 int VectorFloatToUnsigned(double, int);
@@ -47,17 +47,17 @@ extern int dataTable26GroupGetRecord(unsigned int *, unsigned char, unsigned int
 /* Supplied declaration required: effectSpawnDefaultArguments. */
 extern int FUN_00287704(unsigned char);
 /* Supplied declaration required: FUN_002ae038. */
-/* Supplied declaration required: FUN_002ae9ec. */
+/* Supplied declaration required: texTableRecordCallWithParams. */
 /* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: FUN_002b75ec. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002bcf4c. */
 extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: FUN_002bed3c. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 extern unsigned int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: vec2GetXInt. */
-/* Supplied declaration required: FUN_002bf380. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: dataTable26GroupGetRecordS2. */
 
@@ -130,7 +130,7 @@ void FUN_0038368c(unsigned int *param_1)
     temp_v15 = (int)temp_v12;
     temp_v2 = vec2GetXInt(param_1 + 0x11);
     temp_v3 = vec2GetYInt(param_1 + 0x11);
-    FUN_002bf380(2,0x31,0,temp_v2 + (int)temp_v11,temp_v3,0x1f);
+    texDrawCompositeSprite(2,0x31,0,temp_v2 + (int)temp_v11,temp_v3,0x1f);
     effectSpawnDefaultArguments(param_1[0xa3]);
     temp_v22 = temp_v10 | 0x5d2a0000;
     temp_v23 = temp_v22;
@@ -156,12 +156,12 @@ void FUN_0038368c(unsigned int *param_1)
     param_1[0xa1] = (unsigned int)temp_v11;
     param_1[0xa2] = (unsigned int)temp_v12;
     temp_v13 = (float)VectorSignedToFloat(temp_v16,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002bf380(2,0x31,3,(int)(temp_v11 + temp_v13),(int)temp_v12,0x15);
+    texDrawCompositeSprite(2,0x31,3,(int)(temp_v11 + temp_v13),(int)temp_v12,0x15);
     temp_v11 = (float)VectorSignedToFloat(temp_v17,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002bf380(2,0x31,2,(int)((float)param_1[0x9f] + temp_v11),(int)(float)param_1[0xa0],0x1a);
+    texDrawCompositeSprite(2,0x31,2,(int)((float)param_1[0x9f] + temp_v11),(int)(float)param_1[0xa0],0x1a);
     temp_v11 = (float)VectorSignedToFloat(temp_v19,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v11 = (float)(int)((float)param_1[0x9d] + temp_v11);
-    FUN_002bf380(2,0x31,1,temp_v11,(int)(float)param_1[0x9e],0x1f);
+    texDrawCompositeSprite(2,0x31,1,temp_v11,(int)(float)param_1[0x9e],0x1f);
     temp_v6 = 0xc87800ff;
     if ((*(int *)(temp_v0 + 0x10) == -1) && ((int)param_1[0x167] < 0xf)) {
       temp_v6 = 0x7a4c00ff;
@@ -215,7 +215,7 @@ void FUN_0038368c(unsigned int *param_1)
       temp_v11 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v9 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v12 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_002bf380(2,0x31,4,(int)((float)param_1[temp_v16 * 2 + 0xa7] + temp_v9 + temp_v12),
+      texDrawCompositeSprite(2,0x31,4,(int)((float)param_1[temp_v16 * 2 + 0xa7] + temp_v9 + temp_v12),
                    (int)((float)param_1[temp_v16 * 2 + 0xa8] + temp_v11),0x1f);
       temp_v16 = temp_v16 + 1;
     } while (temp_v16 < 0xb);
@@ -234,20 +234,20 @@ void FUN_0038368c(unsigned int *param_1)
       temp_v11 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v9 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v12 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_002ae9ec(2,0x31,*(unsigned char *)(temp_v6 + 0x44dad8),
+      texTableRecordCallWithParams(2,0x31,*(unsigned char *)(temp_v6 + 0x44dad8),
                    (int)((float)param_1[temp_v6 * 2 + 0xaf] + temp_v9 + temp_v12),
                    (int)((float)param_1[temp_v6 * 2 + 0xb0] + temp_v11),0x20);
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 7);
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     temp_v16 = temp_v15;
-    FUN_002bf380(2,0x31,5,temp_v2 + temp_v15,temp_v3,0x1f);
+    texDrawCompositeSprite(2,0x31,5,temp_v2 + temp_v15,temp_v3,0x1f);
     temp_v17 = 0xb;
     do {
       temp_v11 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v9 = (float)VectorSignedToFloat(temp_v15,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v12 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_002ae9ec(2,0x31,0x3a,(int)((float)param_1[temp_v17 * 2 + 0xa7] + temp_v12 + temp_v9),
+      texTableRecordCallWithParams(2,0x31,0x3a,(int)((float)param_1[temp_v17 * 2 + 0xa7] + temp_v12 + temp_v9),
                    (int)((float)param_1[temp_v17 * 2 + 0xa8] + temp_v11),0x20);
       temp_v17 = temp_v17 + 1;
     } while (temp_v17 < 0x15);
@@ -266,12 +266,12 @@ void FUN_0038368c(unsigned int *param_1)
       temp_v11 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v9 = (float)VectorSignedToFloat(temp_v15,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v12 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_002ae9ec(2,0x31,s_______ABCD__0044db58[temp_v6],
+      texTableRecordCallWithParams(2,0x31,s_______ABCD__0044db58[temp_v6],
                    (int)((float)param_1[temp_v6 * 2 + 0xbd] + temp_v12 + temp_v9),
                    (int)((float)param_1[temp_v6 * 2 + 0xbe] + temp_v11),0x20);
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 10);
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     temp_v7 = 0x4b4b4bff;
     temp_v4 = 0x8400ff;
     temp_v15 = 3;

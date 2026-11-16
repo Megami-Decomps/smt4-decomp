@@ -35,7 +35,7 @@ extern "C" {
 extern PathQueue *g_vectorQueueWork;
 
 f32 mathDistanceBetweenPoints(f32 ax, f32 ay, f32 az, f32 bx, f32 by, f32 bz);
-f32 FUN_00281e34(f32 y, f32 x); /* atan2f */
+f32 __hardfp_atan2f(f32 y, f32 x); /* __hardfp_atan2f */
 f32 mathGetShortestAngleDelta(f32 from, f32 to);
 
 /* Moves the walker one step toward its target waypoint, turning its heading gradually; when the
@@ -71,7 +71,7 @@ void FUN_0021e224(PathMover *mover)
     f32 dz = mover->target.z - mover->position.z;
     f32 dy = mover->target.y - mover->position.y;
     if (distance != 0.0f) {
-        f32 wanted = FUN_00281e34(dx, dz) * 57.32484f;
+        f32 wanted = __hardfp_atan2f(dx, dz) * 57.32484f;
         f32 delta = mathGetShortestAngleDelta(mover->heading, wanted);
         f32 turn = delta;
         if (turn < 0.0f)

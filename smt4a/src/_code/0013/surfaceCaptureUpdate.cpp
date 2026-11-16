@@ -22,7 +22,7 @@ static __inline bool captureReady(const CaptureFlagsView *flags)
 
 extern "C" {
 s32 stateValuesGetBySelector(u32 selector);
-s32 FUN_00154edc(s32 mode, CaptureSurfacePrefixA *surface);
+s32 gxCopyFramebufferToSurface(s32 mode, CaptureSurfacePrefixA *surface);
 s32 surfaceCopy(CaptureSurfacePrefixA *destination, CaptureSurfacePrefixA *source);
 
 u32 surfaceCaptureUpdate(u32 process)
@@ -32,10 +32,10 @@ u32 surfaceCaptureUpdate(u32 process)
     if (stateValuesGetBySelector(0) != 0) {
         work->captureSuppressed = 1;
     } else if (captureReady(reinterpret_cast<const CaptureFlagsView *>(reinterpret_cast<u8 *>(work) + 0x1400))) {
-        FUN_00157558(g_renderCtx);
+        renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         work->surface->width = 512;
         work->surface->height = 512;
-        work->captureResult = static_cast<u8>(FUN_00154edc(0, work->surface));
+        work->captureResult = static_cast<u8>(gxCopyFramebufferToSurface(0, work->surface));
         surfaceCopy(work->surface, work->surface);
         work->surface->width >>= 1;
         work->surface->height >>= 1;

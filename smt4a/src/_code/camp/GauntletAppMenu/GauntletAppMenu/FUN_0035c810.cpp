@@ -26,13 +26,13 @@ void FUN_003dc0c0(GauntletAppMenuWork *menu, s32 mode);
 u32 dataTableGetCount(void *section);
 void paramsClearPacket(void *params);
 
-void FUN_0014e188(GauntletSprite *sprite, s32 group, s32 image, void *params, s32 flags, f32 scale);
+void uiSpriteStateInitFromSource(GauntletSprite *sprite, s32 group, s32 image, void *params, s32 flags, f32 scale);
 void recordSetSecondaryValue(GauntletSprite *sprite, u16 value);
 void uiSpriteSetKeyframe(GauntletSprite *sprite, s32 keyframe, s32 flags);
 void uiSpriteSetImageKeyframe(GauntletSprite *sprite, s32 keyframe, s32 flags);
 void uiSpriteSelectAnim(GauntletSprite *sprite, s32 anim);
 void *asdLoadFileSyncDefault(const char *path);
-u32 FUN_00275bc8(void *first, void *second);
+u32 scrScriptProcessCreate(void *first, void *second);
 void FUN_003ce598(void);
 void gauntletAppMenuExit(void);
 void gauntletAppMenuDestroy(void);
@@ -102,19 +102,19 @@ u32 FUN_0035c810(void)
     paramsInit(reinterpret_cast<UiResourceParameters *>(menu->list.params), sGauntletParamsFirst, sizeof(sGauntletParamsFirst),
                sGauntletParamsSecond, sizeof(sGauntletParamsSecond), NULL, 0, NULL, 0,
                sGauntletParamsThird, sizeof(sGauntletParamsThird));
-    FUN_0014e188(&menu->list.sprites[0], 20, 0, menu->list.params, 201, 1.0f);
+    uiSpriteStateInitFromSource(&menu->list.sprites[0], 20, 0, menu->list.params, 201, 1.0f);
     uiSpriteSetKeyframe(&menu->list.sprites[0], 3, 0);
     uiSpriteSetImageKeyframe(&menu->list.sprites[0], 6, 0);
-    FUN_0014e188(&menu->list.sprites[1], 20, 0, menu->list.params, 201, 1.0f);
+    uiSpriteStateInitFromSource(&menu->list.sprites[1], 20, 0, menu->list.params, 201, 1.0f);
     uiSpriteSelectAnim(&menu->list.sprites[1], 0);
-    FUN_0014e188(&menu->list.sprites[2], 20, 0, menu->list.params, 201, 1.0f);
+    uiSpriteStateInitFromSource(&menu->list.sprites[2], 20, 0, menu->list.params, 201, 1.0f);
     uiSpriteSelectAnim(&menu->list.sprites[2], 2);
-    FUN_0014e188(&menu->list.sprites[3], 20, 0x59f, menu->list.params, 181, 1.0f);
+    uiSpriteStateInitFromSource(&menu->list.sprites[3], 20, 0x59f, menu->list.params, 181, 1.0f);
     recordSetSecondaryValue(&menu->list.sprites[3], 2);
     uiSpriteSelectAnim(&menu->list.sprites[3], 1);
     menu->heapA = asdLoadFileSyncDefault("camp/gauntletApp.mbm");
     menu->heapB = asdLoadFileSyncDefault("camp/gauntletApp.bf");
-    menu->handle = FUN_00275bc8(menu->heapB, menu->heapA);
+    menu->handle = scrScriptProcessCreate(menu->heapB, menu->heapA);
     return menu->task;
 }
 

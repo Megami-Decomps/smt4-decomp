@@ -6,7 +6,7 @@ s32 widgetSubCallIfVisible(PartyPanelCursorView *cursor);
 s32 FUN_002a4894(PartyPanelCursorView *cursor);
 s32 objectApplyIfUnblocked(PartyPanelCursorView *cursor);
 s32 FUN_002a4878(PartyPanelCursorView *cursor);
-s32 FUN_001517b4(u32 direction, u32 repeat);
+s32 padQueryLogicalKey(u32 direction, u32 repeat);
 void FUN_0026e848(PartyPanelCursorView *cursor);
 void partyPanelToggleDisplayMode(PartyPanelCursorView *cursor);
 void FUN_0026fa30(void);
@@ -26,10 +26,10 @@ u32 partyPanelHandleCursorEdgeInput(PartyPanelCursorView *cursor, s32 force)
             lastColumn = cursor->count % widgetSubCallIfVisible(cursor) - 1;
     }
     if (!panel->blocked && panel->count > 1) {
-        if ((force || FUN_002a4878(cursor) == 0) && FUN_001517b4(4, 1)) {
+        if ((force || FUN_002a4878(cursor) == 0) && padQueryLogicalKey(4, 1)) {
             changed = 1;
             FUN_0026e848(cursor);
-        } else if ((force || FUN_002a4878(cursor) == lastColumn) && FUN_001517b4(3, 1)) {
+        } else if ((force || FUN_002a4878(cursor) == lastColumn) && padQueryLogicalKey(3, 1)) {
             changed = 1;
             partyPanelToggleDisplayMode(cursor);
         }

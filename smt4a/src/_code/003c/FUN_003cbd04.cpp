@@ -70,39 +70,39 @@ void FUN_003cbd04(int param_1,int param_2,unsigned int param_3,int param_4,int p
   temp_v1 = resourceRunOperationIfUnblocked();
   efctSetSpeed();
   temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,param_2 + 0x185));
-  FUN_001835b4(2,0x1a,0x16f,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,0x65);
-  FUN_001835b4(2,0x1a,0x170,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,0x65);
-  FUN_001835b4(2,0x1a,0x26f,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,0x65);
-  FUN_001835b4(2,0x1a,0x270,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,0x65);
+  texDrawTableEntryAtStoredOrigin(2,0x1a,0x16f,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,0x65);
+  texDrawTableEntryAtStoredOrigin(2,0x1a,0x170,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,0x65);
+  texDrawTableEntryAtStoredOrigin(2,0x1a,0x26f,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,0x65);
+  texDrawTableEntryAtStoredOrigin(2,0x1a,0x270,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,0x65);
   if (param_7 != 0) {
-    FUN_001835b4(2,0x1a,0x173,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,0x65)
+    texDrawTableEntryAtStoredOrigin(2,0x1a,0x173,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,0x65)
     ;
   }
   else {
     if (*(int *)(param_1 + 0x8e84) <= temp_v1 + param_2) {
-      FUN_001835b4(2,0x1a,0x229,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,
+      texDrawTableEntryAtStoredOrigin(2,0x1a,0x229,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,
                    0x65);
       return;
     }
     temp_v3 = *(short *)(temp_v2 + 10) + param_6;
     temp_v5 = *(short *)(temp_v2 + 8) + param_5;
     if (param_4 != 0) {
-      FUN_001835b4(2,0x1a,0x171,temp_v5,temp_v3,0x65);
+      texDrawTableEntryAtStoredOrigin(2,0x1a,0x171,temp_v5,temp_v3,0x65);
     }
     else {
-      FUN_001835b4(2,0x1a,0x171,temp_v5,temp_v3,0x65);
-      FUN_001835b4(2,0x1a,0x244,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,
+      texDrawTableEntryAtStoredOrigin(2,0x1a,0x171,temp_v5,temp_v3,0x65);
+      texDrawTableEntryAtStoredOrigin(2,0x1a,0x244,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,
                    0x65);
     }
   }
   temp_v0 = uiSearchPrimary(temp_v0);
   if (param_2 < temp_v0) {
-    FUN_001835b4(2,0x1a,0x174,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,0x6a)
+    texDrawTableEntryAtStoredOrigin(2,0x1a,0x174,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,0x6a)
     ;
-    FUN_001835b4(2,0x1a,0x175,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,0x6a)
+    texDrawTableEntryAtStoredOrigin(2,0x1a,0x175,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,0x6a)
     ;
     if (param_4 != 0) {
-      FUN_001835b4(2,0x1a,0x176,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,
+      texDrawTableEntryAtStoredOrigin(2,0x1a,0x176,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,
                    0x6f);
       temp_v6 = 0xffffffff;
       if (param_7 != 0) {
@@ -118,7 +118,7 @@ void FUN_003cbd04(int param_1,int param_2,unsigned int param_3,int param_4,int p
     }
     else {
       temp_v0 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,param_2 + 0x234));
-      FUN_001835b4(2,0x1a,0x233,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,
+      texDrawTableEntryAtStoredOrigin(2,0x1a,0x233,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,
                    0x6f);
       temp_v6 = 0x9b9b9bff;
     }

@@ -63,7 +63,7 @@ extern GameStateView g_gameState;
 int CONCAT44(double, double);
 int FUN_001f7c78(void);
 int mapIfActivateRecord(int, unsigned int);
-int FUN_00281e34(void);
+int __hardfp_atan2f(void);
 int mathPositionHeadingDegrees(void);
 int VectorSignedToFloat(unsigned int, int);
 
@@ -139,7 +139,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_001f7c78. */
 /* Supplied declaration required: mapIfActivateRecord. */
 extern int FUN_0027d968(void);
-/* Supplied declaration required: FUN_00281e34. */
+/* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: libc_strcpy. */
 extern int gameFlagIsSet(unsigned int);
@@ -483,7 +483,7 @@ void FUN_00280ccc(void)
           if ((int)romwright_sqrt_4((temp_v15 - temp_v17) * (temp_v15 - temp_v17) + (temp_v19 - in_s2) * (temp_v19 - in_s2))
               < 0x43480000) {
             temp_v10 = in_s3;
-            FUN_00281e34();
+            __hardfp_atan2f();
             temp_v11 = in_fpscr & 0xfffffff;
             FUN_001f7c78();
             in_fpscr = (temp_v11 & 0xfffffff) | ((unsigned int)(temp_v20 <= temp_v10) << 0x1d);

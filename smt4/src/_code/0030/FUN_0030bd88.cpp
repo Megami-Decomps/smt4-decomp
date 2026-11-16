@@ -7,10 +7,10 @@
 extern "C" {
 const StatBlock *gameGetUnitRecord(s32 unit);
 s32 idIsAbove400(u32 id);
-s32 FUN_002497f8(const SkillListEntry *left, const SkillListEntry *right);
+s32 itemSortCompareByCategoryAndId(const SkillListEntry *left, const SkillListEntry *right);
 }
 
-/* Orders skills by descending sort key, then by descending holder id, then by FUN_002497f8. */
+/* Orders skills by descending sort key, then by descending holder id, then by itemSortCompareByCategoryAndId. */
 static __inline s32 skillComparePriorityAndHolder(const SkillListEntry &left, const SkillListEntry &right)
 {
     u16 leftPriority;
@@ -45,7 +45,7 @@ static __inline s32 skillComparePriorityAndHolder(const SkillListEntry &left, co
     if (result != 0) {
         return result;
     }
-    return FUN_002497f8(&left, &right);
+    return itemSortCompareByCategoryAndId(&left, &right);
 }
 
 /* Sort compare of two type-5 table-8 entries by the skills they refer to. */

@@ -12,7 +12,7 @@ int selectionCopySupportedValue(...);
 int FUN_0022abe0(void);
 int FUN_00246134(unsigned int, unsigned int, int, unsigned int);
 int FUN_00247478(...);
-int FUN_0027da30(unsigned int *, unsigned int);
+int btlFindEntryBlockByMemberId(unsigned int *, unsigned int);
 int btlMainFindEntryByListedId(...);
 int passiveSkillLookupRecord(void);
 int FUN_00283ebc(...);
@@ -73,7 +73,7 @@ extern int randRange(unsigned int);
 extern unsigned int FUN_002463e8(unsigned int);
 /* Supplied declaration required: FUN_00247478. */
 extern unsigned int FUN_00255de0(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0027da30. */
+/* Supplied declaration required: btlFindEntryBlockByMemberId. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: passiveSkillLookupRecord. */
 /* Supplied declaration required: FUN_00283ebc. */
@@ -286,9 +286,9 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
       }
       if (temp_v37 == 0 || temp_v0 == '\0') {
         puVar7 = temp_v32;
-        FUN_0027da30(temp_v32,temp_v40);
+        btlFindEntryBlockByMemberId(temp_v32,temp_v40);
         puVar6 = temp_v32;
-        FUN_0027da30(temp_v32,param_5);
+        btlFindEntryBlockByMemberId(temp_v32,param_5);
         temp_v11 = (float)VectorSignedToFloat((int)*(short *)((int)puVar7 + 0xf6) -
                                             (int)*(short *)((int)puVar6 + 0xf6),
                                             (unsigned char)(in_fpscr >> 0x16) & 3);

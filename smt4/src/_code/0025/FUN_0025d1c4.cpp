@@ -10,7 +10,7 @@ int devilGetCategoryTableId(void);
 int FUN_0025cc04(...);
 int mapGetSelectedRecordCategoryTable(void);
 int playerGetMappedCategory(void);
-int FUN_00290994(...);
+int uiDrawListScrollBar(...);
 int FUN_0029a17c(...);
 int FUN_002b6db0(...);
 int devilGetRecord(void);
@@ -23,7 +23,7 @@ int FUN_002bdf94(...);
 int itemDrawCategoryBadge(...);
 int textDrawString(...);
 int textFormatBuffer(...);
-int FUN_002be650(...);
+int dataFindKindRecordWithAocOverrides(...);
 int vec2GetXInt(...);
 int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
@@ -63,13 +63,13 @@ extern int FUN_0025cc54(void);
 /* Supplied declaration required: FUN_0028cfd8. */
 extern short FUN_0028d24c(void);
 /* Supplied declaration required: listGetU16OrZero. */
-extern unsigned int FUN_0028fb40(int);
-/* Supplied declaration required: FUN_00290994. */
+extern unsigned int flagValueRead(int);
+/* Supplied declaration required: uiDrawListScrollBar. */
 extern int flagBitIsSet(int);
 /* Supplied declaration required: btlGetMainState. */
 extern int FUN_00297ca4(int, unsigned int);
 /* Supplied declaration required: FUN_0029a17c. */
-extern unsigned int FUN_0029a924(int);
+extern unsigned int appGetRemainingCapacity(int);
 extern unsigned int FUN_0029a9d4(int, unsigned int);
 extern int FUN_0029d644(unsigned int);
 extern int ifTouchGetSelectionModeForRegion(int);
@@ -86,7 +86,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002be650. */
+/* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 extern int vec2GetYInt(int);
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
@@ -179,11 +179,11 @@ void FUN_0025d1c4(int param_1)
       if ((temp_v24 == 0) || (temp_v9 = FUN_0029efa8(*temp_v20), temp_v9 != temp_v16)) {
         efctSetSpeed();
         temp_v9 = asdTMTexTableEntryAt(0x15,temp_v3 + temp_v16);
-        FUN_002bf288(2,0x15,0x72,*(short *)(temp_v9 + 8) + temp_v6,*(short *)(temp_v9 + 10) + temp_v7,0x3d
+        texDrawTableEntryAtStoredOrigin(2,0x15,0x72,*(short *)(temp_v9 + 8) + temp_v6,*(short *)(temp_v9 + 10) + temp_v7,0x3d
                     );
-        FUN_002bf288(2,0x15,0x73,*(short *)(temp_v9 + 8) + temp_v6,*(short *)(temp_v9 + 10) + temp_v7,0x3d
+        texDrawTableEntryAtStoredOrigin(2,0x15,0x73,*(short *)(temp_v9 + 8) + temp_v6,*(short *)(temp_v9 + 10) + temp_v7,0x3d
                     );
-        FUN_002bf288(2,0x15,0x74,*(short *)(temp_v9 + 8) + temp_v6,*(short *)(temp_v9 + 10) + temp_v7,0x3d
+        texDrawTableEntryAtStoredOrigin(2,0x15,0x74,*(short *)(temp_v9 + 8) + temp_v6,*(short *)(temp_v9 + 10) + temp_v7,0x3d
                     );
         if (temp_v22 != 1) {
           if (temp_v22 != 2) {
@@ -233,15 +233,15 @@ void FUN_0025d1c4(int param_1)
               }
             }
             else {
-              FUN_002bf288(2,0x15,0x76,*(short *)(temp_v9 + 8) + temp_v6,
+              texDrawTableEntryAtStoredOrigin(2,0x15,0x76,*(short *)(temp_v9 + 8) + temp_v6,
                            *(short *)(temp_v9 + 10) + temp_v7,0x3d);
-              FUN_002bf288(2,0x15,0x75,*(short *)(temp_v9 + 8) + temp_v6,
+              texDrawTableEntryAtStoredOrigin(2,0x15,0x75,*(short *)(temp_v9 + 8) + temp_v6,
                            *(short *)(temp_v9 + 10) + temp_v7,0x3e);
               temp_v5 = (int)*(short *)(param_1 + (temp_v8 + temp_v16) * 2 + 0x3480);
               temp_v10 = temp_v5;
-              FUN_002be650(temp_v5,0);
+              dataFindKindRecordWithAocOverrides(temp_v5,0);
               textFormatBuffer(temp_v19,"%s",temp_v5);
-              temp_v13 = FUN_0028fb40(temp_v10);
+              temp_v13 = flagValueRead(temp_v10);
               temp_v21 = 0;
               temp_v5 = temp_v10;
               FUN_0028cfd8();
@@ -275,11 +275,11 @@ void FUN_0025d1c4(int param_1)
             }
           }
           else {
-            FUN_002bf288(2,0x15,0x76,*(short *)(temp_v9 + 8) + temp_v6,*(short *)(temp_v9 + 10) + temp_v7,
+            texDrawTableEntryAtStoredOrigin(2,0x15,0x76,*(short *)(temp_v9 + 8) + temp_v6,*(short *)(temp_v9 + 10) + temp_v7,
                          0x3d);
-            FUN_002bf288(2,0x15,0x75,*(short *)(temp_v9 + 8) + temp_v6,*(short *)(temp_v9 + 10) + temp_v7,
+            texDrawTableEntryAtStoredOrigin(2,0x15,0x75,*(short *)(temp_v9 + 8) + temp_v6,*(short *)(temp_v9 + 10) + temp_v7,
                          0x3e);
-            FUN_002bf288(2,0x15,0x77,*(short *)(temp_v9 + 8) + temp_v6,*(short *)(temp_v9 + 10) + temp_v7,
+            texDrawTableEntryAtStoredOrigin(2,0x15,0x77,*(short *)(temp_v9 + 8) + temp_v6,*(short *)(temp_v9 + 10) + temp_v7,
                          0x48);
             temp_v5 = reinterpret_cast<int>(btlGetMainState());
             if ((*(unsigned int *)(temp_v5 + 0x44a8) & 0x40) != 0) {
@@ -312,11 +312,11 @@ void FUN_0025d1c4(int param_1)
           }
         }
         else {
-          FUN_002bf288(2,0x15,0x76,*(short *)(temp_v9 + 8) + temp_v6,*(short *)(temp_v9 + 10) + temp_v7,
+          texDrawTableEntryAtStoredOrigin(2,0x15,0x76,*(short *)(temp_v9 + 8) + temp_v6,*(short *)(temp_v9 + 10) + temp_v7,
                        0x3d);
-          FUN_002bf288(2,0x15,0x75,*(short *)(temp_v9 + 8) + temp_v6,*(short *)(temp_v9 + 10) + temp_v7,
+          texDrawTableEntryAtStoredOrigin(2,0x15,0x75,*(short *)(temp_v9 + 8) + temp_v6,*(short *)(temp_v9 + 10) + temp_v7,
                        0x3e);
-          FUN_002bf288(2,0x15,0x77,*(short *)(temp_v9 + 8) + temp_v6,*(short *)(temp_v9 + 10) + temp_v7,
+          texDrawTableEntryAtStoredOrigin(2,0x15,0x77,*(short *)(temp_v9 + 8) + temp_v6,*(short *)(temp_v9 + 10) + temp_v7,
                        0x48);
           if (*(int *)(temp_v2 + 0x5c) != 0) {
             temp_v0 = 1;
@@ -330,14 +330,14 @@ void FUN_0025d1c4(int param_1)
                 temp_v5 = (int)(short)temp_v14;
                 temp_v13 = aocIndexValueOrDefault();
                 textFormatBuffer(temp_v19,"%s",temp_v13);
-                temp_v13 = FUN_0029a924(temp_v5);
+                temp_v13 = appGetRemainingCapacity(temp_v5);
               }
               else {
                 temp_v5 = (int)*(short *)(param_1 + *(int *)(temp_v2 + 0x5c) * 0x10 + temp_v14 * 2 +
                                        0x341a);
                 temp_v13 = aocIndexValueOrDefault();
                 textFormatBuffer(temp_v19,"%s",temp_v13);
-                temp_v13 = FUN_0029a924(temp_v5);
+                temp_v13 = appGetRemainingCapacity(temp_v5);
               }
               temp_v10 = (int)*(short *)(param_1 + *(int *)(temp_v2 + 0x5c) * 2 + 0x38f4);
               if (-1 < temp_v10) {
@@ -468,23 +468,23 @@ void FUN_0025d1c4(int param_1)
   temp_v4 = FUN_0029efa8(*temp_v20);
   temp_v3 = asdTMTexTableEntryAt(0x15,temp_v4 + temp_v3);
   efctSetSpeed();
-  FUN_002bf288(2,0x15,0x96,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x3d);
-  FUN_002bf288(2,0x15,0x97,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x3d);
-  FUN_002bf288(2,0x15,0x98,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x3d);
+  texDrawTableEntryAtStoredOrigin(2,0x15,0x96,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x3d);
+  texDrawTableEntryAtStoredOrigin(2,0x15,0x97,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x3d);
+  texDrawTableEntryAtStoredOrigin(2,0x15,0x98,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x3d);
   efctSetSpeed();
-  FUN_002bf288(2,0x15,0x99,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x5b);
+  texDrawTableEntryAtStoredOrigin(2,0x15,0x99,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x5b);
   if (temp_v23 == 0) {
     temp_v4 = FUN_0029efa8(*temp_v20);
     temp_v4 = ifTouchGetSelectionModeForRegion((int)*(short *)(param_1 + temp_v4 * 2 + 0x572c));
     if ((temp_v4 != 1) && (temp_v4 != 2 && temp_v4 != 6)) {
-      FUN_002bf288(2,0x15,0x9a,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x65);
+      texDrawTableEntryAtStoredOrigin(2,0x15,0x9a,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x65);
     }
     else {
-      FUN_002bf288(2,0x15,0x9b,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x65);
+      texDrawTableEntryAtStoredOrigin(2,0x15,0x9b,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x65);
     }
   }
   else {
-    FUN_002bf288(2,0x15,0x9b,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x65);
+    texDrawTableEntryAtStoredOrigin(2,0x15,0x9b,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x65);
   }
   temp_v8 = asdTMTexTableEntryAt(0x15,0x9a);
   temp_v4 = g_titleScene;
@@ -501,7 +501,7 @@ void FUN_0025d1c4(int param_1)
   temp_v4 = vec2GetYInt(param_1 + 0x6b0);
   temp_v1 = *(short *)(temp_v3 + 10);
   temp_v8 = vec2GetXInt(param_1 + 0x6b0);
-  FUN_002bf288(2,0x15,0x9c,temp_v8 + temp_v6 + (int)*(short *)(temp_v3 + 8),temp_v4 + temp_v7 + (int)temp_v1,
+  texDrawTableEntryAtStoredOrigin(2,0x15,0x9c,temp_v8 + temp_v6 + (int)*(short *)(temp_v3 + 8),temp_v4 + temp_v7 + (int)temp_v1,
                0x6f);
   temp_v4 = g_titleScene;
   piVar18 = (int *)(g_titleScene + 0x130c);
@@ -515,7 +515,7 @@ void FUN_0025d1c4(int param_1)
     if (temp_v22 != 2) {
       if (temp_v22 != 7) {
         if (temp_v22 == 3) {
-          FUN_002bf288(2,0x15,0x9d,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x6f
+          texDrawTableEntryAtStoredOrigin(2,0x15,0x9d,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x6f
                       );
           temp_v4 = reinterpret_cast<int>(btlGetMainState());
           if ((*(unsigned int *)(temp_v4 + 0x44a8) & 0x1000) == 0) {
@@ -574,10 +574,10 @@ void FUN_0025d1c4(int param_1)
         temp_v4 = temp_v8;
         FUN_0028cfd8();
         temp_v5 = temp_v4;
-        FUN_002be650(temp_v4,0);
+        dataFindKindRecordWithAocOverrides(temp_v4,0);
         textFormatBuffer(temp_v19,"%s",temp_v4);
-        temp_v13 = FUN_0028fb40(temp_v5);
-        FUN_002bf288(2,0x15,0x9d,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x6f);
+        temp_v13 = flagValueRead(temp_v5);
+        texDrawTableEntryAtStoredOrigin(2,0x15,0x9d,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x6f);
         temp_v4 = asdTMTexTableEntryAt(0x15,0xa8);
         if (temp_v23 != 0) {
           VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v7,
@@ -615,8 +615,8 @@ void FUN_0025d1c4(int param_1)
       }
     }
     else {
-      FUN_002bf288(2,0x15,0x9e,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x6f);
-      FUN_002bf288(2,0x15,0x9d,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x6f);
+      texDrawTableEntryAtStoredOrigin(2,0x15,0x9e,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x6f);
+      texDrawTableEntryAtStoredOrigin(2,0x15,0x9d,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x6f);
       temp_v4 = reinterpret_cast<int>(btlGetMainState());
       if ((*(unsigned int *)(temp_v4 + 0x44a8) & 0x40) != 0) {
         temp_v13 = reinterpret_cast<int>(btlGetMainState());
@@ -653,8 +653,8 @@ void FUN_0025d1c4(int param_1)
     }
   }
   else {
-    FUN_002bf288(2,0x15,0x9e,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x6f);
-    FUN_002bf288(2,0x15,0x9d,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x6f);
+    texDrawTableEntryAtStoredOrigin(2,0x15,0x9e,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x6f);
+    texDrawTableEntryAtStoredOrigin(2,0x15,0x9d,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x6f);
     if (*(int *)(temp_v2 + 0x5c) != 0) {
       temp_v13 = 0;
       temp_v0 = 1;
@@ -666,13 +666,13 @@ void FUN_0025d1c4(int param_1)
           temp_v5 = (int)(short)temp_v15;
           temp_v12 = aocIndexValueOrDefault();
           textFormatBuffer(temp_v19,"%s",temp_v12);
-          temp_v12 = FUN_0029a924(temp_v5);
+          temp_v12 = appGetRemainingCapacity(temp_v5);
         }
         else {
           temp_v5 = (int)*(short *)(param_1 + *(int *)(temp_v2 + 0x5c) * 0x10 + temp_v15 * 2 + 0x341a);
           temp_v12 = aocIndexValueOrDefault();
           textFormatBuffer(temp_v19,"%s",temp_v12);
-          temp_v12 = FUN_0029a924(temp_v5);
+          temp_v12 = appGetRemainingCapacity(temp_v5);
         }
         temp_v4 = (int)*(short *)(param_1 + *(int *)(temp_v2 + 0x5c) * 2 + 0x38f4);
         if (-1 < temp_v4) {
@@ -790,7 +790,7 @@ void FUN_0025d1c4(int param_1)
       temp_v13 = 0xb9;
     }
     temp_v2 = asdTMTexTableEntryAt(0x15,temp_v13);
-    FUN_00290994(*temp_v20,*(short *)(temp_v2 + 8) + temp_v6,*(short *)(temp_v2 + 10) + temp_v7,0x15,0x7f,
+    uiDrawListScrollBar(*temp_v20,*(short *)(temp_v2 + 8) + temp_v6,*(short *)(temp_v2 + 10) + temp_v7,0x15,0x7f,
                  0x80,0x81,0x7b,0x7d,0x7c,0x7e,(int)*(short *)(param_1 + 0x5726),
                  (int)*(short *)(param_1 + 0x5728),(int)*(short *)(param_1 + 0x572a),0x65,0);
   }

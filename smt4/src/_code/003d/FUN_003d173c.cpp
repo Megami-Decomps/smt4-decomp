@@ -34,7 +34,7 @@ void FUN_00338358(BtlMainState *state);
 void armySummonResetRootTransform(BtlMainState *state);
 s32 FUN_00293ed0(BtlMainState *state);
 f32 FUN_00338404(BtlMainState *state);
-void FUN_002505c0(s32 channel, void *unit, u32 resource, s32 a4, s32 a5, s32 a6, s32 a7);
+void btlQueueKeyedScalarReflectAction(s32 channel, void *unit, u32 resource, s32 a4, s32 a5, s32 a6, s32 a7);
 s32 FUN_002c1658(s32 first, s32 second);
 s32 tableIsSupportedKind(BtlMainState *state, u32 index);
 u32 FUN_0024502c(BtlMainState *state, s32 slot);
@@ -77,7 +77,7 @@ u32 FUN_003d173c(BtlMainState **block, ActionStateChannel *channel)
     if (FUN_00293ed0(*block) != 0) {
         u32 frame = channel->timer;
         if (FUN_00338404(*block) == 40.0f)
-            FUN_002505c0(0, channel, 0x10001ee, 0, 0, 0, 0);
+            btlQueueKeyedScalarReflectAction(0, channel, 0x10001ee, 0, 0, 0, 0);
         if (FUN_002c1658(9, 1) != 0 && static_cast<s32>(frame) > 0 &&
             tableIsSupportedKind(*block, 0) != 0 && FUN_0024502c(*block, 0) != 0) {
             s32 soundSlot = reinterpret_cast<ReflectCutsceneView *>(*block)->soundSlot;
@@ -95,7 +95,7 @@ u32 FUN_003d173c(BtlMainState **block, ActionStateChannel *channel)
             mathVectorClear(g_btlMain);
             btlUiPlaySceneFadeOutWhenReady(g_btlUiBlock);
             slotResetIdle(*block, 0, 10);
-            FUN_002505c0(0, channel, 0x100010a, 0, 0, 0, 1);
+            btlQueueKeyedScalarReflectAction(0, channel, 0x100010a, 0, 0, 0, 1);
             break;
         case 90:
             FUN_003ddb50(0, channel, 5, 0.36f, 0.28f, 0.26f);
@@ -113,7 +113,7 @@ u32 FUN_003d173c(BtlMainState **block, ActionStateChannel *channel)
                     action->status |= 0x80000;
                     action->presentationFlags &= ~0x1000;
                     btlActionQueueSourceReflect(reinterpret_cast<ReflectActionView *>(action)->sourceId, channel, action);
-                    FUN_002505c0(reinterpret_cast<ReflectActionView *>(action)->sourceId, channel, 0x10001e9, 0, 0, 0, 0);
+                    btlQueueKeyedScalarReflectAction(reinterpret_cast<ReflectActionView *>(action)->sourceId, channel, 0x10001e9, 0, 0, 0, 0);
                 }
             }
             break;

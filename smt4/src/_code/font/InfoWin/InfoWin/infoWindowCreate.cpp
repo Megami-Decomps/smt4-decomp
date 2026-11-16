@@ -13,7 +13,7 @@ u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc draw, AsdProcFunc destroy, u32 work, u32 parent);
 void drawParameterBlockClear(UiResourceParameters *parameters);
 
-void FUN_002bd954(UiSpriteState *sprite, s32 group, s32 id, UiResourceParameters *parameters, s32 flags, f32 scale);
+void uiSpriteStateInitFromSource(UiSpriteState *sprite, s32 group, s32 id, UiResourceParameters *parameters, s32 flags, f32 scale);
 void timerStart(UiSpriteState *sprite, s32 mode, s32 frame);
 void *asdTextCreate(u32 flags);
 void asdTextSetBaseColor(void *text, u32 color);
@@ -45,9 +45,9 @@ void infoWindowCreate()
     setup = reinterpret_cast<InfoWindowSetupView *>(work);
     drawParameterBlockClear(&setup->parameters);
     paramsInit(&setup->parameters, DAT_00403a04, 0x24, 0, 0, 0, 0, 0, 0, 0, 0);
-    FUN_002bd954(&setup->background, 0xE, 0x87, &setup->parameters, 1, 1.0f);
+    uiSpriteStateInitFromSource(&setup->background, 0xE, 0x87, &setup->parameters, 1, 1.0f);
     timerStart(&setup->background, 0, 0);
-    FUN_002bd954(&setup->label, 0xE, 0x87, &setup->parameters, 1, 1.0f);
+    uiSpriteStateInitFromSource(&setup->label, 0xE, 0x87, &setup->parameters, 1, 1.0f);
     timerStart(&setup->label, 2, 0);
     void *text = asdTextCreate(0);
     work->text = text;

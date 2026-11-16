@@ -43,7 +43,7 @@ extern s8 DAT_0049fce8;
 MapBlock* gameGetMapBlock(void);
 void FUN_0027f958(f32* stickX, f32* stickY, s32 arg);
 void FUN_0026413c(void);
-f32 FUN_00281e34(f32 y, f32 x);
+f32 __hardfp_atan2f(f32 y, f32 x);
 s32 FUN_002ed094(Vec3f* candidate, Vec3f* previous);
 
 // Moves the player on the field from the analog stick: accelerates while held,
@@ -80,7 +80,7 @@ void FUN_002d508c(PlayerController* player)
         player->speed = speed;
         if (speed > 60.0f) speed = 60.0f;
         player->speed = speed;
-        f32 heading = -(FUN_00281e34(stickX, stickY) * 57.29578f - player->cameraYaw);
+        f32 heading = -(__hardfp_atan2f(stickX, stickY) * 57.29578f - player->cameraYaw);
         if (!(heading >= 0.0f)) heading += 360.0f;
         if (heading > 360.0f) heading -= 360.0f;
         g_lmapScene->yaw = heading;
@@ -94,7 +94,7 @@ void FUN_002d508c(PlayerController* player)
         Vec3f before = scene->position;
         scene->candidate = scene->position;
         f32 stride = (player->speed / (f32)steps) * speedScale;
-        scene->candidate.x += FUN_0028250c(scene->yaw * 0.017453292f) * stride;
+        scene->candidate.x += mathRemPio2f(scene->yaw * 0.017453292f) * stride;
         scene = g_lmapScene;
         scene->candidate.z += FUN_00282390(scene->yaw * 0.017453292f) * stride;
         scene = g_lmapScene;

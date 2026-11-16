@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002c131c(int, int);
 int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
-int FUN_002c526c(void);
+int resultHandleFailure(void);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -25,7 +25,7 @@ extern int DAT_004656b0; /* 0x4656b0 */
 extern int asdModelForwardChecked(unsigned int *, int, unsigned int, unsigned int);
 extern unsigned int libc_strlen(void);
 /* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: FUN_002c526c. */
+/* Supplied declaration required: resultHandleFailure. */
 
 
 void FUN_002bb378(void)
@@ -43,7 +43,7 @@ void FUN_002bb378(void)
     temp_v2 = DAT_00465668;
     FUN_002c40f8(puVar1,&temp_v2,1,0,0xffffffff,0xffffffff);
     if ((int)puVar1 < 0) {
-      FUN_002c526c();
+      resultHandleFailure();
     }
   }
   if (DAT_00465664 == 0) {

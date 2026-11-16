@@ -1,6 +1,6 @@
 #include "shard/W5_W5Match2_LinkedItems.h"
 
-extern "C" void FUN_0025c650(LinkedItems *, LinkedItem *, LinkedItem *);
+extern "C" void linkedItemsRedirectToReplacement(LinkedItems *, LinkedItem *, LinkedItem *);
 
 static LinkedItem *findReference(LinkedItems *items, void *resource)
 {
@@ -20,10 +20,10 @@ extern "C" void effResourcePromoteReferences(LinkedItems *items, LinkedItem *ite
         if (replacement != NULL) {
             replacement->reference.flags &= ~2u;
             replacement->reference.source = NULL;
-            FUN_0025c650(items, replacement, replacement);
+            linkedItemsRedirectToReplacement(items, replacement, replacement);
             LinkedItem *reference = findReference(items, item->resource);
             while (reference != NULL) {
-                FUN_0025c650(items, reference, replacement);
+                linkedItemsRedirectToReplacement(items, reference, replacement);
                 reference = findReference(items, item->resource);
             }
         }

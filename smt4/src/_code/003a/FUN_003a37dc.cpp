@@ -4,8 +4,8 @@
 extern "C" {
 extern RenderCtx *g_titleScene;
 void renderCtxSelectStereoLayout(RenderCtx *context);
-void FUN_002bed3c(void);
-s32 FUN_002c5d80(u32 kind, u32 mode);
+void gxResetColorQuadToWhite(void);
+s32 renderCtxPackPassFlags(u32 kind, u32 mode);
 s32 jobIsValid(u32 job);
 void FUN_00285584(u32 job, u32 mode, u32 flags);
 void renderCtxResetColorScale(RenderCtx *context);
@@ -28,9 +28,9 @@ void FUN_003a37dc(TitleJobWork *work)
         return;
     }
     renderCtxSelectStereoLayout(g_titleScene);
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     RenderCtx *context = g_titleScene;
-    renderCtxPushA(context, FUN_002c5d80(1, 0));
+    renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
     if (jobIsValid(draw->firstJob)) {
         FUN_00285584(draw->firstJob, 0, 0);
     }

@@ -2,8 +2,8 @@
 #include "map/lmapMain.h"
 
 extern "C" {
-f32 FUN_001bbf0c(f32 radians);
-f32 FUN_001bc124(f32 radians);
+f32 libm_cosf(f32 radians);
+f32 libm_sinf(f32 radians);
 void FUN_003136e4(f32 angle, f32 distance);
 s32 FUN_003644bc(void);
 void effectSpawnKindTen(f32 x, f32 y, f32 z);
@@ -18,8 +18,8 @@ void FUN_003135bc(f32 angle, f32 distance)
     }
     MapVector position = *reinterpret_cast<const MapVector *>(g_lmapScene->transform.position);
     f32 radians = (g_lmapScene->transform.headingDegrees + angle) * 0.017453292f;
-    position.x += FUN_001bc124(radians) * distance;
-    position.z += FUN_001bbf0c(radians) * distance;
+    position.x += libm_sinf(radians) * distance;
+    position.z += libm_cosf(radians) * distance;
     effectSpawnKindTen(position.x, position.y, position.z);
 }
 }

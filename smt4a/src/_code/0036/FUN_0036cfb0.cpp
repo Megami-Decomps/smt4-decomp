@@ -3,7 +3,7 @@
 
 struct SlotRecord;
 extern "C" {
-ScriptRunState *FUN_00275bc8(void *resource, u32 entry);
+ScriptRunState *scrScriptProcessCreate(void *resource, u32 entry);
 void scrScriptProcessStartEntry(ScriptRunState *script, s32 entry);
 s32 scrRunOpcodesStub(ScriptRunState *script);
 void sysPlaySe(s32 sound);
@@ -11,7 +11,7 @@ void cecProcessStart(void);
 void cecProcessCall4(void);
 void cecProcessDestroy(void);
 void FUN_002a6480(u16 value);
-void FUN_0031d890(void);
+void partyPanelRefreshFromSlotTable(void);
 SlotTable *gameGetSlotTable(void);
 SlotRecord *gameGetSlotRecord(s32 slot);
 s32 bitsAt60Test(SlotRecord *record, u32 flags);
@@ -24,7 +24,7 @@ u32 FUN_0036cfb0(CampCecResumeState *state)
     switch (state->exchange.scriptStep) {
     case 0:
         if (state->launch.resource != NULL && state->launch.entry != 0) {
-            ScriptRunState *script = FUN_00275bc8(state->launch.resource, state->launch.entry);
+            ScriptRunState *script = scrScriptProcessCreate(state->launch.resource, state->launch.entry);
             s32 entry = state->exchange.exchangeKind == 1 ? 25 : 26;
             state->launch.script = script;
             scrScriptProcessStartEntry(script, entry);
@@ -47,7 +47,7 @@ u32 FUN_0036cfb0(CampCecResumeState *state)
                 }
             }
             FUN_002a6480(0);
-            FUN_0031d890();
+            partyPanelRefreshFromSlotTable();
             scrScriptProcessStartEntry(state->launch.script, 30);
             ++state->exchange.scriptStep;
         }

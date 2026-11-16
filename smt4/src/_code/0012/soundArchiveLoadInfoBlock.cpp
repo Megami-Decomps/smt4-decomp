@@ -19,8 +19,8 @@ typedef struct FsSoundArchiveLoader {
 
 u32 nw_snd_internal_SoundArchiveFile_FileHeader_GetInfoBlockOffset(void *reader);
 u32 nw_snd_internal_SoundArchiveFile_FileHeader_GetInfoBlockSize(void *reader);
-s32 FUN_0013041c(void *stream, u32 offset, s32 origin);
-s32 FUN_002b4e00(void *stream, void *buffer, u32 size, u32 *readSize);
+s32 fileHandleSeek(void *stream, u32 offset, s32 origin);
+s32 fileHandleRead(void *stream, void *buffer, u32 size, u32 *readSize);
 void FUN_00130ea8(void *reader, void *infoBlock);
 
 /* Read the archive's info block into buffer and hand it to the reader. */
@@ -33,14 +33,14 @@ s32 soundArchiveLoadInfoBlock(FsSoundArchiveLoader *loader, void *buffer, u32 bu
     if (size > bufferSize) {
         return 0;
     }
-    s32 seekSucceeded = FUN_0013041c(loader->stream.file, offset, 0);
+    s32 seekSucceeded = fileHandleSeek(loader->stream.file, offset, 0);
     SoundArchiveStream *stream = &loader->stream;
     if (!seekSucceeded) {
         loader->lastResult = stream->result;
         return 0;
     }
     readSize = 0;
-    if (!FUN_002b4e00(loader->stream.file, buffer, size, &readSize)) {
+    if (!fileHandleRead(loader->stream.file, buffer, size, &readSize)) {
         loader->lastResult = stream->result;
         return 0;
     }

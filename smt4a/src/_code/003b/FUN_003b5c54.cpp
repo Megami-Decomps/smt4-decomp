@@ -53,7 +53,7 @@ void FUN_003b5c54(s32 index, s32 show)
         if (!slot->loaded) {
             return;
         }
-        reinterpret_cast<LmapModelNode *>(FUN_0040619c(g_lmapMainState->models->group, index))->flags &= ~LMAP_MODEL_NODE_HIDDEN;
+        reinterpret_cast<LmapModelNode *>(ptrVectorAt(g_lmapMainState->models->group, index))->flags &= ~LMAP_MODEL_NODE_HIDDEN;
     } else {
         if (!slot->shown) {
             return;
@@ -62,7 +62,7 @@ void FUN_003b5c54(s32 index, s32 show)
         if (!slot->loaded) {
             return;
         }
-        reinterpret_cast<LmapModelNode *>(FUN_0040619c(g_lmapMainState->models->group, index))->flags |= LMAP_MODEL_NODE_HIDDEN;
+        reinterpret_cast<LmapModelNode *>(ptrVectorAt(g_lmapMainState->models->group, index))->flags |= LMAP_MODEL_NODE_HIDDEN;
     }
 }
 

@@ -40,11 +40,11 @@ void FUN_0047e430(Object *obj, u8 flag)
         campButtonHelpAcquire(obj->flag);
     }
     obj->state = 13;
-    s32 firstState = FUN_0013def0(0);
+    s32 firstState = pairedAvailabilityGetState(0);
     if (firstState == 3) {
         FUN_003d54f8(0, 5);
     }
-    if (FUN_0013def0(1) == 3) {
+    if (pairedAvailabilityGetState(1) == 3) {
         FUN_003d54f8(1, 5);
     }
 }

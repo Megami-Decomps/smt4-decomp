@@ -13,7 +13,7 @@ s32 gameSlotTableFindFree();
 SlotTable *gameGetSlotTable();
 PartySlotA *gameGetSlotRecord(s32 slot);
 s32 recordGetScaledMaximum(PartySlotA *unit);
-PartySlotA *FUN_003e4d68(u16 slot);
+PartySlotA *partyGetSlot(u16 slot);
 
 // Check whether the player, stored party, or support roster needs HP/MP/status recovery.
 u32 FUN_004ced50()
@@ -40,8 +40,8 @@ u32 FUN_004ced50()
         }
     }
     for (s32 index = 0; index < 12; ++index) {
-        PartySlotA *unit = FUN_003e4d68((u16)index);
-        if (FUN_00187168(unit)) {
+        PartySlotA *unit = partyGetSlot((u16)index);
+        if (partySlotIsOccupied(unit)) {
             s16 hp = unit->unk2A;
             if (hp < recordGetScaledMaximum(unit))
                 return 1;

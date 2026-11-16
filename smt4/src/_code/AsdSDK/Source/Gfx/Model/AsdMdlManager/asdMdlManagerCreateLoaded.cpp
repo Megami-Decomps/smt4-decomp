@@ -8,7 +8,7 @@ void *asdFileQueueRequest(void *source, s32 arg);
 void asdFileRequestSetHeapKind(void *data, s32 arg);
 void asdFileWait(void *data);
 u32 asdFileRequestGetResult(void *data, u32 *out);
-void *FUN_002b2988(u32 data, u32 arg);
+void *asdModelRegisterImage(u32 data, u32 arg);
 void asdMdlNodeInit(AsdMdlNode *node, u32 param);
 void asdMdlObjectBuildBounds(AsdMdlObject *obj);
 void asdListAdd(u32 *list, AsdMdlObject *obj, s32 arg);
@@ -29,7 +29,7 @@ AsdMdlObject *asdMdlManagerCreateLoaded(void *source, u32 param)
     asdFileRequestSetHeapKind(obj->request, 1);
     asdFileWait(obj->request);
     data = asdFileRequestGetResult(obj->request, &flags);
-    obj->node->data = FUN_002b2988(data, flags);
+    obj->node->data = asdModelRegisterImage(data, flags);
     asdMdlNodeInit(obj->node, param);
     asdMdlObjectBuildBounds(obj);
     asdListAdd(&g_asdMdlList, obj, 0);

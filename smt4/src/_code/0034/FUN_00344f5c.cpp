@@ -43,7 +43,7 @@ int FUN_0023c5c0(...);
 int btlReflectCreateKind18(...);
 int FUN_0023cd08(...);
 int FUN_0023f4e4(...);
-int FUN_002505c0(...);
+int btlQueueKeyedScalarReflectAction(...);
 int btlReflectQueueKind34(...);
 int FUN_0027e5e4(...);
 int FUN_00293230(...);
@@ -132,7 +132,7 @@ extern int FUN_0024502c(unsigned int, unsigned int);
 extern int tableIsSupportedKind(unsigned int, unsigned int);
 /* Supplied declaration required: bgmSwitchCurrent. */
 extern int FUN_002485b8(void);
-/* Supplied declaration required: FUN_002505c0. */
+/* Supplied declaration required: btlQueueKeyedScalarReflectAction. */
 /* Supplied declaration required: btlReflectQueueKind34. */
 extern int FUN_00256940(int, int, unsigned int);
 /* Supplied declaration required: effectAreAllCompletionChecksReady. */
@@ -781,14 +781,14 @@ LAB_00345938:
       if ((*puVar9 & 10) != 0) {
         temp_v5 = FUN_00293230(unaff_r5);
         if (temp_v5 == 0) {
-          FUN_002505c0(0,*(unsigned int *)(psVar2 + 4),0x10001d3,0,1,0,0);
+          btlQueueKeyedScalarReflectAction(0,*(unsigned int *)(psVar2 + 4),0x10001d3,0,1,0,0);
         }
         FUN_003ae574(g_btlUiBlock,(int)*(short *)((int)puVar9 + 0x6e));
       }
       else if ((*puVar9 & 0x10) != 0) {
         temp_v5 = FUN_00293230(unaff_r5);
         if (temp_v5 == 0) {
-          FUN_002505c0(0,*(unsigned int *)(psVar2 + 4),0x10001d3,0,1,0,0);
+          btlQueueKeyedScalarReflectAction(0,*(unsigned int *)(psVar2 + 4),0x10001d3,0,1,0,0);
         }
         FUN_0023cd08(*param_1,(int)*(short *)(*(int *)(psVar2 + 10) + 0x62));
         FUN_003ae418(g_btlUiBlock,puVar9);
@@ -1075,7 +1075,7 @@ LAB_00346258:
           }
           FUN_0027df30(0,*(unsigned int *)(psVar2 + 4),*puVar9 + (short)unaff_r5[2] * 0x114,0,temp_v9,
                        0xffffffff,0xffffffff,0,0,0,9,0,1);
-          FUN_002505c0(0,*(unsigned int *)(psVar2 + 4),0x10001c5,0,1,0,0);
+          btlQueueKeyedScalarReflectAction(0,*(unsigned int *)(psVar2 + 4),0x10001c5,0,1,0,0);
           actionCreateKindSeventeen(0,*(unsigned int *)(psVar2 + 4),(int)*(short *)((int)unaff_r5 + 0x6e),
                        unaff_r5[0x32]);
           FUN_0023c0d0(g_btlScriptUnit,temp_v4,(int)(short)unaff_r5[2],temp_v9);
@@ -1155,7 +1155,7 @@ LAB_003453f8:
   case '2':
     temp_v5 = btlGetMainState();
     if (0 < *(int *)(temp_v5 + 0x49e4)) {
-      FUN_002505c0(0,*(unsigned int *)(psVar2 + 4),*(int *)(temp_v5 + 0x49e4),0,0,0,0);
+      btlQueueKeyedScalarReflectAction(0,*(unsigned int *)(psVar2 + 4),*(int *)(temp_v5 + 0x49e4),0,0,0,0);
     }
     break;
   case '3':

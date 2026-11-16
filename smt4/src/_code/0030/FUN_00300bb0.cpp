@@ -12,7 +12,7 @@ int randomAdvanceShiftRegister(void);
 int FUN_0024b7bc(int, float *);
 int shiftRandomNextFraction(...);
 int gfxQuaternionWorkspaceBuildMatrix(void);
-int FUN_002b70cc(void);
+int mathSinFixedAngle(void);
 int VectorSignedToFloat(double, int);
 int VectorUnsignedToFloat(...);
 
@@ -77,7 +77,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: shiftRandomNextFraction. */
 extern int effGetFrameCounter(void);
 /* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
-/* Supplied declaration required: FUN_002b70cc. */
+/* Supplied declaration required: mathSinFixedAngle. */
 
 
 void FUN_00300bb0(int param_1)
@@ -217,7 +217,7 @@ void FUN_00300bb0(int param_1)
             fStack_78 = pfVar5[2];
             fStack_74 = pfVar5[3];
             temp_v7 = pfVar6[6] * (float)((unsigned long long)temp_v20 >> 0x20);
-            FUN_002b70cc();
+            mathSinFixedAngle();
             temp_v9 = pfVar6[8] * (temp_v7 - pfVar6[7]);
             *pfVar5 = *pfVar5 + pfVar6[3] * temp_v9;
             pfVar5[1] = pfVar5[1] + pfVar6[4] * temp_v9;
@@ -337,7 +337,7 @@ void FUN_00300bb0(int param_1)
             temp_v19 = temp_v19 * (float)temp_v23;
             pfVar6[6] = temp_v19;
             temp_v19 = temp_v19 * (float)((unsigned long long)temp_v20 >> 0x20);
-            FUN_002b70cc();
+            mathSinFixedAngle();
             pfVar6[7] = temp_v19;
             shiftRandomNextFraction(0);
             DAT_004ea92c = (temp_v19 - (float)temp_v22) * (float)((unsigned long long)temp_v22 >> 0x20) *

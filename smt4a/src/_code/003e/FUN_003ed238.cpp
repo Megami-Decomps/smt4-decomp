@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_001568f8(int, int);
+int btlFindEntryBlockByMemberId(int, int);
 void battleRosterAssignGroupXOrder(BtlMainStateA*, unsigned int);
 int FUN_003e7cc8(int, unsigned int);
 int btlMainFindEntryByListedId(int, int);
@@ -25,7 +25,7 @@ extern float DAT_00573974; /* 0x573974 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001568f8. */
+/* Supplied declaration required: btlFindEntryBlockByMemberId. */
 extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 extern unsigned int dataTableFileGetTable(int, unsigned int);
@@ -155,7 +155,7 @@ LAB_003ed39c:
             ((temp_v1 & 0x10) == 0 && (temp_v1 & 0x200000) == 0)) &&
            (*(char *)(temp_v6 + temp_v3 * 0x1d0 + 0x3c) == temp_v9)) {
           temp_v4 = temp_v27;
-          FUN_001568f8(temp_v27,(int)*(short *)(temp_v6 + temp_v3 * 0x1d0 + 0x6a));
+          btlFindEntryBlockByMemberId(temp_v27,(int)*(short *)(temp_v6 + temp_v3 * 0x1d0 + 0x6a));
           temp_v6 = 0;
           do {
             temp_v7 = *(int *)(temp_v5 + temp_v6 * 4 + 0x216c);
@@ -200,7 +200,7 @@ LAB_003ed4bc:
         if ((((temp_v1 & 1) != 0 && (temp_v1 & 0x80) != 0) && ((temp_v1 & 0x10) == 0)) &&
            (*(char *)(temp_v6 + temp_v3 * 0x1d0 + 0x3c) == temp_v9 && (temp_v1 & 0x200000) == 0)) {
           temp_v4 = temp_v27;
-          FUN_001568f8(temp_v27,(int)*(short *)(temp_v6 + temp_v3 * 0x1d0 + 0x6a));
+          btlFindEntryBlockByMemberId(temp_v27,(int)*(short *)(temp_v6 + temp_v3 * 0x1d0 + 0x6a));
           temp_v6 = 0;
           do {
             temp_v7 = *(int *)(temp_v5 + temp_v6 * 4 + 0x216c);

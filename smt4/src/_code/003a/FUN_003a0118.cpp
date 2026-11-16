@@ -1,4 +1,4 @@
-/* Compares two entries: by FUN_0028fb3c key of their ids (descending), then by their FUN_00230f44 rank. */
+/* Compares two entries: by FUN_0028fb3c key of their ids (descending), then by their aocEntryGetSortOrder rank. */
 #include "common.h"
 #include "gamedata/EquipmentSortPower.h"
 
@@ -21,8 +21,8 @@ s32 FUN_003a0118(const SortEntry *first, const SortEntry *second)
     }
     const u16 *a = reinterpret_cast<const u16 *>(first);
     const u16 *b = reinterpret_cast<const u16 *>(second);
-    u16 rankA = FUN_00230f44(a);
-    u16 rankB = FUN_00230f44(b);
+    u16 rankA = aocEntryGetSortOrder(a);
+    u16 rankB = aocEntryGetSortOrder(b);
     return rankA - rankB;
 }
 

@@ -206,7 +206,7 @@ void FUN_00468fec(QuestChoiceWork *work)
         work->state = 10;
         work->counter = 0;
         QuestControllerModel *model = work->pointerHolder->model;
-        FUN_003fe86c(model, 0, 0, 0.0f, 0.0f);
+        modelPlayClip(model, 0, 0, 0.0f, 0.0f);
         model->weight = 1.0f;
         showModel(work->cursorHolder->model);
         break;

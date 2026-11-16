@@ -7,7 +7,7 @@ extern BtlEntry *btlMainFindActiveEntry(void);
 extern u32 scrGetArg(u32 index);
 extern s32 scrSetResult(s32 value);
 extern s32 btlScriptResolveGroupArg(s32 group);
-extern s32 FUN_002499fc(u32 group, s32 *start, s32 *count);
+extern s32 btlSideGetEntryRange(u32 group, s32 *start, s32 *count);
 extern s32 btlEntryHasActionSkillCategory(BtlEntry *unit, u32 arg);
 
 /* Script command: pushes whether btlEntryHasActionSkillCategory accepts argument 0 for a present, non-excluded unit of the current group
@@ -19,7 +19,7 @@ u32 scrCommBtlGroupUnitCheck(void)
     s32 count;
     s32 index;
 
-    FUN_002499fc(btlScriptResolveGroupArg(scrGetArg(1)), &start, &count);
+    btlSideGetEntryRange(btlScriptResolveGroupArg(scrGetArg(1)), &start, &count);
     for (index = start; index < count + start; index++) {
         BtlMainState *state = btlGetMainState();
         BtlEntry *unit = &state->entries[index];

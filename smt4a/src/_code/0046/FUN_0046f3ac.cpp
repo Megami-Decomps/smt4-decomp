@@ -14,7 +14,7 @@ int _ZN7AocMain12queueRequestE17RequestParametersji(...);
 u32 _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(QueuedRequestTokenState*, const RequestParameters*, QueuedRequestHandle);
 int byteIsAtLeast100(...);
 int legacyResourceIdRemap(...);
-int FUN_002e3140(...);
+int resultHandleFailure(...);
 int __aeabi_vec_delete(...);
 int FUN_002fb0d4(...);
 int asdFsIsSdCardDetected(...);
@@ -56,7 +56,7 @@ extern int *_ZN18WindowStatusResultC1Ev(unsigned char *);
 /* Supplied declaration required: _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle. */
 /* Supplied declaration required: byteIsAtLeast100. */
 /* Supplied declaration required: legacyResourceIdRemap. */
-/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: __aeabi_vec_delete. */
 /* Supplied declaration required: FUN_002fb0d4. */
 /* Supplied declaration required: asdFsIsSdCardDetected. */
@@ -192,7 +192,7 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
       temp_v16 = param_2;
       FUN_002fb0d4(temp_v4,&temp_v12,FUN_00471adc,&temp_v16);
       if ((temp_v4 & 0x7e00000) != 0x600000 && (int)temp_v4 < 0) {
-        FUN_002e3140();
+        resultHandleFailure();
       }
       temp_v1 = 2;
       *(unsigned int *)(param_2 + 0x344) = temp_v1;

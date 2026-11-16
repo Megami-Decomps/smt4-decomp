@@ -17,7 +17,7 @@ int FUN_0023aa28(...);
 int FUN_00257e74(...);
 int eventCommandGetPendingCleanup(void);
 int FUN_002929d8(...);
-int FUN_002b70cc(void);
+int mathSinFixedAngle(void);
 int FUN_003d5698(float *, double);
 int battleVectorTransitionUpdatePath(...);
 int FUN_003d62a0(float *, double);
@@ -120,7 +120,7 @@ extern int rangeIsValid(float *);
 /* Supplied declaration required: FUN_002929d8. */
 extern unsigned int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002ad314. */
-/* Supplied declaration required: FUN_002b70cc. */
+/* Supplied declaration required: mathSinFixedAngle. */
 /* Supplied declaration required: FUN_002c159c. */
 /* Supplied declaration required: FUN_003d5698. */
 /* Supplied declaration required: FUN_003d5af0. */
@@ -282,7 +282,7 @@ unsigned int FUN_003d7404(float *param_1)
   if (((unsigned int)param_1[0x18d] & 0x20) != 0) {
     temp_v2 = (float)VectorSignedToFloat(param_1[0x1a5],(unsigned char)(in_fpscr >> 0x16) & 3);
     in_s0 = temp_v2 * DAT_004342d0 * 40.743664f;
-    FUN_002b70cc();
+    mathSinFixedAngle();
     in_s0 = in_s0 * DAT_004342cc;
     param_1[0x1a3] = in_s0;
     param_1[0x1a5] = (float)((int)param_1[0x1a5] + 1);

@@ -28,11 +28,11 @@ struct PartyPanelMenu {
 
 extern "C" {
 extern PartyPanelMenu *g_partyPanel;
-s32 FUN_001517b4(s32 key, s32 mode);
+s32 padQueryLogicalKey(s32 key, s32 mode);
 void scrollOwnerSelectIndex(ScrollSelection *owner, s32 index);
 void objClearFlagPair(ScrollSelection *object);
 void FUN_0026fa30(void);
-void FUN_003f5220(void *widget, u32 slot);
+void slotPlacementAssignSlotPosition(void *widget, u32 slot);
 void slotPlacementStartTransition(void *widget, u8 mode);
 void FUN_0023e908(void);
 void useCounterStart(void);
@@ -47,7 +47,7 @@ u32 partyPanelHandleLayoutToggle(s32 enabled)
 {
     u32 result = 0;
     PartyPanelMenu *panel = g_partyPanel;
-    if (FUN_001517b4(10, 1) != 0) {
+    if (padQueryLogicalKey(10, 1) != 0) {
         panel->alternate ^= 1;
         if (panel->alternate != 0)
             uiSpriteSetKeyframe(&panel->alternateSprite, 6, 0);
@@ -58,7 +58,7 @@ u32 partyPanelHandleLayoutToggle(s32 enabled)
         case 6:
             if (panel->alternate != 0) {
                 scrollOwnerSelectIndex(&panel->lists[1], FUN_002a4878(&panel->lists[0]));
-                FUN_002a4964(&panel->lists[1], panel->columns * 3 + FUN_002a4894(&panel->lists[0]));
+                scrollListSetSelectionTracked(&panel->lists[1], panel->columns * 3 + FUN_002a4894(&panel->lists[0]));
             } else {
                 if (FUN_002a4894(&panel->lists[1]) >= 3 && panel->pages > 1)
                     panel->columns = 1;
@@ -68,11 +68,11 @@ u32 partyPanelHandleLayoutToggle(s32 enabled)
                 scrollOwnerSelectIndex(&panel->lists[0], FUN_002a4878(&panel->lists[1]));
                 if (FUN_002a4894(&panel->lists[1]) >= 3) {
                     if (panel->pages > 1)
-                        FUN_002a4964(&panel->lists[0], FUN_002a4894(&panel->lists[1]) - panel->columns * 3);
+                        scrollListSetSelectionTracked(&panel->lists[0], FUN_002a4894(&panel->lists[1]) - panel->columns * 3);
                     else
-                        FUN_002a4964(&panel->lists[0], 2);
+                        scrollListSetSelectionTracked(&panel->lists[0], 2);
                 } else {
-                    FUN_002a4964(&panel->lists[0], FUN_002a4894(&panel->lists[1]));
+                    scrollListSetSelectionTracked(&panel->lists[0], FUN_002a4894(&panel->lists[1]));
                 }
                 objClearFlagPair(&panel->lists[0]);
             }
@@ -81,9 +81,9 @@ u32 partyPanelHandleLayoutToggle(s32 enabled)
             if (panel->alternate != 0) {
                 scrollOwnerSelectIndex(&panel->lists[3], FUN_002a4878(&panel->lists[2]));
                 if (FUN_002a4894(&panel->lists[2]) < 1)
-                    FUN_002a4964(&panel->lists[3], 0);
+                    scrollListSetSelectionTracked(&panel->lists[3], 0);
                 else
-                    FUN_002a4964(&panel->lists[3], panel->columns * 3 + FUN_002a4894(&panel->lists[2]));
+                    scrollListSetSelectionTracked(&panel->lists[3], panel->columns * 3 + FUN_002a4894(&panel->lists[2]));
             } else {
                 if (FUN_002a4894(&panel->lists[3]) >= 4 && panel->pages > 1)
                     panel->columns = 1;
@@ -93,28 +93,28 @@ u32 partyPanelHandleLayoutToggle(s32 enabled)
                 scrollOwnerSelectIndex(&panel->lists[2], FUN_002a4878(&panel->lists[3]));
                 if (FUN_002a4894(&panel->lists[3]) >= 4) {
                     if (panel->pages > 1)
-                        FUN_002a4964(&panel->lists[2], FUN_002a4894(&panel->lists[3]) - panel->columns * 3);
+                        scrollListSetSelectionTracked(&panel->lists[2], FUN_002a4894(&panel->lists[3]) - panel->columns * 3);
                     else
-                        FUN_002a4964(&panel->lists[2], 3);
+                        scrollListSetSelectionTracked(&panel->lists[2], 3);
                 } else {
-                    FUN_002a4964(&panel->lists[2], FUN_002a4894(&panel->lists[3]));
+                    scrollListSetSelectionTracked(&panel->lists[2], FUN_002a4894(&panel->lists[3]));
                 }
                 objClearFlagPair(&panel->lists[2]);
             }
             break;
         }
         for (s32 i = 0; i < 4; i++) {
-            FUN_003f5220(panel->characters[i], panel->columns);
+            slotPlacementAssignSlotPosition(panel->characters[i], panel->columns);
             slotPlacementStartTransition(panel->characters[i], panel->alternate == 1);
         }
         for (s32 i = 0; i < 0x18; i++) {
-            FUN_003f5220(panel->demons[i], panel->columns);
+            slotPlacementAssignSlotPosition(panel->demons[i], panel->columns);
             slotPlacementStartTransition(panel->demons[i], panel->alternate == 1);
         }
         if (panel->state != 1)
             FUN_0023e908();
         result = 1;
-    } else if (enabled != 0 && panel->busy == 0 && FUN_002a7410() == 0 && FUN_001517b4(9, 1) != 0) {
+    } else if (enabled != 0 && panel->busy == 0 && FUN_002a7410() == 0 && padQueryLogicalKey(9, 1) != 0) {
         sortMenuAcquire(0, 0);
         FUN_0031f208(2);
         FUN_0031f208(1);

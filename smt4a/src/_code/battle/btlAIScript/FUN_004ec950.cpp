@@ -78,7 +78,7 @@ s32 FUN_003ef738(BtlMainStateA *battle);
 s32 FUN_003f23fc(BtlMainStateA *battle);
 s32 FUN_003e84fc(BtlMainStateA *battle);
 s32 FUN_003f25e8(BtlMainStateA *battle);
-s32 FUN_003eb1cc(BtlMainStateA *battle);
+s32 btlStateHasSelectionGateFlag(BtlMainStateA *battle);
 void btlUiQueueMenuAction(u32 uiBlock, s32 action, s32 a);
 void FUN_004eb838(BattleUnitRecordState *units, BtlAiCommand *cmd);
 
@@ -152,7 +152,7 @@ u32 FUN_004ec950(BattleUnitRecordState *units, BtlAiCommand *cmd)
 
             if ((FUN_003f23fc(units->battle) != 0 || FUN_003e84fc(units->battle) != 0 ||
                  FUN_003f25e8(units->battle) != 0) &&
-                btlScriptUnitHasFlags(units->battle) == 0 && FUN_003eb1cc(units->battle) == 0 && action != 0) {
+                btlScriptUnitHasFlags(units->battle) == 0 && btlStateHasSelectionGateFlag(units->battle) == 0 && action != 0) {
                 btlUiQueueMenuAction(g_btlUiBlock, (s16)action, 1);
                 {
                     /* The AI slots are addressed in 0x495-word strides, like the other action-slot users. */

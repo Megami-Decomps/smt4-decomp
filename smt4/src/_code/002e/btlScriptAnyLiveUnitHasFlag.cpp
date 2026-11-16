@@ -6,7 +6,7 @@ extern "C" {
 BtlEntry* btlMainFindActiveEntry(BtlMainState* state);
 s32 scrGetArg(s32 index);
 s32 btlScriptResolveGroupArg(s32 group);
-void FUN_002499fc(u32 group, s32* first, s32* count);
+void btlSideGetEntryRange(u32 group, s32* first, s32* count);
 
 // Report whether any live unit in the requested group has the specified flag.
 u32 btlScriptAnyLiveUnitHasFlag(void)
@@ -15,7 +15,7 @@ u32 btlScriptAnyLiveUnitHasFlag(void)
     s32 first;
     s32 count;
     u32 group = btlScriptResolveGroupArg(scrGetArg(1));
-    FUN_002499fc(group, &first, &count);
+    btlSideGetEntryRange(group, &first, &count);
     for (s32 index = first; index < count + first; ++index) {
         BtlEntry* unit = &btlGetMainState()->entries[index];
         if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) &&

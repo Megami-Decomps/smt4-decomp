@@ -21,7 +21,7 @@ f32 FUN_001f3f34(f32 first, f32 second, f32 duration, f32 frame);
 void controllerSetDestination(ControllerPose* controller, const MapVector* destination);
 void controllerSetRotationEulerDegrees(ControllerPose* controller, f32 x, f32 y, f32 z);
 void controllerSetPosition(ControllerPose* controller, f32 x, f32 y, f32 z);
-void FUN_003fe86c(ControllerPose* controller, u32 kind, s32 option, f32 first, f32 second);
+void modelPlayClip(ControllerPose* controller, u32 kind, s32 option, f32 first, f32 second);
 
 /* Per-frame update of the trap's display model: visibility, the swinging motion and pending placement. */
 void FUN_0024aeb0(void)
@@ -76,7 +76,7 @@ void FUN_0024aeb0(void)
                 controllerSetDestination(controller, &display->destination);
                 controllerSetRotationEulerDegrees(controller, 0.0f, display->heading, 0.0f);
                 controllerSetPosition(controller, 1.0f, 1.0f, 1.0f);
-                FUN_003fe86c(controller, display->mode, 2, 0.0f, 0.0f);
+                modelPlayClip(controller, display->mode, 2, 0.0f, 0.0f);
                 display->dirty = 0;
             }
         }

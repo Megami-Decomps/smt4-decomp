@@ -57,8 +57,8 @@ u32 FUN_004c67d0(void);
 void FUN_0020d3d4(void *menu);
 void FUN_0023f788(void *menu);
 bool gameFlagIsSet(u32 index);
-void FUN_00203b40(ScrollSelection *list, s32 count, s32 columns, s32 first, s32 second, s32 third);
-void FUN_002a4964(ScrollSelection *list, s32 index);
+void gridNavigationConfigure(ScrollSelection *list, s32 count, s32 columns, s32 first, s32 second, s32 third);
+void scrollListSetSelectionTracked(ScrollSelection *list, s32 index);
 void *sysMemClear(void *destination, u32 size);
 s32 FUN_0047fbb4(u32 id);
 s32 FUN_0047fd9c(s32 id, void *unit);
@@ -120,11 +120,11 @@ void FUN_0021a9e8(CommandMenuSetup *work)
     ScrollSelection *page = &work->lists[4];
     if ((battle->held & DAT_00573b88.blocked) != 0) {
         if (work->targets[*selected] == -1 && gameFlagIsSet(0x410) != 0 && playerUnlocked()) {
-            FUN_00203b40(page, 0x191, 6, 1, 1, 1);
-            FUN_002a4964(page, DAT_00573b88.firstSelection + 2);
+            gridNavigationConfigure(page, 0x191, 6, 1, 1, 1);
+            scrollListSetSelectionTracked(page, DAT_00573b88.firstSelection + 2);
         } else {
-            FUN_00203b40(page, 400, 6, 1, 1, 1);
-            FUN_002a4964(page, DAT_00573b88.firstSelection + 1);
+            gridNavigationConfigure(page, 400, 6, 1, 1, 1);
+            scrollListSetSelectionTracked(page, DAT_00573b88.firstSelection + 1);
         }
     } else {
         s32 count;
@@ -136,15 +136,15 @@ void FUN_0021a9e8(CommandMenuSetup *work)
                 count = 1;
             count = countFilledSlots(&work->slots[0], count);
         }
-        FUN_00203b40(page, count, 6, 1, 0, 1);
+        gridNavigationConfigure(page, count, 6, 1, 0, 1);
     }
     BattleHeldMask *state = reinterpret_cast<BattleHeldMask *>(btlGetMainState());
     ScrollSelection *party = &work->lists[5];
     if (!((DAT_00573b88.blocked & state->held) == 0)) {
-        FUN_00203b40(party, *reinterpret_cast<s16 *>(reinterpret_cast<u8 *>(btlGetMainState()) + 0xE0), 6, 1, 1, 1);
-        FUN_002a4964(party, DAT_00573b88.secondSelection);
+        gridNavigationConfigure(party, *reinterpret_cast<s16 *>(reinterpret_cast<u8 *>(btlGetMainState()) + 0xE0), 6, 1, 1, 1);
+        scrollListSetSelectionTracked(party, DAT_00573b88.secondSelection);
     } else {
-        FUN_00203b40(party, 1, 6, 1, 0, 1);
+        gridNavigationConfigure(party, 1, 6, 1, 0, 1);
     }
     sysMemClear(work->ids, 0xF8);
     s32 count = 0;
@@ -152,8 +152,8 @@ void FUN_0021a9e8(CommandMenuSetup *work)
         addAvailableCommand(work, &count, id);
     for (u32 id = 0x79F; id < 0x7DF; id++)
         addAvailableCommand(work, &count, id);
-    FUN_00203b40(&work->extraList, work->extraCount != 0, 1, 1, 0, 1);
-    FUN_00203b40(&work->lists[6], count, 6, 1, 0, 1);
+    gridNavigationConfigure(&work->extraList, work->extraCount != 0, 1, 1, 0, 1);
+    gridNavigationConfigure(&work->lists[6], count, 6, 1, 0, 1);
     qsort(work->ids, count, 2, dataTableCompareIdsByOrder);
     scrollOwnerSelectIndex(&work->lists[*selected], 0);
     if (FUN_00284dbc() != 0)

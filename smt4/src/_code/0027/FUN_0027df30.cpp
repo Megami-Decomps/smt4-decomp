@@ -23,8 +23,8 @@ void *btlMainFindEntryByListedId(void *state, s32 id);
 
 void FUN_002268d0(s32 frame, s32 delay, u32 actor, SkillRecord *skill, s32 first, s32 second, s32 mode, s32 arg, f32 speed);
 u32 FUN_00293230(void *state);
-void FUN_002505c0(s32 a, s32 b, u32 sound, s32 c, s32 d, s32 e, s32 f);
-BattleEntry *FUN_0027da30(void *state, s32 id);
+void btlQueueKeyedScalarReflectAction(s32 a, s32 b, u32 sound, s32 c, s32 d, s32 e, s32 f);
+BattleEntry *btlFindEntryBlockByMemberId(void *state, s32 id);
 
 /* Queues the reflect actions of a skill use: the optional pre-effect, the one or two damage amounts (with their
    effect and, when a status flag changes, the effect sound), and the follow-up status actions. Always returns 1. */
@@ -83,7 +83,7 @@ u32 FUN_0027df30(s32 frame, u32 actor, SkillRecord *skill, u32 unused4, u32 unus
             changed = FUN_00293230(static_cast<void *>(btlGetMainState())) & ~clearMask;
         }
         if (changed != 0) {
-            FUN_002505c0(0, 0, 0x10001c1, 0, 1, 0, 0);
+            btlQueueKeyedScalarReflectAction(0, 0, 0x10001c1, 0, 1, 0, 0);
         }
     } else if (secondAmount >= 1) {
         if (isReflect && effectDelay >= 0) {
@@ -96,14 +96,14 @@ u32 FUN_0027df30(s32 frame, u32 actor, SkillRecord *skill, u32 unused4, u32 unus
         action->parameter = secondAmount;
         changed = FUN_00293230(static_cast<void *>(btlGetMainState()));
         if (changed != 0) {
-            FUN_002505c0(0, 0, 0x10001c1, 0, 1, 0, 0);
+            btlQueueKeyedScalarReflectAction(0, 0, 0x10001c1, 0, 1, 0, 0);
         }
     }
     if (statusMask != 0) {
         u32 flags = 0;
         isReflect = skill->id < 0x6d;
         if (isReflect) {
-            BattleEntry *entry = FUN_0027da30(static_cast<void *>(btlGetMainState()), skill->id);
+            BattleEntry *entry = btlFindEntryBlockByMemberId(static_cast<void *>(btlGetMainState()), skill->id);
             if (entry != NULL) {
                 flags = entry->statusFlags;
             }

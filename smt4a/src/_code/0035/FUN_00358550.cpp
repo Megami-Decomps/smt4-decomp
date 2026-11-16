@@ -12,17 +12,17 @@ inline void pushDepthState(RenderCtxA *context, s32 state)
 }
 extern "C" {
 extern RenderCtxA *g_renderCtx;
-s32 FUN_00387580(u32 mode, f32 parameter);
-s32 FUN_001692ac(u32 first, u32 second);
+s32 renderCtxPackPassFlagsWithAlpha(u32 mode, f32 parameter);
+s32 renderCtxPackPassFlags(u32 first, u32 second);
 void eplUpdateActiveNodes();
 
 // Draw the effect pass with temporary raster, blend and depth-state overrides.
 u32 FUN_00358550()
 {
     RenderCtxA *context = g_renderCtx;
-    pushRasterState(context, FUN_00387580(6, 0.0f));
+    pushRasterState(context, renderCtxPackPassFlagsWithAlpha(6, 0.0f));
     context = g_renderCtx;
-    renderCtxPushA(context, FUN_001692ac(1, 0));
+    renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
     context = g_renderCtx;
     pushDepthState(context, packNibblesAndByte(6, 1, 0));
     eplUpdateActiveNodes();

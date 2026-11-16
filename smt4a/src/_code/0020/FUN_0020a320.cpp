@@ -46,7 +46,7 @@ extern BattleMasks DAT_00573b88;
 
 void uiSpriteSetImageKeyframe(void *sprite, s32 keyframe, s32 arg);
 void buttonHelpSetText(u32 text, u32 color);
-void FUN_0020ad6c(CommandMenuWork *work, s32 kind, s32 arg);
+void btlCommandMenuEnterMode(CommandMenuWork *work, s32 kind, s32 arg);
 u32 FUN_002cc9e0(void *work, s32 inBattle);
 s32 FUN_003e98e0(void);
 s32 FUN_00284dbc(void);
@@ -66,7 +66,7 @@ u32 FUN_0020a320(CommandMenuWork *work)
     }
     if (FUN_002cc9e0(work, 1) == 1) {
         work->current = &work->lists[4];
-        FUN_0020ad6c(work, 9, 1);
+        btlCommandMenuEnterMode(work, 9, 1);
         for (s32 i = 0; i < 6; i++)
             uiSpriteSetImageKeyframe(&work->sprites[i], 0, 0);
     } else if (FUN_002cc9e0(work, 1) == 2) {
@@ -77,7 +77,7 @@ u32 FUN_0020a320(CommandMenuWork *work)
                 return 0;
         }
         work->current = &work->lists[5];
-        FUN_0020ad6c(work, 9, 1);
+        btlCommandMenuEnterMode(work, 9, 1);
         for (s32 i = 0; i < 6; i++)
             uiSpriteSetImageKeyframe(&work->sprites[i], 0, 0);
     } else if (FUN_002cc9e0(work, 1) == 7) {
@@ -85,7 +85,7 @@ u32 FUN_0020a320(CommandMenuWork *work)
         if (objectApplyIfUnblocked(object = &work->lists[6]) <= 0)
             return 0;
         work->current = object;
-        FUN_0020ad6c(work, 11, 1);
+        btlCommandMenuEnterMode(work, 11, 1);
         for (s32 i = 0; i < 6; i++)
             uiSpriteSetImageKeyframe(&work->sprites[i], 0, 0);
     } else if (FUN_002cc9e0(work, 1) == 3) {
@@ -93,30 +93,30 @@ u32 FUN_0020a320(CommandMenuWork *work)
         if (objectApplyIfUnblocked(object = &work->lists[7]) <= 0)
             return 0;
         work->current = object;
-        FUN_0020ad6c(work, 13, 1);
+        btlCommandMenuEnterMode(work, 13, 1);
         for (s32 i = 0; i < 6; i++)
             uiSpriteSetImageKeyframe(&work->sprites[i], 0, 0);
     } else {
         if (FUN_002cc9e0(work, 1) == 6 || FUN_002cc9e0(work, 1) == 8)
             return 0;
         if (FUN_002cc9e0(work, 1) == 5) {
-            FUN_0020ad6c(work, 23, 1);
+            btlCommandMenuEnterMode(work, 23, 1);
         } else if (FUN_002cc9e0(work, 1) == 10) {
-            FUN_0020ad6c(work, 26, 1);
+            btlCommandMenuEnterMode(work, 26, 1);
         } else if (FUN_002cc9e0(work, 1) == 4) {
-            FUN_0020ad6c(work, 27, 1);
+            btlCommandMenuEnterMode(work, 27, 1);
         } else if (FUN_002cc9e0(work, 1) == 9) {
-            FUN_0020ad6c(work, 25, 1);
+            btlCommandMenuEnterMode(work, 25, 1);
         } else if (FUN_002cc9e0(work, 1) == 12) {
             Object *object;
             if (objectApplyIfUnblocked(object = &work->extra) <= 0)
                 return 0;
             work->current = object;
-            FUN_0020ad6c(work, 9, 1);
+            btlCommandMenuEnterMode(work, 9, 1);
             for (s32 i = 0; i < 6; i++)
                 uiSpriteSetImageKeyframe(&work->sprites[i], 0, 0);
         } else {
-            FUN_0020ad6c(work, 0, 1);
+            btlCommandMenuEnterMode(work, 0, 1);
         }
     }
     buttonHelpSetText(0, 0xf4f4f4ff);

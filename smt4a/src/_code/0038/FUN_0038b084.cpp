@@ -21,7 +21,7 @@ void FUN_0038b084(void)
         NpcRoomOccupantA *occupant = room->occupants[room->displayEntries[i].occupantIndex];
         if (occupant != NULL) {
             libc_strcpy(name, npcRoomOccupantName(occupant));
-            FUN_001654f8(name, converted, 0);
+            textExpandGlyphsToBuffer(name, converted, 0);
             length += textFormatBuffer(message + length, "%s<br>", converted);
         }
     }

@@ -4,9 +4,9 @@
 
 extern "C" {
 extern RenderCtx *g_titleScene;
-s32 FUN_002c5d80(u32 mode, u32 flags);
+s32 renderCtxPackPassFlags(u32 mode, u32 flags);
 s32 packNibblesAndByte(u32 first, u32 second, u32 value);
-void FUN_0028186c(u32 handle);
+void effectNodeUpdatePlacedChildren(u32 handle);
 
 /* Draw callback: when enabled, draws the work's handle with the raster, blend and depth states pushed. */
 s32 FUN_002248b8(u32 job)
@@ -24,12 +24,12 @@ s32 FUN_002248b8(u32 job)
         s32 state = FUN_002865c0(6, 0.0f);
         renderStackPush(&context->additional.stackC, state);
         context = g_titleScene;
-        state = FUN_002c5d80(1, 0);
+        state = renderCtxPackPassFlags(1, 0);
         renderStackPush(&context->stackA, state);
         context = g_titleScene;
         state = packNibblesAndByte(6, 1, 0);
         renderStackPush(&context->stackB, state);
-        FUN_0028186c(work->handle);
+        effectNodeUpdatePlacedChildren(work->handle);
         renderStackPop(&g_titleScene->stackB);
         renderStackPop(&g_titleScene->stackA);
         renderStackPop(&g_titleScene->additional.stackC);

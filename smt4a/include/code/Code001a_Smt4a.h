@@ -9,7 +9,7 @@ extern "C" {
 
 void FUN_001a1244(Holder *object);
 
-s32 FUN_001ad1ac(BustupPlacement *placement, s32 slot);
+s32 bustupPlaceActiveSlot(BustupPlacement *placement, s32 slot);
 
 void FUN_001ab8e0(Record *record, u32 a, u32 b, u32 c, u32 d);
 

@@ -6,16 +6,16 @@ extern "C" {
 
 int textFormatBuffer(...);
 int asdOperatorNew(int, int);
-int FUN_00178b04(int, unsigned char *, int);
+int asdMemoryAllocTraced(int, unsigned char *, int);
 int FUN_0022677c(...);
 int asdLoadFileAsyncSimple(...);
 int sysMemClear(void);
-int FUN_003fe86c(...);
+int modelPlayClip(...);
 int linkSlotSetFlag1C(...);
 int soundResetSpatialState(void);
 int FUN_00407ab0(...);
-int FUN_00408184(...);
-int FUN_0040aa6c(void);
+int gameCounterAddSaturating(...);
+int resourceOwnerLoadFileSync(void);
 int FUN_0040aad4(int, int);
 int modelListInit(void);
 int handleRegistryRegisterObject(...);
@@ -42,17 +42,17 @@ extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 /* Supplied declaration required: textFormatBuffer. */
 extern int _ZN10FloatStateC1Ev(int);
 /* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: FUN_00178b04. */
+/* Supplied declaration required: asdMemoryAllocTraced. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0022677c. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_003fe86c. */
+/* Supplied declaration required: modelPlayClip. */
 /* Supplied declaration required: linkSlotSetFlag1C. */
 /* Supplied declaration required: soundResetSpatialState. */
 /* Supplied declaration required: FUN_00407ab0. */
-/* Supplied declaration required: FUN_00408184. */
-/* Supplied declaration required: FUN_0040aa6c. */
+/* Supplied declaration required: gameCounterAddSaturating. */
+/* Supplied declaration required: resourceOwnerLoadFileSync. */
 /* Supplied declaration required: FUN_0040aad4. */
 /* Supplied declaration required: modelListInit. */
 /* Supplied declaration required: handleRegistryRegisterObject. */
@@ -129,7 +129,7 @@ LAB_0046a3b0:
       textFormatBuffer(temp_v8,&LAB_0046a704,
                    *(unsigned int *)(temp_v7 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4),temp_v4 + 1);
       temp_v0 = 0x20;
-      FUN_00178b04(0x20,&LAB_0046a714,0x245);
+      asdMemoryAllocTraced(0x20,&LAB_0046a714,0x245);
       temp_v1 = 0;
       if (temp_v0 != 0) {
         temp_v1 = modelListInit();
@@ -137,27 +137,27 @@ LAB_0046a3b0:
       temp_v0 = param_1 + temp_v4 * 4;
       piVar6 = (int *)(temp_v0 + 0xa10);
       *piVar6 = temp_v1;
-      FUN_0040aa6c();
+      resourceOwnerLoadFileSync();
       FUN_0040aad4(*piVar6,0);
       FUN_0045b538(*(int *)(*piVar6 + 0xc) + 0xc);
       temp_v1 = *(int *)(*piVar6 + 4);
-      FUN_003fe86c(temp_v1,0);
+      modelPlayClip(temp_v1,0);
       *(int *)(temp_v1 + 0x1fc) = (int)temp_v5;
       handleRegistryRegisterObject(g_handleRegistry,temp_v1);
       textFormatBuffer(temp_v8,&LAB_0046a74c,
                    *(unsigned int *)(temp_v7 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4),temp_v4 + 1);
       temp_v1 = 0x20;
-      FUN_00178b04(0x20,&LAB_0046a714,0x25a);
+      asdMemoryAllocTraced(0x20,&LAB_0046a714,0x25a);
       temp_v2 = 0;
       if (temp_v1 != 0) {
         temp_v2 = modelListInit();
       }
       *(unsigned int *)(temp_v0 + 0xa34) = temp_v2;
-      FUN_0040aa6c();
+      resourceOwnerLoadFileSync();
       FUN_0040aad4(*(int *)(temp_v0 + 0xa34),0);
       temp_v1 = *(int *)(*(int *)(temp_v0 + 0xa34) + 4);
       handleRegistryRegisterObject(g_handleRegistry,temp_v1);
-      FUN_003fe86c(temp_v1,0,1);
+      modelPlayClip(temp_v1,0,1);
       temp_v4 = temp_v4 + 1;
       *(unsigned int *)(temp_v1 + 4) = *(unsigned int *)(temp_v1 + 4) | 1;
     } while (temp_v4 < *(int *)(param_1 + 0xabc));
@@ -167,19 +167,19 @@ LAB_0046a3b0:
     textFormatBuffer(temp_v8,&LAB_0046a768,
                  *(unsigned int *)(temp_v7 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4));
     temp_v4 = 0x20;
-    FUN_00178b04(0x20,&LAB_0046a714,0x27e);
+    asdMemoryAllocTraced(0x20,&LAB_0046a714,0x27e);
     temp_v2 = 0;
     if (temp_v4 != 0) {
       temp_v2 = modelListInit();
     }
     piVar6 = (int *)(param_1 + 0xce8);
     *(unsigned int *)(param_1 + 0xce8) = temp_v2;
-    FUN_0040aa6c();
+    resourceOwnerLoadFileSync();
     FUN_0040aad4(*piVar6,0);
     FUN_0045b538(*(int *)(*piVar6 + 0xc) + 0xc);
     temp_v2 = *(unsigned int *)(*piVar6 + 4);
     handleRegistryRegisterObject(g_handleRegistry,temp_v2);
-    FUN_003fe86c(temp_v2,0,1);
+    modelPlayClip(temp_v2,0,1);
     textFormatBuffer(temp_v8,&LAB_0046a774,
                  *(unsigned int *)(temp_v7 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4));
     temp_v2 = g_handleRegistry;
@@ -220,7 +220,7 @@ LAB_0046a3b0:
   asdLoadFileAsyncSimple(temp_v6,param_1 + 0x294,0);
   FUN_0022677c(0,0xff);
   FUN_0022677c(1,0xff);
-  FUN_00408184(0x1c,1);
+  gameCounterAddSaturating(0x1c,1);
   return;
 }
 

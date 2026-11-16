@@ -16,8 +16,8 @@ struct RosterSpriteFrame {
 }
 
 extern "C" {
-void FUN_00183bb0(void);
-RosterSpriteId *FUN_001568f8(BtlMainStateA *state, s32 index);
+void gxResetColorQuadToWhite(void);
+RosterSpriteId *btlFindEntryBlockByMemberId(BtlMainStateA *state, s32 index);
 RosterSpriteFrame *stateEntryFindById(BtlMainStateA *state, u32 id);
 void FUN_0041a534(void *marker, const BattleVector3 *position, f32 alpha);
 void FUN_0041a834(void *marker, const BattleVector3 *position, f32 alpha);
@@ -25,7 +25,7 @@ void FUN_0041a834(void *marker, const BattleVector3 *position, f32 alpha);
 u32 FUN_002df754(u32 job)
 {
     BtlMainStateA *state = (BtlMainStateA *)jobGetWork(job);
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
     f32 primaryDrawn = 0.0f;
     for (s32 i = 4; i < 54; ++i) {
         if (primaryDrawn == 0.0f) {
@@ -41,7 +41,7 @@ u32 FUN_002df754(u32 job)
                     FUN_0041a834(record->motion.selection, &position,
                         static_cast<f32>(record->motion.color & 0xFF) * (1.0f / 255.0f));
                 } else {
-                    RosterSpriteId *sprite = FUN_001568f8(state, record->combatant.parameterIndex);
+                    RosterSpriteId *sprite = btlFindEntryBlockByMemberId(state, record->combatant.parameterIndex);
                     const BattleSpriteFrame *frame = stateEntryFindById(state, sprite->id)->frame;
                     BattleVector3 position = *reinterpret_cast<BattleVector3 *>(record->motion.position);
                     const u32 height = frame->height;

@@ -10,7 +10,7 @@ void resourceListDestroy(void *handle);
 void asdMemFree(void *ptr);
 void *memAlloc(int heap, int alignClass, int unk08, u32 size, int align, int fromFront);
 void *FUN_002a4e98(void *arg);
-void *FUN_00248f70(void *handle);
+void *effPartClone(void *handle);
 
 void effParticleParamRebuildHandles3c(EffParticleParam *param, void *arg)
 {
@@ -33,7 +33,7 @@ void effParticleParamRebuildHandles3c(EffParticleParam *param, void *arg)
         param->handles3c = (void **)param->buffer40;
         param->handles3c[0] = FUN_002a4e98(arg);
         for (i = 1; i < count; i++) {
-            void *copy = FUN_00248f70(param->handles3c[0]);
+            void *copy = effPartClone(param->handles3c[0]);
             param->handles3c[i] = copy;
         }
     }

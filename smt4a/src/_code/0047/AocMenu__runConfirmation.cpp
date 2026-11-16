@@ -46,7 +46,7 @@ extern AocConfirmMain *g_aocMain;
 extern AocSystemA *g_aocSystem;
 extern AocConfirmDisplay *g_aocDisplay;
 
-void FUN_00169548(u32 value);
+void buttonHelpSetEnabled(u32 value);
 void releaseEntriesB(void *regions);
 void releaseEntriesA(void *notice);
 u32 tableGroupFindEntryIndex(u32 resource, const char *name);
@@ -57,7 +57,7 @@ s32 messageGetChoiceResult(void);
 void FUN_0016ccb4(void *owner);
 void FUN_0021c118(u32 handle, s32 frames);
 s32 obj04StateIs4(void);
-s32 FUN_001517b4(s32 id, s32 mode);
+s32 padQueryLogicalKey(s32 id, s32 mode);
 void eventQueueAddUniqueIfValid(u32 event);
 void msgWindowReset(void);
 void messageBannerRestartOrClear(void);
@@ -87,7 +87,7 @@ void AocMenu::runConfirmation()
         closeConfirmation(menu, 4);
         return;
     case 0:
-        FUN_00169548(0);
+        buttonHelpSetEnabled(0);
         g_aocSystem->getPendingRequest();
         menu->flags &= ~0x10;
         g_aocMain->flags &= ~0x100;
@@ -118,7 +118,7 @@ void AocMenu::runConfirmation()
         if (obj04StateIs4() == 0) {
             return;
         }
-        if (FUN_001517b4(1, 1) == 0) {
+        if (padQueryLogicalKey(1, 1) == 0) {
             return;
         }
         eventQueueAddUniqueIfValid(0x100020e);

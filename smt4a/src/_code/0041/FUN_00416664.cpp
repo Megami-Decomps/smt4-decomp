@@ -22,9 +22,9 @@ typedef char BattleLabelEntryLayoutA[
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
-s32 FUN_001692ac(u32 first, u32 second);
+s32 renderCtxPackPassFlags(u32 first, u32 second);
 void efctSetSpeed(f32 speed);
-void FUN_00183bb0(void);
+void gxResetColorQuadToWhite(void);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 void effectRenderTransformedInstance(UiAnimatedSprite *sprite, f32 offset);
 void FUN_00164168(u32 message, s32 x, s32 y, u32 color, s32 mode, s32 flags, f32 scale);
@@ -32,9 +32,9 @@ void FUN_00164168(u32 message, s32 x, s32 y, u32 color, s32 mode, s32 flags, f32
 void FUN_00416664(BattleLabelEntryViewA *entries)
 {
     RenderCtxA *context = g_renderCtx;
-    renderCtxPushA(context, FUN_001692ac(1, 0));
+    renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
     efctSetSpeed(1.0f);
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
     for (s32 index = 0; index < 12; ++index) {
         BattleLabelEntryViewA *entry = &entries[index];
         if (entry->active) {

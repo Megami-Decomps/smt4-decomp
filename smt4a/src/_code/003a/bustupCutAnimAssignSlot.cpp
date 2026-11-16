@@ -4,7 +4,7 @@
 extern "C" {
 extern BustupCutAnimA *g_bustupCutAnim;
 s32 jobIsValid(u32 job);
-void FUN_00185830(u32 job, u32 mode, s32 duration, f32 x, f32 y);
+void bustupCutAnimStartMove(u32 job, u32 mode, s32 duration, f32 x, f32 y);
 
 // Remember a job in the first free history entry unless it is already recorded.
 static __inline void rememberRecentJob(BustupCutAnimA *state, u32 job)
@@ -35,7 +35,7 @@ s32 bustupCutAnimAssignSlot(u32 job, s32 slot)
         }
         if (jobIsValid(state->slots[slot])) {
             u32 previous = state->slots[slot];
-            FUN_00185830(previous, state->transition.mode, (s32)state->transition.duration,
+            bustupCutAnimStartMove(previous, state->transition.mode, (s32)state->transition.duration,
                          state->transitionPosition.x, state->transitionPosition.y);
             if (result != 3)
                 result = 1;

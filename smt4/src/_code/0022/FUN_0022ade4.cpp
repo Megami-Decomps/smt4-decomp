@@ -9,7 +9,7 @@ extern "C" {
 void efctSetSpeed(f32);
 f32 vec2GetSpeed(const void *object);
 const UiLayoutEntryPrefixIV *asdTMTexTableEntryAt(u32, u32);
-void FUN_002bf380(u32, u32, u32, s32, s32, s32);
+void texDrawCompositeSprite(u32, u32, u32, s32, s32, s32);
 
 void FUN_0022ade4(SceneWidget *work, s32 row, s32 entryIndex, s32 state, s32 fade)
 {
@@ -26,12 +26,12 @@ void FUN_0022ade4(SceneWidget *work, s32 row, s32 entryIndex, s32 state, s32 fad
         const UiLayoutEntryPrefixIV *layout = asdTMTexTableEntryAt(42, row + 21);
         x = layout->x;
         y = layout->y;
-        FUN_002bf380(2, 42, 1, x, y, fade);
+        texDrawCompositeSprite(2, 42, 1, x, y, fade);
     } else {
         const UiLayoutEntryPrefixIV *layout = asdTMTexTableEntryAt(42, row + 5);
         x = layout->x;
         y = layout->y;
-        FUN_002bf380(2, 42, 0, x, y, fade);
+        texDrawCompositeSprite(2, 42, 0, x, y, fade);
     }
     f32 opacity = static_cast<f32>(256 - fade) / 256.0f;
     s32 labelX, labelY;
@@ -57,9 +57,9 @@ void FUN_0022ade4(SceneWidget *work, s32 row, s32 entryIndex, s32 state, s32 fad
         s32 markX = layout->x;
         s32 markY = layout->y;
         if (work->frame < 8) {
-            FUN_002bf288(2, 42, 18, markX, markY, fade);
+            texDrawTableEntryAtStoredOrigin(2, 42, 18, markX, markY, fade);
         } else {
-            FUN_002bf288(2, 42, 19, markX, markY, fade);
+            texDrawTableEntryAtStoredOrigin(2, 42, 19, markX, markY, fade);
         }
     }
 }

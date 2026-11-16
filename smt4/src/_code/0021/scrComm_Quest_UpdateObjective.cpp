@@ -14,7 +14,7 @@ int textEncodeFontSlot(...);
 int FUN_0029bbc8(void);
 int partyFindActiveSlotById(...);
 int FUN_0029ede8(...);
-int FUN_002be650(...);
+int dataFindKindRecordWithAocOverrides(...);
 int libc_strcpy(...);
 int FUN_002bff50(void);
 int asdOperatorNewC(void);
@@ -35,7 +35,7 @@ int scrResultStopJobAndReleaseUi(void);
 int resultCreate(int);
 int dataTable1bOr1cGetRecord(void);
 int buttonHelpSetPreset(int);
-int FUN_002bd06c(...);
+int dataTable01FindByIdWithAoc(...);
 int FUN_002cdf2c(int *);
 int bustupCutAnimSetFlag(int);
 int FUN_00333b74(int *, unsigned int);
@@ -93,9 +93,9 @@ extern int fileSlotGetBuffer(unsigned int);
 extern int gameGetSupportUnitData(void);
 extern int FUN_002b8660(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: FUN_002bd06c. */
+/* Supplied declaration required: dataTable01FindByIdWithAoc. */
 extern unsigned int gameGetPlayerName(void);
-/* Supplied declaration required: FUN_002be650. */
+/* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002bff50. */
 extern int gameGetMapBlock(void);
@@ -267,7 +267,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
         if (*(short *)(temp_v6 + 0x16c) == 2) {
           temp_v0 = (unsigned int)*(unsigned short *)(temp_v6 + 0x16e);
           temp_v2 = 10;
-          FUN_002bd06c(temp_v0);
+          dataTable01FindByIdWithAoc(temp_v0);
           libc_strcpy(&temp_v12,temp_v0);
           textEncodeFontSlot(8,&temp_v12);
           FUN_0029ede8(0x18,*(unsigned int *)(temp_v6 + 0x170),0xffffffff,0);
@@ -278,7 +278,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
         if (*(int *)(temp_v6 + 0x170) == 1) {
           temp_v2 = 8;
         }
-        FUN_002be650(temp_v0,1);
+        dataFindKindRecordWithAocOverrides(temp_v0,1);
         libc_strcpy(&temp_v12,temp_v0);
         textEncodeFontSlot(0,&temp_v12);
         FUN_0029ede8(0x18,*(unsigned int *)(temp_v6 + 0x170),0xffffffff,0);
@@ -288,7 +288,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
       temp_v2 = 8;
       temp_v7 = gameGetSupportUnitData();
       temp_v0 = (unsigned int)*(unsigned short *)(temp_v7 + 0x46);
-      FUN_002bd06c(temp_v0);
+      dataTable01FindByIdWithAoc(temp_v0);
       libc_strcpy(&temp_v12,temp_v0);
       textEncodeFontSlot(0,&temp_v12);
       FUN_0029ede8(0x18,*(unsigned int *)(temp_v3 + temp_v6 * 8 + 0x170),0xffffffff,0);

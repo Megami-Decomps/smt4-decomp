@@ -5,7 +5,7 @@
 
 extern "C" {
 extern const char DAT_00544af8[];
-EffParticleSource *FUN_002b2d74(u32 id, u32 owner, u32 flags);
+EffParticleSource *effBehaviorCreate(u32 id, u32 owner, u32 flags);
 void *memAlloc(u32 pool, u32 category, u32 flags, u32 size, u32 alignment, u32 tracked);
 void FUN_00390368(EffObjectParticle *object, EffObjectParticleState *state);
 
@@ -15,7 +15,7 @@ void FUN_003aa57c(EffObjectParticle *object, u32 sourceId, u32 flags)
     if (object->source) {
         objectBufferFree(object->source);
     }
-    object->source = FUN_002b2d74((u16)sourceId, object->owner, flags);
+    object->source = effBehaviorCreate((u16)sourceId, object->owner, flags);
     if (object->allocation) {
         asdMemFree(object->allocation);
     }

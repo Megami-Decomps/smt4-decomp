@@ -8,7 +8,7 @@
 extern "C" {
 
 int asdTMTexTableLoadSprites(...);
-int FUN_0014e188(...);
+int uiSpriteStateInitFromSource(...);
 int uiSpriteInitializeState(...);
 int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
@@ -21,9 +21,9 @@ int dataTable1bOr1cGetRecord(...);
 int FUN_001ff724(...);
 int asdLoadFileSyncDefault(...);
 int uiFadeSetVisible(...);
-int FUN_00275bc8(...);
+int scrScriptProcessCreate(...);
 int sysMemClear(...);
-int FUN_00387240(...);
+int uiStoreTextureEntryCenter(...);
 int uiGetLayoutPointDifference(...);
 int loadSlotEnsureLoaded(...);
 int gameFlagClearModeBits(...);
@@ -50,8 +50,8 @@ extern unsigned char DAT_0052eb44; /* 0x52eb44 */
 extern unsigned int *g_uiQuest; /* 0x57f28c */
 
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
-/* Supplied declaration required: FUN_0014afd0. */
-/* Supplied declaration required: FUN_0014e188. */
+/* Supplied declaration required: asdTMTexTablePrepareNodeImage. */
+/* Supplied declaration required: uiSpriteStateInitFromSource. */
 /* Supplied declaration required: uiSpriteInitializeState. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: paramsInit. */
@@ -67,9 +67,9 @@ extern int gameFlagBlockGet(void);
 /* Supplied declaration required: FUN_001ff724. */
 /* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: uiFadeSetVisible. */
-/* Supplied declaration required: FUN_00275bc8. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_00387240. */
+/* Supplied declaration required: uiStoreTextureEntryCenter. */
 /* Supplied declaration required: uiGetLayoutPointDifference. */
 extern int partyEntryGetBit5(unsigned short);
 extern int partyEntryGetBit6(unsigned short);
@@ -110,12 +110,12 @@ void FUN_002f0c18(void)
   puVar2[0x23d] = (unsigned int)puVar3;
   asdLoadFileSyncDefault();
   puVar2[0x23e] = (unsigned int)puVar3;
-  FUN_00275bc8();
+  scrScriptProcessCreate();
   puVar2[0x23f] = (unsigned int)puVar3;
   *(unsigned short *)((int)puVar2 + 0xcce) = 0;
   *(unsigned short *)(puVar2 + 0x334) = 0;
   asdTMTexTableLoadSprites(0x1e);
-  FUN_0014afd0(0x1e,0);
+  asdTMTexTablePrepareNodeImage(0x1e,0);
   loadSlotEnsureLoaded(0x34);
   temp_v4 = 0x65;
   do {
@@ -152,41 +152,41 @@ void FUN_002f0c18(void)
   paramsClearPacket(puVar2 + 5);
   paramsInit(reinterpret_cast<UiResourceParameters *>(puVar2 + 5),&DAT_0052e8ec,0x90,&DAT_0052e97c,300,&DAT_0052eaa8,0x9c,0,0,&DAT_0052eb44,
                0x40c);
-  FUN_0014e188(puVar2 + 0xd,0x1e,0,puVar2 + 5,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0xd,0x1e,0,puVar2 + 5,0xc9);
   uiSpriteSetKeyframe(puVar2 + 0xd,0);
   uiSpriteSetImageKeyframe(puVar2 + 0xd,8,0);
-  FUN_0014e188(puVar2 + 0x30,0x1e,0,puVar2 + 5,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x30,0x1e,0,puVar2 + 5,0xc9);
   uiSpriteSelectAnim(puVar2 + 0x30,0);
-  FUN_0014e188(puVar2 + 0x53,0x1e,0,puVar2 + 5,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x53,0x1e,0,puVar2 + 5,0xc9);
   uiSpriteSetKeyframe(puVar2 + 0x53,6,0);
-  FUN_0014e188(puVar2 + 0x76,0x1e,0,puVar2 + 5,0xc9);
-  FUN_0014e188(puVar2 + 0x99,0x1e,0x61,puVar2 + 5,0x68);
+  uiSpriteStateInitFromSource(puVar2 + 0x76,0x1e,0,puVar2 + 5,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x99,0x1e,0x61,puVar2 + 5,0x68);
   uiSpriteSelectAnim(puVar2 + 0x99,2);
   uiGetLayoutPointDifference(puVar2 + 0x99,0x1e,0x2a,0x61);
-  FUN_0014e188(puVar2 + 0xbc,0x1e,0x5d,puVar2 + 5,0xa1);
+  uiSpriteStateInitFromSource(puVar2 + 0xbc,0x1e,0x5d,puVar2 + 5,0xa1);
   uiSpriteSelectAnim(puVar2 + 0xbc,2);
-  FUN_00387240(puVar2 + 0xbc,0x1e,0x53);
+  uiStoreTextureEntryCenter(puVar2 + 0xbc,0x1e,0x53);
   uiSpriteInitializeState(puVar2 + 0xdf,0x1e,0xffffffff,0x12,puVar2 + 5,0xc9);
   uiSpriteSelectAnim(puVar2 + 0xdf,3);
   *(unsigned short *)((int)puVar2 + 0x3b6) = 2;
   pairSetHalves(puVar2 + 0xdf,0,0x78);
   puVar7 = puVar2 + 0x102;
-  FUN_0014e188(puVar7,0x1e,0x5c,puVar2 + 5,0xa1);
+  uiSpriteStateInitFromSource(puVar7,0x1e,0x5c,puVar2 + 5,0xa1);
   uiSpriteSetKeyframe(puVar7,0);
   uiSpriteSetImageKeyframe(puVar7,8,0);
   uiGetLayoutPointDifference(puVar7,0x1e,0x5a,0x5c);
   puVar7 = puVar2 + 0x125;
-  FUN_0014e188(puVar7,0x1e,0,puVar2 + 5,0xc9);
+  uiSpriteStateInitFromSource(puVar7,0x1e,0,puVar2 + 5,0xc9);
   uiSpriteSetKeyframe(puVar7,2,0);
   uiSpriteSetImageKeyframe(puVar7,9,0);
-  FUN_0014e188(puVar2 + 0x148,0x1e,0,puVar2 + 5,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x148,0x1e,0,puVar2 + 5,0xc9);
   uiSpriteSelectAnim(puVar2 + 0x148,5);
-  FUN_0014e188(puVar2 + 0x16b,0x1e,0x4c,puVar2 + 5,0xc9);
-  FUN_0014e188(puVar2 + 0x18e,0x1e,0,puVar2 + 5,0xc9);
-  FUN_0014e188(puVar2 + 0x1b1,0x1e,0x5d,puVar2 + 5,0xc9);
-  FUN_0014e188(puVar2 + 0x1d4,0x1e,0x57,puVar2 + 5,0xc9);
-  FUN_0014e188(puVar2 + 0x1f7,0x1e,0x4b,puVar2 + 5,0xc9);
-  FUN_0014e188(puVar2 + 0x21a,0x1e,0x4d,puVar2 + 5,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x16b,0x1e,0x4c,puVar2 + 5,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x18e,0x1e,0,puVar2 + 5,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x1b1,0x1e,0x5d,puVar2 + 5,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x1d4,0x1e,0x57,puVar2 + 5,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x1f7,0x1e,0x4b,puVar2 + 5,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x21a,0x1e,0x4d,puVar2 + 5,0xc9);
   puVar2 = g_uiQuest;
   temp_v3 = g_uiQuest[1];
   g_uiQuest[1] = 0;

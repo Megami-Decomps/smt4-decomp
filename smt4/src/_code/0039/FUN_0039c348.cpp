@@ -31,7 +31,7 @@ void FUN_002b827c(s32 sound);
 s32 FUN_0026b564(void);
 s32 vec2GetYInt(Vec2Point *point);
 s32 vec2GetXInt(Vec2Point *point);
-s32 FUN_002bf818(Vec2Point *point);
+s32 uiSpriteAdvanceAnimation(Vec2Point *point);
 
 /* Opens the panel (playing sound 0x1b unless muted), then follows its pointer until a confirmed press closes it. */
 void FUN_0039c348(CursorPanel *panel)
@@ -46,7 +46,7 @@ void FUN_0039c348(CursorPanel *panel)
     } else if (panel->state == 1) {
         Vec2Point *pointer = &panel->pointer;
 
-        if (FUN_002bf818(pointer) != 0 && FUN_0026b564() != 0) {
+        if (uiSpriteAdvanceAnimation(pointer) != 0 && FUN_0026b564() != 0) {
             panel->state = 2;
             panel->flags |= 2;
         }

@@ -4,8 +4,8 @@
 extern "C" {
 extern CampStateA *g_camp;
 extern RenderCtxA *g_renderCtx;
-void FUN_00157558(RenderCtxA *context);
-s32 FUN_001692ac(u32 enabled, u32 mode);
+void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
+s32 renderCtxPackPassFlags(u32 enabled, u32 mode);
 u32 FUN_002a4878(const void *selection);
 s32 FUN_003da8f4(s32 kind, u32 selected);
 void FUN_00227294(s32 first, s32 second, s32 enabled);
@@ -16,9 +16,9 @@ void renderCtxResetColorScale(RenderCtxA *context);
 u32 FUN_0025ec04(void)
 {
     CampStateA *camp = g_camp;
-    FUN_00157558(g_renderCtx);
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     RenderCtxA *context = g_renderCtx;
-    renderCtxPushA(context, FUN_001692ac(1, 0));
+    renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
     s32 menu = camp->menu.current;
     if (menu == 0x47)
         menu = camp->menu.previous;

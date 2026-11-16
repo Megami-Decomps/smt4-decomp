@@ -107,7 +107,7 @@ typedef char ModelResourceOwnerSizeCheck[sizeof(ModelResourceOwner) == 0x30 ? 1 
 extern "C" {
 #endif
 /* Canonical declaration (matches the definition). */
-void *FUN_0040619c(const void *owner, u32 index);
+void *ptrVectorAt(const void *owner, u32 index);
 #ifdef __cplusplus
 }
 #endif

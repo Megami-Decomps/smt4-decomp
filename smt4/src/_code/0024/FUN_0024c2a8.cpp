@@ -7,7 +7,7 @@ typedef struct MapBlock {
     /* 0xCF0 */ u8 bits[1]; /* bit tables, 8 bytes per group */
 } MapBlock;
 
-extern MapBlock *FUN_0023d2ec(void);
+extern MapBlock *saveGetFlagRowTable(void);
 
 /* Sets or clears bit `bit` of a bit table. */
 static __inline void bitTableSet(u8 *table, u32 bit, s32 set)
@@ -25,7 +25,7 @@ static __inline void bitTableSet(u8 *table, u32 bit, s32 set)
 /* Sets or clears bit `bit` of group `group`'s bit table. */
 void FUN_0024c2a8(s32 group, u32 bit, s32 set)
 {
-    bitTableSet(FUN_0023d2ec()->bits + group * 8, bit, set);
+    bitTableSet(saveGetFlagRowTable()->bits + group * 8, bit, set);
 }
 
 }

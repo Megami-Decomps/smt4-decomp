@@ -11,7 +11,7 @@ typedef struct Light {
     /* 0x11DC */ s8 dirty;
 } Light;
 
-int FUN_002b634c(u32 target, void *params);
+int gpuWriteVertexUniformVec4(u32 target, void *params);
 
 /* Sets the light's intensity; when it changed (or was marked dirty) pushes the parameters to the target. Clears the dirty flag. */
 void lightSetIntensity(Light *light, f32 intensity)
@@ -23,7 +23,7 @@ void lightSetIntensity(Light *light, f32 intensity)
     }
     if (!unchanged) {
         light->intensity = intensity;
-        FUN_002b634c(light->target, light->params);
+        gpuWriteVertexUniformVec4(light->target, light->params);
     }
     light->dirty = 0;
 }

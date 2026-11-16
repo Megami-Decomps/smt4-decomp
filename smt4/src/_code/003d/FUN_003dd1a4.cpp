@@ -9,7 +9,7 @@ int FUN_002276f8(...);
 int asdModelClearSlotColors(...);
 int modelSetAnimationChannels(...);
 int animPlayerSetLoopPolicy(...);
-int FUN_0028c618(...);
+int modelPartSetRotationDegrees(...);
 int btlGetMainState(...);
 int asdLoadFileAsyncSimple(...);
 int lightOwnerRegister(...);
@@ -41,7 +41,7 @@ extern unsigned int DAT_00435d18; /* 0x435d18 */
 extern int keyedRecordFindByName(int);
 extern int FUN_002522e0(unsigned char *, unsigned int);
 /* Supplied declaration required: animPlayerSetLoopPolicy. */
-/* Supplied declaration required: FUN_0028c618. */
+/* Supplied declaration required: modelPartSetRotationDegrees. */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: lightOwnerRegister. */
@@ -171,7 +171,7 @@ unsigned int FUN_003dd1a4(int param_1,unsigned int param_2,unsigned int param_3,
         if (*(int *)(*(int *)(temp_v1 + 8) + 0xc) < 0) {
           lightOwnerRegister(temp_v1,1);
         }
-        FUN_0028c618(*(unsigned int *)(*puVar8 + 8),0);
+        modelPartSetRotationDegrees(*(unsigned int *)(*puVar8 + 8),0);
         modelSetAnimationChannels(*puVar8,0);
         animOwnerSetScale(*puVar8, 0.0f);
         animPlayerSetLoopPolicy(*(unsigned int *)(*puVar8 + 8),1);

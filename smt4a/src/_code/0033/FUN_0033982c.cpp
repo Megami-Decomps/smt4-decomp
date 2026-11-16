@@ -13,8 +13,8 @@ struct GameStateView {
 extern GameStateView g_gameState;
 
 
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
+int libm_cosf(void);
+int libm_sinf(void);
 int mathAngleDeltaDegrees(void);
 int mapIfStart(...);
 int FUN_0030250c(void);
@@ -50,8 +50,8 @@ extern signed char DAT_005f1c70; /* 0x5f1c70 */
 extern int gameFlagsGetBlock(void);
 extern int slotIsActive(unsigned int);
 extern int padButtonIsPressed(unsigned int);
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 extern unsigned int FUN_0029202c(void);
 /* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: mapIfStart. */
@@ -433,11 +433,11 @@ LAB_00339bb4:
     temp_v16 = -temp_v15;
   }
   temp_v14 = DAT_005806ac * 0.017453292f;
-  FUN_001bc124();
+  libm_sinf();
   temp_v21 = 80.0f;
   temp_v22 = temp_v22 + temp_v14 * 80.0f;
   temp_v14 = DAT_005806ac * temp_v17;
-  FUN_001bbf0c();
+  libm_cosf();
   temp_v13 = 150.0f;
   temp_v24 = temp_v24 + temp_v14 * temp_v21;
   temp_v23 = temp_v23 + 150.0f;
@@ -449,11 +449,11 @@ LAB_00339bb4:
   temp_v23 = *(float *)(g_lmapScene + 0x20);
   temp_v24 = *(float *)(g_lmapScene + 0x24);
   temp_v14 = DAT_005806ac * temp_v17;
-  FUN_001bc124();
+  libm_sinf();
   temp_v21 = 300.0f;
   temp_v22 = temp_v22 + temp_v14 * 300.0f;
   temp_v17 = DAT_005806ac * temp_v17;
-  FUN_001bbf0c();
+  libm_cosf();
   temp_v24 = temp_v24 + temp_v17 * temp_v21;
   temp_v23 = temp_v23 + temp_v13;
   temp_v25 = *(unsigned int *)(g_lmapScene + 0x1c);

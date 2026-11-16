@@ -9,7 +9,7 @@ extern GameState g_gameState;
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 AsdMdlObject *asdMdlManagerCreateLoaded(const char *path, u32 flags);
 void nodeSetTranslation(AsdMdlNode *node, u32 mode, const f32 *position);
-void FUN_0028c618(AsdMdlNode *node, u32 mode, f32 x, f32 y, f32 z);
+void modelPartSetRotationDegrees(AsdMdlNode *node, u32 mode, f32 x, f32 y, f32 z);
 
 void FUN_001a9008(f32 x, f32 y, f32 z, f32 heading)
 {
@@ -36,6 +36,6 @@ void FUN_001a9008(f32 x, f32 y, f32 z, f32 heading)
     work->model = asdMdlManagerCreateLoaded(path, 7);
     lightOwnerRegister(work->model, 1);
     nodeSetTranslation(work->model->node, 0, work->state.position);
-    FUN_0028c618(work->model->node, 0, 0.0f, work->state.heading, 0.0f);
+    modelPartSetRotationDegrees(work->model->node, 0, 0.0f, work->state.heading, 0.0f);
 }
 }

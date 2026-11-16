@@ -18,7 +18,7 @@ int partyIdsReset(...);
 int partyIdsActivateEntry(...);
 int slotPoolResetTrackedState(void);
 int FUN_004cf7cc(...);
-int FUN_004d05c4(...);
+int messageIdListSetRange(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 5 slot(s), 20 byte(s) */
@@ -55,7 +55,7 @@ extern unsigned int DAT_0057f0b8; /* 0x57f0b8 */
 /* Supplied declaration required: FUN_004cf7cc. */
 extern int flaggedValueHolderGetTotal(int *);
 extern int rangeGetMinimumLimit(int *);
-/* Supplied declaration required: FUN_004d05c4. */
+/* Supplied declaration required: messageIdListSetRange. */
 extern unsigned int *_ZN9Obj422594C1Ev(void);
 
 
@@ -120,7 +120,7 @@ void Obj55c89c::start()
   if (temp_v0 >= 10) {
     temp_v0 = 10;
   }
-  FUN_004d05c4(param_1 + 0x206,0x14,0x40e,temp_v0);
+  messageIdListSetRange(param_1 + 0x206,0x14,0x40e,temp_v0);
   *(unsigned char *)(param_1 + 0x20a) = 1;
   buttonHelpSetText(0,0xf4f4f4ff);
   param_1[5] = 0;

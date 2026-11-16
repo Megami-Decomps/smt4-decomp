@@ -14,7 +14,7 @@ typedef struct RunWinWork {
     /* 0x14 */ u8 active;
     /* 0x15 */ u8 unk15[0x3];
     /* 0x18 */ u8 sound[0x20];             /* sound player object (constructed in place) */
-    /* 0x38 */ u8 ui[0x8c];                /* UI object set up by FUN_002bd954 */
+    /* 0x38 */ u8 ui[0x8c];                /* UI object set up by uiSpriteStateInitFromSource */
     /* 0xC4 */ u8 text[0x20];
 } RunWinWork;
 

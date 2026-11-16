@@ -32,7 +32,7 @@ extern ConfigMenu* g_config;
 extern TitleScene* g_titleScene;
 
 s32 resourceRunOperationIfUnblocked(ConfigMenu* menu);
-void FUN_002bf380(s32 a, s32 b, s32 c, s32 x, s32 y, s32 d);
+void texDrawCompositeSprite(s32 a, s32 b, s32 c, s32 x, s32 y, s32 d);
 LayoutEntry* asdTMTexTableEntryAt(u32 group, u32 index);
 s32 packNibblesAndByte(u32 a, u32 b, u32 c);
 s32 gameFlagIsSet(u32 flag);
@@ -64,15 +64,15 @@ void FUN_0018b49c(s32 x, s32 y)
     ConfigMenu* menu = g_config;
     resourceRunOperationIfUnblocked(menu);
     FUN_0029efa8(menu);
-    FUN_002bf380(2, 0x2f, 0, x, y, 0xb);
+    texDrawCompositeSprite(2, 0x2f, 0, x, y, 0xb);
     u32 color = 0xe09800ff;
     LayoutEntry* frame = asdTMTexTableEntryAt(0x2f, 0x20);
     s32 rowX = frame->x + x;
     s32 rowY = frame->y + y;
     setDrawState(packNibblesAndByte(6, 1, 0));
-    FUN_002bf288(2, 0x2f, 0xc, rowX, rowY, 0xb);
+    texDrawTableEntryAtStoredOrigin(2, 0x2f, 0xc, rowX, rowY, 0xb);
     setDrawState(packNibblesAndByte(6, 7, 0));
-    FUN_002bf380(2, 0x2f, 1, rowX, rowY, 0x10);
+    texDrawCompositeSprite(2, 0x2f, 1, rowX, rowY, 0x10);
 
     u32 variant = 0xffffffff;
     if (gameFlagIsSet(0x555) && gameFlagIsSet(0x557)) {

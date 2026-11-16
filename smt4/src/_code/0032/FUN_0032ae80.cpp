@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002881bc(void);
-int FUN_0028836c(void);
+int libm_sinf(void);
 int statusCameraApply(void);
 int renderCtxResetColorScale(int);
 int renderCtxApplyTransforms(int);
@@ -36,12 +36,12 @@ static float romwright_sqrt_4(float value)
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_002881bc. */
-/* Supplied declaration required: FUN_0028836c. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: statusCameraApply. */
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
-extern int FUN_002c501c(void);
-extern int FUN_002c5d80(unsigned int, unsigned int);
+extern int asdCameraGetSavedRenderPairs(void);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0033e160. */
 
 
@@ -68,7 +68,7 @@ unsigned int FUN_0032ae80(void)
   
   temp_v3 = g_titleScene;
   temp_v1 = g_screenStateWork;
-  temp_v2 = FUN_002c5d80(1,0);
+  temp_v2 = renderCtxPackPassFlags(1,0);
   piVar7 = (int *)(temp_v3 + 0x124c);
   temp_v4 = *piVar7;
   temp_v5 = piVar7[temp_v4 + 2];
@@ -107,7 +107,7 @@ unsigned int FUN_0032ae80(void)
   }
   else if (*(int *)(temp_v1 + 8) <= temp_v3) goto LAB_0032b100;
   statusCameraApply();
-  temp_v3 = FUN_002c501c();
+  temp_v3 = asdCameraGetSavedRenderPairs();
   temp_v10 = 1.0f;
   temp_v11 = 0.0f;
   temp_v12 = 0.0f;
@@ -120,7 +120,7 @@ unsigned int FUN_0032ae80(void)
   temp_v9 = temp_v9 * 0.0f;
   temp_v7 = temp_v8 * 0.0f + temp_v9 * 0.0f + temp_v6 * -1.0f;
   if ((temp_v7 != 1.0f) && (temp_v7 != -1.0f)) {
-    FUN_0028836c();
+    libm_sinf();
     in_fpscr = in_fpscr & 0xfffffff;
   }
   temp_v11 = *(float *)(temp_v3 + 0x10) + temp_v8 * 20.0f;

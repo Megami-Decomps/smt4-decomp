@@ -67,12 +67,12 @@ void FUN_002fa4dc(int param_1,int param_2)
         temp_v8 = param_1 + temp_v7 * 2;
         if (*(short *)(temp_v8 + 0x38a8) <
             *(short *)(param_1 + *(int *)(param_1 + 0x3890) * 2 + 0x38a8)) {
-          FUN_001835b4(2,0xd,0x12,temp_v4,temp_v3,0x1f);
-          FUN_001835b4(2,0xd,*(short *)(temp_v8 + 0x38a8) + 0x17,temp_v4,temp_v3,0x24);
+          texDrawTableEntryAtStoredOrigin(2,0xd,0x12,temp_v4,temp_v3,0x1f);
+          texDrawTableEntryAtStoredOrigin(2,0xd,*(short *)(temp_v8 + 0x38a8) + 0x17,temp_v4,temp_v3,0x24);
         }
         else {
-          FUN_001835b4(2,0xd,0x11,temp_v4,temp_v3,0x1f);
-          FUN_001835b4(2,0xd,*(short *)(temp_v8 + 0x38a8) + 0x13,temp_v4,temp_v3,0x24);
+          texDrawTableEntryAtStoredOrigin(2,0xd,0x11,temp_v4,temp_v3,0x1f);
+          texDrawTableEntryAtStoredOrigin(2,0xd,*(short *)(temp_v8 + 0x38a8) + 0x13,temp_v4,temp_v3,0x24);
         }
       }
       efctSetSpeed();

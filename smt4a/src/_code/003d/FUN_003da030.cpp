@@ -7,7 +7,7 @@
 extern "C" {
 
 int textDrawString(...);
-int FUN_00164b5c(int, int, int, int, int, int);
+int texDrawCompositeSprite(int, int, int, int, int, int);
 int vec2GetXInt(...);
 int efctSetSpeed(void);
 int renderCtxResetColorScale(...);
@@ -35,12 +35,12 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: FUN_00164b5c. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: vec2GetXInt. */
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-extern int FUN_001692ac(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
@@ -67,9 +67,9 @@ unsigned int FUN_003da030(void)
   
   temp_v3 = DAT_0057f2c4;
   if (*(int *)(DAT_0057f2c4 + 4) != 0) {
-    FUN_00157558(reinterpret_cast<RenderCtxA *>(g_renderCtx));
+    renderCtxSelectDisplayAreaForStereoMode(reinterpret_cast<RenderCtxA *>(g_renderCtx));
     temp_v2 = g_renderCtx;
-    temp_v1 = FUN_001692ac(1,0);
+    temp_v1 = renderCtxPackPassFlags(1,0);
     piVar7 = (int *)(temp_v2 + 0x1258);
     temp_v4 = *piVar7;
     temp_v5 = piVar7[temp_v4 + 2];
@@ -107,7 +107,7 @@ unsigned int FUN_003da030(void)
           (**(romwright_code **)(temp_v2 + 0x12d4))();
           *(unsigned char *)(temp_v2 + 0x12d0) = 0;
         }
-        FUN_001835b4(2,0x1a,0x204,0,0,0x5b);
+        texDrawTableEntryAtStoredOrigin(2,0x1a,0x204,0,0,0x5b);
         temp_v2 = g_renderCtx;
         temp_v4 = packNibblesAndByte(6,7,0);
         piVar7 = (int *)(temp_v2 + 0x12b8);
@@ -118,14 +118,14 @@ unsigned int FUN_003da030(void)
           *(unsigned char *)(temp_v2 + 0x12d0) = 0;
         }
         efctSetSpeed();
-        FUN_001835b4(2,0x1a,0x205,0,0,0x60);
+        texDrawTableEntryAtStoredOrigin(2,0x1a,0x205,0,0,0x60);
         efctSetSpeed();
       }
     }
     temp_v2 = vec2GetXInt(temp_v3 + 0x360);
     temp_v4 = vec2GetYInt(temp_v3 + 0x360);
-    FUN_00164b5c(2,0x1a,1,temp_v2,temp_v4,0x65);
-    FUN_001835b4(2,0x1a,0x206,temp_v2,temp_v4,0x65);
+    texDrawCompositeSprite(2,0x1a,1,temp_v2,temp_v4,0x65);
+    texDrawTableEntryAtStoredOrigin(2,0x1a,0x206,temp_v2,temp_v4,0x65);
     temp_v0 = *(short *)(temp_v3 + 0x1e);
     pcVar8 = (char *)0x0;
     if (temp_v0 == 2) {

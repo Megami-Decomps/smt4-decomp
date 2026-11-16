@@ -59,7 +59,7 @@ typedef struct SkillOwner {
 
 extern u64 g_btlTargetableMask;
 
-s32 FUN_0026264c(u16 recordId);
+s32 itemIsCollectedWithRelated(u16 recordId);
 s32 valueAtF0IsReady(SkillOwner *owner);
 s32 FUN_004c4604(u32 id, s32 a, s32 b, s32 casterSlot, s32 targetSlot, s32 c, u32 d, u8 *out);
 s32 FUN_004bfcfc(u32 id, s32 a, s32 b, s32 casterSlot, s32 targetSlot, u32 c, u32 d);
@@ -114,7 +114,7 @@ u32 FUN_004e9bd0(SkillOwner **owner, SkillContext *context, SkillRecord *skill, 
         if ((targets[i]->flags & g_btlTargetableMask) == 0) {
             continue;
         }
-        if (FUN_0026264c(targets[i]->recordId) == 0) {
+        if (itemIsCollectedWithRelated(targets[i]->recordId) == 0) {
             u32 id = targets[i]->recordId;
 
             if (((*owner)->unkEC < 0 || ((*owner)->flags & 0x80) == 0) && id != 0x493 && id != 0x494 && id != 0x495

@@ -17,7 +17,7 @@ extern "C" {
 
 extern IdValuePair DAT_0057a46c[11];
 
-PartySlot *FUN_003e4d68(u16 index);
+PartySlot *partyGetSlot(u16 index);
 s32 FUN_003e4d98(PartySlot *slot);
 u32 lcgRandomRange(u16 limit);
 
@@ -30,7 +30,7 @@ u32 FUN_0047f5b8(void)
     s32 i;
 
     for (i = 0; i < 12; i++) {
-        PartySlot *slot = FUN_003e4d68(i);
+        PartySlot *slot = partyGetSlot(i);
         if (FUN_003e4d98(slot) != 0) {
             ids[count++] = slot->id;
         }

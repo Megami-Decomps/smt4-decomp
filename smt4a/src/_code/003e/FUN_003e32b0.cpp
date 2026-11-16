@@ -42,7 +42,7 @@ void FUN_003c3e14(void);
 void FUN_003c1060(void);
 void fillThreeWordsWithByte(s32 *words, u32 value);
 ShopEntryRecord *devilGetRecord(u32 id);
-u32 FUN_00180118(u32 id);
+u32 dataTable01GetRecordWithAocOverride(u32 id);
 s32 gameFlagIsSet(u32 flag);
 s32 gameDataCopySaveEntry(u16 id, u8 *out);
 
@@ -71,7 +71,7 @@ void FUN_003e32b0(NpcShopSelect *scene)
                 if (found == 0 || (*(u16 *)(save + 0x36) & 0xFC) == 0)
                     continue;
             }
-            FUN_003180c4(count, reinterpret_cast<const char *>(FUN_00180118(slots[i].id)));
+            scrSetStringSlot(count, reinterpret_cast<const char *>(dataTable01GetRecordWithAocOverride(slots[i].id)));
             scene->choices[count] = i;
             count++;
         }

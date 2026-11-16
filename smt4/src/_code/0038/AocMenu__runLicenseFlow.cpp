@@ -8,7 +8,7 @@ extern "C" {
 
 int aocMenuSetButtonHelp(unsigned int *, int, int);
 int jobStopAndClearFlags(unsigned int *);
-int FUN_00233db8(unsigned int *, int);
+int aocLoadingTaskStart(unsigned int *, int);
 int FUN_00233e70(unsigned int *, int, int);
 int FUN_00234124(unsigned int *, unsigned int *);
 
@@ -24,7 +24,7 @@ extern int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: aocMenuSetButtonHelp. */
 /* Supplied declaration required: jobStopAndClearFlags. */
-/* Supplied declaration required: FUN_00233db8. */
+/* Supplied declaration required: aocLoadingTaskStart. */
 /* Supplied declaration required: FUN_00233e70. */
 /* Supplied declaration required: FUN_00233fcc. */
 /* Supplied declaration required: FUN_00234124. */
@@ -83,7 +83,7 @@ void AocMenu::runLicenseFlow()
           FUN_00233fcc(puVar3,6);
           param_1[0x82] = (unsigned int)puVar3;
           param_1[2] = 3;
-          FUN_00233db8(param_1,1);
+          aocLoadingTaskStart(param_1,1);
           return;
         }
         if (temp_v0 != 3) {
@@ -100,7 +100,7 @@ void AocMenu::runLicenseFlow()
           if ((int *)param_1[0x82] != (int *)0x0) {
             (**(romwright_code **)(*(int *)param_1[0x82] + 4))();
           }
-          FUN_00233db8(param_1,0);
+          aocLoadingTaskStart(param_1,0);
           puVar3 = param_1 + 0x83;
           FUN_00233fcc(puVar3,0);
           param_1[2] = 4;
@@ -232,7 +232,7 @@ void AocMenu::runLicenseFlow()
     temp_v1 = strIsEmpty(&record.word(0));
     if (temp_v1 != 0) {
       param_1[2] = 5;
-      FUN_00233db8(param_1,1);
+      aocLoadingTaskStart(param_1,1);
       return;
     }
     temp_v1 = byteIsAtLeast100(&record.word(0));

@@ -42,7 +42,7 @@ u8 FUN_0013e8f8(u32 job)
         return 0;
     }
     if (work->enabled) {
-        FUN_00157558(g_renderCtx);
+        renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         if (work->fadeInFrames > 0 || work->fadeOutFrames > 0) {
             work->frame++;
             if (work->fadeOutFrames <= 0) {

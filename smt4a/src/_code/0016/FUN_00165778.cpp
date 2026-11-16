@@ -56,7 +56,7 @@ void FUN_00165778(ItemBadge* badge, TextureTableEntryIV* frame)
     skinObjectUpdateMatrices(g_renderCtx);
 
     TextureTableEntryIV* rect = asdTMTexTableEntryAt(8, 427);
-    FUN_001835b4(2, 8, 424, rect->x + vec2GetXInt(badge->anchor), rect->y, 101);
+    texDrawTableEntryAtStoredOrigin(2, 8, 424, rect->x + vec2GetXInt(badge->anchor), rect->y, 101);
     TextureTableEntryIV* countRect = asdTMTexTableEntryAt(8, 426);
     if (badge->mode != 3) {
         FUN_00180310(6, rect->x + countRect->x + vec2GetXInt(badge->anchor), rect->y + countRect->y, 1, 2, 121, "%d", badge->count);

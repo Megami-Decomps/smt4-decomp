@@ -1,6 +1,6 @@
 #include "status/StatusCamera.h"
 
-extern "C" void FUN_002a6dcc(const Vec3 *eye, const Vec3 *direction, const Vec3 *rotation,
+extern "C" void statusCameraSetup(const Vec3 *eye, const Vec3 *direction, const Vec3 *rotation,
                               f32 nearClip, f32 farClip, f32 fov, f32 distance, f32 scale);
 
 /* Select the close-up, full-body or origin camera preset for a status model. */
@@ -20,7 +20,7 @@ extern "C" void statusCameraSelectPreset(s32 preset)
         rotation.x = 0.0f;
         rotation.y = 0.0f;
         rotation.z = 0.0f;
-        FUN_002a6dcc(&eye, &direction, &rotation, 0.1f, 25600.0f, 35.0f, 4.5f, 2.8f);
+        statusCameraSetup(&eye, &direction, &rotation, 0.1f, 25600.0f, 35.0f, 4.5f, 2.8f);
         break;
     case 1:
         eye.x = 0.0f;
@@ -32,7 +32,7 @@ extern "C" void statusCameraSelectPreset(s32 preset)
         rotation.x = 0.0f;
         rotation.y = 0.0f;
         rotation.z = 0.0f;
-        FUN_002a6dcc(&eye, &direction, &rotation, 1.0f, 10000.0f, 34.3f, 120.0f, 0.25f);
+        statusCameraSetup(&eye, &direction, &rotation, 1.0f, 10000.0f, 34.3f, 120.0f, 0.25f);
         break;
     case 2:
         eye.x = 0.0f;
@@ -44,7 +44,7 @@ extern "C" void statusCameraSelectPreset(s32 preset)
         rotation.x = 0.0f;
         rotation.y = 0.0f;
         rotation.z = 0.0f;
-        FUN_002a6dcc(&eye, &direction, &rotation, 1.0f, 10000.0f, 34.3f, 10.0f, 0.25f);
+        statusCameraSetup(&eye, &direction, &rotation, 1.0f, 10000.0f, 34.3f, 10.0f, 0.25f);
         break;
     }
 }

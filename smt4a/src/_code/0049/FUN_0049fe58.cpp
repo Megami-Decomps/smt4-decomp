@@ -44,7 +44,7 @@ extern "C" {
 SlotRecord *gameGetSlotRecord(s32 slot);
 s32 gameSlotTableFindFree(void);
 s32 unitHasRankingBonus(u16 id);
-void FUN_00408184(s32 kind, s32 amount);
+void gameCounterAddSaturating(s32 kind, s32 amount);
 }
 
 /* The slot's HP limit (with the 1.25x bonus for ids unitHasRankingBonus accepts). */
@@ -92,7 +92,7 @@ extern "C" void FUN_0049fe58(u32 mode, f32 percent)
         PlayerRecord *player = reinterpret_cast<PlayerRecord *>(gameGetPlayerData());
         player->hp = limitHp(newHp, player->maxHp);
         if (hp - remaining > 0.0f) {
-            FUN_00408184(0x17, (s32)hp - (s32)remaining);
+            gameCounterAddSaturating(0x17, (s32)hp - (s32)remaining);
         }
     }
     s32 count;
@@ -137,7 +137,7 @@ extern "C" void FUN_0049fe58(u32 mode, f32 percent)
             record->hp = limitHp(newHp, slotHpLimit(record));
         }
         if (hp - remaining > 0.0f) {
-            FUN_00408184(0x17, (s32)hp - (s32)remaining);
+            gameCounterAddSaturating(0x17, (s32)hp - (s32)remaining);
         }
     }
 }

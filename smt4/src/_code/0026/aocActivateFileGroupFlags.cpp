@@ -3,9 +3,9 @@
 #include "addon/AocSystem_GroupedFileTables.h"
 
 extern "C" {
-s32 FUN_002ac12c(FileTableGroup *);
-FileTableKindRecord *FUN_002ac0f8(FileTableGroup *);
-u32 FUN_002ac0c4(FileTableGroup *);
+s32 packageEntryIsLoaded(FileTableGroup *);
+FileTableKindRecord *packageEntryGetDirectory(FileTableGroup *);
+u32 packageEntryGetFileCount(FileTableGroup *);
 s32 gameFlagIsSet(u32);
 
 s32 flagValueIsPositive(u32);
@@ -23,10 +23,10 @@ void aocActivateFileGroupFlags(GroupedFileTables *owner)
     };
     for (s32 groupIndex = 0; groupIndex < owner->count; ++groupIndex) {
         FileTableGroup *group = &owner->groups[groupIndex];
-        if (FUN_002ac12c(group) == 0)
+        if (packageEntryIsLoaded(group) == 0)
             continue;
-        FileFlagView *records = reinterpret_cast<FileFlagView *>(FUN_002ac0f8(group));
-        u32 count = FUN_002ac0c4(group);
+        FileFlagView *records = reinterpret_cast<FileFlagView *>(packageEntryGetDirectory(group));
+        u32 count = packageEntryGetFileCount(group);
         for (u32 index = 0; index < count; ++index) {
             FileFlagView *record = &records[index];
             if (record->kind != '0') {

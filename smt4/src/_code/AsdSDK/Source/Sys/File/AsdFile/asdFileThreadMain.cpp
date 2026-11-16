@@ -6,14 +6,14 @@ extern "C" {
 
 int refIsNullOrZero(...);
 int threadSleepDuration(...);
-int FUN_002bb5a4(...);
+int archivePathDeviceOpen(...);
 int asdMemoryAllocAligned(...);
 int asdOperatorNew(...);
 int nn_os_LightEvent_Wait(...);
 int FUN_002c40f8(...);
 int asdMemFree(...);
 int FUN_002c5254(...);
-int FUN_002c526c(...);
+int resultHandleFailure(...);
 int asdFatalError(...);
 int FUN_002c618c(...);
 int builtin_strncpy(...);
@@ -39,14 +39,14 @@ extern unsigned int DAT_00465124; /* 0x465124 */
 extern int FUN_002b90c8(int *, unsigned int, unsigned int *);
 /* Supplied declaration required: refIsNullOrZero. */
 /* Supplied declaration required: threadSleepDuration. */
-/* Supplied declaration required: FUN_002bb5a4. */
+/* Supplied declaration required: archivePathDeviceOpen. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: nn_os_LightEvent_Wait. */
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002c5254. */
-/* Supplied declaration required: FUN_002c526c. */
+/* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: asdFatalError. */
 /* Supplied declaration required: FUN_002c618c. */
 extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
@@ -88,14 +88,14 @@ void asdFileThreadMain(void)
     puVar1 = temp_v3;
     FUN_002c40f8(puVar1,&uStack_240,1,0);
     if ((int)puVar1 < 0) {
-      FUN_002c526c();
+      resultHandleFailure();
     }
     piVar8 = DAT_00465010;
     piVar2 = &temp_v2;
     FUN_002c5254(&temp_v2,g_asdFileMutex,1);
     while( 1 ) {
       if ((int)piVar2 < 0) {
-        FUN_002c526c();
+        resultHandleFailure();
       }
       if (piVar8 == (int *)0x0) break;
       if (g_asdFile != '\0') {
@@ -109,14 +109,14 @@ void asdFileThreadMain(void)
           puVar1 = temp_v3;
           FUN_002c40f8(puVar1,&uStack_240,1,0);
           if ((int)puVar1 < 0) {
-            FUN_002c526c();
+            resultHandleFailure();
           }
           (*(romwright_code *)piVar8[0x4e])(piVar8 + 0xb);
           piVar8[0x4e] = 0;
           piVar2 = &temp_v2;
           FUN_002c5254(&temp_v2,g_asdFileMutex,1);
           if ((int)piVar2 < 0) {
-            FUN_002c526c();
+            resultHandleFailure();
           }
         }
         switch(*piVar8) {
@@ -178,7 +178,7 @@ void asdFileThreadMain(void)
           temp_v4[10] = '\0';
           temp_v4[0xb] = '\0';
           pcVar3 = temp_v4;
-          FUN_002bb5a4(temp_v4,&temp_v2,uStack_38);
+          archivePathDeviceOpen(temp_v4,&temp_v2,uStack_38);
           if (((unsigned int)pcVar3 & 0x80000000) != 0) {
             *piVar8 = 5;
           }
@@ -253,7 +253,7 @@ void asdFileThreadMain(void)
           puVar1 = temp_v3;
           FUN_002c40f8(puVar1,&uStack_240,1,0);
           if ((int)puVar1 < 0) {
-            FUN_002c526c();
+            resultHandleFailure();
           }
           piVar2 = (int *)piVar8[0x4d];
           if ((int *)piVar8[0x4d] == (int *)0x0) {
@@ -264,7 +264,7 @@ void asdFileThreadMain(void)
           FUN_002c5254(&temp_v2,g_asdFileMutex,1);
 joined_r0x0011436c:
           if ((int)piVar2 < 0) {
-            FUN_002c526c();
+            resultHandleFailure();
           }
         }
         uStack_240 = g_asdFileMutex;
@@ -273,7 +273,7 @@ joined_r0x0011436c:
         puVar1 = temp_v3;
         FUN_002c40f8(puVar1,&uStack_240,1,0);
         if ((int)puVar1 < 0) {
-          FUN_002c526c();
+          resultHandleFailure();
         }
         piVar8 = (int *)piVar8[0x4f];
         piVar2 = &temp_v2;
@@ -286,7 +286,7 @@ joined_r0x0011436c:
         puVar1 = temp_v3;
         FUN_002c40f8(puVar1,&uStack_240,1,0);
         if ((int)puVar1 < 0) {
-          FUN_002c526c();
+          resultHandleFailure();
         }
         temp_v1 = piVar8[1];
         piVar8[1] = temp_v1 - piVar8[2];

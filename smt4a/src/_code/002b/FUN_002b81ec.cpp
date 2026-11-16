@@ -10,11 +10,11 @@ int FUN_0033ad04(void);
 int sysPlayVoice(...);
 int controllerGetSourceValue(...);
 int controllerGetSourceTiming(...);
-int FUN_003fd7c0(...);
+int moriModelUnitStartMaterialAnimation(...);
 
 int CONCAT44(...);
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
+int libm_cosf(void);
+int libm_sinf(void);
 int FUN_002469d0(void);
 int FUN_0025ef68(int, int, int);
 float mathSnapHeading16(float angle);
@@ -31,11 +31,11 @@ int FUN_00325998(...);
 int FUN_00327ee8(void);
 void lmapSceneStartMovement(signed char);
 int FUN_00354098(void);
-int FUN_00408184(...);
+int gameCounterAddSaturating(...);
 int FUN_004a01c8(...);
 int FUN_004a0524(void);
 int FUN_004a08f0(void);
-int FUN_0050d8e4(void);
+int __hardfp_atan2f(void);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
 
@@ -77,8 +77,8 @@ extern int padButtonRepeat(unsigned int);
 extern int padButtonIsPressed(unsigned int);
 extern int randBetween(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_002469d0. */
 /* Supplied declaration required: FUN_0025ef68. */
 extern unsigned int FUN_0029202c(void);
@@ -98,19 +98,19 @@ extern int FUN_002e5db4(void);
 /* Supplied declaration required: FUN_0033ad04. */
 /* Supplied declaration required: FUN_00354098. */
 /* Supplied declaration required: sysPlayVoice. */
-extern unsigned int FUN_003d4ed8(unsigned int);
+extern unsigned int soundActorStartOnFreeChannel(unsigned int);
 extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: controllerGetSourceValue. */
 extern int linkHolderCheckFirst(unsigned int);
 /* Supplied declaration required: controllerGetSourceTiming. */
-/* Supplied declaration required: FUN_003fd7c0. */
-/* Supplied declaration required: FUN_00408184. */
+/* Supplied declaration required: moriModelUnitStartMaterialAnimation. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: FUN_004a01c8. */
 /* Supplied declaration required: FUN_004a0524. */
 /* Supplied declaration required: FUN_004a08f0. */
 extern int partyAnyMemberHasFlagBit(unsigned int, unsigned int);
 extern int inputIsQuestCancelPressed(void);
-/* Supplied declaration required: FUN_0050d8e4. */
+/* Supplied declaration required: __hardfp_atan2f. */
 
 
 void FUN_002b81ec(void)
@@ -217,7 +217,7 @@ void FUN_002b81ec(void)
             *(unsigned int *)(temp_v5 + 0x278) = 0;
             *(unsigned int *)(temp_v5 + 0x27c) = 0;
             mapSetSceneState(3);
-            FUN_00408184(0x14,1);
+            gameCounterAddSaturating(0x14,1);
             FUN_002e364c(g_lmapScene + 0x28);
             FUN_00327ee8();
             if (*(int *)(g_lmapScene + 0x1d0) == 1 || *(int *)(g_lmapScene + 0x1d0) == 9) {
@@ -314,7 +314,7 @@ void FUN_002b81ec(void)
         *(int *)(temp_v2 + 0xdec) = temp_v6;
         if (temp_v6 >= 0x1f) {
           *(int *)(temp_v2 + 0xdec) = temp_v5 - 0x1d;
-          FUN_00408184(0x1d,1);
+          gameCounterAddSaturating(0x1d,1);
         }
       }
       else {
@@ -324,7 +324,7 @@ void FUN_002b81ec(void)
         *(unsigned int *)(temp_v5 + 0x274) = 0;
         *(unsigned int *)(temp_v5 + 0x278) = 0;
         *(unsigned int *)(temp_v5 + 0x27c) = 0;
-        FUN_0050d8e4();
+        __hardfp_atan2f();
         temp_v26 = temp_v26 * 57.32484f;
         if (*(char *)(g_lmapScene + 0x10) != '\0') {
           temp_v13 = *(float *)(g_lmapScene + 0x14);
@@ -414,13 +414,13 @@ void FUN_002b81ec(void)
         temp_v14 = temp_v14 * 0.017453292f;
         *(unsigned char *)(temp_v5 + 0x6c) = 1;
         *(int *)(temp_v5 + 0x7c) = (int)((unsigned long long)temp_v17 >> 0x20);
-        FUN_001bc124();
+        libm_sinf();
         temp_v5 = g_lmapScene;
         temp_v21 = (float)((unsigned long long)temp_v22 >> 0x20);
         *(float *)(g_lmapScene + 0x28) =
              *(float *)(g_lmapScene + 0x28) + temp_v14 * (float)((unsigned long long)temp_v17 >> 0x20);
         temp_v13 = *(float *)(temp_v5 + 0x50) * temp_v13;
-        FUN_001bbf0c();
+        libm_cosf();
         temp_v5 = g_lmapScene;
         *(float *)(g_lmapScene + 0x30) =
              *(float *)(g_lmapScene + 0x30) + temp_v13 * (float)((unsigned long long)temp_v17 >> 0x20);
@@ -467,7 +467,7 @@ void FUN_002b81ec(void)
           FUN_004a01c8(2,5);
           *(unsigned int *)(g_lmapScene + 0x160) = temp_v8;
           FUN_00325998(0xf,0x50);
-          temp_v8 = FUN_003d4ed8(0x1000224);
+          temp_v8 = soundActorStartOnFreeChannel(0x1000224);
           temp_v5 = g_lmapScene;
           *(unsigned int *)(g_lmapScene + 0x1a0) = temp_v8;
           *(unsigned int *)(temp_v5 + 0x1a4) = 0x14;
@@ -479,7 +479,7 @@ void FUN_002b81ec(void)
       *(float *)(temp_v2 + 0xde8) = temp_v14;
       if ((int)temp_v14 >= 0x47c35001) {
         *(float *)(temp_v2 + 0xde8) = temp_v14 - 100000.0f;
-        FUN_00408184(0x12,1);
+        gameCounterAddSaturating(0x12,1);
       }
       temp_v8 = 0x44bb8000;
       temp_v14 = *(float *)(temp_v2 + 0xdf0) + temp_v13;
@@ -543,7 +543,7 @@ void FUN_002b81ec(void)
           *(unsigned char *)(g_lmapScene + 0x23c) = 1;
           temp_v5 = gameFlagIsSet(0x4c9);
           if ((temp_v5 == 0) || (temp_v5 = FUN_002e5db4(), temp_v5 != 0)) {
-            FUN_003fd7c0(*(unsigned int *)(*(int *)(g_lmapScene + 0x18c) + 4),0,2);
+            moriModelUnitStartMaterialAnimation(*(unsigned int *)(*(int *)(g_lmapScene + 0x18c) + 4),0,2);
           }
         }
       }
@@ -617,7 +617,7 @@ void FUN_002b81ec(void)
         DAT_005f161c = 1;
         *(unsigned char *)(temp_v2 + 0xe09) = 0;
         mapSetSceneState(0x1f);
-        FUN_00408184(0x16,1);
+        gameCounterAddSaturating(0x16,1);
       }
       FUN_00327ee8();
       if ((temp_v9 & 0x800) != 0) {

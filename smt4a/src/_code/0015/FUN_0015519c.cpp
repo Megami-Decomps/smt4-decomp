@@ -8,7 +8,7 @@
 extern "C" {
 
 int textDrawString(...);
-int FUN_00164b5c(...);
+int texDrawCompositeSprite(...);
 int FUN_00165778(...);
 int FUN_0016631c(...);
 int efctSetSpeed(void);
@@ -49,14 +49,14 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: FUN_00164b5c. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: FUN_00165778. */
 /* Supplied declaration required: FUN_0016631c. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00167860. */
 /* Supplied declaration required: FUN_00168470. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-extern int FUN_001692ac(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: fontMeasureLineAdvance. */
@@ -103,9 +103,9 @@ unsigned int FUN_0015519c(void)
   
   temp_v0 = g_menuState;
   if (*(int *)(g_menuState + 8) != 0) {
-    FUN_00157558(reinterpret_cast<RenderCtxA *>(g_renderCtx));
+    renderCtxSelectDisplayAreaForStereoMode(reinterpret_cast<RenderCtxA *>(g_renderCtx));
     temp_v6 = g_renderCtx;
-    temp_v1 = FUN_001692ac(1,0);
+    temp_v1 = renderCtxPackPassFlags(1,0);
     piVar7 = (int *)(temp_v6 + 0x1258);
     temp_v3 = *piVar7;
     temp_v4 = piVar7[temp_v3 + 2];
@@ -206,7 +206,7 @@ unsigned int FUN_0015519c(void)
         (**(romwright_code **)(temp_v3 + 0x12d4))();
         *(unsigned char *)(temp_v3 + 0x12d0) = 0;
       }
-      FUN_00164b5c(2,8,0x19,0,0,0x65);
+      texDrawCompositeSprite(2,8,0x19,0,0,0x65);
       temp_v3 = g_renderCtx;
       temp_v4 = packNibblesAndByte(6,7,0);
       piVar7 = (int *)(temp_v3 + 0x12b8);
@@ -229,7 +229,7 @@ unsigned int FUN_0015519c(void)
         (**(romwright_code **)(temp_v3 + 0x12d4))();
         *(unsigned char *)(temp_v3 + 0x12d0) = 0;
       }
-      FUN_00164b5c(2,8,3,0,temp_v6,0x65);
+      texDrawCompositeSprite(2,8,3,0,temp_v6,0x65);
       temp_v3 = g_renderCtx;
       temp_v4 = packNibblesAndByte(6,7,0);
       piVar7 = (int *)(temp_v3 + 0x12b8);
@@ -243,7 +243,7 @@ unsigned int FUN_0015519c(void)
       temp_v2 = 2;
       temp_v3 = temp_v6;
     }
-    FUN_00164b5c(2,8,temp_v2,0,temp_v3,0x6a);
+    texDrawCompositeSprite(2,8,temp_v2,0,temp_v3,0x6a);
     if (*(char *)(temp_v0 + 0x10) != '\0') {
       if (*(char *)(temp_v0 + 0x12) == '\0') {
         temp_v1 = asdTMTexTableEntryAt(8,0xdc);
@@ -260,8 +260,8 @@ unsigned int FUN_0015519c(void)
           VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
           textDrawString(4,0xffffffff,temp_v0 + 0x26c,temp_v6 + 6);
           if (*(int *)(temp_v0 + 0x14) == 1) {
-            FUN_001835b4(2,8,0xdf,temp_v1 - 0xd,7,0x6f);
-            FUN_001835b4(2,8,0xde,temp_v1 - 0xd,7,0x74);
+            texDrawTableEntryAtStoredOrigin(2,8,0xdf,temp_v1 - 0xd,7,0x6f);
+            texDrawTableEntryAtStoredOrigin(2,8,0xde,temp_v1 - 0xd,7,0x74);
           }
           if (*(int *)(temp_v0 + 0x14) == 4) {
             FUN_00167860((int)*(short *)(temp_v0 + 0x18),temp_v1 - 0xd,8,0x79);

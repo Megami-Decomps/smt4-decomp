@@ -39,7 +39,7 @@ s32 jobIsValid(u32 job);
 s32 modelHasLoadedAttachment(u32 *model);
 s32 FUN_002adde8(u32 model, u32 bone, Vec3 *out);
 void FUN_002adca0(u32 job, Vec3 *from, Vec3 *to, u32 owner, s32 frames, s32 mode);
-void FUN_00138954(u32 job, u32 owner, s32 frames, f32 x, f32 y);
+void bustupCutAnimStartMove(u32 job, u32 owner, s32 frames, f32 x, f32 y);
 
 /* Finishes the cut animation: moves each of its four jobs to its target pose (or releases it when
  * the model is gone). Returns 1 while the animation is still running or has nothing to finish. */
@@ -75,9 +75,9 @@ u32 FUN_001269fc(void)
         }
         if (!placed) {
             if (i != 0)
-                FUN_00138954(anim->jobs[i], anim->owner, (s32)anim->fadeFrames, anim->sideOffsetZ, anim->sideOffsetY);
+                bustupCutAnimStartMove(anim->jobs[i], anim->owner, (s32)anim->fadeFrames, anim->sideOffsetZ, anim->sideOffsetY);
             else
-                FUN_00138954(anim->jobs[0], anim->owner, (s32)anim->fadeFrames, 0.0f, 0.0f);
+                bustupCutAnimStartMove(anim->jobs[0], anim->owner, (s32)anim->fadeFrames, 0.0f, 0.0f);
             anim->jobs[i] = 0;
             continue;
         }

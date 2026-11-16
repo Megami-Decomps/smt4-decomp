@@ -30,10 +30,10 @@ extern AocMain *g_aocMain;
 extern const char DAT_003ff12c[];
 void drawParameterBlockClear(UiResourceParameters *parameters);
 
-void FUN_002bd954(AocUiSprite *sprite, s32 group, s32 image, UiResourceParameters *parameters, s32 flags, f32 scale);
+void uiSpriteStateInitFromSource(AocUiSprite *sprite, s32 group, s32 image, UiResourceParameters *parameters, s32 flags, f32 scale);
 void uiSpriteSetImageKeyframe(AocUiSprite *sprite, s32 keyframe, s32 flags);
-void FUN_00295eb0(AocUiSprite *sprite, s32 group, s32 image);
-void FUN_002ba78c(void *panel);
+void uiStoreTextureEntryCenter(AocUiSprite *sprite, s32 group, s32 image);
+void uiResourceParametersInitDefault(void *panel);
 AsdText *asdTextCreate(u32 flags);
 void positionStateSet(AsdText *text, s32 slot, u32 color, f32 duration);
 void uiInitializeEightTimerSet(void *control);
@@ -44,7 +44,7 @@ void aocMenuInitializePanelSprites(AocMenuSprites *menu)
 {
     drawParameterBlockClear(&menu->parameters);
     paramsInit(&menu->parameters, 0, 0, DAT_003ff12c, 0xc, 0, 0, 0, 0, 0, 0);
-    FUN_002bd954(&menu->header, 0x1d, 2000, &menu->parameters, 0xb, 1.0f);
+    uiSpriteStateInitFromSource(&menu->header, 0x1d, 2000, &menu->parameters, 0xb, 1.0f);
     uiSpriteSetImageKeyframe(&menu->header, 0, 0);
     AocSpriteLayout layout = {{
         0, 1, 1, 0, 0, 0, 1, 1,
@@ -52,12 +52,12 @@ void aocMenuInitializePanelSprites(AocMenuSprites *menu)
         1, 1, 0, 0, 0, 1, 1, 0
     }};
     for (s32 index = 0; index < 24; ++index) {
-        FUN_002bd954(&menu->entries[index], 0x1d, layout.frames[index] + 2001,
+        uiSpriteStateInitFromSource(&menu->entries[index], 0x1d, layout.frames[index] + 2001,
                       &menu->parameters, 0xb, 1.0f);
         uiSpriteSetImageKeyframe(&menu->entries[index], 0, 0);
-        FUN_00295eb0(&menu->entries[index], 0x1d, index + 2005);
+        uiStoreTextureEntryCenter(&menu->entries[index], 0x1d, index + 2005);
     }
-    FUN_002ba78c(menu->panel);
+    uiResourceParametersInitDefault(menu->panel);
     menu->ready = 0;
     aocMenuSetReadyFlag(g_aocMain, 0);
     menu->text = asdTextCreate(0);

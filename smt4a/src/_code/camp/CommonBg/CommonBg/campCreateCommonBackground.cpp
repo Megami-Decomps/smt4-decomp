@@ -28,7 +28,7 @@ void campCreateCommonBackground(void)
     asdTextFormatStream(work->promptSprite, 2, 0xFFFFFFFF, 0, 0,
         "\x82\x6f\x82\x8c\x82\x85\x82\x81\x82\x93\x82\x85\x81\x40\x82\x94\x82\x8f\x82\x95\x82\x83\x82\x88\x81\x40\x82\x94\x82\x88\x82\x85\x81\x40\x82\x89\x82\x83\x82\x8f\x82\x8e\x81\x44");
     asdTMTexTableLoadSprites(34);
-    FUN_0014afd0(34, 0);
+    asdTMTexTablePrepareNodeImage(34, 0);
     work->job = taskCreateDraw("COMBG EVE CALC", 4, 8, 0, FUN_0031a5e4, ref208Destroy, work, g_commonBg.owner->job);
     taskCreateDraw("COMBG DDRAW", 235, 8, 0, FUN_0036dff4, NULL, work, work->job);
 }

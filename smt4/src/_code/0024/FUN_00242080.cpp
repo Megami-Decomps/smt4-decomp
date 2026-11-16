@@ -8,14 +8,14 @@ extern const char DAT_00400002;
 void FUN_002f82ac(EffectTextRequest *request);
 s32 formattedTextCopyLabel(EffectTextRequest *request, char *buffer);
 s32 FUN_00318cac(EffectTextRequest *request);
-void FUN_00247240(EffectTextRequest *request);
+void effectEditorObjectDestroy(EffectTextRequest *request);
 void nodeListOwnerFree(void *owner);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void effMenuAddEntry(void *owner, const char *label, s32 kind, u32 value, s32 flags);
 EffectTextRequest *effMenuCreate(void *owner);
 LinkedItem *linkedFindItemByIndex(LinkedItems *items, s32 index);
 void effResourcePromoteReferences(LinkedItems *items, LinkedItem *item);
-void FUN_0025c650(LinkedItems *items, LinkedItem *item, LinkedItem *replacement);
+void linkedItemsRedirectToReplacement(LinkedItems *items, LinkedItem *item, LinkedItem *replacement);
 void effBlockSetBlobB(EffBlock *block, const void *data, s32 size, u16 tag);
 
 // Run the editor's selection dialog and apply the selected reference or general index.
@@ -33,7 +33,7 @@ u32 FUN_00242080(u32 flags)
         result.kind = formattedTextCopyLabel(g_effectEditor.textRequest.request, result.label);
         result.index = FUN_00318cac(g_effectEditor.textRequest.request);
         if (result.state == 1) {
-            FUN_00247240(g_effectEditor.textRequest.request);
+            effectEditorObjectDestroy(g_effectEditor.textRequest.request);
             g_effectEditor.textRequest.request = NULL;
             nodeListOwnerFree(g_effectEditor.textRequest.owner);
             g_effectEditor.textRequest.owner = NULL;
@@ -60,7 +60,7 @@ u32 FUN_00242080(u32 flags)
             if (reinterpret_cast<LinkedItem *>(g_effectEditor.selection.item) != replacement) {
                 effResourcePromoteReferences(static_cast<LinkedItems *>(g_effectEditor.selection.list),
                              reinterpret_cast<LinkedItem *>(g_effectEditor.selection.item));
-                FUN_0025c650(static_cast<LinkedItems *>(g_effectEditor.selection.list),
+                linkedItemsRedirectToReplacement(static_cast<LinkedItems *>(g_effectEditor.selection.list),
                              reinterpret_cast<LinkedItem *>(g_effectEditor.selection.item), replacement);
             }
         } else {

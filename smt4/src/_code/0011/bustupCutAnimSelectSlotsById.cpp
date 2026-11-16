@@ -8,7 +8,7 @@ s32 jobIsValid(u32 job);
 s32 jobWorkGetFirstWord(u32 job);
 void FUN_002b7160(u32 job, s32 on);
 s32 jobRecordGetTableValue(u32 job, u32 index);
-void FUN_002bff38(u8 value);
+void messageSetDisplayMode(u8 value);
 
 /* Marks the cut slots whose job carries `id` (applying its table value as the message display mode) and clears the rest; returns 1 when one matched. */
 u32 bustupCutAnimSelectSlotsById(s32 id)
@@ -31,7 +31,7 @@ u32 bustupCutAnimSelectSlotsById(s32 id)
                 if (anim->unk604 <= 14) {
                     column = 2;
                 }
-                FUN_002bff38(jobRecordGetTableValue(anim->slots[i], column));
+                messageSetDisplayMode(jobRecordGetTableValue(anim->slots[i], column));
                 found = 1;
             } else {
                 FUN_002b7160(anim->slots[i], 0);

@@ -50,7 +50,7 @@ SlotRecord *btlMainGetUnk14(void);
 s32 btlScriptUnitHasFlags(u32 job);
 s32 uiEntryGetState(u32 job, s32 slot);
 s32 bitsAt60Test(SlotRecord *record, u32 bit);
-void FUN_004fb43c(s32 a, s32 b, u32 id, s32 c, s32 d, s32 e, s32 f);
+void btlQueueActionMessage(s32 a, s32 b, u32 id, s32 c, s32 d, s32 e, s32 f);
 
 /* Refreshes slot `slot` of the screen: clears its stats, then fills them from the player, the
  * battle unit or the stock record the slot points at, marking it unavailable when it cannot be used. */
@@ -100,7 +100,7 @@ void FUN_0023f328(SlotScreen *screen, s32 slot, s32 reset)
     } else if (slot == 4) {
         SlotRecord *saved = (SlotRecord *)saveSlotFindSelected();
 
-        if (FUN_00187168(saved) == 0) {
+        if (partySlotIsOccupied(saved) == 0) {
             return;
         }
         screen->statA[4] = saved->statA;
@@ -121,7 +121,7 @@ void FUN_0023f328(SlotScreen *screen, s32 slot, s32 reset)
                 table->stock[slot] = (s8)0xFF;
                 screen->unavailable[slot] = 1;
                 if (btlScriptUnitHasFlags(screen->job) == 0) {
-                    FUN_004fb43c(0, 0, 0x1000295, 0, 1, 0, 0);
+                    btlQueueActionMessage(0, 0, 0x1000295, 0, 1, 0, 0);
                 }
             } else {
                 screen->statA[slot] = record->statA;

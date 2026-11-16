@@ -23,10 +23,10 @@ void FUN_004b75d0(TransformInterpolation *);
 s32 scrRunOpcodesStub(ScriptRunState *);
 void scrScriptProcessDestroy(ScriptRunState *);
 void asdMemFree(void *);
-void FUN_001695a0();
+void messageSetScriptDisplayMode();
 void textFormatBuffer(char *, const char *, ...);
 void *asdLoadFileSyncDefault(const char *);
-ScriptRunState *FUN_00275bc8(void *, void *);
+ScriptRunState *scrScriptProcessCreate(void *, void *);
 void scriptProcessSetMode(ScriptRunState *process, s32 mode);
 u32 tableGroupFindEntryIndex(void *, const char *);
 void scrScriptProcessStartEntry(ScriptRunState *, u32);
@@ -51,12 +51,12 @@ void eventUpdateScriptLaunch(EventScriptLaunchWorkView *work)
     }
     EventScriptLaunchGlobalsView *event = &DAT_005f16fc;
     event->result = 0;
-    FUN_001695a0();
+    messageSetScriptDisplayMode();
     textFormatBuffer(path, "event/e%03d/e%03d.bf", event->eventId, event->eventId);
     work->bytecode = asdLoadFileSyncDefault(path);
     textFormatBuffer(path, "event/e%03d/e%03d.mbm", event->eventId, event->eventId);
     work->messages = asdLoadFileSyncDefault(path);
-    work->script = FUN_00275bc8(work->bytecode, work->messages);
+    work->script = scrScriptProcessCreate(work->bytecode, work->messages);
     scriptProcessSetMode(work->script, 2);
     u32 entry = tableGroupFindEntryIndex(work->bytecode, event->entryName);
     scrScriptProcessStartEntry(work->script, entry);

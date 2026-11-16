@@ -9,7 +9,7 @@ typedef struct SortRecord {
 
 extern SortRecord *table8Type5FindById(u16 id);
 extern int recordKindRank(u16 category);
-extern int FUN_0024c52c(u16 category);
+extern int itemGetSortCategory(u16 category);
 
 /* Compare function for sorting ids: by two category ranks (descending), then by id (descending). */
 int sortCompareByCategoryRankDesc(const u16 *a, const u16 *b)
@@ -19,7 +19,7 @@ int sortCompareByCategoryRankDesc(const u16 *a, const u16 *b)
     int diff = recordKindRank(recordB->category) - recordKindRank(recordA->category);
 
     if (diff == 0) {
-        diff = FUN_0024c52c(recordB->category) - FUN_0024c52c(recordA->category);
+        diff = itemGetSortCategory(recordB->category) - itemGetSortCategory(recordA->category);
         if (diff == 0) {
             diff = *b - *a;
         }

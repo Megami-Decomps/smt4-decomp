@@ -1,4 +1,4 @@
-/* NON_MATCHING: register choice only: retail stores the three floats through the incoming r0 and loads the tail-called FUN_00387240's base/constant in r0/r1 (here r4 and r1/r0) */
+/* NON_MATCHING: register choice only: retail stores the three floats through the incoming r0 and loads the tail-called uiStoreTextureEntryCenter's base/constant in r0/r1 (here r4 and r1/r0) */
 #include "common.h"
 #include <stddef.h>
 #include "sys/RuntimeObjects.h"
@@ -37,9 +37,9 @@ typedef char SpriteLayoutOffsets[offsetof(SpriteLayout, sprites) == 0x20 &&
 
 extern "C" {
 
-void FUN_0014e188(LayoutSprite *sprite, s32 group, s32 image, void *owner, s32 flags, f32 scale);
+void uiSpriteStateInitFromSource(LayoutSprite *sprite, s32 group, s32 image, void *owner, s32 flags, f32 scale);
 void uiSpriteSelectAnim(LayoutSprite *sprite, s32 anim);
-void FUN_00387240(LayoutSprite *sprite, s32 group, s32 value);
+void uiStoreTextureEntryCenter(LayoutSprite *sprite, s32 group, s32 value);
 void uiGetLayoutPointDifference(LayoutSprite *sprite, s32 group, s32 first, s32 second);
 void FUN_0036b63c(LayoutSprite *sprite, u8 value);
 
@@ -62,7 +62,7 @@ void FUN_003d44ac(SpriteLayout *layout)
     state->unk00 = 0;
     state->unk04 = 0;
     for (i = 0; i < 5; i++) {
-        FUN_0014e188(&layout->sprites[i], 16, -1, layout, 0x97, 1.0f);
+        uiSpriteStateInitFromSource(&layout->sprites[i], 16, -1, layout, 0x97, 1.0f);
     }
     pairSetFirstResetSecond(&layout->sprites[0], layout->baseId * 1000);
     uiSpriteSelectAnim(&layout->sprites[0], 0);
@@ -84,14 +84,14 @@ void FUN_003d44ac(SpriteLayout *layout)
     case 0x11:
         pairSetFirstResetSecond(&layout->sprites[1], layoutId(layout, 1));
         uiSpriteSelectAnim(&layout->sprites[1], 0);
-        FUN_00387240(&layout->sprites[1], 16, layout->baseId * 1000 + 2);
+        uiStoreTextureEntryCenter(&layout->sprites[1], 16, layout->baseId * 1000 + 2);
         return;
     case 3:
-        FUN_00387240(&layout->sprites[0], 16, layout->baseId * 1000);
+        uiStoreTextureEntryCenter(&layout->sprites[0], 16, layout->baseId * 1000);
         FUN_0036b63c(&layout->sprites[0], 1);
         pairSetFirstResetSecond(&layout->sprites[1], layout->baseId * 1000);
         uiSpriteSelectAnim(&layout->sprites[1], 0);
-        FUN_00387240(&layout->sprites[1], 16, layout->baseId * 1000);
+        uiStoreTextureEntryCenter(&layout->sprites[1], 16, layout->baseId * 1000);
         FUN_0036b63c(&layout->sprites[1], 1);
         return;
     case 8:

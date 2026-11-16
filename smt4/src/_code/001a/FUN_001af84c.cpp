@@ -43,7 +43,7 @@ s32 FUN_00298dc8(void);
 s32 FUN_00298e00(s32 quest);
 s32 FUN_00298e40(s32 quest, s32 step, s32 *progress);
 s32 recordCategoryNineIsActiveInMode24(s32 quest);
-void FUN_002bf380(u32 layer, u32 table, u32 sprite, u32 x, u32 y, u32 flags);
+void texDrawCompositeSprite(u32 layer, u32 table, u32 sprite, u32 x, u32 y, u32 flags);
 
 static __inline u32 questColorDim(s32 full)
 {
@@ -77,51 +77,51 @@ u32 FUN_001af84c(s32 quest, u32 x, u32 y, u32 flags, s32 full)
             }
             if (questPassesAvailabilityConditions(quest) != 0) {
                 if (allDone) {
-                    FUN_002bf380(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_NEW, x, y, flags);
+                    texDrawCompositeSprite(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_NEW, x, y, flags);
                     return normal;
                 }
                 if (questIsCompleted(quest) == 0)
                     return normal;
-                FUN_002bf288(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_DONE, x, y, flags);
+                texDrawTableEntryAtStoredOrigin(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_DONE, x, y, flags);
                 if (FUN_00298e00(quest) != 0)
                     return normal;
                 return questColorDim(full);
             }
             if (FUN_00298e00(quest) != 0 || questIsCompleted(quest) == 0) {
-                FUN_002bf288(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_AVAILABLE_ENTRY, x, y, flags);
+                texDrawTableEntryAtStoredOrigin(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_AVAILABLE_ENTRY, x, y, flags);
                 return normal;
             }
         } else {
             if (questIsOfferable((u16)quest) == 0) {
                 if (recordCategoryNineIsActiveInMode24(quest) != 0)
-                    FUN_002bf288(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_LOCKED, x, y, flags);
+                    texDrawTableEntryAtStoredOrigin(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_LOCKED, x, y, flags);
                 else if (questIsCompleted(quest) != 0)
-                    FUN_002bf288(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_DONE, x, y, flags);
+                    texDrawTableEntryAtStoredOrigin(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_DONE, x, y, flags);
                 else
-                    FUN_002bf288(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_LOCKED, x, y, flags);
+                    texDrawTableEntryAtStoredOrigin(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_LOCKED, x, y, flags);
                 return questColorDim(full);
             }
             if (FUN_002903f0() == quest) {
-                FUN_002bf380(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_SELECTED, x, y, flags);
+                texDrawCompositeSprite(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_SELECTED, x, y, flags);
                 return questColorSelected(full);
             }
             if (questIsCompleted(quest) == 0)
                 return normal;
         }
-        FUN_002bf288(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_DONE, x, y, flags);
+        texDrawTableEntryAtStoredOrigin(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_DONE, x, y, flags);
         return normal;
     }
 
     if (FUN_00298dc8() != 0) {
         if (FUN_002903f0() == 0) {
-            FUN_002bf380(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_ACTIVE, x, y, flags);
+            texDrawCompositeSprite(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_ACTIVE, x, y, flags);
             return questColorSelected(full);
         }
-        FUN_002bf288(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_ACTIVE_LOCKED, x, y, flags);
+        texDrawTableEntryAtStoredOrigin(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_ACTIVE_LOCKED, x, y, flags);
     } else {
         if (questIsCompleted(quest) == 0)
             return normal;
-        FUN_002bf288(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_DONE, x, y, flags);
+        texDrawTableEntryAtStoredOrigin(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_DONE, x, y, flags);
     }
     return questColorDim(full);
 }

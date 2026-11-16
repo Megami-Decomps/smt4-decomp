@@ -5,7 +5,7 @@
 
 extern "C" {
 SaveSlotSelectionPrefixA *saveSlotFindSelected(void);
-s32 FUN_0020ad6c(SaveSlotTransitionPrefixA *ui, s32 state, s32 immediate);
+s32 btlCommandMenuEnterMode(SaveSlotTransitionPrefixA *ui, s32 state, s32 immediate);
 
 void saveSlotBeginTransition(SaveSlotTransitionPrefixA *ui, s32 inputCase, u8 option)
 {
@@ -29,9 +29,9 @@ void saveSlotBeginTransition(SaveSlotTransitionPrefixA *ui, s32 inputCase, u8 op
     ui->option = option;
     if (ui->currentState == 0x17) {
         ui->pendingState = 0x1f;
-        FUN_0020ad6c(ui, 0x18, 1);
+        btlCommandMenuEnterMode(ui, 0x18, 1);
         return;
     }
-    FUN_0020ad6c(ui, 0x1f, 1);
+    btlCommandMenuEnterMode(ui, 0x1f, 1);
 }
 }

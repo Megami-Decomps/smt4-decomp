@@ -43,7 +43,7 @@ s8 *gameGetSlotTable(void);
 BtlDebugUnitRecord *gameGetSlotRecord(s32 slot);
 s32 idListHasFlaggedRecord(BtlDebugUnitRecord *record);
 BtlDebugDemon *devilGetRecord(u16 id);
-void FUN_00203b40(void *list, s32 count, s32 a, s32 b, s32 c, s32 d);
+void gridNavigationConfigure(void *list, s32 count, s32 a, s32 b, s32 c, s32 d);
 
 /* Sets up the debug menu's lists: the number of visible entries of the shared page, and for each of
  * the three party slots the number of entries visible for that slot's unit. */
@@ -80,7 +80,7 @@ void FUN_0020d3d4(BtlDebugMenuLists *menu)
         }
         count++;
     }
-    FUN_00203b40(menu->allList, count, 1, count, 1, 1);
+    gridNavigationConfigure(menu->allList, count, 1, count, 1, 1);
     for (slot = 0; slot < 3; slot++) {
         BtlDebugUnitRecord *record = NULL;
 
@@ -125,7 +125,7 @@ void FUN_0020d3d4(BtlDebugMenuLists *menu)
                 }
             }
         }
-        FUN_00203b40(menu->slotList[slot], count, 1, count, 1, 1);
+        gridNavigationConfigure(menu->slotList[slot], count, 1, count, 1, 1);
     }
 }
 

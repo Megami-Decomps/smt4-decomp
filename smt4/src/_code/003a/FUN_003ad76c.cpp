@@ -82,7 +82,7 @@ void uiInitializeFourTimerSet(void *timers);
 void FUN_00199b9c(void *detail, BtlSetupSource *source);
 void drawParameterBlockClear(UiResourceParameters *resources);
 
-void FUN_002bd954(BtlUiSprite *sprite, s32 kind, s32 id, UiResourceParameters *resources, s32 flags, f32 speed);
+void uiSpriteStateInitFromSource(BtlUiSprite *sprite, s32 kind, s32 id, UiResourceParameters *resources, s32 flags, f32 speed);
 void uiSpriteSetImageKeyframe(BtlUiSprite *sprite, s32 keyframe, s32 flag);
 void *asdOperatorNew(u32 size, BtlSetupSource *owner);
 void *FUN_0033d3e4(void *memory);
@@ -112,25 +112,25 @@ void FUN_003ad76c(void *unused, BtlSetupSource *source)
     for (s32 i = 0; i < 16; i++) {
         block->tabs[i].visible = 0;
         for (s32 j = 0; j < 5; j++) {
-            FUN_002bd954(&block->tabs[i].entries[j], 0xD, 2000, resources, 0xF1, 1.0f);
+            uiSpriteStateInitFromSource(&block->tabs[i].entries[j], 0xD, 2000, resources, 0xF1, 1.0f);
             spriteStartAnimationByIndex(&block->tabs[i].entries[j], 3);
         }
-        FUN_002bd954(&block->tabs[i].header, 0x15, 1000, resources, 0xF1, 1.0f);
+        uiSpriteStateInitFromSource(&block->tabs[i].header, 0x15, 1000, resources, 0xF1, 1.0f);
         spriteStartAnimationByIndex(&block->tabs[i].header, 9);
-        FUN_002bd954(&block->tabs[i].footer, 0x15, 0x3EA, resources, 0xF1, 1.0f);
+        uiSpriteStateInitFromSource(&block->tabs[i].footer, 0x15, 0x3EA, resources, 0xF1, 1.0f);
         spriteStartAnimationByIndex(&block->tabs[i].footer, 9);
 
         BtlCommandRow *row = &block->commands[i];
         row->enabled = 0;
-        FUN_002bd954(&row->sprite, 0x15, 0x3EE, resources, 0xF1, 1.0f);
+        uiSpriteStateInitFromSource(&row->sprite, 0x15, 0x3EE, resources, 0xF1, 1.0f);
         spriteStartAnimationByIndex(&row->sprite, 10);
     }
     for (s32 i = 0; i < 12; i++) {
         BtlStatusRow *row = &block->status[i];
         row->value = 0;
-        FUN_002bd954(&row->icon, 0x15, 0xBBA, resources, 0xF1, 1.0f);
+        uiSpriteStateInitFromSource(&row->icon, 0x15, 0xBBA, resources, 0xF1, 1.0f);
         spriteStartAnimationByIndex(&row->icon, 0xB);
-        FUN_002bd954(&row->label, 0x15, 0xBBE, resources, 0xF1, 1.0f);
+        uiSpriteStateInitFromSource(&row->label, 0x15, 0xBBE, resources, 0xF1, 1.0f);
         spriteStartAnimationByIndex(&row->label, 0xC);
     }
 
@@ -139,7 +139,7 @@ void FUN_003ad76c(void *unused, BtlSetupSource *source)
     block->skipIntro = 0;
     if ((source->flags & BTL_UI_SKIP_INTRO_FLAG) != 0)
         block->skipIntro = 1;
-    FUN_002bd954(&block->cursor, 0xE, 0, resources, 1, 1.0f);
+    uiSpriteStateInitFromSource(&block->cursor, 0xE, 0, resources, 1, 1.0f);
     uiSpriteSetImageKeyframe(&block->cursor, 0xD, 0);
 }
 

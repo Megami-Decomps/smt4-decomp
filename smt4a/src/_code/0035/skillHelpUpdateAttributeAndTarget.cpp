@@ -30,17 +30,17 @@ void skillHelpUpdateAttributeAndTarget(s32 id)
         char text[0x6C];
         battleAttributeFormatName(text,
             (static_cast<u32>(record->flags) >> 11) & 31u);
-        FUN_003180c4(0x24, reinterpret_cast<const char *>(text));
+        scrSetStringSlot(0x24, reinterpret_cast<const char *>(text));
         // Shift-JIS full-width "Self", preserved byte for byte.
         textFormatBuffer(text, "\x82\x72\x82\x85\x82\x8c\x82\x86");
-        FUN_003180c4(0x25, reinterpret_cast<const char *>(text));
+        scrSetStringSlot(0x25, reinterpret_cast<const char *>(text));
     } else {
         Table04Record *record = dataTable04FindById(id);
         char text[0x6C];
         battleAttributeFormatName(text, (record->properties >> 11) & 31u);
-        FUN_003180c4(0x24, reinterpret_cast<const char *>(text));
+        scrSetStringSlot(0x24, reinterpret_cast<const char *>(text));
         skillFormatTargetLabel(text, (record->properties >> 5) & 15u);
-        FUN_003180c4(0x25, reinterpret_cast<const char *>(text));
+        scrSetStringSlot(0x25, reinterpret_cast<const char *>(text));
     }
 
     asdTextDrawDirectoryEntry(state->directory, 2, 0xffffffffu, 0,

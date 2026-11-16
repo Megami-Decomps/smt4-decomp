@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0014a930(...);
 int asdProcessCreateSimple(...);
 int aocThreadAllocateStorage(...);
-int FUN_002e3140(...);
+int resultHandleFailure(...);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
 
 typedef int romwright_code(...);
@@ -24,7 +24,7 @@ extern int FUN_001a6c40(...); /* 0x1a6c40 */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: aocThreadAllocateStorage. */
 extern int FUN_0015f434(int);
-/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
@@ -64,7 +64,7 @@ int FUN_001481e4(int param_1)
     }
   }
   if ((int)ppcVar3 < 0) {
-    FUN_002e3140();
+    resultHandleFailure();
   }
   return temp_v0 - 0x4510;
 }

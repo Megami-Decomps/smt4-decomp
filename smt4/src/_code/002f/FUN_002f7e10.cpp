@@ -14,7 +14,7 @@ u32 FUN_00246d38(s32 actor, u32 unit, BtlActionRecord *target, u32 mask);
 u32 FUN_00246e24(s32 actor, u32 unit, BtlActionRecord *target, u32 mask, s32 clearStatus);
 void objectFlagsClear(GameUnitSortRecord *unit, u16 mask);
 void objectFlagSetBit(GameUnitSortRecord *unit, u16 bit);
-void FUN_002505c0(s32 kind, u32 unit, u32 effect, s32, s32, s32, s32);
+void btlQueueKeyedScalarReflectAction(s32 kind, u32 unit, u32 effect, s32, s32, s32, s32);
 
 // Set or clear a status bit on a battle target or stored unit, playing the status effect when set.
 u32 FUN_002f7e10(void)
@@ -40,7 +40,7 @@ u32 FUN_002f7e10(void)
         }
     }
     if (enabled != 0)
-        FUN_002505c0(0, actor, 0x10001BD, 0, 0, 0, 0);
+        btlQueueKeyedScalarReflectAction(0, actor, 0x10001BD, 0, 0, 0, 0);
     return 1;
 }
 }

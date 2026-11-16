@@ -77,8 +77,8 @@ void FUN_0025ee64(int param_1)
   temp_v4 = vec2GetXInt();
   temp_v5 = vec2GetYInt(param_1 + 0x20);
   temp_v6 = vec2GetYInt(temp_v3);
-  FUN_002bf288(2,0x15,0xdb,temp_v2 + temp_v4,temp_v5 + temp_v6,0x29);
-  FUN_002bf288(2,0x15,0xdc,temp_v2 + temp_v4,temp_v5 + temp_v6,0x29);
+  texDrawTableEntryAtStoredOrigin(2,0x15,0xdb,temp_v2 + temp_v4,temp_v5 + temp_v6,0x29);
+  texDrawTableEntryAtStoredOrigin(2,0x15,0xdc,temp_v2 + temp_v4,temp_v5 + temp_v6,0x29);
   temp_v2 = objectPartRunUnlessLocked(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
   temp_v7 = FUN_0029e958(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
   temp_v4 = 0;

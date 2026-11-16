@@ -37,7 +37,7 @@ extern int legacyResourceIdRemap(unsigned int *);
 extern int FUN_002ad1e0(int);
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ev. */
-extern int FUN_002c3dfc(int);
+extern int fsUnmountByName(int);
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 
 
@@ -71,7 +71,7 @@ void FUN_0015e6f4(unsigned int *param_1,int param_2,unsigned int *param_3,unsign
   strcmp((const char *)temp_v0,(const char *)param_3);
   if (temp_v1 != 0) {
     if (*(char *)(param_2 + 0x330) != '\0') {
-      temp_v1 = FUN_002c3dfc(temp_v0);
+      temp_v1 = fsUnmountByName(temp_v0);
       *(unsigned char *)(param_2 + 0x330) = 0;
       if (temp_v1 < 0) {
         _ZN21WindowOperationResultC1Eh(temp_v8,0);

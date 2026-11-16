@@ -58,7 +58,7 @@ extern BtlCamera *g_btlCamera;
 extern u32 g_btlAux;
 extern s32 g_btlEvent;
 
-void FUN_00408184(s32 kind, s32 flag);
+void gameCounterAddSaturating(s32 kind, s32 flag);
 s32 FUN_004c67d0(void);
 s32 FUN_004d7a70(s32 event, s32 kind, s32 arg, s32 flag);
 void FUN_004d7fe4(s32 event);
@@ -116,7 +116,7 @@ void FUN_004dce1c(BtlUnitHandle *handle, BtlAiAction *action)
         }
     }
     if (escaped) {
-        FUN_00408184(4, 1);
+        gameCounterAddSaturating(4, 1);
         handle->data->uiState = 4;
         if (isEntryUsable(g_btlEvent) != 0) {
             return;
@@ -126,7 +126,7 @@ void FUN_004dce1c(BtlUnitHandle *handle, BtlAiAction *action)
             return;
         }
     } else {
-        FUN_00408184(5, 1);
+        gameCounterAddSaturating(5, 1);
         handle->data->uiState = 0;
         flagsData = reinterpret_cast<BtlFlagsData *>(handle->data);
         flagsData->flags |= g_btlAction.mask110;

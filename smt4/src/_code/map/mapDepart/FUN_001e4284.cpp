@@ -61,7 +61,7 @@ extern MapEnvironmentState g_mapTable;
 extern MapEnvironmentGameView g_gameState;
 extern MapHeading g_fixedCameraPosition;
 void asdTMTexTableReleaseNode(u32 table, u32 node);
-void FUN_002c58c8(u32 table, u32 node);
+void asdTMTexTablePrepareNodeImage(u32 table, u32 node);
 s32 asdTMTexTableGetNodeTexture(u32 table, u32 node);
 void FUN_001a9604(u32 a, f32 b, f32 c, f32 d, f32 e, f32 f, f32 g);
 void FUN_001e39ec(u32 enabled, u32 arg14, u32 arg15, u32 arg16, u32 arg17,
@@ -111,7 +111,7 @@ void FUN_001e4284(u32 preset, s32 transition)
     if (id > 49) {
         g_mapTable.texture = 0;
     }
-    FUN_002c58c8(56, g_mapTable.texture);
+    asdTMTexTablePrepareNodeImage(56, g_mapTable.texture);
     g_mapTable.textureLoaded = asdTMTexTableGetNodeTexture(56, g_mapTable.texture);
     g_mapTable.unk0c = entry->unk02;
     g_mapTable.unk10 = 0.0f;

@@ -24,7 +24,7 @@ struct MessagePopupWindow {
 extern "C" {
 
 extern MessagePopupWindow *g_messageMain[4]; /* 0x57f588 */
-void FUN_0014e188(u8 *record, u32 value0, u32 value4, const u8 *source, u16 value38, f32 value20);
+void uiSpriteStateInitFromSource(u8 *record, u32 value0, u32 value4, const u8 *source, u16 value38, f32 value20);
 void uiSpriteSelectAnim(u8 *sprite, s32 anim);
 
 /* Shows the value popup on message window 2 with `value` and its float form, and starts its sprite animation. */
@@ -41,7 +41,7 @@ u32 FUN_003a6b10(s32 value)
     window->enabledA = 1;
     window->valueCopy = value;
     window->valueFloat = valueFloat;
-    FUN_0014e188(window->sprite, 8, 0xffffffff, window->source, 11, 1.0f);
+    uiSpriteStateInitFromSource(window->sprite, 8, 0xffffffff, window->source, 11, 1.0f);
     pairSetFirstResetSecond(window->sprite, 0x17);
     uiSpriteSelectAnim(window->sprite, 6);
     return 1;

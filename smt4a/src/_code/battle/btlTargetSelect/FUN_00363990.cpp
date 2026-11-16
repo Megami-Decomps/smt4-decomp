@@ -33,7 +33,7 @@ void payloadWorkRelease();
 void btlTargetSelectDestroy(u32 job);
 void paramsClearPacket(UiResourceParameters *params);
 
-void FUN_0014e188(TargetSelectDrawState *draw, u32 first, u32 second, UiResourceParameters *params, s32 flag, f32 scalar);
+void uiSpriteStateInitFromSource(TargetSelectDrawState *draw, u32 first, u32 second, UiResourceParameters *params, s32 flag, f32 scalar);
 void FUN_0036b644(TargetSelectDrawState *draw, u32 mode);
 
 // Create the information and marker displays with a calculation job and two draw passes.
@@ -50,7 +50,7 @@ void FUN_00363990(BtlMainStateA *owner)
     taskCreateDraw("btlTargetSelect DrawUpR", 0xDA, 0, 0, payloadWorkRelease, 0, work, owner->targetSelect.job);
     paramsClearPacket(&work->parameters);
     paramsInit(&work->parameters, 0, 0, 0, 0, 0, 0, &DAT_0052aa0c, 0x10, 0, 0);
-    FUN_0014e188(&work->draw, 12, 0x71, &work->parameters, 1, 1.0f);
+    uiSpriteStateInitFromSource(&work->draw, 12, 0x71, &work->parameters, 1, 1.0f);
     FUN_0036b644(&work->draw, 0);
 }
 

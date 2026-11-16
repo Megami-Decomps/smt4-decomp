@@ -16,7 +16,7 @@ typedef struct Context {
 
 extern u32 g_aocSystem;
 
-extern void FUN_001b2d54(u32 table, u32 owner, u32 handle);
+extern void packageFileDisableByKindName(u32 table, u32 owner, u32 handle);
 extern void asdTMTexTableReleaseNode(u32 owner, u32 handle);
 extern void asdMemFree(Context *ctx);
 
@@ -26,12 +26,12 @@ void asdMTeXReleaseJobContext(u32 job)
 
     if (ctx->hasPrimary != 0) {
         asdTMTexTableReleaseNode(ctx->owner, ctx->primary);
-        FUN_001b2d54(g_aocSystem, ctx->owner, ctx->primary);
+        packageFileDisableByKindName(g_aocSystem, ctx->owner, ctx->primary);
         ctx->hasPrimary = 0;
     }
     if (ctx->secondary != -1) {
         asdTMTexTableReleaseNode(ctx->owner, ctx->secondary);
-        FUN_001b2d54(g_aocSystem, ctx->owner, ctx->secondary);
+        packageFileDisableByKindName(g_aocSystem, ctx->owner, ctx->secondary);
         ctx->secondary = -1;
         ctx->unk80 = 0;
     }

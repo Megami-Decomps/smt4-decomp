@@ -29,7 +29,7 @@ s32 slotIsActive(u32 button);
 s32 padButtonRepeat(u32 button);
 s32 padButtonIsPressed(u32 button);
 void FUN_00317af8(f32 *angle, u8 buffer[16], s32 flag);
-void FUN_0050d8e4(void);
+void __hardfp_atan2f(void);
 void sysPlayVoice(u32 voice);
 
 /* Sector centres the stick has to pass through, in order, for both lap directions. */
@@ -72,7 +72,7 @@ u8 FUN_003ba65c(void)
         f32 angle;
         u8 buffer[16];
         FUN_00317af8(&angle, buffer, 0);
-        FUN_0050d8e4();
+        __hardfp_atan2f();
         angle *= SEQ_RAD_TO_DEG;
         if (angle < 0.0f)
             angle += 360.0f;

@@ -5,7 +5,7 @@ u32 campCecViewExists();
 u32 campCecViewIsDone();
 void campCecViewDestroy();
 void sysPlaySe(u32 id);
-void FUN_0031d890();
+void partyPanelRefreshFromSlotTable();
 void FUN_003447a0();
 
 u32 campCecWaitForView(CampCecResumeState *state)
@@ -21,7 +21,7 @@ u32 campCecWaitForView(CampCecResumeState *state)
             sysPlaySe(0x10d);
             state->state = 1;
             state->unk14c = 0;
-            FUN_0031d890();
+            partyPanelRefreshFromSlotTable();
             result = 3;
         }
         break;

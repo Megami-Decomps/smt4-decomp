@@ -23,10 +23,10 @@ typedef struct PickMenu {
 
 extern s32 statusDownGetMode(void);
 extern s32 FUN_0022e714(void);
-extern s32 FUN_00187168(void);
+extern s32 partySlotIsOccupied(void);
 extern s32 FUN_0023b3b8(void);
 extern s32 FUN_0035db94(void);
-extern u32 FUN_003e4d68(u32 item);
+extern u32 partyGetSlot(u32 item);
 extern void statusPanelSetOpen(s32 arg);
 extern void FUN_0023b45c(s32 arg);
 extern void FUN_00183f58(s32 a, s32 b, s32 c, s32 d);
@@ -58,9 +58,9 @@ void FUN_004bf174(PickMenu *menu)
         menu->selected = index;
         FUN_0023b45c(0);
     } else if (FUN_0022e714() == 0) {
-        FUN_003e4d68(menu->items[menu->selected] & 0xFFFF);
-        if (FUN_00187168() != 0) {
-            statusRequestUnitDetails((const UnitCategoryRecord*)FUN_003e4d68(menu->items[menu->selected] & 0xFFFF), 0, 0);
+        partyGetSlot(menu->items[menu->selected] & 0xFFFF);
+        if (partySlotIsOccupied() != 0) {
+            statusRequestUnitDetails((const UnitCategoryRecord*)partyGetSlot(menu->items[menu->selected] & 0xFFFF), 0, 0);
             statusPanelSetOpen(1);
         }
     }

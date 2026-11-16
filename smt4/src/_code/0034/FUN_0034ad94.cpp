@@ -66,7 +66,7 @@ extern "C" {
 void nn_math_ARMv6_MTX34MultAsm(nw::math::MTX34 *dest, const nw::math::MTX34 *a, const nw::math::MTX34 *b);
 void matrixTranslateColumn(nw::math::MTX34 *result, const EffectVec3 *translation, const nw::math::MTX34 *matrix);
 void nodeSetTranslation(EffectModelOwner *owner, u32 kind, const EffectPlacement *translation);
-void FUN_0028c618(EffectModelOwner *owner, u32 kind, EffectVec3 rotation);
+void modelPartSetRotationDegrees(EffectModelOwner *owner, u32 kind, EffectVec3 rotation);
 void modelSetPosition(EffectModelOwner *owner, u32 kind, const EffectPlacement *position);
 void FUN_002929d8(nw::math::MTX34 *result, u32 kind, EffectVec3 scale);
 void nodeCopyMatrixMarkDirty(EffectModelOwner *owner, const nw::math::MTX34 *matrix);
@@ -80,7 +80,7 @@ void FUN_0034ad94(DriftEffect *effect)
         node->flags |= 2;
         node->owner->part->visible = 0;
         nodeSetTranslation(effect->node->owner, 0, &effect->finalTranslation);
-        FUN_0028c618(effect->node->owner, 0, effect->finalRotation);
+        modelPartSetRotationDegrees(effect->node->owner, 0, effect->finalRotation);
         modelSetPosition(effect->node->owner, 0, &effect->finalPosition);
     } else {
         effect->velocity += effect->acceleration;

@@ -37,7 +37,7 @@ s32 FUN_002dece8(u32 job)
     jobGetWork(job);
     BtlEffectObject *effect = g_btlEffect.object;
     if (effect != NULL && (effect->flags & 2) != 0 && effect->child != NULL) {
-        renderCtxPushC(g_renderCtx, FUN_00387580(6, 0.0f));
+        renderCtxPushC(g_renderCtx, renderCtxPackPassFlagsWithAlpha(6, 0.0f));
         effect->child->vtable->draw(effect->child);
         renderStackPop(&g_renderCtx->additional.stackC);
         skinObjectUpdateMatrices(g_renderCtx);

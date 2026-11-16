@@ -42,7 +42,7 @@ u32 FUN_0033004c(void)
             s32 result = svcWaitSynchronization1(process->thread, 0);
             bool failed = nnResultIsFailure(result);
             if (failed) {
-                FUN_002e3140(result, failed);
+                resultHandleFailure(result, failed);
             }
             timedOut = !notTimeout(result);
         }

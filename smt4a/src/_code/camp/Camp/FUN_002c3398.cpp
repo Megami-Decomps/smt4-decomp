@@ -18,11 +18,11 @@ int obj48Arm(...);
 int FUN_0020d934(...);
 int partyPanelHasSlotValue(...);
 int scrollOwnerSelectIndex(...);
-int FUN_002a4964(...);
+int scrollListSetSelectionTracked(...);
 int FUN_003343f0(...);
-int FUN_003f5220(...);
+int slotPlacementAssignSlotPosition(...);
 
-int FUN_0014e188(...);
+int uiSpriteStateInitFromSource(...);
 int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
@@ -77,7 +77,7 @@ extern unsigned char g_campState; /* 0x5e1eb0 */
 extern unsigned char DAT_005e1eba; /* 0x5e1eba */
 
 
-/* Supplied declaration required: FUN_0014e188. */
+/* Supplied declaration required: uiSpriteStateInitFromSource. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -96,7 +96,7 @@ extern unsigned char DAT_005e1eba; /* 0x5e1eba */
 /* Supplied declaration required: FUN_002a4878. */
 extern unsigned int FUN_002a4894(int);
 /* Supplied declaration required: scrollOwnerSelectIndex. */
-/* Supplied declaration required: FUN_002a4964. */
+/* Supplied declaration required: scrollListSetSelectionTracked. */
 /* Supplied declaration required: FUN_002c8538. */
 extern int FUN_002e27b8(void);
 /* Supplied declaration required: FUN_002e5c48. */
@@ -118,7 +118,7 @@ extern unsigned char FUN_003c0dcc(void);
 extern int FUN_003deee4(unsigned int);
 extern unsigned char FUN_003e42f0(void);
 /* Supplied declaration required: obj48Arm. */
-/* Supplied declaration required: FUN_003f5220. */
+/* Supplied declaration required: slotPlacementAssignSlotPosition. */
 /* Supplied declaration required: pair40Set. */
 extern int flagSetAllCoveredBy(unsigned int);
 /* Supplied declaration required: clearThreeWords. */
@@ -175,28 +175,28 @@ void FUN_002c3398(void)
   paramsClearPacket();
   paramsInit(reinterpret_cast<UiResourceParameters *>(puVar4),&DAT_0052b8bc,0xb4,&DAT_0052b970,0x150,&DAT_0052bac0,0x30,0,0,&DAT_0052baf0,
                0x4d0);
-  FUN_0014e188(puVar2 + 0x196,0x14,0,puVar4,0xc9);
-  FUN_0014e188(puVar2 + 0x1b9,0x14,0,puVar4,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x196,0x14,0,puVar4,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x1b9,0x14,0,puVar4,0xc9);
   uiSpriteSetKeyframe(puVar2 + 0x1b9,1,0);
-  FUN_0014e188(puVar2 + 0x1dc,0x14,0,puVar4,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x1dc,0x14,0,puVar4,0xc9);
   uiSpriteSelectAnim(puVar2 + 0x1dc,10);
-  FUN_0014e188(puVar2 + 0x1ff,0x14,0,puVar4,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x1ff,0x14,0,puVar4,0xc9);
   uiSpriteSelectAnim(puVar2 + 0x1ff,2);
-  FUN_0014e188(puVar2 + 0x222,0x14,0,puVar4,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x222,0x14,0,puVar4,0xc9);
   temp_v6 = 0;
   do {
-    FUN_0014e188(puVar2 + temp_v6 * 0x23 + 0x245,0x14,0x22,puVar4,0xc9);
+    uiSpriteStateInitFromSource(puVar2 + temp_v6 * 0x23 + 0x245,0x14,0x22,puVar4,0xc9);
     temp_v6 = temp_v6 + 1;
   } while (temp_v6 < 8);
-  FUN_0014e188(puVar2 + 0x35d,0x14,0,puVar4,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x35d,0x14,0,puVar4,0xc9);
   uiSpriteSelectAnim(puVar2 + 0x35d,1);
-  FUN_0014e188(puVar2 + 0x380,0x14,0,puVar4,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x380,0x14,0,puVar4,0xc9);
   uiSpriteSelectAnim(puVar2 + 0x380,9);
   campSetSpriteAnimationPreset(2,1,0xffffffff,0);
   FUN_002f78a0(puVar2);
-  FUN_0014e188(puVar2 + 0x682,0x14,0,puVar4,2);
+  uiSpriteStateInitFromSource(puVar2 + 0x682,0x14,0,puVar4,2);
   *(unsigned char *)(puVar2 + 0x6c8) = 0;
-  FUN_0014e188(puVar2 + 0x6a5,0x14,0,puVar4,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x6a5,0x14,0,puVar4,0xc9);
   uiSpriteSelectAnim(puVar2 + 0x6a5,0xb);
   puVar4 = g_camp;
   puVar11 = g_camp + 0xcac;
@@ -308,7 +308,7 @@ void FUN_002c3398(void)
               if (*(short *)(g_partyPanel + ((temp_v2 * 4 - 4) + temp_v1 % 4) * 8 + 0xa84) != 0) {
 LAB_002c4664:
                 scrollOwnerSelectIndex(temp_v5,temp_v1 % 4);
-                FUN_002a4964(temp_v5,((int)(temp_v1 + ((unsigned int)(temp_v1 >> 0x1f) >> 0x1e)) >> 2) + 1);
+                scrollListSetSelectionTracked(temp_v5,((int)(temp_v1 + ((unsigned int)(temp_v1 >> 0x1f) >> 0x1e)) >> 2) + 1);
                 if (temp_v1 < 0x18) goto LAB_002c4a2c;
                 break;
               }
@@ -321,7 +321,7 @@ LAB_002c4664:
             if (*(char *)(g_partyPanel + temp_v1 + 0x9c0) != '\0') {
               scrollOwnerSelectIndex(temp_v5);
               temp_v1 = 0;
-              FUN_002a4964(temp_v5,temp_v1);
+              scrollListSetSelectionTracked(temp_v5,temp_v1);
               break;
             }
             temp_v1 = temp_v1 + 1;
@@ -331,7 +331,7 @@ LAB_002c4664:
           do {
             if (*(char *)(g_partyPanel + temp_v1 + 0x9c0) != '\0') {
               scrollOwnerSelectIndex(temp_v5,temp_v1);
-              FUN_002a4964(temp_v5,0);
+              scrollListSetSelectionTracked(temp_v5,0);
               if (temp_v1 < 4) goto LAB_002c4a2c;
               break;
             }
@@ -344,14 +344,14 @@ LAB_002c4664:
               if (*(short *)(g_partyPanel + ((temp_v2 * 4 - 4) + temp_v1 % 4) * 8 + 0xa84) != 0) {
                 scrollOwnerSelectIndex(temp_v5,temp_v1 % 4);
                 temp_v1 = ((int)(temp_v1 + ((unsigned int)(temp_v1 >> 0x1f) >> 0x1e)) >> 2) + 1;
-                FUN_002a4964(temp_v5,temp_v1);
+                scrollListSetSelectionTracked(temp_v5,temp_v1);
                 break;
               }
             }
             else if (*(char *)(g_partyPanel + temp_v1 % 4 + 0x9c0) != '\0') {
               scrollOwnerSelectIndex(temp_v5,temp_v1 % 4);
               temp_v1 = ((int)(temp_v1 + ((unsigned int)(temp_v1 >> 0x1f) >> 0x1e)) >> 2) + 1;
-              FUN_002a4964(temp_v5,temp_v1);
+              scrollListSetSelectionTracked(temp_v5,temp_v1);
               break;
             }
             temp_v1 = temp_v1 + 1;
@@ -377,14 +377,14 @@ LAB_002c4858:
                 if (temp_v5 < 0xc) {
                   *(unsigned int *)(temp_v6 + 0x2c) = 0;
                   scrollOwnerSelectIndex(temp_v6 + 0xd50,temp_v1 % 4);
-                  FUN_002a4964(temp_v6 + 0xd50,
+                  scrollListSetSelectionTracked(temp_v6 + 0xd50,
                                ((int)(temp_v1 + ((unsigned int)(temp_v1 >> 0x1f) >> 0x1e)) >> 2) + 1);
                 }
                 else {
                   temp_v5 = temp_v5 - 0xc;
                   *(unsigned int *)(temp_v6 + 0x2c) = 1;
                   scrollOwnerSelectIndex(temp_v6 + 0xd50,temp_v5 % 4);
-                  FUN_002a4964(temp_v6 + 0xd50,
+                  scrollListSetSelectionTracked(temp_v6 + 0xd50,
                                ((int)(temp_v5 + ((unsigned int)(temp_v5 >> 0x1f) >> 0x1e)) >> 2) + 1);
                 }
                 if (temp_v1 < 0x18) goto LAB_002c4a2c;
@@ -400,7 +400,7 @@ LAB_002c4858:
               scrollOwnerSelectIndex(temp_v6 + 0xd50);
               temp_v1 = 0;
               temp_v5 = temp_v6 + 0xd50;
-              FUN_002a4964(temp_v5,temp_v1);
+              scrollListSetSelectionTracked(temp_v5,temp_v1);
               break;
             }
             temp_v1 = temp_v1 + 1;
@@ -410,7 +410,7 @@ LAB_002c4858:
           do {
             if (*(char *)(g_partyPanel + temp_v1 + 0x9c0) != '\0') {
               scrollOwnerSelectIndex(temp_v6 + 0xd50,temp_v1);
-              FUN_002a4964(temp_v6 + 0xd50,0);
+              scrollListSetSelectionTracked(temp_v6 + 0xd50,0);
               if (temp_v1 < 4) goto LAB_002c4a2c;
               break;
             }
@@ -433,19 +433,19 @@ LAB_002c49c4:
                   uiSpriteSetKeyframe(temp_v1 + 0x180,5,0);
                   temp_v2 = 0;
                   do {
-                    FUN_003f5220(*(unsigned int *)(temp_v1 + temp_v2 * 4 + 0xa10),
+                    slotPlacementAssignSlotPosition(*(unsigned int *)(temp_v1 + temp_v2 * 4 + 0xa10),
                                  *(unsigned int *)(temp_v1 + 0x2c));
                     temp_v2 = temp_v2 + 1;
                   } while (temp_v2 < 4);
                   temp_v2 = 0;
                   do {
-                    FUN_003f5220(*(unsigned int *)(temp_v1 + temp_v2 * 4 + 0xa20),
+                    slotPlacementAssignSlotPosition(*(unsigned int *)(temp_v1 + temp_v2 * 4 + 0xa20),
                                  *(unsigned int *)(temp_v1 + 0x2c));
                     temp_v2 = temp_v2 + 1;
                   } while (temp_v2 < 0x18);
                 }
                 scrollOwnerSelectIndex(temp_v6 + 0xd50,temp_v5 % 4);
-                FUN_002a4964(temp_v6 + 0xd50,
+                scrollListSetSelectionTracked(temp_v6 + 0xd50,
                              ((int)(temp_v5 + ((unsigned int)(temp_v5 >> 0x1f) >> 0x1e)) >> 2) + 1);
                 break;
               }
@@ -457,13 +457,13 @@ LAB_002c49c4:
                 uiSpriteSetKeyframe(temp_v1 + 0x180,4,0);
                 temp_v2 = 0;
                 do {
-                  FUN_003f5220(*(unsigned int *)(temp_v1 + temp_v2 * 4 + 0xa10),
+                  slotPlacementAssignSlotPosition(*(unsigned int *)(temp_v1 + temp_v2 * 4 + 0xa10),
                                *(unsigned int *)(temp_v1 + 0x2c));
                   temp_v2 = temp_v2 + 1;
                 } while (temp_v2 < 4);
                 temp_v2 = 0;
                 do {
-                  FUN_003f5220(*(unsigned int *)(temp_v1 + temp_v2 * 4 + 0xa20),
+                  slotPlacementAssignSlotPosition(*(unsigned int *)(temp_v1 + temp_v2 * 4 + 0xa20),
                                *(unsigned int *)(temp_v1 + 0x2c));
                   temp_v2 = temp_v2 + 1;
                 } while (temp_v2 < 0x18);
@@ -472,7 +472,7 @@ LAB_002c49c4:
               scrollOwnerSelectIndex(temp_v6 + 0xd50,temp_v5 % 4);
               temp_v1 = ((int)(temp_v5 + ((unsigned int)(temp_v5 >> 0x1f) >> 0x1e)) >> 2) + 1;
               temp_v5 = temp_v6 + 0xd50;
-              FUN_002a4964(temp_v5,temp_v1);
+              scrollListSetSelectionTracked(temp_v5,temp_v1);
               break;
             }
             if (*(char *)(g_partyPanel + temp_v5 % 4 + 0x9c0) != '\0') goto LAB_002c49c4;

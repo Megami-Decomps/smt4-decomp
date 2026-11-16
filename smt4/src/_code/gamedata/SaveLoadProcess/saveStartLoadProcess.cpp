@@ -10,7 +10,7 @@ void gameDataBlocksAddFlags(u32 flags);
 void gameDataFlagsSetBits(u32 flags);
 void gameDataFlagsSet(u32 flags);
 GameSaveData *gameDataBlocksGetSaveData(void);
-s32 FUN_002efa00(u32 job);
+s32 saveLoadProcessLoadUpdate(u32 job);
 void jobTeardownFlagsAndWork(u32 process);
 void asdProcessClearSelectedFlags(u32 process, u32 mask, u32 flags);
 
@@ -31,7 +31,7 @@ u32 saveStartLoadProcess(u32 option)
     g_byteSettings.fourth = 0;
     g_byteSettings.flags = 0;
     g_byteSettings.value = 0;
-    work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("Load"), 2, 0, 0, FUN_002efa00, jobTeardownFlagsAndWork, reinterpret_cast<u32>(work));
+    work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("Load"), 2, 0, 0, saveLoadProcessLoadUpdate, jobTeardownFlagsAndWork, reinterpret_cast<u32>(work));
     asdProcessClearSelectedFlags(work->process, 0x80000, 0);
     work->option = option;
     g_byteSettings.selected = 0;

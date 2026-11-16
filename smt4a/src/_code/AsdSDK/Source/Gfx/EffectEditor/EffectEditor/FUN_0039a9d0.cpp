@@ -7,7 +7,7 @@ int textFormatBuffer(int, unsigned char *, unsigned int);
 int padButtonIsPressed(...);
 int memAlloc(int, int, int, unsigned int, int, int);
 int asdMemFree(...);
-int FUN_001b4ddc(...);
+int effPartInitDefaults(...);
 int FUN_00200bcc(unsigned int *);
 int FUN_00202178(int);
 int effEditorNodeChainApply(unsigned int *);
@@ -71,7 +71,7 @@ extern unsigned int DAT_0059ea30; /* 0x59ea30 */
 /* Supplied declaration required: padButtonIsPressed. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_001b4ddc. */
+/* Supplied declaration required: effPartInitDefaults. */
 /* Supplied declaration required: FUN_00200bcc. */
 /* Supplied declaration required: FUN_00202178. */
 /* Supplied declaration required: effEditorNodeChainApply. */
@@ -179,7 +179,7 @@ LAB_0039ab4c:
     if (temp_v4 == 0) goto LAB_0039ad94;
     temp_v6 = VectorFloatToUnsigned(*(unsigned int *)(temp_v0 + DAT_0059ea24 * 0x18 + 0x14),3);
     piVar3 = (int *)(param_2 + temp_v6 * 0x1c);
-    FUN_001b4ddc(&g_effectEditorSavedSnapshot);
+    effPartInitDefaults(&g_effectEditorSavedSnapshot);
     temp_v6 = *piVar3;
     if (piVar3[2] != 0) {
       temp_v1 = effBlockLoadClone();
@@ -262,7 +262,7 @@ LAB_0039ab4c:
           asdEffectQueueRelease(DAT_0059dbf0,3);
           DAT_0059dbf0 = 0;
         }
-        FUN_001b4ddc(&g_effectEditorSavedSnapshot);
+        effPartInitDefaults(&g_effectEditorSavedSnapshot);
         g_effectEditorSavedSnapshot.payload.saved.words[0] = *(unsigned int *)(param_2 + 0xc);
         g_effectEditorSavedSnapshot.payload.saved.words[1] = *(unsigned int *)(param_2 + 0x10);
         g_effectEditorSavedSnapshot.payload.saved.words[2] = *(unsigned int *)(param_2 + 0x14);

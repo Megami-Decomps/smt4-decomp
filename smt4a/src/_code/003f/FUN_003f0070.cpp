@@ -6,7 +6,7 @@
 
 extern "C" {
 s32 FUN_003e4978(void);
-PartySlotA *FUN_003e4d68(u16 slot);
+PartySlotA *partyGetSlot(u16 slot);
 s32 partySlotMatchesSelected(PartySlotA *slot);
 PartySlotA *saveSlotFindSelected(void);
 s32 lcgRandomRange(u16 maximum);
@@ -23,8 +23,8 @@ void FUN_003f0070(u32 request)
     u16 candidates[12] = {0};
     s32 count = 0;
     for (s32 index = 0; index < 12; ++index) {
-        PartySlotA *slot = FUN_003e4d68((u16)index);
-        if (FUN_00187168(slot) != 0 && partySlotMatchesSelected(slot) == 0) {
+        PartySlotA *slot = partyGetSlot((u16)index);
+        if (partySlotIsOccupied(slot) != 0 && partySlotMatchesSelected(slot) == 0) {
             candidates[count++] = slot->id;
         }
     }

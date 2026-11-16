@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016e800(int, int);
+int sysReportCheckFailure(int, int);
 int nn_gxlow_CTR_SaveVramSysArea(void);
 int FUN_00170390(int);
 int FUN_001703b0(int);
@@ -23,7 +23,7 @@ typedef struct {
 
 extern unsigned char DAT_005891b0; /* 0x5891b0 */
 
-/* Supplied declaration required: FUN_0016e800. */
+/* Supplied declaration required: sysReportCheckFailure. */
 /* Supplied declaration required: nn_gxlow_CTR_SaveVramSysArea. */
 /* Supplied declaration required: FUN_00170390. */
 /* Supplied declaration required: FUN_001703b0. */
@@ -82,7 +82,7 @@ int FUN_001a2d04(unsigned int param_1,unsigned int param_2,unsigned int param_3,
       }
     }
     if (temp_v1 < 0) {
-      FUN_0016e800(temp_v1,0x1a2e34);
+      sysReportCheckFailure(temp_v1,0x1a2e34);
     }
     FUN_00170e58();
   }

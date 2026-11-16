@@ -8,12 +8,12 @@ extern "C" {
 
 int textFormatBuffer(...);
 int libc_strcat(...);
-int FUN_001654f8(unsigned char [64], unsigned char [136], int);
+int textExpandGlyphsToBuffer(unsigned char [64], unsigned char [136], int);
 int sysPlaySe(...);
 int jyoucyuGetTableEntry(...);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
-int FUN_00275bc8(...);
+int scrScriptProcessCreate(...);
 int scrScriptProcessStartEntry(...);
 int asdLoadFileAsyncSimple(...);
 int messageGetChoiceResult(void);
@@ -21,7 +21,7 @@ int libc_strcpy(unsigned char [64], unsigned int);
 int sysMemClear(unsigned int *, int);
 int buttonHelpSetSelectedId(int);
 int messageSetIndexedFlag(unsigned int, unsigned int);
-int FUN_003fe86c(...);
+int modelPlayClip(...);
 int pickObjStart(unsigned int *, unsigned char *);
 int FUN_0046a278(unsigned int *, unsigned int);
 int candidateGetPreferredValue(...);
@@ -37,15 +37,15 @@ extern unsigned char LAB_0046b910; /* 0x46b910 */
 
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcat. */
-/* Supplied declaration required: FUN_001654f8. */
+/* Supplied declaration required: textExpandGlyphsToBuffer. */
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_001695a0. */
+/* Supplied declaration required: messageSetScriptDisplayMode. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 extern unsigned int gameSaveTestFlag(unsigned short, unsigned char);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: FUN_00275bc8. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 extern unsigned int messageMainGetValue(void);
@@ -57,12 +57,12 @@ extern int messageWindowIsState1(void);
 extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
 /* Supplied declaration required: messageSetIndexedFlag. */
 /* Supplied declaration required: FUN_003c1060. */
-/* Supplied declaration required: FUN_003fe86c. */
+/* Supplied declaration required: modelPlayClip. */
 /* Supplied declaration required: pickObjStart. */
 /* Supplied declaration required: FUN_0046a278. */
 extern int dataTable27GetEntry(int, unsigned int);
 /* Supplied declaration required: candidateGetPreferredValue. */
-extern int FUN_004ffba8(int);
+extern int animationChannelsAllFinished(int);
 
 
 void FUN_0046b18c(unsigned int *param_1)
@@ -88,12 +88,12 @@ void FUN_0046b18c(unsigned int *param_1)
   case 0:
     if (param_1[0x2b6] != 0) {
       temp_v4 = *(int *)(param_1[*(int *)(param_1[0x2b6] + 4) + 0x283] + 4);
-      temp_v3 = FUN_004ffba8(temp_v4);
+      temp_v3 = animationChannelsAllFinished(temp_v4);
       if (temp_v3 == 0) {
         return;
       }
       *(unsigned int *)(temp_v4 + 0x1fc) = temp_v6;
-      FUN_003fe86c(temp_v4,0);
+      modelPlayClip(temp_v4,0);
       param_1[0x2b6] = 0;
     }
     param_1[2] = param_1[2] + 1;
@@ -106,7 +106,7 @@ void FUN_0046b18c(unsigned int *param_1)
       do {
         temp_v3 = dataTable27GetEntry((int)param_1 + 0x19,0);
         libc_strcpy(temp_v7,temp_v3 + param_1[temp_v2 * 2 + 0x29c] * 0x88);
-        FUN_001654f8(temp_v7,temp_v9,0);
+        textExpandGlyphsToBuffer(temp_v7,temp_v9,0);
         libc_strcat(puVar2,temp_v9);
         libc_strcat(puVar2,"<br>");
         param_1[param_1[0x2b4] + 0x2b0] = temp_v2;
@@ -164,7 +164,7 @@ void FUN_0046b18c(unsigned int *param_1)
         param_1[0x2b6] = (unsigned int)(param_1 + temp_v2 * 2 + 0x29c);
         temp_v3 = *(int *)(param_1[param_1[temp_v2 * 2 + 0x29d] + 0x283] + 4);
         *(unsigned int *)(temp_v3 + 0x1fc) = temp_v5;
-        FUN_003fe86c(temp_v3,0);
+        modelPlayClip(temp_v3,0);
         param_1[2] = param_1[2] + 1;
         *param_1 = *param_1 | 0x100;
         temp_v3 = 0;
@@ -239,7 +239,7 @@ void FUN_0046b18c(unsigned int *param_1)
     temp_v3 = scrRunOpcodesStub(param_1[0xa9]);
     if (temp_v3 == 2) {
       *(unsigned int *)(*(int *)(param_1[*(int *)(param_1[0x2b6] + 4) + 0x283] + 4) + 0x1fc) = temp_v5;
-      FUN_001695a0();
+      messageSetScriptDisplayMode();
       if (param_1[0xa9] != 0) {
         scrScriptProcessDestroy();
         param_1[0xa9] = 0;
@@ -275,7 +275,7 @@ void FUN_0046b18c(unsigned int *param_1)
     param_1[0x2b6] = (unsigned int)(param_1 + temp_v2 * 2 + 0x29c);
     temp_v3 = *(int *)(param_1[param_1[temp_v2 * 2 + 0x29d] + 0x283] + 4);
     *(unsigned int *)(temp_v3 + 0x1fc) = 0x3f800000;
-    FUN_003fe86c(temp_v3,0);
+    modelPlayClip(temp_v3,0);
     sysPlaySe(0xa4);
     temp_v3 = dataTable27GetEntry((int)param_1 + 0x19,0);
     temp_v0 = *(unsigned short *)(temp_v3 + *(int *)param_1[0x2b6] * 0x88 + 0x6a);
@@ -302,9 +302,9 @@ void FUN_0046b18c(unsigned int *param_1)
 LAB_0046b85c:
     temp_v3 = *(int *)(param_1[*(int *)(param_1[0x2b6] + 4) + 0x283] + 4);
     *(unsigned int *)(temp_v3 + 0x1fc) = temp_v6;
-    FUN_003fe86c(temp_v3,0);
+    modelPlayClip(temp_v3,0);
     temp_v2 = param_1[0xa7];
-    FUN_00275bc8(temp_v2,param_1[0xa8]);
+    scrScriptProcessCreate(temp_v2,param_1[0xa8]);
     param_1[0xa9] = temp_v2;
     *(unsigned int *)(temp_v2 + 0x108) = 2;
     temp_v3 = dataTable27GetEntry((int)param_1 + 0x19,0);
@@ -319,7 +319,7 @@ LAB_0046b85c:
     temp_v3 = scrRunOpcodesStub(param_1[0xa9]);
     if (temp_v3 == 2) {
       *(unsigned int *)(*(int *)(param_1[*(int *)(param_1[0x2b6] + 4) + 0x283] + 4) + 0x1fc) = temp_v5;
-      FUN_001695a0();
+      messageSetScriptDisplayMode();
       if (param_1[0xa9] != 0) {
         scrScriptProcessDestroy();
         param_1[0xa9] = 0;

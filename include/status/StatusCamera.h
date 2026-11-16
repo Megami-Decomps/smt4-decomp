@@ -58,7 +58,7 @@ void FUN_00220d24(u8 value);
 extern "C" {
 #endif
 
-s32 FUN_0029a924(u32 id);
+s32 appGetRemainingCapacity(u32 id);
 
 #ifdef __cplusplus
 }

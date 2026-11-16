@@ -13,7 +13,7 @@ struct BattleTextureResourceRecord {
 extern "C" {
 BattleTextureResourceRecord *dataTable25FindById(u32 id);
 s32 FUN_002c1d5c();
-u32 FUN_00294090(s32 textureId, s32 flags);
+u32 eventResourceCacheAcquire(s32 textureId, s32 flags);
 u32 uiStepAnimatedContentTask(void *job);
 u32 FUN_001e023c(void *job);
 void jobWorkRelease(void *job);
@@ -37,7 +37,7 @@ void *eventCreateResourceBattleTexture(u32 id, f32 x, f32 y)
     if (FUN_002c1d5c()) {
         work->state = 1;
     } else {
-        work->resource = FUN_00294090(work->textureId, 1);
+        work->resource = eventResourceCacheAcquire(work->textureId, 1);
         work->state = 2;
     }
     work->id = id;

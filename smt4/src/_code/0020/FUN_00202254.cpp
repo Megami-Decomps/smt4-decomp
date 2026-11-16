@@ -12,7 +12,7 @@ extern GameStateView g_gameState;
 
 extern unsigned char* DAT_004474f4;
 
-int FUN_0028c618(unsigned int, int);
+int modelPartSetRotationDegrees(unsigned int, int);
 int nodeSetTranslation(unsigned int, int, float *);
 void FUN_002e29c0(float x, float z, float heading);
 float cameraGetTargetAngle(void);
@@ -40,7 +40,7 @@ extern int DAT_004bd610; /* 0x4bd610 */
 extern int iRam004bd614; /* 0x4bd614 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0028c618. */
+/* Supplied declaration required: modelPartSetRotationDegrees. */
 /* Supplied declaration required: nodeSetTranslation. */
 extern int gameGetMapBlock(void);
 
@@ -236,7 +236,7 @@ void FUN_00202254(void)
 LAB_0020267c:
                   if (puVar3 != (unsigned int *)0x0) {
                     nodeSetTranslation(puVar3[2],0,&temp_v15);
-                    FUN_0028c618(puVar3[2],0);
+                    modelPartSetRotationDegrees(puVar3[2],0);
                     if ((*puVar3 & 2) != 0) {
                       *puVar3 = *puVar3 & 0xfffffffd;
                       *(unsigned char *)(*(int *)(puVar3[2] + 0x2c) + 0x1f6) = 1;
@@ -260,7 +260,7 @@ LAB_002026d0:
                     temp_v11 = temp_v11 & 0xffffffff00000000;
                   }
                   nodeSetTranslation(*(unsigned int *)(DAT_004bd610 + 8),0,&temp_v15);
-                  FUN_0028c618(*(unsigned int *)(temp_v5 + 8),0);
+                  modelPartSetRotationDegrees(*(unsigned int *)(temp_v5 + 8),0);
                 }
                 temp_v5 = iRam004bd614;
                 if ((*(char *)(temp_v4 + 0x3f) == '\x01') && (iRam004bd614 != 0)) {
@@ -278,7 +278,7 @@ LAB_002026d0:
                     temp_v11 = temp_v11 & 0xffffffff00000000;
                   }
                   nodeSetTranslation(*(unsigned int *)(iRam004bd614 + 8),0,&temp_v15);
-                  FUN_0028c618(*(unsigned int *)(temp_v5 + 8),0);
+                  modelPartSetRotationDegrees(*(unsigned int *)(temp_v5 + 8),0);
                 }
                 temp_v12 = (unsigned int)(temp_v11 >> 0x20);
                 if (*(char *)(temp_v4 + 0x43) != '\x02') {
@@ -299,7 +299,7 @@ LAB_002026d0:
                         temp_v11 = temp_v11 & 0xffffffff00000000;
                       }
                       nodeSetTranslation(*(unsigned int *)(temp_v5 + 8),0,&temp_v15);
-                      FUN_0028c618(*(unsigned int *)(temp_v5 + 8),0);
+                      modelPartSetRotationDegrees(*(unsigned int *)(temp_v5 + 8),0);
                     }
                     temp_v6 = temp_v6 + 1;
                   }
@@ -309,7 +309,7 @@ LAB_002026d0:
                   if (temp_v4 != 0) {
                     temp_v11 = (unsigned long long)temp_v12 << 0x20;
                     nodeSetTranslation(*(unsigned int *)(temp_v4 + 8),0,&temp_v15);
-                    FUN_0028c618(*(unsigned int *)(temp_v4 + 8),0);
+                    modelPartSetRotationDegrees(*(unsigned int *)(temp_v4 + 8),0);
                   }
                   temp_v6 = temp_v6 + 1;
                 }

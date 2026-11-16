@@ -42,7 +42,7 @@ extern int gameGetSlotTable(void);
 extern unsigned int gameSlotTableFindFree(void);
 /* Supplied declaration required: uiAdjustIntegerFromRepeat. */
 /* Supplied declaration required: slotSetRequest. */
-/* Supplied declaration required: FUN_00212204. */
+/* Supplied declaration required: screenFadeSlotReset. */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00239b08. */
 /* Supplied declaration required: FUN_00261a28. */
@@ -50,7 +50,7 @@ extern int scrRunOpcodesStub(unsigned int);
 extern int screenFadeIsBusy(void);
 extern unsigned int messageMainGetValue(void);
 extern int messageGetChoiceResult(void);
-extern int FUN_002e07f4(void);
+extern int pairedAvailabilityBothReady(void);
 extern int FUN_0037de28(void);
 /* Supplied declaration required: saveLoadStartWindowWithArgument. */
 /* Supplied declaration required: FUN_003d54f8. */
@@ -82,7 +82,7 @@ unsigned int FUN_00241058(void)
     FUN_003d54f8(1,0x14);
     break;
   case 2:
-    temp_v5 = FUN_002e07f4();
+    temp_v5 = pairedAvailabilityBothReady();
     if (temp_v5 != 0) {
       *(unsigned int *)(temp_v0 + 0xc) = 8;
       sysPlaySe(0xa9);
@@ -280,8 +280,8 @@ unsigned int FUN_00241058(void)
     temp_v5 = screenFadeIsBusy();
     if (temp_v5 == 0) {
       if (*(char *)(temp_v0 + 8) != '\0') {
-        FUN_00212204(0);
-        FUN_00212204(1);
+        screenFadeSlotReset(0);
+        screenFadeSlotReset(1);
         jobStop(*g_clearSave,0);
       }
       else {

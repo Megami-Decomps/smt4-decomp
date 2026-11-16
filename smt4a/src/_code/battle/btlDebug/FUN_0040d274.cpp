@@ -182,7 +182,7 @@ LAB_0040d588:
     FUN_004f4348(g_btlCamera, in_s0, in_s1, in_s2, *(unsigned int *)(param_2 + 0x28), (int)*(short *)(param_2 + 0x48));
     temp_v11[0] = in_s0;
     temp_v12 = in_s2;
-    temp_v4 = FUN_00152f54();
+    temp_v4 = asdCameraGetSavedRenderPairs();
     FUN_002a1850(temp_v11,0,temp_v4);
     temp_v5 = g_btlCamera;
     temp_v6 = (temp_v11[0] - 200.0f) * 0.006666667f;
@@ -330,7 +330,7 @@ LAB_0040d588:
       FUN_004f1b2c(g_btlCamera,*(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48));
       temp_v11[0] = in_s0;
       temp_v12 = in_s2;
-      temp_v4 = FUN_00152f54();
+      temp_v4 = asdCameraGetSavedRenderPairs();
       FUN_002a1850(temp_v11,0,temp_v4);
       temp_v6 = (temp_v11[0] - 200.0f) * 0.006666667f;
       if (temp_v6 < 0.0f) {

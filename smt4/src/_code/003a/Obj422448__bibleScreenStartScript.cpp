@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern BibleScript *FUN_00297060(BibleFiles files);
+extern BibleScript *scrScriptProcessCreate(BibleFiles files);
 extern int messageTargetSetValue(int, int);
 extern int messageBannerInitSelection(int, int);
 extern int buttonHelpSetPreset(int);
@@ -19,7 +19,7 @@ void Obj422448::bibleScreenStartScript()
 {
     BibleScreen * screen = reinterpret_cast<BibleScreen *>(this);
     if (spriteTable22AllLoaded() != 0) {
-        BibleScript *script = FUN_00297060(screen->files);
+        BibleScript *script = scrScriptProcessCreate(screen->files);
         s32 scroll;
 
         screen->script = script;

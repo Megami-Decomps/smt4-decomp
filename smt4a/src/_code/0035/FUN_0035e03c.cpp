@@ -58,7 +58,7 @@ void playerMaskSetBit(u32 bit);
 void halves34Copy(EffectUnit *unit, u16 *words);
 s32 bitsAt60Test(EffectUnit *unit, u32 bit);
 void bitsAt60Set(EffectUnit *unit, u32 bit);
-u32 FUN_004ccbf0(u16 level);
+u32 levelGetExpRequirement(u16 level);
 u32 FUN_004cc8d8(u16 level, u16 race);
 void gameDataAddCappedPoints(u16 points);
 s32 FUN_003df4a4(void);
@@ -124,13 +124,13 @@ u32 FUN_0035e03c(s32 target, ItemEffect *effect, s32 check, s32 preview)
     }
 
     if (effect->experiencePercent != 0 &&
-        ((player != NULL && FUN_004ccbf0(player->level) != player->experience) ||
+        ((player != NULL && levelGetExpRequirement(player->level) != player->experience) ||
          (unit != NULL && FUN_004cc8d8(unit->level, unit->race) != unit->experience))) {
         if (preview == 0) {
             if (player != NULL) {
-                player->experience += (s32)(effect->experiencePercent * FUN_004ccbf0(player->level)) / 100;
-                if (FUN_004ccbf0(player->level) < player->experience) {
-                    player->experience = FUN_004ccbf0(player->level);
+                player->experience += (s32)(effect->experiencePercent * levelGetExpRequirement(player->level)) / 100;
+                if (levelGetExpRequirement(player->level) < player->experience) {
+                    player->experience = levelGetExpRequirement(player->level);
                 }
             } else if (unit != NULL) {
                 unit->experience += (s32)(effect->experiencePercent * FUN_004cc8d8(unit->level, unit->race)) / 100;

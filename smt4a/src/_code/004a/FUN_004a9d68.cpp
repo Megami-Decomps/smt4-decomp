@@ -34,7 +34,7 @@ u32 FUN_004a9d68(u32 request, u64 *ownerFlags, f32 x, f32 y, f32 z)
     ui->actionRequests.slots[index].progress = 0.0f;
     ui->actionRequests.slots[index].active = 0;
     BattleUiActionVector position = {x, y, z};
-    FUN_002a1850(&position.x, 0, reinterpret_cast<ProjectionMatrices *>(FUN_00152f54()), &position.x);
+    FUN_002a1850(&position.x, 0, reinterpret_cast<ProjectionMatrices *>(asdCameraGetSavedRenderPairs()), &position.x);
     ui->actionRequests.slots[index].projected = position;
     ui->actionRequests.slots[index].velocity[0] = ui->actionRequests.slots[index].velocity[1] = ui->actionRequests.slots[index].velocity[2] = 0.0f;
     ui->actionRequests.slots[index].acceleration[0] = ui->actionRequests.slots[index].acceleration[1] = ui->actionRequests.slots[index].acceleration[2] = 0.0f;

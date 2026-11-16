@@ -68,7 +68,7 @@ int FUN_00233e10(int, unsigned int);
 int FUN_002b4cf4(void);
 int libc_strcpy(unsigned int *, int);
 int mathPositionHeadingDegrees(void);
-int FUN_0050d8e4(void);
+int __hardfp_atan2f(void);
 
 /* stack frame of void: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -142,7 +142,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_002b4cf4. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
-/* Supplied declaration required: FUN_0050d8e4. */
+/* Supplied declaration required: __hardfp_atan2f. */
 
 
 void FUN_00311b74(void)
@@ -494,7 +494,7 @@ void FUN_00311b74(void)
           if ((int)romwright_sqrt_4((temp_v17 - temp_v15) * (temp_v17 - temp_v15) + (temp_v18 - in_s2) * (temp_v18 - in_s2))
               < 0x43480000) {
             temp_v17 = in_s3;
-            FUN_0050d8e4();
+            __hardfp_atan2f();
             FUN_002b4cf4();
             if (temp_v17 < temp_v19) {
               temp_v17 = -temp_v17;

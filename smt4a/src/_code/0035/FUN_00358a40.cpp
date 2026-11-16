@@ -18,9 +18,9 @@ typedef char TermScreenASlotsOffsetCheck[offsetof(TermScreenA, slots) == 0x57C ?
 extern "C" {
 extern TermScreenA *g_tmnl;
 extern RenderCtxA *g_renderCtx;
-s32 FUN_00387580(u32 mode, f32 alpha);
-s32 FUN_001692ac(u32 kind, u32 enabled);
-void FUN_00182540(u32 handle);
+s32 renderCtxPackPassFlagsWithAlpha(u32 mode, f32 alpha);
+s32 renderCtxPackPassFlags(u32 kind, u32 enabled);
+void effectNodeUpdatePlacedChildren(u32 handle);
 
 /* Draws the terminal's slot handles with three render states pushed, for pages 1..17. */
 u32 FUN_00358a40(void)
@@ -28,17 +28,17 @@ u32 FUN_00358a40(void)
     TermScreenA *screen = g_tmnl;
     if ((u32)(screen->page - 1) < 17) {
         RenderCtxA *context = g_renderCtx;
-        s32 state = FUN_00387580(6, 0.0f);
+        s32 state = renderCtxPackPassFlagsWithAlpha(6, 0.0f);
         renderCtxPushC(context, state);
         context = g_renderCtx;
-        state = FUN_001692ac(1, 0);
+        state = renderCtxPackPassFlags(1, 0);
         renderStackPushCountedDirect(&context->stackA, state);
         context = g_renderCtx;
         state = packNibblesAndByte(6, 1, 0);
         renderCtxPushB(context, state);
         for (s32 i = 0; i < 4; ++i) {
             if (screen->slots[i].inUse != 0) {
-                FUN_00182540(screen->slots[i].handle);
+                effectNodeUpdatePlacedChildren(screen->slots[i].handle);
             }
         }
         renderStackPop(&g_renderCtx->stackB);

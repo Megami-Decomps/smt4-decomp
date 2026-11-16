@@ -13,7 +13,7 @@ u32 dataArchiveSetFindFileWithEntry(AocSystemA *system, s32 id);
 u32 dataTableValueOrZero(u32 table);
 void asdTextDrawDirectoryEntry(AsdText *text, s32 font, s32 mode, s32 x, s32 y, u32 directory, s32 index);
 s32 FUN_001688c4(AsdText *text);
-void FUN_00203b40(GridNavigation *navigation, s32 count, s32 visibleRows, s32 columns, s32 wrap, s32 alternateKeys);
+void gridNavigationConfigure(GridNavigation *navigation, s32 count, s32 visibleRows, s32 columns, s32 wrap, s32 alternateKeys);
 void flagsSetOrClearBit(GridNavigation *navigation, s32 enabled);
 
 // Play the mode-specific selection sound and rebuild the selected entry's scrollable caption.
@@ -42,7 +42,7 @@ void FUN_00333de0(s32 selected)
         asdTextDrawDirectoryEntry(status->caption.text, 3, -1, 0, 3, dataTableValueOrZero(0x3F), 0);
     }
     s32 count = FUN_001688c4(status->caption.text);
-    FUN_00203b40(&status->caption.navigation, count, 10, 1, 0, 1);
+    gridNavigationConfigure(&status->caption.navigation, count, 10, 1, 0, 1);
     flagsSetOrClearBit(&status->caption.navigation, 0);
     status->inventoryDirty = 1;
 }

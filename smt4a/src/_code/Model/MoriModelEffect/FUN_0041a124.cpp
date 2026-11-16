@@ -37,7 +37,7 @@ void FUN_0041a124(ModelEffects *effects, u32 modelId)
         ModelEffectEntry *source = table->entries[i];
 
         if (!(source->flags & 1) && source->id == modelId) {
-            ModelEffectEntry *memory = static_cast<ModelEffectEntry *>(FUN_00178b04(
+            ModelEffectEntry *memory = static_cast<ModelEffectEntry *>(asdMemoryAllocTraced(
                 sizeof(ModelEffectEntry), DAT_00526044, 240));
             if (memory != NULL) {
                 memory->id = -1;
@@ -49,7 +49,7 @@ void FUN_0041a124(ModelEffects *effects, u32 modelId)
             copy->id = source->id;
             copy->flags = source->flags;
             copy->unk08 = source->unk08;
-            copy->unk0C = FUN_00291038(source->unk0C);
+            copy->unk0C = effPartClone(source->unk0C);
             list->items[n++] = copy;
         }
     }

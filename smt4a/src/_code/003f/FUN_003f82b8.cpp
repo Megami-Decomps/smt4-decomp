@@ -52,9 +52,9 @@ void FUN_003f82b8(CampStatusScreen *screen)
         s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
         s32 drawX = x + parallax;
         efctSetSpeed(speed);
-        FUN_001835b4(2, 49, 0, drawX, y, 141);
-        FUN_001835b4(2, 49, 1, drawX, y, 141);
-        FUN_001835b4(2, 49, 9, drawX, y, 141);
+        texDrawTableEntryAtStoredOrigin(2, 49, 0, drawX, y, 141);
+        texDrawTableEntryAtStoredOrigin(2, 49, 1, drawX, y, 141);
+        texDrawTableEntryAtStoredOrigin(2, 49, 9, drawX, y, 141);
         break;
     }
     case 4:

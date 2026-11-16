@@ -15,10 +15,10 @@ typedef char ParameterOverlayWorkSpeedOffsetCheck[
 
 extern "C" {
 extern RenderCtx *g_titleScene;
-s32 FUN_002c5d80(u32 preset, u32 index);
+s32 renderCtxPackPassFlags(u32 preset, u32 index);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *animation);
-void FUN_002bed3c(void);
+void gxResetColorQuadToWhite(void);
 void renderCtxResetColorScale(RenderCtx *context);
 
 // Draw the enabled overlay at the owner's animation speed and restore render state.
@@ -31,12 +31,12 @@ u32 aocBoardDrawParameterOverlay(u32 job)
     if (enabled == 0)
         return enabled;
     RenderCtx *context = g_titleScene;
-    renderCtxPushA(context, FUN_002c5d80(1, 0));
+    renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
     efctSetSpeed(vec2GetSpeed(work->animation));
-    FUN_002bf288(2, 14, 0x14F, 0, 0, 6);
+    texDrawTableEntryAtStoredOrigin(2, 14, 0x14F, 0, 0, 6);
     efctSetSpeed(1.0f);
     renderStackPop(&g_titleScene->stackA);
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     renderCtxApplyTransforms(g_titleScene);
     renderCtxResetColorScale(g_titleScene);
     return 0;

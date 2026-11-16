@@ -34,7 +34,7 @@ int btlTargetSetFlag10(...);
 int btlReflectInitKind9(...);
 int FUN_00246080(...);
 int FUN_00247478(...);
-int FUN_002505c0(...);
+int btlQueueKeyedScalarReflectAction(...);
 int btlAdjustPropertyClamped(...);
 int btlMainFindEntryByListedId(...);
 int passiveSkillLookupRecord(void);
@@ -155,7 +155,7 @@ extern int FUN_00245cc0(void);
 /* Supplied declaration required: FUN_00246080. */
 /* Supplied declaration required: FUN_00247478. */
 extern int btlMainFindActiveEntry(int, int);
-/* Supplied declaration required: FUN_002505c0. */
+/* Supplied declaration required: btlQueueKeyedScalarReflectAction. */
 /* Supplied declaration required: btlAdjustPropertyClamped. */
 extern int battleGetEntryHalfword(int, unsigned int);
 /* Supplied declaration required: FUN_002551ac. */
@@ -430,7 +430,7 @@ void FUN_003ccaac(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
       }
     }
     else {
-      FUN_002505c0(0,0,0x10001cd,0,1,0,0);
+      btlQueueKeyedScalarReflectAction(0,0,0x10001cd,0,1,0,0);
     }
   }
   temp_v61 = (int)param_2 + param_8 * 10 + 0x900;
@@ -582,7 +582,7 @@ LAB_003cd124:
         if (temp_v8 != 0) {
           temp_v25 = 0x10001ea;
           temp_v5 = 1;
-          FUN_002505c0(temp_v7,0,temp_v25,0,1,0,0);
+          btlQueueKeyedScalarReflectAction(temp_v7,0,temp_v25,0,1,0,0);
         }
       }
     }
@@ -610,12 +610,12 @@ LAB_003cd124:
           temp_v7 = 0;
           temp_v25 = 0x10001ce;
           temp_v5 = 1;
-          FUN_002505c0(temp_v7,0,temp_v25,0,1,0,0);
+          btlQueueKeyedScalarReflectAction(temp_v7,0,temp_v25,0,1,0,0);
         }
       }
       else {
         temp_v5 = 1;
-        FUN_002505c0(0,0,0x10001cd,0,1,0,0);
+        btlQueueKeyedScalarReflectAction(0,0,0x10001cd,0,1,0,0);
       }
     }
     if ((temp_v56 != 0) && (temp_v40 < 0x6d)) {
@@ -629,7 +629,7 @@ LAB_003cd124:
       temp_v7 = FUN_00293230(*param_1);
       if (temp_v7 != 0) {
         temp_v5 = 1;
-        FUN_002505c0(temp_v8,0,0x10001ea,0,1,0,0);
+        btlQueueKeyedScalarReflectAction(temp_v8,0,0x10001ea,0,1,0,0);
       }
     }
     temp_v67 = 0;

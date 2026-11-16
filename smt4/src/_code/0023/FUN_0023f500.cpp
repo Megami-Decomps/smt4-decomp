@@ -22,9 +22,9 @@ void FUN_0033a144(BtlMainState *context);
 void FUN_00338424(BtlMainState *context);
 void battleSaveCameraVectors(BtlMainState *context);
 void vec3CopyFromOffsetC(void *main);
-void *FUN_0027da30(BtlMainState *context, s32 id);
+void *btlFindEntryBlockByMemberId(BtlMainState *context, s32 id);
 s32 pairedEntryTableContains(BtlMainState *context, u16 id);
-void FUN_002505c0(s32, s32, s32, s32, s32, s32, s32);
+void btlQueueKeyedScalarReflectAction(s32, s32, s32, s32, s32, s32, s32);
 void FUN_00254f58(BtlMainState *context);
 void btlSetSelectedListedValue(s32 value);
 s32 FUN_002c2a04(u32 channel);
@@ -76,7 +76,7 @@ void FUN_0023f500(BattleEncounterQuery *query, BtlMainState *context)
                 if ((record->status & 1) && (record->status & 2) && (record->flags & 8)) {
                     record->flags &= ~8;
                     if (!(record->presentationFlags & 0x800)) {
-                        u16 *entry = (u16 *)FUN_0027da30(context, record->memberId);
+                        u16 *entry = (u16 *)btlFindEntryBlockByMemberId(context, record->memberId);
 
                         if (!pairedEntryTableContains(context, entry[1])) {
                             record->presentationFlags |= 0x800;
@@ -84,7 +84,7 @@ void FUN_0023f500(BattleEncounterQuery *query, BtlMainState *context)
                     }
                 }
             }
-            FUN_002505c0(0, 0, 0x100017b, 0, 0, 0, 0);
+            btlQueueKeyedScalarReflectAction(0, 0, 0x100017b, 0, 0, 0, 0);
             FUN_00254f58(context);
             context->battleFlags |= 0x200000;
             if (!(context->encounter.flagsE4 & 0x20)) {
@@ -97,7 +97,7 @@ void FUN_0023f500(BattleEncounterQuery *query, BtlMainState *context)
         if (FUN_002c2a04(1) == 3) {
             FUN_002c29d8(1, 10, 0xff);
         }
-        if (FUN_002896bc() != 0) {
+        if (screenFadesAllReady() != 0) {
             query->step = 0xe;
             query->pending = 0;
             FUN_0023fbdc(query, context);

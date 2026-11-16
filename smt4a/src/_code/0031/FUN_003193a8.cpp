@@ -25,26 +25,26 @@ int FUN_0038b548(...);
 int sysPlayVoice(...);
 
 int sysPlaySe(...);
-int FUN_00180118(unsigned int);
+int dataTable01GetRecordWithAocOverride(unsigned int);
 int scrScriptProcessStartEntry(...);
 int gameDataGetRecordValue(void);
 int FUN_002a5e7c(...);
 int statusDownSwitchTab(...);
 int FUN_002c85b0(...);
 int libc_strcpy(unsigned char [36], unsigned int);
-int FUN_003180c4(int, unsigned char [36]);
+int scrSetStringSlot(int, unsigned char [36]);
 int FUN_0031cf00(void);
 int btlTalkBustUpReleaseAllSlots(void);
 int btlTalkBustUpSetDemonTexture(...);
 int btlTalkBustUpReleaseTexture(void);
 int btlTalkBustUpSetUnk2F4(...);
 int statusBustUpPortraitAcquire(unsigned int, int);
-int FUN_004bcd90(...);
+int unitRecomputeDerivedStats(...);
 int __aeabi_memcpy4(int, int, int);
 
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00180118. */
+/* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
 /* Supplied declaration required: FUN_00215bd0. */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0022e774. */
@@ -59,11 +59,11 @@ extern int statusDownGetFlag(void);
 /* Supplied declaration required: statusDownSwitchTab. */
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_002c85b0. */
-extern int FUN_002e1a18(unsigned int);
+extern int buttonHelpIsActionActive(unsigned int);
 /* Supplied declaration required: campCecSetObjectValue. */
 /* Supplied declaration required: libc_strcpy. */
 extern int gameGetMode(void);
-/* Supplied declaration required: FUN_003180c4. */
+/* Supplied declaration required: scrSetStringSlot. */
 /* Supplied declaration required: FUN_00319aec. */
 /* Supplied declaration required: FUN_0031cf00. */
 extern int FUN_0031f63c(void);
@@ -88,7 +88,7 @@ extern int maskToCode(void);
 /* Supplied declaration required: FUN_0038b548. */
 /* Supplied declaration required: devilIsTextureLoaded. */
 /* Supplied declaration required: sysPlayVoice. */
-/* Supplied declaration required: FUN_004bcd90. */
+/* Supplied declaration required: unitRecomputeDerivedStats. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
@@ -114,9 +114,9 @@ unsigned int FUN_003193a8(int param_1)
   switch(*(unsigned int *)(param_1 + 0x3bc)) {
   case 0:
     temp_v2 = (unsigned int)*(unsigned short *)(temp_v6 + 0x62);
-    FUN_00180118(temp_v2);
+    dataTable01GetRecordWithAocOverride(temp_v2);
     libc_strcpy(temp_v10,temp_v2);
-    FUN_003180c4(0,temp_v10);
+    scrSetStringSlot(0,temp_v10);
     scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x360),0x14);
     temp_v3 = btlTalkBustUpGetValue();
     if (temp_v3 == 0) {
@@ -150,9 +150,9 @@ unsigned int FUN_003193a8(int param_1)
     break;
   case 4:
     temp_v2 = (unsigned int)*(unsigned short *)(temp_v6 + 0x62);
-    FUN_00180118(temp_v2);
+    dataTable01GetRecordWithAocOverride(temp_v2);
     libc_strcpy(temp_v10,temp_v2);
-    FUN_003180c4(0,temp_v10);
+    scrSetStringSlot(0,temp_v10);
     temp_v3 = (int)*(short *)(param_1 + 0xe0);
     if (temp_v3 >= 1) {
       temp_v7 = 2;
@@ -163,7 +163,7 @@ unsigned int FUN_003193a8(int param_1)
       }
       *(unsigned short *)(param_1 + 0xe0) = 0;
       temp_v0 = *(short *)(temp_v6 + 0x12);
-      FUN_004bcd90(temp_v6);
+      unitRecomputeDerivedStats(temp_v6);
       temp_v1 = *(short *)(temp_v6 + 0x12);
       temp_v9 = temp_v1 == 999;
       if (temp_v1 >= 0x3e7) {
@@ -184,7 +184,7 @@ unsigned int FUN_003193a8(int param_1)
         }
         *(unsigned short *)(param_1 + 0xe2) = 0;
         temp_v0 = *(short *)(temp_v6 + 0x14);
-        FUN_004bcd90(temp_v6);
+        unitRecomputeDerivedStats(temp_v6);
         temp_v1 = *(short *)(temp_v6 + 0x14);
         temp_v9 = temp_v1 == 999;
         if (temp_v1 >= 0x3e7) {
@@ -205,7 +205,7 @@ unsigned int FUN_003193a8(int param_1)
           }
           *(unsigned short *)(param_1 + 0xe4) = 0;
           temp_v0 = *(short *)(temp_v6 + 0x16);
-          FUN_004bcd90(temp_v6);
+          unitRecomputeDerivedStats(temp_v6);
           temp_v1 = *(short *)(temp_v6 + 0x16);
           temp_v9 = temp_v1 == 999;
           if (temp_v1 >= 0x3e7) {
@@ -226,7 +226,7 @@ unsigned int FUN_003193a8(int param_1)
             }
             *(unsigned short *)(param_1 + 0xe6) = 0;
             temp_v0 = *(short *)(temp_v6 + 0x18);
-            FUN_004bcd90(temp_v6);
+            unitRecomputeDerivedStats(temp_v6);
             temp_v1 = *(short *)(temp_v6 + 0x18);
             temp_v9 = temp_v1 == 999;
             if (temp_v1 >= 0x3e7) {
@@ -244,7 +244,7 @@ unsigned int FUN_003193a8(int param_1)
               FUN_002c8538(0);
               temp_v8 = gameDataGetRecordValue();
               statusBustUpPortraitAcquire(temp_v8,1);
-              FUN_004bcd90(temp_v6);
+              unitRecomputeDerivedStats(temp_v6);
               *(unsigned int *)(param_1 + 0x3bc) = 6;
               btlTalkBustUpReleaseAllSlots();
               if (*(char *)(param_1 + 0x7d4) == '\0') {
@@ -262,7 +262,7 @@ unsigned int FUN_003193a8(int param_1)
             }
             *(unsigned short *)(param_1 + 0xe8) = 0;
             temp_v0 = *(short *)(temp_v6 + 0x1a);
-            FUN_004bcd90(temp_v6);
+            unitRecomputeDerivedStats(temp_v6);
             temp_v1 = *(short *)(temp_v6 + 0x1a);
             temp_v9 = temp_v1 == 999;
             if (temp_v1 >= 0x3e7) {
@@ -359,7 +359,7 @@ unsigned int FUN_003193a8(int param_1)
         temp_v6 = FUN_0031f63c();
         if ((((temp_v6 == 0) && (temp_v6 = FUN_002857b8(), temp_v6 == 0)) &&
             (temp_v6 = statusDownGetFlag(), temp_v6 == 0)) &&
-           ((temp_v6 = padButtonIsPressed(0), temp_v6 != 0 || (temp_v6 = FUN_002e1a18(1), temp_v6 != 0)))) {
+           ((temp_v6 = padButtonIsPressed(0), temp_v6 != 0 || (temp_v6 = buttonHelpIsActionActive(1), temp_v6 != 0)))) {
           FUN_003343f0(1);
           sysPlayVoice(0x100020e);
           *(int *)(param_1 + 0x3bc) = *(int *)(param_1 + 0x3bc) + 1;

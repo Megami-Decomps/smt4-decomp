@@ -24,7 +24,7 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
     if (iVar4 == 0 || param_2 == 0) {
       return 0;
     }
-    FUN_00275bc8();
+    scrScriptProcessCreate();
     *(int *)(iVar2 + 0x2b0) = iVar4;
     *(unsigned int *)(iVar4 + 0x108) = 2;
     FUN_00275f44(*(unsigned int *)(iVar2 + 0x2b0),0);
@@ -49,7 +49,7 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
     uVar5 = 0x20;
     break;
   case 2:
-    iVar4 = FUN_002e07f4();
+    iVar4 = pairedAvailabilityBothReady();
     if (iVar4 == 0) {
       return 0;
     }
@@ -58,7 +58,7 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
     uVar5 = 3;
     break;
   case 3:
-    iVar4 = FUN_002e07f4();
+    iVar4 = pairedAvailabilityBothReady();
     if (iVar4 == 0) {
       return 0;
     }
@@ -90,7 +90,7 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
     }
     else {
       FUN_0014374c();
-      FUN_001a0380();
+      fsUnmountByName();
       gameDataAddHomeButtonHold(8);
       FUN_0043ca60(1);
       FUN_00275f44(*(unsigned int *)(iVar2 + 0x2b0),2);
@@ -214,7 +214,7 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
       }
       if (!(bVar6 && cVar1 == '\0')) {
         FUN_0014374c();
-        FUN_001a0380();
+        fsUnmountByName();
         FUN_00275f44(*(unsigned int *)(iVar2 + 0x2b0),7);
         uVar5 = 0xe;
       }
@@ -418,7 +418,7 @@ code_r0x00236f38:
     uVar5 = 0x1e;
     break;
   case 0x1e:
-    iVar4 = FUN_002e07f4();
+    iVar4 = pairedAvailabilityBothReady();
     if (iVar4 == 0) {
       return 0;
     }
@@ -429,7 +429,7 @@ code_r0x00236f38:
     FUN_003d2d34(0x1000001,0,0x3c);
     return 0;
   case 0x1f:
-    iVar4 = FUN_002e07f4();
+    iVar4 = pairedAvailabilityBothReady();
     if (iVar4 == 0) {
       return 0;
     }

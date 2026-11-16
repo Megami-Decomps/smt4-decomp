@@ -79,14 +79,14 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
   iStack_2c = param_2;
   temp_v15 = param_3;
   temp_v0 = uniteGetWork();
-  temp_v13 = reinterpret_cast<int>(FUN_0026140c());
+  temp_v13 = reinterpret_cast<int>(saveGetUserSettingsBlock());
   temp_v13 = temp_v13 + 0x20;
   if (temp_v0 != 0) {
     temp_v10 = 0;
     temp_v12 = 0;
     efctSetSpeed();
-    FUN_00164b5c(2,0x1a,1,param_1,param_2,0x65);
-    FUN_001835b4(2,0x1a,0x8a,param_1,param_2,0x65);
+    texDrawCompositeSprite(2,0x1a,1,param_1,param_2,0x65);
+    texDrawTableEntryAtStoredOrigin(2,0x1a,0x8a,param_1,param_2,0x65);
     temp_v1 = (int)asdTMTexTableEntryAt(0x1a,0x49);
     textFormatBuffer(temp_v11,&LAB_00285eec);
     VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -103,14 +103,14 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
     else {
       temp_v2 = computeCountLimit();
       if (temp_v2 >= 100) {
-        FUN_001835b4(2,0x1a,0x4a,param_1,param_2,0x65);
+        texDrawTableEntryAtStoredOrigin(2,0x1a,0x4a,param_1,param_2,0x65);
         temp_v1 = (int)asdTMTexTableEntryAt(0x1a,0x253);
         temp_v3 = computeCountLimit();
         FUN_00180310(0,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,1,3,0x65,
                      &LAB_00285f24,temp_v3);
       }
       else {
-        FUN_001835b4(2,0x1a,0x4a,param_1,param_2,0x65);
+        texDrawTableEntryAtStoredOrigin(2,0x1a,0x4a,param_1,param_2,0x65);
         temp_v1 = (int)asdTMTexTableEntryAt(0x1a,0x4c);
         temp_v3 = computeCountLimit();
         FUN_00180310(0,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,1,2,0x65,

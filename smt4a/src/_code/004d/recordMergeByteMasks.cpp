@@ -6,7 +6,7 @@ struct MergeRecordView {
     u8 unk68[0x40]; // 0x68
 };
 
-extern "C" s32 FUN_004bcd90(MergeRecordView* destination);
+extern "C" s32 unitRecomputeDerivedStats(MergeRecordView* destination);
 
 // Merge two or three 64-byte ranges, then return the destination finalizer's result.
 extern "C" s32 recordMergeByteMasks(u32 unused, const MergeRecordView* first,
@@ -27,5 +27,5 @@ extern "C" s32 recordMergeByteMasks(u32 unused, const MergeRecordView* first,
         }
     }
 
-    return FUN_004bcd90(destination);
+    return unitRecomputeDerivedStats(destination);
 }

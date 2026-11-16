@@ -34,7 +34,7 @@ extern unsigned long long asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c0944. */
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: findKeyedRecord. */
 
 
@@ -61,7 +61,7 @@ unsigned int FUN_0021ef10(void)
   temp_v8 = 0;
   if (*(int *)(g_mapIf + 0x30) != 0) {
     temp_v6 = *(unsigned int *)(g_mapIf + 0x34);
-    temp_v1 = FUN_002c5d80(5,1);
+    temp_v1 = renderCtxPackPassFlags(5,1);
     piVar7 = (int *)(temp_v4 + 0x124c);
     temp_v2 = *piVar7;
     temp_v3 = piVar7[temp_v2 + 2];
@@ -147,7 +147,7 @@ unsigned int FUN_0021ef10(void)
     temp_v4 = (int)*(short *)(temp_v1 + 0xccbc);
     if ((temp_v4 == 0x18) || (findKeyedRecord(temp_v4,(int)*(short *)(temp_v1 + 0xccbe)), temp_v4 != 0)) {
       temp_v4 = g_titleScene;
-      temp_v2 = FUN_002c5d80(1,0);
+      temp_v2 = renderCtxPackPassFlags(1,0);
       piVar7 = (int *)(temp_v4 + 0x124c);
       temp_v3 = *piVar7;
       temp_v5 = piVar7[temp_v3 + 2];
@@ -160,7 +160,7 @@ unsigned int FUN_0021ef10(void)
       temp_v9 = (unsigned long long)(unsigned int)(int)temp_v7 << 0x20;
       temp_v4 = 0x107;
       do {
-        FUN_002bf288(2,0xe,temp_v4,(int)((unsigned long long)temp_v9 >> 0x20),0,0xb);
+        texDrawTableEntryAtStoredOrigin(2,0xe,temp_v4,(int)((unsigned long long)temp_v9 >> 0x20),0,0xb);
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < 0x10b);
       FUN_0025090c((int)*(short *)(temp_v1 + 0xccbc),(int)*(short *)(temp_v1 + 0xccbe),0,temp_v11);

@@ -8,7 +8,7 @@ extern "C" {
 u32 scrGetArg(u32 index);
 s32 btlResolveEntryChoice(u32 choice);
 void scrSetResult(s32 result);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
 
 // Test whether any eligible selected combatant has a zero encoded stat level.
 u32 FUN_0037fb04(void)
@@ -17,7 +17,7 @@ u32 FUN_0037fb04(void)
     s32 choice = btlResolveEntryChoice(scrGetArg(1));
     if (stat < 21) {
         s32 first, count;
-        FUN_00301a08(choice, &first, &count);
+        btlGetEntryChoiceRange(choice, &first, &count);
         for (s32 index = first; index < first + count; ++index) {
             BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
             if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
@@ -29,7 +29,7 @@ u32 FUN_0037fb04(void)
             }
         }
         if (btlGetMainState()->unk4cd1) {
-            BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+            BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
             if (entry != NULL && (entry->encodedStats.values[stat] & 0xfc00) == 0) {
                 scrSetResult(1);
                 return 1;

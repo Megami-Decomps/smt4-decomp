@@ -16,7 +16,7 @@ struct ScalarEffectState {
 
 extern "C" {
 void FUN_0020ffe8(u32 handle, f32 first, f32 second);
-void FUN_002d9208();
+void statusCameraResetDefaults();
 
 // Restore scalar-effect defaults and stop its active handle before the shared reset.
 void campCecResetScalarEffect(ScalarEffectState* effect)
@@ -31,6 +31,6 @@ void campCecResetScalarEffect(ScalarEffectState* effect)
         effect->active = 0;
         FUN_0020ffe8(effect->handle, 0.0f, 0.0f);
     }
-    FUN_002d9208();
+    statusCameraResetDefaults();
 }
 }

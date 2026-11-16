@@ -69,7 +69,7 @@ void FUN_0028f870(u32 list, s32 x, s32 y, s32 wide)
         if (FUN_0029ee54(list) <= 11) {
             return;
         }
-        FUN_002bf288(2, 0x1d, 0x41c, x, y, 0x6f);
+        texDrawTableEntryAtStoredOrigin(2, 0x1d, 0x41c, x, y, 0x6f);
         nextSprite = 0x419;
         previousSprite = 0x418;
         if (previousHeld != 0) {
@@ -82,7 +82,7 @@ void FUN_0028f870(u32 list, s32 x, s32 y, s32 wide)
         if (FUN_0029ee54(list) <= 9) {
             return;
         }
-        FUN_002bf288(2, 0x1d, 0x423, x, y, 0x6f);
+        texDrawTableEntryAtStoredOrigin(2, 0x1d, 0x423, x, y, 0x6f);
         previousSprite = 0x41f;
         nextSprite = 0x420;
         if (previousHeld != 0) {
@@ -92,8 +92,8 @@ void FUN_0028f870(u32 list, s32 x, s32 y, s32 wide)
             nextSprite = 0x422;
         }
     }
-    FUN_002bf288(2, 0x1d, previousSprite, x, y, 0x6f);
-    FUN_002bf288(2, 0x1d, nextSprite, x, y, 0x6f);
+    texDrawTableEntryAtStoredOrigin(2, 0x1d, previousSprite, x, y, 0x6f);
+    texDrawTableEntryAtStoredOrigin(2, 0x1d, nextSprite, x, y, 0x6f);
     BankSprite *track;
     if (wide != 0) {
         track = asdTMTexTableEntryAt(0x1d, 0x41d);
@@ -119,7 +119,7 @@ void FUN_0028f870(u32 list, s32 x, s32 y, s32 wide)
             thumbSprite = 0x425;
         }
     }
-    FUN_002bf288(2, 0x1d, thumbSprite, x, y, 0x74);
+    texDrawTableEntryAtStoredOrigin(2, 0x1d, thumbSprite, x, y, 0x74);
     setRenderState(g_titleScene, 0);
 }
 

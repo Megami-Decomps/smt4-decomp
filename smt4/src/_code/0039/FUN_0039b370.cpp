@@ -36,7 +36,7 @@ s32 FUN_0039b648(NavigationDrag *drag);
 s32 FUN_002bffd8(s32 *x, s32 *y);
 s32 FUN_003c2e14(s32 *x, s32 *y);
 s32 FUN_003c2e0c(s32 *x, s32 *y);
-s32 FUN_00231434(s32 a, s32 b, s32 *x, s32 *y, s32 *width, s32 *height);
+s32 asdTMTexTableGetEntryPlacement(s32 a, s32 b, s32 *x, s32 *y, s32 *width, s32 *height);
 u32 effectForwardModeOne(s32 x, s32 y, s32 width, s32 height);
 NavigationPoint *NaviMain_GetCursorPos(u8 *cursorData);
 void NaviMain_SetCursorPos(u8 *cursorData, NavigationPoint *position);
@@ -75,7 +75,7 @@ u32 FUN_0039b370(NavigationDrag *drag)
             }
         }
     } else {
-        FUN_00231434(0x1C, 0xFA4, &sample.y, &sample.x, &sample.extentX, &sample.extentY);
+        asdTMTexTableGetEntryPlacement(0x1C, 0xFA4, &sample.y, &sample.x, &sample.extentX, &sample.extentY);
         if (effectForwardModeOne(sample.y, sample.x, sample.extentX, sample.extentY) && g_gameState.unk18 == 0) {
             s32 x, y;
             FUN_003c2e0c(&x, &y);

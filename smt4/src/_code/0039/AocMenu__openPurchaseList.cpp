@@ -46,9 +46,9 @@ s32 FUN_00361960(void);
 void FUN_0036196c(void);
 void FUN_00126fb8(u32 *result);
 void aocMenuInitializePanelSprites(void *context);
-void FUN_002c58c8(u32 group, s32 image);
+void asdTMTexTablePrepareNodeImage(u32 group, s32 image);
 void *fileSlotGetBuffer(u32 slot);
-ScriptRunState *FUN_00297060(void *file, void *buffer);
+ScriptRunState *scrScriptProcessCreate(void *file, void *buffer);
 void __aeabi_memcpy4(void *output, const void *input, u32 size);
 
 void AocMenu::openPurchaseList()
@@ -63,11 +63,11 @@ void AocMenu::openPurchaseList()
     aocMenuInitializePanelSprites(menu);
     asdTMTexTableLoadSprites(0x3A);
     for (s32 image = 0; image < 3; ++image)
-        FUN_002c58c8(0x3A, image);
+        asdTMTexTablePrepareNodeImage(0x3A, image);
     u32 fileSize;
     menu->scriptFile = fileLoadSync(DAT_003ff148, &fileSize, 0);
     menu->scriptBuffer = fileSlotGetBuffer(0x41);
-    menu->script = FUN_00297060(menu->scriptFile, menu->scriptBuffer);
+    menu->script = scrScriptProcessCreate(menu->scriptFile, menu->scriptBuffer);
     menu->script->mode = 2;
     menu->state = 1;
     menu->substate = 0;

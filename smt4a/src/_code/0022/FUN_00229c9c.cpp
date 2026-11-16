@@ -42,7 +42,7 @@ extern s32 g_lazyScriptState;
 extern s32 DAT_005e210c;
 extern s32 DAT_005e2110;
 
-void FUN_00275bc8(void);
+void scrScriptProcessCreate(void);
 s32 scrRunOpcodesStub(s32 process);
 void scrScriptProcessStartEntry(s32 process, s32 entry);
 void scrScriptProcessDestroy(void);
@@ -66,7 +66,7 @@ u32 FUN_00229c9c(u32 unused, s32 enabled)
 
     if (DAT_005e2110 == 0) {
         s32 process = g_lazyScriptState;
-        FUN_00275bc8();
+        scrScriptProcessCreate();
         DAT_005e2110 = process;
         *(s32 *)(process + 0x108) = 2;
     }

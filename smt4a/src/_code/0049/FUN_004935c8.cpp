@@ -12,7 +12,7 @@ struct EffectRect {
 extern "C" {
 
 void efctSetSpeed(f32 speed);
-void FUN_00164b5c(s32 kind, u32 parameter, u32 id, s32 x, s32 y, u32 last);
+void texDrawCompositeSprite(s32 kind, u32 parameter, u32 id, s32 x, s32 y, u32 last);
 
 /* Plays effect `id` at the far corner of `rect` offset by (dx, dy), at speed `speed`, then resets the speed to 1. */
 void FUN_004935c8(f32 speed, const EffectRect *rect, u32 id, s32 dx, s32 dy, u32 last)
@@ -21,7 +21,7 @@ void FUN_004935c8(f32 speed, const EffectRect *rect, u32 id, s32 dx, s32 dy, u32
     s32 y = (s32)(rect->y + rect->height + (f32)dy);
 
     efctSetSpeed(speed);
-    FUN_00164b5c(2, rect->parameter, id, x, y, last);
+    texDrawCompositeSprite(2, rect->parameter, id, x, y, last);
     efctSetSpeed(1.0f);
 }
 

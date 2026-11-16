@@ -151,7 +151,7 @@ LAB_0037c020:;
         if (temp_v4 != temp_v2) {
           temp_v11 = FUN_0019acdc(temp_v2, 0);
           temp_v5 = FUN_0036fcd0(temp_v11,0);
-          temp_v11 = FUN_0019e52c(temp_v5);
+          temp_v11 = dataTable10FindValue(temp_v5);
           gameDataCopySaveEntry(temp_v1,temp_v20);
           FUN_0031654c(temp_v11,temp_v21);
           gameSavedItemClearCounter(temp_v1);

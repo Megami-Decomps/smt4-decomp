@@ -30,10 +30,10 @@ struct NpcShopExchangeWork {
 }
 
 extern "C" {
-const char *FUN_0015f858(u32 id, s32 mode);
+const char *dataFindKindRecordWithAocOverrides(u32 id, s32 mode);
 void FUN_003c1060();
 void FUN_003c3e14();
-s32 FUN_001ba3d4(u32 id);
+s32 flagValueRead(u32 id);
 s32 itemGetStackLimit(u32 id);
 void flagValueSub(u32 id, u32 count);
 void flagValueAdd(u32 id, s32 count);
@@ -68,10 +68,10 @@ extern "C" void FUN_003e618c(NpcShopExchangeWork *work)
     case 0: {
         NpcShopExchangeRow *offer = &work->offers[work->selected];
         if (offer->reward != 0) {
-            FUN_003180c4(0, FUN_0015f858(offer->reward, 0));
+            scrSetStringSlot(0, dataFindKindRecordWithAocOverrides(offer->reward, 0));
         }
         if (offer->payment != 0) {
-            FUN_003180c4(1, FUN_0015f858(offer->payment, 0));
+            scrSetStringSlot(1, dataFindKindRecordWithAocOverrides(offer->payment, 0));
         }
         FUN_00359974(24, offer->cost, -1, 0);
         FUN_003c1060();
@@ -91,17 +91,17 @@ extern "C" void FUN_003e618c(NpcShopExchangeWork *work)
         break;
     case 2: {
         NpcShopExchangeRow *offer = &work->offers[work->selected];
-        if (FUN_001ba3d4(offer->reward) >= itemGetStackLimit(offer->reward)) {
+        if (flagValueRead(offer->reward) >= itemGetStackLimit(offer->reward)) {
             npcShopStartEntry(work, "npcShop_HaveMax");
             work->step = 3;
-        } else if (FUN_001ba3d4(offer->payment) < offer->cost) {
+        } else if (flagValueRead(offer->payment) < offer->cost) {
             npcShopStartEntry(work, "npcShop_Notenough");
             work->step = 3;
         } else {
             flagValueSub(offer->payment, offer->cost);
-            FUN_00359974(24, FUN_001ba3d4(0x7c4), -1, 0);
-            FUN_00359974(25, FUN_001ba3d4(0x7c5), -1, 0);
-            FUN_00359974(26, FUN_001ba3d4(0x7c6), -1, 0);
+            FUN_00359974(24, flagValueRead(0x7c4), -1, 0);
+            FUN_00359974(25, flagValueRead(0x7c5), -1, 0);
+            FUN_00359974(26, flagValueRead(0x7c6), -1, 0);
             screenStartOrClear(work->screen, 21);
             flagValueAdd(offer->reward, 1);
             work->step = 99;

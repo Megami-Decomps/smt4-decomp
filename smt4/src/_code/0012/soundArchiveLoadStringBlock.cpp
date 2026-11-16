@@ -18,8 +18,8 @@ typedef struct SoundArchiveReader {
 
 s32 nw_snd_internal_SoundArchiveFile_FileHeader_GetStringBlockOffset(void *header);
 u32 nw_snd_internal_SoundArchiveFile_FileHeader_GetStringBlockSize(void *header);
-s32 FUN_0013041c(void *stream, s32 offset, s32 origin);
-s32 FUN_002b4e00(void *stream, void *buffer, u32 size, u32 *readSize);
+s32 fileHandleSeek(void *stream, s32 offset, s32 origin);
+s32 fileHandleRead(void *stream, void *buffer, u32 size, u32 *readSize);
 void FUN_00130eb4(void *header, void *block);
 
 /* Read the sound archive's string block into the buffer; returns 1 on success. */
@@ -32,14 +32,14 @@ s32 soundArchiveLoadStringBlock(SoundArchiveReader *reader, void *buffer, u32 bu
     if (offset == -1 || size > bufferSize) {
         return 0;
     }
-    s32 seekSucceeded = FUN_0013041c(reader->file.stream, offset, 0);
+    s32 seekSucceeded = fileHandleSeek(reader->file.stream, offset, 0);
     SoundArchiveFileAccess *file = &reader->file;
     if (!seekSucceeded) {
         reader->position = file->position;
         return 0;
     }
     readSize = 0;
-    if (!FUN_002b4e00(reader->file.stream, buffer, size, &readSize)) {
+    if (!fileHandleRead(reader->file.stream, buffer, size, &readSize)) {
         reader->position = file->position;
         return 0;
     }

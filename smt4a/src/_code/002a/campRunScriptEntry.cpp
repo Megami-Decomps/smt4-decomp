@@ -3,7 +3,7 @@
 extern "C" {
 void campResetScreen(void);
 void scrScriptProcessStartEntry(ScriptProcess *script, u32 entry);
-void FUN_0031d890(void);
+void partyPanelRefreshFromSlotTable(void);
 s32 scrRunOpcodesStub(ScriptProcess *script);
 
 /* Runs the camp script entry and restores the camp screen when it finishes. */
@@ -20,7 +20,7 @@ u32 campRunScriptEntry(CampScriptState *state)
             state->unk14C = 0;
             state->unk144 = 1;
             state->scriptState = 0;
-            FUN_0031d890();
+            partyPanelRefreshFromSlotTable();
             campResetScreen();
             result = 3;
         }

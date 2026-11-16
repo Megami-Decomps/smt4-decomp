@@ -16,9 +16,9 @@ typedef struct PairEntry {
 
 extern s32 dataTable23Type0CountWithAoc(void);
 extern PairEntry *dataTable23Sub0GetEntry(s32 index);
-extern void FUN_002d23f0(s32 index);
+extern void dataTable23MarkEntrySeen(s32 index);
 
-/* Fires FUN_002d23f0 for each entry (up to the first unused one) that lists the pair (a, b) in any of its three slots. */
+/* Fires dataTable23MarkEntrySeen for each entry (up to the first unused one) that lists the pair (a, b) in any of its three slots. */
 void fireEntriesMatchingPair(u32 a, u32 b)
 {
     if (a == 0) {
@@ -33,11 +33,11 @@ void fireEntriesMatchingPair(u32 a, u32 b)
             return;
         }
         if (entry->a0 == a && entry->b0 == b) {
-            FUN_002d23f0(i);
+            dataTable23MarkEntrySeen(i);
         } else if (entry->a1 == a && entry->b1 == b) {
-            FUN_002d23f0(i);
+            dataTable23MarkEntrySeen(i);
         } else if (entry->a2 == a && entry->b2 == b) {
-            FUN_002d23f0(i);
+            dataTable23MarkEntrySeen(i);
         }
     }
 }

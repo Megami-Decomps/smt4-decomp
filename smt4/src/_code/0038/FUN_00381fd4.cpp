@@ -7,7 +7,7 @@
 
 extern "C" {
 extern const u8 DAT_00405878[23];
-ScriptRunState *FUN_00297060(void *buffer, void *arguments);
+ScriptRunState *scrScriptProcessCreate(void *buffer, void *arguments);
 void scriptProcessSetMode(ScriptRunState *process, s32 mode);
 void FUN_002a03d8(s32 index, s32 mode);
 
@@ -33,9 +33,9 @@ void FUN_00381fd4(SpriteAnchorGroupWork *work)
             work->current[index + 11].x += work->rest[22].x;
             work->current[index + 11].y += work->rest[22].y;
         }
-        work->firstProcess = FUN_00297060(work->firstBuffer, work->firstArguments);
+        work->firstProcess = scrScriptProcessCreate(work->firstBuffer, work->firstArguments);
         scriptProcessSetMode(work->firstProcess, 2);
-        work->secondProcess = FUN_00297060(work->secondBuffer, work->secondArguments);
+        work->secondProcess = scrScriptProcessCreate(work->secondBuffer, work->secondArguments);
         scriptProcessSetMode(work->secondProcess, 2);
         work->state = work->mode == 1 || work->mode == 2 ? 14 : 3;
         work->frame = 0;

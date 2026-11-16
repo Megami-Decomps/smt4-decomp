@@ -37,7 +37,7 @@ struct SkillLearnTask {
 }
 
 extern "C" {
-s32 FUN_001517b4(s32 a, s32 b);
+s32 padQueryLogicalKey(s32 a, s32 b);
 void eventQueueAddUniqueIfValid(u32 event);
 PlayerParty *gameGetPlayerData(void);
 SaveSlot *saveSlotFindById(u32 id);
@@ -61,7 +61,7 @@ u32 FUN_0041774c(SkillLearnTask *task)
         task->step = 1;
         // fall through
     case 1:
-        if (FUN_001517b4(0, 1) != 0 || (FUN_001517b4(9, 0) != 0 && task->frame > 2)) {
+        if (padQueryLogicalKey(0, 1) != 0 || (padQueryLogicalKey(9, 0) != 0 && task->frame > 2)) {
             eventQueueAddUniqueIfValid(0x100020e);
             obj04Finish();
             if (task->placeInParty != 0) {
@@ -87,7 +87,7 @@ u32 FUN_0041774c(SkillLearnTask *task)
             break;
         }
         FUN_00333dc8(1);
-        FUN_003180c4(0, reinterpret_cast<const char *>(FUN_00180114(slot->demonId)));
+        scrSetStringSlot(0, reinterpret_cast<const char *>(FUN_00180114(slot->demonId)));
         scrScriptProcessStartEntry(task->script, 0x13);
         task->step = 3;
     }
@@ -97,7 +97,7 @@ u32 FUN_0041774c(SkillLearnTask *task)
             if (messageGetChoiceResult() == 0) {
                 FUN_003e4e4c(task->slotId & 0xffff);
                 SaveSlot *slot = saveSlotFindById(task->slotId & 0xffff);
-                FUN_003180c4(0, reinterpret_cast<const char *>(FUN_00180114(slot->demonId)));
+                scrSetStringSlot(0, reinterpret_cast<const char *>(FUN_00180114(slot->demonId)));
                 scrScriptProcessStartEntry(task->script, 0x14);
                 task->step = 4;
                 break;

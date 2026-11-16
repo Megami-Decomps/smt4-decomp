@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_00164b5c(...);
+int texDrawCompositeSprite(...);
 int gameGetPlayerData(void);
 int FUN_0023d150(...);
 int FUN_002ac470(...);
@@ -25,7 +25,7 @@ typedef struct {
 
 extern int g_camp; /* 0x57f108 */
 
-/* Supplied declaration required: FUN_00164b5c. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: gameGetPlayerData. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0023d150. */
@@ -90,11 +90,11 @@ void FUN_0023c8c0(int *param_1,unsigned int param_2,unsigned int param_3,int par
 LAB_0023ca18:
       temp_v9 = g_camp + 0x318;
       temp_v6 = g_camp + 0x2c58;
-      FUN_00164b5c(2,0x14,4,param_2,param_3,0x65);
-      FUN_001835b4(2,0x14,0x4f2,temp_v11,param_3,0x6a);
-      FUN_001835b4(2,0x14,0x50a,temp_v11,param_3,0x6a);
-      FUN_001835b4(2,0x14,0x50c,temp_v11,param_3,0x6a);
-      FUN_001835b4(2,0x14,0x50d,temp_v11,param_3,0x6a);
+      texDrawCompositeSprite(2,0x14,4,param_2,param_3,0x65);
+      texDrawTableEntryAtStoredOrigin(2,0x14,0x4f2,temp_v11,param_3,0x6a);
+      texDrawTableEntryAtStoredOrigin(2,0x14,0x50a,temp_v11,param_3,0x6a);
+      texDrawTableEntryAtStoredOrigin(2,0x14,0x50c,temp_v11,param_3,0x6a);
+      texDrawTableEntryAtStoredOrigin(2,0x14,0x50d,temp_v11,param_3,0x6a);
       temp_v3 = gameGetPlayerData();
       FUN_002ac470(temp_v10,0,*(unsigned short *)(temp_v3 + 2),temp_v11,param_3,0xffffffff);
       break;
@@ -102,10 +102,10 @@ LAB_0023ca18:
 LAB_0023cae4:
       temp_v9 = g_camp + 0x37c;
       temp_v6 = g_camp + 0x2d48;
-      FUN_00164b5c(2,0x14,4,param_2,param_3,0x65);
-      FUN_001835b4(2,0x14,0x4f3,temp_v11,param_3,0x6a);
-      FUN_001835b4(2,0x14,0x50a,temp_v11,param_3,0x6a);
-      FUN_001835b4(2,0x14,0x50b,temp_v11,param_3,0x6a);
+      texDrawCompositeSprite(2,0x14,4,param_2,param_3,0x65);
+      texDrawTableEntryAtStoredOrigin(2,0x14,0x4f3,temp_v11,param_3,0x6a);
+      texDrawTableEntryAtStoredOrigin(2,0x14,0x50a,temp_v11,param_3,0x6a);
+      texDrawTableEntryAtStoredOrigin(2,0x14,0x50b,temp_v11,param_3,0x6a);
       temp_v3 = gameGetPlayerData();
       FUN_002ac470(temp_v10,0,*(unsigned short *)(temp_v3 + 4),temp_v11,param_3,0xffffffff);
       break;
@@ -113,10 +113,10 @@ LAB_0023cae4:
 LAB_0023cb98:
       temp_v9 = g_camp + 0x3e0;
       temp_v6 = g_camp + 0x2dac;
-      FUN_00164b5c(2,0x14,5,param_2,param_3,0x65);
-      FUN_001835b4(2,0x14,0x4f4,temp_v11,param_3,0x6a);
-      FUN_001835b4(2,0x14,0x50e,temp_v11,param_3,0x6a);
-      FUN_001835b4(2,0x14,0x50f,temp_v11,param_3,0x6a);
+      texDrawCompositeSprite(2,0x14,5,param_2,param_3,0x65);
+      texDrawTableEntryAtStoredOrigin(2,0x14,0x4f4,temp_v11,param_3,0x6a);
+      texDrawTableEntryAtStoredOrigin(2,0x14,0x50e,temp_v11,param_3,0x6a);
+      texDrawTableEntryAtStoredOrigin(2,0x14,0x50f,temp_v11,param_3,0x6a);
       temp_v3 = gameGetPlayerData();
       FUN_002ac470(temp_v10,0,*(unsigned short *)(temp_v3 + 6),temp_v11,param_3,0xffffffff);
       break;
@@ -124,10 +124,10 @@ LAB_0023cb98:
 LAB_0023cc4c:
       temp_v9 = g_camp + 0x444;
       temp_v6 = g_camp + 0x2e9c;
-      FUN_00164b5c(2,0x14,5,param_2,param_3,0x65);
-      FUN_001835b4(2,0x14,0x4f5,temp_v11,param_3,0x6a);
-      FUN_001835b4(2,0x14,0x50e,temp_v11,param_3,0x6a);
-      FUN_001835b4(2,0x14,0x50f,temp_v11,param_3,0x6a);
+      texDrawCompositeSprite(2,0x14,5,param_2,param_3,0x65);
+      texDrawTableEntryAtStoredOrigin(2,0x14,0x4f5,temp_v11,param_3,0x6a);
+      texDrawTableEntryAtStoredOrigin(2,0x14,0x50e,temp_v11,param_3,0x6a);
+      texDrawTableEntryAtStoredOrigin(2,0x14,0x50f,temp_v11,param_3,0x6a);
       temp_v3 = gameGetPlayerData();
       FUN_002ac470(temp_v10,0,*(unsigned short *)(temp_v3 + 8),temp_v11,param_3,0xffffffff);
       break;
@@ -135,10 +135,10 @@ LAB_0023cc4c:
 LAB_0023cd04:
       temp_v9 = g_camp + 0x4a8;
       temp_v6 = g_camp + 0x2f8c;
-      FUN_00164b5c(2,0x14,5,param_2,param_3,0x65);
-      FUN_001835b4(2,0x14,0x4f6,temp_v11,param_3,0x6a);
-      FUN_001835b4(2,0x14,0x50e,temp_v11,param_3,0x6a);
-      FUN_001835b4(2,0x14,0x50f,temp_v11,param_3,0x6a);
+      texDrawCompositeSprite(2,0x14,5,param_2,param_3,0x65);
+      texDrawTableEntryAtStoredOrigin(2,0x14,0x4f6,temp_v11,param_3,0x6a);
+      texDrawTableEntryAtStoredOrigin(2,0x14,0x50e,temp_v11,param_3,0x6a);
+      texDrawTableEntryAtStoredOrigin(2,0x14,0x50f,temp_v11,param_3,0x6a);
       temp_v3 = gameGetPlayerData();
       FUN_002ac470(temp_v10,0,*(unsigned short *)(temp_v3 + 10),temp_v11,param_3,0xffffffff);
       break;
@@ -146,10 +146,10 @@ LAB_0023cd04:
 LAB_0023cdbc:
       temp_v9 = g_camp + 0x50c;
       temp_v6 = g_camp + 0x307c;
-      FUN_00164b5c(2,0x14,5,param_2,param_3,0x65);
-      FUN_001835b4(2,0x14,0x4f7,temp_v11,param_3,0x6a);
-      FUN_001835b4(2,0x14,0x50e,temp_v11,param_3,0x6a);
-      FUN_001835b4(2,0x14,0x50f,temp_v11,param_3,0x6a);
+      texDrawCompositeSprite(2,0x14,5,param_2,param_3,0x65);
+      texDrawTableEntryAtStoredOrigin(2,0x14,0x4f7,temp_v11,param_3,0x6a);
+      texDrawTableEntryAtStoredOrigin(2,0x14,0x50e,temp_v11,param_3,0x6a);
+      texDrawTableEntryAtStoredOrigin(2,0x14,0x50f,temp_v11,param_3,0x6a);
       temp_v3 = gameGetPlayerData();
       FUN_002ac470(temp_v10,0,*(unsigned short *)(temp_v3 + 0xc),temp_v11,param_3,0xffffffff);
     default:
@@ -160,10 +160,10 @@ LAB_0023cdbc:
 LAB_0023c964:
     temp_v9 = g_camp + 0x2b4;
     temp_v6 = g_camp + 0x2b68;
-    FUN_00164b5c(2,0x14,4,param_2,param_3,0x65);
-    FUN_001835b4(2,0x14,0x4f1,temp_v11,param_3,0x6a);
-    FUN_001835b4(2,0x14,0x509,temp_v11,param_3,0x6a);
-    FUN_001835b4(2,0x14,0x50b,temp_v11,param_3,0x6a);
+    texDrawCompositeSprite(2,0x14,4,param_2,param_3,0x65);
+    texDrawTableEntryAtStoredOrigin(2,0x14,0x4f1,temp_v11,param_3,0x6a);
+    texDrawTableEntryAtStoredOrigin(2,0x14,0x509,temp_v11,param_3,0x6a);
+    texDrawTableEntryAtStoredOrigin(2,0x14,0x50b,temp_v11,param_3,0x6a);
     puVar2 = (unsigned short *)gameGetPlayerData();
     FUN_002ac470(temp_v10,0,*puVar2,temp_v11,param_3,0xffffffff);
   }
@@ -197,8 +197,8 @@ LAB_0023ce68:
     if (((temp_v7[temp_v1] != 0x14 && temp_v7[temp_v1] != 0x15) ||
         (temp_v2 = gameFlagIsSet(0x410), temp_v2 != 0)) &&
        (temp_v2 = objectApplyIfUnblocked(temp_v3 + temp_v1 * 100 + 0x2b4), 0 < temp_v2)) {
-      FUN_001835b4(2,0x14,0x4f8,temp_v8,param_3,0x6a);
-      FUN_001835b4(2,0x14,temp_v1 + 0x4fa,temp_v8,param_3,0x6a);
+      texDrawTableEntryAtStoredOrigin(2,0x14,0x4f8,temp_v8,param_3,0x6a);
+      texDrawTableEntryAtStoredOrigin(2,0x14,temp_v1 + 0x4fa,temp_v8,param_3,0x6a);
       break;
     }
     temp_v5 = temp_v5 + 1;
@@ -212,14 +212,14 @@ LAB_0023ce68:
     if (((temp_v7[temp_v4] != 0x14 && temp_v7[temp_v4] != 0x15) ||
         (temp_v5 = gameFlagIsSet(0x410), temp_v5 != 0)) &&
        (temp_v5 = objectApplyIfUnblocked(temp_v3 + temp_v4 * 100 + 0x2b4), 0 < temp_v5)) {
-      FUN_001835b4(2,0x14,0x4f9,temp_v8,param_3,0x6a);
-      FUN_001835b4(2,0x14,temp_v4 + 0x501,temp_v8,param_3,0x6a);
+      texDrawTableEntryAtStoredOrigin(2,0x14,0x4f9,temp_v8,param_3,0x6a);
+      texDrawTableEntryAtStoredOrigin(2,0x14,temp_v4 + 0x501,temp_v8,param_3,0x6a);
       break;
     }
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 7);
-  FUN_001835b4(2,0x14,0x508,temp_v11,param_3,0x6a);
-  FUN_001835b4(2,0x14,0x510,temp_v11,param_3,0x6a);
+  texDrawTableEntryAtStoredOrigin(2,0x14,0x508,temp_v11,param_3,0x6a);
+  texDrawTableEntryAtStoredOrigin(2,0x14,0x510,temp_v11,param_3,0x6a);
   temp_v3 = 0;
   do {
     temp_v1 = resourceRunOperationIfUnblocked(temp_v9);

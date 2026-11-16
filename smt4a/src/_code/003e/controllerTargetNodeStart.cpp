@@ -12,7 +12,7 @@ typedef struct Controller {
     /* 0x8 */ Target *target;
 } Controller;
 
-extern void FUN_003fe86c(void *node, u32 id, s32 mode, f32 a, f32 b);
+extern void modelPlayClip(void *node, u32 id, s32 mode, f32 a, f32 b);
 
 /* Forwards `id` and the timing `a` to the controller's target node, if it has one. */
 void controllerTargetNodeStart(Controller *controller, u32 id, f32 a)
@@ -20,7 +20,7 @@ void controllerTargetNodeStart(Controller *controller, u32 id, f32 a)
     void *node = controller->target->node;
 
     if (node != NULL) {
-        FUN_003fe86c(node, id, 2, a, 0.0f);
+        modelPlayClip(node, id, 2, a, 0.0f);
     }
 }
 

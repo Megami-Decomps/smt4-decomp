@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002b5820(...);
 int FUN_002bcc60(...);
-int FUN_002c526c(...);
+int resultHandleFailure(...);
 int software_interrupt(...);
 
 /* stack frame of param_3: 7 slot(s), 28 byte(s) */
@@ -35,7 +35,7 @@ extern unsigned int *DAT_004e5298; /* 0x4e5298 */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_002b5820. */
 /* Supplied declaration required: FUN_002bcc60. */
-/* Supplied declaration required: FUN_002c526c. */
+/* Supplied declaration required: resultHandleFailure. */
 extern void nn_os_LightEvent_Initialize(unsigned int, unsigned char);
 
 
@@ -67,7 +67,7 @@ void FUN_0011d3fc(unsigned int param_1,unsigned int param_2,unsigned int param_3
     DAT_004e5294 = temp_v0;
   }
   if ((int)ppuVar1 < 0) {
-    FUN_002c526c();
+    resultHandleFailure();
   }
   if (DAT_004e5294 != (unsigned int *)0x0) {
     software_interrupt(0x23);
@@ -80,7 +80,7 @@ void FUN_0011d3fc(unsigned int param_1,unsigned int param_2,unsigned int param_3
     DAT_004e5290 = temp_v0;
   }
   if ((int)ppuVar2 < 0) {
-    FUN_002c526c();
+    resultHandleFailure();
   }
   if (DAT_004e5290 != (unsigned int *)0x0) {
     software_interrupt(0x23);
@@ -93,7 +93,7 @@ void FUN_0011d3fc(unsigned int param_1,unsigned int param_2,unsigned int param_3
     DAT_004e5298 = temp_v0;
   }
   if ((int)ppuVar3 < 0) {
-    FUN_002c526c();
+    resultHandleFailure();
   }
   nn_os_LightEvent_Initialize((unsigned int)&DAT_00465644,1);
   DAT_00465630 = 0;
@@ -109,7 +109,7 @@ void FUN_0011d3fc(unsigned int param_1,unsigned int param_2,unsigned int param_3
   uStack_3c = param_1;
   FUN_002bcc60(&DAT_0046563c,&temp_v2,FUN_0012a37c,&temp_v6);
   if ((int)puVar4 < 0) {
-    FUN_002c526c();
+    resultHandleFailure();
   }
   return;
 }

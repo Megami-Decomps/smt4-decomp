@@ -15,7 +15,7 @@ ActiveSlotView *FUN_003e503c(u16 slot);
 
 void *gameDataBlocksGetSaveData(void);
 void *saveSlotFindById(u16 id);
-u32 FUN_00187168(void *slot);
+u32 partySlotIsOccupied(void *slot);
 
 u32 partyRestoreActiveSlots(void)
 {
@@ -28,7 +28,7 @@ u32 partyRestoreActiveSlots(void)
     u32 count = 0;
     for (s32 index = 0; index < 12; ++index) {
         ActiveSlotView *slot = FUN_003e503c((u16)index);
-        if (slot != NULL && FUN_00187168(slot)) {
+        if (slot != NULL && partySlotIsOccupied(slot)) {
             saved->ids[count++] = slot->id;
         }
     }
@@ -37,7 +37,7 @@ u32 partyRestoreActiveSlots(void)
         u16 id = saved->ids[index];
         if (id != 0) {
             void *slot = saveSlotFindById(id);
-            if (slot != NULL && FUN_00187168(slot)) {
+            if (slot != NULL && partySlotIsOccupied(slot)) {
                 FUN_003e48dc(id);
             }
         }

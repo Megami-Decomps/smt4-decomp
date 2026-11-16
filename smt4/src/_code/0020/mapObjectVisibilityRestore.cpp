@@ -38,9 +38,9 @@ extern "C" {
 extern VisibilityScene *DAT_00447e10;
 extern VisibilityGameFlags g_gameState;
 void FUN_001e2d88();
-void FUN_0029bb14(AsdMdlNode *, f32);
+void modelSetScale(AsdMdlNode *, f32);
 void nodeSetTranslation(AsdMdlNode *, s32, const f32 *);
-void FUN_0028c618(AsdMdlNode *, s32, f32, f32, f32);
+void modelPartSetRotationDegrees(AsdMdlNode *, s32, f32, f32, f32);
 void modelSelectPrimaryMotion(AsdMdlNode *, f32);
 
 // Hide active map objects temporarily, then restore their visibility and saved transforms.
@@ -60,7 +60,7 @@ void mapObjectVisibilityRestore()
                 if (!(object->flags & 2)) {
                     object->flags |= 2;
                     ((VisibilityNodeState *)object->node)->resource->enabled = 0;
-                    FUN_0029bb14(snapshot->object->node, 0.0f);
+                    modelSetScale(snapshot->object->node, 0.0f);
                 }
                 snapshot->pending = 1;
             } else if (snapshot->pending) {
@@ -70,15 +70,15 @@ void mapObjectVisibilityRestore()
                     if (flags & 2) {
                         object->flags = flags & ~2u;
                         ((VisibilityNodeState *)object->node)->resource->enabled = 1;
-                        FUN_0029bb14(snapshot->object->node, 1.0f);
+                        modelSetScale(snapshot->object->node, 1.0f);
                     }
                 } else if (!(flags & 2)) {
                     object->flags = flags | 2;
                     ((VisibilityNodeState *)object->node)->resource->enabled = 0;
-                    FUN_0029bb14(snapshot->object->node, 0.0f);
+                    modelSetScale(snapshot->object->node, 0.0f);
                 }
                 nodeSetTranslation(snapshot->object->node, 0, snapshot->position);
-                FUN_0028c618(snapshot->object->node, 0, 0.0f, snapshot->rotationY, 0.0f);
+                modelPartSetRotationDegrees(snapshot->object->node, 0, 0.0f, snapshot->rotationY, 0.0f);
                 if (((VisibilityNodeState *)snapshot->object->node)->animation != snapshot->animation)
                     modelSelectPrimaryMotion(snapshot->object->node, 0.0f);
                 snapshot->pending = 0;

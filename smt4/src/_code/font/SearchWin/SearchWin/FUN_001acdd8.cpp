@@ -58,10 +58,10 @@ extern RunWin *DAT_0043e170;
 extern RenderCtx *g_titleScene;
 
 LayoutPoint *asdTMTexTableEntryAt(s32 group, s32 part);
-void FUN_002bed3c(void);
+void gxResetColorQuadToWhite(void);
 s32 vec2GetYInt(void *vec);
 void efctSetSpeed(f32 alpha);
-u32 FUN_002c5d80(s32 a, s32 b);
+u32 renderCtxPackPassFlags(s32 a, s32 b);
 
 /* Draws the run window's title, its loading dots (a 3x3 grid where two dots are lit and their
  * predecessors dimmed, advancing every 5 frames) and the label. Returns 0. */
@@ -71,14 +71,14 @@ u8 FUN_001acdd8(void)
     if (win->active != 0 && win->visible != 0) {
         renderCtxSelectStereoLayout(g_titleScene);
         RenderCtx *first = g_titleScene;
-        titleScenePushFirst(first, FUN_002c5d80(1, 0));
+        titleScenePushFirst(first, renderCtxPackPassFlags(1, 0));
         s32 x = vec2GetXInt(win->anchor) + (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.27f);
         s32 y = vec2GetYInt(win->anchor);
         efctSetSpeed(win->alpha);
-        FUN_002bf380(2, 14, 0x14, x, y, 101);
+        texDrawCompositeSprite(2, 14, 0x14, x, y, 101);
         RenderCtx *scene = g_titleScene;
         titleScenePushSecond(scene, packNibblesAndByte(6, 1, 0));
-        FUN_002bf380(2, 14, 0x15, x, y, 102);
+        texDrawCompositeSprite(2, 14, 0x15, x, y, 102);
         titleScenePopSecond(g_titleScene);
         LayoutPoint *labelPoint = asdTMTexTableEntryAt(14, 0x16F);
         textDrawString(4, 0xF49800FF, reinterpret_cast<const char *>(win->label), (f32)(labelPoint->x + x), (f32)(labelPoint->y + y), 0.56640625f, 0.0f,
@@ -93,14 +93,14 @@ u8 FUN_001acdd8(void)
                 s32 index = row * 3 + column;
                 LayoutPoint *dot = asdTMTexTableEntryAt(14, 0x170 + index);
                 if (lit == index || lit2 == index)
-                    FUN_002bf288(2, 14, 0x155, dot->x + x, dot->y, 111);
+                    texDrawTableEntryAtStoredOrigin(2, 14, 0x155, dot->x + x, dot->y, 111);
                 else if (litPrevious == index || lit2Previous == index)
-                    FUN_002bf288(2, 14, 0x156, dot->x + x, dot->y, 111);
+                    texDrawTableEntryAtStoredOrigin(2, 14, 0x156, dot->x + x, dot->y, 111);
                 else
-                    FUN_002bf288(2, 14, 0x154, dot->x + x, dot->y, 111);
+                    texDrawTableEntryAtStoredOrigin(2, 14, 0x154, dot->x + x, dot->y, 111);
             }
         }
-        FUN_002bed3c();
+        gxResetColorQuadToWhite();
         efctSetSpeed(1.0f);
         titleScenePopFirst(g_titleScene);
     }

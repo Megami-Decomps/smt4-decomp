@@ -5,7 +5,7 @@
 extern "C" {
 
 struct FileQueue;
-extern u8 *FUN_002a6e7c(AocSystem *system, s32 kind, s32 key, char *path);
+extern u8 *packageFindFileByTypeAndId(AocSystem *system, s32 kind, s32 key, char *path);
 extern u32 FUN_002a4584(FileQueue *queue, const char *path, const char *secondPath,
                       u32 *transferredBytes, u32 mode, u32 bytes, void *context);
 extern FileQueue *g_aocDisplay;
@@ -15,7 +15,7 @@ static __inline void *loadPackageEntry(AocSystem *system, s32 kind, s32 key, con
 {
     char path[128];
     memClear(path, sizeof(path));
-    u8 *entry = FUN_002a6e7c(system, kind, key, path);
+    u8 *entry = packageFindFileByTypeAndId(system, kind, key, path);
     if (entry != NULL) {
         return reinterpret_cast<void *>(FUN_002a4584(g_aocDisplay, path, secondPath,
             reinterpret_cast<u32 *>(entry + 8), 1, sizeof(path), entry));

@@ -9,7 +9,7 @@ struct BtlActionContext {
 extern "C" {
 extern u64 g_btlTargetableMask;
 
-s32 FUN_004e9ae8(BtlMainStateA **owner, s32 *candidates, s32 count, s32 force);
+s32 btlAiFilterCandidatesByExclusionChance(BtlMainStateA **owner, s32 *candidates, s32 count, s32 force);
 u32 lcgRandomRange(s32 limit);
 
 /* Marks one random combatant among those matching the mask as chosen in the acting unit's selection flags. */
@@ -24,7 +24,7 @@ void btlActionMarkRandomTargetableUnit(BtlActionContext *context)
             candidates[count++] = battle->entries[i].indexView.selectionIndex;
         }
     }
-    u16 remaining = FUN_004e9ae8(&context->battle, candidates, count, 0);
+    u16 remaining = btlAiFilterCandidatesByExclusionChance(&context->battle, candidates, count, 0);
     s32 pick = lcgRandomRange((u16)(remaining - 1));
     btlUnitGet(&context->battle)->selection.targeted[candidates[pick]] = 1;
 }

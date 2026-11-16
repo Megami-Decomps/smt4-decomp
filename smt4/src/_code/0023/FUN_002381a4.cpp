@@ -9,7 +9,7 @@ extern "C" {
 int rangeSetAddPresetGroup(...);
 int FUN_00237e04(void);
 int FUN_00238170(int, unsigned char *, int);
-int FUN_002387f8(...);
+int rangeSetUnionInclusive(...);
 IdList* idListFind(unsigned int id);
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
@@ -23,7 +23,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00237e04. */
 /* Supplied declaration required: FUN_00238170. */
 /* Supplied declaration required: FUN_002381a4. */
-/* Supplied declaration required: FUN_002387f8. */
+/* Supplied declaration required: rangeSetUnionInclusive. */
 /* Supplied declaration required: idListFind. */
 extern int *idListCheck(int *, unsigned int);
 extern int FUN_0035e7ac(unsigned int, unsigned char **);
@@ -56,7 +56,7 @@ int * FUN_002381a4(int *param_1,unsigned int param_2)
     temp_v4 = *param_1;
     temp_v0 = *(unsigned char *)(temp_v4 + 8);
     if (temp_v0 == 5) {
-      temp_v4 = FUN_002387f8(param_2,0x2d);
+      temp_v4 = rangeSetUnionInclusive(param_2,0x2d);
       if (temp_v4 == 0) {
         return (int *)0x2;
       }
@@ -67,7 +67,7 @@ int * FUN_002381a4(int *param_1,unsigned int param_2)
         do {
           temp_v3 = *(short *)(temp_v4 + temp_v7 * 2 + 2);
           if (temp_v3 == 0) break;
-          temp_v6 = FUN_002387f8(param_2,temp_v3,temp_v3);
+          temp_v6 = rangeSetUnionInclusive(param_2,temp_v3,temp_v3);
           if (temp_v6 == 0) {
             return (int *)0x2;
           }
@@ -106,7 +106,7 @@ int * FUN_002381a4(int *param_1,unsigned int param_2)
                 *param_1 = *(int *)(*param_1 + 4);
                 break;
               }
-              temp_v4 = FUN_002387f8(param_2,temp_v8);
+              temp_v4 = rangeSetUnionInclusive(param_2,temp_v8);
               if (temp_v4 == 0) {
 LAB_00238338:
                 piVar6 = (int *)0x2;
@@ -119,7 +119,7 @@ LAB_00238338:
                 do {
                   temp_v3 = *(short *)(temp_v5 + temp_v4 * 2 + 2);
                   if (temp_v3 == 0) break;
-                  temp_v7 = FUN_002387f8(param_2,temp_v3,temp_v3);
+                  temp_v7 = rangeSetUnionInclusive(param_2,temp_v3,temp_v3);
                   if (temp_v7 == 0) goto LAB_00238338;
                   temp_v4 = temp_v4 + 1;
                 } while (temp_v4 < 3);

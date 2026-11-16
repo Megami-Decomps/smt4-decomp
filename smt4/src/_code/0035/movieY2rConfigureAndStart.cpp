@@ -3,7 +3,7 @@
 
 extern "C" {
 
-int FUN_002c526c(int);
+int resultHandleFailure(int);
 int asdResultCheck(int);
 int FUN_003602b0(unsigned int, int, int, int);
 int FUN_003602ec(unsigned int, int, int, int);
@@ -31,7 +31,7 @@ typedef struct {
 extern int g_y2rTransferEvent; /* 0x44e9e8 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_002c526c. */
+/* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: asdResultCheck. */
 /* Supplied declaration required: FUN_003602b0. */
 /* Supplied declaration required: FUN_003602ec. */
@@ -76,7 +76,7 @@ void movieY2rConfigureAndStart(int param_1,int param_2,int param_3,unsigned int 
   } while (puVar7 != (unsigned int *)0x0);
   software_interrupt(0x19);
   if (g_y2rTransferEvent < 0) {
-    FUN_002c526c(g_y2rTransferEvent);
+    resultHandleFailure(g_y2rTransferEvent);
   }
   FUN_003604a0(1);
   FUN_003604d8(param_3);

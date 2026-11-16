@@ -64,7 +64,7 @@ extern s32 g_btlCamera;
 extern u32 g_btlActionReflect;
 extern u32 g_btlUiBlock;
 
-SideRecord* FUN_001568f8(BattleMain* battle, u32 id);
+SideRecord* btlFindEntryBlockByMemberId(BattleMain* battle, u32 id);
 DevilInfo* devilGetRecord(u32 id);
 void textFormatBuffer(char* out, const char* format, ...);
 void asdLoadFileAsyncSimple(const char* path, u32* out, s32 flag);
@@ -75,7 +75,7 @@ void FUN_004feecc(s32 a, s32 b);
 s32 btlAuxAreResourcesReady(u8* aux);
 void FUN_004f89e8(u8* aux);
 s32 FUN_004f9c2c(u8* aux);
-u32 FUN_00275bc8(void);
+u32 scrScriptProcessCreate(void);
 void scrScriptProcessStartEntry(u32 process, s32 entry);
 void sysPlaySe(s32 id);
 s32 scrRunOpcodesStub(u32 process);
@@ -90,7 +90,7 @@ s32 FUN_004c97cc(BtlTalkWindow* window, s32 unused)
     char path[132];
     switch (window->state) {
     case 0: {
-        SideRecord* side = FUN_001568f8(window->battle, window->sideId);
+        SideRecord* side = btlFindEntryBlockByMemberId(window->battle, window->sideId);
         DevilInfo* info = devilGetRecord(side->id);
         textFormatBuffer(path, "battle/talk/Tone%s.tbb", g_btlTalkToneNames[info->tone]);
         asdLoadFileAsyncSimple(path, &window->toneFile, 1);
@@ -117,7 +117,7 @@ s32 FUN_004c97cc(BtlTalkWindow* window, s32 unused)
             window->loadStage = 2;
         }
         if (window->toneFile == 0 || window->talkFile == 0 || window->toneModel == 0) return 0;
-        window->process = FUN_00275bc8();
+        window->process = scrScriptProcessCreate();
         *reinterpret_cast<s32*>(window->process + 264) = 1;
         scrScriptProcessStartEntry(window->process, 0);
         sysPlaySe(0x3e);

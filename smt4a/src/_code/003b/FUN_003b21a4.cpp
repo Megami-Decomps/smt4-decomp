@@ -45,7 +45,7 @@ void efctSetSpeed(f32 speed);
 f32 FUN_001a1ee0(f32 angle);
 void pairSetHalves(void* sprite, s16 first, s16 second);
 void effectRenderTransformedInstance(void* sprite, f32 offset);
-void FUN_00387240(void* sprite, s32 a, s32 index);
+void uiStoreTextureEntryCenter(void* sprite, s32 a, s32 index);
 void FUN_0036b63c(void* sprite, s32 arg);
 
 static void setDrawState(s32 value)
@@ -68,11 +68,11 @@ void FUN_003b21a4(CardPanel* panel)
     s32 shift = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.29f);
     if (panel->showHeader != 0 && PANEL_SPRITE(panel, 0x20)->alpha > 1.0f) {
         efctSetSpeed(PANEL_SPRITE(panel, 0x20)->alpha);
-        FUN_001835b4(2, 12, 1000, shift, 0, 31);
+        texDrawTableEntryAtStoredOrigin(2, 12, 1000, shift, 0, 31);
         if (PANEL_SPRITE(panel, 0x138)->alpha > 1.0f) {
             efctSetSpeed(PANEL_SPRITE(panel, 0x138)->alpha);
             setDrawState(packNibblesAndByte(6, 1, 0));
-            FUN_001835b4(2, 12, 0x3e9, shift, 0, 36);
+            texDrawTableEntryAtStoredOrigin(2, 12, 0x3e9, shift, 0, 36);
             setDrawState(packNibblesAndByte(6, 7, 0));
         }
         efctSetSpeed(1.0f);
@@ -102,16 +102,16 @@ void FUN_003b21a4(CardPanel* panel)
         pairSetHalves(PANEL_SPRITE(panel, 0x1c4), (s16)offsetY, (s16)offsetX);
     }
     effectRenderTransformedInstance(PANEL_SPRITE(panel, 0x20), (f32)x);
-    FUN_00387240(PANEL_SPRITE(panel, 0x20), 12, 41);
+    uiStoreTextureEntryCenter(PANEL_SPRITE(panel, 0x20), 12, 41);
     PANEL_SPRITE(panel, 0x20)->visible = 1;
     effectRenderTransformedInstance(PANEL_SPRITE(panel, 0x1c4), (f32)x);
-    FUN_00387240(PANEL_SPRITE(panel, 0x1c4), 12, 45);
+    uiStoreTextureEntryCenter(PANEL_SPRITE(panel, 0x1c4), 12, 45);
     PANEL_SPRITE(panel, 0x1c4)->visible = 1;
     effectRenderTransformedInstance(PANEL_SPRITE(panel, 0xac), (f32)x);
-    FUN_00387240(PANEL_SPRITE(panel, 0xac), 12, 43);
+    uiStoreTextureEntryCenter(PANEL_SPRITE(panel, 0xac), 12, 43);
     PANEL_SPRITE(panel, 0xac)->visible = 1;
     effectRenderTransformedInstance(PANEL_SPRITE(panel, 0x368), (f32)x);
-    FUN_00387240(PANEL_SPRITE(panel, 0x368), 12, 41);
+    uiStoreTextureEntryCenter(PANEL_SPRITE(panel, 0x368), 12, 41);
     FUN_0036b63c(PANEL_SPRITE(panel, 0x368), 1);
 }
 

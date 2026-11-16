@@ -6,8 +6,8 @@
 
 extern "C" {
 
-int FUN_00183bb0(void);
-int FUN_00185dd4(...);
+int gxResetColorQuadToWhite(void);
+int texDrawTableEntrySized(...);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -28,8 +28,8 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_00185dd4. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
+/* Supplied declaration required: texDrawTableEntrySized. */
 
 
 void FUN_0025e704(int param_1,int param_2,int param_3,int param_4,unsigned int param_5,
@@ -108,15 +108,15 @@ void FUN_0025e704(int param_1,int param_2,int param_3,int param_4,unsigned int p
       }
       if (param_11 == 0) {
         if (temp_v5 < 1) {
-          FUN_00185dd4(2,param_5,param_6,param_9,temp_v10,temp_v1 - 1,(int)psVar2[1],temp_v11);
+          texDrawTableEntrySized(2,param_5,param_6,param_9,temp_v10,temp_v1 - 1,(int)psVar2[1],temp_v11);
         }
         else {
-          FUN_00185dd4(2,param_5,param_6,param_9,temp_v10,temp_v1,(int)psVar2[1],temp_v11);
+          texDrawTableEntrySized(2,param_5,param_6,param_9,temp_v10,temp_v1,(int)psVar2[1],temp_v11);
         }
       }
       temp_v5 = g_renderCtx;
       if (temp_v4 == 0) {
-        FUN_00183bb0();
+        gxResetColorQuadToWhite();
         return;
       }
       if (param_11 != 0) {
@@ -131,11 +131,11 @@ void FUN_0025e704(int param_1,int param_2,int param_3,int param_4,unsigned int p
       }
       temp_v10 = (unsigned int)((unsigned long long)param_10 >> 0x20);
       if (param_1 < 1) {
-        FUN_00185dd4(2,param_5,param_7,(param_9 + temp_v1) - 1,(int)param_10,temp_v4 + 1,
+        texDrawTableEntrySized(2,param_5,param_7,(param_9 + temp_v1) - 1,(int)param_10,temp_v4 + 1,
                      (int)*(short *)(*(int *)(temp_v0 + 0xc) + 2),temp_v10);
       }
       else {
-        FUN_00185dd4(2,param_5,param_7,param_9 + temp_v1,(int)param_10,temp_v4,
+        texDrawTableEntrySized(2,param_5,param_7,param_9 + temp_v1,(int)param_10,temp_v4,
                      (int)*(short *)(*(int *)(temp_v0 + 0xc) + 2),temp_v10);
       }
       temp_v1 = g_renderCtx;
@@ -144,7 +144,7 @@ void FUN_0025e704(int param_1,int param_2,int param_3,int param_4,unsigned int p
       temp_v5 = piVar6[*piVar6 + 2];
       piVar6[*piVar6 + 2] = temp_v0;
       if (*(char *)(temp_v1 + 0x12d0) == '\0' && temp_v5 == temp_v0) {
-        FUN_00183bb0();
+        gxResetColorQuadToWhite();
         return;
       }
     }
@@ -161,15 +161,15 @@ void FUN_0025e704(int param_1,int param_2,int param_3,int param_4,unsigned int p
       }
       if (param_11 == 0) {
         if (temp_v5 < 1) {
-          FUN_00185dd4(2,param_5,param_6,param_9,temp_v10,temp_v7 - 1,(int)psVar2[1],temp_v11);
+          texDrawTableEntrySized(2,param_5,param_6,param_9,temp_v10,temp_v7 - 1,(int)psVar2[1],temp_v11);
         }
         else {
-          FUN_00185dd4(2,param_5,param_6,param_9,temp_v10,temp_v7,(int)psVar2[1],temp_v11);
+          texDrawTableEntrySized(2,param_5,param_6,param_9,temp_v10,temp_v7,(int)psVar2[1],temp_v11);
         }
       }
       temp_v2 = g_renderCtx;
       if (temp_v1 == 0) {
-        FUN_00183bb0();
+        gxResetColorQuadToWhite();
         return;
       }
       if (param_11 != 0) {
@@ -184,11 +184,11 @@ void FUN_0025e704(int param_1,int param_2,int param_3,int param_4,unsigned int p
       }
       temp_v10 = (unsigned int)((unsigned long long)param_10 >> 0x20);
       if (temp_v5 < 1) {
-        FUN_00185dd4(2,param_5,param_8,(param_9 + temp_v7) - 1,(int)param_10,temp_v1 + 1,
+        texDrawTableEntrySized(2,param_5,param_8,(param_9 + temp_v7) - 1,(int)param_10,temp_v1 + 1,
                      (int)*(short *)(*(int *)(temp_v0 + 0xc) + 2),temp_v10);
       }
       else {
-        FUN_00185dd4(2,param_5,param_8,param_9 + temp_v7,(int)param_10,temp_v1,
+        texDrawTableEntrySized(2,param_5,param_8,param_9 + temp_v7,(int)param_10,temp_v1,
                      (int)*(short *)(*(int *)(temp_v0 + 0xc) + 2),temp_v10);
       }
       temp_v1 = g_renderCtx;
@@ -197,7 +197,7 @@ void FUN_0025e704(int param_1,int param_2,int param_3,int param_4,unsigned int p
       temp_v5 = piVar6[*piVar6 + 2];
       piVar6[*piVar6 + 2] = temp_v0;
       if (*(char *)(temp_v1 + 0x12d0) == '\0' && temp_v5 == temp_v0) {
-        FUN_00183bb0();
+        gxResetColorQuadToWhite();
         return;
       }
     }
@@ -208,9 +208,9 @@ void FUN_0025e704(int param_1,int param_2,int param_3,int param_4,unsigned int p
     if (param_1 == 0) {
       temp_v1 = 0;
     }
-    FUN_00185dd4(2,param_5,param_6,param_9,temp_v10,temp_v1,(int)psVar2[1],temp_v11);
+    texDrawTableEntrySized(2,param_5,param_6,param_9,temp_v10,temp_v1,(int)psVar2[1],temp_v11);
   }
-  FUN_00183bb0();
+  gxResetColorQuadToWhite();
   return;
 }
 

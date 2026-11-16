@@ -45,10 +45,10 @@ extern "C" {
 extern PlayLogView *g_playLog;
 
 s32 resourceRunOperationIfUnblocked(void *list);
-void FUN_00290994(void *list, s32 x, s32 a, s32 table, s32 s0, s32 s1, s32 s2, s32 s3, s32 s4, s32 s5, s32 s6,
+void uiDrawListScrollBar(void *list, s32 x, s32 a, s32 table, s32 s0, s32 s1, s32 s2, s32 s3, s32 s4, s32 s5, s32 s6,
                   s32 barC, s32 barA, s32 barB, s32 flags, s32 extra);
 void FUN_002907c4(char *out, u32 value);
-void FUN_002bf380(u32 layer, u32 table, u32 sprite, s32 x, s32 y, u32 flags);
+void texDrawCompositeSprite(u32 layer, u32 table, u32 sprite, s32 x, s32 y, u32 flags);
 PlayLogFrame *asdTMTexTableEntryAt(u32 table, u32 index);
 s32 vec2GetXInt(void *row);
 void textFormatBuffer(char *out, const char *format, ...);
@@ -61,12 +61,12 @@ void FUN_00194b14(void)
     for (s32 row = 0; row < (s32)FUN_0029d644(log->list); row++) {
         s32 x = vec2GetXInt(&log->rows[row]);
         if (row == 0)
-            FUN_002bf380(2, PLAYLOG_FONT_TABLE, 0, x, 0, 0xB);
+            texDrawCompositeSprite(2, PLAYLOG_FONT_TABLE, 0, x, 0, 0xB);
         if ((s32)FUN_0029d644(log->list) - 1 == row) {
-            FUN_00290994(log->list, x, 0, PLAYLOG_FONT_TABLE, 7, 8, 9, 3, 5, 4, 6, log->barC, log->barA, log->barB, 0xB, 0);
+            uiDrawListScrollBar(log->list, x, 0, PLAYLOG_FONT_TABLE, 7, 8, 9, 3, 5, 4, 6, log->barC, log->barA, log->barB, 0xB, 0);
         }
         PlayLogFrame *frame = asdTMTexTableEntryAt(PLAYLOG_FONT_TABLE, row + 0x15);
-        FUN_002bf380(2, PLAYLOG_FONT_TABLE, 1, frame->x + x, frame->y, 0xB);
+        texDrawCompositeSprite(2, PLAYLOG_FONT_TABLE, 1, frame->x + x, frame->y, 0xB);
 
         u32 entryId = *(s16 *)((u8 *)log + PLAYLOG_IDS_OFFSET + (resourceRunOperationIfUnblocked(log->list) + row) * 2);
         DataTableView<PlayLogEntry> table(PLAYLOG_ENTRY_TABLE, 0);

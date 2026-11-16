@@ -57,9 +57,9 @@ extern u32 g_btlMain;
 
 void FUN_0023fbdc(BattleLoadState* state, BattleMain* battle);
 s32 pairedEntryTableContains(BattleMain* battle, u16 id);
-void FUN_002505c0(s32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g);
+void btlQueueKeyedScalarReflectAction(s32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g);
 void frameTexApplyMode(s32 mode);
-SideRecord* FUN_0027da30(BattleMain* battle, s32 id);
+SideRecord* btlFindEntryBlockByMemberId(BattleMain* battle, s32 id);
 s32 FUN_002c2a04(s32 a);
 void FUN_00339e38(BattleMain* battle);
 void FUN_0033a01c(BattleMain* battle);
@@ -94,12 +94,12 @@ void FUN_0023fffc(BattleLoadState* state, BattleMain* battle)
             if ((side->flags & 1) != 0 && (side->flags & 2) != 0 && (side->flags2 & 8) != 0) {
                 side->flags2 &= 0xfffffff7;
                 if ((side->status & 0x800) == 0) {
-                    SideRecord* record = FUN_0027da30(battle, side->listedId);
+                    SideRecord* record = btlFindEntryBlockByMemberId(battle, side->listedId);
                     if (pairedEntryTableContains(battle, record->id) == 0) side->status |= 0x800;
                 }
             }
         }
-        FUN_002505c0(0, 0, 0x100017b, 0, 0, 0, 0);
+        btlQueueKeyedScalarReflectAction(0, 0, 0x100017b, 0, 0, 0, 0);
     }
     state->phase = 0xd;
     if ((battle->flags & 0x40000000) == 0) {
@@ -108,7 +108,7 @@ void FUN_0023fffc(BattleLoadState* state, BattleMain* battle)
     }
     if (FUN_002c2a04(0) == 3) FUN_002c29d8(0, 10, 0xff);
     if (FUN_002c2a04(1) == 3) FUN_002c29d8(1, 10, 0xff);
-    if (FUN_002896bc() != 0) {
+    if (screenFadesAllReady() != 0) {
         state->phase = 0xe;
         state->unk0c = 0;
         FUN_0023fbdc(state, battle);

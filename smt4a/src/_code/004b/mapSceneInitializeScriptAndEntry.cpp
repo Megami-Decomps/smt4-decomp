@@ -41,12 +41,12 @@ extern "C" {
 extern GameStateScene g_gameState;
 extern AocMainView *g_aocMain;
 
-ScriptRunState *FUN_00275bc8(void *script, void *data);
+ScriptRunState *scrScriptProcessCreate(void *script, void *data);
 void scriptProcessSetMode(ScriptRunState *process, s32 mode);
 s32 FUN_004186e0(void);
 s32 FUN_001bd118(void);
 void FUN_004b6bc4(SceneStartWork *work, s32 mode, s32 arg);
-s32 FUN_0013def0(u32 index);
+s32 pairedAvailabilityGetState(u32 index);
 void FUN_003d54f8(u32 index, s32 value);
 void bgmReleaseStopped(void);
 u32 gameDataTableGetFlag(void);
@@ -65,7 +65,7 @@ void mapSceneInitializeScriptAndEntry(SceneStartWork *work)
     u8 special;
     u32 bgm;
 
-    work->process = FUN_00275bc8(work->script, work->scriptData);
+    work->process = scrScriptProcessCreate(work->script, work->scriptData);
     scriptProcessSetMode(work->process, 2);
     mode = work->mode;
     special = 0;
@@ -75,10 +75,10 @@ void mapSceneInitializeScriptAndEntry(SceneStartWork *work)
     FUN_004b6bc4(work, mode, -1);
     work->centerX = 400.0f;
     work->centerY = 240.0f;
-    if (FUN_0013def0(0) == 3) {
+    if (pairedAvailabilityGetState(0) == 3) {
         FUN_003d54f8(0, 10);
     }
-    if (FUN_0013def0(1) == 3) {
+    if (pairedAvailabilityGetState(1) == 3) {
         FUN_003d54f8(1, 10);
     }
     work->entryKind = 0;

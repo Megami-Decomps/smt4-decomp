@@ -84,8 +84,8 @@ void FUN_0028f740(int param_1)
   temp_v6 = vec2GetYInt(param_1 + 0x20);
   temp_v7 = vec2GetYInt(temp_v4);
   efctSetSpeed();
-  FUN_001835b4(2,0xd,0xdb,temp_v3 + temp_v5,temp_v6 + temp_v7,0x29);
-  FUN_001835b4(2,0xd,0xdc,temp_v3 + temp_v5,temp_v6 + temp_v7,0x29);
+  texDrawTableEntryAtStoredOrigin(2,0xd,0xdb,temp_v3 + temp_v5,temp_v6 + temp_v7,0x29);
+  texDrawTableEntryAtStoredOrigin(2,0xd,0xdc,temp_v3 + temp_v5,temp_v6 + temp_v7,0x29);
   efctSetSpeed();
   temp_v3 = FUN_002a4878((void *)(param_1 + *(int *)(param_1 + 0x3890) * 100 + 0x38bc));
   temp_v8 = widgetSubCallIfVisible(param_1 + *(int *)(param_1 + 0x3890) * 100 + 0x38bc);

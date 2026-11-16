@@ -4,7 +4,7 @@
 
 extern "C" {
 extern CampInventoryLists *g_camp;
-void FUN_0029f848(CampInventoryController *controller, s32 count, s32 rows, s32 arg3, s32 arg4, s32 arg5);
+void gridNavigationConfigure(CampInventoryController *controller, s32 count, s32 rows, s32 arg3, s32 arg4, s32 arg5);
 void FUN_00282f80(s32 category);
 
 // Refill one camp inventory category (11-13) with the owned item ids and reset its list navigation.
@@ -54,12 +54,12 @@ void campRebuildOwnedInventoryCategory(s32 category)
         }
     } else if (category == 13) {
         for (u32 id = 0x79f; id <= 0x802; ++id) {
-            if (flagValueIsPositive(id) && FUN_0028fb40(id) > 0) {
+            if (flagValueIsPositive(id) && flagValueRead(id) > 0) {
                 ids[count++] = id;
             }
         }
     }
-    FUN_0029f848(controller, count, 11, 1, 1, 1);
+    gridNavigationConfigure(controller, count, 11, 1, 1, 1);
     FUN_00282f80(category);
 }
 }

@@ -9,7 +9,7 @@ extern "C" {
 
 int scrEffectRunIfActive(void);
 int randBetween(int, int);
-int FUN_00297060(void);
+int scrScriptProcessCreate(void);
 int asdLoadFileAsyncSimple(...);
 int messageDismissNumericBanner(void);
 int buttonHelpSetPreset(...);
@@ -69,11 +69,11 @@ extern int gameDataBlocksGetFlagByteA(void);
 /* Supplied declaration required: scrEffectRunIfActive. */
 /* Supplied declaration required: gameDataBlocksAddFlags. */
 /* Supplied declaration required: FUN_0026b9bc. */
-extern int FUN_0028fb40(unsigned short);
+extern int flagValueRead(unsigned short);
 /* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: randBetween. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_00297060. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: messageDismissNumericBanner. */
 extern int flagWordTestBit(unsigned int, unsigned int);
@@ -360,7 +360,7 @@ unsigned int FUN_002ec588(int param_1)
             do {
               puVar13 = (unsigned short *)(temp_v2 + temp_v4 * 10 + temp_v3 * 2);
               temp_v5 = recordPackedValue(*puVar13);
-              temp_v6 = FUN_0028fb40(*puVar13);
+              temp_v6 = flagValueRead(*puVar13);
               if (temp_v6 < temp_v5) {
                 temp_v5 = temp_v10 * 2;
                 temp_v10 = temp_v10 + 1;
@@ -441,7 +441,7 @@ unsigned int FUN_002ec588(int param_1)
       temp_v8 = *(int *)(param_1 + 0xd00);
     }
     if (temp_v2 != 0 && temp_v8 != 0) {
-      FUN_00297060();
+      scrScriptProcessCreate();
       *(int *)(param_1 + 0xd08) = temp_v2;
       *(unsigned int *)(temp_v2 + 0x108) = 2;
       temp_v7 = *(unsigned int *)(param_1 + 0xd58);

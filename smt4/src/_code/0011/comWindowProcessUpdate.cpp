@@ -11,7 +11,7 @@ struct CommonWindowProcess {
 
 extern "C" {
 extern CommonWindowProcess *g_comWin;
-s32 FUN_002bf818(void *window);
+s32 uiSpriteAdvanceAnimation(void *window);
 }
 
 // Update the active common window and advance its state timer.
@@ -23,16 +23,16 @@ extern "C" s32 comWindowProcessUpdate(void *context)
     case 3: // Waiting for the next request.
         break;
     case 1:
-        if (FUN_002bf818(work->firstWindow)) {
+        if (uiSpriteAdvanceAnimation(work->firstWindow)) {
             work->state = 2;
             work->timer = 0;
         }
         break;
     case 2:
-        FUN_002bf818(work->secondWindow);
+        uiSpriteAdvanceAnimation(work->secondWindow);
         break;
     case 4:
-        if (FUN_002bf818(work->firstWindow))
+        if (uiSpriteAdvanceAnimation(work->firstWindow))
             work->state = 0;
         break;
     }

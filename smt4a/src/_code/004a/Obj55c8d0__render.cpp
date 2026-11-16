@@ -15,7 +15,7 @@ struct TitleScene;
 
 extern TitleScene *g_renderCtx;
 
-void FUN_00183bb0(void);
+void gxResetColorQuadToWhite(void);
 void skinObjectUpdateMatrices(TitleScene *scene);
 void renderCtxResetColorScale(TitleScene *scene);
 void FUN_004a559c(TitleMenu *menu);
@@ -25,7 +25,7 @@ void FUN_004a5344(TitleMenu *menu);
 void _ZN9Obj55c8d06renderEv(TitleMenu *menu)
 {
     if (menu->entryCount > 0) {
-        FUN_00183bb0();
+        gxResetColorQuadToWhite();
         switch (menu->compact) {
         case 0:
             menu->drawMode = 0x1f;

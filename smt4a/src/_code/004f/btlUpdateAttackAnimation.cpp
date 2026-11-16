@@ -49,7 +49,7 @@ void FUN_00420f08(AnimationVisualState *);
 s32 FUN_004f5238(BtlAuxA *, u32, u32, s32, s32, u32, s32, u32, u32, f32, f32);
 void FUN_004f6254(BtlAuxA *, s32, s32);
 void FUN_004fa414(BtlAuxA *);
-u32 FUN_004fb43c(s16, u32, u32, s32, s32, s32, s32);
+u32 btlQueueActionMessage(s16, u32, u32, s32, s32, s32, s32);
 
 void btlUpdateAttackAnimation(BtlAuxA *battle)
 {
@@ -89,9 +89,9 @@ void btlUpdateAttackAnimation(BtlAuxA *battle)
         FUN_004fa414(battle);
         s16 kind = step->resource->kind;
         if (kind == 15 || kind == 16) {
-            FUN_004fb43c(0, 0, 0x1000132, 0, 0, 0, 0);
+            btlQueueActionMessage(0, 0, 0x1000132, 0, 0, 0, 0);
         } else {
-            FUN_004fb43c(0, 0, 0x1000134, 0, 0, 0, 0);
+            btlQueueActionMessage(0, 0, 0x1000134, 0, 0, 0, 0);
         }
     }
 }

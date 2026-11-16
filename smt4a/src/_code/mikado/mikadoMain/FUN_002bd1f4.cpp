@@ -12,7 +12,7 @@ extern MikadoGlobals g_mikado;
 void asdOperatorDelete(void *);
 void clearThreeHalfwords(u16 *);
 void FUN_004b6fc4(UiScreen *);
-void FUN_0019e290(void *);
+void placeWindowDestroy(void *);
 void menu4CSetValue42(Menu4C *, const void *);
 void uiTextScreenRunPhaseUpdate(UiScreen *);
 }
@@ -78,7 +78,7 @@ extern "C" u32 FUN_002bd1f4()
         work->state = 3;
         work->done = 1;
         if (work->window != NULL) {
-            FUN_0019e290(work->window);
+            placeWindowDestroy(work->window);
             delete work->window;
             work->window = NULL;
         }

@@ -11,7 +11,7 @@ struct BattleSoundIdentity {
 
 extern "C" {
 void FUN_001566a8(s32 category, u32 sound, u32 volume, u32 flags, s32 enabled, float left, float right);
-BattleSoundIdentity* FUN_001568f8(BtlMainStateA* battle, s32 group);
+BattleSoundIdentity* btlFindEntryBlockByMemberId(BtlMainStateA* battle, s32 group);
 void FUN_0015f490(u32 id, s32 sound, u32 enabled, u32 flags, f32 volume);
 
 // Play a battle sound, resolving category ten through the current combatant group.
@@ -27,7 +27,7 @@ u32 FUN_0013cae4(s32 category, u32 sound)
     } else {
         BtlMainStateA* battle = btlGetMainState();
         if (battle != NULL) {
-            BattleSoundIdentity* identity = FUN_001568f8(battle, battle->motionGroup.group);
+            BattleSoundIdentity* identity = btlFindEntryBlockByMemberId(battle, battle->motionGroup.group);
             if (identity != NULL) {
                 FUN_0015f490(identity->id, sound, 1, 0, 1.0f);
             }

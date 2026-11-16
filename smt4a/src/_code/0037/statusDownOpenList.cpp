@@ -22,9 +22,9 @@ extern StatusDownStateA *g_statusDown;
 
 extern void ifTouchRegionRemove(void);
 extern void __aeabi_memset4(void *dst, int size, u32 value);
-extern void FUN_00203b40(GridNavigation *list, s32 count, s32 visible, s32 columns, s32 wrap, s32 alternateKeys);
+extern void gridNavigationConfigure(GridNavigation *list, s32 count, s32 visible, s32 columns, s32 wrap, s32 alternateKeys);
 extern void FUN_00230d30(void);
-extern void FUN_002a4964(ScrollSelection *list, s32 index);
+extern void scrollListSetSelectionTracked(ScrollSelection *list, s32 index);
 extern s32 objectApplyIfUnblocked(ScrollSelection *list);
 
 /* Opens the status screen's list with the two arguments: rebuilds the list, resets the touch regions and slots and enters state 0xE. */
@@ -35,8 +35,8 @@ void statusDownOpenList(u32 argA, u32 argB)
 
     status->selection = argA;
     *reinterpret_cast<u32 *>(status->unk658) = argB;
-    FUN_00203b40(statusDownGetList(status), objectApplyIfUnblocked(statusDownGetSelectionList(status)) + 1, 9, 1, 0, 1);
-    FUN_002a4964(statusDownGetSelectionList(status), objectApplyIfUnblocked(statusDownGetSelectionList(status)) - 1);
+    gridNavigationConfigure(statusDownGetList(status), objectApplyIfUnblocked(statusDownGetSelectionList(status)) + 1, 9, 1, 0, 1);
+    scrollListSetSelectionTracked(statusDownGetSelectionList(status), objectApplyIfUnblocked(statusDownGetSelectionList(status)) - 1);
     status->inventoryDirty = 1;
     status = g_statusDown;
     for (int i = 0; i < status->touchRegionCount; i++) {

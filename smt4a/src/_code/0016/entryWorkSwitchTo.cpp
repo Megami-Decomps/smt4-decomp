@@ -66,7 +66,7 @@ void entryWorkSwitchTo(void *job, u32 index, s32 setPending)
     if (aocRunByName(g_aocSystem, work->kind, work->current, 1) != 0) {
         aocLoadTextureNode(g_aocSystem, work->kind, work->current, 0x10000);
     } else {
-        FUN_0014afd0(work->kind, work->current);
+        asdTMTexTablePrepareNodeImage(work->kind, work->current);
     }
 }
 }

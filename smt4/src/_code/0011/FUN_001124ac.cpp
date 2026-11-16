@@ -15,7 +15,7 @@ int nngxLockEnter(void);
 int nngxLockLeave(void);
 int FUN_002ba2b8(void);
 int FUN_002ba51c(...);
-int FUN_002bdb48(void);
+int asdGxCommandBufferTerminateAndSubmit(void);
 int nngxBindCmdlist(...);
 int nngxGetError(void);
 int memClear(...);
@@ -112,7 +112,7 @@ extern unsigned int FUN_00129d98(void);
 /* Supplied declaration required: nngxLockLeave. */
 /* Supplied declaration required: FUN_002ba2b8. */
 /* Supplied declaration required: FUN_002ba51c. */
-/* Supplied declaration required: FUN_002bdb48. */
+/* Supplied declaration required: asdGxCommandBufferTerminateAndSubmit. */
 /* Supplied declaration required: nngxBindCmdlist. */
 /* Supplied declaration required: nngxGetError. */
 /* Supplied declaration required: memClear. */
@@ -356,7 +356,7 @@ unsigned int FUN_001124ac(romwright_code *param_1,romwright_code *param_2)
           FUN_002ba51c((char *)0x400474,temp_v9,4);
           temp_v9[0] = 0x10501;
           FUN_002ba51c(&DAT_00400574,temp_v9,4);
-          FUN_002bdb48();
+          asdGxCommandBufferTerminateAndSubmit();
           puVar1 = DAT_004c632c;
           puVar7 = (unsigned char *)(DAT_004c632c[6] + DAT_004c632c[8] * 0x1c);
           *puVar7 = 3;
@@ -380,7 +380,7 @@ unsigned int FUN_001124ac(romwright_code *param_1,romwright_code *param_2)
           puVar1[8] = puVar1[8] + 1;
         }
         else {
-          FUN_002bdb48();
+          asdGxCommandBufferTerminateAndSubmit();
         }
         if ((DAT_004c632c != (unsigned int *)0x0) && (DAT_004c62a1 == '\0')) {
           DAT_004c6330 = DAT_004c632c;

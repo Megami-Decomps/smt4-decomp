@@ -10,7 +10,7 @@ int FUN_004fbeac(...);
 int jyoucyuGetTableEntry(...);
 int dataTable04FindById(void);
 int FUN_003e892c(int);
-int FUN_003eaf20(void);
+int btlFindFirstEntryMatchingCategoryAndRequiredMask(void);
 int FUN_003ebca0(void);
 int FUN_004abba8(...);
 int btlUiIdsRefresh(unsigned int);
@@ -78,7 +78,7 @@ extern int FUN_0019acdc(unsigned short, unsigned int);
 extern int FUN_003e48bc(void);
 extern int FUN_003e4978(void);
 /* Supplied declaration required: FUN_003e892c. */
-/* Supplied declaration required: FUN_003eaf20. */
+/* Supplied declaration required: btlFindFirstEntryMatchingCategoryAndRequiredMask. */
 /* Supplied declaration required: FUN_003ebca0. */
 /* Supplied declaration required: FUN_003f034c. */
 /* Supplied declaration required: FUN_004abba8. */
@@ -170,7 +170,7 @@ void FUN_003984ac(int param_1)
           temp_v0 = *(short *)(param_1 + 0x4c76);
         }
         if (((!temp_v8 || temp_v0 != 0) || ((temp_v3 & DAT_00573ae0) != 0 || (temp_v5 & DAT_00573ae4) != 0)
-            ) || (temp_v6 = param_1, FUN_003eaf20(), temp_v6 == 0)) goto LAB_003987dc;
+            ) || (temp_v6 = param_1, btlFindFirstEntryMatchingCategoryAndRequiredMask(), temp_v6 == 0)) goto LAB_003987dc;
         temp_v6 = (int)*(short *)(temp_v6 + 8);
         btlSelectSourceTriggeredSkill(temp_v6,1);
         if ((temp_v6 == 0) || (temp_v7 = temp_v6, dataTable04FindById(), temp_v7 == 0)) goto LAB_003987dc;
@@ -178,7 +178,7 @@ void FUN_003984ac(int param_1)
         *puVar6 = *puVar6 | DAT_00573ae0;
         *(unsigned int *)(param_1 + 0x45a4) = temp_v3;
         if (temp_v6 < 1) goto LAB_003987dc;
-        FUN_003eaf20();
+        btlFindFirstEntryMatchingCategoryAndRequiredMask();
         *piVar11 = *(int *)(param_1 + 0x400);
         temp_v6 = btlUnitGet(g_btlScriptUnit);
         temp_v3 = 0;
@@ -379,7 +379,7 @@ LAB_00398c7c:
           return;
         }
         temp_v6 = param_1;
-        FUN_003eaf20();
+        btlFindFirstEntryMatchingCategoryAndRequiredMask();
         if (temp_v6 == 0) {
           *(unsigned char *)(param_1 + 0x4cd0) = 0;
           FUN_003f034c(param_1);
@@ -425,7 +425,7 @@ LAB_00398c7c:
           return;
         }
         temp_v6 = param_1;
-        FUN_003eaf20();
+        btlFindFirstEntryMatchingCategoryAndRequiredMask();
         *piVar11 = *(int *)(temp_v6 + 0x400);
         temp_v6 = btlUnitGet(g_btlScriptUnit);
         temp_v3 = 0;

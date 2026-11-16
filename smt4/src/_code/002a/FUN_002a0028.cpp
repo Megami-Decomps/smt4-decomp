@@ -25,10 +25,10 @@ struct UniteMenuAvailability {
 extern "C" {
 extern UniteTouchWork *g_unite;
 s32 resourceRunOperationIfUnblocked(const ScrollSelection *selection);
-void FUN_0029f848(ScrollSelection *selection, u32 count, u32 visible, u32 option, u32 first, u32 second);
+void gridNavigationConfigure(ScrollSelection *selection, u32 count, u32 visible, u32 option, u32 first, u32 second);
 void FUN_0029eb5c(ScrollSelection *selection, s32 index);
 void ifTouchRegionRemove();
-u16 FUN_002b8584(u32 table, u32 index);
+u16 ifTouchRegionAddRequested(u32 table, u32 index);
 }
 
 // Resize the unite list for available menu categories and optionally rebuild its touch regions.
@@ -48,7 +48,7 @@ extern "C" void FUN_002a0028(s32 refreshRegions)
                 count = 14;
         }
     }
-    FUN_0029f848(selection, count, 8, 1, 0, 1);
+    gridNavigationConfigure(selection, count, 8, 1, 0, 1);
     FUN_0029eb5c(selection, top + offset);
     if (refreshRegions) {
         for (s32 index = 0; index < 8; ++index) {
@@ -62,9 +62,9 @@ extern "C" void FUN_002a0028(s32 refreshRegions)
         ifTouchRegionRemove();
         ifTouchRegionRemove();
         for (s32 index = 0; index < 8 && index < (s32)FUN_0029ee54(selection); ++index)
-            work->itemRegions[index] = FUN_002b8584(36, index + 0xa9);
-        work->confirmRegion = FUN_002b8584(36, 0x1f0);
-        work->previousRegion = FUN_002b8584(36, 0x1ee);
-        work->nextRegion = FUN_002b8584(36, 0x1ef);
+            work->itemRegions[index] = ifTouchRegionAddRequested(36, index + 0xa9);
+        work->confirmRegion = ifTouchRegionAddRequested(36, 0x1f0);
+        work->previousRegion = ifTouchRegionAddRequested(36, 0x1ee);
+        work->nextRegion = ifTouchRegionAddRequested(36, 0x1ef);
     }
 }

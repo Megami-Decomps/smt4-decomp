@@ -12,7 +12,7 @@ struct ModelShadowMap {
 };
 
 extern "C" {
-void *FUN_00178b04(u32 size, const char *file, u32 line);
+void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 ShadowMapWork *FUN_0016d17c(ShadowMapWork *work);
 
 /* Runs the work area's constructor and clears its six handles. */
@@ -32,7 +32,7 @@ static __inline ShadowMapWork *initShadowMapWork(ShadowMapWork *work)
 // Allocate and initialize the model's shadow-map work area.
 void FUN_00156ea8(ModelShadowMap *shadow)
 {
-    void *memory = FUN_00178b04(sizeof(ShadowMapWork),
+    void *memory = asdMemoryAllocTraced(sizeof(ShadowMapWork),
         "c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelShadowMap.cpp", 62);
     ShadowMapWork *work = memory != NULL ? initShadowMapWork(static_cast<ShadowMapWork *>(memory)) : NULL;
     shadow->work = work;

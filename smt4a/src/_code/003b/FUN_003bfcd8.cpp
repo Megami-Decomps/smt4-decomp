@@ -7,7 +7,7 @@ extern "C" {
 extern MessageGlobalsA g_messageMain;
 
 u32 scrGetArg(u32 index);
-void FUN_0014e188(u8 *sprite, s32 anim, s32 frame, u8 *source, f32 scale, s32 layer);
+void uiSpriteStateInitFromSource(u8 *sprite, s32 anim, s32 frame, u8 *source, f32 scale, s32 layer);
 void pairSetFirstResetSecond(u8 *pair, s32 first);
 void uiSpriteSelectAnim(u8 *sprite, s32 anim);
 
@@ -26,7 +26,7 @@ static __inline void messagePanelOpen(u8 mode)
     panel->unk92 = 0;
     panel->unk17D = 0;
     panel->unk16D = 0;
-    FUN_0014e188(panel->blockB00, 8, -1, panel->block194, 1.0f, 11);
+    uiSpriteStateInitFromSource(panel->blockB00, 8, -1, panel->block194, 1.0f, 11);
     pairSetFirstResetSecond(panel->blockB00, 0);
     uiSpriteSelectAnim(panel->blockB00, 6);
 }

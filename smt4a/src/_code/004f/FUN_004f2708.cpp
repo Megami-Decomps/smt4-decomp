@@ -17,7 +17,7 @@ struct BattleCameraGateGlobalsView {
 extern "C" {
 extern BattleCameraGateGlobalsView g_btlCamera;
 extern u32 g_btlScriptUnit;
-s32 FUN_003eb1cc(BtlMainStateA *battle);
+s32 btlStateHasSelectionGateFlag(BtlMainStateA *battle);
 
 /* Gate camera progression on battle masks, the script unit and camera flags. */
 u32 FUN_004f2708(u32 unused, BtlMainStateA *battle, s32 checkTransition)
@@ -26,7 +26,7 @@ u32 FUN_004f2708(u32 unused, BtlMainStateA *battle, s32 checkTransition)
          (battle->stateFlags64.bits & g_btlCamera.requiredState) == 0) &&
         !(battle->stateFlags64.bits & g_btlCamera.blocked) &&
         !(battle->encounter.controlFlags & 0x10)) {
-        if (FUN_003eb1cc(battle))
+        if (btlStateHasSelectionGateFlag(battle))
             return 1;
         if (battle->stateFlags64.bits & g_btlCamera.unitBlocked)
             return 0;

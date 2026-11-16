@@ -116,7 +116,7 @@ void FUN_002d2000(void)
                     DAT_005f1ca4 = found;
                     g_gameState.unk454 = -1;
                     reinterpret_cast<FlagsBlock *>(gameFlagsGetBlock())->level = g_gameState.nextSceneId + 100;
-                    FUN_002b945c(g_gameState.nextSceneId);
+                    gameFlagsLoadTable4cEntry(g_gameState.nextSceneId);
                     g_gameState.progressEnabled = 1;
                 }
                 if (scene == 8) {

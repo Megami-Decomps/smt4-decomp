@@ -25,7 +25,7 @@ void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 region, u32 size, u32 o
     }
     s32 result = nn::svc::ReleaseMutex(*g_allocationAddressRanges.mutex);
     if (nnResultIsFailure(result)) {
-        FUN_002e3140(result);
+        resultHandleFailure(result);
     }
     return block;
 }

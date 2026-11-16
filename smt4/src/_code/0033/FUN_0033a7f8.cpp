@@ -7,7 +7,7 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_0027da30(int, int);
+int btlFindEntryBlockByMemberId(int, int);
 int FUN_002b7bca(int *, unsigned int, int, unsigned char *);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -30,7 +30,7 @@ static float romwright_fabs_4(float value)
 }
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-extern int FUN_0027d9e8(int, unsigned int);
+extern int idSlotsFindEntryById(int, unsigned int);
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: memClear. */
 
@@ -98,8 +98,8 @@ LAB_0033a884:
   }
   temp_v3 = param_1;
   temp_v17 = temp_v16;
-  FUN_0027da30(param_1,(int)*(short *)((int)param_2 + 0x62));
-  temp_v3 = FUN_0027d9e8(param_1,*(unsigned int *)(temp_v3 + 0xc));
+  btlFindEntryBlockByMemberId(param_1,(int)*(short *)((int)param_2 + 0x62));
+  temp_v3 = idSlotsFindEntryById(param_1,*(unsigned int *)(temp_v3 + 0xc));
   if (temp_v3 == 0) {
     return 0;
   }
@@ -139,7 +139,7 @@ LAB_0033a884:
         if (temp_v7 == temp_v2) {
           temp_v5 = aiStack_104[temp_v7];
           temp_v3 = param_1;
-          FUN_0027da30(param_1,(int)*(short *)(temp_v5 + 0x62));
+          btlFindEntryBlockByMemberId(param_1,(int)*(short *)(temp_v5 + 0x62));
           temp_v1 = 0;
           do {
             temp_v4 = *(int *)(param_1 + temp_v1 * 4 + 0x2134);
@@ -171,7 +171,7 @@ LAB_0033aa48:
         else {
           temp_v5 = aiStack_104[temp_v7 + 1];
           temp_v3 = param_1;
-          FUN_0027da30(param_1,(int)*(short *)(temp_v5 + 0x62));
+          btlFindEntryBlockByMemberId(param_1,(int)*(short *)(temp_v5 + 0x62));
           temp_v1 = 0;
           do {
             temp_v4 = *(int *)(param_1 + temp_v1 * 4 + 0x2134);
@@ -218,8 +218,8 @@ LAB_0033ab28:
       return 0;
     }
     temp_v1 = param_1;
-    FUN_0027da30(param_1,(int)*(short *)(temp_v3 + 0x62));
-    temp_v1 = FUN_0027d9e8(param_1,*(unsigned int *)(temp_v1 + 0xc));
+    btlFindEntryBlockByMemberId(param_1,(int)*(short *)(temp_v3 + 0x62));
+    temp_v1 = idSlotsFindEntryById(param_1,*(unsigned int *)(temp_v1 + 0xc));
     if (temp_v1 == 0) {
       return 0;
     }

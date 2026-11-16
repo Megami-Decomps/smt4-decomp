@@ -14,9 +14,9 @@ extern "C" {
 
 void FUN_0028784c(int index, char value);
 
-u32 FUN_0028660c(void);
+u32 btlTalkGetPortraitCode(void);
 
-void FUN_00289880(void);
+void commonBgStopChildAndBeginTransition(void);
 
 void FUN_0028cf30(PlayScene *scene, int value, int flag);
 

@@ -6,7 +6,7 @@
 extern "C" {
 
 int drawSetColorFromRGBA8(...);
-int FUN_002bed3c(void);
+int gxResetColorQuadToWhite(void);
 int asdTMTexTableEntryAt(...);
 
 /* stack frame of param_4: 6 slot(s), 24 byte(s) */
@@ -20,7 +20,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: FUN_002bed3c. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 extern int __aeabi_idivmod(int, unsigned int);
 
@@ -70,19 +70,19 @@ void FUN_002bdce0(int param_1,int param_2,int param_3,int param_4)
         }
         temp_v0 = __aeabi_idivmod(temp_v4,temp_v1);
         temp_v3 = asdTMTexTableEntryAt(0xe,100 - temp_v2);
-        FUN_002bf288(2,0xd,temp_v0,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,
+        texDrawTableEntryAtStoredOrigin(2,0xd,temp_v0,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,
                      0x10);
         temp_v4 = temp_v4 - temp_v1 * temp_v0;
         if (temp_v2 != 2) {
           if (temp_v2 == 5) {
             temp_v3 = asdTMTexTableEntryAt(0xe,0x66);
-            FUN_002bf288(2,0xd,0xc,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,
+            texDrawTableEntryAtStoredOrigin(2,0xd,0xc,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,
                          0x10);
           }
         }
         else {
           temp_v3 = asdTMTexTableEntryAt(0xe,0x67);
-          FUN_002bf288(2,0xd,0xc,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,
+          texDrawTableEntryAtStoredOrigin(2,0xd,0xc,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,
                        0x10);
         }
       }
@@ -92,20 +92,20 @@ void FUN_002bdce0(int param_1,int param_2,int param_3,int param_4)
   }
   else {
     temp_v3 = asdTMTexTableEntryAt(0xe,0x5c);
-    FUN_002bf288(2,0xd,0,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x10);
+    texDrawTableEntryAtStoredOrigin(2,0xd,0,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x10);
   }
   if (param_4 != 0) {
     if (-1 < temp_v5) {
       temp_v3 = asdTMTexTableEntryAt(0xe,0x65 - temp_v5);
     }
     if (param_1 < 0) {
-      FUN_002bf288(2,0xd,0xb,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x10);
+      texDrawTableEntryAtStoredOrigin(2,0xd,0xb,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x10);
     }
     else if (0 < param_1) {
-      FUN_002bf288(2,0xd,10,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x10);
+      texDrawTableEntryAtStoredOrigin(2,0xd,10,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x10);
     }
   }
-  FUN_002bed3c();
+  gxResetColorQuadToWhite();
   return;
 }
 

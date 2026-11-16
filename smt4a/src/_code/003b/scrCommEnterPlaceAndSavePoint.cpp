@@ -5,7 +5,7 @@ extern "C" {
 
 void FUN_00376fb8(s32 arg);
 void mapPlaceSet(s32 place, s32 arg1, s32 arg2);
-void FUN_002b945c(s32 id);
+void gameFlagsLoadTable4cEntry(s32 id);
 
 // Script command: switch to place 0x18 with table 0x4C entry 1 and record the current position as the
 // flag block's save point.
@@ -14,7 +14,7 @@ u32 scrCommEnterPlaceAndSavePoint(void)
     FlagWorkBanks *flags = gameFlagsGetBlock();
     FUN_00376fb8(0x65);
     mapPlaceSet(0x18, 1, 0);
-    FUN_002b945c(1);
+    gameFlagsLoadTable4cEntry(1);
     g_gameState.progressEnabled = 1;
     g_gameState.transitionActive = 0;
     flags->savePoint.scale = (s16)g_gameState.point.scale;

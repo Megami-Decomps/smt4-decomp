@@ -4,7 +4,7 @@ extern "C" {
 
 int ifTouchRegionRemove(void);
 int __aeabi_memset4(int, int, unsigned int);
-int FUN_00230b9c(int, unsigned int, int);
+int statusDownSetSpriteMode(int, unsigned int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ extern int g_statusDown; /* 0x588fe8 */
 
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: FUN_00230b9c. */
+/* Supplied declaration required: statusDownSetSpriteMode. */
 
 
 void statusDownRestartTransition(void)
@@ -28,7 +28,7 @@ void statusDownRestartTransition(void)
   
   temp_v2 = g_statusDown;
   if (*(int *)(g_statusDown + 0x518) != 0) {
-    FUN_00230b9c(2,0xffffffff,0);
+    statusDownSetSpriteMode(2,0xffffffff,0);
     temp_v0 = g_statusDown;
     *(unsigned int *)(g_statusDown + 0x524) = 0;
     temp_v1 = *(unsigned int *)(temp_v0 + 0x518);

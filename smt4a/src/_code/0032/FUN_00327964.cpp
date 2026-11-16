@@ -23,8 +23,8 @@ extern GameStateView g_gameState;
 int mathVec3Dot(void);
 
 int sysPlaySe(int);
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
+int libm_cosf(void);
+int libm_sinf(void);
 int mapIfSetMode1(void);
 int FUN_00233e10(int, unsigned int);
 int FUN_002342b8(void);
@@ -62,8 +62,8 @@ extern int DAT_006160dc; /* 0x6160dc */
 #endif
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: mapIfSetMode1. */
 /* Supplied declaration required: FUN_00233e10. */
 /* Supplied declaration required: FUN_002342b8. */
@@ -180,11 +180,11 @@ void FUN_00327964(void)
             *(unsigned int *)(temp_v3 + 0x120) = temp_v5;
             if ((int)temp_v7 < 0x42700000) {
               temp_v7 = (*(float *)(temp_v3 + 0x4c) + 180.0f) * 0.017453292f;
-              FUN_001bc124();
+              libm_sinf();
               temp_v3 = g_lmapScene;
               *(float *)(g_lmapScene + 0x118) = *(float *)(g_lmapScene + 0x118) + temp_v7 * temp_v14;
               temp_v8 = (*(float *)(temp_v3 + 0x4c) + temp_v13) * temp_v8;
-              FUN_001bbf0c();
+              libm_cosf();
               temp_v3 = g_lmapScene + 0x124;
               *(float *)(g_lmapScene + 0x120) = *(float *)(g_lmapScene + 0x120) + temp_v8 * temp_v14;
               FUN_003250ac(temp_v3);
@@ -197,11 +197,11 @@ void FUN_00327964(void)
             }
             else {
               temp_v7 = (*(float *)(temp_v3 + 0x50) + 180.0f) * 0.017453292f;
-              FUN_001bc124();
+              libm_sinf();
               temp_v3 = g_lmapScene;
               *(float *)(g_lmapScene + 0x118) = *(float *)(g_lmapScene + 0x118) + temp_v7 * temp_v14;
               temp_v8 = (*(float *)(temp_v3 + 0x50) + temp_v13) * temp_v8;
-              FUN_001bbf0c();
+              libm_cosf();
               temp_v3 = g_lmapScene + 0x124;
               *(float *)(g_lmapScene + 0x120) = *(float *)(g_lmapScene + 0x120) + temp_v8 * temp_v14;
               FUN_003250ac(temp_v3);

@@ -36,7 +36,7 @@ s32 FUN_0022a5d8(u32);
 void paramsClearPacket(UiResourceParameters *);
 void __aeabi_memset4(void *destination, u32 bytes, s32 value);
 
-void FUN_0014e188(SortMenuSprite *, u32, u32, UiResourceParameters *, u32, f32);
+void uiSpriteStateInitFromSource(SortMenuSprite *, u32, u32, UiResourceParameters *, u32, f32);
 void uiSpriteSetImageKeyframe(SortMenuSprite *, u32, u32);
 void uiSpriteSelectAnim(SortMenuSprite *, u32);
 
@@ -57,14 +57,14 @@ void sortMenuAcquire(u32 owner, u8 option)
                    sSortMenuPacketB, sizeof(sSortMenuPacketB), NULL, 0, NULL, 0,
                    sSortMenuPacketC, sizeof(sSortMenuPacketC));
         for (s32 i = 0; i < 13; ++i) {
-            FUN_0014e188(&current->sprites[i], 21, 0, &current->parameters, 1, 1.0f);
+            uiSpriteStateInitFromSource(&current->sprites[i], 21, 0, &current->parameters, 1, 1.0f);
             uiSpriteSetImageKeyframe(&current->sprites[i], 0, 0);
         }
-        FUN_0014e188(&current->sprites[10], 21, 0, &current->parameters, 1, 1.0f);
+        uiSpriteStateInitFromSource(&current->sprites[10], 21, 0, &current->parameters, 1, 1.0f);
         uiSpriteSelectAnim(&current->sprites[10], 0);
-        FUN_0014e188(&current->sprites[11], 21, 0, &current->parameters, 1, 1.0f);
+        uiSpriteStateInitFromSource(&current->sprites[11], 21, 0, &current->parameters, 1, 1.0f);
         uiSpriteSelectAnim(&current->sprites[11], 1);
-        FUN_0014e188(&current->sprites[12], 21, 0, &current->parameters, 1, 1.0f);
+        uiSpriteStateInitFromSource(&current->sprites[12], 21, 0, &current->parameters, 1, 1.0f);
         uiSpriteSelectAnim(&current->sprites[12], 2);
         __aeabi_memset4(current->ids, sizeof(current->ids), -1);
         current->frame = 0;

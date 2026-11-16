@@ -24,12 +24,12 @@ int callOnHandleField4B(...);
 int callOnHandleField4C(...);
 int callOnHandleField4D(...);
 int FUN_0050d7ac(void);
-int FUN_0050d8e4(void);
+int __hardfp_atan2f(void);
 int nn_math_ARMv6_MTX34CopyAsm(...);
 
 int dialogClose(...);
 int FUN_00215978(...);
-int FUN_00275bc8(...);
+int scrScriptProcessCreate(...);
 int FUN_002c2610(void);
 int holderStopJob(...);
 int gameSavedItemsPromoteFlagState(void);
@@ -58,7 +58,7 @@ int scrScriptProcessStartEntry(...);
 int sysMemClear(...);
 int FUN_003756c8(void);
 int stateAtCIs4(...);
-int FUN_003eaf20(void);
+int btlFindFirstEntryMatchingCategoryAndRequiredMask(void);
 int FUN_003ebca0(void);
 int FUN_003eebf4(unsigned int, int);
 int FUN_003f034c(...);
@@ -190,14 +190,14 @@ extern int scrRunOpcodesStub(unsigned int);
 extern int tmnlHasSelection(void);
 extern int dialogIsActive(void);
 extern int messageMainIsIdle(void);
-/* Supplied declaration required: FUN_00275bc8. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002ba998. */
 /* Supplied declaration required: FUN_002c2610. */
 extern int FUN_002cf854(void);
 extern int lmapMainGetUnk74(void);
 /* Supplied declaration required: FUN_002d2000. */
-extern int FUN_002e07f4(void);
+extern int pairedAvailabilityBothReady(void);
 /* Supplied declaration required: sysMemClear. */
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: holderStopJob. */
@@ -217,7 +217,7 @@ extern int sequenceRequestIsPending(void);
 /* Supplied declaration required: FUN_003e785c. */
 extern int FUN_003e9964(unsigned int);
 /* Supplied declaration required: btlActionPrepareFromSource. */
-/* Supplied declaration required: FUN_003eaf20. */
+/* Supplied declaration required: btlFindFirstEntryMatchingCategoryAndRequiredMask. */
 /* Supplied declaration required: FUN_003ebad4. */
 /* Supplied declaration required: FUN_003ebca0. */
 extern int FUN_003ed878(unsigned int);
@@ -268,7 +268,7 @@ extern int isEntryUsable(int);
 /* Supplied declaration required: FUN_004fa01c. */
 /* Supplied declaration required: FUN_004fb798. */
 /* Supplied declaration required: FUN_0050d7ac. */
-/* Supplied declaration required: FUN_0050d8e4. */
+/* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: rt_memcpy. */
 /* Supplied declaration required: __aeabi_memcpy4. */
@@ -364,7 +364,7 @@ unsigned int FUN_0024bcd4(void)
     *(unsigned char *)(temp_v2 + 0x45bc) = temp_v3 != 0;
     puVar16 = (unsigned int *)(temp_v2 + 0x45a0);
     if (((DAT_00573adc & *(unsigned int *)(temp_v2 + 0x45a4)) == 0 && (DAT_00573ad8 & *puVar16) == 0) &&
-       (temp_v5 = temp_v2, FUN_003eaf20(), temp_v5 != 0)) {
+       (temp_v5 = temp_v2, btlFindFirstEntryMatchingCategoryAndRequiredMask(), temp_v5 != 0)) {
       temp_v3 = (int)*(short *)(temp_v5 + 8);
       FUN_004c5da4(temp_v3,1);
       if ((temp_v3 != 0) && (temp_v10 = temp_v3, dataTable04FindById(), temp_v5 = DAT_00573ad8, temp_v10 != 0)) {
@@ -939,7 +939,7 @@ joined_r0x0024cba8:
       if (temp_v3 == 1) {
         temp_v3 = *(int *)(temp_v2 + 0x4d50);
         if (temp_v3 != 0) {
-          FUN_00275bc8(temp_v3,0);
+          scrScriptProcessCreate(temp_v3,0);
           *(int *)(temp_v2 + 0x4d54) = temp_v3;
           *(unsigned int *)(temp_v3 + 0x108) = 1;
           scrScriptProcessStartEntry(*(int *)(temp_v2 + 0x4d54),0);
@@ -955,7 +955,7 @@ joined_r0x0024cba8:
     case 4:
       if (*(int *)(temp_v2 + 0xa8) != 2) goto LAB_0024d284;
     }
-    temp_v3 = FUN_002e07f4();
+    temp_v3 = pairedAvailabilityBothReady();
 LAB_0024d278:
     if (temp_v3 == 0) goto LAB_0024d75c;
 LAB_0024d284:
@@ -1166,14 +1166,14 @@ LAB_0024d75c:
             }
             nn_math_ARMv6_MTX34CopyAsm(&temp_v21,&_ZZN2nw4math5MTX348IdentityEvE8identity);
             FUN_003fda64(*(unsigned int *)(**(int **)(temp_v3 + 0x1bc) + 4),&LAB_0024d9a4,&temp_v21);
-            FUN_0050d8e4();
+            __hardfp_atan2f();
             temp_v15 = 57.295776f;
             *(float *)(temp_v2 + 0x22a8) = temp_v28 * 57.295776f;
             temp_v14 = -temp_v27;
             FUN_0050d7ac();
             *(float *)(temp_v2 + 0x22ac) = temp_v14 * temp_v15;
             temp_v14 = temp_v25;
-            FUN_0050d8e4();
+            __hardfp_atan2f();
             *(float *)(temp_v2 + 0x22b0) = temp_v14 * temp_v15;
             callOnHandleField4D(*(unsigned int *)(temp_v2 + 0x2298));
             callOnHandleField4B(*(unsigned int *)(temp_v2 + 0x2298));

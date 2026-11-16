@@ -16,7 +16,7 @@ int effectEditorApplyHandlerState(void);
 int effBlockSetBlobB(unsigned int, unsigned int [2], int);
 int resourceQueueDeferredDestroy(...);
 int registrationEntryInsert(...);
-int FUN_002a3d58(...);
+int effPartInitDefaults(...);
 int textFormatBuffer(int, unsigned char *, unsigned int);
 int padIsButtonPressed(...);
 int memAlloc(int, int, int, unsigned int, int, int);
@@ -82,7 +82,7 @@ extern unsigned int resourceResolveHeaderPointer(void);
 /* Supplied declaration required: effBlockSetBlobB. */
 /* Supplied declaration required: resourceQueueDeferredDestroy. */
 /* Supplied declaration required: registrationEntryInsert. */
-/* Supplied declaration required: FUN_002a3d58. */
+/* Supplied declaration required: effPartInitDefaults. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: padIsButtonPressed. */
@@ -181,7 +181,7 @@ LAB_002424b8:
     if (temp_v4 == 0) goto LAB_002426c4;
     temp_v6 = VectorFloatToUnsigned(*(unsigned int *)(temp_v0 + DAT_0044f8d4 * 0x18 + 0x14),3);
     piVar3 = (int *)(param_2 + temp_v6 * 0x1c);
-    FUN_002a3d58(&g_effectEditorSavedSnapshot);
+    effPartInitDefaults(&g_effectEditorSavedSnapshot);
     temp_v6 = *piVar3;
     if (piVar3[2] != 0) {
       temp_v1 = effBlockLoadClone();
@@ -264,7 +264,7 @@ LAB_002424b8:
           registrationEntryInsert(DAT_0044ea90,3);
           DAT_0044ea90 = 0;
         }
-        FUN_002a3d58(&g_effectEditorSavedSnapshot);
+        effPartInitDefaults(&g_effectEditorSavedSnapshot);
         g_effectEditorSavedSnapshot.payload.saved.words[0] = *(unsigned int *)(param_2 + 0xc);
         g_effectEditorSavedSnapshot.payload.saved.words[1] = *(unsigned int *)(param_2 + 0x10);
         g_effectEditorSavedSnapshot.payload.saved.words[2] = *(unsigned int *)(param_2 + 0x14);

@@ -6,8 +6,8 @@
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 void efctSetSpeed(f32 speed);
-void FUN_00183bb0();
-void FUN_00164b5c(s32 layer, u32 group, u32 sprite, s32 x, s32 y, s32 priority);
+void gxResetColorQuadToWhite();
+void texDrawCompositeSprite(s32 layer, u32 group, u32 sprite, s32 x, s32 y, s32 priority);
 
 /* Draws the sprite at (x, y) with the given speed. */
 static void markerDrawBody(s32 x, s32 y, f32 speed)
@@ -15,8 +15,8 @@ static void markerDrawBody(s32 x, s32 y, f32 speed)
     RenderCtxA *context = g_renderCtx;
     renderCtxPushB(context, packNibblesAndByte(6, 1, 0));
     efctSetSpeed(speed);
-    FUN_00183bb0();
-    FUN_00164b5c(2, 0x2b, 6, x, y, 2);
+    gxResetColorQuadToWhite();
+    texDrawCompositeSprite(2, 0x2b, 6, x, y, 2);
     renderStackPop(&g_renderCtx->stackB);
     efctSetSpeed(1.0f);
 }

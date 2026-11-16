@@ -26,7 +26,7 @@ struct ListPool {
 
 extern "C" {
 void spriteStartAnimationByIndex(ListSprite *sprite, s32 animation);
-void FUN_002bf810(u32 sound);
+void soundPlaySeUnpanned(u32 sound);
 
 void FUN_001e0de0(ListPool *pool, s32 delta, s32 count)
 {
@@ -43,7 +43,7 @@ void FUN_001e0de0(ListPool *pool, s32 delta, s32 count)
     if (count > 0) {
         if (pool->delta > 0)
             index += pool->delta;
-        FUN_002bf810(LIST_SCROLL_SOUND);
+        soundPlaySeUnpanned(LIST_SCROLL_SOUND);
         for (s32 i = 0; i < pool->count; i++) {
             s32 slot = index - pool->offset - i;
             pairSetFirstResetSecond(&pool->sprites[slot + 0x13], pool->alternate == 0 ? 7 : 8);

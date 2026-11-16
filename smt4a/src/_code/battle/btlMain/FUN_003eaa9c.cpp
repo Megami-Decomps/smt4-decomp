@@ -27,10 +27,10 @@ struct EnvironmentScaleRecord {
 }
 extern "C" {
 void FUN_004d854c(u32 *owner);
-void *FUN_00178b04(u32 bytes, const char *file, s32 line);
+void *asdMemoryAllocTraced(u32 bytes, const char *file, s32 line);
 u32 *battleModelOwnerInitialize(u32 *owner);
 void btlModelCopyContentIfMissing(u32 *destination, const u32 *source);
-BattleCombatantStatusKey *FUN_001568f8(BtlMainStateA *state, s32 parameterIndex);
+BattleCombatantStatusKey *btlFindEntryBlockByMemberId(BtlMainStateA *state, s32 parameterIndex);
 void *dataTableFileGetTable(void *file, u32 index);
 BattleVector3 FUN_00201950(u32 index);
 BattleVector3 FUN_00201984(u32 index);
@@ -46,7 +46,7 @@ void FUN_003eaa9c(BtlMainStateA *state)
         return;
     FUN_004d854c(environment->owners[0]);
     for (s32 i = 1; i < 4; ++i) {
-        u32 *owner = static_cast<u32 *>(FUN_00178b04(0x24,
+        u32 *owner = static_cast<u32 *>(asdMemoryAllocTraced(0x24,
             "c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlMain.cpp", 0x3649));
         if (owner != NULL)
             owner = battleModelOwnerInitialize(owner);
@@ -62,7 +62,7 @@ void FUN_003eaa9c(BtlMainStateA *state)
             break;
         }
     }
-    u16 id = FUN_001568f8(state, selected->combatant.parameterIndex)->id;
+    u16 id = btlFindEntryBlockByMemberId(state, selected->combatant.parameterIndex)->id;
     EnvironmentScaleRecord *record = NULL;
     if (environment->table != NULL) {
         void *table = dataTableFileGetTable(environment->table, 0);

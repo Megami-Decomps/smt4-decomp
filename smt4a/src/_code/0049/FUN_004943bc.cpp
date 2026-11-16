@@ -4,13 +4,13 @@
 #include "shard/W6_W6Match7_NumericStepper.h"
 
 extern "C" {
-u16 FUN_0049c9a0(const u16 *entry);
+u16 recordGetCompareValue(const u16 *entry);
 
 /* Orders two entries by their secondary key. */
 static s32 compareOrder(const u16 *left, const u16 *right)
 {
-    s32 leftOrder = FUN_0049c9a0(left);
-    s32 rightOrder = FUN_0049c9a0(right);
+    s32 leftOrder = recordGetCompareValue(left);
+    s32 rightOrder = recordGetCompareValue(right);
     return leftOrder - rightOrder;
 }
 

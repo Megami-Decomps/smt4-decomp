@@ -17,14 +17,14 @@ struct CampCecEdit {
 extern "C" {
 extern CampCecEdit *g_campCecEdit;
 extern RenderCtxA *g_renderCtx;
-void FUN_00157558(RenderCtxA *context);
-s32 FUN_001692ac(u32 kind, bool enabled);
-void FUN_00164b5c(u32 screen, u32 table, u32 frame, s32 x, s32 y, u32 priority);
+void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
+s32 renderCtxPackPassFlags(u32 kind, bool enabled);
+void texDrawCompositeSprite(u32 screen, u32 table, u32 frame, s32 x, s32 y, u32 priority);
 void efctSetSpeed(f32 speed);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
 void asdTMTexTableEntryAt(u32 table, u32 frame);
-void FUN_00183bb0(void);
+void gxResetColorQuadToWhite(void);
 void uiSpawnSlotMarkers(void *screen, s32 a, s32 b, s32 c, s32 d, s32 e);
 void FUN_003426c0(void *screen, u32 a, u32 b, s32 c, s32 d, s32 e, s32 f);
 void FUN_0036cb0c(u32 a, u32 b, s32 c, s32 d, s32 e, s32 f, s32 g, s32 h, s32 i);
@@ -46,18 +46,18 @@ extern "C" u32 FUN_002e1d1c(void)
     s32 x = edit->x;
     s32 y = edit->y;
     efctSetSpeed(edit->alpha);
-    FUN_00157558(g_renderCtx);
-    FUN_00183bb0();
-    renderCtxPushA(g_renderCtx, FUN_001692ac(1, false));
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
+    gxResetColorQuadToWhite();
+    renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, false));
     s32 mode = CEC_AT(edit, s32, 0x14C);
     if (mode == 1)
-        FUN_00164b5c(2, 0x2E, 0x15, x, y, 0xB);
+        texDrawCompositeSprite(2, 0x2E, 0x15, x, y, 0xB);
     else if (mode == 2)
-        FUN_00164b5c(2, 0x2E, 0x16, x, y, 0xB);
+        texDrawCompositeSprite(2, 0x2E, 0x16, x, y, 0xB);
     else if (mode == 5)
-        FUN_00164b5c(2, 0x2E, 0x17, x, y, 0xB);
+        texDrawCompositeSprite(2, 0x2E, 0x17, x, y, 0xB);
     else if (mode == 7)
-        FUN_00164b5c(2, 0x2E, 0x12, x, y, 0xB);
+        texDrawCompositeSprite(2, 0x2E, 0x12, x, y, 0xB);
     mode = CEC_AT(edit, s32, 0x14C);
     s32 variant = 0;
     s32 extra = 0;

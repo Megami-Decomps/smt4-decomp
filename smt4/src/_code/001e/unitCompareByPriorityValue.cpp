@@ -3,9 +3,9 @@
 
 extern "C" {
 
-s32 FUN_0029a924(u32 id);
+s32 appGetRemainingCapacity(u32 id);
 
-/* Compares two ids by their FUN_0029a924 value; ids that are zero or have no record compare equal (0). */
+/* Compares two ids by their appGetRemainingCapacity value; ids that are zero or have no record compare equal (0). */
 s32 unitCompareByPriorityValue(const u16 *left, const u16 *right)
 {
     if (*left == 0) {
@@ -22,7 +22,7 @@ s32 unitCompareByPriorityValue(const u16 *left, const u16 *right)
     if (rightRecord == NULL) {
         return 0;
     }
-    return (s16)FUN_0029a924(*left) - (s16)FUN_0029a924(*right);
+    return (s16)appGetRemainingCapacity(*left) - (s16)appGetRemainingCapacity(*right);
 }
 
 } /* extern "C" */

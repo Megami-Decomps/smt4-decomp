@@ -8,8 +8,8 @@
 
 extern "C" {
 extern CommonBgGlobals g_commonBg;
-s32 FUN_001692ac(s32 enabled, s32 mode);
-void FUN_00164b5c(u32 screen, u32 table, u32 image, s32 x, s32 y, u32 flags);
+s32 renderCtxPackPassFlags(s32 enabled, s32 mode);
+void texDrawCompositeSprite(u32 screen, u32 table, u32 image, s32 x, s32 y, u32 flags);
 void quadSetOrderedVectors(const QuadVector *first, const QuadVector *second,
     const QuadVector *third, const QuadVector *fourth, s32 mode, s32 enabled);
 void renderCtxResetColorScale(RenderCtxA *context);
@@ -23,11 +23,11 @@ s32 FUN_002a3600()
         return 0;
     if (owner->enabled == 0)
         return 0;
-    FUN_00157558(g_renderCtx);
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     RenderCtxA *context = g_renderCtx;
-    renderCtxPushA(context, FUN_001692ac(1, 0));
+    renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
     if (owner->mode == 1) {
-        FUN_00164b5c(2, 9, 0, 0, 0, 1);
+        texDrawCompositeSprite(2, 9, 0, 0, 0, 1);
     } else {
         QuadVector corners[4];
         for (s32 index = 3; index >= 0; --index) {
@@ -37,7 +37,7 @@ s32 FUN_002a3600()
             corners[index].w = 1.0f;
         }
         quadSetOrderedVectors(&corners[0], &corners[1], &corners[2], &corners[3], 0, 1);
-        FUN_001835b4(2, 9, 0, 0, 0, 1);
+        texDrawTableEntryAtStoredOrigin(2, 9, 0, 0, 0, 1);
     }
     renderStackPop(&g_renderCtx->stackA);
     skinObjectUpdateMatrices(reinterpret_cast<SkinObject *>(g_renderCtx));

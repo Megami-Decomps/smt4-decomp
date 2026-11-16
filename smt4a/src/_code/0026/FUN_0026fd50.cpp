@@ -6,7 +6,7 @@
 extern "C" {
 
 int qsort(unsigned short *, int, int, unsigned char *);
-int FUN_00180118(unsigned int);
+int dataTable01GetRecordWithAocOverride(unsigned int);
 int devilGetRecord(void);
 int __ARM_common_memcpy4_8(unsigned short *, unsigned short *);
 int libc_strcpy(unsigned short *, unsigned int);
@@ -23,7 +23,7 @@ extern unsigned char uiCompareNormalizedPriority; /* 0x3b8e98 */
 extern unsigned char g_gameGlobals; /* 0x588fd0 */
 
 /* Supplied declaration required: qsort. */
-/* Supplied declaration required: FUN_00180118. */
+/* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: __ARM_common_memcpy4_8. */
 extern unsigned int FUN_002b4dcc(int);
@@ -32,7 +32,7 @@ extern unsigned int FUN_002b4dcc(int);
 extern int getUnlockedSlotCount(int);
 /* Supplied declaration required: randomGetUpperSixBits. */
 extern int FUN_004cc8d8(unsigned short, unsigned short);
-extern int FUN_004ccbf0(unsigned short);
+extern int levelGetExpRequirement(unsigned short);
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
@@ -62,7 +62,7 @@ void FUN_0026fd50(unsigned short *param_1,int param_2,int param_3,unsigned int *
   *param_1 = *(unsigned short *)(param_2 + 0x62);
   param_1[1] = *(unsigned short *)(param_2 + 100);
   if (param_3 != 0) {
-    temp_v2 = FUN_004ccbf0(*(unsigned short *)(param_2 + 100));
+    temp_v2 = levelGetExpRequirement(*(unsigned short *)(param_2 + 100));
     *(int *)(param_1 + 2) = temp_v2 - *(int *)(param_2 + 0x30);
   }
   else {
@@ -100,7 +100,7 @@ void FUN_0026fd50(unsigned short *param_1,int param_2,int param_3,unsigned int *
     *(unsigned int *)(param_1 + 0x2e) = temp_v10;
   }
   temp_v4 = (unsigned int)*(unsigned short *)(param_2 + 0x62);
-  FUN_00180118(temp_v4);
+  dataTable01GetRecordWithAocOverride(temp_v4);
   libc_strcpy(param_1 + 0x2d2,temp_v4);
   if ((short)param_1[0x11] >= 1000) {
     param_1[0x11] = 999;

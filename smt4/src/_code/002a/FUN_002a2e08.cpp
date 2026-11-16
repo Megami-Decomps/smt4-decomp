@@ -33,6 +33,6 @@ void FUN_002a2e08(FileQueue *queue)
         reinterpret_cast<void *>(thread->stack->address + thread->stack->size), 0x11, -2, 0);
     bool failed = nnResultIsFailureExceptSummary(result, 3);
     if (failed)
-        FUN_002c526c(result, failed);
+        resultHandleFailure(result, failed);
 }
 }

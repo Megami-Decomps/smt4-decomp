@@ -113,7 +113,7 @@ s32 FUN_0031a5e4(u32 process)
         }
         break;
     case INTRO_STATE_WAIT_NEXT:
-        if (FUN_002e07f4() != 0) {
+        if (pairedAvailabilityBothReady() != 0) {
             work->timer++;
             if (work->timer > 10)
                 introEnter(work, INTRO_STATE_DONE);

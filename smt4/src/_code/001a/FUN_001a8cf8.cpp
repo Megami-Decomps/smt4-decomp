@@ -102,7 +102,7 @@ u32 FUN_001a8cf8(void)
                     entry->triggered = 1;
                     SoundActorQueuePosition position = {entry->position.x, entry->position.y + 100.0f,
                                                         entry->position.z};
-                    FUN_00291e40(0x10001FB, position);
+                    soundActorStartOnFreeChannel(0x10001FB, position);
                     FUN_002df824((s16)entry->effectId, 1);
                     entry->reacting = 1;
                     entry->phase = MAP_RANGE_TRIGGERED;

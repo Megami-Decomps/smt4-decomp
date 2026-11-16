@@ -9,10 +9,10 @@ typedef struct BitFlags {
 } BitFlags;
 
 
-/* Sets or clears bit `bit` of the flag bitmap at 0x48 of the FUN_0026140c block. */
+/* Sets or clears bit `bit` of the flag bitmap at 0x48 of the saveGetUserSettingsBlock block. */
 void flagBitmapSetBit(u32 bit, s32 on)
 {
-    BitFlags *flags = reinterpret_cast<BitFlags *>(FUN_0026140c());
+    BitFlags *flags = reinterpret_cast<BitFlags *>(saveGetUserSettingsBlock());
     if (on != 0) {
         flags->bits[bit >> 3] |= 1 << (bit & 7);
     } else {

@@ -4,7 +4,7 @@
 extern "C" {
 extern MapDepartWork *g_mapDepartWork;
 void nodeSetPropertyScale(NodeEnableResource *resource, f32 scale);
-void FUN_0029bb14(NodeEnableResource *resource, f32 scale);
+void modelSetScale(NodeEnableResource *resource, f32 scale);
 
 void mapDepartSyncModelVisibility()
 {
@@ -14,13 +14,13 @@ void mapDepartSyncModelVisibility()
             if ((node->flags & 2) != 0) {
                 node->flags &= ~2u;
                 node->resource->target->enabled = 1;
-                FUN_0029bb14(g_mapDepartWork->nodeA->resource, 1.0f);
+                modelSetScale(g_mapDepartWork->nodeA->resource, 1.0f);
                 nodeSetPropertyScale(g_mapDepartWork->nodeA->resource, 1.0f);
             }
         } else if ((node->flags & 2) == 0) {
             node->flags |= 2;
             node->resource->target->enabled = 0;
-            FUN_0029bb14(g_mapDepartWork->nodeA->resource, 0.0f);
+            modelSetScale(g_mapDepartWork->nodeA->resource, 0.0f);
             nodeSetPropertyScale(g_mapDepartWork->nodeA->resource, 0.0f);
         }
     }
@@ -30,13 +30,13 @@ void mapDepartSyncModelVisibility()
             if ((node->flags & 2) != 0) {
                 node->flags &= ~2u;
                 node->resource->target->enabled = 1;
-                FUN_0029bb14(g_mapDepartWork->nodeB->resource, 1.0f);
+                modelSetScale(g_mapDepartWork->nodeB->resource, 1.0f);
                 nodeSetPropertyScale(g_mapDepartWork->nodeB->resource, 1.0f);
             }
         } else if ((node->flags & 2) == 0) {
             node->flags |= 2;
             node->resource->target->enabled = 0;
-            FUN_0029bb14(g_mapDepartWork->nodeB->resource, 0.0f);
+            modelSetScale(g_mapDepartWork->nodeB->resource, 0.0f);
             nodeSetPropertyScale(g_mapDepartWork->nodeB->resource, 0.0f);
         }
     }

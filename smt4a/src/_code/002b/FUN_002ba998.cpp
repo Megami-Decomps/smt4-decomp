@@ -12,7 +12,7 @@ int FUN_002b50e4(...);
 
 int jobStop(...);
 int sysPlaySe(...);
-int FUN_00180118(...);
+int dataTable01GetRecordWithAocOverride(...);
 int devilGetRecord(void);
 int asdMemFree(void);
 int dialogClose(...);
@@ -21,7 +21,7 @@ int FUN_002854d8(...);
 int btlResultTaskStart(...);
 int mapDepartPrepare(void);
 int libc_strcpy(...);
-int FUN_003180c4(...);
+int scrSetStringSlot(...);
 int FUN_0031cd00(...);
 int FUN_0031f138(...);
 int FUN_003984ac(...);
@@ -31,7 +31,7 @@ int FUN_003eee9c(...);
 int FUN_003f135c(...);
 int FUN_0041817c(...);
 int FUN_004aa854(...);
-int FUN_004bcb54(void);
+int unitRecordResetCurrentValues(void);
 int btlHelpFreeEntries(void);
 int btlCameraReleaseTransientResources(...);
 int state339CFinish(void);
@@ -47,11 +47,11 @@ int FUN_00385c44(...);
 int FUN_003e49e8(void);
 int FUN_003e854c(...);
 int FUN_003e892c(...);
-int FUN_003eaf20(void);
+int btlFindFirstEntryMatchingCategoryAndRequiredMask(void);
 int FUN_003ebca0(void);
 int FUN_003f26d4(...);
 int FUN_003f29c0(...);
-int FUN_00408184(...);
+int gameCounterAddSaturating(...);
 int FUN_004aa2e0(...);
 int FUN_004abba8(...);
 int btlUiIdsRefresh(...);
@@ -68,7 +68,7 @@ int FUN_004feecc(...);
 int VectorSignedToFloat(...);
 
 int saveSlotFindSelected(void);
-int FUN_001695a0(void);
+int messageSetScriptDisplayMode(void);
 int FUN_0021c118(...);
 int btlCreateUiDrawJobs(...);
 int btlAutoStartCalculation(...);
@@ -173,9 +173,9 @@ extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 extern int lcgRandomRange(unsigned int);
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_001695a0. */
+/* Supplied declaration required: messageSetScriptDisplayMode. */
 extern unsigned int recordGetScaledMaximum(void);
-/* Supplied declaration required: FUN_00180118. */
+/* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
 extern unsigned int gameGetPlayerData(void);
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: asdMemFree. */
@@ -211,7 +211,7 @@ extern int dialogIsActive(void);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_00301ad0. */
-/* Supplied declaration required: FUN_003180c4. */
+/* Supplied declaration required: scrSetStringSlot. */
 /* Supplied declaration required: FUN_0031cd00. */
 extern int gameDataGetEntryFlags(short);
 /* Supplied declaration required: FUN_0031f138. */
@@ -229,7 +229,7 @@ extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: FUN_003e9cec. */
 /* Supplied declaration required: btlActionPrepareFromSource. */
 /* Supplied declaration required: FUN_003ea69c. */
-/* Supplied declaration required: FUN_003eaf20. */
+/* Supplied declaration required: btlFindFirstEntryMatchingCategoryAndRequiredMask. */
 /* Supplied declaration required: FUN_003ebca0. */
 /* Supplied declaration required: btlMainBuffersFree. */
 /* Supplied declaration required: FUN_003ecfb4. */
@@ -240,7 +240,7 @@ extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: FUN_003f1d74. */
 /* Supplied declaration required: FUN_003f26d4. */
 /* Supplied declaration required: FUN_003f29c0. */
-/* Supplied declaration required: FUN_00408184. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: countersAddSaturating. */
 /* Supplied declaration required: FUN_0041817c. */
 /* Supplied declaration required: FUN_004a8edc. */
@@ -248,7 +248,7 @@ extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: FUN_004aa854. */
 /* Supplied declaration required: FUN_004abba8. */
 /* Supplied declaration required: btlUiIdsRefresh. */
-/* Supplied declaration required: FUN_004bcb54. */
+/* Supplied declaration required: unitRecordResetCurrentValues. */
 /* Supplied declaration required: slotStreakUpdate. */
 /* Supplied declaration required: btlSelectFirstPartyAssistParticipant. */
 /* Supplied declaration required: btlHelpFreeEntries. */
@@ -423,7 +423,7 @@ void FUN_002ba998(unsigned int param_1)
     FUN_0027249c(temp_v7);
     btlPartnerAttackInitialize(temp_v7);
     btlTalkBustUpCreate();
-    FUN_001695a0();
+    messageSetScriptDisplayMode();
     if (DAT_00573940 >= 0) {
       DAT_00573940 = -1;
     }
@@ -648,7 +648,7 @@ LAB_002bb21c:
     }
     if ((DAT_005739f8 & *(unsigned int *)(temp_v7 + 0x45a0)) != 0 ||
         (*(unsigned int *)(temp_v7 + 0x45a4) & DAT_005739fc) != 0) {
-      FUN_00408184(3,1);
+      gameCounterAddSaturating(3,1);
     }
     break;
   case 6:
@@ -812,7 +812,7 @@ LAB_002bb21c:
   case 0x11:
     btlStageResetAndClearCameraFlag(g_btlAux);
     temp_v6 = temp_v7;
-    FUN_003eaf20();
+    btlFindFirstEntryMatchingCategoryAndRequiredMask();
     temp_v11 = saveSlotFindSelected();
     FUN_003ecfb4(temp_v7,temp_v6 + 0x164,temp_v11,0);
     *(unsigned int *)(temp_v6 + 0x400) = temp_v11;
@@ -869,7 +869,7 @@ LAB_002bb21c:
   case 0x15:
     FUN_004fbeac(0,0,0,0x3a,0);
     saveSlotFindSelected();
-    FUN_004bcb54();
+    unitRecordResetCurrentValues();
     temp_v6 = saveSlotFindSelected();
     if (temp_v6 != 0) {
       FUN_003ecfb4(temp_v7,temp_v23,temp_v6,0);
@@ -1029,10 +1029,10 @@ LAB_002bbdec:
       temp_v9 = (unsigned int)*(unsigned short *)(temp_v6 + 0x62);
       if ((temp_v9 != 0) && (temp_v10 = temp_v9, devilGetRecord(), temp_v10 != 0)) {
         sysMemClear(temp_v22,0x68);
-        FUN_00180118(temp_v9);
+        dataTable01GetRecordWithAocOverride(temp_v9);
         libc_strcpy(temp_v22,temp_v9);
-        FUN_003180c4(0xd,temp_v22);
-        FUN_001695a0();
+        scrSetStringSlot(0xd,temp_v22);
+        messageSetScriptDisplayMode();
         messageForwardDefaultMode(*(unsigned int *)(temp_v7 + 0x2268),0,0,6,0);
         temp_v9 = DAT_00573a5c | *(unsigned int *)(temp_v7 + 0x45a4);
         *(unsigned int *)(temp_v7 + 0x45a0) = *(unsigned int *)(temp_v7 + 0x45a0) | DAT_00573a58;

@@ -45,7 +45,7 @@ void FUN_0034d504(void* animation);
 void animationSelectFirstPart(void* animation);
 void FUN_0024057c(BtlMainState*, ColorFadeWork*, s32 duration, u32 alpha);
 void FUN_00226fc0(ActionController*);
-void FUN_002505c0(u32, u32, u32 effect, u32, u32, u32, u32);
+void btlQueueKeyedScalarReflectAction(u32, u32, u32 effect, u32, u32, u32, u32);
 
 void battleActionFinishPlacement(ActionController* controller)
 {
@@ -76,9 +76,9 @@ void battleActionFinishPlacement(ActionController* controller)
     FUN_00226fc0(controller);
     const s16 kind = controller->sequence->kind;
     if (kind == 15 || kind == 16) {
-        FUN_002505c0(0, 0, 0x1000106, 0, 0, 0, 0);
+        btlQueueKeyedScalarReflectAction(0, 0, 0x1000106, 0, 0, 0, 0);
     } else {
-        FUN_002505c0(0, 0, 0x1000108, 0, 0, 0, 0);
+        btlQueueKeyedScalarReflectAction(0, 0, 0x1000108, 0, 0, 0, 0);
     }
 }
 } // extern "C"

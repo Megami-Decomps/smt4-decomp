@@ -16,7 +16,7 @@ void *FUN_00289de4(AocSystem *system, u32 event, u32 kind);
 void *aocBufferQueueDisplay(AocSystem *system, u32 event, u32 kind);
 void asdMemFree(void *memory);
 void *asdLoadFileSyncDefault(const char *path);
-ScriptRunState *FUN_00297060(void *script, void *messages);
+ScriptRunState *scrScriptProcessCreate(void *script, void *messages);
 s32 FUN_002897f0(u32 event, char *entryName);
 s32 tableGroupFindEntryIndex(TableGroupHeader *table, const char *entryName);
 void scrScriptProcessStartEntry(ScriptRunState *process, u32 entry);
@@ -61,7 +61,7 @@ u32 FUN_00270e34(void)
         messages = asdLoadFileSyncDefault(messagePath);
         map->messageData = messages;
     }
-    ScriptRunState *process = FUN_00297060(map->scriptData, messages);
+    ScriptRunState *process = scrScriptProcessCreate(map->scriptData, messages);
     map->scriptProcess = process;
     scriptProcessSetMode(process, 2);
     map->completionFlag = FUN_002897f0(event->event, event->entryName);

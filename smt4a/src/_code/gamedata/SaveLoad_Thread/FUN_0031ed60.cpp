@@ -51,7 +51,7 @@ static inline s32 startSaveLoadWorker(SaveLoadThreadRequest *request, ThreadEntr
     s32 result = FUN_002fb0d4(&request->thread, &descriptor, worker, &argument,
         request->stack.info.address + request->stack.info.size, 0x11, -2, false);
     if (nnResultIsFailureExceptSummary(result, 3))
-        FUN_002e3140(result);
+        resultHandleFailure(result);
     return result;
 }
 
@@ -62,11 +62,11 @@ extern "C" bool FUN_0031ed60(SaveLoadThreadRequest *request, s32 mode)
     s32 status = initializeSaveSemaphore(&request->semaphore);
     bool creationFailed = nnResultIsFailure(status);
     if (creationFailed)
-        FUN_002e3140(status);
+        resultHandleFailure(status);
     status = releaseSaveSemaphore(request->semaphore);
     bool releaseFailed = nnResultIsFailure(status);
     if (releaseFailed)
-        FUN_002e3140(status);
+        resultHandleFailure(status);
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\gamedata\\SaveLoad_Thread.cpp", 938);
     request->stackAllocation = memAlloc(0x100, 0x100, 0, 0x2000, 0x1000, 1);
     resultReportIfFailed(&request->stack, request->stackAllocation, 0x2000);

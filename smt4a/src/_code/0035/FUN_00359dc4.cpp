@@ -62,7 +62,7 @@ struct StatusScreen {
 extern "C" {
 void sysPlaySe(s32 id);
 void FUN_00182054(void);
-void FUN_00275bc8(StatusResource *resource, u32 size);
+void scrScriptProcessCreate(StatusResource *resource, u32 size);
 void linkHolderApplyFlag(LinkHolder *links, s32 flag);
 void FUN_002e1c94(void *work, s32 count, u32 frame, f32 start, f32 end);
 void FUN_002e207c(void);
@@ -111,7 +111,7 @@ u32 FUN_00359dc4(StatusScreen *screen)
             modelId = screen->devil->modelId;
             if (modelId == 0 || (devilIsTextureLoaded(modelId, 1), modelId != 0)) {
                 StatusResource *resource = screen->resource;
-                FUN_00275bc8(resource, screen->resourceSize);
+                scrScriptProcessCreate(resource, screen->resourceSize);
                 screen->active = resource;
                 resource->state = 2;
                 screen->ready = 1;

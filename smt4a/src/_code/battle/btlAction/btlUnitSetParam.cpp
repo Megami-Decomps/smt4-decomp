@@ -15,7 +15,7 @@ int btlAiMarkLowestHpTarget(int *);
 int FUN_004e7c04(int *, unsigned int);
 void btlSelectMinimumPriorityTarget(BtlMainStateA *const *);
 int btlActionClassifyTargetSide(int *, unsigned int, int, unsigned int [2], int *);
-int FUN_004e9ae8(...);
+int btlAiFilterCandidatesByExclusionChance(...);
 int btlUnitMarkTargetCandidates(int *, unsigned int);
 int btlUnitGet(...);
 int SBORROW4(...);
@@ -52,7 +52,7 @@ extern int lcgRandomRange(short);
 /* Supplied declaration required: btlAiMarkLowestHpTarget. */
 /* Supplied declaration required: FUN_004e7c04. */
 /* Supplied declaration required: btlActionClassifyTargetSide. */
-/* Supplied declaration required: FUN_004e9ae8. */
+/* Supplied declaration required: btlAiFilterCandidatesByExclusionChance. */
 /* Supplied declaration required: btlUnitMarkTargetCandidates. */
 /* Supplied declaration required: btlUnitGet. */
 extern int __aeabi_idivmod(int, unsigned int);
@@ -190,7 +190,7 @@ void btlUnitSetParam(int *param_1,int param_2,unsigned int param_3,int param_4)
       puVar14 = puVar14 + 0x102;
       psVar9 = psVar9 + 0x204;
     } while (temp_v5 != 0);
-    temp_v3 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v3,1);
+    temp_v3 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v3,1);
     goto joined_r0x004deccc;
   case 6:
     temp_v3 = 0;
@@ -219,7 +219,7 @@ void btlUnitSetParam(int *param_1,int param_2,unsigned int param_3,int param_4)
       puVar14 = puVar14 + 0x102;
       psVar9 = psVar9 + 0x204;
     } while (temp_v5 != 0);
-    temp_v3 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v3,1);
+    temp_v3 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v3,1);
 joined_r0x004deccc:
     if (temp_v3 != 0) {
       temp_v5 = btlUnitGet(param_1);
@@ -250,7 +250,7 @@ joined_r0x004deccc:
       puVar14 = puVar14 + 0x102;
       psVar9 = psVar9 + 0x204;
     } while (temp_v5 != 0);
-    temp_v1 = FUN_004e9ae8(temp_v14,temp_v13 + 1,temp_v3,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(temp_v14,temp_v13 + 1,temp_v3,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(temp_v14);
     *(unsigned char *)((temp_v13 + 1)[temp_v3] + temp_v5 + 0x38) = 1;
@@ -273,7 +273,7 @@ joined_r0x004deccc:
       puVar6 = puVar6 + 0x102;
       psVar9 = psVar9 + 0x204;
     } while (temp_v5 != 0);
-    temp_v1 = FUN_004e9ae8(temp_v14,puVar7,temp_v3,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(temp_v14,puVar7,temp_v3,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(temp_v14);
     *(unsigned char *)(puVar7[temp_v3] + temp_v5 + 0x38) = 1;
@@ -295,7 +295,7 @@ joined_r0x004deccc:
       puVar14 = puVar14 + 0x102;
       psVar9 = psVar9 + 0x204;
     } while (temp_v5 != 0);
-    temp_v1 = FUN_004e9ae8(temp_v14,temp_v13 + 1,temp_v3,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(temp_v14,temp_v13 + 1,temp_v3,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(temp_v14);
     *(unsigned char *)((temp_v13 + 1)[temp_v3] + temp_v5 + 0x38) = 1;
@@ -315,7 +315,7 @@ joined_r0x004deccc:
       puVar7 = puVar7 + 0x102;
       psVar9 = psVar9 + 0x204;
     } while (temp_v3 != 0);
-    temp_v1 = FUN_004e9ae8(temp_v16,temp_v13 + 1,temp_v5,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(temp_v16,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(temp_v16);
     temp_v8 = temp_v13[temp_v3 + 1];
@@ -336,7 +336,7 @@ joined_r0x004deccc:
       puVar7 = puVar7 + 0x102;
       psVar9 = psVar9 + 0x204;
     } while (temp_v3 != 0);
-    temp_v1 = FUN_004e9ae8(temp_v16,temp_v13 + 1,temp_v5,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(temp_v16,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(temp_v16);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
@@ -358,7 +358,7 @@ joined_r0x004deccc:
       puVar5 = puVar5 + 0x204;
       psVar9 = psVar9 + 0x204;
     } while (temp_v5 != 0);
-    temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v3,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v3,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)((temp_v13 + 1)[temp_v3] + temp_v5 + 0x38) = 1;
@@ -384,7 +384,7 @@ joined_r0x004deccc:
       puVar5 = puVar5 + 0x204;
       psVar9 = psVar9 + 0x204;
     } while (temp_v5 != 0);
-    temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v3,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v3,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)((temp_v13 + 1)[temp_v3] + temp_v5 + 0x38) = 1;
@@ -411,7 +411,7 @@ joined_r0x004deccc:
       }
       temp_v3 = temp_v4 + 1;
     } while (temp_v3 < 0x6d);
-    temp_v1 = FUN_004e9ae8(param_1,temp_v13,temp_v5,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3] + temp_v5 + 0x38) = 1;
@@ -429,7 +429,7 @@ joined_r0x004deccc:
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
-    temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
@@ -447,7 +447,7 @@ joined_r0x004deccc:
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
-    temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
@@ -465,7 +465,7 @@ joined_r0x004deccc:
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
-    temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
@@ -483,7 +483,7 @@ joined_r0x004deccc:
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
-    temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
@@ -501,7 +501,7 @@ joined_r0x004deccc:
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
-    temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
@@ -519,7 +519,7 @@ joined_r0x004deccc:
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
-    temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
@@ -537,7 +537,7 @@ joined_r0x004deccc:
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
-    temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
@@ -555,7 +555,7 @@ joined_r0x004deccc:
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
-    temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
@@ -578,7 +578,7 @@ joined_r0x004deccc:
       puVar6 = puVar6 + 0x102;
       psVar9 = psVar9 + 0x204;
     } while (temp_v5 != 0);
-    temp_v1 = FUN_004e9ae8(param_1,puVar7,temp_v3,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,puVar7,temp_v3,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(puVar7[temp_v3] + temp_v5 + 0x38) = 1;
@@ -601,7 +601,7 @@ joined_r0x004deccc:
       puVar6 = puVar6 + 0x102;
       psVar9 = psVar9 + 0x204;
     } while (temp_v5 != 0);
-    temp_v1 = FUN_004e9ae8(param_1,puVar7,temp_v3,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,puVar7,temp_v3,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(puVar7[temp_v3] + temp_v5 + 0x38) = 1;
@@ -627,7 +627,7 @@ joined_r0x004deccc:
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
-    temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
@@ -646,7 +646,7 @@ joined_r0x004deccc:
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
-    temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
@@ -666,7 +666,7 @@ joined_r0x004deccc:
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
-    temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v15,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v15,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
@@ -684,7 +684,7 @@ joined_r0x004deccc:
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
-    temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
@@ -704,7 +704,7 @@ joined_r0x004deccc:
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
-    temp_v1 = FUN_004e9ae8(param_1,puVar7,temp_v5,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,puVar7,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(puVar7[temp_v3] + temp_v5 + 0x38) = 1;
@@ -722,7 +722,7 @@ joined_r0x004deccc:
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
-    temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
@@ -740,7 +740,7 @@ joined_r0x004deccc:
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
-    temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
@@ -758,7 +758,7 @@ joined_r0x004deccc:
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
-    temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
@@ -776,7 +776,7 @@ joined_r0x004deccc:
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
-    temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
@@ -796,7 +796,7 @@ joined_r0x004deccc:
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
-    temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v15,1);
+    temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v15,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;

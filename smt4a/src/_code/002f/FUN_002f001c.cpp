@@ -16,7 +16,7 @@ extern StatusDownStateA *g_statusDown;
 s32 FUN_002c7e3c(void);
 s32 fieldStateAllowsAction(void);
 void sysPlaySe(u32);
-void FUN_00203b40(void *, s32, s32, s32, s32, s32);
+void gridNavigationConfigure(void *, s32, s32, s32, s32, s32);
 }
 
 extern "C" void FUN_002f001c(const StatusNotification *notification)
@@ -36,6 +36,6 @@ extern "C" void FUN_002f001c(const StatusNotification *notification)
     view->notification.words[1] = notification->words[1];
     view->notification.words[2] = notification->words[2];
     view->notification.value = notification->value;
-    FUN_00203b40(view->animation, 7, 7, 1, 0, 1);
+    gridNavigationConfigure(view->animation, 7, 7, 1, 0, 1);
     status->inventoryDirty = 1;
 }

@@ -26,7 +26,7 @@ extern "C" {
 s32 idIsAbove400(s32 id);
 PassiveSkillSortRecord *passiveSkillLookupRecord(s32 id);
 UnitSortRecord *gameGetUnitRecord(s32 id);
-s32 FUN_002497f8(SkillSortItem *a, SkillSortItem *b);
+s32 itemSortCompareByCategoryAndId(SkillSortItem *a, SkillSortItem *b);
 
 /* Returns the sort key of an item's skill, read from the passive table for ids above 400. */
 static __inline u16 skillSortKey(const SkillSortItem *item)
@@ -37,7 +37,7 @@ static __inline u16 skillSortKey(const SkillSortItem *item)
     return reinterpret_cast<SkillSortRecord *>(dataTable40FindById(item->skillId))->sortKey;
 }
 
-/* Tie-break by descending unit sort key (0 without a unit), then FUN_002497f8. */
+/* Tie-break by descending unit sort key (0 without a unit), then itemSortCompareByCategoryAndId. */
 static __inline s32 compareUnitSortKeys(SkillSortItem *a, SkillSortItem *b)
 {
     u16 keyA;
@@ -58,11 +58,11 @@ static __inline s32 compareUnitSortKeys(SkillSortItem *a, SkillSortItem *b)
     if (diff != 0) {
         return diff;
     }
-    return FUN_002497f8(a, b);
+    return itemSortCompareByCategoryAndId(a, b);
 }
 
 /* Sort comparator: orders two items by descending skill key, then descending unit key, then by
- * FUN_002497f8. */
+ * itemSortCompareByCategoryAndId. */
 s32 FUN_002f2680(SkillSortItem *a, SkillSortItem *b)
 {
     s32 keyA = skillSortKey(a);

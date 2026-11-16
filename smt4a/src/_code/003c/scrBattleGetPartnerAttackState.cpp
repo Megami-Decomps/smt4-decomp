@@ -5,15 +5,15 @@
 extern "C" {
 
 extern BtlPartnerAttackA *g_btlPartnerAttack;
-extern u8 FUN_003eb1cc(void *state);
+extern u8 btlStateHasSelectionGateFlag(void *state);
 extern void scrSetResult(u32 value);
 
-/* Script command: result is the script object's value at +0x18 while FUN_003eb1cc accepts the battle state, else 2. */
+/* Script command: result is the script object's value at +0x18 while btlStateHasSelectionGateFlag accepts the battle state, else 2. */
 u32 scrBattleGetPartnerAttackState(void)
 {
     u32 value;
 
-    if (FUN_003eb1cc(static_cast<void *>(btlGetMainState())) != 0) {
+    if (btlStateHasSelectionGateFlag(static_cast<void *>(btlGetMainState())) != 0) {
         value = g_btlPartnerAttack->state;
     } else {
         value = 2;

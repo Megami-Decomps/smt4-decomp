@@ -61,8 +61,8 @@ extern unsigned int asdCameraValueGet(unsigned int);
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: effectRestoreSavedRenderPairs. */
-extern unsigned int FUN_002c501c(void);
-extern int FUN_002c5d80(unsigned int);
+extern unsigned int asdCameraGetSavedRenderPairs(void);
+extern int renderCtxPackPassFlags(unsigned int);
 /* Supplied declaration required: FUN_002c733c. */
 /* Supplied declaration required: effectDrawProjectedCircleFan. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44TransposeAsm. */
@@ -100,7 +100,7 @@ void FUN_0030e48c(unsigned int param_1,int *param_2,int param_3)
   unsigned int temp_v20;
   
   temp_v2 = g_titleScene;
-  temp_v1 = FUN_002c5d80(1);
+  temp_v1 = renderCtxPackPassFlags(1);
   piVar9 = (int *)(temp_v2 + 0x124c);
   temp_v5 = *piVar9;
   temp_v6 = piVar9[temp_v5 + 2];
@@ -203,7 +203,7 @@ joined_r0x0030e620:
       temp_v3 = param_2[6];
       temp_v12 = romwright_piece_4_4((int)(temp_v11 + DAT_004724d0),(int)(temp_v10 + DAT_004724cc));
       temp_v13 = romwright_piece_4_4((int)(temp_v8 + DAT_004724d0),(int)(temp_v9 + DAT_004724cc));
-      temp_v1 = FUN_002c5d80(1);
+      temp_v1 = renderCtxPackPassFlags(1);
       piVar10 = (int *)(temp_v2 + 0x124c);
       temp_v6 = *piVar10;
       temp_v5 = piVar10[temp_v6 + 2];
@@ -253,7 +253,7 @@ joined_r0x0030e620:
       temp_v15 = param_2[2];
       temp_v16 = param_2[3];
       temp_v17 = param_2[4];
-      temp_v7 = FUN_002c501c();
+      temp_v7 = asdCameraGetSavedRenderPairs();
       FUN_002630e0(&temp_v15,0,temp_v7,param_2 + 2);
       temp_v17 = 0;
       renderCtxSelectTexture(g_titleScene,0);

@@ -17,7 +17,7 @@ int FUN_004d7a60(...);
 int battleApplyInteractionSelection(...);
 
 int __ARM_common_memcpy4_9(...);
-int FUN_001568f8(...);
+int btlFindEntryBlockByMemberId(...);
 int btlSlotSetStoreValue(...);
 int btlCombatantGetSummaryValues(...);
 int btlDowngradeRandomResistance(void);
@@ -49,7 +49,7 @@ int FUN_004e5f2c(...);
 int btlEffectFindSlotId(...);
 int resolveBattleValue(...);
 int btlSelectionGetUsableUnit(...);
-int FUN_004fb43c(...);
+int btlQueueActionMessage(...);
 int FUN_004fbeac(...);
 int FUN_004fc094(...);
 int FUN_004fda78(...);
@@ -232,7 +232,7 @@ extern unsigned int g_btlEvent; /* 0x573898 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: __ARM_common_memcpy4_9. */
 extern char randRange(unsigned int);
-/* Supplied declaration required: FUN_001568f8. */
+/* Supplied declaration required: btlFindEntryBlockByMemberId. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: dataTable04FindById. */
 extern int FUN_002c7bf4(unsigned int *);
@@ -240,7 +240,7 @@ extern int FUN_002c7bf4(unsigned int *);
 /* Supplied declaration required: FUN_003e77cc. */
 /* Supplied declaration required: btlScriptUnitHasFlags. */
 /* Supplied declaration required: FUN_003e8bb0. */
-extern int FUN_003eb1cc(unsigned int);
+extern int btlStateHasSelectionGateFlag(unsigned int);
 extern int FUN_003ec668(unsigned int, int, int);
 extern int FUN_003eca48(unsigned int, unsigned short);
 /* Supplied declaration required: FUN_003f0254. */
@@ -292,7 +292,7 @@ extern int btlFindEffectValueByNamePrefix(int);
 /* Supplied declaration required: btlSelectionGetUsableUnit. */
 extern int FUN_004f9a20(int);
 extern int FUN_004f9ae4(int, unsigned int);
-/* Supplied declaration required: FUN_004fb43c. */
+/* Supplied declaration required: btlQueueActionMessage. */
 /* Supplied declaration required: FUN_004fb5dc. */
 /* Supplied declaration required: FUN_004fb6f4. */
 /* Supplied declaration required: FUN_004fb798. */
@@ -671,7 +671,7 @@ LAB_004e2728:
     }
     else {
       temp_v21 = (unsigned int *)0x0;
-      FUN_004fb43c(0,0,0x100026f,0,1,0);
+      btlQueueActionMessage(0,0,0x100026f,0,1,0);
     }
   }
   temp_v99 = param_2 + param_8 * 4;
@@ -837,7 +837,7 @@ LAB_004e2ab0:
         if (temp_v8 != 0) {
           temp_v18 = 0x100028c;
           temp_v21 = (unsigned int *)0x0;
-          FUN_004fb43c(temp_v5,0,temp_v18,0,1,0);
+          btlQueueActionMessage(temp_v5,0,temp_v18,0,1,0);
         }
       }
     }
@@ -858,12 +858,12 @@ LAB_004e2ab0:
           temp_v5 = 0;
           temp_v18 = 0x1000270;
           temp_v21 = (unsigned int *)0x0;
-          FUN_004fb43c(temp_v5,0,temp_v18,0,1,0);
+          btlQueueActionMessage(temp_v5,0,temp_v18,0,1,0);
         }
       }
       else {
         temp_v21 = (unsigned int *)0x0;
-        FUN_004fb43c(0,0,0x100026f,0,1,0);
+        btlQueueActionMessage(0,0,0x100026f,0,1,0);
       }
     }
     temp_v59 = 0;
@@ -1412,7 +1412,7 @@ LAB_004e4280:
               }
               temp_v47 = (unsigned int *)0x4;
               temp_v13 = *param_1;
-              FUN_001568f8(temp_v13,param_7);
+              btlFindEntryBlockByMemberId(temp_v13,param_7);
               if ((temp_v13 != 0) && ((*(unsigned short *)(temp_v13 + 0x110) & 0x10) == 0)) {
                 FUN_003f2aac(*param_1,param_7,0);
               }
@@ -1875,7 +1875,7 @@ LAB_004e5308:
       }
     }
   }
-  temp_v12 = FUN_003eb1cc(*param_1);
+  temp_v12 = btlStateHasSelectionGateFlag(*param_1);
   if (temp_v12 != 0) {
     temp_v5 = 0x85;
     temp_v12 = 0;

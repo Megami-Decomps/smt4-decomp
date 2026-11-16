@@ -4,7 +4,7 @@
 #include "gamedata/PartyMoney.h"
 
 extern "C" {
-void FUN_00408184(u32 kind, u32 amount);
+void gameCounterAddSaturating(u32 kind, u32 amount);
 void gameDataAddCappedPoints(u32 points);
 void FUN_0049cd18(const AocItemRef *entry, s32 quantity, u32 flags);
 
@@ -23,7 +23,7 @@ void FUN_004963f8(Scene3a *scene)
         offsetof(TransactionSceneView, totalAmount) == 0x16000 ? 1 : -1];
     TransactionSceneView *work = (TransactionSceneView *)scene;
     partyAddMoneyClampedForward(work->totalAmount);
-    FUN_00408184(0x1f, work->totalAmount);
+    gameCounterAddSaturating(0x1f, work->totalAmount);
     for (s32 index = 0; index < work->count; ++index) {
         u16 id = work->records[index].id;
         s32 quantity = work->records[index].quantity;

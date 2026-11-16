@@ -22,7 +22,7 @@ extern "C" {
 extern PartyPanelState *g_partyPanel;
 extern u32 g_btlScriptUnit;
 PartyDamageSlotsIV *gameGetSlotTable();
-s32 FUN_0029a924(u16 item);
+s32 appGetRemainingCapacity(u16 item);
 s32 FUN_0029a9d4(u16 item, u32 flag);
 s32 FUN_0029efa8(void *selection);
 s32 objectPartRunUnlessLocked(void *selection);
@@ -50,12 +50,12 @@ void FUN_0026d144(void *selection, s32 stockOnly)
         } else {
             for (s32 i = 0; i < 3; i++) {
                 if (slots->active[i] == panel->pendingSelection.selection) {
-                    partyWidgetSetCost(panel->characters[i + 1], -FUN_0029a924(panel->previewItem));
+                    partyWidgetSetCost(panel->characters[i + 1], -appGetRemainingCapacity(panel->previewItem));
                 }
             }
             for (s32 i = 0; i < 24; i++) {
                 if (panel->previewUnits[i].packedIndex == panel->pendingSelection.selection) {
-                    partyWidgetSetCost(panel->demons[i], -FUN_0029a924(panel->previewItem));
+                    partyWidgetSetCost(panel->demons[i], -appGetRemainingCapacity(panel->previewItem));
                 }
             }
         }

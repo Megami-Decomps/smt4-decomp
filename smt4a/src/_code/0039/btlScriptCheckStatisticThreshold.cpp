@@ -9,14 +9,14 @@ struct BattleEntity {
 
 extern "C" {
 s32 scrGetArg(u32 index);
-BattleEntity *FUN_003eaf20(BattleMainState *);
+BattleEntity *btlFindFirstEntryMatchingCategoryAndRequiredMask(BattleMainState *);
 void scrSetResult(s32);
 
 // Compare the selected battle entity's statistic with the script threshold.
 u32 btlScriptCheckStatisticThreshold(void)
 {
     s32 threshold = scrGetArg(0);
-    BattleEntity *entity = FUN_003eaf20(reinterpret_cast<BattleMainState *>(btlGetMainState()));
+    BattleEntity *entity = btlFindFirstEntryMatchingCategoryAndRequiredMask(reinterpret_cast<BattleMainState *>(btlGetMainState()));
     if (entity != NULL) {
         s32 statistic = entity->statistic;
         scrSetResult(threshold <= statistic);

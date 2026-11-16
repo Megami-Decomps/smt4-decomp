@@ -14,7 +14,7 @@ int entryListSetPhase(...);
 int renderCtxSelectBlendPreset(...);
 int FUN_00257374(...);
 int refCountIncrement(void);
-int FUN_0028186c(...);
+int effectNodeUpdatePlacedChildren(...);
 int gfxQuaternionWorkspaceBuildMatrix(void);
 int FUN_002a353c(...);
 int memCopy(...);
@@ -114,7 +114,7 @@ extern int effectQuerySelectedBehavior(void *);
 /* Supplied declaration required: renderCtxSelectBlendPreset. */
 /* Supplied declaration required: FUN_00257374. */
 /* Supplied declaration required: refCountIncrement. */
-/* Supplied declaration required: FUN_0028186c. */
+/* Supplied declaration required: effectNodeUpdatePlacedChildren. */
 /* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: FUN_002a353c. */
 /* Supplied declaration required: memCopy. */
@@ -684,7 +684,7 @@ void FUN_00267d84(fn_00267d84_arg0 *param_1)
             FUN_002a353c(*puVar2,(temp_v13 & 0xff) |
                                  (temp_v7 << 0x18) | ((temp_v17 & 0xff) << 0x10) |
                                  ((temp_v0 & 0xff) << 8));
-            FUN_0028186c(*puVar2);
+            effectNodeUpdatePlacedChildren(*puVar2);
           }
           temp_v1 = temp_v1 + 1;
           pfVar8 = pfVar8 + 10;

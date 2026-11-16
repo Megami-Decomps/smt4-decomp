@@ -10,9 +10,9 @@ extern "C" {
 int sysPlaySe(...);
 int obj04Finish(void);
 
-int FUN_0014e188(...);
-int FUN_001517b4(...);
-int FUN_00163aa4(...);
+int uiSpriteStateInitFromSource(...);
+int padQueryLogicalKey(...);
+int uiSpriteAdvanceAnimation(...);
 int eventQueueAddUniqueIfValid(...);
 int ifTouchRegionRemove(void);
 int eventQueueAddUnique(...);
@@ -25,7 +25,7 @@ int gameDataBlocksGetTableFlag(void);
 int stateModeDispatch(...);
 int scrRunOpcodesStub(...);
 int FUN_00228b04(int, int);
-int FUN_00275bc8(void);
+int scrScriptProcessCreate(void);
 int scrScriptProcessStartEntry(...);
 int ifTouchRegionAdd(int, int, int, int);
 int FUN_003450d4(...);
@@ -43,9 +43,9 @@ typedef struct {
 extern int g_config; /* 0x57f230 */
 extern int g_gameState; /* 0x5f15fc */
 
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_00163aa4. */
+/* Supplied declaration required: uiSpriteStateInitFromSource. */
+/* Supplied declaration required: padQueryLogicalKey. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 extern int ifTouchGetSelectionMode(void);
@@ -62,11 +62,11 @@ extern int dataTableGetEntries(void);
 /* Supplied declaration required: stateModeDispatch. */
 /* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: FUN_00228b04. */
-/* Supplied declaration required: FUN_00275bc8. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: ifTouchRegionAdd. */
 extern int messageGetChoiceResult(void);
-/* Supplied declaration required: FUN_003180c4. */
+/* Supplied declaration required: scrSetStringSlot. */
 /* Supplied declaration required: FUN_003450d4. */
 extern int uiSearchPrimary(int);
 /* Supplied declaration required: obj04Finish. */
@@ -98,7 +98,7 @@ void FUN_00202ea4(void)
   unsigned char temp_v12 [16];
   
   temp_v7 = g_config;
-  FUN_00163aa4(g_config + 0x430);
+  uiSpriteAdvanceAnimation(g_config + 0x430);
   temp_v6 = g_config;
   temp_v11 = 0;
   switch(*(unsigned int *)(temp_v7 + 100)) {
@@ -110,7 +110,7 @@ void FUN_00202ea4(void)
     }
     if (temp_v11 != 0 && temp_v6 != 0) {
       *(unsigned int *)(temp_v7 + 0x84) = 0;
-      FUN_00275bc8();
+      scrScriptProcessCreate();
       *(int *)(temp_v7 + 0x84) = temp_v11;
       messageMainSetFlag(0);
       temp_v6 = gameDataBlocksGetTableFlag();
@@ -162,12 +162,12 @@ void FUN_00202ea4(void)
     }
     break;
   case 1:
-    FUN_00163aa4(temp_v7 + 0xe8);
+    uiSpriteAdvanceAnimation(temp_v7 + 0xe8);
     temp_v6 = uiSearchPrimary(temp_v7);
     temp_v11 = 0;
     if (0 < temp_v6) {
       do {
-        FUN_00163aa4(temp_v7 + temp_v11 * 0x8c + 0x174);
+        uiSpriteAdvanceAnimation(temp_v7 + temp_v11 * 0x8c + 0x174);
         temp_v11 = temp_v11 + 1;
       } while (temp_v11 < temp_v6);
     }
@@ -215,10 +215,10 @@ void FUN_00202ea4(void)
       return;
     }
     temp_v6 = 0;
-    FUN_001517b4(0,1);
+    padQueryLogicalKey(0,1);
     if ((temp_v6 == 0) && (temp_v3 != 6)) {
       temp_v6 = 1;
-      FUN_001517b4();
+      padQueryLogicalKey();
       if (temp_v6 != 0) {
         eventQueueAddUniqueIfValid(0x100020f);
         messageMainSetFlag(1);
@@ -228,7 +228,7 @@ void FUN_00202ea4(void)
         temp_v6 = 0;
         do {
           temp_v11 = temp_v7 + temp_v6 * 0x8c;
-          FUN_0014e188(temp_v11 + 0x174,0x24,0x57,temp_v7 + 200,1);
+          uiSpriteStateInitFromSource(temp_v11 + 0x174,0x24,0x57,temp_v7 + 200,1);
           uiSpriteSetKeyframe(temp_v11 + 0x174,1,0);
           uiSpriteSetImageKeyframe(temp_v11 + 0x174,1,0);
           temp_v6 = temp_v6 + 1;
@@ -369,7 +369,7 @@ void FUN_00202ea4(void)
         temp_v11 = dataTableGetEntries();
         pcVar12 = (char *)(temp_v11 + temp_v7 * 0xc + 0x1e);
       }
-      FUN_003180c4(0, pcVar12);
+      scrSetStringSlot(0, pcVar12);
       scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x84),5);
       temp_v4 = 4;
       *(unsigned int *)(temp_v6 + 0x68) = temp_v4;
@@ -436,7 +436,7 @@ LAB_00203688:
           temp_v11 = dataTableGetEntries();
           pcVar10 = (char *)(temp_v11 + temp_v7 * 0xc + 0x1e);
         }
-        FUN_003180c4(0, pcVar10);
+        scrSetStringSlot(0, pcVar10);
         temp_v11 = *(int *)(temp_v6 + *(int *)(temp_v6 + 0x88) * 8 + 0x94);
         temp_v7 = loadSlotIsLoaded(0x36);
         if ((temp_v7 != 0) && (pcVar12 = pcVar13, temp_v11 < 5)) {
@@ -463,7 +463,7 @@ LAB_00203688:
           temp_v11 = dataTableGetEntries();
           pcVar12 = (char *)(temp_v11 + temp_v7 * 0xc + 0x1e);
         }
-        FUN_003180c4(1, pcVar12);
+        scrSetStringSlot(1, pcVar12);
         scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x84),3);
         *(unsigned int *)(temp_v6 + 0x68) = 1;
         return;
@@ -471,12 +471,12 @@ LAB_00203688:
     }
     break;
   case 4:
-    FUN_00163aa4(temp_v7 + 0xe8);
+    uiSpriteAdvanceAnimation(temp_v7 + 0xe8);
     temp_v6 = uiSearchPrimary(temp_v7);
     temp_v11 = 0;
     if (0 < temp_v6) {
       do {
-        FUN_00163aa4(temp_v7 + temp_v11 * 0x8c + 0x174);
+        uiSpriteAdvanceAnimation(temp_v7 + temp_v11 * 0x8c + 0x174);
         temp_v11 = temp_v11 + 1;
       } while (temp_v11 < temp_v6);
     }

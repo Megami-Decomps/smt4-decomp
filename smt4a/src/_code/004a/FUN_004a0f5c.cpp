@@ -6,12 +6,12 @@
 
 extern "C" {
 
-int FUN_00180118(unsigned int);
+int dataTable01GetRecordWithAocOverride(unsigned int);
 int gameGetSlotRecord(...);
 int FUN_003df57c(int, int);
 int FUN_004bcbb4(int, int);
 
-/* Supplied declaration required: FUN_00180118. */
+/* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: gameGetSlotRecord. */
 extern int gameGetSlotTable(void);
@@ -125,7 +125,7 @@ LAB_004a1070:
         *(unsigned short *)(temp_v1 + 0x2c) = 0;
       }
       temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + 0x62);
-      FUN_00180118(temp_v4);
+      dataTable01GetRecordWithAocOverride(temp_v4);
       return temp_v4;
     }
   }
@@ -181,7 +181,7 @@ LAB_004a11b0:
         *(unsigned short *)(temp_v1 + 0x2c) = 0;
       }
       temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + 0x62);
-      FUN_00180118(temp_v4);
+      dataTable01GetRecordWithAocOverride(temp_v4);
       return temp_v4;
     }
   }

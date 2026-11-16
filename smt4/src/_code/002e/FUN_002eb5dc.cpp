@@ -5,7 +5,7 @@
 extern "C" {
 extern GameState g_gameState;
 extern MapMain *g_mapMain;
-void FUN_00270f70(MapVector *position);
+void mapAdjustPositionToGround(MapVector *position);
 
 /* Saves the current map identity and position for the pending departure. */
 
@@ -15,7 +15,7 @@ void FUN_002eb5dc(void)
     if (g_gameState.unk284) {
         g_gameState.unk284 = 0;
     } else {
-        FUN_00270f70(&g_gameState.position);
+        mapAdjustPositionToGround(&g_gameState.position);
         g_gameState.unk2F8Byte = 1;
         g_gameState.savedMapId = map->mapId;
         g_gameState.savedAreaId = map->areaId;

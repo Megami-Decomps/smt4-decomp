@@ -10,8 +10,8 @@ int dialogClose(...);
 int FUN_0020b490(...);
 int FUN_00333dc8(...);
 
-int FUN_001517b4(...);
-int FUN_00163aa4(...);
+int padQueryLogicalKey(...);
+int uiSpriteAdvanceAnimation(...);
 int eventQueueAddUniqueIfValid(...);
 int sysPlaySe(...);
 int gameGetPlayerData(void);
@@ -46,9 +46,9 @@ typedef struct {
 } param_1_stack;
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_001517b4. */
+/* Supplied declaration required: padQueryLogicalKey. */
 extern int infoWinHasValue(void);
-/* Supplied declaration required: FUN_00163aa4. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern unsigned short FUN_001643b4(unsigned int, int);
 /* Supplied declaration required: sysPlaySe. */
@@ -120,7 +120,7 @@ void FUN_002c9a8c(int param_1)
   unsigned char temp_v23 [8];
   int temp_v24;
   
-  FUN_00163aa4(param_1 + 0x50c);
+  uiSpriteAdvanceAnimation(param_1 + 0x50c);
   temp_v19 = param_1 + 0x624;
   temp_v20 = param_1 + 0x7560;
   piVar25 = (int *)(param_1 + 0x74c0);
@@ -160,7 +160,7 @@ void FUN_002c9a8c(int param_1)
     if (*(char *)(param_1 + 0x7f50) != '\0') {
       engineGetFloatTableValue(param_1 + 0x7f40,0);
     }
-    FUN_00163aa4(temp_v19);
+    uiSpriteAdvanceAnimation(temp_v19);
     temp_v20 = gameFlagIsSet(0x45f);
     if (temp_v20 != 0) {
       temp_v20 = FUN_0022e750();
@@ -310,7 +310,7 @@ LAB_002ca3c0:
     }
     else {
       temp_v19 = 4;
-      FUN_001517b4(4,0);
+      padQueryLogicalKey(4,0);
       if (!(temp_v19 == 0 && !temp_v10)) {
         if (*psVar24 <= *psVar26) goto LAB_002ca3c0;
         *psVar24 = *psVar24 - 1;
@@ -319,7 +319,7 @@ LAB_002ca3c0:
       }
       else {
         temp_v19 = 3;
-        FUN_001517b4(3,0);
+        padQueryLogicalKey(3,0);
         temp_v16 = 0x100020f;
         if (!(temp_v19 == 0 && !temp_v22)) {
           if ((*piVar23 < 1) || (temp_v16 = 0x100020d, *psVar24 >= 0x3e7)) {
@@ -332,13 +332,13 @@ LAB_002ca1c0:
         }
         else {
           temp_v19 = 1;
-          FUN_001517b4();
+          padQueryLogicalKey();
           if (temp_v19 == 0) {
             temp_v19 = 9;
-            FUN_001517b4(9,1);
+            padQueryLogicalKey(9,1);
             if (temp_v19 == 0) {
               temp_v19 = 0;
-              FUN_001517b4(0,1);
+              padQueryLogicalKey(0,1);
               if (temp_v19 != 0) {
                 temp_v14 = *piVar23;
                 temp_v16 = 0x100020e;
@@ -473,7 +473,7 @@ LAB_002ca524:
     if (*(char *)(param_1 + 0x7f50) != '\0') {
       engineGetFloatTableValue(param_1 + 0x7f40,0);
     }
-    temp_v19 = FUN_00163aa4(temp_v19);
+    temp_v19 = uiSpriteAdvanceAnimation(temp_v19);
     if (temp_v19 != 0) {
       buttonHelpSetText(0,0xf4f4f4ff);
       temp_v19 = infoWinHasValue();

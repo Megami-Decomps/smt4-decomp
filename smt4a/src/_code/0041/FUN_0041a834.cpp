@@ -25,7 +25,7 @@ extern RenderCtxA *g_renderCtx;
 
 void efctSetSpeed(f32 speed);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
-s32 FUN_001692ac(u32 kind, bool enabled);
+s32 renderCtxPackPassFlags(u32 kind, bool enabled);
 void FUN_003c5de0(f32 scale, s32 handle, u32 id, s32 x, s32 y, s32 priority);
 
 /* Draws the selected icon of the strip at `position`, shifted by the stereo parallax and a phase wobble,
@@ -35,7 +35,7 @@ void FUN_0041a834(BtlIconStrip *strip, Vector2 *position, f32 scale)
     if (strip->count == 0 || g_btlUiBlock == NULL || FUN_004ab718() != 0) {
         return;
     }
-    renderCtxPushA(g_renderCtx, FUN_001692ac(1, false));
+    renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, false));
     efctSetSpeed(scale);
     {
         f32 x = position->x;

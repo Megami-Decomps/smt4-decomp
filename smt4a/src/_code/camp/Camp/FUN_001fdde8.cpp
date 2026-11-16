@@ -22,7 +22,7 @@ int FUN_0037c8e4(...);
 int gameSetStatusCameraHeightMode(...);
 int messageRestoreBanner(void);
 
-int FUN_001517b4(...);
+int padQueryLogicalKey(...);
 int eventQueueAddUniqueIfValid(...);
 int FUN_00228b04(...);
 int campShowSelectedEntryHelp(...);
@@ -38,7 +38,7 @@ int campCecPreviewEquipmentChoice(...);
 int sysPlayVoice(...);
 int FUN_003df7c4(...);
 
-int FUN_00178b04(...);
+int asdMemoryAllocTraced(...);
 int gameGetPlayerData(void);
 int statusPanelSetOpen(int);
 int FUN_002c85b0(...);
@@ -49,9 +49,9 @@ int FUN_0033449c(...);
 int objBSetWordByIndex(...);
 int gameGlobalsQueueValues(...);
 int FUN_00372100(...);
-int FUN_003fd7b4(...);
-int FUN_003fe86c(...);
-int FUN_0040aa6c(void);
+int controllerSetPositionXyz(...);
+int modelPlayClip(...);
+int resourceOwnerLoadFileSync(void);
 int FUN_0040aad4(...);
 int FUN_0040ab7c(...);
 int handleRegistryRegisterObject(...);
@@ -75,10 +75,10 @@ extern int g_camp; /* 0x57f108 */
 #define ROMWRIGHT_PIECE_2_2_DEFINED
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
-/* Supplied declaration required: FUN_001517b4. */
+/* Supplied declaration required: padQueryLogicalKey. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern unsigned short ifTouchGetButtonHelpValue(void);
-/* Supplied declaration required: FUN_00178b04. */
+/* Supplied declaration required: asdMemoryAllocTraced. */
 /* Supplied declaration required: gameGetPlayerData. */
 extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
@@ -128,9 +128,9 @@ extern int FUN_0036cf78(void);
 /* Supplied declaration required: sysPlayVoice. */
 extern int FUN_003da8f4(int, unsigned int);
 /* Supplied declaration required: FUN_003df7c4. */
-/* Supplied declaration required: FUN_003fd7b4. */
-/* Supplied declaration required: FUN_003fe86c. */
-/* Supplied declaration required: FUN_0040aa6c. */
+/* Supplied declaration required: controllerSetPositionXyz. */
+/* Supplied declaration required: modelPlayClip. */
+/* Supplied declaration required: resourceOwnerLoadFileSync. */
 /* Supplied declaration required: FUN_0040aad4. */
 /* Supplied declaration required: FUN_0040ab7c. */
 extern int FUN_0040ab8c(unsigned int);
@@ -258,13 +258,13 @@ void FUN_001fdde8(int param_1)
       }
       objBSetWordByIndex(temp_v3,temp_v7);
       temp_v9 = 0x20;
-      FUN_00178b04(0x20,&LAB_001fe2e8,0x1e47);
+      asdMemoryAllocTraced(0x20,&LAB_001fe2e8,0x1e47);
       temp_v3 = 0;
       if (temp_v9 != 0) {
         temp_v3 = modelListInit();
       }
       *(unsigned int *)(temp_v5 + 0x32ac) = temp_v3;
-      FUN_0040aa6c();
+      resourceOwnerLoadFileSync();
       FUN_0040ab7c(*(unsigned int *)(temp_v5 + 0x32ac),0);
       FUN_0040aad4(*(unsigned int *)(temp_v5 + 0x32ac),0);
       FUN_0045b538(*(int *)(*(int *)(temp_v5 + 0x32ac) + 0xc) + 0xc);
@@ -279,8 +279,8 @@ void FUN_001fdde8(int param_1)
     if (temp_v9 != 0) {
       temp_v3 = *(unsigned int *)(*(int *)(temp_v5 + 0x32ac) + 4);
       handleRegistryRegisterObject(g_handleRegistry,temp_v3);
-      FUN_003fe86c(temp_v3,0,2);
-      FUN_003fd7b4(temp_v3);
+      modelPlayClip(temp_v3,0,2);
+      controllerSetPositionXyz(temp_v3);
     }
     temp_v9 = objBStateAllowsAction();
     if (temp_v9 == 0) {
@@ -397,7 +397,7 @@ void FUN_001fdde8(int param_1)
       return;
     }
     temp_v4 = 0;
-    FUN_001517b4(0,1);
+    padQueryLogicalKey(0,1);
     if (temp_v4 != 0 || temp_v14[0] != '\0') {
       temp_v5 = resourceRunOperationIfUnblocked(temp_v13);
       temp_v13 = FUN_002a4894(temp_v13);
@@ -457,7 +457,7 @@ void FUN_001fdde8(int param_1)
       return;
     }
     temp_v4 = 1;
-    FUN_001517b4();
+    padQueryLogicalKey();
     if (temp_v4 != 0) {
       if (temp_v10 != 0) {
         campCecPreviewEquipmentChoice();
@@ -475,13 +475,13 @@ void FUN_001fdde8(int param_1)
       return;
     }
     temp_v4 = 8;
-    FUN_001517b4(8,0);
+    padQueryLogicalKey(8,0);
     if ((temp_v4 == 0) && (temp_v4 = recordGetModeForId((int)*(short *)(temp_v5 + 0x1b3a)), temp_v4 != 6)) {
       temp_v4 = 7;
-      FUN_001517b4(7,0);
+      padQueryLogicalKey(7,0);
       if ((temp_v4 == 0) && (temp_v4 = recordGetModeForId((int)*(short *)(temp_v5 + 0x1b3c)), temp_v4 != 6)) {
         temp_v9 = 9;
-        FUN_001517b4(9,1);
+        padQueryLogicalKey(9,1);
         if (temp_v9 == 0) {
           return;
         }

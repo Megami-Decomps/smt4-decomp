@@ -5,7 +5,7 @@
 extern "C" {
 
 int mobiclipPlayerReleaseHandle(u32 handle);
-int FUN_0011b6c8(S4Player *player);
+int timedJobBeginStop(S4Player *player);
 
 extern u8 g_mobiclipCtrl;
 extern S4Player DAT_004c3b20;
@@ -15,7 +15,7 @@ void mobiclipCtrlClosePlayer(int reason)
     S4Player *player = &DAT_004c3b20;
 
     mobiclipPlayerReleaseHandle(player->handle);
-    FUN_0011b6c8(player);
+    timedJobBeginStop(player);
     if (reason == 3) {
         g_mobiclipCtrl = 1;
     }

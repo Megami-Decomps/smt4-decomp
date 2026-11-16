@@ -1,7 +1,7 @@
 #include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
 
-extern "C" u32 FUN_001ba3d4(u16 id);
+extern "C" u32 flagValueRead(u16 id);
 
 /* Script command: when the first argument is set, removes the battle members whose value is not above the second argument. */
 extern "C" u32 scrBattleRemoveMembersAtOrBelowValue(void)
@@ -11,7 +11,7 @@ extern "C" u32 scrBattleRemoveMembersAtOrBelowValue(void)
     BtlMainStateExtA *battle = btlGetMainStateExt();
     if (enabled != 0) {
         for (std::vector<u16>::iterator member = battle->members.begin(); member != battle->members.end();) {
-            if (limit < (s32)(FUN_001ba3d4(*member) & 0xffff)) {
+            if (limit < (s32)(flagValueRead(*member) & 0xffff)) {
                 ++member;
             } else {
                 member = battle->members.erase(member);

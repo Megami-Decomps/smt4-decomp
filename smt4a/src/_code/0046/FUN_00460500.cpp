@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016e800(unsigned int, int);
+int sysReportCheckFailure(unsigned int, int);
 int nw_io_FileStream_FilePosition_Seek(unsigned int *, int);
 
 typedef int romwright_code(...);
@@ -15,7 +15,7 @@ typedef struct {
 
 extern unsigned char DAT_0055bf34; /* 0x55bf34 */
 
-/* Supplied declaration required: FUN_0016e800. */
+/* Supplied declaration required: sysReportCheckFailure. */
 extern unsigned int nn_fs_detail_FileBase_TryGetSize(unsigned int, long long *);
 /* Supplied declaration required: nw_io_FileStream_FilePosition_Seek. */
 
@@ -99,7 +99,7 @@ FUN_00460500(unsigned int *param_1,unsigned int param_2,unsigned int param_3,int
     temp_v0 = nn_fs_detail_FileBase_TryGetSize(temp_v3 + 4,(long long *)&temp_v4);
     temp_v2 = temp_v4;
     if ((int)temp_v0 < 0) {
-      FUN_0016e800(temp_v0,0x460630);
+      sysReportCheckFailure(temp_v0,0x460630);
       temp_v2 = temp_v4;
     }
   }

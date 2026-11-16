@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016e800(unsigned int, int);
+int sysReportCheckFailure(unsigned int, int);
 int FUN_001748a0(unsigned int *, unsigned int, unsigned int);
 int nw_io_FileStream_FilePosition_Seek(unsigned int *, int);
 
@@ -16,7 +16,7 @@ typedef struct {
 
 extern unsigned char DAT_0055bf34; /* 0x55bf34 */
 
-/* Supplied declaration required: FUN_0016e800. */
+/* Supplied declaration required: sysReportCheckFailure. */
 /* Supplied declaration required: FUN_001748a0. */
 extern unsigned int nn_fs_detail_FileBase_TryGetSize(unsigned int, long long *);
 /* Supplied declaration required: nw_io_FileStream_FilePosition_Seek. */
@@ -98,7 +98,7 @@ FUN_00460378(unsigned int *param_1,unsigned int param_2,unsigned int param_3,int
     temp_v0 = nn_fs_detail_FileBase_TryGetSize((unsigned int)(param_1 + 6),(long long *)&temp_v2);
     temp_v1 = temp_v2;
     if ((int)temp_v0 < 0) {
-      FUN_0016e800(temp_v0,0x46049c);
+      sysReportCheckFailure(temp_v0,0x46049c);
       temp_v1 = temp_v2;
     }
   }

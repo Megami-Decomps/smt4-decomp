@@ -24,7 +24,7 @@ void FUN_003a7c3c(u32 quest)
     work->unk93E = 1;
     for (s32 index = 0; index < objectApplyIfUnblocked(cursor); ++index) {
         if (ids[index] == quest) {
-            FUN_002a4964(reinterpret_cast<ScrollSelection *>(cursor), index);
+            scrollListSetSelectionTracked(reinterpret_cast<ScrollSelection *>(cursor), index);
             break;
         }
     }

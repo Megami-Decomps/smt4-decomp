@@ -55,7 +55,7 @@ extern int FUN_00375998(...); /* 0x375998 */
 extern int entrySortComparePrimaryKeyDesc(...); /* 0x375aa8 */
 extern int contentIdCompareRankAndOrderDescending(...); /* 0x375afc */
 extern int FUN_00375b54(...); /* 0x375b54 */
-extern int FUN_003811ec(...); /* 0x3811ec */
+extern int itemSortCompareByCategoryAndId(...); /* 0x3811ec */
 extern int itemCompareCategoryDescendingValueAscending(...); /* 0x3812e0 */
 extern int recordCompareByRank(...); /* 0x39ec5c */
 extern int FUN_0039ecc4(...); /* 0x39ecc4 */
@@ -83,7 +83,7 @@ void FUN_003d0bc0(int param_1)
   int temp_v5;
   
   temp_v3 = g_camp;
-  temp_v1 = reinterpret_cast<int>(FUN_0026140c());
+  temp_v1 = reinterpret_cast<int>(saveGetUserSettingsBlock());
   pbVar5 = (unsigned char *)0x0;
   temp_v4 = 0;
   temp_v5 = 0;
@@ -97,7 +97,7 @@ void FUN_003d0bc0(int param_1)
         if ((*pbVar5 & 0x7f) == 0xb) {
           if ((char)*pbVar5 < '\0') {
             temp_v2 = objectApplyIfUnblocked(temp_v3);
-            qsort(temp_v1,temp_v2,8,FUN_003811ec);
+            qsort(temp_v1,temp_v2,8,itemSortCompareByCategoryAndId);
           }
           else {
             temp_v2 = objectApplyIfUnblocked(temp_v3);

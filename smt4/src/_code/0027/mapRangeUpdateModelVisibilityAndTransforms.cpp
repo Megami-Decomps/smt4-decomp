@@ -56,10 +56,10 @@ inline void setModelEnabled(RangeModelBinding* binding, u8 enabled)
 extern "C" {
 extern RangeWork* g_mapRangeWork;
 extern GameState g_gameState;
-void FUN_0029bb14(RangeModel*, f32);
+void modelSetScale(RangeModel*, f32);
 void nodeSetPropertyScale(RangeModel*, f32);
 void nodeSetTranslation(NodeOwner*, u32, const NodeVec3*);
-void FUN_0028c618(NodeOwner*, u32, f32, f32, f32);
+void modelPartSetRotationDegrees(NodeOwner*, u32, f32, f32, f32);
 void modelSelectPrimaryMotion(RangeModel*, s32, f32);
 void modelSelectSecondaryMotion(RangeModel*, s32, f32);
 u32 modelGetCurrentMotion(Inner0020ffe0 *model);
@@ -76,14 +76,14 @@ void mapRangeUpdateModelVisibilityAndTransforms()
         RangeModelBinding* binding = entry->hasOwnBinding
             ? entry->binding : work->slots[entry->slot].binding;
         if (g_gameState.controllerFlags.mapRangeModelsHidden) {
-            FUN_0029bb14(binding->model, 0.0f);
+            modelSetScale(binding->model, 0.0f);
             nodeSetPropertyScale(binding->model, 0.0f);
             if (!(binding->flags & 2)) {
                 binding->flags |= 2;
                 setModelEnabled(binding, 0);
             }
         } else {
-            FUN_0029bb14(binding->model, 1.0f);
+            modelSetScale(binding->model, 1.0f);
             nodeSetPropertyScale(binding->model, 1.0f);
             if (binding->flags & 2) {
                 binding->flags &= ~2u;
@@ -91,7 +91,7 @@ void mapRangeUpdateModelVisibilityAndTransforms()
             }
             if (entry->transformPending) {
                 nodeSetTranslation(&binding->model->transform, 0, &entry->position);
-                FUN_0028c618(&binding->model->transform, 0, 0.0f, entry->heading, 0.0f);
+                modelPartSetRotationDegrees(&binding->model->transform, 0, 0.0f, entry->heading, 0.0f);
                 if ((s32)modelGetCurrentMotion(reinterpret_cast<Inner0020ffe0 *>(binding->model)) != entry->motion) {
                     modelSelectPrimaryMotion(binding->model, entry->motion, 0.0f);
                     modelSelectSecondaryMotion(binding->model, entry->motion, 0.0f);

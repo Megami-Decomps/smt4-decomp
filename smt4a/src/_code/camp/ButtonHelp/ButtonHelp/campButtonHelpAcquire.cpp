@@ -53,14 +53,14 @@ s32 FUN_002e169c(u32 job);
 void FUN_0025ccc0(u32 job);
 void paramsClearPacket(UiResourceParameters *packet);
 
-void FUN_0014e188(ButtonHelpUnit *sprite, u32 group, u32 image, UiResourceParameters *owner, u16 id, f32 scale);
+void uiSpriteStateInitFromSource(ButtonHelpUnit *sprite, u32 group, u32 image, UiResourceParameters *owner, u16 id, f32 scale);
 void uiGetLayoutPointDifference(ButtonHelpUnit *sprite, u32 group, u32 image, s32 kind);
-void FUN_00387240(ButtonHelpUnit *sprite, u32 group, s32 arg);
+void uiStoreTextureEntryCenter(ButtonHelpUnit *sprite, u32 group, s32 arg);
 void spriteSetLayer(ButtonHelpUnit *sprite, u16 layer);
 void spriteSetVisible(ButtonHelpUnit *sprite, u8 visible);
 u32 spriteHandleCreate(u32 arg);
 void positionStateSet(u32 handle, s32 arg, u32 color, f32 value);
-u32 FUN_00275bc8(s32 bf, s32 mbm);
+u32 scrScriptProcessCreate(s32 bf, s32 mbm);
 
 /* Takes a reference on the button help; the first one builds its work area, jobs and sprites. */
 void campButtonHelpAcquire(void)
@@ -81,18 +81,18 @@ void campButtonHelpAcquire(void)
         paramsInit(&panel->packet, sKeysFirst, sizeof(sKeysFirst), sKeysSecond, sizeof(sKeysSecond),
                    sKeysThird, sizeof(sKeysThird), NULL, 0, sKeysFifth, sizeof(sKeysFifth));
         for (s32 i = 0; i < 6; i++) {
-            FUN_0014e188(&panel->units[i], 10, 3, &panel->packet, 16, 1.0f);
+            uiSpriteStateInitFromSource(&panel->units[i], 10, 3, &panel->packet, 16, 1.0f);
             uiGetLayoutPointDifference(&panel->units[i], 10, 17 + i, 3);
         }
-        FUN_0014e188(&panel->selected[0], 10, 0, &panel->packet, 16, 1.0f);
-        FUN_0014e188(&panel->selected[1], 10, 1, &panel->packet, 16, 1.0f);
-        FUN_0014e188(&panel->selected[2], 10, 163, &panel->packet, 16, 1.0f);
-        FUN_0014e188(&panel->selected[3], 10, 164, &panel->packet, 16, 1.0f);
+        uiSpriteStateInitFromSource(&panel->selected[0], 10, 0, &panel->packet, 16, 1.0f);
+        uiSpriteStateInitFromSource(&panel->selected[1], 10, 1, &panel->packet, 16, 1.0f);
+        uiSpriteStateInitFromSource(&panel->selected[2], 10, 163, &panel->packet, 16, 1.0f);
+        uiSpriteStateInitFromSource(&panel->selected[3], 10, 164, &panel->packet, 16, 1.0f);
         ButtonHelpWorkA *current = g_buttonHelp.prefix.work;
         current->unk5E4 = 0;
         for (s32 i = 0; i < 4; i++) {
             spriteSetLayer(&current->selected[i], 2);
-            FUN_00387240(&current->selected[i], 10, 0);
+            uiStoreTextureEntryCenter(&current->selected[i], 10, 0);
             spriteSetVisible(&current->selected[i], 1);
             current->selected[i].x = 0;
             current->selected[i].y = 0;
@@ -106,7 +106,7 @@ void campButtonHelpAcquire(void)
         work->unk678 = spriteHandleCreate(0);
         FUN_001527d8(work->unk678, 0xf4f4f4ff);
         positionStateSet(work->unk678, 0, 0x646464ff, 0.0f);
-        work->process = FUN_00275bc8(g_buttonHelp.bf, g_buttonHelp.mbm);
+        work->process = scrScriptProcessCreate(g_buttonHelp.bf, g_buttonHelp.mbm);
     }
     g_buttonHelp.prefix.references++;
 }

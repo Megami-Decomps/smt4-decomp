@@ -8,7 +8,7 @@ extern "C" {
 int sysPlaySe(int);
 int dataTable8FindRecord(...);
 int dataTable04FindById(void);
-int FUN_0020ad6c(int, int, int);
+int btlCommandMenuEnterMode(int, int, int);
 int btlCommandResolveSelectedTarget(...);
 int FUN_002c7bb0(...);
 int FUN_002ccde8(...);
@@ -36,7 +36,7 @@ typedef struct {
 /* Supplied declaration required: dataTable8FindRecord. */
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: dataTable04FindById. */
-/* Supplied declaration required: FUN_0020ad6c. */
+/* Supplied declaration required: btlCommandMenuEnterMode. */
 /* Supplied declaration required: btlCommandResolveSelectedTarget. */
 extern int FUN_002a4878(int);
 /* Supplied declaration required: FUN_002c7bb0. */
@@ -76,7 +76,7 @@ void FUN_002fa7a8(int param_1)
   temp_v12 = param_1 + 0x3bdc;
   flaggedEntrySetValueB(temp_v12,0);
   *(unsigned int *)(param_1 + 0x3898) = 0xffffffff;
-  FUN_0020ad6c(param_1,0x22,1);
+  btlCommandMenuEnterMode(param_1,0x22,1);
   sysPlaySe(0x3a);
   temp_v14[0] = 0;
   temp_v8[0] = 0;

@@ -4,7 +4,7 @@
 #include "code/Code0041_Smt4a.h"
 
 extern "C" {
-ScriptRunState *FUN_00275bc8(void *script, void *images);
+ScriptRunState *scrScriptProcessCreate(void *script, void *images);
 void scriptProcessSetMode(ScriptRunState *process, s32 mode);
 u32 scrScriptProcessStartEntry(ScriptRunState *process, s32 entry);
 void asdLoadFileAsyncSimple(const char *path, void **destination, u32 flags);
@@ -23,7 +23,7 @@ u32 scriptHolderUpdateSimple(ScriptHolder *holder)
         break;
     case 1:
         if (holder->buf0C != NULL && holder->buf10 != NULL) {
-            holder->process = FUN_00275bc8(holder->buf0C, holder->buf10);
+            holder->process = scrScriptProcessCreate(holder->buf0C, holder->buf10);
             scriptProcessSetMode(holder->process, 2);
             scrScriptProcessStartEntry(holder->process, holder->phase.entry);
             holder->phase.state = 2;

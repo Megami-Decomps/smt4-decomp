@@ -19,11 +19,11 @@ struct MapDepartView {
 
 extern "C" {
 extern MapDepartView *g_mapDepart;
-s32 FUN_001692ac(u32 a, u32 b);
+s32 renderCtxPackPassFlags(u32 a, u32 b);
 void efctSetSpeed(f32 speed);
-void FUN_00183bb0(void);
+void gxResetColorQuadToWhite(void);
 void FUN_00355428(void);
-void FUN_00164b5c(u32 layer, u32 table, u32 entry, s32 x, s32 y, u32 slot);
+void texDrawCompositeSprite(u32 layer, u32 table, u32 entry, s32 x, s32 y, u32 slot);
 void textFormatBuffer(char *buffer, const char *format, ...);
 
 /* Draws the departure screen's panels under a temporary render-state preset; state 14 slides the
@@ -38,18 +38,18 @@ u32 FUN_00329a90(void)
         return 0;
     }
     {
-        FUN_00157558(g_renderCtx);
+        renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         RenderCtxA *context = g_renderCtx;
-        s32 preset = FUN_001692ac(1, 0);
+        s32 preset = renderCtxPackPassFlags(1, 0);
         renderCtxPushA(context, preset);
         s32 state = depart->state;
         if (state == 5 || state == 6) {
             efctSetSpeed(1.0f);
-            FUN_00183bb0();
+            gxResetColorQuadToWhite();
             FUN_00355428();
         } else if (state == 14) {
             efctSetSpeed(1.0f);
-            FUN_00183bb0();
+            gxResetColorQuadToWhite();
             depart = g_mapDepart;
             f32 offset;
             if (depart->slide < 5) {
@@ -57,7 +57,7 @@ u32 FUN_00329a90(void)
             } else {
                 offset = 0.0f;
             }
-            FUN_00164b5c(2, 19, 30, (s32)offset, 0, 11);
+            texDrawCompositeSprite(2, 19, 30, (s32)offset, 0, 11);
             TextureTableEntryIV *panel = asdTMTexTableEntryAt(19, 0x1105);
             asdTMTexTableEntryAt(19, 0x110d);
             TextureTableEntryIV *counter = asdTMTexTableEntryAt(19, 0x1101);
@@ -65,7 +65,7 @@ u32 FUN_00329a90(void)
             asdTMTexTableEntryAt(19, 0x1104);
             asdTMTexTableEntryAt(19, 0x1102);
             asdTMTexTableEntryAt(19, 0x1103);
-            FUN_001835b4(2, 19, 0x1242, (s32)((f32)panel->x + offset + (f32)frame->x), panel->y + frame->y, 11);
+            texDrawTableEntryAtStoredOrigin(2, 19, 0x1242, (s32)((f32)panel->x + offset + (f32)frame->x), panel->y + frame->y, 11);
             char text[32];
             textFormatBuffer(text, "%d\201@\202l\202\201\202\203\202\203\202\201", depart->value);
             textDrawString(2, 0xffffffff, text, (f32)panel->x + offset + (f32)counter->x,

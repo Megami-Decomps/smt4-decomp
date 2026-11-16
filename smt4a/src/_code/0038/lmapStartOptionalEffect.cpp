@@ -2,7 +2,7 @@
 
 extern "C" {
 
-/* Effect record: the id handed to FUN_003fd7c0 sits at +4. */
+/* Effect record: the id handed to moriModelUnitStartMaterialAnimation sits at +4. */
 typedef struct {
     u8 unk00[4];
     u32 id;             /* 0x04 */
@@ -20,7 +20,7 @@ extern GameBlock *g_lmapScene;
 
 int gameFlagsGetBlock(void);
 int FUN_00162ea4(void);
-int FUN_003fd7c0(u32 id, int a, int b, f32 scale);
+int moriModelUnitStartMaterialAnimation(u32 id, int a, int b, f32 scale);
 
 /* Starts the block's effect (scale 85.0) when its state is set and FUN_00162ea4 accepts; 0 when that check fails. */
 u32 lmapStartOptionalEffect(void)
@@ -31,7 +31,7 @@ u32 lmapStartOptionalEffect(void)
             return 0;
         }
         if (g_lmapScene->effect != NULL) {
-            FUN_003fd7c0(g_lmapScene->effect->id, 0, 2, 85.0f);
+            moriModelUnitStartMaterialAnimation(g_lmapScene->effect->id, 0, 2, 85.0f);
         }
     }
     return 1;

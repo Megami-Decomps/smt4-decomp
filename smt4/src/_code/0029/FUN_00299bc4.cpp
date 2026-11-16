@@ -4,7 +4,7 @@ extern "C" {
 extern CampHelpPrefixIV *g_camp;
 s32 FUN_0029ee54(const void *unit);
 s32 FUN_0029d644(const void *unit);
-u32 FUN_002b8584(u32 group, u32 resource);
+u32 ifTouchRegionAddRequested(u32 group, u32 resource);
 
 void FUN_00299bc4(const void *unit, s32 mode)
 {
@@ -20,13 +20,13 @@ void FUN_00299bc4(const void *unit, s32 mode)
     LabelsView *labels = reinterpret_cast<LabelsView *>(g_camp);
     if (FUN_0029ee54(unit) > FUN_0029d644(unit)) {
         if (mode == 0) {
-            labels->headings[0] = FUN_002b8584(0x1d, 0x572);
-            labels->headings[1] = FUN_002b8584(0x1d, 0x570);
-            labels->headings[2] = FUN_002b8584(0x1d, 0x571);
+            labels->headings[0] = ifTouchRegionAddRequested(0x1d, 0x572);
+            labels->headings[1] = ifTouchRegionAddRequested(0x1d, 0x570);
+            labels->headings[2] = ifTouchRegionAddRequested(0x1d, 0x571);
         } else {
-            labels->headings[0] = FUN_002b8584(0x1d, 0x56d);
-            labels->headings[1] = FUN_002b8584(0x1d, 0x56e);
-            labels->headings[2] = FUN_002b8584(0x1d, 0x56f);
+            labels->headings[0] = ifTouchRegionAddRequested(0x1d, 0x56d);
+            labels->headings[1] = ifTouchRegionAddRequested(0x1d, 0x56e);
+            labels->headings[2] = ifTouchRegionAddRequested(0x1d, 0x56f);
         }
     }
     if (mode == 0) {
@@ -34,16 +34,16 @@ void FUN_00299bc4(const void *unit, s32 mode)
             if (FUN_0029ee54(unit) <= i) {
                 break;
             }
-            labels->entries[i] = FUN_002b8584(0x1d, i + 0x40f);
+            labels->entries[i] = ifTouchRegionAddRequested(0x1d, i + 0x40f);
         }
-        labels->extras[0] = FUN_002b8584(0x1d, 0x576);
-        labels->extras[1] = FUN_002b8584(0x1d, 0x577);
+        labels->extras[0] = ifTouchRegionAddRequested(0x1d, 0x576);
+        labels->extras[1] = ifTouchRegionAddRequested(0x1d, 0x577);
     } else {
         for (s32 i = 0; i < FUN_0029d644(unit); ++i) {
             if (FUN_0029ee54(unit) <= i) {
                 return;
             }
-            labels->entries[i] = FUN_002b8584(0x1d, i + 0x40d);
+            labels->entries[i] = ifTouchRegionAddRequested(0x1d, i + 0x40d);
         }
     }
 }

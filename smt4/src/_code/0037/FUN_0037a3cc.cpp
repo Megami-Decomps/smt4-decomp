@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0013041c(int, int, int);
-int FUN_002b4e00(int, unsigned int, unsigned int, int *);
+int fileHandleSeek(int, int, int);
+int fileHandleRead(int, unsigned int, unsigned int, int *);
 int nw_io_FileStream_FilePosition_Skip(void);
 
 typedef struct fn_0037a3cc_arg0 fn_0037a3cc_arg0;
@@ -26,8 +26,8 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_0013041c. */
-/* Supplied declaration required: FUN_002b4e00. */
+/* Supplied declaration required: fileHandleSeek. */
+/* Supplied declaration required: fileHandleRead. */
 /* Supplied declaration required: nw_io_FileStream_FilePosition_Skip. */
 
 
@@ -49,11 +49,11 @@ int FUN_0037a3cc(fn_0037a3cc_arg0 *param_1,unsigned int param_2,unsigned int par
   }
   temp_v1 = param_1->field_0x34;
   temp_v4 = param_4;
-  FUN_0013041c(temp_v1,temp_v3,0);
+  fileHandleSeek(temp_v1,temp_v3,0);
   if (temp_v1 != 0) {
     temp_v4 = 0;
     temp_v3 = param_1->field_0x34;
-    FUN_002b4e00(temp_v3,param_2,param_3,&temp_v4);
+    fileHandleRead(temp_v3,param_2,param_3,&temp_v4);
     if (temp_v3 != 0) {
       if (0 < temp_v4) {
         nw_io_FileStream_FilePosition_Skip();

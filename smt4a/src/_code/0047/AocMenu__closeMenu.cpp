@@ -9,9 +9,9 @@ extern QueuedRequestState *g_aocMain;
 extern AocSystemA *g_aocSystem;
 RequestParameters FUN_0046f3ac(AocSystemA *system);
 void aocMenuSetButtonHelp(AocMenu *menu, s32 request, s32 mode);
-void FUN_0047bcdc(AocMenu *menu, u32 request);
+void aocLoadingTaskStart(AocMenu *menu, u32 request);
 void FUN_0016ccb4(void *query);
-void FUN_00169548(s32 mode);
+void buttonHelpSetEnabled(s32 mode);
 void jobOwnerFreeSlotAndStop(void *owner);
 void jobFlagsWorkStop(AocMenu *menu);
 void aocReleasePackageOwner(AocSystemA *system);
@@ -56,13 +56,13 @@ void AocMenu::closeMenu()
     }
     switch (menu->substep) {
     case 0:
-        FUN_00169548(0);
+        buttonHelpSetEnabled(0);
         aocMenuSetButtonHelp(menu, -1, 0);
         menu->substep = 1;
         break;
     case 1:
         if (FUN_002e19f8() != 0) {
-            FUN_0047bcdc(menu, 1);
+            aocLoadingTaskStart(menu, 1);
             aocResetOperationState(g_aocSystem);
             menu->substep = 2;
         }

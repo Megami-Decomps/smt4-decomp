@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(double, int);
-int FUN_001bbf0c(void);
+int libm_cosf(void);
 int FUN_0045c58c(unsigned int, float *, float [10]);
 int FUN_0045e960(void);
 
@@ -20,7 +20,7 @@ typedef struct {
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-/* Supplied declaration required: FUN_001bbf0c. */
+/* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: FUN_0045c58c. */
 /* Supplied declaration required: FUN_0045e960. */
 
@@ -81,13 +81,13 @@ void FUN_0045c364(unsigned int param_1,float *param_2,float *param_3)
     temp_v2 = (float)temp_v8;
   }
   temp_v0 = (float)((unsigned long long)temp_v8 >> 0x20);
-  FUN_001bbf0c();
+  libm_cosf();
   temp_v3 = (float)temp_v8;
   temp_v1 = (float)temp_v4;
-  FUN_001bbf0c();
+  libm_cosf();
   temp_v1 = (temp_v0 + temp_v1) * 0.5f;
   temp_v0 = (float)temp_v4;
-  FUN_001bbf0c();
+  libm_cosf();
   temp_v5 = (float)((unsigned long long)temp_v4 >> 0x20);
   *param_2 = temp_v6 * temp_v5 * temp_v7[0];
   *param_3 = temp_v2 * temp_v5 * temp_v7[0] + (temp_v1 / (temp_v1 - temp_v0)) * (temp_v3 - temp_v7[0]) + temp_v3

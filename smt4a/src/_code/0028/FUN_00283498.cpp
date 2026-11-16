@@ -17,13 +17,13 @@ extern AocSystem *g_aocSystem;
 
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 signedKeyRecordCompare(const void *a, const void *b);
-DataTable25Record *FUN_00175f90(AocSystem *system, u32 id);
+DataTable25Record *aocPackageFindRecordById(AocSystem *system, u32 id);
 
 
 /* Finds the record with `id`: the add-on content's override first, else a search of data table 25. */
 DataTable25Record *FUN_00283498(u32 id)
 {
-    DataTable25Record *record = FUN_00175f90(g_aocSystem, id);
+    DataTable25Record *record = aocPackageFindRecordById(g_aocSystem, id);
 
     if (record != NULL) {
         return record;

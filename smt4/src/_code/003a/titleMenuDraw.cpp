@@ -15,7 +15,7 @@ struct TitleScene;
 
 extern TitleScene *g_titleScene;
 
-void FUN_002bed3c(void);
+void gxResetColorQuadToWhite(void);
 void renderCtxApplyTransforms(TitleScene *scene);
 void renderCtxResetColorScale(TitleScene *scene);
 void FUN_003a9648(TitleMenu *menu);
@@ -25,7 +25,7 @@ void scrollMenuDrawVisibleEntries(TitleMenu *menu);
 void titleMenuDraw(TitleMenu *menu)
 {
     if (menu->entryCount > 0) {
-        FUN_002bed3c();
+        gxResetColorQuadToWhite();
         switch (menu->compact) {
         case 0:
             menu->drawMode = 0x1f;

@@ -18,7 +18,7 @@ s32 gameFlagIsSet(u32 flag);
 s32 sub68OwnerCall2(void);
 void sub68OwnerCall3(void);
 void naviMainEnterState4IfActive(void);
-void FUN_003b61ec(void);
+void commonBgStopChildAndBeginTransition(void);
 void commonBgReset(void);
 s32 FUN_004a0404(void);
 
@@ -31,18 +31,18 @@ void FUN_003a2278(s32 open)
             return;
         g_gameState.menuOpen = 1;
         naviMainEnterState4IfActive();
-        FUN_003b61ec();
+        commonBgStopChildAndBeginTransition();
         sysPlaySe(0x92);
         return;
     }
     if (g_gameState.menuOpen) {
         g_gameState.menuOpen = 0;
         if (!gameFlagIsSet(0x49A))
-            FUN_003b61ec();
+            commonBgStopChildAndBeginTransition();
         else
             commonBgReset();
         if (gameFlagIsSet(12) && !gameFlagIsSet(16))
-            FUN_003b61ec();
+            commonBgStopChildAndBeginTransition();
         sub68OwnerCall3();
         return;
     }
@@ -68,7 +68,7 @@ void FUN_003a2278(s32 open)
         }
     }
     if (gameFlagIsSet(12) && !gameFlagIsSet(16))
-        FUN_003b61ec();
+        commonBgStopChildAndBeginTransition();
 }
 
 } /* extern "C" */

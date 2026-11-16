@@ -28,9 +28,9 @@ extern "C" {
 extern const char DAT_00526308[];
 void paramsClearPacket(UiResourceParameters *);
 
-void FUN_0014e188(AocUiSprite *, s32 group, s32 image, UiResourceParameters *, s32 flags, f32 scale);
+void uiSpriteStateInitFromSource(AocUiSprite *, s32 group, s32 image, UiResourceParameters *, s32 flags, f32 scale);
 void uiSpriteSetImageKeyframe(AocUiSprite *, s32 keyframe, s32 flags);
-void FUN_00387240(AocUiSprite *, s32 group, s32 image);
+void uiStoreTextureEntryCenter(AocUiSprite *, s32 group, s32 image);
 void FUN_0015f258(void *panel);
 u32 spriteHandleCreate(s32 flags);
 void positionStateSet(u32 handle, s32 slot, u32 color, f32 duration);
@@ -42,7 +42,7 @@ void aocMenuInitializeSprites(AocMenuSprites *menu)
 {
     paramsClearPacket(&menu->parameters);
     paramsInit(&menu->parameters, 0, 0, DAT_00526308, 0xc, 0, 0, 0, 0, 0, 0);
-    FUN_0014e188(&menu->header, 0x14, 2000, &menu->parameters, 0xb, 1.0f);
+    uiSpriteStateInitFromSource(&menu->header, 0x14, 2000, &menu->parameters, 0xb, 1.0f);
     uiSpriteSetImageKeyframe(&menu->header, 0, 0);
     AocSpriteLayout layout = {{
         0, 1, 1, 0, 0, 0, 1, 1,
@@ -50,10 +50,10 @@ void aocMenuInitializeSprites(AocMenuSprites *menu)
         1, 1, 0, 0, 0, 1, 1, 0
     }};
     for (s32 index = 0; index < 24; ++index) {
-        FUN_0014e188(&menu->entries[index], 0x14, layout.frames[index] + 2001,
+        uiSpriteStateInitFromSource(&menu->entries[index], 0x14, layout.frames[index] + 2001,
                       &menu->parameters, 0xb, 1.0f);
         uiSpriteSetImageKeyframe(&menu->entries[index], 0, 0);
-        FUN_00387240(&menu->entries[index], 0x14, index + 2005);
+        uiStoreTextureEntryCenter(&menu->entries[index], 0x14, index + 2005);
     }
     FUN_0015f258(menu->panel);
     menu->ready = 0;

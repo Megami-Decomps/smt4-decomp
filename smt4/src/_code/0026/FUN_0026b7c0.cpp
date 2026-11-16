@@ -5,7 +5,7 @@
 
 extern "C" {
 extern PartyPanel *g_partyPanel;
-s32 FUN_0029a924(u16 action);
+s32 appGetRemainingCapacity(u16 action);
 s32 FUN_0029a9d4(u16 action, u32 mode);
 s32 FUN_002621b4(u32 user, s32 target, u32 action, s32 *result);
 s32 partyWidgetGetX(void *widget);
@@ -41,11 +41,11 @@ void FUN_0026b7c0(void)
     } else {
         for (s32 index = 0; index < 3; ++index) {
             if (slots->active[index] == panel->user)
-                partyWidgetSetCost(panel->party[index], -FUN_0029a924(panel->action));
+                partyWidgetSetCost(panel->party[index], -appGetRemainingCapacity(panel->action));
         }
         for (s32 index = 0; index < 24; ++index) {
             if (panel->stockSlots[index].unit == panel->user)
-                partyWidgetSetCost(panel->stock[index], -FUN_0029a924(panel->action));
+                partyWidgetSetCost(panel->stock[index], -appGetRemainingCapacity(panel->action));
         }
     }
     if (panel->protagonistActive) {

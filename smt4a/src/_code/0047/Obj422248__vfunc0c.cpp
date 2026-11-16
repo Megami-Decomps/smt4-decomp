@@ -41,7 +41,7 @@ WindowStatusOperationResult Obj422248::vfunc0c(const void *)
         s32 status = FUN_002fb0d4(manager->queue, &request.size, FUN_00475700, &owner);
         if ((status & 0x7e00000) != 0x600000) {
             if (nnResultIsFailure(status)) {
-                FUN_002e3140(status);
+                resultHandleFailure(status);
             }
         }
     } else {

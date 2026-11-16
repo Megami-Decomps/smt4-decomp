@@ -106,7 +106,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0014ce2c. */
 /* Supplied declaration required: FUN_00265b78. */
 extern int __cxa_guard_acquire(unsigned int *);
-extern int FUN_002c501c(void);
+extern int asdCameraGetSavedRenderPairs(void);
 /* Supplied declaration required: nn_math_ARMv6_MTX33CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
 
@@ -201,7 +201,7 @@ void FUN_00265180(void)
   temp_v77 = g_lmapMainState;
   if (g_lmapMainState != 0) {
     if (*(int *)(g_lmapMainState + 0xa9c) != 0) {
-      temp_v5 = FUN_002c501c();
+      temp_v5 = asdCameraGetSavedRenderPairs();
       temp_v16 = 0.0f;
       temp_v61[0] = 1.0f;
       temp_v61[1] = 1.0f;

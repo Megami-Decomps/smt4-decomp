@@ -6,7 +6,7 @@ extern "C" {
 void ifTouchRegionClearAll(void *controller);
 void FUN_00233818(void *work);
 void FUN_00233670(void *work, s32 kind, u32 sprite, u32 state);
-u16 FUN_002b8584(u32 bank, u32 entry);
+u16 ifTouchRegionAddRequested(u32 bank, u32 entry);
 void buttonHelpSelectMenuPreset(Scene3a *scene);
 
 // Rebind the selected menu page, rebuild its touch regions, and choose its help flags.
@@ -62,8 +62,8 @@ void FUN_002302d8(Scene3a *scene, s32 refreshHelp)
     }
     FUN_00233670(&work->menu, 0x2B, sprite, state);
     work->menu.active = 1;
-    work->regions[0] = FUN_002b8584(0x1D, 0x576);
-    work->regions[1] = FUN_002b8584(0x1D, 0x577);
+    work->regions[0] = ifTouchRegionAddRequested(0x1D, 0x576);
+    work->regions[1] = ifTouchRegionAddRequested(0x1D, 0x577);
     work->regionCount += 2;
     if (refreshHelp)
         buttonHelpSelectMenuPreset(scene);

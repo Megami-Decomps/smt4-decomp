@@ -15,7 +15,7 @@ extern void jobStop(u32 job, s32 arg);
 extern void jobRefStopAndFree(void);
 extern void uiFreeCallback(u32 job);
 extern void eventCommandSetPendingCleanup(s32 arg);
-extern void FUN_00359370(u32 object, s32 arg);
+extern void modelRemoveFromSlotList(u32 object, s32 arg);
 extern void gfxObjectDestroy(u32 object);
 extern void cameraRegistryRemove(void *entry);
 extern void asdCameraResetScreenDefaults(s32 a, s32 b, f32 seconds);
@@ -35,7 +35,7 @@ void btlCameraDestroy(u32 job)
         camera->job = 0;
         eventCommandSetPendingCleanup(0);
         if (camera->graphics.object != 0) {
-            FUN_00359370(camera->graphics.object, 0);
+            modelRemoveFromSlotList(camera->graphics.object, 0);
             gfxObjectDestroy(camera->graphics.object);
             camera->graphics.object = 0;
             camera->graphics.aux = 0;

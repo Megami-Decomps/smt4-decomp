@@ -3,7 +3,7 @@
 #include "code/Code0013.h"
 
 extern "C" {
-PickObjectResource *FUN_00275bc8(void *, void *);
+PickObjectResource *scrScriptProcessCreate(void *, void *);
 s32 gameFlagIsSet(u32);
 void FUN_003c1060(void);
 void messageSetMode(s32);
@@ -18,9 +18,9 @@ void FUN_00468574(PickObjectResources *work)
 {
     if (work->primaryData != NULL && work->primaryInfo != NULL &&
         work->secondaryData != NULL && work->secondaryInfo != NULL) {
-        work->primary = FUN_00275bc8(work->primaryData, work->primaryInfo);
+        work->primary = scrScriptProcessCreate(work->primaryData, work->primaryInfo);
         scriptProcessSetMode(work->primary, 2);
-        work->secondary = FUN_00275bc8(work->secondaryData, work->secondaryInfo);
+        work->secondary = scrScriptProcessCreate(work->secondaryData, work->secondaryInfo);
         scriptProcessSetMode(work->secondary, 2);
         if (gameFlagIsSet(0x467)) {
             FUN_003c1060();
@@ -34,10 +34,10 @@ void FUN_00468574(PickObjectResources *work)
             work->state = (work->mode == 1 || work->mode == 2) ? 16 : 3;
             work->phase = 0;
             if (work->mode != 1 && work->mode != 2) {
-                if (FUN_0013def0(0) == 3) {
+                if (pairedAvailabilityGetState(0) == 3) {
                     FUN_003d54f8(0, 10);
                 }
-                if (FUN_0013def0(1) == 3) {
+                if (pairedAvailabilityGetState(1) == 3) {
                     FUN_003d54f8(1, 10);
                 }
             }

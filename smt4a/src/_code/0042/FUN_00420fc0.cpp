@@ -15,7 +15,7 @@ void FUN_00420fc0(ModelStatePlayer *player)
         }
         motion = FUN_001a79e8(model, name);
         if (motion != MODEL_MOTION_NONE) {
-            FUN_003fd7c0(model, motion, 2, 0.0f);
+            moriModelUnitStartMaterialAnimation(model, motion, 2, 0.0f);
         }
     }
 }

@@ -17,14 +17,14 @@ struct KeyRangeView {
 };
 
 extern "C" {
-extern InputStateHandleView* FUN_002c6a50(void);
+extern InputStateHandleView* libcLocaleGetCtypeTable(void);
 extern u32 inputGetKeyFlags(u32 keyCode);
 }
 
 // Resolve alternate-state key flags with a binary search of packed key ranges.
 extern "C" u32 FUN_0010004a(u32 keyCode)
 {
-    InputStateHandleView* handle = FUN_002c6a50();
+    InputStateHandleView* handle = libcLocaleGetCtypeTable();
     if (handle->state->unk100 == 0) {
         return inputGetKeyFlags(keyCode);
     }

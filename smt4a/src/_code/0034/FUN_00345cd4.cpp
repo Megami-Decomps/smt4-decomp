@@ -9,20 +9,20 @@ extern RenderCtxA *g_renderCtx;
 
 void FUN_00300100(s32 handler, s32 flag);
 void requestDispatch(void *request);
-void FUN_00182540(EffectNode *node);
+void effectNodeUpdatePlacedChildren(EffectNode *node);
 void uiSpriteRefreshMode(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
 void skinObjectUpdateMatrices(RenderCtxA *context);
-s32 FUN_001692ac(u32 first, u32 second);
+s32 renderCtxPackPassFlags(u32 first, u32 second);
 
 /* Draws the effect editor's menu under its own render states, then pops them again. */
 void FUN_00345cd4(void)
 {
     renderCtxPushD(g_renderCtx, 0);
-    renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
+    renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
     renderCtxPushB(g_renderCtx, g_renderCtx->stackB.entries[g_renderCtx->stackB.count]);
     if (g_effectEditor.dispatch.unk00 == 0) {
-        effectRestoreSavedRenderPairs(g_renderCtx, reinterpret_cast<void *>(FUN_00152f54()));
+        effectRestoreSavedRenderPairs(g_renderCtx, reinterpret_cast<void *>(asdCameraGetSavedRenderPairs()));
     } else {
         uiSpriteRefreshMode(g_renderCtx);
     }
@@ -31,7 +31,7 @@ void FUN_00345cd4(void)
         requestDispatch(g_effectEditor.selection.resource);
     }
     if (g_effectEditor.dispatch.node != NULL) {
-        FUN_00182540(g_effectEditor.dispatch.node);
+        effectNodeUpdatePlacedChildren(g_effectEditor.dispatch.node);
     }
     if (g_effectEditor.dispatch.cachedEvent != 0) {
         requestDispatch(reinterpret_cast<void *>(g_effectEditor.dispatch.cachedEvent));

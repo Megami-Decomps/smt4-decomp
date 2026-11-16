@@ -10,7 +10,7 @@ int scrScriptProcessStartEntry(...);
 int statsSetFlag(...);
 
 int FUN_00148bb8(...);
-int FUN_00163aa4(unsigned int *);
+int uiSpriteAdvanceAnimation(unsigned int *);
 int buttonHelpSetText(...);
 int scrRunOpcodesStub(...);
 int messageWindowIsState1(...);
@@ -35,7 +35,7 @@ extern unsigned char LAB_004999b8; /* 0x4999b8 */
 extern unsigned char LAB_004999c8; /* 0x4999c8 */
 
 /* Supplied declaration required: FUN_00148bb8. */
-/* Supplied declaration required: FUN_00163aa4. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 extern unsigned int vec2GetXInt(unsigned int *);
 extern unsigned int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: sysPlaySe. */
@@ -80,7 +80,7 @@ void _ZN9Obj53604412FUN_004995b0Ev(unsigned int *param_1)
       if (temp_v0 == 3 || temp_v0 == 4) {
         scrRunOpcodesStub(param_1[99]);
         scrRunOpcodesStub(param_1[100]);
-        FUN_00163aa4(puVar6);
+        uiSpriteAdvanceAnimation(puVar6);
         temp_v1 = vec2GetYInt(puVar6);
         temp_v2 = vec2GetXInt(puVar6);
         pointConvertToFloat(param_1 + 0xe9,temp_v2,temp_v1);
@@ -121,7 +121,7 @@ void _ZN9Obj53604412FUN_004995b0Ev(unsigned int *param_1)
     else {
       scrRunOpcodesStub(param_1[99]);
       scrRunOpcodesStub(param_1[100]);
-      FUN_00163aa4(puVar6);
+      uiSpriteAdvanceAnimation(puVar6);
       temp_v1 = vec2GetYInt(puVar6);
       temp_v2 = vec2GetXInt(puVar6);
       pointConvertToFloat(param_1 + 0xe9,temp_v2,temp_v1);

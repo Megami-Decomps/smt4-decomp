@@ -14,15 +14,15 @@ int dataTableGetCount(...);
 int dataTableGetEntries(...);
 int __aeabi_memset4(...);
 int asdLoadFileSyncDefault(...);
-int FUN_00275bc8(...);
+int scrScriptProcessCreate(...);
 int sysMemClear(...);
 int campCommonBgAcquire(...);
 int campButtonHelpAcquire(...);
 int buttonHelpSetSelectedId(...);
 int jobSetWork3C(...);
-unsigned int FUN_0039af48(unsigned int, unsigned int, int, int, float);
+unsigned int npc2dCreatePortraitJob(unsigned int, unsigned int, int, int, float);
 unsigned int npc2dCreateDemonPortrait(unsigned int, unsigned int, int, int, float);
-int FUN_003b61ec(...);
+int commonBgStopChildAndBeginTransition(...);
 int loadSlotEnsureLoaded(...);
 
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
@@ -41,7 +41,7 @@ extern int FUN_002394a8(...); /* 0x2394a8 */
 extern unsigned char FUN_00284dbc; /* 0x284dbc */
 extern unsigned int *g_npcRoom; /* 0x588124 */
 
-/* Supplied declaration required: FUN_0014afd0. */
+/* Supplied declaration required: asdTMTexTablePrepareNodeImage. */
 /* Supplied declaration required: jobSetParent. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -52,13 +52,13 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: dataTableGetEntries. */
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: asdLoadFileSyncDefault. */
-/* Supplied declaration required: FUN_00275bc8. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: buttonHelpSetSelectedId. */
 /* Supplied declaration required: jobSetWork3C. */
-/* Supplied declaration required: FUN_003b61ec. */
+/* Supplied declaration required: commonBgStopChildAndBeginTransition. */
 /* Supplied declaration required: loadSlotEnsureLoaded. */
 
 
@@ -234,11 +234,11 @@ LAB_002e6874:
   puVar8[0x12] = (unsigned int)puVar9;
   asdLoadFileSyncDefault();
   puVar8[0x13] = (unsigned int)puVar9;
-  FUN_00275bc8();
+  scrScriptProcessCreate();
   puVar8[0x14] = (unsigned int)puVar9;
   *(unsigned int *)(puVar9 + 0x108) = 2;
   temp_v9 = puVar8[0x13];
-  FUN_00275bc8(temp_v9,puVar8[0x12]);
+  scrScriptProcessCreate(temp_v9,puVar8[0x12]);
   puVar8[0x15] = temp_v9;
   *(unsigned int *)(temp_v9 + 0x108) = 2;
   temp_v9 = 0;
@@ -250,7 +250,7 @@ LAB_002e6874:
         temp_v7 = npc2dCreateDemonPortrait(temp_v7,0,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v11 + 6),0,1.0f);
       }
       else {
-        temp_v7 = FUN_0039af48(temp_v7,0,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v11 + 6),0,1.0f);
+        temp_v7 = npc2dCreatePortraitJob(temp_v7,0,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v11 + 6),0,1.0f);
       }
       puVar8[temp_v9 + 1] = temp_v7;
       jobSetParent(*puVar8,puVar8[temp_v9 + 1]);
@@ -268,9 +268,9 @@ LAB_002e6874:
     if (temp_v1 >= 0x7d) {
       if ((!(temp_v1 != 0x7e && temp_v1 != 0x7f)) || (!(temp_v1 != 0x80 && temp_v1 != 0x81)))
       goto LAB_002e6b3c;
-      FUN_0014afd0(0,*(unsigned short *)((int)puVar8 + 0x102));
+      asdTMTexTablePrepareNodeImage(0,*(unsigned short *)((int)puVar8 + 0x102));
       campCommonBgAcquire();
-      FUN_003b61ec();
+      commonBgStopChildAndBeginTransition();
       campButtonHelpAcquire();
       buttonHelpSetSelectedId(0xa2);
       return;
@@ -289,9 +289,9 @@ LAB_002e6b3c:
     *(unsigned short *)((int)puVar8 + 0x102) = temp_v5;
   }
 LAB_002e6af4:
-  FUN_0014afd0(0,*(unsigned short *)((int)puVar8 + 0x102));
+  asdTMTexTablePrepareNodeImage(0,*(unsigned short *)((int)puVar8 + 0x102));
   campCommonBgAcquire();
-  FUN_003b61ec();
+  commonBgStopChildAndBeginTransition();
   campButtonHelpAcquire();
   buttonHelpSetSelectedId(0xa2);
   return;

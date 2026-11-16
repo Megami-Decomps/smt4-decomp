@@ -8,7 +8,7 @@ extern "C" {
 
 extern BtlEntry *btlMainFindActiveEntry(void);
 extern s32 btlScriptResolveGroupArg(s32 group);
-extern void FUN_002499fc(u32 owner, s32 *first, s32 *count);
+extern void btlSideGetEntryRange(u32 owner, s32 *first, s32 *count);
 extern s32 scrGetArg(s32 index);
 
 u32 FUN_002f08d4(void)
@@ -32,7 +32,7 @@ u32 FUN_002f08d4(void)
         slot = 11;
     }
     value = scrGetArg(2);
-    FUN_002499fc(owner, &first, &count);
+    btlSideGetEntryRange(owner, &first, &count);
     for (i = first; i < first + count; i++) {
         BtlEntry *unit = &btlGetMainState()->entries[i];
 

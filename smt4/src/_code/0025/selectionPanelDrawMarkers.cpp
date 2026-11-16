@@ -45,10 +45,10 @@ void selectionPanelDrawMarkers(SelectionPanelWorkIV *work, int drawAll)
         s32 baseY = vec2GetYInt(work->position);
         TextureTableEntryIV *frame = asdTMTexTableEntryAt(0x15, work->selected + 0x5a);
         renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
-        FUN_002bf288(2, 0x15, 0x56, frame->x + baseX, frame->y + baseY, 0x29);
-        FUN_002bf288(2, 0x15, 0x57, frame->x + baseX, frame->y + baseY, 0x29);
-        FUN_002bf288(2, 0x15, 0x58, frame->x + baseX, frame->y + baseY, 0x29);
-        FUN_002bf288(2, 0x15, 0x59, frame->x + baseX, frame->y + baseY, 0x29);
+        texDrawTableEntryAtStoredOrigin(2, 0x15, 0x56, frame->x + baseX, frame->y + baseY, 0x29);
+        texDrawTableEntryAtStoredOrigin(2, 0x15, 0x57, frame->x + baseX, frame->y + baseY, 0x29);
+        texDrawTableEntryAtStoredOrigin(2, 0x15, 0x58, frame->x + baseX, frame->y + baseY, 0x29);
+        texDrawTableEntryAtStoredOrigin(2, 0x15, 0x59, frame->x + baseX, frame->y + baseY, 0x29);
         RenderCtx *context = g_titleScene;
         renderCtxSetB(context, packNibblesAndByte(6, 7, 0));
         efctSetSpeed(1.0f);
@@ -60,12 +60,12 @@ void selectionPanelDrawMarkers(SelectionPanelWorkIV *work, int drawAll)
                     TextureTableEntryIV *marker = asdTMTexTableEntryAt(0x15, slot + 0x52);
                     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
                     efctSetSpeed(1.0f);
-                    FUN_002bf288(2, 0x15, 0x1cb, marker->x + baseX, marker->y + baseY, 0x2e);
+                    texDrawTableEntryAtStoredOrigin(2, 0x15, 0x1cb, marker->x + baseX, marker->y + baseY, 0x2e);
                     efctSetSpeed(vec2GetSpeed(work->fadeObject));
-                    FUN_002bf288(2, 0x15, 0x4b, marker->x + baseX, marker->y + baseY, 0x2e);
-                    FUN_002bf288(2, 0x15, 0x4a, marker->x + baseX, marker->y + baseY, 0x2e);
-                    FUN_002bf288(2, 0x15, 0x4c, marker->x + baseX, marker->y + baseY, 0x2e);
-                    FUN_002bf288(2, 0x15, 0x4d, marker->x + baseX, marker->y + baseY, 0x2e);
+                    texDrawTableEntryAtStoredOrigin(2, 0x15, 0x4b, marker->x + baseX, marker->y + baseY, 0x2e);
+                    texDrawTableEntryAtStoredOrigin(2, 0x15, 0x4a, marker->x + baseX, marker->y + baseY, 0x2e);
+                    texDrawTableEntryAtStoredOrigin(2, 0x15, 0x4c, marker->x + baseX, marker->y + baseY, 0x2e);
+                    texDrawTableEntryAtStoredOrigin(2, 0x15, 0x4d, marker->x + baseX, marker->y + baseY, 0x2e);
                     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
                 }
                 slot = slot + 1;
@@ -74,12 +74,12 @@ void selectionPanelDrawMarkers(SelectionPanelWorkIV *work, int drawAll)
             TextureTableEntryIV *marker = asdTMTexTableEntryAt(0x15, objectPartRunUnlessLocked(work->slotObject) + 0x52);
             renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
             efctSetSpeed(1.0f);
-            FUN_002bf288(2, 0x15, 0x1cb, marker->x + baseX, marker->y + baseY, 0x2e);
+            texDrawTableEntryAtStoredOrigin(2, 0x15, 0x1cb, marker->x + baseX, marker->y + baseY, 0x2e);
             efctSetSpeed(vec2GetSpeed(work->fadeObject));
-            FUN_002bf288(2, 0x15, 0x4b, marker->x + baseX, marker->y + baseY, 0x2e);
-            FUN_002bf288(2, 0x15, 0x4a, marker->x + baseX, marker->y + baseY, 0x2e);
-            FUN_002bf288(2, 0x15, 0x4c, marker->x + baseX, marker->y + baseY, 0x2e);
-            FUN_002bf288(2, 0x15, 0x4d, marker->x + baseX, marker->y + baseY, 0x2e);
+            texDrawTableEntryAtStoredOrigin(2, 0x15, 0x4b, marker->x + baseX, marker->y + baseY, 0x2e);
+            texDrawTableEntryAtStoredOrigin(2, 0x15, 0x4a, marker->x + baseX, marker->y + baseY, 0x2e);
+            texDrawTableEntryAtStoredOrigin(2, 0x15, 0x4c, marker->x + baseX, marker->y + baseY, 0x2e);
+            texDrawTableEntryAtStoredOrigin(2, 0x15, 0x4d, marker->x + baseX, marker->y + baseY, 0x2e);
             renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
         }
         efctSetSpeed(1.0f);

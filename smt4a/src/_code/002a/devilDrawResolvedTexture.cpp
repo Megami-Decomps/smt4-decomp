@@ -6,8 +6,8 @@ DevilRecordA *devilGetRecord(u32 id);
 void *dataTable00FindById(u32 id);
 s32 gameFlagIsSet(u32 flag);
 s32 aocRunByName(u32 system, s32 category, s32 id, s32 mode);
-void FUN_00164b5c(s32 channel, s32 category, s32 variant, u32 first, u32 second, u32 third);
-void FUN_0017ffa8(s32 channel, s32 category, s32 resource, u32 first, u32 second, u32 third);
+void texDrawCompositeSprite(s32 channel, s32 category, s32 variant, u32 first, u32 second, u32 third);
+void texTableRecordCallWithParams(s32 channel, s32 category, s32 resource, u32 first, u32 second, u32 third);
 void texBindBindTableNode(u32 system, s32 id, s32 channel, s32 category, s32 resource, u32 first, u32 second, u32 third);
 void FUN_00471244(u32 system, s32 id, s32 channel, s32 resource, s32 mode, u32 first, u32 second, u32 third);
 
@@ -53,9 +53,9 @@ void devilDrawResolvedTexture(s32 id, u32 first, u32 second, u32 third, s32 reso
                 FUN_00471244(g_aocSystem, id, 2, resource, 0, first, second, third);
         } else {
             if (variant > 0)
-                FUN_00164b5c(2, category, variant, first, second, third);
+                texDrawCompositeSprite(2, category, variant, first, second, third);
             else
-                FUN_0017ffa8(2, category, resource * 1000, first, second, third);
+                texTableRecordCallWithParams(2, category, resource * 1000, first, second, third);
         }
     }
 }

@@ -43,7 +43,7 @@ s32 FUN_00293f10(s32 image, s32 arg);
 s32 statusBustUpPortraitAcquire(s32 image, s32 arg);
 s32 statusBustUpPortraitRelease(s32 image, s32 arg);
 void uiSpriteSetImageKeyframe(void *sprite, s32 keyframe, ...);
-s32 FUN_002bf818(void *sprite);
+s32 uiSpriteAdvanceAnimation(void *sprite);
 
 /* Steps the countdown panel's state machine (intro, idle, outro) and its image swap sub-machine. */
 u32 FUN_003ac480(void)
@@ -75,7 +75,7 @@ u32 FUN_003ac480(void)
             panel->rampA++;
         if (panel->rampB < 8)
             panel->rampB++;
-        if (FUN_002bf818(panel->introSprite) != 0) {
+        if (uiSpriteAdvanceAnimation(panel->introSprite) != 0) {
             panel->state = 3;
             panel->swapState = 3;
             panel->rampA = 8;
@@ -87,7 +87,7 @@ u32 FUN_003ac480(void)
             panel->state = 5;
         break;
     case 5:
-        if (FUN_002bf818(panel->outroSprite) != 0)
+        if (uiSpriteAdvanceAnimation(panel->outroSprite) != 0)
             panel->state = 6;
         break;
     }
@@ -107,7 +107,7 @@ swap:
         panel->outAnimation = 0;
         break;
     case 4:
-        if (FUN_002bf818(panel->swapSprite) != 0) {
+        if (uiSpriteAdvanceAnimation(panel->swapSprite) != 0) {
             if (panel->shown.key != panel->loading.key && panel->shown.id >= 0)
                 statusBustUpPortraitRelease(panel->shown.id, 1);
             panel->shown.key = 0;
@@ -134,7 +134,7 @@ swap:
         break;
     }
     case 2:
-        if (FUN_002bf818(panel->fadeSprite) != 0)
+        if (uiSpriteAdvanceAnimation(panel->fadeSprite) != 0)
             panel->swapState = 3;
         break;
     }

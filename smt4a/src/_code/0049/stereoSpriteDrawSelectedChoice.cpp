@@ -32,7 +32,7 @@ void stereoSpriteDrawSelectedChoice(const StereoSpriteOwner* owner, const Stereo
         s32 drawX = reference->x + x + parallax + (reference->size[0] - width) / 2;
         s32 drawY = reference->y + y;
         efctSetSpeed(speed);
-        FUN_001835b4(2, 0x33, spriteId, drawX, drawY, mode + 5);
+        texDrawTableEntryAtStoredOrigin(2, 0x33, spriteId, drawX, drawY, mode + 5);
         efctSetSpeed(1.0f);
     }
 }

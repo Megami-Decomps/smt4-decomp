@@ -33,7 +33,7 @@ extern "C" void FUN_003c2fe8(void *, s32 index)
         return;
     }
     if (DAT_00435dc0 > 0) {
-        textDrawDefaultString(reinterpret_cast<const char *>(FUN_002bd06c(static_cast<u16>(DAT_00435dc0))), 256.0f, 0.0f);
+        textDrawDefaultString(reinterpret_cast<const char *>(dataTable01FindByIdWithAoc(static_cast<u16>(DAT_00435dc0))), 256.0f, 0.0f);
         return;
     }
     DebugHelpText help;
@@ -50,7 +50,7 @@ extern "C" void FUN_003c2fe8(void *, s32 index)
     u32 spacing = entryTableCallSlot3(3);
     for (u16 i = 0; i < 6; ++i) {
         if (help.messages[i] != 0) {
-            const char *text = reinterpret_cast<const char *>(FUN_002bd06c(static_cast<u16>(help.messages[i])));
+            const char *text = reinterpret_cast<const char *>(dataTable01FindByIdWithAoc(static_cast<u16>(help.messages[i])));
             textDrawDefaultString(text, 256.0f, static_cast<f32>(spacing * line));
             ++line;
         }
@@ -58,14 +58,14 @@ extern "C" void FUN_003c2fe8(void *, s32 index)
     if (g_btlDebugState.category == 0) {
         DebugHelpLabels labels = DAT_004004a8;
         textDrawDefaultString(labels.names[dataTable02HasFlaggedItem(index)], 256.0f, 128.0f);
-        const char *leader = reinterpret_cast<const char *>(FUN_002bd06c(spriteTemplateGetPreferredDevilId(index)));
+        const char *leader = reinterpret_cast<const char *>(dataTable01FindByIdWithAoc(spriteTemplateGetPreferredDevilId(index)));
         char text[32] = {};
         textFormatBuffer(text, "\x83\x8a\x81\x5b\x83\x5f\x81\x5b\x81\x46%s", leader);
         textDrawDefaultString(text, 256.0f, static_cast<f32>(spacing) + 128.0f);
     }
     textDrawDefaultString("\x83\x51\x83\x58\x83\x67", 256.0f, 170.0f);
     if (g_btlDebugState.selection > 0) {
-        const char *guest = reinterpret_cast<const char *>(FUN_002bd06c(static_cast<u16>(g_btlDebugState.selection)));
+        const char *guest = reinterpret_cast<const char *>(dataTable01FindByIdWithAoc(static_cast<u16>(g_btlDebugState.selection)));
         textDrawDefaultString(guest, 256.0f, static_cast<f32>(spacing) + 170.0f);
     }
 }

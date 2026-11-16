@@ -38,7 +38,7 @@ struct MoriModelEffect {
 
 extern "C" {
 
-void* FUN_00178b04(u32 size, const char* file, u32 line);
+void* asdMemoryAllocTraced(u32 size, const char* file, u32 line);
 s32 asdAtbcGetEntryCount(AsdAtbcHeader* table);
 void* FUN_001ad70c(const AsdAtbcHeader* table, s32 index);
 u8* FUN_001ad5d8(u8* entry);
@@ -57,7 +57,7 @@ void FUN_0019f888(MoriModelEffect* effect)
         u32 index = cursor->first;
         if ((cursor->flags & 1) == 0) key = cursor->key;
         for (; (s32)index <= (s32)cursor->last; index++) {
-            void *memory = FUN_00178b04(sizeof(ModelEffectKey),
+            void *memory = asdMemoryAllocTraced(sizeof(ModelEffectKey),
                 "c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelEffect.cpp", 0x6f);
             ModelEffectKey *k = new (memory) ModelEffectKey();
             k->data = FUN_001abbc4(reinterpret_cast<u32*>(FUN_001ad5d8(reinterpret_cast<u8*>(cursor))));

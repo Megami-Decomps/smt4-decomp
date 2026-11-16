@@ -5,7 +5,7 @@
 extern "C" {
 extern StatusDownListIV *g_statusDown;
 void rt_memcpy(void *destination, const void *source, u32 size);
-void FUN_0029f848(ScrollSelection *selection, u32 count, u32 visible, u32 option, u32 first, u32 second);
+void gridNavigationConfigure(ScrollSelection *selection, u32 count, u32 visible, u32 option, u32 first, u32 second);
 }
 
 // Refresh the status-down list and mark entries absent from its previous eight-item snapshot.
@@ -24,7 +24,7 @@ extern "C" void FUN_002e2fb0(const u16 *ids, u32 count)
         if (work->ids[used] == 0)
             break;
     }
-    FUN_0029f848(&work->selection, used, 8, 1, 0, 1);
+    gridNavigationConfigure(&work->selection, used, 8, 1, 0, 1);
     work->active = 1;
     work->dirty = 0;
     for (s32 index = 0; index < (s32)count; ++index) {

@@ -29,7 +29,7 @@ RelativeDirectory *dataArchiveSetFindFileWithEntry(AocSystem *system, s32 entry)
 void asdTextDrawDirectoryEntry(AsdText *text, u32 font, s32 mode, s32 x, s32 y,
                   RelativeDirectory *directory, u32 index);
 u32 FUN_002b753c(AsdText *text);
-void FUN_0029f848(CampEquipmentGrid *grid, s32 count, s32 rows, s32 columns,
+void gridNavigationConfigure(CampEquipmentGrid *grid, s32 count, s32 rows, s32 columns,
                   s32 wrap, s32 updateColor);
 void flagsSetOrClearBit(u32 *flags, s32 set);
 
@@ -60,7 +60,7 @@ void statusDownSetSelectedEntryDescription(s32 entry)
         asdTextDrawDirectoryEntry(screen->text, 3, -1, 0, 3, directory, entry);
     }
     u32 count = FUN_002b753c(screen->text);
-    FUN_0029f848((CampEquipmentGrid *)screen->grid, count, 8, 1, 0, 1);
+    gridNavigationConfigure((CampEquipmentGrid *)screen->grid, count, 8, 1, 0, 1);
     flagsSetOrClearBit(&screen->gridFlags, 0);
     screen->dirty = 1;
 }

@@ -21,7 +21,7 @@ void dataTableRefAcquire(void)
         void *entries;
 
         asdTMTexTableLoadSprites(0x15);
-        FUN_0014afd0(0x15, 0);
+        asdTMTexTablePrepareNodeImage(0x15, 0);
         loadSlotEnsureLoaded(0x38);
         table = dataTableGet(0x38, 0);
         entries = dataTableGetEntries();

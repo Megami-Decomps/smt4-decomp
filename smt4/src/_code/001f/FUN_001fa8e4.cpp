@@ -21,9 +21,9 @@ int FUN_0027f958(float *, unsigned int *, int);
 int lmapSetSceneId(...);
 int mapSelectContainingRegions(void);
 int FUN_002804ec(...);
-int FUN_00281e34(void);
+int __hardfp_atan2f(void);
 int FUN_00282390(void);
-int FUN_0028250c(void);
+int mathRemPio2f(void);
 int mathDistanceBetweenPoints(void);
 int mathGetShortestAngleDelta(void);
 int gameCounterAddSaturating(...);
@@ -69,9 +69,9 @@ extern int unitGroupHasFlag(unsigned int, unsigned int);
 /* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: mapEaseSceneHeading. */
-/* Supplied declaration required: FUN_00281e34. */
+/* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: FUN_00282390. */
-/* Supplied declaration required: FUN_0028250c. */
+/* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: mathGetShortestAngleDelta. */
 /* Supplied declaration required: gameCounterAddSaturating. */
@@ -243,7 +243,7 @@ void FUN_001fa8e4(void)
     }
     else {
       *(unsigned int *)(temp_v2 + 0xd94) = 0;
-      FUN_00281e34();
+      __hardfp_atan2f();
       temp_v13 = 1.0f;
       temp_v24 = temp_v24 * 57.32484f;
       if (*(char *)(g_lmapScene + 0x10) != '\0') {
@@ -322,7 +322,7 @@ void FUN_001fa8e4(void)
       temp_v13 = temp_v13 * 0.017453292f;
       *(unsigned char *)(temp_v8 + 0x6c) = 1;
       *(int *)(temp_v8 + 0x7c) = (int)((unsigned long long)temp_v16 >> 0x20);
-      FUN_0028250c();
+      mathRemPio2f();
       temp_v8 = g_lmapScene;
       temp_v18 = (float)temp_v19;
       *(float *)(g_lmapScene + 0x28) =
@@ -374,7 +374,7 @@ void FUN_001fa8e4(void)
         partyApplyNonlethalAilmentDamage(2,5);
         *(unsigned int *)(g_lmapScene + 0x160) = temp_v6;
         FUN_002562e4(0xf,0x50);
-        temp_v6 = FUN_00291e40(0x1000186, soundActorPositionFromArray(reinterpret_cast<const f32 *>(g_lmapScene + 0x1c)));
+        temp_v6 = soundActorStartOnFreeChannel(0x1000186, soundActorPositionFromArray(reinterpret_cast<const f32 *>(g_lmapScene + 0x1c)));
         temp_v8 = g_lmapScene;
         *(unsigned int *)(g_lmapScene + 0x18c) = temp_v6;
         *(unsigned int *)(temp_v8 + 400) = 0x14;

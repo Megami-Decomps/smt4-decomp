@@ -32,9 +32,9 @@ typedef struct StockSlots {
 } StockSlots;
 
 Table8Record *dataTable8FindRecord(s32 id);
-PartyMember *FUN_003e4d68(u16 index);
-s32 FUN_004ccbf0(u16 key);
-s32 FUN_00287790(s32 member, Table8Record *record, s32 a, s32 b, s32 c);
+PartyMember *partyGetSlot(u16 index);
+s32 levelGetExpRequirement(u16 key);
+s32 itemApplyToMember(s32 member, Table8Record *record, s32 a, s32 b, s32 c);
 StockSlots *gameGetSlotTable(void);
 
 /* Whether the record `id` (ids 1-60 and 0x7A0-0x7DF) can still be used: for a member-bound record,
@@ -52,15 +52,15 @@ u32 FUN_0048144c(s32 id)
     }
     if ((record->flags & 0x20) != 0) {
         for (s32 i = 0; i < 12; i++) {
-            PartyMember *member = FUN_003e4d68((u16)i);
+            PartyMember *member = partyGetSlot((u16)i);
 
-            if (member == NULL || FUN_00187168(member) == 0) {
+            if (member == NULL || partySlotIsOccupied(member) == 0) {
                 continue;
             }
             Table8Record *again = dataTable8FindRecord(id);
 
             if (again != NULL && (again->flags & 0x20) != 0 && again->value != 0
-                && FUN_004ccbf0(member->key) != member->expected) {
+                && levelGetExpRequirement(member->key) != member->expected) {
                 return 1;
             }
         }
@@ -68,13 +68,13 @@ u32 FUN_0048144c(s32 id)
         Table8Record *item = dataTable8FindRecord(id);
 
         if (item != NULL) {
-            s32 missing = FUN_00287790(-1, item, 1, 0, 0) == 0;
+            s32 missing = itemApplyToMember(-1, item, 1, 0, 0) == 0;
             StockSlots *slots = gameGetSlotTable();
 
             for (s32 i = 0; i < 24; i++) {
                 s32 slot = slots->stock[i];
 
-                if (slot >= 0 && FUN_00287790(slot, item, 1, 0, 0) == 0) {
+                if (slot >= 0 && itemApplyToMember(slot, item, 1, 0, 0) == 0) {
                     missing = 1;
                 }
             }
@@ -93,7 +93,7 @@ u32 FUN_0048144c(s32 id)
             }
             Table8Record *item = dataTable8FindRecord(id);
 
-            if (item == NULL || FUN_00287790(slot, item, 1, 0, 0) == 0) {
+            if (item == NULL || itemApplyToMember(slot, item, 1, 0, 0) == 0) {
                 return 1;
             }
         }

@@ -6,12 +6,12 @@ extern "C" {
 
 u32 scrGetArg(u32 index);
 u32 scrGetCommandFrame(void);
-void FUN_0021bdac(u32 unit, u32 arg, u32 value, s32 kind, s32 a, s32 b);
+void messageWindowShowOrPoll(u32 unit, u32 arg, u32 value, s32 kind, s32 a, s32 b);
 
-/* File-local wrapper: FUN_0021bdac with the two trailing arguments 0. */
+/* File-local wrapper: messageWindowShowOrPoll with the two trailing arguments 0. */
 static void showMessage(u32 unit, u32 arg, u32 value, s32 kind)
 {
-    FUN_0021bdac(unit, arg, value, kind, 0, 0);
+    messageWindowShowOrPoll(unit, arg, value, kind, 0, 0);
 }
 
 void scrCommMessageShowPlainBody(u32 unit)

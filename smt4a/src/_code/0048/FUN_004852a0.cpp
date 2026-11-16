@@ -12,14 +12,14 @@ struct StateSetterSpriteWork {
 
 extern "C" {
 s32 FUN_00167458(UiAnimatedSprite* sprite, s32 reverse);
-s32 FUN_00163aa4(UiAnimatedSprite* sprite, f32 frameStep);
+s32 uiSpriteAdvanceAnimation(UiAnimatedSprite* sprite, f32 frameStep);
 s32 vec2GetXInt(UiAnimatedSprite* sprite);
 void stateSetterEnterState(StateSetterSpriteWork* work, s32 state);
 
 void FUN_004852a0(StateSetterSpriteWork* work)
 {
     FUN_00167458(&work->firstSprite, 0);
-    FUN_00163aa4(&work->secondSprite, 1.0f);
+    uiSpriteAdvanceAnimation(&work->secondSprite, 1.0f);
     work->spriteX = vec2GetXInt(&work->firstSprite);
     work->savedSpriteX = work->spriteX;
     if (uiSpriteGetCompletionState(&work->firstSprite) != 0 && uiSpriteGetCompletionState(&work->secondSprite) != 0) {

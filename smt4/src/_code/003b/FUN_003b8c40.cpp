@@ -46,7 +46,7 @@ u16 flaggedValueHolderGetTotal(const FlaggedValueHolder *value);
 s32 tableGroupFindEntryIndex(const void *script, const char *entry);
 void scrScriptProcessStartEntry(ScriptRunState *process, s32 entry);
 void *asdLoadFileSyncDefault(const char *path);
-ScriptRunState *FUN_00297060(void *script, void *messages);
+ScriptRunState *scrScriptProcessCreate(void *script, void *messages);
 void dialogOpen(s32 mode);
 void infoWinSetMessage(void *window, u32 message);
 
@@ -80,7 +80,7 @@ void FUN_003b8c40(CampResultStateView *work)
         work->timer = 0;
         work->resultScript = asdLoadFileSyncDefault("battle/Result.bf");
         work->resultMessages = asdLoadFileSyncDefault("battle/ResultMsg.mbm");
-        work->resultProcess = FUN_00297060(work->resultScript, work->resultMessages);
+        work->resultProcess = scrScriptProcessCreate(work->resultScript, work->resultMessages);
         work->resultProcess->mode = 3;
         scrScriptProcessStartEntry(work->resultProcess, tableGroupFindEntryIndex(work->resultScript, "ProcCharonRequestFirst"));
         break;

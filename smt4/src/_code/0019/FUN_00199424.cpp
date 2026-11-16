@@ -58,7 +58,7 @@ void FUN_0028e9ec(PartyMenu *menu);
 void partyCaptureEligibleSkills(PartyMenu *menu);
 s32 gameFlagIsSet(u32 flag);
 PlayerData *gameGetPlayerData(void);
-void FUN_0029f848(ListBox *box, s32 count, s32 a, s32 b, s32 c, s32 d);
+void gridNavigationConfigure(ListBox *box, s32 count, s32 a, s32 b, s32 c, s32 d);
 void FUN_0029eb5c(ListBox *box, s32 value);
 s32 flagValueIsPositive(u32 id);
 s32 FUN_0028e9a0(u32 id);
@@ -89,10 +89,10 @@ void FUN_00199424(PartyMenu *menu)
     partyCaptureEligibleSkills(menu);
     if ((btlGetMainState()->editorControl.flags & 0x40) != 0) {
         if (menu->page == 0 && captureEntryAvailable()) {
-            FUN_0029f848(&menu->pageBox, 0x191, 6, 1, 1, 1);
+            gridNavigationConfigure(&menu->pageBox, 0x191, 6, 1, 1, 1);
             FUN_0029eb5c(&menu->pageBox, g_partyMenuListState.captureBase + 2);
         } else {
-            FUN_0029f848(&menu->pageBox, 400, 6, 1, 1, 1);
+            gridNavigationConfigure(&menu->pageBox, 400, 6, 1, 1, 1);
             FUN_0029eb5c(&menu->pageBox, g_partyMenuListState.captureBase + 1);
         }
     } else {
@@ -115,13 +115,13 @@ void FUN_00199424(PartyMenu *menu)
                 }
             }
         }
-        FUN_0029f848(&menu->pageBox, total, 6, 1, 0, 1);
+        gridNavigationConfigure(&menu->pageBox, total, 6, 1, 0, 1);
     }
     if ((btlGetMainState()->editorControl.flags & 0x40) != 0) {
-        FUN_0029f848(&menu->headerBox, btlMainStateGetPartyCaptureId(btlGetMainState()), 6, 1, 1, 1);
+        gridNavigationConfigure(&menu->headerBox, btlMainStateGetPartyCaptureId(btlGetMainState()), 6, 1, 1, 1);
         FUN_0029eb5c(&menu->headerBox, g_partyMenuListState.headerBase);
     } else {
-        FUN_0029f848(&menu->headerBox, 1, 6, 1, 0, 1);
+        gridNavigationConfigure(&menu->headerBox, 1, 6, 1, 0, 1);
     }
     memClear(menu->usable, 0x78);
     s32 usableCount = 0;
@@ -141,7 +141,7 @@ void FUN_00199424(PartyMenu *menu)
             }
         }
     }
-    FUN_0029f848(&menu->skillBox, usableCount, 6, 1, 0, 1);
+    gridNavigationConfigure(&menu->skillBox, usableCount, 6, 1, 0, 1);
     FUN_002b7bca(menu->usable, usableCount, 2, FUN_0021960c);
     scrollOwnerSelectIndex(&menu->scrollOwners[menu->page], 0);
     if (FUN_0023dcb8() != 0) {

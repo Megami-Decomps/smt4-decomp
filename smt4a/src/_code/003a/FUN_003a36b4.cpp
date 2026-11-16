@@ -13,8 +13,8 @@ typedef struct {
 
 GameBlock *gameDataBlocksGetSaveData(void);
 int saveSlotFindById(u16 id);
-int FUN_00187168(int value);
-int FUN_0019e52c(u16 id);
+int partySlotIsOccupied(int value);
+int dataTable10FindValue(u16 id);
 int rt_aeabi_memclr(u16 *slots, int size);
 int FUN_003e4e4c(u16 id);
 
@@ -32,9 +32,9 @@ u32 FUN_003a36b4(void)
 
         if (id != 0) {
             int ownerId = saveSlotFindById(id);
-            int usable = FUN_0019e52c(id);
+            int usable = dataTable10FindValue(id);
 
-            if (usable != 0 && (ownerId == 0 || FUN_00187168(ownerId) == 0)) {
+            if (usable != 0 && (ownerId == 0 || partySlotIsOccupied(ownerId) == 0)) {
                 if (started == 0) {
                     FUN_003e4e4c(id);
                 }

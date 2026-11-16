@@ -16,7 +16,7 @@ struct LmapScriptRuntimeView {
 typedef char LmapScriptRuntimeOffsets[(offsetof(LmapScriptRuntimeView, code) == 0xA2C && offsetof(LmapScriptRuntimeView, state) == 0x9354) ? 1 : -1];
 extern "C" {
 extern LmapMainStateA *g_lmapMainState;
-s32 FUN_0013def0(s32 display);
+s32 pairedAvailabilityGetState(s32 display);
 u32 getByteTableAValue(void);
 void byteTableASetValue(u32 value);
 u32 byteTableAGetValue3(void);
@@ -28,14 +28,14 @@ u32 scrRunOpcodesStub(ScriptState *state);
 void messageSlotSet(s32 slot);
 void scrScriptProcessDestroy(ScriptResource *script);
 void asdMemFree(void *memory);
-s32 FUN_002e07f4(void);
+s32 pairedAvailabilityBothReady(void);
 
 u32 FUN_002dfa18(void)
 {
     LmapScriptRuntimeView *work = reinterpret_cast<LmapScriptRuntimeView *>(g_lmapMainState);
     switch (work->state) {
     case 0:
-        if ((FUN_0013def0(0) != 3 || FUN_0013def0(1) != 3) && getByteTableAValue())
+        if ((pairedAvailabilityGetState(0) != 3 || pairedAvailabilityGetState(1) != 3) && getByteTableAValue())
             byteTableASetValue(0);
         if (byteTableAGetValue3()) {
             byteTableASetValue3(0);
@@ -64,7 +64,7 @@ u32 FUN_002dfa18(void)
     case 1:
         break;
     case 2:
-        if (FUN_002e07f4())
+        if (pairedAvailabilityBothReady())
             work->state = 0;
         break;
     }

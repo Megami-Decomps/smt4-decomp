@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0014a918(void);
-int FUN_002e3140(void);
+int resultHandleFailure(void);
 int FUN_0042d328(int, unsigned char [32]);
 int FUN_00514428(unsigned char [32], unsigned int);
 int words4BClear(int);
@@ -16,7 +16,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_0014a918. */
-/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: FUN_0042d328. */
 /* Supplied declaration required: FUN_00514428. */
 extern int FUN_005144b8(unsigned char *);
@@ -46,7 +46,7 @@ int FUN_0042d0c0(int param_1,unsigned int param_2)
       }
     }
     if ((int)puVar1 < 0) {
-      FUN_002e3140();
+      resultHandleFailure();
     }
     *(unsigned char *)(param_1 + 8) = 1;
   }

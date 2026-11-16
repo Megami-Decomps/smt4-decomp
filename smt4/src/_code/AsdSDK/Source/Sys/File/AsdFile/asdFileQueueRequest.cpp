@@ -9,7 +9,7 @@ extern u32 g_asdFileMutex;             /* mutex guarding the list */
 
 s32 FUN_002c40f8(s32 *index, u32 *handles, s32 count, s32 waitAll, s64 timeout);
 s32 FUN_002c5254(s32 *out, u32 handle);
-void FUN_002c526c(void);
+void resultHandleFailure(void);
 void memClear(void *buf, u32 size);
 s32 libc_strlen(const char *s);
 char *libc_strcpy(char *dst, const char *src);
@@ -29,7 +29,7 @@ AsdFileRequest *asdFileQueueRequest(const char *path, u8 flag)
 
     handle = g_asdFileMutex;
     if (((u32)FUN_002c40f8(&index, &handle, 1, 0, -1) >> 31) != 0) {
-        FUN_002c526c();
+        resultHandleFailure();
     }
 
     request = (AsdFileRequest *)asdMemAlloc(0x100, 0x100, 0, sizeof(AsdFileRequest), 1);
@@ -79,7 +79,7 @@ AsdFileRequest *asdFileQueueRequest(const char *path, u8 flag)
 
     handle = g_asdFileMutex;
     if (((u32)FUN_002c5254(&index, handle) >> 31) != 0) {
-        FUN_002c526c();
+        resultHandleFailure();
     }
     return request;
 }

@@ -26,7 +26,7 @@ struct BannerDemon { u8 unk00[4]; u16 id; };
 extern "C" {
 u32 scrGetArg(u32);
 s32 scrGetCommandFrame();
-void FUN_0014e188(DemonBannerSprite *, s32, s32, void *, s32, f32);
+void uiSpriteStateInitFromSource(DemonBannerSprite *, s32, s32, void *, s32, f32);
 void uiSpriteSelectAnim(DemonBannerSprite *, s32);
 void uiSpriteSetKeyframe(DemonBannerSprite *, s32, s32);
 void *saveSlotFindById(u16);
@@ -46,7 +46,7 @@ u32 scrShowDemonNotification()
             DemonBanner *current = (DemonBanner *)g_messageMain.panel;
             current->active = 1;
             current->phase = 1;
-            FUN_0014e188(&current->background, 20, 3001, current->owner, 11, 1.0f);
+            uiSpriteStateInitFromSource(&current->background, 20, 3001, current->owner, 11, 1.0f);
             uiSpriteSelectAnim(&current->background, 0);
             for (s32 i = 0; i < 15; ++i)
                 current->entries.clearWords[i] = 0;
@@ -66,7 +66,7 @@ u32 scrShowDemonNotification()
         banner->queued[banner->index] = 1;
     }
     if (banner->timer == 20) {
-        FUN_0014e188(&banner->sprites[banner->index], 20, 3090, banner->owner, 11, 1.0f);
+        uiSpriteStateInitFromSource(&banner->sprites[banner->index], 20, 3090, banner->owner, 11, 1.0f);
         uiSpriteSetKeyframe(&banner->sprites[banner->index], 10, 0);
         banner->entries.queue.status[banner->index] = 1;
         sysPlayVoice(0x100016e);

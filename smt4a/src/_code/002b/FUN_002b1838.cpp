@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00163aa4(...);
+int uiSpriteAdvanceAnimation(...);
 int uiSpriteSelectAnim(...);
 int pairSetFirstResetSecond(...);
 int SBORROW4(int, int);
@@ -18,7 +18,7 @@ typedef struct {
 } param_1_stack;
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_00163aa4. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: pairSetFirstResetSecond. */
 extern int FUN_00291e14(void);
@@ -58,7 +58,7 @@ void FUN_002b1838(int param_1)
   do {
     temp_v1 = param_1 + temp_v9 * 2;
     if ((-1 < *(short *)(temp_v1 + 0x2450)) && (*(short *)(temp_v1 + 0x2464) == 1)) {
-      FUN_00163aa4(param_1 + *(short *)(temp_v1 + 0x2450) * 0x8c + 0x20);
+      uiSpriteAdvanceAnimation(param_1 + *(short *)(temp_v1 + 0x2450) * 0x8c + 0x20);
       temp_v2 = param_1 + temp_v9 * 4;
       temp_v13 = *(float *)(temp_v2 + 0x2478);
       if (*piVar14 != 0) {
@@ -86,15 +86,15 @@ void FUN_002b1838(int param_1)
     if (0 < *(short *)(param_1 + 0x2448)) {
       do {
         temp_v1 = param_1 + temp_v9 * 0x8c;
-        FUN_00163aa4(temp_v1 + 0x20);
-        FUN_00163aa4(temp_v1 + 0x598);
+        uiSpriteAdvanceAnimation(temp_v1 + 0x20);
+        uiSpriteAdvanceAnimation(temp_v1 + 0x598);
         temp_v9 = temp_v9 + 1;
       } while (temp_v9 < *(short *)(param_1 + 0x2448));
     }
     if (0 < *(short *)(param_1 + 0x244a)) {
       temp_v9 = 0;
       do {
-        FUN_00163aa4(param_1 + ((*(short *)(param_1 + 0x2448) - temp_v9) - 1) * 0x8c + 0xb10);
+        uiSpriteAdvanceAnimation(param_1 + ((*(short *)(param_1 + 0x2448) - temp_v9) - 1) * 0x8c + 0xb10);
         temp_v9 = temp_v9 + 1;
       } while (temp_v9 < *(short *)(param_1 + 0x244a));
       temp_v13 = *(float *)(param_1 + 0x2444) + 0.1f;
@@ -110,21 +110,21 @@ void FUN_002b1838(int param_1)
       do {
         if (temp_v1 * 2 <= *piVar12) {
           temp_v2 = param_1 + temp_v1 * 0x8c;
-          FUN_00163aa4(temp_v2 + 0x20);
+          uiSpriteAdvanceAnimation(temp_v2 + 0x20);
           if (temp_v1 < 4) {
             if (temp_v1 == 0) {
-              FUN_00163aa4(temp_v9);
+              uiSpriteAdvanceAnimation(temp_v9);
             }
-            FUN_00163aa4(temp_v2 + 0x2208);
+            uiSpriteAdvanceAnimation(temp_v2 + 0x2208);
           }
           if (((temp_v1 * 2 + 2 <= *piVar12) &&
-              (FUN_00163aa4(temp_v2 + 0xb10), *(short *)(param_1 + 0x2448) - 1 <= temp_v1)) &&
+              (uiSpriteAdvanceAnimation(temp_v2 + 0xb10), *(short *)(param_1 + 0x2448) - 1 <= temp_v1)) &&
              (*(char *)(temp_v2 + 0xb9a) != '\0')) {
             temp_v10 = 1;
           }
           if (temp_v1 * 2 + 4 <= *piVar12) {
-            FUN_00163aa4();
-            FUN_00163aa4();
+            uiSpriteAdvanceAnimation();
+            uiSpriteAdvanceAnimation();
             if ((*(char *)(temp_v2 + 0x1112) != '\0') && (*(int *)(temp_v2 + 0x59c) == 6)) {
               uiSpriteSelectAnim(temp_v2 + 0x598,0);
             }
@@ -188,7 +188,7 @@ void FUN_002b1838(int param_1)
           temp_v7 = (temp_v1 - *(short *)(param_1 + 0x244a)) - temp_v2;
           temp_v0 = (short)temp_v7 + 0x31;
           *(short *)(param_1 + (temp_v7 - 1) * 2 + 0x2450) = temp_v0;
-          FUN_00163aa4(param_1 + temp_v0 * 0x8c + 0x20);
+          uiSpriteAdvanceAnimation(param_1 + temp_v0 * 0x8c + 0x20);
           temp_v13 = (float)temp_v16;
           temp_v2 = temp_v2 + 1;
         } while (temp_v2 < *(short *)(param_1 + 0x244e));
@@ -268,13 +268,13 @@ void FUN_002b1838(int param_1)
       if (temp_v1 < (int)*(short *)(param_1 + 0x244c) + (int)*(short *)(param_1 + 0x2448)) {
         do {
           temp_v2 = param_1 + temp_v1 * 0x8c;
-          FUN_00163aa4(temp_v2 + 0x20);
-          FUN_00163aa4(temp_v2 + 0x598);
+          uiSpriteAdvanceAnimation(temp_v2 + 0x20);
+          uiSpriteAdvanceAnimation(temp_v2 + 0x598);
           if (temp_v1 < 4) {
             if (temp_v1 == 0) {
-              FUN_00163aa4(temp_v9);
+              uiSpriteAdvanceAnimation(temp_v9);
             }
-            FUN_00163aa4(temp_v2 + 0x2208);
+            uiSpriteAdvanceAnimation(temp_v2 + 0x2208);
           }
           temp_v1 = temp_v1 + 1;
         } while (temp_v1 < (int)*(short *)(param_1 + 0x244c) + (int)*(short *)(param_1 + 0x2448));
@@ -288,16 +288,16 @@ void FUN_002b1838(int param_1)
       temp_v1 = 0;
       if (0 < *(short *)(param_1 + 0x2448)) {
         do {
-          FUN_00163aa4(temp_v9);
+          uiSpriteAdvanceAnimation(temp_v9);
           do {
-            FUN_00163aa4(param_1 + temp_v1 * 0x8c + 0x2208);
+            uiSpriteAdvanceAnimation(param_1 + temp_v1 * 0x8c + 0x2208);
             do {
               temp_v7 = param_1 + temp_v1 * 0x8c;
-              temp_v2 = FUN_00163aa4(temp_v7 + 0x20);
+              temp_v2 = uiSpriteAdvanceAnimation(temp_v7 + 0x20);
               if (temp_v2 == 0) {
-                FUN_00163aa4(temp_v7 + 0x598);
-                FUN_00163aa4(temp_v7 + 0xb10);
-                FUN_00163aa4(temp_v7 + 0x1088);
+                uiSpriteAdvanceAnimation(temp_v7 + 0x598);
+                uiSpriteAdvanceAnimation(temp_v7 + 0xb10);
+                uiSpriteAdvanceAnimation(temp_v7 + 0x1088);
                 *(unsigned short *)(param_1 + temp_v1 * 2 + 0x24a0) = 0xffff;
               }
               temp_v1 = temp_v1 + 1;
@@ -374,12 +374,12 @@ LAB_002b2058:
           temp_v2 = (*(short *)(param_1 + 0x2448) - temp_v1) - 1;
           if (temp_v2 < 4) {
             if (temp_v2 == 0) {
-              FUN_00163aa4(temp_v9);
+              uiSpriteAdvanceAnimation(temp_v9);
             }
-            FUN_00163aa4(param_1 + temp_v2 * 0x8c + 0x2208);
+            uiSpriteAdvanceAnimation(param_1 + temp_v2 * 0x8c + 0x2208);
           }
-          FUN_00163aa4((param_1 + (*(short *)(param_1 + 0x2448) - temp_v1) * 0x8c) - 0x6c);
-          FUN_00163aa4(param_1 + (*(short *)(param_1 + 0x2448) - temp_v1) * 0x8c + 0x50c);
+          uiSpriteAdvanceAnimation((param_1 + (*(short *)(param_1 + 0x2448) - temp_v1) * 0x8c) - 0x6c);
+          uiSpriteAdvanceAnimation(param_1 + (*(short *)(param_1 + 0x2448) - temp_v1) * 0x8c + 0x50c);
           if (*(short *)(param_1 + 0x2448) - 1 <= temp_v1) {
             temp_v10 = 1;
           }
@@ -400,13 +400,13 @@ LAB_002b2058:
     *piVar12 = 0;
     break;
   case 5:
-    temp_v9 = FUN_00163aa4(param_1 + 0x20f0);
+    temp_v9 = uiSpriteAdvanceAnimation(param_1 + 0x20f0);
     if (temp_v9 == 0) break;
     *piVar15 = 1;
     *piVar12 = 0;
     break;
   case 6:
-    temp_v9 = FUN_00163aa4(param_1 + 0x20f0);
+    temp_v9 = uiSpriteAdvanceAnimation(param_1 + 0x20f0);
     if (temp_v9 != 0) {
       *piVar15 = 0;
       *piVar12 = 0;
@@ -430,7 +430,7 @@ LAB_002b2058:
     if (temp_v0 < 0) {
       temp_v1 = param_1 + temp_v9 * 0x8c;
       if (*(char *)(temp_v1 + 0x168a) == '\0') {
-        FUN_00163aa4(temp_v1 + 0x1600);
+        uiSpriteAdvanceAnimation(temp_v1 + 0x1600);
       }
     }
     else {
@@ -477,7 +477,7 @@ LAB_002b2058:
           }
           pairSetFirstResetSecond(temp_v2,temp_v5);
         }
-        FUN_00163aa4(param_1 + temp_v9 * 0x8c + 0x1600);
+        uiSpriteAdvanceAnimation(param_1 + temp_v9 * 0x8c + 0x1600);
       }
       temp_v0 = *(short *)(temp_v1 + 0x24a0) + 1;
       *(short *)(temp_v1 + 0x24a0) = temp_v0;

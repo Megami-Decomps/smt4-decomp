@@ -5,7 +5,7 @@
 #include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
-AocPackageFile *FUN_002a6e7c(AocSystem *system, s32 type, s32 id, char *path);
+AocPackageFile *packageFindFileByTypeAndId(AocSystem *system, s32 type, s32 id, char *path);
 TexTableNamedEntry *asdTMTexTableCallFileB(u32 table, u32 id);
 u32 optionalWorkGetValue();
 char *libc_strcat(char *destination, const char *source);
@@ -21,11 +21,11 @@ TexTableNamedEntry *FUN_002a5ee4(AocSystem *system, u32 table, u32 id, u32 mode)
     char texturePath[128];
     char packagePath[128];
     char requestPath[128];
-    s32 type = FUN_002a6f48(table);
+    s32 type = packageKindToRecordKind(table);
     if (type == -1)
         return NULL;
     memClear(packagePath, sizeof(packagePath));
-    AocPackageFile *file = FUN_002a6e7c(system, type, id, packagePath);
+    AocPackageFile *file = packageFindFileByTypeAndId(system, type, id, packagePath);
     if (file == NULL)
         return NULL;
     file->texture.completion = 0;

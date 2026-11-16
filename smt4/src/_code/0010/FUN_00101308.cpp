@@ -75,7 +75,7 @@ int gameDataRemoveHomeButtonHold(...);
 int asdProcessCreateSimple(...);
 int asdSequenceRequest(...);
 int titleConfigApplyAudio(...);
-int FUN_002c58c8(...);
+int asdTMTexTablePrepareNodeImage(...);
 int asdTMTexTableLoadTmx(...);
 
 int FUN_0010250c(...);
@@ -384,14 +384,14 @@ extern unsigned long long jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: titleConfigApplyAudio. */
-/* Supplied declaration required: FUN_002c58c8. */
+/* Supplied declaration required: asdTMTexTablePrepareNodeImage. */
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: asdGxCommandListCreate. */
 extern int FUN_002c5be8(void);
 extern unsigned int asdModelGetStatic38(void);
 /* Supplied declaration required: asdLoadFileSync. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
-extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
+extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int nn_applet_CTR_detail_CloseApplication(unsigned char *, unsigned int, unsigned int);
 extern void nn_cfg_CTR_Initialize(void);
@@ -498,7 +498,7 @@ void FUN_00101308(void)
   temp_v3 = packNibblesAndByte(6,7,0);
   *(unsigned int *)(temp_v2 + 0x1384) = temp_v3;
   temp_v2 = g_titleScene;
-  temp_v3 = FUN_002c5d80(5,1);
+  temp_v3 = renderCtxPackPassFlags(5,1);
   *(unsigned int *)(temp_v2 + 0x1378) = temp_v3;
   FUN_001042dc();
   asdGxPresetVectorSet(0);
@@ -586,7 +586,7 @@ void FUN_00101308(void)
   FUN_00103f74(2);
   asdGxLoadMaterialShader();
   asdTMTexTableLoadTmx(0x2c,0);
-  FUN_002c58c8(0x2c,0);
+  asdTMTexTablePrepareNodeImage(0x2c,0);
   gameDataAllocBlocks();
   FUN_00104e44(0);
   FUN_00105e50(1);

@@ -1,4 +1,4 @@
-/* Staff roll: once FUN_002e07f4 reports ready, starts the next fade and moves to state 2. */
+/* Staff roll: once pairedAvailabilityBothReady reports ready, starts the next fade and moves to state 2. */
 #include "common.h"
 #include "StaffRoll/StaffRollMain.h"
 
@@ -8,11 +8,11 @@ int soundChannelRequestIfEnabled(int a, int b, int c);
 
 extern StaffRollWork *g_staffRoll;
 
-extern int FUN_002e07f4(void);
+extern int pairedAvailabilityBothReady(void);
 
 void staffRollEnterState2(void)
 {
-    if (FUN_002e07f4() != 0) {
+    if (pairedAvailabilityBothReady() != 0) {
         soundChannelRequestIfEnabled(0x1000000, 0, 0x3c);
         StaffRollWork *work = g_staffRoll;
 

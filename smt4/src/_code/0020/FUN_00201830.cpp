@@ -23,7 +23,7 @@ extern RenderCtx *g_titleScene;
 DebugListWork *jobGetWork(void);
 void renderCtxResetColorScale(RenderCtx *context);
 void renderCtxSelectStereoLayout(RenderCtx *context);
-s32 FUN_002c5d80(u32 mode, u32 option);
+s32 renderCtxPackPassFlags(u32 mode, u32 option);
 void FUN_0032accc(void);
 void FUN_002b76d0(const EffectColor *first, const EffectColor *second, const EffectColor *third,
                   const EffectColor *fourth, f32 x, f32 y, f32 width, f32 height, f32 depth);
@@ -48,7 +48,7 @@ u32 FUN_00201830(void)
             color.blue = 1.0f;
             color.alpha = 1.0f;
             renderCtxSelectStereoLayout(g_titleScene);
-            renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
+            renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
             color.red = 1.0f;
             color.green = 1.0f;
             color.blue = 1.0f;

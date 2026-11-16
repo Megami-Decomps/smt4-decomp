@@ -8,7 +8,7 @@ extern "C" {
 int FUN_00240d88(...);
 int fadeObjectResetIfActive(int);
 int vec2GetXInt(...);
-int FUN_002bf380(int, int, int, unsigned int, unsigned int, int);
+int texDrawCompositeSprite(int, int, int, unsigned int, unsigned int, int);
 int efctSetSpeed(void);
 int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
@@ -31,12 +31,12 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: fadeObjectResetIfActive. */
 extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: vec2GetXInt. */
-/* Supplied declaration required: FUN_002bf380. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: uiDrawRotatingLoadingGrid. */
 
@@ -63,7 +63,7 @@ unsigned int FUN_00330ac8(void)
   }
   renderCtxSelectStereoLayout(g_titleScene);
   temp_v7 = g_titleScene;
-  temp_v2 = FUN_002c5d80(1,0);
+  temp_v2 = renderCtxPackPassFlags(1,0);
   piVar8 = (int *)(temp_v7 + 0x124c);
   temp_v5 = *piVar8;
   temp_v6 = piVar8[temp_v5 + 2];
@@ -101,7 +101,7 @@ unsigned int FUN_00330ac8(void)
         (**(romwright_code **)(temp_v7 + 0x12c8))();
         *(unsigned char *)(temp_v7 + 0x12c4) = 0;
       }
-      FUN_002bf288(2,0x24,0x204,0,0,0x5b);
+      texDrawTableEntryAtStoredOrigin(2,0x24,0x204,0,0,0x5b);
       temp_v7 = g_titleScene;
       temp_v5 = packNibblesAndByte(6,7,0);
       piVar8 = (int *)(temp_v7 + 0x12ac);
@@ -112,14 +112,14 @@ unsigned int FUN_00330ac8(void)
         *(unsigned char *)(temp_v7 + 0x12c4) = 0;
       }
       efctSetSpeed();
-      FUN_002bf288(2,0x24,0x205,0,0,0x60);
+      texDrawTableEntryAtStoredOrigin(2,0x24,0x205,0,0,0x60);
       efctSetSpeed();
     }
   }
   temp_v3 = vec2GetXInt(temp_v1 + 0x2c8);
   temp_v4 = vec2GetYInt(temp_v1 + 0x2c8);
-  FUN_002bf380(2,0x24,1,temp_v3,temp_v4,0x65);
-  FUN_002bf288(2,0x24,0x206,temp_v3,temp_v4,0x65);
+  texDrawCompositeSprite(2,0x24,1,temp_v3,temp_v4,0x65);
+  texDrawTableEntryAtStoredOrigin(2,0x24,0x206,temp_v3,temp_v4,0x65);
   temp_v0 = *(short *)(temp_v1 + 0x1e);
   pcVar10 = (char *)0x0;
   if (temp_v0 == 2) {
@@ -158,7 +158,7 @@ unsigned int FUN_00330ac8(void)
   if (*(int *)(temp_v1 + 4) < 3) {
     temp_v3 = vec2GetXInt();
     temp_v4 = vec2GetYInt(temp_v1 + 0x4f8);
-    FUN_002bf288(2,0x24,0x21d,temp_v3,temp_v4,0x79);
+    texDrawTableEntryAtStoredOrigin(2,0x24,0x21d,temp_v3,temp_v4,0x79);
   }
   else if (*(int *)(temp_v1 + 4) >= 4) {
     temp_v3 = vec2GetXInt();
@@ -166,20 +166,20 @@ unsigned int FUN_00330ac8(void)
     if (*(char *)(temp_v1 + 0x20) != '\0') {
       temp_v7 = *(int *)(temp_v1 + 8);
       if (temp_v7 % 0x14 >= 11) {
-        FUN_002bf288(2,0x24,0x21f,0,0,0x79);
+        texDrawTableEntryAtStoredOrigin(2,0x24,0x21f,0,0,0x79);
       }
     }
     else {
-      FUN_002bf288(2,0x24,0x21e,temp_v3,temp_v4,0x79);
+      texDrawTableEntryAtStoredOrigin(2,0x24,0x21e,temp_v3,temp_v4,0x79);
     }
   }
   else if ((*(char *)(temp_v1 + 0x20) != '\0') && (temp_v7 = *(int *)(temp_v1 + 8), temp_v7 >= temp_v2)) {
     if (temp_v7 % 0x14 >= 11) {
-      FUN_002bf288(2,0x24,0x21f,0,0,0x79);
+      texDrawTableEntryAtStoredOrigin(2,0x24,0x21f,0,0,0x79);
     }
   }
   else {
-    FUN_002bf288(2,0x24,0x21d,0,0,0x79);
+    texDrawTableEntryAtStoredOrigin(2,0x24,0x21d,0,0,0x79);
     uiDrawRotatingLoadingGrid(0x220,*(unsigned int *)(temp_v1 + 0x78));
   }
   temp_v1 = g_titleScene;

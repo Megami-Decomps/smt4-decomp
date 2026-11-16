@@ -3,7 +3,7 @@
 
 extern "C" {
 
-/* The motion slot FUN_0022e0fc plays into; it is empty while `id` is 0. */
+/* The motion slot entryCollectionSortByMode plays into; it is empty while `id` is 0. */
 typedef struct MotionSlot {
     /* 0x00 */ u16 id;
 } MotionSlot;
@@ -25,7 +25,7 @@ typedef struct MotionModeState {
     /* 0x0C */ MotionMode mode;
 } MotionModeState;
 
-void FUN_0022e0fc(MotionSlot *slot, s8 motion);
+void entryCollectionSortByMode(MotionSlot *slot, s8 motion);
 
 /* Plays the motion for the current mode (resetting an unknown mode to 1); the next motion id is
  * its alternate when `allowAlternate` is set and the state asks for it. */
@@ -62,7 +62,7 @@ void motionPlayForMode(MotionOwner *owner, s32 allowAlternate)
     if (allowAlternate && mode->alternate) {
         motion++;
     }
-    FUN_0022e0fc(&owner->motion, motion);
+    entryCollectionSortByMode(&owner->motion, motion);
 }
 
 } /* extern "C" */

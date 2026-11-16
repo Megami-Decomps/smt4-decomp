@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016e800(void);
+int sysReportCheckFailure(void);
 int nn_os_CriticalSection_Initialize(int);
 int nn_fs_GetPriority(void);
 
@@ -30,7 +30,7 @@ typedef struct {
     unsigned int sp88; /* 0x88: local_88 */
 } param_7_stack;
 
-/* Supplied declaration required: FUN_0016e800. */
+/* Supplied declaration required: sysReportCheckFailure. */
 /* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 extern void nn_fnd_UnitHeapBase_Initialize(unsigned int, unsigned int, unsigned int, unsigned int, int, unsigned int);
 /* Supplied declaration required: nn_fs_GetPriority. */
@@ -174,7 +174,7 @@ int FUN_0019fc70(int param_1,unsigned int *param_2,int param_3,int param_4,unsig
   temp_v1 = param_1 + 4;
   nn_fs_GetPriority();
   if (temp_v1 < 0) {
-    FUN_0016e800();
+    sysReportCheckFailure();
   }
   temp_v3 = *(int *)(param_1 + 4);
   temp_v1 = temp_v3;

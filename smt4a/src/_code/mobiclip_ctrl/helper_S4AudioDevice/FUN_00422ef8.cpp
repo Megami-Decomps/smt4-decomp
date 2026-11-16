@@ -113,7 +113,7 @@ extern "C" void FUN_00422ef8(void)
         s32 result = svcWaitSynchronization1(handle, -1);
         bool failed = nnResultIsFailure(result);
         if (failed) {
-            FUN_002e3140(result, failed);
+            resultHandleFailure(result, failed);
         }
         g_threadRecordA.joined = 1;
         nn_os_Thread_FinalizeImpl(&g_threadRecordA.handle);

@@ -7,9 +7,9 @@ struct DataEntry385b84 {
 
 extern "C" {
 
-s32 FUN_002ac12c(DataArchive *archive);
-DataArchiveRecord *FUN_002ac0f8(DataArchive *archive);
-u32 FUN_002ac0c4(DataArchive *archive);
+s32 packageEntryIsLoaded(DataArchive *archive);
+DataArchiveRecord *packageEntryGetDirectory(DataArchive *archive);
+u32 packageEntryGetFileCount(DataArchive *archive);
 void *dataTableFileGetTable(u32 fileId, s32 type);
 s32 dataTableGetCount(void *table);
 DataEntry385b84 *dataTableGetEntries(void *table);
@@ -20,9 +20,9 @@ DataEntry385b84 *FUN_00385b84(DataArchiveSet *set, s32 index)
     s32 total = 0;
     for (s32 i = 0; i < set->archiveCount; i++) {
         DataArchive *archive = &set->archives[i];
-        if (FUN_002ac12c(archive) != 0) {
-            DataArchiveRecord *records = FUN_002ac0f8(archive);
-            u32 count = FUN_002ac0c4(archive);
+        if (packageEntryIsLoaded(archive) != 0) {
+            DataArchiveRecord *records = packageEntryGetDirectory(archive);
+            u32 count = packageEntryGetFileCount(archive);
             for (u32 j = 0; j < count; j++) {
                 if (records[j].kind == '%') {
                     void *table = dataTableFileGetTable(archive->files[j].fileId, 4);

@@ -6,7 +6,7 @@
 extern "C" {
 s32 loadSlotIsLoaded(u32 slot);
 void FUN_00416d30(ResultInputWork *work);
-u32 FUN_00275bc8(const void *script, const void *messages);
+u32 scrScriptProcessCreate(const void *script, const void *messages);
 u32 FUN_003df4a4(u32 skill);
 s32 playerStockHasFreeSlot(void);
 s32 countUnlockedSlots(void);
@@ -46,13 +46,13 @@ extern "C" u32 FUN_00416e60(ResultInputWork *work)
             (work->resources.levelUpScript == NULL || work->resources.demonMessages == NULL)) {
             return 0;
         }
-        work->resources.resultHandle = FUN_00275bc8(work->resources.resultScript, work->resources.resultMessages);
+        work->resources.resultHandle = scrScriptProcessCreate(work->resources.resultScript, work->resources.resultMessages);
         if (work->preparation.player != 0) {
             work->resources.messageMode = 13;
-            work->resources.selectedHandle = FUN_00275bc8(work->resources.resultScript, work->resources.resultMessages);
+            work->resources.selectedHandle = scrScriptProcessCreate(work->resources.resultScript, work->resources.resultMessages);
         } else {
             work->resources.messageMode = 18;
-            work->resources.selectedHandle = FUN_00275bc8(work->resources.levelUpScript, work->resources.demonMessages);
+            work->resources.selectedHandle = scrScriptProcessCreate(work->resources.levelUpScript, work->resources.demonMessages);
         }
         // Fall through to select the next result-screen state.
     case 2:

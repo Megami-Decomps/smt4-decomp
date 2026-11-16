@@ -19,11 +19,11 @@ extern "C" {
 
 extern BtlActionGlobals g_btlAction;
 
-s32 FUN_004e9ae8(BtlPickContext *context, s32 *candidates, s32 count, s32 mode);
+s32 btlAiFilterCandidatesByExclusionChance(BtlPickContext *context, s32 *candidates, s32 count, s32 mode);
 BattleActionUnit *btlUnitGet(BtlPickContext *context);
 
 /* Marks the entry with the highest HP among those in the mask as selected; with `shuffle` the
- * running-maximum candidates are passed through FUN_004e9ae8 first. */
+ * running-maximum candidates are passed through btlAiFilterCandidatesByExclusionChance first. */
 void FUN_004e6ed8(BtlPickContext *context, s32 shuffle)
 {
     s32 candidates[BTL_ENTRY_COUNT_A];
@@ -38,7 +38,7 @@ void FUN_004e6ed8(BtlPickContext *context, s32 shuffle)
         }
     }
     if (shuffle) {
-        count = FUN_004e9ae8(context, candidates, count, 1);
+        count = btlAiFilterCandidatesByExclusionChance(context, candidates, count, 1);
     }
     btlUnitGet(context)->selectedUnits[candidates[count - 1]] = 1;
 }

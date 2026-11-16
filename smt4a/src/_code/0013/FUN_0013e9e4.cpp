@@ -31,7 +31,7 @@ bool FUN_0013e9e4(u32 job)
         return false;
     }
     if (stateValuesGetBySelector(0) == 0 && work->active != 0) {
-        FUN_00157558(g_renderCtx);
+        renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         FUN_0014b01c(0);
     }
     return false;

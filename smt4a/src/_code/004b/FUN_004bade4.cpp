@@ -32,7 +32,7 @@ extern void efctSetSpeed(f32);
 extern f32 vec2GetSpeed(const void *animation);
 extern f32 jobGetScalarValue(void);
 extern SpriteInfo *asdTMTexTableEntryAt(u32, u32);
-extern void FUN_00164b5c(s32, s32, u32, s32, s32, s32);
+extern void texDrawCompositeSprite(s32, s32, u32, s32, s32, s32);
 extern void buttonHelpSetText(s32, u32);
 extern s32 rangeGetMinimumLimit(SlotMenu *);
 extern s32 FUN_0031d174(SlotMenu *);
@@ -47,18 +47,18 @@ void FUN_004bade4(SlotMenu *menu)
         void *pos = menu->position;
         s32 x = vec2GetXInt(pos);
         s32 y = vec2GetYInt(pos);
-        FUN_001835b4(2, 0x1f, 0x1f, x, y, 0x1f);
-        FUN_001835b4(2, 0x1f, 0x20, x, y, 0x1f);
+        texDrawTableEntryAtStoredOrigin(2, 0x1f, 0x1f, x, y, 0x1f);
+        texDrawTableEntryAtStoredOrigin(2, 0x1f, 0x20, x, y, 0x1f);
         SpriteInfo *info = asdTMTexTableEntryAt(0x1f, 0x21);
         s32 dx = info->x;
         s32 dy = info->y;
         s32 sx = vec2GetXInt(pos) + dx;
         s32 sy = dy + vec2GetYInt(pos);
         efctSetSpeed(1.0f);
-        FUN_00164b5c(2, 0x1f, menu->spriteBase, sx, sy, 0x1f);
+        texDrawCompositeSprite(2, 0x1f, menu->spriteBase, sx, sy, 0x1f);
         if (menu->spriteAccent != -1) {
             efctSetSpeed(vec2GetSpeed(&menu->accent));
-            FUN_00164b5c(2, 0x1f, menu->spriteAccent, sx, sy, 0x20);
+            texDrawCompositeSprite(2, 0x1f, menu->spriteAccent, sx, sy, 0x20);
         }
         s32 first = FUN_002a482c(menu);
         s32 count = rangeGetMinimumLimit(menu);

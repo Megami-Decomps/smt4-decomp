@@ -12,7 +12,7 @@ static __inline s32 threadWait(NnOsThread *thread, s64 timeout)
     s32 result = svcWaitSynchronization1(thread->handle, timeout);
     bool failed = nnResultIsFailure(result);
     if (failed) {
-        FUN_002e3140(result, failed);
+        resultHandleFailure(result, failed);
     }
     return result;
 }

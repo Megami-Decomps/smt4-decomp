@@ -8,12 +8,12 @@ extern "C" {
 int uiSetFloatPair(unsigned char *);
 int FUN_0014f0dc(unsigned char *, int, int, int);
 int FUN_001523b8(unsigned char *, int);
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
+int libm_cosf(void);
+int libm_sinf(void);
 int residentApplyFallbackValues(void);
 int FUN_003250ac(unsigned char [4]);
 int FUN_003881f8(int, float *, float *);
-int FUN_0050d8e4(void);
+int __hardfp_atan2f(void);
 
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -43,13 +43,13 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0014f0dc. */
 /* Supplied declaration required: FUN_001523b8. */
 extern int gameFlagsGetBlock(void);
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: residentApplyFallbackValues. */
 /* Supplied declaration required: FUN_003250ac. */
 /* Supplied declaration required: FUN_0036b824. */
 /* Supplied declaration required: FUN_003881f8. */
-/* Supplied declaration required: FUN_0050d8e4. */
+/* Supplied declaration required: __hardfp_atan2f. */
 
 
 void FUN_0036a434(int param_1)
@@ -101,10 +101,10 @@ void FUN_0036a434(int param_1)
   *(float *)(param_1 + 0x74) = temp_v11;
   temp_v2 = temp_v2 + (unsigned int)temp_v0;
   temp_v6 = *(float *)(param_1 + 0x50) * 0.017453292f;
-  FUN_001bc124();
+  libm_sinf();
   *(float *)(param_1 + 0x60) = (float)temp_v12 - temp_v6 * *(float *)(g_lmapView + temp_v2 * 4 + 0x18c);
   temp_v10 = *(float *)(param_1 + 0x50) * temp_v10;
-  FUN_001bbf0c();
+  libm_cosf();
   temp_v1 = g_lmapView;
   temp_v2 = g_lmapView + temp_v2 * 4;
   *(float *)(param_1 + 0x68) = temp_v11 - temp_v10 * *(float *)(temp_v2 + 0x18c);
@@ -255,7 +255,7 @@ void FUN_0036a434(int param_1)
   *(unsigned int *)(temp_v1 + 0x18) = *(unsigned int *)(param_1 + 0x50);
   FUN_003250ac(temp_v16);
   *(unsigned int *)(g_lmapView + 0x308) = temp_v17;
-  FUN_0050d8e4();
+  __hardfp_atan2f();
   residentApplyFallbackValues();
   return;
 }

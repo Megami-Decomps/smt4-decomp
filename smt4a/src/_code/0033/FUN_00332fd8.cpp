@@ -30,8 +30,8 @@ extern "C" {
 s32 FUN_002393cc(s32 scene);
 f32 mathPositionHeadingDegrees(MapPoint from, MapPoint to);
 f32 calcHeadingRoundedToCardinalDirection(f32 heading);
-f32 FUN_001bc124(f32 radians);
-f32 FUN_001bbf0c(f32 radians);
+f32 libm_sinf(f32 radians);
+f32 libm_cosf(f32 radians);
 void sceneRegisterBoxEffect(s32 a, s32 b, const char *name, s32 c, s32 d, s32 e, s32 f0, s32 f1, s32 f2, s32 f3,
                             s32 f4, s32 f5, s32 f6, s32 f7, s32 g, s32 h, s32 kind, s32 i, s32 j, s32 k,
                             MapPoint position, MapPoint size, f32 heading);
@@ -65,8 +65,8 @@ void FUN_00332fd8(void)
     f32 x = static_cast<f32>(grid->gridX * 700 + 350);
     f32 z = static_cast<f32>(grid->gridY * 700 + 350);
     f32 radians = heading * 0.017453292f;
-    x -= FUN_001bc124(radians) * 250.0f;
-    z -= FUN_001bbf0c(radians) * 250.0f;
+    x -= libm_sinf(radians) * 250.0f;
+    z -= libm_cosf(radians) * 250.0f;
     MapPoint position;
     position.x = x;
     position.y = 0.0f;

@@ -43,7 +43,7 @@ s32 messageMainGetChoiceResult(void);
 u32 messageTargetGetValue(void);
 void slotSetRequest(s32 slot, s32 value, u32 mask);
 void FUN_002a03d8(s32 slot, s32 value);
-u32 FUN_002896bc(void);
+u32 screenFadesAllReady(void);
 void buttonHelpSetPreset(u32 preset);
 void buttonHelpSetText(void *record, u32 color);
 void FUN_001c36d8(u8 *options);
@@ -52,7 +52,7 @@ s32 jobWorkerPollAndFree(void);
 s32 FUN_00215a24(void);
 void gameRestorePrimaryWorkSave(void);
 s32 screenFadeIsBusy(void);
-void FUN_00287728(u32 index);
+void screenFadeSlotReset(u32 index);
 u32 jobStop(u32 handle, u16 delay);
 void asdSequenceRequest(s32 state, const void *arg, u32 size);
 
@@ -82,7 +82,7 @@ s32 FUN_001b10e4(u32 job)
         FUN_002a03d8(1, 0x14);
         break;
     case 2:
-        if (FUN_002896bc() != 0) {
+        if (screenFadesAllReady() != 0) {
             work->state = 8;
             buttonHelpSetPreset(0xA7);
             scrScriptProcessStartEntry(work->script, 1);
@@ -217,8 +217,8 @@ s32 FUN_001b10e4(u32 job)
     case 11:
         if (screenFadeIsBusy() == 0) {
             if (work->active != 0) {
-                FUN_00287728(0);
-                FUN_00287728(1);
+                screenFadeSlotReset(0);
+                screenFadeSlotReset(1);
                 jobStop(g_clearSave->process, 0);
             } else {
                 asdSequenceRequest(1, 0, 0);

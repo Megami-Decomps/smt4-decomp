@@ -2,7 +2,7 @@
 #include "gfx/ViewportEncoding.h"
 
 extern "C" {
-u32* FUN_002b7148(void);
+u32* asdGxGetCommandCursor(void);
 void FUN_002af390(u32* begin, u32* end);
 
 void FUN_002bc644(u32 x, s32 y, s32 width, s32 height)
@@ -13,7 +13,7 @@ void FUN_002bc644(u32 x, s32 y, s32 width, s32 height)
     u32 inverseWidth = gpuViewportEncodeInverse(2.0f / widthValue) << 1;
     u32 halfHeight = gpuViewportEncode<16>(heightValue * 0.5f);
     u32 inverseHeight = gpuViewportEncodeInverse(2.0f / heightValue) << 1;
-    u32* begin = FUN_002b7148();
+    u32* begin = asdGxGetCommandCursor();
     u32* cursor = begin;
     *cursor++ = halfWidth;
     *cursor++ = 0x70041;

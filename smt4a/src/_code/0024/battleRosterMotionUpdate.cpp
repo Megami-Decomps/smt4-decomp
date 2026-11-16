@@ -17,7 +17,7 @@ extern BattleEffectGlobals g_battleEffectSettings;
 extern u64 g_battleMotionCombatantClearMask;
 BtlMainStateA *jobGetWork(u32 job);
 s32 idSetFindSubjectIndex(BtlMainStateA *battle, const BattleRosterRecordA *record);
-BattleMotionSubject *FUN_001568f8(BtlMainStateA *battle, s32 group);
+BattleMotionSubject *btlFindEntryBlockByMemberId(BtlMainStateA *battle, s32 group);
 BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, s32 group);
 u32 randBetween(u32 minimum, u32 maximum);
 void *stateEntryFindById(BtlMainStateA *battle, s32 id);
@@ -34,7 +34,7 @@ void flagSelectionRebuild(void *selection, u32 flags);
 void FUN_004cb64c(BtlMainStateA *battle, BattleRosterRecordA *record);
 void battleUnitUpdateModelLoad(BtlMainStateA *battle, BattleRosterRecordA *record);
 BattleMotionCameraSubject *obj80Select(u32 index);
-f32 FUN_0050d8e4(f32 x, f32 z);
+f32 __hardfp_atan2f(f32 x, f32 z);
 void callOnHandleField4D(BattleMotionHandle **handle, f32 first, f32 second, f32 third);
 void callOnHandleField4B(BattleMotionHandle **handle, f32 x, f32 y, f32 z);
 void callOnHandleField4C(BattleMotionHandle **handle, f32 x, f32 y, f32 z);
@@ -56,7 +56,7 @@ u32 battleRosterMotionUpdate(u32 job)
         if (variant < 0) {
             variant = 0;
         }
-        BattleMotionSubject *subject = FUN_001568f8(battle, motion.group);
+        BattleMotionSubject *subject = btlFindEntryBlockByMemberId(battle, motion.group);
         if (subject != NULL && (subject->status & 0x10) != 0) {
             ++motion.pulseFrame;
             if ((subject->appearance.flags & 3) != 0 && motion.pulseFrame >= motion.pulseDuration) {
@@ -134,7 +134,7 @@ u32 battleRosterMotionUpdate(u32 job)
                     for (u32 marker = 0; marker < 5; ++marker) {
                         motion.markers[marker] = 0;
                     }
-                    subject = FUN_001568f8(btlGetMainState(), motion.group);
+                    subject = btlFindEntryBlockByMemberId(btlGetMainState(), motion.group);
                     if (subject != NULL) {
                         if ((subject->status & 0x180) != 0) {
                             btlGetMainState();
@@ -220,7 +220,7 @@ u32 battleRosterMotionUpdate(u32 job)
             if (x == 0.0f && z == 0.0f) {
                 motion.yaw = -3.1415927f;
             } else {
-                motion.yaw = FUN_0050d8e4(x, z) - 3.1415927f;
+                motion.yaw = __hardfp_atan2f(x, z) - 3.1415927f;
             }
         }
         if ((motion.flags & 0x200000) != 0) {

@@ -2,14 +2,14 @@
 
 extern "C" {
 
-void FUN_002df914(void);
+void lmapUpdateMapBgm(void);
 
 extern LmapMainStateA *g_lmapMainState;
 
 void lmapMainCallIfActive(void)
 {
     if (g_lmapMainState != NULL) {
-        FUN_002df914();
+        lmapUpdateMapBgm();
     }
 }
 

@@ -15,13 +15,13 @@ struct KeyRangeView {
 }
 
 extern "C" {
-extern InputStateView **FUN_002e2a98(void);
+extern InputStateView **libcLocaleGetCtypeTable(void);
 extern u32 inputGetKeyFlags(u32 key);
 
 // Search the enabled packed key ranges, or delegate to the normal key lookup.
 u32 FUN_0010004a(u32 key)
 {
-    if ((*FUN_002e2a98())->unk100 == 0) {
+    if ((*libcLocaleGetCtypeTable())->unk100 == 0) {
         return inputGetKeyFlags(key);
     }
 

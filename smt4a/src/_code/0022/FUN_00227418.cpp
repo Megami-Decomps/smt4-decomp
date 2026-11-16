@@ -30,8 +30,8 @@ extern "C" {
 extern CampDetail *g_camp;
 extern RenderCtxA *g_renderCtx;
 
-void FUN_00157558(RenderCtxA *context);
-s32 FUN_001692ac(u32 a, u32 b);
+void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
+s32 renderCtxPackPassFlags(u32 a, u32 b);
 s32 FUN_003da8f4(s32 cursor, u32 value);
 void FUN_0021775c(s32 item, u32 mode);
 void FUN_00217f14(void);
@@ -70,9 +70,9 @@ static __inline void campDrawItemDetail(CampDetail *camp)
 u32 FUN_00227418(void)
 {
     CampDetail *camp = g_camp;
-    FUN_00157558(g_renderCtx);
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     RenderCtxA *context = g_renderCtx;
-    s32 state = FUN_001692ac(1, 0);
+    s32 state = renderCtxPackPassFlags(1, 0);
     renderStackPush(&context->stackA, state);
 
     s32 menu = camp->menu;

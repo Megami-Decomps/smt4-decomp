@@ -91,7 +91,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_00282228. */
 /* Supplied declaration required: calcHeadingRoundedToCardinalDirection. */
 /* Supplied declaration required: FUN_00282390. */
-/* Supplied declaration required: FUN_0028250c. */
+/* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: mathGetShortestAngleDelta. */
 /* Supplied declaration required: FUN_002c5be8. */
 extern unsigned int asdModelGetStatic38(void);

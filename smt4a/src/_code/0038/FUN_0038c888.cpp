@@ -8,7 +8,7 @@
 #include "gamedata/Table00Lookup.h"
 
 extern "C" {
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
 u32 btlEntryHasCategoryThreeSkill(BtlCombatantEntryA *unit);
 s32 btlResolveEntryChoice(s32 choice);
 s32 scrGetArg(s32 index);
@@ -56,7 +56,7 @@ u32 FUN_0038c888(void)
     s32 first;
     s32 count;
 
-    FUN_00301a08(btlResolveEntryChoice(scrGetArg(1)), &first, &count);
+    btlGetEntryChoiceRange(btlResolveEntryChoice(scrGetArg(1)), &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
@@ -68,7 +68,7 @@ u32 FUN_0038c888(void)
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
-        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL && entry->id == id && btlEntryHasCategoryThreeSkill(entry) != 0) {
             scrSetResult(1);
             return 1;

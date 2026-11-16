@@ -20,7 +20,7 @@ void FUN_001400ac(void)
     }
     bool failed = nnResultIsFailure(result);
     if (failed) {
-        FUN_002e3140(result, failed);
+        resultHandleFailure(result, failed);
     }
 }
 }

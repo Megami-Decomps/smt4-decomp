@@ -23,11 +23,11 @@ int FUN_003e5558(int);
 int FUN_003e566c(int);
 int FUN_003e5858(int);
 int controllerSetDestination(...);
-int FUN_003fd7c0(unsigned int, int, int);
+int moriModelUnitStartMaterialAnimation(unsigned int, int, int);
 int FUN_003fd924(...);
 int animationSelectClip(...);
 int controllerSetRotationEulerDegrees(...);
-int FUN_003fe86c(...);
+int modelPlayClip(...);
 int playerLoadOutfitPartModel(int, int, int);
 int playerModelLoadByIndex(int, unsigned int, int, int);
 
@@ -92,16 +92,16 @@ extern int FUN_002e5db4(void);
 /* Supplied declaration required: FUN_003e566c. */
 /* Supplied declaration required: FUN_003e5858. */
 /* Supplied declaration required: controllerSetDestination. */
-/* Supplied declaration required: FUN_003fd7c0. */
+/* Supplied declaration required: moriModelUnitStartMaterialAnimation. */
 /* Supplied declaration required: FUN_003fd924. */
 /* Supplied declaration required: animationSelectClip. */
 /* Supplied declaration required: FUN_003fda64. */
 /* Supplied declaration required: controllerSetRotationEulerDegrees. */
-/* Supplied declaration required: FUN_003fe86c. */
+/* Supplied declaration required: modelPlayClip. */
 /* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: playerLoadOutfitPartModel. */
 /* Supplied declaration required: playerModelLoadByIndex. */
-extern int FUN_004ffba8(int);
+extern int animationChannelsAllFinished(int);
 
 
 void FUN_00296530(void)
@@ -210,19 +210,19 @@ void FUN_00296530(void)
         piVar12 = piVar13;
         temp_v3 = gameFlagIsSet(0x4c9);
         if ((temp_v3 == 0) || (temp_v3 = FUN_002e5db4(), temp_v3 != 0)) {
-          FUN_003fd7c0(*(unsigned int *)(g_lmapScene[0x60] + 4),0,2);
+          moriModelUnitStartMaterialAnimation(*(unsigned int *)(g_lmapScene[0x60] + 4),0,2);
         }
         temp_v3 = gameFlagIsSet(0x4c9);
         if ((temp_v3 == 0) || (temp_v3 = FUN_002e5db4(), piVar13 = g_lmapScene, temp_v3 != 0)) {
           piVar6 = g_lmapScene;
           g_lmapScene[0x8e] = 1;
           piVar13 = piVar12;
-          FUN_003fd7c0(*(unsigned int *)(piVar6[99] + 4),0,2);
+          moriModelUnitStartMaterialAnimation(*(unsigned int *)(piVar6[99] + 4),0,2);
         }
         else {
           g_lmapScene[0x8e] = 3;
           temp_v5 = *(unsigned int *)(piVar13[99] + 4);
-          FUN_003fd7c0(temp_v5,0,2);
+          moriModelUnitStartMaterialAnimation(temp_v5,0,2);
           animationSelectClip(temp_v5,1,2);
           piVar13 = piVar12;
           FUN_003fd924(temp_v5,3,2);
@@ -328,7 +328,7 @@ LAB_00296958:
     temp_v10 = piVar13[9];
     controllerSetDestination(temp_v6,&temp_v8);
     if (*(char *)((int)g_lmapScene + 0x197) != '\0') {
-      FUN_003fe86c(temp_v6,1,2);
+      modelPlayClip(temp_v6,1,2);
       piVar13 = g_lmapScene;
       *(unsigned char *)((int)g_lmapScene + 0x197) = 0;
       *(unsigned char *)(piVar13 + 0x66) = 0;
@@ -349,7 +349,7 @@ LAB_00296958:
       controllerSetRotationEulerDegrees(temp_v7);
       if (*(char *)((int)g_lmapScene + 0x195) != '\0') {
         *(unsigned char *)((int)g_lmapScene + 0x195) = 0;
-        FUN_003fe86c(temp_v7,0,2);
+        modelPlayClip(temp_v7,0,2);
       }
     }
     piVar13 = g_lmapScene;
@@ -393,26 +393,26 @@ LAB_00296958:
               }
             }
             else {
-              FUN_003fe86c(temp_v3,2);
+              modelPlayClip(temp_v3,2);
               *piVar13 = 4;
             }
           }
           else if ((char)g_lmapScene[0xa4] == '\0') {
-            FUN_003fe86c(temp_v3,1,2);
+            modelPlayClip(temp_v3,1,2);
             *(unsigned char *)(g_lmapScene + 0xa4) = 1;
           }
         }
         else {
-          temp_v0 = FUN_004ffba8(temp_v3);
+          temp_v0 = animationChannelsAllFinished(temp_v3);
           if (temp_v0 != 0) {
-            FUN_003fe86c(temp_v3,1,2);
+            modelPlayClip(temp_v3,1,2);
             *piVar13 = 2;
             *(unsigned char *)(g_lmapScene + 0xa4) = 1;
           }
         }
       }
       else {
-        FUN_003fe86c(temp_v3,0,2);
+        modelPlayClip(temp_v3,0,2);
         *piVar13 = 1;
       }
     }
@@ -433,7 +433,7 @@ LAB_00296e98:
       piVar13 = g_lmapScene;
       if (temp_v2 != g_lmapScene[0x5a]) {
         piVar13[0x5a] = temp_v2;
-        FUN_003fe86c(temp_v0,temp_v2,2);
+        modelPlayClip(temp_v0,temp_v2,2);
       }
     }
     else {
@@ -441,7 +441,7 @@ LAB_00296e98:
       *(unsigned int *)(temp_v0 + 4) = temp_v4 | 3;
       piVar13[0x59] = 0;
       piVar13[0x5a] = temp_v2;
-      FUN_003fe86c(temp_v0,temp_v2,2);
+      modelPlayClip(temp_v0,temp_v2,2);
     }
   }
   if (DAT_005f1ad4 == '\0') {
@@ -463,7 +463,7 @@ LAB_00296e98:
       g_lmapScene[0x5d] = DAT_005f1b10;
       temp_v5 = *(unsigned int *)(temp_v0 + 4);
       handleRegistryRegisterObject(g_handleRegistry,temp_v5);
-      FUN_003fe86c(temp_v5,0,2);
+      modelPlayClip(temp_v5,0,2);
       controllerSetDestination(temp_v5,&DAT_005f17d8);
       controllerSetRotationEulerDegrees(temp_v5);
     }

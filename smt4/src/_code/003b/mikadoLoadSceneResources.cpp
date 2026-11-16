@@ -10,7 +10,7 @@ void asdTMTexTableLoadEntryAsync(s32 group, u32 entry);
 s32 textFormatBuffer(char *destination, const char *format, ...);
 void asdLoadFileAsyncSimple(const char *path, void **destination, u32 flags);
 void *asdLoadFileSyncDefault(const char *path);
-ScriptRunState *FUN_00297060(void *script, void *messages);
+ScriptRunState *scrScriptProcessCreate(void *script, void *messages);
 
 // Load location-specific Mikado resources and the shared map-system script.
 void mikadoLoadSceneResources(MikadoCamera *camera)
@@ -55,7 +55,7 @@ void mikadoLoadSceneResources(MikadoCamera *camera)
     asdLoadFileAsyncSimple(messagePath, &scene->locationMessages, 0);
     scene->systemScript = asdLoadFileSyncDefault(DAT_00404dbc);
     scene->systemMessages = asdLoadFileSyncDefault(DAT_00404da4);
-    scene->process = FUN_00297060(scene->systemScript, scene->systemMessages);
+    scene->process = scrScriptProcessCreate(scene->systemScript, scene->systemMessages);
     switch (scene->location) {
     case 0:
     case 4:

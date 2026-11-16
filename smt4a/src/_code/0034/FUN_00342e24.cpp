@@ -361,7 +361,7 @@ code_r0x00343274:
     break;
   case 0x10:
     iVar4 = FUN_00164af0(10);
-    if ((iVar4 != 0) || (iVar4 = FUN_002e1a18(4), iVar4 != 0)) {
+    if ((iVar4 != 0) || (iVar4 = buttonHelpIsActionActive(4), iVar4 != 0)) {
       *(unsigned char *)(param_1 + 0x111) = *(char *)(param_1 + 0x111) == '\0';
       *(unsigned int *)(param_1 + 0x1c) = 0;
       *(unsigned int *)(param_1 + 0x14) = 0x14a;

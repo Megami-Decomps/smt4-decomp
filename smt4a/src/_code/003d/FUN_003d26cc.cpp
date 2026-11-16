@@ -40,8 +40,8 @@ static float romwright_sqrt_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_00152f54. */
-extern int FUN_001692ac(unsigned int, unsigned int);
+/* Supplied declaration required: asdCameraGetSavedRenderPairs. */
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_001a1ee0. */
 /* Supplied declaration required: FUN_001b63b0. */
@@ -78,7 +78,7 @@ unsigned int FUN_003d26cc(void)
   
   temp_v3 = g_renderCtx;
   temp_v1 = DAT_0057f2c4;
-  temp_v2 = FUN_001692ac(1,0);
+  temp_v2 = renderCtxPackPassFlags(1,0);
   piVar7 = (int *)(temp_v3 + 0x1258);
   temp_v4 = *piVar7;
   temp_v5 = piVar7[temp_v4 + 2];
@@ -116,7 +116,7 @@ unsigned int FUN_003d26cc(void)
     goto LAB_003d2950;
   }
   else if (*(int *)(temp_v1 + 8) <= temp_v3) goto LAB_003d2950;
-  FUN_00152f54();
+  asdCameraGetSavedRenderPairs();
   temp_v9 = 0.0f;
   temp_v13 = 0.0f;
   temp_v14 = 0.0f;

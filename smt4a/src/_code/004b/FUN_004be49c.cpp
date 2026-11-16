@@ -18,10 +18,10 @@ static inline s32 findNextEnabledUnit(const Obj25C *menu, s32 start)
 
 extern "C" {
 void flagValueSub(u32 flag, s32 amount);
-UnitCategoryRecord *FUN_003e4d68(u32 id);
+UnitCategoryRecord *partyGetSlot(u32 id);
 s32 itemApplyPercentageHpHeal(UnitCategoryRecord *unit, u32 flag, s32 apply);
 void scrollOwnerSelectIndex(void *cursor, s32 column);
-void FUN_002a4964(void *cursor, s32 row);
+void scrollListSetSelectionTracked(void *cursor, s32 row);
 void statusPanelSetOpen(s32 open);
 
 // Apply the selected unit operation, then advance to another enabled detail entry.
@@ -32,14 +32,14 @@ void FUN_004be49c(Obj25C *menu)
         menu->transition.state = 13;
         return;
     }
-    UnitCategoryRecord *unit = FUN_003e4d68((u16)menu->ids[menu->selectionIndex.selected]);
+    UnitCategoryRecord *unit = partyGetSlot((u16)menu->ids[menu->selectionIndex.selected]);
     if (itemApplyPercentageHpHeal(unit, menu->unk334, 1)) {
         menu->flags[menu->selectionIndex.selected] = 0;
         s32 next = findNextEnabledUnit(menu, menu->selectionIndex.selected);
         if (next >= 0) {
             scrollOwnerSelectIndex(menu->selection.cursor, next % 4);
-            FUN_002a4964(menu->selection.cursor, next / 4);
-            unit = FUN_003e4d68((u16)menu->ids[next]);
+            scrollListSetSelectionTracked(menu->selection.cursor, next / 4);
+            unit = partyGetSlot((u16)menu->ids[next]);
             statusRequestUnitDetails(unit, 0, NULL);
             statusPanelSetOpen(1);
             return;

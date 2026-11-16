@@ -7,7 +7,7 @@
 extern "C" {
 s32 scrGetArg(s32 index);
 s32 btlResolveEntryChoice(s32 choice);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
 void scrSetResult(s32 value);
 
 // Test selected matching combatants and the special active entry for an effect counter.
@@ -22,7 +22,7 @@ u32 FUN_003c46c0()
     };
     u32 id = scrGetArg(0);
     s32 first, count;
-    FUN_00301a08(btlResolveEntryChoice(scrGetArg(1)), &first, &count);
+    btlGetEntryChoiceRange(btlResolveEntryChoice(scrGetArg(1)), &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
@@ -36,7 +36,7 @@ u32 FUN_003c46c0()
         }
     }
     if (btlGetMainState()->unk4cd1) {
-        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL && entry->id == id) {
             const EffectCountersView *counters = reinterpret_cast<const EffectCountersView *>(entry);
             if (counters->primary > 0 || counters->secondary > 0) {

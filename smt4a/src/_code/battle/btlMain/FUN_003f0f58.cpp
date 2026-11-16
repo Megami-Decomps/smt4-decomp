@@ -65,7 +65,7 @@ static __inline void workerThreadStart(WorkerThread *thread, void (*entry)(void 
     s32 result = FUN_002fb0d4(thread, &descriptor, entry, &argument, stack->address + stack->size, priority, 0, 0);
     bool failed = nnResultIsFailure(result);
     if (failed) {
-        FUN_002e3140(result, failed);
+        resultHandleFailure(result, failed);
     }
 }
 
@@ -86,7 +86,7 @@ void FUN_003f0f58(BattleWorkerState *state)
         s32 result = svcWaitSynchronization1(state->thread.handle, 0);
         bool failed = nnResultIsFailure(result);
         if (failed) {
-            FUN_002e3140(result, failed);
+            resultHandleFailure(result, failed);
         }
         timedOut = !nnResultIsNotTimeout(result);
     }

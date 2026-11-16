@@ -21,7 +21,7 @@ typedef char BattleEventCandidateOffsets[
 
 extern "C" {
 s32 FUN_004d7a70(BtlEvent *, s32, s32, s32);
-s32 FUN_003eb1cc(BattleEventOwnerView *);
+s32 btlStateHasSelectionGateFlag(BattleEventOwnerView *);
 s32 isEntryUsable(BtlEvent *);
 extern BtlEvent *g_btlEvent;
 extern BtlActionGlobals g_btlAction;
@@ -38,11 +38,11 @@ u32 FUN_004ea0c0(BattleEventOwnerRef *owner, const BattleEventCandidate *candida
         if (owner->state->available <= 0)
             return 0;
     }
-    if (isEntryUsable(g_btlEvent) || FUN_003eb1cc(owner->state))
+    if (isEntryUsable(g_btlEvent) || btlStateHasSelectionGateFlag(owner->state))
         return 0;
     if (FUN_004d7a70(g_btlEvent, 4, candidate->entry->indexView.selectionIndex, 0))
         return 1;
-    if (!FUN_003eb1cc(owner->state) && owner->state->pending <= 0 &&
+    if (!btlStateHasSelectionGateFlag(owner->state) && owner->state->pending <= 0 &&
         (candidate->entry->flags & g_btlAction.interaction.reachMask) &&
         FUN_004d7a70(g_btlEvent, 10, candidate->entry->indexView.selectionIndex, 0))
         return 1;

@@ -11,7 +11,7 @@ int handlerTableCall(...);
 int quadHolderCopyOut(...);
 int quadSourceCopyOut(...);
 int eventDispatch(...);
-int FUN_00281bb0(...);
+int effectNodeUpdateTransform(...);
 int gfxQuaternionWorkspaceBuildMatrix(...);
 int FUN_002a36fc(...);
 int FUN_002a3ab0(...);
@@ -81,7 +81,7 @@ extern float DAT_004ea998; /* 0x4ea998 */
 /* Supplied declaration required: quadHolderCopyOut. */
 /* Supplied declaration required: quadSourceCopyOut. */
 /* Supplied declaration required: eventDispatch. */
-/* Supplied declaration required: FUN_00281bb0. */
+/* Supplied declaration required: effectNodeUpdateTransform. */
 /* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: FUN_002a36fc. */
 /* Supplied declaration required: FUN_002a3ab0. */
@@ -199,7 +199,7 @@ void FUN_002c74ac(fn_002c74ac_arg0 *param_1)
               DAT_004ea988 = temp_v0;
               FUN_002a36fc(*puVar3);
               FUN_002a3ab0(*puVar3,&temp_v27);
-              FUN_00281bb0(*puVar3);
+              effectNodeUpdateTransform(*puVar3);
             }
             temp_v1 = temp_v1 + 1;
             pfVar2 = pfVar2 + 10;
@@ -217,7 +217,7 @@ void FUN_002c74ac(fn_002c74ac_arg0 *param_1)
             if (-1 < (int)pfVar2[4]) {
               FUN_002a36fc(*puVar3);
               FUN_002a3ab0(*puVar3,pfVar2);
-              FUN_00281bb0(*puVar3);
+              effectNodeUpdateTransform(*puVar3);
             }
             temp_v1 = temp_v1 + 1;
             pfVar2 = pfVar2 + 10;

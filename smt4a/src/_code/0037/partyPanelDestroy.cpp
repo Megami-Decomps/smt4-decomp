@@ -35,7 +35,7 @@ void partyPanelDestroy(void)
     Obj37dab0 *obj = g_partyPanel;
     int i;
 
-    FUN_0026140c()[0x44] = obj->flag;
+    saveGetUserSettingsBlock()[0x44] = obj->flag;
     if (obj->scriptProcess != NULL) {
         scrScriptProcessDestroy();
     }

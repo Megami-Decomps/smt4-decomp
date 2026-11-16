@@ -29,7 +29,7 @@ void eventTexRequestStopAll(void);
 u32 scrGetCommandOwner(void);
 u32 scrGetArg(u32 index);
 s32 scrGetCommandFrame(void);
-u32 FUN_002866b4(u32 message, u32 argument, s32 frame,
+u32 messageWindowShowOrPoll(u32 message, u32 argument, s32 frame,
                  s32 mode, s32 option0, s32 option1);
 
 static u32 showMessage(s32 mode, s32 wait)
@@ -37,7 +37,7 @@ static u32 showMessage(s32 mode, s32 wait)
     u32 owner = scrGetCommandOwner();
     u32 message = scrGetArg(0);
     s32 frame = scrGetCommandFrame();
-    return FUN_002866b4(owner, message, frame, mode, wait, 0);
+    return messageWindowShowOrPoll(owner, message, frame, mode, wait, 0);
 }
 
 // Show the confirmation message and clear the saved message state on its first frame.

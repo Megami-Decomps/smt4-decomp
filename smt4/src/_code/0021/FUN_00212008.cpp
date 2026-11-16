@@ -22,7 +22,7 @@ u32 FUN_00212008(S4FsReader *reader, s64 position)
     s32 result = nn::svc::SignalEvent(reader->dataEvent);
     bool failed = nnResultIsFailure(result);
     if (failed) {
-        FUN_002c526c(result, failed);
+        resultHandleFailure(result, failed);
     }
     return 1;
 }

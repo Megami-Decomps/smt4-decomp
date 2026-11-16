@@ -25,7 +25,7 @@ void rt_aeabi_memclr(void *buffer, u32 bytes);
 s32 textFormatBuffer(char *destination, const char *format, ...);
 u32 asdLoadFileSyncNoContext(const char *path, u32 *size, u32 mode, u32 flags);
 Obj557d00 *FUN_001581dc(void *setup);
-void *FUN_00178b04(u32 size, const char *file, u32 line);
+void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 void moriModelCommandInitBuffers(MoriModelCommand *command, u32 bytes, s32 capacity);
 void FUN_00156ea8();
 u32 *FUN_001582d0(u32 *value);
@@ -46,16 +46,16 @@ void FUN_001463b4(Obj557c48 *manager)
         setup.isResource = 1;
         manager->setShader(FUN_001581dc(&setup));
     }
-    Obj557c28 *memory = static_cast<Obj557c28 *>(FUN_00178b04(sizeof(Obj557c28), DAT_00526098, 0x5a));
+    Obj557c28 *memory = static_cast<Obj557c28 *>(asdMemoryAllocTraced(sizeof(Obj557c28), DAT_00526098, 0x5a));
     Obj557c28 *command = memory != NULL ? new (memory) Obj557c28() : NULL;
     moriModelCommandInitBuffers(command->command(), 0x100000, 0x200);
     manager->setCommands(command);
-    Obj557b28 *tuning = static_cast<Obj557b28 *>(FUN_00178b04(sizeof(Obj557b28), DAT_00526098, 0x60));
+    Obj557b28 *tuning = static_cast<Obj557b28 *>(asdMemoryAllocTraced(sizeof(Obj557b28), DAT_00526098, 0x60));
     if (tuning != NULL)
         tuning = new (tuning) Obj557b28();
     manager->setShadowMap(tuning);
     FUN_00156ea8();
-    u32 *scratch = static_cast<u32 *>(FUN_00178b04(sizeof(u32), DAT_00526098, 100));
+    u32 *scratch = static_cast<u32 *>(asdMemoryAllocTraced(sizeof(u32), DAT_00526098, 100));
     if (scratch != NULL)
         scratch = FUN_001582d0(scratch);
     manager->setScratch(scratch);

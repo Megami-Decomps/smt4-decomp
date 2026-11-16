@@ -10,12 +10,12 @@ typedef struct BitTable {
     /* 0x000 */ BitRow rows[0x200];
 } BitTable;
 
-extern BitTable *FUN_0023d2ec(void);
+extern BitTable *saveGetFlagRowTable(void);
 
 /* Sets (on != 0) or clears flag `bit` (0-31) of row `row` (0-0x1FF) in the bit table; out-of-range ids are ignored. */
 void bitTableSetFlag(u32 row, u32 bit, s32 on)
 {
-    BitTable *table = FUN_0023d2ec();
+    BitTable *table = saveGetFlagRowTable();
 
     if (row < 0x200 && bit < 0x20) {
         u8 *byte = &table->rows[row].bits[bit >> 3];

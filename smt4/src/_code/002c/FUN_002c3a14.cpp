@@ -35,14 +35,14 @@ static bool isIdentity(const f32 *m)
 
 extern "C" {
 void FUN_00126d14(u32 shader);
-void FUN_002b634c(u32 shader, void *colors);
+void gpuWriteVertexUniformVec4(u32 shader, void *colors);
 void mathCopyIdentityMatrix(void *matrix);
 void FUN_002bbbc8(RenderCtx *ctx, void *a, void *b, void *matrix);
-void FUN_002bbb74(u32 shader, void *block);
+void gpuWriteVertexUniformMatrix(u32 shader, void *block);
 void FUN_002b612c(CombinerStage *stages);
 void nn_gr_CTR_Combiner_Stage_SetupPrimaryModulateTexture0(CombinerStage *stage);
 void nn_gr_CTR_Combiner_Stage_SetupPrevious(CombinerStage *stage);
-u32 FUN_002b7148(void);
+u32 asdGxGetCommandCursor(void);
 u32 nn_gr_CTR_Combiner_MakeCommand(CombinerStage *stages, u32 buffer);
 void FUN_002af390(u32 buffer, u32 command);
 
@@ -68,7 +68,7 @@ void FUN_002c3a14(RenderCtx *ctx)
         ctxFloat(ctx, 0x11d0) = 1.0f;
         ctxFloat(ctx, 0x11d4) = 1.0f;
         ctxFloat(ctx, 0x11d8) = 1.0f;
-        FUN_002b634c(ctxWord(ctx, 0x52c), reinterpret_cast<u8 *>(ctx) + 0x11cc);
+        gpuWriteVertexUniformVec4(ctxWord(ctx, 0x52c), reinterpret_cast<u8 *>(ctx) + 0x11cc);
     }
     ctxByte(ctx, 0x11dc) = 0;
     if (ctxByte(ctx, 0x11e1) != 0 || ctxByte(ctx, 0x11dd) != 0 || ctxByte(ctx, 0x11de) != 0 ||
@@ -80,7 +80,7 @@ void FUN_002c3a14(RenderCtx *ctx)
         mathCopyIdentityMatrix(reinterpret_cast<u8 *>(ctx) + 0x570);
         FUN_002bbbc8(ctx, reinterpret_cast<u8 *>(ctx) + 0x114c, reinterpret_cast<u8 *>(ctx) + 0x110c,
                      reinterpret_cast<u8 *>(ctx) + 0x530);
-        FUN_002bbb74(ctxWord(ctx, 0x52c), reinterpret_cast<u8 *>(ctx) + 0x118c);
+        gpuWriteVertexUniformMatrix(ctxWord(ctx, 0x52c), reinterpret_cast<u8 *>(ctx) + 0x118c);
         ctxByte(ctx, 0x5b0) = 0;
     }
     ctxWord(ctx, 0x1128) = ctxWord(ctx, 0x5d0);
@@ -120,7 +120,7 @@ void FUN_002c3a14(RenderCtx *ctx)
     for (s32 i = 1; i < 6; i++) {
         nn_gr_CTR_Combiner_Stage_SetupPrevious(&stages[i]);
     }
-    u32 buffer = FUN_002b7148();
+    u32 buffer = asdGxGetCommandCursor();
     FUN_002af390(buffer, nn_gr_CTR_Combiner_MakeCommand(stages, buffer));
     RenderStateStack *stacks = reinterpret_cast<RenderStateStack *>(reinterpret_cast<u8 *>(ctx) + 0x11ec);
     for (s32 i = 0; i < 12; i++) {

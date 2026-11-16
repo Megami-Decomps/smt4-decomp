@@ -24,7 +24,7 @@ void placeWindowDrawLabel(void *);
 u32 taskCreateDraw(const char *, s32, s32, s32, TaskFunc, TaskFunc, void *, u32);
 void drawParameterBlockClear(void *);
 
-void FUN_002bd954(void *, u32, u32, void *, u32, f32);
+void uiSpriteStateInitFromSource(void *, u32, u32, void *, u32, f32);
 void spriteStartAnimationByIndex(void *, u32);
 
 /* Create the place-name window's update process, stereo draw tasks and animation data. */
@@ -43,7 +43,7 @@ void placeWinCreate()
     drawParameterBlockClear(window->parameters.packet);
     paramsInit(reinterpret_cast<UiResourceParameters *>(window->parameters.packet), sPlaceWinPacketA, sizeof(sPlaceWinPacketA),
                sPlaceWinPacketB, sizeof(sPlaceWinPacketB), NULL, 0, NULL, 0, sPlaceWinPacketC, sizeof(sPlaceWinPacketC));
-    FUN_002bd954(window->animation, 0xe, 0x87, window->parameters.packet, 1, 1.0f);
+    uiSpriteStateInitFromSource(window->animation, 0xe, 0x87, window->parameters.packet, 1, 1.0f);
     spriteStartAnimationByIndex(window->animation, 0);
 }
 }

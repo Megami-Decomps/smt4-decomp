@@ -9,7 +9,7 @@ void FUN_003e5858(void *script);
 s32 fourPtrsAllNull(void *script);
 void uiSpriteBankApplyPreset(SpritePresetBank *, s32 preset);
 void buttonHelpSetText(s32 channel, u32 color);
-void FUN_00163aa4(UiAnimatedSprite *, f32 speed);
+void uiSpriteAdvanceAnimation(UiAnimatedSprite *, f32 speed);
 s32 vec2GetXInt(const UiAnimatedSprite *);
 s32 vec2GetYInt(const UiAnimatedSprite *);
 void pointConvertToFloat(f32 *point, s32 x, s32 y);
@@ -42,7 +42,7 @@ void Obj536044::FUN_00495584()
             return;
     } else {
         UiAnimatedSprite *sprite = &state->bank.sprites[1];
-        FUN_00163aa4(sprite, 1.0f);
+        uiSpriteAdvanceAnimation(sprite, 1.0f);
         s32 y = vec2GetYInt(sprite);
         s32 x = vec2GetXInt(sprite);
         pointConvertToFloat(state->position, x, y);

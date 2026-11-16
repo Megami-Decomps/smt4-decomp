@@ -5,7 +5,7 @@ extern RenderCtx *g_titleScene;
 void mapEplUpdateEntriesIfAny(void);
 void FUN_001f9f64(void);
 void MapMain_DrawMinimapIcons(void);
-s32 FUN_002c5d80(u32, u32);
+s32 renderCtxPackPassFlags(u32, u32);
 
 u32 mapMainDrawOrdinaryPass(u32 job)
 {
@@ -25,7 +25,7 @@ u32 mapMainDrawOrdinaryPass(u32 job)
     if (id == 24)
         return 0;
     RenderCtx *context = g_titleScene;
-    renderCtxPushA(context, FUN_002c5d80(5, 0));
+    renderCtxPushA(context, renderCtxPackPassFlags(5, 0));
     FUN_001f9f64();
     MapMain_DrawMinimapIcons();
     renderStackPop(&g_titleScene->stackA);

@@ -8,15 +8,15 @@ typedef struct SortRecord {
     /* 0x26 */ u16 category;
 } SortRecord;
 
-extern SortRecord *FUN_00480ba0(u16 id);
-extern int FUN_003a6868(u16 category);
+extern SortRecord *dataTableFindType5Record(u16 id);
+extern int itemGetSortCategory(u16 category);
 
 /* Compare function for sorting ids: by category rank, then by the category row's order (descending), then by id. */
 int sortCompareByCategoryOrder(const u16 *a, const u16 *b)
 {
-    SortRecord *recordA = FUN_00480ba0(*a);
-    SortRecord *recordB = FUN_00480ba0(*b);
-    int diff = FUN_003a6868(recordA->category) - FUN_003a6868(recordB->category);
+    SortRecord *recordA = dataTableFindType5Record(*a);
+    SortRecord *recordB = dataTableFindType5Record(*b);
+    int diff = itemGetSortCategory(recordA->category) - itemGetSortCategory(recordB->category);
 
     if (diff == 0) {
         u16 orderA = dataTable04FindById(recordA->category)->listing.sortKey;

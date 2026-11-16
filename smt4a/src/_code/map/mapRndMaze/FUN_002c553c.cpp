@@ -5,13 +5,13 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_00178b04(...);
+int asdMemoryAllocTraced(...);
 void FUN_0035d1e0(float x, float z, float heading);
 int controllerSetPosition(...);
-int FUN_003fe86c(...);
+int modelPlayClip(...);
 int FUN_0040a908(...);
 int FUN_0040a918(...);
-int FUN_0040aa6c(void);
+int resourceOwnerLoadFileSync(void);
 int moriModelContentCopyBody(...);
 int FUN_0040aad4(...);
 int FUN_0040ab7c(...);
@@ -53,14 +53,14 @@ extern int DAT_006105e0; /* 0x6105e0 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
 extern int gameFlagsGetBlock(void);
-/* Supplied declaration required: FUN_00178b04. */
+/* Supplied declaration required: asdMemoryAllocTraced. */
 extern int lmapGetSpawnIndex(void);
 extern unsigned int FUN_003857c8(int);
 /* Supplied declaration required: controllerSetPosition. */
-/* Supplied declaration required: FUN_003fe86c. */
+/* Supplied declaration required: modelPlayClip. */
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
-/* Supplied declaration required: FUN_0040aa6c. */
+/* Supplied declaration required: resourceOwnerLoadFileSync. */
 /* Supplied declaration required: moriModelContentCopyBody. */
 /* Supplied declaration required: FUN_0040aad4. */
 /* Supplied declaration required: FUN_0040ab7c. */
@@ -202,20 +202,20 @@ void FUN_002c553c(void)
     temp_v6 = FUN_003857c8((int)*(float *)(temp_v3 + 0x15c4));
     textFormatBuffer(temp_v12,"map/tokyo/a%02d_07.bam",temp_v6);
     temp_v9 = 0x20;
-    FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapRndMaze.cpp",0x862);
+    asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapRndMaze.cpp",0x862);
     temp_v7 = 0;
     if (temp_v9 != 0) {
       temp_v7 = modelListInit();
     }
     DAT_006105d4 = temp_v7;
-    FUN_0040aa6c();
+    resourceOwnerLoadFileSync();
     FUN_0040ab7c(DAT_006105d4,2);
     FUN_0040aad4(DAT_006105d4,0);
     temp_v6 = *(unsigned int *)(DAT_006105d4 + 4);
-    FUN_003fe86c(temp_v6,0,2);
+    modelPlayClip(temp_v6,0,2);
     handleRegistryRegisterObject(g_handleRegistry,temp_v6);
     temp_v9 = 0x20;
-    FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapRndMaze.cpp",0x86f);
+    asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapRndMaze.cpp",0x86f);
     temp_v7 = 0;
     if (temp_v9 != 0) {
       temp_v7 = modelListInit();
@@ -223,20 +223,20 @@ void FUN_002c553c(void)
     DAT_006105d8 = temp_v7;
     moriModelContentCopyBody();
     temp_v6 = *(unsigned int *)(DAT_006105d8 + 4);
-    FUN_003fe86c(temp_v6,0,2);
+    modelPlayClip(temp_v6,0,2);
     handleRegistryRegisterObject(g_handleRegistry,temp_v6);
     textFormatBuffer(temp_v12,"map/obj/obj_25.bam");
     temp_v9 = 0x20;
-    FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapRndMaze.cpp",0x878);
+    asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapRndMaze.cpp",0x878);
     temp_v7 = 0;
     if (temp_v9 != 0) {
       temp_v7 = modelListInit();
     }
     DAT_006105e0 = temp_v7;
-    FUN_0040aa6c();
+    resourceOwnerLoadFileSync();
     FUN_0040aad4(DAT_006105e0,0);
     temp_v6 = *(unsigned int *)(DAT_006105e0 + 4);
-    FUN_003fe86c(temp_v6,0,2);
+    modelPlayClip(temp_v6,0,2);
     handleRegistryRegisterObject(g_handleRegistry,temp_v6);
   }
   DAT_0060ffb8 = 2;
@@ -263,17 +263,17 @@ void FUN_002c553c(void)
       if (!((temp_v7 == 1 || temp_v7 == 2) || temp_v7 == 3)) {
         if (temp_v7 != 4) {
           temp_v9 = 0x20;
-          FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapRndMaze.cpp",0x8dd);
+          asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapRndMaze.cpp",0x8dd);
           temp_v6 = 0;
           if (temp_v9 != 0) {
             temp_v6 = modelListInit();
           }
           *(unsigned int *)(temp_v3 + 0x60ffbc) = temp_v6;
-          FUN_0040aa6c();
+          resourceOwnerLoadFileSync();
           FUN_0040ab7c(*(unsigned int *)(temp_v3 + 0x60ffbc),2);
           FUN_0040aad4(*(unsigned int *)(temp_v3 + 0x60ffbc),0);
           temp_v6 = *(unsigned int *)(*(int *)(temp_v3 + 0x60ffbc) + 4);
-          FUN_003fe86c(temp_v6,0,2);
+          modelPlayClip(temp_v6,0,2);
           handleRegistryRegisterObject(g_handleRegistry,temp_v6);
           if (temp_v7 != 5) {
             controllerSetPosition(*(unsigned int *)(*(int *)(temp_v3 + 0x60ffbc) + 4));
@@ -281,38 +281,38 @@ void FUN_002c553c(void)
         }
         else {
           temp_v9 = 0x20;
-          FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapRndMaze.cpp",0x8d2);
+          asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapRndMaze.cpp",0x8d2);
           temp_v6 = 0;
           if (temp_v9 != 0) {
             temp_v6 = modelListInit();
           }
           uRam0060ffcc = temp_v6;
-          FUN_0040aa6c();
+          resourceOwnerLoadFileSync();
           FUN_0040ab7c(*(unsigned int *)(temp_v14 + 0x3b4),2);
           FUN_0040a908(*(unsigned int *)(temp_v14 + 0x3b4),0x10000);
           FUN_0040a918(*(unsigned int *)(temp_v14 + 0x3b4),0x20000);
           FUN_0040aad4(*(unsigned int *)(temp_v14 + 0x3b4),0);
           temp_v6 = *(unsigned int *)(*(int *)(temp_v14 + 0x3b4) + 4);
-          FUN_003fe86c(temp_v6,0,2);
+          modelPlayClip(temp_v6,0,2);
           handleRegistryRegisterObject(g_handleRegistry,temp_v6);
           controllerSetPosition(*(unsigned int *)(*(int *)(temp_v3 + 0x60ffbc) + 4));
         }
       }
       else {
         temp_v9 = 0x20;
-        FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapRndMaze.cpp",0x8c4);
+        asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapRndMaze.cpp",0x8c4);
         temp_v6 = 0;
         if (temp_v9 != 0) {
           temp_v6 = modelListInit();
         }
         *(unsigned int *)(temp_v3 + 0x60ffbc) = temp_v6;
-        FUN_0040aa6c();
+        resourceOwnerLoadFileSync();
         FUN_0040ab7c(*(unsigned int *)(temp_v3 + 0x60ffbc),2);
         FUN_0040a908(*(unsigned int *)(temp_v3 + 0x60ffbc),0x10000);
         FUN_0040a918(*(unsigned int *)(temp_v3 + 0x60ffbc),0x20000);
         FUN_0040aad4(*(unsigned int *)(temp_v3 + 0x60ffbc),0);
         temp_v6 = *(unsigned int *)(*(int *)(temp_v3 + 0x60ffbc) + 4);
-        FUN_003fe86c(temp_v6,0,2);
+        modelPlayClip(temp_v6,0,2);
         handleRegistryRegisterObject(g_handleRegistry,temp_v6);
         if (temp_v7 != 5) {
           controllerSetPosition(*(unsigned int *)(*(int *)(temp_v3 + 0x60ffbc) + 4));
@@ -327,7 +327,7 @@ void FUN_002c553c(void)
             if ((&DAT_0060ffa4)[temp_v7] <= temp_v9) goto LAB_002c5d90;
             if (temp_v9 == 0) break;
             temp_v11 = 0x20;
-            FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapRndMaze.cpp",0x90b);
+            asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapRndMaze.cpp",0x90b);
             temp_v6 = 0;
             if (temp_v11 != 0) {
               temp_v6 = modelListInit();
@@ -338,7 +338,7 @@ void FUN_002c553c(void)
             moriModelContentCopyBody(*(unsigned int *)(&g_mapRndMaze + temp_v11 + 0x3cc),
                          *(unsigned int *)(temp_v3 + 0x60ffbc),0);
             temp_v6 = *(unsigned int *)(*(int *)(&g_mapRndMaze + temp_v11 + 0x3cc) + 4);
-            FUN_003fe86c(temp_v6,0,2);
+            modelPlayClip(temp_v6,0,2);
             handleRegistryRegisterObject(g_handleRegistry,temp_v6);
             if (temp_v7 != 5) {
               controllerSetPosition(temp_v6);

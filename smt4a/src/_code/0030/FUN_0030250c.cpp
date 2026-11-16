@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
+int libm_cosf(void);
+int libm_sinf(void);
 int FUN_0029406c(int *, int *, int *);
 int FUN_002e34a4(unsigned int *, int *, int *, unsigned char [24]);
 
@@ -34,8 +34,8 @@ typedef struct {
 extern unsigned char DAT_005806a0; /* 0x5806a0 */
 extern int g_lmapScene; /* 0x581288 */
 
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_0029406c. */
 /* Supplied declaration required: FUN_002e34a4. */
 extern int FUN_003033d4(void);
@@ -83,9 +83,9 @@ void FUN_0030250c(void)
     temp_v19 = temp_v7;
     temp_v0 = FUN_003033d4();
     temp_v1 = *(float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x18) * 0.017453292f;
-    FUN_001bc124();
+    libm_sinf();
     temp_v1 = *(float *)(g_lmapScene + 0x1c) - temp_v1 * *(float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + temp_v0 * 4 + 0x18c);
-    FUN_001bbf0c();
+    libm_cosf();
     FUN_0029406c(&temp_v2,&temp_v14,&temp_v17);
     *(float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x218) = temp_v1 - *(float *)(g_lmapScene + 0x20);
   }

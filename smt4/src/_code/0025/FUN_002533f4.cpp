@@ -12,7 +12,7 @@ struct Table02Sub2Entry;
 extern "C" {
 extern AocSystem* g_aocSystem;
 u16* gameDataGetTableEntry(u32 category, u32 index);
-void FUN_002c0a9c(u32 category, u32 index, u32 initialize);
+void weightedTableRollNextValue(u32 category, u32 index, u32 initialize);
 Table02Sub2Entry* aocFindSpriteTemplateByKey(AocSystem*, u32);
 Table00Record* dataTable00FindById(u32 id);
 
@@ -20,7 +20,7 @@ u16 FUN_002533f4(u32 category, u32 index, s32 filterArrangements)
 {
     s32 choicesId = *gameDataGetTableEntry(category, index);
     if (!choicesId) {
-        FUN_002c0a9c(category, index, 1);
+        weightedTableRollNextValue(category, index, 1);
         choicesId = *gameDataGetTableEntry(category, index);
     }
     void* table = dataTableGet(2, 1);

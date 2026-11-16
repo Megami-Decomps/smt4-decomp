@@ -17,7 +17,7 @@ int statusPanelSetOpen(...);
 int FUN_0029d8f4(...);
 int FUN_0029dfc0(...);
 int buttonHelpSetPreset(...);
-int FUN_002bf810(...);
+int soundPlaySeUnpanned(...);
 
 int objectFlagsClear(...);
 int FUN_00262f78(void);
@@ -36,9 +36,9 @@ int gameGlobalsSetSelected(...);
 int FUN_0029bed8(...);
 int unitRecalculateEffectiveStats(...);
 int FUN_0029e788(void);
-int FUN_0029e874(...);
+int gameSetIconDisplayEnabled(...);
 int FUN_0029ede8(...);
-int FUN_002bd06c(unsigned int);
+int dataTable01FindByIdWithAoc(unsigned int);
 int __aeabi_memcpy4(int, int, int);
 
 extern int scrRunOpcodesStub(unsigned int);
@@ -79,13 +79,13 @@ extern int FUN_0029563c(void);
 /* Supplied declaration required: FUN_0029dfc0. */
 extern int FUN_0029e0f8(void);
 /* Supplied declaration required: FUN_0029e788. */
-/* Supplied declaration required: FUN_0029e874. */
+/* Supplied declaration required: gameSetIconDisplayEnabled. */
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: FUN_002a0cc8. */
 /* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: FUN_002bd06c. */
+/* Supplied declaration required: dataTable01FindByIdWithAoc. */
 /* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_002bf810. */
+/* Supplied declaration required: soundPlaySeUnpanned. */
 extern int padIsButtonPressed(unsigned int);
 /* Supplied declaration required: __aeabi_memcpy4. */
 
@@ -114,7 +114,7 @@ unsigned int FUN_001dbf34(int param_1)
   switch(*(unsigned int *)(param_1 + 0xd38)) {
   case 0:
     temp_v4 = (unsigned int)*(unsigned short *)(temp_v3 + 0x46);
-    FUN_002bd06c(temp_v4);
+    dataTable01FindByIdWithAoc(temp_v4);
     libc_strcpy(reinterpret_cast<unsigned int *>(temp_v8), reinterpret_cast<unsigned int *>(temp_v4));
     textEncodeFontSlot(0,temp_v8);
     scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0xd04),0x16);
@@ -150,7 +150,7 @@ unsigned int FUN_001dbf34(int param_1)
     break;
   case 4:
     temp_v4 = (unsigned int)*(unsigned short *)(temp_v3 + 0x46);
-    FUN_002bd06c(temp_v4);
+    dataTable01FindByIdWithAoc(temp_v4);
     libc_strcpy(reinterpret_cast<unsigned int *>(temp_v8), reinterpret_cast<unsigned int *>(temp_v4));
     textEncodeFontSlot(0,temp_v8);
     temp_v2 = (int)*(short *)(param_1 + 0xd4);
@@ -241,7 +241,7 @@ unsigned int FUN_001dbf34(int param_1)
             if (temp_v2 < 1) {
               gameGlobalsSetSelected(0);
               statusDownSwitchTab(0);
-              FUN_0029e874(0);
+              gameSetIconDisplayEnabled(0);
               temp_v6 = FUN_00262f78();
               statusBustUpPortraitAcquire(temp_v6,1);
               unitRecalculateEffectiveStats(temp_v3);
@@ -303,7 +303,7 @@ unsigned int FUN_001dbf34(int param_1)
     btlTalkBustUpReleaseTexture();
     btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v3 + 0x46),1);
     *(unsigned char *)(param_1 + 0xd62) = 0;
-    FUN_0029e874(1);
+    gameSetIconDisplayEnabled(1);
     FUN_0029e788();
     temp_v3 = partyPanelIsActive();
     if (temp_v3 == 0) {
@@ -339,7 +339,7 @@ unsigned int FUN_001dbf34(int param_1)
        ((temp_v3 = FUN_00293aac(), temp_v3 == 0 &&
         ((temp_v3 = padIsButtonPressed(0), temp_v3 != 0 || (temp_v3 = buttonHelpHasEnabledEntryForId(1), temp_v3 != 0)))))) {
       FUN_002a0cc8(1);
-      FUN_002bf810(0x100016d);
+      soundPlaySeUnpanned(0x100016d);
       *piVar7 = *(int *)(param_1 + 0xd38) + 1;
       beginStatusPanelClose();
     }
@@ -378,7 +378,7 @@ LAB_001dc504:
     statusDownSwitchTab(0);
     FUN_0026d654(1);
     FUN_0029dfc0(0);
-    FUN_0029e874(0);
+    gameSetIconDisplayEnabled(0);
     FUN_0029c4c8(0);
     FUN_0026d670();
     *(unsigned char *)(param_1 + 0xd64) = 0;

@@ -6,8 +6,8 @@ extern "C" {
 
 float FUN_0028f4b4(const char *, unsigned int, float);
 int textDrawString(...);
-int FUN_002bed3c(void);
-int FUN_002bf380(...);
+int gxResetColorQuadToWhite(void);
+int texDrawCompositeSprite(...);
 int efctSetSpeed(...);
 int dataTableGet(int, int);
 int renderCtxSelectStereoLayout(int);
@@ -28,14 +28,14 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0028f4b4. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: FUN_002bed3c. */
-/* Supplied declaration required: FUN_002bf380. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 extern int asdTMTexTableEntryAt(unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: dataTableGet. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
@@ -72,8 +72,8 @@ int FUN_002ca7fc(unsigned int handle)
       *(unsigned char *)(temp_v2 + 0x12c4) = 0;
     }
     efctSetSpeed();
-    FUN_002bed3c();
-    FUN_002bf380(2,0x11,1,0,0,2);
+    gxResetColorQuadToWhite();
+    texDrawCompositeSprite(2,0x11,1,0,0,2);
     temp_v2 = g_titleScene;
     piVar7 = (int *)(g_titleScene + 0x12ac);
     temp_v1 = *piVar7;
@@ -84,7 +84,7 @@ int FUN_002ca7fc(unsigned int handle)
       *(unsigned char *)(temp_v2 + 0x12c4) = 0;
     }
     temp_v2 = g_titleScene;
-    temp_v1 = FUN_002c5d80(1,0);
+    temp_v1 = renderCtxPackPassFlags(1,0);
     piVar7 = (int *)(temp_v2 + 0x124c);
     temp_v4 = *piVar7;
     temp_v5 = piVar7[temp_v4 + 2];
@@ -95,7 +95,7 @@ int FUN_002ca7fc(unsigned int handle)
       *(unsigned char *)(temp_v2 + 0x1264) = 0;
     }
     efctSetSpeed();
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     temp_v10 = 0xff;
     if (*(char *)(temp_v3 + 0x60) == '\0') {
       temp_v10 = 0x787878ff;
@@ -123,10 +123,10 @@ int FUN_002ca7fc(unsigned int handle)
       else {
         efctSetSpeed(temp_v5);
         temp_v5 = temp_v3 + temp_v1 * 8;
-        FUN_002bf380(2,0x11,2,(int)*(float *)(temp_v5 + 0x40),(int)*(float *)(temp_v5 + 0x44),2);
+        texDrawCompositeSprite(2,0x11,2,(int)*(float *)(temp_v5 + 0x40),(int)*(float *)(temp_v5 + 0x44),2);
         efctSetSpeed();
         efctSetSpeed();
-        FUN_002bf380(2,0x11,2,(int)*(float *)(temp_v5 + 0x40),(int)*(float *)(temp_v5 + 0x44),2);
+        texDrawCompositeSprite(2,0x11,2,(int)*(float *)(temp_v5 + 0x40),(int)*(float *)(temp_v5 + 0x44),2);
         efctSetSpeed();
         temp_v7 = (float)VectorSignedToFloat((int)*(short *)(temp_v2 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v2 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);

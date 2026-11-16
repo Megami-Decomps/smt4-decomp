@@ -115,8 +115,8 @@ static const u8 DAT_004013d4[0x39C] = {
 
 void drawParameterBlockClear(UiResourceParameters *resources);
 
-void FUN_002bd954(SpriteSlot *sprite, s32 kind, s32 count, UiResourceParameters *resources, u16 flags, f32 speed);
-void FUN_00295eb0(SpriteSlot *sprite, s32 kind, s32 count);
+void uiSpriteStateInitFromSource(SpriteSlot *sprite, s32 kind, s32 count, UiResourceParameters *resources, u16 flags, f32 speed);
+void uiStoreTextureEntryCenter(SpriteSlot *sprite, s32 kind, s32 count);
 void FUN_002a9fdc(SpriteSlot *sprite, s32 arg, s32 flag);
 void spriteStartAnimationByIndex(SpriteSlot *sprite, s32 animation);
 
@@ -145,36 +145,36 @@ void FUN_001f50ac(SpritePool *pool)
                DAT_004013b8, 0x1C, DAT_004013d4, 0x39C);
 
     for (s32 i = 0; i <= 9; i++) {
-        FUN_002bd954(&pool->sprites[i], SPRITE_KIND, 0, &pool->resources, 2, 1.0f);
-        FUN_00295eb0(&pool->sprites[i], SPRITE_KIND, i + 0xB);
+        uiSpriteStateInitFromSource(&pool->sprites[i], SPRITE_KIND, 0, &pool->resources, 2, 1.0f);
+        uiStoreTextureEntryCenter(&pool->sprites[i], SPRITE_KIND, i + 0xB);
         FUN_002a9fdc(&pool->sprites[i], 5, 0);
     }
     for (s32 i = 10; i <= 19; i++) {
-        FUN_002bd954(&pool->sprites[i], SPRITE_KIND, 4, &pool->resources, 2, 1.0f);
-        FUN_00295eb0(&pool->sprites[i], SPRITE_KIND, i + 0x15);
+        uiSpriteStateInitFromSource(&pool->sprites[i], SPRITE_KIND, 4, &pool->resources, 2, 1.0f);
+        uiStoreTextureEntryCenter(&pool->sprites[i], SPRITE_KIND, i + 0x15);
         spriteStartAnimationByIndex(&pool->sprites[i], 2);
     }
     for (s32 i = 0x14; i <= 29; i++) {
-        FUN_002bd954(&pool->sprites[i], SPRITE_KIND, 7, &pool->resources, 2, 1.0f);
-        FUN_00295eb0(&pool->sprites[i], SPRITE_KIND, i + 1);
+        uiSpriteStateInitFromSource(&pool->sprites[i], SPRITE_KIND, 7, &pool->resources, 2, 1.0f);
+        uiStoreTextureEntryCenter(&pool->sprites[i], SPRITE_KIND, i + 1);
         spriteStartAnimationByIndex(&pool->sprites[i], 5);
     }
     for (s32 i = 0x1E; i <= 39; i++) {
-        FUN_002bd954(&pool->sprites[i], SPRITE_KIND, 2, &pool->resources, 2, 1.0f);
-        FUN_00295eb0(&pool->sprites[i], SPRITE_KIND, i - 9);
+        uiSpriteStateInitFromSource(&pool->sprites[i], SPRITE_KIND, 2, &pool->resources, 2, 1.0f);
+        uiStoreTextureEntryCenter(&pool->sprites[i], SPRITE_KIND, i - 9);
         spriteStartAnimationByIndex(&pool->sprites[i], 3);
     }
     for (s32 i = 0x28; i <= 49; i++) {
-        FUN_002bd954(&pool->sprites[i], SPRITE_KIND, 4000, &pool->resources, 2, 1.0f);
-        FUN_00295eb0(&pool->sprites[i], SPRITE_KIND, i - 0x13);
+        uiSpriteStateInitFromSource(&pool->sprites[i], SPRITE_KIND, 4000, &pool->resources, 2, 1.0f);
+        uiStoreTextureEntryCenter(&pool->sprites[i], SPRITE_KIND, i - 0x13);
         spriteStartAnimationByIndex(&pool->sprites[i], 0xB);
     }
     for (s32 i = 0x32; i <= 59; i++) {
-        FUN_002bd954(&pool->sprites[i], SPRITE_KIND, 0xFA6, &pool->resources, 2, 1.0f);
-        FUN_00295eb0(&pool->sprites[i], SPRITE_KIND, i - 0x1D);
+        uiSpriteStateInitFromSource(&pool->sprites[i], SPRITE_KIND, 0xFA6, &pool->resources, 2, 1.0f);
+        uiStoreTextureEntryCenter(&pool->sprites[i], SPRITE_KIND, i - 0x1D);
         spriteStartAnimationByIndex(&pool->sprites[i], 10);
     }
-    FUN_002bd954(&pool->sprites[0x3C], SPRITE_KIND, 0, &pool->resources, 1, 1.0f);
+    uiSpriteStateInitFromSource(&pool->sprites[0x3C], SPRITE_KIND, 0, &pool->resources, 1, 1.0f);
 }
 
 } /* extern "C" */

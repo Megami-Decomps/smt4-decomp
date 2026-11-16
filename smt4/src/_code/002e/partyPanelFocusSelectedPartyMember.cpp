@@ -24,7 +24,7 @@ extern "C" {
 extern PartyPanelState *g_partyPanel;
 u8 *gameGetSlotTable();
 void timerStart(void *, s32, s32);
-void FUN_0029378c(PartyPanelWidget *, u32);
+void slotPlacementAssignSlotAndPosition(PartyPanelWidget *, u32);
 void FUN_002937e0();
 void scrollOwnerSelectIndex(ScrollSelectionOwner *, s32);
 void FUN_0029eb5c(ScrollSelection *, s32);
@@ -39,10 +39,10 @@ static void partyPanelCollapse(void)
     panel->unk2C ^= 1;
     timerStart(panel->timerC, 5, 0);
     for (i = 0; i < 4; i++) {
-        FUN_0029378c(panel->characters[i], panel->unk2C);
+        slotPlacementAssignSlotAndPosition(panel->characters[i], panel->unk2C);
     }
     for (i = 0; i < 24; i++) {
-        FUN_0029378c(panel->demons[i], panel->unk2C);
+        slotPlacementAssignSlotAndPosition(panel->demons[i], panel->unk2C);
     }
     FUN_002937e0();
 }
@@ -56,10 +56,10 @@ static void partyPanelExpand(void)
     panel->unk2C ^= 1;
     timerStart(panel->timerC, 4, 0);
     for (i = 0; i < 4; i++) {
-        FUN_0029378c(panel->characters[i], panel->unk2C);
+        slotPlacementAssignSlotAndPosition(panel->characters[i], panel->unk2C);
     }
     for (i = 0; i < 24; i++) {
-        FUN_0029378c(panel->demons[i], panel->unk2C);
+        slotPlacementAssignSlotAndPosition(panel->demons[i], panel->unk2C);
     }
     FUN_002937e0();
 }

@@ -9,7 +9,7 @@ int renderCtxCallB(...);
 int nn_math_ARMv6_MTX34AddTranslateAsm(...);
 int nn_math_ARMv6_MTX34MultTranslateAsm_2A3504(...);
 int renderCtxCalculateStereoParallax(...);
-int FUN_002bed3c(void);
+int gxResetColorQuadToWhite(void);
 int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int renderCtxApplyTransforms(...);
@@ -49,11 +49,11 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: nn_math_ARMv6_MTX34AddTranslateAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultTranslateAsm_2A3504. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
-/* Supplied declaration required: FUN_002bed3c. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
@@ -92,7 +92,7 @@ unsigned int FUN_00335b80(int *param_1)
   
   temp_v1 = g_titleScene;
   if ((*param_1 == 8) && (param_1[7] != 0)) {
-    temp_v0 = FUN_002c5d80(1,0);
+    temp_v0 = renderCtxPackPassFlags(1,0);
     piVar5 = (int *)(temp_v1 + 0x124c);
     temp_v2 = *piVar5;
     temp_v3 = piVar5[temp_v2 + 2];
@@ -104,12 +104,12 @@ unsigned int FUN_00335b80(int *param_1)
     }
     temp_v6 = 0x3f800000;
     efctSetSpeed();
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     asdTMTexTableEntryAt(0x2d,3000);
     temp_v4 = 0.35f;
     renderCtxCalculateStereoParallax(g_titleScene);
     temp_v4 = (float)VectorSignedToFloat((int)temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002bf288(2,0x2d,3000,(int)temp_v4,0,2);
+    texDrawTableEntryAtStoredOrigin(2,0x2d,3000,(int)temp_v4,0,2);
     temp_v1 = g_titleScene;
     piVar5 = (int *)(g_titleScene + 0x124c);
     temp_v0 = *piVar5;
@@ -132,7 +132,7 @@ unsigned int FUN_00335b80(int *param_1)
       *(unsigned char *)(temp_v1 + 0x12c4) = 0;
     }
     efctSetSpeed();
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     temp_v1 = asdTMTexTableEntryAt(0x2d,0x7d2);
     temp_v9[0] = param_1[0xb];
     temp_v20 = 0;
@@ -166,7 +166,7 @@ unsigned int FUN_00335b80(int *param_1)
     temp_v7 = 0.5f;
     temp_v5 = (float)VectorSignedToFloat((int)temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v8 = (float)VectorSignedToFloat(-(int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002bf288(2,0x2d,2000,(int)(temp_v5 + temp_v8 * 0.5f),-(int)*(short *)(temp_v1 + 10),6);
+    texDrawTableEntryAtStoredOrigin(2,0x2d,2000,(int)(temp_v5 + temp_v8 * 0.5f),-(int)*(short *)(temp_v1 + 10),6);
     renderCtxApplyTransforms(g_titleScene);
     efctSetSpeed();
     efctSetSpeed();
@@ -193,7 +193,7 @@ unsigned int FUN_00335b80(int *param_1)
     renderCtxCalculateStereoParallax(g_titleScene);
     temp_v8 = (float)VectorSignedToFloat((int)temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v4 = (float)VectorSignedToFloat(-(int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002bf288(2,0x2d,0x7d1,(int)(temp_v8 + temp_v4 * temp_v7),-(int)*(short *)(temp_v1 + 10),6);
+    texDrawTableEntryAtStoredOrigin(2,0x2d,0x7d1,(int)(temp_v8 + temp_v4 * temp_v7),-(int)*(short *)(temp_v1 + 10),6);
     renderCtxApplyTransforms(g_titleScene);
     efctSetSpeed();
     temp_v1 = g_titleScene;
@@ -207,7 +207,7 @@ unsigned int FUN_00335b80(int *param_1)
     }
     efctSetSpeed();
     temp_v1 = g_titleScene;
-    temp_v0 = FUN_002c5d80(1,0);
+    temp_v0 = renderCtxPackPassFlags(1,0);
     piVar5 = (int *)(temp_v1 + 0x124c);
     temp_v2 = *piVar5;
     temp_v3 = piVar5[temp_v2 + 2];
@@ -218,12 +218,12 @@ unsigned int FUN_00335b80(int *param_1)
       *(unsigned char *)(temp_v1 + 0x1264) = 0;
     }
     efctSetSpeed();
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     asdTMTexTableEntryAt(0x2d,1000);
     temp_v4 = 0.28f;
     renderCtxCalculateStereoParallax(g_titleScene);
     temp_v4 = (float)VectorSignedToFloat((int)temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002bf288(2,0x2d,1000,(int)temp_v4,0,6);
+    texDrawTableEntryAtStoredOrigin(2,0x2d,1000,(int)temp_v4,0,6);
     temp_v1 = g_titleScene;
     piVar5 = (int *)(g_titleScene + 0x124c);
     temp_v0 = *piVar5;

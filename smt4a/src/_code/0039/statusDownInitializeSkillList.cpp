@@ -53,7 +53,7 @@ s32 countUnlockedSlots();
 s32 getUnlockedSlotCount();
 void fillTwoWordsWithByte(u32 *destination, u32 value);
 u8 FUN_002c7e3c();
-void FUN_00203b40(void *controller, s32 items, s32 visible, s32 columns,
+void gridNavigationConfigure(void *controller, s32 items, s32 visible, s32 columns,
                   s32 option, s32 secondOption);
 s32 FUN_002857b8();
 void FUN_003343f0(u8 value);
@@ -96,7 +96,7 @@ void statusDownInitializeSkillList()
         copyStatusSkillSlots(menu, source, count);
     }
     s32 items = menu->count + 1;
-    FUN_00203b40(menu->controller, items, items, 1, 1, 1);
+    gridNavigationConfigure(menu->controller, items, items, 1, 1, 1);
     menu->activatedSession = 0;
     if (FUN_002857b8() == 0) {
         FUN_003343f0(1);

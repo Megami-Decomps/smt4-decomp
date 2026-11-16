@@ -6,8 +6,8 @@
 using nw::math::MTX34;
 
 extern "C" {
-f32 FUN_001bbf0c(f32 radians);
-f32 FUN_001bc124(f32 radians);
+f32 libm_cosf(f32 radians);
+f32 libm_sinf(f32 radians);
 void eplSlotStartRequest(s32 slot);
 void mapEplSetSlotPosition(s32 slot, f32 x, f32 y, f32 z);
 void nn_math_ARMv6_MTX34CopyAsm(MTX34 *dest, const MTX34 *source);
@@ -66,8 +66,8 @@ void FUN_003136e4(f32 angle, f32 distance)
     f32 y = g_lmapScene->transform.position[1];
     f32 z = g_lmapScene->transform.position[2];
     f32 radians = (g_lmapScene->transform.headingDegrees + angle) * 0.017453292f;
-    x += FUN_001bc124(radians) * distance;
-    z += FUN_001bbf0c(radians) * distance;
+    x += libm_sinf(radians) * distance;
+    z += libm_cosf(radians) * distance;
     y += 5.0f;
     eplSlotStartRequest(0);
 

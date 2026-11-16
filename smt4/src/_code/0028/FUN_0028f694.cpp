@@ -24,7 +24,7 @@ extern CampHelpPrefixIV* g_camp;
 extern RenderCtx* g_titleScene;
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *object);
-void FUN_002bf380(u32 kind, u32 table, u32 sprite, s32 x, s32 y, u32 parameter);
+void texDrawCompositeSprite(u32 kind, u32 table, u32 sprite, s32 x, s32 y, u32 parameter);
 s32 ifTouchGetSelectionModeForRegion(u32 region);
 SpriteInfo* asdTMTexTableEntryAt(u32 table, u32 id);
 s32 vec2GetXInt(UiSpriteState* animation);
@@ -35,14 +35,14 @@ void FUN_0028f694(s32 x, s32 y, u32 region)
 {
     CampButtonAnimationViewIV* camp = reinterpret_cast<CampButtonAnimationViewIV*>(g_camp);
     efctSetSpeed(vec2GetSpeed(&camp->background));
-    FUN_002bf380(2, 0x1D, 6, x, y, 0x79);
+    texDrawCompositeSprite(2, 0x1D, 6, x, y, 0x79);
     efctSetSpeed(1.0f);
-    FUN_002bf288(2, 0x1D, 0x429, x, y, 0x7E);
+    texDrawTableEntryAtStoredOrigin(2, 0x1D, 0x429, x, y, 0x7E);
     s32 mode = ifTouchGetSelectionModeForRegion(region);
     if (mode == 1 || mode == 2 || mode == 6) {
-        FUN_002bf288(2, 0x1D, 0x42B, x, y, 0x83);
+        texDrawTableEntryAtStoredOrigin(2, 0x1D, 0x42B, x, y, 0x83);
     } else {
-        FUN_002bf288(2, 0x1D, 0x42A, x, y, 0x83);
+        texDrawTableEntryAtStoredOrigin(2, 0x1D, 0x42A, x, y, 0x83);
     }
     CampButtonSpriteView* sprite = reinterpret_cast<CampButtonSpriteView*>(asdTMTexTableEntryAt(0x1D, 0x42A));
     s32 markerX = vec2GetXInt(&camp->marker);
@@ -50,7 +50,7 @@ void FUN_0028f694(s32 x, s32 y, u32 region)
     CampButtonRenderViewIV* context = reinterpret_cast<CampButtonRenderViewIV*>(g_titleScene);
     renderStackSet(&context->scissor, 3);
     FUN_0029a17c(sprite->x + x, sprite->y + y, sprite->size[0], sprite->size[1], 1);
-    FUN_002bf288(2, 0x1D, 0x42C, x + markerX, y + markerY, 0x88);
+    texDrawTableEntryAtStoredOrigin(2, 0x1D, 0x42C, x + markerX, y + markerY, 0x88);
     context = reinterpret_cast<CampButtonRenderViewIV*>(g_titleScene);
     renderStackSet(&context->scissor, 0);
 }

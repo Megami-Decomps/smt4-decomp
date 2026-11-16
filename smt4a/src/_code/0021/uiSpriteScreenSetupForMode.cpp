@@ -21,7 +21,7 @@ extern "C" {
 
 void uiSpriteSelectAnim(ScreenSprite *sprite, s32 animation);
 void pairSetFirstResetSecond(ScreenSprite *sprite, s32 first);
-void FUN_00387240(ScreenSprite *sprite, s32 kind, s32 value);
+void uiStoreTextureEntryCenter(ScreenSprite *sprite, s32 kind, s32 value);
 
 /* Sets the screen's sprites up for its current mode: which animation each sprite plays and the
  * value it shows. */
@@ -54,8 +54,8 @@ void uiSpriteScreenSetupForMode(SpriteScreenWork *work)
     case 5:
         pairSetFirstResetSecond(&work->sprite[1], 0x59D9);
         pairSetFirstResetSecond(&work->sprite[2], 0x59DA);
-        FUN_00387240(&work->sprite[1], 0x10, 0x59DB);
-        FUN_00387240(&work->sprite[2], 0x10, 0x59DB);
+        uiStoreTextureEntryCenter(&work->sprite[1], 0x10, 0x59DB);
+        uiStoreTextureEntryCenter(&work->sprite[2], 0x10, 0x59DB);
         uiSpriteSelectAnim(&work->sprite[1], 7);
         uiSpriteSelectAnim(&work->sprite[2], 8);
         return;

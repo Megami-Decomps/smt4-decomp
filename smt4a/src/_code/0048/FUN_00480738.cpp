@@ -7,13 +7,13 @@ extern u32 DAT_0057f724[11];
 extern u32 DAT_0057f750[11];
 extern u32 DAT_0057f77c[11];
 extern u32 DAT_0057f7a8[11];
-s32 FUN_001ba3d4(u32 id);
+s32 flagValueRead(u32 id);
 }
 
 static s32 addMemberValues(s32 total, const u32 *members)
 {
     for (s32 i = 0; i < 11; ++i)
-        total += FUN_001ba3d4(members[i]);
+        total += flagValueRead(members[i]);
     return total;
 }
 

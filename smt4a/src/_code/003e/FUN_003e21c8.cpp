@@ -68,10 +68,10 @@ void battleRestoreCameraVectors(EncounterContextA *context);
 void words10CopyHighToLow(void *camera);
 s32 FUN_003e0f94(BattleEncounterQuery *query, EncounterContextA *context);
 void FUN_003e0bb8(BattleEncounterQuery *query, EncounterContextA *context);
-u16 *FUN_001568f8(EncounterContextA *context, s32 entry);
+u16 *btlFindEntryBlockByMemberId(EncounterContextA *context, s32 entry);
 s32 pairedEntryTableContains(EncounterContextA *context, u16 id);
-void FUN_004fb43c(s32, s32, s32, s32, s32, s32, s32);
-void FUN_002e5924(s32 mode);
+void btlQueueActionMessage(s32, s32, s32, s32, s32, s32, s32);
+void frameTexRequestFade(s32 mode);
 
 /* Encounter state 0x16: copies the file's records in, marks the unloaded ones and moves on to state 0x17. */
 void FUN_003e21c8(BattleEncounterQuery *query, EncounterContextA *context)
@@ -124,7 +124,7 @@ void FUN_003e21c8(BattleEncounterQuery *query, EncounterContextA *context)
             if ((record->flags & 1) && (record->flags & 2) && (record->stateFlags & 8)) {
                 record->stateFlags &= ~8;
                 if (!(record->loadFlags & 0x800)) {
-                    u16 *entry = FUN_001568f8(context, record->entryId);
+                    u16 *entry = btlFindEntryBlockByMemberId(context, record->entryId);
 
                     if (!pairedEntryTableContains(context, entry[1])) {
                         record->loadFlags |= 0x800;
@@ -132,14 +132,14 @@ void FUN_003e21c8(BattleEncounterQuery *query, EncounterContextA *context)
                 }
             }
         }
-        FUN_004fb43c(0, 0, 0x100021b, 0, 0, 0, 0);
+        btlQueueActionMessage(0, 0, 0x100021b, 0, 0, 0, 0);
     }
     query->elapsed = 0;
     query->step = 0x17;
     query->pending = 0;
     result = FUN_003e0f94(query, context);
     if (result != 2 && result != 5 && !(*flags & (((u64)g_btlEncount.startedHigh << 32) | g_btlEncount.startedLow))) {
-        FUN_002e5924(2);
+        frameTexRequestFade(2);
         *flags |= ((u64)g_btlEncount.startedHigh << 32) | g_btlEncount.startedLow;
     }
     FUN_003e0bb8(query, context);

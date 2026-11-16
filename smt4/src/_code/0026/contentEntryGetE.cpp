@@ -12,7 +12,7 @@ typedef struct AocSystem002670cc AocSystem002670cc;
 
 void *dataTableGet(s32 table, s32 slot);
 u32 dataTableGetCount(void *table);
-s32 FUN_0025bed8(AocSystem002670cc *aoc, s32 kind, s32 slot);
+s32 groupedFileTablesCountRecordsOfKind(AocSystem002670cc *aoc, s32 kind, s32 slot);
 Entry002670cc *FUN_00389af4(AocSystem002670cc *aoc, u32 index);
 
 extern AocSystem002670cc *g_aocSystem; /* 0x433158 */
@@ -27,7 +27,7 @@ Entry002670cc *contentEntryGetE(u32 index)
     if (index < count) {
         return &entries[index];
     }
-    if (index < FUN_0025bed8(g_aocSystem, 0x28, 1) + count) {
+    if (index < groupedFileTablesCountRecordsOfKind(g_aocSystem, 0x28, 1) + count) {
         return FUN_00389af4(g_aocSystem, index - count);
     }
     return NULL;

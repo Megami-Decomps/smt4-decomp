@@ -18,7 +18,7 @@ typedef struct Entity003ab7c8 {
     /* 0x188 */ Placement placement;
 } Entity003ab7c8;
 
-void FUN_002bf818(Placement *placement);
+void uiSpriteAdvanceAnimation(Placement *placement);
 u32 vec2GetYInt(Placement *placement);
 u32 vec2GetXInt(Placement *placement);
 void pointConvertToFloat(u8 *target, u32 x, u32 y);
@@ -37,7 +37,7 @@ void Obj422448::FUN_003ab7c8()
     u32 y;
     u32 x;
 
-    FUN_002bf818(placement);
+    uiSpriteAdvanceAnimation(placement);
     y = vec2GetYInt(placement);
     x = vec2GetXInt(placement);
     pointConvertToFloat(entity->target, x, y);

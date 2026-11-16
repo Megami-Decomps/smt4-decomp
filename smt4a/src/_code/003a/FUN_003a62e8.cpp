@@ -9,12 +9,12 @@ static s32 findOrAllocateSelection(u16 id)
 {
     s32 index;
     for (index = 0; index < 24; ++index) {
-        if (FUN_002613f0(index)->values[0] == id)
+        if (saveGetSelectedRecordSlot(index)->values[0] == id)
             return index;
     }
     for (index = 0; index < 24; ++index) {
-        if (FUN_002613f0(index)->values[0] == 0) {
-            SelectedRecord *empty = FUN_002613f0(index);
+        if (saveGetSelectedRecordSlot(index)->values[0] == 0) {
+            SelectedRecord *empty = saveGetSelectedRecordSlot(index);
             empty->values[0] = 0;
             empty->values[1] = 0;
             empty->values[2] = 0;
@@ -37,10 +37,10 @@ void FUN_003a62e8(const void *record)
     const OwnerView *owner = static_cast<const OwnerView *>(record);
     u16 id = owner->id;
     for (s32 index = 0; index < 24; ++index) {
-        if (FUN_002613f0(index)->values[0] == id) {
-            if (recordContainsPairedId(&owner->pairs, FUN_002613f0(index)->values[1]))
+        if (saveGetSelectedRecordSlot(index)->values[0] == id) {
+            if (recordContainsPairedId(&owner->pairs, saveGetSelectedRecordSlot(index)->values[1]))
                 return;
-            SelectedRecord *selection = FUN_002613f0(index);
+            SelectedRecord *selection = saveGetSelectedRecordSlot(index);
             selection->values[0] = 0;
             selection->values[1] = 0;
             selection->values[2] = 0;
@@ -52,8 +52,8 @@ void FUN_003a62e8(const void *record)
                 return;
             u16 replacement = FUN_003f3104(owner);
             if (replacement != 0) {
-                FUN_002613f0(slot)->values[0] = owner->id;
-                FUN_002613f0(slot)->values[3] = replacement;
+                saveGetSelectedRecordSlot(slot)->values[0] = owner->id;
+                saveGetSelectedRecordSlot(slot)->values[3] = replacement;
             }
             return;
         }

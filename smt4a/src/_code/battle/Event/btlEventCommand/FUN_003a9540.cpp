@@ -5,7 +5,7 @@ extern "C" {
 s32 scrGetCommandFrame(void);
 const char *scrGetArgString(u32 index);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
-void *FUN_00178b04(u32 size, const char *file, s32 line);
+void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 u32 *battleModelOwnerInitialize(u32 *owner);
 void FUN_004d854c(u32 *owner);
 void callOnHandleField4D(u32 *owner, f32 x, f32 y, f32 z);
@@ -34,7 +34,7 @@ u32 FUN_003a9540(void)
     char path[64] = {};
     textFormatBuffer(path, "battle/model/%s.bam", name);
     if (state->eventModel.owner == NULL) {
-        u32 *owner = (u32 *)FUN_00178b04(0x24,
+        u32 *owner = (u32 *)asdMemoryAllocTraced(0x24,
             "c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\Event\\btlEventCommand.cpp", 0x54b);
         if (owner != NULL)
             owner = battleModelOwnerInitialize(owner);

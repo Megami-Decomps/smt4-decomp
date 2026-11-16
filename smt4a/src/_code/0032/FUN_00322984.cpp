@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00182540(...);
+int effectNodeUpdatePlacedChildren(...);
 int FUN_001b4c1c(...);
 int FUN_001bc460(void);
 int refCountIncrement(void);
@@ -102,7 +102,7 @@ extern float DAT_00647358; /* 0x647358 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SUB41 (SUBPIECE). */
-/* Supplied declaration required: FUN_00182540. */
+/* Supplied declaration required: effectNodeUpdatePlacedChildren. */
 /* Supplied declaration required: FUN_001b4c1c. */
 /* Supplied declaration required: FUN_001bc460. */
 /* Supplied declaration required: refCountIncrement. */
@@ -684,7 +684,7 @@ void FUN_00322984(fn_00322984_arg0 *param_1)
             FUN_001b4c1c(*puVar2,(temp_v13 & 0xff) |
                                  (temp_v7 << 0x18) | ((temp_v17 & 0xff) << 0x10) |
                                  ((temp_v0 & 0xff) << 8));
-            FUN_00182540(*puVar2);
+            effectNodeUpdatePlacedChildren(*puVar2);
           }
           temp_v1 = temp_v1 + 1;
           pfVar8 = pfVar8 + 10;

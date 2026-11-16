@@ -10,7 +10,7 @@ struct ParameterPairRecord {
 extern "C" {
 u32 dataTableValueOrZero(u32 slot);
 s32 binFileGetValue(BinFile* file);
-TbcrBlock* FUN_002bf384(BinFile* file, u32 index);
+TbcrBlock* fbinGetFile(BinFile* file, u32 index);
 s32 tbcrBlockGetPayload(TbcrBlock* block);
 void* dataTableFileGetTable(DataTableFile* file, u32 index);
 }
@@ -46,7 +46,7 @@ extern "C" void* dataTableSelectParameterVariant(s32 variant, u32 category, s32 
     if (static_cast<u32>(binFileGetValue(file)) <= 39) {
         blockIndex = 0;
     }
-    TbcrBlock* block = FUN_002bf384(file, blockIndex);
+    TbcrBlock* block = fbinGetFile(file, blockIndex);
     if (static_cast<u32>(tbcrBlockGetPayload(block)) <= tableIndex) {
         tableIndex = 0;
     }

@@ -19,7 +19,7 @@ typedef struct {
     Slot slots[5];      /* 0x618 */
 } Screen;
 
-int FUN_002bf818(Slot *slot);
+int uiSpriteAdvanceAnimation(Slot *slot);
 int flagBitIsSet(u32 flag);
 int gameFlagIsSet(u32 mask);
 s32 uiSpriteGetCompletionState(const void *record);
@@ -33,7 +33,7 @@ void menuScreenAdvanceConfirmedSlots(Screen *screen)
         i = 0;
         do {
             if (i <= screen->step) {
-                FUN_002bf818(&screen->slots[i]);
+                uiSpriteAdvanceAnimation(&screen->slots[i]);
             }
             i++;
         } while (i < 5);

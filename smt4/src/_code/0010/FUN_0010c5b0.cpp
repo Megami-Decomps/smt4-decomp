@@ -3,7 +3,7 @@
 
 extern "C" {
 extern AsdSoundSystem g_asdSound;
-void FUN_002bda30(s32 handle, s32 fadeFrames);
+void basicSoundStopOrFadeOut(s32 handle, s32 fadeFrames);
 s32 FUN_001221a0(s32 handle);
 
 /* Output slot `index` (0 or 1), or NULL for any other index. */
@@ -27,7 +27,7 @@ bool FUN_0010c5b0(u32 index, s32 frames)
         }
         if (!(current->flag & 0x10)) {
             if (slot->handle) {
-                FUN_002bda30(slot->handle, frames);
+                basicSoundStopOrFadeOut(slot->handle, frames);
             }
             slot->flag |= 0x10;
         }

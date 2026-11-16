@@ -17,13 +17,13 @@ typedef char RenderContextStorageSize[sizeof(RenderContextStorage) == 0x13a8 ? 1
 
 extern "C" {
 extern RenderContextStorage *g_renderCtx;
-void *FUN_00178b04(u32 size, const char *file, s32 line);
+void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 void FUN_00145adc(RenderContextStorage *context);
 
 /* Allocates and constructs the global render context. */
 void asdRenderContextCreate(void)
 {
-    RenderContextStorage *context = new (FUN_00178b04(sizeof(RenderContextStorage),
+    RenderContextStorage *context = new (asdMemoryAllocTraced(sizeof(RenderContextStorage),
         "c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\AsdRenderContext.cpp", 36)) RenderContextStorage;
     if (context != NULL) {
         f32 *scale = context->colorScale;

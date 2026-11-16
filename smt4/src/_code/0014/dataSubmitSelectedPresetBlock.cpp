@@ -15,7 +15,7 @@ struct GpuCommandDefaults {
 };
 extern "C" {
 extern const GpuCommandDefaults g_gpuCommandDefaults;
-void FUN_002adba8(const void *commands, u32 bytes, s32 copy);
+void gpuSubmitCommandBlock(const void *commands, u32 bytes, s32 copy);
 
 /* Snapshots the default packets and submits the selected command preset. */
 void dataSubmitSelectedPresetBlock(s32 mode)
@@ -25,13 +25,13 @@ void dataSubmitSelectedPresetBlock(s32 mode)
     GpuExtendedCommandPacket third = g_gpuCommandDefaults.third;
     switch (mode) {
     case 0:
-        FUN_002adba8(first.words, sizeof(first), 1);
+        gpuSubmitCommandBlock(first.words, sizeof(first), 1);
         return;
     case 1:
-        FUN_002adba8(second.words, sizeof(second), 1);
+        gpuSubmitCommandBlock(second.words, sizeof(second), 1);
         break;
     case 2:
-        FUN_002adba8(third.words, sizeof(third), 1);
+        gpuSubmitCommandBlock(third.words, sizeof(third), 1);
         break;
     }
 }

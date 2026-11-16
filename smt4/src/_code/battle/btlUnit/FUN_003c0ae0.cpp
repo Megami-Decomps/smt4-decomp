@@ -57,7 +57,7 @@ extern BtlCameraState *g_btlMain;
 extern s32 DAT_00439ce8;     /* debug override of the camera kind, negative: none */
 extern u32 DAT_00439cf8;     /* action tint colour */
 
-void FUN_0027da30(void *unit, s32 animation);
+void btlFindEntryBlockByMemberId(void *unit, s32 animation);
 s32 idSetFindSubjectIndex(void *unit, BtlUnitAction *action);
 s32 btlFindNthActiveSpecialEntry(void *unit, s32 arg);
 f32 FUN_002881bc(void);
@@ -132,8 +132,8 @@ void FUN_003c0ae0(u8 *unit, BtlUnitAction *action)
         s32 track = idSetFindSubjectIndex(unit, action);
         if (track < 0)
             track = 0;
-        FUN_0027da30(unit, action->animation);
-        u32 trackId = (u32)FUN_0027d9e8(unit, *(u32 *)(unit + track * 4 + 0xC));
+        btlFindEntryBlockByMemberId(unit, action->animation);
+        u32 trackId = (u32)idSlotsFindEntryById(unit, *(u32 *)(unit + track * 4 + 0xC));
         asdAnimGetTrackLastFrame(trackId, 0);
         action->delay = randNextInRange(((s32)frames - 1U) & 0xFFFF);
     }

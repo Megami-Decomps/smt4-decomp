@@ -39,7 +39,7 @@ extern GameStateView g_gameState;
 extern StatusPopupState *g_popupState;
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(s32 max);
-char *FUN_002d8b58(u32 kind, u32 id);
+char *popupSelectWeightedMessage(u32 kind, u32 id);
 void *rt_memcpy(void *dest, const void *src, u32 size);
 int textFormatBuffer(char *dest, const char *name, const char *format);
 
@@ -80,7 +80,7 @@ u32 FUN_0020ecd4(void)
                 g_popupState->state = 6;
                 g_popupState->phase = 0;
                 g_popupState->value = slot->statusId;
-                g_popupState->content = FUN_002d8b58(4, slot->statusId);
+                g_popupState->content = popupSelectWeightedMessage(4, slot->statusId);
                 rt_memcpy(name, g_popupState->content, 0x40);
                 if (playerHasFlagBit(5) != 0)
                     textFormatBuffer(g_popupState->text, name, "\x82\x6f\x82\x8f\x82\x89\x82\x93\x82\x8f\x82\x8e");

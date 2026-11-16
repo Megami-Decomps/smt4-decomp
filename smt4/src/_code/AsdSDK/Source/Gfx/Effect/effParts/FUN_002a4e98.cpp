@@ -10,7 +10,7 @@ int FUN_002a353c(...);
 int FUN_002a36fc(...);
 int FUN_002a3958(...);
 int FUN_002a3ab0(...);
-int FUN_002a3d58(...);
+int effPartInitDefaults(...);
 int libc_strcpy(...);
 int memAlloc(...);
 int memClear(...);
@@ -38,7 +38,7 @@ extern unsigned char g_handlerTable; /* 0x464110 */
 /* Supplied declaration required: FUN_002a36fc. */
 /* Supplied declaration required: FUN_002a3958. */
 /* Supplied declaration required: FUN_002a3ab0. */
-/* Supplied declaration required: FUN_002a3d58. */
+/* Supplied declaration required: effPartInitDefaults. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: memClear. */
@@ -76,7 +76,7 @@ unsigned int * FUN_002a4e98(unsigned int *param_1)
   memClear();
   puVar2[0x20] = 0;
   puVar2[0x21] = 0;
-  FUN_002a3d58(puVar2);
+  effPartInitDefaults(puVar2);
   temp_v4 = param_1[1];
   temp_v6 = param_1[2];
   temp_v8 = param_1[3];
@@ -105,7 +105,7 @@ unsigned int * FUN_002a4e98(unsigned int *param_1)
       *(unsigned char *)(temp_v1 + 0x88) = 8;
       *(unsigned char *)(temp_v1 + 0x89) = 0;
       *(unsigned char *)(temp_v1 + 0x8a) = 0;
-      FUN_002a3d58(temp_v1);
+      effPartInitDefaults(temp_v1);
       if ((*(unsigned int *)(temp_v9 + 0x98) & 1) != 0) {
         temp_v2 = param_1[0x23];
         for (temp_v3 = temp_v2;
@@ -201,7 +201,7 @@ unsigned int * FUN_002a4e98(unsigned int *param_1)
         *(unsigned char *)(temp_v3 + 0x88) = 8;
         *(unsigned char *)(temp_v3 + 0x89) = 0;
         *(unsigned char *)(temp_v3 + 0x8a) = 0;
-        FUN_002a3d58(temp_v3);
+        effPartInitDefaults(temp_v3);
         if ((*(unsigned int *)(temp_v10 + 0x98) & 1) != 0) {
           temp_v2 = puVar2[0x23];
           temp_v5 = *(int *)(temp_v10 + 0x90);

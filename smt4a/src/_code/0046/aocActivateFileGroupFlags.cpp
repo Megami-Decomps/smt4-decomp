@@ -4,9 +4,9 @@
 #include "gamedata/FlagValueIsPositive.h"
 
 extern "C" {
-s32 FUN_001b315c(FileTableGroup *);
-FileTableKindRecord *FUN_001b31ac(FileTableGroup *);
-u32 FUN_001b31e0(FileTableGroup *);
+s32 packageEntryIsLoaded(FileTableGroup *);
+FileTableKindRecord *packageEntryGetDirectory(FileTableGroup *);
+u32 packageEntryGetFileCount(FileTableGroup *);
 s32 gameFlagIsSet(u32);
 
 void flagValueAdd(u32, s32);
@@ -23,10 +23,10 @@ void aocActivateFileGroupFlags(GroupedFileTables *owner)
     };
     for (s32 groupIndex = 0; groupIndex < owner->count; ++groupIndex) {
         FileTableGroup *group = &owner->groups[groupIndex];
-        if (FUN_001b315c(group) == 0)
+        if (packageEntryIsLoaded(group) == 0)
             continue;
-        FileFlagView *records = reinterpret_cast<FileFlagView *>(FUN_001b31ac(group));
-        u32 count = FUN_001b31e0(group);
+        FileFlagView *records = reinterpret_cast<FileFlagView *>(packageEntryGetDirectory(group));
+        u32 count = packageEntryGetFileCount(group);
         for (u32 index = 0; index < count; ++index) {
             FileFlagView *record = &records[index];
             if (record->kind != '0') {

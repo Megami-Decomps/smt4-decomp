@@ -54,7 +54,7 @@ void s4LoadDrawProfilePanel(s32 selected)
         const LoadProfileView *view = reinterpret_cast<const LoadProfileView *>(work);
         char name[0x12];
         FUN_002e59f8(view->profiles[selected].name, name, 0x12);
-        FUN_003180c4(1, name);
+        scrSetStringSlot(1, name);
         FUN_00359974(2, view->profiles[selected].enabled, -1, 0); // This profile byte is the displayed level.
         u32 seconds = view->profiles[selected].playSeconds;
         u32 hours = seconds / 3600;
@@ -69,12 +69,12 @@ void s4LoadDrawProfilePanel(s32 selected)
         s32 shown = 0;
         for (s32 index = 0; index < 4; ++index) {
             if (markers & (1u << index)) {
-                FUN_003180c4(shown + 7, labels.text[index]);
+                scrSetStringSlot(shown + 7, labels.text[index]);
                 ++shown;
             }
         }
         for (s32 index = shown; index < 4; ++index)
-            FUN_003180c4(shown + 7, "");
+            scrSetStringSlot(shown + 7, "");
         asdTextDrawDirectoryEntry(reinterpret_cast<AsdText *>(work->unk2B8), 4, -1, 0,
             3, static_cast<RelativeDirectory *>(work->dataB), 100);
     }

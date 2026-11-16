@@ -68,8 +68,8 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: FUN_00282390. */
-/* Supplied declaration required: FUN_0028250c. */
-/* Supplied declaration required: FUN_00291e40. */
+/* Supplied declaration required: mathRemPio2f. */
+/* Supplied declaration required: soundActorStartOnFreeChannel. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int padIsButtonPressed(unsigned int);
 
@@ -121,13 +121,13 @@ void FUN_002d4874(void)
               if (temp_v1 == 1) {
                 *(unsigned int *)(temp_v0 + 0x54) = 0xf;
                 *(unsigned int *)(temp_v0 + 0x58) = 0;
-                FUN_00291e40(0x1000212, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+                soundActorStartOnFreeChannel(0x1000212, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
                 FUN_0027fca0(0xffffffff);
                 SoundActorQueuePosition position;
-                position.x = *(float *)(g_lmapScene + 0x1c) + FUN_0028250c(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
+                position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
                 position.z = *(float *)(g_lmapScene + 0x24) + FUN_00282390(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
                 position.y = *(float *)(g_lmapScene + 0x20) + 150.0f;
-                FUN_00291e40(0x1000240, position);
+                soundActorStartOnFreeChannel(0x1000240, position);
               }
               if (*(int *)(g_lmapScene + 8) == 2) {
                 g_gameState.f0049fb46 = 0;
@@ -168,7 +168,7 @@ void FUN_002d4874(void)
               *(float *)(g_lmapScene + 0x50) = nearestYaw;
               *(Vec3f *)(temp_v0 + 0x28) = nearestPoint;
               *(float *)(temp_v0 + 0x2c) = nearestPoint.y - 250.0f;
-              *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + FUN_0028250c((*(float *)(temp_v0 + 0x4c) + 180.0f) * 0.017453292f) * 25.0f;
+              *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + mathRemPio2f((*(float *)(temp_v0 + 0x4c) + 180.0f) * 0.017453292f) * 25.0f;
               temp_v0 = g_lmapScene;
               *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + FUN_00282390((*(float *)(temp_v0 + 0x4c) + 180.0f) * 0.017453292f) * 25.0f;
             }
@@ -213,7 +213,7 @@ void FUN_002d4874(void)
         *(unsigned int *)(temp_v0 + 0x28) = g_gameState.f0049f9a0;
         *(unsigned int *)(temp_v0 + 0x2c) = temp_v6;
         *(unsigned int *)(temp_v0 + 0x30) = temp_v3;
-        *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + FUN_0028250c(g_gameState.f0049f9bc * 0.017453292f) * 25.0f;
+        *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + mathRemPio2f(g_gameState.f0049f9bc * 0.017453292f) * 25.0f;
         *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + FUN_00282390(g_gameState.f0049f9bc * 0.017453292f) * 25.0f;
         temp_v0 = g_lmapScene;
         *(unsigned int *)(temp_v0 + 0x50) = g_gameState.f0049f9ac;
@@ -271,7 +271,7 @@ void FUN_002d4874(void)
     *(unsigned int *)(temp_v0 + 0x24) = temp_v6;
     *(float *)(temp_v0 + 0x20) = temp_v4;
     if ((temp_v2 == 0xb) || (temp_v2 == 0x1c || temp_v2 == 0x29)) {
-      FUN_00291e40((temp_v2 & 3) + 0x1000212, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+      soundActorStartOnFreeChannel((temp_v2 & 3) + 0x1000212, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
       FUN_0027fca0(0xffffffff);
     }
     if (*(int *)(g_lmapScene + 8) == 0x1e) {

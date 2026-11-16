@@ -22,7 +22,7 @@ void FUN_00493518(f32 speed, const EffectRect *rect, u32 id, s32 dx, s32 dy, u32
     s32 y = (s32)(rect->y + rect->height + (f32)dy);
 
     efctSetSpeed(speed);
-    FUN_001835b4(2, rect->parameter, id, x, y, last);
+    texDrawTableEntryAtStoredOrigin(2, rect->parameter, id, x, y, last);
     efctSetSpeed(1.0f);
 }
 

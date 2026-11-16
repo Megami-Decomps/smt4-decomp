@@ -60,7 +60,7 @@ extern void resourceOwnerReleaseAndReset(u32 *registry);
 extern void ptrListRemoveClearOwner(u32 *registry, u32 handle);
 extern void scrScriptProcessDestroy(void *process);
 extern void asdMemFree(void *memory);
-extern void FUN_001695a0(void);
+extern void messageSetScriptDisplayMode(void);
 extern void messageSetMode(s32 mode);
 
 static __inline void scriptGroupRelease(ScriptGroup *group)
@@ -120,7 +120,7 @@ void scriptPanelRelease(ScriptPanel *panel)
     scriptGroupRelease(&panel->groups[1]);
     scriptGroupRelease(&panel->groups[2]);
     scriptGroupRelease(&panel->groups[3]);
-    FUN_001695a0();
+    messageSetScriptDisplayMode();
     messageSetMode(1);
 }
 

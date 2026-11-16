@@ -6,7 +6,7 @@ extern "C" {
 s32 scrGetArg(s32 index);
 u32 btlUnitGet(u32 unitId);
 extern u32 g_btlScriptUnit;
-void FUN_004fb43c(s32 kind, u32 unit, u32 effect, s32, s32, s32, s32);
+void btlQueueActionMessage(s32 kind, u32 unit, u32 effect, s32, s32, s32, s32);
 void FUN_004fcffc(s32 kind, u32 unit, BattleRosterRecordA *record, u32 mask);
 void FUN_004fdb18(s32 kind, u32 unit, BattleRosterRecordA *record, u32 mask, s32 enabled);
 
@@ -22,9 +22,9 @@ u32 FUN_0039dda4(void)
     } else {
         FUN_004fdb18(0, unit, &btlGetMainState()->roster[rosterIndex], 1 << effectIndex, 1);
         if (effectIndex == 4) {
-            FUN_004fb43c(0, unit, 0x1000275, 0, 0, 0, 0);
+            btlQueueActionMessage(0, unit, 0x1000275, 0, 0, 0, 0);
         } else {
-            FUN_004fb43c(0, unit, 0x100025F, 0, 0, 0, 0);
+            btlQueueActionMessage(0, unit, 0x100025F, 0, 0, 0, 0);
         }
     }
     return 1;

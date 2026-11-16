@@ -26,9 +26,9 @@ void uniteSortCandidateList(void)
     UniteWork *work = g_unite;
     const u8 *setting;
     if (work->menu.mode != 2) {
-        setting = &reinterpret_cast<FusionSortPreferences *>(FUN_0026140c())->normal;
+        setting = &reinterpret_cast<FusionSortPreferences *>(saveGetUserSettingsBlock())->normal;
     } else {
-        setting = &reinterpret_cast<FusionSortPreferences *>(FUN_0026140c())->special;
+        setting = &reinterpret_cast<FusionSortPreferences *>(saveGetUserSettingsBlock())->special;
     }
     bool ascending = (*setting & 0x80) == 0;
     if ((*setting & 0x7f) == 1) {

@@ -6,7 +6,7 @@
 extern "C" {
 
 int partyPanelHasSlotValue(...);
-int FUN_0029378c(...);
+int slotPlacementAssignSlotAndPosition(...);
 int scrollOwnerSelectIndex(...);
 int FUN_0029eb5c(...);
 int timerStart(...);
@@ -23,7 +23,7 @@ int FUN_0026d144(...);
 int FUN_0026d3e0(...);
 int pair40Set(unsigned int, int);
 int partyPanelSetState(...);
-int FUN_0029e874(int);
+int gameSetIconDisplayEnabled(int);
 int gameGetUnitRecord(...);
 int dataTable40FindById(void);
 int dataTable08Sub1GetRecord(void);
@@ -52,8 +52,8 @@ extern int g_partyPanel; /* 0x43dcf0 */
 /* Supplied declaration required: FUN_0026d3e0. */
 /* Supplied declaration required: pair40Set. */
 /* Supplied declaration required: partyPanelSetState. */
-/* Supplied declaration required: FUN_0029378c. */
-/* Supplied declaration required: FUN_0029e874. */
+/* Supplied declaration required: slotPlacementAssignSlotAndPosition. */
+/* Supplied declaration required: gameSetIconDisplayEnabled. */
 /* Supplied declaration required: scrollOwnerSelectIndex. */
 extern unsigned int objectPartRunUnlessLocked(void);
 /* Supplied declaration required: FUN_0029eb5c. */
@@ -135,7 +135,7 @@ void FUN_0028a924(int param_1,unsigned int param_2,unsigned short param_3)
     } while (temp_v3 < 0x18);
   case 0:
     *(unsigned int *)(temp_v0 + 0x20) = 1;
-    FUN_0029e874(0);
+    gameSetIconDisplayEnabled(0);
     break;
   case 2:
   case 4:
@@ -639,13 +639,13 @@ LAB_0028b668:
                   timerStart(temp_v2 + 0x180,5,0);
                   temp_v4 = 0;
                   do {
-                    FUN_0029378c(*(unsigned int *)(temp_v2 + temp_v4 * 4 + 0x6c8),
+                    slotPlacementAssignSlotAndPosition(*(unsigned int *)(temp_v2 + temp_v4 * 4 + 0x6c8),
                                  *(unsigned int *)(temp_v2 + 0x2c));
                     temp_v4 = temp_v4 + 1;
                   } while (temp_v4 < 4);
                   temp_v4 = 0;
                   do {
-                    FUN_0029378c(*(unsigned int *)(temp_v2 + temp_v4 * 4 + 0x6d8),
+                    slotPlacementAssignSlotAndPosition(*(unsigned int *)(temp_v2 + temp_v4 * 4 + 0x6d8),
                                  *(unsigned int *)(temp_v2 + 0x2c));
                     temp_v4 = temp_v4 + 1;
                   } while (temp_v4 < 0x18);
@@ -662,13 +662,13 @@ LAB_0028b668:
                 timerStart(temp_v2 + 0x180,4,0);
                 temp_v4 = 0;
                 do {
-                  FUN_0029378c(*(unsigned int *)(temp_v2 + temp_v4 * 4 + 0x6c8),
+                  slotPlacementAssignSlotAndPosition(*(unsigned int *)(temp_v2 + temp_v4 * 4 + 0x6c8),
                                *(unsigned int *)(temp_v2 + 0x2c));
                   temp_v4 = temp_v4 + 1;
                 } while (temp_v4 < 4);
                 temp_v4 = 0;
                 do {
-                  FUN_0029378c(*(unsigned int *)(temp_v2 + temp_v4 * 4 + 0x6d8),
+                  slotPlacementAssignSlotAndPosition(*(unsigned int *)(temp_v2 + temp_v4 * 4 + 0x6d8),
                                *(unsigned int *)(temp_v2 + 0x2c));
                   temp_v4 = temp_v4 + 1;
                 } while (temp_v4 < 0x18);

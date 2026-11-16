@@ -26,8 +26,8 @@ extern HakaiBoxState *g_mapHakai;
 
 s32 gameFlagIsSet(u32 flag);
 s32 gameFlagsTestFirstBank(s32 flag);
-f32 FUN_001bc124(f32 angle);
-f32 FUN_001bbf0c(f32 angle);
+f32 libm_sinf(f32 angle);
+f32 libm_cosf(f32 angle);
 void FUN_00244c70(u32 id, u32 kind, s32 variant, u32 option, f32 x, f32 y, f32 z, f32 yaw);
 s32 sceneRegisterBoxEffect(u32 id, u32 value, const char *name, u32 resource,
     u32 effect, s32 variant, u8 option0, u8 option1, u8 option2,
@@ -43,14 +43,14 @@ void FUN_002b7ce0(void)
         HakaiBoxEntry *entry = &state->entries[i];
         if (entry->active != 0 && entry->kind == 3 && gameFlagsTestFirstBank((s16)entry->id) == 0) {
             if (gameFlagIsSet(0x492) != 0) {
-                f32 x = entry->x + FUN_001bc124(entry->heading * 0.017453292f) * 150.0f;
-                f32 z = entry->z + FUN_001bbf0c(entry->heading * 0.017453292f) * 150.0f;
+                f32 x = entry->x + libm_sinf(entry->heading * 0.017453292f) * 150.0f;
+                f32 z = entry->z + libm_cosf(entry->heading * 0.017453292f) * 150.0f;
                 sceneRegisterBoxEffect(0x203, 0, "BOX", 0x35, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                     entry->id, 0, 0, 99, x, entry->y, z, 400.0f, 200.0f, 120.0f, entry->heading);
                 FUN_00244c70(entry->id, 0x25, -1, 0, x, entry->y, z, entry->heading);
             } else {
-                f32 x = entry->x + FUN_001bc124(entry->heading * 0.017453292f) * 150.0f;
-                f32 z = entry->z + FUN_001bbf0c(entry->heading * 0.017453292f) * 150.0f;
+                f32 x = entry->x + libm_sinf(entry->heading * 0.017453292f) * 150.0f;
+                f32 z = entry->z + libm_cosf(entry->heading * 0.017453292f) * 150.0f;
                 sceneRegisterBoxEffect(0, 0, "STELSIRA", 0x4d, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                     entry->id, 0, 0, 99, x, entry->y, z, 400.0f, 200.0f, 120.0f, entry->heading);
                 FUN_00244c70(entry->id, 0x28, -1, 0, x, entry->y, z, entry->heading);

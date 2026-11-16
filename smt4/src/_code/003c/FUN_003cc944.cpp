@@ -28,7 +28,7 @@ struct BattleMemberKeysView {
 };
 
 extern "C" {
-BattleCombatantStatusKey *FUN_0027da30(BtlMainState *battle, s32 id);
+BattleCombatantStatusKey *btlFindEntryBlockByMemberId(BtlMainState *battle, s32 id);
 s32 idSetFindSubjectIndex(BtlMainState *battle, const BtlActionRecord *action);
 
 void FUN_003cc944(BtlMainState **battle, const BtlScriptActor *actor, s32 allActors)
@@ -48,7 +48,7 @@ void FUN_003cc944(BtlMainState **battle, const BtlScriptActor *actor, s32 allAct
         }
         if (action->stateFlags & 2)
             continue;
-        const BattleCombatantStatusKey *member = FUN_0027da30(state, action->memberId);
+        const BattleCombatantStatusKey *member = btlFindEntryBlockByMemberId(state, action->memberId);
         if (!member)
             continue;
         s32 memberIndex = idSetFindSubjectIndex(*battle, action);

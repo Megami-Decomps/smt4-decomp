@@ -37,8 +37,8 @@ struct DrawObject {
 extern "C" {
 
 void sysMemClear(void *memory, u32 bytes);
-DrawSource *FUN_0015fa74(DrawSource *source, u32 argument);
-const DrawDescription *FUN_004bb80c(u32 id);
+DrawSource *dataTable02FindConditionalMapRecord(DrawSource *source, u32 argument);
+const DrawDescription *dataTable02GetRecordWithAocPackage(u32 id);
 void FUN_004bb9c0(DrawObject *object, DrawDescription *description);
 
 /* Initializes a draw object for description `id`; the width, height and resource default from the draw source when the
@@ -54,8 +54,8 @@ void drawObjectInitialize(DrawObject *object, u32 id, DrawSource *source, u32 so
     object->unk00[5] = 0;
     object->scaleX = 1.0f;
     object->scaleY = 1.0f;
-    DrawSource *defaults = FUN_0015fa74(source, sourceArgument);
-    DrawDescription description = *FUN_004bb80c(id);
+    DrawSource *defaults = dataTable02FindConditionalMapRecord(source, sourceArgument);
+    DrawDescription description = *dataTable02GetRecordWithAocPackage(id);
     if (description.width == 0) {
         description.width = defaults->width;
         description.height = defaults->height;

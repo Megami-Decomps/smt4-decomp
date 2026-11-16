@@ -27,7 +27,7 @@ typedef struct AocSystem {
 
 extern AocSystem *g_aocSystem;
 
-Table8Sub3Record *FUN_001762d4(AocSystem *aoc, u32 id);
+Table8Sub3Record *idEntryTableFindById(AocSystem *aoc, u32 id);
 s32 compareRecordKey(const void *left, const void *right);
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size,
                    s32 (*compare)(const void *, const void *));
@@ -38,7 +38,7 @@ static Table8Sub3Record *aocFindRecord(AocSystem *aoc, u32 id)
     if (!aoc->hasRecords) {
         return NULL;
     }
-    return FUN_001762d4(aoc, id);
+    return idEntryTableFindById(aoc, id);
 }
 
 /* The table 8/3 record for `id`: the add-on content's first, else a search of the table. */

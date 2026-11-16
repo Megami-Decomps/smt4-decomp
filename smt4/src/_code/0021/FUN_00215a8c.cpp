@@ -32,7 +32,7 @@ typedef struct StatusDown {
 extern StatusDown *g_statusDown;
 
 void buttonHelpSetPreset(u32 preset);
-void FUN_0029f848(void *window, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
+void gridNavigationConfigure(void *window, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
 
 /* Opens the status-down screen on `entry`, restoring the button help when a selection was showing. */
 void FUN_00215a8c(const StatusDownEntry *entry)
@@ -53,7 +53,7 @@ void FUN_00215a8c(const StatusDownEntry *entry)
     status->entryUnk04 = entry->unk04;
     status->entryUnk08 = entry->unk08;
     status->entryUnk0C = entry->unk0C;
-    FUN_0029f848(status->window, 7, 7, 1, 0, 1);
+    gridNavigationConfigure(status->window, 7, 7, 1, 0, 1);
     status->refresh = 1;
 }
 

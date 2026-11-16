@@ -31,7 +31,7 @@ extern const s32 DAT_0057a634[7];
 
 s32 qsort(void *base, s32 count, s32 size, s32 (*compare)(const void *, const void *));
 s32 FUN_00221a94(const void *a, const void *b);
-ReflectLookup *FUN_001568f8(ReflectBattle *battle, s32 id);
+ReflectLookup *btlFindEntryBlockByMemberId(ReflectBattle *battle, s32 id);
 s32 pairedEntryTableContains(ReflectBattle *battle, u16 key);
 void FUN_004cae0c(void *context, void *state, s32 pending, u32 target);
 void FUN_004fd204(s32 position, u32 actor, ReflectEntry *entry, s32 alpha, s32 size, s32 arg);
@@ -68,7 +68,7 @@ void FUN_003e2840(u32 actor, ReflectBattle *battle, s32 mode)
         if ((entry->state & 0x800) != 0) {
             continue;
         }
-        if (pairedEntryTableContains(battle, FUN_001568f8(battle, entry->id)->key) != 0) {
+        if (pairedEntryTableContains(battle, btlFindEntryBlockByMemberId(battle, entry->id)->key) != 0) {
             continue;
         }
         entry->state |= 0x800;

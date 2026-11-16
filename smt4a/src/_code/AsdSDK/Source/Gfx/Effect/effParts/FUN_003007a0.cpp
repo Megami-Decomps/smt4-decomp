@@ -7,7 +7,7 @@ extern "C" {
 extern const char g_effPartsSourcePath[]; /* "c:\SMT4F\SMT4F\AsdSDK\Source\Gfx\Effect\effParts.cpp": __FILE__ */
 
 void sysMemClear(void *block, s32 size);
-void FUN_001b4ddc(EffPart *part);
+void effPartInitDefaults(EffPart *part);
 
 /* Allocates a cleared 0xC0-byte part. */
 static __inline EffPart *effPartAlloc(void)
@@ -30,7 +30,7 @@ EffPart *FUN_003007a0(void)
     part->unk88 = 8;
     part->unk89 = 0;
     part->unk8a = 0;
-    FUN_001b4ddc(part);
+    effPartInitDefaults(part);
     return part;
 }
 

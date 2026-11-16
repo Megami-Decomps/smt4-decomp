@@ -7,7 +7,7 @@ const SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 sprite);
 s32 uiPointerHitsRect(s32 x, s32 y, s32 width, s32 height, s32 mode);
 s32 padIsButtonPressed(u32 button);
 s32 padIsButtonRepeat(u32 button);
-void FUN_002bf810(u32 sound);
+void soundPlaySeUnpanned(u32 sound);
 void buttonHelpSetPreset(s32 preset);
 s32 FUN_0026f024(void *sprite, u32 id, s32 first, s32 second, u32 frame, s32 enabled);
 void statusCameraHandleControls(StatusCameraWork *camera);
@@ -43,20 +43,20 @@ u32 FUN_00220d58(void *base)
     }
     if (padIsButtonPressed(0) || buttonHelpHasEnabledEntryForId(1)) {
         work->nextMode = 2;
-        FUN_002bf810(0x100016D);
+        soundPlaySeUnpanned(0x100016D);
         buttonHelpSetPreset(0xE2);
         result = 2;
     } else if (padIsButtonPressed(1) || buttonHelpHasEnabledEntryForId(2)) {
         work->nextMode = 8;
-        FUN_002bf810(0x100016E);
+        soundPlaySeUnpanned(0x100016E);
         result = 2;
     } else if (padIsButtonRepeat(10) || buttonHelpHasEnabledEntryForId(4)) {
         work->showControls = work->showControls == 0;
         work->frame = 0;
         work->sprite = 0x14A;
-        FUN_002bf810(0x100016D);
+        soundPlaySeUnpanned(0x100016D);
     } else if (shortTap) {
-        FUN_002bf810(0x100016D);
+        soundPlaySeUnpanned(0x100016D);
         result = 2;
         work->nextMode = 2;
     }

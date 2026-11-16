@@ -22,7 +22,7 @@ struct EffList {
 
 extern "C" {
 
-EffBlock *FUN_00290edc(void *data);
+EffBlock *effBlockCloneDeep(void *data);
 void asdMemFree(void *ptr);
 EffNode *FUN_003007a0(void);
 
@@ -31,7 +31,7 @@ void FUN_0037667c(EffList *list, const char *path)
 {
     u32 size;
     void *data = asdLoadFileSyncNoContext(path, &size, 1, 0x80);
-    EffBlock *block = FUN_00290edc(data);
+    EffBlock *block = effBlockCloneDeep(data);
     asdMemFree(data);
     EffNode *node = FUN_003007a0();
     node->next = NULL;

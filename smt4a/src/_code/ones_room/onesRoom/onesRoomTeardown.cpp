@@ -9,7 +9,7 @@ void scrScriptProcessDestroy(void *process);
 s32 scrRunOpcodesStub(void *process);
 void campCommonBgRelease(s32 arg);
 void campButtonHelpRelease(void);
-void FUN_00212204(s32 arg);
+void screenFadeSlotReset(s32 arg);
 
 extern OnesRoom *g_onesRoom;
 
@@ -38,8 +38,8 @@ s32 onesRoomTeardown(u32 job)
         work->dataB = NULL;
     }
     if (work->active != 0) {
-        FUN_00212204(0);
-        FUN_00212204(1);
+        screenFadeSlotReset(0);
+        screenFadeSlotReset(1);
         jobStop(g_onesRoom->job, 0);
     }
     return -1;

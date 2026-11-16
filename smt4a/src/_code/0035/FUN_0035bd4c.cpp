@@ -9,7 +9,7 @@ typedef struct Actor {
 
 Actor *dataTable12FindBySortKey(void);
 u32 requestKindToId(s32 id);
-s32 FUN_0017ffa8(s32 kind, s32 type, u32 value, u32 arg0, u32 arg1, u32 arg2);
+s32 texTableRecordCallWithParams(s32 kind, s32 type, u32 value, u32 arg0, u32 arg1, u32 arg2);
 
 /* Sends the current actor's message (kind 2, type 11) with three extra arguments. */
 void FUN_0035bd4c(u32 unused, u32 arg0, u32 arg1, u32 arg2)
@@ -19,7 +19,7 @@ void FUN_0035bd4c(u32 unused, u32 arg0, u32 arg1, u32 arg2)
     if (actor != NULL) {
         u32 value = requestKindToId(actor->id);
 
-        FUN_0017ffa8(2, 0xB, value, arg0, arg1, arg2);
+        texTableRecordCallWithParams(2, 0xB, value, arg0, arg1, arg2);
     }
 }
 

@@ -11,7 +11,7 @@ extern "C" {
 
 extern FsMount DAT_0044e640;
 extern u32 g_fsArchiveHandleWords; /* the mount's handle, as the mount check sees it */
-void FUN_002bbb2c(u32 key, u32 address);
+void sysReportCheckFailure(u32 key, u32 address);
 
 /* Returns the user file system mount's handle, reporting a fault (the not-mounted result and the
  * address of the check) when the file system is not mounted yet. */
@@ -19,7 +19,7 @@ u32 fsGetUserMountHandle(void)
 {
     if (g_fsArchiveHandleWords == 0) {
         nn::Result result(0xE0A046DB);
-        FUN_002bbb2c(result, __current_pc());
+        sysReportCheckFailure(result, __current_pc());
     }
     return DAT_0044e640.handle;
 }

@@ -86,7 +86,7 @@ typedef struct RenderCtxA {
     };
     union {
         /* 0x05F8 */ u8 unk5F8;
-        /* 0x05F8 */ u8 shownMode;   /* display area last switched to by FUN_00157558 */
+        /* 0x05F8 */ u8 shownMode;   /* display area last switched to by renderCtxSelectDisplayAreaForStereoMode */
     };
     /* 0x05F9 */ u8 unk05F9[3];
     union {
@@ -264,7 +264,7 @@ extern "C" void renderCtxApplyTransforms(RenderCtx *context);
 
 /* Switches the draw context to the display area for its stereo mode and records the area shown. */
 #ifdef __cplusplus
-extern "C" void FUN_00157558(RenderCtxA *context);
+extern "C" void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 #endif
 
 typedef char RenderCtxSelectedTextureOffsetCheck[

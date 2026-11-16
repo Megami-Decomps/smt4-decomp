@@ -6,8 +6,8 @@ extern "C" {
 
 s32 lzGetAdvertisedSize(u8 *data);
 void lzDecompressBytes(const u8 *src, u8 *dst);
-void FUN_001aeddc(u8 *src, u8 *dst);
-void FUN_001aec9c(u8 *src, u8 *dst);
+void huffmanDecompress(u8 *src, u8 *dst);
+void rleDecompress(u8 *src, u8 *dst);
 void *asdMemoryAllocAligned(int, int, int, s32 size, u32 align, int);
 void asdMemFree(void *block);
 extern const char DAT_0053cdb4[]; /* AsdTMSpr.cpp: __FILE__ */
@@ -40,9 +40,9 @@ u8 *asdTMSprDecompress(u8 *data, u32 flags, u32 align)
         if (format == 0x10) {
             lzDecompressBytes(data, out);
         } else if (format == 0x20) {
-            FUN_001aeddc(data, out);
+            huffmanDecompress(data, out);
         } else if (format == 0x30) {
-            FUN_001aec9c(data, out);
+            rleDecompress(data, out);
         }
         asdMemFree(data);
     }

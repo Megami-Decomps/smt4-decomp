@@ -6,7 +6,7 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_00275bc8(void);
+int scrScriptProcessCreate(void);
 int asdLoadFileAsyncSimple(...);
 int messageDismissNumericBanner(void);
 int messageMainStartMenuAnimationIfEnabled(void);
@@ -19,7 +19,7 @@ int FUN_002a17d4(...);
 int gameDataGetRecordValue(void);
 int libc_strcpy(...);
 int FUN_002e59f8(void);
-int FUN_003180c4(...);
+int scrSetStringSlot(...);
 int cecProcessCall1(void);
 int FUN_0031cf00(...);
 int slotNameDisplaySetEntry(...);
@@ -81,11 +81,11 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: messageSetMode. */
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: __aeabi_memset4. */
-extern int FUN_001ba3d4(short);
+extern int flagValueRead(short);
 /* Supplied declaration required: runWinClose. */
 /* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: gameDataBlocksAddFlags. */
-/* Supplied declaration required: FUN_00275bc8. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00280250. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
@@ -98,7 +98,7 @@ extern int messageGetChoiceResult(void);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002e59f8. */
 extern int asdCecInboxGetMessageCount(void);
-/* Supplied declaration required: FUN_003180c4. */
+/* Supplied declaration required: scrSetStringSlot. */
 extern short *dataTable4AGetEntry(int);
 /* Supplied declaration required: cecProcessCall1. */
 /* Supplied declaration required: dataStoreGetValue50. */
@@ -425,7 +425,7 @@ joined_r0x003a52e4:
         }
         if ((temp_v3 != 0) && ((*(unsigned char *)(temp_v3 + 0x20) & 4) != 0)) {
           libc_strcpy(temp_v15,temp_v3 + 0xe);
-          FUN_003180c4(0,temp_v15);
+          scrSetStringSlot(0,temp_v15);
           scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x360),0x12);
           *(unsigned int *)(param_1 + 0x3dc) = *(unsigned int *)(param_1 + 0x3dc) | 8;
           break;
@@ -639,7 +639,7 @@ LAB_003a5cfc:
               do {
                 psVar5 = (short *)(temp_v11 + temp_v13 * 10 + temp_v3 * 2);
                 temp_v6 = itemGetStackLimit(*psVar5);
-                temp_v7 = FUN_001ba3d4(*psVar5);
+                temp_v7 = flagValueRead(*psVar5);
                 if (temp_v7 < temp_v6) {
                   psVar7 = asStack_194 + temp_v12;
                   temp_v12 = temp_v12 + 1;
@@ -699,7 +699,7 @@ LAB_003a5cfc:
       param_2 = *(int *)(param_1 + 0x35c);
     }
     if (!(temp_v8 == 0 || param_2 == 0)) {
-      FUN_00275bc8();
+      scrScriptProcessCreate();
       *(int *)(param_1 + 0x364) = temp_v8;
       *(unsigned int *)(temp_v8 + 0x108) = 2;
       temp_v9 = maskToCode(*(unsigned int *)(param_1 + 0x3dc));

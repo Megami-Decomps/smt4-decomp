@@ -9,7 +9,7 @@ extern "C" {
 extern RenderCtx *g_titleScene;
 extern MenuDrawPoint DAT_004724cc;
 
-u32 FUN_002c5d80(u32 value, bool enabled);
+u32 renderCtxPackPassFlags(u32 value, bool enabled);
 void FUN_002c0944(u32 color0, u32 color1, u32 color2, u32 color3,
                   f32 x, f32 y, f32 width, f32 height, f32 depth);
 void FUN_0021025c(u32 color0, u32 color1, u32 color2, u32 color3,
@@ -27,7 +27,7 @@ extern "C" void menuDrawRectangle(s32 x, s32 y, s32 width, s32 height,
     RenderCtx *context = g_titleScene;
     s32 adjustedX = static_cast<s32>(static_cast<f32>(x) + DAT_004724cc.x);
     s32 adjustedY = static_cast<s32>(static_cast<f32>(y) + DAT_004724cc.y);
-    s32 state = FUN_002c5d80(1, true);
+    s32 state = renderCtxPackPassFlags(1, true);
     renderStackPush(&context->stackA, state);
     renderCtxSelectTexture(g_titleScene, NULL);
     RgbaWord fill;

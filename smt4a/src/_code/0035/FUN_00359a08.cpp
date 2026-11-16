@@ -27,10 +27,10 @@ void FUN_00359a08(SkillSlotScreen *screen)
     }
     if (emptySlot < objectApplyIfUnblocked(screen->slotCursor)) {
         scrollOwnerSetValue(screen->slotCursor, 0);
-        FUN_002a4964(reinterpret_cast<ScrollSelection *>(screen->slotCursor), emptySlot);
+        scrollListSetSelectionTracked(reinterpret_cast<ScrollSelection *>(screen->slotCursor), emptySlot);
     } else {
         scrollOwnerSetValue(screen->slotCursor, 0);
-        FUN_002a4964(reinterpret_cast<ScrollSelection *>(screen->slotCursor), 0);
+        scrollListSetSelectionTracked(reinterpret_cast<ScrollSelection *>(screen->slotCursor), 0);
     }
 
     s32 index = 0;

@@ -4,7 +4,7 @@
 #include "shard/JobWork.h"
 
 extern "C" {
-s32 FUN_00163aa4(void *state, f32 step);
+s32 uiSpriteAdvanceAnimation(void *state, f32 step);
 s32 FUN_0040898c(JobAnimationTargetPrefixA *target);
 }
 
@@ -22,7 +22,7 @@ static s32 floatRepresentation(f32 value)
 extern "C" u32 FUN_00357ea0(u32 process)
 {
     JobAnimationWorkPrefixA *work = (JobAnimationWorkPrefixA *)jobGetWork(process);
-    FUN_00163aa4(work->unk2C, 1.0f);
+    uiSpriteAdvanceAnimation(work->unk2C, 1.0f);
 
     const bool enabled = (work->code != 0x71);
     work->target->enabled = enabled;

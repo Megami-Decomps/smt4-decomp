@@ -26,11 +26,11 @@ int slotSetRequest(int, int, unsigned int);
 int unitRecalculateEffectiveStats(...);
 int dataTable06Sub1GetRecord(void);
 int devilGetRecord(void);
-int FUN_002bd06c(...);
+int dataTable01FindByIdWithAoc(...);
 int FUN_002bd158(...);
 int FUN_002bd2b4(...);
 int libc_strcpy(...);
-int FUN_002bf810(...);
+int soundPlaySeUnpanned(...);
 int __aeabi_memset4(...);
 int SBORROW4(...);
 int __aeabi_memcpy4(...);
@@ -83,11 +83,11 @@ extern int gameGetUnitRecord(int);
 extern int gameGetSlotTable(void);
 extern int FUN_002b89a4(unsigned int);
 /* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: FUN_002bd06c. */
+/* Supplied declaration required: dataTable01FindByIdWithAoc. */
 /* Supplied declaration required: FUN_002bd158. */
 /* Supplied declaration required: FUN_002bd2b4. */
 /* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_002bf810. */
+/* Supplied declaration required: soundPlaySeUnpanned. */
 /* Supplied declaration required: __aeabi_memset4. */
 extern int btlTalkBustupMatchesDevil(unsigned short);
 /* Supplied declaration required: __aeabi_memcpy4. */
@@ -149,7 +149,7 @@ unsigned int FUN_001ebedc(int param_1)
     FUN_002bd158(temp_v15,temp_v16);
     textEncodeFontSlot(0,temp_v16);
     temp_v6 = (unsigned int)*(unsigned short *)(param_1 + 0x126);
-    FUN_002bd06c(temp_v6);
+    dataTable01FindByIdWithAoc(temp_v6);
     libc_strcpy(temp_v15,temp_v6);
     textEncodeFontSlot(1,temp_v15);
     temp_v5 = *(unsigned int *)(param_1 + 0xd04);
@@ -168,7 +168,7 @@ unsigned int FUN_001ebedc(int param_1)
     btlTalkBustUpReleaseAllSlots();
     slotSetRequest(0,0x1e,0xffffffff);
     temp_v5 = 0x1000173;
-    FUN_002bf810(temp_v5);
+    soundPlaySeUnpanned(temp_v5);
     break;
   case 3:
     temp_v7 = battleTalkIsBustReady();
@@ -367,13 +367,13 @@ LAB_001ec4d0:
     textEncodeFontSlot(0,temp_v16);
     temp_v6 = FUN_00262f78();
     temp_v6 = temp_v6 & 0xffff;
-    FUN_002bd06c(temp_v6);
+    dataTable01FindByIdWithAoc(temp_v6);
     libc_strcpy(temp_v15,temp_v6);
     textEncodeFontSlot(1,temp_v15);
     scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0xd04),0x1a);
     FUN_0026b9bc();
     temp_v5 = 0x1000115;
-    FUN_002bf810(temp_v5);
+    soundPlaySeUnpanned(temp_v5);
     break;
   case 5:
     temp_v1 = FUN_00262f78();

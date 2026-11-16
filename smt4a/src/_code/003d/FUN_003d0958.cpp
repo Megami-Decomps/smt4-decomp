@@ -7,10 +7,10 @@ extern "C" {
 
 extern SpriteWindow *g_sWin; /* 0x57f57c */
 s32 textureIdIsLoaded(s16 id);
-s32 FUN_001517b4(s32 first, s32 second);
-s32 FUN_00163aa4(ByteStateWork *sprite, f32 speed);
+s32 padQueryLogicalKey(s32 first, s32 second);
+s32 uiSpriteAdvanceAnimation(ByteStateWork *sprite, f32 speed);
 void uiSpriteSetImageKeyframe(ByteStateWork *sprite, s32 keyframe, s32 frame);
-void FUN_0019e330(ByteStateWork *sprite, s32 keyframe, s32 frame);
+void rangeSelectionSelectEndpoint(ByteStateWork *sprite, s32 keyframe, s32 frame);
 void workSetStateByte(ByteStateWork *work, u8 state);
 void asdTMTexTableReleaseNode(s32 table, s32 index);
 /* Releases the downloadable texture resource mapped to a window texture id, if it has one. */
@@ -35,15 +35,15 @@ s32 FUN_003d0958(void)
     case 1:
         if (textureIdIsLoaded((s16)window->textureId)) {
             if (window->phase == 0) {
-                if (FUN_001517b4(9, 2) != 0 || slotIsActive(6) != 0) {
+                if (padQueryLogicalKey(9, 2) != 0 || slotIsActive(6) != 0) {
                     workSetStateByte(&window->sprite, 1);
                 } else {
                     uiSpriteSetImageKeyframe(&window->sprite, 0, 0);
-                    FUN_0019e330(&window->sprite, 0, 0);
+                    rangeSelectionSelectEndpoint(&window->sprite, 0, 0);
                 }
                 window->phase = 1;
             }
-            if (FUN_00163aa4(&window->sprite, 1.0f)) {
+            if (uiSpriteAdvanceAnimation(&window->sprite, 1.0f)) {
                 window->phase = 0;
                 window->state = 2;
                 window->frames = 0;
@@ -51,7 +51,7 @@ s32 FUN_003d0958(void)
         }
         break;
     case 3:
-        if (textureIdIsLoaded((s16)window->textureId) && FUN_00163aa4(&window->sprite, 1.0f)) {
+        if (textureIdIsLoaded((s16)window->textureId) && uiSpriteAdvanceAnimation(&window->sprite, 1.0f)) {
             releaseMappedTexture(window->textureId);
             window->state = 0;
             window->phase = 0;

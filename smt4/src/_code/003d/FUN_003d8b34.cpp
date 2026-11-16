@@ -6,7 +6,7 @@ void FUN_00227200(u32, void *, void *);
 void FUN_002271e8(u32, s32, s32);
 void jobSetText(u32, const char *);
 void asdListBoxAddItem(u32, const char *);
-const EnemyEditorUnit *FUN_0027da30(EnemyEditorResourceIV *, s32 id);
+const EnemyEditorUnit *btlFindEntryBlockByMemberId(EnemyEditorResourceIV *, s32 id);
 void asdListBoxSetItemMode3(u32, s32, s32, s32, s32, s32);
 void asdListBoxSetFloatItem(u32, s32, f32, s32, s32);
 void asdListBoxSetByteValue(u32, s32);
@@ -27,7 +27,7 @@ void FUN_003d8b34(EnemyEditorWork *work, EnemyEditorResourceIV *resource, u32 pa
     asdListBoxAddItem(list, DAT_00400610);
     asdListBoxAddItem(list, DAT_00400600);
     EnemyEditorRecordIV *record = &resource->records[work->selection];
-    const EnemyEditorUnit *unit = FUN_0027da30(resource, work->selection);
+    const EnemyEditorUnit *unit = btlFindEntryBlockByMemberId(resource, work->selection);
     asdListBoxSetItemMode3(list, 0, unit->id, 1, 999, 0);
     asdListBoxSetFloatItem(list, 1, record->position[0], -1000, 1000);
     asdListBoxSetFloatItem(list, 2, record->position[1], -1000, 1000);

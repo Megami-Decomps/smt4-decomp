@@ -20,11 +20,11 @@ typedef char TitleRadialGradientOffsets[offsetof(TitleRadialGradient, block) == 
 
 extern "C" {
 extern RenderCtx *g_titleScene;
-s32 FUN_002c5d80(u32, u32);
+s32 renderCtxPackPassFlags(u32, u32);
 void FUN_002573d8(void);
 void effectSpawnPositionDefault(RgbaWord, f32, f32, f32);
 f32 phaseCosInterpolate(f32);
-f32 FUN_002b70cc(f32);
+f32 mathSinFixedAngle(f32);
 void forwardRecoveredCallback(void);
 
 /* Angle of the i-th of the 19 points on the ring (a full turn in 18 steps, in the interpolation tables' units). */
@@ -48,7 +48,7 @@ void FUN_001f67ec(const TitleRadialGradient *gradient)
     edgeColor.word = centerColor.word & ~0xFFu;
     renderCtxSelectTexture(g_titleScene, 0);
     RenderCtx *context = g_titleScene;
-    renderCtxPushA(context, FUN_002c5d80(1, 0));
+    renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
     f32 centerX = block->first.x + (block->last.x - block->first.x) * 0.5f;
     f32 centerY = block->first.y + (block->last.y - block->first.y) * 0.5f;
     f32 radius = (block->last.x - block->first.x) * 0.5f;
@@ -56,7 +56,7 @@ void FUN_001f67ec(const TitleRadialGradient *gradient)
     effectSpawnPositionDefault(centerColor, centerX, centerY, 0.0f);
     for (s32 i = 0; i < 19; ++i) {
         f32 x = centerX + radius * phaseCosInterpolate(titleRingPhase(i));
-        f32 y = centerY + radius * FUN_002b70cc(titleRingPhase(i));
+        f32 y = centerY + radius * mathSinFixedAngle(titleRingPhase(i));
         effectSpawnPositionDefault(edgeColor, x, y, 0.0f);
     }
     forwardRecoveredCallback();

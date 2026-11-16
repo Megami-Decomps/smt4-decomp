@@ -27,7 +27,7 @@ extern const char g_npcShopSelectRepeatEntryName[]; // "npcShop_Select_02"
 extern const char g_npcShopSelectSpecialEntryName[]; // "npcShop_Select_01"
 extern const char g_npcShopSelectState5EntryName[]; // "npcShop_Select_03"
 extern const char g_npcShopSelectDefaultEntryName[]; // "npcShop_Select_00"
-const char *FUN_0015f858(u32 id, s32 mode);
+const char *dataFindKindRecordWithAocOverrides(u32 id, s32 mode);
 void FUN_003c1060();
 s32 tableGroupFindEntryIndex(void *table, const char *name);
 void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
@@ -72,13 +72,13 @@ extern "C" void npcShopUpdateSelectionScript(NpcShopSelectWork *work)
         }
     } else {
         if (work->names[0].id != 0) {
-            FUN_003180c4(0, FUN_0015f858(work->names[0].id, 0));
+            scrSetStringSlot(0, dataFindKindRecordWithAocOverrides(work->names[0].id, 0));
         }
         if (work->names[1].id != 0) {
-            FUN_003180c4(1, FUN_0015f858(work->names[1].id, 0));
+            scrSetStringSlot(1, dataFindKindRecordWithAocOverrides(work->names[1].id, 0));
         }
         if (work->names[2].id != 0) {
-            FUN_003180c4(2, FUN_0015f858(work->names[2].id, 0));
+            scrSetStringSlot(2, dataFindKindRecordWithAocOverrides(work->names[2].id, 0));
         }
         FUN_003c1060();
         if (work->previousState == 4) {

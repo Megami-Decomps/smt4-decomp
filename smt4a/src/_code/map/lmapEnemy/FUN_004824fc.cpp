@@ -29,19 +29,19 @@ extern "C" {
 
 extern void *g_handleRegistry;
 
-void *FUN_00178b04(u32 size, const char *file, u32 line);
+void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 EnemyModelList *modelListInit(void *memory);
 void moriModelContentCopyBody(EnemyModelList *list, void *source, u32 flags);
 void handleRegistryRegisterObject(void *registry, EnemyModel *model);
 void controllerSetDestination(EnemyModel *model, Vec3f *position);
 void controllerSetRotationEulerDegrees(EnemyModel *model, f32 x, f32 y, f32 z);
 void controllerSetPosition(EnemyModel *model, f32 x, f32 y, f32 z);
-void FUN_003fe86c(EnemyModel *model, u32 index, u8 flags, f32 time, f32 blend);
+void modelPlayClip(EnemyModel *model, u32 index, u8 flags, f32 time, f32 blend);
 
 /* Builds the enemy's model from `source`, registers it and puts it at the origin with default rotation and unit scale. */
 void FUN_004824fc(MapEnemy *enemy, void *source)
 {
-    EnemyModelList *list = static_cast<EnemyModelList *>(FUN_00178b04(32, "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\lmapEnemy.cpp", 0x9a));
+    EnemyModelList *list = static_cast<EnemyModelList *>(asdMemoryAllocTraced(32, "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\lmapEnemy.cpp", 0x9a));
     if (list != NULL) {
         list = modelListInit(list);
     }
@@ -58,7 +58,7 @@ void FUN_004824fc(MapEnemy *enemy, void *source)
     controllerSetDestination(model, &destination);
     controllerSetRotationEulerDegrees(model, 0.0f, 0.0f, 0.0f);
     controllerSetPosition(model, 1.0f, 1.0f, 1.0f);
-    FUN_003fe86c(model, 0, 2, 0.0f, 0.0f);
+    modelPlayClip(model, 0, 2, 0.0f, 0.0f);
 }
 
 } /* extern "C" */

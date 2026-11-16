@@ -5,7 +5,7 @@ extern "C" {
 extern GameStateA g_gameState;
 
 s32 dataTable23Type0FindIndexById(s32 id);
-void FUN_002d23f0(s32 index);
+void dataTable23MarkEntrySeen(s32 index);
 void mapIfClearGroupRecordStates(s32 id);
 
 /* Clears the map interface records of both pending groups and resets the clear flags. */
@@ -16,14 +16,14 @@ void mapClearPendingGroups(void)
     if (g_gameState.mapGroups.groupA != 0) {
         index = dataTable23Type0FindIndexById(g_gameState.mapGroups.groupA);
         if (index != -1) {
-            FUN_002d23f0(index);
+            dataTable23MarkEntrySeen(index);
             mapIfClearGroupRecordStates(g_gameState.mapGroups.groupA);
         }
     }
     if (g_gameState.mapGroups.groupB != 0) {
         index = dataTable23Type0FindIndexById(g_gameState.mapGroups.groupB);
         if (index != -1) {
-            FUN_002d23f0(index);
+            dataTable23MarkEntrySeen(index);
             mapIfClearGroupRecordStates(g_gameState.mapGroups.groupB);
         }
         g_gameState.mapGroups.groupB = 0;

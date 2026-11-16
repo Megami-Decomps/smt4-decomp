@@ -36,7 +36,7 @@ struct PlaceRecord {
 extern "C" {
 s32 jobIsValid(u32 job);
 s32 eventTexJobSlotsDone(u32 job);
-ScriptProcessWork *FUN_00297060(ScriptFile *file, u32 owner);
+ScriptProcessWork *scrScriptProcessCreate(ScriptFile *file, u32 owner);
 void scriptProcessSetMode(ScriptRunState *process, s32 mode);
 void FUN_002a03d8(s32 a, s32 b);
 void messageBannerInitSelection(s32 a, s32 b);
@@ -75,9 +75,9 @@ void FUN_003a0d64(PlaceScene *scene)
     if (jobIsValid(scene->jobB) && !eventTexJobSlotsDone(scene->jobB))
         return;
 
-    scene->scriptA = reinterpret_cast<ScriptRunState *>(FUN_00297060(scene->scriptFile, scene->scriptOwner));
+    scene->scriptA = reinterpret_cast<ScriptRunState *>(scrScriptProcessCreate(scene->scriptFile, scene->scriptOwner));
     scriptProcessSetMode(scene->scriptA, 2);
-    scene->scriptB = reinterpret_cast<ScriptRunState *>(FUN_00297060(scene->scriptFile, scene->scriptOwner));
+    scene->scriptB = reinterpret_cast<ScriptRunState *>(scrScriptProcessCreate(scene->scriptFile, scene->scriptOwner));
     scriptProcessSetMode(scene->scriptB, 2);
     FUN_002a03d8(0, 10);
     FUN_002a03d8(1, 10);

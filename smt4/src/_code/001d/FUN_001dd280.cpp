@@ -44,13 +44,13 @@ unsigned int FUN_001dd280(void)
       *(unsigned short *)piVar7 = 0;
       FUN_00355dd0(puVar2,&iStack_254);
       if (((int)puVar2 < 0) && ((int)puVar2 < 0)) {
-        FUN_002bbb2c();
+        sysReportCheckFailure();
       }
       while( 1 ) {
         iVar6 = func_0x00355e5c(&iStack_254,*(unsigned int *)(*(int *)(iVar1 + 0x5c) + 4),auStack_250,
                                 1);
         if (iVar6 < 0) {
-          FUN_002bbb2c(iVar6,0x1dd3a8);
+          sysReportCheckFailure(iVar6,0x1dd3a8);
         }
         if (iStack_254 == 0) break;
         if ((char)uStack_34 == '\0') {
@@ -80,13 +80,13 @@ unsigned int FUN_001dd280(void)
       *(unsigned short *)piVar7 = 0;
       FUN_00355dd0(iVar6,&iStack_254);
       if ((iVar6 < 0) && (iVar6 < 0)) {
-        FUN_002bbb2c();
+        sysReportCheckFailure();
       }
       while( 1 ) {
         iVar6 = func_0x00355e5c(&iStack_254,*(unsigned int *)(*(int *)(iVar1 + 0x5c) + 4),
                                 *(int *)(iVar1 + 100) + iVar3 * 0x228,1);
         if (iVar6 < 0) {
-          FUN_002bbb2c(iVar6,0x1dd4bc);
+          sysReportCheckFailure(iVar6,0x1dd4bc);
         }
         if (iStack_254 == 0) break;
         if (*(char *)(*(int *)(iVar1 + 100) + iVar3 * 0x228 + 0x21c) == '\0') {
@@ -195,7 +195,7 @@ unsigned int FUN_001dd280(void)
     *(unsigned int *)(iVar1 + 0x10) = 7;
     goto code_r0x001dd71c;
   case 6:
-    iVar6 = FUN_002896bc();
+    iVar6 = screenFadesAllReady();
     if (iVar6 == 0) {
       return 0;
     }
@@ -233,7 +233,7 @@ code_r0x001dd71c:
     }
     return 0;
   case 9:
-    iVar1 = FUN_002896bc();
+    iVar1 = screenFadesAllReady();
     if (iVar1 != 0) {
       return 0xffffffff;
     }

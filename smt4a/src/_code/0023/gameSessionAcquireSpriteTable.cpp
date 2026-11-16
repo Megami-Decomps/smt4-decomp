@@ -7,7 +7,7 @@ extern ObjBRef g_gameGlobals;
 
 void asdTMTexTableLoadSprites(s32 table);
 
-/* Counts one more user of table 0x12: the first user (depth 0 or less) prepares it and runs FUN_0014afd0 on its three entries. */
+/* Counts one more user of table 0x12: the first user (depth 0 or less) prepares it and runs asdTMTexTablePrepareNodeImage on its three entries. */
 void gameSessionAcquireSpriteTable(void)
 {
     s32 i;
@@ -16,7 +16,7 @@ void gameSessionAcquireSpriteTable(void)
         asdTMTexTableLoadSprites(0x12);
         i = 0;
         do {
-            FUN_0014afd0(0x12, i);
+            asdTMTexTablePrepareNodeImage(0x12, i);
             i = i + 1;
         } while (i < 3);
     }

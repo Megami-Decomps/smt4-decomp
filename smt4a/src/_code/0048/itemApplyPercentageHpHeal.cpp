@@ -21,7 +21,7 @@ typedef struct HealItem {
 } HealItem;
 
 HealItem *dataTable8FindRecord(u32 itemId);
-s32 FUN_004ccbf0(u16 id);
+s32 levelGetExpRequirement(u16 id);
 
 /* Applies item `itemId`'s percentage HP heal to `target` (only checks when `checkOnly`); returns 0
  * when the item would heal, 1 when it has no effect. */
@@ -38,13 +38,13 @@ u32 itemApplyPercentageHpHeal(HealTarget *target, u32 itemId, s32 checkOnly)
         return 1;
     }
     noEffect = 1;
-    if (item->healPercent != 0 && FUN_004ccbf0(target->id) != target->hp) {
+    if (item->healPercent != 0 && levelGetExpRequirement(target->id) != target->hp) {
         if (!checkOnly) {
-            s32 maximum = FUN_004ccbf0(target->id);
+            s32 maximum = levelGetExpRequirement(target->id);
             s32 healing = item->healPercent * maximum / 100;
             target->hp += healing;
-            if (FUN_004ccbf0(target->id) < target->hp) {
-                target->hp = FUN_004ccbf0(target->id);
+            if (levelGetExpRequirement(target->id) < target->hp) {
+                target->hp = levelGetExpRequirement(target->id);
             }
         }
         noEffect = 0;

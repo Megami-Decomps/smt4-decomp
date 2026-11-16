@@ -6,7 +6,7 @@ extern "C" {
 extern ActiveTextureSlot *g_activeTextureSlot;
 
 AsdTexture *asdTextureCreate(s32 flags);
-void FUN_0019fc50(AsdTexture *texture, const void *data, u32 size, u32 flags);
+void tmxDecodeToTexture(AsdTexture *texture, const void *data, u32 size, u32 flags);
 void asdMemFree(void *block);
 
 /* Clears every particle's state and position. */
@@ -31,7 +31,7 @@ void FUN_00208d8c(void)
 
     g_activeTextureSlot->texture = texture;
     data = fileLoadSync("test/kemuri.tmx", &size, 0);
-    FUN_0019fc50(texture, data, size, 0x10000);
+    tmxDecodeToTexture(texture, data, size, 0x10000);
     asdMemFree(data);
     asdTextureSetImage(texture);
     g_activeTextureSlot->texture->unk3c = 1;

@@ -100,7 +100,7 @@ extern "C" u32 FUN_002d2b40()
             ahead.x = enemy->position.x;
             ahead.y = enemy->position.y;
             ahead.z = enemy->position.z;
-            ahead.x += FUN_0028250c(enemy->heading * 0.017453292f) * 100.0f;
+            ahead.x += mathRemPio2f(enemy->heading * 0.017453292f) * 100.0f;
             ahead.z += FUN_00282390(enemy->heading * 0.017453292f) * 100.0f;
             player.x = g_lmapScene->transform.position[0];
             player.y = g_lmapScene->transform.position[1];

@@ -102,7 +102,7 @@ extern float DAT_0064c07c; /* 0x64c07c */
 extern float DAT_0064c080; /* 0x64c080 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_001692ac(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxSelectTexture. */
 extern unsigned int _ZN2nw4math5MTX448IdentityEv(void);
 extern int nn_math_ARMv6_MTX34InverseAsm(unsigned char *, int);
@@ -262,7 +262,7 @@ void FUN_00238490(int param_1)
   }
   temp_v2 = g_renderCtx;
   if ((*(unsigned char *)(param_1 + 0x130) & 8) != 0) {
-    temp_v1 = FUN_001692ac(5,0);
+    temp_v1 = renderCtxPackPassFlags(5,0);
     piVar8 = (int *)(temp_v2 + 0x1258);
     temp_v3 = *piVar8;
     temp_v4 = piVar8[temp_v3 + 2];

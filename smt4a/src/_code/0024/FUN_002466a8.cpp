@@ -5,7 +5,7 @@ extern "C" {
 
 void popupQueueInsertUnique(s32 state);
 s32 FUN_002c2758(s32 arg);
-s32 FUN_002d8b58(s32 a, s32 b);
+s32 popupSelectWeightedMessage(s32 a, s32 b);
 
 extern LmapEventA *g_popupState;
 
@@ -22,10 +22,10 @@ void FUN_002466a8(void)
         g_popupState->state = 0x10;
         event->unk04 = 0;
         if (FUN_002c2758(6) == 1) {
-            g_popupState->unk14 = FUN_002d8b58(0x18, 0);
+            g_popupState->unk14 = popupSelectWeightedMessage(0x18, 0);
             return;
         }
-        g_popupState->unk14 = FUN_002d8b58(0x11, 0);
+        g_popupState->unk14 = popupSelectWeightedMessage(0x11, 0);
     }
 }
 

@@ -18,7 +18,7 @@ extern const char DAT_0053d448[]; /* the AsdFile.cpp path */
 extern u8 g_asdFileWorkerThread[]; /* the worker thread's handle and joined flag */
 
 void *memAlloc(u32 heap, u32 alignmentClass, u32 flags, u32 size, u32 alignment, u32 category);
-void *FUN_00178b04(u32 size, const char *file, u32 line);
+void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 void resultReportIfFailed(ThreadStackStorage *stack, void *memory, u32 size);
 s32 FUN_002fb0d4(void *thread, const ThreadArgumentDescriptor *descriptor, void (*entry)(void *), void *argument,
                  u32 stackTop, s32 priority, s32 processor, u32 flags);
@@ -34,7 +34,7 @@ void FUN_0014287c(void)
     g_asdFile.stopRequested = 0;
     asdDebugTrace(DAT_0053d448, 956);
     g_asdFile.stackMemory = memAlloc(0x100, 0x100, 0, 0x1000, 0x1000, 1);
-    ThreadStackStorage *stack = (ThreadStackStorage *)FUN_00178b04(sizeof(ThreadStackStorage), DAT_0053d448, 957);
+    ThreadStackStorage *stack = (ThreadStackStorage *)asdMemoryAllocTraced(sizeof(ThreadStackStorage), DAT_0053d448, 957);
     if (stack != NULL) {
         stack->info.unk00 = 0;
         stack->info.unk04 = 0;
@@ -53,7 +53,7 @@ void FUN_0014287c(void)
     ThreadStackInfo *info = &g_asdFile.threadStack->info;
     s32 result = FUN_002fb0d4(g_asdFileWorkerThread, &descriptor, FUN_0014b66c, &argument, info->size + info->address, 18, -2, 0);
     if (nnResultIsFailureExceptSummary(result, 3)) {
-        FUN_002e3140(result);
+        resultHandleFailure(result);
     }
 }
 }

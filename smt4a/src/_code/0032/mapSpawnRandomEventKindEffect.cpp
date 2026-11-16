@@ -5,7 +5,7 @@
 
 extern "C" {
 s32 randBetween(s32 minimum, s32 maximum);
-s32 FUN_003d4ed8(u32 sound, BattleVector3 position);
+s32 soundActorStartOnFreeChannel(u32 sound, BattleVector3 position);
 
 // Scatter one of four event-kind sounds around the current map position.
 void mapSpawnRandomEventKindEffect()
@@ -16,22 +16,22 @@ void mapSpawnRandomEventKindEffect()
     u32 variant = randBetween(0, 100) & 3;
     switch (g_gameState.eventKind) {
     case 0:
-        FUN_003d4ed8(variant + 0x10002ac, position);
+        soundActorStartOnFreeChannel(variant + 0x10002ac, position);
         return;
     case 1:
-        FUN_003d4ed8(variant + 0x10002b1, position);
+        soundActorStartOnFreeChannel(variant + 0x10002b1, position);
         return;
     case 2:
-        FUN_003d4ed8(variant + 0x10002b6, position);
+        soundActorStartOnFreeChannel(variant + 0x10002b6, position);
         return;
     case 3:
-        FUN_003d4ed8(variant + 0x10002bb, position);
+        soundActorStartOnFreeChannel(variant + 0x10002bb, position);
         return;
     case 4:
-        FUN_003d4ed8(variant + 0x10002c0, position);
+        soundActorStartOnFreeChannel(variant + 0x10002c0, position);
         return;
     case 5:
-        FUN_003d4ed8(variant + 0x10002d5, position);
+        soundActorStartOnFreeChannel(variant + 0x10002d5, position);
         return;
     }
 }

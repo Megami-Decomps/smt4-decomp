@@ -32,13 +32,13 @@ extern SaveLoadTask *DAT_0043e314;
 
 s32 scrRunOpcodesStub(s32 script);
 void scrScriptProcessStartEntry(s32 script, s32 entry);
-void FUN_00297060(void);
+void scrScriptProcessCreate(void);
 s32 FUN_002103dc(u32 id, u32 flag);
 void FUN_00223898(SaveLoadTask *task, s32 flag);
 void gameDataFlagsSet(s32 mask);
 void gameDataBlocksAddFlags(u32 flags);
 void gameDataRemoveHomeButtonHold(s32 mask);
-void FUN_00289880(void);
+void commonBgStopChildAndBeginTransition(void);
 void FUN_002898e4(void);
 void messageMainFinishWindow(void);
 s32 messageMainIsWindowActive(void);
@@ -64,7 +64,7 @@ u32 FUN_001edcf0(u32 unused, s32 enabled)
     if (source == 0 || enabled == 0)
         return 0;
     if (task->script == 0) {
-        FUN_00297060();
+        scrScriptProcessCreate();
         task->script = source;
         *(u32 *)(source + 0x108) = 2;
     }
@@ -96,7 +96,7 @@ u32 FUN_001edcf0(u32 unused, s32 enabled)
         buttonHelpSetPreset(0xE6);
         if (DAT_0043e313 == 0) {
             FUN_002898e4();
-            FUN_00289880();
+            commonBgStopChildAndBeginTransition();
             DAT_0043e313 = 1;
         }
         if (scrRunOpcodesStub(task->script) != 2)
@@ -121,7 +121,7 @@ u32 FUN_001edcf0(u32 unused, s32 enabled)
             s32 request = task->request;
             WindowStatusResult result = FUN_002c40f8(&request, 1, 0, 0, 0);
             if ((s32)result.code < 0)
-                FUN_002c526c(result.code);
+                resultHandleFailure(result.code);
             if ((result.code & 0x3FF) == 0x3FE)
                 return 0;
         }

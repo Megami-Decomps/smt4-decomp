@@ -22,10 +22,10 @@ int FUN_0025117c(...);
 int FUN_0025141c(...);
 int FUN_00251d98(...);
 int objectPartRunUnlessLocked(...);
-int FUN_002bed3c(void);
+int gxResetColorQuadToWhite(void);
 int vec2GetYInt(...);
 int vec2GetXInt(...);
-int FUN_002bf380(int, int, int, unsigned int, unsigned int, int);
+int texDrawCompositeSprite(int, int, int, unsigned int, unsigned int, int);
 int efctSetSpeed(void);
 int renderCtxSelectStereoLayout(int);
 
@@ -66,10 +66,10 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002bed3c. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: vec2GetXInt. */
-/* Supplied declaration required: FUN_002bf380. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c0944. */
@@ -77,7 +77,7 @@ extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
@@ -132,7 +132,7 @@ unsigned int FUN_00212538(void)
   }
   renderCtxSelectStereoLayout(g_titleScene);
   temp_v2 = g_titleScene;
-  temp_v3 = FUN_002c5d80(1,0);
+  temp_v3 = renderCtxPackPassFlags(1,0);
   piVar10 = (int *)(temp_v2 + 0x124c);
   temp_v6 = *piVar10;
   temp_v7 = piVar10[temp_v6 + 2];
@@ -147,7 +147,7 @@ unsigned int FUN_00212538(void)
     temp_v2 = temp_v1 + 0x4c8;
     temp_v4 = vec2GetXInt();
     temp_v5 = vec2GetYInt(temp_v2);
-    FUN_002bf380(2,0x19,3,temp_v4,temp_v5,0x5b);
+    texDrawCompositeSprite(2,0x19,3,temp_v4,temp_v5,0x5b);
     temp_v3 = 0;
     do {
       temp_v6 = FUN_00252180(*(unsigned int *)(temp_v1 + 0x6c8));
@@ -385,7 +385,7 @@ unsigned int FUN_00212538(void)
                   );
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 4);
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     temp_v14 = CONCAT44((int)((unsigned long long)temp_v14 >> 0x20),temp_v15);
     efctSetSpeed();
     temp_v2 = 0;
@@ -529,7 +529,7 @@ unsigned int FUN_00212538(void)
       FUN_00251d98(*(unsigned int *)(temp_v1 + temp_v6 * 4 + 0x6d8),2,aiStack_13c[temp_v6],temp_v18[temp_v6]
                   );
     }
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     temp_v14 = CONCAT44(temp_v13,(int)temp_v17);
     efctSetSpeed();
     temp_v6 = temp_v2;
@@ -573,13 +573,13 @@ unsigned int FUN_00212538(void)
     }
     temp_v6 = vec2GetXInt();
     temp_v7 = vec2GetYInt(temp_v1 + 0x4c8);
-    FUN_002bf288(2,0x19,0x1e,temp_v6,temp_v7,0x97);
-    FUN_002bf288(2,0x19,0x1f,temp_v6,temp_v7,0x97);
-    FUN_002bf288(2,0x19,0x20,temp_v6,temp_v7,0x97);
-    FUN_002bf288(2,0x19,0x21,temp_v6,temp_v7,0x97);
-    FUN_002bf288(2,0x19,0x22,temp_v6,temp_v7,0x97);
-    FUN_002bf288(2,0x19,0x23,temp_v6,temp_v7,0x97);
-    FUN_002bf288(2,0x19,0x28,temp_v6,temp_v7,0x9c);
+    texDrawTableEntryAtStoredOrigin(2,0x19,0x1e,temp_v6,temp_v7,0x97);
+    texDrawTableEntryAtStoredOrigin(2,0x19,0x1f,temp_v6,temp_v7,0x97);
+    texDrawTableEntryAtStoredOrigin(2,0x19,0x20,temp_v6,temp_v7,0x97);
+    texDrawTableEntryAtStoredOrigin(2,0x19,0x21,temp_v6,temp_v7,0x97);
+    texDrawTableEntryAtStoredOrigin(2,0x19,0x22,temp_v6,temp_v7,0x97);
+    texDrawTableEntryAtStoredOrigin(2,0x19,0x23,temp_v6,temp_v7,0x97);
+    texDrawTableEntryAtStoredOrigin(2,0x19,0x28,temp_v6,temp_v7,0x9c);
     drawSetColorFromRGBA8(0xf49800ff);
     temp_v10 = gameGetSlotTable();
     textFormatBuffer(temp_v19,&LAB_00213184,*(unsigned char *)(temp_v10 + 0x910b));
@@ -590,7 +590,7 @@ unsigned int FUN_00212538(void)
     temp_v10 = asdTMTexTableEntryAt(0x19,0x2c);
     FUN_002bdf94(2,*(short *)(temp_v10 + 8) + temp_v6,*(short *)(temp_v10 + 10) + temp_v7,1,2,0x9c,
                  temp_v19);
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     if (*(int *)(temp_v1 + 0x30) >= 2) {
       temp_v4 = 0x24;
       temp_v10 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v1 + 0x6b4));
@@ -599,7 +599,7 @@ unsigned int FUN_00212538(void)
       }
       temp_v10 = vec2GetXInt(temp_v1 + 0x68);
       temp_v8 = vec2GetYInt(temp_v1 + 0x68);
-      FUN_002bf288(2,0x19,temp_v4,temp_v6 + temp_v10,temp_v8 + temp_v7,0xa6);
+      texDrawTableEntryAtStoredOrigin(2,0x19,temp_v4,temp_v6 + temp_v10,temp_v8 + temp_v7,0xa6);
       temp_v4 = 0x25;
       temp_v10 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v1 + 0x6b6));
       if (temp_v10 == 1 || temp_v10 == 2) {
@@ -607,7 +607,7 @@ unsigned int FUN_00212538(void)
       }
       temp_v10 = vec2GetXInt(temp_v1 + 0xf4);
       temp_v8 = vec2GetYInt(temp_v1 + 0xf4);
-      FUN_002bf288(2,0x19,temp_v4,temp_v6 + temp_v10,temp_v7 + temp_v8,0xa6);
+      texDrawTableEntryAtStoredOrigin(2,0x19,temp_v4,temp_v6 + temp_v10,temp_v7 + temp_v8,0xa6);
     }
     efctSetSpeed();
     temp_v6 = FUN_00252180(*(unsigned int *)(temp_v1 + 0x6c8));

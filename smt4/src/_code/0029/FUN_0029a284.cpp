@@ -12,7 +12,7 @@ int FUN_002b6c34(...);
 int FUN_002bdf94(...);
 int textDrawString(...);
 int textFormatBuffer(...);
-int FUN_002bf380(int, int, int, int, int, int);
+int texDrawCompositeSprite(int, int, int, int, int, int);
 int efctSetSpeed(void);
 int VectorSignedToFloat(...);
 
@@ -37,7 +37,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0029a17c. */
-extern unsigned int FUN_0029a924(void);
+extern unsigned int appGetRemainingCapacity(void);
 extern unsigned int FUN_0029a9d4(int, unsigned int);
 extern int FUN_0029ac94(void);
 extern int FUN_0029ee54(int);
@@ -50,7 +50,7 @@ extern unsigned int aocIndexValueOrDefault(int);
 /* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
-/* Supplied declaration required: FUN_002bf380. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 
@@ -83,9 +83,9 @@ void FUN_0029a284(int param_1,int param_2,int param_3,unsigned int param_4,unsig
   temp_v12 = FUN_0029efa8();
   temp_v7 = 0;
   efctSetSpeed();
-  FUN_002bf380(2,0x1a,8,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,0xbf);
+  texDrawCompositeSprite(2,0x1a,8,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,0xbf);
   efctSetSpeed();
-  FUN_002bf288(2,0x1a,0x41f,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,0xc4);
+  texDrawTableEntryAtStoredOrigin(2,0x1a,0x41f,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,0xc4);
   temp_v2 = *(int *)(temp_v3 + 0x418);
   temp_v5 = 0x420;
   temp_v8 = temp_v2 == 0;
@@ -106,7 +106,7 @@ void FUN_0029a284(int param_1,int param_2,int param_3,unsigned int param_4,unsig
       temp_v5 = 0x421;
     }
   }
-  FUN_002bf288(2,0x1a,temp_v5,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,0xc4);
+  texDrawTableEntryAtStoredOrigin(2,0x1a,temp_v5,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,0xc4);
   temp_v11 = asdTMTexTableEntryAt(0x1a,0x420);
   temp_v2 = g_titleScene;
   piVar8 = (int *)(g_titleScene + 0x130c);
@@ -122,7 +122,7 @@ void FUN_0029a284(int param_1,int param_2,int param_3,unsigned int param_4,unsig
   temp_v2 = vec2GetYInt(temp_v3 + 0x1cc);
   temp_v0 = *(short *)(temp_v1 + 10);
   temp_v6 = vec2GetXInt(temp_v3 + 0x1cc);
-  FUN_002bf288(2,0x1a,0x422,temp_v6 + param_1 + (int)*(short *)(temp_v1 + 8),
+  texDrawTableEntryAtStoredOrigin(2,0x1a,0x422,temp_v6 + param_1 + (int)*(short *)(temp_v1 + 8),
                temp_v2 + param_2 + (int)temp_v0,0xc9);
   temp_v2 = g_titleScene;
   piVar8 = (int *)(g_titleScene + 0x130c);
@@ -174,7 +174,7 @@ void FUN_0029a284(int param_1,int param_2,int param_3,unsigned int param_4,unsig
                       (unsigned char)(in_fpscr >> 0x16) & 3);
   textDrawString(3,temp_v5,temp_v10,(int)*(short *)(temp_v3 + 8));
   if ((param_7 == 0) || (param_3 != 0)) {
-    FUN_002bf288(2,0x1a,0x425,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,0xc4)
+    texDrawTableEntryAtStoredOrigin(2,0x1a,0x425,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,0xc4)
     ;
     temp_v3 = asdTMTexTableEntryAt(0x1a,0x42a);
     FUN_002b6c34((int)(short)param_3,
@@ -184,7 +184,7 @@ void FUN_0029a284(int param_1,int param_2,int param_3,unsigned int param_4,unsig
   }
   if (param_6 == 0) {
     if (param_7 == 0) {
-      FUN_002bf288(2,0x1a,0x423,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,
+      texDrawTableEntryAtStoredOrigin(2,0x1a,0x423,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,
                    0xc4);
       if (*(short *)(temp_v2 + 0x7e) < 0) {
         temp_v7 = FUN_0029a9d4(param_3,1);
@@ -192,7 +192,7 @@ void FUN_0029a284(int param_1,int param_2,int param_3,unsigned int param_4,unsig
       else {
         temp_v2 = FUN_0029ac94();
         if (temp_v2 != 6) {
-          temp_v7 = FUN_0029a924();
+          temp_v7 = appGetRemainingCapacity();
         }
         else {
           dataTable40FindById();
@@ -207,7 +207,7 @@ void FUN_0029a284(int param_1,int param_2,int param_3,unsigned int param_4,unsig
                    &LAB_0029a914,temp_v7);
       return;
     }
-    FUN_002bf288(2,0x1a,0x522,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,0xc4)
+    texDrawTableEntryAtStoredOrigin(2,0x1a,0x522,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,0xc4)
     ;
     temp_v2 = asdTMTexTableEntryAt(0x1a,0x52a);
     if (param_3 == 0) {

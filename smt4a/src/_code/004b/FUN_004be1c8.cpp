@@ -26,13 +26,13 @@ struct UnitScreenReadyViewA {
     u32 refresh;
 };
 extern "C" {
-ScriptRunState* FUN_00275bc8(void* resource, u32 infoWindow);
+ScriptRunState* scrScriptProcessCreate(void* resource, u32 infoWindow);
 void scriptProcessSetMode(ScriptRunState* process, s32 mode);
 void dialogOpen(s32 first, s32 second);
 void __aeabi_memset4(void* destination, u32 size, u32 value);
 void ifTouchRegionRemove(void);
 void ifTouchResetRecord(void);
-UnitCategoryRecord* FUN_003e4d68(u16 unit);
+UnitCategoryRecord* partyGetSlot(u16 unit);
 u16 FUN_001643b4(u32 table, s32 region);
 void statusPanelSetOpen(s32 opened);
 
@@ -42,7 +42,7 @@ void FUN_004be1c8(UnitScreenReadyViewA* work)
         (work->mode != 1 && !FUN_0023b3d0())) {
         return;
     }
-    ScriptRunState* script = FUN_00275bc8(work->scriptResource, work->infoWindow);
+    ScriptRunState* script = scrScriptProcessCreate(work->scriptResource, work->infoWindow);
     work->script = script;
     scriptProcessSetMode(script, 2);
     if (work->mode == 1) {
@@ -62,15 +62,15 @@ void FUN_004be1c8(UnitScreenReadyViewA* work)
         ifTouchResetRecord();
     }
     for (s32 index = 0; index < 12; ++index) {
-        UnitCategoryRecord* unit = FUN_003e4d68(static_cast<u16>(index));
-        if (unit && FUN_00187168(unit)) {
+        UnitCategoryRecord* unit = partyGetSlot(static_cast<u16>(index));
+        if (unit && partySlotIsOccupied(unit)) {
             u16 region = FUN_001643b4(0x11, work->touchCount + 0xAE);
             work->touchRegions[work->touchCount] = region;
             ++work->touchCount;
         }
     }
     if (work->unitCount > 0) {
-        UnitCategoryRecord* unit = FUN_003e4d68(static_cast<u16>(work->selectedUnit));
+        UnitCategoryRecord* unit = partyGetSlot(static_cast<u16>(work->selectedUnit));
         statusRequestUnitDetails(unit, 0, 0);
         statusPanelSetOpen(1);
     }

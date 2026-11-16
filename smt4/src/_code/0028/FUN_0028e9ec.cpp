@@ -8,7 +8,7 @@ s32 FUN_0023dcb8(void);
 s32 idOwnerHasActiveObject(void *unit);
 s8 *gameGetSlotTable(void);
 void *gameGetUnitRecord(s32 id);
-void FUN_0029f848(CommandCounter *counter, s32 value, s32 a, s32 b, s32 c, s32 d);
+void gridNavigationConfigure(CommandCounter *counter, s32 value, s32 a, s32 b, s32 c, s32 d);
 
 /* Count the commands available in the battle command menu for the party and for each party member. */
 void FUN_0028e9ec(BattleCommandMenu *menu)
@@ -27,7 +27,7 @@ void FUN_0028e9ec(BattleCommandMenu *menu)
         if (command->kind == 6 || command->kind == 8 || FUN_0023dcb8() == 0)
             count++;
     }
-    FUN_0029f848(&menu->counters[0], count, 1, count, 1, 1);
+    gridNavigationConfigure(&menu->counters[0], count, 1, count, 1, 1);
     CommandMenuState *state = &menu->state;
     for (s32 slot = 0; slot < 3; slot++) {
         s32 slotCount = 0;
@@ -49,7 +49,7 @@ void FUN_0028e9ec(BattleCommandMenu *menu)
                 }
             }
         }
-        FUN_0029f848(&menu->counters[1 + slot], slotCount, 1, slotCount, 1, 1);
+        gridNavigationConfigure(&menu->counters[1 + slot], slotCount, 1, slotCount, 1, 1);
     }
 }
 }

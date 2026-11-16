@@ -18,7 +18,7 @@ void FUN_004934ac(ScreenRect *rect, u32 id, s32 dx, s32 dy, u32 extra)
 {
     s32 x = (s32)(rect->x + rect->width + dx);
     s32 y = (s32)(rect->y + rect->height + dy);
-    FUN_001835b4(2, rect->value, id, x, y, extra);
+    texDrawTableEntryAtStoredOrigin(2, rect->value, id, x, y, extra);
 }
 
 } /* extern "C" */

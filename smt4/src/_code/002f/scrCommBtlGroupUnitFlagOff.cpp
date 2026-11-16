@@ -7,7 +7,7 @@ extern BtlEntry *btlMainFindActiveEntry(void);
 extern u32 scrGetArg(u32 index);
 extern s32 scrSetResult(s32 value);
 extern u32 btlScriptResolveGroupArg(void);
-extern s32 FUN_002499fc(u32 group, s32 *start, s32 *count);
+extern s32 btlSideGetEntryRange(u32 group, s32 *start, s32 *count);
 
 /* Script command: pushes whether a present, non-excluded unit of the current group (or the active entry) has flag
  * argument 0 off. */
@@ -19,7 +19,7 @@ u32 scrCommBtlGroupUnitFlagOff(void)
     s32 index;
 
     scrGetArg(1);
-    FUN_002499fc(btlScriptResolveGroupArg(), &start, &count);
+    btlSideGetEntryRange(btlScriptResolveGroupArg(), &start, &count);
     for (index = start; index < count + start; index++) {
         BtlEntry *unit = &btlGetMainState()->entries[index];
 

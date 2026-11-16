@@ -21,10 +21,10 @@ typedef char ShopResourceSetupOffsets[
 
 extern "C" {
 void FUN_002898e4(void);
-void FUN_00289880(void);
+void commonBgStopChildAndBeginTransition(void);
 void buttonHelpAcquireResources(void);
 void buttonHelpCreate(void);
-void FUN_002c58c8(u32 table, u32 variant);
+void asdTMTexTablePrepareNodeImage(u32 table, u32 variant);
 u32 FUN_002fdff4(u32 resource);
 u32 FUN_00285e44(u32 sound, u32 option, u32 flags);
 void FUN_00247bf4(u32 handle, u32 option, u32 flags);
@@ -40,12 +40,12 @@ void shopLoadMessageBankAndSound(ShopCreateWork *shop)
 {
     ShopResourceSetupViewIV *resources = (ShopResourceSetupViewIV *)shop;
     FUN_002898e4();
-    FUN_00289880();
+    commonBgStopChildAndBeginTransition();
     buttonHelpAcquireResources();
     buttonHelpCreate();
     asdLoadFileAsyncSimple(DAT_004075c0, reinterpret_cast<u32 *>(&resources->script), 0);
     asdTMTexTableLoadSprites(43);
-    FUN_002c58c8(43, 0);
+    asdTMTexTablePrepareNodeImage(43, 0);
     u32 resource = 0;
     u32 sound = 0;
     switch (shop->unk14) {

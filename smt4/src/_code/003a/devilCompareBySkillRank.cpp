@@ -13,16 +13,16 @@ typedef struct SkillRecord {
 } SkillRecord;
 
 extern DevilRecord *table8Type5FindById(u16 id);
-extern s32 FUN_0024c52c(u16 skillId);
+extern s32 itemGetSortCategory(u16 skillId);
 extern SkillRecord *dataTable40FindById(u16 skillId);
 
-/* qsort-style comparison of two devil ids by the skill's rank (FUN_0024c52c), then its sort key, then id (descending). */
+/* qsort-style comparison of two devil ids by the skill's rank (itemGetSortCategory), then its sort key, then id (descending). */
 s32 devilCompareBySkillRank(u16 *a, u16 *b)
 {
     DevilRecord *recordA = table8Type5FindById(*a);
     DevilRecord *recordB = table8Type5FindById(*b);
-    s32 rankB = FUN_0024c52c(recordB->skillId);
-    s32 rankA = FUN_0024c52c(recordA->skillId);
+    s32 rankB = itemGetSortCategory(recordB->skillId);
+    s32 rankA = itemGetSortCategory(recordA->skillId);
     s32 result = rankB - rankA;
 
     if (result == 0) {

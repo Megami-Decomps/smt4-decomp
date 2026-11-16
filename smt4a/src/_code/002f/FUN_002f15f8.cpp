@@ -19,7 +19,7 @@ u8 FUN_001bd100(u32 questId);
 void uiSpriteSetKeyframe(void *sprite, s32 frame, s32 flags);
 void uiSpriteSetImageKeyframe(void *sprite, s32 image, s32 flags);
 s32 objectApplyIfUnblocked(void *cursor);
-void FUN_002a4964(void *cursor, s32 index);
+void scrollListSetSelectionTracked(void *cursor, s32 index);
 void uiFadeRequestClear(void);
 void sysPlaySe(u32 sound);
 void sysPlayVoice(u32 voice);
@@ -49,7 +49,7 @@ void FUN_002f15f8(u32 questId, s32 reposition)
         }
         for (s32 index = 0; index < objectApplyIfUnblocked(cursor); ++index) {
             if (list[index] == questId) {
-                FUN_002a4964(cursor, index);
+                scrollListSetSelectionTracked(cursor, index);
                 break;
             }
         }

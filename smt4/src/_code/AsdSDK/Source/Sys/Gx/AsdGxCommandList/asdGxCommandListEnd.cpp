@@ -5,7 +5,7 @@ extern AsdGxState g_asdGxState;
 extern AsdGxCommandList *g_asdGxCommandListStack[];
 
 void gxGetCommandListParameter(u32 param, u32 *out);
-void FUN_002bdb48(void);
+void asdGxCommandBufferTerminateAndSubmit(void);
 void FUN_001376d8(u32 *a, u32 *b, u32 *c, u32 *d);
 void asdGxCommandListRefreshCopy(AsdGxCommandList *list);
 void nngxBindCmdlist(u32 cmdList);
@@ -21,7 +21,7 @@ void asdGxCommandListEnd(AsdGxCommandList *list, s32 restoreCopy, u32 unk08, u32
     AsdGxCommandList *outer;
     u32 bound;
 
-    FUN_002bdb48();
+    asdGxCommandBufferTerminateAndSubmit();
     FUN_001376d8(&list->entries[list->entryCount].values[0], &list->entries[list->entryCount].values[1],
                  &list->entries[list->entryCount].values[2], &list->entries[list->entryCount].values[3]);
     list->state = ASD_GX_CMDLIST_SUSPENDED;

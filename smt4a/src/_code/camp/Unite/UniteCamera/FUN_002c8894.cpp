@@ -18,8 +18,8 @@ struct UniteCamera {
 
 extern "C" {
 extern UniteCamera *g_uniteCamera;
-f32 FUN_001bc124(f32 angle);
-f32 FUN_001bbf0c(f32 angle);
+f32 libm_sinf(f32 angle);
+f32 libm_cosf(f32 angle);
 void FUN_0014f0dc(UniteCamera *camera, UniteCameraTarget *target, const Vec3 *eye, const Vec3 *lookAt);
 void FUN_00280070(UniteCamera *camera, s32 mode, Vec3 up);
 
@@ -31,9 +31,9 @@ void FUN_002c8894(void)
 
     if (camera != NULL) {
         Vec3 eye = camera->target->position;
-        eye.x -= FUN_001bc124(camera->target->yaw);
-        eye.y += FUN_001bc124(camera->target->pitch);
-        eye.z -= FUN_001bbf0c(camera->target->yaw);
+        eye.x -= libm_sinf(camera->target->yaw);
+        eye.y += libm_sinf(camera->target->pitch);
+        eye.z -= libm_cosf(camera->target->yaw);
         FUN_0014f0dc(camera, camera->target, &eye, &camera->target->lookAt);
         FUN_00280070(camera, 0, camera->target->up);
     }

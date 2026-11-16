@@ -111,7 +111,7 @@ extern int nn_math_ARMv6_MTX34InverseAsm(unsigned char *, int);
 /* Supplied declaration required: mtx44Copy. */
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: renderCtxSelectTexture. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: nn_math_ARMv6_MTX33CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
@@ -262,7 +262,7 @@ void FUN_001aad64(int param_1)
   }
   temp_v2 = g_titleScene;
   if ((*(unsigned char *)(param_1 + 0x130) & 8) != 0) {
-    temp_v1 = FUN_002c5d80(5,0);
+    temp_v1 = renderCtxPackPassFlags(5,0);
     piVar8 = (int *)(temp_v2 + 0x124c);
     temp_v3 = *piVar8;
     temp_v4 = piVar8[temp_v3 + 2];

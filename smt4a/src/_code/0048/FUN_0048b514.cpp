@@ -32,13 +32,13 @@ extern "C" {
 extern u32 g_renderCtx;
 extern UiTextFontSettings g_uiTextFontSettings;
 
-u32 FUN_001692ac(s32 a, s32 b);
+u32 renderCtxPackPassFlags(s32 a, s32 b);
 void renderStackPushIndexed(u32 context, s32 index, u32 value);
 void renderCtxPopState(u32 context, s32 index);
 void efctSetSpeed(f32 speed);
-void FUN_00183bb0(void);
-void FUN_00164b5c(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
-void FUN_00163aa4(void *anchor, f32 alpha);
+void gxResetColorQuadToWhite(void);
+void texDrawCompositeSprite(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
+void uiSpriteAdvanceAnimation(void *anchor, f32 alpha);
 s8 uiSpriteGetCompletionState(const void *animation);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 s32 __aeabi_idivmod(s32 a, s32 b);
@@ -48,11 +48,11 @@ s32 __aeabi_idivmod(s32 a, s32 b);
 void FUN_0048b514(SpinnerWork *work)
 {
     FloatPoint points[9];
-    renderStackPushIndexed(g_renderCtx, 3, FUN_001692ac(1, 0));
+    renderStackPushIndexed(g_renderCtx, 3, renderCtxPackPassFlags(1, 0));
     efctSetSpeed(1.0f);
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
     u8 *anchor = (u8 *)work + 0x12DC;
-    FUN_00164b5c(2, 19, 29, vec2GetXInt(anchor), 0, 211);
+    texDrawCompositeSprite(2, 19, 29, vec2GetXInt(anchor), 0, 211);
     work->tick = (work->tick + 1) % g_uiTextFontSettings.tickLength;
     if (work->tick <= 0)
         work->phase++;
@@ -62,14 +62,14 @@ void FUN_0048b514(SpinnerWork *work)
         TextureTableEntryIV *point = asdTMTexTableEntryAt(19, 0x1124 + i);
         points[i].x = (f32)point->x;
         points[i].y = (f32)point->y;
-        FUN_001835b4(1, 19, 0x1121, vec2GetXInt(anchor) + point->x, point->y, 6);
+        texDrawTableEntryAtStoredOrigin(1, 19, 0x1121, vec2GetXInt(anchor) + point->x, point->y, 6);
     }
-    FUN_001835b4(1, 19, 0x1123, (s32)((f32)vec2GetXInt(anchor) + points[work->phase].x), (s32)points[work->phase].y, 6);
-    FUN_001835b4(1, 19, 0x1122, (s32)((f32)vec2GetXInt(anchor) + points[next].x), (s32)points[next].y, 6);
+    texDrawTableEntryAtStoredOrigin(1, 19, 0x1123, (s32)((f32)vec2GetXInt(anchor) + points[work->phase].x), (s32)points[work->phase].y, 6);
+    texDrawTableEntryAtStoredOrigin(1, 19, 0x1122, (s32)((f32)vec2GetXInt(anchor) + points[next].x), (s32)points[next].y, 6);
     s32 opposite = (work->phase + 4) & 7;
     s32 oppositeNext = (opposite + 1) & 7;
-    FUN_001835b4(1, 19, 0x1123, (s32)((f32)vec2GetXInt(anchor) + points[opposite].x), (s32)points[opposite].y, 6);
-    FUN_001835b4(1, 19, 0x1122, (s32)((f32)vec2GetXInt(anchor) + points[oppositeNext].x), (s32)points[oppositeNext].y, 6);
+    texDrawTableEntryAtStoredOrigin(1, 19, 0x1123, (s32)((f32)vec2GetXInt(anchor) + points[opposite].x), (s32)points[opposite].y, 6);
+    texDrawTableEntryAtStoredOrigin(1, 19, 0x1122, (s32)((f32)vec2GetXInt(anchor) + points[oppositeNext].x), (s32)points[oppositeNext].y, 6);
     TextureTableEntryIV *label = asdTMTexTableEntryAt(19, 0x1120);
     char text[27];
     __aeabi_memcpy4(text, "\x82\x60\x82\x83\x82\x94\x82\x89\x82\x96\x82\x81\x82\x94\x82\x89\x82\x8E\x82\x87\x81\x44\x81\x44\x81\x44", sizeof(text));
@@ -77,7 +77,7 @@ void FUN_0048b514(SpinnerWork *work)
                  0.0f, 1.0f);
     renderCtxPopState(g_renderCtx, 3);
     efctSetSpeed(1.0f);
-    FUN_00163aa4(anchor, 1.0f);
+    uiSpriteAdvanceAnimation(anchor, 1.0f);
     if (work->requested == 0) {
         return;
     }

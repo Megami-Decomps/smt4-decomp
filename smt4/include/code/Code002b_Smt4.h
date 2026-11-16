@@ -7,13 +7,13 @@ struct ObjFUN_002bf4f0;
 struct Obj;
 extern "C" {
 
-u8 FUN_002b6b04(void);
+u8 infoWindowIsActive(void);
 
 void FUN_002b0800(int *param_1);
 
 void FUN_002b011c(void);
 
-void FUN_002bbb2c(s32 key, u32 address, u32 failed);
+void sysReportCheckFailure(s32 key, u32 address, u32 failed);
 
 u8 FUN_002bfdd4(void);
 

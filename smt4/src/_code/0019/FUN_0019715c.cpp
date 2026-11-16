@@ -18,8 +18,8 @@ int FUN_002bdf94(...);
 int itemDrawCategoryBadge(...);
 int textDrawString(...);
 int textFormatBuffer(...);
-int FUN_002be650(...);
-int FUN_002bf380(...);
+int dataFindKindRecordWithAocOverrides(...);
+int texDrawCompositeSprite(...);
 int asdTMTexTableEntryAt(...);
 int VectorSignedToFloat(...);
 
@@ -44,7 +44,7 @@ extern int g_camp; /* 0x43da90 */
 /* Supplied declaration required: FUN_001f3958. */
 /* Supplied declaration required: FUN_0028f694. */
 /* Supplied declaration required: FUN_0028f870. */
-extern unsigned int FUN_0028fb40(unsigned int);
+extern unsigned int flagValueRead(unsigned int);
 /* Supplied declaration required: FUN_0028fc60. */
 extern int FUN_0029ee54(int);
 extern int FUN_0029efa8(int);
@@ -53,10 +53,10 @@ extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002be650. */
+/* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(void);
-/* Supplied declaration required: FUN_002bf380. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 
 
@@ -114,21 +114,21 @@ void FUN_0019715c(int param_1,int param_2)
             }
             temp_v12 = g_camp + 0x178;
             temp_v1 = g_camp + 0x1cc4;
-            FUN_002bf380(2,0x1d,0,temp_v2,temp_v3,0x65);
-            FUN_002bf288(2,0x1d,0x46b,temp_v2,temp_v3,0x6a);
+            texDrawCompositeSprite(2,0x1d,0,temp_v2,temp_v3,0x65);
+            texDrawTableEntryAtStoredOrigin(2,0x1d,0x46b,temp_v2,temp_v3,0x6a);
           }
           else {
             temp_v12 = g_camp + 0x114;
             temp_v1 = g_camp + 0x14f4;
-            FUN_002bf380(2,0x1d,0,temp_v2,temp_v3,0x65);
-            FUN_002bf288(2,0x1d,0x46a,temp_v2,temp_v3,0x6a);
+            texDrawCompositeSprite(2,0x1d,0,temp_v2,temp_v3,0x65);
+            texDrawTableEntryAtStoredOrigin(2,0x1d,0x46a,temp_v2,temp_v3,0x6a);
           }
         }
         else {
           temp_v12 = g_camp + 0xb0;
           temp_v1 = g_camp + 0x147c;
-          FUN_002bf380(2,0x1d,0,temp_v2,temp_v3,0x65);
-          FUN_002bf288(2,0x1d,0x469,temp_v2,temp_v3,0x6a);
+          texDrawCompositeSprite(2,0x1d,0,temp_v2,temp_v3,0x65);
+          texDrawTableEntryAtStoredOrigin(2,0x1d,0x469,temp_v2,temp_v3,0x6a);
         }
         temp_v9 = 0;
         do {
@@ -139,15 +139,15 @@ void FUN_0019715c(int param_1,int param_2)
           temp_v0 = *(unsigned short *)(temp_v1 + (temp_v4 + temp_v9) * 2);
           temp_v10 = (unsigned int)temp_v0;
           temp_v4 = asdTMTexTableEntryAt(0x1d,temp_v9 + 0x40d);
-          FUN_002bf288(2,0x1d,0x46c,*(short *)(temp_v4 + 8) + temp_v2,*(short *)(temp_v4 + 10) + temp_v3,
+          texDrawTableEntryAtStoredOrigin(2,0x1d,0x46c,*(short *)(temp_v4 + 8) + temp_v2,*(short *)(temp_v4 + 10) + temp_v3,
                        0x6a);
-          FUN_002bf288(2,0x1d,0x46d,*(short *)(temp_v4 + 8) + temp_v2,*(short *)(temp_v4 + 10) + temp_v3,
+          texDrawTableEntryAtStoredOrigin(2,0x1d,0x46d,*(short *)(temp_v4 + 8) + temp_v2,*(short *)(temp_v4 + 10) + temp_v3,
                        0x6a);
-          FUN_002bf288(2,0x1d,0x46e,*(short *)(temp_v4 + 8) + temp_v2,*(short *)(temp_v4 + 10) + temp_v3,
+          texDrawTableEntryAtStoredOrigin(2,0x1d,0x46e,*(short *)(temp_v4 + 8) + temp_v2,*(short *)(temp_v4 + 10) + temp_v3,
                        0x6a);
           temp_v5 = asdTMTexTableEntryAt(0x1d,0x470);
           temp_v6 = temp_v10;
-          FUN_002be650(temp_v10,0);
+          dataFindKindRecordWithAocOverrides(temp_v10,0);
           if (temp_v6 != 0) {
             temp_v11 = 0xff;
             if ((temp_v14 == 0xb) && (temp_v7 = temp_v10, FUN_0028fc60(), temp_v7 == 0)) {
@@ -160,7 +160,7 @@ void FUN_0019715c(int param_1,int param_2)
             textDrawString(2,temp_v11,temp_v6,(int)*(short *)(temp_v5 + 8));
           }
           temp_v5 = asdTMTexTableEntryAt(0x1d,0x473);
-          temp_v11 = FUN_0028fb40(temp_v10);
+          temp_v11 = flagValueRead(temp_v10);
           textFormatBuffer(temp_v13,"%d",temp_v11);
           FUN_002bdf94(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v2,
                        (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v3,1,3,0x6f,
@@ -188,7 +188,7 @@ void FUN_0019715c(int param_1,int param_2)
                        (int)*(short *)(temp_v8 + temp_v9 * 2 + 0xe0c));
           temp_v8 = asdTMTexTableEntryAt(0x1d,0x477);
           temp_v6 = temp_v10;
-          FUN_002be650(temp_v10,0);
+          dataFindKindRecordWithAocOverrides(temp_v10,0);
           if (temp_v6 != 0) {
             temp_v11 = 0xffffffff;
             if ((temp_v14 == 0xb) && (temp_v7 = temp_v10, FUN_0028fc60(), temp_v7 == 0)) {
@@ -201,7 +201,7 @@ void FUN_0019715c(int param_1,int param_2)
             textDrawString(3,temp_v11,temp_v6,(int)*(short *)(temp_v8 + 8));
           }
           temp_v8 = asdTMTexTableEntryAt(0x1d,0x47a);
-          temp_v11 = FUN_0028fb40(temp_v10);
+          temp_v11 = flagValueRead(temp_v10);
           textFormatBuffer(temp_v13,"%d",temp_v11);
           FUN_002bdf94(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v2,
                        (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v8 + 10) + temp_v3,1,3,0x83,
@@ -210,7 +210,7 @@ void FUN_0019715c(int param_1,int param_2)
           FUN_002bdf94(0,(int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v1 + 8) + temp_v2,
                        (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v8 + 10) + temp_v3,1,1,0x83,
                        "*");
-          FUN_002bf288(2,0x1d,0x475,*(short *)(temp_v1 + 8) + temp_v2,*(short *)(temp_v1 + 10) + temp_v3,
+          texDrawTableEntryAtStoredOrigin(2,0x1d,0x475,*(short *)(temp_v1 + 8) + temp_v2,*(short *)(temp_v1 + 10) + temp_v3,
                        0x83);
           temp_v8 = asdTMTexTableEntryAt(0x1d,0x476);
           itemDrawCategoryBadge((int)(short)temp_v0,

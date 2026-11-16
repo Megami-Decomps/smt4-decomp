@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00157558(...);
+int renderCtxSelectDisplayAreaForStereoMode(...);
 int renderCtxResetColorScale(...);
 int skinObjectUpdateMatrices(...);
-int FUN_00183bb0(void);
+int gxResetColorQuadToWhite(void);
 int FUN_00486444(void);
 int FUN_00487470(...);
 int uiDrawAnimatedMessage(...);
@@ -46,11 +46,11 @@ extern signed char DAT_005f1a5e; /* 0x5f1a5e */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_00157558. */
+/* Supplied declaration required: renderCtxSelectDisplayAreaForStereoMode. */
 extern int campIsState85(void);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
-/* Supplied declaration required: FUN_00183bb0. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 extern int dataTableGetEntry49(unsigned char);
 extern int gameFlagsClassify(unsigned int);
 extern int FUN_00384cf4(void);
@@ -306,8 +306,8 @@ LAB_004925c8:
   temp_v3 = FUN_0048e40c(temp_v33);
   if (((temp_v3 != 0) && (*(int *)(temp_v33 + 4) != 0)) &&
      (words2Copy(temp_v33 + 0x4d0,temp_v20), (unsigned int)temp_v20[0] < 0xc39f8001)) {
-    FUN_00157558(g_renderCtx);
-    FUN_00183bb0();
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
+    gxResetColorQuadToWhite();
     if (*(char *)(temp_v33 + 0xc) != '\0') {
       FUN_00486444();
     }

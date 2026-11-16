@@ -5,7 +5,7 @@
 extern "C" {
 
 int effectRestoreSavedRenderPairs(int, unsigned int);
-int FUN_00157558(int);
+int renderCtxSelectDisplayAreaForStereoMode(int);
 int memAlloc(int, int, int, int);
 int renderCtxSelectTexture(...);
 int asdMemFree(void);
@@ -48,10 +48,10 @@ extern unsigned int *DAT_006471b4; /* 0x6471b4 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: effectRestoreSavedRenderPairs. */
-extern unsigned int FUN_00152f54(void);
-/* Supplied declaration required: FUN_00157558. */
+extern unsigned int asdCameraGetSavedRenderPairs(void);
+/* Supplied declaration required: renderCtxSelectDisplayAreaForStereoMode. */
 /* Supplied declaration required: memAlloc. */
-extern int FUN_001692ac(unsigned int);
+extern int renderCtxPackPassFlags(unsigned int);
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: asdMemFree. */
 extern unsigned int FUN_001c5b4c(unsigned int);
@@ -101,7 +101,7 @@ void FUN_003a1098(unsigned int param_1,int *param_2,int param_3)
   unsigned int temp_v20;
   
   temp_v2 = g_renderCtx;
-  temp_v1 = FUN_001692ac(1);
+  temp_v1 = renderCtxPackPassFlags(1);
   piVar9 = (int *)(temp_v2 + 0x1258);
   temp_v5 = *piVar9;
   temp_v6 = piVar9[temp_v5 + 2];
@@ -204,7 +204,7 @@ joined_r0x003a122c:
       temp_v3 = param_2[6];
       temp_v12 = romwright_piece_4_4((int)(temp_v11 + DAT_005c10c8),(int)(temp_v10 + g_uiDrawOffset));
       temp_v13 = romwright_piece_4_4((int)(temp_v8 + DAT_005c10c8),(int)(temp_v9 + g_uiDrawOffset));
-      temp_v1 = FUN_001692ac(1);
+      temp_v1 = renderCtxPackPassFlags(1);
       piVar10 = (int *)(temp_v2 + 0x1258);
       temp_v6 = *piVar10;
       temp_v5 = piVar10[temp_v6 + 2];
@@ -244,7 +244,7 @@ joined_r0x003a122c:
       FUN_002a1850(&temp_v15,0,temp_v4);
       FUN_002a1850(&temp_v18,0,temp_v4,&temp_v18);
       renderCtxSelectTexture(g_renderCtx,0);
-      FUN_00157558(g_renderCtx);
+      renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
       FUN_0032c810((temp_v3 << 0x18) | (((temp_v3 & 0xffff) >> 8) << 0x10) |
                    (((temp_v3 & 0xffffff) >> 0x10) << 8) | (temp_v3 >> 0x18));
       temp_v7 = FUN_001c5b4c(temp_v7);
@@ -254,7 +254,7 @@ joined_r0x003a122c:
       temp_v15 = param_2[2];
       temp_v16 = param_2[3];
       temp_v17 = param_2[4];
-      temp_v7 = FUN_00152f54();
+      temp_v7 = asdCameraGetSavedRenderPairs();
       FUN_002a1850(&temp_v15,0,temp_v7,param_2 + 2);
       temp_v17 = 0;
       renderCtxSelectTexture(g_renderCtx,0);

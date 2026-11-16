@@ -48,7 +48,7 @@ PartyMemberRecord *gameGetPlayerData(void);
 PartyMemberRecord *gameGetSlotRecord(s32 slot);
 PartyMemberRecord *FUN_003e503c(u16 index);
 s32 partySlotMatchesSelected(PartyMemberRecord *record);
-u32 FUN_004ccbf0(s32 level);
+u32 levelGetExpRequirement(s32 level);
 u32 FUN_004ccdb8(u16 expCurve, s32 level, s32 expBonus);
 }
 
@@ -57,7 +57,7 @@ extern "C" void FUN_00240674(ExpResultWork *work)
 {
     PartySlotTable *table = gameGetSlotTable();
     GaugeIcon *icon = asdTMTexTableEntryAt(0x1d, 0x14);
-    u64 needed = FUN_004ccbf0(gameGetPlayerData()->expCurve + work->leader.levelOffset);
+    u64 needed = levelGetExpRequirement(gameGetPlayerData()->expCurve + work->leader.levelOffset);
     if (work->leader.maxed) {
         work->leader.gauge = *icon->width;
     } else {
@@ -107,7 +107,7 @@ extern "C" void FUN_00240674(ExpResultWork *work)
             if (index > 36) {
                 index = 36;
             }
-            u64 needed = FUN_004ccbf0((&work->leader)[index].levelOffset + record->level);
+            u64 needed = levelGetExpRequirement((&work->leader)[index].levelOffset + record->level);
             if (partySlotMatchesSelected(record)) {
                 icon = asdTMTexTableEntryAt(0x1d, 0x13b);
             } else {

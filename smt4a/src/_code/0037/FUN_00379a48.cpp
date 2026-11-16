@@ -19,7 +19,7 @@ extern "C" {
 extern RenderCtxA *g_renderCtx;
 extern DebugSpatialBoundsQueue DAT_00611874;
 extern const DebugBoundsPalette DAT_00532240;
-u32 FUN_001692ac(u32, u32);
+u32 renderCtxPackPassFlags(u32, u32);
 void FUN_00280a08(u32, u32, u32, u32,
                  f32, f32, f32, f32, f32, f32, f32, f32, f32, f32, f32, f32);
 
@@ -31,7 +31,7 @@ void FUN_00379a48(f32 height)
     DebugSpatialBoundsQueue *queue = &DAT_00611874;
     if (queue->count != 0) {
         RenderCtxA *context = g_renderCtx;
-        renderCtxPushA(context, FUN_001692ac(5, 1));
+        renderCtxPushA(context, renderCtxPackPassFlags(5, 1));
         renderCtxSelectTexture(g_renderCtx, 0);
         s32 index = 0;
         if (queue->count > 0) {

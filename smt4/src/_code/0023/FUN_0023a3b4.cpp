@@ -34,7 +34,7 @@ FUN_0023a3b4(int param_1,unsigned int param_2,unsigned int *param_3,unsigned int
         param_6[1] = uVar3;
         return 0;
       }
-      FUN_003afd18(iVar4);
+      transferQueueForwardNext(iVar4);
     }
     *param_3 = 0;
     *param_4 = 0;

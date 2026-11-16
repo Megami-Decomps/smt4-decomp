@@ -66,7 +66,7 @@ void FUN_0049ec78(IconPanel *panel, IconCursor *cursor, s32 x, s32 y, f32 speed,
             texture = reinterpret_cast<IconTexture *>(asdTMTexTableEntryAt(0x33, 0x2f));
         }
         efctSetSpeed(speed);
-        FUN_001835b4(2, 0x33, id + group * 1000, texture->x + shiftedX, texture->y + y, z + 5);
+        texDrawTableEntryAtStoredOrigin(2, 0x33, id + group * 1000, texture->x + shiftedX, texture->y + y, z + 5);
         efctSetSpeed(1.0f);
     }
     index = cursor->second;
@@ -80,7 +80,7 @@ void FUN_0049ec78(IconPanel *panel, IconCursor *cursor, s32 x, s32 y, f32 speed,
             texture = reinterpret_cast<IconTexture *>(asdTMTexTableEntryAt(0x33, 0x30));
         }
         efctSetSpeed(speed);
-        FUN_001835b4(2, 0x33, id + group * 1000, shiftedX + texture->x, texture->y + y, z + 5);
+        texDrawTableEntryAtStoredOrigin(2, 0x33, id + group * 1000, shiftedX + texture->x, texture->y + y, z + 5);
         efctSetSpeed(1.0f);
     }
     efctSetSpeed(1.0f);
@@ -88,7 +88,7 @@ void FUN_0049ec78(IconPanel *panel, IconCursor *cursor, s32 x, s32 y, f32 speed,
     if (state != 3 && state != 9 && state != 11) {
         s32 markerX = x + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
         efctSetSpeed(speed);
-        FUN_001835b4(2, 0x33, 0x29, markerX, y, z + 10);
+        texDrawTableEntryAtStoredOrigin(2, 0x33, 0x29, markerX, y, z + 10);
         efctSetSpeed(1.0f);
     }
 }

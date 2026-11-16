@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001b4a58(unsigned int, int, int, int, int, int, unsigned int, unsigned int);
-int FUN_002e3140(void);
+int resultHandleFailure(void);
 int hasExclusiveAccess(int);
 int software_interrupt(int);
 
@@ -25,7 +25,7 @@ extern int iRam00643324; /* 0x643324 */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
 /* Supplied declaration required: FUN_001b4a58. */
-/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: resultHandleFailure. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 
 
@@ -41,7 +41,7 @@ void FUN_0042d068(int param_1,int *param_2,int param_3)
   if (param_3 == 0) {
     software_interrupt(0x24);
     if (*(int *)(param_1 + 4) < 0) {
-      FUN_002e3140();
+      resultHandleFailure();
     }
     (*(romwright_code *)0x5144a0)(param_2,0x5144a0,param_2,in_lr);
     return;

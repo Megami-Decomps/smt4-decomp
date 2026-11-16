@@ -8,7 +8,7 @@
 extern "C" {
 void scrSetResult(s32 result);
 s32 btlResolveEntryChoice(s32 choice);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
 
 u32 FUN_003bbf60(void)
 {
@@ -29,7 +29,7 @@ u32 FUN_003bbf60(void)
     else if (kind == 3)
         property = 11;
     u32 first, count;
-    FUN_00301a08(btlResolveEntryChoice(scrGetArg(2)), reinterpret_cast<s32 *>(&first), reinterpret_cast<s32 *>(&count));
+    btlGetEntryChoiceRange(btlResolveEntryChoice(scrGetArg(2)), reinterpret_cast<s32 *>(&first), reinterpret_cast<s32 *>(&count));
     for (s32 index = first; static_cast<s32>(first + count) > index; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         u64 flags = entry->flags;
@@ -42,7 +42,7 @@ u32 FUN_003bbf60(void)
         }
     }
     if (btlGetMainState()->unk4cd1) {
-        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry && entry->id == id &&
             reinterpret_cast<const PropertyView *>(entry)->values[property] <= -1) {
             scrSetResult(1);

@@ -11,7 +11,7 @@ int statusCommitSelectedSkills(...);
 int statusDownEnterState11(...);
 int FUN_004bd6b0(...);
 
-int FUN_001517b4(...);
+int padQueryLogicalKey(...);
 int eventQueueAddUniqueIfValid(...);
 int sysPlaySe(...);
 int buttonHelpSetText(int, unsigned int);
@@ -25,14 +25,14 @@ int obj04Finish(void);
 int btlTalkBustUpSetUnk2F4(int);
 int statusDownOpenList(int, int);
 int countersAddSaturating(int, int);
-int FUN_004bcd90(int);
+int unitRecomputeDerivedStats(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001517b4. */
+/* Supplied declaration required: padQueryLogicalKey. */
 /* Supplied declaration required: FUN_0015f490. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: sysPlaySe. */
@@ -42,7 +42,7 @@ extern int gameFlagIsSet(unsigned int);
 extern int gameGetSlotRecord(unsigned int);
 /* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: gameSavedFlagSet. */
-extern int FUN_002613f0(unsigned int);
+extern int saveGetSelectedRecordSlot(unsigned int);
 extern int messageMainIsIdle(void);
 extern int FUN_0026c3a0(void);
 /* Supplied declaration required: statusCommitSelectedSkills. */
@@ -65,7 +65,7 @@ extern int stateHolderStateIs0x12(void);
 extern int statusDownGetCursorPosition(void);
 extern unsigned int sysPlayVoice(unsigned int);
 /* Supplied declaration required: countersAddSaturating. */
-/* Supplied declaration required: FUN_004bcd90. */
+/* Supplied declaration required: unitRecomputeDerivedStats. */
 /* Supplied declaration required: FUN_004bd6b0. */
 
 
@@ -79,7 +79,7 @@ void FUN_004cbd70(int param_1)
   int temp_v3;
   int temp_v4;
   
-  temp_v0 = FUN_002613f0(*(unsigned int *)(param_1 + 0x2c));
+  temp_v0 = saveGetSelectedRecordSlot(*(unsigned int *)(param_1 + 0x2c));
   temp_v1 = gameGetSlotRecord(*(unsigned int *)(param_1 + 0x30));
   temp_v4 = 0;
 LAB_004cbda0:
@@ -112,7 +112,7 @@ LAB_004cbdc8:
           return;
         }
         FUN_00333dc8(0);
-        FUN_004bcd90(temp_v1);
+        unitRecomputeDerivedStats(temp_v1);
         buttonHelpSetText(0,0xf4f4f4ff);
         if ((*(short *)(temp_v1 + 0x62) == 0x114) && (temp_v1 = gameFlagIsSet(0x4d7), temp_v1 == 0)) {
           gameFlagSetValue(0x4d7, 1, 1);
@@ -213,10 +213,10 @@ LAB_004cbdc8:
         return;
       }
       temp_v0 = 0;
-      FUN_001517b4(0,1);
+      padQueryLogicalKey(0,1);
       if ((temp_v0 == 0) && (temp_v0 = statusDownGetState(), temp_v0 == 0)) {
         temp_v0 = 1;
-        FUN_001517b4();
+        padQueryLogicalKey();
         if (temp_v0 != 0) {
           FUN_00333dc8(1);
           obj04Finish();

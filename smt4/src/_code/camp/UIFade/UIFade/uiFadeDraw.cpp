@@ -8,7 +8,7 @@ extern "C" {
 
 int efctSetSpeed(f32 alpha);
 int renderCtxResetColorScale(RenderCtx *ctx);
-int FUN_002c5d80(u32 a, u32 b);
+int renderCtxPackPassFlags(u32 a, u32 b);
 
 extern UIFadeGlobals g_uiFade;
 extern RenderCtx *g_titleScene;
@@ -24,10 +24,10 @@ void uiFadeDraw(u32 arg)
     }
     renderCtxSelectStereoLayout(g_titleScene);
     ctx = g_titleScene;
-    state = FUN_002c5d80(1, 0);
+    state = renderCtxPackPassFlags(1, 0);
     renderStackPush(&ctx->stackA, state);
     efctSetSpeed(fade->alpha);
-    FUN_002bf288(2, 0xe, 0x10c, 0, 0, arg);
+    texDrawTableEntryAtStoredOrigin(2, 0xe, 0x10c, 0, 0, arg);
     renderStackPop(&g_titleScene->stackA);
     renderCtxResetColorScale(g_titleScene);
     efctSetSpeed(1.0f);

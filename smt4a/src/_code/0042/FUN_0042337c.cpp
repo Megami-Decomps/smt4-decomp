@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e3140(void);
+int resultHandleFailure(void);
 int FUN_0042349c(void);
 int software_interrupt(int);
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: FUN_0042349c. */
 extern int *movieY2rGetTransferEventStorage(void);
 
@@ -48,7 +48,7 @@ void FUN_0042337c(int param_1)
     piVar2 = (int *)movieY2rGetTransferEventStorage();
     software_interrupt(0x24);
     if (*piVar2 < 0) {
-      FUN_002e3140();
+      resultHandleFailure();
     }
   } while( 1 );
 }

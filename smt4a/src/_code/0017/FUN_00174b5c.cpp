@@ -34,7 +34,7 @@ bool FUN_00174b5c(TaskThreadState *thread, s32 priority, const SoundInitStack *s
     if (((u32)result & 0x07E00000) != 0x00600000) {
         bool failed = result < 0;
         if (failed) {
-            FUN_002e3140(result, failed);
+            resultHandleFailure(result, failed);
         }
     }
     bool started = result >= 0;

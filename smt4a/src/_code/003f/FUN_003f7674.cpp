@@ -60,7 +60,7 @@ void FUN_003f7674(DetailPanel *panel, s32 x, s32 y, f32 speed)
     default: sound = DETAIL_KIND_NONE_SOUND; break;
     }
     if (sound >= 0 && kind != DETAIL_KIND_SPECIAL)
-        FUN_0019e52c(sound & 0xFFFF);
+        dataTable10FindValue(sound & 0xFFFF);
 
     FUN_003f707c(panel, x, y, 0xD3, 0x3E, 0x47, 0x4C, 0x4F, speed);
     char *name = panel->item->name;

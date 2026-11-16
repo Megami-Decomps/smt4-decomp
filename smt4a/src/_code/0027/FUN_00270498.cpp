@@ -53,7 +53,7 @@ s32 arrayContainsU16(u16 *array, s32 count, u16 value);
 SlotRecord *unitRecordBuild(u32 info);
 s32 FUN_0034c340(s16 skills[16], s32 count, u64 *packed, s32 flag);
 SkillMetadata *findSkillMetadataById(u32 id);
-s32 FUN_004bcd90(void *record);
+s32 unitRecomputeDerivedStats(void *record);
 s32 recordMergeByteMasks(u32 context, SlotRecord *a, SlotRecord *b, s32 flag, void *record);
 s32 wordAt1B0Clear(u32 context);
 s32 FUN_004db650(u32 context, SlotRecord *a, SlotRecord *b, u64 *packed);
@@ -137,7 +137,7 @@ u32 FUN_00270498(void)
                     }
                 }
             }
-            FUN_004bcd90(record);
+            unitRecomputeDerivedStats(record);
             return 1;
         }
     }

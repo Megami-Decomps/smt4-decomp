@@ -26,7 +26,7 @@ u32 FUN_002fe2f4(EventCounters *counters, u32 count)
     s32 result = nn::svc::SignalEvent(counters->event);
     bool failed = nnResultIsFailure(result);
     if (failed) {
-        FUN_002c526c(result, failed);
+        resultHandleFailure(result, failed);
     }
     return 1;
 }

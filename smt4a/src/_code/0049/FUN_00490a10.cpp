@@ -7,9 +7,9 @@ extern "C" {
 
 int renderCtxPopState(...);
 int renderStackPushIndexed(unsigned int, int, unsigned int);
-int FUN_00183bb0(void);
+int gxResetColorQuadToWhite(void);
 int drawSetColorFromRGBA8(unsigned int);
-int FUN_00185dd4(...);
+int texDrawTableEntrySized(...);
 int FUN_002e1208(...);
 int effectSetByteSpeed(...);
 int words2Copy(int, float *);
@@ -31,12 +31,12 @@ extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int gameFlagsGetBlock(void);
-extern unsigned int FUN_001692ac(unsigned int, unsigned int);
+extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
-/* Supplied declaration required: FUN_00183bb0. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: FUN_00185dd4. */
+/* Supplied declaration required: texDrawTableEntrySized. */
 /* Supplied declaration required: FUN_002e1208. */
 /* Supplied declaration required: effectSetByteSpeed. */
 /* Supplied declaration required: words2Copy. */
@@ -74,7 +74,7 @@ void FUN_00490a10(int param_1)
   temp_v18[0] = 0;
   temp_v17 = 0;
   temp_v11 = temp_v12;
-  temp_v3 = FUN_001692ac(1,0);
+  temp_v3 = renderCtxPackPassFlags(1,0);
   renderStackPushIndexed(g_renderCtx,3,temp_v3);
   temp_v7 = 0;
   if (0 < *(int *)(param_1 + 0x7b8c)) {
@@ -111,7 +111,7 @@ LAB_00490b04:
                                                         (unsigned char)(in_fpscr >> 0x16) & 3);
                     temp_v10 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v6 + 0x17c4),
                                                         (unsigned char)(in_fpscr >> 0x16) & 3);
-                    FUN_001835b4(9,*puVar8,0x1bd3,
+                    texDrawTableEntryAtStoredOrigin(9,*puVar8,0x1bd3,
                                  (int)(((temp_v10 + temp_v15) - (float)temp_v13) +
                                       *(float *)(temp_v6 + 0x17a8)),
                                  (int)(((temp_v9 + temp_v16) - (float)temp_v13) +
@@ -130,7 +130,7 @@ LAB_00490b04:
                                                         (unsigned char)(in_fpscr >> 0x16) & 3);
                     temp_v10 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v6 + 0x17c4),
                                                         (unsigned char)(in_fpscr >> 0x16) & 3);
-                    FUN_001835b4(9,*puVar8,0x1bd5,
+                    texDrawTableEntryAtStoredOrigin(9,*puVar8,0x1bd5,
                                  (int)(((temp_v10 + temp_v15) - (float)temp_v13) +
                                       *(float *)(temp_v6 + 0x17a8)),
                                  (int)(((temp_v9 + temp_v16) - (float)temp_v13) +
@@ -149,7 +149,7 @@ LAB_00490b04:
                                                         (unsigned char)(in_fpscr >> 0x16) & 3);
                     temp_v10 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v6 + 0x17c4),
                                                         (unsigned char)(in_fpscr >> 0x16) & 3);
-                    FUN_001835b4(9,*puVar8,0x1bd7,
+                    texDrawTableEntryAtStoredOrigin(9,*puVar8,0x1bd7,
                                  (int)(((temp_v10 + temp_v15) - (float)temp_v13) +
                                       *(float *)(temp_v6 + 0x17a8)),
                                  (int)(((temp_v9 + temp_v16) - (float)temp_v13) +
@@ -168,7 +168,7 @@ LAB_00490b04:
                                                         (unsigned char)(in_fpscr >> 0x16) & 3);
                     temp_v10 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v6 + 0x17c4),
                                                         (unsigned char)(in_fpscr >> 0x16) & 3);
-                    FUN_001835b4(9,*puVar8,0x1bd7,
+                    texDrawTableEntryAtStoredOrigin(9,*puVar8,0x1bd7,
                                  (int)(((temp_v10 + temp_v15) - (float)temp_v13) +
                                       *(float *)(temp_v6 + 0x17a8)),
                                  (int)(((temp_v9 + temp_v16) - (float)temp_v13) +
@@ -195,7 +195,7 @@ LAB_00490b04:
                                                       (unsigned char)(in_fpscr >> 0x16) & 3);
                   temp_v10 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v6 + 0x17c4),
                                                       (unsigned char)(in_fpscr >> 0x16) & 3);
-                  FUN_00185dd4(9,*puVar8,temp_v4,(int)(temp_v10 + temp_v15),(int)(temp_v9 + temp_v16),
+                  texDrawTableEntrySized(9,*puVar8,temp_v4,(int)(temp_v10 + temp_v15),(int)(temp_v9 + temp_v16),
                                *(unsigned int *)(temp_v6 + 0x17cc),*(unsigned int *)(temp_v6 + 0x17d0),0xb);
                 }
                 else {
@@ -204,7 +204,7 @@ LAB_00490c50:
                                                       (unsigned char)(in_fpscr >> 0x16) & 3);
                   temp_v10 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v6 + 0x17c4),
                                                       (unsigned char)(in_fpscr >> 0x16) & 3);
-                  FUN_001835b4(9,*puVar8,temp_v4,(int)(temp_v15 + *(float *)(temp_v6 + 0x17a8) + temp_v10)
+                  texDrawTableEntryAtStoredOrigin(9,*puVar8,temp_v4,(int)(temp_v15 + *(float *)(temp_v6 + 0x17a8) + temp_v10)
                                ,(int)(temp_v16 + *(float *)(temp_v6 + 0x17ac) + temp_v9),0xb);
                 }
                 if (((*(unsigned int *)(temp_v2 + 0x1510) != 0) &&
@@ -245,7 +245,7 @@ LAB_00490c50:
                                                       (unsigned char)(in_fpscr >> 0x16) & 3);
                   temp_v10 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v6 + 0x17c4),
                                                       (unsigned char)(in_fpscr >> 0x16) & 3);
-                  FUN_00185dd4(9,0x13,*(unsigned short *)(temp_v6 + 0x17de),
+                  texDrawTableEntrySized(9,0x13,*(unsigned short *)(temp_v6 + 0x17de),
                                (int)(temp_v15 + *(float *)(temp_v6 + 0x17a8) + temp_v10 + temp_v11),
                                (int)(temp_v16 + *(float *)(temp_v6 + 0x17ac) + temp_v9 + temp_v12),
                                temp_v18[0],temp_v17,0xb);
@@ -261,7 +261,7 @@ LAB_00490c50:
       temp_v7 = temp_v7 + 1;
     } while (temp_v7 < *(int *)(param_1 + 0x7b8c));
   }
-  FUN_00183bb0();
+  gxResetColorQuadToWhite();
   renderCtxPopState(g_renderCtx,3);
   return;
 }

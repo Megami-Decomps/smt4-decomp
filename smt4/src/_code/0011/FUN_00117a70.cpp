@@ -32,7 +32,7 @@ extern FrameTex *g_frameTex;
 extern RenderCtx *g_titleScene;
 
 s32 stateValuesGetBySelector(s32 selector);
-s32 FUN_002c5d80(u32 a, u32 b);
+s32 renderCtxPackPassFlags(u32 a, u32 b);
 f32 FUN_002b99b8(f32 base, f32 exponent);
 void FUN_002ba1e0(u32 c0, u32 c1, u32 c2, u32 c3,
                   f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1,
@@ -74,7 +74,7 @@ void FUN_00117a70(s32 wide)
     f32 maxV = extentV / height;
 
     RenderCtx *context = g_titleScene;
-    s32 state = FUN_002c5d80(1, 0);
+    s32 state = renderCtxPackPassFlags(1, 0);
     renderStackPush(&context->stackA, state);
     context = g_titleScene;
     switch (tex->blendMode) {

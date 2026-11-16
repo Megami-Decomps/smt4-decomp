@@ -13,7 +13,7 @@ extern NnOsThread g_asdFileThread;
 s32 nn_os_detail_ConvertLibraryToSvcPriority(s32 priority);
 void nn_os_LightEvent_Signal(void *event);
 void FUN_002c3f5c(AddressSpaceRegion *region);
-s32 FUN_002c3dfc(const char *device);
+s32 fsUnmountByName(const char *device);
 void asdFatalError(void);
 
 /* Shuts the file service down: tells the worker thread to stop, waits for it, releases its
@@ -27,7 +27,7 @@ void FUN_00103504(void)
             result = nn::svc::SetThreadPriority(g_asdFileThread.handle, priority);
             bool failed = nnResultIsFailure(result);
             if (failed) {
-                FUN_002c526c(result, failed);
+                resultHandleFailure(result, failed);
             }
             g_asdFile.stopRequested = 1;
             nn_os_LightEvent_Signal(g_asdFile.event);
@@ -38,8 +38,8 @@ void FUN_00103504(void)
             FUN_002c3f5c(g_asdFile.threadStack);
         }
     }
-    FUN_002c3dfc("rom:");
-    s32 result = FUN_002c3dfc("patch:");
+    fsUnmountByName("rom:");
+    s32 result = fsUnmountByName("patch:");
     if (nnResultIsFailure(result)) {
         asdFatalError();
     }

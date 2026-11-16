@@ -14,7 +14,7 @@ typedef struct GaugeOwner {
 } GaugeOwner;
 
 s32 scrSetResult(s32 value);
-GaugeOwner *FUN_003eaf20(void);
+GaugeOwner *btlFindFirstEntryMatchingCategoryAndRequiredMask(void);
 s32 scrGetArg(s32 index);
 
 static s32 gaugePercent(Gauge *gauge)
@@ -31,7 +31,7 @@ u32 scrCommBattleGaugeAtMost(void)
     GaugeOwner *owner;
 
     btlGetMainState();
-    owner = FUN_003eaf20();
+    owner = btlFindFirstEntryMatchingCategoryAndRequiredMask();
     if (owner != NULL && gaugePercent(&owner->gauge) <= limit) {
         scrSetResult(1);
         return 1;

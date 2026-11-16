@@ -8,7 +8,7 @@
 extern "C" {
 
 int FUN_0026faa4(void);
-void FUN_0029c2cc(...);
+void modelRemoveFromSlotList(...);
 int sndObjectForwardField8(...);
 
 int modelEvaluateFirstScalarChannel(...);
@@ -36,7 +36,7 @@ int commonBgReset(void);
 int FUN_002898e4(void);
 int buttonHelpCreate(void);
 int fileSlotLoad(int);
-int FUN_0029bb14(void);
+int modelSetScale(void);
 int asdMdlManagerCreateLoaded(...);
 int buttonHelpSetText(...);
 int soundChannelRequestIfEnabled(int, int, int);
@@ -112,15 +112,15 @@ extern int buttonHelpHasEnabledEntryForId(unsigned int);
 extern int jobWorkerPollAndFree(void);
 /* Supplied declaration required: FUN_0028703c. */
 /* Supplied declaration required: FUN_00287c34. */
-extern int FUN_002896bc(void);
+extern int screenFadesAllReady(void);
 /* Supplied declaration required: FUN_002898e4. */
 /* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: uiFadeRelease. */
 /* Supplied declaration required: fileSlotLoad. */
 /* Supplied declaration required: FUN_00298d50. */
-/* Supplied declaration required: FUN_0029bb14. */
+/* Supplied declaration required: modelSetScale. */
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
-/* Supplied declaration required: FUN_0029c2cc. */
+/* Supplied declaration required: modelRemoveFromSlotList. */
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: slotSetRequest. */
 extern int ifTouchGetSelectionModeForRegion(int);
@@ -136,7 +136,7 @@ extern int ifTouchGetSelectionModeForRegion(int);
 extern int modelHasLoadedAttachment(unsigned int);
 /* Supplied declaration required: sndObjectForwardField8. */
 /* Supplied declaration required: FUN_002b827c. */
-extern unsigned short FUN_002b8584(unsigned int, unsigned int);
+extern unsigned short ifTouchRegionAddRequested(unsigned int, unsigned int);
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 extern int padIsButtonRepeat(unsigned int);
@@ -151,7 +151,7 @@ extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_002c1e30. */
 extern int FUN_002c2a04(unsigned int);
 /* Supplied declaration required: jobStop. */
-extern unsigned int FUN_002c501c(void);
+extern unsigned int asdCameraGetSavedRenderPairs(void);
 /* Supplied declaration required: asdSequenceRequest. */
 extern int gaugeTaskIsIdle(unsigned int);
 /* Supplied declaration required: titleConfigCreate. */
@@ -255,13 +255,13 @@ int FUN_001e9990(unsigned int handle)
     else {
       commonBgBeginExit();
     }
-    temp_v1 = FUN_002b8584(0x11,0x14);
+    temp_v1 = ifTouchRegionAddRequested(0x11,0x14);
     *(unsigned short *)(puVar13 + 0x1d) = temp_v1;
-    temp_v1 = FUN_002b8584(0x11,0x15);
+    temp_v1 = ifTouchRegionAddRequested(0x11,0x15);
     *(unsigned short *)((int)puVar13 + 0x76) = temp_v1;
-    temp_v1 = FUN_002b8584(0x11,0x18);
+    temp_v1 = ifTouchRegionAddRequested(0x11,0x18);
     *(unsigned short *)(puVar13 + 0x1e) = temp_v1;
-    temp_v1 = FUN_002b8584(0x11,0x19);
+    temp_v1 = ifTouchRegionAddRequested(0x11,0x19);
     *(unsigned short *)((int)puVar13 + 0x7a) = temp_v1;
     temp_v6 = asdCameraLoadFromFile(&LAB_001e9fbc);
     puVar13[0x22] = temp_v6;
@@ -291,7 +291,7 @@ int FUN_001e9990(unsigned int handle)
   case 4:
     *(unsigned char *)((int)g_titleMain + 0x86) = 0;
     modelSlotAttachChild(puVar13[0x22],0);
-    temp_v6 = FUN_002c501c();
+    temp_v6 = asdCameraGetSavedRenderPairs();
     temp_v10 = (unsigned int *)&temp_v12;
     FUN_002a8638(*(unsigned int *)(puVar13[0x22] + 8),&temp_v13,temp_v14,&temp_v11);
     temp_v13 = (unsigned char *)romwright_f2u((float)((romwright_u2f((unsigned int)(temp_v13)) * 180.0f * 0.31830987f)));
@@ -307,14 +307,14 @@ int FUN_001e9990(unsigned int handle)
       *puVar10 = *puVar10 & 0xfffffffb;
       *(unsigned int *)(puVar10[2] + 0x74) = temp_v5;
       in_s0 = *(float *)(puVar10[2] + 0x78);
-      FUN_0029bb14();
+      modelSetScale();
     }
     puVar10 = (unsigned int *)puVar13[0x24];
     if ((*puVar10 & 4) == 0) {
       *puVar10 = *puVar10 | 4;
       *(unsigned int *)(puVar10[2] + 0x74) = 0;
       in_s0 = *(float *)(puVar10[2] + 0x78);
-      FUN_0029bb14();
+      modelSetScale();
     }
     puVar10 = (unsigned int *)puVar13[0x24];
     *puVar10 = *puVar10 | 2;
@@ -324,7 +324,7 @@ int FUN_001e9990(unsigned int handle)
     temp_v4 = puVar13[0x27] + 1;
     break;
   case 5:
-    temp_v4 = FUN_002896bc();
+    temp_v4 = screenFadesAllReady();
     if ((temp_v4 == 0) || (temp_v4 = frameTexPollTransitionComplete(), puVar2 = g_titleMain, temp_v4 == 0))
     goto LAB_001ea720;
     temp_v8 = 1.0f;
@@ -400,7 +400,7 @@ int FUN_001e9990(unsigned int handle)
         if ((*puVar10 & 4) != 0) {
           *puVar10 = *puVar10 & 0xfffffffb;
           *(unsigned int *)(puVar10[2] + 0x74) = temp_v6;
-          FUN_0029bb14();
+          modelSetScale();
         }
         temp_v6 = puVar3[0x24];
         in_s0 = (float)puVar3[0x26];
@@ -413,7 +413,7 @@ int FUN_001e9990(unsigned int handle)
         if ((*puVar10 & 4) != 0) {
           *puVar10 = *puVar10 & 0xfffffffb;
           *(unsigned int *)(puVar10[2] + 0x74) = temp_v6;
-          FUN_0029bb14();
+          modelSetScale();
         }
         temp_v6 = puVar3[0x23];
         in_s0 = (float)puVar3[0x26];
@@ -427,7 +427,7 @@ int FUN_001e9990(unsigned int handle)
       if ((*puVar10 & 4) == 0) {
         *puVar10 = *puVar10 | 4;
         *(int *)(puVar10[2] + 0x74) = (int)temp_v9;
-        FUN_0029bb14();
+        modelSetScale();
       }
       puVar10 = (unsigned int *)puVar3[0x23];
       *puVar10 = *puVar10 | 2;
@@ -444,7 +444,7 @@ int FUN_001e9990(unsigned int handle)
         *puVar10 = *puVar10 & 0xfffffffb;
         *(int *)(puVar10[2] + 0x74) = (int)((unsigned long long)temp_v9 >> 0x20);
         in_s0 = *(float *)(puVar10[2] + 0x78);
-        FUN_0029bb14();
+        modelSetScale();
       }
       *(unsigned char *)(puVar3 + 0x25) = 1;
     }
@@ -555,13 +555,13 @@ LAB_001ea4cc:
       g_titleMain[0x19] = 0;
       puVar13[0x1a] = 0;
       buttonHelpSetPreset(0x9f);
-      temp_v1 = FUN_002b8584(0x11,0x14);
+      temp_v1 = ifTouchRegionAddRequested(0x11,0x14);
       *(unsigned short *)(puVar13 + 0x1d) = temp_v1;
-      temp_v1 = FUN_002b8584(0x11,0x15);
+      temp_v1 = ifTouchRegionAddRequested(0x11,0x15);
       *(unsigned short *)((int)puVar13 + 0x76) = temp_v1;
-      temp_v1 = FUN_002b8584(0x11,0x18);
+      temp_v1 = ifTouchRegionAddRequested(0x11,0x18);
       *(unsigned short *)(puVar13 + 0x1e) = temp_v1;
-      temp_v1 = FUN_002b8584(0x11,0x19);
+      temp_v1 = ifTouchRegionAddRequested(0x11,0x19);
       *(unsigned short *)((int)puVar13 + 0x7a) = temp_v1;
       *(unsigned char *)((int)puVar13 + 0x61) = 0;
       FUN_00275be8(2);
@@ -574,12 +574,12 @@ LAB_001ea4cc:
     }
     goto LAB_001ea720;
   case 0xb:
-    temp_v4 = FUN_002896bc();
+    temp_v4 = screenFadesAllReady();
     if (temp_v4 == 0) goto LAB_001ea720;
     temp_v4 = 0xc;
     break;
   case 0xc:
-    temp_v4 = FUN_002896bc();
+    temp_v4 = screenFadesAllReady();
     if (temp_v4 != 0) {
       uiFadeRelease();
       jobStop(*g_titleMain,0);
@@ -669,7 +669,7 @@ LAB_001ea720:
           *puVar10 = *puVar10 | 4;
           *(unsigned int *)(puVar10[2] + 0x74) = 0;
           in_s0 = *(float *)(puVar10[2] + 0x78);
-          FUN_0029bb14();
+          modelSetScale();
         }
         puVar10 = (unsigned int *)puVar13[0x24];
         *puVar10 = *puVar10 | 2;
@@ -683,7 +683,7 @@ LAB_001ea720:
           *puVar10 = *puVar10 | 4;
           *(unsigned int *)(puVar10[2] + 0x74) = 0;
           in_s0 = *(float *)(puVar10[2] + 0x78);
-          FUN_0029bb14();
+          modelSetScale();
         }
         puVar10 = (unsigned int *)puVar13[0x23];
         *puVar10 = *puVar10 | 2;
@@ -691,7 +691,7 @@ LAB_001ea720:
         sndObjectForwardField8(puVar13[0x23]);
         *(float *)&puVar13[0x26] = in_s0;
       }
-      FUN_0029c2cc(puVar13[0x22],0);
+      modelRemoveFromSlotList(puVar13[0x22],0);
       *(unsigned char *)((int)puVar13 + 0x85) = 0;
     }
     puVar13[0x20] = puVar13[0x20] - 1;

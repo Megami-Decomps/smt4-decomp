@@ -6,8 +6,8 @@ extern Player1C *gameGetPlayerData(void);
 extern SlotTable *gameGetSlotTable(void);
 extern Lookup62 *gameGetSlotRecord(s8 slot);
 extern s32 recordGetScaledMaximum(Lookup62 *entry);
-extern Lookup62 *FUN_003e4d68(u32 index);
-extern u32 FUN_00187168(Lookup62 *entry);
+extern Lookup62 *partyGetSlot(u32 index);
+extern u32 partySlotIsOccupied(Lookup62 *entry);
 
 /* True when the amount asked for is more than what is held (id < 0: the player value). */
 u32 heldAmountLessThan(s32 amount, u32 id)
@@ -32,8 +32,8 @@ u32 heldAmountLessThan(s32 amount, u32 id)
             }
         }
         for (j = 0; (s32)j < 0xC; j++) {
-            entry = FUN_003e4d68(j & 0xFFFF);
-            if (entry != NULL && FUN_00187168(entry) == 0 && entry->id == id) {
+            entry = partyGetSlot(j & 0xFFFF);
+            if (entry != NULL && partySlotIsOccupied(entry) == 0 && entry->id == id) {
                 return 1;
             }
         }

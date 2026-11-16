@@ -3,7 +3,7 @@
 
 extern "C" {
 extern ButtonHelpGlobals g_buttonHelp;
-void FUN_00295eb0(ButtonHelpDisplayUnit *unit, s32 value, s32 option);
+void uiStoreTextureEntryCenter(ButtonHelpDisplayUnit *unit, s32 value, s32 option);
 
 // Address of one of the two display units.
 static __inline ButtonHelpDisplayUnit *buttonHelpUnitAt(ButtonHelpWork *work, s32 index)
@@ -19,7 +19,7 @@ void FUN_002d666c(s32 mode)
     if (mode == 0) {
         for (s32 i = 0; i < 2; ++i) {
             buttonHelpUnitAt(work, i)->value = 2;
-            FUN_00295eb0(buttonHelpUnitAt(work, i), 18, 0);
+            uiStoreTextureEntryCenter(buttonHelpUnitAt(work, i), 18, 0);
             buttonHelpUnitAt(work, i)->active = 1;
             buttonHelpUnitAt(work, i)->unk0C = 0;
             buttonHelpUnitAt(work, i)->unk10 = 0;

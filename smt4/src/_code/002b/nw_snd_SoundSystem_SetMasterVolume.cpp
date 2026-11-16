@@ -2,13 +2,13 @@
 
 extern "C" {
 
-int FUN_00128f00(u8 *manager);
+int soundMasterSetVolumeIfEnabled(u8 *manager);
 
 extern u8 g_nnSndMasterManager;
 
 void nw_snd_SoundSystem_SetMasterVolume(void)
 {
-    FUN_00128f00(&g_nnSndMasterManager);
+    soundMasterSetVolumeIfEnabled(&g_nnSndMasterManager);
 }
 
 } /* extern "C" */

@@ -17,20 +17,20 @@ void messageDrawPairedFrameSprites(u32 leftBase, u32 leftOverlay, u32 leftEdge,
         leftY = vec2GetYInt(panel->spritesCA4[17]);
         rightX = vec2GetXInt(panel->spritesCA4[18]);
         rightY = vec2GetYInt(panel->spritesCA4[18]);
-        FUN_001835b4(2, 4, leftEdge, leftX, leftY, 0xf1);
-        FUN_001835b4(2, 4, rightEdge, rightX, rightY, 0xf1);
+        texDrawTableEntryAtStoredOrigin(2, 4, leftEdge, leftX, leftY, 0xf1);
+        texDrawTableEntryAtStoredOrigin(2, 4, rightEdge, rightX, rightY, 0xf1);
     } else {
         leftX = -vec2GetXInt(panel->spritesCA4[19]);
         leftY = 0;
         rightX = vec2GetXInt(panel->spritesCA4[19]);
         rightY = 0;
-        FUN_001835b4(2, 4, leftBase, leftX + 320, 0, 0xf1);
-        FUN_001835b4(2, 4, rightOverlay, rightX - 320, 0, 0xf1);
+        texDrawTableEntryAtStoredOrigin(2, 4, leftBase, leftX + 320, 0, 0xf1);
+        texDrawTableEntryAtStoredOrigin(2, 4, rightOverlay, rightX - 320, 0, 0xf1);
     }
-    FUN_001835b4(2, 4, leftBase, leftX, leftY, 0xf1);
-    FUN_001835b4(2, 4, leftOverlay, leftX, leftY, 0xf1);
-    FUN_001835b4(2, 4, rightBase, rightX, rightY, 0xf1);
-    FUN_001835b4(2, 4, rightOverlay, rightX, rightY, 0xf1);
+    texDrawTableEntryAtStoredOrigin(2, 4, leftBase, leftX, leftY, 0xf1);
+    texDrawTableEntryAtStoredOrigin(2, 4, leftOverlay, leftX, leftY, 0xf1);
+    texDrawTableEntryAtStoredOrigin(2, 4, rightBase, rightX, rightY, 0xf1);
+    texDrawTableEntryAtStoredOrigin(2, 4, rightOverlay, rightX, rightY, 0xf1);
     efctSetSpeed(1.0f);
 }
 }

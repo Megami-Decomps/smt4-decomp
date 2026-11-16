@@ -11,7 +11,7 @@ extern const char DAT_005285dc[]; /* battle/gameover/gameover.mbm */
 void FUN_004f7b84(void *aux, const char *name);
 s32 FUN_004f6d34(void *aux);
 void *gameDataBlocksGetSaveData(void);
-void *FUN_00275bc8(void *process, void *data);
+void *scrScriptProcessCreate(void *process, void *data);
 void scrScriptProcessStartEntry(void *process, s32 entry);
 s32 scrRunOpcodesStub(void *process);
 void campCommonBgRelease(void);
@@ -87,7 +87,7 @@ s32 FUN_003e6f50(BtlGameOverA *work)
     case GAMEOVER_STATE_SCRIPT:
         switch (work->step.phase) {
         case 0:
-            work->process = FUN_00275bc8(work->dataA, work->dataB);
+            work->process = scrScriptProcessCreate(work->dataA, work->dataB);
             scriptProcessSetMode(work->process, 1);
             scrScriptProcessStartEntry(work->process, 0);
             scrScriptProcessStartEntry(work->process, 4);

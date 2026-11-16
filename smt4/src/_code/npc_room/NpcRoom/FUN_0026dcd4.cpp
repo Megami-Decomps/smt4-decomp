@@ -10,7 +10,7 @@ int FUN_00285e44(...);
 int FUN_002898e4(...);
 int buttonHelpCreate(...);
 int FUN_00290d5c(...);
-int FUN_00297060(...);
+int scrScriptProcessCreate(...);
 int fileSlotLoad(...);
 int dataTableGetCount(...);
 int dataTableGetEntries(...);
@@ -20,7 +20,7 @@ int memClear(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
 int asdProcessCreateSimple(...);
-int FUN_002c58c8(...);
+int asdTMTexTablePrepareNodeImage(...);
 int asdLoadFileSyncDefault(...);
 int FUN_002fdfe0(...);
 
@@ -43,11 +43,11 @@ extern unsigned int *g_npcRoom; /* 0x44d198 */
 
 /* Supplied declaration required: FUN_00252190. */
 /* Supplied declaration required: FUN_00285e44. */
-/* Supplied declaration required: FUN_00289880. */
+/* Supplied declaration required: commonBgStopChildAndBeginTransition. */
 /* Supplied declaration required: FUN_002898e4. */
 /* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: FUN_00290d5c. */
-/* Supplied declaration required: FUN_00297060. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 /* Supplied declaration required: fileSlotLoad. */
 extern int gameFlagIsSet(void);
 /* Supplied declaration required: dataTableGetCount. */
@@ -59,7 +59,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_002c58c8. */
+/* Supplied declaration required: asdTMTexTablePrepareNodeImage. */
 /* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: FUN_002fdfe0. */
 
@@ -233,11 +233,11 @@ LAB_0026e0ac:
   puVar6[0x12] = temp_v4;
   temp_v6 = asdLoadFileSyncDefault("[Q");
   puVar6[0x13] = temp_v6;
-  FUN_00297060(temp_v6,puVar6[0x12]);
+  scrScriptProcessCreate(temp_v6,puVar6[0x12]);
   puVar6[0x14] = temp_v6;
   *(unsigned int *)(temp_v6 + 0x108) = 2;
   temp_v6 = puVar6[0x13];
-  FUN_00297060(temp_v6,puVar6[0x12]);
+  scrScriptProcessCreate(temp_v6,puVar6[0x12]);
   puVar6[0x15] = temp_v6;
   *(unsigned int *)(temp_v6 + 0x108) = 2;
   temp_v6 = 0;
@@ -262,9 +262,9 @@ LAB_0026e0ac:
   dataTableGetCount(temp_v4);
   *(unsigned short *)((int)puVar6 + 0x102) =
        *(unsigned short *)((temp_v6 + (unsigned int)*(unsigned short *)(puVar6[9] + 0x22) * 2) - 2);
-  FUN_002c58c8(2);
+  asdTMTexTablePrepareNodeImage(2);
   FUN_002898e4();
-  FUN_00289880();
+  commonBgStopChildAndBeginTransition();
   buttonHelpCreate();
   FUN_00290d5c(0xa0);
   return;

@@ -15,7 +15,7 @@ struct ResourcePairEntry {
 extern "C" {
 extern ResourcePairEntry DAT_00573ce0[14];
 s32 jyoucyuGetTableEntry(u32 index);
-void FUN_004fb43c(u32 param, u32 target, void *resource, s32 slot, s32 arg4, s32 arg5, s32 arg6);
+void btlQueueActionMessage(u32 param, u32 target, void *resource, s32 slot, s32 arg4, s32 arg5, s32 arg6);
 
 static __inline ResourcePairEntry *findResourcePair(u32 id)
 {
@@ -37,10 +37,10 @@ u32 resourcePairApply(u32 id, u32 target)
         ResourcePairEntry *entry = findResourcePair(id);
         if (entry != NULL) {
             if (entry->first != NULL) {
-                FUN_004fb43c(entry->firstParam, target, entry->first, 0, 1, 0, 0);
+                btlQueueActionMessage(entry->firstParam, target, entry->first, 0, 1, 0, 0);
             }
             if (entry->second != NULL) {
-                FUN_004fb43c(entry->secondParam, target, entry->second, 1, 1, 0, 0);
+                btlQueueActionMessage(entry->secondParam, target, entry->second, 1, 1, 0, 0);
             }
         }
     }

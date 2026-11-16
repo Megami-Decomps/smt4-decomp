@@ -15,7 +15,7 @@ struct CachedVectorOwner {
     /* 0x11E8 */ s8 dirty;
 };
 
-void FUN_0019f828(u32 resource, Vec4f *vector);
+void gpuWriteVertexUniformVec4(u32 resource, Vec4f *vector);
 
 /* Applies a vec4 to the resource when it changed or was marked dirty, then clears the dirty flag. */
 void FUN_00409c60(CachedVectorOwner *owner, f32 x, f32 y, f32 z, f32 w)
@@ -25,7 +25,7 @@ void FUN_00409c60(CachedVectorOwner *owner, f32 x, f32 y, f32 z, f32 w)
         owner->cached.y = y;
         owner->cached.z = z;
         owner->cached.w = w;
-        FUN_0019f828(owner->resource, &owner->cached);
+        gpuWriteVertexUniformVec4(owner->resource, &owner->cached);
     }
     owner->dirty = 0;
 }

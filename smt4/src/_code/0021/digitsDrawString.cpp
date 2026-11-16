@@ -9,7 +9,7 @@ void digitsDrawString(s32 x, s32 y, s32 z, const s8 *digits)
 {
     for (; *digits != '\0'; digits++, x += 7) {
         if (*digits != ' ') {
-            FUN_002bf288(2, 13, *digits - '0', x, y, z);
+            texDrawTableEntryAtStoredOrigin(2, 13, *digits - '0', x, y, z);
         }
     }
 }

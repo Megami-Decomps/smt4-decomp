@@ -7,9 +7,9 @@ extern "C" {
 
 int FUN_0025247c(unsigned char [4]);
 int residentApplyFallbackValues(void);
-int FUN_00281e34(void);
+int __hardfp_atan2f(void);
 int FUN_00282390(void);
-int FUN_0028250c(void);
+int mathRemPio2f(void);
 int FUN_002c159c(unsigned char *);
 int FUN_002c1e30(unsigned char *, int);
 int FUN_002c1edc(unsigned char *, int, int, int);
@@ -41,9 +41,9 @@ static float romwright_sqrt_4(float value)
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: FUN_0025247c. */
 /* Supplied declaration required: residentApplyFallbackValues. */
-/* Supplied declaration required: FUN_00281e34. */
+/* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: FUN_00282390. */
-/* Supplied declaration required: FUN_0028250c. */
+/* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: FUN_00298d50. */
 /* Supplied declaration required: FUN_002c159c. */
 /* Supplied declaration required: FUN_002c1e30. */
@@ -93,7 +93,7 @@ void FUN_00265f50(int param_1)
   *(int *)(param_1 + 0x6c) = (int)temp_v10;
   *(float *)(param_1 + 0x74) = in_s16;
   temp_v4 = *(float *)(param_1 + 0x50) * 0.017453292f;
-  FUN_0028250c();
+  mathRemPio2f();
   *(float *)(param_1 + 0x60) =
        (float)temp_v10 - temp_v4 * *(float *)(DAT_004474f4 + *(int *)(DAT_004474f4 + 0xc4) * 4 + 0x188);
   temp_v9 = *(float *)(param_1 + 0x50) * temp_v9;
@@ -241,7 +241,7 @@ void FUN_00265f50(int param_1)
   *(unsigned int *)(temp_v0 + 0x18) = *(unsigned int *)(param_1 + 0x50);
   FUN_0025247c(temp_v14);
   *(unsigned int *)(DAT_004474f4 + 700) = temp_v15;
-  FUN_00281e34();
+  __hardfp_atan2f();
   residentApplyFallbackValues();
   return;
 }

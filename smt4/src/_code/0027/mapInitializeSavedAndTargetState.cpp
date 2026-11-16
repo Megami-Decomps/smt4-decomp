@@ -9,14 +9,14 @@ struct MapMainView {
 extern "C" {
 extern MapMainView *g_mapMain;
 extern GameState g_gameState;
-void FUN_00270f70(MapVector *position);
+void mapAdjustPositionToGround(MapVector *position);
 
 // Refresh the current position and initialize both saved and target map-state snapshots.
 void mapInitializeSavedAndTargetState(void)
 {
     MapMainView *map = g_mapMain;
 
-    FUN_00270f70(&g_gameState.position);
+    mapAdjustPositionToGround(&g_gameState.position);
     g_gameState.unk2F8Byte = 1;
     g_gameState.savedMapId = map->mapId;
     g_gameState.savedAreaId = map->areaId;

@@ -12,7 +12,7 @@ struct MessageInputFlags {
 extern "C" {
 extern MessageGlobalsA g_messageMain;
 extern MessageInputFlags DAT_005e2040;
-s32 FUN_001517b4(s32 key, s32 mode);
+s32 padQueryLogicalKey(s32 key, s32 mode);
 s32 slotIsActive(s32 key);
 s32 querySlotHasHandle();
 void workCommandRefreshActiveSlots();
@@ -24,12 +24,12 @@ u32 FUN_00145534(u32 messageId)
     MessageGlobalsA *messages = &g_messageMain;
     if (messageObjectGetBox(reinterpret_cast<MessageObject *>(messages->panel)) == messageId)
         return 0;
-    if (FUN_001517b4(0, 1) != 0 || FUN_001517b4(9, 2) != 0 ||
+    if (padQueryLogicalKey(0, 1) != 0 || padQueryLogicalKey(9, 2) != 0 ||
         slotIsActive(6) != 0 || DAT_005e2040.suppressAdvanceSound != 0 ||
         (messages->state->box == messageId && messages->state->unk19E8 == 1 &&
-            FUN_001517b4(1, 1) != 0)) {
+            padQueryLogicalKey(1, 1) != 0)) {
         u8 queueSound = 1;
-        if (FUN_001517b4(9, 2) != 0 || slotIsActive(6) != 0)
+        if (padQueryLogicalKey(9, 2) != 0 || slotIsActive(6) != 0)
             FUN_0015059c(1);
         if (querySlotHasHandle() != 0 && (FUN_00152f44() & 1) != 0) {
             workCommandRefreshActiveSlots();
@@ -39,9 +39,9 @@ u32 FUN_00145534(u32 messageId)
             eventQueueAddUniqueIfValid(0x1000226);
         return 1;
     }
-    if (FUN_001517b4(9, 2) == 0 && slotIsActive(6) == 0)
+    if (padQueryLogicalKey(9, 2) == 0 && slotIsActive(6) == 0)
         FUN_0015059c(0);
-    if (FUN_001517b4(8, 1) != 0) {
+    if (padQueryLogicalKey(8, 1) != 0) {
         u8 mode = messages->state->mode;
         if (mode == 7 || mode == 8 || mode == 9)
             return 0;
@@ -49,7 +49,7 @@ u32 FUN_00145534(u32 messageId)
         DAT_005e2040.hidden = wasHidden == 0;
         eventQueueAddUniqueIfValid(wasHidden == 0 ? 0x100020E : 0x100020F);
     } else {
-        FUN_001517b4(1, 1);
+        padQueryLogicalKey(1, 1);
     }
     return 0;
 }

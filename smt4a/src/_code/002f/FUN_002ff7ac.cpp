@@ -14,7 +14,7 @@ struct XformObject2ff7ac {
 };
 
 extern "C" {
-void FUN_002b4c30(Matrix44 *destination, const Matrix44 *source);
+void gfxQuaternionToMatrix34(Matrix44 *destination, const Matrix44 *source);
 void matrix44SetIdentity(Matrix44 *destination);
 void mathMatrixApplyTranslation(Matrix44 *matrix, const Vector3View *offset, s32 mode);
 void matrixApplyByMode(void *transform, const Matrix44 *matrix, s32 mode);
@@ -26,7 +26,7 @@ static void matrixInitializeWithScaleAndOffset(Matrix44 *matrix, const Vector3Vi
                                                const Matrix44 *source, f32 scale)
 {
     if (source != 0) {
-        FUN_002b4c30(matrix, source);
+        gfxQuaternionToMatrix34(matrix, source);
     } else {
         matrix44SetIdentity(matrix);
     }

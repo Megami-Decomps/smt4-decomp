@@ -6,7 +6,7 @@ extern "C" {
 UnitRecord *slotRecordFindById(u32 id);
 void unitRecordBuild(u32 id, UnitRecord *record);
 void FUN_0035ad50(u32 id, UnitRecord *record);
-void FUN_004bcd90(UnitRecord *record);
+void unitRecomputeDerivedStats(UnitRecord *record);
 
 // Union inherited flags from the twelve selected saved or template unit records.
 void unitRecordMergeInheritedFlags(u32, const ContentWordList *sources, UnitRecord *destination)
@@ -32,6 +32,6 @@ void unitRecordMergeInheritedFlags(u32, const ContentWordList *sources, UnitReco
             }
         }
     }
-    FUN_004bcd90(destination);
+    unitRecomputeDerivedStats(destination);
 }
 }

@@ -18,11 +18,11 @@ void FUN_00248738(GauntletAppMenuWork *menu, s32 mode);
 s32 fileSlotLoad(s32 id);
 void drawParameterBlockClear(u8 *block);
 
-void FUN_002bd954(GauntletSprite *sprite, s32 group, s32 id, u8 *params, f32 scale, s32 layer);
+void uiSpriteStateInitFromSource(GauntletSprite *sprite, s32 group, s32 id, u8 *params, f32 scale, s32 layer);
 void timerStart(GauntletSprite *sprite, s32 animation, s32 flags);
 void spriteStartAnimationByIndex(GauntletSprite *sprite, s32 mode);
 void spriteSetLayer(GauntletSprite *sprite, u16 mode);
-u32 FUN_00297060(u32 data, u32 archive);
+u32 scrScriptProcessCreate(u32 data, u32 archive);
 u32 FUN_003291dc();
 void gauntletAppMenuDestroy(void);
 void gauntletAppMenuExit(void);
@@ -83,18 +83,18 @@ u32 FUN_002e24c8(void)
     paramsInit(reinterpret_cast<UiResourceParameters *>(menu->list.params), sGauntletParamsFirst, sizeof(sGauntletParamsFirst),
                sGauntletParamsSecond, sizeof(sGauntletParamsSecond), NULL, 0, NULL, 0,
                sGauntletParamsThird, sizeof(sGauntletParamsThird));
-    FUN_002bd954(&menu->list.sprites[0], 29, 0, menu->list.params, 1.0f, 201);
+    uiSpriteStateInitFromSource(&menu->list.sprites[0], 29, 0, menu->list.params, 1.0f, 201);
     timerStart(&menu->list.sprites[0], 0, 0);
-    FUN_002bd954(&menu->list.sprites[1], 29, 0, menu->list.params, 1.0f, 201);
+    uiSpriteStateInitFromSource(&menu->list.sprites[1], 29, 0, menu->list.params, 1.0f, 201);
     spriteStartAnimationByIndex(&menu->list.sprites[1], 0);
-    FUN_002bd954(&menu->list.sprites[2], 29, 0, menu->list.params, 1.0f, 201);
+    uiSpriteStateInitFromSource(&menu->list.sprites[2], 29, 0, menu->list.params, 1.0f, 201);
     timerStart(&menu->list.sprites[2], 2, 0);
-    FUN_002bd954(&menu->list.sprites[3], 29, 0x59F, menu->list.params, 1.0f, 181);
+    uiSpriteStateInitFromSource(&menu->list.sprites[3], 29, 0x59F, menu->list.params, 1.0f, 181);
     spriteSetLayer(&menu->list.sprites[3], 2);
     spriteStartAnimationByIndex(&menu->list.sprites[3], 1);
     menu->heapA = (void *)asdLoadFileSyncDefault("camp/gauntletApp.mbm");
     menu->heapB = (void *)asdLoadFileSyncDefault("camp/gauntletApp.bf");
-    menu->handle = FUN_00297060((u32)menu->heapB, (u32)menu->heapA);
+    menu->handle = scrScriptProcessCreate((u32)menu->heapB, (u32)menu->heapA);
     return menu->task;
 }
 

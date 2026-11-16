@@ -11,7 +11,7 @@ struct Obj420990DrawContext {
 extern "C" {
 extern Obj420990DrawContext *g_renderCtx;
 void renderCtxSelectTexture(void *context, u32 texture);
-u32 FUN_001692ac(u32 mode, u32 value);
+u32 renderCtxPackPassFlags(u32 mode, u32 value);
 void FUN_00409e78(void *filter, f32 *matrix, const void *motion);
 void FUN_0043b6c0(f32 *vertices, const f32 *matrix, f32 *output, u32 count);
 void FUN_0032c808();
@@ -23,7 +23,7 @@ void Obj420990::draw()
 {
     renderCtxSelectTexture(g_renderCtx, ((FilterDrawTexture *)handles[0].handle)->handle);
     g_renderCtx->blend.push(rects->blendA);
-    g_renderCtx->projection.push(FUN_001692ac(1, 0));
+    g_renderCtx->projection.push(renderCtxPackPassFlags(1, 0));
     f32 color[4] = {1, 1, 1, ((FilterDrawChild *)child)->alpha};
     f32 points[8][3];
     for (u32 vertex = 0; vertex < 8; ++vertex) {

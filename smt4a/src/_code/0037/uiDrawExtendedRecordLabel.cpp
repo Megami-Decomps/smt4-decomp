@@ -16,7 +16,7 @@ struct ExtendedLabelledRecord {
     u16 message; // 0x60
 };
 extern "C" {
-const char *FUN_00180118(u16 message);
+const char *dataTable01GetRecordWithAocOverride(u16 message);
 void textFormatBuffer(char *output, const char *format, ...);
 f32 FUN_00168594(const char *text, u32 mode, f32 spacing);
 extern const char DAT_0052c008[];
@@ -28,9 +28,9 @@ extern "C" s32 uiDrawExtendedRecordLabel(ExtendedRecordLabels *labels, const Ext
     if (labels == NULL)
         return 0;
     char text[80];
-    asdTextFormatStream(labels->handles[0], 2, -1, 0, 0, FUN_001654f8(record->name, NULL, 0));
+    asdTextFormatStream(labels->handles[0], 2, -1, 0, 0, textExpandGlyphsToBuffer(record->name, NULL, 0));
     if (record->message)
-        FUN_001654f8(FUN_00180118(record->message), text, 0);
+        textExpandGlyphsToBuffer(dataTable01GetRecordWithAocOverride(record->message), text, 0);
     else
         strcpy(text, "\x81\x7c\x81\x7c\x81\x7c");
     asdTextFormatStream(labels->handles[1], 2, -1, 0, 0, text);

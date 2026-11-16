@@ -7,7 +7,7 @@ extern "C" {
 void asdMemFree(void *block);
 void sysFatalBreak(void);
 AsdHashPackHeader *asdLoadFileSync(s32 *result, u32 zero, const char *path, u32 *size, u32 arg, u32 priority);
-void *FUN_00178b04(u32 size, const char *file, int line);
+void *asdMemoryAllocTraced(u32 size, const char *file, int line);
 void rt_aeabi_memclr(char *buf, u32 size);
 s32 textFormatBuffer(char *dst, const char *format, ...);
 s32 FUN_00158900(void *stream, const char *path, s32 mode);
@@ -54,7 +54,7 @@ s32 asdFileHashPackLoad(AsdFileHashPack *pack, const char *path, const char *str
     pack->entries = pack->hashes + pack->data->hashCount;
     pack->names = (u8 *)pack->entries + pack->data->entryCount * 16;
 
-    stream = (AsdFileStream *)FUN_00178b04(sizeof(AsdFileStream), "c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Sys\\File\\AsdFileHashPack.cpp", 159);
+    stream = (AsdFileStream *)asdMemoryAllocTraced(sizeof(AsdFileStream), "c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Sys\\File\\AsdFileHashPack.cpp", 159);
     pack->stream = stream;
 
     if (asdLoadFileHasDevice(streamPath) != 0) {

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002bbb2c(unsigned int, int);
+int sysReportCheckFailure(unsigned int, int);
 
-/* Supplied declaration required: FUN_002bbb2c. */
+/* Supplied declaration required: sysReportCheckFailure. */
 
 
 unsigned int FUN_00239ab8(int param_1)
@@ -14,7 +14,7 @@ unsigned int FUN_00239ab8(int param_1)
 {
 /* irregular: 1 native warning(s); review required */
   if (*(int *)(param_1 + 4) == 0) {
-    FUN_002bbb2c(0xe0a046da,0x239ad4);
+    sysReportCheckFailure(0xe0a046da,0x239ad4);
   }
   return *(unsigned int *)(param_1 + 4);
 }

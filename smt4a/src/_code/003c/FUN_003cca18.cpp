@@ -45,7 +45,7 @@ s32 FUN_00228b04(FlaggedEntry *entry, s32 mode);
 s32 resourceRunOperationIfUnblocked(const FlaggedEntry *entry);
 void skillHelpUpdateAttributeAndTarget(u32 id);
 void buttonHelpSetText(u32 mode, u32 color);
-u32 FUN_001517b4(u32 button, u32 mode);
+u32 padQueryLogicalKey(u32 button, u32 mode);
 void unitRecordBuild(u32 id, UnitRecord *record);
 void FUN_0020b908(u32 channel, u32 mode);
 void eventQueueAddUniqueIfValid(u32 event);
@@ -62,7 +62,7 @@ u32 FUN_003cca18(UniteWork *work, s8 blocked, u32 *selected)
         } else {
             buttonHelpSetText(0, 0xF4F4F4FF);
         }
-    } else if ((FUN_001517b4(0, 1) | static_cast<s32>(blocked)) != 0) {
+    } else if ((padQueryLogicalKey(0, 1) | static_cast<s32>(blocked)) != 0) {
         input->accepted = 1;
         if (work->history.previous == 30) {
             *selected = 0;
@@ -76,7 +76,7 @@ u32 FUN_003cca18(UniteWork *work, s8 blocked, u32 *selected)
         unitRecordBuild(pair->resultId, &record);
         FUN_0020b908(0x10, 0);
         eventQueueAddUniqueIfValid(0x100020E);
-    } else if (FUN_001517b4(1, 1) != 0) {
+    } else if (padQueryLogicalKey(1, 1) != 0) {
         eventQueueAddUniqueIfValid(0x100020F);
         input->accepted = 1;
         const s32 index = resourceRunOperationIfUnblocked(&input->secondary) + FUN_002a4894(reinterpret_cast<const Object *>(&input->secondary));

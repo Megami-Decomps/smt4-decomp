@@ -10,7 +10,7 @@ extern "C" {
 int textDrawString(...);
 int effectRenderTransformedInstance(int);
 int FUN_00164034(...);
-int FUN_00164b5c(...);
+int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
 int renderPopStateStacks(void);
 int FUN_00168e00(...);
@@ -48,12 +48,12 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: FUN_00164034. */
-/* Supplied declaration required: FUN_00164b5c. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: renderPopStateStacks. */
 /* Supplied declaration required: FUN_00168e00. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-extern int FUN_001692ac(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 
@@ -111,9 +111,9 @@ unsigned int FUN_0024e31c(void)
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 5);
     if (temp_v6 >= 11) {
-      FUN_00157558((RenderCtxA *)g_renderCtx);
+      renderCtxSelectDisplayAreaForStereoMode((RenderCtxA *)g_renderCtx);
       temp_v6 = g_renderCtx;
-      temp_v5 = FUN_001692ac(1,0);
+      temp_v5 = renderCtxPackPassFlags(1,0);
       piVar6 = (int *)(temp_v6 + 0x1258);
       temp_v2 = *piVar6;
       temp_v3 = piVar6[temp_v2 + 2];
@@ -172,7 +172,7 @@ unsigned int FUN_0024e31c(void)
       FUN_003f931c(*(unsigned int *)(temp_v1 + 0x7488));
       if (*(char *)(temp_v1 + 0x74b3) != '\0') {
         efctSetSpeed();
-        FUN_001835b4(2,8,0x106,0,0,0x65);
+        texDrawTableEntryAtStoredOrigin(2,8,0x106,0,0,0x65);
         efctSetSpeed();
       }
       temp_v9 = 0;
@@ -206,7 +206,7 @@ unsigned int FUN_0024e31c(void)
           renderCtxCalculateStereoParallax(g_renderCtx);
           temp_v4 = (int)temp_v7;
           temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0xbd0));
-          FUN_00164b5c(2,0xd,0x10,temp_v4,*(unsigned int *)(temp_v1 + 0x12fdc),0x15);
+          texDrawCompositeSprite(2,0xd,0x10,temp_v4,*(unsigned int *)(temp_v1 + 0x12fdc),0x15);
           temp_v5 = *(int *)(temp_v1 + 0x12fec);
           temp_v3 = *(int *)(temp_v1 + 0x12fd8);
           temp_v2 = *(int *)(temp_v1 + 0x12ff0) + *(int *)(temp_v1 + 0x12fdc);
@@ -225,7 +225,7 @@ unsigned int FUN_0024e31c(void)
             (**(romwright_code **)(temp_v6 + 0x12d4))();
             *(unsigned char *)(temp_v6 + 0x12d0) = 0;
           }
-          FUN_00164b5c(2,0xd,0x11,temp_v4,temp_v9,0x1a);
+          texDrawCompositeSprite(2,0xd,0x11,temp_v4,temp_v9,0x1a);
           temp_v6 = g_renderCtx;
           temp_v5 = packNibblesAndByte(6,7,0);
           piVar6 = (int *)(temp_v6 + 0x12b8);
@@ -237,7 +237,7 @@ unsigned int FUN_0024e31c(void)
           }
           efctSetSpeed();
           temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0xbe2));
-          FUN_00164b5c(2,0xd,0x12,temp_v4,*(unsigned int *)(temp_v1 + 0x12ff8),0x15);
+          texDrawCompositeSprite(2,0xd,0x12,temp_v4,*(unsigned int *)(temp_v1 + 0x12ff8),0x15);
           temp_v5 = *(int *)(temp_v1 + 0x13008) + *(int *)(temp_v1 + 0x12ff4) + temp_v4;
           temp_v14 = *(int *)(temp_v1 + 0x1300c) + *(int *)(temp_v1 + 0x12ff8);
           FUN_00168e00(*(short *)(temp_v6 + 8) + temp_v4,(int)*(short *)(temp_v6 + 10),
@@ -255,7 +255,7 @@ unsigned int FUN_0024e31c(void)
             (**(romwright_code **)(temp_v1 + 0x12d4))();
             *(unsigned char *)(temp_v1 + 0x12d0) = 0;
           }
-          FUN_00164b5c(2,0xd,0x13,temp_v4,temp_v9,0x1a);
+          texDrawCompositeSprite(2,0xd,0x13,temp_v4,temp_v9,0x1a);
           temp_v1 = g_renderCtx;
           temp_v6 = packNibblesAndByte(6,7,0);
           piVar6 = (int *)(temp_v1 + 0x12b8);

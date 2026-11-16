@@ -8,7 +8,7 @@ struct FileHeader;
 struct TextLine;
 extern "C" {
 
-void FUN_0016e800(s32 key, u32 address, u32 failed);
+void sysReportCheckFailure(s32 key, u32 address, u32 failed);
 
 void FUN_00168470(s32 id, u32 arg0, u32 arg1, u32 arg2);
 

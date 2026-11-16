@@ -11,7 +11,7 @@ extern "C" {
 
 extern PopupTimeoutState* g_popupState;
 extern GameStateA g_gameState;
-s32 FUN_002d8b58(s32 kind, s32 eventId);
+s32 popupSelectWeightedMessage(s32 kind, s32 eventId);
 
 void popupTryStartTimedPrompt(void)
 {
@@ -20,7 +20,7 @@ void popupTryStartTimedPrompt(void)
         g_popupState->eventId = 0xad;
         g_popupState->event.state = 11;
         g_popupState->event.unk04 = 0;
-        g_popupState->event.unk14 = FUN_002d8b58(2, g_popupState->eventId);
+        g_popupState->event.unk14 = popupSelectWeightedMessage(2, g_popupState->eventId);
         game->mapFlags.popupElapsedFrames = 0;
     }
 }

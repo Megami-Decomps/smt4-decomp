@@ -68,7 +68,7 @@ void FUN_002f64d0(unsigned int param_1,float *param_2,float *param_3)
     FUN_001b4c1c(*unaff_r6,
                  (uVar5 & 0xff) | (iVar3 << 0x18) | ((uVar6 & 0xff) << 0x10) | ((uVar4 & 0xff) << 8)
                 );
-    FUN_00182540(*unaff_r6);
+    effectNodeUpdatePlacedChildren(*unaff_r6);
     do {
       puVar1 = unaff_r4;
       unaff_r7 = unaff_r7 + 1;

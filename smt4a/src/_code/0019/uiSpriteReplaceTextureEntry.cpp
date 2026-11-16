@@ -6,7 +6,7 @@ extern "C" {
 extern AocSystemA *g_aocSystem;
 void asdTMTexTableReleaseNode(u32 node, s32 entry);
 void *asdTMTexLoadMainHeap(u32 node, s32 entry);
-void FUN_001b2d54(AocSystemA *system, u32 node, s32 entry);
+void packageFileDisableByKindName(AocSystemA *system, u32 node, s32 entry);
 bool aocRunByName(AocSystemA *system, u32 node, u32 entry, s32 checked);
 void *FUN_001a6568(AocSystemA *system, u32 node, s32 entry, u32 size);
 bool FUN_00162ea4();
@@ -18,7 +18,7 @@ void uiSpriteReplaceTextureEntry(TextureSwap *work, s32 entry, s32 transition)
         if (work->deferred != 0) {
             if (work->previousEntry != -1) {
                 asdTMTexTableReleaseNode(work->node, work->previousEntry);
-                FUN_001b2d54(g_aocSystem, work->node, work->previousEntry);
+                packageFileDisableByKindName(g_aocSystem, work->node, work->previousEntry);
                 work->previousEntry = -1;
                 work->previousTexture = NULL;
             }
@@ -32,7 +32,7 @@ void uiSpriteReplaceTextureEntry(TextureSwap *work, s32 entry, s32 transition)
             }
             if ((work->transitionEnabled == 0 || work->transition == 0.0f) && work->texture != NULL) {
                 asdTMTexTableReleaseNode(work->node, work->entry);
-                FUN_001b2d54(g_aocSystem, work->node, work->entry);
+                packageFileDisableByKindName(g_aocSystem, work->node, work->entry);
                 work->texture = NULL;
             }
             if (FUN_00162ea4()) {

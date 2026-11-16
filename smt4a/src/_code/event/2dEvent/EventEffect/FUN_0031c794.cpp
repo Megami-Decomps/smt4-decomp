@@ -48,7 +48,7 @@ u32 FUN_0031c794(void)
     switch (effect->state) {
     case 0:
         if (loadedTextureCount() == 2) {
-            FUN_00212204(0);
+            screenFadeSlotReset(0);
             effect->state = 1;
             effect->active = 1;
             if (FUN_00203d74() == 0) {

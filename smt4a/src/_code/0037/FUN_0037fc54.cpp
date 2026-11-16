@@ -7,7 +7,7 @@ extern "C" {
 s32 scrGetArg(s32 argument);
 void scrSetResult(s32 value);
 s32 btlResolveEntryChoice(s32 choice);
-BtlCombatantEntryA* FUN_003eaf20(BtlMainStateA* battle);
+BtlCombatantEntryA* btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA* battle);
 
 // Test for a selected combatant with demon id argument 0 that has status bit argument 1 set.
 s32 FUN_0037fc54(void)
@@ -17,7 +17,7 @@ s32 FUN_0037fc54(void)
     s32 choice = btlResolveEntryChoice(scrGetArg(2));
     s32 first;
     s32 count;
-    FUN_00301a08(choice, &first, &count);
+    btlGetEntryChoiceRange(choice, &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlCombatantEntryA* entry = &btlGetMainState()->entries[index];
         if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
@@ -29,7 +29,7 @@ s32 FUN_0037fc54(void)
         }
     }
     if (btlGetMainState()->unk4cd1) {
-        BtlCombatantEntryA* entry = FUN_003eaf20(btlGetMainState());
+        BtlCombatantEntryA* entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry && (entry->statusFlags & (1u << statusBit))) {
             scrSetResult(1);
             return 1;

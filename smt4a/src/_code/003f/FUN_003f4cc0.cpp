@@ -9,9 +9,9 @@ int textDrawString(...);
 int efctSetSpeed(void);
 int gameGetPlayerData(...);
 int FUN_00180310(int, int, int, int);
-int FUN_0018152c(...);
+int uiDrawItemOrStatusIcon(...);
 int asdTMTexTableEntryAt(...);
-int FUN_001835b4(...);
+int texDrawTableEntryAtStoredOrigin(...);
 int fontMeasureLineAdvance(int *, int);
 int drawSetColorFromRGBA8(...);
 int VectorSignedToFloat(...);
@@ -33,9 +33,9 @@ extern unsigned int gameGetPlayerName(void);
 extern unsigned int FUN_00180114(unsigned short);
 /* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: FUN_00180310. */
-/* Supplied declaration required: FUN_0018152c. */
+/* Supplied declaration required: uiDrawItemOrStatusIcon. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
-/* Supplied declaration required: FUN_001835b4. */
+/* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 extern unsigned int markerKindGetColor(int);
@@ -102,7 +102,7 @@ LAB_003f510c:
             if (temp_v7 >= 100) {
               temp_v11 = 0x6f;
               temp_v10 = param_4;
-              FUN_001835b4(2,0x11,0x7a,param_3);
+              texDrawTableEntryAtStoredOrigin(2,0x11,0x7a,param_3);
               temp_v5 = asdTMTexTableEntryAt(0x11,0x7d);
               temp_v10 = 3;
               temp_v11 = 0x79;
@@ -113,7 +113,7 @@ LAB_003f510c:
           }
           temp_v11 = 0x6f;
           temp_v10 = param_4;
-          FUN_001835b4(2,0x11,3,param_3);
+          texDrawTableEntryAtStoredOrigin(2,0x11,3,param_3);
           temp_v5 = asdTMTexTableEntryAt(0x11,0x15);
           temp_v10 = 2;
           temp_v11 = 0x79;
@@ -234,7 +234,7 @@ LAB_003f510c:
           }
           temp_v4 = asdTMTexTableEntryAt(0x11,0x13);
           temp_v10 = 0;
-          FUN_0018152c(temp_v5,*(short *)(temp_v4 + 8) + param_3,*(short *)(temp_v4 + 10) + param_4,0x6a);
+          uiDrawItemOrStatusIcon(temp_v5,*(short *)(temp_v4 + 8) + param_3,*(short *)(temp_v4 + 10) + param_4,0x6a);
           if (*(char *)(param_1 + 0x23) != '\0') {
             efctSetSpeed();
           }
@@ -255,7 +255,7 @@ LAB_003f510c:
         temp_v11 = 0x65;
       }
       temp_v10 = param_4;
-      FUN_001835b4(2,0x11,temp_v3,param_3);
+      texDrawTableEntryAtStoredOrigin(2,0x11,temp_v3,param_3);
     }
   }
   else {
@@ -267,11 +267,11 @@ LAB_003f510c:
     temp_v11 = 0x65;
     if (!(temp_v9 && temp_v6 == '\0')) {
       temp_v10 = param_4;
-      FUN_001835b4(2,0x11,1,param_3);
+      texDrawTableEntryAtStoredOrigin(2,0x11,1,param_3);
     }
     else {
       temp_v10 = param_4;
-      FUN_001835b4(2,0x11,0,param_3);
+      texDrawTableEntryAtStoredOrigin(2,0x11,0,param_3);
     }
   }
   efctSetSpeed();

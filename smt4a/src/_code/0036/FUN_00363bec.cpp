@@ -12,12 +12,12 @@ struct DepartWork {
 
 extern "C" {
 extern DepartWork *g_mapDepartWork;
-void FUN_003fd7c0(void *handle, s32 value, s32 mode, f32 scale);
+void moriModelUnitStartMaterialAnimation(void *handle, s32 value, s32 mode, f32 scale);
 }
 
 extern "C" void FUN_00363bec(s32 value)
 {
     if (g_mapDepartWork->target != NULL) {
-        FUN_003fd7c0(g_mapDepartWork->target->handle, value, 2, 0.0f);
+        moriModelUnitStartMaterialAnimation(g_mapDepartWork->target->handle, value, 2, 0.0f);
     }
 }

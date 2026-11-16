@@ -29,13 +29,13 @@ int scriptHolderFree2(...);
 
 int textFormatBuffer(...);
 int sysPlaySe(int);
-int FUN_001695a0(void);
+int messageSetScriptDisplayMode(void);
 int buttonHelpBeginExit(int);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
 int asdLoadFileSyncDefault(void);
 int scrScriptProcessGetEntry(unsigned int, unsigned int);
-int FUN_00275bc8(int, unsigned int);
+int scrScriptProcessCreate(int, unsigned int);
 int scrScriptProcessStartEntry(unsigned int, int);
 int msgWindowReset(void);
 int rt_aeabi_memclr(...);
@@ -47,7 +47,7 @@ int byteTableASetValue(...);
 int bustupCutAnimStopJob(void);
 int campButtonHelpRelease(void);
 int byteTableASetValue3(int);
-int FUN_003b61ec(void);
+int commonBgStopChildAndBeginTransition(void);
 int eventCommandStop(void);
 int eventOpeningResetValidJob(void);
 int FUN_003d54f8(...);
@@ -83,19 +83,19 @@ extern int FUN_00162ea4(void);
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: jobSetIntensity. */
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_001695a0. */
+/* Supplied declaration required: messageSetScriptDisplayMode. */
 /* Supplied declaration required: buttonHelpBeginExit. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdLoadFileSyncDefault. */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessGetEntry. */
-/* Supplied declaration required: FUN_00275bc8. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: msgWindowReset. */
 /* Supplied declaration required: messageSlotSet. */
 extern int messageMainGetValue(void);
-extern int FUN_002e07f4(void);
+extern int pairedAvailabilityBothReady(void);
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: campCommonBgAcquire. */
 extern int getByteTableAValue(void);
@@ -110,7 +110,7 @@ extern int byteTableAGetValue3(void);
 /* Supplied declaration required: campButtonHelpRelease. */
 /* Supplied declaration required: byteTableASetValue3. */
 extern int campButtonHelpIsActive(void);
-/* Supplied declaration required: FUN_003b61ec. */
+/* Supplied declaration required: commonBgStopChildAndBeginTransition. */
 /* Supplied declaration required: eventCommandStop. */
 /* Supplied declaration required: eventOpeningResetValidJob. */
 /* Supplied declaration required: FUN_003d54f8. */
@@ -149,7 +149,7 @@ unsigned int FUN_00225ddc(void)
   }
   temp_v3 = g_aocJob[2];
   if (temp_v3 == 0x5f) {
-    temp_v1 = FUN_002e07f4();
+    temp_v1 = pairedAvailabilityBothReady();
     temp_v3 = g_aocMain;
     if (temp_v1 == 0) {
       return 0;
@@ -181,11 +181,11 @@ unsigned int FUN_00225ddc(void)
         puVar2[0xd] = temp_v3;
         if (puVar2[0xb] == 0 || temp_v3 == 0) {
           puVar2[2] = 0x5f;
-          temp_v3 = (int)FUN_0013def0(0);
+          temp_v3 = (int)pairedAvailabilityGetState(0);
           if (temp_v3 == 3) {
             FUN_003d54f8(0,5);
           }
-          temp_v3 = (int)FUN_0013def0(1);
+          temp_v3 = (int)pairedAvailabilityGetState(1);
           if (temp_v3 == 3) {
             FUN_003d54f8(1,5);
           }
@@ -207,10 +207,10 @@ unsigned int FUN_00225ddc(void)
       }
       campCommonBgAcquire();
       campButtonHelpAcquire();
-      FUN_003b61ec();
+      commonBgStopChildAndBeginTransition();
       sysPlaySe(0x92);
       temp_v3 = puVar2[0xb];
-      FUN_00275bc8(temp_v3,puVar2[0xd]);
+      scrScriptProcessCreate(temp_v3,puVar2[0xd]);
       puVar2[0xc] = temp_v3;
       *(unsigned int *)(temp_v3 + 0x108) = 2;
       temp_v3 = puVar2[6];
@@ -232,15 +232,15 @@ unsigned int FUN_00225ddc(void)
       if (temp_v3 != 0xb) {
         return 0;
       }
-      temp_v3 = FUN_002e07f4();
+      temp_v3 = pairedAvailabilityBothReady();
       if (temp_v3 == 0) {
         return 0;
       }
       temp_v2 = 1;
     }
     else {
-      temp_v3 = (int)FUN_0013def0(0);
-      if (((temp_v3 != 3) || (temp_v3 = (int)FUN_0013def0(1), temp_v3 != 3)) &&
+      temp_v3 = (int)pairedAvailabilityGetState(0);
+      if (((temp_v3 != 3) || (temp_v3 = (int)pairedAvailabilityGetState(1), temp_v3 != 3)) &&
          (temp_v3 = getByteTableAValue(), temp_v3 != 0)) {
         byteTableASetValue(0);
       }
@@ -263,7 +263,7 @@ unsigned int FUN_00225ddc(void)
           }
           campCommonBgRelease();
           campButtonHelpRelease();
-          FUN_001695a0();
+          messageSetScriptDisplayMode();
           msgWindowReset();
           bustupCutAnimStopJob();
           eventTexReleaseJobs();

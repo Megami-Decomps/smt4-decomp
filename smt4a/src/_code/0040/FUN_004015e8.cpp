@@ -2,7 +2,7 @@
 
 extern "C" {
 
-/* Link to a record whose word at +4 is checked by FUN_004ffba8. */
+/* Link to a record whose word at +4 is checked by animationChannelsAllFinished. */
 typedef struct {
     u8 unk00[4];
     u32 key;            /* 0x04 */
@@ -13,15 +13,15 @@ typedef struct {
     Record *record;     /* 0x1c */
 } Owner;
 
-int FUN_004ffba8(u32 key);
+int animationChannelsAllFinished(u32 key);
 
-/* True when the owner has no record, or the record's key passes FUN_004ffba8. */
+/* True when the owner has no record, or the record's key passes animationChannelsAllFinished. */
 u32 FUN_004015e8(Owner *owner)
 {
     if (owner->record == NULL) {
         return 1;
     }
-    if (FUN_004ffba8(owner->record->key) == 0) {
+    if (animationChannelsAllFinished(owner->record->key) == 0) {
         return 0;
     }
     return 1;

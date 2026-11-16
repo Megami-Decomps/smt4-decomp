@@ -32,7 +32,7 @@ int slotSetRequest(...);
 int asdLoadFileSyncDefault(void);
 int bgmFadeOut(int);
 int scrRunOpcodesStub(...);
-int FUN_00275bc8(void);
+int scrScriptProcessCreate(void);
 int scrScriptProcessStartEntry(...);
 int obj04Finish(void);
 int campCommonBgRelease(void);
@@ -84,7 +84,7 @@ extern int slotIsReady(unsigned int);
 /* Supplied declaration required: bgmFadeOut. */
 /* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: npcRoomDestroy. */
-/* Supplied declaration required: FUN_00275bc8. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int messageMainGetValue(void);
 extern int messageGetChoiceResult(void);
@@ -328,7 +328,7 @@ LAB_002146c0:
                  *(unsigned short *)puVar2[puVar2[0x3e] + 10]);
     asdLoadFileSyncDefault();
     puVar2[0x17] = (unsigned int)puVar5;
-    FUN_00275bc8();
+    scrScriptProcessCreate();
     puVar2[0x18] = (unsigned int)puVar5;
     temp_v2 = tableGroupFindEntryIndex(puVar2[0x17],puVar2[puVar2[0x3e] + 10] + 0x16);
     scrScriptProcessStartEntry(puVar2[0x18],temp_v2);

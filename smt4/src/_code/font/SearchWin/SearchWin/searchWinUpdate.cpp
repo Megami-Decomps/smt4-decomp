@@ -12,7 +12,7 @@ typedef struct SearchWin00200a18 {
 } SearchWin00200a18;
 
 void spriteStartAnimationByIndex(u8 *part, s32 value);
-void FUN_002bf810(u32 message);
+void soundPlaySeUnpanned(u32 message);
 void asdMemFree(SearchWin00200a18 *block);
 void jobStop(u32 job, s32 flags);
 s32 FUN_002c1d5c(void);
@@ -46,7 +46,7 @@ u32 searchWinUpdate(void)
                     DAT_0043e170->stateB = 3;
                 }
                 spriteStartAnimationByIndex(DAT_0043e170->part, 1);
-                FUN_002bf810(0x1000181);
+                soundPlaySeUnpanned(0x1000181);
             } else if (stateA == 4) {
                 current = DAT_0043e170;
                 jobStop(current->job, 0);

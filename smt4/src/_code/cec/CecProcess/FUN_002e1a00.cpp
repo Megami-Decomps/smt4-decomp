@@ -65,7 +65,7 @@ void FUN_002e1a00(CecInboxReader *reader)
     nn::Result result = FUN_002bcc60(reader->thread, &ops, FUN_001dc684, &argument,
                                      reader->stack.base + reader->stack.size, 17, -2, 0);
     if ((result & 0x7e00000) != 0x600000 && nnResultIsFailure(result)) {
-        FUN_002c526c(result);
+        resultHandleFailure(result);
     }
 }
 }

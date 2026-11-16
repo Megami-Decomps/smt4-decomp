@@ -7,7 +7,7 @@
 #include "event/2dEvent/EventEffect.h"
 #include "code/Code0018.h"
 extern "C" {
-InitializedUnitStatsA *FUN_003e4d68(u32 slot);
+InitializedUnitStatsA *partyGetSlot(u32 slot);
 InitializedUnitStatsA *saveSlotFindSelected(void);
 void FUN_003f1b3c(BtlMainStateA *state, u32 message, s32 kind, u32 *text, u32 *color);
 void FUN_0047f4cc(u32 color, f32 red, f32 green, f32 blue);
@@ -21,8 +21,8 @@ void FUN_00412488(void)
         u16 candidates[12] = {0};
         s32 count = 0;
         for (s32 slot = 0; slot < 12; ++slot) {
-            InitializedUnitStatsA *unit = FUN_003e4d68((u16)slot);
-            if (FUN_00187168(unit))
+            InitializedUnitStatsA *unit = partyGetSlot((u16)slot);
+            if (partySlotIsOccupied(unit))
                 candidates[count++] = unit->categoryId;
         }
         if (count == 0) {

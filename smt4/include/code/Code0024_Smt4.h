@@ -18,7 +18,7 @@ u32 FUN_00245c78(void);
 
 void textureSlotReplace(TextureSlot *slot, u32 id);
 
-void FUN_00247240(Obj *obj);
+void effectEditorObjectDestroy(Obj *obj);
 
 void FUN_002485d4(Source *source, u16 *dst);
 

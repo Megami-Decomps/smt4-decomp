@@ -74,7 +74,7 @@ extern int FUN_003de92c(unsigned short);
 extern int FUN_003dedf0(unsigned int);
 /* Supplied declaration required: FUN_003deea4. */
 extern int FUN_003df004(unsigned int, int, unsigned int *);
-extern int FUN_003df390(unsigned int);
+extern int gameUnlockRecordRequirementsMet(unsigned int);
 /* Supplied declaration required: partyEntryTriggerIfLevelAndFlag3. */
 /* Supplied declaration required: FUN_00417b70. */
 extern int partyEntryBitsBit5(unsigned int);
@@ -132,7 +132,7 @@ int FUN_00235438(void)
   temp_v19 = temp_v2 + 0x1000;
   temp_v10 = 100;
   do {
-    temp_v2 = FUN_003df390(temp_v10);
+    temp_v2 = gameUnlockRecordRequirementsMet(temp_v10);
     if (temp_v2 != 0) {
       temp_v2 = FUN_001bd100(temp_v10);
       if ((temp_v2 == 0) && (temp_v2 = partyEntryFlagsBit3(temp_v10), temp_v2 != 0)) {

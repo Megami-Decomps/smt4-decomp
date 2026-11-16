@@ -35,7 +35,7 @@ extern "C" {
 void unlockLogMenuInitializeReadyResources(UnlockLogUpdateWork *work);
 void FUN_003f5ed8(UnlockLogUpdateWork *work);
 void dialogEnterState(UnlockLogUpdateWork *work, u32 state, u32 argument);
-u32 FUN_00163aa4(SpritePlaybackView *sprite, f32 speed);
+u32 uiSpriteAdvanceAnimation(SpritePlaybackView *sprite, f32 speed);
 void uiSpriteSetKeyframe(SpritePlaybackView *sprite, s16 key, s32 mode);
 void uiSpriteSetImageKeyframe(SpritePlaybackView *sprite, s16 key, s32 mode);
 void FUN_003f56ac(UnlockLogUpdateWork *work);
@@ -54,8 +54,8 @@ extern "C" s32 unlockLogMenuUpdate(UnlockLogUpdateWork *work)
         unlockLogMenuInitializeReadyResources(work);
         break;
     case 2: {
-        u32 firstDone = FUN_00163aa4(&work->first, 1.0f);
-        u32 secondDone = FUN_00163aa4(&work->fifth, 1.0f);
+        u32 firstDone = uiSpriteAdvanceAnimation(&work->first, 1.0f);
+        u32 secondDone = uiSpriteAdvanceAnimation(&work->fifth, 1.0f);
         if (firstDone & secondDone)
             dialogEnterState(work, work->nextState, 0);
         break;
@@ -67,15 +67,15 @@ extern "C" s32 unlockLogMenuUpdate(UnlockLogUpdateWork *work)
         dialogEnterState(work, 5, 0);
         break;
     case 5: {
-        FUN_00163aa4(&work->fourth, 1.0f);
-        u32 firstDone = FUN_00163aa4(&work->fifth, 1.0f);
-        u32 secondDone = FUN_00163aa4(&work->second, 1.0f);
+        uiSpriteAdvanceAnimation(&work->fourth, 1.0f);
+        u32 firstDone = uiSpriteAdvanceAnimation(&work->fifth, 1.0f);
+        u32 secondDone = uiSpriteAdvanceAnimation(&work->second, 1.0f);
         if (firstDone & secondDone)
             dialogEnterState(work, work->second.frameKey == 1 ? work->nextState : 7, 0);
         break;
     }
     case 6:
-        if (FUN_00163aa4(&work->third, 1.0f)) {
+        if (uiSpriteAdvanceAnimation(&work->third, 1.0f)) {
             if (work->third.frameKey != 1) {
                 dialogEnterState(work, 7, 0);
                 work->firstFlag = 0;
@@ -118,7 +118,7 @@ extern "C" s32 unlockLogMenuUpdate(UnlockLogUpdateWork *work)
         dialogEnterState(work, 10, 0);
         break;
     case 10:
-        if (FUN_00163aa4(&work->first, 1.0f)) {
+        if (uiSpriteAdvanceAnimation(&work->first, 1.0f)) {
             work->visible = 0;
             dialogEnterState(work, 11, 0);
         }

@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
+int libm_cosf(void);
+int libm_sinf(void);
 int FUN_002d1e44(int *);
 int FUN_0033a374(void);
 
@@ -29,8 +29,8 @@ typedef struct {
 extern int g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
 
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_002d1e44. */
 /* Supplied declaration required: FUN_0033a374. */
 
@@ -94,12 +94,12 @@ void FUN_002d1780(void)
     temp_v12 = *(float *)(g_lmapScene + 0x20);
     temp_v4 = *(float *)(g_lmapScene + 0x4c) * 0.017453292f;
     temp_v10 = *(float *)(g_lmapScene + 0x24);
-    FUN_001bc124();
+    libm_sinf();
     temp_v13 = 300.0f;
     temp_v12 = temp_v12 + temp_v7;
     temp_v8 = temp_v8 + temp_v4 * 300.0f;
     temp_v4 = *(float *)(g_lmapScene + 0x4c) * temp_v2;
-    FUN_001bbf0c();
+    libm_cosf();
     temp_v20 = temp_v10 + temp_v4 * temp_v13;
     temp_v7 = *(float *)(g_lmapScene + 0x1c);
     temp_v13 = *(float *)(g_lmapScene + 0x20);
@@ -107,11 +107,11 @@ void FUN_002d1780(void)
     temp_v4 = (*(float *)(g_lmapScene + 0x4c) - temp_v3) * temp_v2;
     temp_v18 = temp_v8;
     temp_v19 = temp_v12;
-    FUN_001bc124();
+    libm_sinf();
     temp_v7 = temp_v7 + temp_v4 * temp_v11;
     temp_v13 = temp_v13 + temp_v9;
     temp_v2 = (*(float *)(g_lmapScene + 0x4c) - temp_v3) * temp_v2;
-    FUN_001bbf0c();
+    libm_cosf();
     temp_v23 = temp_v10 + temp_v2 * temp_v11;
     temp_v25 = 0x1e;
     temp_v24 = 0;
@@ -139,11 +139,11 @@ void FUN_002d1780(void)
       temp_v11 = *(float *)(g_lmapScene + 0x20);
       temp_v4 = *(float *)(g_lmapScene + 0x4c) * temp_v2;
       temp_v10 = *(float *)(g_lmapScene + 0x24);
-      FUN_001bc124();
+      libm_sinf();
       temp_v8 = temp_v8 + temp_v4 * temp_v12;
       temp_v11 = temp_v11 + temp_v7;
       temp_v4 = *(float *)(g_lmapScene + 0x4c) * temp_v2;
-      FUN_001bbf0c();
+      libm_cosf();
       temp_v20 = temp_v10 + temp_v4 * temp_v12;
       temp_v10 = *(float *)(g_lmapScene + 0x1c);
       temp_v12 = *(float *)(g_lmapScene + 0x20);
@@ -151,12 +151,12 @@ void FUN_002d1780(void)
       temp_v4 = (*(float *)(g_lmapScene + 0x4c) - temp_v3) * temp_v2;
       temp_v18 = temp_v8;
       temp_v19 = temp_v11;
-      FUN_001bc124();
+      libm_sinf();
       temp_v8 = 200.0f;
       temp_v12 = temp_v12 + temp_v9;
       temp_v10 = temp_v10 + temp_v4 * 200.0f;
       temp_v2 = (*(float *)(g_lmapScene + 0x4c) - temp_v3) * temp_v2;
-      FUN_001bbf0c();
+      libm_cosf();
       temp_v23 = temp_v7 + temp_v2 * temp_v8;
       temp_v25 = 0x5a;
       temp_v24 = 0;
@@ -184,11 +184,11 @@ void FUN_002d1780(void)
       temp_v10 = *(float *)(g_lmapScene + 0x20);
       temp_v4 = *(float *)(g_lmapScene + 0x4c) * temp_v2;
       temp_v7 = *(float *)(g_lmapScene + 0x24);
-      FUN_001bc124();
+      libm_sinf();
       temp_v8 = temp_v8 + temp_v4 * temp_v12;
       temp_v10 = temp_v10 + temp_v13;
       temp_v4 = *(float *)(g_lmapScene + 0x4c) * temp_v2;
-      FUN_001bbf0c();
+      libm_cosf();
       temp_v20 = temp_v7 + temp_v4 * temp_v12;
       temp_v7 = *(float *)(g_lmapScene + 0x1c);
       temp_v12 = *(float *)(g_lmapScene + 0x20);
@@ -196,11 +196,11 @@ void FUN_002d1780(void)
       temp_v4 = (*(float *)(g_lmapScene + 0x4c) - temp_v3) * temp_v2;
       temp_v18 = temp_v8;
       temp_v19 = temp_v10;
-      FUN_001bc124();
+      libm_sinf();
       temp_v7 = temp_v7 + temp_v4 * temp_v11;
       temp_v12 = temp_v12 + temp_v11;
       temp_v2 = (*(float *)(g_lmapScene + 0x4c) - temp_v3) * temp_v2;
-      FUN_001bbf0c();
+      libm_cosf();
       temp_v23 = temp_v9 + temp_v2 * temp_v11;
       temp_v25 = 10;
       temp_v24 = 0;
@@ -228,11 +228,11 @@ void FUN_002d1780(void)
       temp_v10 = *(float *)(g_lmapScene + 0x20);
       temp_v4 = *(float *)(g_lmapScene + 0x4c) * temp_v2;
       temp_v7 = *(float *)(g_lmapScene + 0x24);
-      FUN_001bc124();
+      libm_sinf();
       temp_v8 = temp_v8 + temp_v4 * temp_v12;
       temp_v10 = temp_v10 + temp_v13;
       temp_v4 = *(float *)(g_lmapScene + 0x4c) * temp_v2;
-      FUN_001bbf0c();
+      libm_cosf();
       temp_v20 = temp_v7 + temp_v4 * temp_v12;
       temp_v7 = *(float *)(g_lmapScene + 0x1c);
       temp_v12 = *(float *)(g_lmapScene + 0x20);
@@ -240,11 +240,11 @@ void FUN_002d1780(void)
       temp_v4 = (*(float *)(g_lmapScene + 0x4c) - temp_v3) * temp_v2;
       temp_v18 = temp_v8;
       temp_v19 = temp_v10;
-      FUN_001bc124();
+      libm_sinf();
       temp_v7 = temp_v7 + temp_v4 * temp_v11;
       temp_v12 = temp_v12 + 280.0f;
       temp_v2 = (*(float *)(g_lmapScene + 0x4c) - temp_v3) * temp_v2;
-      FUN_001bbf0c();
+      libm_cosf();
       temp_v23 = temp_v9 + temp_v2 * temp_v11;
       temp_v25 = 0x50;
       temp_v24 = 0;
@@ -273,21 +273,21 @@ void FUN_002d1780(void)
       temp_v12 = *(float *)(g_lmapScene + 0x20);
       temp_v11 = *(float *)(g_lmapScene + 0x24);
       temp_v3 = (*(float *)(g_lmapScene + 0x4c) - 15.0f) * temp_v2;
-      FUN_001bc124();
+      libm_sinf();
       temp_v7 = temp_v7 + temp_v3 * temp_v4;
       temp_v19 = temp_v12 + temp_v10;
       temp_v3 = (*(float *)(g_lmapScene + 0x4c) - temp_v13) * temp_v2;
-      FUN_001bbf0c();
+      libm_cosf();
       temp_v20 = temp_v11 + temp_v3 * temp_v4;
       temp_v4 = *(float *)(g_lmapScene + 0x24);
       temp_v5 = *(unsigned long long *)(g_lmapScene + 0x1c);
       temp_v3 = (*(float *)(g_lmapScene + 0x4c) - temp_v9) * temp_v2;
       temp_v18 = temp_v7;
-      FUN_001bc124();
+      libm_sinf();
       temp_v3 = (float)temp_v5 + temp_v3 * temp_v8;
       temp_v7 = (float)((unsigned long long)temp_v5 >> 0x20) + temp_v8;
       temp_v2 = (*(float *)(g_lmapScene + 0x4c) - temp_v9) * temp_v2;
-      FUN_001bbf0c();
+      libm_cosf();
       temp_v23 = temp_v4 + temp_v2 * temp_v8;
       temp_v25 = 0xf;
       temp_v24 = 1;
@@ -316,11 +316,11 @@ void FUN_002d1780(void)
       temp_v12 = *(float *)(g_lmapScene + 0x20);
       temp_v11 = *(float *)(g_lmapScene + 0x24);
       temp_v3 = (*(float *)(g_lmapScene + 0x4c) - 18.0f) * temp_v2;
-      FUN_001bc124();
+      libm_sinf();
       temp_v9 = temp_v9 + temp_v3 * temp_v4;
       temp_v12 = temp_v12 + temp_v10;
       temp_v3 = (*(float *)(g_lmapScene + 0x4c) - temp_v13) * temp_v2;
-      FUN_001bbf0c();
+      libm_cosf();
       temp_v20 = temp_v11 + temp_v3 * temp_v4;
       temp_v10 = 165.0f;
       temp_v4 = *(float *)(g_lmapScene + 0x24);
@@ -328,11 +328,11 @@ void FUN_002d1780(void)
       temp_v3 = (*(float *)(g_lmapScene + 0x4c) - 165.0f) * temp_v2;
       temp_v18 = temp_v9;
       temp_v19 = temp_v12;
-      FUN_001bc124();
+      libm_sinf();
       temp_v3 = (float)temp_v5 + temp_v3 * temp_v7;
       temp_v8 = (float)((unsigned long long)temp_v5 >> 0x20) + temp_v8;
       temp_v2 = (*(float *)(g_lmapScene + 0x4c) - temp_v10) * temp_v2;
-      FUN_001bbf0c();
+      libm_cosf();
       temp_v23 = temp_v4 + temp_v2 * temp_v7;
       temp_v25 = 0x69;
       temp_v24 = 0;

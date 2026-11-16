@@ -80,7 +80,7 @@ void FUN_002e8be0(void)
         scene->cameraSpeed = 3.0f;
         scene->unk6c = 0;
         scene->target = g_gameState.overviewPosition;
-        g_lmapScene->target.x = g_lmapScene->target.x + FUN_0028250c(g_gameState.overviewDirection * DEGREES_TO_RADIANS) * 40.0f;
+        g_lmapScene->target.x = g_lmapScene->target.x + mathRemPio2f(g_gameState.overviewDirection * DEGREES_TO_RADIANS) * 40.0f;
         g_lmapScene->target.z = g_lmapScene->target.z + FUN_00282390(g_gameState.overviewDirection * DEGREES_TO_RADIANS) * 40.0f;
         g_lmapScene->targetHeading = g_gameState.overviewHeading;
         FUN_0027fc14(11);
@@ -91,7 +91,7 @@ void FUN_002e8be0(void)
         viewPosition.x = g_gameState.overviewPosition.x;
         viewPosition.y = g_gameState.overviewPosition.y;
         viewPosition.z = g_gameState.overviewPosition.z;
-        viewPosition.x = viewPosition.x + FUN_0028250c(g_gameState.overviewHeading * DEGREES_TO_RADIANS) * 80.0f;
+        viewPosition.x = viewPosition.x + mathRemPio2f(g_gameState.overviewHeading * DEGREES_TO_RADIANS) * 80.0f;
         viewPosition.z = viewPosition.z + FUN_00282390(g_gameState.overviewHeading * DEGREES_TO_RADIANS) * 80.0f;
         FUN_001b4478(viewPosition.x, viewPosition.y, viewPosition.z, g_gameState.overviewDirection);
         g_lmapScene->state = g_lmapScene->state + 1;

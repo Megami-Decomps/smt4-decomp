@@ -47,14 +47,14 @@ extern "C" void FUN_003cb948(const s8 grid[10][8])
     for (u32 index = 0; index < state->scene->handles->count; ++index) {
         if (DAT_005f0c04[index] == 1) {
             if (g_lmapMainState == NULL || !g_lmapMainState->entries[index].registered) {
-                handleRegistryRegisterObject(g_handleRegistry, FUN_0040619c(state->scene->handles, index));
+                handleRegistryRegisterObject(g_handleRegistry, ptrVectorAt(state->scene->handles, index));
                 if (g_lmapMainState != NULL && !g_lmapMainState->entries[index].registered)
                     g_lmapMainState->entries[index].registered = 1;
             }
             FUN_00399290(index, 1);
         } else {
             if (g_lmapMainState != NULL && g_lmapMainState->entries[index].registered) {
-                ptrListRemoveClearOwner(g_handleRegistry, FUN_0040619c(state->scene->handles, index));
+                ptrListRemoveClearOwner(g_handleRegistry, ptrVectorAt(state->scene->handles, index));
                 if (g_lmapMainState != NULL && g_lmapMainState->entries[index].registered)
                     g_lmapMainState->entries[index].registered = 0;
             }

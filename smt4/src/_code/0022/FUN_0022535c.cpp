@@ -5,7 +5,7 @@ extern "C" {
 extern BtlTalkBustUp *g_btlTalkBustUp;
 extern RenderCtx *g_titleScene;
 void renderCtxSelectStereoLayout(RenderCtx *);
-s32 FUN_002c5d80(u32, u32);
+s32 renderCtxPackPassFlags(u32, u32);
 f32 renderCtxCalculateStereoParallax(RenderCtx *, f32);
 s32 aocJobIsValid(void);
 s32 btlMainIsSecondJobValid(void);
@@ -19,7 +19,7 @@ u32 FUN_0022535c(void)
     if (portrait == NULL)
         return 0;
     renderCtxSelectStereoLayout(g_titleScene);
-    renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
+    renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
     if (portrait->unk2F4 && portrait->state == 2) {
         s32 offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.3f);
         if (aocJobIsValid() || btlMainIsSecondJobValid()) {

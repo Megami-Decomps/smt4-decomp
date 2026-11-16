@@ -27,7 +27,7 @@ struct SelectionRegistry {
 
 extern "C" {
 extern SelectionRegistry *g_handleRegistry;
-void FUN_003fe86c(SelectionVisual *, s32 mode, s32 flags, f32 x, f32 y);
+void modelPlayClip(SelectionVisual *, s32 mode, s32 flags, f32 x, f32 y);
 void FUN_003fd8dc(SelectionVisual *, s32 slot, u32 color);
 void FUN_00406768(void *background, s32 slot, u32 color);
 
@@ -45,19 +45,19 @@ void controllerSelectionSetMode(ControllerSelection *selection, s32 mode)
         visual->opacity = 1.0f;
         SelectionRegistry *registry = g_handleRegistry;
         if (mode == 0) {
-            FUN_003fe86c(visual, mode, 0, 0.0f, 0.0f);
+            modelPlayClip(visual, mode, 0, 0.0f, 0.0f);
             FUN_003fd8dc(visual, 8, 0xffffffff);
             FUN_00406768(registry->background, 0, 0x4c4c4cff);
             return;
         }
         if (mode == 1) {
-            FUN_003fe86c(visual, mode, 0, 0.0f, 0.0f);
+            modelPlayClip(visual, mode, 0, 0.0f, 0.0f);
             FUN_003fd8dc(visual, 8, 0x999999ff);
             FUN_00406768(registry->background, 0, 0x191919ff);
             return;
         }
         if (mode == 2) {
-            FUN_003fe86c(visual, mode, 1, 0.0f, 0.0f);
+            modelPlayClip(visual, mode, 1, 0.0f, 0.0f);
             FUN_003fd8dc(visual, 8, 0xffffffff);
             FUN_00406768(registry->background, 0, 0x4c4c4cff);
         }

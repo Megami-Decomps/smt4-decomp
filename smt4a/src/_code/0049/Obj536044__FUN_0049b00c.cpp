@@ -10,7 +10,7 @@ extern "C" {
 int scrRunOpcodesStub(...);
 int scrScriptProcessStartEntry(...);
 int FUN_002f0384(...);
-int FUN_003180c4(...);
+int scrSetStringSlot(...);
 int panelSetMode3(...);
 int gameGlobalsQueueValues(...);
 int FUN_003720e4(...);
@@ -66,7 +66,7 @@ extern int FUN_002a482c(unsigned int *);
 extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002c2c80. */
 /* Supplied declaration required: FUN_002f0384. */
-/* Supplied declaration required: FUN_003180c4. */
+/* Supplied declaration required: scrSetStringSlot. */
 /* Supplied declaration required: panelSetMode3. */
 extern int FUN_0031d174(unsigned int *);
 /* Supplied declaration required: screenShowMessage. */
@@ -319,7 +319,7 @@ void _ZN9Obj53604412FUN_0049b00cEv(unsigned int *param_1)
       temp_v5 = temp_v5 * param_1[0x2d2];
     }
     temp_v4 = itemGetNameOrFallback(temp_v0,1);
-    FUN_003180c4(0,temp_v4);
+    scrSetStringSlot(0,temp_v4);
     FUN_00359974(0x18,param_1[0x2d2],0xffffffff,0);
     FUN_00359974(0x19,temp_v5,0xffffffff,0);
     if (param_1[0x2d0] != 8) {

@@ -19,7 +19,7 @@ typedef struct QuestScriptRun {
     /* 0x14 */ ScriptProcess *process;
 } QuestScriptRun;
 
-ScriptProcess *FUN_00297060(void *script, void *messages);
+ScriptProcess *scrScriptProcessCreate(void *script, void *messages);
 void scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 s32 scrRunOpcodesStub(ScriptProcess *process);
@@ -38,7 +38,7 @@ u32 FUN_002736e8(QuestScriptRun *run)
         break;
     case 1:
         if (run->script != NULL && run->messages != NULL) {
-            run->process = FUN_00297060(run->script, run->messages);
+            run->process = scrScriptProcessCreate(run->script, run->messages);
             scriptProcessSetMode(run->process, 2);
             scrScriptProcessStartEntry(run->process, run->entry);
             run->state = 2;

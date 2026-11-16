@@ -78,8 +78,8 @@ void FUN_0037e5c0(s32 index, s32 x, s32 y, f32 speed)
         textDrawString(3, color, text, name->x + x, name->y + y, 0.2f, 0.0f, speed);
         return;
     }
-    FUN_001835b4(2, 18, 0x576, x, y, 206);
-    FUN_001835b4(2, 18, 0x577, x, y, 206);
+    texDrawTableEntryAtStoredOrigin(2, 18, 0x576, x, y, 206);
+    texDrawTableEntryAtStoredOrigin(2, 18, 0x577, x, y, 206);
     LayoutEntry *icon = reinterpret_cast<LayoutEntry *>(asdTMTexTableEntryAt(18, 0x578));
     u32 power;
     if (status->compareCount <= 0) {

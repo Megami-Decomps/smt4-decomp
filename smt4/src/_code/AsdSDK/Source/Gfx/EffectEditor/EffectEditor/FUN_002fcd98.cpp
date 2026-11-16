@@ -10,7 +10,7 @@ int effBlockCreateFromBlock(void);
 int eventDispatch(...);
 int effectEditorApplyHandlerState(void);
 int resourceQueueDeferredDestroy(...);
-int FUN_00281bb0(...);
+int effectNodeUpdateTransform(...);
 int FUN_002a353c(...);
 int FUN_002a36fc(...);
 int FUN_002a3958(void);
@@ -109,7 +109,7 @@ extern unsigned char *FUN_0024dd90(void);
 /* Supplied declaration required: effectEditorApplyHandlerState. */
 /* Supplied declaration required: resourceQueueDeferredDestroy. */
 /* Supplied declaration required: registrationEntryInsert. */
-/* Supplied declaration required: FUN_00281bb0. */
+/* Supplied declaration required: effectNodeUpdateTransform. */
 /* Supplied declaration required: FUN_002a353c. */
 /* Supplied declaration required: FUN_002a36fc. */
 /* Supplied declaration required: FUN_002a3958. */
@@ -596,7 +596,7 @@ LAB_002fd8ac:
           temp_v0 = DAT_0044ea81;
         }
         if (DAT_0044ea89 == 2 && temp_v0 == 0) {
-          FUN_00281bb0(DAT_0044ea90);
+          effectNodeUpdateTransform(DAT_0044ea90);
         }
       }
       else {
@@ -605,16 +605,16 @@ LAB_002fd8ac:
           padAlternateButtonIndex(1);
           temp_v3 = padIsButtonPressed();
           if (temp_v3 != 0) {
-            FUN_00281bb0(DAT_0044ea90);
+            effectNodeUpdateTransform(DAT_0044ea90);
           }
         }
         else {
-          FUN_00281bb0(DAT_0044ea90);
+          effectNodeUpdateTransform(DAT_0044ea90);
         }
       }
     }
     else {
-      FUN_00281bb0(DAT_0044ea90);
+      effectNodeUpdateTransform(DAT_0044ea90);
     }
     FUN_002c79c4(DAT_0044ea90);
     temp_v3 = effResourceListHasActiveData(reinterpret_cast<LinkedItems*>(DAT_0044ea90));

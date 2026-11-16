@@ -4,7 +4,7 @@ extern "C" {
 
 s32 gameSlotTableGetHeader(void);
 s32 recordPackedValue(u32 id);
-s32 FUN_0028fb40(u32 id);
+s32 flagValueRead(u32 id);
 
 /* Divides gameSlotTableGetHeader() by `divisor`, clamps the quotient to 0-99 and then to the id's available count. */
 s32 btlRollClamped(u32 id, s32 divisor)
@@ -20,7 +20,7 @@ s32 btlRollClamped(u32 id, s32 divisor)
     } else {
         amount = quotient;
     }
-    available = recordPackedValue(id) - FUN_0028fb40(id);
+    available = recordPackedValue(id) - flagValueRead(id);
     if (amount < 0) {
         amount = 0;
     } else if (available < amount) {

@@ -8,7 +8,7 @@ extern GameState g_gameState;
 void mapCollisionRelease();
 void FUN_0027b2b4(s32 map, u32 entry, s32 secondaryMap, s32 mode);
 void FUN_002d508c(LmapMainState *state);
-void FUN_00266a2c();
+void lmapUpdateMapBgm();
 void FUN_00281784();
 void mapInitializeStoryMarkerEffects(u32 map);
 void objSetBaseAndValue(LmapObj *object, s32 base, u32 value);
@@ -78,7 +78,7 @@ u32 FUN_002fb7dc()
         break;
     case 5:
         transition->distance = 200.0f;
-        FUN_00266a2c();
+        lmapUpdateMapBgm();
         transition = reinterpret_cast<EntryTransitionView *>(g_lmapMainState);
         transition->frozen = 0;
         transition->trackerFlags &= ~2;

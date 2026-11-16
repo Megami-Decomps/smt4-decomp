@@ -4,7 +4,7 @@
 #include "shard/Shard004A.h"
 
 extern "C" {
-void FUN_00163aa4(void *selection, f32 scale);
+void uiSpriteAdvanceAnimation(void *selection, f32 scale);
 s32 vec2GetXInt(const void *selection);
 s32 vec2GetYInt(const void *selection);
 void pointConvertToFloat(f32 *position, s32 x, s32 y);
@@ -15,7 +15,7 @@ void _ZN9Obj55c89c12FUN_004a2404Ev(Screen4A *screen)
 {
     void *selection = screen->input.selection;
     screen->unkA874 = 8;
-    FUN_00163aa4(selection, 1.0f);
+    uiSpriteAdvanceAnimation(selection, 1.0f);
     s32 y = vec2GetYInt(selection);
     s32 x = vec2GetXInt(selection);
     pointConvertToFloat(screen->cursor.position, x, y);

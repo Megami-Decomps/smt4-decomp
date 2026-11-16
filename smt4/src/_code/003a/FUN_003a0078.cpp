@@ -6,15 +6,15 @@ extern "C" {
 
 extern int contentGetKindValue(u16 id);
 
-/* Orders two entries by their FUN_00230f44 key. */
+/* Orders two entries by their aocEntryGetSortOrder key. */
 static s32 compareOrder(u16 *a, u16 *b)
 {
-    s32 orderA = FUN_00230f44(a);
-    s32 orderB = FUN_00230f44(b);
+    s32 orderA = aocEntryGetSortOrder(a);
+    s32 orderB = aocEntryGetSortOrder(b);
     return orderA - orderB;
 }
 
-/* Comparison of two entries: by sort key (contentGetKindValue for kinds 2, 3 and 8, else 0), then by FUN_00230f44. */
+/* Comparison of two entries: by sort key (contentGetKindValue for kinds 2, 3 and 8, else 0), then by aocEntryGetSortOrder. */
 int FUN_003a0078(u16 *a, u16 *b)
 {
     s32 diff;

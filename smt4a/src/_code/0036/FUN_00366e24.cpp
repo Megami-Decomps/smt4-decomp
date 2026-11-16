@@ -10,8 +10,8 @@ int mapSetSceneState(unsigned int);
 int soundVolumeSettingSet(...);
 int FUN_0014af98(void);
 int sysPlaySe(int);
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
+int libm_cosf(void);
+int libm_sinf(void);
 int FUN_00233e10(int, unsigned int);
 int FUN_00246014(void);
 int mapIfOverlayRelease(void);
@@ -23,7 +23,7 @@ int FUN_00324e38(unsigned int);
 int FUN_00325ba4(int, int, int, int *, float [7], unsigned int);
 int FUN_00327ee8(void);
 int sysPlayVoice(int);
-int FUN_003d4ed8(...);
+int soundActorStartOnFreeChannel(...);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -48,8 +48,8 @@ extern unsigned int soundVolumeSettingGet(void);
 /* Supplied declaration required: FUN_0014af98. */
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_00233e10. */
 /* Supplied declaration required: FUN_002342b8. */
 /* Supplied declaration required: FUN_00246014. */
@@ -64,7 +64,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: FUN_00325ba4. */
 /* Supplied declaration required: FUN_00327ee8. */
 /* Supplied declaration required: sysPlayVoice. */
-/* Supplied declaration required: FUN_003d4ed8. */
+/* Supplied declaration required: soundActorStartOnFreeChannel. */
 extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
 
@@ -118,11 +118,11 @@ void FUN_00366e24(void)
               *(int *)(g_lmapScene + 8) = temp_v2;
               if (temp_v2 == 1) {
                 if ((g_gameState != 0x26) && (g_gameState != 0x1a)) {
-                  FUN_003d4ed8(0x10002bb);
+                  soundActorStartOnFreeChannel(0x10002bb);
                 }
                 FUN_00324e38(0xffffffff);
-                FUN_001bc124();
-                FUN_001bbf0c();
+                libm_sinf();
+                libm_cosf();
                 FUN_0014af98();
                 soundVolumeSettingSet();
                 sysPlayVoice(0x10002e7);
@@ -144,7 +144,7 @@ void FUN_00366e24(void)
                 *(unsigned int *)(temp_v2 + 0x24) = temp_v8;
                 *(int *)(temp_v2 + 4) = *(int *)(temp_v2 + 4) + 1;
                 if (g_gameState == 0x26 || g_gameState == 0x1a) {
-                  FUN_003d4ed8(0x10000f7);
+                  soundActorStartOnFreeChannel(0x10000f7);
                 }
                 *(unsigned int *)(g_lmapScene + 8) = 0;
               }
@@ -183,12 +183,12 @@ void FUN_00366e24(void)
               *(unsigned int *)(temp_v2 + 0x30) = uStack_38;
               temp_v7 = (temp_v10[0] + temp_v4) * temp_v5;
               *(float *)(temp_v2 + 0x2c) = fStack_3c - 142.0f;
-              FUN_001bc124();
+              libm_sinf();
               temp_v2 = g_lmapScene;
               temp_v6 = 35.0f;
               *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + temp_v7 * 35.0f;
               temp_v5 = (*(float *)(temp_v2 + 0x50) + temp_v4) * temp_v5;
-              FUN_001bbf0c();
+              libm_cosf();
               *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v5 * temp_v6;
             }
             else {
@@ -237,8 +237,8 @@ void FUN_00366e24(void)
         *(unsigned int *)(g_lmapView + 0xb0) = 0xfffffffd;
         sysPlaySe(0xdd);
         FUN_00233e10(1,DAT_005f16ac);
-        FUN_001bc124();
-        FUN_001bbf0c();
+        libm_sinf();
+        libm_cosf();
         FUN_00246014();
         temp_v2 = g_lmapScene;
         *(int *)(g_lmapScene + 4) = *(int *)(g_lmapScene + 4) + 1;
@@ -288,7 +288,7 @@ void FUN_00366e24(void)
     *(unsigned int *)(temp_v2 + 0x24) = *(unsigned int *)(temp_v2 + 0x30);
     if ((g_gameState != 0x26) && (g_gameState != 0x1a)) {
       if ((temp_v3 == 1 || temp_v3 == 0xb) || (temp_v3 == 0x1c || temp_v3 == 0x29)) {
-        FUN_003d4ed8((temp_v3 & 3) + 0x10002bb);
+        soundActorStartOnFreeChannel((temp_v3 & 3) + 0x10002bb);
         FUN_00324e38(0xffffffff);
       }
     }

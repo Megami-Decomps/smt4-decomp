@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0016e544(int);
-int FUN_0016e800(int, int);
+int sysReportCheckFailure(int, int);
 
 /* stack frame of void: 3 slot(s), 6 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ extern unsigned char LAB_00130000; /* 0x130000 */
 extern unsigned char bRam1ff80014; /* 0x1ff80014 */
 
 /* Supplied declaration required: FUN_0016e544. */
-/* Supplied declaration required: FUN_0016e800. */
+/* Supplied declaration required: sysReportCheckFailure. */
 extern int FUN_00189738(unsigned char *, unsigned int, unsigned char *);
 extern int nn_cfg_CTR_detail_InitializeProperPort(unsigned char *);
 
@@ -35,11 +35,11 @@ unsigned char FUN_00158ef4(void)
   if ((bRam1ff80014 & 1) == 0) {
     temp_v0 = nn_cfg_CTR_detail_InitializeProperPort(temp_v3);
     if ((temp_v0 < 0) && (temp_v0 < 0)) {
-      FUN_0016e800(temp_v0,0x158f28);
+      sysReportCheckFailure(temp_v0,0x158f28);
     }
     temp_v0 = FUN_00189738(temp_v1,4,&LAB_00130000);
     if (temp_v0 < 0) {
-      FUN_0016e800(temp_v0,0x158f44);
+      sysReportCheckFailure(temp_v0,0x158f44);
     }
     FUN_0016e544(temp_v3[0]);
                     /* WARNING: Treating indirect jump as return */

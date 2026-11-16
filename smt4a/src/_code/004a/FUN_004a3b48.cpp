@@ -55,7 +55,7 @@ StatusSlotTable *gameGetSlotTable(void);
 s32 FUN_00372014(void);
 void devilGetRecord(u32 id);
 void __aeabi_memcpy4(void *destination, const void *source, s32 size);
-void FUN_004bcd90(UnitRecord *unit);
+void unitRecomputeDerivedStats(UnitRecord *unit);
 u16 recordGetScaledMaximum(UnitRecord *unit);
 void objBInitBlock19D0(UnitRecord *unit, s32 value);
 
@@ -113,7 +113,7 @@ void FUN_004a3b48(StatusPanel *panel)
             for (s32 i = 0; i < 0x40; i++) {
                 unit.inheritance.flags[i] = 0;
             }
-            FUN_004bcd90(&unit);
+            unitRecomputeDerivedStats(&unit);
             unit.unk2A = recordGetScaledMaximum(&unit);
             unit.unk2C = unit.unk10;
             ((u16 *)unit.unk5E)[1] = 0;

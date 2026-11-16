@@ -26,7 +26,7 @@ extern "C" {
 void asdTMTexTableLoadTmx(u32 table, u32 flags);
 void asdTMTexTableReleaseNode(u32 table, u32 index);
 s32 campButtonHelpIsActive(void);
-GameOverScriptProcess* FUN_00275bc8(void* script, void* messages);
+GameOverScriptProcess* scrScriptProcessCreate(void* script, void* messages);
 void scrScriptProcessStartEntry(GameOverScriptProcess* process, u32 entry);
 s32 scrRunOpcodesStub(GameOverScriptProcess* process);
 s32 fountainCrazingSumahoUpdate(GameOverTransition* transition);
@@ -59,7 +59,7 @@ extern "C" u32 FUN_004cef24(GameOverTransition* transition)
                     return 0;
                 }
             }
-            transition->process = FUN_00275bc8(transition->scriptData, transition->messageData);
+            transition->process = scrScriptProcessCreate(transition->scriptData, transition->messageData);
             transition->process->enabled = 1;
             scrScriptProcessStartEntry(transition->process, 0);
             if (transition->mode != 2) {

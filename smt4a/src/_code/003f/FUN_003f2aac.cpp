@@ -10,12 +10,12 @@ typedef struct Actor {
     /* 0x114 */ u16 flagsB;
 } Actor;
 
-Actor *FUN_001568f8(void);
+Actor *btlFindEntryBlockByMemberId(void);
 
 /* Sets bit 0x10 of the current actor's flagsA (when `first` is nonzero) or flagsB, unless the actor is flagged 8. */
 void FUN_003f2aac(u32 unused0, u32 unused1, s32 first)
 {
-    Actor *actor = FUN_001568f8();
+    Actor *actor = btlFindEntryBlockByMemberId();
 
     if ((actor->flags & 8) == 0 && actor != NULL) {
         if (first != 0) {

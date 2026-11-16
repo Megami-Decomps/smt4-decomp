@@ -6,7 +6,7 @@ extern "C" {
 extern const char DAT_00410408[]; /* "c:\SMT4\XRD686\sdds4\Patch\AsdSDK\Source\Gfx\Effect\effPolygonFlash.cpp": __FILE__ */
 
 void *memAlloc(int, int, int, int size, int align, int);
-PolyGeom *FUN_00247334(u32 count, int w, int h, u8 *table, int tableSize);
+PolyGeom *effGeomCreateRepeatedIndexList(u32 count, int w, int h, u8 *table, int tableSize);
 extern u8 DAT_0047377a;
 
 /* Builds the geometry block of a flash polygon effect with one segment per parameter segment. */
@@ -22,7 +22,7 @@ PolyGeomBlock *effPolyFlashGeomCreate1(PolyParams *params)
     u8 *payload = block->payload;
     block->data = payload;
     block->self = block;
-    block->geom = FUN_00247334(segments & 0xffff, 12, 13, &DAT_0047377a, 72);
+    block->geom = effGeomCreateRepeatedIndexList(segments & 0xffff, 12, 13, &DAT_0047377a, 72);
     return block;
 }
 

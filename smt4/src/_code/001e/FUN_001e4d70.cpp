@@ -9,9 +9,9 @@ int FUN_002897f0(...);
 
 int asdLoadFileSetUseRawPaths(int);
 int FUN_00282bfc(int, int);
-int FUN_00287728(int);
+int screenFadeSlotReset(int);
 int msgWindowReset(void);
-int FUN_00289880(void);
+int commonBgStopChildAndBeginTransition(void);
 int FUN_002898e4(void);
 int aocBufferQueueDisplay(int, unsigned int, int);
 int FUN_00289de4(int, unsigned int, int);
@@ -19,7 +19,7 @@ int buttonHelpCreate(void);
 int messageSlotSet(int);
 int buttonHelpRelease(void);
 int uiFadeRelease(void);
-int FUN_00297060(int, unsigned int);
+int scrScriptProcessCreate(int, unsigned int);
 int soundChannelStopAll(int);
 int scrScriptProcessDestroy(void);
 int buttonHelpSetPreset(int);
@@ -45,11 +45,11 @@ extern int messageAnyWindowActive(void);
 /* Supplied declaration required: asdLoadFileSetUseRawPaths. */
 extern int asdLoadFileGetUseRawPaths(void);
 /* Supplied declaration required: FUN_00282bfc. */
-/* Supplied declaration required: FUN_00287728. */
+/* Supplied declaration required: screenFadeSlotReset. */
 /* Supplied declaration required: msgWindowReset. */
 /* Supplied declaration required: FUN_002897f0. */
 extern unsigned int scrScriptProcessGetEntry(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00289880. */
+/* Supplied declaration required: commonBgStopChildAndBeginTransition. */
 /* Supplied declaration required: FUN_002898e4. */
 /* Supplied declaration required: aocBufferQueueDisplay. */
 /* Supplied declaration required: FUN_00289de4. */
@@ -59,7 +59,7 @@ extern int aocPackageGrantsItem(int, unsigned int, unsigned int);
 /* Supplied declaration required: buttonHelpRelease. */
 /* Supplied declaration required: uiFadeRelease. */
 extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00297060. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: buttonHelpSetPreset. */
@@ -145,8 +145,8 @@ unsigned int FUN_001e4d70(void)
     }
     puVar1[2] = 1;
     messageSlotSet(0);
-    FUN_00287728(0);
-    FUN_00287728(1);
+    screenFadeSlotReset(0);
+    screenFadeSlotReset(1);
     soundChannelStopAll(0xf);
     gameFlagSetValue(0x522,0,1);
     return 0;
@@ -213,7 +213,7 @@ unsigned int FUN_001e4d70(void)
     }
     FUN_002898e4();
     buttonHelpCreate();
-    FUN_00289880();
+    commonBgStopChildAndBeginTransition();
     buttonHelpSetPreset(0x90);
     if (*(char *)((int)puVar1 + 0x21) != '\0') {
       asdLoadFileSetUseRawPaths(0);
@@ -224,7 +224,7 @@ unsigned int FUN_001e4d70(void)
       FUN_00282bfc(1,0xff);
     }
     temp_v0 = puVar1[0xb];
-    FUN_00297060(temp_v0,puVar1[0xd]);
+    scrScriptProcessCreate(temp_v0,puVar1[0xd]);
     puVar1[0xc] = temp_v0;
     *(unsigned int *)(temp_v0 + 0x108) = 2;
     temp_v0 = scrScriptProcessStartEntry(puVar1[0xc],puVar1[6]);

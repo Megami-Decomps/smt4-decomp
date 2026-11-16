@@ -17,7 +17,7 @@ typedef struct Screen2c39a4 {
 } Screen2c39a4;
 
 extern s32 FUN_002bbbc8(Screen2c39a4 *screen, u8 *layout, s32 arg, u8 *unk530);
-extern s32 FUN_002bbb74(u32 value, u8 *unk118c);
+extern s32 gpuWriteVertexUniformMatrix(u32 value, u8 *unk118c);
 
 /* Switches the screen to the layout of its current phase when that isn't the loaded mode yet. */
 void renderCtxSelectStereoLayout(RenderCtx *context)
@@ -42,7 +42,7 @@ void renderCtxSelectStereoLayout(RenderCtx *context)
     }
     if (screen->mode != mode) {
         FUN_002bbbc8(screen, layout, 0, screen->unk530);
-        FUN_002bbb74(screen->unk52c, screen->unk118c);
+        gpuWriteVertexUniformMatrix(screen->unk52c, screen->unk118c);
         screen->mode = mode;
     }
 }

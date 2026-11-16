@@ -14,7 +14,7 @@ void FUN_002b7bca(void *array, s32 count, s32 elementSize, s32 (*compare)(const 
 s32 FUN_003d10a0(BtlMainState **block, CommandState *state, BtlEntry **units, s32 count, s32 mode);
 void FUN_0022abe0(BtlEntry *entry, u16 *skills);
 s32 FUN_0029a9d4(u32 id, s32 arg);
-s32 FUN_0029a924(u32 id);
+s32 appGetRemainingCapacity(u32 id);
 s32 FUN_002277d4(BtlMainState **block, CommandState *state, SkillInfo *info, BtlEntry **units, s32 count, s32 a, s32 b);
 s32 FUN_0029e9cc(u32 skillId);
 void btlMarkLowestHpUnit(BtlMainState **block);
@@ -48,7 +48,7 @@ void FUN_003d06e4(BtlMainState **block, CommandState *state)
         if (skills[i] != 0) {
             SkillInfo *info = reinterpret_cast<SkillInfo *>(dataTable40FindById(skills[i]));
             if (info != NULL) {
-                s32 cost = (state->entry->flags & 2) != 0 ? FUN_0029a9d4(skills[i], 1) : FUN_0029a924(skills[i]);
+                s32 cost = (state->entry->flags & 2) != 0 ? FUN_0029a9d4(skills[i], 1) : appGetRemainingCapacity(skills[i]);
                 if (cost <= state->selection->budget) {
                     if (FUN_002277d4(block, state, info, units, count, 1, 0) != 0) {
                         return;
@@ -64,7 +64,7 @@ void FUN_003d06e4(BtlMainState **block, CommandState *state)
         if (skills[i] != 0) {
             SkillInfo *info = reinterpret_cast<SkillInfo *>(dataTable40FindById(skills[i]));
             if (info != NULL) {
-                s32 cost = (state->entry->flags & 2) != 0 ? FUN_0029a9d4(skills[i], 1) : FUN_0029a924(skills[i]);
+                s32 cost = (state->entry->flags & 2) != 0 ? FUN_0029a9d4(skills[i], 1) : appGetRemainingCapacity(skills[i]);
                 if (cost <= state->selection->budget) {
                     if (FUN_002277d4(block, state, info, units, count, 0, 1) != 0) {
                         return;
@@ -77,7 +77,7 @@ void FUN_003d06e4(BtlMainState **block, CommandState *state)
         if (skills[i] != 0) {
             SkillInfo *info = reinterpret_cast<SkillInfo *>(dataTable40FindById(skills[i]));
             if (info != NULL) {
-                s32 cost = (state->entry->flags & 2) != 0 ? FUN_0029a9d4(skills[i], 1) : FUN_0029a924(skills[i]);
+                s32 cost = (state->entry->flags & 2) != 0 ? FUN_0029a9d4(skills[i], 1) : appGetRemainingCapacity(skills[i]);
                 if (cost <= state->selection->budget) {
                     if (FUN_002277d4(block, state, info, units, count, 0, 2) != 0) {
                         return;

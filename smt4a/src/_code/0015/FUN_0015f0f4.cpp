@@ -35,7 +35,7 @@ u32 FUN_0015f0f4(u32 job)
         s32 result = svcWaitSynchronization1(work->waitHandle, 0);
         bool failed = nnResultIsFailure(result);
         if (failed) {
-            FUN_002e3140(result, failed);
+            resultHandleFailure(result, failed);
         }
         nnResultFields code;
         code.value = result;

@@ -52,7 +52,7 @@ WindowStatusOperationResult Obj4221bc::vfunc0c(const void *)
         Obj4221bc *owner = this;
         u32 status = FUN_002bcc60(queue, &request.size, FUN_0038ae30, &owner);
         if (nnResultIsFailureExceptSummary(status, 3)) {
-            FUN_002c526c(status);
+            resultHandleFailure(status);
         }
     }
     return output;

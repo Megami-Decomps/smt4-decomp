@@ -6,7 +6,7 @@ extern "C" {
 extern RenderCtxA* g_renderCtx;
 extern const void* g_tmnlEntries;
 extern const u8 DAT_0056df38[][60];
-u32 FUN_001692ac(u32 mode, u32 options);
+u32 renderCtxPackPassFlags(u32 mode, u32 options);
 
 u32 FUN_003161b4(void)
 {
@@ -25,7 +25,7 @@ u32 FUN_003161b4(void)
                       150.0f, 0.0f, 0.0f, 1.0f, 1.0f);
     }
     RenderCtxA* context = g_renderCtx;
-    u32 value = FUN_001692ac(1, 0);
+    u32 value = renderCtxPackPassFlags(1, 0);
     renderCtxPushA(context, value);
     renderStackPop(&g_renderCtx->stackA);
     return 0;

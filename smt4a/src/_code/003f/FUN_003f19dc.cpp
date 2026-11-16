@@ -48,7 +48,7 @@ void FUN_003f19dc(StreamWorker *worker)
     s32 result = svcWaitSynchronization1(worker->thread.handle, -1);
     bool failed = nnResultIsFailure(result);
     if (failed) {
-        FUN_002e3140(result, failed);
+        resultHandleFailure(result, failed);
     }
     worker->thread.joined = 1;
     worker->thread.~NnOsThread();

@@ -5,7 +5,7 @@
 extern "C" {
 
 int appCostRecordFindById(void);
-int FUN_002ae9ec(int, int, unsigned int, unsigned int, unsigned int, unsigned int);
+int texTableRecordCallWithParams(int, int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: appCostRecordFindById. */
-/* Supplied declaration required: FUN_002ae9ec. */
+/* Supplied declaration required: texTableRecordCallWithParams. */
 
 
 void FUN_002b6b8c(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -43,7 +43,7 @@ void FUN_002b6b8c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   case 5:
     temp_v0 = 0x416;
   }
-  FUN_002ae9ec(2,0x13,temp_v0,param_2,param_3,param_4);
+  texTableRecordCallWithParams(2,0x13,temp_v0,param_2,param_3,param_4);
   return;
 }
 

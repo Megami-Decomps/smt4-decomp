@@ -9,7 +9,7 @@ typedef struct Record {
 } Record;
 
 extern Record *dataFindKeyedRecordWithOverrides(s32 id);
-extern int FUN_0017ffa8(int a, int b, u32 message, u32 arg0, u32 arg1, u32 arg2);
+extern int texTableRecordCallWithParams(int a, int b, u32 message, u32 arg0, u32 arg1, u32 arg2);
 
 /* Shows the message (0x411-0x416) for the record's kind, passing the three arguments on. */
 void FUN_00168470(s32 id, u32 arg0, u32 arg1, u32 arg2)
@@ -36,7 +36,7 @@ void FUN_00168470(s32 id, u32 arg0, u32 arg1, u32 arg2)
         message = 0x416;
         break;
     }
-    FUN_0017ffa8(2, 11, message, arg0, arg1, arg2);
+    texTableRecordCallWithParams(2, 11, message, arg0, arg1, arg2);
 }
 
 }

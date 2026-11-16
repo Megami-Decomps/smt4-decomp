@@ -4,7 +4,7 @@
 extern "C" {
 
 void gfxObjectDestroy(u32 arg);
-void FUN_00359370(s32 arg, s32 flag);
+void modelRemoveFromSlotList(s32 arg, s32 flag);
 void asdCameraInitAreas(void);
 void asdMdlManagerDestroy(u32 arg);
 void asdMemFree(void *block);
@@ -20,7 +20,7 @@ void bustupCutAnimDestroy(u32 job)
     asdCameraInitAreas();
     anim = (BustupCutAnimA *)jobGetWork(job);
     if (anim->unk5EC != 0 && anim->unk5F0 != 5 && anim->unk5F0 != 6) {
-        FUN_00359370(anim->unk5EC, 0);
+        modelRemoveFromSlotList(anim->unk5EC, 0);
     }
     anim->unk5EC = 0;
     anim->unk5E8 = 0;

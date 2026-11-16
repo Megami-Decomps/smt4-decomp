@@ -6,7 +6,7 @@
 extern "C" {
 
 int FUN_0019e3d0(...);
-int FUN_001bc124(void);
+int libm_sinf(void);
 int mapIfDrawBackground(void);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);
@@ -82,9 +82,9 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern int FUN_001692ac(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0019e3d0. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: mapIfDrawBackground. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
@@ -158,7 +158,7 @@ void FUN_002dd40c(void)
   }
   mapIfDrawBackground();
   temp_v1 = g_renderCtx;
-  temp_v0 = FUN_001692ac(5,0);
+  temp_v0 = renderCtxPackPassFlags(5,0);
   piVar8 = (int *)(temp_v1 + 0x1258);
   temp_v2 = *piVar8;
   temp_v3 = piVar8[temp_v2 + 2];
@@ -214,7 +214,7 @@ void FUN_002dd40c(void)
     else {
       temp_v16 = (float)VectorSignedToFloat(temp_v1 - 0xf,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v16 = temp_v16 * 1.57f * 0.06666667f;
-      FUN_001bc124();
+      libm_sinf();
       temp_v16 = (temp_v13 - temp_v16) * 64.0f;
       temp_v46 = (unsigned int)temp_v16;
       if ((int)temp_v46 < 0) {
@@ -228,7 +228,7 @@ void FUN_002dd40c(void)
   else {
     temp_v10 = (float)VectorSignedToFloat(temp_v1 - 0xf,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v10 = temp_v10 * 1.57f * 0.06666667f;
-    FUN_001bc124();
+    libm_sinf();
     temp_v16 = (temp_v13 - temp_v10) * temp_v16;
     temp_v46 = (unsigned int)temp_v16;
     if ((int)temp_v46 < 0) {

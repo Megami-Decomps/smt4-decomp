@@ -36,7 +36,7 @@ static const s32 kExpandedYBits = 0x3eb851ec;
 
 extern "C" {
 AnimatedPanel *jobGetWork();
-void FUN_00163aa4(PanelSprite *, f32);
+void uiSpriteAdvanceAnimation(PanelSprite *, f32);
 void FUN_001536e4(AnimatedPanel *);
 void FUN_0014aa9c(s32);
 
@@ -60,11 +60,11 @@ u8 panelUpdateAnimatedScale()
             }
             panel->scaleY = scaleBits(y) > kContractedScaleBits ? y : 0.25f;
             for (s32 i = 0; i < 24; ++i)
-                FUN_00163aa4(&panel->sprites[i], 1.0f);
-            FUN_00163aa4(&panel->sprites[26], 1.0f);
-            FUN_00163aa4(&panel->sprites[27], 1.0f);
+                uiSpriteAdvanceAnimation(&panel->sprites[i], 1.0f);
+            uiSpriteAdvanceAnimation(&panel->sprites[26], 1.0f);
+            uiSpriteAdvanceAnimation(&panel->sprites[27], 1.0f);
             if (panel->sprites[27].visible)
-                FUN_00163aa4(&panel->sprites[24], 1.0f);
+                uiSpriteAdvanceAnimation(&panel->sprites[24], 1.0f);
         } else {
             f32 x = panel->scaleX;
             if (scaleBits(x) < kExpandedXBits) {

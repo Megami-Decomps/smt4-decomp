@@ -20,7 +20,7 @@ void FUN_0034e020(S4FsReader *reader)
         u32 result = FUN_003573a4(&signalled, reader->wakeup, 2, 0, -1);
         bool failed = nnResultIsFailure(result);
         if (failed) {
-            FUN_002c526c(result, failed);
+            resultHandleFailure(result, failed);
         }
         if (signalled != 0) {
             break;

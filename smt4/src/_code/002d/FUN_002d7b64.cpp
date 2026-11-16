@@ -6,7 +6,7 @@ extern "C" {
 u32 scrGetArg(u32 index);
 u32 scrGetCommandOwner(void);
 u32 scrGetCommandFrame(void);
-void FUN_002866b4(u32 unit, u32 arg, u32 value, u32 kind, s32 a, s32 b);
+void messageWindowShowOrPoll(u32 unit, u32 arg, u32 value, u32 kind, s32 a, s32 b);
 
 void FUN_002d7b64(u32 kind)
 {
@@ -14,7 +14,7 @@ void FUN_002d7b64(u32 kind)
     u32 arg = scrGetArg(0);
     u32 value = scrGetCommandFrame();
 
-    FUN_002866b4(unit, arg, value, kind, 0, 0);
+    messageWindowShowOrPoll(unit, arg, value, kind, 0, 0);
 }
 
 }

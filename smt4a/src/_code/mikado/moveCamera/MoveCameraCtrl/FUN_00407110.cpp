@@ -7,7 +7,7 @@
 extern "C" {
 extern void *g_handleRegistry;
 extern const char DAT_0053295c[];
-void *FUN_00178b04(u32 size, const char *source, u32 line);
+void *asdMemoryAllocTraced(u32 size, const char *source, u32 line);
 MoveCameraResource *_ZN9Obj557af8C1EPK21AsdAnimCameraResource(MoveCameraResource *resource, void *data);
 void uiSetFloatPair(ManagedCamera *camera, f32 distance, f32 scale);
 void FUN_0014f0dc(ManagedCamera *camera, const Vec3f *eye, const Vec3f *target, const Vec3f *up);
@@ -23,7 +23,7 @@ void FUN_00407110(MoveCameraCtrlWork *work, const char *name)
     };
     u32 entry;
     void *data = asdLoadFileWithSize(name, &entry, 1);
-    MoveCameraResource *resource = static_cast<MoveCameraResource *>(FUN_00178b04(sizeof(MoveCameraResource), DAT_0053295c, 0x29));
+    MoveCameraResource *resource = static_cast<MoveCameraResource *>(asdMemoryAllocTraced(sizeof(MoveCameraResource), DAT_0053295c, 0x29));
     if (resource != NULL)
         resource = _ZN9Obj557af8C1EPK21AsdAnimCameraResource(resource, data);
     work->resource = resource;

@@ -39,10 +39,10 @@ s32 FUN_003c0390(u32 request, s32 entryIndex, u8 argument)
     u32 stateValue = state->unk2240;
     if (entryIndex >= 0) {
         const void *activeEntry = btlMainFindActiveEntry(reinterpret_cast<BtlMainState *>(state));
-        return (s32)FUN_0022a4ac(1, 0, request, stateValue,
+        return (s32)btlHelpEntryCreate(1, 0, request, stateValue,
                             activeEntry, argument, entryIndex);
     } else {
-        return (s32)FUN_0022a4ac(0, 0, request, stateValue,
+        return (s32)btlHelpEntryCreate(0, 0, request, stateValue,
                             NULL, argument, -1);
     }
 }

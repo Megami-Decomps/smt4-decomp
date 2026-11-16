@@ -24,7 +24,7 @@ void FUN_003b7960(const MaskedSpriteWidget *widget, s32 x, s32 y,
                   u32 foreground, u32 background)
 {
     TextureTableEntryIV *frame = asdTMTexTableEntryAt(0x12, 0x6E);
-    FUN_001835b4(2, 0x12, background, x, y, 0xDD);
+    texDrawTableEntryAtStoredOrigin(2, 0x12, background, x, y, 0xDD);
     RenderCtxScissorA *context = g_renderCtx;
     bool scissored = false;
     if (context->scissor.entries[context->scissor.count] == RENDER_STATE_SCISSOR) {
@@ -35,7 +35,7 @@ void FUN_003b7960(const MaskedSpriteWidget *widget, s32 x, s32 y,
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
     s32 targetY = vec2GetYInt(widget->position) + y;
     s32 targetX = vec2GetXInt(widget->position) + x;
-    FUN_001835b4(2, 0x12, foreground, targetX, targetY, 0xDD);
+    texDrawTableEntryAtStoredOrigin(2, 0x12, foreground, targetX, targetY, 0xDD);
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 7, 0));
     if (scissored) {
         renderStackSet(&g_renderCtx->scissor, RENDER_STATE_SCISSOR);

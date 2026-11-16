@@ -16,7 +16,7 @@ int FUN_002b4b88(...);
 int _ZN7AocMain12queueRequestE17RequestParametersji(...);
 int _ZN18WindowStatusResultC1Ej(...);
 int FUN_002bcc60(...);
-int FUN_002c526c(...);
+int resultHandleFailure(...);
 int jyoucyuGetTableEntry(...);
 int FUN_00385f74(...);
 int aocFinishHandleOperation(...);
@@ -60,7 +60,7 @@ extern int FUN_002ad1e0(int);
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 extern int *_ZN18WindowStatusResultC1Ev(unsigned char *);
 /* Supplied declaration required: FUN_002bcc60. */
-/* Supplied declaration required: FUN_002c526c. */
+/* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_00385f74. */
 /* Supplied declaration required: aocFinishHandleOperation. */
@@ -192,7 +192,7 @@ void FUN_003887cc(unsigned char *param_1,int param_2)
       temp_v16 = param_2;
       FUN_002bcc60(temp_v4,&temp_v12,FUN_0038a048,&temp_v16);
       if ((temp_v4 & 0x7e00000) != 0x600000 && (int)temp_v4 < 0) {
-        FUN_002c526c();
+        resultHandleFailure();
       }
       temp_v1 = 2;
       *(unsigned int *)(param_2 + 0x344) = temp_v1;

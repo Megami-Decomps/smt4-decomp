@@ -28,7 +28,7 @@ extern u32 DAT_00573bac;   /* battle flag mask tested against flagsB */
 s32 btlScriptUnitHasFlags(void);
 void uiSpriteSelectAnim(void *sprite, s32 animation);
 void FUN_0020acd8(BtlMenuPanel *panel, u32 a, u32 b);
-void FUN_0020ad6c(BtlMenuPanel *panel, u32 mode, u32 flag);
+void btlCommandMenuEnterMode(BtlMenuPanel *panel, u32 mode, u32 flag);
 void FUN_0020d3d4(BtlMenuPanel *panel);
 void screenSetContextHint(BtlMenuPanel *panel, u32 hint, u32 target);
 void flaggedEntrySetValueB(void *entry, s32 value);
@@ -60,7 +60,7 @@ void FUN_00231cdc(BtlMenuPanel *panel, u32 a, s32 request, u32 b)
         for (s32 i = 0; i < 8; i++)
             uiSpriteSelectAnim(panel->slots[i], BTL_MENU_CLOSE_ANIMATION);
         panel->mode = BTL_MENU_CLOSED_MODE;
-        FUN_0020ad6c(panel, 0x10, 1);
+        btlCommandMenuEnterMode(panel, 0x10, 1);
         return;
     }
 
@@ -71,21 +71,21 @@ void FUN_00231cdc(BtlMenuPanel *panel, u32 a, s32 request, u32 b)
 
     if (request != -1) {
         if (request == 0xB) {
-            FUN_0020ad6c(panel, panel->returnMode, 1);
+            btlCommandMenuEnterMode(panel, panel->returnMode, 1);
             return;
         }
         if (request != 1) {
             if (request != 2) {
                 if (request == 7) {
-                    FUN_0020ad6c(panel, 10, 1);
+                    btlCommandMenuEnterMode(panel, 10, 1);
                     return;
                 }
                 if (request == 3) {
-                    FUN_0020ad6c(panel, 0xC, 1);
+                    btlCommandMenuEnterMode(panel, 0xC, 1);
                     return;
                 }
                 if (request != 0xC) {
-                    FUN_0020ad6c(panel, 1, 1);
+                    btlCommandMenuEnterMode(panel, 1, 1);
                     return;
                 }
             }
@@ -95,13 +95,13 @@ void FUN_00231cdc(BtlMenuPanel *panel, u32 a, s32 request, u32 b)
             panel->clear[2] = 0;
             panel->clear[3] = 0;
         }
-        FUN_0020ad6c(panel, 8, 1);
+        btlCommandMenuEnterMode(panel, 8, 1);
         return;
     }
 
     u32 mode = panel->currentMode;
     if (mode == 0x1A || mode == 0x1B) {
-        FUN_0020ad6c(panel, 1, 0);
+        btlCommandMenuEnterMode(panel, 1, 0);
         u32 hint = FUN_002cc9e0(panel, 1);
         screenSetContextHint(panel, hint, panel->target);
         return;

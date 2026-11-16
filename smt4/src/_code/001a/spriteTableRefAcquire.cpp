@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c58c8(int table, int index);
+int asdTMTexTablePrepareNodeImage(int table, int index);
 
 extern struct {
     s8 unk00;
@@ -20,7 +20,7 @@ void spriteTableRefAcquire(void)
         asdTMTexTableLoadSprites(0x1a);
         i = 0;
         do {
-            FUN_002c58c8(0x1a, i);
+            asdTMTexTablePrepareNodeImage(0x1a, i);
             i++;
         } while (i < 3);
     }

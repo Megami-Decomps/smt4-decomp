@@ -16,7 +16,7 @@ typedef struct SlotSource {
 } SlotSource;
 
 s32 gameFlagIsSet(u32 flag);
-SlotRecord *FUN_002613f0(s32 index);
+SlotRecord *saveGetSelectedRecordSlot(s32 index);
 s32 skillChooseRandomFlaggedSlot(u16 *values);
 u16 FUN_003f36a4(u16 *values, s32 index, u16 id);
 
@@ -26,13 +26,13 @@ static __inline s32 slotRecordFind(u16 id)
     s32 i;
 
     for (i = 0; i < 24; i++) {
-        if (FUN_002613f0(i)->id == id) {
+        if (saveGetSelectedRecordSlot(i)->id == id) {
             return i;
         }
     }
     for (i = 0; i < 24; i++) {
-        if (FUN_002613f0(i)->id == 0) {
-            SlotRecord *record = FUN_002613f0(i);
+        if (saveGetSelectedRecordSlot(i)->id == 0) {
+            SlotRecord *record = saveGetSelectedRecordSlot(i);
 
             record->id = 0;
             record->value = 0;
@@ -66,9 +66,9 @@ s32 FUN_0035ac58(SlotSource *source)
     if (slot < 0) {
         return 0;
     }
-    FUN_002613f0(slot)->id = source->id;
-    FUN_002613f0(slot)->value = source->values[index];
-    FUN_002613f0(slot)->count = count;
+    saveGetSelectedRecordSlot(slot)->id = source->id;
+    saveGetSelectedRecordSlot(slot)->value = source->values[index];
+    saveGetSelectedRecordSlot(slot)->count = count;
     return 1;
 }
 

@@ -4558,3 +4558,170 @@
 0037e730 constructTrackBase inferred Twin of smt4a constructTrackBase: same-named callers reference them at the same place (1 callers).
 0038b3e8 block88OwnerCheck inferred Twin of smt4a block88OwnerCheck: same-named callers reference them at the same place (1 callers).
 003bbb98 cecSendCardData inferred Twin of smt4a cecSendCardData: same-named callers reference them at the same place (1 callers).
+002499fc btlSideGetEntryRange inferred [high] maps side/group 1-4 to first entry index (0/0/55/59/63 mapping) and count (4) in the battle entry array; no twin.
+002bd954 uiSpriteStateInitFromSource inferred [high] wrapper that clears a UiSpriteState and copies channels from the resource source with id/scale (smt4a FUN_0014e188 identical).
+002c526c resultHandleFailure inferred [high] same as smt4a FUN_002e3140.
+0024c52c itemGetSortCategory inferred [med] maps a table record kind byte to category 0-4 (99 for none) used by category sort comparators; twin smt4a FUN_003a6868.
+0027da30 btlFindEntryBlockByMemberId inferred [med] scans battle entries for one whose member id list contains id and returns entry+0xCC; twin smt4a FUN_001568f8 (verify).
+00297060 scrScriptProcessCreate inferred [high] same as smt4a FUN_00275bc8.
+0029f848 gridNavigationConfigure inferred [high] same as smt4a FUN_00203b40.
+002b634c gpuWriteVertexUniformVec4 inferred [high] appends a float32 vec4 vertex-uniform write (reversed components) to the GPU command buffer; twin smt4a FUN_0019f828.
+002bbb74 gpuWriteVertexUniformMatrix inferred [high] emits register header and 4x4 matrix payload into the GPU command buffer; twin smt4a FUN_00187d90.
+002b7148 asdGxGetCommandCursor inferred [high] smt4 twin of smt4a asdGxGetCommandCursor (same call pattern in the GPU command emitters).
+00281e34 atan2f inferred [high] atan2f(y,x); twin of smt4a FUN_0050d8e4.
+00290e78 messageBannerIsIdle inferred [med] returns 1 when the message banner is absent or its state is 0.
+002bf810 soundPlaySeUnpanned inferred [med] calls soundPlaySePanned(id, 0) i.e. plays SE with default pan.
+0024ba44 fbinGetFile inferred [high] returns pointer to file `index` inside an FBIN archive (sums sizes after header); twin smt4a FUN_002bf384 identical source.
+002bbb2c sysReportCheckFailure inferred [med] stores key/address in a global fault record (code 0xBCA3) and runs the fault handler; twin smt4a FUN_0016e800.
+002387f8 rangeSetUnionInclusive inferred [med] same as smt4a FUN_00437cac (linked range list, same callers idListCheck/rangeListAllMatch).
+002bda30 basicSoundStopOrFadeOut inferred [high] stops a BasicSound immediately or ramps its fade volume to zero over fadeFrames.
+002b39f0 asdGxCommandListFinishCurrent inferred [high] advances the active command buffer to its next list, clears submit flags and runs the list callback; twin smt4a FUN_0017e4d8 (identical source).
+002bd06c dataTable01FindByIdWithAoc inferred [med] looks up a table-01 record by id preferring add-on lookup entries, else base table first entry.
+002bffe0 touchGetPointByMode inferred [high] reads touch x/y for held/pressed/triggered/released mode from the touch sample; twin smt4a FUN_00167c14 identical.
+002b9178 texTableEntryLoadSync inferred [high] builds the entry file path and synchronously loads/decompresses its texture; twin smt4a FUN_00169310 identical.
+00131898 keyedEntryListFindByKey inferred [high] linear search of a 0x30-byte-entry list for u16 key at +0x20; twin smt4a FUN_001763a4 identical.
+003f87cc frameCurveFindKeyAtTime inferred [high] returns last curve key at or before the time (estimated start index); twin smt4a FUN_0051d730 identical.
+0022a4ac btlHelpEntryCreate inferred [high] allocates a help entry (btlHelp.cpp) and appends it to the help list.
+0019fc50 tmxDecodeToTexture inferred [high] decodes a 4/8-bit paletted TMX image into an AsdTexture (AsdTexTMX.cpp); twin smt4a FUN_00226970.
+00270f70 mapAdjustPositionToGround inferred [med] tries +1 then up to five -15 y samples via a ground-check callback, keeping last candidate.
+002bff38 messageSetDisplayMode inferred [med] sets displayMode on the global message state when present.
+002b6b04 infoWindowIsActive inferred [med] returns whether g_infoWin->state is nonzero.
+0027d9e8 idSlotsFindEntryById inferred [med] scans 42 slot pointers and returns the entry whose id matches.
+002bdb48 asdGxCommandBufferTerminateAndSubmit inferred [med] terminates buffered GPU commands, enqueues a submission record and requests submission.
+002b4e00 fileHandleRead inferred [high] reads from an nn::fs file; in result-recording mode stores the result, else faults on failure; twin smt4a FUN_00174a00.
+0013041c fileHandleSeek inferred [high] seeks an nn::fs file (TrySeek) with result recording/fault; twin smt4a FUN_00174a64.
+002b6480 asdLoadFileAsyncDefault inferred [med] forwards five args to asdLoadFileAsync with mode fixed at 4; twin smt4a FUN_00168750 identical wrapper.
+002b70cc mathSinFixedAngle inferred [med] 256-entry table sine with 65536 period, odd symmetry and linear interpolation.
+002b8584 ifTouchRegionAddRequested inferred [med] appends the current requested touch rectangle (flags stripped) to the touch region list (max 200).
+00266f30 dataTable2AGetEntryWithAoc inferred [high] returns entry `index` of data table 0x2A, continuing into the add-on table past its end, else NULL.
+002e0094 vectorQueueClearActiveSlots inferred [med] clears the active byte of all 32 slots in g_vectorQueueWork.
+002b2988 asdModelRegisterImage inferred [high] registers a model image (raw or ATBC-wrapped MDLSIGN) into the loaded-model list (AsdModel.cpp).
+002bb5a4 archivePathDeviceOpen inferred [high] finds the device for a full path and opens it via ArchivePathDescriptor, storing the handle; twin smt4a FUN_001883b0.
+0024b96c btlGetActiveShareRating inferred [high] rates share of active units among the total (5 at >=70%, 4 from 40%, else 3, 5 when check fails); same code as smt4a FUN_0027099c.
+00247240 effectEditorObjectDestroy inferred [med] releases the object's texture and handle block then frees it; used by effectEditorReleaseObjects.
+00242914 btlUiObjCSetActive inferred [med] sets the battle UI objC state (value 0 clears) when the UI flag is released.
+00248f70 effPartClone inferred [high] copies a part: header words then clones every node and block in its list; twin smt4a FUN_00291038.
+00266a2c lmapUpdateMapBgm inferred [high] picks the map BGM id from area/kind/story override and starts it unless already playing, or releases it when suppressed; twin smt4a FUN_002df914.
+002ba78c uiResourceParametersInitDefault inferred [med] clears the parameter block and installs the default sprite resource packets; used by aocBootCreate and panel sprite init.
+0011890c asdMdlManagerMaintenanceCallback inferred [med] runs model-manager maintenance (FUN_001247f0) and returns 0 to acknowledge the callback.
+00138954 bustupCutAnimStartMove inferred [high] starts (or stops when target==0) a timed move of the cut job's position, raising start height by to-from; twin smt4a FUN_00185830 identical.
+00131530 aocPackageFindRecordById inferred [med] searches the kind-11 data tables of all loaded packages for a 0x2c-byte record with the given id (caller dataTable25FindById).
+002ac12c packageEntryIsLoaded inferred [high] Twin of smt4a FUN_001b315c: package entry validity check.
+002ac0f8 packageEntryGetDirectory inferred [high] Twin of smt4a FUN_001b31ac.
+002ac0c4 packageEntryGetFileCount inferred [high] Twin of smt4a FUN_001b31e0.
+002a6e7c packageFindFileByTypeAndId inferred [med] Twin of smt4a FUN_001b2bd8.
+002a6f48 packageKindToRecordKind inferred [med] Maps a kind id to its counterpart package record kind, -1 when none; twin of smt4a FUN_001b3214.
+002a60cc packageFileDisableByKindName inferred [med] Twin of smt4a FUN_001b2d54.
+002c58c8 asdTMTexTablePrepareNodeImage inferred [med] Fetches a table texture node, prepares it and sets its image (state |= 4); twin smt4a FUN_0014afd0.
+0028fb40 flagValueRead inferred [high] Twin of smt4a FUN_001ba3d4.
+003f9e30 libcVformat inferred [high] Twin of smt4a FUN_0051ec68.
+002a6114 texTableEntryStartLoad inferred [med] Builds directory+name+.stex/.cmp path for a texture table entry and starts asdLoadFileAsync.
+002ae9ec texTableRecordCallWithParams inferred [med] Twin of smt4a FUN_0017ffa8.
+0028836c libm_sinf inferred [high] Twin of smt4a FUN_001bc124.
+002c6a50 libcLocaleGetCtypeTable inferred [med] Returns libcLocaleGetTables()+4 (ctype table), used by toupper; smt4a twin FUN_002e2a98.
+001317c8 idEntryTableFindById inferred [high] Twin of smt4a FUN_001762d4.
+002a3d58 effPartInitDefaults inferred [med] Clears effect part record and installs default vectors/color/scalars; smt4a twin FUN_001b4ddc.
+002aff74 gpuSubmitPositionColorTexCoord inferred [med] Encodes position, packed color and uv as float24 and calls gpuSubmitVectorCommand; smt4a twin FUN_00184c50.
+00100b64 libc_vsprintf inferred [high] Formats into buffer via the byte-append callback and NUL-terminates, returns length; smt4a twin FUN_0010284c.
+002d602c soundArchiveLoadItem inferred [med] Loads an archive item with all load flags via the sound archive loader, returns bool; smt4a twin FUN_003418c0.
+002691d8 effBehaviorCreate evidence [high] Twin of smt4a FUN_002b2d74 (effBehavior.cpp allocation).
+002c5030 renderBindPreset inferred [med] Binds the requested render preset and its active color buffer unless rendering is suspended; smt4a twin FUN_00145084.
+0035fdc8 ipcRequestWithString inferred [med] IPC request passing a string and its length incl. terminator; smt4a twin FUN_00439c50 takes a wide string.
+0022e0fc entryCollectionSortByMode inferred [high] Sorts a collection's entries with the comparator selected by mode (table of 34), caching sortMode.
+002adba8 gpuSubmitCommandBlock inferred [med] Appends copied GPU words or enqueues external command block for submission.
+0033b960 nkmGrowEventLearnRandomSkill evidence [high] asdDebugTrace string names NkmGrowEvent.cpp; learns an eligible random skill excluding known and natural skills.
+0035777c cecInitializeServices inferred [med] Runs shared CEC (StreetPass) setup then service init.
+002c3dfc fsUnmountByName inferred [med] Removes a named mount from registry and releases its filesystem unless borrowed; smt4a twin FUN_001a0380.
+002c0a9c weightedTableRollNextValue inferred [med] Rolls next weighted choice for a table record with countdown flags; smt4a twin FUN_00148d68.
+002a4e18 bustupPlaceActiveSlot inferred [med] Twin of smt4a FUN_001ad1ac.
+002866b4 messageWindowShowOrPoll inferred [med] Selects message window by kind then opens it or polls until closed; twin smt4a FUN_0021bdac.
+002896bc screenFadesAllReady inferred [high] Returns 1 only if both fade slots (DAT_004d9758/976c) are ready; inverse of screenFadeIsBusy.
+0028c618 modelPartSetRotationDegrees inferred [med] Converts Vec3 degrees to radians and builds rotation matrix on owner->part->rotation.
+0023d2ec saveGetFlagRowTable inferred [med] Returns saveBlock+0x1c62c, the 8-byte-row flag table read by saveTestFlagRow; twin smt4a FUN_002c2710.
+00287728 screenFadeSlotReset inferred [high] Zeroes active/value/state/scale of fade slot[index]; twin smt4a FUN_00212204.
+0028c92c renderGetCameraViewMatrix inferred [med] Selects the active camera by stereo mode and copies its 3x4 matrix into a 4x4 out; twin smt4a FUN_001bced4.
+0028be84 uiSpriteOperationIsComplete inferred [med] Returns completion state if sprite operation mode 3 is active, else 1.
+00281bb0 effectNodeUpdateTransform inferred [med] Computes node world position = origin+offset and updates its matrix/children; twin smt4a FUN_0019c0e0.
+00232b68 itemApplyToMember inferred [med] Tests/applies an item record to party slot (-1 = player), called per slot by table08ApplyToParty; twin smt4a FUN_00287790.
+00145a98 passiveSkillCompareById inferred [high] qsort/bsearch comparator returning a->id - b->id on PassiveSkillRecord.
+00230f44 aocEntryGetSortOrder inferred [med] Looks up record by entry kind and returns its order field.
+00282be4 saveGetUnlockFlagBlock inferred [med] Returns saveBlock->block09874, the block read by unlockFlagTest.
+00289574 gameStateSetJumpRequest inferred [high] Fills g_gameState.jump.request with ids, flags -1 and five float values.
+0014147c compareU16Ascending inferred [high] Comparator returning *left - *right on u16.
+0014162c dataTable08Sub0FindById inferred [med] Linear search of table records by id; used by dataTable08Sub0GetRecord.
+0014148c dataTable08Sub1FindById inferred [med] Linear search of entry table by id; used by dataTable08Sub1GetRecord.
+00141548 dataTable08Sub2FindById inferred [med] Linear search of owner records by id; used by dataTable08Sub2GetRecord.
+0014ca60 dataTable40BsearchRecord inferred [med] bsearch of 0x68-byte records by u16 id; used by dataTable40FindById.
+001221b4 ringBufferGetFreeSize inferred [high] Returns capacity-used (0 if full).
+00128f00 soundMasterSetVolumeIfEnabled inferred [med] If enabled, stores value and applies it to master manager; called by nw_snd_SoundSystem_SetMasterVolume.
+002f5390 saveMediaReadBuffer inferred [med] Opens save stream by media kind (rom/archive/...) for read and reads buffer.
+002f55cc saveMediaWriteBuffer inferred [med] Opens file by media kind for write and writes buffer.
+0019dc90 mapTimerBanksReset inferred [med] Clears all 16 timer banks, counts, and 32 slots (id=-1) in map timer work.
+0014f408 huffmanDecompress inferred [high] Decodes GBA/BIOS-style Huffman stream (symbol width in header low nibble, tree, word output); twin smt4a FUN_001aeddc.
+0014f2c8 rleDecompress inferred [high] Decodes BIOS-style RLE (flag 0x80 = run of count+3) into destination; twin smt4a FUN_001aec9c.
+00233db8 aocLoadingTaskStart inferred [med] Stores request and creates 'Aoc loading CALC' process and 'Aoc loading DOWN' draw task once; twin smt4a FUN_0047bcdc.
+00142f30 asdGxCommandBufferGetCopyTarget inferred [med] Finds command buffer by handle, records written size if active, returns copy target of entries[index]; twin smt4a FUN_00196068.
+0014d2f8 nw_snd_internal_Util_BitFlag_GetValueOrZero inferred [med] Reads bit-flag value at index 1 of flags+4, returning 0 if absent; used by ReadPlayerInfo; twin smt4a FUN_001a8c20.
+00392b2c aocMenuDrawScreen inferred [med] Draw routine for the Aoc menu scene resource (stereo layout, effect submits); twin smt4a FUN_0047c00c.
+00398ba8 slotPickerDraw inferred [med] Draws the SlotPicker with fade scale; called by nameDrawIfVisible; twin smt4a FUN_00485718.
+003912a4 aocListMenuDrawRows inferred [med] Draws visible rows of an Aoc ListMenu with selection highlight; called by AocMenu::drawSelection; twin smt4a FUN_0047a484.
+003c28dc byteScreenFadeUpdateDraw inferred [med] Steps frame counter of ByteScreenFade by mode and draws overlay; called by naviMainDrawFade; twin smt4a FUN_004cf9ac.
+00289880 commonBgStopChildAndBeginTransition inferred [med] Stops common background child job and sets state 3 with progress/timer reset.
+00231434 asdTMTexTableGetEntryPlacement inferred [med] Reads tex table entry x,y and range (or masked defaults) into out params.
+00128cd8 nn_hid_DisableAccelerometer inferred [med] Parameterless hid service IPC request 0x12 (DisableAccelerometer), called from AccelerometerReader dtor.
+0028cb40 btlCommandMenuResolveLayout inferred [med] Maps active command menu page to screen layout and cursor index.
+0028660c btlTalkGetPortraitCode inferred [med] Maps talk bust-up portrait kind to a code (0x14 when no portrait).
+00337360 btlSummonLoadAndSpawn inferred [med] Per-frame step that loads/caches the summon resource and returns 1 once spawned.
+001c35e8 saveGetIndexedFlagBytes inferred [med] Returns saveBlock flag-byte array used by saveFlagBytesSetOneBased/gameTestIndexedAuxiliaryFlag; twin smt4a FUN_00261440.
+002efa00 saveLoadProcessLoadUpdate inferred [high] Update callback of the process created as "Load": allocates buffer, reads save payload, copies into game data.
+002efba0 saveLoadProcessSaveUpdate inferred [high] Update callback of the process created as "Save": builds payload from game data and writes it.
+002ef8e4 saveLoadProcessBootUpdate inferred [high] Update callback of the process created as "Boot" (SaveLoadProcess state machine).
+003c0880 btlTalkRunEventStep inferred [med] State machine step of the battle talk event, called from btlTalkJobUpdate with g_btlTalk.
+003c64ec btlDebugMenuUpdate inferred [med] Debug battle menu state machine (list box selection) dispatched by btlDebugDispatchCurrentJob.
+001f7380 effEmitterUpdate inferred [med] Per-frame update of EffectEmitter, wrapped by effEmitterAdvanceFrame.
+003934d0 aocTexCtrlParseResource inferred [med] Parses loaded resource file header (item A/B tables, strings) building texture control nodes; called by aocTexCtrlInit.
+0028a22c partyPanelReleaseResources inferred [med] Frees party panel script process, files and entries; body of campDestroy.
+0028250c mathRemPio2f inferred [med] fdlibm-style float argument reduction by pi/2 (multiplies by 2/pi, rounds); twin smt4a FUN_001bbde0.
+002bf288 texDrawTableEntryAtStoredOrigin inferred [high] Twin of smt4a FUN_001835b4 (same contract per TextureDrawCall.h).
+0025bed8 groupedFileTablesCountRecordsOfKind inferred [high] Sums record counts of table N across enabled file-table slots whose kind matches; twin smt4a FUN_0046c35c.
+002bf818 uiSpriteAdvanceAnimation inferred [med] Twin of smt4a FUN_00163aa4.
+002c5210 gxIsStereoscopic3dEnabled inferred [med] Twin of smt4a FUN_001696f4.
+002c5d80 renderCtxPackPassFlags inferred [med] Twin of smt4a FUN_001692ac.
+002bed3c gxResetColorQuadToWhite inferred [med] Twin of smt4a FUN_00183bb0.
+002bf380 texDrawCompositeSprite inferred [med] Twin of smt4a FUN_00164b5c.
+00247334 effGeomCreateRepeatedIndexList inferred [med] Twin of smt4a FUN_002b3b58.
+002c501c asdCameraGetSavedRenderPairs inferred [med] Twin of smt4a FUN_00152f54.
+0029c2cc modelRemoveFromSlotList inferred [med] Removes a model entry from the slot array's list, clears its attached flag and the slot's settings flag; twin smt4a FUN_00359370.
+00290994 uiDrawListScrollBar inferred [high] Draws a list scroll bar (frame, arrow buttons, proportional thumb); twin smt4a FUN_00344cd0.
+002566b4 effParticleSpawnCycleOrientation inferred [med] Allocates one of 64 particle slots and cycles its texture-coordinate orientation; twin smt4a FUN_00364578.
+00268fc4 effGeomCloneHandle inferred [med] Clones a record- or buffer-style effect geometry handle (caller effPolyTexClone); twin smt4a FUN_00271d28.
+002497f8 itemSortCompareByCategoryAndId inferred [med] Twin of smt4a FUN_003811ec.
+0028186c effectNodeUpdatePlacedChildren inferred [med] Twin of smt4a FUN_00182540.
+002be650 dataFindKindRecordWithAocOverrides inferred [med] Twin of smt4a FUN_0015f858.
+00291730 naviReleaseTextureNode inferred [med] Releases the navi object's texture-table node then frees table entry 0x33; called from naviReleaseMain/Destroy.
+00296dc4 gxEmitColoredQuad inferred [med] Emits a four-vertex primitive with per-corner color/position and submits default parameters.
+00258c04 statusCameraSetup inferred [med] Allocates the status camera work and fills lens/eye/direction/clip parameters, registers it; twin smt4a FUN_002a6dcc.
+0029a924 appGetRemainingCapacity inferred [med] Capacity of app id left after installed apps' costs (min 1), 0 if no record.
+002907a8 saveBlockGetPlaySeconds inferred [med] Returns the saved play-time seconds used by PlayLog and as fallback when the clock reads 0xffffffff.
+0029e874 gameSetIconDisplayEnabled inferred [med] Writes the game-data flag at 0x1E61 that gates drawing the three animated game icons (FUN_001cdef8 returns 0 when clear).
+00348e10 questRaiseMaxAvailableForArea inferred [high] Counts quests in the area that are currently available and raises the quest-center recorded maximum for that area if larger.
+003e0634 cecMessageBoxFindMessageByKey inferred [med] Finds a message by its eight-byte key in the selected inbox or outbox of a CEC message box; caller cecOutboxPost.
+002d9208 statusCameraResetDefaults inferred [med] Clears the status camera work and sets default lens (fov 35, near 0.1) and pose.
+0020ef14 btlGameOverJobUpdate inferred [med] Job update for game over: advances frame counter (cap 0xFFFF) and runs its state machine; caller btlGameOverCreateTasks.
+0015226c sndArchiveResolveWaveSoundInfo inferred [med] Returns header address plus the header's relative offset; used by SoundArchiveFileReader_ReadWaveSoundInfo; twin smt4a FUN_001b3c78.
+001522a0 sndArchiveResolveSequenceSoundInfo inferred [med] Header-relative offset resolver used by SoundArchiveFileReader_ReadSequenceSoundInfo; twin smt4a FUN_001b3c84.
+0015eea0 nnSndVoiceApplyStatusMessage inferred [med] Applies a status message to a voice (serial check, position, retiring playback nodes); caller nn_snd_CTR_VoiceManager_UpdateStatus; twin smt4a FUN_001d3008.
+0025009c gfxQuaternionToMatrix34 inferred [high] Builds the 3x4 rotation matrix of a quaternion via the camera workspace; twin smt4a FUN_002b4c30.
+003ea180 nw_font_ResFontBase_FillGlyph inferred [med] Fills a glyph record (texture, cell, widths) for a glyph index; caller nw_font_ResFontBase_GetGlyph; twin smt4a FUN_0050caf0.
+002c35b0 renderCtxResetFrameState inferred [med] Twin of smt4a FUN_001575cc.
+0011b6c8 timedJobBeginStop inferred [med] Twin of smt4a FUN_0015836c.
+00291e40 soundActorStartOnFreeChannel inferred [med] Starts a sound on an idle 3D sound actor channel (of 16) or picks the highest-priority-value player to replace; same code as smt4a FUN_003d4ed8.
+002505c0 btlQueueKeyedScalarReflectAction inferred [med] Queues a kind-0x31 reflect action with key and parameter, invalidating the secondary id when a duplicate exists; twin smt4a FUN_004fbc30.
+0025c650 linkedItemsRedirectToReplacement inferred [med] Redirects an item to share a replacement's resource, moving/promoting items that referenced either; twin smt4a FUN_003c2df0.
+00295eb0 uiStoreTextureEntryCenter inferred [high] Stores the center of a texture-table entry's rectangle (size override if present) into the target at 0x18; same code as smt4a FUN_00387240.
+002b8244 buttonHelpSetEnabled inferred [med] Twin of smt4a FUN_00169548.
+0029378c slotPlacementAssignSlotAndPosition inferred [med] Sets the state's slot and recomputes its stored position from the slot placement.
+003afd18 transferQueueForwardNext inferred [med] Twin of smt4a FUN_004acb54.
+00294090 eventResourceCacheAcquire inferred [high] Returns the cached event resource (16-slot cache) for an id, bumping its refcount, or creates one and optionally queues its file load (AOC first); callers eventCreate*BattleTexture.
+0029bb14 modelSetScale inferred [med] Stores the scale on the model owner and applies factor*scale to its first part; first call in animOwnerSetScale.
+00281e34 __hardfp_atan2f inferred The hardfp entry of atan2f: armcc compiles calls to atan2f under --fpu=vfpv2 to __hardfp_atan2f (as __hardfp_floorf). Twin of smt4a __hardfp_atan2f.

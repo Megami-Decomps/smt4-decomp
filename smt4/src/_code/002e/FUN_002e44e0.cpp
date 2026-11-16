@@ -16,7 +16,7 @@ typedef struct SortKey {
 } SortKey;
 
 s32 idIsAbove400(u32 id);
-s32 FUN_0024c52c(u32 id);
+s32 itemGetSortCategory(u32 id);
 s32 FUN_00257568(SortKey *a, SortKey *b);
 }
 
@@ -33,14 +33,14 @@ static __inline s32 sortKeyCompare(SortKey &a, SortKey &b)
         rankA = 99;
         orderA = 0;
     } else {
-        rankA = FUN_0024c52c(a.id);
+        rankA = itemGetSortCategory(a.id);
         orderA = reinterpret_cast<ItemData *>(dataTable40FindById(a.id))->order;
     }
     if (idIsAbove400(b.id)) {
         rankB = 99;
         orderB = 0;
     } else {
-        rankB = FUN_0024c52c(b.id);
+        rankB = itemGetSortCategory(b.id);
         orderB = reinterpret_cast<ItemData *>(dataTable40FindById(b.id))->order;
     }
     s32 diff = rankA - rankB;

@@ -10,7 +10,7 @@ int memAlloc(int, int, int, int, int, int);
 int FUN_001a1ee0(void);
 int FUN_001b63b0(void);
 int FUN_001b640c(void);
-int FUN_001bbde0(void);
+int mathRemPio2f(void);
 int FUN_001bc2f0(...);
 int FUN_001bc3e4(void);
 int FUN_00202178(...);
@@ -100,7 +100,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_001a1ee0. */
 /* Supplied declaration required: FUN_001b63b0. */
 /* Supplied declaration required: FUN_001b640c. */
-/* Supplied declaration required: FUN_001bbde0. */
+/* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: FUN_001bc2f0. */
 /* Supplied declaration required: FUN_001bc3e4. */
 /* Supplied declaration required: FUN_00202178. */
@@ -454,7 +454,7 @@ LAB_003c01a8:
   DAT_006472f0 = temp_v15;
   if ((temp_v12 & 2) != 0) {
     FUN_001b640c();
-    FUN_001bbde0();
+    mathRemPio2f();
     FUN_001bc2f0();
     VectorSignedToFloat((int)DAT_0059dbe4,(unsigned char)(temp_v13 >> 0x16) & 3);
     temp_v18 = DAT_006472dc;

@@ -6,11 +6,11 @@ extern "C" {
 extern BlinkFadeWork *g_eventEffect;
 extern BlinkFadeTexture DAT_0043df00[2];
 extern RenderCtx *g_titleScene;
-void FUN_002bed3c();
+void gxResetColorQuadToWhite();
 void renderCtxSelectStereoLayout(RenderCtx *context);
-u32 FUN_002c5d80(u32 value, bool enabled);
+u32 renderCtxPackPassFlags(u32 value, bool enabled);
 void efctSetSpeed(f32 speed);
-void FUN_002bf288(u32 flags, u32 table, s32 entry, u32 argument, TextureDrawPayloadIV payload);
+void texDrawTableEntryAtStoredOrigin(u32 flags, u32 table, s32 entry, u32 argument, TextureDrawPayloadIV payload);
 u32 packNibblesAndByte(u32 first, u32 second, u32 third);
 void renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
 
@@ -21,9 +21,9 @@ u8 FUN_002222e8(u32)
     if (work->visible == 0) {
         return 0;
     }
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     renderCtxSelectStereoLayout(g_titleScene);
-    renderCtxPushA(g_titleScene, FUN_002c5d80(1, false));
+    renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, false));
     renderCtxPushB(g_titleScene, packNibblesAndByte(6, 1, 0));
     renderCtxCalculateStereoParallax(g_titleScene, 0.25f);
     s32 firstEntry = DAT_0043df00[0].node * 1000;
@@ -31,16 +31,16 @@ u8 FUN_002222e8(u32)
     TextureDrawPayloadIV payload;
     payload.words[0] = 0;
     payload.words[1] = 250;
-    FUN_002bf288(2, DAT_0043df00[0].table, firstEntry, 0, payload);
+    texDrawTableEntryAtStoredOrigin(2, DAT_0043df00[0].table, firstEntry, 0, payload);
     renderStackPop(&g_titleScene->stackB);
     s32 secondEntry = DAT_0043df00[1].node * 1000;
     efctSetSpeed(1.0f);
     payload.words[0] = -work->position;
     payload.words[1] = 251;
-    FUN_002bf288(2, DAT_0043df00[1].table, secondEntry, 0, payload);
+    texDrawTableEntryAtStoredOrigin(2, DAT_0043df00[1].table, secondEntry, 0, payload);
     payload.words[0] = work->position;
-    FUN_002bf288(2, DAT_0043df00[1].table, secondEntry + 1, 0, payload);
-    FUN_002bed3c();
+    texDrawTableEntryAtStoredOrigin(2, DAT_0043df00[1].table, secondEntry + 1, 0, payload);
+    gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
     renderStackPop(&g_titleScene->stackA);
     return 0;

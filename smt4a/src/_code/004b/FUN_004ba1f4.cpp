@@ -8,7 +8,7 @@ extern "C" {
 extern const u8 DAT_00532924[];
 void paramsClearPacket(UiResourceParameters *packet);
 
-void FUN_0014e188(UiSpriteState *sprite, s32 imageBank, s32 animation, UiResourceParameters *packet, s32 flags, f32 scale);
+void uiSpriteStateInitFromSource(UiSpriteState *sprite, s32 imageBank, s32 animation, UiResourceParameters *packet, s32 flags, f32 scale);
 void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 key, s32 flags);
 void FUN_004cf7cc(SpritePresetBank *bank);
 void uiSpriteBankApplyPreset(SpritePresetBank *bank, s32 preset);
@@ -41,10 +41,10 @@ void FUN_004ba1f4(Menu4C *menu)
     // These three adjacent tables are anchored by the final table's retail data symbol.
     paramsInit(&parameters->packet, DAT_00532924 - 0x24, 0xc, DAT_00532924 - 0x18, 0x18, 0, 0, 0, 0, DAT_00532924, 0x38);
     for (s32 index = 0; index < 10; ++index) {
-        FUN_0014e188(reinterpret_cast<UiSpriteState *>(menu->rowsA10[index]), 0x1f, 0, &parameters->packet, 0x15, 1.0f);
+        uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(menu->rowsA10[index]), 0x1f, 0, &parameters->packet, 0x15, 1.0f);
         uiSpriteSetImageKeyframe(reinterpret_cast<UiSpriteState *>(menu->rowsA10[index]), 0, 0);
     }
-    FUN_0014e188(reinterpret_cast<UiSpriteState *>(menu->unkF88), 0x1f, 0, &parameters->packet, 0x15, 1.0f);
+    uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(menu->unkF88), 0x1f, 0, &parameters->packet, 0x15, 1.0f);
     FUN_004cf7cc(reinterpret_cast<SpritePresetBank *>(menu->blockA8));
     uiSpriteBankApplyPreset(reinterpret_cast<SpritePresetBank *>(menu->blockA8), 0xc);
 }

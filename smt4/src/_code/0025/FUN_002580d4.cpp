@@ -14,11 +14,11 @@ void FUN_002580d4(u32 target, u32 a, u32 b, u32 c)
     s32 context = partyMemberFindById(target);
 
     if (context != 0 && flagWordTestBit(context, 10) == 0 && flagWordTestBit(context, 2) == 0) {
-        FUN_002bf288(2, 0x24, 0x5b, a, b, c);
+        texDrawTableEntryAtStoredOrigin(2, 0x24, 0x5b, a, b, c);
         return;
     }
     if (itemGetFlagBit1(target) != 0) {
-        FUN_002bf288(2, 0x24, 0x5a, a, b, c);
+        texDrawTableEntryAtStoredOrigin(2, 0x24, 0x5a, a, b, c);
     }
 }
 

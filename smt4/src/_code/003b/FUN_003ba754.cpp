@@ -42,7 +42,7 @@ void bgmReleaseStopped(void);
 void mapDepartSetTarget(s32 first, s32 second, u32 third);
 s32 FUN_0027d8c8(void);
 void gameRestoreWorkSave(s32 kind);
-ScriptProcessWork *FUN_00297060(ScriptFile *file, u32 owner);
+ScriptProcessWork *scrScriptProcessCreate(ScriptFile *file, u32 owner);
 void scriptProcessSetMode(ScriptRunState *process, s32 mode);
 void soundChannelRequestIfEnabled(s32 id, s32 flag, s32 frames);
 void FUN_002a03d8(s32 channel, s32 frames);
@@ -54,7 +54,7 @@ s32 FUN_002c2a04(s32 channel);
 void FUN_003ba754(MapSceneView *scene)
 {
     ScriptRunState *process = reinterpret_cast<ScriptRunState *>(
-        FUN_00297060(scene->scriptFile, scene->scriptOwner));
+        scrScriptProcessCreate(scene->scriptFile, scene->scriptOwner));
     scene->scriptProcess = process;
     scriptProcessSetMode(process, 2);
     s32 mode = scene->mode;

@@ -18,7 +18,7 @@ int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int panelSetTarget(int);
 int gameSetStatusCameraHeightMode(...);
 int FUN_0038b010(int);
-int FUN_003fd7b4(unsigned int);
+int controllerSetPositionXyz(unsigned int);
 int FUN_0040aad4(int, int);
 int handleRegistryRegisterObject(unsigned int, unsigned int);
 int FUN_004954e8(int);
@@ -54,7 +54,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: gameSetStatusCameraHeightMode. */
 /* Supplied declaration required: FUN_0038b010. */
 /* Supplied declaration required: FUN_0038b57c. */
-/* Supplied declaration required: FUN_003fd7b4. */
+/* Supplied declaration required: controllerSetPositionXyz. */
 /* Supplied declaration required: FUN_0040aad4. */
 extern int FUN_0040ab8c(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
@@ -108,7 +108,7 @@ void _ZN9Obj53604412FUN_0049bd20Ev(int param_1)
       FUN_0040aad4(*(int *)(param_1 + 0x16028),0);
       temp_v2 = *(unsigned int *)(*(int *)(param_1 + 0x16028) + 4);
       handleRegistryRegisterObject(g_handleRegistry,temp_v2);
-      FUN_003fd7b4(temp_v2);
+      controllerSetPositionXyz(temp_v2);
     }
   }
   piVar6 = (int *)(param_1 + 0xb40);

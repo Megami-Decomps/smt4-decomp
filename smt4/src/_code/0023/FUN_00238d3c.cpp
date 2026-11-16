@@ -6,7 +6,7 @@ extern "C" {
 
 int threadSleepDuration(int, int);
 int FUN_002c40f8(unsigned char *, int *, int, int);
-int FUN_002c526c(void);
+int resultHandleFailure(void);
 int FUN_00358e78(int *);
 int software_interrupt(int);
 
@@ -27,7 +27,7 @@ extern int resourceDispatch(unsigned int);
 extern int FUN_00239a54(void);
 /* Supplied declaration required: threadSleepDuration. */
 /* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: FUN_002c526c. */
+/* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: FUN_00358e78. */
 extern unsigned int resourceDispatch2(int *);
 extern int FUN_0035ae94(unsigned int);
@@ -95,7 +95,7 @@ int FUN_00238d3c(int param_1,int param_2)
         temp_v7 = temp_v0;
         FUN_002c40f8(puVar5,&temp_v7,1,0);
         if ((int)puVar5 < 0) {
-          FUN_002c526c();
+          resultHandleFailure();
         }
         temp_v1 = temp_v3;
         if (((((unsigned int)puVar5 & 0x3ff) != 0x3fe) || (FUN_00358e78(temp_v6 + 2), temp_v6[2] == 1)) ||

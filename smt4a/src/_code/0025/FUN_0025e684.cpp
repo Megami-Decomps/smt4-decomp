@@ -15,7 +15,7 @@ typedef struct Holder {
     /* 0x62 */ u16 id;
 } Holder;
 
-Entry *FUN_002613f0(s32 index);
+Entry *saveGetSelectedRecordSlot(s32 index);
 
 /* Finds the entry (of 0x18) with the object's id: returns 0 when its three values are all 0 and 1 otherwise; 0 when there is no object or no match. */
 u16 FUN_0025e684(Holder *object)
@@ -26,11 +26,11 @@ u16 FUN_0025e684(Holder *object)
     if (object != NULL) {
         i = 0;
         do {
-            entry = FUN_002613f0(i);
+            entry = saveGetSelectedRecordSlot(i);
             if (entry->id == object->id) {
-                entry = FUN_002613f0(i);
-                if (((entry->a == 0) && (entry = FUN_002613f0(i), entry->b == 0)) &&
-                    (entry = FUN_002613f0(i), entry->c == 0)) {
+                entry = saveGetSelectedRecordSlot(i);
+                if (((entry->a == 0) && (entry = saveGetSelectedRecordSlot(i), entry->b == 0)) &&
+                    (entry = saveGetSelectedRecordSlot(i), entry->c == 0)) {
                     return 0;
                 }
                 return 1;

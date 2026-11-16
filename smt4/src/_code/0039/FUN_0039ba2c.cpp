@@ -19,17 +19,17 @@ extern RenderCtx *g_titleScene;
 extern const u8 DAT_00404c48[];
 extern TitleTextColor DAT_0044cdc8;
 void pairCopy(const Point2 *source, Point2 *destination);
-u32 FUN_002c5d80(u32 mode, u32 flags);
+u32 renderCtxPackPassFlags(u32 mode, u32 flags);
 void renderStackPushIndexed(RenderCtx *context, s32 stack, u32 state);
 void renderCtxPopState(RenderCtx *context, s32 stack);
 void efctSetSpeed(f32 speed);
-void FUN_002bed3c(void);
+void gxResetColorQuadToWhite(void);
 s32 vec2GetXInt(const UiSpriteState *sprite);
-void FUN_002bf380(u32 layer, u32 group, u32 index, s32 x, s32 y, u32 color);
+void texDrawCompositeSprite(u32 layer, u32 group, u32 index, s32 x, s32 y, u32 color);
 SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 id);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 f32 FUN_0028f4b4(const u8 *text, s32 mode, f32 scale);
-void FUN_002bf818(UiSpriteState *sprite);
+void uiSpriteAdvanceAnimation(UiSpriteState *sprite);
 s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 
 /* Draws the title banner and its centered caption; marks it complete once its closing animation ends. */
@@ -37,10 +37,10 @@ void FUN_0039ba2c(TitleBannerView *banner)
 {
     Point2 origin;
     pairCopy(&banner->origin, &origin);
-    renderStackPushIndexed(g_titleScene, 3, FUN_002c5d80(1, 0));
+    renderStackPushIndexed(g_titleScene, 3, renderCtxPackPassFlags(1, 0));
     efctSetSpeed(1.0f);
-    FUN_002bed3c();
-    FUN_002bf380(2, 28, 28, (s32)((f32)vec2GetXInt(&banner->sprite) + origin.x), (s32)origin.y, 211);
+    gxResetColorQuadToWhite();
+    texDrawCompositeSprite(2, 28, 28, (s32)((f32)vec2GetXInt(&banner->sprite) + origin.x), (s32)origin.y, 211);
     SpriteInfo *info = asdTMTexTableEntryAt(28, 0x111B);
     u8 text[64];
     __aeabi_memcpy4(text, DAT_00404c48, 45);
@@ -50,7 +50,7 @@ void FUN_0039ba2c(TitleBannerView *banner)
     textDrawString(2, DAT_0044cdc8.color, reinterpret_cast<const char *>(text), x, (f32)info->y + origin.y, 0.0f, 0.0f, 1.0f);
     renderCtxPopState(g_titleScene, 3);
     efctSetSpeed(1.0f);
-    FUN_002bf818(&banner->sprite);
+    uiSpriteAdvanceAnimation(&banner->sprite);
     if (banner->closing && uiSpriteGetCompletionState(&banner->sprite))
         banner->complete = 1;
 }

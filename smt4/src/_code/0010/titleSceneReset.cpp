@@ -4,7 +4,7 @@ extern "C" {
 
 extern TitleScene *g_titleScene;
 
-extern void FUN_002c35b0(s32 mode);
+extern void renderCtxResetFrameState(s32 mode);
 extern void FUN_002bdb44(void);
 extern void renderTargetClear(s32 a, s32 b);
 extern void FUN_002c3a14(TitleScene *scene);
@@ -15,7 +15,7 @@ u32 titleSceneReset(void)
 {
     TitleScene *scene;
 
-    FUN_002c35b0(0);
+    renderCtxResetFrameState(0);
     scene = g_titleScene;
     scene->stereoMode = 0;
     FUN_002bdb44();

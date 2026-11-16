@@ -13,7 +13,7 @@ typedef struct Owner {
 } Owner;
 
 extern s32 FUN_003fdae8(u32 handle);
-extern s32 FUN_003fe86c(u32 handle, s32 arg, s32 mode, f32 a, f32 b);
+extern s32 modelPlayClip(u32 handle, s32 arg, s32 mode, f32 a, f32 b);
 
 /* Lowers every child whose current value exceeds `level` down to it. */
 void childrenLowerToLevel(Owner *owner, s32 level)
@@ -27,7 +27,7 @@ void childrenLowerToLevel(Owner *owner, s32 level)
             u32 handle = child->handle;
 
             if (level < FUN_003fdae8(handle)) {
-                FUN_003fe86c(handle, level, 2, 0.0f, 0.0f);
+                modelPlayClip(handle, level, 2, 0.0f, 0.0f);
             }
         }
     }

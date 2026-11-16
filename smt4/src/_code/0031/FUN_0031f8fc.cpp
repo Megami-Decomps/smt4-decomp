@@ -9,7 +9,7 @@ int asdSetNormalizedColorRgba(unsigned int);
 int randomAdvanceShiftRegister(void);
 int shiftRandomNextFraction(int);
 int phaseCosInterpolate(void);
-int FUN_002b70cc(void);
+int mathSinFixedAngle(void);
 int VectorSignedToFloat(...);
 int __aeabi_idivmod(int, int);
 int __aeabi_uidivmod(void);
@@ -103,7 +103,7 @@ extern unsigned int FUN_00246c28(void);
 /* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: shiftRandomNextFraction. */
 /* Supplied declaration required: phaseCosInterpolate. */
-/* Supplied declaration required: FUN_002b70cc. */
+/* Supplied declaration required: mathSinFixedAngle. */
 /* Supplied declaration required: __aeabi_idivmod. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
@@ -270,7 +270,7 @@ void FUN_0031f8fc(fn_0031f8fc_arg0 *param_1)
                 temp_v24 = DAT_004ea91c;
                 temp_v26 = DAT_004ea920;
                 phaseCosInterpolate();
-                FUN_002b70cc();
+                mathSinFixedAngle();
                 temp_v24 = temp_v24 * temp_v27;
                 temp_v26 = temp_v26 * temp_v34;
                 temp_v32 = temp_v32 * -temp_v33;

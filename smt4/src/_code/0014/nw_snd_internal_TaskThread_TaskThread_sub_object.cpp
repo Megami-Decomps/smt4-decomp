@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0014db9c(void);
 int FUN_002bb020(void);
 int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
-int FUN_002c526c(void);
+int resultHandleFailure(void);
 int software_interrupt(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -19,7 +19,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0014db9c. */
 /* Supplied declaration required: FUN_002bb020. */
 /* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: FUN_002c526c. */
+/* Supplied declaration required: resultHandleFailure. */
 extern void nn_os_Thread_FinalizeImpl(unsigned int);
 
 
@@ -39,7 +39,7 @@ int * nw_snd_internal_TaskThread_TaskThread_sub_object(int *param_1)
     puVar1 = temp_v0;
     FUN_002c40f8(puVar1,&iStack_18,1,0,0xffffffff,0xffffffff);
     if ((int)puVar1 < 0) {
-      FUN_002c526c();
+      resultHandleFailure();
     }
     *(unsigned char *)(param_1 + 1) = 1;
     nn_os_Thread_FinalizeImpl((unsigned int)param_1);

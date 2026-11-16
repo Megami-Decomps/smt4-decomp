@@ -3,7 +3,7 @@
 
 extern "C" {
 extern const RegisterCommandData DAT_0053d500;
-void FUN_001b4120(const void *commands, u32 byteCount);
+void gpuSubmitCommandBlock(const void *commands, u32 byteCount);
 
 // Submit the preset register sequence with its first value selected by the caller.
 void FUN_00186948(u32 value)
@@ -12,6 +12,6 @@ void FUN_00186948(u32 value)
     packet.head = DAT_0053d500.head;
     packet.tail = DAT_0053d500.tail;
     packet.value = value << 8;
-    FUN_001b4120(&packet, sizeof(packet));
+    gpuSubmitCommandBlock(&packet, sizeof(packet));
 }
 }

@@ -4,9 +4,9 @@
 struct GroupedSectionRecord { u8 data[0x1C]; };
 
 extern "C" {
-u32 FUN_001b315c(FileTableGroup* group);
-const FileTableKindRecord* FUN_001b31ac(FileTableGroup* group);
-u32 FUN_001b31e0(FileTableGroup* group);
+u32 packageEntryIsLoaded(FileTableGroup* group);
+const FileTableKindRecord* packageEntryGetDirectory(FileTableGroup* group);
+u32 packageEntryGetFileCount(FileTableGroup* group);
 void* dataTableFileGetTable(void* file, u32 section);
 
 // Resolve an index across enabled groups' kind-37 table sections.
@@ -15,11 +15,11 @@ GroupedSectionRecord* dataFindGroupedSectionRecord(GroupedFileTables* tables, s3
     s32 base = 0;
     for (s32 groupIndex = 0; groupIndex < tables->count; ++groupIndex) {
         FileTableGroup* group = &tables->groups[groupIndex];
-        if (FUN_001b315c(group) == 0) {
+        if (packageEntryIsLoaded(group) == 0) {
             continue;
         }
-        const FileTableKindRecord* kinds = FUN_001b31ac(group);
-        u32 count = FUN_001b31e0(group);
+        const FileTableKindRecord* kinds = packageEntryGetDirectory(group);
+        u32 count = packageEntryGetFileCount(group);
         for (u32 slot = 0; slot < count; ++slot) {
             if (kinds[slot].kind == '%') {
                 void* table = dataTableFileGetTable(group->slots[slot].file, 3);

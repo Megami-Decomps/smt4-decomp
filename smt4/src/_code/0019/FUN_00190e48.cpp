@@ -7,7 +7,7 @@ extern "C" {
 
 int fadeObjectResetIfActive(...);
 int quadSetOrderedVectors(...);
-int FUN_002bf380(...);
+int texDrawCompositeSprite(...);
 int __aeabi_vec_ctor_nocookie_nodtor(float [24], unsigned char *, int, int);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(...);
@@ -54,7 +54,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: quadSetOrderedVectors. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
-/* Supplied declaration required: FUN_002bf380. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -201,35 +201,35 @@ void FUN_00190e48(void)
               temp_v1 = *(char *)(temp_v5 + temp_v7 + 0x4b8);
               if (temp_v0 != '\t') {
                 if (temp_v1 != '\0') {
-                  FUN_002bf288(2,0x12,4,temp_v9,temp_v10,0xb);
+                  texDrawTableEntryAtStoredOrigin(2,0x12,4,temp_v9,temp_v10,0xb);
                 }
                 else {
-                  FUN_002bf288(2,0x12,2,temp_v9,temp_v10,0xb);
+                  texDrawTableEntryAtStoredOrigin(2,0x12,2,temp_v9,temp_v10,0xb);
                 }
               }
               else if (temp_v1 != '\0') {
-                FUN_002bf380(2,0x12,2,temp_v9,temp_v10,0xb);
+                texDrawCompositeSprite(2,0x12,2,temp_v9,temp_v10,0xb);
               }
               else {
-                FUN_002bf380(2,0x12,6,temp_v9,temp_v10,0xb);
+                texDrawCompositeSprite(2,0x12,6,temp_v9,temp_v10,0xb);
               }
             }
             else if (*(char *)(temp_v5 + temp_v7 + 0x4b8) != '\0') {
-              FUN_002bf380(2,0x12,5,temp_v9,temp_v10,0xb);
+              texDrawCompositeSprite(2,0x12,5,temp_v9,temp_v10,0xb);
             }
             else {
-              FUN_002bf380(2,0x12,3,temp_v9,temp_v10,0xb);
+              texDrawCompositeSprite(2,0x12,3,temp_v9,temp_v10,0xb);
             }
           }
           else {
-            FUN_002bf380(2,0x12,0,temp_v9,temp_v10,0xb);
+            texDrawCompositeSprite(2,0x12,0,temp_v9,temp_v10,0xb);
           }
         }
         else if (*(char *)(temp_v5 + temp_v7 + 0x4b8) != '\0') {
-          FUN_002bf380(2,0x12,2,temp_v9,temp_v10,0xb);
+          texDrawCompositeSprite(2,0x12,2,temp_v9,temp_v10,0xb);
         }
         else {
-          FUN_002bf380(2,0x12,0,temp_v9,temp_v10,0xb);
+          texDrawCompositeSprite(2,0x12,0,temp_v9,temp_v10,0xb);
         }
       }
       temp_v10 = g_titleScene;
@@ -366,7 +366,7 @@ void FUN_00190e48(void)
             }
             temp_v20 = 0xf;
           }
-          FUN_002bf288(2,0x12,temp_v19,temp_v8,temp_v10,0xc);
+          texDrawTableEntryAtStoredOrigin(2,0x12,temp_v19,temp_v8,temp_v10,0xc);
           if (*(char *)(temp_v5 + temp_v7 + 0x4b8) != '\0') {
             temp_v25 = (float)VectorUnsignedToFloat(0,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v27 = (float)VectorUnsignedToFloat(0,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -389,7 +389,7 @@ void FUN_00190e48(void)
             temp_v39 = temp_v27;
             temp_v40 = temp_v28;
             quadSetOrderedVectors(&temp_v25,&temp_v29,&temp_v33,&temp_v37,0,1);
-            FUN_002bf288(2,0x12,temp_v20,temp_v8,temp_v10,0x10);
+            texDrawTableEntryAtStoredOrigin(2,0x12,temp_v20,temp_v8,temp_v10,0x10);
             temp_v6 = temp_v2 - 0x100;
             temp_v16 = (float)VectorUnsignedToFloat(temp_v6 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v16 = temp_v16 * temp_v17;
@@ -417,12 +417,12 @@ void FUN_00190e48(void)
             quadSetOrderedVectors(&temp_v37,&temp_v33,&temp_v29,&temp_v25,0,1);
           }
           else {
-            FUN_002bf288(2,0x12,temp_v20,temp_v8,temp_v10,0x10);
+            texDrawTableEntryAtStoredOrigin(2,0x12,temp_v20,temp_v8,temp_v10,0x10);
           }
         }
         if (temp_v0 != '\0') {
           temp_v4 = dataTable0eSub1GetId(*(unsigned short *)(temp_v5 + temp_v7 * 4 + 0x496) & 0xff);
-          FUN_002bf288(2,0x12,temp_v4,temp_v9,temp_v10,0xd);
+          texDrawTableEntryAtStoredOrigin(2,0x12,temp_v4,temp_v9,temp_v10,0xd);
         }
       }
       temp_v10 = g_titleScene;

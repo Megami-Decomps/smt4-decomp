@@ -4,10 +4,10 @@ extern "C" {
 
 void FUN_002bdb44(void);
 void renderTargetClear(s32 a, s32 b);
-void FUN_002c35b0(s32 arg);
+void renderCtxResetFrameState(s32 arg);
 void renderCtxSelectStereoLayout(TitleScene *scene);
 void FUN_002c3a14(TitleScene *scene);
-s32 FUN_002c5210(void);
+s32 gxIsStereoscopic3dEnabled(void);
 
 extern TitleScene *g_titleScene;
 extern struct {
@@ -17,10 +17,10 @@ extern struct {
 
 u32 renderCtxBeginPass(void)
 {
-    if (FUN_002c5210() == 1 && g_titleFlags.unk01 != 0) {
+    if (gxIsStereoscopic3dEnabled() == 1 && g_titleFlags.unk01 != 0) {
         TitleScene *scene;
 
-        FUN_002c35b0(1);
+        renderCtxResetFrameState(1);
         scene = g_titleScene;
         scene->stereoMode = 1;
         FUN_002bdb44();

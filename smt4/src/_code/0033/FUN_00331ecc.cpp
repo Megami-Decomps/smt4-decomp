@@ -35,7 +35,7 @@ void FUN_00331ecc(void)
   
   iVar12 = DAT_0043da90;
   piVar6 = &iStack_638;
-  FUN_002bf818(DAT_0043da90 + 0xd64);
+  uiSpriteAdvanceAnimation(DAT_0043da90 + 0xd64);
   iVar7 = FUN_0028f670();
   if ((((iVar7 == 0) && (iVar7 = FUN_002c09d0(0x418), iVar7 == 0)) ||
       ((iVar7 = FUN_0028f670(), iVar7 == 0 &&
@@ -793,7 +793,7 @@ LAB_003333b4:
           FUN_002a035c();
           FUN_002b8838(0x50);
           FUN_0029e890((int)*(char *)(iVar12 + 0xac),1);
-          FUN_0029e874(1);
+          gameSetIconDisplayEnabled(1);
           FUN_0029e788();
         }
         iVar7 = FUN_0029e0f8();

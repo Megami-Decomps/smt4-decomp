@@ -22,14 +22,14 @@ static __inline s32 gaugePercent(Gauge0039d35c *gauge)
 }
 
 s32 scrGetArg(s32 index);
-BattleGaugeOwner0039d35c *FUN_003eaf20(void *state);
+BattleGaugeOwner0039d35c *btlFindFirstEntryMatchingCategoryAndRequiredMask(void *state);
 void scrSetResult(s32 value);
 
 /* Script command: true when the battle gauge is filled to at least arg0 percent. */
 s32 scrCommBattleGaugeAtLeast(void)
 {
     s32 percent = scrGetArg(0);
-    BattleGaugeOwner0039d35c *owner = FUN_003eaf20(btlGetMainState());
+    BattleGaugeOwner0039d35c *owner = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
 
     if (owner != NULL && percent <= gaugePercent(&owner->gauge)) {
         scrSetResult(1);

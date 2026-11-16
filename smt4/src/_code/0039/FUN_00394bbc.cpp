@@ -15,7 +15,7 @@ struct ResourcePairEntry {
 extern "C" {
 extern ResourcePairEntry DAT_00435ea0[14];
 s32 jyoucyuGetTableEntry(u32 index);
-void FUN_002505c0(u32 param, u32 target, void *resource, s32 slot, s32 arg4, s32 arg5, s32 arg6);
+void btlQueueKeyedScalarReflectAction(u32 param, u32 target, void *resource, s32 slot, s32 arg4, s32 arg5, s32 arg6);
 
 static __inline ResourcePairEntry *findResourcePair(u32 id)
 {
@@ -37,10 +37,10 @@ u32 FUN_00394bbc(u32 id, u32 target)
         ResourcePairEntry *entry = findResourcePair(id);
         if (entry != NULL) {
             if (entry->first != NULL) {
-                FUN_002505c0(entry->firstParam, target, entry->first, 0, 1, 0, 0);
+                btlQueueKeyedScalarReflectAction(entry->firstParam, target, entry->first, 0, 1, 0, 0);
             }
             if (entry->second != NULL) {
-                FUN_002505c0(entry->secondParam, target, entry->second, 1, 1, 0, 0);
+                btlQueueKeyedScalarReflectAction(entry->secondParam, target, entry->second, 1, 1, 0, 0);
             }
         }
     }

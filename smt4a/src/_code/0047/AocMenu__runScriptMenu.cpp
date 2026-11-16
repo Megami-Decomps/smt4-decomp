@@ -49,7 +49,7 @@ struct AocGlobals {
 extern "C" {
 extern AocGlobals *g_aocMain;
 
-void FUN_0047bcdc(AocMenuProcess *process, s32 value);
+void aocLoadingTaskStart(AocMenuProcess *process, s32 value);
 void aocMenuSetButtonHelp(AocMenuProcess *process, s32 a, s32 b);
 void FUN_00476e58(AocMenuProcess *process, s32 unused, s32 next);
 AocMenuObject *windowCreateStatusOperation(AocMenuObject *object, s32 kind);
@@ -62,9 +62,9 @@ void obj04Finish(void);
 u32 flaggedValueHolderGetTotal(void *holder);
 u8 messageMainIsIdle(void);
 u8 panelIsMissingOrFlagClear(void);
-u32 FUN_002e1a18(u32 id);
+u32 buttonHelpIsActionActive(u32 id);
 void eventQueueAddUniqueIfValid(s32 event);
-void FUN_00169548(u32 mode);
+void buttonHelpSetEnabled(u32 mode);
 
 /* Runs one step of the menu process: 0 starts the script, 1 waits for input, 2 follows the screen's result, 3-5 chain the follow-up screens. */
 void AocMenu::runScriptMenu()
@@ -75,7 +75,7 @@ void AocMenu::runScriptMenu()
     switch (process->phase) {
     case 0:
         process->flags |= 0x10000;
-        FUN_0047bcdc(process, 3);
+        aocLoadingTaskStart(process, 3);
         scrScriptProcessStartEntry(process->script, tableGroupFindEntryIndex(process->table, "aoc_ExeDelete"));
         process->phase = 1;
         aocMenuSetButtonHelp(process, -1, 0);
@@ -111,7 +111,7 @@ void AocMenu::runScriptMenu()
     case 3:
         if (messageMainIsIdle() != 0) {
             scrScriptProcessStartEntry(process->script, tableGroupFindEntryIndex(process->table, "aoc_Deleted"));
-            FUN_00169548(0);
+            buttonHelpSetEnabled(0);
             aocMenuSetButtonHelp(process, 3, 1);
             process->phase = 4;
             return;
@@ -119,7 +119,7 @@ void AocMenu::runScriptMenu()
         return;
     case 4:
         scrRunOpcodesStub(process->script);
-        if (FUN_002e1a18(0x10) != 0) {
+        if (buttonHelpIsActionActive(0x10) != 0) {
             eventQueueAddUniqueIfValid(0x100020e);
             obj04Finish();
             process->phase = 5;

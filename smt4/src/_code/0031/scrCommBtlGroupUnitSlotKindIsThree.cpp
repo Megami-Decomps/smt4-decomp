@@ -7,7 +7,7 @@ extern BtlEntry *btlMainFindActiveEntry(void);
 extern u32 scrGetArg(u32 index);
 extern s32 scrSetResult(s32 value);
 extern u32 btlScriptResolveGroupArg(void);
-extern s32 FUN_002499fc(u32 group, s32 *start, s32 *count);
+extern s32 btlSideGetEntryRange(u32 group, s32 *start, s32 *count);
 
 /* Script command: pushes whether a present, non-excluded unit of the current group (or the active entry) with the group
  * id in argument 0 has kind 3 in the value slot of argument 1. */
@@ -20,7 +20,7 @@ u32 scrCommBtlGroupUnitSlotKindIsThree(void)
     s32 index;
 
     scrGetArg(2);
-    FUN_002499fc(btlScriptResolveGroupArg(), &start, &count);
+    btlSideGetEntryRange(btlScriptResolveGroupArg(), &start, &count);
     for (index = start; index < start + count; index++) {
         BtlEntry *unit = &btlGetMainState()->entries[index];
 

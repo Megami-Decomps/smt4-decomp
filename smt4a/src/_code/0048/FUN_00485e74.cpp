@@ -7,7 +7,7 @@
 extern "C" {
 
 int asdTMTexTableLoadTmx(int, int);
-int FUN_0014e188(...);
+int uiSpriteStateInitFromSource(...);
 int uiSpriteInitializeState(...);
 
 int uiSpriteSetKeyframe(...);
@@ -37,7 +37,7 @@ extern unsigned int DAT_00587f24; /* 0x587f24 */
 extern unsigned char DAT_00616ee4; /* 0x616ee4 */
 
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
-/* Supplied declaration required: FUN_0014e188. */
+/* Supplied declaration required: uiSpriteStateInitFromSource. */
 /* Supplied declaration required: uiSpriteInitializeState. */
 /* Supplied declaration required: paramsInit. */
 extern int gameFlagsGetBlock(void);
@@ -100,17 +100,17 @@ void FUN_00485e74(unsigned char *param_1)
   paramsInit(reinterpret_cast<UiResourceParameters *>(param_1 + 0xc20), &DAT_00532378,0x60,&DAT_005323d8,0x54,0,0,0,0,&DAT_0053242c,0x8c);
   temp_v2 = 0;
   do {
-    FUN_0014e188(param_1 + temp_v2 * 0x8c + 0xc40,0x13,0xfa1,param_1 + 0xc20,0x15);
+    uiSpriteStateInitFromSource(param_1 + temp_v2 * 0x8c + 0xc40,0x13,0xfa1,param_1 + 0xc20,0x15);
     uiSpriteSetKeyframe(param_1 + temp_v2 * 0x8c + 0xc40,4,0);
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 6);
-  FUN_0014e188(param_1 + 0x10a0,0x13,0x112d,param_1 + 0xc20,0x15);
+  uiSpriteStateInitFromSource(param_1 + 0x10a0,0x13,0x112d,param_1 + 0xc20,0x15);
   uiSpriteSetKeyframe(param_1 + 0x10a0,4,0);
-  FUN_0014e188(param_1 + 0x11b8,0x13,0x1135,param_1 + 0xc20,0x15);
+  uiSpriteStateInitFromSource(param_1 + 0x11b8,0x13,0x1135,param_1 + 0xc20,0x15);
   uiSpriteSetImageKeyframe(param_1 + 0x11b8,3,0);
-  FUN_0014e188(param_1 + 0x1244,0x13,0x112e,param_1 + 0xc20,0x15);
+  uiSpriteStateInitFromSource(param_1 + 0x1244,0x13,0x112e,param_1 + 0xc20,0x15);
   uiSpriteSetImageKeyframe(param_1 + 0x1244,5,0);
-  FUN_0014e188(param_1 + 0x112c,0x13,0x112e,param_1 + 0xc20,0x15);
+  uiSpriteStateInitFromSource(param_1 + 0x112c,0x13,0x112e,param_1 + 0xc20,0x15);
   uiSpriteSetKeyframe(param_1 + 0x112c,4,0);
   FUN_004cf7cc(param_1 + 0x4e4);
   *(unsigned int *)(param_1 + 0x1480) = 0;

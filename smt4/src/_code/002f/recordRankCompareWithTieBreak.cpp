@@ -4,9 +4,9 @@ extern "C" {
 
 s32 idIsAbove400(u32 id);
 s32 recordKindRank(u32 id);
-s32 FUN_002497f8(u32 *a, u32 *b);
+s32 itemSortCompareByCategoryAndId(u32 *a, u32 *b);
 
-/* Comparator: orders two ids by rank (ids above 400 rank 99, others by recordKindRank); ties go to FUN_002497f8. */
+/* Comparator: orders two ids by rank (ids above 400 rank 99, others by recordKindRank); ties go to itemSortCompareByCategoryAndId. */
 s32 recordRankCompareWithTieBreak(u32 *a, u32 *b)
 {
     s32 rankA;
@@ -27,7 +27,7 @@ s32 recordRankCompareWithTieBreak(u32 *a, u32 *b)
     if (order != 0) {
         return order;
     }
-    return FUN_002497f8(a, b);
+    return itemSortCompareByCategoryAndId(a, b);
 }
 
 } /* extern "C" */

@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(...);
 int qsort(int *, unsigned int, int, unsigned char *);
-int FUN_001568f8(int, int);
+int btlFindEntryBlockByMemberId(int, int);
 int sysMemClear(int *, int);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -30,7 +30,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: qsort. */
-/* Supplied declaration required: FUN_001568f8. */
+/* Supplied declaration required: btlFindEntryBlockByMemberId. */
 /* Supplied declaration required: sysMemClear. */
 extern int stateEntryFindById(int, unsigned int);
 extern int btlUnitGet(unsigned int);
@@ -99,7 +99,7 @@ LAB_003f15c0:
   }
   temp_v3 = param_1;
   temp_v17 = temp_v16;
-  FUN_001568f8(param_1,(int)*(short *)((int)param_2 + 0x6a));
+  btlFindEntryBlockByMemberId(param_1,(int)*(short *)((int)param_2 + 0x6a));
   temp_v3 = stateEntryFindById(param_1,*(unsigned int *)(temp_v3 + 0xc));
   if (temp_v3 == 0) {
     return 0;
@@ -140,7 +140,7 @@ LAB_003f15c0:
         if (temp_v7 == temp_v2) {
           temp_v5 = aiStack_104[temp_v7];
           temp_v3 = param_1;
-          FUN_001568f8(param_1,(int)*(short *)(temp_v5 + 0x6a));
+          btlFindEntryBlockByMemberId(param_1,(int)*(short *)(temp_v5 + 0x6a));
           temp_v1 = 0;
           do {
             temp_v4 = *(int *)(param_1 + temp_v1 * 4 + 0x216c);
@@ -172,7 +172,7 @@ LAB_003f1784:
         else {
           temp_v5 = aiStack_104[temp_v7 + 1];
           temp_v3 = param_1;
-          FUN_001568f8(param_1,(int)*(short *)(temp_v5 + 0x6a));
+          btlFindEntryBlockByMemberId(param_1,(int)*(short *)(temp_v5 + 0x6a));
           temp_v1 = 0;
           do {
             temp_v4 = *(int *)(param_1 + temp_v1 * 4 + 0x216c);
@@ -219,7 +219,7 @@ LAB_003f1864:
       return 0;
     }
     temp_v1 = param_1;
-    FUN_001568f8(param_1,(int)*(short *)(temp_v3 + 0x6a));
+    btlFindEntryBlockByMemberId(param_1,(int)*(short *)(temp_v3 + 0x6a));
     temp_v1 = stateEntryFindById(param_1,*(unsigned int *)(temp_v1 + 0xc));
     if (temp_v1 == 0) {
       return 0;

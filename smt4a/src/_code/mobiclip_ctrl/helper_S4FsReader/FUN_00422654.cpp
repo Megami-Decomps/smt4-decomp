@@ -37,12 +37,12 @@ void FUN_00422654(S4FsReader *reader)
     s32 result = nn::svc::SignalEvent(reader->stopEvent);
     bool failed = nnResultIsFailure(result);
     if (failed) {
-        FUN_002e3140(result, failed);
+        resultHandleFailure(result, failed);
     }
     result = svcWaitSynchronization1(reader->threadHandle, -1);
     failed = nnResultIsFailure(result);
     if (failed) {
-        FUN_002e3140(result, failed);
+        resultHandleFailure(result, failed);
     }
     reader->threadJoined = 1;
     nn_os_Thread_FinalizeImpl(&reader->threadHandle);

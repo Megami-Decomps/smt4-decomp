@@ -5,7 +5,7 @@ struct EffectVec4 {
     f32 x, y, z, w;
 };
 
-/* Scratch values shared by the effect drawing code (see FUN_00281bb0). */
+/* Scratch values shared by the effect drawing code (see effectNodeUpdateTransform). */
 extern struct EffectScratch {
     u8 unk00[0x100];
     EffectVec4 modulate;    // 0x100: current color scale

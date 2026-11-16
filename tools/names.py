@@ -100,6 +100,10 @@ class Game:
                         other["source"] = unit["source"]
                 self.files.append((old_source, unit["source"]))
             self.stems[old_stem] = new_stem
+        # Units compiled together with it (armcc --multifile) name it in their "multifile" list.
+        for other in self.units.values():
+            if old in other.get("multifile", ()):
+                other["multifile"] = [new if name == old else name for name in other["multifile"]]
         self.renamed.append((old, new))
 
     def name_global(self, address, new, size=None):

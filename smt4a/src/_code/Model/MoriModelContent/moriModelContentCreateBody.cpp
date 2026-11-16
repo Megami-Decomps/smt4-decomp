@@ -4,13 +4,13 @@
 #include "Model/MoriModelContent.h"
 
 extern "C" {
-void *FUN_00178b04(u32 size, const char *file, int line);
+void *asdMemoryAllocTraced(u32 size, const char *file, int line);
 extern char DAT_00526000[];     /* "c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelContent.cpp" */
 
 static __inline Obj557b18 *moriModelBodyCreate(UnitModelContent *source, u32 arg)
 {
     Obj557b18 *body = static_cast<Obj557b18 *>(
-        FUN_00178b04(sizeof(Obj557b18), DAT_00526000, 0xef));
+        asdMemoryAllocTraced(sizeof(Obj557b18), DAT_00526000, 0xef));
     if (body != NULL) {
         body = new (body) Obj557b18(source, 0, arg);
     }

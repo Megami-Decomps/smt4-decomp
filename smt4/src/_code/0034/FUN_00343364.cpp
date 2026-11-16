@@ -5,7 +5,7 @@
 extern "C" {
 u32 asdGxPresetsGetHeightByKind(u32 mode);
 u32 asdGxPresetsGetByKind(u32 mode);
-s32 FUN_002c5d80(u32 kind, u8 enabled);
+s32 renderCtxPackPassFlags(u32 kind, u8 enabled);
 s32 flagsPackFourBooleans(u8 first, u8 second, u8 third, u8 fourth);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);
 s32 FUN_00310578(u32 kind, u32 value, u32 alpha);
@@ -32,7 +32,7 @@ void FUN_00343364(RenderCtx *context, u32 color, u32 alpha, u32 flags, f32 scale
         nibble = 2;
     }
     renderCtxSelectTexture(context, 0);
-    renderCtxPushA(context, FUN_002c5d80(1, second));
+    renderCtxPushA(context, renderCtxPackPassFlags(1, second));
     renderCtxPushC(context, FUN_002865c0(1, 0.0f));
     renderCtxPushG(context, flagsPackFourBooleans(first, first, first, first));
     renderCtxPushB(context, packNibblesAndByte(1, 0, 0));

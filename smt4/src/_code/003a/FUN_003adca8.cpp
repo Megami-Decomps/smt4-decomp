@@ -17,10 +17,10 @@ struct BattleUiGlobal {
 extern "C" {
 extern BattleUiGlobal g_btlUi;
 
-u32 FUN_002c501c(void);
+u32 asdCameraGetSavedRenderPairs(void);
 void FUN_002630e0(f32 *vector, s32 a, u32 stereo);
 void spriteStartAnimationByIndex(u8 *sprite, s32 animation);
-void FUN_00295eb0(u8 *sprite, s32 group, s32 part);
+void uiStoreTextureEntryCenter(u8 *sprite, s32 group, s32 part);
 void FUN_002963ec(u8 *sprite, s32 x, s32 y);
 void pairSetFirstResetSecond(u8 *sprite, s32 id);
 LayoutSize *asdTMTexTableEntryAt(s32 group, u32 part);
@@ -35,7 +35,7 @@ void FUN_003adca8(u32 unused1, s32 slot, s32 value, u32 unused2, f32 x, f32 y, f
     f32 position[3] = { x, y, z };
     u8 *block = g_btlUi.block;
     if (stereo != 0)
-        FUN_002630e0(position, 0, FUN_002c501c());
+        FUN_002630e0(position, 0, asdCameraGetSavedRenderPairs());
     u8 *popup = block + slot * 0x400;
     popup[0x832C] = 1;
     popup[0x832D] = (u8)stereo;
@@ -49,7 +49,7 @@ void FUN_003adca8(u32 unused1, s32 slot, s32 value, u32 unused2, f32 x, f32 y, f
         *(u32 *)(popup + digit * 4 + 0x8330) = 0;
         u8 *sprite = popup + digit * 0x8C + 0x7F4C;
         spriteStartAnimationByIndex(sprite, 3);
-        FUN_00295eb0(sprite, 0x15, digit + 0x41A);
+        uiStoreTextureEntryCenter(sprite, 0x15, digit + 0x41A);
         FUN_002963ec(sprite, (s16)(s32)position[0], (s16)(s32)position[1]);
         s32 base;
         if (negative == 0)
@@ -81,8 +81,8 @@ void FUN_003adca8(u32 unused1, s32 slot, s32 value, u32 unused2, f32 x, f32 y, f
             pairSetFirstResetSecond(second, 0x3ED);
         }
     }
-    FUN_00295eb0(first, 0x15, 0x419);
-    FUN_00295eb0(second, 0x15, 0x418);
+    uiStoreTextureEntryCenter(first, 0x15, 0x419);
+    uiStoreTextureEntryCenter(second, 0x15, 0x418);
     LayoutSize *size = asdTMTexTableEntryAt(0x15, *(u32 *)(popup + 0x820C));
     FUN_002963ec(first, -((size->width & 0x7FFF) >> 1), -((size->height & 0x7FFF) >> 1));
     FUN_002963ec(first, (s16)(s32)position[0], (s16)(s32)position[1]);

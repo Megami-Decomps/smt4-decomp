@@ -22,9 +22,9 @@ void textFormatBuffer(char *output, const char *format, ...);
 AsdMdlObject *asdMdlManagerCreateLoaded(const char *path, u32 group);
 void lightOwnerRegister(AsdMdlObject *model, u32 enabled);
 void nodeSetTranslation(AsdMdlNode *node, s32 index, const TransformVec3 *position);
-void FUN_0028c618(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
+void modelPartSetRotationDegrees(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
 void nodeSetScale(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
-void FUN_002c58c8(u32 group, u32 id);
+void asdTMTexTablePrepareNodeImage(u32 group, u32 id);
 
 // Create the fast-travel marker at the requested position and heading, then start its map cue.
 void mapFastMarkerCreate(f32 x, f32 y, f32 z, f32 heading)
@@ -43,9 +43,9 @@ void mapFastMarkerCreate(f32 x, f32 y, f32 z, f32 heading)
     pose->model = asdMdlManagerCreateLoaded(path, 7);
     lightOwnerRegister(pose->model, 1);
     nodeSetTranslation(pose->model->node, 0, &pose->position);
-    FUN_0028c618(pose->model->node, 0, 0.0f, pose->heading, 0.0f);
+    modelPartSetRotationDegrees(pose->model->node, 0, 0.0f, pose->heading, 0.0f);
     nodeSetScale(pose->model->node, 0, 50.0f, 50.0f, 50.0f);
-    FUN_002c58c8(10, 37);
+    asdTMTexTablePrepareNodeImage(10, 37);
     state->unkCCD8 = 1;
     state->unkCCDC = 0;
 }

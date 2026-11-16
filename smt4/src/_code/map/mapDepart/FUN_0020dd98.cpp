@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0028250c(void);
+int mathRemPio2f(void);
 int FUN_002ba1e0(...);
 int mapIfDrawBackground(void);
 int VectorFloatToUnsigned(...);
@@ -81,9 +81,9 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0028250c. */
+/* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: FUN_002ba1e0. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: mapIfDrawBackground. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
@@ -158,7 +158,7 @@ void FUN_0020dd98(void)
   }
   mapIfDrawBackground();
   temp_v1 = g_titleScene;
-  temp_v0 = FUN_002c5d80(5,0);
+  temp_v0 = renderCtxPackPassFlags(5,0);
   piVar8 = (int *)(temp_v1 + 0x124c);
   temp_v2 = *piVar8;
   temp_v3 = piVar8[temp_v2 + 2];
@@ -214,7 +214,7 @@ void FUN_0020dd98(void)
     else {
       temp_v16 = (float)VectorSignedToFloat(temp_v1 - 0xf,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v16 = temp_v16 * 1.57f * 0.06666667f;
-      FUN_0028250c();
+      mathRemPio2f();
       temp_v16 = (temp_v13 - temp_v16) * 64.0f;
       temp_v46 = (unsigned int)temp_v16;
       if ((int)temp_v46 < 0) {
@@ -228,7 +228,7 @@ void FUN_0020dd98(void)
   else {
     temp_v10 = (float)VectorSignedToFloat(temp_v1 - 0xf,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v10 = temp_v10 * 1.57f * 0.06666667f;
-    FUN_0028250c();
+    mathRemPio2f();
     temp_v16 = (temp_v13 - temp_v10) * temp_v16;
     temp_v46 = (unsigned int)temp_v16;
     if ((int)temp_v46 < 0) {

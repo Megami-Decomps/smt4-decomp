@@ -7,7 +7,7 @@ extern "C" {
 s32 vec2GetYInt(const UiSpriteState *sprite);
 void efctSetSpeed(f32 scale);
 f32 vec2GetSpeed(const void *object);
-void FUN_00344cd0(void *controller, s32 x, s32 y, u32 texture,
+void uiDrawListScrollBar(void *controller, s32 x, s32 y, u32 texture,
     s32 firstImage, s32 secondImage, s32 thirdImage, s32 fourthImage,
     s32 fifthImage, s32 sixthImage, s32 seventhImage,
     s32 selected, s32 first, s32 second, u32 flags, s32 mode);
@@ -32,10 +32,10 @@ void FUN_0049d594(void *panel)
     f32 scale = vec2GetSpeed(&work->sprite);
     efctSetSpeed(scale);
     for (s32 index = 0; index < 5; ++index)
-        FUN_001835b4(2, 0x33, index + 0x39, x, y, index + 0xbf);
+        texDrawTableEntryAtStoredOrigin(2, 0x33, index + 0x39, x, y, index + 0xbf);
     for (s32 index = 0; index < 9; ++index) {
-        FUN_001835b4(2, 0x33, index * 2 + 0x3e, x, y, index + 0xc4);
-        FUN_001835b4(2, 0x33, index * 2 + 0x3f, x, y, index + 0xc5);
+        texDrawTableEntryAtStoredOrigin(2, 0x33, index * 2 + 0x3e, x, y, index + 0xc4);
+        texDrawTableEntryAtStoredOrigin(2, 0x33, index * 2 + 0x3f, x, y, index + 0xc5);
     }
     efctSetSpeed(1.0f);
     FUN_0049d938(work, x, y, scale);
@@ -43,7 +43,7 @@ void FUN_0049d594(void *panel)
     s32 first = work->first;
     s32 second = work->second;
     s32 selected = work->selected;
-    FUN_00344cd0(work->controller, x, y, 0x33,
+    uiDrawListScrollBar(work->controller, x, y, 0x33,
         0x50, 0x51, 0x52, 0x53, 0x54, 0x55, 0x56,
         selected, first, second, 0x6a, 0);
     efctSetSpeed(1.0f);
@@ -57,7 +57,7 @@ void FUN_0049d594(void *panel)
     case 5:
     case 6:
         efctSetSpeed(scale);
-        FUN_001835b4(2, 0x33, 0x7e, x, y, 0xc9);
+        texDrawTableEntryAtStoredOrigin(2, 0x33, 0x7e, x, y, 0xc9);
         break;
     }
     efctSetSpeed(1.0f);

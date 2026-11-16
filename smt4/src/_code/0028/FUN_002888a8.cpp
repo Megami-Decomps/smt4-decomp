@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002b0750(...);
-int FUN_002bed3c(void);
+int gxResetColorQuadToWhite(void);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -27,7 +27,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002b0750. */
-/* Supplied declaration required: FUN_002bed3c. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
@@ -116,7 +116,7 @@ void FUN_002888a8(int param_1,int param_2,int param_3,int param_4,unsigned int p
       }
       temp_v5 = g_titleScene;
       if (temp_v4 == 0) {
-        FUN_002bed3c();
+        gxResetColorQuadToWhite();
         return;
       }
       if (param_11 != 0) {
@@ -144,7 +144,7 @@ void FUN_002888a8(int param_1,int param_2,int param_3,int param_4,unsigned int p
       temp_v5 = piVar6[*piVar6 + 2];
       piVar6[*piVar6 + 2] = temp_v0;
       if (*(char *)(temp_v1 + 0x12c4) == '\0' && temp_v5 == temp_v0) {
-        FUN_002bed3c();
+        gxResetColorQuadToWhite();
         return;
       }
     }
@@ -169,7 +169,7 @@ void FUN_002888a8(int param_1,int param_2,int param_3,int param_4,unsigned int p
       }
       temp_v2 = g_titleScene;
       if (temp_v1 == 0) {
-        FUN_002bed3c();
+        gxResetColorQuadToWhite();
         return;
       }
       if (param_11 != 0) {
@@ -197,7 +197,7 @@ void FUN_002888a8(int param_1,int param_2,int param_3,int param_4,unsigned int p
       temp_v5 = piVar6[*piVar6 + 2];
       piVar6[*piVar6 + 2] = temp_v0;
       if (*(char *)(temp_v1 + 0x12c4) == '\0' && temp_v5 == temp_v0) {
-        FUN_002bed3c();
+        gxResetColorQuadToWhite();
         return;
       }
     }
@@ -210,7 +210,7 @@ void FUN_002888a8(int param_1,int param_2,int param_3,int param_4,unsigned int p
     }
     FUN_002b0750(2,param_5,param_6,param_9,temp_v10,temp_v1,(int)psVar2[1],temp_v11);
   }
-  FUN_002bed3c();
+  gxResetColorQuadToWhite();
   return;
 }
 

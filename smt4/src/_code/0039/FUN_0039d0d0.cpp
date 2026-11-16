@@ -8,12 +8,12 @@ int pairCopy(int, float *);
 int effectSetByteSpeed(...);
 int FUN_002b0750(...);
 int drawSetColorFromRGBA8(...);
-int FUN_002bed3c(void);
+int gxResetColorQuadToWhite(void);
 int renderCtxPopState(...);
 int renderStackPushIndexed(...);
 int FUN_002c0944(...);
 int renderCtxSelectTexture(...);
-int FUN_002c5d80(...);
+int renderCtxPackPassFlags(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
@@ -37,12 +37,12 @@ extern signed char DAT_0049fd00; /* 0x49fd00 */
 /* Supplied declaration required: effectSetByteSpeed. */
 /* Supplied declaration required: FUN_002b0750. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: FUN_002bed3c. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
 /* Supplied declaration required: FUN_002c0944. */
 /* Supplied declaration required: renderCtxSelectTexture. */
-/* Supplied declaration required: FUN_002c5d80. */
+/* Supplied declaration required: renderCtxPackPassFlags. */
 
 
 void FUN_0039d0d0(int param_1)
@@ -62,7 +62,7 @@ void FUN_0039d0d0(int param_1)
   
   pairCopy(param_1 + 0x164,&temp_v7);
   if (DAT_0049fcfc == 0) {
-    temp_v1 = FUN_002c5d80(1);
+    temp_v1 = renderCtxPackPassFlags(1);
     renderStackPushIndexed(g_titleScene,3,temp_v1);
     renderCtxSelectTexture(g_titleScene,0);
     temp_v3 = 0;
@@ -86,7 +86,7 @@ void FUN_0039d0d0(int param_1)
     }
     renderCtxPopState(g_titleScene,3);
   }
-  temp_v1 = FUN_002c5d80(3,0);
+  temp_v1 = renderCtxPackPassFlags(3,0);
   renderStackPushIndexed(g_titleScene,3,temp_v1);
   temp_v3 = 0;
   if (temp_v3 < *(int *)(param_1 + 0x61b0)) {
@@ -108,7 +108,7 @@ void FUN_0039d0d0(int param_1)
   }
   renderCtxPopState(g_titleScene,3);
   if (DAT_0049fd00 != '\0') {
-    temp_v1 = FUN_002c5d80(1,0);
+    temp_v1 = renderCtxPackPassFlags(1,0);
     renderStackPushIndexed(g_titleScene,3,temp_v1);
     renderCtxSelectTexture(g_titleScene,0);
     temp_v3 = 0;
@@ -147,7 +147,7 @@ void FUN_0039d0d0(int param_1)
     }
     renderCtxPopState(g_titleScene,3);
   }
-  temp_v1 = FUN_002c5d80(1,0);
+  temp_v1 = renderCtxPackPassFlags(1,0);
   renderStackPushIndexed(g_titleScene,3,temp_v1);
   temp_v3 = 0;
   if (temp_v3 < *(int *)(param_1 + 0x5a88)) {
@@ -167,7 +167,7 @@ void FUN_0039d0d0(int param_1)
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < *(int *)(param_1 + 0x5a88));
   }
-  FUN_002bed3c();
+  gxResetColorQuadToWhite();
   renderCtxPopState(g_titleScene,3);
   return;
 }

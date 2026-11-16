@@ -62,13 +62,13 @@ u32 FUN_00186118(u32 handle, u32 *argument);
 void FUN_00187e08(MoriUnit *unit, u32 resource, u32 first, u32 second, u32 third);
 void FUN_0018f69c(ModelTextureBindings *model, u8 *matrix, u8 *replacementCommands, const u8 *originalCommands);
 void FUN_0018f9c0(MaterialTextureBinding *binding, u8 *matrix);
-void *FUN_00178b04(u32 bytes, const char *file, s32 line);
+void *asdMemoryAllocTraced(u32 bytes, const char *file, s32 line);
 }
 
 /* The engine's tracked allocator: file and line of the allocation site. */
 static inline void *operator new(u32 bytes, const char *file, s32 line) throw()
 {
-    return FUN_00178b04(bytes, file, line);
+    return asdMemoryAllocTraced(bytes, file, line);
 }
 
 extern "C" void FUN_0016c88c(const MoriUnitSpec *spec, MoriUnit *unit, u32 unused, u32 argument)

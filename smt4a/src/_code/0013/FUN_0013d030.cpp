@@ -3,7 +3,7 @@
 
 extern "C" {
 
-u8 FUN_00154edc(u32 mode, JobSurface *surface);
+u8 gxCopyFramebufferToSurface(u32 mode, JobSurface *surface);
 s32 stateValuesGetBySelector(void);
 
 
@@ -25,10 +25,10 @@ s32 FUN_0013d030(u32 job)
     if (work->captureBlocked || work->enabled) {
         return 0;
     }
-    FUN_00157558(g_renderCtx);
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     ((JobSurface *)work->bufferC)->width = 512;
     ((JobSurface *)work->bufferC)->height = 512;
-    work->captureResult = FUN_00154edc(0, (JobSurface *)work->bufferC);
+    work->captureResult = gxCopyFramebufferToSurface(0, (JobSurface *)work->bufferC);
     work->capturedC = 1;
     return 0;
 }

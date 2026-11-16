@@ -40,12 +40,12 @@ void FUN_0041a270(ModelEffects *effects)
     for (s32 index = 0; index < table->count; ++index) {
         ModelEffectEntry *source = table->entries[index];
         if ((source->flags & 1) != 0) {
-            void *memory = FUN_00178b04(sizeof(ModelEffectEntry), DAT_00526044, 0xC9);
+            void *memory = asdMemoryAllocTraced(sizeof(ModelEffectEntry), DAT_00526044, 0xC9);
             ModelEffectEntry *entry = memory != NULL ? initEntry(static_cast<ModelEffectEntry *>(memory)) : NULL;
             entry->id = source->id;
             entry->flags = source->flags;
             entry->unk08 = source->unk08;
-            entry->unk0C = FUN_00291038(source->unk0C);
+            entry->unk0C = effPartClone(source->unk0C);
             filtered->items[copied++] = entry;
         }
     }

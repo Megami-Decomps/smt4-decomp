@@ -30,7 +30,7 @@ void FUN_0026a958(u8 value);
 void FUN_001e1874(BattleMainState* state);
 void scrResultStopJobAndReleaseUi(void);
 u32 FUN_002c40f8(s32* signalled, s32* handles, s32 count, s32 waitAll, u32 timeoutLow, u32 timeoutHigh);
-void FUN_002c526c(void);
+void resultHandleFailure(void);
 void nn_os_Thread_FinalizeImpl(u32* thread);
 void FUN_002c3f5c(u32 object);
 void asdMemFreeNonNull(u32 object);
@@ -71,7 +71,7 @@ void FUN_0020f04c(void)
 
     s32 signalled;
     s32 handle = w[BTL_WORD_THREAD];
-    if (FUN_002c40f8(&signalled, &handle, 1, 0, 0xffffffff, 0xffffffff) >> 31) FUN_002c526c();
+    if (FUN_002c40f8(&signalled, &handle, 1, 0, 0xffffffff, 0xffffffff) >> 31) resultHandleFailure();
     *reinterpret_cast<u8*>(&w[BTL_WORD_THREAD_DONE]) = 1;
     nn_os_Thread_FinalizeImpl(&w[BTL_WORD_THREAD]);
     if (w[BTL_WORD_THREAD] != 0) {

@@ -10,7 +10,7 @@ struct MapSoundActor {
     u32 kind; // 0x17c
 };
 extern "C" {
-u32 FUN_003d4ed8(u32 id, f32 x, f32 y, f32 z);
+u32 soundActorStartOnFreeChannel(u32 id, f32 x, f32 y, f32 z);
 
 // Play the actor-kind sound above its position, retaining the handle for the looping variant.
 void mapPlayActorKindSound(MapSoundActor *actor, u32 variant)
@@ -29,8 +29,8 @@ void mapPlayActorKindSound(MapSoundActor *actor, u32 variant)
     case 10: case 20: id = 0x1000303 + variant; break;
     }
     if (variant == 1)
-        actor->sound = FUN_003d4ed8(id, position.x, position.y, position.z);
+        actor->sound = soundActorStartOnFreeChannel(id, position.x, position.y, position.z);
     else
-        FUN_003d4ed8(id, position.x, position.y, position.z);
+        soundActorStartOnFreeChannel(id, position.x, position.y, position.z);
 }
 }

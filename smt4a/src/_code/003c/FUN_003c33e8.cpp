@@ -28,9 +28,9 @@ void FUN_003c33e8(SkillSlotScreen *screen, s32 index, u32 unit, s32 count, s32 x
         textDrawString(2, 0xffffffff, text, label->x + x, label->y + y, 0.0f, 0.0f, effect);
         return;
     }
-    FUN_001835b4(2, 0x1a, 0x174, x, y, 0x6a);
-    FUN_001835b4(2, 0x1a, 0x175, x, y, 0x6a);
-    FUN_001835b4(2, 0x1a, 0x176, x, y, 0x6f);
+    texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x174, x, y, 0x6a);
+    texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x175, x, y, 0x6a);
+    texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x176, x, y, 0x6f);
     if (index < count - screen->freedCount) {
         color = 0x9fe7ffff;
     }

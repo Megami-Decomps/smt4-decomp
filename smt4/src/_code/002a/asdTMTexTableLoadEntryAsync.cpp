@@ -3,11 +3,11 @@
 
 extern "C" {
 TexTableNamedEntry *asdTMTexTableCallFileB(s32 table, s32 index);
-TexTableNamedEntry *FUN_002a6114(TexTableNamedEntry *entry, u32 mode);
+TexTableNamedEntry *texTableEntryStartLoad(TexTableNamedEntry *entry, u32 mode);
 
 /* Gets texture table entry `index` of `table` and starts its asynchronous load. */
 TexTableNamedEntry *asdTMTexTableLoadEntryAsync(s32 table, s32 index)
 {
-    return FUN_002a6114(asdTMTexTableCallFileB(table, index), 0x10000);
+    return texTableEntryStartLoad(asdTMTexTableCallFileB(table, index), 0x10000);
 }
 }

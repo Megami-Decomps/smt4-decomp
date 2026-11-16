@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00185dd4(int, int, unsigned int, int, int, unsigned int, unsigned int, unsigned int);
+int texDrawTableEntrySized(int, int, unsigned int, int, int, unsigned int, unsigned int, unsigned int);
 int renderCtxCalculateStereoParallax(unsigned int);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(int, int);
@@ -22,7 +22,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00185dd4. */
+/* Supplied declaration required: texDrawTableEntrySized. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 
 
@@ -62,7 +62,7 @@ void FUN_002f6f44(unsigned int param_1,unsigned int param_2,int param_3,int para
   }
   temp_v4 = VectorFloatToUnsigned(temp_v5,3);
   temp_v7 = VectorFloatToUnsigned(temp_v6,3);
-  FUN_00185dd4(2,0x1e,param_1,temp_v1 + (int)temp_v3,temp_v2,temp_v4,temp_v7,param_2);
+  texDrawTableEntrySized(2,0x1e,param_1,temp_v1 + (int)temp_v3,temp_v2,temp_v4,temp_v7,param_2);
   return;
 }
 

@@ -22,8 +22,8 @@ struct UnlockLogMenu {
 };
 
 extern "C" {
-s32 FUN_001517b4(u32 button, u32 mode);
-void FUN_00163aa4(void *sprite, f32 speed);
+s32 padQueryLogicalKey(u32 button, u32 mode);
+void uiSpriteAdvanceAnimation(void *sprite, f32 speed);
 void eventQueueAddUniqueIfValid(u32 event);
 void uiSpriteSetKeyframe(void *sprite, s16 key, s32 mode);
 void uiSpriteSetImageKeyframe(void *sprite, s32 key, s32 mode);
@@ -38,16 +38,16 @@ void FUN_003f6f68(UnlockLogMenu *menu, u32 state);
  * buttons and starts the selection animation. */
 void FUN_003f56ac(UnlockLogMenu *menu)
 {
-    FUN_00163aa4(menu->titleSprite, 1.0f);
+    uiSpriteAdvanceAnimation(menu->titleSprite, 1.0f);
     FUN_003f6f68(menu, 7);
-    s32 up = FUN_001517b4(9, 0);
+    s32 up = padQueryLogicalKey(9, 0);
     if (up == 0 || resourceRunOperationIfUnblocked(menu->cursor) != 0) {
         if (up != 0) {
             eventQueueAddUniqueIfValid(0x100020d);
             menu->selected--;
             scrollOwnerSetValue(menu->cursor, menu->selected);
         }
-        if (FUN_001517b4(10, 0) != 0 && objectApplyIfUnblocked(menu->cursor) >= 7) {
+        if (padQueryLogicalKey(10, 0) != 0 && objectApplyIfUnblocked(menu->cursor) >= 7) {
             if (resourceRunOperationIfUnblocked(menu->cursor) != objectApplyIfUnblocked(menu->cursor) - 7 &&
                 (flaggedEntryGetValueA(menu->cursor) != 0 || objectApplyIfUnblocked(menu->cursor) >= 7)) {
                 eventQueueAddUniqueIfValid(0x100020d);
@@ -57,14 +57,14 @@ void FUN_003f56ac(UnlockLogMenu *menu)
         }
     }
     if (menu->confirmed != 0) {
-        if (FUN_001517b4(8, 1) != 0) {
+        if (padQueryLogicalKey(8, 1) != 0) {
             eventQueueAddUniqueIfValid(0x1000210);
             uiSpriteSetKeyframe(menu->buttonSprite, 3, 0);
             uiSpriteSetImageKeyframe(menu->buttonSprite, 1, 0);
             menu->firstPressed = 1;
             dialogEnterState(menu, 6, 7);
         }
-        if (FUN_001517b4(7, 1) != 0) {
+        if (padQueryLogicalKey(7, 1) != 0) {
             eventQueueAddUniqueIfValid(0x1000210);
             uiSpriteSetKeyframe(menu->buttonSprite, 2, 0);
             uiSpriteSetImageKeyframe(menu->buttonSprite, 1, 0);
@@ -72,7 +72,7 @@ void FUN_003f56ac(UnlockLogMenu *menu)
             dialogEnterState(menu, 6, 7);
         }
     }
-    if (FUN_001517b4(1, 1) != 0) {
+    if (padQueryLogicalKey(1, 1) != 0) {
         eventQueueAddUniqueIfValid(0x100020f);
         uiSpriteSetKeyframe(menu->backSprite, 2, 0);
         uiSpriteSetImageKeyframe(menu->backSprite, 1, 0);

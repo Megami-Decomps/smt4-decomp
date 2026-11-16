@@ -11,7 +11,7 @@ f32 mathAngleDeltaDegrees(f32, f32);
 void controllerSetDestination(ControllerPose *, const MapVector *);
 void controllerSetRotationEulerDegrees(ControllerPose *, f32, f32, f32);
 s32 slots4FGetActiveValue(ControllerPose *);
-void FUN_003fe86c(ControllerPose *, s32, s32, f32, f32);
+void modelPlayClip(ControllerPose *, s32, s32, f32, f32);
 
 void FUN_0027461c(void)
 {
@@ -48,7 +48,7 @@ void FUN_0027461c(void)
                     controllerSetDestination(controller, &entry->position);
                     controllerSetRotationEulerDegrees(controller, 0.0f, entry->heading, 0.0f);
                     if (slots4FGetActiveValue(controller) != entry->motion)
-                        FUN_003fe86c(controller, entry->motion, 2, 0.0f, 0.0f);
+                        modelPlayClip(controller, entry->motion, 2, 0.0f, 0.0f);
                     entry->changed = 0;
                 }
             }

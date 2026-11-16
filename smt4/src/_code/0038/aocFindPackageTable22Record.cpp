@@ -23,9 +23,9 @@ struct AocTableRecord {
 };
 
 extern "C" {
-s32 FUN_002ac12c(AocPackage *package);
-AocDirectoryEntry *FUN_002ac0f8(AocPackage *package);
-u32 FUN_002ac0c4(AocPackage *package);
+s32 packageEntryIsLoaded(AocPackage *package);
+AocDirectoryEntry *packageEntryGetDirectory(AocPackage *package);
+u32 packageEntryGetFileCount(AocPackage *package);
 void *dataTableFileGetTable(void *file, s32 index);
 AocTableRecord *dataTableGetEntries(void *table);
 s32 dataTableGetCount(void *table);
@@ -34,9 +34,9 @@ u8 *aocFindPackageTable22Record(AocSystem *system, s32 id)
 {
     for (s32 packageIndex = 0; packageIndex < system->packages.count; ++packageIndex) {
         AocPackage *package = &system->packages.entries[packageIndex];
-        if (FUN_002ac12c(package)) {
-            AocDirectoryEntry *directory = FUN_002ac0f8(package);
-            u32 fileCount = FUN_002ac0c4(package);
+        if (packageEntryIsLoaded(package)) {
+            AocDirectoryEntry *directory = packageEntryGetDirectory(package);
+            u32 fileCount = packageEntryGetFileCount(package);
             for (u32 fileIndex = 0; fileIndex < fileCount; ++fileIndex) {
                 if (directory[fileIndex].type == 0x22 && package->files[fileIndex].enabled) {
                     void *table = dataTableFileGetTable(package->files[fileIndex].tableFile, 0);

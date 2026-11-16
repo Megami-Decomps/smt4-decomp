@@ -36,7 +36,7 @@ int FUN_004a9588(...);
 int FUN_004aa0b0(...);
 int VectorSignedToFloat(...);
 
-int FUN_001517b4(void);
+int padQueryLogicalKey(void);
 int dataTable00FindById(void);
 int FUN_00284ee4(...);
 int FUN_00291e14(void);
@@ -50,7 +50,7 @@ int btlTalkBustUpSetUnk2F4(int);
 int FUN_0039ebcc(void);
 int uiMenuRequestStateNine(...);
 
-int FUN_00163aa4(...);
+int uiSpriteAdvanceAnimation(...);
 int uiSpriteSelectAnim(int, int);
 int menuStateStartConfirm(void);
 int FUN_0021d13c(int);
@@ -99,9 +99,9 @@ extern unsigned int DAT_0057a9fc; /* 0x57a9fc */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: randRange. */
-/* Supplied declaration required: FUN_001517b4. */
+/* Supplied declaration required: padQueryLogicalKey. */
 /* Supplied declaration required: jobStop. */
-/* Supplied declaration required: FUN_00163aa4. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int jobGetWork(void);
 extern int padButtonRepeat(unsigned int);
@@ -272,7 +272,7 @@ unsigned int FUN_002248f8(void)
               *puVar7 = *puVar7 | DAT_0057a9f0;
               puVar7[1] = temp_v8;
             }
-            temp_v5 = FUN_00163aa4(temp_v9 + 0x11914);
+            temp_v5 = uiSpriteAdvanceAnimation(temp_v9 + 0x11914);
             if (temp_v5 != 0) {
               *(unsigned short *)(temp_v9 + 0x11a2c) = 0;
             }
@@ -291,12 +291,12 @@ unsigned int FUN_002248f8(void)
             }
           }
           else {
-            FUN_00163aa4(temp_v16);
+            uiSpriteAdvanceAnimation(temp_v16);
           }
         }
       }
       else {
-        temp_v5 = FUN_00163aa4(temp_v9 + 0x11914);
+        temp_v5 = uiSpriteAdvanceAnimation(temp_v9 + 0x11914);
         if (temp_v5 != 0) {
           *(unsigned short *)(temp_v9 + 0x11a2c) = 3;
         }
@@ -305,7 +305,7 @@ unsigned int FUN_002248f8(void)
     temp_v10 = temp_v10 + 1;
   } while (temp_v10 < 0xc);
   cyclingPanelAdvance(*(unsigned int *)(temp_v0 + 0x7488));
-  if (((*(char *)(temp_v0 + 0x74b3) != '\0') && (temp_v10 = FUN_00163aa4(), temp_v10 != 0)) &&
+  if (((*(char *)(temp_v0 + 0x74b3) != '\0') && (temp_v10 = uiSpriteAdvanceAnimation(), temp_v10 != 0)) &&
      (*(short *)(temp_v0 + 0x7584) == 0xe)) {
     *(unsigned char *)(temp_v0 + 0x74b3) = 0;
   }
@@ -348,7 +348,7 @@ unsigned int FUN_002248f8(void)
       do {
         temp_v15 = (float)(temp_v14 >> 0x20);
         if (*(int *)(temp_v0 + 0x128a4) / 2 < temp_v4) break;
-        FUN_00163aa4(temp_v0 + temp_v4 * 0x8c + 0x128ac);
+        uiSpriteAdvanceAnimation(temp_v0 + temp_v4 * 0x8c + 0x128ac);
         temp_v15 = (float)(temp_v14 >> 0x20);
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < *piVar9);
@@ -541,7 +541,7 @@ unsigned int FUN_002248f8(void)
     break;
   case 0xd:
     temp_v10 = 1;
-    FUN_001517b4();
+    padQueryLogicalKey();
     temp_v4 = g_btlUiBlock;
     if ((temp_v10 != 0) && (temp_v10 = menu32ModeIsNot6(g_btlUiBlock + 8), temp_v10 != 0)) {
       temp_v4 = temp_v4 + 0x24bc;

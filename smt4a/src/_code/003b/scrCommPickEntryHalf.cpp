@@ -4,8 +4,8 @@ extern "C" {
 
 extern s32 partyCountActiveSlots(void);
 extern s32 randRange(u32 value);
-extern Rec12C *FUN_003e4d68(u32 index);
-extern s32 FUN_00187168(Rec12C *entry);
+extern Rec12C *partyGetSlot(u32 index);
+extern s32 partySlotIsOccupied(Rec12C *entry);
 extern void scrSetResult(u32 value);
 
 /* Script command: result is a halfword (+0x12C) of the n-th active entry selected by partyCountActiveSlots, or 0xAD. */
@@ -21,8 +21,8 @@ u32 scrCommPickEntryHalf(void)
         skip = randRange((count + 1U) & 0xFFFF);
         i = 0;
         do {
-            entry = FUN_003e4d68(i & 0xFFFF);
-            if (FUN_00187168(entry) != 0) {
+            entry = partyGetSlot(i & 0xFFFF);
+            if (partySlotIsOccupied(entry) != 0) {
                 if (skip == 0) {
                     result = entry->unk12C;
                     break;

@@ -34,7 +34,7 @@ extern BtlActionGlobals g_btlAction;
 extern u32 g_btlUiBlock;
 extern u32 DAT_00439cf8;
 
-CommandUnit *FUN_0027da30(BtlMainState *state, s32 unit);
+CommandUnit *btlFindEntryBlockByMemberId(BtlMainState *state, s32 unit);
 void FUN_00229098(BtlMainState **block);
 s32 FUN_00229118(BtlMainState **block, s32 a, s32 target, CommandState *work);
 void FUN_002296dc(u32 ui);
@@ -258,7 +258,7 @@ u32 FUN_003cbf40(BtlMainState **block, CommandState *work)
             } else {
                 action->editorRestore.current = action->editorRestore.saved;
                 if (!done) {
-                    CommandUnit *unit = FUN_0027da30(*block, action->memberId);
+                    CommandUnit *unit = btlFindEntryBlockByMemberId(*block, action->memberId);
                     if (unit != NULL && (unit->responseFlags & 0x10) == 0) {
                         (*block)->actions[i].editorRestore.current = 0x4c4c4cff;
                         continue;

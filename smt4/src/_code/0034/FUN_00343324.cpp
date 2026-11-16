@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002bbb74(u32 a, int b);
+int gpuWriteVertexUniformMatrix(u32 a, int b);
 int FUN_002bbbc8(void);
 
 typedef struct Obj {
@@ -15,7 +15,7 @@ typedef struct Obj {
 void FUN_00343324(Obj *obj)
 {
     FUN_002bbbc8();
-    FUN_002bbb74(obj->unk52C, (int)obj + 0x118c);
+    gpuWriteVertexUniformMatrix(obj->unk52C, (int)obj + 0x118c);
     obj->unk5F4 = 0;
 }
 

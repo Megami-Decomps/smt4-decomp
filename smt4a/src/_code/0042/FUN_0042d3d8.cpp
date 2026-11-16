@@ -5,7 +5,7 @@
 extern "C" {
 
 int svcSleepThread(int, int);
-int FUN_002e3140(unsigned int, int, int, int);
+int resultHandleFailure(unsigned int, int, int, int);
 int cecdDispatchBackendCall(int *);
 int software_interrupt(int);
 
@@ -22,7 +22,7 @@ extern unsigned int g_moduleCriticalSection6; /* 0x6426b4 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: svcSleepThread. */
-/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: resultHandleFailure. */
 extern int FUN_0042fbd4(void);
 /* Supplied declaration required: cecdDispatchBackendCall. */
 extern unsigned int resourceDispatch(unsigned int *);
@@ -86,7 +86,7 @@ int FUN_0042d3d8(int param_1,int param_2)
       while( 1 ) {
         software_interrupt(0x24);
         if (-((int)temp_v4 >> 0x1f) != 0) {
-          FUN_002e3140(temp_v4,-((int)temp_v4 >> 0x1f),1000000000,0);
+          resultHandleFailure(temp_v4,-((int)temp_v4 >> 0x1f),1000000000,0);
         }
         temp_v1 = temp_v3;
         if ((((temp_v4 & 0x3ff) != 0x3fe) || (cecdDispatchBackendCall(&temp_v7), temp_v7 == 1)) ||

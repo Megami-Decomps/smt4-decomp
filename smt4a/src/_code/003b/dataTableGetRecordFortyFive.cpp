@@ -3,14 +3,14 @@
 extern "C" {
 
 extern void *g_aocSystem;
-s32 FUN_0046c35c(void *system, s32 kind, s32 slot);
+s32 groupedFileTablesCountRecordsOfKind(void *system, s32 kind, s32 slot);
 
 /* Count base and add-on entries for the selected table. */
 s32 dataTableGetRecordFortyFive(void)
 {
     s32 count = dataTableGetCount(dataTableGetSection(45, 0));
 
-    return FUN_0046c35c(g_aocSystem, 37, 0) + count;
+    return groupedFileTablesCountRecordsOfKind(g_aocSystem, 37, 0) + count;
 }
 
 } /* extern "C" */

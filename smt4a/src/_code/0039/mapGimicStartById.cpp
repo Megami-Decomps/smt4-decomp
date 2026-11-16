@@ -27,7 +27,7 @@ extern u32 g_handleRegistry;
 
 s32 FUN_0040ab8c(GimicObject *object);
 void FUN_0040aad4(GimicObject *object, s32 a);
-void FUN_003fe86c(void *model, u32 index, u8 flags, f32 time, f32 blend);
+void modelPlayClip(void *model, u32 index, u8 flags, f32 time, f32 blend);
 void animationSelectClip(void *model, u32 index, u8 flags, f32 time);
 void handleRegistryRegisterObject(u32 registry, void *object);
 
@@ -47,7 +47,7 @@ u32 mapGimicStartById(s32 id)
             }
             FUN_0040aad4(slot->object, 0);
             model = slot->object->model;
-            FUN_003fe86c(model, 0, 2, 0.0f, 0.0f);
+            modelPlayClip(model, 0, 2, 0.0f, 0.0f);
             if (id == 42) {
                 animationSelectClip(model, 1, 2, 0.0f);
             }

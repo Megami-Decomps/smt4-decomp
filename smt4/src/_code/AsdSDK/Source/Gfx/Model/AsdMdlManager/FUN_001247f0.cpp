@@ -54,7 +54,7 @@ void asdMdlNodeInit(s32 owner, u32 index);
 void asdListAdd(MdlListEntry **list, MdlListEntry *entry, s32 flag);
 void indexedListErase(MdlListEntry **list, MdlListEntry *entry);
 void asdMdlObjectBuildBounds(MdlListEntry *entry);
-void FUN_002b2988(u32 result, s32 size);
+void asdModelRegisterImage(u32 result, s32 size);
 void FUN_002b2ae8(u32 owner, s32 node, s32 *out);
 void resOwnerRunNodeHandlers(u32 owner);
 u32 FUN_002b2b64(MdlBody *body);
@@ -127,7 +127,7 @@ void FUN_001247f0(void)
             continue;
         s32 size;
         u32 result = asdFileRequestGetResult(model->requestHandle, &size);
-        FUN_002b2988(result, size);
+        asdModelRegisterImage(result, size);
         *reinterpret_cast<u32 *>(model->body->owner + 4) = result;
         asdMdlNodeInit(model->body->owner, *reinterpret_cast<u32 *>(model->body->owner + 8) & 0xFFFF);
         asdMdlObjectBuildBounds(entry);

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002a6894(...);
-int FUN_00408184(...);
+int gameCounterAddSaturating(...);
 
 int qsort(...);
 int devilGetRecord(void);
@@ -15,7 +15,7 @@ int FUN_002a5e7c(...);
 int arrayContainsU16(...);
 int FUN_0035ad50(unsigned int, unsigned char [98]);
 int findSkillMetadataById(void);
-int FUN_004bcd90(...);
+int unitRecomputeDerivedStats(...);
 int FUN_004bd17c(...);
 int dispatchIfFound(unsigned int, unsigned int, int);
 int bitsAt60Clear(int, int);
@@ -67,8 +67,8 @@ extern int FUN_002a4b28(unsigned int);
 /* Supplied declaration required: arrayContainsU16. */
 /* Supplied declaration required: FUN_0035ad50. */
 /* Supplied declaration required: findSkillMetadataById. */
-/* Supplied declaration required: FUN_00408184. */
-/* Supplied declaration required: FUN_004bcd90. */
+/* Supplied declaration required: gameCounterAddSaturating. */
+/* Supplied declaration required: unitRecomputeDerivedStats. */
 /* Supplied declaration required: FUN_004bd17c. */
 extern int getUnlockedSlotCount(int);
 /* Supplied declaration required: dispatchIfFound. */
@@ -324,7 +324,7 @@ unsigned char FUN_001ff014(int param_1)
         temp_v8 = temp_v8 + 1;
       } while (temp_v8 < 0x20);
     }
-    FUN_004bcd90(temp_v4);
+    unitRecomputeDerivedStats(temp_v4);
     piVar1[0x2426] = 1;
     piVar1[0x2427] = (unsigned int)*(unsigned short *)(temp_v4 + 100);
     *(unsigned int *)(temp_v4 + 0x44) = 0;
@@ -365,7 +365,7 @@ unsigned char FUN_001ff014(int param_1)
     *(int *)(temp_v4 + 0xa4) = temp_v13;
     temp_v7 = getUnlockedSlotCount(temp_v4);
     __aeabi_memcpy4(temp_v4 + 0x34,piVar1 + 0x19b4,temp_v7 << 1);
-    FUN_004bcd90(temp_v4);
+    unitRecomputeDerivedStats(temp_v4);
     piVar1[0x2426] = 1;
     piVar1[0x2427] = (unsigned int)*(unsigned short *)(temp_v4 + 100);
     *(unsigned int *)(temp_v4 + 0x44) = 0;
@@ -378,9 +378,9 @@ unsigned char FUN_001ff014(int param_1)
   if (temp_v1 == 0) {
     FUN_002a5e7c(*(unsigned short *)(temp_v4 + 0x62));
   }
-  FUN_00408184(0x26,1);
+  gameCounterAddSaturating(0x26,1);
   if (temp_v10 != 0) {
-    FUN_00408184(0x27,1);
+    gameCounterAddSaturating(0x27,1);
   }
   FUN_002a6894(temp_v4);
   return temp_v10;

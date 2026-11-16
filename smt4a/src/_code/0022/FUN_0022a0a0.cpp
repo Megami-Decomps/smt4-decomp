@@ -5,8 +5,8 @@
 
 extern "C" {
 
-int FUN_001517b4(...);
-int FUN_00163aa4(...);
+int padQueryLogicalKey(...);
+int uiSpriteAdvanceAnimation(...);
 int eventQueueAddUniqueIfValid(...);
 int ifTouchRegionRemove(void);
 int FUN_001643b4(int, int);
@@ -27,8 +27,8 @@ typedef struct {
 
 extern int DAT_0057f280; /* 0x57f280 */
 
-/* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_00163aa4. */
+/* Supplied declaration required: padQueryLogicalKey. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_001643b4. */
@@ -87,7 +87,7 @@ unsigned int FUN_0022a0a0(void)
     do {
       if (temp_v9 <= *(int *)(temp_v0 + 0x748)) {
         temp_v6 = temp_v0 + temp_v9 * 0x8c;
-        FUN_00163aa4(temp_v6 + 0x28);
+        uiSpriteAdvanceAnimation(temp_v6 + 0x28);
         if ((temp_v8 - 1 <= temp_v9) && (*(char *)(temp_v6 + 0xb2) != '\0')) {
           *(unsigned int *)(temp_v0 + 0x744) = 2;
           if (*(char *)(temp_v0 + 0x74e) != '\x02') {
@@ -135,13 +135,13 @@ unsigned int FUN_0022a0a0(void)
     } while (temp_v9 < temp_v8);
     break;
   case 2:
-    FUN_00163aa4(DAT_0057f280 + 0x5a0);
-    FUN_00163aa4(temp_v0 + 0x62c);
+    uiSpriteAdvanceAnimation(DAT_0057f280 + 0x5a0);
+    uiSpriteAdvanceAnimation(temp_v0 + 0x62c);
     temp_v8 = temp_v0 + 0x788;
     temp_v9 = objectApplyIfUnblocked();
     temp_v5 = uiSearchPrimary(temp_v8);
     if (temp_v5 < temp_v9) {
-      FUN_00163aa4(temp_v0 + 0x6b8);
+      uiSpriteAdvanceAnimation(temp_v0 + 0x6b8);
     }
     temp_v5 = resourceRunOperationIfUnblocked(temp_v8);
     temp_v6 = FUN_002a4894(temp_v8);
@@ -160,12 +160,12 @@ unsigned int FUN_0022a0a0(void)
       FUN_00228b04(temp_v8,1);
       if (temp_v9 == 0) {
         temp_v9 = 0;
-        FUN_001517b4(0,1);
+        padQueryLogicalKey(0,1);
         if (!(temp_v9 == 0 && temp_v10[0] == '\0')) {
           *(unsigned char *)(temp_v0 + 0x74c) = 1;
           *(unsigned int *)(temp_v0 + 0x744) = 3;
           if (-1 < *(int *)(temp_v0 + 0x750)) {
-            temp_v9 = reinterpret_cast<int>(FUN_0026140c());
+            temp_v9 = reinterpret_cast<int>(saveGetUserSettingsBlock());
             pbVar11 = (unsigned char *)(temp_v9 + *(int *)(temp_v0 + 0x750));
             temp_v9 = resourceRunOperationIfUnblocked(temp_v8);
             temp_v8 = FUN_002a4894(temp_v8);
@@ -181,7 +181,7 @@ unsigned int FUN_0022a0a0(void)
         }
         else {
           temp_v9 = 1;
-          FUN_001517b4();
+          padQueryLogicalKey();
           temp_v8 = DAT_0057f280;
           if (temp_v9 == 0) break;
           temp_v9 = 0;
@@ -220,12 +220,12 @@ unsigned int FUN_0022a0a0(void)
     buttonHelpSetText(temp_v7,0xf4f4f4ff);
     break;
   case 3:
-    FUN_00163aa4(DAT_0057f280 + 0x5a0);
-    FUN_00163aa4(temp_v0 + 0x62c);
+    uiSpriteAdvanceAnimation(DAT_0057f280 + 0x5a0);
+    uiSpriteAdvanceAnimation(temp_v0 + 0x62c);
     temp_v8 = objectApplyIfUnblocked();
     temp_v9 = uiSearchPrimary(temp_v0 + 0x788);
     if (temp_v9 < temp_v8) {
-      FUN_00163aa4(temp_v0 + 0x6b8);
+      uiSpriteAdvanceAnimation(temp_v0 + 0x6b8);
     }
     temp_v8 = DAT_0057f280;
     if (*(char *)(temp_v0 + 0x74e) != '\x02') {

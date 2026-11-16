@@ -20,8 +20,8 @@ typedef struct LoadingWork {
 
 extern u8 *g_aocMain;
 
-s32 FUN_001692ac(s32 a, s32 b);
-void FUN_00164b5c(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
+s32 renderCtxPackPassFlags(s32 a, s32 b);
+void texDrawCompositeSprite(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
 void FUN_00473754(u8 *aoc, s32 text, u8 buffer[1024]);
 s32 curveEvaluateStandard(u8 *buffer, u32 kind);
 
@@ -36,9 +36,9 @@ s32 FUN_00478ac4(u32 job)
     u8 text[1024];
     u32 messageIds[4] = {0x6E, 0x6F, 0x70, 0x71};
 
-    FUN_00157558(g_renderCtx);
-    renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
-    FUN_00164b5c(2, 0x2F, 5, 0, 0, 0x81);
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
+    renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
+    texDrawCompositeSprite(2, 0x2F, 5, 0, 0, 0x81);
     s32 body = FUN_00473910(aoc, messageIds[work->messageIndex]);
 
     FUN_00473754(aoc, body, text);
@@ -61,11 +61,11 @@ s32 FUN_00478ac4(u32 job)
             s32 x = (dot->x - origin->x) + left + width + 4;
 
             if (index == first || index == second) {
-                FUN_001835b4(2, 8, 0x155, x, dot->y, 0x81);
+                texDrawTableEntryAtStoredOrigin(2, 8, 0x155, x, dot->y, 0x81);
             } else if (index == firstTrail || index == secondTrail) {
-                FUN_001835b4(2, 8, 0x156, x, dot->y, 0x81);
+                texDrawTableEntryAtStoredOrigin(2, 8, 0x156, x, dot->y, 0x81);
             } else {
-                FUN_001835b4(2, 8, 0x154, x, dot->y, 0x81);
+                texDrawTableEntryAtStoredOrigin(2, 8, 0x154, x, dot->y, 0x81);
             }
         }
     }

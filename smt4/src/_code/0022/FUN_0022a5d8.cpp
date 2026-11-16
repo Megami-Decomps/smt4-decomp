@@ -27,7 +27,7 @@ u32 FUN_0022a5d8(u32 owner, s32 mode, u8 value)
     ActionStateView *state = (ActionStateView *)btlGetMainState();
     if (!actionBlocked(state)) {
         if (mode != 0) {
-            return (u32)FUN_0022a4ac(1, 0, owner, state->command, (const void *)mode, value, 13);
+            return (u32)btlHelpEntryCreate(1, 0, owner, state->command, (const void *)mode, value, 13);
         }
         BtlMainState *battle = btlGetMainState();
         u32 flags = battle->battleFlags;
@@ -35,7 +35,7 @@ u32 FUN_0022a5d8(u32 owner, s32 mode, u8 value)
             return 0;
         if (flags & 0x100)
             return 0;
-        return (u32)FUN_0022a4ac(0, 0, owner, battle->dialog.messageHandle, NULL, value, -1);
+        return (u32)btlHelpEntryCreate(0, 0, owner, battle->dialog.messageHandle, NULL, value, -1);
     }
     return 0;
 }

@@ -16,7 +16,7 @@ void FUN_0013290c(LightRenderOwner* owner, LightRenderParameters* argument);
 
 void FUN_00138c14(List *list);
 
-IdEntry * FUN_001317c8(IdEntryTable *table, u32 id);
+IdEntry * idEntryTableFindById(IdEntryTable *table, u32 id);
 
 void FUN_00138c94(CommandListDesc *list);
 

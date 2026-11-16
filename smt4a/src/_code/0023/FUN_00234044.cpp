@@ -12,7 +12,7 @@ extern "C" {
 extern MapIfGlobalsA g_mapIf;
 extern GameStateA g_gameState;
 extern InterfaceSoundPosition *DAT_00581280;
-s32 FUN_003d4ed8(u32, f32, f32, f32);
+s32 soundActorStartOnFreeChannel(u32, f32, f32, f32);
 
 // Change the active interface mode and reset its movement state.
 void FUN_00234044(s32 mode, s32 id)
@@ -48,9 +48,9 @@ void FUN_00234044(s32 mode, s32 id)
         block->id = id;
         const f32 *position = DAT_00581280[id].position;
         if (g_gameState.mode <= 100)
-            FUN_003d4ed8(0x10002ab, position[0], position[1], position[2]);
+            soundActorStartOnFreeChannel(0x10002ab, position[0], position[1], position[2]);
         else
-            FUN_003d4ed8(0x10002ab, position[0] * (1.0f / 3.0f),
+            soundActorStartOnFreeChannel(0x10002ab, position[0] * (1.0f / 3.0f),
                         position[1] * (1.0f / 3.0f), position[2] * (1.0f / 3.0f));
         block->position[0] = 0.0f;
         block->position[1] = 20.0f;

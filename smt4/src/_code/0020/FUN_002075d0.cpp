@@ -18,13 +18,13 @@ static __inline void vector4Subtract(Vector4 *minuend, const Vector4 *subtrahend
 
 extern "C" {
 extern CameraVectorScratch DAT_004ea81c;
-void FUN_0028c92c(Matrix44* output);
+void renderGetCameraViewMatrix(Matrix44* output);
 
 // Compute the normalized XYZ direction from the current camera origin to a target.
 void FUN_002075d0(const Vector4* target, Vector4* output)
 {
     Matrix44 view;
-    FUN_0028c92c(&view);
+    renderGetCameraViewMatrix(&view);
     vector4Copy(target, &DAT_004ea81c.direction);
     DAT_004ea81c.origin.x = view.values[3];
     DAT_004ea81c.origin.y = view.values[7];

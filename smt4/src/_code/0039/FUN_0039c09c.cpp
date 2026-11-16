@@ -8,13 +8,13 @@ extern "C" {
 extern GameState g_gameState;
 
 void pointConvertToFloat(f32 *point, s32 x, s32 y);
-s32 FUN_002bf818(UiSpriteState *sprite);
+s32 uiSpriteAdvanceAnimation(UiSpriteState *sprite);
 s32 vec2GetXInt(const UiSpriteState *sprite);
 s32 vec2GetYInt(const UiSpriteState *sprite);
 s32 uiSpriteGetCompletionState(const void *record);
 s32 gameFlagIsSet(u32 flag);
 void commonBgReset(void);
-void FUN_00289880(void);
+void commonBgStopChildAndBeginTransition(void);
 void buttonHelpSelectMapPreset(void);
 void FUN_00233240(void *window, s32 enable);
 s32 NaviMain_GetPosX(u16 *state);
@@ -32,7 +32,7 @@ void FUN_0039c09c(MapNaviDisplay *display)
         if (g_gameState.bgResetPending != 0) {
             g_gameState.bgResetPending = 0;
             if (gameFlagIsSet(0x16) == 0) {
-                FUN_00289880();
+                commonBgStopChildAndBeginTransition();
             } else {
                 commonBgReset();
             }
@@ -59,7 +59,7 @@ void FUN_0039c09c(MapNaviDisplay *display)
     }
     if (work->state == 1) {
         UiSpriteState *outgoing = &work->outgoing;
-        if (FUN_002bf818(outgoing) != 0) {
+        if (uiSpriteAdvanceAnimation(outgoing) != 0) {
             work->state = 2;
         }
         pointConvertToFloat(work->origin, vec2GetXInt(outgoing), vec2GetYInt(outgoing));
@@ -68,7 +68,7 @@ void FUN_0039c09c(MapNaviDisplay *display)
         }
         for (s32 i = 0; i < 5; i++) {
             if (i <= work->step) {
-                FUN_002bf818(&work->lines[i]);
+                uiSpriteAdvanceAnimation(&work->lines[i]);
             }
         }
     } else if (work->state == 2) {
@@ -80,7 +80,7 @@ void FUN_0039c09c(MapNaviDisplay *display)
         }
         for (s32 i = 0; i < 5; i++) {
             if (i <= work->step) {
-                FUN_002bf818(&work->lines[i]);
+                uiSpriteAdvanceAnimation(&work->lines[i]);
             }
         }
     } else {

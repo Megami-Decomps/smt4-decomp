@@ -1,6 +1,6 @@
 #include "shard/W6_W6Match5_DisplayMode.h"
 
-extern "C" void FUN_0017e4d8(void);
+extern "C" void asdGxCommandListFinishCurrent(void);
 
 // Account for the completed command entry before advancing the graphics queue.
 extern "C" void asdGxAccountCommandBytesAndAdvanceQueue(void)
@@ -9,5 +9,5 @@ extern "C" void asdGxAccountCommandBytesAndAdvanceQueue(void)
     GraphicsQueueEntry *entry = &queue->entries[queue->currentEntry];
     if ((entry->flags & 2) == 0)
         queue->accounting.submittedBytes += entry->byteCount;
-    FUN_0017e4d8();
+    asdGxCommandListFinishCurrent();
 }

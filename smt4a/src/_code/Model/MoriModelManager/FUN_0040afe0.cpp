@@ -3,7 +3,7 @@
 #include <new>
 class Obj557d00;
 extern "C" {
-void *FUN_00178b04(u32 size, const char *file, u32 line);
+void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 Obj557d00 *FUN_001581dc(void *owner);
 void FUN_00406834(UiLookupObj *scene, UiOwner *owner);
 void FUN_003fed38(Obj557b28 *shadowMap, Obj557b68Layer *layer);
@@ -12,7 +12,7 @@ void FUN_003fed38(Obj557b28 *shadowMap, Obj557b68Layer *layer);
 void FUN_0040afe0(Obj557c48 *manager, u16 layer, s32 attach)
 {
     if (manager->scene() == NULL) {
-        void *storage = FUN_00178b04(sizeof(Obj557b68),
+        void *storage = asdMemoryAllocTraced(sizeof(Obj557b68),
             "c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelManager.cpp", 0x196);
         Obj557b68 *scene = static_cast<Obj557b68 *>(storage);
         if (scene != NULL)

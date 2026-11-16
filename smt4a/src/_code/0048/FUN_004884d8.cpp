@@ -5,7 +5,7 @@
 extern "C" {
 
 int efctSetSpeed(void);
-int FUN_00185dd4(...);
+int texDrawTableEntrySized(...);
 int FUN_002e1208(int, unsigned int, unsigned int [3], int *);
 int naviMainSelectPair(int);
 int words2Copy(int, float *);
@@ -38,8 +38,8 @@ extern int g_renderCtx; /* 0x59dbb4 */
 #endif
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: efctSetSpeed. */
-extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00185dd4. */
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
+/* Supplied declaration required: texDrawTableEntrySized. */
 /* Supplied declaration required: FUN_002e1208. */
 extern unsigned long long *sub68OwnerGetBlock60(void);
 /* Supplied declaration required: naviMainSelectPair. */
@@ -180,7 +180,7 @@ void FUN_004884d8(int param_1)
       if (*(char *)(temp_v2 + 0x69) != '\0') {
         efctSetSpeed();
         temp_v2 = g_renderCtx;
-        temp_v5 = FUN_001692ac(1,0);
+        temp_v5 = renderCtxPackPassFlags(1,0);
         piVar12 = (int *)(temp_v2 + 0x1258);
         temp_v6 = *piVar12;
         temp_v8 = piVar12[temp_v6 + 2];
@@ -193,7 +193,7 @@ void FUN_004884d8(int param_1)
         temp_v11 = (float)VectorSignedToFloat((int)((unsigned long long)temp_v18 >> 0x20),
                                             (unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v10 = (float)VectorSignedToFloat((int)temp_v18,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_00185dd4(9,0xb,temp_v3,(int)(temp_v27 + temp_v10),(int)(temp_v28 + temp_v11),(int)temp_v20,
+        texDrawTableEntrySized(9,0xb,temp_v3,(int)(temp_v27 + temp_v10),(int)(temp_v28 + temp_v11),(int)temp_v20,
                      (int)((unsigned long long)temp_v20 >> 0x20),temp_v25);
         temp_v2 = g_renderCtx;
         piVar12 = (int *)(g_renderCtx + 0x1258);

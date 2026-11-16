@@ -6,7 +6,7 @@
 
 extern "C" {
 
-int FUN_0019e290(MikadoCamera *camera);
+int placeWindowDestroy(MikadoCamera *camera);
 void asdOperatorDelete(void *object);
 int jobFind(u32 task);                /* nonzero while the task exists */
 int asdMemFree(void *ptr);               /* heap free */
@@ -26,7 +26,7 @@ u32 mikadoPollShutdown(void)
         if (work != NULL) {
             work->done = 1;
             if (work->camera != NULL) {
-                FUN_0019e290(work->camera);
+                placeWindowDestroy(work->camera);
                 if (work->camera != NULL) {
                     asdOperatorDelete(_ZN9Obj55ca08D1Ev(&work->camera->sub) - offsetof(MikadoCamera, sub));
                 }

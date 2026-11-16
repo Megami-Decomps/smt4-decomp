@@ -37,11 +37,11 @@ struct TalkScene {
 };
 
 extern "C" {
-SavedPair *FUN_002613f0(s32 index);
+SavedPair *saveGetSelectedRecordSlot(s32 index);
 SlotRecordId *gameGetSlotRecord(s32 slot);
 s32 recordContainsPairedId(const void *record, u32 id);
 s32 loadSlotIsLoaded(u32 index);
-u8 *FUN_00275bc8(void *first, void *second);
+u8 *scrScriptProcessCreate(void *first, void *second);
 DevilBase *devilGetRecord(u16 id);
 s32 FUN_003316b4(s8 variant);
 void textFormatBuffer(char *buffer, const char *format, ...);
@@ -77,7 +77,7 @@ void FUN_004cbb38(TalkScene *scene)
 {
     s32 found = -1;
     if (scene->pairIndex >= 0) {
-        found = findPairSlot(FUN_002613f0(scene->pairIndex));
+        found = findPairSlot(saveGetSelectedRecordSlot(scene->pairIndex));
         scene->slot = found;
     }
     if (found < 0) {
@@ -92,15 +92,15 @@ void FUN_004cbb38(TalkScene *scene)
         return;
     }
     if (scene->scene == NULL) {
-        scene->scene = FUN_00275bc8(scene->sceneData, scene->modelData);
+        scene->scene = scrScriptProcessCreate(scene->sceneData, scene->modelData);
         *(u32 *)(scene->scene + 0x108) = 0;
     }
-    SavedPair *pair = FUN_002613f0(scene->pairIndex);
+    SavedPair *pair = saveGetSelectedRecordSlot(scene->pairIndex);
     SlotRecordId *record = gameGetSlotRecord(scene->slot);
     char path[64];
     textFormatBuffer(path, DAT_0052c7c0, FUN_003316b4(devilGetRecord(record->id)->variant) + 1);
     scene->portraitFile = asdLoadFileSyncDefault(path);
-    scene->portrait = FUN_00275bc8(scene->portraitData, scene->portraitFile);
+    scene->portrait = scrScriptProcessCreate(scene->portraitData, scene->portraitFile);
     btlTalkBustUpCreate();
     FUN_002c85b0(6);
     statusDisplayBindUnitRecord(record, 0, 0, 0);

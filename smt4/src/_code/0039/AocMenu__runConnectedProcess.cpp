@@ -9,7 +9,7 @@ extern "C" {
 int FUN_00233240(...);
 int aocMenuSetButtonHelp(...);
 int jobStopAndClearFlags(...);
-int FUN_00233db8(...);
+int aocLoadingTaskStart(...);
 int FUN_00233e70(...);
 int FUN_00234124(...);
 int asdFsIsSdCardDetected(...);
@@ -39,7 +39,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00233240. */
 /* Supplied declaration required: aocMenuSetButtonHelp. */
 /* Supplied declaration required: jobStopAndClearFlags. */
-/* Supplied declaration required: FUN_00233db8. */
+/* Supplied declaration required: aocLoadingTaskStart. */
 /* Supplied declaration required: FUN_00233e70. */
 /* Supplied declaration required: FUN_00233fcc. */
 /* Supplied declaration required: FUN_00234124. */
@@ -166,7 +166,7 @@ void AocMenu::runConnectedProcess()
           FUN_00233fcc(puVar2,0);
           param_1[2] = 1;
           param_1[0x82] = (unsigned int)puVar2;
-          FUN_00233db8(param_1,0);
+          aocLoadingTaskStart(param_1,0);
           return;
         }
         *(unsigned char *)(param_1 + 0x84) = 0x6a;

@@ -21,7 +21,7 @@ void scrSetResult(s32 result);
 TalkDevilRecord *dataTable00FindById(u16 id);
 PadState *gameGetPlayerData();
 u32 partyHasStoredDemon(u32 id);
-Table01Record *FUN_002bd06c(u16 id);
+Table01Record *dataTable01FindByIdWithAoc(u16 id);
 s32 randBetween(s32 low, s32 high);
 s32 randNextInRange(u32 maximum);
 void asdMemFree(void *memory);
@@ -61,7 +61,7 @@ u32 btlTalkCommand_SelectTalkTarget()
                 TalkDevilRecord *data = dataTable00FindById((u16)id);
                 if (devil->level >= low && devil->level <= high &&
                     (data->flags & 0x400) && !partyHasStoredDemon(devil->id)) {
-                    FUN_002bd06c(devil->id);
+                    dataTable01FindByIdWithAoc(devil->id);
                     candidates[count++] = (s16)devil->id;
                 }
             }

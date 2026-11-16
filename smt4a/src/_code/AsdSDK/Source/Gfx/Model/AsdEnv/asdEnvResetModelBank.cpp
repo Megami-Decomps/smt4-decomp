@@ -27,7 +27,7 @@ void sysMemClear(void *memory, u32 bytes);
 EnvironmentSlotArray *asdModelGetSlotArray1(u32 bank);
 EnvironmentSlotArray *asdModelGetSlotArray2(u32 bank);
 u32 asdLoadFileSyncNoContext(u32 resource, s32 mode, s32 flags, u32 size);
-void *FUN_00178b04(u32 size, const char *file, u32 line);
+void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 void FUN_003168b8(u32 *handle, u32 bank);
 }
 
@@ -59,7 +59,7 @@ extern "C" void asdEnvResetModelBank(u32 resource, u32 bank)
     resetEnvironmentSlots(asdModelGetSlotArray1(bank));
     resetEnvironmentSlots(asdModelGetSlotArray2(bank));
     DAT_005b3bd8[bank] = asdLoadFileSyncNoContext(resource, 0, 1, 0x80);
-    u32 *handle = static_cast<u32 *>(FUN_00178b04(sizeof(u32),
+    u32 *handle = static_cast<u32 *>(asdMemoryAllocTraced(sizeof(u32),
         "c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Model\\AsdEnv.cpp", 0x48b));
     if (handle != NULL) {
         *handle = DAT_005b3bd8[bank];

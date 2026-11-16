@@ -34,7 +34,7 @@ s32 gameFlagIsSet(s32 flag);
 
 s32 randRange(u32 maximum);
 void popupQueueInsertUnique(s32 state);
-s32 FUN_002d8b58(s32 kind);
+s32 popupSelectWeightedMessage(s32 kind);
 
 /* Picks a story popup. `immediate` skips the random gates. */
 void FUN_00295108(s32 immediate)
@@ -88,7 +88,7 @@ void FUN_00295108(s32 immediate)
             if (DAT_005f1994 == 0) {
                 DAT_005f1994 = 1;
                 g_popupState->entryId = entry->id;
-                g_popupState->kindId = FUN_002d8b58(POPUP_KIND_STORY);
+                g_popupState->kindId = popupSelectWeightedMessage(POPUP_KIND_STORY);
                 g_popupState->state = POPUP_STATE_STORY;
                 g_popupState->unk04 = 0;
                 return;

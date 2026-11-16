@@ -40,7 +40,7 @@ void FUN_003210bc(BtlUiA *ui, s32 eye)
         offsetof(OverlayView, labels) == 0xB5B4 ? 1 : -1];
     OverlayView *overlays = reinterpret_cast<OverlayView *>(ui);
     struct SortEntry { s8 index; u8 active; u8 priority; u8 padding; } order[16];
-    FUN_00157558(g_renderCtx);
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     s32 parallax = 0;
     if (eye != 0)
         parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, DAT_00573c00);

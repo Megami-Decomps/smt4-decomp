@@ -15,9 +15,9 @@ typedef struct {
     u16 group;      /* 0x46 */
 } HandleRecord;
 
-int FUN_002497f8(HandleHolder *first, HandleHolder *second);
+int itemSortCompareByCategoryAndId(HandleHolder *first, HandleHolder *second);
 
-/* Calls FUN_002497f8 when both holders resolve to the same group (a holder without a handle counts as group 0). */
+/* Calls itemSortCompareByCategoryAndId when both holders resolve to the same group (a holder without a handle counts as group 0). */
 void FUN_002f2740(HandleHolder *first, HandleHolder *second)
 {
     u16 firstGroup;
@@ -37,7 +37,7 @@ void FUN_002f2740(HandleHolder *first, HandleHolder *second)
     if (difference != 0) {
         return;
     }
-    FUN_002497f8(first, second);
+    itemSortCompareByCategoryAndId(first, second);
 }
 
 } /* extern "C" */

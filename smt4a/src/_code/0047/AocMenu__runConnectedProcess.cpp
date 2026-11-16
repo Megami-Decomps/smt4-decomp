@@ -17,7 +17,7 @@ int FUN_00476e58(...);
 int aocMenuSetButtonHelp(...);
 int jobFlagsWorkStop(...);
 int FUN_0047bc90(...);
-int FUN_0047bcdc(...);
+int aocLoadingTaskStart(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 6 slot(s), 24 byte(s) */
@@ -47,7 +47,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int recordGetModeForId(int);
 extern int messageGetChoiceResult(void);
-extern int FUN_002e1a18(unsigned int);
+extern int buttonHelpIsActionActive(unsigned int);
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: asdFsIsSdCardDetected. */
 /* Supplied declaration required: windowCreateStatusOperation. */
@@ -55,7 +55,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: aocMenuSetButtonHelp. */
 /* Supplied declaration required: jobFlagsWorkStop. */
 /* Supplied declaration required: FUN_0047bc90. */
-/* Supplied declaration required: FUN_0047bcdc. */
+/* Supplied declaration required: aocLoadingTaskStart. */
 extern int isEmptyString(unsigned int *);
 
 
@@ -166,7 +166,7 @@ void AocMenu::runConnectedProcess()
           windowCreateStatusOperation(puVar2,0);
           param_1[2] = 1;
           param_1[0x82] = (unsigned int)puVar2;
-          FUN_0047bcdc(param_1,0);
+          aocLoadingTaskStart(param_1,0);
           return;
         }
         *(unsigned char *)(param_1 + 0x84) = 0x6a;
@@ -238,7 +238,7 @@ void AocMenu::runConnectedProcess()
     }
   }
   else if ((*param_1 & 0x2000) != 0) {
-    temp_v1 = FUN_002e1a18(0x10);
+    temp_v1 = buttonHelpIsActionActive(0x10);
     if ((temp_v1 != 0) ||
        ((((*param_1 & 0x2000) != 0 && (*puVar2 != 0xffffffff)) &&
         (temp_v1 = recordGetModeForId((int)(short)*puVar2), temp_v1 == 6)))) {
@@ -254,7 +254,7 @@ void AocMenu::runConnectedProcess()
       param_1[2] = 4;
       return;
     }
-    temp_v1 = FUN_002e1a18(0xb);
+    temp_v1 = buttonHelpIsActionActive(0xb);
     if (temp_v1 != 0) {
       eventQueueAddUniqueIfValid(0x100020e);
       if ((*param_1 & 0x1000) != 0) {

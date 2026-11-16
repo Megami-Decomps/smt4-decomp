@@ -17,8 +17,8 @@ struct GameStateView {
 extern GameStateView g_gameState;
 
 
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
+int libm_cosf(void);
+int libm_sinf(void);
 int FUN_0025ef68(int, int, int);
 int FUN_00294c28(void);
 int FUN_00295108(int);
@@ -28,12 +28,12 @@ int FUN_00317af8(float *, unsigned int [12], int);
 int FUN_00325998(int, int);
 int FUN_0033f8a4(void);
 int FUN_0033f9f4(void);
-int FUN_003d4ed8(int);
-int FUN_00408184(int, int);
+int soundActorStartOnFreeChannel(int);
+int gameCounterAddSaturating(int, int);
 int FUN_004a01c8(int, int);
 int FUN_004a0524(void);
 int FUN_004a08f0(void);
-int FUN_0050d8e4(void);
+int __hardfp_atan2f(void);
 int SBORROW4(int, int);
 int VectorSignedToFloat(unsigned int, int);
 
@@ -59,8 +59,8 @@ extern signed char DAT_005f1c48; /* 0x5f1c48 */
 extern int gameFlagsGetBlock(void);
 extern int padButtonRepeat(unsigned int);
 extern int padButtonIsPressed(unsigned int);
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_0025ef68. */
 extern unsigned int FUN_0029202c(void);
 /* Supplied declaration required: FUN_00294c28. */
@@ -71,14 +71,14 @@ extern unsigned int FUN_0029202c(void);
 /* Supplied declaration required: FUN_00325998. */
 /* Supplied declaration required: FUN_0033f8a4. */
 /* Supplied declaration required: FUN_0033f9f4. */
-/* Supplied declaration required: FUN_003d4ed8. */
+/* Supplied declaration required: soundActorStartOnFreeChannel. */
 extern int gameDataFlagTestBit(unsigned int);
-/* Supplied declaration required: FUN_00408184. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: FUN_004a01c8. */
 /* Supplied declaration required: FUN_004a0524. */
 /* Supplied declaration required: FUN_004a08f0. */
 extern int partyAnyMemberHasFlagBit(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0050d8e4. */
+/* Supplied declaration required: __hardfp_atan2f. */
 
 
 void FUN_003868dc(int param_1)
@@ -172,7 +172,7 @@ void FUN_003868dc(int param_1)
       *(unsigned int *)(param_1 + 0xc4) = 0x3f800000;
       if (!temp_v5) {
         *(unsigned int *)(temp_v0 + 0xdc8) = 0;
-        FUN_0050d8e4();
+        __hardfp_atan2f();
         temp_v12 = temp_v15 * 57.32484f - *(float *)(param_1 + 0x50);
         if (temp_v12 < temp_v10) {
           temp_v12 = temp_v12 + 360.0f;
@@ -183,11 +183,11 @@ void FUN_003868dc(int param_1)
         temp_v14 = 0.017453292f;
         *(float *)(g_lmapScene + 0x50) = -temp_v12;
         temp_v12 = -temp_v12 * 0.017453292f;
-        FUN_001bc124();
+        libm_sinf();
         temp_v2 = g_lmapScene;
         *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + temp_v12 * temp_v8;
         temp_v14 = *(float *)(temp_v2 + 0x50) * temp_v14;
-        FUN_001bbf0c();
+        libm_cosf();
         temp_v2 = g_lmapScene;
         *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v14 * temp_v8;
         *(unsigned int *)(param_1 + 0xc0) = 1;
@@ -218,7 +218,7 @@ void FUN_003868dc(int param_1)
         *(int *)(temp_v0 + 0xdec) = temp_v3;
         if (temp_v3 >= 0x1f) {
           *(int *)(temp_v0 + 0xdec) = temp_v2 - 0x1d;
-          FUN_00408184(0x1d,1);
+          gameCounterAddSaturating(0x1d,1);
         }
         g_gameState.f005f1894 = g_gameState.f005f1894 + 0.2f;
         if ((int)g_gameState.f005f1894 >= 0x44bb8001) {
@@ -257,7 +257,7 @@ void FUN_003868dc(int param_1)
           FUN_004a01c8(2,5);
           *(unsigned int *)(g_lmapScene + 0x160) = 0x453b8000;
           FUN_00325998(0xf,0x1e0);
-          FUN_003d4ed8(0x1000224);
+          soundActorStartOnFreeChannel(0x1000224);
         }
       }
       temp_v2 = (int)(short)*(unsigned int *)(param_1 + 0x48);
@@ -295,7 +295,7 @@ void FUN_003868dc(int param_1)
       *(float *)(temp_v0 + 0xde8) = temp_v7;
       if ((int)temp_v7 >= 0x47c35001) {
         *(float *)(temp_v0 + 0xde8) = temp_v7 - 100000.0f;
-        FUN_00408184(0x12,1);
+        gameCounterAddSaturating(0x12,1);
       }
       temp_v7 = *(float *)(temp_v0 + 0xdf0) + temp_v8;
       *(float *)(temp_v0 + 0xdf0) = temp_v7;

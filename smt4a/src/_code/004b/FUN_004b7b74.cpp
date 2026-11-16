@@ -44,7 +44,7 @@ u16 flaggedValueHolderGetTotal(FlaggedValueHolder *);
 void sysPlaySe(u32);
 void dialogOpen(u32);
 void *asdLoadFileSyncDefault(const char *);
-ScriptRunState *FUN_00275bc8(void *, void *);
+ScriptRunState *scrScriptProcessCreate(void *, void *);
 u32 tableGroupFindEntryIndex(void *, const char *);
 void scrScriptProcessStartEntry(ScriptRunState *, u32);
 
@@ -80,7 +80,7 @@ void FUN_004b7b74(MapMenuCompletionWork *work)
         work->frame = 0;
         work->resultTable = asdLoadFileSyncDefault("battle/Result.bf");
         work->resultMessages = asdLoadFileSyncDefault("battle/ResultMsg.mbm");
-        work->resultProcess = FUN_00275bc8(work->resultTable, work->resultMessages);
+        work->resultProcess = scrScriptProcessCreate(work->resultTable, work->resultMessages);
         work->resultProcess->mode = 3;
         scrScriptProcessStartEntry(work->resultProcess,
             tableGroupFindEntryIndex(work->resultTable, "ProcCharonRequestFirst"));

@@ -54,7 +54,7 @@ void FUN_003c8058(BattleStageWorkerView *worker)
         s32 result = FUN_002c40f8(&index, &handle, 1, 0, 0);
         bool failed = nnResultIsFailure(result);
         if (failed)
-            FUN_002c526c(result, failed);
+            resultHandleFailure(result, failed);
         if (nnResultDescription(result) == 0x3fe)
             return;
     }
@@ -68,6 +68,6 @@ void FUN_003c8058(BattleStageWorkerView *worker)
         worker->stackInfo->unk08 + worker->stackInfo->unk0C, 0x11, 0, 0);
     bool failed = nnResultIsFailure(result);
     if (failed)
-        FUN_002c526c(result, failed);
+        resultHandleFailure(result, failed);
 }
 }

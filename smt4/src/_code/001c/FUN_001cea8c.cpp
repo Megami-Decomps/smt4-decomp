@@ -17,7 +17,7 @@ int arrayContainsU16(...);
 int flaggedEntrySetValueA(...);
 int FUN_0029efd8(...);
 int uiScrollHandleActionsOrTouch(...);
-int FUN_0029f848(...);
+int gridNavigationConfigure(...);
 int soundChannelRequestIfEnabled(...);
 int eventQueueAddUniqueIfValid(...);
 int FUN_002c1658(...);
@@ -41,7 +41,7 @@ int FUN_002b7bca(...);
 int buttonHelpSetPreset(...);
 int timerStart(...);
 int spriteStartAnimationByIndex(...);
-int FUN_002bf818(...);
+int uiSpriteAdvanceAnimation(...);
 int whisperEffectFinish(void);
 int whisperEffectStart(...);
 
@@ -96,22 +96,22 @@ extern int FUN_0029ee54(int);
 extern int FUN_0029efa8(int);
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
-/* Supplied declaration required: FUN_0029f848. */
+/* Supplied declaration required: gridNavigationConfigure. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 extern int sys43e188GetState(void);
 /* Supplied declaration required: messageStatesSetFirst. */
 extern int gameGetUnitRecord(int);
 extern int gameGetPlayerData(void);
-extern int FUN_002b6b04(void);
+extern int infoWindowIsActive(void);
 /* Supplied declaration required: FUN_002b7bca. */
-extern unsigned short FUN_002b8584(unsigned int, int);
+extern unsigned short ifTouchRegionAddRequested(unsigned int, int);
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int buttonHelpGetStatus(void);
 extern int FUN_002b8ee0(int, unsigned int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
-/* Supplied declaration required: FUN_002bf818. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: whisperEffectFinish. */
@@ -162,7 +162,7 @@ void FUN_001cea8c(int param_1)
   temp_v4 = param_1 + *(int *)(param_1 + 0xcf78) * 0x620;
   temp_v5 = gameGetUnitRecord((int)*(char *)(temp_v4 + 0x3654));
   temp_v6 = gameGetPlayerData();
-  FUN_002bf818(param_1 + 0x624);
+  uiSpriteAdvanceAnimation(param_1 + 0x624);
   piVar9 = (int *)(param_1 + 0x3534);
   temp_v25[0] = '\0';
   temp_v15 = *piVar9;
@@ -338,17 +338,17 @@ void FUN_001cea8c(int param_1)
       temp_v5 = 0;
       do {
         temp_v9 = param_1 + temp_v5 * 0x8c;
-        temp_v15 = FUN_002bf818(temp_v9 + 0x7c8);
+        temp_v15 = uiSpriteAdvanceAnimation(temp_v9 + 0x7c8);
         if (temp_v15 == 0) {
           temp_v24 = 0;
         }
-        temp_v15 = FUN_002bf818(temp_v9 + 0xc28);
+        temp_v15 = uiSpriteAdvanceAnimation(temp_v9 + 0xc28);
         if (temp_v15 == 0) {
           temp_v24 = 0;
         }
         temp_v5 = temp_v5 + 1;
       } while (temp_v5 < 8);
-      temp_v5 = FUN_002b6b04();
+      temp_v5 = infoWindowIsActive();
       if ((temp_v5 == 0) && (temp_v5 = dialogIsActive(), temp_v5 == 0)) {
         if (!temp_v24) {
           return;
@@ -403,7 +403,7 @@ void FUN_001cea8c(int param_1)
       if (temp_v5 == 0) {
         return;
       }
-      temp_v5 = FUN_002bf818(param_1 + 0xac);
+      temp_v5 = uiSpriteAdvanceAnimation(param_1 + 0xac);
       if (temp_v5 == 0) {
         return;
       }
@@ -485,15 +485,15 @@ void FUN_001cea8c(int param_1)
       temp_v18 = temp_v18 + 1;
     } while (temp_v18 < 8);
     temp_v11 = FUN_0029aafc();
-    FUN_0029f848(temp_v9,temp_v11,temp_v11,1,1,1);
-    FUN_0029f848(temp_v10,temp_v15,8,1,1,1);
+    gridNavigationConfigure(temp_v9,temp_v11,temp_v11,1,1,1);
+    gridNavigationConfigure(temp_v10,temp_v15,8,1,1,1);
     temp_v15 = FUN_0029efa8(temp_v10);
     buttonHelpShowSkillDetails(*(unsigned short *)(temp_v5 + temp_v15 * 2 + 0x34));
     temp_v8 = 0;
     temp_v15 = FUN_0029ee54(temp_v9);
     if (0 < temp_v15) {
       do {
-        temp_v2 = FUN_002b8584(0x28,temp_v8 + 0xe4);
+        temp_v2 = ifTouchRegionAddRequested(0x28,temp_v8 + 0xe4);
         temp_v15 = temp_v8 * 2;
         temp_v8 = temp_v8 + 1;
         *(unsigned short *)(param_1 + temp_v15 + 0x357e) = temp_v2;
@@ -505,7 +505,7 @@ void FUN_001cea8c(int param_1)
     temp_v15 = FUN_0029ee54(temp_v10);
     if (0 < temp_v15) {
       do {
-        temp_v2 = FUN_002b8584(0x28,temp_v9 + 0xec);
+        temp_v2 = ifTouchRegionAddRequested(0x28,temp_v9 + 0xec);
         temp_v15 = temp_v9 * 2;
         temp_v9 = temp_v9 + 1;
         *(unsigned short *)(param_1 + temp_v15 + 0x358e) = temp_v2;
@@ -930,9 +930,9 @@ LAB_001cf6b0:
     }
     if (*piVar27 >= 2) {
       if (*piVar27 >= 6) {
-        FUN_002bf818(param_1 + temp_v4 * 0x8c + 0x7c8);
+        uiSpriteAdvanceAnimation(param_1 + temp_v4 * 0x8c + 0x7c8);
       }
-      temp_v6 = FUN_002bf818(param_1 + 0x6b0);
+      temp_v6 = uiSpriteAdvanceAnimation(param_1 + 0x6b0);
       if ((temp_v6 != 0) && (param_1 = param_1 + temp_v4 * 0x8c, *(char *)(param_1 + 0x852) != '\0')) {
         spriteStartAnimationByIndex(param_1 + 0x7c8,0);
         FUN_002b7bca(temp_v7,8,2,&LAB_002c6e64);

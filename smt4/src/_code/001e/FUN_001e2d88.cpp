@@ -115,7 +115,7 @@ LAB_001e2fd0:
             *(unsigned char *)(temp_v5 + 0x24) = 1;
             *(unsigned int *)(temp_v5 + 0x38) = 0;
             if (DAT_0049f934 == '\0') {
-              FUN_00291e40(0x1000265, soundActorPositionFromArray(reinterpret_cast<const f32 *>(temp_v5 + 0x28)));
+              soundActorStartOnFreeChannel(0x1000265, soundActorPositionFromArray(reinterpret_cast<const f32 *>(temp_v5 + 0x28)));
             }
             temp_v2 = *(int *)(temp_v5 + 0x54);
             *(int *)(temp_v5 + 0x18) = *(int *)(temp_v5 + 0x18) + 1;

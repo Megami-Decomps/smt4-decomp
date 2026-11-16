@@ -65,12 +65,12 @@ extern SaveLoadGlobals g_saveLoadUI;   /* 0x44de2c */
 extern TitleScene *g_titleScene;       /* 0x44ea00 */
 
 s32 FUN_002996d8(s32 arg);
-void FUN_002bed3c(void);
-u32 FUN_002c5d80(s32 a, s32 b);
+void gxResetColorQuadToWhite(void);
+u32 renderCtxPackPassFlags(s32 a, s32 b);
 void efctSetSpeed(f32 speed);
 TitleCaption *asdTMTexTableEntryAt(s32 a, s32 b);
 f32 renderCtxCalculateStereoParallax(TitleScene *scene, f32 scale);
-s32 FUN_002bf380(s32 a, s32 b, s32 c, s32 d, s32 e, s32 f);
+s32 texDrawCompositeSprite(s32 a, s32 b, s32 c, s32 d, s32 e, s32 f);
 s32 libc_strlen(const u8 *text);
 s32 textDrawString(s32 a, s32 b, const u8 *text, f32 x, f32 y, f32 z, f32 w, f32 speed);
 s32 FUN_002ae038(f32 *color);
@@ -114,13 +114,13 @@ u8 FUN_001ed9a0(void)
             FUN_002996d8(0);
             if (ui->titleShown != 0 && ui->titleBusy == 0) {
                 SaveLoadUI *cursorUi = g_saveLoadUI.ui;
-                FUN_002bed3c();
-                renderTargetPush(g_titleScene, FUN_002c5d80(1, 0));
+                gxResetColorQuadToWhite();
+                renderTargetPush(g_titleScene, renderCtxPackPassFlags(1, 0));
                 efctSetSpeed(1.0f);
                 asdTMTexTableEntryAt(0x36, 0x56);
                 TitleCaption *caption = asdTMTexTableEntryAt(0x36, 0x59);
                 s32 parallax = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.305f);
-                FUN_002bf380(2, 0x36, 7, parallax, 0, 0xF1);
+                texDrawCompositeSprite(2, 0x36, 7, parallax, 0, 0xF1);
                 s32 entry = cursorUi->hasCursor;
                 s32 width = caption->size[0];
                 s32 height = caption->size[1];
@@ -135,7 +135,7 @@ u8 FUN_001ed9a0(void)
             }
         }
         if (ui->shaded != 0 && (ui->hasCursor == 0 || ui->cursorBusy == 0)) {
-            renderTargetPush(g_titleScene, FUN_002c5d80(1, 0));
+            renderTargetPush(g_titleScene, renderCtxPackPassFlags(1, 0));
             efctSetSpeed(ui->speed);
             f32 color[4];
             color[0] = 0.0f;
@@ -146,7 +146,7 @@ u8 FUN_001ed9a0(void)
             screenDrawShadedRect(0, 0, 400, 240, 245);
             renderTargetPop(g_titleScene);
             efctSetSpeed(1.0f);
-            FUN_002bed3c();
+            gxResetColorQuadToWhite();
         }
     }
     return 0;

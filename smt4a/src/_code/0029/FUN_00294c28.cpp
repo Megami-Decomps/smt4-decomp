@@ -22,7 +22,7 @@ void gameFlagsGetBlock(void);
 s32 randRange(u32 id);
 Candidate *saveSlotFindSelected(void);
 s32 gameFlagIsSet(u32 flag);
-s32 FUN_002d8b58(u32 kind, u16 id);
+s32 popupSelectWeightedMessage(u32 kind, u16 id);
 
 /* Starts the mode-2 popup when nothing is busy, flag 0x49A is set, a candidate exists and flag 0x1A2 is clear or the level is above 0x32; with level above 0x3C and flag 0x10 set it uses id 0xAD instead of the candidate's. */
 void FUN_00294c28(void)
@@ -43,7 +43,7 @@ void FUN_00294c28(void)
         } else {
             id = candidate->id;
         }
-        value = FUN_002d8b58(0, id);
+        value = popupSelectWeightedMessage(0, id);
         popup = g_popupState;
         g_popupState->handle = value;
         popup->mode = 2;

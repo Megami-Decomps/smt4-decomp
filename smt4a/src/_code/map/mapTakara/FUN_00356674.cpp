@@ -9,11 +9,11 @@ int moriModelContentCopyBody(void);
 int handleRegistryRegisterObject(...);
 int VectorSignedToFloat(...);
 
-int FUN_00178b04(...);
+int asdMemoryAllocTraced(...);
 int FUN_003689d0(void);
 int FUN_0040a908(...);
 int FUN_0040a918(...);
-int FUN_0040aa6c(void);
+int resourceOwnerLoadFileSync(void);
 int FUN_0040aad4(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -38,7 +38,7 @@ extern union romwright_storage_s__a_a_00587f08_9_1 s__a_a_00587f08; /* 0x587f08 
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int gameFlagsGetBlock(void);
-/* Supplied declaration required: FUN_00178b04. */
+/* Supplied declaration required: asdMemoryAllocTraced. */
 extern int gameFlagIsSet(void);
 extern int gameFlagBitsTest(void);
 extern int gameFlagsTestSecondBank(int);
@@ -47,7 +47,7 @@ extern int dataTableGetRecordFortyNine(void);
 /* Supplied declaration required: controllerSetPosition. */
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
-/* Supplied declaration required: FUN_0040aa6c. */
+/* Supplied declaration required: resourceOwnerLoadFileSync. */
 /* Supplied declaration required: moriModelContentCopyBody. */
 /* Supplied declaration required: FUN_0040aad4. */
 extern int FUN_0040ab8c(unsigned int);
@@ -182,12 +182,12 @@ unsigned int FUN_00356674(void)
               if (temp_v1 != 6) {
                 if (temp_v1 == 8) {
                   temp_v1 = 0x20;
-                  FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x193);
+                  asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x193);
                   goto joined_r0x00356b80;
                 }
                 if (temp_v1 == 9) {
                   temp_v1 = 0x20;
-                  FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x19c);
+                  asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x19c);
                   goto joined_r0x00356bb0;
                 }
                 if (temp_v1 != 10) {
@@ -198,7 +198,7 @@ unsigned int FUN_00356674(void)
                           if (temp_v1 != 0xf) {
                             if (temp_v1 != 0x10) {
                               temp_v1 = 0x20;
-                              FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x1e4);
+                              asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x1e4);
                               temp_v2 = 0;
                               if (temp_v1 != 0) {
                                 temp_v2 = modelListInit();
@@ -206,7 +206,7 @@ unsigned int FUN_00356674(void)
                               *(unsigned int *)
                                ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 +
                                0x20) = temp_v2;
-                              FUN_0040aa6c();
+                              resourceOwnerLoadFileSync();
                               FUN_0040a908(*(unsigned int *)
                                             ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                              *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
@@ -221,7 +221,7 @@ unsigned int FUN_00356674(void)
                             }
                             else {
                               temp_v1 = 0x20;
-                              FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x1db);
+                              asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x1db);
                               temp_v2 = 0;
                               if (temp_v1 != 0) {
                                 temp_v2 = modelListInit();
@@ -229,7 +229,7 @@ unsigned int FUN_00356674(void)
                               *(unsigned int *)
                                ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 +
                                0x20) = temp_v2;
-                              FUN_0040aa6c();
+                              resourceOwnerLoadFileSync();
                               FUN_0040a908(*(unsigned int *)
                                             ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                              *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
@@ -245,7 +245,7 @@ unsigned int FUN_00356674(void)
                           }
                           else {
                             temp_v1 = 0x20;
-                            FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x1d2);
+                            asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x1d2);
                             temp_v2 = 0;
                             if (temp_v1 != 0) {
                               temp_v2 = modelListInit();
@@ -253,7 +253,7 @@ unsigned int FUN_00356674(void)
                             *(unsigned int *)
                              ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 +
                              0x20) = temp_v2;
-                            FUN_0040aa6c();
+                            resourceOwnerLoadFileSync();
                             FUN_0040a908(*(unsigned int *)
                                           ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                            *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
@@ -269,7 +269,7 @@ unsigned int FUN_00356674(void)
                         }
                         else {
                           temp_v1 = 0x20;
-                          FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x1c9);
+                          asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x1c9);
                           temp_v2 = 0;
                           if (temp_v1 != 0) {
                             temp_v2 = modelListInit();
@@ -277,7 +277,7 @@ unsigned int FUN_00356674(void)
                           *(unsigned int *)
                            ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 +
                            0x20) = temp_v2;
-                          FUN_0040aa6c();
+                          resourceOwnerLoadFileSync();
                           FUN_0040a908(*(unsigned int *)
                                         ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                          *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),0x10000)
@@ -293,7 +293,7 @@ unsigned int FUN_00356674(void)
                       }
                       else {
                         temp_v1 = 0x20;
-                        FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x1c0);
+                        asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x1c0);
                         temp_v2 = 0;
                         if (temp_v1 != 0) {
                           temp_v2 = modelListInit();
@@ -301,7 +301,7 @@ unsigned int FUN_00356674(void)
                         *(unsigned int *)
                          ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20)
                              = temp_v2;
-                        FUN_0040aa6c();
+                        resourceOwnerLoadFileSync();
                         FUN_0040a908(*(unsigned int *)
                                       ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                        *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),0x10000);
@@ -315,7 +315,7 @@ unsigned int FUN_00356674(void)
                     }
                     else {
                       temp_v1 = 0x20;
-                      FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x1b7);
+                      asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x1b7);
                       temp_v2 = 0;
                       if (temp_v1 != 0) {
                         temp_v2 = modelListInit();
@@ -323,7 +323,7 @@ unsigned int FUN_00356674(void)
                       *(unsigned int *)
                        ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) =
                            temp_v2;
-                      FUN_0040aa6c();
+                      resourceOwnerLoadFileSync();
                       FUN_0040a908(*(unsigned int *)
                                     ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                      *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),0x10000);
@@ -337,7 +337,7 @@ unsigned int FUN_00356674(void)
                   }
                   else {
                     temp_v1 = 0x20;
-                    FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x1ae);
+                    asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x1ae);
                     temp_v2 = 0;
                     if (temp_v1 != 0) {
                       temp_v2 = modelListInit();
@@ -345,7 +345,7 @@ unsigned int FUN_00356674(void)
                     *(unsigned int *)
                      ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) =
                          temp_v2;
-                    FUN_0040aa6c();
+                    resourceOwnerLoadFileSync();
                     FUN_0040a908(*(unsigned int *)
                                   ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                    *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),0x10000);
@@ -359,7 +359,7 @@ unsigned int FUN_00356674(void)
                 }
                 else {
                   temp_v1 = 0x20;
-                  FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x1a5);
+                  asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x1a5);
                   temp_v2 = 0;
                   if (temp_v1 != 0) {
                     temp_v2 = modelListInit();
@@ -367,7 +367,7 @@ unsigned int FUN_00356674(void)
                   *(unsigned int *)
                    ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) =
                        temp_v2;
-                  FUN_0040aa6c();
+                  resourceOwnerLoadFileSync();
                   FUN_0040a908(*(unsigned int *)
                                 ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8
                                 + 0x20),0x10000);
@@ -381,7 +381,7 @@ unsigned int FUN_00356674(void)
               }
               else {
                 temp_v1 = 0x20;
-                FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x18a);
+                asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x18a);
                 temp_v2 = 0;
                 if (temp_v1 != 0) {
                   temp_v2 = modelListInit();
@@ -389,7 +389,7 @@ unsigned int FUN_00356674(void)
                 *(unsigned int *)
                  ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) = temp_v2
                 ;
-                FUN_0040aa6c();
+                resourceOwnerLoadFileSync();
                 FUN_0040a908(*(unsigned int *)
                               ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 +
                               0x20),0x10000);
@@ -403,14 +403,14 @@ unsigned int FUN_00356674(void)
             }
             else {
               temp_v1 = 0x20;
-              FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x181);
+              asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x181);
               temp_v2 = 0;
               if (temp_v1 != 0) {
                 temp_v2 = modelListInit();
               }
               *(unsigned int *)
                ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) = temp_v2;
-              FUN_0040aa6c();
+              resourceOwnerLoadFileSync();
               FUN_0040a908(*(unsigned int *)
                             ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 +
                             0x20),0x10000);
@@ -424,7 +424,7 @@ unsigned int FUN_00356674(void)
           }
           else {
             temp_v1 = 0x20;
-            FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x178);
+            asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x178);
 joined_r0x00356bb0:
             temp_v2 = 0;
             if (temp_v1 != 0) {
@@ -432,7 +432,7 @@ joined_r0x00356bb0:
             }
             *(unsigned int *)
              ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) = temp_v2;
-            FUN_0040aa6c();
+            resourceOwnerLoadFileSync();
             FUN_0040a908(*(unsigned int *)
                           ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20
                           ),0x10000);
@@ -446,7 +446,7 @@ joined_r0x00356bb0:
         }
         else {
           temp_v1 = 0x20;
-          FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x16f);
+          asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x16f);
 joined_r0x00356b80:
           temp_v2 = 0;
           if (temp_v1 != 0) {
@@ -454,7 +454,7 @@ joined_r0x00356b80:
           }
           *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20)
                = temp_v2;
-          FUN_0040aa6c();
+          resourceOwnerLoadFileSync();
           FUN_0040a908(*(unsigned int *)
                         ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
                        0x10000);
@@ -468,14 +468,14 @@ joined_r0x00356b80:
       }
       else {
         temp_v1 = 0x20;
-        FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x166);
+        asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x166);
         temp_v2 = 0;
         if (temp_v1 != 0) {
           temp_v2 = modelListInit();
         }
         *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) =
              temp_v2;
-        FUN_0040aa6c();
+        resourceOwnerLoadFileSync();
         FUN_0040a908(*(unsigned int *)
                       ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
                      0x10000);
@@ -489,14 +489,14 @@ joined_r0x00356b80:
     }
     else {
       temp_v1 = 0x20;
-      FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x15d);
+      asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x15d);
       temp_v2 = 0;
       if (temp_v1 != 0) {
         temp_v2 = modelListInit();
       }
       *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) =
            temp_v2;
-      FUN_0040aa6c();
+      resourceOwnerLoadFileSync();
       FUN_0040a908(*(unsigned int *)
                     ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
                    0x10000);
@@ -509,14 +509,14 @@ joined_r0x00356b80:
   }
   else {
     temp_v1 = 0x20;
-    FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x154);
+    asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x154);
     temp_v2 = 0;
     if (temp_v1 != 0) {
       temp_v2 = modelListInit();
     }
     *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) =
          temp_v2;
-    FUN_0040aa6c();
+    resourceOwnerLoadFileSync();
     FUN_0040a908(*(unsigned int *)
                   ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
                  0x10000);
@@ -550,7 +550,7 @@ LAB_003572ac:
       *(unsigned char *)(temp_v5 + 0xbd8) = 1;
       *(unsigned int *)(temp_v5 + 0xbdc) = 0;
       *(unsigned char *)(temp_v5 + 0xbd0) = 1;
-      FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x276);
+      asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x276);
       temp_v2 = 0;
       if (temp_v1 != 0) {
         temp_v2 = modelListInit();
@@ -655,7 +655,7 @@ LAB_0035755c:
                 *(unsigned int *)(temp_v7 + 0xdc) = 0;
                 temp_v1 = 0x20;
                 *(unsigned char *)(temp_v7 + 0xd8) = 1;
-                FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x333);
+                asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x333);
                 temp_v2 = 0;
                 if (temp_v1 != 0) {
                   temp_v2 = modelListInit();

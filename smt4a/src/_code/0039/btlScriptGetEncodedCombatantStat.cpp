@@ -10,7 +10,7 @@
 extern "C" {
 s32 btlResolveEntryChoice(s32 choice);
 void scrSetResult(s32 result);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
 
 // Find the requested combatant with an encoded statistic whose high six bits equal one.
 u32 btlScriptGetEncodedCombatantStat()
@@ -19,7 +19,7 @@ u32 btlScriptGetEncodedCombatantStat()
     u32 stat = scrGetArg(1);
     s32 choice = btlResolveEntryChoice(scrGetArg(2));
     s32 first, count;
-    FUN_00301a08(choice, &first, &count);
+    btlGetEntryChoiceRange(choice, &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
@@ -31,7 +31,7 @@ u32 btlScriptGetEncodedCombatantStat()
         }
     }
     if (btlGetMainState()->unk4cd1) {
-        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL && entry->id == id && (entry->encodedStats.values[stat] >> 10) == 1) {
             scrSetResult(1);
             return 1;

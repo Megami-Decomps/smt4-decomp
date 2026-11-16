@@ -91,7 +91,7 @@ static __inline void lmapPlaceBehind(LmapScene *scene, f32 heading)
     scene->targetY = *reinterpret_cast<f32 *>(&g_gameState.f0049f9a4);
     scene->targetZ = *reinterpret_cast<f32 *>(&g_gameState.f0049f9a8);
     f32 angle = (heading + LMAP_HALF_TURN) * LMAP_DEG_TO_RAD;
-    scene->targetX += FUN_0028250c(angle) * LMAP_BEHIND_DISTANCE;
+    scene->targetX += mathRemPio2f(angle) * LMAP_BEHIND_DISTANCE;
     scene->targetZ += FUN_00282390(angle) * LMAP_BEHIND_DISTANCE;
 }
 

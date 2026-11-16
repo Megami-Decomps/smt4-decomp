@@ -3,7 +3,7 @@
 #include <new>
 
 extern "C" {
-void *FUN_00178b04(u32 size, const char *file, u32 line);
+void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 void FUN_003fdd1c(ModelUnitBuffers *unit, void *part);
 void moriModelUnitAllocateChannels(ModelUnitBuffers *unit);
 void moriModelChannelInitialize(UnitChannel *channel, s32 count);
@@ -41,7 +41,7 @@ void Obj557b18::attachContent(UnitModelContent *content, u32 partIndex)
         moriModelChannelInitialize(&unit->channelsB[1], maxElementCount(view->table->meshesC, view->table->countC));
     }
     if (content->extra != NULL && content->extra->count > 0) {
-        void *memory = FUN_00178b04(0x24, "c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelUnit.cpp", 0x5d);
+        void *memory = asdMemoryAllocTraced(0x24, "c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelUnit.cpp", 0x5d);
         unit->extra = new (memory) ModelUnitExtra(content->extra, unit);
     }
     nn_math_ARMv6_MTX34CopyAsm(&unit->matrix, &nw::math::MTX34::Identity());

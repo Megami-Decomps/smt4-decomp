@@ -6,7 +6,7 @@ extern "C" {
 extern PanelTextDefaultsPrefixA DAT_0057f0ac;
 const PanelTextLayoutEntryPrefixA *layoutFindTableEntry(TextLayoutContextA *context, s32 entryId);
 u32 FUN_002a4b28(u16 textId);
-u32 FUN_00180118(u16 textId);
+u32 dataTable01GetRecordWithAocOverride(u16 textId);
 void drawTextAtSnappedRectangle(TextLayoutContextA *context, u32 style,
                                 u32 color, u32 textValue,
                                 f32 x, f32 y, f32 opacity,
@@ -42,7 +42,7 @@ void FUN_004a7ba0(PanelTextOwnerPrefixA *panel, s16 textId,
     const s16 baseY = base->y;
     u32 textValue;
     if (FUN_002a4b28(textId) != 0 || panel->allowTextLookup != 0) {
-        textValue = FUN_00180118(textId);
+        textValue = dataTable01GetRecordWithAocOverride(textId);
     } else {
         textValue = DAT_0057f0ac.fallbackTextValue;
     }

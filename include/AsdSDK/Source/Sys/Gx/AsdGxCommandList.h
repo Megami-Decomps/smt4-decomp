@@ -52,7 +52,7 @@ unsigned int jyoucyuGetTableEntry(int param_1);
 }
 
 extern "C" {
-u32 FUN_002c5210(void);
+u32 gxIsStereoscopic3dEnabled(void);
 }
 
 extern "C" {
@@ -60,7 +60,7 @@ AsdGxCommandList *asdGxCommandListCreate(void);
 }
 
 extern "C" {
-u32 FUN_00167c14(u32 *x, u32 *y, s32 mode);
+u32 touchGetPointByMode(u32 *x, u32 *y, s32 mode);
 }
 
 #ifdef __cplusplus

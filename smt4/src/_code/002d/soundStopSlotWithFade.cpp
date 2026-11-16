@@ -14,7 +14,7 @@ struct SoundState {
 
 extern "C" {
 extern SoundState DAT_004e2f68;
-void FUN_002bda30(SoundHandle *handle, s32 frames);
+void basicSoundStopOrFadeOut(SoundHandle *handle, s32 frames);
 
 /* Stops an indexed sound, allowing it to fade over the requested frame count. */
 s32 soundStopSlotWithFade(u32 index, s32 frames)
@@ -25,7 +25,7 @@ s32 soundStopSlotWithFade(u32 index, s32 frames)
         return result;
     }
     if (slots->handles[index] != NULL) {
-        FUN_002bda30(slots->handles[index], frames);
+        basicSoundStopOrFadeOut(slots->handles[index], frames);
     }
     return 1;
 }

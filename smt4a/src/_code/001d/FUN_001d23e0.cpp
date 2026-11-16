@@ -31,7 +31,7 @@ extern int g_aocMain; /* 0x570260 */
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
 /* Supplied declaration required: jyoucyuGetTableEntry. */
-extern int FUN_001a0380(int);
+extern int fsUnmountByName(int);
 extern int sysLightEventTryWait(int);
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ev. */
@@ -71,7 +71,7 @@ void FUN_001d23e0(unsigned int *param_1,int param_2,unsigned int *param_3,unsign
   strcmp((const char *)temp_v0,(const char *)param_3);
   if (temp_v1 != 0) {
     if (*(char *)(param_2 + 0x330) != '\0') {
-      temp_v1 = FUN_001a0380(temp_v0);
+      temp_v1 = fsUnmountByName(temp_v0);
       *(unsigned char *)(param_2 + 0x330) = 0;
       if (temp_v1 < 0) {
         _ZN21WindowOperationResultC1Eh(temp_v8,0);

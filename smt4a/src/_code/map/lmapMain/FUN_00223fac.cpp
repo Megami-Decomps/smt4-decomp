@@ -16,7 +16,7 @@ s32 randRange(s32 maximum);
 
 s32 gameFlagIsSet(u32 flag);
 s32 gameFlagStateIsOne(void);
-u32 FUN_002d8b58(u32 kind, u32 resource);
+u32 popupSelectWeightedMessage(u32 kind, u32 resource);
 
 // Periodically open the map popup while its progress flag is enabled.
 void FUN_00223fac(void)
@@ -32,7 +32,7 @@ void FUN_00223fac(void)
             g_gameState.popup.countdown = 5;
             g_popupState->timer = 0;
             g_popupState->state = 20;
-            g_popupState->process = FUN_002d8b58(21, 187);
+            g_popupState->process = popupSelectWeightedMessage(21, 187);
         } else {
             --g_gameState.popup.countdown;
         }

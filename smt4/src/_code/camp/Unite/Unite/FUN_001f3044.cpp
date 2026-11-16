@@ -8,13 +8,13 @@ extern "C" {
 
 int FUN_00294834(...);
 int statusCameraSelectPreset(...);
-int FUN_00297060(...);
+int scrScriptProcessCreate(...);
 int fileSlotLoad(...);
 int uniteRebuildFusionCatalog(...);
 int FUN_002bcc60(...);
 int resultReportIfFailed(...);
 int timerStart(...);
-int FUN_002bd954(...);
+int uiSpriteStateInitFromSource(...);
 int spriteStartAnimationByIndex(...);
 int asdOperatorNew(...);
 int memAlloc(...);
@@ -22,7 +22,7 @@ int __aeabi_memset4(...);
 int memClear(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
-int FUN_002c526c(...);
+int resultHandleFailure(...);
 int asdProcessCreateSimple(...);
 int mapMainCallIfFlag(...);
 int FUN_003c9c94(...);
@@ -65,7 +65,7 @@ extern int *g_unite; /* 0x43dd68 */
 extern int asdCameraLoadFromFile(unsigned char *);
 /* Supplied declaration required: FUN_00294834. */
 /* Supplied declaration required: statusCameraSelectPreset. */
-/* Supplied declaration required: FUN_00297060. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 /* Supplied declaration required: fileSlotLoad. */
 extern int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 extern int FUN_0029aef0(void);
@@ -78,7 +78,7 @@ extern int lmapMainIsRunning(void);
 /* Supplied declaration required: FUN_002bcc60. */
 /* Supplied declaration required: resultReportIfFailed. */
 /* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002bd954. */
+/* Supplied declaration required: uiSpriteStateInitFromSource. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: asdOperatorNew. */
@@ -88,7 +88,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: FUN_002c526c. */
+/* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 extern int asdLoadFileSyncDefault(unsigned char *);
 /* Supplied declaration required: mapMainCallIfFlag. */
@@ -160,7 +160,7 @@ void FUN_001f3044(void)
   FUN_002bcc60(piVar5,&temp_v5,FUN_001de340,&temp_v3,*(int *)(temp_v0 + 0xc) + *(int *)(temp_v0 + 8),
                0x11,0xfffffffe,0);
   if (((unsigned int)piVar5 & 0x7e00000) != 0x600000 && (int)piVar5 < 0) {
-    FUN_002c526c();
+    resultHandleFailure();
   }
   temp_v0 = gameFlagIsSet(0x418);
   if (temp_v0 == 0) {
@@ -211,19 +211,19 @@ void FUN_001f3044(void)
   uniteRebuildFusionCatalog();
   drawParameterBlockClear(piVar1 + 1);
   paramsInit(reinterpret_cast<UiResourceParameters *>(piVar1 + 1),&DAT_004030ec,0x54,&DAT_00403140,0x3c,0,0,0,0,&DAT_0040317c,0x16c);
-  FUN_002bd954(piVar1 + 9,0x24,0,piVar1 + 1,1);
+  uiSpriteStateInitFromSource(piVar1 + 9,0x24,0,piVar1 + 1,1);
   spriteStartAnimationByIndex(piVar1 + 9,0);
-  FUN_002bd954(piVar1 + 0x2c,0x24,0,piVar1 + 1,1);
+  uiSpriteStateInitFromSource(piVar1 + 0x2c,0x24,0,piVar1 + 1,1);
   timerStart(piVar1 + 0x2c,0);
-  FUN_002bd954(piVar1 + 0x4f,0x24,0,piVar1 + 1,1);
+  uiSpriteStateInitFromSource(piVar1 + 0x4f,0x24,0,piVar1 + 1,1);
   spriteStartAnimationByIndex(piVar1 + 0x4f,1);
-  FUN_002bd954(piVar1 + 0x72,0x24,0,piVar1 + 1,1);
+  uiSpriteStateInitFromSource(piVar1 + 0x72,0x24,0,piVar1 + 1,1);
   timerStart(piVar1 + 0x72,1,0);
-  FUN_002bd954(piVar1 + 0x95,0x24,0,piVar1 + 1,1);
+  uiSpriteStateInitFromSource(piVar1 + 0x95,0x24,0,piVar1 + 1,1);
   timerStart(piVar1 + 0x95,5,0);
-  FUN_002bd954(piVar1 + 0xb8,0x24,0,piVar1 + 1,1);
+  uiSpriteStateInitFromSource(piVar1 + 0xb8,0x24,0,piVar1 + 1,1);
   spriteStartAnimationByIndex(piVar1 + 0xb8,2);
-  FUN_002bd954(piVar1 + 0xdb,0x24,0,piVar1 + 1,1);
+  uiSpriteStateInitFromSource(piVar1 + 0xdb,0x24,0,piVar1 + 1,1);
   spriteStartAnimationByIndex(piVar1 + 0xdb,3);
   fileSlotLoad(0x24);
   fileSlotLoad(0x22);
@@ -233,7 +233,7 @@ void FUN_001f3044(void)
   piVar1[0x109] = temp_v0;
   temp_v0 = asdLoadFileSyncDefault(&LAB_001f3668);
   piVar1[0x10a] = temp_v0;
-  FUN_00297060(temp_v0,piVar1[0x109]);
+  scrScriptProcessCreate(temp_v0,piVar1[0x109]);
   piVar1[0x10b] = temp_v0;
   temp_v0 = lmapSceneGetScript();
   if ((temp_v0 != 0) || (temp_v0 = lmapMainIsRunning(), temp_v0 != 0)) {
@@ -250,7 +250,7 @@ void FUN_001f3044(void)
   piVar1[0x2573] = temp_v0;
   piVar1[0x2576] = 0;
   piVar1[0x2577] = 0;
-  temp_v0 = FUN_002907a8();
+  temp_v0 = saveBlockGetPlaySeconds();
   piVar1[0x107] = temp_v0;
   return;
 }

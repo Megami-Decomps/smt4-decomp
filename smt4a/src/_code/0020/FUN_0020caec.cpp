@@ -14,12 +14,12 @@ void FUN_0020caec(u32 id, u32 a, u32 b, u32 c)
 
     record = slotRecordFindById(id);
     if ((record != 0) && (record = bitsAt60Test(record, 10), record == 0)) {
-        FUN_001835b4(2, 0x1A, 0x5B, a, b, c);
+        texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x5B, a, b, c);
         return;
     }
     record = FUN_002a4b28(id);
     if (record != 0) {
-        FUN_001835b4(2, 0x1A, 0x5A, a, b, c);
+        texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x5A, a, b, c);
     }
 }
 

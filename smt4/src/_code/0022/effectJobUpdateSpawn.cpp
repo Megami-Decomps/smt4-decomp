@@ -13,7 +13,7 @@ struct EffectJobState {
 
 extern "C" {
 EffectJobState *jobGetWork();
-void FUN_00281bb0(void *current);
+void effectNodeUpdateTransform(void *current);
 s32 effectTimelineNodesFitDuration(void *current);
 void *FUN_002a4e98(const void *definition);
 void FUN_002a3ab0(void *current, const f32 *translation);
@@ -35,7 +35,7 @@ u32 effectJobUpdateSpawn()
         }
         break;
     case 1:
-        FUN_00281bb0(work->current);
+        effectNodeUpdateTransform(work->current);
         if (effectTimelineNodesFitDuration(work->current)) {
             return 0xffffffff;
         }

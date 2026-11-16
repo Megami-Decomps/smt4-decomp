@@ -7,7 +7,7 @@
 
 extern "C" {
 void FUN_0027df30(s32, ScriptUnit *, BtlActionRecord *, s32, s32, s32, u32, u32, s32, s32, s32, s32, s32);
-void FUN_002505c0(s32, ScriptUnit *, u32, s32, s32, s32, s32);
+void btlQueueKeyedScalarReflectAction(s32, ScriptUnit *, u32, s32, s32, s32, s32);
 
 u32 FUN_002f7f54()
 {
@@ -34,7 +34,7 @@ u32 FUN_002f7f54()
             s32 delay = count * 5;
             FUN_0027df30(0, actor, &battle->actions[unit->members.ids[0]], 0,
                          hp, mp, static_cast<u32>(-1), effect, delay, delay, 9, 0, 0);
-            FUN_002505c0(delay, actor, 0x10001C1, 0, 0, 0, 0);
+            btlQueueKeyedScalarReflectAction(delay, actor, 0x10001C1, 0, 0, 0, 0);
             ++count;
         }
     }

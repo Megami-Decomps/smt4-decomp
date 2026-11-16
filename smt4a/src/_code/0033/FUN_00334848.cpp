@@ -21,7 +21,7 @@ extern RenderCtxA *g_renderCtx;
 JobSlotsWork *jobGetWork(void);
 s32 jobIsValid(u32 job);
 f32 jobGetScalarFrame(u32 job);
-s32 FUN_00387580(u32 kind, f32 value);
+s32 renderCtxPackPassFlagsWithAlpha(u32 kind, f32 value);
 void FUN_00281428(u32 job, f32 x, f32 y);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
@@ -58,7 +58,7 @@ u32 FUN_00334848(void)
     } while (swapped);
 
     RenderCtxA *context = g_renderCtx;
-    s32 state = FUN_00387580(6, 0.0f);
+    s32 state = renderCtxPackPassFlagsWithAlpha(6, 0.0f);
     renderStackPush(&context->additional.stackC, state);
     if (work->drawAll != 0) {
         for (s32 i = 0; i < 10; i++) {

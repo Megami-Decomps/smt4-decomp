@@ -12,9 +12,9 @@ int nnnstdMemCpy(...);
 int itemVariantReselect(unsigned int);
 int aocTexCtrlInit(...);
 int dataTableFileGetTable(...);
-int FUN_002ac0c4(void);
-int FUN_002ac0f8(void);
-int FUN_002ac12c(...);
+int packageEntryGetFileCount(void);
+int packageEntryGetDirectory(void);
+int packageEntryIsLoaded(...);
 int FUN_002b486c(void);
 int FUN_0038e2ac(unsigned int);
 int FUN_00393620(unsigned int, unsigned int);
@@ -137,7 +137,7 @@ typedef struct {
     unsigned int spE0; /* 0xe0: local_e0 */
 } param_1_stack;
 
-extern unsigned char FUN_0014147c; /* 0x14147c */
+extern unsigned char compareU16Ascending; /* 0x14147c */
 extern unsigned char compareRecordKey; /* 0x151b78 */
 extern unsigned char FUN_00151b88; /* 0x151b88 */
 extern unsigned char FUN_00385b64; /* 0x385b64 */
@@ -153,9 +153,9 @@ extern unsigned char FUN_00387c68; /* 0x387c68 */
 /* Supplied declaration required: itemVariantReselect. */
 /* Supplied declaration required: aocTexCtrlInit. */
 /* Supplied declaration required: dataTableFileGetTable. */
-/* Supplied declaration required: FUN_002ac0c4. */
-/* Supplied declaration required: FUN_002ac0f8. */
-/* Supplied declaration required: FUN_002ac12c. */
+/* Supplied declaration required: packageEntryGetFileCount. */
+/* Supplied declaration required: packageEntryGetDirectory. */
+/* Supplied declaration required: packageEntryIsLoaded. */
 /* Supplied declaration required: FUN_002b486c. */
 /* Supplied declaration required: FUN_002b7bca. */
 extern int dataTableGetCount(void);
@@ -265,12 +265,12 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
     temp_v58 = &param_1->field_0x3fc;
     do {
       temp_v23 = param_1->field_0x318 + temp_v37 * 0x50;
-      temp_v2 = FUN_002ac12c();
+      temp_v2 = packageEntryIsLoaded();
       if (temp_v2 != 0) {
         temp_v13 = temp_v23;
-        FUN_002ac0f8();
+        packageEntryGetDirectory();
         temp_v9 = temp_v23;
-        FUN_002ac0c4();
+        packageEntryGetFileCount();
         temp_v12 = 0;
         if (temp_v12 < temp_v9) {
           do {
@@ -632,13 +632,13 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
   if (0 < param_1->field_0x310) {
     do {
       piVar13 = (int *)(param_1->field_0x318 + (int)temp_v49 * 0x50);
-      temp_v2 = FUN_002ac12c(piVar13);
+      temp_v2 = packageEntryIsLoaded(piVar13);
       if (temp_v2 != 0) {
         piVar17 = piVar13;
-        FUN_002ac0f8();
+        packageEntryGetDirectory();
         piVar6 = piVar13;
         temp_v45 = piVar17;
-        FUN_002ac0c4();
+        packageEntryGetFileCount();
         piVar17 = (int *)0;
         if (piVar6 != (int *)0x0) {
           piVar17 = temp_v49;
@@ -1028,7 +1028,7 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
     FUN_002b7bca(param_1->field_0x378,param_1->field_0x374,0x28,&FUN_00387c68);
   }
   if (param_1->field_0x42c != 0) {
-    FUN_002b7bca(param_1->field_0x430,param_1->field_0x42c,0x18,&FUN_0014147c);
+    FUN_002b7bca(param_1->field_0x430,param_1->field_0x42c,0x18,&compareU16Ascending);
   }
   if (param_1->field_0x434 != 0) {
     FUN_002b7bca(param_1->field_0x438,param_1->field_0x434,0x68,&FUN_00151b88);

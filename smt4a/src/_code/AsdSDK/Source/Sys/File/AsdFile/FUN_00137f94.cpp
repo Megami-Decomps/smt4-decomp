@@ -25,7 +25,7 @@ void nn_os_LightEvent_Signal(void *event);
 void syncWaitHandleForever(u32 *handle);
 void FUN_001469a8(AddressSpaceRegion *region);
 void asdFileHashPackClose(void);
-void FUN_001a0380(const char *mount);
+void fsUnmountByName(const char *mount);
 
 // Stops the loader's worker thread if it is still running (the poll times out), then closes the
 // file packs and the ROM mount.
@@ -35,7 +35,7 @@ void FUN_00137f94(void)
         s32 result = svcWaitSynchronization1(g_asdFileWorkerThread.handle, 0);
         bool failed = nnResultIsFailure(result);
         if (failed) {
-            FUN_002e3140(result, failed);
+            resultHandleFailure(result, failed);
         }
         nnResultFields fields;
         fields.value = result;
@@ -45,7 +45,7 @@ void FUN_00137f94(void)
             result = nn::svc::SetThreadPriority(g_asdFileWorkerThread.handle, nn_os_detail_ConvertLibraryToSvcPriority(0x10));
             failed = nnResultIsFailure(result);
             if (failed) {
-                FUN_002e3140(result, failed);
+                resultHandleFailure(result, failed);
             }
             g_asdFile.stopRequested = 1;
             nn_os_LightEvent_Signal(g_asdFile.event);
@@ -56,7 +56,7 @@ void FUN_00137f94(void)
         }
     }
     asdFileHashPackClose();
-    FUN_001a0380("rom:");
+    fsUnmountByName("rom:");
 }
 
 }

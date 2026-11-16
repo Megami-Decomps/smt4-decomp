@@ -12,8 +12,8 @@ struct CampCecOverlayWork {
 extern "C" {
 extern CampCecOverlayWork *g_campCec;
 extern RenderCtx *g_titleScene;
-void FUN_002bed3c();
-s32 FUN_002c5d80(u32 mode, u32 option);
+void gxResetColorQuadToWhite();
+s32 renderCtxPackPassFlags(u32 mode, u32 option);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
 void FUN_002b76d0(const EffectColor *first, const EffectColor *second,
                   const EffectColor *third, const EffectColor *fourth,
@@ -36,10 +36,10 @@ u32 campCecDrawDimmingOverlay()
     case 4:
     case 5:
         if (g_campCec->dimBackground != 0) {
-            FUN_002bed3c();
+            gxResetColorQuadToWhite();
             renderCtxSelectStereoLayout(g_titleScene);
             RenderCtx *context = g_titleScene;
-            s32 state = FUN_002c5d80(1, 0);
+            s32 state = renderCtxPackPassFlags(1, 0);
             renderStackPush(&context->stackA, state);
             color.red = 0.0f;
             color.green = 0.0f;

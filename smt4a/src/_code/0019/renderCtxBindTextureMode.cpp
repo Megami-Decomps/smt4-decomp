@@ -3,7 +3,7 @@
 #include "shard/W6_W6Match2_HelpResources.h"
 
 extern "C" {
-void FUN_001ac64c(u32 width, u32 height, u32 format, u32 address);
+void gpuSubmitTextureConfig(u32 width, u32 height, u32 format, u32 address);
 
 /* Selects the texture-environment mode, unless it is already active. */
 static void setBindingState(RenderCtxA *context, u8 state)
@@ -20,7 +20,7 @@ void renderCtxBindTextureMode(RenderCtxA *context, AsdTexture *texture, u8 mode)
     if (context->depthStacks.selectedTextureDirty != 0 || context->depthStacks.selectedTexture != texture) {
         context->depthStacks.selectedTexture = texture;
         if (texture != NULL) {
-            FUN_001ac64c(texture->dimensions.width, texture->dimensions.height, texture->image.hardwareFormat,
+            gpuSubmitTextureConfig(texture->dimensions.width, texture->dimensions.height, texture->image.hardwareFormat,
                          texture->image.physicalAddress);
             context->depthStacks.selectedTextureState = 3;
         }

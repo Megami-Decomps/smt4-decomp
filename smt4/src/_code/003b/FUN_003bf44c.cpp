@@ -15,7 +15,7 @@ struct BattleAmountPlayer {
 extern "C" {
 void *gameGetSlotTable();
 u32 clockGetSecondsSinceStart();
-u32 FUN_002907a8();
+u32 saveBlockGetPlaySeconds();
 BattleAmountPlayer *gameGetPlayerData();
 f32 FUN_002b99b8(f32 base, f32 exponent);
 
@@ -26,7 +26,7 @@ s32 FUN_003bf44c()
     gameGetSlotTable();
     u32 seconds = clockGetSecondsSinceStart();
     if (seconds == 0xffffffff)
-        seconds = FUN_002907a8();
+        seconds = saveBlockGetPlaySeconds();
     f32 minutes = (f32)(seconds / 60);
     if (battle->elapsedMinutes != -1)
         minutes = (f32)battle->elapsedMinutes;

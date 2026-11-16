@@ -4,7 +4,7 @@
 #include "gamedata/DevilRecordA.h"
 extern "C" {
 extern BtlMain g_btlMain;
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
 DevilRecordA *devilGetRecord(u32 id);
 s32 gameFlagIsSet(u32 flag);
 u32 lcgRandomRange(s32 limit);
@@ -39,7 +39,7 @@ u32 FUN_003ed6e8(BtlMainStateA *state)
         return 0;
     ExtraActionView *extra = (ExtraActionView *)state;
     extra->count = 0;
-    BtlCombatantEntryA *entry = FUN_003eaf20(state);
+    BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(state);
     if (!entry)
         return 0;
     if ((entry->flags & masks->required) && !(entry->flags & masks->excluded)) {

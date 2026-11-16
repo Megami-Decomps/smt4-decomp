@@ -40,12 +40,12 @@ void FUN_00399290(s32 index, s32 show)
         if (show) {
             if (!state->markers[index].shown && state->markers[index].enabled) {
                 state->markers[index].shown = 1;
-                LmapMarkerNode *node = reinterpret_cast<LmapMarkerNode *>(FUN_0040619c(state->model->nodes, index));
+                LmapMarkerNode *node = reinterpret_cast<LmapMarkerNode *>(ptrVectorAt(state->model->nodes, index));
                 node->flags &= ~3;
             }
         } else if (state->markers[index].shown && state->markers[index].enabled) {
             state->markers[index].shown = 0;
-            LmapMarkerNode *node = reinterpret_cast<LmapMarkerNode *>(FUN_0040619c(state->model->nodes, index));
+            LmapMarkerNode *node = reinterpret_cast<LmapMarkerNode *>(ptrVectorAt(state->model->nodes, index));
             node->flags |= 3;
         }
     }

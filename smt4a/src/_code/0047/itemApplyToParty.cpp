@@ -8,7 +8,7 @@ struct ItemUseRecord {
 
 extern "C" {
 ItemUseRecord *dataTable8FindRecord(s32 itemId);
-s32 FUN_00287790(s32 slot, ItemUseRecord *item, s32 mode, u32 *first, u32 *second);
+s32 itemApplyToMember(s32 slot, ItemUseRecord *item, s32 mode, u32 *first, u32 *second);
 PartyStatusSlots *gameGetSlotTable(void);
 void flagValueSub(s32 itemId, s32 amount);
 
@@ -19,13 +19,13 @@ s32 itemApplyToParty(s32 itemId, s32 mode)
     bool used = false;
     ItemUseRecord *item = dataTable8FindRecord(itemId);
     if (item != NULL) {
-        if (FUN_00287790(-1, item, mode, NULL, NULL) == 0) {
+        if (itemApplyToMember(-1, item, mode, NULL, NULL) == 0) {
             used = true;
         }
         PartyStatusSlots *table = gameGetSlotTable();
         for (s32 i = 0; i < 0x18; i++) {
             s8 slot = table->active.slots[i];
-            if (slot >= 0 && FUN_00287790(slot, item, mode, NULL, NULL) == 0) {
+            if (slot >= 0 && itemApplyToMember(slot, item, mode, NULL, NULL) == 0) {
                 used = true;
             }
         }

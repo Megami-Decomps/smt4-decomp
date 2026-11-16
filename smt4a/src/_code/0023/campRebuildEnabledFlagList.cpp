@@ -18,7 +18,7 @@ struct CampFlagLists {
 
 extern "C" {
 extern CampFlagLists *g_camp;
-void FUN_00203b40(CampFlagMenu *, s32 count, s32 kind, s32 a, s32 b, s32 c);
+void gridNavigationConfigure(CampFlagMenu *, s32 count, s32 kind, s32 a, s32 b, s32 c);
 void FUN_003d0bc0(s32 mode);
 
 // Rebuild the requested camp list from the enabled flag ranges.
@@ -68,7 +68,7 @@ void campRebuildEnabledFlagList(s32 mode)
                 entries[count++] = flag;
         }
     }
-    FUN_00203b40(menu, count, 11, 1, 1, 1);
+    gridNavigationConfigure(menu, count, 11, 1, 1, 1);
     FUN_003d0bc0(mode);
 }
 }

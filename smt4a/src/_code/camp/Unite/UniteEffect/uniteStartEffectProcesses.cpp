@@ -11,7 +11,7 @@ s32 FUN_003da030(u32 process);
 s32 FUN_003d26cc(u32 process);
 u32 taskCreateDraw(const char *name, s32 priority, u32 flags, AsdProcFunc start, AsdProcUpdateFunc update, AsdProcFunc end, void *work, u32 parent);
 void btlTalkBustUpCreate();
-void FUN_001695a0();
+void messageSetScriptDisplayMode();
 void loadSlotEnsureLoaded(u32 slot);
 
 // Create the unite effect's calculation and paired draw processes once, then preload its resources.
@@ -27,7 +27,7 @@ void uniteStartEffectProcesses()
     taskCreateDraw("TMD DDRAW", 235, 0, NULL, FUN_003da030, NULL, NULL, work->process);
     taskCreateDraw("TMD DDRAW", 113, 0, NULL, FUN_003d26cc, NULL, NULL, work->process);
     btlTalkBustUpCreate();
-    FUN_001695a0();
+    messageSetScriptDisplayMode();
     loadSlotEnsureLoaded(37);
 }
 }

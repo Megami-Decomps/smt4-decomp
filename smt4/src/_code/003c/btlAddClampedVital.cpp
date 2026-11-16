@@ -13,7 +13,7 @@ struct BattleLiveVitals {
 };
 
 extern "C" {
-BattleLiveVitals *FUN_0027da30(BtlMainState *, s32 id);
+BattleLiveVitals *btlFindEntryBlockByMemberId(BtlMainState *, s32 id);
 BtlEntry *btlMainFindEntryByListedId(BtlMainState *, s32 id);
 
 static __inline void addClampedVital(s16 *value, s16 maximum, s32 amount)
@@ -31,7 +31,7 @@ void btlAddClampedVital(s32 id, s32 kind, s32 amount)
 {
     BtlMainState *state = btlGetMainState();
     if (id < BTL_ENTRY_COUNT) {
-        BattleLiveVitals *live = FUN_0027da30(state, id);
+        BattleLiveVitals *live = btlFindEntryBlockByMemberId(state, id);
         if (live == NULL)
             return;
         if (kind == 0)

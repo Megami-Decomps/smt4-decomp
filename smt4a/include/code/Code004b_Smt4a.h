@@ -10,7 +10,7 @@ extern "C" {
 
 void FUN_004b7a54(CampScriptPanelResources *work);
 
-Table02Record* FUN_004bb80c(s32 index);
+Table02Record* dataTable02GetRecordWithAocPackage(s32 index);
 
 u8 isFlag1F0Set(void);
 

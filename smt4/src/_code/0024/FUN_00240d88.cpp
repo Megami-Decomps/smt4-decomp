@@ -13,7 +13,7 @@ int devilGetRecord(void);
 int FUN_002bdf94(...);
 int textDrawString(...);
 int textFormatBuffer(...);
-int FUN_002bf380(...);
+int texDrawCompositeSprite(...);
 int asdTMTexTableEntryAt(...);
 int efctSetSpeed(...);
 int VectorSignedToFloat(...);
@@ -44,7 +44,7 @@ extern unsigned int demonGetRaceLabel(short, unsigned int);
 /* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
-/* Supplied declaration required: FUN_002bf380. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -106,7 +106,7 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
     (**(romwright_code **)(temp_v5 + 0x12c8))();
     *(unsigned char *)(temp_v5 + 0x12c4) = 0;
   }
-  FUN_002bf288(2,0x24,0xd2,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v2,0x65);
+  texDrawTableEntryAtStoredOrigin(2,0x24,0xd2,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v2,0x65);
   temp_v5 = g_titleScene;
   temp_v4 = packNibblesAndByte(6,7,0);
   piVar12 = (int *)(temp_v5 + 0x12ac);
@@ -119,10 +119,10 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
   temp_v5 = *(short *)(temp_v3 + 10) + temp_v2;
   temp_v4 = *(short *)(temp_v3 + 8) + temp_v1;
   if (temp_v15 != 0) {
-    FUN_002bf288(2,0x24,0x214,temp_v4,temp_v5,0x65);
+    texDrawTableEntryAtStoredOrigin(2,0x24,0x214,temp_v4,temp_v5,0x65);
   }
   else {
-    FUN_002bf288(2,0x24,0x20f,temp_v4,temp_v5,0x65);
+    texDrawTableEntryAtStoredOrigin(2,0x24,0x20f,temp_v4,temp_v5,0x65);
   }
   if (param_1 < (int)(unsigned int)*(unsigned short *)(temp_v7 + 0x1e)) {
     temp_v14 = temp_v7 + param_1 * 2;
@@ -154,8 +154,8 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
         *(unsigned char *)(temp_v5 + 0x1324) = 0;
       }
     }
-    FUN_002bf380(2,0x24,0xc,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v2,0x6a);
-    FUN_002bf288(2,0x24,0xd8,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v2,0x6a);
+    texDrawCompositeSprite(2,0x24,0xc,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v2,0x6a);
+    texDrawTableEntryAtStoredOrigin(2,0x24,0xd8,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v2,0x6a);
     temp_v5 = asdTMTexTableEntryAt(0x24,0xdc);
     temp_v6 = FUN_002bd068(*psVar7);
     textFormatBuffer(temp_v12,"%s",temp_v6);
@@ -183,7 +183,7 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
                  (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,1,2,0x6f,
                  "%d",*(unsigned short *)(temp_v14 + 0x16));
     if (temp_v15 != 0) {
-      FUN_002bf288(2,0x24,param_1 + 0x215,*(short *)(temp_v3 + 8) + temp_v1,
+      texDrawTableEntryAtStoredOrigin(2,0x24,param_1 + 0x215,*(short *)(temp_v3 + 8) + temp_v1,
                    *(short *)(temp_v3 + 10) + temp_v2,0x6f);
       temp_v9 = g_titleScene;
       temp_v5 = packNibblesAndByte(6,1,0);
@@ -194,7 +194,7 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
         (**(romwright_code **)(temp_v9 + 0x12c8))();
         *(unsigned char *)(temp_v9 + 0x12c4) = 0;
       }
-      FUN_002bf380(2,0x24,0xd,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v2,0x74);
+      texDrawCompositeSprite(2,0x24,0xd,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v2,0x74);
       temp_v9 = g_titleScene;
       temp_v5 = packNibblesAndByte(6,7,0);
       piVar12 = (int *)(temp_v9 + 0x12ac);
@@ -210,7 +210,7 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
       else {
         temp_v9 = 2;
       }
-      FUN_002bf288(2,0x24,0x219,*(short *)(temp_v3 + 8) + temp_v1,
+      texDrawTableEntryAtStoredOrigin(2,0x24,0x219,*(short *)(temp_v3 + 8) + temp_v1,
                    (int)*(short *)(temp_v3 + 10) + temp_v2 + temp_v9,0x74);
       temp_v1 = temp_v7 + param_1 * 4;
       if (0 < *(int *)(temp_v1 + 0x58)) {
@@ -228,7 +228,7 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
         FUN_0029a17c((int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v2,
                      (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v8,
                      *(unsigned int *)(temp_v1 + 0x58),(int)*(short *)(*(int *)(temp_v5 + 0xc) + 2),1);
-        FUN_002bf288(2,0x24,0x20b,(int)*(short *)(temp_v3 + 8),*(short *)(temp_v3 + 10) + temp_v8,0x79);
+        texDrawTableEntryAtStoredOrigin(2,0x24,0x20b,(int)*(short *)(temp_v3 + 8),*(short *)(temp_v3 + 10) + temp_v8,0x79);
         temp_v7 = *(int *)(temp_v7 + 8) % 0xb;
         VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
         efctSetSpeed(temp_v7);
@@ -241,7 +241,7 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
           (**(romwright_code **)(temp_v7 + 0x12c8))();
           *(unsigned char *)(temp_v7 + 0x12c4) = 0;
         }
-        FUN_002bf288(2,0x24,0x20b,(int)*(short *)(temp_v3 + 8),*(short *)(temp_v3 + 10) + temp_v8,0x79);
+        texDrawTableEntryAtStoredOrigin(2,0x24,0x20b,(int)*(short *)(temp_v3 + 8),*(short *)(temp_v3 + 10) + temp_v8,0x79);
         temp_v7 = g_titleScene;
         temp_v1 = packNibblesAndByte(6,7,0);
         piVar12 = (int *)(temp_v7 + 0x12ac);
@@ -260,9 +260,9 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
           (**(romwright_code **)(temp_v7 + 0x1328))();
           *(unsigned char *)(temp_v7 + 0x1324) = 0;
         }
-        FUN_002bf288(2,0x24,0x20c,*(short *)(temp_v3 + 8) + temp_v2,*(short *)(temp_v3 + 10) + temp_v8,0x79
+        texDrawTableEntryAtStoredOrigin(2,0x24,0x20c,*(short *)(temp_v3 + 8) + temp_v2,*(short *)(temp_v3 + 10) + temp_v8,0x79
                     );
-        FUN_002bf288(2,0x24,0x20d,*(short *)(temp_v3 + 8) - temp_v2,*(short *)(temp_v3 + 10) + temp_v8,0x79
+        texDrawTableEntryAtStoredOrigin(2,0x24,0x20d,*(short *)(temp_v3 + 8) - temp_v2,*(short *)(temp_v3 + 10) + temp_v8,0x79
                     );
         efctSetSpeed();
         temp_v7 = g_titleScene;
@@ -274,9 +274,9 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
           (**(romwright_code **)(temp_v7 + 0x12c8))();
           *(unsigned char *)(temp_v7 + 0x12c4) = 0;
         }
-        FUN_002bf288(2,0x24,0x20c,*(short *)(temp_v3 + 8) + temp_v2,*(short *)(temp_v3 + 10) + temp_v8,0x79
+        texDrawTableEntryAtStoredOrigin(2,0x24,0x20c,*(short *)(temp_v3 + 8) + temp_v2,*(short *)(temp_v3 + 10) + temp_v8,0x79
                     );
-        FUN_002bf288(2,0x24,0x20d,*(short *)(temp_v3 + 8) - temp_v2,*(short *)(temp_v3 + 10) + temp_v8,0x79
+        texDrawTableEntryAtStoredOrigin(2,0x24,0x20d,*(short *)(temp_v3 + 8) - temp_v2,*(short *)(temp_v3 + 10) + temp_v8,0x79
                     );
         temp_v7 = g_titleScene;
         temp_v1 = packNibblesAndByte(6,7,0);
@@ -300,15 +300,15 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
           efctSetSpeed();
           if ((*(char *)(temp_v7 + 0x20) != '\0') &&
              ((*(int *)(temp_v7 + 4) >= 4 || (*(int *)(temp_v7 + 8) >= temp_v13 + param_1 * 4)))) {
-            FUN_002bf380(2,0x24,0x15,temp_v1 + temp_v5,temp_v2 + temp_v4,0x79);
+            texDrawCompositeSprite(2,0x24,0x15,temp_v1 + temp_v5,temp_v2 + temp_v4,0x79);
           }
           else {
-            FUN_002bf380(2,0x24,0x14,temp_v1 + temp_v5,temp_v2 + temp_v4,0x79);
+            texDrawCompositeSprite(2,0x24,0x14,temp_v1 + temp_v5,temp_v2 + temp_v4,0x79);
           }
           efctSetSpeed();
         }
       }
-      FUN_002bf288(2,0x24,param_1 + 0x210,*(short *)(temp_v3 + 8) + temp_v1,
+      texDrawTableEntryAtStoredOrigin(2,0x24,param_1 + 0x210,*(short *)(temp_v3 + 8) + temp_v1,
                    *(short *)(temp_v3 + 10) + temp_v2,0x6f);
     }
   }

@@ -4,7 +4,7 @@
 extern "C" {
 
 s32 resourceFindActiveIndex(s32 kind);
-PairedModel *FUN_00297060(PairedModel *model, void *target);
+PairedModel *scrScriptProcessCreate(PairedModel *model, void *target);
 
 /* Binds the owner's model to its target once everything and both table 40 textures are loaded;
  * returns 1 when ready. */
@@ -29,7 +29,7 @@ u32 modelPairTryBind(ModelPairOwner *owner)
         return 0;
     }
     if (owner->bound == NULL) {
-        owner->bound = FUN_00297060(owner->model, owner->target);
+        owner->bound = scrScriptProcessCreate(owner->model, owner->target);
         owner->bound->unk108 = 0;
     }
     return 1;

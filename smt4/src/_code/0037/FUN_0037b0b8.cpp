@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002bda30(int, int);
+int basicSoundStopOrFadeOut(int, int);
 int FUN_0037aeb0(int, int, int);
 
-/* Supplied declaration required: FUN_002bda30. */
+/* Supplied declaration required: basicSoundStopOrFadeOut. */
 /* Supplied declaration required: FUN_0037aeb0. */
 
 
@@ -21,7 +21,7 @@ void FUN_0037b0b8(int param_1)
     if (*(char *)(param_1 + 0x554) != '\x04') {
       return;
     }
-    FUN_002bda30(param_1,0);
+    basicSoundStopOrFadeOut(param_1,0);
     temp_v0 = 0;
   }
   else {

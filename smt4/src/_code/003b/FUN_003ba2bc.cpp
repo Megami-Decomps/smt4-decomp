@@ -4,7 +4,7 @@
 
 #define UNK3BA2BC_FLAG_PENDING 0x10
 
-/* An object FUN_00297060 builds from a resource pair. */
+/* An object scrScriptProcessCreate builds from a resource pair. */
 struct Unk3ba2bcPart {
     /* 0x000 */ u8 unk000[0x108];
     /* 0x108 */ s32 mode;
@@ -33,7 +33,7 @@ extern "C" {
 
 s32 stageAssetsLoaded(void);
 s32 spriteTable2aIsLoaded(void *sprites);
-Unk3ba2bcPart *FUN_00297060(void *resourceA, void *resourceB);
+Unk3ba2bcPart *scrScriptProcessCreate(void *resourceA, void *resourceB);
 void __ARM_common_memcpy4_6(void *a, void *b);
 void mikadoLoadSceneResources(Unk3ba2bcOwner *owner);
 void scriptProcessSetMode(Unk3ba2bcPart *part, s32 mode);
@@ -48,9 +48,9 @@ void FUN_003ba2bc(Unk3ba2bcOwner *owner)
         owner->secondResourceB == NULL) {
         return;
     }
-    owner->firstPart = FUN_00297060(owner->firstResourceA, owner->firstResourceB);
+    owner->firstPart = scrScriptProcessCreate(owner->firstResourceA, owner->firstResourceB);
     scriptProcessSetMode(owner->firstPart, 2);
-    owner->secondPart = FUN_00297060(owner->secondResourceA, owner->secondResourceB);
+    owner->secondPart = scrScriptProcessCreate(owner->secondResourceA, owner->secondResourceB);
     scriptProcessSetMode(owner->secondPart, 2);
     if (owner->flags & UNK3BA2BC_FLAG_PENDING) {
         __ARM_common_memcpy4_6(owner->unk03C, owner->unk042);

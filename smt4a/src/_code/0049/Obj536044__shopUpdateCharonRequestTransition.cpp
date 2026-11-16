@@ -26,7 +26,7 @@ s32 scrRunOpcodesStub(CharonScript *);
 u32 gameDataBlocksGetWord();
 u32 FUN_004d05b4();
 void asdLoadFileAsyncSimple(const char *, void **, u32);
-CharonScript *FUN_00275bc8(void *, void *);
+CharonScript *scrScriptProcessCreate(void *, void *);
 void scriptProcessSetMode(CharonScript *, s32);
 void slotSetRequest(u32, u32, u32);
 s32 screenFadeIsBusy();
@@ -74,7 +74,7 @@ void Obj536044::shopUpdateCharonRequestTransition()
         break;
     case 3:
         if (view->resultTable && view->resultMessages) {
-            CharonScript *script = FUN_00275bc8(view->resultTable, view->resultMessages);
+            CharonScript *script = scrScriptProcessCreate(view->resultTable, view->resultMessages);
             view->resultScript = script;
             scriptProcessSetMode(script, 2);
             u32 entry = tableGroupFindEntryIndex(view->resultTable, "ProcCharonRequestSecond");

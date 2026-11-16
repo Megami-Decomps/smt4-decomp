@@ -12,7 +12,7 @@ extern "C" {
 
 extern const char DAT_00410408[]; /* effect source file name (__FILE__) */
 void *memAlloc(int, int, int, int size, int align, int);
-PolyGeom *FUN_00268fc4(PolyGeom *src);
+PolyGeom *effGeomCloneHandle(PolyGeom *src);
 
 /* Allocates a geometry block (16-byte header plus `payloadBytes`), recording the allocation site first. */
 static PolyGeomBlock *allocGeomBlock(u32 payloadBytes, s32 line)
@@ -33,7 +33,7 @@ PolyGeomBlock *effPolyFlashGeomClone0(PolyCloneOwner *owner)
     PolyGeomBlock *block = allocGeomBlock(params->segments * 0x28, 2090);
     PolyGeom *geom;
 
-    geom = FUN_00268fc4(srcBlock->geom);
+    geom = effGeomCloneHandle(srcBlock->geom);
     block->geom = geom;
     u32 segments = params->segments;
     if (segments != 0) {

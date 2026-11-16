@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
-int FUN_002c526c(void);
+int resultHandleFailure(void);
 int software_interrupt(int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -16,7 +16,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: FUN_002c526c. */
+/* Supplied declaration required: resultHandleFailure. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -34,11 +34,11 @@ void nn_snd_CTR_Dspsnd_WaitPipe_15D5E0(int *param_1)
   puVar1 = temp_v0;
   FUN_002c40f8(puVar1,&iStack_18,1,0,0xffffffff,0xffffffff);
   if ((int)puVar1 < 0) {
-    FUN_002c526c();
+    resultHandleFailure();
   }
   software_interrupt(0x19);
   if (*param_1 < 0) {
-    FUN_002c526c();
+    resultHandleFailure();
   }
   *(char *)((int)param_1 + 0x1319) = *(char *)((int)param_1 + 0x1319) + '\x01';
   nn_os_CriticalSection_Leave((unsigned int)(param_1 + 2));

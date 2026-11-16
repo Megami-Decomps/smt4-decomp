@@ -24,7 +24,7 @@ extern PlayerTrack *DAT_004474f4;
 
 s32 scrGetArg(u32 index);
 void scrSetResult(s32 result);
-f32 FUN_00281e34(f32 x, f32 z);
+f32 __hardfp_atan2f(f32 x, f32 z);
 
 /* Script command: returns one of six game state values by selector 0-5 (3 is a heading in degrees, 4 is a constant 500). */
 u32 FUN_00310f44(void)
@@ -45,7 +45,7 @@ u32 FUN_00310f44(void)
         f32 dx = track->toX - track->fromX;
         f32 dz = track->toZ - track->fromZ;
 
-        scrSetResult((s32)(FUN_00281e34(dx, dz) * (180.0f / 3.14f)));
+        scrSetResult((s32)(__hardfp_atan2f(dx, dz) * (180.0f / 3.14f)));
         break;
     }
     case 4:

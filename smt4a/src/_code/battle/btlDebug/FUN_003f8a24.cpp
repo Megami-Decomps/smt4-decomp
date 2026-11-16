@@ -9,9 +9,9 @@ int textFormatBuffer(...);
 int textDrawString(...);
 int effectDispatchSelector(...);
 int efctSetSpeed(void);
-int FUN_0018152c(...);
+int uiDrawItemOrStatusIcon(...);
 int asdTMTexTableEntryAt(...);
-int FUN_00183bb0(void);
+int gxResetColorQuadToWhite(void);
 int fontMeasureLineAdvance(...);
 int drawSetColorFromRGBA8(void);
 int renderCtxCalculateStereoParallax(unsigned int);
@@ -46,9 +46,9 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: effectDispatchSelector. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_0018152c. */
+/* Supplied declaration required: uiDrawItemOrStatusIcon. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
-/* Supplied declaration required: FUN_00183bb0. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
@@ -107,25 +107,25 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
   temp_v24 = romwright_piece_4_4(temp_v17,temp_v16);
   temp_v12 = (float)VectorSignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
   if (*(char *)(param_3 + 0x4c) != '\0') {
-    FUN_001835b4(2,0xc,0x9f,(int)(in_s0 + temp_v12),temp_v16,param_2);
+    texDrawTableEntryAtStoredOrigin(2,0xc,0x9f,(int)(in_s0 + temp_v12),temp_v16,param_2);
   }
   else {
-    FUN_001835b4(2,0xc,0x56,(int)(in_s0 + temp_v12),temp_v16,param_2);
+    texDrawTableEntryAtStoredOrigin(2,0xc,0x56,(int)(in_s0 + temp_v12),temp_v16,param_2);
   }
   temp_v12 = (float)VectorSignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_001835b4(2,0xc,0x57,(int)(in_s0 + temp_v12),(int)temp_v24,param_2);
+  texDrawTableEntryAtStoredOrigin(2,0xc,0x57,(int)(in_s0 + temp_v12),(int)temp_v24,param_2);
   temp_v12 = (float)VectorSignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_001835b4(2,0xc,0x58,(int)(in_s0 + temp_v12),(int)temp_v24,param_2);
+  texDrawTableEntryAtStoredOrigin(2,0xc,0x58,(int)(in_s0 + temp_v12),(int)temp_v24,param_2);
   temp_v5 = (unsigned int)((unsigned long long)temp_v24 >> 0x20);
   if (*(int *)(param_3 + 0x38) != 0) {
     markerKindGetColor((int)(short)*(unsigned int *)(param_3 + *(int *)(param_3 + 0x3c) * 4));
     drawSetColorFromRGBA8();
   }
   temp_v12 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_0018152c((int)(short)*(unsigned int *)(param_3 + 0x48),
+  uiDrawItemOrStatusIcon((int)(short)*(unsigned int *)(param_3 + 0x48),
                (int)(*(float *)(param_1 + 0x36c) + in_s0 + temp_v12),
                (int)(*(float *)(param_1 + 0x370) + in_s1),param_2 + 5,0);
-  FUN_00183bb0();
+  gxResetColorQuadToWhite();
   if (*(char *)(param_3 + 0x44) != '\0') {
     temp_v16 = 0;
     do {
@@ -278,7 +278,7 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
         temp_v12 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3
                                            );
         temp_v9 = (float)VectorSignedToFloat(temp_v22,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_001835b4(temp_v21,0xc,0x9e,(int)(*(float *)(temp_v17 + 0x39c) + in_s0 + temp_v9) + temp_v8,
+        texDrawTableEntryAtStoredOrigin(temp_v21,0xc,0x9e,(int)(*(float *)(temp_v17 + 0x39c) + in_s0 + temp_v9) + temp_v8,
                      (int)(*(float *)(temp_v17 + 0x3a0) + temp_v12 + in_s1),temp_v20);
         temp_v1 = asdTMTexTableEntryAt(0xc,0x9e);
         temp_v1 = *(int *)(temp_v1 + 0xc);
@@ -293,7 +293,7 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
         temp_v12 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3
                                            );
         temp_v9 = (float)VectorSignedToFloat(temp_v22,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_001835b4(temp_v21,0xc,0x9d,(int)(*(float *)(temp_v17 + 0x39c) + in_s0 + temp_v9) + temp_v8,
+        texDrawTableEntryAtStoredOrigin(temp_v21,0xc,0x9d,(int)(*(float *)(temp_v17 + 0x39c) + in_s0 + temp_v9) + temp_v8,
                      (int)(*(float *)(temp_v17 + 0x3a0) + temp_v12 + in_s1),temp_v20);
         temp_v1 = asdTMTexTableEntryAt(0xc,0x9d);
         temp_v1 = *(int *)(temp_v1 + 0xc);
@@ -308,7 +308,7 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
     else if (unaff_r7 < 0) {
       temp_v12 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v9 = (float)VectorSignedToFloat(temp_v22,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_001835b4(temp_v21,0xc,0x9a,(int)(*(float *)(temp_v17 + 0x39c) + in_s0 + temp_v9) + temp_v8,
+      texDrawTableEntryAtStoredOrigin(temp_v21,0xc,0x9a,(int)(*(float *)(temp_v17 + 0x39c) + in_s0 + temp_v9) + temp_v8,
                    (int)(*(float *)(temp_v17 + 0x3a0) + temp_v12 + in_s1),temp_v20);
       temp_v1 = asdTMTexTableEntryAt(0xc,0x9a);
       temp_v1 = *(int *)(temp_v1 + 0xc);
@@ -322,7 +322,7 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
     else if (0 < unaff_r7) {
       temp_v12 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v9 = (float)VectorSignedToFloat(temp_v22,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_001835b4(temp_v21,0xc,0x99,(int)(*(float *)(temp_v17 + 0x39c) + in_s0 + temp_v9) + temp_v8,
+      texDrawTableEntryAtStoredOrigin(temp_v21,0xc,0x99,(int)(*(float *)(temp_v17 + 0x39c) + in_s0 + temp_v9) + temp_v8,
                    (int)(*(float *)(temp_v17 + 0x3a0) + temp_v12 + in_s1),temp_v20);
       temp_v1 = asdTMTexTableEntryAt(0xc,0x99);
       temp_v1 = *(int *)(temp_v1 + 0xc);

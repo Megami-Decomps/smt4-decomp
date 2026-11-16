@@ -12,7 +12,7 @@ Table8Record *dataTable8FindRecord(u32 id);
 BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, u32 subject);
 void FUN_003e8bb0(void *snapshot, BtlMainStateA *battle, BtlCombatantEntryA *subject);
 s32 FUN_004bd098(u32 source, u32 item);
-BtlUnitDataA *FUN_001568f8(BtlMainStateA *battle, s32 index);
+BtlUnitDataA *btlFindEntryBlockByMemberId(BtlMainStateA *battle, s32 index);
 PartySlotA *gameGetSlotRecord(s32 index);
 
 u32 FUN_004bfa30(u32 itemId, u32 skillId, u32 subjectId, s32 target)
@@ -64,7 +64,7 @@ u32 FUN_004bfa30(u32 itemId, u32 skillId, u32 subjectId, s32 target)
     else mask = 1u << category;
     u16 categories;
     if (target < 109)
-        categories = FUN_001568f8(battle, target)->unk110;
+        categories = btlFindEntryBlockByMemberId(battle, target)->unk110;
     else
         categories = gameGetSlotRecord(target - 109)->unk60;
     return (categories & mask) ? mask : 0;

@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_001bbde0(void);
+int mathRemPio2f(void);
 int FUN_0050dda4(void);
 
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
@@ -17,7 +17,7 @@ static float romwright_sqrt_4(float value)
 }
 #endif
 extern int btlMainIsRunning(void);
-/* Supplied declaration required: FUN_001bbde0. */
+/* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: FUN_0050dda4. */
 
 
@@ -45,7 +45,7 @@ void FUN_00230038(int *param_1)
   unsigned long long temp_v17;
   float temp_v18;
   
-  temp_v0 = FUN_00152f54();
+  temp_v0 = asdCameraGetSavedRenderPairs();
   temp_v12 = -1.0f;
   temp_v18 = 57.295776f;
   temp_v17 = 0x433400003f800000;
@@ -65,7 +65,7 @@ void FUN_00230038(int *param_1)
       param_1[10] = 0x43340000;
     }
     else {
-      FUN_001bbde0();
+      mathRemPio2f();
       param_1[10] = (int)(temp_v4 * temp_v18);
       if (temp_v12 * temp_v5 - temp_v11 * temp_v3 < temp_v11) {
         param_1[10] = (int)-(float)param_1[10];
@@ -96,7 +96,7 @@ void FUN_00230038(int *param_1)
         param_1[10] = 0x43340000;
       }
       else {
-        FUN_001bbde0();
+        mathRemPio2f();
         param_1[10] = (int)(temp_v5 * temp_v18);
         temp_v11 = temp_v3;
         if (temp_v12 * temp_v8 - temp_v3 * temp_v4 < temp_v3) {
@@ -152,7 +152,7 @@ void FUN_00230038(int *param_1)
     }
   }
   else {
-    temp_v0 = FUN_00152f54();
+    temp_v0 = asdCameraGetSavedRenderPairs();
     temp_v5 = (float)param_1[6] - *(float *)(temp_v0 + 4);
     temp_v3 = (float)param_1[8] - *(float *)(temp_v0 + 0xc);
     temp_v4 = (float)temp_v17 / romwright_sqrt_4(temp_v5 * temp_v5 + temp_v11 * temp_v11 + temp_v3 * temp_v3);
@@ -166,7 +166,7 @@ void FUN_00230038(int *param_1)
       param_1[10] = (int)((unsigned long long)temp_v17 >> 0x20);
     }
     else {
-      FUN_001bbde0();
+      mathRemPio2f();
       param_1[10] = (int)(temp_v4 * temp_v18);
       if (temp_v12 * temp_v5 - temp_v11 * temp_v3 < temp_v11) {
         param_1[10] = (int)-(float)param_1[10];

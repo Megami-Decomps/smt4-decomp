@@ -47,14 +47,14 @@ struct RunWin {
 extern "C" {
 extern RunWin *DAT_0057f584;
 
-void FUN_00164b5c(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
-void FUN_00183bb0(void);
+void texDrawCompositeSprite(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
+void gxResetColorQuadToWhite(void);
 s32 vec2GetXInt(void *vec);
 s32 vec2GetYInt(void *vec);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *scene, f32 depth);
 void efctSetSpeed(f32 alpha);
 s32 packNibblesAndByte(u32 a, u32 b, u32 c);
-u32 FUN_001692ac(s32 a, s32 b);
+u32 renderCtxPackPassFlags(s32 a, s32 b);
 
 /* Draws the run window's title, its loading dots (a 3x3 grid where two dots are lit and their
  * predecessors dimmed, advancing every 5 frames) and the label. Returns 0. */
@@ -62,16 +62,16 @@ u8 FUN_0023a5f8(void)
 {
     RunWin *win = DAT_0057f584;
     if (win->active != 0 && win->visible != 0) {
-        FUN_00157558(g_renderCtx);
+        renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         RenderCtxA *first = g_renderCtx;
-        titleScenePushFirst(first, FUN_001692ac(1, 0));
+        titleScenePushFirst(first, renderCtxPackPassFlags(1, 0));
         s32 x = vec2GetXInt(win->anchor) + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
         s32 y = vec2GetYInt(win->anchor);
         efctSetSpeed(win->alpha);
-        FUN_00164b5c(2, 8, 0x14, x, y, 101);
+        texDrawCompositeSprite(2, 8, 0x14, x, y, 101);
         RenderCtxA *scene = g_renderCtx;
         titleScenePushSecond(scene, packNibblesAndByte(6, 1, 0));
-        FUN_00164b5c(2, 8, 0x15, x, y, 102);
+        texDrawCompositeSprite(2, 8, 0x15, x, y, 102);
         titleScenePopSecond(g_renderCtx);
         TextureTableEntryIV *labelPoint = asdTMTexTableEntryAt(8, 0x16F);
         textDrawString(4, 0x57D8FFFF, (const char *)win->label, (f32)(labelPoint->x + x), (f32)(labelPoint->y + y), 0.56640625f, 0.0f,
@@ -86,14 +86,14 @@ u8 FUN_0023a5f8(void)
                 s32 index = row * 3 + column;
                 TextureTableEntryIV *dot = asdTMTexTableEntryAt(8, 0x170 + index);
                 if (lit == index || lit2 == index)
-                    FUN_001835b4(2, 8, 0x155, dot->x + x, dot->y, 111);
+                    texDrawTableEntryAtStoredOrigin(2, 8, 0x155, dot->x + x, dot->y, 111);
                 else if (litPrevious == index || lit2Previous == index)
-                    FUN_001835b4(2, 8, 0x156, dot->x + x, dot->y, 111);
+                    texDrawTableEntryAtStoredOrigin(2, 8, 0x156, dot->x + x, dot->y, 111);
                 else
-                    FUN_001835b4(2, 8, 0x154, dot->x + x, dot->y, 111);
+                    texDrawTableEntryAtStoredOrigin(2, 8, 0x154, dot->x + x, dot->y, 111);
             }
         }
-        FUN_00183bb0();
+        gxResetColorQuadToWhite();
         efctSetSpeed(1.0f);
         titleScenePopFirst(g_renderCtx);
     }

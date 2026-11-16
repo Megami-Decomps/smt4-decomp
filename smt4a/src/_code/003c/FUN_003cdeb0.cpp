@@ -56,16 +56,16 @@ void FUN_003cdeb0(SlotListScreen *screen, u32 argument, s32 x, s32 y, f32 scale)
     if (screen->entryCount <= entry) {
         filled = false;
     }
-    FUN_001835b4(2, 0x1a, 0x19f, frame->x + x, frame->y + y, 0x83);
+    texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x19f, frame->x + x, frame->y + y, 0x83);
     if (filled) {
-        FUN_001835b4(2, 0x1a, 0x1a0, frame->x + x, frame->y + y, 0x83);
+        texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x1a0, frame->x + x, frame->y + y, 0x83);
     } else {
         s32 offsetX = reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x1a7))->x - reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x185))->x + reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x1a0))->x -
                       reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x176))->x;
         s32 offsetY = reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x1a7))->y - reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x185))->y + reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x1a0))->y -
                       reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x176))->y;
         SlotIconPosition *marker = reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, FUN_002a4894(&screen->cursor) + 0x234));
-        FUN_001835b4(2, 0x1a, 0x233, marker->x + x + offsetX, marker->y + y + offsetY, 0x83);
+        texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x233, marker->x + x + offsetX, marker->y + y + offsetY, 0x83);
     }
     s32 mode = recordGetModeForId(screen->slotIds[row]);
     u32 color = 0x9fe7ffff;

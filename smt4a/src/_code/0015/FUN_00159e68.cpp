@@ -38,7 +38,7 @@ void FUN_00159e68(void)
         s32 result = svcWaitSynchronization1(DAT_00646078.event, -1);
         bool failed = nnResultIsFailure(result);
         if (failed) {
-            FUN_002e3140(result, failed);
+            resultHandleFailure(result, failed);
         }
         u32 id;
         result = FUN_0016faa8(&id);

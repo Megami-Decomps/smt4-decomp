@@ -21,7 +21,7 @@ extern "C" s32 uniteSelectedFusionIsEnabled(s32 enabled)
     if (work == NULL)
         return 0;
     if (work->registered.selectedId != 0) {
-        s32 selected = (reinterpret_cast<FusionSelectionRecord *>(FUN_0026140c())->flags & 2) >> 1;
+        s32 selected = (reinterpret_cast<FusionSelectionRecord *>(saveGetUserSettingsBlock())->flags & 2) >> 1;
         if (selected != 0 && flagValueIsPositive(work->registered.selectedId) != 0) {
             return 1;
         }

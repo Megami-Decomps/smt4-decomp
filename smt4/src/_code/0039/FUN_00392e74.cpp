@@ -20,7 +20,7 @@ void jobStopAndClearFlags(AocMenu *menu);
 s32 jobIsValid(u32 job);
 void ifTouchRegionRemove(void);
 void jobStop(u32 job, s32 arg);
-void FUN_002bf818(void *effect);
+void uiSpriteAdvanceAnimation(void *effect);
 void FUN_00126fb8(void *block);
 void aocClearDisplayFlag(u32 system);
 void aocReleasePackageOwner(u32 system);
@@ -65,7 +65,7 @@ extern "C" void FUN_00392e74(AocMenu *menu)
         return;
     }
     for (s32 i = 0; i < 25; i++)
-        FUN_002bf818(menu->animated.effects[i]);
+        uiSpriteAdvanceAnimation(menu->animated.effects[i]);
     u32 *counterA = (u32 *)(raw + 0x1128);
     u32 *counterB = (u32 *)(raw + 0x112C);
     *counterA = (*counterA + 1) % 20;

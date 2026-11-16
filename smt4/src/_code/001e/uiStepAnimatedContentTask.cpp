@@ -19,7 +19,7 @@ struct AnimatedContentTaskWork {
 extern "C" {
 f32 asdAnimGetTrackLastFrame(NkdwPreviewResource *resource, s32 track);
 s32 FUN_002c1d5c(void);
-NkdwPreviewResource *FUN_00294090(u32 request, u32 mode);
+NkdwPreviewResource *eventResourceCacheAcquire(u32 request, u32 mode);
 s32 nkdwHeaderParse(NkdwPreviewResource *resource);
 void aocHandleButtons(NkdwPreviewResource *resource, s32 mode);
 s32 FUN_00294fe0(NkdwPreviewResource *resource);
@@ -54,7 +54,7 @@ u32 uiStepAnimatedContentTask(u32 job)
         break;
     case 1:
         if (FUN_002c1d5c() == 0 && work->requested != 0) {
-            NkdwPreviewResource *resource = FUN_00294090(work->requested, 1);
+            NkdwPreviewResource *resource = eventResourceCacheAcquire(work->requested, 1);
             work->state = 2;
             work->resource = resource;
         }

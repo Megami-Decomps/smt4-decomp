@@ -3,13 +3,13 @@
 extern "C" {
 
 extern s32 aocItemGetPrice(const AocItemRef *ref);
-extern u16 FUN_00230f44(const u16 *entry);
+extern u16 aocEntryGetSortOrder(const u16 *entry);
 
 /* Orders two item references by their record's order key. */
 static s32 compareOrder(const AocItemRef *a, const AocItemRef *b)
 {
-    s32 rankA = FUN_00230f44(&a->id);
-    s32 rankB = FUN_00230f44(&b->id);
+    s32 rankA = aocEntryGetSortOrder(&a->id);
+    s32 rankB = aocEntryGetSortOrder(&b->id);
     return rankA - rankB;
 }
 

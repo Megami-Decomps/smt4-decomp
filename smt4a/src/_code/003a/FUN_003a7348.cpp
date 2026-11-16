@@ -22,7 +22,7 @@ extern GameStateAngleView g_gameState;
 extern LmapViewPoints *g_lmapView;
 s32 scrGetArg(u32 index);
 void scrSetResult(s32 result);
-f32 FUN_0050d8e4(f32 x, f32 y);
+f32 __hardfp_atan2f(f32 x, f32 y);
 
 /* Script command: sets the result to one of the game state's float values, or to the map view's direction in degrees. */
 s32 FUN_003a7348(void)
@@ -41,7 +41,7 @@ s32 FUN_003a7348(void)
     {
         f32 dx = g_lmapView->toX - g_lmapView->fromX;
         f32 dy = g_lmapView->toY - g_lmapView->fromY;
-        scrSetResult((s32)(FUN_0050d8e4(dx, dy) * (180.0f / 3.14f)));
+        scrSetResult((s32)(__hardfp_atan2f(dx, dy) * (180.0f / 3.14f)));
         break;
     }
     case 4:

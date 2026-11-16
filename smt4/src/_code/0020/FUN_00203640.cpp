@@ -23,7 +23,7 @@ extern UiQuest *g_uiQuest; /* 0x43dd50 */
 
 extern int buttonHelpSetPreset(int preset);
 extern int timerStart(u8 *timer, int a, int b);
-extern int FUN_002bf810(u32 arg);
+extern int soundPlaySeUnpanned(u32 arg);
 
 /* Opens page `page` of the quest screen: starts its timer and animations and enters state 17. */
 void FUN_00203640(u16 page)
@@ -40,7 +40,7 @@ void FUN_00203640(u16 page)
     quest->state = 17;
     quest->stateTime = 0;
     buttonHelpSetPreset(26);
-    FUN_002bf810(0x100025D);
+    soundPlaySeUnpanned(0x100025D);
 }
 
 }

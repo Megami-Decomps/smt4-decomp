@@ -2,7 +2,7 @@
 #include "map/NaviDisplayTransition.h"
 
 extern "C" {
-s32 FUN_002bf818(UiSpriteState *sprite);
+s32 uiSpriteAdvanceAnimation(UiSpriteState *sprite);
 s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 void FUN_002b8ee0(UiSpriteState *sprite, s32 mode);
 s32 vec2GetXInt(const UiSpriteState *sprite);
@@ -21,9 +21,9 @@ void FUN_0039c3fc(MapNaviDisplay *display)
     if ((work->flags & 8) != 0) {
         UiSpriteState *indicator = &work->indicator;
         if (work->phase == 0) {
-            FUN_002bf818(indicator);
+            uiSpriteAdvanceAnimation(indicator);
             UiSpriteState *incoming = &work->incoming;
-            if (FUN_002bf818(incoming) != 0) {
+            if (uiSpriteAdvanceAnimation(incoming) != 0) {
                 naviMainSetCurrentMap(&work->mapState, work->map);
                 FUN_0039f860(&work->mapState, 0);
                 s32 map = work->map;
@@ -44,8 +44,8 @@ void FUN_0039c3fc(MapNaviDisplay *display)
             work->mapDirty = 1;
             work->overlayDirty = 1;
         } else if (work->phase == 1) {
-            FUN_002bf818(indicator);
-            FUN_002bf818(&work->overlay);
+            uiSpriteAdvanceAnimation(indicator);
+            uiSpriteAdvanceAnimation(&work->overlay);
             UiSpriteState *outgoing = &work->outgoing;
             FUN_002b8ee0(outgoing, 0);
             if (uiSpriteGetCompletionState(outgoing) != 0) {

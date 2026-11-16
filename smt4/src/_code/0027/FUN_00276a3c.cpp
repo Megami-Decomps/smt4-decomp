@@ -18,9 +18,9 @@ int FUN_0025c238(void);
 int residentApplyFallbackValues(void);
 int FUN_00266c5c(int *, int *, float *);
 int randomGetNormalizedFloat(void);
-int FUN_00281e34(void);
+int __hardfp_atan2f(void);
 int FUN_00282390(void);
-int FUN_0028250c(void);
+int mathRemPio2f(void);
 int mathDistanceBetweenPoints(void);
 int FUN_00298d50(...);
 int cameraExportParameters(float [3], int);
@@ -70,9 +70,9 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: residentApplyFallbackValues. */
 /* Supplied declaration required: FUN_00266c5c. */
 /* Supplied declaration required: randomGetNormalizedFloat. */
-/* Supplied declaration required: FUN_00281e34. */
+/* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: FUN_00282390. */
-/* Supplied declaration required: FUN_0028250c. */
+/* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: FUN_00298d50. */
 /* Supplied declaration required: cameraExportParameters. */
@@ -141,7 +141,7 @@ void FUN_00276a3c(void)
     piVar4[0x13] = (int)temp_v24[0];
     piVar4[0x14] = (int)temp_v24[1];
     piVar4[0x15] = (int)temp_v24[2];
-    FUN_00281e34();
+    __hardfp_atan2f();
     residentApplyFallbackValues();
     return;
   }
@@ -242,7 +242,7 @@ void FUN_00276a3c(void)
     FUN_002c1e30(&g_fixedCamera,1);
     FUN_0025c238();
     FUN_00298d50(&g_fixedCamera);
-    FUN_00281e34();
+    __hardfp_atan2f();
     residentApplyFallbackValues();
     return;
   }
@@ -253,7 +253,7 @@ void FUN_00276a3c(void)
     FUN_002c1edc(&g_fixedCamera,DAT_004474f4 + 0x20,DAT_004474f4 + 0x23,DAT_004474f4 + 7);
     FUN_0025c238();
     FUN_00298d50(&g_fixedCamera);
-    FUN_00281e34();
+    __hardfp_atan2f();
     residentApplyFallbackValues();
     return;
   }
@@ -269,7 +269,7 @@ void FUN_00276a3c(void)
     }
     FUN_0025c238();
     FUN_00298d50(&g_fixedCamera);
-    FUN_00281e34();
+    __hardfp_atan2f();
     residentApplyFallbackValues();
     piVar1 = DAT_004474f4;
     temp_v3 = piVar4[0x98];
@@ -316,7 +316,7 @@ void FUN_00276a3c(void)
     DAT_004474f4[0x10] = *(int *)(g_lmapScene + 0x1c);
     piVar4[0x12] = *(int *)(temp_v3 + 0x24);
     temp_v9 = (float)piVar4[6] * 0.017453292f;
-    FUN_0028250c();
+    mathRemPio2f();
     piVar4 = DAT_004474f4;
     DAT_004474f4[0xd] =
          (int)(*(float *)(g_lmapScene + 0x1c) - temp_v9 * (float)DAT_004474f4[temp_v4 + 0x62]);
@@ -330,7 +330,7 @@ void FUN_00276a3c(void)
     piVar4[0x11] = (int)(*(float *)(temp_v3 + 0x20) + (float)piVar4[temp_v4 + 0x32]);
     piVar4[0xe] = (int)(*(float *)(temp_v3 + 0x20) + (float)piVar4[temp_v4 + 0x42]);
     temp_v9 = ((float)piVar4[6] - 90.0f) * temp_v12;
-    FUN_0028250c();
+    mathRemPio2f();
     piVar4 = DAT_004474f4;
     DAT_004474f4[0x10] =
          (int)((float)DAT_004474f4[0x10] + temp_v9 * (float)DAT_004474f4[temp_v4 + 0x52]);
@@ -340,7 +340,7 @@ void FUN_00276a3c(void)
     DAT_004474f4[0x12] =
          (int)((float)DAT_004474f4[0x12] + temp_v9 * (float)DAT_004474f4[temp_v4 + 0x52]);
     temp_v9 = ((float)piVar4[6] - temp_v14) * temp_v12;
-    FUN_0028250c();
+    mathRemPio2f();
     piVar4 = DAT_004474f4;
     DAT_004474f4[0xd] =
          (int)((float)DAT_004474f4[0xd] + temp_v9 * (float)DAT_004474f4[temp_v4 + 0x52]);
@@ -625,7 +625,7 @@ void FUN_00276a3c(void)
     FUN_0025c238();
     FUN_00298d50(&g_fixedCamera);
   }
-  FUN_00281e34();
+  __hardfp_atan2f();
   residentApplyFallbackValues();
   return;
 }

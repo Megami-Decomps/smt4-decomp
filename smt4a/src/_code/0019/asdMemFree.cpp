@@ -19,7 +19,7 @@ static __inline void allocatorUnlock(AllocatorState &state)
     s32 result = nn::svc::ReleaseMutex(*state.mutex);
     bool failed = nnResultIsFailure(result);
     if (failed) {
-        FUN_002e3140(result, failed);
+        resultHandleFailure(result, failed);
     }
 }
 

@@ -41,9 +41,9 @@ static const u32 sFourTimerPacketD[70] = {
 };
 void drawParameterBlockClear(UiResourceParameters *resources);
 
-void FUN_002bd954(TimerSlot *timer, s32 kind, s32 count, UiResourceParameters *resources, u16 flags, f32 speed);
+void uiSpriteStateInitFromSource(TimerSlot *timer, s32 kind, s32 count, UiResourceParameters *resources, u16 flags, f32 speed);
 void uiSpriteInitializeState(TimerSlot *timer, s32 kind, s32 count, s32 animation, UiResourceParameters *resources, u16 flags, f32 speed);
-void FUN_00295eb0(TimerSlot *timer, s32 kind, s32 count);
+void uiStoreTextureEntryCenter(TimerSlot *timer, s32 kind, s32 count);
 void pairSetHalves(TimerSlot *timer, s32 x, s32 y);
 void spriteStartAnimationByIndex(TimerSlot *timer, s32 animation);
 void timerStart(TimerSlot *timer, s32 animation, s32 flags);
@@ -59,9 +59,9 @@ extern "C" void uiInitializeFourTimerSet(UiFourTimerSet *set)
     drawParameterBlockClear(&set->resources);
     paramsInit(&set->resources, sFourTimerPacketA, sizeof(sFourTimerPacketA), sFourTimerPacketB, sizeof(sFourTimerPacketB),
         sFourTimerPacketC, sizeof(sFourTimerPacketC), NULL, 0, sFourTimerPacketD, sizeof(sFourTimerPacketD));
-    FUN_002bd954(&set->timers[0], 0x14, 0x29, &set->resources, 0x33, 1.0f);
+    uiSpriteStateInitFromSource(&set->timers[0], 0x14, 0x29, &set->resources, 0x33, 1.0f);
     spriteSetLayer(&set->timers[0], 2);
-    FUN_00295eb0(&set->timers[0], 0x14, 0x29);
+    uiStoreTextureEntryCenter(&set->timers[0], 0x14, 0x29);
     spriteSetVisible(&set->timers[0], 1);
     spriteStartAnimationByIndex(&set->timers[0], 0);
     uiSpriteInitializeState(&set->timers[2], 0x14, -1, 2, &set->resources, 0x3d, 1.0f);
@@ -71,9 +71,9 @@ extern "C" void uiInitializeFourTimerSet(UiFourTimerSet *set)
     spriteStartAnimationByIndex(&set->timers[2], 2);
     uiSpriteInitializeState(&set->timers[1], 0x14, -1, 0, &set->resources, 0x47, 1.0f);
     spriteSetLayer(&set->timers[1], 2);
-    FUN_00295eb0(&set->timers[1], 0x14, 0x2b);
+    uiStoreTextureEntryCenter(&set->timers[1], 0x14, 0x2b);
     spriteSetVisible(&set->timers[1], 1);
     spriteStartAnimationByIndex(&set->timers[1], 1);
-    FUN_002bd954(&set->timers[3], 0x14, 9, &set->resources, 0xb, 1.0f);
+    uiSpriteStateInitFromSource(&set->timers[3], 0x14, 9, &set->resources, 0xb, 1.0f);
     timerStart(&set->timers[3], 2, 0);
 }

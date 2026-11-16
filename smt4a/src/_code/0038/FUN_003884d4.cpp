@@ -13,7 +13,7 @@ void scrSetResult(s32 result);
 void bustupCutAnimRequestStopSlots(void);
 void eventTexRequestStopAll(void);
 u32 scrGetCommandOwner(void);
-void FUN_0021bdac(u32, u32, u32, s32, s32, s32);
+void messageWindowShowOrPoll(u32, u32, u32, s32, s32, s32);
 void asdTextFormatStream(u32, s32, u32, s32, s32, const u8 *, const u8 *);
 void msgBoxFlagsSetBit7(u32 box);
 void sortMenuAcquire(u32, s32);
@@ -49,7 +49,7 @@ u32 FUN_003884d4(void)
         u32 message = scrGetCommandOwner();
         u32 argument = scrGetArg(0);
         u32 commandFrame = scrGetCommandFrame();
-        FUN_0021bdac(message, argument, commandFrame, 6, 0, 0);
+        messageWindowShowOrPoll(message, argument, commandFrame, 6, 0, 0);
         asdTextFormatStream(work->box, 4, 0xffffffff, 0, 3, "%s", &LAB_0038870c);
         msgBoxFlagsSetBit7(work->box);
         work->unk19C4 = 0;

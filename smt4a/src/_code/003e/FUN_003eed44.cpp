@@ -9,7 +9,7 @@ extern BtlMainGlobalsA g_btlMain;
 u32 hasFlag80Or1000(u32 unit, u32 *flags);
 s32 FUN_003eebf4(const BtlMainStateA *battle, s32 ordinal);
 bool FUN_0047f78c();
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
 void FUN_003f1b3c(BtlMainStateA *battle, u32 category, s32 kind, u32 *entry, u32 *sound);
 u32 FUN_0047f4cc(u32 sound, f32 volume, f32 gain, f32 pitch);
 
@@ -23,7 +23,7 @@ void FUN_003eed44(BtlMainStateA *battle)
             if ((battle->stateFlags64.bits & g_btlMain.voiceBlocking.blocked) == 0 &&
                 (battle->stateFlags64.bits & g_btlMain.voiceState.attempted) == 0) {
                 if (FUN_0047f78c()) {
-                    BtlCombatantEntryA *entry = FUN_003eaf20(battle);
+                    BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(battle);
                     battle->specialEffect = 0;
                     if (entry != NULL) {
                         const ScriptEntryInfo *record = reinterpret_cast<const ScriptEntryInfo *>(entry->specialMaximum.record);

@@ -33,7 +33,7 @@ extern RenderCtx *g_titleScene;
 
 s32 modelPairTryBind(ResultScreen *result);
 void renderCtxSelectStereoLayout(RenderCtx *context);
-s32 FUN_002c5d80(s32 a, s32 b);
+s32 renderCtxPackPassFlags(s32 a, s32 b);
 u32 packNibblesAndByte(u32 a, u32 b, u32 c);
 void efctSetSpeed(f32 speed);
 u32 vec2GetXInt(void *vector);
@@ -52,7 +52,7 @@ u32 FUN_001a16c0(u32 job)
 
     if (result != NULL && modelPairTryBind(result) != 0) {
         renderCtxSelectStereoLayout(g_titleScene);
-        renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
+        renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
         if (result->phase == 12 && result->step == 5 && uiSpriteGetCompletionState(&result->panel) == 0) {
             s32 curtain = result->curtain;
 
@@ -63,21 +63,21 @@ u32 FUN_001a16c0(u32 job)
                 }
                 renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
                 if (curtain > -240) {
-                    FUN_002bf288(2, 0x28, 0x113, 0, curtain, 0xF1);
+                    texDrawTableEntryAtStoredOrigin(2, 0x28, 0x113, 0, curtain, 0xF1);
                 }
-                FUN_002bf288(2, 0x28, 0x114, 0, curtain + 240, 0xF1);
+                texDrawTableEntryAtStoredOrigin(2, 0x28, 0x114, 0, curtain + 240, 0xF1);
                 renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
             }
             if (result->curtain > 8) {
                 efctSetSpeed(vec2GetSpeed(&result->panel));
-                FUN_002bf288(2, 0x28, 0x115, 0, 0, 0xF2);
+                texDrawTableEntryAtStoredOrigin(2, 0x28, 0x115, 0, 0, 0xF2);
                 efctSetSpeed(1.0f);
             }
         }
         renderStackPop(&g_titleScene->stackA);
         if (result->phase < 9) {
             if (result->phase != 0) {
-                renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
+                renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
                 u32 x = vec2GetXInt(result->position);
                 u32 y = vec2GetYInt(result->position);
                 FUN_003b3388(result, x, y);

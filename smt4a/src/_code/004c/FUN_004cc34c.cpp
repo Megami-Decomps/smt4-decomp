@@ -22,10 +22,10 @@ struct CallbackWorkflow {
 
 extern "C" {
 s32 loadSlotIsLoaded(u32 slot);
-ScriptRunState *FUN_00275bc8(void *heapA, void *heapB);
+ScriptRunState *scrScriptProcessCreate(void *heapA, void *heapB);
 void FUN_004cbb38(CallbackWorkflow *work);
 void FUN_004cbd70(CallbackWorkflow *work);
-u16 *FUN_002613f0(u32 region);
+u16 *saveGetSelectedRecordSlot(u32 region);
 void FUN_0022e774();
 void statusDownRestartTransition();
 void countersAddSaturating(u32 index, s32 value);
@@ -47,7 +47,7 @@ void asdMemFree(void *allocation);
 void btlTalkBustUpDestroy();
 void soundChannelStopAll(u32 channel);
 s32 mapMainIsBusy();
-void FUN_00312d6c();
+void mapSelectRoomMusicIfActive();
 s32 lmapMainIsRunning();
 void lmapMainCallIfActive();
 s32 mikadoPollShutdown();
@@ -69,7 +69,7 @@ extern "C" s32 FUN_004cc34c(CallbackWorkflow *work)
             !loadSlotIsLoaded(20) || !loadSlotIsLoaded(37) || !loadSlotIsLoaded(62))
             break;
         if (work->script == NULL) {
-            work->script = FUN_00275bc8(work->heapA, work->heapB);
+            work->script = scrScriptProcessCreate(work->heapA, work->heapB);
             scriptProcessSetMode(work->script, 0);
         }
         work->step = 0;
@@ -82,7 +82,7 @@ extern "C" s32 FUN_004cc34c(CallbackWorkflow *work)
         FUN_004cbd70(work);
         break;
     case 6: {
-        FUN_002613f0(work->region);
+        saveGetSelectedRecordSlot(work->region);
         SlotRecord *record = gameGetSlotRecord(work->slot);
         switch (work->step) {
         case 0:
@@ -118,7 +118,7 @@ extern "C" s32 FUN_004cc34c(CallbackWorkflow *work)
     case 7: {
         if (!FUN_002effbc())
             break;
-        u16 *region = FUN_002613f0(work->region);
+        u16 *region = saveGetSelectedRecordSlot(work->region);
         region[0] = 0;
         region[1] = 0;
         region[2] = 0;
@@ -139,7 +139,7 @@ extern "C" s32 FUN_004cc34c(CallbackWorkflow *work)
         btlTalkBustUpDestroy();
         soundChannelStopAll(0);
         if (mapMainIsBusy())
-            FUN_00312d6c();
+            mapSelectRoomMusicIfActive();
         else if (lmapMainIsRunning())
             lmapMainCallIfActive();
         else if (mikadoPollShutdown())

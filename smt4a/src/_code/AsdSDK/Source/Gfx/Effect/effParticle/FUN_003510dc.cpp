@@ -17,8 +17,8 @@ int effBlockClone(void);
 int effTlpCreate(void);
 int handleBlockUnref(void);
 int effBlockCreateFromBlock(void);
-int FUN_00291038(void);
-int FUN_002b2d74(unsigned int, unsigned int, unsigned int);
+int effPartClone(void);
+int effBehaviorCreate(unsigned int, unsigned int, unsigned int);
 int objectBufferFree(void);
 int rt_memclr(void);
 int FUN_0035105c(...);
@@ -58,8 +58,8 @@ typedef struct {
 /* Supplied declaration required: handleBlockUnref. */
 /* Supplied declaration required: effBlockCreateFromBlock. */
 extern unsigned int *resourceResolveDataPointer(fn_003510dc_arg0 *);
-/* Supplied declaration required: FUN_00291038. */
-/* Supplied declaration required: FUN_002b2d74. */
+/* Supplied declaration required: effPartClone. */
+/* Supplied declaration required: effBehaviorCreate. */
 /* Supplied declaration required: objectBufferFree. */
 extern unsigned int resourceResolveHeaderPointer(void);
 /* Supplied declaration required: rt_memclr. */
@@ -102,7 +102,7 @@ unsigned int * FUN_003510dc(fn_003510dc_arg0 *param_1)
   if (puVar3[0x13] != 0) {
     objectBufferFree();
   }
-  FUN_002b2d74(temp_v3,*puVar3,temp_v0);
+  effBehaviorCreate(temp_v3,*puVar3,temp_v0);
   puVar3[0x13] = temp_v3;
   *(unsigned char *)((int)puVar3 + 0xe) = *(unsigned char *)((int)puVar3 + 0xe) | 1;
   if ((*puVar3 != 0) && (puVar4 = (unsigned int *)resourceResolveDataPointer(param_1), puVar4 != (unsigned int *)0x0)) {
@@ -209,7 +209,7 @@ unsigned int * FUN_003510dc(fn_003510dc_arg0 *param_1)
         if (temp_v0 >= 2) {
           do {
             temp_v2 = *(unsigned int *)puVar3[0xf];
-            FUN_00291038();
+            effPartClone();
             *(unsigned int *)(puVar3[0xf] + temp_v3 * 4) = temp_v2;
             temp_v3 = temp_v3 + 1;
           } while (temp_v3 < temp_v0);

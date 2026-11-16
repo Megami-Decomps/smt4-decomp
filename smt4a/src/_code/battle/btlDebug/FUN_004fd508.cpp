@@ -7,7 +7,7 @@
 
 extern "C" {
 
-int FUN_004fb43c(...);
+int btlQueueActionMessage(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_5: 4 slot(s), 16 byte(s) */
@@ -24,7 +24,7 @@ extern unsigned int DAT_00573c48; /* 0x573c48 */
 extern unsigned int DAT_00573c4c; /* 0x573c4c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_004fb43c. */
+/* Supplied declaration required: btlQueueActionMessage. */
 
 
 unsigned int
@@ -108,7 +108,7 @@ FUN_004fd508(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
        (temp_v5 = temp_v4,
        (DAT_00573c48 & *(unsigned int *)(temp_v1 + 0x45a0)) != 0 ||
        (*(unsigned int *)(temp_v1 + 0x45a4) & DAT_00573c4c) != 0)) break;
-    FUN_004fb43c(param_1,param_2,0x1000216,0,0,0,0);
+    btlQueueActionMessage(param_1,param_2,0x1000216,0,0,0,0);
     temp_v4 = temp_v5;
     break;
   case 7:
@@ -122,7 +122,7 @@ FUN_004fd508(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
        (temp_v5 = temp_v3,
        (*(unsigned int *)(temp_v1 + 0x45a4) & DAT_00573c4c) != 0 ||
        (*(unsigned int *)(temp_v1 + 0x45a0) & DAT_00573c48) != 0)) break;
-    FUN_004fb43c(param_1,param_2,0x1000216,0,0,0,0);
+    btlQueueActionMessage(param_1,param_2,0x1000216,0,0,0,0);
     temp_v4 = temp_v5;
     break;
   case 0x10:
@@ -147,7 +147,7 @@ FUN_004fd508(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
        (temp_v5 = temp_v4,
        (DAT_00573c48 & *(unsigned int *)(temp_v1 + 0x45a0)) != 0 ||
        (*(unsigned int *)(temp_v1 + 0x45a4) & DAT_00573c4c) != 0)) break;
-    FUN_004fb43c(param_1,param_2,0x1000216,0,0,0,0);
+    btlQueueActionMessage(param_1,param_2,0x1000216,0,0,0,0);
     temp_v4 = temp_v5;
     break;
   case 0x15:
@@ -163,7 +163,7 @@ FUN_004fd508(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
        (temp_v5 = temp_v4,
        (*(unsigned int *)(temp_v1 + 0x45a0) & DAT_00573c48) != 0 ||
        (*(unsigned int *)(temp_v1 + 0x45a4) & DAT_00573c4c) != 0)) break;
-    FUN_004fb43c(param_1,param_2,0x1000216,0,0,0,0);
+    btlQueueActionMessage(param_1,param_2,0x1000216,0,0,0,0);
     temp_v4 = temp_v5;
     break;
   case 0x16:
@@ -179,7 +179,7 @@ FUN_004fd508(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
        (temp_v5 = temp_v4,
        (*(unsigned int *)(temp_v1 + 0x45a0) & DAT_00573c48) != 0 ||
        (*(unsigned int *)(temp_v1 + 0x45a4) & DAT_00573c4c) != 0)) break;
-    FUN_004fb43c(param_1,param_2,0x1000216,0,0,0,0);
+    btlQueueActionMessage(param_1,param_2,0x1000216,0,0,0,0);
     temp_v4 = temp_v5;
     break;
   case 0x17:
@@ -195,7 +195,7 @@ FUN_004fd508(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
        (temp_v5 = temp_v4,
        (*(unsigned int *)(temp_v1 + 0x45a4) & DAT_00573c4c) != 0 ||
        (*(unsigned int *)(temp_v1 + 0x45a0) & DAT_00573c48) != 0)) break;
-    FUN_004fb43c(param_1,param_2,0x1000216,0,0,0,0);
+    btlQueueActionMessage(param_1,param_2,0x1000216,0,0,0,0);
     temp_v4 = temp_v5;
     break;
   case 0x18:

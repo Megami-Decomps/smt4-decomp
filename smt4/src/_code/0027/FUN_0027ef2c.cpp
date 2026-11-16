@@ -18,7 +18,7 @@ void FUN_0027ef2c(u32 id, s32 kind, f32 x, f32 y, f32 z)
             request->id = id;
             if (kind == 0) {
                 SoundActorQueuePosition position = { x, y, z };
-                request->timer = FUN_00291e40(id, position);
+                request->timer = soundActorStartOnFreeChannel(id, position);
                 request->state = 1;
             } else {
                 request->timer = 0;

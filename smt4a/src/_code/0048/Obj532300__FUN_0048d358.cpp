@@ -14,7 +14,7 @@ typedef struct PresetCursorView {
     /* 0x590 */ u8 cursor[0x8C];
 } PresetCursorView;
 
-s32 FUN_00163aa4(void *sprite, f32 rate);
+s32 uiSpriteAdvanceAnimation(void *sprite, f32 rate);
 s32 vec2GetXInt(void *sprite);
 s32 vec2GetYInt(void *sprite);
 void pointConvertToFloat(void *point, s32 x, s32 y);
@@ -35,7 +35,7 @@ void _ZN9Obj53230012FUN_0048d358Ev(PresetCursorView *view)
         break;
     case 1: {
         void *cursor = view->cursor;
-        if (FUN_00163aa4(cursor, 1.0f) && FUN_002e19f8()) {
+        if (uiSpriteAdvanceAnimation(cursor, 1.0f) && FUN_002e19f8()) {
             view->state = 2;
             view->flags |= 2;
         }

@@ -34,7 +34,7 @@ u32 gameSlotTableGetHeader(void);
 void slotSetRequest(s32 slot, s32 kind, s32 value);
 s32 screenFadeIsBusy(void);
 void messageDismissNumericBanner(s32 value);
-ScriptProcess *FUN_00297060(void *file, u32 owner);
+ScriptProcess *scrScriptProcessCreate(void *file, u32 owner);
 }
 
 /* Steps the shop-exit sequence: runs the exit script, then the result screen and its script. */
@@ -74,7 +74,7 @@ extern "C" void FUN_003a3130(ShopExit *exit)
         break;
     case 3:
         if (exit->resultData != NULL && exit->resultMessages != NULL) {
-            exit->resultProcess = FUN_00297060(exit->resultData,
+            exit->resultProcess = scrScriptProcessCreate(exit->resultData,
                 reinterpret_cast<u32>(exit->resultMessages));
             exit->resultProcess->mode = 2;
             scrScriptProcessStartEntry(exit->resultProcess, tableGroupFindEntryIndex(exit->resultData, "ProcCharRequestSecond"));

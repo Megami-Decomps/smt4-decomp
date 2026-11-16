@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void FUN_003fd7c0(u32 handle, u32 mode, u32 flags, f32 value);
+void moriModelUnitStartMaterialAnimation(u32 handle, u32 mode, u32 flags, f32 value);
 
 extern LmapSceneA *g_lmapScene; /* 0x581288 */
 
@@ -15,11 +15,11 @@ u32 FUN_00331110(void)
     g_lmapScene->flag23D = 1;
     g_lmapScene->unk228 = 1;
     g_lmapScene->unk240 = 0.0f;
-    FUN_003fd7c0(g_lmapScene->actor180->controller, 0, 2, 0.0f);
+    moriModelUnitStartMaterialAnimation(g_lmapScene->actor180->controller, 0, 2, 0.0f);
     g_lmapScene->unk1D4 = 0;
     g_lmapScene->unk248 = 0;
     g_lmapScene->unk238 = 1;
-    FUN_003fd7c0(g_lmapScene->actor18C->controller, 0, 2, 0.0f);
+    moriModelUnitStartMaterialAnimation(g_lmapScene->actor18C->controller, 0, 2, 0.0f);
     return 1;
 }
 

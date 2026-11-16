@@ -18,12 +18,12 @@ typedef char BattleUnitStateWorkOffsets[offsetof(BattleUnitStateWork, state) == 
     offsetof(BattleUnitStateWork, actor) == 0x60 && offsetof(BattleUnitStateWork, step) == 0xA0 ? 1 : -1];
 
 extern "C" {
-BtlUnitData* FUN_0027da30(BtlMainState* battle, s32 index);
+BtlUnitData* btlFindEntryBlockByMemberId(BtlMainState* battle, s32 index);
 
 // Refresh the unit state machine and mirror its status mask onto the actor entry.
 void FUN_0027e5e4(BattleUnitStateWork* work)
 {
-    BtlUnitData* data = FUN_0027da30(btlGetMainState(), work->target);
+    BtlUnitData* data = btlFindEntryBlockByMemberId(btlGetMainState(), work->target);
     if (data == NULL) {
         return;
     }

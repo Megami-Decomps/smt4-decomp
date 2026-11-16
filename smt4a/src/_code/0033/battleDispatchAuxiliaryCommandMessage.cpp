@@ -2,7 +2,7 @@
 #include "battle/btlMain.h"
 
 extern "C" {
-u32 FUN_0027099c(u32 *command);
+u32 btlGetActiveShareRating(u32 *command);
 u32 messageAuxDispatch(u32 message, u32 value);
 }
 
@@ -11,6 +11,6 @@ extern "C" u32 battleDispatchAuxiliaryCommandMessage(void)
 {
     BtlCommandMessageStateA *state = &btlGetMainState()->commandMessage;
     u32 message = state->auxiliaryMessage;
-    u32 value = FUN_0027099c(state->commandWords);
+    u32 value = btlGetActiveShareRating(state->commandWords);
     return messageAuxDispatch(message, value);
 }

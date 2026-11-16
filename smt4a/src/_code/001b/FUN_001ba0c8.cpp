@@ -25,7 +25,7 @@ static __inline void semaphoreAcquire(u32 *semaphore)
     s32 result = svcWaitSynchronization1(*semaphore, -1);
     bool failed = nnResultIsFailure(result);
     if (failed)
-        FUN_002e3140(result, failed);
+        resultHandleFailure(result, failed);
 }
 
 /* Releases the queue semaphore once, reporting a failed release. */
@@ -35,7 +35,7 @@ static __inline void semaphoreRelease(u32 *semaphore)
     s32 result = FUN_0019a364(&previousCount, *semaphore, 1);
     bool failed = nnResultIsFailure(result);
     if (failed)
-        FUN_002e3140(result, failed);
+        resultHandleFailure(result, failed);
 }
 
 // Append a copied request to the fixed ring and link it after the previous queued request.

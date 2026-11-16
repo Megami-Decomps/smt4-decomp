@@ -18,7 +18,7 @@ typedef struct ArchiveOpenWork {
     /* 0x08 */ ArchiveStream stream;
 } ArchiveOpenWork;
 
-nn::Result FUN_001883b0(u32 *handle, const s16 *convertedPath, u32 mode);
+nn::Result archivePathDeviceOpen(u32 *handle, const s16 *convertedPath, u32 mode);
 
 static nn::Result archiveOpen(ArchiveStream *stream, const s16 *convertedPath, u32 mode)
 {
@@ -26,7 +26,7 @@ static nn::Result archiveOpen(ArchiveStream *stream, const s16 *convertedPath, u
     stream->sizeHigh = 0;
     stream->state = 0;
     stream->position = 0;
-    return FUN_001883b0(&stream->handle, convertedPath, mode);
+    return archivePathDeviceOpen(&stream->handle, convertedPath, mode);
 }
 
 /* Convert a path, reset archive bookkeeping and open it in access mode 2 when `mode` is 1, else 1; returns an nn::Result. */

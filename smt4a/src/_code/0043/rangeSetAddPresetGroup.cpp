@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match2_RangePresets.h"
 
 extern "C" {
-u32 FUN_00437cac(RangeSet*, u16, u16);
+u32 rangeSetUnionInclusive(RangeSet*, u16, u16);
 extern RangePresetGroup g_rangePresetGroups[];
 extern RangePreset g_rangePresets[];
 
@@ -12,7 +12,7 @@ u32 rangeSetAddPresetGroup(RangeSet* set, s32 groupIndex)
     RangePresetGroup* group = &g_rangePresetGroups[groupIndex];
     for (s32 i = group->first + group->count - 1; i >= group->first; --i) {
         RangePreset* range = &g_rangePresets[i];
-        if (FUN_00437cac(set, range->first, range->last) == 0) {
+        if (rangeSetUnionInclusive(set, range->first, range->last) == 0) {
             return 0;
         }
     }

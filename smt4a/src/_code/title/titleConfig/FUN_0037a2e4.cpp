@@ -31,10 +31,10 @@ u32 taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, void (*draw)(vo
                    void *owner, u32 job);
 void paramsClearPacket(UiResourceParameters *params);
 
-void FUN_0014e188(void *sprite, u32 anim, u32 frame, const void *source, u16 layer, f32 scale);
+void uiSpriteStateInitFromSource(void *sprite, u32 anim, u32 frame, const void *source, u16 layer, f32 scale);
 void uiSpriteSetKeyframe(void *sprite, s32 key, s32 restart);
 void uiSpriteSetImageKeyframe(void *sprite, s32 image, s32 restart);
-void FUN_00203b40(void *cursor, s32 a, s32 b, s32 c, s32 d, s32 e);
+void gridNavigationConfigure(void *cursor, s32 a, s32 b, s32 c, s32 d, s32 e);
 void fillTwoWordsWithByte(void *destination, u32 value);
 void sysPlaySe(s32 sound);
 void buttonHelpSetText(s32 channel, u32 color);
@@ -54,12 +54,12 @@ void FUN_0037a2e4(void)
     taskCreateDraw("TITLE_CONFIG D", 0xea, 0, 0, FUN_0032ba8c, NULL, NULL, config->job);
     paramsClearPacket(&config->params);
     paramsInit(&config->params, DAT_00536bec, 0x30, DAT_00536bec + 0x30, 0x30, 0, 0, 0, 0, 0, 0);
-    FUN_0014e188(config->window, 36, 0, &config->params, 201, 1.0f);
+    uiSpriteStateInitFromSource(config->window, 36, 0, &config->params, 201, 1.0f);
     uiSpriteSetKeyframe(config->window, 2, 0);
     uiSpriteSetImageKeyframe(config->window, 0, 0);
     config->cursorScale = 1.0f;
     config->cursorFrames = 30;
-    FUN_00203b40(config->cursor, 3, 3, 1, 0, 1);
+    gridNavigationConfigure(config->cursor, 3, 3, 1, 0, 1);
     config->state = 0;
     config->countA = 0;
     fillTwoWordsWithByte(config->touchRegions, 0xffffffff);

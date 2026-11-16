@@ -28,23 +28,23 @@ void FUN_001eb874(unsigned int *param_1,int param_2,float *param_3,int param_4,i
     return;
   }
   iStack_54 = param_2 + 0x38;
-  FUN_002bed3c();
+  gxResetColorQuadToWhite();
   FUN_002bf538();
   param_4 = param_4 + (int)param_3[1];
   param_5 = (int)param_3[2] + param_5;
   if (param_6 != 0) {
-    FUN_002bf288(2,0x39,0x56,param_4,param_5,0x6f);
+    texDrawTableEntryAtStoredOrigin(2,0x39,0x56,param_4,param_5,0x6f);
     return;
   }
   if (*(char *)(param_2 + 0x37) != '\0') {
     if (*(char *)(param_2 + 0x37) == '\x01') {
-      FUN_002bf380(2,0x39,10,param_4,param_5,0x6f);
+      texDrawCompositeSprite(2,0x39,10,param_4,param_5,0x6f);
       unaff_r10 = 0xc0c0c000;
       unaff_r11 = 0xffffff00;
     }
   }
   else {
-    FUN_002bf380(2,0x39,9,param_4,param_5,0x6f);
+    texDrawCompositeSprite(2,0x39,9,param_4,param_5,0x6f);
     unaff_r10 = 0x32323200;
     unaff_r11 = 0;
   }
@@ -65,7 +65,7 @@ void FUN_001eb874(unsigned int *param_1,int param_2,float *param_3,int param_4,i
   iVar1 = asdTMTexTableEntryAt(0x39,0x77);
   asdTextSetBaseColor(param_1[1],unaff_r10);
   FUN_002598f0(param_1[1],*(short *)(iVar1 + 8) + param_4,*(short *)(iVar1 + 10) + param_5,0x70);
-  FUN_002bf288(2,0x39,0x5a,param_4,param_5,0x70);
+  texDrawTableEntryAtStoredOrigin(2,0x39,0x5a,param_4,param_5,0x70);
   uVar2 = (unsigned int)*(unsigned short *)(iStack_54 + 0x10);
   if (uVar2 != 0) {
     FUN_002b9024();
@@ -143,7 +143,7 @@ LAB_001ebcbc:
       iVar1 = asdTMTexTableEntryAt(0x39,0x89);
       FUN_00210d08(*(unsigned int *)(param_2 + 0x30),*(short *)(iVar1 + 8) + param_4,
                    *(short *)(iVar1 + 10) + param_5,0x71);
-      FUN_002bed3c();
+      gxResetColorQuadToWhite();
       FUN_002bf538();
       return;
     }

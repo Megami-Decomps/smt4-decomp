@@ -10,7 +10,7 @@ void syncWaitHandleForever(u32 *handle, u32 arg)
 {
     s32 result = svcWaitSynchronization1(*handle, arg, 0xFFFFFFFF, 0xFFFFFFFF);
     if (result < 0) {
-        FUN_002e3140(result);
+        resultHandleFailure(result);
     }
 }
 

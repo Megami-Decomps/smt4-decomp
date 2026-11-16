@@ -53,7 +53,7 @@ extern unsigned char LAB_00468e88; /* 0x468e88 */
 
 extern int engineCleanupIsDone(void);
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_001695a0. */
+/* Supplied declaration required: messageSetScriptDisplayMode. */
 /* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: messageSetMode. */
 extern int idIsAtLeast350(unsigned int);
@@ -294,7 +294,7 @@ LAB_004689f8:
       return;
     }
     uniteReleaseExit();
-    FUN_001695a0();
+    messageSetScriptDisplayMode();
     puVar5 = (unsigned short *)(param_1[0x283] & 0xffff);
     dataTable1bOr1cGetRecord();
     FUN_00417a60(*puVar5);

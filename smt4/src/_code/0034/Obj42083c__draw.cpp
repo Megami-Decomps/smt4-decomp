@@ -43,7 +43,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002573d8. */
 /* Supplied declaration required: forwardRecoveredCallback. */
 /* Supplied declaration required: renderCtxSelectTexture. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 
 
 } /* extern "C" */
@@ -149,7 +149,7 @@ void Obj42083c::draw()
     *(unsigned char *)(temp_v0 + 0x12c4) = 0;
   }
   temp_v0 = g_titleScene;
-  temp_v1 = FUN_002c5d80(1,0);
+  temp_v1 = renderCtxPackPassFlags(1,0);
   piVar10 = (int *)(temp_v0 + 0x124c);
   temp_v2 = *piVar10;
   temp_v3 = piVar10[temp_v2 + 2];

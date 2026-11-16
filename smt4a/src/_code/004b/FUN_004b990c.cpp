@@ -25,7 +25,7 @@ int asdOperatorNew(void);
 int eventQueueAddUnique(...);
 int dialogOpen(...);
 int placeWinStartText(...);
-int FUN_002e5924(...);
+int frameTexRequestFade(...);
 int frameTexInitActive(void);
 int moveCameraCtrlCreateEntry(...);
 int linkSlotSetFlag1C(...);
@@ -105,7 +105,7 @@ extern int screenFadeIsBusy(void);
 /* Supplied declaration required: FUN_002c3398. */
 /* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_002e5924. */
+/* Supplied declaration required: frameTexRequestFade. */
 /* Supplied declaration required: objectE0ResetFlags1040. */
 /* Supplied declaration required: obj04Finish. */
 /* Supplied declaration required: sub68OwnerCall4. */
@@ -114,7 +114,7 @@ extern int screenFadeIsBusy(void);
 /* Supplied declaration required: FUN_00363c58. */
 /* Supplied declaration required: clearFlags310To31F. */
 /* Supplied declaration required: FUN_003b5064. */
-/* Supplied declaration required: FUN_003b61ec. */
+/* Supplied declaration required: commonBgStopChildAndBeginTransition. */
 /* Supplied declaration required: FUN_003c91e8. */
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: moveCameraCtrlCreateEntry. */
@@ -294,7 +294,7 @@ void FUN_004b990c(int param_1)
       *(unsigned short *)(param_1 + 0x4c) = temp_v2;
     }
     frameTransitionSetMode(0);
-    FUN_003b61ec();
+    commonBgStopChildAndBeginTransition();
     menu4CStartBlock74(param_1 + 0x9c);
     menu4CReset(param_1 + 0x9c);
     *(unsigned char *)(param_1 + 0xa88) = 0;
@@ -397,7 +397,7 @@ void FUN_004b990c(int param_1)
     temp_v6 = *(int *)(param_1 + 0x30) + 1;
     *(int *)(param_1 + 0x30) = temp_v6;
     if (temp_v6 == 1) {
-      FUN_002e5924(4);
+      frameTexRequestFade(4);
     }
     if (*(int *)(param_1 + 0x30) >= 4) {
       *(unsigned int *)(param_1 + 0x28) = 0x11;

@@ -30,14 +30,14 @@ void gameDataBlocksReleaseHold(s32 hold);
 void sysPlaySe(s32 id);
 s32 scrRunOpcodesStub(LazyScript *script);
 void gameDataBlocksAddFlags(s32 flags);
-void FUN_00275bc8(void);
+void scrScriptProcessCreate(void);
 void scrScriptProcessStartEntry(LazyScript *script, s32 entry);
 void campCommonBgAcquire(void);
 void FUN_0031ed60(PromptState *state, s32 flag);
 void obj04Finish(void);
 s32 FUN_0035d7bc(PromptState *state);
 s32 FUN_0035d83c(PromptState *state);
-void FUN_003b61ec(void);
+void commonBgStopChildAndBeginTransition(void);
 s32 messageMainIsWindowActive(void);
 s32 FUN_002e0b5c(u32 a, u32 b);
 
@@ -60,7 +60,7 @@ u32 FUN_002a60f8(u32 unused, s32 enabled)
         return 0;
     if (DAT_005e2110 == NULL) {
         LazyScript *script = g_lazyScriptState;
-        FUN_00275bc8();
+        scrScriptProcessCreate();
         DAT_005e2110 = script;
         script->mode = 2;
     }
@@ -91,7 +91,7 @@ u32 FUN_002a60f8(u32 unused, s32 enabled)
         sysPlaySe(0xE8);
         if (DAT_0057f6cc == 0) {
             campCommonBgAcquire();
-            FUN_003b61ec();
+            commonBgStopChildAndBeginTransition();
             DAT_0057f6cc = 1;
         }
         if (scrRunOpcodesStub(DAT_005e2110) != 2)

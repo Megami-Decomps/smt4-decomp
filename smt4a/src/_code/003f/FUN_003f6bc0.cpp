@@ -33,7 +33,7 @@ void *dataTableFileGetTable(void *file, s32 section);
 void fileSectionGetData(void *file, u32 index, s32 arg);
 void asdTextDrawDirectoryEntry(void *text, s32 a1, s32 color, s32 a3, s32 a4, void *file, u32 index);
 s32 FUN_001688c4(void *text);
-void FUN_00203b40(void *cursor, s32 x, s32 a2, s32 a3, s32 a4, s32 a5);
+void gridNavigationConfigure(void *cursor, s32 x, s32 a2, s32 a3, s32 a4, s32 a5);
 void flagsSetOrClearBit(void *flags, s32 set);
 
 /* Loads the window's message for its current index and lays the text and cursor out. */
@@ -64,7 +64,7 @@ void FUN_003f6bc0(MessageWindow *window)
     fileSectionGetData(window->messageFile, message, 0);
     asdTextDrawDirectoryEntry(window->text, 3, -1, 0, 3, window->messageFile, message);
     window->textWidth = FUN_001688c4(window->text);
-    FUN_00203b40(window->cursor, window->offsetX + FUN_001688c4(window->text), 8, 1, 0, 1);
+    gridNavigationConfigure(window->cursor, window->offsetX + FUN_001688c4(window->text), 8, 1, 0, 1);
     flagsSetOrClearBit(window->cursor, 0);
     window->unk050 = 0;
 }

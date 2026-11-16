@@ -9,7 +9,7 @@ int battleRecordUnitMaskHistoryEvents(...);
 int btlSelectActionTier(void);
 int FUN_004e5f2c(...);
 int battleApplyInteractionSelection(...);
-int FUN_004fb43c(...);
+int btlQueueActionMessage(...);
 int FUN_004fb798(...);
 int btlReflectCreateKind19(...);
 int FUN_004fbeac(...);
@@ -50,7 +50,7 @@ extern int btlScriptUnitHasFlags(int);
 /* Supplied declaration required: FUN_004e5f2c. */
 /* Supplied declaration required: battleApplyInteractionSelection. */
 extern int FUN_004e83ac(int *, unsigned int *, int);
-/* Supplied declaration required: FUN_004fb43c. */
+/* Supplied declaration required: btlQueueActionMessage. */
 /* Supplied declaration required: FUN_004fb798. */
 /* Supplied declaration required: btlReflectCreateKind19. */
 /* Supplied declaration required: FUN_004fbeac. */
@@ -89,7 +89,7 @@ unsigned char FUN_004e76cc(int *param_1,unsigned int *param_2,int param_3)
                  param_2[*(short *)(param_2[9] + 0x6a) * 4 + 0x279],
                  *(unsigned int *)(param_2[10] + 0xf8),0,0,0,0,1,0,0x1e,0,temp_v3,temp_v5,temp_v4,0xffffffff
                  ,1,0,1,1);
-    FUN_004fb43c(10,param_2,0x1000223,0,0,0,0);
+    btlQueueActionMessage(10,param_2,0x1000223,0,0,0,0);
     temp_v0 = gameFlagIsSet(0x591);
     if ((temp_v0 != 0) && ((*param_2 & 0x20000) != 0)) {
       FUN_004fbeac(0x1e,param_2,0,0x45,1);
@@ -134,10 +134,10 @@ unsigned char FUN_004e76cc(int *param_1,unsigned int *param_2,int param_3)
                param_2[*(short *)(param_2[9] + 0x6a) * 4 + 0x279],
                *(unsigned int *)(param_2[10] + 0xf8),0,0,temp_v6,0,1,0,0x1e,0,temp_v3,temp_v5,temp_v4,
                0xffffffff,1,0,1,1);
-  FUN_004fb43c(10,param_2,0x1000223,0,0,0,0);
+  btlQueueActionMessage(10,param_2,0x1000223,0,0,0,0);
   if (-1 < (int)temp_v2) {
     FUN_004fb798(0x1e,param_2,0,param_2[9],0,temp_v2,0xffffffff,0xffffffff,0,temp_v3,temp_v5,temp_v4,0,1,1);
-    FUN_004fb43c(0x1e,param_2,0x1000267,0,1,0,0);
+    btlQueueActionMessage(0x1e,param_2,0x1000267,0,1,0,0);
   }
   if (temp_v6 != 0) {
     temp_v2 = param_2[9];

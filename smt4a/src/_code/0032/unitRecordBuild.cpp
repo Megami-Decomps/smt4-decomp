@@ -6,7 +6,7 @@ extern UnitTemplate *devilGetRecord(s32 id);
 extern void sysMemClear(void *ptr, u32 size);
 extern void __aeabi_memcpy4(void *dst, const void *src, u32 size);
 extern void FUN_004bd6b0(UnitRecord *unit, u16 skill, s32 slot);
-extern void FUN_004bcd90(UnitRecord *unit);
+extern void unitRecomputeDerivedStats(UnitRecord *unit);
 extern u16 recordGetScaledMaximum(UnitRecord *unit);
 
 /* Builds unit record `out` from table entry `id`. */
@@ -37,7 +37,7 @@ void unitRecordBuild(s32 id, UnitRecord *out)
         FUN_004bd6b0(out, entry->skills[i], i);
     }
     out->unk30 = 0;
-    FUN_004bcd90(out);
+    unitRecomputeDerivedStats(out);
     out->unk2A = recordGetScaledMaximum(out);
     out->unk2C = out->unk10;
 }

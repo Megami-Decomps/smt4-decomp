@@ -5,7 +5,7 @@ extern "C" {
 
 extern void *saveSlotFindSelected(void);
 extern s32 bitsAt60Test(void *slot, u32 flag);
-extern void FUN_004bcb54(void *slot);
+extern void unitRecordResetCurrentValues(void *slot);
 extern void recordSetClampedCurrent(void *slot, s32 value);
 extern void saveSlotApplySelected(void *state);
 
@@ -15,7 +15,7 @@ u32 scrCommUpdateSlotIfQualified(void)
     void *slot = saveSlotFindSelected();
 
     if (bitsAt60Test(slot, 1) != 0) {
-        FUN_004bcb54(slot);
+        unitRecordResetCurrentValues(slot);
         recordSetClampedCurrent(slot, 1);
         saveSlotApplySelected(static_cast<void *>(btlGetMainState()));
     }

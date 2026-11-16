@@ -16,7 +16,7 @@ int flaggedEntryGetValueA(int);
 int FUN_0029efd8(int, int);
 int eventQueueAddUniqueIfValid(int);
 int timerStart(int, int, int);
-int FUN_002bf818(int);
+int uiSpriteAdvanceAnimation(int);
 int FUN_003983dc(...);
 int FUN_00398fa8(void);
 
@@ -40,7 +40,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002bf818. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: FUN_003983dc. */
 /* Supplied declaration required: FUN_00398fa8. */
 
@@ -63,7 +63,7 @@ void FUN_00397580(int param_1)
   int in_r12;
   
   scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x654));
-  FUN_002bf818(param_1 + 0x67c);
+  uiSpriteAdvanceAnimation(param_1 + 0x67c);
   temp_v7 = param_1;
   FUN_00398fa8();
   *(int *)(param_1 + 0x948) = temp_v7;

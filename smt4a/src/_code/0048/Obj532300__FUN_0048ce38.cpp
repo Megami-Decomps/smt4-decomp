@@ -14,7 +14,7 @@ typedef struct UiCursorWork {
     /* 0x590 */ u8 motion[1];
 } UiCursorWork;
 
-s32 FUN_00163aa4(void *motion, f32 step);
+s32 uiSpriteAdvanceAnimation(void *motion, f32 step);
 s32 vec2GetXInt(void *vec);
 s32 vec2GetYInt(void *vec);
 void uiSpriteBankApplyPreset(void *bank, s32 preset);
@@ -32,7 +32,7 @@ void _ZN9Obj53230012FUN_0048ce38Ev(UiCursorWork *work)
     case 1: {
         void *motion = work->motion;
 
-        if (FUN_00163aa4(motion, 1.0f) && FUN_002e19f8()) {
+        if (uiSpriteAdvanceAnimation(motion, 1.0f) && FUN_002e19f8()) {
             work->state = 2;
             work->flags |= 2;
         }

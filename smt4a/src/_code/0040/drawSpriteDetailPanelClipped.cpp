@@ -27,7 +27,7 @@ void drawSpriteDetailPanelClipped(SpriteDetailPanel* panel, s32 x, s32 y, f32 sp
         efctSetSpeed(speed);
         const TextureTableEntryIV* image = asdTMTexTableEntryAt(0x32, 0x38);
         const s32 screenX = x + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
-        FUN_001835b4(2, panel->spriteGroup, panel->spriteId * 1000,
+        texDrawTableEntryAtStoredOrigin(2, panel->spriteGroup, panel->spriteId * 1000,
                      panel->anchor->x + image->x + screenX,
                      image->y + panel->anchor->y + y, 0x65);
         efctSetSpeed(1.0f);

@@ -41,7 +41,7 @@ u32 FUN_0043299c(s32 *result)
         }
         bool failed = nnResultIsFailure(open);
         if (failed) {
-            FUN_002e3140(open, failed);
+            resultHandleFailure(open, failed);
         }
         s32 setup = FUN_0042640c(reinterpret_cast<void **>(&DAT_00588118));
         *result = setup;

@@ -9,7 +9,7 @@ extern EffectSelectionCatalogEntry *DAT_0059e624[13];
 EffectSelectionItem *linkedFindItemByIndex(void *owner, s32 index);
 EffectSelectionItem *FUN_00376628(void *owner, EffectSelectionBlock *block);
 EffectSelectionItem *nodeListFindByKey(void *owner, u32 key);
-void FUN_003c2df0(void *owner, EffectSelectionItem *item, EffectSelectionItem *previous);
+void linkedItemsRedirectToReplacement(void *owner, EffectSelectionItem *item, EffectSelectionItem *previous);
 void rt_memcpy_w144(void *destination, const void *source);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 EffectSelectionParts *FUN_002b30e4(EffectSelectionItem *item);
@@ -50,7 +50,7 @@ extern "C" u32 FUN_003c597c()
     EffectSelectionItem *previous = source;
     if (sourceView->flags & 2)
         previous = nodeListFindByKey(g_effectEditor.selection.list, sourceView->related);
-    FUN_003c2df0(g_effectEditor.selection.list, copy, previous);
+    linkedItemsRedirectToReplacement(g_effectEditor.selection.list, copy, previous);
     __aeabi_memcpy4(&g_effectEditorSettings, copy, 0x90);
     __aeabi_memcpy4(&g_effectEditorSavedSnapshot, copy, 0x80);
     g_effectEditor.selection.block = copy->block;

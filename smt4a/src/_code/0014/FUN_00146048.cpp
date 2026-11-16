@@ -82,8 +82,8 @@ void gfxCommandSetFlushCursor(ModelSlot *model);
 void objectListsClearActive(SlotOwner *owner);
 void FUN_00144ab4(s32 value);
 void FUN_0017dd80(void);
-void FUN_001575cc(RenderCtxA *context);
-void FUN_00157558(RenderCtxA *context);
+void renderCtxResetFrameState(RenderCtxA *context);
+void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 s32 FUN_00157e98(ModelSlot *model, ModelAnimationSet *animations);
 void renderCtxSetStereoMode(RenderCtxA *context, s32 mode);
 void holderFlushPending(u32 handle);
@@ -140,18 +140,18 @@ u32 FUN_00146048(void)
     FUN_00144ab4(0);
     renderCtxSetStereoMode(g_renderCtx, 0);
     FUN_0017dd80();
-    FUN_001575cc(g_renderCtx);
-    FUN_00157558(g_renderCtx);
+    renderCtxResetFrameState(g_renderCtx);
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     manager = g_handleRegistry;
     if (FUN_00158124(manager)) {
         ModelSlot *model = manager->model;
         if (FUN_00157e98(model, activeAnimations(manager)) == 0) {
-            FUN_001575cc(g_renderCtx);
+            renderCtxResetFrameState(g_renderCtx);
         }
     } else {
-        FUN_001575cc(g_renderCtx);
+        renderCtxResetFrameState(g_renderCtx);
     }
-    effectRestoreSavedRenderPairs(g_renderCtx, reinterpret_cast<void *>(FUN_00152f54()));
+    effectRestoreSavedRenderPairs(g_renderCtx, reinterpret_cast<void *>(asdCameraGetSavedRenderPairs()));
     u32 *pendingEnd = g_handleRegistry->pendingEnd;
     for (u32 *pending = g_handleRegistry->pendingBegin; pending != pendingEnd; pending++) {
         holderFlushPending(*pending);

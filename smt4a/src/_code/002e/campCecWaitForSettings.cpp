@@ -5,7 +5,7 @@ u32 campCecSettingExists();
 u32 campCecSettingIsDone();
 void campCecSettingOpen();
 void campCecSettingDestroy();
-void FUN_0031d890();
+void partyPanelRefreshFromSlotTable();
 u8 cecQueryOptionalProcess();
 
 u32 campCecWaitForSettings(CampCecResumeState *state)
@@ -20,7 +20,7 @@ u32 campCecWaitForSettings(CampCecResumeState *state)
             campCecSettingDestroy();
             state->state = 1;
             state->unk14c = 0;
-            FUN_0031d890();
+            partyPanelRefreshFromSlotTable();
             state->optionalProcess = cecQueryOptionalProcess();
             result = 3;
         }

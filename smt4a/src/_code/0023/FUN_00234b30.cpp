@@ -11,10 +11,10 @@ int mathAngleDeltaDegrees(void);
 int FUN_00312ea0(int);
 int mathPositionHeadingDegrees(void);
 int mathAbsHeadingErrorToPoint(void);
-int FUN_003d4ed8(unsigned int);
+int soundActorStartOnFreeChannel(unsigned int);
 int controllerSetDestination(int, int);
 int controllerSetRotationEulerDegrees(int);
-int FUN_003fe86c(int, int, int);
+int modelPlayClip(int, int, int);
 int candidateGetPreferredValue(int);
 int VectorSignedToFloat(int, int);
 
@@ -50,10 +50,10 @@ extern signed char DAT_005f161f; /* 0x5f161f */
 /* Supplied declaration required: FUN_00312ea0. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: mathAbsHeadingErrorToPoint. */
-/* Supplied declaration required: FUN_003d4ed8. */
+/* Supplied declaration required: soundActorStartOnFreeChannel. */
 /* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: controllerSetRotationEulerDegrees. */
-/* Supplied declaration required: FUN_003fe86c. */
+/* Supplied declaration required: modelPlayClip. */
 /* Supplied declaration required: candidateGetPreferredValue. */
 extern int slots4FGetActiveValue(int);
 
@@ -301,7 +301,7 @@ void FUN_00234b30(void)
           temp_v11 = slots4FGetActiveValue(temp_v5);
           if (temp_v11 != *(int *)(temp_v4 + 0x2c)) {
             temp_v10 = (int)temp_v16;
-            FUN_003fe86c(temp_v5,*(int *)(temp_v4 + 0x2c),2);
+            modelPlayClip(temp_v5,*(int *)(temp_v4 + 0x2c),2);
             *(int *)(temp_v4 + 0x30) = (int)temp_v16;
           }
           candidateGetPreferredValue(temp_v5);
@@ -319,7 +319,7 @@ void FUN_00234b30(void)
               else {
                 temp_v3 = 0x10002d4;
               }
-              FUN_003d4ed8(temp_v3);
+              soundActorStartOnFreeChannel(temp_v3);
             }
             else if ((((0x41a7ffff >= temp_v11) && (temp_v10 >= 0x41a80000)) ||
                      ((0x4273ffff >= temp_v11 && (temp_v10 >= 0x42740000)))) ||
@@ -333,7 +333,7 @@ void FUN_00234b30(void)
               else {
                 temp_v3 = 0x10002d3;
               }
-              FUN_003d4ed8(temp_v3);
+              soundActorStartOnFreeChannel(temp_v3);
             }
           }
           *(int *)(temp_v4 + 0x30) = temp_v10;

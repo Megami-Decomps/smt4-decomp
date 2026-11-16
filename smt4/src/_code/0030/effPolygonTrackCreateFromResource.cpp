@@ -6,14 +6,14 @@ extern "C" {
 void *resourceResolveHeaderPointer(const RelativeDataB *record);
 void polygonTrackRebuildResources(ResourceEmitter *emitter, u32 kind, const EmitterArguments *arguments);
 void objectBufferFree(void *buffer);
-void *FUN_002691d8(u16 kind, u32 count, void *data);
+void *effBehaviorCreate(u16 kind, u32 count, void *data);
 
 static inline void replaceEmitterBuffer(ResourceEmitter *emitter, u32 kind, void *data)
 {
     if (emitter->buffer != NULL) {
         objectBufferFree(emitter->buffer);
     }
-    emitter->buffer = FUN_002691d8((u16)kind, emitter->key, data);
+    emitter->buffer = effBehaviorCreate((u16)kind, emitter->key, data);
 }
 
 

@@ -18,7 +18,7 @@ struct FrameTextureActivity {
 };
 
 extern "C" {
-s32 FUN_002bf818(FrameTextureAnimationWork *work);
+s32 uiSpriteAdvanceAnimation(FrameTextureAnimationWork *work);
 s8 frameAnimationGetBusy(const FrameTextureAnimation *animation);
 
 // Poll active frame animation, rejecting a busy or incomplete transition.
@@ -27,7 +27,7 @@ u32 frameTexPollTransitionComplete(void)
     FrameWork *texture = g_frameTex;
     FrameTextureActivity *activity = (FrameTextureActivity *)texture;
     if (texture->unkF2B != 0 && activity->active != 0) {
-        if (frameAnimationGetBusy(&activity->animation) != 0 || FUN_002bf818(&activity->animation.work) == 0) {
+        if (frameAnimationGetBusy(&activity->animation) != 0 || uiSpriteAdvanceAnimation(&activity->animation.work) == 0) {
             return 0;
         }
     }

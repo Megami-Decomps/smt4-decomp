@@ -8,7 +8,7 @@ int moriModelContentCopyBody(void);
 int handleRegistryRegisterObject(...);
 
 int randRange(...);
-int FUN_00178b04(...);
+int asdMemoryAllocTraced(...);
 int gameFlagIsSet(...);
 int dataTable00FindById(void);
 int distSpatial(void);
@@ -82,7 +82,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: randRange. */
 extern int gameFlagsGetBlock(void);
-/* Supplied declaration required: FUN_00178b04. */
+/* Supplied declaration required: asdMemoryAllocTraced. */
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: dataTable00FindById. */
@@ -631,7 +631,7 @@ LAB_00304874:
       temp_v0 = temp_v6 + *(int *)(temp_v2 + 0x1b0) * 8;
       if (*(char *)(temp_v0 + 0x3d91) != '\0') {
         temp_v0 = 0x20;
-        FUN_00178b04(0x20,&LAB_00304cd0,0x8d5);
+        asdMemoryAllocTraced(0x20,&LAB_00304cd0,0x8d5);
         temp_v9 = 0;
         if (temp_v0 != 0) {
           temp_v9 = modelListInit();

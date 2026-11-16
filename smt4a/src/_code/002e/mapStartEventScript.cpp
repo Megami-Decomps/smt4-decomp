@@ -13,12 +13,12 @@ struct MapScriptProcess {
 extern "C" {
 extern MapMainState *g_mapMain;
 extern AocSystemA *g_aocSystem;
-void FUN_001695a0();
+void messageSetScriptDisplayMode();
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 s32 aocPackageGrantsItem(AocSystemA *system, u32 id, s32 flags);
 void asdMemFree(void *memory);
 void *asdLoadFileSyncDefault(const char *path);
-MapScriptProcess *FUN_00275bc8(void *script, void *messages);
+MapScriptProcess *scrScriptProcessCreate(void *script, void *messages);
 s32 scrScriptProcessGetEntry(MapScriptProcess *process, s32 entry);
 s32 tableGroupFindEntryIndex(void *script, const char *name);
 u32 scrScriptProcessStartEntry(MapScriptProcess *process, s32 entry);
@@ -29,7 +29,7 @@ u32 mapStartEventScript()
     MapMainState *map = g_mapMain;
     char scriptPath[128];
     char messagePath[128];
-    FUN_001695a0();
+    messageSetScriptDisplayMode();
     textFormatBuffer(scriptPath, "event/e%03d/e%03d.bf", map->eventId, map->eventId);
     textFormatBuffer(messagePath, "event/e%03d/e%03d.mbm", map->eventId, map->eventId);
     if (aocPackageGrantsItem(g_aocSystem, map->eventId, 0)) {
@@ -50,7 +50,7 @@ u32 mapStartEventScript()
         map->script = asdLoadFileSyncDefault(scriptPath);
         map->messages = asdLoadFileSyncDefault(messagePath);
     }
-    map->process = FUN_00275bc8(map->script, map->messages);
+    map->process = scrScriptProcessCreate(map->script, map->messages);
     map->process->mode = 2;
     if (g_gameState.scriptOverride) {
         g_gameState.scriptOverride = 0;

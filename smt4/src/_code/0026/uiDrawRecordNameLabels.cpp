@@ -26,7 +26,7 @@ extern "C" s32 uiDrawRecordNameLabels(RecordLabels *labels, const LabelledRecord
     char text[64];
     asdTextDrawFormatted(labels->handles[0], 2, -1, 0, 0, record->name);
     if (record->message)
-        textConvertToGlyphPairs(FUN_002bd06c(record->message), text);
+        textConvertToGlyphPairs(dataTable01FindByIdWithAoc(record->message), text);
     else
         strcpy(text, "\x81\x7c\x81\x7c\x81\x7c");
     asdTextDrawFormatted(labels->handles[1], 2, -1, 0, 0, text);

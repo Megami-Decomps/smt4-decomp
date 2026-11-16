@@ -7,11 +7,11 @@ extern "C" {
 
 int textFormatBuffer(...);
 int textDrawString(...);
-int FUN_00164b5c(int, int, unsigned int, int, int, int);
+int texDrawCompositeSprite(int, int, unsigned int, int, int, int);
 int efctSetSpeed(void);
 int FUN_00180310(...);
-int FUN_0018152c(...);
-int FUN_00183bb0(void);
+int uiDrawItemOrStatusIcon(...);
+int gxResetColorQuadToWhite(void);
 int fontMeasureLineAdvance(...);
 int drawSetColorFromRGBA8(...);
 int FUN_003849cc(...);
@@ -38,16 +38,16 @@ extern unsigned char DAT_00533f4c; /* 0x533f4c */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: FUN_00164b5c. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180310. */
-/* Supplied declaration required: FUN_0018152c. */
+/* Supplied declaration required: uiDrawItemOrStatusIcon. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00183bb0. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 extern int gameFlagIsSet(unsigned int);
-extern short FUN_0019e52c(short);
+extern short dataTable10FindValue(short);
 extern unsigned int FUN_0031a914(unsigned char);
 /* Supplied declaration required: FUN_003849cc. */
 /* Supplied declaration required: FUN_0041af74. */
@@ -97,16 +97,16 @@ void FUN_0041b360(int *param_1,int param_2,int param_3,unsigned int param_4,int 
     return;
   }
   efctSetSpeed();
-  FUN_00164b5c(2,0x2b,temp_v2,temp_v6,temp_v7,2);
-  FUN_001835b4(2,0x2b,0x3b,temp_v6,temp_v7,2);
-  FUN_001835b4(2,0x2b,0x3c,temp_v6,temp_v7,2);
-  FUN_001835b4(2,0x2b,0x1e,temp_v6,temp_v7,2);
+  texDrawCompositeSprite(2,0x2b,temp_v2,temp_v6,temp_v7,2);
+  texDrawTableEntryAtStoredOrigin(2,0x2b,0x3b,temp_v6,temp_v7,2);
+  texDrawTableEntryAtStoredOrigin(2,0x2b,0x3c,temp_v6,temp_v7,2);
+  texDrawTableEntryAtStoredOrigin(2,0x2b,0x1e,temp_v6,temp_v7,2);
   temp_v3 = 0;
   do {
-    FUN_001835b4(2,0x2b,temp_v3 + 0x2b,temp_v6,temp_v7,2);
+    texDrawTableEntryAtStoredOrigin(2,0x2b,temp_v3 + 0x2b,temp_v6,temp_v7,2);
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 3);
-  FUN_001835b4(2,0x2b,0x4b,temp_v6,temp_v7,2);
+  texDrawTableEntryAtStoredOrigin(2,0x2b,0x4b,temp_v6,temp_v7,2);
   temp_v3 = asdTMTexTableEntryAt(0x2b,0x2f);
   temp_v5 = temp_v6 + *(short *)(temp_v3 + 8);
   temp_v4 = temp_v7 + *(short *)(temp_v3 + 10);
@@ -141,27 +141,27 @@ void FUN_0041b360(int *param_1,int param_2,int param_3,unsigned int param_4,int 
   FUN_0041b8e0(param_1,param_2,&temp_v6);
   FUN_0041b204(param_1,param_2,&temp_v6);
   if (*(short *)(param_2 + 0x66) != 0) {
-    FUN_001835b4(2,0x2b,0x6e,temp_v6,temp_v7,2);
+    texDrawTableEntryAtStoredOrigin(2,0x2b,0x6e,temp_v6,temp_v7,2);
     drawSetColorFromRGBA8(0x57d8ffff);
     temp_v3 = asdTMTexTableEntryAt(0x2b,0x72);
     FUN_00180310(6,temp_v6 + *(short *)(temp_v3 + 8),*(short *)(temp_v3 + 10) + temp_v7,1,4,2,
                  &DAT_00533f48,*(unsigned short *)(param_2 + 0x66) + 1);
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
   }
   else if (*(char *)(param_2 + 0x4d) != '\0') {
-    FUN_001835b4(2,0x2b,0x17,temp_v6,temp_v7,2);
+    texDrawTableEntryAtStoredOrigin(2,0x2b,0x17,temp_v6,temp_v7,2);
   }
-  FUN_001835b4(2,0x2b,0x84,temp_v6,temp_v7,2);
-  FUN_001835b4(2,0x2b,param_1[0xf],temp_v6,temp_v7,2);
+  texDrawTableEntryAtStoredOrigin(2,0x2b,0x84,temp_v6,temp_v7,2);
+  texDrawTableEntryAtStoredOrigin(2,0x2b,param_1[0xf],temp_v6,temp_v7,2);
   FUN_0041af74(param_1,param_4,&temp_v6,0xffffffff);
-  FUN_001835b4(2,0x2b,0x1c,temp_v6,temp_v7,0xb);
+  texDrawTableEntryAtStoredOrigin(2,0x2b,0x1c,temp_v6,temp_v7,0xb);
   temp_v0 = *(short *)(param_2 + 0x68);
   if (temp_v0 != 0) {
     temp_v3 = asdTMTexTableEntryAt(0x2b,0x1d);
-    FUN_001835b4(2,0x2b,0x16,temp_v6 + *(short *)(temp_v3 + 8),temp_v7 + *(short *)(temp_v3 + 10),0xb)
+    texDrawTableEntryAtStoredOrigin(2,0x2b,0x16,temp_v6 + *(short *)(temp_v3 + 8),temp_v7 + *(short *)(temp_v3 + 10),0xb)
     ;
-    temp_v0 = FUN_0019e52c(temp_v0);
-    FUN_0018152c((int)temp_v0,temp_v6 + *(short *)(temp_v3 + 8),temp_v7 + *(short *)(temp_v3 + 10),0x15,
+    temp_v0 = dataTable10FindValue(temp_v0);
+    uiDrawItemOrStatusIcon((int)temp_v0,temp_v6 + *(short *)(temp_v3 + 8),temp_v7 + *(short *)(temp_v3 + 10),0x15,
                  0);
   }
   temp_v2 = FUN_0031a914(*(unsigned char *)(param_2 + 99));
@@ -176,7 +176,7 @@ void FUN_0041b360(int *param_1,int param_2,int param_3,unsigned int param_4,int 
                       (unsigned char)(in_fpscr >> 0x16) & 3);
   textDrawString(2,0xb9d7d7ff,temp_v9,temp_v4);
   efctSetSpeed();
-  FUN_00183bb0();
+  gxResetColorQuadToWhite();
   return;
 }
 

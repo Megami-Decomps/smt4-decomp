@@ -9,7 +9,7 @@ extern "C" {
 
 u32 FUN_0019196c(Holder *object, s32 kind);
 
-void FUN_0019f828(UniformContext* context, const u32 values[4]);
+void gpuWriteVertexUniformVec4(UniformContext* context, const u32 values[4]);
 
 void acmpUnpackInPlace(u32 unused, AcmpHeader *header, u32 capacity);
 

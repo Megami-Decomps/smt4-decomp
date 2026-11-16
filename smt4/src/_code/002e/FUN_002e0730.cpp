@@ -26,14 +26,14 @@ struct TitleLogoWork {
 
 
 extern "C" {
-void FUN_002bf818(void *fade);
+void uiSpriteAdvanceAnimation(void *fade);
 void FUN_0034266c(TitleLogoModel *model);
 
 /* Job update: steps the fade, shows the logo unless faded out, and animates it by mode. */
 s32 FUN_002e0730(u32 job)
 {
     TitleLogoWork *work = (TitleLogoWork *)jobGetWork(job);
-    FUN_002bf818(work->fade);
+    uiSpriteAdvanceAnimation(work->fade);
     s32 fadeState = work->fadeState;
     work->model->visible = fadeState != 113;
     work->effect->visible = fadeState != 113;

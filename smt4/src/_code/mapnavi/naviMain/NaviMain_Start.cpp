@@ -14,7 +14,7 @@ extern const char DAT_00404cc4[];
 void NaviMain_InitInstance(void *instance);
 void FUN_002898e4(void);
 s32 gameFlagIsSet(u32 flag);
-void FUN_00289880(void);
+void commonBgStopChildAndBeginTransition(void);
 void buttonHelpCreate(void);
 void FUN_00240cec(s32 requestId);
 void naviRequestClose(u32 handle);
@@ -54,7 +54,7 @@ void NaviMain_Start(s32 unused, s32 requestId)
     NaviMain_InitInstance(navi->state);
     FUN_002898e4();
     if (gameFlagIsSet(0x16) == 0) {
-        FUN_00289880();
+        commonBgStopChildAndBeginTransition();
     }
     buttonHelpCreate();
     FUN_00240cec(requestId);

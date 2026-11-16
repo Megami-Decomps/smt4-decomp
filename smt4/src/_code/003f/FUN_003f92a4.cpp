@@ -4,7 +4,7 @@
 
 struct FrameCurve;
 struct CurveKey;
-extern "C" CurveKey *FUN_003f87cc(FrameCurve *curve, f32 time);
+extern "C" CurveKey *frameCurveFindKeyAtTime(FrameCurve *curve, f32 time);
 
 extern "C" f32 FUN_003f92a4(FrameCurve *source, f32 time)
 {
@@ -18,7 +18,7 @@ extern "C" f32 FUN_003f92a4(FrameCurve *source, f32 time)
         PackedAnimKeyNarrow keys[1];
     };
     NarrowCurveView *curve = (NarrowCurveView *)source;
-    PackedAnimKeyNarrow *key = (PackedAnimKeyNarrow *)FUN_003f87cc(source, time);
+    PackedAnimKeyNarrow *key = (PackedAnimKeyNarrow *)frameCurveFindKeyAtTime(source, time);
     f32 keyTime = curve->frameDuration * (f32)(u32)key->frame;
     u32 value = key->valueLow + ((u32)(key->valueHigh & 15) << 8);
     if (keyTime == time || key == &curve->keys[curve->count - 1]) {

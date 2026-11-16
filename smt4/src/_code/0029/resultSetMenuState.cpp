@@ -26,7 +26,7 @@ extern int scrScriptProcessStartEntry(u32 script, int entry);
 extern int gameGlobalsSetSelected(int);
 extern int FUN_0029c4c8(int);
 extern int FUN_0029dfc0(int);
-extern int FUN_0029e874(int);
+extern int gameSetIconDisplayEnabled(int);
 extern int buttonHelpSetText(int, u32);
 extern int FUN_002b827c(int);
 extern int buttonHelpSetPreset(u8 preset);
@@ -88,7 +88,7 @@ done:
     gameGlobalsSetSelected(0);
     statusDownSwitchTab(0);
     FUN_0029dfc0(0);
-    FUN_0029e874(0);
+    gameSetIconDisplayEnabled(0);
     FUN_0029c4c8(0);
     gameReleaseDataReference();
     value = FUN_00292bf0();

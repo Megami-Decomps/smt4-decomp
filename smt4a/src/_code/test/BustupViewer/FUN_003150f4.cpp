@@ -14,7 +14,7 @@ int scrScriptProcessDestroy(void);
 int asdMemFreeSlot(unsigned int);
 int textureIdRelease(void);
 int textureIdHasTexture(void);
-int FUN_00275bc8(...);
+int scrScriptProcessCreate(...);
 int scrScriptProcessStartEntry(...);
 int FUN_00283498(void);
 int textureIdIsLoaded(void);
@@ -47,7 +47,7 @@ extern int scrRunOpcodesStub(void);
 /* Supplied declaration required: asdMemFreeSlot. */
 /* Supplied declaration required: textureIdRelease. */
 /* Supplied declaration required: textureIdHasTexture. */
-/* Supplied declaration required: FUN_00275bc8. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00283498. */
 /* Supplied declaration required: textureIdIsLoaded. */
@@ -578,7 +578,7 @@ LAB_003153fc:
                   temp_v1 = puVar3[0x27];
                   if (temp_v1 == 0) {
                     temp_v1 = puVar3[0x26];
-                    FUN_00275bc8(temp_v1,0);
+                    scrScriptProcessCreate(temp_v1,0);
                     puVar3[0x27] = temp_v1;
                   }
                   *(unsigned int *)(temp_v1 + 0x108) = 2;

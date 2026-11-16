@@ -29,32 +29,32 @@ typedef struct MoveCameraCtrl {
 extern const char DAT_0053295c[]; /* "c:\\SMT4F\\SMT4F\\sdds4\\program\\mikado\\moveCamera\\MoveCameraCtrl.cpp" */
 extern u32 g_handleRegistry;
 
-extern CameraCtrlEntry *FUN_00178b04(u32 size, const char *file, s32 line);
+extern CameraCtrlEntry *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 extern CameraCtrlEntry *modelListInit(CameraCtrlEntry *memory);
-extern void FUN_0040aa6c(CameraCtrlEntry *entry, u32 arg);
+extern void resourceOwnerLoadFileSync(CameraCtrlEntry *entry, u32 arg);
 extern void FUN_0040ab7c(CameraCtrlEntry *entry, s32 arg);
 extern void FUN_0040aad4(CameraCtrlEntry *entry, s32 arg);
 extern void FUN_0045b538(void *position);
 extern void handleRegistryRegisterObject(u32 registry, CameraChild *child);
-extern void FUN_003fe86c(CameraChild *child, s32 a, s32 b, f32 x, f32 y);
+extern void modelPlayClip(CameraChild *child, s32 a, s32 b, f32 x, f32 y);
 
 /* Creates camera entry `index` (allocated at MoveCameraCtrl.cpp:0x1a3), initialises it and registers its child. */
 void moveCameraCtrlCreateEntry(MoveCameraCtrl *ctrl, u32 arg, s32 index)
 {
-    CameraCtrlEntry *entry = FUN_00178b04(0x20, DAT_0053295c, 0x1A3);
+    CameraCtrlEntry *entry = asdMemoryAllocTraced(0x20, DAT_0053295c, 0x1A3);
     CameraChild *child;
 
     if (entry != NULL) {
         entry = modelListInit(entry);
     }
     ctrl->entries[index] = entry;
-    FUN_0040aa6c(entry, arg);
+    resourceOwnerLoadFileSync(entry, arg);
     FUN_0040ab7c(ctrl->entries[index], 0);
     FUN_0040aad4(ctrl->entries[index], 0);
     FUN_0045b538(ctrl->entries[index]->link->position);
     child = ctrl->entries[index]->child;
     handleRegistryRegisterObject(g_handleRegistry, child);
-    FUN_003fe86c(child, 0, 2, 0.0f, 0.0f);
+    modelPlayClip(child, 0, 2, 0.0f, 0.0f);
     child->flags |= 1;
 }
 

@@ -23,7 +23,7 @@ typedef struct GameGlobals {
 
 extern GameGlobals g_gameGlobals; /* 0x588fd0 */
 
-extern int FUN_0026264c(u16 eventId);
+extern int itemIsCollectedWithRelated(u16 eventId);
 
 /* Stores `request` in the map block unless it is missing, in mode 0xE or 0x10, or in mode 7 with a failing event check. */
 void mapBlockSetRequest(u32 request)
@@ -31,7 +31,7 @@ void mapBlockSetRequest(u32 request)
     MapBlock *block = g_gameGlobals.block;
 
     if (block != NULL && block->state.mode != 0xE
-        && (block->state.mode != 7 || FUN_0026264c(block->eventId) != 0)
+        && (block->state.mode != 7 || itemIsCollectedWithRelated(block->eventId) != 0)
         && block->state.mode != 0x10) {
         block->request = request;
     }

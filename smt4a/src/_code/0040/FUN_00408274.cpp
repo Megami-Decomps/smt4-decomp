@@ -1,7 +1,7 @@
 #include "gamedata/IndexedFlags.h"
 
 extern "C" {
-IndexedFlags *FUN_002c2710(void);
+IndexedFlags *saveGetFlagRowTable(void);
 
 /* Sets or clears bit `bit` of a byte-packed bit array. */
 static __inline void bitArrayWrite(u8 *bits, u32 bit, s32 set)
@@ -24,9 +24,9 @@ void FUN_00408274(u32 owner, u32 flag, s32 enabled)
     if ((s32)owner >= 100 || (s32)flag > 100) {
         return;
     }
-    bitArrayWrite(FUN_002c2710()->flags + owner * 4, flag, enabled);
+    bitArrayWrite(saveGetFlagRowTable()->flags + owner * 4, flag, enabled);
     if (enabled != 0) {
-        bitArrayWrite(FUN_002c2710()->enabled, owner, 1);
+        bitArrayWrite(saveGetFlagRowTable()->enabled, owner, 1);
     }
 }
 }

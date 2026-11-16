@@ -10,7 +10,7 @@ struct BattleMember {
 };
 
 
-BattleMember *FUN_0027da30(void *state, s32 memberId);
+BattleMember *btlFindEntryBlockByMemberId(void *state, s32 memberId);
 
 /* Queues a kind-0x27 reflect action for an active source record unless one with the same argument is already queued. */
 ReflectAction *btlActionQueueSourceReflect(s32 id, u32 argument, BtlActionRecord *source)
@@ -31,7 +31,7 @@ ReflectAction *btlActionQueueSourceReflect(s32 id, u32 argument, BtlActionRecord
     }
     state = static_cast<void *>(btlGetMainState());
     action = btlQueueReflectAction(g_btlActionReflect, (s16)id, 0, argument);
-    member = FUN_0027da30(state, source->memberId);
+    member = btlFindEntryBlockByMemberId(state, source->memberId);
     action->kind = 0x27;
     action->target = (u32)source;
     action->first = member->id;

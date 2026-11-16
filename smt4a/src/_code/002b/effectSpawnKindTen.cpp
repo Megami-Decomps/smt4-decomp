@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_00364578(u32 kind, f32 x, f32 y, f32 z, f32 height, f32 duration);
+void effParticleSpawnCycleOrientation(u32 kind, f32 x, f32 y, f32 z, f32 height, f32 duration);
 
 /* Spawn an effect of the given kind with the standard height and duration. */
 static __inline void effectSpawnKind(u32 kind, f32 x, f32 y, f32 z)
 {
-    FUN_00364578(kind, x, y, z, 5.0f, 20.0f);
+    effParticleSpawnCycleOrientation(kind, x, y, z, 5.0f, 20.0f);
 }
 
 /* Spawn a kind-ten effect with the standard height and duration. */

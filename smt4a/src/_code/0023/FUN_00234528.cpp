@@ -9,7 +9,7 @@ extern void *g_popupState;
 extern PopupSubstitutionNames DAT_00531a98;
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(u32 maximum);
-const char *FUN_002d8b58(s32 category, s32 id);
+const char *popupSelectWeightedMessage(s32 category, s32 id);
 void rt_memcpy(void *destination, const void *source, u32 size);
 s32 textFormatBuffer(char *destination, const char *format, ...);
 
@@ -45,7 +45,7 @@ u32 FUN_00234528(s32 action, s32 count)
     work = static_cast<PopupFormattingView *>(g_popupState);
     work->state = 8;
     work->phase = 0;
-    const char *message = FUN_002d8b58(category, unit->id);
+    const char *message = popupSelectWeightedMessage(category, unit->id);
     work = static_cast<PopupFormattingView *>(g_popupState);
     work->message = message;
     work->selectedId = unit->id;

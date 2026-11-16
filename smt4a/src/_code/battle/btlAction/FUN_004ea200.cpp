@@ -33,7 +33,7 @@ extern unsigned int DAT_00571194; /* 0x571194 */
 
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
-extern int FUN_0026264c(unsigned short);
+extern int itemIsCollectedWithRelated(unsigned short);
 extern int gameProgressIsAdvanced(void);
 /* Supplied declaration required: FUN_003e8bb0. */
 extern int valueAtF0IsReady(int);
@@ -105,7 +105,7 @@ unsigned int FUN_004ea200(int *param_1,int param_2,int param_3,unsigned int para
         puVar4 = *(unsigned int **)(param_3 + temp_v4 * 4);
         puVar6 = g_btlTargetableMask;
         if ((*puVar4 & (unsigned int)g_btlTargetableMask) != 0 || (puVar4[1] & DAT_00571194) != 0) {
-          temp_v0 = FUN_0026264c(*(unsigned short *)((int)puVar4 + 0x166));
+          temp_v0 = itemIsCollectedWithRelated(*(unsigned short *)((int)puVar4 + 0x166));
           if (temp_v0 == 0) {
             temp_v2 = (unsigned int)*(unsigned short *)(*(int *)(param_3 + temp_v4 * 4) + 0x166);
             if ((*(int *)(*param_1 + 0xec) < 0) || ((*(unsigned int *)(*param_1 + 0x110) & 0x80) == 0)) {

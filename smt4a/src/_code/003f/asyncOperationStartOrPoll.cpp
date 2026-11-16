@@ -22,7 +22,7 @@ u32 asyncOperationStartOrPoll(ThreadHandleState *operation, s32 *result, u32 *de
         s32 waitResult = svcWaitSynchronization1(operation->handle, 30000000);
         bool waitFailed = nnResultIsFailure(waitResult);
         if (waitFailed) {
-            FUN_002e3140(waitResult, waitFailed);
+            resultHandleFailure(waitResult, waitFailed);
         }
         if ((static_cast<u32>(waitResult) & 0x3ff) == 0x3fe) {
             return 0;
@@ -51,7 +51,7 @@ u32 asyncOperationStartOrPoll(ThreadHandleState *operation, s32 *result, u32 *de
         }
         bool createFailed = nnResultIsFailure(createResult);
         if (createFailed) {
-            FUN_002e3140(createResult, createFailed);
+            resultHandleFailure(createResult, createFailed);
         }
         u8 buffer[512];
         s32 startStatus = FUN_0042632c(buffer);

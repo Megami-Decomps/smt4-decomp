@@ -7,9 +7,6 @@ extern "C" {
 extern AocDisplay *g_aocDisplay;
 extern const char DAT_005265ac[];
 void sysMemClear(void *destination, u32 size);
-s32 FUN_001b315c(AocPackage *package);
-AocPackageFileDescription *FUN_001b31ac(AocPackage *package);
-u32 FUN_001b31e0(AocPackage *package);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 s32 textFormatBuffer(char *destination, const char *format, ...);
 void aocQueueFileLoad(AocDisplay *display, const char *path, void *destination, s32 kind, u32 flags, void *work);
@@ -22,9 +19,10 @@ void FUN_00471468(AocSystemA *system, s32 kind, s32 capacity, PackageFileRef *ou
     s32 written = 0;
     for (s32 packageIndex = 0; packageIndex < system->packages.count; ++packageIndex) {
         AocPackage *package = &system->packages.entries[packageIndex];
-        if (FUN_001b315c(package)) {
-            AocPackageFileDescription *descriptions = FUN_001b31ac(package);
-            u32 count = FUN_001b31e0(package);
+        if (packageEntryIsLoaded(reinterpret_cast<PackageEntry *>(package))) {
+            AocPackageFileDescription *descriptions =
+                reinterpret_cast<AocPackageFileDescription *>(packageEntryGetDirectory(reinterpret_cast<PackageEntry *>(package)));
+            u32 count = packageEntryGetFileCount(reinterpret_cast<PackageEntry *>(package));
             const char *mount = package->mountName;
             for (u32 index = 0; index < count; ++index) {
                 const AocPackageFileDescription *description = &descriptions[index];

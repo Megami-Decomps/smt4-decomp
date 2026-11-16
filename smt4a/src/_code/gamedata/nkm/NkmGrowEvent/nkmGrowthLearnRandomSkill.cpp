@@ -24,7 +24,7 @@ s32 randRange(u32);
 s32 uiCompareHalfwordKeysDescending(const void *, const void *);
 void qsort(void *, u32, u32, s32 (*)(const void *, const void *));
 void FUN_004bd6b0(GrowDemon *, u16);
-void FUN_004bcd90(GrowDemon *);
+void unitRecomputeDerivedStats(GrowDemon *);
 void recordRestoreScaledMaximumPair(GrowDemon *);
 
 u16 nkmGrowthLearnRandomSkill(GrowDemon *demon)
@@ -87,7 +87,7 @@ u16 nkmGrowthLearnRandomSkill(GrowDemon *demon)
             FUN_004bd6b0(demon, selected);
         }
     }
-    FUN_004bcd90(demon);
+    unitRecomputeDerivedStats(demon);
     recordRestoreScaledMaximumPair(demon);
     asdMemFree(candidates);
     return selected;

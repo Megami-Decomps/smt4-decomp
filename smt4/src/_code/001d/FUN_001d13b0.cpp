@@ -51,7 +51,7 @@ extern PartyPanel *g_partyPanel;
 SlotTable *gameGetSlotTable(void);
 void slotPlacementSetSlot(SlotPlacement *placement, s32 slot);
 void slotPlacementStartTransition(SlotPlacement *placement, s32 immediate);
-void FUN_0029378c(SlotPlacement *placement, u32 arg);
+void slotPlacementAssignSlotAndPosition(SlotPlacement *placement, u32 arg);
 UnitRecord *gameGetUnitRecord(s32 id);
 s32 FUN_00295d7c(void);
 void FUN_0026c9c0(void);
@@ -70,13 +70,13 @@ void FUN_001d13b0(void)
 {
     PartyPanel *panel = g_partyPanel;
     SlotTable *slots = gameGetSlotTable();
-    FUN_0029378c(panel->placements[0], 0);
+    slotPlacementAssignSlotAndPosition(panel->placements[0], 0);
     slotPlacementStartTransition(panel->placements[0], panel->transitionMode == 1);
     slotPlacementSetUnk25(panel->placements[0], 0);
     slotPlacementSetUnk26(panel->placements[0], 0);
     slotPlacementSetUnk27(panel->placements[0], 0);
     for (s32 i = 0; i < 3; i++) {
-        FUN_0029378c(panel->placements[1 + i], panel->transitionArg);
+        slotPlacementAssignSlotAndPosition(panel->placements[1 + i], panel->transitionArg);
         slotPlacementStartTransition(panel->placements[1 + i], panel->transitionMode == 1);
         slotPlacementSetSlot(panel->placements[1 + i], i + 1);
         SlotPlacement **placement = &panel->placements[1 + i];
@@ -91,7 +91,7 @@ void FUN_001d13b0(void)
         slotPlacementSetUnk27(*placement, 0);
     }
     for (s32 i = 0; i < 24; i++) {
-        FUN_0029378c(panel->placements[4 + i], panel->transitionArg);
+        slotPlacementAssignSlotAndPosition(panel->placements[4 + i], panel->transitionArg);
         slotPlacementStartTransition(panel->placements[4 + i], panel->transitionMode == 1);
         SlotPlacement **placement = &panel->placements[4 + i];
         slotPlacementSetSlot(*placement, i + 4);

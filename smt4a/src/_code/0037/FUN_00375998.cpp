@@ -1,4 +1,4 @@
-/* If both entries have the same slot id (u16 at +0x62 of their gameGetSlotRecord record, 0 for negative handles), forwards them to FUN_003811ec. */
+/* If both entries have the same slot id (u16 at +0x62 of their gameGetSlotRecord record, 0 for negative handles), forwards them to itemSortCompareByCategoryAndId. */
 #include "common.h"
 
 extern "C" {
@@ -14,7 +14,7 @@ typedef struct Record {
 } Record;
 
 extern Record *gameGetSlotRecord(void);
-extern void FUN_003811ec(Entry *a, Entry *b);
+extern void itemSortCompareByCategoryAndId(Entry *a, Entry *b);
 
 void FUN_00375998(Entry *a, Entry *b)
 {
@@ -34,7 +34,7 @@ void FUN_00375998(Entry *a, Entry *b)
     }
     diff = slotB - slotA;
     if (diff == 0) {
-        FUN_003811ec(a, b);
+        itemSortCompareByCategoryAndId(a, b);
     }
 }
 

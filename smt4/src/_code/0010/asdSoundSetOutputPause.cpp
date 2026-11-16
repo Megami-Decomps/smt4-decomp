@@ -4,7 +4,7 @@ extern "C" {
 extern AsdSoundSystem g_asdSound;
 s32 nw_snd_internal_BasicSound_IsPause(s32 sound);
 void nw_snd_internal_BasicSound_Pause(s32 sound, s32 paused, u32 frames);
-s32 FUN_001221b4(s32 sound);
+s32 ringBufferGetFreeSize(s32 sound);
 }
 
 /* Pauses or resumes a sound when the slot has one. */
@@ -40,7 +40,7 @@ s32 asdSoundSetOutputPause(u32 channel, s32 operation, u32 frames)
                 }
                 break;
             }
-            if (slot->handle == 0 || FUN_001221b4(slot->handle) <= 0) {
+            if (slot->handle == 0 || ringBufferGetFreeSize(slot->handle) <= 0) {
                 if ((slot->flag & 0x10) != 0) {
                     slot->flag &= ~0x10;
                 }

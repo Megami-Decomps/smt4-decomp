@@ -7,7 +7,7 @@ extern "C" {
 
 int FUN_002347b8(unsigned int, unsigned int, unsigned char [1024]);
 int textDrawString(int, unsigned int, unsigned char [1024], int);
-int FUN_002bf380(int, int, int, int, int, int);
+int texDrawCompositeSprite(int, int, int, int, int, int);
 int asdTMTexTableEntryAt(...);
 int renderCtxSelectStereoLayout(int);
 int VectorSignedToFloat(int, int);
@@ -29,11 +29,11 @@ extern int curveEvaluateStandard(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_0023478c. */
 /* Supplied declaration required: FUN_002347b8. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: FUN_002bf380. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 extern int jobGetWork(unsigned int task);
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 
 
 int FUN_0038f924(unsigned int task)
@@ -64,7 +64,7 @@ int FUN_0038f924(unsigned int task)
   temp_v11 = *(unsigned int *)(temp_v3 + 0x1798);
   renderCtxSelectStereoLayout(g_titleScene);
   temp_v6 = g_titleScene;
-  temp_v4 = FUN_002c5d80(1,0);
+  temp_v4 = renderCtxPackPassFlags(1,0);
   piVar11 = (int *)(temp_v6 + 0x124c);
   temp_v8 = *piVar11;
   temp_v9 = piVar11[temp_v8 + 2];
@@ -74,7 +74,7 @@ int FUN_0038f924(unsigned int task)
     (**(romwright_code **)(temp_v6 + 0x1268))();
     *(unsigned char *)(temp_v6 + 0x1264) = 0;
   }
-  FUN_002bf380(2,0x3a,5,0,0,0x81);
+  texDrawCompositeSprite(2,0x3a,5,0,0,0x81);
   temp_v14[0] = 0x6e;
   temp_v14[1] = 0x6f;
   temp_v14[2] = 0x70;
@@ -104,7 +104,7 @@ int FUN_0038f924(unsigned int task)
       temp_v7 = (int)*(short *)(temp_v9 + 10);
       temp_v9 = ((int)*(short *)(temp_v9 + 8) - (int)temp_v0) + temp_v4 + temp_v6 + 4;
       if (temp_v12 == temp_v10 || temp_v11 == temp_v10) {
-        FUN_002bf288(2,0xe,0x155,temp_v9,temp_v7,0x81);
+        texDrawTableEntryAtStoredOrigin(2,0xe,0x155,temp_v9,temp_v7,0x81);
       }
       else {
         temp_v1 = temp_v14[4];
@@ -112,10 +112,10 @@ int FUN_0038f924(unsigned int task)
           temp_v1 = temp_v15;
         }
         if (!(temp_v14[4] != temp_v10 && temp_v1 != temp_v10)) {
-          FUN_002bf288(2,0xe,0x156,temp_v9,temp_v7,0x81);
+          texDrawTableEntryAtStoredOrigin(2,0xe,0x156,temp_v9,temp_v7,0x81);
         }
         else {
-          FUN_002bf288(2,0xe,0x154,temp_v9,temp_v7,0x81);
+          texDrawTableEntryAtStoredOrigin(2,0xe,0x154,temp_v9,temp_v7,0x81);
         }
       }
       temp_v9 = g_titleScene;

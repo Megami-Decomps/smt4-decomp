@@ -51,7 +51,7 @@ s32 padButtonIsPressed(s32 button);
 void eventQueueAddUnique(u32 event);
 void buttonHelpSetText(s32 a, u32 color);
 void FUN_0023b45c(s32 value);
-s32 FUN_002e1a18(s32 value);
+s32 buttonHelpIsActionActive(s32 value);
 void FUN_002f0384(s32 value);
 void FUN_0033449c(s32 value);
 void FUN_0038b5fc(s32 index, u32 value);
@@ -101,7 +101,7 @@ extern "C" void FUN_0041f22c(SelectScreen *screen)
     FUN_0041e7c0(screen);
     FUN_0041fc24(screen);
     FUN_0041e2d8(screen);
-    if ((objBStateAllowsAction() != 0 && padButtonIsPressed(1) != 0) || FUN_002e1a18(2) != 0) {
+    if ((objBStateAllowsAction() != 0 && padButtonIsPressed(1) != 0) || buttonHelpIsActionActive(2) != 0) {
         eventQueueAddUnique(0x100020F);
         FUN_0033449c(0);
         FUN_0023b45c(1);
@@ -122,11 +122,11 @@ extern "C" void FUN_0041f22c(SelectScreen *screen)
         screen->stateTimer = 0;
         screen->unk0C = 0;
     } else {
-        if (padButtonIsPressed(0) != 0 || screen->confirmHeld != 0 || FUN_002e1a18(1) != 0) {
+        if (padButtonIsPressed(0) != 0 || screen->confirmHeld != 0 || buttonHelpIsActionActive(1) != 0) {
             FUN_0041e9d4(screen);
             return;
         }
         if (padButtonIsPressed(10) == 0 && screen->cancelHeld == 0)
-            FUN_002e1a18(4);
+            buttonHelpIsActionActive(4);
     }
 }

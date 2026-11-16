@@ -29,7 +29,7 @@ struct ContentListState {
 
 extern "C" {
 void contentListWaitAndInitialize(ContentListState* list);
-s32 FUN_00163aa4(UiSpriteState* sprite, f32 speed);
+s32 uiSpriteAdvanceAnimation(UiSpriteState* sprite, f32 speed);
 void FUN_004029f4(ContentListState* list, u32 state, u32 entry);
 void FUN_00403e2c(ContentListState* list);
 void* textureGetIndexedResource(u32 table);
@@ -51,7 +51,7 @@ extern "C" u32 FUN_00405268(ContentListState* list)
         contentListWaitAndInitialize(list);
         break;
     case 2:
-        if (FUN_00163aa4(&list->firstSprite, 1.0f)) {
+        if (uiSpriteAdvanceAnimation(&list->firstSprite, 1.0f)) {
             FUN_004029f4(list, list->nextState, 0);
         }
         break;
@@ -71,7 +71,7 @@ extern "C" u32 FUN_00405268(ContentListState* list)
         break;
     }
     case 5:
-        if (!FUN_00163aa4(&list->secondSprite, 1.0f)) {
+        if (!uiSpriteAdvanceAnimation(&list->secondSprite, 1.0f)) {
             break;
         }
         if (list->secondSprite.mode != 1) {
@@ -95,7 +95,7 @@ extern "C" u32 FUN_00405268(ContentListState* list)
         FUN_004029f4(list, list->nextState, 0);
         break;
     case 6:
-        if (FUN_00163aa4(&list->thirdSprite, 1.0f)) {
+        if (uiSpriteAdvanceAnimation(&list->thirdSprite, 1.0f)) {
             if (list->thirdSprite.mode != 1) {
                 FUN_004029f4(list, 7, 0);
                 list->firstFlag = 0;

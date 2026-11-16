@@ -16,7 +16,7 @@ struct BattleParty {
     /* 0x0C */ u32 ids[1];
 };
 
-BattleParty *FUN_001568f8(void *state, s32 memberId);
+BattleParty *btlFindEntryBlockByMemberId(void *state, s32 memberId);
 s32 idSetFindSubjectIndex(void *state, BtlActionSourceA *source);
 
 /* Queues a kind-0x30 action for an active source record unless one with the same argument is already queued. */
@@ -37,7 +37,7 @@ ReflectAction *FUN_004feb50(s32 id, u32 argument, BtlActionSourceA *source, u32 
         }
     }
     action = btlQueueReflectAction(g_btlActionReflect, (s16)id, 0, argument);
-    party = FUN_001568f8(static_cast<void *>(btlGetMainState()), source->memberId);
+    party = btlFindEntryBlockByMemberId(static_cast<void *>(btlGetMainState()), source->memberId);
     index = idSetFindSubjectIndex(static_cast<void *>(btlGetMainState()), source);
     if (index < 0) {
         index = 0;

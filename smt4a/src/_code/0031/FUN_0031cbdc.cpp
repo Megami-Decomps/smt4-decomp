@@ -28,7 +28,7 @@ u32 FUN_0031cbdc(S4FsReader *reader, void **block)
         s32 result = nn::svc::SignalEvent(reader->dataEvent);
         bool failed = nnResultIsFailure(result);
         if (failed) {
-            FUN_002e3140(result, failed);
+            resultHandleFailure(result, failed);
         }
         return 0;
     }

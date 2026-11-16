@@ -38,12 +38,12 @@ void titleDrawLogo(TitleLogo *logo)
         f32 first = vec2GetSpeed(&logo->elements[0]);
         if (first > minimumScale) {
             efctSetSpeed(first);
-            FUN_002bf288(2, 0x14, 1000, frame, 0, 0x1F);
+            texDrawTableEntryAtStoredOrigin(2, 0x14, 1000, frame, 0, 0x1F);
             f32 third = vec2GetSpeed(&logo->elements[2]);
             if (third > minimumScale) {
                 efctSetSpeed(third);
                 renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
-                FUN_002bf288(2, 0x14, 0x3E9, frame, 0, 0x24);
+                texDrawTableEntryAtStoredOrigin(2, 0x14, 0x3E9, frame, 0, 0x24);
                 renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
             }
             efctSetSpeed(1.0f);

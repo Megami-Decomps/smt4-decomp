@@ -12,8 +12,8 @@ void btlEncountDestroy(u32 job);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, void *owner);
 void asdMemFree(void *memory);
-void FUN_00408184(s32 kind, s32 enabled);
-void FUN_002e5924(s32 state);
+void gameCounterAddSaturating(s32 kind, s32 enabled);
+void frameTexRequestFade(s32 state);
 
 // Create the encounter job, reset its candidate slots and queue the initial encounter state.
 void FUN_002cf698(BtlMainStateA *battle)
@@ -38,12 +38,12 @@ void FUN_002cf698(BtlMainStateA *battle)
         battle->encounterSlots.entries[index].category = -1;
         battle->encounterSlots.entries[index].listedId = -1;
     }
-    FUN_00408184(2, 1);
+    gameCounterAddSaturating(2, 1);
     if (battle->encounterGate.disabled == 0 && battle->encounterSelection.id >= 0 &&
         !(battle->encounter.statusFlags & 0x2000000)) {
         if (!(battle->stateFlags64.bits & g_btlEncount.initialStateMask) &&
             !(g_btlEncount.initializedMask & battle->stateFlags64.bits)) {
-            FUN_002e5924(2);
+            frameTexRequestFade(2);
             battle->stateFlags64.bits |= g_btlEncount.initializedMask;
         }
     }

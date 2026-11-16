@@ -13,7 +13,7 @@ typedef struct PlayerParams {
 } PlayerParams;
 
 extern PlayerInfo *nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetPlayerInfo(void *infoBlock);
-extern u32 FUN_0014d2f8(PlayerInfo *info);
+extern u32 nw_snd_internal_Util_BitFlag_GetValueOrZero(PlayerInfo *info);
 
 u8 nw_snd_internal_SoundArchiveFileReader_ReadPlayerInfo(SoundArchiveRef *ref, u32 unused, PlayerParams *out)
 {
@@ -21,7 +21,7 @@ u8 nw_snd_internal_SoundArchiveFileReader_ReadPlayerInfo(SoundArchiveRef *ref, u
 
     if (info != NULL) {
         out->id = info->id;
-        out->unk04 = FUN_0014d2f8(info);
+        out->unk04 = nw_snd_internal_Util_BitFlag_GetValueOrZero(info);
         return 1;
     }
     return 0;

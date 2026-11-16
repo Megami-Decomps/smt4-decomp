@@ -23,8 +23,8 @@ struct RunWin {
 extern "C" {
 extern RunWin *g_runWin;
 
-void FUN_00164b5c(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
-void FUN_00183bb0(void);
+void texDrawCompositeSprite(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
+void gxResetColorQuadToWhite(void);
 s32 vec2GetXInt(void *vec);
 s32 vec2GetYInt(void *vec);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *scene, f32 depth);
@@ -37,17 +37,17 @@ u8 FUN_00208650(void)
 {
     RunWin *win = g_runWin;
     if (win->active != 0 && win->visible != 0) {
-        FUN_00157558(g_renderCtx);
-        FUN_001835b4(2, 8, 0x14F, 0, 0, 109);
+        renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
+        texDrawTableEntryAtStoredOrigin(2, 8, 0x14F, 0, 0, 109);
         s32 x = vec2GetXInt(win->anchor) + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
         s32 y = vec2GetYInt(win->anchor);
         efctSetSpeed(win->alpha);
         RenderCtxA *scene = g_renderCtx;
-        FUN_00164b5c(2, 8, 19, x, y, 110);
+        texDrawCompositeSprite(2, 8, 19, x, y, 110);
         s32 state = packNibblesAndByte(6, 1, 0);
         renderStackPushCountedDirect(&scene->stackB, state);
-        FUN_001835b4(2, 8, 0x150, x, 0, 111);
-        FUN_001835b4(2, 8, 0x151, x, 0, 111);
+        texDrawTableEntryAtStoredOrigin(2, 8, 0x150, x, 0, 111);
+        texDrawTableEntryAtStoredOrigin(2, 8, 0x151, x, 0, 111);
         renderStackPop(&g_renderCtx->stackB);
         TextureTableEntryIV *labelPoint = asdTMTexTableEntryAt(8, 0x153);
         textDrawString(4, 0x57D8FFFF, (const char *)win->label, (f32)(labelPoint->x + (x - 20)), (f32)(labelPoint->y + y), 0.56640625f, 0.0f,
@@ -62,14 +62,14 @@ u8 FUN_00208650(void)
                 s32 index = row * 3 + column;
                 TextureTableEntryIV *dot = asdTMTexTableEntryAt(8, 0x157 + index);
                 if (lit == index || lit2 == index)
-                    FUN_001835b4(2, 8, 0x155, dot->x + x, dot->y, 111);
+                    texDrawTableEntryAtStoredOrigin(2, 8, 0x155, dot->x + x, dot->y, 111);
                 else if (litPrevious == index || lit2Previous == index)
-                    FUN_001835b4(2, 8, 0x156, dot->x + x, dot->y, 111);
+                    texDrawTableEntryAtStoredOrigin(2, 8, 0x156, dot->x + x, dot->y, 111);
                 else
-                    FUN_001835b4(2, 8, 0x154, dot->x + x, dot->y, 111);
+                    texDrawTableEntryAtStoredOrigin(2, 8, 0x154, dot->x + x, dot->y, 111);
             }
         }
-        FUN_00183bb0();
+        gxResetColorQuadToWhite();
         efctSetSpeed(1.0f);
     }
     return 0;

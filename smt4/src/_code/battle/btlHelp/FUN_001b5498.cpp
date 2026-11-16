@@ -36,9 +36,9 @@ void jobGetWork(void);
 void asdMemFree(void *block);
 void memClear(void *buffer, s32 size);
 s32 dialogIsActive(void);
-s32 FUN_002b6b04(void);
+s32 infoWindowIsActive(void);
 const char *gameGetPlayerName(void);
-const char *FUN_002bd06c(u32 id);
+const char *dataTable01FindByIdWithAoc(u32 id);
 char *libc_strcpy(char *destination, const char *source);
 void textEncodeFontSlot(s32 slot, const char *text);
 void infoWinSetMessage(u32 window, u32 message);
@@ -64,7 +64,7 @@ u32 FUN_001b5498(void)
         if (entry->timer >= 0) {
             switch (entry->phase) {
             case 0:
-                if (FUN_002b6b04() == 0 && dialogIsActive() == 0) {
+                if (infoWindowIsActive() == 0 && dialogIsActive() == 0) {
                     memClear(name, 0x60);
                     switch (entry->kind) {
                     case 1:
@@ -72,7 +72,7 @@ u32 FUN_001b5498(void)
                             if ((entry->flags & 2) != 0) {
                                 libc_strcpy(name, gameGetPlayerName());
                             } else {
-                                libc_strcpy(name, FUN_002bd06c(entry->nameId));
+                                libc_strcpy(name, dataTable01FindByIdWithAoc(entry->nameId));
                             }
                             textEncodeFontSlot(entry->textSlot, name);
                         }
@@ -86,7 +86,7 @@ u32 FUN_001b5498(void)
                             if ((entry->flags & 2) != 0) {
                                 libc_strcpy(name, gameGetPlayerName());
                             } else {
-                                    libc_strcpy(name, FUN_002bd06c(entry->nameId));
+                                    libc_strcpy(name, dataTable01FindByIdWithAoc(entry->nameId));
                             }
                             textEncodeFontSlot(entry->textSlot, name);
                         }
@@ -100,7 +100,7 @@ u32 FUN_001b5498(void)
                 }
                 break;
             case 1:
-                if (FUN_002b6b04() != 0) {
+                if (infoWindowIsActive() != 0) {
                     entry->timer = 1;
                 }
                 break;

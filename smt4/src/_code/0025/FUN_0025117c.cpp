@@ -21,13 +21,13 @@ void FUN_0025117c(s32 entry, s32 x, s32 y, u32 flags, s32 selected)
         RenderCtx *context = g_titleScene;
         s32 blend = packNibblesAndByte(6, 1, 0);
         renderStackSetCounted(&context->stackB, blend);
-        FUN_002bf288(2, 0x19, 0x4F, position->x + x, position->y + y, flags);
+        texDrawTableEntryAtStoredOrigin(2, 0x19, 0x4F, position->x + x, position->y + y, flags);
         context = g_titleScene;
         blend = packNibblesAndByte(6, 7, 0);
         renderStackSetCounted(&context->stackB, blend);
         efctSetSpeed(1.0f);
         return;
     }
-    FUN_002bf288(2, 0x19, 0x4E, position->x + x, position->y + y, flags);
+    texDrawTableEntryAtStoredOrigin(2, 0x19, 0x4E, position->x + x, position->y + y, flags);
 }
 }

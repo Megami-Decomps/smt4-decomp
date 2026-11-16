@@ -22,8 +22,8 @@ extern GameDataBlocksCheat g_gameDataBlocks;
 s32 padIsButtonPressed(u32 button);
 s32 padIsButtonRepeat(u32 button);
 void FUN_0027f958(f32 *angle, u8 buffer[16], s32 stick);
-s32 FUN_00281e34(void);
-void FUN_002bf810(u32 sound);
+s32 __hardfp_atan2f(void);
+void soundPlaySeUnpanned(u32 sound);
 
 /* Abandons the sequence when any button outside it is pressed or held. */
 static s32 sequenceBroken(void)
@@ -57,7 +57,7 @@ u8 FUN_0031e384(void)
         f32 angle;
         u8 buffer[16];
         FUN_0027f958(&angle, buffer, 0);
-        FUN_00281e34();
+        __hardfp_atan2f();
         angle = angle * 57.295776f;
         if (angle < 0.0f) {
             angle = angle + 360.0f;
@@ -119,7 +119,7 @@ u8 FUN_0031e384(void)
             current = current & 0xfd;
         }
         g_gameDataBlocks.work->flags = current;
-        FUN_002bf810(0x1000170);
+        soundPlaySeUnpanned(0x1000170);
         g_gameDataBlocks.sequenceStep = 0;
     }
     return flags;

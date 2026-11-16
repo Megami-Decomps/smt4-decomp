@@ -8,10 +8,10 @@ int characterInfoPanelPopulate(...);
 int buttonHelpSetPreset(...);
 int padIsButtonRepeat(...);
 int asdTMTexTableEntryAt(...);
-int FUN_002bf810(...);
+int soundPlaySeUnpanned(...);
 int padIsButtonPressed(...);
 int uiPointerHitsRect(...);
-int FUN_002bffe0(...);
+int touchGetPointByMode(...);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
 
@@ -30,10 +30,10 @@ extern int FUN_0026f024(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: padIsButtonRepeat. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
-/* Supplied declaration required: FUN_002bf810. */
+/* Supplied declaration required: soundPlaySeUnpanned. */
 /* Supplied declaration required: padIsButtonPressed. */
 /* Supplied declaration required: uiPointerHitsRect. */
-/* Supplied declaration required: FUN_002bffe0. */
+/* Supplied declaration required: touchGetPointByMode. */
 
 
 unsigned int FUN_003172e0(int param_1)
@@ -70,7 +70,7 @@ unsigned int FUN_003172e0(int param_1)
   temp_v0 = 0;
   temp_v18[0] = 0;
   temp_v17 = 0;
-  FUN_002bffe0(param_1 + 0x154,param_1 + 0x158,1);
+  touchGetPointByMode(param_1 + 0x154,param_1 + 0x158,1);
   *(unsigned int *)(param_1 + 0x14c) = 0xe0;
   asdTMTexTableEntryAt(0x39,*(int *)(param_1 + 0x13c) + 0xe6);
   temp_v16 = *(int *)(param_1 + 0x98);
@@ -166,7 +166,7 @@ unsigned int FUN_003172e0(int param_1)
   uiPointerHitsRect(temp_v2,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
                (int)(*(short **)(temp_v1 + 0xc))[1]);
   if (temp_v2 != 0) {
-    FUN_002bffe0(temp_v18,&temp_v17,3);
+    touchGetPointByMode(temp_v18,&temp_v17,3);
     temp_v1 = temp_v17 - *(int *)(param_1 + 0x158);
     temp_v2 = *(int *)(param_1 + 0x118);
     if (temp_v1 < 0) {
@@ -227,7 +227,7 @@ unsigned int FUN_003172e0(int param_1)
   }
   else if ((temp_v3 & 4) != 0) {
     temp_v2 = *(int *)(param_1 + 0x13c);
-    FUN_002bffe0(&uStack_34,&temp_v16,0);
+    touchGetPointByMode(&uStack_34,&temp_v16,0);
     temp_v6 = asdTMTexTableEntryAt(0x39,0x41);
     temp_v16 = temp_v16 - *(short *)(temp_v6 + 10);
     temp_v1 = *(int *)(param_1 + 0x138);
@@ -435,7 +435,7 @@ LAB_003179a8:
          temp_v1 + *(int *)(param_1 + 0x134) + *(int *)(param_1 + 0x148);
     characterInfoPanelPopulate(*(unsigned int *)(param_1 + 0x10),*(unsigned int *)(param_1 + 8),
                  *(unsigned int *)(param_1 + 0xac));
-    FUN_002bf810(0x100016c);
+    soundPlaySeUnpanned(0x100016c);
   }
   temp_v6 = padIsButtonPressed(0);
   if ((temp_v6 != 0) || (temp_v6 = buttonHelpHasEnabledEntryForId(1), temp_v6 != 0 || temp_v0)) {
@@ -444,7 +444,7 @@ LAB_003179a8:
     *(unsigned int *)(param_1 + 0x110) = 2;
     *(unsigned int *)(param_1 + 0x114) = 5;
     buttonHelpSetPreset(0xe2);
-    FUN_002bf810(0x100016d);
+    soundPlaySeUnpanned(0x100016d);
   }
   return temp_v7;
 }

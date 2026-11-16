@@ -7,9 +7,9 @@
 
 extern "C" {
 
-int FUN_0015f858(...);
+int dataFindKindRecordWithAocOverrides(...);
 int textDrawString(...);
-int FUN_00164b5c(...);
+int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
 int asdTMTexTableEntryAt(...);
 int jobGetScalarValue(void);
@@ -34,9 +34,9 @@ extern unsigned char DAT_0052bfdc; /* 0x52bfdc */
 extern int g_camp; /* 0x57f108 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0015f858. */
+/* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: FUN_00164b5c. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
@@ -76,12 +76,12 @@ void FUN_00288538(int param_1)
   jobGetScalarValue();
   efctSetSpeed();
   if (param_1 == 0) {
-    FUN_001835b4(2,0x12,0x52d,temp_v1,temp_v0,0xbf);
-    FUN_001835b4(2,0x12,0x52f,temp_v1,temp_v0,0xbf);
-    FUN_001835b4(2,0x12,0x52e,temp_v1,temp_v0,0xbf);
-    FUN_001835b4(2,0x12,0x530,temp_v1,temp_v0,0xbf);
-    FUN_001835b4(2,0x12,0x532,temp_v1,temp_v0,0xbf);
-    FUN_001835b4(2,0x12,0x531,temp_v1,temp_v0,0xbf);
+    texDrawTableEntryAtStoredOrigin(2,0x12,0x52d,temp_v1,temp_v0,0xbf);
+    texDrawTableEntryAtStoredOrigin(2,0x12,0x52f,temp_v1,temp_v0,0xbf);
+    texDrawTableEntryAtStoredOrigin(2,0x12,0x52e,temp_v1,temp_v0,0xbf);
+    texDrawTableEntryAtStoredOrigin(2,0x12,0x530,temp_v1,temp_v0,0xbf);
+    texDrawTableEntryAtStoredOrigin(2,0x12,0x532,temp_v1,temp_v0,0xbf);
+    texDrawTableEntryAtStoredOrigin(2,0x12,0x531,temp_v1,temp_v0,0xbf);
     temp_v2 = 0;
     temp_v11 = temp_v0;
     do {
@@ -111,13 +111,13 @@ void FUN_00288538(int param_1)
       temp_v4 = temp_v9;
       temp_v7 = *(short *)(temp_v0 + 8) + temp_v1;
       temp_v5 = *(short *)(temp_v0 + 10) + temp_v11;
-      FUN_00164b5c(2,0x12,0xd,temp_v7,temp_v5,0xbf);
+      texDrawCompositeSprite(2,0x12,0xd,temp_v7,temp_v5,0xbf);
       temp_v0 = asdTMTexTableEntryAt(0x12,0xa0);
       uiDrawItemCategoryIcon((int)(short)temp_v3,*(short *)(temp_v0 + 8) + temp_v7,*(short *)(temp_v0 + 10) + temp_v5,
                    0xc4,0);
       temp_v0 = asdTMTexTableEntryAt(0x12,0xa1);
       if (temp_v4 >= 1) {
-        FUN_0015f858(temp_v4,0);
+        dataFindKindRecordWithAocOverrides(temp_v4,0);
         if (temp_v4 != 0) {
           VectorSignedToFloat(*(short *)(temp_v0 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat(*(short *)(temp_v0 + 8) + temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -138,7 +138,7 @@ void FUN_00288538(int param_1)
       } while ((temp_v2 == 1 || temp_v2 == 2) && (temp_v0 = gameFlagIsSet(0x410), temp_v0 == 0));
     } while( 1 );
   }
-  FUN_00164b5c(2,0x12,0xc,temp_v1,temp_v0,0xbf);
+  texDrawCompositeSprite(2,0x12,0xc,temp_v1,temp_v0,0xbf);
   temp_v11 = g_camp;
   temp_v10 = 0;
   temp_v9 = 0;
@@ -178,13 +178,13 @@ void FUN_00288538(int param_1)
       temp_v2 = temp_v9;
       temp_v7 = *(short *)(temp_v3 + 8) + temp_v12;
       temp_v5 = *(short *)(temp_v3 + 10) + temp_v13;
-      FUN_00164b5c(2,0x12,0xd,temp_v7,temp_v5,0xbf);
+      texDrawCompositeSprite(2,0x12,0xd,temp_v7,temp_v5,0xbf);
       temp_v3 = asdTMTexTableEntryAt(0x12,0x464);
       uiDrawItemCategoryIcon((int)(short)temp_v4,*(short *)(temp_v3 + 8) + temp_v7,*(short *)(temp_v3 + 10) + temp_v5,
                    0xc4,0);
       temp_v4 = asdTMTexTableEntryAt(0x12,0x465);
       if (temp_v2 >= 1) {
-        FUN_0015f858(temp_v2,0);
+        dataFindKindRecordWithAocOverrides(temp_v2,0);
         if (temp_v2 != 0) {
           VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);

@@ -62,13 +62,13 @@ extern u32 DAT_005f190c[HINT_KNOWN_COUNT];     /* ids already shown */
 SaveSlotView *saveSlotFindSelected(void);
 s32 gameFlagIsSet(s32 flag);
 s32 randRange(u32 maximum);
-HintCandidates *FUN_004bb80c(u32 owner);
+HintCandidates *dataTable02GetRecordWithAocPackage(u32 owner);
 PlayerView *gameGetPlayerData(void);
 HintRecord *dataTable00FindById(u32 id);
 HintRecord *devilGetRecord(u32 id);
-void *FUN_002d8b58(s32 kind, u32 id);
+void *popupSelectWeightedMessage(s32 kind, u32 id);
 void rt_memcpy(void *destination, const void *source, u32 size);
-const char *FUN_00180118(u32 id);
+const char *dataTable01GetRecordWithAocOverride(u32 id);
 void textFormatBuffer(char *out, const void *format, const char *argument);
 
 static __inline bool hintInList(const u32 *list, s32 count, u32 id)
@@ -93,7 +93,7 @@ void FUN_00294cfc(u32 owner)
     if (gameFlagIsSet(0x15) == 0)
         return;
 
-    HintCandidates *candidates = FUN_004bb80c(owner);
+    HintCandidates *candidates = dataTable02GetRecordWithAocPackage(owner);
     s32 level = gameGetPlayerData()->level;
     s32 lowest = level - HINT_LEVEL_WINDOW;
     u32 chosen = 0;
@@ -131,13 +131,13 @@ void FUN_00294cfc(u32 owner)
         PopupState *popup = g_popupState;
         popup->state = HINT_POPUP_STATE;
         popup->unk04 = 0;
-        void *record = FUN_002d8b58(HINT_KIND, slot->id);
+        void *record = popupSelectWeightedMessage(HINT_KIND, slot->id);
         popup = g_popupState;
         popup->record = record;
         popup->entryId = slot->id;
         u32 format[19];
         rt_memcpy(format, record, 0x48);
-        textFormatBuffer(g_popupState->text, format, FUN_00180118((u16)chosen));
+        textFormatBuffer(g_popupState->text, format, dataTable01GetRecordWithAocOverride((u16)chosen));
 
         /* Move the id to the front of the recent list unless it is already there. */
         s32 index;

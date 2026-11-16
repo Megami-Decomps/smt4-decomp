@@ -4,7 +4,7 @@
 
 extern "C" {
 
-s32 FUN_00163aa4(void *sprite, f32 step);
+s32 uiSpriteAdvanceAnimation(void *sprite, f32 step);
 void FUN_00167458(void *sprite, s32 arg);
 void uiSpriteSetKeyframe(void *sprite, s32 keyframe, s32 arg);
 void uiSpriteSetImageKeyframe(void *sprite, s32 keyframe, s32 arg);
@@ -31,9 +31,9 @@ s32 FUN_00156478(void)
     switch (window->state) {
     case 1:
         if (window->active == 2) {
-            FUN_00163aa4(&window->sprites.content, 1.0f);
+            uiSpriteAdvanceAnimation(&window->sprites.content, 1.0f);
         }
-        if (FUN_00163aa4(&window->sprites.background, 1.0f) != 0) {
+        if (uiSpriteAdvanceAnimation(&window->sprites.background, 1.0f) != 0) {
             if (window->style != 0) {
                 window->state = 4;
             } else {
@@ -74,9 +74,9 @@ s32 FUN_00156478(void)
         break;
     case 5:
         if (window->active == 2) {
-            FUN_00163aa4(&window->sprites.content, 1.0f);
+            uiSpriteAdvanceAnimation(&window->sprites.content, 1.0f);
         }
-        if (FUN_00163aa4(&window->sprites.background, 1.0f) != 0) {
+        if (uiSpriteAdvanceAnimation(&window->sprites.background, 1.0f) != 0) {
             window->style = 0;
             window->state = 0;
             window->frame = 0;

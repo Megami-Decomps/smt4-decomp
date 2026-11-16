@@ -23,7 +23,7 @@ void ref208SetPair1C(u8 a, u8 b);
 u32 bgmGetStateById(s32 trackId);
 s32 soundChannelRequestIfEnabled(s32 a, s32 b, s32 c);
 void soundChannelStopAll(u32 value);
-u8 FUN_0013def0(s32 index);
+u8 pairedAvailabilityGetState(s32 index);
 void FUN_003d54f8(u32 index, u32 value);
 void slotSetRequest(u32 index, u32 value, u32 extra);
 u32 padButtonIsPressed(u32 button);
@@ -48,18 +48,18 @@ s32 fountainCrazingSumahoUpdate(CrazingSumahoWork *work)
         }
         work->state++;
     }
-    if (FUN_0013def0(0) == 0 && (ifTouchGetSelectionMode() == 6 || padButtonIsPressed(0) != 0)) {
+    if (pairedAvailabilityGetState(0) == 0 && (ifTouchGetSelectionMode() == 6 || padButtonIsPressed(0) != 0)) {
         work->state = 2;
         work->timer = 0;
     }
     if (work->state == 1) {
-        if (FUN_0013def0(0) == 3) {
+        if (pairedAvailabilityGetState(0) == 3) {
             FUN_003d54f8(0, 30);
         }
-        if (FUN_0013def0(1) == 3) {
+        if (pairedAvailabilityGetState(1) == 3) {
             FUN_003d54f8(1, 30);
         }
-        if (FUN_0013def0(0) != 2) {
+        if (pairedAvailabilityGetState(0) != 2) {
             union {
                 f32 value;
                 s32 bits;
@@ -80,7 +80,7 @@ s32 fountainCrazingSumahoUpdate(CrazingSumahoWork *work)
             slotSetRequest(1, 45, 255);
         }
     } else if (work->state == 3) {
-        if (FUN_0013def0(0) == 3) {
+        if (pairedAvailabilityGetState(0) == 3) {
             work->active = 0;
             ref208SetPair1C(0, 0);
             if (work->ownsBackground != 0) {

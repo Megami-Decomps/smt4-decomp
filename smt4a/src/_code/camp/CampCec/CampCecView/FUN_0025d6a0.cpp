@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_00167c14(...);
+int touchGetPointByMode(...);
 int FUN_0036c7a8(...);
 int uiGetFloatValue(void);
 int textureRequestCacheGet(...);
@@ -47,10 +47,10 @@ extern int g_campCecView; /* 0x57f130 */
 /* Supplied declaration required: uiPointerHitsRect. */
 extern int slotIsActive(unsigned int);
 extern int padButtonRepeat(unsigned int);
-/* Supplied declaration required: FUN_00167c14. */
+/* Supplied declaration required: touchGetPointByMode. */
 /* Supplied declaration required: FUN_00182054. */
 /* Supplied declaration required: linkHolderApplyFlag. */
-extern int FUN_002e1a18(unsigned int);
+extern int buttonHelpIsActionActive(unsigned int);
 /* Supplied declaration required: FUN_002e1c94. */
 /* Supplied declaration required: FUN_002e207c. */
 /* Supplied declaration required: FUN_002e2114. */
@@ -492,7 +492,7 @@ LAB_0025dd50:
         temp_v3 = padButtonRepeat(0);
         temp_v1 = temp_v5;
         if (temp_v3 == 0) {
-          temp_v5 = FUN_002e1a18(2);
+          temp_v5 = buttonHelpIsActionActive(2);
           if (temp_v5 != 0) {
             if (*(int *)(temp_v0 + 0x11c) == 1) {
               *(unsigned int *)(temp_v0 + 0xac) = 0;
@@ -526,7 +526,7 @@ LAB_0025dd50:
                    ((temp_v5 = slotIsActive(5), temp_v5 != 0 ||
                     ((temp_v5 = slotIsActive(3), temp_v5 != 0 || (temp_v5 = slotIsActive(4), temp_v5 != 0)))
                     ))) {
-                  temp_v5 = FUN_002e1a18(4);
+                  temp_v5 = buttonHelpIsActionActive(4);
                   if (temp_v5 != 0) {
                     if (*(char *)(temp_v0 + 0x135) != '\0') {
                       *(unsigned char *)(temp_v0 + 0x135) = 0;
@@ -546,7 +546,7 @@ LAB_0025dd50:
               else {
                 temp_v5 = *(int *)(temp_v0 + 0x114);
                 temp_v3 = *(int *)(temp_v0 + 0x118);
-                FUN_00167c14(temp_v17 + 1,temp_v17,0);
+                touchGetPointByMode(temp_v17 + 1,temp_v17,0);
                 temp_v9 = (int)asdTMTexTableEntryAt(0x2e,0x41);
                 temp_v17[0] = temp_v17[0] - *(short *)(temp_v9 + 10);
                 temp_v4 = *(int *)(temp_v9 + 0xc);

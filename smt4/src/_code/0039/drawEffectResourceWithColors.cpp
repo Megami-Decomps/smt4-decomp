@@ -7,7 +7,7 @@ extern "C" {
 int jobGetScalarValue(void);
 int FUN_002b0750(int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 int quadSetOrderedVectors(int *, int *, int *, int *, int, int);
-int FUN_002bed3c(void);
+int gxResetColorQuadToWhite(void);
 int efctSetSpeed(void);
 int __aeabi_vec_ctor_nocookie_nodtor(int *, unsigned char *, int, int);
 int VectorSignedToFloat(unsigned int, int);
@@ -37,7 +37,7 @@ extern unsigned char vectorSetAllOne; /* 0x141adc */
 /* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: FUN_002b0750. */
 /* Supplied declaration required: quadSetOrderedVectors. */
-/* Supplied declaration required: FUN_002bed3c. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
@@ -148,7 +148,7 @@ void drawEffectResourceWithColors(unsigned int param_1,unsigned int param_2,unsi
   efctSetSpeed();
   texTableRecordCallExtended(2,0x1c,param_1,param_2,param_3,temp_v2,temp_v3,param_4);
   efctSetSpeed();
-  FUN_002bed3c();
+  gxResetColorQuadToWhite();
   return;
 }
 

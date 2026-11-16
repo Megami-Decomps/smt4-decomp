@@ -48,7 +48,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: btlReflectQueueKind34. */
 extern int FUN_00256940(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002630e0. */
-extern unsigned int FUN_002c501c(void);
+extern unsigned int asdCameraGetSavedRenderPairs(void);
 /* Supplied declaration required: FUN_003d64dc. */
 /* Supplied declaration required: FUN_003d6b7c. */
 /* Supplied declaration required: FUN_003d710c. */
@@ -182,7 +182,7 @@ LAB_00344904:
     btlSetVectorTransitionTarget(g_btlMain,*(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48));
     temp_v11[0] = in_s0;
     temp_v12 = in_s2;
-    temp_v4 = FUN_002c501c();
+    temp_v4 = asdCameraGetSavedRenderPairs();
     FUN_002630e0(temp_v11,0,temp_v4);
     temp_v5 = g_btlMain;
     temp_v6 = (temp_v11[0] - 200.0f) * 0.006666667f;
@@ -330,7 +330,7 @@ LAB_00344904:
       FUN_003d64dc(g_btlMain,*(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48));
       temp_v11[0] = in_s0;
       temp_v12 = in_s2;
-      temp_v4 = FUN_002c501c();
+      temp_v4 = asdCameraGetSavedRenderPairs();
       FUN_002630e0(temp_v11,0,temp_v4);
       temp_v6 = (temp_v11[0] - 200.0f) * 0.006666667f;
       if (temp_v6 < 0.0f) {

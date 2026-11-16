@@ -32,7 +32,7 @@ typedef char MemberResetLayoutCheck[offsetof(Member, unk37) == 0x37 &&
 /* Resets the member's ids to -1 and its counters and flags to 0. */
 void FUN_0034c8e8(void)
 {
-    Member *member = reinterpret_cast<Member *>(FUN_0026140c());
+    Member *member = reinterpret_cast<Member *>(saveGetUserSettingsBlock());
 
     member->id0 = -1;
     member->id1 = -1;

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_002866b4(u32 unit, u32 arg, u32 value, s32 kind, s32 a, s32 b);
+void messageWindowShowOrPoll(u32 unit, u32 arg, u32 value, s32 kind, s32 a, s32 b);
 void scrCommMessageSetMode(s32 arg);
 u32 scrGetCommandOwner(void);
 u32 scrGetCommandFrame(void);
@@ -15,7 +15,7 @@ static void showMessage(s32 kind)
     u32 arg = scrGetArg(0);
     u32 value = scrGetCommandFrame();
 
-    FUN_002866b4(unit, arg, value, kind, 0, 0);
+    messageWindowShowOrPoll(unit, arg, value, kind, 0, 0);
 }
 
 void scrComm_Message_ShowMode19(void)

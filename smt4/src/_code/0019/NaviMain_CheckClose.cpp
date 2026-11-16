@@ -3,7 +3,7 @@
 extern "C" {
 extern NaviMain *g_naviMain;
 
-int FUN_00291730(u32 *block);
+int naviReleaseTextureNode(u32 *block);
 int asdMemFree(void *ptr);
 extern int jobFind(u32 job);
 
@@ -17,7 +17,7 @@ u32 NaviMain_CheckClose(void)
             return 1;
         }
         if (g_naviMain != NULL) {
-            FUN_00291730(g_naviMain->state);
+            naviReleaseTextureNode(g_naviMain->state);
             asdMemFree(g_naviMain);
             g_naviMain = NULL;
         }

@@ -5,7 +5,7 @@
 #include "code/Code0033.h"
 
 extern "C" {
-void FUN_003fd7b4(u32, f32, f32, f32);
+void controllerSetPositionXyz(u32, f32, f32, f32);
 void __aeabi_memcpy4(void *, const void *, u32);
 char *libc_strcpy(char *, const char *);
 void *gameDataBlocksGetSaveData();
@@ -37,7 +37,7 @@ void FUN_0041eb94(SavedUnitSelection *work)
         offsetof(UnitRestoreFields, name) == 0x4C &&
         offsetof(UnitRestoreFields, id) == 0x62 &&
         offsetof(SaveNameView, name) == 0x54 ? 1 : -1];
-    FUN_003fd7b4(work->resource->handle, 0.0f, -10000.0f, 0.0f);
+    controllerSetPositionXyz(work->resource->handle, 0.0f, -10000.0f, 0.0f);
     work->current = work->selected;
     SavedUnitChoice *choice = &work->choices[work->selected];
     UnitRestoreFields *unit = (UnitRestoreFields *)work->unit;

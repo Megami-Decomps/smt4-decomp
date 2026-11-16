@@ -37,7 +37,7 @@ extern BibleCursor DAT_0043d9c8;
 
 void useCounterRelease(void);
 void buttonHelpSetPreset(s32 preset);
-void FUN_0022e0fc(BibleDevilIcon *icon, s8 animation);
+void entryCollectionSortByMode(BibleDevilIcon *icon, s8 animation);
 void FUN_0022d1a8(BibleDevilScreen *screen);
 
 }
@@ -70,7 +70,7 @@ static __inline void iconRefresh(BibleDevilScreen *screen)
         if (type->variant) {
             animation++;
         }
-        FUN_0022e0fc(&screen->icon, animation);
+        entryCollectionSortByMode(&screen->icon, animation);
     }
 }
 

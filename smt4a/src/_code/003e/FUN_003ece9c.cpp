@@ -8,7 +8,7 @@ extern "C" {
 extern BtlMainGlobalsA g_btlMain;
 extern void *g_btlUiBlock;
 s32 hasFlag80Or1000(u32 id, const ScriptCategoryUnit *unit);
-UnitCategoryState *FUN_003eaf20(BtlMainStateA *state);
+UnitCategoryState *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
 void FUN_0047f780(s32 category, s32 first, s32 second);
 
 /* Request the scripted unit's category effect unless the current battle selection blocks it. */
@@ -18,7 +18,7 @@ void FUN_003ece9c(BtlMainStateA *state)
     if (unit != NULL && hasFlag80Or1000(g_btlScriptUnit, unit)) {
         return;
     }
-    if (FUN_003eaf20(state) == NULL) {
+    if (btlFindFirstEntryMatchingCategoryAndRequiredMask(state) == NULL) {
         return;
     }
     if (state->stateFlags64.bits & g_btlMain.selectionGate64.bits) {
@@ -27,7 +27,7 @@ void FUN_003ece9c(BtlMainStateA *state)
     if (btlUiHasSelection(g_btlUiBlock)) {
         return;
     }
-    UnitCategoryState *entry = FUN_003eaf20(state);
+    UnitCategoryState *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(state);
     s32 category = FUN_0019acdc(entry->record->id, 1);
     BtlUnitDataA *data = reinterpret_cast<BtlUnitA *>(reinterpret_cast<ScriptCategoryUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit))))->data;
     switch ((s16)data->unk1BE) {

@@ -13,7 +13,7 @@ struct LazyScriptState {
 
 extern "C" {
 extern LazyScriptState g_lazyScriptState;
-ScriptProcess* FUN_00275bc8(ScriptTable* table, u32 parameter);
+ScriptProcess* scrScriptProcessCreate(ScriptTable* table, u32 parameter);
 u32 tableGroupFindEntryIndex(ScriptTable* table, u32 id);
 void scrScriptProcessStartEntry(ScriptProcess* process, u32 index);
 
@@ -21,7 +21,7 @@ void scrScriptProcessStartEntry(ScriptProcess* process, u32 index);
 void scriptStartEntryById(u32 id)
 {
     if (g_lazyScriptState.process == NULL) {
-        ScriptProcess* process = FUN_00275bc8(g_lazyScriptState.table, g_lazyScriptState.parameter);
+        ScriptProcess* process = scrScriptProcessCreate(g_lazyScriptState.table, g_lazyScriptState.parameter);
         g_lazyScriptState.process = process;
         process->mode = 2;
     }

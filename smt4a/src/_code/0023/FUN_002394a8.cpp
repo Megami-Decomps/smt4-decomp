@@ -6,9 +6,9 @@ extern "C" {
 
 int mathInterpolateTimed(int, int);
 int efctSetSpeed(void);
-int FUN_0017ffa8(int, int, unsigned int, int);
-int FUN_001835b4(...);
-int FUN_00183bb0(void);
+int texTableRecordCallWithParams(int, int, unsigned int, int);
+int texDrawTableEntryAtStoredOrigin(...);
+int gxResetColorQuadToWhite(void);
 int renderCtxCalculateStereoParallax(int);
 int FUN_002609d8(unsigned int, int);
 int SBORROW4(int, int);
@@ -47,11 +47,11 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: mathInterpolateTimed. */
 extern int jobGetWork(unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
-extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0017ffa8. */
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
+/* Supplied declaration required: texTableRecordCallWithParams. */
 extern int gameSaveTestFlag(unsigned short, unsigned char);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00183bb0. */
+/* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002609d8. */
 /* Supplied declaration required: __aeabi_idivmod. */
@@ -97,7 +97,7 @@ unsigned int FUN_002394a8(void)
   temp_v23[8] = g_npcRoom;
   renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v12 = g_renderCtx;
-  temp_v1 = FUN_001692ac(1,0);
+  temp_v1 = renderCtxPackPassFlags(1,0);
   piVar12 = (int *)(temp_v12 + 0x1258);
   temp_v4 = *piVar12;
   temp_v5 = piVar12[temp_v4 + 2];
@@ -109,7 +109,7 @@ unsigned int FUN_002394a8(void)
   }
   temp_v23[0] = -8;
   temp_v23[1] = 1;
-  FUN_0017ffa8(2,0,(unsigned int)*(unsigned short *)(temp_v23[8] + 0x102) * 1000,(int)temp_v14 - 0x38);
+  texTableRecordCallWithParams(2,0,(unsigned int)*(unsigned short *)(temp_v23[8] + 0x102) * 1000,(int)temp_v14 - 0x38);
   temp_v24 = 0;
   if (0 < *(int *)(temp_v23[8] + 0xe4)) {
     temp_v20 = 0x3e9eb852;
@@ -195,12 +195,12 @@ unsigned int FUN_002394a8(void)
                 temp_v7 = *(int *)(temp_v11 + 0x28);
                 efctSetSpeed();
                 temp_v2 = (unsigned int)temp_v20;
-                FUN_00183bb0();
+                gxResetColorQuadToWhite();
                 temp_v10 = temp_v2;
                 renderCtxCalculateStereoParallax(g_renderCtx);
                 temp_v1 = g_renderCtx;
                 temp_v16 = romwright_piece_4_4(temp_v19,temp_v2);
-                temp_v4 = FUN_001692ac(1,0);
+                temp_v4 = renderCtxPackPassFlags(1,0);
                 piVar12 = (int *)(temp_v1 + 0x1258);
                 temp_v5 = *piVar12;
                 temp_v11 = piVar12[temp_v5 + 2];
@@ -218,7 +218,7 @@ unsigned int FUN_002394a8(void)
                                                     (unsigned char)(in_fpscr >> 0x16) & 3);
                 temp_v14 = (float)VectorSignedToFloat((int)*(short *)(temp_v7 + 8),
                                                     (unsigned char)(in_fpscr >> 0x16) & 3);
-                FUN_001835b4(2,8,0x18d,(int)(temp_v15 + (float)temp_v17 + temp_v14 + (float)temp_v16));
+                texDrawTableEntryAtStoredOrigin(2,8,0x18d,(int)(temp_v15 + (float)temp_v17 + temp_v14 + (float)temp_v16));
                 temp_v20 = (unsigned long long)temp_v10;
                 temp_v10 = 0;
                 do {
@@ -286,7 +286,7 @@ LAB_00239938:
                                                       (unsigned char)(in_fpscr >> 0x16) & 3);
                   temp_v15 = (float)VectorSignedToFloat((int)*(short *)(temp_v7 + 8),
                                                       (unsigned char)(in_fpscr >> 0x16) & 3);
-                  FUN_001835b4(2,8,temp_v10 + 0x18e,
+                  texDrawTableEntryAtStoredOrigin(2,8,temp_v10 + 0x18e,
                                (int)(temp_v14 + (float)temp_v17 + temp_v15 + (float)temp_v16));
                   temp_v1 = g_renderCtx;
                   temp_v10 = temp_v10 + 1;
@@ -299,7 +299,7 @@ LAB_00239938:
                   (**(romwright_code **)(temp_v1 + 0x1274))();
                   *(unsigned char *)(temp_v1 + 0x1270) = 0;
                 }
-                FUN_00183bb0();
+                gxResetColorQuadToWhite();
                 efctSetSpeed();
               }
             }

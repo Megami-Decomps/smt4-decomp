@@ -59,14 +59,14 @@ typedef char DirectoryScreenWorkOffsets[offsetof(DirectoryScreenWork, definition
 
 extern "C" {
 
-void FUN_00163aa4(void *sprite, f32 scale);
-s32 FUN_001517b4(s32 pad, s32 mode);
+void uiSpriteAdvanceAnimation(void *sprite, f32 scale);
+s32 padQueryLogicalKey(s32 pad, s32 mode);
 void eventQueueAddUniqueIfValid(u32 id);
 void uiSpriteSelectAnim(void *sprite, s32 anim);
 s32 ifTouchGetSelectionMode(void);
 void asdTMTexTableReleaseNode(u32 table, s32 node);
 
-void FUN_00203b40(void *flags, u32 height, s32, s32, s32, s32);
+void gridNavigationConfigure(void *flags, u32 height, s32, s32, s32, s32);
 void FUN_00212724(void);
 void FUN_00228b04(void *listbox, s32 mode);
 u32 resourceRunOperationIfUnblocked(void *listbox);
@@ -85,8 +85,8 @@ void FUN_0049df84(DirectoryScreenWork *work)
     s32 mode;
     s32 node;
 
-    FUN_00163aa4(work->panelA, 1.0f);
-    FUN_00163aa4(work->panelB, 1.0f);
+    uiSpriteAdvanceAnimation(work->panelA, 1.0f);
+    uiSpriteAdvanceAnimation(work->panelB, 1.0f);
     FUN_00228b04(work->listbox, 1);
     work->scroll = resourceRunOperationIfUnblocked(work->listbox);
     work->cursor = FUN_002a4894(work->listbox);
@@ -98,7 +98,7 @@ void FUN_0049df84(DirectoryScreenWork *work)
                      work->touchY, &result, 0, 1) != 0) {
         return;
     }
-    if (FUN_001517b4(0, 1) || mode == 6) {
+    if (padQueryLogicalKey(0, 1) || mode == 6) {
         eventQueueAddUniqueIfValid(0x100020e);
         node = work->definition->firstNode;
         if (node > 0 && !asdTMTexTableNodeIsLoaded(0x33, node)) {
@@ -109,7 +109,7 @@ void FUN_0049df84(DirectoryScreenWork *work)
             asdTMTexLoadMainHeap(0x33, node);
         }
         FUN_0049de10(work);
-        FUN_00203b40(work->flags, work->height, 9, 1, 1, 1);
+        gridNavigationConfigure(work->flags, work->height, 9, 1, 1, 1);
         flagsSetOrClearBit(work->flags, 0);
         work->pending = 0;
         if (flagsAtGetBit1(work->definition->group)) {
@@ -117,7 +117,7 @@ void FUN_0049df84(DirectoryScreenWork *work)
         }
         uiSpriteSelectAnim(work->selectSprite, 0);
         FUN_0049d140(work, 5, 6);
-    } else if (FUN_001517b4(1, 1)) {
+    } else if (padQueryLogicalKey(1, 1)) {
         eventQueueAddUniqueIfValid(0x100020f);
         node = work->definition->firstNode;
         if (node > 0 && asdTMTexTableNodeIsLoaded(0x33, node)) {

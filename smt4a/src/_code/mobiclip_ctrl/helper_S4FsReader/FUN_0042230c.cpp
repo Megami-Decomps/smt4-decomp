@@ -54,7 +54,7 @@ static void createEventOnce(u32 *slot)
     }
     bool failed = nnResultIsFailure(result);
     if (failed)
-        FUN_002e3140(result, failed);
+        resultHandleFailure(result, failed);
 }
 
 /* Starts the movie reader: sizes it from the source, allocates the ring buffer, creates the data and
@@ -93,11 +93,11 @@ u32 FUN_0042230c(S4FsReader *reader, S4StreamSource *source, S4Allocator *alloca
                               DAT_005880f8.stack->base + DAT_005880f8.stack->size, 4, -2, 0);
     bool failed = nnResultIsFailure(result);
     if (failed)
-        FUN_002e3140(result, failed);
+        resultHandleFailure(result, failed);
     result = nn::svc::SignalEvent(reader->dataEvent);
     failed = nnResultIsFailure(result);
     if (failed)
-        FUN_002e3140(result, failed);
+        resultHandleFailure(result, failed);
     return 1;
 }
 

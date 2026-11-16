@@ -8,7 +8,7 @@ void flagObjAdvance(void *);
 void FUN_0047306c(void *, u32, u32, u32);
 void jobOwnerFreeSlotAndStop(void *);
 void aocMenuSetButtonHelp(ScreenTransitionState *, s32, u32);
-s32 FUN_002e1a18(u32);
+s32 buttonHelpIsActionActive(u32);
 s8 uiSpriteGetCompletionState(const void *record);
 
 // Wait for the close animation and input, post the transition event, then release its callback.
@@ -25,7 +25,7 @@ void AocMenu::waitCloseAnimation()
         transition->phase = 1;
         break;
     case 1:
-        if (uiSpriteGetCompletionState(&view->dialog.cursor) && FUN_002e1a18(0x10)) {
+        if (uiSpriteGetCompletionState(&view->dialog.cursor) && buttonHelpIsActionActive(0x10)) {
             eventQueueAddUniqueIfValid(0x100020e);
             flagObjAdvance(animation);
             aocMenuSetButtonHelp(transition, -1, 0);

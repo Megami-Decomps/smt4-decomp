@@ -2,7 +2,7 @@
 
 extern "C" {
 void textFormatBuffer(void*, const char*, ...);
-void FUN_002bf810(u32);
+void soundPlaySeUnpanned(u32);
 void searchWinInitialize(void);
 extern SearchWinWork* DAT_0043e170;
 extern const char DAT_00403cb0[];
@@ -26,7 +26,7 @@ u32 scrComm_SearchWin_Start(void)
         }
         window->active = 1;
         window->state = 1;
-        FUN_002bf810(0x1000180);
+        soundPlaySeUnpanned(0x1000180);
     }
     return 1;
 }

@@ -27,7 +27,7 @@ void questCenterBeginConversation(QuestInteraction *object);
 extern "C" {
 #endif
 
-u32 FUN_0046c35c(GroupedFileTables *owner, s32 kind, u32 tableIndex);
+u32 groupedFileTablesCountRecordsOfKind(GroupedFileTables *owner, s32 kind, u32 tableIndex);
 
 #ifdef __cplusplus
 }

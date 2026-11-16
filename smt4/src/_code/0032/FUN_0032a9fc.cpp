@@ -2,7 +2,7 @@
 
 extern "C" {
 s32 FUN_002b8ee0(void *animation, u32 mode);
-s32 FUN_002bf818(void *animation);
+s32 uiSpriteAdvanceAnimation(void *animation);
 extern PlaceWindow *g_placeWin;
 
 /* Advances opening and closing animations and the window's frame counter. */
@@ -21,7 +21,7 @@ u32 FUN_0032a9fc(void)
     case 2:
         break;
     case 3:
-        if (FUN_002bf818(window->animation)) {
+        if (uiSpriteAdvanceAnimation(window->animation)) {
             window->state = 0;
         }
         break;

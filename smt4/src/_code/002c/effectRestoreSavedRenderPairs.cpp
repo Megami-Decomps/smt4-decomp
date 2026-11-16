@@ -7,9 +7,9 @@ typedef char CheckRestoreSourceOffset[offsetof(EffRenderState, restoreSource) ==
 typedef char CheckRestoreCompletionOffset[offsetof(EffRenderState, completion) == 0x118c ? 1 : -1];
 typedef char CheckRestoreStateSize[sizeof(EffRenderState) == 0x1190 ? 1 : -1];
 
-extern "C" s32 FUN_002c5210(EffRenderState *state, EffRenderRestoreSource *source);
+extern "C" s32 gxIsStereoscopic3dEnabled(EffRenderState *state, EffRenderRestoreSource *source);
 extern "C" void FUN_002bbbc8(EffRenderState *state, const void *second, const void *first, void *snapshot);
-extern "C" void FUN_002bbb74(u32 resource, u32 *completion);
+extern "C" void gpuWriteVertexUniformMatrix(u32 resource, u32 *completion);
 
 // Select the appropriate saved render pair and prepare the effect's restore state.
 extern "C" void effectRestoreSavedRenderPairs(EffRenderState *state, EffRenderRestoreSource *source)
@@ -18,7 +18,7 @@ extern "C" void effectRestoreSavedRenderPairs(EffRenderState *state, EffRenderRe
         return;
     const void *second = NULL;
     const void *first = NULL;
-    if (FUN_002c5210(state, source) == 1) {
+    if (gxIsStereoscopic3dEnabled(state, source) == 1) {
         if (state->restore.selection == 0) {
             second = source->alternate.second;
             first = source->alternate.first;
@@ -34,7 +34,7 @@ extern "C" void effectRestoreSavedRenderPairs(EffRenderState *state, EffRenderRe
         first = source->primary.first;
     }
     FUN_002bbbc8(state, second, first, state->restore.snapshot);
-    FUN_002bbb74(state->restore.resource, &state->completion);
+    gpuWriteVertexUniformMatrix(state->restore.resource, &state->completion);
     state->restoreSource = source;
     state->mode = 5;
 }

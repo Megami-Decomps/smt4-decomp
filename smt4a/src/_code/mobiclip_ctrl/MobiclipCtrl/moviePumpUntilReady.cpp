@@ -8,7 +8,7 @@ extern MovieReadHandle DAT_00617f18;
 extern MovieSync DAT_00617f40;
 s32 mobiclipProcessPollStopEvent();
 void mobiclipPlayerReleaseHandle(MovieReadHandle *read);
-void FUN_0015836c(MovieSync *sync);
+void timedJobBeginStop(MovieSync *sync);
 void FUN_0015842c(MovieSync *sync);
 void asdSndApplyPendingVoiceState(MovieReadHandle *read);
 s32 block158OwnerHasRemaining(MovieSync *sync);
@@ -37,7 +37,7 @@ bool moviePumpUntilReady()
             canceled = true;
         if (mobiclipReadIsComplete(&DAT_00617f18)) {
             mobiclipPlayerReleaseHandle(&DAT_00617f18);
-            FUN_0015836c(&DAT_00617f40);
+            timedJobBeginStop(&DAT_00617f40);
             FUN_0015842c(&DAT_00617f40);
             asdSndApplyPendingVoiceState(&DAT_00617f18);
         }

@@ -5,7 +5,7 @@
 
 extern "C" {
 
-void FUN_003934d0(AocTexCtrl *ctrl);
+void aocTexCtrlParseResource(AocTexCtrl *ctrl);
 
 /* Allocates the controller's state block on first use and clears it. */
 void aocTexCtrlInit(AocTexCtrl *ctrl)
@@ -22,7 +22,7 @@ void aocTexCtrlInit(AocTexCtrl *ctrl)
         state->unk0C = 0;
         state->unk10 = 0;
         state->unk14 = 0;
-        FUN_003934d0(ctrl);
+        aocTexCtrlParseResource(ctrl);
     }
 }
 

@@ -11,9 +11,9 @@ int nnnstdMemCpy(...);
 
 int FUN_00191f68(void);
 int dataTableFileGetTable(...);
-int FUN_001b315c(...);
-int FUN_001b31ac(void);
-int FUN_001b31e0(void);
+int packageEntryIsLoaded(...);
+int packageEntryGetDirectory(void);
+int packageEntryGetFileCount(void);
 int itemVariantReselect(unsigned int);
 int asdOperatorNewE(...);
 int FUN_00476e0c(unsigned int);
@@ -155,9 +155,9 @@ extern int dataTableGetCount(void);
 extern unsigned int dataTableGetEntries(unsigned int);
 /* Supplied declaration required: FUN_001a6928. */
 /* Supplied declaration required: dataTableFileGetTable. */
-/* Supplied declaration required: FUN_001b315c. */
-/* Supplied declaration required: FUN_001b31ac. */
-/* Supplied declaration required: FUN_001b31e0. */
+/* Supplied declaration required: packageEntryIsLoaded. */
+/* Supplied declaration required: packageEntryGetDirectory. */
+/* Supplied declaration required: packageEntryGetFileCount. */
 /* Supplied declaration required: itemVariantReselect. */
 /* Supplied declaration required: asdOperatorNewE. */
 /* Supplied declaration required: FUN_00476e0c. */
@@ -265,12 +265,12 @@ void FUN_0046c528(fn_0046c528_arg0 *param_1)
     temp_v37 = &param_1->field_0x3a8;
     do {
       temp_v30 = param_1->field_0x318 + temp_v36 * 0x50;
-      temp_v2 = FUN_001b315c();
+      temp_v2 = packageEntryIsLoaded();
       if (temp_v2 != 0) {
         temp_v12 = temp_v30;
-        FUN_001b31ac();
+        packageEntryGetDirectory();
         temp_v4 = temp_v30;
-        FUN_001b31e0();
+        packageEntryGetFileCount();
         temp_v13 = 0;
         if (temp_v13 < temp_v4) {
           do {
@@ -637,13 +637,13 @@ void FUN_0046c528(fn_0046c528_arg0 *param_1)
   if (0 < param_1->field_0x310) {
     do {
       piVar14 = (int *)(param_1->field_0x318 + (int)temp_v46 * 0x50);
-      temp_v2 = FUN_001b315c(piVar14);
+      temp_v2 = packageEntryIsLoaded(piVar14);
       if (temp_v2 != 0) {
         piVar16 = piVar14;
-        FUN_001b31ac();
+        packageEntryGetDirectory();
         piVar6 = piVar14;
         temp_v43 = piVar16;
-        FUN_001b31e0();
+        packageEntryGetFileCount();
         piVar16 = (int *)0;
         if (piVar6 != (int *)0x0) {
           piVar16 = temp_v46;

@@ -8,8 +8,8 @@ extern "C" {
 int FUN_003ee0c0(void);
 int btlMainFindEntryByListedId(int, int);
 int bitsAt60Set(...);
-int FUN_004fb43c(...);
-int FUN_004fbc30(...);
+int btlQueueActionMessage(...);
+int btlQueueKeyedScalarReflectAction(...);
 int btlReflectCreateKind10(...);
 int FUN_004fbfbc(...);
 int FUN_004fc094(int, unsigned int, int, int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int);
@@ -45,8 +45,8 @@ extern int scrGetArg(unsigned int);
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: bitsAt60Set. */
 extern unsigned int btlUnitGet(unsigned int);
-/* Supplied declaration required: FUN_004fb43c. */
-/* Supplied declaration required: FUN_004fbc30. */
+/* Supplied declaration required: btlQueueActionMessage. */
+/* Supplied declaration required: btlQueueKeyedScalarReflectAction. */
 /* Supplied declaration required: btlReflectCreateKind10. */
 /* Supplied declaration required: FUN_004fbfbc. */
 /* Supplied declaration required: FUN_004fc094. */
@@ -73,7 +73,7 @@ unsigned int FUN_002f8edc(void)
     FUN_004fc094(0,temp_v1,0,temp_v3,0,*(unsigned int *)(temp_v2 + 0x25c),0xffffffff,0xffffffff,
                  *(unsigned int *)(temp_v2 + 600),*(unsigned int *)(temp_v2 + 0x25c),0,0,1,0,0,0,0,0,0,0,1,0
                  ,1,1,0,1);
-    FUN_004fbc30(0x19,temp_v1,temp_v3,0);
+    btlQueueKeyedScalarReflectAction(0x19,temp_v1,temp_v3,0);
   }
   else {
     temp_v0 = gameGetSlotRecord(temp_v0 - 0x6d);
@@ -81,7 +81,7 @@ unsigned int FUN_002f8edc(void)
     bitsAt60Set(temp_v0,1);
     FUN_004fbfbc(0,temp_v1,0xf);
   }
-  FUN_004fb43c(0,temp_v1,0x10000cd,1,0,0,0);
+  btlQueueActionMessage(0,temp_v1,0x10000cd,1,0,0,0);
   btlReflectCreateKind10(0,temp_v1,0,1,2,0xb4,3);
   return 1;
 }

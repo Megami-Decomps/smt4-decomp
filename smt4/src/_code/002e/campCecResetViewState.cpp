@@ -17,7 +17,7 @@ struct CampCecViewState {
 
 extern "C" {
 void statusCameraSelectPreset(s32);
-void FUN_002d9208();
+void statusCameraResetDefaults();
 
 // Restore the camp-CEC presentation defaults and clear its pending transform.
 void campCecResetViewState(CampCecViewState* state)
@@ -33,6 +33,6 @@ void campCecResetViewState(CampCecViewState* state)
         state->pending = 0;
         FUN_0020ffe8(state->handle, 0, 0.0f, 0.0f);
     }
-    FUN_002d9208();
+    statusCameraResetDefaults();
 }
 }

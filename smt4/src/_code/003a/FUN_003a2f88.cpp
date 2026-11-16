@@ -17,21 +17,21 @@ extern "C" {
 extern RenderCtx *g_titleScene;
 extern const ArrowSpritePositions DAT_00407540;
 void renderCtxSelectStereoLayout(RenderCtx *context);
-void FUN_002bed3c(void);
-s32 FUN_002c5d80(u32 mode, u32 flags);
+void gxResetColorQuadToWhite(void);
+s32 renderCtxPackPassFlags(u32 mode, u32 flags);
 void FUN_003a37dc(SceneArrowDrawWork *work);
 s32 placeWinGetValue(void);
 s32 FUN_001dd910(void);
 const SpriteInfo *asdTMTexTableEntryAt(u32 table, u32 sprite);
-u32 FUN_002bf380(u32 flags, u32 table, u32 spriteId, s32 x, s32 y, s32 z);
+u32 texDrawCompositeSprite(u32 flags, u32 table, u32 spriteId, s32 x, s32 y, s32 z);
 void renderCtxResetColorScale(RenderCtx *context);
 
 void FUN_003a2f88(SceneArrowDrawWork *work)
 {
     renderCtxSelectStereoLayout(g_titleScene);
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     RenderCtx *context = g_titleScene;
-    s32 state = FUN_002c5d80(1, 0);
+    s32 state = renderCtxPackPassFlags(1, 0);
     renderStackPush(&context->stackA, state);
     if (work->mode != 1) {
         FUN_003a37dc(work);
@@ -46,14 +46,14 @@ void FUN_003a2f88(SceneArrowDrawWork *work)
                 const SpriteOriginView *origin = reinterpret_cast<const SpriteOriginView *>(asdTMTexTableEntryAt(0x2B, positions.ids[position]));
                 s32 arrowX = origin->x + offset.x;
                 s32 arrowY = origin->y + offset.y;
-                FUN_002bf380(2, 0x2B, 6, arrowX, arrowY, depth);
+                texDrawCompositeSprite(2, 0x2B, 6, arrowX, arrowY, depth);
                 ++position;
             }
             if (work->secondArrow) {
                 const SpriteOriginView *origin = reinterpret_cast<const SpriteOriginView *>(asdTMTexTableEntryAt(0x2B, positions.ids[position]));
                 s32 arrowX = origin->x + offset.x;
                 s32 arrowY = origin->y + offset.y;
-                FUN_002bf380(2, 0x2B, 7, arrowX, arrowY, depth);
+                texDrawCompositeSprite(2, 0x2B, 7, arrowX, arrowY, depth);
             }
         }
     }

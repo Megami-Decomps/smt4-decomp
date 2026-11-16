@@ -16,7 +16,7 @@ struct StatusSkillListState {
 
 extern "C" StatusSkillListState *g_statusDown;
 extern "C" void *rt_memcpy(void *destination, const void *source, u32 size);
-extern "C" void FUN_00203b40(void *selector, s32 count, s32 rows, s32 wrap, s32 first, s32 enabled);
+extern "C" void gridNavigationConfigure(void *selector, s32 count, s32 rows, s32 wrap, s32 first, s32 enabled);
 
 /* Replace the displayed skills and configure the selector for its nonempty prefix. */
 extern "C" void statusReplaceSkills(const u16 *skills, u8 count)
@@ -34,7 +34,7 @@ extern "C" void statusReplaceSkills(const u16 *skills, u8 count)
         if (status->skills[nonempty] == 0)
             break;
     }
-    FUN_00203b40(status->selector, nonempty, 8, 1, 0, 1);
+    gridNavigationConfigure(status->selector, nonempty, 8, 1, 0, 1);
     status->refresh = true;
     status->selection = 0;
 }

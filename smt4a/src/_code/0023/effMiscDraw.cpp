@@ -5,7 +5,7 @@
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 extern EffMiscKind g_effMiscKinds[];
-void FUN_00157558(RenderCtxA *context);
+void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 void uiSpriteRefreshMode(RenderCtxA *context);
 
 static __inline void effMiscLateUpdate(EffMiscObject *object)
@@ -20,7 +20,7 @@ void effMiscDraw(EffMiscObject *object)
 
     if (mode != 1) {
         u32 state = g_renderCtx->unk6FC;
-        FUN_00157558(g_renderCtx);
+        renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         effMiscLateUpdate(object);
         if (mode == 3 || mode == 4) {
             uiSpriteRefreshMode(g_renderCtx);

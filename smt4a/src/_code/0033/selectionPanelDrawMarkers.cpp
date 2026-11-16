@@ -46,10 +46,10 @@ void selectionPanelDrawMarkers(SelectionPanelWork *work, int drawAll)
         efctSetSpeed(opacity);
         TextureTableEntryIV *frame = asdTMTexTableEntryAt(0xd, work->selected + 0x5a);
         renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
-        FUN_001835b4(2, 0xd, 0x56, frame->x + baseX, frame->y + baseY, 0x29);
-        FUN_001835b4(2, 0xd, 0x57, frame->x + baseX, frame->y + baseY, 0x29);
-        FUN_001835b4(2, 0xd, 0x58, frame->x + baseX, frame->y + baseY, 0x29);
-        FUN_001835b4(2, 0xd, 0x59, frame->x + baseX, frame->y + baseY, 0x29);
+        texDrawTableEntryAtStoredOrigin(2, 0xd, 0x56, frame->x + baseX, frame->y + baseY, 0x29);
+        texDrawTableEntryAtStoredOrigin(2, 0xd, 0x57, frame->x + baseX, frame->y + baseY, 0x29);
+        texDrawTableEntryAtStoredOrigin(2, 0xd, 0x58, frame->x + baseX, frame->y + baseY, 0x29);
+        texDrawTableEntryAtStoredOrigin(2, 0xd, 0x59, frame->x + baseX, frame->y + baseY, 0x29);
         RenderCtxA *context = g_renderCtx;
         renderCtxSetB(context, packNibblesAndByte(6, 7, 0));
         efctSetSpeed(1.0f);
@@ -61,12 +61,12 @@ void selectionPanelDrawMarkers(SelectionPanelWork *work, int drawAll)
                     TextureTableEntryIV *marker = asdTMTexTableEntryAt(0xd, slot + 0x52);
                     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
                     efctSetSpeed(opacity);
-                    FUN_001835b4(2, 0xd, 0x1cb, marker->x + baseX, marker->y + baseY, 0x2e);
+                    texDrawTableEntryAtStoredOrigin(2, 0xd, 0x1cb, marker->x + baseX, marker->y + baseY, 0x2e);
                     efctSetSpeed(vec2GetSpeed(work->fadeObject));
-                    FUN_001835b4(2, 0xd, 0x4b, marker->x + baseX, marker->y + baseY, 0x2e);
-                    FUN_001835b4(2, 0xd, 0x4a, marker->x + baseX, marker->y + baseY, 0x2e);
-                    FUN_001835b4(2, 0xd, 0x4c, marker->x + baseX, marker->y + baseY, 0x2e);
-                    FUN_001835b4(2, 0xd, 0x4d, marker->x + baseX, marker->y + baseY, 0x2e);
+                    texDrawTableEntryAtStoredOrigin(2, 0xd, 0x4b, marker->x + baseX, marker->y + baseY, 0x2e);
+                    texDrawTableEntryAtStoredOrigin(2, 0xd, 0x4a, marker->x + baseX, marker->y + baseY, 0x2e);
+                    texDrawTableEntryAtStoredOrigin(2, 0xd, 0x4c, marker->x + baseX, marker->y + baseY, 0x2e);
+                    texDrawTableEntryAtStoredOrigin(2, 0xd, 0x4d, marker->x + baseX, marker->y + baseY, 0x2e);
                     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 7, 0));
                 }
                 slot = slot + 1;
@@ -76,12 +76,12 @@ void selectionPanelDrawMarkers(SelectionPanelWork *work, int drawAll)
             TextureTableEntryIV *marker = asdTMTexTableEntryAt(0xd, chosen + 0x52);
             renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
             efctSetSpeed(opacity);
-            FUN_001835b4(2, 0xd, 0x1cb, marker->x + baseX, marker->y + baseY, 0x2e);
+            texDrawTableEntryAtStoredOrigin(2, 0xd, 0x1cb, marker->x + baseX, marker->y + baseY, 0x2e);
             efctSetSpeed(vec2GetSpeed(work->fadeObject));
-            FUN_001835b4(2, 0xd, 0x4b, marker->x + baseX, marker->y + baseY, 0x2e);
-            FUN_001835b4(2, 0xd, 0x4a, marker->x + baseX, marker->y + baseY, 0x2e);
-            FUN_001835b4(2, 0xd, 0x4c, marker->x + baseX, marker->y + baseY, 0x2e);
-            FUN_001835b4(2, 0xd, 0x4d, marker->x + baseX, marker->y + baseY, 0x2e);
+            texDrawTableEntryAtStoredOrigin(2, 0xd, 0x4b, marker->x + baseX, marker->y + baseY, 0x2e);
+            texDrawTableEntryAtStoredOrigin(2, 0xd, 0x4a, marker->x + baseX, marker->y + baseY, 0x2e);
+            texDrawTableEntryAtStoredOrigin(2, 0xd, 0x4c, marker->x + baseX, marker->y + baseY, 0x2e);
+            texDrawTableEntryAtStoredOrigin(2, 0xd, 0x4d, marker->x + baseX, marker->y + baseY, 0x2e);
             renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 7, 0));
         }
         efctSetSpeed(1.0f);

@@ -12,7 +12,7 @@ struct ActionSubjectKeys {
 };
 extern "C" {
 s32 idSetFindSubjectIndex(BtlMainStateA *battle, BtlActionRecord *action);
-ActionSubjectKeys *FUN_001568f8(BtlMainStateA *battle, s32 member);
+ActionSubjectKeys *btlFindEntryBlockByMemberId(BtlMainStateA *battle, s32 member);
 u32 FUN_003eae20(BtlMainStateA *battle, s32 actor, u16 id);
 void FUN_00401d18(BattleSpritePlacement *placement, u32 mask, u32 flags, u32 value);
 void FUN_00402290(BattleSpritePlacement *placement);
@@ -47,7 +47,7 @@ s32 FUN_004f7924(void *owner, BtlActionRecord *action)
     if (subject < 0) {
         subject = 0;
     }
-    ActionSubjectKeys *subjects = FUN_001568f8(battle, action->apocalypse.memberId);
+    ActionSubjectKeys *subjects = btlFindEntryBlockByMemberId(battle, action->apocalypse.memberId);
     u16 id = subjects->id;
     s32 key = subjects->keys[subject];
     PlacementOwnerView *placements = (PlacementOwnerView *)owner;

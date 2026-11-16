@@ -62,9 +62,9 @@ typedef struct EffPartsFile {
 void *asdLoadFileSync(const char *path, u32 *size, u32 a, u32 b);
 void *memAlloc(int heap, int alignClass, int unk08, u32 size, int align, int fromFront);
 void memClear(void *block, s32 size);
-void FUN_002a3d58(void *part);
+void effPartInitDefaults(void *part);
 EffPartNode *FUN_0025c870(void);
-void FUN_0025c650(EffPartList *list, EffPartNode *node, EffPartNode *parent);
+void linkedItemsRedirectToReplacement(EffPartList *list, EffPartNode *node, EffPartNode *parent);
 EffBlock *effBlockCloneDeep(EffBlock *src);
 void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 char *libc_strcpy(char *destination, const char *source);
@@ -93,7 +93,7 @@ EffPartList *FUN_001e1a70(const char *path)
     memClear(list, 0x90);
     list->count = 0;
     list->unk84 = 0;
-    FUN_002a3d58(list);
+    effPartInitDefaults(list);
     list->header = file->header;
     list->header2 = file->header;
     list->unk74 = file->unk74;
@@ -114,7 +114,7 @@ EffPartList *FUN_001e1a70(const char *path)
             node->unk88 = 8;
             node->unk89 = 0;
             node->unk8a = 0;
-            FUN_002a3d58(node);
+            effPartInitDefaults(node);
             node->flags |= 1;
             node->block = source->block;
             if (source->next != NULL) {
@@ -144,7 +144,7 @@ EffPartList *FUN_001e1a70(const char *path)
             list->count++;
         }
         if ((entry->flags & 2) != 0) {
-            FUN_0025c650(list, node, effPartListNth(list, entry->parentIndex));
+            linkedItemsRedirectToReplacement(list, node, effPartListNth(list, entry->parentIndex));
         }
         __aeabi_memcpy4(node, entry, 0x90);
         libc_strcpy(node->name, entry->name);

@@ -2,13 +2,13 @@
 
 extern "C" {
 
-extern u16 FUN_0049c9a0(u16 *p);
+extern u16 recordGetCompareValue(u16 *p);
 
-/* Difference of FUN_0049c9a0(b) and FUN_0049c9a0(a). */
+/* Difference of recordGetCompareValue(b) and recordGetCompareValue(a). */
 s32 halfDifference(u16 *a, u16 *b)
 {
-    s32 first = FUN_0049c9a0(a);
-    s32 second = FUN_0049c9a0(b);
+    s32 first = recordGetCompareValue(a);
+    s32 second = recordGetCompareValue(b);
 
     return second - first;
 }

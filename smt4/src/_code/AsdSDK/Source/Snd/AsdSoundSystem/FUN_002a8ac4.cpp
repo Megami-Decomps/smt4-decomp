@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(double, double);
 int FUN_002a8a58(...);
 int phaseCosInterpolate(void);
-int FUN_002b70cc(void);
+int mathSinFixedAngle(void);
 int cameraSetViewMatrix(...);
 int renderCtxCalculateStereoParallax(...);
 int FUN_002c1ac8(...);
@@ -47,7 +47,7 @@ extern float DAT_004efd34; /* 0x4efd34 */
 #endif
 /* Supplied declaration required: FUN_002a8a58. */
 /* Supplied declaration required: phaseCosInterpolate. */
-/* Supplied declaration required: FUN_002b70cc. */
+/* Supplied declaration required: mathSinFixedAngle. */
 /* Supplied declaration required: cameraSetViewMatrix. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern int __cxa_guard_acquire(unsigned int *);
@@ -334,7 +334,7 @@ unsigned int FUN_002a8ac4(unsigned short *param_1,unsigned int *param_2,int para
       VectorSignedToFloat((int)temp_v17,(unsigned char)(temp_v7 >> 0x16) & 3);
     }
     if (!romwright_subpiece_4_1_0(temp_v7 >> 0x1e,0)) {
-      FUN_002b70cc();
+      mathSinFixedAngle();
       phaseCosInterpolate();
     }
   }

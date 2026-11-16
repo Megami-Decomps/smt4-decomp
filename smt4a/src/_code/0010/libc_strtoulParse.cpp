@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-extern int *FUN_002e2a98(void);
+extern int *libcLocaleGetCtypeTable(void);
 extern int *__aeabi_errno_addr(void);
 /* Supplied declaration required: FUN_002e6b7c. */
 
@@ -41,7 +41,7 @@ unsigned char * libc_strtoulParse(unsigned char *param_1,unsigned int *param_2,u
     temp_v1 = (unsigned int)*pbVar4;
     pbVar5 = pbVar4 + 1;
     if (temp_v1 == 0) break;
-    piVar3 = (int *)FUN_002e2a98();
+    piVar3 = (int *)libcLocaleGetCtypeTable();
   } while ((*(unsigned char *)(*piVar3 + temp_v1) & 1) != 0);
   pbVar6 = pbVar5;
   if ((temp_v1 != 0x2b) && (pbVar6 = pbVar4, temp_v1 == 0x2d)) {

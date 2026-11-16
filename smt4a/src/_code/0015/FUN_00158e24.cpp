@@ -9,7 +9,7 @@ void FUN_00158e24(void)
   
   uVar1 = func_0x001623b4(auStack_10,0xffff8001,0x14);
   if ((uVar1 & 0x80000000) != 0) {
-    FUN_002e3140();
+    resultHandleFailure();
   }
   DAT_005c1be8 = auStack_10[0];
                     /* WARNING: Treating indirect jump as return * /

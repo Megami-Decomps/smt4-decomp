@@ -14,7 +14,7 @@ int btlUnitMarkTargetCandidates(...);
 int FUN_004eb838(...);
 
 int btlScriptUnitHasFlags(...);
-int FUN_003eaf20(void);
+int btlFindFirstEntryMatchingCategoryAndRequiredMask(void);
 int FUN_003ee0c0(int);
 int FUN_003f1244(void);
 int btlUIClearWorkTables(void);
@@ -100,7 +100,7 @@ extern int g_btlUiBlock; /* 0x57a9c8 */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: btlScriptUnitHasFlags. */
 /* Supplied declaration required: FUN_003e8bb0. */
-/* Supplied declaration required: FUN_003eaf20. */
+/* Supplied declaration required: btlFindFirstEntryMatchingCategoryAndRequiredMask. */
 /* Supplied declaration required: FUN_003ee0c0. */
 /* Supplied declaration required: FUN_003f1244. */
 /* Supplied declaration required: btlUIClearWorkTables. */
@@ -453,7 +453,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
            (*(unsigned int *)(*param_1 + 0x45a0) & DAT_00571298) != 0))) {
         FUN_004c9160(0x35,param_2[8],0,1);
         temp_v19 = *param_1;
-        FUN_003eaf20();
+        btlFindFirstEntryMatchingCategoryAndRequiredMask();
         *(unsigned int *)(*param_1 + 0x4d68) = *(unsigned int *)(temp_v19 + 0x400);
         temp_v20 = btlScriptUnitHasFlags(*param_1);
         FUN_004abfd0(g_btlUiBlock,temp_v20 ^ 1);
@@ -466,7 +466,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
                (*(unsigned int *)(*param_1 + 0x45a0) & DAT_005712b8) != 0) {
         FUN_004c9160(0x35,param_2[8],0,1);
         temp_v19 = *param_1;
-        FUN_003eaf20();
+        btlFindFirstEntryMatchingCategoryAndRequiredMask();
         *(unsigned int *)(*param_1 + 0x4d68) = *(unsigned int *)(temp_v19 + 0x400);
         temp_v20 = btlScriptUnitHasFlags(*param_1);
         FUN_004abfd0(g_btlUiBlock,temp_v20 ^ 1);

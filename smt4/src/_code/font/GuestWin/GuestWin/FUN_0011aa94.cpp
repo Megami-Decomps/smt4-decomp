@@ -13,7 +13,7 @@ int FUN_002bcf4c(...);
 int textDrawString(...);
 int textFormatBuffer(...);
 int FUN_002be90c(...);
-int FUN_002bed3c(void);
+int gxResetColorQuadToWhite(void);
 int efctSetSpeed(void);
 int renderCtxSelectStereoLayout(int);
 int VectorSignedToFloat(...);
@@ -36,7 +36,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002b6940. */
 extern int supportUnitGetEntry(int, unsigned short);
-extern int FUN_002b6b04(void);
+extern int infoWindowIsActive(void);
 extern int gameGetOptionProgressStatus(void);
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002bcf4c. */
@@ -44,13 +44,13 @@ extern unsigned int FUN_002bd068(unsigned short);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002be90c. */
-/* Supplied declaration required: FUN_002bed3c. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
@@ -77,7 +77,7 @@ unsigned int FUN_0011aa94(void)
      && (temp_v1 = gameGetSupportUnitData(), *(short *)(temp_v1 + 0x46) != 0)) {
     renderCtxSelectStereoLayout(g_titleScene);
     temp_v3 = g_titleScene;
-    temp_v2 = FUN_002c5d80(1,0);
+    temp_v2 = renderCtxPackPassFlags(1,0);
     piVar10 = (int *)(temp_v3 + 0x124c);
     temp_v7 = *piVar10;
     temp_v8 = piVar10[temp_v7 + 2];
@@ -93,7 +93,7 @@ unsigned int FUN_0011aa94(void)
     temp_v4 = vec2GetYInt(temp_v4 + 0x30);
     efctSetSpeed();
     temp_v2 = asdTMTexTableEntryAt(0xe,0xda);
-    temp_v7 = FUN_002b6b04();
+    temp_v7 = infoWindowIsActive();
     if (temp_v7 != 0) {
       temp_v2 = asdTMTexTableEntryAt(0xe,0xdb);
     }
@@ -108,7 +108,7 @@ unsigned int FUN_0011aa94(void)
       (**(romwright_code **)(temp_v7 + 0x12c8))();
       *(unsigned char *)(temp_v7 + 0x12c4) = 0;
     }
-    FUN_002bf288(2,0xe,0xc9,temp_v8,temp_v4,0x15);
+    texDrawTableEntryAtStoredOrigin(2,0xe,0xc9,temp_v8,temp_v4,0x15);
     temp_v3 = g_titleScene;
     temp_v2 = packNibblesAndByte(6,7,0);
     piVar10 = (int *)(temp_v3 + 0x12ac);
@@ -118,12 +118,12 @@ unsigned int FUN_0011aa94(void)
       (**(romwright_code **)(temp_v3 + 0x12c8))();
       *(unsigned char *)(temp_v3 + 0x12c4) = 0;
     }
-    FUN_002bf288(2,0xe,0xca,temp_v8,temp_v4,0x1a);
-    FUN_002bf288(2,0xe,0xcb,temp_v8,temp_v4,0x1a);
-    FUN_002bf288(2,0xe,0xcc,temp_v8,temp_v4,0x1a);
-    FUN_002bf288(2,0xe,0xcd,temp_v8,temp_v4,0x1a);
-    FUN_002bf288(2,0xe,0xce,temp_v8,temp_v4,0x1f);
-    FUN_002bf288(2,0xe,0xcf,temp_v8,temp_v4,0x1f);
+    texDrawTableEntryAtStoredOrigin(2,0xe,0xca,temp_v8,temp_v4,0x1a);
+    texDrawTableEntryAtStoredOrigin(2,0xe,0xcb,temp_v8,temp_v4,0x1a);
+    texDrawTableEntryAtStoredOrigin(2,0xe,0xcc,temp_v8,temp_v4,0x1a);
+    texDrawTableEntryAtStoredOrigin(2,0xe,0xcd,temp_v8,temp_v4,0x1a);
+    texDrawTableEntryAtStoredOrigin(2,0xe,0xce,temp_v8,temp_v4,0x1f);
+    texDrawTableEntryAtStoredOrigin(2,0xe,0xcf,temp_v8,temp_v4,0x1f);
     FUN_002be90c((int)*(short *)(temp_v1 + 0x2a),(int)*(short *)(temp_v1 + 0xe),0,0,0xe,0xd0,0xd3,0xd2,
                  0xd1,temp_v8,temp_v4,0x24,0);
     temp_v3 = asdTMTexTableEntryAt(0xe,0xd9);
@@ -150,7 +150,7 @@ unsigned int FUN_0011aa94(void)
     VectorSignedToFloat(*(short *)(temp_v1 + 10) + temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v1 + 8) + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(2,0xff,temp_v10);
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     efctSetSpeed();
     temp_v4 = g_titleScene;
     piVar10 = (int *)(g_titleScene + 0x124c);

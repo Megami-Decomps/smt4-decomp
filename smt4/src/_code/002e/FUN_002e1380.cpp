@@ -21,7 +21,7 @@ typedef struct SaveStreamOwner {
 
 void *pathBuildWide(u32 id, u8 *buffer, s32 flags);
 u32 FUN_002ad888(void);
-s32 FUN_002bb5a4(SaveStream *stream, u8 *buffer, s32 mode);
+s32 archivePathDeviceOpen(SaveStream *stream, u8 *buffer, s32 mode);
 
 static s32 saveStreamOpen(SaveStream *stream, u8 *buffer, s32 mode)
 {
@@ -29,7 +29,7 @@ static s32 saveStreamOpen(SaveStream *stream, u8 *buffer, s32 mode)
     stream->unk10 = 0;
     stream->unk04 = 0;
     stream->unk08 = 0;
-    return FUN_002bb5a4(stream, buffer, mode);
+    return archivePathDeviceOpen(stream, buffer, mode);
 }
 
 /* Create the record `id` with `size` bytes and open the owner's stream on it; returns an nn::Result. */

@@ -49,7 +49,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002ba1e0. */
 /* Supplied declaration required: renderCtxSelectTexture. */
 extern unsigned int asdTMTexTableGetNodeTexture(unsigned int, unsigned int);
-extern int FUN_002c5d80(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002e0460. */
 /* Supplied declaration required: FUN_002f3904. */
@@ -83,7 +83,7 @@ unsigned int FUN_001fd9f4(void)
   FUN_00396dec(g_lmapMainState + 0xec);
   temp_v3 = g_titleScene;
   if (g_gameState.f0049fc68 != 0) {
-    temp_v0 = FUN_002c5d80(5,1);
+    temp_v0 = renderCtxPackPassFlags(5,1);
     piVar7 = (int *)(temp_v3 + 0x124c);
     temp_v4 = *piVar7;
     temp_v5 = piVar7[temp_v4 + 2];
@@ -107,7 +107,7 @@ unsigned int FUN_001fd9f4(void)
   }
   temp_v3 = g_titleScene;
   if (g_gameState.f0049fca0 != 0) {
-    temp_v0 = FUN_002c5d80(5,0);
+    temp_v0 = renderCtxPackPassFlags(5,0);
     piVar7 = (int *)(temp_v3 + 0x124c);
     temp_v4 = *piVar7;
     temp_v5 = piVar7[temp_v4 + 2];
@@ -142,7 +142,7 @@ unsigned int FUN_001fd9f4(void)
     temp_v7 = VectorFloatToUnsigned(temp_v6 * 2184.5f,3);
     mathInterpolatePackedTable(temp_v7 & 0xffff);
     temp_v1 = g_titleScene;
-    temp_v0 = FUN_002c5d80(5,0);
+    temp_v0 = renderCtxPackPassFlags(5,0);
     piVar7 = (int *)(temp_v1 + 0x124c);
     temp_v4 = *piVar7;
     temp_v5 = piVar7[temp_v4 + 2];

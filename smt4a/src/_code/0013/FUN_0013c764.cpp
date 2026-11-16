@@ -28,7 +28,7 @@ typedef char JobWorkLayoutCheck[offsetof(JobWork, display.enabled) == 0xFF4 &&
 extern u32 g_renderCtx;
 
 extern JobWork *jobGetWork(u32 job);
-extern void FUN_00157558(u32 ctx);
+extern void renderCtxSelectDisplayAreaForStereoMode(u32 ctx);
 extern void FUN_00150d38(s32 arg);
 
 s32 FUN_0013c764(u32 job)
@@ -41,7 +41,7 @@ s32 FUN_0013c764(u32 job)
         JobRequestState *state = &work->requestState;
         if (state->busy != 0)
             return 0;
-        FUN_00157558(g_renderCtx);
+        renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         FUN_00150d38(1);
         return 0;
     }

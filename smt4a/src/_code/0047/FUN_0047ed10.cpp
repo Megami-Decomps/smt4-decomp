@@ -23,7 +23,7 @@ struct BtlMainStateEffectSet {
 
 extern "C" {
 s32 textFormatBuffer(char *destination, const char *format, ...);
-void FUN_004fb43c(s32 actor, u32 options, void *payload, s32 initializeValue, s32 suppressDuplicate,
+void btlQueueActionMessage(s32 actor, u32 options, void *payload, s32 initializeValue, s32 suppressDuplicate,
                   u32 parameterBits, s32 firstId);
 u32 jyoucyuGetTableEntry(s32 index);
 
@@ -96,7 +96,7 @@ u32 FUN_0047ed10(const char *name, u32 target, s32 mode, f32 x)
     }
     for (s32 i = 0; i < 4; i++) {
         if (set->slots[i].effect != 0) {
-            FUN_004fb43c(set->slots[i].actor, target, (void *)set->slots[i].effect, 0, 0, lane, 0);
+            btlQueueActionMessage(set->slots[i].actor, target, (void *)set->slots[i].effect, 0, 0, lane, 0);
         }
     }
     for (s32 i = 0; i < 3; i++) {

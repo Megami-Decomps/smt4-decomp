@@ -12,7 +12,7 @@ int FUN_002b5820(int [2], int);
 int FUN_002b5954(void);
 int FUN_002bb470(void);
 int nn_os_CriticalSection_Initialize(int *);
-int FUN_002c526c(void);
+int resultHandleFailure(void);
 int software_interrupt(int);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
@@ -40,7 +40,7 @@ extern int FUN_0013a294(int, unsigned int);
 extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
 /* Supplied declaration required: FUN_002bb470. */
 /* Supplied declaration required: nn_os_CriticalSection_Initialize. */
-/* Supplied declaration required: FUN_002c526c. */
+/* Supplied declaration required: resultHandleFailure. */
 extern void nn_snd_CTR_Dspsnd_InitializeVariables(unsigned int, unsigned char);
 
 
@@ -66,7 +66,7 @@ int FUN_00129214(int *param_1,int param_2)
       *param_1 = temp_v1[0];
     }
     if ((int)piVar2 < 0) {
-      FUN_002c526c();
+      resultHandleFailure();
     }
     temp_v0 = FUN_0013a294(*param_1,2);
     if (temp_v0 < 0) {

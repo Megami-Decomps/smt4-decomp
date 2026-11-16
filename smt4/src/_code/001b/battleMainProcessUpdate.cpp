@@ -180,14 +180,14 @@ void FUN_0027dbc8(u32 kind, u32 enabled);
 void jobStopIfValidC(BattleTaskContext *work);
 s32 sys43e188GetState();
 s32 FUN_002d1ce0();
-BattleTaskScript *FUN_00297060(void *data, u32 flags);
-s32 FUN_002896bc();
+BattleTaskScript *scrScriptProcessCreate(void *data, u32 flags);
+s32 screenFadesAllReady();
 void frameTexResetFlags();
 void soundChannelStopAll(u32 channels);
 void *gameGetSlotTable();
 void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 void *rt_memcpy(void *destination, const void *source, u32 size);
-void *FUN_00282be4();
+void *saveGetUnlockFlagBlock();
 void FUN_00338790(BattleTaskContext *work);
 void sequenceRequestClearDeferred();
 void FUN_00208be8();
@@ -242,7 +242,7 @@ static inline void restoreBattleTaskData()
     if (g_btlMainState.savedSlots)
         __aeabi_memcpy4(gameGetSlotTable(), g_btlMainState.savedSlots, 0x97e8);
     if (g_btlMainState.savedData)
-        rt_memcpy(FUN_00282be4(), g_btlMainState.savedData, 0x104a);
+        rt_memcpy(saveGetUnlockFlagBlock(), g_btlMainState.savedData, 0x104a);
 }
 
 static inline void resetBattleTaskRound(BattleTaskContext *work)
@@ -322,7 +322,7 @@ static inline bool battleTaskCompletionReady(BattleTaskContext *work)
             switch (work->exitStage) {
             case 1:
                 if (work->exitScriptData) {
-                    work->exitScript = FUN_00297060(work->exitScriptData, 0);
+                    work->exitScript = scrScriptProcessCreate(work->exitScriptData, 0);
                     work->exitScript->active = 1;
                     scrScriptProcessStartEntry(work->exitScript, 0);
                     ++work->exitStage;
@@ -334,13 +334,13 @@ static inline bool battleTaskCompletionReady(BattleTaskContext *work)
                 return false;
             }
         }
-        return FUN_002896bc() != 0;
+        return screenFadesAllReady() != 0;
     case 3:
         return true;
     case 4:
-        return work->result != 2 || FUN_002896bc();
+        return work->result != 2 || screenFadesAllReady();
     default:
-        return FUN_002896bc() != 0;
+        return screenFadesAllReady() != 0;
     }
 }
 

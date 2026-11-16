@@ -21,7 +21,7 @@ int FUN_002869e8(...);
 int FUN_00287328(int);
 int asdTextDrawDirectoryEntry(...);
 int scrScriptProcessStartEntry(...);
-int FUN_002b8244(...);
+int buttonHelpSetEnabled(...);
 int eventQueueAddUniqueIfValid(...);
 int listCursorSetPosition(unsigned int *, int);
 int recordResetIndex(unsigned int *);
@@ -70,7 +70,7 @@ extern int messageMainGetChoiceResult(void);
 extern int ifTouchGetSelectionModeForRegion(int);
 extern int legacyResourceIdRemap(unsigned int *);
 extern int ifTouchIsInitialSelection(int);
-/* Supplied declaration required: FUN_002b8244. */
+/* Supplied declaration required: buttonHelpSetEnabled. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: memClear. */
@@ -106,7 +106,7 @@ void AocMenu::runMainProcess()
   temp_v10 = param_1 + 0x70c;
   switch(param_1[2]) {
   case 0:
-    FUN_002b8244(0);
+    buttonHelpSetEnabled(0);
     *param_1 = *param_1 & 0xfffeffff;
     archiveFileReplaceHandle(&temp_v9,puVar1 + 10,puVar1 + 6);
     temp_v7 = temp_v9;
@@ -304,7 +304,7 @@ LAB_003906d4:
           (**(romwright_code **)(*(int *)param_1[0x82] + 4))();
           param_1[0x82] = 0;
         }
-        FUN_002b8244(1);
+        buttonHelpSetEnabled(1);
         eventQueueAddUniqueIfValid(0x100016d);
         *(unsigned char *)(param_1 + 0xd3) = 0;
         return;
@@ -323,7 +323,7 @@ LAB_003906d4:
     reinterpret_cast<int>(memClear(reinterpret_cast<void*>(&temp_v7), 0x80));
     textFormatBuffer(&temp_v7,&LAB_0039096c,temp_v3 + temp_v2 * 0x9c8);
     textEncodeFontSlot(0,&temp_v7);
-    FUN_002b8244(1);
+    buttonHelpSetEnabled(1);
     temp_v2 = scrRunOpcodesStub(param_1[0xd6]);
     if (temp_v2 == 2) {
       temp_v2 = messageMainGetChoiceResult();

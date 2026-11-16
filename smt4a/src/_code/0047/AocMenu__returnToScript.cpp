@@ -8,7 +8,7 @@
 extern "C" {
 extern AocMain *g_aocMain;
 void scrScriptProcessDestroy(ScriptState *process);
-ScriptState *FUN_00275bc8(void *script, void *messages);
+ScriptState *scrScriptProcessCreate(void *script, void *messages);
 void msgWindowReset();
 void messageBannerRestartOrClear();
 void ifTouchRegionRemove();
@@ -36,7 +36,7 @@ void AocMenu::returnToScript()
         }
         scrScriptProcessDestroy(work->process);
         work->process = NULL;
-        ScriptState *process = FUN_00275bc8(work->script, work->messages);
+        ScriptState *process = scrScriptProcessCreate(work->script, work->messages);
         work->process = process;
         ((ScriptStateModeView *)process)->mode = 2;
         msgWindowReset();

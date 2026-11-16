@@ -14,7 +14,7 @@ extern GameState g_gameState;
 extern MapMain *g_mapMain;
 extern LmapScene *g_lmapScene;
 extern MapTransitionAuxiliary *DAT_004474f4;
-void FUN_00270f70(MapVector *position);
+void mapAdjustPositionToGround(MapVector *position);
 
 void FUN_002eb674()
 {
@@ -22,7 +22,7 @@ void FUN_002eb674()
     if (g_gameState.unk284 != 0) {
         g_gameState.unk284 = 0;
     } else {
-        FUN_00270f70(&g_gameState.position);
+        mapAdjustPositionToGround(&g_gameState.position);
         g_gameState.unk2F8 = 1;
         g_gameState.savedMapId = map->mapId;
         g_gameState.savedAreaId = map->areaId;

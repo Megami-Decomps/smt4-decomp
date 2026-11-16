@@ -12,7 +12,7 @@ void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFron
 void nw_snd_SoundHeap_Create(void *heap, void *buffer, u32 size);
 u32 nw_snd_SoundHeap_SaveState(void *heap);
 void nw_snd_SoundHeap_LoadState(void *heap, u32 state);
-void FUN_002bda30(s32 handle, s32 unk);
+void basicSoundStopOrFadeOut(s32 handle, s32 unk);
 
 /* Activates slot `index` of the first kind, optionally with a sound heap of `heapSize` bytes,
  * resets the duck state to its defaults and selects the first active slot. Returns 0 when the
@@ -58,7 +58,7 @@ s32 asdSoundSlotAActivate(u32 index, s32 heapSize)
     if (g_asdSoundDuck.flags != 0) {
         for (j = 0; j < 4; j++) {
             if (slot->handles[j] != 0) {
-                FUN_002bda30(slot->handles[j], 0);
+                basicSoundStopOrFadeOut(slot->handles[j], 0);
             }
         }
         slot->volume = ASD_SND_VOLUME_DEFAULT;

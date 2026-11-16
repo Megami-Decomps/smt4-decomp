@@ -5,7 +5,7 @@
 extern "C" {
 void modelSetAnimationChannels(void *model, s32 channels, f32 blend);
 void animPlayerSetLoopPolicy(void *player, s32 policy);
-void FUN_0028c618(void *player, s32 index, f32 x, f32 y, f32 z);
+void modelPartSetRotationDegrees(void *player, s32 index, f32 x, f32 y, f32 z);
 void lightOwnerRegister(void *model, s32 enabled);
 void animOwnerSetScale(void *model, f32 frame);
 
@@ -50,7 +50,7 @@ void FUN_003d9d9c(void *object)
             if (slot->model->player->index < 0) {
                 lightOwnerRegister(slot->model, 1);
             }
-            FUN_0028c618(slot->model->player, 0, 0.0f, 0.0f, 0.0f);
+            modelPartSetRotationDegrees(slot->model->player, 0, 0.0f, 0.0f, 0.0f);
             modelSetAnimationChannels(slot->model, 0, 0.0f);
             animOwnerSetScale(slot->model, 0.0f);
             animPlayerSetLoopPolicy(slot->model->player, 1);

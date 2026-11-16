@@ -9,7 +9,7 @@ void uiQuestLoadResources();
 void FUN_0028fe0c(u32 questId, s32 mode);
 void buttonHelpSetPreset(s32 preset);
 void timerStart(void *timer, s32 animation, s32 initial);
-void FUN_002bf810(u32 message);
+void soundPlaySeUnpanned(u32 message);
 
 // Focus the quest in the appropriate list, then open its detail panel.
 void FUN_003115b4(u32 questId)
@@ -44,6 +44,6 @@ void FUN_003115b4(u32 questId)
     quest->state = 0x17;
     quest->timer = 0;
     buttonHelpSetPreset(0x1A);
-    FUN_002bf810(0x100025C);
+    soundPlaySeUnpanned(0x100025C);
 }
 }

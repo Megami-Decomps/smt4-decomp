@@ -14,7 +14,7 @@ void kernelThreadJoinAndClose(KernelThreadObject *thread)
         s32 result = FUN_002c40f8(&index, &handle, 1, 0, -1);
         bool failed = nnResultIsFailure(result);
         if (failed) {
-            FUN_002c526c(result, failed);
+            resultHandleFailure(result, failed);
         }
         thread->finalized = 1;
         nn_os_Thread_FinalizeImpl(thread);

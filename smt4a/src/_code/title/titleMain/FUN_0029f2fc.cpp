@@ -22,7 +22,7 @@ int gameApplyFlagTriggers(void);
 int FUN_00324c94(...);
 int FUN_00363c58(...);
 int FUN_003b5064(void);
-int FUN_003b61ec(void);
+int commonBgStopChildAndBeginTransition(void);
 int FUN_003c91e8(void);
 int aocActivateFileGroupFlags(...);
 int gameFlagsSetFlagsFromTaggedGroupEntries(...);
@@ -47,7 +47,7 @@ int FUN_003ca7d8(void);
 int soundChannelRequestIfEnabled(...);
 
 int asdTMTexTableLoadTmx(int, int);
-int FUN_001517b4(...);
+int padQueryLogicalKey(...);
 int buttonHelpSetText(...);
 int asdTMTexLoadMainHeap(int, int);
 int slotSetRequest(...);
@@ -83,7 +83,7 @@ extern int g_mapSelection; /* 0x5f1c98 */
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
 extern int gameDataBlocksGetSaveData(void);
-/* Supplied declaration required: FUN_001517b4. */
+/* Supplied declaration required: padQueryLogicalKey. */
 /* Supplied declaration required: jobStop. */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: ifTouchRegionRemove. */
@@ -117,8 +117,8 @@ extern int recordGetModeForId(int);
 extern int menuAreModeTexturesLoaded(unsigned int *);
 /* Supplied declaration required: FUN_002c7150. */
 extern int jyoucyuGetLevel(void);
-extern int FUN_002e07f4(void);
-extern int FUN_002e1a18(unsigned int);
+extern int pairedAvailabilityBothReady(void);
+extern int buttonHelpIsActionActive(unsigned int);
 /* Supplied declaration required: commonBgBeginExit. */
 extern int configGetValueBC(void);
 /* Supplied declaration required: gameApplyFlagTriggers. */
@@ -138,7 +138,7 @@ extern int titleConfigIsClosed(void);
 extern int saveLoadUIHasResult(void);
 /* Supplied declaration required: saveLoadStartDefaultWindow. */
 /* Supplied declaration required: FUN_003b5064. */
-/* Supplied declaration required: FUN_003b61ec. */
+/* Supplied declaration required: commonBgStopChildAndBeginTransition. */
 /* Supplied declaration required: mobiclipProcessSetFlag78. */
 /* Supplied declaration required: mobiclipProcessSetFlag77. */
 /* Supplied declaration required: FUN_003c4f28. */
@@ -193,11 +193,11 @@ unsigned int FUN_0029f2fc(void)
     asdTMTexLoadMainHeap(0x2a,7);
     asdTMTexLoadMainHeap(0x2a,8);
     texEntrySpritesLoad();
-    temp_v5 = (int)FUN_0013def0(0);
+    temp_v5 = (int)pairedAvailabilityGetState(0);
     if (temp_v5 != 3) {
       FUN_0022677c(0,0xff);
     }
-    temp_v5 = (int)FUN_0013def0(1);
+    temp_v5 = (int)pairedAvailabilityGetState(1);
     if (temp_v5 != 3) {
       FUN_0022677c(1,0xff);
     }
@@ -230,19 +230,19 @@ unsigned int FUN_0029f2fc(void)
   case 3:
     if (*(char *)(DAT_00589170 + 0x24) != '\0') {
       temp_v5 = 0;
-      FUN_001517b4(0,1);
+      padQueryLogicalKey(0,1);
       if (temp_v5 == 0) {
         temp_v5 = 1;
-        FUN_001517b4();
+        padQueryLogicalKey();
         if (temp_v5 == 0) {
           temp_v5 = 9;
-          FUN_001517b4(9,1);
+          padQueryLogicalKey(9,1);
           if (temp_v5 == 0) {
             temp_v5 = 10;
-            FUN_001517b4(10,1);
+            padQueryLogicalKey(10,1);
             if (temp_v5 == 0) {
               temp_v5 = 2;
-              FUN_001517b4(2,1);
+              padQueryLogicalKey(2,1);
               if (temp_v5 == 0) goto LAB_0029f580;
             }
           }
@@ -348,19 +348,19 @@ LAB_0029f9fc:
   case 4:
     if (*(char *)(DAT_00589170 + 0x24) != '\0') {
       temp_v5 = 0;
-      FUN_001517b4(0,1);
+      padQueryLogicalKey(0,1);
       if (temp_v5 == 0) {
         temp_v5 = 1;
-        FUN_001517b4();
+        padQueryLogicalKey();
         if (temp_v5 == 0) {
           temp_v5 = 9;
-          FUN_001517b4(9,1);
+          padQueryLogicalKey(9,1);
           if (temp_v5 == 0) {
             temp_v5 = 10;
-            FUN_001517b4(10,1);
+            padQueryLogicalKey(10,1);
             if (temp_v5 == 0) {
               temp_v5 = 2;
-              FUN_001517b4(2,1);
+              padQueryLogicalKey(2,1);
               if (temp_v5 == 0) goto LAB_0029f848;
             }
           }
@@ -445,19 +445,19 @@ LAB_0029f848:
   case 6:
     if (*(char *)(DAT_00589170 + 0x24) != '\0') {
       temp_v5 = 0;
-      FUN_001517b4(0,1);
+      padQueryLogicalKey(0,1);
       if (temp_v5 == 0) {
         temp_v5 = 1;
-        FUN_001517b4();
+        padQueryLogicalKey();
         if (temp_v5 == 0) {
           temp_v5 = 9;
-          FUN_001517b4(9,1);
+          padQueryLogicalKey(9,1);
           if (temp_v5 == 0) {
             temp_v5 = 10;
-            FUN_001517b4(10,1);
+            padQueryLogicalKey(10,1);
             if (temp_v5 == 0) {
               temp_v5 = 2;
-              FUN_001517b4(2,1);
+              padQueryLogicalKey(2,1);
               if (temp_v5 == 0) goto LAB_0029fb00;
             }
           }
@@ -622,8 +622,8 @@ LAB_0029fb00:
     break;
   case 10:
     *(unsigned char *)((int)DAT_00589170 + 99) = 0;
-    temp_v5 = (int)FUN_0013def0(0);
-    if ((temp_v5 != 2) && (temp_v5 = (int)FUN_0013def0(0), temp_v5 != 0)) {
+    temp_v5 = (int)pairedAvailabilityGetState(0);
+    if ((temp_v5 != 2) && (temp_v5 = (int)pairedAvailabilityGetState(0), temp_v5 != 0)) {
       FUN_003d54f8(0,10);
     }
     FUN_003d54f8(1,10);
@@ -634,7 +634,7 @@ LAB_0029fb00:
     puVar4[0x20] = 0;
     break;
   case 0xb:
-    temp_v5 = FUN_002e07f4();
+    temp_v5 = pairedAvailabilityBothReady();
     if ((temp_v5 == 0) || (temp_v5 = FUN_003309e0(), temp_v5 == 0)) break;
     *(unsigned char *)((int)puVar4 + 0x91) = 0;
     puVar5 = DAT_00589170;
@@ -704,7 +704,7 @@ LAB_0029fb00:
     temp_v5 = dataTableGetEntries();
     textFormatBuffer(&temp_v13,temp_v5 + temp_v7 * 100 + 0x14,&LAB_0029ff54);
     buttonHelpSetText(&temp_v13,0xf4f4f4ff);
-    if (((*(char *)((int)puVar4 + 0x3f) != '\0') || (temp_v5 = FUN_002e1a18(1), temp_v5 != 0)) ||
+    if (((*(char *)((int)puVar4 + 0x3f) != '\0') || (temp_v5 = buttonHelpIsActionActive(1), temp_v5 != 0)) ||
        (temp_v5 = padButtonIsPressed(0), temp_v5 != 0)) {
       puVar5 = DAT_00589170;
       temp_v4 = DAT_00589170[2];
@@ -864,14 +864,14 @@ LAB_0029fb00:
     FUN_003ca7d8();
     break;
   case 0x11:
-    temp_v5 = FUN_002e07f4();
+    temp_v5 = pairedAvailabilityBothReady();
     if (temp_v5 == 0) break;
     puVar4[0x1f] = 0;
     puVar4[0x1e] = 0x12;
     puVar4[0x20] = 0;
     break;
   case 0x12:
-    temp_v5 = FUN_002e07f4();
+    temp_v5 = pairedAvailabilityBothReady();
     if (temp_v5 != 0) {
       campCommonBgRelease();
       jobStop(*DAT_00589170,0);
@@ -944,7 +944,7 @@ LAB_0029fb00:
     if (*(char *)((int)DAT_00589170 + 0x5a) == '\0') {
       configOpen(0);
       *(unsigned char *)(puVar4 + 0x26) = 1;
-      FUN_003b61ec();
+      commonBgStopChildAndBeginTransition();
       puVar4[0x1f] = 0;
       puVar4[0x1e] = 0x15;
       puVar4[0x20] = 0;

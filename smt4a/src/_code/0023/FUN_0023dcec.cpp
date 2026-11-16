@@ -9,7 +9,7 @@ const char *dataTableGetEntry24Member(u32 id);
 s32 saveOptionIsEnabled(u32 option);
 void efctSetSpeed(f32 value);
 f32 vec2GetSpeed(const void *object);
-void FUN_00164b5c(u32 layer, u32 group, s32 image, s32 x, s32 y, s32 order);
+void texDrawCompositeSprite(u32 layer, u32 group, s32 image, s32 x, s32 y, s32 order);
 PanelTextLayoutEntryPrefixA *asdTMTexTableEntryAt(u32 group, u32 image);
 
 /* The speed object the option pulse reads sits at 0x13C of the work; its speed is the f32 at +0x20. */
@@ -26,24 +26,24 @@ void FUN_0023dcec(UniteWork *work, s32 row, s32 x, s32 y, s32 selected,
     f32 scale = baseScale * factor;
     u32 style;
     if (selected) {
-        FUN_00164b5c(2, 0x1A, 0x10, x, y, 0x65);
-        FUN_001835b4(2, 0x1A, 0x95, x, y, 0x6A);
+        texDrawCompositeSprite(2, 0x1A, 0x10, x, y, 0x65);
+        texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x95, x, y, 0x6A);
         if (saveOptionIsEnabled(option)) {
             efctSetSpeed(vec2GetSpeed(&reinterpret_cast<OptionSpeedView *>(work)->speedObject) * factor);
-            FUN_001835b4(2, 0x1A, 0x97, x, y, 0x6D);
+            texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x97, x, y, 0x6D);
             efctSetSpeed(scale);
-            FUN_001835b4(2, 0x1A, 0x91, x, y, 0x6F);
+            texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x91, x, y, 0x6F);
         } else {
             efctSetSpeed(vec2GetSpeed(&reinterpret_cast<OptionSpeedView *>(work)->speedObject));
-            FUN_001835b4(2, 0x1A, 0x96, x, y, 0x6F);
+            texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x96, x, y, 0x6F);
             efctSetSpeed(scale);
         }
         style = 0xFF;
     } else {
-        FUN_00164b5c(2, 0x1A, 0x0F, x, y, 0x65);
-        FUN_001835b4(2, 0x1A, 0x90, x, y, 0x6A);
+        texDrawCompositeSprite(2, 0x1A, 0x0F, x, y, 0x65);
+        texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x90, x, y, 0x6A);
         if (saveOptionIsEnabled(option))
-            FUN_001835b4(2, 0x1A, 0x91, x, y, 0x6F);
+            texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x91, x, y, 0x6F);
         style = ~0u;
     }
     const char *text = dataTableGetEntry24Member(work->optionNamesA.ids[row]);

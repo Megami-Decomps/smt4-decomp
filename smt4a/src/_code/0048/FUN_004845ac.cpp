@@ -6,10 +6,10 @@
 extern "C" {
 
 int textDrawString(int, unsigned int, unsigned char [4]);
-int FUN_00164b5c(...);
+int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
 int asdTMTexTableEntryAt(...);
-int FUN_001835b4(...);
+int texDrawTableEntryAtStoredOrigin(...);
 int FUN_00485108(...);
 int textDrawEncodedGlyph(int, int, int, int);
 int VectorSignedToFloat(int, int);
@@ -26,10 +26,10 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: FUN_00164b5c. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
-/* Supplied declaration required: FUN_001835b4. */
+/* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
 extern int recordTableGet(unsigned int, int);
 extern int FUN_002a4878(int);
 extern int uiSearchSecondary(int);
@@ -74,7 +74,7 @@ void FUN_004845ac(int param_1)
         temp_v5 = asdTMTexTableEntryAt(0x23,temp_v10 * 0xf + temp_v8 + 0x56);
         (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v5 + 10);
         temp_v13 = 0x15;
-        FUN_00164b5c(2,0x23,1,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v5 + 8));
+        texDrawCompositeSprite(2,0x23,1,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v5 + 8));
         temp_v6 = asdTMTexTableEntryAt(0x23,0x1a);
         temp_v7 = *(int *)(param_1 + 0xa4);
         temp_v0 = *(short *)(temp_v6 + 8);
@@ -109,7 +109,7 @@ void FUN_004845ac(int param_1)
     temp_v10 = asdTMTexTableEntryAt(0x23,*(int *)(param_1 + 0x14) * 0xf + 0x56 + *(int *)(param_1 + 0x10));
     (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v10 + 10);
     temp_v13 = 0x15;
-    FUN_00164b5c(2,0x23,2,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v10 + 8));
+    texDrawCompositeSprite(2,0x23,2,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v10 + 8));
     temp_v8 = asdTMTexTableEntryAt(0x23,0x22);
     temp_v13 = 1;
     (*(unsigned int *)temp_v12) = 0x0;
@@ -129,11 +129,11 @@ void FUN_004845ac(int param_1)
       }
       (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v10 + 10);
       temp_v13 = 0x1f;
-      FUN_00164b5c(2,0x23,3,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v10 + 8));
+      texDrawCompositeSprite(2,0x23,3,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v10 + 8));
       if (0 < *(short *)(param_1 + 0x560)) {
         (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v10 + 10);
         temp_v13 = 0x1f;
-        FUN_001835b4(2,0x23,0x21,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v10 + 8));
+        texDrawTableEntryAtStoredOrigin(2,0x23,0x21,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v10 + 8));
       }
       temp_v10 = g_renderCtx;
       temp_v8 = packNibblesAndByte(6, 7, 0);
@@ -156,10 +156,10 @@ void FUN_004845ac(int param_1)
         if (temp_v8 != 3) {
           (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v10 + 10);
           temp_v13 = 0x15;
-          FUN_00164b5c(2,0x23,4,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v10 + 8));
+          texDrawCompositeSprite(2,0x23,4,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v10 + 8));
           (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v10 + 10);
           temp_v13 = 0x1a;
-          FUN_001835b4(2,0x23,temp_v8 + 0x29,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v10 + 8));
+          texDrawTableEntryAtStoredOrigin(2,0x23,temp_v8 + 0x29,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v10 + 8));
           efctSetSpeed();
         }
         else {
@@ -168,13 +168,13 @@ void FUN_004845ac(int param_1)
           efctSetSpeed();
           temp_v13 = 0x15;
           (*(unsigned int *)temp_v12) = (unsigned int)temp_v5;
-          FUN_001835b4(2,0x23,0x151,temp_v10);
+          texDrawTableEntryAtStoredOrigin(2,0x23,0x151,temp_v10);
           temp_v13 = 0x15;
           (*(unsigned int *)temp_v12) = (unsigned int)temp_v5;
-          FUN_001835b4(2,0x23,0x152,temp_v10);
+          texDrawTableEntryAtStoredOrigin(2,0x23,0x152,temp_v10);
           temp_v13 = 0x1a;
           (*(unsigned int *)temp_v12) = (unsigned int)temp_v5;
-          FUN_001835b4(2,0x23,0x14f,temp_v10);
+          texDrawTableEntryAtStoredOrigin(2,0x23,0x14f,temp_v10);
         }
         temp_v8 = temp_v8 + 1;
         temp_v10 = uiSearchSecondary(param_1 + 0x1fc);
@@ -186,10 +186,10 @@ void FUN_004845ac(int param_1)
       if (temp_v10 != 3) {
         (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v8 + 10);
         temp_v13 = 0x1f;
-        FUN_00164b5c(2,0x23,5,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v8 + 8));
+        texDrawCompositeSprite(2,0x23,5,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v8 + 8));
         (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v8 + 10);
         temp_v13 = 0x24;
-        FUN_001835b4(2,0x23,temp_v10 + 0x32,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v8 + 8));
+        texDrawTableEntryAtStoredOrigin(2,0x23,temp_v10 + 0x32,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v8 + 8));
         efctSetSpeed();
         efctSetSpeed();
         temp_v10 = g_renderCtx;
@@ -203,7 +203,7 @@ void FUN_004845ac(int param_1)
         }
         (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v8 + 10);
         temp_v13 = 0x29;
-        FUN_00164b5c(2,0x23,6,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v8 + 8));
+        texDrawCompositeSprite(2,0x23,6,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v8 + 8));
         temp_v10 = g_renderCtx;
         temp_v5 = packNibblesAndByte(6, 7, 0);
         piVar10 = (int *)(temp_v10 + 0x12b8);
@@ -216,7 +216,7 @@ void FUN_004845ac(int param_1)
         if (0 < *(short *)(param_1 + 0x560)) {
           (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v8 + 10);
           temp_v13 = 0x29;
-          FUN_001835b4(2,0x23,0x39,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v8 + 8));
+          texDrawTableEntryAtStoredOrigin(2,0x23,0x39,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v8 + 8));
         }
       }
       else {

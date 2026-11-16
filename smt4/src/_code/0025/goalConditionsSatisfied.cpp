@@ -97,7 +97,7 @@ u32 goalConditionsSatisfied(u32 id)
         for (s32 i = 0; i < 6; i++) {
             switch (record->conditions.requirements[i].kind) {
             case 1: {
-                u32 progress = FUN_0028fb40(record->conditions.requirements[i].parameter);
+                u32 progress = flagValueRead(record->conditions.requirements[i].parameter);
                 if (record->conditions.requirements[i].value > progress) met = 0;
                 break;
             }
@@ -132,7 +132,7 @@ u32 goalConditionsSatisfied(u32 id)
             case 7:
                 if (aocEntryGetKind(record->conditions.requirements[i].parameter) != 11 ||
                     !unlockFlagTest(record->conditions.requirements[i].parameter) ||
-                    FUN_0028fb40(record->conditions.requirements[i].parameter) != 0) {
+                    flagValueRead(record->conditions.requirements[i].parameter) != 0) {
                     met = 0;
                 }
                 break;

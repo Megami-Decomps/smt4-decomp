@@ -28,12 +28,12 @@ int FUN_0029eb5c(int, int);
 int resourceRunOperationIfUnblocked(...);
 int FUN_0029efd8(...);
 int uiScrollHandleActionsOrTouch(...);
-int FUN_0029f848(...);
-int FUN_002b8584(int, int);
+int gridNavigationConfigure(...);
+int ifTouchRegionAddRequested(int, int);
 int buttonHelpSetPreset(...);
 int eventQueueAddUnique(...);
 int eventQueueAddUniqueIfValid(...);
-int FUN_002bf818(...);
+int uiSpriteAdvanceAnimation(...);
 int uiPointerHitsRect(int, int, int, int, int);
 int FUN_002c1658(...);
 
@@ -71,17 +71,17 @@ extern int FUN_0029ee54(int);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
-/* Supplied declaration required: FUN_0029f848. */
+/* Supplied declaration required: gridNavigationConfigure. */
 extern int sys43e188GetState(void);
 /* Supplied declaration required: appCostRecordFindById. */
-/* Supplied declaration required: FUN_002b8584. */
+/* Supplied declaration required: ifTouchRegionAddRequested. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int padIsButtonRepeat(unsigned int);
 /* Supplied declaration required: eventQueueAddUnique. */
 extern int FUN_002b8ee0(int, unsigned int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002bf818. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 extern int padIsButtonPressed(unsigned int);
 /* Supplied declaration required: uiPointerHitsRect. */
 /* Supplied declaration required: FUN_002c1658. */
@@ -107,8 +107,8 @@ unsigned int FUN_003291dc(int *param_1)
   char temp_v12 [4];
   
   temp_v7 = *param_1;
-  FUN_002bf818(temp_v7 + 0x364);
-  FUN_002bf818(temp_v7 + 0x3f0);
+  uiSpriteAdvanceAnimation(temp_v7 + 0x364);
+  uiSpriteAdvanceAnimation(temp_v7 + 0x3f0);
   temp_v9 = 0x100016d;
   temp_v10 = 0x100016e;
   switch(*(unsigned int *)(temp_v7 + 8)) {
@@ -122,17 +122,17 @@ unsigned int FUN_003291dc(int *param_1)
       do {
         temp_v4 = FUN_0029ee54(temp_v7 + 0x10);
         if (temp_v4 <= temp_v6) break;
-        temp_v1 = FUN_002b8584(0x1d,temp_v6 + 0x40e);
+        temp_v1 = ifTouchRegionAddRequested(0x1d,temp_v6 + 0x40e);
         temp_v4 = temp_v6 * 2;
         temp_v6 = temp_v6 + 1;
         *(unsigned short *)(temp_v7 + temp_v4 + 0x508) = temp_v1;
         *(short *)(temp_v7 + 0x524) = *(short *)(temp_v7 + 0x524) + 1;
       } while (temp_v6 < 10);
-      temp_v1 = FUN_002b8584(0x1d,0x573);
+      temp_v1 = ifTouchRegionAddRequested(0x1d,0x573);
       *(unsigned short *)(temp_v7 + 0x51e) = temp_v1;
-      temp_v1 = FUN_002b8584(0x1d,0x574);
+      temp_v1 = ifTouchRegionAddRequested(0x1d,0x574);
       *(unsigned short *)(temp_v7 + 0x520) = temp_v1;
-      temp_v1 = FUN_002b8584(0x1d,0x575);
+      temp_v1 = ifTouchRegionAddRequested(0x1d,0x575);
       *(unsigned short *)(temp_v7 + 0x522) = temp_v1;
       *(short *)(temp_v7 + 0x524) = *(short *)(temp_v7 + 0x524) + 3;
     }
@@ -269,7 +269,7 @@ unsigned int FUN_003291dc(int *param_1)
         }
       }
     }
-    FUN_0029f848(temp_v7 + 0x10,*(unsigned int *)(temp_v7 + 0x2a8),10,1,1,1);
+    gridNavigationConfigure(temp_v7 + 0x10,*(unsigned int *)(temp_v7 + 0x2a8),10,1,1,1);
     if (*(int *)(temp_v7 + 0x2a8) != 0) {
       return 0;
     }
@@ -370,7 +370,7 @@ unsigned int FUN_003291dc(int *param_1)
     }
     break;
   case 5:
-    temp_v6 = FUN_002bf818(temp_v7 + 0x47c);
+    temp_v6 = uiSpriteAdvanceAnimation(temp_v7 + 0x47c);
     if (temp_v6 == 0) {
       return 0;
     }
@@ -415,7 +415,7 @@ unsigned int FUN_003291dc(int *param_1)
             temp_v8 = temp_v8 + 1;
           } while (temp_v8 < 0x8d);
         }
-        FUN_0029f848(temp_v7 + 0x10,*(unsigned int *)(temp_v7 + 0x2a8),10,1,1,1);
+        gridNavigationConfigure(temp_v7 + 0x10,*(unsigned int *)(temp_v7 + 0x2a8),10,1,1,1);
         gauntletAppSortMenuEntries();
         scrollOwnerSetValue(temp_v7 + 0x10,temp_v10);
         flaggedEntrySetValueA(temp_v7 + 0x10,temp_v9);
@@ -441,7 +441,7 @@ unsigned int FUN_003291dc(int *param_1)
     }
     break;
   case 7:
-    temp_v7 = FUN_002bf818(temp_v7 + 0x2d8);
+    temp_v7 = uiSpriteAdvanceAnimation(temp_v7 + 0x2d8);
     if (temp_v7 != 0) {
       FUN_002dfefc(1);
       return 0xffffffff;

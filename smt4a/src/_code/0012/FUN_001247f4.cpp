@@ -17,7 +17,7 @@ extern unsigned char DAT_0055780c; /* 0x55780c */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int *FUN_002e2a98(void);
+extern int *libcLocaleGetCtypeTable(void);
 /* Supplied declaration required: asdOperatorNewC. */
 /* Supplied declaration required: strcmp. */
 /* Supplied declaration required: FUN_0030eca8. */
@@ -49,7 +49,7 @@ unsigned long long FUN_001247f4(int param_1,unsigned int param_2,unsigned int pa
     asdOperatorNewC();
     FUN_0030ed04(&uStack_20,param_1,2);
     temp_v5 = 0;
-    piVar3 = (int *)FUN_002e2a98();
+    piVar3 = (int *)libcLocaleGetCtypeTable();
     do {
       temp_v0 = *(unsigned char *)(*piVar3 + temp_v5);
       temp_v2 = (unsigned int)temp_v0;

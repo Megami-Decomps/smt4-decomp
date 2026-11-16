@@ -24,7 +24,7 @@ struct FlaggedDemonSortOptions { u8 unk00[0x15]; FlaggedDemonSortFlags sort; };
 extern "C" {
 extern FlaggedDemonList *g_statusDown;
 const FlaggedDemonDefinition *devilGetRecord(u32);
-void FUN_0029f848(void *, s32, s32, s32, s32, s32);
+void gridNavigationConfigure(void *, s32, s32, s32, s32, s32);
 void FUN_002b7bca(void *, s32, s32, s32 (*)(const void *, const void *));
 s32 devilIdCompareRankOrderId(const void *, const void *);
 s32 FUN_00206d4c(const void *, const void *);
@@ -51,7 +51,7 @@ void statusBuildFlaggedDemonList(const u8 *flags)
             ++list->total;
         }
     }
-    FUN_0029f848(list->controller, list->count, 11, 1, 0, 1);
+    gridNavigationConfigure(list->controller, list->count, 11, 1, 0, 1);
     FlaggedDemonList *sorting = g_statusDown;
     const FlaggedDemonSortFlags *options = &reinterpret_cast<const FlaggedDemonSortOptions *>(FUN_002a0d0c())->sort;
     if (options->mode == 1) {

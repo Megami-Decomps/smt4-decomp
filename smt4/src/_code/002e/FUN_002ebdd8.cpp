@@ -4,7 +4,7 @@
 extern "C" {
 extern u8 g_asdSound[];
 s32 asd3dSoundActorIsPlaying(u32 actorIndex);
-void FUN_002bda30(u32 handle, u32 arg);
+void basicSoundStopOrFadeOut(u32 handle, u32 arg);
 
 /* Stops spatial actor `actorIndex` (when playing) and clears its bit in the active mask. */
 void FUN_002ebdd8(u32 actorIndex, u32 arg)
@@ -14,7 +14,7 @@ void FUN_002ebdd8(u32 actorIndex, u32 arg)
 
     if (playback->enabled && actorIndex < 16 && asd3dSoundActorIsPlaying(actorIndex)) {
         if (playback->handles[actorIndex] != 0) {
-            FUN_002bda30(playback->handles[actorIndex], arg);
+            basicSoundStopOrFadeOut(playback->handles[actorIndex], arg);
         }
         playback->activeMask &= ~(1u << actorIndex);
     }

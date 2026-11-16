@@ -20,8 +20,8 @@ typedef char TerminalScreenSlotsOffsetCheck[offsetof(TerminalScreen, slots) == 0
 extern "C" {
 extern TerminalScreen *g_tmnl;
 extern RenderCtx *g_titleScene;
-s32 FUN_002c5d80(u32 first, u32 second);
-s32 FUN_0028186c(u32 handle);
+s32 renderCtxPackPassFlags(u32 first, u32 second);
+s32 effectNodeUpdatePlacedChildren(u32 handle);
 
 /* Draws the terminal's slot handles with the three render stacks pushed, for pages 1..98. */
 u32 FUN_001fe23c(void)
@@ -31,11 +31,11 @@ u32 FUN_001fe23c(void)
         RenderCtx *context = g_titleScene;
         s32 state = FUN_002865c0(6, 0.0f);
         renderStackPushCounted(&context->additional.stackC, state);
-        renderCtxPushACountedDirect(g_titleScene, FUN_002c5d80(1, 0));
+        renderCtxPushACountedDirect(g_titleScene, renderCtxPackPassFlags(1, 0));
         renderCtxPushB(g_titleScene, packNibblesAndByte(6, 1, 0));
         for (s32 i = 0; i < 4; ++i) {
             if (screen->slots[i].inUse != 0) {
-                FUN_0028186c(screen->slots[i].handle);
+                effectNodeUpdatePlacedChildren(screen->slots[i].handle);
             }
         }
         renderStackPop(&g_titleScene->stackB);

@@ -14,13 +14,13 @@ struct CallbackSelectionWorkA688 {
 
 extern "C" {
 extern RenderCtx *g_titleScene;
-void FUN_002bed3c(CallbackSelectionWorkA688 *work);
+void gxResetColorQuadToWhite(CallbackSelectionWorkA688 *work);
 void renderCtxResetColorScale(RenderCtx *scene);
 
 // Commits the current selection, invokes its member callback, and refreshes the scene.
 void FUN_003aada8(CallbackSelectionWorkA688 *work)
 {
-    FUN_002bed3c(work);
+    gxResetColorQuadToWhite(work);
     work->state = 0x1F;
     if (work->callbacks[work->selection] != NULL) {
         (work->*work->callbacks[work->selection])();

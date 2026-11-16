@@ -6,7 +6,7 @@ void uiSpriteSelectAnim(void *sprite, s32 animation);
 void uiSpriteSetKeyframe(void *sprite, s32 frame, s32 initial);
 void uiSpriteSetImageKeyframe(void *sprite, s32 frame, s32 initial);
 void ifTouchDecrementTimer();
-void FUN_0019e330(void *sprite, s32 enabled, s32 initial);
+void rangeSelectionSelectEndpoint(void *sprite, s32 enabled, s32 initial);
 
 // Release help touch registrations and start the four panel exit animations.
 void buttonHelpBeginExit(s32 clearKinds)
@@ -31,9 +31,9 @@ void buttonHelpBeginExit(s32 clearKinds)
             uiSpriteSetKeyframe(&reinterpret_cast<ButtonHelpUnit *>(work->unk37C)[index], 3, 0);
         } else if (work->unk5E4 == 2) {
             uiSpriteSetImageKeyframe(&reinterpret_cast<ButtonHelpUnit *>(work->unk37C)[index], 1, 0);
-            FUN_0019e330(&reinterpret_cast<ButtonHelpUnit *>(work->unk37C)[index], 1, 0);
+            rangeSelectionSelectEndpoint(&reinterpret_cast<ButtonHelpUnit *>(work->unk37C)[index], 1, 0);
         } else {
-            FUN_0019e330(&reinterpret_cast<ButtonHelpUnit *>(work->unk37C)[index], 0, 1);
+            rangeSelectionSelectEndpoint(&reinterpret_cast<ButtonHelpUnit *>(work->unk37C)[index], 0, 1);
         }
     }
     work = g_buttonHelp.work;

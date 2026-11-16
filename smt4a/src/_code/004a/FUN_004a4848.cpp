@@ -42,13 +42,13 @@ extern "C" {
 void releaseEntriesB(InventoryWidget *widget);
 void releaseEntriesA(InventoryHelpList *help);
 void slotPoolResetTrackedState(InventoryListView *list);
-s32 FUN_0026264c(u16 id);
+s32 itemIsCollectedWithRelated(u16 id);
 void inventoryListAppend(InventoryListView *list, const CampUnitComparison *record);
 void listScrollerInitialize(InventoryCursorState *cursor, s32 visible, s32 count, s32 first, s32 mode, s32 enabled);
 u8 gaugePercent(InventoryListView *list, u32 mode);
 void *jyoucyuGetTableEntry(u32 index);
 void FUN_004a5b20(Screen4A *work);
-void FUN_004d05c4(InventoryHelpList *help, u32 group, u32 image, s32 count);
+void messageIdListSetRange(InventoryHelpList *help, u32 group, u32 image, s32 count);
 
 // Rebuild the available demon list, connect its selection widget and refresh the help rows.
 void FUN_004a4848(Screen4A *owner)
@@ -66,7 +66,7 @@ void FUN_004a4848(Screen4A *owner)
             Table00Record *record = dataTable00FindById((u16)id);
             if (candidate != NULL && record != NULL && (record->flags & 1) != 0) {
                 ++total;
-                if (FUN_0026264c(candidate->id) != 0) {
+                if (itemIsCollectedWithRelated(candidate->id) != 0) {
                     CampUnitComparison entry;
                     campFillUnitComparison(&entry, candidate->id, 0);
                     entry.unk18[0] = 1;
@@ -90,10 +90,10 @@ void FUN_004a4848(Screen4A *owner)
     s32 count = work->cursor.count;
     if (work->alternate == 0) {
         count = count < 10 ? count : 10;
-        FUN_004d05c4(&work->help, 0x14, 0x40E, count);
+        messageIdListSetRange(&work->help, 0x14, 0x40E, count);
     } else {
         count = count < 10 ? count : 10;
-        FUN_004d05c4(&work->help, 0x13, 0x1030, count);
+        messageIdListSetRange(&work->help, 0x13, 0x1030, count);
     }
     work->help.active = 1;
 }

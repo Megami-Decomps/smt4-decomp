@@ -9,11 +9,11 @@ int moriModelContentCopyBody(...);
 int handleRegistryRegisterObject(...);
 int VectorSignedToFloat(...);
 
-int FUN_00178b04(...);
+int asdMemoryAllocTraced(...);
 int FUN_00356470(void);
 int FUN_0040a908(...);
 int FUN_0040a918(...);
-int FUN_0040aa6c(void);
+int resourceOwnerLoadFileSync(void);
 int FUN_0040aad4(...);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
@@ -31,7 +31,7 @@ extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_mapHakai; /* 0x581038 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00178b04. */
+/* Supplied declaration required: asdMemoryAllocTraced. */
 extern int gameFlagIsSet(void);
 /* Supplied declaration required: FUN_0027461c. */
 extern int gameFlagsTestFirstBank(int);
@@ -39,7 +39,7 @@ extern int gameFlagsTestFirstBank(int);
 extern int dataTableCountWithAoc(void);
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
-/* Supplied declaration required: FUN_0040aa6c. */
+/* Supplied declaration required: resourceOwnerLoadFileSync. */
 /* Supplied declaration required: moriModelContentCopyBody. */
 /* Supplied declaration required: FUN_0040aad4. */
 extern unsigned int modelListInit(void);
@@ -74,13 +74,13 @@ unsigned int FUN_0033d6c0(void)
     else {
       if (*(int *)(g_mapHakai + 0x59c) != 0) {
         temp_v1 = 0x20;
-        FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapHakai.cpp",0xf5);
+        asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapHakai.cpp",0xf5);
         temp_v4 = 0;
         if (temp_v1 != 0) {
           temp_v4 = modelListInit();
         }
         *(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x20) = temp_v4;
-        FUN_0040aa6c();
+        resourceOwnerLoadFileSync();
         FUN_0040a908(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x20),
                      0x10000);
         FUN_0040a918(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x20),
@@ -89,13 +89,13 @@ unsigned int FUN_0033d6c0(void)
       }
       if (*(int *)(g_mapHakai + 0x5a0) != 0) {
         temp_v1 = 0x20;
-        FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapHakai.cpp",0xff);
+        asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapHakai.cpp",0xff);
         temp_v4 = 0;
         if (temp_v1 != 0) {
           temp_v4 = modelListInit();
         }
         *(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x24) = temp_v4;
-        FUN_0040aa6c();
+        resourceOwnerLoadFileSync();
         FUN_0040a908(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x24),
                      0x10000);
         FUN_0040a918(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x24),
@@ -104,13 +104,13 @@ unsigned int FUN_0033d6c0(void)
       }
       if (*(int *)(g_mapHakai + 0x5a4) != 0) {
         temp_v1 = 0x20;
-        FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapHakai.cpp",0x109);
+        asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapHakai.cpp",0x109);
         temp_v4 = 0;
         if (temp_v1 != 0) {
           temp_v4 = modelListInit();
         }
         *(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x28) = temp_v4;
-        FUN_0040aa6c();
+        resourceOwnerLoadFileSync();
         FUN_0040a908(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x28),
                      0x10000);
         FUN_0040a918(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x28),
@@ -119,13 +119,13 @@ unsigned int FUN_0033d6c0(void)
       }
       if (*(int *)(g_mapHakai + 0x5a8) != 0) {
         temp_v1 = 0x20;
-        FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapHakai.cpp",0x113);
+        asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapHakai.cpp",0x113);
         temp_v4 = 0;
         if (temp_v1 != 0) {
           temp_v4 = modelListInit();
         }
         *(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x2c) = temp_v4;
-        FUN_0040aa6c();
+        resourceOwnerLoadFileSync();
         FUN_0040a908(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x2c),
                      0x10000);
         FUN_0040a918(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x2c),
@@ -134,13 +134,13 @@ unsigned int FUN_0033d6c0(void)
       }
       if (*(int *)(g_mapHakai + 0x5b0) != 0) {
         temp_v1 = 0x20;
-        FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapHakai.cpp",0x122);
+        asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapHakai.cpp",0x122);
         temp_v4 = 0;
         if (temp_v1 != 0) {
           temp_v4 = modelListInit();
         }
         *(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x34) = temp_v4;
-        FUN_0040aa6c();
+        resourceOwnerLoadFileSync();
         FUN_0040a908(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x34),
                      0x10000);
         FUN_0040a918(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x34),
@@ -149,13 +149,13 @@ unsigned int FUN_0033d6c0(void)
       }
       if (*(int *)(g_mapHakai + 0x5b4) != 0) {
         temp_v1 = 0x20;
-        FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapHakai.cpp",299);
+        asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapHakai.cpp",299);
         temp_v4 = 0;
         if (temp_v1 != 0) {
           temp_v4 = modelListInit();
         }
         *(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x38) = temp_v4;
-        FUN_0040aa6c();
+        resourceOwnerLoadFileSync();
         FUN_0040aad4(*(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x38),0);
       }
       *(short *)(g_mapHakai + 8) = *(short *)(g_mapHakai + 8) + 1;
@@ -210,7 +210,7 @@ LAB_0033dd20:
           *(short **)(temp_v2 + 0x80) = psVar5;
           if (temp_v5[*(short *)(temp_v2 + 0xac)] != 0) {
             temp_v1 = 0x20;
-            FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapHakai.cpp",0x1bb);
+            asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapHakai.cpp",0x1bb);
             if (temp_v1 == 0) {
               temp_v4 = 0;
             }

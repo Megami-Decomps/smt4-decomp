@@ -7,7 +7,7 @@ extern "C" {
 u32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
 s32 btlScriptResolveGroupArg(s32 group);
-void FUN_002499fc(s32 group, u32 *first, u32 *count);
+void btlSideGetEntryRange(s32 group, u32 *first, u32 *count);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *battle);
 
 // Report whether a matching combatant has a positive value for the selected statistic.
@@ -26,7 +26,7 @@ u32 btlScriptHasPositiveCombatantStat()
     s32 group = (s32)scrGetArg(2);
     u32 first;
     u32 count;
-    FUN_002499fc(btlScriptResolveGroupArg(group), &first, &count);
+    btlSideGetEntryRange(btlScriptResolveGroupArg(group), &first, &count);
     for (s32 index = first; index < (s32)(first + count); ++index) {
         BtlEntry *entry = &btlGetMainState()->entries[index];
         u32 flags = entry->flags;

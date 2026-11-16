@@ -33,7 +33,7 @@ struct GameStateNavBlock {
 s32 FUN_0048e40c(PulsePanel *panel);
 void FUN_0048c394(PulsePanel *panel);
 s32 FUN_00485d1c(PulsePanel *panel);
-s32 FUN_00163aa4(UiSpriteState *sprite, f32 speed);
+s32 uiSpriteAdvanceAnimation(UiSpriteState *sprite, f32 speed);
 s32 uiSpriteGetMode(const UiSpriteState *sprite);
 s32 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 keyframe, s32 frame);
@@ -55,7 +55,7 @@ void _ZN9Obj53230012FUN_00487124Ev(PulsePanel *panel)
         FUN_0048c394(panel);
     }
     if (g_gameState.controllerFlags.primary != 0) {
-        FUN_00163aa4(&panel->first, 1.0f);
+        uiSpriteAdvanceAnimation(&panel->first, 1.0f);
         if (uiSpriteGetCompletionState(&panel->first) != 0) {
             if (uiSpriteGetMode(&panel->first) == 3) {
                 uiSpriteSetImageKeyframe(&panel->first, 4, 0);
@@ -63,7 +63,7 @@ void _ZN9Obj53230012FUN_00487124Ev(PulsePanel *panel)
                 uiSpriteSetImageKeyframe(&panel->first, 3, 0);
             }
         }
-        FUN_00163aa4(&panel->second, 1.0f);
+        uiSpriteAdvanceAnimation(&panel->second, 1.0f);
         if (uiSpriteGetCompletionState(&panel->second) != 0) {
             if (uiSpriteGetMode(&panel->second) == 5) {
                 uiSpriteSetImageKeyframe(&panel->second, 6, 0);

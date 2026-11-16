@@ -16,7 +16,7 @@ const char *dataTableGetEntry24Member(u32 id);
 s32 selectionGetValidatedField(void);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *position);
-void FUN_00164b5c(u32 layer, u32 group, s32 sprite, s32 x, s32 y, u32 priority);
+void texDrawCompositeSprite(u32 layer, u32 group, s32 sprite, s32 x, s32 y, u32 priority);
 const SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 sprite);
 void FUN_0021b390(EntryListScreen *screen, u32 entry, s32 field, char *text);
 
@@ -31,25 +31,25 @@ void uiDrawDataEntryRow(EntryListScreen *screen, s32 index, s32 x, s32 y, f32 ba
 
     efctSetSpeed(speed);
     if (selected != 0) {
-        FUN_00164b5c(2, 0x1a, 0x12, x, y, 0x65);
-        FUN_001835b4(2, 0x1a, 0x95, x, y, 0x6a);
+        texDrawCompositeSprite(2, 0x1a, 0x12, x, y, 0x65);
+        texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x95, x, y, 0x6a);
         if (field >= 0) {
             efctSetSpeed(vec2GetSpeed(screen->rowPosition));
-            FUN_001835b4(2, 0x1a, 0x97, x, y, 0x6d);
+            texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x97, x, y, 0x6d);
             efctSetSpeed(baseSpeed);
-            FUN_001835b4(2, 0x1a, 0x91, x, y, 0x6f);
+            texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x91, x, y, 0x6f);
         } else {
             efctSetSpeed(vec2GetSpeed(screen->rowPosition));
-            FUN_001835b4(2, 0x1a, 0x96, x, y, 0x6f);
+            texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x96, x, y, 0x6f);
             efctSetSpeed(baseSpeed);
         }
         nameColor = 0xff;
         detailColor = 0x9fe7ffff;
     } else {
-        FUN_00164b5c(2, 0x1a, 0x11, x, y, 0x65);
-        FUN_001835b4(2, 0x1a, 0x90, x, y, 0x6a);
+        texDrawCompositeSprite(2, 0x1a, 0x11, x, y, 0x65);
+        texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x90, x, y, 0x6a);
         if (field >= 0) {
-            FUN_001835b4(2, 0x1a, 0x91, x, y, 0x6f);
+            texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x91, x, y, 0x6f);
         }
         nameColor = 0xffffffff;
         detailColor = 0xffffffff;

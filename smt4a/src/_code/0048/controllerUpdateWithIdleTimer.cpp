@@ -9,7 +9,7 @@ struct TimedController {
 
 extern "C" {
 void controllerPoolUpdate(TimedController *controller);
-void FUN_004834b0(TimedController *controller, s32 mode);
+void enemySpawnChooseCandidates(TimedController *controller, s32 mode);
 
 static __inline void advanceControllerTimer(TimedController *controller)
 {
@@ -18,7 +18,7 @@ static __inline void advanceControllerTimer(TimedController *controller)
     ++controller->timer;
     if (controller->timer >= 120) {
         controller->timer = 0;
-        FUN_004834b0(controller, 2);
+        enemySpawnChooseCandidates(controller, 2);
     }
 }
 

@@ -9,7 +9,7 @@ struct FlagBlock {
 
 extern "C" {
 
-FlagBlock *FUN_0023d2ec(void);
+FlagBlock *saveGetFlagRowTable(void);
 
 /* Sets or clears bit `bit` of a byte-packed bit array. */
 static __inline void bitArrayWrite(u8 *bits, u32 bit, s32 set)
@@ -32,9 +32,9 @@ void FUN_00342078(u32 group, u32 bit, s32 set)
     if ((s32)group >= 100) {
         return;
     }
-    bitArrayWrite(FUN_0023d2ec()->groups[group], bit, set);
+    bitArrayWrite(saveGetFlagRowTable()->groups[group], bit, set);
     if (set != 0) {
-        bitArrayWrite(FUN_0023d2ec()->touched, group, 1);
+        bitArrayWrite(saveGetFlagRowTable()->touched, group, 1);
     }
 }
 

@@ -10,7 +10,7 @@ int FUN_0025bab8(...);
 int colorSetAndCachePica(...);
 int asdModelSlotGetResource(...);
 int FUN_00282390(void);
-int FUN_0028250c(void);
+int mathRemPio2f(void);
 int VectorSignedToFloat(unsigned int, int);
 
 /* stack frame of param_13: 6 slot(s), 24 byte(s) */
@@ -75,7 +75,7 @@ extern float DAT_004bdba8; /* 0x4bdba8 */
 /* Supplied declaration required: asdModelSlotGetResource. */
 extern unsigned int FUN_0025bb34(unsigned int, unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00282390. */
-/* Supplied declaration required: FUN_0028250c. */
+/* Supplied declaration required: mathRemPio2f. */
 
 
 void FUN_001e39ec(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
@@ -167,7 +167,7 @@ void FUN_001e39ec(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   uStack_2c = param_3;
   uStack_28 = param_4;
   temp_v45 = in_s1;
-  FUN_0028250c();
+  mathRemPio2f();
   FUN_00282390();
   temp_v24 = (float)VectorSignedToFloat(param_8,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v22 = (float)VectorSignedToFloat(param_9,(unsigned char)(in_fpscr >> 0x16) & 3);

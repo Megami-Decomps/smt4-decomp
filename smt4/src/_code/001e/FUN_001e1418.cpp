@@ -4,9 +4,9 @@
 extern "C" {
 extern RenderCtx *g_titleScene;
 void renderCtxSelectStereoLayout(RenderCtx *context);
-s32 FUN_002c5d80(u32 kind, u32 flags);
+s32 renderCtxPackPassFlags(u32 kind, u32 flags);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
-void FUN_002bed3c(void);
+void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 speed);
 void renderCtxResetColorScale(RenderCtx *context);
 
@@ -15,11 +15,11 @@ u32 FUN_001e1418(void)
 {
     renderCtxSelectStereoLayout(g_titleScene);
     RenderCtx *context = g_titleScene;
-    s32 renderState = FUN_002c5d80(1, 0);
+    s32 renderState = renderCtxPackPassFlags(1, 0);
     renderStackPush(&context->stackA, renderState);
     f32 parallax = renderCtxCalculateStereoParallax(g_titleScene, 0.33f);
-    FUN_002bf288(2, 2, 0x1FFB8, static_cast<s32>(parallax) - 56, -8, 1);
-    FUN_002bed3c();
+    texDrawTableEntryAtStoredOrigin(2, 2, 0x1FFB8, static_cast<s32>(parallax) - 56, -8, 1);
+    gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
     renderStackPop(&g_titleScene->stackA);
     renderCtxApplyTransforms(g_titleScene);

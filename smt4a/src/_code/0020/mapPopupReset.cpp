@@ -7,7 +7,7 @@ struct PopupState {
 
 extern "C" {
 extern PopupState* g_popupState;
-void FUN_002d868c(void);
+void mapDialogRequestsClear(void);
 
 void mapPopupReset(void)
 {
@@ -16,6 +16,6 @@ void mapPopupReset(void)
         popup->active = 0;
         popup->unk04 = 0;
     }
-    FUN_002d868c();
+    mapDialogRequestsClear();
 }
 }

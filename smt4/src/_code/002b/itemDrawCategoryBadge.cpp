@@ -20,7 +20,7 @@ const ItemCategoryView *dataTable08Sub0GetRecord(u32 id);
 const EquipmentCategoryView *dataTable08Sub1GetRecord(u32 id);
 u32 categoryIdFromIndex(u32 category);
 PadState *gameGetPlayerData();
-void FUN_002ae9ec(s32 layer, s32 group, u32 image, s32 x, s32 y, s32 priority);
+void texTableRecordCallWithParams(s32 layer, s32 group, u32 image, s32 x, s32 y, s32 priority);
 
 // Draw an item's category icon and optionally mark the currently equipped entry.
 void itemDrawCategoryBadge(u32 id, s32 x, s32 y, s32 priority, s32 markEquipped)
@@ -75,8 +75,8 @@ void itemDrawCategoryBadge(u32 id, s32 x, s32 y, s32 priority, s32 markEquipped)
         icon = 0x3FE;
         break;
     }
-    FUN_002ae9ec(2, 0x13, icon, x, y, priority);
+    texTableRecordCallWithParams(2, 0x13, icon, x, y, priority);
     if (equipped != 0)
-        FUN_002bf288(2, 0x13, 0x417, x, y, priority + 1);
+        texDrawTableEntryAtStoredOrigin(2, 0x13, 0x417, x, y, priority + 1);
 }
 }

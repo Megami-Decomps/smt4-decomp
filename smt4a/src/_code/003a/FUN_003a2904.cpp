@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0017efa4(int, int, int);
 int mathPositionHeadingDegrees(void);
-int FUN_0050d8e4(void);
+int __hardfp_atan2f(void);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(unsigned int, int);
 int nn_math_ARMv6_MTX34MultAsm(int, int, float *);
@@ -53,7 +53,7 @@ static float romwright_fabs_4(float value)
 extern int FUN_001a7a20(int, unsigned char *, unsigned int);
 extern unsigned int libc_strlen(unsigned char *);
 /* Supplied declaration required: mathPositionHeadingDegrees. */
-/* Supplied declaration required: FUN_0050d8e4. */
+/* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultAsm. */
 
 
@@ -132,7 +132,7 @@ void FUN_003a2904(void)
         temp_v2 = *(int *)(temp_v5 + 0xc);
         temp_v7 = *(float *)(g_lmapScene + 0x1c);
         mathPositionHeadingDegrees();
-        FUN_0050d8e4();
+        __hardfp_atan2f();
         temp_v7 = (temp_v7 + (float)temp_v24) * temp_v19;
         in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v18 <= temp_v7) << 0x1d);
         for (temp_v7 = romwright_fabs_4(temp_v7); (int)temp_v7 >= 0x47800000; temp_v7 = temp_v7 - 65536.0f) {
@@ -189,7 +189,7 @@ void FUN_003a2904(void)
         temp_v9 = *(float *)(g_lmapScene + 0x1c);
         mathPositionHeadingDegrees();
         temp_v7 = temp_v7 - *(float *)(g_lmapScene + 0x20);
-        FUN_0050d8e4();
+        __hardfp_atan2f();
         temp_v7 = temp_v7 * temp_v20;
         if (temp_v7 < temp_v18) {
           temp_v7 = temp_v7 + temp_v21;

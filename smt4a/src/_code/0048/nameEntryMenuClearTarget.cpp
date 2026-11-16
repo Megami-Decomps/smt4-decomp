@@ -17,7 +17,7 @@ typedef struct NameEntryMenu {
     /* 0x3AC */ u8 ui[0x20];
 } NameEntryMenu;
 
-extern s32 FUN_00163aa4(u8 *ui, f32 speed);
+extern s32 uiSpriteAdvanceAnimation(u8 *ui, f32 speed);
 extern NameBuffer *gameGetPlayerName(void);
 extern NameBuffer *gameDataGetPlayerName(void);
 extern NameBuffer *gameBlockGetArea221AA(void);
@@ -38,7 +38,7 @@ void nameEntryMenuClearTarget(NameEntryMenu *menu)
 {
     NameBuffer *buffer;
 
-    if (FUN_00163aa4(menu->ui, 1.0f) != 0) {
+    if (uiSpriteAdvanceAnimation(menu->ui, 1.0f) != 0) {
         if (menu->target == 0 || menu->target == -1) {
             buffer = gameGetPlayerName();
             nameBufferClear(buffer);

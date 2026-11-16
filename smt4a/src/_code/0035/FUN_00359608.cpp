@@ -6,12 +6,12 @@
 extern "C" {
 void *pathBuildWide(u32 id, u8 *buffer, s32 mode);
 u32 FUN_001886bc();
-s32 FUN_001883b0(RomOpenFile *file, u8 *buffer, s32 mode);
+s32 archivePathDeviceOpen(RomOpenFile *file, u8 *buffer, s32 mode);
 
 static s32 saveStreamOpen(RomOpenFile *file, u8 *buffer, s32 mode)
 {
     romOpenFileInitialize(file);
-    return FUN_001883b0(file, buffer, mode);
+    return archivePathDeviceOpen(file, buffer, mode);
 }
 
 /* Create the selected save record and open its stream, recording every completion result. */

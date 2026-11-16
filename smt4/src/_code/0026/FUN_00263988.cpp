@@ -53,7 +53,7 @@ struct TintColor {
 extern "C" {
 void asdModelSlotSetColor(s32 slot, u32 index, f32 r, f32 g, f32 b);
 void asdModelSlotSetTint(s32 slot, u32 bank, TintColor color);
-void FUN_0029c2cc(void *slot, s32 index);
+void modelRemoveFromSlotList(void *slot, s32 index);
 void modelSlotAttachChild(void *slot, s32 index);
 void asdModelResetAndSelectSecondaryMotion(void *model, s32 motion, f32 blend, f32 speed);
 void animOwnerSetScale(void *model, f32 speed);
@@ -74,7 +74,7 @@ void FUN_00263988(ModelSwitcher *switcher, s32 motion)
         return;
     }
     if (switcher->current != -1) {
-        FUN_0029c2cc(switcher->slots[switcher->current], 0);
+        modelRemoveFromSlotList(switcher->slots[switcher->current], 0);
         animOwnerSetScale(switcher->models[switcher->modelIndex], 0.0f);
         AnimationPlayer *old = switcher->slots[switcher->current]->player;
         old->speed = 0.0f;

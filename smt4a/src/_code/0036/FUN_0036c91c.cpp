@@ -7,7 +7,7 @@ struct SegmentedScrollbarAnchor {
     /* 0x04 */ s32 x;
 };
 extern "C" {
-void FUN_00185dd4(s32 layer, u32 group, u32 sprite, s32 x, s32 y,
+void texDrawTableEntrySized(s32 layer, u32 group, u32 sprite, s32 x, s32 y,
                   s32 width, s32 height, s32 priority);
 
 /* Draws scrollbar backing, directional arrows, and the shortened movable thumb. */
@@ -16,17 +16,17 @@ void FUN_0036c91c(SegmentedScrollbarAnchor *anchor, s32 x, s32 y, u32 upEnabled,
 {
     s32 hiddenRows = count - 3;
     if (hiddenRows > 0) {
-        FUN_001835b4(2, 46, 57, anchor->x + x, y, 100);
-        FUN_001835b4(2, 46, 62, anchor->x + x, y, 100);
+        texDrawTableEntryAtStoredOrigin(2, 46, 57, anchor->x + x, y, 100);
+        texDrawTableEntryAtStoredOrigin(2, 46, 62, anchor->x + x, y, 100);
         s32 upArrow = upEnabled != 0 ? 60 : 58;
-        FUN_001835b4(2, 46, upArrow, anchor->x + x, y, 101);
+        texDrawTableEntryAtStoredOrigin(2, 46, upArrow, anchor->x + x, y, 101);
         s32 downArrow = downEnabled != 0 ? 61 : 59;
-        FUN_001835b4(2, 46, downArrow, anchor->x + x, y, 101);
+        texDrawTableEntryAtStoredOrigin(2, 46, downArrow, anchor->x + x, y, 101);
         u32 thumb = thumbActive != 0 ? 64 : 63;
         TextureTableEntryIV *sprite = asdTMTexTableEntryAt(46, thumb);
         s32 height = sprite->placement->height;
         s32 step = height / 32;
-        FUN_00185dd4(2, 46, thumb, anchor->x + x, step * position + y,
+        texDrawTableEntrySized(2, 46, thumb, anchor->x + x, step * position + y,
             sprite->placement->width, height - step * hiddenRows, 101);
     }
 }

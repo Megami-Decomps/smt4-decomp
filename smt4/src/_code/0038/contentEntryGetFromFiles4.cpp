@@ -28,9 +28,9 @@ typedef struct Entry00387790 {
     /* 0x00 */ u8 data[0x10];
 } Entry00387790;
 
-s32 FUN_002ac12c(ContentFile00387790 *file);
-Row00387790 *FUN_002ac0f8(ContentFile00387790 *file);
-u32 FUN_002ac0c4(ContentFile00387790 *file);
+s32 packageEntryIsLoaded(ContentFile00387790 *file);
+Row00387790 *packageEntryGetDirectory(ContentFile00387790 *file);
+u32 packageEntryGetFileCount(ContentFile00387790 *file);
 void *dataTableFileGetTable(u32 file, s32 slot);
 s32 dataTableGetCount(void *table);
 Entry00387790 *dataTableGetEntries(void *table);
@@ -44,9 +44,9 @@ Entry00387790 *contentEntryGetFromFiles4(Content00387790 *content, s32 index)
     for (fileIndex = 0; fileIndex < content->fileCount; fileIndex++) {
         ContentFile00387790 *file = &content->files[fileIndex];
 
-        if (FUN_002ac12c(file) != 0) {
-            Row00387790 *rows = FUN_002ac0f8(file);
-            u32 rowCount = FUN_002ac0c4(file);
+        if (packageEntryIsLoaded(file) != 0) {
+            Row00387790 *rows = packageEntryGetDirectory(file);
+            u32 rowCount = packageEntryGetFileCount(file);
             u32 row;
 
             for (row = 0; row < rowCount; row++) {

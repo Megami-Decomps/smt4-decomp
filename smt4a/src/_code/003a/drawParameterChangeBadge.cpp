@@ -5,11 +5,11 @@
 extern "C" {
 u32 requestKindToId(u32 kind);
 s32 textFormatBuffer(char *output, const char *format, ...);
-void FUN_0017ffa8(u32 screen, u32 table, s32 index, u32 x, u32 y, u32 layer);
+void texTableRecordCallWithParams(u32 screen, u32 table, s32 index, u32 x, u32 y, u32 layer);
 void drawSetColorFromRGBA8(u32 color);
 void FUN_00180310(u32 screen, s32 x, s32 y, s32 mode, s32 font, s32 layer,
                   const char *format, ...);
-void FUN_00183bb0();
+void gxResetColorQuadToWhite();
 
 void drawParameterChangeBadge(u32 kind, s32 amount, s32 x, s32 y, s32 layer)
 {
@@ -25,13 +25,13 @@ void drawParameterChangeBadge(u32 kind, s32 amount, s32 x, s32 y, s32 layer)
     }
     if (kind == 14) {
         drawSetColorFromRGBA8(color);
-        FUN_001835b4(2, 11, 0x3f5, x, y, layer);
-        FUN_0017ffa8(2, 11, 0x41e, x, y, layer);
-        FUN_00183bb0();
+        texDrawTableEntryAtStoredOrigin(2, 11, 0x3f5, x, y, layer);
+        texTableRecordCallWithParams(2, 11, 0x41e, x, y, layer);
+        gxResetColorQuadToWhite();
         return;
     }
-    FUN_001835b4(2, 11, 0x3f5, x, y, layer);
-    FUN_0017ffa8(2, 11, icon, x, y, layer);
+    texDrawTableEntryAtStoredOrigin(2, 11, 0x3f5, x, y, layer);
+    texTableRecordCallWithParams(2, 11, icon, x, y, layer);
     drawSetColorFromRGBA8(color);
     const TextureTableEntryIV *info = asdTMTexTableEntryAt(11, 0x402);
     FUN_00180310(2, info->x + x, info->y + y, 0, 1, layer + 1, sign);
@@ -40,6 +40,6 @@ void drawParameterChangeBadge(u32 kind, s32 amount, s32 x, s32 y, s32 layer)
         amount = -(u32)amount;
     }
     FUN_00180310(2, info->x + x, info->y + y, 0, 1, layer + 1, "%d", amount);
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
 }
 }

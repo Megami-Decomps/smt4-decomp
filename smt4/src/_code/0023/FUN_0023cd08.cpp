@@ -19,7 +19,7 @@ static inline s32 findAnchorMember(const BtlEntry *entry, s16 id)
 
 extern "C" {
 BtlEntry *btlMainFindEntryByListedId(BtlMainState *, s32);
-BattleAnchorSource *FUN_0027da30(BtlMainState *, s32);
+BattleAnchorSource *btlFindEntryBlockByMemberId(BtlMainState *, s32);
 void enemyDrawCalcVerticalOffset(const EnemyDrawOffsetOwner *, BattleVector3 *, f32);
 const BattleVector3 *FUN_002d8c3c(void *);
 Table00Record *dataTable00FindById(u32);
@@ -33,8 +33,8 @@ BattleVector3 FUN_0023cd08(BtlMainState *state, s32 index, s32 forceEnemy)
         s32 part = entry ? findAnchorMember(entry, action->memberId) : -1;
         if (part < 0)
             part = 0;
-        BattleAnchorSource *source = FUN_0027da30(state, index);
-        const EnemyDrawOffsetOwner *owner = reinterpret_cast<const EnemyDrawOffsetOwner *>(FUN_0027d9e8(state, source->parts[part]));
+        BattleAnchorSource *source = btlFindEntryBlockByMemberId(state, index);
+        const EnemyDrawOffsetOwner *owner = reinterpret_cast<const EnemyDrawOffsetOwner *>(idSlotsFindEntryById(state, source->parts[part]));
         enemyDrawCalcVerticalOffset(owner, &position, action->geometry.scale);
         position.x += action->geometry.position[0];
         position.y += action->geometry.position[1];
@@ -42,7 +42,7 @@ BattleVector3 FUN_0023cd08(BtlMainState *state, s32 index, s32 forceEnemy)
     } else {
         position = *FUN_002d8c3c(state->arrangement.file);
         position.z += 2.0f;
-        BattleAnchorSource *source = FUN_0027da30(state, index);
+        BattleAnchorSource *source = btlFindEntryBlockByMemberId(state, index);
         u8 kind = dataTable00FindById(source->id)->arrangement.first;
         f32 height = 0.0f;
         if (kind == 0)

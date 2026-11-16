@@ -12,7 +12,7 @@ typedef struct EffectTextResult {
 } EffectTextResult;
 
 void nodeListOwnerFree(void *owner);
-void FUN_00247240(EffectTextRequest *request);
+void effectEditorObjectDestroy(EffectTextRequest *request);
 void FUN_002f82ac(EffectTextRequest *request);
 EffectTextRequest *effMenuCreate(void *owner, u32 size);
 u32 FUN_00318cac(EffectTextRequest *request);
@@ -30,7 +30,7 @@ void FUN_002430c8(u32 unused, u32 size, EffectTextResult *result)
         result->extra = FUN_00318cac(g_effectEditor.textRequest.request);
         FUN_003241c4(g_effectEditor.textRequest.request, result->body);
         if (result->state == 1) {
-            FUN_00247240(g_effectEditor.textRequest.request);
+            effectEditorObjectDestroy(g_effectEditor.textRequest.request);
             g_effectEditor.textRequest.request = NULL;
             nodeListOwnerFree(g_effectEditor.textRequest.owner);
             g_effectEditor.textRequest.owner = NULL;

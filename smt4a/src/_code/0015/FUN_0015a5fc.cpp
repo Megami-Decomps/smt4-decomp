@@ -15,7 +15,7 @@ extern void FUN_00170474(s32 a);
 extern void nn_applet_CTR_detail_OpenSession(void);
 extern void nn_applet_CTR_detail_CloseSession(void);
 extern u32 FUN_00171660(s32 a);
-extern void FUN_0016e800(u32 result, u32 site);
+extern void sysReportCheckFailure(u32 result, u32 site);
 extern void FUN_00170414(s32 a);
 extern void FUN_00170ebc(s32 a);
 extern u32 FUN_001715d0(u32 a, u32 b, u32 c);
@@ -43,7 +43,7 @@ u32 FUN_0015a5fc(u32 a, u32 b, u32 c)
             break;
         }
         if (result >> 31) {
-            FUN_0016e800(result, __current_pc());
+            sysReportCheckFailure(result, __current_pc());
         }
     }
     FUN_00170414(1);
@@ -59,7 +59,7 @@ u32 FUN_0015a5fc(u32 a, u32 b, u32 c)
         break;
     }
     if (result >> 31) {
-        FUN_0016e800(result, __current_pc());
+        sysReportCheckFailure(result, __current_pc());
     }
     FUN_00170e58();
     svcExitProcess();

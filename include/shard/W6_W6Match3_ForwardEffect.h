@@ -21,7 +21,7 @@ void FUN_0025921c(u32 a, u32 b);
 extern "C" {
 #endif
 
-u32 FUN_0025bed8(GroupedFileTables *owner, s32 kind, u32 tableIndex);
+u32 groupedFileTablesCountRecordsOfKind(GroupedFileTables *owner, s32 kind, u32 tableIndex);
 
 #ifdef __cplusplus
 }

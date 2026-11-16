@@ -3,14 +3,14 @@
 extern "C" {
 extern u8 DAT_0053f34c;
 s32 FUN_00189738(void *value, u32 size, u32 block);
-void FUN_0016e800(s32 result, u32 location);
+void sysReportCheckFailure(s32 result, u32 location);
 u32 FUN_00431270(void);
 }
 
 static __inline void checkLanguageResult(s32 result, u32 location)
 {
     if (nnResultIsFailure(result))
-        FUN_0016e800(result, location);
+        sysReportCheckFailure(result, location);
 }
 
 /* Use the configured language only if it is supported by the console's region. */

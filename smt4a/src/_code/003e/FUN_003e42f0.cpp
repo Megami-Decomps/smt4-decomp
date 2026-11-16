@@ -13,7 +13,7 @@ typedef struct AreaBits {
 s32 gameFlagIsSet(u32 flag);
 AreaBits *gameDataBlockGetArea28350(void);
 u8 *gameDataBlockGetArea2D68(void);
-s32 FUN_003e4230(u32 id);
+s32 shopGetEntryAvailability(u32 id);
 
 /* Whether bit `id` of a bitset is set. */
 static u32 bitsetTest(const u8 *bits, u32 id)
@@ -41,7 +41,7 @@ u32 FUN_003e42f0(void)
                 return 1;
             }
         } else if ((s32)dataFindKeyedRecordWithOverrides(id) != 0 &&
-                   (bitsetTest(gameDataBlockGetArea2D68(), id) || FUN_003e4230(id) != 2)) {
+                   (bitsetTest(gameDataBlockGetArea2D68(), id) || shopGetEntryAvailability(id) != 2)) {
             bitsetSet(gameDataBlockGetArea28350()->known, id);
             bitsetSet(gameDataBlockGetArea28350()->marked, id);
             return 1;

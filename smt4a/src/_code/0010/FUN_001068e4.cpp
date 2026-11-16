@@ -49,7 +49,7 @@ extern int DAT_005949dc; /* 0x5949dc */
 /* Supplied declaration required: FUN_00106a5c. */
 /* Supplied declaration required: FUN_0016cd18. */
 extern int fsArchiveGetWorkspaceSize(unsigned int, unsigned int *, unsigned int, unsigned int, unsigned int);
-extern int FUN_001a0380(unsigned int);
+extern int fsUnmountByName(unsigned int);
 extern unsigned int rt_malloc(void);
 /* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
@@ -140,7 +140,7 @@ LAB_001069c6:
     if (temp_v1 >= 0) {
       temp_v1 = temp_v12;
       FUN_00106a5c(temp_v12,temp_v13,temp_v14,param_4);
-      temp_v2 = FUN_001a0380((*(unsigned int *)&s__V_V_V_0058954c.u1[0]));
+      temp_v2 = fsUnmountByName((*(unsigned int *)&s__V_V_V_0058954c.u1[0]));
       if (-1 < temp_v2) {
         asdOperatorDeleteArray(temp_v8[0]);
         return temp_v1;

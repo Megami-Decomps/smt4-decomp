@@ -41,10 +41,10 @@ void FUN_00136df8()
         }
     }
     if ((s32)nnResultIsFailure(result))
-        FUN_002e3140(result);
+        resultHandleFailure(result);
     result = FUN_0019a364(&handle, g_asdFileMutex, 1);
     if ((s32)nnResultIsFailure(result))
-        FUN_002e3140(result);
+        resultHandleFailure(result);
     nn_os_LightEvent_Initialize(g_asdFileEvent, 0);
     FUN_0014287c();
     FUN_00146808();

@@ -5,8 +5,8 @@
 extern "C" {
 
 int textFormatBuffer(unsigned char *, unsigned char *, unsigned int, unsigned int);
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
+int libm_cosf(void);
+int libm_sinf(void);
 int mapPlayActorKindSound(char *, int);
 int distSpatial(void);
 int FUN_0033abb4(void);
@@ -14,8 +14,8 @@ int mathPositionHeadingDegrees(void);
 int FUN_00376fa4(unsigned int);
 int sequenceRequestDefer(int, unsigned int);
 int sysClearCachedFlag(void);
-int FUN_003d4ed8(int);
-int FUN_00408184(int, int);
+int soundActorStartOnFreeChannel(int);
+int gameCounterAddSaturating(int, int);
 int VectorSignedToFloat(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
@@ -53,8 +53,8 @@ extern int DAT_005f1be8; /* 0x5f1be8 */
 extern int gameFlagsGetBlock(void);
 extern int gameGetPlayerData(void);
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: mapPlayActorKindSound. */
 extern unsigned int gameDataGetTableValue(void);
 /* Supplied declaration required: distSpatial. */
@@ -64,9 +64,9 @@ extern unsigned int gameDataGetTableValue(void);
 /* Supplied declaration required: sequenceRequestDefer. */
 /* Supplied declaration required: sysClearCachedFlag. */
 extern int FUN_003d21dc(void);
-/* Supplied declaration required: FUN_003d4ed8. */
+/* Supplied declaration required: soundActorStartOnFreeChannel. */
 extern int gameDataFlagTestBit(unsigned int);
-/* Supplied declaration required: FUN_00408184. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 
 
 unsigned int FUN_0033b7c4(void)
@@ -108,7 +108,7 @@ unsigned int FUN_0033b7c4(void)
         DAT_005f17c8 = 1;
         temp_v4 = temp_v4 + DAT_005f17c6 * 0x188;
         pcVar7 = (char *)(temp_v4 + 0x34);
-        FUN_00408184(0x15,1);
+        gameCounterAddSaturating(0x15,1);
         if (*(char *)(temp_v4 + 0x84) == '\0') {
           DAT_005f18e8 = *(unsigned int *)(temp_v4 + 0xa4);
         }
@@ -162,8 +162,8 @@ unsigned int FUN_0033b7c4(void)
               temp_v7 = *(int *)(temp_v6 + 100) == 4;
             }
             if (temp_v7) {
-              FUN_001bc124();
-              FUN_001bbf0c();
+              libm_sinf();
+              libm_cosf();
               temp_v8 = *(int *)(g_lmapScene + 0x1c);
               distSpatial();
               if (temp_v8 < 0x42700000) goto LAB_0033baac;
@@ -178,16 +178,16 @@ LAB_0033baac:
               DAT_005f17c9 = 0;
               mathPositionHeadingDegrees();
               if (*(unsigned char *)(temp_v6 + 0x1af) < 2) {
-                FUN_001bc124();
-                FUN_001bbf0c();
+                libm_sinf();
+                libm_cosf();
               }
               if (*(char *)(temp_v6 + 0x1af) == '\x02') {
-                FUN_001bc124();
-                FUN_001bbf0c();
+                libm_sinf();
+                libm_cosf();
               }
               if (*(char *)(temp_v6 + 0x1af) == '\x03') {
-                FUN_001bc124();
-                FUN_001bbf0c();
+                libm_sinf();
+                libm_cosf();
               }
               mathPositionHeadingDegrees();
               temp_v8 = *(int *)(g_lmapScene + 0x4c);
@@ -239,7 +239,7 @@ LAB_0033baac:
                   }
                 }
                 if (temp_v13 < (int)((unsigned int)*(unsigned short *)(temp_v2 + 0x62) + temp_v14)) {
-                  FUN_003d4ed8(0x1000225);
+                  soundActorStartOnFreeChannel(0x1000225);
                   *(int *)(temp_v4 + 0x3d7c) = *(int *)(temp_v4 + 0x3d7c) - 1;
                   *(unsigned int *)(temp_v6 + 0xb8) = 0xb;
                   *(unsigned int *)(temp_v6 + 0xbc) = 0;

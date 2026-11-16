@@ -46,19 +46,19 @@ typedef struct CameraView {
 void FUN_002a09b4(const char *path, s32 flags);
 TitleIntroCamera *asdCameraLoadFromFile(const char *path);
 void modelSlotAttachChild(TitleIntroCamera *camera, s32 index);
-void *FUN_002c501c(void);
+void *asdCameraGetSavedRenderPairs(void);
 void FUN_002a8638(void *node, f32 *a, f32 *b, f32 *c, f32 *d);
 void FUN_002c1e30(void *camera, s32 flag, CameraView view);
 AsdMdlObject *asdMdlManagerCreateLoaded(const char *path, u32 flags);
 s32 modelHasLoadedAttachment(AsdMdlObject *model);
 void lightOwnerRegister(AsdMdlObject *model, u32 enabled);
-void FUN_0029bb14(void *node, f32 speed);
+void modelSetScale(void *node, f32 speed);
 s32 effTimelineIsDone(void *effect);
 void slotSetRequest(s32 slot, s32 value, s32 arg);
 s32 screenFadeIsBusy(void);
 void asdMdlManagerMarkDestroy(AsdMdlObject *model);
 void asdMdlManagerDestroy(AsdMdlObject *model);
-void FUN_0029c2cc(void *camera, s32 arg);
+void modelRemoveFromSlotList(void *camera, s32 arg);
 void gfxObjectDestroy(void *object);
 void asdModelSlotRelease(s32 slot);
 s32 padIsButtonPressed(u32 button);
@@ -79,7 +79,7 @@ void FUN_003bc9d0(TitleIntro *intro)
         FUN_002a09b4(DAT_00407dc4, 0);
         intro->camera = asdCameraLoadFromFile(DAT_00407db0);
         modelSlotAttachChild(intro->camera, 0);
-        void *camera = FUN_002c501c();
+        void *camera = asdCameraGetSavedRenderPairs();
         CameraView view;
         FUN_002a8638(intro->camera->node, &view.fov, &view.v[2], &view.v[0], &view.v[1]);
         f32 degrees = view.fov * 180.0f;
@@ -93,7 +93,7 @@ void FUN_003bc9d0(TitleIntro *intro)
             if ((model->flags & 4) != 0) {
                 model->flags &= ~4;
                 ((TitleIntroNode *)model->node)->baseSpeed = 1.0f;
-                FUN_0029bb14(model->node, ((TitleIntroNode *)model->node)->speed);
+                modelSetScale(model->node, ((TitleIntroNode *)model->node)->speed);
             }
         }
         intro->started = 1;
@@ -115,7 +115,7 @@ void FUN_003bc9d0(TitleIntro *intro)
             asdMdlManagerMarkDestroy(intro->model);
             asdMdlManagerDestroy(intro->model);
             intro->model = NULL;
-            FUN_0029c2cc(intro->camera, 0);
+            modelRemoveFromSlotList(intro->camera, 0);
             gfxObjectDestroy(intro->camera);
             intro->camera = NULL;
             asdModelSlotRelease(0);

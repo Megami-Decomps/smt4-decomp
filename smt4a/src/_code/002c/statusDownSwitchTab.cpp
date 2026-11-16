@@ -4,7 +4,7 @@
 extern "C" {
 extern StatusDownStateA *g_statusDown;
 s32 FUN_0035db94();
-void FUN_00230b9c(u32 direction, u32 selection, s32 mode);
+void statusDownSetSpriteMode(u32 direction, u32 selection, s32 mode);
 void ifTouchRegionRemove();
 void buttonHelpSetText(s32 channel, u32 color);
 void __aeabi_memset4(void *destination, s32 size, s32 value);
@@ -19,9 +19,9 @@ void statusDownSwitchTab(u32 tab)
     screen->unk515[0] = *currentTab;
     *currentTab = static_cast<u8>(tab);
     if (FUN_0035db94() < 0)
-        FUN_00230b9c(3, 0xffffffff, 0);
+        statusDownSetSpriteMode(3, 0xffffffff, 0);
     else if (FUN_0035db94() > 0)
-        FUN_00230b9c(2, 0xffffffff, 0);
+        statusDownSetSpriteMode(2, 0xffffffff, 0);
     StatusDownStateA *state = g_statusDown;
     for (s32 region = 0; region < state->touchRegionCount; ++region)
         ifTouchRegionRemove();

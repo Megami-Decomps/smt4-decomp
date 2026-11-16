@@ -47,7 +47,7 @@ void FUN_00176800(RenderSceneOwner *owner, void *traverser, s32 enabled);
 void FUN_0018e9d8(void *builder, void *tree);
 void FUN_00176e84(RenderSceneOwner *owner, u32 mask, s32 mode, s32 flags);
 void nw_gfx_RenderContext_ResetState_2B7478(void *context);
-void FUN_001575cc(void *context);
+void renderCtxResetFrameState(void *context);
 }
 
 /* Traverse the active model scene and reset the render context after submission. */
@@ -69,6 +69,6 @@ extern "C" void renderSceneUpdate(void)
     }
     FUN_00176e84(g_gfxSettings.owner, g_gfxSettings.mask, 2, 0);
     nw_gfx_RenderContext_ResetState_2B7478(context);
-    FUN_001575cc(g_renderCtx);
+    renderCtxResetFrameState(g_renderCtx);
     g_gfxSettings.pending = 0;
 }

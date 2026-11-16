@@ -15,7 +15,7 @@ void campCecDispatchMode(PlayerSummary *summary);
 void FUN_002f4014(PlayerSummary *summary);
 void linkHolderApplyFlag(void *link, s32 enabled);
 void campCecSetObjectValue(u32 value);
-void FUN_0031d890(void);
+void partyPanelRefreshFromSlotTable(void);
 s32 partyPanelExists(void);
 
 // Wait for a refresh command, then repopulate the character panel and StreetPass summary.
@@ -48,7 +48,7 @@ u32 FUN_00387bb8(CharacterRefreshWork *work)
         work->command = 0;
         work->ready = 1;
         campCecSetObjectValue(0);
-        FUN_0031d890();
+        partyPanelRefreshFromSlotTable();
         result = 3;
     } else {
         switch (work->command) {

@@ -10,7 +10,7 @@ int FUN_00284ee4(...);
 int FUN_002c8550(...);
 int FUN_0037e1b0(...);
 
-int FUN_001517b4(...);
+int padQueryLogicalKey(...);
 int eventQueueAddUniqueIfValid(...);
 int buttonHelpSetText(...);
 int FUN_0020b908(...);
@@ -18,7 +18,7 @@ int FUN_00228b04(int, int);
 int uniteStartOrQueueRequest(int);
 int resourceRunOperationIfUnblocked(...);
 int scrollOwnerSetValue(int, int);
-int FUN_002a4964(int, int);
+int scrollListSetSelectionTracked(int, int);
 int FUN_002a7b74(void);
 int flaggedEntrySetValueA(int, int);
 int arrayContainsU16(...);
@@ -42,7 +42,7 @@ typedef struct {
     unsigned int sp168; /* 0x168: local_168 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_001517b4. */
+/* Supplied declaration required: padQueryLogicalKey. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
@@ -56,7 +56,7 @@ extern int recordGetModeForId(int);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int FUN_002a4894(int);
 /* Supplied declaration required: scrollOwnerSetValue. */
-/* Supplied declaration required: FUN_002a4964. */
+/* Supplied declaration required: scrollListSetSelectionTracked. */
 /* Supplied declaration required: FUN_002a7b74. */
 extern unsigned int *objectApplyIfUnblocked(int);
 /* Supplied declaration required: FUN_002c8550. */
@@ -137,10 +137,10 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
       else if (temp_v6 == 0) {
         if (temp_v1 != '\0') {
           temp_v6 = 6;
-          FUN_001517b4(6,1);
+          padQueryLogicalKey(6,1);
           if (temp_v6 != 0) {
             if (temp_v5 < 2) {
-              FUN_002a4964(temp_v14,0);
+              scrollListSetSelectionTracked(temp_v14,0);
             }
             else {
               scrollOwnerSetValue(temp_v14,temp_v5 - 2);
@@ -171,7 +171,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
     return temp_v15;
   }
   temp_v4 = 0;
-  FUN_001517b4(0,1);
+  padQueryLogicalKey(0,1);
   temp_v16 = param_1 + 0x8b60;
   if (temp_v4 != 0 || (char)temp_v18 != '\0') {
     temp_v4 = resourceRunOperationIfUnblocked(temp_v14);
@@ -249,7 +249,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
   }
   else {
     temp_v4 = 9;
-    FUN_001517b4(9,1);
+    padQueryLogicalKey(9,1);
     piVar11 = (int *)(param_1 + 0x8e7c);
     if (temp_v4 != 0) {
       eventQueueAddUniqueIfValid(0x100020e);
@@ -294,12 +294,12 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
       } while( 1 );
     }
     temp_v4 = 10;
-    FUN_001517b4(10,1);
+    padQueryLogicalKey(10,1);
     if (temp_v4 != 0) {
       return temp_v15;
     }
     temp_v4 = 1;
-    FUN_001517b4();
+    padQueryLogicalKey();
     if (temp_v4 == 0) {
       return temp_v15;
     }

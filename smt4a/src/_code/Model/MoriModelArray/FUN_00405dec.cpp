@@ -5,10 +5,10 @@
 extern "C" {
 
 int _ZN4__rw15__rw_deallocateEPvji(int, int, int);
-int FUN_00178b04(int, unsigned char *, int);
+int asdMemoryAllocTraced(int, unsigned char *, int);
 int FUN_001a79e8(unsigned int, unsigned int);
 void _ZN4__rw10__rw_throwEiz(int kind, ...);
-int FUN_003fd7c0(unsigned int, unsigned int, int);
+int moriModelUnitStartMaterialAnimation(unsigned int, unsigned int, int);
 int FUN_003fd924(unsigned int, unsigned int, int);
 int animationSelectClip(unsigned int, unsigned int, int);
 int _ZN9Obj557b1813attachContentEP16UnitModelContentj(void);
@@ -26,10 +26,10 @@ extern unsigned char LAB_0040615c; /* 0x40615c */
 
 extern unsigned int *_ZN4__rw13__rw_allocateEji(int, unsigned int);
 /* Supplied declaration required: _ZN4__rw15__rw_deallocateEPvji. */
-/* Supplied declaration required: FUN_00178b04. */
+/* Supplied declaration required: asdMemoryAllocTraced. */
 /* Supplied declaration required: FUN_001a79e8. */
 /* Supplied declaration required: _ZN4__rw10__rw_throwEiz. */
-/* Supplied declaration required: FUN_003fd7c0. */
+/* Supplied declaration required: moriModelUnitStartMaterialAnimation. */
 /* Supplied declaration required: FUN_003fd924. */
 /* Supplied declaration required: animationSelectClip. */
 extern unsigned int FUN_003fdadc(unsigned int);
@@ -94,7 +94,7 @@ void FUN_00405dec(int param_1,int param_2)
   if (temp_v6 != 0) {
     do {
       temp_v0 = 0x26c;
-      FUN_00178b04(0x26c,&LAB_0040615c,0x4c);
+      asdMemoryAllocTraced(0x26c,&LAB_0040615c,0x4c);
       temp_v1 = 0;
       if (temp_v0 != 0) {
         temp_v1 = _ZN9Obj557b18C1Ev();
@@ -166,7 +166,7 @@ void FUN_00405dec(int param_1,int param_2)
     temp_v6 = temp_v5;
     FUN_001a79e8(temp_v5,temp_v1);
     if ((temp_v6 & 0xffff) != 0xffff) {
-      FUN_003fd7c0(temp_v5,temp_v6 & 0xffff,1);
+      moriModelUnitStartMaterialAnimation(temp_v5,temp_v6 & 0xffff,1);
     }
     temp_v6 = temp_v5;
     FUN_004ffab8(temp_v5,temp_v1);

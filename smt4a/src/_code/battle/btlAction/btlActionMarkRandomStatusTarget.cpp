@@ -5,7 +5,7 @@
 
 extern "C" {
 extern u64 g_btlTargetableMask;
-s16 FUN_004e9ae8(BtlMainStateA **context, s32 *candidates, s32 count, u32 mode);
+s16 btlAiFilterCandidatesByExclusionChance(BtlMainStateA **context, s32 *candidates, s32 count, u32 mode);
 u32 lcgRandomRange(s32 limit);
 
 // Choose and mark one random action target among combatants with the requested status bit.
@@ -18,7 +18,7 @@ void btlActionMarkRandomStatusTarget(BtlMainStateA **context, u32 status)
         if ((entry->flags & g_btlTargetableMask) && (entry->statusFlags & (1u << status)))
             candidates[count++] = entry->indexView.selectionIndex;
     }
-    s16 eligibleCount = FUN_004e9ae8(context, candidates, count, 1);
+    s16 eligibleCount = btlAiFilterCandidatesByExclusionChance(context, candidates, count, 1);
     u32 selected = lcgRandomRange((u16)(eligibleCount - 1));
     btlUnitGet(context)->selection.targeted[candidates[selected]] = 1;
 }

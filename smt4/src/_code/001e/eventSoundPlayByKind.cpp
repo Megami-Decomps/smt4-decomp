@@ -47,7 +47,7 @@ void eventSoundPlayByKind(u32 kind, s32 index, SoundActorQueuePosition position)
         sound = index + 0x1000257;
         break;
     }
-    FUN_00291e40(sound, position);
+    soundActorStartOnFreeChannel(sound, position);
 }
 
 } /* extern "C" */

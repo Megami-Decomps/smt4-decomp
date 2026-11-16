@@ -5,7 +5,7 @@ extern "C" {
 s32 randBetween(s32 minimum, s32 maximum);
 u32 randNextInRange(u32 limit);
 f32 phaseCosInterpolate(f32 angle);
-f32 FUN_002b70cc(f32 angle);
+f32 mathSinFixedAngle(f32 angle);
 }
 
 /* Refresh the quad coordinates and initialize each filter motion's phase and speed. */
@@ -29,7 +29,7 @@ extern "C" void _ZN9Obj42094c25refreshTextureCoordinatesEv(Filter4PolyView *filt
         f32 phase = (f32)randNextInRange(65535) * (1.0f / 65536.0f) * 256.0f;
         f32 *velocity = &filter->motions[index].x;
         f32 x = phaseCosInterpolate(phase);
-        f32 y = FUN_002b70cc(phase);
+        f32 y = mathSinFixedAngle(phase);
         velocity[0] = x;
         velocity[1] = y;
         velocity[2] = 0;

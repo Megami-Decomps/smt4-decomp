@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0013cab8(int, int, int);
 int dataTableGetEntries(void);
 int dataTableFileGetTable(...);
-int FUN_002e5924(int);
+int frameTexRequestFade(int);
 int FUN_003e0cd4(unsigned int *, int);
 int FUN_003ed6e8(int);
 int btlLoadBossAppearData(...);
@@ -43,11 +43,11 @@ extern unsigned int DAT_00573894; /* 0x573894 */
 extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_0013cab8. */
-extern int FUN_0013def0(unsigned int);
+extern int pairedAvailabilityGetState(unsigned int);
 extern int dataTableGetCount(unsigned int);
 /* Supplied declaration required: dataTableGetEntries. */
 /* Supplied declaration required: dataTableFileGetTable. */
-/* Supplied declaration required: FUN_002e5924. */
+/* Supplied declaration required: frameTexRequestFade. */
 /* Supplied declaration required: FUN_003e0cd4. */
 /* Supplied declaration required: FUN_003ed6e8. */
 extern int FUN_003f1230(int);
@@ -112,11 +112,11 @@ void FUN_003e1b80(unsigned int *param_1,int param_2,int param_3)
         if ((*(unsigned int *)(g_btlCamera + 0x64c) & 0x200) != 0) {
           return;
         }
-        temp_v0 = FUN_0013def0(0);
+        temp_v0 = pairedAvailabilityGetState(0);
         if (temp_v0 == 3) {
           FUN_0013cab8(0,10,0xff);
         }
-        temp_v0 = FUN_0013def0(1);
+        temp_v0 = pairedAvailabilityGetState(1);
         if (temp_v0 == 3) {
           FUN_0013cab8(1,10,0xff);
         }
@@ -154,7 +154,7 @@ LAB_003e1f28:
           temp_v7 = temp_v7 + 1;
         } while (temp_v7 < 0x36);
         if ((*puVar10 & DAT_00573888) == 0 && (*(unsigned int *)(param_2 + 0x45a4) & DAT_0057388c) == 0) {
-          FUN_002e5924(2);
+          frameTexRequestFade(2);
           temp_v5 = *puVar10 | DAT_00573888;
           *(unsigned int *)(param_2 + 0x45a4) = DAT_0057388c | *(unsigned int *)(param_2 + 0x45a4);
           *puVar10 = temp_v5;

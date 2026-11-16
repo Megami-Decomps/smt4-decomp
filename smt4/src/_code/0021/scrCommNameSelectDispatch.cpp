@@ -4,8 +4,8 @@ extern "C" {
 
 extern s32 textEncodeFontSlot(u32 kind, char *name);
 extern s32 FUN_0029ede8(u32 kind, u32 arg, u32 a2, s32 a3);
-extern char *FUN_002bd06c(u32 id);
-extern char *FUN_002be650(u32 id, s32 flag);
+extern char *dataTable01FindByIdWithAoc(u32 id);
+extern char *dataFindKindRecordWithAocOverrides(u32 id, s32 flag);
 extern char *aocEntryDataById(s32 id, u32 flag);
 extern char *aocIndexValueOrDefault(u32 id);
 extern char *libc_strcpy(char *dst, const char *src);
@@ -34,7 +34,7 @@ u32 scrCommNameSelectDispatch(void)
     case 0x21:
     case 0x22:
     case 0x23:
-        libc_strcpy(name, FUN_002be650(arg, 1));
+        libc_strcpy(name, dataFindKindRecordWithAocOverrides(arg, 1));
         textEncodeFontSlot(kind, name);
         break;
     case 8:
@@ -45,7 +45,7 @@ u32 scrCommNameSelectDispatch(void)
     case 13:
     case 14:
     case 15:
-        libc_strcpy(name, FUN_002bd06c((u16)arg));
+        libc_strcpy(name, dataTable01FindByIdWithAoc((u16)arg));
         textEncodeFontSlot(kind, name);
         break;
     case 0x10:

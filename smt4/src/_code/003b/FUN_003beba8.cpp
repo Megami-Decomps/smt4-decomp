@@ -27,7 +27,7 @@ struct AffinityRates {
 
 extern "C" {
 
-BattleCombatant* FUN_0027da30(BtlMainState* main, s32 id);
+BattleCombatant* btlFindEntryBlockByMemberId(BtlMainState* main, s32 id);
 BattleListEntry* btlMainFindEntryByListedId(BtlMainState* main, s32 id);
 f32 FUN_0022a690(s32 kind, f32 value);
 f32 FUN_003be670(s32 attacker, s32 defender);
@@ -45,8 +45,8 @@ s32 FUN_003beba8(s32 partyId, s32 mode, s32 attackerId, s32 defenderId, f32 powe
     f32 adjust = 0.0f;
     f32 scale = 1.0f;
     BtlMainState* main = btlGetMainState();
-    BattleCombatant* attacker = FUN_0027da30(main, attackerId);
-    BattleCombatant* defender = FUN_0027da30(main, defenderId);
+    BattleCombatant* attacker = btlFindEntryBlockByMemberId(main, attackerId);
+    BattleCombatant* defender = btlFindEntryBlockByMemberId(main, defenderId);
     if (attacker->flags & 4) scale = 0.8f;
 
     f32 magic = (f32)attacker->magic;

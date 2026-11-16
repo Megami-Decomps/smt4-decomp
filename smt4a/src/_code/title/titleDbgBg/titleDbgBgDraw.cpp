@@ -13,9 +13,9 @@ struct TitleDebugBackground {
 extern "C" {
 extern TitleDebugBackground *DAT_00589168;
 extern RenderCtxA *g_renderCtx;
-s32 FUN_001692ac(s32 mode, s32 flags);
+s32 renderCtxPackPassFlags(s32 mode, s32 flags);
 void efctSetSpeed(f32 speed);
-void FUN_00183bb0(void);
+void gxResetColorQuadToWhite(void);
 f32 FUN_00182884(s32 mode, void *display, f32 x, f32 y);
 
 /* Draws a white debug label on the title background. */
@@ -33,9 +33,9 @@ u32 titleDbgBgDraw(void)
     }
     {
         RenderCtxA *context = g_renderCtx;
-        renderCtxPushA(context, FUN_001692ac(1, 0));
+        renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
         efctSetSpeed(1.0f);
-        FUN_00183bb0();
+        gxResetColorQuadToWhite();
         renderStackPop(&g_renderCtx->stackA);
         if (jyoucyuGetTableEntry(0) != NULL) {
             drawDebugLabel("\x82\x6f\x82\x62\x83\x8d\x81\x5b\x83\x68", 296.0f, 194.0f);

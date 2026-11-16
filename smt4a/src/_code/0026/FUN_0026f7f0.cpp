@@ -27,7 +27,7 @@ extern CampWork *g_camp;
 SlotRecord *gameGetSlotRecord(s32 owner);
 void sysMemClear(void *memory, u32 size);
 void playerGetWords(u16 *words, s32 kind);
-void FUN_00203b40(void *view, u32 count, u32 a, u32 b, u32 c, u32 d);
+void gridNavigationConfigure(void *view, u32 count, u32 a, u32 b, u32 c, u32 d);
 void FUN_003d0bc0(s32 mode);
 
 /* Rebuild the camp list of every skill id the player and the party slots hold. */
@@ -62,7 +62,7 @@ void FUN_0026f7f0(void)
             }
         }
     }
-    FUN_00203b40(camp->listView, count, 11, 1, 1, 1);
+    gridNavigationConfigure(camp->listView, count, 11, 1, 1, 1);
     FUN_003d0bc0(9);
 }
 }

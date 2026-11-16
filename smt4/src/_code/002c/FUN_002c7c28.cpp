@@ -8,8 +8,8 @@ extern "C" {
 EffEmitter *effEmitterCreate(u32 count);
 void polygonTrackRebuildResources(ResourceEmitter *emitter, u32 id, const EmitterArguments *arguments);
 void objectBufferFree(void *buffer);
-void *FUN_002691d8(u16 kind, u32 count, EffEmitterDesc *descriptor);
-void *FUN_00268fc4(void *auxiliary);
+void *effBehaviorCreate(u16 kind, u32 count, EffEmitterDesc *descriptor);
+void *effGeomCloneHandle(void *auxiliary);
 
 /* Replaces the emitter's particle buffer with one sized for its particle count. */
 static __inline void particleCreateBuffer(EffEmitter *emitter, u32 kind, EffEmitterDesc *descriptor)
@@ -17,7 +17,7 @@ static __inline void particleCreateBuffer(EffEmitter *emitter, u32 kind, EffEmit
     if (emitter->particle.buffer != NULL) {
         objectBufferFree(emitter->particle.buffer);
     }
-    emitter->particle.buffer = FUN_002691d8(kind, emitter->maxCount, descriptor);
+    emitter->particle.buffer = effBehaviorCreate(kind, emitter->maxCount, descriptor);
 }
 
 /* Creates a particle emitter, its backing buffer and an independent copy of auxiliary data. */
@@ -38,7 +38,7 @@ EffEmitter *FUN_002c7c28(EmitterResourceRequest *request)
         emitter->particle.parameter->source = (EffParticleSource *)emitter->particle.buffer;
     }
     if (arguments->parameter->auxiliary != NULL) {
-        emitter->particle.parameter->auxiliary = FUN_00268fc4(arguments->parameter->auxiliary);
+        emitter->particle.parameter->auxiliary = effGeomCloneHandle(arguments->parameter->auxiliary);
     }
     effParticleParamCopy(emitter->particle.parameter, arguments->parameter);
     emitter->particle.parameter->type = arguments->parameter->type;

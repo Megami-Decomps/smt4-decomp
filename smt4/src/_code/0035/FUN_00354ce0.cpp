@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002bbb2c(unsigned int, int);
+int sysReportCheckFailure(unsigned int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_002bbb2c. */
+/* Supplied declaration required: sysReportCheckFailure. */
 extern unsigned int nn_fs_detail_FileBase_TryRead(unsigned int, int *, unsigned int, unsigned int);
 
 
@@ -25,7 +25,7 @@ int FUN_00354ce0(int param_1,unsigned int param_2,unsigned int param_3,int param
   temp_v1[0] = param_4;
   temp_v0 = nn_fs_detail_FileBase_TryRead(param_1 + 4,temp_v1,param_2,param_3);
   if ((int)temp_v0 < 0) {
-    FUN_002bbb2c(temp_v0,0x354d00);
+    sysReportCheckFailure(temp_v0,0x354d00);
   }
   return temp_v1[0];
 }

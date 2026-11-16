@@ -15,7 +15,7 @@ void sysPlaySe(u32 sound);
 void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 key, s32 mode);
 void buttonHelpSetText(s32 layer, u32 color);
 void FUN_0020acd8(BtlUiObjCA *panel, u32 selection, u32 mode);
-void FUN_0020ad6c(BtlUiObjCA *panel, s32 state, s32 enabled);
+void btlCommandMenuEnterMode(BtlUiObjCA *panel, s32 state, s32 enabled);
 void FUN_0021a9e8(BtlUiObjCA *panel);
 
 // Reset command icons and select the normal, disabled or special battle-panel transition.
@@ -51,13 +51,13 @@ void FUN_003363a8(BtlUiObjCA *panel, u32 selection, s8 first, u32 second)
             uiSpriteSetImageKeyframe(&work->icons[index], 0, 0);
     }
     if (work->disabled != 0) {
-        FUN_0020ad6c(panel, 0x2A, 1);
+        btlCommandMenuEnterMode(panel, 0x2A, 1);
         return;
     }
     if (btlScriptUnitHasFlags(btlGetMainState()) != 0 ||
         (btlGetMainState()->stateFlags64.bits & DAT_00573b88.blocked) != 0) {
         buttonHelpSetText(0, 0xF4F4F4FF);
-        FUN_0020ad6c(panel, 0x28, 1);
+        btlCommandMenuEnterMode(panel, 0x28, 1);
         if (ifTouchGetButtonHelpValue() != 0x3F && btlScriptUnitHasFlags(btlGetMainState()) != 0)
             sysPlaySe(0x3F);
         return;
@@ -70,6 +70,6 @@ void FUN_003363a8(BtlUiObjCA *panel, u32 selection, s8 first, u32 second)
     for (s32 index = 0; index < 8; ++index)
         uiSpriteSelectAnim(&work->children[index], 0x1B);
     work->savedState = 0x11;
-    FUN_0020ad6c(panel, 0x10, 1);
+    btlCommandMenuEnterMode(panel, 0x10, 1);
 }
 }

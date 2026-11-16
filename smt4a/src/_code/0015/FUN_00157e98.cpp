@@ -5,12 +5,12 @@
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 
 extern "C" {
-u32 FUN_001696f4(void);
+u32 gxIsStereoscopic3dEnabled(void);
 s32 FUN_0019a2ac(u32 *destination, const void *source, u32 command);
 s32 FUN_0019a270(u32 *destination, const void *source, u32 command);
 s32 asdModelCommitCommandRange(u32 *begin, u32 *end);
 s32 FUN_0017cdcc(u32 resource, u32 count);
-s32 FUN_001575cc(RenderCtxA *context);
+s32 renderCtxResetFrameState(RenderCtxA *context);
 extern RenderCtxA *g_renderCtx;
 
 u32 FUN_00157e98(ModelCommandPrefixA *model, const u8 *commandData)
@@ -20,7 +20,7 @@ u32 FUN_00157e98(ModelCommandPrefixA *model, const u8 *commandData)
 
     const void *longData = 0;
     const void *shortData = 0;
-    if (FUN_001696f4() == 1) {
+    if (gxIsStereoscopic3dEnabled() == 1) {
         switch (g_renderCtx->stereoMode) {
         case 0:
             longData = commandData + 0x248;
@@ -57,7 +57,7 @@ u32 FUN_00157e98(ModelCommandPrefixA *model, const u8 *commandData)
     const u8 *selectedResource = reinterpret_cast<const u8 *>(model)
         + static_cast<u32>(model->resourceIndex) * 0x4cu + 0x48u;
     FUN_0017cdcc(*reinterpret_cast<const u32 *>(selectedResource), model->count);
-    FUN_001575cc(g_renderCtx);
+    renderCtxResetFrameState(g_renderCtx);
     return 1;
 }
 }

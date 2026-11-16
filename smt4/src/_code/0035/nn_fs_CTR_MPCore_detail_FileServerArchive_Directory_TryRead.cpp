@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002bbb2c(unsigned int, int);
+int sysReportCheckFailure(unsigned int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_002bbb2c. */
+/* Supplied declaration required: sysReportCheckFailure. */
 extern unsigned int nn_fs_ipc_Directory_Read(unsigned int, int *, unsigned int, int);
 
 
@@ -25,7 +25,7 @@ unsigned int nn_fs_CTR_MPCore_detail_FileServerArchive_Directory_TryRead
   
   if (*(int *)(param_1 + 4) == 0) {
     temp_v1 = param_4;
-    FUN_002bbb2c(0xe0a046da,0x35649c);
+    sysReportCheckFailure(0xe0a046da,0x35649c);
   }
   temp_v1 = *(int *)(param_1 + 4);
   temp_v0 = nn_fs_ipc_Directory_Read((unsigned int)&temp_v1,param_2,param_3,param_4);

@@ -23,12 +23,12 @@ struct ModelStatePlayer {
 
 extern "C" {
 void FUN_00421858(ModelStatePlayer *player);
-void *FUN_0040619c(void *models, u32 index);
+void *ptrVectorAt(void *models, u32 index);
 u32 FUN_003fdadc(void);
 u32 ownerSlotSetText(void *model, u32 name);
 u32 FUN_001a79e8(void *model, u32 name);
 void FUN_003fd924(void *model, u32 motion, s32 mode, f32 start, f32 blend);
-void FUN_003fd7c0(void *model, u32 motion, s32 mode, f32 start);
+void moriModelUnitStartMaterialAnimation(void *model, u32 motion, s32 mode, f32 start);
 }
 
 /* The owner's model `index`, or NULL without an owner. */
@@ -37,7 +37,7 @@ static inline void *modelStateOwnerGetModel(ModelStateOwner *owner, u32 index)
     if (owner == NULL) {
         return NULL;
     }
-    return FUN_0040619c(owner->models, index);
+    return ptrVectorAt(owner->models, index);
 }
 
 #ifdef __cplusplus

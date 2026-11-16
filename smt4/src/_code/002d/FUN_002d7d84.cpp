@@ -3,13 +3,13 @@
 extern "C" {
 
 extern RenderCtx *g_titleScene;
-u32 FUN_002c5d80(u32 slot, u32 flags);
+u32 renderCtxPackPassFlags(u32 slot, u32 flags);
 void effMenuCallHandler(s32 handler, s32 value);
 
-/* Runs effect-menu handler 3 under render state FUN_002c5d80(1, 1) pushed on the title scene's first stack. */
+/* Runs effect-menu handler 3 under render state renderCtxPackPassFlags(1, 1) pushed on the title scene's first stack. */
 void FUN_002d7d84(void)
 {
-    renderCtxPushA(g_titleScene, FUN_002c5d80(1, 1));
+    renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 1));
     renderCtxSelectTexture(g_titleScene, 0);
     effMenuCallHandler(3, 1);
     renderStackPop(&g_titleScene->stackA);

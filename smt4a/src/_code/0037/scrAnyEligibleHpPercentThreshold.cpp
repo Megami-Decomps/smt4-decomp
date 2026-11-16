@@ -15,7 +15,7 @@ extern "C" {
 s32 scrGetArg(s32);
 void scrSetResult(s32);
 s32 btlResolveEntryChoice(s32);
-BtlCombatantEntryA* FUN_003eaf20(BtlMainStateA*);
+BtlCombatantEntryA* btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA*);
 
 /* Check eligible HP percentages, preserving the special entry's opposite comparison. */
 u32 scrAnyEligibleHpPercentThreshold(void)
@@ -23,7 +23,7 @@ u32 scrAnyEligibleHpPercentThreshold(void)
     s32 threshold = scrGetArg(0);
     u32 choice = scrGetArg(1);
     s32 first, count;
-    FUN_00301a08(btlResolveEntryChoice(choice), &first, &count);
+    btlGetEntryChoiceRange(btlResolveEntryChoice(choice), &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         const BtlCombatantEntryA* entry = &btlGetMainState()->entries[index];
         if (!(g_btlCandidateMasks.unavailable & entry->flags) &&
@@ -34,7 +34,7 @@ u32 scrAnyEligibleHpPercentThreshold(void)
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
-        const BtlCombatantEntryA* entry = FUN_003eaf20(btlGetMainState());
+        const BtlCombatantEntryA* entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL && hpPercent(entry->hp, entry->maxHp) <= threshold) {
             scrSetResult(1);
             return 1;

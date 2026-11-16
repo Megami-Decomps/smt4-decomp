@@ -19,7 +19,7 @@ u16 *devilGetRecord(void *source);
 int unitRecordBuild(u32 id, u8 *record);
 u32 getUnlockedSlotCount(u8 *record);
 void __aeabi_memset4(void *block, u32 size, u32 value);
-int FUN_00203b40(void *list, u32 count, s32 columns, s32 a, s32 b, s32 c);
+int gridNavigationConfigure(void *list, u32 count, s32 columns, s32 a, s32 b, s32 c);
 
 /* Rebuilds the unite list for the unit record of `source`: sizes it to the unlocked slot count and clears the slots. */
 void uniteListRebuild(void *source)
@@ -32,7 +32,7 @@ void uniteListRebuild(void *source)
     unitRecordBuild(*devilGetRecord(source), record);
     slotCount = getUnlockedSlotCount(record);
     unite->selection = 0;
-    FUN_00203b40(unite->list, slotCount, 8, 1, 1, 1);
+    gridNavigationConfigure(unite->list, slotCount, 8, 1, 1, 1);
     unite->listReady = 1;
     __aeabi_memset4(unite->slots, sizeof(unite->slots), 0xFFFFFFFF);
     unite->unk8EAC = 0;

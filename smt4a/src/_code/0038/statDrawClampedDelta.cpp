@@ -9,7 +9,7 @@ void textFormatBuffer(char *destination, const char *format, ...);
 void drawSetColorFromRGBA8(u32 color);
 const MessageDrawPosition *asdTMTexTableEntryAt(u32 group, u32 index);
 void FUN_00180310(s32 layer, s32 x, s32 y, s32 z, s32 mode, s32 depth, const char *format, ...);
-void FUN_00183bb0(void);
+void gxResetColorQuadToWhite(void);
 
 /* Show the clamped stat delta, coloring values at the bounds separately. */
 void statDrawClampedDelta(void *owner, u32 stat, s32 x, s32 y, s32 depth, s32 delta)
@@ -50,7 +50,7 @@ void statDrawClampedDelta(void *owner, u32 stat, s32 x, s32 y, s32 depth, s32 de
             value = -value;
         }
         FUN_00180310(2, position->x + x, position->y + y, 0, 1, depth + 1, "%d", value);
-        FUN_00183bb0();
+        gxResetColorQuadToWhite();
     }
 }
 }

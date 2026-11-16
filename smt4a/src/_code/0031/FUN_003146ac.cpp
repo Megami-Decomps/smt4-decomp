@@ -38,7 +38,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int gameFlagIsSet(void);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
-extern int FUN_001ba3d4(unsigned int);
+extern int flagValueRead(unsigned int);
 /* Supplied declaration required: aocFindPackagePayload. */
 /* Supplied declaration required: flagValueAdd. */
 /* Supplied declaration required: gamePackedFlagTest. */
@@ -168,7 +168,7 @@ LAB_00314950:
 LAB_00314960:
             if (temp_v10[temp_v9] != 0) {
               temp_v5 = itemGetStackLimit();
-              temp_v6 = FUN_001ba3d4(temp_v10[temp_v9]);
+              temp_v6 = flagValueRead(temp_v10[temp_v9]);
               temp_v2 = (*(unsigned int *)&s__a_a_00587f08.u1[0]);
               if (temp_v5 < temp_v6 + temp_v8) {
                 temp_v6 = temp_v5 - temp_v6;

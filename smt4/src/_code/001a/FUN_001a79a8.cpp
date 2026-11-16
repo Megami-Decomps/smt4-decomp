@@ -6,7 +6,7 @@
 extern "C" {
 
 int FUN_002881bc(void);
-int FUN_0028836c(void);
+int libm_sinf(void);
 
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
 #define ROMWRIGHT_SQRT_4_DEFINED
@@ -18,7 +18,7 @@ static float romwright_sqrt_4(float value)
 #endif
 extern int btlMainIsRunning(void);
 /* Supplied declaration required: FUN_002881bc. */
-/* Supplied declaration required: FUN_0028836c. */
+/* Supplied declaration required: libm_sinf. */
 
 
 void FUN_001a79a8(int param_1)
@@ -41,7 +41,7 @@ void FUN_001a79a8(int param_1)
   float temp_v13;
   float temp_v14;
   
-  temp_v0 = FUN_002c501c();
+  temp_v0 = asdCameraGetSavedRenderPairs();
   temp_v13 = 40.743664f;
   temp_v7 = -1.0f;
   temp_v10 = 1.0f;
@@ -61,7 +61,7 @@ void FUN_001a79a8(int param_1)
       *(unsigned int *)(param_1 + 0x28) = 0x43000000;
     }
     else {
-      FUN_0028836c();
+      libm_sinf();
       *(float *)(param_1 + 0x28) = temp_v3 * temp_v13;
       if (temp_v7 * temp_v4 - temp_v6 * temp_v2 < temp_v6) {
         *(float *)(param_1 + 0x28) = -*(float *)(param_1 + 0x28);
@@ -92,7 +92,7 @@ void FUN_001a79a8(int param_1)
         *(unsigned int *)(param_1 + 0x28) = 0x43000000;
       }
       else {
-        FUN_0028836c();
+        libm_sinf();
         *(float *)(param_1 + 0x28) = temp_v4 * temp_v13;
         if (temp_v7 * temp_v11 - temp_v10 * temp_v2 < temp_v10) {
           temp_v6 = -*(float *)(param_1 + 0x28);

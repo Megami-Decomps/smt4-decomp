@@ -12,7 +12,7 @@ extern GameStateView g_gameState;
 
 
 int rectangleForwardExpandedAlt(...);
-int FUN_00296dc4(unsigned char *, unsigned char *);
+int gxEmitColoredQuad(unsigned char *, unsigned char *);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -44,7 +44,7 @@ static float romwright_sqrt_4(float value)
 }
 #endif
 /* Supplied declaration required: rectangleForwardExpandedAlt. */
-/* Supplied declaration required: FUN_00296dc4. */
+/* Supplied declaration required: gxEmitColoredQuad. */
 
 
 void FUN_002005ec(void)
@@ -81,12 +81,12 @@ void FUN_002005ec(void)
           temp_v0 = (&DAT_0049e45c)[temp_v1];
         }
         if (temp_v0 == '\x01') {
-          FUN_00296dc4(temp_v6[temp_v1 & 3],temp_v6[temp_v1 & 3]);
+          gxEmitColoredQuad(temp_v6[temp_v1 & 3],temp_v6[temp_v1 & 3]);
         }
       }
       else {
 LAB_002006a4:
-        FUN_00296dc4(temp_v6[temp_v1 & 3],temp_v6[temp_v1 & 3]);
+        gxEmitColoredQuad(temp_v6[temp_v1 & 3],temp_v6[temp_v1 & 3]);
       }
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < DAT_00446fec);
@@ -106,12 +106,12 @@ LAB_002006a4:
           temp_v0 = (&DAT_0049e65c)[temp_v1];
         }
         if (temp_v0 == '\x01') {
-          FUN_00296dc4(temp_v6[temp_v1 & 3],temp_v6[temp_v1 & 3]);
+          gxEmitColoredQuad(temp_v6[temp_v1 & 3],temp_v6[temp_v1 & 3]);
         }
       }
       else {
 LAB_00200760:
-        FUN_00296dc4(temp_v6[temp_v1 & 3],temp_v6[temp_v1 & 3]);
+        gxEmitColoredQuad(temp_v6[temp_v1 & 3],temp_v6[temp_v1 & 3]);
       }
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < DAT_00446ff0);

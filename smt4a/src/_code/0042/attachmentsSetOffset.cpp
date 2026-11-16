@@ -29,7 +29,7 @@ typedef struct AttachOwner {
 } AttachOwner;
 
 void FUN_00401b50(void *model, AttachVec3 *position, f32 arg);
-void *FUN_0040619c(AttachGroup *group, s32 index);
+void *ptrVectorAt(AttachGroup *group, s32 index);
 void controllerSetDestination(void *controller, const AttachVec3 *destination);
 
 /* Sets the attachment offset and moves every attachment to the model position plus that offset. */
@@ -54,7 +54,7 @@ void attachmentsSetOffset(AttachOwner *owner, const AttachVec3 *offset)
     }
     count = owner->attachments->group->count;
     for (i = 0; i < count; i++) {
-        void *controller = FUN_0040619c(owner->attachments->group, i);
+        void *controller = ptrVectorAt(owner->attachments->group, i);
 
         if (controller != NULL) {
             controllerSetDestination(controller, &position);

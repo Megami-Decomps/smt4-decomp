@@ -15,7 +15,7 @@ extern "C" {
 extern CampEquipmentLists *g_camp;
 const CampPlayerEquipment *gameGetPlayerData();
 s32 flagValueIsPositive(u32);
-void FUN_0029f848(CampEquipmentGrid *, s32, s32, s32, s32, s32);
+void gridNavigationConfigure(CampEquipmentGrid *, s32, s32, s32, s32, s32);
 void FUN_00282f80(u32);
 void FUN_0029eb5c(CampEquipmentGrid *, s32);
 void objClearFlagPair(CampEquipmentGrid *);
@@ -75,7 +75,7 @@ void campRefreshEquipmentCategory(u32 category)
         if (flagValueIsPositive(id))
             items[count++] = id;
     }
-    FUN_0029f848(grid, count, 9, 1, 1, 0);
+    gridNavigationConfigure(grid, count, 9, 1, 1, 0);
     FUN_00282f80(category);
     s32 selected = 0;
     for (s32 i = 0; i < count + 1; ++i) {

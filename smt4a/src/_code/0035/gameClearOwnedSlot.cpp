@@ -16,7 +16,7 @@ typedef struct {
     u16 id;     /* 0x62 */
 } Owner;
 
-Slot *FUN_002613f0(int index);
+Slot *saveGetSelectedRecordSlot(int index);
 
 /* Clears the first of the 24 slots owned by `owner`. */
 void gameClearOwnedSlot(Owner *owner)
@@ -25,8 +25,8 @@ void gameClearOwnedSlot(Owner *owner)
     u16 id = owner->id;
 
     do {
-        if (FUN_002613f0(i)->id == id) {
-            Slot *slot = FUN_002613f0(i);
+        if (saveGetSelectedRecordSlot(i)->id == id) {
+            Slot *slot = saveGetSelectedRecordSlot(i);
 
             slot->id = 0;
             slot->unk02 = 0;

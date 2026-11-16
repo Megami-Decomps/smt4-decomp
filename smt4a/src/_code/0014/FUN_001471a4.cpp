@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e3140(void);
+int resultHandleFailure(void);
 int FUN_002fb0d4(unsigned char *, int *, unsigned char *, unsigned char **);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
@@ -28,7 +28,7 @@ extern unsigned char DAT_00646088; /* 0x646088 */
 extern unsigned int g_sharedHandleState; /* 0x6462a0 */
 
 extern unsigned int FUN_00159f64(unsigned int **);
-/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: FUN_002fb0d4. */
 
 
@@ -66,7 +66,7 @@ unsigned int FUN_001471a4(void)
     uStack_3c = 0;
     FUN_002fb0d4(&DAT_00646088,&temp_v4,&LAB_00158e68,&temp_v3);
     if ((int)puVar2 < 0) {
-      FUN_002e3140();
+      resultHandleFailure();
     }
   }
   return temp_v0;

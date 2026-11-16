@@ -29,8 +29,8 @@ struct ListMenuTail {
 };
 
 extern "C" {
-s32 FUN_001517b4(s32 button, s32 mode);
-void FUN_00163aa4(void *scroll, f32 amount);
+s32 padQueryLogicalKey(s32 button, s32 mode);
+void uiSpriteAdvanceAnimation(void *scroll, f32 amount);
 s32 eventQueueAddUniqueIfValid(u32 event);
 void uiSpriteSetKeyframe(void *sprite, s32 key, s32 arg);
 void uiSpriteSetImageKeyframe(void *sprite, s32 key, s32 arg);
@@ -53,8 +53,8 @@ s32 FUN_002a4894(void *list);
  * and the back/confirm/sort buttons. */
 void FUN_00403e2c(ListMenu *menu)
 {
-    FUN_00163aa4(menu->scrollA, 1.0f);
-    FUN_00163aa4(menu->scrollB, 1.0f);
+    uiSpriteAdvanceAnimation(menu->scrollA, 1.0f);
+    uiSpriteAdvanceAnimation(menu->scrollB, 1.0f);
     FUN_00228b04(menu->list, 1);
     menu->cursor = resourceRunOperationIfUnblocked(menu->list);
     menu->pageCount = FUN_002a4894(menu->list);
@@ -65,7 +65,7 @@ void FUN_00403e2c(ListMenu *menu)
     u32 handle = asdTMTexTableEntryAt(50, 139);
     if (FUN_003450d4(menu->list, handle, menu->area, menu->areaX, menu->areaY, menu->areaWidth, &touched, 0, 1))
         return;
-    if (FUN_001517b4(0, 1) || mode == 6) {
+    if (padQueryLogicalKey(0, 1) || mode == 6) {
         eventQueueAddUniqueIfValid(0x0100020E);
         FUN_00404974(menu);
         uiSpriteSetKeyframe(menu->backSprite, 1, 0);
@@ -73,13 +73,13 @@ void FUN_00403e2c(ListMenu *menu)
         FUN_004029f4(menu, 5, 7);
         return;
     }
-    if (FUN_001517b4(1, 1)) {
+    if (padQueryLogicalKey(1, 1)) {
         eventQueueAddUniqueIfValid(0x0100020E | 1);
         uiSpriteSetKeyframe(menu->confirmSprite, 2, 0);
         uiSpriteSetImageKeyframe(menu->confirmSprite, 1, 0);
         FUN_00212724();
         FUN_004029f4(menu, 2, 0);
-    } else if (FUN_001517b4(9, 1)) {
+    } else if (padQueryLogicalKey(9, 1)) {
         sortMenuAcquire(30, 0);
         FUN_0031f208(52);
         FUN_0031f208(27);

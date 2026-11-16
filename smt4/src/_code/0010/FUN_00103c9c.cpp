@@ -7,15 +7,15 @@ extern "C" {
 extern u8 g_appletBusyFlag;
 
 int FUN_002c3520(void);
-int FUN_002c3dfc(void);
+int fsUnmountByName(void);
 
-/* Runs FUN_002c3dfc between FUN_002c3520/FUN_002c3510; clears g_appletBusyFlag when its result has the sign bit clear (success). */
+/* Runs fsUnmountByName between FUN_002c3520/FUN_002c3510; clears g_appletBusyFlag when its result has the sign bit clear (success). */
 int FUN_00103c9c(void)
 {
     int result;
 
     FUN_002c3520();
-    result = FUN_002c3dfc();
+    result = fsUnmountByName();
     FUN_002c3510(result);
     if ((s32)(result & 0x80000000) >= 0) {
         g_appletBusyFlag = 0;

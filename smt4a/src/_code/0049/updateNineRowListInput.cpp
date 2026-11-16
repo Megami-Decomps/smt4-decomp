@@ -10,7 +10,7 @@ extern "C" {
 s32 resourceRunOperationIfUnblocked(FlaggedEntry *);
 s32 objectApplyIfUnblocked(FlaggedEntry *);
 u32 FUN_00228b04(FlaggedEntry *, u32);
-u32 FUN_001517b4(u32, u32);
+u32 padQueryLogicalKey(u32, u32);
 u32 flaggedEntryGetValueA(FlaggedEntry *);
 void scrollOwnerSetValue(FlaggedEntry *, s32);
 void eventQueueAddUniqueIfValid(u32);
@@ -36,13 +36,13 @@ void updateNineRowListInput(NineRowListInput *list)
     }
     if (list->top != previousTop)
         eventQueueAddUniqueIfValid(0x100020d);
-    if (FUN_001517b4(9, 0)) {
+    if (padQueryLogicalKey(9, 0)) {
         if (resourceRunOperationIfUnblocked(&list->grid) == 0)
             return;
         eventQueueAddUniqueIfValid(0x100020d);
         scrollOwnerSetValue(&list->grid, --list->top);
     }
-    if (FUN_001517b4(10, 0) && objectApplyIfUnblocked(&list->grid) >= 9) {
+    if (padQueryLogicalKey(10, 0) && objectApplyIfUnblocked(&list->grid) >= 9) {
         s32 top = resourceRunOperationIfUnblocked(&list->grid);
         s32 count = objectApplyIfUnblocked(&list->grid);
         if (top != count - 9 &&

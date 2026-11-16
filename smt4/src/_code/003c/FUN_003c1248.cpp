@@ -27,7 +27,7 @@ s32 flagWordTestBit(const void *owner, u32 bit);
 void objectFlagsClear(void *owner, u32 flags);
 void btlSummaryInitializeSavedDemon(BtlMainState *battle, BtlUnitData *data, PartyDamageUnitIV *unit, s32 slot);
 BtlEntry *FUN_002561d8(BtlMainState *battle, s32 index, u32 mode);
-void FUN_002505c0(s32 first, s32 second, u32 event, s32 fourth, s32 fifth, s32 sixth, s32 seventh);
+void btlQueueKeyedScalarReflectAction(s32 first, s32 second, u32 event, s32 fourth, s32 fifth, s32 sixth, s32 seventh);
 void FUN_003ae2d0(BtlUi *ui, s32 slot, s32 partySlot, s32 immediate);
 void FUN_00255e38(BtlMainState *battle, BtlUnitData *data, s32 kind, s32 target, s32 enabled);
 
@@ -50,7 +50,7 @@ void FUN_003c1248(s32 kind, s32 source, s32 target, s32 animate)
             s32 immediate = 1;
             if (animate > 0) {
                 immediate = 0;
-                FUN_002505c0(0, 0, 0x10001CF, 0, 0, 0, 0);
+                btlQueueKeyedScalarReflectAction(0, 0, 0x10001CF, 0, 0, 0, 0);
             }
             FUN_003ae2d0(g_btlUiBlock, entry->slot, party->stock[source], immediate);
         }

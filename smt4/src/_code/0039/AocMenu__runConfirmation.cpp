@@ -46,7 +46,7 @@ extern AocConfirmMain *g_aocMain;
 extern AocSystem *g_aocSystem;
 extern AocConfirmDisplay *g_aocDisplay;
 
-void FUN_002b8244(u32 value);
+void buttonHelpSetEnabled(u32 value);
 void ifTouchRegionClearAll(void *regions);
 void FUN_00233818(void *notice);
 u32 tableGroupFindEntryIndex(u32 resource, const char *name);
@@ -88,7 +88,7 @@ void AocMenu::runConfirmation()
         closeConfirmation(menu, 4);
         return;
     case 0:
-        FUN_002b8244(0);
+        buttonHelpSetEnabled(0);
         g_aocSystem->getPendingRequest();
         menu->flags &= ~0x10;
         g_aocMain->flags &= ~0x100;

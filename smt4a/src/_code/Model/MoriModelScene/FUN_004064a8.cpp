@@ -6,7 +6,7 @@
 
 extern "C" {
 u32 *setMinus1ReturnPtr(u32 *value);
-void *FUN_00178b04(u32 size, const char *file, u32 line);
+void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 void __aeabi_memcpy4(void *dest, const void *src, u32 size);
 }
 
@@ -59,7 +59,7 @@ struct UiModelNode : UiModelNodeHead {
         position.v[1] = 0;
     }
 
-    static void *operator new(u32 size, const char *file, u32 line) throw() { return FUN_00178b04(size, file, line); }
+    static void *operator new(u32 size, const char *file, u32 line) throw() { return asdMemoryAllocTraced(size, file, line); }
 };
 
 /* The lookup object's per slot lists of attached models. */

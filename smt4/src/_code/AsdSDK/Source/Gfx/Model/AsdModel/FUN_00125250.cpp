@@ -10,7 +10,7 @@ int FUN_001411bc(int, int);
 int FUN_00141a18(unsigned int, unsigned int, unsigned int, int);
 int _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_(void);
 int FUN_002c2968(unsigned int, unsigned int);
-int FUN_002c501c(void);
+int asdCameraGetSavedRenderPairs(void);
 int nw_gfx_Camera_UpdateCameraMatrix(...);
 int nw_gfx_SceneNode_IsCircularReference(void);
 
@@ -58,8 +58,8 @@ extern int DAT_004dad98; /* 0x4dad98 */
 extern int FUN_002af294(int, int);
 /* Supplied declaration required: _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_. */
 /* Supplied declaration required: FUN_002c2968. */
-/* Supplied declaration required: FUN_002c501c. */
-extern int FUN_002c5210(void);
+/* Supplied declaration required: asdCameraGetSavedRenderPairs. */
+extern int gxIsStereoscopic3dEnabled(void);
 /* Supplied declaration required: nw_gfx_Camera_UpdateCameraMatrix. */
 /* Supplied declaration required: nw_gfx_SceneNode_IsCircularReference. */
 
@@ -84,7 +84,7 @@ void FUN_00125250(unsigned int param_1,unsigned int param_2,int *param_3)
   temp_v5 = 0.017453292f;
   if (0 < g_asdLightCount) {
     if ((DAT_00464af8 & 1) != 0) {
-      temp_v0 = FUN_002c501c();
+      temp_v0 = asdCameraGetSavedRenderPairs();
       puVar2 = (unsigned int *)(**(romwright_code **)(**(int **)(temp_v3 + 0x260) + 0x10))();
       if ((puVar2 != (unsigned int *)0x0) && ((*puVar2 & 0x20000000) == 0)) {
         puVar2 = (unsigned int *)0x0;
@@ -495,8 +495,8 @@ LAB_00125b80:
       if (0 < DAT_004dad98) {
         nw_gfx_Camera_UpdateCameraMatrix(DAT_00464b1c);
       }
-      if ((0 < g_asdLightCount) && (temp_v3 = FUN_002c5210(), temp_v3 == 1)) {
-        FUN_002c501c();
+      if ((0 < g_asdLightCount) && (temp_v3 = gxIsStereoscopic3dEnabled(), temp_v3 == 1)) {
+        asdCameraGetSavedRenderPairs();
         FUN_00141a18(g_asdModelSlotArray3,DAT_00464b14,DAT_00464b18,DAT_00464b10);
       }
       DAT_00464afc = 0;

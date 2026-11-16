@@ -29,7 +29,7 @@ extern GameStateA g_gameState;
 void FUN_00227a70(void);
 void FUN_002a2e98(s32 map, u32 variant, u32 specialMap, u32 mode);
 void FUN_0033feb8(LmapMainStateA *state);
-void FUN_002df914(void);
+void lmapUpdateMapBgm(void);
 void FUN_00244ac8(void);
 void FUN_002747dc(void);
 void FUN_00364740(s32 map, u32 variant);
@@ -76,7 +76,7 @@ u32 FUN_00386720(void)
         return 0;
     case 5:
         state->radius = 200.0f;
-        FUN_002df914();
+        lmapUpdateMapBgm();
         state = (MapElevationView *)g_lmapMainState;
         state->active = 0;
         state->flags &= ~2;

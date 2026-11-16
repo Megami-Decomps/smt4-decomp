@@ -9,9 +9,9 @@ int FUN_0025b670(unsigned int);
 int itemDrawCategoryBadge(...);
 int textDrawString(...);
 int textFormatBuffer(...);
-int FUN_002be650(...);
-int FUN_002bed3c(void);
-int FUN_002bf380(...);
+int dataFindKindRecordWithAocOverrides(...);
+int gxResetColorQuadToWhite(void);
+int texDrawCompositeSprite(...);
 int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int renderCtxSelectStereoLayout(int);
@@ -38,13 +38,13 @@ extern unsigned char DAT_0049fd38; /* 0x49fd38 */
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002be650. */
-/* Supplied declaration required: FUN_002bed3c. */
-/* Supplied declaration required: FUN_002bf380. */
+/* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 
 
 unsigned int FUN_002ca09c(void)
@@ -75,7 +75,7 @@ unsigned int FUN_002ca09c(void)
   if ((*(int *)(g_mapDepart + 0x18) >= 2) && (*(int *)(g_mapDepart + 0x18) < 0xb)) {
     renderCtxSelectStereoLayout(g_titleScene);
     temp_v9 = g_titleScene;
-    temp_v1 = FUN_002c5d80(1,0);
+    temp_v1 = renderCtxPackPassFlags(1,0);
     piVar10 = (int *)(temp_v9 + 0x124c);
     temp_v7 = *piVar10;
     temp_v8 = piVar10[temp_v7 + 2];
@@ -87,7 +87,7 @@ unsigned int FUN_002ca09c(void)
     }
     if (*(int *)(temp_v2 + 0x18) == 5 || *(int *)(temp_v2 + 0x18) == 6) {
       efctSetSpeed();
-      FUN_002bed3c();
+      gxResetColorQuadToWhite();
       temp_v14 = g_mapDepart;
       if (*(char *)(g_mapDepart + 0x20) != '\0') {
         temp_v12 = 0.0f;
@@ -102,7 +102,7 @@ unsigned int FUN_002ca09c(void)
           temp_v11 = (unsigned long long)(unsigned int)(int)temp_v10;
           temp_v9 = 0x107;
           do {
-            FUN_002bf288(2,0xe,temp_v9,(int)temp_v11,0,0xb);
+            texDrawTableEntryAtStoredOrigin(2,0xe,temp_v9,(int)temp_v11,0,0xb);
             temp_v9 = temp_v9 + 1;
           } while (temp_v9 < 0x10b);
           temp_v3 = (*(unsigned int *)((unsigned char *)&g_gameState + 0xa8));
@@ -119,10 +119,10 @@ unsigned int FUN_002ca09c(void)
         }
         temp_v11 = (unsigned long long)(unsigned int)temp_v12;
         if (*(int *)(temp_v14 + 0xc) != 2) {
-          FUN_002bf380(2,0x1c,0x1a,(int)temp_v12,0,0xb);
+          texDrawCompositeSprite(2,0x1c,0x1a,(int)temp_v12,0,0xb);
         }
         else {
-          FUN_002bf380(2,0x1c,0x1e,(int)temp_v12,0,0xb);
+          texDrawCompositeSprite(2,0x1c,0x1e,(int)temp_v12,0,0xb);
         }
         temp_v2 = 0;
         if (temp_v2 < (*(short *)((unsigned char *)&DAT_0049fd38 + 0xa6))) {
@@ -150,13 +150,13 @@ unsigned int FUN_002ca09c(void)
               do {
                 temp_v12 = (float)VectorSignedToFloat((int)*(short *)(temp_v7 + 8),
                                                     (unsigned char)(in_fpscr >> 0x16) & 3);
-                FUN_002bf288(2,0x1c,temp_v4,(int)(temp_v12 + (float)temp_v11),(int)*(short *)(temp_v7 + 10),
+                texDrawTableEntryAtStoredOrigin(2,0x1c,temp_v4,(int)(temp_v12 + (float)temp_v11),(int)*(short *)(temp_v7 + 10),
                              0xb);
                 temp_v4 = temp_v4 + 1;
               } while (temp_v4 < 0x10bc);
             }
             temp_v7 = (int)*(short *)(temp_v9 + 0x49fd8c);
-            FUN_002be650(temp_v7,0);
+            dataFindKindRecordWithAocOverrides(temp_v7,0);
             textFormatBuffer(temp_v13,"%s",temp_v7);
             VectorSignedToFloat((int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
             VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v8 + 10),
@@ -166,25 +166,25 @@ unsigned int FUN_002ca09c(void)
             temp_v0 = *(short *)(temp_v9 + 0x49fdbc);
             temp_v12 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 8),
                                                 (unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_002bf288(2,0x1c,0x10fe,(int)(temp_v12 + (float)temp_v11),(int)*(short *)(temp_v1 + 10),0xb
+            texDrawTableEntryAtStoredOrigin(2,0x1c,0x10fe,(int)(temp_v12 + (float)temp_v11),(int)*(short *)(temp_v1 + 10),0xb
                         );
             temp_v10 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 8),
                                                 (unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v12 = (float)VectorSignedToFloat((int)*(short *)(temp_v16 + 8),
                                                 (unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_002bf288(2,0xd,0xd,(int)(temp_v10 + (float)temp_v11 + temp_v12),
+            texDrawTableEntryAtStoredOrigin(2,0xd,0xd,(int)(temp_v10 + (float)temp_v11 + temp_v12),
                          (int)*(short *)(temp_v16 + 10) + (int)*(short *)(temp_v1 + 10),0xb);
             temp_v12 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 8),
                                                 (unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v10 = (float)VectorSignedToFloat((int)*(short *)(temp_v5 + 8),
                                                 (unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_002bf288(2,0xd,(int)temp_v0 / 10,(int)(temp_v12 + (float)temp_v11 + temp_v10),
+            texDrawTableEntryAtStoredOrigin(2,0xd,(int)temp_v0 / 10,(int)(temp_v12 + (float)temp_v11 + temp_v10),
                          (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v1 + 10),0xb);
             temp_v10 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 8),
                                                 (unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v12 = (float)VectorSignedToFloat((int)*(short *)(temp_v15 + 8),
                                                 (unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_002bf288(2,0xd,(int)temp_v0 % 10,(int)(temp_v10 + (float)temp_v11 + temp_v12),
+            texDrawTableEntryAtStoredOrigin(2,0xd,(int)temp_v0 % 10,(int)(temp_v10 + (float)temp_v11 + temp_v12),
                          (int)*(short *)(temp_v15 + 10) + (int)*(short *)(temp_v1 + 10),0xb);
             temp_v2 = temp_v2 + 1;
           } while (temp_v2 < (*(short *)((unsigned char *)&DAT_0049fd38 + 0xa6)));

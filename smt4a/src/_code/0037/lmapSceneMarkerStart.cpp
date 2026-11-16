@@ -14,13 +14,13 @@ typedef struct LmapScene {
 
 extern LmapScene *g_lmapScene;
 
-extern void FUN_003fd7c0(u32 handle, u32 id, s32 mode, f32 delay);
+extern void moriModelUnitStartMaterialAnimation(u32 handle, u32 id, s32 mode, f32 delay);
 
 /* Starts `id` on the lmap scene's marker (no delay), if it has one. */
 void lmapSceneMarkerStart(u32 id)
 {
     if (g_lmapScene->marker != NULL) {
-        FUN_003fd7c0(g_lmapScene->marker->handle, id, 2, 0.0f);
+        moriModelUnitStartMaterialAnimation(g_lmapScene->marker->handle, id, 2, 0.0f);
     }
 }
 

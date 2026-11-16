@@ -11,9 +11,9 @@ int btlReflectQueueMemberAction(int, unsigned int, int, int);
 int FUN_002267b8(int, unsigned int, int);
 int FUN_002268d0(...);
 
-int FUN_002505c0(...);
+int btlQueueKeyedScalarReflectAction(...);
 int btlAdjustPropertyClamped(...);
-int FUN_0027da30(int, int);
+int btlFindEntryBlockByMemberId(int, int);
 int btlMainFindEntryByListedId(unsigned int *, int);
 int gameCounterAddSaturating(...);
 int FUN_002b7bca(int [2], int, int, unsigned char *);
@@ -48,10 +48,10 @@ extern unsigned char DAT_00439960; /* 0x439960 */
 /* Supplied declaration required: FUN_002267b8. */
 /* Supplied declaration required: FUN_002268d0. */
 /* Supplied declaration required: btlQueueReflectAction. */
-/* Supplied declaration required: FUN_002505c0. */
+/* Supplied declaration required: btlQueueKeyedScalarReflectAction. */
 /* Supplied declaration required: btlAdjustPropertyClamped. */
 extern short battleGetEntryHalfword(int, unsigned int);
-/* Supplied declaration required: FUN_0027da30. */
+/* Supplied declaration required: btlFindEntryBlockByMemberId. */
 extern int idSetFindSubjectIndex(unsigned int, int);
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 extern int FUN_00293230(unsigned int *);
@@ -277,7 +277,7 @@ FUN_002551ac(int param_1,unsigned int param_2,int param_3,int param_4,int param_
                                                (short)temp_v20),0,param_2);
                       temp_v14[0] = temp_v6;
                       temp_v6 = reinterpret_cast<int>(btlGetMainState());
-                      FUN_0027da30(temp_v6,(int)*(short *)(temp_v4 + 0x62));
+                      btlFindEntryBlockByMemberId(temp_v6,(int)*(short *)(temp_v4 + 0x62));
                       temp_v17 = temp_v6;
                       temp_v5 = reinterpret_cast<int>(btlGetMainState());
                       temp_v6 = idSetFindSubjectIndex(temp_v5,temp_v4);
@@ -360,7 +360,7 @@ FUN_002551ac(int param_1,unsigned int param_2,int param_3,int param_4,int param_
         temp_v14[0] = 1;
         temp_v14[1] = 0;
         temp_v15 = (unsigned int *)0x0;
-        FUN_002505c0(0,0,0x10001a0,0);
+        btlQueueKeyedScalarReflectAction(0,0,0x10001a0,0);
       }
     }
     puVar5 = temp_v18;

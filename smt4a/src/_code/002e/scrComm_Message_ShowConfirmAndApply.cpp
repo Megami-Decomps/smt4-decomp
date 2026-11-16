@@ -6,7 +6,7 @@ s32 scrWorkGetValue(s32 index);
 void scrWorkSetValue(s32 index, s32 value);
 s32 messageForwardDefaultMode(s32 buffer, s32 size, u32 value, s32 kind, s32 flag);
 void FUN_003dea6c(u32 arg, s32 a, s32 b);
-void FUN_001695a0(void);
+void messageSetScriptDisplayMode(void);
 s32 FUN_00417c24(u32 arg);
 s32 scrGetCommandFrame(void);
 u32 scrGetArg(u32 index);
@@ -24,7 +24,7 @@ u8 scrComm_Message_ShowConfirmAndApply(void)
     if (scrGetCommandFrame() == 0) {
         scrWorkSetValue(0, 0);
         FUN_003dea6c(arg, 0, 1);
-        FUN_001695a0();
+        messageSetScriptDisplayMode();
     }
     buffer = dataTableValueOrZero(0x1e);
     frame = scrWorkGetValue(0);

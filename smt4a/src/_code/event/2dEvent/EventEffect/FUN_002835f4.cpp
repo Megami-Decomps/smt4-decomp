@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00157558(int);
+int renderCtxSelectDisplayAreaForStereoMode(int);
 int FUN_001640cc(...);
 int efctSetSpeed(void);
 int renderCtxSelectTexture(...);
-int FUN_00183bb0(void);
+int gxResetColorQuadToWhite(void);
 int drawSetColorFromRGBA8(...);
 int renderCtxCalculateStereoParallax(...);
 int screenDrawShadedRect(...);
@@ -44,14 +44,14 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 extern unsigned int asdTMTexTableGetHeaderValue(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00157558. */
+/* Supplied declaration required: renderCtxSelectDisplayAreaForStereoMode. */
 /* Supplied declaration required: FUN_001640cc. */
 extern int jobGetWork(void);
 /* Supplied declaration required: efctSetSpeed. */
-extern int FUN_001692ac(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxSelectTexture. */
 extern int asdTMTexTableEntryAt(unsigned int, int);
-/* Supplied declaration required: FUN_00183bb0. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: screenDrawShadedRect. */
@@ -97,9 +97,9 @@ unsigned int FUN_002835f4(void)
     return 0;
   }
   temp_v1 = *(int *)(*(int *)(temp_v0 + 0x24) * 0x10 + 0x57f440);
-  FUN_00157558(g_renderCtx);
+  renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
   temp_v3 = g_renderCtx;
-  temp_v2 = FUN_001692ac(1,0);
+  temp_v2 = renderCtxPackPassFlags(1,0);
   piVar12 = (int *)(temp_v3 + 0x1258);
   temp_v6 = *piVar12;
   temp_v7 = piVar12[temp_v6 + 2];
@@ -238,7 +238,7 @@ unsigned int FUN_002835f4(void)
     efctSetSpeed();
     screenDrawShadedRect(0,0,400,0xf0,0x2e);
   }
-  FUN_00183bb0();
+  gxResetColorQuadToWhite();
   efctSetSpeed();
   temp_v0 = g_renderCtx;
   piVar12 = (int *)(g_renderCtx + 0x1258);

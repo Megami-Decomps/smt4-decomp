@@ -40,7 +40,7 @@ u32 FUN_00146314()
         }
         FUN_00157e98(target, parameters);
     }
-    effectRestoreSavedRenderPairs(g_renderCtx, FUN_00152f54());
+    effectRestoreSavedRenderPairs(g_renderCtx, asdCameraGetSavedRenderPairs());
     RegisteredHandle **end = g_handleRegistry->end;
     for (RegisteredHandle **holder = g_handleRegistry->begin; holder != end; ++holder) {
         holderFlushPending(*holder);

@@ -3,12 +3,12 @@
 #include "sys/FilePaths.h"
 #include "nn/Result.h"
 
-extern "C" s32 FUN_002bb5a4(RomOpenFile *file, const u8 *path, u32 mode);
+extern "C" s32 archivePathDeviceOpen(RomOpenFile *file, const u8 *path, u32 mode);
 
 static __inline s32 romFileOpen(RomOpenFile *file, const u8 *path, u32 mode)
 {
     romOpenFileInitialize(file);
-    return FUN_002bb5a4(file, path, mode);
+    return archivePathDeviceOpen(file, path, mode);
 }
 
 // Normalize a path, open the file when `mode` is 1 (the only supported mode) and report the resulting status.

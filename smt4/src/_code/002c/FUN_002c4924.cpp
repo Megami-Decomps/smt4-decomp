@@ -3,10 +3,10 @@
 
 extern "C" {
 
-extern void *FUN_0023d2ec(void);
+extern void *saveGetFlagRowTable(void);
 void FUN_002c4924(void)
 {
-    memClear(FUN_0023d2ec(), 9088);
+    memClear(saveGetFlagRowTable(), 9088);
 }
 
 } /* extern "C" */

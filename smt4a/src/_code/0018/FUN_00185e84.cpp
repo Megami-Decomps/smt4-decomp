@@ -5,12 +5,12 @@
 extern "C" {
 bool idIsAbove400(u32 id);
 u32 requestKindToId(u32 kind);
-void FUN_0017ffa8(u32 layer, u32 bank, u32 sprite, s32 x, s32 y, s32 depth);
+void texTableRecordCallWithParams(u32 layer, u32 bank, u32 sprite, s32 x, s32 y, s32 depth);
 s32 padGetMappedValue(u32 id);
 s32 dataTableCountRecordStages(u32 id);
 void drawSetColorFromRGBA8(u32 color);
 void FUN_00180310(u32 layer, s32 x, s32 y, u32 flags, u32 font, s32 depth, const char *format, ...);
-void FUN_00183bb0(void);
+void gxResetColorQuadToWhite(void);
 
 // Draw a categorized skill icon and its clamped, color-coded upgrade badge.
 void FUN_00185e84(u32 id, s32 x, s32 y, s32 depth, s32 showUpgrade, s32 adjustment)
@@ -32,7 +32,7 @@ void FUN_00185e84(u32 id, s32 x, s32 y, s32 depth, s32 showUpgrade, s32 adjustme
             sprite = record == NULL ? 1000 : requestKindToId(record->properties & 0x1F);
         }
     }
-    FUN_0017ffa8(2, 0xB, sprite, x, y, depth);
+    texTableRecordCallWithParams(2, 0xB, sprite, x, y, depth);
     if (showUpgrade != 0) {
         u32 upgrade = (padGetMappedValue(id) + adjustment) & 0xFF;
         s32 maximum = dataTableCountRecordStages(id);
@@ -44,7 +44,7 @@ void FUN_00185e84(u32 id, s32 x, s32 y, s32 depth, s32 showUpgrade, s32 adjustme
             FUN_00180310(2, position->x + x, position->y + y, 0, 1, depth + 1, "+");
             position = asdTMTexTableEntryAt(0xB, 0x401);
             FUN_00180310(2, position->x + x, position->y + y, 0, 1, depth + 1, "%d", upgrade - 1);
-            FUN_00183bb0();
+            gxResetColorQuadToWhite();
         }
     }
 }

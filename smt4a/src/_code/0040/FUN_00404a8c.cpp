@@ -48,35 +48,35 @@ void FUN_00404a8c(FramePanel *panel, s32 x, s32 y, f32 speed)
         }
         s32 shift = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.27f));
         for (s32 i = 0; i < 4; ++i)
-            FUN_001835b4(2, 50, icons[i], shift + x, y, 191);
+            texDrawTableEntryAtStoredOrigin(2, 50, icons[i], shift + x, y, 191);
     }
     if (panel->centerFrame != 0) {
         SpritePlacement *edge = asdTMTexTableEntryAt(50, 40);
         s32 shift = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.27f));
         s32 edgeY = edge->y + y;
         s32 edgeX = edge->x + (shift + x);
-        FUN_001835b4(2, 50, 34, edgeX, edgeY, 191);
-        FUN_001835b4(2, 50, 35, edgeX, edgeY, 191);
+        texDrawTableEntryAtStoredOrigin(2, 50, 34, edgeX, edgeY, 191);
+        texDrawTableEntryAtStoredOrigin(2, 50, 35, edgeX, edgeY, 191);
         SpritePlacement *corner = asdTMTexTableEntryAt(50, 41);
         shift = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.27f));
         s32 cornerY = corner->y + y;
         s32 cornerX = corner->x + (shift + x);
-        FUN_001835b4(2, 50, 37, cornerX, cornerY, 191);
-        FUN_001835b4(2, 50, 39, cornerX, cornerY, 191);
+        texDrawTableEntryAtStoredOrigin(2, 50, 37, cornerX, cornerY, 191);
+        texDrawTableEntryAtStoredOrigin(2, 50, 39, cornerX, cornerY, 191);
     } else {
         SpritePlacement *edge = asdTMTexTableEntryAt(50, 40);
         s32 shift = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.27f));
         s32 edgeY = edge->y + y;
         s32 edgeX = edge->x + (shift + x);
-        FUN_001835b4(2, 50, 37, edgeX, edgeY, 191);
-        FUN_001835b4(2, 50, 38, edgeX, edgeY, 191);
+        texDrawTableEntryAtStoredOrigin(2, 50, 37, edgeX, edgeY, 191);
+        texDrawTableEntryAtStoredOrigin(2, 50, 38, edgeX, edgeY, 191);
         if (panel->leftFrame) {
             SpritePlacement *corner = asdTMTexTableEntryAt(50, 41);
             shift = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.27f));
             s32 cornerY = corner->y + y;
             s32 cornerX = corner->x + (shift + x);
-            FUN_001835b4(2, 50, 34, cornerX, cornerY, 191);
-            FUN_001835b4(2, 50, 36, cornerX, cornerY, 191);
+            texDrawTableEntryAtStoredOrigin(2, 50, 34, cornerX, cornerY, 191);
+            texDrawTableEntryAtStoredOrigin(2, 50, 36, cornerX, cornerY, 191);
         }
     }
     efctSetSpeed(1.0f);

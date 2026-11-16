@@ -19,7 +19,7 @@ typedef struct Group0034008c {
     /* 0x10 */ Item0034008c *items[3];
 } Group0034008c;
 
-void FUN_0029bb14(f32 limit);
+void modelSetScale(f32 limit);
 
 /* Starts every item of the group that has not started yet: resets its target's progress and passes the target's limit on. */
 void groupStartItems(Group0034008c *group)
@@ -32,7 +32,7 @@ void groupStartItems(Group0034008c *group)
         if (item != NULL && (item->flags & 4) == 0) {
             item->flags |= 4;
             item->target->progress = 0.0f;
-            FUN_0029bb14(item->target->limit);
+            modelSetScale(item->target->limit);
         }
     }
 }

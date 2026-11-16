@@ -10,14 +10,14 @@ typedef struct EffectEditor {
 
 extern EffectEditor g_effectEditor;
 
-void FUN_00247240(void);
+void effectEditorObjectDestroy(void);
 void nodeListOwnerFree(void);
 
 /* Frees the editor's two owned objects, if present. */
 void effectEditorReleaseObjects(void)
 {
     if (g_effectEditor.unk40 != NULL) {
-        FUN_00247240();
+        effectEditorObjectDestroy();
         g_effectEditor.unk40 = NULL;
     }
     if (g_effectEditor.nodeListOwner != NULL) {

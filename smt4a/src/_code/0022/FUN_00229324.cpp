@@ -31,7 +31,7 @@ extern "C" {
 extern OverlayOwner g_engineCleanupOwner;
 
 s32 scriptProcessCreateWhenReady(OverlayScene *scene);
-u32 FUN_001692ac(s32 a, s32 b);
+u32 renderCtxPackPassFlags(s32 a, s32 b);
 void efctSetSpeed(f32 speed);
 u32 vec2GetYInt(void *vec);
 s32 uiSpriteGetCompletionState(const u8 *sprite);
@@ -46,9 +46,9 @@ u32 FUN_00229324(void)
     OverlayScene *scene = g_engineCleanupOwner.scene;
     if (scene == NULL || scriptProcessCreateWhenReady(scene) == 0)
         return 0;
-    FUN_00157558(g_renderCtx);
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     RenderCtxA *ctx = g_renderCtx;
-    u32 firstState = FUN_001692ac(1, 0);
+    u32 firstState = renderCtxPackPassFlags(1, 0);
     renderStackPushCounted(&ctx->stackA, firstState);
     ctx = g_renderCtx;
     if (scene->state == 13 && scene->step == 5 && uiSpriteGetCompletionState(scene->banner) == 0) {
@@ -58,13 +58,13 @@ u32 FUN_00229324(void)
                 offset = -240;
             renderStackSet(&ctx->stackB, packNibblesAndByte(6, 1, 0));
             if (offset > -240)
-                FUN_001835b4(2, 0x1D, 0x113, 0, offset, 0xF1);
-            FUN_001835b4(2, 0x1D, 0x114, 0, offset + 240, 0xF1);
+                texDrawTableEntryAtStoredOrigin(2, 0x1D, 0x113, 0, offset, 0xF1);
+            texDrawTableEntryAtStoredOrigin(2, 0x1D, 0x114, 0, offset + 240, 0xF1);
             renderStackSet(&g_renderCtx->stackB, packNibblesAndByte(6, 7, 0));
         }
         if (scene->timer >= 9) {
             efctSetSpeed(g_engineCleanupOwner.alpha);
-            FUN_001835b4(2, 0x1D, 0x115, 0, 0, 0xF2);
+            texDrawTableEntryAtStoredOrigin(2, 0x1D, 0x115, 0, 0, 0xF2);
             efctSetSpeed(1.0f);
         }
     }
@@ -72,7 +72,7 @@ u32 FUN_00229324(void)
     ctx = g_renderCtx;
     if (scene->state < 10) {
         if (scene->state != 0) {
-            u32 secondState = FUN_001692ac(1, 0);
+            u32 secondState = renderCtxPackPassFlags(1, 0);
             renderStackPushCounted(&ctx->stackA, secondState);
             FUN_004b0164(scene, vec2GetXInt(scene->position), vec2GetYInt(scene->position));
             renderStackPop(&g_renderCtx->stackA);

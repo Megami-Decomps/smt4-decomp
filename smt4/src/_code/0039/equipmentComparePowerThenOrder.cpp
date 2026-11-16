@@ -37,8 +37,8 @@ s32 equipmentComparePowerThenOrder(const u16 *left, const u16 *right)
     }
     s32 difference = leftPower - rightPower;
     if (difference == 0) {
-        s32 leftOrder = FUN_00230f44(left);
-        s32 rightOrder = FUN_00230f44(right);
+        s32 leftOrder = aocEntryGetSortOrder(left);
+        s32 rightOrder = aocEntryGetSortOrder(right);
         difference = leftOrder - rightOrder;
     }
     return difference;

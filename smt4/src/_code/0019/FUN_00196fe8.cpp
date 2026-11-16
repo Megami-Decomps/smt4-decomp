@@ -12,7 +12,7 @@ struct ConfigurationChoices {
 extern "C" {
 extern const char DAT_004028ec[];
 const SpriteInfo *asdTMTexTableEntryAt(u32 archive, s32 index);
-void FUN_002bf380(s32 layer, u32 archive, u32 image, s32 x, s32 y, s32 priority);
+void texDrawCompositeSprite(s32 layer, u32 archive, u32 image, s32 x, s32 y, s32 priority);
 s32 textFormatBuffer(char *destination, const char *format, ...);
 
 // Draw configuration choices with the selected background and horizontally centered labels.
@@ -26,10 +26,10 @@ void FUN_00196fe8(s32 count, s32 x, s32 y, s32 selected, const ConfigurationChoi
         u32 color;
         if (selected == index) {
             color = 0xff;
-            FUN_002bf380(2, 0x2f, 9, position->x + x, position->y + y, 0x1f);
+            texDrawCompositeSprite(2, 0x2f, 9, position->x + x, position->y + y, 0x1f);
         } else {
             color = 0xffffffff;
-            FUN_002bf380(2, 0x2f, 8, position->x + x, position->y + y, 0x1f);
+            texDrawCompositeSprite(2, 0x2f, 8, position->x + x, position->y + y, 0x1f);
         }
         char text[64];
         textFormatBuffer(text, DAT_004028ec, choices->labels[index]);

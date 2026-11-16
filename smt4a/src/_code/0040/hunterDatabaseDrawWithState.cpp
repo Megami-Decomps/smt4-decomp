@@ -6,21 +6,21 @@ struct HunterDatabaseDrawView {
     u8 state;
 };
 extern "C" {
-void FUN_00157558(RenderCtxA *);
+void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *);
 void efctSetSpeed(f32);
 void renderCtxResetColorScale(RenderCtxA *);
 void FUN_004058b0(HunterDatabaseDrawView *);
 extern RenderCtxA *g_renderCtx;
-u32 FUN_001692ac(u32, u32);
+u32 renderCtxPackPassFlags(u32, u32);
 
 // Draw the database with a temporary draw state, then restore blending and color.
 u32 hunterDatabaseDrawWithState(HunterDatabaseDrawView *work)
 {
     if (work->state == 0 || work->state == 1)
         return 0;
-    FUN_00157558(g_renderCtx);
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     RenderCtxA *context = g_renderCtx;
-    renderCtxPushA(context, FUN_001692ac(1, 0));
+    renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
     FUN_004058b0(work);
     efctSetSpeed(1.0f);
     renderStackPop(&g_renderCtx->stackA);

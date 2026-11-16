@@ -3,7 +3,7 @@
 extern "C" {
 
 AsdMdlObject *asdMdlObjectNew(void);
-void *FUN_002b2988(void *source, void *arg);
+void *asdModelRegisterImage(void *source, void *arg);
 void FUN_003289d8(AsdMdlNode *node, u32 param);
 void asdMdlObjectBuildBounds(AsdMdlObject *obj);
 void asdListAdd(u32 *list, AsdMdlObject *obj, s32 arg);
@@ -17,7 +17,7 @@ AsdMdlObject *asdMdlManagerCreateFromSourceB(void *source, void *arg, u32 param)
     AsdMdlObject *obj = asdMdlObjectNew();
 
     obj->node->param = param;
-    obj->node->data = FUN_002b2988(source, arg);
+    obj->node->data = asdModelRegisterImage(source, arg);
     FUN_003289d8(obj->node, param);
     asdMdlObjectBuildBounds(obj);
     asdListAdd(&g_asdMdlList, obj, 0);

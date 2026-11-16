@@ -105,7 +105,7 @@ void rectangleInitializeSelection(void *selection, s32 x, s32 y, s32 size);
 void FUN_003eb068(void *state);
 void drawParameterBlockClear(UiResourceParameters *packet);
 
-void FUN_002bd954(NaviSprite *sprite, u32 group, u32 image, UiResourceParameters *owner, u16 id, f32 scale);
+void uiSpriteStateInitFromSource(NaviSprite *sprite, u32 group, u32 image, UiResourceParameters *owner, u16 id, f32 scale);
 void timerStart(NaviSprite *sprite, s32 id, s32 arg);
 void uiInitializeEightTimerSet(void *timers);
 void memFill8(void *data, s32 value);
@@ -134,7 +134,7 @@ void NaviMain_InitInstance(NaviMainWork *work)
     paramsInit(&work->packet, sKeysFirst, sizeof(sKeysFirst), sKeysSecond, sizeof(sKeysSecond),
                NULL, 0, NULL, 0, sKeysFifth, sizeof(sKeysFifth));
     for (s32 i = 0; i < 5; i++) {
-        FUN_002bd954(&work->sprites[i], 0x1c, 0xfa1, &work->packet, 0x15, 1.0f);
+        uiSpriteStateInitFromSource(&work->sprites[i], 0x1c, 0xfa1, &work->packet, 0x15, 1.0f);
         timerStart(&work->sprites[i], 4, 0);
     }
     uiInitializeEightTimerSet(work->timers);

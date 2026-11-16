@@ -41,8 +41,8 @@ u32 dataTableGet(u32 table, u32 index);
 UniteTableRecord *dataTableGetEntries(u32 table);
 u32 dataTableGetCount(u32 table);
 s32 gamePackedFlagTest(u32 flagId);
-void FUN_00203b40(void *list, s32 count, s32 columns, s32 a, s32 b, s32 c);
-void FUN_002a4964(void *list, s32 value);
+void gridNavigationConfigure(void *list, s32 count, s32 columns, s32 a, s32 b, s32 c);
+void scrollListSetSelectionTracked(void *list, s32 value);
 void ifTouchRegionRemove(void);
 s32 objectApplyIfUnblocked(void *list);
 s16 FUN_001643b4(s32 category, s32 index);
@@ -52,7 +52,7 @@ s16 FUN_001643b4(s32 category, s32 index);
 void FUN_0028a2e8(s32 resetTouch)
 {
     UniteMenu *menu = g_unite;
-    UniteDraftState *draft = (UniteDraftState *)FUN_0026140c();
+    UniteDraftState *draft = (UniteDraftState *)saveGetUserSettingsBlock();
     void *list = menu->list;
     s32 a = resourceRunOperationIfUnblocked(list);
     s32 b = FUN_002a4894(list);
@@ -80,8 +80,8 @@ void FUN_0028a2e8(s32 resetTouch)
             menu->entryIndices[count++] = i;
         }
     }
-    FUN_00203b40(list, count, 8, 1, 0, 1);
-    FUN_002a4964(list, a + b);
+    gridNavigationConfigure(list, count, 8, 1, 0, 1);
+    scrollListSetSelectionTracked(list, a + b);
     if (resetTouch != 0) {
         for (i = 0; i < 8; i++) {
             menu->touchIds[i] = -1;

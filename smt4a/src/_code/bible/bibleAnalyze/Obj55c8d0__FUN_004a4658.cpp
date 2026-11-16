@@ -59,7 +59,7 @@ s32 textFormatBuffer(char *output, const char *format, ...);
 void buttonHelpSetText(const char *text, u32 color);
 void FUN_0032d0c8(s32 first, s32 second, u16 id, s32 fourth);
 void FUN_003343f0(u8 value);
-void FUN_004d05c4(void *controls, s32 kind, u32 flags, s32 count);
+void messageIdListSetRange(void *controls, s32 kind, u32 flags, s32 count);
 
 }
 
@@ -106,9 +106,9 @@ void Obj55c8d0::FUN_004a4658()
     s32 count = screen->listCount.count;
     if (screen->unk0860 != 0) {
         count = count < 10 ? count : 10;
-        FUN_004d05c4(screen->confirmation.controls, 0x13, 0x1030, count);
+        messageIdListSetRange(screen->confirmation.controls, 0x13, 0x1030, count);
     } else {
         count = count < 10 ? count : 10;
-        FUN_004d05c4(screen->confirmation.controls, 0x14, 0x40E, count);
+        messageIdListSetRange(screen->confirmation.controls, 0x14, 0x40E, count);
     }
 }

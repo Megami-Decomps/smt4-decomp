@@ -22,7 +22,7 @@ extern const char DAT_0052801c[];
 extern u32 g_btlUiBlock;
 extern u32 g_btlAux;
 
-ScriptRunState *FUN_00275bc8(void *resource, u32 entry);
+ScriptRunState *scrScriptProcessCreate(void *resource, u32 entry);
 s32 dialogIsActive(void);
 void dialogClose(s32 arg);
 void btlUiPanelStart(u32 block);
@@ -54,7 +54,7 @@ u32 FUN_003e69ac(ContinueState *continueState)
         break;
     case 2: {
         BtlMainStateA *battle = btlGetMainState();
-        continueState->script = FUN_00275bc8(continueState->resource, battle->helpMessages.context);
+        continueState->script = scrScriptProcessCreate(continueState->resource, battle->helpMessages.context);
         continueState->script->mode = 2;
         battle->stateFlags64.bits = battle->stateFlags64.bits & ~DAT_005715d0[1].whole & ~DAT_005715d0[2].whole;
         if (dialogIsActive() != 0) {

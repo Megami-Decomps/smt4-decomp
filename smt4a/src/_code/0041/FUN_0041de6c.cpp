@@ -26,7 +26,7 @@ int gameGlobalsQueueValues(...);
 int FUN_0038b5fc(...);
 int messageMainSetFlag(...);
 unsigned int saveLoadStartSave(int, unsigned char);
-int FUN_00408184(int, int);
+int gameCounterAddSaturating(int, int);
 int __aeabi_memcpy4(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -66,7 +66,7 @@ extern int byteTripleGetV1(void);
 /* Supplied declaration required: messageMainSetFlag. */
 extern int byteArr5Get4(void);
 /* Supplied declaration required: saveLoadStartSave. */
-/* Supplied declaration required: FUN_00408184. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
@@ -121,7 +121,7 @@ void FUN_0041de6c(int param_1)
     gameDataBlocksGetSaveData();
     FUN_002299b0();
     clockRecordStartSeconds();
-    FUN_00408184(0x20,1);
+    gameCounterAddSaturating(0x20,1);
     temp_v0 = gameDataBlocksGetSaveData();
     saveLoadStartSave(*(int *)(param_1 + 0x2f8) + 1,*(unsigned char *)(temp_v0 + 2));
     return;

@@ -53,7 +53,7 @@ extern "C" void FUN_00266fac(s32 mode, s32 id)
     if (mode != 0) {
         animation->id = id;
         if (g_gameState > 100) {
-            FUN_00291e40(0x10001FD, soundPositionFromWorld(g_deferredMapModels[id].position));
+            soundActorStartOnFreeChannel(0x10001FD, soundPositionFromWorld(g_deferredMapModels[id].position));
         }
         animation->position.x = 0.0f;
         animation->position.y = 20.0f;

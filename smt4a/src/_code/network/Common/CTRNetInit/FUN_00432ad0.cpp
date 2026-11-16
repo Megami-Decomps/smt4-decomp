@@ -12,7 +12,7 @@ bool FUN_00432ad0(void)
     s32 result = svcWaitSynchronization1(DAT_00588118, 0);
     bool failed = nnResultIsFailure(result);
     if (failed) {
-        FUN_002e3140(result, failed);
+        resultHandleFailure(result, failed);
     }
     nnResultFields code;
     code.value = result;

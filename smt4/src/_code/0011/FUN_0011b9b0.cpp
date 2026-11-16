@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002bbb2c(...);
+int sysReportCheckFailure(...);
 int nn_fs_ipc_FileSystem_OpenFileDirectly(int *, int [2], int, int, int, unsigned int **);
 int software_interrupt(int);
 
@@ -29,7 +29,7 @@ extern int DAT_0044e660; /* 0x44e660 */
 extern unsigned int g_titleContentAdapterHeap; /* 0x4d4358 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_002bbb2c. */
+/* Supplied declaration required: sysReportCheckFailure. */
 extern int *nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate(unsigned int *);
 /* Supplied declaration required: nn_fs_ipc_FileSystem_OpenFileDirectly. */
 
@@ -67,7 +67,7 @@ int FUN_0011b9b0(int param_1,int param_2,int param_3,unsigned int param_4)
   temp_v2[2] = param_4;
   nn_fs_ipc_FileSystem_OpenFileDirectly(piVar1,temp_v4,0,3,1,temp_v5);
   if ((int)piVar1 < 0) {
-    FUN_002bbb2c();
+    sysReportCheckFailure();
   }
   temp_v0 = temp_v4[0];
   piVar1 = (int *)nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate
@@ -78,7 +78,7 @@ int FUN_0011b9b0(int param_1,int param_2,int param_3,unsigned int param_4)
   }
   else {
     software_interrupt(0x23);
-    FUN_002bbb2c(0xf96047a2,&LAB_0011bab0);
+    sysReportCheckFailure(0xf96047a2,&LAB_0011bab0);
   }
   temp_v0 = 0;
   if (param_3 != 0) {
@@ -98,7 +98,7 @@ LAB_0011baec:
     }
   }
   software_interrupt(0x23);
-  FUN_002bbb2c(0xf96047a2,0x11bb08);
+  sysReportCheckFailure(0xf96047a2,0x11bb08);
   (**(romwright_code **)(*piVar1 + 0x2c))(piVar1);
   return temp_v1;
 }

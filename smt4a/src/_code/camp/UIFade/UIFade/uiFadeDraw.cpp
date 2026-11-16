@@ -8,7 +8,7 @@ extern "C" {
 
 int efctSetSpeed(f32 alpha);
 int renderCtxResetColorScale(RenderCtxA *ctx);
-int FUN_001692ac(u32 a, u32 b);
+int renderCtxPackPassFlags(u32 a, u32 b);
 
 extern UIFadeGlobals g_uiFade;
 extern RenderCtxA *g_renderCtx;
@@ -22,12 +22,12 @@ void uiFadeDraw(u32 arg)
     if (fade->alpha <= 0.0f) {
         return;
     }
-    FUN_00157558(g_renderCtx);
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     ctx = g_renderCtx;
-    state = FUN_001692ac(1, 0);
+    state = renderCtxPackPassFlags(1, 0);
     renderStackPush(&ctx->stackA, state);
     efctSetSpeed(fade->alpha);
-    FUN_001835b4(2, 8, 0x10c, 0, 0, arg);
+    texDrawTableEntryAtStoredOrigin(2, 8, 0x10c, 0, 0, arg);
     renderStackPop(&g_renderCtx->stackA);
     renderCtxResetColorScale(g_renderCtx);
     efctSetSpeed(1.0f);

@@ -56,11 +56,11 @@ void campDrawPartyComparisonIndicators(PartyComparisonScene *scene, s32 forceFul
             if (scene->faded[row])
                 efctSetSpeed(vec2GetSpeed(&scene->widgets[row + 5]));
             if (scene->values[row] < scene->values[scene->selected]) {
-                FUN_002bf288(2, 0x15, 0x12, x, y, 0x1f);
-                FUN_002bf288(2, 0x15, scene->values[row] + 0x17, x, y, 0x24);
+                texDrawTableEntryAtStoredOrigin(2, 0x15, 0x12, x, y, 0x1f);
+                texDrawTableEntryAtStoredOrigin(2, 0x15, scene->values[row] + 0x17, x, y, 0x24);
             } else {
-                FUN_002bf288(2, 0x15, 0x11, x, y, 0x1f);
-                FUN_002bf288(2, 0x15, scene->values[row] + 0x13, x, y, 0x24);
+                texDrawTableEntryAtStoredOrigin(2, 0x15, 0x11, x, y, 0x1f);
+                texDrawTableEntryAtStoredOrigin(2, 0x15, scene->values[row] + 0x13, x, y, 0x24);
             }
         }
         efctSetSpeed(1.0f);

@@ -18,7 +18,7 @@ typedef struct SaveStreamOwner {
 } SaveStreamOwner;
 
 void *pathBuildWide(u32 id, u8 *buffer, s32 flags);
-nn::Result FUN_002bb5a4(SaveStream *stream, u8 *buffer, s32 mode);
+nn::Result archivePathDeviceOpen(SaveStream *stream, u8 *buffer, s32 mode);
 
 static nn::Result saveStreamOpen(SaveStream *stream, u8 *buffer, s32 mode)
 {
@@ -26,7 +26,7 @@ static nn::Result saveStreamOpen(SaveStream *stream, u8 *buffer, s32 mode)
     stream->unk10 = 0;
     stream->unk04 = 0;
     stream->unk08 = 0;
-    return FUN_002bb5a4(stream, buffer, mode);
+    return archivePathDeviceOpen(stream, buffer, mode);
 }
 
 /* Open the owner's stream on the record `id` (mode 1 opens it in mode 2); returns an nn::Result. */

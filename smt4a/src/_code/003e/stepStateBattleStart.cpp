@@ -9,10 +9,10 @@ typedef struct StepState {
     /* 0x14 */ u32 job;
 } StepState;
 
-extern s32 FUN_0013def0(u32 index);
+extern s32 pairedAvailabilityGetState(u32 index);
 extern void campCommonBgAcquire(void);
 extern void campButtonHelpAcquire(void);
-extern void FUN_003b61ec(void);
+extern void commonBgStopChildAndBeginTransition(void);
 extern void sysPlaySe(u32 id);
 extern void scrScriptProcessStartEntry(u32 job, s32 value);
 extern s32 scrRunOpcodesStub(u32 job);
@@ -20,15 +20,15 @@ extern void campCommonBgRelease(void);
 extern void campButtonHelpRelease(void);
 extern u32 FUN_003e71a8(StepState *step);
 
-/* Step: once both FUN_0013def0 inputs report 3, plays the sound, starts the job and moves on to state 9/10 when it finishes. */
+/* Step: once both pairedAvailabilityGetState inputs report 3, plays the sound, starts the job and moves on to state 9/10 when it finishes. */
 u32 stepStateBattleStart(StepState *step)
 {
     u32 result;
 
-    if (FUN_0013def0(0) == 3 && FUN_0013def0(1) == 3) {
+    if (pairedAvailabilityGetState(0) == 3 && pairedAvailabilityGetState(1) == 3) {
         campCommonBgAcquire();
         campButtonHelpAcquire();
-        FUN_003b61ec();
+        commonBgStopChildAndBeginTransition();
         sysPlaySe(0xAB);
         scrScriptProcessStartEntry(step->job, 0);
         step->state = 8;

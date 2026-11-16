@@ -68,7 +68,7 @@ void FUN_002aa038(int param_1,int param_2)
   temp_v2 = FUN_002a4894(temp_v1);
   temp_v2 = asdTMTexTableEntryAt(0x1a,temp_v2 + 0xb6);
   if (*(int *)(temp_v0 + 0x3fc) >= 4) {
-    FUN_001835b4(2,0x1a,0xb5,param_1,param_2,0x97);
+    texDrawTableEntryAtStoredOrigin(2,0x1a,0xb5,param_1,param_2,0x97);
   }
   temp_v13 = resourceRunOperationIfUnblocked(temp_v0 + 0x560);
   temp_v3 = 0;
@@ -87,7 +87,7 @@ void FUN_002aa038(int param_1,int param_2)
       temp_v5 = (int)*(short *)(temp_v2 + 10) +
               (((int)(temp_v5 + ((unsigned int)(temp_v5 >> 0x1f) >> 0x1e)) >> 2) * temp_v7 >> 0xc);
     }
-    FUN_001835b4(2,0x1a,0xb1,param_1 + temp_v11,param_2 + temp_v5,0x9c);
+    texDrawTableEntryAtStoredOrigin(2,0x1a,0xb1,param_1 + temp_v11,param_2 + temp_v5,0x9c);
     temp_v7 = objectApplyIfUnblocked(temp_v0 + 0x560);
     temp_v8 = temp_v13 + temp_v3;
     if (temp_v8 < temp_v7) {
@@ -130,39 +130,39 @@ void FUN_002aa038(int param_1,int param_2)
   efctSetSpeed();
   param_2 = param_2 + temp_v1;
   temp_v11 = temp_v11 + param_1;
-  FUN_001835b4(2,0x1a,0xbe,temp_v11,param_2,0xab);
-  FUN_001835b4(2,0x1a,0xbf,temp_v11,param_2,0xab);
-  FUN_001835b4(2,0x1a,0xc0,temp_v11,param_2,0xab);
+  texDrawTableEntryAtStoredOrigin(2,0x1a,0xbe,temp_v11,param_2,0xab);
+  texDrawTableEntryAtStoredOrigin(2,0x1a,0xbf,temp_v11,param_2,0xab);
+  texDrawTableEntryAtStoredOrigin(2,0x1a,0xc0,temp_v11,param_2,0xab);
   efctSetSpeed();
-  FUN_001835b4(2,0x1a,0xc1,temp_v11,param_2,0xb5);
+  texDrawTableEntryAtStoredOrigin(2,0x1a,0xc1,temp_v11,param_2,0xb5);
   temp_v1 = FUN_002a4894(temp_v0 + 0x560);
   temp_v1 = recordGetModeForId((int)*(short *)(temp_v0 + temp_v1 * 2 + 0x44c));
   if (!((temp_v1 == 1 || temp_v1 == 2) || temp_v1 == 6)) {
-    FUN_001835b4(2,0x1a,0x247,temp_v11,param_2,0xb5);
-    FUN_001835b4(2,0x1a,0xc2,temp_v11,param_2,0xba);
-    FUN_001835b4(2,0x1a,0xc3,temp_v11,param_2,0xba);
+    texDrawTableEntryAtStoredOrigin(2,0x1a,0x247,temp_v11,param_2,0xb5);
+    texDrawTableEntryAtStoredOrigin(2,0x1a,0xc2,temp_v11,param_2,0xba);
+    texDrawTableEntryAtStoredOrigin(2,0x1a,0xc3,temp_v11,param_2,0xba);
   }
   else {
-    FUN_001835b4(2,0x1a,0x287,temp_v11,param_2,0xb5);
+    texDrawTableEntryAtStoredOrigin(2,0x1a,0x287,temp_v11,param_2,0xb5);
     if (!((temp_v1 == 1 || temp_v1 == 2) || temp_v1 == 6)) {
-      FUN_001835b4(2,0x1a,0xc2,temp_v11,param_2,0xba);
-      FUN_001835b4(2,0x1a,0xc3,temp_v11,param_2,0xba);
+      texDrawTableEntryAtStoredOrigin(2,0x1a,0xc2,temp_v11,param_2,0xba);
+      texDrawTableEntryAtStoredOrigin(2,0x1a,0xc3,temp_v11,param_2,0xba);
     }
     else {
-      FUN_001835b4(2,0x1a,0x284,temp_v11,param_2,0xba);
-      FUN_001835b4(2,0x1a,0x285,temp_v11,param_2,0xba);
+      texDrawTableEntryAtStoredOrigin(2,0x1a,0x284,temp_v11,param_2,0xba);
+      texDrawTableEntryAtStoredOrigin(2,0x1a,0x285,temp_v11,param_2,0xba);
     }
   }
   efctSetSpeed();
   if (!((temp_v1 == 1 || temp_v1 == 2) || temp_v1 == 6)) {
     temp_v5 = vec2GetYInt(temp_v0 + 0xb0);
     temp_v7 = vec2GetXInt(reinterpret_cast<const void *>(temp_v0 + 0xb0));
-    FUN_001835b4(2,0x1a,0xc4,temp_v7 + temp_v11,temp_v5 + param_2,0xbf);
+    texDrawTableEntryAtStoredOrigin(2,0x1a,0xc4,temp_v7 + temp_v11,temp_v5 + param_2,0xbf);
   }
   else {
     temp_v5 = vec2GetYInt(temp_v0 + 0xb0);
     temp_v7 = vec2GetXInt(reinterpret_cast<const void *>(temp_v0 + 0xb0));
-    FUN_001835b4(2,0x1a,0x286,temp_v7 + temp_v11,temp_v5 + param_2,0xbf);
+    texDrawTableEntryAtStoredOrigin(2,0x1a,0x286,temp_v7 + temp_v11,temp_v5 + param_2,0xbf);
   }
   efctSetSpeed();
   temp_v5 = asdTMTexTableEntryAt(0x1a,0xc5);

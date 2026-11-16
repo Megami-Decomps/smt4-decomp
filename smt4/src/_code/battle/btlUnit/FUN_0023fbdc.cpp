@@ -68,11 +68,11 @@ void FUN_003ae720(u32 block, s32 mode);
 void FUN_00240678(ReflectTask *task, ReflectBattle *battle);
 void FUN_002b7bca(ReflectUnit **list, s32 count, s32 stride, void *compare);
 void FUN_0019d7d4(void);
-const u16 *FUN_0027da30(ReflectBattle *battle, s32 slot);
+const u16 *btlFindEntryBlockByMemberId(ReflectBattle *battle, s32 slot);
 s32 pairedEntryTableContains(ReflectBattle *battle, u16 id);
 void FUN_0024057c(ReflectBattle *battle, ReflectUnit *unit, s32 a, s32 b, s32 style);
 void btlReflectInitKind9(s32 x, ReflectTask *task, ReflectUnit *unit, s32 kind, s32 count);
-void FUN_002505c0(s32 x, ReflectTask *task, u32 id, s32 a, s32 b, s32 c, s32 d);
+void btlQueueKeyedScalarReflectAction(s32 x, ReflectTask *task, u32 id, s32 a, s32 b, s32 c, s32 d);
 
 /* Waits out the reflect effects of a battle turn: starts them one unit at a time, then hands the
    battle back to the main task state. */
@@ -123,7 +123,7 @@ void FUN_0023fbdc(ReflectTask *task, ReflectBattle *battle)
             if ((unit->flags & 1) != 0 && (unit->flags & 2) != 0 && (unit->pending & 8) != 0) {
                 unit->pending &= ~8;
                 if ((unit->effectFlags & 0x800) == 0 &&
-                    pairedEntryTableContains(battle, FUN_0027da30(battle, unit->skillSlot)[1]) == 0) {
+                    pairedEntryTableContains(battle, btlFindEntryBlockByMemberId(battle, unit->skillSlot)[1]) == 0) {
                     unit->effectFlags |= 0x800;
                     const ReflectLayout *layout = (unit->flags & 0x10) != 0 ? &DAT_00439a20.special : &DAT_00439a20.normal;
                     s16 spacing = (s16)layout->spacing;
@@ -134,7 +134,7 @@ void FUN_0023fbdc(ReflectTask *task, ReflectBattle *battle)
                     FUN_002451c4(started * spacing + offsetY + offsetX, reinterpret_cast<u32>(task), reinterpret_cast<u32>(unit), 0xff, style, 0);
                     btlReflectInitKind9(started * spacing + offsetX, task, unit, (unit->flags & 0x10) != 0 ? 7 : 6, 13);
                     if (firstStarted == 0) {
-                        FUN_002505c0(started * spacing, task, 0x10001d4, 0, 0, 0, 0);
+                        btlQueueKeyedScalarReflectAction(started * spacing, task, 0x10001d4, 0, 0, 0, 0);
                         firstStarted = 1;
                     }
                     started = started + 1;

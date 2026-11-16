@@ -16,16 +16,16 @@ typedef struct BtlUiView {
 extern BtlUiView g_btlUi;
 
 s32 playSceneIsFadeOutDone(void *scene);
-s32 FUN_0028be84(void *timer);
+s32 uiSpriteOperationIsComplete(void *timer);
 int playSceneFadeInStart(void *scene);
 int playSceneTimerSubStart(void *timer);
 
-/* Once the panel's scene has faded out and FUN_0028be84 accepts its timer, fades the scene back in and starts the timer. */
+/* Once the panel's scene has faded out and uiSpriteOperationIsComplete accepts its timer, fades the scene back in and starts the timer. */
 void btlUiPanelFadeInWhenReady(void)
 {
     BtlUiPanel *panel = g_btlUi.panel;
 
-    if (playSceneIsFadeOutDone(panel->scene) != 0 && FUN_0028be84(panel->timer) != 0) {
+    if (playSceneIsFadeOutDone(panel->scene) != 0 && uiSpriteOperationIsComplete(panel->timer) != 0) {
         playSceneFadeInStart(panel->scene);
         playSceneTimerSubStart(panel->timer);
     }

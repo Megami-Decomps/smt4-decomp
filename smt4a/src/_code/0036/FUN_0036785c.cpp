@@ -29,8 +29,8 @@ int mapSetSceneState(...);
 
 int soundVolumeSettingSet(...);
 int FUN_0014af98(void);
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
+int libm_cosf(void);
+int libm_sinf(void);
 int FUN_00233e10(int, unsigned int);
 int mapEaseSceneHeading(void);
 int FUN_002e364c(...);
@@ -42,7 +42,7 @@ int FUN_0033abd4(void);
 int mathPositionHeadingDegrees(void);
 int table23FindRecordByKey(unsigned int, unsigned int, unsigned int);
 int sysPlayVoice(...);
-int FUN_003d4ed8(unsigned int);
+int soundActorStartOnFreeChannel(unsigned int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -66,14 +66,14 @@ extern unsigned int soundVolumeSettingGet(void);
 /* Supplied declaration required: FUN_0014af98. */
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: FUN_00233e10. */
 /* Supplied declaration required: FUN_00246014. */
 /* Supplied declaration required: mapIfOverlayRelease. */
 /* Supplied declaration required: mapEaseSceneHeading. */
-extern int FUN_002e07f4(void);
+extern int pairedAvailabilityBothReady(void);
 /* Supplied declaration required: FUN_002e364c. */
 /* Supplied declaration required: FUN_00303460. */
 /* Supplied declaration required: mapIfReleaseSlot3. */
@@ -84,7 +84,7 @@ extern int FUN_002e07f4(void);
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: table23FindRecordByKey. */
 /* Supplied declaration required: sysPlayVoice. */
-/* Supplied declaration required: FUN_003d4ed8. */
+/* Supplied declaration required: soundActorStartOnFreeChannel. */
 extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
 
@@ -187,34 +187,34 @@ void FUN_0036785c(void)
         switch(g_gameState.f005f162e) {
         case 0:
           temp_v7 = 0x10002c4;
-          FUN_003d4ed8(temp_v7);
+          soundActorStartOnFreeChannel(temp_v7);
           break;
         case 1:
           temp_v7 = 0x10002c6;
-          FUN_003d4ed8(temp_v7);
+          soundActorStartOnFreeChannel(temp_v7);
           break;
         case 2:
           temp_v7 = 0x10002c8;
-          FUN_003d4ed8(temp_v7);
+          soundActorStartOnFreeChannel(temp_v7);
           break;
         case 3:
           temp_v7 = 0x10002ca;
-          FUN_003d4ed8(temp_v7);
+          soundActorStartOnFreeChannel(temp_v7);
           break;
         case 4:
           temp_v7 = 0x10002cc;
-          FUN_003d4ed8(temp_v7);
+          soundActorStartOnFreeChannel(temp_v7);
           break;
         case 5:
           temp_v7 = 0x10002d9;
-          FUN_003d4ed8(temp_v7);
+          soundActorStartOnFreeChannel(temp_v7);
           break;
         default:
         }
 LAB_00367d2c:
         FUN_00324e38(0xffffffff);
-        FUN_001bc124();
-        FUN_001bbf0c();
+        libm_sinf();
+        libm_cosf();
         FUN_0014af98();
         soundVolumeSettingSet();
         sysPlayVoice(0x10002e5);
@@ -294,19 +294,19 @@ LAB_00367d2c:
       *(float *)(temp_v1 + 0x2c) = temp_v5;
       *(unsigned int *)(temp_v1 + 0x30) = temp_v0;
       temp_v5 = (temp_v4 + 180.0f) * temp_v6;
-      FUN_001bc124();
+      libm_sinf();
       temp_v1 = g_lmapScene;
       temp_v4 = 110.0f;
       *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + temp_v5 * 110.0f;
       temp_v6 = (*(float *)(temp_v1 + 0x50) + temp_v9) * temp_v6;
-      FUN_001bbf0c();
+      libm_cosf();
       *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v6 * temp_v4;
       FUN_00303460(10);
       *(unsigned int *)(g_lmapView + 0xb0) = 0xffffffff;
       sysPlaySe(0xdd);
       FUN_00233e10(1,g_gameState.f005f16ac);
-      FUN_001bc124();
-      FUN_001bbf0c();
+      libm_sinf();
+      libm_cosf();
       FUN_00246014();
       temp_v2 = *(int *)(g_lmapScene + 4);
       temp_v1 = g_lmapScene;
@@ -384,7 +384,7 @@ LAB_00367d2c:
       slotSetRequest(0,10,0xff);
       slotSetRequest(1,10,0xff);
     }
-    if ((*(int *)(g_lmapScene + 8) < 0x1f) || (temp_v1 = FUN_002e07f4(), temp_v1 == 0)) {
+    if ((*(int *)(g_lmapScene + 8) < 0x1f) || (temp_v1 = pairedAvailabilityBothReady(), temp_v1 == 0)) {
       FUN_002e364c(g_lmapScene + 0x28);
       FUN_00327ee8();
       return;

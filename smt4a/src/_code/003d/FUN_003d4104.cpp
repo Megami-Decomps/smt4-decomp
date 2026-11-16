@@ -20,7 +20,7 @@ void FUN_003d4104(void)
 {
     StatusDownStateA *status = g_statusDown;
     /* Low seven bits: sort key; high bit: descending. */
-    const u8 *sortMode = reinterpret_cast<const u8 *>(FUN_0026140c() + 0x16);
+    const u8 *sortMode = reinterpret_cast<const u8 *>(saveGetUserSettingsBlock() + 0x16);
     if ((*sortMode & 0x7f) == 1) {
         if ((*sortMode >> 7) == 0)
             qsort(status->inventory.entries, status->inventory.count, 4, devilSlotCompareRaceThenLevel);

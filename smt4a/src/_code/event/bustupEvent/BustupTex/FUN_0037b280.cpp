@@ -49,7 +49,7 @@ void FUN_0037b280(s32 portrait)
             if (aocRunByName(g_aocSystem, work->texture.table, work->texture.node, 1)) {
                 work->texture.texture = aocLoadTextureNode(reinterpret_cast<u32>(g_aocSystem), work->texture.table, work->texture.node, 0x10000);
             } else {
-                work->texture.texture = reinterpret_cast<u32>(FUN_0014afd0(work->texture.table, work->texture.node));
+                work->texture.texture = reinterpret_cast<u32>(asdTMTexTablePrepareNodeImage(work->texture.table, work->texture.node));
             }
         }
         work->texture.deferred = 0;

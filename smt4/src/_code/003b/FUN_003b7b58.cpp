@@ -15,7 +15,7 @@ int asdLoadFileAsyncSimple(...);
 int gameGlobalsSetSelected(...);
 int asdTMTexTableLoadEntryAsync(int, int);
 int timerStart(...);
-int FUN_002bd954(...);
+int uiSpriteStateInitFromSource(...);
 int spriteStartAnimationByIndex(...);
 
 int FUN_002eb76c(...);
@@ -41,12 +41,12 @@ extern unsigned char DAT_00405a4c; /* 0x405a4c */
 /* Supplied declaration required: statusBustUpPortraitAcquire. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: gameGlobalsSetSelected. */
-/* Supplied declaration required: FUN_0029e874. */
+/* Supplied declaration required: gameSetIconDisplayEnabled. */
 /* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
 extern int gameGetUnitRecord(void);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002bd954. */
+/* Supplied declaration required: uiSpriteStateInitFromSource. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: memClear. */
@@ -121,32 +121,32 @@ void FUN_003b7b58(int param_1)
   drawParameterBlockClear(param_1);
   paramsInit(reinterpret_cast<UiResourceParameters *>(param_1), &DAT_004058d4,0x48,&DAT_0040591c,0xa8,&DAT_004059c4,0x6c,&DAT_00405a30,0x1c,
                &DAT_00405a4c,0x32c);
-  FUN_002bd954(param_1 + 0x20,0x28,0,param_1,1);
+  uiSpriteStateInitFromSource(param_1 + 0x20,0x28,0,param_1,1);
   timerStart(param_1 + 0x20,0);
   temp_v1 = 0;
   do {
     temp_v2 = param_1 + temp_v1 * 0x8c;
-    FUN_002bd954(temp_v2 + 0xac,0x28,0,param_1,1);
+    uiSpriteStateInitFromSource(temp_v2 + 0xac,0x28,0,param_1,1);
     timerStart(temp_v2 + 0xac,4,0);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 6);
-  FUN_002bd954(param_1 + 0x3f4,0x28,0,param_1,1);
+  uiSpriteStateInitFromSource(param_1 + 0x3f4,0x28,0,param_1,1);
   spriteStartAnimationByIndex(param_1 + 0x3f4,4);
-  FUN_002bd954(param_1 + 0x480,0x28,0,param_1,1);
+  uiSpriteStateInitFromSource(param_1 + 0x480,0x28,0,param_1,1);
   timerStart(param_1 + 0x480,2,0);
-  FUN_002bd954(param_1 + 0x50c,0x28,0,param_1,1);
+  uiSpriteStateInitFromSource(param_1 + 0x50c,0x28,0,param_1,1);
   timerStart(param_1 + 0x50c,0);
-  FUN_002bd954(param_1 + 0x598,0x28,0,param_1,1);
+  uiSpriteStateInitFromSource(param_1 + 0x598,0x28,0,param_1,1);
   timerStart(param_1 + 0x598,0);
-  FUN_002bd954(param_1 + 0x624,0x28,1000,param_1,0x65);
+  uiSpriteStateInitFromSource(param_1 + 0x624,0x28,1000,param_1,0x65);
   FUN_002eb76c(param_1 + 0x624,0);
-  FUN_002bd954(param_1 + 0x6b0,0x28,1000,param_1,0x65);
-  FUN_002bd954(param_1 + 0x73c,0x28,1000,param_1,0x65);
+  uiSpriteStateInitFromSource(param_1 + 0x6b0,0x28,1000,param_1,0x65);
+  uiSpriteStateInitFromSource(param_1 + 0x73c,0x28,1000,param_1,0x65);
   spriteStartAnimationByIndex(param_1 + 0x73c,5);
   temp_v1 = 0;
   do {
     temp_v2 = param_1 + temp_v1 * 0x8c + 0x7c8;
-    FUN_002bd954(temp_v2,0x28,0,param_1,1);
+    uiSpriteStateInitFromSource(temp_v2,0x28,0,param_1,1);
     spriteStartAnimationByIndex(temp_v2,0);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x10);
@@ -161,7 +161,7 @@ void FUN_003b7b58(int param_1)
     *(unsigned char *)(param_1 + temp_v1 + 0xd4fe) = 0;
     *(unsigned char *)(param_1 + temp_v1 + 0xd517) = 0;
     temp_v2 = param_1 + temp_v1 * 0x8c;
-    FUN_002bd954(temp_v2 + 0x1fd8,0x28,0x1a,param_1,0xc9);
+    uiSpriteStateInitFromSource(temp_v2 + 0x1fd8,0x28,0x1a,param_1,0xc9);
     *(unsigned short *)(temp_v2 + 0x2012) = 2;
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x19);
@@ -170,7 +170,7 @@ void FUN_003b7b58(int param_1)
     temp_v2 = 0;
     do {
       temp_v0 = param_1 + (temp_v1 * 7 + temp_v2 + 0x1e) * 0x8c;
-      FUN_002bd954(temp_v0 + 0x20,0xd,0x80c,param_1,0x97);
+      uiSpriteStateInitFromSource(temp_v0 + 0x20,0xd,0x80c,param_1,0x97);
       spriteStartAnimationByIndex(temp_v0 + 0x20,1);
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 7);
@@ -179,9 +179,9 @@ void FUN_003b7b58(int param_1)
   temp_v1 = 0;
   do {
     temp_v2 = param_1 + temp_v1 * 0x8c;
-    FUN_002bd954(temp_v2 + 0x2d84,0x28,0x3e,param_1,0x6a);
+    uiSpriteStateInitFromSource(temp_v2 + 0x2d84,0x28,0x3e,param_1,0x6a);
     spriteStartAnimationByIndex(temp_v2 + 0x2d84,8);
-    FUN_002bd954(temp_v2 + 0x3158,0x28,0x119,param_1,0xf1);
+    uiSpriteStateInitFromSource(temp_v2 + 0x3158,0x28,0x119,param_1,0xf1);
     spriteStartAnimationByIndex(temp_v2 + 0x3158,9);
     *(unsigned short *)(temp_v2 + 0x3192) = 2;
     temp_v1 = temp_v1 + 1;
@@ -195,7 +195,7 @@ void FUN_003b7b58(int param_1)
   FUN_0028c040();
   gameGlobalsSetSelected(0);
   statusDownSwitchTab(0);
-  FUN_0029e874(0);
+  gameSetIconDisplayEnabled(0);
   buttonHelpCreate();
   return;
 }

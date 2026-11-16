@@ -15,7 +15,7 @@ typedef char TitleSceneRequestsOffsetCheck[
 extern "C" {
 extern TitleScene *g_titleScene;
 
-void FUN_00231434(s32 kind, u32 size, s32 *x, s32 *y, s32 *width, s32 *height);
+void asdTMTexTableGetEntryPlacement(s32 kind, u32 size, s32 *x, s32 *y, s32 *width, s32 *height);
 void pairCopy(const f32 *source, f32 *destination);
 void gxSetClippedBottomScreenScissor(s32 x, s32 y, s32 width, s32 height);
 
@@ -26,7 +26,7 @@ void titleScissorApplyOrClearRequests(TitleScissorOwner *owner, s32 clip)
         s32 x, y, width, height;
         f32 offset[2];
 
-        FUN_00231434(0x1c, 0xfa4, &x, &y, &width, &height);
+        asdTMTexTableGetEntryPlacement(0x1c, 0xfa4, &x, &y, &width, &height);
         pairCopy(owner->offset, offset);
         x = offset[0] + x;
         y = offset[1] + y;

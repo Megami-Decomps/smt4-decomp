@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0017fd20(void);
-int FUN_002e3140(void);
+int resultHandleFailure(void);
 int onlineHandleClose(int *);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0017fd20. */
 extern int svcClearEvent(int);
-/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: onlineHandleClose. */
 
 
@@ -46,11 +46,11 @@ void FUN_002ea458(int param_1,unsigned int param_2,unsigned int param_3,int para
     }
   }
   if ((int)piVar1 < 0) {
-    FUN_002e3140();
+    resultHandleFailure();
   }
   temp_v0 = svcClearEvent(*piVar3);
   if (temp_v0 < 0) {
-    FUN_002e3140();
+    resultHandleFailure();
   }
   *(unsigned char *)(param_1 + 0x11c) = 1;
   return;

@@ -14,7 +14,7 @@ int VectorFloatToUnsigned(double, int);
 
 int asdSequenceRequest(...);
 int jobStop(...);
-int FUN_001695a0(void);
+int messageSetScriptDisplayMode(void);
 int resourceListDestroy(void);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
@@ -34,7 +34,7 @@ int FUN_003a2278(...);
 int sysPlayVoice(...);
 int linkHolderClearFlag(...);
 int resourceOwnerReleaseAll(void);
-int FUN_00408184(...);
+int gameCounterAddSaturating(...);
 
 int FUN_001628c0(...);
 int FUN_00168980(...);
@@ -62,7 +62,7 @@ int linkHolderSetFlag(...);
 int textFormatBuffer(...);
 int asdCameraInitializeDefaults(...);
 int FUN_0013cab8(...);
-int FUN_001517b4(...);
+int padQueryLogicalKey(...);
 int asdLoadFileSyncNoContext(...);
 int sysPlaySe(...);
 int gameFlagIsSet(...);
@@ -71,9 +71,9 @@ int FUN_001b4eb8(void);
 int asdLoadFileSyncDefault(void);
 int placeWinStartText(...);
 int FUN_0022677c(...);
-int FUN_00275bc8(...);
+int scrScriptProcessCreate(...);
 int scrScriptProcessStartEntry(...);
-int FUN_003180c4(...);
+int scrSetStringSlot(...);
 int campCommonBgAcquire(void);
 int placeWinCreate(void);
 int campButtonHelpAcquire(void);
@@ -90,18 +90,18 @@ int uiSetFloatPair(...);
 int FUN_0014f0dc(...);
 int FUN_001523b8(...);
 int asdOperatorNew(void);
-int FUN_00178b04(...);
-int FUN_0019c0e0(unsigned int);
+int asdMemoryAllocTraced(...);
+int effectNodeUpdateTransform(unsigned int);
 int cameraAnimationSampleAndAdvance(...);
 int _ZN9Obj557af8C1EPK21AsdAnimCameraResource(void);
-int FUN_003fe86c(...);
-int FUN_0040aa6c(void);
+int modelPlayClip(...);
+int resourceOwnerLoadFileSync(void);
 int FUN_0040aad4(...);
 int FUN_0040ab7c(...);
 int handleRegistryRegisterObject(...);
 int resourceOwnerLoadNamed(...);
 int playerLoadOutfitPartModel(unsigned int, unsigned int, int);
-int FUN_0040ba38(void);
+int playerModelStartBaseMotion(void);
 int FUN_0045b538(...);
 int VectorSignedToFloat(...);
 
@@ -163,11 +163,11 @@ extern unsigned int DAT_005f1b7c; /* 0x5f1b7c */
 /* Supplied declaration required: asdLoadFileWithSize. */
 /* Supplied declaration required: asdCameraInitializeDefaults. */
 /* Supplied declaration required: FUN_0013cab8. */
-extern int FUN_0013def0(unsigned int);
+extern int pairedAvailabilityGetState(unsigned int);
 /* Supplied declaration required: uiSetFloatPair. */
 extern unsigned int FUN_0014af98(void);
 /* Supplied declaration required: FUN_0014f0dc. */
-/* Supplied declaration required: FUN_001517b4. */
+/* Supplied declaration required: padQueryLogicalKey. */
 /* Supplied declaration required: FUN_001523b8. */
 extern unsigned int FUN_00152f44(void);
 /* Supplied declaration required: asdOperatorNew. */
@@ -178,12 +178,12 @@ extern int jobIsValid(unsigned int);
 extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00168980. */
-/* Supplied declaration required: FUN_001695a0. */
-/* Supplied declaration required: FUN_00178b04. */
+/* Supplied declaration required: messageSetScriptDisplayMode. */
+/* Supplied declaration required: asdMemoryAllocTraced. */
 /* Supplied declaration required: resourceListDestroy. */
 /* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0019c0e0. */
+/* Supplied declaration required: effectNodeUpdateTransform. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: resOwnerRunNodeHandlers. */
 /* Supplied declaration required: placeWinRelease. */
@@ -208,7 +208,7 @@ extern int useCounterIsFinished(void);
 extern unsigned int gameDataGetPlayerName(void);
 /* Supplied declaration required: touchMenuClose. */
 /* Supplied declaration required: tmnlFindSlotForItem. */
-/* Supplied declaration required: FUN_00275bc8. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int screenFadeIsBusy(void);
 /* Supplied declaration required: msgWindowReset. */
@@ -216,7 +216,7 @@ extern int screenFadeIsBusy(void);
 extern int useCounterGetCurrentValue(void);
 /* Supplied declaration required: gameStateClearFlag. */
 /* Supplied declaration required: naviMainSetFlagsAndActivate. */
-/* Supplied declaration required: FUN_003180c4. */
+/* Supplied declaration required: scrSetStringSlot. */
 /* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: placeWinCreate. */
 /* Supplied declaration required: sortMenuAcquire. */
@@ -254,10 +254,10 @@ extern unsigned int *_ZN9Obj557ae8C1Ev(void);
 /* Supplied declaration required: cameraAnimationSampleAndAdvance. */
 /* Supplied declaration required: _ZN9Obj557af8C1EPK21AsdAnimCameraResource. */
 /* Supplied declaration required: FUN_003fd8dc. */
-/* Supplied declaration required: FUN_003fe86c. */
+/* Supplied declaration required: modelPlayClip. */
 /* Supplied declaration required: FUN_00406768. */
-/* Supplied declaration required: FUN_00408184. */
-/* Supplied declaration required: FUN_0040aa6c. */
+/* Supplied declaration required: gameCounterAddSaturating. */
+/* Supplied declaration required: resourceOwnerLoadFileSync. */
 /* Supplied declaration required: FUN_0040aad4. */
 /* Supplied declaration required: FUN_0040ab7c. */
 extern int FUN_0040ab8c(unsigned int);
@@ -267,10 +267,10 @@ extern unsigned int modelListInit(void);
 extern int FUN_0040af60(int);
 /* Supplied declaration required: resourceOwnerLoadNamed. */
 /* Supplied declaration required: playerLoadOutfitPartModel. */
-/* Supplied declaration required: FUN_0040ba38. */
+/* Supplied declaration required: playerModelStartBaseMotion. */
 /* Supplied declaration required: FUN_0045b538. */
 /* Supplied declaration required: modelSetDrawMode. */
-extern int FUN_004ffba8(unsigned int);
+extern int animationChannelsAllFinished(unsigned int);
 
 
 unsigned int FUN_0027e0d8(void)
@@ -341,7 +341,7 @@ unsigned int FUN_0027e0d8(void)
     in_s0 = temp_v15;
     do {
       if (*(char *)(puVar3 + temp_v7 * 3 + 0x160) != '\0') {
-        FUN_0019c0e0(puVar3[temp_v7 * 3 + 0x15f]);
+        effectNodeUpdateTransform(puVar3[temp_v7 * 3 + 0x15f]);
         temp_v3 = FUN_00323bc4(puVar3[temp_v7 * 3 + 0x15f]);
         if (temp_v3 != 0) {
           *(unsigned char *)(puVar3 + temp_v7 * 3 + 0x160) = 0;
@@ -361,7 +361,7 @@ unsigned int FUN_0027e0d8(void)
       *puVar6 = (unsigned int)&DAT_00557c60;
     }
     puVar8[0xf] = (unsigned int)puVar6;
-    FUN_0040ba38();
+    playerModelStartBaseMotion();
     temp_v6 = 0;
     do {
       playerLoadOutfitPartModel(puVar8[0xf],temp_v6 & 0xff,0x1c0);
@@ -371,38 +371,38 @@ unsigned int FUN_0027e0d8(void)
     puVar8[0x15d] = (int)temp_v2;
     if (temp_v2 != 0) {
       temp_v7 = 0x20;
-      FUN_00178b04(0x20,&LAB_0027e4bc,0x356);
+      asdMemoryAllocTraced(0x20,&LAB_0027e4bc,0x356);
       temp_v4 = 0;
       if (temp_v7 != 0) {
         temp_v4 = modelListInit();
       }
       puVar8[0x11] = temp_v4;
-      FUN_0040aa6c();
+      resourceOwnerLoadFileSync();
       FUN_0040aad4(puVar8[0x11],0);
       FUN_0045b538(*(int *)(puVar8[0x11] + 0xc) + 0xc);
       temp_v4 = *(unsigned int *)(puVar8[0x11] + 4);
       handleRegistryRegisterObject(g_handleRegistry,temp_v4);
-      FUN_003fe86c(temp_v4,0,2);
+      modelPlayClip(temp_v4,0,2);
     }
     else {
       temp_v7 = 0x20;
-      FUN_00178b04(0x20,&LAB_0027e4bc,0x345);
+      asdMemoryAllocTraced(0x20,&LAB_0027e4bc,0x345);
       temp_v4 = 0;
       if (temp_v7 != 0) {
         temp_v4 = modelListInit();
       }
       puVar8[0x10] = temp_v4;
-      FUN_0040aa6c();
+      resourceOwnerLoadFileSync();
       FUN_0040ab7c(puVar8[0x10],0);
       FUN_0040aad4(puVar8[0x10],0);
       FUN_0045b538(*(int *)(puVar8[0x10] + 0xc) + 0xc);
       temp_v4 = *(unsigned int *)(puVar8[0x10] + 4);
       handleRegistryRegisterObject(g_handleRegistry,temp_v4);
-      FUN_003fe86c(temp_v4,0,2);
+      modelPlayClip(temp_v4,0,2);
     }
     asdLoadFileWithSize(&LAB_0027e510,temp_v25,1);
     temp_v7 = 0x48;
-    FUN_00178b04(0x48,&LAB_0027e4bc,0x378);
+    asdMemoryAllocTraced(0x48,&LAB_0027e4bc,0x378);
     if (temp_v7 != 0) {
       _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
     }
@@ -410,7 +410,7 @@ unsigned int FUN_0027e0d8(void)
     controllerApplyAtUnitScale(reinterpret_cast<void *>(temp_v7), temp_v11, 0);
     asdLoadFileWithSize(&LAB_0027e52c,temp_v25,1);
     temp_v7 = 0x48;
-    FUN_00178b04(0x48,&LAB_0027e4bc,0x37c);
+    asdMemoryAllocTraced(0x48,&LAB_0027e4bc,0x37c);
     if (temp_v7 != 0) {
       _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
     }
@@ -418,7 +418,7 @@ unsigned int FUN_0027e0d8(void)
     controllerApplyAtUnitScale(reinterpret_cast<void *>(temp_v7), temp_v11, 0);
     asdLoadFileWithSize(&LAB_0027e548,temp_v25,1);
     temp_v7 = 0x48;
-    FUN_00178b04(0x48,&LAB_0027e4bc,0x380);
+    asdMemoryAllocTraced(0x48,&LAB_0027e4bc,0x380);
     if (temp_v7 != 0) {
       _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
     }
@@ -495,7 +495,7 @@ unsigned int FUN_0027e0d8(void)
     } while (temp_v3 < 4);
     *(unsigned char *)((int)puVar8 + 6) = 0;
     temp_v4 = gameDataGetPlayerName();
-    FUN_003180c4(0x33,temp_v4);
+    scrSetStringSlot(0x33,temp_v4);
     temp_v7 = bgmGetStateById(0x1000040);
     if (temp_v7 != 1) {
       soundChannelRequestIfEnabled(0x1000040,0,0x3c);
@@ -530,7 +530,7 @@ unsigned int FUN_0027e0d8(void)
       *(char *)((int)puVar3 + 9) = temp_v2;
     }
     temp_v7 = 0;
-    FUN_001517b4(0,1);
+    padQueryLogicalKey(0,1);
     if (temp_v7 != 0) {
       puVar3[4] = 0;
       puVar3[5] = 0;
@@ -552,18 +552,18 @@ unsigned int FUN_0027e0d8(void)
     asdLoadFileSyncDefault();
     puVar3[9] = (unsigned int)puVar9;
     temp_v7 = puVar3[8];
-    FUN_00275bc8(temp_v7,puVar9);
+    scrScriptProcessCreate(temp_v7,puVar9);
     puVar3[10] = temp_v7;
     *(unsigned int *)(temp_v7 + 0x108) = 2;
-    FUN_003180c4(0x28,s_________0056fd3d + (unsigned int)*(unsigned char *)((int)puVar3 + 9) * 0x3c + 2);
+    scrSetStringSlot(0x28,s_________0056fd3d + (unsigned int)*(unsigned char *)((int)puVar3 + 9) * 0x3c + 2);
     puVar9 = &LAB_0027ed10;
     asdLoadFileSyncDefault();
     puVar3[0xe] = (unsigned int)puVar9;
-    temp_v7 = FUN_0013def0(0);
+    temp_v7 = pairedAvailabilityGetState(0);
     if (temp_v7 == 3) {
       FUN_0013cab8(0,10,0xff);
     }
-    temp_v7 = FUN_0013def0(1);
+    temp_v7 = pairedAvailabilityGetState(1);
     if (temp_v7 == 3) {
       FUN_0013cab8(1,10,0xff);
     }
@@ -671,10 +671,10 @@ LAB_0027edcc:
           puVar3[3] = (unsigned int)puVar8;
           if (*(short *)puVar3[(int)puVar8 + 0x16a] >= 0xc9) {
             temp_v4 = gameDataGetPlayerName();
-            FUN_003180c4(0x28,temp_v4);
+            scrSetStringSlot(0x28,temp_v4);
           }
           else {
-            FUN_003180c4(0x28,(int)puVar3[(int)puVar8 + 0x16a] + 7);
+            scrSetStringSlot(0x28,(int)puVar3[(int)puVar8 + 0x16a] + 7);
           }
           msgWindowReset();
           puVar3[5] = 1;
@@ -693,24 +693,24 @@ LAB_0027edcc:
       linkHolderApplyFirst(puVar3[0xf],0);
     }
     temp_v7 = 6;
-    FUN_001517b4(6,2);
+    padQueryLogicalKey(6,2);
     if (temp_v7 == 0) {
       temp_v7 = 9;
-      FUN_001517b4(9,2);
+      padQueryLogicalKey(9,2);
       if (temp_v7 == 0) {
         temp_v7 = 1;
-        FUN_001517b4();
+        padQueryLogicalKey();
         if (temp_v7 == 0) {
           temp_v8 = (float)VectorSignedToFloat(puVar3[0x15],(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v9 = *(float *)(**(int **)(*(int *)(puVar3[puVar3[0x159] + 0x12] + 0x34) + 0x90) + 8);
           temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v9 < temp_v8) << 0x1f);
           in_fpscr = temp_v6 | ((unsigned int)((temp_v9 != temp_v9) || (temp_v8 != temp_v8)) << 0x1c);
           if (((unsigned char)(temp_v6 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) ||
-             (temp_v7 = FUN_004ffba8(*(unsigned int *)(puVar3[puVar3[0x15d] + 0x10] + 4)), temp_v7 == 0)
+             (temp_v7 = animationChannelsAllFinished(*(unsigned int *)(puVar3[puVar3[0x15d] + 0x10] + 4)), temp_v7 == 0)
              ) {
             temp_v8 = (float)VectorSignedToFloat(puVar3[0x15],(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v7 = (int)temp_v8;
-            if ((temp_v7 >= 6) && (temp_v3 = FUN_0013def0(0), temp_v3 == 3)) {
+            if ((temp_v7 >= 6) && (temp_v3 = pairedAvailabilityGetState(0), temp_v3 == 3)) {
               FUN_003d54f8(0,8);
             }
             if (temp_v7 != 0xb4) {
@@ -813,25 +813,25 @@ LAB_0027edcc:
   case 8:
     if (puVar3[0x15d] != 0) {
       temp_v7 = 0x20;
-      FUN_00178b04(0x20,&LAB_0027e4bc,0x72b);
+      asdMemoryAllocTraced(0x20,&LAB_0027e4bc,0x72b);
       temp_v4 = 0;
       if (temp_v7 != 0) {
         temp_v4 = modelListInit();
       }
       puVar3[0x11] = temp_v4;
-      FUN_0040aa6c();
+      resourceOwnerLoadFileSync();
       FUN_0040aad4(puVar3[0x11],0);
       FUN_0045b538(*(int *)(puVar3[0x11] + 0xc) + 0xc);
     }
     else {
       temp_v7 = 0x20;
-      FUN_00178b04(0x20,&LAB_0027e4bc,0x725);
+      asdMemoryAllocTraced(0x20,&LAB_0027e4bc,0x725);
       temp_v4 = 0;
       if (temp_v7 != 0) {
         temp_v4 = modelListInit();
       }
       puVar3[0x10] = temp_v4;
-      FUN_0040aa6c();
+      resourceOwnerLoadFileSync();
       FUN_0040aad4(puVar3[0x10],0);
       FUN_0045b538(*(int *)(puVar3[0x10] + 0xc) + 0xc);
     }
@@ -907,7 +907,7 @@ LAB_0027edcc:
   case 0xe:
     temp_v7 = scrRunOpcodesStub(puVar3[10]);
     if (temp_v7 != 2) break;
-    FUN_00408184(0x21,1);
+    gameCounterAddSaturating(0x21,1);
     *(unsigned char *)(puVar3 + 0x15c) = 0;
     sysPlayVoice(0x10000b2);
     FUN_00214da4();
@@ -930,7 +930,7 @@ LAB_0027edcc:
     linkedTargetSetFloat(temp_v4);
     break;
   case 0xf:
-    FUN_00408184(0x21,1);
+    gameCounterAddSaturating(0x21,1);
     *(unsigned char *)(puVar3 + 0x15c) = 0;
     sysPlayVoice(0x10000b2);
     FUN_00214da4();
@@ -961,7 +961,7 @@ LAB_0027edcc:
       asdLoadFileSyncDefault();
       puVar3[0xc] = (unsigned int)puVar9;
       temp_v7 = puVar3[0xb];
-      FUN_00275bc8(temp_v7,puVar9);
+      scrScriptProcessCreate(temp_v7,puVar9);
       puVar3[0xd] = temp_v7;
       *(unsigned int *)(temp_v7 + 0x108) = 2;
       scrScriptProcessStartEntry(puVar3[0xd],1);
@@ -1011,7 +1011,7 @@ LAB_0027edcc:
         asdMemFree();
         puVar3[0xe] = 0;
       }
-      FUN_001695a0();
+      messageSetScriptDisplayMode();
       resourceOwnerReleaseAndReset(g_handleRegistry);
       puVar8 = g_tmnl;
       asdCameraInitAreas();

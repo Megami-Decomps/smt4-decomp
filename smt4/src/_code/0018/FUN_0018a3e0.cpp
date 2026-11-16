@@ -61,7 +61,7 @@ extern int FUN_00298848(unsigned int, int);
 /* Supplied declaration required: dataTable15GetUnlockedEntryId. */
 /* Supplied declaration required: FUN_00299900. */
 /* Supplied declaration required: FUN_00299bc4. */
-/* Supplied declaration required: FUN_0029a924. */
+/* Supplied declaration required: appGetRemainingCapacity. */
 /* Supplied declaration required: FUN_0029a9d4. */
 /* Supplied declaration required: FUN_0029acb0. */
 /* Supplied declaration required: beginStatusPanelClose. */
@@ -126,7 +126,7 @@ void FUN_0018a3e0(void)
       temp_v3 = FUN_0029a9d4(temp_v5,1);
     }
     else {
-      temp_v3 = FUN_0029a924(temp_v5);
+      temp_v3 = appGetRemainingCapacity(temp_v5);
     }
     FUN_00298d28(0,-temp_v3);
     FUN_00299bc4(temp_v6 + 0x1dc,1);
@@ -244,7 +244,7 @@ void FUN_0018a3e0(void)
       temp_v6 = FUN_0029a9d4(*(unsigned int *)(temp_v6 + 0xe3c),1);
     }
     else {
-      temp_v6 = FUN_0029a924(*(unsigned int *)(temp_v6 + 0xe3c));
+      temp_v6 = appGetRemainingCapacity(*(unsigned int *)(temp_v6 + 0xe3c));
     }
     FUN_00298d28(0,-temp_v6);
     return;
@@ -264,7 +264,7 @@ void FUN_0018a3e0(void)
       temp_v6 = FUN_0029a9d4(*(unsigned int *)(temp_v6 + 0xe3c),1);
     }
     else {
-      temp_v6 = FUN_0029a924(*(unsigned int *)(temp_v6 + 0xe3c));
+      temp_v6 = appGetRemainingCapacity(*(unsigned int *)(temp_v6 + 0xe3c));
     }
     FUN_00298d28(0,-temp_v6);
     return;
@@ -292,7 +292,7 @@ LAB_0018a948:
             }
             else {
               temp_v6 = gameGetUnitRecord();
-              temp_v2 = FUN_0029a924(*(unsigned int *)(temp_v4 + 0xe3c));
+              temp_v2 = appGetRemainingCapacity(*(unsigned int *)(temp_v4 + 0xe3c));
               temp_v2 = *(short *)(temp_v6 + 0x2c) - temp_v2;
               *(short *)(temp_v6 + 0x2c) = temp_v2;
             }

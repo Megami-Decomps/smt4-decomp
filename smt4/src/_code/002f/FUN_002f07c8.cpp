@@ -16,7 +16,7 @@ static __inline void groupMemberBitResult(s32 flag, s32 group)
 {
     s32 first;
     s32 count;
-    FUN_002499fc(group, &first, &count);
+    btlSideGetEntryRange(group, &first, &count);
     for (s32 index = first; index < count + first; ++index) {
         BtlEntry *entry = &btlGetMainState()->entries[index];
         if ((entry->flags & 0x10) == 0 && (entry->flags & 1) != 0 &&

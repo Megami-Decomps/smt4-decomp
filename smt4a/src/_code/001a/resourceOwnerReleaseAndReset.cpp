@@ -18,7 +18,7 @@ struct ResourceOwner {
     u32 state; // 0x38
 };
 
-extern "C" void FUN_001b55f8(Buffers *);
+extern "C" void resourceBuffersFree(Buffers *);
 
 // Release the owned polymorphic resource and any backing buffers.
 extern "C" void resourceOwnerReleaseAndReset(ResourceOwner *owner)
@@ -29,5 +29,5 @@ extern "C" void resourceOwnerReleaseAndReset(ResourceOwner *owner)
     }
     owner->state = 0;
     if (owner->buffers != NULL)
-        FUN_001b55f8(owner->buffers);
+        resourceBuffersFree(owner->buffers);
 }

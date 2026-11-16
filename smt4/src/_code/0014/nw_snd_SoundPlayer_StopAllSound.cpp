@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002bda30(int *, unsigned int);
+int basicSoundStopOrFadeOut(int *, unsigned int);
 
-/* Supplied declaration required: FUN_002bda30. */
+/* Supplied declaration required: basicSoundStopOrFadeOut. */
 
 
 void nw_snd_SoundPlayer_StopAllSound(int param_1,unsigned int param_2)
@@ -20,7 +20,7 @@ void nw_snd_SoundPlayer_StopAllSound(int param_1,unsigned int param_2)
   if (piVar1 != (int *)(param_1 + 4)) {
     do {
       piVar2 = (int *)*piVar1;
-      FUN_002bda30(piVar1 + -0x37,param_2);
+      basicSoundStopOrFadeOut(piVar1 + -0x37,param_2);
       piVar1 = piVar2;
     } while (piVar2 != (int *)(param_1 + 4));
   }

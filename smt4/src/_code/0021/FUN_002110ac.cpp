@@ -29,7 +29,7 @@ void FUN_00295a18(u32 item, s32 amount);
 void scrScriptProcessStartEntry(u32 script, s32 entry);
 s32 scrRunOpcodesStub(u32 script);
 void messageMainSetEnabled(s32 enabled);
-void FUN_002be650(u32 item, s32 a);
+void dataFindKindRecordWithAocOverrides(u32 item, s32 a);
 s32 gameDataBlocksGetFlagByteA(void);
 s32 battleTalkIsBustReady(void);
 
@@ -37,7 +37,7 @@ s32 battleTalkIsBustReady(void);
 static void printItemName(u32 item)
 {
     u8 name[128];
-    FUN_002be650(item, 1);
+    dataFindKindRecordWithAocOverrides(item, 1);
     libc_strcpy(reinterpret_cast<unsigned int *>(name), reinterpret_cast<unsigned int *>(item));
     textEncodeFontSlot(0, name);
 }

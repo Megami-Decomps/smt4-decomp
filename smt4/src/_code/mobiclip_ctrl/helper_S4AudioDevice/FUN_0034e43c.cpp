@@ -109,7 +109,7 @@ u32 FUN_0034e43c(AudioAllocator *allocator, s32 ringCount, const void *first, co
                               DAT_0044d0f8.thread->stackBase + DAT_0044d0f8.thread->stackSize, 2, -2, 0);
     bool failed = nnResultIsFailure(result);
     if (failed) {
-        FUN_002c526c(result, failed);
+        resultHandleFailure(result, failed);
     }
     return 1;
 }

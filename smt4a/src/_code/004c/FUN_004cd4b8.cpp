@@ -223,7 +223,7 @@ void FUN_004cd4b8(int param_1,int param_2)
       iVar9 = iVar9 + 1;
     } while (iVar9 < param_2);
   }
-  FUN_004bcd90(param_1);
+  unitRecomputeDerivedStats(param_1);
   sVar5 = recordGetScaledMaximum(param_1);
   *(short *)(param_1 + 0x2a) = (sVar5 - (short)uStack_5c) + *(short *)(param_1 + 0x2a);
   *(short *)(param_1 + 0x2c) = (*(short *)(param_1 + 0x10) - sVar3) + *(short *)(param_1 + 0x2c);

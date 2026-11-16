@@ -3,7 +3,7 @@
 #include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
-void FUN_0025c650(LinkedItems *items, LinkedItem *item, LinkedItem *replacement);
+void linkedItemsRedirectToReplacement(LinkedItems *items, LinkedItem *item, LinkedItem *replacement);
 
 static LinkedItem *findSharer(LinkedItems *items, void *resource)
 {
@@ -51,10 +51,10 @@ void linkedItemsRemoveAndRelease(LinkedItems *items, LinkedItem *item)
             if (replacement != NULL) {
                 replacement->reference.flags &= ~2u;
                 replacement->reference.source = NULL;
-                FUN_0025c650(items, replacement, replacement);
+                linkedItemsRedirectToReplacement(items, replacement, replacement);
                 for (LinkedItem *reference = findReference(items, item->resource); reference != NULL;
                      reference = findReference(items, item->resource))
-                    FUN_0025c650(items, reference, replacement);
+                    linkedItemsRedirectToReplacement(items, reference, replacement);
             }
         }
         if (!(item->reference.flags & 1)) {

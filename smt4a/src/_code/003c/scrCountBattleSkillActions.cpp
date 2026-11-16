@@ -14,7 +14,7 @@ struct BattleCountActions {
 };
 extern "C" {
 s32 btlResolveEntryChoice(s32);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *);
 s32 FUN_003249c0(BtlCombatantEntryA *, s32);
 void scrSetResult(s32);
 }
@@ -40,7 +40,7 @@ extern "C" u32 scrCountBattleSkillActions()
     s32 group = btlResolveEntryChoice(scrGetArg(1));
     s32 starts[12], counts[3];
     s32 total = 0;
-    FUN_00301a08(group, starts, counts);
+    btlGetEntryChoiceRange(group, starts, counts);
     for (s32 slot = starts[0]; slot < starts[0] + counts[0]; ++slot) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[slot];
         u64 flags = entry->flags;
@@ -50,7 +50,7 @@ extern "C" u32 scrCountBattleSkillActions()
         }
     }
     if (btlGetMainState()->unk4cd1) {
-        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry)
             total += FUN_003249c0(entry, skill);
     }

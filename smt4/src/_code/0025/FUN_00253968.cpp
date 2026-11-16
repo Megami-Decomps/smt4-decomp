@@ -61,7 +61,7 @@ u32 FUN_00253968(MapEnemyEncounterView *enemy)
         bool approaching = isSourceApproaching(enemy->position);
         if (!approaching && (enemy->kind == 6 || enemy->kind == 16) && enemy->behavior == 4) {
             MapVector shifted = enemy->position;
-            shifted.x += FUN_0028250c(enemy->heading * 0.0174532924f) * 100.0f;
+            shifted.x += mathRemPio2f(enemy->heading * 0.0174532924f) * 100.0f;
             shifted.z += FUN_00282390(enemy->heading * 0.0174532924f) * 100.0f;
             approaching = isSourceApproaching(shifted);
         }
@@ -83,7 +83,7 @@ u32 FUN_00253968(MapEnemyEncounterView *enemy)
                     g_gameState.encounterApproach = 0;
             }
             SoundActorQueuePosition soundPosition = { enemy->position.x, enemy->position.y + 110.0f, enemy->position.z };
-            FUN_00291e40(trigger->approach != 0 ? 0x1000187 : 0x1000185, soundPosition);
+            soundActorStartOnFreeChannel(trigger->approach != 0 ? 0x1000187 : 0x1000185, soundPosition);
         }
             return 1;
         }

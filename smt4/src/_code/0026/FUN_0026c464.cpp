@@ -6,7 +6,7 @@
 
 extern "C" {
 s32 FUN_00258de0(s32 user, s32 target, Table04Record *skill, s32 preview, s32 mode);
-s32 FUN_0029a924(u32 skill);
+s32 appGetRemainingCapacity(u32 skill);
 s32 FUN_0029a9d4(u32 skill, s32 mode);
 BtlEquip *gameGetUnitRecord(s32 index);
 PartyDamageSlotsIV *gameGetSlotTable(void);
@@ -37,7 +37,7 @@ s32 FUN_0026c464(s32 user, u32 skillId, s32 preview)
                         unit->mp = 0;
                 } else {
                     BtlEquip *unit = gameGetUnitRecord(user);
-                    unit->mp -= FUN_0029a924(skill->identity.id);
+                    unit->mp -= appGetRemainingCapacity(skill->identity.id);
                     if (unit->mp < 0)
                         unit->mp = 0;
                 }

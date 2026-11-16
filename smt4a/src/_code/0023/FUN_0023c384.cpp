@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00163aa4(int);
+int uiSpriteAdvanceAnimation(int);
 int eventQueueAddUnique(int);
 int uiSpriteSelectAnim(int, int);
 int pairSetFirstResetSecond(int, int);
 int gameGetSlotRecord(int);
 int FUN_00358e94(int, int, int);
-int FUN_00387240(int, int, int);
+int uiStoreTextureEntryCenter(int, int, int);
 int FUN_004bd0d8(...);
 int bitsAt60Set(int, int);
 
@@ -30,7 +30,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_00163aa4. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: eventQueueAddUnique. */
 extern int asdTMTexTableEntryAt(unsigned int, int);
 /* Supplied declaration required: uiSpriteSelectAnim. */
@@ -40,7 +40,7 @@ extern int gameGetSlotTable(void);
 extern int gameGetUnlockedCountLimit(void);
 extern long long __aeabi_uldivmod(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00358e94. */
-/* Supplied declaration required: FUN_00387240. */
+/* Supplied declaration required: uiStoreTextureEntryCenter. */
 /* Supplied declaration required: FUN_004bd0d8. */
 extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: bitsAt60Set. */
@@ -99,7 +99,7 @@ void FUN_0023c384(int param_1)
           *(unsigned int *)(temp_v12 + 0x78a8) = temp_v7 << 0xc;
           *(unsigned int *)(temp_v12 + 0x78ac) = temp_v7 >> 0x14;
           *(short *)(temp_v12 + 0x78b4) = *(short *)(temp_v12 + 0x78b4) + 1;
-          FUN_00163aa4(param_1 + temp_v6 * 0x8c + 0x2550);
+          uiSpriteAdvanceAnimation(param_1 + temp_v6 * 0x8c + 0x2550);
           if (*(short *)(temp_v12 + 0x78b4) >= 0x1f) {
             *(unsigned char *)(temp_v12 + 0x78b6) = 0;
             *(int *)(temp_v12 + 0x78a8) = 0;
@@ -190,7 +190,7 @@ void FUN_0023c384(int param_1)
                   temp_v6 = param_1 + temp_v6 * 0x8c + 0x2550;
                   uiSpriteSelectAnim(temp_v6,2);
                   pairSetFirstResetSecond(temp_v6,0x1a);
-                  FUN_00387240(temp_v6,0x1d,0x2f);
+                  uiStoreTextureEntryCenter(temp_v6,0x1d,0x2f);
                   temp_v11 = asdTMTexTableEntryAt(0x1d,temp_v12 + 0x31);
                   temp_v1 = *(short *)(temp_v11 + 10);
                   temp_v2 = *(short *)(temp_v11 + 8);
@@ -213,7 +213,7 @@ void FUN_0023c384(int param_1)
                   temp_v6 = param_1 + temp_v6 * 0x8c + 0x2550;
                   uiSpriteSelectAnim(temp_v6,3);
                   pairSetFirstResetSecond(temp_v6,0x62);
-                  FUN_00387240(temp_v6,0x1d,0x67);
+                  uiStoreTextureEntryCenter(temp_v6,0x1d,0x67);
                   temp_v11 = asdTMTexTableEntryAt(0x1d,temp_v14 + 0x68);
                   temp_v1 = *(short *)(temp_v11 + 10);
                   temp_v2 = *(short *)(temp_v11 + 8);

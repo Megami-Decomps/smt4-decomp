@@ -8,7 +8,7 @@ extern "C" {
 extern TerminalDrawWork *g_tmnl;
 extern TerminalDrawName g_tmnlEntries[];
 extern RenderCtx *g_titleScene;
-s32 FUN_002c5d80(u32 group, u32 index);
+s32 renderCtxPackPassFlags(u32 group, u32 index);
 
 // Draw the terminal name during the active sequence and refresh the scene's scoped render state.
 u32 FUN_0021f354()
@@ -18,7 +18,7 @@ u32 FUN_0021f354()
         if (work->state == 1)
             textDrawString(3, -1, g_tmnlEntries[work->nameIndex].text, 150.0f, 0.0f, 0.0f, 1.0f, 1.0f);
         RenderCtx *scene = g_titleScene;
-        renderCtxPushA(scene, FUN_002c5d80(1, 0));
+        renderCtxPushA(scene, renderCtxPackPassFlags(1, 0));
         renderStackPop(&g_titleScene->stackA);
     }
     return 0;

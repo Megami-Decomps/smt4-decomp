@@ -1,6 +1,6 @@
 #include "shard/RomFileOpenState.h"
 
-extern "C" s32 FUN_001883b0(RomOpenFile *file, const char *path, u32 mode);
+extern "C" s32 archivePathDeviceOpen(RomOpenFile *file, const char *path, u32 mode);
 #include "sys/ProcessResult.h"
 #include "sys/FilePaths.h"
 #include "nn/Result.h"
@@ -8,7 +8,7 @@ extern "C" s32 FUN_001883b0(RomOpenFile *file, const char *path, u32 mode);
 static __inline s32 romFileOpen(RomOpenFile *file, const char *path, u32 mode)
 {
     romOpenFileInitialize(file);
-    return FUN_001883b0(file, path, mode);
+    return archivePathDeviceOpen(file, path, mode);
 }
 
 // Resolve the path and initialize the ROM file in read or write mode.

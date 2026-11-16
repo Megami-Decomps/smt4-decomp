@@ -8,7 +8,7 @@ extern CampInventoryLists *g_camp;
 PartyDamageSlotsIV *gameGetSlotTable();
 StatBlock *gameGetUnitRecord(s32);
 void FUN_00283f30(UnitSummarySkills *, s32);
-void FUN_0029f848(CampInventoryController *, u32, s32, s32, s32, s32);
+void gridNavigationConfigure(CampInventoryController *, u32, s32, s32, s32, s32);
 void FUN_00282f80(s32);
 
 void FUN_00262d40()
@@ -42,7 +42,7 @@ void FUN_00262d40()
             }
         }
     }
-    FUN_0029f848(&work->categories.controller, count, 11, 1, 1, 1);
+    gridNavigationConfigure(&work->categories.controller, count, 11, 1, 1, 1);
     FUN_00282f80(9);
 }
 }

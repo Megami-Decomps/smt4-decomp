@@ -6,13 +6,13 @@
 extern "C" {
 f32 jobGetScalarValue();
 void efctSetSpeed(f32 scale);
-void FUN_00185dd4(u32 flags, u32 table, s32 index, u32 second, u32 third,
+void texDrawTableEntrySized(u32 flags, u32 table, s32 index, u32 second, u32 third,
     u32 firstExtra, u32 secondExtra, u32 fourth);
 void vectorSetAllOne(QuadVector *value);
 void *__aeabi_vec_ctor_nocookie_nodtor(QuadVector *values, void (*construct)(QuadVector *), u32 size, u32 count);
 void quadSetOrderedVectors(const QuadVector *first, const QuadVector *second,
     const QuadVector *third, const QuadVector *fourth, s32 mode, s32 preserveW);
-void FUN_00183bb0();
+void gxResetColorQuadToWhite();
 
 /* Dispatch the sprite's special mode, otherwise apply optional vertex colors around the draw. */
 void FUN_00492c98(u32 flags, u32 table, s32 index, u32 second, u32 third,
@@ -22,7 +22,7 @@ void FUN_00492c98(u32 flags, u32 table, s32 index, u32 second, u32 third,
     TextureTableEntryIV *sprite = asdTMTexTableEntryAt(table, index);
     ItemSpriteExtension *extension = reinterpret_cast<ItemSpriteExtension *>(sprite->placement);
     if (extension != NULL && extension->mode == 1) {
-        FUN_00185dd4(flags, table, index, second, third, firstExtra, secondExtra, fourth);
+        texDrawTableEntrySized(flags, table, index, second, third, firstExtra, secondExtra, fourth);
         return;
     }
     if (useColors && extension != NULL) {
@@ -37,6 +37,6 @@ void FUN_00492c98(u32 flags, u32 table, s32 index, u32 second, u32 third,
     }
     texTableRecordCallExtended(flags, table, index, second, third, firstExtra, secondExtra, fourth);
     efctSetSpeed(previousScale);
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
 }
 }

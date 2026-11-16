@@ -6,7 +6,7 @@ extern BtlUiGlobals g_btlUi;
 void FUN_00206270(BtlUiObjC *);
 void playSceneTimerSubStart(BtlUiObjB *);
 void playSceneFadeInStart(BtlUiObjA *);
-s32 FUN_0028be84(BtlUiObjB *);
+s32 uiSpriteOperationIsComplete(BtlUiObjB *);
 s32 playSceneIsFadeOutDone(BtlUiObjA *);
 void FUN_00297f1c(BtlUiObjC *, u32 selection, s32 mode, u32 options);
 
@@ -14,7 +14,7 @@ static inline void battleUiRestorePanels()
 {
     BtlUi *ui = g_btlUi.ui;
     if (playSceneIsFadeOutDone(&ui->objA)) {
-        if (FUN_0028be84(&ui->objB)) {
+        if (uiSpriteOperationIsComplete(&ui->objB)) {
             playSceneFadeInStart(&ui->objA);
             playSceneTimerSubStart(&ui->objB);
         }

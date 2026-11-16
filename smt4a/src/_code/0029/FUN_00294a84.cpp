@@ -27,7 +27,7 @@ extern "C" {
 extern PopupState *g_popupState;
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(s32 maximum);
-u32 FUN_002d8b58(s32 type);
+u32 popupSelectWeightedMessage(s32 type);
 }
 
 /* Queue a selected-slot popup, subject to its flags and probability table. */
@@ -47,7 +47,7 @@ extern "C" void FUN_00294a84(s32 immediate)
     }
     if (immediate != 0) {
         g_popupState->selection = slot->selection;
-        g_popupState->handle = FUN_002d8b58(6);
+        g_popupState->handle = popupSelectWeightedMessage(6);
         g_popupState->step = 0;
         g_popupState->state = 4;
         return;
@@ -69,7 +69,7 @@ extern "C" void FUN_00294a84(s32 immediate)
             continue;
         }
         g_popupState->selection = slot->selection;
-        g_popupState->handle = FUN_002d8b58(5);
+        g_popupState->handle = popupSelectWeightedMessage(5);
         g_popupState->step = 0;
         g_popupState->state = 4;
         return;

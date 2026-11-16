@@ -35,7 +35,7 @@ extern "C" SecondarySortRecord *dataTable1bOr1cGetRecord(u16);
 extern "C" {
 #endif
 
-u32 FUN_002b7148(void);
+u32 asdGxGetCommandCursor(void);
 
 #ifdef __cplusplus
 }

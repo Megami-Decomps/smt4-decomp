@@ -23,7 +23,7 @@ char *libc_strcpy(char *destination, const char *source);
 char *libc_strcat(char *destination, const char *source);
 u32 libc_strlen(const char *text);
 void textureEntryAttachStex();
-u32 FUN_001bcfb4(const char *path, u32 mode, u32 flags, void (*callback)(), TextureLoadNode *node, u32 alignment);
+u32 asdLoadFileAsyncByPath(const char *path, u32 mode, u32 flags, void (*callback)(), TextureLoadNode *node, u32 alignment);
 }
 
 // Resolve a node's texture path, choose its compression mode and submit the load.
@@ -63,7 +63,7 @@ extern "C" TextureLoadNode *asdMTeXLoadNodeTexturePath(TextureLoadNode *node, u3
             else
                 options |= 2;
         }
-        FUN_001bcfb4(path, 0, options, textureEntryAttachStex, node, 0x80);
+        asdLoadFileAsyncByPath(path, 0, options, textureEntryAttachStex, node, 0x80);
     }
     return node;
 }

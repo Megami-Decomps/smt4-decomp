@@ -11,7 +11,7 @@ extern "C" {
 #define GAME_MODE_KEY_ITEMS_LOCKED 24
 #define GAME_FLAG_ITEMS_LOCKED 0x560
 
-s32 FUN_003df390(void);
+s32 gameUnlockRecordRequirementsMet(void);
 
 /* Returns whether item `id` is currently usable. */
 u32 FUN_003de75c(u32 id)
@@ -19,7 +19,7 @@ u32 FUN_003de75c(u32 id)
     ItemDataRecord *record;
     ItemDataRecord *late;
 
-    if (!FUN_003df390()) {
+    if (!gameUnlockRecordRequirementsMet()) {
         return 0;
     }
     record = dataTable1bOr1cGetRecord(id);

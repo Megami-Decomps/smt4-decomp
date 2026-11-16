@@ -21,9 +21,9 @@ int FUN_00293f10(int, int);
 int statusCameraHandleControls(...);
 int FUN_0029ede8(int, unsigned int, unsigned int);
 int asdTMTexTableEntryAt(...);
-int FUN_002bf810(...);
+int soundPlaySeUnpanned(...);
 int uiPointerHitsRect(...);
-int FUN_002bffe0(...);
+int touchGetPointByMode(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -53,9 +53,9 @@ extern int FUN_0028d594(void);
 /* Supplied declaration required: FUN_0029ede8. */
 extern int padIsButtonRepeat(unsigned int);
 /* Supplied declaration required: asdTMTexTableEntryAt. */
-/* Supplied declaration required: FUN_002bf810. */
+/* Supplied declaration required: soundPlaySeUnpanned. */
 /* Supplied declaration required: uiPointerHitsRect. */
-/* Supplied declaration required: FUN_002bffe0. */
+/* Supplied declaration required: touchGetPointByMode. */
 extern int slotIsActive(unsigned int);
 /* Supplied declaration required: FUN_002ebfbc. */
 /* Supplied declaration required: FUN_0030a84c. */
@@ -278,7 +278,7 @@ LAB_001c1220:
                 }
                 *(unsigned int *)(temp_v0 + 0xa4) = 0x14a;
                 *(unsigned int *)(temp_v0 + 0xac) = 0;
-                FUN_002bf810(0x100016d);
+                soundPlaySeUnpanned(0x100016d);
               }
             }
             else {
@@ -344,7 +344,7 @@ LAB_001c1220:
     } while (temp_v7 < 3);
     temp_v2 = saveGetIndexedMapValue(*(unsigned int *)(temp_v1 + 0x13c));
     *(unsigned int *)(temp_v1 + 0xc) = temp_v2;
-    FUN_002bf810(0x100016c);
+    soundPlaySeUnpanned(0x100016c);
     temp_v8 = 1;
     *(unsigned int *)(temp_v0 + 0x158) = 0;
   }
@@ -468,7 +468,7 @@ LAB_001c1220:
                 }
                 *(unsigned int *)(temp_v0 + 0xa4) = 0x14a;
                 *(unsigned int *)(temp_v0 + 0xac) = 0;
-                FUN_002bf810(0x100016d);
+                soundPlaySeUnpanned(0x100016d);
               }
             }
             else {
@@ -478,7 +478,7 @@ LAB_001c1220:
           else {
             temp_v7 = *(int *)(temp_v0 + 0x13c);
             temp_v3 = *(int *)(temp_v0 + 0x140);
-            FUN_002bffe0(temp_v17 + 1,temp_v17,0);
+            touchGetPointByMode(temp_v17 + 1,temp_v17,0);
             temp_v1 = asdTMTexTableEntryAt(0x39,0x41);
             temp_v17[0] = temp_v17[0] - *(short *)(temp_v1 + 10);
             temp_v5 = *(int *)(temp_v0 + 0x148);
@@ -557,7 +557,7 @@ LAB_001c1220:
       } while (temp_v7 < 3);
       temp_v2 = saveGetIndexedMapValue(*(unsigned int *)(temp_v1 + 0x13c));
       *(unsigned int *)(temp_v1 + 0xc) = temp_v2;
-      FUN_002bf810(0x100016c);
+      soundPlaySeUnpanned(0x100016c);
       temp_v8 = 1;
       *(unsigned int *)(temp_v0 + 0x158) = 0;
     }
@@ -576,7 +576,7 @@ LAB_001c1220:
     *(unsigned int *)(temp_v0 + 0x168) = 0;
   }
   else if (temp_v8 == 2) {
-    FUN_002bf810(0x100016e);
+    soundPlaySeUnpanned(0x100016e);
     *(unsigned int *)(temp_v0 + 0x144) = 2;
   }
   FUN_002ebfbc(temp_v0 + 0x118);

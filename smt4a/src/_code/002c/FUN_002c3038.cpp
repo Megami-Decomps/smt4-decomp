@@ -19,8 +19,8 @@ extern RenderCtxA *g_renderCtx;
 u32 jobGetWork(u32 handle);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
-void FUN_00157558(RenderCtxA *context);
-u32 FUN_001692ac(u32 kind, bool enabled);
+void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
+u32 renderCtxPackPassFlags(u32 kind, bool enabled);
 void mobiclipRenderCurrentScreen(void);
 void FUN_00167618(const f32 *topLeft, const f32 *topRight, const f32 *bottomLeft, const f32 *bottomRight, f32 x, f32 y,
                   f32 width, f32 height, f32 depth);
@@ -34,7 +34,7 @@ u32 FUN_002c3038(u32 handle)
     MovieTestWork *work = (MovieTestWork *)jobGetWork(handle);
     if (work->mode != 1) {
         skinObjectUpdateMatrices(g_renderCtx);
-        FUN_00157558(g_renderCtx);
+        renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         if (work->mode != 7 && work->mode != 8 && work->mode != 14) {
             mobiclipRenderCurrentScreen();
         } else {
@@ -52,8 +52,8 @@ u32 FUN_002c3038(u32 handle)
             color[1] = 1.0f;
             color[2] = 1.0f;
             color[3] = 1.0f;
-            FUN_00157558(g_renderCtx);
-            renderCtxPushA(g_renderCtx, FUN_001692ac(1, false));
+            renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
+            renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, false));
             color[3] = work->fade;
             renderCtxSelectTexture(g_renderCtx, NULL);
             FUN_00167618(color, color, color, color, 0.0f, 0.0f, 400.0f, 240.0f, 0.9375f);

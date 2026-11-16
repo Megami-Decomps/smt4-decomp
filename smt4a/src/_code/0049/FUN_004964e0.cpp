@@ -34,7 +34,7 @@ extern "C" {
 void releaseEntriesB(EquipmentMenuPanelView *);
 void releaseEntriesA(MessageIdList *);
 void ifTouchRegionRemove();
-void FUN_004d05c4(MessageIdList *, u32, s32, s32);
+void messageIdListSetRange(MessageIdList *, u32, s32, s32);
 u16 FUN_001643b4(u32, u32);
 void FUN_00498ff0(EquipmentMenuState *);
 
@@ -56,7 +56,7 @@ void FUN_004964e0(EquipmentMenuResetView *menu, s32 refresh)
         firstItem = 0x28;
         itemCount = 10;
     }
-    FUN_004d05c4(&menu->reset.messages, 0x20, firstItem, itemCount);
+    messageIdListSetRange(&menu->reset.messages, 0x20, firstItem, itemCount);
     menu->reset.messages.unk10 = 1;
     menu->touchHandles[0] = FUN_001643b4(0x14, 0x576);
     menu->touchHandles[1] = FUN_001643b4(0x14, 0x577);

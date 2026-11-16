@@ -13,7 +13,7 @@ int FUN_0018a28c(unsigned char *);
 int FUN_0018a520(int *, int);
 int FUN_001afd94(void);
 int FUN_001bd5f8(void);
-int FUN_002e3140(void);
+int resultHandleFailure(void);
 int software_interrupt(int);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
@@ -38,7 +38,7 @@ extern int FUN_0018985c(int, unsigned int);
 /* Supplied declaration required: FUN_001afd94. */
 /* Supplied declaration required: FUN_001bd5f8. */
 extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
-/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: resultHandleFailure. */
 
 
 int FUN_0016f574(int *param_1,int param_2)
@@ -68,7 +68,7 @@ int FUN_0016f574(int *param_1,int param_2)
       }
     }
     if ((int)piVar2 < 0) {
-      FUN_002e3140();
+      resultHandleFailure();
     }
     temp_v0 = FUN_0018985c(*param_1,2);
     if (temp_v0 < 0) {

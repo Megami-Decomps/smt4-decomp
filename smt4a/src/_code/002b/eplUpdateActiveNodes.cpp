@@ -20,7 +20,7 @@ typedef struct GameStateFlags {
     /* 0x23 */ u8 paused;
 } GameStateFlags;
 
-void FUN_00182540(EffectNode *node);
+void effectNodeUpdatePlacedChildren(EffectNode *node);
 
 extern EplSlots *g_eplSlots;
 extern GameStateFlags g_gameState;
@@ -30,7 +30,7 @@ static inline bool eplWorkIsActive(EplWork *work)
     return work->target != NULL && work->active != 0;
 }
 
-/* Runs FUN_00182540 for each of the 16 effect works that has a target and is active, unless the game state is paused. */
+/* Runs effectNodeUpdatePlacedChildren for each of the 16 effect works that has a target and is active, unless the game state is paused. */
 void eplUpdateActiveNodes(void)
 {
     s32 i;
@@ -39,7 +39,7 @@ void eplUpdateActiveNodes(void)
         for (i = 0; i < 16; i++) {
             EplWork *work = &g_eplSlots->work[i];
             if (eplWorkIsActive(work)) {
-                FUN_00182540(work->target);
+                effectNodeUpdatePlacedChildren(work->target);
             }
         }
     }

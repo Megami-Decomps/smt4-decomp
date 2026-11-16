@@ -26,7 +26,7 @@ extern void scrScriptProcessDestroy(void *process);
 extern void asdMemFree(void *block);
 extern void placeWinRelease(void);
 extern void sceneReleaseJobsAndResources(Scene *scene);
-extern void FUN_001695a0(void);
+extern void messageSetScriptDisplayMode(void);
 extern void messageSetMode(s32 arg);
 
 /* Releases the scene's widget, script process and buffers, then shuts its subsystems down. */
@@ -52,7 +52,7 @@ void FUN_00499c84(Scene *scene)
     }
     placeWinRelease();
     sceneReleaseJobsAndResources(scene);
-    FUN_001695a0();
+    messageSetScriptDisplayMode();
     messageSetMode(1);
 }
 

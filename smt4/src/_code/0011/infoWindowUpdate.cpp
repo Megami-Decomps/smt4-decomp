@@ -19,7 +19,7 @@ struct InfoWindowUpdateState {
 };
 
 extern "C" InfoWindowUpdateState *g_infoWin;
-extern "C" s32 FUN_002bf818(TimerSlot *timer);
+extern "C" s32 uiSpriteAdvanceAnimation(TimerSlot *timer);
 extern "C" void timerStart(TimerSlot *timer, s32 animation, s32 flags);
 extern "C" void FUN_002b8ee0(TimerSlot *timer, s32 value);
 
@@ -29,7 +29,7 @@ extern "C" s32 infoWindowUpdate(u32 job)
     InfoWindowUpdateState *window = g_infoWin;
     switch (window->state) {
     case 1:
-        if (FUN_002bf818(&window->transition)) {
+        if (uiSpriteAdvanceAnimation(&window->transition)) {
             if (window->timed) {
                 window->state = 4;
             } else {
@@ -68,7 +68,7 @@ extern "C" s32 infoWindowUpdate(u32 job)
         }
         break;
     case 5:
-        if (FUN_002bf818(&window->transition)) {
+        if (uiSpriteAdvanceAnimation(&window->transition)) {
             window->timed = 0;
             window->state = 0;
             window->frames = 0;

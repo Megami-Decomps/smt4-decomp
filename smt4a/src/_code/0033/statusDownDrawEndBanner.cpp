@@ -13,11 +13,11 @@ void statusDownDrawEndBanner(u32 x, s32 y, f32 alpha)
 {
     efctSetSpeed(alpha);
     const TextureTableEntryIV *anchor = asdTMTexTableEntryAt(0x12, 0x56e);
-    FUN_001835b4(2, 0x12, 0x55a, anchor->x + x, anchor->y + y, 0x97);
-    FUN_001835b4(2, 0x12, 0x55b, anchor->x + x, anchor->y + y, 0x97);
-    FUN_001835b4(2, 0x12, 0x55c, anchor->x + x, anchor->y + y, 0x97);
-    FUN_001835b4(2, 0x12, 0x5bf, anchor->x + x, anchor->y + y, 0x97);
-    FUN_001835b4(2, 0x12, 0x5c0, anchor->x + x, anchor->y + y, 0x97);
+    texDrawTableEntryAtStoredOrigin(2, 0x12, 0x55a, anchor->x + x, anchor->y + y, 0x97);
+    texDrawTableEntryAtStoredOrigin(2, 0x12, 0x55b, anchor->x + x, anchor->y + y, 0x97);
+    texDrawTableEntryAtStoredOrigin(2, 0x12, 0x55c, anchor->x + x, anchor->y + y, 0x97);
+    texDrawTableEntryAtStoredOrigin(2, 0x12, 0x5bf, anchor->x + x, anchor->y + y, 0x97);
+    texDrawTableEntryAtStoredOrigin(2, 0x12, 0x5c0, anchor->x + x, anchor->y + y, 0x97);
     u8 text[24];
     textFormatBuffer(text, DAT_00536bc4);
     s32 textX = anchor->x + (anchor->placement->width - fontMeasureLineAdvance(text, 2)) / 2;

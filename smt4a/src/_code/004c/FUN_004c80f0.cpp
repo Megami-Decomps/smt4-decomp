@@ -17,7 +17,7 @@ static inline s32 clampVital(s32 value, s32 maximum)
 }
 
 extern "C" {
-BattleCombatantStatusKey *FUN_001568f8(BtlMainStateA *state, s32 id);
+BattleCombatantStatusKey *btlFindEntryBlockByMemberId(BtlMainStateA *state, s32 id);
 BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, s32 id);
 ScaledRecordValues *gameGetSlotRecord(s32 slot);
 s32 recordGetScaledMaximum(const ScaledRecordValues *record);
@@ -34,7 +34,7 @@ void FUN_004c80f0(s32 id, s32 kind, s32 delta)
         typedef char VitalsOffsets[offsetof(VitalsView, hp) == 0xf4 &&
             offsetof(VitalsView, maxHp) == 0xf8 && offsetof(VitalsView, mp) == 0xfc &&
             offsetof(VitalsView, maxMp) == 0x100 ? 1 : -1];
-        VitalsView *vitals = reinterpret_cast<VitalsView *>(FUN_001568f8(state, id));
+        VitalsView *vitals = reinterpret_cast<VitalsView *>(btlFindEntryBlockByMemberId(state, id));
         if (!vitals) {
             return;
         }

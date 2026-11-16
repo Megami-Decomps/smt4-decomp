@@ -19,7 +19,7 @@ struct ModelLoadDesc {
 extern "C" {
 
 Obj557d00 *FUN_001581dc(void *desc);
-void *FUN_00178b04(u32 size, const char *file, int line);   /* allocate with source location */
+void *asdMemoryAllocTraced(u32 size, const char *file, int line);   /* allocate with source location */
 
 extern char DAT_00526000[];     /* "c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelContent.cpp" */
 
@@ -35,7 +35,7 @@ void FUN_0040aad4(MoriModelContentLoad *content, u32 arg)
         Obj557d00 *loaded = FUN_001581dc(&desc);
         content->unk0C = reinterpret_cast<u32>(loaded);
         Obj557b18 *body = static_cast<Obj557b18 *>(
-            FUN_00178b04(sizeof(Obj557b18), DAT_00526000, 0xef));
+            asdMemoryAllocTraced(sizeof(Obj557b18), DAT_00526000, 0xef));
         if (body != NULL) {
             body = new (body) Obj557b18(reinterpret_cast<UnitModelContent *>(loaded), 0, arg);
         }

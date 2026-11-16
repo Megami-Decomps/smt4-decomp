@@ -152,14 +152,14 @@ void FUN_00408c3c(int param_1)
                *(unsigned int *)(param_1 + (unsigned int)(*(char *)(param_1 + 0x55) != '\0') * 4 + 0x9c),0x41)
   ;
   temp_v13 = (float)VectorSignedToFloat((int)temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_001835b4(2,0xc,0x36,(int)((float)((unsigned long long)temp_v12 >> 0x20) + temp_v13),
+  texDrawTableEntryAtStoredOrigin(2,0xc,0x36,(int)((float)((unsigned long long)temp_v12 >> 0x20) + temp_v13),
                (int)(float)((unsigned long long)temp_v9 >> 0x20),0x41);
   if (*(char *)(param_1 + 0xec) != '\0') {
     temp_v1 = asdTMTexTableEntryAt(0xc,0x7f);
     temp_v11 = (float)VectorSignedToFloat((int)temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v13 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v8 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_001835b4(2,0xc,0x7e,(int)((float)((unsigned long long)temp_v12 >> 0x20) + temp_v11 + temp_v8),
+    texDrawTableEntryAtStoredOrigin(2,0xc,0x7e,(int)((float)((unsigned long long)temp_v12 >> 0x20) + temp_v11 + temp_v8),
                  (int)(temp_v13 + (float)((unsigned long long)temp_v9 >> 0x20)),0x42);
   }
   efctSetSpeed();
@@ -273,22 +273,22 @@ void FUN_00408c3c(int param_1)
     }
   }
   temp_v13 = (float)VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_001835b4(2,0xc,temp_v4,(int)(*(float *)(param_1 + 0x68) + temp_v13),
+  texDrawTableEntryAtStoredOrigin(2,0xc,temp_v4,(int)(*(float *)(param_1 + 0x68) + temp_v13),
                (int)*(float *)(param_1 + 0x6c),0x42);
   if (temp_v1 == 4 || temp_v1 == 8) {
     temp_v13 = (float)VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_001835b4(2,0xc,0x77,(int)(*(float *)(param_1 + 0x68) + temp_v13),
+    texDrawTableEntryAtStoredOrigin(2,0xc,0x77,(int)(*(float *)(param_1 + 0x68) + temp_v13),
                  (int)*(float *)(param_1 + 0x6c),0x43);
   }
   if (temp_v1 == 5) {
     temp_v13 = (float)VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_001835b4(2,0xc,0x78,(int)(*(float *)(param_1 + 0x68) + temp_v13),
+    texDrawTableEntryAtStoredOrigin(2,0xc,0x78,(int)(*(float *)(param_1 + 0x68) + temp_v13),
                  (int)*(float *)(param_1 + 0x6c),0x43);
     return;
   }
   if (temp_v1 == 6 || temp_v1 == 9) {
     temp_v13 = (float)VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_001835b4(2,0xc,0x79,(int)(*(float *)(param_1 + 0x68) + temp_v13),
+    texDrawTableEntryAtStoredOrigin(2,0xc,0x79,(int)(*(float *)(param_1 + 0x68) + temp_v13),
                  (int)*(float *)(param_1 + 0x6c),0x43);
   }
   return;

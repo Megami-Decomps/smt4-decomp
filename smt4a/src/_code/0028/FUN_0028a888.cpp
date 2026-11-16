@@ -13,7 +13,7 @@ int battleAttributeFormatName(...);
 int skillFormatTargetLabel(...);
 int FUN_002c0940(...);
 int sysMemClear(...);
-int FUN_003180c4(...);
+int scrSetStringSlot(...);
 int equipmentGetCappedUpgradeBonuses(...);
 
 /* stack frame of param_1: 9 slot(s), 36 byte(s) */
@@ -51,7 +51,7 @@ extern unsigned int aocEntryGetKind(int);
 /* Supplied declaration required: FUN_002c0940. */
 extern int FUN_002e5c2c(void);
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_003180c4. */
+/* Supplied declaration required: scrSetStringSlot. */
 /* Supplied declaration required: FUN_00359974. */
 /* Supplied declaration required: equipmentGetCappedUpgradeBonuses. */
 
@@ -122,7 +122,7 @@ void FUN_0028a888(int param_1)
     else {
       textFormatBuffer(temp_v12,"\x82P\x81@\x82\x81\x82\x8c\x82\x8c\x82\x99");
     }
-    FUN_003180c4(0x24,temp_v12);
+    scrSetStringSlot(0x24,temp_v12);
     temp_v3 = itemGetStackLimit(param_1);
     FUN_00359974(0x25,temp_v3,0xffffffff,0);
     return;
@@ -139,12 +139,12 @@ void FUN_0028a888(int param_1)
       FUN_002c0940(temp_v10,temp_v0 & 0xf);
       FUN_002c0940(temp_v13,*(unsigned char *)(param_1 + 0x28) >> 4);
       textFormatBuffer(temp_v12,"%s\x81`%s",temp_v10,temp_v13);
-      FUN_003180c4(0x25,temp_v12);
+      scrSetStringSlot(0x25,temp_v12);
     }
     battleAttributeFormatName(temp_v12,*(unsigned int *)(param_1 + 0x24) >> 0x14);
-    FUN_003180c4(0x26,temp_v12);
+    scrSetStringSlot(0x26,temp_v12);
     skillFormatTargetLabel(temp_v12,*(unsigned char *)(param_1 + 0x29));
-    FUN_003180c4(0x27,temp_v12);
+    scrSetStringSlot(0x27,temp_v12);
     if (*(char *)(param_1 + 0x2b) == '\0') {
       textFormatBuffer(temp_v12,"\x82m\x82\x8f\x82\x8e\x82\x85");
     }
@@ -218,7 +218,7 @@ void FUN_0028a888(int param_1)
       else {
         textFormatBuffer(temp_v12,&LAB_0028b028);
       }
-      FUN_003180c4(temp_v4 + 0x24,temp_v12);
+      scrSetStringSlot(temp_v4 + 0x24,temp_v12);
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 5);
     sysMemClear(acStack_a4,0x6c);
@@ -314,7 +314,7 @@ void FUN_0028a888(int param_1)
       }
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 5);
-    FUN_003180c4(0x29,temp_v12);
+    scrSetStringSlot(0x29,temp_v12);
     if (*(short *)(temp_v6 + 0x3a) != 0) {
       temp_v3 = FUN_0014bd84();
       textFormatBuffer(temp_v12,"%s",temp_v3);
@@ -324,7 +324,7 @@ void FUN_0028a888(int param_1)
     }
     temp_v3 = 0x2a;
   }
-  FUN_003180c4(temp_v3,temp_v12);
+  scrSetStringSlot(temp_v3,temp_v12);
   return;
 }
 

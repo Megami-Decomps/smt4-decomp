@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00248f70(void);
+int effPartClone(void);
 int spriteGroupCreateFromFile(void);
 int FUN_002493a4(...);
 int effTlpCreate(void);
@@ -12,7 +12,7 @@ int effBlockClone(void);
 int effBlockCreateFromBlock(void);
 int handleBlockUnref(void);
 int handleBlockRefDrop(void);
-int FUN_002691d8(unsigned int, unsigned int, unsigned int);
+int effBehaviorCreate(unsigned int, unsigned int, unsigned int);
 int objectBufferFree(void);
 int refCountIncrement(...);
 int asdEffectTextureCreate(void);
@@ -44,7 +44,7 @@ typedef struct {
 } param_1_stack;
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00248f70. */
+/* Supplied declaration required: effPartClone. */
 /* Supplied declaration required: spriteGroupCreateFromFile. */
 /* Supplied declaration required: FUN_002493a4. */
 /* Supplied declaration required: effTlpCreate. */
@@ -55,7 +55,7 @@ extern unsigned int resourceResolveHeaderPointer(void);
 /* Supplied declaration required: effBlockCreateFromBlock. */
 /* Supplied declaration required: handleBlockUnref. */
 /* Supplied declaration required: handleBlockRefDrop. */
-/* Supplied declaration required: FUN_002691d8. */
+/* Supplied declaration required: effBehaviorCreate. */
 /* Supplied declaration required: objectBufferFree. */
 /* Supplied declaration required: refCountIncrement. */
 extern int textureCreateFromImage(unsigned int *);
@@ -102,7 +102,7 @@ unsigned int * FUN_002de490(fn_002de490_arg0 *param_1)
   if (puVar3[0x13] != 0) {
     objectBufferFree();
   }
-  FUN_002691d8(temp_v3,*puVar3,temp_v0);
+  effBehaviorCreate(temp_v3,*puVar3,temp_v0);
   puVar3[0x13] = temp_v3;
   *(unsigned char *)((int)puVar3 + 0xe) = *(unsigned char *)((int)puVar3 + 0xe) | 1;
   if ((*puVar3 != 0) && (puVar4 = (unsigned int *)resourceResolveDataPointer(param_1), puVar4 != (unsigned int *)0x0)) {
@@ -209,7 +209,7 @@ unsigned int * FUN_002de490(fn_002de490_arg0 *param_1)
         if (temp_v0 >= 2) {
           do {
             temp_v2 = *(unsigned int *)puVar3[0xf];
-            FUN_00248f70();
+            effPartClone();
             *(unsigned int *)(puVar3[0xf] + temp_v3 * 4) = temp_v2;
             temp_v3 = temp_v3 + 1;
           } while (temp_v3 < temp_v0);

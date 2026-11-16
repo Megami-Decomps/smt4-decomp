@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00139750(int);
 int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
-int FUN_002c526c(void);
+int resultHandleFailure(void);
 int software_interrupt(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -18,7 +18,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00139750. */
 extern unsigned int nn_gxlow_CTR_GetGpu(void);
 /* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: FUN_002c526c. */
+/* Supplied declaration required: resultHandleFailure. */
 extern void nn_gxlow_CTR_CmdReqQueueTx_Finalize(unsigned int);
 extern unsigned int nn_gxlow_CTR_Gpu_UnregisterInterruptRelayQueue(unsigned int);
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -38,13 +38,13 @@ void nn_gxlow_CTR_InterruptReceiver_Finalize(int param_1)
   *(unsigned char *)(param_1 + 0x77) = 1;
   software_interrupt(0x18);
   if (*(int *)(param_1 + 0x2c) < 0) {
-    FUN_002c526c();
+    resultHandleFailure();
   }
   uStack_18 = *(unsigned int *)(param_1 + 0x6c);
   puVar1 = temp_v1;
   FUN_002c40f8(puVar1,&uStack_18,1,0,0xffffffff,0xffffffff);
   if ((int)puVar1 < 0) {
-    FUN_002c526c();
+    resultHandleFailure();
   }
   *(unsigned char *)(param_1 + 0x70) = 1;
   nn_os_Thread_FinalizeImpl(param_1 + 0x6c);

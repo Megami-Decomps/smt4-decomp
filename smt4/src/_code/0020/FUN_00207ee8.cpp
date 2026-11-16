@@ -13,7 +13,7 @@ void FUN_002630e0(f32 *screen, s32 display, void *camera, const MapVector *world
 // keeping the previous direction in DAT_00472550.
 void FUN_00207ee8(void)
 {
-    void *camera = reinterpret_cast<void *>(FUN_002c501c());
+    void *camera = reinterpret_cast<void *>(asdCameraGetSavedRenderPairs());
     Vector4 screen;
 
     Vector4 *previous = &DAT_00472550;

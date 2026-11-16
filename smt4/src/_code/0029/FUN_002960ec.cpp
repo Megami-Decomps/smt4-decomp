@@ -19,22 +19,22 @@ typedef char StagedAnimationOffsets[offsetof(StagedAnimationView, first) == 0x2D
     offsetof(StagedAnimationView, soundPlayed) == 0x3648 ? 1 : -1];
 extern "C" {
 s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
-void FUN_002bf810(u32 sound);
-s32 FUN_002bf818(UiSpriteState *sprite);
+void soundPlaySeUnpanned(u32 sound);
+s32 uiSpriteAdvanceAnimation(UiSpriteState *sprite);
 u32 FUN_002960ec(StagedAnimationView *view)
 {
     u32 complete = 1;
     for (s32 i = 0; i < 6; ++i) {
         if (i == 0 || uiSpriteGetCompletionState(&view->first[i - 1]))
-            FUN_002bf818(&view->first[i]);
+            uiSpriteAdvanceAnimation(&view->first[i]);
     }
     for (s32 i = 0; i < 6; ++i) {
         if (uiSpriteGetCompletionState(&view->first[i])) {
             if (view->soundEnabled[i] && !view->soundPlayed[i]) {
-                FUN_002bf810(0x1000174);
+                soundPlaySeUnpanned(0x1000174);
                 view->soundPlayed[i] = 1;
             }
-            FUN_002bf818(&view->reveals[i]);
+            uiSpriteAdvanceAnimation(&view->reveals[i]);
         }
     }
     for (s32 i = 0; i < 6; ++i) {

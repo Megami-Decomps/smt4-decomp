@@ -6,7 +6,7 @@
 extern "C" {
 
 s32 hasFlag80Or1000(u32 id, const ScriptCategoryUnit *unit);
-UnitCategoryState *FUN_003eaf20(BtlMainStateA *state);
+UnitCategoryState *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
 void FUN_003f1b3c(BtlMainStateA *state, s32 category, s32 kind, u8 info[8], s32 *effectId);
 s32 FUN_0047f4cc(s32 effectId, f32 scale, f32 alphaA, f32 alphaB);
 
@@ -18,7 +18,7 @@ void FUN_003edfd4(BtlMainStateA *state)
     if (unit != NULL && hasFlag80Or1000(g_btlScriptUnit, unit)) {
         return;
     }
-    entry = FUN_003eaf20(state);
+    entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(state);
     state->specialEffect = 0;
     if (entry != NULL) {
         u8 info[8];

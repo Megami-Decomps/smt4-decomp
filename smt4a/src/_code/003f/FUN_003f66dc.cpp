@@ -31,7 +31,7 @@ extern RenderCtxA *g_renderCtx;
 void efctSetSpeed(f32 speed);
 void FUN_003f7164(ListMenu *menu, ListEntry *entry, s32 index, u32 kind, s32 x, s32 y, u32 slot, f32 speed);
 void FUN_003f6424(ListMenu *menu, ListEntry *entry, u32 kind, s32 x, s32 y, u32 slot);
-void FUN_00344cd0(void *frame, s32 x, s32 y, u32 group, u32 a, u32 b, u32 c, u32 d, u32 e, u32 f, u32 g,
+void uiDrawListScrollBar(void *frame, s32 x, s32 y, u32 group, u32 a, u32 b, u32 c, u32 d, u32 e, u32 f, u32 g,
                   s32 h, s32 i, s32 j, u32 k, u32 l);
 
 /* Draws the four list slots: the highlighted one with its animated frame, the others plain, each with its optional
@@ -59,7 +59,7 @@ void FUN_003f66dc(ListMenu *menu, s32 x, s32 y, f32 speed)
             efctSetSpeed(*reinterpret_cast<f32 *>(base + 0x330 + 0x20) * speed);
             renderCtxPushB(g_renderCtx, packNibblesAndByte(6, 1, 0));
             for (s32 k = 0; k < 4; k++) {
-                FUN_001835b4(2, 0x31, k + 0x8c, frameX, frameY, 0x83);
+                texDrawTableEntryAtStoredOrigin(2, 0x31, k + 0x8c, frameX, frameY, 0x83);
             }
             efctSetSpeed(speed);
             renderCtxPushB(g_renderCtx, packNibblesAndByte(6, 7, 0));
@@ -73,7 +73,7 @@ void FUN_003f66dc(ListMenu *menu, s32 x, s32 y, f32 speed)
                 iconX = iconX + record->x;
                 efctSetSpeed(speed);
                 for (s32 k = 0; k < 3; k++) {
-                    FUN_001835b4(2, 0x31, k + 0x9d, iconX, iconY + record->y, 0x97 + k);
+                    texDrawTableEntryAtStoredOrigin(2, 0x31, k + 0x9d, iconX, iconY + record->y, 0x97 + k);
                 }
             }
         } else {
@@ -86,15 +86,15 @@ void FUN_003f66dc(ListMenu *menu, s32 x, s32 y, f32 speed)
                 iconX = iconX + record->x;
                 efctSetSpeed(speed);
                 for (s32 k = 0; k < 3; k++) {
-                    FUN_001835b4(2, 0x31, k + 0x9d, iconX, record->y + iconY, 0x97 + k);
+                    texDrawTableEntryAtStoredOrigin(2, 0x31, k + 0x9d, iconX, record->y + iconY, 0x97 + k);
                 }
             }
         }
     }
     efctSetSpeed(speed);
-    FUN_001835b4(2, 0x31, 0x9a, x, y, 0x83);
+    texDrawTableEntryAtStoredOrigin(2, 0x31, 0x9a, x, y, 0x83);
     s16 *frameWords = reinterpret_cast<s16 *>(base + 0x100);
-    FUN_00344cd0(menu->frame, x, y, 0x31, 0x99, 0x9b, 0x9c, 0x95, 0x96, 0x97, 0x98, frameWords[0x46 / 2],
+    uiDrawListScrollBar(menu->frame, x, y, 0x31, 0x99, 0x9b, 0x9c, 0x95, 0x96, 0x97, 0x98, frameWords[0x46 / 2],
                  frameWords[0x42 / 2], frameWords[0x44 / 2], 0x6a, 0);
     efctSetSpeed(1.0f);
 }

@@ -3,7 +3,7 @@
 
 extern "C" {
 
-s32 FUN_0029f848(void *selection, s32 count, u32 kind, s32 a, s32 b, s32 c);
+s32 gridNavigationConfigure(void *selection, s32 count, u32 kind, s32 a, s32 b, s32 c);
 extern Obj7ECRef g_useCounter;
 
 // Append a value to the counter's value list (up to 20) and refresh the selection that shows it.
@@ -30,7 +30,7 @@ void FUN_0029e328(u8 value)
         } else {
             kind = 9;
         }
-        FUN_0029f848(work->selection, count, kind, 1, 1, 1);
+        gridNavigationConfigure(work->selection, count, kind, 1, 1, 1);
     }
 }
 

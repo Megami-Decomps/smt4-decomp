@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_001386f8(void);
 int dataTable40FindById(void);
-int FUN_002ae9ec(int, int, unsigned int, int, int, int);
+int texTableRecordCallWithParams(int, int, unsigned int, int, int, int);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(void);
-int FUN_002bed3c(void);
+int gxResetColorQuadToWhite(void);
 
 /* stack frame of param_6: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -26,10 +26,10 @@ extern int playerGetSkillRank(unsigned int);
 /* Supplied declaration required: dataTable40FindById. */
 extern int idIsAbove400(void);
 extern unsigned int categoryIdFromIndex(unsigned int);
-/* Supplied declaration required: FUN_002ae9ec. */
+/* Supplied declaration required: texTableRecordCallWithParams. */
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: FUN_002bed3c. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 
 
@@ -66,7 +66,7 @@ void FUN_002b6c34(unsigned int param_1,int param_2,int param_3,int param_4,int p
       }
     }
   }
-  FUN_002ae9ec(2,0x13,temp_v0,param_2,param_3,param_4);
+  texTableRecordCallWithParams(2,0x13,temp_v0,param_2,param_3,param_4);
   if (param_5 != 0) {
     temp_v1 = playerGetSkillRank(param_1);
     temp_v2 = (temp_v1 + param_6) & 0xff;
@@ -82,7 +82,7 @@ void FUN_002b6c34(unsigned int param_1,int param_2,int param_3,int param_4,int p
       temp_v1 = asdTMTexTableEntryAt(0x13,0x401);
       FUN_002bdf94(2,*(short *)(temp_v1 + 8) + param_2,*(short *)(temp_v1 + 10) + param_3,0,1,
                    param_4 + 1,&LAB_002b6dac,temp_v2 - 1);
-      FUN_002bed3c();
+      gxResetColorQuadToWhite();
       return;
     }
   }

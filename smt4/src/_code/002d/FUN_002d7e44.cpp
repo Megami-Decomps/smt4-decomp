@@ -4,7 +4,7 @@
 
 extern "C" {
 extern TitleScene *g_titleScene;
-u32 FUN_002c5d80(u32 mode, u32 option);
+u32 renderCtxPackPassFlags(u32 mode, u32 option);
 s32 effMenuGetFlag();
 void effMenuCallHandler(s32 mode, u32 enabled);
 void FUN_001db658(s32 count, u32 colorA, u32 colorB, f32 x, f32 y, f32 z, f32 height);
@@ -18,7 +18,7 @@ void FUN_002d7e44()
         s32 debugBackdrop;
     };
     RenderCtx *scene = g_titleScene;
-    u32 state = FUN_002c5d80(1, 1);
+    u32 state = renderCtxPackPassFlags(1, 1);
     renderCtxPushA(scene, state);
     renderCtxSelectTexture(g_titleScene, 0);
     u32 enabled = 1;

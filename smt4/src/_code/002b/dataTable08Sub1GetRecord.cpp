@@ -18,7 +18,7 @@ typedef struct AocSystem {
 
 extern AocSystem *g_aocSystem;
 
-extern Record *FUN_0014148c(AocSystem *system, u32 id);
+extern Record *dataTable08Sub1FindById(AocSystem *system, u32 id);
 extern void *dataTableGet(s32 table, s32 section);
 extern u32 dataTableGetCount(void *section);
 extern Record *libc_bsearch(Record *key, Record *entries, u32 count, s32 size, u8 *compare);
@@ -32,7 +32,7 @@ Record *dataTable08Sub1GetRecord(u16 id)
 
     key.id = id;
     if (g_aocSystem->overrides != NULL) {
-        found = FUN_0014148c(g_aocSystem, id);
+        found = dataTable08Sub1FindById(g_aocSystem, id);
         if (found != NULL) {
             return found;
         }

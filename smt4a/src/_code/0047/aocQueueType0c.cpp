@@ -6,7 +6,7 @@ extern "C" {
 
 extern AocDisplay *g_aocDisplay;
 
-AocPackageFile *FUN_001b2bd8(AocSystem *system, s32 kind, s32 id, char *path);
+AocPackageFile *packageFindFileByTypeAndId(AocSystem *system, s32 kind, s32 id, char *path);
 void aocDisplayQueueRecord(AocDisplay *display, const char *path, const char *destination,
     u32 *output, u32 mode, u32 bytes, void *context);
 
@@ -15,7 +15,7 @@ static __inline void formatAndQueueAocRecord(AocSystem *system, s32 kind, s32 id
 {
     char path[128];
     sysMemClear(path, sizeof(path));
-    AocPackageFile *file = FUN_001b2bd8(system, kind, id, path);
+    AocPackageFile *file = packageFindFileByTypeAndId(system, kind, id, path);
     if (file != NULL)
         aocDisplayQueueRecord(g_aocDisplay, path, destination,
             reinterpret_cast<u32 *>(output), 0, sizeof(path), file);

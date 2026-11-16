@@ -3,7 +3,7 @@
 #include "util/Random.h"
 extern "C" {
 s32 randBetween(s32 minimum, s32 maximum);
-f32 FUN_002b70cc(f32 phase);
+f32 mathSinFixedAngle(f32 phase);
 f32 phaseCosInterpolate(f32 phase);
 }
 
@@ -20,7 +20,7 @@ void Obj42094c::prepareGeometry()
             f32 speed = minimum + (filter->config->maximumSpeed - minimum) * fraction;
             f32 phase = (f32)randNextInRange(65535) * (1.0f / 65536.0f) * 256.0f;
             motion->x = phaseCosInterpolate(phase);
-            motion->y = FUN_002b70cc(phase);
+            motion->y = mathSinFixedAngle(phase);
             motion->z = 0;
             motion->x *= speed;
             motion->y *= speed;

@@ -62,7 +62,7 @@ s32 asdMemFree(u32 memory);
 s32 FUN_00152bf8(AsdSndObject *handle);
 void rt_aeabi_memclr(void *memory, s32 size);
 s32 FUN_00162ea4(void);
-s32 FUN_001517b4(s32 a, s32 b);
+s32 padQueryLogicalKey(s32 a, s32 b);
 s32 slotIsActive(s32 a);
 
 /* Releases a finished sound object (data, handle) and clears its slot. */
@@ -164,7 +164,7 @@ void FUN_0013af10(void)
             soundObjectRelease(object, loop);
         }
     }
-    if (DAT_0061978c.enabled == 1 && FUN_001517b4(9, 2) == 0 && slotIsActive(6) == 0) {
+    if (DAT_0061978c.enabled == 1 && padQueryLogicalKey(9, 2) == 0 && slotIsActive(6) == 0) {
         DAT_0061978c.enabled = 0;
     }
 }

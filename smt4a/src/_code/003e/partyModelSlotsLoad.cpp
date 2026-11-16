@@ -30,7 +30,7 @@ typedef struct DevilModelData {
 } DevilModelData;
 
 PartyMember *FUN_003e503c(u16 index);
-s32 FUN_00187168(PartyMember *member);
+s32 partySlotIsOccupied(PartyMember *member);
 DevilModelData *devilGetRecord(u16 devilId);
 u32 FUN_00409fe8(u32 modelId, s32 a, s32 b);
 
@@ -48,7 +48,7 @@ void partyModelSlotsLoad(PartyModelWork *work)
         DevilModelData *data;
         u16 modelId;
 
-        if (FUN_00187168(member) == 0) {
+        if (partySlotIsOccupied(member) == 0) {
             continue;
         }
         data = devilGetRecord(member->devilId);

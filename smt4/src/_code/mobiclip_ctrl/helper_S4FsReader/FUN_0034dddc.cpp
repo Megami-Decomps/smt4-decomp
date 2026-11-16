@@ -68,7 +68,7 @@ u32 FUN_0034dddc(S4FsReader *reader, S4StreamSource *source, S4Allocator *alloca
     }
     bool failed = nnResultIsFailure(result);
     if (failed) {
-        FUN_002c526c(result, failed);
+        resultHandleFailure(result, failed);
     }
     handle = 0;
     result = FUN_002b5820(&handle, 0);
@@ -78,7 +78,7 @@ u32 FUN_0034dddc(S4FsReader *reader, S4StreamSource *source, S4Allocator *alloca
     }
     failed = nnResultIsFailure(result);
     if (failed) {
-        FUN_002c526c(result, failed);
+        resultHandleFailure(result, failed);
     }
     reader->wakeup[0] = (u32)&reader->dataEvent;
     reader->wakeup[1] = (u32)&reader->stopEvent;
@@ -98,12 +98,12 @@ u32 FUN_0034dddc(S4FsReader *reader, S4StreamSource *source, S4Allocator *alloca
                           DAT_0044d130.stack->address + DAT_0044d130.stack->size, 4, -2, 0);
     failed = nnResultIsFailure(result);
     if (failed) {
-        FUN_002c526c(result, failed);
+        resultHandleFailure(result, failed);
     }
     result = nn::svc::SignalEvent(reader->dataEvent);
     failed = nnResultIsFailure(result);
     if (failed) {
-        FUN_002c526c(result, failed);
+        resultHandleFailure(result, failed);
     }
     return 1;
 }

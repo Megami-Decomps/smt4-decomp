@@ -30,7 +30,7 @@ extern "C" {
 
 extern GameStateA g_gameState;
 
-s32 FUN_00163aa4(void* sprite, f32 step);
+s32 uiSpriteAdvanceAnimation(void* sprite, f32 step);
 void FUN_00167458(void* sprite, s32 arg);
 void uiSpriteSetImageKeyframe(void* sprite, s32 image, s32 keyframe);
 s8 uiSpriteGetCompletionState(const void* sprite);
@@ -59,13 +59,13 @@ void FUN_0048bdec(MapScreen* screen)
     MapScreenListBlock* list = reinterpret_cast<MapScreenListBlock*>(reinterpret_cast<u8*>(screen) + 0x20600);
     if (phase == 0) {
         if (list->active != 0) {
-            for (s32 i = 0; i < 6; i++) FUN_00163aa4(screen->listSprites[i], 1.0f);
-            FUN_00163aa4(SCREEN_PTR(screen, 0x112c), 1.0f);
-            FUN_00163aa4(SCREEN_PTR(screen, 0x10a0), 1.0f);
+            for (s32 i = 0; i < 6; i++) uiSpriteAdvanceAnimation(screen->listSprites[i], 1.0f);
+            uiSpriteAdvanceAnimation(SCREEN_PTR(screen, 0x112c), 1.0f);
+            uiSpriteAdvanceAnimation(SCREEN_PTR(screen, 0x10a0), 1.0f);
         }
-        FUN_00163aa4(titleSprite, 1.0f);
+        uiSpriteAdvanceAnimation(titleSprite, 1.0f);
         void* menuSprite = screen->menuSprite;
-        if (FUN_00163aa4(menuSprite, 1.0f) != 0) screen->phase = 1;
+        if (uiSpriteAdvanceAnimation(menuSprite, 1.0f) != 0) screen->phase = 1;
         u32 y = vec2GetYInt(menuSprite);
         u32 x = vec2GetXInt(menuSprite);
         pointConvertToFloat(SCREEN_PTR(screen, 0x4d0), x, y);
@@ -98,8 +98,8 @@ void FUN_0048bdec(MapScreen* screen)
         }
         screen->phase = 2;
     } else if (phase == 2) {
-        FUN_00163aa4(titleSprite, 1.0f);
-        FUN_00163aa4(SCREEN_PTR(screen, 0x1014), 1.0f);
+        uiSpriteAdvanceAnimation(titleSprite, 1.0f);
+        uiSpriteAdvanceAnimation(SCREEN_PTR(screen, 0x1014), 1.0f);
         void* pointerSprite = screen->pointerSprite;
         FUN_00167458(pointerSprite, 0);
         if (uiSpriteGetCompletionState(pointerSprite) != 0) {

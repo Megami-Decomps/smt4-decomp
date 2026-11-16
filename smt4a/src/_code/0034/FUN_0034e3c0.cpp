@@ -6,7 +6,7 @@
 extern "C" {
 s32 scrGetArg(u32);
 void scrSetResult(s32);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *);
 
 static s32 remainingPercent(s32 current, s32 maximum)
 {
@@ -29,7 +29,7 @@ u32 FUN_0034e3c0(void)
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
-        BtlCombatantEntryA *partner = FUN_003eaf20(btlGetMainState());
+        BtlCombatantEntryA *partner = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (partner != NULL && remainingPercent(partner->mp, partner->maxMp) <= threshold) {
             scrSetResult(1);
             return 1;

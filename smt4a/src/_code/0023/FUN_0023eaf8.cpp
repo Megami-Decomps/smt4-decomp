@@ -14,7 +14,7 @@ int FUN_0031f208(...);
 int sortMenuAcquire(...);
 int FUN_003dea6c(...);
 
-int FUN_001517b4(...);
+int padQueryLogicalKey(...);
 int eventQueueAddUniqueIfValid(...);
 int uiSpriteSetKeyframe(...);
 int uiSpriteSetImageKeyframe(...);
@@ -42,7 +42,7 @@ typedef struct {
 extern int g_uiQuest; /* 0x57f28c */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_001517b4. */
+/* Supplied declaration required: padQueryLogicalKey. */
 extern int campIsState85(void);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: sysPlaySe. */
@@ -113,7 +113,7 @@ void FUN_0023eaf8(void)
   temp_v12 = 0x100020f;
   if (temp_v3 < 1) {
     temp_v11 = 1;
-    FUN_001517b4();
+    padQueryLogicalKey();
     if (temp_v11 != 0) {
       uiSpriteSetKeyframe(temp_v2 + 0x34,2,0);
       uiSpriteSetImageKeyframe(temp_v2 + 0x34,9,0);
@@ -241,7 +241,7 @@ void FUN_0023eaf8(void)
       }
       else {
         temp_v3 = 8;
-        FUN_001517b4(8,0);
+        padQueryLogicalKey(8,0);
         if (temp_v3 != 0) {
           temp_v8 = *(int *)(temp_v2 + 0x910) - 1;
           *(int *)(temp_v2 + 0x914) = temp_v8;
@@ -267,7 +267,7 @@ LAB_0023f080:
         }
         else {
           temp_v3 = 7;
-          FUN_001517b4(7,0);
+          padQueryLogicalKey(7,0);
           if (temp_v3 != 0) {
             temp_v8 = *(int *)(temp_v2 + 0x910) + 1;
             *(int *)(temp_v2 + 0x914) = temp_v8;
@@ -289,7 +289,7 @@ LAB_0023f080:
           else {
             if (*(char *)(temp_v2 + 0x90c) == '\0') {
               temp_v3 = 9;
-              FUN_001517b4(9,1);
+              padQueryLogicalKey(9,1);
               if (temp_v3 != 0) {
                 eventQueueAddUniqueIfValid(0x100020e);
                 buttonHelpSetText(0,0xf4f4f4ff);
@@ -310,12 +310,12 @@ LAB_0023f080:
               if (*(char *)(temp_v2 + 0x90c) == '\0') {
                 if (*(char *)(temp_v2 + 0x93d) == '\0') {
                   temp_v3 = 10;
-                  FUN_001517b4(10,1);
+                  padQueryLogicalKey(10,1);
                   if (temp_v3 != 0) goto LAB_0023f2a8;
                   if (*(char *)(temp_v2 + 0x90c) != '\0') goto LAB_0023f21c;
                 }
                 temp_v3 = 0;
-                FUN_001517b4(0,1);
+                padQueryLogicalKey(0,1);
                 if (temp_v3 != 0 || temp_v15[0] != '\0') {
                   temp_v4 = resourceRunOperationIfUnblocked(temp_v11);
                   temp_v7 = FUN_002a4894(temp_v11);
@@ -405,7 +405,7 @@ LAB_0023f080:
             }
 LAB_0023f21c:
             temp_v8 = 1;
-            FUN_001517b4();
+            padQueryLogicalKey();
             if (temp_v8 != 0) {
               uiSpriteSetKeyframe(temp_v2 + 0x34,2,0);
               uiSpriteSetImageKeyframe(temp_v2 + 0x34,9,0);

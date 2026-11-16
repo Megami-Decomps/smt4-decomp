@@ -8,7 +8,7 @@ struct BtlMainStateA;
 extern "C" {
 void asdMemFree(void *data);
 void scrScriptProcessDestroy(void *process);
-ScriptRunState *FUN_00275bc8(void *data, s32 mode);
+ScriptRunState *scrScriptProcessCreate(void *data, s32 mode);
 void scrScriptProcessStartEntry(void *process, s32 entry);
 s32 scrRunOpcodesStub(void *process);
 s32 FUN_003efb18(BtlMainStateA *battle);
@@ -35,7 +35,7 @@ s32 FUN_003e688c(BtlAiScript *runner)
         break;
     case 2:
         if (runner->data != NULL) {
-            runner->process = FUN_00275bc8(runner->data, 0);
+            runner->process = scrScriptProcessCreate(runner->data, 0);
             ((ScriptRunState *)runner->process)->mode = 1;
             scrScriptProcessStartEntry(runner->process, 0);
             runner->unk0C = 3;

@@ -20,10 +20,10 @@ struct CecCardPlacement {
     /* 0x08 */ s32 y;
 };
 extern "C" {
-void FUN_00164b5c(s32 mode, u32 file, u32 sprite, s32 x, s32 y, u32 layer);
+void texDrawCompositeSprite(s32 mode, u32 file, u32 sprite, s32 x, s32 y, u32 layer);
 void drawSetColorFromRGBA8(u32 color);
 void FUN_002e1b64(u32 display, s32 x, s32 y, u32 layer);
-void FUN_00183bb0();
+void gxResetColorQuadToWhite();
 }
 
 /* Draw the card background, its entry display, and a horizontally centered label. */
@@ -34,18 +34,18 @@ extern "C" void cecCardDrawBackgroundAndLabel(CecCardLabel *label, const CecCard
         return;
     }
     if (entry != NULL && entry->id == 0) {
-        FUN_00164b5c(2, 46, 37, placement->x + x, placement->y + y, 101);
+        texDrawCompositeSprite(2, 46, 37, placement->x + x, placement->y + y, 101);
     } else if (!entry->selected) {
-        FUN_00164b5c(2, 46, 24, placement->x + x, placement->y + y, 101);
+        texDrawCompositeSprite(2, 46, 24, placement->x + x, placement->y + y, 101);
     } else {
-        FUN_00164b5c(2, 46, 25, placement->x + x, placement->y + y, 101);
+        texDrawCompositeSprite(2, 46, 25, placement->x + x, placement->y + y, 101);
     }
     drawSetColorFromRGBA8(0x82fff500);
     const TextureTableEntryIV *entrySprite = asdTMTexTableEntryAt(46, 83);
     FUN_002e1b64(entry->display, placement->x + entrySprite->x + x,
                   placement->y + entrySprite->y + y, 101);
-    FUN_00183bb0();
-    FUN_00164b5c(2, 46, 14, placement->x + x, placement->y + y, 101);
+    gxResetColorQuadToWhite();
+    texDrawCompositeSprite(2, 46, 14, placement->x + x, placement->y + y, 101);
     const TextureTableEntryIV *labelSprite = asdTMTexTableEntryAt(46, 158);
     s32 center = 6 + (labelSprite->placement->width - label->width) / 2;
     FUN_001527d8(label->text, 0xffffff00);

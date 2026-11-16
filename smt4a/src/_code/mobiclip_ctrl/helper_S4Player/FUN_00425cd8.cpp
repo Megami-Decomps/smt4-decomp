@@ -112,7 +112,7 @@ extern "C" void FUN_00425cd8(MoviePlayer *player)
         s32 result = svcWaitSynchronization1(player->thread.handle, -1);
         bool failed = nnResultIsFailure(result);
         if (failed) {
-            FUN_002e3140(result, failed);
+            resultHandleFailure(result, failed);
         }
         player->thread.joined = 1;
         player->thread.~NnOsThread();

@@ -12,7 +12,7 @@ struct RepeatedGeometryResourceView {
 
 extern "C" {
 extern const char DAT_0054baf8[];
-void *FUN_00178b04(s32 bytes, const char *file, s32 line);
+void *asdMemoryAllocTraced(s32 bytes, const char *file, s32 line);
 OwnedBufferPair *slotReset(OwnedBufferPair *buffers);
 void slotInit(OwnedBufferPair *buffers, s32 format, s32 indexCount, s32 vertexCount);
 
@@ -23,7 +23,7 @@ GeometryResources *FUN_00350d90(s32 repeats, const u16 *pattern, s32 verticesPer
     s32 indicesPerSection = trianglesPerSection * 3;
     asdDebugTrace(DAT_0054baf8, 0x71);
     RepeatedGeometryResourceView *geometry = (RepeatedGeometryResourceView *)memAlloc(0x10000, 0x100, 0, 0x58, 0x10, 1);
-    OwnedBufferPair *buffers = (OwnedBufferPair *)FUN_00178b04(sizeof(OwnedBufferPair), DAT_0054baf8, 0x73);
+    OwnedBufferPair *buffers = (OwnedBufferPair *)asdMemoryAllocTraced(sizeof(OwnedBufferPair), DAT_0054baf8, 0x73);
     if (buffers)
         buffers = slotReset(buffers);
     slotInit(buffers, 0x25, repeats * trianglesPerSection * 3, vertexCount);

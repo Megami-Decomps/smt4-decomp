@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_003d4ed8(s32 messageId);
+void soundActorStartOnFreeChannel(s32 messageId);
 
 /* Show the message for a kind (two kinds share each group of three messages) and a variant index. */
 void messageShowForKindVariant(u32 kind, s32 index)
@@ -48,7 +48,7 @@ void messageShowForKindVariant(u32 kind, s32 index)
         message = 0x1000303 + index;
         break;
     }
-    FUN_003d4ed8(message);
+    soundActorStartOnFreeChannel(message);
 }
 
 } /* extern "C" */

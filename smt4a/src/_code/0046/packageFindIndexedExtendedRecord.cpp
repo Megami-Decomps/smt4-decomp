@@ -2,18 +2,18 @@
 #include "addon/PackageSelection.h"
 
 extern "C" {
-s32 FUN_001b315c(PackageEntry *package);
-char (*FUN_001b31ac(PackageEntry *package))[0x40];
-u32 FUN_001b31e0(PackageEntry *package);
+s32 packageEntryIsLoaded(PackageEntry *package);
+char (*packageEntryGetDirectory(PackageEntry *package))[0x40];
+u32 packageEntryGetFileCount(PackageEntry *package);
 
 ExtendedPackageIndexedRecord *packageFindIndexedExtendedRecord(PackageList *packages, s32 index)
 {
     s32 base = 0;
     for (s32 i = 0; i < packages->count; ++i) {
         PackageEntry *package = &packages->entries[i];
-        if (FUN_001b315c(package)) {
-            char (*records)[0x40] = FUN_001b31ac(package);
-            u32 count = FUN_001b31e0(package);
+        if (packageEntryIsLoaded(package)) {
+            char (*records)[0x40] = packageEntryGetDirectory(package);
+            u32 count = packageEntryGetFileCount(package);
             for (u32 j = 0; j < count; ++j) {
                 if (records[j][0] == 38) {
                     void *table = dataTableFileGetTable(package->files[j].fileId, 0);

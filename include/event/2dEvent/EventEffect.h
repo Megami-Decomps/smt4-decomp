@@ -74,7 +74,7 @@ s32 FUN_003b6fc4(void);
 extern "C" {
 #endif
 
-void FUN_003b61ec(void);
+void commonBgStopChildAndBeginTransition(void);
 
 #ifdef __cplusplus
 }

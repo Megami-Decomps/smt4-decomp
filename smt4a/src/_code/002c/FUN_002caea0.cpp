@@ -18,7 +18,7 @@ int lightOwnerRegister(...);
 int asdMdlManagerMarkDestroy(...);
 int animationEvaluateCallback(...);
 int faderSetValue(...);
-int FUN_00359370(...);
+int modelRemoveFromSlotList(...);
 int animPlayerSetLoopPolicy(...);
 int FUN_0037a898(...);
 int gfxObjectDestroy(...);
@@ -45,12 +45,12 @@ extern int modelHasLoadedAttachment(const ModelBoneAttachmentRoot *object);
 /* Supplied declaration required: asdEnvResetModelBank. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
 extern unsigned int asdMdlManagerCreateSecondList(char *, unsigned int);
-/* Supplied declaration required: FUN_00212204. */
+/* Supplied declaration required: screenFadeSlotReset. */
 /* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: asdMdlManagerMarkDestroy. */
 /* Supplied declaration required: animationEvaluateCallback. */
 /* Supplied declaration required: faderSetValue. */
-/* Supplied declaration required: FUN_00359370. */
+/* Supplied declaration required: modelRemoveFromSlotList. */
 /* Supplied declaration required: animPlayerSetLoopPolicy. */
 /* Supplied declaration required: FUN_0037a898. */
 extern unsigned int FUN_00387350(char *);
@@ -112,7 +112,7 @@ unsigned int FUN_002caea0(void)
       uiSetFloatPair(temp_v0 + 4);
       FUN_0014f0dc(temp_v0 + 4,temp_v0 + 0x510,temp_v0 + 0x51c,temp_v0 + 0x528);
       FUN_001523b8(temp_v0 + 4,1);
-      FUN_00212204(0);
+      screenFadeSlotReset(0);
       FUN_003d54f8(1,10);
       *(unsigned int *)(temp_v0 + 0x568) = 2;
       *(unsigned int *)(temp_v0 + 0x56c) = 0;
@@ -127,7 +127,7 @@ unsigned int FUN_002caea0(void)
       FUN_0037a898(*(unsigned int *)(*piVar4 + 8));
       piVar5 = (int *)(temp_v0 + 0x574);
       FUN_001ac2d4(*(unsigned int *)(*piVar4 + 8),*(unsigned int *)(temp_v0 + 0x574));
-      FUN_00359370(*(unsigned int *)(temp_v0 + 0x55c),0);
+      modelRemoveFromSlotList(*(unsigned int *)(temp_v0 + 0x55c),0);
       VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
       *piVar5 = 0;
       FUN_001ac2d4(*(unsigned int *)(*piVar4 + 8),0);
@@ -152,7 +152,7 @@ unsigned int FUN_002caea0(void)
   case 4:
     if (*(int *)(temp_v0 + 0x56c) != 0) {
       if (*(char *)(temp_v0 + 0x570) != '\0') {
-        FUN_00359370(*(unsigned int *)(temp_v0 + 0x55c),0);
+        modelRemoveFromSlotList(*(unsigned int *)(temp_v0 + 0x55c),0);
       }
       gfxObjectDestroy(*(unsigned int *)(temp_v0 + 0x560));
       gfxObjectDestroy(*(unsigned int *)(temp_v0 + 0x564));

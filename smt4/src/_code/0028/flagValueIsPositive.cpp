@@ -3,11 +3,11 @@
 
 extern "C" {
 
-extern int FUN_0028fb40(void);
+extern int flagValueRead(void);
 
 u8 flagValueIsPositive(void)
 {
-    return 0 < FUN_0028fb40();
+    return 0 < flagValueRead();
 }
 
 } /* extern "C" */

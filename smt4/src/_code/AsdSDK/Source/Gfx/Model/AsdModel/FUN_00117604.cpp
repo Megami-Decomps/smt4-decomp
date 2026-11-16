@@ -26,7 +26,7 @@ void sceneTraverserVisit(u32 traverser, SceneNode *root);
 SceneNode **_ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_(SceneNode **first, SceneNode **last,
     SceneNode **destination, SceneNode *const *value);
 bool nw_gfx_SceneNode_AttachChild(SceneNode *parent, SceneNode *child);
-s32 FUN_002c5210();
+s32 gxIsStereoscopic3dEnabled();
 void nw_gfx_RenderContext_ResetState_2B7478(void *context);
 s32 sceneQueryFalse();
 void registerBlockRequestGroups(u32 groups);
@@ -68,7 +68,7 @@ void FUN_00117604()
         nw_gfx_SceneNode_AttachChild(g_asdModelTransformBuilder[0], sceneGroup1Root[0]);
         sceneTraverserVisit(DAT_00464b7c[0], g_asdModelTransformBuilder[0]);
     }
-    if (FUN_002c5210() != 1) {
+    if (gxIsStereoscopic3dEnabled() != 1) {
         FUN_0013231c(g_asdModelSlotArray3[0], DAT_00464b10, 1, 0);
     } else {
         FUN_001326b4(g_asdModelSlotArray3[0], DAT_00464b14, DAT_00464b18, 0);

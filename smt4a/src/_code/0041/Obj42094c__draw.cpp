@@ -11,7 +11,7 @@ struct Obj42094cDrawContext {
 extern "C" {
 extern Obj42094cDrawContext *g_renderCtx;
 void renderCtxSelectTexture(void *context, u32 texture);
-u32 FUN_001692ac(u32 mode, u32 value);
+u32 renderCtxPackPassFlags(u32 mode, u32 value);
 void FUN_00409e78(void *filter, f32 *matrix, const void *motion);
 void FUN_0032c808();
 void gpuSubmitFloatVectorsOrDefault(const f32 *color, f32 x, f32 y, f32 z, f32 u, f32 v);
@@ -23,7 +23,7 @@ void Obj42094c::draw()
     Filter4PolyView *filter = (Filter4PolyView *)this;
     renderCtxSelectTexture(g_renderCtx, ((FilterDrawTexture *)filter->texture)->handle);
     g_renderCtx->blend.push(filter->config->blendMode);
-    g_renderCtx->projection.push(FUN_001692ac(1, 0));
+    g_renderCtx->projection.push(renderCtxPackPassFlags(1, 0));
     f32 color[4] = {1, 1, 1, ((FilterDrawChild *)filter->child)->alpha};
     f32 vertices[4][3];
     for (u32 vertex = 0; vertex < 4; ++vertex) {

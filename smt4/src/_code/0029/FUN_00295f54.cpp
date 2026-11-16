@@ -17,7 +17,7 @@ s32 dialogIsActive();
 s32 dialogGetTimer();
 void infoWinStartTimer(s32);
 const StatBlock *gameGetUnitRecord(s32);
-const char *FUN_002bd06c(u32);
+const char *dataTable01FindByIdWithAoc(u32);
 const char *demonGetRaceLabel(u16, u32);
 char *libc_strcpy(char *, const char *);
 void textEncodeFontSlot(u32, const char *);
@@ -30,7 +30,7 @@ void FUN_00295f54(UnitNotificationView *notifications, s32)
 {
     if (!notifications->count || notifications->count == notifications->current)
         return;
-    if (FUN_002b6b04()) {
+    if (infoWindowIsActive()) {
         if (dialogIsActive() && FUN_001ab9dc() > 90 && dialogGetTimer() == -1 &&
             notifications->count != notifications->current)
             infoWinStartTimer(1);
@@ -49,7 +49,7 @@ void FUN_00295f54(UnitNotificationView *notifications, s32)
     } else {
         const StatBlock *unit = gameGetUnitRecord(index - 1);
         char text[32] = {};
-        libc_strcpy(text, FUN_002bd06c(unit->id));
+        libc_strcpy(text, dataTable01FindByIdWithAoc(unit->id));
         textEncodeFontSlot(8, text);
         libc_strcpy(text, demonGetRaceLabel(unit->id, 0));
         textEncodeFontSlot(16, text);

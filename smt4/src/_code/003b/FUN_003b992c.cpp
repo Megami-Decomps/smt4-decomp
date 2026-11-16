@@ -17,7 +17,7 @@ void asdMemFree(void *allocation);
 void FUN_002bff50();
 s32 textFormatBuffer(char *destination, const char *format, ...);
 void *asdLoadFileSyncDefault(const char *path);
-ScriptRunState *FUN_00297060(void *script, void *messages);
+ScriptRunState *scrScriptProcessCreate(void *script, void *messages);
 void scriptProcessSetMode(ScriptRunState *process, s32 mode);
 u32 tableGroupFindEntryIndex(void *script, const char *name);
 void scrScriptProcessStartEntry(ScriptRunState *process, u32 entry);
@@ -47,7 +47,7 @@ void FUN_003b992c(EventScriptScene *scene)
     scene->scriptData = asdLoadFileSyncDefault(path);
     textFormatBuffer(path, "event/e%03d/e%03d.mbm", event->eventId, event->eventId);
     scene->messageData = asdLoadFileSyncDefault(path);
-    scene->process = FUN_00297060(scene->scriptData, scene->messageData);
+    scene->process = scrScriptProcessCreate(scene->scriptData, scene->messageData);
     scriptProcessSetMode(scene->process, 2);
     u32 entry = tableGroupFindEntryIndex(scene->scriptData, event->entryName);
     scrScriptProcessStartEntry(scene->process, entry);

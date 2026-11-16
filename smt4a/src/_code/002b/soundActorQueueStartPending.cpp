@@ -2,7 +2,7 @@
 
 extern "C" {
 extern SoundActorQueue *DAT_005821a0;
-u32 FUN_003d4ed8(u32 soundId, SoundActorQueuePosition position);
+u32 soundActorStartOnFreeChannel(u32 soundId, SoundActorQueuePosition position);
 
 // When the queue was flagged pending, start the sound of every active non-positional entry that has no handle yet.
 void soundActorQueueStartPending()
@@ -15,7 +15,7 @@ void soundActorQueueStartPending()
             do {
                 SoundActorQueueEntry *entry = &DAT_005821a0->entries[index];
                 if (entry->active && entry->unk10 == 0 && entry->handle == 0) {
-                    entry->handle = FUN_003d4ed8(entry->soundId, entry->position);
+                    entry->handle = soundActorStartOnFreeChannel(entry->soundId, entry->position);
                 }
                 ++index;
             } while (index < DAT_005821a0->count);

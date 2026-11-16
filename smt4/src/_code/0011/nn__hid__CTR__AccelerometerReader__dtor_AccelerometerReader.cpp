@@ -1,8 +1,8 @@
 #include "classes/AccelerometerReader.h"
 
-extern "C" int FUN_00128cd8(void *);
+extern "C" int nn_hid_DisableAccelerometer(void *);
 
 nn::hid::CTR::AccelerometerReader::~AccelerometerReader()
 {
-    FUN_00128cd8(this);
+    nn_hid_DisableAccelerometer(this);
 }

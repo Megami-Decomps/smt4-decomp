@@ -78,7 +78,7 @@ unsigned int mapIfDrawWorldIndicators(void)
   if ((((DAT_005f1bfc != 0) && (DAT_005f161f == '\0')) && (DAT_005f1621 == '\0')) &&
      (*DAT_005806a4 != 3)) {
     iVar18 = 0;
-    uVar3 = FUN_001692ac(5,0);
+    uVar3 = renderCtxPackPassFlags(5,0);
     piVar14 = (int *)(iVar19 + 0x1258);
     iVar11 = *piVar14;
     uVar6 = piVar14[iVar11 + 2];
@@ -469,7 +469,7 @@ joined_r0x0029e2d8:
       *(unsigned char *)(iVar19 + 0x1270) = 0;
     }
     iVar19 = DAT_0059dbb4;
-    iVar11 = FUN_001692ac(5,0);
+    iVar11 = renderCtxPackPassFlags(5,0);
     piVar14 = (int *)(iVar19 + 0x1258);
     iVar18 = *piVar14;
     iVar15 = piVar14[iVar18 + 2];
@@ -522,7 +522,7 @@ joined_r0x0029e2d8:
             if (*(int *)(iVar17 + 0x38) == 1) {
               fVar29 = *(float *)(iVar17 + 0x78) + fVar34;
               *(float *)(iVar17 + 0x78) = fVar29;
-              FUN_001bc124();
+              libm_sinf();
               *(float *)(iVar17 + 0xb4) = *(float *)(iVar17 + 0xb4) + fVar29 * fVar35;
               in_s0 = 192.0f;
               FUN_0032a904(pcVar16);
@@ -599,9 +599,9 @@ joined_r0x0029e2d8:
             *(float *)(iVar17 + 0xbc) = fVar33;
             fVar33 = fVar33 * 0.017453292f;
             in_s0 = fVar33;
-            FUN_001bc124();
+            libm_sinf();
             *(float *)(iVar17 + 0xb0) = *(float *)(iVar17 + 0xb0) + fVar33 * fVar30;
-            FUN_001bbf0c();
+            libm_cosf();
             *(float *)(iVar17 + 0xb8) = *(float *)(iVar17 + 0xb8) + in_s0 * fVar30;
           }
           *(unsigned int *)(iVar17 + 0xd4) = uVar26;
@@ -635,10 +635,10 @@ joined_r0x0029e2d8:
             sVar1 = *(short *)(iVar19 + *(int *)(iVar17 + 0x1d8) * 0x3c + 0x12);
             if ((sVar1 == 0x1f || sVar1 == 0x21) || sVar1 == 0x1a) {
               in_s0 = in_s0 * fVar29;
-              FUN_001bc124();
+              libm_sinf();
               *(float *)(iVar17 + 0xb0) = *(float *)(iVar17 + 0xb0) + in_s0 * fVar30;
               in_s0 = *(float *)(iVar17 + 0xbc) * fVar29;
-              FUN_001bbf0c();
+              libm_cosf();
               *(float *)(iVar17 + 0xb8) = *(float *)(iVar17 + 0xb8) + in_s0 * fVar30;
             }
           }
@@ -646,10 +646,10 @@ joined_r0x0029e2d8:
             *(float *)(iVar17 + 0xbc) = in_s0 + fVar27;
             fVar29 = (in_s0 + fVar27) * fVar29;
             in_s0 = fVar29;
-            FUN_001bc124();
+            libm_sinf();
             fVar27 = 100.0f;
             *(float *)(iVar17 + 0xb0) = *(float *)(iVar17 + 0xb0) + fVar29 * 100.0f;
-            FUN_001bbf0c();
+            libm_cosf();
             *(float *)(iVar17 + 0xb8) = *(float *)(iVar17 + 0xb8) + in_s0 * fVar27;
           }
         }
@@ -661,13 +661,13 @@ joined_r0x0029e2d8:
             fVar33 = *(float *)(iVar17 + 0x78) + (float)((unsigned long long)uVar28 >> 0x20);
             *(float *)(iVar17 + 0x78) = fVar33;
             if (DAT_005f15fc >= 0x65) {
-              FUN_001bc124();
+              libm_sinf();
               fVar33 = fVar33 * fVar25;
               in_s0 = fVar27;
             }
             else {
               in_s0 = fVar27;
-              FUN_001bc124();
+              libm_sinf();
               fVar33 = fVar33 * fVar35;
             }
             *(float *)(iVar17 + 0xb4) = *(float *)(iVar17 + 0xb4) + fVar33;

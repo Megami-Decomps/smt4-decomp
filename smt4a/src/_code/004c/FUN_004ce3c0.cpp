@@ -35,9 +35,9 @@ void soundChannelRequestIfEnabled(u32 id, u32 channel, u32 duration);
 void FUN_0035d03c(u32 value);
 s32 FUN_0040ab8c(HealingModel *model);
 void FUN_0040aad4(HealingModel *model, u32 value);
-void FUN_003fe86c(void *object, u32 animation, u32 mode, f32 speed, f32 blend);
+void modelPlayClip(void *object, u32 animation, u32 mode, f32 speed, f32 blend);
 void handleRegistryRegisterObject(void *registry, void *object);
-ScriptProcess *FUN_00275bc8(void *heapA, void *heapB);
+ScriptProcess *scrScriptProcessCreate(void *heapA, void *heapB);
 void *dataTableFileGetTable(void *file, u32 index);
 void *dataTableGetEntries(void *table);
 u32 dataTableGetCount(void *table);
@@ -63,7 +63,7 @@ static __inline void registerHealingModel(HealingModel *model)
 {
     FUN_0040aad4(model, 0);
     void *object = model->object;
-    FUN_003fe86c(object, 0, 2, 1, 1);
+    modelPlayClip(object, 0, 2, 1, 1);
     handleRegistryRegisterObject(g_handleRegistry, object);
 }
 
@@ -101,7 +101,7 @@ extern "C" s32 FUN_004ce3c0(HealingSceneWork *work)
             registerHealingModel(work->secondary);
             for (s32 index = 0; index < 3; ++index)
                 registerHealingModel(work->models[index]);
-            work->script = FUN_00275bc8(work->heapA, work->heapB);
+            work->script = scrScriptProcessCreate(work->heapA, work->heapB);
             work->script->state = 2;
             void *table = dataTableFileGetTable(work->tableFile, 0);
             work->entries = dataTableGetEntries(table);
@@ -110,9 +110,9 @@ extern "C" s32 FUN_004ce3c0(HealingSceneWork *work)
             placeWinStartText("\x82\x72\x82\x90\x82\x92\x82\x89\x82\x8e\x82\x87\x81\x40"
                               "\x82\x8f\x82\x86\x81\x40\x82\x67\x82\x85\x82\x81\x82\x8c"
                               "\x82\x89\x82\x8e\x82\x87");
-            if (FUN_0013def0(0) == 3)
+            if (pairedAvailabilityGetState(0) == 3)
                 FUN_0013cab8(0, 10, 255);
-            if (FUN_0013def0(1) == 3)
+            if (pairedAvailabilityGetState(1) == 3)
                 FUN_0013cab8(1, 10, 255);
             work->state = 3;
             FUN_00348c50(2);

@@ -8,7 +8,7 @@ extern "C" {
 int randomAdvanceShiftRegister(void);
 int shiftRandomNextFraction(...);
 int phaseCosInterpolate(void);
-int FUN_002b70cc(void);
+int mathSinFixedAngle(void);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 int __aeabi_uidivmod(void);
@@ -75,7 +75,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: shiftRandomNextFraction. */
 extern int effGetFrameCounter(void);
 /* Supplied declaration required: phaseCosInterpolate. */
-/* Supplied declaration required: FUN_002b70cc. */
+/* Supplied declaration required: mathSinFixedAngle. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
@@ -215,7 +215,7 @@ void FUN_00306b68(fn_00306b68_arg0 *param_1)
                     temp_v22 = temp_v25 + temp_v23;
                     temp_v16 = temp_v29;
                     phaseCosInterpolate();
-                    FUN_002b70cc();
+                    mathSinFixedAngle();
                     DAT_004ea91c = temp_v29 * temp_v23;
                     DAT_004ea924 = temp_v16 * temp_v23;
                     DAT_004ea944 = temp_v16 * temp_v22;

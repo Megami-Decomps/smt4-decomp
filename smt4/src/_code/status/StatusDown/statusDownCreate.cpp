@@ -72,7 +72,7 @@ s32 FUN_001ca748(u32 handle);
 s32 FUN_001cca14(u32 handle);
 void drawParameterBlockClear(UiResourceParameters *packet);
 
-void FUN_002bd954(StatusSprite *sprite, u32 group, u32 image, UiResourceParameters *owner, u16 id, f32 scale);
+void uiSpriteStateInitFromSource(StatusSprite *sprite, u32 group, u32 image, UiResourceParameters *owner, u16 id, f32 scale);
 void asdTextSetBaseColor(u32 text, u32 value);
 void timerStart(StatusSprite *sprite, s32 id, s32 arg);
 void spriteStartAnimationByIndex(StatusSprite *sprite, s32 index);
@@ -100,17 +100,17 @@ void statusDownCreate(void)
     drawParameterBlockClear(&status->packet);
     paramsInit(&status->packet, sKeysFirst, sizeof(sKeysFirst), sKeysSecond, sizeof(sKeysSecond),
                sKeysThird, sizeof(sKeysThird), NULL, 0, sKeysFifth, sizeof(sKeysFifth));
-    FUN_002bd954(&status->sprites[0], 0x1a, 1000, &status->packet, 1, 1.0f);
+    uiSpriteStateInitFromSource(&status->sprites[0], 0x1a, 1000, &status->packet, 1, 1.0f);
     timerStart(&status->sprites[0], 0, 0);
-    FUN_002bd954(&status->sprites[1], 0x1a, 1000, &status->packet, 1, 1.0f);
+    uiSpriteStateInitFromSource(&status->sprites[1], 0x1a, 1000, &status->packet, 1, 1.0f);
     spriteStartAnimationByIndex(&status->sprites[1], 0);
-    FUN_002bd954(&status->sprites[2], 0x1a, 1000, &status->packet, 1, 1.0f);
+    uiSpriteStateInitFromSource(&status->sprites[2], 0x1a, 1000, &status->packet, 1, 1.0f);
     spriteStartAnimationByIndex(&status->sprites[2], 1);
-    FUN_002bd954(&status->sprites[3], 0x1a, 1000, &status->packet, 1, 1.0f);
+    uiSpriteStateInitFromSource(&status->sprites[3], 0x1a, 1000, &status->packet, 1, 1.0f);
     timerStart(&status->sprites[3], 4, 0);
-    FUN_002bd954(&status->sprites[4], 0x1a, 1000, &status->packet, 1, 1.0f);
+    uiSpriteStateInitFromSource(&status->sprites[4], 0x1a, 1000, &status->packet, 1, 1.0f);
     timerStart(&status->sprites[4], 5, 0);
-    FUN_002bd954(&status->sprites[5], 0x1a, 1000, &status->packet, 1, 1.0f);
+    uiSpriteStateInitFromSource(&status->sprites[5], 0x1a, 1000, &status->packet, 1, 1.0f);
     timerStart(&status->sprites[5], 0, 0);
     uiSpriteInitializeState(&status->sprites[6], 0x1a, -1, 0x1c, &status->packet, 0xc9, 1.0f);
     spriteStartAnimationByIndex(&status->sprites[6], 2);

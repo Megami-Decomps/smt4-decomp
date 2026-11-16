@@ -35,7 +35,7 @@ void FUN_00167618(u32 first, u32 second, u32 third, f32 firstValue, f32 secondVa
 extern "C" {
 #endif
 
-void FUN_001695a0(void);
+void messageSetScriptDisplayMode(void);
 
 #ifdef __cplusplus
 }
@@ -45,7 +45,7 @@ void FUN_001695a0(void);
 extern "C" {
 #endif
 
-u32 FUN_001696f4(void);
+u32 gxIsStereoscopic3dEnabled(void);
 
 #ifdef __cplusplus
 }

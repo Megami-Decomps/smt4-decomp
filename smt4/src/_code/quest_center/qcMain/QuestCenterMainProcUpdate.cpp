@@ -53,7 +53,7 @@ s32 gameStateIsFlagSetAndLarge(void);
 s32 FUN_00287304(void);
 void FUN_00287328(u32 bgm);
 void FUN_00287528(s32 mode);
-void FUN_00289880(void);
+void commonBgStopChildAndBeginTransition(void);
 void FUN_002898e4(void);
 s32 bgmGetStateById(u32 id);
 s32 objectFlagBitIsSet(u32 object, u32 bit);
@@ -154,7 +154,7 @@ s32 QuestCenterMainProcUpdate(u32 handle)
             FUN_002898e4();
             buttonHelpAcquireResources();
             buttonHelpCreate();
-            FUN_00289880();
+            commonBgStopChildAndBeginTransition();
         }
         work->entry = new QuestEntry;
         FUN_00381b8c();

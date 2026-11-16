@@ -2,9 +2,9 @@
 
 extern "C" {
 
-s32 FUN_002ac12c(DataArchive *archive);
-DataArchiveRecord *FUN_002ac0f8(DataArchive *archive);
-u32 FUN_002ac0c4(DataArchive *archive);
+s32 packageEntryIsLoaded(DataArchive *archive);
+DataArchiveRecord *packageEntryGetDirectory(DataArchive *archive);
+u32 packageEntryGetFileCount(DataArchive *archive);
 
 /* Entry `index` of a packed file, or NULL when the file has no such entry or it is empty. */
 static __inline void *dataFileEntryData(DataFileHeader *header, s32 index)
@@ -23,9 +23,9 @@ DataFileHeader *dataArchiveSetFindFileWithEntry(DataArchiveSet *set, s32 index)
 {
     for (s32 i = 0; i < set->archiveCount; i++) {
         DataArchive *archive = &set->archives[i];
-        if (FUN_002ac12c(archive) != 0) {
-            DataArchiveRecord *records = FUN_002ac0f8(archive);
-            u32 count = FUN_002ac0c4(archive);
+        if (packageEntryIsLoaded(archive) != 0) {
+            DataArchiveRecord *records = packageEntryGetDirectory(archive);
+            u32 count = packageEntryGetFileCount(archive);
             for (u32 j = 0; j < count; j++) {
                 if (records[j].kind == 0x13 && archive->files[j].loaded) {
                     if (dataFileEntryData(archive->files[j].header, index) != NULL) {

@@ -4,7 +4,7 @@
 extern "C" {
 extern AsdSoundSystem g_asdSound;
 s32 nw_snd_SoundArchive_GetSoundType(AsdSoundSystem *system, s32 sound);
-void FUN_002bda30(s32 handle, s32 frames);
+void basicSoundStopOrFadeOut(s32 handle, s32 frames);
 u32 nw_snd_SoundStartable_StartSound(void *player, s32 *handle, s32 sound, void *parameters);
 void nw_snd_internal_BasicSound_SetVolume(s32 handle, s32 frames, f32 volume);
 
@@ -19,7 +19,7 @@ u32 FUN_0010ddcc(u32 slotIndex, s32 sound, u32 level, s32 frames)
     if (slot == NULL)
         return 0;
     if (slot->handle)
-        FUN_002bda30(slot->handle, 0);
+        basicSoundStopOrFadeOut(slot->handle, 0);
     if ((u8)nw_snd_SoundStartable_StartSound(g_asdSound.player, &slot->handle, sound, NULL))
         return 0;
     if (slot->handle)

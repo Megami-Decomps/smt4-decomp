@@ -38,7 +38,7 @@ extern FrameTransitionWork *g_frameTex;
 extern const FrameTransitionPresets g_frameTransitionDefaultPresets;
 void sysPlayVoice(u32 sound);
 void FUN_003b7b4c(FrameTransitionWork *work);
-void FUN_0014e188(UiAnimatedSprite *sprite, u32 group, u32 id,
+void uiSpriteStateInitFromSource(UiAnimatedSprite *sprite, u32 group, u32 id,
                   UiResourceParameters *resources, u16 flags, f32 speed);
 void uiSpriteSetImageKeyframe(UiAnimatedSprite *sprite, s32 keyframe, s32 restart);
 
@@ -66,13 +66,13 @@ void frameTransitionSetMode(s32 mode)
         work->scaleY = 0.25f;
         work->speed = 20.0f;
         g_frameTex->dirty = 1;
-        FUN_0014e188(&work->sprites[0], 20, 2000, &work->resources, 11, 1.0f);
+        uiSpriteStateInitFromSource(&work->sprites[0], 20, 2000, &work->resources, 11, 1.0f);
         uiSpriteSetImageKeyframe(&work->sprites[0], 0, 0);
         frameTransitionPresetsCopy(&g_frameTransitionDefaultPresets, &work->presets);
         FUN_003b7b4c(work);
-        FUN_0014e188(&work->sprites[2], 20, 2000, &work->resources, 11, 1.0f);
+        uiSpriteStateInitFromSource(&work->sprites[2], 20, 2000, &work->resources, 11, 1.0f);
         uiSpriteSetImageKeyframe(&work->sprites[2], 2, 0);
-        FUN_0014e188(&work->sprites[3], 20, 2000, &work->resources, 11, 1.0f);
+        uiSpriteStateInitFromSource(&work->sprites[3], 20, 2000, &work->resources, 11, 1.0f);
         uiSpriteSetImageKeyframe(&work->sprites[3], 1, 0);
         return;
     case 2:

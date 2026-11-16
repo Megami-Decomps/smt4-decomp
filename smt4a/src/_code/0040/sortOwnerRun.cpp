@@ -27,7 +27,7 @@ void sortOwnerRun(int param_1)
   int temp_v1;
   unsigned int temp_v2;
   
-  temp_v1 = reinterpret_cast<int>(FUN_0026140c());
+  temp_v1 = reinterpret_cast<int>(saveGetUserSettingsBlock());
   temp_v0 = *(unsigned char *)(temp_v1 + 0x1e);
   temp_v1 = param_1 + 0x90;
   param_1 = param_1 + 0x408;

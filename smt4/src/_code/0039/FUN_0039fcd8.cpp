@@ -20,8 +20,8 @@ int FUN_0039fcd8(const SortEntry *a, const SortEntry *b)
     }
     const u16 *keyA = reinterpret_cast<const u16 *>(a);
     const u16 *keyB = reinterpret_cast<const u16 *>(b);
-    u16 orderA = FUN_00230f44(keyA);
-    u16 orderB = FUN_00230f44(keyB);
+    u16 orderA = aocEntryGetSortOrder(keyA);
+    u16 orderB = aocEntryGetSortOrder(keyB);
     return orderA - orderB;
 }
 

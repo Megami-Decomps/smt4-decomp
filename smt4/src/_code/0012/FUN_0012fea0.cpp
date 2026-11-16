@@ -6,7 +6,7 @@ extern "C" {
 
 int listAppendNode(int, int);
 int FUN_002b4f64(int, int);
-int FUN_002bda30(int *, int);
+int basicSoundStopOrFadeOut(int *, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 11 slot(s), 44 byte(s) */
@@ -27,7 +27,7 @@ typedef struct {
 /* Supplied declaration required: listAppendNode. */
 /* Supplied declaration required: FUN_002b4f64. */
 extern int FUN_002baed8(void);
-/* Supplied declaration required: FUN_002bda30. */
+/* Supplied declaration required: basicSoundStopOrFadeOut. */
 
 
 void FUN_0012fea0(int *param_1)
@@ -70,7 +70,7 @@ void FUN_0012fea0(int *param_1)
         param_1[0x24] = param_1[0x24] - 1;
       }
       else if (*(char *)((int)param_1 + 0x8b) == '\0' || *(char *)((int)param_1 + 0x8b) == '\x03') {
-        FUN_002bda30(param_1,0);
+        basicSoundStopOrFadeOut(param_1,0);
         return;
       }
     }

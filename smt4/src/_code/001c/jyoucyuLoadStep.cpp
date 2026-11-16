@@ -74,8 +74,8 @@ s32 jyoucyuLoadStep(u32 handle)
         work->state++;
         break;
     case 5:
-        FUN_002c58c8(5, 2);
-        FUN_002c58c8(5, 3);
+        asdTMTexTablePrepareNodeImage(5, 2);
+        asdTMTexTablePrepareNodeImage(5, 3);
         commonBgLoadSpritesOnFirstUse();
         work->state++;
         break;

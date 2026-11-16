@@ -9,7 +9,7 @@ extern MapIfGlobalsA g_mapIf;
 extern RenderCtxA *g_renderCtx;
 extern GameStateA g_gameState;
 
-u32 FUN_001692ac(u32 first, u32 second);
+u32 renderCtxPackPassFlags(u32 first, u32 second);
 void efctSetSpeed(f32 speed);
 void textureRegionBoundsRead(u32 layer, u32 sprite, s32 *bounds);
 void FUN_001849bc(u32 kind, u32 layer, u32 sprite, u32 argument, s32 y, u32 order, s32 *bounds);
@@ -22,7 +22,7 @@ void FUN_002342d0(u32 argument)
     if (state->fadeMode == 0 || g_gameState.mode >= 100) {
         return;
     }
-    renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
+    renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
 
     f32 progress = state->fadeProgress;
     if (state->fadeMode == 3) {
@@ -39,9 +39,9 @@ void FUN_002342d0(u32 argument)
         level = one + ((f32)(timer - 25) * (1.0f / 15.0f)) * -0.6f;
     }
     efctSetSpeed(level);
-    FUN_001835b4(2, 0x13, 0x11f8, argument, 0, 11);
+    texDrawTableEntryAtStoredOrigin(2, 0x13, 0x11f8, argument, 0, 11);
     efctSetSpeed(one);
-    FUN_001835b4(2, 0x13, 0x11f9, argument, 0, 11);
+    texDrawTableEntryAtStoredOrigin(2, 0x13, 0x11f9, argument, 0, 11);
 
     s32 bounds[4];
     textureRegionBoundsRead(0x13, 0x11fa, bounds);

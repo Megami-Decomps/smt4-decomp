@@ -16,7 +16,7 @@ void FUN_0032c810(u32 firstColor, u32 secondColor, Point2 first, Point2 second,
 
 void effectDrawProjectedCircleFan(const Vec3f *center, u32 color, const Matrix44 *transform, f32 radius, f32 height)
 {
-    void *projection = reinterpret_cast<void *>(FUN_00152f54());
+    void *projection = reinterpret_cast<void *>(asdCameraGetSavedRenderPairs());
     if (transform == NULL)
         transform = block5B8OwnerGetBlock(g_renderCtx);
     Matrix44 matrix;

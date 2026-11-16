@@ -12,7 +12,7 @@ extern const char DAT_004017dc[];
 extern const char DAT_004017c0[];
 extern const char DAT_004017ac[];
 extern u32 DAT_00435d18;
-const BattleTalkUnitReference *FUN_0027da30(u32 unitId, u32 selector);
+const BattleTalkUnitReference *btlFindEntryBlockByMemberId(u32 unitId, u32 selector);
 s32 textFormatBuffer(char *output, const char *format, ...);
 void FUN_003dadd8(u32 value);
 s32 FUN_00256940(BtlMainState *battle, u32 unitId, u32 flags);
@@ -38,7 +38,7 @@ static __inline void battleTalkLoadFiles(BattleTalkWork *work, const DevilRecord
 
 u32 FUN_003c06ac(BattleTalkWork *work)
 {
-    const BattleTalkUnitReference *unit = FUN_0027da30(work->unitId, work->selector);
+    const BattleTalkUnitReference *unit = btlFindEntryBlockByMemberId(work->unitId, work->selector);
     const DevilRecord *record = reinterpret_cast<const DevilRecord *>(devilGetRecord(unit->id));
     battleTalkLoadFiles(work, record);
     FUN_003dadd8(DAT_00435d18);

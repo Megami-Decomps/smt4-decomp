@@ -12,7 +12,7 @@ struct BibleAnalyzeTextGlobals {
 }
 extern "C" {
 u32 shopListItemGetId(const BibleAnalyzeListEntry *entry);
-void FUN_00163aa4(UiAnimatedSprite *, f32 speed);
+void uiSpriteAdvanceAnimation(UiAnimatedSprite *, f32 speed);
 s8 uiSpriteGetCompletionState(const UiAnimatedSprite *sprite);
 s32 vec2GetXInt(const UiAnimatedSprite *);
 s32 vec2GetYInt(const UiAnimatedSprite *);
@@ -34,7 +34,7 @@ void Obj55c8d0::FUN_004a4d70()
     Screen4A * screen = reinterpret_cast<Screen4A *>(this);
     UiAnimatedSprite *selection = &screen->animation.selection;
     screen->unkA872 = 8;
-    FUN_00163aa4(selection, 1.0f);
+    uiSpriteAdvanceAnimation(selection, 1.0f);
     s32 y = vec2GetYInt(selection);
     s32 x = vec2GetXInt(selection);
     pointConvertToFloat(screen->cursor.position, x, y);

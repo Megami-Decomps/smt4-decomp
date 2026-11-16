@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e3140(void);
+int resultHandleFailure(void);
 int software_interrupt(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -13,7 +13,7 @@ typedef struct {
 } param_1_stack;
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: resultHandleFailure. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -25,11 +25,11 @@ void FUN_001cd984(int *param_1)
   nn_os_CriticalSection_Enter((unsigned int)(param_1 + 2));
   software_interrupt(0x24);
   if (*param_1 < 0) {
-    FUN_002e3140();
+    resultHandleFailure();
   }
   software_interrupt(0x19);
   if (*param_1 < 0) {
-    FUN_002e3140();
+    resultHandleFailure();
   }
   *(char *)((int)param_1 + 0x1319) = *(char *)((int)param_1 + 0x1319) + '\x01';
   nn_os_CriticalSection_Leave((unsigned int)(param_1 + 2));

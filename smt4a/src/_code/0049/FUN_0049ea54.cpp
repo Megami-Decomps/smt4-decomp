@@ -35,7 +35,7 @@ typedef struct Screen {
 } Screen;
 
 extern void uiSpriteSelectAnim(void *widget, s32 arg);
-extern void FUN_00203b40(void *panel, u32 arg, s32 a, s32 b, s32 c, s32 d);
+extern void gridNavigationConfigure(void *panel, u32 arg, s32 a, s32 b, s32 c, s32 d);
 extern void flagsSetOrClearBit(void *panel, s32 arg);
 extern s32 textureGetIndexedResource(s32 id);
 extern void sysPlayVoice(u32 id);
@@ -70,7 +70,7 @@ void FUN_0049ea54(Screen *screen)
         asdTMTexLoadMainHeap(0x33, resource);
     }
     FUN_0049de10(screen);
-    FUN_00203b40(screen->panel, screen->unk094, 9, 1, 1, 1);
+    gridNavigationConfigure(screen->panel, screen->unk094, 9, 1, 1, 1);
     flagsSetOrClearBit(screen->panel, 0);
     screen->unk188 = 0;
     uiSpriteSelectAnim(screen->widgetA, 0);

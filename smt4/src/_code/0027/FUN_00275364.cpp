@@ -16,7 +16,7 @@ extern "C" {
 extern MapStateSlots *g_mapStateSlots;
 extern GameState g_gameState;
 void nodeSetTranslation(AsdMdlNode *node, u32 mode, const f32 *position);
-void FUN_0028c618(AsdMdlNode *node, u32 mode, f32 x, f32 y, f32 z);
+void modelPartSetRotationDegrees(AsdMdlNode *node, u32 mode, f32 x, f32 y, f32 z);
 void modelSelectPrimaryMotion(AsdMdlNode *node, f32 blend);
 void modelSelectSecondaryMotion(AsdMdlNode *node, u32 motion, f32 blend);
 u32 modelGetCurrentMotion(AsdMdlNode *node);
@@ -41,7 +41,7 @@ void FUN_00275364(void)
                     }
                     if (slot->motion.mode != 0) {
                         nodeSetTranslation(model->node, 0, slot->motion.position);
-                        FUN_0028c618(model->node, 0, 0.0f, slot->motion.heading, 0.0f);
+                        modelPartSetRotationDegrees(model->node, 0, 0.0f, slot->motion.heading, 0.0f);
                         if (modelGetCurrentMotion(model->node) != slot->motion.elapsed) {
                             modelSelectPrimaryMotion(model->node, 0.0f);
                             modelSelectSecondaryMotion(model->node, slot->motion.elapsed, 0.0f);
@@ -79,7 +79,7 @@ void FUN_00275364(void)
                 }
                 if (slot->motion.mode != 0) {
                     nodeSetTranslation(model->node, 0, slot->motion.position);
-                    FUN_0028c618(model->node, 0, 0.0f, slot->motion.heading, 0.0f);
+                    modelPartSetRotationDegrees(model->node, 0, 0.0f, slot->motion.heading, 0.0f);
                     if (modelGetCurrentMotion(model->node) != slot->motion.elapsed) {
                         modelSelectPrimaryMotion(model->node, 0.0f);
                         modelSelectSecondaryMotion(model->node, slot->motion.elapsed, 0.0f);

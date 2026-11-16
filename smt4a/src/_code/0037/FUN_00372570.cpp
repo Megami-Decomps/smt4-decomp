@@ -29,8 +29,8 @@ typedef struct PartyPanelView {
 s32 uiSpriteSetKeyframe(void *sprite, s32 keyframe, s32 frame);
 s32 FUN_0026fa30(void);
 s32 scrollOwnerSelectIndex(void *cursor, s32 column);
-s32 FUN_002a4964(void *cursor, s32 row);
-s32 FUN_003f5220(u32 handle, s32 expanded);
+s32 scrollListSetSelectionTracked(void *cursor, s32 row);
+s32 slotPlacementAssignSlotPosition(u32 handle, s32 expanded);
 s8 *gameGetSlotTable(void);
 
 extern PartyPanelView *g_partyPanel;
@@ -44,10 +44,10 @@ static void partyPanelCollapse(void)
     panel->expanded ^= 1;
     uiSpriteSetKeyframe(panel->sprite, 5, 0);
     for (i = 0; i < 4; i++) {
-        FUN_003f5220(panel->headerHandles[i], panel->expanded);
+        slotPlacementAssignSlotPosition(panel->headerHandles[i], panel->expanded);
     }
     for (i = 0; i < 0x18; i++) {
-        FUN_003f5220(panel->rowHandles[i], panel->expanded);
+        slotPlacementAssignSlotPosition(panel->rowHandles[i], panel->expanded);
     }
     FUN_0026fa30();
 }
@@ -61,10 +61,10 @@ static void partyPanelExpand(void)
     panel->expanded ^= 1;
     uiSpriteSetKeyframe(panel->sprite, 4, 0);
     for (i = 0; i < 4; i++) {
-        FUN_003f5220(panel->headerHandles[i], panel->expanded);
+        slotPlacementAssignSlotPosition(panel->headerHandles[i], panel->expanded);
     }
     for (i = 0; i < 0x18; i++) {
-        FUN_003f5220(panel->rowHandles[i], panel->expanded);
+        slotPlacementAssignSlotPosition(panel->rowHandles[i], panel->expanded);
     }
     FUN_0026fa30();
 }
@@ -85,7 +85,7 @@ u32 FUN_00372570(s32 force)
                     s32 state;
                     if (panel->cursorOnly != 0) {
                         scrollOwnerSelectIndex(panel->cursorAlt, i % 4);
-                        FUN_002a4964(panel->cursorAlt, i / 4);
+                        scrollListSetSelectionTracked(panel->cursorAlt, i / 4);
                         break;
                     }
                     if (i < 0xC) {
@@ -100,7 +100,7 @@ u32 FUN_00372570(s32 force)
                             partyPanelCollapse();
                         }
                         scrollOwnerSelectIndex(panel->cursor, i % 4);
-                        FUN_002a4964(panel->cursor, i / 4);
+                        scrollListSetSelectionTracked(panel->cursor, i / 4);
                         break;
                     }
                     if (force == 0) {
@@ -117,7 +117,7 @@ u32 FUN_00372570(s32 force)
                     }
                     i -= 0xC;
                     scrollOwnerSelectIndex(panel->cursor, i % 4);
-                    FUN_002a4964(panel->cursor, i / 4);
+                    scrollListSetSelectionTracked(panel->cursor, i / 4);
                     break;
                 }
             }

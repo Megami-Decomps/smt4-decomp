@@ -13,7 +13,7 @@ extern const char DAT_0040357c[];
 extern const char DAT_00403570[];
 s32 FUN_002c1d5c(void);
 s32 aocRunByName(AocSystem *system, s32 table, s32 node, s32 enabled);
-void FUN_002c58c8(s32 table, s32 node);
+void asdTMTexTablePrepareNodeImage(s32 table, s32 node);
 s32 FUN_001dfc64(u32 handle);
 void FUN_002db92c(u32 handle);
 
@@ -40,7 +40,7 @@ void FUN_002fdff4(s32 npc)
         if (aocRunByName(g_aocSystem, work->textureTable, work->textureNode, 1))
             FUN_002ae8e4(reinterpret_cast<u32>(g_aocSystem), work->textureTable, work->textureNode, 0x10000);
         else
-            FUN_002c58c8(work->textureTable, work->textureNode);
+            asdTMTexTablePrepareNodeImage(work->textureTable, work->textureNode);
     }
     work->speed = 0.33f;
     asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00403570), 2, 0, 0, FUN_001dfc64, FUN_002db92c, reinterpret_cast<u32>(work));

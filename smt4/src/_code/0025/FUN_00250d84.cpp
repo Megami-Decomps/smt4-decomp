@@ -3,7 +3,7 @@
 
 extern "C" {
 SavedCounterRange *itemCategoryFindByItemId(u32 flag);
-SavedCounterBanks *FUN_00282be4();
+SavedCounterBanks *saveGetUnlockFlagBlock();
 }
 
 // Clear a saved bit flag or subtract from a saved halfword counter without underflow.
@@ -14,7 +14,7 @@ extern "C" void FUN_00250d84(u32 flag, u32 amount)
     SavedCounterRange *range = itemCategoryFindByItemId(flag);
     if (range != NULL) {
         u8 bankIndex = range->bank;
-        SavedCounterBanks *save = FUN_00282be4();
+        SavedCounterBanks *save = saveGetUnlockFlagBlock();
         u8 *bank = savedCounterBank(save, bankIndex);
         s32 index = flag - range->first;
         if (range->elementType == 0) {

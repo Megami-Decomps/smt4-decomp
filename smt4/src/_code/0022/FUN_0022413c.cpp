@@ -7,9 +7,9 @@ extern "C" {
 int CONCAT44(...);
 int FUN_0024d5bc(...);
 int renderCtxCallB(...);
-int FUN_002ae9ec(...);
+int texTableRecordCallWithParams(...);
 int renderCtxCalculateStereoParallax(int);
-int FUN_002bed3c(void);
+int gxResetColorQuadToWhite(void);
 int efctSetSpeed(void);
 int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
@@ -33,14 +33,14 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_0024d5bc. */
 /* Supplied declaration required: renderCtxCallB. */
 extern int FUN_002865c0(unsigned int);
-/* Supplied declaration required: FUN_002ae9ec. */
+/* Supplied declaration required: texTableRecordCallWithParams. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
-/* Supplied declaration required: FUN_002bed3c. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int jobGetWork(void);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
@@ -74,7 +74,7 @@ unsigned int FUN_0022413c(void)
     temp_v8 = 0.29f;
     renderCtxCalculateStereoParallax(g_titleScene);
     temp_v9 = (unsigned int)temp_v8;
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     efctSetSpeed();
     temp_v3 = g_titleScene;
     temp_v8 = 0.0f;
@@ -89,7 +89,7 @@ unsigned int FUN_0022413c(void)
       *(unsigned char *)(temp_v3 + 0x1284) = 0;
     }
     temp_v3 = g_titleScene;
-    temp_v2 = FUN_002c5d80(1,0);
+    temp_v2 = renderCtxPackPassFlags(1,0);
     piVar7 = (int *)(temp_v3 + 0x124c);
     temp_v4 = *piVar7;
     temp_v5 = piVar7[temp_v4 + 2];
@@ -130,7 +130,7 @@ unsigned int FUN_0022413c(void)
         VectorSignedToFloat(*(int *)(temp_v1 + 0x1c),(unsigned char)(temp_v9 >> 0x16) & 3);
       }
       efctSetSpeed();
-      FUN_002ae9ec(2,0x37,*(unsigned int *)(temp_v1 + 0x28),(int)(*(float *)(temp_v1 + 0x2c) + temp_v13),
+      texTableRecordCallWithParams(2,0x37,*(unsigned int *)(temp_v1 + 0x28),(int)(*(float *)(temp_v1 + 0x2c) + temp_v13),
                    (int)*(float *)(temp_v1 + 0x30),0x81);
     }
     temp_v13 = (float)VectorSignedToFloat((int)temp_v10,(unsigned char)(temp_v9 >> 0x16) & 3);
@@ -154,7 +154,7 @@ unsigned int FUN_0022413c(void)
         VectorSignedToFloat(*(int *)(temp_v1 + 0x3c),(unsigned char)(temp_v9 >> 0x16) & 3);
       }
       efctSetSpeed();
-      FUN_002ae9ec(2,0x37,*(unsigned int *)(temp_v1 + 0x48),(int)(*(float *)(temp_v1 + 0x4c) + temp_v13),
+      texTableRecordCallWithParams(2,0x37,*(unsigned int *)(temp_v1 + 0x48),(int)(*(float *)(temp_v1 + 0x4c) + temp_v13),
                    (int)*(float *)(temp_v1 + 0x50),0x82);
     }
     temp_v3 = g_titleScene;
@@ -189,7 +189,7 @@ unsigned int FUN_0022413c(void)
         FUN_0024d5bc(temp_v16);
         renderCtxCallB(temp_v16);
         efctSetSpeed();
-        FUN_002ae9ec(2,0x37,*(unsigned int *)(temp_v1 + temp_v6 * 0x20 + 0x70),(int)(float)temp_v12,0x80,
+        texTableRecordCallWithParams(2,0x37,*(unsigned int *)(temp_v1 + temp_v6 * 0x20 + 0x70),(int)(float)temp_v12,0x80,
                      0x83);
       }
       temp_v3 = g_titleScene;
@@ -235,7 +235,7 @@ unsigned int FUN_0022413c(void)
         FUN_0024d5bc(temp_v17);
         renderCtxCallB(temp_v17);
         efctSetSpeed();
-        FUN_002ae9ec(2,0x37,*(unsigned short *)(*(int *)(temp_v3 + 0xd4) + *(int *)(temp_v3 + 0xdc) * 2),
+        texTableRecordCallWithParams(2,0x37,*(unsigned short *)(*(int *)(temp_v3 + 0xd4) + *(int *)(temp_v3 + 0xdc) * 2),
                      (int)(*(float *)(temp_v3 + 0xb4) + (float)temp_v12),(int)*(float *)(temp_v3 + 0xb8),
                      0x84);
       }
@@ -268,7 +268,7 @@ unsigned int FUN_0022413c(void)
       (**(romwright_code **)(temp_v1 + 0x1288))();
       *(unsigned char *)(temp_v1 + 0x1284) = 0;
     }
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     efctSetSpeed();
     renderCtxApplyTransforms(g_titleScene);
     renderCtxResetColorScale(g_titleScene);

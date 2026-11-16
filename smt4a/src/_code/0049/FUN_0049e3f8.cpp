@@ -28,15 +28,15 @@ void FUN_0049e3f8(ListPanel *panel)
 
     efctSetSpeed(speed);
     renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
-    FUN_001835b4(2, 0x33, 6, x + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f), y, 0x65);
+    texDrawTableEntryAtStoredOrigin(2, 0x33, 6, x + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f), y, 0x65);
     if (panel->type == 8 || panel->type == 9) {
         s32 offset = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
 
         for (s32 tab = 0; tab < 4; tab++) {
-            FUN_001835b4(2, 0x33, 0x2A + tab, x + offset, y, 0x65);
+            texDrawTableEntryAtStoredOrigin(2, 0x33, 0x2A + tab, x + offset, y, 0x65);
         }
     }
-    FUN_001835b4(2, 0x33, 5, x + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f), y, 0x67);
+    texDrawTableEntryAtStoredOrigin(2, 0x33, 5, x + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f), y, 0x67);
 
     for (s32 i = 0; i < 5; i++) {
         PanelRow *row = &panel->rows[i];

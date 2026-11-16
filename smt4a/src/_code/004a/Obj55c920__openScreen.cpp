@@ -21,7 +21,7 @@ void campButtonHelpLoad(void);
 void campButtonHelpAcquire(void);
 void **asdTMTexTableGetEntry(s32 table);
 void asdTMTexTableLoadSprites(s32 table);
-void FUN_0014afd0(s32 table, s32 index);
+void asdTMTexTablePrepareNodeImage(s32 table, s32 index);
 void FUN_002c7e6c(void);
 void FUN_002c85b0(s32 arg);
 void FUN_002c8538(s32 arg);
@@ -51,7 +51,7 @@ void Obj55c920::openScreen()
     if (*asdTMTexTableGetEntry(20) == NULL) {
         asdTMTexTableLoadSprites(20);
         for (i = 0; i < 4; i++) {
-            FUN_0014afd0(20, i);
+            asdTMTexTablePrepareNodeImage(20, i);
         }
         screen->loadedTexture20 = 1;
     }

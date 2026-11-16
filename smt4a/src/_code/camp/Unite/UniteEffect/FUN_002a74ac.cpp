@@ -19,28 +19,28 @@ typedef char UniteEffectParameterTablesLayoutCheck[
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_0014e188(...);
+int uiSpriteStateInitFromSource(...);
 int uiSpriteInitializeState(...);
 
 int sysPlaySe(...);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
-int FUN_0019e330(...);
+int rangeSelectionSelectEndpoint(...);
 int asdLoadFileSyncDefault(void);
-int FUN_00275bc8(...);
+int scrScriptProcessCreate(...);
 int statusBustUpPortraitAcquire(...);
-int FUN_00387240(...);
+int uiStoreTextureEntryCenter(...);
 int paramsClearPacket(...);
 
 int asdLoadFileWithSize(...);
-int FUN_00178b04(...);
+int asdMemoryAllocTraced(...);
 int devilGetRecord(void);
 int FUN_001fc348(...);
 int uniteCameraDestroy(void);
 int FUN_003d2a00(...);
 int _ZN9Obj557af8C1EPK21AsdAnimCameraResource(void);
 int FUN_003fb5d4(unsigned int, int, int);
-int FUN_0040aa6c(void);
+int resourceOwnerLoadFileSync(void);
 int FUN_0040aad4(...);
 int FUN_0040ab7c(...);
 int FUN_0040bd04(int, int, int, int);
@@ -62,28 +62,28 @@ extern int DAT_0057f2c4; /* 0x57f2c4 */
 
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdLoadFileWithSize. */
-/* Supplied declaration required: FUN_0014e188. */
+/* Supplied declaration required: uiSpriteStateInitFromSource. */
 /* Supplied declaration required: uiSpriteInitializeState. */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00178b04. */
+/* Supplied declaration required: asdMemoryAllocTraced. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: FUN_0019e330. */
+/* Supplied declaration required: rangeSelectionSelectEndpoint. */
 /* Supplied declaration required: FUN_001fc348. */
 /* Supplied declaration required: asdLoadFileSyncDefault. */
-/* Supplied declaration required: FUN_00275bc8. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 /* Supplied declaration required: uniteCameraDestroy. */
 extern int FUN_003316b4(int);
 extern unsigned int asdVramBGetFreeBytes(void);
 /* Supplied declaration required: statusBustUpPortraitAcquire. */
-/* Supplied declaration required: FUN_00387240. */
+/* Supplied declaration required: uiStoreTextureEntryCenter. */
 /* Supplied declaration required: FUN_003d2a00. */
 /* Supplied declaration required: _ZN9Obj557af8C1EPK21AsdAnimCameraResource. */
 /* Supplied declaration required: FUN_003fb5d4. */
 extern unsigned int FUN_00409fe8(unsigned short, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0040aa6c. */
+/* Supplied declaration required: resourceOwnerLoadFileSync. */
 /* Supplied declaration required: FUN_0040aad4. */
 /* Supplied declaration required: FUN_0040ab7c. */
 extern unsigned int modelListInit(void);
@@ -137,33 +137,33 @@ void FUN_002a74ac(void)
   if (*(short *)(temp_v0 + 0x1e) == 2) {
     if (*(char *)(temp_v0 + 0x20) != '\0') {
       temp_v3 = 0x20;
-      FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x6ea);
+      asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x6ea);
       temp_v2 = 0;
       if (temp_v3 != 0) {
         temp_v2 = modelListInit();
       }
       *(unsigned int *)(temp_v0 + 0x90) = temp_v2;
-      FUN_0040aa6c();
+      resourceOwnerLoadFileSync();
       FUN_0040ab7c(*(unsigned int *)(temp_v0 + 0x90),0);
       FUN_0040aad4(*(unsigned int *)(temp_v0 + 0x90),0);
       asdLoadFileWithSize("camp/jakyou_union2_ac.bch",&temp_v5,1);
       temp_v3 = 0x48;
-      FUN_00178b04(0x48,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x6ef);
+      asdMemoryAllocTraced(0x48,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x6ef);
     }
     else {
       temp_v3 = 0x20;
-      FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x6f2);
+      asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x6f2);
       temp_v2 = 0;
       if (temp_v3 != 0) {
         temp_v2 = modelListInit();
       }
       *(unsigned int *)(temp_v0 + 0x90) = temp_v2;
-      FUN_0040aa6c();
+      resourceOwnerLoadFileSync();
       FUN_0040ab7c(*(unsigned int *)(temp_v0 + 0x90),0);
       FUN_0040aad4(*(unsigned int *)(temp_v0 + 0x90),0);
       asdLoadFileWithSize("camp/jakyou_union2.bch",&temp_v5,1);
       temp_v3 = 0x48;
-      FUN_00178b04(0x48,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x6f7);
+      asdMemoryAllocTraced(0x48,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x6f7);
     }
     if (temp_v3 != 0) {
       _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
@@ -174,18 +174,18 @@ void FUN_002a74ac(void)
   }
   if (*(short *)(temp_v0 + 0x1e) == 3) {
     temp_v3 = 0x20;
-    FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x70c);
+    asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x70c);
     temp_v2 = 0;
     if (temp_v3 != 0) {
       temp_v2 = modelListInit();
     }
     *(unsigned int *)(temp_v0 + 0x90) = temp_v2;
-    FUN_0040aa6c();
+    resourceOwnerLoadFileSync();
     FUN_0040ab7c(*(unsigned int *)(temp_v0 + 0x90),0);
     FUN_0040aad4(*(unsigned int *)(temp_v0 + 0x90),0);
     asdLoadFileWithSize("camp/jakyou_union3.bch",&temp_v5,1);
     temp_v3 = 0x48;
-    FUN_00178b04(0x48,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x711);
+    asdMemoryAllocTraced(0x48,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x711);
     if (temp_v3 != 0) {
       _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
     }
@@ -195,18 +195,18 @@ void FUN_002a74ac(void)
   }
   if (*(short *)(temp_v0 + 0x1e) == 4) {
     temp_v3 = 0x20;
-    FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x723);
+    asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x723);
     temp_v2 = 0;
     if (temp_v3 != 0) {
       temp_v2 = modelListInit();
     }
     *(unsigned int *)(temp_v0 + 0x90) = temp_v2;
-    FUN_0040aa6c();
+    resourceOwnerLoadFileSync();
     FUN_0040ab7c(*(unsigned int *)(temp_v0 + 0x90),0);
     FUN_0040aad4(*(unsigned int *)(temp_v0 + 0x90),0);
     asdLoadFileWithSize("camp/jakyou_union4.bch",&temp_v5,1);
     temp_v3 = 0x48;
-    FUN_00178b04(0x48,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x728);
+    asdMemoryAllocTraced(0x48,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x728);
     if (temp_v3 != 0) {
       _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
     }
@@ -231,7 +231,7 @@ void FUN_002a74ac(void)
   asdLoadFileSyncDefault();
   *(unsigned char **)(temp_v0 + 0x33c) = puVar4;
   temp_v2 = *(unsigned int *)(temp_v0 + 0x334);
-  FUN_00275bc8(temp_v2,puVar4);
+  scrScriptProcessCreate(temp_v2,puVar4);
   *(unsigned int *)(temp_v0 + 0x338) = temp_v2;
   paramsClearPacket(temp_v0 + 0x340);
   paramsInit(reinterpret_cast<UiResourceParameters *>(temp_v0 + 0x340),
@@ -243,7 +243,7 @@ void FUN_002a74ac(void)
   do {
     temp_v4 = temp_v0 + temp_v3 * 0x8c;
     temp_v5 = 1;
-    FUN_0014e188(temp_v4 + 0x360,0x1a,0,temp_v0 + 0x340);
+    uiSpriteStateInitFromSource(temp_v4 + 0x360,0x1a,0,temp_v0 + 0x340);
     uiSpriteSetKeyframe(temp_v4 + 0x360,0);
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 6);
@@ -251,7 +251,7 @@ void FUN_002a74ac(void)
   do {
     temp_v4 = temp_v0 + temp_v3 * 0x8c;
     temp_v5 = 1;
-    FUN_0014e188(temp_v4 + 0x360,0x1a,0,temp_v0 + 0x340);
+    uiSpriteStateInitFromSource(temp_v4 + 0x360,0x1a,0,temp_v0 + 0x340);
     uiSpriteSelectAnim(temp_v4 + 0x360,0);
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 10);
@@ -259,12 +259,12 @@ void FUN_002a74ac(void)
   temp_v6 = (unsigned char *)0x65;
   temp_v3 = temp_v0 + 0x8d8;
   uiSpriteInitializeState(temp_v3,0x1a,0xffffffff,0x18);
-  FUN_0019e330(temp_v3,0);
+  rangeSelectionSelectEndpoint(temp_v3,0);
   *(unsigned short *)(temp_v0 + 0x912) = 2;
-  FUN_00387240(temp_v3,0x1a,0x21c);
+  uiStoreTextureEntryCenter(temp_v3,0x1a,0x21c);
   *(unsigned char *)(temp_v0 + 0x914) = 1;
   temp_v5 = 1;
-  FUN_0014e188(temp_v0 + 0x964,0x1a,0,temp_v0 + 0x340);
+  uiSpriteStateInitFromSource(temp_v0 + 0x964,0x1a,0,temp_v0 + 0x340);
   uiSpriteSelectAnim(temp_v0 + 0x964,2);
   sysPlaySe(99);
   temp_v0 = DAT_0057f2c4;

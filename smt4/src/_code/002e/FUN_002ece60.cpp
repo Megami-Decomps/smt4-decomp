@@ -3,7 +3,7 @@
 #include "event/2dEvent/Npc2d.h"
 
 extern "C" {
-u32 FUN_00297060(u32 resource, u32 screen);
+u32 scrScriptProcessCreate(u32 resource, u32 screen);
 void scrScriptProcessStartEntry(u32 process, s32 entry);
 void buttonHelpSetPreset(s32 preset);
 void cecProcessStart(void);
@@ -23,7 +23,7 @@ u32 FUN_002ece60(CampCecMenu *work)
     switch (work->scriptFlow.phase) {
     case 0:
         if (work->scriptResource != 0 && work->unkCF8 != 0) {
-            u32 process = FUN_00297060(work->scriptResource, work->unkCF8);
+            u32 process = scrScriptProcessCreate(work->scriptResource, work->unkCF8);
             s32 entry = work->scriptFlow.kind == 1 ? 0x1C : 0x1D;
             work->script.process = process;
             scrScriptProcessStartEntry(process, entry);

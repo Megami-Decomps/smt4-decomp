@@ -37,13 +37,13 @@ extern void asdTMTexTableLoadSprites(s32 table);
 extern void asdTMTexTableLoadEntryAsync(s32 table, s32 index);
 extern void fileSlotLoad(s32 id);
 extern void drawParameterBlockClear(void *params);
-extern void FUN_002bd954(PlayLogSprite *sprite, s32 group, s32 id, void *owner, s32 flags, f32 scale);
+extern void uiSpriteStateInitFromSource(PlayLogSprite *sprite, s32 group, s32 id, void *owner, s32 flags, f32 scale);
 extern void timerStart(PlayLogSprite *sprite, s32 animation, s32 flags);
 extern u32 dataTableGet(u32 group, u32 index);
 extern void *dataTableGetEntries(u32 table);
 extern u32 dataTableGetCount(u32 table);
 extern s32 gameCountersGetWord(u32 counter);
-extern void FUN_0029f848(u8 *list, s32 count, s32 columns, s32 a, s32 b, s32 c);
+extern void gridNavigationConfigure(u8 *list, s32 count, s32 columns, s32 a, s32 b, s32 c);
 
 /* Looks a record up in data table 0x37, or NULL when out of range. */
 static __inline u32 playLogGetTable(PlayLogRecord **records)
@@ -82,14 +82,14 @@ void FUN_00194ec8(void)
     drawParameterBlockClear(log);
     paramsInit(&log->parameters, DAT_00402d04, 0x18, 0, 0, 0, 0, 0, 0, 0, 0);
     for (i = 0; i < 5; i++) {
-        FUN_002bd954(&log->sprites[i], 0x30, 0, log, 1, 1.0f);
+        uiSpriteStateInitFromSource(&log->sprites[i], 0x30, 0, log, 1, 1.0f);
         timerStart(&log->sprites[i], 0, 0);
     }
     shown = 0;
     for (i = 0; (u32)i < playLogGetTable(&records); i++) {
         record = playLogGetRecord(i);
         if (record != NULL && record->counter < 0) {
-            log->values[i] = FUN_002907a8();
+            log->values[i] = saveBlockGetPlaySeconds();
         } else {
             log->values[i] = gameCountersGetWord(record->counter & 0xFF);
             if ((record->counter & 0xFF) == 0x29 && log->values[i] != 0) {
@@ -100,7 +100,7 @@ void FUN_00194ec8(void)
             log->shownIds[shown++] = i;
         }
     }
-    FUN_0029f848(log->list, shown, 5, 1, 0, 1);
+    gridNavigationConfigure(log->list, shown, 5, 1, 0, 1);
 }
 
 } /* extern "C" */

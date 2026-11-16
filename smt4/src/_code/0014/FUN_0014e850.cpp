@@ -2,7 +2,7 @@
 
 extern "C" {
 extern const TextureCommandTemplates g_gpuCommandDefaults;
-void FUN_002adba8(const void *commands, u32 bytes, u32 mode);
+void gpuSubmitCommandBlock(const void *commands, u32 bytes, u32 mode);
 
 void FUN_0014e850(u32 width, u32 height, u32 format, u32 address)
 {
@@ -12,6 +12,6 @@ void FUN_0014e850(u32 width, u32 height, u32 format, u32 address)
     command.words[3] = formats.words[format] | 0x2200;
     command.words[5] = address >> 3;
     command.words[12] = format;
-    FUN_002adba8(&command, sizeof(command), 1);
+    gpuSubmitCommandBlock(&command, sizeof(command), 1);
 }
 }

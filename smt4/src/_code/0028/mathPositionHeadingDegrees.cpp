@@ -2,12 +2,12 @@
 #include "shard/W6_W6Match3_MapSceneTransition.h"
 
 extern "C" {
-float FUN_00281e34(float x, float z);
+float __hardfp_atan2f(float x, float z);
 float mathPositionHeadingDegrees(MapVector from, MapVector to)
 {
     float dx = to.x - from.x;
     float dz = to.z - from.z;
-    float angle = FUN_00281e34(dx, dz) * 57.3248405456543f;
+    float angle = __hardfp_atan2f(dx, dz) * 57.3248405456543f;
     if (angle < 0.0f) { angle += 360.0f; }
     if (angle > 360.0f) { angle -= 360.0f; }
     return angle;

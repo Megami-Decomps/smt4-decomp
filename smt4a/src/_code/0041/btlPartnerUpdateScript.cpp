@@ -9,7 +9,7 @@ void scrScriptProcessDestroy(ScriptResource *script);
 void asdMemFree(void *memory);
 void FUN_00416610(void *entries);
 void asdLoadFileAsyncSimple(const char *path, void **output, u32 flags);
-ScriptRunState *FUN_00275bc8(void *data, u32 flags);
+ScriptRunState *scrScriptProcessCreate(void *data, u32 flags);
 void scrScriptProcessStartEntry(ScriptRunState *state, u32 entry);
 void scriptProcessSetMode(ScriptRunState *state, s32 mode);
 u32 scrRunOpcodesStub(ScriptState *state);
@@ -51,7 +51,7 @@ extern "C" void btlPartnerUpdateScript(BtlPartnerAttackA *work)
     case 1:
         if (!work->scriptData)
             return;
-        work->runState = FUN_00275bc8(work->scriptData, 0);
+        work->runState = scrScriptProcessCreate(work->scriptData, 0);
         scriptProcessSetMode(work->runState, 1);
         scrScriptProcessStartEntry(work->runState, 0);
         break;

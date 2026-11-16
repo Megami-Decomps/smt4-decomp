@@ -4,7 +4,7 @@
 #include "code/Code0028_Smt4.h"
 
 extern "C" {
-void FUN_002866b4(u32 context, u32 message, s32 frame, s32 mode, bool wait, u32 flags);
+void messageWindowShowOrPoll(u32 context, u32 message, s32 frame, s32 mode, bool wait, u32 flags);
 extern MessageGlobals g_messageMain;
 
 static void showMessage(s32 mode, bool wait)
@@ -12,7 +12,7 @@ static void showMessage(s32 mode, bool wait)
     u32 context = scrGetCommandOwner();
     u32 message = scrGetArg(0);
     s32 frame = scrGetCommandFrame();
-    FUN_002866b4(context, message, frame, mode, wait, 0);
+    messageWindowShowOrPoll(context, message, frame, mode, wait, 0);
 }
 
 /* Script command: locks the banner panel on the first frame, then shows a message and waits for it (mode 5 when the current mode is 20). */
@@ -26,7 +26,7 @@ void scrComm_Message_ShowWaitLockConfirm()
         }
         panel->unk31 = 1;
     }
-    s32 mode = FUN_0028660c();
+    s32 mode = btlTalkGetPortraitCode();
     if (mode == 20) {
         mode = 5;
     }

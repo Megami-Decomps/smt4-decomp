@@ -3,11 +3,11 @@
 extern "C" {
 
 int processDispatchFinishedNodes(void);
-int FUN_002c5210(void);
+int gxIsStereoscopic3dEnabled(void);
 
 s32 titleRunActiveCommand(void)
 {
-    if (FUN_002c5210() == 1) {
+    if (gxIsStereoscopic3dEnabled() == 1) {
         if (g_titleFlags.commandActive != 0 && g_titleFlags.disabled == 0) {
             processDispatchFinishedNodes();
         }

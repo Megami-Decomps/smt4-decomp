@@ -5,18 +5,18 @@
 
 extern "C" {
 extern void *g_titleScene;
-void *FUN_002c501c();
+void *asdCameraGetSavedRenderPairs();
 const Matrix44 *FUN_00343318(void *owner);
 void memCopyWords(const void *source, void *destination, u32 bytes);
 void FUN_002630e0(Vec3f *out, s32 screen, void *projection, const Vec3f *position);
 f32 phaseCosInterpolate(f32 phase);
-f32 FUN_002b70cc(f32 phase);
+f32 mathSinFixedAngle(f32 phase);
 void FUN_00263028(u32 firstColor, u32 secondColor, Point2 first, Point2 second,
                   f32 depth, f32 thickness);
 
 void effectDrawProjectedCircleFan(const Vec3f *center, u32 color, const Matrix44 *transform, f32 radius, f32 height)
 {
-    void *projection = FUN_002c501c();
+    void *projection = asdCameraGetSavedRenderPairs();
     if (transform == NULL)
         transform = FUN_00343318(g_titleScene);
     Matrix44 matrix;
@@ -32,7 +32,7 @@ void effectDrawProjectedCircleFan(const Vec3f *center, u32 color, const Matrix44
     for (u32 index = 0; index < 10; ++index) {
         f32 phase = angle * 40.7436638f;
         f32 x = phaseCosInterpolate(phase) * radius;
-        f32 z = FUN_002b70cc(phase) * radius;
+        f32 z = mathSinFixedAngle(phase) * radius;
         f32 reciprocalW = 1.0f / ((matrix.values[13] * height + matrix.values[14] * z) +
                                   (matrix.values[15] + matrix.values[12] * x));
         Vec3f position = {

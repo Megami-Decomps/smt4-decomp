@@ -48,7 +48,7 @@ extern void *g_btlUiBlock;
 extern void *g_btlAux;
 
 s32 idSetFindSubjectIndex(BtlSlotBattle *battle, BtlSpawnEntry *entry);
-BtlIdTable *FUN_001568f8(BtlSlotBattle *battle, s32 index);
+BtlIdTable *btlFindEntryBlockByMemberId(BtlSlotBattle *battle, s32 index);
 s32 uiHasEntryId(BtlSlotBattle *battle, u32 id);
 u32 FUN_00409fe8(u32 id, s32 flag);
 void valueSlotsInsert(BtlSlotBattle *battle, u32 value);
@@ -98,7 +98,7 @@ void FUN_004cb64c(BtlSlotBattle *battle, BtlSpawnEntry *entry)
             if (index < 0) {
                 index = 0;
             }
-            table = FUN_001568f8(battle, entry->tableIndex);
+            table = btlFindEntryBlockByMemberId(battle, entry->tableIndex);
             id = table->ids[index];
             if (uiHasEntryId(battle, id) == 0) {
                 entry->flags &= ~(u64)ENTRY_ID_BOTH;
@@ -113,7 +113,7 @@ void FUN_004cb64c(BtlSlotBattle *battle, BtlSpawnEntry *entry)
         if (index < 0) {
             index = 0;
         }
-        table = FUN_001568f8(battle, entry->tableIndex);
+        table = btlFindEntryBlockByMemberId(battle, entry->tableIndex);
         id = table->ids[index];
         state = stateEntryFindById(battle, id);
         if ((entry->flags & ENTRY_ID_KNOWN) == 0) {

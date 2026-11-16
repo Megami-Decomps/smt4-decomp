@@ -36,9 +36,9 @@ struct BattleStatDefinition {
 
 extern "C" {
 void sysMemClear(void *buffer, u32 size);
-u16 FUN_0019e52c(u16 id);
+u16 dataTable10FindValue(u16 id);
 BattleStatDefinition *devilGetRecord(u16 id);
-void FUN_004bcd90(BattleStatRecord *record);
+void unitRecomputeDerivedStats(BattleStatRecord *record);
 s32 unitHasRankingBonus(u16 id);
 void FUN_002a6894(BattleStatRecord *record);
 }
@@ -49,7 +49,7 @@ extern "C" void battleRecordInitializeFromDefinition(BattleStatRecord *record, u
     if (record == NULL)
         return;
     sysMemClear(record, 300);
-    u16 id = FUN_0019e52c(record->fallbackId);
+    u16 id = dataTable10FindValue(record->fallbackId);
     if (overrideId != 0)
         id = overrideId;
     if (id == 0)
@@ -79,7 +79,7 @@ extern "C" void battleRecordInitializeFromDefinition(BattleStatRecord *record, u
     record->skills[5] = definition->skills[5];
     record->skills[6] = definition->skills[6];
     record->skills[7] = definition->skills[7];
-    FUN_004bcd90(record);
+    unitRecomputeDerivedStats(record);
     s16 maximum = record->maximum;
     if (unitHasRankingBonus(record->id))
         maximum = (s16)(s32)(maximum * 1.25f);

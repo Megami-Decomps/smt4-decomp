@@ -17,11 +17,11 @@ void uiDrawRotatingGridHighlights(s32 firstEntry, s32 frame)
             s32 index = row * 3 + column;
             const PanelTextLayoutEntryPrefixA *entry = asdTMTexTableEntryAt(26, firstEntry + index);
             if (firstHighlight == index || secondHighlight == index)
-                FUN_001835b4(2, 26, 0x1DE, entry->x, entry->y, 251);
+                texDrawTableEntryAtStoredOrigin(2, 26, 0x1DE, entry->x, entry->y, 251);
             else if (firstTrailing == index || secondTrailing == index)
-                FUN_001835b4(2, 26, 0x1DF, entry->x, entry->y, 251);
+                texDrawTableEntryAtStoredOrigin(2, 26, 0x1DF, entry->x, entry->y, 251);
             else
-                FUN_001835b4(2, 26, 0x1DD, entry->x, entry->y, 251);
+                texDrawTableEntryAtStoredOrigin(2, 26, 0x1DD, entry->x, entry->y, 251);
         }
     }
 }

@@ -11,15 +11,15 @@ typedef struct RestartObj {
     /* 0x208 */ Object *object;
 } RestartObj;
 
-extern s32 FUN_002e07f4(void);
+extern s32 pairedAvailabilityBothReady(void);
 extern void FUN_003d54f8(s32 a, u32 b);
 
-/* Once the previous run finished (state 1 and FUN_002e07f4), frees the object at +0x208 and starts. */
+/* Once the previous run finished (state 1 and pairedAvailabilityBothReady), frees the object at +0x208 and starts. */
 void AocMenu::restartPreviousRun()
 {
     RestartObj * obj = reinterpret_cast<RestartObj *>(this);
     if (obj->unk08 != 0) {
-        if (obj->unk08 == 1 && FUN_002e07f4() != 0) {
+        if (obj->unk08 == 1 && pairedAvailabilityBothReady() != 0) {
             obj->unk04 = 2;
             obj->unk08 = 0;
             if (obj->object != NULL) {

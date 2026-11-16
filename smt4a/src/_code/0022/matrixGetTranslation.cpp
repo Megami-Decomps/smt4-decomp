@@ -2,13 +2,13 @@
 
 extern "C" {
 
-extern void FUN_001bced4(u32 *matrix);
+extern void renderGetCameraViewMatrix(u32 *matrix);
 
 /* Captures the three matrix translation components. */
 void matrixGetTranslation(MatrixTranslation *result)
 {
     u32 matrix[16];
-    FUN_001bced4(matrix);
+    renderGetCameraViewMatrix(matrix);
     result->first = matrix[2];
     result->second = matrix[6];
     result->third = matrix[10];

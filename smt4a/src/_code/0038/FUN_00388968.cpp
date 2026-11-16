@@ -5,7 +5,7 @@
 
 extern "C" {
 extern MessageGlobalsA g_messageMain;
-void FUN_0014e188(void *, s32, s32, void *, s32, f32);
+void uiSpriteStateInitFromSource(void *, s32, s32, void *, s32, f32);
 
 // Start the designated message-panel animation and wait for its pending flag to clear.
 u8 FUN_00388968(void)
@@ -24,7 +24,7 @@ u8 FUN_00388968(void)
         u32 value = scrGetArg(0);
         MessagePanelA *panel = g_messageMain.panel;
         void *sprite = panel->spritesCA4[14];
-        FUN_0014e188(sprite, 4, 0xabe1, panel->block194, 11, 1.0f);
+        uiSpriteStateInitFromSource(sprite, 4, 0xabe1, panel->block194, 11, 1.0f);
         uiSpriteSelectAnim(sprite, 11);
         MessageAnimationView *animation = reinterpret_cast<MessageAnimationView *>(panel);
         animation->value = value;

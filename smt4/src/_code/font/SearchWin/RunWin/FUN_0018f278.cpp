@@ -34,7 +34,7 @@ extern RunWin *g_runWin;
 extern RenderCtx *g_titleScene;
 
 LayoutPoint *asdTMTexTableEntryAt(s32 group, s32 part);
-void FUN_002bed3c(void);
+void gxResetColorQuadToWhite(void);
 s32 vec2GetYInt(void *vec);
 void efctSetSpeed(f32 alpha);
 
@@ -45,16 +45,16 @@ u8 FUN_0018f278(void)
     RunWin *win = g_runWin;
     if (win->active != 0 && win->visible != 0) {
         renderCtxSelectStereoLayout(g_titleScene);
-        FUN_002bf288(2, 14, 0x14F, 0, 0, 109);
+        texDrawTableEntryAtStoredOrigin(2, 14, 0x14F, 0, 0, 109);
         s32 x = vec2GetXInt(win->anchor) + (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.27f);
         s32 y = vec2GetYInt(win->anchor);
         efctSetSpeed(win->alpha);
-        FUN_002bf380(2, 14, 19, x, y, 110);
+        texDrawCompositeSprite(2, 14, 19, x, y, 110);
         RenderCtx *scene = g_titleScene;
         s32 state = packNibblesAndByte(6, 1, 0);
         renderStackPushCountedDirect(&scene->stackB, state);
-        FUN_002bf288(2, 14, 0x150, x, 0, 111);
-        FUN_002bf288(2, 14, 0x151, x, 0, 111);
+        texDrawTableEntryAtStoredOrigin(2, 14, 0x150, x, 0, 111);
+        texDrawTableEntryAtStoredOrigin(2, 14, 0x151, x, 0, 111);
         renderStackPop(&g_titleScene->stackB);
         LayoutPoint *labelPoint = asdTMTexTableEntryAt(14, 0x153);
         u32 color = 0xF49800FF;
@@ -70,14 +70,14 @@ u8 FUN_0018f278(void)
                 s32 index = row * 3 + column;
                 LayoutPoint *dot = asdTMTexTableEntryAt(14, 0x157 + index);
                 if (lit == index || lit2 == index)
-                    FUN_002bf288(2, 14, 0x155, dot->x + x, dot->y, 111);
+                    texDrawTableEntryAtStoredOrigin(2, 14, 0x155, dot->x + x, dot->y, 111);
                 else if (litPrevious == index || lit2Previous == index)
-                    FUN_002bf288(2, 14, 0x156, dot->x + x, dot->y, 111);
+                    texDrawTableEntryAtStoredOrigin(2, 14, 0x156, dot->x + x, dot->y, 111);
                 else
-                    FUN_002bf288(2, 14, 0x154, dot->x + x, dot->y, 111);
+                    texDrawTableEntryAtStoredOrigin(2, 14, 0x154, dot->x + x, dot->y, 111);
             }
         }
-        FUN_002bed3c();
+        gxResetColorQuadToWhite();
         efctSetSpeed(1.0f);
     }
     return 0;

@@ -8,7 +8,7 @@ struct ModelTransformTarget {
 };
 
 extern "C" {
-void FUN_002b4c30(Matrix44 *matrix, const Matrix44 *source);
+void gfxQuaternionToMatrix34(Matrix44 *matrix, const Matrix44 *source);
 void matrix44SetIdentity(Matrix44 *matrix);
 void mathMatrixApplyTranslation(Matrix44 *matrix, const ModelTransformVector *translation, s32 mode);
 void matrixApplyByMode(Matrix44 *target, const Matrix44 *matrix, u32 flags);
@@ -20,7 +20,7 @@ static void matrixInitializeWithScaleAndOffset(Matrix44 *matrix, const ModelTran
                                                const Matrix44 *source, f32 scale)
 {
     if (source != 0) {
-        FUN_002b4c30(matrix, source);
+        gfxQuaternionToMatrix34(matrix, source);
     } else {
         matrix44SetIdentity(matrix);
     }

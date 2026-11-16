@@ -39,8 +39,8 @@ extern ViewState g_battleViewState;
 extern MapViewState *g_lmapView;
 extern CameraScratch g_gameState;
 
-f32 FUN_001bc124(f32 radians);
-f32 FUN_001bbf0c(f32 radians);
+f32 libm_sinf(f32 radians);
+f32 libm_cosf(f32 radians);
 s32 FUN_00330108(Vector3 *end, Vector3 *start, u8 *hit);
 f32 distSpatial(Vector3 start, Vector3 end);
 f32 mathPositionHeadingDegrees(Vector3 from, Vector3 to);
@@ -78,9 +78,9 @@ void FUN_002d0480(s32 enabled)
     g_gameState.ray.start.y = g_battleViewState.position.y + height;
     g_gameState.ray.start.z = g_battleViewState.position.z;
     radians = bestHeading * 0.017453292f;
-    g_gameState.ray.end.x = g_battleViewState.position.x + FUN_001bc124(radians) * distance;
+    g_gameState.ray.end.x = g_battleViewState.position.x + libm_sinf(radians) * distance;
     g_gameState.ray.end.y = g_battleViewState.position.y + height;
-    g_gameState.ray.end.z = g_battleViewState.position.z + FUN_001bbf0c(radians) * distance;
+    g_gameState.ray.end.z = g_battleViewState.position.z + libm_cosf(radians) * distance;
     start = g_gameState.ray.start;
     end = g_gameState.ray.end;
     if (FUN_00330108(&end, &start, hit) == -1) {
@@ -97,8 +97,8 @@ void FUN_002d0480(s32 enabled)
         f32 candidate;
 
         radians = heading * 0.017453292f;
-        g_gameState.ray.end.x = g_battleViewState.position.x + FUN_001bc124(radians) * distance;
-        g_gameState.ray.end.z = g_battleViewState.position.z + FUN_001bbf0c(radians) * distance;
+        g_gameState.ray.end.x = g_battleViewState.position.x + libm_sinf(radians) * distance;
+        g_gameState.ray.end.z = g_battleViewState.position.z + libm_cosf(radians) * distance;
         start = g_gameState.ray.start;
         end = g_gameState.ray.end;
         if (FUN_00330108(&end, &start, hit) == -1) {
@@ -113,9 +113,9 @@ void FUN_002d0480(s32 enabled)
         offset += step;
     }
     radians = bestHeading * 0.017453292f;
-    g_gameState.ray.end.x = g_battleViewState.position.x + FUN_001bc124(radians) * distance;
+    g_gameState.ray.end.x = g_battleViewState.position.x + libm_sinf(radians) * distance;
     g_gameState.ray.end.y = g_battleViewState.position.y + height;
-    g_gameState.ray.end.z = g_battleViewState.position.z + FUN_001bbf0c(radians) * distance;
+    g_gameState.ray.end.z = g_battleViewState.position.z + libm_cosf(radians) * distance;
 }
 
 } /* extern "C" */

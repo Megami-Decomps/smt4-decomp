@@ -49,7 +49,7 @@ extern UniteLists* g_unite;
 DevilInfo* devilGetRecord(u32 product);
 SkillMetadata* findSkillMetadataById(u32 skill);
 s32 arrayContainsU16(const u16* array, s32 count, u32 value);
-void FUN_00203b40(void* listBox, s32 count, s32 a, s32 b, s32 c, s32 d);
+void gridNavigationConfigure(void* listBox, s32 count, s32 a, s32 b, s32 c, s32 d);
 void FUN_0034c340(u16* skills, s32 count, FusionKey* key, s32 mode);
 void unitRecordBuild(u32 id, u8* record);
 s32 getUnlockedSlotCount(u8* record);
@@ -96,7 +96,7 @@ void FUN_0028a538(u32 unused, PartyUnit* first, PartyUnit* second, u32 product)
     key.marker = 1;
     key.keep = 1;
     key.product = product;
-    FUN_00203b40(lists->listBox, primaryCount, 8, 1, 1, 1);
+    gridNavigationConfigure(lists->listBox, primaryCount, 8, 1, 1, 1);
     FUN_0034c340(lists->primary, primaryCount, &key, 0);
     FUN_0034c340(lists->secondary, secondaryCount, &key, 0);
     u8 record[300];

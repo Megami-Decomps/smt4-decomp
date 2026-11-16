@@ -112,7 +112,7 @@ unsigned int sysGetTableWord(int param_1);
 extern "C" {
 #endif
 
-u32 FUN_0024c52c(void *id);
+u32 itemGetSortCategory(void *id);
 
 #ifdef __cplusplus
 }

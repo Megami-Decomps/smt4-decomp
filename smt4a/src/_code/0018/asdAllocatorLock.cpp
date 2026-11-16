@@ -13,7 +13,7 @@ void asdAllocatorLock(void)
     s32 result = svcWaitSynchronization1(*g_allocationAddressRanges.mutex, -1);
     bool failed = nnResultIsFailure(result);
     if (failed) {
-        FUN_002e3140(result, failed);
+        resultHandleFailure(result, failed);
     }
 }
 

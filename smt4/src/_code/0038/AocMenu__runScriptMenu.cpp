@@ -48,7 +48,7 @@ struct AocGlobals {
 extern "C" {
 extern AocGlobals *g_aocMain;
 
-void FUN_00233db8(AocMenuProcess *process, s32 value);
+void aocLoadingTaskStart(AocMenuProcess *process, s32 value);
 void aocMenuSetButtonHelp(AocMenuProcess *process, s32 a, s32 b);
 void FUN_00233e70(AocMenuProcess *process, s32 unused, s32 next);
 s32 tableGroupFindEntryIndex(void *table, const char *name);
@@ -61,10 +61,10 @@ void messageMainFinishWindow(void);
 u32 flaggedValueHolderGetTotal(void *holder);
 u8 FUN_0026b564(void);
 u8 sys43e188GetState(void);
-u8 FUN_00290e78(void);
+u8 messageBannerIsIdle(void);
 u32 buttonHelpHasEnabledEntryForId(u32 id);
 void eventQueueAddUniqueIfValid(s32 event);
-void FUN_002b8244(u32 mode);
+void buttonHelpSetEnabled(u32 mode);
 
 /* Runs one step of the menu process: 0 starts the script, 1 waits for input, 2 follows the screen's result, 3-5 chain the follow-up screens. */
 void AocMenu::runScriptMenu()
@@ -75,7 +75,7 @@ void AocMenu::runScriptMenu()
     switch (process->phase) {
     case 0:
         process->flags |= 0x10000;
-        FUN_00233db8(process, 3);
+        aocLoadingTaskStart(process, 3);
         scrScriptProcessStartEntry(process->script, tableGroupFindEntryIndex(process->table, "aoc_ExeDelete"));
         process->phase = 1;
         aocMenuSetButtonHelp(process, -1, 0);
@@ -112,7 +112,7 @@ void AocMenu::runScriptMenu()
     case 3:
         if (sys43e188GetState() != 0) {
             scrScriptProcessStartEntry(process->script, tableGroupFindEntryIndex(process->table, "aoc_Deleted"));
-            FUN_002b8244(0);
+            buttonHelpSetEnabled(0);
             aocMenuSetButtonHelp(process, 3, 1);
             process->phase = 4;
             return;
@@ -128,7 +128,7 @@ void AocMenu::runScriptMenu()
         }
         return;
     case 5:
-        if (sys43e188GetState() != 0 && FUN_00290e78() != 0) {
+        if (sys43e188GetState() != 0 && messageBannerIsIdle() != 0) {
             process->mode = 10;
             process->phase = 0;
             if (process->active != 0) {

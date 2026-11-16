@@ -8,7 +8,7 @@ typedef struct {
     u16 counts[3]; /* 0x2 */
 } CallbackSlot;
 
-CallbackSlot *FUN_002613f0(s32 index);
+CallbackSlot *saveGetSelectedRecordSlot(s32 index);
 
 typedef struct {
     u8 unk0[4];
@@ -33,9 +33,9 @@ static s32 callbackFindSlot(CallbackDemon *demon)
     s32 i;
 
     for (i = 0; i < 24; i++) {
-        if (FUN_002613f0(i)->id == demon->id) {
-            if (FUN_002613f0(i)->counts[0] != 0 || FUN_002613f0(i)->counts[1] != 0 ||
-                FUN_002613f0(i)->counts[2] != 0) {
+        if (saveGetSelectedRecordSlot(i)->id == demon->id) {
+            if (saveGetSelectedRecordSlot(i)->counts[0] != 0 || saveGetSelectedRecordSlot(i)->counts[1] != 0 ||
+                saveGetSelectedRecordSlot(i)->counts[2] != 0) {
                 return i;
             }
             return -1;

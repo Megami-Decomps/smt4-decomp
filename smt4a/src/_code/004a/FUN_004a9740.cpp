@@ -36,7 +36,7 @@ extern BtlUiGlobals g_btlUi;
 void FUN_002a1850(Vec3f *position, s32 arg, u32 value);
 u32 FUN_004aaff0(u32 handle, s32 slot);
 void uiSpriteSelectAnim(void *sprite, s32 anim);
-void FUN_00387240(void *sprite, u32 kind, u32 index);
+void uiStoreTextureEntryCenter(void *sprite, u32 kind, u32 index);
 void FUN_00358e94(void *sprite, s16 x, s16 y);
 void pairSetFirstResetSecond(void *sprite, s32 value);
 
@@ -48,7 +48,7 @@ void FUN_004a9740(u32 handle, s32 slot, s32 number, u32 unused, Vec3f position, 
     BtlUiNumberSlot *popup;
 
     if (anchored != 0) {
-        FUN_002a1850(&position, 0, FUN_00152f54());
+        FUN_002a1850(&position, 0, asdCameraGetSavedRenderPairs());
         f32 maxY = 240.0f - (f32)(asdTMTexTableEntryAt(13, 0x41A)->placement->height << 1);
 
         if (position.y > maxY) {
@@ -74,7 +74,7 @@ void FUN_004a9740(u32 handle, s32 slot, s32 number, u32 unused, Vec3f position, 
         void *sprite = popup->digitSprites[i];
 
         uiSpriteSelectAnim(sprite, 3);
-        FUN_00387240(sprite, 13, i + 0x41A);
+        uiStoreTextureEntryCenter(sprite, 13, i + 0x41A);
         FUN_00358e94(sprite, (s16)(position.x + (f32)digitOffset), (s16)position.y);
 
         s32 base;

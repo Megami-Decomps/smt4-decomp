@@ -12,7 +12,7 @@ struct CallbackSelectionWorkA {
 };
 
 extern "C" {
-void FUN_00183bb0(void);
+void gxResetColorQuadToWhite(void);
 void renderCtxResetColorScale(void*);
 void skinObjectUpdateMatrices(void*);
 extern void* g_renderCtx;
@@ -20,7 +20,7 @@ extern void* g_renderCtx;
 // Commits the current selection, invokes its member callback, and refreshes the scene.
 void _ZN9Obj55c89c6renderEv(CallbackSelectionWorkA* work)
 {
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
     work->state = 0x1F;
     if (work->callbacks[work->selection] != NULL) {
         (work->*work->callbacks[work->selection])();

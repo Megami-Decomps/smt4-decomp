@@ -9,15 +9,15 @@ typedef struct SortEntry {
 } SortEntry;
 
 extern SortEntry *dataFindKeyedRecordWithOverrides(u32 id);
-extern s32 FUN_003e4230(u32 id);
+extern s32 shopGetEntryAvailability(u32 id);
 
 /* Comparator: entries of kind 2 sort first; then by level and by order, both descending. */
 s32 entryRefCompareByKindLevelOrder(u32 *a, u32 *b)
 {
     SortEntry *entryA = dataFindKeyedRecordWithOverrides(*a);
     SortEntry *entryB = dataFindKeyedRecordWithOverrides(*b);
-    s32 kindA = FUN_003e4230(*a);
-    s32 kindB = FUN_003e4230(*b);
+    s32 kindA = shopGetEntryAvailability(*a);
+    s32 kindB = shopGetEntryAvailability(*b);
     s32 diff;
 
     if (kindA == 2) {

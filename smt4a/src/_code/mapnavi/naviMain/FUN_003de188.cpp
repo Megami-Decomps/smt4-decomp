@@ -13,7 +13,7 @@ u8 *gameFlagsGetBlock(void);
 s32 gameFlagIsSet(u32 flag);
 void campCommonBgAcquire(void);
 void campButtonHelpAcquire(void);
-void FUN_003b61ec(void);
+void commonBgStopChildAndBeginTransition(void);
 void commonBgReset(void);
 void FUN_00485e74(u8 *panel);
 void FUN_00490484(void *panel, u32 first, u32 third, u32 second, f32 x, f32 y);
@@ -59,12 +59,12 @@ void FUN_003de188(u32 unused, u32 argument)
 
     campCommonBgAcquire();
     if (gameFlagIsSet(0x49a) == 0) {
-        FUN_003b61ec();
+        commonBgStopChildAndBeginTransition();
     } else {
         commonBgReset();
     }
     if (gameFlagIsSet(0xc) != 0 && gameFlagIsSet(0x10) == 0) {
-        FUN_003b61ec();
+        commonBgStopChildAndBeginTransition();
     }
     campButtonHelpAcquire();
     FUN_004930e4(argument);

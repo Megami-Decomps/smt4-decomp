@@ -6,7 +6,7 @@
 
 extern "C" {
 
-int FUN_00437cac(...);
+int rangeSetUnionInclusive(...);
 int FUN_00437e98(void);
 IdList* idListFind(unsigned int id);
 int rangeSetAddPresetGroup(...);
@@ -21,7 +21,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00435318. */
 extern int *idListCheck(int *, unsigned int);
-/* Supplied declaration required: FUN_00437cac. */
+/* Supplied declaration required: rangeSetUnionInclusive. */
 extern int rangeListAllMatch(unsigned int, unsigned char **);
 /* Supplied declaration required: FUN_00437e98. */
 /* Supplied declaration required: idListFind. */
@@ -56,7 +56,7 @@ int * FUN_00435318(int *param_1,unsigned int param_2)
     temp_v4 = *param_1;
     temp_v0 = *(unsigned char *)(temp_v4 + 8);
     if (temp_v0 == 5) {
-      temp_v4 = FUN_00437cac(param_2,0x2d);
+      temp_v4 = rangeSetUnionInclusive(param_2,0x2d);
       if (temp_v4 == 0) {
         return (int *)0x2;
       }
@@ -67,7 +67,7 @@ int * FUN_00435318(int *param_1,unsigned int param_2)
         do {
           temp_v3 = *(short *)(temp_v4 + temp_v7 * 2 + 2);
           if (temp_v3 == 0) break;
-          temp_v6 = FUN_00437cac(param_2,temp_v3,temp_v3);
+          temp_v6 = rangeSetUnionInclusive(param_2,temp_v3,temp_v3);
           if (temp_v6 == 0) {
             return (int *)0x2;
           }
@@ -106,7 +106,7 @@ int * FUN_00435318(int *param_1,unsigned int param_2)
                 *param_1 = *(int *)(*param_1 + 4);
                 break;
               }
-              temp_v4 = FUN_00437cac(param_2,temp_v8);
+              temp_v4 = rangeSetUnionInclusive(param_2,temp_v8);
               if (temp_v4 == 0) {
 LAB_004354ac:
                 piVar6 = (int *)0x2;
@@ -119,7 +119,7 @@ LAB_004354ac:
                 do {
                   temp_v3 = *(short *)(temp_v5 + temp_v4 * 2 + 2);
                   if (temp_v3 == 0) break;
-                  temp_v7 = FUN_00437cac(param_2,temp_v3,temp_v3);
+                  temp_v7 = rangeSetUnionInclusive(param_2,temp_v3,temp_v3);
                   if (temp_v7 == 0) goto LAB_004354ac;
                   temp_v4 = temp_v4 + 1;
                 } while (temp_v4 < 3);

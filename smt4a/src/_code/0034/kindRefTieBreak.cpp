@@ -5,9 +5,9 @@ extern "C" {
 extern s32 FUN_003df57c(u32 id, s32 flag);
 extern u32 gameGetSlotRecord(s32 index);
 extern s32 FUN_004bcbb4(u32 data, u32 id);
-extern void FUN_003811ec(KindRef *a, KindRef *b);
+extern void itemSortCompareByCategoryAndId(KindRef *a, KindRef *b);
 
-/* If the two references rate the same, hands them to FUN_003811ec. */
+/* If the two references rate the same, hands them to itemSortCompareByCategoryAndId. */
 void kindRefTieBreak(KindRef *a, KindRef *b)
 {
     s32 rankA;
@@ -26,7 +26,7 @@ void kindRefTieBreak(KindRef *a, KindRef *b)
     }
     diff = rankA - rankB;
     if (diff == 0) {
-        FUN_003811ec(a, b);
+        itemSortCompareByCategoryAndId(a, b);
     }
 }
 

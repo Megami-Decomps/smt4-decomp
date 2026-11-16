@@ -100,16 +100,16 @@ void FUN_00349214(ListWork *work)
             id = work->count > 0 ? 0x7D : 0x7C;
             break;
         }
-        FUN_002bf288(2, 0x14, id, (s32)(row->x + (f32)parallax), (s32)row->y, 0x42);
+        texDrawTableEntryAtStoredOrigin(2, 0x14, id, (s32)(row->x + (f32)parallax), (s32)row->y, 0x42);
         if (state == 4 || state == 8) {
-            FUN_002bf288(2, 0x14, 0x77, (s32)(row->x + (f32)parallax), (s32)row->y, 0x43);
+            texDrawTableEntryAtStoredOrigin(2, 0x14, 0x77, (s32)(row->x + (f32)parallax), (s32)row->y, 0x43);
         }
         if (state != 5) {
             if (state == 6 || state == 9) {
-                FUN_002bf288(2, 0x14, 0x79, (s32)(row->x + (f32)parallax), (s32)row->y, 0x43);
+                texDrawTableEntryAtStoredOrigin(2, 0x14, 0x79, (s32)(row->x + (f32)parallax), (s32)row->y, 0x43);
             }
         } else {
-            FUN_002bf288(2, 0x14, 0x78, (s32)(row->x + (f32)parallax), (s32)row->y, 0x43);
+            texDrawTableEntryAtStoredOrigin(2, 0x14, 0x78, (s32)(row->x + (f32)parallax), (s32)row->y, 0x43);
         }
     }
 }

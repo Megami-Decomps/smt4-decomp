@@ -29,8 +29,8 @@ int FUN_003fd5bc(...);
 int aocActivateFileGroupFlags(...);
 int flagValueSub(...);
 int FUN_0048111c(...);
-int FUN_004bcb54(...);
-int FUN_004bcd90(...);
+int unitRecordResetCurrentValues(...);
+int unitRecomputeDerivedStats(...);
 int dispatchIfFound(...);
 int bitsAt60Set(...);
 int __aeabi_memcpy4(...);
@@ -79,7 +79,7 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: gameFlagIsSet. */
 extern int gameGetSlotRecord(unsigned int);
-extern unsigned int FUN_001ba3d4(unsigned int);
+extern unsigned int flagValueRead(unsigned int);
 /* Supplied declaration required: FUN_001f50fc. */
 extern int gameDataBlocksGetTableFlag(void);
 /* Supplied declaration required: gameDataSetTableFlag. */
@@ -99,13 +99,13 @@ extern int gameDataBlocksValueGet(void);
 /* Supplied declaration required: FUN_003e45bc. */
 extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: FUN_003e48dc. */
-extern int FUN_003e4d68(unsigned int);
+extern int partyGetSlot(unsigned int);
 /* Supplied declaration required: FUN_003fd5bc. */
 /* Supplied declaration required: aocActivateFileGroupFlags. */
 /* Supplied declaration required: flagValueSub. */
 /* Supplied declaration required: FUN_0048111c. */
-/* Supplied declaration required: FUN_004bcb54. */
-/* Supplied declaration required: FUN_004bcd90. */
+/* Supplied declaration required: unitRecordResetCurrentValues. */
+/* Supplied declaration required: unitRecomputeDerivedStats. */
 /* Supplied declaration required: dispatchIfFound. */
 extern unsigned long long bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: bitsAt60Set. */
@@ -541,12 +541,12 @@ void FUN_00261a28(int param_1)
         __aeabi_memcpy4(temp_v24,temp_v23,0x10e8);
         temp_v2 = flagValueIsPositive(0xac);
         if (temp_v2 != 0) {
-          temp_v9 = FUN_001ba3d4(0xac);
+          temp_v9 = flagValueRead(0xac);
           flagValueSub(0xac,temp_v9);
         }
         temp_v2 = flagValueIsPositive(0xad);
         if (temp_v2 != 0) {
-          temp_v9 = FUN_001ba3d4(0xad);
+          temp_v9 = flagValueRead(0xad);
           flagValueSub(0xad,temp_v9);
         }
         break;
@@ -579,8 +579,8 @@ void FUN_00261a28(int param_1)
             *(unsigned char *)(temp_v3 + 0x12a) = 0;
             *(unsigned short *)(temp_v3 + 0x60) = 0;
             bitsAt60Set(temp_v3,2);
-            FUN_004bcd90(temp_v3);
-            FUN_004bcb54(temp_v3);
+            unitRecomputeDerivedStats(temp_v3);
+            unitRecordResetCurrentValues(temp_v3);
             bitsAt60Set(temp_v3,2);
             gameDataBlocksSetFlagBits(0x20,1);
             if (temp_v7 != 0) {
@@ -605,7 +605,7 @@ void FUN_00261a28(int param_1)
       case 8:
         temp_v5 = 0;
         do {
-          temp_v2 = FUN_003e4d68(temp_v5 & 0xffff);
+          temp_v2 = partyGetSlot(temp_v5 & 0xffff);
           __aeabi_memcpy4(temp_v2,temp_v1 + temp_v5 * 0x134 + 0x1de0,0x134);
           FUN_003e48dc(*(unsigned short *)(temp_v2 + 300));
           temp_v5 = temp_v5 + 1;

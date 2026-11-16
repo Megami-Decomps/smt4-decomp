@@ -34,8 +34,8 @@ extern "C" {
 extern RenderCtxA *g_renderCtx;
 
 SaveSlotEntry *saveSlotFindSelected(void);
-s32 FUN_001692ac(u32 a, u32 b);
-void FUN_00183bb0(void);
+s32 renderCtxPackPassFlags(u32 a, u32 b);
+void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 speed);
 SaveRowFrame *asdTMTexTableEntryAt(u32 table, u32 index);
 SaveSlotEntry *FUN_00187068(s32 index);
@@ -51,8 +51,8 @@ void FUN_0037eb64(SaveListWork *work, s32 x, s32 y);
 void FUN_00335060(SaveListWork *work)
 {
     RenderCtxA *context = g_renderCtx;
-    renderStackPush(&context->stackA, FUN_001692ac(1, 0));
-    FUN_00183bb0();
+    renderStackPush(&context->stackA, renderCtxPackPassFlags(1, 0));
+    gxResetColorQuadToWhite();
     FUN_0037e8a4(work);
 
     s32 row = 1;
@@ -62,7 +62,7 @@ void FUN_00335060(SaveListWork *work)
 
     for (s32 slot = 0; slot < SAVE_LIST_SLOT_COUNT; slot++) {
         SaveSlotEntry *entry = FUN_00187068(slot);
-        if (FUN_00187168(entry) != 0) {
+        if (partySlotIsOccupied(entry) != 0) {
             SaveRowSprite *sprite = &work->rows[row];
             s32 x = vec2GetXInt(sprite);
             s32 y = vec2GetYInt(sprite);
@@ -94,7 +94,7 @@ void FUN_00335060(SaveListWork *work)
     s32 x = vec2GetXInt(sprite);
     s32 y = vec2GetYInt(sprite);
     FUN_0037eb64(work, x, y);
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
     renderStackPop(&g_renderCtx->stackA);
 }

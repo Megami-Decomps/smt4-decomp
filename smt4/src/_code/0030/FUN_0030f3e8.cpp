@@ -5,13 +5,13 @@
 extern "C" {
 extern MatrixRotationWork DAT_004ea81c;
 f32 phaseCosInterpolate(f32 phase);
-f32 FUN_002b70cc(f32 phase);
+f32 mathSinFixedAngle(f32 phase);
 
 void FUN_0030f3e8(f32 angle)
 {
     f32 phase = angle * 40.743664f;
     f32 cosine = phaseCosInterpolate(phase);
-    f32 sine = FUN_002b70cc(phase);
+    f32 sine = mathSinFixedAngle(phase);
     f32 complement = 1.0f - cosine;
     f32 x = DAT_004ea81c.axisInput.values[0];
     f32 y = DAT_004ea81c.axisInput.values[1];

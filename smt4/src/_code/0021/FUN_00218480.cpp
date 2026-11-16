@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0025043c(...);
 int FUN_002621b4(...);
 int btlItemComputeValues(...);
-int FUN_0028cb40(...);
+int btlCommandMenuResolveLayout(...);
 int btlCommandResolveSelectedTarget(...);
 int playSceneSetState(int, int, int);
 int flaggedEntrySetValueB(...);
@@ -31,7 +31,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0025043c. */
 /* Supplied declaration required: FUN_002621b4. */
 /* Supplied declaration required: btlItemComputeValues. */
-/* Supplied declaration required: FUN_0028cb40. */
+/* Supplied declaration required: btlCommandMenuResolveLayout. */
 /* Supplied declaration required: btlCommandResolveSelectedTarget. */
 extern int playerPadTestBit(unsigned int);
 /* Supplied declaration required: playSceneSetState. */
@@ -73,7 +73,7 @@ void FUN_00218480(int param_1)
   buttonHelpSetPreset(0x38);
   temp_v12[0] = 0;
   temp_v8[0] = 0;
-  FUN_0028cb40(param_1,temp_v12,temp_v8);
+  btlCommandMenuResolveLayout(param_1,temp_v12,temp_v8);
   puVar8 = (unsigned int *)(param_1 + 0x345c);
   *puVar8 = 0x1010101;
   *(unsigned int *)(param_1 + 0x3460) = 0;
@@ -88,7 +88,7 @@ void FUN_00218480(int param_1)
       *(unsigned int *)(param_1 + 0x3048) = 0x23;
       temp_v15[0] = 0;
       temp_v10[0] = 0;
-      FUN_0028cb40(param_1,temp_v15,temp_v10);
+      btlCommandMenuResolveLayout(param_1,temp_v15,temp_v10);
       FUN_002621b4(*(int *)(param_1 + 0x305c) - 1,0xffffffff,(int)temp_v10[0],temp_v9);
       temp_v6 = 1;
       do {
@@ -154,7 +154,7 @@ void FUN_00218480(int param_1)
         *(unsigned int *)(param_1 + 0x3048) = 0x23;
         temp_v13[0] = 0;
         temp_v10[0] = 0;
-        FUN_0028cb40(param_1,temp_v13,temp_v10);
+        btlCommandMenuResolveLayout(param_1,temp_v13,temp_v10);
         FUN_002621b4(*(int *)(param_1 + 0x305c) - 1,0xffffffff,(int)temp_v10[0],temp_v9);
         temp_v2 = 1;
         do {
@@ -213,7 +213,7 @@ void FUN_00218480(int param_1)
         *(unsigned int *)(param_1 + 0x3048) = 0x23;
         temp_v14[0] = 0;
         temp_v10[0] = 0;
-        FUN_0028cb40(param_1,temp_v14,temp_v10);
+        btlCommandMenuResolveLayout(param_1,temp_v14,temp_v10);
         btlItemComputeValues(0xffffffff,(int)temp_v10[0],temp_v9,param_1 + 0x3470);
         temp_v6 = 1;
         do {
@@ -227,7 +227,7 @@ void FUN_00218480(int param_1)
       else {
         temp_v14[0] = 0;
         temp_v10[0] = 0;
-        FUN_0028cb40(param_1,temp_v14,temp_v10);
+        btlCommandMenuResolveLayout(param_1,temp_v14,temp_v10);
         temp_v6 = objectPartRunUnlessLocked(temp_v11);
         if (temp_v6 != 0) {
           temp_v3 = gameGetSlotTable();

@@ -21,10 +21,10 @@ void FUN_002512c4(s32 entry, s32 x, s32 y, u32 flags, s32 selected)
     renderStackSet(&context->stackB, blend);
     if (selected != 0) {
         efctSetSpeed(vec2GetSpeed(&panel->members[3]));
-        FUN_002bf288(2, 0x19, 0x10, position->x + x, position->y + y, flags);
+        texDrawTableEntryAtStoredOrigin(2, 0x19, 0x10, position->x + x, position->y + y, flags);
         efctSetSpeed(1.0f);
     } else {
-        FUN_002bf288(2, 0x19, 0xF, position->x + x, position->y + y, flags);
+        texDrawTableEntryAtStoredOrigin(2, 0x19, 0xF, position->x + x, position->y + y, flags);
     }
     context = g_titleScene;
     blend = packNibblesAndByte(6, 7, 0);

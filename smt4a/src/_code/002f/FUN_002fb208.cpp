@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e3140(void);
+int resultHandleFailure(void);
 int FUN_002e726c(unsigned int *, unsigned int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: FUN_002e726c. */
 
 
@@ -28,7 +28,7 @@ unsigned int FUN_002fb208(void)
   temp_v0[0] = in_r3;
   FUN_002e726c(puVar1,0xffff8000);
   if ((int)puVar1 < 0) {
-    FUN_002e3140();
+    resultHandleFailure();
   }
   return temp_v0[0];
 }

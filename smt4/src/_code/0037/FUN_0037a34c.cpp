@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002bbb2c(int, int);
+int sysReportCheckFailure(int, int);
 int nn_fs_CTR_MPCore_detail_UserFileSystem_TrySetPriorityForFile(unsigned int);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002bbb2c. */
+/* Supplied declaration required: sysReportCheckFailure. */
 /* Supplied declaration required: nn_fs_CTR_MPCore_detail_UserFileSystem_TrySetPriorityForFile. */
 
 
@@ -44,7 +44,7 @@ int FUN_0037a34c(int param_1)
     temp_v2 = nn_fs_CTR_MPCore_detail_UserFileSystem_TrySetPriorityForFile(temp_v0);
     temp_v3 = 1;
     if (temp_v2 < 0) {
-      FUN_002bbb2c(temp_v2,0x37a398);
+      sysReportCheckFailure(temp_v2,0x37a398);
     }
   }
   return temp_v3;

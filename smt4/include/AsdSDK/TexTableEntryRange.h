@@ -7,7 +7,7 @@
 extern "C" {
 
 /* Reads entry `index` of table file `file`: its position (x, y) and range (first, second). */
-void FUN_00231434(u32 file, s32 index, int *x, int *y, int *first, int *second);
+void asdTMTexTableGetEntryPlacement(u32 file, s32 index, int *x, int *y, int *first, int *second);
 
 } /* extern "C" */
 

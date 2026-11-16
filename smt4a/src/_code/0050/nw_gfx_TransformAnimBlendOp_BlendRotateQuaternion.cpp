@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001bbde0(void);
-int FUN_001bc124(void);
+int mathRemPio2f(void);
+int libm_sinf(void);
 int nn_math_ARMv6_MTX34CopyAsm(float *);
 int nn_math_ARMv6_MTX34ToQUATC_FAST(float *);
 
@@ -17,8 +17,8 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_001bbde0. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: mathRemPio2f. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34ToQUATC_FAST. */
 
@@ -77,14 +77,14 @@ void nw_gfx_TransformAnimBlendOp_BlendRotateQuaternion
         temp_v6 = 1.0f - temp_v1;
       }
       else {
-        FUN_001bbde0();
+        mathRemPio2f();
         temp_v7 = temp_v0;
-        FUN_001bc124();
+        libm_sinf();
         temp_v6 = (temp_v6 - temp_v1) * temp_v7;
-        FUN_001bc124();
+        libm_sinf();
         temp_v6 = temp_v6 / temp_v0;
         temp_v1 = temp_v1 * temp_v7;
-        FUN_001bc124();
+        libm_sinf();
         temp_v5 = (temp_v1 / temp_v0) * temp_v5;
       }
       temp_v0 = (float)((unsigned long long)temp_v3 >> 0x20) * temp_v6 + temp_v5 * temp_v10;

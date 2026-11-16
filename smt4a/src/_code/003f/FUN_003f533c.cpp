@@ -21,9 +21,9 @@ void FUN_003f533c(u32 unused, s32 x, s32 y, u32 parameter, s32 number,
     s32 iconX = sprite->x + (x + parallax);
     s32 iconY = sprite->y + y;
     if (alternate) {
-        FUN_001835b4(2, 0x31, 2, iconX, iconY, parameter);
+        texDrawTableEntryAtStoredOrigin(2, 0x31, 2, iconX, iconY, parameter);
     } else {
-        FUN_001835b4(2, 0x31, 0xA0, iconX, iconY, parameter);
+        texDrawTableEntryAtStoredOrigin(2, 0x31, 0xA0, iconX, iconY, parameter);
     }
     parallax = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.26f));
     s32 tens = number / 10;

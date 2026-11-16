@@ -14,7 +14,7 @@ s32 lmapMainIsRunning(void);
 void lmapApplyMapAndArea(void);
 void FUN_003b5d1c(void);
 void popupQueueInsertUnique(s32 request);
-s32 FUN_002d8b58(s32 content, s32 option);
+s32 popupSelectWeightedMessage(s32 content, s32 option);
 void FUN_00295108(s32 enabled);
 
 void FUN_00312af0(void)
@@ -35,7 +35,7 @@ void FUN_00312af0(void)
                 }
                 g_popupState->popup.state = 13;
                 g_popupState->popup.phase = 0;
-                s32 content = FUN_002d8b58(15, 0);
+                s32 content = popupSelectWeightedMessage(15, 0);
                 g_popupState->popup.contentValue = content;
             }
             g_popupState->pending[index] = 0;
@@ -46,10 +46,10 @@ void FUN_00312af0(void)
                 work->popup.state = 16;
                 work->popup.phase = 0;
                 if (FUN_002c2758(6) != 1) {
-                    s32 content = FUN_002d8b58(17, 0);
+                    s32 content = popupSelectWeightedMessage(17, 0);
                     g_popupState->popup.contentValue = content;
                 } else {
-                    s32 content = FUN_002d8b58(24, 0);
+                    s32 content = popupSelectWeightedMessage(24, 0);
                     g_popupState->popup.contentValue = content;
                 }
             } else if (work->popup.state != 16) {
@@ -69,7 +69,7 @@ void FUN_00312af0(void)
             } else {
                 work->popup.phase = 0;
                 work->popup.state = 19;
-                s32 content = FUN_002d8b58(20, 0);
+                s32 content = popupSelectWeightedMessage(20, 0);
                 g_popupState->popup.contentValue = content;
             }
             g_popupState->pending[index] = 0;

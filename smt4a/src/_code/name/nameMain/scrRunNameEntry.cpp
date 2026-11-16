@@ -46,10 +46,10 @@ u32 scrRunNameEntry(void)
     }
     switch (mode) {
     case 1:
-        FUN_003180c4(0x33, reinterpret_cast<const char *>(gameDataGetPlayerName()));
+        scrSetStringSlot(0x33, reinterpret_cast<const char *>(gameDataGetPlayerName()));
         break;
     case 2:
-        FUN_003180c4(0x33, reinterpret_cast<const char *>(gameBlockGetArea221AA()));
+        scrSetStringSlot(0x33, reinterpret_cast<const char *>(gameBlockGetArea221AA()));
         break;
     }
     g_name.status.active = 0;

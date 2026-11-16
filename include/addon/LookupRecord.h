@@ -10,9 +10,9 @@ struct Table01Record {
 #ifdef __cplusplus
 extern "C" {
 #endif
-struct Table01Record *FUN_00180118(u32 id);
+struct Table01Record *dataTable01GetRecordWithAocOverride(u32 id);
 struct Table01Record *FUN_00180114(u32 id);
-struct Table01Record *FUN_002bd06c(u32 id);
+struct Table01Record *dataTable01FindByIdWithAoc(u32 id);
 #ifdef __cplusplus
 }
 #endif

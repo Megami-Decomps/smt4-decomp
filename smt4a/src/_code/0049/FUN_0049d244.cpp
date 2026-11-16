@@ -21,15 +21,15 @@ void FUN_0049d244(MenuCaptionView *view, s32 x, s32 y, f32 alpha)
     s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
     if (view->mode == 8 || view->mode == 9) {
         efctSetSpeed(alpha);
-        FUN_001835b4(2, 51, 46, (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f), 0, 101);
+        texDrawTableEntryAtStoredOrigin(2, 51, 46, (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f), 0, 101);
         efctSetSpeed(1.0f);
     }
     efctSetSpeed(alpha);
     for (s32 index = 0; index < 3; ++index)
-        FUN_001835b4(2, 51, index, parallax + x, y, 101);
+        texDrawTableEntryAtStoredOrigin(2, 51, index, parallax + x, y, 101);
     if (!view->caption || !view->caption->length)
         return;
-    FUN_001835b4(2, 51, 3, x + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f), y, 101);
+    texDrawTableEntryAtStoredOrigin(2, 51, 3, x + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f), y, 101);
     TextureTableEntryIV *info = asdTMTexTableEntryAt(51, 4);
     s32 captionX = info->x + ((s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f) + x);
     textDrawString(3, 0xFFFFFFFF, (const char *)view->caption->text,

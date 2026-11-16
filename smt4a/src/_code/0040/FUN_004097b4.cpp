@@ -6,8 +6,8 @@ extern "C" {
 
 u32 asdGxPresetsGetHeightByKind(u32 kind);
 u32 asdGxPresetsGetByKind(u32 kind);
-u32 FUN_001692ac(u32 value, bool enabled);
-u32 FUN_00387580(u32 kind, f32 value);
+u32 renderCtxPackPassFlags(u32 value, bool enabled);
+u32 renderCtxPackPassFlagsWithAlpha(u32 kind, f32 value);
 u32 flagsPackFourBooleans(s32 first, s32 second, s32 third, s32 fourth);
 u32 FUN_003a48dc(s32 a, s32 b, s32 c, u32 d);
 u32 packThreeFields(u32 a, s32 b, s32 c);
@@ -34,8 +34,8 @@ void FUN_004097b4(RenderCtxA *context, u32 color, u32 fade, u32 flags, f32 alpha
         mode = 2;
     }
     renderCtxSelectTexture(context, NULL);
-    renderStackPush(&context->stackA, FUN_001692ac(1, second));
-    renderStackPush(&context->additional.stackC, FUN_00387580(1, 0.0f));
+    renderStackPush(&context->stackA, renderCtxPackPassFlags(1, second));
+    renderStackPush(&context->additional.stackC, renderCtxPackPassFlagsWithAlpha(1, 0.0f));
     renderStackPush(&context->additional.stackG, flagsPackFourBooleans(first, first, first, first));
     renderStackPush(&context->stackB, packNibblesAndByte(1, 0, 0));
     renderStackPush(&context->depthStacks.stackE, FUN_003a48dc(1, fade, 255, 255));

@@ -5,7 +5,7 @@ struct IndexedValues;
 struct AnimatedCompletionState;
 
 extern "C" {
-void *FUN_0040619c(const IndexedValues *owner, u32 index);
+void *ptrVectorAt(const IndexedValues *owner, u32 index);
 u32 FUN_004ffa14(AnimatedCompletionState *object);
 bool animationIsClipComplete(AnimatedCompletionState *object);
 
@@ -14,7 +14,7 @@ static __inline AnimatedCompletionState *animationGetComponent(const AnimationVi
     const AnimationVisualBinding *binding = state->binding;
     if (binding == NULL)
         return NULL;
-    return (AnimatedCompletionState *)FUN_0040619c((const IndexedValues *)binding->model, index);
+    return (AnimatedCompletionState *)ptrVectorAt((const IndexedValues *)binding->model, index);
 }
 
 u8 animationVisualIsComplete(const AnimationVisualState *state)

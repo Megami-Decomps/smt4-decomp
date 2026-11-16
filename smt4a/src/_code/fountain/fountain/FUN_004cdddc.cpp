@@ -35,7 +35,7 @@ typedef char FountainInitializationOffsets[
 }
 extern "C" {
 extern LockedObj *g_handleRegistry;
-void *FUN_00178b04(u32 bytes, const char *file, u32 line);
+void *asdMemoryAllocTraced(u32 bytes, const char *file, u32 line);
 ModelList *modelListInit(ModelList *list);
 s32 textFormatBuffer(char *output, const char *format, ...);
 void resourceOwnerLoadNamed(LockedObj *owner, const char *name);
@@ -57,12 +57,12 @@ void placeWinCreate();
 void FUN_004cdddc(FountainInitializationView *work)
 {
     const char *file = "c:\\SMT4F\\SMT4F\\sdds4\\program\\fountain\\fountain.cpp";
-    ModelList *list = static_cast<ModelList *>(FUN_00178b04(sizeof(ModelList), file, 0x18D));
+    ModelList *list = static_cast<ModelList *>(asdMemoryAllocTraced(sizeof(ModelList), file, 0x18D));
     if (list != NULL)
         list = modelListInit(list);
     work->environment = list;
     FUN_001cd3ec(list, "fountain/fountain.bam");
-    list = static_cast<ModelList *>(FUN_00178b04(sizeof(ModelList), file, 0x191));
+    list = static_cast<ModelList *>(asdMemoryAllocTraced(sizeof(ModelList), file, 0x191));
     if (list != NULL)
         list = modelListInit(list);
     work->character = list;
@@ -70,7 +70,7 @@ void FUN_004cdddc(FountainInitializationView *work)
     char name[128];
     for (s32 index = 0; index < 3; ++index) {
         textFormatBuffer(name, "fountain/obj%03d.bam", index + 1);
-        list = static_cast<ModelList *>(FUN_00178b04(sizeof(ModelList), file, 0x198));
+        list = static_cast<ModelList *>(asdMemoryAllocTraced(sizeof(ModelList), file, 0x198));
         if (list != NULL)
             list = modelListInit(list);
         work->objects[index] = list;

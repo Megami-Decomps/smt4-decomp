@@ -47,7 +47,7 @@ u32 npcCreateTextureEffectJob(u32 id, s32 x, s32 y)
         if (aocRunByName(g_aocSystem, work->table, work->node, 1)) {
             aocLoadTextureNode(g_aocSystem, work->table, work->node, 0x10000);
         } else {
-            FUN_0014afd0(work->table, work->node);
+            asdTMTexTablePrepareNodeImage(work->table, work->node);
         }
     }
     work->speed = 0.33f;

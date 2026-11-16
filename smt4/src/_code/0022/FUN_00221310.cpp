@@ -120,7 +120,7 @@ s32 FUN_00221310(u32 handle)
         }
         break;
     case INTRO_STATE_WAIT_NEXT:
-        if (FUN_002896bc() != 0) {
+        if (screenFadesAllReady() != 0) {
             work->timer++;
             if (work->timer > 10)
                 introEnter(work, INTRO_STATE_DONE);

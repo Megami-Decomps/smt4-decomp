@@ -17,14 +17,14 @@ extern "C" {
 u32 scrGetArg(s32 argument);
 u32 btlResolveEntryChoice(u32 choice);
 void scrSetResult(s32 result);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
 
 /* Test eligible group entries and the special active entry for a positive counter. */
 u32 FUN_003cab30(void)
 {
     u32 choice = scrGetArg(0);
     s32 first, count;
-    FUN_00301a08(btlResolveEntryChoice(choice), &first, &count);
+    btlGetEntryChoiceRange(btlResolveEntryChoice(choice), &first, &count);
     for (s32 i = first; i < first + count; ++i) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
         if (!(g_btlCandidateMasks.unavailable & entry->flags) &&
@@ -38,7 +38,7 @@ u32 FUN_003cab30(void)
         }
     }
     if (btlGetMainState()->unk4cd1) {
-        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         const BattleCandidateCounterView *counters = (const BattleCandidateCounterView *)entry;
         if (entry && (counters->primary > 0 || counters->secondary > 0)) {
             scrSetResult(1);

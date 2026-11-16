@@ -78,7 +78,7 @@ u32 FUN_00425ab0(MoviePlayerInitialization *player, void *fileBackend, void *rea
         &argument, DAT_00588104->info.address + DAT_00588104->info.size, 17, -2, 0);
     bool failed = nnResultIsFailure(result);
     if (failed)
-        FUN_002e3140(result, failed);
+        resultHandleFailure(result, failed);
     return 1;
 }
 }

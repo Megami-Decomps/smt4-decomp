@@ -27,8 +27,8 @@ typedef struct RenderWork {
 extern u32 g_renderCtx; /* 0x59dbb4 */
 
 extern int surfaceCopy(Surface *dst, Surface *src);
-extern int FUN_00154edc(int arg, Surface *surface);
-extern int FUN_00157558(u32 ctx);
+extern int gxCopyFramebufferToSurface(int arg, Surface *surface);
+extern int renderCtxSelectDisplayAreaForStereoMode(u32 ctx);
 
 /* Renders the scene into the backdrop surface once, then halves the surface size to mark it copied. */
 s32 frameTexRenderBackdropOnce(u32 handle)
@@ -39,10 +39,10 @@ s32 frameTexRenderBackdropOnce(u32 handle)
         return 0;
     if (work->backdrop.copied != 0)
         return 0;
-    FUN_00157558(g_renderCtx);
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     work->surface->width = 0x200;
     work->surface->height = 0x200;
-    work->backdrop.fresh = FUN_00154edc(0, work->surface);
+    work->backdrop.fresh = gxCopyFramebufferToSurface(0, work->surface);
     surfaceCopy(work->surface, work->surface);
     work->surface->width >>= 1;
     work->surface->height >>= 1;

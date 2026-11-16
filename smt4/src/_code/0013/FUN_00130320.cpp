@@ -5,12 +5,12 @@
 extern "C" {
 
 int multibyteToUtf16(...);
-int FUN_002bb5a4(int, unsigned char [524], int);
-int FUN_002bbb2c(void);
+int archivePathDeviceOpen(int, unsigned char [524], int);
+int sysReportCheckFailure(void);
 
 /* Supplied declaration required: multibyteToUtf16. */
-/* Supplied declaration required: FUN_002bb5a4. */
-/* Supplied declaration required: FUN_002bbb2c. */
+/* Supplied declaration required: archivePathDeviceOpen. */
+/* Supplied declaration required: sysReportCheckFailure. */
 
 
 int FUN_00130320(int param_1,unsigned int param_2,int param_3)
@@ -36,7 +36,7 @@ int FUN_00130320(int param_1,unsigned int param_2,int param_3)
     *(unsigned int *)(param_1 + 0x14) = 0;
     *(unsigned int *)(param_1 + 8) = 0;
     *(unsigned int *)(param_1 + 0xc) = 0;
-    FUN_002bb5a4(temp_v2,temp_v3,1);
+    archivePathDeviceOpen(temp_v2,temp_v3,1);
     *(int *)(param_1 + 0x18) = temp_v2;
     return (temp_v2 >> 0x1f) + 1;
   }
@@ -52,9 +52,9 @@ int FUN_00130320(int param_1,unsigned int param_2,int param_3)
   *(unsigned int *)(param_1 + 0x14) = 0;
   *(unsigned int *)(param_1 + 8) = 0;
   *(unsigned int *)(param_1 + 0xc) = 0;
-  FUN_002bb5a4(temp_v2,temp_v3,1);
+  archivePathDeviceOpen(temp_v2,temp_v3,1);
   if ((temp_v2 < 0) && (temp_v2 < 0)) {
-    FUN_002bbb2c();
+    sysReportCheckFailure();
   }
   return 1;
 }

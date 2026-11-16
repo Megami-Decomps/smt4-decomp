@@ -8,7 +8,7 @@ int FUN_001897bc(int, unsigned short [4], int);
 int FUN_001a0f34(int);
 int FUN_001a0f60(...);
 int FUN_001a0fb4(int, int *);
-int FUN_002e3140(void);
+int resultHandleFailure(void);
 int coproc_moveto_Data_Synchronization(int);
 int rt_memcpy(int, int *, int);
 int software_interrupt(int);
@@ -40,7 +40,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001a0f34. */
 /* Supplied declaration required: FUN_001a0f60. */
 /* Supplied declaration required: FUN_001a0fb4. */
-/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: resultHandleFailure. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 /* Supplied declaration required: rt_memcpy. */
@@ -92,11 +92,11 @@ void FUN_0018a520(int *param_1,int param_2)
     nn_os_CriticalSection_Enter((unsigned int)(param_1 + 2));
     software_interrupt(0x24);
     if (*param_1 < 0) {
-      FUN_002e3140();
+      resultHandleFailure();
     }
     software_interrupt(0x19);
     if (*param_1 < 0) {
-      FUN_002e3140();
+      resultHandleFailure();
     }
     *(char *)((int)param_1 + 0x1319) = *(char *)((int)param_1 + 0x1319) + '\x01';
     nn_os_CriticalSection_Leave((unsigned int)(param_1 + 2));
@@ -147,7 +147,7 @@ void FUN_0018a520(int *param_1,int param_2)
     *(short *)((int)param_1 + 0x131a) = *(short *)((int)param_1 + 0x131a) + 1;
     software_interrupt(0x18);
     if (param_1[1] < 0) {
-      FUN_002e3140();
+      resultHandleFailure();
     }
     temp_v0 = *(unsigned short *)((int)param_1 + 0x131a) & 1;
     *(unsigned short *)((int)param_1 + 0x131e) = temp_v0;

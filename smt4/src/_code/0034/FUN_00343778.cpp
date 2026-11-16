@@ -16,7 +16,7 @@ struct UpdateStateView {
 
 }
 
-extern "C" s32 FUN_002b634c(u32 handle, f32* values);
+extern "C" s32 gpuWriteVertexUniformVec4(u32 handle, f32* values);
 
 // Forward changed or forced four-float values, then clear the force-update flag.
 extern "C" void FUN_00343778(UpdateStateView* state, const Float4View* values)
@@ -27,7 +27,7 @@ extern "C" void FUN_00343778(UpdateStateView* state, const Float4View* values)
         values->components[2] != state->unk11CC.components[2] ||
         values->components[3] != state->unk11CC.components[3]) {
         state->unk11CC = *values;
-        FUN_002b634c(state->unk52C, state->unk11CC.components);
+        gpuWriteVertexUniformVec4(state->unk52C, state->unk11CC.components);
     }
     state->unk11DC = 0;
 }

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002b5820(...);
 int FUN_002bcc60(...);
 int nn_os_CriticalSection_Initialize(...);
-int FUN_002c526c(...);
+int resultHandleFailure(...);
 int nn_os_SharedMemoryBlock_AttachAndMap(...);
 
 /* stack frame of param_1: 10 slot(s), 40 byte(s) */
@@ -35,7 +35,7 @@ extern int nngxCheckVramBank(void);
 /* Supplied declaration required: FUN_002b5820. */
 /* Supplied declaration required: FUN_002bcc60. */
 /* Supplied declaration required: nn_os_CriticalSection_Initialize. */
-/* Supplied declaration required: FUN_002c526c. */
+/* Supplied declaration required: resultHandleFailure. */
 extern void nn_gxlow_CTR_CmdReqQueueTx_Initialize(unsigned int, unsigned int);
 extern unsigned int nn_gxlow_CTR_Gpu_RegisterInterruptRelayQueue(unsigned int, unsigned int, unsigned int, unsigned int, int *);
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -78,7 +78,7 @@ void FUN_0013b218(int param_1)
     *(unsigned int *)(param_1 + 0x2c) = temp_v2;
   }
   if ((int)puVar1 < 0) {
-    FUN_002c526c();
+    resultHandleFailure();
   }
   *(unsigned char *)(param_1 + 0x77) = 0;
   *(unsigned char *)(param_1 + 0x76) = 0;
@@ -120,7 +120,7 @@ void FUN_0013b218(int param_1)
   temp_v9 = param_1;
   FUN_002bcc60(temp_v0,&temp_v5,nn_gxlow_CTR_InterruptReceiver_ReceiverThreadFunc,&temp_v9);
   if (temp_v0 < 0) {
-    FUN_002c526c();
+    resultHandleFailure();
   }
   nn_os_CriticalSection_Leave(param_1);
   return;

@@ -2,7 +2,7 @@
 
 extern "C" {
 extern const TextureCommandTemplates g_gpuCommandDefaults;
-void FUN_002adba8(const void *commands, u32 byteCount, s32 copyCommands);
+void gpuSubmitCommandBlock(const void *commands, u32 byteCount, s32 copyCommands);
 
 // Submit a texture register packet with dimensions, address, wrapping, and filtering.
 void FUN_00138810(u32 width, u32 height, s32 textureFormat, u32 byteAddress,
@@ -15,6 +15,6 @@ void FUN_00138810(u32 width, u32 height, s32 textureFormat, u32 byteAddress,
                        formats.words[textureFormat];
     command.words[5] = byteAddress >> 3;
     command.words[12] = textureFormat;
-    FUN_002adba8(&command, sizeof(command), 1);
+    gpuSubmitCommandBlock(&command, sizeof(command), 1);
 }
 }

@@ -5,14 +5,14 @@ void scrCommMessageSetMode(s32);
 u32 scrGetCommandOwner(void);
 u32 scrGetArg(u32);
 u32 scrGetCommandFrame(void);
-u32 FUN_002866b4(u32, u32, u32, s32, s32, s32);
+u32 messageWindowShowOrPoll(u32, u32, u32, s32, s32, s32);
 
 static u32 showMessage(s32 mode, s32 wait)
 {
     u32 context = scrGetCommandOwner();
     u32 message = scrGetArg(0);
     u32 frame = scrGetCommandFrame();
-    return FUN_002866b4(context, message, frame, mode, wait, 0);
+    return messageWindowShowOrPoll(context, message, frame, mode, wait, 0);
 }
 
 // Show the script's choice message through the shared message-state handler.

@@ -10,7 +10,7 @@ u8 flagsAtGetBit0(s32 id);
 s32 gameFlagIsSet(u16 flag);
 void flagsAtSetBits01(s32 id);
 s32 FUN_0049ebf0(const void *left, const void *right);
-void FUN_00203b40(GridNavigation *navigation, s32 count, s32 rows, s32 columns, s32 wrap, s32 alternateKeys);
+void gridNavigationConfigure(GridNavigation *navigation, s32 count, s32 rows, s32 columns, s32 wrap, s32 alternateKeys);
 u16 FUN_001643b4(u32 group, s32 image);
 void FUN_00202400(void);
 void FUN_0049d140(CallbackControllerWork *work, s32 state, s32 nextState);
@@ -37,7 +37,7 @@ void FUN_0049d770(CallbackControllerWork *work)
     }
     work->catalog.availableCount = available;
     qsort(work->catalog.indices, available, sizeof(u16), FUN_0049ebf0);
-    FUN_00203b40(&work->list.navigation, work->catalog.availableCount, 10, 1, 1, 1);
+    gridNavigationConfigure(&work->list.navigation, work->catalog.availableCount, 10, 1, 1, 1);
     work->list.rowState[0] = 0;
     work->list.rowState[1] = 0;
     work->list.rowState[2] = 0;

@@ -35,7 +35,7 @@ extern MapIf *g_mapIf; /* 0x447a78 */
 MapModel *asdMdlManagerCreateLoaded(const char *path, s32 heap);
 void lightOwnerRegister(MapModel *model, s32 mode);
 void nodeSetTranslation(void *node, s32 index, const Vec3 *translation);
-void FUN_0028c618(void *node, s32 index, Vec3 scale);
+void modelPartSetRotationDegrees(void *node, s32 index, Vec3 scale);
 
 /* Creates the map action-manhole marker model at the given position (xyz, w) and starts it. */
 void FUN_001fa760(Vec4 position)
@@ -53,7 +53,7 @@ void FUN_001fa760(Vec4 position)
     scale.x = 0.0f;
     scale.y = block->position.w;
     scale.z = 0.0f;
-    FUN_0028c618(block->model->node, 0, scale);
+    modelPartSetRotationDegrees(block->model->node, 0, scale);
 }
 
 } /* extern "C" */

@@ -2,7 +2,7 @@
 
 extern "C" {
 extern LmapSceneA *g_lmapScene;
-void FUN_0040ba38(LmapScript *owner, u32 selector);
+void playerModelStartBaseMotion(LmapScript *owner, u32 selector);
 void playerLoadOutfitPartModel(LmapScript *owner, u8 channel, u32 selector);
 void playerModelLoadByIndex(LmapScript *owner, u8 channel, u32 value, u32 selector);
 
@@ -10,7 +10,7 @@ void playerModelLoadByIndex(LmapScript *owner, u8 channel, u32 value, u32 select
  * only set for the three channel indices (it is never read uninitialised). */
 void lmapInitializeModelChannels(void)
 {
-    FUN_0040ba38(g_lmapScene->script, 448);
+    playerModelStartBaseMotion(g_lmapScene->script, 448);
     if (g_lmapScene->restoreChannelValues != 0) {
         for (s32 i = 0; i < 3; ++i) {
             u32 selector;

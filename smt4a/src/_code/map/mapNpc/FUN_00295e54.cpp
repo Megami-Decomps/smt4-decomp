@@ -5,7 +5,7 @@
 extern "C" {
 
 int textFormatBuffer(unsigned char [68], unsigned char *);
-int FUN_00178b04(int, unsigned char *, int);
+int asdMemoryAllocTraced(int, unsigned char *, int);
 int FUN_001cd3ec(void);
 int FUN_00295d40(void);
 int FUN_00312de8(void);
@@ -14,13 +14,13 @@ int vectorQueuePushPosition(void);
 int FUN_0037976c(void);
 int FUN_00385964(void);
 int controllerSetPosition(...);
-int FUN_003fe86c(unsigned int, int, int);
+int modelPlayClip(unsigned int, int, int);
 int FUN_0040a908(int, int);
 int FUN_0040a918(...);
 int moriModelContentCopyBody(void);
 int FUN_0040aad4(int, int);
 int handleRegistryRegisterObject(...);
-int FUN_0046c35c(...);
+int groupedFileTablesCountRecordsOfKind(...);
 int VectorSignedToFloat(...);
 
 extern unsigned char LAB_00296450; /* 0x296450 */
@@ -31,7 +31,7 @@ extern int *DAT_00581280; /* 0x581280 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_00178b04. */
+/* Supplied declaration required: asdMemoryAllocTraced. */
 /* Supplied declaration required: FUN_001cd3ec. */
 /* Supplied declaration required: FUN_00295d40. */
 /* Supplied declaration required: FUN_00312de8. */
@@ -43,7 +43,7 @@ extern unsigned int asdVramBGetFreeBytes(void);
 extern int flagPairCondition(int, int);
 extern int FUN_003b564c(void);
 /* Supplied declaration required: controllerSetPosition. */
-/* Supplied declaration required: FUN_003fe86c. */
+/* Supplied declaration required: modelPlayClip. */
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
 /* Supplied declaration required: moriModelContentCopyBody. */
@@ -51,7 +51,7 @@ extern int FUN_003b564c(void);
 extern int FUN_0040ab8c(int);
 extern int modelListInit(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
-/* Supplied declaration required: FUN_0046c35c. */
+/* Supplied declaration required: groupedFileTablesCountRecordsOfKind. */
 
 
 unsigned int FUN_00295e54(int param_1,int param_2,int param_3)
@@ -123,12 +123,12 @@ unsigned int FUN_00295e54(int param_1,int param_2,int param_3)
       psVar5 = psVar11;
       dataTable2aGetEntryWithAoc();
       temp_v3 = g_aocSystem;
-      FUN_0046c35c(g_aocSystem,0x24);
+      groupedFileTablesCountRecordsOfKind(g_aocSystem,0x24);
       piVar12 = DAT_00581280;
       if (temp_v3 != 0) {
         if (*psVar5 != -1) goto LAB_00296008;
         temp_v3 = g_aocSystem;
-        FUN_0046c35c(g_aocSystem,0x24,0);
+        groupedFileTablesCountRecordsOfKind(g_aocSystem,0x24,0);
         piVar12 = DAT_00581280;
         if (temp_v5 - temp_v3 <= (int)psVar11) {
           *DAT_00581280 = 0;
@@ -208,7 +208,7 @@ LAB_002960c8:
 LAB_002961a0:
       if (temp_v8 != 0xffffffff) {
         temp_v4 = 0x20;
-        FUN_00178b04(0x20,&LAB_00296470,0x115);
+        asdMemoryAllocTraced(0x20,&LAB_00296470,0x115);
         temp_v5 = 0;
         if (temp_v4 != 0) {
           temp_v5 = modelListInit();
@@ -220,7 +220,7 @@ LAB_002961a0:
       else {
 LAB_002961f8:
         temp_v4 = 0x20;
-        FUN_00178b04(0x20,&LAB_00296470,0x120);
+        asdMemoryAllocTraced(0x20,&LAB_00296470,0x120);
         temp_v5 = 0;
         if (temp_v4 != 0) {
           temp_v5 = modelListInit();
@@ -234,7 +234,7 @@ LAB_002961f8:
     }
     else {
       temp_v4 = 0x20;
-      FUN_00178b04(0x20,&LAB_00296470,300);
+      asdMemoryAllocTraced(0x20,&LAB_00296470,300);
       temp_v5 = 0;
       if (temp_v4 != 0) {
         temp_v5 = modelListInit();
@@ -276,7 +276,7 @@ LAB_002961f8:
   }
   FUN_0040aad4(piVar12[temp_v5 * 0xf + 0x10],0);
   temp_v9 = *(unsigned int *)(piVar12[temp_v5 * 0xf + 0x10] + 4);
-  FUN_003fe86c(temp_v9,0,2);
+  modelPlayClip(temp_v9,0,2);
   handleRegistryRegisterObject(g_handleRegistry,temp_v9);
   temp_v3 = DAT_00581280[1];
   dataTable2aGetEntryWithAoc();

@@ -31,7 +31,7 @@ struct MapIf {
 
 extern MapIf *g_mapIf;
 
-void FUN_003d4ed8(u32 soundId);
+void soundActorStartOnFreeChannel(u32 soundId);
 
 /* Switches the map interface on or off; switching on plays the sound and resets the panel geometry. */
 void FUN_002d8614(s8 enable)
@@ -46,7 +46,7 @@ void FUN_002d8614(s8 enable)
     if (enable == 0) {
         return;
     }
-    FUN_003d4ed8(0x10002ab);
+    soundActorStartOnFreeChannel(0x10002ab);
     panel->offset = 0.0f;
     panel->size = Vec2(0.0f, 20.0f);
     panel->depth = 0.0f;

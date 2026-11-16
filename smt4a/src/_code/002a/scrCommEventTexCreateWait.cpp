@@ -16,7 +16,7 @@ s32 scrGetCommandFrame(void);
 u32 eventTexGetCurrent(void);
 void eventTexSetCurrent(u32 handle);
 s32 jobIsValid(u32 handle);
-s32 FUN_0039af04(void);
+s32 eventTexHasEmptySlot(void);
 u32 FUN_003b6820(u32 id, s32 mode, u32 arg);
 void eventInsertSortedTextureJob(u32 handle);
 
@@ -35,7 +35,7 @@ u32 scrCommEventTexCreateWait(void)
         }
         return 1;
     }
-    if (FUN_0039af04() != 0) {
+    if (eventTexHasEmptySlot() != 0) {
         u32 handle = FUN_003b6820(id, 1, arg);
         if (handle != 0) {
             eventTexSetCurrent(handle);

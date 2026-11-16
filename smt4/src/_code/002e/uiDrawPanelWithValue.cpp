@@ -14,9 +14,9 @@ struct SpritePartInfo {
 
 extern "C" {
 
-void FUN_002bed3c(void);
+void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 speed);
-void FUN_002bf380(s32 layer, s32 sheet, s32 part, s32 x, s32 y, s32 priority);
+void texDrawCompositeSprite(s32 layer, s32 sheet, s32 part, s32 x, s32 y, s32 priority);
 void drawSetColorFromRGBA8(u32 color);
 SpritePartInfo *asdTMTexTableEntryAt(s32 sheet, s32 part);
 void FUN_00210d08(u32 value, s32 x, s32 y, s32 priority);
@@ -24,19 +24,19 @@ void FUN_00210d08(u32 value, s32 x, s32 y, s32 priority);
 // Draw the panel frame (highlighted or not) and its number at an offset from the panel position.
 void uiDrawPanelWithValue(PanelDrawPos *pos, s32 dx, s32 dy, u32 value, s32 highlighted)
 {
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     efctSetSpeed(pos->alpha);
     s32 x = pos->x + dx;
     s32 y = pos->y + dy;
     if (!highlighted) {
-        FUN_002bf380(2, 0x39, 7, x, y, 0x6f);
+        texDrawCompositeSprite(2, 0x39, 7, x, y, 0x6f);
     } else {
-        FUN_002bf380(2, 0x39, 8, x, y, 0x6f);
+        texDrawCompositeSprite(2, 0x39, 8, x, y, 0x6f);
     }
     drawSetColorFromRGBA8(0xb4ff8200);
     SpritePartInfo *part = asdTMTexTableEntryAt(0x39, 0x53);
     FUN_00210d08(value, part->x + x, part->y + y, 0x71);
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
 }
 

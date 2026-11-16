@@ -1,11 +1,10 @@
 #include "camp/RenderCtx.h"
 #include "gfx/RenderTransformState.h"
-#include "shard/W4_W4Match5_DataTable.h"
 
 extern "C" {
 void mathCopyIdentityMatrix(Matrix44 *matrix);
 void FUN_002bbbc8(RenderTransformState *context, Matrix44 *projection, Matrix44 *view, Matrix44 *transform);
-void FUN_002bbb74(u32 mode, Matrix44 *combined);
+void gpuWriteVertexUniformMatrix(u32 mode, Matrix44 *combined);
 
 // Rebuild nonidentity or dirty transform matrices and apply the combined render matrix.
 void renderCtxApplyTransforms(RenderCtx *renderCtx)
@@ -25,7 +24,7 @@ void renderCtxApplyTransforms(RenderCtx *renderCtx)
     mathCopyIdentityMatrix(&context->transform);
     mathCopyIdentityMatrix(&context->inverse);
     FUN_002bbbc8(context, &context->projection, &context->view, &context->transform);
-    FUN_002bbb74(context->mode, &context->combined);
+    gpuWriteVertexUniformMatrix(context->mode, &context->combined);
     context->dirty = 0;
 }
 }

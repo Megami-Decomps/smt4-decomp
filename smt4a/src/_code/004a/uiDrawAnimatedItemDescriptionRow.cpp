@@ -33,7 +33,7 @@ void btlDrawLayeredHud(ItemRowContext *context, s32 x, s32 y, s32 label);
 void efctSetSpeed(f32 speed);
 void FUN_00185e84(s32 effect, s32 x, s32 y, s32 layer, s32 first, s32 second);
 void uiDrawItemCategoryIcon(s32 category, s32 x, s32 y, s32 layer, s32 flags);
-const char *FUN_0015f858(s32 category, s32 variant);
+const char *dataFindKindRecordWithAocOverrides(s32 category, s32 variant);
 }
 
 // Draw a row's label, effect or category icon, and description at its animated position.
@@ -60,7 +60,7 @@ extern "C" void uiDrawAnimatedItemDescriptionRow(ItemRowContext *context, s32 ro
         efctSetSpeed(speed);
         TextureTableEntryIV *icon = asdTMTexTableEntryAt(12, 134);
         uiDrawItemCategoryIcon(static_cast<s16>(category), icon->x + x, icon->y + y, 26, 0);
-        text = FUN_0015f858(category, 0);
+        text = dataFindKindRecordWithAocOverrides(category, 0);
     } else {
         s16 effect = static_cast<s16>(entry->effect);
         efctSetSpeed(speed);

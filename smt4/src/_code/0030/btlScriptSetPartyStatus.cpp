@@ -19,7 +19,7 @@ u32 FUN_00246080(s16 priority, s16 mode, BtlUnit* source,
 u32 FUN_00246d38(s16 priority, BtlUnit* source, BtlActionRecord* target, u32 mask);
 u32 FUN_00246e24(s16 priority, BtlUnit* source, BtlActionRecord* target,
                  u32 mask, s32 updateGroup);
-u32 FUN_002505c0(s16 priority, BtlUnit* source, u32 message,
+u32 btlQueueKeyedScalarReflectAction(s16 priority, BtlUnit* source, u32 message,
                  s32 value, s32 option, s32 extra, s32 flags);
 
 // Apply or remove the selected status on each active front-line party member.
@@ -44,14 +44,14 @@ u32 btlScriptSetPartyStatus()
              0x10000)) {
             FUN_00246080(0, 0, source,
                          &table->actions[entry->members.ids[0]], 4);
-            FUN_002505c0(0, source, 0x10001ea, 0, 1, 0, 0);
+            btlQueueKeyedScalarReflectAction(0, source, 0x10001ea, 0, 1, 0, 0);
             continue;
         }
         if (!apply) {
             FUN_00246d38(0, source, &table->actions[entry->members.ids[0]], mask);
         } else {
             FUN_00246e24(0, source, &table->actions[entry->members.ids[0]], mask, 1);
-            FUN_002505c0(0, source, 0x10001bd, 0, 0, 0, 0);
+            btlQueueKeyedScalarReflectAction(0, source, 0x10001bd, 0, 0, 0, 0);
         }
     }
     return 1;

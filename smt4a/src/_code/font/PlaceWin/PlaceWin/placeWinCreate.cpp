@@ -28,7 +28,7 @@ u32 taskCreateDraw(const char *name, u32 group, u32, u32,
                    u32 (*draw)(u32), u32, u32, u32 parent);
 void paramsClearPacket(void *packet);
 
-void FUN_0014e188(void *animation, u32 layer, u32 resource, const void *packet, u16 mode, f32 scale);
+void uiSpriteStateInitFromSource(void *animation, u32 layer, u32 resource, const void *packet, u16 mode, f32 scale);
 void uiSpriteSelectAnim(void *animation, u32 index);
 
 /* Allocate the place caption window, create its update/draw jobs and initialize its animation. */
@@ -49,7 +49,7 @@ void placeWinCreate(void)
     paramsInit(reinterpret_cast<UiResourceParameters *>(window->parameters.packet),
                sPlaceWinPacketA, sizeof(sPlaceWinPacketA), sPlaceWinPacketB, sizeof(sPlaceWinPacketB),
                NULL, 0, NULL, 0, sPlaceWinPacketC, sizeof(sPlaceWinPacketC));
-    FUN_0014e188(window->animation, 8, 0x87, window->parameters.packet, 1, 1.0f);
+    uiSpriteStateInitFromSource(window->animation, 8, 0x87, window->parameters.packet, 1, 1.0f);
     uiSpriteSelectAnim(window->animation, 0);
 }
 }

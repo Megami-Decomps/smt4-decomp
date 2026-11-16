@@ -13,7 +13,7 @@ static __inline void quaternionSetIdentity(PolyVec4 *quaternion)
 extern "C" {
 
 void sysMemClear(void *block, int size);
-PolyGeom *FUN_002b3b58(u32 count, int w, int h, u8 *table, int tableSize);
+PolyGeom *effGeomCreateRepeatedIndexList(u32 count, int w, int h, u8 *table, int tableSize);
 void *resourceResolveHeaderPointer(PolyTexDesc *desc);
 u32 *resourceResolveDataPointer(PolyTexDesc *desc);
 void rt_memcpy(void *dst, const void *src, int size);
@@ -41,7 +41,7 @@ PolyTexObject *effPolyTexCreate(PolyTexDesc *desc)
     obj->unk24 = -1;
     obj->scale = 1.0f;
     if (desc != NULL) {
-        obj->geom = FUN_002b3b58(1, 2, 4, &DAT_005c1f82, 0x4c);
+        obj->geom = effGeomCreateRepeatedIndexList(1, 2, 4, &DAT_005c1f82, 0x4c);
         obj->kind = desc->kind;
         rt_memcpy(obj->params, resourceResolveHeaderPointer(desc), 152);
         resource = resourceResolveDataPointer(desc);

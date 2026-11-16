@@ -20,7 +20,7 @@ void *resourceResolveDataPointer(ResourceDesc *resource);
 TrackObject *effEmitterCreateSmall(void *header);
 void polygonTrackRebuildResources(TrackObject *track, u32 count, void *header);
 void objectBufferFree(void *buffer);
-void *FUN_002b2d74(u32 count, u32 first, void *header);
+void *effBehaviorCreate(u32 count, u32 first, void *header);
 void effHolderSetParams(TrackObject *track, u32 count, void *data);
 
 static inline void replaceTrackBuffer(TrackObject *track, u32 count, void *header)
@@ -28,7 +28,7 @@ static inline void replaceTrackBuffer(TrackObject *track, u32 count, void *heade
     if (track->buffer != NULL) {
         objectBufferFree(track->buffer);
     }
-    track->buffer = FUN_002b2d74((u16)count, track->unk00, header);
+    track->buffer = effBehaviorCreate((u16)count, track->unk00, header);
 }
 
 /* Creates the track object of a resource, rebuilds its resources and replaces its buffer. */

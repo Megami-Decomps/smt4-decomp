@@ -7,7 +7,7 @@ extern "C" {
 
 void FUN_00246d38(s32 side, ScriptUnit *unit, BtlActionRecord *action, u32 mask);
 void FUN_00246e24(s32 side, ScriptUnit *unit, BtlActionRecord *action, u32 mask, s32 arg);
-void FUN_002505c0(s32 side, ScriptUnit *unit, u32 message, s32 a3, s32 a4, s32 a5, s32 a6);
+void btlQueueKeyedScalarReflectAction(s32 side, ScriptUnit *unit, u32 message, s32 a3, s32 a4, s32 a5, s32 a6);
 
 /* Script command: applies action record arg0 with bit arg1 to the script unit; arg2 selects the variant that also shows a message. */
 s32 FUN_0030b6dc(void)
@@ -21,7 +21,7 @@ s32 FUN_0030b6dc(void)
         FUN_00246d38(0, unit, &btlGetMainState()->actions[action], 1 << bit);
     } else {
         FUN_00246e24(0, unit, &btlGetMainState()->actions[action], 1 << bit, 1);
-        FUN_002505c0(0, unit, 0x10001bd, 0, 0, 0, 0);
+        btlQueueKeyedScalarReflectAction(0, unit, 0x10001bd, 0, 0, 0, 0);
     }
     return 1;
 }

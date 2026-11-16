@@ -10,7 +10,7 @@ extern "C" {
 PortraitSlotTableView *gameGetSlotTable();
 PartySlotA *gameGetSlotRecord();
 PartySlotA *btlMainGetUnk14();
-void FUN_0020ad6c(void *work, s32 state, s32 initial);
+void btlCommandMenuEnterMode(void *work, s32 state, s32 initial);
 void statusBustUpPortraitAcquire(s16 id, s32 enabled);
 void statusBustUpPortraitRelease(s16 id, s32 enabled);
 void statusIconSetKind(void *work, s32 kind);
@@ -27,7 +27,7 @@ void statusSynchronizePortraits(void *work, s32 mode)
     };
     PortraitWorkView *view = static_cast<PortraitWorkView *>(work);
     if (view->mode == mode) {
-        FUN_0020ad6c(work, 0x30, 1);
+        btlCommandMenuEnterMode(work, 0x30, 1);
         return;
     }
     view->mode = mode;
@@ -57,6 +57,6 @@ void statusSynchronizePortraits(void *work, s32 mode)
             *portrait = id;
         }
     }
-    FUN_0020ad6c(work, 0x2E, 1);
+    btlCommandMenuEnterMode(work, 0x2E, 1);
 }
 }

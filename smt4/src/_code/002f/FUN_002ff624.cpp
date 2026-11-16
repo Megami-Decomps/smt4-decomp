@@ -6,7 +6,7 @@ extern "C" {
 BtlEntry *btlMainFindActiveEntry(BtlMainState *);
 u32 scrGetArg(s32);
 u32 btlScriptResolveGroupArg(u32);
-void FUN_002499fc(u32, s32 *, s32 *);
+void btlSideGetEntryRange(u32, s32 *, s32 *);
 void scrSetResult(s32);
 
 // Find an available combatant of the requested ID with a selected statistic equal to the value.
@@ -24,7 +24,7 @@ u32 FUN_002ff624(void)
         column = 11;
     s32 value = scrGetArg(3);
     s32 first, count;
-    FUN_002499fc(group, &first, &count);
+    btlSideGetEntryRange(group, &first, &count);
     for (s32 i = first; i < first + count; ++i) {
         BtlEntry *entry = &btlGetMainState()->entries[i];
         if ((entry->flags & 0x10) == 0 && (entry->flags & 1) != 0 &&

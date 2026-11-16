@@ -18,7 +18,7 @@ int devilGetRecord(void);
 int renderCtxCalculateStereoParallax(...);
 int FUN_002bdf94(...);
 int itemDrawCategoryBadge(...);
-int FUN_002be650(...);
+int dataFindKindRecordWithAocOverrides(...);
 int FUN_002be90c(...);
 int gameDataBlocksGetSaveData(void);
 int renderCtxResetColorScale(...);
@@ -32,9 +32,9 @@ int fontMeasureLineAdvance(...);
 int drawSetColorFromRGBA8(...);
 int textDrawString(...);
 int textFormatBuffer(...);
-int FUN_002bed3c(void);
-int FUN_002bf288(...);
-int FUN_002bf380(...);
+int gxResetColorQuadToWhite(void);
+int texDrawTableEntryAtStoredOrigin(...);
+int texDrawCompositeSprite(...);
 int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int renderCtxSelectStereoLayout(int);
@@ -139,13 +139,13 @@ extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002be650. */
+/* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: FUN_002be90c. */
-/* Supplied declaration required: FUN_002bed3c. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
-/* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: FUN_002bf380. */
+/* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: gameDataBlocksGetSaveData. */
@@ -153,7 +153,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: requestForward. */
 /* Supplied declaration required: spriteDrawAnimationUnplaced. */
@@ -224,7 +224,7 @@ unsigned char FUN_001a321c(void)
   }
   renderCtxSelectStereoLayout(g_titleScene);
   temp_v7 = g_titleScene;
-  temp_v6 = FUN_002c5d80(1,0);
+  temp_v6 = renderCtxPackPassFlags(1,0);
   piVar17 = (int *)(temp_v7 + 0x124c);
   temp_v10 = *piVar17;
   temp_v11 = piVar17[temp_v10 + 2];
@@ -239,18 +239,18 @@ unsigned char FUN_001a321c(void)
   if (*temp_v38 != '\x03' && *temp_v38 != '\t') {
     unitGetStereoScreenPosition(&temp_v28,&temp_v30,9);
     efctSetSpeed();
-    FUN_002bf288(2,0x1a,0,temp_v28,temp_v30,0x81);
+    texDrawTableEntryAtStoredOrigin(2,0x1a,0,temp_v28,temp_v30,0x81);
     efctSetSpeed();
     unitGetStereoScreenPosition(&temp_v28,&temp_v30,7);
     efctSetSpeed();
-    FUN_002bf288(2,0x1a,1,temp_v28,temp_v30,0x81);
+    texDrawTableEntryAtStoredOrigin(2,0x1a,1,temp_v28,temp_v30,0x81);
     temp_v7 = temp_v34;
     if (-1 < *(char *)(temp_v34 + 0x12ef)) {
-      FUN_002bf288(2,0x1a,0xb5,temp_v28,temp_v30,0x81);
+      texDrawTableEntryAtStoredOrigin(2,0x1a,0xb5,temp_v28,temp_v30,0x81);
       unitGetStereoScreenPosition(&temp_v28,&temp_v30,8);
       if (*(char *)(temp_v7 + 0x12f4) != '\0') {
-        FUN_002bf288(2,0x1a,0xb6,temp_v28,temp_v30,0x83);
-        FUN_002bf288(2,0x1a,0xb7,temp_v28,temp_v30,0x83);
+        texDrawTableEntryAtStoredOrigin(2,0x1a,0xb6,temp_v28,temp_v30,0x83);
+        texDrawTableEntryAtStoredOrigin(2,0x1a,0xb7,temp_v28,temp_v30,0x83);
       }
       if (*(char *)(temp_v7 + 0x12ef) == '\0') {
         textFormatBuffer(temp_v35,&LAB_001a35ec);
@@ -281,7 +281,7 @@ unsigned char FUN_001a321c(void)
     efctSetSpeed();
     unitGetStereoScreenPosition(&temp_v28,&temp_v30,8);
     efctSetSpeed();
-    FUN_002bf288(2,0x1a,2,temp_v28,temp_v30,0x81);
+    texDrawTableEntryAtStoredOrigin(2,0x1a,2,temp_v28,temp_v30,0x81);
   }
   temp_v17 = (float)temp_v18;
   if ((*(char *)(temp_v5 + 0x1e60) != '\0') && (psVar24 = (short *)(temp_v34 + 0x1300), *psVar24 != 0)
@@ -291,10 +291,10 @@ unsigned char FUN_001a321c(void)
     if (temp_v7 >= 2) {
       unitGetStereoScreenPosition(&temp_v28,&temp_v30,8);
       efctSetSpeed();
-      FUN_002bf288(2,0x1a,3,temp_v28,temp_v30,0x81);
-      FUN_002bf288(2,0x1a,4,temp_v28,temp_v30,0x81);
-      FUN_002bf288(2,0x1a,5,temp_v28,temp_v30,0x81);
-      FUN_002bf288(2,0x1a,6,temp_v28,temp_v30,0x81);
+      texDrawTableEntryAtStoredOrigin(2,0x1a,3,temp_v28,temp_v30,0x81);
+      texDrawTableEntryAtStoredOrigin(2,0x1a,4,temp_v28,temp_v30,0x81);
+      texDrawTableEntryAtStoredOrigin(2,0x1a,5,temp_v28,temp_v30,0x81);
+      texDrawTableEntryAtStoredOrigin(2,0x1a,6,temp_v28,temp_v30,0x81);
       temp_v8 = FUN_00293ac0();
       temp_v7 = temp_v34;
       temp_v17 = (float)temp_v18;
@@ -307,7 +307,7 @@ unsigned char FUN_001a321c(void)
             if (*(int *)(temp_v7 + 0x12e4) == temp_v6) {
               temp_v13 = temp_v10 + 0x18;
             }
-            FUN_002bf288(2,0x1a,temp_v13,temp_v28,temp_v30,0x81);
+            texDrawTableEntryAtStoredOrigin(2,0x1a,temp_v13,temp_v28,temp_v30,0x81);
             temp_v17 = (float)temp_v18;
             temp_v6 = temp_v6 + 1;
           } while (temp_v6 < (int)temp_v8);
@@ -322,7 +322,7 @@ unsigned char FUN_001a321c(void)
             if (*(int *)(temp_v7 + 0x12e4) == temp_v6) {
               temp_v13 = temp_v10 + 0xd;
             }
-            FUN_002bf288(2,0x1a,temp_v13,temp_v28,temp_v30,0x81);
+            texDrawTableEntryAtStoredOrigin(2,0x1a,temp_v13,temp_v28,temp_v30,0x81);
             temp_v17 = (float)temp_v18;
             temp_v6 = temp_v6 + 1;
           } while (temp_v6 < (int)temp_v8);
@@ -346,13 +346,13 @@ unsigned char FUN_001a321c(void)
         if (*(short *)(temp_v34 + 0x12fc) != 0) {
           if ((*(char *)(temp_v34 + 0x12ed) != '\0') && (-1 >= *psVar24)) {
             drawSetColorFromRGBA8(temp_v8);
-            FUN_002bf288(2,0x1a,2000,temp_v28,temp_v30,0x83);
+            texDrawTableEntryAtStoredOrigin(2,0x1a,2000,temp_v28,temp_v30,0x83);
           }
           else {
             drawSetColorFromRGBA8(temp_v8);
             FUN_001ee4e4((int)*(short *)(temp_v7 + 0x12fc),temp_v28,temp_v30,0x83,1);
           }
-          FUN_002bed3c();
+          gxResetColorQuadToWhite();
         }
         else if (0 < *(short *)(temp_v34 + 0x12fe)) {
           temp_v16 = (float)VectorSignedToFloat(temp_v28,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -369,7 +369,7 @@ unsigned char FUN_001a321c(void)
       }
       efctSetSpeed();
       if (*pcVar21 == '\r') {
-        FUN_002bf380(2,0x1a,0x1a,temp_v28,temp_v30,0x8d);
+        texDrawCompositeSprite(2,0x1a,0x1a,temp_v28,temp_v30,0x8d);
       }
     }
   }
@@ -380,9 +380,9 @@ unsigned char FUN_001a321c(void)
     unitGetStereoScreenPosition(&temp_v28,&temp_v30,0xe);
     if ((*(int *)(temp_v34 + 0x12dc) >= 7) && (*temp_v38 == '\x05' || *temp_v38 == '\x06')) {
       unitGetStereoScreenPosition(&temp_v28,&temp_v30,0xb);
-      FUN_002bf288(2,0x1a,0xbb,temp_v28,temp_v30,0xc9);
+      texDrawTableEntryAtStoredOrigin(2,0x1a,0xbb,temp_v28,temp_v30,0xc9);
       unitGetStereoScreenPosition(&temp_v28,&temp_v30,0xc);
-      FUN_002bf288(2,0x1a,0xbc,temp_v28,temp_v30,0xce);
+      texDrawTableEntryAtStoredOrigin(2,0x1a,0xbc,temp_v28,temp_v30,0xce);
       temp_v7 = g_titleScene;
       if ((*(char *)(temp_v34 + 0x759) != '\0') && (*(char *)(temp_v34 + 0x75e) != '\0')) {
         temp_v6 = packNibblesAndByte(6,1,0);
@@ -397,14 +397,14 @@ unsigned char FUN_001a321c(void)
           unitGetStereoScreenPosition(&temp_v28,&temp_v30,0xd);
           temp_v7 = vec2GetXInt(temp_v34 + 0x1e8);
           temp_v6 = vec2GetYInt(temp_v34 + 0x1e8);
-          FUN_002bf288(2,0x1a,0xbd,(unsigned char *)((int)temp_v28 + temp_v7),temp_v6 + (int)temp_v30,0xd3)
+          texDrawTableEntryAtStoredOrigin(2,0x1a,0xbd,(unsigned char *)((int)temp_v28 + temp_v7),temp_v6 + (int)temp_v30,0xd3)
           ;
         }
         else {
           efctSetSpeed();
           unitGetStereoScreenPosition(&temp_v28,&temp_v30,0xd);
-          FUN_002bf288(2,0x1a,0xbe,temp_v28,temp_v30,0xd3);
-          FUN_002bf288(2,0x1a,0xbe,temp_v28,temp_v30,0xd4);
+          texDrawTableEntryAtStoredOrigin(2,0x1a,0xbe,temp_v28,temp_v30,0xd3);
+          texDrawTableEntryAtStoredOrigin(2,0x1a,0xbe,temp_v28,temp_v30,0xd4);
           efctSetSpeed();
         }
         temp_v7 = g_titleScene;
@@ -419,29 +419,29 @@ unsigned char FUN_001a321c(void)
       }
     }
     unitGetStereoScreenPosition(&temp_v28,&temp_v30,0xf);
-    FUN_002bf288(2,0x1a,0x1f,temp_v28,temp_v30,0xd8);
+    texDrawTableEntryAtStoredOrigin(2,0x1a,0x1f,temp_v28,temp_v30,0xd8);
     pcVar21 = (char *)(temp_v34 + 0x1e66);
     temp_v0 = *pcVar21;
     if (temp_v0 != '\r' && temp_v0 != '\x06') {
       unitGetStereoScreenPosition(&temp_v28,&temp_v30,0xf);
-      FUN_002bf380(2,0x1a,0,temp_v28,temp_v30,0xd8);
+      texDrawCompositeSprite(2,0x1a,0,temp_v28,temp_v30,0xd8);
     }
     unitGetStereoScreenPosition(&temp_v28,&temp_v30,0x10);
-    FUN_002bf288(2,0x1a,0x2d,temp_v28,temp_v30,0xd8);
-    FUN_002bf288(2,0x1a,0x2e,temp_v28,temp_v30,0xd8);
-    FUN_002bf288(2,0x1a,0x38,temp_v28,temp_v30,0xd8);
-    FUN_002bf288(2,0x1a,0x39,temp_v28,temp_v30,0xd8);
+    texDrawTableEntryAtStoredOrigin(2,0x1a,0x2d,temp_v28,temp_v30,0xd8);
+    texDrawTableEntryAtStoredOrigin(2,0x1a,0x2e,temp_v28,temp_v30,0xd8);
+    texDrawTableEntryAtStoredOrigin(2,0x1a,0x38,temp_v28,temp_v30,0xd8);
+    texDrawTableEntryAtStoredOrigin(2,0x1a,0x39,temp_v28,temp_v30,0xd8);
     unitGetStereoScreenPosition(&temp_v28,&temp_v30,0x11);
-    FUN_002bf288(2,0x1a,0x4a,temp_v28,temp_v30,0xd8);
+    texDrawTableEntryAtStoredOrigin(2,0x1a,0x4a,temp_v28,temp_v30,0xd8);
     temp_v7 = 0;
     do {
       unitGetStereoScreenPosition(&temp_v28,&temp_v30,temp_v7 + 0x12);
       temp_v6 = asdTMTexTableEntryAt(0x1a,temp_v7 + 0x7b);
-      FUN_002bf288(2,0x1a,0x68,temp_v28,(int)*(short *)(temp_v6 + 10) + (int)temp_v30,0xd8);
-      FUN_002bf288(2,0x1a,temp_v7 + 0x69,temp_v28,(int)temp_v30 + (int)*(short *)(temp_v6 + 10),0xdd);
+      texDrawTableEntryAtStoredOrigin(2,0x1a,0x68,temp_v28,(int)*(short *)(temp_v6 + 10) + (int)temp_v30,0xd8);
+      texDrawTableEntryAtStoredOrigin(2,0x1a,temp_v7 + 0x69,temp_v28,(int)temp_v30 + (int)*(short *)(temp_v6 + 10),0xdd);
       if (*(char *)(temp_v5 + 0x1e62) != '\0') {
         temp_v6 = asdTMTexTableEntryAt(0x1a,temp_v7 + 0x85);
-        FUN_002bf288(2,0x1a,0x80,(unsigned char *)((int)*(short *)(temp_v6 + 8) + (int)temp_v28),
+        texDrawTableEntryAtStoredOrigin(2,0x1a,0x80,(unsigned char *)((int)*(short *)(temp_v6 + 8) + (int)temp_v28),
                      (int)*(short *)(temp_v6 + 10) + (int)temp_v30,0xd8);
       }
       temp_v17 = (float)temp_v19;
@@ -450,15 +450,15 @@ unsigned char FUN_001a321c(void)
     unitGetStereoScreenPosition(&temp_v28,&temp_v30,0x17);
     if (*(char *)(temp_v5 + 0x1e60) != '\0') {
       if (*pcVar21 == '\0') {
-        FUN_002bf288(2,0x1a,0x8a,temp_v28,temp_v30,0xd8);
+        texDrawTableEntryAtStoredOrigin(2,0x1a,0x8a,temp_v28,temp_v30,0xd8);
         if (*temp_v38 != '\t') {
           temp_v7 = gameFlagIsSet(0x410);
           if (temp_v7 != 0) {
-            FUN_002bf288(2,0x1a,0x8e,temp_v28,temp_v30,0xd8);
+            texDrawTableEntryAtStoredOrigin(2,0x1a,0x8e,temp_v28,temp_v30,0xd8);
           }
         }
         else if (*(char *)(temp_v5 + 0x1eb9) == '\x01') {
-          FUN_002bf288(2,0x1a,0x8e,temp_v28,temp_v30,0xd8);
+          texDrawTableEntryAtStoredOrigin(2,0x1a,0x8e,temp_v28,temp_v30,0xd8);
         }
 LAB_001a3ea8:
         if (*(char *)(temp_v5 + 0x1e60) == '\0') goto LAB_001a6a8c;
@@ -540,7 +540,7 @@ LAB_001a3ea8:
           temp_v22 = psVar24;
           FUN_002bdf94(6,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v10 + 8)),
                        (int)temp_v30 + (int)*(short *)(temp_v10 + 10),1,2,0xdd,&LAB_001a43f4);
-          FUN_002bed3c();
+          gxResetColorQuadToWhite();
           unitGetStereoScreenPosition(&temp_v28,&temp_v30,0xf);
           temp_v10 = temp_v34;
           if (*pcVar21 != '\r' && *pcVar21 != '\x06') {
@@ -561,7 +561,7 @@ LAB_001a3ea8:
             temp_v22 = psVar24;
             FUN_002bdf94(0,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v10 + 8)),
                          (int)temp_v30 + (int)*(short *)(temp_v10 + 10),1,8,0xdd,&LAB_001a43f4);
-            FUN_002bed3c();
+            gxResetColorQuadToWhite();
           }
           gameDataBlocksGetSaveData();
           unitGetStereoScreenPosition(&temp_v28,&temp_v30,0x10);
@@ -630,7 +630,7 @@ LAB_001a3ea8:
             FUN_002bdf94(0,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v36 + 8)),
                          (int)temp_v30 + (int)*(short *)(temp_v36 + 10),1,4,0xdd,&LAB_001a48a0);
           }
-          FUN_002bed3c();
+          gxResetColorQuadToWhite();
           if (*(char *)(temp_v5 + 0x1e62) != '\0') {
             temp_v12 = (int)*(short *)(temp_v7 + 0x130c);
             temp_v11 = (int)*(short *)(temp_v34 + 0x18bc);
@@ -661,7 +661,7 @@ LAB_001a3ea8:
             FUN_002bdf94(0,(unsigned char *)((int)*(short *)(temp_v36 + 8) + (int)temp_v28),
                          (int)temp_v30 + (int)*(short *)(temp_v36 + 10),1,4,0xdd,&LAB_001a48a0);
           }
-          FUN_002bed3c();
+          gxResetColorQuadToWhite();
           temp_v10 = asdTMTexTableEntryAt(0x1a,0x33);
           FUN_002bdf94(0,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v10 + 8)),
                        (int)temp_v30 + (int)*(short *)(temp_v10 + 10),0,1,0xdd,&LAB_001a48a4);
@@ -779,7 +779,7 @@ LAB_001a3ea8:
             FUN_002bdf94(0,(unsigned char *)((int)*(short *)(temp_v10 + 8) + (int)temp_v28),
                          (int)temp_v30 + (int)*(short *)(temp_v10 + 10),1,4,0xdd,&LAB_001a48a0);
           }
-          FUN_002bed3c();
+          gxResetColorQuadToWhite();
           temp_v10 = asdTMTexTableEntryAt(0x1a,0x3e);
           FUN_002bdf94(0,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v10 + 8)),
                        (int)temp_v30 + (int)*(short *)(temp_v10 + 10),0,1,0xdd,&LAB_001a48a4);
@@ -834,7 +834,7 @@ LAB_001a3ea8:
           }
           temp_v19 = (unsigned long long)(unsigned int)temp_v17;
           unitGetStereoScreenPosition(&temp_v28,&temp_v30,0x11);
-          FUN_002bed3c();
+          gxResetColorQuadToWhite();
           temp_v10 = 0;
           do {
             temp_v12 = temp_v34 + temp_v10;
@@ -877,7 +877,7 @@ LAB_001a3ea8:
               }
             }
             temp_v11 = asdTMTexTableEntryAt(0x1a,temp_v10 + 0x60);
-            FUN_002bf288(2,0x1a,temp_v13,(unsigned char *)((int)*(short *)(temp_v11 + 8) + (int)temp_v28),
+            texDrawTableEntryAtStoredOrigin(2,0x1a,temp_v13,(unsigned char *)((int)*(short *)(temp_v11 + 8) + (int)temp_v28),
                          (int)*(short *)(temp_v11 + 10) + (int)temp_v30,0xdd);
             temp_v11 = temp_v34;
             temp_v10 = temp_v10 + 1;
@@ -1073,7 +1073,7 @@ LAB_001a3ea8:
                              &LAB_001a5514);
               }
             }
-            FUN_002bed3c();
+            gxResetColorQuadToWhite();
             temp_v36 = asdTMTexTableEntryAt(0x1a,temp_v13 + 0x7b);
             temp_v23 = (short *)asdTMTexTableEntryAt(0x1a,0x6e);
             if ((*pcVar21 != '\r') &&
@@ -1291,7 +1291,7 @@ LAB_001a3ea8:
               else {
                 temp_v10 = (int)*(short *)(temp_v36 + 10) + (int)temp_v30;
                 if (psVar24 == (short *)0x3e7) {
-                  FUN_002bf288(2,0x1a,0x74,temp_v28,temp_v10,0xdd);
+                  texDrawTableEntryAtStoredOrigin(2,0x1a,0x74,temp_v28,temp_v10,0xdd);
                   FUN_002b659c((unsigned char *)((int)temp_v28 + (int)temp_v23[4]),
                                (int)*(short *)(temp_v36 + 10) + (int)temp_v23[5] + (int)temp_v30,
                                (int)**(short **)(temp_v23 + 6),(int)(*(short **)(temp_v23 + 6))[1]);
@@ -1308,7 +1308,7 @@ LAB_001a3ea8:
                   temp_v2 = *(short *)(temp_v36 + 10);
                   temp_v10 = temp_v10 + (int)temp_v30;
                   temp_v12 = vec2GetXInt(temp_v34 + 0x44);
-                  FUN_002bf288(2,0x1a,0x75,(unsigned char *)(temp_v12 + (int)temp_v28),temp_v10 + temp_v2,
+                  texDrawTableEntryAtStoredOrigin(2,0x1a,0x75,(unsigned char *)(temp_v12 + (int)temp_v28),temp_v10 + temp_v2,
                                0xdd);
                   temp_v10 = g_titleScene;
                   temp_v12 = packNibblesAndByte(6,7,0);
@@ -1321,7 +1321,7 @@ LAB_001a3ea8:
                   }
                 }
                 else {
-                  FUN_002bf288(2,0x1a,0x72,temp_v28,temp_v10,0xdd);
+                  texDrawTableEntryAtStoredOrigin(2,0x1a,0x72,temp_v28,temp_v10,0xdd);
                   FUN_002b659c((unsigned char *)((int)temp_v28 + (int)temp_v23[4]),
                                (int)*(short *)(temp_v36 + 10) + (int)temp_v23[5] + (int)temp_v30,
                                (int)**(short **)(temp_v23 + 6),(int)(*(short **)(temp_v23 + 6))[1]);
@@ -1338,7 +1338,7 @@ LAB_001a3ea8:
                   temp_v2 = *(short *)(temp_v36 + 10);
                   temp_v10 = temp_v10 + (int)temp_v30;
                   temp_v12 = vec2GetXInt(temp_v34 + 0x44);
-                  FUN_002bf288(2,0x1a,0x73,(unsigned char *)(temp_v12 + (int)temp_v28),temp_v10 + temp_v2,
+                  texDrawTableEntryAtStoredOrigin(2,0x1a,0x73,(unsigned char *)(temp_v12 + (int)temp_v28),temp_v10 + temp_v2,
                                0xdd);
                   temp_v10 = g_titleScene;
                   temp_v12 = packNibblesAndByte(6,7,0);
@@ -1353,7 +1353,7 @@ LAB_001a3ea8:
                 FUN_002b64b8();
               }
             }
-            FUN_002bed3c();
+            gxResetColorQuadToWhite();
             temp_v13 = temp_v13 + 1;
           } while (temp_v13 < 5);
           unitGetStereoScreenPosition(&temp_v28,&temp_v30,0x17);
@@ -1361,7 +1361,7 @@ LAB_001a3ea8:
           if (*pcVar21 == '\0') {
             psVar24 = (short *)(int)*(short *)(temp_v7 + 0x1310);
             if (*(char *)(temp_v5 + 0x1e62) != '\0') {
-              FUN_002bf288(2,0x1a,0xe6,temp_v28,temp_v30,0xdd);
+              texDrawTableEntryAtStoredOrigin(2,0x1a,0xe6,temp_v28,temp_v30,0xdd);
               psVar12 = (short *)((int)*(short *)(temp_v11 + 0x18c0) - (int)*(short *)(temp_v7 + 0x1310)
                                  );
               if ((int)psVar12 < 0) {
@@ -1419,7 +1419,7 @@ LAB_001a3ea8:
               if (temp_v13 != 0) {
                 psVar24 = (short *)(int)*(short *)(temp_v7 + 0x1312);
                 if (*(char *)(temp_v5 + 0x1e62) != '\0') {
-                  FUN_002bf288(2,0x1a,0xe7,temp_v28,temp_v30,0xdd);
+                  texDrawTableEntryAtStoredOrigin(2,0x1a,0xe7,temp_v28,temp_v30,0xdd);
                   psVar12 = (short *)((int)*(short *)(temp_v11 + 0x18c2) -
                                      (int)*(short *)(temp_v7 + 0x1312));
                   if ((int)psVar12 < 0) {
@@ -1479,7 +1479,7 @@ LAB_001a3ea8:
             else if (*(char *)(temp_v5 + 0x1eb9) == '\x01') {
               psVar24 = (short *)(int)*(short *)(temp_v7 + 0x1312);
               if (*(char *)(temp_v5 + 0x1e62) != '\0') {
-                FUN_002bf288(2,0x1a,0xe7,temp_v28,temp_v30,0xdd);
+                texDrawTableEntryAtStoredOrigin(2,0x1a,0xe7,temp_v28,temp_v30,0xdd);
                 psVar12 = (short *)((int)*(short *)(temp_v11 + 0x18c2) -
                                    (int)*(short *)(temp_v7 + 0x1312));
                 if ((int)psVar12 < 0) {
@@ -1536,14 +1536,14 @@ LAB_001a3ea8:
                            (int)temp_v30 + (int)*(short *)(temp_v13 + 10),1,3,0xdd,&LAB_001a6450);
             }
           }
-          FUN_002bed3c();
+          gxResetColorQuadToWhite();
           temp_v0 = *pcVar21;
           temp_v15 = temp_v0 == '\x04';
           if (temp_v15) {
             temp_v0 = *(char *)(temp_v5 + 0x1e62);
           }
           if (temp_v15 && temp_v0 == '\0') {
-            FUN_002bf288(2,0x1a,0x93,temp_v28,temp_v30,0xdd);
+            texDrawTableEntryAtStoredOrigin(2,0x1a,0x93,temp_v28,temp_v30,0xdd);
           }
           temp_v10 = 0;
           temp_v13 = 0;
@@ -1588,7 +1588,7 @@ LAB_001a3ea8:
           temp_v17 = (float)temp_v19;
           if ((*temp_v38 == '\x03') && (*(char *)(temp_v6 + 0x12f0) != '\0')) {
             unitGetStereoScreenPosition(&temp_v28,&temp_v30,10);
-            FUN_002bf380(2,0x1a,1,temp_v28,temp_v30,0xdd);
+            texDrawCompositeSprite(2,0x1a,1,temp_v28,temp_v30,0xdd);
             temp_v13 = 0;
 LAB_001a6868:
             temp_v8 = (unsigned int)*(unsigned short *)(temp_v7 + 0x133a);
@@ -1598,11 +1598,11 @@ LAB_001a68b0:
               unitGetStereoScreenPosition(&temp_v28,&temp_v30,10);
               temp_v10 = asdTMTexTableEntryAt(0x1a,temp_v13 + 0xa2);
               if (*(char *)(temp_v6 + 0x12ee) == temp_v13) {
-                FUN_002bf380(2,0x1a,3,(unsigned char *)((int)*(short *)(temp_v10 + 8) + (int)temp_v28),
+                texDrawCompositeSprite(2,0x1a,3,(unsigned char *)((int)*(short *)(temp_v10 + 8) + (int)temp_v28),
                              (int)temp_v30 + (int)*(short *)(temp_v10 + 10),0xdd);
               }
               else {
-                FUN_002bf380(2,0x1a,2,(unsigned char *)((int)*(short *)(temp_v10 + 8) + (int)temp_v28),
+                texDrawCompositeSprite(2,0x1a,2,(unsigned char *)((int)*(short *)(temp_v10 + 8) + (int)temp_v28),
                              (int)*(short *)(temp_v10 + 10) + (int)temp_v30,0xdd);
               }
               temp_v11 = asdTMTexTableEntryAt(0x1a,0xa0);
@@ -1613,7 +1613,7 @@ LAB_001a68b0:
                            (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v11 + 10),0xe2,0);
               temp_v11 = asdTMTexTableEntryAt(0x1a,0xa1);
               if (temp_v8 != 0) {
-                FUN_002be650(temp_v8,0);
+                dataFindKindRecordWithAocOverrides(temp_v8,0);
                 if (temp_v8 != 0) {
                   temp_v12 = (int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v11 + 8);
                   VectorSignedToFloat((int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v10 + 10) +
@@ -1679,7 +1679,7 @@ LAB_001a68b0:
         }
         else {
           unitGetStereoScreenPosition(&temp_v28,&temp_v30,0xe);
-          FUN_002bf288(2,0x1a,0xc2,temp_v28,temp_v30,0xdd);
+          texDrawTableEntryAtStoredOrigin(2,0x1a,0xc2,temp_v28,temp_v30,0xdd);
           temp_v8 = (unsigned int)*(unsigned short *)(temp_v5 + 0x1eb6);
           table8Type5GetValue(temp_v8);
           temp_v13 = asdTMTexTableEntryAt(0x1a,0xc3);
@@ -1712,7 +1712,7 @@ LAB_001a6a8c:
         (**(romwright_code **)(temp_v5 + 0x12c8))();
         *(unsigned char *)(temp_v5 + 0x12c4) = 0;
       }
-      FUN_002bf288(2,0x1a,0xc6,temp_v28,0,0xdd);
+      texDrawTableEntryAtStoredOrigin(2,0x1a,0xc6,temp_v28,0,0xdd);
       temp_v5 = g_titleScene;
       temp_v13 = packNibblesAndByte(6,7,0);
       piVar17 = (int *)(temp_v5 + 0x12ac);
@@ -1735,7 +1735,7 @@ LAB_001a6a8c:
         (**(romwright_code **)(temp_v5 + 0x12c8))();
         *(unsigned char *)(temp_v5 + 0x12c4) = 0;
       }
-      FUN_002bf288(2,0x1a,0xc6,temp_v28,0,0xdd);
+      texDrawTableEntryAtStoredOrigin(2,0x1a,0xc6,temp_v28,0,0xdd);
       temp_v5 = g_titleScene;
       temp_v13 = packNibblesAndByte(6,7,0);
       piVar17 = (int *)(temp_v5 + 0x12ac);

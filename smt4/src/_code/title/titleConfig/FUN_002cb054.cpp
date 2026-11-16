@@ -8,7 +8,7 @@ extern "C" {
 
 int textDrawString(...);
 int textFormatBuffer(...);
-int FUN_002bf380(...);
+int texDrawCompositeSprite(...);
 int asdTMTexTableEntryAt(...);
 int dataTableGet(...);
 int VectorSignedToFloat(...);
@@ -52,7 +52,7 @@ extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
-/* Supplied declaration required: FUN_002bf380. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: dataTableGet. */
@@ -116,7 +116,7 @@ unsigned int FUN_002cb054(void)
   temp_v21 = 0;
   temp_v22 = 0;
   temp_v25 = 0;
-  FUN_002bf380(2,0x2f,0xc,temp_v2,temp_v3,0xb);
+  texDrawCompositeSprite(2,0x2f,0xc,temp_v2,temp_v3,0xb);
   temp_v4 = resourceRunOperationIfUnblocked(temp_v1 + 0xe8);
   temp_v28 = FUN_0029efa8(temp_v1 + 0xe8);
   temp_v28 = temp_v28 + temp_v4;
@@ -159,10 +159,10 @@ unsigned int FUN_002cb054(void)
         *(unsigned char *)(temp_v4 + 0x12c4) = 0;
       }
       if (temp_v0) {
-        FUN_002bf288(2,0x2f,0xd,temp_v27,temp_v9,0xb);
+        texDrawTableEntryAtStoredOrigin(2,0x2f,0xd,temp_v27,temp_v9,0xb);
       }
       else {
-        FUN_002bf288(2,0x2f,0xc,temp_v27,temp_v9,0xb);
+        texDrawTableEntryAtStoredOrigin(2,0x2f,0xc,temp_v27,temp_v9,0xb);
       }
       temp_v4 = g_titleScene;
       temp_v6 = packNibblesAndByte(6,7,0);
@@ -173,7 +173,7 @@ unsigned int FUN_002cb054(void)
         (**(romwright_code **)(temp_v4 + 0x12c8))();
         *(unsigned char *)(temp_v4 + 0x12c4) = 0;
       }
-      FUN_002bf380(2,0x2f,1,temp_v27,temp_v9,0x10);
+      texDrawCompositeSprite(2,0x2f,1,temp_v27,temp_v9,0x10);
       temp_v4 = g_titleScene;
       if (temp_v0) {
         temp_v6 = packNibblesAndByte(6,1,0);
@@ -184,7 +184,7 @@ unsigned int FUN_002cb054(void)
           (**(romwright_code **)(temp_v4 + 0x12c8))();
           *(unsigned char *)(temp_v4 + 0x12c4) = 0;
         }
-        FUN_002bf380(2,0x2f,2,temp_v27,temp_v9,0x15);
+        texDrawCompositeSprite(2,0x2f,2,temp_v27,temp_v9,0x15);
         temp_v4 = g_titleScene;
         temp_v6 = packNibblesAndByte(6,7,0);
         piVar10 = (int *)(temp_v4 + 0x12ac);
@@ -208,7 +208,7 @@ unsigned int FUN_002cb054(void)
         textDrawString(2,temp_v29,&temp_v10,(int)*(short *)(temp_v4 + 8));
       }
       if (temp_v0) {
-        FUN_002bf288(2,0x2f,0x1c,*(short *)(temp_v5 + 8) + temp_v2,*(short *)(temp_v5 + 10) + temp_v3,0x1f);
+        texDrawTableEntryAtStoredOrigin(2,0x2f,0x1c,*(short *)(temp_v5 + 8) + temp_v2,*(short *)(temp_v5 + 10) + temp_v3,0x1f);
         temp_v6 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v1 + 0x1c));
         temp_v4 = g_titleScene;
         if ((temp_v6 == 1 || temp_v6 == 2) || temp_v6 == 6) {
@@ -220,7 +220,7 @@ unsigned int FUN_002cb054(void)
             (**(romwright_code **)(temp_v4 + 0x12c8))();
             *(unsigned char *)(temp_v4 + 0x12c4) = 0;
           }
-          FUN_002bf288(2,0x2f,0x1d,*(short *)(temp_v5 + 8) + temp_v2,*(short *)(temp_v5 + 10) + temp_v3,0x1f
+          texDrawTableEntryAtStoredOrigin(2,0x2f,0x1d,*(short *)(temp_v5 + 8) + temp_v2,*(short *)(temp_v5 + 10) + temp_v3,0x1f
                       );
           temp_v4 = g_titleScene;
           temp_v6 = packNibblesAndByte(6,7,0);
@@ -234,44 +234,44 @@ unsigned int FUN_002cb054(void)
         }
       }
       else {
-        FUN_002bf288(2,0x2f,0x1b,*(short *)(temp_v5 + 8) + temp_v2,*(short *)(temp_v5 + 10) + temp_v3,0x1f);
+        texDrawTableEntryAtStoredOrigin(2,0x2f,0x1b,*(short *)(temp_v5 + 8) + temp_v2,*(short *)(temp_v5 + 10) + temp_v3,0x1f);
       }
       temp_v27 = *(short *)(temp_v5 + 8) + temp_v2;
       temp_v6 = *(short *)(temp_v5 + 10) + temp_v3;
       temp_v5 = resourceRunOperationIfUnblocked(temp_v1 + 0xe8);
       temp_v4 = g_titleConfig;
       temp_v5 = *(int *)(temp_v1 + (temp_v5 + temp_v8) * 4 + 0x28);
-      FUN_002bf380(2,0x2f,3,temp_v27,temp_v6,0x1f);
+      texDrawCompositeSprite(2,0x2f,3,temp_v27,temp_v6,0x1f);
       temp_v5 = asdTMTexTableEntryAt(0x2f,temp_v5 + 0x5b);
       if (temp_v0) {
         temp_v7 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v4 + 0x1e));
         if (!((temp_v7 == 1 || temp_v7 == 2) || temp_v7 == 6)) {
-          FUN_002bf380(2,0x2f,4,temp_v27,temp_v6,0x1f);
+          texDrawCompositeSprite(2,0x2f,4,temp_v27,temp_v6,0x1f);
         }
         else {
-          FUN_002bf380(2,0x2f,5,temp_v27,temp_v6,0x15);
+          texDrawCompositeSprite(2,0x2f,5,temp_v27,temp_v6,0x15);
         }
         temp_v7 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v4 + 0x20));
         if (!((temp_v7 == 1 || temp_v7 == 2) || temp_v7 == 6)) {
-          FUN_002bf380(2,0x2f,6,temp_v27,temp_v6,0x1f);
+          texDrawCompositeSprite(2,0x2f,6,temp_v27,temp_v6,0x1f);
         }
         else {
-          FUN_002bf380(2,0x2f,7,temp_v27,temp_v6,0x15);
+          texDrawCompositeSprite(2,0x2f,7,temp_v27,temp_v6,0x15);
         }
         temp_v4 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v4 + 0x22));
         if (!((temp_v4 == 1 || temp_v4 == 2) || temp_v4 == 6)) {
-          FUN_002bf288(2,0x2f,0x31,*(short *)(temp_v5 + 8) + temp_v27,*(short *)(temp_v5 + 10) + temp_v6,
+          texDrawTableEntryAtStoredOrigin(2,0x2f,0x31,*(short *)(temp_v5 + 8) + temp_v27,*(short *)(temp_v5 + 10) + temp_v6,
                        0x29);
         }
         else {
-          FUN_002bf288(2,0x2f,0x32,*(short *)(temp_v5 + 8) + temp_v27,*(short *)(temp_v5 + 10) + temp_v6,
+          texDrawTableEntryAtStoredOrigin(2,0x2f,0x32,*(short *)(temp_v5 + 8) + temp_v27,*(short *)(temp_v5 + 10) + temp_v6,
                        0x29);
         }
       }
       else {
-        FUN_002bf380(2,0x2f,4,temp_v27,temp_v6,0x1f);
-        FUN_002bf380(2,0x2f,6,temp_v27,temp_v6,0x1f);
-        FUN_002bf288(2,0x2f,0x31,*(short *)(temp_v5 + 8) + temp_v27,*(short *)(temp_v5 + 10) + temp_v6,
+        texDrawCompositeSprite(2,0x2f,4,temp_v27,temp_v6,0x1f);
+        texDrawCompositeSprite(2,0x2f,6,temp_v27,temp_v6,0x1f);
+        texDrawTableEntryAtStoredOrigin(2,0x2f,0x31,*(short *)(temp_v5 + 8) + temp_v27,*(short *)(temp_v5 + 10) + temp_v6,
                      0x29);
       }
       temp_v8 = temp_v8 + 1;

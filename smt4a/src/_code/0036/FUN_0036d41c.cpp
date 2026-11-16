@@ -16,7 +16,7 @@ void FUN_0036d41c()
         s32 result = svcWaitSynchronization1(work->thread.handle, -1);
         bool failed = nnResultIsFailure(result);
         if (failed) {
-            FUN_002e3140(result, failed);
+            resultHandleFailure(result, failed);
         }
         work->thread.joined = 1;
         work->thread.~NnOsThread();

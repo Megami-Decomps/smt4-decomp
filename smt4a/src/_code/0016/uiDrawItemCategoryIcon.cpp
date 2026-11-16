@@ -26,7 +26,7 @@ Entry00192690 *contentEntryFindById2(u32 id);
 u8 *dataTable8FindRecord(s32 id);
 u32 requestKindToId(u32 kind);
 u8 *gameGetPlayerData();
-void FUN_0017ffa8(u32, u32, s32, u32, u32, u32);
+void texTableRecordCallWithParams(u32, u32, s32, u32, u32, u32);
 
 void uiDrawItemCategoryIcon(u32 id, s32 x, s32 y, s32 layer, s32 showEquipped)
 {
@@ -93,9 +93,9 @@ void uiDrawItemCategoryIcon(u32 id, s32 x, s32 y, s32 layer, s32 showEquipped)
         frame = 0x3fe;
         break;
     }
-    FUN_0017ffa8(2, 11, frame, x, y, layer);
+    texTableRecordCallWithParams(2, 11, frame, x, y, layer);
     if (equipped) {
-        FUN_001835b4(2, 11, 0x417, x, y, layer + 1);
+        texDrawTableEntryAtStoredOrigin(2, 11, 0x417, x, y, layer + 1);
     }
 }
 }

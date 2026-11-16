@@ -36,7 +36,7 @@ void uniteRequestScriptEntry(s32 mode);
 void buttonHelpSetPreset(s32 preset);
 void timerStart(void *timer, s32 running, s32 initial);
 s32 statusGetAvailableChoiceCount();
-void FUN_0029f848(void *selector, s32 count, s32 rows, s32 wrap, s32, s32);
+void gridNavigationConfigure(void *selector, s32 count, s32 rows, s32 wrap, s32, s32);
 
 // Gather enabled status skills and open the selector at the first unavailable slot.
 void statusOpenSkillSelection(u16 selectedId, u8 mode)
@@ -58,10 +58,10 @@ void statusOpenSkillSelection(u16 selectedId, u8 mode)
     buttonHelpSetPreset(5);
     timerStart(screen->timer, 1, 0);
     if (count >= statusGetAvailableChoiceCount()) {
-        FUN_0029f848(screen->selector, statusGetAvailableChoiceCount() + 1, 9, 1, 1, 1);
+        gridNavigationConfigure(screen->selector, statusGetAvailableChoiceCount() + 1, 9, 1, 1, 1);
         screen->nextState = 25;
     } else {
-        FUN_0029f848(screen->selector, statusGetAvailableChoiceCount(), 9, 1, 1, 1);
+        gridNavigationConfigure(screen->selector, statusGetAvailableChoiceCount(), 9, 1, 1, 1);
         FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(screen->selector), count);
         screen->nextState = 22;
     }

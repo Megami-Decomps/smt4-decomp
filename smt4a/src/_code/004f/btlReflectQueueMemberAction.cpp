@@ -18,7 +18,7 @@ struct ReflectSubjectGroup {
 extern "C" {
 
 
-ReflectSubjectGroup *FUN_001568f8(void *state, s16 group);
+ReflectSubjectGroup *btlFindEntryBlockByMemberId(void *state, s16 group);
 s32 idSetFindSubjectIndex(void *state, ReflectSubject *subject);
 
 /* Queues a kind-47 reflect action on an active subject unless one with the same options is queued. */
@@ -34,7 +34,7 @@ ReflectAction *btlReflectQueueMemberAction(s32 actor, u32 options, ReflectSubjec
             return NULL;
     }
     ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, options);
-    ReflectSubjectGroup *group = FUN_001568f8(btlGetMainState(), subject->group);
+    ReflectSubjectGroup *group = btlFindEntryBlockByMemberId(btlGetMainState(), subject->group);
     s32 index = idSetFindSubjectIndex(btlGetMainState(), subject);
     if (index < 0) {
         index = 0;

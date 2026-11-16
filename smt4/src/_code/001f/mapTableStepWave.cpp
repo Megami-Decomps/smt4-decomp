@@ -11,7 +11,7 @@ extern "C" {
 
 extern MapZoomState g_mapTable;
 
-f32 FUN_0028250c(f32 phase);
+f32 mathRemPio2f(f32 phase);
 
 /* Advances the phase by the mode's step (0.1, 0.2 or 0.05) and derives the offset from it, with an
  * amplitude of 32 for modes 1-3 and 48 for modes 4-6. */
@@ -21,27 +21,27 @@ void mapTableStepWave(void)
     switch (g_mapTable.mode) {
     case 1:
         g_mapTable.phase += 0.1f;
-        g_mapTable.offset = (s32)(FUN_0028250c(g_mapTable.phase) * 32.0f);
+        g_mapTable.offset = (s32)(mathRemPio2f(g_mapTable.phase) * 32.0f);
         break;
     case 2:
         g_mapTable.phase += 0.2f;
-        g_mapTable.offset = (s32)(FUN_0028250c(g_mapTable.phase) * 32.0f);
+        g_mapTable.offset = (s32)(mathRemPio2f(g_mapTable.phase) * 32.0f);
         break;
     case 3:
         g_mapTable.phase += 0.05f;
-        g_mapTable.offset = (s32)(FUN_0028250c(g_mapTable.phase) * 32.0f);
+        g_mapTable.offset = (s32)(mathRemPio2f(g_mapTable.phase) * 32.0f);
         break;
     case 4:
         g_mapTable.phase += 0.1f;
-        g_mapTable.offset = (s32)(FUN_0028250c(g_mapTable.phase) * 48.0f);
+        g_mapTable.offset = (s32)(mathRemPio2f(g_mapTable.phase) * 48.0f);
         break;
     case 5:
         g_mapTable.phase += 0.2f;
-        g_mapTable.offset = (s32)(FUN_0028250c(g_mapTable.phase) * 48.0f);
+        g_mapTable.offset = (s32)(mathRemPio2f(g_mapTable.phase) * 48.0f);
         break;
     case 6:
         g_mapTable.phase += 0.05f;
-        g_mapTable.offset = (s32)(FUN_0028250c(g_mapTable.phase) * 48.0f);
+        g_mapTable.offset = (s32)(mathRemPio2f(g_mapTable.phase) * 48.0f);
         break;
     }
 }

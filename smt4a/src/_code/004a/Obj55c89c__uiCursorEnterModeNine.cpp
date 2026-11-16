@@ -23,7 +23,7 @@ typedef struct CursorOwner {
     /* 0xA874 */ u16 mode;
 } CursorOwner;
 
-void FUN_00163aa4(CursorSprite *sprite, f32 rate);
+void uiSpriteAdvanceAnimation(CursorSprite *sprite, f32 rate);
 s8 uiSpriteGetCompletionState(const void *record);
 s32 vec2GetXInt(CursorSprite *sprite);
 s32 vec2GetYInt(CursorSprite *sprite);
@@ -40,7 +40,7 @@ extern "C" void _ZN9Obj55c89c21uiCursorEnterModeNineEv(CursorOwner *owner)
 {
     CursorSprite *cursor = &owner->cursor;
     owner->mode = 9;
-    FUN_00163aa4(cursor, 1.0f);
+    uiSpriteAdvanceAnimation(cursor, 1.0f);
     pointConvertToFloat(owner->position, vec2GetXInt(cursor), vec2GetYInt(cursor));
     if (FUN_0026c3a0() == 0) {
         return;

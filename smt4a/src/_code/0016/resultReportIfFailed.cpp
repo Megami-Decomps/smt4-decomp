@@ -12,7 +12,7 @@ void resultReportIfFailed(ThreadStackStorage *stack, void *buffer, u32 size)
     bool failed = result < 0;
 
     if (failed) {
-        FUN_002e3140(result);
+        resultHandleFailure(result);
     }
 }
 

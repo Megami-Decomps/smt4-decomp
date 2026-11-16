@@ -15,7 +15,7 @@ typedef struct Table08Sub0Record {
     /* 0x52 */ u8 unk52[6];
 } Table08Sub0Record;
 
-Table08Sub0Record *FUN_0014162c(AocSystemView *system, u32 id);
+Table08Sub0Record *dataTable08Sub0FindById(AocSystemView *system, u32 id);
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 dataTable08Sub0CompareKeys(const void *left, const void *right);
 u32 dataTableGetCount(void *table);
@@ -30,7 +30,7 @@ Table08Sub0Record *dataTable08Sub0GetRecord(u32 id)
     Table08Sub0Record key;
     Table08Sub0Record *record;
     key.id = id;
-    if (g_aocSystem->lookupEnabled == 0 || (record = FUN_0014162c(g_aocSystem, id)) == NULL) {
+    if (g_aocSystem->lookupEnabled == 0 || (record = dataTable08Sub0FindById(g_aocSystem, id)) == NULL) {
         void *table = dataTableGet(8, 0);
         record = (Table08Sub0Record *)table;
         if (table != NULL) {

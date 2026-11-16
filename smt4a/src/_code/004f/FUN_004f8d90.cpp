@@ -39,7 +39,7 @@ struct BattleCacheWork {
 extern "C" {
 void sysMemClear(void *buffer, u32 size);
 void textFormatBuffer(char *destination, const char *format, ...);
-void *FUN_00178b04(u32 size, const char *file, u32 line);
+void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 BattleCacheModel *modelListInit(BattleCacheModel *model);
 extern const char DAT_005284d8[];
 extern const char DAT_00528500[];
@@ -82,7 +82,7 @@ extern "C" void FUN_004f8d90(BattleCacheWork *work, s32 kind)
             continue;
         }
         BattleCacheEntry *entry = &work->entries[index];
-        BattleCacheModel *model = static_cast<BattleCacheModel *>(FUN_00178b04(32, DAT_00528500, 0x4ab));
+        BattleCacheModel *model = static_cast<BattleCacheModel *>(asdMemoryAllocTraced(32, DAT_00528500, 0x4ab));
         if (model != NULL) {
             model = modelListInit(model);
         }

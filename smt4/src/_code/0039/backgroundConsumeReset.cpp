@@ -9,7 +9,7 @@ extern "C" {
 extern BackgroundResetState g_gameState;
 s32 gameFlagIsSet(u32 flag);
 void commonBgReset(void);
-void FUN_00289880(void);
+void commonBgStopChildAndBeginTransition(void);
 void buttonHelpSelectMapPreset(void);
 
 // Consume a pending background reset, choosing the reset path by game flag 0x16.
@@ -19,7 +19,7 @@ void backgroundConsumeReset(void)
         g_gameState.pending = 0;
         switch (gameFlagIsSet(0x16)) {
         case 0:
-            FUN_00289880();
+            commonBgStopChildAndBeginTransition();
             break;
         default:
             commonBgReset();

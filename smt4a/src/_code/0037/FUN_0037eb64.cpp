@@ -10,7 +10,7 @@ void efctSetSpeed(f32 speed);
 const SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 sprite);
 s32 FUN_003e53ec(void);
 s32 FUN_003e48bc(void);
-void FUN_00183bb0(void);
+void gxResetColorQuadToWhite(void);
 
 void FUN_0037eb64(u32 mode, s32 x, s32 y, f32 speed)
 {
@@ -19,8 +19,8 @@ void FUN_0037eb64(u32 mode, s32 x, s32 y, f32 speed)
     s32 parallax = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.26f));
     x += parallax;
     efctSetSpeed(speed);
-    FUN_001835b4(2, 0x14, 0xBCC, x, y, 0xC9);
-    FUN_001835b4(2, 0x14, 0xBCD, x, y, 0xCA);
+    texDrawTableEntryAtStoredOrigin(2, 0x14, 0xBCC, x, y, 0xC9);
+    texDrawTableEntryAtStoredOrigin(2, 0x14, 0xBCD, x, y, 0xCA);
     s32 filled = FUN_003e53ec();
     if (filled > 8)
         filled = 8;
@@ -36,22 +36,22 @@ void FUN_0037eb64(u32 mode, s32 x, s32 y, f32 speed)
         const SpriteInfo *origin = asdTMTexTableEntryAt(0x14, placement + i);
         s32 spriteX = origin->x + x;
         s32 spriteY = origin->y + y;
-        FUN_001835b4(2, 0x14, sprite, spriteX, spriteY, 0xC9);
+        texDrawTableEntryAtStoredOrigin(2, 0x14, sprite, spriteX, spriteY, 0xC9);
     }
     if (FUN_003e48bc()) {
         for (s32 i = 0; i < 8; ++i) {
             const SpriteInfo *origin = asdTMTexTableEntryAt(0x14, 0xC2B + i);
             s32 spriteX = origin->x + x;
         s32 spriteY = origin->y + y;
-        FUN_001835b4(2, 0x14, 0xC0D, spriteX, spriteY, 0xDD);
+        texDrawTableEntryAtStoredOrigin(2, 0x14, 0xC0D, spriteX, spriteY, 0xDD);
         }
         efctSetSpeed(speed);
         const SpriteInfo *origin = asdTMTexTableEntryAt(0x14, 0xC14);
         s32 spriteX = origin->x + x;
         s32 spriteY = origin->y + y;
-        FUN_001835b4(2, 0x14, 0xC0E, spriteX, spriteY, 0xDD);
+        texDrawTableEntryAtStoredOrigin(2, 0x14, 0xC0E, spriteX, spriteY, 0xDD);
         efctSetSpeed(speed);
-        FUN_00183bb0();
+        gxResetColorQuadToWhite();
     }
 }
 }

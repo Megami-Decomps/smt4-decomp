@@ -17,7 +17,7 @@ int randomGetNormalizedFloat(void);
 int partyApplyStatusMask(int, int, int);
 int partyApplyPercentHealthDamage(int, int);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
-int FUN_002bf810(int);
+int soundPlaySeUnpanned(int);
 int FUN_002bff50(void);
 int FUN_002dfea4(void);
 int mapIfResetCounter(void);
@@ -67,7 +67,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: partyApplyPercentHealthDamage. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned int *);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_002bf810. */
+/* Supplied declaration required: soundPlaySeUnpanned. */
 /* Supplied declaration required: FUN_002bff50. */
 extern int FUN_002c8684(unsigned int);
 /* Supplied declaration required: FUN_002dfea4. */
@@ -218,7 +218,7 @@ LAB_00264b84:
     temp_v14[4] = 0.6f;
     temp_v14[5] = 0.6f;
     if (*(int *)(param_1 + 0xd0) == 0) {
-      FUN_00291e40(0x1000186, soundActorScalePosition(
+      soundActorStartOnFreeChannel(0x1000186, soundActorScalePosition(
           soundActorPositionFromArray(reinterpret_cast<const f32 *>(g_lmapScene + 0x28)), 1.0f / 3.0f));
       partyApplyPercentHealthDamage(2,3);
       partyApplyStatusMask(2,5,0xf);
@@ -342,16 +342,16 @@ LAB_00264b84:
       return;
     case 1:
       if (*(int *)(param_1 + 0xd4) == 2) {
-        FUN_002bf810(0x1000179);
+        soundPlaySeUnpanned(0x1000179);
       }
       if (*(int *)(param_1 + 0xd4) == 0x2d) {
-        FUN_002bf810(0x1000202);
+        soundPlaySeUnpanned(0x1000202);
       }
       if (*(int *)(param_1 + 0xd4) == 0x9c) {
-        FUN_002bf810(0x1000201);
+        soundPlaySeUnpanned(0x1000201);
       }
       if (*(int *)(param_1 + 0xd4) == 0xf0) {
-        FUN_002bf810(0x10001fe);
+        soundPlaySeUnpanned(0x10001fe);
       }
       *(int *)(param_1 + 0xd4) = *(int *)(param_1 + 0xd4) + 1;
       temp_v7 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x9ac));

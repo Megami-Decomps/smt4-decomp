@@ -3,8 +3,7 @@
 #include "addon/aocMain.h"
 
 extern "C" {
-s32 FUN_001b3214(u32 table);
-AocPackageFile *FUN_001b2bd8(AocSystem *system, s32 type, s32 id, char *path);
+AocPackageFile *packageFindFileByTypeAndId(AocSystem *system, s32 type, s32 id, char *path);
 TexTableNamedEntry *asdTMTexTableGetNode(u32 table, u32 id);
 u32 optionalWorkGetValue();
 void sysMemClear(void *buffer, u32 size);
@@ -22,11 +21,11 @@ TexTableNamedEntry *FUN_001a6568(AocSystem *system, u32 table, u32 id, u32 mode)
     char texturePath[128];
     char packagePath[128];
     char requestPath[128];
-    s32 type = FUN_001b3214(table);
+    s32 type = packageKindToRecordKind(table);
     if (type == -1)
         return NULL;
     sysMemClear(packagePath, sizeof(packagePath));
-    AocPackageFile *file = FUN_001b2bd8(system, type, id, packagePath);
+    AocPackageFile *file = packageFindFileByTypeAndId(system, type, id, packagePath);
     if (file == NULL)
         return NULL;
     file->texture.completion = 0;

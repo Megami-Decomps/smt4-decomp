@@ -2,7 +2,7 @@
 #include "classes/Obj422594.h"
 
 extern "C" {
-s32 FUN_00231434(s32 table, s32 id, s32 *a, s32 *b, s32 *c, u32 *d);
+s32 asdTMTexTableGetEntryPlacement(s32 table, s32 id, s32 *a, s32 *b, s32 *c, u32 *d);
 void FUN_002346ac(Obj4223ac *obj, s32 a, s32 b, s32 c, u32 d);
 void touchRegisterSecondRegion(Obj4223ac *obj, s32 a, s32 b, s32 c, u32 d);
 void touchRegisterFirstRegion(Obj4223ac *obj, s32 a, s32 b, s32 c, u32 d);
@@ -20,18 +20,18 @@ void Obj4223ac::initialize(const void *param)
 
     Obj422594::initialize(param);
     if (type != 9) {
-        FUN_00231434(0x2b, 0xfa, &a, &b, &c, &d);
+        asdTMTexTableGetEntryPlacement(0x2b, 0xfa, &a, &b, &c, &d);
         touchRegisterFirstRegion(this, a, b, c, d);
-        FUN_00231434(0x2b, 0xfb, &a, &b, &c, &d);
+        asdTMTexTableGetEntryPlacement(0x2b, 0xfb, &a, &b, &c, &d);
         touchRegisterSecondRegion(this, a, b, c, d);
-        FUN_00231434(0x2b, 0xfc, &a, &b, &c, &d);
+        asdTMTexTableGetEntryPlacement(0x2b, 0xfc, &a, &b, &c, &d);
         FUN_002346ac(this, a, b, c, d);
         return;
     }
-    FUN_00231434(0x2b, 0xfd, &a, &b, &c, &d);
+    asdTMTexTableGetEntryPlacement(0x2b, 0xfd, &a, &b, &c, &d);
     touchRegisterFirstRegion(this, a, b, c, d);
-    FUN_00231434(0x2b, 0xfe, &a, &b, &c, &d);
+    asdTMTexTableGetEntryPlacement(0x2b, 0xfe, &a, &b, &c, &d);
     touchRegisterSecondRegion(this, a, b, c, d);
-    FUN_00231434(0x2b, 0xff, &a, &b, &c, &d);
+    asdTMTexTableGetEntryPlacement(0x2b, 0xff, &a, &b, &c, &d);
     FUN_002346ac(this, a, b, c, d);
 }

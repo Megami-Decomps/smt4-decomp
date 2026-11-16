@@ -6,7 +6,7 @@
 extern "C" {
 s32 scrGetArg(s32 index);
 s32 btlScriptResolveGroupArg(s32 group);
-void FUN_002499fc(s32 group, s32 *first, s32 *count);
+void btlSideGetEntryRange(s32 group, s32 *first, s32 *count);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 
 // Test the requested group's matching combatants for either active effect counter.
@@ -14,7 +14,7 @@ u32 btlScriptHasMatchingEffectCounter()
 {
     u32 id = scrGetArg(0);
     s32 first, count;
-    FUN_002499fc(btlScriptResolveGroupArg(scrGetArg(1)), &first, &count);
+    btlSideGetEntryRange(btlScriptResolveGroupArg(scrGetArg(1)), &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlEntry *entry = &btlGetMainState()->entries[index];
         if (!(entry->flags & BTL_ENTRY_FLAG_PRESENT) && (entry->flags & BTL_ENTRY_FLAG_ACTIVE) &&

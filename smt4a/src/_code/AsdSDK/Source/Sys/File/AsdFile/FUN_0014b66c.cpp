@@ -10,15 +10,15 @@ int svcSleepThread(...);
 
 int syncWaitHandleForever(int *);
 int refIsNullOrZero(int *);
-int FUN_00178b04(int, unsigned char *, int);
+int asdMemoryAllocTraced(int, unsigned char *, int);
 int FUN_001858ec(...);
 int asdFileHashPackReadRequest(int, int *);
-int FUN_001883b0(char *, int *, unsigned int);
+int archivePathDeviceOpen(char *, int *, unsigned int);
 int vcallSlot12IfValid(...);
 int sysFatalBreak(void);
 int FUN_0019a364(...);
 int nn_os_LightEvent_Wait(unsigned int *);
-int FUN_002e3140(void);
+int resultHandleFailure(void);
 int FUN_002e3c44(int *, int *, int, int *);
 int software_interrupt(...);
 
@@ -44,11 +44,11 @@ extern unsigned int g_asdFileEvent; /* 0x5b3fd4 */
 /* Supplied declaration required: refIsNullOrZero. */
 extern int FUN_00100836(int *, unsigned int, unsigned int *);
 extern int asdFileHashPackTryReadRequest(int *);
-/* Supplied declaration required: FUN_00178b04. */
+/* Supplied declaration required: asdMemoryAllocTraced. */
 /* Supplied declaration required: FUN_001858ec. */
 extern int asdFileHashPackIsOpen(void);
 /* Supplied declaration required: asdFileHashPackReadRequest. */
-/* Supplied declaration required: FUN_001883b0. */
+/* Supplied declaration required: archivePathDeviceOpen. */
 /* Supplied declaration required: vcallSlot12IfValid. */
 /* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: FUN_0019a364. */
@@ -56,7 +56,7 @@ extern int asdFileHashPackIsOpen(void);
 /* Supplied declaration required: nn_os_LightEvent_ClearSignal. */
 /* Supplied declaration required: nn_os_LightEvent_Wait. */
 /* Supplied declaration required: svcSleepThread. */
-/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: FUN_002e3c44. */
 
 
@@ -92,7 +92,7 @@ void FUN_0014b66c(void)
     FUN_0019a364(&temp_v3,g_asdFileMutex,1);
     while( 1 ) {
       if ((int)piVar4 < 0) {
-        FUN_002e3140();
+        resultHandleFailure();
       }
       if (piVar8 == (int *)0x0) break;
       if (g_asdFile != '\0') {
@@ -102,14 +102,14 @@ void FUN_0014b66c(void)
         if (piVar8[0x4e] != 0) {
           software_interrupt(0x24);
           if (g_asdFileMutex < 0) {
-            FUN_002e3140();
+            resultHandleFailure();
           }
           (*(romwright_code *)piVar8[0x4e])(piVar8 + 0xb);
           piVar8[0x4e] = 0;
           piVar4 = &temp_v3;
           FUN_0019a364(&temp_v3,g_asdFileMutex,1);
           if ((int)piVar4 < 0) {
-            FUN_002e3140();
+            resultHandleFailure();
           }
         }
         temp_v0 = piVar8[0x4f];
@@ -118,7 +118,7 @@ void FUN_0014b66c(void)
           switch(*piVar8) {
           case 0:
             pcVar2 = (char *)0x18;
-            FUN_00178b04(0x18,&LAB_0014bab8,0x2ff);
+            asdMemoryAllocTraced(0x18,&LAB_0014bab8,0x2ff);
             if (pcVar2 != (char *)0x0) {
               pcVar2[4] = '\0';
               pcVar2[5] = '\0';
@@ -181,7 +181,7 @@ void FUN_0014b66c(void)
             temp_v5[10] = '\0';
             temp_v5[0xb] = '\0';
             pcVar2 = temp_v5;
-            FUN_001883b0(temp_v5,&temp_v3,uStack_38);
+            archivePathDeviceOpen(temp_v5,&temp_v3,uStack_38);
             piVar8[0x50] = (int)pcVar2;
             piVar4 = (int *)piVar8[0x4b];
             if (-1 < (int)pcVar2) {
@@ -263,19 +263,19 @@ void FUN_0014b66c(void)
         if ((piVar8[0x50] < 0) && (piVar8[0x51] != 0)) {
           software_interrupt(0x24);
           if (g_asdFileMutex < 0) {
-            FUN_002e3140();
+            resultHandleFailure();
           }
           (*(romwright_code *)piVar8[0x51])(piVar8[0x52],piVar8);
           piVar4 = &temp_v3;
           FUN_0019a364(&temp_v3,g_asdFileMutex,1);
           if ((int)piVar4 < 0) {
-            FUN_002e3140();
+            resultHandleFailure();
           }
         }
         if ((*piVar8 == 4 || *piVar8 == 5) && (piVar8[0x4c] != 0)) {
           software_interrupt(0x24);
           if (g_asdFileMutex < 0) {
-            FUN_002e3140();
+            resultHandleFailure();
           }
           piVar4 = (int *)piVar8[0x4d];
           if ((int *)piVar8[0x4d] == (int *)0x0) {
@@ -285,12 +285,12 @@ void FUN_0014b66c(void)
           piVar4 = &temp_v3;
           FUN_0019a364(&temp_v3,g_asdFileMutex,1);
           if ((int)piVar4 < 0) {
-            FUN_002e3140();
+            resultHandleFailure();
           }
         }
         software_interrupt(0x24);
         if (g_asdFileMutex < 0) {
-          FUN_002e3140();
+          resultHandleFailure();
         }
         piVar8 = (int *)piVar8[0x53];
         piVar4 = &temp_v3;
@@ -299,7 +299,7 @@ void FUN_0014b66c(void)
       else {
         software_interrupt(0x24);
         if (g_asdFileMutex < 0) {
-          FUN_002e3140();
+          resultHandleFailure();
         }
         temp_v0 = piVar8[1];
         piVar8[1] = temp_v0 - piVar8[2];
@@ -307,11 +307,11 @@ void FUN_0014b66c(void)
           piVar4 = &temp_v3;
           FUN_0019a364(&temp_v3,g_asdFileMutex,1);
           if ((int)piVar4 < 0) {
-            FUN_002e3140();
+            resultHandleFailure();
           }
           software_interrupt(0x24);
           if (g_asdFileMutex < 0) {
-            FUN_002e3140();
+            resultHandleFailure();
           }
           piVar8 = (int *)piVar8[0x53];
           piVar4 = &temp_v3;

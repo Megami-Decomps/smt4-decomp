@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0019a364(int *, int, int);
 int svcSleepThread(unsigned char *, int);
 int FUN_001cc6d0(int *, int *);
-int FUN_002e3140(void);
+int resultHandleFailure(void);
 int software_interrupt(int);
 
 typedef int romwright_code(...);
@@ -17,7 +17,7 @@ extern unsigned char LAB_002dc6c0; /* 0x2dc6c0 */
 /* Supplied declaration required: FUN_0019a364. */
 /* Supplied declaration required: svcSleepThread. */
 /* Supplied declaration required: FUN_001cc6d0. */
-/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: resultHandleFailure. */
 
 
 void FUN_001c3864(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -35,18 +35,18 @@ void FUN_001c3864(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
     while (*param_1 != param_1[1]) {
       software_interrupt(0x24);
       if (*piVar3 < 0) {
-        FUN_002e3140();
+        resultHandleFailure();
       }
       temp_v0 = *param_1;
       puVar2 = (unsigned int *)&uStack_20;
       FUN_0019a364(&uStack_20,*piVar3,1);
       if ((int)puVar2 < 0) {
-        FUN_002e3140();
+        resultHandleFailure();
       }
       FUN_001cc6d0(param_1,param_1 + temp_v0 * 0x2e + 3);
       software_interrupt(0x24);
       if (*piVar3 < 0) {
-        FUN_002e3140();
+        resultHandleFailure();
       }
       if ((char)param_1[temp_v0 * 0x2e + 5] == '\x03') {
         (**(romwright_code **)param_1[*param_1 * 0x2e + 3])();
@@ -59,7 +59,7 @@ void FUN_001c3864(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
       puVar2 = (unsigned int *)&uStack_20;
       FUN_0019a364(&uStack_20,*piVar3,1);
       if ((int)puVar2 < 0) {
-        FUN_002e3140();
+        resultHandleFailure();
       }
     }
     svcSleepThread(&LAB_002dc6c0,0);

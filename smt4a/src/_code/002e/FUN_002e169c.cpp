@@ -47,7 +47,7 @@ extern "C" {
 
 extern ButtonHelpHolder g_buttonHelp;
 
-u32 FUN_001692ac(u32 a, u32 b);
+u32 renderCtxPackPassFlags(u32 a, u32 b);
 void FUN_0020bd54(void);
 void fadeObjectResetIfActive(void* fade);
 s32 vec2GetYInt(void* vec);
@@ -63,8 +63,8 @@ u8 FUN_002e169c(void)
     ButtonHelp* help = g_buttonHelp.help;
     if (help->visible == 0) return 0;
 
-    FUN_00157558(g_renderCtx);
-    renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
+    renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
     if (help->state == 0 || help->state == 1 || help->state == 2 || help->state == 3) {
         FUN_0020bd54();
         if (help->shown != 0) {
@@ -76,10 +76,10 @@ u8 FUN_002e169c(void)
             } else {
                 s32 x = vec2GetXInt(help->fadeA);
                 s32 y = vec2GetYInt(help->fadeA);
-                FUN_001835b4(2, 10, 0, x, y, 16);
-                FUN_001835b4(2, 10, 1, x, y, 16);
-                FUN_001835b4(2, 10, 163, x, y, 16);
-                FUN_001835b4(2, 10, 164, x, y, 16);
+                texDrawTableEntryAtStoredOrigin(2, 10, 0, x, y, 16);
+                texDrawTableEntryAtStoredOrigin(2, 10, 1, x, y, 16);
+                texDrawTableEntryAtStoredOrigin(2, 10, 163, x, y, 16);
+                texDrawTableEntryAtStoredOrigin(2, 10, 164, x, y, 16);
             }
             if (help->shown != 0 && help->enabled != 0 && help->fadeBits >= 0x3f800000) {
                 TextureTableEntryIV* rect = asdTMTexTableEntryAt(10, 29);

@@ -13,9 +13,9 @@ typedef struct Rec10 {
 } Rec10;
 
 extern Rec10 *FUN_0050d2cc(u8 *key);
-extern s32 FUN_004acb54(Inner38 *inner);
+extern s32 transferQueueForwardNext(Inner38 *inner);
 
-/* Runs FUN_004acb54 for each of the inner object's items; 0xE if there is no inner object, 0x14 on failure. */
+/* Runs transferQueueForwardNext for each of the inner object's items; 0xE if there is no inner object, 0x14 on failure. */
 u32 runItemsOfInner(Ref4 *obj)
 {
     Rec10 *record;
@@ -35,7 +35,7 @@ u32 runItemsOfInner(Ref4 *obj)
     }
     count = inner->count;
     for (i = 0; i < count; i++) {
-        if (FUN_004acb54(inner) == 0) {
+        if (transferQueueForwardNext(inner) == 0) {
             return 0x14;
         }
     }

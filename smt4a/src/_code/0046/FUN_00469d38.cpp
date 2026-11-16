@@ -15,7 +15,7 @@ typedef struct QuestRecord {
 
 void eventQueueAddUnique(u32 event);
 void frameTexInitActive(void);
-void FUN_002e5924(s32 a);
+void frameTexRequestFade(s32 a);
 void *FUN_004186e0(void);
 s32 FUN_001bd118(void);
 void qcMainSetMode(s32 mode);
@@ -42,7 +42,7 @@ void FUN_00469d38(StepWork *work)
         break;
     case 1:
         if (work->counter == 0) {
-            FUN_002e5924(1);
+            frameTexRequestFade(1);
         }
         if (++work->counter > 3) {
             work->counter++;

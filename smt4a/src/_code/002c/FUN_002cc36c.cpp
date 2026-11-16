@@ -7,13 +7,13 @@
 
 extern "C" {
 
-int FUN_00163aa4(int);
+int uiSpriteAdvanceAnimation(int);
 int pairSetSecondResetFirst(int, int);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_002a1850(unsigned int *, int, unsigned int);
 int FUN_00358e94(...);
-int FUN_00387240(...);
+int uiStoreTextureEntryCenter(...);
 int FUN_004a9740(int, int, unsigned int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -30,13 +30,13 @@ extern int g_btlUiBlock; /* 0x57a9c8 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_00163aa4. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: pairSetSecondResetFirst. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_002a1850. */
 /* Supplied declaration required: FUN_00358e94. */
-/* Supplied declaration required: FUN_00387240. */
+/* Supplied declaration required: uiStoreTextureEntryCenter. */
 extern int btlScriptUnitHasFlags(void);
 /* Supplied declaration required: FUN_004a9740. */
 
@@ -110,14 +110,14 @@ void FUN_002cc36c(int param_1)
       temp_v4 = 0;
       if (temp_v4 < temp_v2) {
         do {
-          FUN_00163aa4(temp_v5 + temp_v4 * 0x8c + 0x75b4);
+          uiSpriteAdvanceAnimation(temp_v5 + temp_v4 * 0x8c + 0x75b4);
           piVar4 = (int *)(temp_v5 + temp_v4 * 4 + 0x7998);
           temp_v4 = temp_v4 + 1;
           *piVar4 = *piVar4 + 1;
         } while (temp_v4 < temp_v2);
       }
-      FUN_00163aa4(temp_v5 + 0x7870);
-      FUN_00163aa4(temp_v5 + 0x78fc);
+      uiSpriteAdvanceAnimation(temp_v5 + 0x7870);
+      uiSpriteAdvanceAnimation(temp_v5 + 0x78fc);
       if (*(char *)(temp_v5 + 0x7994) == '\0') goto LAB_002cc580;
     }
     else {
@@ -149,7 +149,7 @@ LAB_002cc580:
           *(unsigned char *)(temp_v5 + 0xb64c) = 0;
         }
         if (*(int *)(temp_v5 + 0xb650) >= 3) {
-          FUN_00163aa4(temp_v5 + 0xb5b4);
+          uiSpriteAdvanceAnimation(temp_v5 + 0xb5b4);
         }
       }
       else {
@@ -161,7 +161,7 @@ LAB_002cc6b0:
             if (*(short *)(temp_v5 + 0xb610) != 0xc) {
               uiSpriteSetImageKeyframe(temp_v5 + 0xb5b4,0xc,0);
               if (*(int *)(temp_v5 + 0xb650) >= 3) {
-                FUN_00163aa4(temp_v5 + 0xb5b4);
+                uiSpriteAdvanceAnimation(temp_v5 + 0xb5b4);
               }
             }
             else if (*(char *)(temp_v5 + 0xb63e) != '\0') {
@@ -169,17 +169,17 @@ LAB_002cc6b0:
               *(unsigned char *)(temp_v5 + 0xb64c) = 0;
             }
             else if (*(int *)(temp_v5 + 0xb650) >= 3) {
-              FUN_00163aa4(temp_v5 + 0xb5b4);
+              uiSpriteAdvanceAnimation(temp_v5 + 0xb5b4);
             }
           }
           else if (*(int *)(temp_v5 + 0xb650) >= 3) {
-            FUN_00163aa4(temp_v5 + 0xb5b4);
+            uiSpriteAdvanceAnimation(temp_v5 + 0xb5b4);
           }
         }
         else {
           if (*(int *)(temp_v5 + 0xb650) >= 0x12) goto LAB_002cc6b0;
           if (*(int *)(temp_v5 + 0xb650) >= 3) {
-            FUN_00163aa4(temp_v5 + 0xb5b4);
+            uiSpriteAdvanceAnimation(temp_v5 + 0xb5b4);
           }
         }
       }
@@ -216,7 +216,7 @@ LAB_002cc760:
         temp_v12 = (int)temp_v9;
         temp_v11 = temp_v8;
         if (temp_v0 != '\0') {
-          temp_v3 = FUN_00152f54();
+          temp_v3 = asdCameraGetSavedRenderPairs();
           FUN_002a1850(&temp_v10,0,temp_v3);
         }
         temp_v5 = temp_v5 + temp_v7 * 0xa0;
@@ -227,7 +227,7 @@ LAB_002cc760:
         temp_v6 = temp_v5 + 0xb5b4;
         *(unsigned int *)(temp_v5 + 0xb644) = temp_v11;
         *(int *)(temp_v5 + 0xb648) = temp_v12;
-        FUN_00387240(temp_v6,0xd,0x416);
+        uiStoreTextureEntryCenter(temp_v6,0xd,0x416);
         FUN_00358e94(temp_v6,(int)(short)(int)*(float *)(temp_v5 + 0xb640),
                      (int)(short)(int)*(float *)(temp_v5 + 0xb644));
         uiSpriteSelectAnim(temp_v6,9);

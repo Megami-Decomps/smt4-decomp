@@ -7,7 +7,7 @@
 extern "C" {
 void uiInitializeEightTimerSet(void *timers);
 void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 image, s32 frame);
-void FUN_002bd954(UiSpriteState *sprite, u32 table, u32 image, UiResourceParameters *parameters, u32 flags, f32 scale);
+void uiSpriteStateInitFromSource(UiSpriteState *sprite, u32 table, u32 image, UiResourceParameters *parameters, u32 flags, f32 scale);
 
 void drawParameterBlockClear(UiResourceParameters *parameters);
 extern const u8 DAT_00404e08[];
@@ -49,10 +49,10 @@ void FUN_003bb1f0(SceneWidget *widget)
     paramsInit(&work->parameters, DAT_00404e08, 12, DAT_00404e14, 24,
         0, 0, 0, 0, DAT_00404e2c, 56);
     for (s32 index = 0; index < 10; ++index) {
-        FUN_002bd954(&work->buttons[index], SCENE_TEXTURE_TABLE, 0, &work->parameters, 21, 1.0f);
+        uiSpriteStateInitFromSource(&work->buttons[index], SCENE_TEXTURE_TABLE, 0, &work->parameters, 21, 1.0f);
         uiSpriteSetImageKeyframe(&work->buttons[index], 0, 0);
     }
-    FUN_002bd954(&work->image, SCENE_TEXTURE_TABLE, 0, &work->parameters, 21, 1.0f);
+    uiSpriteStateInitFromSource(&work->image, SCENE_TEXTURE_TABLE, 0, &work->parameters, 21, 1.0f);
     uiInitializeEightTimerSet(reinterpret_cast<u8 *>(widget) + 0xa8);
 }
 }

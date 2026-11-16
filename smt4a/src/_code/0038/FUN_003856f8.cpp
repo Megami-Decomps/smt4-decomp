@@ -18,7 +18,7 @@ extern "C" {
 extern LmapSceneView* g_lmapScene;
 extern s32 gameFlagIsSet(u32 flag);
 extern s32 FUN_002e5db4(void);
-extern void FUN_003fd7c0(u32 target, u32 mode, u32 option, f32 amount);
+extern void moriModelUnitStartMaterialAnimation(u32 target, u32 mode, u32 option, f32 amount);
 }
 
 // Apply the requested mode, with a mode-3, amount-10 override when required by game state.
@@ -31,9 +31,9 @@ extern "C" void FUN_003856f8(u32 mode)
     s32 flagSet = gameFlagIsSet(0x4c9);
     f32 amount = 0.0f;
     if (flagSet != 0 && FUN_002e5db4() == 0) {
-        FUN_003fd7c0(g_lmapScene->unk18C->unk04, 3, 2, 10.0f);
+        moriModelUnitStartMaterialAnimation(g_lmapScene->unk18C->unk04, 3, 2, 10.0f);
         return;
     }
 
-    FUN_003fd7c0(g_lmapScene->unk18C->unk04, mode, 2, amount);
+    moriModelUnitStartMaterialAnimation(g_lmapScene->unk18C->unk04, mode, 2, amount);
 }

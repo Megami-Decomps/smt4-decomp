@@ -9,7 +9,7 @@ extern "C" {
 extern const char DAT_0040357c[];
 extern const char DAT_00403570[];
 Table00Record *dataTable00FindById(u16 id);
-u32 FUN_00294090(s32 portraitId, u32 mode);
+u32 eventResourceCacheAcquire(s32 portraitId, u32 mode);
 s32 FUN_002c1d5c();
 s32 FUN_001dfc64(u32 handle);
 void FUN_002db92c(u32 handle);
@@ -31,7 +31,7 @@ void FUN_00252190(u32 npcId, u32 mode, s32 x)
     if (FUN_002c1d5c() != 0) {
         work->deferred = 1;
     } else {
-        work->portrait.portraitHandle = FUN_00294090(work->portrait.portraitId, 1);
+        work->portrait.portraitHandle = eventResourceCacheAcquire(work->portrait.portraitId, 1);
         work->deferred = 2;
     }
     work->phase = static_cast<u16>(-npcId);

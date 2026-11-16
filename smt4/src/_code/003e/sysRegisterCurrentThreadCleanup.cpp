@@ -17,7 +17,7 @@ static __inline ThreadHandleState* initializeCurrentThread(ThreadHandleState* th
     s32 result = FUN_0015f858(&handle, DAT_00408ee0);
     bool failed = nnResultIsFailure(result);
     if (failed) {
-        FUN_002c526c(result, failed);
+        resultHandleFailure(result, failed);
     }
     thread->handle = handle;
     thread->unk04 = 0;

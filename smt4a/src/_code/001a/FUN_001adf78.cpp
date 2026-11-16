@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_001b4128(unsigned int *, int, int);
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
+int libm_cosf(void);
+int libm_sinf(void);
 
 /* stack frame of param_6: 59 slot(s), 236 byte(s) */
 typedef struct {
@@ -81,8 +81,8 @@ static float romwright_fabs_4(float value)
 }
 #endif
 /* Supplied declaration required: FUN_001b4128. */
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 
 
 unsigned int * FUN_001adf78(unsigned int param_1,unsigned int *param_2,unsigned int *param_3,unsigned int *param_4,unsigned int *param_5,
@@ -198,16 +198,16 @@ unsigned int * FUN_001adf78(unsigned int param_1,unsigned int *param_2,unsigned 
     temp_v13 = *pfVar8 - temp_v16;
     temp_v15 = temp_v31[temp_v8 * 2 + 1] - temp_v17;
     temp_v18 = (float)temp_v19;
-    FUN_001bbf0c();
+    libm_cosf();
     temp_v18 = temp_v18 * temp_v13;
     temp_v12 = (float)temp_v19;
-    FUN_001bc124();
+    libm_sinf();
     temp_v14 = (float)temp_v19;
     *pfVar8 = temp_v18 - temp_v15 * temp_v12;
-    FUN_001bc124();
+    libm_sinf();
     temp_v14 = temp_v14 * temp_v13;
     temp_v18 = (float)temp_v19;
-    FUN_001bbf0c();
+    libm_cosf();
     temp_v14 = temp_v14 + temp_v15 * temp_v18;
     temp_v18 = *pfVar8;
     temp_v9 = temp_v8 + 1;

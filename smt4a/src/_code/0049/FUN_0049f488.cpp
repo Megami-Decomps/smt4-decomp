@@ -4,7 +4,7 @@
 #include "util/BitsAndBytes.h"
 #include "util/MathFunctions.h"
 extern "C" {
-s32 FUN_001692ac(u32 first, u32 second);
+s32 renderCtxPackPassFlags(u32 first, u32 second);
 s32 vec2GetYInt(const UiSpriteState *sprite);
 void FUN_0049d244(HowToScreenWork *screen, s32 x, s32 y, f32 progress);
 void FUN_0049e3f8(HowToScreenWork *screen);
@@ -40,9 +40,9 @@ u32 FUN_0049f488(HowToScreenWork *screen)
 {
     if (!screen->mode.state || screen->mode.state == 2)
         return 0;
-    FUN_00157558(g_renderCtx);
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     RenderCtxA *context = g_renderCtx;
-    renderCtxPushA(context, FUN_001692ac(1, 0));
+    renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
     howToScreenDrawStates(screen);
     efctSetSpeed(1.0f);
     renderStackPop(&g_renderCtx->stackA);

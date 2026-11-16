@@ -31,9 +31,9 @@ void FUN_004058b0(SpriteDetailPanel* panel)
     const f32 speed = vec2GetSpeed(&panel->positions[1]);
     const s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
     efctSetSpeed(speed);
-    FUN_001835b4(2, 0x32, 11, x + parallax, y, 0x65);
+    texDrawTableEntryAtStoredOrigin(2, 0x32, 11, x + parallax, y, 0x65);
     for (s32 i = 0; i < 4; ++i) {
-        FUN_001835b4(2, 0x32, i + 14, x + parallax, y, 0x65);
+        texDrawTableEntryAtStoredOrigin(2, 0x32, i + 14, x + parallax, y, 0x65);
     }
     efctSetSpeed(1.0f);
     const s32 detailX = vec2GetXInt(&panel->positions[2]) + x;
@@ -43,7 +43,7 @@ void FUN_004058b0(SpriteDetailPanel* panel)
         efctSetSpeed(detailSpeed);
         const s32 detailParallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
         for (s32 i = 0; i < 3; ++i) {
-            FUN_001835b4(2, 0x32, i + 6, x + detailParallax, y, 0xc9);
+            texDrawTableEntryAtStoredOrigin(2, 0x32, i + 6, x + detailParallax, y, 0xc9);
         }
         efctSetSpeed(1.0f);
         FUN_00402ab8(panel, detailX, detailY, detailSpeed);

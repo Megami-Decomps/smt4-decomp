@@ -6,7 +6,7 @@
 #include "script/ScriptArgs.h"
 
 extern "C" {
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
 void scrSetResult(s32 result);
 
 // Check eligible selected combatants and the active override for a unit ID.
@@ -18,7 +18,7 @@ u32 FUN_0034e27c(void)
         s32 count;
         s32 entries[7];
     } range;
-    FUN_00301a08(choice, range.entries, &range.count);
+    btlGetEntryChoiceRange(choice, range.entries, &range.count);
     s32 first = range.entries[0];
     for (s32 index = first; index < range.count + range.entries[0]; ++index) {
         BtlMainStateA *state = btlGetMainState();
@@ -31,7 +31,7 @@ u32 FUN_0034e27c(void)
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
-        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL && entry->id == id) {
             scrSetResult(1);
             return 1;

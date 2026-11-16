@@ -8,7 +8,7 @@ extern MapIfGlobalsA g_mapIf;
 extern LmapExtraA *g_lmapView;
 extern GameStateA g_gameState;
 
-void FUN_003d4ed8(u32 sound);
+void soundActorStartOnFreeChannel(u32 sound);
 void FUN_0050245c(f32 x, f32 y, f32 z);
 
 // Applies a state change to interface entry `index` (-1: none): `blocked` is stored in the interface head and cleared
@@ -50,33 +50,33 @@ u32 FUN_00233e10(u8 blocked, s32 index)
         record->state = 7;
         if (g_gameState.inputBlocked == 0) {
             FUN_0050245c(record->reset.start[0], record->reset.start[1], record->reset.start[2]);
-            FUN_003d4ed8(0x10002ab);
+            soundActorStartOnFreeChannel(0x10002ab);
         }
     } else {
         s32 destination = record->navigation.destination;
         if (destination == -1) {
             record->state = 9;
-            FUN_003d4ed8(0x10002ab);
+            soundActorStartOnFreeChannel(0x10002ab);
         } else if (destination == -2) {
             record->state = 11;
-            FUN_003d4ed8(0x10002ab);
+            soundActorStartOnFreeChannel(0x10002ab);
         } else if (destination == -3) {
             record->state = 13;
-            FUN_003d4ed8(0x10002ab);
+            soundActorStartOnFreeChannel(0x10002ab);
         } else if (record->reset.values[2] != 0) {
             record->state = 7;
             if (g_gameState.inputBlocked != 0 && g_lmapView->camera.mode == 0) {
                 // the entry is left in state 7 without a sound or a jump marker
             } else if (g_gameState.mode < 100) {
-                FUN_003d4ed8(0x10002ab);
+                soundActorStartOnFreeChannel(0x10002ab);
             } else {
                 FUN_0050245c(record->reset.start[0], record->reset.start[1], record->reset.start[2]);
-                FUN_003d4ed8(0x10002ab);
+                soundActorStartOnFreeChannel(0x10002ab);
             }
         } else {
             record->state = 15;
             if (g_gameState.inputBlocked == 0) {
-                FUN_003d4ed8(0x10002ab);
+                soundActorStartOnFreeChannel(0x10002ab);
             }
         }
     }

@@ -10,7 +10,7 @@ s32 asdFsIsSdCardDetected(void)
     s32 result = nn_fs_ipc_FileSystem_IsSdmcDetected(&session, &detected);
     u32 location = __current_pc();
     u32 failed = (u32)result >> 31;
-    if (failed != 0) { FUN_002bbb2c(result, location, failed); }
+    if (failed != 0) { sysReportCheckFailure(result, location, failed); }
     return detected;
 }
 }

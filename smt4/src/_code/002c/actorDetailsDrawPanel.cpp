@@ -8,12 +8,12 @@
 extern "C" {
 extern RenderCtx *g_titleScene;
 extern const s32 g_actorDetailsStyleImages[2];
-void FUN_002bed3c(void);
+void gxResetColorQuadToWhite(void);
 void renderCtxSelectStereoLayout(RenderCtx *context);
-s32 FUN_002c5d80(s32 first, s32 second);
+s32 renderCtxPackPassFlags(s32 first, s32 second);
 void efctSetSpeed(f32 alpha);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 value);
-void FUN_002bf380(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 depth);
+void texDrawCompositeSprite(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 depth);
 const MessageDrawItem *asdTMTexTableEntryAt(u32 group, u32 index);
 void FUN_002b659c(s32 x, s32 y, s32 width, s32 height);
 void textureLoadOptionalDemonModel(s32 portrait, s32 x, s32 y, s32 depth, s32 mode);
@@ -36,13 +36,13 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
         return;
     }
     s32 images[2] = { g_actorDetailsStyleImages[0], g_actorDetailsStyleImages[1] };
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     renderCtxSelectStereoLayout(g_titleScene);
     RenderCtx *context = g_titleScene;
-    renderStackPush(&context->stackA, FUN_002c5d80(1, 0));
+    renderStackPush(&context->stackA, renderCtxPackPassFlags(1, 0));
     efctSetSpeed(transform->alpha);
     s32 offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.3f);
-    FUN_002bf380(2, 0x39, 3, x + offset, y, 0x71);
+    texDrawCompositeSprite(2, 0x39, 3, x + offset, y, 0x71);
     if (texts->portrait != 0) {
         offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.3f);
         const MessageDrawItem *portrait = asdTMTexTableEntryAt(0x39, 0x23);
@@ -54,15 +54,15 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
         FUN_002b64b8();
     } else {
         offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.29f);
-        FUN_002bf288(2, 0x39, 0x21, x + offset, y, 0x72);
+        texDrawTableEntryAtStoredOrigin(2, 0x39, 0x21, x + offset, y, 0x72);
     }
     offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.3f);
-    FUN_002bf380(2, 0x39, images[record->style], x + offset, y, 0x73);
+    texDrawCompositeSprite(2, 0x39, images[record->style], x + offset, y, 0x73);
     offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.31f);
-    FUN_002bf380(2, 0x39, 6, x + offset, y, 0x71);
+    texDrawCompositeSprite(2, 0x39, 6, x + offset, y, 0x71);
     offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.3f);
-    FUN_002bf288(2, 0x39, 0x0D, x + offset, y, 0x72);
-    FUN_002bf288(2, 0x39, 0x0E, x + offset, y, 0x73);
+    texDrawTableEntryAtStoredOrigin(2, 0x39, 0x0D, x + offset, y, 0x72);
+    texDrawTableEntryAtStoredOrigin(2, 0x39, 0x0E, x + offset, y, 0x73);
     const MessageDrawItem *position = asdTMTexTableEntryAt(0x39, 0x10);
     char text[16];
     if (record->level >= 10) {
@@ -72,11 +72,11 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
     }
     drawSetColorFromRGBA8(0);
     FUN_002bdf94(0, position->position.x + x + offset, position->position.y + y, 0, 5, 0x73, text);
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.32f);
     for (s32 index = 0; index < 8; ++index) {
         const MessageDrawItem *row = asdTMTexTableEntryAt(0x39, index + 0x2F);
-        FUN_002bf288(2, 0x39, 0x2D, row->position.x + offset + x, row->position.y + y, 0x71);
+        texDrawTableEntryAtStoredOrigin(2, 0x39, 0x2D, row->position.x + offset + x, row->position.y + y, 0x71);
         const MessageDrawItem *cell = asdTMTexTableEntryAt(0x39, 0x2E);
         s32 inset = cell->position.x + (cell->size->width - texts->widths[index]) / 2;
         if (record->values[index] == 0) {
@@ -88,8 +88,8 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
     }
     if (expanded != 0) {
         offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.29f);
-        FUN_002bf380(2, 0x39, 0x0F, transform->x + x + offset, y, 0x71);
-        FUN_002bf380(2, 0x39, 0x10, transform->x + x + offset, y, 0x71);
+        texDrawCompositeSprite(2, 0x39, 0x0F, transform->x + x + offset, y, 0x71);
+        texDrawCompositeSprite(2, 0x39, 0x10, transform->x + x + offset, y, 0x71);
         offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.3f);
         for (s32 index = 0; index < 7; ++index) {
             if (texts->skillIds[index] == 0) {
@@ -98,7 +98,7 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
             const MessageDrawItem *row = asdTMTexTableEntryAt(0x39, index + 0xAC);
             s32 rowY = row->position.y + y;
             s32 rowX = row->position.x + transform->x + x;
-            FUN_002bf380(2, 0x39, 0x11, rowX + offset, rowY, 0x71);
+            texDrawCompositeSprite(2, 0x39, 0x11, rowX + offset, rowY, 0x71);
             position = asdTMTexTableEntryAt(0x39, 0xAA);
             itemDrawCategoryBadge(texts->skillIds[index], position->position.x + rowX + offset,
                           position->position.y + rowY, 0x72, 0);
@@ -150,7 +150,7 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
     }
     drawSetColorFromRGBA8(valueColor);
     FUN_002bdf94(0, x + offset + position->position.x, position->position.y + y, 0, 5, 0x74, text);
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
     renderStackPop(&g_titleScene->stackA);
 }

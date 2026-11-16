@@ -15,7 +15,7 @@ int matrixCopySelectedToGlobal(float *);
 int randomAdvanceShiftRegister(...);
 int shiftRandomNextFraction(...);
 int phaseCosInterpolate(void);
-int FUN_002b70cc(void);
+int mathSinFixedAngle(void);
 int FUN_00360e64(void);
 int VectorSignedToFloat(int, int);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -111,7 +111,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: shiftRandomNextFraction. */
 extern int effGetFrameCounter(void);
 /* Supplied declaration required: phaseCosInterpolate. */
-/* Supplied declaration required: FUN_002b70cc. */
+/* Supplied declaration required: mathSinFixedAngle. */
 /* Supplied declaration required: FUN_00360e64. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
@@ -235,11 +235,11 @@ void FUN_003041a0(fn_003041a0_arg0 *param_1)
               temp_v15 = 40.743664f;
               temp_v42 = (temp_v7 * 0.95f + 0.050000012f) * temp_v28;
               temp_v5 = temp_v12 * 40.743664f;
-              FUN_002b70cc();
+              mathSinFixedAngle();
               temp_v5 = temp_v5 * temp_v42;
               temp_v12 = temp_v12 + temp_v32;
               temp_v6 = temp_v12 * temp_v15;
-              FUN_002b70cc();
+              mathSinFixedAngle();
               temp_v6 = temp_v6 * temp_v42;
               temp_v5 = temp_v6 - temp_v5;
               temp_v5 = temp_v5 / romwright_sqrt_4(temp_v5 * temp_v5 + temp_v20 * temp_v20);
@@ -260,7 +260,7 @@ void FUN_003041a0(fn_003041a0_arg0 *param_1)
               phaseCosInterpolate();
               temp_v19 = 0.0f;
               temp_v12 = temp_v12 * temp_v41;
-              FUN_002b70cc();
+              mathSinFixedAngle();
               DAT_004ea924 = temp_v7 * temp_v41;
               DAT_004ea91c = temp_v12;
               DAT_004ea920 = temp_v19;
@@ -408,7 +408,7 @@ void FUN_003041a0(fn_003041a0_arg0 *param_1)
                     temp_v43 = (temp_v14 * 0.7f + 0.3f) * temp_v40;
                   }
                   temp_v14 = temp_v20 * 40.743664f;
-                  FUN_002b70cc();
+                  mathSinFixedAngle();
                   temp_v14 = temp_v14 * temp_v42;
                   temp_v6 = temp_v14 - temp_v6;
                   temp_v18 = temp_v6 / romwright_sqrt_4(temp_v6 * temp_v6 + (float)temp_v44 * (float)temp_v44);
@@ -538,7 +538,7 @@ void FUN_003041a0(fn_003041a0_arg0 *param_1)
             temp_v7 = temp_v12;
             phaseCosInterpolate();
             temp_v12 = temp_v12 * temp_v41;
-            FUN_002b70cc();
+            mathSinFixedAngle();
             DAT_004ea924 = temp_v7 * temp_v41;
             DAT_004ea928 = temp_v24;
             DAT_004ea91c = temp_v12;

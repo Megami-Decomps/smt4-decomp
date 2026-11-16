@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00178b04(int, unsigned char *, int);
+int asdMemoryAllocTraced(int, unsigned char *, int);
 int lmapApplyAreaHandleVisibility(void);
-int FUN_0040619c(unsigned int, int);
+int ptrVectorAt(unsigned int, int);
 int FUN_0040a908(void);
 int FUN_0040a918(int, int);
 int moriModelContentCreateBinding(int);
@@ -48,11 +48,11 @@ extern float DAT_0064c04c; /* 0x64c04c */
 extern unsigned int DAT_0064c050; /* 0x64c050 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00178b04. */
+/* Supplied declaration required: asdMemoryAllocTraced. */
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: lmapApplyAreaHandleVisibility. */
 extern int FUN_003fdadc(void);
-/* Supplied declaration required: FUN_0040619c. */
+/* Supplied declaration required: ptrVectorAt. */
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
 /* Supplied declaration required: moriModelContentCreateBinding. */
@@ -108,7 +108,7 @@ void FUN_00379d58(void)
   if (g_lmapMainState != 0) {
     temp_v5 = *(unsigned int *)(g_lmapMainState + 0xadc);
     temp_v1 = 0x20;
-    FUN_00178b04(0x20,&LAB_00379fe4,0x25a0);
+    asdMemoryAllocTraced(0x20,&LAB_00379fe4,0x25a0);
     temp_v2 = 0;
     if (temp_v1 != 0) {
       temp_v2 = modelListInit();
@@ -152,7 +152,7 @@ void FUN_00379d58(void)
         else {
           temp_v2 = (unsigned int)temp_v11;
         }
-        FUN_0040619c(*(unsigned int *)(*(int *)(temp_v0 + 0xae4) + 8),temp_v1);
+        ptrVectorAt(*(unsigned int *)(*(int *)(temp_v0 + 0xae4) + 8),temp_v1);
         temp_v3 = FUN_003fdadc();
         temp_v19[0] = temp_v10;
         temp_v19[1] = temp_v10;

@@ -32,7 +32,7 @@ extern const u8 DAT_0058024c[], DAT_0058029c[], DAT_005802ec[];
 extern const u8 DAT_0058033c[], DAT_0058038c[], DAT_005803dc[];
 extern const u8 DAT_0058042c[], DAT_0058047c[], DAT_005804cc[];
 void FUN_003cb948(const u8 *mask);
-RegisteredHandle *FUN_0040619c(LmapHandleTable *, u32 index);
+RegisteredHandle *ptrVectorAt(LmapHandleTable *, u32 index);
 void handleRegistryRegisterObject(void *registry, RegisteredHandle *handle);
 void FUN_00399290(u32 index, s32 enabled);
 
@@ -81,7 +81,7 @@ void lmapApplyAreaHandleVisibility(void)
     }
     LmapHandleTable *table;
     for (u32 index = 0; table = map->handles->table, index < table->count; ++index) {
-        RegisteredHandle *handle = FUN_0040619c(table, index);
+        RegisteredHandle *handle = ptrVectorAt(table, index);
         handleRegistryRegisterObject(g_handleRegistry, handle);
         if (g_lmapMainState != NULL &&
             g_lmapMainState->registrations[index].registered == 0) {

@@ -14,7 +14,7 @@ extern const char DAT_0040357c[];
 extern const char DAT_00403570[];
 NpcPortraitSourceView *dataTable25FindById(s32);
 s32 FUN_002c1d5c();
-u32 FUN_00294090(s32 portraitId, u32 enabled);
+u32 eventResourceCacheAcquire(s32 portraitId, u32 enabled);
 s32 FUN_001dfc64(u32);
 void FUN_002db92c(u32);
 
@@ -35,7 +35,7 @@ void FUN_00285e44(s32 npcId, u32 style, s32 x)
     if (FUN_002c1d5c()) {
         work->deferred = 1;
     } else {
-        work->portrait.portraitHandle = FUN_00294090(work->portrait.portraitId, 1);
+        work->portrait.portraitHandle = eventResourceCacheAcquire(work->portrait.portraitId, 1);
         work->deferred = 2;
     }
     work->npcId = npcId;

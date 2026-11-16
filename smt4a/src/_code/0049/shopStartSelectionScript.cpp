@@ -34,7 +34,7 @@ void shopStartSelectionScript(Shop004989f0 *shop, s32 second)
         s32 item = second == 0 ? shop->items[i] : shop->items[i] + 4;
         const char *entry = dataTable17Type0GetEntry(&entryOut, item);
 
-        textFormatBuffer(shop->text, "%s%s<br>", shop->text, FUN_001654f8(entry, 0, 0));
+        textFormatBuffer(shop->text, "%s%s<br>", shop->text, textExpandGlyphsToBuffer(entry, 0, 0));
     }
     scrScriptProcessStartEntry(shop->process, tableGroupFindEntryIndex(shop->table, entryName));
     scrRunOpcodesStub(shop->process);

@@ -47,7 +47,7 @@ typedef char PartyWorldLayout[offsetof(PartyWorld, flags) == 0x44A8 && offsetof(
 extern "C" {
 
 PartyRecord *saveGetIndexedMapValue(s32 index);
-PartyObject *FUN_00294090(s32 id, s32 arg);
+PartyObject *eventResourceCacheAcquire(s32 id, s32 arg);
 
 /* Builds the party list for a new battle setup: picks the demon ids (the tutorial defaults, the first party-count
  * defaults, or the saved map's demons), then creates a party object for each id that has none yet. */
@@ -111,7 +111,7 @@ void FUN_003398e4(PartyWorld *world)
         if (j < 42) {
             continue;
         }
-        object = FUN_00294090(id, 1);
+        object = eventResourceCacheAcquire(id, 1);
         for (j = 0; j < 42; j++) {
             if (world->objects[j] == NULL) {
                 world->objects[j] = object;

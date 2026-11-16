@@ -8,7 +8,7 @@ struct TransformOwnerA {
 };
 extern "C" {
 void matrix44SetIdentity(TransformMtx44 *matrix);
-void FUN_002b4c30(TransformRotation *rotation, const void *source);
+void gfxQuaternionToMatrix34(TransformRotation *rotation, const void *source);
 void matrix43Multiply(TransformMtx44 *result, const TransformMtx44 *left, const TransformRotation *right);
 void matrixCopyFull(TransformMtx44 *destination, const TransformMtx44 *source);
 void mathMatrixApplyTranslation(TransformMtx44 *matrix, const TransformVec3 *translation, u32 mode);
@@ -32,7 +32,7 @@ static void matrixComposeScaleRotateTranslate(TransformMtx44 *matrix, const Tran
         matrix44SetIdentity(&scaleMatrix);
     }
     if (rotationSource) {
-        FUN_002b4c30(&rotation, rotationSource);
+        gfxQuaternionToMatrix34(&rotation, rotationSource);
         matrix43Multiply(matrix, &scaleMatrix, &rotation);
     } else {
         matrixCopyFull(matrix, &scaleMatrix);

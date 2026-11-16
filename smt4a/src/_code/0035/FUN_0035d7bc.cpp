@@ -26,7 +26,7 @@ void FUN_0035d7bc(ThreadedWorker *worker)
 
     bool failed = nnResultIsFailure(result);
     if (failed) {
-        FUN_002e3140(result, failed);
+        resultHandleFailure(result, failed);
     }
     worker->thread.joined = 1;
     /* Joined above: finalize the thread, then close its handle through the handle's destructor. */

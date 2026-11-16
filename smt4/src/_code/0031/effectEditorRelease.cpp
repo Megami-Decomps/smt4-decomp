@@ -9,7 +9,7 @@ typedef struct EffectEditor0031baa4 {
 } EffectEditor0031baa4;
 
 void nodeListOwnerFree(void);
-void FUN_00247240(void);
+void effectEditorObjectDestroy(void);
 
 extern EffectEditor0031baa4 g_effectEditor; /* 0x44ea80 */
 
@@ -17,7 +17,7 @@ extern EffectEditor0031baa4 g_effectEditor; /* 0x44ea80 */
 void effectEditorRelease(void)
 {
     if (g_effectEditor.object != NULL) {
-        FUN_00247240();
+        effectEditorObjectDestroy();
         g_effectEditor.object = NULL;
     }
     if (g_effectEditor.nodeList != NULL) {

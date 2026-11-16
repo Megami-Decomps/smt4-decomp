@@ -2,9 +2,9 @@
 
 extern "C" {
 
-int FUN_002613f0(int);
+int saveGetSelectedRecordSlot(int);
 
-/* Supplied declaration required: FUN_002613f0. */
+/* Supplied declaration required: saveGetSelectedRecordSlot. */
 
 
 void FUN_0037c6ac(int param_1,unsigned short param_2,unsigned short param_3)
@@ -20,18 +20,18 @@ void FUN_0037c6ac(int param_1,unsigned short param_2,unsigned short param_3)
   temp_v0 = *(unsigned short *)(param_1 + 0x62);
   temp_v2 = 0;
   do {
-    psVar2 = (unsigned short *)FUN_002613f0(temp_v2);
+    psVar2 = (unsigned short *)saveGetSelectedRecordSlot(temp_v2);
     if (*psVar2 == temp_v0) goto LAB_0037c728;
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 0x18);
   temp_v2 = 0;
-  while (psVar2 = (unsigned short *)FUN_002613f0(temp_v2), *psVar2 != 0) {
+  while (psVar2 = (unsigned short *)saveGetSelectedRecordSlot(temp_v2), *psVar2 != 0) {
     temp_v2 = temp_v2 + 1;
     if (temp_v2 >= 0x18) {
       return;
     }
   }
-  puVar3 = (unsigned short *)FUN_002613f0(temp_v2);
+  puVar3 = (unsigned short *)saveGetSelectedRecordSlot(temp_v2);
   *puVar3 = 0;
   puVar3[1] = 0;
   puVar3[2] = 0;
@@ -40,11 +40,11 @@ LAB_0037c728:
   if (temp_v2 < 0) {
     return;
   }
-  puVar3 = (unsigned short *)FUN_002613f0(temp_v2);
+  puVar3 = (unsigned short *)saveGetSelectedRecordSlot(temp_v2);
   *puVar3 = *(unsigned short *)(param_1 + 0x62);
-  temp_v1 = FUN_002613f0(temp_v2);
+  temp_v1 = saveGetSelectedRecordSlot(temp_v2);
   *(unsigned short *)(temp_v1 + 2) = param_2;
-  temp_v2 = FUN_002613f0(temp_v2);
+  temp_v2 = saveGetSelectedRecordSlot(temp_v2);
   *(unsigned short *)(temp_v2 + 4) = param_3;
   return;
 }

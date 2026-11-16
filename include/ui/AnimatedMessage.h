@@ -26,16 +26,16 @@ extern "C" {
 extern RenderCtxA *g_renderCtx;
 extern UiTextFontGlobals g_uiTextFontSettings;
 void words2Copy(const UiFloatPosition *source, UiFloatPosition *destination);
-u32 FUN_001692ac(s32 mode, s32 flags);
+u32 renderCtxPackPassFlags(s32 mode, s32 flags);
 void renderStackPushIndexed(RenderCtxA *context, s32 stack, u32 state);
 void renderCtxPopState(RenderCtxA *context, s32 stack);
 void efctSetSpeed(f32 speed);
-void FUN_00183bb0();
+void gxResetColorQuadToWhite();
 s32 vec2GetXInt(UiAnimatedSprite *sprite);
-void FUN_00164b5c(s32 layer, s32 group, s32 frame, s32 x, s32 y, s32 flags);
+void texDrawCompositeSprite(s32 layer, s32 group, s32 frame, s32 x, s32 y, s32 flags);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 f32 FUN_00168594(const char *text, s32 font, f32 spacing);
-s32 FUN_00163aa4(UiAnimatedSprite *sprite, f32 delta);
+s32 uiSpriteAdvanceAnimation(UiAnimatedSprite *sprite, f32 delta);
 }
 
 #endif

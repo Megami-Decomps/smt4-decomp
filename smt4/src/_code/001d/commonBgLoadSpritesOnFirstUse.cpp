@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c58c8(int table, int index);
+int asdTMTexTablePrepareNodeImage(int table, int index);
 
 extern struct {
     u8 unk00;
@@ -16,7 +16,7 @@ void commonBgLoadSpritesOnFirstUse(void)
 {
     if (g_commonBg.spriteRefCount <= 0) {
         asdTMTexTableLoadSprites(0x11);
-        FUN_002c58c8(0x11, 0);
+        asdTMTexTablePrepareNodeImage(0x11, 0);
     }
     g_commonBg.spriteRefCount = g_commonBg.spriteRefCount + 1;
 }

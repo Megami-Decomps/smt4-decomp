@@ -95,7 +95,7 @@ extern float mathClampFloat(void*, float, float, float);
 extern int FUN_0024530c(SceneNode*, Animation*);
 extern SceneNode* asdModelGetSlotArray0(int);
 extern int nw_gfx_SceneNode_IsCircularReference(SceneNode*, SceneNode*);
-extern ModelParameters* FUN_002c501c(void*);
+extern ModelParameters* asdCameraGetSavedRenderPairs(void*);
 extern void FUN_002a8638(SceneNode*, float*, float*, float*, float*);
 extern void FUN_00341bec(ModelSelection*);
 
@@ -238,7 +238,7 @@ void modelSelectionActivate(ModelSelection* selection, int modelIndex, int anima
     }
 
     void* parameterOwner = FUN_00244d98(0);
-    ModelParameters* parameters = FUN_002c501c(parameterOwner);
+    ModelParameters* parameters = asdCameraGetSavedRenderPairs(parameterOwner);
     FUN_002a8638(model,
                  &parameters->value28,
                  &parameters->value34,

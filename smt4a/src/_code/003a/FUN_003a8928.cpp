@@ -8,7 +8,7 @@
 extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
 
 u32 FUN_003a8928()
 {
@@ -25,7 +25,7 @@ u32 FUN_003a8928()
     }
     s32 first, count;
     u32 choice = btlResolveEntryChoice(scrGetArg(1));
-    FUN_00301a08(choice, &first, &count);
+    btlGetEntryChoiceRange(choice, &first, &count);
     // These words cannot enter the shared union at unaligned +0x0a without shifting its fields.
     struct PropertyView { u8 prefix[0x74]; s32 values[12]; };
     for (s32 index = first; index < count + first; ++index) {
@@ -39,7 +39,7 @@ u32 FUN_003a8928()
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
-        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         const PropertyView *properties = reinterpret_cast<const PropertyView *>(entry);
         if (entry != NULL && properties->values[property] >= 1) {
             scrSetResult(1);

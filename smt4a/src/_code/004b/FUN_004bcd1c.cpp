@@ -11,7 +11,7 @@ struct GrowthRecord {
 
 extern "C" {
 
-void FUN_004bcd90(GrowthRecord *record);
+void unitRecomputeDerivedStats(GrowthRecord *record);
 
 /* Sets the growth rank (1-3; other values give 0) and raises the five base stats by it, then recalculates. */
 void FUN_004bcd1c(GrowthRecord *record, s32 rankArg)
@@ -32,7 +32,7 @@ void FUN_004bcd1c(GrowthRecord *record, s32 rankArg)
     record->stats[2] += bonus;
     record->stats[3] += bonus;
     record->stats[4] += bonus;
-    FUN_004bcd90(record);
+    unitRecomputeDerivedStats(record);
 }
 
 } /* extern "C" */

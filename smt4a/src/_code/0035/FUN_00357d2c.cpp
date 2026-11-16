@@ -12,13 +12,13 @@ struct SaveSlotView {
 extern "C" {
 u32 scrGetArg(u32 index);
 SaveSlotView* saveSlotFindSelected(void);
-SaveSlotView* FUN_003e4d68(u16 index);
+SaveSlotView* partyGetSlot(u16 index);
 
 static __inline s32 findEligibleAlternate(u32 requestedValue)
 {
     for (s32 index = 0; index < 12; ++index) {
-        SaveSlotView *candidate = FUN_003e4d68((u16)index);
-        if (candidate->unk12C != requestedValue && FUN_00187168(candidate) != 0)
+        SaveSlotView *candidate = partyGetSlot((u16)index);
+        if (candidate->unk12C != requestedValue && partySlotIsOccupied(candidate) != 0)
             return candidate->unk12C;
     }
     return 0;

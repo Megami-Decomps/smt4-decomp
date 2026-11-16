@@ -18,7 +18,7 @@ void uiDrawDirectoryRows(const NumberDisplayPosition *position, u32 context, u32
             asdTextDrawDirectoryEntry(context, 2, -1, 0, 3, directory, i + start + offset);
             FUN_002598f0(context, x + (s16)row->textureWidth + (s16)base->textureWidth,
                 y + (s16)row->textureHeight + (s16)base->textureHeight, 21, 1.0f);
-            FUN_002bf288(2, 57, 206, x + (s16)row->textureWidth, y + (s16)row->textureHeight, 12);
+            texDrawTableEntryAtStoredOrigin(2, 57, 206, x + (s16)row->textureWidth, y + (s16)row->textureHeight, 12);
         }
     }
 }

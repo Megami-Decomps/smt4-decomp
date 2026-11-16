@@ -22,10 +22,10 @@ void FUN_00227294(s32 x, s32 y, s32 scale)
     if (camp != NULL && camp->spriteState != 0 && camp->spriteState != 4) {
         f32 previousSpeed = jobGetScalarValue();
         efctSetSpeed(vec2GetSpeed(camp->transitionSprite) * static_cast<f32>(scale));
-        FUN_001835b4(2, 20, 0x5ca, x, y, 11);
-        FUN_001835b4(2, 20, 0x5cb, x, y, 11);
-        FUN_001835b4(2, 20, 0x5cc, x, y, 11);
-        FUN_001835b4(2, 20, 0x5cd, x, y, 11);
+        texDrawTableEntryAtStoredOrigin(2, 20, 0x5ca, x, y, 11);
+        texDrawTableEntryAtStoredOrigin(2, 20, 0x5cb, x, y, 11);
+        texDrawTableEntryAtStoredOrigin(2, 20, 0x5cc, x, y, 11);
+        texDrawTableEntryAtStoredOrigin(2, 20, 0x5cd, x, y, 11);
         const TextureTableEntryIV *frame = asdTMTexTableEntryAt(20, 0x5ca);
         const TextureTableEntryIV *anchor = asdTMTexTableEntryAt(20, 0x5ce);
         CampSpritePivot pivot;

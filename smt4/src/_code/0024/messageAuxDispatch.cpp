@@ -6,7 +6,7 @@ extern MessageAuxGlobals g_messageMain;
 u32 scrGetCommandOwner(void);
 u32 scrGetArg(u32 index);
 u32 scrGetCommandFrame(void);
-u32 FUN_002866b4(u32 message, u32 argument, u32 frame, s32 mode, s32 option, u32 flags);
+u32 messageWindowShowOrPoll(u32 message, u32 argument, u32 frame, s32 mode, s32 option, u32 flags);
 /* Set the auxiliary message value and dispatch in mode twelve. */
 u32 messageAuxDispatch(u32 message, u32 value)
 {
@@ -14,6 +14,6 @@ u32 messageAuxDispatch(u32 message, u32 value)
     g_messageMain.work->value = value;
     u32 argument = scrGetArg(0);
     u32 frame = scrGetCommandFrame();
-    return FUN_002866b4(message, argument, frame, 12, 0, 0);
+    return messageWindowShowOrPoll(message, argument, frame, 12, 0, 0);
 }
 }

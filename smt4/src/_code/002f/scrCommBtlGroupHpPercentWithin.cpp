@@ -20,7 +20,7 @@ static __inline void groupAddHp(s32 group, HpSums *sums)
     s32 count;
     s32 start;
 
-    FUN_002499fc(group, &start, &count);
+    btlSideGetEntryRange(group, &start, &count);
     for (s32 index = start; index < count + start; index++) {
         BtlEntry *unit = &btlGetMainState()->entries[index];
 

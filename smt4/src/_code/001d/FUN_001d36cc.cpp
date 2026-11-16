@@ -33,7 +33,7 @@ void FUN_001d36cc(void)
         f32 distance = mathDistanceBetweenPoints(DAT_004474f4->position, entry->position);
         if (!entry->started) {
             if (distance < radius) {
-                entry->handle = FUN_00291e40(entry->soundId, entry->position);
+                entry->handle = soundActorStartOnFreeChannel(entry->soundId, entry->position);
                 entry->started = 1;
                 entry->inactiveFrames = 0;
             }

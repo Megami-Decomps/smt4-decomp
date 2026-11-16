@@ -1,0 +1,16 @@
+#include "common.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
+
+extern "C" {
+
+extern struct {
+    u8 unk000[0x1C8];
+    u32 unk1C8;
+} g_asdGxPresets;
+
+u32 gxIsStereoscopic3dEnabled(void)
+{
+    return g_asdGxPresets.unk1C8;
+}
+
+} /* extern "C" */

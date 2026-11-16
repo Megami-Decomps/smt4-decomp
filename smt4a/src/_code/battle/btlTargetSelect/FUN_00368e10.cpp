@@ -6,7 +6,7 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_00180118(...);
+int dataTable01GetRecordWithAocOverride(...);
 int fontMeasureLineAdvance(...);
 int dataTable00FindById(...);
 int FUN_002a1850(...);
@@ -48,12 +48,12 @@ extern int *g_btlTargetSelect; /* 0x57a9a8 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0014bf3c(fn_00368e10_arg1 *, unsigned int);
-/* Supplied declaration required: FUN_00180118. */
+/* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: dataTable00FindById. */
 extern unsigned int gameDataGetTableValue(void);
-extern unsigned char FUN_0026264c(fn_00368e10_arg1 *);
+extern unsigned char itemIsCollectedWithRelated(fn_00368e10_arg1 *);
 extern int gameProgressIsAdvanced(void);
 /* Supplied declaration required: FUN_002a1850. */
 extern int FUN_002a4b28(fn_00368e10_arg1 *);
@@ -91,11 +91,11 @@ void FUN_00368e10(unsigned int *param_1,fn_00368e10_arg1 *param_2,unsigned int p
   temp_v8 = param_4;
   dataTable00FindById();
   pfVar4 = param_2;
-  FUN_00180118(param_2);
+  dataTable01GetRecordWithAocOverride(param_2);
   textFormatBuffer(*piVar1 + 4,&LAB_00369218,pfVar4);
   temp_v1 = FUN_0014bf3c(param_2,0);
   textFormatBuffer(*piVar1 + 0x2c,&LAB_00369218,temp_v1);
-  temp_v0 = FUN_0026264c(param_2);
+  temp_v0 = itemIsCollectedWithRelated(param_2);
   *(unsigned char *)(*piVar1 + 0x24) = temp_v0;
   *(unsigned int *)(*piVar1 + 0x28) = pfVar3->field_0x2 & 0xffff7fff;
   temp_v2 = gameProgressIsAdvanced();

@@ -52,7 +52,7 @@ char *libc_strcpy(char *output, const char *input);
 void asdMemFree(void *allocation);
 void asdLoadFileAsyncSimple(const char *path, void **output, u32 flags);
 u32 FUN_0023fffc(BattleEncounterQuery *query, BattleEncounterContext *context);
-s32 FUN_002896bc();
+s32 screenFadesAllReady();
 u32 FUN_0023fbdc(BattleEncounterQuery *query, BattleEncounterContext *context);
 u32 FUN_00240678(BattleEncounterQuery *query, BattleEncounterContext *context);
 s32 nodeListCountActiveById(void *list, u32 id);
@@ -135,7 +135,7 @@ extern "C" u32 FUN_003349c0(BattleEncounterQuery *query, BattleEncounterContext 
             FUN_002c29d8(0, 10, 255);
         if (FUN_002c2a04(1) == 3)
             FUN_002c29d8(1, 10, 255);
-        if (!FUN_002896bc())
+        if (!screenFadesAllReady())
             return 0;
         query->pending = 0;
         query->step = 14;

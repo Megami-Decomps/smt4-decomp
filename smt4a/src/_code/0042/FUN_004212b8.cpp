@@ -15,7 +15,7 @@ struct SceneCompletionOwner {
 };
 
 extern "C" {
-MoriSceneModel *FUN_0040619c(MoriScene *scene, s32 index);
+MoriSceneModel *ptrVectorAt(MoriScene *scene, s32 index);
 u32 FUN_004ffa14(MoriSceneModel *model);
 u32 animationIsClipComplete(MoriSceneModel *model);
 
@@ -25,7 +25,7 @@ static __inline MoriSceneModel *ownerGetSceneModel(const SceneCompletionOwner *o
     const SceneModelContainer *container = owner->container;
     if (container == NULL)
         return NULL;
-    return FUN_0040619c(container->scene, index);
+    return ptrVectorAt(container->scene, index);
 }
 
 // In state three, require both completion predicates when a scene model exists.

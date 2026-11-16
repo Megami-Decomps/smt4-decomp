@@ -7,14 +7,14 @@ typedef struct Record {
     /* 0x24 */ u8 order;
 } Record;
 
-extern s32 FUN_001ba3d4(u16 id);
+extern s32 flagValueRead(u16 id);
 extern Record *contentEntryFindById2(u16 id);
 
-/* Comparison of two ids: descending by FUN_001ba3d4, then ascending by the record's order byte. */
+/* Comparison of two ids: descending by flagValueRead, then ascending by the record's order byte. */
 s32 pairCompareByKeyThenOrder(const u16 *a, const u16 *b)
 {
-    s32 keyA = FUN_001ba3d4(*a);
-    s32 keyB = FUN_001ba3d4(*b);
+    s32 keyA = flagValueRead(*a);
+    s32 keyB = flagValueRead(*b);
     s32 result = keyB - keyA;
 
     if (result == 0) {

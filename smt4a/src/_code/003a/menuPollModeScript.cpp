@@ -19,7 +19,7 @@ struct MenuScriptState {
 };
 
 extern "C" {
-void *FUN_00275bc8(void *script, void *data);
+void *scrScriptProcessCreate(void *script, void *data);
 void scrScriptProcessStartEntry(void *process, s32 entry);
 void sysPlaySe(s32 id);
 void cecProcessCall4(void);
@@ -31,7 +31,7 @@ u32 menuPollModeScript(MenuScriptState *menu)
     switch (menu->scriptState) {
     case 0:
         if (menu->script && menu->scriptData) {
-            void *process = FUN_00275bc8(menu->script, menu->scriptData);
+            void *process = scrScriptProcessCreate(menu->script, menu->scriptData);
             menu->process = process;
             if (menu->mode == 1)
                 scrScriptProcessStartEntry(process, 0x19);

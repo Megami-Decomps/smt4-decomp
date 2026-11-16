@@ -11,7 +11,7 @@ int FUN_002bb180(void);
 int FUN_002bb194(int);
 int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
-int FUN_002bbb2c(...);
+int sysReportCheckFailure(...);
 int FUN_002c1148(int, int);
 int software_interrupt(int);
 
@@ -25,7 +25,7 @@ extern unsigned int FUN_0011d744(unsigned char *, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bb194. */
 /* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: FUN_002bb378. */
-/* Supplied declaration required: FUN_002bbb2c. */
+/* Supplied declaration required: sysReportCheckFailure. */
 /* Supplied declaration required: FUN_002c1148. */
 extern void nn_applet_CTR_CloseAppletHook(void);
 
@@ -50,7 +50,7 @@ unsigned int nn_applet_CTR_detail_CloseApplication(unsigned char *param_1,unsign
       threadSleepDuration(10000000,0);
     }
     if (temp_v0 < 0) {
-      FUN_002bbb2c(temp_v0,0x2c54d0);
+      sysReportCheckFailure(temp_v0,0x2c54d0);
     }
   }
   nn_applet_CTR_CloseAppletHook();
@@ -63,7 +63,7 @@ unsigned int nn_applet_CTR_detail_CloseApplication(unsigned char *param_1,unsign
     threadSleepDuration(10000000,0);
   }
   if ((int)temp_v1 < 0) {
-    FUN_002bbb2c(temp_v1,0x2c5528);
+    sysReportCheckFailure(temp_v1,0x2c5528);
   }
   FUN_002bb180();
   software_interrupt(3);

@@ -7,7 +7,7 @@
 
 extern "C" {
 
-int FUN_0014e188(...);
+int uiSpriteStateInitFromSource(...);
 int asdProcessCreateSimple(...);
 
 int taskCreateDraw(...);
@@ -15,13 +15,13 @@ int asdOperatorNew(...);
 int asdMemoryAllocTracked(...);
 int uiSpriteSetKeyframe(...);
 int gameGetSlotTable(...);
-int FUN_00203b40(...);
+int gridNavigationConfigure(...);
 int FUN_00230ac0(...);
 int asdLoadFileAsyncSimple(...);
 int FUN_002c7e6c(...);
 int FUN_002c8538(...);
 int sysMemClear(...);
-int FUN_0031d890(...);
+int partyPanelRefreshFromSlotTable(...);
 int partyPanelSortByMode(...);
 int slotPlacementSetSlot(...);
 int fusionRaceSelectionInitialize(...);
@@ -51,7 +51,7 @@ extern unsigned char DAT_0052d9e4; /* 0x52d9e4 */
 extern unsigned char DAT_0052d9fc; /* 0x52d9fc */
 extern unsigned int *g_partyPanel; /* 0x57f268 */
 
-/* Supplied declaration required: FUN_0014e188. */
+/* Supplied declaration required: uiSpriteStateInitFromSource. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -59,15 +59,15 @@ extern unsigned int *g_partyPanel; /* 0x57f268 */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: gameGetSlotTable. */
-/* Supplied declaration required: FUN_00203b40. */
+/* Supplied declaration required: gridNavigationConfigure. */
 /* Supplied declaration required: FUN_00215bd0. */
 /* Supplied declaration required: FUN_00230ac0. */
-extern int FUN_0026140c(void);
+extern int saveGetUserSettingsBlock(void);
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: FUN_002c7e6c. */
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0031d890. */
+/* Supplied declaration required: partyPanelRefreshFromSlotTable. */
 /* Supplied declaration required: partyPanelSortByMode. */
 /* Supplied declaration required: slotPlacementSetSlot. */
 /* Supplied declaration required: fusionRaceSelectionInitialize. */
@@ -97,7 +97,7 @@ void FUN_003493dc(int param_1)
   }
   puVar2 = g_partyPanel;
   sysMemClear();
-  temp_v1 = FUN_0026140c();
+  temp_v1 = saveGetUserSettingsBlock();
   *(unsigned char *)((int)puVar2 + 0x42) = *(unsigned char *)(temp_v1 + 0x44);
   puVar4 = &LAB_003497f4;
   asdProcessCreateSimple(&LAB_003497f4,3,0,0,FUN_00262874,&LAB_002e7a88,0);
@@ -154,39 +154,39 @@ void FUN_003493dc(int param_1)
   paramsClearPacket(puVar8);
   paramsInit(reinterpret_cast<UiResourceParameters *>(puVar2 + 0x12), &DAT_0052d888,0xb4,&DAT_0052d93c,0xa8,&DAT_0052d9e4,0x18,0,0,
                &DAT_0052d9fc,0x39c);
-  FUN_0014e188(puVar2 + 0x1a,0x11,0x24,puVar2 + 0x12,0x6a);
+  uiSpriteStateInitFromSource(puVar2 + 0x1a,0x11,0x24,puVar2 + 0x12,0x6a);
   uiSpriteSelectAnim(puVar2 + 0x1a,0);
-  FUN_0014e188(puVar2 + 0x3d,0x11,0x25,puVar2 + 0x12,0x6a);
+  uiSpriteStateInitFromSource(puVar2 + 0x3d,0x11,0x25,puVar2 + 0x12,0x6a);
   uiSpriteSelectAnim(puVar2 + 0x3d,1);
-  FUN_0014e188(puVar2 + 0x60,0x11,0,puVar2 + 0x12,0x6a);
+  uiSpriteStateInitFromSource(puVar2 + 0x60,0x11,0,puVar2 + 0x12,0x6a);
   uiSpriteSetKeyframe(puVar2 + 0x60,4,0);
-  FUN_0014e188(puVar2 + 0x83,0x11,0,puVar2 + 0x12,0x6a);
+  uiSpriteStateInitFromSource(puVar2 + 0x83,0x11,0,puVar2 + 0x12,0x6a);
   uiSpriteSelectAnim(puVar2 + 0x83,2);
   temp_v1 = 0;
   do {
-    FUN_0014e188(puVar2 + temp_v1 * 0x23 + 0xa6,0x11,0,puVar2 + 0x12,0x6a);
+    uiSpriteStateInitFromSource(puVar2 + temp_v1 * 0x23 + 0xa6,0x11,0,puVar2 + 0x12,0x6a);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 4);
-  FUN_0014e188(puVar2 + 0x132,0x11,0,puVar2 + 0x12,0x6a);
-  FUN_0014e188(puVar2 + 0x24a,0x11,1,puVar2 + 0x12,0x6a);
+  uiSpriteStateInitFromSource(puVar2 + 0x132,0x11,0,puVar2 + 0x12,0x6a);
+  uiSpriteStateInitFromSource(puVar2 + 0x24a,0x11,1,puVar2 + 0x12,0x6a);
   FUN_00230ac0(4,0xffffffff,0);
-  FUN_0014e188(puVar2 + 0x155,0x11,1000,puVar2 + 0x12,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x155,0x11,1000,puVar2 + 0x12,0xc9);
   uiSpriteSelectAnim(puVar2 + 0x155,3);
-  FUN_0014e188(puVar2 + 0x178,0x11,1000,puVar2 + 0x12,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x178,0x11,1000,puVar2 + 0x12,0xc9);
   uiSpriteSelectAnim(puVar2 + 0x178,4);
-  FUN_0014e188(puVar2 + 0x19b,0x11,0xb5,puVar2 + 0x12,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x19b,0x11,0xb5,puVar2 + 0x12,0xc9);
   uiSpriteSelectAnim(puVar2 + 0x19b,5);
   puVar2[0x485] = 0;
-  FUN_0014e188(puVar2 + 0x1be,0x11,0x160,puVar2 + 0x12,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x1be,0x11,0x160,puVar2 + 0x12,0xc9);
   uiSpriteSelectAnim(puVar2 + 0x1be,6);
   temp_v1 = 0;
   do {
-    FUN_0014e188(puVar2 + temp_v1 * 0x23 + 0x1e1,0x11,temp_v1 + 0x161,puVar2 + 0x12,
+    uiSpriteStateInitFromSource(puVar2 + temp_v1 * 0x23 + 0x1e1,0x11,temp_v1 + 0x161,puVar2 + 0x12,
                  (int)(short)((short)temp_v1 + 0xca));
     uiSpriteSelectAnim(puVar2 + temp_v1 * 0x23 + 0x1e1,7);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 3);
-  FUN_00203b40(puVar2 + 0x309,4,1,4,1,1);
+  gridNavigationConfigure(puVar2 + 0x309,4,1,4,1,1);
   temp_v1 = gameGetSlotTable();
   pbVar10 = (unsigned char *)(temp_v1 + 0x1ca3);
   temp_v0 = *pbVar10;
@@ -196,23 +196,23 @@ void FUN_003493dc(int param_1)
     temp_v5 = temp_v5 + 1;
   }
   if (temp_v4 < 0xc) {
-    FUN_00203b40(puVar2 + 0x322,temp_v4,temp_v5,4,1,1);
-    FUN_00203b40(puVar2 + 0x354,*pbVar10 + 4,temp_v5 + 1,4,1,1);
+    gridNavigationConfigure(puVar2 + 0x322,temp_v4,temp_v5,4,1,1);
+    gridNavigationConfigure(puVar2 + 0x354,*pbVar10 + 4,temp_v5 + 1,4,1,1);
   }
   else if (puVar2[0xb] != 0) {
-    FUN_00203b40(puVar2 + 0x322,temp_v4 - 0xc,3,4,1,1);
-    FUN_00203b40(puVar2 + 0x354,*pbVar10 - 8,4,4,1,1);
+    gridNavigationConfigure(puVar2 + 0x322,temp_v4 - 0xc,3,4,1,1);
+    gridNavigationConfigure(puVar2 + 0x354,*pbVar10 - 8,4,4,1,1);
   }
   else {
-    FUN_00203b40(puVar2 + 0x322,0xc,3,4,1,1);
-    FUN_00203b40(puVar2 + 0x354,0x10,4,4,1,1);
+    gridNavigationConfigure(puVar2 + 0x322,0xc,3,4,1,1);
+    gridNavigationConfigure(puVar2 + 0x354,0x10,4,4,1,1);
   }
-  FUN_00203b40(puVar2 + 0x33b,*pbVar10,temp_v5,4,1,1);
-  FUN_00203b40(puVar2 + 0x36d,*pbVar10 + 4,temp_v5 + 1,4,1,1);
-  FUN_00203b40(puVar2 + 0x386,6,6,1,1,1);
+  gridNavigationConfigure(puVar2 + 0x33b,*pbVar10,temp_v5,4,1,1);
+  gridNavigationConfigure(puVar2 + 0x36d,*pbVar10 + 4,temp_v5 + 1,4,1,1);
+  gridNavigationConfigure(puVar2 + 0x386,6,6,1,1,1);
   puVar2[0x26e] = 0xffffffff;
   puVar2[0x26f] = 0xffffffff;
-  FUN_0031d890();
+  partyPanelRefreshFromSlotTable();
   *(unsigned short *)(puVar2 + 0x281) = 0;
   *(unsigned char *)(puVar2 + 0x11) = 0;
   return;

@@ -31,7 +31,7 @@ u8 countUnlockedSlots(void);
 u8 getUnlockedSlotCount(u32 arg);
 s32 slotRecordFindById(u16 id);
 s8 FUN_004bcaa8(s16 id, s16 slot, s16 *skills, u32 *out, u32 flag);
-DemonView *FUN_003e4d68(u16 index);
+DemonView *partyGetSlot(u16 index);
 u32 dataTableFileGetTable(u32 file, u32 index);
 u32 *dataTableGetEntries(void);
 u32 dataTableGetCount(u32 table);
@@ -126,7 +126,7 @@ void FUN_002f0420(s32 second, u32 unused, s16 *unusedList)
         s32 wantedId = -1;
 
         for (s32 i = 0; i < 12; i++) {
-            DemonView *demon = FUN_003e4d68((u16)i);
+            DemonView *demon = partyGetSlot((u16)i);
 
             if ((demon->flags & 1) != 0 && demon->id == (u32)SS(0x1390, s16)) {
                 wantedId = *(u16 *)((u8 *)demon + 300);

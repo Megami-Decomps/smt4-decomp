@@ -6,7 +6,7 @@ extern "C" {
 extern MapIfStateA *g_mapIf;
 extern GameStateA g_gameState;
 f32 distSpatial(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
-void FUN_003d4ed8(u32 effect, f32 x, f32 y, f32 z);
+void soundActorStartOnFreeChannel(u32 effect, f32 x, f32 y, f32 z);
 
 /* Activate the first nearby eligible map record and emit its proximity effect. */
 void FUN_003659f4(f32 x, f32 y, f32 z)
@@ -28,10 +28,10 @@ void FUN_003659f4(f32 x, f32 y, f32 z)
                 f32 effectZ = record->position.z;
                 if (!g_gameState.inputBlocked) {
                     if (record->display.category == 0x31 || record->display.category == 0x30) {
-                        FUN_003d4ed8(0x10002ab, effectX * 0.33333334f,
+                        soundActorStartOnFreeChannel(0x10002ab, effectX * 0.33333334f,
                                      effectY * 0.33333334f, effectZ * 0.33333334f);
                     } else {
-                        FUN_003d4ed8(0x10002ab, effectX, effectY, effectZ);
+                        soundActorStartOnFreeChannel(0x10002ab, effectX, effectY, effectZ);
                     }
                 }
                 record->state = 7;

@@ -5,11 +5,11 @@
 extern "C" {
 s32 gameFlagIsSet(u32);
 void asdTMTexTableReleaseNode(s32 table, s32 node);
-void FUN_002a60cc(void *, u32, s32);
+void packageFileDisableByKindName(void *, u32, s32);
 void aocSlotRelease(SpriteTransitionWork *);
 s32 bustupCutAnimAssignSlot(u32, u32);
 void bustupSpriteStartTransition(SpriteTransitionWork *, s32, s32);
-void FUN_002a4e18(Vec3f *, u32);
+void bustupPlaceActiveSlot(Vec3f *, u32);
 extern void *g_aocSystem;
 
 void FUN_00249c4c(u32 job, u32 resourceId, s32 immediate)
@@ -31,7 +31,7 @@ void FUN_00249c4c(u32 job, u32 resourceId, s32 immediate)
     SpriteResourceView *resource = reinterpret_cast<SpriteResourceView *>(work);
     if (resource->node != -1 && resource->active) {
         asdTMTexTableReleaseNode(work->unk10, resource->node);
-        FUN_002a60cc(g_aocSystem, work->unk10, resource->node);
+        packageFileDisableByKindName(g_aocSystem, work->unk10, resource->node);
         resource->node = -1;
         resource->active = 0;
     }
@@ -64,7 +64,7 @@ void FUN_00249c4c(u32 job, u32 resourceId, s32 immediate)
         SpriteTransitionWork *current = (SpriteTransitionWork *)jobGetWork(job);
         current->start = reinterpret_cast<SpriteResourceView *>(current)->position;
         current->state = 1;
-        FUN_002a4e18(&work->target, work->unk08);
+        bustupPlaceActiveSlot(&work->target, work->unk08);
         break;
     }
     }

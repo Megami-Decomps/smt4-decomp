@@ -4,7 +4,7 @@ extern "C" {
 extern BtlTalkBustUp *g_btlTalkBustUp;
 extern void *g_aocSystem;
 void asdTMTexTableReleaseNode(s32 table, s32 node);
-void FUN_002a60cc(void *system, s32 table, u32 node);
+void packageFileDisableByKindName(void *system, s32 table, u32 node);
 void jobStop(u32 job, s32 mode);
 void asdMemFree(void *allocation);
 
@@ -25,7 +25,7 @@ static __inline void btlTalkBustUpReleaseTextureInline(void)
         if (portrait->textureNode >= 0) {
             asdTMTexTableReleaseNode(24, portrait->textureNode);
             btlTalkBustUpSetUnk2F4(g_btlTalkBustUp, 0);
-            FUN_002a60cc(g_aocSystem, 24, portrait->textureNode);
+            packageFileDisableByKindName(g_aocSystem, 24, portrait->textureNode);
             portrait->textureNode = -1;
         }
         portrait->unk2EC = 0;

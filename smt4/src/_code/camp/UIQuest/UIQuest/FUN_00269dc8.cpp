@@ -9,12 +9,12 @@ int FUN_00189c24(...);
 int uiFadeSetVisible(...);
 int gameFlagClearModeBits(...);
 int FUN_00262210(...);
-int FUN_00295eb0(...);
-int FUN_00297060(...);
+int uiStoreTextureEntryCenter(...);
+int scrScriptProcessCreate(...);
 int fileSlotLoad(...);
 int pairSetHalves(...);
 int timerStart(...);
-int FUN_002bd954(...);
+int uiSpriteStateInitFromSource(...);
 int spriteStartAnimationByIndex(...);
 int uiSpriteInitializeState(...);
 int memClear(...);
@@ -22,7 +22,7 @@ int asdMemAlloc(...);
 int taskCreateDraw(...);
 int asdTMTexTableLoadSprites(...);
 int asdProcessCreateSimple(...);
-int FUN_002c58c8(...);
+int asdTMTexTablePrepareNodeImage(...);
 int drawParameterBlockClear(...);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
@@ -57,14 +57,14 @@ extern unsigned int *g_uiQuest; /* 0x43dd50 */
 /* Supplied declaration required: FUN_00262210. */
 extern int FUN_002886b0(unsigned short);
 extern int FUN_002886c8(unsigned short);
-/* Supplied declaration required: FUN_00295eb0. */
-/* Supplied declaration required: FUN_00297060. */
+/* Supplied declaration required: uiStoreTextureEntryCenter. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 /* Supplied declaration required: fileSlotLoad. */
 extern int FUN_00298f88(unsigned short);
 extern int questReadRuntimeFlag(unsigned short, unsigned int);
 /* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002bd954. */
+/* Supplied declaration required: uiSpriteStateInitFromSource. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: uiSpriteInitializeState. */
 /* Supplied declaration required: paramsInit. */
@@ -73,7 +73,7 @@ extern int questReadRuntimeFlag(unsigned short, unsigned int);
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_002c58c8. */
+/* Supplied declaration required: asdTMTexTablePrepareNodeImage. */
 extern unsigned int asdLoadFileSyncDefault(unsigned char *);
 /* Supplied declaration required: drawParameterBlockClear. */
 
@@ -108,12 +108,12 @@ void FUN_00269dc8(void)
   puVar2[0x16b] = temp_v1;
   temp_v1 = asdLoadFileSyncDefault(&LAB_0026a26c);
   puVar2[0x16c] = temp_v1;
-  FUN_00297060(temp_v1,puVar2[0x16b]);
+  scrScriptProcessCreate(temp_v1,puVar2[0x16b]);
   puVar2[0x16d] = temp_v1;
   *(unsigned short *)((int)puVar2 + 0x982) = 0;
   *(unsigned short *)(puVar2 + 0x261) = 0;
   asdTMTexTableLoadSprites(0x29);
-  FUN_002c58c8(0x29,0);
+  asdTMTexTablePrepareNodeImage(0x29,0);
   fileSlotLoad(0x34);
   FUN_00189c24();
   temp_v0 = 0;
@@ -137,30 +137,30 @@ void FUN_00269dc8(void)
   drawParameterBlockClear(puVar2 + 5);
   paramsInit(reinterpret_cast<UiResourceParameters *>(puVar2 + 5),&DAT_00402e00,0x3c,&DAT_00402e3c,0x60,&DAT_00402e9c,0x3c,0,0,&DAT_00402ed8
                ,0x214);
-  FUN_002bd954(puVar2 + 0xd,0x29,0,puVar2 + 5,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0xd,0x29,0,puVar2 + 5,0xc9);
   timerStart(puVar2 + 0xd,0);
-  FUN_002bd954(puVar2 + 0x30,0x29,0,puVar2 + 5,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x30,0x29,0,puVar2 + 5,0xc9);
   spriteStartAnimationByIndex(puVar2 + 0x30,0);
-  FUN_002bd954(puVar2 + 0x53,0x29,0,puVar2 + 5,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x53,0x29,0,puVar2 + 5,0xc9);
   timerStart(puVar2 + 0x53,4,0);
-  FUN_002bd954(puVar2 + 0x76,0x29,0,puVar2 + 5,0xc9);
-  FUN_002bd954(puVar2 + 0x99,0x29,0x61,puVar2 + 5,0x68);
+  uiSpriteStateInitFromSource(puVar2 + 0x76,0x29,0,puVar2 + 5,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x99,0x29,0x61,puVar2 + 5,0x68);
   spriteStartAnimationByIndex(puVar2 + 0x99,2);
-  FUN_00295eb0(puVar2 + 0x99,0x29,0x2a);
-  FUN_002bd954(puVar2 + 0xbc,0x29,0x5d,puVar2 + 5,0xa1);
+  uiStoreTextureEntryCenter(puVar2 + 0x99,0x29,0x2a);
+  uiSpriteStateInitFromSource(puVar2 + 0xbc,0x29,0x5d,puVar2 + 5,0xa1);
   spriteStartAnimationByIndex(puVar2 + 0xbc,2);
-  FUN_00295eb0(puVar2 + 0xbc,0x29,0x53);
+  uiStoreTextureEntryCenter(puVar2 + 0xbc,0x29,0x53);
   uiSpriteInitializeState(puVar2 + 0xdf,0x29,0xffffffff,0x12,puVar2 + 5,0xc9);
   spriteStartAnimationByIndex(puVar2 + 0xdf,3);
   *(unsigned short *)((int)puVar2 + 0x3b6) = 2;
   pairSetHalves(puVar2 + 0xdf,0,0x78);
   puVar6 = puVar2 + 0x102;
-  FUN_002bd954(puVar6,0x29,0x5c,puVar2 + 5,0xa1);
+  uiSpriteStateInitFromSource(puVar6,0x29,0x5c,puVar2 + 5,0xa1);
   timerStart(puVar6,0);
   FUN_00262210(puVar6,0x29,0x5a,0x5c);
-  FUN_002bd954(puVar2 + 0x125,0x29,0,puVar2 + 5,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x125,0x29,0,puVar2 + 5,0xc9);
   timerStart(puVar2 + 0x125,2,0);
-  FUN_002bd954(puVar2 + 0x148,0x29,0,puVar2 + 5,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x148,0x29,0,puVar2 + 5,0xc9);
   spriteStartAnimationByIndex(puVar2 + 0x148,5);
   puVar2 = g_uiQuest;
   temp_v1 = g_uiQuest[1];

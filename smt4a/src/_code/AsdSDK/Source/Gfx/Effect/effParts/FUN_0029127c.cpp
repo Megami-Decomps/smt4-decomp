@@ -62,10 +62,10 @@ typedef struct EffPartsFile {
 } EffPartsFile;
 
 void sysMemClear(void *block, s32 size);
-void FUN_001b4ddc(void *part);
+void effPartInitDefaults(void *part);
 EffPartNode *FUN_003007a0(void);
-void FUN_003c2df0(EffPartList *list, EffPartNode *node, EffPartNode *parent);
-EffBlock *FUN_00290edc(EffBlock *src);
+void linkedItemsRedirectToReplacement(EffPartList *list, EffPartNode *node, EffPartNode *parent);
+EffBlock *effBlockCloneDeep(EffBlock *src);
 void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 char *libc_strcpy(char *destination, const char *source);
 void asdMemFree(void *block);
@@ -93,7 +93,7 @@ EffPartList *FUN_0029127c(const char *path)
     sysMemClear(list, 0x90);
     list->count = 0;
     list->unk84 = 0;
-    FUN_001b4ddc(list);
+    effPartInitDefaults(list);
     list->header = file->header;
     list->header2 = file->header;
     list->unk74 = file->unk74;
@@ -114,7 +114,7 @@ EffPartList *FUN_0029127c(const char *path)
             node->unk88 = 8;
             node->unk89 = 0;
             node->unk8a = 0;
-            FUN_001b4ddc(node);
+            effPartInitDefaults(node);
             node->flags |= 1;
             node->block = source->block;
             if (source->next != NULL) {
@@ -128,7 +128,7 @@ EffPartList *FUN_0029127c(const char *path)
             node->prev = source;
             list->count++;
         } else {
-            void *block = FUN_00290edc((EffBlock *)((u8 *)file + (u32)entry->block));
+            void *block = effBlockCloneDeep((EffBlock *)((u8 *)file + (u32)entry->block));
 
             node = FUN_003007a0();
             node->block = block;
@@ -144,7 +144,7 @@ EffPartList *FUN_0029127c(const char *path)
             list->count++;
         }
         if ((entry->flags & 2) != 0) {
-            FUN_003c2df0(list, node, effPartListNth(list, entry->parentIndex));
+            linkedItemsRedirectToReplacement(list, node, effPartListNth(list, entry->parentIndex));
         }
         __aeabi_memcpy4(node, entry, 0x90);
         libc_strcpy(node->name, entry->name);

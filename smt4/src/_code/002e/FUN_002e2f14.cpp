@@ -25,7 +25,7 @@ void FUN_002e2f14(ThreadOwner *owner)
     s32 result = FUN_002c40f8(&signaled, handles, 1, 0, -1);
     bool failed = nnResultIsFailure(result);
     if (failed) {
-        FUN_002c526c(result, failed);
+        resultHandleFailure(result, failed);
     }
     owner->thread.joined = 1;
     /* Joined above: finalize the thread, then close its handle through the handle's destructor. */

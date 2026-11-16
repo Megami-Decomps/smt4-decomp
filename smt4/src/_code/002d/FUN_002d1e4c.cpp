@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0021b0f0(void);
 int FUN_0027eee0(void);
 int FUN_00282390(void);
-int FUN_0028250c(void);
+int mathRemPio2f(void);
 int mathGetShortestAngleDelta(void);
 int SBORROW4(int, int);
 int VectorSignedToFloat(unsigned int, int);
@@ -43,7 +43,7 @@ extern int inputIsQuestMenuPressed(void);
 extern int lmapSceneGetUnk0(void);
 /* Supplied declaration required: FUN_0027eee0. */
 /* Supplied declaration required: FUN_00282390. */
-/* Supplied declaration required: FUN_0028250c. */
+/* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: mathGetShortestAngleDelta. */
 extern int padIsButtonPressed(unsigned int);
 extern int slotIsActive(unsigned int);
@@ -388,7 +388,7 @@ LAB_002d21d0:
     temp_v16 = -temp_v15;
   }
   temp_v14 = DAT_004474fc * 0.017453292f;
-  FUN_0028250c();
+  mathRemPio2f();
   temp_v21 = 80.0f;
   temp_v22 = temp_v22 + temp_v14 * 80.0f;
   temp_v14 = DAT_004474fc * temp_v17;
@@ -404,7 +404,7 @@ LAB_002d21d0:
   temp_v23 = *(float *)(g_lmapScene + 0x20);
   temp_v24 = *(float *)(g_lmapScene + 0x24);
   temp_v14 = DAT_004474fc * temp_v17;
-  FUN_0028250c();
+  mathRemPio2f();
   temp_v21 = 300.0f;
   temp_v22 = temp_v22 + temp_v14 * 300.0f;
   temp_v17 = DAT_004474fc * temp_v17;

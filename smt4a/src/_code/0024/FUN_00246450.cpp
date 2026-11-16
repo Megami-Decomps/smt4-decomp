@@ -34,8 +34,8 @@ s32 gameFlagIsSet(s32 flag);
 PopupMessageResource *FUN_00365bc4(s32 message);
 void rt_memcpy(void *destination, const void *source, u32 size);
 void textFormatFullWidthTwoDigits(s32 value, u8 *output);
-const char *FUN_0015f858(s32 value, s32 option);
-const char *FUN_00180118(s32 value);
+const char *dataFindKindRecordWithAocOverrides(s32 value, s32 option);
+const char *dataTable01GetRecordWithAocOverride(s32 value);
 s32 textFormatBuffer(char *destination, const char *format, ...);
 
 // Show the context popup for `context`, filling the message's placeholders from `count` and `value`.
@@ -73,12 +73,12 @@ void FUN_00246450(s32 context, s32 value, s32 count)
                 return;
             }
             if (context == 2) {
-                textFormatBuffer(g_popupState->formatted, format, FUN_0015f858(value, 0));
+                textFormatBuffer(g_popupState->formatted, format, dataFindKindRecordWithAocOverrides(value, 0));
                 g_popupState->message = g_popupState->formatted;
                 return;
             }
             if (context == 3) {
-                const char *name = FUN_0015f858(value, 0);
+                const char *name = dataFindKindRecordWithAocOverrides(value, 0);
                 textFormatFullWidthTwoDigits(count, number);
                 textFormatBuffer(g_popupState->formatted, format, name, number);
                 g_popupState->message = g_popupState->formatted;
@@ -86,7 +86,7 @@ void FUN_00246450(s32 context, s32 value, s32 count)
             }
             if (context == 6) {
                 textFormatFullWidthTwoDigits(count, number);
-                textFormatBuffer(g_popupState->formatted, format, FUN_00180118(value), number);
+                textFormatBuffer(g_popupState->formatted, format, dataTable01GetRecordWithAocOverride(value), number);
                 g_popupState->message = g_popupState->formatted;
             }
             return;

@@ -21,8 +21,8 @@ int FUN_0029cc3c(void);
 int FUN_0029ede8(int, unsigned int, unsigned int, int);
 int gameGetUnitRecord(...);
 int dataTable1bOr1cGetRecord(void);
-int FUN_002bd06c(unsigned int);
-int FUN_002be650(unsigned int, int);
+int dataTable01FindByIdWithAoc(unsigned int);
+int dataFindKindRecordWithAocOverrides(unsigned int, int);
 int FUN_00383674(void);
 int QuestCenter_GetActiveEntry(void);
 
@@ -51,8 +51,8 @@ extern int sys43e188GetState(void);
 /* Supplied declaration required: gameGetUnitRecord. */
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
-/* Supplied declaration required: FUN_002bd06c. */
-/* Supplied declaration required: FUN_002be650. */
+/* Supplied declaration required: dataTable01FindByIdWithAoc. */
+/* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002bff50. */
 extern int gameGetMapBlock(void);
@@ -123,7 +123,7 @@ unsigned int scrComm_QuestUI_RunListLoop(void)
           temp_v1 = 1;
           reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v12), 0x80));
           temp_v5 = (unsigned int)*(unsigned short *)(temp_v9 + 0x16e);
-          FUN_002bd06c(temp_v5);
+          dataTable01FindByIdWithAoc(temp_v5);
           libc_strcpy(reinterpret_cast<unsigned int *>(temp_v12), reinterpret_cast<unsigned int *>(temp_v5));
           textEncodeFontSlot(8,temp_v12);
           FUN_0029ede8(0x18,*(unsigned int *)(temp_v9 + 0x170),0xffffffff,0);
@@ -151,7 +151,7 @@ unsigned int scrComm_QuestUI_RunListLoop(void)
         temp_v8 = *(unsigned int *)(temp_v9 + 0x170);
         reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v12), 0x80));
         temp_v5 = temp_v14;
-        FUN_002be650(temp_v14,1);
+        dataFindKindRecordWithAocOverrides(temp_v14,1);
         libc_strcpy(reinterpret_cast<unsigned int *>(temp_v12), reinterpret_cast<unsigned int *>(temp_v5));
         textEncodeFontSlot(0,temp_v12);
         FUN_0029ede8(0x18,temp_v8,0xffffffff,0);

@@ -8,7 +8,7 @@ extern "C" {
 s32 scrGetArg(s32 index);
 s32 btlResolveEntryChoice(s32 choice);
 void scrSetResult(s32 value);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
 }
 
 static inline u32 candidateEqualityStat(BtlCombatantEntryA *entry, s32 index)
@@ -38,7 +38,7 @@ extern "C" u32 FUN_0038c6dc(void)
     u32 value = scrGetArg(3);
     s32 first;
     s32 count;
-    FUN_00301a08(choice, &first, &count);
+    btlGetEntryChoiceRange(choice, &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlMainStateA *state = btlGetMainState();
         BtlCombatantEntryA *entry = &state->entries[index];
@@ -51,7 +51,7 @@ extern "C" u32 FUN_0038c6dc(void)
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
-        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL && entry->id == id && candidateEqualityStat(entry, stat) == value) {
             scrSetResult(1);
             return 1;

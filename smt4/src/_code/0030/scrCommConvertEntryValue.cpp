@@ -12,11 +12,11 @@ typedef struct Entry003004fc {
 s32 scrGetArg(s32 index);
 Entry003004fc *btlMainFindEntryByListedId(void *state, s32 id);
 s32 gameGetUnitRecord(s32 index);
-s32 FUN_0033b960(s32 value);
+s32 nkmGrowEventLearnRandomSkill(s32 value);
 void gameSavedFlagSet(s16 value);
 
 /* Script command: looks up the value for script argument 0 (a battle entry below 0x6d, a unit record from there on), converts it
- * with FUN_0033b960, calls gameSavedFlagSet when the result is positive and reports it. Returns 1. */
+ * with nkmGrowEventLearnRandomSkill, calls gameSavedFlagSet when the result is positive and reports it. Returns 1. */
 u32 scrCommConvertEntryValue(void)
 {
     s32 id = scrGetArg(0);
@@ -29,7 +29,7 @@ u32 scrCommConvertEntryValue(void)
     } else {
         value = gameGetUnitRecord(id - 0x6d);
     }
-    result = FUN_0033b960(value);
+    result = nkmGrowEventLearnRandomSkill(value);
     if (result > 0) {
         gameSavedFlagSet(result);
     }

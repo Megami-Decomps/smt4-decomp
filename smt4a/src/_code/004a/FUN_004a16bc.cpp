@@ -47,7 +47,7 @@ s32 inputIsQuestConfirmPressed(void);
 s32 inputIsQuestCancelPressed(void);
 s32 gameGetMode(void);
 void FUN_004d0680(QuestMenu *menu);
-const char *FUN_00180118(u32 id);
+const char *dataTable01GetRecordWithAocOverride(u32 id);
 const char *FUN_0014bf3c(u32 id, u32 option);
 char *libc_strcpy(char *destination, const char *source);
 void scrScriptProcessStartEntry(u32 job, u32 entry);
@@ -82,10 +82,10 @@ void FUN_004a16bc(QuestMenu *menu)
     if (selected != 0) {
         char text[304];
         u32 id = rows[flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(menu->holder))].id;
-        libc_strcpy(text, FUN_00180118(id));
-        FUN_003180c4(8, text);
+        libc_strcpy(text, dataTable01GetRecordWithAocOverride(id));
+        scrSetStringSlot(8, text);
         libc_strcpy(text, FUN_0014bf3c(id, 0));
-        FUN_003180c4(16, text);
+        scrSetStringSlot(16, text);
         scrScriptProcessStartEntry(menu->job, 7);
         FUN_003343f0(1);
         menu->state = 8;

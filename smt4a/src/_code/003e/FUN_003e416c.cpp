@@ -14,7 +14,7 @@ struct Area2D68View {
 
 extern "C" {
 Area2D68View* gameDataBlockGetArea2D68(void);
-s32 FUN_003e4230(s32 entryIndex);
+s32 shopGetEntryAvailability(s32 entryIndex);
 
 // Set both area bit arrays for present entries with a zero field and status other than 2.
 void FUN_003e416c(void)
@@ -28,7 +28,7 @@ void FUN_003e416c(void)
         if (entry->unk26 != 0) {
             continue;
         }
-        if (FUN_003e4230(entryIndex) == 2) {
+        if (shopGetEntryAvailability(entryIndex) == 2) {
             continue;
         }
 

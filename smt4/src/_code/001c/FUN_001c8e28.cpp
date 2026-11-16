@@ -37,7 +37,7 @@ unsigned int FUN_001c8e28(void)
       FUN_0029a128(9);
       FUN_0029c4c8(0);
       FUN_0029dfc0(1);
-      FUN_0029e874(1);
+      gameSetIconDisplayEnabled(1);
       FUN_002996d8(0);
       FUN_0029e788();
       saveStartLoadProcess(1);
@@ -145,12 +145,12 @@ unsigned int FUN_001c8e28(void)
       if (!bVar13) {
         FUN_0029c4c8(0);
         FUN_0029dfc0(1);
-        FUN_0029e874(1);
+        gameSetIconDisplayEnabled(1);
       }
       else {
         FUN_0029c4c8(0);
         FUN_0029dfc0(0);
-        FUN_0029e874(1);
+        gameSetIconDisplayEnabled(1);
       }
       FUN_002996d8(!bVar13);
       FUN_0029a084(1,*(unsigned short *)(puVar4[0xd4] + 8));
@@ -168,7 +168,7 @@ unsigned int FUN_001c8e28(void)
       if ((iVar8 != 0) &&
          (puVar2[4] = puVar2[4] + 1, *(char *)((int)DAT_0044de2c + DAT_0044de30 + 0x34c) == '\0')) {
         FUN_0029dfc0(0);
-        FUN_0029e874(1);
+        gameSetIconDisplayEnabled(1);
         FUN_002996d8(0);
       }
       break;
@@ -195,9 +195,9 @@ unsigned int FUN_001c8e28(void)
         puVar4[0x1a] = uVar9;
         uVar9 = FUN_002beda4(puVar4 + 0x6d);
         puVar4[0x1b] = uVar9;
-        FUN_002bf818(puVar4 + 0x27);
-        FUN_002bf818(puVar4 + 0x4a);
-        FUN_002bf818(puVar4 + 0x6d);
+        uiSpriteAdvanceAnimation(puVar4 + 0x27);
+        uiSpriteAdvanceAnimation(puVar4 + 0x4a);
+        uiSpriteAdvanceAnimation(puVar4 + 0x6d);
         puVar2[4] = puVar2[4] + 1;
         if (*(char *)((int)DAT_0044de2c + DAT_0044de30 + 0x34c) == '\0') {
           FUN_0029dfc0(0);
@@ -217,18 +217,18 @@ unsigned int FUN_001c8e28(void)
       puVar4[0x1a] = uVar9;
       uVar9 = FUN_002beda4(puVar4 + 0x6d);
       puVar4[0x1b] = uVar9;
-      FUN_002bf818(puVar4 + 0x27);
-      FUN_002bf818(puVar4 + 0x4a);
-      FUN_002bf818(puVar4 + 0x6d);
+      uiSpriteAdvanceAnimation(puVar4 + 0x27);
+      uiSpriteAdvanceAnimation(puVar4 + 0x4a);
+      uiSpriteAdvanceAnimation(puVar4 + 0x6d);
       if (*(char *)(puVar2 + 0x1c) != '\0') {
         FUN_002a0cc8(0);
         *(unsigned char *)(puVar2 + 0xd5) = 1;
         puVar2[3] = 0;
         puVar2[2] = 2;
         puVar2[4] = 0;
-        uVar9 = FUN_002b8584(0x36,0x51);
+        uVar9 = ifTouchRegionAddRequested(0x36,0x51);
         puVar2[0x10] = uVar9;
-        uVar9 = FUN_002b8584(0x36,0x52);
+        uVar9 = ifTouchRegionAddRequested(0x36,0x52);
         puVar2[0x11] = uVar9;
         *(unsigned char *)((int)puVar2 + 0x37a) = 1;
       }
@@ -248,7 +248,7 @@ unsigned int FUN_001c8e28(void)
       FUN_002a0cc8(0);
       FUN_0029c4c8(0);
       FUN_0029dfc0(1);
-      FUN_0029e874(1);
+      gameSetIconDisplayEnabled(1);
       FUN_002996d8(0);
       if (*(char *)((int)DAT_0044de2c + DAT_0044de30 + 0x34c) == '\0') {
         FUN_0029dfc0(0);
@@ -360,7 +360,7 @@ code_r0x001c9900:
         }
         if (puVar4[0x92] == 0) {
           uVar9 = puVar4[0x90];
-          FUN_00297060(uVar9,puVar4[0x91]);
+          scrScriptProcessCreate(uVar9,puVar4[0x91]);
           puVar4[0x92] = uVar9;
         }
         if (*(char *)((int)puVar4 + 0x49) != '\0') {
@@ -413,9 +413,9 @@ code_r0x001c9900:
     puVar4[0x1a] = uVar9;
     uVar9 = FUN_002beda4(puVar4 + 0x6d);
     puVar4[0x1b] = uVar9;
-    FUN_002bf818(puVar4 + 0x27);
-    FUN_002bf818(puVar4 + 0x4a);
-    FUN_002bf818(puVar4 + 0x6d);
+    uiSpriteAdvanceAnimation(puVar4 + 0x27);
+    uiSpriteAdvanceAnimation(puVar4 + 0x4a);
+    uiSpriteAdvanceAnimation(puVar4 + 0x6d);
     if ((*(char *)((int)puVar4 + 0x23e) != '\0') && (iVar8 = FUN_00295618(), iVar8 != 0)) {
       *(unsigned char *)(puVar4 + 0x12) = 1;
     }
@@ -435,9 +435,9 @@ code_r0x001c9900:
     puVar4[0x1a] = uVar9;
     uVar9 = FUN_002beda4(puVar4 + 0x6d);
     puVar4[0x1b] = uVar9;
-    FUN_002bf818(puVar4 + 0x27);
-    FUN_002bf818(puVar4 + 0x4a);
-    FUN_002bf818(puVar4 + 0x6d);
+    uiSpriteAdvanceAnimation(puVar4 + 0x27);
+    uiSpriteAdvanceAnimation(puVar4 + 0x4a);
+    uiSpriteAdvanceAnimation(puVar4 + 0x6d);
     if ((*(char *)((int)puVar4 + 0x23e) != '\0') && (iVar8 = FUN_00295618(), iVar8 != 0)) {
       *(unsigned char *)(puVar4 + 0x12) = 1;
     }
@@ -534,7 +534,7 @@ code_r0x001c9900:
     }
     break;
   case 7:
-    iVar8 = FUN_002896bc();
+    iVar8 = screenFadesAllReady();
     if (iVar8 == 0) {
       return 0;
     }
@@ -604,7 +604,7 @@ code_r0x001c9900:
         }
         FUN_0029c4c8(0);
         FUN_0029dfc0(1);
-        FUN_0029e874(1);
+        gameSetIconDisplayEnabled(1);
         FUN_002996d8(0);
         FUN_0029963c(1,*(unsigned short *)(puVar4[0xd4] + 8));
         FUN_0029963c(2,*(unsigned short *)(puVar4[0xd4] + 10));
@@ -681,9 +681,9 @@ code_r0x001c9900:
       puVar2[2] = 2;
       puVar2[3] = 0;
       *(unsigned char *)((int)puVar2 + 0x37a) = 1;
-      uVar9 = FUN_002b8584(0x36,0x51);
+      uVar9 = ifTouchRegionAddRequested(0x36,0x51);
       puVar2[0x10] = uVar9;
-      uVar9 = FUN_002b8584(0x36,0x52);
+      uVar9 = ifTouchRegionAddRequested(0x36,0x52);
       puVar2[0x11] = uVar9;
     }
     break;
@@ -694,9 +694,9 @@ code_r0x001c9900:
     puVar4[0x1a] = uVar9;
     uVar9 = FUN_002beda4(puVar4 + 0x6d);
     puVar4[0x1b] = uVar9;
-    FUN_002bf818(puVar4 + 0x27);
-    FUN_002bf818(puVar4 + 0x4a);
-    FUN_002bf818(puVar4 + 0x6d);
+    uiSpriteAdvanceAnimation(puVar4 + 0x27);
+    uiSpriteAdvanceAnimation(puVar4 + 0x4a);
+    uiSpriteAdvanceAnimation(puVar4 + 0x6d);
     if ((*(char *)((int)puVar4 + 0x23e) != '\0') && (iVar8 = FUN_00295618(), iVar8 != 0)) {
       *(unsigned char *)(puVar4 + 0x12) = 1;
     }
@@ -712,7 +712,7 @@ code_r0x001c9900:
     puVar2[3] = 0;
     break;
   case 0xf:
-    iVar8 = FUN_002896bc();
+    iVar8 = screenFadesAllReady();
     if (iVar8 == 0) {
       return 0;
     }

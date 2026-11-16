@@ -12,14 +12,14 @@ static __inline s32 narrowKeyTangent(const PackedAnimKeyNarrow *key)
 }
 
 extern "C" {
-const PackedAnimKeyNarrow *FUN_003f87cc(const NarrowHermiteCurve *curve, f32 time);
+const PackedAnimKeyNarrow *frameCurveFindKeyAtTime(const NarrowHermiteCurve *curve, f32 time);
 f32 nn_math_ARMv6_HermiteC_FAST(f32 firstValue, f32 firstTangent, f32 nextValue,
                                f32 nextTangent, f32 elapsed, f32 duration);
 
 // Decode unsigned 12-bit values and signed 12-bit slopes from four-byte keys.
 f32 FUN_003f982c(const NarrowHermiteCurve *curve, f32 time)
 {
-    const PackedAnimKeyNarrow *key = FUN_003f87cc(curve, time);
+    const PackedAnimKeyNarrow *key = frameCurveFindKeyAtTime(curve, time);
     const PackedAnimKeyNarrow *last = &curve->keys[curve->keyCount - 1];
     f32 keyTime = curve->frameLength * static_cast<f32>(static_cast<u32>(key->frame));
     if (keyTime == time || key == last) {

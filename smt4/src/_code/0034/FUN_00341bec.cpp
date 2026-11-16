@@ -7,7 +7,7 @@ extern f32 DAT_00407ed0[]; /* sine/cosine table: per entry base sine, base cosin
 
 Vec3f *FUN_002a86a4(MovedPart *part);
 void FUN_002a8638(MovedPart *part, f32 *a, f32 *b, f32 *c, f32 *d);
-void *FUN_002c501c(void);
+void *asdCameraGetSavedRenderPairs(void);
 void FUN_002c1edc(void *camera, Vec3f *eye, Vec3f *target, Vec3f *up);
 void FUN_002c1e30(void *camera, s32 flag, f32 a, f32 b, f32 c, f32 d);
 void nn_math_ARMv6_VEC3TransformAsm_2AD44C(Vec3f *out, const Mtx34 *m, const Vec3f *in);
@@ -79,7 +79,7 @@ void FUN_00341bec(Mover *mover)
 
     nn_math_ARMv6_VEC3TransformAsm_2AD44C(&mover->cameraUp, &matrix, &upAxis);
 
-    void *camera = FUN_002c501c();
+    void *camera = asdCameraGetSavedRenderPairs();
     f32 fov[4];
 
     FUN_002c1edc(camera, &mover->cameraEye, &mover->cameraTarget, &mover->cameraUp);

@@ -39,8 +39,8 @@ u32 partyEntryFlagsBit1(s32 index);
 u32 partyEntryFlagsBit3(s32 index);
 u8 idIsAtLeast350(u32 value);
 s32 FUN_00284dbc(u32 id);
-void FUN_00203b40(ScrollSelection *list, s32 count, s32 columns, s32 first, s32 second, s32 third);
-void FUN_002a4964(ScrollSelection *list, s32 index);
+void gridNavigationConfigure(ScrollSelection *list, s32 count, s32 columns, s32 first, s32 second, s32 third);
+void scrollListSetSelectionTracked(ScrollSelection *list, s32 index);
 void uiQuestSortListByEntryKind(s32 mode);
 s32 uiSearchPrimary(ScrollSelection *list);
 s32 objectApplyIfUnblocked(ScrollSelection *list);
@@ -113,12 +113,12 @@ void FUN_001ff724(void)
         }
     }
     qsort(menu->primaryList, primaryCount, 2, dataTable1bOr1cCompareRecordKeys);
-    FUN_00203b40(&menu->primaryCursor, primaryCount, 10, 1, 1, 1);
-    FUN_00203b40(&menu->alternateCursor, alternateCount, 10, 1, 1, 1);
+    gridNavigationConfigure(&menu->primaryCursor, primaryCount, 10, 1, 1, 1);
+    gridNavigationConfigure(&menu->alternateCursor, alternateCount, 10, 1, 1, 1);
     uiQuestSortListByEntryKind(0);
     for (s32 i = 0; i < primaryCount; i++) {
         if (partyEntryFlagsBit1(menu->primaryList[i]) != 0) {
-            FUN_002a4964(&menu->primaryCursor, i);
+            scrollListSetSelectionTracked(&menu->primaryCursor, i);
             break;
         }
     }
@@ -126,7 +126,7 @@ void FUN_001ff724(void)
         if (partyEntryFlagsBit1(menu->alternateList[i]) != 0) {
             ItemDataRecord *quest = dataTable1bOr1cGetRecord(menu->alternateList[i]);
             if (quest != NULL && quest->ordering.sortGroup != 0 && quest->ordering.sortGroup != 10) {
-                FUN_002a4964(&menu->alternateCursor, i);
+                scrollListSetSelectionTracked(&menu->alternateCursor, i);
                 break;
             }
         }

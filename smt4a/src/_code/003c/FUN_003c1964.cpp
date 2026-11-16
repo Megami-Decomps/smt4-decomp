@@ -16,7 +16,7 @@ extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
 s32 btlResolveEntryChoice(s32 choice);
-BattleThresholdEntryView *FUN_003eaf20(BtlMainStateA *state);
+BattleThresholdEntryView *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
 
 /* Tests whether an eligible member of the selected group, or the enabled special member, exceeds a threshold. */
 u32 FUN_003c1964(void)
@@ -35,7 +35,7 @@ u32 FUN_003c1964(void)
     s32 threshold = scrGetArg(1);
     s32 group = btlResolveEntryChoice(scrGetArg(2));
     s32 first, count;
-    FUN_00301a08(group, &first, &count);
+    btlGetEntryChoiceRange(group, &first, &count);
     for (s32 index = first; index < count + first; ++index) {
         BattleThresholdEntryView *entry = &((BattleThresholdEntryView *)btlGetMainState()->entries)[index];
         if ((g_btlCandidateMasks.unavailable & entry->flags) == 0 &&
@@ -46,7 +46,7 @@ u32 FUN_003c1964(void)
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
-        BattleThresholdEntryView *entry = FUN_003eaf20(btlGetMainState());
+        BattleThresholdEntryView *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL && entry->values[property] > threshold) {
             scrSetResult(1);
             return 1;

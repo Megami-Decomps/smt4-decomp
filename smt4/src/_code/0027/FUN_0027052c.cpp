@@ -10,14 +10,14 @@ int FUN_001fc0a8(void);
 int FUN_0027ee24(void);
 int FUN_0027eee0(void);
 int FUN_00282390(void);
-int FUN_0028250c(void);
+int mathRemPio2f(void);
 int mathAbsHeadingErrorToPoint(void);
 int FUN_00295a18(int, int);
 int gameCounterAddSaturating(int, int);
 int asdMdlManagerDestroy(void);
 int eventQueueAddUnique(int);
 int libc_strcpy(unsigned char *, int);
-int FUN_002bf810(int);
+int soundPlaySeUnpanned(int);
 int mapFlagsWriteBit(int, int);
 int FUN_002e8a78(void);
 int FUN_002f3b14(void);
@@ -65,14 +65,14 @@ extern unsigned int lmapSceneGetUnk0(void);
 /* Supplied declaration required: FUN_0027eee0. */
 extern int FUN_0027ef00(void);
 /* Supplied declaration required: FUN_00282390. */
-/* Supplied declaration required: FUN_0028250c. */
+/* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: mathAbsHeadingErrorToPoint. */
 /* Supplied declaration required: FUN_00295a18. */
 /* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_002bf810. */
+/* Supplied declaration required: soundPlaySeUnpanned. */
 extern int gameGetMapBlock(void);
 /* Supplied declaration required: mapFlagsWriteBit. */
 /* Supplied declaration required: FUN_002e8a78. */
@@ -209,7 +209,7 @@ joined_r0x002706c8:
                       temp_v14 = *(float *)(temp_v6 + 100);
                       temp_v11 = *(float *)(temp_v6 + 0x70) * (float)((unsigned long long)temp_v12 >> 0x20);
                       temp_v15 = *(float *)(temp_v6 + 0x6c);
-                      FUN_0028250c();
+                      mathRemPio2f();
                       temp_v14 = temp_v14 + temp_v11 * temp_v13;
                       temp_v11 = *(float *)(temp_v6 + 0x70) * (float)((unsigned long long)temp_v12 >> 0x20);
                       FUN_00282390();
@@ -301,7 +301,7 @@ LAB_002709b8:
           *(unsigned char *)(temp_v6 + 0x78) = 1;
           *(unsigned int *)(temp_v6 + 0x74) = 1;
           if ((temp_v0 == 3 || temp_v0 == 4) || (temp_v0 == 5 || temp_v0 == 7)) {
-            FUN_002bf810(0x10000a7);
+            soundPlaySeUnpanned(0x10000a7);
           }
         }
         temp_v8 = 1;

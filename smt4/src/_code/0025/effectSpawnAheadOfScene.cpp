@@ -9,7 +9,7 @@ extern "C" void effectSpawnAheadOfScene(f32 angle, f32 distance)
 {
     MapVector position = g_lmapScene->position;
     angle = (g_lmapScene->heading + angle) * 0.017453292f;
-    position.x += FUN_0028250c(angle) * distance;
+    position.x += mathRemPio2f(angle) * distance;
     position.z += FUN_00282390(angle) * distance;
     effectSpawnKindTen(position.x, position.y, position.z);
 }

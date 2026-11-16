@@ -16,7 +16,7 @@ EffectTextRequest *effMenuCreate(void *owner);
 void handleHolderFree(EffectTextRequest *request);
 s32 linkedObjGetValue(EffectTextRequest *request);
 s32 formattedTextCopyLabel(EffectTextRequest *request, char *label);
-void FUN_003c2df0(void *list, EffectSelectionItem *from, EffectSelectionItem *to);
+void linkedItemsRedirectToReplacement(void *list, EffectSelectionItem *from, EffectSelectionItem *to);
 void FUN_003ca0ec(void *list, EffectSelectionItem *item);
 
 // Drive the effect editor's number-entry menu: build the "GENERAL n" list on the first call, then
@@ -66,7 +66,7 @@ u32 FUN_003c8878(u32 flags)
             EffectSelectionItem *item = linkedFindItemByIndex(g_effectEditor.selection.list, -input.value);
             if (g_effectEditor.selection.item != item) {
                 FUN_003ca0ec(g_effectEditor.selection.list, g_effectEditor.selection.item);
-                FUN_003c2df0(g_effectEditor.selection.list, g_effectEditor.selection.item, item);
+                linkedItemsRedirectToReplacement(g_effectEditor.selection.list, g_effectEditor.selection.item, item);
             }
         } else {
             FUN_003ca0ec(g_effectEditor.selection.list, g_effectEditor.selection.item);

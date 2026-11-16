@@ -4,7 +4,7 @@
 #include "script/ScriptArgs.h"
 
 extern "C" {
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
 
 /* Sets the script result and reports the command as done. */
 static s32 commandResult(s32 value)
@@ -17,7 +17,7 @@ static s32 commandResult(s32 value)
 u32 FUN_0039d304()
 {
     u32 bit = scrGetArg(0);
-    BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+    BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
     if (entry != NULL && (entry->statusFlags & (1u << bit)) != 0) {
         return commandResult(1);
     }

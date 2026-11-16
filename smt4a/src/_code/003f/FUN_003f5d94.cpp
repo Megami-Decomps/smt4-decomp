@@ -19,9 +19,9 @@ void FUN_003f5d94(DigitPanelDisplay *display, s32 x, u32 color, f32 alpha)
 {
     x += (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
     efctSetSpeed(alpha);
-    FUN_001835b4(2, 0x31, 0, x, color, 0x8D);
-    FUN_001835b4(2, 0x31, 1, x, color, 0x8D);
-    FUN_001835b4(2, 0x31, 9, x, color, 0x8D);
+    texDrawTableEntryAtStoredOrigin(2, 0x31, 0, x, color, 0x8D);
+    texDrawTableEntryAtStoredOrigin(2, 0x31, 1, x, color, 0x8D);
+    texDrawTableEntryAtStoredOrigin(2, 0x31, 9, x, color, 0x8D);
     s32 baseX = vec2GetXInt(&display->position);
     s32 baseY = vec2GetYInt(&display->position);
     f32 baseAlpha = vec2GetSpeed(&display->position);

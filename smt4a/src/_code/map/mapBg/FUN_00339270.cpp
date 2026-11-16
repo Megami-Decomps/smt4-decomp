@@ -6,7 +6,7 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_00178b04(int, unsigned char *, int);
+int asdMemoryAllocTraced(int, unsigned char *, int);
 int FUN_0040a908(unsigned int, int);
 int FUN_0040a918(unsigned int, int);
 
@@ -22,7 +22,7 @@ extern unsigned char LAB_003396e8; /* 0x3396e8 */
 extern int g_mapDepartWork; /* 0x58069c */
 
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_00178b04. */
+/* Supplied declaration required: asdMemoryAllocTraced. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
@@ -61,7 +61,7 @@ unsigned int FUN_00339270(void)
     }
     if (0 < *(int *)(g_mapDepartWork + 0x1c)) {
       temp_v1 = 0x20;
-      FUN_00178b04(0x20,&LAB_00339680,0x4c7);
+      asdMemoryAllocTraced(0x20,&LAB_00339680,0x4c7);
       temp_v2 = 0;
       if (temp_v1 != 0) {
         temp_v2 = modelListInit();
@@ -95,7 +95,7 @@ unsigned int FUN_00339270(void)
     return 0;
   }
   temp_v1 = 0x20;
-  FUN_00178b04(0x20,&LAB_00339680,0x4fe);
+  asdMemoryAllocTraced(0x20,&LAB_00339680,0x4fe);
   temp_v2 = 0;
   if (temp_v1 != 0) {
     temp_v2 = modelListInit();
@@ -138,7 +138,7 @@ unsigned int FUN_00339270(void)
   }
   FUN_001cd3ec((void *)(*(unsigned int *)(g_mapDepartWork + 0xc)),(const char *)temp_v4);
   temp_v1 = 0x20;
-  FUN_00178b04(0x20,&LAB_00339680,0x528);
+  asdMemoryAllocTraced(0x20,&LAB_00339680,0x528);
   temp_v2 = 0;
   if (temp_v1 != 0) {
     temp_v2 = modelListInit();

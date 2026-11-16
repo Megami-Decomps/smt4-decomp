@@ -10,7 +10,7 @@ void renderCtxResetColorScale(RenderCtx *);
 void renderCtxSelectStereoLayout(RenderCtx *);
 extern RenderCtx *g_titleScene;
 extern BtlUiGlobals g_btlUi;
-s32 FUN_002c5d80(u32, u32);
+s32 renderCtxPackPassFlags(u32, u32);
 
 // Draw the lower battle UI only after both texture sets have finished loading.
 s32 FUN_001e4bf0(u32 job)
@@ -28,7 +28,7 @@ s32 FUN_001e4bf0(u32 job)
         }
         if (loaded >= 9) {
             renderCtxSelectStereoLayout(g_titleScene);
-            renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
+            renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
             if (FUN_0028a318())
                 FUN_001e071c(&ui->objC);
             renderStackPop(&g_titleScene->stackA);

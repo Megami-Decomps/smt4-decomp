@@ -4,7 +4,7 @@ extern "C" {
 
 extern u32 scrGetArg(u32 index);
 extern s32 scrSetResult(u32 value);
-extern s32 FUN_0039af04(void);
+extern s32 eventTexHasEmptySlot(void);
 extern u32 npcCreateTextureEffectJob(u32 id, s32 x, s32 y);
 extern void eventTexSetJobParam(u32 handle);
 extern s32 eventInsertSortedTextureJob(u32 id);
@@ -17,7 +17,7 @@ u32 scrCommEventTexJobCreate(void)
     u32 arg2 = scrGetArg(2);
     u32 result = 0;
 
-    if (FUN_0039af04() != 0) {
+    if (eventTexHasEmptySlot() != 0) {
         result = npcCreateTextureEffectJob(id, arg1, arg2);
         eventTexSetJobParam(result);
         eventInsertSortedTextureJob(result);

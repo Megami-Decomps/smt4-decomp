@@ -26,7 +26,7 @@ int FUN_002b8ee0(int, int);
 int eventQueueAddUniqueIfValid(...);
 int timerStart(...);
 int asdTMTexTableEntryAt(int, int);
-int FUN_002bf818(...);
+int uiSpriteAdvanceAnimation(...);
 int FUN_002c1658(...);
 
 /* stack frame of param_1: 10 slot(s), 37 byte(s) */
@@ -64,14 +64,14 @@ extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: messageStatesSetFirst. */
 /* Supplied declaration required: gameGetPlayerData. */
-extern unsigned short FUN_002b8584(unsigned int, int);
+extern unsigned short ifTouchRegionAddRequested(unsigned int, int);
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int buttonHelpGetStatus(void);
 /* Supplied declaration required: FUN_002b8ee0. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
-/* Supplied declaration required: FUN_002bf818. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
@@ -106,7 +106,7 @@ void FUN_00204358(int param_1)
   int temp_v15;
   int temp_v16;
   
-  FUN_002bf818(param_1 + 0x3f4);
+  uiSpriteAdvanceAnimation(param_1 + 0x3f4);
   piVar16 = (int *)(param_1 + 0x3534);
   temp_v10 = param_1 + 0xcfd4;
   temp_v12 = param_1 + 0x50c;
@@ -120,7 +120,7 @@ void FUN_00204358(int param_1)
     timerStart(temp_v12,0);
     temp_v10 = 0;
     do {
-      temp_v1 = FUN_002b8584(0x28,temp_v10 + 0xba);
+      temp_v1 = ifTouchRegionAddRequested(0x28,temp_v10 + 0xba);
       *(unsigned short *)(param_1 + temp_v10 * 2 + 0x357e) = temp_v1;
       temp_v5 = asdTMTexTableEntryAt(0x28,temp_v10 + 0xba);
       temp_v4 = asdTMTexTableEntryAt(0x28,0x117);
@@ -494,7 +494,7 @@ LAB_002049f0:
     buttonHelpSetText(temp_v10,0x323232ff);
     return;
   case 5:
-    temp_v10 = FUN_002bf818(temp_v12);
+    temp_v10 = uiSpriteAdvanceAnimation(temp_v12);
     if (temp_v10 != 0) {
       buttonHelpSetText(0,0x323232ff);
       resultSetMenuState(param_1,0x12);

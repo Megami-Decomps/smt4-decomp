@@ -35,7 +35,7 @@ s32 textureGetIndexedResource(u32);
 
 s32 aocCountTableRecords(AocSystemA *);
 void FUN_00403b84(ContentListScreen *);
-void FUN_00203b40(ContentListScroller *, void *, s32, s32, s32, s32);
+void gridNavigationConfigure(ContentListScroller *, void *, s32, s32, s32, s32);
 u16 FUN_001643b4(u32, s32);
 void sortOwnerRun(ContentListScreen *);
 void FUN_00202400();
@@ -69,7 +69,7 @@ void contentListWaitAndInitialize(ContentListScreen *screen)
     s32 count = dataTableGetCount(table);
     screen->totalCount = count + aocCountTableRecords(g_aocSystem);
     FUN_00403b84(screen);
-    FUN_00203b40(&screen->scroller, screen->rows, screen->visibleCount, 1, 1, 1);
+    gridNavigationConfigure(&screen->scroller, screen->rows, screen->visibleCount, 1, 1, 1);
     for (s32 i = 0; i < 10; ++i) {
         if (i >= screen->visibleCount)
             break;

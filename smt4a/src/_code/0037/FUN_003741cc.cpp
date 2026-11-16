@@ -33,10 +33,10 @@ void FUN_003741cc(SaveSlotTransitionPrefixA *work)
         const SaveSlotMarkerAnchorA *anchor = asdTMTexTableEntryAt(13, work->transitionMode + 0x52);
         RenderCtxA *context = g_renderCtx;
         renderCtxSetB(context, packNibblesAndByte(6, 1, 0));
-        FUN_001835b4(2, 13, 0x4B, anchor->x + x, anchor->y + y, 0x29);
-        FUN_001835b4(2, 13, 0x4A, anchor->x + x, anchor->y + y, 0x29);
-        FUN_001835b4(2, 13, 0x4C, anchor->x + x, anchor->y + y, 0x29);
-        FUN_001835b4(2, 13, 0x4D, anchor->x + x, anchor->y + y, 0x29);
+        texDrawTableEntryAtStoredOrigin(2, 13, 0x4B, anchor->x + x, anchor->y + y, 0x29);
+        texDrawTableEntryAtStoredOrigin(2, 13, 0x4A, anchor->x + x, anchor->y + y, 0x29);
+        texDrawTableEntryAtStoredOrigin(2, 13, 0x4C, anchor->x + x, anchor->y + y, 0x29);
+        texDrawTableEntryAtStoredOrigin(2, 13, 0x4D, anchor->x + x, anchor->y + y, 0x29);
         context = g_renderCtx;
         renderCtxSetB(context, packNibblesAndByte(6, 7, 0));
         efctSetSpeed(1.0f);

@@ -6,7 +6,7 @@ struct ScriptTransitionContext;
 extern "C" {
 s32 scrMessageKindGetValue(void);
 u32 scrGetCommandFrame();
-void FUN_0021bdac(ScriptTransitionContext* context, u32 argument, u32 frame, s32 mode, s32 first, s32 second);
+void messageWindowShowOrPoll(ScriptTransitionContext* context, u32 argument, u32 frame, s32 mode, s32 first, s32 second);
 
 /* Maps the script's transition kind 21 to mode 5; other kinds pass through. */
 static __inline s32 transitionMode(s32 kind)
@@ -23,6 +23,6 @@ void FUN_002378b8()
     ScriptTransitionContext* context = reinterpret_cast<ScriptTransitionContext*>(scrGetCommandOwner());
     u32 argument = scrGetArg(0);
     u32 frame = scrGetCommandFrame();
-    FUN_0021bdac(context, argument, frame, mode, 0, 0);
+    messageWindowShowOrPoll(context, argument, frame, mode, 0, 0);
 }
 }

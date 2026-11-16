@@ -8,7 +8,7 @@ extern GameState g_gameState;
 void FUN_00266fac(s32 mode, s32 id);
 f32 mathDistanceBetweenPoints(f32, f32, f32, f32, f32, f32);
 f32 mathAbsHeadingErrorToPoint(f32, f32, f32, f32, f32, f32, f32);
-ModelSelectionLabel *FUN_00266f30(u32);
+ModelSelectionLabel *dataTable2AGetEntryWithAoc(u32);
 char *libc_strcpy(char *, const char *);
 
 /* Select the nearest active model within the interaction distance and facing cone. */
@@ -43,7 +43,7 @@ void mapSelectNearestInteractiveModel(f32 x, f32 y, f32 z, f32 heading)
         g_deferredMapModels->pending = 1;
         g_deferredMapModels->pendingCount = selected;
         g_deferredMapModels->selection.id = g_deferredMapModels->entries[selected].id;
-        ModelSelectionLabel *label = FUN_00266f30(g_deferredMapModels->entries[selected].modelId);
+        ModelSelectionLabel *label = dataTable2AGetEntryWithAoc(g_deferredMapModels->entries[selected].modelId);
         const char *name = label->name;
         if (name != NULL && (name[0] != '0' || name[1] != '\0')) {
             libc_strcpy(g_deferredMapModels->selection.label, label->name);

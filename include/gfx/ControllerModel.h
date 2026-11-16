@@ -12,7 +12,7 @@ extern "C" {
 void controllerSetDestination(ControllerModel *model, const f32 *position);
 void controllerSetRotationEulerDegrees(ControllerModel *model, f32 x, f32 y, f32 z);
 s32 slots4FGetActiveValue(ControllerModel *model);
-void FUN_003fe86c(ControllerModel *model, u32 index, u8 flags, f32 time, f32 blend);
+void modelPlayClip(ControllerModel *model, u32 index, u8 flags, f32 time, f32 blend);
 }
 
 #endif

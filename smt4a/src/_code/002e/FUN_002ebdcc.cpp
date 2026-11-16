@@ -5,16 +5,16 @@
 
 extern "C" {
 
-int FUN_0015f858(...);
-int FUN_001695a0(void);
-int FUN_00180118(...);
+int dataFindKindRecordWithAocOverrides(...);
+int messageSetScriptDisplayMode(void);
+int dataTable01GetRecordWithAocOverride(...);
 int partyFindSlotById(...);
 int FUN_002292ac(void);
 int messageForwardDefaultMode(...);
 int libc_strcpy(...);
 int asdOperatorNewD(void);
 int asdOperatorDeleteC(...);
-int FUN_003180c4(...);
+int scrSetStringSlot(...);
 int FUN_00359974(...);
 int FUN_003dea6c(...);
 int FUN_00417c24(...);
@@ -61,13 +61,13 @@ typedef struct {
 } void_stack;
 
 extern unsigned int gameGetPlayerName(void);
-/* Supplied declaration required: FUN_0015f858. */
+/* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 extern int engineCleanupIsDone(void);
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_001695a0. */
+/* Supplied declaration required: messageSetScriptDisplayMode. */
 extern int dataTableValueOrZero(unsigned int);
-/* Supplied declaration required: FUN_00180118. */
+/* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
 extern int gameGetOptions(void);
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 extern int goalConditionsSatisfied(unsigned int);
@@ -86,7 +86,7 @@ extern int scrGetCommandFrame(void);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: asdOperatorDeleteC. */
-/* Supplied declaration required: FUN_003180c4. */
+/* Supplied declaration required: scrSetStringSlot. */
 /* Supplied declaration required: eventTexSetFlag. */
 extern int btlTalkBustUpExists(void);
 /* Supplied declaration required: scrSetResult. */
@@ -271,9 +271,9 @@ unsigned int FUN_002ebdcc(void)
         if (*(short *)(temp_v10 + 0x100) == 2) {
           temp_v1 = (unsigned int)*(unsigned short *)(temp_v10 + 0x102);
           temp_v3 = 10;
-          FUN_00180118(temp_v1);
+          dataTable01GetRecordWithAocOverride(temp_v1);
           libc_strcpy(&temp_v13,temp_v1);
-          FUN_003180c4(8,&temp_v13);
+          scrSetStringSlot(8,&temp_v13);
           FUN_00359974(0x18,*(unsigned int *)(temp_v10 + 0x104),0xffffffff,0);
         }
       }
@@ -282,9 +282,9 @@ unsigned int FUN_002ebdcc(void)
         if (*(int *)(temp_v10 + 0x104) == 1) {
           temp_v3 = 8;
         }
-        FUN_0015f858(temp_v1,1);
+        dataFindKindRecordWithAocOverrides(temp_v1,1);
         libc_strcpy(&temp_v13,temp_v1);
-        FUN_003180c4(0,&temp_v13);
+        scrSetStringSlot(0,&temp_v13);
         FUN_00359974(0x18,*(unsigned int *)(temp_v10 + 0x104),0xffffffff,0);
       }
     }
@@ -292,19 +292,19 @@ unsigned int FUN_002ebdcc(void)
       temp_v3 = 8;
       temp_v6 = gameGetOptions();
       temp_v1 = (unsigned int)*(unsigned short *)(temp_v6 + 0x62);
-      FUN_00180118(temp_v1);
+      dataTable01GetRecordWithAocOverride(temp_v1);
       libc_strcpy(&temp_v13,temp_v1);
-      FUN_003180c4(0,&temp_v13);
+      scrSetStringSlot(0,&temp_v13);
       FUN_00359974(0x18,*(unsigned int *)(temp_v4 + temp_v10 * 8 + 0x104),0xffffffff,0);
     }
-    FUN_001695a0();
+    messageSetScriptDisplayMode();
     temp_v11 = 1;
     messageForwardDefaultMode(temp_v2,temp_v3,0,6);
     scrWorkSetValue(1,0);
     scrWorkSetValue(0,3);
     break;
   case 3:
-    FUN_001695a0();
+    messageSetScriptDisplayMode();
     FUN_002292ac();
     temp_v3 = scrWorkGetValue(1);
     temp_v11 = 0;
@@ -352,7 +352,7 @@ unsigned int FUN_002ebdcc(void)
     scrWorkSetValue(0);
     break;
   case 4:
-    FUN_001695a0();
+    messageSetScriptDisplayMode();
     temp_v3 = scrWorkGetValue(1);
     temp_v11 = 0;
     messageForwardDefaultMode(temp_v2,0xc,temp_v3,6);
@@ -368,11 +368,11 @@ unsigned int FUN_002ebdcc(void)
     temp_v10 = scrWorkGetValue(2);
     temp_v3 = gameGetPlayerName();
     libc_strcpy(&temp_v13,temp_v3);
-    FUN_003180c4(0,&temp_v13);
+    scrSetStringSlot(0,&temp_v13);
     if (temp_v10 >= 2) {
       temp_v9 = 0x3b;
     }
-    FUN_001695a0();
+    messageSetScriptDisplayMode();
     temp_v3 = scrWorkGetValue(1);
     temp_v11 = 0;
     messageForwardDefaultMode(temp_v2,temp_v9,temp_v3,6);
@@ -396,7 +396,7 @@ unsigned int FUN_002ebdcc(void)
     asdOperatorNewD();
     puVar12 = (unsigned short *)(temp_v10 + temp_v6 * 2);
     FUN_003dea6c(*puVar12,0,1);
-    FUN_001695a0();
+    messageSetScriptDisplayMode();
     temp_v3 = scrWorkGetValue(1);
     temp_v11 = 0;
     messageForwardDefaultMode(temp_v2,0x10,temp_v3,6);

@@ -16,7 +16,7 @@ typedef struct {
     ShaderBindSymbol uMaterialColor; /* 0x12a40 */
 } ModelShader;
 
-u32 FUN_002b7148(void);
+u32 asdGxGetCommandCursor(void);
 void nn_gr_CTR_Shader_SetupBinary(NativeShaderPrefix *shader, const void *binary, s32 size, s32 index);
 u32 *FUN_002b5cf0(NativeShaderPrefix *shader, u32 *cursor);
 void FUN_002af390(u32 begin, u32 end);
@@ -32,7 +32,7 @@ s32 FUN_0011b498(ModelShader *owner, const void *binary, u32 unused, s32 size)
     u32 begin;
     u32 *end;
 
-    FUN_002b7148();
+    asdGxGetCommandCursor();
     nn_gr_CTR_Shader_SetupBinary(&owner->shader, binary, size, -1);
     owner->binary = binary;
     owner->ready = 0;
@@ -41,7 +41,7 @@ s32 FUN_0011b498(ModelShader *owner, const void *binary, u32 unused, s32 size)
     nn_gr_CTR_Shader_SearchBindSymbol(&owner->shader, &owner->aTexCoord, "aTexCoord");
     nn_gr_CTR_Shader_SearchBindSymbol(&owner->shader, &owner->uMatrix, DAT_00410688);
     nn_gr_CTR_Shader_SearchBindSymbol(&owner->shader, &owner->uMaterialColor, DAT_00410678);
-    u32 *cursor = reinterpret_cast<u32 *>(FUN_002b7148());
+    u32 *cursor = reinterpret_cast<u32 *>(asdGxGetCommandCursor());
     begin = reinterpret_cast<u32>(cursor);
     end = FUN_002b5cf0(&owner->shader, cursor);
     FUN_002af390(begin, reinterpret_cast<u32>(end));

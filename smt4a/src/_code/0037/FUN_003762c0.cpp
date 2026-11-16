@@ -10,7 +10,7 @@ static __inline u32 rectangleColorToNative(u32 color)
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 extern f32 g_uiDrawOffset[2];
-u32 FUN_001692ac(u32 mode, u32 enabled);
+u32 renderCtxPackPassFlags(u32 mode, u32 enabled);
 void FUN_0014e314(u32 colorA, u32 colorB, u32 colorC, u32 colorD,
     f32 x, f32 y, f32 width, f32 height, f32 depth);
 void FUN_002e0924(u32 colorA, u32 colorB, u32 colorC, u32 colorD,
@@ -21,7 +21,7 @@ void FUN_003762c0(s32 x, s32 y, s32 width, s32 height, u32 outlineColor, u32 fil
     RenderCtxA *context = g_renderCtx;
     s32 drawX = (s32)(g_uiDrawOffset[0] + (f32)x);
     s32 drawY = (s32)(g_uiDrawOffset[1] + (f32)y);
-    renderCtxPushA(context, FUN_001692ac(1, 1));
+    renderCtxPushA(context, renderCtxPackPassFlags(1, 1));
     renderCtxSelectTexture(g_renderCtx, 0);
     if (fillColor >> 24) {
         u32 color = rectangleColorToNative(fillColor);

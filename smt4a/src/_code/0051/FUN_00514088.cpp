@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_004acb54(int);
+int transferQueueForwardNext(int);
 int FUN_0050cc3c(int, unsigned int *, unsigned int *);
 int FUN_0050d2cc(void);
 
-/* Supplied declaration required: FUN_004acb54. */
+/* Supplied declaration required: transferQueueForwardNext. */
 /* Supplied declaration required: FUN_0050cc3c. */
 extern unsigned int *FUN_0050cf94(int);
 /* Supplied declaration required: FUN_0050d2cc. */
@@ -48,7 +48,7 @@ FUN_00514088(int param_1,unsigned int param_2,unsigned int *param_3,unsigned int
         param_6[1] = temp_v1;
         return 0;
       }
-      FUN_004acb54(temp_v2);
+      transferQueueForwardNext(temp_v2);
     }
     *param_3 = 0;
     *param_4 = 0;

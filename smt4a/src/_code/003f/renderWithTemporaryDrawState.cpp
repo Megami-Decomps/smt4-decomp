@@ -3,17 +3,17 @@
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
-void FUN_00157558(RenderCtxA *context);
+void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 void efctSetSpeed(f32 speed);
-u32 FUN_001692ac(u32 mode, u32 option);
+u32 renderCtxPackPassFlags(u32 mode, u32 option);
 void renderCtxResetColorScale(RenderCtxA *context);
 void FUN_003f82b8(u32 argument);
 
 // Render under a temporary draw state and restore the standard blend and color settings.
 u32 renderWithTemporaryDrawState(u32 argument)
 {
-    FUN_00157558(g_renderCtx);
-    renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
+    renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
     FUN_003f82b8(argument);
     efctSetSpeed(1.0f);
     renderStackPop(&g_renderCtx->stackA);

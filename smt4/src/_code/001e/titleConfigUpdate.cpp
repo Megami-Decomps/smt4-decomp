@@ -7,15 +7,15 @@
 extern "C" {
 extern TitleConfigCallbackView *g_titleConfig;
 extern TitleConfigValues g_titleConfigValues;
-s32 FUN_002bf818(const void *window);
-u16 FUN_002b8584(u32 group, u32 item);
+s32 uiSpriteAdvanceAnimation(const void *window);
+u16 ifTouchRegionAddRequested(u32 group, u32 item);
 s32 resourceRunOperationIfUnblocked(const void *cursor);
 s32 FUN_0029efa8(const void *cursor);
 const void *dataTableGet(u32 table, u32 group);
 const TitleConfigHelpEntry *dataTableGetEntries(const void *table);
 void buttonHelpSetText(const char *text, u32 color);
 void FUN_00259e98(void);
-void *FUN_00297060(void *dataA, void *dataB);
+void *scrScriptProcessCreate(void *dataA, void *dataB);
 s32 ifTouchGetSelectionModeForRegion(s32 button);
 s32 FUN_002c1658(u32 action, u32 repeat);
 s32 bgmVolumeToStep(u32 value);
@@ -50,22 +50,22 @@ u32 titleConfigUpdate(void)
     TitleConfigCallbackView *work = g_titleConfig;
     switch (work->state) {
     case 0: {
-        if (!asdTMTexTableNodeIsLoaded(0x2F, 0) || !FUN_002bf818(work->window) ||
+        if (!asdTMTexTableNodeIsLoaded(0x2F, 0) || !uiSpriteAdvanceAnimation(work->window) ||
             work->dataA == NULL || work->dataB == NULL) {
             return 0;
         }
-        work->buttons[0] = FUN_002b8584(0x2F, 0x1F);
+        work->buttons[0] = ifTouchRegionAddRequested(0x2F, 0x1F);
         ++work->countA;
-        work->buttons[1] = FUN_002b8584(0x2F, 0x20);
+        work->buttons[1] = ifTouchRegionAddRequested(0x2F, 0x20);
         ++work->countA;
-        work->buttons[2] = FUN_002b8584(0x2F, 0x21);
+        work->buttons[2] = ifTouchRegionAddRequested(0x2F, 0x21);
         ++work->countA;
         s32 selected = resourceRunOperationIfUnblocked(g_titleConfig->cursor);
         selected += FUN_0029efa8(g_titleConfig->cursor);
         const TitleConfigHelpEntry *help = dataTableGetEntries(dataTableGet(0x3A, 1));
         buttonHelpSetText(help[selected].text, 0x323232FF);
         FUN_00259e98();
-        work->process = FUN_00297060(work->dataA, work->dataB);
+        work->process = scrScriptProcessCreate(work->dataA, work->dataB);
         work->state = 1;
         return 0;
     }
@@ -188,7 +188,7 @@ u32 titleConfigUpdate(void)
             return 0;
         }
     case 3:
-        if (FUN_002bf818(work->window)) {
+        if (uiSpriteAdvanceAnimation(work->window)) {
             work->state = 4;
         }
         return 0;

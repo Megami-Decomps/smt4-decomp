@@ -32,7 +32,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: linkHolderApplyFlag. */
 /* Supplied declaration required: FUN_00284ee4. */
 /* Supplied declaration required: FUN_002c39dc. */
-extern int FUN_002e1a18(unsigned int);
+extern int buttonHelpIsActionActive(unsigned int);
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_00319aec. */
 extern int FUN_0039a2d8(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
@@ -64,7 +64,7 @@ unsigned int FUN_00318e84(int param_1)
     *(unsigned int *)(param_1 + 0x100) = 0;
   }
   temp_v0 = padButtonRepeat(10);
-  if ((temp_v0 != 0) || (temp_v0 = FUN_002e1a18(4), temp_v0 != 0)) {
+  if ((temp_v0 != 0) || (temp_v0 = buttonHelpIsActionActive(4), temp_v0 != 0)) {
     if (*(char *)(param_1 + 0x111) != '\0') {
       *(unsigned char *)(param_1 + 0x111) = 0;
     }

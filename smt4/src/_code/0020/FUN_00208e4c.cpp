@@ -15,7 +15,7 @@ int effectSpawnTypeTen(void);
 int vec4Forward(...);
 int FUN_0027eee0(void);
 int FUN_00282390(void);
-int FUN_0028250c(void);
+int mathRemPio2f(void);
 int mathAbsHeadingErrorToPoint(void);
 int mathGetShortestAngleDelta(void);
 int mathPositionHeadingDegrees(void);
@@ -28,7 +28,7 @@ int FUN_0025363c(...);
 int FUN_00253860(...);
 int FUN_00253c70(...);
 int FUN_0025b4b0(...);
-int FUN_00281e34(void);
+int __hardfp_atan2f(void);
 int mathDistanceBetweenPoints(void);
 int lightOwnerRegister(...);
 int randNextInRange(...);
@@ -101,9 +101,9 @@ extern int FUN_00256550(unsigned int);
 /* Supplied declaration required: vec4Forward. */
 extern int spriteTemplateGetPreferredDevilId(void);
 /* Supplied declaration required: FUN_0027eee0. */
-/* Supplied declaration required: FUN_00281e34. */
+/* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: FUN_00282390. */
-/* Supplied declaration required: FUN_0028250c. */
+/* Supplied declaration required: mathRemPio2f. */
 extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002879dc. */
 /* Supplied declaration required: mathAbsHeadingErrorToPoint. */
@@ -720,7 +720,7 @@ LAB_00209c48:
             temp_v22 = (*(float *)(temp_v3 + 200) - temp_v30) * temp_v18;
             temp_v20 = (*(float *)(temp_v3 + 0xd0) - temp_v32) * temp_v18;
             temp_v18 = (*(float *)(temp_v3 + 0xcc) - temp_v31) * temp_v18;
-            FUN_00281e34();
+            __hardfp_atan2f();
             temp_v19 = *(unsigned int *)(temp_v3 + 0x60);
             FUN_002535ec();
             *(unsigned int *)(temp_v3 + 0x60) = temp_v19;
@@ -789,7 +789,7 @@ LAB_00209c48:
         *(unsigned int *)(temp_v3 + 0x6c) = 1;
         mathDistanceBetweenPoints();
         temp_v22 = 1.0f;
-        FUN_00281e34();
+        __hardfp_atan2f();
         temp_v18 = *(float *)(temp_v3 + 0x60);
         FUN_002535ec();
         *(float *)(temp_v3 + 0x60) = temp_v18;
@@ -1032,13 +1032,13 @@ LAB_0020a4b4:
         }
         else {
           mathDistanceBetweenPoints();
-          FUN_00281e34();
+          __hardfp_atan2f();
           temp_v22 = *(float *)(temp_v3 + 0x60);
           FUN_002535ec();
           temp_v20 = 0.017453292f;
           *(float *)(temp_v3 + 0x60) = temp_v22;
           temp_v22 = temp_v22 * 0.017453292f;
-          FUN_0028250c();
+          mathRemPio2f();
           temp_v30 = temp_v30 + temp_v22 * *(float *)(temp_v3 + 0xe8);
           temp_v20 = *(float *)(temp_v3 + 0x60) * temp_v20;
           FUN_00282390();
@@ -1188,13 +1188,13 @@ LAB_0020a9e0:
                 }
                 else {
                   mathDistanceBetweenPoints();
-                  FUN_00281e34();
+                  __hardfp_atan2f();
                   temp_v22 = *(float *)(temp_v3 + 0x60);
                   FUN_002535ec();
                   temp_v20 = 0.017453292f;
                   *(float *)(temp_v3 + 0x60) = temp_v22;
                   temp_v22 = temp_v22 * 0.017453292f;
-                  FUN_0028250c();
+                  mathRemPio2f();
                   temp_v30 = temp_v30 + temp_v22 * *(float *)(temp_v3 + 0xe8);
                   temp_v20 = *(float *)(temp_v3 + 0x60) * temp_v20;
                   FUN_00282390();
@@ -1678,7 +1678,7 @@ LAB_0020b4ec:
             temp_v34 = temp_v31;
             temp_v35 = temp_v32;
             temp_v11 = temp_v22;
-            FUN_0028250c();
+            mathRemPio2f();
             temp_v27 = 100.0f;
             temp_v33 = temp_v33 + temp_v22 * 100.0f;
             FUN_00282390();
@@ -1756,7 +1756,7 @@ LAB_0020b4ec:
         temp_v6 = *(int *)(temp_v3 + 0x11c);
         mathDistanceBetweenPoints();
         if (temp_v6 >= 0x3f800001) {
-          FUN_00281e34();
+          __hardfp_atan2f();
           temp_v19 = *(unsigned int *)(temp_v3 + 0x128);
           FUN_002535ec();
           *(unsigned int *)(temp_v3 + 0x128) = temp_v19;
@@ -1773,7 +1773,7 @@ LAB_0020b4ec:
         }
         if (!(temp_v16 || temp_v6 < 0 != temp_v17)) {
           mathDistanceBetweenPoints();
-          FUN_00281e34();
+          __hardfp_atan2f();
           temp_v19 = *(unsigned int *)(temp_v3 + 0x60);
           FUN_002535ec();
           *(unsigned int *)(temp_v3 + 0x60) = temp_v19;
@@ -1789,7 +1789,7 @@ LAB_0020b4ec:
         }
         temp_v20 = 0.017453292f;
         temp_v22 = *(float *)(temp_v3 + 0x128) * 0.017453292f;
-        FUN_0028250c();
+        mathRemPio2f();
         temp_v30 = temp_v30 + temp_v22 * *(float *)(temp_v3 + 0x108);
         temp_v20 = *(float *)(temp_v3 + 0x128) * temp_v20;
         FUN_00282390();
@@ -1956,7 +1956,7 @@ LAB_0020bd68:
               temp_v6 = *(int *)(temp_v3 + 0x11c);
               mathDistanceBetweenPoints();
               if (temp_v6 >= 0x3f800001) {
-                FUN_00281e34();
+                __hardfp_atan2f();
                 temp_v19 = *(unsigned int *)(temp_v3 + 0x128);
                 FUN_002535ec();
                 *(unsigned int *)(temp_v3 + 0x128) = temp_v19;
@@ -1973,7 +1973,7 @@ LAB_0020bd68:
               }
               if (!(temp_v16 || temp_v6 < 0 != temp_v17)) {
                 mathDistanceBetweenPoints();
-                FUN_00281e34();
+                __hardfp_atan2f();
                 temp_v19 = *(unsigned int *)(temp_v3 + 0x60);
                 FUN_002535ec();
                 *(unsigned int *)(temp_v3 + 0x60) = temp_v19;
@@ -1989,7 +1989,7 @@ LAB_0020bd68:
               }
               temp_v20 = 0.017453292f;
               temp_v22 = *(float *)(temp_v3 + 0x128) * 0.017453292f;
-              FUN_0028250c();
+              mathRemPio2f();
               temp_v30 = temp_v30 + temp_v22 * *(float *)(temp_v3 + 0x108);
               temp_v20 = *(float *)(temp_v3 + 0x128) * temp_v20;
               FUN_00282390();
@@ -2092,7 +2092,7 @@ LAB_0020c014:
             temp_v40 = temp_v31;
             temp_v41 = temp_v32;
             temp_v11 = *(float *)(temp_v3 + 0x104) * 0.017453292f;
-            FUN_0028250c();
+            mathRemPio2f();
             temp_v26 = 100.0f;
             temp_v39 = temp_v39 + temp_v11 * 100.0f;
             temp_v11 = *(float *)(temp_v3 + 0x104) * temp_v27;
@@ -2105,7 +2105,7 @@ LAB_0020c014:
             temp_v6 = FUN_0025b4b0(&temp_v33,&temp_v39,0);
             if (temp_v6 == -1) {
               temp_v18 = *(float *)(temp_v3 + 0x60) * temp_v27;
-              FUN_0028250c();
+              mathRemPio2f();
               temp_v30 = temp_v30 + temp_v18 * *(float *)(temp_v3 + 0xe8);
               temp_v27 = *(float *)(temp_v3 + 0x60) * temp_v27;
               FUN_00282390();
@@ -2499,7 +2499,7 @@ LAB_0020a934:
                                               (unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v22 = *(float *)(temp_v3 + 0x168);
           temp_v18 = (180.0f / *(float *)(temp_v3 + 0x158)) * temp_v18 * 0.017453292f;
-          FUN_0028250c();
+          mathRemPio2f();
           temp_v31 = temp_v31 + temp_v18 * temp_v22;
           *(float *)(temp_v3 + 0x54) = temp_v30;
           *(float *)(temp_v3 + 0x58) = temp_v31;
@@ -2515,7 +2515,7 @@ LAB_0020a934:
           temp_v31 = *(float *)(temp_v3 + 0x58);
           temp_v32 = *(float *)(temp_v3 + 0x5c);
           mathDistanceBetweenPoints();
-          FUN_00281e34();
+          __hardfp_atan2f();
           temp_v19 = *(unsigned int *)(temp_v3 + 0x60);
           FUN_002535ec();
           *(unsigned int *)(temp_v3 + 0x60) = temp_v19;

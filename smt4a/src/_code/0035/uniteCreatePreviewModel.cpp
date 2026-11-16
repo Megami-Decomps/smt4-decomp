@@ -20,14 +20,14 @@ extern const char DAT_0052f264[];
 extern const char DAT_0052f298[];
 f32 candidateGetPreferredValue(void *candidate);
 u32 asdVramBGetFreeBytes();
-void *FUN_00178b04(u32 size, const char *file, u32 line);
+void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 RegisteredHandle *modelListInit(RegisteredHandle *list);
-void FUN_0040aa6c(RegisteredHandle *list, const char *name);
+void resourceOwnerLoadFileSync(RegisteredHandle *list, const char *name);
 void FUN_0040a908(RegisteredHandle *list, u32 bytes);
 void FUN_0040a918(RegisteredHandle *list, u32 bytes);
 void FUN_0040aad4(RegisteredHandle *list, s32 mode);
 void handleRegistryRegisterObject(void *registry, FusionPreviewObject *object);
-void FUN_003fe86c(FusionPreviewObject *object, s32 index, s32 mode, f32 first, f32 second);
+void modelPlayClip(FusionPreviewObject *object, s32 index, s32 mode, f32 first, f32 second);
 }
 
 /* Lazily create and register the fusion preview model using the available VRAM budget. */
@@ -45,19 +45,19 @@ extern "C" void uniteCreatePreviewModel()
             budget = 0x30000;
         }
         RegisteredHandle *list = static_cast<RegisteredHandle *>(
-            FUN_00178b04(32, DAT_0052f264, 0x23e8));
+            asdMemoryAllocTraced(32, DAT_0052f264, 0x23e8));
         if (list != NULL) {
             list = modelListInit(list);
         }
         work->registered.handle = list;
-        FUN_0040aa6c(list, DAT_0052f298);
+        resourceOwnerLoadFileSync(list, DAT_0052f298);
         FUN_0040a908(work->registered.handle, budget);
         FUN_0040a918(work->registered.handle, budget);
         FUN_0040aad4(work->registered.handle, 0);
         FusionPreviewObject *object = reinterpret_cast<FusionPreviewObject *>(work->registered.handle->id);
         handleRegistryRegisterObject(g_handleRegistry, object);
-        FUN_003fe86c(object, 0, 2, 0.0f, 0.0f);
+        modelPlayClip(object, 0, 2, 0.0f, 0.0f);
         object->flags &= ~3;
-        FUN_003fe86c(object, 0, 2, preferred, 0.0f);
+        modelPlayClip(object, 0, 2, preferred, 0.0f);
     }
 }

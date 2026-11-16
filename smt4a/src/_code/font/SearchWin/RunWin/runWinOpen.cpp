@@ -11,7 +11,7 @@ extern "C" {
 
 typedef void (*VoidFunc)(void);
 
-void FUN_0014e188(void *ui, int a, int b, void *sound, int c, f32 scale);
+void uiSpriteStateInitFromSource(void *ui, int a, int b, void *sound, int c, f32 scale);
 int uiSpriteSelectAnim(void *ui, int arg);
 
 int sysMemClear(void *ptr, int size);                  /* zero a block */
@@ -58,7 +58,7 @@ void runWinOpen(void)
     taskCreateDraw("RunWin DrawDown", 0xed, 0, 0, FUN_00208650, 0, 0, run->task);
     paramsClearPacket(run->sound);
     paramsInit(reinterpret_cast<UiResourceParameters *>(run->sound), runWinResource0, 0x24, runWinResource1, 0x24, 0, 0, 0, 0, runWinResource2, 0x70);
-    FUN_0014e188(run->ui, 8, 0x87, run->sound, 1, 1.0f);
+    uiSpriteStateInitFromSource(run->ui, 8, 0x87, run->sound, 1, 1.0f);
     uiSpriteSelectAnim(run->ui, 0);
 }
 

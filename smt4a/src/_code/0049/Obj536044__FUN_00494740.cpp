@@ -37,7 +37,7 @@ void scrRunOpcodesStub(void *);
 s32 FUN_0040ab8c();
 void FUN_0040aad4(EquipmentMenuResource *, s32);
 void handleRegistryRegisterObject(u32, u32);
-void FUN_003fd7b4(u32, f32, f32, f32);
+void controllerSetPositionXyz(u32, f32, f32, f32);
 }
 
 // Moves on from the page's open animation: the item pages wait for the fade, the buy and sell pages
@@ -88,6 +88,6 @@ void Obj536044::FUN_00494740()
         FUN_0040aad4(scene->resource, 0);
         u32 handle = scene->resource->handle;
         handleRegistryRegisterObject(g_handleRegistry, handle);
-        FUN_003fd7b4(handle, 0.0f, -32000.0f, 0.0f);
+        controllerSetPositionXyz(handle, 0.0f, -32000.0f, 0.0f);
     }
 }

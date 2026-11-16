@@ -44,9 +44,9 @@ struct UnlockLogWork {
 };
 
 extern "C" {
-UnlockLogScript *FUN_00275bc8(void *flow, u32 screen);
+UnlockLogScript *scrScriptProcessCreate(void *flow, u32 screen);
 void FUN_003f5bd8(UnlockLogWork *work, s32 count);
-void FUN_00203b40(ScrollSelection *list, s32 count, s32 visible, s32 columns, s32 enabled, s32 colors);
+void gridNavigationConfigure(ScrollSelection *list, s32 count, s32 visible, s32 columns, s32 enabled, s32 colors);
 s32 FUN_001643b4(u32 group, u32 index);
 void dialogEnterState(UnlockLogWork *work, u32 state, u32 argument);
 
@@ -62,7 +62,7 @@ void unlockLogMenuInitializeReadyResources(UnlockLogWork *work)
     void *table = dataTableGet(0x44, 0);
     work->entries = static_cast<UnlockLogEntry *>(dataTableGetEntries(table));
     work->entryCount = dataTableGetCount(table);
-    work->script = FUN_00275bc8(work->flow, work->screen);
+    work->script = scrScriptProcessCreate(work->flow, work->screen);
     work->script->state = 2;
     work->unk3c = 0;
     FUN_003f5bd8(work, (s32)work->entryCount);
@@ -70,7 +70,7 @@ void unlockLogMenuInitializeReadyResources(UnlockLogWork *work)
         work->neighbors[index] = work->selected + index - 5;
     work->current = &work->entries[work->filtered[0]];
     work->visible = work->count < 4 ? work->count : 4;
-    FUN_00203b40(&work->list, work->count, work->visible, 1, 1, 1);
+    gridNavigationConfigure(&work->list, work->count, work->visible, 1, 1, 1);
     for (s32 index = 0; index < 4 && index < work->visible; ++index) {
         work->rowRegions[index] = FUN_001643b4(0x31, index + 0x88);
         ++work->regionCount;

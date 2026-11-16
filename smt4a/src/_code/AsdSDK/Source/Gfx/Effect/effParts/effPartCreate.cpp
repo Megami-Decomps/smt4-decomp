@@ -9,7 +9,7 @@ extern const char g_effPartsSourcePath[]; /* "c:\SMT4F\SMT4F\AsdSDK\Source\Gfx\E
 
 void *memAlloc(int, int, int, int size, int align, int);
 void sysMemClear(void *block, s32 size);
-void FUN_001b4ddc(EffPart *part);
+void effPartInitDefaults(EffPart *part);
 
 /* Creates a part object: a zeroed 0x90-byte block with unk80/unk84 cleared, then initialized. */
 EffPart *effPartCreate(void)
@@ -20,7 +20,7 @@ EffPart *effPartCreate(void)
     sysMemClear(part, 0x90);
     part->unk80 = 0;
     part->unk84 = 0;
-    FUN_001b4ddc(part);
+    effPartInitDefaults(part);
     return part;
 }
 

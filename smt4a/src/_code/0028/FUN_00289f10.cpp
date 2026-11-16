@@ -27,8 +27,8 @@ extern "C" {
 extern RenderCtxA *g_renderCtx;
 
 void FUN_00230038(SpriteJobWork *work);
-s32 FUN_001692ac(u32 a, u32 b);
-s32 FUN_00387580(u32 mode);
+s32 renderCtxPackPassFlags(u32 a, u32 b);
+s32 renderCtxPackPassFlagsWithAlpha(u32 mode);
 void FUN_003fba4c(s32 sprite, s32 layer, s32 frame, s32 *origin, u32 color, s32 mode);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
@@ -50,9 +50,9 @@ u32 FUN_00289f10(u32 job)
             work->prepared = 1;
         }
         RenderCtxA *context = g_renderCtx;
-        renderStackPush(&context->stackA, FUN_001692ac(5, 1));
+        renderStackPush(&context->stackA, renderCtxPackPassFlags(5, 1));
         context = g_renderCtx;
-        renderStackPush(&context->additional.stackC, FUN_00387580(6));
+        renderStackPush(&context->additional.stackC, renderCtxPackPassFlagsWithAlpha(6));
 
         bool twoPass = work->spriteId == SPRITE_ID_FADE_A || work->spriteId == SPRITE_ID_FADE_B
                        || work->spriteId == SPRITE_ID_FADE_C;

@@ -18,7 +18,7 @@ int soundChannelRequestIfEnabled(int, int, int);
 int soundChannelStopAll(int);
 void bgmRequestSelectedChannelFade(unsigned int frames);
 int FUN_003e503c(unsigned int);
-int FUN_00408184(int, int);
+int gameCounterAddSaturating(int, int);
 int VectorSignedToFloat(int, int);
 int VectorUnsignedToFloat(unsigned int, int);
 
@@ -50,7 +50,7 @@ extern int FUN_003ddfd8(void);
 extern int actorIsActive(void);
 extern int partySlotMatchesSelected(unsigned int);
 /* Supplied declaration required: FUN_003e503c. */
-/* Supplied declaration required: FUN_00408184. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 extern int bitsAt60Test(int, unsigned int);
 extern int mapMainIsBusy(void);
 
@@ -144,9 +144,9 @@ void FUN_00331714(int param_1)
     if (temp_v15 >= 6) {
       temp_v15 = FUN_001bd100(*(unsigned short *)(param_1 + 0x38));
       if (temp_v15 == 0) {
-        FUN_00408184(0x22,1);
-        FUN_00408184(0x23,temp_v5);
-        FUN_00408184(0x24,temp_v12);
+        gameCounterAddSaturating(0x22,1);
+        gameCounterAddSaturating(0x23,temp_v5);
+        gameCounterAddSaturating(0x24,temp_v12);
       }
       temp_v12 = *(int *)(param_1 + 0x34);
       temp_v5 = playerHasFlagBit(1);

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002bcc60(...);
-int FUN_002c526c(...);
+int resultHandleFailure(...);
 
 /* stack frame of param_4: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -25,7 +25,7 @@ extern int FUN_00153400(...); /* 0x153400 */
 extern unsigned char LAB_001559dc; /* 0x1559dc */
 
 /* Supplied declaration required: FUN_002bcc60. */
-/* Supplied declaration required: FUN_002c526c. */
+/* Supplied declaration required: resultHandleFailure. */
 extern void nn_os_LightEvent_Initialize(unsigned int, unsigned char);
 
 
@@ -56,7 +56,7 @@ unsigned int FUN_0014fbec(int param_1,int param_2,int param_3,unsigned int param
       temp_v4 = &LAB_001525f8;
       FUN_002bcc60(temp_v0,&temp_v1,FUN_00153400,&temp_v5,param_2 + param_3,param_4,0,0);
       if (((temp_v0 & 0x7e00000) != 0x600000) && ((int)temp_v0 < 0)) {
-        FUN_002c526c(temp_v0);
+        resultHandleFailure(temp_v0);
       }
       *(unsigned char *)(param_1 + 0xe) = (unsigned char)(temp_v0 >> 0x1f) ^ 1;
     }

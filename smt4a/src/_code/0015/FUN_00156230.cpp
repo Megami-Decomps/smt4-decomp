@@ -5,7 +5,7 @@
 
 extern "C" {
 extern MenuState *g_menuState;
-s32 FUN_00163aa4(UiSpriteState *sprite, f32 speed);
+s32 uiSpriteAdvanceAnimation(UiSpriteState *sprite, f32 speed);
 s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 
 // Advance the opening, closing and delayed multi-panel animation phases.
@@ -28,23 +28,23 @@ u32 FUN_00156230(void)
     MenuAnimationView *work = reinterpret_cast<MenuAnimationView *>(g_menuState);
     switch (work->mode) {
     case 1:
-        if (FUN_00163aa4(&work->sprites[0], 1.0f)) {
+        if (uiSpriteAdvanceAnimation(&work->sprites[0], 1.0f)) {
             work->timer = 0;
             work->mode = 2;
         }
         break;
     case 4:
-        if (FUN_00163aa4(&work->sprites[0], 1.0f))
+        if (uiSpriteAdvanceAnimation(&work->sprites[0], 1.0f))
             work->mode = 0;
         break;
     case 5:
         if (work->phase == 0) {
-            FUN_00163aa4(&work->sprites[0], 1.0f);
-            FUN_00163aa4(&work->sprites[2], 1.0f);
+            uiSpriteAdvanceAnimation(&work->sprites[0], 1.0f);
+            uiSpriteAdvanceAnimation(&work->sprites[2], 1.0f);
             if (uiSpriteGetCompletionState(&work->sprites[0]) && uiSpriteGetCompletionState(&work->sprites[2])) {
                 work->timer = 0;
                 work->phase = 2;
-                FUN_00163aa4(&work->sprites[1], 1.0f);
+                uiSpriteAdvanceAnimation(&work->sprites[1], 1.0f);
             }
             break;
         }
@@ -53,15 +53,15 @@ u32 FUN_00156230(void)
             uiSpriteSelectAnim(&work->sprites[3], 5);
             work->phase = 3;
         }
-        if (work->phase == 3 && FUN_00163aa4(&work->sprites[3], 1.0f))
+        if (work->phase == 3 && uiSpriteAdvanceAnimation(&work->sprites[3], 1.0f))
             work->phase = 4;
         // The middle panel continues through each delayed transition phase.
     case 2:
-        FUN_00163aa4(&work->sprites[1], 1.0f);
+        uiSpriteAdvanceAnimation(&work->sprites[1], 1.0f);
         break;
     case 6:
-        FUN_00163aa4(&work->sprites[0], 1.0f);
-        FUN_00163aa4(&work->sprites[2], 1.0f);
+        uiSpriteAdvanceAnimation(&work->sprites[0], 1.0f);
+        uiSpriteAdvanceAnimation(&work->sprites[2], 1.0f);
         if (uiSpriteGetCompletionState(&work->sprites[0]) && uiSpriteGetCompletionState(&work->sprites[2]))
             work->mode = 0;
         break;

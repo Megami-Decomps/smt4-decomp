@@ -5,7 +5,7 @@
 
 extern "C" {
 extern MessageGlobalsA g_messageMain;
-void FUN_0014e188(void *sprite, u32 table, u32 id, void *source, u32 group, f32 scale);
+void uiSpriteStateInitFromSource(void *sprite, u32 table, u32 id, void *source, u32 group, f32 scale);
 
 /* Script command: create the banner's sprites and start its fade-in animation; true while it has not begun. */
 u8 FUN_003c55e8(void)
@@ -14,12 +14,12 @@ u8 FUN_003c55e8(void)
     if (scrGetCommandFrame() == 0) {
         s32 style = scrGetArg(0);
         MessagePanelA *p = g_messageMain.panel;
-        FUN_0014e188(p->spritesCA4[15], 4, 0xabf9, p->block194, 0xb, 1.0f);
-        FUN_0014e188(p->spritesCA4[16], 4, 0xac04, p->block194, 0xb, 1.0f);
-        FUN_0014e188(p->spritesCA4[17], 4, 0xabff, p->block194, 0xb, 1.0f);
-        FUN_0014e188(p->spritesCA4[18], 4, 0xac01, p->block194, 0xb, 1.0f);
-        FUN_0014e188(p->spritesCA4[19], 4, 0xac01, p->block194, 0xb, 1.0f);
-        FUN_0014e188(p->spritesCA4[20], 4, 0xabfe, p->block194, 0xb, 1.0f);
+        uiSpriteStateInitFromSource(p->spritesCA4[15], 4, 0xabf9, p->block194, 0xb, 1.0f);
+        uiSpriteStateInitFromSource(p->spritesCA4[16], 4, 0xac04, p->block194, 0xb, 1.0f);
+        uiSpriteStateInitFromSource(p->spritesCA4[17], 4, 0xabff, p->block194, 0xb, 1.0f);
+        uiSpriteStateInitFromSource(p->spritesCA4[18], 4, 0xac01, p->block194, 0xb, 1.0f);
+        uiSpriteStateInitFromSource(p->spritesCA4[19], 4, 0xac01, p->block194, 0xb, 1.0f);
+        uiSpriteStateInitFromSource(p->spritesCA4[20], 4, 0xabfe, p->block194, 0xb, 1.0f);
         p->unk19FC = style;
         p->unk19FB = 1;
         p->unk19FA = 1;

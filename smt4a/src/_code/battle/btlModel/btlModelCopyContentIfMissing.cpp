@@ -5,7 +5,7 @@ struct BattleModelHolder {
 };
 
 extern "C" {
-void *FUN_00178b04(u32, const char *, s32);
+void *asdMemoryAllocTraced(u32, const char *, s32);
 MoriModelContent *modelListInit(void *);
 void moriModelContentCopyBody(MoriModelContent *, MoriModelContent *, u32);
 
@@ -13,7 +13,7 @@ void moriModelContentCopyBody(MoriModelContent *, MoriModelContent *, u32);
 void btlModelCopyContentIfMissing(BattleModelHolder *destination, const BattleModelHolder *source)
 {
     if (destination->content == NULL) {
-        MoriModelContent *content = (MoriModelContent *)FUN_00178b04(0x20,
+        MoriModelContent *content = (MoriModelContent *)asdMemoryAllocTraced(0x20,
             "c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlModel.cpp", 0x95);
         if (content != NULL)
             content = modelListInit(content);

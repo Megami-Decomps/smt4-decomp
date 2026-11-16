@@ -4,7 +4,7 @@
 extern "C" {
 extern StatusDownListIV *g_statusDown;
 void rt_memcpy(void *destination, const void *source, u32 size);
-void FUN_0029f848(ScrollSelection *selection, u32 count, u32 visible, u32 option, u32 first, u32 second);
+void gridNavigationConfigure(ScrollSelection *selection, u32 count, u32 visible, u32 option, u32 first, u32 second);
 }
 
 // Populate the bounded status-down list and select its nonzero prefix.
@@ -21,7 +21,7 @@ extern "C" void statusReplaceSkills(const u16 *ids, u8 count)
         if (work->ids[used] == 0)
             break;
     }
-    FUN_0029f848(&work->selection, used, 8, 1, 0, 1);
+    gridNavigationConfigure(&work->selection, used, 8, 1, 0, 1);
     work->active = 1;
     work->dirty = 0;
 }

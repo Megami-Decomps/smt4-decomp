@@ -42,7 +42,7 @@ extern "C" {
 extern GameStateA g_gameState;
 void uiSpriteBankApplyPreset(ButtonHelpDisplayUnit *unit, u32 preset);
 void FUN_00168980(u32 sound);
-s32 FUN_00163aa4(ButtonHelpDisplayUnit *unit, f32 step);
+s32 uiSpriteAdvanceAnimation(ButtonHelpDisplayUnit *unit, f32 step);
 void msgWindowReset(void);
 void sub68OwnerDestroy(void);
 s32 vec2GetYInt(const void *point);
@@ -63,11 +63,11 @@ void _ZN9Obj53230012FUN_0048c1c0Ev(NaviCategorySelectionWork *work)
         return;
     case 1: {
         for (s32 index = 0; index < 6; ++index)
-            FUN_00163aa4(&((NaviCategoryTransitionView *)work)->entries[index], 1.0f);
-        FUN_00163aa4(&((NaviCategoryTransitionView *)work)->upper, 1.0f);
-        FUN_00163aa4(&((NaviCategoryTransitionView *)work)->lower, 1.0f);
+            uiSpriteAdvanceAnimation(&((NaviCategoryTransitionView *)work)->entries[index], 1.0f);
+        uiSpriteAdvanceAnimation(&((NaviCategoryTransitionView *)work)->upper, 1.0f);
+        uiSpriteAdvanceAnimation(&((NaviCategoryTransitionView *)work)->lower, 1.0f);
         ButtonHelpDisplayUnit *cursor = &((NaviCategoryTransitionView *)work)->cursor;
-        if (FUN_00163aa4(cursor, 1.0f) && FUN_002e19f8()) {
+        if (uiSpriteAdvanceAnimation(cursor, 1.0f) && FUN_002e19f8()) {
             work->selection = work->selectedIcon;
             work->refresh[0] = 1;
             work->refresh[1] = 1;

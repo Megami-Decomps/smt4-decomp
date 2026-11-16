@@ -18,7 +18,7 @@ void efctSetSpeed(f32 speed);
 u32 FUN_004038e0(u32 effect, u16 kind);
 CardPoint *asdTMTexTableEntryAt(s32 group, s32 part);
 void drawSetColorFromRGBA8(u32 color);
-void FUN_00183bb0(void);
+void gxResetColorQuadToWhite(void);
 void *gameGetPlayerData(void);
 const char *gameGetPlayerName(void);
 void textFormatBuffer(u8 *buffer, const char *format, ...);
@@ -38,20 +38,20 @@ void FUN_00404f40(u32 effect, u16 cardId, s32 x, s32 y, f32 speed, u32 arg5, u32
     case 2: case 4: case 6: case 8: case 10: case 12: case 14: case 16: case 18: {
         drawSetColorFromRGBA8(0x57D8FFFF);
         CardPoint *shadow = asdTMTexTableEntryAt(0x32, 0x97);
-        FUN_001835b4(2, 0x32, 1000, shadow->x + x, shadow->y + y, 0x6A);
+        texDrawTableEntryAtStoredOrigin(2, 0x32, 1000, shadow->x + x, shadow->y + y, 0x6A);
         CardPoint *frame = asdTMTexTableEntryAt(0x32, 0x96);
         s32 frameX = frame->x + x;
         s32 frameY = frame->y + y;
-        FUN_001835b4(2, 0x32, frameSprite, frameX, frameY, 0x6B);
-        FUN_001835b4(2, 0x32, 0x3F1, frameX, frameY, 0x6B);
-        FUN_00183bb0();
+        texDrawTableEntryAtStoredOrigin(2, 0x32, frameSprite, frameX, frameY, 0x6B);
+        texDrawTableEntryAtStoredOrigin(2, 0x32, 0x3F1, frameX, frameY, 0x6B);
+        gxResetColorQuadToWhite();
         break;
     }
     default: {
         CardPoint *shadow = asdTMTexTableEntryAt(0x32, 0x97);
-        FUN_001835b4(2, 0x32, 1000, shadow->x + x, shadow->y + y, 0x6A);
+        texDrawTableEntryAtStoredOrigin(2, 0x32, 1000, shadow->x + x, shadow->y + y, 0x6A);
         CardPoint *frame = asdTMTexTableEntryAt(0x32, 0x96);
-        FUN_001835b4(2, 0x32, frameSprite, frame->x + x, frame->y + y, 0x6B);
+        texDrawTableEntryAtStoredOrigin(2, 0x32, frameSprite, frame->x + x, frame->y + y, 0x6B);
         break;
     }
     }
@@ -72,8 +72,8 @@ void FUN_00404f40(u32 effect, u16 cardId, s32 x, s32 y, f32 speed, u32 arg5, u32
         CardPoint *mark = asdTMTexTableEntryAt(0x32, 0x9A);
         x += mark->x;
         y += mark->y;
-        FUN_001835b4(2, 0x32, 0x9C, x, y, 0x79);
-        FUN_001835b4(2, 0x32, 0x9D, x, y, 0x7A);
+        texDrawTableEntryAtStoredOrigin(2, 0x32, 0x9C, x, y, 0x79);
+        texDrawTableEntryAtStoredOrigin(2, 0x32, 0x9D, x, y, 0x7A);
     }
     efctSetSpeed(1.0f);
 }

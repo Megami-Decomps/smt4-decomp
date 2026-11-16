@@ -17,7 +17,7 @@ int pairCopy(int, float *);
 int FUN_00231bcc(int, int, int);
 int flaggedEntryGetValueByState(...);
 int drawSetColorFromRGBA8(...);
-int FUN_002bed3c(void);
+int gxResetColorQuadToWhite(void);
 int uiMenuAnchorGetOffset(int, float [3]);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
@@ -45,7 +45,7 @@ extern unsigned long long rangeLimitMin(int);
 /* Supplied declaration required: flaggedEntryGetValueByState. */
 extern int FUN_0029e924(int);
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: FUN_002bed3c. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: uiMenuAnchorGetOffset. */
 
 
@@ -203,7 +203,7 @@ LAB_0022cd30:
               temp_v0 = temp_v0 + 1;
             } while (temp_v0 < temp_v1);
           }
-          FUN_002bed3c();
+          gxResetColorQuadToWhite();
           temp_v2 = *(int *)(param_1 + 0x14);
           if (((temp_v2 == 2 || temp_v2 == 3) || (temp_v2 == 7 || temp_v2 == 4)) ||
              (temp_v2 == 5 || temp_v2 == 8)) {
@@ -226,7 +226,7 @@ LAB_0022cd30:
             temp_v16 = (float)(temp_v2 * 0x20 + 0x49361c);
             digitsDrawAtAreaCorner(param_1 + 200,*(unsigned int *)(temp_v2 * 4 + 0x4935cc),
                          *(unsigned int *)(temp_v2 * 4 + 0x4935f4),temp_v12);
-            FUN_002bed3c();
+            gxResetColorQuadToWhite();
           }
           FUN_0022d7b0(param_1,temp_v18[0]);
           return;

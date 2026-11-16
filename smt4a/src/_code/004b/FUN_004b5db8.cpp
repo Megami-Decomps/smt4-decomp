@@ -8,9 +8,9 @@ extern "C" {
 
 int efctSetSpeed(void);
 int FUN_00180310(...);
-int FUN_0018152c(...);
+int uiDrawItemOrStatusIcon(...);
 int drawSetColorFromRGBA8(...);
-int FUN_00185dd4(...);
+int texDrawTableEntrySized(...);
 int FUN_003e503c(void);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
@@ -30,9 +30,9 @@ extern int DAT_00588c50; /* 0x588c50 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180310. */
-/* Supplied declaration required: FUN_0018152c. */
+/* Supplied declaration required: uiDrawItemOrStatusIcon. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: FUN_00185dd4. */
+/* Supplied declaration required: texDrawTableEntrySized. */
 /* Supplied declaration required: FUN_003e503c. */
 
 
@@ -56,7 +56,7 @@ void FUN_004b5db8(unsigned int param_1,unsigned int param_2,unsigned int param_3
   temp_v0 = (int)temp_v5;
   switch(param_2) {
   case 0:
-    FUN_001835b4(2,0x1d,0x56,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x65);
+    texDrawTableEntryAtStoredOrigin(2,0x1d,0x56,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x65);
     break;
   case 1:
     temp_v4 = param_9 == 0;
@@ -68,9 +68,9 @@ void FUN_004b5db8(unsigned int param_1,unsigned int param_2,unsigned int param_3
     }
     if (!(temp_v4 || temp_v2 < 0 != (param_9 < 1 && SBORROW4(temp_v1,param_10)))) {
       if ((int)((unsigned int)*(unsigned short *)(param_3 + 100) + param_9) >= 100) {
-        FUN_001835b4(2,0x1d,0x58,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,
+        texDrawTableEntryAtStoredOrigin(2,0x1d,0x58,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,
                      0x6a);
-        FUN_001835b4(2,0x1d,0x174,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,
+        texDrawTableEntryAtStoredOrigin(2,0x1d,0x174,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,
                      0x6f);
         return;
       }
@@ -80,46 +80,46 @@ void FUN_004b5db8(unsigned int param_1,unsigned int param_2,unsigned int param_3
 LAB_004b5ef4:
       if ((int)(unsigned int)*(unsigned short *)(param_3 + 100) <= (int)param_10) {
         if ((int)((unsigned int)*(unsigned short *)(param_3 + 100) + param_9) < 100) {
-          FUN_001835b4(2,0x1d,0x57,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,
+          texDrawTableEntryAtStoredOrigin(2,0x1d,0x57,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,
                        0x6a);
-          FUN_001835b4(2,0x1d,0x59,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,
+          texDrawTableEntryAtStoredOrigin(2,0x1d,0x59,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,
                        0x6f);
           return;
         }
-        FUN_001835b4(2,0x1d,0x57,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,
+        texDrawTableEntryAtStoredOrigin(2,0x1d,0x57,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,
                      0x6a);
-        FUN_001835b4(2,0x1d,0x173,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,
+        texDrawTableEntryAtStoredOrigin(2,0x1d,0x173,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,
                      0x6f);
         return;
       }
     }
     if ((int)((unsigned int)*(unsigned short *)(param_3 + 100) + param_9) < 100) {
-      FUN_001835b4(2,0x1d,0x58,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x6a
+      texDrawTableEntryAtStoredOrigin(2,0x1d,0x58,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x6a
                   );
-      FUN_001835b4(2,0x1d,0x5a,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x6f
+      texDrawTableEntryAtStoredOrigin(2,0x1d,0x5a,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x6f
                   );
       return;
     }
-    FUN_001835b4(2,0x1d,0x57,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x6a);
-    FUN_001835b4(2,0x1d,0x173,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x6f)
+    texDrawTableEntryAtStoredOrigin(2,0x1d,0x57,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x6a);
+    texDrawTableEntryAtStoredOrigin(2,0x1d,0x173,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x6f)
     ;
     return;
   case 2:
-    FUN_0018152c((int)*(short *)(param_3 + 0x62),
+    uiDrawItemOrStatusIcon((int)*(short *)(param_3 + 0x62),
                  (int)*(short *)(temp_v0 + 8) + (int)*(short *)(DAT_00588c4c + 8) + param_5,
                  (int)*(short *)(DAT_00588c4c + 10) + (int)*(short *)(temp_v0 + 10) + param_6,0x6a,0);
     return;
   case 3:
-    FUN_001835b4(2,0x1d,0x5b,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x6f);
-    FUN_001835b4(2,0x1d,0x5c,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x6f);
-    FUN_001835b4(2,0x1d,0x5d,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x74);
-    FUN_001835b4(2,0x1d,0x5e,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x79);
-    FUN_001835b4(2,0x1d,0x81,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x7e);
-    FUN_001835b4(2,0x1d,0x14f,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x65)
+    texDrawTableEntryAtStoredOrigin(2,0x1d,0x5b,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x6f);
+    texDrawTableEntryAtStoredOrigin(2,0x1d,0x5c,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x6f);
+    texDrawTableEntryAtStoredOrigin(2,0x1d,0x5d,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x74);
+    texDrawTableEntryAtStoredOrigin(2,0x1d,0x5e,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x79);
+    texDrawTableEntryAtStoredOrigin(2,0x1d,0x81,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x7e);
+    texDrawTableEntryAtStoredOrigin(2,0x1d,0x14f,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x65)
     ;
-    FUN_001835b4(2,0x1d,0x150,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x65)
+    texDrawTableEntryAtStoredOrigin(2,0x1d,0x150,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x65)
     ;
-    FUN_001835b4(2,0x1d,0x151,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x65)
+    texDrawTableEntryAtStoredOrigin(2,0x1d,0x151,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x65)
     ;
     return;
   case 4:
@@ -155,11 +155,11 @@ LAB_004b5ef4:
     return;
   case 6:
     if (param_8 == 0) {
-      FUN_00185dd4(2,0x1d,0x5f,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,
+      texDrawTableEntrySized(2,0x1d,0x5f,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,
                    param_7,(int)*(short *)(*(int *)(DAT_00588c4c + 0xc) + 2),0x83);
       return;
     }
-    FUN_001835b4(2,0x1d,0x60,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x83);
+    texDrawTableEntryAtStoredOrigin(2,0x1d,0x60,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x83);
     return;
   case 7:
     if (param_8 != 0) {
@@ -167,9 +167,9 @@ LAB_004b5ef4:
         VectorSignedToFloat(param_9,(unsigned char)(in_fpscr >> 0x16) & 3);
         efctSetSpeed();
       }
-      FUN_001835b4(2,0x1d,0x61,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x88
+      texDrawTableEntryAtStoredOrigin(2,0x1d,0x61,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x88
                   );
-      FUN_001835b4(2,0x1d,0x61,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x89
+      texDrawTableEntryAtStoredOrigin(2,0x1d,0x61,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x89
                   );
       return;
     }

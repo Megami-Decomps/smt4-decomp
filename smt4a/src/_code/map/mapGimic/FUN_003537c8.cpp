@@ -5,7 +5,7 @@
 extern "C" {
 extern MapGimic *g_mapGimic;
 s32 textFormatBuffer(char *buffer, const char *format, ...);
-void *FUN_00178b04(u32 size, const char *file, u32 line);
+void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 MapGimicObj *modelListInit(MapGimicObj *storage);
 void FUN_0040a908(MapGimicObj *model, u32 flags);
 void FUN_0040a918(MapGimicObj *model, u32 flags);
@@ -28,7 +28,7 @@ void FUN_003537c8(s32 unitId)
     textFormatBuffer(path, "map/unit/u%03d.bam", unitId);
     slot->active = 1;
     slot->id = (s16)unitId;
-    MapGimicObj *storage = (MapGimicObj *)FUN_00178b04(
+    MapGimicObj *storage = (MapGimicObj *)asdMemoryAllocTraced(
         32, "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapGimic.cpp", 0x9C6);
     slot->obj = storage != NULL ? modelListInit(storage) : NULL;
     FUN_001cd3ec(slot->obj, path);

@@ -19,7 +19,7 @@ struct NavigationFeedbackMode {
 };
 extern "C" {
 void commonBgReset(void);
-void FUN_003b61ec(void);
+void commonBgStopChildAndBeginTransition(void);
 void FUN_00183e58(void);
 void sysPlaySe(s32 sound);
 void uiPlayGatedActionFeedback(void);
@@ -33,12 +33,12 @@ void FUN_0048a378(NavigationFeedbackRequest *request)
     if ((&g_gameState)->mapFlags.unk295 != 0) {
         (&g_gameState)->mapFlags.unk295 = 0;
         if (gameFlagIsSet(0x49A) == 0) {
-            FUN_003b61ec();
+            commonBgStopChildAndBeginTransition();
         } else {
             commonBgReset();
         }
         if (gameFlagIsSet(12) != 0 && gameFlagIsSet(16) == 0) {
-            FUN_003b61ec();
+            commonBgStopChildAndBeginTransition();
         }
     }
     if (DAT_005f19fc.blocked == 0) {

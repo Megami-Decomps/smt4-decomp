@@ -28,9 +28,9 @@ struct PartySelectionOwner {
 };
 extern "C" {
 extern PartySelectionOwner g_callbackOwnerSlots;
-PartyChoiceRecord *FUN_003e4d68(u32 index);
-void FUN_00203b40(u8 *menu, s32 count, s32 visible, s32 a, s32 b, s32 c);
-void FUN_002a4964(u8 *menu);
+PartyChoiceRecord *partyGetSlot(u32 index);
+void gridNavigationConfigure(u8 *menu, s32 count, s32 visible, s32 a, s32 b, s32 c);
+void scrollListSetSelectionTracked(u8 *menu);
 
 /* Builds the party menu from a value copy of the supplied record set. */
 void FUN_002e76c0(PartyChoices input)
@@ -48,7 +48,7 @@ void FUN_002e76c0(PartyChoices input)
                     work->selected = count;
                 u32 index = 0;
                 for (; index < 12; ++index) {
-                    if (FUN_003e4d68(index & 0xffff)->id == id)
+                    if (partyGetSlot(index & 0xffff)->id == id)
                         break;
                 }
                 if (index == 12)
@@ -57,9 +57,9 @@ void FUN_002e76c0(PartyChoices input)
             }
         }
         work->count = count;
-        FUN_00203b40(work->menu, count, count, 1, 1, 1);
+        gridNavigationConfigure(work->menu, count, count, 1, 1, 1);
         if (work->selected >= 0) {
-            FUN_002a4964(work->menu);
+            scrollListSetSelectionTracked(work->menu);
             work->current = work->selected;
             work->firstVisible = work->selected;
         }

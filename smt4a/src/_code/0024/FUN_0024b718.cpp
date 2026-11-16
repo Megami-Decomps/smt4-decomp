@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001517b4(...);
+int padQueryLogicalKey(...);
 int eventQueueAddUniqueIfValid(int);
 int dialogClose(int);
 int battleFlagsQueryBlockedOrForced(void);
@@ -31,14 +31,14 @@ extern unsigned int DAT_005713ec; /* 0x5713ec */
 extern int g_btlCamera; /* 0x571508 */
 extern int g_btlUiBlock; /* 0x57a9c8 */
 
-/* Supplied declaration required: FUN_001517b4. */
+/* Supplied declaration required: padQueryLogicalKey. */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int jobGetWork(void);
 /* Supplied declaration required: dialogClose. */
 extern int dialogIsActive(void);
 /* Supplied declaration required: battleFlagsQueryBlockedOrForced. */
-extern int FUN_003eb1cc(int);
+extern int btlStateHasSelectionGateFlag(int);
 extern int btlScriptUnitIsNotKind6(int);
 extern int FUN_0040ddec(unsigned int, unsigned int);
 extern int btlUiCanStartMenu(void);
@@ -156,7 +156,7 @@ unsigned int FUN_0024b718(void)
         if (temp_v5 == 0) {
           return 0;
         }
-        temp_v5 = FUN_003eb1cc(temp_v3);
+        temp_v5 = btlStateHasSelectionGateFlag(temp_v3);
         if (temp_v5 != 0) {
           return 0;
         }
@@ -185,7 +185,7 @@ unsigned int FUN_0024b718(void)
         }
         if ((DAT_005713bc & *(unsigned int *)(temp_v3 + 0x45a4)) != 0 || (DAT_005713b8 & *puVar8) != 0) {
           temp_v5 = 1;
-          FUN_001517b4();
+          padQueryLogicalKey();
           if (temp_v5 == 0) {
             return 0;
           }
@@ -199,7 +199,7 @@ unsigned int FUN_0024b718(void)
         }
         if ((*(unsigned int *)(temp_v3 + 0x45a4) & DAT_005713c4) != 0 || (DAT_005713c0 & *puVar8) != 0) {
           temp_v5 = 1;
-          FUN_001517b4(1,1);
+          padQueryLogicalKey(1,1);
           if (temp_v5 == 0) {
             return 0;
           }
@@ -212,7 +212,7 @@ unsigned int FUN_0024b718(void)
           return 0;
         }
         temp_v5 = 7;
-        FUN_001517b4(7,1);
+        padQueryLogicalKey(7,1);
         if (temp_v5 != 0) {
           btlHelpFreeAll();
           FUN_004c8bb8(0,0);
@@ -223,7 +223,7 @@ unsigned int FUN_0024b718(void)
           return 0;
         }
         temp_v5 = 8;
-        FUN_001517b4(8,1);
+        padQueryLogicalKey(8,1);
         if (temp_v5 == 0) {
           return 0;
         }

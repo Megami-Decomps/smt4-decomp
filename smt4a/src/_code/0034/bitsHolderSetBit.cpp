@@ -4,10 +4,10 @@
 extern "C" {
 
 
-/* Sets bit `bit` in the bit array at +0x55 of the FUN_0026140c object. */
+/* Sets bit `bit` in the bit array at +0x55 of the saveGetUserSettingsBlock object. */
 void bitsHolderSetBit(u32 bit)
 {
-    BitsHolder *holder = reinterpret_cast<BitsHolder *>(FUN_0026140c());
+    BitsHolder *holder = reinterpret_cast<BitsHolder *>(saveGetUserSettingsBlock());
 
     holder->bits[bit >> 3] |= 1 << (bit & 7);
 }

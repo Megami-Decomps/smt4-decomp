@@ -25,26 +25,26 @@ s32 vec2GetYInt(GridButtonSlide *);
 void largeGridDrawButtonStrip(LargeGridButtonDraw *work, s32 x, s32 y, s32 button, f32 scale)
 {
     efctSetSpeed(work->alpha * scale);
-    FUN_001835b4(2, 26, 408, x, y, 121);
-    FUN_001835b4(2, 26, 409, x, y, 121);
-    FUN_001835b4(2, 26, 410, x, y, 121);
+    texDrawTableEntryAtStoredOrigin(2, 26, 408, x, y, 121);
+    texDrawTableEntryAtStoredOrigin(2, 26, 409, x, y, 121);
+    texDrawTableEntryAtStoredOrigin(2, 26, 410, x, y, 121);
     efctSetSpeed(scale);
-    FUN_001835b4(2, 26, 411, x, y, 126);
+    texDrawTableEntryAtStoredOrigin(2, 26, 411, x, y, 126);
     s32 type = recordGetModeForId(work->touches[button]);
     bool highlighted = type == 1 || type == 2 || type == 6;
     if (highlighted) {
-        FUN_001835b4(2, 26, 660, x, y, 126);
-        FUN_001835b4(2, 26, 657, x, y, 126);
-        FUN_001835b4(2, 26, 658, x, y, 126);
+        texDrawTableEntryAtStoredOrigin(2, 26, 660, x, y, 126);
+        texDrawTableEntryAtStoredOrigin(2, 26, 657, x, y, 126);
+        texDrawTableEntryAtStoredOrigin(2, 26, 658, x, y, 126);
     } else {
-        FUN_001835b4(2, 26, 587, x, y, 126);
-        FUN_001835b4(2, 26, 412, x, y, 126);
-        FUN_001835b4(2, 26, 413, x, y, 126);
+        texDrawTableEntryAtStoredOrigin(2, 26, 587, x, y, 126);
+        texDrawTableEntryAtStoredOrigin(2, 26, 412, x, y, 126);
+        texDrawTableEntryAtStoredOrigin(2, 26, 413, x, y, 126);
     }
     efctSetSpeed(work->slide.alpha * scale);
     s32 offsetY = vec2GetYInt(&work->slide);
     s32 offsetX = vec2GetXInt(&work->slide);
-    FUN_001835b4(2, 26, highlighted ? 659 : 414, x + offsetX, y + offsetY, 131);
+    texDrawTableEntryAtStoredOrigin(2, 26, highlighted ? 659 : 414, x + offsetX, y + offsetY, 131);
     efctSetSpeed(scale);
 }
 }

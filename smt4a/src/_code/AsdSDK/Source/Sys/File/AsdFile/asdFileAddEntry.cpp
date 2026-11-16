@@ -20,7 +20,7 @@ static void syncReleaseMutex(u32 *handle)
     s32 result = FUN_0019a364(&previousCount, *handle, 1);
 
     if (nnResultIsFailure(result)) {
-        FUN_002e3140(result);
+        resultHandleFailure(result);
     }
 }
 

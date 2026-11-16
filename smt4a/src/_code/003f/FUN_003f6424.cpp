@@ -53,7 +53,7 @@ static __inline u16 panelIconSprite(u32 category)
     case 9: slot = 0xbb; break;
     default: slot = -1; break;
     }
-    IconInfo* icon = devilGetRecord(slot < 0 ? 0 : category == 9 ? 0x29d : FUN_0019e52c((u16)slot));
+    IconInfo* icon = devilGetRecord(slot < 0 ? 0 : category == 9 ? 0x29d : dataTable10FindValue((u16)slot));
     if (icon == NULL) {
         return 0;
     }
@@ -63,15 +63,15 @@ static __inline u16 panelIconSprite(u32 category)
 void FUN_003f6424(f32 scale, u32 id, PanelRecord* record, u32 flags, s32 x, s32 y, s32 z)
 {
     efctSetSpeed(scale);
-    FUN_001835b4(2, 0x31, 0x7b, x, y, z);
-    FUN_001835b4(2, 0x31, 0x7c, x, y, z);
+    texDrawTableEntryAtStoredOrigin(2, 0x31, 0x7b, x, y, z);
+    texDrawTableEntryAtStoredOrigin(2, 0x31, 0x7c, x, y, z);
     LayoutEntry* frame = asdTMTexTableEntryAt(0x31, 0x7d);
     s32 iconX = frame->x + x;
     s32 iconY = frame->y + y;
 
     u16 sprite = panelIconSprite(record->kindWord >> 8);
     if (sprite == 0) {
-        FUN_001835b4(2, 0x31, 4, iconX, iconY, z + 5);
+        texDrawTableEntryAtStoredOrigin(2, 0x31, 4, iconX, iconY, z + 5);
     } else {
         FUN_00169a1c(sprite, iconX, iconY, z + 5);
     }

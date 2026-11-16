@@ -18,7 +18,7 @@ int dataTable00FindById(void);
 int buttonHelpSetPreset(...);
 int eventQueueAddUniqueIfValid(int);
 int timerStart(...);
-int FUN_002bf818(int);
+int uiSpriteAdvanceAnimation(int);
 int FUN_002c1658(int, int);
 int FUN_002efed8(...);
 
@@ -54,14 +54,14 @@ extern int FUN_0029e0f8(void);
 extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: FUN_002a0cc8. */
 /* Supplied declaration required: dataTable00FindById. */
-extern unsigned short FUN_002b8584(unsigned int, unsigned int);
+extern unsigned short ifTouchRegionAddRequested(unsigned int, unsigned int);
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int ifTouchGetSelectionMode(void);
 extern int ifTouchGetSelectedRegion(void);
 extern int FUN_002b8ee0(int, unsigned int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002bf818. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: FUN_002efed8. */
 
@@ -121,7 +121,7 @@ LAB_002179dc:
     if (temp_v6 != 0) {
       *puVar12 = 2;
       *piVar13 = 0;
-      temp_v0 = FUN_002b8584(0x15,0x1b3);
+      temp_v0 = ifTouchRegionAddRequested(0x15,0x1b3);
       *(unsigned short *)(param_1 + 0x5738) = temp_v0;
       temp_v6 = 0;
       *(short *)(param_1 + 0x5714) = *(short *)(param_1 + 0x5714) + 1;
@@ -132,7 +132,7 @@ LAB_002179dc:
           dataTable00FindById();
           if ((*(unsigned char *)(temp_v4 + 3) & 1) != 0) {
             if (*(char *)(param_1 + 0x575f) != '\0') {
-              temp_v0 = FUN_002b8584(0x15,0x1a0);
+              temp_v0 = ifTouchRegionAddRequested(0x15,0x1a0);
               *(unsigned short *)(param_1 + temp_v6 * 2 + 0x573a) = temp_v0;
             }
             else {
@@ -145,17 +145,17 @@ LAB_002179dc:
                 temp_v7 = temp_v4 == 3;
               }
               if (!(temp_v8 && !temp_v7)) {
-                temp_v0 = FUN_002b8584(0x15,0x19f);
+                temp_v0 = ifTouchRegionAddRequested(0x15,0x19f);
                 *(unsigned short *)(param_1 + temp_v6 * 2 + 0x573a) = temp_v0;
               }
               else {
-                temp_v0 = FUN_002b8584(0x15,0x19e);
+                temp_v0 = ifTouchRegionAddRequested(0x15,0x19e);
                 *(unsigned short *)(param_1 + temp_v6 * 2 + 0x573a) = temp_v0;
               }
             }
           }
           else {
-            temp_v0 = FUN_002b8584(0x15,*(unsigned int *)(temp_v1 + 0x5780));
+            temp_v0 = ifTouchRegionAddRequested(0x15,*(unsigned int *)(temp_v1 + 0x5780));
             *(unsigned short *)(param_1 + temp_v6 * 2 + 0x573a) = temp_v0;
           }
           temp_v6 = temp_v6 + 1;
@@ -314,7 +314,7 @@ LAB_00217e94:
     }
     break;
   case 3:
-    FUN_002bf818(temp_v18);
+    uiSpriteAdvanceAnimation(temp_v18);
     categoryPreviewCycleTint(param_1);
     temp_v6 = FUN_0029e02c();
     if (temp_v6 != 0) {

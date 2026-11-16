@@ -7,7 +7,7 @@ extern "C" {
 
 void tripleClear(u32 *list);
 void asdMemFree(void *block);
-void FUN_0011890c(void);
+void asdMdlManagerMaintenanceCallback(void);
 void asdMdlWorkerFreeWork(void);
 
 extern u32 g_asdMdlWorker;
@@ -30,7 +30,7 @@ s32 asdMdlManagerStart(s32 group)
     *state = 0;
     tripleClear(&g_asdMdlList);
     tripleClear(&g_asdMdlList2);
-    g_asdMdlWorker = asdProcessCreateSimple(reinterpret_cast<const s8 *>("AsdMdlManCalcProc"), group, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_0011890c), reinterpret_cast<AsdProcFunc>(asdMdlWorkerFreeWork), reinterpret_cast<u32>(state));
+    g_asdMdlWorker = asdProcessCreateSimple(reinterpret_cast<const s8 *>("AsdMdlManCalcProc"), group, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(asdMdlManagerMaintenanceCallback), reinterpret_cast<AsdProcFunc>(asdMdlWorkerFreeWork), reinterpret_cast<u32>(state));
     if (g_asdMdlWorker == 0) {
         asdMemFree(state);
     }

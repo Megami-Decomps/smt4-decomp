@@ -7,7 +7,7 @@ extern "C" {
 u32 dataTable24Sub0GetRecordS90X(u32);
 const u16 *dataTable24Sub0GetRecordS90(u32);
 s32 FUN_002240b4(u32);
-void FUN_002bf380(s32, s32, s32, s32, s32, s32);
+void texDrawCompositeSprite(s32, s32, s32, s32, s32, s32);
 void efctSetSpeed(f32);
 f32 vec2GetSpeed(const void *object);
 void textDrawString(s32, u32, const u16 *, f32, f32, f32, f32, f32);
@@ -21,24 +21,24 @@ void FUN_001af670(void *owner, u32 entryId, s32 x, s32 y, s32 highlighted, f32 s
     u32 record = dataTable24Sub0GetRecordS90X(entryId);
     u32 color;
     if (highlighted != 0) {
-        FUN_002bf380(2, 36, 16, x, y, 101);
-        FUN_002bf288(2, 36, 0x95, x, y, 106);
+        texDrawCompositeSprite(2, 36, 16, x, y, 101);
+        texDrawTableEntryAtStoredOrigin(2, 36, 0x95, x, y, 106);
         if (FUN_002240b4(record)) {
             efctSetSpeed(vec2GetSpeed(&static_cast<LabelOwnerView *>(owner)->effect));
-            FUN_002bf288(2, 36, 0x97, x, y, 109);
+            texDrawTableEntryAtStoredOrigin(2, 36, 0x97, x, y, 109);
             efctSetSpeed(speed);
-            FUN_002bf288(2, 36, 0x91, x, y, 111);
+            texDrawTableEntryAtStoredOrigin(2, 36, 0x91, x, y, 111);
         } else {
             efctSetSpeed(vec2GetSpeed(&static_cast<LabelOwnerView *>(owner)->effect));
-            FUN_002bf288(2, 36, 0x96, x, y, 111);
+            texDrawTableEntryAtStoredOrigin(2, 36, 0x96, x, y, 111);
             efctSetSpeed(speed);
         }
         color = 0xFFFFFFFF;
     } else {
-        FUN_002bf380(2, 36, 15, x, y, 101);
-        FUN_002bf288(2, 36, 0x90, x, y, 106);
+        texDrawCompositeSprite(2, 36, 15, x, y, 101);
+        texDrawTableEntryAtStoredOrigin(2, 36, 0x90, x, y, 106);
         if (FUN_002240b4(record))
-            FUN_002bf288(2, 36, 0x91, x, y, 111);
+            texDrawTableEntryAtStoredOrigin(2, 36, 0x91, x, y, 111);
         color = 0xFF;
     }
     const u16 *text = dataTable24Sub0GetRecordS90(entryId);

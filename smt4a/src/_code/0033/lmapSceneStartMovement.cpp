@@ -42,7 +42,7 @@ extern "C" {
 u32 gameFlagIsSet(u32);
 u32 FUN_002e5db4();
 u32 mapHasFacingBreakableInReach();
-void FUN_003fd7c0(MapMotionActor *, u32, u8, f32);
+void moriModelUnitStartMaterialAnimation(MapMotionActor *, u32, u8, f32);
 void FUN_003fd924(MapMotionActor *, u32, u8, f32, f32);
 
 void lmapSceneStartMovement(s8 mode)
@@ -68,7 +68,7 @@ void lmapSceneStartMovement(s8 mode)
         ((MapMotionScene *)g_lmapScene)->transition = 2.0f;
         if (gameFlagIsSet(0x4c9) && !FUN_002e5db4()) {
             MapMotionActor *actor = ((MapMotionScene *)g_lmapScene)->binding->actor;
-            FUN_003fd7c0(actor, 4, 2, 0.0f);
+            moriModelUnitStartMaterialAnimation(actor, 4, 2, 0.0f);
             ((MapMotionScene *)g_lmapScene)->nextAnimation = 13;
             FUN_003fd924(actor, 13, 2, 0.0f, 0.0f);
             return;
@@ -86,10 +86,10 @@ void lmapSceneStartMovement(s8 mode)
         if (gameFlagIsSet(0x4c9) && !FUN_002e5db4()) {
             MapMotionActor *actor = ((MapMotionScene *)g_lmapScene)->binding->actor;
             actor->playbackScale = 1.0f;
-            FUN_003fd7c0(actor, 5, 2, 19.0f);
+            moriModelUnitStartMaterialAnimation(actor, 5, 2, 19.0f);
             return;
         }
     }
-    FUN_003fd7c0(((MapMotionScene *)g_lmapScene)->binding->actor, 0, 2, 85.0f);
+    moriModelUnitStartMaterialAnimation(((MapMotionScene *)g_lmapScene)->binding->actor, 0, 2, 85.0f);
 }
 }

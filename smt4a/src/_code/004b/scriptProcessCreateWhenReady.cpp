@@ -17,7 +17,7 @@ struct ScriptProcessOwner004b {
 
 extern "C" {
 s32 loadSlotIsLoaded(u32 slot);
-ScriptProcess004b *FUN_00275bc8(void *heapA, void *heapB);
+ScriptProcess004b *scrScriptProcessCreate(void *heapA, void *heapB);
 
 /* Once the heaps, load slots 0x14 and 0x25 and the three textures of table 0x1d are ready, creates
  * the script process (first time only) and returns 1; returns 0 while still loading. */
@@ -40,7 +40,7 @@ u32 scriptProcessCreateWhenReady(ScriptProcessOwner004b *owner)
         return 0;
     }
     if (owner->process == NULL) {
-        owner->process = FUN_00275bc8(owner->heapA, owner->heapB);
+        owner->process = scrScriptProcessCreate(owner->heapA, owner->heapB);
         owner->process->state = 0;
     }
     return 1;

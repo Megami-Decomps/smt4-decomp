@@ -7,11 +7,11 @@
 
 extern "C" {
 
-int FUN_001568f8(...);
+int btlFindEntryBlockByMemberId(...);
 int btlMainFindEntryByListedId(int, int);
 
 int btlAdjustPropertyClamped(int, int, int, int);
-int FUN_004fb43c(...);
+int btlQueueActionMessage(...);
 int FUN_004fd0ec(...);
 
 /* stack frame of param_15: 8 slot(s), 32 byte(s) */
@@ -28,11 +28,11 @@ typedef struct {
 
 
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_001568f8. */
-extern int FUN_003eb1cc(void);
+/* Supplied declaration required: btlFindEntryBlockByMemberId. */
+extern int btlStateHasSelectionGateFlag(void);
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlAdjustPropertyClamped. */
-/* Supplied declaration required: FUN_004fb43c. */
+/* Supplied declaration required: btlQueueActionMessage. */
 /* Supplied declaration required: FUN_004fd0ec. */
 
 
@@ -86,7 +86,7 @@ FUN_004fb798(int param_1,unsigned int param_2,int param_3,int param_4,unsigned i
       if (param_15 != 0) {
         temp_v3 = btlScriptUnitHasFlags(btlGetMainState());
         if (temp_v3 != 0) {
-          FUN_004fb43c(0,0,0x1000263,0,1,0,0);
+          btlQueueActionMessage(0,0,0x1000263,0,1,0,0);
         }
       }
     }
@@ -104,7 +104,7 @@ LAB_004fba00:
       temp_v3 = btlScriptUnitHasFlags(btlGetMainState());
       temp_v3 = temp_v3 & ~param_14;
       if (temp_v3 != 0) {
-        FUN_004fb43c(0,0,0x1000263,0,1,0,0);
+        btlQueueActionMessage(0,0,0x1000263,0,1,0,0);
       }
     }
   }
@@ -120,7 +120,7 @@ LAB_004fba00:
     if (param_15 != 0) {
       temp_v3 = btlScriptUnitHasFlags(btlGetMainState());
       if (temp_v3 != 0) {
-        FUN_004fb43c(0,0,0x1000263,0,1,0,0);
+        btlQueueActionMessage(0,0,0x1000263,0,1,0,0);
       }
     }
   }
@@ -134,7 +134,7 @@ LAB_004fbabc:
     temp_v0 = *(short *)(param_4 + 0x6a) < 0x6d;
     if (temp_v0) {
       temp_v2 = reinterpret_cast<int>(btlGetMainState());
-      FUN_001568f8(temp_v2,(int)*(short *)(param_4 + 0x6a));
+      btlFindEntryBlockByMemberId(temp_v2,(int)*(short *)(param_4 + 0x6a));
       if (temp_v2 != 0) {
         temp_v3 = (unsigned int)*(unsigned short *)(temp_v2 + 0x110);
       }
@@ -162,7 +162,7 @@ LAB_004fbabc:
     temp_v2 = reinterpret_cast<int>(btlQueueReflectAction(g_btlActionReflect,0,0,0));
     *(unsigned char *)(temp_v2 + 4) = 0x41;
     reinterpret_cast<int>(btlGetMainState());
-    temp_v4 = FUN_003eb1cc();
+    temp_v4 = btlStateHasSelectionGateFlag();
     if (temp_v4 == 0) {
       *(unsigned int *)(temp_v2 + 0x28) = 1;
     }

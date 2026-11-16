@@ -13,7 +13,7 @@ int cameraSetViewMatrix(int, unsigned char [84]);
 int renderCtxCalculateStereoParallax(int);
 int itemDrawCategoryBadge(...);
 int textDrawString(...);
-int FUN_002bf380(...);
+int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
 int mtx44Copy(...);
 int renderCtxApplyTransforms(...);
@@ -72,14 +72,14 @@ extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: FUN_002bf380. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: mtx44Copy. */
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
 
@@ -122,7 +122,7 @@ unsigned int FUN_0011a434(void)
   if (*(int *)(g_comWin + 8) != 0) {
     renderCtxSelectStereoLayout(g_titleScene);
     temp_v2 = g_titleScene;
-    temp_v1 = FUN_002c5d80(1,0);
+    temp_v1 = renderCtxPackPassFlags(1,0);
     piVar6 = (int *)(temp_v2 + 0x124c);
     temp_v3 = *piVar6;
     temp_v4 = piVar6[temp_v3 + 2];
@@ -253,7 +253,7 @@ unsigned int FUN_0011a434(void)
       (**(romwright_code **)(temp_v1 + 0x12c8))();
       *(unsigned char *)(temp_v1 + 0x12c4) = 0;
     }
-    FUN_002bf380(2,0xe,3,0,0,0x65);
+    texDrawCompositeSprite(2,0xe,3,0,0,0x65);
     temp_v1 = g_titleScene;
     temp_v3 = packNibblesAndByte(6,7,0);
     piVar6 = (int *)(temp_v1 + 0x12ac);
@@ -264,7 +264,7 @@ unsigned int FUN_0011a434(void)
       *(unsigned char *)(temp_v1 + 0x12c4) = 0;
     }
     efctSetSpeed();
-    FUN_002bf380(2,0xe,2,0,0,0x6a);
+    texDrawCompositeSprite(2,0xe,2,0,0,0x6a);
     if (*(char *)(temp_v0 + 0x10) != '\0') {
       if (*(char *)(temp_v0 + 0x12) == '\0') {
         temp_v2 = asdTMTexTableEntryAt(0xe,0xdc);
@@ -278,8 +278,8 @@ unsigned int FUN_0011a434(void)
       VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
       textDrawString(4,0xff,temp_v0 + 0x154);
       if (*(int *)(temp_v0 + 0x14) == 1) {
-        FUN_002bf288(2,0xe,0xdf,temp_v2 - 0xd,7,0x6f);
-        FUN_002bf288(2,0xe,0xde,temp_v2 - 0xd,7,0x74);
+        texDrawTableEntryAtStoredOrigin(2,0xe,0xdf,temp_v2 - 0xd,7,0x6f);
+        texDrawTableEntryAtStoredOrigin(2,0xe,0xde,temp_v2 - 0xd,7,0x74);
       }
       if (*(int *)(temp_v0 + 0x14) == 4) {
         FUN_002b6db0((int)*(short *)(temp_v0 + 0x18),temp_v2 - 0xd,8,0x79);

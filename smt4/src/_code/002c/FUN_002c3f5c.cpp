@@ -15,7 +15,7 @@ static __inline void controlMemory(u32 address, u32 source, u32 size, u32 operat
     s32 result = FUN_002bb7c4(&output, address, source, size, operation, permission);
     bool failed = nnResultIsFailure(result);
     if (failed)
-        FUN_002c526c(result, failed);
+        resultHandleFailure(result, failed);
 }
 
 /* Removes a mapped region and frees its backing allocation. */

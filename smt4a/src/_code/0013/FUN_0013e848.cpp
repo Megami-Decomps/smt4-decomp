@@ -2,8 +2,8 @@
 
 extern "C" {
 
-void FUN_00157558(u32 renderCtx);
-u8 FUN_00154edc(u32 mode, JobSurface *surface);
+void renderCtxSelectDisplayAreaForStereoMode(u32 renderCtx);
+u8 gxCopyFramebufferToSurface(u32 mode, JobSurface *surface);
 s32 stateValuesGetBySelector(u32 selector);
 
 extern u32 g_renderCtx;
@@ -20,10 +20,10 @@ s32 FUN_0013e848(u32 job)
     if (!work->fadeActive || work->fadeCaptured || work->fadeCaptureSkipped) {
         return 0;
     }
-    FUN_00157558(g_renderCtx);
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     work->surface->width = 512;
     work->surface->height = 512;
-    work->fadeCaptureResult = FUN_00154edc(0, work->surface);
+    work->fadeCaptureResult = gxCopyFramebufferToSurface(0, work->surface);
     work->fadeCaptured = 1;
     return 0;
 }

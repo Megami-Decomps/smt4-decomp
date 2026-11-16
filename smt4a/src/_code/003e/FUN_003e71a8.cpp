@@ -86,7 +86,7 @@ u32 FUN_003e71a8(SplashWork *splash)
         splash->state++;
     }
 
-    if (FUN_0013def0(0) == 0 && (ifTouchGetSelectionMode() == 6 || padButtonIsPressed(0) != 0)) {
+    if (pairedAvailabilityGetState(0) == 0 && (ifTouchGetSelectionMode() == 6 || padButtonIsPressed(0) != 0)) {
         splash->state = SPLASH_STATE_TIMEOUT;
         splash->timeout = 0;
     } else if (splash->state == SPLASH_STATE_LOAD) {
@@ -122,11 +122,11 @@ u32 FUN_003e71a8(SplashWork *splash)
     if (splash->state == SPLASH_STATE_FADE_IN) {
         if (asdTMTexTableNodeIsLoaded(SPLASH_TEXTURE_TABLE, 6) == 0)
             return 0;
-        if (FUN_0013def0(0) == 3)
+        if (pairedAvailabilityGetState(0) == 3)
             FUN_003d54f8(0, 0x1E);
-        if (FUN_0013def0(1) == 3)
+        if (pairedAvailabilityGetState(1) == 3)
             FUN_003d54f8(1, 0x1E);
-        if (FUN_0013def0(0) == 2)
+        if (pairedAvailabilityGetState(0) == 2)
             return 0;
         if (splash->alpha < 1.0f)
             splash->alpha += SPLASH_FADE_STEP;
@@ -144,7 +144,7 @@ u32 FUN_003e71a8(SplashWork *splash)
         slotSetRequest(1, 0x2D, 0xFF);
     }
 
-    if (splash->state == SPLASH_STATE_WAIT_TOUCH && FUN_0013def0(0) == 3) {
+    if (splash->state == SPLASH_STATE_WAIT_TOUCH && pairedAvailabilityGetState(0) == 3) {
         ref208SetPair1C(0, 0);
         commonBgReleaseOwnedJob();
         for (s32 node = 1; node < SPLASH_TEXTURE_COUNT; node++) {

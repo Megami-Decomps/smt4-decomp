@@ -12,13 +12,13 @@ struct FlagTargetOwner {
     u32 flags;           // 0x44a0
 };
 
-extern "C" TargetFlags* FUN_0027da30(FlagTargetOwner* owner, s32 targetId);
+extern "C" TargetFlags* btlFindEntryBlockByMemberId(FlagTargetOwner* owner, s32 targetId);
 
 // Set bit 0x10 in the selected target flag bank unless either owner disables it.
 extern "C" void btlTargetSetFlag10(FlagTargetOwner* owner, s32 targetId, s32 primary)
 {
     if ((owner->flags & 0x40000) == 0) {
-        TargetFlags* target = FUN_0027da30(owner, targetId);
+        TargetFlags* target = btlFindEntryBlockByMemberId(owner, targetId);
         if ((target->flags & 8) == 0 && target != NULL) {
             u16 flags = primary ? target->primary : target->alternate;
             flags |= 0x10;

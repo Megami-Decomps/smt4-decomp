@@ -10,14 +10,14 @@ struct InteractionFlagBankView {
 typedef char InteractionFlagBankOffsets[offsetof(InteractionFlagBankView, normal) == 0xCF0 ? 1 : -1];
 extern "C" {
 extern GameStateA g_gameState;
-InteractionFlagBankView *FUN_002c2710();
+InteractionFlagBankView *saveGetFlagRowTable();
 s32 gameFlagIsSet(u32);
 
 /* Whether interaction `id` has variant `variant` enabled: fixed answers for a few ids, the scene
  * state for ids 0x79/0x7A, else the variant's bit in the id's flag row. */
 bool FUN_004083a8(s32 id, u32 variant)
 {
-    InteractionFlagBankView *save = FUN_002c2710();
+    InteractionFlagBankView *save = saveGetFlagRowTable();
     InteractionVariantFlags *flags = id > 191 ? &save->extended[id] : &save->normal[id];
     u32 bit = 1; /* variant bit 0, shifted to the variant below */
     if (id == 0x93) {

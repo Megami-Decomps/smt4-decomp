@@ -32,13 +32,13 @@ extern "C" void FUN_003c3238(void *context, const StatusHelpRecord *record)
         description = reinterpret_cast<const char *>(gameGetPlayerName());
     } else if (record->flags & 8) {
         textFormatBuffer(label, DAT_00400574);
-        description = reinterpret_cast<const char *>(FUN_002bd06c(record->entryId));
+        description = reinterpret_cast<const char *>(dataTable01FindByIdWithAoc(record->entryId));
     } else if (record->flags & 0x20) {
         textFormatBuffer(label, DAT_0040057c);
-        description = reinterpret_cast<const char *>(FUN_002bd06c(record->entryId));
+        description = reinterpret_cast<const char *>(dataTable01FindByIdWithAoc(record->entryId));
     } else if (record->flags & 0x10) {
         textFormatBuffer(label, DAT_00400584);
-        description = reinterpret_cast<const char *>(FUN_002bd06c(record->entryId));
+        description = reinterpret_cast<const char *>(dataTable01FindByIdWithAoc(record->entryId));
     }
     textDrawDefaultString(label, 228, 42);
     textDrawDefaultString(description, 228, (f32)lineHeight + 42);

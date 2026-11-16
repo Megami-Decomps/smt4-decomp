@@ -12,7 +12,7 @@ struct GameStateFade {
 extern "C" {
 extern GameStateFade g_gameState;
 void uiPlayGatedActionFeedback(void);
-void FUN_00163aa4(UiAnimatedSprite *sprite, f32 value);
+void uiSpriteAdvanceAnimation(UiAnimatedSprite *sprite, f32 value);
 NavigationPoint *sub68OwnerGetBlock60(void *scene);
 void naviMainSetValuePair(void *scene, const NavigationPoint *position);
 void FUN_002d22c0(s32 value);
@@ -30,10 +30,10 @@ void _ZN9Obj53230012FUN_00490898Ev(NavigationFadeWork *work)
         return;
     case 1:
         for (s32 i = 0; i < 6; ++i) {
-            FUN_00163aa4(&work->sprites[i], 1.0f);
+            uiSpriteAdvanceAnimation(&work->sprites[i], 1.0f);
         }
-        FUN_00163aa4(&work->footerSprite, 1.0f);
-        FUN_00163aa4(&work->headerSprite, 1.0f);
+        uiSpriteAdvanceAnimation(&work->footerSprite, 1.0f);
+        uiSpriteAdvanceAnimation(&work->headerSprite, 1.0f);
         if (uiSpriteGetCompletionState(&work->sprites[5]) != 0) {
             if (g_gameState.fadeInDialog) {
                 NavigationPoint point = *sub68OwnerGetBlock60(work->scene);

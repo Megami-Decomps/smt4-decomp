@@ -5,7 +5,7 @@
 
 extern "C" {
 void uiSpriteSetImageKeyframe(UiSpriteState *, s32, s32);
-void FUN_002a4964(void *);
+void scrollListSetSelectionTracked(void *);
 s32 buttonHelpGetPanelMode(void);
 s32 buttonHelpGetPanelState(void);
 const char *screenGetEntry(u32);
@@ -33,10 +33,10 @@ void useCounterStart(void)
     work->state = 1;
     work->frame = 0;
     if (work->valueOffset >= 0) {
-        const u8 *value = FUN_0026140c() + work->valueOffset;
+        const u8 *value = saveGetUserSettingsBlock() + work->valueOffset;
         for (s32 index = 0; index < work->count; ++index) {
             if (work->values[index] == (*value & 0x7f)) {
-                FUN_002a4964(work->selection);
+                scrollListSetSelectionTracked(work->selection);
                 break;
             }
         }

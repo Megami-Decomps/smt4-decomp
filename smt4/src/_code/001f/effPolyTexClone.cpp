@@ -5,7 +5,7 @@ void *handleBlockRefCreate(void *resource);
 void handleBlockUnref(void *resource);
 void handleBlockRefDrop(void *resource);
 void *handleRefIncrement(void *resource);
-PolyGeom *FUN_00268fc4(PolyGeom *geometry);
+PolyGeom *effGeomCloneHandle(PolyGeom *geometry);
 PolyTexObject *effPolyTexCreate(u32 flags);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
@@ -13,7 +13,7 @@ void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 PolyTexObject *effPolyTexClone(const PolyTexObject *source)
 {
     PolyTexObject *clone = effPolyTexCreate(0);
-    clone->geom = FUN_00268fc4(source->geom);
+    clone->geom = effGeomCloneHandle(source->geom);
     __aeabi_memcpy4(clone->params, source->params, sizeof(clone->params));
     if (source->resource2 != NULL) {
         if (clone->resource2 != NULL) {

@@ -13,13 +13,13 @@ int resourceResultMatchesRemappedCodes(void);
 int refIsNullOrZero(int *);
 int asdLoadFileSyncNoContext(int, int, unsigned int, unsigned int);
 int jyoucyuGetTableEntry(...);
-int FUN_001883b0(unsigned int *, int *, unsigned int);
+int archivePathDeviceOpen(unsigned int *, int *, unsigned int);
 int vcallSlot12IfValid(...);
 int sysFatalBreak(void);
 int asdMemFree(void);
 int asdMemoryAllocAligned(...);
 int _ZN18WindowStatusResultC1Ej(...);
-int FUN_001bcfb4(int, unsigned int, unsigned int);
+int asdLoadFileAsyncByPath(int, unsigned int, unsigned int);
 int asdLoadFileAsyncWrap(int, unsigned int, unsigned int, unsigned int);
 int aocResolveMountPath(int *, unsigned int, int);
 int _ZN10AocSystemA17getPendingRequestEv(...);
@@ -63,7 +63,7 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 extern int FUN_00100836(int, unsigned int, unsigned int *);
 /* Supplied declaration required: asdLoadFileSyncNoContext. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
-/* Supplied declaration required: FUN_001883b0. */
+/* Supplied declaration required: archivePathDeviceOpen. */
 /* Supplied declaration required: vcallSlot12IfValid. */
 /* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: asdMemFree. */
@@ -72,7 +72,7 @@ extern int sysLightEventTryWait(int);
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 extern unsigned int _ZN18WindowStatusResultC1Ev(char *);
 /* Supplied declaration required: _ZN7AocMain12queueRequestE17RequestParametersji. */
-/* Supplied declaration required: FUN_001bcfb4. */
+/* Supplied declaration required: asdLoadFileAsyncByPath. */
 /* Supplied declaration required: asdLoadFileAsyncWrap. */
 /* Supplied declaration required: aocResolveMountPath. */
 /* Supplied declaration required: _ZN10AocSystemA17getPendingRequestEv. */
@@ -177,7 +177,7 @@ void FUN_001cc6d0(int param_1,int param_2)
         if (*(int *)(param_2 + 0x1c) != 0) {
           temp_v7 = *(unsigned int *)(param_2 + 0x20);
           temp_v8 = *(unsigned int *)(param_2 + 0x2c);
-          FUN_001bcfb4(param_2 + 0x70,*(unsigned int *)(param_2 + 0x18),
+          asdLoadFileAsyncByPath(param_2 + 0x70,*(unsigned int *)(param_2 + 0x18),
                        *(unsigned int *)(param_2 + 0x28));
         }
         else {
@@ -244,7 +244,7 @@ void FUN_001cc6d0(int param_1,int param_2)
           puVar8[4] = 0;
           puVar8[1] = 0;
           puVar8[2] = 0;
-          FUN_001883b0(puVar8,&temp_v18,temp_v4);
+          archivePathDeviceOpen(puVar8,&temp_v18,temp_v4);
           pcVar4 = acStack_40;
           _ZN18WindowStatusResultC1Ej(pcVar4,puVar8);
           (*(unsigned int *)temp_v16) = (unsigned int)*(char (*) [4])pcVar4;

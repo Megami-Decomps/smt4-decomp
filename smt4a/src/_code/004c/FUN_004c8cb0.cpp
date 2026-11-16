@@ -11,7 +11,7 @@ struct HelpMasksView {
 
 extern "C" {
 extern BtlHelpGlobalsA g_btlHelp;
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
 BtlHelpEntryA *FUN_00200a68(u32 kind, u16 message, u32 object, u32 command,
                          const void *combatant, u8 option, u32 category, u32 resource);
 
@@ -32,7 +32,7 @@ u32 FUN_004c8cb0(u32 object, s32 index, u8 option)
     u32 command = reinterpret_cast<CommandView*>(battle)->command;
     if (index >= 0) {
         return reinterpret_cast<u32>(FUN_00200a68(1, 0, object, command,
-            FUN_003eaf20(battle), option, index, 0));
+            btlFindFirstEntryMatchingCategoryAndRequiredMask(battle), option, index, 0));
     }
     return reinterpret_cast<u32>(FUN_00200a68(0, 0, object, command, NULL, option, -1, 0));
 }

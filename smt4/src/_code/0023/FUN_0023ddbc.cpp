@@ -8,7 +8,7 @@ extern "C" {
 
 s32 gameFlagIsSet(u32 flag);
 void *gameDataGetTableEntry(u8 keyA, u8 keyB);
-void FUN_002c0a9c(u32 keyA, u32 keyB, s32 value);
+void weightedTableRollNextValue(u32 keyA, u32 keyB, s32 value);
 
 // Reset cached entry state if changing this flag selects a different add-on variant.
 void FUN_0023ddbc(u32 flag, u32 value)
@@ -51,7 +51,7 @@ void FUN_0023ddbc(u32 flag, u32 value)
             if (oldVariant != newVariant) {
                 state->status = 0;
                 state->flags &= ~0x1f;
-                FUN_002c0a9c(keyA, keyB, 0);
+                weightedTableRollNextValue(keyA, keyB, 0);
             }
             gameFlagSetValue(flag, value ^ 1, 0);
         }

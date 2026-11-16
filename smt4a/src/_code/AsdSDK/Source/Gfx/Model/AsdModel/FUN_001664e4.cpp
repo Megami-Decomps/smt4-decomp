@@ -53,7 +53,7 @@ extern unsigned char DAT_00636e05; /* 0x636e05 */
 extern unsigned char DAT_00636e14; /* 0x636e14 */
 extern int DAT_00636e18; /* 0x636e18 */
 
-/* Supplied declaration required: FUN_00152f54. */
+/* Supplied declaration required: asdCameraGetSavedRenderPairs. */
 /* Supplied declaration required: FUN_00176538. */
 /* Supplied declaration required: FUN_001767a4. */
 /* Supplied declaration required: FUN_00191bec. */
@@ -85,7 +85,7 @@ void FUN_001664e4(unsigned int param_1,unsigned int param_2,int *param_3)
   temp_v5 = 0.017453292f;
   if (0 < g_asdLightCount) {
     if ((DAT_005b3bfc & 1) != 0) {
-      temp_v0 = FUN_00152f54();
+      temp_v0 = asdCameraGetSavedRenderPairs();
       puVar2 = (unsigned int *)(**(romwright_code **)(**(int **)(temp_v3 + 0x260) + 0x10))();
       if ((puVar2 != (unsigned int *)0x0) && ((*puVar2 & 0x20000000) == 0)) {
         puVar2 = (unsigned int *)0x0;
@@ -496,9 +496,9 @@ LAB_00166e14:
       if (0 < DAT_00636e18) {
         nw_gfx_Camera_UpdateCameraMatrix(DAT_005b3c20);
       }
-      if ((0 < g_asdLightCount) && (temp_v3 = FUN_001696f4(), temp_v3 == 1)) {
+      if ((0 < g_asdLightCount) && (temp_v3 = gxIsStereoscopic3dEnabled(), temp_v3 == 1)) {
         const CameraMatrixStereoCache *camera =
-            reinterpret_cast<const CameraMatrixStereoCache *>(FUN_00152f54());
+            reinterpret_cast<const CameraMatrixStereoCache *>(asdCameraGetSavedRenderPairs());
         FUN_00192484(g_asdModelSlotArray3,DAT_005b3c18,DAT_005b3c1c,DAT_005b3c14,
                      camera->stereoParameter,camera->stereoScale);
       }

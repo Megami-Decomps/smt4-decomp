@@ -5,6 +5,6 @@
 extern "C" {
 
 /* Whether bit 0 of the flags word at 0x130 of `state` is set; a missing state counts as clear. */
-u32 FUN_00187168(const void *state);
+u32 partySlotIsOccupied(const void *state);
 
 } /* extern "C" */

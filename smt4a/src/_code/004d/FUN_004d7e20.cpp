@@ -27,7 +27,7 @@ struct AocRequestView {
 extern "C" {
 extern AocMainView* g_aocMain;
 void asdMemFree(void* allocation);
-AocResultView* FUN_00275bc8(void* storage, void* source);
+AocResultView* scrScriptProcessCreate(void* storage, void* source);
 
 // Consume completion flags, releasing failed requests or recording the constructed result.
 u32 FUN_004d7e20(AocRequestView* request)
@@ -53,7 +53,7 @@ u32 FUN_004d7e20(AocRequestView* request)
         return 0;
     }
 
-    AocResultView* result = FUN_00275bc8(request->unk10, request->unk0C);
+    AocResultView* result = scrScriptProcessCreate(request->unk10, request->unk0C);
     request->result = result;
     result->unk108 = 2;
     request->status = 0;

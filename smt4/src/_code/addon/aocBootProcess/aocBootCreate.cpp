@@ -11,7 +11,7 @@ extern "C" {
 extern AocBootGlobals g_aocBoot;
 extern AocMain *g_aocMain;
 
-void FUN_002ba78c(void *dialog);
+void uiResourceParametersInitDefault(void *dialog);
 s32 aocBootUpdate(u32 handle);
 void aocBootDestroy(u32 handle);
 
@@ -28,7 +28,7 @@ u32 aocBootCreate(void)
     g_aocBoot.finished = 0;
     boot->state = 0;
     boot->dialogOpen = 0;
-    FUN_002ba78c(boot->dialog);
+    uiResourceParametersInitDefault(boot->dialog);
     boot->frames = 0;
     g_aocBoot.boot->job = asdProcessCreateSimple((const s8 *)"aocBoot CALC", 2, 0, 0, aocBootUpdate, aocBootDestroy, 0);
     g_aocMain->flags &= ~AOC_MAIN_FLAGS_BOOT_MASK;

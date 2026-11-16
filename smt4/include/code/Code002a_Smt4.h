@@ -16,7 +16,7 @@ u8 objGetFlagBit0(Obj *obj);
 
 void FUN_002aea44(Obj *obj);
 
-u32 FUN_002a4e18(Placement *placement, s32 mode);
+u32 bustupPlaceActiveSlot(Placement *placement, s32 mode);
 
 void FUN_002a6d1c(Obj *obj, u32 a, u32 b, u32 c, u32 d);
 

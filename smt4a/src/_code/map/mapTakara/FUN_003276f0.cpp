@@ -7,7 +7,7 @@ extern "C" {
 extern EngineRecordList *g_engineRecordList;
 extern HandleRegistry *g_handleRegistry;
 void *gameFlagsGetBlock(void);
-EngineRecordModelList *FUN_00178b04(u32 bytes, const char *file, s32 line);
+EngineRecordModelList *asdMemoryAllocTraced(u32 bytes, const char *file, s32 line);
 EngineRecordModelList *modelListInit(EngineRecordModelList *models);
 void FUN_0040aad4(EngineRecordModelList *models, s32 index);
 void handleRegistryRegisterObject(HandleRegistry *registry, u32 handle);
@@ -32,11 +32,11 @@ void FUN_003276f0(s32 delay, s32 alternate, f32 x, f32 y, f32 z, f32 w)
     list->counter18 = 0;
     list->counterCE0 = 0;
     list->modelSlot = 1;
-    EngineRecordModelList *models = FUN_00178b04(32,
+    EngineRecordModelList *models = asdMemoryAllocTraced(32,
         "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp", 971);
     models = models != NULL ? modelListInit(models) : NULL;
     g_engineRecordList->models[g_engineRecordList->modelSlot].models = models;
-    FUN_0040aa6c(models, "map/unit/u007.bam");
+    resourceOwnerLoadFileSync(models, "map/unit/u007.bam");
     FUN_0040aad4(g_engineRecordList->models[g_engineRecordList->modelSlot].models, 0);
     list = g_engineRecordList;
     s32 index = findFreeRecord(list);

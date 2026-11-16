@@ -3,7 +3,7 @@
 extern "C" {
 extern GameDataBlocksA g_gameDataBlocks;
 s32 gameFlagIsSet(u32);
-u16 FUN_0019e52c(u16 key);
+u16 dataTable10FindValue(u16 key);
 
 // Check whether the unit is in the unlocked portion of either saved availability list.
 u32 unitHasRankingBonus(u32 unitId)
@@ -56,7 +56,7 @@ u32 unitHasRankingBonus(u32 unitId)
                     case 8: key = variant == 0 ? 0xB3 : 0xBA; break;
                     case 7: key = 5; break;
                     }
-                    u32 unit = FUN_0019e52c(key);
+                    u32 unit = dataTable10FindValue(key);
                     if (unitId == unit) {
                         if (level - 1 <= 2)
                             return 1;

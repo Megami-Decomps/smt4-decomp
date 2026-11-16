@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00163aa4(...);
+int uiSpriteAdvanceAnimation(...);
 int uiSpriteSetKeyframe(int, int, int);
 int uiSpriteSetImageKeyframe(int, int, int);
 int fillTwoWordsWithByte(int, unsigned int);
 
-/* Supplied declaration required: FUN_00163aa4. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: fillTwoWordsWithByte. */
@@ -26,8 +26,8 @@ void FUN_002f7cd4(int param_1)
   int temp_v3;
   
   temp_v3 = param_1 + 0x24ac;
-  FUN_00163aa4(param_1 + 0x3fc);
-  FUN_00163aa4();
+  uiSpriteAdvanceAnimation(param_1 + 0x3fc);
+  uiSpriteAdvanceAnimation();
   temp_v1 = *(int *)(param_1 + 0x2568);
   if (temp_v1 != 0) {
     if (temp_v1 != 1) {

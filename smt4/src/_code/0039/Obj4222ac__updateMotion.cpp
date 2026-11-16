@@ -12,7 +12,7 @@ extern "C" {
 extern Obj4222acTransition *DAT_004474f4;
 extern GameState g_gameState;
 void nodeSetTranslation(NodeEnableResource *node, s32 index, const f32 *position);
-void FUN_0028c618(NodeEnableResource *node, s32 index, f32 x, f32 y, f32 z);
+void modelPartSetRotationDegrees(NodeEnableResource *node, s32 index, f32 x, f32 y, f32 z);
 void nodeSetScale(NodeEnableResource *node, s32 index, f32 x, f32 y, f32 z);
 }
 
@@ -59,10 +59,10 @@ void Obj4222ac::updateMotion()
             }
             translated[1] += amount * 100.0f;
             nodeSetTranslation(modelOf(handle)->resource, 0, translated);
-            FUN_0028c618(modelOf(handle)->resource, 0, amount * -60.0f, DAT_004474f4->heading + 180.0f, 0);
+            modelPartSetRotationDegrees(modelOf(handle)->resource, 0, amount * -60.0f, DAT_004474f4->heading + 180.0f, 0);
         } else {
             nodeSetTranslation(modelOf(handle)->resource, 0, translated);
-            FUN_0028c618(modelOf(handle)->resource, 0, rotation[0], rotation[1], rotation[2]);
+            modelPartSetRotationDegrees(modelOf(handle)->resource, 0, rotation[0], rotation[1], rotation[2]);
         }
         nodeSetScale(modelOf(handle)->resource, 0, scale[0], scale[1], scale[2]);
         NodeEnableNode *node = modelOf(handle);

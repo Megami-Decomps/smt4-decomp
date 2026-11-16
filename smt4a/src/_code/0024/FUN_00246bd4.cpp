@@ -16,10 +16,10 @@ int nn_math_ARMv6_VEC3TransformAsm_2AD44C(...);
 
 int FUN_0013cab8(...);
 int asdMemoryAllocTracked(...);
-int FUN_00178b04(...);
+int asdMemoryAllocTraced(...);
 int FUN_00234118(...);
 int calcHeadingRoundedToCardinalDirection(...);
-int FUN_00291038(...);
+int effPartClone(...);
 int FUN_002b56e0(...);
 int FUN_002d1780(...);
 int FUN_002d1e44(...);
@@ -30,20 +30,20 @@ int FUN_0033a374(...);
 int linkHolderSetFlag(...);
 int linkHolderClearFlag(...);
 int FUN_003fd924(...);
-int FUN_003fe86c(...);
+int modelPlayClip(...);
 int itemTableClear(...);
 int FUN_0045adc0(...);
 int FUN_0049fc88(...);
 int mapIfReleaseHandle(...);
 int mapInterfaceUnregisterHandle(...);
 
-int FUN_0015f858(...);
+int dataFindKindRecordWithAocOverrides(...);
 int FUN_001681c4(...);
 int FUN_002950a8(...);
 int mapTrapGetUnk3C(...);
 int FUN_00303bd4(...);
 int naviMainSetFlagsAndActivate(...);
-int FUN_003180c4(...);
+int scrSetStringSlot(...);
 int lmapSceneRestoreEntryPosition(...);
 int mapTrapEnable(...);
 int naviMainApplyRequestValue(...);
@@ -107,11 +107,11 @@ int mapSpawnRandomEventKindEffect(...);
 int FUN_00324e38(...);
 int FUN_0033ad04(...);
 int sysPlayVoice(...);
-int FUN_003d4ed8(...);
+int soundActorStartOnFreeChannel(...);
 int gameDataFlagTestBit(...);
 int controllerGetSourceValue(...);
 int controllerGetSourceTiming(...);
-int FUN_003fd7c0(...);
+int moriModelUnitStartMaterialAnimation(...);
 int FUN_004a0524(...);
 int FUN_004a08f0(...);
 int __aeabi_memcpy4(...);
@@ -119,8 +119,8 @@ int __aeabi_memcpy4(...);
 int CONCAT44(...);
 int gameFlagsGetBlock(...);
 int randBetween(...);
-int FUN_001bbf0c(...);
-int FUN_001bc124(...);
+int libm_cosf(...);
+int libm_sinf(...);
 int FUN_002469d0(...);
 int FUN_0025ef68(...);
 float mathSnapHeading16(float angle);
@@ -137,9 +137,9 @@ int FUN_00325998(...);
 int FUN_00327ee8(...);
 void lmapSceneStartMovement(signed char);
 int FUN_00354098(...);
-int FUN_00408184(...);
+int gameCounterAddSaturating(...);
 int FUN_004a01c8(...);
-int FUN_0050d8e4(...);
+int __hardfp_atan2f(...);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
 
@@ -296,7 +296,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: soundVolumeSettingGet. */
 /* Supplied declaration required: FUN_0014af98. */
 extern unsigned int FUN_00152f44(void);
-/* Supplied declaration required: FUN_0015f858. */
+/* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: FUN_001628c0. */
 /* Supplied declaration required: gameFlagsGetBlock. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
@@ -304,11 +304,11 @@ extern int padButtonRepeat(unsigned int);
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_001681c4. */
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00178b04. */
+/* Supplied declaration required: asdMemoryAllocTraced. */
 /* Supplied declaration required: randBetween. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: mapIfSetMode1. */
 /* Supplied declaration required: mapIfShowActionMarker. */
@@ -321,7 +321,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002469d0. */
 /* Supplied declaration required: FUN_0025ef68. */
 /* Supplied declaration required: calcHeadingRoundedToCardinalDirection. */
-/* Supplied declaration required: FUN_00291038. */
+/* Supplied declaration required: effPartClone. */
 extern unsigned int FUN_0029202c(void);
 extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapIfReleaseResource. */
@@ -346,7 +346,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapIfOverlayRelease. */
 /* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: FUN_002de104. */
-extern int FUN_002e07f4(void);
+extern int pairedAvailabilityBothReady(void);
 /* Supplied declaration required: FUN_002e364c. */
 extern int FUN_002e5db4(void);
 /* Supplied declaration required: FUN_003024a0. */
@@ -365,7 +365,7 @@ extern int mapJobIsDone(void);
 /* Supplied declaration required: mapTrapGetUnk38. */
 /* Supplied declaration required: naviMainSetFlagsAndActivate. */
 /* Supplied declaration required: FUN_00317af8. */
-/* Supplied declaration required: FUN_003180c4. */
+/* Supplied declaration required: scrSetStringSlot. */
 /* Supplied declaration required: lmapSceneRestoreEntryPosition. */
 /* Supplied declaration required: mathVec3Dot. */
 /* Supplied declaration required: mapSpawnRandomEventKindEffect. */
@@ -396,7 +396,7 @@ extern unsigned int asdModelGetStatic38(void);
 /* Supplied declaration required: table23FindRecordByKey. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d2158. */
-/* Supplied declaration required: FUN_003d4ed8. */
+/* Supplied declaration required: soundActorStartOnFreeChannel. */
 /* Supplied declaration required: FUN_003d54f8. */
 extern unsigned int FUN_003e0034(void);
 /* Supplied declaration required: playerSetClampedValue. */
@@ -411,11 +411,11 @@ extern int linkHolderCheckFirst(int);
 /* Supplied declaration required: linkHolderSetFlag. */
 /* Supplied declaration required: linkHolderClearFlag. */
 /* Supplied declaration required: controllerSetDestination. */
-/* Supplied declaration required: FUN_003fd7c0. */
+/* Supplied declaration required: moriModelUnitStartMaterialAnimation. */
 /* Supplied declaration required: FUN_003fd924. */
 /* Supplied declaration required: controllerSetRotationEulerDegrees. */
-/* Supplied declaration required: FUN_003fe86c. */
-/* Supplied declaration required: FUN_00408184. */
+/* Supplied declaration required: modelPlayClip. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: itemTableClear. */
 /* Supplied declaration required: FUN_0045adc0. */
 /* Supplied declaration required: flagValueSub. */
@@ -429,7 +429,7 @@ extern int inputIsQuestCancelPressed(void);
 extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
 extern unsigned int slots4FGetActiveValue(void);
-/* Supplied declaration required: FUN_0050d8e4. */
+/* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: mapIfReleaseHandle. */
 /* Supplied declaration required: mapInterfaceUnregisterHandle. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
@@ -660,7 +660,7 @@ LAB_002b82a8:
           piVar18[0x9e] = 0;
           piVar18[0x9f] = 0;
           mapSetSceneState(3);
-          FUN_00408184(0x14,1);
+          gameCounterAddSaturating(0x14,1);
           FUN_002e364c(g_lmapScene + 10);
           FUN_00327ee8();
           if (g_lmapScene[0x74] == 1 || g_lmapScene[0x74] == 9) {
@@ -755,7 +755,7 @@ LAB_002b82a8:
       *(int *)(temp_v6 + 0xdec) = temp_v13;
       if (temp_v13 >= 0x1f) {
         *(int *)(temp_v6 + 0xdec) = temp_v12 - 0x1d;
-        FUN_00408184(0x1d,1);
+        gameCounterAddSaturating(0x1d,1);
       }
     }
     else {
@@ -765,7 +765,7 @@ LAB_002b82a8:
       piVar18[0x9d] = 0;
       piVar18[0x9e] = 0;
       piVar18[0x9f] = 0;
-      FUN_0050d8e4();
+      __hardfp_atan2f();
       fStack_6c = fStack_6c * 57.32484f;
       if ((char)g_lmapScene[4] != '\0') {
         temp_v35 = (float)g_lmapScene[5];
@@ -855,13 +855,13 @@ LAB_002b82a8:
       temp_v25 = temp_v25 * 0.017453292f;
       *(unsigned char *)(piVar18 + 0x1b) = 1;
       piVar18[0x1f] = (int)((unsigned long long)temp_v36 >> 0x20);
-      FUN_001bc124();
+      libm_sinf();
       piVar18 = g_lmapScene;
       temp_v18 = (float)((unsigned long long)temp_v41 >> 0x20);
       g_lmapScene[10] =
            (int)((float)g_lmapScene[10] + temp_v25 * (float)((unsigned long long)temp_v36 >> 0x20));
       temp_v35 = (float)piVar18[0x14] * temp_v35;
-      FUN_001bbf0c();
+      libm_cosf();
       piVar18 = g_lmapScene;
       g_lmapScene[0xc] =
            (int)((float)g_lmapScene[0xc] + temp_v35 * (float)((unsigned long long)temp_v36 >> 0x20));
@@ -909,7 +909,7 @@ LAB_002b82a8:
         FUN_004a01c8(2,5);
         g_lmapScene[0x58] = temp_v13;
         FUN_00325998(0xf,0x50);
-        temp_v13 = FUN_003d4ed8(0x1000224);
+        temp_v13 = soundActorStartOnFreeChannel(0x1000224);
         piVar18 = g_lmapScene;
         g_lmapScene[0x68] = temp_v13;
         piVar18[0x69] = 0x14;
@@ -921,7 +921,7 @@ LAB_002b82a8:
     *(float *)(temp_v6 + 0xde8) = temp_v25;
     if ((int)temp_v25 >= 0x47c35001) {
       *(float *)(temp_v6 + 0xde8) = temp_v25 - 100000.0f;
-      FUN_00408184(0x12,1);
+      gameCounterAddSaturating(0x12,1);
     }
     temp_v13 = 0x44bb8000;
     temp_v25 = *(float *)(temp_v6 + 0xdf0) + temp_v35;
@@ -985,7 +985,7 @@ LAB_002b82a8:
         *(unsigned char *)(g_lmapScene + 0x8f) = 1;
         temp_v32 = gameFlagIsSet(0x4c9);
         if ((temp_v32 == 0) || (temp_v32 = FUN_002e5db4(), temp_v32 != 0)) {
-          FUN_003fd7c0(*(unsigned int *)(g_lmapScene[99] + 4),0,2);
+          moriModelUnitStartMaterialAnimation(*(unsigned int *)(g_lmapScene[99] + 4),0,2);
         }
       }
     }
@@ -1059,7 +1059,7 @@ LAB_002b82a8:
       DAT_005f161c = 1;
       *(unsigned char *)(temp_v6 + 0xe09) = 0;
       mapSetSceneState(0x1f);
-      FUN_00408184(0x16,1);
+      gameCounterAddSaturating(0x16,1);
     }
     FUN_00327ee8();
     if (((unsigned int)piVar18 & 0x800) != 0) {
@@ -1301,7 +1301,7 @@ LAB_002b82a8:
           FUN_004a01c8(2,5);
           g_lmapScene[0x58] = 0x447a0000;
           FUN_00325998(0xf,0x50);
-          temp_v32 = FUN_003d4ed8(0x1000224);
+          temp_v32 = soundActorStartOnFreeChannel(0x1000224);
           piVar18 = g_lmapScene;
           g_lmapScene[0x68] = temp_v32;
           piVar18[0x69] = 0x14;
@@ -1459,11 +1459,11 @@ LAB_00326fcc:
         }
         temp_v20 = (float)VectorSignedToFloat((int)romwright_subpiece_4_2_0(unaff_r7,0),(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v27 = (float)g_lmapScene[0x14] * temp_v37;
-        FUN_001bc124();
+        libm_sinf();
         piVar18 = g_lmapScene;
         g_lmapScene[10] = (int)((float)g_lmapScene[10] + temp_v27 * temp_v20);
         temp_v37 = (float)piVar18[0x14] * temp_v37;
-        FUN_001bbf0c();
+        libm_cosf();
         piVar10 = &iStack_304;
         g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v37 * temp_v20);
         FUN_002469d0();
@@ -1551,7 +1551,7 @@ LAB_00326fcc:
           *(unsigned char *)(g_lmapScene + 0x8f) = 1;
           temp_v6 = gameFlagIsSet(0x4c9);
           if ((temp_v6 == 0) || (temp_v6 = FUN_002e5db4(), temp_v6 != 0)) {
-            FUN_003fd7c0(*(unsigned int *)(g_lmapScene[99] + 4),0,2);
+            moriModelUnitStartMaterialAnimation(*(unsigned int *)(g_lmapScene[99] + 4),0,2);
           }
         }
         temp_v35 = *(float *)(temp_v32 + 0x14ec) + temp_v35;
@@ -1594,7 +1594,7 @@ LAB_00326fcc:
         if ((((unsigned int)piVar18 & 4) != 0) && (DAT_005f17d0 == '\0')) {
           *(unsigned char *)(temp_v32 + 0xe09) = 0;
           mapSetSceneState(0x1f);
-          FUN_00408184(0x16,1);
+          gameCounterAddSaturating(0x16,1);
         }
         piVar18 = g_lmapScene;
         piVar10 = g_lmapScene + 7;
@@ -1622,8 +1622,8 @@ LAB_00326fcc:
                 temp_v11 = (short)g_lmapScene[0x67];
                 if (0 < temp_v11) goto LAB_003267fc;
                 *(unsigned short *)(g_lmapScene + 0x67) = 1;
-                FUN_001bc124();
-                FUN_001bbf0c();
+                libm_sinf();
+                libm_cosf();
                 temp_v32 = randBetween(0,1);
                 if (g_lmapScene[0x74] != 10) {
                   FUN_0014af98();
@@ -1633,9 +1633,9 @@ LAB_00326fcc:
                 }
               }
               if (g_lmapScene[2] == 3) {
-                FUN_001bc124();
-                FUN_001bbf0c();
-                FUN_003d4ed8(0x100029e);
+                libm_sinf();
+                libm_cosf();
+                soundActorStartOnFreeChannel(0x100029e);
                 FUN_00324e38(0xffffffff);
               }
               if ((g_lmapScene[2] == 6) && (mapSpawnRandomEventKindEffect(), g_lmapScene[2] == 6)) {
@@ -1652,9 +1652,9 @@ LAB_00326fcc:
             if (g_lmapScene[2] != 2) {
 LAB_00326870:
               if (g_lmapScene[2] == 3) {
-                FUN_001bc124();
-                FUN_001bbf0c();
-                FUN_003d4ed8(0x100029d);
+                libm_sinf();
+                libm_cosf();
+                soundActorStartOnFreeChannel(0x100029d);
                 FUN_00324e38(0xffffffff);
               }
               if (g_lmapScene[2] != 4) goto LAB_00326a10;
@@ -1663,8 +1663,8 @@ LAB_00326870:
             temp_v11 = (short)g_lmapScene[0x67];
             if (temp_v11 < 1) {
               *(unsigned short *)(g_lmapScene + 0x67) = 1;
-              FUN_001bc124();
-              FUN_001bbf0c();
+              libm_sinf();
+              libm_cosf();
               temp_v32 = randBetween(0,1);
               if (g_lmapScene[0x74] != 10) {
                 FUN_0014af98();
@@ -1680,16 +1680,16 @@ LAB_003267fc:
         }
         else {
           if (g_lmapScene[2] == 3) {
-            FUN_001bc124();
-            FUN_001bbf0c();
-            FUN_003d4ed8(0x100029c);
+            libm_sinf();
+            libm_cosf();
+            soundActorStartOnFreeChannel(0x100029c);
             if ((short)g_lmapScene[0x67] >= 1) {
               *(short *)(g_lmapScene + 0x67) = (short)g_lmapScene[0x67] - 1;
             }
             else {
               *(unsigned short *)(g_lmapScene + 0x67) = 1;
-              FUN_001bc124();
-              FUN_001bbf0c();
+              libm_sinf();
+              libm_cosf();
               temp_v32 = randBetween(0,1);
               if (g_lmapScene[0x74] != 10) {
                 FUN_0014af98();
@@ -1711,16 +1711,16 @@ LAB_003268e4:
       }
       else {
         if (g_lmapScene[2] == 3) {
-          FUN_001bc124();
-          FUN_001bbf0c();
-          FUN_003d4ed8(0x100029b);
+          libm_sinf();
+          libm_cosf();
+          soundActorStartOnFreeChannel(0x100029b);
           if ((short)g_lmapScene[0x67] >= 1) {
             *(short *)(g_lmapScene + 0x67) = (short)g_lmapScene[0x67] - 1;
           }
           else {
             *(unsigned short *)(g_lmapScene + 0x67) = 1;
-            FUN_001bc124();
-            FUN_001bbf0c();
+            libm_sinf();
+            libm_cosf();
             temp_v32 = randBetween(0,1);
             if (g_lmapScene[0x74] != 10) {
               FUN_0014af98();
@@ -1868,7 +1868,7 @@ LAB_00326cc4:
       FUN_00317af8(afStack_2f4,&uStack_2f8,0);
       if ((((0xbeffffff < (unsigned int)afStack_2f4[0]) || ((int)afStack_2f4[0] >= 0x3f000000)) ||
           (0xbeffffff < uStack_2f8)) || ((int)uStack_2f8 >= 0x3f000000)) {
-        FUN_0050d8e4();
+        __hardfp_atan2f();
         temp_v36 = CONCAT44(0x43b40000,temp_v19);
         temp_v35 = afStack_2f4[0] * 57.32484f - (float)g_lmapView[6];
         if (temp_v35 < temp_v19) {
@@ -2067,33 +2067,33 @@ LAB_003270bc:
             switch(DAT_005f162e) {
             case 0:
               temp_v3 = 0x10002c5;
-              FUN_003d4ed8(temp_v3);
+              soundActorStartOnFreeChannel(temp_v3);
               break;
             case 1:
               temp_v3 = 0x10002c7;
-              FUN_003d4ed8(temp_v3);
+              soundActorStartOnFreeChannel(temp_v3);
               break;
             case 2:
               temp_v3 = 0x10002c9;
-              FUN_003d4ed8(temp_v3);
+              soundActorStartOnFreeChannel(temp_v3);
               break;
             case 3:
               temp_v3 = 0x10002cb;
-              FUN_003d4ed8(temp_v3);
+              soundActorStartOnFreeChannel(temp_v3);
               break;
             case 4:
               temp_v3 = 0x10002cd;
-              FUN_003d4ed8(temp_v3);
+              soundActorStartOnFreeChannel(temp_v3);
               break;
             case 5:
               temp_v3 = 0x10002da;
-              FUN_003d4ed8(temp_v3);
+              soundActorStartOnFreeChannel(temp_v3);
               break;
             default:
             }
             FUN_00324e38(0xffffffff);
-            FUN_001bc124();
-            FUN_001bbf0c();
+            libm_sinf();
+            libm_cosf();
             FUN_0014af98();
             soundVolumeSettingSet();
             sysPlayVoice(0x10002e6);
@@ -2112,33 +2112,33 @@ LAB_003270bc:
           switch(DAT_005f162e) {
           case 0:
             temp_v3 = 0x10002c4;
-            FUN_003d4ed8(temp_v3);
+            soundActorStartOnFreeChannel(temp_v3);
             break;
           case 1:
             temp_v3 = 0x10002c6;
-            FUN_003d4ed8(temp_v3);
+            soundActorStartOnFreeChannel(temp_v3);
             break;
           case 2:
             temp_v3 = 0x10002c8;
-            FUN_003d4ed8(temp_v3);
+            soundActorStartOnFreeChannel(temp_v3);
             break;
           case 3:
             temp_v3 = 0x10002ca;
-            FUN_003d4ed8(temp_v3);
+            soundActorStartOnFreeChannel(temp_v3);
             break;
           case 4:
             temp_v3 = 0x10002cc;
-            FUN_003d4ed8(temp_v3);
+            soundActorStartOnFreeChannel(temp_v3);
             break;
           case 5:
             temp_v3 = 0x10002d9;
-            FUN_003d4ed8(temp_v3);
+            soundActorStartOnFreeChannel(temp_v3);
             break;
           default:
           }
           FUN_00324e38(0xffffffff);
-          FUN_001bc124();
-          FUN_001bbf0c();
+          libm_sinf();
+          libm_cosf();
           FUN_0014af98();
           soundVolumeSettingSet();
           sysPlayVoice(0x10002e5);
@@ -2220,11 +2220,11 @@ LAB_003270bc:
               piVar18[0x48] = (int)temp_v25;
               if ((int)temp_v18 < 0x42700000) {
                 temp_v18 = ((float)piVar18[0x13] + 180.0f) * 0.017453292f;
-                FUN_001bc124();
+                libm_sinf();
                 piVar18 = g_lmapScene;
                 g_lmapScene[0x46] = (int)((float)g_lmapScene[0x46] + temp_v18 * temp_v27);
                 temp_v35 = ((float)piVar18[0x13] + temp_v37) * temp_v35;
-                FUN_001bbf0c();
+                libm_cosf();
                 piVar18 = g_lmapScene + 0x49;
                 g_lmapScene[0x48] = (int)((float)g_lmapScene[0x48] + temp_v35 * temp_v27);
                 FUN_003250ac(piVar18);
@@ -2237,11 +2237,11 @@ LAB_003270bc:
               }
               else {
                 temp_v18 = ((float)piVar18[0x14] + 180.0f) * 0.017453292f;
-                FUN_001bc124();
+                libm_sinf();
                 piVar18 = g_lmapScene;
                 g_lmapScene[0x46] = (int)((float)g_lmapScene[0x46] + temp_v18 * temp_v27);
                 temp_v35 = ((float)piVar18[0x14] + temp_v37) * temp_v35;
-                FUN_001bbf0c();
+                libm_cosf();
                 piVar18 = g_lmapScene + 0x49;
                 g_lmapScene[0x48] = (int)((float)g_lmapScene[0x48] + temp_v35 * temp_v27);
                 FUN_003250ac(piVar18);
@@ -2435,11 +2435,11 @@ LAB_003270bc:
               piVar18[0xb] = (int)temp_v18;
               piVar18[0xc] = (int)temp_v19;
               temp_v18 = DAT_005f16cc * 0.017453292f;
-              FUN_001bc124();
+              libm_sinf();
               temp_v19 = 40.0f;
               g_lmapScene[10] = (int)((float)g_lmapScene[10] + temp_v18 * 40.0f);
               temp_v25 = DAT_005f16cc * temp_v25;
-              FUN_001bbf0c();
+              libm_cosf();
               piVar18 = g_lmapScene;
               g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v25 * temp_v19);
               piVar18[0x14] = (int)DAT_005f16bc;
@@ -2447,8 +2447,8 @@ LAB_003270bc:
               g_lmapView[0x2c] = -2;
               sysPlaySe(0xdd);
               FUN_00233e10(1,DAT_005f16ac);
-              FUN_001bc124();
-              FUN_001bbf0c();
+              libm_sinf();
+              libm_cosf();
               mapIfSpawnCaveAction();
               temp_v32 = g_lmapScene[1];
               piVar18 = g_lmapScene;
@@ -2631,27 +2631,27 @@ LAB_003270bc:
             FUN_0033abd4();
             switch(DAT_005f162e) {
             case 0:
-              FUN_003d4ed8(temp_v17);
+              soundActorStartOnFreeChannel(temp_v17);
               break;
             case 1:
               temp_v17 = 0x10002c6;
-              FUN_003d4ed8(temp_v17);
+              soundActorStartOnFreeChannel(temp_v17);
               break;
             case 2:
               temp_v17 = 0x10002c8;
-              FUN_003d4ed8(temp_v17);
+              soundActorStartOnFreeChannel(temp_v17);
               break;
             case 3:
               temp_v17 = 0x10002ca;
-              FUN_003d4ed8(temp_v17);
+              soundActorStartOnFreeChannel(temp_v17);
               break;
             case 4:
               temp_v17 = 0x10002cc;
-              FUN_003d4ed8(temp_v17);
+              soundActorStartOnFreeChannel(temp_v17);
               break;
             case 5:
               temp_v17 = 0x10002d9;
-              FUN_003d4ed8(temp_v17);
+              soundActorStartOnFreeChannel(temp_v17);
             }
             goto LAB_00366704;
           }
@@ -2753,8 +2753,8 @@ LAB_003270bc:
         g_lmapView[0x2c] = -3;
         sysPlaySe(0xdd);
         FUN_00233e10(1,DAT_005f16ac);
-        FUN_001bc124();
-        FUN_001bbf0c();
+        libm_sinf();
+        libm_cosf();
         FUN_00246014();
         piVar18 = g_lmapScene;
         temp_v32 = piVar18[1];
@@ -2783,13 +2783,13 @@ LAB_003270bc:
           piVar18 = g_lmapScene;
           if (DAT_005f164c != 0) {
             temp_v19 = (float)g_lmapScene[0x14] * temp_v18;
-            FUN_001bc124();
+            libm_sinf();
             piVar18 = g_lmapScene;
             temp_v25 = 250.0f;
             g_lmapScene[0x28] = (int)((float)g_lmapScene[10] + temp_v19 * 250.0f);
             piVar18[0x29] = (int)((float)piVar18[0xb] - 500.0f);
             temp_v18 = (float)piVar18[0x14] * temp_v18;
-            FUN_001bbf0c();
+            libm_cosf();
             piVar18 = g_lmapScene;
             g_lmapScene[0x2a] = (int)((float)g_lmapScene[0xc] + temp_v18 * temp_v25);
             piVar18[0x2b] = piVar18[0x14];
@@ -2851,34 +2851,34 @@ LAB_003270bc:
         FUN_0033abd4();
         switch(DAT_005f162e) {
         case 0:
-          FUN_003d4ed8(temp_v17);
+          soundActorStartOnFreeChannel(temp_v17);
           break;
         case 1:
           temp_v17 = 0x10002c6;
-          FUN_003d4ed8(temp_v17);
+          soundActorStartOnFreeChannel(temp_v17);
           break;
         case 2:
           temp_v17 = 0x10002c8;
-          FUN_003d4ed8(temp_v17);
+          soundActorStartOnFreeChannel(temp_v17);
           break;
         case 3:
           temp_v17 = 0x10002ca;
-          FUN_003d4ed8(temp_v17);
+          soundActorStartOnFreeChannel(temp_v17);
           break;
         case 4:
           temp_v17 = 0x10002cc;
-          FUN_003d4ed8(temp_v17);
+          soundActorStartOnFreeChannel(temp_v17);
           break;
         case 5:
           temp_v17 = 0x10002d9;
-          FUN_003d4ed8(temp_v17);
+          soundActorStartOnFreeChannel(temp_v17);
           break;
         default:
         }
 LAB_00366704:
         FUN_00324e38(0xffffffff);
-        FUN_001bc124();
-        FUN_001bbf0c();
+        libm_sinf();
+        libm_cosf();
         FUN_0014af98();
         soundVolumeSettingSet();
         sysPlayVoice(0x10002e5);
@@ -2941,10 +2941,10 @@ LAB_00366704:
           piVar18[0x16] = 0x40400000;
           piVar18[1] = 0xe;
           piVar18[2] = 0;
-          FUN_001bc124();
-          FUN_001bbf0c();
-          FUN_001bc124();
-          FUN_001bbf0c();
+          libm_sinf();
+          libm_cosf();
+          libm_sinf();
+          libm_cosf();
           FUN_00352308();
         }
         break;
@@ -2964,33 +2964,33 @@ LAB_00366704:
           switch(DAT_005f162e) {
           case 0:
             temp_v17 = 0x10002c5;
-            FUN_003d4ed8(temp_v17);
+            soundActorStartOnFreeChannel(temp_v17);
             break;
           case 1:
             temp_v17 = 0x10002c7;
-            FUN_003d4ed8(temp_v17);
+            soundActorStartOnFreeChannel(temp_v17);
             break;
           case 2:
             temp_v17 = 0x10002c9;
-            FUN_003d4ed8(temp_v17);
+            soundActorStartOnFreeChannel(temp_v17);
             break;
           case 3:
             temp_v17 = 0x10002cb;
-            FUN_003d4ed8(temp_v17);
+            soundActorStartOnFreeChannel(temp_v17);
             break;
           case 4:
             temp_v17 = 0x10002cd;
-            FUN_003d4ed8(temp_v17);
+            soundActorStartOnFreeChannel(temp_v17);
             break;
           case 5:
             temp_v17 = 0x10002da;
-            FUN_003d4ed8(temp_v17);
+            soundActorStartOnFreeChannel(temp_v17);
             break;
           default:
           }
           FUN_00324e38(0xffffffff);
-          FUN_001bc124();
-          FUN_001bbf0c();
+          libm_sinf();
+          libm_cosf();
           FUN_0014af98();
           soundVolumeSettingSet();
           sysPlayVoice(0x10002e6);
@@ -3076,11 +3076,11 @@ LAB_00366704:
                 if (temp_v32 + 1 == 1) {
                   if ((g_gameState != (unsigned int *)0x26) && (g_gameState != (unsigned int *)0x1a))
                   {
-                    FUN_003d4ed8(0x10002bb);
+                    soundActorStartOnFreeChannel(0x10002bb);
                   }
                   FUN_00324e38(0xffffffff);
-                  FUN_001bc124();
-                  FUN_001bbf0c();
+                  libm_sinf();
+                  libm_cosf();
                   FUN_0014af98();
                   soundVolumeSettingSet();
                   sysPlayVoice(0x10002e7);
@@ -3102,7 +3102,7 @@ LAB_00366704:
                   piVar18[9] = temp_v6;
                   piVar18[1] = piVar18[1] + 1;
                   if (g_gameState == (unsigned int *)0x26 || g_gameState == (unsigned int *)0x1a) {
-                    FUN_003d4ed8(0x10000f7);
+                    soundActorStartOnFreeChannel(0x10000f7);
                   }
                   g_lmapScene[2] = 0;
                 }
@@ -3142,12 +3142,12 @@ LAB_00366704:
                 piVar18[0xc] = iStack_38;
                 temp_v19 = (fStack_34 + temp_v18) * temp_v25;
                 piVar18[0xb] = (int)(fStack_3c - 142.0f);
-                FUN_001bc124();
+                libm_sinf();
                 piVar18 = g_lmapScene;
                 temp_v35 = 35.0f;
                 g_lmapScene[10] = (int)((float)g_lmapScene[10] + temp_v19 * 35.0f);
                 temp_v25 = ((float)piVar18[0x14] + temp_v18) * temp_v25;
-                FUN_001bbf0c();
+                libm_cosf();
                 g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v25 * temp_v35);
               }
               else {
@@ -3196,8 +3196,8 @@ LAB_00366704:
           g_lmapView[0x2c] = -3;
           sysPlaySe(0xdd);
           FUN_00233e10(1,DAT_005f16ac);
-          FUN_001bc124();
-          FUN_001bbf0c();
+          libm_sinf();
+          libm_cosf();
           FUN_00246014();
           piVar18 = g_lmapScene;
           g_lmapScene[1] = g_lmapScene[1] + 1;
@@ -3246,7 +3246,7 @@ LAB_00366704:
       piVar18[9] = piVar18[0xc];
       if ((g_gameState != (unsigned int *)0x26) && (g_gameState != (unsigned int *)0x1a)) {
         if ((temp_v5 == 1 || temp_v5 == 0xb) || (temp_v5 == 0x1c || temp_v5 == 0x29)) {
-          FUN_003d4ed8((temp_v5 & 3) + 0x10002bb);
+          soundActorStartOnFreeChannel((temp_v5 & 3) + 0x10002bb);
           FUN_00324e38(0xffffffff);
         }
       }
@@ -3358,11 +3358,11 @@ LAB_00366704:
             piVar18[0xb] = (int)temp_v19;
             piVar18[0xc] = (int)temp_v25;
             temp_v18 = ((float)piVar18[0x13] + 180.0f) * 0.017453292f;
-            FUN_001bc124();
+            libm_sinf();
             piVar18 = g_lmapScene;
             g_lmapScene[10] = (int)((float)g_lmapScene[10] + temp_v18 * temp_v27);
             temp_v35 = ((float)piVar18[0x13] + temp_v37) * temp_v35;
-            FUN_001bbf0c();
+            libm_cosf();
             piVar18 = g_lmapScene;
             g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v35 * temp_v27);
             temp_v32 = piVar18[10];
@@ -3380,11 +3380,11 @@ LAB_00366704:
             piVar18[0xb] = (int)temp_v18;
             piVar18[0xc] = (int)temp_v19;
             temp_v18 = (temp_v25 + temp_v37) * temp_v35;
-            FUN_001bc124();
+            libm_sinf();
             piVar18 = g_lmapScene;
             g_lmapScene[10] = (int)((float)g_lmapScene[10] + temp_v18 * temp_v27);
             temp_v35 = ((float)piVar18[0x14] + temp_v37) * temp_v35;
-            FUN_001bbf0c();
+            libm_cosf();
             g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v35 * temp_v27);
           }
           FUN_00303460(10);
@@ -3508,19 +3508,19 @@ LAB_00366704:
               piVar18[0xb] = (int)temp_v19;
               piVar18[0xc] = (int)temp_v25;
               temp_v19 = (temp_v35 + 180.0f) * temp_v18;
-              FUN_001bc124();
+              libm_sinf();
               piVar18 = g_lmapScene;
               temp_v25 = 110.0f;
               g_lmapScene[10] = (int)((float)g_lmapScene[10] + temp_v19 * 110.0f);
               temp_v18 = ((float)piVar18[0x14] + temp_v37) * temp_v18;
-              FUN_001bbf0c();
+              libm_cosf();
               g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v18 * temp_v25);
               FUN_00303460(10);
               g_lmapView[0x2c] = -1;
               sysPlaySe(0xdd);
               FUN_00233e10(1,DAT_005f16ac);
-              FUN_001bc124();
-              FUN_001bbf0c();
+              libm_sinf();
+              libm_cosf();
               FUN_00246014();
               temp_v32 = g_lmapScene[1];
               piVar18 = g_lmapScene;
@@ -3556,33 +3556,33 @@ LAB_00366704:
           switch(DAT_005f162e) {
           case 0:
             temp_v3 = 0x10002c4;
-            FUN_003d4ed8(temp_v3);
+            soundActorStartOnFreeChannel(temp_v3);
             break;
           case 1:
             temp_v3 = 0x10002c6;
-            FUN_003d4ed8(temp_v3);
+            soundActorStartOnFreeChannel(temp_v3);
             break;
           case 2:
             temp_v3 = 0x10002c8;
-            FUN_003d4ed8(temp_v3);
+            soundActorStartOnFreeChannel(temp_v3);
             break;
           case 3:
             temp_v3 = 0x10002ca;
-            FUN_003d4ed8(temp_v3);
+            soundActorStartOnFreeChannel(temp_v3);
             break;
           case 4:
             temp_v3 = 0x10002cc;
-            FUN_003d4ed8(temp_v3);
+            soundActorStartOnFreeChannel(temp_v3);
             break;
           case 5:
             temp_v3 = 0x10002d9;
-            FUN_003d4ed8(temp_v3);
+            soundActorStartOnFreeChannel(temp_v3);
             break;
           default:
           }
           FUN_00324e38(0xffffffff);
-          FUN_001bc124();
-          FUN_001bbf0c();
+          libm_sinf();
+          libm_cosf();
           FUN_0014af98();
           soundVolumeSettingSet();
           sysPlayVoice(0x10002e5);
@@ -3672,7 +3672,7 @@ LAB_00366704:
         slotSetRequest(0,10,0xff);
         slotSetRequest(1,10,0xff);
       }
-      if ((g_lmapScene[2] >= 0x1f) && (temp_v32 = FUN_002e07f4(), temp_v32 != 0)) {
+      if ((g_lmapScene[2] >= 0x1f) && (temp_v32 = pairedAvailabilityBothReady(), temp_v32 != 0)) {
         temp_v32 = g_lmapScene[1];
         piVar18 = g_lmapScene;
         piVar18[1] = temp_v32 + 1;
@@ -3761,11 +3761,11 @@ LAB_00367f20:
               piVar18[0xb] = (int)temp_v19;
               piVar18[0xc] = (int)temp_v25;
               temp_v19 = DAT_005f16cc * 0.017453292f;
-              FUN_001bc124();
+              libm_sinf();
               temp_v25 = 25.0f;
               g_lmapScene[10] = (int)((float)g_lmapScene[10] + temp_v19 * 25.0f);
               temp_v18 = DAT_005f16cc * temp_v18;
-              FUN_001bbf0c();
+              libm_cosf();
               piVar18 = g_lmapScene;
               g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v18 * temp_v25);
               piVar18[0x14] = (int)DAT_005f16bc;
@@ -3802,33 +3802,33 @@ LAB_00367f20:
             switch(DAT_005f162e) {
             case 0:
               temp_v3 = 0x10002c4;
-              FUN_003d4ed8(temp_v3);
+              soundActorStartOnFreeChannel(temp_v3);
               break;
             case 1:
               temp_v3 = 0x10002c6;
-              FUN_003d4ed8(temp_v3);
+              soundActorStartOnFreeChannel(temp_v3);
               break;
             case 2:
               temp_v3 = 0x10002c8;
-              FUN_003d4ed8(temp_v3);
+              soundActorStartOnFreeChannel(temp_v3);
               break;
             case 3:
               temp_v3 = 0x10002ca;
-              FUN_003d4ed8(temp_v3);
+              soundActorStartOnFreeChannel(temp_v3);
               break;
             case 4:
               temp_v3 = 0x10002cc;
-              FUN_003d4ed8(temp_v3);
+              soundActorStartOnFreeChannel(temp_v3);
               break;
             case 5:
               temp_v3 = 0x10002d9;
-              FUN_003d4ed8(temp_v3);
+              soundActorStartOnFreeChannel(temp_v3);
               break;
             default:
             }
             FUN_00324e38(0xffffffff);
-            FUN_001bc124();
-            FUN_001bbf0c();
+            libm_sinf();
+            libm_cosf();
             FUN_0014af98();
             soundVolumeSettingSet();
             sysPlayVoice(0x10002e5);
@@ -3883,7 +3883,7 @@ LAB_00367f20:
           }
         }
         else {
-          temp_v32 = FUN_002e07f4();
+          temp_v32 = pairedAvailabilityBothReady();
           piVar18 = g_lmapView;
           if (temp_v32 != 0) {
             g_lmapView[6] = g_lmapScene[0x14];
@@ -3958,11 +3958,11 @@ LAB_0033eae8:
                 if (temp_v32 + 1 == 1) {
                   if ((g_gameState != (unsigned int *)0x26) && (g_gameState != (unsigned int *)0x1a))
                   {
-                    FUN_003d4ed8(0x10002bb);
+                    soundActorStartOnFreeChannel(0x10002bb);
                   }
                   FUN_00324e38(0xffffffff);
-                  FUN_001bc124();
-                  FUN_001bbf0c();
+                  libm_sinf();
+                  libm_cosf();
                   FUN_0014af98();
                   soundVolumeSettingSet();
                   sysPlayVoice(0x10002e7);
@@ -3984,7 +3984,7 @@ LAB_0033eae8:
                   piVar18[9] = temp_v6;
                   piVar18[1] = piVar18[1] + 1;
                   if (g_gameState == (unsigned int *)0x26 || g_gameState == (unsigned int *)0x1a) {
-                    FUN_003d4ed8(0x10000f7);
+                    soundActorStartOnFreeChannel(0x10000f7);
                   }
                   g_lmapScene[2] = 0;
                 }
@@ -4019,11 +4019,11 @@ LAB_0033eae8:
                 piVar18[0xc] = iStack_38;
                 piVar18[0xb] = (int)(fStack_3c - 250.0f);
                 temp_v18 = ((float)piVar18[0x13] + 180.0f) * temp_v19;
-                FUN_001bc124();
+                libm_sinf();
                 piVar18 = g_lmapScene;
                 g_lmapScene[10] = (int)((float)g_lmapScene[10] + temp_v18 * temp_v25);
                 temp_v19 = ((float)piVar18[0x13] + temp_v35) * temp_v19;
-                FUN_001bbf0c();
+                libm_cosf();
                 g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v19 * temp_v25);
               }
               else {
@@ -4068,10 +4068,10 @@ LAB_0033eae8:
           piVar18[0xb] = (int)temp_v18;
           piVar18[0xc] = (int)temp_v35;
           temp_v18 = DAT_005f16cc * 0.017453292f;
-          FUN_001bc124();
+          libm_sinf();
           g_lmapScene[10] = (int)((float)g_lmapScene[10] + temp_v18 * temp_v25);
           temp_v19 = DAT_005f16cc * temp_v19;
-          FUN_001bbf0c();
+          libm_cosf();
           piVar18 = g_lmapScene;
           g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v19 * temp_v25);
           piVar18[0x14] = (int)DAT_005f16bc;
@@ -4127,7 +4127,7 @@ LAB_0033eae8:
       piVar18[9] = piVar18[0xc];
       if ((g_gameState != (unsigned int *)0x26) && (g_gameState != (unsigned int *)0x1a)) {
         if ((temp_v5 == 0xb || temp_v5 == 0x1c) || temp_v5 == 0x29) {
-          FUN_003d4ed8((temp_v5 & 3) + 0x10002bb);
+          soundActorStartOnFreeChannel((temp_v5 & 3) + 0x10002bb);
           FUN_00324e38(0xffffffff);
         }
       }
@@ -4177,33 +4177,33 @@ LAB_0033eae8:
           switch(DAT_005f162e) {
           case 0:
             temp_v3 = 0x10002c5;
-            FUN_003d4ed8(temp_v3);
+            soundActorStartOnFreeChannel(temp_v3);
             break;
           case 1:
             temp_v3 = 0x10002c7;
-            FUN_003d4ed8(temp_v3);
+            soundActorStartOnFreeChannel(temp_v3);
             break;
           case 2:
             temp_v3 = 0x10002c9;
-            FUN_003d4ed8(temp_v3);
+            soundActorStartOnFreeChannel(temp_v3);
             break;
           case 3:
             temp_v3 = 0x10002cb;
-            FUN_003d4ed8(temp_v3);
+            soundActorStartOnFreeChannel(temp_v3);
             break;
           case 4:
             temp_v3 = 0x10002cd;
-            FUN_003d4ed8(temp_v3);
+            soundActorStartOnFreeChannel(temp_v3);
             break;
           case 5:
             temp_v3 = 0x10002da;
-            FUN_003d4ed8(temp_v3);
+            soundActorStartOnFreeChannel(temp_v3);
             break;
           default:
           }
           FUN_00324e38(0xffffffff);
-          FUN_001bc124();
-          FUN_001bbf0c();
+          libm_sinf();
+          libm_cosf();
           FUN_0014af98();
           soundVolumeSettingSet();
           sysPlayVoice(0x10002e6);
@@ -4251,33 +4251,33 @@ LAB_0033eae8:
           switch(DAT_005f162e) {
           case 0:
             temp_v3 = 0x10002c5;
-            FUN_003d4ed8(temp_v3);
+            soundActorStartOnFreeChannel(temp_v3);
             break;
           case 1:
             temp_v3 = 0x10002c7;
-            FUN_003d4ed8(temp_v3);
+            soundActorStartOnFreeChannel(temp_v3);
             break;
           case 2:
             temp_v3 = 0x10002c9;
-            FUN_003d4ed8(temp_v3);
+            soundActorStartOnFreeChannel(temp_v3);
             break;
           case 3:
             temp_v3 = 0x10002cb;
-            FUN_003d4ed8(temp_v3);
+            soundActorStartOnFreeChannel(temp_v3);
             break;
           case 4:
             temp_v3 = 0x10002cd;
-            FUN_003d4ed8(temp_v3);
+            soundActorStartOnFreeChannel(temp_v3);
             break;
           case 5:
             temp_v3 = 0x10002da;
-            FUN_003d4ed8(temp_v3);
+            soundActorStartOnFreeChannel(temp_v3);
             break;
           default:
           }
           FUN_00324e38(0xffffffff);
-          FUN_001bc124();
-          FUN_001bbf0c();
+          libm_sinf();
+          libm_cosf();
           FUN_0014af98();
           soundVolumeSettingSet();
           sysPlayVoice(0x10002e6);
@@ -4367,33 +4367,33 @@ LAB_0033eae8:
       switch(DAT_005f162e) {
       case 0:
         temp_v3 = 0x10002c5;
-        FUN_003d4ed8(temp_v3);
+        soundActorStartOnFreeChannel(temp_v3);
         break;
       case 1:
         temp_v3 = 0x10002c7;
-        FUN_003d4ed8(temp_v3);
+        soundActorStartOnFreeChannel(temp_v3);
         break;
       case 2:
         temp_v3 = 0x10002c9;
-        FUN_003d4ed8(temp_v3);
+        soundActorStartOnFreeChannel(temp_v3);
         break;
       case 3:
         temp_v3 = 0x10002cb;
-        FUN_003d4ed8(temp_v3);
+        soundActorStartOnFreeChannel(temp_v3);
         break;
       case 4:
         temp_v3 = 0x10002cd;
-        FUN_003d4ed8(temp_v3);
+        soundActorStartOnFreeChannel(temp_v3);
         break;
       case 5:
         temp_v3 = 0x10002da;
-        FUN_003d4ed8(temp_v3);
+        soundActorStartOnFreeChannel(temp_v3);
         break;
       default:
       }
       FUN_00324e38(0xffffffff);
-      FUN_001bc124();
-      FUN_001bbf0c();
+      libm_sinf();
+      libm_cosf();
       FUN_0014af98();
       soundVolumeSettingSet();
       sysPlayVoice(0x10002e6);
@@ -4558,8 +4558,8 @@ joined_r0x00248750:
           piVar18[0xb] = piVar18[8];
           piVar18[0xc] = piVar18[9];
           *(unsigned char *)(piVar18 + 0x1b) = 0;
-          FUN_001bc124();
-          FUN_001bbf0c();
+          libm_sinf();
+          libm_cosf();
           temp_v17 = FUN_00152f44();
           temp_v3 = FUN_0014af98();
           FUN_001628c0(&LAB_002d9eec,temp_v3,temp_v17,1);
@@ -4645,8 +4645,8 @@ joined_r0x00248750:
                   temp_v11 = (short)g_lmapScene[0x67];
                   if (0 < temp_v11) goto LAB_002da2b0;
                   *(unsigned short *)(g_lmapScene + 0x67) = 1;
-                  FUN_001bc124();
-                  FUN_001bbf0c();
+                  libm_sinf();
+                  libm_cosf();
                   uStack_60 = randBetween(0,1);
                   FUN_0014af98();
                   soundVolumeSettingSet();
@@ -4654,9 +4654,9 @@ joined_r0x00248750:
                   soundVolumeSettingSet((unsigned int)uStack_54);
                 }
                 if (g_lmapScene[0x9c] == 3) {
-                  FUN_001bc124();
-                  FUN_001bbf0c();
-                  FUN_003d4ed8(0x100029e);
+                  libm_sinf();
+                  libm_cosf();
+                  soundActorStartOnFreeChannel(0x100029e);
                   FUN_00324e38(0xffffffff);
                 }
                 if ((g_lmapScene[0x9c] == 6) && (mapSpawnRandomEventKindEffect(), g_lmapScene[0x9c] == 6)) {
@@ -4669,9 +4669,9 @@ joined_r0x00248750:
               if (g_lmapScene[0x9c] != 2) {
 LAB_002da1e4:
                 if (g_lmapScene[0x9c] == 3) {
-                  FUN_001bc124();
-                  FUN_001bbf0c();
-                  FUN_003d4ed8(0x100029d);
+                  libm_sinf();
+                  libm_cosf();
+                  soundActorStartOnFreeChannel(0x100029d);
                   FUN_00324e38(0xffffffff);
                 }
                 if (g_lmapScene[0x9c] == 4) {
@@ -4685,8 +4685,8 @@ LAB_002da1e4:
               temp_v11 = (short)g_lmapScene[0x67];
               if (temp_v11 < 1) {
                 *(unsigned short *)(g_lmapScene + 0x67) = 1;
-                FUN_001bc124();
-                FUN_001bbf0c();
+                libm_sinf();
+                libm_cosf();
                 uStack_60 = randBetween(0,1);
                 FUN_0014af98();
                 soundVolumeSettingSet();
@@ -4699,16 +4699,16 @@ LAB_002da2b0:
             }
             else {
               if (g_lmapScene[0x9c] == 3) {
-                FUN_001bc124();
-                FUN_001bbf0c();
-                FUN_003d4ed8(0x100029c);
+                libm_sinf();
+                libm_cosf();
+                soundActorStartOnFreeChannel(0x100029c);
                 if ((short)g_lmapScene[0x67] >= 1) {
                   *(short *)(g_lmapScene + 0x67) = (short)g_lmapScene[0x67] - 1;
                 }
                 else {
                   *(unsigned short *)(g_lmapScene + 0x67) = 1;
-                  FUN_001bc124();
-                  FUN_001bbf0c();
+                  libm_sinf();
+                  libm_cosf();
                   uStack_60 = randBetween(0,1);
                   FUN_0014af98();
                   soundVolumeSettingSet();
@@ -4747,16 +4747,16 @@ LAB_002da3cc:
           }
           else {
             if (g_lmapScene[0x9c] == 3) {
-              FUN_001bc124();
-              FUN_001bbf0c();
-              FUN_003d4ed8(0x100029b);
+              libm_sinf();
+              libm_cosf();
+              soundActorStartOnFreeChannel(0x100029b);
               if ((short)g_lmapScene[0x67] >= 1) {
                 *(short *)(g_lmapScene + 0x67) = (short)g_lmapScene[0x67] - 1;
               }
               else {
                 *(unsigned short *)(g_lmapScene + 0x67) = 1;
-                FUN_001bc124();
-                FUN_001bbf0c();
+                libm_sinf();
+                libm_cosf();
                 uStack_60 = randBetween(0,1);
                 FUN_0014af98();
                 soundVolumeSettingSet();
@@ -4856,8 +4856,8 @@ LAB_002da3cc:
             FUN_00303bd4();
             if (temp_v5 != 0) {
               temp_v10 = temp_v5;
-              FUN_0015f858();
-              FUN_003180c4(0,temp_v10);
+              dataFindKindRecordWithAocOverrides();
+              scrSetStringSlot(0,temp_v10);
               flagValueSub(temp_v5,1);
               mapMainStartEntry(&LAB_002dab1c);
             }
@@ -4893,8 +4893,8 @@ LAB_002da3cc:
             }
             else {
               temp_v10 = temp_v5;
-              FUN_0015f858(temp_v5,0);
-              FUN_003180c4(0,temp_v10);
+              dataFindKindRecordWithAocOverrides(temp_v5,0);
+              scrSetStringSlot(0,temp_v10);
               flagValueSub(temp_v5,1);
               temp_v17 = 0x2dab4c;
             }
@@ -4918,7 +4918,7 @@ LAB_002da3cc:
           }
           break;
         case 7:
-          temp_v32 = FUN_002e07f4();
+          temp_v32 = pairedAvailabilityBothReady();
           if (temp_v32 != 0) {
             temp_v32 = mapTrapGetUnk38();
             g_lmapScene[2] = g_lmapScene[2] + 1;
@@ -5036,7 +5036,7 @@ LAB_002dad8c:
                 }
               }
               else {
-                temp_v32 = FUN_002e07f4();
+                temp_v32 = pairedAvailabilityBothReady();
                 if (temp_v32 != 0) {
                   mapTrapGetUnk38();
                   g_lmapScene[2] = g_lmapScene[2] + 1;
@@ -5149,12 +5149,12 @@ LAB_002dad8c:
     }
     else {
       temp_v32 = linkHolderCheckFirst(g_lmapScene[0x6a]);
-      if ((temp_v32 != 0) && (temp_v32 = FUN_002e07f4(), temp_v32 != 0)) {
+      if ((temp_v32 != 0) && (temp_v32 = pairedAvailabilityBothReady(), temp_v32 != 0)) {
         temp_v32 = (int)DAT_005f19d0;
         if (temp_v32 != 0) {
           temp_v6 = temp_v32;
-          FUN_0015f858(temp_v32,0);
-          FUN_003180c4(0,temp_v6);
+          dataFindKindRecordWithAocOverrides(temp_v32,0);
+          scrSetStringSlot(0,temp_v6);
           flagValueSub(temp_v32,1);
           mapMainStartEntry(&LAB_002dae40);
           FUN_001681c4();
@@ -5198,9 +5198,9 @@ LAB_002dad8c:
       *(unsigned char *)(piVar10 + 0x1b) = 0;
       FUN_002d1f40(10,0x14,0);
       FUN_00324e38(0);
-      FUN_003d4ed8(0x1000224);
-      FUN_001bc124();
-      FUN_001bbf0c();
+      soundActorStartOnFreeChannel(0x1000224);
+      libm_sinf();
+      libm_cosf();
       temp_v32 = randBetween(0,1);
       if (temp_v32 == 0) {
         FUN_0014af98();
@@ -5302,7 +5302,7 @@ LAB_002dad8c:
     case 3:
       fStack_20 = temp_v35;
       fStack_1c = temp_v37;
-      temp_v32 = FUN_002e07f4();
+      temp_v32 = pairedAvailabilityBothReady();
       if (temp_v32 != 0) {
         FUN_00303460(0);
         piVar18 = g_lmapScene;
@@ -5441,8 +5441,8 @@ code_r0x00313648:
             fStack_20 = temp_v35;
             fStack_1c = temp_v37;
             FUN_00324e38(0);
-            FUN_001bc124();
-            FUN_001bbf0c();
+            libm_sinf();
+            libm_cosf();
             temp_v17 = FUN_00152f44();
             temp_v3 = FUN_0014af98();
             FUN_001628c0(0x2483f0,temp_v3,temp_v17,1);
@@ -5536,11 +5536,11 @@ code_r0x00313648:
     fStack_3c = temp_v19;
     fStack_20 = temp_v35;
     fStack_1c = temp_v37;
-    FUN_001bc124();
+    libm_sinf();
     piVar18 = g_lmapScene;
     g_lmapScene[10] = (int)((float)g_lmapScene[10] + temp_v18 * (float)g_lmapScene[0x1f]);
     temp_v27 = (float)piVar18[0x14] * temp_v27;
-    FUN_001bbf0c();
+    libm_cosf();
     piVar18 = g_lmapScene;
     g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v27 * (float)g_lmapScene[0x1f]);
     piVar18[0xd] = temp_v6;
@@ -5883,14 +5883,14 @@ code_r0x00313648:
           temp_v18 = (float)g_lmapScene[7];
           mathPositionHeadingDegrees();
           temp_v18 = temp_v18 * temp_v19;
-          FUN_001bc124();
+          libm_sinf();
           piVar18 = g_lmapScene;
           temp_v25 = 20.0f;
           g_lmapScene[10] = (int)((float)g_lmapScene[10] + temp_v18 * 20.0f);
           temp_v18 = (float)piVar18[7];
           mathPositionHeadingDegrees();
           temp_v18 = temp_v18 * temp_v19;
-          FUN_001bbf0c();
+          libm_cosf();
           piVar18 = g_lmapScene;
           g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v18 * temp_v25);
           if (piVar18[2] >= 0x17) {
@@ -5914,12 +5914,12 @@ code_r0x00313648:
             FUN_00303460(0x13);
             temp_v25 = 180.0f;
             temp_v18 = ((float)g_lmapScene[0x14] + 180.0f) * temp_v19;
-            FUN_001bc124();
+            libm_sinf();
             piVar18 = g_lmapScene;
             temp_v35 = 500.0f;
             g_lmapScene[10] = (int)((float)g_lmapScene[10] + temp_v18 * 500.0f);
             temp_v19 = ((float)piVar18[0x14] + temp_v25) * temp_v19;
-            FUN_001bbf0c();
+            libm_cosf();
             g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v19 * temp_v35);
           }
         }
@@ -5953,12 +5953,12 @@ code_r0x00313648:
     case 3:
       g_lmapScene[2] = g_lmapScene[2] + 1;
       temp_v18 = (float)piVar18[0x14] * 0.017453292f;
-      FUN_001bc124();
+      libm_sinf();
       piVar18 = g_lmapScene;
       temp_v25 = 22.5f;
       g_lmapScene[10] = (int)((float)g_lmapScene[10] + temp_v18 * 22.5f);
       temp_v19 = (float)piVar18[0x14] * temp_v19;
-      FUN_001bbf0c();
+      libm_cosf();
       piVar18 = g_lmapScene;
       g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v19 * temp_v25);
       if (piVar18[2] < 0x29) {
@@ -5983,12 +5983,12 @@ code_r0x00313648:
       return;
     case 5:
       temp_v18 = (float)g_lmapScene[0x14] * 0.017453292f;
-      FUN_001bc124();
+      libm_sinf();
       piVar18 = g_lmapScene;
       temp_v25 = 100.0f;
       g_lmapScene[7] = (int)((float)g_lmapScene[7] + temp_v18 * 100.0f);
       temp_v19 = (float)piVar18[0x14] * temp_v19;
-      FUN_001bbf0c();
+      libm_cosf();
       piVar18 = g_lmapScene;
       temp_v18 = (float)g_lmapScene[9] + temp_v19 * temp_v25;
       g_lmapScene[9] = (int)temp_v18;
@@ -6073,7 +6073,7 @@ code_r0x00313648:
         in_s0 = 0x3f400000;
         temp_v32 = *(int *)(piVar18[0x61] + 4);
         *(unsigned int *)(temp_v32 + 0x1fc) = 0x3f400000;
-        FUN_003fe86c(temp_v32,0,2);
+        modelPlayClip(temp_v32,0,2);
         *(unsigned int *)(temp_v32 + 4) = *(unsigned int *)(temp_v32 + 4) & 0xfffffffc;
         slotTargetApplyActiveValue(g_lmapScene[0x6a]);
         linkedTargetSetFloat(g_lmapScene[0x6a]);
@@ -6087,7 +6087,7 @@ code_r0x00313648:
       }
       controllerGetSourceValue(g_lmapScene[0x6a]);
       if (in_s0 >= 0x41500000) {
-        FUN_003fe86c(*(unsigned int *)(g_lmapScene[0x61] + 4),0,2);
+        modelPlayClip(*(unsigned int *)(g_lmapScene[0x61] + 4),0,2);
         slotTargetApplyActiveValue(g_lmapScene[0x6a]);
       }
       piVar18 = g_lmapScene;
@@ -6134,7 +6134,7 @@ code_r0x00313648:
       fStack_20 = temp_v35;
       fStack_1c = temp_v37;
       FUN_003fd924();
-      FUN_003fd7c0(temp_v32,temp_v5,0);
+      moriModelUnitStartMaterialAnimation(temp_v32,temp_v5,0);
       temp_v6 = *(int *)(temp_v32 + 0x20c);
       if (temp_v6 != 0) {
         temp_v6 = temp_v6 + 0xc;
@@ -6184,7 +6184,7 @@ code_r0x00313648:
                 }
                 if (temp_v15 && temp_v10 == temp_v5) {
                   puVar11 = (unsigned int *)0x10;
-                  FUN_00178b04(0x10,"c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelEffect.cpp",
+                  asdMemoryAllocTraced(0x10,"c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelEffect.cpp",
                                0xf0);
                   if (puVar11 != (unsigned int *)0x0) {
                     *puVar11 = 0xffffffff;
@@ -6196,7 +6196,7 @@ code_r0x00313648:
                   puVar11[1] = puVar17[1];
                   puVar11[2] = puVar17[2];
                   temp_v10 = puVar17[3];
-                  FUN_00291038();
+                  effPartClone();
                   puVar11[3] = temp_v10;
                   *(unsigned int **)(*(int *)(temp_v32 + 0x20) + temp_v13 * 4) = puVar11;
                   temp_v13 = temp_v13 + 1;
@@ -6460,11 +6460,11 @@ code_r0x00303460:
       piVar18[0x16] = temp_v32;
       piVar18[0x15] = (int)(temp_v18 + 150.0f);
       temp_v18 = (float)piVar10[0x14] * 0.017453292f;
-      FUN_001bc124();
+      libm_sinf();
       temp_v25 = 600.0f;
       g_lmapView[0x14] = (int)((float)g_lmapView[0x14] + temp_v18 * 600.0f);
       temp_v19 = (float)g_lmapScene[0x14] * temp_v19;
-      FUN_001bbf0c();
+      libm_cosf();
       g_lmapView[0x16] = (int)((float)g_lmapView[0x16] + temp_v19 * temp_v25);
       break;
     case 7:
@@ -6478,21 +6478,21 @@ code_r0x00303460:
       }
       temp_v19 = (float)g_lmapView[0xa6] * 0.017453292f;
       if (!(temp_v6 != 0x5a && temp_v32 != 0xe)) {
-        FUN_001bc124();
+        libm_sinf();
         piVar18 = g_lmapView;
         g_lmapView[0xd] = (int)temp_v19;
         temp_v18 = (float)piVar18[0xa6] * temp_v18;
-        FUN_001bbf0c();
+        libm_cosf();
         piVar18 = g_lmapView;
         g_lmapView[0xc] = (int)temp_v18;
         piVar18[0xb] = 0;
       }
       else {
-        FUN_001bc124();
+        libm_sinf();
         piVar18 = g_lmapView;
         g_lmapView[0xb] = (int)temp_v19;
         temp_v18 = (float)piVar18[0xa6] * temp_v18;
-        FUN_001bbf0c();
+        libm_cosf();
         piVar18 = g_lmapView;
         g_lmapView[0xc] = (int)temp_v18;
         piVar18[0xd] = 0;
@@ -6516,21 +6516,21 @@ code_r0x00303460:
       }
       temp_v19 = (float)g_lmapView[0xa6] * 0.017453292f;
       if (!(temp_v6 != 0x5a && temp_v32 != 0xe)) {
-        FUN_001bc124();
+        libm_sinf();
         piVar18 = g_lmapView;
         g_lmapView[0xd] = (int)temp_v19;
         temp_v18 = (float)piVar18[0xa6] * temp_v18;
-        FUN_001bbf0c();
+        libm_cosf();
         piVar18 = g_lmapView;
         g_lmapView[0xc] = (int)temp_v18;
         piVar18[0xb] = 0;
       }
       else {
-        FUN_001bc124();
+        libm_sinf();
         piVar18 = g_lmapView;
         g_lmapView[0xb] = (int)temp_v19;
         temp_v18 = (float)piVar18[0xa6] * temp_v18;
-        FUN_001bbf0c();
+        libm_cosf();
         piVar18 = g_lmapView;
         g_lmapView[0xc] = (int)temp_v18;
         piVar18[0xd] = 0;
@@ -6557,21 +6557,21 @@ code_r0x00303460:
       }
       temp_v19 = (float)g_lmapView[0xa6] * 0.017453292f;
       if (!(temp_v6 != 0x5a && temp_v32 != 0xe)) {
-        FUN_001bc124();
+        libm_sinf();
         piVar18 = g_lmapView;
         g_lmapView[0xd] = (int)temp_v19;
         temp_v18 = (float)piVar18[0xa6] * temp_v18;
-        FUN_001bbf0c();
+        libm_cosf();
         piVar18 = g_lmapView;
         g_lmapView[0xc] = (int)temp_v18;
         piVar18[0xb] = 0;
       }
       else {
-        FUN_001bc124();
+        libm_sinf();
         piVar18 = g_lmapView;
         g_lmapView[0xb] = (int)temp_v19;
         temp_v18 = (float)piVar18[0xa6] * temp_v18;
-        FUN_001bbf0c();
+        libm_cosf();
         piVar18 = g_lmapView;
         g_lmapView[0xc] = (int)temp_v18;
         piVar18[0xd] = 0;
@@ -6616,12 +6616,12 @@ code_r0x00303460:
             temp_v18 = (float)g_lmapScene[0x14] * 0.017453292f;
             temp_v35 = (float)g_lmapScene[10];
             temp_v27 = (float)g_lmapScene[0xb];
-            FUN_001bc124();
+            libm_sinf();
             temp_v37 = 90.0f;
             temp_v35 = temp_v35 + temp_v18 * 90.0f;
             temp_v27 = temp_v27 + 65.0f;
             temp_v18 = (float)g_lmapScene[0x14] * temp_v19;
-            FUN_001bbf0c();
+            libm_cosf();
             fStack_98 = temp_v25 + temp_v18 * temp_v37;
             temp_v31 = 110.0f;
             temp_v25 = (float)g_lmapScene[0xc];
@@ -6630,12 +6630,12 @@ code_r0x00303460:
             temp_v18 = ((float)g_lmapScene[0x14] - 110.0f) * temp_v19;
             fStack_a0 = temp_v35;
             fStack_9c = temp_v27;
-            FUN_001bc124();
+            libm_sinf();
             temp_v35 = 120.0f;
             temp_v37 = temp_v37 + temp_v18 * 120.0f;
             fStack_90 = temp_v20 + 250.0f;
             temp_v19 = ((float)g_lmapScene[0x14] - temp_v31) * temp_v19;
-            FUN_001bbf0c();
+            libm_cosf();
             fStack_8c = temp_v25 + temp_v19 * temp_v35;
             fStack_6c = 4.2039e-43f;
             uStack_70 = 0;
@@ -6660,12 +6660,12 @@ code_r0x00303460:
         temp_v18 = (float)g_lmapScene[0x14] * 0.017453292f;
         temp_v35 = (float)g_lmapScene[10];
         temp_v27 = (float)g_lmapScene[0xb];
-        FUN_001bc124();
+        libm_sinf();
         temp_v37 = 90.0f;
         temp_v35 = temp_v35 + temp_v18 * 90.0f;
         temp_v27 = temp_v27 + 75.0f;
         temp_v18 = (float)g_lmapScene[0x14] * temp_v19;
-        FUN_001bbf0c();
+        libm_cosf();
         fStack_98 = temp_v25 + temp_v18 * temp_v37;
         temp_v31 = 110.0f;
         temp_v25 = (float)g_lmapScene[0xc];
@@ -6674,12 +6674,12 @@ code_r0x00303460:
         temp_v18 = ((float)g_lmapScene[0x14] - 110.0f) * temp_v19;
         fStack_a0 = temp_v35;
         fStack_9c = temp_v27;
-        FUN_001bc124();
+        libm_sinf();
         temp_v35 = 120.0f;
         temp_v37 = temp_v37 + temp_v18 * 120.0f;
         fStack_90 = temp_v20 + 210.0f;
         temp_v19 = ((float)g_lmapScene[0x14] - temp_v31) * temp_v19;
-        FUN_001bbf0c();
+        libm_cosf();
         fStack_8c = temp_v25 + temp_v19 * temp_v35;
         fStack_6c = 1.12104e-44f;
         uStack_70 = 0;
@@ -6721,12 +6721,12 @@ code_r0x00303460:
             temp_v18 = (float)g_lmapScene[0x14] * 0.017453292f;
             temp_v35 = (float)g_lmapScene[10];
             temp_v27 = (float)g_lmapScene[0xb];
-            FUN_001bc124();
+            libm_sinf();
             temp_v31 = 120.0f;
             temp_v35 = temp_v35 + temp_v18 * 120.0f;
             temp_v27 = temp_v27 + 70.0f;
             temp_v18 = (float)g_lmapScene[0x14] * temp_v19;
-            FUN_001bbf0c();
+            libm_cosf();
             fStack_98 = temp_v25 + temp_v18 * temp_v31;
             temp_v25 = (float)g_lmapScene[0xc];
             temp_v37 = (float)g_lmapScene[10];
@@ -6734,12 +6734,12 @@ code_r0x00303460:
             temp_v18 = ((float)g_lmapScene[0x14] - temp_v31) * temp_v19;
             fStack_a0 = temp_v35;
             fStack_9c = temp_v27;
-            FUN_001bc124();
+            libm_sinf();
             temp_v35 = 140.0f;
             temp_v37 = temp_v37 + temp_v18 * 140.0f;
             fStack_90 = temp_v20 + 200.0f;
             temp_v19 = ((float)g_lmapScene[0x14] - temp_v31) * temp_v19;
-            FUN_001bbf0c();
+            libm_cosf();
             fStack_8c = temp_v25 + temp_v19 * temp_v35;
             fStack_6c = 4.2039e-43f;
             uStack_70 = 0;
@@ -6766,12 +6766,12 @@ code_r0x00303460:
         temp_v18 = (float)g_lmapScene[0x14] * 0.017453292f;
         temp_v35 = (float)g_lmapScene[10];
         temp_v27 = (float)g_lmapScene[0xb];
-        FUN_001bc124();
+        libm_sinf();
         temp_v31 = 120.0f;
         temp_v35 = temp_v35 + temp_v18 * 120.0f;
         temp_v27 = temp_v27 + 70.0f;
         temp_v18 = (float)g_lmapScene[0x14] * temp_v19;
-        FUN_001bbf0c();
+        libm_cosf();
         fStack_98 = temp_v25 + temp_v18 * temp_v31;
         temp_v25 = (float)g_lmapScene[0xc];
         temp_v37 = (float)g_lmapScene[10];
@@ -6779,12 +6779,12 @@ code_r0x00303460:
         temp_v18 = ((float)g_lmapScene[0x14] - temp_v31) * temp_v19;
         fStack_a0 = temp_v35;
         fStack_9c = temp_v27;
-        FUN_001bc124();
+        libm_sinf();
         temp_v35 = 140.0f;
         temp_v37 = temp_v37 + temp_v18 * 140.0f;
         fStack_90 = temp_v20 + 200.0f;
         temp_v19 = ((float)g_lmapScene[0x14] - temp_v31) * temp_v19;
-        FUN_001bbf0c();
+        libm_cosf();
         fStack_8c = temp_v25 + temp_v19 * temp_v35;
         fStack_6c = 1.12104e-44f;
         uStack_70 = 0;
@@ -6832,7 +6832,7 @@ code_r0x00303460:
             temp_v18 = (float)g_lmapScene[0x14] * 0.017453292f;
             temp_v35 = (float)g_lmapScene[10];
             temp_v37 = (float)g_lmapScene[0xb];
-            FUN_001bc124();
+            libm_sinf();
             temp_v27 = 40.0f;
             fStack_9c = temp_v37 + 20.0f;
             fStack_a0 = temp_v35 + temp_v18 * 40.0f;
@@ -6840,19 +6840,19 @@ code_r0x00303460:
               fStack_9c = fStack_9c + 20.0f;
             }
             temp_v18 = (float)g_lmapScene[0x14] * temp_v19;
-            FUN_001bbf0c();
+            libm_cosf();
             fStack_98 = temp_v25 + temp_v18 * temp_v27;
             temp_v20 = 170.0f;
             temp_v25 = (float)g_lmapScene[0xc];
             temp_v35 = (float)g_lmapScene[10];
             temp_v37 = (float)g_lmapScene[0xb];
             temp_v18 = ((float)g_lmapScene[0x14] - 170.0f) * temp_v19;
-            FUN_001bc124();
+            libm_sinf();
             temp_v27 = 180.0f;
             temp_v35 = temp_v35 + temp_v18 * 180.0f;
             fStack_90 = temp_v37 + 221.0f;
             temp_v19 = ((float)g_lmapScene[0x14] - temp_v20) * temp_v19;
-            FUN_001bbf0c();
+            libm_cosf();
             fStack_8c = temp_v25 + temp_v19 * temp_v27;
             if (g_gameState == (unsigned int *)0x16) {
               fStack_90 = fStack_90 + 80.0f;
@@ -6880,7 +6880,7 @@ code_r0x00303460:
         temp_v18 = (float)g_lmapScene[0x14] * 0.017453292f;
         temp_v35 = (float)g_lmapScene[10];
         temp_v37 = (float)g_lmapScene[0xb];
-        FUN_001bc124();
+        libm_sinf();
         temp_v27 = 40.0f;
         fStack_9c = temp_v37 + 20.0f;
         fStack_a0 = temp_v35 + temp_v18 * 40.0f;
@@ -6888,19 +6888,19 @@ code_r0x00303460:
           fStack_9c = fStack_9c + 20.0f;
         }
         temp_v18 = (float)g_lmapScene[0x14] * temp_v19;
-        FUN_001bbf0c();
+        libm_cosf();
         fStack_98 = temp_v25 + temp_v18 * temp_v27;
         temp_v20 = 160.0f;
         temp_v25 = (float)g_lmapScene[0xc];
         temp_v35 = (float)g_lmapScene[10];
         temp_v37 = (float)g_lmapScene[0xb];
         temp_v18 = ((float)g_lmapScene[0x14] - 160.0f) * temp_v19;
-        FUN_001bc124();
+        libm_sinf();
         temp_v27 = 180.0f;
         temp_v35 = temp_v35 + temp_v18 * 180.0f;
         fStack_90 = temp_v37 + 220.0f;
         temp_v19 = ((float)g_lmapScene[0x14] - temp_v20) * temp_v19;
-        FUN_001bbf0c();
+        libm_cosf();
         fStack_8c = temp_v25 + temp_v19 * temp_v27;
         if (g_gameState == (unsigned int *)0x16) {
           fStack_90 = fStack_90 + 80.0f;
@@ -6943,7 +6943,7 @@ code_r0x00303460:
         fStack_b0 = (float)piVar18[0x19];
         temp_v19 = 0.017453292f;
         temp_v18 = (float)g_lmapScene[0x14] * 0.017453292f;
-        FUN_001bc124();
+        libm_sinf();
         temp_v25 = 100.0f;
         fStack_b8 = fStack_b8 + temp_v18 * 100.0f;
         fStack_b4 = fStack_b4 - 100.0f;
@@ -6951,19 +6951,19 @@ code_r0x00303460:
         fStack_a8 = (float)g_lmapView[0x15];
         iStack_a4 = g_lmapView[0x16];
         temp_v18 = (float)g_lmapScene[0x14] * temp_v19;
-        FUN_001bc124();
+        libm_sinf();
         fStack_ac = fStack_ac + temp_v18 * temp_v25;
         fStack_a8 = fStack_a8 - temp_v25;
         temp_v25 = (float)g_lmapScene[0xc];
         temp_v18 = (float)g_lmapScene[0x14] * temp_v19;
         temp_v35 = (float)g_lmapScene[10];
         temp_v27 = (float)g_lmapScene[0xb];
-        FUN_001bc124();
+        libm_sinf();
         temp_v37 = 50.0f;
         temp_v35 = temp_v35 + temp_v18 * 50.0f;
         temp_v27 = temp_v27 + 200.0f;
         temp_v18 = (float)g_lmapScene[0x14] * temp_v19;
-        FUN_001bbf0c();
+        libm_cosf();
         fStack_98 = temp_v25 + temp_v18 * temp_v37;
         temp_v31 = 180.0f;
         temp_v25 = (float)g_lmapScene[0xc];
@@ -6972,12 +6972,12 @@ code_r0x00303460:
         temp_v18 = ((float)g_lmapScene[0x14] + 180.0f) * temp_v19;
         fStack_a0 = temp_v35;
         fStack_9c = temp_v27;
-        FUN_001bc124();
+        libm_sinf();
         temp_v35 = 400.0f;
         temp_v37 = temp_v37 + temp_v18 * 400.0f;
         fStack_90 = temp_v20 + 300.0f;
         temp_v19 = ((float)g_lmapScene[0x14] + temp_v31) * temp_v19;
-        FUN_001bbf0c();
+        libm_cosf();
         fStack_8c = temp_v25 + temp_v19 * temp_v35;
         fStack_6c = 2.8026e-44f;
         uStack_70 = 0;
@@ -7019,12 +7019,12 @@ code_r0x00303460:
         temp_v18 = (float)g_lmapScene[0x14] * 0.017453292f;
         temp_v35 = (float)g_lmapScene[10];
         temp_v27 = (float)g_lmapScene[0xb];
-        FUN_001bc124();
+        libm_sinf();
         temp_v37 = 100.0f;
         temp_v35 = temp_v35 + temp_v18 * 100.0f;
         temp_v27 = temp_v27 - 150.0f;
         temp_v18 = (float)g_lmapScene[0x14] * temp_v19;
-        FUN_001bbf0c();
+        libm_cosf();
         fStack_98 = temp_v25 + temp_v18 * temp_v37;
         temp_v25 = (float)g_lmapScene[0xc];
         temp_v37 = (float)g_lmapScene[10];
@@ -7032,12 +7032,12 @@ code_r0x00303460:
         temp_v18 = ((float)g_lmapScene[0x14] - 38.0f) * temp_v19;
         fStack_a0 = temp_v35;
         fStack_9c = temp_v27;
-        FUN_001bc124();
+        libm_sinf();
         temp_v35 = 900.0f;
         temp_v37 = temp_v37 + temp_v18 * 900.0f;
         fStack_90 = temp_v20 + 250.0f;
         temp_v19 = ((float)g_lmapScene[0x14] - 42.5f) * temp_v19;
-        FUN_001bbf0c();
+        libm_cosf();
         fStack_8c = temp_v25 + temp_v19 * temp_v35;
         fStack_6c = 1.4013e-45f;
         uStack_70 = 0;
@@ -7083,12 +7083,12 @@ code_r0x00303460:
         temp_v18 = (float)g_lmapScene[0x14] * 0.017453292f;
         temp_v35 = (float)g_lmapScene[10];
         temp_v27 = (float)g_lmapScene[0xb];
-        FUN_001bc124();
+        libm_sinf();
         temp_v37 = -30.0f;
         temp_v35 = temp_v35 + temp_v18 * -30.0f;
         temp_v27 = temp_v27 - 750.0f;
         temp_v18 = (float)g_lmapScene[0x14] * temp_v19;
-        FUN_001bbf0c();
+        libm_cosf();
         fStack_98 = temp_v25 + temp_v18 * temp_v37;
         temp_v31 = 30.0f;
         temp_v25 = (float)g_lmapScene[0xc];
@@ -7097,12 +7097,12 @@ code_r0x00303460:
         temp_v18 = ((float)g_lmapScene[0x14] - 30.0f) * temp_v19;
         fStack_a0 = temp_v35;
         fStack_9c = temp_v27;
-        FUN_001bc124();
+        libm_sinf();
         temp_v35 = 250.0f;
         temp_v37 = temp_v37 + temp_v18 * 250.0f;
         fStack_90 = temp_v20 - 700.0f;
         temp_v19 = ((float)g_lmapScene[0x14] - temp_v31) * temp_v19;
-        FUN_001bbf0c();
+        libm_cosf();
         fStack_8c = temp_v25 + temp_v19 * temp_v35;
         fStack_6c = 1.4013e-45f;
         uStack_70 = 0;
@@ -7152,26 +7152,26 @@ code_r0x00303460:
         temp_v25 = (float)g_lmapScene[9];
         temp_v37 = (float)g_lmapScene[8] + (float)piVar18[temp_v32 + 0x33];
         temp_v18 = ((float)piVar18[6] - 90.0f) * 0.017453292f;
-        FUN_001bc124();
+        libm_sinf();
         temp_v35 = temp_v35 + temp_v18 * (float)g_lmapView[temp_v32 + 0x53];
         temp_v18 = ((float)g_lmapView[6] - temp_v27) * temp_v19;
-        FUN_001bbf0c();
+        libm_cosf();
         fStack_98 = temp_v25 + temp_v18 * (float)g_lmapView[temp_v32 + 0x53];
         temp_v18 = (float)g_lmapView[6] * temp_v19;
         fStack_a0 = temp_v35;
         fStack_9c = temp_v37;
-        FUN_001bc124();
+        libm_sinf();
         temp_v25 = (float)g_lmapScene[7] - temp_v18 * (float)g_lmapView[temp_v32 + 99];
         temp_v18 = (float)g_lmapView[6] * temp_v19;
-        FUN_001bbf0c();
+        libm_cosf();
         temp_v37 = (float)g_lmapScene[9] - temp_v18 * (float)g_lmapView[temp_v32 + 99];
         temp_v35 = (float)g_lmapScene[8] + (float)g_lmapView[temp_v32 + 0x43] +
                  (float)g_lmapView[7];
         temp_v18 = ((float)g_lmapView[6] - temp_v27) * temp_v19;
-        FUN_001bc124();
+        libm_sinf();
         temp_v25 = temp_v25 + temp_v18 * (float)g_lmapView[temp_v32 + 0x53];
         temp_v19 = ((float)g_lmapView[6] - temp_v27) * temp_v19;
-        FUN_001bbf0c();
+        libm_cosf();
         temp_v6 = 0;
         fStack_8c = temp_v37 + temp_v19 * (float)g_lmapView[temp_v32 + 0x53];
         fStack_6c = 1.26117e-43f;
@@ -7221,12 +7221,12 @@ code_r0x00303460:
         temp_v18 = (float)g_lmapScene[0x14] * 0.017453292f;
         temp_v35 = (float)g_lmapScene[10];
         temp_v27 = (float)g_lmapScene[0xb];
-        FUN_001bc124();
+        libm_sinf();
         temp_v37 = -30.0f;
         temp_v35 = temp_v35 + temp_v18 * -30.0f;
         temp_v27 = temp_v27 + 50.0f;
         temp_v18 = (float)g_lmapScene[0x14] * temp_v19;
-        FUN_001bbf0c();
+        libm_cosf();
         fStack_98 = temp_v25 + temp_v18 * temp_v37;
         temp_v31 = 30.0f;
         temp_v25 = (float)g_lmapScene[0xc];
@@ -7235,12 +7235,12 @@ code_r0x00303460:
         temp_v18 = ((float)g_lmapScene[0x14] - 30.0f) * temp_v19;
         fStack_a0 = temp_v35;
         fStack_9c = temp_v27;
-        FUN_001bc124();
+        libm_sinf();
         temp_v35 = 250.0f;
         temp_v37 = temp_v37 + temp_v18 * 250.0f;
         fStack_90 = temp_v20 + 100.0f;
         temp_v19 = ((float)g_lmapScene[0x14] - temp_v31) * temp_v19;
-        FUN_001bbf0c();
+        libm_cosf();
         fStack_8c = temp_v25 + temp_v19 * temp_v35;
         fStack_6c = 1.4013e-45f;
         uStack_70 = 0;
@@ -7295,26 +7295,26 @@ joined_r0x00397538:
         temp_v25 = (float)g_lmapScene[9];
         temp_v37 = (float)g_lmapScene[8] + (float)piVar18[temp_v32 + 0x33];
         temp_v18 = ((float)piVar18[6] - 90.0f) * 0.017453292f;
-        FUN_001bc124();
+        libm_sinf();
         temp_v35 = temp_v35 + temp_v18 * (float)g_lmapView[temp_v32 + 0x53];
         temp_v18 = ((float)g_lmapView[6] - temp_v27) * temp_v19;
-        FUN_001bbf0c();
+        libm_cosf();
         fStack_98 = temp_v25 + temp_v18 * (float)g_lmapView[temp_v32 + 0x53];
         temp_v18 = (float)g_lmapView[6] * temp_v19;
         fStack_a0 = temp_v35;
         fStack_9c = temp_v37;
-        FUN_001bc124();
+        libm_sinf();
         temp_v25 = (float)g_lmapScene[7] - temp_v18 * (float)g_lmapView[temp_v32 + 99];
         temp_v18 = (float)g_lmapView[6] * temp_v19;
-        FUN_001bbf0c();
+        libm_cosf();
         temp_v35 = (float)g_lmapScene[9] - temp_v18 * (float)g_lmapView[temp_v32 + 99];
         temp_v37 = (float)g_lmapScene[8] + (float)g_lmapView[temp_v32 + 0x43] +
                  (float)g_lmapView[7];
         temp_v18 = ((float)g_lmapView[6] - temp_v27) * temp_v19;
-        FUN_001bc124();
+        libm_sinf();
         temp_v25 = temp_v25 + temp_v18 * (float)g_lmapView[temp_v32 + 0x53];
         temp_v19 = ((float)g_lmapView[6] - temp_v27) * temp_v19;
-        FUN_001bbf0c();
+        libm_cosf();
         fStack_8c = temp_v35 + temp_v19 * (float)g_lmapView[temp_v32 + 0x53];
         fStack_94 = temp_v25;
         fStack_90 = temp_v37;
@@ -7363,26 +7363,26 @@ joined_r0x00397538:
         temp_v25 = (float)g_lmapScene[9];
         temp_v37 = (float)g_lmapScene[8] + (float)piVar18[temp_v32 + 0x33];
         temp_v18 = ((float)piVar18[6] - 90.0f) * 0.017453292f;
-        FUN_001bc124();
+        libm_sinf();
         temp_v35 = temp_v35 + temp_v18 * (float)g_lmapView[temp_v32 + 0x53];
         temp_v18 = ((float)g_lmapView[6] - temp_v27) * temp_v19;
-        FUN_001bbf0c();
+        libm_cosf();
         fStack_98 = temp_v25 + temp_v18 * (float)g_lmapView[temp_v32 + 0x53];
         temp_v18 = (float)g_lmapView[6] * temp_v19;
         fStack_a0 = temp_v35;
         fStack_9c = temp_v37;
-        FUN_001bc124();
+        libm_sinf();
         temp_v25 = (float)g_lmapScene[7] - temp_v18 * (float)g_lmapView[temp_v32 + 99];
         temp_v18 = (float)g_lmapView[6] * temp_v19;
-        FUN_001bbf0c();
+        libm_cosf();
         temp_v35 = (float)g_lmapScene[9] - temp_v18 * (float)g_lmapView[temp_v32 + 99];
         temp_v37 = (float)g_lmapScene[8] + (float)g_lmapView[temp_v32 + 0x43] +
                  (float)g_lmapView[7];
         temp_v18 = ((float)g_lmapView[6] - temp_v27) * temp_v19;
-        FUN_001bc124();
+        libm_sinf();
         temp_v25 = temp_v25 + temp_v18 * (float)g_lmapView[temp_v32 + 0x53];
         temp_v19 = ((float)g_lmapView[6] - temp_v27) * temp_v19;
-        FUN_001bbf0c();
+        libm_cosf();
         fStack_8c = temp_v35 + temp_v19 * (float)g_lmapView[temp_v32 + 0x53];
         fStack_94 = temp_v25;
         fStack_90 = temp_v37;
@@ -7497,12 +7497,12 @@ joined_r0x00397538:
         temp_v18 = (float)g_lmapScene[0x14] * 0.017453292f;
         temp_v35 = (float)g_lmapScene[10];
         temp_v27 = (float)g_lmapScene[0xb];
-        FUN_001bc124();
+        libm_sinf();
         temp_v37 = 120.0f;
         temp_v35 = temp_v35 + temp_v18 * 120.0f;
         temp_v27 = temp_v27 + 170.0f;
         temp_v18 = (float)g_lmapScene[0x14] * temp_v19;
-        FUN_001bbf0c();
+        libm_cosf();
         fStack_98 = temp_v25 + temp_v18 * temp_v37;
         temp_v31 = 160.0f;
         temp_v25 = (float)g_lmapScene[0xc];
@@ -7511,12 +7511,12 @@ joined_r0x00397538:
         temp_v18 = ((float)g_lmapScene[0x14] - 160.0f) * temp_v19;
         fStack_a0 = temp_v35;
         fStack_9c = temp_v27;
-        FUN_001bc124();
+        libm_sinf();
         temp_v35 = 240.0f;
         temp_v37 = temp_v37 + temp_v18 * 240.0f;
         fStack_90 = temp_v20 + 30.0f;
         temp_v19 = ((float)g_lmapScene[0x14] - temp_v31) * temp_v19;
-        FUN_001bbf0c();
+        libm_cosf();
         fStack_8c = temp_v25 + temp_v19 * temp_v35;
         uStack_70 = 2;
         fStack_6c = 1.4013e-44f;
@@ -7635,12 +7635,12 @@ joined_r0x00397538:
         temp_v18 = DAT_005f16b8;
         temp_v19 = DAT_005f16b0;
         temp_v35 = DAT_005f16b4;
-        FUN_001bc124();
+        libm_sinf();
         temp_v37 = temp_v37 + temp_v19;
         temp_v31 = 200.0f;
         temp_v35 = temp_v35 + 200.0f;
         temp_v19 = DAT_005f16bc * temp_v20;
-        FUN_001bbf0c();
+        libm_cosf();
         fStack_98 = temp_v19 + temp_v18;
         temp_v24 = 180.0f;
         temp_v27 = (DAT_005f16bc + 180.0f) * temp_v20;
@@ -7649,12 +7649,12 @@ joined_r0x00397538:
         temp_v25 = DAT_005f16b0;
         fStack_a0 = temp_v37;
         fStack_9c = temp_v35;
-        FUN_001bc124();
+        libm_sinf();
         temp_v35 = 150.0f;
         temp_v19 = temp_v19 + temp_v31;
         fStack_94 = temp_v25 + temp_v27 * 150.0f;
         temp_v20 = (DAT_005f16bc + temp_v24) * temp_v20;
-        FUN_001bbf0c();
+        libm_cosf();
         fStack_8c = temp_v18 + temp_v20 * temp_v35;
         fStack_6c = 1.4013e-45f;
         uStack_70 = 0;
@@ -7696,12 +7696,12 @@ joined_r0x00397538:
         temp_v18 = DAT_005f16b8;
         temp_v19 = DAT_005f16b0;
         temp_v35 = DAT_005f16b4;
-        FUN_001bc124();
+        libm_sinf();
         temp_v37 = temp_v37 + temp_v19;
         temp_v31 = 200.0f;
         temp_v35 = temp_v35 + 200.0f;
         temp_v19 = DAT_005f16bc * temp_v20;
-        FUN_001bbf0c();
+        libm_cosf();
         fStack_98 = temp_v19 + temp_v18;
         temp_v24 = 120.0f;
         temp_v27 = (DAT_005f16bc + 120.0f) * temp_v20;
@@ -7710,11 +7710,11 @@ joined_r0x00397538:
         temp_v25 = DAT_005f16b4;
         fStack_a0 = temp_v37;
         fStack_9c = temp_v35;
-        FUN_001bc124();
+        libm_sinf();
         fStack_94 = temp_v18 + temp_v27 * temp_v31;
         temp_v25 = temp_v25 + temp_v31;
         temp_v20 = (DAT_005f16bc + temp_v24) * temp_v20;
-        FUN_001bbf0c();
+        libm_cosf();
         fStack_8c = temp_v19 + temp_v20 * temp_v31;
         fStack_6c = 1.4013e-45f;
         uStack_70 = 0;
@@ -7890,11 +7890,11 @@ joined_r0x00397538:
     fStack_a8 = fStack_a8 * temp_v19;
     temp_v37 = 0.017453292f;
     temp_v19 = (float)g_lmapView[6] * 0.017453292f;
-    FUN_001bc124();
+    libm_sinf();
     temp_v31 = 290.0f;
     temp_v25 = temp_v25 + temp_v19 * 290.0f;
     temp_v37 = (float)g_lmapView[6] * temp_v37;
-    FUN_001bbf0c();
+    libm_cosf();
     temp_v18 = temp_v18 + DAT_005f1a04;
     temp_v32 = *(int *)(g_handleRegistry + 0x14);
     temp_v19 = (float)g_lmapScene[9];
@@ -8173,7 +8173,7 @@ LAB_00246d70:
         in_s0 = 0x3f400000;
         temp_v32 = *(int *)(piVar18[0x61] + 4);
         *(unsigned int *)(temp_v32 + 0x1fc) = 0x3f400000;
-        FUN_003fe86c(temp_v32,0,2);
+        modelPlayClip(temp_v32,0,2);
         *(unsigned int *)(temp_v32 + 4) = *(unsigned int *)(temp_v32 + 4) & 0xfffffffc;
         slotTargetApplyActiveValue(g_lmapScene[0x6a]);
         linkedTargetSetFloat(g_lmapScene[0x6a]);
@@ -8189,7 +8189,7 @@ LAB_00246d70:
       if (in_s0 < 0x41500000) {
         return;
       }
-      FUN_003fe86c(*(unsigned int *)(g_lmapScene[0x61] + 4),0,2);
+      modelPlayClip(*(unsigned int *)(g_lmapScene[0x61] + 4),0,2);
       slotTargetApplyActiveValue(g_lmapScene[0x6a]);
       return;
     }
@@ -8204,7 +8204,7 @@ joined_r0x002495a4:
       controllerSetDestination(temp_v32,piVar18 + 7);
       controllerSetRotationEulerDegrees(temp_v32);
       *(unsigned int *)(temp_v32 + 0x1fc) = 0x3f400000;
-      FUN_003fd7c0(temp_v32,0,2);
+      moriModelUnitStartMaterialAnimation(temp_v32,0,2);
       FUN_003fd924(temp_v32,0,2);
       piVar18 = g_lmapScene;
       g_lmapScene[1] = g_lmapScene[1] + 1;

@@ -8,14 +8,14 @@ typedef struct Record {
 } Record;
 
 extern Record *table8Type5FindById(u32 id);
-extern s32 FUN_0024c52c(u32 key);
+extern s32 itemGetSortCategory(u32 key);
 
-/* Comparison of two ids: by FUN_0024c52c of their record's key, then by id. */
+/* Comparison of two ids: by itemGetSortCategory of their record's key, then by id. */
 s32 FUN_003ac7ec(const u16 *a, const u16 *b)
 {
     Record *recordA = table8Type5FindById(*a);
     Record *recordB = table8Type5FindById(*b);
-    s32 result = FUN_0024c52c(recordA->key) - FUN_0024c52c(recordB->key);
+    s32 result = itemGetSortCategory(recordA->key) - itemGetSortCategory(recordB->key);
 
     if (result == 0) {
         result = *a - *b;

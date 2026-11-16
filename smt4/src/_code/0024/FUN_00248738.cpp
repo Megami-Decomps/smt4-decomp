@@ -27,8 +27,8 @@ extern "C" {
 
 void gauntletAppSortMenuEntries(void);
 s32 appCheckPurchaseRequirements(u32 app);
-void FUN_00295eb0(void* sprite, s32 a, s32 b);
-void FUN_0029f848(void* list, s32 count, s32 a, s32 b, s32 c, s32 d);
+void uiStoreTextureEntryCenter(void* sprite, s32 a, s32 b);
+void gridNavigationConfigure(void* list, s32 count, s32 a, s32 b, s32 c, s32 d);
 s32 appCostRecordFindById(u32 app);
 void ifTouchRegionRemove(s32 index);
 void timerStart(void* timer, s32 a, s32 b);
@@ -63,7 +63,7 @@ u32 FUN_00248738(AppMenu* menu, u32 newState)
                 if (appCostRecordFindById(app) != 0 && (flagBitIsSet(app) != 0 || appCheckPurchaseRequirements(app) != 2)) addEntry(menu, app);
             }
         }
-        FUN_0029f848(menu->list, menu->entryCount, 10, 1, 1, 1);
+        gridNavigationConfigure(menu->list, menu->entryCount, 10, 1, 1, 1);
         gauntletAppSortMenuEntries();
         break;
     case 1:
@@ -71,7 +71,7 @@ u32 FUN_00248738(AppMenu* menu, u32 newState)
         for (u32 app = 1; app < 0x8d; app++) {
             if (flagBitIsSet(app) != 0) addEntry(menu, app);
         }
-        FUN_0029f848(menu->list, menu->entryCount, 10, 1, 1, 1);
+        gridNavigationConfigure(menu->list, menu->entryCount, 10, 1, 1, 1);
         break;
     case 2:
         menu->entryCount = 0;
@@ -84,7 +84,7 @@ u32 FUN_00248738(AppMenu* menu, u32 newState)
         } else {
             if (flagBitIsSet(0x18) == 0 && appCheckPurchaseRequirements(0x18) == 0) addEntry(menu, 0x18);
         }
-        FUN_0029f848(menu->list, menu->entryCount, 10, 1, 1, 1);
+        gridNavigationConfigure(menu->list, menu->entryCount, 10, 1, 1, 1);
         if (menu->entryCount == 0) {
             FUN_00248738(menu, menu->state);
             return 0;
@@ -92,7 +92,7 @@ u32 FUN_00248738(AppMenu* menu, u32 newState)
         break;
     case 5:
         spriteStartAnimationByIndex(menu->cursorSprite, 1);
-        FUN_00295eb0(menu->cursorSprite, 0x1d, FUN_0029efa8(menu->list) + 0x40e);
+        uiStoreTextureEntryCenter(menu->cursorSprite, 0x1d, FUN_0029efa8(menu->list) + 0x40e);
         menu->cursorWidth = 0xa0;
         break;
     case 7:

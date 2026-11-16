@@ -6,7 +6,7 @@
 extern "C" {
 extern StatusBustUpResources DAT_0044e158;
 extern void *g_aocSystem;
-void FUN_002a60cc(void *system, u32 table, u32 node);
+void packageFileDisableByKindName(void *system, u32 table, u32 node);
 void asdTMTexTableReleaseNode(u32 table, u32 node);
 Table00Record *dataTable00FindById(u16 id);
 
@@ -60,7 +60,7 @@ void statusBustUpPortraitRelease(s32 portrait, s32 isDevil)
     }
     if (asdTMTexTableNodeIsLoaded(table, portrait)) {
         asdTMTexTableReleaseNode(table, portrait);
-        FUN_002a60cc(g_aocSystem, table, portrait);
+        packageFileDisableByKindName(g_aocSystem, table, portrait);
     }
     static_cast<s8 *>(DAT_0044e158.workA)[portrait] = 0;
 }

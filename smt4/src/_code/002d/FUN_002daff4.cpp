@@ -13,8 +13,8 @@ int drawSetColorFromRGBA8(...);
 int itemDrawCategoryBadge(...);
 int textDrawString(...);
 int textFormatBuffer(...);
-int FUN_002be650(int, int);
-int FUN_002bed3c(void);
+int dataFindKindRecordWithAocOverrides(int, int);
+int gxResetColorQuadToWhite(void);
 int asdTMTexTableEntryAt(...);
 int VectorSignedToFloat(...);
 
@@ -44,8 +44,8 @@ extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002be650. */
-/* Supplied declaration required: FUN_002bed3c. */
+/* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 
 
@@ -90,7 +90,7 @@ void FUN_002daff4(int param_1,int param_2,int param_3,int param_4,int param_5)
                (int)*(short *)(temp_v6 + param_2 * 2 + 0xe08));
   temp_v4 = asdTMTexTableEntryAt(0x1d,0x523);
   temp_v6 = temp_v13;
-  FUN_002be650(temp_v13,0);
+  dataFindKindRecordWithAocOverrides(temp_v13,0);
   if (temp_v6 != 0) {
     temp_v11 = 0xffffffff;
     temp_v5 = recordAcceptsStickDirection(temp_v13);
@@ -104,14 +104,14 @@ void FUN_002daff4(int param_1,int param_2,int param_3,int param_4,int param_5)
     textDrawString(3,temp_v11,temp_v6,(int)*(short *)(temp_v4 + 8));
   }
   temp_v6 = asdTMTexTableEntryAt(0x1d,0x52f);
-  temp_v11 = FUN_0028fb40(temp_v13);
+  temp_v11 = flagValueRead(temp_v13);
   textFormatBuffer(temp_v12,"%d",temp_v11);
   drawSetColorFromRGBA8(0xffffffff);
   FUN_002bdf94(0,(int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v3 + 8) + param_4,
                (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v6 + 10) + param_5,1,2,0x83,
                temp_v12);
-  FUN_002bed3c();
-  FUN_002bf288(2,0x1d,0x521,*(short *)(temp_v3 + 8) + param_4,*(short *)(temp_v3 + 10) + param_5,0x83);
+  gxResetColorQuadToWhite();
+  texDrawTableEntryAtStoredOrigin(2,0x1d,0x521,*(short *)(temp_v3 + 8) + param_4,*(short *)(temp_v3 + 10) + param_5,0x83);
   temp_v6 = asdTMTexTableEntryAt(0x1d,0x522);
   itemDrawCategoryBadge((int)(short)temp_v13,
                (int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v3 + 8) + param_4,
@@ -155,7 +155,7 @@ LAB_002db240:
     FUN_002bdf94(0,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v6 + 8) + param_4,
                  (int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v3 + 10) + param_5,1,4,0x83,
                  temp_v12);
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     if (*(unsigned int *)(temp_v2 + 0x54) >> 0x14 == 0) {
       textFormatBuffer(temp_v12,"\x82r\x82\x8c\x82\x81\x82\x93\x82\x88");
     }
@@ -222,7 +222,7 @@ LAB_002db240:
     FUN_002bdf94(0,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v6 + 8) + param_4,
                  (int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v3 + 10) + param_5,1,4,0x83,
                  temp_v12);
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     if (*(char *)(temp_v2 + 0x59) == '\0') {
       textFormatBuffer(temp_v12,&LAB_002db8c4);
     }
@@ -250,7 +250,7 @@ LAB_002db240:
     FUN_002bdf94(0,(int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v3 + 8) + param_4,
                  (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v6 + 10) + param_5,1,3,0x83,
                  temp_v12);
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     break;
   case 0x14:
   case 0x15:
@@ -296,7 +296,7 @@ LAB_002db240:
     FUN_002bdf94(0,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v6 + 8) + param_4,
                  (int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v3 + 10) + param_5,1,5,0x83,
                  temp_v12);
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     drawSetColorFromRGBA8(0xffffffff);
     temp_v5 = (int)*(short *)(temp_v2 + 0x68);
     temp_v6 = temp_v5;
@@ -314,7 +314,7 @@ LAB_002db240:
     FUN_002bdf94(0,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v6 + 8) + param_4,
                  (int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v3 + 10) + param_5,1,5,0x83,
                  temp_v12);
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
   }
   return;
 }

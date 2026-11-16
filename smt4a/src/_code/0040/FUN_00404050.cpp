@@ -20,7 +20,7 @@ void efctSetSpeed(f32 speed);
 EffectPlacement *asdTMTexTableEntryAt(u32 table, u32 id);
 s32 FUN_004038e0(u32 unused, u32 kind);
 void drawSetColorFromRGBA8(u32 rgba);
-void FUN_00183bb0(void);
+void gxResetColorQuadToWhite(void);
 void gameGetPlayerData(void);
 const char *gameGetPlayerName(void);
 void textFormatBuffer(char *buffer, const char *format, ...);
@@ -73,11 +73,11 @@ void FUN_00404050(u32 effect, f32 speed, u32 handle, s32 x, s32 y, s32 useFirstS
         }
         if (framed) {
             drawSetColorFromRGBA8(0x57d8ffff);
-            FUN_001835b4(2, 0x32, frameId, frameX, frameY, 0x6b);
-            FUN_001835b4(2, 0x32, 0x3f1, frameX, frameY, 0x6b);
-            FUN_00183bb0();
+            texDrawTableEntryAtStoredOrigin(2, 0x32, frameId, frameX, frameY, 0x6b);
+            texDrawTableEntryAtStoredOrigin(2, 0x32, 0x3f1, frameX, frameY, 0x6b);
+            gxResetColorQuadToWhite();
         } else {
-            FUN_001835b4(2, 0x32, frameId, frameX, frameY, 0x6b);
+            texDrawTableEntryAtStoredOrigin(2, 0x32, frameId, frameX, frameY, 0x6b);
         }
         placement = asdTMTexTableEntryAt(0x32, 100);
         name = entry->content.name;
@@ -94,8 +94,8 @@ void FUN_00404050(u32 effect, f32 speed, u32 handle, s32 x, s32 y, s32 useFirstS
             placement = asdTMTexTableEntryAt(0x32, 0x9b);
             x += placement->x;
             y += placement->y;
-            FUN_001835b4(2, 0x32, 0x9c, x, y, 0x79);
-            FUN_001835b4(2, 0x32, 0x9d, x, y, 0x7a);
+            texDrawTableEntryAtStoredOrigin(2, 0x32, 0x9c, x, y, 0x79);
+            texDrawTableEntryAtStoredOrigin(2, 0x32, 0x9d, x, y, 0x7a);
         }
         efctSetSpeed(1.0f);
     }

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern u32 FUN_002907a8(void);
+extern u32 saveBlockGetPlaySeconds(void);
 
 typedef struct Obj {
     /* 0x0 */ u8 unk0[4];
@@ -15,8 +15,8 @@ u32 timerStampIsExpired(Obj *obj)
     u32 now;
     u32 result;
 
-    if (((obj->timestamp == 0) || (now = FUN_002907a8(), now < obj->timestamp)) ||
-        (FUN_002907a8() - obj->timestamp >= 901)) {
+    if (((obj->timestamp == 0) || (now = saveBlockGetPlaySeconds(), now < obj->timestamp)) ||
+        (saveBlockGetPlaySeconds() - obj->timestamp >= 901)) {
         result = 1;
     } else {
         result = 0;

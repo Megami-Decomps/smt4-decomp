@@ -109,7 +109,7 @@ s32 FUN_00396370(TalkTargetList *list)
                             target->position.y * (1.0f / 3.0f),
                             target->position.z * (1.0f / 3.0f)
                         };
-                        FUN_00291e40(0x1000187, position);
+                        soundActorStartOnFreeChannel(0x1000187, position);
                     }
                 } else if (target->kind == 1) {
                     g_gameState.eventValue = 0;

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_0017ffa8(s32 arg0, s32 arg1, u32 id, u32 a, u32 b, u32 c);
+int texTableRecordCallWithParams(s32 arg0, s32 arg1, u32 id, u32 a, u32 b, u32 c);
 
 /* Maps the kind (1..13) to its id and forwards it with the extra arguments; kind 0 does nothing. */
 void FUN_003481c4(s32 kind, u32 a, u32 b, u32 c)
@@ -54,7 +54,7 @@ void FUN_003481c4(s32 kind, u32 a, u32 b, u32 c)
         id = 40;
         break;
     }
-    FUN_0017ffa8(2, 11, id, a, b, c);
+    texTableRecordCallWithParams(2, 11, id, a, b, c);
 }
 
 } /* extern "C" */

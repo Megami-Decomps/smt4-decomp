@@ -10,7 +10,7 @@ int FUN_002878e4(void);
 int mathDistanceBetweenPoints(void);
 int mathGetShortestAngleDelta(void);
 int mathPositionHeadingDegrees(void);
-int FUN_0028c618(unsigned int, int);
+int modelPartSetRotationDegrees(unsigned int, int);
 int nodeSetTranslation(unsigned int, int);
 int modelSelectPrimaryMotion(unsigned int);
 int FUN_002b2b64(unsigned int);
@@ -38,7 +38,7 @@ extern signed char DAT_0049f93e; /* 0x49f93e */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: mathGetShortestAngleDelta. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
-/* Supplied declaration required: FUN_0028c618. */
+/* Supplied declaration required: modelPartSetRotationDegrees. */
 /* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: modelSelectPrimaryMotion. */
 /* Supplied declaration required: FUN_002b2b64. */
@@ -257,7 +257,7 @@ LAB_002748b4:
             }
             nodeSetTranslation(*(unsigned int *)(*(int *)(temp_v1 + 0x3c) + 8),0);
             temp_v8 = (int)temp_v13;
-            FUN_0028c618(*(unsigned int *)(*(int *)(temp_v1 + 0x3c) + 8),0);
+            modelPartSetRotationDegrees(*(unsigned int *)(*(int *)(temp_v1 + 0x3c) + 8),0);
             if (*(int *)(*(int *)(*(int *)(temp_v1 + 0x3c) + 8) + 0x38) != *(int *)(temp_v1 + 0x2c)) {
               temp_v8 = (int)temp_v13;
               modelSelectPrimaryMotion(*(unsigned int *)(*(int *)(temp_v1 + 0x3c) + 8));
@@ -278,7 +278,7 @@ LAB_002748b4:
                 else {
                   temp_v3 = 0x100022b;
                 }
-                FUN_00291e40(temp_v3, soundActorPositionFromArray(reinterpret_cast<const f32 *>(temp_v1 + 0x1c)));
+                soundActorStartOnFreeChannel(temp_v3, soundActorPositionFromArray(reinterpret_cast<const f32 *>(temp_v1 + 0x1c)));
               }
               else if ((((0x41a7ffff >= temp_v9) && (temp_v8 >= 0x41a80000)) ||
                        ((0x4273ffff >= temp_v9 && (temp_v8 >= 0x42740000)))) ||
@@ -292,7 +292,7 @@ LAB_002748b4:
                 else {
                   temp_v3 = 0x100022a;
                 }
-                FUN_00291e40(temp_v3, soundActorPositionFromArray(reinterpret_cast<const f32 *>(temp_v1 + 0x1c)));
+                soundActorStartOnFreeChannel(temp_v3, soundActorPositionFromArray(reinterpret_cast<const f32 *>(temp_v1 + 0x1c)));
               }
             }
             *(int *)(temp_v1 + 0x30) = temp_v8;

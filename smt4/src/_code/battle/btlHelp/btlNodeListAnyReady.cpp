@@ -18,9 +18,9 @@ typedef struct BtlList {
 } BtlList;
 
 extern BtlList *DAT_00435d78;
-extern s32 FUN_002b6b04(void);
+extern s32 infoWindowIsActive(void);
 
-/* Whether any node in the list has a valid index, kind 1, flag 0 clear and passes FUN_002b6b04. */
+/* Whether any node in the list has a valid index, kind 1, flag 0 clear and passes infoWindowIsActive. */
 u32 btlNodeListAnyReady(void)
 {
     BtlNode *node = DAT_00435d78->first;
@@ -28,7 +28,7 @@ u32 btlNodeListAnyReady(void)
     while (node != NULL) {
         BtlNode *next = node->next;
 
-        if (node->index >= 0 && node->kind == 1 && (node->flags & 1) == 0 && FUN_002b6b04() != 0) {
+        if (node->index >= 0 && node->kind == 1 && (node->flags & 1) == 0 && infoWindowIsActive() != 0) {
             return 1;
         }
         node = next;

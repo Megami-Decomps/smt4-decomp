@@ -3,7 +3,7 @@
 extern "C" {
 
 
-extern int FUN_00437cac(u32 owner, u32 id, ...);
+extern int rangeSetUnionInclusive(u32 owner, u32 id, ...);
 extern IdList *idListFind(u32 id);
 
 /* Checks `id` and each non-zero id of its list: returns 2 when any check fails, else 0. */
@@ -12,7 +12,7 @@ u32 idListCheck(u32 unused, u32 owner, u32 id)
     IdList *list;
     int i;
 
-    if (FUN_00437cac(owner, id) == 0) {
+    if (rangeSetUnionInclusive(owner, id) == 0) {
         return 2;
     }
     list = idListFind(id);
@@ -23,7 +23,7 @@ u32 idListCheck(u32 unused, u32 owner, u32 id)
             if (listed == 0) {
                 return 0;
             }
-            if (FUN_00437cac(owner, listed, listed) == 0) {
+            if (rangeSetUnionInclusive(owner, listed, listed) == 0) {
                 return 2;
             }
         }

@@ -21,7 +21,7 @@ struct PackageFileRef {
 typedef char PackageFileRefLayoutCheck[sizeof(PackageFileRef) == 0x10 &&
     offsetof(PackageFileRef, state.loaded) == 0x0C ? 1 : -1];
 
-/* One 0x40-byte record of a package's record table (FUN_002ac0f8). */
+/* One 0x40-byte record of a package's record table (packageEntryGetDirectory). */
 struct PackageRecord {
     /* 0x00 */ s8 kind;
     /* 0x01 */ u8 unk01[0x3b];
@@ -43,9 +43,9 @@ struct PackageList {
 };
 
 extern "C" {
-s32 FUN_002ac12c(PackageEntry *entry);
-char (*FUN_002ac0f8(PackageEntry *entry))[0x40];
-u32 FUN_002ac0c4(PackageEntry *entry);
+s32 packageEntryIsLoaded(PackageEntry *entry);
+char (*packageEntryGetDirectory(PackageEntry *entry))[0x40];
+u32 packageEntryGetFileCount(PackageEntry *entry);
 }
 
 #ifdef __cplusplus

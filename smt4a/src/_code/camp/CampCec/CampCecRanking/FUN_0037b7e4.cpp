@@ -7,13 +7,13 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_0014e188(...);
+int uiSpriteStateInitFromSource(...);
 int asdProcessCreateSimple(...);
 
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
-int FUN_001654f8(...);
-int FUN_00180118(...);
+int textExpandGlyphsToBuffer(...);
+int dataTable01GetRecordWithAocOverride(...);
 int asdTMTexLoadMainHeap(...);
 int asdTextFormatStream(...);
 int asdLoadFileAsyncSimple(...);
@@ -47,14 +47,14 @@ extern unsigned int *g_campCecRanking; /* 0x57f11c */
 /* Supplied declaration required: textFormatBuffer. */
 extern int gameDataBlocksGetSaveData(void);
 extern unsigned int spriteHandleCreate(unsigned int);
-/* Supplied declaration required: FUN_0014e188. */
+/* Supplied declaration required: uiSpriteStateInitFromSource. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_001654f8. */
-/* Supplied declaration required: FUN_00180118. */
-extern int FUN_0019e52c(unsigned short);
+/* Supplied declaration required: textExpandGlyphsToBuffer. */
+/* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
+extern int dataTable10FindValue(unsigned short);
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: asdTextFormatStream. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
@@ -111,7 +111,7 @@ void FUN_0037b7e4(void)
   paramsInit(reinterpret_cast<UiResourceParameters *>(puVar2 + 0x26),
       &DAT_0052c050, 0xb4, &DAT_0052c104, 0x150, &DAT_0052c254, 0x30,
       NULL, 0, &DAT_0052c284, 0x4d0);
-  FUN_0014e188(puVar2 + 3,0x2e,1000,puVar2 + 0x26,0x65);
+  uiSpriteStateInitFromSource(puVar2 + 3,0x2e,1000,puVar2 + 0x26,0x65);
   temp_v5 = 0;
   do {
     temp_v1 = spriteHandleCreate(0);
@@ -165,7 +165,7 @@ void FUN_0037b7e4(void)
     do {
       temp_v2 = (unsigned int)*(unsigned short *)(puVar2 + temp_v5 * 3 + 0x31);
       if (temp_v2 != 0) {
-        FUN_00180118();
+        dataTable01GetRecordWithAocOverride();
         textFormatBuffer(&temp_v7,"%s",temp_v2);
       }
       else {
@@ -179,7 +179,7 @@ void FUN_0037b7e4(void)
         temp_v1 = 3;
       }
       puVar7 = (unsigned int *)&temp_v7;
-      FUN_001654f8(puVar7,0);
+      textExpandGlyphsToBuffer(puVar7,0);
       asdTextFormatStream(puVar2[temp_v5 + 0x82],temp_v1,0xffffffff,0,0,puVar7);
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 0x14);
@@ -187,9 +187,9 @@ void FUN_0037b7e4(void)
     do {
       if (*(unsigned short *)(puVar2 + temp_v5 * 3 + 0x6d) - 1 < 8) {
         temp_v0 = FUN_0036fcd0((unsigned int)*(unsigned short *)(puVar2 + temp_v5 * 3 + 0x6d),0);
-        temp_v4 = FUN_0019e52c(temp_v0);
+        temp_v4 = dataTable10FindValue(temp_v0);
         if (temp_v4 != 0) {
-          FUN_00180118();
+          dataTable01GetRecordWithAocOverride();
           textFormatBuffer(&temp_v7,"%s",temp_v4);
         }
         else {
@@ -207,7 +207,7 @@ void FUN_0037b7e4(void)
         temp_v1 = 3;
       }
       puVar7 = (unsigned int *)&temp_v7;
-      FUN_001654f8(puVar7,0);
+      textExpandGlyphsToBuffer(puVar7,0);
       asdTextFormatStream(puVar2[temp_v5 + 0x96],temp_v1,0xffffffff,0,0,puVar7);
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 7);

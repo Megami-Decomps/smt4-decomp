@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_002bf810(int id);
+int soundPlaySeUnpanned(int id);
 
 extern RunWinWork *g_runWin;
 
@@ -19,7 +19,7 @@ u32 runWinOpenState(void)
     u32 result = 1;
     run->active = result;
     run->state = result;
-    FUN_002bf810(0x10001fd);
+    soundPlaySeUnpanned(0x10001fd);
     return result;
 }
 

@@ -1,4 +1,4 @@
-/* If the global state's active id matches `id`, forwards the pointer stored in its record to FUN_003fd7c0 with mode 2 and a default scale. */
+/* If the global state's active id matches `id`, forwards the pointer stored in its record to moriModelUnitStartMaterialAnimation with mode 2 and a default scale. */
 #include "common.h"
 
 extern "C" {
@@ -17,12 +17,12 @@ typedef struct State {
 
 extern State *g_mapDepartWork;
 
-extern void FUN_003fd7c0(void *target, u32 arg, s32 mode, f32 scale);
+extern void moriModelUnitStartMaterialAnimation(void *target, u32 arg, s32 mode, f32 scale);
 
 void FUN_003024d8(s32 id, u32 arg)
 {
     if (g_mapDepartWork->activeId == id) {
-        FUN_003fd7c0(g_mapDepartWork->record->target, arg, 2, 0.0f);
+        moriModelUnitStartMaterialAnimation(g_mapDepartWork->record->target, arg, 2, 0.0f);
     }
 }
 

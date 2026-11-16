@@ -13,10 +13,10 @@ extern "C" {
 void *asdMemoryAlloc(u32, u32, u32, u32, u32);
 void FUN_002898e4(void);
 void buttonHelpCreate(void);
-void FUN_00289880(void);
+void commonBgStopChildAndBeginTransition(void);
 void buttonHelpSetPreset(s32);
 void *asdLoadFileSyncDefault(const char *);
-RoomScriptProcess *FUN_00297060(void *, void *);
+RoomScriptProcess *scrScriptProcessCreate(void *, void *);
 void scrScriptProcessStartEntry(RoomScriptProcess *, s32);
 void FUN_00282bfc(s32, s32);
 s32 onesRoomTeardown(u32);
@@ -58,11 +58,11 @@ void FUN_001d39f8(s32 inactive)
     }
     FUN_002898e4();
     buttonHelpCreate();
-    FUN_00289880();
+    commonBgStopChildAndBeginTransition();
     buttonHelpSetPreset(0xA2);
     room->dataA = asdLoadFileSyncDefault("ones_room/onesRoom.bf");
     room->dataB = asdLoadFileSyncDefault("ones_room/onesRoom.mbm");
-    room->process = FUN_00297060(room->dataA, room->dataB);
+    room->process = scrScriptProcessCreate(room->dataA, room->dataB);
     room->process->state = 2;
     scrScriptProcessStartEntry(room->process, 0);
     room->flags.bytes.freeOnEnd = 0;

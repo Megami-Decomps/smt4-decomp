@@ -13,7 +13,7 @@ extern UseCounter g_useCounter;
 int fileSlotLoad(int id);
 int FUN_002b7bca(u32 first, u32 second, int size, u8 *table);
 int asdTMTexTableLoadSprites(int id);
-int FUN_002c58c8(int id, int arg);
+int asdTMTexTablePrepareNodeImage(int id, int arg);
 u32 dataTableGetCount(u32 value);
 u32 dataTableGetEntries(void);
 u32 dataTableGet(u32 first, u32 second);
@@ -27,7 +27,7 @@ void FUN_001ddb40(void)
         u32 second;
 
         asdTMTexTableLoadSprites(0x1e);
-        FUN_002c58c8(0x1e, 0);
+        asdTMTexTablePrepareNodeImage(0x1e, 0);
         fileSlotLoad(0x38);
         first = dataTableGet(0x38, 0);
         second = dataTableGetEntries();

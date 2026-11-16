@@ -10,7 +10,7 @@ struct Vector3View {
 };
 
 extern "C" {
-void FUN_002b4c30(Matrix44View* destination, const Matrix44View* source);
+void gfxQuaternionToMatrix34(Matrix44View* destination, const Matrix44View* source);
 void matrix44SetIdentity(Matrix44View* destination);
 void mathMatrixApplyTranslation(Matrix44View* matrix, const Vector3View* offset, s32 mode);
 
@@ -19,7 +19,7 @@ void matrixInitializeWithScaleAndOffset(Matrix44View* matrix, const Vector3View*
                   const Matrix44View* source, f32 scale)
 {
     if (source != 0) {
-        FUN_002b4c30(matrix, source);
+        gfxQuaternionToMatrix34(matrix, source);
     } else {
         matrix44SetIdentity(matrix);
     }

@@ -56,7 +56,7 @@ extern PanelView *g_partyPanel;
 
 SlotTable *gameGetSlotTable(void);
 SlotRecord *gameGetSlotRecord(s32 id);
-void FUN_003f5220(SlotWidget *widget, u32 toggle);
+void slotPlacementAssignSlotPosition(SlotWidget *widget, u32 toggle);
 void slotPlacementStartTransition(SlotWidget *widget, s32 alternate);
 void slotPlacementSetSlot(SlotWidget *widget, s32 slot);
 s32 FUN_004bd0d8(void);
@@ -70,13 +70,13 @@ void FUN_0026f3a0(void)
     SlotTable *table = gameGetSlotTable();
     s32 i;
 
-    FUN_003f5220(panel->characters[0], 0);
+    slotPlacementAssignSlotPosition(panel->characters[0], 0);
     slotPlacementStartTransition(panel->characters[0], panel->alternate == 1);
     panel->characters[0]->transitionActive = 0;
     panel->characters[0]->unk26 = 0;
     panel->characters[0]->transitionPending = 0;
     for (i = 0; i < 3; i++) {
-        FUN_003f5220(panel->characters[i + 1], panel->toggle);
+        slotPlacementAssignSlotPosition(panel->characters[i + 1], panel->toggle);
         slotPlacementStartTransition(panel->characters[i + 1], panel->alternate == 1);
         slotPlacementSetSlot(panel->characters[i + 1], i + 1);
         if (table->characterIds[i] < 0) {
@@ -94,7 +94,7 @@ void FUN_0026f3a0(void)
         panel->characters[i + 1]->transitionPending = 0;
     }
     for (i = 0; i < 24; i++) {
-        FUN_003f5220(panel->demons[i], panel->toggle);
+        slotPlacementAssignSlotPosition(panel->demons[i], panel->toggle);
         slotPlacementStartTransition(panel->demons[i], panel->alternate == 1);
         slotPlacementSetSlot(panel->demons[i], i + 4);
         panel->demons[i]->transitionActive = 0;

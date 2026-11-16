@@ -51,7 +51,7 @@ s32 vec2GetYInt(FixedPosition *position);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const IconFade *fade);
 IconTextureEntry *asdTMTexTableEntryAt(u32 file, s32 index);
-void FUN_002bf288(u32 flags, u32 table, s32 entry, u32 argument, TextureDrawPayloadIV payload);
+void texDrawTableEntryAtStoredOrigin(u32 flags, u32 table, s32 entry, u32 argument, TextureDrawPayloadIV payload);
 void FUN_0029a17c(s32 x, s32 y, u32 width, s32 height, s32 useNarrowScreen);
 
 static __inline TextureDrawPayloadIV payloadAt(s32 y)
@@ -82,13 +82,13 @@ void FUN_002dc120(IconScroller *scroller, s32 amount)
     efctSetSpeed(vec2GetSpeed(&scroller->fade));
     IconTextureEntry *entry = asdTMTexTableEntryAt(0x15, scroller->icon + 0x52);
     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
-    FUN_002bf288(2, 0x15, 0x4f, entry->x + x, payloadAt(entry->y + y));
-    FUN_002bf288(2, 0x15, 0x4e, entry->x + x, payloadAt(entry->y + y - amount));
+    texDrawTableEntryAtStoredOrigin(2, 0x15, 0x4f, entry->x + x, payloadAt(entry->y + y));
+    texDrawTableEntryAtStoredOrigin(2, 0x15, 0x4e, entry->x + x, payloadAt(entry->y + y - amount));
     renderStackSetCounted(&g_titleScene->stackE, 3);
     FUN_0029a17c(entry->x + x, entry->y + y, entry->size[0], entry->size[1] - amount, 1);
     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
-    FUN_002bf288(2, 0x15, 0x50, entry->x + x, payloadAt(entry->y + y));
-    FUN_002bf288(2, 0x15, 0x51, entry->x + x, payloadAt(entry->y + y));
+    texDrawTableEntryAtStoredOrigin(2, 0x15, 0x50, entry->x + x, payloadAt(entry->y + y));
+    texDrawTableEntryAtStoredOrigin(2, 0x15, 0x51, entry->x + x, payloadAt(entry->y + y));
     renderStackSetCounted(&g_titleScene->stackE, 0);
     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
     efctSetSpeed(1.0f);

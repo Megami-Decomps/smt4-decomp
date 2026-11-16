@@ -5,12 +5,12 @@
 
 extern "C" {
 
-int FUN_001695a0(void);
+int messageSetScriptDisplayMode(void);
 int FUN_002292ac(void);
 int messageArmMenuAnimation(...);
 
-int FUN_0015f858(unsigned int, int);
-int FUN_00180118(unsigned int);
+int dataFindKindRecordWithAocOverrides(unsigned int, int);
+int dataTable01GetRecordWithAocOverride(unsigned int);
 int gameGetSlotRecord(...);
 int dataTable1bOr1cGetRecord(void);
 int messageForwardDefaultMode(...);
@@ -33,10 +33,10 @@ typedef struct {
     unsigned int spB0; /* 0xb0: local_b0 */
 } void_stack;
 
-/* Supplied declaration required: FUN_0015f858. */
+/* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 extern int gameFlagsGetBlock(void);
-/* Supplied declaration required: FUN_001695a0. */
-/* Supplied declaration required: FUN_00180118. */
+/* Supplied declaration required: messageSetScriptDisplayMode. */
+/* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
 /* Supplied declaration required: gameGetSlotRecord. */
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
@@ -52,7 +52,7 @@ extern int scrGetCommandOwner(void);
 extern int scrGetCommandFrame(void);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_003180c4. */
+/* Supplied declaration required: scrSetStringSlot. */
 extern int panelIsMissingOrFlagClear(void);
 /* Supplied declaration required: FUN_00359974. */
 /* Supplied declaration required: messageArmMenuAnimation. */
@@ -124,9 +124,9 @@ unsigned int FUN_002c4b48(void)
           temp_v1 = 1;
           sysMemClear(temp_v12,0x80);
           temp_v5 = (unsigned int)*(unsigned short *)(temp_v9 + 0x102);
-          FUN_00180118(temp_v5);
+          dataTable01GetRecordWithAocOverride(temp_v5);
           libc_strcpy(temp_v12,temp_v5);
-          FUN_003180c4(8, reinterpret_cast<const char *>(temp_v12));
+          scrSetStringSlot(8, reinterpret_cast<const char *>(temp_v12));
           FUN_00359974(0x18,*(unsigned int *)(temp_v9 + 0x104),0xffffffff,0);
           temp_v6 = gameGetSlotTable();
           temp_v10 = 0;
@@ -152,9 +152,9 @@ unsigned int FUN_002c4b48(void)
         temp_v8 = *(unsigned int *)(temp_v9 + 0x104);
         sysMemClear(temp_v12,0x80);
         temp_v5 = temp_v14;
-        FUN_0015f858(temp_v14,1);
+        dataFindKindRecordWithAocOverrides(temp_v14,1);
         libc_strcpy(temp_v12,temp_v5);
-        FUN_003180c4(0, reinterpret_cast<const char *>(temp_v12));
+        scrSetStringSlot(0, reinterpret_cast<const char *>(temp_v12));
         FUN_00359974(0x18,temp_v8,0xffffffff,0);
       }
     }
@@ -297,7 +297,7 @@ unsigned int FUN_002c4b48(void)
       FUN_002292ac();
     }
     if (*(char *)(temp_v4 + 6) != '\0') {
-      FUN_001695a0();
+      messageSetScriptDisplayMode();
       temp_v8 = scrWorkGetValue(1);
       temp_v12[0] = 1;
       messageForwardDefaultMode(temp_v13,0x68,temp_v8,5);
@@ -319,7 +319,7 @@ LAB_002c4f24:
       }
     }
     else {
-      FUN_001695a0();
+      messageSetScriptDisplayMode();
       if (!temp_v1) {
         temp_v8 = scrWorkGetValue(1);
         temp_v12[0] = 1;

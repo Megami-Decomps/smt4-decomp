@@ -38,7 +38,7 @@ void partyPanelSortByMode(void)
   unsigned char temp_v1;
   
   temp_v0 = g_partyPanel;
-  pbVar2 = (unsigned char *)reinterpret_cast<unsigned char *>(FUN_0026140c());
+  pbVar2 = (unsigned char *)reinterpret_cast<unsigned char *>(saveGetUserSettingsBlock());
   temp_v1 = ~(*pbVar2 >> 7) & 1;
   if ((*pbVar2 & 0x7f) == 2) {
     if (temp_v1 != 0) {

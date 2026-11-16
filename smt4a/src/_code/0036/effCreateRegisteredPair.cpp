@@ -4,15 +4,15 @@
 
 extern "C" {
 
-extern void FUN_00164b5c(s32 a, s32 b, s32 c, u32 param1, u32 param2, s32 d);
+extern void texDrawCompositeSprite(s32 a, s32 b, s32 c, u32 param1, u32 param2, s32 d);
 extern void efctSetSpeed(f32 scale);
-extern void FUN_00183bb0(void);
+extern void gxResetColorQuadToWhite(void);
 
 void effCreateRegisteredPair(u32 param1, u32 param2)
 {
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
-    FUN_00164b5c(2, 0x2E, 0xD, param1, param2, 0x6C);
+    texDrawCompositeSprite(2, 0x2E, 0xD, param1, param2, 0x6C);
 }
 
 }

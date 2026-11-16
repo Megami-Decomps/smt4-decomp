@@ -27,14 +27,14 @@ void FUN_003cc97c(WaitObject *object, u32 state)
     s32 result = svcWaitSynchronization1(object->handle, -1);
     bool failed = nnResultIsFailure(result);
     if (failed) {
-        FUN_002e3140(result, failed);
+        resultHandleFailure(result, failed);
     }
     object->signal = -1;
     object->state = state;
     s32 started = FUN_0019a364(&reply, object->handle, 1);
     failed = nnResultIsFailure(started);
     if (failed) {
-        FUN_002e3140(started, failed);
+        resultHandleFailure(started, failed);
     }
     while (object->state != 0xffffffff || object->done != 0) {
         svcSleepThread(nn::fnd::TimeSpan::FromMicroSeconds(100));

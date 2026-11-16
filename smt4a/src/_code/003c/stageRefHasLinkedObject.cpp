@@ -19,14 +19,14 @@ typedef struct StageObjB {
 } StageObjB;
 extern StageObjB *g_mapGimic;
 
-extern s32 FUN_004ffba8(u32 value);
+extern s32 animationChannelsAllFinished(u32 value);
 
-/* True when the stage's sub-record is active and FUN_004ffba8 accepts its linked object. */
+/* True when the stage's sub-record is active and animationChannelsAllFinished accepts its linked object. */
 u32 stageRefHasLinkedObject(void)
 {
     StageSubB *sub = &g_mapGimic->sub;
 
-    if (sub->flag == 0 || FUN_004ffba8(sub->link->unk04) == 0) {
+    if (sub->flag == 0 || animationChannelsAllFinished(sub->link->unk04) == 0) {
         return 0;
     }
     return 1;

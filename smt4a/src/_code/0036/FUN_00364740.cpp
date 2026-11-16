@@ -9,8 +9,8 @@ int libc_strcpy(...);
 int mapIfRequestById(...);
 
 int gameFlagIsSet(void);
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
+int libm_cosf(void);
+int libm_sinf(void);
 int sceneRegisterBoxEffect(...);
 int FUN_0035363c(...);
 int sceneLoadParameterPreset(int, unsigned char [8]);
@@ -70,8 +70,8 @@ extern unsigned char DAT_005f32a0; /* 0x5f32a0 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: FUN_001a90f0. */
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: libc_strcpy. */
 extern unsigned int gameFlagsGet(unsigned char *);
 extern unsigned int gameFlags2Get(unsigned char *);
@@ -494,8 +494,8 @@ LAB_00364eac:
                         if (!(temp_v8 == 0x21 || temp_v8 == 5)) {
                           if (temp_v8 != 0x1f) {
                             if (temp_v8 == 0x45) {
-                              FUN_001bc124();
-                              FUN_001bbf0c();
+                              libm_sinf();
+                              libm_cosf();
                               temp_v12 = 0x202;
                               temp_v6 = 0;
                               param_3 = (unsigned int *)&LAB_0036535c;

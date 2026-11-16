@@ -23,7 +23,7 @@ int table23FindRecordByKey(...);
 int lmapSetSceneId(...);
 int FUN_0027fc14(...);
 int naviRegisterTransitionsAndRequest(...);
-int FUN_002bf810(...);
+int soundPlaySeUnpanned(...);
 int FUN_002c29d8(...);
 int VectorSignedToFloat(...);
 
@@ -88,7 +88,7 @@ extern int dataTableGetRecord23(void);
 /* Supplied declaration required: FUN_0027fc14. */
 /* Supplied declaration required: naviRegisterTransitionsAndRequest. */
 extern int messageMainGetChoiceResult(void);
-/* Supplied declaration required: FUN_002bf810. */
+/* Supplied declaration required: soundPlaySeUnpanned. */
 /* Supplied declaration required: FUN_002c29d8. */
 extern int FUN_002c2a04(unsigned int);
 
@@ -186,7 +186,7 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
       }
     }
     if (DAT_0049f9d0 < 99) {
-      FUN_002bf810(DAT_0049f9d0 + 0x10000af);
+      soundPlaySeUnpanned(DAT_0049f9d0 + 0x10000af);
     }
     mapInitializeSavedAndTargetState();
     *(unsigned int *)(temp_v2 + 0x38) = DAT_0049f990;

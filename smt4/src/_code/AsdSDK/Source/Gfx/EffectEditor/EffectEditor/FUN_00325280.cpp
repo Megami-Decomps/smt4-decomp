@@ -11,7 +11,7 @@ int matrixCopySelectedToGlobal(float *);
 int randomAdvanceShiftRegister(int);
 int shiftRandomNextFraction(int);
 int gfxQuaternionWorkspaceBuildMatrix(void);
-int FUN_002b70cc(void);
+int mathSinFixedAngle(void);
 int VectorSignedToFloat(int, int);
 int VectorUnsignedToFloat(unsigned int, int);
 int __aeabi_uidivmod(void);
@@ -90,7 +90,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: shiftRandomNextFraction. */
 extern int effGetFrameCounter(void);
 /* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
-/* Supplied declaration required: FUN_002b70cc. */
+/* Supplied declaration required: mathSinFixedAngle. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
 
@@ -255,7 +255,7 @@ void FUN_00325280(int param_1)
             temp_v24 = temp_v10 * 40.743664f;
             temp_v23 = temp_v10 - 6.2831855f;
             temp_v25 = temp_v24;
-            FUN_002b70cc();
+            mathSinFixedAngle();
             temp_v24 = temp_v24 * temp_v46;
             temp_v11 = temp_v42 * temp_v24;
             temp_v12 = temp_v43 * temp_v24;
@@ -264,7 +264,7 @@ void FUN_00325280(int param_1)
             DAT_004ea91c = temp_v11;
             DAT_004ea920 = temp_v12;
             DAT_004ea924 = temp_v13;
-            FUN_002b70cc();
+            mathSinFixedAngle();
             temp_v25 = temp_v25 * temp_v46;
             temp_v24 = temp_v25 - temp_v24;
             DAT_004ea93c = temp_v42 * temp_v24 + temp_v44 * temp_v53;
@@ -466,7 +466,7 @@ void FUN_00325280(int param_1)
                 }
                 temp_v14 = temp_v10 * 40.743664f;
                 temp_v38 = temp_v25;
-                FUN_002b70cc();
+                mathSinFixedAngle();
                 temp_v25 = temp_v14 * temp_v46;
                 DAT_004ea93c = temp_v44 * temp_v53;
                 temp_v14 = temp_v25 - temp_v38;

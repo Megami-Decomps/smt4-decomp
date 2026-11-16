@@ -47,8 +47,8 @@ struct GameStateWideView {
 extern GameStateWideView g_gameState;
 
 u32 randRange(u32 limit);
-f32 FUN_001bc124(f32 radians);
-f32 FUN_001bbf0c(f32 radians);
+f32 libm_sinf(f32 radians);
+f32 libm_cosf(f32 radians);
 s32 FUN_0036d984(Vector3 *start, Vector3 *end, s32 flags);
 s32 FUN_0025ef68(Vector3 *position, Vector3 *ground, s32 flags);
 f32 mathPositionHeadingDegrees(Vector3 from, Vector3 to);
@@ -97,8 +97,8 @@ u32 FUN_00353200(EnemyPlacement *enemy)
             distance = (f32)randRange(50) + 560.0f;
         }
         radians = angle * 0.017453292f;
-        origin.x = origin.x + FUN_001bc124(radians) * distance;
-        origin.z = origin.z + FUN_001bbf0c(radians) * distance;
+        origin.x = origin.x + libm_sinf(radians) * distance;
+        origin.z = origin.z + libm_cosf(radians) * distance;
         g_mapEnemy->attempts++;
         end = origin;
         ground = origin;

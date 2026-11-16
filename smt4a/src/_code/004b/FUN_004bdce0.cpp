@@ -12,7 +12,7 @@ struct BattleRosterLabelMode {
 extern "C" {
 extern const char DAT_0052d838[];
 UiTextMetrics *asdTMTexTableEntryAt(u32 texture, u32 frame);
-BattleRosterRecordA *FUN_003e4d68(u32 id);
+BattleRosterRecordA *partyGetSlot(u32 id);
 void textFormatBuffer(char *output, const char *format, ...);
 s32 fontMeasureLineAdvance(const char *text, s32 font);
 
@@ -23,7 +23,7 @@ void FUN_004bdce0(Obj25C *owner, s32 x, s32 y, f32 alpha)
     f32 dimAlpha = alpha * 0.5f;
     s32 visible = 0;
     for (s32 slot = 0; slot < 12; ++slot) {
-        BattleRosterRecordA *record = FUN_003e4d68(owner->ids[slot] & 0xFFFF);
+        BattleRosterRecordA *record = partyGetSlot(owner->ids[slot] & 0xFFFF);
         if (record != NULL && (record->label.enabled & 1) != 0) {
             f32 labelAlpha = alpha;
             if (((BattleRosterLabelMode *)owner)->mode == 2 && owner->flags[slot] == 0) {

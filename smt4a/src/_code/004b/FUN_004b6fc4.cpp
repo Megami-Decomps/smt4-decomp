@@ -80,7 +80,7 @@ void FUN_004b6fc4(MikadoCameraWork *camera)
     camera->unk34 = -1;
     asdTMTexTableLoadTmx(0x18, 0);
     campCommonBgAcquire();
-    FUN_003b61ec();
+    commonBgStopChildAndBeginTransition();
     campButtonHelpLoad();
     campButtonHelpAcquire();
     FUN_004930e4(0);

@@ -13,7 +13,7 @@ void vectorSetAllOne(QuadVector *value);
 void *__aeabi_vec_ctor_nocookie_nodtor(QuadVector *values, void (*construct)(QuadVector *), u32 size, u32 count);
 void quadSetOrderedVectors(const QuadVector *first, const QuadVector *second,
     const QuadVector *third, const QuadVector *fourth, s32 mode, s32 preserveW);
-void FUN_002bed3c();
+void gxResetColorQuadToWhite();
 
 /* Dispatch the sprite's special mode, otherwise apply optional vertex colors around the draw. */
 void FUN_00230fe4(u32 flags, u32 table, s32 index, u32 second, u32 third,
@@ -38,6 +38,6 @@ void FUN_00230fe4(u32 flags, u32 table, s32 index, u32 second, u32 third,
     }
     texTableRecordCallExtended(flags, table, index, second, third, firstExtra, secondExtra, fourth);
     efctSetSpeed(previousScale);
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
 }
 }

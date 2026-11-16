@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001517b4(...);
+int padQueryLogicalKey(...);
 int asdTMTexTableEntryAt(...);
 int sysMemClear(int, int);
 int FUN_0035e6d4(...);
@@ -17,7 +17,7 @@ int VectorSignedToFloat(...);
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_001517b4. */
+/* Supplied declaration required: padQueryLogicalKey. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 extern unsigned long long slotIsReady(unsigned int);
 extern int menuAreModeTexturesLoaded(int);
@@ -54,19 +54,19 @@ void FUN_003c4f28(int param_1)
   
   if (*(char *)(param_1 + 0x90) != '\0') {
     temp_v2 = 0;
-    FUN_001517b4(0,1);
+    padQueryLogicalKey(0,1);
     if (temp_v2 == 0) {
       temp_v2 = 1;
-      FUN_001517b4();
+      padQueryLogicalKey();
       if (temp_v2 == 0) {
         temp_v2 = 9;
-        FUN_001517b4(9,1);
+        padQueryLogicalKey(9,1);
         if (temp_v2 == 0) {
           temp_v2 = 10;
-          FUN_001517b4(10,1);
+          padQueryLogicalKey(10,1);
           if (temp_v2 == 0) {
             temp_v2 = 2;
-            FUN_001517b4(2,1);
+            padQueryLogicalKey(2,1);
             if (temp_v2 == 0) goto LAB_003c4fac;
           }
         }

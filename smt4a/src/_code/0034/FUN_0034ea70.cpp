@@ -34,7 +34,7 @@ extern u8 *g_renderCtx;
 
 s32 vec2GetXInt(const void *vector);
 void efctSetSpeed(f32 speed);
-void FUN_00164b5c(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
+void texDrawCompositeSprite(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
 void FUN_0035ae58(s32 x, s32 y, s32 width, s32 height, s32 flag);
 
 /* Draws the party panel's pop-up: positions it from the phase (rising in, held with a texture
@@ -80,18 +80,18 @@ void FUN_0034ea70(PartyPopup *popup)
         speed = popup->slideSpeed;
     }
     efctSetSpeed(speed);
-    FUN_001835b4(2, 13, 0x1E0, x, y, 0x51);
+    texDrawTableEntryAtStoredOrigin(2, 13, 0x1E0, x, y, 0x51);
     TextureTableEntryIV *window = asdTMTexTableEntryAt(13, 0x1DD);
 
     renderStackSet((RenderStateStack *)(g_renderCtx + 0x1318), 3);
     FUN_0035ae58(window->x + x, window->y + y, window->placement->width, window->placement->height + y, 1);
     devilDispatchTextureResource(popup->textureId, frame->x + x, frame->y + y, 0x15, 1);
     renderStackSet((RenderStateStack *)(g_renderCtx + 0x1318), 0);
-    FUN_00164b5c(2, 13, 13, x, y, 0x56);
+    texDrawCompositeSprite(2, 13, 13, x, y, 0x56);
     if (speed > 0.0f) {
         efctSetSpeed(popup->closeSpeed);
     }
-    FUN_00164b5c(2, 13, 14, x, y, 0x56);
+    texDrawCompositeSprite(2, 13, 14, x, y, 0x56);
     efctSetSpeed(1.0f);
 }
 

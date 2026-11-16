@@ -13,7 +13,7 @@ int FUN_0022abe0(...);
 int FUN_00246134(unsigned int, unsigned int, int, unsigned int);
 int FUN_002463e8(...);
 int FUN_00247478(...);
-int FUN_0027da30(unsigned int *, unsigned int);
+int btlFindEntryBlockByMemberId(unsigned int *, unsigned int);
 int btlMainFindEntryByListedId(...);
 int passiveSkillLookupRecord(void);
 int dataTable40FindById(void);
@@ -64,7 +64,7 @@ extern unsigned short FUN_00245cc0(unsigned int);
 /* Supplied declaration required: FUN_00246134. */
 /* Supplied declaration required: FUN_002463e8. */
 /* Supplied declaration required: FUN_00247478. */
-/* Supplied declaration required: FUN_0027da30. */
+/* Supplied declaration required: btlFindEntryBlockByMemberId. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: passiveSkillLookupRecord. */
 /* Supplied declaration required: btlGetMainState. */
@@ -164,10 +164,10 @@ FUN_0022899c(int param_1,unsigned int param_2,fn_0022899c_arg2 *param_3,unsigned
     }
   }
   puVar5 = temp_v27;
-  FUN_0027da30(temp_v27,temp_v31);
+  btlFindEntryBlockByMemberId(temp_v27,temp_v31);
   puVar6 = temp_v27;
   temp_v29 = puVar5;
-  FUN_0027da30(temp_v27,param_5);
+  btlFindEntryBlockByMemberId(temp_v27,param_5);
   puVar5 = temp_v27;
   btlMainFindEntryByListedId(temp_v27,temp_v31);
   puVar7 = temp_v27;

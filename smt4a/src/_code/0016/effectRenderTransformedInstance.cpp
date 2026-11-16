@@ -252,10 +252,10 @@ void effectRenderTransformedInstance(unsigned int *param_1)
         }
         FUN_00187d04(DAT_0059dbb4,auStack_b0);
         if ((int)param_1[2] >= 0) {
-          FUN_00164b5c(uVar4,*param_1,param_1[2],0);
+          texDrawCompositeSprite(uVar4,*param_1,param_1[2],0);
         }
         else {
-          FUN_001835b4(uVar4,*param_1,param_1[1],0,0,(int)*(short *)(param_1 + 0xe));
+          texDrawTableEntryAtStoredOrigin(uVar4,*param_1,param_1[1],0,0,(int)*(short *)(param_1 + 0xe));
         }
         FUN_001677c0();
         uStack_70 = uVar9;

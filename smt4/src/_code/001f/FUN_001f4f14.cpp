@@ -3,7 +3,7 @@
 #include "gamedata/SaveSlotTableIV.h"
 
 extern "C" {
-void FUN_0028cb40(void *work, u16 *kind, s16 *index);
+void btlCommandMenuResolveLayout(void *work, u16 *kind, s16 *index);
 
 // Resolve selected party positions to the battle target mask and return the current command index.
 u32 FUN_001f4f14(void *work, u64 *targets, s64 *commandIndex)
@@ -39,7 +39,7 @@ u32 FUN_001f4f14(void *work, u64 *targets, s64 *commandIndex)
     }
     u16 kind = 0;
     s16 index = 0;
-    FUN_0028cb40(work, &kind, &index);
+    btlCommandMenuResolveLayout(work, &kind, &index);
     *commandIndex = index;
     return 1;
 }

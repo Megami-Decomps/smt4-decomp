@@ -14,7 +14,7 @@ u32 FUN_00379ca0(void)
 {
     if (scrGetCommandFrame() != 0) {
         if (FUN_00162ea4() != 0) {
-            FUN_00212204(0);
+            screenFadeSlotReset(0);
             return 1;
         }
     } else {

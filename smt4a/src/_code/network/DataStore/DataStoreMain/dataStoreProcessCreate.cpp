@@ -8,7 +8,7 @@ typedef void (*DataStoreCallback)(void *);
 extern "C" {
 extern DataStoreCtrl *g_dataStore;
 extern const char DAT_00533030[];
-void *FUN_00178b04(u32 size, const char *file, s32 line);
+void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 void *FUN_002e9ff4(void *member);
 void FUN_00227ee8(void *);
 void FUN_002e50d0(void *);
@@ -22,7 +22,7 @@ u32 dataStoreProcessCreate(void)
     if (g_dataStore == NULL) {
         asdDebugTrace(DAT_00533030, 0x47e);
         g_dataStore = static_cast<DataStoreCtrl *>(asdMemoryAllocTracked(0x100, 0x100, 0, 0x10, 1));
-        DataStoreWork *work = static_cast<DataStoreWork *>(FUN_00178b04(sizeof(DataStoreWork), DAT_00533030, 0x47f));
+        DataStoreWork *work = static_cast<DataStoreWork *>(asdMemoryAllocTraced(sizeof(DataStoreWork), DAT_00533030, 0x47f));
         if (work != NULL) {
             work->state = 0;
             work->initialState[0] = 0;

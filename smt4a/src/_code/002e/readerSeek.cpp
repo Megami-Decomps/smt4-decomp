@@ -21,7 +21,7 @@ u32 readerSeek(S4FsReader *reader, s64 position)
     nn_os_CriticalSection_Leave(reader->lock);
     s32 result = nn::svc::SignalEvent(reader->dataEvent);
     if (nnResultIsFailure(result)) {
-        FUN_002e3140(result);
+        resultHandleFailure(result);
     }
     return 1;
 }

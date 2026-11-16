@@ -27,8 +27,8 @@ extern GameStateView g_gameState;
 int soundVolumeSettingSet(...);
 int FUN_0014af98(void);
 int sysPlaySe(int);
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
+int libm_cosf(void);
+int libm_sinf(void);
 int FUN_00233e10(...);
 int FUN_00246014(void);
 int FUN_002d1f40(...);
@@ -48,7 +48,7 @@ int mapIfReleaseSlot3(void);
 int mapSetSceneState(...);
 int FUN_00327ee8(void);
 int FUN_0033abd4(void);
-int FUN_003d4ed8(...);
+int soundActorStartOnFreeChannel(...);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -77,8 +77,8 @@ extern unsigned int soundVolumeSettingGet(void);
 /* Supplied declaration required: FUN_0014af98. */
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_00233e10. */
 /* Supplied declaration required: FUN_002342b8. */
 /* Supplied declaration required: FUN_00246014. */
@@ -98,7 +98,7 @@ extern int mapIfHasSelection(void);
 extern int dataTableGetRecord23(void);
 /* Supplied declaration required: table23FindRecordByKey. */
 /* Supplied declaration required: sysPlayVoice. */
-/* Supplied declaration required: FUN_003d4ed8. */
+/* Supplied declaration required: soundActorStartOnFreeChannel. */
 extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
 
@@ -189,27 +189,27 @@ void FUN_003661c8(void)
           FUN_0033abd4();
           switch(g_gameState.f005f162e) {
           case 0:
-            FUN_003d4ed8(temp_v4);
+            soundActorStartOnFreeChannel(temp_v4);
             break;
           case 1:
             temp_v4 = 0x10002c6;
-            FUN_003d4ed8(temp_v4);
+            soundActorStartOnFreeChannel(temp_v4);
             break;
           case 2:
             temp_v4 = 0x10002c8;
-            FUN_003d4ed8(temp_v4);
+            soundActorStartOnFreeChannel(temp_v4);
             break;
           case 3:
             temp_v4 = 0x10002ca;
-            FUN_003d4ed8(temp_v4);
+            soundActorStartOnFreeChannel(temp_v4);
             break;
           case 4:
             temp_v4 = 0x10002cc;
-            FUN_003d4ed8(temp_v4);
+            soundActorStartOnFreeChannel(temp_v4);
             break;
           case 5:
             temp_v4 = 0x10002d9;
-            FUN_003d4ed8(temp_v4);
+            soundActorStartOnFreeChannel(temp_v4);
           }
           goto LAB_00366704;
         }
@@ -312,8 +312,8 @@ void FUN_003661c8(void)
       *(unsigned int *)(g_lmapView + 0xb0) = 0xfffffffd;
       sysPlaySe(0xdd);
       FUN_00233e10(1,g_gameState.f005f16ac);
-      FUN_001bc124();
-      FUN_001bbf0c();
+      libm_sinf();
+      libm_cosf();
       FUN_00246014();
       temp_v1 = g_lmapScene;
       temp_v2 = *(int *)(temp_v1 + 4);
@@ -342,13 +342,13 @@ void FUN_003661c8(void)
         temp_v1 = g_lmapScene;
         if (g_gameState.f005f164c != 0) {
           temp_v5 = *(float *)(g_lmapScene + 0x50) * temp_v6;
-          FUN_001bc124();
+          libm_sinf();
           temp_v1 = g_lmapScene;
           temp_v8 = 250.0f;
           *(float *)(g_lmapScene + 0xa0) = *(float *)(g_lmapScene + 0x28) + temp_v5 * 250.0f;
           *(float *)(temp_v1 + 0xa4) = *(float *)(temp_v1 + 0x2c) - 500.0f;
           temp_v6 = *(float *)(temp_v1 + 0x50) * temp_v6;
-          FUN_001bbf0c();
+          libm_cosf();
           temp_v1 = g_lmapScene;
           *(float *)(g_lmapScene + 0xa8) = *(float *)(g_lmapScene + 0x30) + temp_v6 * temp_v8;
           *(unsigned int *)(temp_v1 + 0xac) = *(unsigned int *)(temp_v1 + 0x50);
@@ -411,34 +411,34 @@ void FUN_003661c8(void)
       FUN_0033abd4();
       switch(g_gameState.f005f162e) {
       case 0:
-        FUN_003d4ed8(temp_v4);
+        soundActorStartOnFreeChannel(temp_v4);
         break;
       case 1:
         temp_v4 = 0x10002c6;
-        FUN_003d4ed8(temp_v4);
+        soundActorStartOnFreeChannel(temp_v4);
         break;
       case 2:
         temp_v4 = 0x10002c8;
-        FUN_003d4ed8(temp_v4);
+        soundActorStartOnFreeChannel(temp_v4);
         break;
       case 3:
         temp_v4 = 0x10002ca;
-        FUN_003d4ed8(temp_v4);
+        soundActorStartOnFreeChannel(temp_v4);
         break;
       case 4:
         temp_v4 = 0x10002cc;
-        FUN_003d4ed8(temp_v4);
+        soundActorStartOnFreeChannel(temp_v4);
         break;
       case 5:
         temp_v4 = 0x10002d9;
-        FUN_003d4ed8(temp_v4);
+        soundActorStartOnFreeChannel(temp_v4);
         break;
       default:
       }
 LAB_00366704:
       FUN_00324e38(0xffffffff);
-      FUN_001bc124();
-      FUN_001bbf0c();
+      libm_sinf();
+      libm_cosf();
       FUN_0014af98();
       soundVolumeSettingSet();
       sysPlayVoice(0x10002e5);
@@ -501,10 +501,10 @@ LAB_00366704:
         *(unsigned int *)(temp_v1 + 0x58) = 0x40400000;
         *(unsigned int *)(temp_v1 + 4) = 0xe;
         *(unsigned int *)(temp_v1 + 8) = 0;
-        FUN_001bc124();
-        FUN_001bbf0c();
-        FUN_001bc124();
-        FUN_001bbf0c();
+        libm_sinf();
+        libm_cosf();
+        libm_sinf();
+        libm_cosf();
         FUN_00352308();
       }
       break;
@@ -524,34 +524,34 @@ LAB_00366704:
         switch(g_gameState.f005f162e) {
         case 0:
           temp_v4 = 0x10002c5;
-          FUN_003d4ed8(temp_v4);
+          soundActorStartOnFreeChannel(temp_v4);
           break;
         case 1:
           temp_v4 = 0x10002c7;
-          FUN_003d4ed8(temp_v4);
+          soundActorStartOnFreeChannel(temp_v4);
           break;
         case 2:
           temp_v4 = 0x10002c9;
-          FUN_003d4ed8(temp_v4);
+          soundActorStartOnFreeChannel(temp_v4);
           break;
         case 3:
           temp_v4 = 0x10002cb;
-          FUN_003d4ed8(temp_v4);
+          soundActorStartOnFreeChannel(temp_v4);
           break;
         case 4:
           temp_v4 = 0x10002cd;
-          FUN_003d4ed8(temp_v4);
+          soundActorStartOnFreeChannel(temp_v4);
           break;
         case 5:
           temp_v4 = 0x10002da;
-          FUN_003d4ed8(temp_v4);
+          soundActorStartOnFreeChannel(temp_v4);
           break;
         default:
         }
 LAB_00366a74:
         FUN_00324e38(0xffffffff);
-        FUN_001bc124();
-        FUN_001bbf0c();
+        libm_sinf();
+        libm_cosf();
         FUN_0014af98();
         soundVolumeSettingSet();
         sysPlayVoice(0x10002e6);

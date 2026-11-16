@@ -14,9 +14,9 @@ PackageRecord *packageFindRecordByName(PackageList *list, s32 kind, const char *
     for (i = 0; i < list->count; i++) {
         PackageEntry *entry = &list->entries[i];
 
-        if (FUN_002ac12c(entry) != 0) {
-            PackageRecord *records = (PackageRecord *)FUN_002ac0f8(entry);
-            u32 count = FUN_002ac0c4(entry);
+        if (packageEntryIsLoaded(entry) != 0) {
+            PackageRecord *records = (PackageRecord *)packageEntryGetDirectory(entry);
+            u32 count = packageEntryGetFileCount(entry);
 
             for (j = 0; j < count; j++) {
                 const PackageRecord *record = &records[j];

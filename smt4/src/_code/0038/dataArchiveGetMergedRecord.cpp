@@ -32,9 +32,9 @@ typedef struct DataArchiveRecord {
     u8 data[0xC];
 } DataArchiveRecord;
 
-s32 FUN_002ac12c(DataArchive *archive);
-DataArchiveName *FUN_002ac0f8(DataArchive *archive);
-u32 FUN_002ac0c4(DataArchive *archive);
+s32 packageEntryIsLoaded(DataArchive *archive);
+DataArchiveName *packageEntryGetDirectory(DataArchive *archive);
+u32 packageEntryGetFileCount(DataArchive *archive);
 void *dataTableFileGetTable(u32 handle, u32 section);
 
 /* Returns record `index` of the '$' data tables of every loaded archive taken in order (NULL past the end). */
@@ -46,9 +46,9 @@ DataArchiveRecord *dataArchiveGetMergedRecord(DataArchiveSet *set, s32 index)
     for (i = 0; i < set->count; i++) {
         DataArchive *archive = &set->archives[i];
 
-        if (FUN_002ac12c(archive)) {
-            DataArchiveName *names = FUN_002ac0f8(archive);
-            u32 fileCount = FUN_002ac0c4(archive);
+        if (packageEntryIsLoaded(archive)) {
+            DataArchiveName *names = packageEntryGetDirectory(archive);
+            u32 fileCount = packageEntryGetFileCount(archive);
             u32 j;
 
             for (j = 0; j < fileCount; j++) {

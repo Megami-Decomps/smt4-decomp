@@ -20,7 +20,7 @@ int sysFatalBreak(void);
 int nn_os_LightEvent_Signal(unsigned int *);
 int nn_os_LightEvent_TryWait(void);
 int svcSleepThread(int, int);
-int FUN_002e3140(void);
+int resultHandleFailure(void);
 int __aeabi_vec_ctor_nocookie_nodtor(int *, unsigned char *, int, int);
 int software_interrupt(int);
 
@@ -64,7 +64,7 @@ extern int FUN_0018bc38(unsigned int, unsigned int *);
 /* Supplied declaration required: nn_os_LightEvent_Signal. */
 /* Supplied declaration required: nn_os_LightEvent_TryWait. */
 /* Supplied declaration required: svcSleepThread. */
-/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
@@ -110,7 +110,7 @@ void FUN_00170a34(void)
     if (puVar2 == (unsigned int *)0x0) {
       software_interrupt(0x19);
       if ((int)(&DAT_006416a8)[temp_v5] < 0) {
-        FUN_002e3140();
+        resultHandleFailure();
       }
       if (temp_v5 == 2) {
         temp_v0 = 0xc;
@@ -207,7 +207,7 @@ joined_r0x00170cec:
     svcSleepThread(10000000,0);
     software_interrupt(0x18);
     if ((int)(&DAT_006416a8)[temp_v5] < 0) {
-      FUN_002e3140();
+      resultHandleFailure();
     }
   } while( 1 );
 }

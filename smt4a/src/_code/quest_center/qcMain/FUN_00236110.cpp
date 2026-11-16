@@ -47,7 +47,7 @@ void campButtonHelpLoad(void);
 void campButtonHelpAcquire(void);
 void campButtonHelpRelease(void);
 void helpTexturesRelease(void);
-void FUN_003b61ec(void);
+void commonBgStopChildAndBeginTransition(void);
 void questCenterInitEntry(void *entry);
 void FUN_0046a34c(QuestEntry *screen, s32 which, s32 argB, s32 nested);
 void _ZN9Obj5333c06updateEv(QuestEntry *screen);
@@ -113,7 +113,7 @@ u32 FUN_00236110(void)
             campCommonBgAcquire();
             campButtonHelpLoad();
             campButtonHelpAcquire();
-            FUN_003b61ec();
+            commonBgStopChildAndBeginTransition();
         }
         QuestEntry *created = new QuestEntry;
         work->entry = created;

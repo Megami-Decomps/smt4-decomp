@@ -8,7 +8,7 @@ extern "C" {
 int btlReflectQueueMemberAction(...);
 int FUN_002267b8(...);
 
-int FUN_0027da30(...);
+int btlFindEntryBlockByMemberId(...);
 int FUN_0027e3e8(...);
 int btlMainFindEntryByListedId(...);
 int btlGetMainState(...);
@@ -46,7 +46,7 @@ extern unsigned int g_btlEvent; /* 0x435d48 */
 /* Supplied declaration required: btlReflectQueueMemberAction. */
 /* Supplied declaration required: FUN_002267b8. */
 /* Supplied declaration required: btlQueueReflectAction. */
-/* Supplied declaration required: FUN_0027da30. */
+/* Supplied declaration required: btlFindEntryBlockByMemberId. */
 extern int idSetFindSubjectIndex(unsigned int, int);
 /* Supplied declaration required: FUN_0027e3e8. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
@@ -215,7 +215,7 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
                       temp_v8 = (int)btlQueueReflectAction(g_btlActionReflect,(int)(short)((short)*(int *)(temp_v9 + 0x5c) + temp_v0)
                                    ,0,param_2);
                       temp_v5 = btlGetMainState();
-                      FUN_0027da30(temp_v5,(int)*(short *)(temp_v9 + 0x62));
+                      btlFindEntryBlockByMemberId(temp_v5,(int)*(short *)(temp_v9 + 0x62));
                       temp_v6 = btlGetMainState();
                       temp_v7 = idSetFindSubjectIndex(temp_v6,temp_v9);
                       if (temp_v7 < 0) {

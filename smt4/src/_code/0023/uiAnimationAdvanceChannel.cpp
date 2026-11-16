@@ -8,7 +8,7 @@ struct IndexedTimerGroup {
 extern "C" {
 extern PartyPanelState *g_partyPanel;
 s32 FUN_002b8ee0(TimerSlot *timer, s32 reverse);
-s32 FUN_002bf818(TimerSlot *timer);
+s32 uiSpriteAdvanceAnimation(TimerSlot *timer);
 
 // Use the directional entrance animation for the edge slots, otherwise update normally.
 s32 uiAnimationAdvanceChannel(IndexedTimerGroup *group, s32 index)
@@ -27,7 +27,7 @@ s32 uiAnimationAdvanceChannel(IndexedTimerGroup *group, s32 index)
     case 3:
     case 5:
     case 7:
-        result = FUN_002bf818(&group->timers[index]);
+        result = uiSpriteAdvanceAnimation(&group->timers[index]);
         break;
     }
     return result;

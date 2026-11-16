@@ -17,7 +17,7 @@ void resourceOwnerSetChildEulerAngles(BtlStage *stage, f32 x, f32 y, f32 z);
 u16 resourceNameGroupFindIndex(void *registry, const char *name);
 void FUN_004d8bf8(BtlStage *stage, f32 x, f32 y, f32 z);
 void FUN_004d896c(BtlStage *stage, u32 first, u32 second);
-void FUN_002c2358(void);
+void frameTexturesRelease(void);
 void objectOwner3Release(BtlStage *stage);
 void FUN_00401198(BtlStage *stage);
 void FUN_0040128c(FrameColorUpdateWork *stage);
@@ -62,7 +62,7 @@ u32 btlStageUpdate(BtlStage *stage, s32 enabled)
         if (stage->context != NULL) {
             stage->context = NULL;
         }
-        FUN_002c2358();
+        frameTexturesRelease();
         objectOwner3Release(stage);
         stage->state = 0;
         break;

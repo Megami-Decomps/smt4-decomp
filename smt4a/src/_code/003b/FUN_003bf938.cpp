@@ -9,15 +9,15 @@ s32 scrGetCommandFrame(void);
 void uiSpriteSelectAnim(void *sprite, s32 animation);
 void FUN_004bd410(u16 id);
 PartySlotA *saveSlotFindSelected(void);
-PartySlotA *FUN_003e4d68(u16 index);
+PartySlotA *partyGetSlot(u16 index);
 void FUN_003e4e4c(u16 id);
 }
 
 static inline u16 findRemainingSelectedUnit(u32 removed)
 {
     for (s32 i = 0; i < 12; ++i) {
-        PartySlotA *unit = FUN_003e4d68((u16)i);
-        if (unit->id != removed && FUN_00187168(unit)) {
+        PartySlotA *unit = partyGetSlot((u16)i);
+        if (unit->id != removed && partySlotIsOccupied(unit)) {
             return unit->id;
         }
     }

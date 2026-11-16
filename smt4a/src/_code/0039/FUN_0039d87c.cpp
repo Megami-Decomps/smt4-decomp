@@ -10,7 +10,7 @@ s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
 s32 btlResolveEntryChoice(s32 choice);
 s32 FUN_003020fc(BtlCombatantEntryA *entry, u32 category);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
 s32 randRange(u32 maximum);
 
 /* Chooses a random eligible group member whose available action matches the requested category. */
@@ -21,7 +21,7 @@ u32 FUN_0039d87c(void)
     u32 candidates[109];
     s32 candidateCount = 0;
     s32 first, count;
-    FUN_00301a08(group, &first, &count);
+    btlGetEntryChoiceRange(group, &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlMainStateA *state = btlGetMainState();
         BtlCombatantEntryA *entry = &state->entries[index];
@@ -33,7 +33,7 @@ u32 FUN_0039d87c(void)
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
-        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL && FUN_003020fc(entry, category) != 0) {
             candidates[candidateCount++] = entry->id;
         }

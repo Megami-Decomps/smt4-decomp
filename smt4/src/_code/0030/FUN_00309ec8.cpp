@@ -9,7 +9,7 @@ void FUN_002b0750(s32 layer, s32 group, u32 sprite, s32 x, s32 y, s32 width, s32
 
 static __inline void indicatorDraw(UiControlDrawPosition *position, s32 x, s32 y, u32 sprite, s32 priority)
 {
-    FUN_002bf288(2, 0x39, sprite, position->x + x, y, priority);
+    texDrawTableEntryAtStoredOrigin(2, 0x39, sprite, position->x + x, y, priority);
 }
 
 /* Draw the two directional indicators and the visible section of the scroll track. */

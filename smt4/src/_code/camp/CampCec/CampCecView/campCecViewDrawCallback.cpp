@@ -31,7 +31,7 @@ extern "C" {
 extern CampCecView *g_campCecView;
 extern RenderCtx *g_titleScene;
 void renderCtxSelectStereoLayout(RenderCtx *);
-s32 FUN_002c5d80(u32, u32);
+s32 renderCtxPackPassFlags(u32, u32);
 u32 FUN_0025981c();
 CecViewSavedRecord *saveGetIndexedMapValue(u32);
 u16 *asdTMTexTableEntryAt(u32, s32);
@@ -47,7 +47,7 @@ u32 campCecViewDrawCallback()
     CecViewDrawFields *fields = reinterpret_cast<CecViewDrawFields *>(view);
     renderCtxSelectStereoLayout(g_titleScene);
     RenderCtx *context = g_titleScene;
-    renderCtxPushA(context, FUN_002c5d80(1, 0));
+    renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
     u32 headerValue = FUN_0025981c();
     uiDrawPanelWithValue(&fields->widgets[0], 0, 0, headerValue, 0);
     for (s32 row = 0; row < 3; ++row) {

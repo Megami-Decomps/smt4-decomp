@@ -4,7 +4,7 @@ extern GameState g_gameState;
 void commonBgReset(void);
 void FUN_002757a8(void);
 void FUN_00275bc8(void);
-void FUN_00289880(void);
+void commonBgStopChildAndBeginTransition(void);
 void buttonHelpSetPreset(s32 preset);
 s32 gameFlagIsSet(u32 flag);
 s32 lmapMainGetFlag(void);
@@ -17,7 +17,7 @@ void FUN_00273840(s32 enabled)
         if (!g_gameState.bgResetPending) {
             g_gameState.bgResetPending = 1;
             FUN_00275bc8();
-            FUN_00289880();
+            commonBgStopChildAndBeginTransition();
             buttonHelpSetPreset(0x90);
         }
         return;
@@ -27,7 +27,7 @@ void FUN_00273840(s32 enabled)
         if (gameFlagIsSet(0x16))
             commonBgReset();
         else
-            FUN_00289880();
+            commonBgStopChildAndBeginTransition();
     } else if (!NaviMain_IsMapOpen()) {
         if (g_gameState.unk000 == 101) {
             if (lmapMainGetFlag())

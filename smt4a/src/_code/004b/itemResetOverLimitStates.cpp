@@ -25,8 +25,8 @@ typedef struct ItemDef {
 extern u32 dataTableGet(u32 table, u32 index);
 extern LimitEntry *dataTableGetEntries(void);
 extern s32 dataTableGetCount(u32 index);
-extern ItemDef *FUN_0015fa74(u8 groupId, u8 itemId);
-extern void FUN_00148d68(u8 groupId, u8 itemId, s32 arg);
+extern ItemDef *dataTable02FindConditionalMapRecord(u8 groupId, u8 itemId);
+extern void weightedTableRollNextValue(u8 groupId, u8 itemId, s32 arg);
 
 /* Resets every item whose limit is set and not above `level` and whose value has drifted from its base. */
 void itemResetOverLimitStates(u32 level)
@@ -44,12 +44,12 @@ void itemResetOverLimitStates(u32 level)
             u8 groupId = entries[i].groupId;
             ItemState *state = reinterpret_cast<ItemState *>(gameDataGetTableEntry(groupId, itemId));
 
-            u16 baseValue = FUN_0015fa74(groupId, itemId)->baseValue;
+            u16 baseValue = dataTable02FindConditionalMapRecord(groupId, itemId)->baseValue;
 
             if (state->value != baseValue) {
                 state->count = 0;
                 state->flags = state->flags & ~0x1F;
-                FUN_00148d68(groupId, itemId, 0);
+                weightedTableRollNextValue(groupId, itemId, 0);
             }
         }
     }

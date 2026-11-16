@@ -6,14 +6,14 @@ extern "C" {
 extern AppletParameterState g_moduleEventC;
 s32 FUN_0016f9bc(AppletParameterState *state, u32 command);
 s32 FUN_0018a8ec(u32 command);
-void FUN_0016e800(s32 result, u32 address);
+void sysReportCheckFailure(s32 result, u32 address);
 }
 
 /* The diagnostic address identifies the result check, even on success. */
 static __inline void checkAppletResult(s32 result, u32 address)
 {
     if (nnResultIsFailure(result)) {
-        FUN_0016e800(result, address);
+        sysReportCheckFailure(result, address);
     }
 }
 

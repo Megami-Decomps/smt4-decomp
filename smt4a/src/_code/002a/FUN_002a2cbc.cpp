@@ -9,7 +9,7 @@ typedef struct Entry {
     /* 0x06 */ u16 d;
 } Entry;
 
-Entry *FUN_002613f0(s32 index);
+Entry *saveGetSelectedRecordSlot(s32 index);
 
 /* Clears the 0x18 four-halfword entries. */
 void FUN_002a2cbc(void)
@@ -19,7 +19,7 @@ void FUN_002a2cbc(void)
 
     i = 0;
     do {
-        entry = FUN_002613f0(i);
+        entry = saveGetSelectedRecordSlot(i);
         entry->a = 0;
         entry->b = 0;
         i = i + 1;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016e800(int, int);
+int sysReportCheckFailure(int, int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int spC8; /* 0xc8: local_c8 */
 } void_stack;
 
-/* Supplied declaration required: FUN_0016e800. */
+/* Supplied declaration required: sysReportCheckFailure. */
 extern int FUN_00189738(unsigned int *, unsigned int, unsigned int);
 
 
@@ -25,7 +25,7 @@ unsigned int nn_cfg_CTR_IsRestrictP2pCec(void)
   
   temp_v0 = FUN_00189738(temp_v1,0xc0,0xc0000);
   if (temp_v0 < 0) {
-    FUN_0016e800(temp_v0,0x431190);
+    sysReportCheckFailure(temp_v0,0x431190);
   }
                     /* WARNING: Treating indirect jump as return */
   return (temp_v1[0] & 0x20) >> 5;

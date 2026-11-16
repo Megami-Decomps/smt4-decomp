@@ -34,8 +34,8 @@ void FUN_00183788(s32 hp, s32 maxHp, u32 a, u32 b, u32 group, u32 id0, u32 id1, 
                   u32 c);
 s32 valueAtMostFifthOfTotal(s32 value, s32 total);
 void drawSetColorFromRGBA8(u32 color);
-void FUN_00183bb0(void);
-void FUN_0018152c(s16 portrait, s32 x, s32 y, u32 id, u32 flag);
+void gxResetColorQuadToWhite(void);
+void uiDrawItemOrStatusIcon(s16 portrait, s32 x, s32 y, u32 id, u32 flag);
 void FUN_004bda84(PartnerCardScreen *screen, PartnerCardUnit *unit, s32 slot, s32 x, s32 y, f32 scale);
 
 /* Draws partner card `slot` for `unit` at (`x`, `y`) with fade `scale`: the card frame, level, hp
@@ -56,17 +56,17 @@ void FUN_004bde34(PartnerCardScreen *screen, PartnerCardUnit *unit, s32 slot, s3
     if ((flags & 2) != 0) {
         efctSetSpeed(scale * 0.5f);
     }
-    FUN_001835b4(2, 0x11, 2000, x, y, 0x65);
-    FUN_001835b4(2, 0x11, 2, x, y, 0x65);
-    FUN_001835b4(2, 0x11, 0x99, x, y, 0x6F);
-    FUN_001835b4(2, 0x11, 0x9A, x, y, 0x6F);
-    FUN_001835b4(2, 0x11, 0x98, x, y, 0x6F);
+    texDrawTableEntryAtStoredOrigin(2, 0x11, 2000, x, y, 0x65);
+    texDrawTableEntryAtStoredOrigin(2, 0x11, 2, x, y, 0x65);
+    texDrawTableEntryAtStoredOrigin(2, 0x11, 0x99, x, y, 0x6F);
+    texDrawTableEntryAtStoredOrigin(2, 0x11, 0x9A, x, y, 0x6F);
+    texDrawTableEntryAtStoredOrigin(2, 0x11, 0x98, x, y, 0x6F);
     TextureTableEntryIV *levelBox = asdTMTexTableEntryAt(0x11, 0x9D);
 
     FUN_00180310(0, levelBox->x + x, levelBox->y + y, 1, 3, 0x79, "%d", level);
     efctSetSpeed(scale);
-    FUN_001835b4(2, 0x11, 0x9E, x, y, 0x6F);
-    FUN_001835b4(2, 0x11, 0x77, x, y, 0x79);
+    texDrawTableEntryAtStoredOrigin(2, 0x11, 0x9E, x, y, 0x6F);
+    texDrawTableEntryAtStoredOrigin(2, 0x11, 0x77, x, y, 0x79);
     FUN_00183788(hp, maxHp, 0, 0, 0x11, 0x9F, 0xA2, 0xA0, 0xA1, x, y, 0x74, 0);
     TextureTableEntryIV *hpBox = asdTMTexTableEntryAt(0x11, 0xAA);
     s32 hpX = hpBox->x + x;
@@ -77,7 +77,7 @@ void FUN_004bde34(PartnerCardScreen *screen, PartnerCardUnit *unit, s32 slot, s3
     }
     efctSetSpeed(scale);
     FUN_00180310(10, hpX, hpY, 1, 4, 0x79, "%d", hp);
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
     TextureTableEntryIV *markerBox = asdTMTexTableEntryAt(0x11, 0xAC);
     s32 markerX = markerBox->x + x;
     s32 markerY = markerBox->y + y;
@@ -95,8 +95,8 @@ void FUN_004bde34(PartnerCardScreen *screen, PartnerCardUnit *unit, s32 slot, s3
     }
     drawSetColorFromRGBA8(color);
     efctSetSpeed(scale);
-    FUN_0018152c(portrait, markerX, markerY, 0x9C, 0);
-    FUN_00183bb0();
+    uiDrawItemOrStatusIcon(portrait, markerX, markerY, 0x9C, 0);
+    gxResetColorQuadToWhite();
     s32 count = 0;
 
     for (s32 kind = 1; kind < 14; kind++) {

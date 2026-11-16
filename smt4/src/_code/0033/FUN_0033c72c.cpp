@@ -12,7 +12,7 @@ int renderCtxCalculateStereoParallax(int);
 int drawSetColorFromRGBA8(void);
 int textDrawString(...);
 int textFormatBuffer(...);
-int FUN_002bed3c(void);
+int gxResetColorQuadToWhite(void);
 int efctSetSpeed(void);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
@@ -42,7 +42,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002bed3c. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: __aeabi_idivmod. */
@@ -104,7 +104,7 @@ void FUN_0033c72c(int param_1,int param_2,int param_3)
   temp_v15 = (int)(float)((unsigned long long)temp_v12 >> 0x20);
   temp_v19 = romwright_piece_4_4(temp_v16,temp_v15);
   temp_v13 = (float)VectorSignedToFloat(temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002bf288(2,0x14,0x56,(int)((float)temp_v12 + temp_v13),temp_v15,param_2);
+  texDrawTableEntryAtStoredOrigin(2,0x14,0x56,(int)((float)temp_v12 + temp_v13),temp_v15,param_2);
   temp_v15 = g_titleScene;
   piVar8 = (int *)(g_titleScene + 0x12ac);
   temp_v2 = *piVar8;
@@ -115,9 +115,9 @@ void FUN_0033c72c(int param_1,int param_2,int param_3)
     *(unsigned char *)(temp_v15 + 0x12c4) = 0;
   }
   temp_v13 = (float)VectorSignedToFloat(temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002bf288(2,0x14,0x57,(int)((float)temp_v12 + temp_v13),(int)temp_v19,param_2);
+  texDrawTableEntryAtStoredOrigin(2,0x14,0x57,(int)((float)temp_v12 + temp_v13),(int)temp_v19,param_2);
   temp_v13 = (float)VectorSignedToFloat(temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002bf288(2,0x14,0x58,(int)((float)temp_v12 + temp_v13),(int)temp_v19,param_2);
+  texDrawTableEntryAtStoredOrigin(2,0x14,0x58,(int)((float)temp_v12 + temp_v13),(int)temp_v19,param_2);
   temp_v5 = (unsigned int)((unsigned long long)temp_v19 >> 0x20);
   if (*(int *)(param_3 + 0x2c) != 0) {
     categoryGetColor((int)(short)*(unsigned int *)(param_3 + *(int *)(param_3 + 0x30) * 4));
@@ -128,7 +128,7 @@ void FUN_0033c72c(int param_1,int param_2,int param_3)
                (int)(*(float *)(param_1 + 0x300) + (float)temp_v12 + temp_v13),
                (int)(*(float *)(param_1 + 0x304) + (float)((unsigned long long)temp_v12 >> 0x20)),param_2 + 5,0
               );
-  FUN_002bed3c();
+  gxResetColorQuadToWhite();
   if (*(char *)(param_3 + 0x38) != '\0') {
     temp_v15 = 0;
     do {

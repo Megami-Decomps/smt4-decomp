@@ -11,9 +11,9 @@ struct AocItemRowView {
 extern "C" {
 extern u32 g_aocMain;
 s32 objHasFlagBit16(u32 aoc);
-s32 FUN_002ac12c(DataEntry *entry);
-const DataRow *FUN_002ac0f8(DataEntry *entry);
-u32 FUN_002ac0c4(DataEntry *entry);
+s32 packageEntryIsLoaded(DataEntry *entry);
+const DataRow *packageEntryGetDirectory(DataEntry *entry);
+u32 packageEntryGetFileCount(DataEntry *entry);
 
 // Report whether a mounted content package grants the item (optionally only while content is available).
 s32 aocPackageGrantsItem(AocSystem *system, u32 itemId, s32 checkAvailable)
@@ -23,11 +23,11 @@ s32 aocPackageGrantsItem(AocSystem *system, u32 itemId, s32 checkAvailable)
     }
     for (s32 package = 0; package < system->packages.count; ++package) {
         DataEntry *entry = &((DataEntry *)system->packages.entries)[package];
-        if (!FUN_002ac12c(entry)) {
+        if (!packageEntryIsLoaded(entry)) {
             continue;
         }
-        const AocItemRowView *rows = (const AocItemRowView *)FUN_002ac0f8(entry);
-        u32 rowCount = FUN_002ac0c4(entry);
+        const AocItemRowView *rows = (const AocItemRowView *)packageEntryGetDirectory(entry);
+        u32 rowCount = packageEntryGetFileCount(entry);
         for (u32 row = 0; row < rowCount; ++row) {
             bool grants = rows[row].opcode == 7 || rows[row].opcode == 8;
             if (grants) {

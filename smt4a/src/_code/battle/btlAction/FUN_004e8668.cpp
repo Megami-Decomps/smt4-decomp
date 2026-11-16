@@ -33,7 +33,7 @@ extern unsigned int DAT_00571194; /* 0x571194 */
 
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: dataTable04FindById. */
-extern int FUN_0026264c(unsigned short);
+extern int itemIsCollectedWithRelated(unsigned short);
 extern int gameProgressIsAdvanced(void);
 extern int FUN_003df57c(unsigned short, unsigned int);
 extern int valueAtF0IsReady(int);
@@ -174,7 +174,7 @@ LAB_004e89c4:
         do {
           puVar2 = (unsigned int *)aiStack_1ec[temp_v1];
           if ((*puVar2 & g_btlTargetableMask) != 0 || (puVar2[1] & DAT_00571194) != 0) {
-            temp_v2 = FUN_0026264c(*(unsigned short *)((int)puVar2 + 0x166));
+            temp_v2 = itemIsCollectedWithRelated(*(unsigned short *)((int)puVar2 + 0x166));
             if (temp_v2 != 0) {
               *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x1be) = 6;
               *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x1c0) = 0;

@@ -37,7 +37,7 @@ f32 FUN_001b640c(f32 directionX, f32 directionZ);
 // Normalize the horizontal direction and compute its angle, allowing the navigation override.
 extern "C" f32 FUN_00492adc(void)
 {
-    const DirectionSourceView* source = reinterpret_cast<DirectionSourceView*>(FUN_00152f54());
+    const DirectionSourceView* source = reinterpret_cast<DirectionSourceView*>(asdCameraGetSavedRenderPairs());
     DirectionVector direction;
     direction.x = source->unk10 - source->unk04;
     direction.y = 0.0f;

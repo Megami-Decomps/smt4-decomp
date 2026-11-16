@@ -11,7 +11,7 @@ extern s32 scrGetArg(s32 index);
 extern BtlEntry *btlMainFindActiveEntry(void);
 extern s32 btlScriptResolveGroupArg(s32 group);
 extern s32 btlCommandOwnerHasSlotId(BtlEntry *entry, s32 slot);
-extern void FUN_002499fc(u32 group, s32 *first, s32 *count);
+extern void btlSideGetEntryRange(u32 group, s32 *first, s32 *count);
 
 /* Script command: sets the result to 1 when btlCommandOwnerHasSlotId accepts a live entry (or the active one) for the argument's slot. */
 s32 FUN_00323268(void)
@@ -20,7 +20,7 @@ s32 FUN_00323268(void)
     s32 first;
     s32 count;
 
-    FUN_002499fc(btlScriptResolveGroupArg(scrGetArg(1)), &first, &count);
+    btlSideGetEntryRange(btlScriptResolveGroupArg(scrGetArg(1)), &first, &count);
     for (s32 i = first; i < count + first; i++) {
         BtlMainState *state = btlGetMainState();
         BtlEntry *entry = &state->entries[i];

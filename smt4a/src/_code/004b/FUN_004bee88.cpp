@@ -29,8 +29,8 @@ typedef struct PartnerLayout {
 
 extern RenderCtxA *g_renderCtx;
 
-s32 FUN_001692ac(s32 a, s32 b);
-PartnerUnitView *FUN_003e4d68(u16 index);
+s32 renderCtxPackPassFlags(s32 a, s32 b);
+PartnerUnitView *partyGetSlot(u16 index);
 PartnerLayout *asdTMTexTableEntryAt(u32 group, u32 id);
 void FUN_004bde34(PartnerScreenView *screen, PartnerUnitView *unit, s32 index, s32 x, s32 y, f32 scale);
 void uiDrawSelectedSpriteIndicator(PartnerScreenView *screen, s32 x, s32 y, f32 scale);
@@ -44,12 +44,12 @@ void renderCtxResetColorScale(RenderCtxA *context);
  * partners" notice), the frame parts and the selection mark, inside a pushed render state. */
 void FUN_004bee88(PartnerScreenView *screen, s32 x, s32 y, f32 scale)
 {
-    FUN_00157558(g_renderCtx);
-    renderStackPush(&g_renderCtx->stackA, FUN_001692ac(1, 0));
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
+    renderStackPush(&g_renderCtx->stackA, renderCtxPackPassFlags(1, 0));
     s32 shown = 0;
 
     for (s32 i = 0; i < 12; i++) {
-        PartnerUnitView *unit = FUN_003e4d68((u16)screen->partners[i]);
+        PartnerUnitView *unit = partyGetSlot((u16)screen->partners[i]);
 
         if (unit != NULL && (unit->flags & 1) != 0) {
             PartnerLayout *slot = asdTMTexTableEntryAt(0x11, shown + 0xAE);
@@ -63,7 +63,7 @@ void FUN_004bee88(PartnerScreenView *screen, s32 x, s32 y, f32 scale)
     } else {
         efctSetSpeed(scale);
         for (s32 i = 0; i < 6; i++) {
-            FUN_001835b4(2, 0x11, i + 0xBE, 0, 0, 0x6F);
+            texDrawTableEntryAtStoredOrigin(2, 0x11, i + 0xBE, 0, 0, 0x6F);
         }
         PartnerLayout *notice = asdTMTexTableEntryAt(0x11, 0xC4);
         u8 text[76];
@@ -80,13 +80,13 @@ void FUN_004bee88(PartnerScreenView *screen, s32 x, s32 y, f32 scale)
     }
     efctSetSpeed(scale);
     for (s32 i = 0; i < 3; i++) {
-        FUN_001835b4(2, 0x11, i + 0x81, x, y, 0x97);
+        texDrawTableEntryAtStoredOrigin(2, 0x11, i + 0x81, x, y, 0x97);
     }
-    FUN_001835b4(2, 0x11, 0xAD, x, y, 0x97);
+    texDrawTableEntryAtStoredOrigin(2, 0x11, 0xAD, x, y, 0x97);
     if (screen->current >= 0) {
         PartnerLayout *mark = asdTMTexTableEntryAt(0x11, screen->current + 0xAE);
 
-        FUN_001835b4(2, 0x11, 0xAB, mark->x + x, mark->y + y, 0x97);
+        texDrawTableEntryAtStoredOrigin(2, 0x11, 0xAB, mark->x + x, mark->y + y, 0x97);
         efctSetSpeed(1.0f);
     }
     renderStackPop(&g_renderCtx->stackA);

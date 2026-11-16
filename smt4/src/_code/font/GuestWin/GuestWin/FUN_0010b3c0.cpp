@@ -32,7 +32,7 @@ void guestWinUpdate(void* work);
 void FUN_0011aa94(void* work);
 void drawParameterBlockClear(void* parameters);
 
-void FUN_002bd954(void* object, s32 category, s32 resource, void* parameters, u32 enabled, f32 scale);
+void uiSpriteStateInitFromSource(void* object, s32 category, s32 resource, void* parameters, u32 enabled, f32 scale);
 void spriteStartAnimationByIndex(void* object, s32 state);
 
 // Allocate and initialize the guest message window and its calculation/stereo drawing tasks.
@@ -53,7 +53,7 @@ void FUN_0010b3c0(void)
     drawParameterBlockClear(work->unk10);
     paramsInit(reinterpret_cast<UiResourceParameters *>(work->unk10), sGuestWinPacketA, sizeof(sGuestWinPacketA),
         sGuestWinPacketB, sizeof(sGuestWinPacketB), NULL, 0, NULL, 0, sGuestWinPacketE, sizeof(sGuestWinPacketE));
-    FUN_002bd954(work->ui, 14, 0x87, work->unk10, 1, 1.0f);
+    uiSpriteStateInitFromSource(work->ui, 14, 0x87, work->unk10, 1, 1.0f);
     spriteStartAnimationByIndex(work->ui, 0);
 }
 }

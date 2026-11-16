@@ -10,23 +10,23 @@ float calcHeadingRoundedTo32Directions(float angle);
 int mathAngleDeltaDegrees(void);
 int FUN_00327ee8(void);
 void lmapSceneStartMovement(unsigned char);
-int FUN_0050d8e4(void);
+int __hardfp_atan2f(void);
 
 int soundVolumeSettingSet(...);
 int FUN_0014af98(void);
-int FUN_001bbf0c(void);
+int libm_cosf(void);
 int FUN_002469d0(void);
 int FUN_0025ef68(...);
 int distSpatial(void);
 int FUN_002d1f40(...);
 int FUN_002e364c(...);
 int sysPlayVoice(...);
-int FUN_003fd7c0(...);
-int FUN_00408184(...);
+int moriModelUnitStartMaterialAnimation(...);
+int gameCounterAddSaturating(...);
 int SBORROW4(...);
 
 int soundVolumeSettingGet(void);
-int FUN_001bc124(void);
+int libm_sinf(void);
 int mapEaseSceneHeading(void);
 int FUN_003135bc(...);
 int mapSetSceneState(...);
@@ -34,7 +34,7 @@ int FUN_00317af8(...);
 int mapSpawnRandomEventKindEffect(void);
 int FUN_00324e38(...);
 int FUN_00325998(int, int);
-int FUN_003d4ed8(...);
+int soundActorStartOnFreeChannel(...);
 int slotTargetApplyActiveValue(unsigned int);
 int FUN_004a01c8(int, int);
 int VectorSignedToFloat(...);
@@ -86,8 +86,8 @@ extern signed char DAT_005f1c48; /* 0x5f1c48 */
 extern int gameFlagsGetBlock(void);
 extern int randBetween(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_002469d0. */
 /* Supplied declaration required: FUN_0025ef68. */
 /* Supplied declaration required: distSpatial. */
@@ -104,16 +104,16 @@ extern int FUN_002e5db4(void);
 /* Supplied declaration required: FUN_00325998. */
 /* Supplied declaration required: FUN_00327ee8. */
 /* Supplied declaration required: sysPlayVoice. */
-/* Supplied declaration required: FUN_003d4ed8. */
+/* Supplied declaration required: soundActorStartOnFreeChannel. */
 extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: slotTargetApplyActiveValue. */
 extern int linkHolderCheckFirst(unsigned int);
-/* Supplied declaration required: FUN_003fd7c0. */
-/* Supplied declaration required: FUN_00408184. */
+/* Supplied declaration required: moriModelUnitStartMaterialAnimation. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: FUN_004a01c8. */
 extern int partyAnyMemberHasFlagBit(unsigned int, unsigned int);
 extern int inputIsQuestCancelPressed(void);
-/* Supplied declaration required: FUN_0050d8e4. */
+/* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
@@ -182,7 +182,7 @@ void FUN_00325d08(void)
         FUN_004a01c8(2,5);
         *(unsigned int *)(g_lmapScene + 0x160) = 0x447a0000;
         FUN_00325998(0xf,0x50);
-        temp_v4 = FUN_003d4ed8(0x1000224);
+        temp_v4 = soundActorStartOnFreeChannel(0x1000224);
         temp_v3 = g_lmapScene;
         *(unsigned int *)(g_lmapScene + 0x1a0) = temp_v4;
         *(unsigned int *)(temp_v3 + 0x1a4) = 0x14;
@@ -340,11 +340,11 @@ LAB_00326fcc:
       }
       temp_v12 = (float)VectorSignedToFloat((int)(short)unaff_r7,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v9 = *(float *)(g_lmapScene + 0x50) * temp_v15;
-      FUN_001bc124();
+      libm_sinf();
       temp_v3 = g_lmapScene;
       *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + temp_v9 * temp_v12;
       temp_v15 = *(float *)(temp_v3 + 0x50) * temp_v15;
-      FUN_001bbf0c();
+      libm_cosf();
       puVar9 = (unsigned int *)&temp_v18;
       *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v15 * temp_v12;
       FUN_002469d0();
@@ -430,7 +430,7 @@ LAB_00326fcc:
         *(unsigned char *)(g_lmapScene + 0x23c) = 1;
         temp_v3 = gameFlagIsSet(0x4c9);
         if ((temp_v3 == 0) || (temp_v3 = FUN_002e5db4(), temp_v3 != 0)) {
-          FUN_003fd7c0(*(unsigned int *)(*(int *)(g_lmapScene + 0x18c) + 4),0,2);
+          moriModelUnitStartMaterialAnimation(*(unsigned int *)(*(int *)(g_lmapScene + 0x18c) + 4),0,2);
         }
       }
       temp_v16 = *(float *)(temp_v0 + 0x14ec) + temp_v16;
@@ -473,7 +473,7 @@ LAB_00326fcc:
       if (((temp_v2 & 4) != 0) && (DAT_005f17d0 == '\0')) {
         *(unsigned char *)(temp_v0 + 0xe09) = 0;
         mapSetSceneState(0x1f);
-        FUN_00408184(0x16,1);
+        gameCounterAddSaturating(0x16,1);
       }
       temp_v3 = g_lmapScene;
       puVar9 = (unsigned int *)(g_lmapScene + 0x1c);
@@ -504,8 +504,8 @@ LAB_00326fcc:
               temp_v7 = *(short *)(g_lmapScene + 0x19c);
               if (0 < temp_v7) goto LAB_003267fc;
               *(unsigned short *)(g_lmapScene + 0x19c) = 1;
-              FUN_001bc124();
-              FUN_001bbf0c();
+              libm_sinf();
+              libm_cosf();
               temp_v3 = randBetween(0,1);
               if (*(int *)(g_lmapScene + 0x1d0) != 10) {
                 FUN_0014af98();
@@ -515,9 +515,9 @@ LAB_00326fcc:
               }
             }
             if (*(int *)(g_lmapScene + 8) == 3) {
-              FUN_001bc124();
-              FUN_001bbf0c();
-              FUN_003d4ed8(0x100029e);
+              libm_sinf();
+              libm_cosf();
+              soundActorStartOnFreeChannel(0x100029e);
               FUN_00324e38(0xffffffff);
             }
             if ((*(int *)(g_lmapScene + 8) == 6) &&
@@ -535,9 +535,9 @@ LAB_00326fcc:
           if (*(int *)(g_lmapScene + 8) != 2) {
 LAB_00326870:
             if (*(int *)(g_lmapScene + 8) == 3) {
-              FUN_001bc124();
-              FUN_001bbf0c();
-              FUN_003d4ed8(0x100029d);
+              libm_sinf();
+              libm_cosf();
+              soundActorStartOnFreeChannel(0x100029d);
               FUN_00324e38(0xffffffff);
             }
             if (*(int *)(g_lmapScene + 8) != 4) goto LAB_00326a10;
@@ -546,8 +546,8 @@ LAB_00326870:
           temp_v7 = *(short *)(g_lmapScene + 0x19c);
           if (temp_v7 < 1) {
             *(unsigned short *)(g_lmapScene + 0x19c) = 1;
-            FUN_001bc124();
-            FUN_001bbf0c();
+            libm_sinf();
+            libm_cosf();
             temp_v3 = randBetween(0,1);
             if (*(int *)(g_lmapScene + 0x1d0) != 10) {
               FUN_0014af98();
@@ -563,16 +563,16 @@ LAB_003267fc:
       }
       else {
         if (*(int *)(g_lmapScene + 8) == 3) {
-          FUN_001bc124();
-          FUN_001bbf0c();
-          FUN_003d4ed8(0x100029c);
+          libm_sinf();
+          libm_cosf();
+          soundActorStartOnFreeChannel(0x100029c);
           if (*(short *)(g_lmapScene + 0x19c) >= 1) {
             *(short *)(g_lmapScene + 0x19c) = *(short *)(g_lmapScene + 0x19c) - 1;
           }
           else {
             *(unsigned short *)(g_lmapScene + 0x19c) = 1;
-            FUN_001bc124();
-            FUN_001bbf0c();
+            libm_sinf();
+            libm_cosf();
             temp_v3 = randBetween(0,1);
             if (*(int *)(g_lmapScene + 0x1d0) != 10) {
               FUN_0014af98();
@@ -594,16 +594,16 @@ LAB_003268e4:
     }
     else {
       if (*(int *)(g_lmapScene + 8) == 3) {
-        FUN_001bc124();
-        FUN_001bbf0c();
-        FUN_003d4ed8(0x100029b);
+        libm_sinf();
+        libm_cosf();
+        soundActorStartOnFreeChannel(0x100029b);
         if (*(short *)(g_lmapScene + 0x19c) >= 1) {
           *(short *)(g_lmapScene + 0x19c) = *(short *)(g_lmapScene + 0x19c) - 1;
         }
         else {
           *(unsigned short *)(g_lmapScene + 0x19c) = 1;
-          FUN_001bc124();
-          FUN_001bbf0c();
+          libm_sinf();
+          libm_cosf();
           temp_v3 = randBetween(0,1);
           if (*(int *)(g_lmapScene + 0x1d0) != 10) {
             FUN_0014af98();
@@ -751,7 +751,7 @@ LAB_00326cc4:
     FUN_00317af8(temp_v20,&temp_v19,0);
     if ((((0xbeffffff < (unsigned int)temp_v20[0]) || ((int)temp_v20[0] >= 0x3f000000)) ||
         (0xbeffffff < temp_v19)) || ((int)temp_v19 >= 0x3f000000)) {
-      FUN_0050d8e4();
+      __hardfp_atan2f();
       temp_v14 = CONCAT44(0x43b40000,temp_v13);
       temp_v16 = temp_v20[0] * 57.32484f - *(float *)(g_lmapView + 0x18);
       if (temp_v16 < temp_v13) {

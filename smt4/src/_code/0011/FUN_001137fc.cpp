@@ -60,7 +60,7 @@ extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: renderCtxSelectTexture. */
 extern int asdTMTexTableGetNodeTexture(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
@@ -181,7 +181,7 @@ void FUN_001137fc(int param_1)
     temp_v4 = 0xff;
   }
   temp_v3 = g_titleScene;
-  temp_v0 = FUN_002c5d80(1,0);
+  temp_v0 = renderCtxPackPassFlags(1,0);
   piVar5 = (int *)(temp_v3 + 0x124c);
   temp_v1 = *piVar5;
   temp_v2 = piVar5[temp_v1 + 2];

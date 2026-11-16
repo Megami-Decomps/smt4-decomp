@@ -6,7 +6,7 @@
 extern "C" {
 
 int quadSetOrderedVectors(...);
-int FUN_002bf380(...);
+int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
 int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
@@ -55,12 +55,12 @@ extern int DAT_0043dc24; /* 0x43dc24 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: quadSetOrderedVectors. */
-/* Supplied declaration required: FUN_002bf380. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
@@ -117,7 +117,7 @@ int FUN_001ecd68(void)
   if (DAT_0043dc24 != 0 && temp_v0 != 0) {
     renderCtxSelectStereoLayout(g_titleScene);
     temp_v0 = g_titleScene;
-    temp_v1 = FUN_002c5d80(1,0);
+    temp_v1 = renderCtxPackPassFlags(1,0);
     piVar6 = (int *)(temp_v0 + 0x124c);
     temp_v2 = *piVar6;
     temp_v3 = piVar6[temp_v2 + 2];
@@ -146,7 +146,7 @@ int FUN_001ecd68(void)
       temp_v13 = 0x3f800000;
       temp_v14 = 0x3f800000;
       quadSetOrderedVectors(&temp_v11,&temp_v15,&temp_v19,&temp_v7,0,1);
-      FUN_002bf288(2,0x11,0,0,0,1);
+      texDrawTableEntryAtStoredOrigin(2,0x11,0,0,0,1);
       temp_v0 = g_titleScene;
       temp_v1 = packNibblesAndByte(6,1,0);
       piVar6 = (int *)(temp_v0 + 0x12ac);
@@ -176,7 +176,7 @@ int FUN_001ecd68(void)
         temp_v37 = temp_v23;
         temp_v38 = temp_v23;
         quadSetOrderedVectors(&temp_v35,&temp_v23,&temp_v27,&temp_v31,0,1);
-        FUN_002bf288(2,0x11,3,0,(int)*(float *)(temp_v4 + temp_v0 * 0x14 + 0x7c),1);
+        texDrawTableEntryAtStoredOrigin(2,0x11,3,0,(int)*(float *)(temp_v4 + temp_v0 * 0x14 + 0x7c),1);
         temp_v5 = (unsigned int)temp_v6;
         temp_v0 = temp_v0 + 1;
       } while (temp_v0 < 5);
@@ -210,7 +210,7 @@ int FUN_001ecd68(void)
       temp_v0 = 0;
       do {
         temp_v1 = temp_v4 + temp_v0 * 0x14;
-        FUN_002bf288(2,0x11,1,(int)*(float *)(temp_v1 + 0x18),(int)*(float *)(temp_v1 + 0x1c),2);
+        texDrawTableEntryAtStoredOrigin(2,0x11,1,(int)*(float *)(temp_v1 + 0x18),(int)*(float *)(temp_v1 + 0x1c),2);
         temp_v1 = g_titleScene;
         temp_v0 = temp_v0 + 1;
       } while (temp_v0 < 5);
@@ -224,7 +224,7 @@ int FUN_001ecd68(void)
       }
     }
     else {
-      FUN_002bf380(2,0x11,0,0,0,1);
+      texDrawCompositeSprite(2,0x11,0,0,0,1);
     }
     temp_v0 = g_titleScene;
     piVar6 = (int *)(g_titleScene + 0x124c);

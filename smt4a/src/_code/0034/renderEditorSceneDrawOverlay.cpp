@@ -4,7 +4,7 @@
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
-s32 FUN_001692ac(u32 kind, u32 flags);
+s32 renderCtxPackPassFlags(u32 kind, u32 flags);
 s32 getFloatPairValue(void);
 s32 displayIsStereoActive(void);
 void FUN_00280840(u32 style, f32 x, f32 y, f32 depth, f32 size, u32 firstColor, u32 secondColor);
@@ -14,7 +14,7 @@ s32 renderCtxGetStereoMode(RenderCtxA *context);
 void renderEditorSceneDrawOverlay(void)
 {
     RenderCtxA *context = g_renderCtx;
-    renderCtxPushA(context, FUN_001692ac(1, 1));
+    renderCtxPushA(context, renderCtxPackPassFlags(1, 1));
     renderCtxSelectTexture(g_renderCtx, 0);
     u32 mono = 1;
     if (getFloatPairValue() && renderCtxGetStereoMode(g_renderCtx) == 0 && displayIsStereoActive()) {

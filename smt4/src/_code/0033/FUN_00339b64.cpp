@@ -50,7 +50,7 @@ extern BtlMainStateHandles g_btlMainState;
 void FUN_00394cc4(void);
 void *btlLoaderGetLock(BtlLoader *loader);
 s32 jyoucyuEnsureResidentEntry(void);
-ScriptProcess *FUN_00297060(void);
+ScriptProcess *scrScriptProcessCreate(void);
 s32 resourceFindActiveIndex(u32 id);
 void FUN_00328d2c(void);
 void FUN_00328fa4(void);
@@ -72,7 +72,7 @@ void FUN_00339b64(BtlLoader *loader)
             loader->scriptA = g_btlMainState.scriptA;
             loader->scriptB = g_btlMainState.scriptB;
             loader->script = g_btlMainState.script;
-            loader->process = FUN_00297060();
+            loader->process = scrScriptProcessCreate();
             loader->process->mode = 0;
             loader->step++;
         case 2:

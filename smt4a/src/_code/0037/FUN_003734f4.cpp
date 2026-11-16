@@ -7,7 +7,7 @@ extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
 u32 btlResolveEntryChoice(s32 choice);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
 
 static __inline s32 entryMpPercentage(const BtlCombatantEntryA *entry)
 {
@@ -23,7 +23,7 @@ u32 FUN_003734f4()
     s32 threshold = scrGetArg(1);
     u32 choice = btlResolveEntryChoice(scrGetArg(2));
     s32 first, count;
-    FUN_00301a08(choice, &first, &count);
+    btlGetEntryChoiceRange(choice, &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlMainStateA *state = btlGetMainState();
         BtlCombatantEntryA *entry = &state->entries[index];
@@ -36,7 +36,7 @@ u32 FUN_003734f4()
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
-        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL && entry->id == id && entryMpPercentage(entry) <= threshold) {
             scrSetResult(1);
             return 1;

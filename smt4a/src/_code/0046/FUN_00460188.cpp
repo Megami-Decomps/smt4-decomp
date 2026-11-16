@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016e800(unsigned int, int);
+int sysReportCheckFailure(unsigned int, int);
 int nw_io_FileStream_FilePosition_Skip(int);
 
 typedef int romwright_code(...);
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_0016e800. */
+/* Supplied declaration required: sysReportCheckFailure. */
 extern unsigned int nn_fs_detail_FileBase_TryRead(unsigned int, int *, unsigned int, unsigned int);
 extern unsigned int nn_fs_detail_FileBase_TrySeek(unsigned int, long long, int);
 /* Supplied declaration required: nw_io_FileStream_FilePosition_Skip. */
@@ -55,7 +55,7 @@ int FUN_00460188(int param_1,unsigned int param_2,unsigned int param_3)
   else {
     temp_v0 = nn_fs_detail_FileBase_TrySeek(temp_v2 + 4,(unsigned long long)in_stack_ffffffe4 << 0x20,0);
     if ((int)temp_v0 < 0) {
-      FUN_0016e800(temp_v0,0x460208);
+      sysReportCheckFailure(temp_v0,0x460208);
     }
   }
   temp_v2 = 0;
@@ -76,7 +76,7 @@ int FUN_00460188(int param_1,unsigned int param_2,unsigned int param_3)
     temp_v0 = nn_fs_detail_FileBase_TryRead(temp_v3 + 4,(int *)&temp_v4,param_2,param_3);
     temp_v2 = temp_v4;
     if ((int)temp_v0 < 0) {
-      FUN_0016e800(temp_v0,0x46027c);
+      sysReportCheckFailure(temp_v0,0x46027c);
       temp_v2 = temp_v4;
     }
   }

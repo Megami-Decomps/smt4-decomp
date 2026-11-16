@@ -11,7 +11,7 @@ int table8Type5GetValue(void);
 
 int textFormatBuffer(...);
 int buttonHelpSetText(...);
-int FUN_00275bc8(void);
+int scrScriptProcessCreate(void);
 int FUN_002a4878(...);
 int statusDownRestartTransition(void);
 int FUN_002e2848(...);
@@ -33,23 +33,23 @@ int asdTMTexTableEntryAt(...);
 int useCounterStart(void);
 int resourceRunOperationIfUnblocked(...);
 int FUN_002a4894(...);
-int FUN_002a4964(...);
+int scrollListSetSelectionTracked(...);
 int objectApplyIfUnblocked(...);
 int FUN_0031f208(...);
 int sortMenuAcquire(...);
 int useCounterRelease(void);
 
-int FUN_001517b4(...);
-int FUN_00163aa4(...);
+int padQueryLogicalKey(...);
+int uiSpriteAdvanceAnimation(...);
 int eventQueueAddUniqueIfValid(...);
 int sysPlaySe(...);
 int devilGetRecord(void);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
-int FUN_00203b40(...);
+int gridNavigationConfigure(...);
 int FUN_00228b04(...);
 int FUN_0023092c(void);
-int FUN_00230b9c(unsigned int, unsigned int, int);
+int statusDownSetSpriteMode(unsigned int, unsigned int, int);
 int FUN_00230d30(void);
 int recordGetModeForId(...);
 int statusDownSwitchTab(...);
@@ -57,7 +57,7 @@ int flaggedEntryGetValueA(...);
 int flaggedEntrySetValueA(...);
 int FUN_003423e8(...);
 int FUN_003450d4(...);
-int FUN_00387240(...);
+int uiStoreTextureEntryCenter(...);
 int statusDownInitializeSkillList(int);
 int FUN_003e40d0(...);
 
@@ -82,10 +82,10 @@ extern int g_statusDown; /* 0x588fe8 */
 /* Supplied declaration required: qsort. */
 extern int randRange(unsigned int);
 extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_001517b4. */
+/* Supplied declaration required: padQueryLogicalKey. */
 /* Supplied declaration required: FUN_0015f490. */
 extern int querySlotHasHandle(void);
-/* Supplied declaration required: FUN_00163aa4. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int FUN_00167458(int, unsigned int);
 extern int ifTouchGetButtonHelpValue(void);
@@ -97,24 +97,24 @@ extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: buttonHelpSetText. */
-/* Supplied declaration required: FUN_00203b40. */
+/* Supplied declaration required: gridNavigationConfigure. */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00228b04. */
 extern int FUN_00230544(void);
 /* Supplied declaration required: FUN_0023092c. */
-/* Supplied declaration required: FUN_00230b9c. */
+/* Supplied declaration required: statusDownSetSpriteMode. */
 /* Supplied declaration required: FUN_00230d30. */
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
 extern int uniteNotBusy(void);
-extern int FUN_0026264c(unsigned short);
-/* Supplied declaration required: FUN_00275bc8. */
+extern int itemIsCollectedWithRelated(unsigned short);
+/* Supplied declaration required: scrScriptProcessCreate. */
 /* Supplied declaration required: recordGetModeForId. */
 extern short resourceRunEmbeddedOperationIfUnblocked(int);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: FUN_002a4878. */
 /* Supplied declaration required: FUN_002a4894. */
-/* Supplied declaration required: FUN_002a4964. */
+/* Supplied declaration required: scrollListSetSelectionTracked. */
 extern int messageMainGetValue(void);
 /* Supplied declaration required: statusDownRestartTransition. */
 /* Supplied declaration required: objectApplyIfUnblocked. */
@@ -144,7 +144,7 @@ extern int asdSoundIsBankHandleLoaded(unsigned int);
 /* Supplied declaration required: useCounterRelease. */
 extern int FUN_0037b564(void);
 /* Supplied declaration required: screenStartOrClear. */
-/* Supplied declaration required: FUN_00387240. */
+/* Supplied declaration required: uiStoreTextureEntryCenter. */
 /* Supplied declaration required: statusDownInitializeSkillList. */
 extern int fieldStateAllowsAction(void);
 extern unsigned int sysPlayVoice(unsigned int);
@@ -214,7 +214,7 @@ unsigned int FUN_00268770(void)
     if (*(char *)(g_statusDown + 0x2584) != '\0') {
       FUN_003e40d0(g_statusDown + 0x2588,0);
     }
-    temp_v14 = FUN_00163aa4(temp_v2 + 0x28);
+    temp_v14 = uiSpriteAdvanceAnimation(temp_v2 + 0x28);
     temp_v6 = g_statusDown;
     if (temp_v14 != 0) {
       temp_v7 = *(unsigned int *)(temp_v2 + 0x520);
@@ -231,7 +231,7 @@ unsigned int FUN_00268770(void)
     if (*(char *)(g_statusDown + 0x2584) != '\0') {
       FUN_003e40d0(g_statusDown + 0x2588,0);
     }
-    FUN_00163aa4(temp_v2 + 0x28);
+    uiSpriteAdvanceAnimation(temp_v2 + 0x28);
     if (*(char *)(temp_v2 + 0xb2) != '\0') {
       if (*(int *)(temp_v2 + 0x520) != 0) {
         if ((*(short *)(temp_v2 + 0x78) == 3) || (*(short *)(temp_v2 + 0x78) == 9)) {
@@ -240,7 +240,7 @@ unsigned int FUN_00268770(void)
         else {
           temp_v7 = 1;
         }
-        FUN_00230b9c(temp_v7,0xffffffff,0);
+        statusDownSetSpriteMode(temp_v7,0xffffffff,0);
         temp_v6 = g_statusDown;
         *(unsigned int *)(g_statusDown + 0x524) = 0;
         puVar13 = (unsigned int *)(temp_v6 + 0x518);
@@ -409,11 +409,11 @@ LAB_00268c6c:
     }
     break;
   case 3:
-    FUN_00163aa4(temp_v2 + 0xb4);
-    FUN_00163aa4(temp_v2 + 0x1cc);
+    uiSpriteAdvanceAnimation(temp_v2 + 0xb4);
+    uiSpriteAdvanceAnimation(temp_v2 + 0x1cc);
     if ((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v14 = FUN_00230544(), temp_v14 != 0)) {
       temp_v14 = 4;
-      FUN_001517b4(4,0);
+      padQueryLogicalKey(4,0);
       if (temp_v14 == 0) goto LAB_00268d68;
     }
     else {
@@ -421,7 +421,7 @@ LAB_00268d68:
       if (*(int *)(temp_v2 + 0x540) != 6) {
         if ((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v14 = FUN_00230544(), temp_v14 != 0)) {
           temp_v14 = 3;
-          FUN_001517b4(3,0);
+          padQueryLogicalKey(3,0);
           if (temp_v14 != 0) {
             temp_v3 = 1;
             *(unsigned char *)(temp_v2 + 0x59b) = temp_v3;
@@ -457,7 +457,7 @@ LAB_00268d68:
           temp_v6 = fieldStateAllowsAction();
           if (temp_v6 != 0) {
             temp_v6 = 10;
-            FUN_001517b4(10,1);
+            padQueryLogicalKey(10,1);
             if (temp_v6 != 0) {
               statusDownInitializeSkillList(0);
               eventQueueAddUniqueIfValid(0x100020e);
@@ -493,23 +493,23 @@ LAB_00268d68:
           *(unsigned short *)(temp_v2 + temp_v14 * 2 + 0x59c) = *(unsigned short *)(temp_v2 + 0x5bc);
           temp_v6 = temp_v14;
         }
-        FUN_00203b40(temp_v2 + 0x5ec,temp_v6 + 1,8,1,0,1);
+        gridNavigationConfigure(temp_v2 + 0x5ec,temp_v6 + 1,8,1,0,1);
         flaggedEntrySetValueA(temp_v2 + 0x5ec,temp_v6);
         *(unsigned char *)(temp_v2 + 0x528) = 1;
         uiSpriteSetKeyframe(temp_v2 + 0x2e4,1,0);
         uiSpriteSelectAnim(temp_v2 + 0x370,2);
-        FUN_00387240(temp_v2 + 0x370,0x12,temp_v6 + 0x414);
+        uiStoreTextureEntryCenter(temp_v2 + 0x370,0x12,temp_v6 + 0x414);
         *(unsigned short *)(temp_v2 + 0x388) = 0xa0;
       }
       if (*(char *)(g_statusDown + 0x2584) != '\0') {
         FUN_003e40d0(g_statusDown + 0x2588,0);
       }
-      temp_v6 = FUN_00163aa4(temp_v2 + 0x2e4);
+      temp_v6 = uiSpriteAdvanceAnimation(temp_v2 + 0x2e4);
       if (temp_v6 != 0) {
         if (*(char *)(g_statusDown + 0x2584) != '\0') {
           FUN_003e40d0(g_statusDown + 0x2588,1);
         }
-        temp_v6 = FUN_00163aa4(temp_v2 + 0x370);
+        temp_v6 = uiSpriteAdvanceAnimation(temp_v2 + 0x370);
         if (temp_v6 != 0) {
           FUN_0023092c();
           FUN_00230d30();
@@ -524,15 +524,15 @@ LAB_00268d68:
     }
     break;
   case 7:
-    FUN_00163aa4(temp_v2 + 0xb4);
-    FUN_00163aa4(temp_v2 + 0x1cc);
+    uiSpriteAdvanceAnimation(temp_v2 + 0xb4);
+    uiSpriteAdvanceAnimation(temp_v2 + 0x1cc);
     if (*(int *)(temp_v2 + 0x524) >= 8) {
       if (*(int *)(temp_v2 + 0x524) == 8) {
         temp_v6 = temp_v2 + 0x5ec;
         temp_v7 = FUN_002a4894();
         temp_v14 = objectApplyIfUnblocked(temp_v6);
-        FUN_00203b40(temp_v6,temp_v14 + 1,9,1,0,1);
-        FUN_002a4964(temp_v6,temp_v7);
+        gridNavigationConfigure(temp_v6,temp_v14 + 1,9,1,0,1);
+        scrollListSetSelectionTracked(temp_v6,temp_v7);
         *(unsigned char *)(temp_v2 + 0x528) = 1;
       }
       if (*(char *)(temp_v2 + 0x52a) == '\0') {
@@ -542,7 +542,7 @@ LAB_00268d68:
         FUN_003450d4(temp_v14,0,temp_v2 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2 + 0x24a0,0,1);
         if ((temp_v6 == 0) && (temp_v6 = temp_v14, FUN_00228b04(temp_v14,0), temp_v6 == 0)) {
           temp_v6 = 0;
-          FUN_001517b4(0,1);
+          padQueryLogicalKey(0,1);
           if ((temp_v6 != 0) || (*(char *)(temp_v2 + 0x24a0) != '\0')) {
             temp_v6 = resourceRunOperationIfUnblocked(temp_v14);
             temp_v8 = FUN_002a4894(temp_v14);
@@ -590,7 +590,7 @@ LAB_00268d68:
           }
           else {
             temp_v6 = 1;
-            FUN_001517b4();
+            padQueryLogicalKey();
             if (temp_v6 != 0) {
               temp_v7 = sysPlayVoice(0x100020f);
               *(unsigned int *)(temp_v2 + 0x24a4) = temp_v7;
@@ -625,8 +625,8 @@ LAB_00268d68:
     }
     break;
   case 8:
-    FUN_00163aa4(temp_v2 + 0xb4);
-    FUN_00163aa4(temp_v2 + 0x1cc);
+    uiSpriteAdvanceAnimation(temp_v2 + 0xb4);
+    uiSpriteAdvanceAnimation(temp_v2 + 0x1cc);
     temp_v6 = asdSoundIsBankHandleLoaded(*(unsigned int *)(temp_v2 + 0x24a4));
     if ((temp_v6 == 0) && (*(char *)(temp_v2 + 0x24a9) != '\0')) {
       temp_v6 = objectApplyIfUnblocked(temp_v2 + 0x5ec);
@@ -644,8 +644,8 @@ LAB_0026941c:
     }
     break;
   case 9:
-    FUN_00163aa4(temp_v2 + 0xb4);
-    FUN_00163aa4(temp_v2 + 0x1cc);
+    uiSpriteAdvanceAnimation(temp_v2 + 0xb4);
+    uiSpriteAdvanceAnimation(temp_v2 + 0x1cc);
     temp_v6 = *(int *)(temp_v2 + 0x668) + 1;
     *(int *)(temp_v2 + 0x668) = temp_v6;
     if (temp_v6 >= 9) {
@@ -655,16 +655,16 @@ joined_r0x002694c0:
     }
     break;
   case 10:
-    FUN_00163aa4(temp_v2 + 0xb4);
-    FUN_00163aa4(temp_v2 + 0x1cc);
+    uiSpriteAdvanceAnimation(temp_v2 + 0xb4);
+    uiSpriteAdvanceAnimation(temp_v2 + 0x1cc);
     if (*(char *)(temp_v2 + 0x24a9) != '\0') {
       temp_v6 = asdSoundIsBankHandleLoaded(*(unsigned int *)(temp_v2 + 0x24a4));
       goto joined_r0x002694c0;
     }
     break;
   case 0xb:
-    FUN_00163aa4(temp_v2 + 0xb4);
-    FUN_00163aa4(temp_v2 + 0x1cc);
+    uiSpriteAdvanceAnimation(temp_v2 + 0xb4);
+    uiSpriteAdvanceAnimation(temp_v2 + 0x1cc);
     if (*(char *)(temp_v2 + 0x24a9) != '\0') {
       temp_v6 = asdSoundIsBankHandleLoaded(*(unsigned int *)(temp_v2 + 0x24a4));
       goto joined_r0x002694c0;
@@ -691,7 +691,7 @@ joined_r0x002694c0:
           eventQueueAddUnique(0x100021a);
         }
         temp_v14 = objectApplyIfUnblocked(temp_v6);
-        FUN_00203b40(temp_v6,temp_v14 - 1,8,1,0,1);
+        gridNavigationConfigure(temp_v6,temp_v14 - 1,8,1,0,1);
         if (*(int *)(temp_v2 + 0x654) >= 8) {
           flaggedEntrySetValueA(temp_v6,0);
         }
@@ -701,7 +701,7 @@ joined_r0x002694c0:
         *(unsigned char *)(temp_v2 + 0x528) = 1;
         uiSpriteSetKeyframe(temp_v2 + 0x2e4,1,0);
         uiSpriteSelectAnim(temp_v2 + 0x370,2);
-        FUN_00387240(temp_v2 + 0x370,0x12,*(int *)(temp_v2 + 0x654) + 0x414);
+        uiStoreTextureEntryCenter(temp_v2 + 0x370,0x12,*(int *)(temp_v2 + 0x654) + 0x414);
         *(unsigned short *)(temp_v2 + 0x388) = 0xa0;
       }
       temp_v6 = FUN_00167458(temp_v2 + 0x2e4,0);
@@ -710,7 +710,7 @@ joined_r0x002694c0:
           FUN_0015f490((int)*(short *)(temp_v2 + 0x598),0,1);
           *(unsigned char *)(temp_v2 + 0x24a8) = 1;
         }
-        temp_v6 = FUN_00163aa4(temp_v2 + 0x370);
+        temp_v6 = uiSpriteAdvanceAnimation(temp_v2 + 0x370);
         if (temp_v6 != 0) {
           FUN_0023092c();
           FUN_00230d30();
@@ -725,8 +725,8 @@ joined_r0x002694c0:
     }
     break;
   case 0xe:
-    FUN_00163aa4(temp_v2 + 0xb4);
-    FUN_00163aa4(temp_v2 + 0x1cc);
+    uiSpriteAdvanceAnimation(temp_v2 + 0xb4);
+    uiSpriteAdvanceAnimation(temp_v2 + 0x1cc);
     if (*(char *)(temp_v2 + 0x52a) == '\0') {
       temp_v14 = temp_v2 + 0x5ec;
       temp_v8 = flaggedEntryGetValueA();
@@ -747,7 +747,7 @@ joined_r0x002694c0:
       if (*(int *)(temp_v2 + 0x524) == 8) {
         if (*(int *)(temp_v2 + 0x65c) < 0) {
           temp_v6 = objectApplyIfUnblocked();
-          FUN_00203b40(temp_v2 + 0x5ec,temp_v6 - 1,8,1,0,1);
+          gridNavigationConfigure(temp_v2 + 0x5ec,temp_v6 - 1,8,1,0,1);
           flaggedEntrySetValueA(temp_v2 + 0x5ec,0);
           temp_v6 = g_statusDown;
           *(unsigned int *)(g_statusDown + 0x524) = 0;
@@ -761,15 +761,15 @@ joined_r0x002694c0:
           *(short *)(temp_v2 + *(int *)(temp_v2 + 0x65c) * 2 + 0x59c) =
                (short)*(unsigned int *)(temp_v2 + 0x658);
           temp_v6 = objectApplyIfUnblocked();
-          FUN_00203b40(temp_v2 + 0x5ec,temp_v6 - 1,8,1,0,1);
+          gridNavigationConfigure(temp_v2 + 0x5ec,temp_v6 - 1,8,1,0,1);
           uiSpriteSetKeyframe(temp_v2 + 0x2e4,1,0);
           uiSpriteSelectAnim(temp_v2 + 0x370,2);
-          FUN_00387240(temp_v2 + 0x370,0x12,*(int *)(temp_v2 + 0x65c) + 0x414);
+          uiStoreTextureEntryCenter(temp_v2 + 0x370,0x12,*(int *)(temp_v2 + 0x65c) + 0x414);
           *(unsigned short *)(temp_v2 + 0x388) = 0xa0;
         }
       }
       temp_v6 = FUN_00167458(temp_v2 + 0x2e4,0);
-      if ((temp_v6 != 0) && (temp_v14 = FUN_00163aa4(temp_v2 + 0x370), temp_v6 = g_statusDown, temp_v14 != 0))
+      if ((temp_v6 != 0) && (temp_v14 = uiSpriteAdvanceAnimation(temp_v2 + 0x370), temp_v6 = g_statusDown, temp_v14 != 0))
       {
         *(unsigned int *)(g_statusDown + 0x524) = 0;
         puVar13 = (unsigned int *)(temp_v6 + 0x518);
@@ -781,8 +781,8 @@ joined_r0x002694c0:
     }
     break;
   case 0x12:
-    FUN_00163aa4(temp_v2 + 0xb4);
-    FUN_00163aa4(temp_v2 + 0x1cc);
+    uiSpriteAdvanceAnimation(temp_v2 + 0xb4);
+    uiSpriteAdvanceAnimation(temp_v2 + 0x1cc);
     temp_v9 = temp_v2 + 0x5ec;
     temp_v6 = temp_v9;
     FUN_003450d4(temp_v9,0,temp_v2 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2 + 0x24a0,0,1);
@@ -797,14 +797,14 @@ joined_r0x002694c0:
     }
     break;
   case 0x13:
-    FUN_00163aa4(temp_v2 + 0xb4);
-    FUN_00163aa4(temp_v2 + 600);
+    uiSpriteAdvanceAnimation(temp_v2 + 0xb4);
+    uiSpriteAdvanceAnimation(temp_v2 + 600);
     if (*(char *)(temp_v2 + 0x52a) == '\0') {
       temp_v6 = temp_v2 + 0x67c;
       temp_v14 = FUN_002a4894();
       if ((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v8 = FUN_00230544(), temp_v8 != 0)) {
         temp_v8 = 4;
-        FUN_001517b4(4,0);
+        padQueryLogicalKey(4,0);
         if (temp_v8 != 0) {
           temp_v3 = 0xff;
           *(unsigned char *)(temp_v2 + 0x59b) = temp_v3;
@@ -818,7 +818,7 @@ joined_r0x002694c0:
       }
       if ((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v8 = FUN_00230544(), temp_v8 != 0)) {
         temp_v8 = 3;
-        FUN_001517b4(3,0);
+        padQueryLogicalKey(3,0);
         if (temp_v8 != 0) {
           temp_v3 = 1;
           *(unsigned char *)(temp_v2 + 0x59b) = temp_v3;
@@ -855,12 +855,12 @@ joined_r0x002694c0:
     }
     break;
   case 0x14:
-    FUN_00163aa4(temp_v2 + 0xb4);
-    FUN_00163aa4(temp_v2 + 0x1cc);
+    uiSpriteAdvanceAnimation(temp_v2 + 0xb4);
+    uiSpriteAdvanceAnimation(temp_v2 + 0x1cc);
     if (*(char *)(temp_v2 + 0x52a) == '\0') {
       if ((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v6 = FUN_00230544(), temp_v6 != 0)) {
         temp_v6 = 4;
-        FUN_001517b4(4,0);
+        padQueryLogicalKey(4,0);
         if (temp_v6 != 0) {
           temp_v3 = 0xff;
           *(unsigned char *)(temp_v2 + 0x59b) = temp_v3;
@@ -874,7 +874,7 @@ joined_r0x002694c0:
       }
       if ((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v6 = FUN_00230544(), temp_v6 != 0)) {
         temp_v6 = 3;
-        FUN_001517b4(3,0);
+        padQueryLogicalKey(3,0);
         if (temp_v6 != 0) {
           temp_v3 = 1;
           *(unsigned char *)(temp_v2 + 0x59b) = temp_v3;
@@ -887,7 +887,7 @@ joined_r0x002694c0:
         break;
       }
       temp_v6 = 9;
-      FUN_001517b4(9,1);
+      padQueryLogicalKey(9,1);
       if (temp_v6 != 0) {
         sortMenuAcquire(0x15,0);
         FUN_0031f208(1);
@@ -946,7 +946,7 @@ joined_r0x002694c0:
       temp_v14 = useCounterGetCurrentValue();
       temp_v6 = g_statusDown;
       if (temp_v14 != 0x69) {
-        temp_v14 = reinterpret_cast<int>(FUN_0026140c());
+        temp_v14 = reinterpret_cast<int>(saveGetUserSettingsBlock());
         if ((*(unsigned char *)(temp_v14 + 0x15) & 0x7f) == 1) {
           if ((char)*(unsigned char *)(temp_v14 + 0x15) < '\0') {
             qsort(temp_v6 + 0x6e0,(int)*(short *)(temp_v6 + 0xee0),4,entryRefCompareByRankOrderId);
@@ -978,7 +978,7 @@ joined_r0x002694c0:
     }
     break;
   case 0x16:
-    FUN_00163aa4(temp_v2 + 0x140);
+    uiSpriteAdvanceAnimation(temp_v2 + 0x140);
     if (*(char *)(temp_v2 + 0x52a) == '\0') {
       temp_v9 = temp_v2 + 0x2354;
       temp_v6 = resourceRunOperationIfUnblocked();
@@ -990,7 +990,7 @@ joined_r0x002694c0:
       if (((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v10 = FUN_00230544(), temp_v10 != 0)) &&
          ((temp_v10 = FUN_002a4878(temp_v9), temp_v10 == 0 || (*(short *)(temp_v2 + 0x234a) == 0)))) {
         temp_v10 = 4;
-        FUN_001517b4(4,0);
+        padQueryLogicalKey(4,0);
         if (temp_v10 == 0) goto LAB_00269ec4;
       }
       else {
@@ -1001,14 +1001,14 @@ LAB_00269ec4:
               ((int)*(short *)(temp_v2 + 0x234a) == temp_v8 + (temp_v6 + temp_v14) * 4 + 1 ||
                *(short *)(temp_v2 + 0x234a) == 0)))) {
             temp_v6 = 3;
-            FUN_001517b4(3,0);
+            padQueryLogicalKey(3,0);
             if (temp_v6 == 0) goto LAB_00269f7c;
           }
           else {
 LAB_00269f7c:
             if (*(int *)(temp_v2 + 0x53c) != 6) {
               temp_v6 = 9;
-              FUN_001517b4(9,1);
+              padQueryLogicalKey(9,1);
               if (temp_v6 != 0) {
                 sortMenuAcquire(0x16,0);
                 FUN_0031f208(1);
@@ -1120,7 +1120,7 @@ LAB_00269f7c:
       temp_v6 = resourceRunOperationIfUnblocked(temp_v2 + 0x23c0);
       if ((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v14 = FUN_00230544(), temp_v14 != 0)) {
         temp_v14 = 4;
-        FUN_001517b4(4,0);
+        padQueryLogicalKey(4,0);
         if (temp_v14 != 0) {
           temp_v3 = 0xff;
           *(unsigned char *)(temp_v2 + 0x59b) = temp_v3;
@@ -1134,7 +1134,7 @@ LAB_00269f7c:
       }
       if ((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v14 = FUN_00230544(), temp_v14 != 0)) {
         temp_v14 = 3;
-        FUN_001517b4(3,0);
+        padQueryLogicalKey(3,0);
         if (temp_v14 != 0) {
           temp_v3 = 1;
           *(unsigned char *)(temp_v2 + 0x59b) = temp_v3;
@@ -1183,7 +1183,7 @@ LAB_00269f7c:
     break;
   case 0x19:
     temp_v14 = 0;
-    FUN_001517b4(0,1);
+    padQueryLogicalKey(0,1);
     temp_v6 = g_statusDown;
     if (temp_v14 != 0) {
       *(unsigned int *)(g_statusDown + 0x524) = 0;
@@ -1211,11 +1211,11 @@ LAB_00269f7c:
         *(unsigned char *)(temp_v2 + 0x528) = 1;
         uiSpriteSetKeyframe(temp_v2 + 0x2e4,0);
         uiSpriteSelectAnim(temp_v2 + 0x370,2);
-        FUN_00387240(temp_v2 + 0x370,0x12,temp_v14 + 0x414);
+        uiStoreTextureEntryCenter(temp_v2 + 0x370,0x12,temp_v14 + 0x414);
         *(unsigned short *)(temp_v2 + 0x388) = 0xa0;
       }
       temp_v6 = FUN_00167458(temp_v2 + 0x2e4,0);
-      if ((temp_v6 != 0) && (temp_v14 = FUN_00163aa4(temp_v2 + 0x370), temp_v6 = g_statusDown, temp_v14 != 0))
+      if ((temp_v6 != 0) && (temp_v14 = uiSpriteAdvanceAnimation(temp_v2 + 0x370), temp_v6 = g_statusDown, temp_v14 != 0))
       {
         *(unsigned int *)(g_statusDown + 0x524) = 0;
         puVar13 = (unsigned int *)(temp_v6 + 0x518);
@@ -1234,10 +1234,10 @@ LAB_00269f7c:
       break;
     }
     temp_v6 = 0;
-    FUN_001517b4(0,1);
+    padQueryLogicalKey(0,1);
     if (temp_v6 == 0) {
       temp_v6 = 1;
-      FUN_001517b4();
+      padQueryLogicalKey();
       if (temp_v6 == 0) break;
     }
     temp_v6 = uniteNotBusy();
@@ -1257,7 +1257,7 @@ LAB_00269f7c:
       break;
     }
     temp_v6 = 0;
-    FUN_001517b4(0,1);
+    padQueryLogicalKey(0,1);
     if ((temp_v6 != 0) || (*(char *)(temp_v2 + 0x24a0) != '\0')) {
       temp_v6 = FUN_002a4894(temp_v14);
       temp_v8 = objectApplyIfUnblocked(temp_v14);
@@ -1286,7 +1286,7 @@ LAB_00269f7c:
     }
     else {
       temp_v6 = 1;
-      FUN_001517b4();
+      padQueryLogicalKey();
       if (temp_v6 != 0) {
         *(unsigned int *)(temp_v2 + 0x249c) = 0;
         temp_v6 = uniteNotBusy();
@@ -1306,17 +1306,17 @@ LAB_00269f7c:
           temp_v14 = FUN_002a4894();
           *(unsigned short *)(temp_v2 + temp_v14 * 2 + 0x2488) = *(unsigned short *)(temp_v2 + 0x2498);
           temp_v8 = objectApplyIfUnblocked(temp_v6);
-          FUN_00203b40(temp_v6,temp_v8 - 1,8,1,1,1);
+          gridNavigationConfigure(temp_v6,temp_v8 - 1,8,1,1,1);
           flaggedEntrySetValueA(temp_v6,temp_v14);
           *(unsigned char *)(temp_v2 + 0x528) = 1;
           uiSpriteSetKeyframe(temp_v2 + 0x2e4,0);
           uiSpriteSelectAnim(temp_v2 + 0x370,2);
-          FUN_00387240(temp_v2 + 0x370,0x12,temp_v14 + 0x414);
+          uiStoreTextureEntryCenter(temp_v2 + 0x370,0x12,temp_v14 + 0x414);
           *(unsigned short *)(temp_v2 + 0x388) = 0xa0;
         }
         else {
           temp_v14 = objectApplyIfUnblocked();
-          FUN_00203b40(temp_v6,temp_v14 - 1,8,1,1,1);
+          gridNavigationConfigure(temp_v6,temp_v14 - 1,8,1,1,1);
           flaggedEntrySetValueA(temp_v6,0);
           temp_v6 = g_statusDown;
           *(unsigned int *)(g_statusDown + 0x524) = 0;
@@ -1327,7 +1327,7 @@ LAB_00269f7c:
         }
       }
       temp_v6 = FUN_00167458(temp_v2 + 0x2e4,0);
-      if ((temp_v6 != 0) && (temp_v14 = FUN_00163aa4(temp_v2 + 0x370), temp_v6 = g_statusDown, temp_v14 != 0))
+      if ((temp_v6 != 0) && (temp_v14 = uiSpriteAdvanceAnimation(temp_v2 + 0x370), temp_v6 = g_statusDown, temp_v14 != 0))
       {
         *(unsigned int *)(g_statusDown + 0x524) = 0;
         puVar13 = (unsigned int *)(temp_v6 + 0x518);
@@ -1346,10 +1346,10 @@ LAB_00269f7c:
       break;
     }
     temp_v6 = 0;
-    FUN_001517b4(0,1);
+    padQueryLogicalKey(0,1);
     if (temp_v6 == 0) {
       temp_v6 = 1;
-      FUN_001517b4();
+      padQueryLogicalKey();
       if (temp_v6 == 0) break;
     }
     temp_v6 = uniteNotBusy();
@@ -1360,8 +1360,8 @@ LAB_00269f7c:
     statusDownRestartTransition();
     break;
   case 0x1f:
-    FUN_00163aa4(temp_v2 + 0xb4);
-    FUN_00163aa4(temp_v2 + 0x1cc);
+    uiSpriteAdvanceAnimation(temp_v2 + 0xb4);
+    uiSpriteAdvanceAnimation(temp_v2 + 0x1cc);
     temp_v14 = g_statusDown;
     *(unsigned char *)(g_statusDown + 0x2578) = 1;
     temp_v6 = *(int *)(temp_v14 + 0x2564);
@@ -1373,7 +1373,7 @@ LAB_00269f7c:
       }
       if (temp_v16 && temp_v6 != 0) {
         if (*(int *)(temp_v14 + 0x2574) == 0) {
-          FUN_00275bc8();
+          scrScriptProcessCreate();
           *(int *)(temp_v14 + 0x2574) = temp_v6;
           *(unsigned int *)(temp_v6 + 0x108) = 2;
         }
@@ -1486,7 +1486,7 @@ LAB_00269f7c:
     }
     else {
       puVar14 = (unsigned short *)FUN_002c7e24();
-      temp_v6 = FUN_0026264c(*puVar14);
+      temp_v6 = itemIsCollectedWithRelated(*puVar14);
       if (temp_v6 == 0) {
         temp_v16 = 1;
       }

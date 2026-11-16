@@ -5,7 +5,7 @@
 
 extern "C" {
 extern BtlMainGlobalsA g_btlMain;
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
 u32 FUN_004c5da4(s32 unitIndex, s32 markQueued);
 
 // Resolve the active actor's queued skill and optionally mark this queue as consumed.
@@ -15,7 +15,7 @@ u32 FUN_003f0bd8(BtlMainStateA *state, s32 markQueued)
     if (markQueued && (*flags & g_btlMain.skillQueue.queuedSkillMask)) {
         return 0;
     }
-    BtlCombatantEntryA *actor = FUN_003eaf20(state);
+    BtlCombatantEntryA *actor = btlFindFirstEntryMatchingCategoryAndRequiredMask(state);
     if (actor == NULL) {
         return 0;
     }

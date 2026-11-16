@@ -3,7 +3,7 @@
 
 extern "C" {
 extern MessageGlobalsA g_messageMain;
-u32 FUN_0021bdac(u32 owner, u32 text, u32 frame, s32 mode, s32 wait, s32 flags);
+u32 messageWindowShowOrPoll(u32 owner, u32 text, u32 frame, s32 mode, s32 wait, s32 flags);
 
 /* Shows the script command's first argument as a message with message state `mode`. */
 static u32 showMessage(s32 mode, s32 wait)
@@ -12,7 +12,7 @@ static u32 showMessage(s32 mode, s32 wait)
     u32 text = scrGetArg(0);
     u32 frame = scrGetCommandFrame();
 
-    return FUN_0021bdac(owner, text, frame, mode, wait, 0);
+    return messageWindowShowOrPoll(owner, text, frame, mode, wait, 0);
 }
 
 /* Script command: resets the message mode, on the first frame raises both panel flags, puts the

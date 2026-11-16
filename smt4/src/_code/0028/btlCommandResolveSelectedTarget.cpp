@@ -3,7 +3,7 @@
 #include "gamedata/DataTable40.h"
 
 extern "C" {
-void FUN_0028cb40(PlayScene *scene, u16 *kind, s16 *skill);
+void btlCommandMenuResolveLayout(PlayScene *scene, u16 *kind, s16 *skill);
 s32 objectPartRunUnlessLocked(PlayScenePart *part);
 const void *gameGetSlotTable();
 
@@ -12,7 +12,7 @@ u32 btlCommandResolveSelectedTarget(PlayScene *scene)
 {
     u16 kind = 0;
     s16 skill = 0;
-    FUN_0028cb40(scene, &kind, &skill);
+    btlCommandMenuResolveLayout(scene, &kind, &skill);
     s32 selection = objectPartRunUnlessLocked(&scene->targeting.selector);
     // The party selection tail lies beyond the shared SlotTable prefix.
     struct PartyView { u8 prefix[0x9108]; s8 slots[4]; };

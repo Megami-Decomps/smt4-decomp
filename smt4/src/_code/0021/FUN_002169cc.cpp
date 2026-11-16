@@ -43,7 +43,7 @@ unsigned int FUN_002169cc(void)
             *puVar3 = *puVar3 | 2;
             *(unsigned char *)(*(int *)(puVar3[2] + 0x2c) + 0x1f6) = 0;
             FUN_0028703c(*(unsigned int *)(*(int *)(iVar5 + 0x658) + 8));
-            FUN_0029bb14(*(unsigned int *)(*(int *)(iVar5 + 0x658) + 8));
+            modelSetScale(*(unsigned int *)(*(int *)(iVar5 + 0x658) + 8));
             uVar4 = uVar4 + 1;
           } while (uVar4 < 0x1c);
           uVar10 = 1;
@@ -67,7 +67,7 @@ unsigned int FUN_002169cc(void)
       }
       FUN_0028703c(*(unsigned int *)(*(int *)(iVar2 + 0x5e4) + 8));
       in_s0 = (float)uVar11;
-      FUN_0029bb14(*(unsigned int *)(*piVar7 + 8));
+      modelSetScale(*(unsigned int *)(*piVar7 + 8));
       *(unsigned int *)(iVar2 + 0x5ec) = 3;
       break;
     case 3:
@@ -79,7 +79,7 @@ unsigned int FUN_002169cc(void)
           (iVar5 = FUN_0025a03c(*(unsigned int *)(*(int *)(iVar2 + 0x5e4) + 8)), iVar5 != 0)))) {
         FUN_002f50b8(*(unsigned int *)(*(int *)(iVar2 + 0x5e4) + 8));
         FUN_0028703c(*(unsigned int *)(*piVar7 + 8));
-        FUN_0029bb14(*(unsigned int *)(*piVar7 + 8));
+        modelSetScale(*(unsigned int *)(*piVar7 + 8));
         uVar10 = 4;
 code_r0x00216c3c:
         *(unsigned int *)(iVar2 + 0x5ec) = uVar10;

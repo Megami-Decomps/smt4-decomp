@@ -25,7 +25,7 @@ void eventCommandSetPendingCleanup(s32 value);
 void asdMemoryFreeLockedAlt(u32 resource);
 void gfxObjectDestroy(u32 effect);
 void cameraRegistryRemove(void *subObject);
-void FUN_0029c2cc(s32 effect, s32 value);
+void modelRemoveFromSlotList(s32 effect, s32 value);
 void asdMemFree(ScreenState *screen);
 void jobStop(u32 setting, s32 value);
 
@@ -39,7 +39,7 @@ void scrDestroyActive(u32 job)
         screen->resource = 0;
         eventCommandSetPendingCleanup(0);
         if (screen->effect != 0) {
-            FUN_0029c2cc(screen->effect, 0);
+            modelRemoveFromSlotList(screen->effect, 0);
             gfxObjectDestroy(screen->effect);
             screen->effect = 0;
             screen->effectParam = 0;

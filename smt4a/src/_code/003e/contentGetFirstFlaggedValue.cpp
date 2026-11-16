@@ -8,7 +8,7 @@ struct ContentFlagsView {
 };
 
 extern "C" {
-u16 FUN_001ba3d4(s32 id);
+u16 flagValueRead(s32 id);
 
 u32 contentGetFirstFlaggedValue(void)
 {
@@ -18,7 +18,7 @@ u32 contentGetFirstFlaggedValue(void)
         const ContentFlagsView *record = (const ContentFlagsView *)dataTable8FindRecord(id);
         if (record != NULL && (record->flags & 8)) {
             if (id - 1 < count) {
-                result = FUN_001ba3d4(id);
+                result = flagValueRead(id);
             }
             return result;
         }

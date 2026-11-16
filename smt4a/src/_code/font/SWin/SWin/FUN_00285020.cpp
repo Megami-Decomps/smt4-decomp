@@ -25,7 +25,7 @@ u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc end, u32 work, void *owner);
 void paramsClearPacket(UiResourceParameters *packet);
 
-void FUN_0014e188(UiAnimatedSprite *sprite, s32 group, s32 entry, UiResourceParameters *parameters,
+void uiSpriteStateInitFromSource(UiAnimatedSprite *sprite, s32 group, s32 entry, UiResourceParameters *parameters,
     s32 flags, f32 speed);
 
 void FUN_00285020(s32 raisedPriority)
@@ -58,6 +58,6 @@ void FUN_00285020(s32 raisedPriority)
     paramsClearPacket(&work->parameters);
     /* The first animation packet immediately precedes the second in the shared table. */
     paramsInit(&work->parameters, 0, 0, DAT_0052fbe4 - 0x18, 0x18, DAT_0052fbe4, 0x18, 0, 0, 0, 0);
-    FUN_0014e188(&work->sprite, 0x34, 0, &work->parameters, 0x15, 1.0f);
+    uiSpriteStateInitFromSource(&work->sprite, 0x34, 0, &work->parameters, 0x15, 1.0f);
 }
 }

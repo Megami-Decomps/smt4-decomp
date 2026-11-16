@@ -19,7 +19,7 @@ void uiDrawSelectedSpriteIndicator(SpriteIndicatorOwner *owner, s32 x, s32 y, f3
         RenderCtxA *context = g_renderCtx;
         u32 state = packNibblesAndByte(6, 1, 0);
         renderCtxSetB(context, state);
-        FUN_001835b4(2, 17, 16, drawX, drawY, 121);
+        texDrawTableEntryAtStoredOrigin(2, 17, 16, drawX, drawY, 121);
         context = g_renderCtx;
         state = packNibblesAndByte(6, 7, 0);
         renderCtxSetB(context, state);

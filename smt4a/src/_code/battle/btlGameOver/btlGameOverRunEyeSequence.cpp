@@ -58,9 +58,9 @@ u32 btlGameOverRunEyeSequence(BtlGameOverSequence *sequence)
     }
     if (sequence->frame == g_btlGameOverEyeTimeline.effectFrame)
         btlReflectQueuePairedParameters(0, 0, g_btlGameOverEyeTimeline.effectId, 16, 0, g_btlGameOverEyeTimeline.effectParameter, 0, 2, -1);
-    if (sequence->frame == g_btlGameOverEyeTimeline.fade0Frame && FUN_0013def0(0) != 1 && FUN_0013def0(0) != 3)
+    if (sequence->frame == g_btlGameOverEyeTimeline.fade0Frame && pairedAvailabilityGetState(0) != 1 && pairedAvailabilityGetState(0) != 3)
         slotSetRequest(0, g_btlGameOverEyeTimeline.fade0, 255);
-    if (sequence->frame == g_btlGameOverEyeTimeline.fade1Frame && FUN_0013def0(1) != 1 && FUN_0013def0(1) != 3)
+    if (sequence->frame == g_btlGameOverEyeTimeline.fade1Frame && pairedAvailabilityGetState(1) != 1 && pairedAvailabilityGetState(1) != 3)
         slotSetRequest(1, g_btlGameOverEyeTimeline.fade1, 255);
     if (sequence->frame > g_btlGameOverEyeTimeline.endFrame) {
         BtlMainStateA *battle = btlGetMainState();

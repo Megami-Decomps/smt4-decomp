@@ -15,7 +15,7 @@ void onlineThreadSetPriority(u32 *handle, u32 priority)
     svcPriority = nn_os_detail_ConvertLibraryToSvcPriority(priority);
     result = svcSetThreadPriority(*handle, svcPriority);
     if (result < 0) {
-        FUN_002e3140(result);
+        resultHandleFailure(result);
     }
 }
 

@@ -35,7 +35,7 @@ int campRefreshEquipmentCategory(int);
 int slotSetRequest(int, int, int);
 int messageDismissNumericBanner(...);
 int FUN_0029e788(void);
-int FUN_0029e874(int);
+int gameSetIconDisplayEnabled(int);
 int buttonHelpSetText(int, int);
 int timerStart(...);
 int FUN_002cf780(void);
@@ -80,7 +80,7 @@ extern int dataTable15GetUnlockedEntryId(int, unsigned int);
 /* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: FUN_0029e774. */
 /* Supplied declaration required: FUN_0029e788. */
-/* Supplied declaration required: FUN_0029e874. */
+/* Supplied declaration required: gameSetIconDisplayEnabled. */
 extern unsigned int objectPartRunUnlessLocked(int);
 extern int FUN_0029ee54(int);
 /* Supplied declaration required: buttonHelpSetText. */
@@ -131,7 +131,7 @@ void FUN_001d0750(int *param_1)
     messageDismissNumericBanner(1);
     temp_v1 = FUN_0029ee54(temp_v2 + 0x1dc);
     if (0 < temp_v1) {
-      FUN_0029e874(1);
+      gameSetIconDisplayEnabled(1);
       FUN_0029e788();
       FUN_00298d0c(1);
     }
@@ -267,7 +267,7 @@ void FUN_001d0750(int *param_1)
       FUN_0026d5a4();
       guestWinRequestClose();
       messageDismissNumericBanner(1);
-      FUN_0029e874(1);
+      gameSetIconDisplayEnabled(1);
       FUN_0029e788();
       *(unsigned int *)(temp_v2 + 0x20) = 0x1a;
       campRefreshEquipmentCategory(0x11);

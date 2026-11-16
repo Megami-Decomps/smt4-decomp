@@ -13,7 +13,7 @@ typedef char SpriteIntroTransitionOffsetsCheck[
     offsetof(SpriteIntroTransitionWork, phase) == 0xD48 &&
     offsetof(SpriteIntroTransitionWork, timer) == 0xD4C ? 1 : -1];
 extern "C" {
-void FUN_00163aa4(UiAnimatedSprite *sprite, f32 speed);
+void uiSpriteAdvanceAnimation(UiAnimatedSprite *sprite, f32 speed);
 
 /* Finishes the first two sprites, waits seventeen frames, then starts the remaining intro group. */
 u32 FUN_00335384(SpriteIntroTransitionWork *work)
@@ -21,8 +21,8 @@ u32 FUN_00335384(SpriteIntroTransitionWork *work)
     u32 result = 0;
     switch (work->phase) {
     case 0:
-        FUN_00163aa4(&work->sprites[0], 1.0f);
-        FUN_00163aa4(&work->sprites[1], 1.0f);
+        uiSpriteAdvanceAnimation(&work->sprites[0], 1.0f);
+        uiSpriteAdvanceAnimation(&work->sprites[1], 1.0f);
         if (uiAnimatedSpriteIsFinished(&work->sprites[0]) && uiAnimatedSpriteIsFinished(&work->sprites[1])) {
             ++work->phase;
             work->timer = 0;
@@ -36,10 +36,10 @@ u32 FUN_00335384(SpriteIntroTransitionWork *work)
         work->timer = 0;
         /* Continue directly into the second group on the transition frame. */
     case 2:
-        FUN_00163aa4(&work->sprites[2], 1.0f);
-        FUN_00163aa4(&work->sprites[3], 1.0f);
-        FUN_00163aa4(&work->sprites[4], 1.0f);
-        FUN_00163aa4(&work->sprites[5], 1.0f);
+        uiSpriteAdvanceAnimation(&work->sprites[2], 1.0f);
+        uiSpriteAdvanceAnimation(&work->sprites[3], 1.0f);
+        uiSpriteAdvanceAnimation(&work->sprites[4], 1.0f);
+        uiSpriteAdvanceAnimation(&work->sprites[5], 1.0f);
         if (!(uiAnimatedSpriteIsFinished(&work->sprites[2]) &&
               uiAnimatedSpriteIsFinished(&work->sprites[3]) && uiAnimatedSpriteIsFinished(&work->sprites[4]))) {
             break;

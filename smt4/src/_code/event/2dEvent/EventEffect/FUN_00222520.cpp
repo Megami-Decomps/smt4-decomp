@@ -39,7 +39,7 @@ s32 FUN_00222520(void)
             }
         }
         if (loaded == 2) {
-            FUN_00287728(0);
+            screenFadeSlotReset(0);
             work->state = 1;
             work->visible = 1;
         }

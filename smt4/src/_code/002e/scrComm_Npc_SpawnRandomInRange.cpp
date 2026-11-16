@@ -39,11 +39,11 @@ void eventTexSetJobParam(u32 job);
 void eventTexRegisterAndSortTask(u32 job);
 void FUN_00247bf4(u32 job, s32 frame, s32 flag);
 void *memClear(void *data, u32 size);
-const char *FUN_002bd06c(u32 id);
+const char *dataTable01FindByIdWithAoc(u32 id);
 char *libc_strcpy(char *destination, const char *source);
 void textEncodeFontSlot(u32 slot, const char *text);
 u32 fileSlotGetBuffer(u32 slot);
-void FUN_002bff38(s32 arg);
+void messageSetDisplayMode(s32 arg);
 s32 messageForwardDefaultMode(u32 buffer, s32 message, s32 frame, s32 mode, s32 arg);
 s32 jobIsValid(u32 job);
 void jobStop(u32 job, s32 arg);
@@ -112,12 +112,12 @@ u32 scrComm_Npc_SpawnRandomInRange(void)
         devilGetRecord((u16)scrWorkGetValue(1));
         memClear(name, 0x80);
         memClear(race, 0x80);
-        libc_strcpy(name, FUN_002bd06c((u16)scrWorkGetValue(1)));
+        libc_strcpy(name, dataTable01FindByIdWithAoc((u16)scrWorkGetValue(1)));
         libc_strcpy(race, demonGetRaceLabel((u16)scrWorkGetValue(1), 1));
         textEncodeFontSlot(8, name);
         textEncodeFontSlot(9, race);
         u32 buffer = fileSlotGetBuffer(30);
-        FUN_002bff38(20);
+        messageSetDisplayMode(20);
         s32 result = messageForwardDefaultMode(buffer, 0x38, DAT_0044cfa0, 6, 0);
         DAT_0044cfa0 = DAT_0044cfa0 + 1;
         if (result == 1) {

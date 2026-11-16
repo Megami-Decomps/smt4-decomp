@@ -4,7 +4,7 @@ extern "C" {
 
 extern u32 fileSlotGetBuffer(u32 slot);
 extern u32 binFileGetValue(void);
-extern u32 FUN_0024ba44(u32 buffer, u32 group);
+extern u32 fbinGetFile(u32 buffer, u32 group);
 extern u32 tbcrBlockGetPayload(void);
 extern void dataTableFileGetTable(u32 table, u32 index);
 extern u8 *dataTableGetEntries(void);
@@ -71,7 +71,7 @@ u8 *dataTableGetAocEntryBlock(s32 isSecond, u32 kind, s32 swap, s32 variant)
     if (binFileGetValue() <= 0x26) {
         group = 0;
     }
-    table = FUN_0024ba44(table, group);
+    table = fbinGetFile(table, group);
     if (tbcrBlockGetPayload() <= row) {
         row = 0;
     }

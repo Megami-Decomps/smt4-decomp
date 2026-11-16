@@ -2,7 +2,7 @@
 
 extern "C" {
 extern s32 FUN_001ba3d0(u16 id);
-extern u16 FUN_0049c9a0(const u16 *id);
+extern u16 recordGetCompareValue(const u16 *id);
 }
 
 extern "C" {
@@ -26,8 +26,8 @@ int FUN_00493e94(const SortEntry *a, const SortEntry *b)
     }
     const u16 *keyA = reinterpret_cast<const u16 *>(a);
     const u16 *keyB = reinterpret_cast<const u16 *>(b);
-    u16 orderA = FUN_0049c9a0(keyA);
-    u16 orderB = FUN_0049c9a0(keyB);
+    u16 orderA = recordGetCompareValue(keyA);
+    u16 orderB = recordGetCompareValue(keyB);
     return orderA - orderB;
 }
 

@@ -24,7 +24,7 @@ typedef struct QuestUi {
 
 extern QuestUi *g_uiQuest;
 
-s32 FUN_001692ac(s32 a, s32 b);
+s32 renderCtxPackPassFlags(s32 a, s32 b);
 void FUN_00218640(void);
 void FUN_002f6048(QuestUi *ui);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
@@ -48,8 +48,8 @@ u32 FUN_0023b4cc(void)
 {
     QuestUi *ui = g_uiQuest;
 
-    FUN_00157558(g_renderCtx);
-    renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
+    renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
     switch (ui->state) {
     case 1:
     case 2:
@@ -102,10 +102,10 @@ u32 FUN_0023b4cc(void)
         }
         efctSetSpeed(speed);
         x += parallax;
-        FUN_001835b4(2, 0x1E, 0x57, x, y, 0x97);
-        FUN_001835b4(2, 0x1E, 0x58, x, y, 0x97);
-        FUN_001835b4(2, 0x1E, 0x59, x, y, 0x97);
-        FUN_001835b4(2, 0x1E, 0x51, x, y, 0xA1);
+        texDrawTableEntryAtStoredOrigin(2, 0x1E, 0x57, x, y, 0x97);
+        texDrawTableEntryAtStoredOrigin(2, 0x1E, 0x58, x, y, 0x97);
+        texDrawTableEntryAtStoredOrigin(2, 0x1E, 0x59, x, y, 0x97);
+        texDrawTableEntryAtStoredOrigin(2, 0x1E, 0x51, x, y, 0xA1);
         TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x1E, 0x54);
 
         partyDrawCategorySelectionIcon(category, icon->x + x, icon->y + y, 0xA6);

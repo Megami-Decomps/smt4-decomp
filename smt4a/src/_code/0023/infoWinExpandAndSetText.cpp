@@ -17,7 +17,7 @@ void infoWinExpandAndSetText(const char *text)
     window->hasText = 0;
     if (text != NULL) {
         sysMemClear(window->message.buffer, sizeof(window->message.buffer));
-        FUN_001654f8(text, expanded, 0);
+        textExpandGlyphsToBuffer(text, expanded, 0);
         for (s32 length = 0; length < 160; ++length) {
             if (expanded[length] == '\0') {
                 __aeabi_memcpy4(window->message.buffer, expanded, length + 1);

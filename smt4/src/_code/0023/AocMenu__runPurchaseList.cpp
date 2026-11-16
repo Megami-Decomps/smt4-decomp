@@ -2,7 +2,7 @@
 #include "shard/ScreenTransitionState.h"
 
 extern "C" {
-bool FUN_002896bc();
+bool screenFadesAllReady();
 void soundChannelStopAll(u32 channels);
 void slotSetRequest(u32 slot, u32 request, u32 value);
 void aocMenuSetButtonHelp(ScreenTransitionState *state, s32 selection, u32 value);
@@ -16,7 +16,7 @@ void AocMenu::runPurchaseList()
         slotSetRequest(1, 10, 255);
         state->phase = 1;
         aocMenuSetButtonHelp(state, -1, 0);
-    } else if (state->phase == 1 && FUN_002896bc()) {
+    } else if (state->phase == 1 && screenFadesAllReady()) {
         state->flags = 16;
         state->phase = 0;
         if (state->callback) {

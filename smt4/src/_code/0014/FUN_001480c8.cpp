@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
-int FUN_002c526c(void);
+int resultHandleFailure(void);
 int software_interrupt(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -20,7 +20,7 @@ extern int DAT_004e5290; /* 0x4e5290 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: FUN_002c526c. */
+/* Supplied declaration required: resultHandleFailure. */
 extern void nn_os_Thread_FinalizeImpl(unsigned int);
 
 
@@ -36,13 +36,13 @@ void FUN_001480c8(void)
   DAT_00465630 = 1;
   software_interrupt(0x18);
   if (DAT_004e5290 < 0) {
-    FUN_002c526c();
+    resultHandleFailure();
   }
   iStack_20 = DAT_0046563c;
   puVar1 = temp_v1;
   FUN_002c40f8(puVar1,&iStack_20,1,0,0xffffffff,0xffffffff);
   if ((int)puVar1 < 0) {
-    FUN_002c526c();
+    resultHandleFailure();
   }
   DAT_00465640 = 1;
   nn_os_Thread_FinalizeImpl((unsigned int)&DAT_0046563c);

@@ -39,7 +39,7 @@ s32 gameSlotTableFindFree(void);
 s32 gameGetSlotRecord(s32 slot);
 s32 recordGetScaledMaximum(s32 record);
 
-s32 FUN_002d8b58(s32 kind, s32 id);
+s32 popupSelectWeightedMessage(s32 kind, s32 id);
 
 // Opens the popup for the first ratio message matching the selected slot.
 void FUN_00234880(void)
@@ -87,20 +87,20 @@ void FUN_00234880(void)
                 g_popupState->state = 5;
                 g_popupState->arg = 0;
                 if (special) {
-                    g_popupState->message = FUN_002d8b58(8, 0xad);
+                    g_popupState->message = popupSelectWeightedMessage(8, 0xad);
                     return;
                 }
-                g_popupState->message = FUN_002d8b58(8, slot->id);
+                g_popupState->message = popupSelectWeightedMessage(8, slot->id);
                 return;
             }
         } else if (percent <= threshold) {
             g_popupState->state = 5;
             g_popupState->arg = 0;
             if (special) {
-                g_popupState->message = FUN_002d8b58(9, 0xad);
+                g_popupState->message = popupSelectWeightedMessage(9, 0xad);
                 return;
             }
-            g_popupState->message = FUN_002d8b58(9, slot->id);
+            g_popupState->message = popupSelectWeightedMessage(9, slot->id);
             return;
         }
     }

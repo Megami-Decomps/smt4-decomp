@@ -36,7 +36,7 @@ s32 FUN_00298e00(u32 id);
 s32 idIsAtLeast350(u32 id);
 void FUN_002b7bca(void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 dataTable1bOr1cCompareRecordKeys(const void *left, const void *right);
-void FUN_0029f848(void *list, s32 count, s32 visible, s32 a, s32 b, s32 c);
+void gridNavigationConfigure(void *list, s32 count, s32 visible, s32 a, s32 b, s32 c);
 void uiQuestSortListByEntryKind(s32 kind);
 u32 FUN_00298dc8(u32 id);
 void FUN_0029eb5c(void *list, s32 index);
@@ -128,8 +128,8 @@ void FUN_00189c24(void)
     }
     FUN_002b7bca(quest->cursor.alternate.ids, reportCount, sizeof(u16), dataTable1bOr1cCompareRecordKeys);
     void *reportList = quest->panel.alternate.cursor;
-    FUN_0029f848(reportList, reportCount, 10, 1, 1, 1);
-    FUN_0029f848(quest->cursor.data, openCount, 10, 1, 1, 1);
+    gridNavigationConfigure(reportList, reportCount, 10, 1, 1, 1);
+    gridNavigationConfigure(quest->cursor.data, openCount, 10, 1, 1, 1);
     uiQuestSortListByEntryKind(0);
     for (s32 i = 0; i < reportCount; i++) {
         if (FUN_00298dc8(quest->cursor.alternate.ids[i]) != 0) {

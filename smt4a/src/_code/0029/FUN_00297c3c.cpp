@@ -27,7 +27,7 @@ void FUN_00297c3c(void)
                         controllerSetDestination(model, record->position);
                         controllerSetRotationEulerDegrees(model, 0.0f, record->spatial.fourth, 0.0f);
                         if (slots4FGetActiveValue(model) != record->variant) {
-                            FUN_003fe86c(model, record->variant, 2, 0.0f, 0.0f);
+                            modelPlayClip(model, record->variant, 2, 0.0f, 0.0f);
                         }
                         record->visible = 0;
                     }
@@ -71,7 +71,7 @@ void FUN_00297c3c(void)
                     controllerSetDestination(model, record->position);
                     controllerSetRotationEulerDegrees(model, 0.0f, record->spatial.fourth, 0.0f);
                     if (slots4FGetActiveValue(model) != record->variant) {
-                        FUN_003fe86c(model, record->variant, 2, 0.0f, 0.0f);
+                        modelPlayClip(model, record->variant, 2, 0.0f, 0.0f);
                     }
                     record->visible = 0;
                 }

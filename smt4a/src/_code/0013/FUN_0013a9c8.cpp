@@ -3,7 +3,7 @@
 #include "shard/W6_W6Match2_TitleCommand.h"
 
 extern "C" {
-void FUN_00145084(u32);
+void renderBindPreset(u32);
 void FUN_001640cc(const EffectColor *, const EffectColor *, const EffectColor *, const EffectColor *,
                   f32, f32, f32, f32, f32, f32, f32, f32, f32);
 void renderCtxResetColorScale(void *);
@@ -39,7 +39,7 @@ u32 FUN_0013a9c8(void)
         s32 elapsed = FUN_00144eec();
         g_titleFlags.overlay.frame = g_titleFlags.overlay.frame - elapsed - 1;
     }
-    FUN_00145084(0x401);
+    renderBindPreset(0x401);
     return 0;
 }
 }

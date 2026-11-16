@@ -56,17 +56,17 @@ void FUN_0037c988(SlotScreen *screen, u32 argument, s32 drawExtra, s32 mode, u32
         ScreenOffset position = offset;
         IconPosition *icon = asdTMTexTableEntryAt(0x1a, slot + 0x17d);
         if (slot >= unlocked) {
-            FUN_001835b4(2, 0x1a, 0x229, icon->x + position.x, icon->y + position.y, 0x65);
-            FUN_001835b4(2, 0x1a, 0x16f, icon->x + position.x, icon->y + position.y, 0x65);
-            FUN_001835b4(2, 0x1a, 0x170, icon->x + position.x, icon->y + position.y, 0x65);
-            FUN_001835b4(2, 0x1a, 0x26f, icon->x + position.x, icon->y + position.y, 0x65);
-            FUN_001835b4(2, 0x1a, 0x270, icon->x + position.x, icon->y + position.y, 0x65);
+            texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x229, icon->x + position.x, icon->y + position.y, 0x65);
+            texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x16f, icon->x + position.x, icon->y + position.y, 0x65);
+            texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x170, icon->x + position.x, icon->y + position.y, 0x65);
+            texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x26f, icon->x + position.x, icon->y + position.y, 0x65);
+            texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x270, icon->x + position.x, icon->y + position.y, 0x65);
         } else {
             FUN_003b6354(screen, slot, mode, flags, scale, icon->x, icon->y, &position.x, &position.y, &extra);
-            FUN_001835b4(2, 0x1a, 0x16f, icon->x + position.x, icon->y + position.y, 0x65);
-            FUN_001835b4(2, 0x1a, 0x170, icon->x + position.x, icon->y + position.y, 0x65);
-            FUN_001835b4(2, 0x1a, 0x26f, icon->x + position.x, icon->y + position.y, 0x65);
-            FUN_001835b4(2, 0x1a, 0x270, icon->x + position.x, icon->y + position.y, 0x65);
+            texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x16f, icon->x + position.x, icon->y + position.y, 0x65);
+            texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x170, icon->x + position.x, icon->y + position.y, 0x65);
+            texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x26f, icon->x + position.x, icon->y + position.y, 0x65);
+            texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x270, icon->x + position.x, icon->y + position.y, 0x65);
             FUN_003c33e8(screen, slot, argument, flags, scale, icon->x + position.x, icon->y + position.y);
             if (mode == 1 && screen->phase >= 5) {
                 s32 base = resourceRunOperationIfUnblocked(&screen->cursor);
@@ -74,7 +74,7 @@ void FUN_0037c988(SlotScreen *screen, u32 argument, s32 drawExtra, s32 mode, u32
                     efctSetSpeed(screen->effectSpeed * scale);
                     RenderCtxA *context = g_renderCtx;
                     renderStackSet(&context->stackB, packNibblesAndByte(6, 1, 0));
-                    FUN_001835b4(2, 0x1a, 0x173, icon->x + position.x, icon->y + position.y, 0x65);
+                    texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x173, icon->x + position.x, icon->y + position.y, 0x65);
                     context = g_renderCtx;
                     renderStackSet(&context->stackB, packNibblesAndByte(6, 7, 0));
                 }

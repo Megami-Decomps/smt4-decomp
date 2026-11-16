@@ -230,7 +230,7 @@ s32 FUN_002ad1e0(void *event);
 extern "C" {
 #endif
 
-s32 FUN_002a6f48(s32 kind);
+s32 packageKindToRecordKind(s32 kind);
 
 #ifdef __cplusplus
 }

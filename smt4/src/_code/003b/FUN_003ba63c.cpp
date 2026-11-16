@@ -11,20 +11,20 @@ typedef struct StateDrawWork {
 
 extern RenderCtx *g_titleScene;
 void renderCtxSelectStereoLayout(RenderCtx *context);
-void FUN_002bed3c(void);
-u32 FUN_002c5d80(u32 slot, u32 flags);
+void gxResetColorQuadToWhite(void);
+u32 renderCtxPackPassFlags(u32 slot, u32 flags);
 void FUN_003bb77c(void *view);
 void renderCtxResetColorScale(RenderCtx *context);
 
-/* Draws the view at 0x9C under render state FUN_002c5d80(1, 0) once the work reaches state 3 (nothing in state 0x11). */
+/* Draws the view at 0x9C under render state renderCtxPackPassFlags(1, 0) once the work reaches state 3 (nothing in state 0x11). */
 void FUN_003ba63c(StateDrawWork *work)
 {
     if (work->state == 0x11) {
         return;
     }
     renderCtxSelectStereoLayout(g_titleScene);
-    FUN_002bed3c();
-    renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
+    gxResetColorQuadToWhite();
+    renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
     if (work->state >= 3) {
         FUN_003bb77c(work->view);
     }

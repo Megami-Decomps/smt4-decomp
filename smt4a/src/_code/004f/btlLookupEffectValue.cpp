@@ -26,7 +26,7 @@ extern "C" {
 extern const char *g_btlEffect; /* name of the effect being played */
 
 s32 btlScriptUnitHasFlags(void *state);
-s32 FUN_004f59b0(BtlNamedValueOwner *owner);
+s32 btlGetMaxSlotMetric(BtlNamedValueOwner *owner);
 u32 libc_strlen(const char *text);
 s32 libc_strncmp(const char *a, const char *b, u32 size);
 
@@ -48,7 +48,7 @@ static BtlNamedValue *btlFindEffectValue(BtlNamedValueOwner *owner)
 }
 
 /* Returns -1 while btlScriptUnitHasFlags holds the battle; otherwise the owner's value for the current
- * effect, falling back to FUN_004f59b0 when it has none. */
+ * effect, falling back to btlGetMaxSlotMetric when it has none. */
 s32 btlLookupEffectValue(BtlNamedValueOwner *owner)
 {
     BtlNamedValue *entry;
@@ -63,7 +63,7 @@ s32 btlLookupEffectValue(BtlNamedValueOwner *owner)
         value = entry->value;
     }
     if (value == 0) {
-        value = FUN_004f59b0(owner);
+        value = btlGetMaxSlotMetric(owner);
     }
     return value;
 }

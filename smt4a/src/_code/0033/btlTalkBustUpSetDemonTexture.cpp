@@ -48,7 +48,7 @@ void btlTalkBustUpSetDemonTexture(u32 demonId, s32 deferred)
             if (aocRunByName(g_aocSystem, 0x10, portrait->textureNode, 1) != 0) {
                 aocLoadTextureNode(g_aocSystem, 0x10, portrait->textureNode, 0x10000);
             } else {
-                FUN_0014afd0(0x10, portrait->textureNode);
+                asdTMTexTablePrepareNodeImage(0x10, portrait->textureNode);
             }
             FUN_003d44ac(portrait);
             uiSpriteScreenSetupForMode(portrait);

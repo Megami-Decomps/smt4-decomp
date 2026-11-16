@@ -1,4 +1,4 @@
-/* NON_MATCHING: stripped debug trace and the mode switch shape now match retail; remaining differences are register choice (retail keeps the constant 1 in r7), FUN_0029f848's stack arguments (two str vs stm) and literal pool order. */
+/* NON_MATCHING: stripped debug trace and the mode switch shape now match retail; remaining differences are register choice (retail keeps the constant 1 in r7), gridNavigationConfigure's stack arguments (two str vs stm) and literal pool order. */
 /* Opens the Config screen: allocates and clears its work area, acquires its resources and picks
  * the initial selection from the story flags. */
 #include "common.h"
@@ -10,7 +10,7 @@
 extern "C" {
 
 int fileSlotLoad(int id);
-int FUN_0029f848(ConfigWork *config, u32 value, int a, int b, int c, int d);
+int gridNavigationConfigure(ConfigWork *config, u32 value, int a, int b, int c, int d);
 int asdTMTexTableLoadEntryAsync(int type, int index);
 int dataTableGetEntries(void);
 int memClear(void *ptr, int size);                  /* zero a block */
@@ -45,7 +45,7 @@ void configOpen(void)
     value = dataTableGet(0x36, 0);
     dataTableGetEntries();
     value = dataTableGetCount(value);
-    FUN_0029f848(config, value, 1, 1, 0, 1);
+    gridNavigationConfigure(config, value, 1, 1, 0, 1);
     mode = FUN_002973ec();
     selection = 1;
     if (gameFlagIsSet(0x555) != 0 && gameFlagIsSet(0x557) != 0) {

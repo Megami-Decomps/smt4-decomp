@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001517b4(...);
+int padQueryLogicalKey(...);
 int eventQueueAddUniqueIfValid(int);
 int uiSpriteSetKeyframe(int, int, int);
 int uiSpriteSetImageKeyframe(int, int, int);
@@ -21,7 +21,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001517b4. */
+/* Supplied declaration required: padQueryLogicalKey. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
@@ -49,7 +49,7 @@ void FUN_002f7f6c(int param_1)
     FUN_003450d4(temp_v1,0,param_1 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2,0,1);
     if (temp_v1 == 0) {
       temp_v1 = 0;
-      FUN_001517b4(0,1);
+      padQueryLogicalKey(0,1);
       if (!(temp_v1 == 0 && temp_v2[0] == '\0')) {
         if (temp_v0 < *(int *)(param_1 + 0x24ec)) {
           if (*(int *)(param_1 + 0x24f4) < 0) {
@@ -87,7 +87,7 @@ void FUN_002f7f6c(int param_1)
       }
       else {
         temp_v0 = 1;
-        FUN_001517b4();
+        padQueryLogicalKey();
         if (temp_v0 != 0) {
           eventQueueAddUniqueIfValid(0x100020f);
           if (*(int *)(param_1 + 0x24f4) < 0) {

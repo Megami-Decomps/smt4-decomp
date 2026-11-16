@@ -5,7 +5,7 @@
 extern "C" {
 void sysPlaySe(u32 sound);
 void asdLoadFileAsyncSimple(const char *path, void **buffer, s32 flags);
-ScriptRunState *FUN_00275bc8(void *script, void *messages);
+ScriptRunState *scrScriptProcessCreate(void *script, void *messages);
 u32 scrScriptProcessStartEntry(ScriptRunState *process, s32 entry);
 u32 scrRunOpcodesStub(ScriptRunState *process);
 void scriptProcessSetMode(ScriptRunState *process, s32 mode);
@@ -31,7 +31,7 @@ u32 scriptHolderUpdate(ScriptHolder *holder)
         if (holder->unk08) {
             sysPlaySe(0x92);
         }
-        holder->process = FUN_00275bc8(holder->buf0C, holder->buf10);
+        holder->process = scrScriptProcessCreate(holder->buf0C, holder->buf10);
         scriptProcessSetMode(holder->process, 2);
         scrScriptProcessStartEntry(holder->process, holder->phase.entry);
         holder->phase.state = 2;

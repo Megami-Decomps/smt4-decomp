@@ -52,13 +52,13 @@ void FUN_0046868c(NpcDummyBindings *owner, u32, s32)
                     world.x += (f32)marker.offsetX;
                     world.y += (f32)marker.offsetY;
                     f32 screen[3];
-                    FUN_002a1850(screen, 0, reinterpret_cast<const ProjectionMatrices *>(FUN_00152f54()), &world.x);
+                    FUN_002a1850(screen, 0, reinterpret_cast<const ProjectionMatrices *>(asdCameraGetSavedRenderPairs()), &world.x);
                     s32 x = (s32)((screen[0] - (f32)width) + (f32)(width / 2) + (f32)parallax);
                     s32 y = (s32)(screen[1] - (f32)height);
-                    FUN_001835b4(2, 8, 0x18D, x, y, 2);
+                    texDrawTableEntryAtStoredOrigin(2, 8, 0x18D, x, y, 2);
                     for (u32 channel = 0; channel < 3; ++channel) {
                         efctSetSpeed(messageGetActiveValue(channel));
-                        FUN_001835b4(2, 8, 0x18E + channel, x, y, 6);
+                        texDrawTableEntryAtStoredOrigin(2, 8, 0x18E + channel, x, y, 6);
                     }
                     efctSetSpeed(1.0f);
                 }

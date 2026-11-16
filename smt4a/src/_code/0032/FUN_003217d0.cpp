@@ -57,12 +57,12 @@ void FUN_003217d0(ResultPanel *panel)
         f32 first = vec2GetSpeed(&panel->elements[0]);
         if (first > minimumScale) {
             efctSetSpeed(first);
-            FUN_001835b4(2, 12, 1000, frame, 0, 0x1F);
+            texDrawTableEntryAtStoredOrigin(2, 12, 1000, frame, 0, 0x1F);
             f32 third = vec2GetSpeed(&panel->elements[2]);
             if (third > minimumScale) {
                 efctSetSpeed(third);
                 renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
-                FUN_001835b4(2, 12, 0x3E9, frame, 0, 0x24);
+                texDrawTableEntryAtStoredOrigin(2, 12, 0x3E9, frame, 0, 0x24);
                 renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 7, 0));
             }
             efctSetSpeed(1.0f);

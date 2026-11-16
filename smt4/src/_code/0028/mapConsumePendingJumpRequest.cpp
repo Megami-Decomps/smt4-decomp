@@ -6,7 +6,7 @@ extern "C" {
 extern GameState g_gameState;
 MapJumpRequest *gameJumpRequestGet(void);
 void gameJumpRequestClear(void);
-void FUN_00289574(u32 map, u32 entrance, u32 object, f32, f32, f32, f32, f32);
+void gameStateSetJumpRequest(u32 map, u32 entrance, u32 object, f32, f32, f32, f32, f32);
 void mapDepartSetTarget(u32 map, u32 entrance, u32 object);
 
 // Consume a saved jump request and optionally switch to its destination sequence.
@@ -17,7 +17,7 @@ u32 mapConsumePendingJumpRequest(u32 context, s32 switchSequence)
     switch (request->kind) {
     case 1:
         handled = 1;
-        FUN_00289574(request->map, request->entrance, request->object,
+        gameStateSetJumpRequest(request->map, request->entrance, request->object,
             request->transform[0], request->transform[1], request->transform[2],
             request->transform[3], request->transform[4]);
         if (switchSequence != 0) {
@@ -27,7 +27,7 @@ u32 mapConsumePendingJumpRequest(u32 context, s32 switchSequence)
         break;
     case 2:
         handled = 1;
-        FUN_00289574(request->map + 100, request->entrance, (u32)-1,
+        gameStateSetJumpRequest(request->map + 100, request->entrance, (u32)-1,
             request->transform[0], request->transform[1], request->transform[2],
             request->transform[3], request->transform[4]);
         g_gameState.currentObjectId = (u32)-1;

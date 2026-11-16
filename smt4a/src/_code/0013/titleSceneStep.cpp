@@ -10,19 +10,19 @@ typedef struct TitleState0013705c {
     /* 0x08 */ u32 sceneArg;
 } TitleState0013705c;
 
-s32 FUN_001696f4(void);
+s32 gxIsStereoscopic3dEnabled(void);
 void effectRestoreSavedRenderPairs(u32 scene, s32 arg);
 void FUN_00167eb0(u32 arg);
 
 extern TitleState0013705c g_titleFlags; /* 0x57ffd0 */
 extern u32 g_renderCtx; /* 0x59dbb4 */
 
-/* Title scene step: when FUN_001696f4 reports 1 and the title is ready, forwards the pending value and starts the scene unless skipped. */
+/* Title scene step: when gxIsStereoscopic3dEnabled reports 1 and the title is ready, forwards the pending value and starts the scene unless skipped. */
 u32 titleSceneStep(void)
 {
-    if (FUN_001696f4() == 1 && g_titleFlags.ready != 0) {
-        if (FUN_00152f54() != 0) {
-            effectRestoreSavedRenderPairs(g_renderCtx, FUN_00152f54());
+    if (gxIsStereoscopic3dEnabled() == 1 && g_titleFlags.ready != 0) {
+        if (asdCameraGetSavedRenderPairs() != 0) {
+            effectRestoreSavedRenderPairs(g_renderCtx, asdCameraGetSavedRenderPairs());
         }
         if (g_titleFlags.skipped == 0) {
             FUN_00167eb0(g_titleFlags.sceneArg);

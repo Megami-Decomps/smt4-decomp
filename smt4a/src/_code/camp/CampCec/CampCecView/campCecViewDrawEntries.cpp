@@ -32,7 +32,7 @@ struct CecViewMarkEntry {
 };
 extern "C" {
 extern CampCecViewA *g_campCecView;
-s32 FUN_001692ac(u32, u32);
+s32 renderCtxPackPassFlags(u32, u32);
 u32 gameDataBlocksGetWord27E90();
 void uiDrawNumberFrame(u32 *, s32, s32, u32, u32);
 const CecViewMarkEntry *gameDataGetMarkEntry(s32);
@@ -46,9 +46,9 @@ u32 campCecViewDrawEntries()
 {
     CampCecViewA *view = g_campCecView;
     CecViewDrawState *draw = (CecViewDrawState *)view;
-    FUN_00157558(g_renderCtx);
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     RenderCtxA *render = g_renderCtx;
-    renderCtxPushA(render, FUN_001692ac(1, 0));
+    renderCtxPushA(render, renderCtxPackPassFlags(1, 0));
     uiDrawNumberFrame(draw->header, 0, 0, gameDataBlocksGetWord27E90(), 0);
     for (s32 i = 0; i < 3; ++i) {
         const CecViewMarkEntry *entry = gameDataGetMarkEntry(draw->top + i);

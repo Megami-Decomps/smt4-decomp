@@ -32,6 +32,6 @@ extern "C" s32 FUN_003a0164(const u16 *left, const u16 *right)
     u16 leftPower = equipmentSortPower(*left);
     s32 result = equipmentSortPower(*right) - leftPower;
     if (result == 0)
-        result = FUN_00230f44(left) - FUN_00230f44(right);
+        result = aocEntryGetSortOrder(left) - aocEntryGetSortOrder(right);
     return result;
 }

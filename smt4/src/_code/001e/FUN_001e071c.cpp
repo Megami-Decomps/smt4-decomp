@@ -10,7 +10,7 @@ int FUN_0025ee64(...);
 int FUN_0025f300(...);
 int campDrawPartyComparisonIndicators(...);
 int FUN_0025f6b8(...);
-int FUN_002bed3c(...);
+int gxResetColorQuadToWhite(...);
 int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
 int renderCtxSelectStereoLayout(...);
@@ -48,7 +48,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_0025f300. */
 /* Supplied declaration required: campDrawPartyComparisonIndicators. */
 /* Supplied declaration required: FUN_0025f6b8. */
-/* Supplied declaration required: FUN_002bed3c. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
@@ -67,7 +67,7 @@ void FUN_001e071c(fn_001e071c_arg0 *param_1)
   int *piVar4;
   
   renderCtxSelectStereoLayout(g_titleScene);
-  FUN_002bed3c();
+  gxResetColorQuadToWhite();
   if (param_1->field_0x3048 == 6) {
     if (*(int *)&param_1[1].field_0x28c8 == 3) {
       if (param_1->field_0x1342 != '\0') {

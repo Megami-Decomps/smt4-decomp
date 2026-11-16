@@ -24,8 +24,8 @@ void FUN_0049e7e4(ListPanel *panel, s32 x, s32 y, f32 speed)
     s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
     efctSetSpeed(speed);
     x += parallax;
-    FUN_001835b4(2, 0x33, 7, x, y, 0xC9);
-    FUN_001835b4(2, 0x33, 0x12, x, y, 0xC9);
+    texDrawTableEntryAtStoredOrigin(2, 0x33, 7, x, y, 0xC9);
+    texDrawTableEntryAtStoredOrigin(2, 0x33, 0x12, x, y, 0xC9);
 
     s32 thumbOffset = 0;
     TextureTableEntryIV *track = asdTMTexTableEntryAt(0x33, 0x13);
@@ -50,7 +50,7 @@ void FUN_0049e7e4(ListPanel *panel, s32 x, s32 y, f32 speed)
     bool suspended = renderCtxSuspendScissor(g_renderCtx);
 
     FUN_00168e00(track->x + x, track->y + y + thumbOffset, track->placement->width, thumbHeight);
-    FUN_001835b4(2, 0x33, 0x13, x, y, 0xCE);
+    texDrawTableEntryAtStoredOrigin(2, 0x33, 0x13, x, y, 0xCE);
     if (suspended) {
         renderCtxResumeScissor(g_renderCtx);
     }

@@ -49,12 +49,12 @@ unsigned int FUN_001f3e48(void)
   if (*(int *)(unaff_r4 + 0x14) == DAT_0057a698) {
     FUN_004fddf4(0,0,DAT_0057a69c,0x10,0,DAT_0057a6a0,0,2,0xffffffff,in_stack_00000000);
   }
-  if (((*(int *)(unaff_r4 + 0x14) == DAT_0057a688) && (iVar1 = FUN_0013def0(0), iVar1 != 1)) &&
-     (iVar1 = FUN_0013def0(0), iVar1 != 3)) {
+  if (((*(int *)(unaff_r4 + 0x14) == DAT_0057a688) && (iVar1 = pairedAvailabilityGetState(0), iVar1 != 1)) &&
+     (iVar1 = pairedAvailabilityGetState(0), iVar1 != 3)) {
     FUN_001f4908(0,DAT_0057a68c,0xff);
   }
-  if (((*(int *)(unaff_r4 + 0x14) == DAT_0057a690) && (iVar1 = FUN_0013def0(1), iVar1 != 1)) &&
-     (iVar1 = FUN_0013def0(1), iVar1 != 3)) {
+  if (((*(int *)(unaff_r4 + 0x14) == DAT_0057a690) && (iVar1 = pairedAvailabilityGetState(1), iVar1 != 1)) &&
+     (iVar1 = pairedAvailabilityGetState(1), iVar1 != 3)) {
     FUN_001f4908(1,DAT_0057a694,0xff);
   }
   if (DAT_0057a6a4 < *(int *)(unaff_r4 + 0x14)) {

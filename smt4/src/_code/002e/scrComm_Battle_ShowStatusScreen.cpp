@@ -10,7 +10,7 @@ void stateSetBitFlag(u32 unit, s32 mode);
 void FUN_00295a18(u32 unit, s32 mode);
 void FUN_00250d84(u32 unit, s32 mode);
 void FUN_0028c040();
-void FUN_0029e874(s32 mode);
+void gameSetIconDisplayEnabled(s32 mode);
 void statusOpenSkillSelection(u16 unit, s32 mode);
 void FUN_00218b9c(BtlUiObjC *panel);
 s32 statusScreenIsClosed();
@@ -40,7 +40,7 @@ u32 scrComm_Battle_ShowStatusScreen()
     case 1:
         scrWorkSetValue(0, 2);
         FUN_0028c040();
-        FUN_0029e874(0);
+        gameSetIconDisplayEnabled(0);
         statusOpenSkillSelection(static_cast<u16>(unit), 0);
         FUN_00218b9c(&g_btlUiBlock->objC);
         break;

@@ -29,7 +29,7 @@ typedef struct BtlPartner {
 } BtlPartner;
 
 BtlListedEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 id);
-BtlPartner *FUN_0027da30(BtlMainState *state, s32 id);
+BtlPartner *btlFindEntryBlockByMemberId(BtlMainState *state, s32 id);
 void FUN_003be7d0(BtlListedEntry *entry);
 void FUN_00336b98(BtlMainState *state, s32 partnerId);
 s32 FUN_00293230(BtlMainState *state);
@@ -46,7 +46,7 @@ void btlShowListedActionMessage(BtlContext *context, BtlScene *scene, s32 id, u3
     }
     messageId = scene->slots[id].messageId;
     if (entry->flags & 0x10) {
-        BtlPartner *partner = FUN_0027da30(context->state, id);
+        BtlPartner *partner = btlFindEntryBlockByMemberId(context->state, id);
         if (partner != NULL) {
             FUN_003be7d0(entry);
             FUN_00336b98(context->state, partner->id);

@@ -14,7 +14,7 @@ extern "C" {
 extern LmapModelState *g_lmapMainState;
 extern char DAT_00531310[];     /* "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\lmapMain.cpp" */
 
-void *FUN_00178b04(u32 size, const char *file, int line);   /* allocate with source location */
+void *asdMemoryAllocTraced(u32 size, const char *file, int line);   /* allocate with source location */
 MoriModelContent *modelListInit(void *mem);                 /* content constructor */
 void FUN_0040a908(MoriModelContent *content, u32 flags);
 void FUN_0040a918(MoriModelContent *content, u32 flags);
@@ -35,7 +35,7 @@ void lmapRebuildModelContent(void)
     LmapModelState *state = g_lmapMainState;
     if (state != NULL) {
         u32 pending = state->pending;
-        void *mem = FUN_00178b04(0x20, DAT_00531310, 0x265d);
+        void *mem = asdMemoryAllocTraced(0x20, DAT_00531310, 0x265d);
         if (mem != NULL) {
             mem = modelListInit(mem);
         }

@@ -22,12 +22,12 @@ struct EventRow {
 };
 
 extern "C" {
-s32 FUN_00163aa4(EventRowSprite* sprite, f32 speed);
+s32 uiSpriteAdvanceAnimation(EventRowSprite* sprite, f32 speed);
 void FUN_0049d140(EventRow* row, u32 state, u32 entry);
 void FUN_0049d770(EventRow* row);
 void FUN_0049df84(EventRow* row);
 void updateNineRowListInput(EventRow* row);
-s32 FUN_001517b4(u32 button, u32 mode);
+s32 padQueryLogicalKey(u32 button, u32 mode);
 void eventQueueAddUniqueIfValid(u32 event);
 void FUN_0049ea54(EventRow* row);
 }
@@ -43,7 +43,7 @@ extern "C" u32 eventRowUpdateState(EventRow* row, u32 handle)
 {
     switch (row->state) {
     case 1:
-        if (!FUN_00163aa4(&row->firstSprite, 1.0f)) {
+        if (!uiSpriteAdvanceAnimation(&row->firstSprite, 1.0f)) {
             break;
         }
         FUN_0049d140(row, row->nextState, 0);
@@ -61,13 +61,13 @@ extern "C" u32 eventRowUpdateState(EventRow* row, u32 handle)
         }
         break;
     case 5:
-        if (FUN_00163aa4(&row->secondSprite, 1.0f)) {
+        if (uiSpriteAdvanceAnimation(&row->secondSprite, 1.0f)) {
             FUN_0049d140(row, row->nextState, 0);
         }
         break;
     case 6:
         updateNineRowListInput(row);
-        if (FUN_001517b4(1, 1)) {
+        if (padQueryLogicalKey(1, 1)) {
             eventQueueAddUniqueIfValid(0x100020F);
             uiSpriteSelectAnim(&row->secondSprite, 1);
             FUN_0049d140(row, 5, 3);
@@ -84,8 +84,8 @@ extern "C" u32 eventRowUpdateState(EventRow* row, u32 handle)
             break;
         }
         {
-            s32 complete = FUN_00163aa4(&row->firstSprite, 1.0f);
-            FUN_00163aa4(&row->secondSprite, 1.0f);
+            s32 complete = uiSpriteAdvanceAnimation(&row->firstSprite, 1.0f);
+            uiSpriteAdvanceAnimation(&row->secondSprite, 1.0f);
             if (complete) {
                 FUN_0049d140(row, row->nextState, 0);
             }
@@ -93,7 +93,7 @@ extern "C" u32 eventRowUpdateState(EventRow* row, u32 handle)
         break;
     case 9:
         updateNineRowListInput(row);
-        if (!FUN_001517b4(1, 1) && !FUN_001517b4(0, 1)) {
+        if (!padQueryLogicalKey(1, 1) && !padQueryLogicalKey(0, 1)) {
             break;
         }
         eventQueueAddUniqueIfValid(0x100020E);

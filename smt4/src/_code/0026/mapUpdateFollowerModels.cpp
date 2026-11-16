@@ -41,8 +41,8 @@ extern GameStateHide g_gameState;
 void animOwnerSetScale(AsdMdlObject *object, f32 scale);
 void nodeSetTranslation(AsdMdlNode *node, s32 index, f32 *position);
 void nodeSetScale(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
-void FUN_0029bb14(AsdMdlNode *node, f32 value);
-void FUN_0028c618(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
+void modelSetScale(AsdMdlNode *node, f32 value);
+void modelPartSetRotationDegrees(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
 void modelSelectPrimaryMotion(AsdMotionModel *model, s32 motionIndex, f32 blend);
 s32 gameFlagIsSet(u32 flag);
 u32 modelGetCurrentMotion(Inner0020ffe0 *model);
@@ -102,7 +102,7 @@ void mapUpdateFollowerModels(FollowerWork *work)
     }
     nodeSetTranslation(work->body->node, 0, g_lmapScene->position);
     nodeSetScale(work->body->node, 0, work->scale * 50.0f, work->scale * 50.0f, work->scale * 50.0f);
-    FUN_0029bb14(work->body->node, work->tilt);
+    modelSetScale(work->body->node, work->tilt);
     motion = 0;
     if (gameFlagIsSet(0x16B) != 0) {
         motion = 1;
@@ -113,7 +113,7 @@ void mapUpdateFollowerModels(FollowerWork *work)
         modelSelectPrimaryMotion((AsdMotionModel *)work->body->node, motion, 0.0f);
     }
     nodeSetTranslation(work->shadow->node, 0, g_lmapScene->position);
-    FUN_0028c618(work->shadow->node, 0, 0.0f, g_lmapScene->height, 0.0f);
+    modelPartSetRotationDegrees(work->shadow->node, 0, 0.0f, g_lmapScene->height, 0.0f);
     nodeSetScale(work->shadow->node, 0, 50.0f, 50.0f, 50.0f);
     if (work->shadowMotionPending != 0) {
         modelSelectPrimaryMotion((AsdMotionModel *)work->shadow->node, (s32)work->shadowMotion, 0.0f);

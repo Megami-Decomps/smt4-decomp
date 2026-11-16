@@ -5,7 +5,7 @@
 extern "C" {
 
 int nn_os_LightEvent_Initialize(...);
-int FUN_002e3140(...);
+int resultHandleFailure(...);
 int FUN_002fb0d4(...);
 
 /* stack frame of param_4: 8 slot(s), 32 byte(s) */
@@ -26,7 +26,7 @@ extern int FUN_001b5cec(...); /* 0x1b5cec */
 extern unsigned char LAB_001bc5f4; /* 0x1bc5f4 */
 
 /* Supplied declaration required: nn_os_LightEvent_Initialize. */
-/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: FUN_002fb0d4. */
 
 
@@ -57,7 +57,7 @@ unsigned int FUN_001afc38(int param_1,int param_2,int param_3,unsigned int param
       temp_v4 = &LAB_00100ded;
       FUN_002fb0d4(temp_v0,&temp_v1,FUN_001b5cec,&temp_v5,param_2 + param_3,param_4,0,0);
       if (((temp_v0 & 0x7e00000) != 0x600000) && ((int)temp_v0 < 0)) {
-        FUN_002e3140(temp_v0);
+        resultHandleFailure(temp_v0);
       }
       *(unsigned char *)(param_1 + 0xe) = (unsigned char)(temp_v0 >> 0x1f) ^ 1;
     }

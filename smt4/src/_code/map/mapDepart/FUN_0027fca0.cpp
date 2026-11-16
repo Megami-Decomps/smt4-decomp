@@ -28,11 +28,11 @@ void FUN_0027fca0(s32 variant)
     struct EffectModeView { u8 prefix[0x21c]; s32 mode; };
     const EffectModeView *state = reinterpret_cast<const EffectModeView *>(&g_gameState);
     if (state->mode == 0) {
-        FUN_00291e40(DAT_00447538 + 0x10001f5, position);
+        soundActorStartOnFreeChannel(DAT_00447538 + 0x10001f5, position);
     } else if (state->mode == 1) {
-        FUN_00291e40(DAT_00447538 + 0x10001f7, position);
+        soundActorStartOnFreeChannel(DAT_00447538 + 0x10001f7, position);
     } else if (state->mode == 2) {
-        FUN_00291e40(DAT_00447538 + 0x10001f9, position);
+        soundActorStartOnFreeChannel(DAT_00447538 + 0x10001f9, position);
     }
 }
 }

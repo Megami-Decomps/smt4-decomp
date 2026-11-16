@@ -52,7 +52,7 @@ s32 NaviMain_GetCurrentMap(void *navi);
 void pairCopy(void *source, f32 *destination);
 void uiGetEntrySize(u32 table, u32 sprite, s32 *width, s32 *height);
 void efctSetSpeed(f32 speed);
-s32 FUN_002c5d80(u32 a, u32 b);
+s32 renderCtxPackPassFlags(u32 a, u32 b);
 void FUN_002b0750(u32 layer, u32 table, u32 sprite, s32 x, s32 y, s32 width, s32 height, u32 flags);
 
 void FUN_0039af94(MapMarkerScreen *screen)
@@ -110,7 +110,7 @@ void FUN_0039af94(MapMarkerScreen *screen)
         if (screen->entries[i].active != 0) {
             efctSetSpeed(1.0f);
             RenderCtx *context = g_titleScene;
-            s32 state = FUN_002c5d80(1, 0);
+            s32 state = renderCtxPackPassFlags(1, 0);
             renderStackPush(&context->stackA, state);
             FUN_002b0750(9, 0x13, sprite, (s32)(origin[0] + (f32)drawX), (s32)(origin[1] + (f32)drawY),
                          drawWidth, drawHeight, 0xB);

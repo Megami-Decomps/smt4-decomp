@@ -13,13 +13,13 @@ f32 vec2GetSpeed(const void *object);
 static __inline void startPanelEffects(u32 x, u32 y, f32 speed)
 {
     efctSetSpeed(speed);
-    FUN_001835b4(2, 0x11, 0xB5, x, y, 0xC9);
+    texDrawTableEntryAtStoredOrigin(2, 0x11, 0xB5, x, y, 0xC9);
     for (s32 index = 0; index < 3; ++index) {
         PartyMember* member = partyPanelGetMember(index + 13);
         if (member != NULL) {
             efctSetSpeed(vec2GetSpeed(member) * speed);
         }
-        FUN_001835b4(2, 0x11, index + 0xB8, x, y, 0xCE);
+        texDrawTableEntryAtStoredOrigin(2, 0x11, index + 0xB8, x, y, 0xCE);
         efctSetSpeed(speed);
     }
 }

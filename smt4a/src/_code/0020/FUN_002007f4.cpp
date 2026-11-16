@@ -35,17 +35,17 @@ typedef char BufferedRowsOffsets[
     offsetof(BufferedRowsWork, selected) == 0x6f0 &&
     sizeof(BufferedRowsPayload) == 0x130 ? 1 : -1];
 extern "C" {
-void FUN_00163aa4(UiSpriteState *, f32);
+void uiSpriteAdvanceAnimation(UiSpriteState *, f32);
 s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 void __aeabi_memcpy4(void *, const void *, u32);
-void FUN_00203b40(BufferedRowsDisplay *, u32, u32, u32, u32, u32);
+void gridNavigationConfigure(BufferedRowsDisplay *, u32, u32, u32, u32, u32);
 
 void FUN_002007f4(BufferedRowsWork *work)
 {
     switch (work->state) {
     case 0:
         for (s32 index = 0; index < 5; ++index)
-            FUN_00163aa4(&work->rows[index], 1.0f);
+            uiSpriteAdvanceAnimation(&work->rows[index], 1.0f);
         if (!uiSpriteGetCompletionState(&work->rows[4]))
             return;
         work->state = 1;
@@ -54,7 +54,7 @@ void FUN_002007f4(BufferedRowsWork *work)
         break;
     case 2:
         for (s32 index = 0; index < 5; ++index)
-            FUN_00163aa4(&work->rows[index], 1.0f);
+            uiSpriteAdvanceAnimation(&work->rows[index], 1.0f);
         if (!uiSpriteGetCompletionState(&work->rows[4]))
             return;
         work->state = 3;
@@ -71,7 +71,7 @@ void FUN_002007f4(BufferedRowsWork *work)
                 work->buffers[work->display.activeBuffer].primaryData, 200);
     __aeabi_memcpy4(work->display.secondaryData,
                 work->buffers[work->display.activeBuffer].secondaryData, 100);
-    FUN_00203b40(&work->display, work->buffers[work->display.activeBuffer].source, 5, 1, 0, 1);
+    gridNavigationConfigure(&work->display, work->buffers[work->display.activeBuffer].source, 5, 1, 0, 1);
     s16 animation = work->selected ? 0 : 2;
     for (s32 index = 0; index < 5; ++index)
         uiSpriteSelectAnim(&work->rows[index], animation);

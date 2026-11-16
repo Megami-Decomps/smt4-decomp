@@ -7,7 +7,7 @@
 extern "C" {
 
 int textDrawString(...);
-int FUN_00164b5c(...);
+int texDrawCompositeSprite(...);
 int vec2GetXInt(...);
 int vec2GetYInt(...);
 int efctSetSpeed(void);
@@ -21,7 +21,7 @@ int FUN_002aa038(...);
 int FUN_002c8940(unsigned int, unsigned int);
 int FUN_002f197c(...);
 int uiDrawRotatingGridHighlights(...);
-int FUN_00344cd0(...);
+int uiDrawListScrollBar(...);
 int FUN_0034abe0(...);
 int VectorSignedToFloat(...);
 
@@ -46,16 +46,16 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: FUN_00164b5c. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: efctSetSpeed. */
-extern int FUN_001692ac(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: debugDrawText. */
-extern int FUN_0026140c(void);
+extern int saveGetUserSettingsBlock(void);
 /* Supplied declaration required: FUN_00285b58. */
 /* Supplied declaration required: FUN_002a7bb8. */
 /* Supplied declaration required: FUN_002a968c. */
@@ -63,7 +63,7 @@ extern int FUN_0026140c(void);
 /* Supplied declaration required: FUN_002c8940. */
 /* Supplied declaration required: FUN_002f197c. */
 /* Supplied declaration required: uiDrawRotatingGridHighlights. */
-/* Supplied declaration required: FUN_00344cd0. */
+/* Supplied declaration required: uiDrawListScrollBar. */
 /* Supplied declaration required: FUN_0034abe0. */
 
 
@@ -87,9 +87,9 @@ unsigned int FUN_0023b8b0(void)
   unsigned int in_fpscr;
   
   temp_v0 = g_unite;
-  FUN_00157558(reinterpret_cast<RenderCtxA *>(g_renderCtx));
+  renderCtxSelectDisplayAreaForStereoMode(reinterpret_cast<RenderCtxA *>(g_renderCtx));
   temp_v2 = g_renderCtx;
-  temp_v1 = FUN_001692ac(1,0);
+  temp_v1 = renderCtxPackPassFlags(1,0);
   piVar11 = (int *)(temp_v2 + 0x1258);
   temp_v8 = *piVar11;
   temp_v9 = piVar11[temp_v8 + 2];
@@ -130,8 +130,8 @@ unsigned int FUN_0023b8b0(void)
     temp_v8 = vec2GetXInt(temp_v0 + 0x254);
     temp_v9 = vec2GetYInt(temp_v0 + 0x254);
     efctSetSpeed();
-    FUN_001835b4(2,0x1a,0x271,temp_v2 + temp_v8,temp_v9 + temp_v1,0x79);
-    FUN_00344cd0(temp_v0 + 0x4fc,temp_v2 + temp_v8,temp_v9 + temp_v1,0x1a,0x1c,0x1d,0x1e,0x18,0x1a,0x19,0x1b,
+    texDrawTableEntryAtStoredOrigin(2,0x1a,0x271,temp_v2 + temp_v8,temp_v9 + temp_v1,0x79);
+    uiDrawListScrollBar(temp_v0 + 0x4fc,temp_v2 + temp_v8,temp_v9 + temp_v1,0x1a,0x1c,0x1d,0x1e,0x18,0x1a,0x19,0x1b,
                  (int)*(short *)(temp_v0 + 0x476),(int)*(short *)(temp_v0 + 0x472),
                  (int)*(short *)(temp_v0 + 0x474),0x79,0);
     efctSetSpeed();
@@ -144,8 +144,8 @@ unsigned int FUN_0023b8b0(void)
     temp_v8 = vec2GetXInt(temp_v0 + 0x254);
     temp_v9 = vec2GetYInt(temp_v0 + 0x254);
     efctSetSpeed();
-    FUN_001835b4(2,0x1a,0x271,temp_v2 + temp_v8,temp_v1 + temp_v9,0x79);
-    FUN_00344cd0(temp_v0 + 0x560,temp_v2 + temp_v8,temp_v1 + temp_v9,0x1a,0x1c,0x1d,0x1e,0x18,0x1a,0x19,0x1b,
+    texDrawTableEntryAtStoredOrigin(2,0x1a,0x271,temp_v2 + temp_v8,temp_v1 + temp_v9,0x79);
+    uiDrawListScrollBar(temp_v0 + 0x560,temp_v2 + temp_v8,temp_v1 + temp_v9,0x1a,0x1c,0x1d,0x1e,0x18,0x1a,0x19,0x1b,
                  (int)*(short *)(temp_v0 + 0x476),(int)*(short *)(temp_v0 + 0x472),
                  (int)*(short *)(temp_v0 + 0x474),0x79,0);
     efctSetSpeed();
@@ -226,7 +226,7 @@ unsigned int FUN_0023b8b0(void)
     temp_v5 = vec2GetYInt(temp_v0 + 0x1c8);
     FUN_002f197c(temp_v4,temp_v5);
   }
-  temp_v2 = FUN_0026140c();
+  temp_v2 = saveGetUserSettingsBlock();
   temp_v6 = temp_v2 + 0x20;
   if (*(int *)(temp_v0 + 0x400) == 5 || *(int *)(temp_v0 + 0x400) == 6) {
     temp_v11 = *(char *)(temp_v0 + 0x9090) != '\0';
@@ -234,8 +234,8 @@ unsigned int FUN_0023b8b0(void)
       temp_v6 = (unsigned int)*(unsigned char *)(temp_v2 + 0x33);
     }
     if (temp_v11 && temp_v6 != 0) {
-      FUN_001835b4(2,0x1a,0x1d9,0,0,0xfb);
-      FUN_00164b5c(2,0x1a,0x13,0,0,0xfb);
+      texDrawTableEntryAtStoredOrigin(2,0x1a,0x1d9,0,0,0xfb);
+      texDrawCompositeSprite(2,0x1a,0x13,0,0,0xfb);
       temp_v2 = asdTMTexTableEntryAt(0x1a,0x1dc);
       VectorSignedToFloat((int)*(short *)(temp_v2 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v2 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);

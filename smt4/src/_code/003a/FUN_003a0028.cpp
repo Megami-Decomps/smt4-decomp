@@ -7,12 +7,12 @@ struct RankedEntry {
 
 extern "C" {
 
-s32 FUN_00230f44(const RankedEntry *entry);
+s32 aocEntryGetSortOrder(const RankedEntry *entry);
 
 static s32 compareLookupRank(const RankedEntry *left, const RankedEntry *right)
 {
-    s32 leftRank = FUN_00230f44(left);
-    s32 rightRank = FUN_00230f44(right);
+    s32 leftRank = aocEntryGetSortOrder(left);
+    s32 rightRank = aocEntryGetSortOrder(right);
     return leftRank - rightRank;
 }
 

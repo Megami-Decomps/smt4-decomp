@@ -7,7 +7,7 @@
 
 extern "C" {
 void sysMemClear(void *destination, u32 size);
-void FUN_004bcd90(UnitRecord *unit);
+void unitRecomputeDerivedStats(UnitRecord *unit);
 u16 recordGetScaledMaximum(UnitRecord *unit);
 
 // Restore the saved demon's stats, skills, name, and status into a runtime unit.
@@ -38,7 +38,7 @@ void FUN_0035ad50(u32 id, UnitRecord *unit)
     memcpy(unit->skillList.unk44, saved.skills.words + 4, sizeof(unit->skillList.unk44));
     unit->unk30 = saved.bits;
     unit->savedState.status = (u32(saved.status) << 26) >> 28;
-    FUN_004bcd90(unit);
+    unitRecomputeDerivedStats(unit);
     unit->unk2A = recordGetScaledMaximum(unit);
     unit->unk2C = unit->unk10;
 }

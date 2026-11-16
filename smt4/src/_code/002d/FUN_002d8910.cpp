@@ -8,7 +8,7 @@ void scrWorkSetValue(s32 index, s32 value);
 s32 messageForwardDefaultMode(s32 buffer, s32 message, s32 line, s32 a, s32 b);
 void textEncodeFontSlot(s32 slot, u32 value);
 u8 *gameGetUnitRecord(s32 index);
-u32 FUN_002bd06c(u32 id);
+u32 dataTable01FindByIdWithAoc(u32 id);
 void FUN_002bff50(void);
 s32 scrGetCommandFrame(void);
 s8 *gameGetSlotTable(void);
@@ -59,7 +59,7 @@ s32 FUN_002d8910(s32 phase)
         /* fall through */
         case 3: {
             u8 *unit = gameGetUnitRecord(gameGetSlotTable()[0x90F0 + scrWorkGetValue(2)]);
-            textEncodeFontSlot(0x28, FUN_002bd06c(*reinterpret_cast<u16 *>(unit + 0x46)));
+            textEncodeFontSlot(0x28, dataTable01FindByIdWithAoc(*reinterpret_cast<u16 *>(unit + 0x46)));
             result = messageForwardDefaultMode(buffer, 13, scrWorkGetValue(1), 6, 0);
             scrWorkSetValue(1, scrWorkGetValue(1) + 1);
             if (result == 1) {

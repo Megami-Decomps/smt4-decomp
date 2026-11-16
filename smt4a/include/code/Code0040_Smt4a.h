@@ -13,7 +13,7 @@ s32 FUN_004038e0(u32 unused, s32 level);
 
 void FUN_0040a3c8(s32 amount);
 
-void FUN_0040ba38(Object *obj);
+void playerModelStartBaseMotion(Object *obj);
 
 s32 chainCountIdUnflagged(ChainOwner *owner, s32 id);
 

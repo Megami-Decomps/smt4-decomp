@@ -14,7 +14,7 @@ extern GameState g_gameState;
 extern LmapSceneCamera *g_lmapScene;
 f32 sqrtf(f32 value);
 void nodeSetTranslation(NodeEnableResource *node, s32 index, const f32 *position);
-void FUN_0028c618(NodeEnableResource *node, s32 index, f32 x, f32 y, f32 z);
+void modelPartSetRotationDegrees(NodeEnableResource *node, s32 index, f32 x, f32 y, f32 z);
 void nodeSetScale(NodeEnableResource *node, s32 index, f32 x, f32 y, f32 z);
 }
 
@@ -46,7 +46,7 @@ void Obj42233c::stop()
         };
         NodeEnableNode *node = (NodeEnableNode *)handle;
         nodeSetTranslation(node->resource, 0, translated);
-        FUN_0028c618(((NodeEnableNode *)handle)->resource, 0, rotation[0], rotation[1], rotation[2]);
+        modelPartSetRotationDegrees(((NodeEnableNode *)handle)->resource, 0, rotation[0], rotation[1], rotation[2]);
         nodeSetScale(((NodeEnableNode *)handle)->resource, 0, scale[0], scale[1], scale[2]);
         if ((flags & 4) != 0) {
             node = (NodeEnableNode *)handle;

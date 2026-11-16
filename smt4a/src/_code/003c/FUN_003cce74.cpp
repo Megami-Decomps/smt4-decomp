@@ -43,8 +43,8 @@ void FUN_003cce74(GridDetailView *view, void *owner, s32 x, s32 y, f32 speed)
     u32 color = GRID_COLOR_NORMAL;
     s16 entry = view->entryIds[slot];
     if (entry != 0) {
-        FUN_001835b4(2, 0x1A, 0x19F, frame->x + x, frame->y + y, 0x83);
-        FUN_001835b4(2, 0x1A, 0x1A0, frame->x + x, frame->y + y, 0x83);
+        texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x19F, frame->x + x, frame->y + y, 0x83);
+        texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x1A0, frame->x + x, frame->y + y, 0x83);
         s32 mode = recordGetModeForId(view->slotIds[button]);
         if (mode == 1 || mode == 2 || mode == 6)
             color = GRID_COLOR_SPECIAL;

@@ -3,7 +3,7 @@
 #include "test/BustupViewer.h"
 
 extern "C" {
-s32 FUN_001517b4(s32, s32);
+s32 padQueryLogicalKey(s32, s32);
 s32 sysPlaySe(s32);
 s32 FUN_00183e58(void);
 s32 slotSetRequest(s32, s32, s32);
@@ -33,7 +33,7 @@ extern "C" void eventUpdatePickedObjectEndScript(PickObjectEndPrefixA *object)
             ++object->phase;
             return;
         }
-        if (FUN_001517b4(1, 1) != 0 &&
+        if (padQueryLogicalKey(1, 1) != 0 &&
             messageMainIsWindowActive() != 0) {
             msgWindowReset();
         }

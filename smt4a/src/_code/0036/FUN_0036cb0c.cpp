@@ -7,7 +7,7 @@
 
 extern "C" {
 
-void FUN_00164b5c(s32 layer, s32 group, s32 index, s32 x, s32 y, s32 z);
+void texDrawCompositeSprite(s32 layer, s32 group, s32 index, s32 x, s32 y, s32 z);
 void efctSetSpeed(f32 speed);
 void asdTextDrawDirectoryEntry(u32 text, s32 a, u32 b, s32 c, s32 d, u32 name, s32 index);
 const char *FUN_0035aa90(s32 index);
@@ -21,25 +21,25 @@ void FUN_0036cb0c(u32 text, u32 name, s32 base, s32 offset, s32 row, s32 selecte
 {
     asdTMTexTableEntryAt(0x2e, 0xe0);
     TextureTableEntryIV* frame = asdTMTexTableEntryAt(0x2e, row + 0xe6);
-    FUN_00164b5c(2, 0x2e, 0x13, frame->x, frame->y, 0x1f);
-    FUN_001835b4(2, 0x2e, 0xdf, frame->x, frame->y, 0x21);
-    FUN_001835b4(2, 0x2e, 0xe0, frame->x, frame->y, 0x22);
-    FUN_001835b4(2, 0x2e, 0xe1, frame->x, frame->y, 0x22);
-    FUN_001835b4(2, 0x2e, 0xe2, frame->x, frame->y, 0x22);
+    texDrawCompositeSprite(2, 0x2e, 0x13, frame->x, frame->y, 0x1f);
+    texDrawTableEntryAtStoredOrigin(2, 0x2e, 0xdf, frame->x, frame->y, 0x21);
+    texDrawTableEntryAtStoredOrigin(2, 0x2e, 0xe0, frame->x, frame->y, 0x22);
+    texDrawTableEntryAtStoredOrigin(2, 0x2e, 0xe1, frame->x, frame->y, 0x22);
+    texDrawTableEntryAtStoredOrigin(2, 0x2e, 0xe2, frame->x, frame->y, 0x22);
     asdTMTexTableEntryAt(0x2e, 0xe0);
 
     s32 phase = pulseFrame % 0x28;
     if (phase >= 0x14) phase = 0x28 - phase;
     f32 pulse = (f32)phase / 20.0f;
     efctSetSpeed(pulse);
-    FUN_001835b4(2, 0x2e, 0xf9, frame->x, frame->y, 0x22);
+    texDrawTableEntryAtStoredOrigin(2, 0x2e, 0xf9, frame->x, frame->y, 0x22);
     efctSetSpeed(1.0f);
     if (selected != 0) {
         for (s32 index = 0x10d; index < 0x110; index++) {
-            FUN_001835b4(2, 0x2e, index, frame->x, frame->y, 0x22);
+            texDrawTableEntryAtStoredOrigin(2, 0x2e, index, frame->x, frame->y, 0x22);
         }
         efctSetSpeed(pulse);
-        FUN_001835b4(2, 0x2e, 0x110, frame->x, frame->y, 0x22);
+        texDrawTableEntryAtStoredOrigin(2, 0x2e, 0x110, frame->x, frame->y, 0x22);
         efctSetSpeed(1.0f);
     }
 
@@ -53,12 +53,12 @@ void FUN_0036cb0c(u32 text, u32 name, s32 base, s32 offset, s32 row, s32 selecte
         break;
     case 1: {
         const char *source = FUN_0035aa90(index);
-        char *converted = FUN_001654f8(source, NULL, 0);
+        char *converted = textExpandGlyphsToBuffer(source, NULL, 0);
         asdTextFormatStream(text, 3, 0xffffffff, 0, 3, converted);
         break;
     }
     }
-    FUN_001835b4(2, 0x2e, 0xe3, frame->x, frame->y, 0xd);
+    texDrawTableEntryAtStoredOrigin(2, 0x2e, 0xe3, frame->x, frame->y, 0xd);
     if (selected != 0) {
         FUN_001527d8(text, 0xf5ff9fff);
     } else {
@@ -71,7 +71,7 @@ void FUN_0036cb0c(u32 text, u32 name, s32 base, s32 offset, s32 row, s32 selecte
         s32 bit = progressUnlockFindNthEarnedIndex(index);
         if (gameDataToggleFlagIsSet(bit) != 0) {
             TextureTableEntryIV* marker = asdTMTexTableEntryAt(0x14, 0x597);
-            FUN_00164b5c(2, 0x14, 7, frame->x + marker->x, marker->y + frame->y, 0xc);
+            texDrawCompositeSprite(2, 0x14, 7, frame->x + marker->x, marker->y + frame->y, 0xc);
         }
     }
 }

@@ -28,9 +28,9 @@ struct ResourceTableRecord {
 };
 
 extern "C" {
-s32 FUN_001b315c(ResourceContainer *);
-ResourceDescription *FUN_001b31ac(ResourceContainer *);
-u32 FUN_001b31e0(ResourceContainer *);
+s32 packageEntryIsLoaded(ResourceContainer *);
+ResourceDescription *packageEntryGetDirectory(ResourceContainer *);
+u32 packageEntryGetFileCount(ResourceContainer *);
 void *dataTableFileGetTable(void *file, u32 index);
 ResourceTableRecord *dataTableGetEntries(void *table);
 s32 dataTableGetCount(void *table);
@@ -40,9 +40,9 @@ void *resourceFindType27Record(ResourceCollection *collection, s32 id)
 {
     for (s32 i = 0; i < collection->count; ++i) {
         ResourceContainer *container = &collection->containers[i];
-        if (FUN_001b315c(container)) {
-            ResourceDescription *descriptions = FUN_001b31ac(container);
-            u32 count = FUN_001b31e0(container);
+        if (packageEntryIsLoaded(container)) {
+            ResourceDescription *descriptions = packageEntryGetDirectory(container);
+            u32 count = packageEntryGetFileCount(container);
             for (u32 j = 0; j < count; ++j) {
                 if (descriptions[j].kind == 0x1b) {
                     void *table = dataTableFileGetTable(container->files[j].file, 0);

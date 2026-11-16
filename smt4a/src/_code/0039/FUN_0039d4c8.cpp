@@ -7,7 +7,7 @@
 extern "C" {
 s32 scrGetArg(u32);
 u32 btlResolveEntryChoice(s32);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *);
 void scrSetResult(s32);
 
 /* Test selected eligible combatants, including the special entry, for enough missing HP. */
@@ -16,7 +16,7 @@ u32 FUN_0039d4c8(void)
     s32 amount = scrGetArg(0);
     s32 first;
     s32 count;
-    FUN_00301a08(btlResolveEntryChoice(scrGetArg(1)), &first, &count);
+    btlGetEntryChoiceRange(btlResolveEntryChoice(scrGetArg(1)), &first, &count);
     for (s32 i = first; i < first + count; ++i) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
         if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
@@ -28,7 +28,7 @@ u32 FUN_0039d4c8(void)
         }
     }
     if (btlGetMainState()->unk4cd1) {
-        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL && amount <= entry->maxHp - entry->hp) {
             scrSetResult(1);
             return 1;

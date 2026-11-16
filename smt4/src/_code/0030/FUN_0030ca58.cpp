@@ -13,7 +13,7 @@ int FUN_0024b7bc(int, float *);
 int shiftRandomNextFraction(...);
 int gfxQuaternionWorkspaceBuildMatrix(void);
 int phaseCosInterpolate(void);
-int FUN_002b70cc(void);
+int mathSinFixedAngle(void);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(unsigned int, int);
 int __aeabi_uidivmod(void);
@@ -73,7 +73,7 @@ static float romwright_fabs_4(float value)
 extern int effGetFrameCounter(void);
 /* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: phaseCosInterpolate. */
-/* Supplied declaration required: FUN_002b70cc. */
+/* Supplied declaration required: mathSinFixedAngle. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
 
@@ -232,7 +232,7 @@ void FUN_0030ca58(int param_1)
             temp_v9 = temp_v9 * temp_v14;
             temp_v10 = (float)temp_v21;
             temp_v12 = pfVar7[4];
-            FUN_002b70cc();
+            mathSinFixedAngle();
             DAT_004ea924 = temp_v10 * temp_v14;
             DAT_004ea91c = temp_v9;
             DAT_004ea920 = temp_v12;
@@ -276,7 +276,7 @@ void FUN_0030ca58(int param_1)
             temp_v2 = (in_s0 * (float)temp_v23 * (float)puVar9[0x38] +
                     (temp_v2 - (float)puVar9[0x38]) * (float)temp_v23 * temp_v10) * temp_v17;
             temp_v15 = CONCAT44(temp_v2,temp_v17);
-            FUN_002b70cc();
+            mathSinFixedAngle();
             temp_v17 = (float)puVar9[0x32];
             temp_v9 = (float)puVar9[0x33];
             temp_v10 = (float)VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -310,7 +310,7 @@ void FUN_0030ca58(int param_1)
             temp_v2 = temp_v2 * temp_v9;
             temp_v12 = pfVar7[4];
             temp_v10 = pfVar7[3] * temp_v17;
-            FUN_002b70cc();
+            mathSinFixedAngle();
             temp_v10 = temp_v10 * temp_v9;
             DAT_004ea91c = temp_v2;
             DAT_004ea920 = temp_v12;
@@ -382,7 +382,7 @@ void FUN_0030ca58(int param_1)
               temp_v21 = CONCAT44(temp_v2,temp_v10 * temp_v12);
               temp_v10 = pfVar7[4];
               temp_v2 = pfVar7[3] * temp_v17;
-              FUN_002b70cc();
+              mathSinFixedAngle();
               DAT_004ea924 = temp_v2 * temp_v12;
               DAT_004ea91c = (float)temp_v21;
               DAT_004ea920 = temp_v10;

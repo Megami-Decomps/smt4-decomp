@@ -22,7 +22,7 @@ struct BattleOverridePositionRecord {
     Vec3f position;
     u8 unk20[0x18];
 };
-/* FUN_001568f8 returns the parameter block embedded at combatant +0x164. */
+/* btlFindEntryBlockByMemberId returns the parameter block embedded at combatant +0x164. */
 struct BattleAppearancePositionView {
     u16 parameterBlock;
     u16 id;
@@ -50,7 +50,7 @@ typedef char BattlePositionQueryOffsets[
     offsetof(BattleAppearancePositionView, nodeKeys) == 0x0C ? 1 : -1];
 }
 extern "C" {
-BattleAppearancePositionView *FUN_001568f8(BtlMainStateA *state, s32 index);
+BattleAppearancePositionView *btlFindEntryBlockByMemberId(BtlMainStateA *state, s32 index);
 BattleGroupPositionMembersView *btlMainFindEntryByListedId(BtlMainStateA *state, s16 group);
 EnemyDrawOffsetOwner *stateEntryFindById(BtlMainStateA *state, u32 id);
 void btlEnemyDrawCalcVerticalOffset(const EnemyDrawOffsetOwner *owner, BattleVector3 *output, f32 scale);
@@ -63,7 +63,7 @@ Vec3f FUN_003ecab8(BtlMainStateA *state, s32 index, s32 forceAttachment)
     BattlePositionResourcesView *resources = reinterpret_cast<BattlePositionResourcesView *>(state);
     Vec3f position;
     if ((roster->motion.flags & 0x200000) != 0) {
-        u16 id = FUN_001568f8(state, index)->id;
+        u16 id = btlFindEntryBlockByMemberId(state, index)->id;
         const BattleOverridePositionRecord *selected = NULL;
         if (resources->overrides != NULL) {
             void *table = dataTableFileGetTable((u32)(resources->overrides), 0);
@@ -84,7 +84,7 @@ Vec3f FUN_003ecab8(BtlMainStateA *state, s32 index, s32 forceAttachment)
         s32 attachment = group != NULL ? battleFindPositionMember(group, roster->motion.group) : -1;
         if (attachment < 0)
             attachment = 0;
-        BattleAppearancePositionView *appearance = FUN_001568f8(state, index);
+        BattleAppearancePositionView *appearance = btlFindEntryBlockByMemberId(state, index);
         EnemyDrawOffsetOwner *node = stateEntryFindById(state, appearance->nodeKeys[attachment]);
         btlEnemyDrawCalcVerticalOffset(node, reinterpret_cast<BattleVector3 *>(&position), roster->motion.scale);
         position.x += roster->motion.position[0];
@@ -95,7 +95,7 @@ Vec3f FUN_003ecab8(BtlMainStateA *state, s32 index, s32 forceAttachment)
         const Vec3f *stage = reinterpret_cast<const Vec3f *>(FUN_00348f74(resources->stagePosition));
         position = *stage;
         position.z += 2.0f;
-        const Table00Record *record = dataTable00FindById(FUN_001568f8(state, index)->id);
+        const Table00Record *record = dataTable00FindById(btlFindEntryBlockByMemberId(state, index)->id);
         f32 offset;
         switch (record->bustUp.value) {
         case 0: offset = 15.0f; break;

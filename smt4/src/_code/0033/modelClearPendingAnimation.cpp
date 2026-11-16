@@ -19,7 +19,7 @@ typedef struct TargetOwner {
     /* 0x4398 */ Target *target;
 } TargetOwner;
 
-s32 FUN_0029bb14(f32 value);
+s32 modelSetScale(f32 value);
 s32 modelSetAnimationChannels(Target *target, s32 arg, f32 value);
 
 /* Clears the target's pending flag (resetting its effect scale) and then refreshes the target. */
@@ -31,7 +31,7 @@ void modelClearPendingAnimation(TargetOwner *owner)
         if ((target->flags & 4) != 0) {
             target->flags &= ~4u;
             target->effect->scale = 1.0f;
-            FUN_0029bb14(target->effect->unk78);
+            modelSetScale(target->effect->unk78);
         }
         modelSetAnimationChannels(owner->target, 0, 0.0f);
     }

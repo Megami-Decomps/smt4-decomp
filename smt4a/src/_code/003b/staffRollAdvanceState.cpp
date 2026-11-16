@@ -7,7 +7,7 @@ struct StaffRoll {
     /* 0x14c */ u32 state;
 };
 extern StaffRoll *g_staffRoll;
-s32 FUN_002e07f4(void);
+s32 pairedAvailabilityBothReady(void);
 
 static __inline void staffRollSetState(StaffRoll *work, u32 state)
 {
@@ -16,7 +16,7 @@ static __inline void staffRollSetState(StaffRoll *work, u32 state)
 
 void staffRollAdvanceState(void)
 {
-    if (FUN_002e07f4()) {
+    if (pairedAvailabilityBothReady()) {
         staffRollSetState(g_staffRoll, 5);
     }
 }

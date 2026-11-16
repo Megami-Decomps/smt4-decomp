@@ -49,8 +49,8 @@ unsigned int FUN_0032c8d4(void)
       FUN_002a0cc8(1);
     }
   }
-  FUN_002bf818(puVar2 + 0x1d8);
-  FUN_002bf818(puVar2 + 0x1fb);
+  uiSpriteAdvanceAnimation(puVar2 + 0x1d8);
+  uiSpriteAdvanceAnimation(puVar2 + 0x1fb);
   uVar4 = ifTouchGetSelectionMode();
   iVar7 = puVar2[6];
   *(unsigned char *)(puVar2 + 0xc) = uVar4;
@@ -121,7 +121,7 @@ unsigned int FUN_0032c8d4(void)
             FUN_00257a50(puVar12,iVar7,0);
             if (puVar12 != (unsigned char *)0x0) {
               iVar19 = asdTMTexTableEntryAt(0x24,iVar7 + 0x87);
-              uVar5 = FUN_002b8584(0x24,iVar7 + 0x87);
+              uVar5 = ifTouchRegionAddRequested(0x24,iVar7 + 0x87);
               *(unsigned short *)((int)puVar17 + iVar7 * 2 + 0xe22) = uVar5;
               iVar13 = asdTMTexTableEntryAt(0x24,0x7f);
               iVar14 = (int)(short)(*(short *)(iVar19 + 8) + *(short *)(iVar13 + 8));
@@ -155,7 +155,7 @@ unsigned int FUN_0032c8d4(void)
           if ((uVar20 & 1) != 0) {
             iVar19 = (int)(7 - uVar20) / 2 + 0x14;
           }
-          uVar5 = FUN_002b8584(0x1d,iVar19 + iVar7);
+          uVar5 = ifTouchRegionAddRequested(0x1d,iVar19 + iVar7);
           iVar7 = iVar7 + 1;
           *(unsigned short *)((int)puVar2 + (unsigned int)*(unsigned char *)((int)puVar2 + 0xe3a) * 2 + 0xdf0) = uVar5;
           *(char *)((int)puVar2 + 0xe3a) = *(char *)((int)puVar2 + 0xe3a) + '\x01';
@@ -173,7 +173,7 @@ unsigned int FUN_0032c8d4(void)
         }
       }
       else {
-        uVar5 = FUN_002b8584(0x1d,0xe0);
+        uVar5 = ifTouchRegionAddRequested(0x1d,0xe0);
         *(unsigned short *)(puVar2 + 0x380) = uVar5;
         *(char *)((int)puVar2 + 0xe3a) = *(char *)((int)puVar2 + 0xe3a) + '\x01';
         if (*(char *)((int)puVar2 + 0x99) == '\x01') {
@@ -251,16 +251,16 @@ unsigned int FUN_0032c8d4(void)
     messageInitializeSavedBanner();
     break;
   case 4:
-    FUN_002bf818();
+    uiSpriteAdvanceAnimation();
     iVar7 = 0;
     do {
-      FUN_002bf818(puVar2 + iVar7 * 0x23 + 0x241);
+      uiSpriteAdvanceAnimation(puVar2 + iVar7 * 0x23 + 0x241);
       iVar7 = iVar7 + 1;
     } while (iVar7 < 8);
     puVar17 = puVar2 + 0x1b5;
     if (*(short *)(puVar2 + 0x1c9) != 2) {
       if (*(short *)(puVar2 + 0x1c9) != 1) {
-        FUN_002bf818(puVar17);
+        uiSpriteAdvanceAnimation(puVar17);
       }
       else {
         FUN_002b8ee0(puVar17,0);
@@ -370,7 +370,7 @@ code_r0x0032d518:
     }
     break;
   case 5:
-    FUN_002bf818();
+    uiSpriteAdvanceAnimation();
     if (*(char *)((int)puVar2 + 0x75e) == '\0') break;
     if (puVar2[9] == 0x2b) {
       FUN_001a0e8c();
@@ -469,13 +469,13 @@ code_r0x0032d518:
     func_0x00331ecc();
     break;
   case 7:
-    FUN_002bf818();
+    uiSpriteAdvanceAnimation();
     iVar7 = 0;
     do {
-      FUN_002bf818(puVar2 + iVar7 * 0x23 + 0x241);
+      uiSpriteAdvanceAnimation(puVar2 + iVar7 * 0x23 + 0x241);
       iVar7 = iVar7 + 1;
     } while (iVar7 < 8);
-    FUN_002bf818(puVar2 + 0x21e);
+    uiSpriteAdvanceAnimation(puVar2 + 0x21e);
     puVar17 = DAT_0043da90;
     if (*(char *)((int)puVar2 + 0x6d2) != '\0') {
       puVar9 = DAT_0043da90 + 6;
@@ -787,7 +787,7 @@ code_r0x0032d518:
         uVar18 = statusGetAvailableChoiceCount();
         uStack_658 = 1;
         uStack_654 = 1;
-        FUN_0029f848(puVar9 + 0x90,uVar18,0xb,1);
+        gridNavigationConfigure(puVar9 + 0x90,uVar18,0xb,1);
         FUN_00282f80(10);
       }
       FUN_0029dfc0(0);
@@ -802,10 +802,10 @@ code_r0x0032d518:
     }
     break;
   case 0x12:
-    FUN_002bf818();
+    uiSpriteAdvanceAnimation();
     iVar7 = 0;
     do {
-      FUN_002bf818(puVar2 + iVar7 * 0x23 + 0x241);
+      uiSpriteAdvanceAnimation(puVar2 + iVar7 * 0x23 + 0x241);
       iVar7 = iVar7 + 1;
     } while (iVar7 < 8);
     if (*(char *)((int)puVar2 + 0x6d2) != '\0') {
@@ -822,10 +822,10 @@ code_r0x0032d518:
     }
     break;
   case 0x13:
-    FUN_002bf818();
+    uiSpriteAdvanceAnimation();
     iVar7 = 0;
     do {
-      FUN_002bf818(puVar2 + iVar7 * 0x23 + 0x241);
+      uiSpriteAdvanceAnimation(puVar2 + iVar7 * 0x23 + 0x241);
       iVar7 = iVar7 + 1;
     } while (iVar7 < 8);
     if (*(char *)((int)puVar2 + 0x6d2) != '\0') {
@@ -919,10 +919,10 @@ code_r0x0032d518:
     }
     break;
   case 0x16:
-    FUN_002bf818();
+    uiSpriteAdvanceAnimation();
     iVar7 = 0;
     do {
-      FUN_002bf818(puVar2 + iVar7 * 0x23 + 0x241);
+      uiSpriteAdvanceAnimation(puVar2 + iVar7 * 0x23 + 0x241);
       iVar7 = iVar7 + 1;
     } while (iVar7 < 8);
     if (*(char *)((int)puVar2 + 0x6d2) != '\0') {
@@ -939,10 +939,10 @@ code_r0x0032d518:
     }
     break;
   case 0x17:
-    FUN_002bf818();
+    uiSpriteAdvanceAnimation();
     iVar7 = 0;
     do {
-      FUN_002bf818(puVar2 + iVar7 * 0x23 + 0x241);
+      uiSpriteAdvanceAnimation(puVar2 + iVar7 * 0x23 + 0x241);
       iVar7 = iVar7 + 1;
     } while (iVar7 < 8);
     if (*(char *)((int)puVar2 + 0x6d2) != '\0') {
@@ -1086,13 +1086,13 @@ code_r0x0032d518:
     }
     break;
   case 0x1d:
-    FUN_002bf818();
+    uiSpriteAdvanceAnimation();
     iVar7 = 0;
     do {
-      FUN_002bf818(puVar2 + iVar7 * 0x23 + 0x241);
+      uiSpriteAdvanceAnimation(puVar2 + iVar7 * 0x23 + 0x241);
       iVar7 = iVar7 + 1;
     } while (iVar7 < 8);
-    FUN_002bf818(puVar2 + 0x21e);
+    uiSpriteAdvanceAnimation(puVar2 + 0x21e);
     if ((*(char *)((int)puVar2 + 0x6d2) != '\0') && (iVar7 = FUN_0028f670(), iVar7 != 0)) {
       FUN_0026b9bc();
       FUN_00269da0(2);
@@ -1116,7 +1116,7 @@ code_r0x0032d518:
       uVar18 = statusGetAvailableChoiceCount();
       uStack_658 = 1;
       uStack_654 = 1;
-      FUN_0029f848(puVar17 + 0x90,uVar18,0xb,1);
+      gridNavigationConfigure(puVar17 + 0x90,uVar18,0xb,1);
       FUN_00282f80(10);
       puVar2[8] = 6;
       puVar17 = DAT_0043da90;
@@ -1188,11 +1188,11 @@ code_r0x0032d518:
     }
     break;
   case 0x20:
-    FUN_002bf818();
-    FUN_002bf818();
+    uiSpriteAdvanceAnimation();
+    uiSpriteAdvanceAnimation();
     iVar7 = 0;
     do {
-      FUN_002bf818(puVar2 + iVar7 * 0x23 + 0x241);
+      uiSpriteAdvanceAnimation(puVar2 + iVar7 * 0x23 + 0x241);
       iVar7 = iVar7 + 1;
     } while (iVar7 < 8);
     iVar7 = func_0x0021697c();
@@ -1218,7 +1218,7 @@ code_r0x0032d518:
         }
         else {
           FUN_0029e890((int)*(char *)(puVar2 + 0x2b),1);
-          FUN_0029e874(1);
+          gameSetIconDisplayEnabled(1);
           FUN_0029e788();
         }
       }
@@ -1252,13 +1252,13 @@ code_r0x0032d518:
     }
     break;
   case 0x21:
-    FUN_002bf818();
+    uiSpriteAdvanceAnimation();
     iVar7 = 0;
     do {
-      FUN_002bf818(puVar2 + iVar7 * 0x23 + 0x241);
+      uiSpriteAdvanceAnimation(puVar2 + iVar7 * 0x23 + 0x241);
       iVar7 = iVar7 + 1;
     } while (iVar7 < 8);
-    FUN_002bf818(puVar2 + 0x21e);
+    uiSpriteAdvanceAnimation(puVar2 + 0x21e);
     if ((*(char *)((int)puVar2 + 0x6d2) != '\0') && (iVar7 = FUN_001922f8(), iVar7 != 0)) {
       puVar2[8] = 6;
       puVar17 = DAT_0043da90;
@@ -1287,7 +1287,7 @@ code_r0x0032d518:
       uVar18 = statusGetAvailableChoiceCount();
       uStack_658 = 1;
       uStack_654 = 1;
-      FUN_0029f848(puVar17 + 0x90,uVar18,0xb,1);
+      gridNavigationConfigure(puVar17 + 0x90,uVar18,0xb,1);
       FUN_00282f80(10);
       FUN_0026b9bc();
       iVar7 = dataTable15GetUnlockedEntryId((int)*(char *)(puVar2 + 0x26),
@@ -1499,10 +1499,10 @@ code_r0x0032d518:
     }
     break;
   case 0x2d:
-    FUN_002bf818();
+    uiSpriteAdvanceAnimation();
     iVar7 = 0;
     do {
-      FUN_002bf818(puVar2 + iVar7 * 0x23 + 0x241);
+      uiSpriteAdvanceAnimation(puVar2 + iVar7 * 0x23 + 0x241);
       iVar7 = iVar7 + 1;
     } while (iVar7 < 8);
     if ((*(char *)((int)puVar2 + 0x6d2) != '\0') && (iVar7 = FUN_002bf244(puVar2[4]), iVar7 == 0)) {
@@ -1516,13 +1516,13 @@ code_r0x0032d518:
     }
     break;
   case 0x2e:
-    FUN_002bf818();
+    uiSpriteAdvanceAnimation();
     iVar7 = 0;
     do {
-      FUN_002bf818(puVar2 + iVar7 * 0x23 + 0x241);
+      uiSpriteAdvanceAnimation(puVar2 + iVar7 * 0x23 + 0x241);
       iVar7 = iVar7 + 1;
     } while (iVar7 < 8);
-    FUN_002bf818(puVar2 + 0x21e);
+    uiSpriteAdvanceAnimation(puVar2 + 0x21e);
     if (puVar2[5] == 1) {
       FUN_0030aa50(1);
     }
@@ -1559,10 +1559,10 @@ code_r0x0032f574:
     messageInitializeSavedBanner();
     break;
   case 0x30:
-    FUN_002bf818();
+    uiSpriteAdvanceAnimation();
     iVar7 = 0;
     do {
-      FUN_002bf818(puVar2 + iVar7 * 0x23 + 0x241);
+      uiSpriteAdvanceAnimation(puVar2 + iVar7 * 0x23 + 0x241);
       iVar7 = iVar7 + 1;
     } while (iVar7 < 8);
     iVar7 = func_0x00213bf4();
@@ -1656,14 +1656,14 @@ code_r0x0032f574:
     else {
       iVar7 = 0;
       while( 1 ) {
-        FUN_002bf818(puVar2 + iVar7 * 0x23 + 0x241);
+        uiSpriteAdvanceAnimation(puVar2 + iVar7 * 0x23 + 0x241);
         iVar7 = iVar7 + 1;
         if (7 < iVar7) break;
         if ((iVar7 == 7) && (*(char *)((int)puVar2 + 0xd62) != '\0')) {
           FUN_001ffc5c();
         }
       }
-      FUN_002bf818(puVar2 + 0x192);
+      uiSpriteAdvanceAnimation(puVar2 + 0x192);
     }
     break;
   case 0x35:
@@ -1705,7 +1705,7 @@ code_r0x0032f574:
     }
     puVar17 = DAT_0043da90;
     campReleaseTouchRegions();
-    FUN_0028a22c();
+    partyPanelReleaseResources();
     FUN_00291944();
     FUN_002917b8();
     campFreeFileSlot();

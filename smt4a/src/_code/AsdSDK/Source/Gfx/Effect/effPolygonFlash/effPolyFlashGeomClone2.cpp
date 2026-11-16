@@ -6,7 +6,7 @@ extern "C" {
 
 extern const char DAT_00544ba8[]; /* effPolygonFlash.cpp: __FILE__ */
 void *memAlloc(int, int, int, int size, int align, int);
-PolyGeom *FUN_00271d28(PolyGeom *src);
+PolyGeom *effGeomCloneHandle(PolyGeom *src);
 
 /* Allocates a geometry block (16-byte header plus `payloadBytes`), recording the allocation site first. */
 static PolyGeomBlock *allocGeomBlock(u32 payloadBytes, s32 line)
@@ -28,7 +28,7 @@ PolyGeomBlock *effPolyFlashGeomClone2(PolyObject *obj)
     PolyGeom *geom;
 
     params->unk70 = (params->unk70 <= 1) ? 1 : params->unk70;
-    geom = FUN_00271d28(srcBlock->geom);
+    geom = effGeomCloneHandle(srcBlock->geom);
     block->geom = geom;
     u32 segments = params->segments;
     if (segments != 0) {

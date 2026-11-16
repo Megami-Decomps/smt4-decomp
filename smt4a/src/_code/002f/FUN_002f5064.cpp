@@ -13,22 +13,22 @@ int roundObjFinish(...);
 
 int textFormatBuffer(...);
 int qsort(int, int, int, unsigned char *);
-int FUN_00163aa4(int);
-int FUN_00180118(unsigned int);
+int uiSpriteAdvanceAnimation(int);
+int dataTable01GetRecordWithAocOverride(unsigned int);
 int devilGetRecord(...);
 int asdMemFree(...);
 int scrScriptProcessDestroy(...);
 int asdLoadFileSyncDefault(void);
 int FUN_0022e774(void);
 int statusCommitSelectedSkills(int);
-int FUN_00275bc8(...);
+int scrScriptProcessCreate(...);
 int scrScriptProcessStartEntry(...);
 int FUN_00285774(void);
 int FUN_002a5e7c(...);
 int statusDownRestartTransition(void);
 int libc_strcpy(unsigned char [32], unsigned int);
 int FUN_002f01c4(int);
-int FUN_003180c4(...);
+int scrSetStringSlot(...);
 int FUN_00333dc8(...);
 int statusDisplayBindUnitRecord(int, int, int);
 int btlTalkBustUpSetDemonTexture(...);
@@ -37,8 +37,8 @@ int FUN_0035da20(...);
 int btlTalkBustUpReleaseTexture(void);
 int btlTalkBustUpSetUnk2F4(...);
 int FUN_003f33b0(int, unsigned int, int);
-int FUN_004bcb54(...);
-int FUN_004bcd90(...);
+int unitRecordResetCurrentValues(...);
+int unitRecomputeDerivedStats(...);
 int bitsAt60Set(...);
 int FUN_004bd6b0(int);
 
@@ -62,10 +62,10 @@ extern unsigned char LAB_00321c94; /* 0x321c94 */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: qsort. */
 extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_00163aa4. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: eventQueueAddUnique. */
-/* Supplied declaration required: FUN_00180118. */
+/* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
 /* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
@@ -82,7 +82,7 @@ extern int scrRunOpcodesStub(unsigned int);
 extern int messageMainIsIdle(void);
 extern int FUN_0026c3a0(void);
 /* Supplied declaration required: statusCommitSelectedSkills. */
-/* Supplied declaration required: FUN_00275bc8. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00285774. */
 extern int FUN_002a4b28(void);
@@ -91,7 +91,7 @@ extern int messageGetChoiceResult(void);
 /* Supplied declaration required: statusDownRestartTransition. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002f01c4. */
-/* Supplied declaration required: FUN_003180c4. */
+/* Supplied declaration required: scrSetStringSlot. */
 extern int btlTalkBustUpGetValue(void);
 /* Supplied declaration required: FUN_00333dc8. */
 /* Supplied declaration required: statusDisplayBindUnitRecord. */
@@ -104,8 +104,8 @@ extern int btlTalkBustUpGetValue(void);
 /* Supplied declaration required: FUN_003f33b0. */
 extern unsigned int FUN_003f3908(int);
 extern int FUN_004bcaa8(unsigned short, unsigned short, int, unsigned int *, unsigned char);
-/* Supplied declaration required: FUN_004bcb54. */
-/* Supplied declaration required: FUN_004bcd90. */
+/* Supplied declaration required: unitRecordResetCurrentValues. */
+/* Supplied declaration required: unitRecomputeDerivedStats. */
 extern int getUnlockedSlotCount(int);
 extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: bitsAt60Set. */
@@ -154,7 +154,7 @@ void FUN_002f5064(int param_1)
     if (*(int *)(param_1 + 0x437c) < 8) {
       return;
     }
-    FUN_00163aa4(temp_v13);
+    uiSpriteAdvanceAnimation(temp_v13);
     temp_v20 = param_1 + 0x7500;
     if (*(int *)(param_1 + 0x437c) == 0x10) {
       btlTalkBustUpSetUnk2F4(0);
@@ -257,12 +257,12 @@ void FUN_002f5064(int param_1)
       }
       FUN_00285774();
       temp_v5 = (unsigned int)*(unsigned short *)(temp_v2 + 0x62);
-      FUN_00180118(temp_v5);
+      dataTable01GetRecordWithAocOverride(temp_v5);
       libc_strcpy(temp_v18,temp_v5);
-      FUN_003180c4(8,temp_v18);
+      scrSetStringSlot(8,temp_v18);
       temp_v4 = FUN_0014bf3c(*(unsigned short *)(temp_v2 + 0x62),0);
       libc_strcpy(temp_v18,temp_v4);
-      FUN_003180c4(0x10,temp_v18);
+      scrSetStringSlot(0x10,temp_v18);
       scrScriptProcessDestroy(*(unsigned int *)(param_1 + 0x43ac));
       asdMemFree(*(unsigned int *)(param_1 + 0x43b0));
       temp_v5 = (unsigned int)*(unsigned short *)(temp_v2 + 0x62);
@@ -286,11 +286,11 @@ LAB_002f56d4:
       asdLoadFileSyncDefault();
       *(unsigned char **)(param_1 + 0x43b0) = puVar8;
       temp_v4 = *(unsigned int *)(param_1 + 0x43a8);
-      FUN_00275bc8(temp_v4,puVar8);
+      scrScriptProcessCreate(temp_v4,puVar8);
       *(unsigned int *)(param_1 + 0x43ac) = temp_v4;
       temp_v3 = bitsAt60Test(temp_v2,2);
-      FUN_004bcd90(temp_v2);
-      FUN_004bcb54(temp_v2);
+      unitRecomputeDerivedStats(temp_v2);
+      unitRecordResetCurrentValues(temp_v2);
       if (temp_v3 != 0) {
         bitsAt60Set(temp_v2,2);
       }

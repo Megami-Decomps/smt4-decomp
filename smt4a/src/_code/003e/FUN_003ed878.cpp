@@ -22,7 +22,7 @@ extern BtlMainGlobalsA g_btlMain;
 extern BtlPartnerAttackA* g_btlPartnerAttack;
 extern u32 g_btlScriptUnit;
 extern void* g_btlUiBlock;
-BattleTransitionSource* FUN_003eaf20(BtlMainStateA* battle);
+BattleTransitionSource* btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA* battle);
 s32 hasFlag80Or1000(u32 id, BtlUnitA* unit);
 
 // Begin the next partner-attack phase or queue the current unit's transition command.
@@ -43,7 +43,7 @@ u32 FUN_003ed878(BattleTransitionStateView* state)
     } else {
         if (flags & g_btlMain.transition.mask)
             return 0;
-        state->command = FUN_003eaf20(&state->battle)->command;
+        state->command = btlFindFirstEntryMatchingCategoryAndRequiredMask(&state->battle)->command;
         BtlUnitA* unit = reinterpret_cast<BtlUnitA *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
         u32 special = 0;
         if (unit != NULL && hasFlag80Or1000(g_btlScriptUnit, unit))

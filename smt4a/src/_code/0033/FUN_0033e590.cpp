@@ -28,8 +28,8 @@ int mapSetSceneState(...);
 int soundVolumeSettingSet(...);
 int FUN_0014af98(void);
 int sysPlaySe(int);
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
+int libm_cosf(void);
+int libm_sinf(void);
 int mapIfShowActionMarker(void);
 int FUN_00233e10(...);
 int FUN_002342b8(void);
@@ -41,7 +41,7 @@ int FUN_00324e38(unsigned int);
 int FUN_00327ee8(void);
 int FUN_0033abd4(void);
 int sysPlayVoice(int);
-int FUN_003d4ed8(unsigned int);
+int soundActorStartOnFreeChannel(unsigned int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -64,8 +64,8 @@ extern unsigned int soundVolumeSettingGet(void);
 /* Supplied declaration required: FUN_0014af98. */
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: mapIfShowActionMarker. */
 /* Supplied declaration required: FUN_00233e10. */
@@ -74,7 +74,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapIfReleaseResource. */
 /* Supplied declaration required: mapIfReleaseSlot4. */
 /* Supplied declaration required: mapEaseSceneHeading. */
-extern int FUN_002e07f4(void);
+extern int pairedAvailabilityBothReady(void);
 /* Supplied declaration required: FUN_002e364c. */
 /* Supplied declaration required: FUN_00303460. */
 /* Supplied declaration required: mapSetSceneState. */
@@ -82,7 +82,7 @@ extern int FUN_002e07f4(void);
 /* Supplied declaration required: FUN_00327ee8. */
 /* Supplied declaration required: FUN_0033abd4. */
 /* Supplied declaration required: sysPlayVoice. */
-/* Supplied declaration required: FUN_003d4ed8. */
+/* Supplied declaration required: soundActorStartOnFreeChannel. */
 extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
 
@@ -176,11 +176,11 @@ void FUN_0033e590(void)
           *(unsigned int *)(temp_v1 + 0x2c) = temp_v0;
           *(unsigned int *)(temp_v1 + 0x30) = temp_v5;
           temp_v3 = g_gameState.f005f16cc * 0.017453292f;
-          FUN_001bc124();
+          libm_sinf();
           temp_v6 = 25.0f;
           *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + temp_v3 * 25.0f;
           temp_v4 = g_gameState.f005f16cc * temp_v4;
-          FUN_001bbf0c();
+          libm_cosf();
           temp_v1 = g_lmapScene;
           *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v4 * temp_v6;
           *(unsigned int *)(temp_v1 + 0x50) = g_gameState.f005f16bc;
@@ -223,34 +223,34 @@ void FUN_0033e590(void)
           switch(g_gameState.f005f162e) {
           case 0:
             temp_v5 = 0x10002c4;
-            FUN_003d4ed8(temp_v5);
+            soundActorStartOnFreeChannel(temp_v5);
             break;
           case 1:
             temp_v5 = 0x10002c6;
-            FUN_003d4ed8(temp_v5);
+            soundActorStartOnFreeChannel(temp_v5);
             break;
           case 2:
             temp_v5 = 0x10002c8;
-            FUN_003d4ed8(temp_v5);
+            soundActorStartOnFreeChannel(temp_v5);
             break;
           case 3:
             temp_v5 = 0x10002ca;
-            FUN_003d4ed8(temp_v5);
+            soundActorStartOnFreeChannel(temp_v5);
             break;
           case 4:
             temp_v5 = 0x10002cc;
-            FUN_003d4ed8(temp_v5);
+            soundActorStartOnFreeChannel(temp_v5);
             break;
           case 5:
             temp_v5 = 0x10002d9;
-            FUN_003d4ed8(temp_v5);
+            soundActorStartOnFreeChannel(temp_v5);
             break;
           default:
           }
 LAB_0033e908:
           FUN_00324e38(0xffffffff);
-          FUN_001bc124();
-          FUN_001bbf0c();
+          libm_sinf();
+          libm_cosf();
           FUN_0014af98();
           soundVolumeSettingSet();
           sysPlayVoice(0x10002e5);
@@ -298,7 +298,7 @@ LAB_0033e908:
         temp_v1 = g_lmapScene;
       }
       else {
-        temp_v2 = FUN_002e07f4();
+        temp_v2 = pairedAvailabilityBothReady();
         temp_v1 = g_lmapView;
         if (temp_v2 == 0) {
           FUN_002e364c(g_lmapScene + 0x28);

@@ -106,7 +106,7 @@ unsigned int FUN_0035a3f0(int param_1)
       return 0;
     }
     iVar4 = 0;
-    FUN_001517b4(0,1);
+    padQueryLogicalKey(0,1);
     if (iVar4 == 0) {
       return 0;
     }

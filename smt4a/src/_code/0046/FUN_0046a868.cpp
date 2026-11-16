@@ -15,9 +15,9 @@ typedef struct TitleOverlayA {
 } TitleOverlayA;
 
 
-void FUN_00183bb0(void);
+void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 speed);
-s32 FUN_001692ac(u32 kind, u32 arg);
+s32 renderCtxPackPassFlags(u32 kind, u32 arg);
 void FUN_0046868c(TitleOverlayA *overlay);
 u32 asdGxPresetsGetByKind(u32 kind);
 u32 asdGxPresetsGetHeightByKind(u32 kind);
@@ -32,17 +32,17 @@ void FUN_0046a868(TitleOverlayA *overlay)
     if (overlay->state <= 2) {
         return;
     }
-    FUN_00157558(g_renderCtx);
-    FUN_00183bb0();
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
+    gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
-    renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
+    renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
     if ((overlay->flags & 0x200) != 0) {
         FUN_0046868c(overlay);
     }
     if ((overlay->flags & 0x80) != 0) {
         u8 alpha = (u8)(u32)(overlay->fade * 192.0f);
 
-        renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
+        renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
         renderCtxSelectTexture(g_renderCtx, 0);
         f32 preset = (f32)asdGxPresetsGetByKind(g_renderCtx->stereoMode);
         f32 height = (f32)asdGxPresetsGetHeightByKind(g_renderCtx->stereoMode);
@@ -50,7 +50,7 @@ void FUN_0046a868(TitleOverlayA *overlay)
         renderStackPop(&g_renderCtx->stackA);
     }
     renderStackPop(&g_renderCtx->stackA);
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);

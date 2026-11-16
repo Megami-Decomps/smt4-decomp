@@ -1,7 +1,7 @@
 #include "shard/W8Match1_EntryDispatch.h"
 #include "sys/RuntimeObjects_EntryDispatch.h"
 extern "C" {
-u32 FUN_00163aa4(DispatchEntry*, f32);
+u32 uiSpriteAdvanceAnimation(DispatchEntry*, f32);
 u32 FUN_00167458(DispatchEntry*, u32);
 
 // Uses the entry kind's appropriate update routine and default factor.
@@ -26,7 +26,7 @@ u32 entryDispatchUpdate(DispatchEntrySet* entries, s32 kind)
     case 10:
     case 11:
     case 12:
-        result = FUN_00163aa4(&entries->entries[kind], 1.0f);
+        result = uiSpriteAdvanceAnimation(&entries->entries[kind], 1.0f);
         break;
     }
     return result;

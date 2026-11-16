@@ -55,7 +55,7 @@ u32 FUN_00100836(const char *source, u32 size, u32 *state);
 s32 FUN_002e3c44(u16 *destination, const char *source, u32 size, u32 *state);
 s32 FUN_0042b1e4(void **handle, const u16 *path);
 s32 vcallSlot0With3(u32 *read, void *handle, MovieDirectoryEntry *entry, u32 count);
-void FUN_0016e800(s32 result, u32 address);
+void sysReportCheckFailure(s32 result, u32 address);
 void objectReleaseIfSet(void *handle);
 s32 padButtonRepeat(u32 button);
 s32 padButtonIsPressed(u32 button);
@@ -76,7 +76,7 @@ void FUN_00229104();
 s32 moviePumpUntilReady();
 s32 slotIsActive(u32 button);
 void slotSetRequest(u32 slot, u32 duration, u32 color);
-s32 FUN_002e07f4();
+s32 pairedAvailabilityBothReady();
 void mobiclipCtrlShutdown();
 void FUN_001f51ac();
 void soundSetupArchiveAndSlots();
@@ -93,7 +93,7 @@ s32 engineIsResourceStateTwo();
 static inline void checkMovieDirectoryResult(s32 result, u32 address)
 {
     if (!nnResultIsSuccess(result))
-        FUN_0016e800(result, address);
+        sysReportCheckFailure(result, address);
 }
 
 static __forceinline void openMovieDirectory(MovieDirectory *directory)
@@ -260,7 +260,7 @@ extern "C" s32 mobiclipProcessUpdate()
         work->state = 7;
         return 0;
     case 6:
-        if (FUN_002e07f4())
+        if (pairedAvailabilityBothReady())
             work->state = 7;
         return 0;
     case 7:
@@ -300,7 +300,7 @@ extern "C" s32 mobiclipProcessUpdate()
         work->state = 12;
         return 0;
     case 12:
-        if (work->error && !FUN_002e07f4())
+        if (work->error && !pairedAvailabilityBothReady())
             return 0;
         scriptStartEntryById("Add_Movie_SD_ERR");
         work->state = 13;
@@ -313,7 +313,7 @@ extern "C" s32 mobiclipProcessUpdate()
         }
         return 0;
     case 14:
-        return FUN_002e07f4() ? -1 : 0;
+        return pairedAvailabilityBothReady() ? -1 : 0;
     default:
         return 0;
     }

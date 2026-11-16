@@ -7,7 +7,7 @@ extern "C" {
 extern AocSystemA *g_aocSystem;
 void asdTextureRelease(AsdTexture *texture);
 void asdTMTexTableReleaseNode(s32 mode, s32 index);
-void FUN_001b2d54(AocSystemA *system, s32 mode, s32 index);
+void packageFileDisableByKindName(AocSystemA *system, s32 mode, s32 index);
 void aocClearFlagD_C(AocSystemA *system, s32 id);
 void aocClearFlagD_10(AocSystemA *system, s32 id);
 void asdMemFree(void *memory);
@@ -37,7 +37,7 @@ void gfxResourceTableReleaseTexturesAndBuffers(ResourceTableView *table)
             if (entry->resource) {
                 if (entry->textureIndex >= 0) {
                     asdTMTexTableReleaseNode(owner->table.identity.mode, entry->textureIndex);
-                    FUN_001b2d54(g_aocSystem, owner->table.identity.mode, entry->textureIndex);
+                    packageFileDisableByKindName(g_aocSystem, owner->table.identity.mode, entry->textureIndex);
                 } else {
                     asdTextureRelease(static_cast<AsdTexture *>(entry->resource));
                 }

@@ -8,7 +8,7 @@
 
 extern "C" {
 extern BtlUiGlobalsA g_btlUi;
-u32 FUN_001692ac(u32, u32);
+u32 renderCtxPackPassFlags(u32, u32);
 void FUN_0028cb88(BtlUiObjCA *);
 void renderCtxResetColorScale(RenderCtxA *);
 
@@ -24,9 +24,9 @@ u32 FUN_00298674(void)
             if (asdTMTexTableNodeIsLoaded(13, i))
                 ++loaded;
         if (loaded >= 11) {
-            FUN_00157558(g_renderCtx);
+            renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
             RenderCtxA *ctx = g_renderCtx;
-            renderCtxPushA(ctx, FUN_001692ac(1, 0));
+            renderCtxPushA(ctx, renderCtxPackPassFlags(1, 0));
             if (FUN_00284e94())
                 FUN_0028cb88(&ui->objC);
             renderStackPop(&g_renderCtx->stackA);

@@ -3,7 +3,7 @@
 
 extern "C" {
 extern AsdSoundSystem g_asdSound;
-void FUN_002bda30(s32 handle, s32 arg);
+void basicSoundStopOrFadeOut(s32 handle, s32 arg);
 void asdMemFree(void *memory);
 void nw_snd_SoundHandle_DetachSound(s32 *handle);
 void nw_snd_SoundHeap_Destroy(void *heap);
@@ -50,13 +50,13 @@ static __inline void asdSoundReleaseSlotC(u32 index)
     AsdSndSlotC *slot = &g_asdSound.slotsC[index];
     if (slot->pad0e[0] != 0) {
         if (slot->handle != 0) {
-            FUN_002bda30(slot->handle, 0);
+            basicSoundStopOrFadeOut(slot->handle, 0);
             nw_snd_SoundHandle_DetachSound(&slot->handle);
         }
         slot->pad0e[0] = 0;
         if (index < ASD_SND_SLOT_C_COUNT) {
             if (slot->handle != 0)
-                FUN_002bda30(slot->handle, 0);
+                basicSoundStopOrFadeOut(slot->handle, 0);
             slot->unk08 = 0;
             slot->volume = ASD_SND_VOLUME_DEFAULT;
             slot->flag = 0;
@@ -70,7 +70,7 @@ static __inline void asdSoundReleaseSlotA(u32 index)
     if (slot->active != 0) {
         for (s32 i = 0; i < 4; i++) {
             if (slot->handles[i] != 0) {
-                FUN_002bda30(slot->handles[i], 0);
+                basicSoundStopOrFadeOut(slot->handles[i], 0);
                 nw_snd_SoundHandle_DetachSound(&slot->handles[i]);
             }
         }
@@ -84,7 +84,7 @@ static __inline void asdSoundReleaseSlotA(u32 index)
         if (index < ASD_SND_SLOT_A_COUNT && slot != NULL) {
             for (s32 i = 0; i < 4; i++) {
                 if (slot->handles[i] != 0)
-                    FUN_002bda30(slot->handles[i], 0);
+                    basicSoundStopOrFadeOut(slot->handles[i], 0);
             }
             slot->volume = ASD_SND_VOLUME_DEFAULT;
             if (slot->hasHeap != 0)

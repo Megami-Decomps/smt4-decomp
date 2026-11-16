@@ -22,7 +22,7 @@ typedef char FountainConfirmationOffsets[offsetof(FountainConfirmationMenuView, 
 extern "C" {
 s32 scrRunOpcodesStub(u32 script);
 void sysPlaySe(u32 id);
-s32 FUN_001517b4(s32 button, s32 mode);
+s32 padQueryLogicalKey(s32 button, s32 mode);
 s32 messageAnyWindowActive(void);
 void eventQueueAddUniqueIfValid(u32 event);
 void messageBannerRestartOrClear(void);
@@ -57,7 +57,7 @@ extern "C" void FUN_004ceb9c(FountainConfirmationMenuView *menu)
     s32 scriptState = scrRunOpcodesStub(menu->script);
     sysPlaySe(0x122);
     if (scriptState != 2) {
-        if (FUN_001517b4(1, 1) == 0 || messageAnyWindowActive() != 0)
+        if (padQueryLogicalKey(1, 1) == 0 || messageAnyWindowActive() != 0)
             return;
         eventQueueAddUniqueIfValid(0x0100020F);
         messageBannerRestartOrClear();

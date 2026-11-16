@@ -1,4 +1,4 @@
-/* NON_MATCHING: battle start request (formation file check, unit flag fix-up, state flags); flag pairs are u64 and FUN_001568f8 returns the state like retail; remaining differences are scheduling/register allocation (retail re-reads unit->state after the respawn test). */
+/* NON_MATCHING: battle start request (formation file check, unit flag fix-up, state flags); flag pairs are u64 and btlFindEntryBlockByMemberId returns the state like retail; remaining differences are scheduling/register allocation (retail re-reads unit->state after the respawn test). */
 #include "common.h"
 
 #define BTL_UNIT_FIRST_ENEMY 4
@@ -17,7 +17,7 @@ struct BtlUnit {
     /* 0x6C */ u8 unk6C[0x164];
 };
 
-/* The data block (unit +0x164) FUN_001568f8 finds for a resource id. */
+/* The data block (unit +0x164) btlFindEntryBlockByMemberId finds for a resource id. */
 struct UnitDataBlock {
     /* 0x00 */ u16 unk00;
     /* 0x02 */ u16 formation;
@@ -70,12 +70,12 @@ void controllerClearVectorState(BtlStartState *state);
 void battleSaveCameraVectors(BtlStartState *state);
 void words10CopyHighToLow(u32 camera);
 s32 FUN_003e0f94(BtlRequest *request, BtlStartState *state);
-UnitDataBlock *FUN_001568f8(BtlStartState *state, s32 resourceId);
+UnitDataBlock *btlFindEntryBlockByMemberId(BtlStartState *state, s32 resourceId);
 s32 pairedEntryTableContains(BtlStartState *state, u16 id);
-void FUN_004fb43c(s32 a, s32 b, u32 id, s32 c, s32 d, s32 e, s32 f);
+void btlQueueActionMessage(s32 a, s32 b, u32 id, s32 c, s32 d, s32 e, s32 f);
 void FUN_003ed6e8(BtlStartState *state);
 void FUN_003f26d4(BtlStartState *state);
-void FUN_002e5924(s32 mode);
+void frameTexRequestFade(s32 mode);
 void FUN_003e0bb8(BtlRequest *request, BtlStartState *state);
 void contentRequestStart(BtlRequest *request, BtlStartState *state);
 
@@ -104,13 +104,13 @@ void FUN_003e1454(BtlRequest *request, BtlStartState *state)
                 if ((unit->flags & 1) != 0 && (unit->flags & 2) != 0 && (unit->state & BTL_UNIT_STATE_RESPAWN) != 0) {
                     unit->state &= ~BTL_UNIT_STATE_RESPAWN;
                     if ((unit->visual & BTL_UNIT_VISUAL_HIDDEN) == 0) {
-                        UnitDataBlock *data = FUN_001568f8(state, unit->resourceId);
+                        UnitDataBlock *data = btlFindEntryBlockByMemberId(state, unit->resourceId);
                         if (pairedEntryTableContains(state, data->formation) == 0)
                             unit->visual |= BTL_UNIT_VISUAL_HIDDEN;
                     }
                 }
             }
-            FUN_004fb43c(0, 0, 0x100021B, 0, 0, 0, 0);
+            btlQueueActionMessage(0, 0, 0x100021B, 0, 0, 0, 0);
             FUN_003ed6e8(state);
             FUN_003f26d4(state);
             state->flags |= g_btlEncount.formation | g_btlEncount.ready;
@@ -120,7 +120,7 @@ void FUN_003e1454(BtlRequest *request, BtlStartState *state)
         request->unk0C = 0;
         result = FUN_003e0f94(request, state);
         if (result != 2 && result != 5 && (state->flags & g_btlEncount.intro) == 0) {
-            FUN_002e5924(2);
+            frameTexRequestFade(2);
             state->flags |= g_btlEncount.intro;
         }
         FUN_003e0bb8(request, state);

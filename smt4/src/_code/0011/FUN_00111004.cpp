@@ -36,7 +36,7 @@ u32 FUN_00111004(u32 handle)
         s32 result = FUN_002c40f8(&signalled, &waitHandle, 1, 0, 0, 0);
         bool failed = nnResultIsFailure(result);
         if (failed) {
-            FUN_002c526c(result, failed);
+            resultHandleFailure(result, failed);
         }
         if (!nnResultIsNotTimeout(result) && work->requestId == work->completedId) {
             kernelThreadJoinAndClose(&work->waitHandle);

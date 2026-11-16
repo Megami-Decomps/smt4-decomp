@@ -5,7 +5,7 @@
 extern "C" {
 
 int nn_os_LightEvent_Signal(int);
-int FUN_002e3140(void);
+int resultHandleFailure(void);
 int hasExclusiveAccess(unsigned int *);
 int software_interrupt(int);
 
@@ -13,7 +13,7 @@ typedef int romwright_code(...);
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
 /* Supplied declaration required: nn_os_LightEvent_Signal. */
-/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: resultHandleFailure. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -34,11 +34,11 @@ void FUN_001a26e4(int param_1)
   while( 1 ) {
     software_interrupt(0x24);
     if (*(int *)(param_1 + 0x2c) < 0) {
-      FUN_002e3140();
+      resultHandleFailure();
     }
     software_interrupt(0x19);
     if (*(int *)(param_1 + 0x2c) < 0) {
-      FUN_002e3140();
+      resultHandleFailure();
     }
     if (*(char *)(param_1 + 0x77) != '\0') break;
     while( 1 ) {

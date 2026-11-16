@@ -5,7 +5,7 @@ extern "C" {
 extern const NamedVariantTableKey DAT_00439d20[455];
 void *fileSlotGetBuffer(u32 table);
 u32 binFileGetValue(void *file);
-void *FUN_0024ba44(void *file, u32 block);
+void *fbinGetFile(void *file, u32 block);
 u32 tbcrBlockGetPayload(void *block);
 void *dataTableFileGetTable(void *block, u32 table);
 NamedVariantTableEntry *dataTableGetEntries(void *table);
@@ -16,7 +16,7 @@ static inline NamedVariantTableEntry *namedVariantResolve(u32 blockIndex, u32 ta
     void *file = fileSlotGetBuffer(7);
     if (binFileGetValue(file) <= blockIndex)
         blockIndex = 0;
-    void *block = FUN_0024ba44(file, blockIndex);
+    void *block = fbinGetFile(file, blockIndex);
     if (tbcrBlockGetPayload(block) <= tableIndex)
         tableIndex = 0;
     return dataTableGetEntries(dataTableFileGetTable(block, tableIndex));

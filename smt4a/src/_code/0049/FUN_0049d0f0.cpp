@@ -7,12 +7,12 @@ struct RankedEntry {
 
 extern "C" {
 
-s32 FUN_0049c9a0(const RankedEntry *entry);
+s32 recordGetCompareValue(const RankedEntry *entry);
 
 static s32 compareRanks(const RankedEntry *left, const RankedEntry *right)
 {
-    s32 leftRank = FUN_0049c9a0(left);
-    s32 rightRank = FUN_0049c9a0(right);
+    s32 leftRank = recordGetCompareValue(left);
+    s32 rightRank = recordGetCompareValue(right);
     return leftRank - rightRank;
 }
 

@@ -52,7 +52,7 @@ void FUN_0021b390(FilterMenuA *menu, s32 kind, s32 index, char *label);
    the entry the settings currently have selected. */
 u8 FUN_00240210(FilterMenuA *menu, s32 kind, char *label, s32 entry)
 {
-    FilterSelectionA *settings = &reinterpret_cast<FilterSettingsA *>(FUN_0026140c())->selection;
+    FilterSelectionA *settings = &reinterpret_cast<FilterSettingsA *>(saveGetUserSettingsBlock())->selection;
     u8 selected = 0;
 
     if (kind == 0) {

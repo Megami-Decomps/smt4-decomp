@@ -12,8 +12,8 @@ s32 gameFlagIsSet(u32 flag);
 s32 FUN_0040ab8c(BattleViewOwner *owner);
 void FUN_0040ab7c(BattleViewOwner *owner, s32 mode);
 void FUN_0040aad4(BattleViewOwner *owner, BattleViewObject *parent);
-void FUN_003fd7b4(BattleViewObject *object, f32 x, f32 y, f32 z);
-void FUN_003fe86c(BattleViewObject *object, s32 first, s32 second, f32 x, f32 y);
+void controllerSetPositionXyz(BattleViewObject *object, f32 x, f32 y, f32 z);
+void modelPlayClip(BattleViewObject *object, s32 first, s32 second, f32 x, f32 y);
 void handleRegistryRegisterObject(void *registry, BattleViewObject *object);
 }
 
@@ -21,8 +21,8 @@ static inline void activateBattleView(BattleViewOwner **slot)
 {
     FUN_0040aad4(*slot, NULL);
     BattleViewObject *object = (*slot)->object;
-    FUN_003fd7b4(object, 0.0f, 0.0f, 0.0f);
-    FUN_003fe86c(object, 0, 2, 0.0f, 0.0f);
+    controllerSetPositionXyz(object, 0.0f, 0.0f, 0.0f);
+    modelPlayClip(object, 0, 2, 0.0f, 0.0f);
     handleRegistryRegisterObject(g_handleRegistry, object);
     object->flags |= 1;
 }

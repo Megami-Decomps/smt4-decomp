@@ -7,13 +7,13 @@ extern "C" {
 
 extern u32 g_handleRegistry;
 
-void FUN_003fe86c(ControllerModel *model, u32 index, u8 flags, f32 time, f32 blend);
+void modelPlayClip(ControllerModel *model, u32 index, u8 flags, f32 time, f32 blend);
 u32 FUN_00340f80(Obj557ae8 *object);
-void *FUN_00178b04(u32 size, const char *file, u32 line);
+void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 ModelList *modelListInit(ModelList *list);
 void ptrListRemoveClearOwner(u32 registry, ControllerModel *model);
 void FUN_003e573c(Obj557ae8 *object, s32 index, const char *name, u16 kind);
-void FUN_003fd7b4(ControllerModel *model, f32 x, f32 y, f32 z);
+void controllerSetPositionXyz(ControllerModel *model, f32 x, f32 y, f32 z);
 void FUN_0040aad4(Obj557ae8Child *child, ControllerModel *parent);
 void FUN_0040ab7c(Obj557ae8Child *child, s32 mode);
 s32 FUN_0040ab8c(Obj557ae8Child *child);
@@ -29,8 +29,8 @@ void FUN_003e5858(Obj557ae8 *object)
                 FUN_0040ab7c(object->owned, 2);
                 FUN_0040aad4(object->owned, NULL);
                 ControllerModel *model = object->owned->model;
-                FUN_003fd7b4(model, 0.0f, 0.0f, 0.0f);
-                FUN_003fe86c(model, 0, 2, 0.0f, 0.0f);
+                controllerSetPositionXyz(model, 0.0f, 0.0f, 0.0f);
+                modelPlayClip(model, 0, 2, 0.0f, 0.0f);
                 handleRegistryRegisterObject(g_handleRegistry, model);
                 object->owned->model->flags |= 1;
                 object->unk04 = 0;
@@ -48,7 +48,7 @@ void FUN_003e5858(Obj557ae8 *object)
                 FUN_0040ab7c(slot->child, 2);
                 FUN_0040aad4(slot->child, object->owned->model);
                 ControllerModel *model = slot->child->model;
-                FUN_003fd7b4(model, 0.0f, 0.0f, 0.0f);
+                controllerSetPositionXyz(model, 0.0f, 0.0f, 0.0f);
                 handleRegistryRegisterObject(g_handleRegistry, model);
                 finished = true;
                 slot->state = 0;
@@ -68,7 +68,7 @@ void FUN_003e5858(Obj557ae8 *object)
             }
             slot->state = 0;
             if (slot->name[0] != '\0') {
-                void *storage = FUN_00178b04(0x20, "c:\\SMT4F\\SMT4F\\sdds4\\program\\player_model\\playerModel.cpp", 906);
+                void *storage = asdMemoryAllocTraced(0x20, "c:\\SMT4F\\SMT4F\\sdds4\\program\\player_model\\playerModel.cpp", 906);
                 slot->child = storage != NULL ? (Obj557ae8Child *)modelListInit((ModelList *)storage) : NULL;
                 FUN_003e573c(object, i, slot->name, slot->kind);
             }

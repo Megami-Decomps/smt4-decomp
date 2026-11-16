@@ -460,7 +460,7 @@ struct JobAnimationWorkPrefixA {
     JobAnimationParametersPrefixA *animation; // 0x04
     u8 mode; // 0x08
     u8 unk09[0x23];
-    u8 unk2C[4]; // address passed to FUN_00163aa4; extent unknown
+    u8 unk2C[4]; // address passed to uiSpriteAdvanceAnimation; extent unknown
     s32 code; // 0x30
 };
 

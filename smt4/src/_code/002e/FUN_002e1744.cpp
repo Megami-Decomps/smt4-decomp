@@ -6,7 +6,7 @@
 
 extern "C" {
 u32 FUN_0026f784(void *link);
-ScriptRunState *FUN_00297060(void *resource, u32 entry);
+ScriptRunState *scrScriptProcessCreate(void *resource, u32 entry);
 void scriptProcessSetMode(ScriptRunState *process, s32 mode);
 void linkHolderApplyFlag(void *link, u32 flag);
 void characterInfoPanelPopulate(void *panel, u32 selection, const void *record);
@@ -52,7 +52,7 @@ u32 FUN_002e1744(void *object)
     if (!transition->busy && FUN_0026f784(work->link) &&
         work->resource != NULL && work->entry != 0 && work->record != NULL) {
         if (work->ready == 1) {
-            work->process = FUN_00297060(work->resource, work->entry);
+            work->process = scrScriptProcessCreate(work->resource, work->entry);
             scriptProcessSetMode(work->process, 2);
             work->transition.busy = 1;
             linkHolderApplyFlag(work->link, 1);

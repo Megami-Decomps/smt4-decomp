@@ -4,7 +4,7 @@ extern "C" {
 
 int campFreeFileSlot(void);
 int campReleaseTouchRegions(void);
-int FUN_0028a22c(void);
+int partyPanelReleaseResources(void);
 int buttonHelpRelease(void);
 int uiFadeRelease(void);
 int asdMemFree(void *ptr);
@@ -17,7 +17,7 @@ void campDestroy(void)
     u32 *block = g_camp;
 
     campReleaseTouchRegions();
-    FUN_0028a22c();
+    partyPanelReleaseResources();
     uiFadeRelease();
     buttonHelpRelease();
     campFreeFileSlot();

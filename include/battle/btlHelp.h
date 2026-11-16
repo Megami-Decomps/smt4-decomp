@@ -46,7 +46,7 @@ typedef char BtlHelpEntryIVLayoutCheck[
     offsetof(BtlHelpEntryIV, next) == 0x2A4 &&
     sizeof(BtlHelpEntryIV) == 0x2B0 && sizeof(BtlHelpListIV) == 0xC ? 1 : -1];
 
-extern "C" BtlHelpEntryIV *FUN_0022a4ac(u16 id, s16 style, u32 argument, u32 resource,
+extern "C" BtlHelpEntryIV *btlHelpEntryCreate(u16 id, s16 style, u32 argument, u32 resource,
     const void *body, u8 option, BtlHelpValue value);
 
 /* The help block, kept by a module global (Apocalypse). */

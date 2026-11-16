@@ -16,7 +16,7 @@ u32 FUN_002f0a0c()
     s32 group = btlScriptResolveGroupArg(scrGetArg(1));
     s32 first;
     s32 count;
-    FUN_002499fc(group, &first, &count);
+    btlSideGetEntryRange(group, &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlEntry *entry = &btlGetMainState()->entries[index];
         if ((entry->flags & BTL_ENTRY_FLAG_PRESENT) == 0 &&

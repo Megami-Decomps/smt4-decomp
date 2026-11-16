@@ -15,7 +15,7 @@ extern GameStateView g_gameState;
 int FUN_0019e3d0(...);
 int distSpatial(void);
 int mapRenderApplySecondary(void);
-int FUN_0050d8e4(void);
+int __hardfp_atan2f(void);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(unsigned int, int);
 int nn_math_ARMv6_VEC3TransformAsm_2AD44C(float *, float *, float *);
@@ -85,7 +85,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019e3d0. */
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: mapRenderApplySecondary. */
-/* Supplied declaration required: FUN_0050d8e4. */
+/* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
 
@@ -157,7 +157,7 @@ void FUN_002cfb18(void)
     temp_v16 = DAT_005f0c9c;
     distSpatial();
     temp_v6 = *(float *)(g_lmapView + 0x50) - temp_v15;
-    FUN_0050d8e4();
+    __hardfp_atan2f();
     temp_v6 = temp_v6 * 57.32484f * 0.7111111f;
     temp_v7 = 0;
     temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(0.0f <= temp_v6) << 0x1d);

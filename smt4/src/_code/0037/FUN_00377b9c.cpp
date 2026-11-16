@@ -5,7 +5,7 @@
 extern "C" {
 
 int nw_snd_SoundArchive_GetSoundType(...);
-int FUN_002bda30(...);
+int basicSoundStopOrFadeOut(...);
 int FUN_00377a10(...);
 int FUN_003784a4(...);
 int FUN_00378698(...);
@@ -55,7 +55,7 @@ typedef struct {
 extern int FUN_0014d3fc(unsigned int, unsigned int, unsigned char *);
 extern int FUN_0014d478(unsigned int, unsigned int, unsigned char *);
 extern int FUN_0014d530(unsigned int, unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_002bda30. */
+/* Supplied declaration required: basicSoundStopOrFadeOut. */
 extern int FUN_002bf684(void);
 /* Supplied declaration required: FUN_00377a10. */
 /* Supplied declaration required: FUN_003784a4. */
@@ -217,7 +217,7 @@ LAB_003780a4:
             temp_v5 = UnsignedSaturate(temp_v7,7);
             UnsignedDoesSaturate(temp_v7,7);
             if (temp_v5 <= temp_v4) {
-              FUN_002bda30(temp_v6 - 0xd4,0);
+              basicSoundStopOrFadeOut(temp_v6 - 0xd4,0);
               goto LAB_003780a4;
             }
           }
@@ -272,7 +272,7 @@ LAB_00377f48:
             temp_v5 = UnsignedSaturate(temp_v7,7);
             UnsignedDoesSaturate(temp_v7,7);
             if (temp_v5 <= temp_v4) {
-              FUN_002bda30(temp_v6 - 0xd4,0);
+              basicSoundStopOrFadeOut(temp_v6 - 0xd4,0);
               goto LAB_00377f48;
             }
           }
@@ -328,7 +328,7 @@ LAB_00377d84:
           temp_v5 = UnsignedSaturate(temp_v7,7);
           UnsignedDoesSaturate(temp_v7,7);
           if (temp_v5 <= temp_v4) {
-            FUN_002bda30(temp_v6 - 0xd4,0);
+            basicSoundStopOrFadeOut(temp_v6 - 0xd4,0);
             goto LAB_00377d84;
           }
         }

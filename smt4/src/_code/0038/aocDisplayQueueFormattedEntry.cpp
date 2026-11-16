@@ -6,7 +6,7 @@ extern "C" {
 
 extern u32 g_aocDisplay;
 
-extern s32 FUN_002a6e7c(u32 a, s32 kind, u32 b, u8 *buffer);
+extern s32 packageFindFileByTypeAndId(u32 a, s32 kind, u32 b, u8 *buffer);
 extern void aocDisplayQueueRecord(u32 display, u8 *buffer, u32 d, u32 c, s32 e, s32 size, s32 length);
 
 static inline void formatAndQueueAocRecord(u32 a, s32 kind, u32 b, u32 c, u32 d)
@@ -15,7 +15,7 @@ static inline void formatAndQueueAocRecord(u32 a, s32 kind, u32 b, u32 c, u32 d)
     s32 length;
 
     memClear(buffer, sizeof(buffer));
-    length = FUN_002a6e7c(a, kind, b, buffer);
+    length = packageFindFileByTypeAndId(a, kind, b, buffer);
     if (length != 0) {
         aocDisplayQueueRecord(g_aocDisplay, buffer, d, c, 0, sizeof(buffer), length);
     }

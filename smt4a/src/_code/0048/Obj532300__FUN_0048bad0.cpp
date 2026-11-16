@@ -48,7 +48,7 @@ extern "C" {
 
 extern NaviGameFlags g_gameState;
 
-s32 FUN_00163aa4(void *sprite, f32 delta);
+s32 uiSpriteAdvanceAnimation(void *sprite, f32 delta);
 s8 uiSpriteGetCompletionState(const void *sprite);
 void uiSpriteBankApplyPreset(void *bank, s32 preset);
 void uiSpriteSetKeyframe(void *sprite, s32 keyframe, s32 restart);
@@ -93,7 +93,7 @@ void _ZN9Obj53230012FUN_0048bad0Ev(NaviMenu *menu)
         }
     } else if (menu->step == 1) {
         void *titleSprite = menu->titleSprite;
-        if (FUN_00163aa4(titleSprite, 1.0f) != 0) {
+        if (uiSpriteAdvanceAnimation(titleSprite, 1.0f) != 0) {
             menu->flags &= ~NAVI_FLAG_SLIDE_DONE;
             FUN_002d22c0(1);
             g_gameState.naviOpen = 1;
@@ -101,13 +101,13 @@ void _ZN9Obj53230012FUN_0048bad0Ev(NaviMenu *menu)
         }
         pointConvertToFloat(menu->cursorPoint, vec2GetXInt(titleSprite), vec2GetYInt(titleSprite));
         for (i = 0; i < NAVI_SLOT_COUNT; i++) {
-            FUN_00163aa4(menu->slotSprites[i], 1.0f);
+            uiSpriteAdvanceAnimation(menu->slotSprites[i], 1.0f);
         }
-        FUN_00163aa4(menu->backSprite, 1.0f);
-        FUN_00163aa4(&menu->frameSprite, 1.0f);
+        uiSpriteAdvanceAnimation(menu->backSprite, 1.0f);
+        uiSpriteAdvanceAnimation(&menu->frameSprite, 1.0f);
     } else if (menu->step == 2) {
         if (uiSpriteGetCompletionState(&menu->frameSprite) == 0) {
-            FUN_00163aa4(&menu->frameSprite, 1.0f);
+            uiSpriteAdvanceAnimation(&menu->frameSprite, 1.0f);
         }
         menu->mode = 2;
         menu->step = 0;

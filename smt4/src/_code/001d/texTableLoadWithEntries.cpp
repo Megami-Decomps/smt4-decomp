@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002c58c8(int table, int index);
+int asdTMTexTablePrepareNodeImage(int table, int index);
 int asdTMTexTableLoadTmx(int table, int flag);
 
 void texTableLoadWithEntries(void)
@@ -12,7 +12,7 @@ void texTableLoadWithEntries(void)
     asdTMTexTableLoadTmx(0x25, 0);
     i = 0;
     do {
-        FUN_002c58c8(0x25, i);
+        asdTMTexTablePrepareNodeImage(0x25, i);
         i++;
     } while (i < 4);
 }

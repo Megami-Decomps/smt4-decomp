@@ -34,7 +34,7 @@ extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_003dfad4. */
 extern int countUnlockedSlots(void);
 /* Supplied declaration required: recordGetPercentageScaledBase. */
-extern int FUN_004ccbf0(unsigned short);
+extern int levelGetExpRequirement(unsigned short);
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
@@ -72,7 +72,7 @@ void FUN_002cb55c(unsigned short *param_1,unsigned short *param_2,unsigned int *
   temp_v0 = param_2[0x31];
   *param_1 = 0xffff;
   param_1[1] = temp_v0;
-  temp_v4 = FUN_004ccbf0(param_2[0x31]);
+  temp_v4 = levelGetExpRequirement(param_2[0x31]);
   temp_v0 = param_2[0x15];
   temp_v1 = param_2[0x16];
   *(int *)(param_1 + 2) = temp_v4 - *(int *)(param_2 + 0x18);

@@ -11,7 +11,7 @@ s32 uiPointerHitsRect(s32 x, s32 y, s32 width, s32 height, u32 pointer)
     s32 px;
     s32 py;
 
-    if (FUN_00167c14(reinterpret_cast<u32 *>(&px), reinterpret_cast<u32 *>(&py), pointer) != 0) {
+    if (touchGetPointByMode(reinterpret_cast<u32 *>(&px), reinterpret_cast<u32 *>(&py), pointer) != 0) {
         if (x <= px && px <= x + width && y <= py && py <= y + height) {
             hit = 1;
         }

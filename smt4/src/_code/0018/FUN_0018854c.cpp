@@ -23,7 +23,7 @@ int sortMenuCreate(...);
 int objectPartRunUnlessLocked(...);
 int buttonHelpSetText(...);
 int buttonHelpSetPreset(...);
-int FUN_002bf810(...);
+int soundPlaySeUnpanned(...);
 
 int FUN_002996d8(...);
 int campPreviewSelectedEquipment(...);
@@ -101,7 +101,7 @@ extern unsigned char buttonHelpGetStatus(void);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002bf810. */
+/* Supplied declaration required: soundPlaySeUnpanned. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
 
@@ -397,7 +397,7 @@ void FUN_0018854c(unsigned int param_1)
       FUN_0029a0e8(psVar3);
       FUN_0029a0cc(psVar3);
       eventQueueAddUniqueIfValid(0x100016d);
-      FUN_002bf810(0x100025f);
+      soundPlaySeUnpanned(0x100025f);
       return;
     }
     temp_v4 = 1;

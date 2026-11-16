@@ -13,7 +13,7 @@ int efctSetSpeed(void);
 int renderCtxResetColorScale(...);
 int skinObjectUpdateMatrices(...);
 int asdTMTexTableEntryAt(...);
-int FUN_00183bb0(void);
+int gxResetColorQuadToWhite(void);
 int renderCtxCalculateStereoParallax(int);
 int VectorSignedToFloat(...);
 int __aeabi_memcpy4(int [24], unsigned char *, int);
@@ -40,11 +40,11 @@ extern int vec2GetXInt(void);
 extern int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-extern int FUN_001692ac(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
-/* Supplied declaration required: FUN_00183bb0. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
@@ -79,7 +79,7 @@ s32 FUN_00472820(u32 job)
     renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v2 = g_renderCtx;
     temp_v14 = (int)temp_v11;
-    temp_v1 = FUN_001692ac(1,0);
+    temp_v1 = renderCtxPackPassFlags(1,0);
     piVar12 = (int *)(temp_v2 + 0x1258);
     temp_v6 = *piVar12;
     temp_v7 = piVar12[temp_v6 + 2];
@@ -90,7 +90,7 @@ s32 FUN_00472820(u32 job)
       *(unsigned char *)(temp_v2 + 0x1270) = 0;
     }
     efctSetSpeed();
-    FUN_001835b4(2,8,0x106,0,0,6);
+    texDrawTableEntryAtStoredOrigin(2,8,0x106,0,0,6);
     efctSetSpeed();
     temp_v2 = g_renderCtx;
     temp_v1 = packNibblesAndByte(6,1,0);
@@ -129,7 +129,7 @@ s32 FUN_00472820(u32 job)
       temp_v1 = temp_v1 + temp_v14;
       temp_v6 = vec2GetYInt(puVar2 + 0x133);
       temp_v2 = g_renderCtx;
-      temp_v7 = FUN_001692ac(1,0);
+      temp_v7 = renderCtxPackPassFlags(1,0);
       piVar12 = (int *)(temp_v2 + 0x1258);
       temp_v8 = *piVar12;
       temp_v9 = piVar12[temp_v8 + 2];
@@ -161,7 +161,7 @@ s32 FUN_00472820(u32 job)
               temp_v8 = (int)*(short *)(temp_v2 + 8) + aiStack_a0[temp_v3 * 2];
               temp_v7 = aiStack_a0[temp_v3 * 2 + 1] + (int)*(short *)(temp_v2 + 10);
               if (temp_v10 == temp_v3 || temp_v5 == temp_v3) {
-                FUN_001835b4(2,8,0x155,temp_v8,temp_v7,0x15);
+                texDrawTableEntryAtStoredOrigin(2,8,0x155,temp_v8,temp_v7,0x15);
               }
               else {
                 temp_v0 = (int)*(short *)(temp_v2 + 10);
@@ -169,10 +169,10 @@ s32 FUN_00472820(u32 job)
                   temp_v0 = temp_v13;
                 }
                 if (!(temp_v12 != temp_v3 && temp_v0 != temp_v3)) {
-                  FUN_001835b4(2,8,0x156,temp_v8,temp_v7,0x15);
+                  texDrawTableEntryAtStoredOrigin(2,8,0x156,temp_v8,temp_v7,0x15);
                 }
                 else {
-                  FUN_001835b4(2,8,0x154,temp_v8,temp_v7,0x15);
+                  texDrawTableEntryAtStoredOrigin(2,8,0x154,temp_v8,temp_v7,0x15);
                 }
               }
               temp_v6 = temp_v6 + 1;
@@ -182,8 +182,8 @@ s32 FUN_00472820(u32 job)
         }
       }
       else {
-        FUN_001835b4(2,8,0xdf,*(short *)(temp_v2 + 8) + temp_v1,*(short *)(temp_v2 + 10) + temp_v6,0x13);
-        FUN_001835b4(2,8,0xde,*(short *)(temp_v2 + 8) + temp_v1,*(short *)(temp_v2 + 10) + temp_v6,0x15);
+        texDrawTableEntryAtStoredOrigin(2,8,0xdf,*(short *)(temp_v2 + 8) + temp_v1,*(short *)(temp_v2 + 10) + temp_v6,0x13);
+        texDrawTableEntryAtStoredOrigin(2,8,0xde,*(short *)(temp_v2 + 8) + temp_v1,*(short *)(temp_v2 + 10) + temp_v6,0x15);
       }
       temp_v4 = FUN_0023b4a4(5);
       temp_v5 = puVar2[4];
@@ -226,7 +226,7 @@ s32 FUN_00472820(u32 job)
         (**(romwright_code **)(temp_v2 + 0x1274))();
         *(unsigned char *)(temp_v2 + 0x1270) = 0;
       }
-      FUN_00183bb0();
+      gxResetColorQuadToWhite();
       efctSetSpeed();
       skinObjectUpdateMatrices(g_renderCtx);
       renderCtxResetColorScale(g_renderCtx);

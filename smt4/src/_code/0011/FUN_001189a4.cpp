@@ -23,11 +23,11 @@ struct RowMenu {
 
 extern "C" {
 extern u32 g_titleScene;
-u32 FUN_002c5d80(u32 value, bool enabled);
+u32 renderCtxPackPassFlags(u32 value, bool enabled);
 void renderStackPushIndexed(u32 scene, u32 slot, u32 value);
 void renderCtxPopState(u32 scene, u32 slot);
 SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 id);
-void FUN_002bf380(u32 screen, u32 group, u32 id, s32 x, s32 y, u32 priority);
+void texDrawCompositeSprite(u32 screen, u32 group, u32 id, s32 x, s32 y, u32 priority);
 f32 FUN_00126830(u8 *view, s32 index);
 void positionStateSet(f32 scale, u8 *view, u32 a, u32 color);
 void FUN_002b75ec(f32 scale, u8 *view, s32 x, s32 y, u32 style, u32 priority, s32 index);
@@ -38,7 +38,7 @@ void FUN_001189a4(RowMenu *menu)
     static const u32 rowSprites[9] = {0xA8, 0xA9, 0x9C, 0x9D, 0x9E, 0xB0, 0xB1, 0xB2, 0xB3};
     if (menu->state != 1 && menu->state != 5)
         return;
-    renderStackPushIndexed(g_titleScene, 3, FUN_002c5d80(1, false));
+    renderStackPushIndexed(g_titleScene, 3, renderCtxPackPassFlags(1, false));
     if (menu->mode == 11) {
         u32 sprites[9];
         for (s32 i = 0; i < 9; i++)
@@ -66,10 +66,10 @@ void FUN_001189a4(RowMenu *menu)
         for (s32 i = 0; i < menu->rowCount; i++) {
             SpriteInfo *sprite = asdTMTexTableEntryAt(0x3A, 0x98 + i);
             if (menu->selected == i) {
-                FUN_002bf380(2, 0x3A, 0x12, sprite->x, sprite->y, 11);
+                texDrawCompositeSprite(2, 0x3A, 0x12, sprite->x, sprite->y, 11);
                 *reinterpret_cast<u32 *>(menu->view + 0xB0) = 15;
             } else {
-                FUN_002bf380(2, 0x3A, 0x11, sprite->x, sprite->y, 11);
+                texDrawCompositeSprite(2, 0x3A, 0x11, sprite->x, sprite->y, 11);
                 *reinterpret_cast<u32 *>(menu->view + 0xB0) = 14;
             }
             s32 width = static_cast<s32>(FUN_00126830(menu->view, i));

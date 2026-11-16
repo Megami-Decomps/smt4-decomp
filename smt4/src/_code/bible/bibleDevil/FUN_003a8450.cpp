@@ -101,7 +101,7 @@ void FUN_003a8450(DevilView *view)
         FUN_0029ede8(0x18, shown, 0xFFFFFFFF, 0);
         if (demonPurchaseValidate(view, shown) != 0) {
             char text[0x84];
-            FUN_002bd06c(shown);
+            dataTable01FindByIdWithAoc(shown);
             libc_strcpy(reinterpret_cast<unsigned int *>(text), reinterpret_cast<unsigned int *>(shown));
             textEncodeFontSlot(8, text);
             libc_strcpy(reinterpret_cast<unsigned int *>(text), reinterpret_cast<unsigned int *>(demonGetRaceLabel(shown, 1)));

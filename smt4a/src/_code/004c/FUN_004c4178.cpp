@@ -6,7 +6,7 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_001568f8(...);
+int btlFindEntryBlockByMemberId(...);
 int dataTable04FindById(void);
 int FUN_00243d30(...);
 int FUN_0028cb6c(void);
@@ -57,7 +57,7 @@ extern unsigned int DAT_0057149c; /* 0x57149c */
 #endif
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_001568f8. */
+/* Supplied declaration required: btlFindEntryBlockByMemberId. */
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_00243d30. */
 /* Supplied declaration required: FUN_0028cb6c. */
@@ -138,9 +138,9 @@ int FUN_004c4178(fn_004c4178_arg0 *param_1,int param_2,unsigned int param_3,int 
   iStack_28 = param_4;
   pbVar2 = (unsigned char *)reinterpret_cast<int>(btlGetMainState());
   temp_v21 = pbVar2;
-  FUN_001568f8(pbVar2,param_2);
+  btlFindEntryBlockByMemberId(pbVar2,param_2);
   pbVar3 = temp_v21;
-  FUN_001568f8(temp_v21,param_3);
+  btlFindEntryBlockByMemberId(temp_v21,param_3);
   temp_v10 = (float)VectorUnsignedToFloat
                             ((unsigned int)*(unsigned short *)(pbVar2 + 0x116),(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v15 = VectorSignedToFloat((int)*(short *)(pbVar2 + 0x108),(unsigned char)(in_fpscr >> 0x16) & 3);

@@ -60,10 +60,10 @@ extern BattleActionGlobals g_btlAction;
 extern void *g_btlActionReflect;
 
 s32 chainCountIdUnflagged(void *owner);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
 u32 FUN_004c9160(s32 kind, void *object, s32 mode, s32 option);
 void FUN_004fe764(s32 unit, CommandMenu *menu, s32 target, s32 value, s32 mode);
-void FUN_004fb43c(s32 actor, CommandMenu *menu, u32 options, s32 a, s32 b, s32 c, s32 d);
+void btlQueueActionMessage(s32 actor, CommandMenu *menu, u32 options, s32 a, s32 b, s32 c, s32 d);
 void FUN_004c9d04(s32 index, s32 a, s32 b);
 SlotRecord *gameGetSlotRecord(s32 slotIndex);
 void FUN_004fcf0c(s32 row, CommandMenu *menu, s32 first, s32 slot, s32 member, s32 last);
@@ -92,10 +92,10 @@ u32 FUN_004e0314(BattleMenuOwner *owner, CommandMenu *menu)
         if (menu->frames < 10) {
             return 0;
         }
-        BtlCombatantEntryA *current = FUN_003eaf20(owner->state);
+        BtlCombatantEntryA *current = btlFindFirstEntryMatchingCategoryAndRequiredMask(owner->state);
         FUN_004c9160(0x38, current, 0, 1);
         FUN_004fe764(0, menu, 0, 10, 6);
-        FUN_004fb43c(0, menu, 0x1000296, 0, 1, 0, 0);
+        btlQueueActionMessage(0, menu, 0x1000296, 0, 1, 0, 0);
         for (s32 i = 0; i < 109; i++) {
             BtlCombatantEntryA *entry = &owner->state->entries[i];
             if ((g_btlAction.requiredAny & entry->flags) != 0 && (entry->flags & g_btlAction.excluded) == 0 &&

@@ -7,7 +7,7 @@ SpriteTransitionWork *jobGetWork(u32 job);
 void aocSlotRelease(SpriteTransitionWork *work);
 s32 bustupCutAnimAssignSlot(u32 job, u32 portrait);
 void bustupSpriteStartTransition(SpriteTransitionWork *work, u32 mode, u32 flags);
-void FUN_001ad1ac(Vec3f *target, u32 portrait);
+void bustupPlaceActiveSlot(Vec3f *target, u32 portrait);
 
 void bustupConfigureSlotTransition(u32 job, u32 portrait, s32 mode, u32 first, u32 second, u32 third)
 {
@@ -56,7 +56,7 @@ void bustupConfigureSlotTransition(u32 job, u32 portrait, s32 mode, u32 first, u
             current->state = 1;
             current->start = position;
         }
-        FUN_001ad1ac(&work->target, work->unk08);
+        bustupPlaceActiveSlot(&work->target, work->unk08);
         break;
     }
 }

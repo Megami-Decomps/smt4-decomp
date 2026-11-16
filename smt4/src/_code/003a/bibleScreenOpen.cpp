@@ -13,8 +13,8 @@ extern int buttonHelpAcquireResources(void);
 extern int asdLoadFileAsyncSimple(const char *path, void **buffer, int flags);
 extern int gameGlobalsSetSelected(int);
 extern int FUN_0029e788(void);
-extern int FUN_0029e874(int);
-extern int FUN_002c58c8(int, int);
+extern int gameSetIconDisplayEnabled(int);
+extern int asdTMTexTablePrepareNodeImage(int, int);
 extern int *asdTMTexTableGetEntry(u32);
 extern int campButtonHelpIsActive(void);
 
@@ -35,13 +35,13 @@ void bibleScreenOpen(BibleScreen *screen)
     if (*asdTMTexTableGetEntry(0x1D) == 0) {
         asdTMTexTableLoadSprites(0x1D);
         for (i = 0; i < 3; i++) {
-            FUN_002c58c8(0x1D, i);
+            asdTMTexTablePrepareNodeImage(0x1D, i);
         }
         screen->sprites1dLoaded = 1;
     }
     FUN_0028c040();
     gameGlobalsSetSelected(2);
-    FUN_0029e874(1);
+    gameSetIconDisplayEnabled(1);
     FUN_0029e788();
     FUN_002a0cc8(1);
     asdLoadFileAsyncSimple("bible/bible.bf", &screen->files.bibleBf, 0);

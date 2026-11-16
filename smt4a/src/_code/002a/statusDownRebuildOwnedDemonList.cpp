@@ -6,7 +6,7 @@
 extern "C" {
 extern StatusDownStateA *g_statusDown;
 void sysMemClear(void *memory, u32 size);
-void FUN_00203b40(void *controller, s32 count, s32 rows, s32 columns, s32 arg4, s32 arg5);
+void gridNavigationConfigure(void *controller, s32 count, s32 rows, s32 columns, s32 arg4, s32 arg5);
 void scrollOwnerSelectIndex(void *controller, s32 column);
 void FUN_003d4104(void);
 
@@ -29,16 +29,16 @@ void statusDownRebuildOwnedDemonList(const u8 *quantities)
         }
     }
     void *controller = state->inventory.controller;
-    FUN_00203b40(controller, state->inventory.count, 9, 4, 1, 1);
+    gridNavigationConfigure(controller, state->inventory.count, 9, 4, 1, 1);
     s32 count = state->inventory.count;
     if (count > 0 && count <= state->inventory.column + state->inventory.row * 4) {
         u16 row = (count - 1) / 4;
         state->inventory.row = row;
         state->inventory.column = count - row * 4 - 1;
-        FUN_002a4964(reinterpret_cast<ScrollSelection *>(controller), row);
+        scrollListSetSelectionTracked(reinterpret_cast<ScrollSelection *>(controller), row);
         scrollOwnerSelectIndex(controller, state->inventory.column);
     } else {
-        FUN_002a4964(reinterpret_cast<ScrollSelection *>(controller), state->inventory.row);
+        scrollListSetSelectionTracked(reinterpret_cast<ScrollSelection *>(controller), state->inventory.row);
         scrollOwnerSelectIndex(controller, state->inventory.column);
     }
     FUN_003d4104();

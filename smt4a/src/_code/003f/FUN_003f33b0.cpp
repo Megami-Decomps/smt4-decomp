@@ -32,7 +32,7 @@ void FUN_002a6894(void* record);
 void qsort(void* base, u32 count, u32 size, s32 (*compare)(const void*, const void*));
 s32 FUN_002c2bf4(const void* a, const void* b);
 u32 getUnlockedSlotCount(void* record);
-void FUN_004bcd90(void* record);
+void unitRecomputeDerivedStats(void* record);
 void FUN_004bd6b0(void* record, u32 skill, s32 slot);
 
 // Merges the member image `source` into its slot record, collecting the skills
@@ -78,7 +78,7 @@ u32 FUN_003f33b0(MemberRecord* source, u32 arg, u16* outSkills)
         if (member->skills[i] == 0) unplaced--;
     }
     if (unplaced > 0) {
-        FUN_004bcd90(record);
+        unitRecomputeDerivedStats(record);
         return 1;
     }
     for (s32 i = 0; i < 8; i++) {
@@ -92,7 +92,7 @@ u32 FUN_003f33b0(MemberRecord* source, u32 arg, u16* outSkills)
             }
         }
     }
-    FUN_004bcd90(record);
+    unitRecomputeDerivedStats(record);
     return 0;
 }
 

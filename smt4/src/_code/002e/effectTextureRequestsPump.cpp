@@ -6,7 +6,7 @@ extern "C" {
 extern NamedTextureCache g_textureCache;
 s32 FUN_002522f8(char *buffer, u32 size, const char *format, ...);
 void FUN_001f4b3c(u32 unused, BattleEffectTextureSlot *request, u32 bytes);
-void FUN_002b6480(const char *path, void **result, u32 flags, NamedTextureLoadCallback callback, BattleEffectTextureSlot *request);
+void asdLoadFileAsyncDefault(const char *path, void **result, u32 flags, NamedTextureLoadCallback callback, BattleEffectTextureSlot *request);
 void asdMemFree(void *buffer);
 
 // Start missing effect textures, retry failed requests, then release their temporary buffers.
@@ -26,7 +26,7 @@ void effectTextureRequestsPump()
             if (request->texture->image.physicalAddress == 0 && request->loaded == 0) {
                 FUN_002522f8(path, sizeof(path), "%s%s.tga", "battle/effect/tex/", request->name);
                 request->loadingState = 1;
-                FUN_002b6480(path, &request->file, 0, FUN_001f4b3c, request);
+                asdLoadFileAsyncDefault(path, &request->file, 0, FUN_001f4b3c, request);
             }
         }
         g_textureCache.state = 2;

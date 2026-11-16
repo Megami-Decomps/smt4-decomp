@@ -114,7 +114,7 @@ SelectionScene *FUN_003a5e30(SelectionScene *scene, u32 mode, s32 kind, s32 subK
         buttonHelpAcquireResources();
         buttonHelpCreate();
         asdTMTexTableLoadSprites(0x2B);
-        FUN_002c58c8(0x2B, 0);
+        asdTMTexTablePrepareNodeImage(0x2B, 0);
         scene->buttonSprite = 0x83;
         FUN_003a45fc();
         scene->shown = 1;

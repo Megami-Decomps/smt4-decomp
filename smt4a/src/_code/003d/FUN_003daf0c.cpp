@@ -12,7 +12,7 @@ int FUN_003a7c00(...);
 int messageMainSetTargetFlags(...);
 int flagValueSub(...);
 
-int FUN_001517b4(...);
+int padQueryLogicalKey(...);
 int eventQueueAddUniqueIfValid(...);
 int uiSpriteSetImageKeyframe(...);
 int buttonHelpSetText(...);
@@ -41,7 +41,7 @@ typedef struct {
 
 extern int g_camp; /* 0x57f108 */
 
-/* Supplied declaration required: FUN_001517b4. */
+/* Supplied declaration required: padQueryLogicalKey. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern unsigned short ifTouchGetButtonHelpValue(void);
 extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
@@ -116,11 +116,11 @@ void FUN_003daf0c(int param_1)
       return;
     }
     temp_v6 = 0;
-    FUN_001517b4(0,1);
+    padQueryLogicalKey(0,1);
     temp_v2 = 0x100020f;
     if ((temp_v6 == 0 && temp_v8[0] == '\0') || (param_1 != 0xb)) {
       temp_v6 = 1;
-      FUN_001517b4();
+      padQueryLogicalKey();
       if (temp_v6 != 0) {
         campShowSelectedEntryHelp(0);
         FUN_0021b274(3,0xffffffff,0);
@@ -130,7 +130,7 @@ void FUN_003daf0c(int param_1)
       }
       else {
         temp_v7 = 9;
-        FUN_001517b4(9,1);
+        padQueryLogicalKey(9,1);
         if (temp_v7 == 0) {
           return;
         }

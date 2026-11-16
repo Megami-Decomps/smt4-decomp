@@ -6,10 +6,10 @@
 extern "C" {
 
 int FUN_0026e70c(void);
-int FUN_002a4e18(int, unsigned int);
+int bustupPlaceActiveSlot(int, unsigned int);
 int asdTMTexTableLoadEntryAsync(void);
 int FUN_002a5ee4(int, unsigned int, unsigned int, int);
-int FUN_002a60cc(int, unsigned int, unsigned int);
+int packageFileDisableByKindName(int, unsigned int, unsigned int);
 int asdTMTexTableReleaseNode(unsigned int);
 int uiSpriteReplaceTextureEntry(int, int, unsigned int);
 
@@ -17,10 +17,10 @@ typedef int romwright_code(...);
 extern int g_aocSystem; /* 0x433158 */
 
 /* Supplied declaration required: FUN_0026e70c. */
-/* Supplied declaration required: FUN_002a4e18. */
+/* Supplied declaration required: bustupPlaceActiveSlot. */
 /* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
 /* Supplied declaration required: FUN_002a5ee4. */
-/* Supplied declaration required: FUN_002a60cc. */
+/* Supplied declaration required: packageFileDisableByKindName. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
 extern int aocRunByName(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: uiSpriteReplaceTextureEntry. */
@@ -139,7 +139,7 @@ unsigned int FUN_001ce4a4(void)
     }
   }
   else {
-    FUN_002a4e18(temp_v0 + 0x34,*(unsigned int *)(temp_v0 + 8));
+    bustupPlaceActiveSlot(temp_v0 + 0x34,*(unsigned int *)(temp_v0 + 8));
   }
   if (*(int *)(temp_v0 + 0x24) != 0) {
     switch(*(int *)(temp_v0 + 0x24)) {
@@ -179,7 +179,7 @@ unsigned int FUN_001ce4a4(void)
           }
           if (temp_v3 && temp_v1 != 0) {
             asdTMTexTableReleaseNode(*(unsigned int *)(temp_v0 + 0x10));
-            FUN_002a60cc(g_aocSystem,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x84));
+            packageFileDisableByKindName(g_aocSystem,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x84));
             *(unsigned int *)(temp_v0 + 0x80) = 0;
             *(unsigned int *)(temp_v0 + 0x84) = 0xffffffff;
             temp_v5 = temp_v8;

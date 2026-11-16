@@ -3,12 +3,12 @@
 
 extern "C" {
 
-extern u32 FUN_004ffba8(FlagData *data);
+extern u32 animationChannelsAllFinished(FlagData *data);
 
 void linkHolderCheckFirst(LinkHolder *holder)
 {
     if (holder->first->data != NULL) {
-        FUN_004ffba8(holder->first->data);
+        animationChannelsAllFinished(holder->first->data);
     }
 }
 

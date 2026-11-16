@@ -11,7 +11,7 @@ struct Obj420990DrawContext {
 extern "C" {
 extern Obj420990DrawContext *g_titleScene;
 void renderCtxSelectTexture(void *context, u32 texture);
-u32 FUN_002c5d80(u32 mode, u32 value);
+u32 renderCtxPackPassFlags(u32 mode, u32 value);
 void titleSceneMultiplyByCameraView(void *filter, f32 *matrix, const void *motion);
 void FUN_0023b4f4(f32 *vertices, const f32 *matrix, f32 *output, u32 count);
 void FUN_002b011c();
@@ -23,7 +23,7 @@ void Obj420990::draw()
 {
     renderCtxSelectTexture(g_titleScene, ((FilterDrawTexture *)handles[0].handle)->handle);
     g_titleScene->blend.push(rects->blendA);
-    g_titleScene->projection.push(FUN_002c5d80(1, 0));
+    g_titleScene->projection.push(renderCtxPackPassFlags(1, 0));
     f32 color[4] = {1, 1, 1, ((FilterDrawChild *)child)->alpha};
     f32 points[8][3];
     for (u32 vertex = 0; vertex < 8; ++vertex) {

@@ -5,8 +5,8 @@
 
 extern "C" {
 
-int FUN_001517b4(...);
-int FUN_00163aa4(...);
+int padQueryLogicalKey(...);
+int uiSpriteAdvanceAnimation(...);
 int eventQueueAddUniqueIfValid(...);
 int sysPlaySe(...);
 int devilGetRecord(void);
@@ -39,8 +39,8 @@ typedef struct {
     unsigned short sp156; /* 0x156: local_156 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_00163aa4. */
+/* Supplied declaration required: padQueryLogicalKey. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int ifTouchGetSelectionMode(void);
 extern unsigned short FUN_001643b4(unsigned int, unsigned int);
@@ -49,7 +49,7 @@ extern int ifTouchGetSelectedRegion(void);
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_0021a6c8. */
-extern int FUN_0026264c(unsigned short);
+extern int itemIsCollectedWithRelated(unsigned short);
 /* Supplied declaration required: statusPanelSetOpen. */
 extern int FUN_002a7410(void);
 /* Supplied declaration required: FUN_002c7e24. */
@@ -117,7 +117,7 @@ LAB_002f9458:
   case 1:
     FUN_0021a6c8(param_1);
     statusIconSetKind(param_1,0);
-    temp_v8 = FUN_00163aa4(param_1 + 0x11a0);
+    temp_v8 = uiSpriteAdvanceAnimation(param_1 + 0x11a0);
     if (temp_v8 != 0) {
       *puVar15 = 2;
       *temp_v19 = 0;
@@ -183,7 +183,7 @@ LAB_002f9458:
     }
     break;
   case 2:
-    temp_v2 = FUN_00163aa4(param_1 + 0x12b8);
+    temp_v2 = uiSpriteAdvanceAnimation(param_1 + 0x12b8);
     if (temp_v2 == 0) break;
     statusIconSetKind(param_1,0);
     temp_v2 = FUN_0023b3d0();
@@ -225,7 +225,7 @@ LAB_002f9458:
             FUN_0037e09c(1);
             statusPanelSetOpen(1);
             *temp_v21 = 0;
-            temp_v4 = FUN_0026264c(*(unsigned short *)(temp_v2 + 0x4858));
+            temp_v4 = itemIsCollectedWithRelated(*(unsigned short *)(temp_v2 + 0x4858));
             if (temp_v4 != 0) {
               FUN_0032d0c8(0,1,*(unsigned short *)(temp_v2 + 0x4858),0);
             }
@@ -306,13 +306,13 @@ LAB_002f9458:
     else {
 LAB_002f9924:
       temp_v8 = 0;
-      FUN_001517b4(0,1);
+      padQueryLogicalKey(0,1);
       if (temp_v8 != 0) {
         *puVar14 = 0;
       }
       else {
         temp_v8 = 1;
-        FUN_001517b4(1,1);
+        padQueryLogicalKey(1,1);
         if (temp_v8 != 0) {
           *puVar14 = 1;
           *puVar15 = 4;
@@ -322,7 +322,7 @@ LAB_002f9924:
     }
     break;
   case 3:
-    FUN_00163aa4(param_1 + 0x12b8);
+    uiSpriteAdvanceAnimation(param_1 + 0x12b8);
     FUN_002c982c(param_1);
     temp_v8 = FUN_002a7410();
     if (temp_v8 != 0) {
@@ -380,7 +380,7 @@ LAB_002f9924:
       if ((*(unsigned char *)(temp_v6 + 0xb3) & 2) != 0) {
         sysPlaySe(0x11b);
       }
-      temp_v8 = FUN_0026264c(*puVar7);
+      temp_v8 = itemIsCollectedWithRelated(*puVar7);
       if (temp_v8 != 0) {
         FUN_0032d0c8(0,1,*puVar7,0);
       }

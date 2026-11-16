@@ -6,7 +6,7 @@ extern "C" {
 extern S4Load* g_s4Load;
 extern RenderCtxA* g_renderCtx;
 void efctSetSpeed(f32 alpha);
-void FUN_00183bb0(void);
+void gxResetColorQuadToWhite(void);
 void rt_aeabi_memclr(void* memory, u32 size);
 void drawSetColorFromRGBA8(u32 color);
 void screenDrawShadedRect(s32 x, s32 y, s32 width, s32 height, s32 depth);
@@ -30,7 +30,7 @@ u32 FUN_0027dbac(void)
     PhaseView* state = reinterpret_cast<PhaseView*>(work);
     u8 drawScratch[64];
     efctSetSpeed(0.5f);
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
     // This scratch initialization is present even though this draw path does not consume it.
     rt_aeabi_memclr(drawScratch, sizeof(drawScratch));
     switch (state->phase) {
@@ -40,7 +40,7 @@ u32 FUN_0027dbac(void)
         efctSetSpeed(0.5f);
         renderCtxSelectTexture(g_renderCtx, NULL);
         screenDrawShadedRect(0, 0, 400, 240, 101);
-        FUN_00183bb0();
+        gxResetColorQuadToWhite();
         efctSetSpeed(1.0f);
         break;
     case 3: case 4: case 5: case 6: case 7: case 8:
@@ -51,14 +51,14 @@ u32 FUN_0027dbac(void)
         drawSetColorFromRGBA8(0xFF);
         renderCtxSelectTexture(g_renderCtx, NULL);
         screenDrawShadedRect(0, 0, 400, 240, 101);
-        FUN_00183bb0();
+        gxResetColorQuadToWhite();
         break;
     }
     if (state->phase == 21 || state->phase == 22 || state->phase == 23) {
         drawLoadSlotLabels(work, 105, 7, 6, 1.0f);
     }
     efctSetSpeed(1.0f);
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
     return 0;
 }
 }

@@ -7,7 +7,7 @@ extern "C" {
 
 extern u8 DAT_005b40c8;
 extern u32 globalBlockGetFirst(void);
-extern u32 FUN_001a0380(const char *path);
+extern u32 fsUnmountByName(const char *path);
 
 /* Unmounts the current registration and clears its mounted flag on success. */
 bool FUN_001387c0(void)
@@ -16,7 +16,7 @@ bool FUN_001387c0(void)
         return true;
     }
     const char *path = reinterpret_cast<const char *>(globalBlockGetFirst());
-    u32 status = FUN_001a0380(path);
+    u32 status = fsUnmountByName(path);
     FUN_0013ebd8(status);
     if (nnResultIsSuccess(status)) {
         DAT_005b40c8 = 0;

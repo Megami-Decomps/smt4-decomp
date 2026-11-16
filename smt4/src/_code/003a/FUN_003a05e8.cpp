@@ -3,14 +3,14 @@
 
 extern "C" {
 s32 contentGetKindValue(u32 id);
-u16 FUN_00230f44(const u16 *entry);
+u16 aocEntryGetSortOrder(const u16 *entry);
 u32 contentGetEntryKind(u32 id);
 
 /* Orders two entries by their secondary key. */
 static s32 compareOrder(const u16 *left, const u16 *right)
 {
-    s32 leftOrder = FUN_00230f44(left);
-    s32 rightOrder = FUN_00230f44(right);
+    s32 leftOrder = aocEntryGetSortOrder(left);
+    s32 rightOrder = aocEntryGetSortOrder(right);
     return leftOrder - rightOrder;
 }
 

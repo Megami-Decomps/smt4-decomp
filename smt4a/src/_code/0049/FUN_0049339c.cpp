@@ -10,14 +10,14 @@ struct ScreenRect {
 
 extern "C" {
 
-void FUN_00164b5c(s32 kind, u32 value, u32 id, s32 x, s32 y, u32 extra);
+void texDrawCompositeSprite(s32 kind, u32 value, u32 id, s32 x, s32 y, u32 extra);
 
 // Submit the rectangle's bottom-right corner, shifted by (dx, dy), together with its value.
 void FUN_0049339c(ScreenRect *rect, u32 id, s32 dx, s32 dy, u32 extra)
 {
     s32 x = (s32)(rect->x + rect->width + dx);
     s32 y = (s32)(rect->y + rect->height + dy);
-    FUN_00164b5c(2, rect->value, id, x, y, extra);
+    texDrawCompositeSprite(2, rect->value, id, x, y, extra);
 }
 
 } /* extern "C" */

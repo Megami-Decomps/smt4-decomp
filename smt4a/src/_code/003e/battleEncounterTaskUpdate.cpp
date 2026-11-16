@@ -32,7 +32,7 @@ extern void *g_btlActionReflect;
 extern void *g_btlAux;
 s32 isEntryUsable(BtlStep *event);
 s32 FUN_004d7a70(BtlStep *event, u32 kind, u32 value, u32 flags);
-void FUN_002e5924(u32 state);
+void frameTexRequestFade(u32 state);
 void FUN_0013cab8(u32 index, u32 first, u32 second);
 void FUN_004d7fe4(BtlStep *event);
 s32 FUN_003e11ac(EncounterTask *task, EncounterTaskContext *context);
@@ -84,9 +84,9 @@ extern "C" s32 battleEncounterTaskUpdate(EncounterTask *task, EncounterTaskConte
             return 0;
         if (FUN_004d7a70(g_btlEvent, 9, -1u, 0)) {
             if (!(context->flags & g_btlEncount.requiredFlags)) {
-                FUN_002e5924(2);
+                frameTexRequestFade(2);
                 context->flags |= g_btlEncount.requiredFlags;
-                if (FUN_0013def0(1) == 3)
+                if (pairedAvailabilityGetState(1) == 3)
                     FUN_0013cab8(1, 10, 0xff);
             }
             FUN_004d7fe4(g_btlEvent);

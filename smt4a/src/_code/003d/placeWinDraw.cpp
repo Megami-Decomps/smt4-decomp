@@ -22,12 +22,12 @@ struct PlaceWindow {
 
 extern "C" {
 extern PlaceWindow *g_placeWin;
-s32 FUN_001692ac(s32 mode, s32 flags);
+s32 renderCtxPackPassFlags(s32 mode, s32 flags);
 s32 vec2GetXInt(const PlaceWindowPosition *);
 s32 vec2GetYInt(const PlaceWindowPosition *);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *, f32 offset);
-void FUN_00164b5c(s32 layer, u32 group, u32 sprite, s32 x, s32 y, s32 priority);
-void FUN_00183bb0(void);
+void texDrawCompositeSprite(s32 layer, u32 group, u32 sprite, s32 x, s32 y, s32 priority);
+void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 speed);
 
 // Draw the active place-name window at its animated position.
@@ -35,18 +35,18 @@ u8 placeWinDraw(void)
 {
     PlaceWindow *window = g_placeWin;
     if (window->state && window->visible) {
-        FUN_00157558(g_renderCtx);
+        renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         RenderCtxA *context = g_renderCtx;
-        renderCtxPushA(context, FUN_001692ac(1, 0));
+        renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
         s32 x = vec2GetXInt(&window->position);
         s32 translatedX = x + static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.25f));
         s32 y = vec2GetYInt(&window->position);
-        FUN_00164b5c(2, 8, 0xe, translatedX, y, 0x65);
+        texDrawCompositeSprite(2, 8, 0xe, translatedX, y, 0x65);
         TextureTableEntryIV *sprite = asdTMTexTableEntryAt(8, 0x10b);
         textDrawString(3, 0xffffffff, (const char *)window->text,
                       static_cast<f32>(sprite->x + translatedX),
                       static_cast<f32>(sprite->y + y), 0.56640625f, 0.0f, 1.0f);
-        FUN_00183bb0();
+        gxResetColorQuadToWhite();
         efctSetSpeed(1.0f);
         renderStackPop(&g_renderCtx->stackA);
     }

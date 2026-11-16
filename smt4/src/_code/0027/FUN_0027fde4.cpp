@@ -33,7 +33,7 @@ int FUN_0027fc14(int);
 int FUN_002804ec(int);
 int mapEaseSceneHeading(void);
 int FUN_00282390(void);
-int FUN_0028250c(void);
+int mathRemPio2f(void);
 int mathDistanceBetweenPoints(void);
 int mathPositionHeadingDegrees(void);
 int buttonHelpSetPreset(int);
@@ -70,7 +70,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: FUN_00282390. */
-/* Supplied declaration required: FUN_0028250c. */
+/* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: buttonHelpSetPreset. */
@@ -158,7 +158,7 @@ void FUN_0027fde4(void)
             *(unsigned int *)(temp_v2 + 0x120) = temp_v4;
             if ((int)temp_v6 < 0x42700000) {
               temp_v6 = (*(float *)(temp_v2 + 0x4c) + 180.0f) * 0.017453292f;
-              FUN_0028250c();
+              mathRemPio2f();
               temp_v2 = g_lmapScene;
               *(float *)(g_lmapScene + 0x118) = *(float *)(g_lmapScene + 0x118) + temp_v6 * temp_v15;
               temp_v7 = (*(float *)(temp_v2 + 0x4c) + temp_v12) * temp_v7;
@@ -175,7 +175,7 @@ void FUN_0027fde4(void)
             }
             else {
               temp_v6 = (*(float *)(temp_v2 + 0x50) + 180.0f) * 0.017453292f;
-              FUN_0028250c();
+              mathRemPio2f();
               temp_v2 = g_lmapScene;
               *(float *)(g_lmapScene + 0x118) = *(float *)(g_lmapScene + 0x118) + temp_v6 * temp_v15;
               temp_v7 = (*(float *)(temp_v2 + 0x50) + temp_v12) * temp_v7;

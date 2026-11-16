@@ -45,10 +45,10 @@ void titleConfigDestroy(void);
 s32 FUN_002cb054(void);
 void drawParameterBlockClear(UiResourceParameters *resources);
 
-void FUN_002bd954(SpritePlaybackView *sprite, s32 kind, s32 count,
+void uiSpriteStateInitFromSource(SpritePlaybackView *sprite, s32 kind, s32 count,
                    UiResourceParameters *resources, u16 flags, f32 speed);
 void timerStart(SpritePlaybackView *sprite, s32 key, s32 mode);
-void FUN_0029f848(void *selector, s32 count, s32 rows, s32 wrap, s32 first, s32 enabled);
+void gridNavigationConfigure(void *selector, s32 count, s32 rows, s32 wrap, s32 first, s32 enabled);
 void memFill8(void *destination, u32 value);
 void buttonHelpSetPreset(s32 preset);
 void buttonHelpSetText(s32 first, u32 color);
@@ -68,9 +68,9 @@ extern "C" void titleConfigCreate(void)
     taskCreateDraw("TITLE_CONFIG D", 0xe6, 0, 0, FUN_002cb054, NULL, NULL, work->process);
     drawParameterBlockClear(&work->resources);
     paramsInit(&work->resources, DAT_00407dd6, 0x18, NULL, 0, NULL, 0, NULL, 0, NULL, 0);
-    FUN_002bd954(&work->sprite, 0x2f, 0, &work->resources, 0xc9, 1.0f);
+    uiSpriteStateInitFromSource(&work->sprite, 0x2f, 0, &work->resources, 0xc9, 1.0f);
     timerStart(&work->sprite, 0, 0);
-    FUN_0029f848(work->selector, 3, 3, 1, 0, 1);
+    gridNavigationConfigure(work->selector, 3, 3, 1, 0, 1);
     work->state = 0;
     work->countA = 0;
     memFill8(&work->handles, -1u);

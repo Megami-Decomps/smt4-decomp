@@ -7,14 +7,14 @@
 extern "C" {
 
 
-int FUN_00180118(...);
+int dataTable01GetRecordWithAocOverride(...);
 int gameFlagIsSet(...);
 int __aeabi_memset4(...);
 int messageForwardDefaultMode(...);
 int scrWorkGetValue(...);
 int scrWorkSetValue(...);
 int libc_strcpy(...);
-int FUN_003180c4(...);
+int scrSetStringSlot(...);
 int FUN_0034a240(int);
 int contentEntryFindById(void);
 int dataTableFindRecordWord(...);
@@ -30,14 +30,14 @@ typedef struct {
 extern int *g_unite; /* 0x57f290 */
 
 extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_00180118. */
+/* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
 /* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: messageForwardDefaultMode. */
 /* Supplied declaration required: scrWorkGetValue. */
 /* Supplied declaration required: scrWorkSetValue. */
 /* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_003180c4. */
+/* Supplied declaration required: scrSetStringSlot. */
 extern int FUN_00330bb4(unsigned short);
 /* Supplied declaration required: FUN_0034a240. */
 /* Supplied declaration required: contentEntryFindById. */
@@ -116,12 +116,12 @@ unsigned int FUN_003a7d74(void)
         temp_v4 = (int)*(char *)((int)g_unite + g_unite[0x241b] + 0x901c) & 0xffff;
         contentEntryFindById();
         temp_v8 = (unsigned int)*(unsigned short *)(temp_v4 + 0x1a);
-        FUN_00180118(temp_v8);
+        dataTable01GetRecordWithAocOverride(temp_v8);
         libc_strcpy(temp_v10,temp_v8);
-        FUN_003180c4(8,temp_v10);
+        scrSetStringSlot(8,temp_v10);
         temp_v5 = FUN_0014bf3c(*(unsigned short *)(temp_v4 + 0x1a),0);
         libc_strcpy(temp_v10,temp_v5);
-        FUN_003180c4(0x10,temp_v10);
+        scrSetStringSlot(0x10,temp_v10);
         piVar3[0x246c] = piVar3[0x246c] + 1;
         return 0;
       }
@@ -197,12 +197,12 @@ unsigned int FUN_003a7d74(void)
       puVar8 = (unsigned short *)
                dataTableFindRecordWord((short)*(char *)((int)(char)g_unite[0x2481] + (int)piVar13));
       temp_v4 = (unsigned int)*puVar8;
-      FUN_00180118(temp_v4);
+      dataTable01GetRecordWithAocOverride(temp_v4);
       libc_strcpy(temp_v10,temp_v4);
-      FUN_003180c4(8,temp_v10);
+      scrSetStringSlot(8,temp_v10);
       temp_v5 = FUN_0014bf3c(*puVar8,0);
       libc_strcpy(temp_v10,temp_v5);
-      FUN_003180c4(0x10,temp_v10);
+      scrSetStringSlot(0x10,temp_v10);
     }
     else {
       temp_v5 = scrWorkGetValue(1);
@@ -237,7 +237,7 @@ unsigned int FUN_003a7d74(void)
           temp_v6 = *piVar3;
           FUN_004da858(temp_v6,*puVar6);
           if (temp_v6 != 0) {
-            temp_v6 = reinterpret_cast<int>(FUN_0026140c());
+            temp_v6 = reinterpret_cast<int>(saveGetUserSettingsBlock());
             pbVar7 = (unsigned char *)(temp_v6 + ((int)(temp_v8 + ((unsigned int)((int)temp_v8 >> 0x1f) >> 0x1d)) >> 3)
                              + 0x39);
             temp_v1 = *pbVar7;

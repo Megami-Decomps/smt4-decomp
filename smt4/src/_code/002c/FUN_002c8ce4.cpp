@@ -67,10 +67,10 @@ extern int unitGroupHasFlag(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: FUN_00282390. */
-/* Supplied declaration required: FUN_0028250c. */
+/* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: FUN_002879dc. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
-/* Supplied declaration required: FUN_00291e40. */
+/* Supplied declaration required: soundActorStartOnFreeChannel. */
 extern int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: __aeabi_memcpy4. */
 
@@ -130,7 +130,7 @@ void FUN_002c8ce4(void)
           partyApplyNonlethalAilmentDamage(2,5);
           *(unsigned int *)(g_lmapScene + 0x160) = 0x447a0000;
           FUN_002562e4(0xf,0x50);
-          temp_v3 = FUN_00291e40(0x1000186, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+          temp_v3 = soundActorStartOnFreeChannel(0x1000186, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
           temp_v2 = g_lmapScene;
           *(unsigned int *)(g_lmapScene + 0x18c) = temp_v3;
           *(unsigned int *)(temp_v2 + 400) = 0x14;
@@ -285,7 +285,7 @@ joined_r0x002c99a8:
           effectSpawnAheadOfScene((f32)(s16)unaff_r4,(f32)(unaff_r4 >> 16));
         }
         temp_v10 = (float)VectorSignedToFloat((int)(short)unaff_r5,(unsigned char)(in_fpscr >> 0x16) & 3);
-        *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + FUN_0028250c(*(float *)(g_lmapScene + 0x50) * temp_v11) * temp_v10;
+        *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + mathRemPio2f(*(float *)(g_lmapScene + 0x50) * temp_v11) * temp_v10;
         temp_v2 = g_lmapScene;
         *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + FUN_00282390(*(float *)(temp_v2 + 0x50) * temp_v11) * temp_v10;
         FUN_0027f848();
@@ -367,20 +367,20 @@ joined_r0x002c99a8:
               if (*(int *)(g_lmapScene + 8) == 2) {
                 {
                 SoundActorQueuePosition position;
-                position.x = *(float *)(g_lmapScene + 0x1c) + FUN_0028250c(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 60.0f;
+                position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 60.0f;
                 position.z = *(float *)(g_lmapScene + 0x24) + FUN_00282390(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 60.0f;
                 position.y = *(float *)(g_lmapScene + 0x20) + 150.0f;
                 temp_v2 = randBetween(0,2);
-                FUN_00291e40(temp_v2 + 0x1000235, position);
+                soundActorStartOnFreeChannel(temp_v2 + 0x1000235, position);
                 }
               }
               if (*(int *)(g_lmapScene + 8) == 3) {
                 {
                 SoundActorQueuePosition position;
-                position.x = *(float *)(g_lmapScene + 0x1c) + FUN_0028250c(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 150.0f;
+                position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 150.0f;
                 position.z = *(float *)(g_lmapScene + 0x24) + FUN_00282390(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 150.0f;
                 position.y = *(float *)(g_lmapScene + 0x20) + 130.0f;
-                FUN_00291e40(0x10001f3, position);
+                soundActorStartOnFreeChannel(0x10001f3, position);
                 }
                 FUN_0027fca0(0xffffffff);
               }
@@ -396,20 +396,20 @@ joined_r0x002c99a8:
             if (*(int *)(g_lmapScene + 8) == 2) {
               {
               SoundActorQueuePosition position;
-              position.x = *(float *)(g_lmapScene + 0x1c) + FUN_0028250c(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 60.0f;
+              position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 60.0f;
               position.z = *(float *)(g_lmapScene + 0x24) + FUN_00282390(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 60.0f;
               position.y = *(float *)(g_lmapScene + 0x20) + 150.0f;
               temp_v2 = randBetween(0,2);
-              FUN_00291e40(temp_v2 + 0x1000232, position);
+              soundActorStartOnFreeChannel(temp_v2 + 0x1000232, position);
               }
             }
             if (*(int *)(g_lmapScene + 8) == 3) {
               {
               SoundActorQueuePosition position;
-              position.x = *(float *)(g_lmapScene + 0x1c) + FUN_0028250c(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 150.0f;
+              position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 150.0f;
               position.z = *(float *)(g_lmapScene + 0x24) + FUN_00282390(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 150.0f;
               position.y = *(float *)(g_lmapScene + 0x20) + 130.0f;
-              FUN_00291e40(0x10001f2, position);
+              soundActorStartOnFreeChannel(0x10001f2, position);
               }
               FUN_0027fca0(0xffffffff);
             }
@@ -422,18 +422,18 @@ joined_r0x002c99a8:
           if (*(int *)(g_lmapScene + 8) == 3) {
             {
             SoundActorQueuePosition position;
-            position.x = *(float *)(g_lmapScene + 0x1c) + FUN_0028250c(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 150.0f;
+            position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 150.0f;
             position.z = *(float *)(g_lmapScene + 0x24) + FUN_00282390(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 150.0f;
             position.y = *(float *)(g_lmapScene + 0x20) + 130.0f;
-            FUN_00291e40(0x10001f1, position);
+            soundActorStartOnFreeChannel(0x10001f1, position);
             }
             {
             SoundActorQueuePosition position;
-            position.x = *(float *)(g_lmapScene + 0x1c) + FUN_0028250c(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 60.0f;
+            position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 60.0f;
             position.z = *(float *)(g_lmapScene + 0x24) + FUN_00282390(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 60.0f;
             position.y = *(float *)(g_lmapScene + 0x20) + 150.0f;
             temp_v2 = randBetween(0,2);
-            FUN_00291e40(temp_v2 + 0x100022f, position);
+            soundActorStartOnFreeChannel(temp_v2 + 0x100022f, position);
             }
             FUN_0027fca0(0xffffffff);
           }
@@ -446,18 +446,18 @@ joined_r0x002c99a8:
         if (*(int *)(g_lmapScene + 8) == 3) {
           {
           SoundActorQueuePosition position;
-          position.x = *(float *)(g_lmapScene + 0x1c) + FUN_0028250c(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 150.0f;
+          position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 150.0f;
           position.z = *(float *)(g_lmapScene + 0x24) + FUN_00282390(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 150.0f;
           position.y = *(float *)(g_lmapScene + 0x20) + 130.0f;
-          FUN_00291e40(0x10001f0, position);
+          soundActorStartOnFreeChannel(0x10001f0, position);
           }
           {
           SoundActorQueuePosition position;
-          position.x = *(float *)(g_lmapScene + 0x1c) + FUN_0028250c(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 60.0f;
+          position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 60.0f;
           position.z = *(float *)(g_lmapScene + 0x24) + FUN_00282390(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 60.0f;
           position.y = *(float *)(g_lmapScene + 0x20) + 150.0f;
           temp_v2 = randBetween(0,2);
-          FUN_00291e40(temp_v2 + 0x100022c, position);
+          soundActorStartOnFreeChannel(temp_v2 + 0x100022c, position);
           }
           FUN_0027fca0(0xffffffff);
         }

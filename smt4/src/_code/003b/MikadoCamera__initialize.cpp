@@ -14,7 +14,7 @@ void contentTransitionInstallDispatch(ContentTransition *transition);
 void FUN_003bb1f0(SelectionFlags *panel);
 void asdTMTexTableLoadTmx(u32 kind, u32 arg);
 void FUN_002898e4(void);
-void FUN_00289880(void);
+void commonBgStopChildAndBeginTransition(void);
 void buttonHelpAcquireResources(void);
 void buttonHelpCreate(void);
 void FUN_00240cec(s32 arg);
@@ -33,7 +33,7 @@ void MikadoCamera::initialize()
     unk34 = -1;
     asdTMTexTableLoadTmx(0x21, 0);
     FUN_002898e4();
-    FUN_00289880();
+    commonBgStopChildAndBeginTransition();
     buttonHelpAcquireResources();
     buttonHelpCreate();
     FUN_00240cec(0);

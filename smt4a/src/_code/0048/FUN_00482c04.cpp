@@ -53,7 +53,7 @@ u8 *gameGetPlayerData(void);
 void textFormatBuffer(u8 *buffer, const char *format, u32 a, u32 b);
 void FUN_00376fa4(u32 id);
 void sequenceRequestDefer(s32 sequence, u32 arg);
-void FUN_003d4ed8(u32 id);
+void soundActorStartOnFreeChannel(u32 id);
 s32 gameDataFlagTestBit(u32 flag);
 
 /* Picks the nearest interactable target within 150 units and starts what it does (a scripted
@@ -109,7 +109,7 @@ u32 FUN_00482c04(TalkTargetSet *set)
             }
             if (!affordable) {
                 DAT_005f17c9 = 1;
-                FUN_003d4ed8(0x1000225);
+                soundActorStartOnFreeChannel(0x1000225);
             } else {
                 DAT_005f1a58 = 0;
                 DAT_005f18e8 = chosen;

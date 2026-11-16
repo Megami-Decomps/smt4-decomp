@@ -5,12 +5,12 @@ struct UnlockState {
     /* 0xF49 */ u8 flags[0x101];
 };
 
-extern "C" UnlockState* FUN_00282be4(void);
+extern "C" UnlockState* saveGetUnlockFlagBlock(void);
 
 // Test the one-based identifier in the persistent unlock bitset.
 extern "C" u32 unlockFlagTest(u32 id)
 {
-    UnlockState* state = FUN_00282be4();
+    UnlockState* state = saveGetUnlockFlagBlock();
     --id;
     if ((u32)((s32)id >> 3) >= 0x101)
         return 0;

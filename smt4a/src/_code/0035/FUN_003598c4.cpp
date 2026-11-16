@@ -3,14 +3,14 @@
 
 extern "C" {
 TexNode* asdTMTexTableGetNode(s32 tableIndex, s32 nodeIndex);
-void FUN_00169310(TexNode* node);
+void texTableEntryLoadSync(TexNode* node);
 
 static inline bool prepareTextureNode(TexNode* node, u32 imageMode, u32 stateFlag)
 {
     if (node == NULL) {
         return false;
     }
-    FUN_00169310(node);
+    texTableEntryLoadSync(node);
     if (node->loaded.texture == NULL) {
         return false;
     }

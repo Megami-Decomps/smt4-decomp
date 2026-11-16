@@ -15,7 +15,7 @@ typedef struct Holder {
     /* 0x20 */ Item **itemsB;
 } Holder;
 
-void FUN_00182540(u32 handle);
+void effectNodeUpdatePlacedChildren(u32 handle);
 
 /* Releases the handle of every item in both lists. */
 void FUN_0016cae0(Holder *object)
@@ -24,12 +24,12 @@ void FUN_0016cae0(Holder *object)
 
     if (object->countA != 0) {
         for (i = 0; i < object->countA; i++) {
-            FUN_00182540(object->itemsA[i]->handle);
+            effectNodeUpdatePlacedChildren(object->itemsA[i]->handle);
         }
     }
     if (object->countB != 0) {
         for (i = 0; i < object->countB; i++) {
-            FUN_00182540(object->itemsB[i]->handle);
+            effectNodeUpdatePlacedChildren(object->itemsB[i]->handle);
         }
     }
 }

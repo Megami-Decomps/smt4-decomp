@@ -15,7 +15,7 @@ void FUN_0035dfc0(u32 id)
     for (s32 i = 0; i < count; i++) {
         u16 *record = dataTableFindRecordWord((u16)i);
         if (record != NULL && *record == id) {
-            u8 *byte = FUN_0026140c() + 0x39 + i / 8;
+            u8 *byte = saveGetUserSettingsBlock() + 0x39 + i / 8;
             if ((*byte & (1 << (i % 8))) == 0) {
                 *byte |= 1 << (i % 8);
             }

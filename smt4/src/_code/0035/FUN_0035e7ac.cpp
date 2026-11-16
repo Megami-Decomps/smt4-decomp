@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_002387f8(unsigned int, unsigned short, unsigned short);
+extern int rangeSetUnionInclusive(unsigned int, unsigned short, unsigned short);
 
 
 unsigned int FUN_0035e7ac(unsigned int param_1,int param_2)
@@ -18,7 +18,7 @@ unsigned int FUN_0035e7ac(unsigned int param_1,int param_2)
     if (temp_v1 == param_2) {
       return 1;
     }
-    temp_v0 = FUN_002387f8(param_1,*(unsigned short *)(temp_v1 + 8),*(unsigned short *)(temp_v1 + 10));
+    temp_v0 = rangeSetUnionInclusive(param_1,*(unsigned short *)(temp_v1 + 8),*(unsigned short *)(temp_v1 + 10));
     if (temp_v0 == 0) break;
     temp_v1 = *(int *)(temp_v1 + 4);
   }

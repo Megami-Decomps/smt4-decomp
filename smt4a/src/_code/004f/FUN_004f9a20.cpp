@@ -4,7 +4,7 @@
 
 extern "C" {
 
-s32 FUN_004f59b0(void *unit);
+s32 btlGetMaxSlotMetric(void *unit);
 s32 btlScriptUnitHasFlags(void);
 
 typedef struct {
@@ -58,10 +58,10 @@ s32 FUN_004f9a20(BtlBonusUnit *unit)
     value = 0;
     entry = btlFindNameBonus(unit);
     if (entry != NULL) {
-        value = FUN_004f59b0(unit) + entry->bonus;
+        value = btlGetMaxSlotMetric(unit) + entry->bonus;
     }
     if (value == 0) {
-        value = FUN_004f59b0(unit);
+        value = btlGetMaxSlotMetric(unit);
     }
     return value;
 }

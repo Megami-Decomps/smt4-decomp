@@ -8,7 +8,7 @@ extern "C" {
 extern AsdCecGlobals g_asdCec;
 void asdOperatorDelete(void *memory);
 void asdMemFree(void *memory);
-u32 FUN_0042d734(void);
+u32 cecShutdownIfInitialized(void);
 
 u8 asdCecShutdown(void)
 {
@@ -22,7 +22,7 @@ u8 asdCecShutdown(void)
         asdMemFree(g_asdCec.cec);
         g_asdCec.cec = NULL;
     }
-    if ((s32)(FUN_0042d734() & 0x80000000) >= 0) {
+    if ((s32)(cecShutdownIfInitialized() & 0x80000000) >= 0) {
         shutDown = 1;
     }
     return shutDown;

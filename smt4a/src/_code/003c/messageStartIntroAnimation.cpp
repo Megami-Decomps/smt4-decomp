@@ -20,7 +20,7 @@ typedef struct SceneHolder {
 
 extern SceneHolder g_messageMain;
 
-extern void FUN_0014e188(void *player, s32 animId, s32 loops, void *data, s32 count, f32 speed);
+extern void uiSpriteStateInitFromSource(void *player, s32 animId, s32 loops, void *data, s32 count, f32 speed);
 
 u32 messageStartIntroAnimation(void)
 {
@@ -29,7 +29,7 @@ u32 messageStartIntroAnimation(void)
     scene->mode = 2;
     scene->step = 0;
     scene->flag = 0;
-    FUN_0014e188(scene->player, 0x13, -1, scene->animData, 11, 1.0f);
+    uiSpriteStateInitFromSource(scene->player, 0x13, -1, scene->animData, 11, 1.0f);
     return 1;
 }
 

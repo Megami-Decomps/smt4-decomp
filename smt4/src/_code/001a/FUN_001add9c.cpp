@@ -11,11 +11,11 @@ int FUN_001f0540(...);
 int FUN_001f1bc4(...);
 int FUN_002036b8(unsigned int, unsigned int);
 int FUN_00215d68(...);
-int FUN_00290994(...);
+int uiDrawListScrollBar(...);
 int debugDrawText(...);
 int vec2GetYInt(...);
 int vec2GetXInt(...);
-int FUN_002bf380(...);
+int texDrawCompositeSprite(...);
 int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
 int renderCtxSelectStereoLayout(int);
@@ -49,16 +49,16 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_001f1bc4. */
 /* Supplied declaration required: FUN_002036b8. */
 /* Supplied declaration required: FUN_00215d68. */
-/* Supplied declaration required: FUN_00290994. */
+/* Supplied declaration required: uiDrawListScrollBar. */
 /* Supplied declaration required: debugDrawText. */
 extern int FUN_002a0d0c(void);
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: vec2GetXInt. */
-/* Supplied declaration required: FUN_002bf380. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: uiDrawRotatingLoadingGrid. */
 /* Supplied declaration required: FUN_002d96d4. */
 
@@ -87,7 +87,7 @@ unsigned int FUN_001add9c(void)
   temp_v3 = g_unite;
   renderCtxSelectStereoLayout(g_titleScene);
   temp_v5 = g_titleScene;
-  temp_v4 = FUN_002c5d80(1,0);
+  temp_v4 = renderCtxPackPassFlags(1,0);
   piVar14 = (int *)(temp_v5 + 0x124c);
   temp_v11 = *piVar14;
   temp_v12 = piVar14[temp_v11 + 2];
@@ -133,7 +133,7 @@ unsigned int FUN_001add9c(void)
     temp_v1 = *(short *)(temp_v3 + 0x472);
     temp_v2 = *(short *)(temp_v3 + 0x476);
     temp_v11 = temp_v3 + 0x4e8;
-    FUN_00290994(temp_v11,temp_v5,temp_v4,0x24,0x1c,0x1d,0x1e,0x18,0x1a,0x19,0x1b,(int)temp_v2,(int)temp_v1,
+    uiDrawListScrollBar(temp_v11,temp_v5,temp_v4,0x24,0x1c,0x1d,0x1e,0x18,0x1a,0x19,0x1b,(int)temp_v2,(int)temp_v1,
                  (int)temp_v0,0x79,0);
     break;
   case 6:
@@ -149,7 +149,7 @@ unsigned int FUN_001add9c(void)
     temp_v0 = *(short *)(temp_v3 + 0x474);
     temp_v2 = *(short *)(temp_v3 + 0x476);
     temp_v11 = temp_v3 + 0x54c;
-    FUN_00290994(temp_v11,temp_v5,temp_v4,0x24,0x1c,0x1d,0x1e,0x18,0x1a,0x19,0x1b,(int)temp_v2,(int)temp_v1,
+    uiDrawListScrollBar(temp_v11,temp_v5,temp_v4,0x24,0x1c,0x1d,0x1e,0x18,0x1a,0x19,0x1b,(int)temp_v2,(int)temp_v1,
                  (int)temp_v0,0x79,0);
     break;
   case 7:
@@ -226,8 +226,8 @@ unsigned int FUN_001add9c(void)
       temp_v9 = (unsigned int)*(unsigned char *)(temp_v5 + 0x2f);
     }
     if (temp_v14 && temp_v9 != 0) {
-      FUN_002bf288(2,0x24,0x1d9,0,0,0xfb);
-      FUN_002bf380(2,0x24,0x13,0,0,0xfb);
+      texDrawTableEntryAtStoredOrigin(2,0x24,0x1d9,0,0,0xfb);
+      texDrawCompositeSprite(2,0x24,0x13,0,0,0xfb);
       temp_v9 = (*(unsigned char *)(temp_v3 + 0x95f4) + 1) & 0xff;
       temp_v10 = temp_v9 % 0x28;
       *(unsigned char *)(temp_v3 + 0x95f4) = (unsigned char)temp_v10;

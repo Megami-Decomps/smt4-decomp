@@ -9,7 +9,7 @@ int FUN_00230d84(int, int, int, int, int);
 void gxSetClippedBottomScreenScissor(int, int, int, int);
 int FUN_00231bcc(...);
 int dataTable00FindById(void);
-int FUN_002bd06c(void);
+int dataTable01FindByIdWithAoc(void);
 int drawTextAtSnappedRectangle(...);
 int textFormatBuffer(...);
 int FUN_002bf4f0(...);
@@ -37,7 +37,7 @@ extern int g_titleScene; /* 0x44ea00 */
 extern int curveEvaluateStandard(unsigned int, unsigned int);
 /* Supplied declaration required: dataTable00FindById. */
 extern unsigned int demonGetRaceLabel(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002bd06c. */
+/* Supplied declaration required: dataTable01FindByIdWithAoc. */
 /* Supplied declaration required: drawTextAtSnappedRectangle. */
 /* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
@@ -142,7 +142,7 @@ void FUN_003aa044(int param_1,int param_2,int param_3,unsigned int param_4)
                         temp_v4 / 2,(unsigned char)(in_fpscr >> 0x16) & 3);
     drawTextAtSnappedRectangle(param_1 + 200,temp_v14,temp_v12,temp_v7,temp_v7,temp_v4);
     temp_v8 = param_4;
-    FUN_002bd06c();
+    dataTable01FindByIdWithAoc();
     if (param_3 == 0) {
       temp_v7 = 0x105c;
       temp_v9 = 0xff;

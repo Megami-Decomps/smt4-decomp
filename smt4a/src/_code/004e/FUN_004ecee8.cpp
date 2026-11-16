@@ -61,7 +61,7 @@ void FUN_004fd508(s32 delay, BtlCommand *command, s32 mode, BtlSkill *skill, s32
 void FUN_004fbeac(s32 delay, BtlCommand *command, s32 mode, s32 kind, s32 flag);
 void FUN_004c9160(s32 effect, BtlUnit *unit, s32 a, s32 b);
 s32 FUN_003e7adc(BtlUnit *unit);
-BtlModelOwner *FUN_003eaf20(BtlUnit *unit);
+BtlModelOwner *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlUnit *unit);
 void FUN_003f1b3c(BtlUnit *unit, u32 id, s32 slot, u32 *outA, u32 *outB);
 void FUN_0047f4cc(u32 value, f32 x, f32 y, f32 z);
 
@@ -102,7 +102,7 @@ void FUN_004ecee8(BtlActorRef *ref, BtlCommand *command)
             BtlModelOwner *owner;
 
             FUN_004c9160(0x2D, command->unit, 0, 1);
-            owner = FUN_003eaf20(ref->unit);
+            owner = btlFindFirstEntryMatchingCategoryAndRequiredMask(ref->unit);
             if (owner != NULL) {
                 u32 id = FUN_0019acdc(*(u16 *)(owner->model + 0x12C), 1);
                 u32 outA;

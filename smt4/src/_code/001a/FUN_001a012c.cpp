@@ -11,10 +11,10 @@ int FUN_001f20b4(...);
 int dataTable15GetUnlockedEntryId(...);
 int itemDrawCategoryBadge(...);
 int textDrawString(...);
-int FUN_002be650(...);
+int dataFindKindRecordWithAocOverrides(...);
 int vec2GetYInt(...);
 int vec2GetXInt(void);
-int FUN_002bf380(...);
+int texDrawCompositeSprite(...);
 int asdTMTexTableEntryAt(...);
 int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
@@ -42,16 +42,16 @@ extern unsigned int objectPartRunUnlessLocked(int);
 extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: FUN_002be650. */
+/* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: vec2GetXInt. */
-/* Supplied declaration required: FUN_002bf380. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 
 
 unsigned int FUN_001a012c(void)
@@ -76,7 +76,7 @@ unsigned int FUN_001a012c(void)
   temp_v1 = g_camp;
   renderCtxSelectStereoLayout(g_titleScene);
   temp_v3 = g_titleScene;
-  temp_v2 = FUN_002c5d80(1,0);
+  temp_v2 = renderCtxPackPassFlags(1,0);
   piVar11 = (int *)(temp_v3 + 0x124c);
   temp_v7 = *piVar11;
   temp_v8 = piVar11[temp_v7 + 2];
@@ -113,12 +113,12 @@ unsigned int FUN_001a012c(void)
       temp_v10 = 0;
       temp_v2 = vec2GetXInt();
       temp_v3 = vec2GetYInt(temp_v3 + 0x904);
-      FUN_002bf288(2,0x1a,0x52d,temp_v2,temp_v3,0xbf);
-      FUN_002bf288(2,0x1a,0x52f,temp_v2,temp_v3,0xbf);
-      FUN_002bf288(2,0x1a,0x52e,temp_v2,temp_v3,0xbf);
-      FUN_002bf288(2,0x1a,0x530,temp_v2,temp_v3,0xbf);
-      FUN_002bf288(2,0x1a,0x532,temp_v2,temp_v3,0xbf);
-      FUN_002bf288(2,0x1a,0x531,temp_v2,temp_v3,0xbf);
+      texDrawTableEntryAtStoredOrigin(2,0x1a,0x52d,temp_v2,temp_v3,0xbf);
+      texDrawTableEntryAtStoredOrigin(2,0x1a,0x52f,temp_v2,temp_v3,0xbf);
+      texDrawTableEntryAtStoredOrigin(2,0x1a,0x52e,temp_v2,temp_v3,0xbf);
+      texDrawTableEntryAtStoredOrigin(2,0x1a,0x530,temp_v2,temp_v3,0xbf);
+      texDrawTableEntryAtStoredOrigin(2,0x1a,0x532,temp_v2,temp_v3,0xbf);
+      texDrawTableEntryAtStoredOrigin(2,0x1a,0x531,temp_v2,temp_v3,0xbf);
       temp_v7 = 0;
 LAB_001a03b8:
       do {
@@ -174,14 +174,14 @@ LAB_001a03b8:
           temp_v9 = (unsigned int)*puVar6;
         }
         temp_v8 = asdTMTexTableEntryAt(0x1a,temp_v7 + 0x533);
-        FUN_002bf380(2,0x1a,0xd,*(short *)(temp_v8 + 8) + temp_v2,*(short *)(temp_v8 + 10) + temp_v3,0xbf)
+        texDrawCompositeSprite(2,0x1a,0xd,*(short *)(temp_v8 + 8) + temp_v2,*(short *)(temp_v8 + 10) + temp_v3,0xbf)
         ;
         temp_v5 = asdTMTexTableEntryAt(0x1a,0xa0);
         itemDrawCategoryBadge(temp_v10,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v2,
                      (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v3,0xc4,0);
         temp_v5 = asdTMTexTableEntryAt(0x1a,0xa1);
         if (temp_v9 != 0) {
-          FUN_002be650(temp_v9,0);
+          dataFindKindRecordWithAocOverrides(temp_v9,0);
           if (temp_v9 != 0) {
             VectorSignedToFloat((int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v8 + 10) + temp_v3,
                                 (unsigned char)(in_fpscr >> 0x16) & 3);

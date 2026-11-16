@@ -37,7 +37,7 @@ extern unsigned int vec2GetXInt(void);
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-extern unsigned int FUN_001692ac(unsigned int, unsigned int);
+extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
 extern int lmapSceneGetUnk0(void);
@@ -80,7 +80,7 @@ void FUN_00487d6c(int param_1)
       return;
     }
   }
-  temp_v2 = FUN_001692ac(5,1);
+  temp_v2 = renderCtxPackPassFlags(5,1);
   renderStackPushIndexed(g_renderCtx,3,temp_v2);
   temp_v1 = param_1 + 0x4cc;
   naviGetActiveStateValue();
@@ -110,7 +110,7 @@ void FUN_00487d6c(int param_1)
           *(unsigned char *)(temp_v1 + 0x12d0) = 0;
         }
         efctSetSpeed();
-        FUN_001835b4(2,0x13,0x112e,temp_v6,0,DAT_00587f20);
+        texDrawTableEntryAtStoredOrigin(2,0x13,0x112e,temp_v6,0,DAT_00587f20);
         efctSetSpeed();
         temp_v1 = g_renderCtx;
         temp_v3 = packNibblesAndByte(6,7,0);
@@ -132,7 +132,7 @@ void FUN_00487d6c(int param_1)
           *(unsigned char *)(temp_v1 + 0x12d0) = 0;
         }
         efctSetSpeed();
-        FUN_001835b4(2,0x13,0x1135,temp_v6,0,DAT_00587f20);
+        texDrawTableEntryAtStoredOrigin(2,0x13,0x1135,temp_v6,0,DAT_00587f20);
         efctSetSpeed();
         temp_v1 = g_renderCtx;
         temp_v3 = packNibblesAndByte(6,7,0);

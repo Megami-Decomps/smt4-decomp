@@ -2,7 +2,7 @@
 #include "camp/Unite/UniteEffect.h"
 
 extern "C" {
-u32 FUN_00212204(s32 mode);
+u32 screenFadeSlotReset(s32 mode);
 s32 scrGetArg(u32 index);
 u32 FUN_003d54f8(s32 channel, s32 duration);
 s32 FUN_00162ea4(void);
@@ -27,7 +27,7 @@ u32 FUN_00314c8c(void)
             return 1;
         }
         if (FUN_00162ea4() != 0) {
-            FUN_00212204(0);
+            screenFadeSlotReset(0);
         }
     }
     return 0;

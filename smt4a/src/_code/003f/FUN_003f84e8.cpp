@@ -16,7 +16,7 @@ extern "C" {
 extern const SpritePanelResourceBundle g_spritePanelResourceBundle;
 void paramsClearPacket(UiResourceParameters *);
 
-void FUN_0014e188(UiSpriteState *, u32, s32, UiResourceParameters *, u32, f32);
+void uiSpriteStateInitFromSource(UiSpriteState *, u32, s32, UiResourceParameters *, u32, f32);
 void uiSpriteSetKeyframe(UiSpriteState *, s32, s32);
 void uiSpriteSetImageKeyframe(UiSpriteState *, s32, s32);
 
@@ -37,21 +37,21 @@ void FUN_003f84e8(void *work)
     paramsInit(&panel->parameters, g_spritePanelResourceBundle.firstChunk, sizeof(g_spritePanelResourceBundle.firstChunk),
                g_spritePanelResourceBundle.secondChunk, sizeof(g_spritePanelResourceBundle.secondChunk),
                NULL, 0, NULL, 0, g_spritePanelResourceBundle.fifthChunk, sizeof(g_spritePanelResourceBundle.fifthChunk));
-    FUN_0014e188(&panel->sprites[0], 0x31, 0, &panel->parameters, 0xC9, 1.0f);
+    uiSpriteStateInitFromSource(&panel->sprites[0], 0x31, 0, &panel->parameters, 0xC9, 1.0f);
     uiSpriteSetKeyframe(&panel->sprites[0], 1, 0);
     uiSpriteSetImageKeyframe(&panel->sprites[0], 0, 0);
-    FUN_0014e188(&panel->sprites[1], 0x31, 0, &panel->parameters, 0xC9, 1.0f);
+    uiSpriteStateInitFromSource(&panel->sprites[1], 0x31, 0, &panel->parameters, 0xC9, 1.0f);
     uiSpriteSetKeyframe(&panel->sprites[1], 1, 0);
     uiSpriteSetImageKeyframe(&panel->sprites[1], 0, 0);
-    FUN_0014e188(&panel->sprites[2], 0x31, 0, &panel->parameters, 0xC9, 1.0f);
-    FUN_0014e188(&panel->sprites[3], 0x31, 0, &panel->parameters, 0xC9, 1.0f);
+    uiSpriteStateInitFromSource(&panel->sprites[2], 0x31, 0, &panel->parameters, 0xC9, 1.0f);
+    uiSpriteStateInitFromSource(&panel->sprites[3], 0x31, 0, &panel->parameters, 0xC9, 1.0f);
     uiSpriteSelectAnim(&panel->sprites[3], 0);
-    FUN_0014e188(&panel->sprites[4], 0x31, 0, &panel->parameters, 0xC9, 1.0f);
+    uiSpriteStateInitFromSource(&panel->sprites[4], 0x31, 0, &panel->parameters, 0xC9, 1.0f);
     uiSpriteSetKeyframe(&panel->sprites[4], 4, 0);
-    FUN_0014e188(&panel->sprites[5], 0x31, 0, &panel->parameters, 0xC9, 1.0f);
+    uiSpriteStateInitFromSource(&panel->sprites[5], 0x31, 0, &panel->parameters, 0xC9, 1.0f);
     uiSpriteSelectAnim(&panel->sprites[5], 1);
-    FUN_0014e188(&panel->sprites[6], 0x31, 0, &panel->parameters, 0xC9, 1.0f);
+    uiSpriteStateInitFromSource(&panel->sprites[6], 0x31, 0, &panel->parameters, 0xC9, 1.0f);
     uiSpriteSelectAnim(&panel->sprites[6], 2);
-    FUN_0014e188(&panel->sprites[7], 0x31, 0, &panel->parameters, 0xC9, 1.0f);
+    uiSpriteStateInitFromSource(&panel->sprites[7], 0x31, 0, &panel->parameters, 0xC9, 1.0f);
 }
 }

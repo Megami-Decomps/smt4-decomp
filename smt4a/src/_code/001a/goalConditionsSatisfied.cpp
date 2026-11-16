@@ -39,7 +39,7 @@ SlotTable* gameGetSlotTable(void);
 u8* gameGetSlotRecord(s32 slot);
 s32 bitSetTest(u8* record, u16 bit);
 u32 gameCountersGetWord(u16 counter);
-u16 FUN_001ba3d4(s32 id);
+u16 flagValueRead(s32 id);
 s32 partyFindSlotById(u16 id);
 RosterEntry* gameFindRosterEntry(s32 id);
 
@@ -91,7 +91,7 @@ s32 goalConditionsSatisfied(s32 id)
         for (s32 i = 0; i < 4; i++) {
             switch (goal->conditions[i].kind) {
             case 1: {
-                u32 progress = FUN_001ba3d4(goal->conditions[i].arg);
+                u32 progress = flagValueRead(goal->conditions[i].arg);
                 if (goal->conditions[i].value > progress) result = 0;
                 break;
             }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0016cdd8(int);
-int FUN_0016e800(...);
+int sysReportCheckFailure(...);
 int nn_os_LightEvent_Initialize(int, int);
 int nn_os_LightEvent_ClearSignal(int);
 
@@ -18,7 +18,7 @@ extern unsigned int g_moduleEventC; /* 0x62d2d8 */
 extern int DAT_0062d2e8; /* 0x62d2e8 */
 
 /* Supplied declaration required: FUN_0016cdd8. */
-/* Supplied declaration required: FUN_0016e800. */
+/* Supplied declaration required: sysReportCheckFailure. */
 extern int FUN_0016f9bc(unsigned int *, unsigned int);
 extern int FUN_0018a8ec(unsigned int);
 /* Supplied declaration required: nn_os_LightEvent_Initialize. */
@@ -41,11 +41,11 @@ void FUN_0016ce28(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   DAT_0062d2e8 = param_1 + 8;
   temp_v0 = FUN_0016f9bc(&g_moduleEventC,0x207);
   if (-(temp_v0 >> 0x1f) != 0) {
-    FUN_0016e800(temp_v0,0x16ce8c,-(temp_v0 >> 0x1f),param_4,unaff_r4,in_lr);
+    sysReportCheckFailure(temp_v0,0x16ce8c,-(temp_v0 >> 0x1f),param_4,unaff_r4,in_lr);
   }
   temp_v0 = FUN_0018a8ec(0x207);
   if (temp_v0 < 0) {
-    FUN_0016e800(temp_v0,0x16cea0);
+    sysReportCheckFailure(temp_v0,0x16cea0);
     return;
   }
   return;

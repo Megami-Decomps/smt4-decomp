@@ -12,7 +12,7 @@ extern GameStateView g_gameState;
 
 
 int mapInterfaceForwardResource(void);
-int FUN_00281e34(void);
+int __hardfp_atan2f(void);
 int FUN_002ba1e0(...);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -75,7 +75,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: mapInterfaceForwardResource. */
-/* Supplied declaration required: FUN_00281e34. */
+/* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: FUN_002ba1e0. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
@@ -187,7 +187,7 @@ LAB_001fa01c:
               *(float *)(temp_v4 + 0x188) = temp_v22;
               *(float *)(temp_v4 + 0x18c) = temp_v19;
               temp_v9 = *(float *)(DAT_004474f4 + 0x4c) - temp_v18;
-              FUN_00281e34();
+              __hardfp_atan2f();
               temp_v9 = temp_v9 * temp_v26 * (float)temp_v27;
               temp_v10 = 0;
               in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(0.0f <= temp_v9) << 0x1d);

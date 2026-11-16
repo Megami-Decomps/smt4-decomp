@@ -25,12 +25,12 @@ struct QuestTalkWork {
 extern "C" {
 void sysPlaySe(s32 sound);
 void asdLoadFileAsyncSimple(const char *path, void **output, s32 flags);
-ScriptProcess *FUN_00275bc8(void *bytecode, void *messages);
+ScriptProcess *scrScriptProcessCreate(void *bytecode, void *messages);
 u32 tableGroupFindEntryIndex(void *table, const char *name);
 void scrScriptProcessStartEntry(ScriptProcess *script, u32 entry);
 s32 scrRunOpcodesStub(ScriptProcess *script);
 f32 candidateGetPreferredValue(QuestTalkActor *actor);
-void FUN_003fe86c(QuestTalkActor *actor, u32 animation, u32 mode, f32 frame, f32 blend);
+void modelPlayClip(QuestTalkActor *actor, u32 animation, u32 mode, f32 frame, f32 blend);
 
 void questCenterUpdateTalkMasterScript(QuestTalkWork *work)
 {
@@ -51,10 +51,10 @@ void questCenterUpdateTalkMasterScript(QuestTalkWork *work)
             if (work->startFrame > candidateGetPreferredValue(actor)) {
                 break;
             }
-            work->script = FUN_00275bc8(work->bytecode, work->messages);
+            work->script = scrScriptProcessCreate(work->bytecode, work->messages);
             u32 entry = tableGroupFindEntryIndex(work->bytecode, "qc_TalkMaster");
             scrScriptProcessStartEntry(work->script, entry);
-            FUN_003fe86c(actor, 0, 0, work->startFrame, 0.0f);
+            modelPlayClip(actor, 0, 0, work->startFrame, 0.0f);
             actor->speed = 0.0f;
             work->step = 2;
         }

@@ -25,7 +25,7 @@ extern AocScriptOverride *g_aocSystem;
 
 void aocQueueType1d(AocScriptOverride *system, s32 script, BtlAiScriptLoader *loader, u8 *request);
 void asdLoadFileAsyncSimple(u8 *request, BtlAiScriptLoader *loader, s32 flags);
-ScriptProcess *FUN_00297060(void *file, s32 arg);
+ScriptProcess *scrScriptProcessCreate(void *file, s32 arg);
 void scrScriptProcessStartEntry(void *process, s32 index);
 s32 scrRunOpcodesStub(void *process);
 void scrScriptProcessDestroy(void *process);
@@ -48,7 +48,7 @@ s32 btlAiScriptLoadStep(BtlAiScriptLoader *loader)
         break;
     case 2:
         if (loader->file != NULL) {
-            ScriptProcess *process = FUN_00297060(loader->file, 0);
+            ScriptProcess *process = scrScriptProcessCreate(loader->file, 0);
 
             loader->process = process;
             process->running = 1;

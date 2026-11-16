@@ -14,7 +14,7 @@ struct BattleCandidateSignedValuesView {
 extern "C" {
 s32 scrGetArg(s32 argument);
 void scrSetResult(s32 result);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
 
 u32 FUN_003b1100(void)
 {
@@ -30,7 +30,7 @@ u32 FUN_003b1100(void)
         valueIndex = 11;
     u32 group = btlResolveEntryChoice(scrGetArg(1));
     s32 first, count;
-    FUN_00301a08(group, &first, &count);
+    btlGetEntryChoiceRange(group, &first, &count);
     for (s32 i = first; i < count + first; ++i) {
         BtlMainStateA *state = btlGetMainState();
         BtlCombatantEntryA *entry = &state->entries[i];
@@ -43,7 +43,7 @@ u32 FUN_003b1100(void)
         }
     }
     if (btlGetMainState()->unk4cd1) {
-        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry && ((const BattleCandidateSignedValuesView *)entry)->values[valueIndex] <= -1) {
             scrSetResult(1);
             return 1;

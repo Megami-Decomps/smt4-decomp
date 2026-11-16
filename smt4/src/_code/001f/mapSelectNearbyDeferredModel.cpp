@@ -31,7 +31,7 @@ extern "C" {
 
 extern DeferredModels1fa800 *g_deferredMapModels;
 f32 mathDistanceBetweenPoints(MapVector a, MapVector b);
-ModelInfo1fa800 *FUN_00266f30(s32 modelId);
+ModelInfo1fa800 *dataTable2AGetEntryWithAoc(s32 modelId);
 void FUN_00266fac(s32 found, s32 index);
 char *libc_strcpy(char *dest, const char *src);
 
@@ -41,7 +41,7 @@ void mapSelectNearbyDeferredModel(MapVector point)
     for (s32 i = 0; i < 64; i++) {
         if (g_deferredMapModels->models[i].active &&
             mathDistanceBetweenPoints(point, g_deferredMapModels->models[i].position) < 200.0f) {
-            ModelInfo1fa800 *info = FUN_00266f30(g_deferredMapModels->models[i].modelId);
+            ModelInfo1fa800 *info = dataTable2AGetEntryWithAoc(g_deferredMapModels->models[i].modelId);
             g_deferredMapModels->nearActive = 1;
             g_deferredMapModels->nearIndex = i;
             g_deferredMapModels->nearKind = g_deferredMapModels->models[i].kind;

@@ -24,14 +24,14 @@ typedef struct Holder {
 } Holder;
 
 extern s32 idSetFindSubjectIndex(ObjectBlock *block, Entry *entry);
-extern Object *FUN_001568f8(ObjectBlock *block, s32 id);
+extern Object *btlFindEntryBlockByMemberId(ObjectBlock *block, s32 id);
 extern void stateEntryFindById(ObjectBlock *block, u32 value);
 
 void FUN_00421b2c(Holder *holder, s32 row)
 {
     Entry *entry = &holder->block->entries[row];
     s32 slot = idSetFindSubjectIndex(holder->block, entry);
-    Object *object = FUN_001568f8(holder->block, entry->id);
+    Object *object = btlFindEntryBlockByMemberId(holder->block, entry->id);
 
     stateEntryFindById(holder->block, object->slots[slot]);
 }

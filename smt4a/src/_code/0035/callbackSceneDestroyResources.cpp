@@ -18,7 +18,7 @@ typedef struct SceneResources {
 extern SceneResources *g_callbackWork;
 
 int jobStop(void *context, int arg);
-int FUN_001695a0(void);
+int messageSetScriptDisplayMode(void);
 void asdMemFree(void *memory);
 void scrScriptProcessDestroy(ScriptResource *resource);
 int dataTableFree(int arg);
@@ -51,7 +51,7 @@ void callbackSceneDestroyResources(void)
     if (res->resource1C != NULL) {
         asdMemFree(res->resource1C);
     }
-    FUN_001695a0();
+    messageSetScriptDisplayMode();
     dataTableFree(0x3e);
     dataTableFree(0x25);
     dataTableFree(0x14);

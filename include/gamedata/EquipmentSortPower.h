@@ -15,7 +15,7 @@ typedef char EquipmentSortPowerOffsets[offsetof(EquipmentSortPowerPrimary, power
 extern "C" {
 #endif
 /* Canonical declaration (matches the definition). */
-u16 FUN_00230f44(const u16 *entry);
+u16 aocEntryGetSortOrder(const u16 *entry);
 #ifdef __cplusplus
 }
 #endif

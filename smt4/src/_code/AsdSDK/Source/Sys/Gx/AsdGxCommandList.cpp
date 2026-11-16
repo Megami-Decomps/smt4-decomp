@@ -15,14 +15,14 @@ s32 g_asdGxListDepth;
 u32 g_asdGxCommandLists[2];
 
 void gxGetCommandListParameter(u32 param, u32 *out);
-void FUN_002bdb48(void);
+void asdGxCommandBufferTerminateAndSubmit(void);
 void FUN_001376d8(u32 *a, u32 *b, u32 *c, u32 *d);
 void asdGxCommandListRefreshCopy(AsdGxCommandList *list);
 void nngxBindCmdlist(u32 cmdList);
 void FUN_0013764c(void);
 void nngxGetError(void);
 void asdModelResetCommandBuffer(void);
-u32 FUN_002b7148(void);
+u32 asdGxGetCommandCursor(void);
 void FUN_002af390(u32 begin, u32 end);
 
 /* Flips between the two command lists. */
@@ -57,9 +57,9 @@ void asdGxCommandListStartRecord(AsdGxCommandList *list)
     gxGetCommandListParameter(0x207, &list->entries[0].values[1]);
     nngxBindCmdlist(g_asdGxCommandLists[g_asdGxState]);
     list->entries[0].values[2] = 1;
-    u32 cursor = FUN_002b7148();
+    u32 cursor = asdGxGetCommandCursor();
     FUN_002af390(cursor, cursor);
-    list->id = FUN_002b7148();
+    list->id = asdGxGetCommandCursor();
 }
 
 /* Creates a render pass command list object. */
@@ -81,7 +81,7 @@ void asdGxCommandListBegin(AsdGxCommandList *list)
     gxGetCommandListParameter(0x207, &list->boundList);
     if (g_asdGxListDepth != 0) {
         outer = g_asdGxCommandListStack[g_asdGxListDepth - 1];
-        FUN_002bdb48();
+        asdGxCommandBufferTerminateAndSubmit();
         FUN_001376d8(&outer->entries[outer->entryCount].values[0], &outer->entries[outer->entryCount].values[1],
                      &outer->entries[outer->entryCount].values[2], &outer->entries[outer->entryCount].values[3]);
         outer->state = ASD_GX_CMDLIST_SUSPENDED;

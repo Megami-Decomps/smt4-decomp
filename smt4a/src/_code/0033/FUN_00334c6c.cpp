@@ -25,9 +25,9 @@ void FUN_00334c6c(s32 x, s32 y, s32 alternate)
     StatusPanelAnimationsView *animations = reinterpret_cast<StatusPanelAnimationsView *>(work);
     efctSetSpeed(vec2GetSpeed(&animations->background));
     for (s32 index = 0; index < 3; ++index)
-        FUN_001835b4(2, 0x12, index + 0x57E, x, y, 0xBF);
+        texDrawTableEntryAtStoredOrigin(2, 0x12, index + 0x57E, x, y, 0xBF);
     efctSetSpeed(1.0f);
-    FUN_001835b4(2, 0x12, 0x581, x, y, 0xC0);
+    texDrawTableEntryAtStoredOrigin(2, 0x12, 0x581, x, y, 0xC0);
     s32 topLeft, topRight, middleLeft, middleRight, bottomLeft, bottomRight;
     if (alternate != 0) {
         topLeft = 0x5B5;
@@ -44,13 +44,13 @@ void FUN_00334c6c(s32 x, s32 y, s32 alternate)
         bottomLeft = 0x5A0;
         bottomRight = 0x5A4;
     }
-    FUN_001835b4(2, 0x12, topLeft, x, y, 0xC1);
-    FUN_001835b4(2, 0x12, topRight, x, y, 0xC1);
-    FUN_001835b4(2, 0x12, middleLeft, x, y, 0xC2);
-    FUN_001835b4(2, 0x12, middleRight, x, y, 0xC2);
+    texDrawTableEntryAtStoredOrigin(2, 0x12, topLeft, x, y, 0xC1);
+    texDrawTableEntryAtStoredOrigin(2, 0x12, topRight, x, y, 0xC1);
+    texDrawTableEntryAtStoredOrigin(2, 0x12, middleLeft, x, y, 0xC2);
+    texDrawTableEntryAtStoredOrigin(2, 0x12, middleRight, x, y, 0xC2);
     efctSetSpeed(vec2GetSpeed(&animations->accent));
-    FUN_001835b4(2, 0x12, bottomLeft, x, y, 0xC4);
-    FUN_001835b4(2, 0x12, bottomRight, x, y, 0xC4);
+    texDrawTableEntryAtStoredOrigin(2, 0x12, bottomLeft, x, y, 0xC4);
+    texDrawTableEntryAtStoredOrigin(2, 0x12, bottomRight, x, y, 0xC4);
     efctSetSpeed(1.0f);
 }
 }

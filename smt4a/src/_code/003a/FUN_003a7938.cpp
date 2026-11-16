@@ -8,9 +8,9 @@ extern "C" {
 extern SaveLoadProcessA g_saveLoadProcess;
 s32 saveLoadThreadValueGet(void);
 s32 saveLoadJobIsReady(void);
-u32 FUN_001692ac(u32 state, u32 options);
+u32 renderCtxPackPassFlags(u32 state, u32 options);
 void efctSetSpeed(f32 speed);
-void FUN_00183bb0(void);
+void gxResetColorQuadToWhite(void);
 
 // Animation frame follows the established six-byte save-process prefix.
 struct SaveLoadActivityView {
@@ -29,16 +29,16 @@ static __inline u32 saveLoadActivityFrame(void)
 u32 FUN_003a7938(void)
 {
     if (saveLoadThreadValueGet() || saveLoadJobIsReady()) {
-        FUN_00157558(g_renderCtx);
+        renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         RenderCtxA *context = g_renderCtx;
-        renderCtxPushA(context, FUN_001692ac(1, 0));
+        renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
         efctSetSpeed(1.0f);
-        FUN_00183bb0();
+        gxResetColorQuadToWhite();
         s32 x = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.27f);
-        FUN_001835b4(2, 8, saveLoadActivityFrame() + 389, x, 0, 6);
+        texDrawTableEntryAtStoredOrigin(2, 8, saveLoadActivityFrame() + 389, x, 0, 6);
         renderStackPop(&g_renderCtx->stackA);
         efctSetSpeed(1.0f);
-        FUN_00183bb0();
+        gxResetColorQuadToWhite();
     }
     return 0;
 }

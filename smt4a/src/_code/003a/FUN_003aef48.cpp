@@ -7,7 +7,7 @@
 extern "C" {
 
 int uiPointerHitsRect(...);
-int FUN_00167c14(...);
+int touchGetPointByMode(...);
 int sysPlaySe(...);
 int msgWindowReset(void);
 int gameDataToggleFlagSet(...);
@@ -35,10 +35,10 @@ typedef struct {
 /* Supplied declaration required: uiPointerHitsRect. */
 extern int padButtonRepeat(unsigned int);
 extern int padButtonIsPressed(unsigned int);
-/* Supplied declaration required: FUN_00167c14. */
+/* Supplied declaration required: touchGetPointByMode. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: msgWindowReset. */
-extern int FUN_002e1a18(unsigned int);
+extern int buttonHelpIsActionActive(unsigned int);
 /* Supplied declaration required: campCecSetObjectValue. */
 extern unsigned int overlayGetStatusScene(void);
 extern unsigned int dataTableGetEntryValue(void);
@@ -93,7 +93,7 @@ unsigned int FUN_003aef48(int param_1)
   temp_v10 = -1;
   temp_v21 = 0;
   temp_v18 = 0;
-  FUN_00167c14(param_1 + 0x140,param_1 + 0x144,1);
+  touchGetPointByMode(param_1 + 0x140,param_1 + 0x144,1);
   *(unsigned char *)(param_1 + 0x138) = 0;
   asdTMTexTableEntryAt(0x2e,*(int *)(param_1 + 0x128) + 0xe6);
   temp_v1 = param_1;
@@ -180,7 +180,7 @@ unsigned int FUN_003aef48(int param_1)
     uiPointerHitsRect(temp_v11,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
                  (int)(*(short **)(temp_v1 + 0xc))[1]);
     if (temp_v11 != 0) {
-      FUN_00167c14(&temp_v21,&temp_v18,3);
+      touchGetPointByMode(&temp_v21,&temp_v18,3);
       temp_v1 = temp_v18 - *(int *)(param_1 + 0x144);
       temp_v11 = *(int *)(param_1 + 0x100);
       if (temp_v1 < 0) {
@@ -241,7 +241,7 @@ unsigned int FUN_003aef48(int param_1)
     }
     else if ((temp_v2 & 4) != 0) {
       temp_v11 = *(int *)(param_1 + 0x128);
-      FUN_00167c14(temp_v23,&temp_v17,0);
+      touchGetPointByMode(temp_v23,&temp_v17,0);
       temp_v1 = (int)asdTMTexTableEntryAt(0x2e,0x41);
       temp_v17 = temp_v17 - *(short *)(temp_v1 + 10);
       temp_v6 = *(int *)(param_1 + 0x124);
@@ -450,14 +450,14 @@ unsigned int FUN_003aef48(int param_1)
     }
     temp_v1 = padButtonIsPressed(0);
     if (temp_v1 == 0) {
-      temp_v6 = FUN_002e1a18(1);
+      temp_v6 = buttonHelpIsActionActive(1);
       temp_v1 = temp_v6;
       if (temp_v6 == 0) {
         temp_v1 = temp_v22;
       }
       if (temp_v6 != 0 || temp_v1 != 0) goto LAB_003af720;
       temp_v1 = padButtonIsPressed(1);
-      if ((temp_v1 != 0) || (temp_v1 = FUN_002e1a18(2), temp_v1 != 0)) {
+      if ((temp_v1 != 0) || (temp_v1 = buttonHelpIsActionActive(2), temp_v1 != 0)) {
         msgWindowReset();
         temp_v1 = *(int *)(param_1 + 0x14c);
         *(unsigned char *)(param_1 + 0x114) = 1;

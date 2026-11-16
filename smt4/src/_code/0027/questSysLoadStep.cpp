@@ -21,7 +21,7 @@ extern const char g_questScriptPath[];
 extern const char g_questMessagesPath[];
 void asdLoadFileAsyncSimple(const char *path, void **resource, s32 flags);
 void buttonHelpSetPreset(s32 preset);
-QuestScriptProcess *FUN_00297060(void *script, void *messages);
+QuestScriptProcess *scrScriptProcessCreate(void *script, void *messages);
 void scrScriptProcessStartEntry(QuestScriptProcess *process, u32 entry);
 s32 scrRunOpcodesStub(QuestScriptProcess *process);
 s32 FUN_00298dc8();
@@ -44,7 +44,7 @@ u32 questSysLoadStep(QuestLoadStep *step)
             if (step->showButtonHelp) {
                 buttonHelpSetPreset(0x90);
             }
-            step->process = FUN_00297060(step->script, step->messages);
+            step->process = scrScriptProcessCreate(step->script, step->messages);
             scriptProcessSetMode(step->process, 2);
             scrScriptProcessStartEntry(step->process, step->entry);
             step->state = 2;

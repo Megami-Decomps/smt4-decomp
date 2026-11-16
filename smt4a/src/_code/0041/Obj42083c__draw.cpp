@@ -38,7 +38,7 @@ typedef struct {
 
 extern int g_renderCtx; /* 0x59dbb4 */
 
-extern int FUN_001692ac(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: FUN_00186940. */
 /* Supplied declaration required: FUN_002371b0. */
@@ -149,7 +149,7 @@ void Obj42083c::draw()
     *(unsigned char *)(temp_v0 + 0x12d0) = 0;
   }
   temp_v0 = g_renderCtx;
-  temp_v1 = FUN_001692ac(1,0);
+  temp_v1 = renderCtxPackPassFlags(1,0);
   piVar10 = (int *)(temp_v0 + 0x1258);
   temp_v2 = *piVar10;
   temp_v3 = piVar10[temp_v2 + 2];

@@ -5,7 +5,7 @@
 extern "C" {
 
 /* Finds the populated slot (of 42 at 0x2134) whose entry has the requested id. */
-void *FUN_0027d9e8(const void *slots, s32 id);
+void *idSlotsFindEntryById(const void *slots, s32 id);
 
 u32 FUN_0027db08(int which);
 

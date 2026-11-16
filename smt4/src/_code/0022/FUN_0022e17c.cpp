@@ -36,7 +36,7 @@ typedef char PartyComparisonOffsets[offsetof(PartyComparisonSlotsView, stockCoun
     offsetof(DevilComparisonSummaryView, name) == 0x1C ? 1 : -1];
 extern "C" {
 void unitInitializeFromSavedRecord(u16, StatBlock *);
-const char *FUN_002bd06c(u32);
+const char *dataTable01FindByIdWithAoc(u32);
 PartyComparisonSlotsView *gameGetSlotTable();
 
 void FUN_0022e17c(DevilComparisonSummaryView *output, u16 id, s32 useCurrent)
@@ -46,7 +46,7 @@ void FUN_0022e17c(DevilComparisonSummaryView *output, u16 id, s32 useCurrent)
     output->race = devil->sort.race;
     output->category = devil->category;
     output->variant = devil->variant;
-    output->name = FUN_002bd06c(devil->sort.id);
+    output->name = dataTable01FindByIdWithAoc(devil->sort.id);
     output->addedPoints = 0;
     StatBlock temporary;
     unitInitializeFromSavedRecord(id, &temporary);

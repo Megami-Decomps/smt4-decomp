@@ -27,13 +27,13 @@ extern "C" {
 extern PlaceWindowWork *g_placeWin;
 extern RenderCtx *g_titleScene;
 void renderCtxSelectStereoLayout(RenderCtx *context);
-u32 FUN_002c5d80(u32 slot, u32 flags);
+u32 renderCtxPackPassFlags(u32 slot, u32 flags);
 s32 vec2GetXInt(const PlaceWindowPosition *position);
 s32 vec2GetYInt(const PlaceWindowPosition *position);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 scale);
-void FUN_002bf380(s32 layer, u32 group, u32 frame, s32 x, s32 y, s32 flags);
+void texDrawCompositeSprite(s32 layer, u32 group, u32 frame, s32 x, s32 y, s32 flags);
 PlaceWindowFrame *asdTMTexTableEntryAt(u32 group, u32 frame);
-void FUN_002bed3c(void);
+void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 speed);
 
 u32 placeWindowDrawLabel(void)
@@ -44,16 +44,16 @@ u32 placeWindowDrawLabel(void)
     }
     renderCtxSelectStereoLayout(g_titleScene);
     RenderCtx *context = g_titleScene;
-    u32 state = FUN_002c5d80(1, 0);
+    u32 state = renderCtxPackPassFlags(1, 0);
     renderCtxPushA(context, state);
     s32 x = vec2GetXInt(&window->position) + static_cast<s32>(renderCtxCalculateStereoParallax(g_titleScene, 0.27f));
     s32 y = vec2GetYInt(&window->position);
-    FUN_002bf380(2, 0xe, 0xe, x, y, 0x65);
+    texDrawCompositeSprite(2, 0xe, 0xe, x, y, 0x65);
     PlaceWindowFrame *frame = asdTMTexTableEntryAt(0xe, 0x10b);
     textDrawString(3, 0xffffffff, window->text,
         static_cast<f32>(x + frame->offsetX), static_cast<f32>(y + frame->offsetY),
         0.56640625f, 0.0f, 1.0f);
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
     renderStackPop(&g_titleScene->stackA);
     return 0;

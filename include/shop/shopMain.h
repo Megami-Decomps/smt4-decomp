@@ -37,7 +37,7 @@ typedef struct ShopGlobals {
 } ShopGlobals;
 
 extern "C" {
-u16 FUN_0049c9a0(const u16 *idPtr);
+u16 recordGetCompareValue(const u16 *idPtr);
 }
 
 extern "C" {
@@ -58,7 +58,7 @@ void FUN_002328b4(void);
 extern "C" {
 #endif
 
-u8 FUN_00290e78(void);
+u8 messageBannerIsIdle(void);
 
 #ifdef __cplusplus
 }

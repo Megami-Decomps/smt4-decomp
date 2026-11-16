@@ -14,7 +14,7 @@ BtlEntry *btlMainFindActiveEntry(BtlMainState *battle);
 static __inline void groupEntryBitResult(u32 id, u32 bit, u32 group)
 {
     s32 first, count;
-    FUN_002499fc(group, &first, &count);
+    btlSideGetEntryRange(group, &first, &count);
     for (s32 i = first; i < first + count; ++i) {
         BtlEntry *entry = &btlGetMainState()->entries[i];
         if (!(entry->flags & 0x10) && (entry->flags & 1) && !(entry->flags & 0x40) &&

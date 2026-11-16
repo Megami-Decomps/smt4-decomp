@@ -48,10 +48,10 @@ void mapEaseSceneHeading(void);
 u32 soundVolumeSettingGet(void);
 void soundVolumeSettingSet(u32 volume);
 void FUN_0033abd4(void);
-void FUN_003d4ed8(u32 event);
+void soundActorStartOnFreeChannel(u32 event);
 void FUN_00324e38(u32 value);
-void FUN_001bc124(void);
-void FUN_001bbf0c(void);
+void libm_sinf(void);
+void libm_cosf(void);
 void FUN_0014af98(void);
 void sysPlayVoice(u32 voice);
 void FUN_002e364c(f32 *target);
@@ -69,10 +69,10 @@ static __inline void lmapIntroAnnounce(const u32 *events, u32 voice, u32 volume)
 {
     FUN_0033abd4();
     if (g_gameState.area < LMAP_AREA_COUNT)
-        FUN_003d4ed8(events[g_gameState.area]);
+        soundActorStartOnFreeChannel(events[g_gameState.area]);
     FUN_00324e38(0xFFFFFFFF);
-    FUN_001bc124();
-    FUN_001bbf0c();
+    libm_sinf();
+    libm_cosf();
     FUN_0014af98();
     soundVolumeSettingSet(0);
     sysPlayVoice(voice);

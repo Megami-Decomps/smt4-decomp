@@ -35,7 +35,7 @@ extern unsigned char FUN_0042cb68; /* 0x42cb68 */
 extern unsigned char FUN_0042cbb0; /* 0x42cbb0 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
-extern int FUN_001692ac(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
@@ -108,7 +108,7 @@ void FUN_003380a0(unsigned int *param_1,unsigned int param_2)
   FUN_002ff8e8(param_2);
   temp_v5 = g_renderCtx;
   if ((*(unsigned short *)((int)param_1 + 0x12) & 0x100) != 0) {
-    temp_v0 = FUN_001692ac(5,0);
+    temp_v0 = renderCtxPackPassFlags(5,0);
     piVar5 = (int *)(temp_v5 + 0x1258);
     temp_v1 = *piVar5;
     temp_v2 = piVar5[temp_v1 + 2];
@@ -120,7 +120,7 @@ void FUN_003380a0(unsigned int *param_1,unsigned int param_2)
     }
   }
   else {
-    temp_v0 = FUN_001692ac(1,0);
+    temp_v0 = renderCtxPackPassFlags(1,0);
     piVar5 = (int *)(temp_v5 + 0x1258);
     temp_v1 = *piVar5;
     temp_v2 = piVar5[temp_v1 + 2];

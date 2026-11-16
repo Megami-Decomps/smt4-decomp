@@ -35,9 +35,9 @@ union ContentPackageSystem {
 }
 
 extern "C" {
-u32 FUN_001b315c(ContentPackage* package);
-ContentDirectoryEntry* FUN_001b31ac(ContentPackage* package);
-u32 FUN_001b31e0(ContentPackage* package);
+u32 packageEntryIsLoaded(ContentPackage* package);
+ContentDirectoryEntry* packageEntryGetDirectory(ContentPackage* package);
+u32 packageEntryGetFileCount(ContentPackage* package);
 void* dataTableFileGetTable(void* file, s32 index);
 
 u8* aocFindTable22Record(AocSystemA* system, s32 id)
@@ -45,9 +45,9 @@ u8* aocFindTable22Record(AocSystemA* system, s32 id)
     ContentPackageSystem* owner = reinterpret_cast<ContentPackageSystem*>(system);
     for (s32 packageIndex = 0; packageIndex < owner->packages.count; ++packageIndex) {
         ContentPackage* package = &owner->packages.entries[packageIndex];
-        if (FUN_001b315c(package)) {
-            ContentDirectoryEntry* directory = FUN_001b31ac(package);
-            const u32 fileCount = FUN_001b31e0(package);
+        if (packageEntryIsLoaded(package)) {
+            ContentDirectoryEntry* directory = packageEntryGetDirectory(package);
+            const u32 fileCount = packageEntryGetFileCount(package);
             for (u32 fileIndex = 0; fileIndex < fileCount; ++fileIndex) {
                 if (directory[fileIndex].type == 0x22 && package->files[fileIndex].enabled) {
                     void* table = dataTableFileGetTable(package->files[fileIndex].tableFile, 0);

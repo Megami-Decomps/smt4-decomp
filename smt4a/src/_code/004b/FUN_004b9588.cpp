@@ -12,9 +12,9 @@ typedef char SkinDrawObjectOffsetsCheck[
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
-void FUN_00157558(RenderCtxA *context);
-void FUN_00183bb0(void);
-s32 FUN_001692ac(s32 first, s32 second);
+void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
+void gxResetColorQuadToWhite(void);
+s32 renderCtxPackPassFlags(s32 first, s32 second);
 void FUN_004bade0(void *skinState);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
@@ -24,10 +24,10 @@ void FUN_004b9588(SkinDrawObject *object)
     if (object->kind == 0x11) {
         return;
     }
-    FUN_00157558(g_renderCtx);
-    FUN_00183bb0();
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
+    gxResetColorQuadToWhite();
     RenderCtxA *context = g_renderCtx;
-    renderCtxPushA(context, FUN_001692ac(1, 0));
+    renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
     if (object->kind >= 3) {
         FUN_004bade0(object->skinState);
     }

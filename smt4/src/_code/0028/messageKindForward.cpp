@@ -3,9 +3,9 @@
 
 extern "C" {
 
-void FUN_002ae9ec(s32 a, s32 b, u32 kind, u32 arg1, u32 arg2, u32 arg3);
+void texTableRecordCallWithParams(s32 a, s32 b, u32 kind, u32 arg1, u32 arg2, u32 arg3);
 
-/* Maps `category` (1..10) to the kind FUN_002ae9ec expects and forwards it with the three extra arguments; category 0 does nothing. */
+/* Maps `category` (1..10) to the kind texTableRecordCallWithParams expects and forwards it with the three extra arguments; category 0 does nothing. */
 void messageKindForward(s32 category, u32 arg1, u32 arg2, u32 arg3)
 {
     u32 kind;
@@ -43,7 +43,7 @@ void messageKindForward(s32 category, u32 arg1, u32 arg2, u32 arg3)
         kind = 0x22;
         break;
     }
-    FUN_002ae9ec(2, 0x13, kind, arg1, arg2, arg3);
+    texTableRecordCallWithParams(2, 0x13, kind, arg1, arg2, arg3);
 }
 
 } /* extern "C" */

@@ -12,7 +12,7 @@ struct DemonMessageArchiveRow {
 };
 extern "C" {
 PartyTextureSlot *saveSlotFindById(u32);
-const char *FUN_00180118(u32);
+const char *dataTable01GetRecordWithAocOverride(u32);
 const char *FUN_0014bf3c(u16, u32);
 char *libc_strcpy(char *, const char *);
 void textFormatBuffer(char *, const char *, ...);
@@ -32,10 +32,10 @@ void FUN_00416d30(ResultInputWork *work)
     if (work->resources.selectedId >= 0) {
         PartyTextureSlot *slot = saveSlotFindById(static_cast<u16>(work->resources.selectedId));
         if (slot != NULL) {
-            libc_strcpy(name, FUN_00180118(slot->id));
-            FUN_003180c4(8, name);
+            libc_strcpy(name, dataTable01GetRecordWithAocOverride(slot->id));
+            scrSetStringSlot(8, name);
             libc_strcpy(name, FUN_0014bf3c(slot->id, 0));
-            FUN_003180c4(0x10, name);
+            scrSetStringSlot(0x10, name);
             asdLoadFileAsyncSimple(DAT_00533c70, reinterpret_cast<u32 *>(&work->resources.levelUpScript), 0);
             s8 voiceCategory = (s8)devilGetVoiceCategory(devilGetRecord(slot->id));
             DataTableView<DemonMessageArchiveRow> messages(0x25, 0);

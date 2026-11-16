@@ -26,7 +26,7 @@ typedef struct BtlMainGlobals {
 
 extern BtlMainGlobals g_btlMain;
 
-extern void FUN_004bcb54(void *effect);
+extern void unitRecordResetCurrentValues(void *effect);
 
 /* Releases the battle's background and slot effects and clears flag 1 of the owner's state. */
 void btlEffectsRelease(BtlOwnerHolder *holder)
@@ -34,13 +34,13 @@ void btlEffectsRelease(BtlOwnerHolder *holder)
     s32 i;
 
     if (g_btlMain.background != NULL) {
-        FUN_004bcb54(g_btlMain.background);
+        unitRecordResetCurrentValues(g_btlMain.background);
     }
     if (g_btlMain.slots != NULL) {
         for (i = 0; i < 24; i++) {
             BtlSlot *slot = &g_btlMain.slots[i];
 
-            FUN_004bcb54(slot->effect);
+            unitRecordResetCurrentValues(slot->effect);
         }
     }
     holder->owner->flags &= ~1;

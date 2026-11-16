@@ -14,7 +14,7 @@ extern MoviePlaybackControl g_mobiclipCtrl;
 extern MovieReadHandle DAT_004c3af8;
 extern MovieSync DAT_004c3b20;
 void mobiclipPlayerReleaseHandle(MovieReadHandle *);
-void FUN_0011b6c8(MovieSync *);
+void timedJobBeginStop(MovieSync *);
 void FUN_0011b788(MovieSync *);
 void asdSndApplyPendingVoiceState(MovieReadHandle *);
 s32 FUN_00350e18(MovieSync *);
@@ -39,7 +39,7 @@ u8 mobiclipPollUntilReady(void)
     do {
         if (mobiclipReadIsComplete(&DAT_004c3af8)) {
             mobiclipPlayerReleaseHandle(&DAT_004c3af8);
-            FUN_0011b6c8(&DAT_004c3b20);
+            timedJobBeginStop(&DAT_004c3b20);
             FUN_0011b788(&DAT_004c3b20);
             asdSndApplyPendingVoiceState(&DAT_004c3af8);
         }

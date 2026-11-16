@@ -13,7 +13,7 @@ extern PartyPanelState *g_partyPanel;
 SlotTable *gameGetSlotTable(void);
 s32 objectPartRunUnlessLocked(GridNavigation *grid);
 s32 FUN_0029efa8(const GridNavigation *grid);
-void FUN_0029f848(GridNavigation *grid, s32 count, s32 visibleRows, s32 columns, s32 wrap, s32 alternateKeys);
+void gridNavigationConfigure(GridNavigation *grid, s32 count, s32 visibleRows, s32 columns, s32 wrap, s32 alternateKeys);
 void scrollOwnerSelectIndex(GridNavigation *grid, s32 index);
 void scrollSelectionClampToCount(GridNavigation *grid);
 
@@ -30,16 +30,16 @@ void FUN_002937e0(void)
     if (capacity & 3)
         ++rows;
     if (capacity < 12) {
-        FUN_0029f848(&panel->capacityGrids.base, capacity, rows, 4, 1, 1);
-        FUN_0029f848(&panel->capacityGrids.expanded, party->capacity + 4, rows + 1, 4, 1, 1);
+        gridNavigationConfigure(&panel->capacityGrids.base, capacity, rows, 4, 1, 1);
+        gridNavigationConfigure(&panel->capacityGrids.expanded, party->capacity + 4, rows + 1, 4, 1, 1);
     } else if (!panel->unk2C) {
-        FUN_0029f848(&panel->capacityGrids.base, 12, 3, 4, 1, 1);
-        FUN_0029f848(&panel->capacityGrids.expanded, 16, 4, 4, 1, 1);
+        gridNavigationConfigure(&panel->capacityGrids.base, 12, 3, 4, 1, 1);
+        gridNavigationConfigure(&panel->capacityGrids.expanded, 16, 4, 4, 1, 1);
     } else {
         party = reinterpret_cast<const PartyCapacityView *>(gameGetSlotTable());
-        FUN_0029f848(&panel->capacityGrids.base, party->capacity - 12, 3, 4, 1, 1);
+        gridNavigationConfigure(&panel->capacityGrids.base, party->capacity - 12, 3, 4, 1, 1);
         party = reinterpret_cast<const PartyCapacityView *>(gameGetSlotTable());
-        FUN_0029f848(&panel->capacityGrids.expanded, party->capacity - 8, 4, 4, 1, 1);
+        gridNavigationConfigure(&panel->capacityGrids.expanded, party->capacity - 8, 4, 4, 1, 1);
     }
     scrollOwnerSelectIndex(&panel->capacityGrids.base, firstRow);
     FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(&panel->capacityGrids.base), firstColumn);

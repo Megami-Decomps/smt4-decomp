@@ -5,8 +5,8 @@
 extern "C" {
 
 int itemGroupHasEnabledItem(unsigned int, int);
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
+int libm_cosf(void);
+int libm_sinf(void);
 int FUN_00235bfc(int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -47,8 +47,8 @@ extern float DAT_00610af8; /* 0x610af8 */
 extern float DAT_00610afc; /* 0x610afc */
 
 /* Supplied declaration required: itemGroupHasEnabledItem. */
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_00235bfc. */
 extern int sceneFindRecordByName(unsigned int, int, unsigned char *);
 extern short resourceNameGroupFindIndex(unsigned int, unsigned char *);
@@ -72,8 +72,8 @@ void FUN_0031416c(int param_1,int param_2,int param_3)
   temp_v6 = in_s0 * 0.017453292f;
   temp_v2 = *(unsigned int *)(g_handleRegistry + 4);
   temp_v7 = temp_v6;
-  FUN_001bc124();
-  FUN_001bbf0c();
+  libm_sinf();
+  libm_cosf();
   temp_v0 = resourceNameGroupFindIndex(temp_v2,&LAB_00314518);
   temp_v3 = (int)temp_v0;
   temp_v1 = sceneFindRecordByName(temp_v2,temp_v3,&LAB_00314518);

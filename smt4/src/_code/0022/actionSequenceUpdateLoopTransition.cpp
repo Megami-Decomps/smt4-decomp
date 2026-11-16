@@ -8,7 +8,7 @@ void FUN_00226a90(ActionController *, s16, s32);
 void FUN_0023c700(ActionController *, s32, s32, s32, s32, s32, f32, f32);
 void animationSelectThirdPart(void *);
 void actionSequenceDispatchTriggers(ActionController *);
-void FUN_002505c0(s32, s32, u32, s32, s32, s32, s32);
+void btlQueueKeyedScalarReflectAction(s32, s32, u32, s32, s32, s32, s32);
 
 // Track animation loops and enter the next action phase when playback finishes.
 void actionSequenceUpdateLoopTransition(ActionController *controller)
@@ -46,10 +46,10 @@ void actionSequenceUpdateLoopTransition(ActionController *controller)
         actionSequenceDispatchTriggers(controller);
         s16 kind = controller->sequence->kind;
         if (kind == 15 || kind == 16) {
-            FUN_002505c0(0, 0, 0x1000107, 0, 0, 0, 0);
+            btlQueueKeyedScalarReflectAction(0, 0, 0x1000107, 0, 0, 0, 0);
             return;
         }
-        FUN_002505c0(0, 0, 0x1000109, 0, 0, 0, 0);
+        btlQueueKeyedScalarReflectAction(0, 0, 0x1000109, 0, 0, 0, 0);
     }
 }
 }

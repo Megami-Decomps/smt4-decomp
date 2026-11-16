@@ -1,4 +1,4 @@
-/* NON_MATCHING: guard tests, tail calls and the shared result returns now match; retail reaches the final battleFlags read with add/add (not the literal-pool index form), sets up the FUN_0022a4ac stack arguments in a different order and numbers the saved argument registers r6/r5. */
+/* NON_MATCHING: guard tests, tail calls and the shared result returns now match; retail reaches the final battleFlags read with add/add (not the literal-pool index form), sets up the btlHelpEntryCreate stack arguments in a different order and numbers the saved argument registers r6/r5. */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/btlHelp.h"
@@ -40,6 +40,6 @@ u32 FUN_003c0484(BtlEntry *entry, u32 ignoredConditions, u8 context)
     if ((state->battleFlags & 0x100) != 0)
         return result;
     u32 message = state->dialog.messageHandle;
-    return (u32)FUN_0022a4ac(0, 0, kind, message, NULL, context, -1);
+    return (u32)btlHelpEntryCreate(0, 0, kind, message, NULL, context, -1);
 }
 }

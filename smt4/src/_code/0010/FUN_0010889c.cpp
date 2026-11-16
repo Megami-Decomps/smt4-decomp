@@ -26,8 +26,8 @@ typedef struct TransitionWork {
     /* 0xF2B */ s8 ready;
 } TransitionWork;
 
-s32 FUN_002bf818(void *widget);
-void FUN_002bf810(u32 sound);
+s32 uiSpriteAdvanceAnimation(void *widget);
+void soundPlaySeUnpanned(u32 sound);
 void FUN_0011340c(s32 arg);
 s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 
@@ -64,7 +64,7 @@ s32 FUN_0010889c(u32 job)
             }
         }
         if (work->items[23].visibility.active == 0) {
-            FUN_002bf818(&work->frameWidget);
+            uiSpriteAdvanceAnimation(&work->frameWidget);
         }
     } else {
         if (work->widthScale < 0.38f) {
@@ -75,21 +75,21 @@ s32 FUN_0010889c(u32 job)
             work->heightScale += 0.11f / work->speed;
         }
         work->heightScale = work->heightScale > 0.36f ? 0.36f : work->heightScale;
-        if (FUN_002bf818(&work->frameWidget) == 0) {
+        if (uiSpriteAdvanceAnimation(&work->frameWidget) == 0) {
             FUN_0011340c(1);
             return 0;
         }
         work->frame++;
         if (work->frame == 1) {
-            FUN_002bf810(0x100025A);
+            soundPlaySeUnpanned(0x100025A);
         }
         for (s32 i = 0; i < 24; i++) {
             if (work->frame >= frames[i]) {
-                FUN_002bf818(&work->items[i]);
+                uiSpriteAdvanceAnimation(&work->items[i]);
             }
         }
         if (uiSpriteGetCompletionState(&work->items[23]) != 0) {
-            FUN_002bf818(&work->closeWidget);
+            uiSpriteAdvanceAnimation(&work->closeWidget);
         }
     }
     FUN_0011340c(1);

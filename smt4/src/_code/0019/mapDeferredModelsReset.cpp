@@ -2,7 +2,7 @@
 
 extern "C" {
 extern DeferredModelWork* g_deferredMapModels;
-void FUN_0019dc90(void);
+void mapTimerBanksReset(void);
 
 // Reset deferred model records and the associated timed vector queues.
 void mapDeferredModelsReset(void)
@@ -34,6 +34,6 @@ void mapDeferredModelsReset(void)
         work->entries[i].timer = 0;
         work->entries[i].resource = 0;
     }
-    FUN_0019dc90();
+    mapTimerBanksReset();
 }
 }

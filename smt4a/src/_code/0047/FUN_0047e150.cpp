@@ -11,7 +11,7 @@ s32 aocPackageGrantsItem(AocSystemA *, u16, u32);
 void aocQueueType07(AocSystemA *, u32, void **, u32);
 void aocQueueType08(AocSystemA *, u32, void **, u32);
 void sysPlaySe(u32);
-ScriptRunState *FUN_00275bc8(void *, void *);
+ScriptRunState *scrScriptProcessCreate(void *, void *);
 u32 tableGroupFindEntryIndex(void *, const char *);
 void scrScriptProcessStartEntry(ScriptRunState *, u32);
 void scriptProcessSetMode(ScriptRunState *process, s32 mode);
@@ -47,7 +47,7 @@ u32 FUN_0047e150(ItemEventStartup *work)
         if (!item)
             work->state = 3;
         sysPlaySe(0x92);
-        ScriptRunState *process = FUN_00275bc8(work->script, work->messages);
+        ScriptRunState *process = scrScriptProcessCreate(work->script, work->messages);
         work->process = process;
         scriptProcessSetMode(process, 2);
         textFormatBuffer(path, "e%03d_%02d", item->event.package, item->event.entry);

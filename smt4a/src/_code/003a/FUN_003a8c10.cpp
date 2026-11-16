@@ -7,7 +7,7 @@
 extern "C" {
 u32 scrGetArg(u32 index);
 void scrSetResult(s32 result);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
 
 // Test for a selected combatant with the requested id whose indexed encoded stat has kind four.
 u32 FUN_003a8c10(void)
@@ -16,7 +16,7 @@ u32 FUN_003a8c10(void)
     u32 stat = scrGetArg(1);
     s32 choice = btlResolveEntryChoice(scrGetArg(2));
     s32 first, count;
-    FUN_00301a08(choice, &first, &count);
+    btlGetEntryChoiceRange(choice, &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
@@ -28,7 +28,7 @@ u32 FUN_003a8c10(void)
         }
     }
     if (btlGetMainState()->unk4cd1) {
-        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL && entry->id == id && (entry->encodedStats.values[stat] >> 10) == 4) {
             scrSetResult(1);
             return 1;

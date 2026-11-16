@@ -66,12 +66,12 @@ void FUN_00399e20(s32 textId, u32 flags)
         FUN_002c0940(minimum, range & 0xF);
         FUN_002c0940(maximum, first->levelRange >> 4);
         textFormatBuffer(text, "%s\x81\x60%s", minimum, maximum); /* "%s～%s" */
-        FUN_003180c4(0x25, text);
+        scrSetStringSlot(0x25, text);
     }
     battleAttributeFormatName(text, second->attributeWord >> 20);
-    FUN_003180c4(0x26, text);
+    scrSetStringSlot(0x26, text);
     skillFormatTargetLabel(text, first->target);
-    FUN_003180c4(0x27, text);
+    scrSetStringSlot(0x27, text);
     if (second->effect == 0)
         textFormatBuffer(text, "\x82\x6D\x82\x8F\x82\x8E\x82\x85"); /* Ｎｏｎｅ */
     if (second->effect == 1)
@@ -92,7 +92,7 @@ void FUN_00399e20(s32 textId, u32 flags)
         textFormatBuffer(text, "\x82\x63\x82\x81\x82\x9A\x82\x85"); /* Ｄａｚｅ */
     if (second->effect == 13)
         textFormatBuffer(text, "\x82\x6C\x82\x95\x82\x94\x82\x85"); /* Ｍｕｔｅ */
-    FUN_003180c4(0x28, text);
+    scrSetStringSlot(0x28, text);
     if (textId == 0)
         textId = g_buttonHelp.defaultText;
     asdTextDrawDirectoryEntry(block->directory, 2, -1, 0, 3, textId, flags);

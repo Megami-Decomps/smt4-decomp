@@ -11,7 +11,7 @@ extern "C" {
 
 u32 contentBuildWordList(u32 unused, u32 id, ContentWordList* output);
 
-int FUN_00178b04(...);
+int asdMemoryAllocTraced(...);
 int slotSetRequest(...);
 int FUN_001ff014(...);
 int statusDownRestartTransition(void);
@@ -28,7 +28,7 @@ int fusionPrepareSpecialRecipeList(void);
 int soundChannelStopAll(...);
 int linkHolderSetFlag(...);
 int linkHolderClearFlag(...);
-int FUN_0040aa6c(void);
+int resourceOwnerLoadFileSync(void);
 int flagValueSub(...);
 int fusionClassifyRecipeAvailability(...);
 int wordAt1B0Clear(...);
@@ -46,7 +46,7 @@ int FUN_00359a08(...);
 int uniteStartEffectProcesses(void);
 int FUN_0035dd60(...);
 int uniteCreatePreviewModel(void);
-int FUN_00408184(...);
+int gameCounterAddSaturating(...);
 int countersRaiseA(...);
 int FUN_004bd17c(...);
 int dispatchIfFound(...);
@@ -71,7 +71,7 @@ int FUN_003c3f8c(...);
 int FUN_003c9354(void);
 int FUN_003cca18(...);
 int FUN_004a8750(...);
-int FUN_004bcd90(...);
+int unitRecomputeDerivedStats(...);
 int FUN_004d0eec(void);
 int unitRecordMergeInheritedFlags(...);
 int recordMergeByteMasks(...);
@@ -109,8 +109,8 @@ int devilGetRecord(...);
 int uiSpriteSetKeyframe(...);
 int gameGetSlotRecord(...);
 int gameGetSlotTable(void);
-int FUN_0026264c(...);
-int FUN_002a4964(...);
+int itemIsCollectedWithRelated(...);
+int scrollListSetSelectionTracked(...);
 int FUN_002a4b28(...);
 int selectionGetValidatedField(...);
 int findSkillMetadataById(void);
@@ -139,20 +139,20 @@ int gameFlagIsSet(...);
 int dataTableGetCount(...);
 int dataTableGetEntries(void);
 int ptrListRemoveClearOwner(...);
-int FUN_00203b40(...);
+int gridNavigationConfigure(...);
 int FUN_0020b908(...);
 int uniteSortCandidateList(void);
 int FUN_00215bbc(void);
 int FUN_00284ee4(...);
 int FUN_0028a2e8(...);
 int FUN_002c39dc(...);
-int FUN_0031d890(void);
+int partyPanelRefreshFromSlotTable(void);
 int contentEntryFindById(void);
 int partyPanelSetHidden(...);
 int fusionListAvailableSpecialRecipes(...);
 
-int FUN_001517b4(...);
-int FUN_00163aa4(...);
+int padQueryLogicalKey(...);
+int uiSpriteAdvanceAnimation(...);
 int sysPlaySe(...);
 int uniteStartOrQueueRequest(...);
 int rebuildFusionCatalogLists(void);
@@ -164,7 +164,7 @@ int FUN_003343f0(...);
 int buttonHelpGetValue(void);
 int soundChannelRequestIfEnabled(...);
 int FUN_003d54f8(...);
-int FUN_003fe86c(...);
+int modelPlayClip(...);
 int FUN_0040a908(...);
 int FUN_0040a918(...);
 int FUN_0040aad4(...);
@@ -209,9 +209,9 @@ extern int *g_unite; /* 0x57f290 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: qsort. */
 extern int gameDataBlocksGetSaveData(void);
-/* Supplied declaration required: FUN_001517b4. */
+/* Supplied declaration required: padQueryLogicalKey. */
 extern int engineCleanupIsDone(void);
-/* Supplied declaration required: FUN_00163aa4. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 extern int FUN_00163e84(unsigned int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
@@ -219,7 +219,7 @@ extern int FUN_00163e84(unsigned int);
 extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 extern unsigned short recordGetScaledMaximum(int);
-/* Supplied declaration required: FUN_00178b04. */
+/* Supplied declaration required: asdMemoryAllocTraced. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_00183f58. */
 /* Supplied declaration required: devilGetRecord. */
@@ -238,7 +238,7 @@ extern unsigned short recordGetScaledMaximum(int);
 /* Supplied declaration required: partyFindSlotById. */
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: FUN_001ff014. */
-/* Supplied declaration required: FUN_00203b40. */
+/* Supplied declaration required: gridNavigationConfigure. */
 /* Supplied declaration required: FUN_0020b908. */
 /* Supplied declaration required: uniteSortCandidateList. */
 /* Supplied declaration required: FUN_00215bbc. */
@@ -256,7 +256,7 @@ extern int useCounterIsFinished(void);
 extern int FUN_0023b3b8(void);
 /* Supplied declaration required: FUN_0023b45c. */
 /* Supplied declaration required: uniteStartOrQueueRequest. */
-/* Supplied declaration required: FUN_0026264c. */
+/* Supplied declaration required: itemIsCollectedWithRelated. */
 extern int messageMainIsIdle(void);
 /* Supplied declaration required: rebuildFusionCatalogLists. */
 /* Supplied declaration required: recordGetModeForId. */
@@ -272,7 +272,7 @@ extern int FUN_002a4878(int *);
 /* Supplied declaration required: FUN_002a4894. */
 /* Supplied declaration required: scrollOwnerSetValue. */
 /* Supplied declaration required: scrollOwnerSelectIndex. */
-/* Supplied declaration required: FUN_002a4964. */
+/* Supplied declaration required: scrollListSetSelectionTracked. */
 /* Supplied declaration required: FUN_002a4b28. */
 extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002a5e7c. */
@@ -303,7 +303,7 @@ extern int FUN_002effbc(void);
 /* Supplied declaration required: panelSetMode3. */
 extern int flaggedEntryGetValueA(int *);
 /* Supplied declaration required: flaggedEntrySetValueA. */
-/* Supplied declaration required: FUN_0031d890. */
+/* Supplied declaration required: partyPanelRefreshFromSlotTable. */
 /* Supplied declaration required: FUN_0031db84. */
 /* Supplied declaration required: FUN_0031f208. */
 /* Supplied declaration required: sortMenuAcquire. */
@@ -365,12 +365,12 @@ extern int partyPanelIsStateTwentyFive(void);
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: linkHolderSetFlag. */
 /* Supplied declaration required: linkHolderClearFlag. */
-/* Supplied declaration required: FUN_003fe86c. */
-/* Supplied declaration required: FUN_00408184. */
+/* Supplied declaration required: modelPlayClip. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: countersRaiseA. */
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
-/* Supplied declaration required: FUN_0040aa6c. */
+/* Supplied declaration required: resourceOwnerLoadFileSync. */
 /* Supplied declaration required: FUN_0040aad4. */
 /* Supplied declaration required: FUN_0040ab7c. */
 extern int FUN_0040ab8c(int);
@@ -381,7 +381,7 @@ extern int FUN_0040af60(int);
 /* Supplied declaration required: resourceOwnerLoadNamed. */
 /* Supplied declaration required: flagValueSub. */
 /* Supplied declaration required: FUN_004a8750. */
-/* Supplied declaration required: FUN_004bcd90. */
+/* Supplied declaration required: unitRecomputeDerivedStats. */
 /* Supplied declaration required: FUN_004bd17c. */
 /* Supplied declaration required: dispatchIfFound. */
 /* Supplied declaration required: bitsAt60Test. */
@@ -475,15 +475,15 @@ unsigned int FUN_001f5294(void)
   
   piVar3 = g_unite;
   ppiVar16 = &temp_v25;
-  temp_v4 = reinterpret_cast<int>(FUN_0026140c());
+  temp_v4 = reinterpret_cast<int>(saveGetUserSettingsBlock());
   psVar24 = (short *)(temp_v4 + 0x20);
   temp_v18 = 0;
   temp_v47[0] = 0;
   temp_v39[0] = (((unsigned int)(temp_v39[0]) & 0xffffff00U) | (((unsigned int)('\0') & 0xffU) << 0));
-  FUN_00163aa4(piVar3 + 9);
-  FUN_00163aa4(piVar3 + 0x2c);
-  FUN_00163aa4(piVar3 + 0x4f);
-  FUN_00163aa4(piVar3 + 0x95);
+  uiSpriteAdvanceAnimation(piVar3 + 9);
+  uiSpriteAdvanceAnimation(piVar3 + 0x2c);
+  uiSpriteAdvanceAnimation(piVar3 + 0x4f);
+  uiSpriteAdvanceAnimation(piVar3 + 0x95);
   piVar19 = g_unite;
   if ((((g_unite != (int *)0x0) && ((char)g_unite[0x10c] != '\0')) &&
       (temp_v5 = scrRunOpcodesStub(g_unite[0x10b]), temp_v5 == 2)) &&
@@ -518,9 +518,9 @@ unsigned int FUN_001f5294(void)
       }
       else {
         if (piVar3[0x2498] >= 0x1e0) {
-          FUN_003fe86c(*(unsigned int *)(piVar3[0x2482] + 4),0,2);
+          modelPlayClip(*(unsigned int *)(piVar3[0x2482] + 4),0,2);
           if (piVar3[0x2483] != 0) {
-            FUN_003fe86c(*(unsigned int *)(piVar3[0x2483] + 4),0,2);
+            modelPlayClip(*(unsigned int *)(piVar3[0x2483] + 4),0,2);
           }
           controllerRefreshAtUnitScale(reinterpret_cast<AnimatedObject *>(piVar3[0x2484]), reinterpret_cast<CameraMotionOutput *>(piVar3 + 0x2485), 0);
           FUN_003f9ac4(reinterpret_cast<AnimatedObject *>(piVar3[0x2484]), reinterpret_cast<CameraMotionOutput *>(piVar3 + 0x2485), 0, 60.0f);
@@ -561,7 +561,7 @@ unsigned int FUN_001f5294(void)
         FUN_0040aad4(piVar3[0x2482],0);
         temp_v5 = *(int *)(piVar3[0x2482] + 4);
         handleRegistryRegisterObject(g_handleRegistry,temp_v5);
-        FUN_003fe86c(temp_v5,0,2);
+        modelPlayClip(temp_v5,0,2);
         *(unsigned int *)(temp_v5 + 4) = *(unsigned int *)(temp_v5 + 4) & 0xfffffffc;
         FUN_0040ab7c(piVar3[0x2483],0);
         FUN_0040a908(piVar3[0x2483],temp_v26);
@@ -569,7 +569,7 @@ unsigned int FUN_001f5294(void)
         FUN_0040aad4(piVar3[0x2483],0);
         temp_v5 = *(int *)(piVar3[0x2483] + 4);
         handleRegistryRegisterObject(g_handleRegistry,temp_v5);
-        FUN_003fe86c(temp_v5,0,2);
+        modelPlayClip(temp_v5,0,2);
         *(unsigned int *)(temp_v5 + 4) = *(unsigned int *)(temp_v5 + 4) & 0xfffffffc;
         piVar3[0x2497] = piVar3[0x2497] + 1;
         FUN_003d54f8(0,10);
@@ -591,7 +591,7 @@ unsigned int FUN_001f5294(void)
     }
     if (temp_v17 && temp_v12 != '\0') {
       temp_v4 = 1;
-      FUN_001517b4();
+      padQueryLogicalKey();
       if (temp_v4 != 0) {
         FUN_002a7b74();
         uniteStartOrQueueRequest(3);
@@ -644,7 +644,7 @@ unsigned int FUN_001f5294(void)
         sysPlaySe(0xa0);
         FUN_002c39dc(0,0,0xffffffff);
       }
-      FUN_0031d890();
+      partyPanelRefreshFromSlotTable();
       FUN_00284ee4(1);
     }
     if ((char)piVar3[0x108] == '\x02') {
@@ -656,10 +656,10 @@ unsigned int FUN_001f5294(void)
           if (piVar3[0xff] >= 3) {
             temp_v25 = (int *)0x1;
             temp_v26 = 1;
-            FUN_00203b40(piVar3 + 0x23ac,temp_v4,10,1);
+            gridNavigationConfigure(piVar3 + 0x23ac,temp_v4,10,1);
             temp_v25 = (int *)0x1;
             temp_v26 = 1;
-            FUN_00203b40(piVar3 + 0x23c5,(short)piVar3[0x23de],1,4);
+            gridNavigationConfigure(piVar3 + 0x23c5,(short)piVar3[0x23de],1,4);
             piVar19 = piVar3 + 0x19a6;
             *piVar19 = 0;
             temp_v4 = 0;
@@ -730,7 +730,7 @@ unsigned int FUN_001f5294(void)
       } while (temp_v10 < 0x50);
       temp_v25 = (int *)0x1;
       temp_v26 = 1;
-      FUN_00203b40(piVar3 + 0x2452,temp_v7,10,1);
+      gridNavigationConfigure(piVar3 + 0x2452,temp_v7,10,1);
       FUN_00184b90(piVar3,1);
       FUN_0020b908(3,1);
       FUN_002a7b74();
@@ -744,7 +744,7 @@ unsigned int FUN_001f5294(void)
     return 0;
   case 3:
     temp_v12 = *(char *)((int)piVar3 + 0x252);
-    FUN_00163aa4(piVar3 + 0x72);
+    uiSpriteAdvanceAnimation(piVar3 + 0x72);
     if (*(char *)((int)piVar3 + 0x252) != '\0') {
       temp_v4 = 0;
       if (temp_v12 == '\0') {
@@ -795,7 +795,7 @@ unsigned int FUN_001f5294(void)
         if ((piVar19 == (int *)0x0) &&
            (piVar19 = piVar17, FUN_00228b04(piVar17,1), piVar19 == (int *)0x0)) {
           temp_v4 = 0;
-          FUN_001517b4(0,1);
+          padQueryLogicalKey(0,1);
           if (!(temp_v4 == 0 && (char)temp_v39[0] == '\0')) {
             temp_v4 = resourceRunOperationIfUnblocked(piVar17);
             temp_v5 = FUN_002a4894(piVar17);
@@ -825,7 +825,7 @@ unsigned int FUN_001f5294(void)
           }
           else {
             temp_v4 = 1;
-            FUN_001517b4();
+            padQueryLogicalKey();
             if (temp_v4 != 0) {
               piVar3[0x103] = 0x28;
               FUN_0020b908(0x24,1);
@@ -900,7 +900,7 @@ unsigned int FUN_001f5294(void)
       buttonHelpSetText(temp_v5,0xf4f4f4ff);
     }
     temp_v12 = *(char *)((int)piVar3 + 0x252);
-    FUN_00163aa4(piVar3 + 0x72);
+    uiSpriteAdvanceAnimation(piVar3 + 0x72);
     if (*(char *)((int)piVar3 + 0x252) == '\0') {
       piVar3[0xff] = piVar3[0xff] + 1;
       return 0;
@@ -966,7 +966,7 @@ unsigned int FUN_001f5294(void)
       uniteStartOrQueueRequest(temp_v15);
     }
     temp_v5 = 10;
-    FUN_001517b4(10,1);
+    padQueryLogicalKey(10,1);
     if (temp_v5 != 0) {
       temp_v10 = piVar3[0x172];
       temp_v7 = temp_v13;
@@ -1009,9 +1009,9 @@ unsigned int FUN_001f5294(void)
     }
     else {
       temp_v5 = 9;
-      FUN_001517b4(9,1);
+      padQueryLogicalKey(9,1);
       if (temp_v5 != 0) {
-        temp_v5 = reinterpret_cast<int>(FUN_0026140c());
+        temp_v5 = reinterpret_cast<int>(saveGetUserSettingsBlock());
         *(unsigned short *)(temp_v5 + 0x20) = 0xffff;
         *(unsigned short *)(temp_v5 + 0x22) = 0xffff;
         *(unsigned short *)(temp_v5 + 0x24) = 0;
@@ -1078,7 +1078,7 @@ unsigned int FUN_001f5294(void)
           }
           else {
             temp_v5 = 0;
-            FUN_001517b4(0,1);
+            padQueryLogicalKey(0,1);
             if (!(temp_v5 == 0 && (char)temp_v39[0] == '\0')) {
               temp_v5 = resourceRunOperationIfUnblocked(piVar17);
               temp_v6 = FUN_002a4894(piVar17);
@@ -1116,21 +1116,21 @@ unsigned int FUN_001f5294(void)
                 } while (temp_v5 < 0x18);
                 temp_v25 = (int *)0x1;
                 temp_v26 = 1;
-                FUN_00203b40(piVar3 + 0x158,(int)piVar19 + 1,8,1);
-                FUN_002a4964(piVar3 + 0x158,temp_v28);
+                gridNavigationConfigure(piVar3 + 0x158,(int)piVar19 + 1,8,1);
+                scrollListSetSelectionTracked(piVar3 + 0x158,temp_v28);
                 uiSpriteSetKeyframe(piVar3 + 0x95,5,0);
                 FUN_0020b908(6,1);
                 break;
               case 1:
                 temp_v25 = (int *)0x1;
                 temp_v26 = 1;
-                FUN_00203b40(piVar3 + 0x158,piVar3[0x4e9] + 1,8,1);
+                gridNavigationConfigure(piVar3 + 0x158,piVar3[0x4e9] + 1,8,1);
                 if (-1 < (int)temp_v10) {
                   temp_v5 = 0;
                   if (temp_v5 < piVar3[0x4e9]) {
                     do {
                       if (*(unsigned short *)((int)piVar3 + temp_v5 * 2 + 0x5d4) == temp_v10) {
-                        FUN_002a4964(piVar3 + 0x158,temp_v5 + 1);
+                        scrollListSetSelectionTracked(piVar3 + 0x158,temp_v5 + 1);
                         break;
                       }
                       temp_v5 = temp_v5 + 1;
@@ -1143,9 +1143,9 @@ unsigned int FUN_001f5294(void)
               case 2:
                 temp_v25 = (int *)0x1;
                 temp_v26 = 1;
-                FUN_00203b40(piVar3 + 0x158,0xb,8,1);
+                gridNavigationConfigure(piVar3 + 0x158,0xb,8,1);
                 if (-1 < (int)temp_v10) {
-                  FUN_002a4964(piVar3 + 0x158,temp_v10);
+                  scrollListSetSelectionTracked(piVar3 + 0x158,temp_v10);
                 }
                 uiSpriteSetKeyframe(piVar3 + 0x95,5,0);
                 FUN_0020b908(6,1);
@@ -1153,13 +1153,13 @@ unsigned int FUN_001f5294(void)
               case 3:
                 temp_v25 = (int *)0x1;
                 temp_v26 = 1;
-                FUN_00203b40(piVar3 + 0x158,piVar3[0x4ea] + 1,8,1);
+                gridNavigationConfigure(piVar3 + 0x158,piVar3[0x4ea] + 1,8,1);
                 if (-1 < (int)temp_v10) {
                   temp_v5 = 0;
                   if (temp_v5 < piVar3[0x4ea]) {
                     do {
                       if (*(unsigned short *)((int)piVar3 + temp_v5 * 2 + 0xf36) == temp_v10) {
-                        FUN_002a4964(piVar3 + 0x158,temp_v5 + 1);
+                        scrollListSetSelectionTracked(piVar3 + 0x158,temp_v5 + 1);
                         break;
                       }
                       temp_v5 = temp_v5 + 1;
@@ -1172,13 +1172,13 @@ unsigned int FUN_001f5294(void)
               case 4:
                 temp_v25 = (int *)0x1;
                 temp_v26 = 1;
-                FUN_00203b40(piVar3 + 0x158,piVar3[0x4eb] + 1,8,1);
+                gridNavigationConfigure(piVar3 + 0x158,piVar3[0x4eb] + 1,8,1);
                 if (-1 < (int)temp_v10) {
                   temp_v5 = 0;
                   if (temp_v5 < piVar3[0x4eb]) {
                     do {
                       if (*(unsigned short *)((int)piVar3 + temp_v5 * 2 + 0xfb8) == temp_v10) {
-                        FUN_002a4964(piVar3 + 0x158,temp_v5 + 1);
+                        scrollListSetSelectionTracked(piVar3 + 0x158,temp_v5 + 1);
                         break;
                       }
                       temp_v5 = temp_v5 + 1;
@@ -1191,15 +1191,15 @@ unsigned int FUN_001f5294(void)
               case 5:
                 temp_v25 = (int *)0x1;
                 temp_v26 = 1;
-                FUN_00203b40(piVar3 + 0x158,0x15,8,1);
+                gridNavigationConfigure(piVar3 + 0x158,0x15,8,1);
                 goto joined_r0x001f6a20;
               case 6:
                 temp_v25 = (int *)0x1;
                 temp_v26 = 1;
-                FUN_00203b40(piVar3 + 0x158,9,8,1);
+                gridNavigationConfigure(piVar3 + 0x158,9,8,1);
 joined_r0x001f6a20:
                 if (-1 < (int)temp_v10) {
-                  FUN_002a4964(piVar3 + 0x158,temp_v10 + 1);
+                  scrollListSetSelectionTracked(piVar3 + 0x158,temp_v10 + 1);
                 }
                 uiSpriteSetKeyframe(piVar3 + 0x95,5,0);
                 FUN_0020b908(6,1);
@@ -1274,8 +1274,8 @@ joined_r0x001f6a20:
                 } while (temp_v5 < 0x18);
                 temp_v25 = (int *)0x1;
                 temp_v26 = 1;
-                FUN_00203b40(piVar3 + 0x158,(int)piVar19 + 1,8,1);
-                FUN_002a4964(piVar3 + 0x158,temp_v28);
+                gridNavigationConfigure(piVar3 + 0x158,(int)piVar19 + 1,8,1);
+                scrollListSetSelectionTracked(piVar3 + 0x158,temp_v28);
                 uiSpriteSetKeyframe(piVar3 + 0x95,5,0);
                 FUN_0020b908(6,1);
                 break;
@@ -1287,7 +1287,7 @@ joined_r0x001f6a20:
             }
             else {
               temp_v5 = 1;
-              FUN_001517b4();
+              padQueryLogicalKey();
               if (temp_v5 == 0) goto LAB_001f6b9c;
               FUN_0020b908(8,1);
               FUN_00184b90(piVar3,3);
@@ -1354,7 +1354,7 @@ LAB_001f6b9c:
       FUN_00228b04(piVar19,1);
       if (piVar19 == (int *)0x0) {
         temp_v5 = 0;
-        FUN_001517b4(0,1);
+        padQueryLogicalKey(0,1);
         if (!(temp_v5 == 0 && (char)temp_v39[0] == '\0')) {
           temp_v5 = resourceRunOperationIfUnblocked();
           temp_v6 = FUN_002a4894(piVar3 + 0x13f);
@@ -1425,7 +1425,7 @@ LAB_001f6b9c:
                 puVar12 = puVar15;
                 devilGetRecord();
                 temp_v5 = FUN_002a4b28(*puVar12);
-                if ((temp_v5 != 0) || (temp_v5 = FUN_0026264c(*puVar12), temp_v5 != 0)) {
+                if ((temp_v5 != 0) || (temp_v5 = itemIsCollectedWithRelated(*puVar12), temp_v5 != 0)) {
                   temp_v24 = FUN_004da77c(*piVar3,puVar12[3],(int)*(char *)(temp_v4 + 0x43));
                   temp_v10 = (unsigned int)((unsigned long long)temp_v24 >> 0x20);
                   if ((int)temp_v24 != 0) {
@@ -1493,7 +1493,7 @@ LAB_001f707c:
                 temp_v24 = FUN_002a4b28(*puVar12);
                 temp_v10 = (unsigned int)((unsigned long long)temp_v24 >> 0x20);
                 if ((int)temp_v24 == 0) {
-                  temp_v24 = FUN_0026264c(*puVar12);
+                  temp_v24 = itemIsCollectedWithRelated(*puVar12);
                   temp_v10 = (unsigned int)((unsigned long long)temp_v24 >> 0x20);
                   if ((int)temp_v24 == 0) goto LAB_001f713c;
                 }
@@ -1664,7 +1664,7 @@ LAB_001f732c:
         }
         else {
           temp_v4 = 1;
-          FUN_001517b4();
+          padQueryLogicalKey();
           if (temp_v4 != 0) {
             uiSpriteSetKeyframe(piVar3 + 0x95,5,0);
             FUN_0020b908(5,1);
@@ -1711,7 +1711,7 @@ LAB_001f732c:
     piVar3[0xff] = piVar3[0xff] + 1;
     return 0;
   case 8:
-    temp_v4 = FUN_00163aa4(piVar3 + 0x72);
+    temp_v4 = uiSpriteAdvanceAnimation(piVar3 + 0x72);
     if (temp_v4 == 0) {
       piVar3[0xff] = piVar3[0xff] + 1;
       return 0;
@@ -1756,7 +1756,7 @@ LAB_001f732c:
     break;
   case 0xb:
     temp_v12 = *(char *)((int)piVar3 + 0x252);
-    temp_v5 = FUN_00163aa4(piVar3 + 0x72);
+    temp_v5 = uiSpriteAdvanceAnimation(piVar3 + 0x72);
     if (temp_v5 == 0) {
       piVar3[0xff] = piVar3[0xff] + 1;
       return 0;
@@ -1819,7 +1819,7 @@ LAB_001f732c:
          (piVar19 = piVar17, FUN_00228b04(piVar17,1), piVar19 != (int *)0x0)) {
         temp_v4 = resourceRunEmbeddedOperationIfUnblocked(piVar17);
         temp_v5 = FUN_002a4878(piVar17);
-        FUN_002a4964(piVar3 + 0x1876,temp_v4 + temp_v5);
+        scrollListSetSelectionTracked(piVar3 + 0x1876,temp_v4 + temp_v5);
         piVar3[0xff] = piVar3[0xff] + 1;
         return 0;
       }
@@ -1846,7 +1846,7 @@ LAB_001f77ec:
       }
     }
     temp_v5 = 0;
-    FUN_001517b4(0,1);
+    padQueryLogicalKey(0,1);
     if (!(temp_v5 == 0 && (char)temp_v39[0] == '\0')) {
       temp_v5 = resourceRunEmbeddedOperationIfUnblocked();
       temp_v6 = FUN_002a4878(piVar3 + 0x188f);
@@ -1875,7 +1875,7 @@ LAB_001f77ec:
       }
       temp_v26 = 1;
       temp_v25 = (int *)0x0;
-      FUN_00203b40(piVar3 + 0x19f3,piVar3[0x1cfb],5,1);
+      gridNavigationConfigure(piVar3 + 0x19f3,piVar3[0x1cfb],5,1);
       *(unsigned char *)(piVar3 + 0x1a0c) = 0;
       piVar3[0x103] = 0xd;
       FUN_0020b908(0x24,1);
@@ -1902,7 +1902,7 @@ LAB_001f77ec:
     }
     else {
       temp_v5 = 10;
-      FUN_001517b4(10,1);
+      padQueryLogicalKey(10,1);
       if (temp_v5 != 0) {
         piVar3[0x103] = 0xb;
         FUN_0020b908(0x24,1);
@@ -1911,7 +1911,7 @@ LAB_001f77ec:
       }
       else {
         temp_v5 = 1;
-        FUN_001517b4();
+        padQueryLogicalKey();
         if (temp_v5 != 0) {
           piVar3[0x103] = 5;
           FUN_0020b908(0x24,1);
@@ -1922,7 +1922,7 @@ LAB_001f77ec:
         }
         else {
           temp_v5 = 9;
-          FUN_001517b4(9,1);
+          padQueryLogicalKey(9,1);
           if (temp_v5 == 0) {
             piVar3[0xff] = piVar3[0xff] + 1;
             return 0;
@@ -1985,7 +1985,7 @@ LAB_001f77ec:
       return 0;
     }
     temp_v12 = *(char *)((int)piVar3 + 0x252);
-    temp_v5 = FUN_00163aa4(piVar3 + 0x72);
+    temp_v5 = uiSpriteAdvanceAnimation(piVar3 + 0x72);
     if (temp_v5 == 0) {
       piVar3[0xff] = piVar3[0xff] + 1;
       return 0;
@@ -2279,7 +2279,7 @@ LAB_001f77ec:
       }
       else {
         temp_v5 = 4;
-        FUN_001517b4(4,1);
+        padQueryLogicalKey(4,1);
         if (temp_v5 != 0) {
           eventQueueAddUniqueIfValid(0x100020d);
           temp_v12 = (char)piVar3[0x1a0c] - '\x01';
@@ -2291,7 +2291,7 @@ LAB_001f77ec:
         }
         else {
           temp_v5 = 3;
-          FUN_001517b4(3,1);
+          padQueryLogicalKey(3,1);
           if (temp_v5 != 0) {
             eventQueueAddUniqueIfValid(0x100020d);
             temp_v12 = (char)piVar3[0x1a0c] + '\x01';
@@ -2303,7 +2303,7 @@ LAB_001f77ec:
           }
           else {
             temp_v5 = 0;
-            FUN_001517b4(0,1);
+            padQueryLogicalKey(0,1);
             if (!(temp_v5 == 0 && (char)temp_v39[0] == '\0')) {
               puVar15 = (unsigned short *)((piVar3[temp_v47[0] * 2 + 0x4ef] & 0x1ffffU) >> 2);
               devilGetRecord();
@@ -2388,7 +2388,7 @@ LAB_001f77ec:
             }
             else {
               temp_v5 = 1;
-              FUN_001517b4();
+              padQueryLogicalKey();
               if (temp_v5 != 0) {
                 if (*(char *)(temp_v4 + 0x33) != '\0') {
                   messageDismissNumericBanner(1);
@@ -2406,7 +2406,7 @@ LAB_001f8c54:
               }
               else {
                 temp_v4 = 9;
-                FUN_001517b4(9,1);
+                padQueryLogicalKey(9,1);
                 if (temp_v4 == 0) goto LAB_001f8d58;
                 eventQueueAddUniqueIfValid(0x100020e);
                 sortMenuAcquire(0x13,0);
@@ -2493,7 +2493,7 @@ LAB_001f8d58:
       return 0;
     }
     temp_v12 = *(char *)((int)piVar3 + 0x252);
-    temp_v4 = FUN_00163aa4(piVar3 + 0x72);
+    temp_v4 = uiSpriteAdvanceAnimation(piVar3 + 0x72);
     if (temp_v4 == 0) {
       piVar3[0xff] = piVar3[0xff] + 1;
       return 0;
@@ -2586,7 +2586,7 @@ LAB_001f8d58:
       piVar3[0x19b5] = piVar3[0x22d9];
       piVar3[0x19b6] = piVar3[0x22da];
     }
-    FUN_004bcd90(piVar3 + 0x19a7);
+    unitRecomputeDerivedStats(piVar3 + 0x19a7);
     temp_v4 = 0;
     do {
       *(unsigned short *)((int)piVar3 + temp_v4 * 2 + 0x438) = 0xffff;
@@ -2639,9 +2639,9 @@ LAB_001f8d58:
       return 0;
     }
     if (piVar3[0xff] >= 6) {
-      FUN_00163aa4(piVar3 + 0xdb);
+      uiSpriteAdvanceAnimation(piVar3 + 0xdb);
     }
-    temp_v4 = FUN_00163aa4(piVar3 + 0xb8);
+    temp_v4 = uiSpriteAdvanceAnimation(piVar3 + 0xb8);
     if ((temp_v4 == 0) || (*(char *)((int)piVar3 + 0x3f6) == '\0')) {
       piVar3[0xff] = piVar3[0xff] + 1;
       return 0;
@@ -2659,7 +2659,7 @@ LAB_001f8d58:
     }
     else {
       scrollOwnerSetValue(piVar19,0);
-      FUN_002a4964(piVar19,0);
+      scrollListSetSelectionTracked(piVar19,0);
     }
     FUN_002a4894(piVar19);
     temp_v4 = 0;
@@ -2673,11 +2673,11 @@ LAB_001f8d58:
     temp_v4 = objectApplyIfUnblocked();
     if (temp_v5 < temp_v4) {
       scrollOwnerSetValue(piVar17,0);
-      FUN_002a4964(piVar17,temp_v5);
+      scrollListSetSelectionTracked(piVar17,temp_v5);
     }
     else {
       scrollOwnerSetValue(piVar17,0);
-      FUN_002a4964(piVar17,0);
+      scrollListSetSelectionTracked(piVar17,0);
     }
     temp_v4 = resourceRunOperationIfUnblocked(piVar19);
     temp_v5 = FUN_002a4894(piVar19);
@@ -2733,7 +2733,7 @@ LAB_001f8d58:
     }
     if ((*(char *)((int)piVar3 + 0x9071) == '\0') || (piVar3[0xff] >= 2)) {
       temp_v4 = 0;
-      FUN_001517b4(0,1);
+      padQueryLogicalKey(0,1);
       if (temp_v4 != 0) {
         if (piVar3[0x101] != 0x1c) {
           if (piVar3[0x101] != 0x1e) {
@@ -2795,7 +2795,7 @@ LAB_001f9868:
     temp_v4 = FUN_0023b3b8();
     if (temp_v4 == 0) {
       temp_v4 = 1;
-      FUN_001517b4();
+      padQueryLogicalKey();
       if (temp_v4 != 0) {
         if (piVar3[0x101] != 0x1c) {
           if (piVar3[0x101] != 0x1e) {
@@ -2841,7 +2841,7 @@ LAB_001f9868:
       return 0;
     }
     temp_v4 = 9;
-    FUN_001517b4(9,1);
+    padQueryLogicalKey(9,1);
     if (temp_v4 == 0) {
       piVar3[0xff] = piVar3[0xff] + 1;
       return 0;
@@ -3024,7 +3024,7 @@ LAB_001f9868:
       *(int *)(temp_v5 + 0x34) = temp_v6;
       *(int *)(temp_v5 + 0x38) = temp_v11;
       *(int *)(temp_v5 + 0x3c) = temp_v19;
-      FUN_004bcd90(temp_v5);
+      unitRecomputeDerivedStats(temp_v5);
       FUN_0023b45c(0);
       piVar19[0x2426] = 1;
       piVar19[0x2427] = (unsigned int)*(unsigned short *)(temp_v5 + 100);
@@ -3037,7 +3037,7 @@ LAB_001f9868:
       if (temp_v4 == 0) {
         FUN_002a5e7c(*(unsigned short *)(temp_v5 + 0x62));
       }
-      FUN_00408184(0x26,1);
+      gameCounterAddSaturating(0x26,1);
       temp_v4 = *piVar19;
       contentCountAvailableDemons(temp_v4,piVar19 + 0x23df);
       countersRaiseA(4,temp_v4);
@@ -3102,7 +3102,7 @@ LAB_001f9868:
     if (0 < piVar3[0x106]) {
       piVar19 = (int *)gameGetSlotTable();
       *piVar19 = *piVar19 - piVar3[0x106];
-      FUN_00408184(0x28,piVar3[0x106]);
+      gameCounterAddSaturating(0x28,piVar3[0x106]);
       piVar3[0x106] = 0;
     }
     piVar19 = piVar3 + 0x2480;
@@ -3135,19 +3135,19 @@ LAB_001f9868:
       temp_v15 = 0x30000;
     }
     temp_v5 = 0x20;
-    FUN_00178b04(0x20,&LAB_001fa588,0x16dd);
+    asdMemoryAllocTraced(0x20,&LAB_001fa588,0x16dd);
     temp_v4 = 0;
     if (temp_v5 != 0) {
       temp_v4 = modelListInit();
     }
     piVar3[0x2482] = temp_v4;
-    FUN_0040aa6c();
+    resourceOwnerLoadFileSync();
     FUN_0040a908(piVar3[0x2482],temp_v15);
     FUN_0040a918(piVar3[0x2482],temp_v15);
     FUN_0040aad4(piVar3[0x2482],0);
     temp_v4 = *(int *)(piVar3[0x2482] + 4);
     handleRegistryRegisterObject(g_handleRegistry,temp_v4);
-    FUN_003fe86c(temp_v4,0,2);
+    modelPlayClip(temp_v4,0,2);
     *(unsigned int *)(temp_v4 + 4) = *(unsigned int *)(temp_v4 + 4) | 3;
     piVar3[0x2498] = 0;
     FUN_003d54f8(0,10);
@@ -3171,7 +3171,7 @@ LAB_001f9868:
           FUN_0039c744();
         }
         else {
-          temp_v4 = reinterpret_cast<int>(FUN_0026140c());
+          temp_v4 = reinterpret_cast<int>(saveGetUserSettingsBlock());
           soundChannelStopAll(0);
           soundChannelRequestIfEnabled(piVar19[0x123],0,0x3c);
           if ((-1 < *(short *)(temp_v4 + 0x20)) &&
@@ -3208,19 +3208,19 @@ LAB_001f9868:
         temp_v15 = 0x30000;
       }
       temp_v5 = 0x20;
-      FUN_00178b04(0x20,&LAB_001fa588,0x1730);
+      asdMemoryAllocTraced(0x20,&LAB_001fa588,0x1730);
       temp_v4 = 0;
       if (temp_v5 != 0) {
         temp_v4 = modelListInit();
       }
       piVar3[0x2483] = temp_v4;
-      FUN_0040aa6c();
+      resourceOwnerLoadFileSync();
       FUN_0040a908(piVar3[0x2483],temp_v15);
       FUN_0040a918(piVar3[0x2483],temp_v15);
       FUN_0040aad4(piVar3[0x2483],0);
       temp_v4 = *(int *)(piVar3[0x2483] + 4);
       handleRegistryRegisterObject(g_handleRegistry,temp_v4);
-      FUN_003fe86c(temp_v4,0,2);
+      modelPlayClip(temp_v4,0,2);
       *(unsigned int *)(temp_v4 + 4) = *(unsigned int *)(temp_v4 + 4) & 0xfffffffc;
       temp_v4 = *(int *)(piVar3[0x2482] + 4);
       controllerRefreshAtUnitScale(reinterpret_cast<AnimatedObject *>(piVar3[0x2484]), reinterpret_cast<CameraMotionOutput *>(piVar3 + 0x2485), 0);
@@ -3232,7 +3232,7 @@ LAB_001f9868:
   case 0x1b:
     temp_v36 = 0;
     temp_v12 = *(char *)((int)piVar3 + 0x252);
-    temp_v5 = FUN_00163aa4(piVar3 + 0x72);
+    temp_v5 = uiSpriteAdvanceAnimation(piVar3 + 0x72);
     if (temp_v5 == 0) {
       piVar3[0xff] = piVar3[0xff] + 1;
       return 0;
@@ -3337,7 +3337,7 @@ LAB_001f9868:
       }
       temp_v5 = resourceRunEmbeddedOperationIfUnblocked(piVar17);
       temp_v6 = FUN_002a4878(piVar17);
-      FUN_002a4964(piVar3 + 0x23ac,temp_v5 + temp_v6);
+      scrollListSetSelectionTracked(piVar3 + 0x23ac,temp_v5 + temp_v6);
       if (temp_v36 == 0) {
         piVar3[0xff] = piVar3[0xff] + 1;
         return 0;
@@ -3367,7 +3367,7 @@ LAB_001fab44:
       else {
 LAB_001fac50:
         temp_v5 = 0;
-        FUN_001517b4(0,1);
+        padQueryLogicalKey(0,1);
         if (!(temp_v5 == 0 && (char)temp_v39[0] == '\0')) {
           piVar3[0x172] = 0;
           piVar19 = piVar3 + 0x148e;
@@ -3399,7 +3399,7 @@ LAB_001fac50:
           devilGetRecord((short)piVar3[0x148e]);
           temp_v26 = 1;
           temp_v25 = (int *)0x0;
-          FUN_00203b40(piVar3 + 0x19f3,piVar3[0x172],5,1);
+          gridNavigationConfigure(piVar3 + 0x19f3,piVar3[0x172],5,1);
           *(unsigned char *)(piVar3 + 0x1a0c) = 0;
           piVar3[0x103] = 0x1c;
           FUN_0020b908(0x24,1);
@@ -3428,7 +3428,7 @@ LAB_001fac50:
         }
         else {
           temp_v5 = 10;
-          FUN_001517b4(10,1);
+          padQueryLogicalKey(10,1);
           if (temp_v5 != 0) {
             piVar3[0x103] = 0x1b;
             FUN_0020b908(0x24,1);
@@ -3437,7 +3437,7 @@ LAB_001fac50:
           }
           else {
             temp_v5 = 9;
-            FUN_001517b4(9,1);
+            padQueryLogicalKey(9,1);
             if (temp_v5 != 0) {
               eventQueueAddUniqueIfValid(0x100020e);
               sortMenuAcquire(0x12,0);
@@ -3450,7 +3450,7 @@ LAB_001fac50:
             }
             else {
               temp_v5 = 1;
-              FUN_001517b4();
+              padQueryLogicalKey();
               if (temp_v5 == 0) {
                 piVar3[0xff] = piVar3[0xff] + 1;
                 return 0;
@@ -3525,7 +3525,7 @@ LAB_001fac1c:
     temp_v12 = *(char *)((int)piVar3 + 0x252);
     temp_v4 = FUN_0023b3d0();
     if (((temp_v4 == 0) || (temp_v4 = FUN_002c905c(), temp_v4 != 0)) ||
-       (temp_v4 = FUN_00163aa4(piVar3 + 0x72), temp_v4 == 0)) {
+       (temp_v4 = uiSpriteAdvanceAnimation(piVar3 + 0x72), temp_v4 == 0)) {
       piVar3[0xff] = piVar3[0xff] + 1;
       return 0;
     }
@@ -3690,7 +3690,7 @@ LAB_001fac1c:
         return 0;
       }
       temp_v4 = 4;
-      FUN_001517b4(4,1);
+      padQueryLogicalKey(4,1);
       if (temp_v4 != 0) {
         eventQueueAddUniqueIfValid(0x100020d);
         temp_v12 = (char)temp_v33[0xc] - '\x01';
@@ -3701,14 +3701,14 @@ LAB_001fac1c:
       }
       else {
         temp_v4 = 3;
-        FUN_001517b4(3,1);
+        padQueryLogicalKey(3,1);
         if (temp_v4 == 0) {
           temp_v4 = 0;
-          FUN_001517b4(0,1);
+          padQueryLogicalKey(0,1);
           piVar19 = g_unite;
           if (temp_v4 == 0 && (char)temp_v39[0] == '\0') {
             temp_v4 = 1;
-            FUN_001517b4();
+            padQueryLogicalKey();
             if (temp_v4 != 0) {
               piVar3[0x103] = 0x1b;
               FUN_0020b908(0x24,1);
@@ -3834,7 +3834,7 @@ LAB_001fb9c4:
                   } while (temp_v4 < 0xc);
                   temp_v25 = (int *)0x1;
                   temp_v26 = 1;
-                  FUN_00203b40(piVar19 + 0x2385,temp_v28,8,1);
+                  gridNavigationConfigure(piVar19 + 0x2385,temp_v28,8,1);
                   FUN_0034c340(temp_v31,temp_v28,0,piVar19 + 0x148e);
                   temp_v35 = piVar19[0x148e];
                   iStack_3a4 = piVar19[0x148f];
@@ -3993,7 +3993,7 @@ joined_r0x001fbbe8:
     piVar3[0xff] = piVar3[0xff] + 1;
     return 0;
   case 0x22:
-    temp_v4 = FUN_00163aa4(piVar3 + 0x72);
+    temp_v4 = uiSpriteAdvanceAnimation(piVar3 + 0x72);
     if (temp_v4 == 0) {
       piVar3[0xff] = piVar3[0xff] + 1;
       return 0;
@@ -4145,7 +4145,7 @@ LAB_001fc128:
     temp_v15 = 0;
     break;
   case 0x24:
-    FUN_00163aa4(piVar3 + 0x72);
+    uiSpriteAdvanceAnimation(piVar3 + 0x72);
     if (*(char *)((int)piVar3 + 0x252) == '\0') {
       piVar3[0xff] = piVar3[0xff] + 1;
       return 0;
@@ -4210,7 +4210,7 @@ LAB_001fc128:
       piVar3[0xff] = piVar3[0xff] + 1;
       return 0;
     }
-    FUN_0031d890();
+    partyPanelRefreshFromSlotTable();
     FUN_00215bbc();
     FUN_002c39dc(0x12,0,0xffffffff);
     FUN_00284ee4(1);

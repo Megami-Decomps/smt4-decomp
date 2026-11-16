@@ -13,7 +13,7 @@ int messageForwardDefaultMode(...);
 int textEncodeFontSlot(...);
 int dataTable54FindById(void);
 int FUN_0029fa0c(int, int *);
-int FUN_002bd06c(...);
+int dataTable01FindByIdWithAoc(...);
 int libc_strcpy(...);
 int __aeabi_memset4(...);
 int FUN_002d91b8(int);
@@ -36,7 +36,7 @@ extern int partyClassifyRequestedSources(int, unsigned short, unsigned int *);
 /* Supplied declaration required: dataTable54FindById. */
 /* Supplied declaration required: FUN_0029fa0c. */
 extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_002bd06c. */
+/* Supplied declaration required: dataTable01FindByIdWithAoc. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: __aeabi_memset4. */
 extern int gameDataBlocksGetFlagBit2(unsigned short);
@@ -112,7 +112,7 @@ unsigned int FUN_003116c8(void)
         temp_v3 = (int)*(char *)(g_unite[0x250b] + (int)piVar12) & 0xffff;
         dataTable54FindById();
         temp_v7 = (unsigned int)*(unsigned short *)(temp_v3 + 0x1a);
-        FUN_002bd06c(temp_v7);
+        dataTable01FindByIdWithAoc(temp_v7);
         libc_strcpy(temp_v10,temp_v7);
         textEncodeFontSlot(8,temp_v10);
         temp_v4 = demonGetRaceLabel(*(unsigned short *)(temp_v3 + 0x1a),1);
@@ -193,7 +193,7 @@ unsigned int FUN_003116c8(void)
       puVar7 = (unsigned short *)
                dataTableFindRecordWord((short)*(char *)((int)(char)g_unite[0x2571] + (int)piVar12));
       temp_v3 = (unsigned int)*puVar7;
-      FUN_002bd06c(temp_v3);
+      dataTable01FindByIdWithAoc(temp_v3);
       libc_strcpy(temp_v10,temp_v3);
       textEncodeFontSlot(8,temp_v10);
       temp_v4 = demonGetRaceLabel(*puVar7,1);

@@ -62,7 +62,7 @@ extern AocDropSource *g_aocSystem;
 
 s32 randRange(u16 maximum);
 u32 gameGetUnlockedCountLimit(void);
-u32 FUN_004ccbf0(u32 level);
+u32 levelGetExpRequirement(u32 level);
 EncounterRecord *dataTable1bOr1cGetRecord(s32 index);
 
 // The drop table entry `id`: from the add-on content when it provides one, else from the base game's table.
@@ -129,9 +129,9 @@ void FUN_003df168(RewardResult *result, s32 index)
         PlayerLevelView *player = reinterpret_cast<PlayerLevelView *>(gameGetPlayerData());
         u32 scaled;
         if (gameGetUnlockedCountLimit() > player->level) {
-            scaled = FUN_004ccbf0(player->level);
+            scaled = levelGetExpRequirement(player->level);
         } else {
-            scaled = FUN_004ccbf0(gameGetUnlockedCountLimit() - 1);
+            scaled = levelGetExpRequirement(gameGetUnlockedCountLimit() - 1);
         }
         result->value = scaled;
         result->value = scaled * record->percent / 100;

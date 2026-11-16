@@ -6,7 +6,7 @@
 
 extern "C" {
 s32 scrGetArg(u32 index);
-u32 FUN_001ba3d4(u32 id);
+u32 flagValueRead(u32 id);
 Table8Record *dataTable8FindRecord(u32 id);
 void scrSetResult(u32 result);
 
@@ -26,7 +26,7 @@ u32 btlScriptGetBestEntryCategory(void)
     if (enabled != 0) {
         for (u16 *entry = state->begin; entry != state->end; ++entry) {
             u16 id = *entry;
-            u32 value = (u16)FUN_001ba3d4(id);
+            u32 value = (u16)flagValueRead(id);
             if (value > best) {
                 best = value;
                 selected = id;

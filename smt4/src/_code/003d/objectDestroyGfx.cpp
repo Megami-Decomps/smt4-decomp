@@ -3,7 +3,7 @@
 extern "C" {
 
 int gfxObjectDestroy(u32 value);
-void FUN_0029c2cc(int value, int flag);
+void modelRemoveFromSlotList(int value, int flag);
 
 typedef struct Obj {
     /* 0x000 */ u8 unk000[0x730];
@@ -14,7 +14,7 @@ typedef struct Obj {
 void objectDestroyGfx(Obj *obj)
 {
     if (obj->value != 0) {
-        FUN_0029c2cc(obj->value, 0);
+        modelRemoveFromSlotList(obj->value, 0);
         gfxObjectDestroy(obj->value);
         obj->value = 0;
         obj->unk734 = 0;

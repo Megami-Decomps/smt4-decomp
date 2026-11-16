@@ -17,7 +17,7 @@ struct Unk4cfeb0Scroller {
 
 extern "C" {
 
-void FUN_00203b40(void *list, s32 total, s32 columns, s32 rows, s32 a, s32 b);
+void gridNavigationConfigure(void *list, s32 total, s32 columns, s32 rows, s32 a, s32 b);
 void scrollOwnerSetValue(void *list, s32 value);
 void recordTrackDirtyValue(void *list, s32 value);
 void flaggedEntrySetValueB(void *list, s32 value);
@@ -41,9 +41,9 @@ void listScrollerInitialize(Unk4cfeb0Scroller *scroller, s32 visible, s32 total,
                   s32 option)
 {
     if (direction == UNK4CFEB0_HORIZONTAL) {
-        FUN_00203b40(scroller->list, total, visible, 1, 1, option);
+        gridNavigationConfigure(scroller->list, total, visible, 1, 1, option);
     } else if (direction == UNK4CFEB0_VERTICAL) {
-        FUN_00203b40(scroller->list, total, 1, visible, 1, option);
+        gridNavigationConfigure(scroller->list, total, 1, visible, 1, option);
     }
     scroller->visible = visible;
     scroller->total = total;

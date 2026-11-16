@@ -39,7 +39,7 @@ void FUN_0022daac(void *owner, u32 value, u32 entryIndex,
 
     const s16 entryX = entry->x;
     const s16 entryY = entry->y;
-    const u32 convertedValue = (u32)FUN_002bd06c(value & 0xFFFFU);
+    const u32 convertedValue = (u32)dataTable01FindByIdWithAoc(value & 0xFFFFU);
     const UiLayoutEntryPrefixIV *anchor = FUN_002bf4f0(ownerResource(owner), anchorId);
     const s32 y = anchor->y + entryY;
     const s32 x = anchor->x + entryX;

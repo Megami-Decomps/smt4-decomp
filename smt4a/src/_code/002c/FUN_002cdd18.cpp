@@ -18,10 +18,10 @@ struct SpritePanel {
 typedef char SpritePanelOffsets[sizeof(SpritePanel) == 0x408 ? 1 : -1];
 
 extern "C" {
-s32 FUN_00163aa4(UiSpriteState *sprite, f32 step);
+s32 uiSpriteAdvanceAnimation(UiSpriteState *sprite, f32 step);
 s32 FUN_00163e84(s32 index);
 void slotSetRequest(u32 index, u32 value, u32 extra);
-void FUN_00212204(u32 index);
+void screenFadeSlotReset(u32 index);
 /* Sets the sprite's visibility.active byte / reads its signed completion flag. */
 void workSetStateByte(UiSpriteState *sprite, u8 state);
 s32 uiSpriteGetCompletionState(const UiSpriteState *sprite);
@@ -37,13 +37,13 @@ static __inline PanelTimer panelStartState(s32 state)
 extern "C" void FUN_002cdd18(SpritePanel *panel)
 {
     if (panel->timer.state > 0) {
-        FUN_00163aa4(&panel->sprites[5], 1.0f);
+        uiSpriteAdvanceAnimation(&panel->sprites[5], 1.0f);
     }
     switch (panel->timer.state) {
     case 2:
-        FUN_00163aa4(&panel->sprites[3], 1.0f);
-        if (FUN_00163aa4(&panel->sprites[0], 1.0f) && FUN_00163aa4(&panel->sprites[1], 1.0f) &&
-            FUN_00163aa4(&panel->sprites[2], 1.0f)) {
+        uiSpriteAdvanceAnimation(&panel->sprites[3], 1.0f);
+        if (uiSpriteAdvanceAnimation(&panel->sprites[0], 1.0f) && uiSpriteAdvanceAnimation(&panel->sprites[1], 1.0f) &&
+            uiSpriteAdvanceAnimation(&panel->sprites[2], 1.0f)) {
             uiSpriteSelectAnim(&panel->sprites[0], 3);
             uiSpriteSelectAnim(&panel->sprites[1], 3);
             uiSpriteSelectAnim(&panel->sprites[3], 3);
@@ -51,9 +51,9 @@ extern "C" void FUN_002cdd18(SpritePanel *panel)
         }
         break;
     case 3:
-        FUN_00163aa4(&panel->sprites[0], 1.0f);
-        FUN_00163aa4(&panel->sprites[1], 1.0f);
-        FUN_00163aa4(&panel->sprites[3], 1.0f);
+        uiSpriteAdvanceAnimation(&panel->sprites[0], 1.0f);
+        uiSpriteAdvanceAnimation(&panel->sprites[1], 1.0f);
+        uiSpriteAdvanceAnimation(&panel->sprites[3], 1.0f);
         if (uiSpriteGetCompletionState(&panel->sprites[0]) == 0 ||
             uiSpriteGetCompletionState(&panel->sprites[1]) == 0)
             break;
@@ -66,13 +66,13 @@ extern "C" void FUN_002cdd18(SpritePanel *panel)
         panel->timer = panelStartState(1);
         break;
     case 4:
-        FUN_00163aa4(&panel->sprites[3], 1.0f);
-        if (FUN_00163aa4(&panel->sprites[0], 1.0f) && FUN_00163aa4(&panel->sprites[1], 1.0f)) {
+        uiSpriteAdvanceAnimation(&panel->sprites[3], 1.0f);
+        if (uiSpriteAdvanceAnimation(&panel->sprites[0], 1.0f) && uiSpriteAdvanceAnimation(&panel->sprites[1], 1.0f)) {
             panel->timer = panelStartState(6);
         }
         break;
     case 5:
-        if (FUN_00163aa4(&panel->sprites[6], 1.0f)) {
+        if (uiSpriteAdvanceAnimation(&panel->sprites[6], 1.0f)) {
             panel->timer = panelStartState(7);
         }
         break;
@@ -90,7 +90,7 @@ extern "C" void FUN_002cdd18(SpritePanel *panel)
             workSetStateByte(&panel->sprites[2], 0);
             workSetStateByte(&panel->sprites[6], 0);
             workSetStateByte(&panel->sprites[3], 0);
-            FUN_00212204(0);
+            screenFadeSlotReset(0);
             panel->timer = panelStartState(9);
         }
         break;

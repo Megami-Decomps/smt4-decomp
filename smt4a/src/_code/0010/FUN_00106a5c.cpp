@@ -8,7 +8,7 @@ int refIsNullOrZero(int *);
 int FUN_001028b8(unsigned char [64], int, unsigned char *, unsigned int);
 int FUN_00103750(int *);
 int FUN_001585e4(...);
-int FUN_001883b0(unsigned int *, unsigned short [6], unsigned int *);
+int archivePathDeviceOpen(unsigned int *, unsigned short [6], unsigned int *);
 int FUN_002e3c44(unsigned short *, unsigned char *, int, int *);
 int _ZN9Obj55aff4D1Ev(...);
 int _ZN9Obj55aff4C1ERKS_(...);
@@ -64,7 +64,7 @@ extern int FUN_00100836(unsigned char *, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_00103750. */
 extern int wordRefsDiffer_00132112(unsigned int **, unsigned int **);
 /* Supplied declaration required: FUN_001585e4. */
-/* Supplied declaration required: FUN_001883b0. */
+/* Supplied declaration required: archivePathDeviceOpen. */
 /* Supplied declaration required: FUN_002e3c44. */
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: _ZN9Obj55aff4C1ERKS_. */
@@ -176,7 +176,7 @@ LAB_00106ab8:
       puVar5[4] = 0;
       puVar5[2] = 0;
       puVar5[1] = 0;
-      FUN_001883b0(puVar5,temp_v19,puVar1);
+      archivePathDeviceOpen(puVar5,temp_v19,puVar1);
       pcVar7 = temp_v3;
       if ((int)puVar5 < 0) {
         FUN_001585e4(temp_v6,pcVar7);

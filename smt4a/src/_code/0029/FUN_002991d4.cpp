@@ -14,7 +14,7 @@ int panelSetTarget(...);
 int partyAddMoneyClamped(...);
 
 int FUN_001628c0(...);
-int FUN_00163aa4(...);
+int uiSpriteAdvanceAnimation(...);
 int uiSpriteSetKeyframe(...);
 int FUN_00234528(...);
 int popupStateClose(void);
@@ -33,11 +33,11 @@ int FUN_00377158(...);
 int messageDismissNumericBanner(...);
 int scrCommResetPanel(void);
 int FUN_003d2158(...);
-int FUN_00408184(...);
+int gameCounterAddSaturating(...);
 int gameScaleCategoryAmount(...);
 int flagValueAdd(...);
 
-int FUN_0014afd0(int);
+int asdTMTexTablePrepareNodeImage(int);
 int FUN_001681c4(void);
 int jyoucyuGetTableEntry(int);
 int asdMemFree(...);
@@ -46,7 +46,7 @@ int asdTMTexLoadMainHeap(int, int);
 int asdLoadFileSyncDefault(void);
 int mapPopupReset(void);
 int FUN_00246128(void);
-int FUN_00275bc8(...);
+int scrScriptProcessCreate(...);
 int scrScriptProcessStartEntry(...);
 int messageSlotSet(int);
 int FUN_00295108(...);
@@ -111,13 +111,13 @@ extern short DAT_005f1e18; /* 0x5f1e18 */
 extern short DAT_005f1e1a; /* 0x5f1e1a */
 
 extern unsigned int FUN_0014af98(void);
-/* Supplied declaration required: FUN_0014afd0. */
+/* Supplied declaration required: asdTMTexTablePrepareNodeImage. */
 extern int randRange(unsigned int);
 extern unsigned int FUN_00152f44(void);
 extern int asdTMTexTableGetHeaderValue(unsigned int);
 /* Supplied declaration required: FUN_001628c0. */
 extern int infoWinHasValue(void);
-/* Supplied declaration required: FUN_00163aa4. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: FUN_001681c4. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
@@ -134,7 +134,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00246128. */
 /* Supplied declaration required: popupStateClose. */
 extern int messageMainIsIdle(void);
-/* Supplied declaration required: FUN_00275bc8. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: messageSlotSet. */
 /* Supplied declaration required: FUN_00295108. */
@@ -177,7 +177,7 @@ extern unsigned short *dataTable20GetEntry(int);
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d2158. */
 /* Supplied declaration required: loadSlotEnsureLoaded. */
-/* Supplied declaration required: FUN_00408184. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: gameScaleCategoryAmount. */
 /* Supplied declaration required: itemGetTable8Sub3Value. */
 /* Supplied declaration required: flagValueAdd. */
@@ -225,7 +225,7 @@ unsigned int FUN_002991d4(void)
   temp_v4 = g_mapDepart;
   switch(*(unsigned int *)(g_mapDepart + 0x48)) {
   case 0:
-    FUN_0014afd0(4);
+    asdTMTexTablePrepareNodeImage(4);
     temp_v11 = asdTMTexTableGetHeaderValue(4);
     *(int *)(temp_v4 + 0x124) = temp_v11;
     *(unsigned int *)(temp_v11 + 0x3c) = 1;
@@ -311,7 +311,7 @@ unsigned int FUN_002991d4(void)
       asdLoadFileSyncDefault();
       *(unsigned char **)(temp_v4 + 0x104) = puVar15;
       temp_v11 = *(int *)(temp_v4 + 0x100);
-      FUN_00275bc8(temp_v11,puVar15);
+      scrScriptProcessCreate(temp_v11,puVar15);
       *(int *)(temp_v4 + 0x108) = temp_v11;
       *(unsigned int *)(temp_v11 + 0x108) = 2;
       *(unsigned int *)(temp_v4 + 0x10c) = 0;
@@ -672,7 +672,7 @@ LAB_0029a094:
           temp_v11 = 0;
           do {
             if (*(int *)(temp_v4 + temp_v11 * 4 + 0xd4) == 1) {
-              FUN_00163aa4(temp_v4 + temp_v11 * 0x8c + 0x1d4);
+              uiSpriteAdvanceAnimation(temp_v4 + temp_v11 * 0x8c + 0x1d4);
             }
             temp_v11 = temp_v11 + 1;
           } while (temp_v11 < 5);
@@ -717,7 +717,7 @@ LAB_0029a094:
         if (*(int *)(temp_v4 + 0xc) == 0) {
           mapIfRequestById(*(unsigned int *)(temp_v4 + 0x10));
           entryTableSetHalfwordsById(*(unsigned int *)(temp_v4 + 0x10),5,0);
-          FUN_00408184(0x13,1);
+          gameCounterAddSaturating(0x13,1);
         }
         if (*(int *)(temp_v4 + 0xc) == 3) {
           if (*(int *)(temp_v4 + 0x14) != 0) {
@@ -742,7 +742,7 @@ LAB_0029a094:
       do {
         temp_v8 = temp_v4 + temp_v11 * 4;
         if (*(int *)(temp_v8 + 0xd4) == 1) {
-          FUN_00163aa4(temp_v4 + temp_v11 * 0x8c + 0x1d4);
+          uiSpriteAdvanceAnimation(temp_v4 + temp_v11 * 0x8c + 0x1d4);
         }
         if (*(int *)(temp_v8 + 0xe8) != 0) {
           *(int *)(temp_v8 + 0xbc) = *(int *)(temp_v8 + 0xe8) + *(int *)(temp_v8 + 0xbc);
@@ -772,7 +772,7 @@ LAB_0029a094:
     asdLoadFileSyncDefault();
     *(unsigned char **)(temp_v4 + 0x104) = puVar15;
     temp_v11 = *(int *)(temp_v4 + 0x100);
-    FUN_00275bc8(temp_v11,puVar15);
+    scrScriptProcessCreate(temp_v11,puVar15);
     *(int *)(temp_v4 + 0x108) = temp_v11;
     *(unsigned int *)(temp_v11 + 0x108) = 3;
     scrScriptProcessStartEntry(*(unsigned int *)(temp_v4 + 0x108),1);
@@ -852,7 +852,7 @@ LAB_0029a094:
         *(unsigned int *)(temp_v4 + 0x49c) = 0;
         break;
       case 1:
-        FUN_00163aa4(temp_v4 + 0x148);
+        uiSpriteAdvanceAnimation(temp_v4 + 0x148);
         if (*(char *)(temp_v4 + 0x1d2) != '\0') {
           *(unsigned int *)(temp_v4 + 0x490) = 2;
           temp_v12 = sysPlayVoice(0x100021d);
@@ -887,7 +887,7 @@ LAB_0029a094:
         }
         break;
       case 3:
-        temp_v11 = FUN_00163aa4(temp_v4 + 0x148);
+        temp_v11 = uiSpriteAdvanceAnimation(temp_v4 + 0x148);
         if (temp_v11 != 0) {
           *(unsigned int *)(temp_v4 + 0x490) = 4;
           FUN_003d2158(*(unsigned int *)(temp_v4 + 0x49c),0);
@@ -1024,7 +1024,7 @@ LAB_002993c0:
     asdLoadFileSyncDefault();
     *(unsigned char **)(temp_v4 + 0x104) = puVar15;
     temp_v11 = *(int *)(temp_v4 + 0x100);
-    FUN_00275bc8(temp_v11,puVar15);
+    scrScriptProcessCreate(temp_v11,puVar15);
     *(int *)(temp_v4 + 0x108) = temp_v11;
     *(unsigned int *)(temp_v11 + 0x108) = 3;
     if (g_gameState < 100) {
@@ -1053,7 +1053,7 @@ LAB_002993c0:
       }
       else {
         mapPlaceSet(0x18,1,0);
-        FUN_00408184(0x1b,1);
+        gameCounterAddSaturating(0x1b,1);
       }
       *(unsigned int *)(temp_v4 + 0x48) = 0x12;
       *(unsigned int *)(temp_v4 + 0x4c) = 0;

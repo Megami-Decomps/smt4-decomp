@@ -24,7 +24,7 @@ struct BattleEntryView {
 
 extern "C" {
 extern BattleMaskView g_btlMain;
-BattleEntryView* FUN_003eaf20(BattleObjectView* object);
+BattleEntryView* btlFindFirstEntryMatchingCategoryAndRequiredMask(BattleObjectView* object);
 
 // Resolve a valid table ID and optionally test and set the object's battle mask.
 s32 FUN_003f1a9c(BattleObjectView* object, s32 mode)
@@ -36,7 +36,7 @@ s32 FUN_003f1a9c(BattleObjectView* object, s32 mode)
         }
     }
 
-    BattleEntryView* entry = FUN_003eaf20(object);
+    BattleEntryView* entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(object);
     if (entry == 0) {
         return 0;
     }

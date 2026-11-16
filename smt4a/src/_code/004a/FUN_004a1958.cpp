@@ -81,7 +81,7 @@ void FUN_004a84e8(EntryList *list, s32 mode);
 void listScrollerInitialize(void *layout, s32 columns, s32 count, s32 a, s32 b, s32 c);
 u8 gaugePercent(EntryList *list, s32 arg);
 u8 calcPercentClamped(s32 numerator, s32 denominator);
-void FUN_004d05c4(void *header, s32 a, s32 b, s32 count);
+void messageIdListSetRange(void *header, s32 a, s32 b, s32 count);
 s32 gameFlagIsSet(u32 flag);
 void jyoucyuGetTableEntry(s32 arg);
 
@@ -157,7 +157,7 @@ void FUN_004a1958(EntryScreen *screen)
         } while (index < 0x4FF);
         screen->listedCount = listed;
         if (screen->list.count != 0) {
-            u8 *flagsByte = FUN_0026140c() + 0xF;
+            u8 *flagsByte = saveGetUserSettingsBlock() + 0xF;
             s32 mode;
 
             switch (*flagsByte & 0x7F) {
@@ -190,7 +190,7 @@ void FUN_004a1958(EntryScreen *screen)
     }
     screen->panel->rebuild(screen->layout);
     screen->panel->flags |= 0x1000;
-    FUN_004d05c4(screen->header, 20, 0x40E, screen->selected > 10 ? 10 : screen->selected);
+    messageIdListSetRange(screen->header, 20, 0x40E, screen->selected > 10 ? 10 : screen->selected);
     screen->headerShown = 1;
     jyoucyuGetTableEntry(0);
 }

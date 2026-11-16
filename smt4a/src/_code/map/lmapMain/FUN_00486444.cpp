@@ -54,7 +54,7 @@ extern float DAT_005f1c8c; /* 0x5f1c8c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int gameFlagsGetBlock(void);
-extern unsigned int FUN_001692ac(unsigned int, unsigned int);
+extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
 /* Supplied declaration required: distSpatial. */
@@ -253,7 +253,7 @@ LAB_004866c8:
   if ((temp_v4 == temp_v6) && ((int)*(char *)(param_1 + 100) == *(int *)(param_1 + 0x20510))) {
     puVar9 = (unsigned long long *)sub68OwnerGetBlock60(temp_v3);
     temp_v13 = *puVar9;
-    temp_v5 = FUN_001692ac(1,0);
+    temp_v5 = renderCtxPackPassFlags(1,0);
     renderStackPushIndexed(g_renderCtx,3,temp_v5);
     piVar10 = (int *)(param_1 + 0x20508);
     if ((*(unsigned int *)(param_1 + 0x10) & 0x20000) == 0) {

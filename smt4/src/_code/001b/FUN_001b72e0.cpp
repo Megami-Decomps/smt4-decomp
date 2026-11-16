@@ -63,7 +63,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: titleDrawLogo. */
 /* Supplied declaration required: FUN_0033cc84. */
@@ -112,7 +112,7 @@ int FUN_001b72e0(unsigned int job)
     if (temp_v5 >= 9) {
       renderCtxSelectStereoLayout(g_titleScene);
       temp_v5 = g_titleScene;
-      temp_v4 = FUN_002c5d80(1,0);
+      temp_v4 = renderCtxPackPassFlags(1,0);
       piVar5 = (int *)(temp_v5 + 0x124c);
       temp_v0 = *piVar5;
       temp_v2 = piVar5[temp_v0 + 2];
@@ -171,7 +171,7 @@ int FUN_001b72e0(unsigned int job)
       FUN_0033cc84(*(unsigned int *)(temp_v1 + 0x7e20));
       if (*(char *)(temp_v1 + 0x7e4b) != '\0') {
         efctSetSpeed();
-        FUN_002bf288(2,0xe,0x106,0,0,0x65);
+        texDrawTableEntryAtStoredOrigin(2,0xe,0x106,0,0,0x65);
         efctSetSpeed();
       }
       temp_v7 = 0;
@@ -188,15 +188,15 @@ int FUN_001b72e0(unsigned int job)
         FUN_002b7638(&temp_v10);
         temp_v6 = DAT_00439c94;
         renderCtxCalculateStereoParallax(g_titleScene);
-        FUN_002bf288(2,0xf,(unsigned int)*(unsigned short *)(DAT_00439c90 * 2 + 0x439cc0) * 1000,(int)temp_v6,0,0x97);
+        texDrawTableEntryAtStoredOrigin(2,0xf,(unsigned int)*(unsigned short *)(DAT_00439c90 * 2 + 0x439cc0) * 1000,(int)temp_v6,0,0x97);
         temp_v6 = DAT_00439c98;
         renderCtxCalculateStereoParallax(g_titleScene);
         temp_v5 = (int)temp_v6;
         temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0x43));
-        FUN_002bf288(2,0xe,0,(int)*(short *)(temp_v1 + 8) + temp_v5 + (int)**(short **)(temp_v1 + 0xc) / 2
+        texDrawTableEntryAtStoredOrigin(2,0xe,0,(int)*(short *)(temp_v1 + 8) + temp_v5 + (int)**(short **)(temp_v1 + 0xc) / 2
                      ,(int)*(short *)(temp_v1 + 10) + (int)(*(short **)(temp_v1 + 0xc))[1] / 2,0xc9);
         temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0x45));
-        FUN_002bf288(2,0xe,2,(int)*(short *)(temp_v1 + 8) + temp_v5 + (int)**(short **)(temp_v1 + 0xc) / 2
+        texDrawTableEntryAtStoredOrigin(2,0xe,2,(int)*(short *)(temp_v1 + 8) + temp_v5 + (int)**(short **)(temp_v1 + 0xc) / 2
                      ,(int)*(short *)(temp_v1 + 10) + (int)(*(short **)(temp_v1 + 0xc))[1],0xd3);
         temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0x3d));
         VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);

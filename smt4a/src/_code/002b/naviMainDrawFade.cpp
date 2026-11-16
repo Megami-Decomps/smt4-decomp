@@ -9,7 +9,7 @@ struct NaviMainView {
 extern "C" {
 extern NaviMainView *g_naviMain;
 
-void FUN_004cf9ac(void *fade);
+void byteScreenFadeUpdateDraw(void *fade);
 
 /* "NAVI FADE DRAW" task: advances and draws the navi screen's fade, if the navi object exists; returns 0. */
 s32 naviMainDrawFade(u32 handle)
@@ -17,7 +17,7 @@ s32 naviMainDrawFade(u32 handle)
     if (g_naviMain == NULL) {
         return 0;
     }
-    FUN_004cf9ac(g_naviMain->fade);
+    byteScreenFadeUpdateDraw(g_naviMain->fade);
     return 0;
 }
 

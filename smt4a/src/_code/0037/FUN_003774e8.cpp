@@ -30,7 +30,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
-extern int FUN_003e4d68(unsigned int);
+extern int partyGetSlot(unsigned int);
 /* Supplied declaration required: aocRecordLookup83. */
 /* Supplied declaration required: flagValueAdd. */
 extern int gamePackedFlagTest(int);
@@ -101,7 +101,7 @@ int FUN_003774e8(unsigned int param_1,int param_2,int param_3,int *param_4)
       temp_v15 = 0;
       temp_v8 = 0;
       do {
-        temp_v9 = FUN_003e4d68(temp_v8 & 0xffff);
+        temp_v9 = partyGetSlot(temp_v8 & 0xffff);
         temp_v8 = temp_v8 + 1;
         if ((*(unsigned int *)(temp_v9 + 0x130) & 1) != 0) {
           temp_v15 = temp_v15 + 1;

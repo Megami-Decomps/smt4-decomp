@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001b31ac(void);
-int FUN_001b31e0(void);
+int packageEntryGetDirectory(void);
+int packageEntryGetFileCount(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,9 +15,9 @@ typedef struct {
 extern int dataTableGetCount(void);
 extern int dataTableGetEntries(unsigned int);
 extern unsigned int dataTableFileGetTable(unsigned int, unsigned int);
-extern int FUN_001b315c(unsigned int);
-/* Supplied declaration required: FUN_001b31ac. */
-/* Supplied declaration required: FUN_001b31e0. */
+extern int packageEntryIsLoaded(unsigned int);
+/* Supplied declaration required: packageEntryGetDirectory. */
+/* Supplied declaration required: packageEntryGetFileCount. */
 
 
 int FUN_00470974(int param_1,int param_2)
@@ -38,12 +38,12 @@ int FUN_00470974(int param_1,int param_2)
   if (temp_v7 < *(int *)(param_1 + 0x310)) {
     do {
       temp_v6 = *(int *)(param_1 + 0x318) + temp_v7 * 0x50;
-      temp_v0 = FUN_001b315c(temp_v6);
+      temp_v0 = packageEntryIsLoaded(temp_v6);
       if (temp_v0 != 0) {
         temp_v1 = temp_v6;
-        FUN_001b31ac();
+        packageEntryGetDirectory();
         temp_v2 = temp_v6;
-        FUN_001b31e0();
+        packageEntryGetFileCount();
         temp_v4 = 0;
         if (temp_v4 < temp_v2) {
           do {

@@ -8,7 +8,7 @@
 extern "C" {
 
 int efctSetSpeed(void);
-int FUN_00344cd0(...);
+int uiDrawListScrollBar(...);
 int FUN_00404050(...);
 int FUN_00404f40(...);
 
@@ -29,7 +29,7 @@ typedef struct {
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int recordGetModeForId(int);
-/* Supplied declaration required: FUN_00344cd0. */
+/* Supplied declaration required: uiDrawListScrollBar. */
 /* Supplied declaration required: FUN_00404050. */
 /* Supplied declaration required: FUN_00404f40. */
 extern unsigned int tableFlagBit2(unsigned int);
@@ -57,15 +57,15 @@ void FUN_0040307c(int param_1)
   temp_v0 = vec2GetXInt(reinterpret_cast<const void *>(param_1 + 0x14c));
   temp_v1 = vec2GetYInt(param_1 + 0x14c);
   efctSetSpeed();
-  FUN_001835b4(2,0x32,0x4d,temp_v0,temp_v1,0x60);
-  FUN_001835b4(2,0x32,0x4e,temp_v0,temp_v1,0x60);
-  FUN_001835b4(2,0x32,0x4a,temp_v0,temp_v1,0x65);
-  FUN_001835b4(2,0x32,0x4b,temp_v0,temp_v1,0x65);
-  FUN_001835b4(2,0x32,0x4c,temp_v0,temp_v1,0x66);
+  texDrawTableEntryAtStoredOrigin(2,0x32,0x4d,temp_v0,temp_v1,0x60);
+  texDrawTableEntryAtStoredOrigin(2,0x32,0x4e,temp_v0,temp_v1,0x60);
+  texDrawTableEntryAtStoredOrigin(2,0x32,0x4a,temp_v0,temp_v1,0x65);
+  texDrawTableEntryAtStoredOrigin(2,0x32,0x4b,temp_v0,temp_v1,0x65);
+  texDrawTableEntryAtStoredOrigin(2,0x32,0x4c,temp_v0,temp_v1,0x66);
   temp_v8 = 0;
   do {
-    FUN_001835b4(2,0x32,temp_v8 * 2 + 0x4f,temp_v0,temp_v1,0x6a);
-    FUN_001835b4(2,0x32,temp_v8 * 2 + 0x50,temp_v0,temp_v1,0x6a);
+    texDrawTableEntryAtStoredOrigin(2,0x32,temp_v8 * 2 + 0x4f,temp_v0,temp_v1,0x6a);
+    texDrawTableEntryAtStoredOrigin(2,0x32,temp_v8 * 2 + 0x50,temp_v0,temp_v1,0x6a);
     temp_v8 = temp_v8 + 1;
   } while (temp_v8 < 9);
   efctSetSpeed();
@@ -88,25 +88,25 @@ void FUN_0040307c(int param_1)
         efctSetSpeed();
         temp_v9 = 0;
         do {
-          FUN_001835b4(2,0x32,temp_v9 + 0x7d,temp_v7,temp_v11,0x7e);
+          texDrawTableEntryAtStoredOrigin(2,0x32,temp_v9 + 0x7d,temp_v7,temp_v11,0x7e);
           temp_v9 = temp_v9 + 1;
         } while (temp_v9 < 3);
         efctSetSpeed();
-        FUN_001835b4(2,0x32,0x80,temp_v7,temp_v11,0x7e);
+        texDrawTableEntryAtStoredOrigin(2,0x32,0x80,temp_v7,temp_v11,0x7e);
         if (!((temp_v6 != 1 && temp_v6 != 2) && temp_v6 != 6)) {
-          FUN_001835b4(2,0x32,0xa2,temp_v7,temp_v11,0x83);
-          FUN_001835b4(2,0x32,0xa3,temp_v7,temp_v11,0x83);
-          FUN_001835b4(2,0x32,0xa4,temp_v7,temp_v11,0x88);
+          texDrawTableEntryAtStoredOrigin(2,0x32,0xa2,temp_v7,temp_v11,0x83);
+          texDrawTableEntryAtStoredOrigin(2,0x32,0xa3,temp_v7,temp_v11,0x83);
+          texDrawTableEntryAtStoredOrigin(2,0x32,0xa4,temp_v7,temp_v11,0x88);
           temp_v10 = 0xa5;
         }
         else {
-          FUN_001835b4(2,0x32,0x81,temp_v7,temp_v11,0x83);
-          FUN_001835b4(2,0x32,0x82,temp_v7,temp_v11,0x83);
-          FUN_001835b4(2,0x32,0x83,temp_v7,temp_v11,0x88);
+          texDrawTableEntryAtStoredOrigin(2,0x32,0x81,temp_v7,temp_v11,0x83);
+          texDrawTableEntryAtStoredOrigin(2,0x32,0x82,temp_v7,temp_v11,0x83);
+          texDrawTableEntryAtStoredOrigin(2,0x32,0x83,temp_v7,temp_v11,0x88);
           temp_v10 = 0xa1;
         }
         efctSetSpeed();
-        FUN_001835b4(2,0x32,temp_v10,temp_v7,temp_v11,0x8d);
+        texDrawTableEntryAtStoredOrigin(2,0x32,temp_v10,temp_v7,temp_v11,0x8d);
         efctSetSpeed();
       }
       FUN_00404f40(param_1,temp_v2,*(short *)(temp_v5 + 8) + temp_v0,*(short *)(temp_v5 + 10) + temp_v1,temp_v3,
@@ -120,12 +120,12 @@ void FUN_0040307c(int param_1)
     temp_v8 = temp_v8 + 1;
   } while (temp_v8 < 10);
   efctSetSpeed();
-  FUN_00344cd0(param_1 + 0x90,temp_v0,temp_v1,0x32,0x88,0x89,0x8a,0x84,0x85,0x86,0x87,
+  uiDrawListScrollBar(param_1 + 0x90,temp_v0,temp_v1,0x32,0x88,0x89,0x8a,0x84,0x85,0x86,0x87,
                (int)*(short *)(param_1 + 0x126),(int)*(short *)(param_1 + 0x122),
                (int)*(short *)(param_1 + 0x124),0x6a,0);
   if (*(unsigned char *)(param_1 + 4) >= 4) {
     efctSetSpeed();
-    FUN_001835b4(2,0x32,0x95,temp_v0,temp_v1,0x97);
+    texDrawTableEntryAtStoredOrigin(2,0x32,0x95,temp_v0,temp_v1,0x97);
     efctSetSpeed();
   }
   efctSetSpeed();

@@ -12,7 +12,7 @@ struct MapIfSoundView {
 extern "C" {
 extern MapIfStateA *g_mapIf;
 extern GameStateA g_gameState;
-s32 FUN_003d4ed8(u32 sound, MapVector position);
+s32 soundActorStartOnFreeChannel(u32 sound, MapVector position);
 
 /* Finds the waiting map record of group `id`, plays its sound (unless input is blocked) and advances it to state 7. */
 void FUN_00245f70(s32 id)
@@ -27,7 +27,7 @@ void FUN_00245f70(s32 id)
             MapVector position = details->position;
             position.y += 120.0f;
             if (state->inputBlocked == 0) {
-                FUN_003d4ed8(0x010002ab, position);
+                soundActorStartOnFreeChannel(0x010002ab, position);
             }
             details->unk2c = 0;
             record->state = 7;

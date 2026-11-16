@@ -41,7 +41,7 @@ void FUN_004d0f48(unsigned int param_1,int param_2)
     return;
   }
   if ((int)DAT_00573970 >= 1) {
-    FUN_00180118(DAT_00573970 & 0xffff);
+    dataTable01GetRecordWithAocOverride(DAT_00573970 & 0xffff);
     FUN_00212234();
   }
   else {
@@ -59,7 +59,7 @@ void FUN_004d0f48(unsigned int param_1,int param_2)
       FUN_004bbc4c(auStack_110,param_2,0);
     }
     else {
-      uVar2 = FUN_004bb80c(param_2);
+      uVar2 = dataTable02GetRecordWithAocPackage(param_2);
       FUN_004bb9c0(auStack_110,uVar2);
     }
     iVar4 = 0;
@@ -67,7 +67,7 @@ void FUN_004d0f48(unsigned int param_1,int param_2)
     uVar3 = 0;
     do {
       if (auStack_110[uVar3] != 0) {
-        FUN_00180118(auStack_110[uVar3] & 0xffff);
+        dataTable01GetRecordWithAocOverride(auStack_110[uVar3] & 0xffff);
         VectorUnsignedToFloat(iVar1 * iVar4,(unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_00212234();
         iVar4 = iVar4 + 1;
@@ -115,7 +115,7 @@ void FUN_004d0f48(unsigned int param_1,int param_2)
       iVar4 = FUN_004bbbd8(param_2);
       FUN_00212234(acStack_88 + iVar4 * 0x20);
       uVar2 = dataSelectPrioritizedCandidate(param_2);
-      FUN_00180118();
+      dataTable01GetRecordWithAocOverride();
       uStack_48 = 0;
       uStack_44 = 0;
       uStack_40 = 0;
@@ -130,7 +130,7 @@ void FUN_004d0f48(unsigned int param_1,int param_2)
     }
     FUN_00212234(&LAB_004d118c);
     if (0 < DAT_005715fa) {
-      FUN_00180118(DAT_005715fa);
+      dataTable01GetRecordWithAocOverride(DAT_005715fa);
       VectorUnsignedToFloat(iVar1,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_00212234();
       return;

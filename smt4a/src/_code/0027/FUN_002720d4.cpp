@@ -9,9 +9,9 @@ void *memAlloc(u32 pool, u32 category, u32 options, u32 size,
                u32 alignment, u32 count);
 void rt_memclr(void *destination, u32 size);
 void objectBufferFree(void *buffer);
-void *FUN_002b2d74(u16 kind, u32 count,
+void *effBehaviorCreate(u16 kind, u32 count,
                     ParticleCapacityPrefixA *definition);
-void *FUN_00271d28(void *source);
+void *effGeomCloneHandle(void *source);
 void effParticleParamCopy(ParticleInstanceA *destination,
                           ParticleSourcePrefixA *source);
 
@@ -36,12 +36,12 @@ ParticleInstanceA *FUN_002720d4(ParticleSourcePrefixA *source)
     u16 kind = source->resource->resourceId;
     if (instance->objectBuffer != 0)
         objectBufferFree(instance->objectBuffer);
-    instance->objectBuffer = FUN_002b2d74(kind, instance->count, definition);
+    instance->objectBuffer = effBehaviorCreate(kind, instance->count, definition);
     instance->flags |= 1;
 
     if (instance->count != 0) {
         if (source->auxiliary != 0)
-            instance->auxiliary = FUN_00271d28(source->auxiliary);
+            instance->auxiliary = effGeomCloneHandle(source->auxiliary);
         effParticleParamCopy(instance, source);
     }
     return instance;

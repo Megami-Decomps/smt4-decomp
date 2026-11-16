@@ -18,7 +18,7 @@ typedef struct MessageMain {
 extern MessageMain g_messageMain; /* 0x43e188 */
 
 extern int timerStart(void *timer, int kind, int arg);
-extern int FUN_002bd954(void *timer, int a, int b, void *layout, int c, f32 scale);
+extern int uiSpriteStateInitFromSource(void *timer, int a, int b, void *layout, int c, f32 scale);
 
 /* Starts the message window's open (nonzero `open`) or close animation timer; returns 1. */
 u32 messageWindowStartTimer(int open)
@@ -27,11 +27,11 @@ u32 messageWindowStartTimer(int open)
 
     if (open != 0) {
         window->closing = 1;
-        FUN_002bd954(window->timer, 0xE, 0, window->layout, 0xB, 1.0f);
+        uiSpriteStateInitFromSource(window->timer, 0xE, 0, window->layout, 0xB, 1.0f);
         timerStart(window->timer, 8, 0);
     } else {
         window->closing = 2;
-        FUN_002bd954(window->timer, 0xE, 0, window->layout, 0xB, 1.0f);
+        uiSpriteStateInitFromSource(window->timer, 0xE, 0, window->layout, 0xB, 1.0f);
         timerStart(window->timer, 9, 0);
     }
     return 1;

@@ -17,7 +17,7 @@ static __inline void flagsClearBits(u32 *flags, u32 bits)
 }
 
 extern "C" {
-s32 FUN_00163aa4(UiSpriteState *, f32);
+s32 uiSpriteAdvanceAnimation(UiSpriteState *, f32);
 void uiSpriteBankApplyPreset(void *, s32);
 void FUN_0048a378(NaviCategorySelectionWork *);
 void FUN_0048821c(NaviCategorySelectionWork *, u32);
@@ -69,18 +69,18 @@ void _ZN9Obj53230012FUN_0048b8a4Ev(NaviCategorySelectionWork *owner)
         return;
     }
     case 1: {
-        if (FUN_00163aa4(&work->motion, 1.0f))
+        if (uiSpriteAdvanceAnimation(&work->motion, 1.0f))
             work->phase = 2;
         s32 y = vec2GetYInt(&work->motion);
         s32 x = vec2GetXInt(&work->motion);
         pointConvertToFloat(&work->scene.position, x, y);
         if (!uiSpriteGetCompletionState(&work->auxiliary))
-            FUN_00163aa4(&work->auxiliary, 1.0f);
+            uiSpriteAdvanceAnimation(&work->auxiliary, 1.0f);
         return;
     }
     case 2:
         if (!uiSpriteGetCompletionState(&work->auxiliary))
-            FUN_00163aa4(&work->auxiliary, 1.0f);
+            uiSpriteAdvanceAnimation(&work->auxiliary, 1.0f);
         work->state = 2;
         work->phase = 0;
         work->flags &= ~0x1000000;

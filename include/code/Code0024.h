@@ -6,7 +6,7 @@ extern "C" {
 
 u8 FUN_00241990(void);
 
-void FUN_00242914(void *block, u8 value);
+void btlUiObjCSetActive(void *block, u8 value);
 
 void FUN_002454c4(void *obj, u32 b, u32 a, int flag);
 

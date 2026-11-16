@@ -78,7 +78,7 @@ int FUN_0013ba0c(...);
 int FUN_0013ba3c(...);
 int FUN_0013ba70(...);
 int asdTMTexTableLoadTmx(...);
-int FUN_0014afd0(...);
+int asdTMTexTablePrepareNodeImage(...);
 int asdProcessCreateSimple(...);
 
 int FUN_00136df8(...);
@@ -380,7 +380,7 @@ extern int FUN_0013bdb8(unsigned int);
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: FUN_00140ba4. */
 /* Supplied declaration required: systemInitializeAndResetSharedState. */
-/* Supplied declaration required: FUN_0014afd0. */
+/* Supplied declaration required: asdTMTexTablePrepareNodeImage. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: asdGxCommandListCreate. */
 /* Supplied declaration required: FUN_0015a410. */
@@ -390,7 +390,7 @@ extern int FUN_0013bdb8(unsigned int);
 /* Supplied declaration required: FUN_00161a10. */
 /* Supplied declaration required: asdLoadFileSyncNoContext. */
 extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-extern unsigned int FUN_001692ac(unsigned int, unsigned int);
+extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern unsigned long long FUN_00170390(unsigned int);
 /* Supplied declaration required: FUN_001703b0. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
@@ -497,7 +497,7 @@ void FUN_00135c30(void)
   temp_v3 = packNibblesAndByte(6,7,0);
   *(unsigned int *)(temp_v2 + 0x1390) = temp_v3;
   temp_v2 = g_renderCtx;
-  temp_v3 = FUN_001692ac(5,1);
+  temp_v3 = renderCtxPackPassFlags(5,1);
   *(unsigned int *)(temp_v2 + 0x1384) = temp_v3;
   mathInitDefaultUnitVector();
   asdGxPresetVectorSet(0);
@@ -545,7 +545,7 @@ void FUN_00135c30(void)
   FUN_001389ec(2);
   asdGxLoadMaterialShader();
   asdTMTexTableLoadTmx(0x21,0);
-  FUN_0014afd0(0x21,0);
+  asdTMTexTablePrepareNodeImage(0x21,0);
   gameDataAllocBlocks();
   FUN_00139508(0);
   FUN_0013a630(1);

@@ -3,7 +3,7 @@
 extern "C" {
 
 s32 playSceneAcceptsInput(BtlUiObjC *obj);
-void FUN_0028cb40(BtlUiObjC *obj, u16 *a, u16 *b);
+void btlCommandMenuResolveLayout(BtlUiObjC *obj, u16 *a, u16 *b);
 
 extern BtlUiGlobals g_btlUi;
 
@@ -18,7 +18,7 @@ s32 btlUiAcceptSelection(void)
     }
     result = playSceneAcceptsInput(&ui->objC);
     if (result != 0) {
-        FUN_0028cb40(&ui->objC, &ui->unk7E4E, &ui->unk7E50);
+        btlCommandMenuResolveLayout(&ui->objC, &ui->unk7E4E, &ui->unk7E50);
         if (ui->unk7E4E == 0xE) {
             *state = 10;
         } else {

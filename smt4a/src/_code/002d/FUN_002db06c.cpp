@@ -11,8 +11,8 @@ int controllerSetDestination(...);
 int animationSelectClip(...);
 
 int soundVolumeSettingGet(void);
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
+int libm_cosf(void);
+int libm_sinf(void);
 int FUN_001f3f34(void);
 int soundAllocateSpatialActor(...);
 int FUN_0025ef68(int *, int *, int);
@@ -21,8 +21,8 @@ int distSpatial(void);
 int FUN_002d1f40(int, int, int);
 int FUN_003250ac(int *);
 int mathPositionHeadingDegrees(void);
-int FUN_003d4ed8(...);
-int FUN_003fd7c0(...);
+int soundActorStartOnFreeChannel(...);
+int moriModelUnitStartMaterialAnimation(...);
 int FUN_003fd924(...);
 int controllerSetRotationEulerDegrees(...);
 int FUN_004ff98c(...);
@@ -80,8 +80,8 @@ extern signed char DAT_005f1c7e; /* 0x5f1c7e */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: soundVolumeSettingGet. */
 extern int gameFlagsGetBlock(void);
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_001f3f34. */
 /* Supplied declaration required: soundAllocateSpatialActor. */
 /* Supplied declaration required: FUN_0025ef68. */
@@ -92,9 +92,9 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_002d1f40. */
 /* Supplied declaration required: FUN_003250ac. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
-/* Supplied declaration required: FUN_003d4ed8. */
+/* Supplied declaration required: soundActorStartOnFreeChannel. */
 /* Supplied declaration required: controllerSetDestination. */
-/* Supplied declaration required: FUN_003fd7c0. */
+/* Supplied declaration required: moriModelUnitStartMaterialAnimation. */
 /* Supplied declaration required: FUN_003fd924. */
 /* Supplied declaration required: animationSelectClip. */
 /* Supplied declaration required: controllerSetRotationEulerDegrees. */
@@ -198,8 +198,8 @@ void FUN_002db06c(void)
       piVar2[0x90] = 0;
       piVar2[0x8e] = 5;
       *(unsigned char *)(piVar2 + 0x8f) = 1;
-      FUN_003fd7c0(*(unsigned int *)(piVar2[0x60] + 4),2);
-      FUN_003fd7c0(*(unsigned int *)(g_lmapScene[99] + 4),1,2);
+      moriModelUnitStartMaterialAnimation(*(unsigned int *)(piVar2[0x60] + 4),2);
+      moriModelUnitStartMaterialAnimation(*(unsigned int *)(g_lmapScene[99] + 4),1,2);
     }
     piVar2 = g_lmapScene;
     switch(g_lmapScene[0x74]) {
@@ -244,14 +244,14 @@ LAB_002db2e8:
       temp_v15 = (float)piVar2[7];
       temp_v14 = *(unsigned long long *)(piVar2 + 8);
       temp_v9 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
-      FUN_001bc124();
+      libm_sinf();
       temp_v15 = temp_v15 + temp_v9 * DAT_005f19b8;
       temp_v9 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
-      FUN_001bbf0c();
+      libm_cosf();
       temp_v13 = (float)((unsigned long long)temp_v14 >> 0x20) + temp_v9 * DAT_005f19b8;
       temp_v17 = (float)temp_v14 + DAT_005f1aa0 + temp_v12;
       temp_v9 = DAT_0058128c;
-      FUN_001bc124();
+      libm_sinf();
       piVar2 = g_lmapScene;
       g_lmapScene[0x7c] = (int)temp_v15;
       piVar2[0x7d] = (int)(temp_v17 + temp_v9 * (float)((unsigned long long)temp_v16 >> 0x20));
@@ -300,15 +300,15 @@ LAB_002db724:
           piVar2[0x83] = (int)temp_v15;
           piVar2[0x84] = (int)temp_v13;
           temp_v9 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
-          FUN_001bc124();
+          libm_sinf();
           temp_v19 = (float)((unsigned long long)temp_v16 >> 0x20);
           temp_v17 = temp_v17 + temp_v9 * DAT_005f19b8;
           temp_v9 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
-          FUN_001bbf0c();
+          libm_cosf();
           temp_v13 = temp_v13 + temp_v9 * DAT_005f19b8;
           temp_v12 = temp_v15 + DAT_005f1aa0 + temp_v12;
           temp_v9 = temp_v10;
-          FUN_001bc124();
+          libm_sinf();
           piVar2 = g_lmapScene;
           piVar5 = g_lmapScene + 7;
           g_lmapScene[0x7c] = (int)temp_v17;
@@ -318,12 +318,12 @@ LAB_002db724:
           piVar2[0x80] = piVar2[8];
           piVar2[0x81] = piVar2[9];
           temp_v10 = (float)piVar2[0x13] * temp_v11;
-          FUN_001bc124();
+          libm_sinf();
           piVar2 = g_lmapScene;
           g_lmapScene[0x7f] =
                (int)((float)g_lmapScene[0x7f] + temp_v10 * *(float *)(temp_v0 + 0x1528));
           temp_v11 = (float)piVar2[0x13] * temp_v11;
-          FUN_001bbf0c();
+          libm_cosf();
           piVar2 = g_lmapScene;
           piVar5 = g_lmapScene + 0x76;
           g_lmapScene[0x81] =
@@ -362,11 +362,11 @@ LAB_002db724:
         piVar2[0x90] = (int)temp_v10;
         *(unsigned char *)(piVar2 + 0x8f) = 1;
         DAT_005f19e8 = 0;
-        FUN_003fd7c0(*(unsigned int *)(piVar2[0x60] + 4),2);
+        moriModelUnitStartMaterialAnimation(*(unsigned int *)(piVar2[0x60] + 4),2);
         temp_v3 = 1;
         temp_v5 = *(unsigned int *)(g_lmapScene[99] + 4);
       }
-      FUN_003fd7c0(temp_v5,temp_v3,2);
+      moriModelUnitStartMaterialAnimation(temp_v5,temp_v3,2);
       break;
     case 3:
       if (DAT_005f161c == '\0') {
@@ -394,10 +394,10 @@ LAB_002db724:
             }
             if (!(temp_v7 || temp_v6 != temp_v8)) {
               temp_v13 = DAT_0058128c / DAT_005f19ac;
-              FUN_001bc124();
+              libm_sinf();
               g_lmapScene[0x7c] = (int)((float)g_lmapScene[0x7c] - temp_v13 * DAT_005f19a8);
               temp_v13 = DAT_0058128c / DAT_005f19ac;
-              FUN_001bc124();
+              libm_sinf();
               temp_v13 = (float)g_lmapScene[0x7e] + temp_v13 * DAT_005f19a8;
               g_lmapScene[0x7e] = (int)temp_v13;
             }
@@ -408,28 +408,28 @@ LAB_002db724:
               }
               if (!temp_v6) {
                 temp_v13 = DAT_0058128c / DAT_005f19ac;
-                FUN_001bc124();
+                libm_sinf();
                 g_lmapScene[0x7c] = (int)((float)g_lmapScene[0x7c] + temp_v13 * DAT_005f19a8);
                 temp_v13 = DAT_0058128c / DAT_005f19ac;
-                FUN_001bc124();
+                libm_sinf();
                 temp_v13 = (float)g_lmapScene[0x7e] - temp_v13 * DAT_005f19a8;
                 g_lmapScene[0x7e] = (int)temp_v13;
               }
               else if ((temp_v10 > temp_v13) && ((float)g_lmapScene[0x78] > temp_v10)) {
                 temp_v13 = DAT_0058128c / DAT_005f19ac;
-                FUN_001bc124();
+                libm_sinf();
                 g_lmapScene[0x7c] = (int)((float)g_lmapScene[0x7c] - temp_v13 * DAT_005f19a8);
                 temp_v13 = DAT_0058128c / DAT_005f19ac;
-                FUN_001bc124();
+                libm_sinf();
                 temp_v13 = (float)g_lmapScene[0x7e] - temp_v13 * DAT_005f19a8;
                 g_lmapScene[0x7e] = (int)temp_v13;
               }
               else if ((temp_v13 > temp_v10) && (temp_v10 > (float)g_lmapScene[0x78])) {
                 temp_v13 = DAT_0058128c / DAT_005f19ac;
-                FUN_001bc124();
+                libm_sinf();
                 g_lmapScene[0x7c] = (int)((float)g_lmapScene[0x7c] + temp_v13 * DAT_005f19a8);
                 temp_v13 = DAT_0058128c / DAT_005f19ac;
-                FUN_001bc124();
+                libm_sinf();
                 temp_v13 = (float)g_lmapScene[0x7e] + temp_v13 * DAT_005f19a8;
                 g_lmapScene[0x7e] = (int)temp_v13;
               }
@@ -438,7 +438,7 @@ LAB_002db724:
         }
         else {
           temp_v13 = DAT_0058128c / DAT_005f19ac;
-          FUN_001bc124();
+          libm_sinf();
           g_lmapScene[0x7d] = (int)((float)g_lmapScene[0x7d] + temp_v13 * DAT_005f19a8);
         }
         piVar2 = g_lmapScene;
@@ -469,8 +469,8 @@ LAB_002dba80:
           piVar2[0x8e] = 5;
           piVar2[0x90] = (int)temp_v10;
           *(unsigned char *)(piVar2 + 0x8f) = 1;
-          FUN_003fd7c0(*(unsigned int *)(piVar2[0x60] + 4),2);
-          FUN_003fd7c0(*(unsigned int *)(g_lmapScene[99] + 4),1,2);
+          moriModelUnitStartMaterialAnimation(*(unsigned int *)(piVar2[0x60] + 4),2);
+          moriModelUnitStartMaterialAnimation(*(unsigned int *)(g_lmapScene[99] + 4),1,2);
         }
         piVar2 = g_lmapScene;
         g_lmapScene[0x75] = g_lmapScene[0x75] + 1;
@@ -489,8 +489,8 @@ LAB_002dba80:
           piVar2[0x8e] = 5;
           piVar2[0x90] = (int)temp_v10;
           *(unsigned char *)(piVar2 + 0x8f) = 1;
-          FUN_003fd7c0(*(unsigned int *)(piVar2[0x60] + 4),2);
-          FUN_003fd7c0(*(unsigned int *)(g_lmapScene[99] + 4),1,2);
+          moriModelUnitStartMaterialAnimation(*(unsigned int *)(piVar2[0x60] + 4),2);
+          moriModelUnitStartMaterialAnimation(*(unsigned int *)(g_lmapScene[99] + 4),1,2);
         }
         piVar2 = g_lmapScene;
         if (DAT_005f161d != '\0') {
@@ -503,8 +503,8 @@ LAB_002dba80:
           piVar2[0x90] = (int)temp_v10;
           *(unsigned char *)(piVar2 + 0x8f) = 1;
           DAT_005f19e8 = 0;
-          FUN_003fd7c0(*(unsigned int *)(piVar2[0x60] + 4),2);
-          FUN_003fd7c0(*(unsigned int *)(g_lmapScene[99] + 4),1,2);
+          moriModelUnitStartMaterialAnimation(*(unsigned int *)(piVar2[0x60] + 4),2);
+          moriModelUnitStartMaterialAnimation(*(unsigned int *)(g_lmapScene[99] + 4),1,2);
           piVar2 = g_lmapScene;
         }
         goto joined_r0x002dbf24;
@@ -531,15 +531,15 @@ LAB_002dba80:
       temp_v22 = g_lmapScene[0x7d];
       iStack_a8 = g_lmapScene[0x7e];
       temp_v17 = DAT_0058128c / DAT_005f19ac;
-      FUN_001bc124();
+      libm_sinf();
       piVar2 = g_lmapScene;
       g_lmapScene[0x7d] = (int)((float)g_lmapScene[0x7d] + temp_v17 * DAT_005f19a8);
       temp_v17 = (float)piVar2[0x86] * temp_v11;
-      FUN_001bc124();
+      libm_sinf();
       piVar2 = g_lmapScene;
       g_lmapScene[0x7c] = (int)((float)g_lmapScene[0x7c] + temp_v17 * temp_v13);
       temp_v17 = (float)piVar2[0x86] * temp_v11;
-      FUN_001bbf0c();
+      libm_cosf();
       piVar2 = g_lmapScene;
       g_lmapScene[0x7e] = (int)((float)g_lmapScene[0x7e] + temp_v17 * temp_v13);
       temp_v24 = (float)piVar2[0x7d] + (float)piVar2[0x77] * 30.0f;
@@ -566,8 +566,8 @@ LAB_002dbd84:
         piVar2[0x8e] = 5;
         piVar2[0x90] = (int)temp_v10;
         *(unsigned char *)(piVar2 + 0x8f) = 1;
-        FUN_003fd7c0(*(unsigned int *)(piVar2[0x60] + 4),2);
-        FUN_003fd7c0(*(unsigned int *)(g_lmapScene[99] + 4),1,2);
+        moriModelUnitStartMaterialAnimation(*(unsigned int *)(piVar2[0x60] + 4),2);
+        moriModelUnitStartMaterialAnimation(*(unsigned int *)(g_lmapScene[99] + 4),1,2);
       }
       piVar2 = g_lmapScene;
       DAT_005f19d4 = 1;
@@ -585,8 +585,8 @@ LAB_002dbd84:
         piVar2[0x8e] = 5;
         piVar2[0x90] = (int)temp_v10;
         *(unsigned char *)(piVar2 + 0x8f) = 1;
-        FUN_003fd7c0(*(unsigned int *)(piVar2[0x60] + 4),2);
-        FUN_003fd7c0(*(unsigned int *)(g_lmapScene[99] + 4),1,2);
+        moriModelUnitStartMaterialAnimation(*(unsigned int *)(piVar2[0x60] + 4),2);
+        moriModelUnitStartMaterialAnimation(*(unsigned int *)(g_lmapScene[99] + 4),1,2);
       }
       piVar2 = g_lmapScene;
       if (DAT_005f161d != '\0') {
@@ -599,8 +599,8 @@ LAB_002dbd84:
         piVar2[0x90] = (int)temp_v10;
         *(unsigned char *)(piVar2 + 0x8f) = 1;
         DAT_005f19e8 = 0;
-        FUN_003fd7c0(*(unsigned int *)(piVar2[0x60] + 4),2);
-        FUN_003fd7c0(*(unsigned int *)(g_lmapScene[99] + 4),1,2);
+        moriModelUnitStartMaterialAnimation(*(unsigned int *)(piVar2[0x60] + 4),2);
+        moriModelUnitStartMaterialAnimation(*(unsigned int *)(g_lmapScene[99] + 4),1,2);
         piVar2 = g_lmapScene;
       }
 joined_r0x002dbf24:
@@ -614,10 +614,10 @@ joined_r0x002dbf24:
         piVar2[0x90] = (int)temp_v10;
         piVar2[0x8e] = 0xb;
         *(unsigned char *)(piVar2 + 0x8f) = 1;
-        FUN_003fd7c0(*(unsigned int *)(piVar2[0x60] + 4),3,2);
+        moriModelUnitStartMaterialAnimation(*(unsigned int *)(piVar2[0x60] + 4),3,2);
         temp_v3 = 2;
         temp_v5 = *(unsigned int *)(g_lmapScene[99] + 4);
-        FUN_003fd7c0(temp_v5,temp_v3,2);
+        moriModelUnitStartMaterialAnimation(temp_v5,temp_v3,2);
       }
       break;
     case 5:
@@ -637,8 +637,8 @@ joined_r0x002dbf24:
         piVar2[0x90] = (int)temp_v10;
         *(unsigned char *)(piVar2 + 0x8f) = 1;
         DAT_005f19e8 = 0;
-        FUN_003fd7c0(*(unsigned int *)(piVar2[0x60] + 4),2);
-        FUN_003fd7c0(*(unsigned int *)(g_lmapScene[99] + 4),1,2);
+        moriModelUnitStartMaterialAnimation(*(unsigned int *)(piVar2[0x60] + 4),2);
+        moriModelUnitStartMaterialAnimation(*(unsigned int *)(g_lmapScene[99] + 4),1,2);
       }
       piVar2 = g_lmapScene;
       if (DAT_005f1ad6 != '\0') {
@@ -650,10 +650,10 @@ joined_r0x002dbf24:
         piVar2[0x90] = (int)temp_v10;
         piVar2[0x8e] = 0xb;
         *(unsigned char *)(piVar2 + 0x8f) = 1;
-        FUN_003fd7c0(*(unsigned int *)(piVar2[0x60] + 4),3,2);
+        moriModelUnitStartMaterialAnimation(*(unsigned int *)(piVar2[0x60] + 4),3,2);
         temp_v3 = 2;
         temp_v5 = *(unsigned int *)(g_lmapScene[99] + 4);
-        FUN_003fd7c0(temp_v5,temp_v3,2);
+        moriModelUnitStartMaterialAnimation(temp_v5,temp_v3,2);
       }
       break;
     case 6:
@@ -679,8 +679,8 @@ joined_r0x002dbf24:
         piVar2[0x90] = (int)temp_v10;
         piVar2[0x8e] = 0xb;
         *(unsigned char *)(piVar2 + 0x8f) = 1;
-        FUN_003fd7c0(*(unsigned int *)(piVar2[0x60] + 4),3,2);
-        FUN_003fd7c0(*(unsigned int *)(g_lmapScene[99] + 4),2);
+        moriModelUnitStartMaterialAnimation(*(unsigned int *)(piVar2[0x60] + 4),3,2);
+        moriModelUnitStartMaterialAnimation(*(unsigned int *)(g_lmapScene[99] + 4),2);
       }
       piVar2 = g_lmapScene;
       if (DAT_005f1ad6 != '\0') {
@@ -692,10 +692,10 @@ joined_r0x002dbf24:
         piVar2[0x90] = (int)temp_v10;
         piVar2[0x8e] = 0xb;
         *(unsigned char *)(piVar2 + 0x8f) = 1;
-        FUN_003fd7c0(*(unsigned int *)(piVar2[0x60] + 4),3,2);
+        moriModelUnitStartMaterialAnimation(*(unsigned int *)(piVar2[0x60] + 4),3,2);
         temp_v3 = 2;
         temp_v5 = *(unsigned int *)(g_lmapScene[99] + 4);
-        FUN_003fd7c0(temp_v5,temp_v3,2);
+        moriModelUnitStartMaterialAnimation(temp_v5,temp_v3,2);
       }
       break;
     case 8:
@@ -709,13 +709,13 @@ joined_r0x002dbf24:
           soundAllocateSpatialActor(0x10002eb);
         }
         if (g_lmapScene[0x75] == 5) {
-          FUN_003d4ed8(0x1000237);
+          soundActorStartOnFreeChannel(0x1000237);
         }
         if (g_lmapScene[0x75] == 0xf) {
-          FUN_003d4ed8(0x1000238);
+          soundActorStartOnFreeChannel(0x1000238);
         }
         if (g_lmapScene[0x75] == 0x23) {
-          FUN_003d4ed8(0x1000239);
+          soundActorStartOnFreeChannel(0x1000239);
         }
         if (g_lmapScene[0x75] == 0x36) {
           soundAllocateSpatialActor(0x10002ec);
@@ -800,8 +800,8 @@ joined_r0x002dc288:
           piVar2[0x75] = 0;
           piVar2[0x92] = 0;
           piVar2[0x8e] = 1;
-          FUN_003fd7c0(*(unsigned int *)(piVar2[0x60] + 4),0,2);
-          FUN_003fd7c0(*(unsigned int *)(g_lmapScene[99] + 4),0,2);
+          moriModelUnitStartMaterialAnimation(*(unsigned int *)(piVar2[0x60] + 4),0,2);
+          moriModelUnitStartMaterialAnimation(*(unsigned int *)(g_lmapScene[99] + 4),0,2);
           *(unsigned char *)(g_lmapScene + 0x8f) = 1;
         }
       }
@@ -813,10 +813,10 @@ joined_r0x002dc288:
       temp_v13 = (float)piVar2[7];
       temp_v15 = (float)piVar2[8];
       temp_v9 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
-      FUN_001bc124();
+      libm_sinf();
       temp_v13 = temp_v13 + temp_v9 * DAT_005f19b8;
       temp_v9 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
-      FUN_001bbf0c();
+      libm_cosf();
       temp_v17 = temp_v17 + temp_v9 * DAT_005f19b8;
       temp_v9 = temp_v15 + DAT_005f1aa0 + temp_v12;
       controllerSetRotationEulerDegrees(*(unsigned int *)(g_lmapScene[0x60] + 4));
@@ -848,7 +848,7 @@ joined_r0x002dc288:
           *(unsigned char *)(piVar2 + 0x8f) = 1;
           temp_v3 = 0;
           temp_v5 = *(unsigned int *)(piVar2[99] + 4);
-          FUN_003fd7c0(temp_v5,temp_v3,2);
+          moriModelUnitStartMaterialAnimation(temp_v5,temp_v3,2);
           break;
         }
         g_lmapScene[0x8e] = 0;
@@ -864,10 +864,10 @@ joined_r0x002dc288:
         temp_v17 = (float)piVar2[8];
         temp_v15 = (float)piVar2[9];
         temp_v9 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
-        FUN_001bc124();
+        libm_sinf();
         temp_v13 = temp_v13 + temp_v9 * DAT_005f19b8;
         temp_v9 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
-        FUN_001bbf0c();
+        libm_cosf();
         piVar2 = g_lmapScene;
         temp_v17 = temp_v17 + DAT_005f1aa0;
         temp_v9 = temp_v9 * DAT_005f19b8;
@@ -886,13 +886,13 @@ joined_r0x002dc288:
         soundAllocateSpatialActor(0x10002eb);
       }
       if (g_lmapScene[0x75] == 5) {
-        FUN_003d4ed8(0x1000237);
+        soundActorStartOnFreeChannel(0x1000237);
       }
       if (g_lmapScene[0x75] == 0xf) {
-        FUN_003d4ed8(0x1000238);
+        soundActorStartOnFreeChannel(0x1000238);
       }
       if (g_lmapScene[0x75] == 0x1e) {
-        FUN_003d4ed8(0x1000239);
+        soundActorStartOnFreeChannel(0x1000239);
       }
       if (g_lmapScene[0x75] == 0x36) {
         soundAllocateSpatialActor(0x10002ec);
@@ -926,22 +926,22 @@ joined_r0x002dc288:
     temp_v17 = (float)piVar2[8];
     temp_v15 = (float)piVar2[9];
     temp_v9 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
-    FUN_001bc124();
+    libm_sinf();
     temp_v13 = temp_v13 + temp_v9 * DAT_005f19b8;
     temp_v9 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
-    FUN_001bbf0c();
+    libm_cosf();
     piVar2 = g_lmapScene;
     temp_v9 = temp_v9 * DAT_005f19b8;
     temp_v17 = temp_v17 + DAT_005f1aa0;
     g_lmapScene[0x7c] = (int)temp_v13;
     piVar2[0x7d] = (int)(temp_v17 + temp_v12);
     piVar2[0x7e] = (int)(temp_v15 + temp_v9);
-    FUN_003fd7c0(*(unsigned int *)(piVar2[0x60] + 4),1,2);
+    moriModelUnitStartMaterialAnimation(*(unsigned int *)(piVar2[0x60] + 4),1,2);
     piVar2 = g_lmapScene;
     if (g_lmapScene[0x8a] != 6) {
       g_lmapScene[0x8a] = 6;
       temp_v5 = *(unsigned int *)(piVar2[99] + 4);
-      FUN_003fd7c0(temp_v5,0,2);
+      moriModelUnitStartMaterialAnimation(temp_v5,0,2);
       FUN_003fd924(temp_v5,6,2);
     }
     else if (g_lmapScene[0x75] == 0x3c) {
@@ -949,7 +949,7 @@ joined_r0x002dc288:
       piVar2[0x8a] = 2;
       *(unsigned char *)(piVar2 + 0x8b) = 1;
       piVar2[0x75] = 0;
-      FUN_003fd7c0(*(unsigned int *)(piVar2[0x60] + 4),1);
+      moriModelUnitStartMaterialAnimation(*(unsigned int *)(piVar2[0x60] + 4),1);
     }
     controllerSetRotationEulerDegrees(*(unsigned int *)(g_lmapScene[0x60] + 4));
     controllerSetRotationEulerDegrees(*(unsigned int *)(g_lmapScene[99] + 4));
@@ -960,10 +960,10 @@ joined_r0x002dc288:
     temp_v17 = (float)g_lmapScene[8];
     temp_v15 = (float)g_lmapScene[9];
     temp_v9 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
-    FUN_001bc124();
+    libm_sinf();
     temp_v13 = temp_v13 + temp_v9 * DAT_005f19b8;
     temp_v9 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
-    FUN_001bbf0c();
+    libm_cosf();
     piVar2 = g_lmapScene;
     temp_v17 = temp_v17 + DAT_005f1aa0;
     temp_v9 = temp_v9 * DAT_005f19b8;
@@ -973,7 +973,7 @@ joined_r0x002dc288:
     piVar2[0x91] = temp_v20;
     if (piVar2[0x8a] != 2) {
       piVar2[0x8a] = 2;
-      FUN_003fd7c0(*(unsigned int *)(piVar2[0x60] + 4),1,2);
+      moriModelUnitStartMaterialAnimation(*(unsigned int *)(piVar2[0x60] + 4),1,2);
       FUN_003fd924(*(unsigned int *)(g_lmapScene[99] + 4),2);
     }
     else {
@@ -1031,8 +1031,8 @@ LAB_002dccd8:
       piVar2[0x75] = 0;
       piVar2[0x92] = 0;
       piVar2[0x8e] = 1;
-      FUN_003fd7c0(*(unsigned int *)(piVar2[0x60] + 4),0,2);
-      FUN_003fd7c0(*(unsigned int *)(g_lmapScene[99] + 4),0,2);
+      moriModelUnitStartMaterialAnimation(*(unsigned int *)(piVar2[0x60] + 4),0,2);
+      moriModelUnitStartMaterialAnimation(*(unsigned int *)(g_lmapScene[99] + 4),0,2);
       *(unsigned char *)(g_lmapScene + 0x8f) = 1;
     }
   }
@@ -1074,7 +1074,7 @@ LAB_002dcd94:
     temp_v0 = piVar2[0x97];
     temp_v17 = (float)piVar2[0x96] - 20.0f;
     temp_v9 = DAT_0058128c;
-    FUN_001bc124();
+    libm_sinf();
     piVar2 = g_lmapScene;
     g_lmapScene[0x7c] = (int)temp_v14;
     piVar2[0x7d] = (int)(temp_v17 + temp_v9 * (float)((unsigned long long)temp_v16 >> 0x20));
@@ -1132,14 +1132,14 @@ LAB_002dd03c:
     temp_v15 = (float)piVar2[8];
     temp_v13 = (float)piVar2[9];
     temp_v9 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
-    FUN_001bc124();
+    libm_sinf();
     temp_v17 = temp_v17 + temp_v9 * DAT_005f19b8;
     temp_v11 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
-    FUN_001bbf0c();
+    libm_cosf();
     temp_v13 = temp_v13 + temp_v11 * DAT_005f19b8;
     temp_v12 = temp_v15 + DAT_005f1aa0 + temp_v12;
     temp_v11 = DAT_0058128c;
-    FUN_001bc124();
+    libm_sinf();
     piVar2 = g_lmapScene;
     g_lmapScene[0x7c] = (int)temp_v17;
     piVar2[0x7d] = (int)(temp_v12 + temp_v11 * temp_v19);

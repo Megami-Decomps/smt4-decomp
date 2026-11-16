@@ -4,7 +4,7 @@
 extern "C" {
 extern MapMainA *g_mapMain;
 extern RenderCtxA *g_renderCtx;
-s32 FUN_001692ac(s32 preset, s32 index);
+s32 renderCtxPackPassFlags(s32 preset, s32 index);
 void FUN_002b6f30(void);
 void FUN_002cfb18(void);
 void FUN_002443e4(void);
@@ -24,7 +24,7 @@ s32 mapMainDrawOrdinaryPass(u32 job)
         return 0;
     }
     RenderCtxA *context = g_renderCtx;
-    s32 state = FUN_001692ac(5, 0);
+    s32 state = renderCtxPackPassFlags(5, 0);
     renderStackPush(&context->stackA, state);
     FUN_002b6f30();
     FUN_002cfb18();

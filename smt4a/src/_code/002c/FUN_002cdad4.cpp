@@ -55,9 +55,9 @@ static const s32 sPanelKeysD[] = {
 };
 
 
-void FUN_0014e188(PanelSprite *sprite, u32 group, u32 image, PanelSprites *owner, u16 id, f32 scale);
+void uiSpriteStateInitFromSource(PanelSprite *sprite, u32 group, u32 image, PanelSprites *owner, u16 id, f32 scale);
 void uiSpriteInitializeState(PanelSprite *sprite, u32 group, s32 image, u32 kind, PanelSprites *owner, u16 id, f32 scale);
-void FUN_00387240(PanelSprite *sprite, u32 group, u32 image);
+void uiStoreTextureEntryCenter(PanelSprite *sprite, u32 group, u32 image);
 void uiSpriteSelectAnim(PanelSprite *sprite, s32 animation);
 void uiSpriteSetKeyframe(PanelSprite *sprite, s32 keyframe, s32 restart);
 void spriteSetLayer(PanelSprite *sprite, u16 layer);
@@ -72,14 +72,14 @@ void FUN_002cdad4(PanelSprites *panel)
     paramsClearPacket(&panel->parameters);
     paramsInit(&panel->parameters, sPanelKeysA, sizeof(sPanelKeysA), sPanelKeysB, sizeof(sPanelKeysB), sPanelKeysC,
                sizeof(sPanelKeysC), NULL, 0, sPanelKeysD, sizeof(sPanelKeysD));
-    FUN_0014e188(&panel->frame, 0xc, 0x29, panel, 0x33, 1.0f);
+    uiSpriteStateInitFromSource(&panel->frame, 0xc, 0x29, panel, 0x33, 1.0f);
     spriteSetLayer(&panel->frame, 2);
-    FUN_00387240(&panel->frame, 0xc, 0x29);
+    uiStoreTextureEntryCenter(&panel->frame, 0xc, 0x29);
     spriteSetVisible(&panel->frame, 1);
     uiSpriteSelectAnim(&panel->frame, 0);
     uiSpriteInitializeState(&panel->cursor, 0xc, -1, 7, panel, 0x38, 1.0f);
     spriteSetLayer(&panel->cursor, 2);
-    FUN_00387240(&panel->cursor, 0xc, 0x29);
+    uiStoreTextureEntryCenter(&panel->cursor, 0xc, 0x29);
     spriteSetVisible(&panel->cursor, 1);
     uiSpriteSelectAnim(&panel->cursor, 0);
     uiSpriteInitializeState(&panel->marker, 0xc, -1, 2, panel, 0x3d, 1.0f);
@@ -89,13 +89,13 @@ void FUN_002cdad4(PanelSprites *panel)
     uiSpriteSelectAnim(&panel->marker, 2);
     uiSpriteInitializeState(&panel->icon, 0xc, -1, 0, panel, 0x47, 1.0f);
     spriteSetLayer(&panel->icon, 2);
-    FUN_00387240(&panel->icon, 0xc, 0x2b);
+    uiStoreTextureEntryCenter(&panel->icon, 0xc, 0x2b);
     spriteSetVisible(&panel->icon, 1);
     uiSpriteSelectAnim(&panel->icon, 1);
-    FUN_0014e188(&panel->label, 0xc, 9, panel, 0xb, 1.0f);
+    uiSpriteStateInitFromSource(&panel->label, 0xc, 9, panel, 0xb, 1.0f);
     uiSpriteSetKeyframe(&panel->label, 2, 0);
-    FUN_0014e188(&panel->hint, 0xc, 5000, panel, 0x51, 1.0f);
-    FUN_00387240(&panel->hint, 0xc, 0x29);
+    uiSpriteStateInitFromSource(&panel->hint, 0xc, 5000, panel, 0x51, 1.0f);
+    uiStoreTextureEntryCenter(&panel->hint, 0xc, 0x29);
     uiSpriteSelectAnim(&panel->hint, 4);
 }
 

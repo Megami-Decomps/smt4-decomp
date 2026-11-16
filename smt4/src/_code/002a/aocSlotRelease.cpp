@@ -14,14 +14,14 @@ typedef struct AocSlot {
 extern u32 g_aocSystem;
 
 extern void asdTMTexTableReleaseNode(u32 node);
-extern void FUN_002a60cc(u32 system, u32 node, s32 handle);
+extern void packageFileDisableByKindName(u32 system, u32 node, s32 handle);
 
 /* Releases the slot's texture node and handle and marks the slot inactive. */
 void aocSlotRelease(AocSlot *slot)
 {
     if (slot != NULL && slot->handle != -1 && slot->active != 0) {
         asdTMTexTableReleaseNode(slot->node);
-        FUN_002a60cc(g_aocSystem, slot->node, slot->handle);
+        packageFileDisableByKindName(g_aocSystem, slot->node, slot->handle);
         slot->handle = -1;
         slot->active = 0;
     }

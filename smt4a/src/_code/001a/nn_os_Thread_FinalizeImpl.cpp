@@ -7,7 +7,7 @@ void nn_os_Thread_FinalizeImpl(int *param_1)
   if ((char)param_1[1] == '\0') {
     software_interrupt(0x24);
     if (*param_1 < 0) {
-      FUN_002e3140();
+      resultHandleFailure();
     }
     *(unsigned char *)(param_1 + 1) = 1;
   }

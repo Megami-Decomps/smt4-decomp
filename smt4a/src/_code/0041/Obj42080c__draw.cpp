@@ -31,7 +31,7 @@ typedef struct {
 
 extern int g_renderCtx; /* 0x59dbb4 */
 
-extern int FUN_001692ac(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: FUN_002371b0. */
 /* Supplied declaration required: gpuSubmitFloatVectorsOrDefault. */
@@ -87,7 +87,7 @@ void Obj42080c::draw()
     *(unsigned char *)(temp_v1 + 0x12d0) = 0;
   }
   temp_v1 = g_renderCtx;
-  temp_v0 = FUN_001692ac(1,0);
+  temp_v0 = renderCtxPackPassFlags(1,0);
   piVar6 = (int *)(temp_v1 + 0x1258);
   temp_v2 = *piVar6;
   temp_v3 = piVar6[temp_v2 + 2];

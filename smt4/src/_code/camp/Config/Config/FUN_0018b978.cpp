@@ -14,7 +14,7 @@ int scrRunOpcodesStub(unsigned int);
 int FUN_001d15fc(void);
 int scrScriptProcessStartEntry(...);
 int messageMainSetEnabled(...);
-int FUN_00297060(unsigned int, unsigned int);
+int scrScriptProcessCreate(unsigned int, unsigned int);
 int FUN_002973ec(void);
 int gameCounterAddSaturating(int, int);
 int buttonHelpSetText(...);
@@ -39,7 +39,7 @@ extern int g_config; /* 0x43dc58 */
 /* Supplied declaration required: messageMainFinishWindow. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: messageMainSetEnabled. */
-/* Supplied declaration required: FUN_00297060. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: FUN_002973ec. */
 /* Supplied declaration required: gameCounterAddSaturating. */
@@ -48,7 +48,7 @@ extern int ifTouchGetSelectionModeForRegion(int);
 extern int FUN_0029efa8(int);
 extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_0029efd8. */
-extern unsigned short FUN_002b8584(unsigned int, unsigned int);
+extern unsigned short ifTouchRegionAddRequested(unsigned int, unsigned int);
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
@@ -85,12 +85,12 @@ void FUN_0018b978(void)
     if (*(int *)(g_config + 0xb0) == 0) {
       return;
     }
-    temp_v1 = FUN_002b8584(0x2f,0x20);
+    temp_v1 = ifTouchRegionAddRequested(0x2f,0x20);
     *(unsigned short *)(temp_v8 + 0x70) = temp_v1;
     *(unsigned int *)(temp_v8 + 0xb4) = 0;
     *(short *)(temp_v8 + 0x74) = *(short *)(temp_v8 + 0x74) + 1;
     temp_v9 = *(unsigned int *)(temp_v8 + 0xac);
-    FUN_00297060(temp_v9,*(unsigned int *)(temp_v8 + 0xb0));
+    scrScriptProcessCreate(temp_v9,*(unsigned int *)(temp_v8 + 0xb0));
     *(unsigned int *)(temp_v8 + 0xb4) = temp_v9;
     messageMainSetEnabled(0);
     scrScriptProcessStartEntry(*(unsigned int *)(temp_v8 + 0xb4),0);

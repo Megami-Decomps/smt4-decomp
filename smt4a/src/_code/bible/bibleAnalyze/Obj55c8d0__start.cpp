@@ -17,7 +17,7 @@ int partyIdsReset(...);
 int partyIdsActivateEntry(...);
 int slotPoolResetTrackedState(void);
 int FUN_004cf7cc(...);
-int FUN_004d05c4(...);
+int messageIdListSetRange(...);
 int _ZN9Obj422594C1Ev(void);
 
 typedef int romwright_code(...);
@@ -54,7 +54,7 @@ extern int gameTestProgressFlag(int);
 /* Supplied declaration required: slotPoolResetTrackedState. */
 /* Supplied declaration required: FUN_004cf7cc. */
 extern int rangeGetMinimumLimit(int *);
-/* Supplied declaration required: FUN_004d05c4. */
+/* Supplied declaration required: messageIdListSetRange. */
 /* Supplied declaration required: _ZN9Obj422594C1Ev. */
 
 
@@ -107,7 +107,7 @@ void Obj55c8d0::start()
     if (temp_v0 >= 10) {
       temp_v0 = 10;
     }
-    FUN_004d05c4(param_1 + 0x206,0x13,0x1030,temp_v0);
+    messageIdListSetRange(param_1 + 0x206,0x13,0x1030,temp_v0);
     *(unsigned char *)(param_1 + 0x20a) = 1;
     temp_v0 = 1;
     *(unsigned short *)((int)param_1 + 0xa97a) = 0;
@@ -138,7 +138,7 @@ void Obj55c8d0::start()
     if (temp_v0 >= 10) {
       temp_v0 = 10;
     }
-    FUN_004d05c4(param_1 + 0x206,0x14,0x40e,temp_v0);
+    messageIdListSetRange(param_1 + 0x206,0x14,0x40e,temp_v0);
     *(unsigned char *)(param_1 + 0x20a) = 1;
   }
   FUN_004a4848(param_1);

@@ -9,7 +9,7 @@ extern "C" {
 extern BattleUi *g_btlUiBlock;
 extern RenderCtxA *g_renderCtx;
 s32 FUN_004ab718(void);
-s32 FUN_001692ac(s32 enabled, s32 option);
+s32 renderCtxPackPassFlags(s32 enabled, s32 option);
 void efctSetSpeed(f32 alpha);
 void FUN_002a1850(f32 *screen, s32 display, const ProjectionMatrices *camera, const f32 *world);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 distance);
@@ -19,10 +19,10 @@ void FUN_003c5de0(s32 id, s32 time, s32 x, s32 y, u32 color, f32 scale, f32 spee
 void FUN_0041a534(BattleAnimatedIconStrip *strip, const f32 *world, f32 alpha)
 {
     if (strip->count != 0 && g_btlUiBlock != NULL && FUN_004ab718() == 0) {
-        renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
+        renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
         efctSetSpeed(alpha);
         f32 screen[3];
-        FUN_002a1850(screen, 0, reinterpret_cast<ProjectionMatrices *>(FUN_00152f54()), world);
+        FUN_002a1850(screen, 0, reinterpret_cast<ProjectionMatrices *>(asdCameraGetSavedRenderPairs()), world);
         s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.7f);
         s32 count = strip->count;
         if (count > 1)

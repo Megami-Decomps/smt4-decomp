@@ -6,10 +6,10 @@ extern "C" {
 extern RenderCtx *g_titleScene;
 extern GameState g_gameState;
 void pairCopy(const Point2 *source, Point2 *destination);
-u32 FUN_002c5d80(u32 mode, u32 flags);
+u32 renderCtxPackPassFlags(u32 mode, u32 flags);
 void renderStackPushIndexed(RenderCtx *context, s32 stack, u32 state);
 void renderCtxPopState(RenderCtx *context, s32 stack);
-void FUN_002bed3c(void);
+void gxResetColorQuadToWhite(void);
 void drawSetColorFromRGBA8(u32 color);
 void effectSetByteSpeed(u32 alpha);
 void FUN_002b0750(s32 layer, u32 resource, u32 sprite, s32 x, s32 y,
@@ -20,7 +20,7 @@ void uiDrawTransientSprites(TransientSpriteList *list)
 {
     Point2 origin;
     pairCopy(&list->origin, &origin);
-    renderStackPushIndexed(g_titleScene, 3, FUN_002c5d80(1, 0));
+    renderStackPushIndexed(g_titleScene, 3, renderCtxPackPassFlags(1, 0));
     for (s32 index = 0; index < list->count; ++index) {
         const TransientSpriteEntry *entry = &list->entries[index];
         if (entry->visible != 0 || g_gameState.spriteVisibility.forceVisible != 0) {
@@ -32,7 +32,7 @@ void uiDrawTransientSprites(TransientSpriteList *list)
                 entry->scaleX, entry->scaleY, 11);
         }
     }
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     renderCtxPopState(g_titleScene, 3);
 }
 }

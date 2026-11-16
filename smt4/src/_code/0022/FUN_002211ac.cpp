@@ -15,7 +15,7 @@ typedef struct MessageCommand {
 u32 scrGetCommandOwner(void);
 u32 scrGetArg(u32 index);
 u32 scrGetCommandFrame(void);
-s32 FUN_002866b4(u32 a, u32 b, u32 c, s32 d, s32 e, s32 f);
+s32 messageWindowShowOrPoll(u32 a, u32 b, u32 c, s32 d, s32 e, s32 f);
 
 static void showMessage(MessageCommand *command, s32 state, s32 mode)
 {
@@ -30,10 +30,10 @@ static void showMessage(MessageCommand *command, s32 state, s32 mode)
     b = scrGetArg(0);
     c = scrGetCommandFrame();
 
-    FUN_002866b4(a, b, c, mode, 0, 0);
+    messageWindowShowOrPoll(a, b, c, mode, 0, 0);
 }
 
-/* Script command: puts the message state in mode 0x14 and starts FUN_002866b4 with the first argument. */
+/* Script command: puts the message state in mode 0x14 and starts messageWindowShowOrPoll with the first argument. */
 extern MessageCommand g_messageMain;
 void FUN_002211ac(void)
 {

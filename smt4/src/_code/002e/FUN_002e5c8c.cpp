@@ -15,7 +15,7 @@ int randomAdvanceShiftRegister(...);
 int FUN_0024b7bc(int, float *);
 int shiftRandomNextFraction(...);
 int phaseCosInterpolate(void);
-int FUN_002b70cc(void);
+int mathSinFixedAngle(void);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(unsigned int, int);
 int __aeabi_uidivmod(void);
@@ -78,7 +78,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: shiftRandomNextFraction. */
 extern int effGetFrameCounter(void);
 /* Supplied declaration required: phaseCosInterpolate. */
-/* Supplied declaration required: FUN_002b70cc. */
+/* Supplied declaration required: mathSinFixedAngle. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
 
@@ -230,7 +230,7 @@ void FUN_002e5c8c(int param_1)
             phaseCosInterpolate();
             temp_v15 = temp_v15 * temp_v12;
             temp_v19 = (float)temp_v20;
-            FUN_002b70cc();
+            mathSinFixedAngle();
             temp_v10 = temp_v10 * temp_v12;
             DAT_004ea91c = temp_v15 * DAT_004ea95c + temp_v19 * DAT_004ea96c + temp_v10 * DAT_004ea97c;
             DAT_004ea920 = temp_v15 * DAT_004ea960 + temp_v19 * DAT_004ea970 + temp_v10 * DAT_004ea980;
@@ -294,7 +294,7 @@ void FUN_002e5c8c(int param_1)
             phaseCosInterpolate();
             temp_v14 = temp_v14 * temp_v12;
             temp_v10 = pfVar7[8] * temp_v15;
-            FUN_002b70cc();
+            mathSinFixedAngle();
             temp_v10 = temp_v10 * temp_v12;
             DAT_004ea91c = temp_v14 * DAT_004ea95c + temp_v19 * DAT_004ea96c + temp_v10 * DAT_004ea97c;
             DAT_004ea920 = temp_v14 * DAT_004ea960 + temp_v19 * DAT_004ea970 + temp_v10 * DAT_004ea980;
@@ -368,7 +368,7 @@ void FUN_002e5c8c(int param_1)
               phaseCosInterpolate();
               temp_v14 = temp_v14 * temp_v10;
               temp_v15 = pfVar7[8] * temp_v15;
-              FUN_002b70cc();
+              mathSinFixedAngle();
               temp_v15 = temp_v15 * temp_v10;
               temp_v10 = temp_v14 * DAT_004ea95c + temp_v19 * DAT_004ea96c + temp_v15 * DAT_004ea97c;
               temp_v12 = temp_v14 * DAT_004ea960 + temp_v19 * DAT_004ea970 + temp_v15 * DAT_004ea980;

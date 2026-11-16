@@ -71,7 +71,7 @@ s8* gameGetSlotTable(void);
 void gameItemSetFlag(u32 id, s32 value);
 struct SkillRecord { u8 unk00[0x26]; u16 affinity; };
 void FUN_0031f190(u32 id, s32 arg);
-void FUN_004bcd90(DemonRecord* record);
+void unitRecomputeDerivedStats(DemonRecord* record);
 s32 unitHasRankingBonus(u32 id);
 void FUN_002a6894(DemonRecord* record);
 
@@ -161,7 +161,7 @@ void FUN_002305d0(DemonRecord* record, u32 slot, u32 id, s32 kind)
     }
         break;
     }
-    FUN_004bcd90(record);
+    unitRecomputeDerivedStats(record);
     if (record != NULL) {
         hp = record->hpBase;
         if (unitHasRankingBonus(record->id) != 0) hp = (s16)((f32)hp * 1.25f);

@@ -30,7 +30,7 @@ typedef struct ZStream {
 #define Z_DEFAULT_ALLOC ((ZAlloc)0x001289e1)
 #define Z_DEFAULT_FREE ((ZFree)0x001289ed)
 
-int FUN_00128648(ZStream *strm, int windowBits);
+int zlib_inflateReset2(ZStream *strm, int windowBits);
 
 /* zlib inflateInit2_: validates the version ("1...") and stream size, installs default allocators, allocates the 0x1bcc-byte inflate state and resets the stream. */
 int zlib_inflateInit2_(ZStream *strm, int windowBits, const char *version, int streamSize)
@@ -58,7 +58,7 @@ int zlib_inflateInit2_(ZStream *strm, int windowBits, const char *version, int s
     }
     strm->state = state;
     state->window = NULL;
-    ret = FUN_00128648(strm, windowBits);
+    ret = zlib_inflateReset2(strm, windowBits);
     if (ret != 0) {
         strm->zfree(strm->opaque, state);
         strm->state = NULL;

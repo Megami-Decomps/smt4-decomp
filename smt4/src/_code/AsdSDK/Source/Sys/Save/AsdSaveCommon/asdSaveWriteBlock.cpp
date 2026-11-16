@@ -6,7 +6,7 @@ extern "C" {
 extern const char g_asdSaveCommonSourcePath[]; /* "c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Sys\\Save\\AsdSaveCommon.cpp": __FILE__ */
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void asdMemFree(void *block);
-u32 FUN_002f55cc(u32 file, u32 unk, void *buffer, u32 size);
+u32 saveMediaWriteBuffer(u32 file, u32 unk, void *buffer, u32 size);
 void memCopy(const void *src, void *dst, u32 size);
 
 /* Writes a save block: `header` then `payload` (`payloadSize` bytes) go out in one piece. Returns the writer's result. */
@@ -21,7 +21,7 @@ u32 asdSaveWriteBlock(u32 file, u32 unk, const void *header, const void *payload
 
     memCopy(header, buffer, ASD_SAVE_HEADER_SIZE);
     memCopy(payload, buffer + ASD_SAVE_HEADER_SIZE, payloadSize);
-    result = FUN_002f55cc(file, unk, buffer, total);
+    result = saveMediaWriteBuffer(file, unk, buffer, total);
     asdMemFree(buffer);
     return result;
 }

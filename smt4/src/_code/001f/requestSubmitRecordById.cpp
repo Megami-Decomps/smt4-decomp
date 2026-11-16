@@ -13,7 +13,7 @@ typedef struct RequestOwner {
 } RequestOwner;
 
 void pathBuildWide(u32 id, u8 buffer[500], s32 kind);
-void FUN_002bb5a4(u32 *request, u8 buffer[500], s32 mode);
+void archivePathDeviceOpen(u32 *request, u8 buffer[500], s32 mode);
 
 /* Clears the owner's request words and submits the request record at +8 with `mode`. */
 static __inline void requestClearAndSubmit(RequestOwner *owner, u8 *buffer, s32 mode)
@@ -23,7 +23,7 @@ static __inline void requestClearAndSubmit(RequestOwner *owner, u8 *buffer, s32 
     owner->unk18 = 0;
     owner->unk0C = 0;
     owner->unk10 = 0;
-    FUN_002bb5a4(request, buffer, mode);
+    archivePathDeviceOpen(request, buffer, mode);
 }
 
 /* Loads the id's record into a scratch buffer, clears the owner's request words and submits the record: mode 2 when `kind` is 1, else mode 1. */

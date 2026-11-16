@@ -23,7 +23,7 @@ void __aeabi_memcpy4(void *out, const void *source, u32 size);
 void recordMergeByteMasks(void *context, UnitRecord *first, UnitRecord *second,
                   s32 option, UnitRecord *out);
 void FUN_0028a538(u32 resultId, UnitRecord *first, UnitRecord *second);
-void FUN_004bcd90(UnitRecord *unit);
+void unitRecomputeDerivedStats(UnitRecord *unit);
 
 u32 FUN_002f3bc4(UnitRecord *out, s32 index, s32 mode, u32)
 {
@@ -51,7 +51,7 @@ u32 FUN_002f3bc4(UnitRecord *out, s32 index, s32 mode, u32)
                 }
             }
         }
-        FUN_004bcd90(out);
+        unitRecomputeDerivedStats(out);
     } else {
         UnitRecord *source;
         if (mode == 1)

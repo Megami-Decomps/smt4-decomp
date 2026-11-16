@@ -61,13 +61,13 @@ typedef struct {
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_001692ac(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: effectApplyFiveComponentsWithDefaults. */
 /* Supplied declaration required: FUN_0037aa68. */
-extern int FUN_00387580(unsigned int);
+extern int renderCtxPackPassFlagsWithAlpha(unsigned int);
 /* Supplied declaration required: packFields. */
 /* Supplied declaration required: flagsPackFourBooleans. */
 /* Supplied declaration required: block530OwnerReset. */
@@ -182,7 +182,7 @@ void FUN_00402290(fn_00402290_arg0 *param_1)
     *(unsigned char *)(temp_v0 + 0x12d0) = 0;
   }
   temp_v0 = g_renderCtx;
-  temp_v1 = FUN_00387580(6);
+  temp_v1 = renderCtxPackPassFlagsWithAlpha(6);
   piVar5 = (int *)(temp_v0 + 0x1278);
   temp_v2 = *piVar5;
   temp_v3 = piVar5[temp_v2 + 2];
@@ -215,7 +215,7 @@ void FUN_00402290(fn_00402290_arg0 *param_1)
   temp_v15 = temp_v8 + temp_v5 + temp_v15;
   temp_v4 = FUN_004ff4b0(param_1->field_0x4,0);
   temp_v0 = g_renderCtx;
-  temp_v1 = FUN_001692ac(5,1);
+  temp_v1 = renderCtxPackPassFlags(5,1);
   piVar5 = (int *)(temp_v0 + 0x1258);
   temp_v2 = *piVar5;
   temp_v3 = piVar5[temp_v2 + 2];

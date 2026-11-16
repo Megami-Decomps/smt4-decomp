@@ -10,7 +10,7 @@ u32 FUN_002551ac(s32 kind, BtlUnit* actor, BtlActionRecord* actions, s32 mode,
                  s32 first, u32 argument, s32 second, s32 selection, s32 variant,
                  u32, u32, u32, u32, u32, u32, u32, u32,
                  u32, u32, u32, u32, u32, u32, u32, u32);
-void FUN_002505c0(s32 actor, u32 options, void* key, s32 mode,
+void btlQueueKeyedScalarReflectAction(s32 actor, u32 options, void* key, s32 mode,
                   s32 checkDuplicates, s32 parameter, s32 first);
 
 u32 btlScriptCreateSelectedAction(void)
@@ -29,7 +29,7 @@ u32 btlScriptCreateSelectedAction(void)
     s16 selection = reinterpret_cast<SelectionView*>(btlGetMainState())->skill->unk1B4;
     FUN_002551ac(0, actor, btlGetMainState()->actions, 0, -1, argument, -1,
                   selection, variant, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1);
-    FUN_002505c0(0, (u32)actor, reinterpret_cast<void*>(0x10001B5), 0, 0, 0, 0);
+    btlQueueKeyedScalarReflectAction(0, (u32)actor, reinterpret_cast<void*>(0x10001B5), 0, 0, 0, 0);
     return 1;
 }
 }

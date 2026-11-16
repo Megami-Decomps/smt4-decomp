@@ -15,7 +15,7 @@ typedef char ListenerMatrixOffset[offsetof(ListenerOrientationView, matrix) == 0
 typedef char ListenerUpOffset[offsetof(ListenerOrientationView, up) == 0x11A8 ? 1 : -1];
 extern "C" {
 extern AsdSoundSystem g_asdSound;
-f32 FUN_002b70cc(f32 phase);
+f32 mathSinFixedAngle(f32 phase);
 f32 phaseCosInterpolate(f32 phase);
 void FUN_0012f6f4(void *listener, const f32 *matrix);
 
@@ -31,7 +31,7 @@ void FUN_00119c28(const ListenerVector *position, f32 angle)
     sound->angle = angle;
     f32 phase = angle * 0.7111111f;
     ListenerVector up = sound->up;
-    f32 dx = -FUN_002b70cc(phase);
+    f32 dx = -mathSinFixedAngle(phase);
     f32 dz = -phaseCosInterpolate(phase);
     ListenerVector forward = {x - (x + dx), y - (y + 0.0f), z - (z + dz)};
     f32 inverseLength = 1.0f / sqrtf(forward.x * forward.x + forward.y * forward.y + forward.z * forward.z);

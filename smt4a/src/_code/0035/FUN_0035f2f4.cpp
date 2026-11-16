@@ -44,7 +44,7 @@ s32 gameDataFlagTestBit(u32 bit);
 u8* gameGetSlotTable(void);
 s32 bitsAt60Test(u8* record, u32 bit);
 void bitsAt60Set(u8* record, u32 bit);
-void FUN_004bcb54(u8* record);
+void unitRecordResetCurrentValues(u8* record);
 void* saveSlotFindSelected(void);
 void saveSlotApplySelected(BattleMain* battle);
 void btlClearMode4D74(BattleMain* battle);
@@ -82,7 +82,7 @@ u32 FUN_0035f2f4(void)
     for (s32 i = 0; i < 0x18; i++) {
         u8* record = table + i * 300 + 0x68;
         s32 marked = bitsAt60Test(record, 2);
-        FUN_004bcb54(record);
+        unitRecordResetCurrentValues(record);
         if (marked != 0) bitsAt60Set(record, 2);
     }
     for (s32 i = 0; i < 3; i++) {
@@ -91,7 +91,7 @@ u32 FUN_0035f2f4(void)
     }
     u8 *selected = static_cast<u8 *>(saveSlotFindSelected());
     if (selected != NULL) {
-        FUN_004bcb54(selected);
+        unitRecordResetCurrentValues(selected);
         saveSlotApplySelected(battle);
         btlClearMode4D74(battle);
     }

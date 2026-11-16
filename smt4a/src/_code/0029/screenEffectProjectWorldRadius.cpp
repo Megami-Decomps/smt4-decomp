@@ -8,12 +8,12 @@ extern "C" {
 extern CameraVectorScratch DAT_006471dc;
 extern Vector4 g_effectRingScratchColor;
 void FUN_002a1850(f32 *screen, s32 display, const ProjectionMatrices *camera, const f32 *world);
-void FUN_001bced4(Matrix44 *output);
+void renderGetCameraViewMatrix(Matrix44 *output);
 
 f32 screenEffectProjectWorldRadius(f32 size)
 {
     Vector4 saved = DAT_006471dc.direction;
-    const ProjectionMatrices *camera = reinterpret_cast<const ProjectionMatrices *>(FUN_00152f54());
+    const ProjectionMatrices *camera = reinterpret_cast<const ProjectionMatrices *>(asdCameraGetSavedRenderPairs());
     g_effectRingScratchColor = DAT_006471dc.direction;
     f32 world[3] = {g_effectRingScratchColor.x, g_effectRingScratchColor.y, g_effectRingScratchColor.z};
     Vector4 projected;
@@ -21,7 +21,7 @@ f32 screenEffectProjectWorldRadius(f32 size)
     projected.w = 0.0f;
     DAT_006471dc.direction = projected;
     Matrix44 view;
-    FUN_001bced4(&view);
+    renderGetCameraViewMatrix(&view);
     DAT_006471dc.direction = saved;
     g_effectRingScratchColor.x = view.values[3];
     g_effectRingScratchColor.y = view.values[7];

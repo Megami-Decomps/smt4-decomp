@@ -55,7 +55,7 @@ extern BattleMainGlobals g_btlMain;
 extern u32 g_btlUiBlock;
 
 
-u32 *FUN_003eaf20(BattleFlagsState *battle);
+u32 *btlFindFirstEntryMatchingCategoryAndRequiredMask(BattleFlagsState *battle);
 void FUN_003f26d4(BattleFlagsState *battle);
 void btlUiIdsRefresh(u32 block);
 void FUN_004a9d1c(u32 block);
@@ -81,7 +81,7 @@ void FUN_003f034c(BattleFlagsState *battle)
     gameFlagSetValue(0x591, 0, 1);
     battle->flags &= ~g_btlMain.clearMaskC & ~g_btlMain.clearMaskA & ~g_btlMain.clearMaskD & ~g_btlMain.clearMaskH;
     if (battle->hasExtra)
-        battle->extra = FUN_003eaf20(battle)[0x100];
+        battle->extra = btlFindFirstEntryMatchingCategoryAndRequiredMask(battle)[0x100];
     battle->flags &= ~g_btlMain.clearMaskE & ~g_btlMain.clearMaskF;
     bool resolved = (battle->flags & g_btlMain.resolveMask) != 0;
     battle->flags &= ~g_btlMain.resolveMask & ~g_btlMain.clearMaskG;

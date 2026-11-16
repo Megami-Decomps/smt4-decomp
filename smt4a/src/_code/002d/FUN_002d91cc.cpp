@@ -7,8 +7,8 @@
 extern "C" {
 
 int FUN_001628c0(unsigned char *, unsigned int, unsigned int, int);
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
+int libm_cosf(void);
+int libm_sinf(void);
 int FUN_0025ef68(int, int, int);
 int FUN_002e364c(int);
 int FUN_00303460(...);
@@ -32,8 +32,8 @@ extern unsigned int DAT_005f1604; /* 0x5f1604 */
 extern unsigned char DAT_005f1a4e; /* 0x5f1a4e */
 
 /* Supplied declaration required: FUN_001628c0. */
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_0025ef68. */
 /* Supplied declaration required: FUN_002e364c. */
 /* Supplied declaration required: FUN_00303460. */
@@ -123,14 +123,14 @@ void FUN_002d91cc(void)
         temp_v10 = *(float *)(g_lmapScene + 0x1c);
         mathPositionHeadingDegrees();
         temp_v10 = temp_v10 * temp_v3;
-        FUN_001bc124();
+        libm_sinf();
         temp_v0 = g_lmapScene;
         temp_v4 = 20.0f;
         *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + temp_v10 * 20.0f;
         temp_v10 = *(float *)(temp_v0 + 0x1c);
         mathPositionHeadingDegrees();
         temp_v10 = temp_v10 * temp_v3;
-        FUN_001bbf0c();
+        libm_cosf();
         temp_v0 = g_lmapScene;
         *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v10 * temp_v4;
         if (*(int *)(temp_v0 + 8) >= 0x17) {
@@ -154,12 +154,12 @@ void FUN_002d91cc(void)
           FUN_00303460(0x13);
           temp_v4 = 180.0f;
           temp_v10 = (*(float *)(g_lmapScene + 0x50) + 180.0f) * temp_v3;
-          FUN_001bc124();
+          libm_sinf();
           temp_v0 = g_lmapScene;
           temp_v5 = 500.0f;
           *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + temp_v10 * 500.0f;
           temp_v3 = (*(float *)(temp_v0 + 0x50) + temp_v4) * temp_v3;
-          FUN_001bbf0c();
+          libm_cosf();
           *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v3 * temp_v5;
         }
       }
@@ -193,12 +193,12 @@ void FUN_002d91cc(void)
   case 3:
     *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
     temp_v10 = *(float *)(temp_v0 + 0x50) * 0.017453292f;
-    FUN_001bc124();
+    libm_sinf();
     temp_v0 = g_lmapScene;
     temp_v4 = 22.5f;
     *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + temp_v10 * 22.5f;
     temp_v3 = *(float *)(temp_v0 + 0x50) * temp_v3;
-    FUN_001bbf0c();
+    libm_cosf();
     temp_v0 = g_lmapScene;
     *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v3 * temp_v4;
     if (*(int *)(temp_v0 + 8) >= 0x29) {
@@ -218,12 +218,12 @@ void FUN_002d91cc(void)
     return;
   case 5:
     temp_v10 = *(float *)(g_lmapScene + 0x50) * 0.017453292f;
-    FUN_001bc124();
+    libm_sinf();
     temp_v0 = g_lmapScene;
     temp_v4 = 100.0f;
     *(float *)(g_lmapScene + 0x1c) = *(float *)(g_lmapScene + 0x1c) + temp_v10 * 100.0f;
     temp_v3 = *(float *)(temp_v0 + 0x50) * temp_v3;
-    FUN_001bbf0c();
+    libm_cosf();
     temp_v0 = g_lmapScene;
     temp_v10 = *(float *)(g_lmapScene + 0x24) + temp_v3 * temp_v4;
     *(float *)(g_lmapScene + 0x24) = temp_v10;

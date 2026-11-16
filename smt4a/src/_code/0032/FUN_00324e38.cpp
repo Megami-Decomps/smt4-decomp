@@ -4,7 +4,7 @@
 extern "C" {
 extern u32 DAT_005806c0;
 s32 randBetween(s32, s32);
-void FUN_003d4ed8(u32, f32, f32, f32);
+void soundActorStartOnFreeChannel(u32, f32, f32, f32);
 
 /* Alternate a regional map effect and scatter it near the scene position. */
 void FUN_00324e38(s32 variant)
@@ -27,13 +27,13 @@ void FUN_00324e38(s32 variant)
     }
     switch (((const RegionView *)&g_gameState)->region) {
     case 0:
-        FUN_003d4ed8(DAT_005806c0 + 0x10002A0, position.x, position.y, position.z);
+        soundActorStartOnFreeChannel(DAT_005806c0 + 0x10002A0, position.x, position.y, position.z);
         break;
     case 1:
-        FUN_003d4ed8(DAT_005806c0 + 0x10002A2, position.x, position.y, position.z);
+        soundActorStartOnFreeChannel(DAT_005806c0 + 0x10002A2, position.x, position.y, position.z);
         break;
     case 2:
-        FUN_003d4ed8(DAT_005806c0 + 0x10002A4, position.x, position.y, position.z);
+        soundActorStartOnFreeChannel(DAT_005806c0 + 0x10002A4, position.x, position.y, position.z);
         break;
     }
 }

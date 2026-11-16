@@ -10,7 +10,7 @@ struct PartyUseItemView {
 extern "C" {
 const PartyUseItemView *dataTable08Sub1GetRecord(u32);
 PartyDamageSlotsIV *gameGetSlotTable();
-s32 FUN_00232b68(s32, const PartyUseItemView *, s32, s32, s32);
+s32 itemApplyToMember(s32, const PartyUseItemView *, s32, s32, s32);
 
 u32 FUN_0028fc60(u32 id)
 {
@@ -23,11 +23,11 @@ u32 FUN_0028fc60(u32 id)
         item = dataTable08Sub1GetRecord(id);
         if (!item)
             return 0;
-        bool applicable = FUN_00232b68(-1, item, 1, 0, 0) == 0;
+        bool applicable = itemApplyToMember(-1, item, 1, 0, 0) == 0;
         PartyDamageSlotsIV *slots = gameGetSlotTable();
         for (s32 i = 0; i < 24; ++i) {
             s32 slot = slots->stock[i];
-            if (slot >= 0 && FUN_00232b68(slot, item, 1, 0, 0) == 0)
+            if (slot >= 0 && itemApplyToMember(slot, item, 1, 0, 0) == 0)
                 applicable = true;
         }
         return applicable;
@@ -41,7 +41,7 @@ u32 FUN_0028fc60(u32 id)
                 continue;
         }
         item = dataTable08Sub1GetRecord(id);
-        if (item && FUN_00232b68(slot, item, 1, 0, 0) == 0)
+        if (item && itemApplyToMember(slot, item, 1, 0, 0) == 0)
             return 1;
     }
     return 0;

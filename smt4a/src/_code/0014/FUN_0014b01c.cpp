@@ -6,7 +6,7 @@
 extern "C" {
 
 int asdTMTexTableGetHeaderValue(...);
-int FUN_00157558(int);
+int renderCtxSelectDisplayAreaForStereoMode(int);
 int FUN_0016242c(...);
 int renderCtxSelectTexture(...);
 int skinObjectUpdateMatrices(int);
@@ -53,9 +53,9 @@ extern unsigned int DAT_0064c0c0; /* 0x64c0c0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: asdTMTexTableGetHeaderValue. */
-/* Supplied declaration required: FUN_00157558. */
+/* Supplied declaration required: renderCtxSelectDisplayAreaForStereoMode. */
 /* Supplied declaration required: FUN_0016242c. */
-extern int FUN_001692ac(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: camSetMatrixA. */
@@ -182,7 +182,7 @@ void FUN_0014b01c(int param_1)
     temp_v4 = 0xff;
   }
   temp_v3 = g_renderCtx;
-  temp_v0 = FUN_001692ac(1,0);
+  temp_v0 = renderCtxPackPassFlags(1,0);
   piVar5 = (int *)(temp_v3 + 0x1258);
   temp_v1 = *piVar5;
   temp_v2 = piVar5[temp_v1 + 2];
@@ -203,7 +203,7 @@ void FUN_0014b01c(int param_1)
     (**(romwright_code **)(temp_v3 + 0x12d4))();
     *(unsigned char *)(temp_v3 + 0x12d0) = 0;
   }
-  FUN_00157558(g_renderCtx);
+  renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
   temp_v3 = g_frameTex;
   temp_v7 = 0x3f800000;
   FUN_001a9698();

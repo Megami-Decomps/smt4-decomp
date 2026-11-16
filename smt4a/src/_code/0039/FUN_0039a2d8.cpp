@@ -3,8 +3,8 @@
 #include <math.h>
 
 extern "C" {
-f32 FUN_001bbf0c(f32 angle);
-f32 FUN_001bc124(f32 angle);
+f32 libm_cosf(f32 angle);
+f32 libm_sinf(f32 angle);
 
 // Ease an integer between endpoints, reporting when the destination is reached.
 u32 FUN_0039a2d8(s32 *output, s32 start, s32 end, s32 duration, s32 elapsed, s32 easeOut)
@@ -18,9 +18,9 @@ u32 FUN_0039a2d8(s32 *output, s32 start, s32 end, s32 duration, s32 elapsed, s32
     f32 angle = ratio * 1.5707964f;
     f32 progress;
     if (easeOut != 0) {
-        progress = FUN_001bc124(angle);
+        progress = libm_sinf(angle);
     } else {
-        progress = 1.0f - FUN_001bbf0c(angle);
+        progress = 1.0f - libm_cosf(angle);
     }
     if (start < end) {
         *output = (s32)((f32)start + (f32)distance * progress);

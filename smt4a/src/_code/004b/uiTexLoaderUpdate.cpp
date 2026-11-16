@@ -10,7 +10,7 @@ extern "C" {
 
 extern void asdTMTexTableReleaseNode(s32 table, s32 node);
 extern void uiSpriteSetImageKeyframe(UiTexSprite *sprite, s32 a, s32 b);
-extern s32 FUN_00163aa4(UiTexSprite *sprite, f32 time);
+extern s32 uiSpriteAdvanceAnimation(UiTexSprite *sprite, f32 time);
 extern void entryDispatchUpdate(void *anim, s32 count);
 
 /* Per-frame update of the screen's texture loader: advances the cycle counter, starts the queued
@@ -34,7 +34,7 @@ void uiTexLoaderUpdate(UiTexLoader *loader)
             uiSpriteSetImageKeyframe(&loader->sprite, 1, 0);
         }
     }
-    if (loader->pending.node != UI_TEX_NONE && FUN_00163aa4(&loader->sprite, 1.0f) != 0) {
+    if (loader->pending.node != UI_TEX_NONE && uiSpriteAdvanceAnimation(&loader->sprite, 1.0f) != 0) {
         loader->current = loader->pending;
         loader->pending.node = UI_TEX_NONE;
         loader->pending.keyframe = UI_TEX_NONE;

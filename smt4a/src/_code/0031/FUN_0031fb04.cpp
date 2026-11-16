@@ -75,7 +75,7 @@ extern u32 g_handleRegistry;
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
 void FUN_001469a8(AddressSpaceRegion *region);
 void asdOperatorDelete(void *block);
-void FUN_00408184(s32 id, s32 value);
+void gameCounterAddSaturating(s32 id, s32 value);
 void resourceOwnerReleaseAndReset(u32 registry);
 void uniteCameraDestroy(void);
 void ptrListRemoveClearOwner(u32 registry, u32 owner);
@@ -102,7 +102,7 @@ static void threadWait(const u32 *handle)
     s32 result = svcWaitSynchronization1(*handle, -1);
     bool failed = nnResultIsFailure(result);
     if (failed) {
-        FUN_002e3140(result, failed);
+        resultHandleFailure(result, failed);
     }
 }
 
@@ -125,7 +125,7 @@ extern "C" void FUN_0031fb04(void)
     unite->stackRegion = NULL;
     asdMemFree(unite->threadStack);
     unite->threadStack = NULL;
-    FUN_00408184(0x25, FUN_002e50d4() - unite->startTime);
+    gameCounterAddSaturating(0x25, FUN_002e50d4() - unite->startTime);
     if (unite->registered != 0) {
         resourceOwnerReleaseAndReset(g_handleRegistry);
     }

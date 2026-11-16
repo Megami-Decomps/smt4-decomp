@@ -5,6 +5,6 @@
 extern "C" {
 
 /* Loads the resource file `name` into `owner` (its resource slot at +0x10). */
-void FUN_0040aa6c(void *owner, const char *name);
+void resourceOwnerLoadFileSync(void *owner, const char *name);
 
 } /* extern "C" */

@@ -30,7 +30,7 @@ typedef struct EventTexA {
 } EventTexA;
 
 extern "C" {
-u8 *FUN_0026140c(void);
+u8 *saveGetUserSettingsBlock(void);
 }
 
 #endif

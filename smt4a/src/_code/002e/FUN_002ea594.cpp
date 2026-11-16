@@ -11,7 +11,7 @@ s32 FUN_002ea594(const u32 *source)
     s32 status = svcWaitSynchronization1(*source);
 
     if (status < 0) {
-        FUN_002e3140(status);
+        resultHandleFailure(status);
     }
     if ((status & 0x3ff) != 0x3fe) {
         return 1;

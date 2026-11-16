@@ -13,7 +13,7 @@ typedef struct PopupState {
 extern PopupState *g_popupState;
 
 extern void FUN_00152f44(void);
-extern s32 FUN_002d8b58(s32 kind, s32 arg);
+extern s32 popupSelectWeightedMessage(s32 kind, s32 arg);
 
 /* Starts the popup with `arg` unless one is already running. */
 void popupStart(s32 arg)
@@ -26,7 +26,7 @@ void popupStart(s32 arg)
         popup->state = 3;
         popup->unk04 = 0;
         popup->arg = arg;
-        g_popupState->handle = FUN_002d8b58(11, arg);
+        g_popupState->handle = popupSelectWeightedMessage(11, arg);
     }
 }
 

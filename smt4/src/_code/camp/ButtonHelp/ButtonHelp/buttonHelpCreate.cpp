@@ -35,14 +35,14 @@ u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work, u32 parent);
 void drawParameterBlockClear(UiResourceParameters *resources);
 
-void FUN_002bd954(ButtonHelpDisplayUnit *unit, s32 kind, s32 count, UiResourceParameters *resources,
+void uiSpriteStateInitFromSource(ButtonHelpDisplayUnit *unit, s32 kind, s32 count, UiResourceParameters *resources,
                   u16 flags, f32 speed);
 void FUN_00262210(ButtonHelpDisplayUnit *unit, s32 kind, s32 count, s32 mode);
-void FUN_00295eb0(ButtonHelpDisplayUnit *unit, s32 kind, s32 count);
+void uiStoreTextureEntryCenter(ButtonHelpDisplayUnit *unit, s32 kind, s32 count);
 u32 asdTextCreate(s32 arg);
 void asdTextSetBaseColor(u32 text, u32 color);
 void positionStateSet(u32 text, s32 arg, u32 color, f32 value);
-u32 FUN_00297060(s32 bf, s32 mbm);
+u32 scrScriptProcessCreate(s32 bf, s32 mbm);
 void buttonHelpNotifyNoop(u32 handle);
 s32 FUN_001c0c38(u32 handle);
 s32 FUN_002109cc(u32 handle);
@@ -69,17 +69,17 @@ void buttonHelpCreate(void)
         paramsInit(&help->ui.parameters, sButtonHelpPresets.packetA, 0x30, &sButtonHelpPacketB, 0xC,
                    &sButtonHelpPacketC, 0xC, NULL, 0, sButtonHelpPacketE, 0xA8);
         for (s32 i = 0; i < 6; i++) {
-            FUN_002bd954(&help->ui.selection[i], 0x12, 3, &help->ui.parameters, 0x10, 1.0f);
+            uiSpriteStateInitFromSource(&help->ui.selection[i], 0x12, 3, &help->ui.parameters, 0x10, 1.0f);
             FUN_00262210(&help->ui.selection[i], 0x12, i + 0x11, 3);
         }
-        FUN_002bd954(&help->units[0], 0x12, 0, &help->ui.parameters, 0x10, 1.0f);
-        FUN_002bd954(&help->units[1], 0x12, 1, &help->ui.parameters, 0x10, 1.0f);
+        uiSpriteStateInitFromSource(&help->units[0], 0x12, 0, &help->ui.parameters, 0x10, 1.0f);
+        uiSpriteStateInitFromSource(&help->units[1], 0x12, 1, &help->ui.parameters, 0x10, 1.0f);
 
         ButtonHelpWork *units = globals->work;
         units->mode = 0;
         for (s32 i = 0; i < 2; i++) {
             units->units[i].value = 2;
-            FUN_00295eb0(&units->units[i], 0x12, 0);
+            uiStoreTextureEntryCenter(&units->units[i], 0x12, 0);
             units->units[i].active = 1;
             units->units[i].unk0C = 0;
             units->units[i].unk10 = 0;
@@ -93,7 +93,7 @@ void buttonHelpCreate(void)
         work->unk558 = asdTextCreate(0);
         asdTextSetBaseColor(work->unk558, 0x323232FF);
         positionStateSet(work->unk558, 0, 0x646464FF, 0.0f);
-        work->unk560 = FUN_00297060(globals->bf, globals->mbm);
+        work->unk560 = scrScriptProcessCreate(globals->bf, globals->mbm);
     }
     globals->references++;
 }

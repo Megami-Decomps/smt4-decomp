@@ -11,7 +11,7 @@ extern "C" {
 extern PartyPanelState *g_partyPanel;
 void drawParameterBlockClear(UiResourceParameters *resources);
 
-void FUN_002bd954(TimerSlot *timer, s32 kind, s32 count, UiResourceParameters *resources, u16 flags, f32 speed);
+void uiSpriteStateInitFromSource(TimerSlot *timer, s32 kind, s32 count, UiResourceParameters *resources, u16 flags, f32 speed);
 void timerStart(TimerSlot *timer, s32 animation, s32 flags);
 void spriteStartAnimationByIndex(TimerSlot *timer, s32 animation);
 /* The timer set's sprite resource packets, in retail's order (0x54, 0x18 and 0x70 bytes). */
@@ -37,7 +37,7 @@ void uiInitializeEightTimerSet(UiEightTimerSet *set)
     paramsInit(&set->resources, sEightTimerPacketA, sizeof(sEightTimerPacketA), sEightTimerPacketB, sizeof(sEightTimerPacketB),
         NULL, 0, NULL, 0, sEightTimerPacketC, sizeof(sEightTimerPacketC));
     for (s32 index = 0; index < 8; ++index) {
-        FUN_002bd954(&set->timers[index], 0x1c, 1, &set->resources, 0x15, 1.0f);
+        uiSpriteStateInitFromSource(&set->timers[index], 0x1c, 1, &set->resources, 0x15, 1.0f);
         switch (index) {
         case 0:
             timerStart(&set->timers[index], 0, 0);

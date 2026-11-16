@@ -8,7 +8,7 @@
 extern "C" {
 void FUN_00254824(u32 result, ...);
 void *FUN_002ad888(void);
-u32 FUN_002bb5a4(RomOpenFile *file, const u8 *path, u32 mode);
+u32 archivePathDeviceOpen(RomOpenFile *file, const u8 *path, u32 mode);
 void asdFatalError(void);
 void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(u32 handle);
 
@@ -53,7 +53,7 @@ nn::Result FUN_00220330(RomFileOpenState *state, const void *path, u32 size)
     state->file.unk10 = 0;
     state->file.unk04 = 0;
     state->file.unk08 = 0;
-    result = FUN_002bb5a4(&state->file, normalized, 2);
+    result = archivePathDeviceOpen(&state->file, normalized, 2);
     FUN_002c3510(result);
     failed = result & 0x80000000;
     if ((s32)failed < 0) {

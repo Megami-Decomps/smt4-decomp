@@ -43,7 +43,7 @@ void FUN_0021b0f0(void)
             }
         }
         const f32 degreesToRadians = 0.017453292f;
-        f32 x = g_lmapScene->transform.position[0] - FUN_0028250c(DAT_004474f0.work->heading * degreesToRadians) *
+        f32 x = g_lmapScene->transform.position[0] - mathRemPio2f(DAT_004474f0.work->heading * degreesToRadians) *
                 DAT_004474f0.work->followPresets.rearDistance[preset];
         f32 z = g_lmapScene->transform.position[2] - FUN_00282390(DAT_004474f0.work->heading * degreesToRadians) *
                 DAT_004474f0.work->followPresets.rearDistance[preset];

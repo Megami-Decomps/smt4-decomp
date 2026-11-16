@@ -5,7 +5,7 @@
 extern "C" {
 
 int nn_os_Thread_FinalizeImpl(int *);
-int FUN_002e3140(void);
+int resultHandleFailure(void);
 int software_interrupt(int);
 
 extern unsigned char DAT_005b4448; /* 0x5b4448 */
@@ -15,7 +15,7 @@ extern int DAT_006416a8; /* 0x6416a8 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: nn_os_Thread_FinalizeImpl. */
-/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: resultHandleFailure. */
 
 
 void FUN_001a2f70(void)
@@ -27,11 +27,11 @@ void FUN_001a2f70(void)
   DAT_005b4448 = 1;
   software_interrupt(0x18);
   if (DAT_006416a8 < 0) {
-    FUN_002e3140();
+    resultHandleFailure();
   }
   software_interrupt(0x24);
   if (DAT_005b4454 < 0) {
-    FUN_002e3140();
+    resultHandleFailure();
   }
   DAT_005b4458 = 1;
   nn_os_Thread_FinalizeImpl(&DAT_005b4454);

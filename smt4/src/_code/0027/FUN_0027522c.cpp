@@ -7,9 +7,9 @@ extern "C" {
 extern MapObjectWork *g_mapObj;
 extern GameState g_gameState;
 void nodeSetTranslation(NodeEnableResource *, s32, const MapVector *);
-void FUN_0028c618(NodeEnableResource *, s32, f32, f32, f32);
+void modelPartSetRotationDegrees(NodeEnableResource *, s32, f32, f32, f32);
 void modelSelectPrimaryMotion(NodeEnableResource *, u32, f32);
-void FUN_0029bb14(NodeEnableResource *, f32);
+void modelSetScale(NodeEnableResource *, f32);
 
 // Synchronize visible map-object models with their pending position and motion changes.
 void FUN_0027522c(void)
@@ -47,11 +47,11 @@ void FUN_0027522c(void)
                 if (object->changed) {
                     if (object->positionChanged) {
                         nodeSetTranslation(object->node->resource, 0, &object->position);
-                        FUN_0028c618(object->node->resource, 0, 0.0f, object->heading, 0.0f);
+                        modelPartSetRotationDegrees(object->node->resource, 0, 0.0f, object->heading, 0.0f);
                     }
                     if (reinterpret_cast<MotionView *>(object->node->resource)->motion != object->motion) {
                         modelSelectPrimaryMotion(object->node->resource, object->motion, 0.0f);
-                        FUN_0029bb14(object->node->resource, 1.0f);
+                        modelSetScale(object->node->resource, 1.0f);
                     }
                     object->changed = 0;
                 }

@@ -38,7 +38,7 @@ extern FontSlotTable DAT_005b3bc0;
 void asdTextureRelease(AsdTexture *texture);
 void asdMemFree(void *memory);
 void *asdMemoryAlloc(u32 size, u32 alignment, u32 a, u32 count, u32 b);
-void *FUN_00178b04(u32 size, const char *sourceFile, u32 sourceLine);
+void *asdMemoryAllocTraced(u32 size, const char *sourceFile, u32 sourceLine);
 FontReader *initVtable0055c618(void *storage);
 s32 FUN_0015ef04(FontReader *reader, u8 *data);
 AsdTexture *asdTextureCreate(s32 shared);
@@ -78,7 +78,7 @@ u32 FUN_00140e6c(u32 index, u8 *data)
         slot->glyphInfo = NULL;
     }
     slot->data = data;
-    FontReader *reader = (FontReader *)FUN_00178b04(0x18, "c:\\SMT4F\\AsdSDK\\Source\\Gfx\\Font\\AsdFont.cpp", 537);
+    FontReader *reader = (FontReader *)asdMemoryAllocTraced(0x18, "c:\\SMT4F\\AsdSDK\\Source\\Gfx\\Font\\AsdFont.cpp", 537);
 
     if (reader != NULL) {
         reader = initVtable0055c618(reader);

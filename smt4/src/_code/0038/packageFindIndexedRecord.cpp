@@ -6,9 +6,9 @@ extern "C" PackageIndexedRecord *packageFindIndexedRecord(PackageList *packages,
     s32 base = 0;
     for (s32 i = 0; i < packages->count; ++i) {
         PackageEntry *package = &packages->entries[i];
-        if (FUN_002ac12c(package)) {
-            char (*records)[0x40] = FUN_002ac0f8(package);
-            u32 count = FUN_002ac0c4(package);
+        if (packageEntryIsLoaded(package)) {
+            char (*records)[0x40] = packageEntryGetDirectory(package);
+            u32 count = packageEntryGetFileCount(package);
             for (u32 j = 0; j < count; ++j) {
                 if (records[j][0] == 40) {
                     void *table = dataTableFileGetTable(package->files[j].fileId, 0);

@@ -39,7 +39,7 @@ extern "C" {
 extern u8 g_gameState;
 NaviMapBlock *gameGetMapBlock(void);
 s32 FUN_002319c0(void);
-s32 FUN_00231434(u32 group, u32 id, u32 *first, u32 *second, u32 *third, u32 *fourth);
+s32 asdTMTexTableGetEntryPlacement(u32 group, u32 id, u32 *first, u32 *second, u32 *third, u32 *fourth);
 s32 effectForwardModeOne(u32 first, u32 second, u32 third, u32 fourth);
 s32 keyListFindAdjacentKey(NaviWork *work, s32 direction);
 f32 *NaviMain_GetCursorPos(f32 *cursor);
@@ -65,7 +65,7 @@ u32 FUN_0039b648(NaviWork *work)
         u32 second;
         u32 third;
         u32 fourth;
-        FUN_00231434(0x1c, slot + 0xfb5, &first, &second, &third, &fourth);
+        asdTMTexTableGetEntryPlacement(0x1c, slot + 0xfb5, &first, &second, &third, &fourth);
         if (effectForwardModeOne(first, second, third, fourth) == 0 || *(&g_gameState + 0x18) != 0) {
             continue;
         }

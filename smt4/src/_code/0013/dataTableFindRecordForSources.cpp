@@ -33,9 +33,9 @@ typedef struct SourceOwner {
     /* 0x318 */ SourceNode *nodes;
 } SourceOwner;
 
-extern s32 FUN_002ac12c(void);
-extern SourceEntry *FUN_002ac0f8(SourceNode *node);
-extern u32 FUN_002ac0c4(SourceNode *node);
+extern s32 packageEntryIsLoaded(void);
+extern SourceEntry *packageEntryGetDirectory(SourceNode *node);
+extern u32 packageEntryGetFileCount(SourceNode *node);
 extern u32 dataTableFileGetTable(u32 table, u32 index);
 extern DataRecord *dataTableGetEntries(void);
 extern s32 dataTableGetCount(u32 table);
@@ -49,9 +49,9 @@ DataRecord *dataTableFindRecordForSources(SourceOwner *owner, u32 kind, u32 sub)
     for (i = 0; i < owner->nodeCount; i++) {
         SourceNode *node = &owner->nodes[i];
 
-        if (FUN_002ac12c() != 0) {
-            SourceEntry *entries = FUN_002ac0f8(node);
-            u32 count = FUN_002ac0c4(node);
+        if (packageEntryIsLoaded() != 0) {
+            SourceEntry *entries = packageEntryGetDirectory(node);
+            u32 count = packageEntryGetFileCount(node);
             u32 j;
 
             for (j = 0; j < count; j++) {

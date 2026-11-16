@@ -3,7 +3,7 @@
 
 extern "C" f32 jobGetScalarValue(void);
 extern "C" void efctSetSpeed(f32 speed);
-extern "C" void FUN_0017ffa8(u32 first, u32 table, s32 index, u32 second, u32 third, u32 fourth);
+extern "C" void texTableRecordCallWithParams(u32 first, u32 table, s32 index, u32 second, u32 third, u32 fourth);
 
 /* Dispatch an effect selector while temporarily reducing the global effect speed. */
 extern "C" void effectDispatchSelector(u32 kind, u32 first, u32 second, u32 third, f32 speed)
@@ -28,6 +28,6 @@ extern "C" void effectDispatchSelector(u32 kind, u32 first, u32 second, u32 thir
     f32 previousSpeed = jobGetScalarValue();
     if (speed < 1.0f)
         efctSetSpeed(speed);
-    FUN_0017ffa8(2, 11, index, first, second, third);
+    texTableRecordCallWithParams(2, 11, index, first, second, third);
     efctSetSpeed(previousSpeed);
 }

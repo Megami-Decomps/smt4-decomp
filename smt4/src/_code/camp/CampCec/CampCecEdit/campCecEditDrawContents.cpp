@@ -66,9 +66,9 @@ void uiDrawCenteredResourceText(u32 text, void *area, s32 a, s32 b);
 void FUN_001eb874(u32 layer, u32 image, void *area, s32 x, s32 y, s32 flag);
 void FUN_002e15f8(void *area, s32 x, s32 y);
 void renderCtxSelectStereoLayout(RenderCtx *context);
-void FUN_002bed3c(void);
-s32 FUN_002c5d80(u32 mode, u32 option);
-void FUN_002bf380(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 mode);
+void gxResetColorQuadToWhite(void);
+s32 renderCtxPackPassFlags(u32 mode, u32 option);
+void texDrawCompositeSprite(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 mode);
 void uiDrawDirectoryRows(void *list, u32 left, u32 top, s32 firstRow, u32 rowCount, u32 columnWidth);
 void FUN_00309ec8(void *list, s32 a, s32 b, u32 first, u32 second, u32 third, u32 rowHeight, u32 rowCount, s32 visibleRows);
 void FUN_002ec2e0(u32 left, u32 top, u32 rowCount, u32 columnWidth, u32 scrollTop, u32 knob, u32 scrollHeight);
@@ -99,9 +99,9 @@ u32 campCecEditDrawContents(void)
         s32 listY = work->listY;
 
         renderCtxSelectStereoLayout(g_titleScene);
-        FUN_002bed3c();
-        renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
-        FUN_002bf380(2, 0x39, 0x12, listX, listY, 0xB);
+        gxResetColorQuadToWhite();
+        renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
+        texDrawCompositeSprite(2, 0x39, 0x12, listX, listY, 0xB);
         uiDrawDirectoryRows(work->list, work->rowsLeft, work->rowsTop, work->firstRow, work->rowCount, work->columnWidth);
         if (firstRow < 11) {
             firstRow = 11;

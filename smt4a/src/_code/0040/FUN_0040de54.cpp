@@ -50,7 +50,7 @@ int FUN_004f5fb8(...);
 int resourceEnsureCachedObject(...);
 int btlResetMatchingBoundObjects(...);
 int keyedValueFindPair(...);
-int FUN_004fb43c(...);
+int btlQueueActionMessage(...);
 int FUN_004fb798(...);
 int FUN_004fd508(...);
 int FUN_004fe7e4(...);
@@ -281,7 +281,7 @@ extern int FUN_004fa0d8(int);
 /* Supplied declaration required: FUN_004fa5ec. */
 extern int FUN_004fa7bc(int);
 /* Supplied declaration required: keyedValueFindPair. */
-/* Supplied declaration required: FUN_004fb43c. */
+/* Supplied declaration required: btlQueueActionMessage. */
 /* Supplied declaration required: FUN_004fb4fc. */
 /* Supplied declaration required: btlQueueDuplicateSuppressedAction. */
 /* Supplied declaration required: FUN_004fb798. */
@@ -291,7 +291,7 @@ extern int FUN_004fa7bc(int);
 /* Supplied declaration required: FUN_004fe900. */
 /* Supplied declaration required: btlReflectSetValuePair. */
 /* Supplied declaration required: btlReflectRequestPairScalar. */
-extern int FUN_004ffba8(unsigned int);
+extern int animationChannelsAllFinished(unsigned int);
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -1034,14 +1034,14 @@ LAB_0040f258:
            (!((DAT_00571310 & temp_v5) == 0 && (DAT_00571314 & temp_v7) == 0))) {
           temp_v3 = btlScriptUnitHasFlags(temp_v8);
           if (temp_v3 == 0) {
-            FUN_004fb43c(0,*(unsigned int *)(psVar2 + 4),0x1000275,0,1,0,0);
+            btlQueueActionMessage(0,*(unsigned int *)(psVar2 + 4),0x1000275,0,1,0,0);
           }
           FUN_004aa008(g_btlUiBlock,(int)*(short *)((int)puVar6 + 0x6e));
         }
         else if ((temp_v5 & DAT_00571318) != 0 || (temp_v7 & DAT_0057131c) != 0) {
           temp_v3 = btlScriptUnitHasFlags(temp_v8);
           if (temp_v3 == 0) {
-            FUN_004fb43c(0,*(unsigned int *)(psVar2 + 4),0x1000275,0,1,0,0);
+            btlQueueActionMessage(0,*(unsigned int *)(psVar2 + 4),0x1000275,0,1,0,0);
           }
           FUN_003e7fa4(*param_1,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
           FUN_004a9d68(g_btlUiBlock,puVar6);
@@ -1131,7 +1131,7 @@ LAB_0040f258:
       }
       temp_v3 = g_btlAux;
       keyedValueFindPair(g_btlAux,(int)psVar2[0x12]);
-      if ((temp_v3 != 0) && (temp_v3 = FUN_004ffba8(*(unsigned int *)(temp_v3 + 4)), temp_v3 == 0)) {
+      if ((temp_v3 != 0) && (temp_v3 = animationChannelsAllFinished(*(unsigned int *)(temp_v3 + 4)), temp_v3 == 0)) {
         temp_v5 = *(unsigned int *)(*(int *)(psVar2 + 10) + 0x50);
 joined_r0x0040f750:
         if ((temp_v5 & 1) != 0) {
@@ -1280,7 +1280,7 @@ LAB_0040f684:
           FUN_004fb798(0,*(unsigned int *)(psVar2 + 4),0,
                        *(int *)(temp_v3 + 0x1ed4) + (short)puVar6[2] * 0x1d0,0,temp_v12,0xffffffff,
                        0xffffffff,0,0,0,9,0,1,1);
-          FUN_004fb43c(0,*(unsigned int *)(psVar2 + 4),0x1000267,0,1,0,0);
+          btlQueueActionMessage(0,*(unsigned int *)(psVar2 + 4),0x1000267,0,1,0,0);
           btlReflectCreateKind19(0,*(unsigned int *)(psVar2 + 4),(int)*(short *)((int)puVar6 + 0x6e),
                        puVar6[0x56]);
           FUN_004e5f2c(g_btlScriptUnit,temp_v8);
@@ -1365,7 +1365,7 @@ LAB_0040fb78:
     temp_v3 = reinterpret_cast<int>(btlGetMainState());
     temp_v3 = *(int *)(temp_v3 + 0x4cf0);
     if ((0 < temp_v3) || ((temp_v3 == -1 && (temp_v3 = FUN_0047f5b8(), 0 < temp_v3)))) {
-      FUN_004fb43c(0,*(unsigned int *)(psVar2 + 4),temp_v3,0,0,0,0);
+      btlQueueActionMessage(0,*(unsigned int *)(psVar2 + 4),temp_v3,0,0,0,0);
     }
     break;
   case '>':

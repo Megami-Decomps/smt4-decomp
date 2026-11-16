@@ -14,12 +14,12 @@ int textFormatBuffer(unsigned char [128], unsigned char *);
 int wstrBufferPutChar(...);
 int FUN_0014f2a8(...);
 int uiGetTableEntry(...);
-int FUN_0015f858(unsigned int, int);
+int dataFindKindRecordWithAocOverrides(unsigned int, int);
 int dataTable25FindById(int);
 int FUN_001654f0(...);
-int FUN_001654f8(...);
-int FUN_001695a0(void);
-int FUN_00180118(...);
+int textExpandGlyphsToBuffer(...);
+int messageSetScriptDisplayMode(void);
+int dataTable01GetRecordWithAocOverride(...);
 int libc_strcpy(...);
 int sysMemClear(unsigned char [128], int);
 
@@ -50,13 +50,13 @@ extern unsigned int FUN_00156850(unsigned short, unsigned int);
 extern unsigned int FUN_00156868(void);
 extern unsigned int gameGetPlayerName(void);
 extern int saveSlotFindSelected(void);
-/* Supplied declaration required: FUN_0015f858. */
+/* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: dataTable25FindById. */
 /* Supplied declaration required: FUN_001654f0. */
-/* Supplied declaration required: FUN_001654f8. */
+/* Supplied declaration required: textExpandGlyphsToBuffer. */
 /* Supplied declaration required: messageMainSetMode. */
-/* Supplied declaration required: FUN_001695a0. */
-/* Supplied declaration required: FUN_00180118. */
+/* Supplied declaration required: messageSetScriptDisplayMode. */
+/* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: __aeabi_memcpy4. */
@@ -85,7 +85,7 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
     if (param_1 < 0xf875) {
       if (param_1 == 0xf870) {
         dataTable25FindById(*(unsigned short *)(param_2 + *param_4 * 2 + 2));
-        FUN_001654f8();
+        textExpandGlyphsToBuffer();
         *param_4 = *param_4 + 1;
         wstrBufferPutChar(param_3,param_5,0x12f8,param_6);
         temp_v7 = 0;
@@ -104,15 +104,15 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
           return 1;
         case 0xf841:
           temp_v4 = (unsigned int)*(unsigned short *)(param_2 + *param_4 * 2 + 2);
-          FUN_0015f858(temp_v4,1);
+          dataFindKindRecordWithAocOverrides(temp_v4,1);
           libc_strcpy(temp_v9,temp_v4);
           FUN_001654f0(temp_v9,temp_v10);
           FUN_0014f2a8(param_3,param_5,temp_v10,param_6);
           *param_4 = *param_4 + 1;
           return 1;
         case 0xf842:
-          FUN_00180118(*(unsigned short *)(param_2 + *param_4 * 2 + 2));
-          FUN_001654f8();
+          dataTable01GetRecordWithAocOverride(*(unsigned short *)(param_2 + *param_4 * 2 + 2));
+          textExpandGlyphsToBuffer();
           break;
         case 0xf843:
           temp_v0 = *(short *)(param_2 + *param_4 * 2 + 2);
@@ -182,7 +182,7 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
         return 0;
       case 0xf876:
         temp_v5 = FUN_0014bd84(*(unsigned short *)(param_2 + *param_4 * 2 + 2));
-        FUN_001654f8(temp_v5,temp_v9,0);
+        textExpandGlyphsToBuffer(temp_v5,temp_v9,0);
         FUN_0014f2a8(param_3,param_5,temp_v9,param_6);
         break;
       case 0xf877:
@@ -204,7 +204,7 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
         temp_v0 = *(short *)(param_2 + (temp_v7 + 1) * 2);
         wstrBufferPutChar(param_3,param_5,temp_v0,param_6);
         if (temp_v0 == 0) {
-          FUN_001695a0();
+          messageSetScriptDisplayMode();
           return 1;
         }
         temp_v7 = bustupCutAnimSelectSlotsByWorkId(temp_v0);
@@ -256,7 +256,7 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
           return 1;
         }
         temp_v5 = FUN_00156868();
-        FUN_001654f8(temp_v5,temp_v9,0);
+        textExpandGlyphsToBuffer(temp_v5,temp_v9,0);
         FUN_0014f2a8(param_3,param_5,temp_v9,param_6);
         return 1;
       case 0xf87d:
@@ -310,8 +310,8 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
           temp_v9[0] = 0;
         }
         else {
-          FUN_00180118(*(unsigned short *)(temp_v7 + 0x62));
-          FUN_001654f8();
+          dataTable01GetRecordWithAocOverride(*(unsigned short *)(temp_v7 + 0x62));
+          textExpandGlyphsToBuffer();
         }
         FUN_0014f2a8(param_3,param_5,temp_v9,param_6);
         return 1;

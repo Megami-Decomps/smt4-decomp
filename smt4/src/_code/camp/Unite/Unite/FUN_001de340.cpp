@@ -9,7 +9,7 @@ extern "C" {
 
 int statusPanelSetOpen(...);
 int FUN_0029defc(...);
-int FUN_0029f848(...);
+int gridNavigationConfigure(...);
 int FUN_002b7bca(...);
 int devilGetRecord(void);
 int asdMemFree(...);
@@ -86,7 +86,7 @@ extern int FUN_0029dde0(void);
 /* Supplied declaration required: FUN_0029defc. */
 extern int itemGetFlagBit1(unsigned short);
 extern int flagWordTestBit(int, unsigned int);
-/* Supplied declaration required: FUN_0029f848. */
+/* Supplied declaration required: gridNavigationConfigure. */
 extern int gameGetUnitRecord(int);
 extern int gameGetSlotTable(void);
 extern int gameCountUnits(void);
@@ -695,10 +695,10 @@ LAB_001df3cc:
           }
           temp_v18 = 1;
           temp_v17 = 1;
-          FUN_0029f848(temp_v22,*temp_v28,10,1);
+          gridNavigationConfigure(temp_v22,*temp_v28,10,1);
           temp_v18 = 1;
           temp_v17 = 1;
-          FUN_0029f848(temp_v27,*temp_v28,1,4);
+          gridNavigationConfigure(temp_v27,*temp_v28,1,4);
           if (param_1[0x100] != 2) {
             FUN_0029defc((int)(short)temp_v34[0x1e],0);
             statusPanelSetOpen(1);

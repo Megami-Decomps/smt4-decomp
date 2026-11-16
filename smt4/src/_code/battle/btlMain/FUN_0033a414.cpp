@@ -59,7 +59,7 @@ void FUN_0033a414(BtlMainState *state)
         s32 result = FUN_002c40f8(&index, &handle, 1, false, 0);
         bool failed = nnResultIsFailure(result);
         if (failed)
-            FUN_002c526c(result, failed);
+            resultHandleFailure(result, failed);
         if (nnResultDescription(result) == 0x3FE)
             return;
     }
@@ -73,6 +73,6 @@ void FUN_0033a414(BtlMainState *state)
         worker->stack->info.address + worker->stack->info.size, 17, 0, 0);
     bool failed = nnResultIsFailure(result);
     if (failed)
-        FUN_002c526c(result, failed);
+        resultHandleFailure(result, failed);
 }
 }

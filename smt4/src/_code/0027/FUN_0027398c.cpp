@@ -23,7 +23,7 @@ s32 aocPackageGrantsItem(AocSystem *system, u16 id, u32 kind);
 void aocQueueType07(AocSystem *system, u32 id, void **output, u32 flags);
 void aocQueueType08(AocSystem *system, u32 id, void **output, u32 flags);
 void buttonHelpSetPreset(u32 preset);
-ScriptRunState *FUN_00297060(void *commands, void *messages);
+ScriptRunState *scrScriptProcessCreate(void *commands, void *messages);
 void textFormatBuffer(char *output, const char *format, ...);
 u32 tableGroupFindEntryIndex(void *commands, const char *entry);
 void scrScriptProcessStartEntry(ScriptRunState *script, u32 entry);
@@ -72,7 +72,7 @@ u32 FUN_0027398c(QuestAddonScriptWork *work)
             work->state = 3;
         }
         buttonHelpSetPreset(0x90);
-        work->script = FUN_00297060(work->commands, work->messages);
+        work->script = scrScriptProcessCreate(work->commands, work->messages);
         work->script->mode = 2;
         char entryName[128];
         textFormatBuffer(entryName, "e%03d_%02d", definition->package, definition->entry);

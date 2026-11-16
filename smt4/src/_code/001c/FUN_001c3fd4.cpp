@@ -33,7 +33,7 @@ int FUN_0026c464(...);
 int uniteLoadPreviewRoomModel(void);
 int FUN_0028a924(...);
 int FUN_0028d1f4(...);
-int FUN_00295eb0(...);
+int uiStoreTextureEntryCenter(...);
 int gameGlobalsSetSelected(...);
 int FUN_0029bd4c(void);
 int FUN_0029c43c(...);
@@ -67,7 +67,7 @@ int partyPanelHandleCursorEdgeInput(...);
 int FUN_0026d144(...);
 int FUN_0026d3e0(...);
 int pair40Set(...);
-int FUN_0029378c(...);
+int slotPlacementAssignSlotAndPosition(...);
 int menuSetModeAndResetTransitions(...);
 int FUN_0029e890(...);
 int FUN_0029eb5c(...);
@@ -97,13 +97,13 @@ int partyPanelRebuildTouchRegions(void);
 int objClearFlagPair(int);
 int FUN_002937e0(void);
 int messageMainFinishWindow(void);
-int FUN_00297060(unsigned int, unsigned int);
+int scrScriptProcessCreate(unsigned int, unsigned int);
 int FUN_0029acb0(void);
 int gameGetSlotTable(...);
 int ifTouchRegionRemove(void);
 int FUN_002b8ee0(...);
 int timerStart(...);
-int FUN_002bf818(...);
+int uiSpriteAdvanceAnimation(...);
 int __aeabi_memset4(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
@@ -154,21 +154,21 @@ extern unsigned short FUN_00282ccc(void);
 extern unsigned char FUN_00282e70(void);
 /* Supplied declaration required: FUN_0028a924. */
 /* Supplied declaration required: FUN_0028d1f4. */
-extern int FUN_0028fb40(unsigned short);
+extern int flagValueRead(unsigned short);
 /* Supplied declaration required: FUN_00292bcc. */
 /* Supplied declaration required: pair40Set. */
 /* Supplied declaration required: partyPanelToggleRefresh. */
 /* Supplied declaration required: FUN_002932d8. */
 /* Supplied declaration required: partyPanelSetState. */
 /* Supplied declaration required: partyPanelRebuildTouchRegions. */
-/* Supplied declaration required: FUN_0029378c. */
+/* Supplied declaration required: slotPlacementAssignSlotAndPosition. */
 /* Supplied declaration required: objClearFlagPair. */
 /* Supplied declaration required: FUN_002937e0. */
 extern int FUN_0029563c(void);
-/* Supplied declaration required: FUN_00295eb0. */
+/* Supplied declaration required: uiStoreTextureEntryCenter. */
 /* Supplied declaration required: messageMainFinishWindow. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_00297060. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 extern int messageMainGetChoiceResult(void);
 extern int FUN_002987d8(int, unsigned short);
 /* Supplied declaration required: FUN_00298d28. */
@@ -233,7 +233,7 @@ extern int ifTouchGetSelectionMode(void);
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002bf818. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: __aeabi_memset4. */
@@ -286,11 +286,11 @@ unsigned int FUN_001c3fd4(void)
   }
   temp_v4 = gameGetSlotTable(*(int *)(g_partyPanel + 0x1c));
   temp_v24 = 0;
-  FUN_002bf818(temp_v1 + 0x68);
-  FUN_002bf818(temp_v1 + 0xf4);
-  FUN_002bf818(temp_v1 + 0x20c);
+  uiSpriteAdvanceAnimation(temp_v1 + 0x68);
+  uiSpriteAdvanceAnimation(temp_v1 + 0xf4);
+  uiSpriteAdvanceAnimation(temp_v1 + 0x20c);
   temp_v5 = temp_v1 + 0x4c8;
-  FUN_002bf818();
+  uiSpriteAdvanceAnimation();
   FUN_0026dafc(partyPanelPollSelectedStatusColor());
   temp_v6 = *(int *)(temp_v1 + 0x1c);
   if ((((temp_v6 == 0 || temp_v6 == 0x15) || (temp_v6 == 0xe || temp_v6 == 0xd)) ||
@@ -380,7 +380,7 @@ joined_r0x001c43a0:
               }
               if (*(int *)(temp_v1 + 0x14) == 0) {
                 temp_v7 = *(unsigned int *)(temp_v1 + 0x10);
-                FUN_00297060(temp_v7,*(unsigned int *)(temp_v1 + 0xc));
+                scrScriptProcessCreate(temp_v7,*(unsigned int *)(temp_v1 + 0xc));
                 *(unsigned int *)(temp_v1 + 0x14) = temp_v7;
               }
               partyPanelSetState(*(unsigned int *)(temp_v1 + 0x20),1);
@@ -712,13 +712,13 @@ LAB_001c4748:
             }
             temp_v6 = 0;
             do {
-              FUN_0029378c(*(unsigned int *)(temp_v1 + temp_v6 * 4 + 0x6c8),*(unsigned int *)(temp_v1 + 0x2c))
+              slotPlacementAssignSlotAndPosition(*(unsigned int *)(temp_v1 + temp_v6 * 4 + 0x6c8),*(unsigned int *)(temp_v1 + 0x2c))
               ;
               temp_v6 = temp_v6 + 1;
             } while (temp_v6 < 4);
             temp_v6 = 0;
             do {
-              FUN_0029378c(*(unsigned int *)(temp_v1 + temp_v6 * 4 + 0x6d8),*(unsigned int *)(temp_v1 + 0x2c))
+              slotPlacementAssignSlotAndPosition(*(unsigned int *)(temp_v1 + temp_v6 * 4 + 0x6d8),*(unsigned int *)(temp_v1 + 0x2c))
               ;
               temp_v6 = temp_v6 + 1;
             } while (temp_v6 < 0x18);
@@ -1096,13 +1096,13 @@ LAB_001c545c:
               }
               temp_v4 = 0;
               do {
-                FUN_0029378c(*(unsigned int *)(temp_v1 + temp_v4 * 4 + 0x6c8),
+                slotPlacementAssignSlotAndPosition(*(unsigned int *)(temp_v1 + temp_v4 * 4 + 0x6c8),
                              *(unsigned int *)(temp_v1 + 0x2c));
                 temp_v4 = temp_v4 + 1;
               } while (temp_v4 < 4);
               temp_v4 = 0;
               do {
-                FUN_0029378c(*(unsigned int *)(temp_v1 + temp_v4 * 4 + 0x6d8),
+                slotPlacementAssignSlotAndPosition(*(unsigned int *)(temp_v1 + temp_v4 * 4 + 0x6d8),
                              *(unsigned int *)(temp_v1 + 0x2c));
                 temp_v4 = temp_v4 + 1;
               } while (temp_v4 < 0x18);
@@ -2167,8 +2167,8 @@ LAB_001c7700:
     }
 LAB_001c7720:
     if (*(int *)(temp_v1 + 0x18) != 8) {
-      FUN_002bf818();
-      FUN_002bf818(temp_v1 + 0x5e0);
+      uiSpriteAdvanceAnimation();
+      uiSpriteAdvanceAnimation(temp_v1 + 0x5e0);
       if ((*(int *)(temp_v1 + 0x18) >= 0x29) && (*(char *)(temp_v1 + 0x5de) != '\0')) {
         FUN_0017fbc4();
         *(unsigned char *)(temp_v1 + 0x34) = 1;
@@ -2185,15 +2185,15 @@ LAB_001c7720:
         temp_v4 = 0;
       } while (temp_v6 < 0x18);
       if (*(char *)(temp_v1 + 0x42) != '\0') {
-        FUN_00295eb0(temp_v1 + 0x554,0x19,temp_v4 + 0x5b);
-        FUN_00295eb0(temp_v1 + 0x5e0,0x19,temp_v4 + 0x5b);
+        uiStoreTextureEntryCenter(temp_v1 + 0x554,0x19,temp_v4 + 0x5b);
+        uiStoreTextureEntryCenter(temp_v1 + 0x5e0,0x19,temp_v4 + 0x5b);
       }
       else {
         if (temp_v4 >= 0xc) {
           temp_v4 = temp_v4 - 0xc;
         }
-        FUN_00295eb0(temp_v1 + 0x554,0x19,temp_v4 + 0x31);
-        FUN_00295eb0(temp_v1 + 0x5e0,0x19,temp_v4 + 0x31);
+        uiStoreTextureEntryCenter(temp_v1 + 0x554,0x19,temp_v4 + 0x31);
+        uiStoreTextureEntryCenter(temp_v1 + 0x5e0,0x19,temp_v4 + 0x31);
       }
       spriteStartAnimationByIndex((void *)(temp_v1 + 0x554),3);
       spriteStartAnimationByIndex((void *)(temp_v1 + 0x5e0),4);
@@ -2474,7 +2474,7 @@ LAB_001c7c50:
         }
       }
       else {
-        temp_v6 = FUN_0028fb40(*(unsigned short *)(temp_v1 + 0x36));
+        temp_v6 = flagValueRead(*(unsigned short *)(temp_v1 + 0x36));
         if (0 < temp_v6) {
           if (*(char *)(temp_v1 + 0x42) != '\0') {
             temp_v6 = temp_v1 + 0xa6c;
@@ -2578,7 +2578,7 @@ LAB_001c7c50:
         temp_v7 = 10;
       }
       else {
-        temp_v6 = FUN_0028fb40(*(unsigned short *)(temp_v1 + 0x36));
+        temp_v6 = flagValueRead(*(unsigned short *)(temp_v1 + 0x36));
         if (temp_v6 < 1) {
           *(unsigned char *)(temp_v1 + 0x34) = 0;
           FUN_0026d5a4();
@@ -2619,7 +2619,7 @@ LAB_001c7c50:
   case 0x15:
     temp_v6 = 0;
     do {
-      FUN_002bf818(temp_v1 + temp_v6 * 0x8c + 0x298);
+      uiSpriteAdvanceAnimation(temp_v1 + temp_v6 * 0x8c + 0x298);
       temp_v24 = g_partyPanel;
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 4);

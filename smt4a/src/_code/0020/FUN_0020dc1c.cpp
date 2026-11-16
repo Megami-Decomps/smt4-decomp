@@ -9,7 +9,7 @@
 
 extern "C" {
 
-int FUN_001517b4(...);
+int padQueryLogicalKey(...);
 int eventQueueAddUniqueIfValid(...);
 int ifTouchRegionRemove(void);
 int campChangeState(...);
@@ -23,11 +23,11 @@ int sysPlayVoice(...);
 int FUN_004803e4(...);
 int flagValueSub(...);
 
-int FUN_00163aa4(...);
+int uiSpriteAdvanceAnimation(...);
 int sysPlaySe(...);
 int gameGetPlayerData(void);
 int asdTMTexTableEntryAt(...);
-int FUN_00203b40(int, int, int, int);
+int gridNavigationConfigure(int, int, int, int);
 void campSetSpriteAnimationPreset(int, int, int, unsigned int);
 int ifTouchRegionAdd(int, int, int, int);
 int resourceRunOperationIfUnblocked(...);
@@ -68,8 +68,8 @@ typedef struct {
 extern int g_camp; /* 0x57f108 */
 extern unsigned int DAT_0057f10c; /* 0x57f10c */
 
-/* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_00163aa4. */
+/* Supplied declaration required: padQueryLogicalKey. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 extern int ifTouchGetSelectionMode(void);
@@ -77,7 +77,7 @@ extern int ifTouchGetSelectionMode(void);
 /* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_00203b40. */
+/* Supplied declaration required: gridNavigationConfigure. */
 /* Supplied declaration required: campChangeState. */
 /* Supplied declaration required: FUN_00215bd0. */
 /* Supplied declaration required: FUN_0021b274. */
@@ -178,7 +178,7 @@ void FUN_0020dc1c(void)
                 temp_v6 = temp_v4 + 0x32b8;
                 temp_v7 = 1;
                 temp_v8 = 1;
-                FUN_00203b40(temp_v6,temp_v5,temp_v5,1);
+                gridNavigationConfigure(temp_v6,temp_v5,temp_v5,1);
                 flaggedEntrySetValueA(temp_v6,temp_v2);
                 temp_v5 = resourceRunOperationIfUnblocked(temp_v6);
                 temp_v6 = FUN_002a4894(temp_v6);
@@ -208,13 +208,13 @@ void FUN_0020dc1c(void)
 LAB_0020de28:
     temp_v5 = g_camp;
     temp_v6 = widgetSubCallIfVisible(g_camp + 0x40);
-    FUN_00163aa4(temp_v5 + 0x658);
+    uiSpriteAdvanceAnimation(temp_v5 + 0x658);
     if ((*(short *)(temp_v5 + 0x964) != 2) && (*(short *)(temp_v5 + 0x964) != 10)) {
       temp_v3 = 0;
       if (temp_v3 < temp_v6) {
         do {
           if (temp_v3 <= *(int *)(temp_v5 + 0x14) - 1) {
-            FUN_00163aa4(temp_v5 + temp_v3 * 0x8c + 0x914);
+            uiSpriteAdvanceAnimation(temp_v5 + temp_v3 * 0x8c + 0x914);
           }
           temp_v3 = temp_v3 + 1;
         } while (temp_v3 < temp_v6);
@@ -224,7 +224,7 @@ LAB_0020de28:
       temp_v3 = 0;
       while (temp_v6 = temp_v6 - 1, -1 < temp_v6) {
         if (temp_v3 <= *(int *)(temp_v5 + 0x14) - 1) {
-          FUN_00163aa4(temp_v5 + temp_v6 * 0x8c + 0x914);
+          uiSpriteAdvanceAnimation(temp_v5 + temp_v6 * 0x8c + 0x914);
         }
         temp_v3 = temp_v3 + 1;
       }
@@ -289,10 +289,10 @@ LAB_0020de28:
       FUN_00228b04(temp_v3,1);
       if (temp_v6 == 0) {
         temp_v6 = 0;
-        FUN_001517b4(0,1);
+        padQueryLogicalKey(0,1);
         if ((temp_v6 == 0) && (temp_v5 != 6)) {
           temp_v6 = 1;
-          FUN_001517b4();
+          padQueryLogicalKey();
           if (temp_v6 != 0) {
             eventQueueAddUniqueIfValid(0x100020f);
             campSetSpriteAnimationPreset(2,3,0xffffffff,0);
@@ -373,13 +373,13 @@ LAB_0020de28:
     return;
   case 3:
     temp_v6 = widgetSubCallIfVisible(g_camp + 0x40);
-    FUN_00163aa4(temp_v4 + 0x658);
+    uiSpriteAdvanceAnimation(temp_v4 + 0x658);
     if ((*(short *)(temp_v4 + 0x964) != 2) && (*(short *)(temp_v4 + 0x964) != 10)) {
       temp_v5 = 0;
       if (temp_v5 < temp_v6) {
         do {
           if (temp_v5 <= *(int *)(temp_v4 + 0x14) - 1) {
-            FUN_00163aa4(temp_v4 + temp_v5 * 0x8c + 0x914);
+            uiSpriteAdvanceAnimation(temp_v4 + temp_v5 * 0x8c + 0x914);
           }
           temp_v5 = temp_v5 + 1;
         } while (temp_v5 < temp_v6);
@@ -389,7 +389,7 @@ LAB_0020de28:
       temp_v5 = 0;
       while (temp_v6 = temp_v6 - 1, -1 < temp_v6) {
         if (temp_v5 <= *(int *)(temp_v4 + 0x14) - 1) {
-          FUN_00163aa4(temp_v4 + temp_v6 * 0x8c + 0x914);
+          uiSpriteAdvanceAnimation(temp_v4 + temp_v6 * 0x8c + 0x914);
         }
         temp_v5 = temp_v5 + 1;
       }

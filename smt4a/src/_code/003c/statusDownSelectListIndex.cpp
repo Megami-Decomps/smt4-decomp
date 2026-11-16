@@ -14,7 +14,7 @@ typedef struct StatusDown {
 extern StatusDown *g_statusDown; /* 0x588fe8 */
 
 extern int uiSearchPrimary(StatusList *list);
-extern int FUN_002a4964(StatusList *list, int index);
+extern int scrollListSetSelectionTracked(StatusList *list, int index);
 
 /* Selects `index` in the status list, clamped to the number of entries. */
 void statusDownSelectListIndex(int index)
@@ -30,7 +30,7 @@ void statusDownSelectListIndex(int index)
         if (index < 0) {
             index = 0;
         }
-        FUN_002a4964(&status->list, index);
+        scrollListSetSelectionTracked(&status->list, index);
     }
 }
 

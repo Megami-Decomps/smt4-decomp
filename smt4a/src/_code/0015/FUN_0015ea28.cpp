@@ -3,7 +3,7 @@
 
 extern "C" {
 s32 FUN_001748a0(NativeFileReader *reader, const char *path, s32 suppressErrors);
-s32 FUN_00174a00(NativeFileReader *reader, void *data, u32 size, u32 *bytesRead);
+s32 fileHandleRead(NativeFileReader *reader, void *data, u32 size, u32 *bytesRead);
 void FUN_00175750(ArchiveFileHeader *header, const void *data);
 void FUN_001739d4(SoundArchiveDisk *archive, ArchiveFileHeader *header);
 void FUN_001739f8(SoundArchiveDisk *archive, const char *directory);
@@ -22,7 +22,7 @@ u32 FUN_0015ea28(SoundArchiveDisk *archive, const char *path)
         u8 storage[64 + 31];
         void *data = (void *)(((u32)storage + 31) & ~31u);
         u32 bytesRead = 0;
-        if (!FUN_00174a00(&archive->reader, data, 64, &bytesRead)) {
+        if (!fileHandleRead(&archive->reader, data, 64, &bytesRead)) {
             archive->result = archive->reader.result;
             return 0;
         }

@@ -211,7 +211,7 @@ void FUN_003699e4(int param_1)
     param_1 = *(int *)(g_lmapMainState + 0xae4);
   }
   if (g_lmapMainState != 0 && param_1 != 0) {
-    temp_v1 = FUN_00152f54();
+    temp_v1 = asdCameraGetSavedRenderPairs();
     temp_v19 = 0.0f;
     temp_v79[0] = 1.0f;
     temp_v79[1] = 1.0f;

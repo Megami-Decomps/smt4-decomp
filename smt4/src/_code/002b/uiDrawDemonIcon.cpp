@@ -44,19 +44,19 @@ void drawSetColorFromRGBA8(u32 color);
 void effectSubmitPackageRequest(AocSystem* system, u32 image, s32 x, s32 y, u32 style);
 void FUN_002b04e8(s32 layer, u32 group, u32 image, s32 x, s32 y, u32 style,
                   const DemonIconRect* region);
-void FUN_002bed3c(void);
+void gxResetColorQuadToWhite(void);
 
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight)
 {
     if ((s32)demon < 0) {
-        FUN_002bf288(2, 0x25, 1000, x, y, style);
+        texDrawTableEntryAtStoredOrigin(2, 0x25, 1000, x, y, style);
         return;
     }
 
     const DemonIconRecord* record = (const DemonIconRecord*)devilGetRecord((u16)demon);
     const DemonIconDefinition* definition = reinterpret_cast<const DemonIconDefinition*>(dataTable00FindById((u16)demon));
     if ((definition->flags & 1) != 0) {
-        FUN_002bf288(2, 0x25, 2000, x, y, style);
+        texDrawTableEntryAtStoredOrigin(2, 0x25, 2000, x, y, style);
         return;
     }
 
@@ -88,7 +88,7 @@ void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight)
         }
     }
     if (highlight != 0) {
-        FUN_002bed3c();
+        gxResetColorQuadToWhite();
     }
 }
 }

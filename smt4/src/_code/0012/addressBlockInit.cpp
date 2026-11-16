@@ -30,7 +30,7 @@ void addressBlockInit(AddressBlock *block, u32 size)
     block->mapped = 0;
     if (g_nnosAddressSpaceInitialized != 0) {
         if (nn_os_AddressSpaceManager_Allocate(&g_nnosAddressSpaceManager, block, (size + 0xfff) & 0xfffff000, 0) == 0) {
-            FUN_002c526c(0xd8601837);
+            resultHandleFailure(0xd8601837);
         }
         block->mapped = 0;
     }

@@ -6,17 +6,17 @@
 extern "C" {
 
 int FUN_001a79e8(...);
-int FUN_003fd7c0(...);
+int moriModelUnitStartMaterialAnimation(...);
 int handleRegistryRegisterObject(...);
 
 int asdOperatorNew(void);
-int FUN_00178b04(...);
+int asdMemoryAllocTraced(...);
 int FUN_003478dc(unsigned int, char *);
 int textureCachePollReady(void);
 int pairSourceGet(unsigned int, unsigned int *, int);
 int FUN_003d8f24(unsigned int);
 int FUN_003fd924(...);
-int FUN_0040619c(...);
+int ptrVectorAt(...);
 int FUN_0040a884(void);
 int attachmentsSetOffset(unsigned int, float *);
 int FUN_00420f08(...);
@@ -28,7 +28,7 @@ int FUN_004fa15c(int);
 void btlUpdateAttackAnimation(BtlAuxA *);
 int FUN_004fa414(...);
 int FUN_004fa64c(int);
-int FUN_004fb43c(...);
+int btlQueueActionMessage(...);
 int ownerSlotSetText(...);
 int __aeabi_memcpy4(float *, int, int);
 
@@ -45,7 +45,7 @@ extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_btlStageModel; /* 0x57a4f8 */
 
 /* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: FUN_00178b04. */
+/* Supplied declaration required: asdMemoryAllocTraced. */
 /* Supplied declaration required: FUN_001a79e8. */
 extern int rangeIsValid(void);
 extern unsigned int keyedRecordRegisterName(int);
@@ -54,10 +54,10 @@ extern unsigned int keyedRecordRegisterName(int);
 extern int FUN_003c5d8c(void);
 /* Supplied declaration required: pairSourceGet. */
 /* Supplied declaration required: FUN_003d8f24. */
-/* Supplied declaration required: FUN_003fd7c0. */
+/* Supplied declaration required: moriModelUnitStartMaterialAnimation. */
 /* Supplied declaration required: FUN_003fd924. */
 extern unsigned int FUN_003fdadc(void);
-/* Supplied declaration required: FUN_0040619c. */
+/* Supplied declaration required: ptrVectorAt. */
 /* Supplied declaration required: FUN_0040a884. */
 extern unsigned int modelListInit(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
@@ -71,7 +71,7 @@ extern unsigned int _ZN9Obj4209ccC1Ev(void);
 /* Supplied declaration required: FUN_004fa15c. */
 /* Supplied declaration required: FUN_004fa414. */
 /* Supplied declaration required: FUN_004fa64c. */
-/* Supplied declaration required: FUN_004fb43c. */
+/* Supplied declaration required: btlQueueActionMessage. */
 /* Supplied declaration required: ownerSlotSetText. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
@@ -236,10 +236,10 @@ void FUN_004f65d4(int param_1)
     temp_v11 = 0.0f;
     temp_v12 = 0;
     if (!(temp_v1 == 0xf || temp_v1 == 0x10)) {
-      FUN_004fb43c(0,0,0x1000133,0);
+      btlQueueActionMessage(0,0,0x1000133,0);
     }
     else {
-      FUN_004fb43c(0,0,0x1000131,0);
+      btlQueueActionMessage(0,0,0x1000131,0);
     }
     break;
   case 8:
@@ -262,10 +262,10 @@ void FUN_004f65d4(int param_1)
     temp_v11 = 0.0f;
     temp_v12 = 0;
     if (!(temp_v1 == 0xf || temp_v1 == 0x10)) {
-      FUN_004fb43c(0,0,0x1000134,0);
+      btlQueueActionMessage(0,0,0x1000134,0);
     }
     else {
-      FUN_004fb43c(0,0,0x1000132,0);
+      btlQueueActionMessage(0,0,0x1000132,0);
     }
     break;
   case 0xc:
@@ -282,7 +282,7 @@ code_r0x0042138c:
   case 1:
     if (*(int *)(temp_v4 + 0x24) != 0) {
       temp_v5 = 0x20;
-      FUN_00178b04(0x20,
+      asdMemoryAllocTraced(0x20,
                    "c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\EnemyDraw\\DeadEffectModelChange.cpp",
                    0x451);
       temp_v9 = 0;
@@ -296,7 +296,7 @@ code_r0x0042138c:
       if (0 < temp_v6) {
         do {
           temp_v2 = *(int *)(*(int *)(temp_v4 + 8) + 8);
-          FUN_0040619c(temp_v2,temp_v5);
+          ptrVectorAt(temp_v2,temp_v5);
           if (temp_v2 != 0) {
             temp_v9 = FUN_003fdadc();
             temp_v3 = temp_v2;
@@ -307,7 +307,7 @@ code_r0x0042138c:
             temp_v3 = temp_v2;
             FUN_001a79e8(temp_v2,temp_v9);
             if (temp_v3 != 0xffff) {
-              FUN_003fd7c0(temp_v2,temp_v3,2);
+              moriModelUnitStartMaterialAnimation(temp_v2,temp_v3,2);
             }
             handleRegistryRegisterObject(g_handleRegistry,temp_v2);
           }
@@ -320,7 +320,7 @@ code_r0x0042138c:
         if (0 < temp_v6) {
           do {
             temp_v2 = *(int *)(*(int *)(temp_v4 + 8) + 8);
-            FUN_0040619c(temp_v2,temp_v5);
+            ptrVectorAt(temp_v2,temp_v5);
             if (temp_v2 != 0) {
               *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 4) | 3;
             }

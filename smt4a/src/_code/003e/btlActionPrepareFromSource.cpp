@@ -33,7 +33,7 @@ struct ActionPreparationMasks {
 extern "C" {
 extern ActionPreparationMasks g_btlMain;
 void drawObjectInitialize(PreparedBattleAction *, s32, s32, s32, s32, s32);
-u32 FUN_004bb80c(s32);
+u32 dataTable02GetRecordWithAocPackage(s32);
 void FUN_004bb9c0(PreparedBattleAction *, u32);
 void aocGetTableRecordOrFallback(s32);
 void FUN_004bbc4c(PreparedBattleAction *, s32, s32, s32);
@@ -55,7 +55,7 @@ void btlActionPrepareFromSource(BattleActionSource *source, PreparedBattleAction
     }
     if (actionId >= 0) {
         if (source->first < 0 || source->second < 0) {
-            FUN_004bb9c0(action, FUN_004bb80c(actionId));
+            FUN_004bb9c0(action, dataTable02GetRecordWithAocPackage(actionId));
         } else {
             drawObjectInitialize(action, actionId, source->first, source->second,
                          (s8)source->variation, (s8)source->target);

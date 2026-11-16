@@ -16,6 +16,6 @@ u32 FUN_0027dbc8(u32 request, u8 value)
     }
     s32 mode = -1;
     u32 target = state->dialog.messageHandle;
-    return (u32)FUN_0022a4ac(0, 0, request, target, NULL, value, mode);
+    return (u32)btlHelpEntryCreate(0, 0, request, target, NULL, value, mode);
 }
 }

@@ -33,9 +33,9 @@ void FUN_003f6e24(MenuLayerComposition *owner, s32 y, u32 color, f32 alpha)
     vec2GetSpeed(&owner->background);
     y += (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
     efctSetSpeed(alpha);
-    FUN_001835b4(2, 0x31, 0, y, color, 0x8D);
-    FUN_001835b4(2, 0x31, 1, y, color, 0x8D);
-    FUN_001835b4(2, 0x31, 9, y, color, 0x8D);
+    texDrawTableEntryAtStoredOrigin(2, 0x31, 0, y, color, 0x8D);
+    texDrawTableEntryAtStoredOrigin(2, 0x31, 1, y, color, 0x8D);
+    texDrawTableEntryAtStoredOrigin(2, 0x31, 9, y, color, 0x8D);
     s32 x = vec2GetXInt(&owner->position);
     s32 positionY = vec2GetYInt(&owner->position);
     f32 contentAlpha = vec2GetSpeed(&owner->position);

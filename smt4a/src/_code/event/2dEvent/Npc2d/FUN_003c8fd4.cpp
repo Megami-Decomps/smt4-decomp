@@ -74,8 +74,8 @@ u32 FUN_003c8fd4(u32 id)
     work->y = (s32)work->points[1].y;
     if (!FUN_00162ea4()) {
         work->resourceState = 0;
-        FUN_0014afd0(work->table, work->node);
-        FUN_0014afd0(0x27, 0);
+        asdTMTexTablePrepareNodeImage(work->table, work->node);
+        asdTMTexTablePrepareNodeImage(0x27, 0);
     } else {
         work->resourceState = 1;
     }

@@ -14,7 +14,7 @@ void messageMainSetTargetFlags(s32 flags);
 void gameClearUnlockedSavedId(u32 id);
 void buttonHelpSetPreset(s32 preset);
 void FUN_002b8ee0(void *vec, s32 value);
-void FUN_002bf818(void *vec);
+void uiSpriteAdvanceAnimation(void *vec);
 void statusOpenSkillSelection(u16 skill, s32 mode);
 u32 statusDownGetValue(void);
 s32 statusScreenIsClosed(void);
@@ -80,7 +80,7 @@ void Obj422448::FUN_003ab128()
         break;
     case 2: {
         StatusCursor *cursor = &flow->cursorB;
-        FUN_002bf818(cursor);
+        uiSpriteAdvanceAnimation(cursor);
         pointConvertToFloat(flow->pointer, vec2GetXInt(cursor), vec2GetYInt(cursor));
         if (uiSpriteGetCompletionState(cursor) != 0) {
             flow->state++;

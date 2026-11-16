@@ -174,7 +174,7 @@ code_r0x004f4c54:
     if (iVar4 == 0) {
       uVar2 = param_1[3];
       iVar10 = *(int *)(param_2 + 0x1ed4) + *(short *)(param_1 + 4) * 0x1d0;
-      FUN_001568f8(param_2);
+      btlFindEntryBlockByMemberId(param_2);
       iVar4 = func_0x003f11ac(param_2,(int)*(short *)(param_1 + 4));
       puVar6 = (unsigned int *)FUN_00340ec8(uVar2,1);
       *(unsigned int *)(iVar10 + 0xc) = *puVar6;

@@ -9,7 +9,7 @@
 struct CompendiumPreviewHandle { u8 prefix[0x108]; s32 mode; };
 extern "C" {
 s32 utilityReturnSuccess(const void *input);
-CompendiumPreviewHandle *FUN_00297060(u32 first, u32 second);
+CompendiumPreviewHandle *scrScriptProcessCreate(u32 first, u32 second);
 void buttonHelpSetPreset(u32 preset);
 void *partyMemberFindById(u16 id);
 void FUN_0029da34(s32 screen, s32 enabled, u16 id, void *unit);
@@ -46,7 +46,7 @@ void Obj4223c4::FUN_003a76b8()
         __INTADDR__(&((DetailView *)0)->entries) == 0x5a8 ? 1 : -1];
     DetailView *state = reinterpret_cast<DetailView *>(view);
     if (view->isScreenReady() != 0 && utilityReturnSuccess(state->input) == 0) {
-        CompendiumPreviewHandle *preview = FUN_00297060(state->handleA, state->handleB);
+        CompendiumPreviewHandle *preview = scrScriptProcessCreate(state->handleA, state->handleB);
         state->preview = preview;
         preview->mode = 2;
         state->phase = 1;

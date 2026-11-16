@@ -5,7 +5,7 @@
 extern "C" {
 
 
-/* Starts the battle message FUN_0022a4ac for `id` unless battle flags 0x40 or 0x100 are set; returns 0 when skipped. */
+/* Starts the battle message btlHelpEntryCreate for `id` unless battle flags 0x40 or 0x100 are set; returns 0 when skipped. */
 s32 btlMessageStartUnlessFlagged(s32 id, s32 arg)
 {
     BtlMainState *battle = btlGetMainState();
@@ -22,7 +22,7 @@ s32 btlMessageStartUnlessFlagged(s32 id, s32 arg)
     if (arg != 0) {
         mode = 13;
     }
-    return (s32)FUN_0022a4ac(2, (s16)id, 0, 0, (const void *)arg, 0, mode);
+    return (s32)btlHelpEntryCreate(2, (s16)id, 0, 0, (const void *)arg, 0, mode);
 }
 
 } /* extern "C" */

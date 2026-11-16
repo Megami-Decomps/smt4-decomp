@@ -1,4 +1,4 @@
-/* Refreshes the active group surface for the current movie surface mode (0 or 1) once FUN_002c5210 reports ready. */
+/* Refreshes the active group surface for the current movie surface mode (0 or 1) once gxIsStereoscopic3dEnabled reports ready. */
 #include "common.h"
 
 extern "C" {
@@ -9,12 +9,12 @@ struct TitleSceneMode {
 
 extern TitleSceneMode *g_titleScene;
 extern u8 DAT_004c3a50;
-s32 FUN_002c5210(void);
+s32 gxIsStereoscopic3dEnabled(void);
 void asdGxUpdateActiveGroupSurface(void *group, u32 index);
 
 void FUN_0032accc(void)
 {
-    if (FUN_002c5210() == 1) {
+    if (gxIsStereoscopic3dEnabled() == 1) {
         s32 mode = g_titleScene->surfaceMode;
 
         if (mode == 0) {

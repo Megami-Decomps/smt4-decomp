@@ -18,7 +18,7 @@ static inline s32 findBattleMemberPart(const BtlEntry *entry, s16 id)
 
 extern "C" {
 struct BattleAnchorSource { u16 flags; u16 id; u32 unk04; u32 unk08; u32 parts[50]; };
-BattleAnchorSource *FUN_0027da30(BtlMainState *state, s32 index);
+BattleAnchorSource *btlFindEntryBlockByMemberId(BtlMainState *state, s32 index);
 BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 member);
 const BattleVector3 *FUN_002d8cc8(void *arrangement);
 Table00Record *dataTable00FindById(u32 id);
@@ -40,8 +40,8 @@ BattleVector3 FUN_0024d434(BtlMainState *state, s32 index, s32 forceEnemy)
         s32 part = entry != NULL ? findBattleMemberPart(entry, action->memberId) : -1;
         if (part < 0)
             part = 0;
-        BattleAnchorSource *source = FUN_0027da30(state, index);
-        const EnemyDrawOffsetOwner *owner = reinterpret_cast<const EnemyDrawOffsetOwner *>(FUN_0027d9e8(state, source->parts[part]));
+        BattleAnchorSource *source = btlFindEntryBlockByMemberId(state, index);
+        const EnemyDrawOffsetOwner *owner = reinterpret_cast<const EnemyDrawOffsetOwner *>(idSlotsFindEntryById(state, source->parts[part]));
         ActionAnchorView *anchor = (ActionAnchorView *)action;
         btlEnemyDrawCalcVerticalOffset(owner, &position, anchor->scale);
         position.x += anchor->position.x;
@@ -51,7 +51,7 @@ BattleVector3 FUN_0024d434(BtlMainState *state, s32 index, s32 forceEnemy)
         struct ArrangementView { u8 prefix[0x1E88]; void *arrangement; };
         position = *FUN_002d8cc8(((ArrangementView *)state)->arrangement);
         position.z += 2.0f;
-        BattleAnchorSource *source = FUN_0027da30(state, index);
+        BattleAnchorSource *source = btlFindEntryBlockByMemberId(state, index);
         u8 kind = dataTable00FindById(source->id)->arrangement.first;
         f32 height = 0.0f;
         switch (kind) {

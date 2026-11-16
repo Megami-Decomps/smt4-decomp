@@ -12,7 +12,7 @@ struct TableEntryView {
 
 extern "C" {
 extern const TableEntryView DAT_0043988c[3];
-s32 FUN_002505c0(u32 index, u32 argument, u32 entryValue, u32 flag,
+s32 btlQueueKeyedScalarReflectAction(u32 index, u32 argument, u32 entryValue, u32 flag,
                  u32 unkStack0, u32 unkStack4, u32 unkStack8);
 
 static __inline const TableEntryView* findFallbackEntry(u32 id)
@@ -34,7 +34,7 @@ u32 FUN_00394a80(u32 id, u32 argument, s32 indexOffset)
     if (jyoucyuGetTableEntry(1) == 0) {
         const TableEntryView* entry = findFallbackEntry(id);
         if (entry != 0 && entry->unk08 != 0) {
-            FUN_002505c0(entry->unk0C + indexOffset, argument, entry->unk08, 1, 0, 0, 0);
+            btlQueueKeyedScalarReflectAction(entry->unk0C + indexOffset, argument, entry->unk08, 1, 0, 0, 0);
         }
     }
     return 0;

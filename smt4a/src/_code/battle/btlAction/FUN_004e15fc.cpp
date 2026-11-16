@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001568f8(...);
+int btlFindEntryBlockByMemberId(...);
 
 int dataTable04FindById(int);
 int sysMemClear(int *, int);
@@ -46,7 +46,7 @@ extern unsigned int DAT_0057123c; /* 0x57123c */
 extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 extern unsigned int DAT_0057aa1c; /* 0x57aa1c */
 
-/* Supplied declaration required: FUN_001568f8. */
+/* Supplied declaration required: btlFindEntryBlockByMemberId. */
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: dataTable04FindById. */
 extern int FUN_002a7410(void);
@@ -371,7 +371,7 @@ int FUN_004e15fc(int *param_1,unsigned int *param_2)
         *(unsigned int *)(temp_v11 + temp_v15) = *(unsigned int *)(temp_v11 + temp_v16);
         if (temp_v13 == 0) {
           temp_v11 = *param_1;
-          FUN_001568f8(temp_v11,(int)*(short *)(*(int *)(temp_v11 + 0x1ed4) + temp_v3 * 0x1d0 + 0x6a));
+          btlFindEntryBlockByMemberId(temp_v11,(int)*(short *)(*(int *)(temp_v11 + 0x1ed4) + temp_v3 * 0x1d0 + 0x6a));
           if ((temp_v11 != 0) && ((*(unsigned short *)(temp_v11 + 0x110) & 0x10) == 0)) {
             *(unsigned int *)(*(int *)(*param_1 + 0x1ed4) + temp_v15) = 0x4c4c4cff;
             temp_v3 = temp_v3 + 1;

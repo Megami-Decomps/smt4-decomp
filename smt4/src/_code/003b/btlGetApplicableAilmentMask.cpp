@@ -9,7 +9,7 @@ struct ItemAilmentView { u8 prefix[0x6A]; u8 effect; };
 }
 extern "C" {
 const ItemAilmentView *dataTable08Sub1GetRecord(u32 id);
-BtlUnitData *FUN_0027da30(BtlMainState *state, s32 index);
+BtlUnitData *btlFindEntryBlockByMemberId(BtlMainState *state, s32 index);
 PartyDamageUnitIV *gameGetUnitRecord(s32 index);
 
 // Return the complete affected ailment group when the target has at least one matching ailment.
@@ -37,7 +37,7 @@ u32 btlGetApplicableAilmentMask(u32 skillId, u32 itemId, u32 unused, s32 target)
         default: mask = 1u << kind; break;
         }
         if (target < 0x6D) {
-            const BtlUnitData *unit = FUN_0027da30(btlGetMainState(), target);
+            const BtlUnitData *unit = btlFindEntryBlockByMemberId(btlGetMainState(), target);
             if ((unit->unk0FA & mask) != 0)
                 return mask;
         } else {

@@ -24,7 +24,7 @@ extern InfoWindowDrawState *g_infoWin;
 extern RenderCtx *g_titleScene;
 
 void renderCtxSelectStereoLayout(RenderCtx *context);
-s32 FUN_002c5d80(u32 preset, u32 index);
+s32 renderCtxPackPassFlags(u32 preset, u32 index);
 s32 vec2GetXInt(const void *position);
 s32 vec2GetYInt(const void *position);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 scale);
@@ -51,11 +51,11 @@ s32 infoWinDraw(u32 job)
         return 0;
     }
     renderCtxSelectStereoLayout(g_titleScene);
-    renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
+    renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
     s32 x = vec2GetXInt(&window->transition) + (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.27f);
     s32 y = vec2GetYInt(&window->transition);
-    FUN_002bf288(2, 14, 135, x, y, 21);
-    FUN_002bf288(2, 14, 136, x, y, 21);
+    texDrawTableEntryAtStoredOrigin(2, 14, 135, x, y, 21);
+    texDrawTableEntryAtStoredOrigin(2, 14, 136, x, y, 21);
     if (window->framed != 0) {
         InfoWindowSprite *frame = (InfoWindowSprite *)asdTMTexTableEntryAt(14, 135);
         FUN_002b659c(frame->x + x, frame->y + y, frame->size[0], frame->size[1]);
@@ -70,8 +70,8 @@ s32 infoWinDraw(u32 job)
         }
         FUN_002b64b8();
     }
-    FUN_002bf288(2, 14, 134, x, y, 31);
-    FUN_002bf288(2, 14, 258, x, y, 31);
+    texDrawTableEntryAtStoredOrigin(2, 14, 134, x, y, 31);
+    texDrawTableEntryAtStoredOrigin(2, 14, 258, x, y, 31);
     renderStackPop(&g_titleScene->stackA);
     return 0;
 }

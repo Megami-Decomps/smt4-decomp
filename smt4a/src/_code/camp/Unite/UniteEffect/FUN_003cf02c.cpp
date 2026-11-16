@@ -11,7 +11,7 @@ extern "C" {
 int asdMemFree(...);
 int scrScriptProcessDestroy(...);
 int slotSetRequest(...);
-int FUN_003180c4(...);
+int scrSetStringSlot(...);
 int btlTalkBustUpSetDemonTexture(...);
 int btlTalkBustUpReleaseTexture(void);
 int btlTalkBustUpSetUnk2F4(...);
@@ -20,9 +20,9 @@ int soundChannelStopAll(...);
 int workOwnerRelease(...);
 int resourceReleaseReference(...);
 
-int FUN_001517b4(...);
+int padQueryLogicalKey(...);
 int sysPlaySe(...);
-int FUN_00180118(...);
+int dataTable01GetRecordWithAocOverride(...);
 int ptrListRemoveClearOwner(...);
 int FUN_001fc348(...);
 int FUN_0022677c(...);
@@ -35,9 +35,9 @@ int FUN_0040c190(...);
 int candidateGetPreferredValue(...);
 
 int asdLoadFileWithSize(...);
-int FUN_00163aa4(...);
+int uiSpriteAdvanceAnimation(...);
 int FUN_00167458(int, int);
-int FUN_00178b04(...);
+int asdMemoryAllocTraced(...);
 int FUN_0019eb14(void);
 int uniteCameraInitialize(...);
 int FUN_002c8894(void);
@@ -45,8 +45,8 @@ int sysPlayVoice(...);
 int soundChannelRequestIfEnabled(int, int, int);
 int FUN_003d54f8(...);
 int _ZN9Obj557af8C1EPK21AsdAnimCameraResource(void);
-int FUN_003fe86c(...);
-int FUN_0040aa6c(...);
+int modelPlayClip(...);
+int resourceOwnerLoadFileSync(...);
 int FUN_0040aad4(...);
 int FUN_0040ab7c(...);
 int handleRegistryRegisterObject(...);
@@ -81,12 +81,12 @@ extern int DAT_0057f2c4; /* 0x57f2c4 */
 #endif
 /* Supplied declaration required: asdLoadFileWithSize. */
 extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_00163aa4. */
+/* Supplied declaration required: padQueryLogicalKey. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: FUN_00167458. */
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_00180118. */
+/* Supplied declaration required: asdMemoryAllocTraced. */
+/* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
@@ -101,7 +101,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_002c8894. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: uniteCameraDestroy. */
-/* Supplied declaration required: FUN_003180c4. */
+/* Supplied declaration required: scrSetStringSlot. */
 /* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 /* Supplied declaration required: btlTalkBustUpReleaseTexture. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
@@ -113,10 +113,10 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: _ZN9Obj557af8C1EPK21AsdAnimCameraResource. */
-/* Supplied declaration required: FUN_003fe86c. */
+/* Supplied declaration required: modelPlayClip. */
 /* Supplied declaration required: workOwnerRelease. */
 /* Supplied declaration required: resourceReleaseReference. */
-/* Supplied declaration required: FUN_0040aa6c. */
+/* Supplied declaration required: resourceOwnerLoadFileSync. */
 /* Supplied declaration required: FUN_0040aad4. */
 /* Supplied declaration required: FUN_0040ab7c. */
 extern unsigned int modelListInit(void);
@@ -124,7 +124,7 @@ extern unsigned int modelListInit(void);
 /* Supplied declaration required: FUN_0040c190. */
 /* Supplied declaration required: asdAnimGetTrackLastFrame. */
 /* Supplied declaration required: candidateGetPreferredValue. */
-extern int FUN_004ffba8(unsigned int);
+extern int animationChannelsAllFinished(unsigned int);
 /* Supplied declaration required: __aeabi_idivmod. */
 
 
@@ -160,7 +160,7 @@ unsigned int FUN_003cf02c(void)
   temp_v2 = DAT_0057f2c4;
   temp_v16 = 1.0f;
   temp_v18 = 0x3f800000;
-  FUN_00163aa4(DAT_0057f2c4 + 0x964);
+  uiSpriteAdvanceAnimation(DAT_0057f2c4 + 0x964);
   *(int *)(temp_v2 + 0x88) = *(int *)(temp_v2 + 0x88) + 2;
   asdAnimGetTrackLastFrame(*(unsigned int *)(temp_v2 + 0x8c),0);
   temp_v16 = (float)(int)temp_v16;
@@ -207,13 +207,13 @@ unsigned int FUN_003cf02c(void)
       temp_v16 = (float)((unsigned long long)temp_v15 >> 0x20);
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 5);
-    FUN_00163aa4(temp_v2 + 0x8d8);
+    uiSpriteAdvanceAnimation(temp_v2 + 0x8d8);
     temp_v6 = FUN_00163e84(0);
     if (((temp_v6 != 0) && (temp_v6 = FUN_00163e84(1), temp_v6 != 0)) &&
        (*(char *)(temp_v2 + 0x61a) != '\0')) {
       temp_v6 = *(int *)(*(int *)(temp_v2 + 0x90) + 4);
       handleRegistryRegisterObject(g_handleRegistry,temp_v6);
-      FUN_003fe86c(temp_v6,0,2);
+      modelPlayClip(temp_v6,0,2);
       *(unsigned int *)(temp_v6 + 4) = *(unsigned int *)(temp_v6 + 4) & 0xfffffffc;
       temp_v6 = *(int *)(temp_v2 + 0x98);
       temp_v12 = *(short *)(*(int *)(temp_v6 + 0x34) + 0x94) != 0;
@@ -299,7 +299,7 @@ unsigned int FUN_003cf02c(void)
             else {
               temp_v16 = (float)temp_v18;
               *(unsigned int *)(temp_v6 + temp_v9 * 4 + 100) = 0;
-              FUN_00163aa4(temp_v6 + temp_v9 * 0x8c + 0x6a8);
+              uiSpriteAdvanceAnimation(temp_v6 + temp_v9 * 0x8c + 0x6a8);
             }
           }
         }
@@ -315,12 +315,12 @@ unsigned int FUN_003cf02c(void)
       }
       FUN_002c8894();
     }
-    temp_v6 = FUN_004ffba8(*(unsigned int *)(*(int *)(temp_v2 + 0x90) + 4));
+    temp_v6 = animationChannelsAllFinished(*(unsigned int *)(*(int *)(temp_v2 + 0x90) + 4));
     if (temp_v6 != 0) {
       temp_v10 = *(int *)(*(int *)(temp_v2 + 0x90) + 4);
       *(unsigned int *)(temp_v10 + 4) = *(unsigned int *)(temp_v10 + 4) | 1;
       temp_v6 = 0x20;
-      FUN_00178b04(0x20,&LAB_003cf760,0x300);
+      asdMemoryAllocTraced(0x20,&LAB_003cf760,0x300);
       temp_v5 = 0;
       if (temp_v6 != 0) {
         temp_v5 = modelListInit();
@@ -328,20 +328,20 @@ unsigned int FUN_003cf02c(void)
       *(unsigned int *)(temp_v2 + 0x94) = temp_v5;
       if (*(short *)(temp_v2 + 0x1e) == 2) {
         if (*(char *)(temp_v2 + 0x20) != '\0') {
-          FUN_0040aa6c();
+          resourceOwnerLoadFileSync();
           FUN_0040ab7c(*(unsigned int *)(temp_v2 + 0x94),0);
           FUN_0040aad4(*(unsigned int *)(temp_v2 + 0x94),0);
           asdLoadFileWithSize(&LAB_003cf7b8,temp_v17,1);
           temp_v6 = 0x48;
-          FUN_00178b04(0x48,&LAB_003cf760,0x309);
+          asdMemoryAllocTraced(0x48,&LAB_003cf760,0x309);
         }
         else {
-          FUN_0040aa6c();
+          resourceOwnerLoadFileSync();
           FUN_0040ab7c(*(unsigned int *)(temp_v2 + 0x94),0);
           FUN_0040aad4(*(unsigned int *)(temp_v2 + 0x94),0);
           asdLoadFileWithSize(&LAB_003cf7f8,temp_v17,1);
           temp_v6 = 0x48;
-          FUN_00178b04(0x48,&LAB_003cf760,0x310);
+          asdMemoryAllocTraced(0x48,&LAB_003cf760,0x310);
         }
         if (temp_v6 != 0) {
           _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
@@ -349,24 +349,24 @@ unsigned int FUN_003cf02c(void)
         *(int *)(temp_v2 + 0x9c) = temp_v6;
       }
       if (*(short *)(temp_v2 + 0x1e) == 3) {
-        FUN_0040aa6c(*(unsigned int *)(temp_v2 + 0x94),&LAB_003cf814);
+        resourceOwnerLoadFileSync(*(unsigned int *)(temp_v2 + 0x94),&LAB_003cf814);
         FUN_0040ab7c(*(unsigned int *)(temp_v2 + 0x94),0);
         FUN_0040aad4(*(unsigned int *)(temp_v2 + 0x94),0);
         asdLoadFileWithSize(&LAB_003cf830,temp_v17,1);
         temp_v6 = 0x48;
-        FUN_00178b04(0x48,&LAB_003cf760,0x319);
+        asdMemoryAllocTraced(0x48,&LAB_003cf760,0x319);
         if (temp_v6 != 0) {
           _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
         }
         *(int *)(temp_v2 + 0x9c) = temp_v6;
       }
       if (*(short *)(temp_v2 + 0x1e) == 4) {
-        FUN_0040aa6c(*(unsigned int *)(temp_v2 + 0x94),&LAB_003cf850);
+        resourceOwnerLoadFileSync(*(unsigned int *)(temp_v2 + 0x94),&LAB_003cf850);
         FUN_0040ab7c(*(unsigned int *)(temp_v2 + 0x94),0);
         FUN_0040aad4(*(unsigned int *)(temp_v2 + 0x94),0);
         asdLoadFileWithSize(&LAB_003cf86c,temp_v17,1);
         temp_v6 = 0x48;
-        FUN_00178b04(0x48,&LAB_003cf760,0x321);
+        asdMemoryAllocTraced(0x48,&LAB_003cf760,0x321);
         if (temp_v6 != 0) {
           _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
         }
@@ -379,7 +379,7 @@ unsigned int FUN_003cf02c(void)
       uniteCameraDestroy();
       temp_v6 = *(int *)(*(int *)(temp_v2 + 0x94) + 4);
       handleRegistryRegisterObject(g_handleRegistry,temp_v6);
-      FUN_003fe86c(temp_v6,0,2);
+      modelPlayClip(temp_v6,0,2);
       *(unsigned int *)(temp_v6 + 4) = *(unsigned int *)(temp_v6 + 4) & 0xfffffffc;
       temp_v6 = *(int *)(temp_v2 + 0x9c);
       temp_v12 = *(short *)(*(int *)(temp_v6 + 0x34) + 0x94) != 0;
@@ -430,12 +430,12 @@ unsigned int FUN_003cf02c(void)
     temp_v5 = *(unsigned int *)(*(int *)(temp_v2 + 0x90) + 4);
     candidateGetPreferredValue(temp_v5);
     temp_v10 = 9;
-    FUN_001517b4(9,1);
+    padQueryLogicalKey(9,1);
     temp_v6 = 0x28e;
     temp_v9 = 0x311;
     if (temp_v10 == 0) {
       temp_v10 = 6;
-      FUN_001517b4(6,1);
+      padQueryLogicalKey(6,1);
       if (temp_v10 != 0) goto LAB_003cf9bc;
     }
     else {
@@ -472,7 +472,7 @@ LAB_003cf9bc:
       temp_v4 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v13 <= temp_v16) << 0x1d);
       if (!romwright_subpiece_4_1_0(temp_v4 >> 0x1d,0)) {
         VectorSignedToFloat(temp_v10,(unsigned char)(temp_v4 >> 0x16) & 3);
-        FUN_003fe86c(temp_v5,0,2);
+        modelPlayClip(temp_v5,0,2);
         temp_v3 = *(int *)(temp_v2 + 0x98);
         temp_v12 = *(short *)(*(int *)(temp_v3 + 0x34) + 0x94) != 0;
         *(unsigned char *)(temp_v2 + 0x128) = temp_v12;
@@ -614,17 +614,17 @@ LAB_003cf9bc:
     }
     break;
   case 4:
-    FUN_00163aa4();
+    uiSpriteAdvanceAnimation();
     temp_v6 = scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x338));
     if ((temp_v6 != 2) || (*(char *)(temp_v2 + 0x6a6) == '\0')) break;
   case 5:
     temp_v4 = (unsigned int)*(unsigned short *)(temp_v2 + 0xc);
-    FUN_00180118(temp_v4);
+    dataTable01GetRecordWithAocOverride(temp_v4);
     libc_strcpy(temp_v17,temp_v4);
-    FUN_003180c4(8,temp_v17);
+    scrSetStringSlot(8,temp_v17);
     temp_v5 = FUN_0014bf3c(*(unsigned short *)(temp_v2 + 0xc),0);
     libc_strcpy(temp_v17,temp_v5);
-    FUN_003180c4(0x10,temp_v17);
+    scrSetStringSlot(0x10,temp_v17);
     scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x338),0x10);
     sysPlaySe(0x5a);
     btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v2 + 0xc),1);
@@ -634,7 +634,7 @@ LAB_003cf9bc:
     *(unsigned int *)(temp_v6 + 8) = 0;
     break;
   case 6:
-    FUN_00163aa4();
+    uiSpriteAdvanceAnimation();
     temp_v6 = scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x338));
     if ((temp_v6 == 2) && (*(char *)(temp_v2 + 0x6a6) != '\0')) {
       slotSetRequest(0,10,0xff);

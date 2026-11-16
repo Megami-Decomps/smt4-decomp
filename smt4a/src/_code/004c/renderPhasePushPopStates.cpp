@@ -6,17 +6,17 @@ struct RenderPhase {
 };
 extern "C" {
 extern RenderCtxA *g_renderCtx;
-s32 FUN_00387580(u32, f32);
-s32 FUN_001692ac(u32, u32);
+s32 renderCtxPackPassFlagsWithAlpha(u32, f32);
+s32 renderCtxPackPassFlags(u32, u32);
 
 u32 renderPhasePushPopStates(RenderPhase *owner)
 {
     if (owner->phase - 2 < 3) {
         RenderCtxA *context = g_renderCtx;
-        s32 state = FUN_00387580(6, 0.0f);
+        s32 state = renderCtxPackPassFlagsWithAlpha(6, 0.0f);
         renderStackPush(&context->additional.stackC, state);
         context = g_renderCtx;
-        state = FUN_001692ac(1, 0);
+        state = renderCtxPackPassFlags(1, 0);
         renderStackPush(&context->stackA, state);
         context = g_renderCtx;
         state = packNibblesAndByte(6, 1, 0);

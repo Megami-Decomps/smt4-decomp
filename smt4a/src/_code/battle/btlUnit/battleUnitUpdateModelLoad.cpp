@@ -25,10 +25,10 @@ union BattleModelRecord {
 
 extern "C" {
 void textFormatBuffer(char *buffer, const char *format, ...);
-void *FUN_00178b04(u32 size, const char *file, s32 line);
+void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 u32 *battleModelOwnerInitialize(u32 *word);
 BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, s32 group);
-BtlUnitDataA *FUN_001568f8(BtlMainStateA *state, s32 group);
+BtlUnitDataA *btlFindEntryBlockByMemberId(BtlMainStateA *state, s32 group);
 void btlUiAddRequest(void *ui, u16 id);
 void FUN_004cb9d0(BattleEffectSetup *render);
 void FUN_004d854c(s32 *owner);
@@ -50,7 +50,7 @@ void battleUnitUpdateModelLoad(BtlMainStateA *state, BattleModelRecord *record)
             if (record->model.owner == NULL) {
                 const BattleEntryModelView *entry = (const BattleEntryModelView *)
                     btlMainFindEntryByListedId(state, render.group);
-                ModelOwner *owner = (ModelOwner *)FUN_00178b04(0x24, g_battleUnitSourceFile, 0x642);
+                ModelOwner *owner = (ModelOwner *)asdMemoryAllocTraced(0x24, g_battleUnitSourceFile, 0x642);
                 if (owner != NULL) {
                     owner = (ModelOwner *)battleModelOwnerInitialize((u32 *)owner);
                 }
@@ -67,7 +67,7 @@ void battleUnitUpdateModelLoad(BtlMainStateA *state, BattleModelRecord *record)
             FUN_004d87e4((void **)record->model.owner)) {
             render.flags |= 0x200002;
             FUN_004d854c((s32 *)record->model.owner);
-            BtlUnitDataA *data = FUN_001568f8(state, render.group);
+            BtlUnitDataA *data = btlFindEntryBlockByMemberId(state, render.group);
             btlUiAddRequest(g_btlUiBlock, data->unk02);
             render.variant = 0;
             render.position[0] = 0.0f;

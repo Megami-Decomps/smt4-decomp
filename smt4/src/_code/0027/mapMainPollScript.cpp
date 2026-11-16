@@ -15,7 +15,7 @@ s32 scrRunOpcodesStub(void *process);
 void messageSlotSet(s32 slot);
 void scrScriptProcessDestroy(void *process);
 void asdMemFree(void *allocation);
-s32 FUN_002896bc(void);
+s32 screenFadesAllReady(void);
 
 // Poll the map script, coordinating message channels and releasing its data on completion.
 u32 mapMainPollScript(void)
@@ -52,7 +52,7 @@ u32 mapMainPollScript(void)
     case 1:
         break;
     case 2:
-        if (FUN_002896bc())
+        if (screenFadesAllReady())
             map->scriptState = 0;
         break;
     }

@@ -10,8 +10,8 @@ extern void *g_btlUiBlock;
 u32 isEntryUsable(const BtlEventStateA *event);
 u32 FUN_004d7a70(BtlEventStateA *event, u32 kind, s32 index, s32 flags);
 void FUN_004d7fe4(BtlEventStateA *event);
-void FUN_002e5924(s32 kind);
-u32 FUN_0013def0(u32 display);
+void frameTexRequestFade(s32 kind);
+u32 pairedAvailabilityGetState(u32 display);
 void FUN_0013cab8(u32 display, s32 frames, u32 alpha);
 void FUN_003ed6e8(BtlMainStateA *state);
 void FUN_003f26d4(BtlMainStateA *state);
@@ -53,13 +53,13 @@ u32 FUN_003e2504(BtlStep *step, BtlMainStateA *state)
     }
     if (FUN_004d7a70(event, 0xB, -1, 0)) {
         if (!(state->stateFlags64.bits & masks->fadeStarted)) {
-            FUN_002e5924(2);
+            frameTexRequestFade(2);
             state->stateFlags64.bits |= masks->fadeStarted;
         }
-        if (FUN_0013def0(0) == 3) {
+        if (pairedAvailabilityGetState(0) == 3) {
             FUN_0013cab8(0, 10, 0xFF);
         }
-        if (FUN_0013def0(1) == 3) {
+        if (pairedAvailabilityGetState(1) == 3) {
             FUN_0013cab8(1, 10, 0xFF);
         }
         FUN_004d7fe4(g_btlEvent);

@@ -58,7 +58,7 @@ char *libc_strcpy(char *, const char *);
 s32 FUN_00295c60(u16 id, u8 variant);
 s32 btlLinkGetMaxHp(const SnapshotUnitSource *);
 s32 flagCountUnlockedSlots(const SnapshotUnitSource *);
-const char *FUN_002bd06c(u16 id);
+const char *dataTable01FindByIdWithAoc(u16 id);
 u32 randomGetUpperSixBits(const SnapshotUnitSource *, u8 index);
 
 // Build the battle-facing snapshot of a persistent unit.
@@ -79,7 +79,7 @@ void btlBuildUnitSnapshot(BattleUnitSnapshot *snapshot, const SnapshotUnitSource
     snapshot->vitals = unit->prefix.vitals;
     __aeabi_memcpy4(snapshot->stats, unit->prefix.stats, sizeof(snapshot->stats));
     __aeabi_memcpy4(snapshot->skills, unit->record.items, flagCountUnlockedSlots(unit) * sizeof(u16));
-    libc_strcpy(snapshot->name, FUN_002bd06c(unit->id));
+    libc_strcpy(snapshot->name, dataTable01FindByIdWithAoc(unit->id));
     for (s32 stat = 0; stat < 5; ++stat) {
         if (snapshot->vitals.attributes[stat] >= 1000) {
             snapshot->vitals.attributes[stat] = 999;

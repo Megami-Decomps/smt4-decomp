@@ -11,13 +11,13 @@ int buttonHelpAcquireResources(void);
 void partyStatusRefreshSlot(void*, int, int);
 int FUN_0028e9ec(...);
 int statusBustUpPortraitAcquire(...);
-int FUN_00295eb0(...);
+int uiStoreTextureEntryCenter(...);
 int asdLoadFileAsyncSimple(...);
-int FUN_0029f848(...);
+int gridNavigationConfigure(...);
 int uiSpriteSetImageKeyframe(int, unsigned int, int);
 int FUN_002b7bca(...);
 int timerStart(...);
-int FUN_002bd954(...);
+int uiSpriteStateInitFromSource(...);
 int spriteStartAnimationByIndex(...);
 int drawParameterBlockClear(int);
 
@@ -50,9 +50,9 @@ extern int flagValueIsPositive(unsigned int);
 /* Supplied declaration required: FUN_0028e9ec. */
 extern int flagBitIsSet(int);
 /* Supplied declaration required: statusBustUpPortraitAcquire. */
-/* Supplied declaration required: FUN_00295eb0. */
+/* Supplied declaration required: uiStoreTextureEntryCenter. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: FUN_0029f848. */
+/* Supplied declaration required: gridNavigationConfigure. */
 extern int gameGetUnitRecord(int);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
@@ -61,7 +61,7 @@ extern int FUN_002b6ad0(void);
 extern int gameGetSupportUnitData(void);
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002bd954. */
+/* Supplied declaration required: uiSpriteStateInitFromSource. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: drawParameterBlockClear. */
@@ -104,10 +104,10 @@ void FUN_00199b9c(int param_1,unsigned int param_2)
   temp_v5 = 0;
   do {
     temp_v4 = param_1 + temp_v5 * 0x8c;
-    FUN_002bd954(temp_v4 + 0x73c,0x15,0,param_1,6);
+    uiSpriteStateInitFromSource(temp_v4 + 0x73c,0x15,0,param_1,6);
     spriteStartAnimationByIndex(temp_v4 + 0x73c,0);
     temp_v2 = temp_v4 + 0x9f8;
-    FUN_002bd954(temp_v2,0x15,0,param_1,6);
+    uiSpriteStateInitFromSource(temp_v2,0x15,0,param_1,6);
     if (temp_v5 == 0) {
       temp_v3 = 9;
       temp_v2 = temp_v1;
@@ -117,51 +117,51 @@ void FUN_00199b9c(int param_1,unsigned int param_2)
     }
     uiSpriteSetImageKeyframe(temp_v2,temp_v3,0);
     temp_v2 = temp_v4 + 0xc28;
-    FUN_002bd954(temp_v2,0x15,0x1b,param_1,0x1f);
-    FUN_00295eb0(temp_v2,0x15,0x45);
+    uiSpriteStateInitFromSource(temp_v2,0x15,0x1b,param_1,0x1f);
+    uiStoreTextureEntryCenter(temp_v2,0x15,0x45);
     spriteStartAnimationByIndex(temp_v2,6);
-    FUN_002bd954(temp_v4 + 0x13d0,0x15,0x1c8,param_1,0x1a);
+    uiSpriteStateInitFromSource(temp_v4 + 0x13d0,0x15,0x1c8,param_1,0x1a);
     spriteStartAnimationByIndex(temp_v4 + 0x13d0,0xb);
-    FUN_002bd954(temp_v4 + 0x1600,0x15,0xbba,param_1,0x1a);
-    FUN_00295eb0(temp_v4 + 0x1600,0x15,0x1ca);
+    uiSpriteStateInitFromSource(temp_v4 + 0x1600,0x15,0xbba,param_1,0x1a);
+    uiStoreTextureEntryCenter(temp_v4 + 0x1600,0x15,0x1ca);
     spriteStartAnimationByIndex(temp_v4 + 0x1600,0xd);
     temp_v4 = temp_v4 + 0x1830;
-    FUN_002bd954(temp_v4,0x15,0xbbe,param_1,0x25);
-    FUN_00295eb0(temp_v4,0x15,0x1ca);
+    uiSpriteStateInitFromSource(temp_v4,0x15,0xbbe,param_1,0x25);
+    uiStoreTextureEntryCenter(temp_v4,0x15,0x1ca);
     spriteStartAnimationByIndex(temp_v4,0xe);
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 4);
-  FUN_002bd954(param_1 + 0x96c,0x15,0x5e,param_1,6);
+  uiSpriteStateInitFromSource(param_1 + 0x96c,0x15,0x5e,param_1,6);
   temp_v1 = btlActorIsDown(*(unsigned int *)(param_1 + 0x3040));
   if ((temp_v1 != 0) && (temp_v1 = FUN_002b6ad0(), temp_v1 != 0)) {
     timerStart(param_1 + 0x96c,0xd,0);
   }
-  FUN_002bd954(param_1 + 0x20,0x15,0xdb,param_1,6);
+  uiSpriteStateInitFromSource(param_1 + 0x20,0x15,0xdb,param_1,6);
   spriteStartAnimationByIndex(param_1 + 0x20,0);
   temp_v1 = 0;
   do {
     temp_v5 = param_1 + temp_v1 * 0x8c;
-    FUN_002bd954(temp_v5 + 0x138,0x15,0xdd,param_1,6);
+    uiSpriteStateInitFromSource(temp_v5 + 0x138,0x15,0xdd,param_1,6);
     spriteStartAnimationByIndex(temp_v5 + 0x138,0);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 8);
-  FUN_002bd954(param_1 + 0xac,0x15,0xde,param_1,6);
+  uiSpriteStateInitFromSource(param_1 + 0xac,0x15,0xde,param_1,6);
   spriteStartAnimationByIndex(param_1 + 0xac,1);
-  FUN_002bd954(param_1 + 0x598,0x15,0x4a,param_1,6);
+  uiSpriteStateInitFromSource(param_1 + 0x598,0x15,0x4a,param_1,6);
   spriteStartAnimationByIndex(param_1 + 0x598,2);
-  FUN_002bd954(param_1 + 0x624,0x15,0x96,param_1,6);
+  uiSpriteStateInitFromSource(param_1 + 0x624,0x15,0x96,param_1,6);
   spriteStartAnimationByIndex(param_1 + 0x624,3);
-  FUN_002bd954(param_1 + 0x6b0,0x15,0x9c,param_1,6);
+  uiSpriteStateInitFromSource(param_1 + 0x6b0,0x15,0x9c,param_1,6);
   timerStart(param_1 + 0x6b0,6,0);
   temp_v1 = 0;
   do {
-    FUN_002bd954(param_1 + temp_v1 * 0x8c + 0xe58,0x15,0x72,param_1,6);
+    uiSpriteStateInitFromSource(param_1 + temp_v1 * 0x8c + 0xe58,0x15,0x72,param_1,6);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 6);
   temp_v1 = 0;
   do {
     temp_v5 = param_1 + temp_v1 * 0x8c + 0x1a60;
-    FUN_002bd954(temp_v5,0xd,2000,param_1,0xf1);
+    uiSpriteStateInitFromSource(temp_v5,0xd,2000,param_1,0xf1);
     spriteStartAnimationByIndex(temp_v5,4);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x19);
@@ -169,28 +169,28 @@ void FUN_00199b9c(int param_1,unsigned int param_2)
   do {
     temp_v5 = param_1 + temp_v1 * 0x8c;
     temp_v2 = temp_v5 + 0x280c;
-    FUN_002bd954(temp_v2,0x15,1000,param_1,0xf1);
+    uiSpriteStateInitFromSource(temp_v2,0x15,1000,param_1,0xf1);
     spriteStartAnimationByIndex(temp_v2,5);
     temp_v5 = temp_v5 + 0x2ac8;
-    FUN_002bd954(temp_v5,0x15,0x3ea,param_1,0xf1);
+    uiSpriteStateInitFromSource(temp_v5,0x15,0x3ea,param_1,0xf1);
     spriteStartAnimationByIndex(temp_v5,5);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 5);
   temp_v1 = 0;
   do {
     temp_v5 = param_1 + temp_v1 * 0x8c + 0x2d84;
-    FUN_002bd954(temp_v5,0x15,0x3ee,param_1,0xf1);
+    uiSpriteStateInitFromSource(temp_v5,0x15,0x3ee,param_1,0xf1);
     spriteStartAnimationByIndex(temp_v5,7);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 5);
-  FUN_002bd954(param_1 + 0x11a0,0x15,0x110,param_1,6);
+  uiSpriteStateInitFromSource(param_1 + 0x11a0,0x15,0x110,param_1,6);
   spriteStartAnimationByIndex(param_1 + 0x11a0,0);
-  FUN_002bd954(param_1 + 0x1344,0x15,0,param_1,6);
+  uiSpriteStateInitFromSource(param_1 + 0x1344,0x15,0,param_1,6);
   spriteStartAnimationByIndex(param_1 + 0x1344,9);
   FUN_0028e9ec(param_1);
-  FUN_002bd954(param_1 + 0x122c,0x15,0x124,param_1,6);
+  uiSpriteStateInitFromSource(param_1 + 0x122c,0x15,0x124,param_1,6);
   spriteStartAnimationByIndex(param_1 + 0x122c,8);
-  FUN_002bd954(param_1 + 0x12b8,0x15,0,param_1,6);
+  uiSpriteStateInitFromSource(param_1 + 0x12b8,0x15,0,param_1,6);
   statusBustUpPortraitAcquire(0xffffffff,1);
   temp_v1 = 0;
   do {
@@ -242,8 +242,8 @@ void FUN_00199b9c(int param_1,unsigned int param_2)
     *(unsigned short *)(temp_v5 + 0x59b0) = 0;
   } while (temp_v1 < 5);
   *(int *)(param_1 + 0x340c) = param_1 + 0x3218;
-  FUN_0029f848(param_1 + 0x3218,399,6,1,0,1);
-  FUN_0029f848(param_1 + 0x327c,100,6,1,0,1);
+  gridNavigationConfigure(param_1 + 0x3218,399,6,1,0,1);
+  gridNavigationConfigure(param_1 + 0x327c,100,6,1,0,1);
   temp_v1 = 0;
   temp_v6 = 1;
   do {
@@ -255,9 +255,9 @@ void FUN_00199b9c(int param_1,unsigned int param_2)
     }
     temp_v6 = temp_v6 + 1;
   } while (temp_v6 < 0x3d);
-  FUN_0029f848(param_1 + 0x32e0,temp_v1,6,1,0,1);
+  gridNavigationConfigure(param_1 + 0x32e0,temp_v1,6,1,0,1);
   FUN_002b7bca(param_1 + 0x3480,temp_v1,2,FUN_0021960c);
-  FUN_0029f848(param_1 + 0x33a8,4,1,4,1,1);
+  gridNavigationConfigure(param_1 + 0x33a8,4,1,4,1,1);
   temp_v5 = 0;
   temp_v1 = 0;
   do {
@@ -267,7 +267,7 @@ void FUN_00199b9c(int param_1,unsigned int param_2)
     }
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 6);
-  FUN_0029f848(param_1 + 0x3344,temp_v5,6,1,0,1);
+  gridNavigationConfigure(param_1 + 0x3344,temp_v5,6,1,0,1);
   buttonHelpAcquireResources();
   buttonHelpCreate();
   asdLoadFileAsyncSimple(0x19a4e0,param_1 + 0x59bc,0);

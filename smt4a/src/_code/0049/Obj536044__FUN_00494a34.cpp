@@ -34,7 +34,7 @@ void FUN_0037c8e4(s32 a, s32 b);
 void FUN_0049a5b4(ShopMain *shop);
 u32 FUN_0049a9a8(void);
 s32 gameFlagIsSet(u32 flag);
-s32 FUN_001ba3d4(u32 id);
+s32 flagValueRead(u32 id);
 u32 tableGroupFindEntryIndex(u32 table, const char *name);
 
 /* Whether any shop entry in the two id ranges is available. */
@@ -67,7 +67,7 @@ void _ZN9Obj53604412FUN_00494a34Ev(ShopMain *shop)
                 sysPlaySe(0xA0);
                 return;
             }
-        } else if ((FUN_001ba3d4(0x363) > 0 && gameFlagIsSet(0x114) == 0) || gameFlagIsSet(0x113) == 0) {
+        } else if ((flagValueRead(0x363) > 0 && gameFlagIsSet(0x114) == 0) || gameFlagIsSet(0x113) == 0) {
             scrScriptProcessStartEntry(shop->script, tableGroupFindEntryIndex(shop->scriptTable, "shop_event"));
             scrRunOpcodesStub(shop->script);
             shop->step = 1;

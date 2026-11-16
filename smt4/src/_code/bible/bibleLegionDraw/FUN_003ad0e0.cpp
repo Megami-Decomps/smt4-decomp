@@ -44,7 +44,7 @@ extern const u8 DAT_00402400[];
 u32 FUN_003ac480();
 void drawParameterBlockClear(UiResourceParameters *parameters);
 
-void FUN_002bd954(UiSpriteState *, u32, u32, UiSpriteSource *, u16, f32);
+void uiSpriteStateInitFromSource(UiSpriteState *, u32, u32, UiSpriteSource *, u16, f32);
 void uiSpriteSetImageKeyframe(UiSpriteState *, s32 image, s32 frame);
 
 void FUN_003ad0e0()
@@ -87,9 +87,9 @@ void FUN_003ad0e0()
             NULL, 0, NULL, 0, DAT_00402400, 0x70);
         UiSpriteSource *source = reinterpret_cast<UiSpriteSource *>(&state->parameters);
         for (s32 index = 0; index < 2; ++index) {
-            FUN_002bd954(&state->sprites[index], 0x23, 0, source, 0x15, 1.0f);
+            uiSpriteStateInitFromSource(&state->sprites[index], 0x23, 0, source, 0x15, 1.0f);
             uiSpriteSetImageKeyframe(&state->sprites[index], 0, 0);
-            FUN_002bd954(&state->sprites[index + 2], 0x23, 0, source, 0x15, 1.0f);
+            uiSpriteStateInitFromSource(&state->sprites[index + 2], 0x23, 0, source, 0x15, 1.0f);
             uiSpriteSetImageKeyframe(&state->sprites[index + 2], 1, 0);
         }
     }

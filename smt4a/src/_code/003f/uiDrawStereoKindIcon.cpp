@@ -38,7 +38,7 @@ void uiDrawStereoKindIcon(u32 context, s32 x, s32 y, u32 color, u32 kind, u32 an
     s32 drawX = anchor->x + (x + parallax);
     s32 drawY = anchor->y + y;
     efctSetSpeed(speed);
-    FUN_001835b4(2, 49, image, drawX, drawY, color);
+    texDrawTableEntryAtStoredOrigin(2, 49, image, drawX, drawY, color);
     efctSetSpeed(1.0f);
 }
 }

@@ -5,7 +5,7 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-void *FUN_002c58c8(s32 tableIndex, s32 nodeIndex);
+void *asdTMTexTablePrepareNodeImage(s32 tableIndex, s32 nodeIndex);
 }
 
 #endif

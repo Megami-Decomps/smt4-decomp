@@ -18,7 +18,7 @@ s32 FUN_00258de0(s32 unit, u32 a, SkillItem *item, s32 noCost, s32 e);
 UnitRecord *gameGetPlayerData(void);
 UnitRecord *gameGetUnitRecord(s32 unit);
 s32 FUN_0029a9d4(u32 skill, s32 player);
-s32 FUN_0029a924(u32 skill);
+s32 appGetRemainingCapacity(u32 skill);
 
 /* Uses a skill item for a unit (negative: the player) and, unless it failed or is free, pays its MP cost. */
 s32 FUN_0026c654(s32 unit, u32 a, u32 id, s32 noCost)
@@ -42,7 +42,7 @@ s32 FUN_0026c654(s32 unit, u32 a, u32 id, s32 noCost)
             }
         } else {
             record = gameGetUnitRecord(unit);
-            mp = record->mp - FUN_0029a924(item->skill);
+            mp = record->mp - appGetRemainingCapacity(item->skill);
             record->mp = mp;
             if (mp < 0) {
                 record->mp = 0;

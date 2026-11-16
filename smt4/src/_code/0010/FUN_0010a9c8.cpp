@@ -16,12 +16,12 @@ int drawSetColorFromRGBA8(...);
 int itemDrawCategoryBadge(...);
 int textDrawString(...);
 int textFormatBuffer(...);
-int FUN_002be650(...);
-int FUN_002bed3c(void);
+int dataFindKindRecordWithAocOverrides(...);
+int gxResetColorQuadToWhite(void);
 int vec2GetXInt(...);
 int renderCtxPopState(...);
 int renderStackPushIndexed(...);
-int FUN_002bf380(...);
+int texDrawCompositeSprite(...);
 int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int VectorSignedToFloat(...);
@@ -48,16 +48,16 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002be650. */
-/* Supplied declaration required: FUN_002bed3c. */
+/* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 extern int vec2GetYInt(int);
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
-/* Supplied declaration required: FUN_002bf380. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
-extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
+extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 
 
 unsigned int FUN_0010a9c8(void)
@@ -84,9 +84,9 @@ unsigned int FUN_0010a9c8(void)
     if (*(char *)(DAT_0043e190 + 9) == '\x13') {
       if (*(char *)(DAT_0043e190 + 8) != '\0') {
         efctSetSpeed();
-        temp_v3 = FUN_002c5d80(1,0);
+        temp_v3 = renderCtxPackPassFlags(1,0);
         renderStackPushIndexed(g_titleScene,3,temp_v3);
-        FUN_002bf288(2,0x3a,0x8d,0,0,6);
+        texDrawTableEntryAtStoredOrigin(2,0x3a,0x8d,0,0,6);
         renderCtxPopState(g_titleScene,3);
         efctSetSpeed();
       }
@@ -97,9 +97,9 @@ unsigned int FUN_0010a9c8(void)
   else {
     if (*(char *)(DAT_0043e190 + 8) != '\0') {
       efctSetSpeed();
-      temp_v3 = FUN_002c5d80(1,0);
+      temp_v3 = renderCtxPackPassFlags(1,0);
       renderStackPushIndexed(g_titleScene,3,temp_v3);
-      FUN_002bf288(2,0xe,0x101,0,0,6);
+      texDrawTableEntryAtStoredOrigin(2,0xe,0x101,0,0,6);
       renderCtxPopState(g_titleScene,3);
       efctSetSpeed();
     }
@@ -112,14 +112,14 @@ unsigned int FUN_0010a9c8(void)
   if (*(char *)(DAT_0043e190 + 0x7e) != '\0') {
     temp_v1 = vec2GetXInt(DAT_0043e190 + 0x754);
     temp_v2 = vec2GetYInt(DAT_0043e190 + 0x754);
-    temp_v3 = FUN_002c5d80(1,0);
+    temp_v3 = renderCtxPackPassFlags(1,0);
     renderStackPushIndexed(g_titleScene,3,temp_v3);
     efctSetSpeed();
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     temp_v4 = asdTMTexTableEntryAt(0xe,200);
-    FUN_002bf380(2,0xe,10,*(short *)(temp_v4 + 8) + temp_v1,*(short *)(temp_v4 + 10) + temp_v2,0xb);
+    texDrawCompositeSprite(2,0xe,10,*(short *)(temp_v4 + 8) + temp_v1,*(short *)(temp_v4 + 10) + temp_v2,0xb);
     temp_v3 = *(unsigned int *)(DAT_0043e190 + 0x68);
-    FUN_002be650(temp_v3,0);
+    dataFindKindRecordWithAocOverrides(temp_v3,0);
     textFormatBuffer(temp_v9,"%s",temp_v3);
     temp_v5 = asdTMTexTableEntryAt(0xe,0xc2);
     VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,
@@ -140,7 +140,7 @@ unsigned int FUN_0010a9c8(void)
     FUN_002bdf94(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                  (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0,1,0x10,
                  "*");
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     renderCtxPopState(g_titleScene,3);
   }
   temp_v1 = DAT_0043e190;
@@ -148,12 +148,12 @@ unsigned int FUN_0010a9c8(void)
     temp_v2 = DAT_0043e190 + 0x984;
     temp_v4 = vec2GetXInt();
     temp_v2 = vec2GetYInt(temp_v2);
-    temp_v3 = FUN_002c5d80(1,0);
+    temp_v3 = renderCtxPackPassFlags(1,0);
     renderStackPushIndexed(g_titleScene,3,temp_v3);
     efctSetSpeed();
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     temp_v5 = asdTMTexTableEntryAt(0xe,0xc0);
-    FUN_002bf380(2,0xe,0x11,*(short *)(temp_v5 + 8) + temp_v4,*(short *)(temp_v5 + 10) + temp_v2,0xb);
+    texDrawCompositeSprite(2,0xe,0x11,*(short *)(temp_v5 + 8) + temp_v4,*(short *)(temp_v5 + 10) + temp_v2,0xb);
     FUN_002bdce0(*(unsigned short *)(temp_v1 + 0x90),*(short *)(temp_v5 + 8) + temp_v4,
                  *(short *)(temp_v5 + 10) + temp_v2,0);
     temp_v7 = 100000000;
@@ -181,7 +181,7 @@ unsigned int FUN_0010a9c8(void)
     FUN_002bdf94(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v1 + 8) + temp_v4,
                  (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0,0xf,0x10,
                  "*");
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     renderCtxPopState(g_titleScene,3);
   }
   return 0;

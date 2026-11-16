@@ -18,7 +18,7 @@ struct BattleItemDetails {
 
 extern "C" {
 extern BtlUiGlobals g_btlUi;
-void FUN_0028cb40(BtlUiObjC *, s16 *kind, s16 *id);
+void btlCommandMenuResolveLayout(BtlUiObjC *, s16 *kind, s16 *id);
 BattleItemDetails *dataTable08Sub1GetRecord(s32 id);
 void FUN_00218480(BtlUiObjC *);
 void FUN_0028bfe4(BtlUiObjC *);
@@ -35,7 +35,7 @@ void btlUiRouteSelectedAction(void)
     s16 kind = 0;
     s16 id = 0;
     BtlUiObjC *selection = &ui->objC;
-    FUN_0028cb40(selection, &kind, &id);
+    btlCommandMenuResolveLayout(selection, &kind, &id);
     if (kind == 2 || kind == 3) {
         BattleActionDetails *details = reinterpret_cast<BattleActionDetails *>(dataTable40FindById(id));
         if (details->targetKind == 2 || details->targetKind == 3 || details->targetKind == 4)

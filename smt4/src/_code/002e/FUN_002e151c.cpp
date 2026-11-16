@@ -3,14 +3,14 @@
 #include "shard/W6_W6Match3_MapSceneTransition.h"
 
 extern "C" {
-void FUN_002b9178(TexNode* node);
+void texTableEntryLoadSync(TexNode* node);
 
 static inline bool prepareTextureNode(TexNode* node, u32 imageMode, u32 stateFlag)
 {
     if (node == NULL) {
         return false;
     }
-    FUN_002b9178(node);
+    texTableEntryLoadSync(node);
     if (node->loaded.texture == NULL) {
         return false;
     }

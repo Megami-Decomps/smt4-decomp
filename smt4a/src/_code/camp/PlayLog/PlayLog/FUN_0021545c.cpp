@@ -49,8 +49,8 @@ typedef char PlayLogScreenOffsetCheck[
 
 extern "C" {
 extern PlayLogScreen *g_playLog;
-s32 FUN_001517b4(s32 key, s32 mode);
-s32 FUN_00163aa4(void *sprite, f32 step);
+s32 padQueryLogicalKey(s32 key, s32 mode);
+s32 uiSpriteAdvanceAnimation(void *sprite, f32 step);
 s32 FUN_001643b4(u32 file, u32 index);
 void uiSpriteSelectAnim(void *sprite, s16 group);
 void eventQueueAddUniqueIfValid(s32 event);
@@ -72,7 +72,7 @@ void FUN_0021545c(void)
     case 0:
         for (s32 i = 0; i < 5; i++) {
             if (work->frame >= i)
-                FUN_00163aa4(&work->sprites[i], 1.0f);
+                uiSpriteAdvanceAnimation(&work->sprites[i], 1.0f);
         }
         if (uiAnimatedSpriteIsFinished(&work->sprites[4])) {
             work->touchRegions[0] = FUN_001643b4(0x25, 0x1A);
@@ -104,7 +104,7 @@ void FUN_0021545c(void)
                 eventQueueAddUniqueIfValid(0x100020D);
         } else {
             if (FUN_00228b04(&work->list, 0) == 0) {
-                if (FUN_001517b4(1, 1) != 0) {
+                if (padQueryLogicalKey(1, 1) != 0) {
                     eventQueueAddUniqueIfValid(0x100020F);
                     s32 animation = 1;
                     for (s32 i = 0; i < 5; i++)
@@ -112,7 +112,7 @@ void FUN_0021545c(void)
                     work->state = 2;
                     work->pending = 0;
                 } else if (work->hasPlayer != 0) {
-                    if (FUN_001517b4(8, 1) != 0) {
+                    if (padQueryLogicalKey(8, 1) != 0) {
                         s32 animation = 3;
                         for (s32 i = 0; i < 5; i++)
                             uiSpriteSelectAnim(&work->sprites[i], animation);
@@ -120,7 +120,7 @@ void FUN_0021545c(void)
                         work->state = 3;
                         work->pending = 0;
                     } else if (work->hasPlayer != 0) {
-                        if (FUN_001517b4(7, 1) != 0) {
+                        if (padQueryLogicalKey(7, 1) != 0) {
                             s32 animation = 1;
                             for (s32 i = 0; i < 5; i++)
                                 uiSpriteSelectAnim(&work->sprites[i], animation);
@@ -153,7 +153,7 @@ void FUN_0021545c(void)
     }
     case 2:
         for (s32 i = 0; i < 5; i++)
-            FUN_00163aa4(&work->sprites[i], 1.0f);
+            uiSpriteAdvanceAnimation(&work->sprites[i], 1.0f);
         if (uiAnimatedSpriteIsFinished(&work->sprites[4])) {
             work->state = 4;
             work->pending = 0;

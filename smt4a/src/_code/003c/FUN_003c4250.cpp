@@ -19,7 +19,7 @@ extern u8 *g_renderCtx;
 
 f32 jobGetScalarValue(void);
 void efctSetSpeed(f32 speed);
-void FUN_00185dd4(u32 id, u32 table, s32 texture, s32 x, s32 y, s32 width, s32 height, u32 tag);
+void texDrawTableEntrySized(u32 id, u32 table, s32 texture, s32 x, s32 y, s32 width, s32 height, u32 tag);
 s32 __aeabi_idivmod(s32 a, s32 b);
 
 /* The width of the gauge part `id` for `value` out of 200 (at least 1 for a positive value),
@@ -58,26 +58,26 @@ void FUN_003c4250(GaugeOwner *owner, s32 x, s32 y, s32 target, s32 current, s32 
         s32 flashHeight;
 
         flash = gaugeWidth(0x76, (s16)chunk, &flashHeight);
-        FUN_00185dd4(2, 0x12, 0x76, x + width, y, flash, flashHeight, 0xDD);
+        texDrawTableEntrySized(2, 0x12, 0x76, x + width, y, flash, flashHeight, 0xDD);
         efctSetSpeed(owner->closingSpeed * scale);
         renderStackSet((RenderStateStack *)(g_renderCtx + 0x12B8), packNibblesAndByte(6, 1, 0));
-        FUN_00185dd4(2, 0x12, 0x77, x + width, y, flash, flashHeight, 0xDE);
+        texDrawTableEntrySized(2, 0x12, 0x77, x + width, y, flash, flashHeight, 0xDE);
         renderStackSet((RenderStateStack *)(g_renderCtx + 0x12B8), packNibblesAndByte(6, 7, 0));
         efctSetSpeed(scale);
     }
-    FUN_00185dd4(2, 0x12, 0x6E, x, y, width, height, 0xDD);
+    texDrawTableEntrySized(2, 0x12, 0x6E, x, y, width, height, 0xDD);
     if (current < target) {
         s32 partHeight;
         s32 part = gaugeWidth(0x6F, (s16)((s16)target - value), &partHeight);
 
-        FUN_00185dd4(2, 0x12, 0x6F, x + width + flash, y, part, partHeight, 0xDD);
+        texDrawTableEntrySized(2, 0x12, 0x6F, x + width + flash, y, part, partHeight, 0xDD);
     } else if (target < current) {
         s32 partHeight;
         s32 part = gaugeWidth(0x71, (s16)(value - (s16)target), &partHeight);
         TextureTableEntryIV *bar = asdTMTexTableEntryAt(0x12, 0x6E);
         TextureTableEntryIV *damage = asdTMTexTableEntryAt(0x12, 0x71);
 
-        FUN_00185dd4(2, 0x12, 0x71, (width - part) + flash + x + (bar->x - damage->x), y, part, partHeight, 0xDD);
+        texDrawTableEntrySized(2, 0x12, 0x71, (width - part) + flash + x + (bar->x - damage->x), y, part, partHeight, 0xDD);
     }
 }
 

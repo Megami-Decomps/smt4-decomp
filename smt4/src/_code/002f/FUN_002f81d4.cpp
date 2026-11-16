@@ -7,7 +7,7 @@ extern "C" {
 void matrixApplyByMode(void *transform, const TransformMtx44 *matrix, s32 mode);
 void mathMatrixApplyTranslation(TransformMtx44 *matrix, const TransformVec3 *translation, s32 mode);
 void mathMatrixApplyScale(TransformMtx44 *matrix, const TransformVec3 *scale, s32 mode);
-void FUN_0025009c(TransformRotation *rotation, const void *source);
+void gfxQuaternionToMatrix34(TransformRotation *rotation, const void *source);
 void matrix44SetIdentity(TransformMtx44 *matrix);
 void matrix43Multiply(TransformMtx44 *dst, const TransformMtx44 *a, const TransformRotation *b);
 void matrixCopyFull(TransformMtx44 *dst, const TransformMtx44 *src);
@@ -28,7 +28,7 @@ void FUN_002f81d4(TransformOwner *owner, const TransformVec3 *translation, const
         matrix44SetIdentity(&scaled);
     }
     if (rotation != NULL) {
-        FUN_0025009c(&rotated, rotation);
+        gfxQuaternionToMatrix34(&rotated, rotation);
         matrix43Multiply(&matrix, &scaled, &rotated);
     } else {
         matrixCopyFull(&matrix, &scaled);

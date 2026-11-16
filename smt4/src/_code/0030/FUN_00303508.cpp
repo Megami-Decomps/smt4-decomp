@@ -48,7 +48,7 @@ extern "C" {
 extern EffectColor g_polyDefaultColor;
 extern EffectColor DAT_00472550;
 extern EffectColorProductState DAT_004ea81c;
-f32 FUN_002b70cc(f32 angle);
+f32 mathSinFixedAngle(f32 angle);
 f32 phaseCosInterpolate(f32 angle);
 
 /* Builds the segments of the ring polygon for the current frame: the ring radius follows the
@@ -110,7 +110,7 @@ void FUN_00303508(EffectPrimitiveWork *work)
         for (s32 i = 0; i < segments; i++) {
             f32 phase = angle * 40.743664f;
             f32 cosine = phaseCosInterpolate(phase);
-            f32 sine = FUN_002b70cc(phase);
+            f32 sine = mathSinFixedAngle(phase);
             out->hub[0] = 0.0f;
             out->hub[1] = 0.0f;
             out->hub[2] = 0.0f;

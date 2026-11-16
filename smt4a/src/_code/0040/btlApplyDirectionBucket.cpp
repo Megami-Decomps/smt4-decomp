@@ -21,7 +21,7 @@ extern "C" {
 extern BtlAuxA *g_btlAux;
 extern BattleCameraAngle *g_btlCamera;
 f32 FUN_004fad68(BtlAuxA *, u32 kind, s32 x, s32 y);
-void FUN_004fb43c(u32 unused, u32 handle, u32 flags, s32 a, s32 b, s32 direction, s32 c);
+void btlQueueActionMessage(u32 unused, u32 handle, u32 flags, s32 a, s32 b, s32 direction, s32 c);
 
 static bool isBelow(f32 value, f32 limit)
 {
@@ -81,6 +81,6 @@ void btlApplyDirectionBucket(u32 unused, BattleDirectionEntry *entry)
             direction = 3;
         break;
     }
-    FUN_004fb43c(0, entry->handle, flags, 0, 0, direction, 0);
+    btlQueueActionMessage(0, entry->handle, flags, 0, 0, direction, 0);
 }
 }

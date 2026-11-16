@@ -98,14 +98,14 @@ void FUN_00418960(MarkerPanel *panel)
             icon = panel->page > 0 ? 0x7D : 0x7C;
             break;
         }
-        FUN_001835b4(2, 12, icon, (s32)(marker->x + (f32)parallax), (s32)marker->y, 0x42);
+        texDrawTableEntryAtStoredOrigin(2, 12, icon, (s32)(marker->x + (f32)parallax), (s32)marker->y, 0x42);
         if (look == 4 || look == 8) {
-            FUN_001835b4(2, 12, 0x77, (s32)(marker->x + (f32)parallax), (s32)marker->y, 0x43);
+            texDrawTableEntryAtStoredOrigin(2, 12, 0x77, (s32)(marker->x + (f32)parallax), (s32)marker->y, 0x43);
         }
         if (look == 5) {
-            FUN_001835b4(2, 12, 0x78, (s32)(marker->x + (f32)parallax), (s32)marker->y, 0x43);
+            texDrawTableEntryAtStoredOrigin(2, 12, 0x78, (s32)(marker->x + (f32)parallax), (s32)marker->y, 0x43);
         } else if (look == 6 || look == 9) {
-            FUN_001835b4(2, 12, 0x79, (s32)(marker->x + (f32)parallax), (s32)marker->y, 0x43);
+            texDrawTableEntryAtStoredOrigin(2, 12, 0x79, (s32)(marker->x + (f32)parallax), (s32)marker->y, 0x43);
         }
     }
 }

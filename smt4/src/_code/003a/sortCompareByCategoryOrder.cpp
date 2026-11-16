@@ -13,7 +13,7 @@ typedef struct CategoryRow {
 } CategoryRow;
 
 extern SortRecord *table8Type5FindById(u16 id);
-extern int FUN_0024c52c(u16 category);
+extern int itemGetSortCategory(u16 category);
 extern CategoryRow *dataTable40FindById(u16 category);
 
 /* Compare function for sorting ids: by category rank, then by the category row's order (descending), then by id. */
@@ -21,7 +21,7 @@ int sortCompareByCategoryOrder(const u16 *a, const u16 *b)
 {
     SortRecord *recordA = table8Type5FindById(*a);
     SortRecord *recordB = table8Type5FindById(*b);
-    int diff = FUN_0024c52c(recordA->category) - FUN_0024c52c(recordB->category);
+    int diff = itemGetSortCategory(recordA->category) - itemGetSortCategory(recordB->category);
 
     if (diff == 0) {
         u16 orderA = dataTable40FindById(recordA->category)->order;

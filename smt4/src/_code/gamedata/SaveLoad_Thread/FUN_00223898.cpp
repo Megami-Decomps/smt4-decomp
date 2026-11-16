@@ -70,7 +70,7 @@ static __inline s32 startWorkerThread(SaveLoadThreadWork *work, void (*entry)(vo
     ThreadBoundArgs args = {work};
     s32 result = FUN_002bcc60(work->thread, &traits, entry, &args, work->stackBase + work->stackSize, 17, -2, 0);
     if (nnResultIsFailureExceptSummary(result, 3)) {
-        FUN_002c526c(result);
+        resultHandleFailure(result);
     }
     return result;
 }
@@ -84,12 +84,12 @@ bool FUN_00223898(SaveLoadThreadWork *work, u8 kind)
     s32 result = createSemaphore(&work->semaphore, 0, 1);
     bool failed = nnResultIsFailure(result);
     if (failed) {
-        FUN_002c526c(result, failed);
+        resultHandleFailure(result, failed);
     }
     result = releaseSemaphore(work->semaphore, 1);
     failed = nnResultIsFailure(result);
     if (failed) {
-        FUN_002c526c(result, failed);
+        resultHandleFailure(result, failed);
     }
 
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\gamedata\\SaveLoad_Thread.cpp", 511);

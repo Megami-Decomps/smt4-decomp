@@ -24,7 +24,7 @@ extern UiHolder g_engineCleanupOwner;
 
 extern void scrScriptProcessDestroy(u32 process);
 extern void asdMemFree(void *p);
-extern void FUN_001695a0(void);
+extern void messageSetScriptDisplayMode(void);
 extern void dataTableFree(s32 table);
 extern void asdTMTexTableReleaseNode(s32 table, s32 node);
 
@@ -40,7 +40,7 @@ void FUN_00267bf0(void)
         scrScriptProcessDestroy(sub->process);
         asdMemFree(sub->bufferA);
         asdMemFree(sub->bufferB);
-        FUN_001695a0();
+        messageSetScriptDisplayMode();
         asdMemFree(sub->bufferC);
         dataTableFree(0x14);
         dataTableFree(0x25);

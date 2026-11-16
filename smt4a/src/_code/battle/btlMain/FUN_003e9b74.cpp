@@ -15,7 +15,7 @@ static inline BattleRosterRecordA *findFirstMarkedOpponent(BtlMainStateA *state)
 }
 
 extern "C" {
-void *FUN_00178b04(u32 size, const char *file, s32 line);
+void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 u32 *battleModelOwnerInitialize(u32 *owner);
 BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, s32 group);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
@@ -31,7 +31,7 @@ void FUN_003e9b74(BtlMainStateA *state)
     };
     typedef char IdentifierOffsetCheck[offsetof(EnvironmentResourceView, identifier) == 0x8C ? 1 : -1];
 
-    u32 *owner = (u32 *)FUN_00178b04(0x24, "c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlMain.cpp", 0x3626);
+    u32 *owner = (u32 *)asdMemoryAllocTraced(0x24, "c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlMain.cpp", 0x3626);
     state->environmentModel.owner = owner != NULL ? battleModelOwnerInitialize(owner) : NULL;
     char name[64] = {};
     BattleRosterRecordA *selected = findFirstMarkedOpponent(state);

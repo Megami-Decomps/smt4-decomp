@@ -5,8 +5,8 @@
 extern "C" {
 
 int itemGroupHasEnabledItem(unsigned int, int);
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
+int libm_cosf(void);
+int libm_sinf(void);
 int FUN_0033f42c(void);
 int VectorSignedToFloat(unsigned int, int);
 
@@ -63,8 +63,8 @@ extern float DAT_00610b00; /* 0x610b00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: itemGroupHasEnabledItem. */
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_0033f42c. */
 extern int sceneFindRecordByName(unsigned int, int, unsigned char *);
 extern short resourceNameGroupFindIndex(unsigned int, unsigned char *);
@@ -139,8 +139,8 @@ void FUN_00297024(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v32 = temp_v42;
   temp_v33 = temp_v42;
   temp_v43 = temp_v42;
-  FUN_001bc124();
-  FUN_001bbf0c();
+  libm_sinf();
+  libm_cosf();
   temp_v25 = (float)VectorSignedToFloat(in_stack_00000018,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v26 = (float)VectorSignedToFloat(in_stack_0000001c,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v27 = (float)VectorSignedToFloat(in_stack_00000020,(unsigned char)(in_fpscr >> 0x16) & 3);

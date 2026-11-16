@@ -23,7 +23,7 @@ struct NpcShopSelectionState {
 };
 
 extern "C" {
-ScriptRunState *FUN_00275bc8(void *tableGroup, void *scriptData);
+ScriptRunState *scrScriptProcessCreate(void *tableGroup, void *scriptData);
 void scrScriptProcessStartEntry(ScriptRunState *script, s32 entry);
 s32 tableGroupFindEntryIndex(void *group, const char *name);
 s32 loadSlotIsLoaded(u32 slot);
@@ -33,7 +33,7 @@ extern const char DAT_0053322c[]; /* npcShop_Select_00 */
 void FUN_003e36e4(NpcShopSelectionState *shop)
 {
     if (shop->scriptData && shop->tableGroup && loadSlotIsLoaded(0x4f)) {
-        shop->script = FUN_00275bc8(shop->tableGroup, shop->scriptData);
+        shop->script = scrScriptProcessCreate(shop->tableGroup, shop->scriptData);
         shop->script->mode = 2;
         s32 entry = tableGroupFindEntryIndex(shop->tableGroup, DAT_0053322c);
         if (entry >= 0)

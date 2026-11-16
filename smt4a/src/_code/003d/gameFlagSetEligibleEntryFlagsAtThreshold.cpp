@@ -15,7 +15,7 @@ struct EntryRecordView {
 
 extern "C" {
 u8* gameFlagBlockGetEntry(u16 entryId);
-s32 FUN_003df390(u16 entryId);
+s32 gameUnlockRecordRequirementsMet(u16 entryId);
 EntryRecordView* dataTable1bOr1cGetRecord(u16 entryId);
 
 
@@ -26,7 +26,7 @@ void gameFlagSetEligibleEntryFlagsAtThreshold(s32 threshold)
         if ((*gameFlagBlockGetEntry((u16)entryId) & 1) != 0) {
             continue;
         }
-        if (FUN_003df390((u16)entryId) == 0) {
+        if (gameUnlockRecordRequirementsMet((u16)entryId) == 0) {
             continue;
         }
 

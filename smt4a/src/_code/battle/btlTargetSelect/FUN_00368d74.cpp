@@ -38,7 +38,7 @@ struct TargetSelectView {
 
 extern "C" {
 extern TargetSelectView* g_btlTargetSelect;
-u8 FUN_0026264c(u32 value);
+u8 itemIsCollectedWithRelated(u32 value);
 s32 FUN_002a1850(TargetValueView* value, s32 mode, u32 context,
                  const TargetValueView* source);
 
@@ -51,7 +51,7 @@ void FUN_00368d74(s32 entryIndex, const TargetValueView* source, u32 target,
     if (entryIndex < 5) {
         TargetEntryView* entry = &select->unk04->entries[entryIndex];
         entry->unk0F = 1;
-        entry->unk08 = FUN_0026264c(target);
+        entry->unk08 = itemIsCollectedWithRelated(target);
         entry->unk09 = field09;
         entry->unk0A = field0A;
         entry->unk0B = field0B;

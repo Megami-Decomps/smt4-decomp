@@ -73,7 +73,7 @@ unsigned int FUN_001e84f0(void)
   if ((((DAT_0049fc9c != 0) && (DAT_0049f93e == '\0')) && (DAT_0049f940 == '\0')) &&
      (*DAT_004474f4 != 3)) {
     iVar21 = 0;
-    fVar3 = (float)FUN_002c5d80(5,0);
+    fVar3 = (float)renderCtxPackPassFlags(5,0);
     piVar16 = (int *)(iVar19 + 0x124c);
     iVar8 = *piVar16;
     fVar9 = (float)piVar16[iVar8 + 2];
@@ -431,7 +431,7 @@ LAB_001e8a6c:
       *(unsigned char *)(iVar19 + 0x1264) = 0;
     }
     iVar19 = DAT_0044ea00;
-    iVar8 = FUN_002c5d80(5,0);
+    iVar8 = renderCtxPackPassFlags(5,0);
     piVar16 = (int *)(iVar19 + 0x124c);
     iVar21 = *piVar16;
     iVar20 = piVar16[iVar21 + 2];

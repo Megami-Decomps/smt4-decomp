@@ -48,7 +48,7 @@ void FUN_00137144(void)
     asdTMTexTableLoadTmx(3, 0);
     asdTMTexTableLoadSprites(8);
     for (s32 i = 0; i < 3; i++)
-        FUN_0014afd0(8, i);
+        asdTMTexTablePrepareNodeImage(8, i);
     g_messageMain.main = FUN_00145280();
     g_messageMain.second = FUN_00145280();
     g_messageMain.third = FUN_00145280();

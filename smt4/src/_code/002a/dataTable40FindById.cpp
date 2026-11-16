@@ -17,13 +17,13 @@ extern AocSystem *g_aocSystem;
 
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 dataCompareUnsignedRecordKeys(const void *a, const void *b);
-DataTable40Record *FUN_0014ca60(AocSystem *system, u32 id);
+DataTable40Record *dataTable40BsearchRecord(AocSystem *system, u32 id);
 
 
 /* Finds the record with `id`: the add-on content's override first, else a search of data table 4/0. */
 Table04Record *dataTable40FindById(u32 id)
 {
-    DataTable40Record *record = FUN_0014ca60(g_aocSystem, id);
+    DataTable40Record *record = dataTable40BsearchRecord(g_aocSystem, id);
 
     if (record != NULL) {
         return reinterpret_cast<Table04Record *>(record);

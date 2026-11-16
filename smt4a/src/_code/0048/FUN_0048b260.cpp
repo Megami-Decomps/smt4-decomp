@@ -8,10 +8,10 @@ void FUN_0048b260(AnimatedMessageWork *work)
 {
     UiFloatPosition position;
     words2Copy(&work->position, &position);
-    renderStackPushIndexed(g_renderCtx, 3, FUN_001692ac(1, 0));
+    renderStackPushIndexed(g_renderCtx, 3, renderCtxPackPassFlags(1, 0));
     efctSetSpeed(1.0f);
-    FUN_00183bb0();
-    FUN_00164b5c(2, 0x13, 0x1c,
+    gxResetColorQuadToWhite();
+    texDrawCompositeSprite(2, 0x13, 0x1c,
         static_cast<s32>(static_cast<f32>(vec2GetXInt(&work->sprites[1])) + position.x),
         static_cast<s32>(position.y), 0xd3);
     TextureTableEntryIV *info = asdTMTexTableEntryAt(0x13, 0x111b);
@@ -23,7 +23,7 @@ void FUN_0048b260(AnimatedMessageWork *work)
     textDrawString(2, g_uiTextFontSettings.font, text, x, static_cast<f32>(info->y) + position.y, 0.0f, 0.0f, 1.0f);
     renderCtxPopState(g_renderCtx, 3);
     efctSetSpeed(1.0f);
-    FUN_00163aa4(&work->sprites[1], 1.0f);
+    uiSpriteAdvanceAnimation(&work->sprites[1], 1.0f);
     if (work->sprites[0].finished != 0 && uiAnimatedSpriteIsFinished(&work->sprites[1])) {
         work->sprites[0].completion.channels[2] = 1;
     }

@@ -50,7 +50,7 @@ void asdMdlManagerMarkDestroy(GimicObject *object);
 s32 FUN_0027cda0(void);
 void FUN_002671f4(s32 id, f32 x, f32 y, f32 z, f32 w, f32 a, f32 b, f32 c);
 void nodeSetTranslation(GimicObject *object, s32 index, f32 *position);
-void FUN_0028c618(GimicObject *object, s32 index, f32 a, f32 b, f32 c);
+void modelPartSetRotationDegrees(GimicObject *object, s32 index, f32 a, f32 b, f32 c);
 void modelSelectPrimaryMotion(GimicObject *object, f32 speed);
 
 /* Per-frame update of the map gimics: keeps their models' visibility and motion in sync with the map, and runs
@@ -115,7 +115,7 @@ void FUN_00274fac(void)
             }
             if (entry->dirty != 0) {
                 nodeSetTranslation(entry->object, 0, entry->position);
-                FUN_0028c618(entry->object, 0, 350.0f, entry->position[3], 350.0f);
+                modelPartSetRotationDegrees(entry->object, 0, 350.0f, entry->position[3], 350.0f);
                 if (((GimicNode *)entry->object)->motion != entry->motion) {
                     modelSelectPrimaryMotion(entry->object, 350.0f);
                 }

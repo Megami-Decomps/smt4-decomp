@@ -11,7 +11,7 @@ int selectionCopySupportedValue(...);
 int FUN_0023cd08(...);
 int FUN_00246134(...);
 int FUN_00247478(...);
-int FUN_0027da30(int, int);
+int btlFindEntryBlockByMemberId(int, int);
 int btlMainFindEntryByListedId(...);
 int targetSelectChangeDisplayMode(...);
 int btlTargetSelectSetEntry(...);
@@ -44,7 +44,7 @@ extern unsigned int g_btlAction; /* 0x434278 */
 /* Supplied declaration required: FUN_00246134. */
 /* Supplied declaration required: FUN_00247478. */
 extern int battleGetEntryHalfword(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0027da30. */
+/* Supplied declaration required: btlFindEntryBlockByMemberId. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: targetSelectChangeDisplayMode. */
@@ -96,7 +96,7 @@ void FUN_00229118(int *param_1,int param_2,unsigned int param_3,int param_4)
     g_btlAction = param_3;
     FUN_0023cd08(*param_1,param_3,0);
     temp_v0 = *param_1;
-    FUN_0027da30(temp_v0,(int)*(short *)(temp_v3 + param_3 * 0x114 + 0x62));
+    btlFindEntryBlockByMemberId(temp_v0,(int)*(short *)(temp_v3 + param_3 * 0x114 + 0x62));
     temp_v3 = __aeabi_idivmod(*(short *)(temp_v0 + 0xe8) * 100,(int)*(short *)(temp_v0 + 0xea));
     temp_v13[0] = (unsigned int)(temp_v3 < 0x14);
     temp_v1 = reinterpret_cast<int>(btlGetMainState());

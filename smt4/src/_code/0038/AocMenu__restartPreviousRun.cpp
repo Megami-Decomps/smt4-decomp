@@ -4,7 +4,7 @@
 extern "C" {
 
 int FUN_002a03d8(int a, int b);
-extern int FUN_002896bc(void);
+extern int screenFadesAllReady(void);
 
 struct Object;
 typedef struct ObjectVtbl {
@@ -28,7 +28,7 @@ void AocMenu::restartPreviousRun()
 {
     Obj * obj = reinterpret_cast<Obj *>(this);
     if (obj->state != 0) {
-        if ((obj->state == 1) && (FUN_002896bc() != 0)) {
+        if ((obj->state == 1) && (screenFadesAllReady() != 0)) {
             obj->unk004 = 2;
             obj->state = 0;
             if (obj->object != NULL) {

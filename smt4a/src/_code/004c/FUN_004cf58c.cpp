@@ -14,9 +14,9 @@ extern "C" {
 extern RenderCtxA *g_renderCtx;
 
 void efctSetSpeed(f32 speed);
-s32 FUN_001692ac(u32 first, u32 second);
-void FUN_001835b4(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 color);
-void FUN_00183bb0(void);
+s32 renderCtxPackPassFlags(u32 first, u32 second);
+void texDrawTableEntryAtStoredOrigin(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 color);
+void gxResetColorQuadToWhite(void);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 
 // Draws the wide and the narrow sprite of the effect with a stereo offset, each between a render-state push and pop.
@@ -25,20 +25,20 @@ void FUN_004cf58c(StereoSpriteEffect *effect)
     if (effect->visible == 0) {
         return;
     }
-    renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
+    renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
     efctSetSpeed(1.0f);
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
     asdTMTexTableEntryAt(0x22, 3000);
     f32 wideOffset = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.35f);
-    FUN_001835b4(2, 0x22, 3000, wideOffset, 0, 2);
+    texDrawTableEntryAtStoredOrigin(2, 0x22, 3000, wideOffset, 0, 2);
     renderStackPop(&g_renderCtx->stackA);
     efctSetSpeed(1.0f);
-    renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
+    renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
     efctSetSpeed(effect->speed);
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
     asdTMTexTableEntryAt(0x22, 1000);
     f32 narrowOffset = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.28f);
-    FUN_001835b4(2, 0x22, 1000, narrowOffset, 0, 6);
+    texDrawTableEntryAtStoredOrigin(2, 0x22, 1000, narrowOffset, 0, 6);
     renderStackPop(&g_renderCtx->stackA);
     efctSetSpeed(1.0f);
 }

@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0016e800(int, int);
+int sysReportCheckFailure(int, int);
 int FUN_0042b398(unsigned int);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_0016e800. */
+/* Supplied declaration required: sysReportCheckFailure. */
 /* Supplied declaration required: FUN_0042b398. */
 
 
@@ -44,7 +44,7 @@ int FUN_00460108(int param_1)
     temp_v2 = FUN_0042b398(temp_v0);
     temp_v3 = 1;
     if (temp_v2 < 0) {
-      FUN_0016e800(temp_v2,0x460154);
+      sysReportCheckFailure(temp_v2,0x460154);
     }
   }
   return temp_v3;

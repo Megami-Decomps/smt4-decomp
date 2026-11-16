@@ -57,7 +57,7 @@ LayoutPoint *asdTMTexTableEntryAt(s32 group, s32 part);
 void renderCtxResetColorScale(TitleScene *scene);
 void renderCtxApplyTransforms(TitleScene *scene);
 void renderCtxSelectStereoLayout(TitleScene *scene);
-s32 FUN_002c5d80(s32 a, s32 b);
+s32 renderCtxPackPassFlags(s32 a, s32 b);
 u32 vec2GetXInt(void *vec);
 u32 vec2GetYInt(void *vec);
 
@@ -67,7 +67,7 @@ u8 FUN_002109cc(void)
     ButtonHelp *help = g_buttonHelp.block;
     if (help->enabled) {
         renderCtxSelectStereoLayout(g_titleScene);
-        renderStackPush(&g_titleScene->stack, FUN_002c5d80(1, 0));
+        renderStackPush(&g_titleScene->stack, renderCtxPackPassFlags(1, 0));
         if (help->mode <= 3 && (help->mode < 2 || help->mode == 2 || help->mode == 3)) {
             FUN_00190e48();
             if (help->visible) {
@@ -77,8 +77,8 @@ u8 FUN_002109cc(void)
                 } else {
                     u32 x = vec2GetXInt(help->anchor);
                     u32 y = vec2GetYInt(help->anchor);
-                    FUN_002bf288(2, 0x12, 0, x, y, 0x10);
-                    FUN_002bf288(2, 0x12, 1, x, y, 0x10);
+                    texDrawTableEntryAtStoredOrigin(2, 0x12, 0, x, y, 0x10);
+                    texDrawTableEntryAtStoredOrigin(2, 0x12, 1, x, y, 0x10);
                 }
                 if (help->visible && help->showIcons && help->fade >= 1.0f) {
                     LayoutPoint *first = asdTMTexTableEntryAt(0x12, 0x1D);

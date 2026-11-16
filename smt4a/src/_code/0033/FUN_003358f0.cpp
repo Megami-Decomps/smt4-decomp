@@ -9,14 +9,14 @@ extern "C" {
 
 extern BtlTalkMessage *g_btlTalk;
 
-u32 FUN_0027099c(void);
+u32 btlGetActiveShareRating(void);
 u32 messageAuxDispatch(u32 message, u32 name);
 
-/* Dispatches the talk's message together with the name FUN_0027099c yields. */
+/* Dispatches the talk's message together with the name btlGetActiveShareRating yields. */
 u32 FUN_003358f0(void)
 {
     u32 message = g_btlTalk->message;
-    return messageAuxDispatch(message, FUN_0027099c());
+    return messageAuxDispatch(message, btlGetActiveShareRating());
 }
 
 } /* extern "C" */

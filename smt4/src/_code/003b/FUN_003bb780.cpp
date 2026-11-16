@@ -8,7 +8,7 @@ extern "C" {
 f32 jobGetScalarValue(void);
 s32 vec2GetXInt(Vec2Int *v);
 s32 vec2GetYInt(Vec2Int *v);
-void FUN_002bf380(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 size);
+void texDrawCompositeSprite(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 size);
 f32 *asdTMTexTableEntryAt(s32 group, s32 id);
 void efctSetSpeed(f32 alpha);
 f32 vec2GetSpeed(const void *animation);
@@ -31,8 +31,8 @@ void FUN_003bb780(ListMenu *menu)
     s32 x = vec2GetXInt(position);
     s32 y = vec2GetYInt(position);
 
-    FUN_002bf288(2, 42, 31, x, y, 31);
-    FUN_002bf288(2, 42, 32, x, y, 31);
+    texDrawTableEntryAtStoredOrigin(2, 42, 31, x, y, 31);
+    texDrawTableEntryAtStoredOrigin(2, 42, 32, x, y, 31);
 
     s16 *frame = (s16 *)asdTMTexTableEntryAt(42, 33);
     s16 offsetX = frame[4];
@@ -41,10 +41,10 @@ void FUN_003bb780(ListMenu *menu)
     s32 iconY = vec2GetYInt(position) + offsetY;
 
     efctSetSpeed(1.0f);
-    FUN_002bf380(2, 42, menu->iconA, iconX, iconY, 31);
+    texDrawCompositeSprite(2, 42, menu->iconA, iconX, iconY, 31);
     if (menu->iconB != -1) {
         efctSetSpeed(vec2GetSpeed(&menu->iconBAnimation));
-        FUN_002bf380(2, 42, menu->iconB, iconX, iconY, 32);
+        texDrawCompositeSprite(2, 42, menu->iconB, iconX, iconY, 32);
     }
 
     s32 first = FUN_0029e924(menu);

@@ -68,27 +68,27 @@ u32 mapIfActivateRecord(u8 enabled, s32 index)
     if (record->display.category >= 0x22) {
         record->state = 7;
         if (g_gameState.unk18 == 0)
-            FUN_00291e40(0x10001ff, soundPosition(FUN_003e0e60(&details->position, 1.0f / 3.0f)));
+            soundActorStartOnFreeChannel(0x10001ff, soundPosition(FUN_003e0e60(&details->position, 1.0f / 3.0f)));
     } else if (details->destination == -1) {
         record->state = 9;
-        FUN_00291e40(0x10001ff, soundPosition(details->position));
+        soundActorStartOnFreeChannel(0x10001ff, soundPosition(details->position));
     } else if (details->destination == -2) {
         record->state = 11;
-        FUN_00291e40(0x10001ff, soundPosition(details->position));
+        soundActorStartOnFreeChannel(0x10001ff, soundPosition(details->position));
     } else if (details->destination == -3) {
         record->state = 13;
-        FUN_00291e40(0x10001ff, soundPosition(details->position));
+        soundActorStartOnFreeChannel(0x10001ff, soundPosition(details->position));
     } else if (details->linked == 0) {
         record->state = 15;
         if (g_gameState.unk18 == 0)
-            FUN_00291e40(0x10001ff, soundPosition(details->position));
+            soundActorStartOnFreeChannel(0x10001ff, soundPosition(details->position));
     } else {
         record->state = 7;
         if (!(g_gameState.unk18 != 0 && DAT_004474f4->mode == 0)) {
             if (g_gameState.unk000 >= 100)
-                FUN_00291e40(0x10001ff, soundPosition(FUN_003e0e60(&details->position, 1.0f / 3.0f)));
+                soundActorStartOnFreeChannel(0x10001ff, soundPosition(FUN_003e0e60(&details->position, 1.0f / 3.0f)));
             else
-                FUN_00291e40(0x10001ff, soundPosition(details->position));
+                soundActorStartOnFreeChannel(0x10001ff, soundPosition(details->position));
         }
     }
     details->timer = 0;

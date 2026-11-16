@@ -126,7 +126,7 @@ void FUN_0033adf8(BattleMainBlock* battle, u32 row)
             }
         }
     }
-    rt_memclr(FUN_00282be4(), 0x104a);
+    rt_memclr(saveGetUnlockFlagBlock(), 0x104a);
     for (s32 i = 0; i < 5; i++) {
         if (scenario->stock[i].id != 0 && scenario->stock[i].count != 0) {
             FUN_00295a18(scenario->stock[i].id, scenario->stock[i].count);

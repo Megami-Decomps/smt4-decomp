@@ -8,7 +8,7 @@ extern UniteWork *g_unite;
 DevilRecordA *devilGetRecord(u32 id);
 void sysMemClear(void *memory, u32 size);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
-void FUN_00203b40(void *cursor, s32 count, s32 visibleRows, s32 first, s32 second, s32 third);
+void gridNavigationConfigure(void *cursor, s32 count, s32 visibleRows, s32 first, s32 second, s32 third);
 }
 
 static __inline void fusionAppendUniqueSkill(u16 *merged, const u16 *skill)
@@ -86,5 +86,5 @@ extern "C" void FUN_003bb710(u32 devilId)
         inheritance->inherited[count++] = skill;
     }
     inheritance->totalCount = count;
-    FUN_00203b40(inheritance->cursor, count + 1, 9, 1, 1, 1);
+    gridNavigationConfigure(inheritance->cursor, count + 1, 9, 1, 1, 1);
 }

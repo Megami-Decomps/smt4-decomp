@@ -3,7 +3,7 @@
 
 extern "C" {
 f32 phaseCosInterpolate(f32);
-f32 FUN_002b70cc(f32);
+f32 mathSinFixedAngle(f32);
 extern QuaternionWorkspace DAT_004ea81c;
 }
 
@@ -12,13 +12,13 @@ extern "C" void FUN_003f6b88(f32 x, f32 y, f32 z)
 {
     f32 halfX = x * -0.5f * 40.743664f;
     f32 cosX = phaseCosInterpolate(halfX);
-    f32 sinX = FUN_002b70cc(halfX);
+    f32 sinX = mathSinFixedAngle(halfX);
     f32 halfY = y * -0.5f * 40.743664f;
     f32 cosY = phaseCosInterpolate(halfY);
-    f32 sinY = FUN_002b70cc(halfY);
+    f32 sinY = mathSinFixedAngle(halfY);
     f32 halfZ = z * -0.5f * 40.743664f;
     f32 cosZ = phaseCosInterpolate(halfZ);
-    f32 sinZ = FUN_002b70cc(halfZ);
+    f32 sinZ = mathSinFixedAngle(halfZ);
     RotationQuaternion rotation;
     rotation.x = sinY * sinZ * cosX + cosZ * sinX * cosY;
     rotation.y = cosZ * sinY * cosX - sinZ * cosY * sinX;

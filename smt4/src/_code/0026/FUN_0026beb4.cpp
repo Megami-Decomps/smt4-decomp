@@ -8,7 +8,7 @@ extern "C" {
 
 s32 FUN_00293230(BtlMainState* state);
 
-void FUN_002505c0(u32 a, u32 b, u32 event, s32 c, s32 d, s32 e, s32 f);
+void btlQueueKeyedScalarReflectAction(u32 a, u32 b, u32 event, s32 c, s32 d, s32 e, s32 f);
 
 // Menu cursor step for the given direction `kind`: works out how far the two cursors move
 // (clamped to the row limit), optionally sends the "cannot move" notice, then queues the
@@ -93,7 +93,7 @@ u32 FUN_0026beb4(u32 id, u32 arg, u32 kind, u32 unused, f32 speed)
     }
 
     if (check && FUN_00293230(state) == 0 && (state->battleFlags & 0x1000) == 0) {
-        FUN_002505c0(id, arg, 0x01000175, 0, 0, 0, 0);
+        btlQueueKeyedScalarReflectAction(id, arg, 0x01000175, 0, 0, 0, 0);
     }
 
     if (state->menuCursor.x + moveX > 9) moveX = 9 - state->menuCursor.x;

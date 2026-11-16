@@ -20,7 +20,7 @@ typedef struct SkinObject {
 } SkinObject;
 
 extern int FUN_00187a84(SkinObject *obj, void *a, void *b, Mtx44 *bind);
-extern int FUN_00187d90(u32 handle, void *b);
+extern int gpuWriteVertexUniformMatrix(u32 handle, void *b);
 extern void mathCopyIdentityMatrix(Mtx44 *mtx);
 
 /* Whether `mtx` is the identity matrix. */
@@ -41,7 +41,7 @@ void skinObjectUpdateMatrices(SkinObject *obj)
     mathCopyIdentityMatrix(&obj->bind);
     mathCopyIdentityMatrix(&obj->inverse);
     FUN_00187a84(obj, obj->skinB, obj->skinA, &obj->bind);
-    FUN_00187d90(obj->handle, obj->skinC);
+    gpuWriteVertexUniformMatrix(obj->handle, obj->skinC);
     obj->dirty = 0;
 }
 

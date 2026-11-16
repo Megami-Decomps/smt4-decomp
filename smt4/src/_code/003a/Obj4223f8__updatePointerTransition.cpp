@@ -19,8 +19,8 @@ struct UpdateStateView {
 extern "C" {
 void pointConvertToFloat(void* destination, s32 x, s32 y);
 s32 FUN_00295618(void);
-void FUN_0029e874(s32 value);
-void FUN_002bf818(UiSpriteState* position);
+void gameSetIconDisplayEnabled(s32 value);
+void uiSpriteAdvanceAnimation(UiSpriteState* position);
 s32 vec2GetYInt(const UiSpriteState* position);
 s32 vec2GetXInt(const UiSpriteState* position);
 s8 uiSpriteGetCompletionState(const UiSpriteState* position);
@@ -34,11 +34,11 @@ void Obj4223f8::updatePointerTransition()
 {
     UpdateStateView* state = reinterpret_cast<UpdateStateView*>(this);
     if (FUN_00295618() != 0) {
-        FUN_0029e874(0);
+        gameSetIconDisplayEnabled(0);
     }
 
     UiSpriteState* position = &state->unk188;
-    FUN_002bf818(position);
+    uiSpriteAdvanceAnimation(position);
     s32 y = vec2GetYInt(position);
     s32 x = vec2GetXInt(position);
     pointConvertToFloat(state->unkC8, x, y);

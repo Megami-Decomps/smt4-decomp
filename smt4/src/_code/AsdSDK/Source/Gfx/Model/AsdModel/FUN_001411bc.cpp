@@ -11,8 +11,8 @@
 
 extern "C" {
 ManagedCameraIV *FUN_00145e10();
-ManagedCameraIV *FUN_002c501c();
-u32 FUN_002c5210();
+ManagedCameraIV *asdCameraGetSavedRenderPairs();
+u32 gxIsStereoscopic3dEnabled();
 f32 workScalarGet(const WorkScalar *);
 void nn_math_ARMv6_MTX34CopyAsm(void *, const void *);
 extern u8 DAT_00472140[];
@@ -60,7 +60,7 @@ extern "C" void FUN_001411bc(MovedPart *model, s32 cameraIndex)
         offsetof(CameraTransform, matrix) == 0x4C ? 1 : -1];
     ManagedCameraIV *camera;
     if (cameraIndex == 0)
-        camera = FUN_002c501c();
+        camera = asdCameraGetSavedRenderPairs();
     else
         camera = FUN_00145e10();
     const CameraDescription *description = reinterpret_cast<const CameraDescription *>(camera);
@@ -74,7 +74,7 @@ extern "C" void FUN_001411bc(MovedPart *model, s32 cameraIndex)
     lens->nearClip = description->pose.nearClip;
     lens->farClip = description->pose.farClip;
     lens->fieldOfView = description->pose.fieldOfView * 0.017453292f;
-    if (cameraIndex == 0 && FUN_002c5210() == 1)
+    if (cameraIndex == 0 && gxIsStereoscopic3dEnabled() == 1)
         fields->projection->unk08 = 0;
     else
         fields->projection->unk08 = 1;

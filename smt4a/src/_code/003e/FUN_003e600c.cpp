@@ -23,8 +23,8 @@ struct ItemExchangeWork {
 };
 extern "C" {
 s32 loadSlotIsLoaded(u32 slot);
-ScriptRunState *FUN_00275bc8(void *resource, void *screen);
-u32 FUN_001ba3d4(u32 item);
+ScriptRunState *scrScriptProcessCreate(void *resource, void *screen);
+u32 flagValueRead(u32 item);
 
 /* Moves the exchange work to `state`, remembering the state it left and restarting its timer. */
 static inline void itemExchangeEnterState(ItemExchangeWork *work, u32 state)
@@ -38,7 +38,7 @@ static inline void itemExchangeEnterState(ItemExchangeWork *work, u32 state)
 void FUN_003e600c(ItemExchangeWork *work)
 {
     if (work->screen != NULL && work->scriptResource != NULL && loadSlotIsLoaded(0x4F) != 0) {
-        work->script = FUN_00275bc8(work->scriptResource, work->screen);
+        work->script = scrScriptProcessCreate(work->scriptResource, work->screen);
         work->script->mode = 2;
         u32 key = work->key;
         void *table = dataTableGet(0x4F, 0);
@@ -62,9 +62,9 @@ void FUN_003e600c(ItemExchangeWork *work)
                 }
             }
         }
-        u32 first = FUN_001ba3d4(0x7C4);
-        u32 second = FUN_001ba3d4(0x7C5);
-        u32 third = FUN_001ba3d4(0x7C6);
+        u32 first = flagValueRead(0x7C4);
+        u32 second = flagValueRead(0x7C5);
+        u32 third = flagValueRead(0x7C6);
         FUN_00359974(0x18, first, 0xFFFFFFFF, 0);
         FUN_00359974(0x19, second, 0xFFFFFFFF, 0);
         FUN_00359974(0x1A, third, 0xFFFFFFFF, 0);

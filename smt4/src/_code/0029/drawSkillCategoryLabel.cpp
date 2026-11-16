@@ -13,8 +13,8 @@ u32 questIsCompleted(s32 skill);
 u32 FUN_00298f88(u32 skill);
 s32 idIsAtLeast350(s32 skill);
 void drawSetColorFromRGBA8(u32);
-void FUN_002ae9ec(u32, u32, s32, u32, u32, u32);
-void FUN_002bed3c(void);
+void texTableRecordCallWithParams(u32, u32, s32, u32, u32, u32);
+void gxResetColorQuadToWhite(void);
 
 /* Draw the category label, using the alternate color/record for flagged skills. */
 void drawSkillCategoryLabel(u16 skill, s32 x, s32 y, u32 style)
@@ -55,7 +55,7 @@ void drawSkillCategoryLabel(u16 skill, s32 x, s32 y, u32 style)
     if (highlighted != 0) {
         drawSetColorFromRGBA8(0xF49800FF);
     }
-    FUN_002ae9ec(2, 0x13, label, x, y, style);
-    FUN_002bed3c();
+    texTableRecordCallWithParams(2, 0x13, label, x, y, style);
+    gxResetColorQuadToWhite();
 }
 } // extern "C"

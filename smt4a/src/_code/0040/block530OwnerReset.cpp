@@ -12,12 +12,12 @@ typedef struct Block530Owner {
 } Block530Owner;
 
 extern void FUN_00187a84(Block530Owner *owner);
-extern void FUN_00187d90(u32 handle, u8 *block);
+extern void gpuWriteVertexUniformMatrix(u32 handle, u8 *block);
 
 void block530OwnerReset(Block530Owner *owner)
 {
     FUN_00187a84(owner);
-    FUN_00187d90(owner->handle530, owner->block1198);
+    gpuWriteVertexUniformMatrix(owner->handle530, owner->block1198);
     owner->unk5F8 = 0;
 }
 

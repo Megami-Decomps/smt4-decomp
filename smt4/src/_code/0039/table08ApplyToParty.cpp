@@ -12,7 +12,7 @@ struct GameSlotTable {
 
 extern "C" {
 Table08Record *dataTable08Sub1GetRecord(u32 id);
-s32 FUN_00232b68(s32 slot, Table08Record *record, u32 option, s32 arg3, s32 arg4);
+s32 itemApplyToMember(s32 slot, Table08Record *record, u32 option, s32 arg3, s32 arg4);
 GameSlotTable *gameGetSlotTable(void);
 void FUN_00250d84(u32 id, s32 mode);
 
@@ -26,13 +26,13 @@ u32 table08ApplyToParty(u32 id, u32 option)
     s32 i;
 
     if (record != NULL) {
-        if (FUN_00232b68(-1, record, option, 0, 0) == 0) {
+        if (itemApplyToMember(-1, record, option, 0, 0) == 0) {
             applied = true;
         }
         table = gameGetSlotTable();
         for (i = 0; i < 24; i++) {
             s32 slot = table->slots[i];
-            if (slot >= 0 && FUN_00232b68(slot, record, option, 0, 0) == 0) {
+            if (slot >= 0 && itemApplyToMember(slot, record, option, 0, 0) == 0) {
                 applied = true;
             }
         }

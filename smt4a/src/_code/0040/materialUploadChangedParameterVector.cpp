@@ -10,7 +10,7 @@ extern "C" void materialUploadChangedParameterVector(MaterialParameterWork *work
         values->values[2] != work->parameters.values[2] ||
         values->values[3] != work->parameters.values[3]) {
         work->parameters = *values;
-        FUN_0019f828(work->handle, reinterpret_cast<const u32 *>(work->parameters.values));
+        gpuWriteVertexUniformVec4(work->handle, reinterpret_cast<const u32 *>(work->parameters.values));
     }
     work->dirty = 0;
 }

@@ -23,7 +23,7 @@ void FUN_00321f08(EffMiscObject* object)
 
     if (mode != 1) {
         u32 resource = g_renderCtx->unk6FC;
-        FUN_00157558(g_renderCtx);
+        renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         effMiscLateUpdate(object);
         if (mode == 3 || mode == 4) {
             uiSpriteRefreshMode(g_renderCtx);

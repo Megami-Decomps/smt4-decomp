@@ -5,7 +5,7 @@
 extern "C" {
 
 int btlGetMainState(...);
-int FUN_001568f8(...);
+int btlFindEntryBlockByMemberId(...);
 int recordGetScaledMaximum(void);
 int dataTable8FindRecord(void);
 int dataTable08Sub2GetRecord(void);
@@ -55,7 +55,7 @@ extern unsigned int DAT_005714fc; /* 0x5714fc */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_001568f8. */
+/* Supplied declaration required: btlFindEntryBlockByMemberId. */
 extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: recordGetScaledMaximum. */
 /* Supplied declaration required: dataTable8FindRecord. */
@@ -273,7 +273,7 @@ LAB_004c3334:
       temp_v12 = 0.01f;
       if (param_6 < 0x6d) {
         puVar5 = puVar4;
-        FUN_001568f8(puVar4,param_6);
+        btlFindEntryBlockByMemberId(puVar4,param_6);
         temp_v11 = (float)VectorSignedToFloat(puVar5[0x3e] * (unsigned int)*(unsigned char *)(param_4 + 0x38),
                                             (unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v11 = temp_v11 * temp_v12;
@@ -309,7 +309,7 @@ LAB_004c3334:
     if ((*(unsigned int *)(param_4 + 0x68) & 4) == 0) goto LAB_004c2f70;
     if (param_6 < 0x6d) {
       puVar5 = puVar4;
-      FUN_001568f8(puVar4,param_6);
+      btlFindEntryBlockByMemberId(puVar4,param_6);
       temp_v8 = puVar5[0x3e];
     }
     else {

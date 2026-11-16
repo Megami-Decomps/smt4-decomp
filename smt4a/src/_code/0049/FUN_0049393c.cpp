@@ -5,7 +5,7 @@
 extern "C" {
 ContentItemPriorityRecord *contentEntryFindById2(u32 id);
 EquipmentItemPriorityRecord *dataTable08Sub2GetRecord(u32 id);
-u16 FUN_0049c9a0(const u16 *id);
+u16 recordGetCompareValue(const u16 *id);
 }
 
 static inline u32 itemPriority(const u16 *item)
@@ -40,8 +40,8 @@ static inline u32 itemPriority(const u16 *item)
 /* Orders two entries by their secondary key. */
 static s32 compareOrder(const u16 *left, const u16 *right)
 {
-    s32 leftOrder = FUN_0049c9a0(left);
-    s32 rightOrder = FUN_0049c9a0(right);
+    s32 leftOrder = recordGetCompareValue(left);
+    s32 rightOrder = recordGetCompareValue(right);
     return leftOrder - rightOrder;
 }
 

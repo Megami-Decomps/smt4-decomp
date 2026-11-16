@@ -7,7 +7,7 @@ extern "C" {
 
 void asdTMTexTableReleaseNode(s32 table, s32 index);
 void uiSpriteSetImageKeyframe(SceneSprite *sprite, s32 keyframe, s32 arg2);
-s32 FUN_002bf818(SceneSprite *sprite);
+s32 uiSpriteAdvanceAnimation(SceneSprite *sprite);
 s32 flaggedValueHolderGetTotal(SceneWidget *widget);
 /* Whether the sprite's image is up (a signed byte at 0x8a). */
 s32 uiSpriteGetCompletionState(SceneSprite *sprite);
@@ -30,7 +30,7 @@ void FUN_003bb454(SceneWidget *widget)
             uiSpriteSetImageKeyframe(&widget->sprite, 1, 0);
         }
     }
-    if (widget->nextTex != -1 && FUN_002bf818(&widget->sprite) != 0) {
+    if (widget->nextTex != -1 && uiSpriteAdvanceAnimation(&widget->sprite) != 0) {
         widget->shownTex = widget->nextTex;
         widget->shownKey = widget->nextKey;
         widget->nextTex = -1;

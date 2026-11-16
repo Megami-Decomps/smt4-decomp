@@ -23,7 +23,7 @@ typedef char EffectGeometryBatchLayout[sizeof(EffectGeometryBatchView) == 0x5c &
 extern "C" {
 extern const char DAT_0054baf8[];
 void *memAlloc(u32, u32, u32, u32, u32, u32);
-void *FUN_00178b04(u32, const char *, u32);
+void *asdMemoryAllocTraced(u32, const char *, u32);
 EffectGeometrySlotView *slotReset(EffectGeometrySlotView *);
 void slotInit(EffectGeometrySlotView *, u32, s32, s32);
 void matrix44SetIdentity(f32 *);
@@ -33,7 +33,7 @@ EffectGeometryBatchView *FUN_002ce938(s32 count, s32 verticesPerItem, s32 triang
 {
     asdDebugTrace(DAT_0054baf8, 504);
     EffectGeometryBatchView *batch = static_cast<EffectGeometryBatchView *>(memAlloc(0x10000, 0x100, 0, sizeof(EffectGeometryBatchView), 0x10, 1));
-    EffectGeometrySlotView *slotMemory = static_cast<EffectGeometrySlotView *>(FUN_00178b04(sizeof(EffectGeometrySlotView), DAT_0054baf8, 506));
+    EffectGeometrySlotView *slotMemory = static_cast<EffectGeometrySlotView *>(asdMemoryAllocTraced(sizeof(EffectGeometrySlotView), DAT_0054baf8, 506));
     EffectGeometrySlotView *slot = (slotMemory != NULL) ? slotReset(slotMemory) : NULL;
     s32 triangles = trianglesPerItem * count;
     s32 vertices = verticesPerItem * count;

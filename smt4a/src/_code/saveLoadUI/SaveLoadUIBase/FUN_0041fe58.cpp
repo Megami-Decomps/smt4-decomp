@@ -85,12 +85,12 @@ void FUN_003f86f0(void);
 void sysMemClear(void *block, u32 size);
 void paramsClearPacket(void *packet);
 
-void FUN_0014e188(void *sprite, u32 group, u32 id, void *owner, u32 flag, f32 scale);
+void uiSpriteStateInitFromSource(void *sprite, u32 group, u32 id, void *owner, u32 flag, f32 scale);
 void uiSpriteInitializeState(void *sprite, u32 group, u32 id, u32 size, void *owner, u32 anim, f32 scale);
 u8 saveLoadProcessGetState(void);
 void sysPlaySe(u32 id);
 void FUN_0041f020(SaveLoadUI *ui, s32 arg);
-void FUN_00203b40(void *list, s32 count, s32 rows, s32 columns, s32 a, s32 b);
+void gridNavigationConfigure(void *list, s32 count, s32 rows, s32 columns, s32 a, s32 b);
 void flaggedEntrySetValueA(void *list, s32 value);
 void scrollOwnerSetValue(void *list, s32 value);
 void buttonHelpSetText(s32 a, u32 color);
@@ -136,7 +136,7 @@ void FUN_0041fe58(SaveLoadUI *ui, s32 isLoad, u8 option)
     ui->buffer = asdMemoryAlloc(0x100, 0x100, 0, 100, 1);
     paramsClearPacket(ui->params);
     paramsInit(reinterpret_cast<UiResourceParameters *>(ui->params), DAT_00533d50, 0x78, DAT_00533dc8, 0x18, NULL, 0, 0, 0, DAT_00533de0, 0xE0);
-    FUN_0014e188(ui->sprite0, 0x2B, 1, ui->params, 0xC9, 1.0f);
+    uiSpriteStateInitFromSource(ui->sprite0, 0x2B, 1, ui->params, 0xC9, 1.0f);
     uiSpriteInitializeState(ui->sprite1, 0x2B, 0x51, 2, ui->params, 2, 1.0f);
     uiSpriteInitializeState(ui->sprite2, 0x2B, 0x52, 2, ui->params, 2, 1.0f);
     ui->unk618 = 0;
@@ -165,7 +165,7 @@ void FUN_0041fe58(SaveLoadUI *ui, s32 isLoad, u8 option)
     }
     ui->scrollTop = top;
     ui->scrollRange = range;
-    FUN_00203b40(ui->list, 5, 2, 1, 1, 1);
+    gridNavigationConfigure(ui->list, 5, 2, 1, 1, 1);
     flaggedEntrySetValueA(ui->list, range);
     scrollOwnerSetValue(ui->list, top);
     buttonHelpSetText(0, 0xF4F4F4FF);

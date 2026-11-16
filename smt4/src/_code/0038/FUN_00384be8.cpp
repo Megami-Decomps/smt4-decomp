@@ -11,7 +11,7 @@ int scrScriptProcessStartMappedEntry(unsigned int *, unsigned char *);
 int messageMainRequestBanner(void);
 int FUN_00290d5c(int);
 int scrScriptProcessStartEntry(...);
-int FUN_00297060(unsigned int, unsigned int);
+int scrScriptProcessCreate(unsigned int, unsigned int);
 int messageMainGetChoiceResult(void);
 int asdLoadFileAsyncSimple(unsigned char [64], unsigned int *, int);
 int scrScriptProcessDestroy(void);
@@ -45,7 +45,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
 extern unsigned int messageTargetGetValue(void);
 extern int messageWindowIsState1(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_00297060. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 /* Supplied declaration required: messageMainGetChoiceResult. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
@@ -211,7 +211,7 @@ void FUN_00384be8(unsigned int *param_1)
       animOwnerSetScale(param_1[*(int *)(*puVar6 + 4) + 0x343], 0.0f);
       FUN_002e1230(param_1[*(int *)(*puVar6 + 4) + 0x343],0);
       temp_v2 = param_1[0x16e];
-      FUN_00297060(temp_v2,param_1[0x16f]);
+      scrScriptProcessCreate(temp_v2,param_1[0x16f]);
       param_1[0x170] = temp_v2;
       *(unsigned int *)(temp_v2 + 0x108) = 2;
       temp_v4 = dataTable27Sub0GetRecord(param_1 + 8,0);

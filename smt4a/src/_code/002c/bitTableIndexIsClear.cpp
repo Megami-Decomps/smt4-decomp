@@ -14,7 +14,7 @@ u8 bitTableIndexIsClear(u32 index)
 {
     BitTable *table;
 
-    table = reinterpret_cast<BitTable *>(FUN_0026140c());
+    table = reinterpret_cast<BitTable *>(saveGetUserSettingsBlock());
     if (((u32)table->bits[index >> 3] & (1 << (index & 7))) != 0) {
         return 0;
     }

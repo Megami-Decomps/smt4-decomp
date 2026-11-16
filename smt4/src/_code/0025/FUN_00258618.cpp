@@ -45,7 +45,7 @@ extern RenderCtx *g_titleScene;
 void FUN_002f5288(ScreenHolder *holder, s32 mode);
 void FUN_00343324(RenderCtx *context, const Matrix44 *projection, s32 mode);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);
-s32 FUN_002c5d80(u32 kind, u8 enabled);
+s32 renderCtxPackPassFlags(u32 kind, u8 enabled);
 s32 flagsPackFourBooleans(u8 first, u8 second, u8 third, u8 fourth);
 u32 FUN_003deab0(LogoObject *logo, s32 mode);
 void FUN_0023e024(LogoObject *logo, u32 handle, f32 *position, s32 color, s32 mode, f32 scale);
@@ -82,7 +82,7 @@ void FUN_00258618(TitleLogoRequest *request)
 
     renderCtxPushB(g_titleScene, packNibblesAndByte(6, 7, 0));
     renderCtxPushC(g_titleScene, FUN_002865c0(6, 0.0f));
-    renderCtxPushA(g_titleScene, FUN_002c5d80(5, 1));
+    renderCtxPushA(g_titleScene, renderCtxPackPassFlags(5, 1));
     renderCtxPushG(g_titleScene, flagsPackFourBooleans(1, 1, 1, 1));
 
     LogoBox *box = request->logo->box;

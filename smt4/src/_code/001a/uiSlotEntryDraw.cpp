@@ -21,7 +21,7 @@ u32 dataTable24Sub0GetRecordS90X(u32 index);
 const char *dataTable24Sub0GetRecordS90(u32 index);
 s32 sceneSelectionGetSlotId(void);
 void efctSetSpeed(f32 speed);
-void FUN_002bf380(s32 layer, s32 group, u32 sprite, s32 x, s32 y, s32 order);
+void texDrawCompositeSprite(s32 layer, s32 group, u32 sprite, s32 x, s32 y, s32 order);
 LayoutRect *asdTMTexTableEntryAt(u32 group, u32 id);
 void textDrawString(u32 layer, u32 color, const char *text, f32 x, f32 y, f32 scale, f32 shear, f32 speed);
 void uiFormatIndexedDisplayName(SlotPanel *panel, u32 name, s32 slot, char *buffer);
@@ -35,25 +35,25 @@ void uiSlotEntryDraw(f32 speed, SlotPanel *panel, u32 id, s32 x, s32 y, s32 sele
     u32 nameColor;
     u32 detailColor;
     if (selected != 0) {
-        FUN_002bf380(2, 0x24, 0x12, x, y, 0x65);
-        FUN_002bf288(2, 0x24, 0x95, x, y, 0x6a);
+        texDrawCompositeSprite(2, 0x24, 0x12, x, y, 0x65);
+        texDrawTableEntryAtStoredOrigin(2, 0x24, 0x95, x, y, 0x6a);
         if (slot >= 0) {
             efctSetSpeed(vec2GetSpeed(&panel->highlight));
-            FUN_002bf288(2, 0x24, 0x97, x, y, 0x6d);
+            texDrawTableEntryAtStoredOrigin(2, 0x24, 0x97, x, y, 0x6d);
             efctSetSpeed(speed);
-            FUN_002bf288(2, 0x24, 0x91, x, y, 0x6f);
+            texDrawTableEntryAtStoredOrigin(2, 0x24, 0x91, x, y, 0x6f);
         } else {
             efctSetSpeed(vec2GetSpeed(&panel->highlight));
-            FUN_002bf288(2, 0x24, 0x96, x, y, 0x6f);
+            texDrawTableEntryAtStoredOrigin(2, 0x24, 0x96, x, y, 0x6f);
             efctSetSpeed(speed);
         }
         nameColor = 0xffffffff;
         detailColor = 0xff;
     } else {
-        FUN_002bf380(2, 0x24, 0x11, x, y, 0x65);
-        FUN_002bf288(2, 0x24, 0x90, x, y, 0x6a);
+        texDrawCompositeSprite(2, 0x24, 0x11, x, y, 0x65);
+        texDrawTableEntryAtStoredOrigin(2, 0x24, 0x90, x, y, 0x6a);
         if (slot >= 0) {
-            FUN_002bf288(2, 0x24, 0x91, x, y, 0x6f);
+            texDrawTableEntryAtStoredOrigin(2, 0x24, 0x91, x, y, 0x6f);
         }
         nameColor = 0xff;
         detailColor = 0xffffffff;

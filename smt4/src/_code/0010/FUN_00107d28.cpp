@@ -58,7 +58,7 @@ u32 FUN_00107d28(void)
     TouchWidget* t = g_ifTouch.widget;
     switch (t->state) {
     case 0:
-        if (FUN_002bffe0(&t->startX, &t->startY, 1) != 0) {
+        if (touchGetPointByMode(&t->startX, &t->startY, 1) != 0) {
             for (s16 i = 0; i < t->itemCount; i++) {
                 if (i >= 10 || i < t->hitLimit) {
                     TouchRect* r = itemRect(t, i);
@@ -81,21 +81,21 @@ u32 FUN_00107d28(void)
         t->holdTime = t->holdTime + 1;
         if (t->holdTime >= 10) {
             t->state = 2;
-        } else if (FUN_002bffe0(&t->curX, &t->curY, 0) != 0) {
+        } else if (touchGetPointByMode(&t->curX, &t->curY, 0) != 0) {
             s32 dx = t->curX - t->startX;
             s32 dy = t->curY - t->startY;
             if ((u32)sqrt((double)(dx * dx + dy * dy)) > 8) {
                 t->state = 2;
             }
         }
-        if (FUN_002bffe0(0, 0, 3) != 0) {
+        if (touchGetPointByMode(0, 0, 3) != 0) {
             t->state = 6;
             t->holdTime = 0;
         }
         break;
     case 2:
         t->holdTime = t->holdTime + 1;
-        if (FUN_002bffe0(&t->curX, &t->curY, 0) == 0) {
+        if (touchGetPointByMode(&t->curX, &t->curY, 0) == 0) {
             t->state = 0;
             t->holdTime = 0;
         } else {

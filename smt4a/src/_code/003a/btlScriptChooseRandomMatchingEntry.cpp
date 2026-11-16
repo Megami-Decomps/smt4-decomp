@@ -8,8 +8,8 @@
 
 extern "C" {
 s32 scrGetArg(s32 index);
-s32 FUN_002b54a0(BtlCombatantEntryA *, u32 condition);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *);
+s32 btlCombatantHasSkillAction(BtlCombatantEntryA *, u32 condition);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *);
 u32 randRange(u16 maximum);
 
 // Pick a random battle entry satisfying the current masks and script-supplied condition.
@@ -20,20 +20,20 @@ u32 btlScriptChooseRandomMatchingEntry(void)
     u32 candidates[109];
     s32 candidateCount = 0;
     s32 start, count;
-    FUN_00301a08(side, &start, &count);
+    btlGetEntryChoiceRange(side, &start, &count);
     for (s32 index = start; index < start + count; ++index) {
         BtlMainStateA *state = btlGetMainState();
         BtlCombatantEntryA *entry = &state->entries[index];
         if ((g_btlCandidateMasks.unavailable & entry->flags) == 0 &&
             (g_btlCandidateMasks.required & entry->flags) != 0 &&
             (g_btlCandidateMasks.excluded & entry->flags) == 0 &&
-            FUN_002b54a0(entry, condition)) {
+            btlCombatantHasSkillAction(entry, condition)) {
             candidates[candidateCount++] = entry->id;
         }
     }
     if (btlGetMainState()->unk4cd1) {
-        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
-        if (entry != NULL && FUN_002b54a0(entry, condition)) {
+        BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
+        if (entry != NULL && btlCombatantHasSkillAction(entry, condition)) {
             candidates[candidateCount++] = entry->id;
         }
     }

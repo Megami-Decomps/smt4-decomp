@@ -27,7 +27,7 @@ struct ButtonHelpGlobalView {
 
 extern "C" {
 extern ButtonHelpGlobalView g_buttonHelp;
-void FUN_00387240(ButtonHelpEntryView* entry, s32 value, s32 flags);
+void uiStoreTextureEntryCenter(ButtonHelpEntryView* entry, s32 value, s32 flags);
 
 // Store the help mode, disabling entries or resetting all four for modes 0 and 2.
 void FUN_003423e8(s32 mode)
@@ -46,7 +46,7 @@ void FUN_003423e8(s32 mode)
     for (s32 index = 0; index < 4; ++index) {
         ButtonHelpEntryView* entry = &state->entries[index];
         entry->unk3A = 2;
-        FUN_00387240(entry, 10, 0);
+        uiStoreTextureEntryCenter(entry, 10, 0);
         entry->unk3C = 1;
         entry->unk0C = 0;
         entry->unk10 = 0;

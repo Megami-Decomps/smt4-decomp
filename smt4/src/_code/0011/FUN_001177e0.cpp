@@ -4,7 +4,7 @@
 
 extern "C" {
 extern AsdSoundSystem g_asdSound;
-void FUN_002bda30(s32 sound, s32 fadeFrames);
+void basicSoundStopOrFadeOut(s32 sound, s32 fadeFrames);
 void nw_snd_SoundHandle_DetachSound(s32 *handle);
 void FUN_00126770(u32 first, u32 second);
 void asdSoundSlotCSelect(u32 first, u32 second);
@@ -28,7 +28,7 @@ void FUN_001177e0()
     if (slotB != NULL) {
         for (u8 index = 0; index < 8; ++index) {
             if (slotB->handles[index] != 0) {
-                FUN_002bda30(slotB->handles[index], 0);
+                basicSoundStopOrFadeOut(slotB->handles[index], 0);
                 nw_snd_SoundHandle_DetachSound(&slotB->handles[index]);
             }
         }
@@ -36,14 +36,14 @@ void FUN_001177e0()
     for (u8 index = 0; index < 2; ++index) {
         AsdSndSingleHeapSlotView *slot = selected->getAuxiliary(index);
         if (slot != NULL && slot->handle != 0) {
-            FUN_002bda30(slot->handle, 0);
+            basicSoundStopOrFadeOut(slot->handle, 0);
             nw_snd_SoundHandle_DetachSound(&slot->handle);
         }
     }
     for (u8 index = 0; index < 2; ++index) {
         AsdSndSlotC *slot = selected->getOutput(index);
         if (slot != NULL && slot->handle != 0) {
-            FUN_002bda30(slot->handle, 0);
+            basicSoundStopOrFadeOut(slot->handle, 0);
             nw_snd_SoundHandle_DetachSound(&slot->handle);
         }
     }
@@ -51,7 +51,7 @@ void FUN_001177e0()
     if (slotA != NULL) {
         for (u8 index = 0; index < 4; ++index) {
             if (slotA->handles[index] != 0) {
-                FUN_002bda30(slotA->handles[index], 0);
+                basicSoundStopOrFadeOut(slotA->handles[index], 0);
                 nw_snd_SoundHandle_DetachSound(&slotA->handles[index]);
             }
         }
@@ -65,7 +65,7 @@ void FUN_001177e0()
     if (spatial->enabled == 1) {
         for (u8 index = 0; index < 16; ++index) {
             if (spatial->handles[index] != 0) {
-                FUN_002bda30(spatial->handles[index], 0);
+                basicSoundStopOrFadeOut(spatial->handles[index], 0);
                 nw_snd_SoundHandle_DetachSound(&spatial->handles[index]);
             }
         }

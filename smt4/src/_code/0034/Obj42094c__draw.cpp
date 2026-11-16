@@ -1,4 +1,4 @@
-/* NON_MATCHING: the colour array is filled element-wise like retail (no constant table); the recovered render-state pushes (stack address evaluated before the FUN_002c5d80 call in retail) and VFP/call register scheduling still differ. */
+/* NON_MATCHING: the colour array is filled element-wise like retail (no constant table); the recovered render-state pushes (stack address evaluated before the renderCtxPackPassFlags call in retail) and VFP/call register scheduling still differ. */
 #include "classes/Obj42094c.h"
 #include "classes/FilterDraw.h"
 
@@ -11,7 +11,7 @@ struct Obj42094cDrawContext {
 extern "C" {
 extern Obj42094cDrawContext *g_titleScene;
 void renderCtxSelectTexture(void *context, u32 texture);
-u32 FUN_002c5d80(u32 mode, u32 value);
+u32 renderCtxPackPassFlags(u32 mode, u32 value);
 void titleSceneMultiplyByCameraView(void *filter, f32 *matrix, const void *motion);
 void FUN_002b011c();
 void gpuSubmitFloatVectorsOrDefault(const f32 *color, f32 x, f32 y, f32 z, f32 u, f32 v);
@@ -23,7 +23,7 @@ void Obj42094c::draw()
     Filter4PolyView *filter = (Filter4PolyView *)this;
     renderCtxSelectTexture(g_titleScene, ((FilterDrawTexture *)filter->texture)->handle);
     g_titleScene->blend.push(filter->config->blendMode);
-    g_titleScene->projection.push(FUN_002c5d80(1, 0));
+    g_titleScene->projection.push(renderCtxPackPassFlags(1, 0));
     f32 color[4];
     color[0] = 1.0f;
     color[1] = 1.0f;

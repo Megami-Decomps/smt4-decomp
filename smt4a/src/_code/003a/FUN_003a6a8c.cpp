@@ -25,7 +25,7 @@ extern "C" {
 
 extern MessageMainView g_messageMain;
 u16 gameDataBlocksGetCounter(void);
-void FUN_0014e188(SpritePlaybackView *sprite, u32 value0, u32 value4, const void *source, u16 value38, f32 value20);
+void uiSpriteStateInitFromSource(SpritePlaybackView *sprite, u32 value0, u32 value4, const void *source, u16 value38, f32 value20);
 void pairSetFirstResetSecond(SpritePlaybackView *sprite, s32 value);
 void uiSpriteSelectAnim(SpritePlaybackView *sprite, s32 group);
 
@@ -41,7 +41,7 @@ u32 FUN_003a6a8c(void)
     panel->displayCount = counter;
     panel->countValue = (f32)counter;
     panel->active = 1;
-    FUN_0014e188(&panel->sprite, 8, 0xFFFFFFFF, panel->spriteSource, 11, 1.0f);
+    uiSpriteStateInitFromSource(&panel->sprite, 8, 0xFFFFFFFF, panel->spriteSource, 11, 1.0f);
     pairSetFirstResetSecond(&panel->sprite, 0x11);
     uiSpriteSelectAnim(&panel->sprite, 6);
     return 1;

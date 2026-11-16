@@ -17,7 +17,7 @@ struct ReflectRecord {
 extern "C" {
 
 
-ReflectRecord *FUN_0027da30(void *battle, s16 id);
+ReflectRecord *btlFindEntryBlockByMemberId(void *battle, s16 id);
 s32 idSetFindSubjectIndex(void *battle, ReflectUnit *unit);
 
 /* Registers a type-0x25 reflect entry for the unit under `key` unless the unit lacks flag 1 or
@@ -39,7 +39,7 @@ ReflectAction *btlQueueUnitReflectAction25(s32 id, u32 key, ReflectUnit *unit, u
         }
     }
     action = btlQueueReflectAction(g_btlActionReflect, (s16)id, 0, key);
-    record = FUN_0027da30(static_cast<void *>(btlGetMainState()), unit->id);
+    record = btlFindEntryBlockByMemberId(static_cast<void *>(btlGetMainState()), unit->id);
     index = idSetFindSubjectIndex(static_cast<void *>(btlGetMainState()), unit);
     if (index < 0) {
         index = 0;

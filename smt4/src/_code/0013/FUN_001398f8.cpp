@@ -8,7 +8,7 @@ int FUN_00128174(void);
 int FUN_002a84e8(void);
 int FUN_002ad888(void);
 int threadSleepDuration(int, int);
-int FUN_002bb5a4(unsigned int, unsigned int, int);
+int archivePathDeviceOpen(unsigned int, unsigned int, int);
 int FUN_002bb648(void);
 int SBORROW4(...);
 
@@ -19,7 +19,7 @@ extern unsigned char DAT_00471b5c; /* 0x471b5c */
 /* Supplied declaration required: FUN_002a84e8. */
 /* Supplied declaration required: FUN_002ad888. */
 /* Supplied declaration required: threadSleepDuration. */
-/* Supplied declaration required: FUN_002bb5a4. */
+/* Supplied declaration required: archivePathDeviceOpen. */
 /* Supplied declaration required: FUN_002bb648. */
 
 
@@ -44,7 +44,7 @@ unsigned int FUN_001398f8(int param_1)
         *(unsigned int *)(param_1 + 0x18) = 0;
         *(unsigned int *)(param_1 + 0xc) = 0;
         *(unsigned int *)(param_1 + 0x10) = 0;
-        FUN_002bb5a4(temp_v2,temp_v3,3);
+        archivePathDeviceOpen(temp_v2,temp_v3,3);
         temp_v3 = (*(unsigned int *)((unsigned char *)&DAT_00471b5c + 0x4));
         if (-1 < (int)temp_v2) {
           return temp_v4;

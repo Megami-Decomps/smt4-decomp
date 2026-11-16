@@ -8,7 +8,7 @@ void uiSpriteSelectAnim(ButtonHelpUnit *unit, s32 animation);
 void uiSpriteSetKeyframe(ButtonHelpUnit *unit, s32 keyframe, s32 flag);
 void uiSpriteSetImageKeyframe(ButtonHelpUnit *unit, s32 keyframe, s32 flag);
 u16 FUN_0019d890(s32 table, s32 id);
-void FUN_0019e330(ButtonHelpUnit *unit, s32 arg, s32 flag);
+void rangeSelectionSelectEndpoint(ButtonHelpUnit *unit, s32 arg, s32 flag);
 void FUN_001a90e0(void *state);
 }
 
@@ -63,7 +63,7 @@ extern "C" void FUN_00182084(void)
     for (s32 i = 0; i < 4; i++) {
         if (work->unk5E4 != 1) {
             uiSpriteSetImageKeyframe(&work->selected[i], 0, 0);
-            FUN_0019e330(&work->selected[i], 0, 0);
+            rangeSelectionSelectEndpoint(&work->selected[i], 0, 0);
         } else {
             uiSpriteSetImageKeyframe(&work->selected[i], 0, 0);
             uiSpriteSetKeyframe(&work->selected[i], 2, 0);

@@ -5,7 +5,7 @@
 extern "C" {
 s32 scrGetArg(u32 index);
 u32 btlScriptResolveGroupArg(s32 group);
-void FUN_002499fc(u32 group, s32 *start, s32 *count);
+void btlSideGetEntryRange(u32 group, s32 *start, s32 *count);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *battle);
 void scrSetResult(s32 result);
 
@@ -17,7 +17,7 @@ u32 btlScriptAnyEntryHpAtMost(void)
     u32 group = btlScriptResolveGroupArg(scrGetArg(2));
     s32 start;
     s32 count;
-    FUN_002499fc(group, &start, &count);
+    btlSideGetEntryRange(group, &start, &count);
     for (s32 index = start; index < start + count; ++index) {
         BtlEntry *entry = &btlGetMainState()->entries[index];
         if ((entry->flags & 0x10) == 0 && (entry->flags & 1) != 0 && (entry->flags & 0x40) == 0 &&

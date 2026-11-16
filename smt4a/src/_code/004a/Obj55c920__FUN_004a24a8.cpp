@@ -5,7 +5,7 @@
 extern "C" {
 
 int efctSetSpeed(void);
-int FUN_00183bb0(void);
+int gxResetColorQuadToWhite(void);
 int drawSetColorFromRGBA8(...);
 int FUN_0031d174(...);
 int FUN_00493518(...);
@@ -27,7 +27,7 @@ typedef struct {
 extern unsigned int g_entryWindowColors; /* 0x5e1e88 */
 
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_00183bb0. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 extern int FUN_002a482c(int);
 /* Supplied declaration required: FUN_0031d174. */
@@ -170,7 +170,7 @@ extern "C" void _ZN9Obj55c92012FUN_004a24a8Ev(int param_1)
           temp_v7 = temp_v7 + 1;
         } while (temp_v7 < temp_v2);
       }
-      FUN_00183bb0();
+      gxResetColorQuadToWhite();
       temp_v1 = *(int *)(param_1 + 0x14);
       if ((((temp_v1 == 2 || temp_v1 == 3) || (temp_v1 == 8 || temp_v1 == 4)) || (temp_v1 == 5 || temp_v1 == 6))
          || (temp_v1 == 10 || temp_v1 == 9)) {

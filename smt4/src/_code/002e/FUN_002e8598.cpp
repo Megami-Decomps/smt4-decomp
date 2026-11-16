@@ -33,7 +33,7 @@ void FUN_002e8598(u32 kind, u32 item, s32 count)
     case 11:
         textFormatFullWidthTwoDigits(count, number);
         /* Full-width English: "%s: %s Remaining". */
-        textFormatBuffer(text, "%s\x81\x46\x81\x40%s\x81\x40\x82\x71\x82\x85\x82\x8d\x82\x81\x82\x89\x82\x8e\x82\x89\x82\x8e\x82\x87", textConvertToGlyphPairs(FUN_002bd06c(item), 0), number);
+        textFormatBuffer(text, "%s\x81\x46\x81\x40%s\x81\x40\x82\x71\x82\x85\x82\x8d\x82\x81\x82\x89\x82\x8e\x82\x89\x82\x8e\x82\x87", textConvertToGlyphPairs(dataTable01FindByIdWithAoc(item), 0), number);
         break;
     case 6:
     case 10:

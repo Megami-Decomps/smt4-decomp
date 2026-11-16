@@ -7,12 +7,12 @@ extern "C" {
 int CONCAT44(double, double);
 int FUN_00208e4c(void);
 int FUN_00282390(void);
-int FUN_0028250c(void);
+int mathRemPio2f(void);
 int mathGetShortestAngleDelta(void);
 int mathPositionHeadingDegrees(void);
-int FUN_0028c618(unsigned int, int);
+int modelPartSetRotationDegrees(unsigned int, int);
 int nodeSetTranslation(unsigned int, int, int *);
-int FUN_0029bb14(unsigned int);
+int modelSetScale(unsigned int);
 int modelSelectPrimaryMotion(unsigned int, unsigned int);
 int FUN_0031d49c(void);
 int VectorSignedToFloat(unsigned int, int);
@@ -56,12 +56,12 @@ static float romwright_sqrt_4(float value)
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00208e4c. */
 /* Supplied declaration required: FUN_00282390. */
-/* Supplied declaration required: FUN_0028250c. */
+/* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: mathGetShortestAngleDelta. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
-/* Supplied declaration required: FUN_0028c618. */
+/* Supplied declaration required: modelPartSetRotationDegrees. */
 /* Supplied declaration required: nodeSetTranslation. */
-/* Supplied declaration required: FUN_0029bb14. */
+/* Supplied declaration required: modelSetScale. */
 /* Supplied declaration required: modelSelectPrimaryMotion. */
 /* Supplied declaration required: FUN_0031d49c. */
 
@@ -156,7 +156,7 @@ void FUN_001d3018(void)
     temp_v10 = *(float *)(temp_v3 + 0x50);
     *(float *)(temp_v2 + 0x24) = temp_v10;
     temp_v10 = temp_v10 * 0.017453292f;
-    FUN_0028250c();
+    mathRemPio2f();
     *(float *)(temp_v2 + 0x28) = temp_v10 * *(float *)(temp_v2 + 0x20);
     *(unsigned int *)(temp_v2 + 0x2c) = temp_v20;
     temp_v18 = *(float *)(temp_v2 + 0x24) * temp_v18;
@@ -241,12 +241,12 @@ void FUN_001d3018(void)
           *(unsigned char *)(*(int *)(puVar6[2] + 0x2c) + 0x1f6) = 1;
         }
         nodeSetTranslation(*(unsigned int *)(*(int *)(temp_v4 + 0x1ac) + 8),0,&temp_v23);
-        FUN_0028c618(*(unsigned int *)(*(int *)(temp_v4 + 0x1ac) + 8),0);
+        modelPartSetRotationDegrees(*(unsigned int *)(*(int *)(temp_v4 + 0x1ac) + 8),0);
         if (*(int *)(temp_v4 + 100) != *(int *)(temp_v4 + 0x68)) {
           *(int *)(temp_v4 + 0x68) = *(int *)(temp_v4 + 100);
           modelSelectPrimaryMotion(*(unsigned int *)(*(int *)(temp_v4 + 0x1ac) + 8),*(unsigned int *)(temp_v4 + 100));
           VectorSignedToFloat(*(unsigned int *)(temp_v4 + 0x6c),(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_0029bb14(*(unsigned int *)(*(int *)(temp_v4 + 0x1ac) + 8));
+          modelSetScale(*(unsigned int *)(*(int *)(temp_v4 + 0x1ac) + 8));
         }
       }
       else {

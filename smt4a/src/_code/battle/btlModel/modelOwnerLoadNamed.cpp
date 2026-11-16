@@ -5,7 +5,7 @@ struct ModelOwner {
 };
 extern "C" {
 char *libc_strcpy(char *destination, const char *source);
-void *FUN_00178b04(u32 size, const char *file, s32 line);
+void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 void *modelListInit(void *allocation);
 void FUN_001cd3ec(void *model, const char *name);
 
@@ -13,7 +13,7 @@ void FUN_001cd3ec(void *model, const char *name);
 void modelOwnerLoadNamed(ModelOwner *owner, const char *name)
 {
     libc_strcpy(owner->name, name);
-    void *model = FUN_00178b04(32, "c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlModel.cpp", 68);
+    void *model = asdMemoryAllocTraced(32, "c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlModel.cpp", 68);
     if (model != NULL) {
         model = modelListInit(model);
     }

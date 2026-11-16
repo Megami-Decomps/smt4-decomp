@@ -49,9 +49,9 @@ extern s8 DAT_005f1c48;
 
 void FUN_00317af8(f32* stickX, f32* stickY, s32 arg);
 void FUN_0033f9f4(void);
-f32 FUN_0050d8e4(f32 y, f32 x);
-f32 FUN_001bc124(f32 angle);
-f32 FUN_001bbf0c(f32 angle);
+f32 __hardfp_atan2f(f32 y, f32 x);
+f32 libm_sinf(f32 angle);
+f32 libm_cosf(f32 angle);
 s32 FUN_0036d5e0(Vec3f* candidate, Vec3f* previous);
 
 // Moves the player on the field from the analog stick: accelerates while held,
@@ -88,7 +88,7 @@ void FUN_0033feb8(PlayerController* player)
         player->speed = speed;
         if (speed > 60.0f) speed = 60.0f;
         player->speed = speed;
-        f32 heading = -(FUN_0050d8e4(stickX, stickY) * 57.29578f - player->cameraYaw);
+        f32 heading = -(__hardfp_atan2f(stickX, stickY) * 57.29578f - player->cameraYaw);
         if (!(heading >= 0.0f)) heading += 360.0f;
         if (heading > 360.0f) heading -= 360.0f;
         g_lmapScene->yaw = heading;
@@ -102,9 +102,9 @@ void FUN_0033feb8(PlayerController* player)
         Vec3f before = scene->position;
         scene->candidate = scene->position;
         f32 stride = (player->speed / (f32)steps) * speedScale;
-        scene->candidate.x += FUN_001bc124(scene->yaw * 0.017453292f) * stride;
+        scene->candidate.x += libm_sinf(scene->yaw * 0.017453292f) * stride;
         scene = g_lmapScene;
-        scene->candidate.z += FUN_001bbf0c(scene->yaw * 0.017453292f) * stride;
+        scene->candidate.z += libm_cosf(scene->yaw * 0.017453292f) * stride;
         scene = g_lmapScene;
         if (DAT_005f1c48 == 0) blocked = FUN_0036d5e0(&scene->candidate, &before);
         scene = g_lmapScene;

@@ -76,8 +76,8 @@ void FUN_00324e38(s32 mode);
 void FUN_00327ee8(void);
 void FUN_002e364c(f32 *position);
 void mapEaseSceneHeading(void);
-f32 FUN_001bbf0c(f32 angle);
-f32 FUN_001bc124(f32 angle);
+f32 libm_cosf(f32 angle);
+f32 libm_sinf(f32 angle);
 f32 distSpatial(void);
 f32 mathPositionHeadingDegrees(void);
 void sysPlaySe(u32 sound);
@@ -92,8 +92,8 @@ static __inline void lmapPlaceBehind(LmapScene *scene, f32 heading)
     scene->targetY = *reinterpret_cast<f32 *>(&g_gameState.f005f16b4);
     scene->targetZ = *reinterpret_cast<f32 *>(&g_gameState.f005f16b8);
     f32 angle = (heading + LMAP_HALF_TURN) * LMAP_DEG_TO_RAD;
-    scene->targetX += FUN_001bc124(angle) * LMAP_BEHIND_DISTANCE;
-    scene->targetZ += FUN_001bbf0c(angle) * LMAP_BEHIND_DISTANCE;
+    scene->targetX += libm_sinf(angle) * LMAP_BEHIND_DISTANCE;
+    scene->targetZ += libm_cosf(angle) * LMAP_BEHIND_DISTANCE;
 }
 
 void FUN_0036749c(void)

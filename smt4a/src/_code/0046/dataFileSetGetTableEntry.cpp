@@ -34,9 +34,9 @@ struct DataTableEntry16 {
 
 extern "C" {
 
-s32 FUN_001b315c(DataFile *file);
-DataFileChunk *FUN_001b31ac(DataFile *file);
-u32 FUN_001b31e0(DataFile *file);
+s32 packageEntryIsLoaded(DataFile *file);
+DataFileChunk *packageEntryGetDirectory(DataFile *file);
+u32 packageEntryGetFileCount(DataFile *file);
 void *dataTableFileGetTable(u32 handle, s32 kind);
 s32 dataTableGetCount(void *table);
 DataTableEntry16 *dataTableGetEntries(void *table);
@@ -49,9 +49,9 @@ DataTableEntry16 *dataFileSetGetTableEntry(DataFileSet *set, s32 index)
 
     for (i = 0; i < set->fileCount; i++) {
         DataFile *file = &set->files[i];
-        if (FUN_001b315c(file)) {
-            DataFileChunk *chunks = FUN_001b31ac(file);
-            u32 chunkCount = FUN_001b31e0(file);
+        if (packageEntryIsLoaded(file)) {
+            DataFileChunk *chunks = packageEntryGetDirectory(file);
+            u32 chunkCount = packageEntryGetFileCount(file);
             u32 j;
 
             for (j = 0; j < chunkCount; j++) {

@@ -25,8 +25,8 @@ typedef struct {
 
 extern MenuGlobals g_messageMain;
 
-u32 FUN_001ba3d4(void);
-void FUN_0014e188(void *widget, s32 a, u32 b, void *slots, s32 c, f32 scale);
+u32 flagValueRead(void);
+void uiSpriteStateInitFromSource(void *widget, s32 a, u32 b, void *slots, s32 c, f32 scale);
 void uiSpriteSelectAnim(void *widget, s32 a);
 void pairSetFirstResetSecond(void *widget, s32 a);
 
@@ -38,10 +38,10 @@ u32 messageArmMenuAnimation(u32 param)
     state->active = 1;
     state->armed = 1;
     state->param = param;
-    tick = FUN_001ba3d4();
+    tick = flagValueRead();
     state->startTick = tick;
     state->lastTick = tick;
-    FUN_0014e188(state->widget, 8, 0xffffffff, state->slots, 0xb, 1.0f);
+    uiSpriteStateInitFromSource(state->widget, 8, 0xffffffff, state->slots, 0xb, 1.0f);
     pairSetFirstResetSecond(state->widget, 10);
     uiSpriteSelectAnim(state->widget, 6);
     return 1;

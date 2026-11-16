@@ -69,13 +69,13 @@ extern "C" void FUN_0034e784(u8 *panel, s32 rows)
     efctSetSpeed(vec2GetSpeed(&view->firstPosition) * scale);
     TextureTableEntryIV *sprite = asdTMTexTableEntryAt(13, view->slot + 0x52);
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
-    FUN_001835b4(2, 13, 0x4F, sprite->x + x, sprite->y + y, 0x2E);
-    FUN_001835b4(2, 13, 0x4E, sprite->x + x, sprite->y + y - shrink, 0x2E);
+    texDrawTableEntryAtStoredOrigin(2, 13, 0x4F, sprite->x + x, sprite->y + y, 0x2E);
+    texDrawTableEntryAtStoredOrigin(2, 13, 0x4E, sprite->x + x, sprite->y + y - shrink, 0x2E);
     renderStackSet(renderCtxStackE(g_renderCtx), 3);
     FUN_0035ae58(sprite->x + x, sprite->y + y, sprite->placement->width, sprite->placement->height - shrink, 1);
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
-    FUN_001835b4(2, 13, 0x50, sprite->x + x, sprite->y + y, 0x2E);
-    FUN_001835b4(2, 13, 0x51, sprite->x + x, sprite->y + y, 0x2E);
+    texDrawTableEntryAtStoredOrigin(2, 13, 0x50, sprite->x + x, sprite->y + y, 0x2E);
+    texDrawTableEntryAtStoredOrigin(2, 13, 0x51, sprite->x + x, sprite->y + y, 0x2E);
     renderStackSet(renderCtxStackE(g_renderCtx), 0);
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 7, 0));
     efctSetSpeed(1.0f);

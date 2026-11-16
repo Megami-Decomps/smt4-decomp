@@ -11,9 +11,9 @@ void *memAlloc(u32 pool, u32 category, u32 options, u32 size,
                u32 alignment, u32 count);
 void rt_memclr(void *destination, u32 size);
 void objectBufferFree(void *buffer);
-void *FUN_002691d8(u16 kind, u32 count,
+void *effBehaviorCreate(u16 kind, u32 count,
                     ParticleDefinitionPrefixIV *definition);
-void *FUN_00268fc4(void *source);
+void *effGeomCloneHandle(void *source);
 
 static ParticleInstanceIV *allocateParticleInstance(u32 size)
 {
@@ -41,12 +41,12 @@ ParticleInstanceIV *FUN_001d2450(ParticleSourcePrefixIV *source)
     u32 kind = source->resource->kind;
     if (instance->objectBuffer != 0)
         objectBufferFree(instance->objectBuffer);
-    instance->objectBuffer = FUN_002691d8(kind, instance->count, definition);
+    instance->objectBuffer = effBehaviorCreate(kind, instance->count, definition);
     instance->flags |= 1;
 
     if (instance->count != 0) {
         if (source->auxiliary != 0)
-            instance->auxiliary = FUN_00268fc4(source->auxiliary);
+            instance->auxiliary = effGeomCloneHandle(source->auxiliary);
         effParticleParamCopy(reinterpret_cast<EffParticleParam *>(instance), reinterpret_cast<EffParticleParam *>(source));
     }
     return instance;

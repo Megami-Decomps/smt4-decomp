@@ -15,12 +15,12 @@ extern GameStateView g_gameState;
 
 
 int textDrawString(...);
-int FUN_00164b5c(int, int, int, int, int, int);
+int texDrawCompositeSprite(int, int, int, int, int, int);
 int vec2GetXInt(...);
 int efctSetSpeed(void);
 int renderCtxPopState(...);
 int renderStackPushIndexed(...);
-int FUN_00183bb0(void);
+int gxResetColorQuadToWhite(void);
 int libc_strcpy(...);
 int mapFindContainingRegionResult(...);
 int FUN_003849cc(unsigned int, unsigned int, int, unsigned char [132], unsigned int);
@@ -57,16 +57,16 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textDrawString. */
 extern int gameFlagsGetBlock(void);
-/* Supplied declaration required: FUN_00164b5c. */
+/* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: vec2GetXInt. */
 extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern unsigned int gameGetIndexedSlotMember(unsigned int);
-extern unsigned int FUN_001692ac(unsigned int, unsigned int);
+extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00183bb0. */
+/* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: libc_strcpy. */
 extern int FUN_00325064(void);
 /* Supplied declaration required: mapFindContainingRegionResult. */
@@ -118,7 +118,7 @@ void FUN_0048a5e4(int param_1)
   int temp_v21;
   
   temp_v1 = gameFlagsGetBlock();
-  temp_v2 = FUN_001692ac(5,1);
+  temp_v2 = renderCtxPackPassFlags(5,1);
   renderStackPushIndexed(g_renderCtx,3,temp_v2);
   temp_v19 = (unsigned char *)(param_1 + 0x4cc);
   VectorSignedToFloat(0x100 - DAT_00587f20,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -135,8 +135,8 @@ void FUN_0048a5e4(int param_1)
     words2Copy(param_1 + 0x4d0,&temp_v15);
   }
   efctSetSpeed();
-  FUN_00183bb0();
-  FUN_00164b5c(2,0x13,8,(int)temp_v15,(int)temp_v16,DAT_00587f20);
+  gxResetColorQuadToWhite();
+  texDrawCompositeSprite(2,0x13,8,(int)temp_v15,(int)temp_v16,DAT_00587f20);
   temp_v9 = param_1 + 0x205ac;
   if ((*(unsigned int *)(param_1 + 0x10) & 0x20) == 0) {
     if (*(char *)(param_1 + 0xc) != '\0') {

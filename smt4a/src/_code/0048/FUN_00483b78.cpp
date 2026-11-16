@@ -19,12 +19,12 @@ typedef char KeyboardPanelOffsets[offsetof(KeyboardPanelState, sideOffset) == 0x
 }
 extern "C" {
 extern RenderCtxA *g_renderCtx;
-void FUN_00157558(RenderCtxA *context);
-void FUN_00183bb0();
-s32 FUN_001692ac(u32 first, u32 second);
+void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
+void gxResetColorQuadToWhite();
+s32 renderCtxPackPassFlags(u32 first, u32 second);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *object);
-void FUN_00164b5c(s32 layer, u32 archive, u32 image, s32 x, s32 y, s32 priority);
+void texDrawCompositeSprite(s32 layer, u32 archive, u32 image, s32 x, s32 y, s32 priority);
 void FUN_004845ac(KeyboardPanelState *panel, u8 page, f32 progress);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
@@ -32,16 +32,16 @@ void renderCtxResetColorScale(RenderCtxA *context);
 // Draw the custom keyboard panel and character page under a temporary render-state override.
 void FUN_00483b78(KeyboardPanelState *panel)
 {
-    FUN_00157558(g_renderCtx);
-    FUN_00183bb0();
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
+    gxResetColorQuadToWhite();
     RenderCtxA *context = g_renderCtx;
-    renderCtxPushA(context, FUN_001692ac(1, 0));
+    renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
     renderCtxSelectTexture(g_renderCtx, 0);
     f32 progress = vec2GetSpeed(&panel->animation);
     efctSetSpeed(progress);
-    FUN_00164b5c(2, 0x23, 0, panel->backgroundOffset, 0, 0xb);
-    FUN_001835b4(2, 0x23, 0x3d, panel->sideOffset, 0, 0xb);
-    FUN_001835b4(2, 0x23, 0x3e, panel->sideOffset, 0, 0xb);
+    texDrawCompositeSprite(2, 0x23, 0, panel->backgroundOffset, 0, 0xb);
+    texDrawTableEntryAtStoredOrigin(2, 0x23, 0x3d, panel->sideOffset, 0, 0xb);
+    texDrawTableEntryAtStoredOrigin(2, 0x23, 0x3e, panel->sideOffset, 0, 0xb);
     s8 page = panel->page;
     if (panel->alternate)
         page += 4;

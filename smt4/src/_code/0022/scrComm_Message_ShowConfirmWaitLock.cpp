@@ -4,14 +4,14 @@
 
 extern "C" {
 extern MessageGlobals g_messageMain;
-void FUN_002866b4(u32 context, u32 message, s32 frame, s32 mode, s32 wait, s32 flags);
+void messageWindowShowOrPoll(u32 context, u32 message, s32 frame, s32 mode, s32 wait, s32 flags);
 
 static void showMessage(s32 mode, s32 wait)
 {
     u32 context = scrGetCommandOwner();
     u32 message = scrGetArg(0);
     s32 frame = scrGetCommandFrame();
-    FUN_002866b4(context, message, frame, mode, wait, 0);
+    messageWindowShowOrPoll(context, message, frame, mode, wait, 0);
 }
 
 /* Script command: locks the banner panel on the first frame, puts the message in display mode 0x14

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016e800(int, int);
+int sysReportCheckFailure(int, int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0016e800. */
+/* Supplied declaration required: sysReportCheckFailure. */
 extern int FUN_004311e8(unsigned int, unsigned long long *);
 
 
@@ -25,7 +25,7 @@ unsigned long long FUN_004311c0(unsigned int param_1)
   
   temp_v0 = FUN_004311e8(param_1,temp_v1);
   if (temp_v0 < 0) {
-    FUN_0016e800(temp_v0,0x4311d8);
+    sysReportCheckFailure(temp_v0,0x4311d8);
   }
                     /* WARNING: Treating indirect jump as return */
   return temp_v1[0];

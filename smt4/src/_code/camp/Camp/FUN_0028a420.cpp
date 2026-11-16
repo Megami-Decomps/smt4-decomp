@@ -9,7 +9,7 @@ extern "C" {
 
 int FUN_0026c868(void);
 int FUN_00292bcc(...);
-int FUN_0029378c(...);
+int slotPlacementAssignSlotAndPosition(...);
 int FUN_00298d28(...);
 
 int partyPanelHasSlotValue(...);
@@ -24,13 +24,13 @@ int pair40Set(...);
 int FUN_00297408(void);
 int FUN_00298ad8(void);
 int campRefreshEquipmentCategory(...);
-int FUN_0029e874(...);
+int gameSetIconDisplayEnabled(...);
 int scrollOwnerSelectIndex(...);
 int FUN_0029eb5c(...);
-int FUN_0029f848(...);
+int gridNavigationConfigure(...);
 int gameGetSlotTable(...);
 int timerStart(...);
-int FUN_002bd954(...);
+int uiSpriteStateInitFromSource(...);
 int spriteStartAnimationByIndex(...);
 int __aeabi_memset4(...);
 int memClear(void);
@@ -77,21 +77,21 @@ extern unsigned int statusGetAvailableChoiceCount(void);
 /* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: FUN_00292bcc. */
 /* Supplied declaration required: pair40Set. */
-/* Supplied declaration required: FUN_0029378c. */
+/* Supplied declaration required: slotPlacementAssignSlotAndPosition. */
 /* Supplied declaration required: FUN_00297408. */
 /* Supplied declaration required: FUN_00298ad8. */
 /* Supplied declaration required: FUN_00298d28. */
 /* Supplied declaration required: campRefreshEquipmentCategory. */
-/* Supplied declaration required: FUN_0029e874. */
+/* Supplied declaration required: gameSetIconDisplayEnabled. */
 /* Supplied declaration required: scrollOwnerSelectIndex. */
 extern unsigned int objectPartRunUnlessLocked(void);
 /* Supplied declaration required: FUN_0029eb5c. */
 extern unsigned int FUN_0029efa8(int);
-/* Supplied declaration required: FUN_0029f848. */
+/* Supplied declaration required: gridNavigationConfigure. */
 /* Supplied declaration required: FUN_002a0cc8. */
 /* Supplied declaration required: gameGetSlotTable. */
 /* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002bd954. */
+/* Supplied declaration required: uiSpriteStateInitFromSource. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: __aeabi_memset4. */
@@ -149,23 +149,23 @@ void FUN_0028a420(void)
   puVar3 = puVar1 + 0x18a;
   drawParameterBlockClear();
   paramsInit(reinterpret_cast<UiResourceParameters *>(puVar3),&DAT_00402648,0x6c,&DAT_004026b4,0x30,0,0,0,0,&DAT_004026e4,0x150);
-  FUN_002bd954(puVar1 + 0x192,0x1d,0,puVar3,0xc9);
+  uiSpriteStateInitFromSource(puVar1 + 0x192,0x1d,0,puVar3,0xc9);
   timerStart(puVar1 + 0x192,1,0);
-  FUN_002bd954(puVar1 + 0x1b5,0x1d,0,puVar3,0xc9);
+  uiSpriteStateInitFromSource(puVar1 + 0x1b5,0x1d,0,puVar3,0xc9);
   timerStart(puVar1 + 0x1b5,1,0);
-  FUN_002bd954(puVar1 + 0x1d8,0x1d,0,puVar3,0xc9);
+  uiSpriteStateInitFromSource(puVar1 + 0x1d8,0x1d,0,puVar3,0xc9);
   timerStart(puVar1 + 0x1d8,8,0);
-  FUN_002bd954(puVar1 + 0x1fb,0x1d,0,puVar3,0xc9);
+  uiSpriteStateInitFromSource(puVar1 + 0x1fb,0x1d,0,puVar3,0xc9);
   spriteStartAnimationByIndex(puVar1 + 0x1fb,2);
-  FUN_002bd954(puVar1 + 0x21e,0x1d,0,puVar3,0xc9);
+  uiSpriteStateInitFromSource(puVar1 + 0x21e,0x1d,0,puVar3,0xc9);
   timerStart(puVar1 + 0x21e,1,0);
   temp_v6 = 0;
   do {
-    FUN_002bd954(puVar1 + temp_v6 * 0x23 + 0x241,0x1d,0x22,puVar3,0xc9);
+    uiSpriteStateInitFromSource(puVar1 + temp_v6 * 0x23 + 0x241,0x1d,0x22,puVar3,0xc9);
     timerStart(puVar1 + temp_v6 * 0x23 + 0x241,1,0);
     temp_v6 = temp_v6 + 1;
   } while (temp_v6 < 8);
-  FUN_002bd954(puVar1 + 0x359,0x1d,0,puVar3,0xc9);
+  uiSpriteStateInitFromSource(puVar1 + 0x359,0x1d,0,puVar3,0xc9);
   spriteStartAnimationByIndex(puVar1 + 0x359,1);
   *(unsigned char *)(puVar1 + 0x26) = 1;
   FUN_00298ad8();
@@ -192,7 +192,7 @@ void FUN_0028a420(void)
     }
   }
   temp_v2 = statusGetAvailableChoiceCount();
-  FUN_0029f848(puVar1 + 0x90,temp_v2,0xb,1,1,1);
+  gridNavigationConfigure(puVar1 + 0x90,temp_v2,0xb,1,1,1);
   FUN_00282f80(10);
   campRefreshEquipmentCategory(0x11);
   campRefreshEquipmentCategory(0x12);
@@ -244,7 +244,7 @@ void FUN_0028a420(void)
     *(unsigned short *)(temp_v6 + temp_v3 * 8 + 0x73c) = 0;
   } while (temp_v5 < 0x18);
   *(unsigned int *)(temp_v6 + 0x20) = 1;
-  FUN_0029e874(0);
+  gameSetIconDisplayEnabled(0);
   if (*(int *)(temp_v6 + 0x20) == 8) {
     if (*(char *)(temp_v6 + 0x42) != '\0') {
       temp_v5 = temp_v6 + 0xa6c;
@@ -383,13 +383,13 @@ LAB_0028b668:
                   timerStart(temp_v0 + 0x180,5,0);
                   temp_v8 = 0;
                   do {
-                    FUN_0029378c(*(unsigned int *)(temp_v0 + temp_v8 * 4 + 0x6c8),
+                    slotPlacementAssignSlotAndPosition(*(unsigned int *)(temp_v0 + temp_v8 * 4 + 0x6c8),
                                  *(unsigned int *)(temp_v0 + 0x2c));
                     temp_v8 = temp_v8 + 1;
                   } while (temp_v8 < 4);
                   temp_v8 = 0;
                   do {
-                    FUN_0029378c(*(unsigned int *)(temp_v0 + temp_v8 * 4 + 0x6d8),
+                    slotPlacementAssignSlotAndPosition(*(unsigned int *)(temp_v0 + temp_v8 * 4 + 0x6d8),
                                  *(unsigned int *)(temp_v0 + 0x2c));
                     temp_v8 = temp_v8 + 1;
                   } while (temp_v8 < 0x18);
@@ -406,13 +406,13 @@ LAB_0028b668:
                 timerStart(temp_v0 + 0x180,4,0);
                 temp_v8 = 0;
                 do {
-                  FUN_0029378c(*(unsigned int *)(temp_v0 + temp_v8 * 4 + 0x6c8),
+                  slotPlacementAssignSlotAndPosition(*(unsigned int *)(temp_v0 + temp_v8 * 4 + 0x6c8),
                                *(unsigned int *)(temp_v0 + 0x2c));
                   temp_v8 = temp_v8 + 1;
                 } while (temp_v8 < 4);
                 temp_v8 = 0;
                 do {
-                  FUN_0029378c(*(unsigned int *)(temp_v0 + temp_v8 * 4 + 0x6d8),
+                  slotPlacementAssignSlotAndPosition(*(unsigned int *)(temp_v0 + temp_v8 * 4 + 0x6d8),
                                *(unsigned int *)(temp_v0 + 0x2c));
                   temp_v8 = temp_v8 + 1;
                 } while (temp_v8 < 0x18);

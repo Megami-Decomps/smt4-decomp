@@ -23,7 +23,7 @@ struct AttackInfo {
 };
 
 extern "C" {
-BattleEntryView *FUN_0027da30(BtlMainState *state, s32 id);
+BattleEntryView *btlFindEntryBlockByMemberId(BtlMainState *state, s32 id);
 void *btlMainFindEntryByListedId(BtlMainState *state, s32 id);
 f32 FUN_0022a690(s32 kind, f32 value);
 f32 FUN_003be670(s32 attacker, s32 target);
@@ -40,8 +40,8 @@ s32 FUN_003be918(void *player, s32 attackerId, s32 targetId, s32 first, f32 base
     f32 zero = 0.0f;
     f32 sideFactor = 1.0f;
     BtlMainState *state = btlGetMainState();
-    BattleEntryView *attacker = FUN_0027da30(state, attackerId);
-    BattleEntryView *target = FUN_0027da30(state, targetId);
+    BattleEntryView *attacker = btlFindEntryBlockByMemberId(state, attackerId);
+    BattleEntryView *target = btlFindEntryBlockByMemberId(state, targetId);
     f32 level = (f32)attacker->level;
     if (attacker->flags & 4) {
         sideFactor = 0.8f;

@@ -6,14 +6,14 @@ extern "C" {
 u32 scrGetArg(s32 index);
 void FUN_00376fb8(u32 id);
 void mapPlaceSet(s32 map, s32 area, s32 object);
-void FUN_002b945c(u32 id);
+void gameFlagsLoadTable4cEntry(u32 id);
 
 u32 scrCommStartMapTransition(void)
 {
     u32 id = scrGetArg(0);
     FUN_00376fb8(id + 100);
     mapPlaceSet(0x18, 1, 0);
-    FUN_002b945c(id);
+    gameFlagsLoadTable4cEntry(id);
     g_gameState.progressEnabled = 1;
     g_gameState.transitionActive = 0;
     g_gameState.transitionPending = 1;

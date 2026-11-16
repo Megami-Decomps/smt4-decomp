@@ -28,14 +28,14 @@ struct RankingSavedState {
 
 extern "C" {
 extern RankingTransitionWork *g_campCecRanking;
-RankingScriptProcess *FUN_00275bc8(void *heapA, void *heapB);
+RankingScriptProcess *scrScriptProcessCreate(void *heapA, void *heapB);
 void uiSpriteSetKeyframe(void *sprite, u32 frame, u32 option);
 void uiSpriteSetImageKeyframe(void *sprite, u32 frame, u32 option);
 void sysPlaySe(u32 sound);
 void scrScriptProcessStartEntry(RankingScriptProcess *process, u32 entry);
 s32 scrRunOpcodesStub(RankingScriptProcess *process);
-s32 FUN_00163aa4(void *sprite, f32 speed);
-s32 FUN_001517b4(u32 input, u32 mode);
+s32 uiSpriteAdvanceAnimation(void *sprite, f32 speed);
+s32 padQueryLogicalKey(u32 input, u32 mode);
 s32 padButtonIsPressed(u32 button);
 u32 gameDataBlocksGetWord27E90();
 void FUN_00359974(s32 index, u32 a, u32 b, u32 c);
@@ -50,7 +50,7 @@ extern "C" s32 FUN_002c0240()
     case 0:
         if (!asdTMTexTableNodeIsLoaded(46, 1) || work->heapA == NULL || work->heapB == NULL)
             return 0;
-        work->process = FUN_00275bc8(work->heapA, work->heapB);
+        work->process = scrScriptProcessCreate(work->heapA, work->heapB);
         work->process->state = 2;
         uiSpriteSetKeyframe(work->sprite, 13, 0);
         uiSpriteSetImageKeyframe(work->sprite, 21, 0);
@@ -69,12 +69,12 @@ extern "C" s32 FUN_002c0240()
         work->state = 6;
         return 0;
     case 2:
-        if (!FUN_00163aa4(work->sprite, 1))
+        if (!uiSpriteAdvanceAnimation(work->sprite, 1))
             return 0;
         nextState = 3;
         break;
     case 3:
-        if (!FUN_001517b4(0, 1) && !padButtonIsPressed(1))
+        if (!padQueryLogicalKey(0, 1) && !padButtonIsPressed(1))
             return 0;
         FUN_00359974(0, 100 - gameDataBlocksGetWord27E90() % 100, ~0u, 0);
         scrScriptProcessStartEntry(work->process, 32);
@@ -82,7 +82,7 @@ extern "C" s32 FUN_002c0240()
         nextState = 5;
         break;
     case 4:
-        if (!FUN_00163aa4(work->sprite, 1))
+        if (!uiSpriteAdvanceAnimation(work->sprite, 1))
             return 0;
         work->state = 6;
         return 0;

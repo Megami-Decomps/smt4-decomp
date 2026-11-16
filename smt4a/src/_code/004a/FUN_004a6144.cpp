@@ -7,7 +7,7 @@ extern "C" {
 int textFormatBuffer(...);
 int drawTextAtSnappedRectangle(...);
 int efctSetSpeed(void);
-int FUN_00180118(void);
+int dataTable01GetRecordWithAocOverride(void);
 int layoutFindTableEntry(...);
 int dataTable00FindById(void);
 int devilDrawIconRelative(...);
@@ -37,7 +37,7 @@ extern unsigned int FUN_0014bf3c(unsigned int, unsigned int);
 extern int vec2GetXInt(void);
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_00180118. */
+/* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
 /* Supplied declaration required: layoutFindTableEntry. */
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: devilDrawIconRelative. */
@@ -142,7 +142,7 @@ void FUN_004a6144(int param_1,int param_2,int param_3,unsigned int param_4)
                         temp_v3 / 2,(unsigned char)(in_fpscr >> 0x16) & 3);
     drawTextAtSnappedRectangle(param_1 + 200,temp_v13,temp_v11,temp_v6,temp_v6,temp_v3);
     temp_v7 = param_4;
-    FUN_00180118();
+    dataTable01GetRecordWithAocOverride();
     if (param_3 == 0) {
       temp_v6 = 0x105c;
       temp_v8 = 0xff;

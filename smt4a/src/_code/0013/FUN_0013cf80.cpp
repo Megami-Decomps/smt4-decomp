@@ -3,7 +3,7 @@
 
 extern "C" {
 
-u8 FUN_00154edc(u32 mode, JobSurface *surface);
+u8 gxCopyFramebufferToSurface(u32 mode, JobSurface *surface);
 
 
 /* Starts a 512x512 capture into the job's surface once one is requested and nothing blocks it. */
@@ -24,10 +24,10 @@ s32 FUN_0013cf80(u32 job)
     if (work->captureBlocked || work->enabled) {
         return 0;
     }
-    FUN_00157558(g_renderCtx);
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     ((JobSurface *)work->bufferB)->width = 512;
     ((JobSurface *)work->bufferB)->height = 512;
-    work->captureResult = FUN_00154edc(0, (JobSurface *)work->bufferB);
+    work->captureResult = gxCopyFramebufferToSurface(0, (JobSurface *)work->bufferB);
     work->captured = 1;
     return 0;
 }

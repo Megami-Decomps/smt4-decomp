@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
+int libm_cosf(void);
+int libm_sinf(void);
 int distSpatial(void);
 int mathAngleDeltaDegrees(void);
 int FUN_00330108(...);
@@ -22,7 +22,7 @@ int lmapUpdateCameraDistancePair(void);
 int FUN_00324b68(void);
 int FUN_0036b824(...);
 int cameraAnimationSampleAndAdvance(int, int *, int);
-int FUN_0050d8e4(void);
+int __hardfp_atan2f(void);
 int VectorUnsignedToFloat(unsigned int, int);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
@@ -73,8 +73,8 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_001523b8. */
 /* Supplied declaration required: gameFlagsGetBlock. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: randomGetNormalizedFloat. */
 /* Supplied declaration required: residentApplyFallbackValues. */
 /* Supplied declaration required: distSpatial. */
@@ -86,7 +86,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_0036b824. */
 /* Supplied declaration required: cameraAnimationSampleAndAdvance. */
-/* Supplied declaration required: FUN_0050d8e4. */
+/* Supplied declaration required: __hardfp_atan2f. */
 extern short __aeabi_idivmod(short, int);
 
 
@@ -163,7 +163,7 @@ void FUN_00292b84(void)
       piVar5[0x14] = piVar5[0xb0];
       piVar5[0x15] = piVar5[0xb1];
       piVar5[0x16] = piVar5[0xb2];
-      FUN_0050d8e4();
+      __hardfp_atan2f();
       residentApplyFallbackValues();
       FUN_0014f0dc(&g_localCamera,g_lmapView + 0x14,g_lmapView + 0x17,g_lmapView + 8);
       FUN_001523b8(&g_localCamera,1);
@@ -276,7 +276,7 @@ void FUN_00292b84(void)
     FUN_00324b68();
     FUN_0036b824(&g_localCamera);
     *(unsigned char **)(g_lmapView[0xc5] + 0xc) = &g_localCamera;
-    FUN_0050d8e4();
+    __hardfp_atan2f();
     residentApplyFallbackValues();
     return;
   }
@@ -288,7 +288,7 @@ void FUN_00292b84(void)
     FUN_00324b68();
     FUN_0036b824(&g_localCamera);
     *(unsigned char **)(g_lmapView[0xc5] + 0xc) = &g_localCamera;
-    FUN_0050d8e4();
+    __hardfp_atan2f();
     residentApplyFallbackValues();
     return;
   }
@@ -300,7 +300,7 @@ void FUN_00292b84(void)
     FUN_00324b68();
     FUN_0036b824(&g_localCamera);
     *(unsigned char **)(g_lmapView[0xc5] + 0xc) = &g_localCamera;
-    FUN_0050d8e4();
+    __hardfp_atan2f();
     residentApplyFallbackValues();
     piVar1 = g_lmapView;
     temp_v2 = piVar5[0x99];
@@ -321,7 +321,7 @@ void FUN_00292b84(void)
     FUN_00324b68();
     FUN_0036b824(&g_localCamera);
     *(unsigned char **)(g_lmapView[0xc5] + 0xc) = &g_localCamera;
-    FUN_0050d8e4();
+    __hardfp_atan2f();
     residentApplyFallbackValues();
     return;
   }
@@ -332,12 +332,12 @@ void FUN_00292b84(void)
   g_lmapView[0x11] = *(int *)(g_lmapScene + 0x1c);
   piVar5[0x13] = *(int *)(temp_v2 + 0x24);
   temp_v7 = (float)piVar5[6] * 0.017453292f;
-  FUN_001bc124();
+  libm_sinf();
   piVar5 = g_lmapView;
   g_lmapView[0xe] =
        (int)(*(float *)(g_lmapScene + 0x1c) - temp_v7 * (float)g_lmapView[temp_v10 + 99]);
   temp_v8 = (float)piVar5[6] * temp_v13;
-  FUN_001bbf0c();
+  libm_cosf();
   temp_v2 = g_lmapScene;
   piVar5 = g_lmapView;
   temp_v7 = 90.0f;
@@ -346,21 +346,21 @@ void FUN_00292b84(void)
   piVar5[0x12] = (int)(*(float *)(temp_v2 + 0x20) + (float)piVar5[temp_v10 + 0x33]);
   piVar5[0xf] = (int)(*(float *)(temp_v2 + 0x20) + (float)piVar5[temp_v10 + 0x43] + (float)piVar5[7]);
   temp_v8 = ((float)piVar5[6] - 90.0f) * temp_v13;
-  FUN_001bc124();
+  libm_sinf();
   piVar5 = g_lmapView;
   g_lmapView[0x11] =
        (int)((float)g_lmapView[0x11] + temp_v8 * (float)g_lmapView[temp_v10 + 0x53]);
   temp_v8 = ((float)piVar5[6] - temp_v7) * temp_v13;
-  FUN_001bbf0c();
+  libm_cosf();
   piVar5 = g_lmapView;
   g_lmapView[0x13] =
        (int)((float)g_lmapView[0x13] + temp_v8 * (float)g_lmapView[temp_v10 + 0x53]);
   temp_v8 = ((float)piVar5[6] - temp_v7) * temp_v13;
-  FUN_001bc124();
+  libm_sinf();
   piVar5 = g_lmapView;
   g_lmapView[0xe] = (int)((float)g_lmapView[0xe] + temp_v8 * (float)g_lmapView[temp_v10 + 0x53]);
   temp_v13 = ((float)piVar5[6] - temp_v7) * temp_v13;
-  FUN_001bbf0c();
+  libm_cosf();
   piVar5 = g_lmapView;
   pfVar8 = (float *)(g_lmapView + 0x12);
   temp_v14 = -20.0f;
@@ -722,7 +722,7 @@ LAB_002936f8:
   else {
     FUN_0014f0dc(&g_localCamera,g_lmapView + 0x14,g_lmapView + 0x17,g_lmapView + 0xb);
   }
-  FUN_0050d8e4();
+  __hardfp_atan2f();
   residentApplyFallbackValues();
   return;
 }

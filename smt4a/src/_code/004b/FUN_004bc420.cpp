@@ -8,17 +8,17 @@
 struct AocSystem;
 extern "C" {
 extern AocSystem *g_aocSystem;
-void FUN_00148d68(u32, u32, s32);
+void weightedTableRollNextValue(u32, u32, s32);
 
 WeightedEncounterTable *resourceFindType27Record(AocSystem *, u32);
-const WeightedEncounterGroup *FUN_004bb80c(s32);
+const WeightedEncounterGroup *dataTable02GetRecordWithAocPackage(s32);
 const Table00Record *dataTable00FindById(u16);
 s32 randRange(u16);
 }
 
 static bool groupHasPortrait(u16 id)
 {
-    const WeightedEncounterGroup *group = FUN_004bb80c(id);
+    const WeightedEncounterGroup *group = dataTable02GetRecordWithAocPackage(id);
     for (s32 i = 0; i < 6; ++i) {
         if (group->members[i]) {
             const Table00Record *member = dataTable00FindById(group->members[i]);
@@ -33,7 +33,7 @@ extern "C" u16 FUN_004bc420(u32 first, u32 second, s32 excludePortraitGroups)
 {
     s32 index = gameDataGetTableEntry(first, second)->value;
     if (!index) {
-        FUN_00148d68(first, second, 1);
+        weightedTableRollNextValue(first, second, 1);
         index = gameDataGetTableEntry(first, second)->value;
     }
     void *section = dataTableGet(2, 1);

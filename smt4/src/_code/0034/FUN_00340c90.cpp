@@ -64,7 +64,7 @@ extern int FUN_002865c0(unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectTexture. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
+extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002f5288. */
 /* Supplied declaration required: packNibbleFields. */
@@ -191,7 +191,7 @@ void FUN_00340c90(fn_00340c90_arg0 *param_1)
   temp_v29 = temp_v11 + temp_v7 + temp_v29;
   temp_v4 = FUN_003deab0(param_1->field_0x4,0);
   temp_v0 = g_titleScene;
-  temp_v1 = FUN_002c5d80(5,1);
+  temp_v1 = renderCtxPackPassFlags(5,1);
   piVar5 = (int *)(temp_v0 + 0x124c);
   temp_v2 = *piVar5;
   temp_v3 = piVar5[temp_v2 + 2];

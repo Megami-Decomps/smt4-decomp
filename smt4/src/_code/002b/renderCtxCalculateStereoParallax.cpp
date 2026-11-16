@@ -2,7 +2,7 @@
 #include "gfx/StereoParallax.h"
 
 extern "C" {
-s32 FUN_002c5210(void);
+s32 gxIsStereoscopic3dEnabled(void);
 u32 asdGxPresetsGetHeightByKind(u32 index);
 f32 nn_ulcd_CTR_StereoCamera_GetParallax(void *camera, f32 value);
 
@@ -12,7 +12,7 @@ f32 renderCtxCalculateStereoParallax(void *handle, f32 value)
     RenderCtx *context = static_cast<RenderCtx *>(handle);
     f32 result = 0.0f;
     s32 mode = context->stereoMode;
-    if (mode == 2 || FUN_002c5210() != 1) {
+    if (mode == 2 || gxIsStereoscopic3dEnabled() != 1) {
         return result;
     }
     if (context->stereo.transform != NULL) {

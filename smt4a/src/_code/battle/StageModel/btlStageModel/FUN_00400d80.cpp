@@ -56,7 +56,7 @@ void resourceOwnerLoadNamed(ResourceOwner* owner, const char* name);
 s32 FUN_0040af60(ResourceOwner* owner);
 void FUN_0040ae70(ResourceOwner* owner, s32 arg);
 void FUN_0040afe0(ResourceOwner* owner, s32 a, s32 b);
-void* FUN_00178b04(u32 size, const char* file, u32 line);
+void* asdMemoryAllocTraced(u32 size, const char* file, u32 line);
 void* modelListInit(void* memory);
 
 // Finds the stage table row for the given ids.
@@ -109,7 +109,7 @@ void FUN_00400d80(BtlStageModel* model, u32 stage, u32 substage)
         model->stage = 1;
         model->substage = 1;
     }
-    void* memory = FUN_00178b04(0x20, DAT_00527348, 217);
+    void* memory = asdMemoryAllocTraced(0x20, DAT_00527348, 217);
     model->mapList = memory != NULL ? modelListInit(memory) : NULL;
     FUN_001cd3ec(model->mapList, name);
 
@@ -119,7 +119,7 @@ void FUN_00400d80(BtlStageModel* model, u32 stage, u32 substage)
         StageBam* bam = &row->bams[i];
         if (bam->name[0] == '0') continue;
         textFormatBuffer(name, "%s%s.bam", "battle/battle_map/", bam->name);
-        void* bamMemory = FUN_00178b04(0x20, DAT_00527348, 246);
+        void* bamMemory = asdMemoryAllocTraced(0x20, DAT_00527348, 246);
         model->bamList[i] = bamMemory != NULL ? modelListInit(bamMemory) : NULL;
         FUN_001cd3ec(model->bamList[i], name);
         model->bamPos[i][0] = (f32)bam->x;

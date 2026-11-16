@@ -12,7 +12,7 @@ extern BattleMessageFlagMasks g_btlMessageFlagMasks;
 s32 scrGetArg(u32 index);
 void FUN_004fb798(s32 mode, BtlUnitA *unit, u32 effect, BattleRosterRecordA *target, s32 first,
     s32 hp, s32 mp, u32 color, u32 flags, s32 start, s32 end, s32 kind, s32 third, s32 fourth, s32 enabled);
-void FUN_004fb43c(s32 delay, BtlUnitA *unit, u32 effect, s32 first, s32 second, s32 third, s32 fourth);
+void btlQueueActionMessage(s32 delay, BtlUnitA *unit, u32 effect, s32 first, s32 second, s32 third, s32 fourth);
 
 u32 FUN_00380c48(void)
 {
@@ -41,7 +41,7 @@ u32 FUN_00380c48(void)
             BattleRosterRecordA *target = &btlGetMainState()->roster[entry->unitIndex];
             s32 delay = affected * 5;
             FUN_004fb798(0, unit, 0, target, 0, hp, mp, ~0u, flags, delay, delay, 9, 0, 0, 1);
-            FUN_004fb43c(delay, unit, 0x1000263, 0, 0, 0, 0);
+            btlQueueActionMessage(delay, unit, 0x1000263, 0, 0, 0, 0);
             ++affected;
         }
     }

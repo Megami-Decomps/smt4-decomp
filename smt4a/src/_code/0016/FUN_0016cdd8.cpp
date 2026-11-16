@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016e800(int, int);
+int sysReportCheckFailure(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 extern unsigned int g_moduleEventD; /* 0x62d2ec */
 extern unsigned int DAT_0062d2fc; /* 0x62d2fc */
 
-/* Supplied declaration required: FUN_0016e800. */
+/* Supplied declaration required: sysReportCheckFailure. */
 extern int FUN_0016f9bc(unsigned int *, unsigned int);
 extern int FUN_0018a8ec(unsigned int);
 
@@ -28,11 +28,11 @@ void FUN_0016cdd8(unsigned int param_1)
   DAT_0062d2fc = param_1;
   temp_v0 = FUN_0016f9bc(&g_moduleEventD,0x209);
   if (temp_v0 < 0) {
-    FUN_0016e800(temp_v0,0x16cdfc);
+    sysReportCheckFailure(temp_v0,0x16cdfc);
   }
   temp_v0 = FUN_0018a8ec(0x209);
   if (temp_v0 < 0) {
-    FUN_0016e800(temp_v0,0x16ce10);
+    sysReportCheckFailure(temp_v0,0x16ce10);
     return;
   }
   return;

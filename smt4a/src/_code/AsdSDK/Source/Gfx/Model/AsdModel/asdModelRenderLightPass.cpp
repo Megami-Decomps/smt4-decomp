@@ -53,7 +53,7 @@ void FUN_0018e9d8(void*, u32);
 void FUN_00176e84(void*, u32, u32, u32);
 void FUN_0017721c(void*, u32, u32, u32);
 void nw_gfx_RenderContext_ResetState_2B7478(void*);
-void FUN_001575cc(void*);
+void renderCtxResetFrameState(void*);
 
 /* Render the model lighting pass, visiting the optional transform builder around it. */
 void asdModelRenderLightPass(void)
@@ -75,13 +75,13 @@ void asdModelRenderLightPass(void)
         FUN_0018e9d8(settings->visitor, settings->visitorState);
         sceneTraverserVisit(settings->light, settings->visitor);
     }
-    if (!(FUN_001696f4() != 1)) {
+    if (!(gxIsStereoscopic3dEnabled() != 1)) {
         FUN_0017721c(settings->owner, settings->modeFirst, settings->modeSecond, 0);
         nw_gfx_RenderContext_ResetState_2B7478(savedContext);
     } else {
         FUN_00176e84(settings->owner, settings->node, 1, 0);
     }
-    FUN_001575cc(g_renderCtx);
+    renderCtxResetFrameState(g_renderCtx);
     settings->pendingPass = 0;
 }
 } // extern "C"

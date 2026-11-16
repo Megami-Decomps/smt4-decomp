@@ -49,7 +49,7 @@ extern EventPlayerState g_saveLoadThread;
 
 s32 FUN_00223898(EventRequest *request, s32 kind);
 s32 scrScriptProcessStartEntry(void *process, s32 entry);
-ScriptProcessState *FUN_00297060(void);
+ScriptProcessState *scrScriptProcessCreate(void);
 void scrScriptProcessDestroy(void *process);
 u32 FUN_002c40f8(u32 *signalledCount, s32 *handles, s32 count, s32 waitAll, u32 timeoutLow, u32 timeoutHigh);
 void asdMemFree(void *block);
@@ -71,7 +71,7 @@ u32 FUN_001a1d08(void)
         return 0;
 
     if (request->scriptProcess == NULL) {
-        ScriptProcessState *process = FUN_00297060();
+        ScriptProcessState *process = scrScriptProcessCreate();
         request->scriptProcess = process;
         process->state = 2;
     }
@@ -98,7 +98,7 @@ u32 FUN_001a1d08(void)
             u32 result = FUN_002c40f8(&signalledCount, &id, 1, 0, 0, 0);
             bool failed = nnResultIsFailure(result);
             if (failed)
-                FUN_002c526c(result, failed);
+                resultHandleFailure(result, failed);
             if (!nnResultIsNotTimeout(result)) {
                 request->frames++;
                 return 0;

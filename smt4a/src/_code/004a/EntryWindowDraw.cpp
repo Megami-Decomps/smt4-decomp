@@ -37,7 +37,7 @@ void efctSetSpeed(f32 scale);
 void drawSetColorFromRGBA8(u32 color);
 s8 touchSelectionGetSelected(const EntryStyle *style);
 void FUN_002e7284(TextLayoutContextA *context, s32 x, s32 y, s32 fade, const char *text);
-void FUN_00183bb0(void);
+void gxResetColorQuadToWhite(void);
 void FUN_004a80d8(EntryWindow *window, s32 index, s32 fade, s32 variant, f32 scale);
 void demonIconPanelDrawRow(EntryWindow *window, s32 enabled, u32 textId, s32 index, s32 alternate, s32 fade);
 void FUN_004a7cb0(EntryWindow *window, u32 textId, s32 index, s32 alternate, s32 fade, f32 scale);
@@ -70,7 +70,7 @@ void FUN_004a2a30(EntryWindow *panel, s32 entry, s32 alternate, u32 textId, f32 
     else
         drawTextAtRelativePosition(reinterpret_cast<TextLayoutContextA *>(panel->textArea), 0, g_entryWindowCaptionX[entry], g_entryWindowCaptionY[entry],
             0, 0, 0xFFFFFFFF, fade, DAT_0052b724);
-    FUN_00183bb0();
+    gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
 }
 

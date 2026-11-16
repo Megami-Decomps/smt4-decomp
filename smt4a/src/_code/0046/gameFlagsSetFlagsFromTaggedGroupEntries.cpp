@@ -19,9 +19,9 @@ struct FlagOwnerView {
 };
 
 extern "C" {
-s32 FUN_001b315c(FlagGroupView* group);
-FlagEntryView* FUN_001b31ac(FlagGroupView* group);
-u32 FUN_001b31e0(FlagGroupView* group);
+s32 packageEntryIsLoaded(FlagGroupView* group);
+FlagEntryView* packageEntryGetDirectory(FlagGroupView* group);
+u32 packageEntryGetFileCount(FlagGroupView* group);
 
 
 // Set flags referenced by entries tagged '6' in each active group.
@@ -29,9 +29,9 @@ void gameFlagsSetFlagsFromTaggedGroupEntries(FlagOwnerView* owner)
 {
     for (s32 groupIndex = 0; groupIndex < owner->unk310; ++groupIndex) {
         FlagGroupView* group = &owner->unk318[groupIndex];
-        if (FUN_001b315c(group) != 0) {
-            FlagEntryView* entries = FUN_001b31ac(group);
-            u32 entryCount = FUN_001b31e0(group);
+        if (packageEntryIsLoaded(group) != 0) {
+            FlagEntryView* entries = packageEntryGetDirectory(group);
+            u32 entryCount = packageEntryGetFileCount(group);
             for (u32 entryIndex = 0; entryIndex < entryCount; ++entryIndex) {
                 FlagEntryView* entry = &entries[entryIndex];
                 if (entry->unk00 == '6') {

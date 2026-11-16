@@ -7,8 +7,8 @@ int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(...);
 int nn_math_ARMv6_VEC3TransformAsm_2AD44C(...);
 
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
+int libm_cosf(void);
+int libm_sinf(void);
 
 extern unsigned int DAT_00536d14; /* 0x536d14 */
 extern unsigned int DAT_00536d18; /* 0x536d18 */
@@ -191,11 +191,11 @@ void FUN_00397aa4(void)
   temp_v31 = temp_v31 * temp_v21;
   temp_v25 = 0.017453292f;
   temp_v21 = (float)g_lmapView[6] * 0.017453292f;
-  FUN_001bc124();
+  libm_sinf();
   temp_v20 = 290.0f;
   temp_v22 = temp_v22 + temp_v21 * 290.0f;
   temp_v25 = (float)g_lmapView[6] * temp_v25;
-  FUN_001bbf0c();
+  libm_cosf();
   temp_v24 = temp_v24 + DAT_005f1a04;
   temp_v9 = *(int *)(g_handleRegistry + 0x14);
   temp_v21 = *(float *)(g_lmapScene + 0x24);

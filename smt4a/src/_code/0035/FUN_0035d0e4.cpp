@@ -21,7 +21,7 @@ struct PartyPanelView {
 extern "C" {
 extern PartyPanelView* g_partyPanel;
 void __aeabi_memcpy4(void* destination, const void* source, u32 size);
-void FUN_0031d890(void);
+void partyPanelRefreshFromSlotTable(void);
 void FUN_0023f900(void);
 
 // Update the panel mode, copying its saved data when enabled or resetting it when disabled.
@@ -39,7 +39,7 @@ void FUN_0035d0e4(s32 mode)
         __aeabi_memcpy4(panel->unk0D50, panel->unk0C24, 100);
         __aeabi_memcpy4(panel->unk0DB4, panel->unk0C24, 100);
     } else {
-        FUN_0031d890();
+        partyPanelRefreshFromSlotTable();
     }
     FUN_0023f900();
 }

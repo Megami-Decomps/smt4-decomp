@@ -8,7 +8,7 @@ extern "C" {
 
 int uiSpriteSetImageKeyframe(...);
 int timerStart(...);
-int FUN_002bd954(...);
+int uiSpriteStateInitFromSource(...);
 int spriteStartAnimationByIndex(...);
 
 int memClear(...);
@@ -40,7 +40,7 @@ extern unsigned int *DAT_0044e144; /* 0x44e144 */
 
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002bd954. */
+/* Supplied declaration required: uiSpriteStateInitFromSource. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: memClear. */
@@ -90,41 +90,41 @@ void FUN_0028c040(void)
     *(unsigned char *)((int)puVar1 + 0x1e7d) = 0;
     drawParameterBlockClear(puVar1 + 9);
     paramsInit(reinterpret_cast<UiResourceParameters *>(puVar1 + 9), &DAT_00407728,0xb4,&DAT_004077dc,0x90,0,0,0,0,&DAT_0040786c,0x348);
-    FUN_002bd954(puVar1 + 0xe3,0x17,0,puVar1 + 9,1);
+    uiSpriteStateInitFromSource(puVar1 + 0xe3,0x17,0,puVar1 + 9,1);
     timerStart(puVar1 + 0xe3,1,0);
-    FUN_002bd954(puVar1 + 0x106,0x1a,1,puVar1 + 9,1);
+    uiSpriteStateInitFromSource(puVar1 + 0x106,0x1a,1,puVar1 + 9,1);
     spriteStartAnimationByIndex(puVar1 + 0x106,0);
-    FUN_002bd954(puVar1 + 0x129,0x1a,2,puVar1 + 9,1);
+    uiSpriteStateInitFromSource(puVar1 + 0x129,0x1a,2,puVar1 + 9,1);
     spriteStartAnimationByIndex(puVar1 + 0x129,1);
-    FUN_002bd954(puVar1 + 0x14c,0x1a,0,puVar1 + 9,1);
+    uiSpriteStateInitFromSource(puVar1 + 0x14c,0x1a,0,puVar1 + 9,1);
     spriteStartAnimationByIndex(puVar1 + 0x14c,2);
-    FUN_002bd954(puVar1 + 0x16f,0x1a,0,puVar1 + 9,1);
+    uiSpriteStateInitFromSource(puVar1 + 0x16f,0x1a,0,puVar1 + 9,1);
     timerStart(puVar1 + 0x16f,7,0);
     temp_v0 = 0;
     do {
-      FUN_002bd954(puVar1 + temp_v0 * 0x23 + 0x1fb,0x1a,0,puVar1 + 9,1);
+      uiSpriteStateInitFromSource(puVar1 + temp_v0 * 0x23 + 0x1fb,0x1a,0,puVar1 + 9,1);
       timerStart(puVar1 + temp_v0 * 0x23 + 0x1fb,4,0);
-      FUN_002bd954(puVar1 + temp_v0 * 0x23 + 0x359,0x1a,0,puVar1 + 9,1);
+      uiSpriteStateInitFromSource(puVar1 + temp_v0 * 0x23 + 0x359,0x1a,0,puVar1 + 9,1);
       timerStart(puVar1 + temp_v0 * 0x23 + 0x359,1,0);
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 10);
-    FUN_002bd954(puVar1 + 0x11,0x1a,0,puVar1 + 9,1);
+    uiSpriteStateInitFromSource(puVar1 + 0x11,0x1a,0,puVar1 + 9,1);
     timerStart(puVar1 + 0x11,6,0);
-    FUN_002bd954(puVar1 + 0x57,0x1a,0,puVar1 + 9,1);
+    uiSpriteStateInitFromSource(puVar1 + 0x57,0x1a,0,puVar1 + 9,1);
     uiSpriteSetImageKeyframe(puVar1 + 0x57,4,0);
-    FUN_002bd954(puVar1 + 0x7a,0x1a,0,puVar1 + 9,1);
+    uiSpriteStateInitFromSource(puVar1 + 0x7a,0x1a,0,puVar1 + 9,1);
     spriteStartAnimationByIndex(puVar1 + 0x7a,6);
-    FUN_002bd954(puVar1 + 0x9d,0x1a,0,puVar1 + 9,1);
+    uiSpriteStateInitFromSource(puVar1 + 0x9d,0x1a,0,puVar1 + 9,1);
     spriteStartAnimationByIndex(puVar1 + 0x9d,7);
-    FUN_002bd954(puVar1 + 0xc0,0x1a,0,puVar1 + 9,1);
+    uiSpriteStateInitFromSource(puVar1 + 0xc0,0x1a,0,puVar1 + 9,1);
     spriteStartAnimationByIndex(puVar1 + 0xc0,8);
-    FUN_002bd954(puVar1 + 0x34,0x1a,0,puVar1 + 9,1);
+    uiSpriteStateInitFromSource(puVar1 + 0x34,0x1a,0,puVar1 + 9,1);
     spriteStartAnimationByIndex(puVar1 + 0x34,4);
-    FUN_002bd954(puVar1 + 0x192,0x1a,0,puVar1 + 9,1);
+    uiSpriteStateInitFromSource(puVar1 + 0x192,0x1a,0,puVar1 + 9,1);
     timerStart(puVar1 + 0x192,8,0);
-    FUN_002bd954(puVar1 + 0x1b5,0x1a,0,puVar1 + 9,1);
+    uiSpriteStateInitFromSource(puVar1 + 0x1b5,0x1a,0,puVar1 + 9,1);
     timerStart(puVar1 + 0x1b5,9,0);
-    FUN_002bd954(puVar1 + 0x1d8,0x1a,0,puVar1 + 9,1);
+    uiSpriteStateInitFromSource(puVar1 + 0x1d8,0x1a,0,puVar1 + 9,1);
     spriteStartAnimationByIndex(puVar1 + 0x1d8,5);
   }
   g_gameGlobals = g_gameGlobals + '\x01';

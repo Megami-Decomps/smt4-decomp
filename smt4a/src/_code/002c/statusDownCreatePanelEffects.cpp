@@ -26,9 +26,9 @@ void statusDownCreatePanelEffects(u32 target, u32 flags, s32 alternate)
         reinterpret_cast<StatusDownEffectPositionView *>(g_statusDown);
     efctSetSpeed(vec2GetSpeed(status->panelPosition));
     for (s32 i = 0; i < 3; ++i)
-        FUN_001835b4(2, 0x12, 0x56f + i, target, flags, 0xbf);
+        texDrawTableEntryAtStoredOrigin(2, 0x12, 0x56f + i, target, flags, 0xbf);
     efctSetSpeed(1.0f);
-    FUN_001835b4(2, 0x12, 0x572, target, flags, 0xc0);
+    texDrawTableEntryAtStoredOrigin(2, 0x12, 0x572, target, flags, 0xc0);
     s32 panel, firstAccent, secondAccent, finalAccent;
     if (alternate) {
         panel = 0x5b1;
@@ -41,11 +41,11 @@ void statusDownCreatePanelEffects(u32 target, u32 flags, s32 alternate)
         secondAccent = 0x575;
         finalAccent = 0x59f;
     }
-    FUN_001835b4(2, 0x12, panel, target, flags, 0xc1);
-    FUN_001835b4(2, 0x12, firstAccent, target, flags, 0xc1);
-    FUN_001835b4(2, 0x12, secondAccent, target, flags, 0xc2);
+    texDrawTableEntryAtStoredOrigin(2, 0x12, panel, target, flags, 0xc1);
+    texDrawTableEntryAtStoredOrigin(2, 0x12, firstAccent, target, flags, 0xc1);
+    texDrawTableEntryAtStoredOrigin(2, 0x12, secondAccent, target, flags, 0xc2);
     efctSetSpeed(vec2GetSpeed(status->accentPosition));
-    FUN_001835b4(2, 0x12, finalAccent, target, flags, 0xc4);
+    texDrawTableEntryAtStoredOrigin(2, 0x12, finalAccent, target, flags, 0xc4);
     efctSetSpeed(1.0f);
 }
 }

@@ -33,7 +33,7 @@ void movieY2rConfigureAndStart(s32 width, s32 height, s32 format, u32 rotation, 
     const u32 result = nn::svc::ClearEvent(g_y2rTransferEvent);
     bool failed = nnResultIsFailure(result);
     if (failed) {
-        FUN_002e3140(result, failed);
+        resultHandleFailure(result, failed);
     }
     FUN_0043a718(1);
     FUN_0043a750(format);

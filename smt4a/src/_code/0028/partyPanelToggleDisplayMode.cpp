@@ -3,7 +3,7 @@
 extern "C" {
 
 void uiSpriteSetKeyframe(u8 *member, s32 a, s32 b);
-void FUN_003f5220(u32 handle, u32 value);
+void slotPlacementAssignSlotPosition(u32 handle, u32 value);
 
 typedef struct Screen {
     /* 0x000 */ u8 unk000[0x2C];
@@ -26,12 +26,12 @@ void partyPanelToggleDisplayMode(void)
     uiSpriteSetKeyframe(screen->member180, 4, 0);
     i = 0;
     do {
-        FUN_003f5220(screen->handlesA[i], screen->toggle);
+        slotPlacementAssignSlotPosition(screen->handlesA[i], screen->toggle);
         i = i + 1;
     } while (i < 4);
     i = 0;
     do {
-        FUN_003f5220(screen->handlesB[i], screen->toggle);
+        slotPlacementAssignSlotPosition(screen->handlesB[i], screen->toggle);
         i = i + 1;
     } while (i < 0x18);
 }

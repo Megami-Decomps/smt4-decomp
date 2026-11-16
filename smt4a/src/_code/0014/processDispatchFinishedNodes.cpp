@@ -24,13 +24,13 @@ struct ProcessRegistryView {
 
 extern "C" {
 extern ProcessRegistryView g_asdProcess;
-s32 FUN_001696f4(void);
+s32 gxIsStereoscopic3dEnabled(void);
 s32 FUN_00167eb0(u32);
 
 // Dispatch callbacks or the default handler for nodes whose state byte is three.
 void processDispatchFinishedNodes(void)
 {
-    if (FUN_001696f4() == 1) {
+    if (gxIsStereoscopic3dEnabled() == 1) {
         for (s32 bucketIndex = 0; bucketIndex < g_asdProcess.bucketCount; ++bucketIndex) {
             for (ProcessNodeView* node = g_asdProcess.buckets[bucketIndex].head;
                  node != 0; node = node->next) {

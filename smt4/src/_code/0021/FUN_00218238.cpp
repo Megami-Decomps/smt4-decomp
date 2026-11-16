@@ -45,19 +45,19 @@ extern "C" void FUN_00218238(SpritePanel *panel, u32 id, s32 x, s32 y, s32 shado
             offsetX = vec2GetXInt(panel->offset);
             offsetY = vec2GetYInt(panel->offset);
         }
-        FUN_002bf288(2, 0x15, 0xde, x + offsetX, y + offsetY, 0x35);
+        texDrawTableEntryAtStoredOrigin(2, 0x15, 0xde, x + offsetX, y + offsetY, 0x35);
         if (panel->mode == 1) {
             efctSetSpeed(vec2GetSpeed(panel->offset));
             setTitleRenderState(g_titleScene, packNibblesAndByte(6, 1, 0));
-            FUN_002bf288(2, 0x15, 0xde, x + offsetX, y + offsetY, 0x36);
+            texDrawTableEntryAtStoredOrigin(2, 0x15, 0xde, x + offsetX, y + offsetY, 0x36);
             setTitleRenderState(g_titleScene, packNibblesAndByte(6, 7, 0));
             efctSetSpeed(1.0f);
         }
-        FUN_002bf288(2, 0x15, second, x, y, 0x37);
-        FUN_002bf288(2, 0x15, first, x + offsetX, y + offsetY, 0x38);
+        texDrawTableEntryAtStoredOrigin(2, 0x15, second, x, y, 0x37);
+        texDrawTableEntryAtStoredOrigin(2, 0x15, first, x + offsetX, y + offsetY, 0x38);
         return;
     }
-    FUN_002bf288(2, 0x15, 0xdd, x, y, 0x2c);
-    FUN_002bf288(2, 0x15, second, x, y, 0x2d);
-    FUN_002bf288(2, 0x15, first, x, y, 0x2e);
+    texDrawTableEntryAtStoredOrigin(2, 0x15, 0xdd, x, y, 0x2c);
+    texDrawTableEntryAtStoredOrigin(2, 0x15, second, x, y, 0x2d);
+    texDrawTableEntryAtStoredOrigin(2, 0x15, first, x, y, 0x2e);
 }

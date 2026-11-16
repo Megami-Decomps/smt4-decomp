@@ -4,7 +4,7 @@
 #include "script/ScriptArgs.h"
 
 extern "C" {
-void FUN_002499fc(u32, s32 *, s32 *);
+void btlSideGetEntryRange(u32, s32 *, s32 *);
 s32 scrGetArg(s32);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *);
 u32 btlScriptResolveGroupArg(s32);
@@ -22,7 +22,7 @@ u32 btlScriptAnySelectedNegativeStat(void)
         stat = 11;
     u32 group = btlScriptResolveGroupArg(scrGetArg(1));
     s32 first, count;
-    FUN_002499fc(group, &first, &count);
+    btlSideGetEntryRange(group, &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlEntry *entry = &btlGetMainState()->entries[index];
         if (!(entry->flags & BTL_ENTRY_FLAG_PRESENT) &&

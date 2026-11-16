@@ -21,7 +21,7 @@ extern const u32 DAT_0052f210[];
 void sysMemClear(void *, u32);
 void rt_memclr(void *, u32);
 u32 FUN_002a4b28(u32);
-u16 FUN_0026264c(u32);
+u16 itemIsCollectedWithRelated(u32);
 s32 arrayContainsU16(const u16 *, s32, u32);
 s32 FUN_002b2ca8(const void *, const void *);
 u32 FUN_00229210(s32);
@@ -29,7 +29,7 @@ u32 FUN_00229210(s32);
 void rebuildFusionCatalogLists()
 {
     UniteWork *work = g_unite;
-    const FusionCatalogCriteria *filter = (const FusionCatalogCriteria *)(FUN_0026140c() + 0x20);
+    const FusionCatalogCriteria *filter = (const FusionCatalogCriteria *)(saveGetUserSettingsBlock() + 0x20);
     sysMemClear(work->catalogA.demons, sizeof(work->catalogA.demons));
     rt_memclr(work->catalogA.races, sizeof(work->catalogA.races));
     sysMemClear(work->catalogA.skills, sizeof(work->catalogA.skills));
@@ -37,7 +37,7 @@ void rebuildFusionCatalogLists()
     for (u16 id = 0; id <= 1200; ++id) {
         if (entryDefIsAvailable(work->context, id)) {
             const DevilRecordA *demon = devilGetRecord(id);
-            if ((FUN_002a4b28(demon->id) || FUN_0026264c(demon->id)) &&
+            if ((FUN_002a4b28(demon->id) || itemIsCollectedWithRelated(demon->id)) &&
                 (!filter->race || filter->race == demon->race) &&
                 (!filter->levelBand || FUN_004da77c(reinterpret_cast<u32>(work->context), demon->level, filter->levelBand))) {
                 work->catalogA.demons[demonCount++] = demon->id;

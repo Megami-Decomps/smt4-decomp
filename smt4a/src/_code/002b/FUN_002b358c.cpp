@@ -11,7 +11,7 @@ int FUN_00184c4c(...);
 int FUN_00186940(void);
 int FUN_0018a924(...);
 int nn_math_ARMv6_MTX44MultAsm(...);
-int FUN_001bced4(...);
+int renderGetCameraViewMatrix(...);
 int mtx44TransformPosition(...);
 int FUN_002371b0(void);
 int FUN_002b3538(...);
@@ -139,7 +139,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00186940. */
 /* Supplied declaration required: FUN_0018a924. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
-/* Supplied declaration required: FUN_001bced4. */
+/* Supplied declaration required: renderGetCameraViewMatrix. */
 /* Supplied declaration required: mtx44TransformPosition. */
 /* Supplied declaration required: FUN_002371b0. */
 /* Supplied declaration required: FUN_002b3538. */
@@ -278,7 +278,7 @@ void FUN_002b358c(fn_002b358c_arg0 *param_1)
   if ((param_1->field_0xa8 & 2) != 0) {
     temp_v67 = param_1 + 1;
   }
-  FUN_001bced4(temp_v23);
+  renderGetCameraViewMatrix(temp_v23);
   temp_v4 = 0x3f800000;
   temp_v24 = 0;
   temp_v25 = 0;

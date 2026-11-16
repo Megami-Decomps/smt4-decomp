@@ -8,7 +8,7 @@ int aocLoaderUpdateRecords(void *result, void *obj);
 int btlStateResetEntries(void *obj);
 int entryAddUniqueIdentifier(void *obj, int id);
 int resourceSlotsInsert(void *obj, u32 value);
-extern u32 FUN_00294090(u32 id, u32 flag);
+extern u32 eventResourceCacheAcquire(u32 id, u32 flag);
 extern int entryContainsIdentifier(void *obj, u32 id);
 
 typedef struct Slot {
@@ -48,7 +48,7 @@ void entryCollectNewIdentifiers(Result *result, Obj *obj)
     if (i < count) {
         do {
             if (entryContainsIdentifier(obj, ids[i]) == 0) {
-                value = FUN_00294090(ids[i], 1);
+                value = eventResourceCacheAcquire(ids[i], 1);
                 resourceSlotsInsert(obj, value);
                 obj->slots[added].id = ids[i];
                 entryAddUniqueIdentifier(obj, (s16)ids[i]);

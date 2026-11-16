@@ -33,7 +33,7 @@ typedef struct BustupSprite {
 } BustupSprite;
 
 void aocSlotRelease(BustupSprite *sprite);
-void FUN_001ad1ac(void *position, s32 slot);
+void bustupPlaceActiveSlot(void *position, s32 slot);
 AddonSpriteRecord *dataTable19FindAddonWord(void *request, u32 index);
 void uiSpriteReplaceTextureEntry(BustupSprite *sprite, u32 entry, u32 flag);
 
@@ -69,7 +69,7 @@ void bustupSpriteStartTransition(BustupSprite *sprite, u32 operation, s32 durati
         break;
     case 6:
         sprite->duration = duration == 0 ? 10.0f : (f32)duration;
-        FUN_001ad1ac(sprite->position, sprite->slot);
+        bustupPlaceActiveSlot(sprite->position, sprite->slot);
         sprite->hidden = 1;
         sprite->offset[1] = 0.0f;
         sprite->offset[0] = 0.0f;

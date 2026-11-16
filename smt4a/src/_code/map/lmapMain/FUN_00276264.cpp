@@ -37,10 +37,10 @@ int mapGimicClearEntryChildren(void);
 int FUN_002ba30c(void);
 int FUN_002d22c0(...);
 int engineRecordsUnregisterHandles(void);
-int FUN_002e5924(...);
+int frameTexRequestFade(...);
 int mapProjectPointHeightToCollision(...);
 int messageStartIntroAnimation(void);
-int FUN_0040619c(...);
+int ptrVectorAt(...);
 int mapIfUnregisterOwnedResources(void);
 
 int asdMemFree(...);
@@ -72,7 +72,7 @@ int recTableFireType3(void);
 int dataTable1bOr1cGetRecord(void);
 int slotSetRequest(...);
 void frameTransitionSetMode(int);
-int FUN_002c2358(void);
+int frameTexturesRelease(void);
 int FUN_002c23cc(...);
 int FUN_002c2610(void);
 int FUN_002c3398(...);
@@ -121,10 +121,10 @@ int popupClearPendingEntries(void);
 int lmapSnapshotTransitionState(void);
 int gameDataEntrySetBit7(...);
 
-int FUN_0015f858(...);
+int dataFindKindRecordWithAocOverrides(...);
 int FUN_001654f0(void);
 int FUN_001681c4(void);
-int FUN_001695a0(void);
+int messageSetScriptDisplayMode(void);
 int mapPopupReset(void);
 int FUN_00234b30(void);
 int FUN_00235438(void);
@@ -133,7 +133,7 @@ int FUN_002737a8(void);
 int scrScriptProcessStartEntry(...);
 int FUN_00311b74(void);
 int naviMainSetFlagsAndActivate(...);
-int FUN_003180c4(...);
+int scrSetStringSlot(...);
 int FUN_003401a4(...);
 int mapProbePositionDownward(...);
 int FUN_00387014(void);
@@ -171,15 +171,15 @@ int applyIfIdValid(...);
 int __aeabi_memcpy4(...);
 
 int asdCameraInitializeDefaults(...);
-int FUN_00178b04(...);
+int asdMemoryAllocTraced(...);
 int FUN_001cd3ec(...);
 int asdLoadFileAsyncWrap(...);
 int asdLoadFileSyncDefault(void);
 int mapGimmickResetControllers(void);
-int FUN_00275bc8(...);
+int scrScriptProcessCreate(...);
 void mapIfInitializeSceneControllers(void);
 int navigationSetArguments(...);
-int FUN_002df914(void);
+int lmapUpdateMapBgm(void);
 int FUN_00314bf8(...);
 int lmapInitializeActorHandles(void);
 int FUN_0033e014(...);
@@ -188,10 +188,10 @@ int FUN_00376fb8(...);
 int FUN_00379d58(void);
 int FUN_00398004(...);
 int FUN_003de188(...);
-int FUN_003fd7c0(...);
+int moriModelUnitStartMaterialAnimation(...);
 int FUN_0040a908(...);
 int FUN_0040a918(...);
-int FUN_0040aa6c(void);
+int resourceOwnerLoadFileSync(void);
 int FUN_0040aad4(...);
 int FUN_0040ab8c(...);
 int handleRegistryRegisterObject(...);
@@ -389,13 +389,13 @@ extern unsigned int DAT_005f1cb0; /* 0x5f1cb0 */
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: asdCameraInitializeDefaults. */
 /* Supplied declaration required: FUN_0013cab8. */
-extern int FUN_0013def0(unsigned int);
+extern int pairedAvailabilityGetState(unsigned int);
 extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: randRange. */
 /* Supplied declaration required: FUN_0014f0dc. */
 /* Supplied declaration required: FUN_001523b8. */
 extern int saveSlotFindSelected(void);
-/* Supplied declaration required: FUN_0015f858. */
+/* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 extern int campIsState85(void);
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: jobStop. */
@@ -403,9 +403,9 @@ extern int infoWinHasValue(void);
 /* Supplied declaration required: FUN_001654f0. */
 /* Supplied declaration required: FUN_001681c4. */
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_001695a0. */
+/* Supplied declaration required: messageSetScriptDisplayMode. */
 /* Supplied declaration required: eventQueueAddUnique. */
-/* Supplied declaration required: FUN_00178b04. */
+/* Supplied declaration required: asdMemoryAllocTraced. */
 extern int gameGetPlayerData(void);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
@@ -456,7 +456,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: popupTryStartTimedPrompt. */
 /* Supplied declaration required: resourceRemoveSlotOwners. */
 /* Supplied declaration required: naviMainUpdateSlider. */
-/* Supplied declaration required: FUN_00275bc8. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern char *campGetState(void);
 /* Supplied declaration required: FUN_00291e50. */
@@ -476,7 +476,7 @@ extern int mapDepartIsRunning(void);
 /* Supplied declaration required: fieldSceneResetEntryState. */
 /* Supplied declaration required: FUN_002b9324. */
 /* Supplied declaration required: FUN_002ba30c. */
-/* Supplied declaration required: FUN_002c2358. */
+/* Supplied declaration required: frameTexturesRelease. */
 /* Supplied declaration required: FUN_002c23cc. */
 /* Supplied declaration required: FUN_002c2610. */
 /* Supplied declaration required: FUN_002c3398. */
@@ -486,18 +486,18 @@ extern int mapDepartIsRunning(void);
 /* Supplied declaration required: engineRecordsUnregisterHandles. */
 /* Supplied declaration required: FUN_002ddea0. */
 /* Supplied declaration required: navigationSetArguments. */
-/* Supplied declaration required: FUN_002df914. */
-extern int FUN_002e07f4(void);
-extern int FUN_002e1a18(unsigned int);
+/* Supplied declaration required: lmapUpdateMapBgm. */
+extern int pairedAvailabilityBothReady(void);
+extern int buttonHelpIsActionActive(unsigned int);
 /* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_002e5924. */
+/* Supplied declaration required: frameTexRequestFade. */
 extern unsigned int FUN_002e5c2c(void);
 /* Supplied declaration required: FUN_00311b74. */
 /* Supplied declaration required: popupStart. */
 /* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: FUN_00314bf8. */
 /* Supplied declaration required: naviMainSetFlagsAndActivate. */
-/* Supplied declaration required: FUN_003180c4. */
+/* Supplied declaration required: scrSetStringSlot. */
 extern int FUN_0031d230(void);
 /* Supplied declaration required: mapPlaceSet. */
 /* Supplied declaration required: FUN_003254a0. */
@@ -567,13 +567,13 @@ extern int FUN_003cd4b4(unsigned int);
 /* Supplied declaration required: FUN_003de188. */
 /* Supplied declaration required: gameFlagSetEligibleEntryFlagsAtThreshold. */
 extern int gameDataFlagTestBit(unsigned int);
-/* Supplied declaration required: FUN_003fd7c0. */
-/* Supplied declaration required: FUN_0040619c. */
+/* Supplied declaration required: moriModelUnitStartMaterialAnimation. */
+/* Supplied declaration required: ptrVectorAt. */
 /* Supplied declaration required: objectVectorClear. */
 /* Supplied declaration required: countersAddSaturating. */
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
-/* Supplied declaration required: FUN_0040aa6c. */
+/* Supplied declaration required: resourceOwnerLoadFileSync. */
 /* Supplied declaration required: FUN_0040aad4. */
 /* Supplied declaration required: FUN_0040ab8c. */
 extern unsigned int modelListInit(void);
@@ -954,7 +954,7 @@ unsigned int FUN_00276264(void)
     asdLoadFileAsyncWrap(temp_v27,puVar2 + 0x2b7,1,0x80);
     textFormatBuffer(temp_v27,0x276d74,puVar2[0x10] - 100);
     temp_v8 = 0x20;
-    FUN_00178b04(0x20,0x276d94,0xe84);
+    asdMemoryAllocTraced(0x20,0x276d94,0xe84);
     temp_v22 = 0;
     if (temp_v8 != 0) {
       temp_v22 = modelListInit();
@@ -967,7 +967,7 @@ unsigned int FUN_00276264(void)
     asdLoadFileAsyncWrap(temp_v27,puVar2 + 0x13bd,1,0x80);
     textFormatBuffer(temp_v27,0x276ddc);
     temp_v8 = 0x20;
-    FUN_00178b04(0x20,0x276d94,0xe99);
+    asdMemoryAllocTraced(0x20,0x276d94,0xe99);
     temp_v22 = 0;
     if (temp_v8 != 0) {
       temp_v22 = modelListInit();
@@ -984,7 +984,7 @@ unsigned int FUN_00276264(void)
            (uStack_138 = temp_v10, textFormatBuffer(temp_v27,0x276e04,puVar2[0x10] - 100),
            puVar19 = g_lmapMainState, g_lmapMainState != (unsigned int *)0x0)) {
           temp_v8 = 0x20;
-          FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\lmapMain.cpp",0x2a4b);
+          asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\lmapMain.cpp",0x2a4b);
           temp_v22 = 0;
           if (temp_v8 != 0) {
             temp_v22 = modelListInit();
@@ -1025,7 +1025,7 @@ unsigned int FUN_00276264(void)
         return 0;
       }
       if (DAT_005f18c0 != 0) {
-        FUN_002df914();
+        lmapUpdateMapBgm();
       }
       FUN_00379d58();
       lmapRebuildModelContent();
@@ -1057,7 +1057,7 @@ LAB_00276eb8:
           temp_v8 = DAT_005f1b08;
           puVar2[0x27b] = DAT_005f1b08;
           puVar2[0x27c] = DAT_005f1b0c;
-          FUN_00275bc8();
+          scrScriptProcessCreate();
           puVar2[0x27d] = temp_v8;
           *(unsigned int *)(temp_v8 + 0x108) = 3;
           textFormatBuffer(temp_v27,0x277298,puVar2[0x10] - 100);
@@ -1069,19 +1069,19 @@ LAB_00276eb8:
           asdLoadFileSyncDefault();
           puVar2[0x27f] = (unsigned int)puVar16;
           temp_v8 = puVar2[0x27e];
-          FUN_00275bc8(temp_v8,puVar16);
+          scrScriptProcessCreate(temp_v8,puVar16);
           puVar2[0x280] = temp_v8;
           *(unsigned int *)(temp_v8 + 0x108) = 3;
           puVar2[3] = puVar2[3] + 1;
 LAB_00276f5c:
           temp_v8 = 0x20;
-          FUN_00178b04(0x20,0x276d94,0xf07);
+          asdMemoryAllocTraced(0x20,0x276d94,0xf07);
           temp_v22 = 0;
           if (temp_v8 != 0) {
             temp_v22 = modelListInit();
           }
           puVar2[0x2f] = temp_v22;
-          FUN_0040aa6c();
+          resourceOwnerLoadFileSync();
           FUN_0040a908(puVar2[0x2f],0x10000);
           FUN_0040a918(puVar2[0x2f],0x30000);
           FUN_0040aad4(puVar2[0x2f],0);
@@ -1089,13 +1089,13 @@ LAB_00276f5c:
           handleRegistryRegisterObject(g_handleRegistry,temp_v8);
           *(unsigned int *)(temp_v8 + 4) = *(unsigned int *)(temp_v8 + 4) | 3;
           temp_v8 = 0x20;
-          FUN_00178b04(0x20,0x276d94,0xf11);
+          asdMemoryAllocTraced(0x20,0x276d94,0xf11);
           temp_v22 = 0;
           if (temp_v8 != 0) {
             temp_v22 = modelListInit();
           }
           puVar2[0x36] = temp_v22;
-          FUN_0040aa6c();
+          resourceOwnerLoadFileSync();
           FUN_0040a908(puVar2[0x36],0x10000);
           FUN_0040a918(puVar2[0x36],0x30000);
           FUN_0040aad4(puVar2[0x36],0);
@@ -1108,7 +1108,7 @@ LAB_00276f5c:
           handleRegistryRegisterObject(g_handleRegistry,temp_v8);
           *(unsigned int *)(temp_v8 + 4) = *(unsigned int *)(temp_v8 + 4) | 3;
           if (*(int *)(temp_v5 + 0x15b4) == 2) {
-            FUN_003fd7c0(temp_v8,1,2);
+            moriModelUnitStartMaterialAnimation(temp_v8,1,2);
           }
           mapIfInitializeSceneControllers();
           temp_v22 = 0;
@@ -1178,7 +1178,7 @@ LAB_00276f5c:
           }
           puVar2[0x3d] = temp_v10;
           if (DAT_005f18c0 == 0) {
-            FUN_002df914();
+            lmapUpdateMapBgm();
           }
           puVar19 = g_lmapMainState;
           DAT_005f18c0 = 0;
@@ -1238,11 +1238,11 @@ LAB_00276f5c:
     }
     if (((DAT_005f1776 == '\0') && (DAT_005f1748 != '\0')) &&
        (*(char *)((int)puVar2 + 0x9e1) == '\0')) {
-      temp_v8 = FUN_0013def0(0);
+      temp_v8 = pairedAvailabilityGetState(0);
       if (temp_v8 == 3) {
         FUN_0013cab8(0,10,0xff);
       }
-      temp_v8 = FUN_0013def0(1);
+      temp_v8 = pairedAvailabilityGetState(1);
       if (temp_v8 == 3) {
         FUN_0013cab8(1,10,0xff);
       }
@@ -1518,9 +1518,9 @@ LAB_00276f5c:
             puVar2[3] = 0x2f;
             puVar2[4] = 0;
             DAT_005f1614 = 1;
-            FUN_0015f858(DAT_005f16dc,1);
+            dataFindKindRecordWithAocOverrides(DAT_005f16dc,1);
             FUN_001654f0();
-            FUN_003180c4(0,&uStack_b0);
+            scrSetStringSlot(0,&uStack_b0);
             temp_v9 = 0x17;
             temp_v22 = 0x2780e8;
             __aeabi_memcpy4(&DAT_005f1660,temp_v22,temp_v9);
@@ -1618,11 +1618,11 @@ LAB_00276f5c:
                   DAT_005f1614 = 1;
                   puVar2[3] = 0x3f;
                   puVar2[4] = 0;
-                  temp_v8 = FUN_0013def0(0);
+                  temp_v8 = pairedAvailabilityGetState(0);
                   if (temp_v8 == 3) {
                     FUN_0013cab8(0,10,0xff);
                   }
-                  temp_v8 = FUN_0013def0(1);
+                  temp_v8 = pairedAvailabilityGetState(1);
                   if (temp_v8 != 3) {
                     return 0;
                   }
@@ -1734,13 +1734,13 @@ LAB_00276f5c:
                                           DAT_005f1600 = temp_v8;
                                           puVar2[3] = 0x59;
                                           puVar2[4] = 0;
-                                          FUN_001695a0();
+                                          messageSetScriptDisplayMode();
                                           return 0;
                                         }
                                         FUN_001681c4();
                                         puVar2[3] = 0x4b;
                                         puVar2[4] = 0;
-                                        FUN_001695a0();
+                                        messageSetScriptDisplayMode();
                                         scrScriptProcessStartEntry(puVar2[0x280],0);
                                         return 0;
                                       }
@@ -1793,7 +1793,7 @@ LAB_00278b38:
                                 if (DAT_005f1be4 == 0 && temp_v10 == 0) {
                                   temp_v8 = FUN_004a0404();
                                   if (temp_v8 != 0) {
-                                    temp_v8 = FUN_002e1a18(0x13);
+                                    temp_v8 = buttonHelpIsActionActive(0x13);
                                     if ((temp_v8 != 0) && (temp_v8 = FUN_004a0f5c(), temp_v8 != 0)) {
                                       textFormatBuffer(&uStack_b0,0x278fdc,temp_v8);
                                       mapIfStart(&uStack_b0);
@@ -2174,7 +2174,7 @@ LAB_00278774:
                     DAT_005f1660 = 0x5f726373;
                     DAT_005f1664 = 0x73757566;
                   }
-                  FUN_003180c4(0);
+                  scrSetStringSlot(0);
                   puVar2[3] = 0x2f;
                   puVar2[4] = 0;
                   mapPopupReset();
@@ -2255,7 +2255,7 @@ LAB_00278774:
     if (temp_v8 + 1 < 8) {
       return 0;
     }
-    FUN_002c2358();
+    frameTexturesRelease();
     mapRecordResumePoint();
     FUN_002c3398(0);
     temp_v8 = 0xf;
@@ -2390,7 +2390,7 @@ LAB_00279444:
     stateSetterSetFromBase(puVar2 + 0x3d,puVar2[0x10] - 100,puVar2[0x12]);
     FUN_00482fd4(puVar2 + 0x3d);
     lmapApplyMapAndArea();
-    FUN_002df914();
+    lmapUpdateMapBgm();
     break;
   case 0x10:
     temp_v8 = puVar2[4];
@@ -2476,7 +2476,7 @@ LAB_00279444:
             DAT_005f161c = 0;
             puVar2[3] = 0xd;
             puVar2[4] = 0;
-            FUN_002df914();
+            lmapUpdateMapBgm();
           }
           goto LAB_00279834;
         }
@@ -2508,7 +2508,7 @@ LAB_00279834:
       slotSetRequest(1,10,0xff);
       puVar2[4] = puVar2[4] + 1;
     }
-    temp_v8 = FUN_002e07f4();
+    temp_v8 = pairedAvailabilityBothReady();
     if (temp_v8 == 0) {
       return 0;
     }
@@ -2521,7 +2521,7 @@ LAB_00279834:
       scriptHolderReset(g_aocMain + 0xa8);
       mapSetSceneState(2);
       FUN_001681c4();
-      FUN_001695a0();
+      messageSetScriptDisplayMode();
       temp_v5 = puVar2[4] + 1;
       puVar2[4] = temp_v5;
       break;
@@ -2536,7 +2536,7 @@ LAB_00279834:
     DAT_005f1614 = '\0';
     puVar2[3] = 0xd;
     puVar2[4] = 0;
-    FUN_002df914();
+    lmapUpdateMapBgm();
     break;
   case 0x15:
     temp_v8 = g_aocMain + 0xa8;
@@ -2607,7 +2607,7 @@ LAB_00279834:
     gameDataCopySaveToWork();
     mapPlaceSet(0xffffffff,0xffffffff);
     puVar19 = g_lmapMainState;
-    FUN_001695a0();
+    messageSetScriptDisplayMode();
     textFormatBuffer(&uStack_b0,"event/e%03d/e%03d.bf",DAT_005f1658,DAT_005f1658);
     puVar10 = &uStack_b0;
     asdLoadFileSyncDefault();
@@ -2617,7 +2617,7 @@ LAB_00279834:
     asdLoadFileSyncDefault();
     puVar19[0x28c] = (unsigned int)puVar10;
     temp_v8 = puVar19[0x28b];
-    FUN_00275bc8(temp_v8,puVar10);
+    scrScriptProcessCreate(temp_v8,puVar10);
     puVar19[0x28d] = temp_v8;
     *(unsigned int *)(temp_v8 + 0x108) = 2;
     puVar19[0x28e] = 0;
@@ -2657,11 +2657,11 @@ LAB_0027a7a8:
       DAT_005f1614 = 0;
       puVar2[3] = 0xd;
       puVar2[4] = 0;
-      temp_v8 = FUN_0013def0(0);
+      temp_v8 = pairedAvailabilityGetState(0);
       if (temp_v8 == 3) {
         FUN_0013cab8(0,10,0xff);
       }
-      temp_v8 = FUN_0013def0(1);
+      temp_v8 = pairedAvailabilityGetState(1);
       if (temp_v8 != 3) {
         return 0;
       }
@@ -2679,7 +2679,7 @@ LAB_0027a7a8:
       DAT_005f165c = tableGroupFindEntryIndex(puVar2[0x27e],&DAT_005f1660);
     }
     mapPlaceSet(0xffffffff,0xffffffff);
-    FUN_001695a0();
+    messageSetScriptDisplayMode();
     scrScriptProcessStartEntry(puVar2[0x280],DAT_005f165c);
     DAT_005f1658 = 0;
     puVar2[3] = puVar2[3] + 1;
@@ -2703,11 +2703,11 @@ LAB_0027a7a8:
       DAT_005f1614 = 0;
       puVar2[3] = 0xd;
       puVar2[4] = 0;
-      temp_v8 = FUN_0013def0(0);
+      temp_v8 = pairedAvailabilityGetState(0);
       if (temp_v8 == 3) {
         FUN_0013cab8(0,10,0xff);
       }
-      temp_v8 = FUN_0013def0(1);
+      temp_v8 = pairedAvailabilityGetState(1);
       if (temp_v8 != 3) {
         return 0;
       }
@@ -2725,7 +2725,7 @@ LAB_0027a7a8:
       DAT_005f165c = tableGroupFindEntryIndex(puVar2[0x27e],&DAT_005f1660);
     }
     mapPlaceSet(0xffffffff,0xffffffff);
-    FUN_001695a0();
+    messageSetScriptDisplayMode();
     scrScriptProcessStartEntry(puVar2[0x280],DAT_005f165c);
     DAT_005f1658 = 0;
     puVar2[3] = puVar2[3] + 1;
@@ -2750,11 +2750,11 @@ LAB_0027a7a8:
         DAT_005f1614 = 0;
         puVar2[3] = 0xd;
         puVar2[4] = 0;
-        temp_v8 = FUN_0013def0(0);
+        temp_v8 = pairedAvailabilityGetState(0);
         if (temp_v8 == 3) {
           FUN_0013cab8(0,10,0xff);
         }
-        temp_v8 = FUN_0013def0(1);
+        temp_v8 = pairedAvailabilityGetState(1);
         if (temp_v8 != 3) {
           return 0;
         }
@@ -2770,7 +2770,7 @@ LAB_0027a7a8:
     if (DAT_005f165c == -1) {
       DAT_005f165c = tableGroupFindEntryIndex(puVar2[0x27e],&DAT_005f1660);
     }
-    FUN_001695a0();
+    messageSetScriptDisplayMode();
     scrScriptProcessStartEntry(puVar2[0x280],DAT_005f165c);
     FUN_0036a434(puVar2);
     FUN_003401a4(puVar2);
@@ -2873,7 +2873,7 @@ LAB_0027a7a8:
     DAT_005f1614 = '\x01';
     DAT_005f161c = 1;
     recTableFireType3();
-    FUN_001695a0();
+    messageSetScriptDisplayMode();
     scrScriptProcessStartEntry(puVar2[0x27d],puVar2[0x279]);
     FUN_0036a434(puVar2);
     FUN_003401a4(puVar2);
@@ -2964,7 +2964,7 @@ LAB_0027a030:
     DAT_005f1658 = 0;
     temp_v22 = tableGroupFindEntryIndex(puVar2[0x27b],&DAT_005f1660);
     puVar2[0x279] = temp_v22;
-    FUN_001695a0();
+    messageSetScriptDisplayMode();
     scrScriptProcessStartEntry(puVar2[0x27d],puVar2[0x279]);
     FUN_0036a434(puVar2);
     FUN_003401a4(puVar2);
@@ -3062,7 +3062,7 @@ LAB_0027a030:
     break;
   case 0x33:
     FUN_00387014();
-    temp_v8 = FUN_002e07f4();
+    temp_v8 = pairedAvailabilityBothReady();
     if (temp_v8 != 0) {
       puVar2[0x24d6] = 1;
       puVar2[0x24d7] = DAT_005f16a0;
@@ -3072,13 +3072,13 @@ LAB_0027a030:
     break;
   case 0x34:
     FUN_00387014();
-    temp_v8 = FUN_002e07f4();
+    temp_v8 = pairedAvailabilityBothReady();
     if (temp_v8 != 0) {
       mapPlaceSet(0xffffffff,0xffffffff);
       DAT_005f1658 = 0;
       temp_v22 = tableGroupFindEntryIndex(puVar2[0x27b],0x27aba4);
       puVar2[0x279] = temp_v22;
-      FUN_001695a0();
+      messageSetScriptDisplayMode();
       scrScriptProcessStartEntry(puVar2[0x27d],puVar2[0x279]);
       puVar2[3] = puVar2[3] + 1;
       puVar2[4] = 0;
@@ -3100,7 +3100,7 @@ LAB_0027a030:
       fieldBuildAreaPlacementList(puVar19 + 0x3d);
     }
     sub68OwnerCall3();
-    FUN_002df914();
+    lmapUpdateMapBgm();
     temp_v8 = 0xd;
     DAT_005f1614 = '\0';
     puVar2[3] = temp_v8;
@@ -3108,7 +3108,7 @@ LAB_0027a030:
     break;
   case 0x36:
     FUN_00387014();
-    temp_v8 = FUN_002e07f4();
+    temp_v8 = pairedAvailabilityBothReady();
     if (((temp_v8 != 0) && (temp_v8 = puVar2[4], puVar2[4] = temp_v8 + 1, temp_v8 + 1 >= 5)) &&
        (temp_v8 = infoWinHasValue(), temp_v8 == 0)) {
       mapPlaceSet(0xffffffff,0xffffffff);
@@ -3157,7 +3157,7 @@ LAB_0027a030:
       }
     }
     puVar19 = g_lmapMainState;
-    FUN_001695a0();
+    messageSetScriptDisplayMode();
     textFormatBuffer(&uStack_b0,"event/e%03d/e%03d.bf",DAT_005f1658,DAT_005f1658);
     puVar10 = &uStack_b0;
     asdLoadFileSyncDefault();
@@ -3167,7 +3167,7 @@ LAB_0027a030:
     asdLoadFileSyncDefault();
     puVar19[0x28c] = (unsigned int)puVar10;
     temp_v8 = puVar19[0x28b];
-    FUN_00275bc8(temp_v8,puVar10);
+    scrScriptProcessCreate(temp_v8,puVar10);
     puVar19[0x28d] = temp_v8;
     *(unsigned int *)(temp_v8 + 0x108) = 2;
     puVar19[0x28e] = 0;
@@ -3184,11 +3184,11 @@ LAB_0027a030:
       return 0;
     }
     if (g_mapSelection == -1) {
-      temp_v8 = FUN_0013def0(0);
+      temp_v8 = pairedAvailabilityGetState(0);
       if (temp_v8 == 3) {
         FUN_0013cab8(0,10,0xff);
       }
-      temp_v8 = FUN_0013def0(1);
+      temp_v8 = pairedAvailabilityGetState(1);
       if (temp_v8 == 3) {
         FUN_0013cab8(1,10,0xff);
       }
@@ -3199,7 +3199,7 @@ LAB_0027a030:
       FUN_00364740(temp_v22,puVar19[0x12]);
       FUN_002ddea0();
       FUN_00245d78(0);
-      FUN_002df914();
+      lmapUpdateMapBgm();
       FUN_003a2278(0);
       DAT_005f1614 = '\0';
       DAT_005f185a = 1;
@@ -3215,14 +3215,14 @@ LAB_0027a030:
     mapPopupReset();
     FUN_00387014();
     puVar2[0x277] = 0;
-    temp_v8 = FUN_002e07f4();
+    temp_v8 = pairedAvailabilityBothReady();
     if (temp_v8 != 0) {
       FUN_001681c4();
       mapPlaceSet(0xffffffff,0xffffffff);
       DAT_005f1658 = 0;
       temp_v22 = tableGroupFindEntryIndex(puVar2[0x27b],0x27aff0);
       puVar2[0x279] = temp_v22;
-      FUN_001695a0();
+      messageSetScriptDisplayMode();
       scrScriptProcessStartEntry(puVar2[0x27d],puVar2[0x279]);
       puVar2[3] = puVar2[3] + 1;
       puVar2[4] = 0;
@@ -3243,7 +3243,7 @@ LAB_0027a030:
     FUN_00215978(0);
     lmapApplyMapAndArea();
     uiPlayGatedActionFeedback();
-    FUN_002df914();
+    lmapUpdateMapBgm();
     temp_v8 = 0xd;
     DAT_005f1614 = '\0';
     puVar2[3] = temp_v8;
@@ -3251,13 +3251,13 @@ LAB_0027a030:
     break;
   case 0x3c:
     FUN_00387014();
-    temp_v8 = FUN_002e07f4();
+    temp_v8 = pairedAvailabilityBothReady();
     if (temp_v8 != 0) {
       mapPlaceSet(0xffffffff,0xffffffff);
       DAT_005f1658 = 0;
       temp_v22 = tableGroupFindEntryIndex(puVar2[0x27b],0x27b000);
       puVar2[0x279] = temp_v22;
-      FUN_001695a0();
+      messageSetScriptDisplayMode();
       scrScriptProcessStartEntry(puVar2[0x27d],puVar2[0x279]);
       puVar2[3] = puVar2[3] + 1;
       puVar2[4] = 0;
@@ -3279,14 +3279,14 @@ LAB_0027a030:
       fieldBuildAreaPlacementList(puVar19 + 0x3d);
     }
     sub68OwnerCall3();
-    FUN_002df914();
+    lmapUpdateMapBgm();
     temp_v8 = 0xd;
     DAT_005f1614 = '\0';
     puVar2[3] = temp_v8;
     puVar2[4] = 0;
     break;
   case 0x3e:
-    temp_v8 = FUN_002e07f4();
+    temp_v8 = pairedAvailabilityBothReady();
     if ((temp_v8 != 0) && (temp_v8 = naviMainUpdateWidget(), temp_v8 == 0)) {
       DAT_005f1aca = 1;
       FUN_00387014();
@@ -3294,7 +3294,7 @@ LAB_0027a030:
       DAT_005f1658 = 0;
       temp_v22 = tableGroupFindEntryIndex(puVar2[0x27b],0x27b018);
       puVar2[0x279] = temp_v22;
-      FUN_001695a0();
+      messageSetScriptDisplayMode();
       scrScriptProcessStartEntry(puVar2[0x27d],puVar2[0x279]);
       puVar2[3] = 0x3d;
       puVar2[4] = 0;
@@ -3302,7 +3302,7 @@ LAB_0027a030:
     break;
   case 0x3f:
     *(unsigned char *)(puVar2 + 0x276) = 0;
-    FUN_001695a0();
+    messageSetScriptDisplayMode();
     FUN_001681c4();
     temp_v22 = 0x27b030;
     asdLoadFileSyncDefault();
@@ -3311,7 +3311,7 @@ LAB_0027a030:
     asdLoadFileSyncDefault();
     puVar2[0x290] = temp_v22;
     temp_v8 = puVar2[0x28f];
-    FUN_00275bc8(temp_v8,temp_v22);
+    scrScriptProcessCreate(temp_v8,temp_v22);
     puVar2[0x291] = temp_v8;
     *(unsigned int *)(temp_v8 + 0x108) = 3;
     temp_v22 = tableGroupFindEntryIndex(puVar2[0x28f],0x27b05c);
@@ -3340,7 +3340,7 @@ LAB_0027a030:
     lmapSnapshotTransitionState();
     mapPlaceSet(0xffffffff,0xffffffff);
     puVar19 = g_lmapMainState;
-    FUN_001695a0();
+    messageSetScriptDisplayMode();
     textFormatBuffer(&uStack_b0,0x27b440,puVar19[0x281],puVar19[0x281]);
     puVar10 = &uStack_b0;
     asdLoadFileSyncDefault();
@@ -3350,7 +3350,7 @@ LAB_0027a030:
     asdLoadFileSyncDefault();
     puVar19[0x28c] = (unsigned int)puVar10;
     temp_v8 = puVar19[0x28b];
-    FUN_00275bc8(temp_v8,puVar10);
+    scrScriptProcessCreate(temp_v8,puVar10);
     puVar19[0x28d] = temp_v8;
     *(unsigned int *)(temp_v8 + 0x108) = 2;
     scrScriptProcessGetEntry(puVar19[0x28d],puVar19[0x28a]);
@@ -3488,14 +3488,14 @@ LAB_0027a030:
         do {
           temp_v6 = (&DAT_005f176c)[temp_v8];
           if (temp_v6 != 0) {
-            FUN_0015f858(temp_v6,1);
+            dataFindKindRecordWithAocOverrides(temp_v6,1);
             FUN_001654f0();
-            FUN_003180c4(temp_v5,temp_v6);
+            scrSetStringSlot(temp_v5,temp_v6);
             temp_v5 = temp_v5 + 1;
           }
           temp_v8 = temp_v8 + 1;
         } while (temp_v8 < 2);
-        FUN_001695a0();
+        messageSetScriptDisplayMode();
         if (temp_v5 >= 2) {
           temp_v22 = tableGroupFindEntryIndex(puVar2[0x27b],0x27b82c);
           puVar2[0x279] = temp_v22;
@@ -3620,7 +3620,7 @@ LAB_0027a030:
     if (temp_v8 + 1 < 0x15) {
       return 0;
     }
-    temp_v8 = FUN_002e07f4();
+    temp_v8 = pairedAvailabilityBothReady();
     if (temp_v8 == 0) {
       return 0;
     }
@@ -3649,7 +3649,7 @@ LAB_0027a030:
         temp_v8 = temp_v13;
         if (*(char *)(puVar2 + temp_v10 * 0x22 + 0x2de) != '\0') {
           temp_v22 = *(unsigned int *)(puVar2[0x2b9] + 8);
-          FUN_0040619c(temp_v22,temp_v10);
+          ptrVectorAt(temp_v22,temp_v10);
           ptrListRemoveClearOwner(g_handleRegistry,temp_v22);
           temp_v8 = temp_v14;
         }
@@ -3662,7 +3662,7 @@ LAB_0027a030:
         temp_v8 = temp_v15;
         if (*(char *)(puVar2 + temp_v10 * 0x22 + 0x13e1) != '\0') {
           temp_v22 = *(unsigned int *)(*piVar12 + 8);
-          FUN_0040619c(temp_v22,temp_v10);
+          ptrVectorAt(temp_v22,temp_v10);
           ptrListRemoveClearOwner(g_handleRegistry,temp_v22);
           temp_v8 = temp_v16;
         }
@@ -3770,7 +3770,7 @@ LAB_0027a030:
            (uStack_138 = temp_v10, textFormatBuffer(temp_v27,0x276e04,puVar2[0x10] - 100),
            puVar19 = g_lmapMainState, g_lmapMainState != (unsigned int *)0x0)) {
           temp_v8 = 0x20;
-          FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\lmapMain.cpp",0x2a4b);
+          asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\lmapMain.cpp",0x2a4b);
           temp_v22 = 0;
           if (temp_v8 != 0) {
             temp_v22 = modelListInit();
@@ -3900,7 +3900,7 @@ LAB_0027a030:
     break;
   case 0x58:
     FUN_00387014();
-    temp_v8 = FUN_002e07f4();
+    temp_v8 = pairedAvailabilityBothReady();
     if (temp_v8 == 0) {
       return 0;
     }
@@ -3965,7 +3965,7 @@ LAB_0027a030:
     if (temp_v8 + 1 < 0x15) {
       return 0;
     }
-    temp_v8 = FUN_002e07f4();
+    temp_v8 = pairedAvailabilityBothReady();
     if (temp_v8 == 0) {
       return 0;
     }
@@ -3990,7 +3990,7 @@ LAB_0027a030:
         FUN_00399290(temp_v10,0);
         if (*(char *)(puVar2 + temp_v10 * 0x22 + 0x2de) != '\0') {
           temp_v22 = *(unsigned int *)(puVar2[0x2b9] + 8);
-          FUN_0040619c(temp_v22,temp_v10);
+          ptrVectorAt(temp_v22,temp_v10);
           ptrListRemoveClearOwner(g_handleRegistry,temp_v22);
         }
       }
@@ -4001,7 +4001,7 @@ LAB_0027a030:
         FUN_003b5c54(temp_v10,0);
         if (*(char *)(puVar2 + temp_v10 * 0x22 + 0x13e1) != '\0') {
           temp_v22 = *(unsigned int *)(*piVar12 + 8);
-          FUN_0040619c(temp_v22,temp_v10);
+          ptrVectorAt(temp_v22,temp_v10);
           ptrListRemoveClearOwner(g_handleRegistry,temp_v22);
         }
       }
@@ -4075,7 +4075,7 @@ LAB_0027a030:
            (uStack_138 = temp_v10, textFormatBuffer(temp_v27,0x276e04,puVar2[0x10] - 100),
            puVar19 = g_lmapMainState, g_lmapMainState != (unsigned int *)0x0)) {
           temp_v8 = 0x20;
-          FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\lmapMain.cpp",0x2a4b);
+          asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\lmapMain.cpp",0x2a4b);
           temp_v22 = 0;
           if (temp_v8 != 0) {
             temp_v22 = modelListInit();
@@ -4143,7 +4143,7 @@ LAB_0027a030:
       temp_v10 = puVar2[0x3d] | 1;
     }
     puVar2[0x3d] = temp_v10;
-    FUN_002df914();
+    lmapUpdateMapBgm();
     puVar19 = g_lmapMainState;
     temp_v22 = puVar2[0x10];
     FUN_002747dc();
@@ -4192,7 +4192,7 @@ LAB_0027a030:
     *(unsigned int *)(temp_v8 + 0x50) = 0x43340000;
     puVar2[0x14] = 0x43340000;
     puVar2[0x24] = 0;
-    FUN_002df914();
+    lmapUpdateMapBgm();
     *(unsigned char *)((int)puVar2 + 0xb) = 0;
     uiPlayGatedActionFeedback();
     uRam005f1621 = 0;
@@ -4209,7 +4209,7 @@ LAB_0027a030:
     break;
   case 0x65:
     FUN_00387014();
-    temp_v8 = FUN_002e07f4();
+    temp_v8 = pairedAvailabilityBothReady();
     if (temp_v8 == 0) {
       return 0;
     }
@@ -4243,7 +4243,7 @@ LAB_0027ca0c:
     if (temp_v8 + 1 < 0x15) {
       return 0;
     }
-    temp_v8 = FUN_002e07f4();
+    temp_v8 = pairedAvailabilityBothReady();
     if (temp_v8 == 0) {
       return 0;
     }
@@ -4306,7 +4306,7 @@ LAB_0027ca0c:
     break;
   case 0x69:
     FUN_002a2e98(puVar2[0x10],puVar2[0x12]);
-    FUN_002df914();
+    lmapUpdateMapBgm();
     FUN_00483acc(puVar2 + 0x3d);
     stateSetterSetFromBase(puVar2 + 0x3d,puVar2[0x10] - 100,puVar2[0x12]);
     fieldBuildAreaPlacementList(puVar2 + 0x3d);
@@ -4320,11 +4320,11 @@ LAB_0027ca0c:
     puVar2[3] = puVar2[3] + 1;
     break;
   case 0x6c:
-    temp_v8 = FUN_0013def0(0);
+    temp_v8 = pairedAvailabilityGetState(0);
     if (temp_v8 == 3) {
       FUN_0013cab8(0,10,0xff);
     }
-    temp_v8 = FUN_0013def0(1);
+    temp_v8 = pairedAvailabilityGetState(1);
     if (temp_v8 == 3) {
       FUN_0013cab8(1,10,0xff);
     }
@@ -4368,7 +4368,7 @@ LAB_0027ca0c:
     FUN_003401a4(puVar2);
     FUN_0036aa04(puVar2);
     puVar2[4] = puVar2[4] + 1;
-    temp_v8 = FUN_002e07f4();
+    temp_v8 = pairedAvailabilityBothReady();
 joined_r0x0027ce58:
     if (temp_v8 == 0) {
       return 0;
@@ -4379,7 +4379,7 @@ joined_r0x0027ce58:
     break;
   case 0x6f:
     if (puVar2[4] == 0) {
-      FUN_002e5924(4);
+      frameTexRequestFade(4);
     }
     temp_v8 = puVar2[4];
     puVar2[4] = temp_v8 + 1;
@@ -4410,7 +4410,7 @@ joined_r0x0027ce58:
         FUN_00399290(temp_v10,0);
         if (*(char *)(puVar2 + temp_v10 * 0x22 + 0x2de) != '\0') {
           temp_v22 = *(unsigned int *)(puVar2[0x2b9] + 8);
-          FUN_0040619c(temp_v22,temp_v10);
+          ptrVectorAt(temp_v22,temp_v10);
           ptrListRemoveClearOwner(g_handleRegistry,temp_v22);
         }
       }
@@ -4421,7 +4421,7 @@ joined_r0x0027ce58:
         FUN_003b5c54(temp_v10,0);
         if (*(char *)(puVar2 + temp_v10 * 0x22 + 0x13e1) != '\0') {
           temp_v22 = *(unsigned int *)(*piVar12 + 8);
-          FUN_0040619c(temp_v22,temp_v10);
+          ptrVectorAt(temp_v22,temp_v10);
           ptrListRemoveClearOwner(g_handleRegistry,temp_v22);
         }
       }
@@ -4539,7 +4539,7 @@ joined_r0x0027ce58:
     FUN_002ba30c();
     temp_v22 = FUN_00294854();
     mapReleaseTableTexture(temp_v22);
-    FUN_002c2358();
+    frameTexturesRelease();
     jobFlagObjStop();
     temp_v8 = puVar2[3] + 1;
     puVar2[3] = temp_v8;

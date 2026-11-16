@@ -7,7 +7,7 @@
 extern "C" {
 u32 scrGetArg(s32 argument);
 s32 btlResolveEntryChoice(s32 choice);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
 u32 FUN_003248e4(const BtlCombatantEntryA *entry);
 void scrSetResult(s32 result);
 
@@ -17,7 +17,7 @@ u32 FUN_003c1c00()
     u32 unitId = scrGetArg(0);
     s32 group = btlResolveEntryChoice(scrGetArg(1));
     s32 first, count;
-    FUN_00301a08(group, &first, &count);
+    btlGetEntryChoiceRange(group, &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
@@ -29,7 +29,7 @@ u32 FUN_003c1c00()
         }
     }
     if (btlGetMainState()->unk4cd1) {
-        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry && entry->id == unitId && FUN_003248e4(entry)) {
             scrSetResult(1);
             return 1;

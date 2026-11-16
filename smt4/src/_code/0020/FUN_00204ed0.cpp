@@ -6,7 +6,7 @@
 extern "C" {
 
 const SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 sprite);
-void FUN_002bf380(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 size);
+void texDrawCompositeSprite(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 size);
 void FUN_002bdf94(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const char *text);
 void FUN_002b6c34(s16 id, s32 x, s32 y, s32 size, s32 a, s32 b);
 void textFormatBuffer(char *buffer, const char *format, ...);
@@ -18,7 +18,7 @@ void FUN_00204ed0(s32 x, s32 y, s32 id, u32 frame, u32 color)
     char text[64];
     const SpriteInfo *base = asdTMTexTableEntryAt(0x1a, frame);
 
-    FUN_002bf380(2, 0x1a, 0x19, base->x + x, base->y + y, 0xb5);
+    texDrawCompositeSprite(2, 0x1a, 0x19, base->x + x, base->y + y, 0xb5);
     if (id != 0) {
         const SpriteInfo *namePos = asdTMTexTableEntryAt(0x1a, 0x40f);
         textFormatBuffer(text, "%s", aocIndexValueOrDefault(id));

@@ -77,7 +77,7 @@ s32 FUN_001f3f34();
 s32 FUN_0016242c();
 
 void cameraExportParameters(void *camera, CutRef *ref);
-void FUN_00359370(CutRef *ref, s32 flag);
+void modelRemoveFromSlotList(CutRef *ref, s32 flag);
 void FUN_00449814(CutNodeHead *node, s32 index);
 void animationEvaluateCallback(u32 object);
 void faderSetValue(u32 object);
@@ -135,7 +135,7 @@ void FUN_00318174(s32 id, s32 easeKind, s32 frames)
 
     cameraExportParameters(anim->camera, anim->ref);
     if (anim->dirty != 0)
-        FUN_00359370(anim->ref, 0);
+        modelRemoveFromSlotList(anim->ref, 0);
     cutRefreshNodes(anim->ref->nodes);
     animationEvaluateCallback((u32)anim->node->extra);
     faderSetValue((u32)anim->node->extra);

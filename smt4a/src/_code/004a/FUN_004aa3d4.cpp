@@ -48,11 +48,11 @@ s32 dataRecordGetKindValue(u32 id);
 UnitState *btlUnitGet(u32 unit);
 s32 FUN_002e4308(s32 value, s32 mode, s32 flag);
 s32 FUN_00388424(s32 unit, s32 locked);
-u32 FUN_0015f858(u16 value, s32 arg);
+u32 dataFindKindRecordWithAocOverrides(u16 value, s32 arg);
 s32 FUN_002c13b0(s32 value);
 s32 FUN_003f2448(u32 unit);
 s32 btlScriptUnitHasFlags(u32 unit);
-s32 FUN_001ba3d4(u16 value);
+s32 flagValueRead(u16 value);
 s32 FUN_002c13d4(s32 value, s32 amount);
 s32 menuStateReset(void);
 s32 menuStateStartSelect(s32 arg);
@@ -123,10 +123,10 @@ void FUN_004aa3d4(u32 unused, s32 kind, s32 value, s32 partyMember, u32 recordId
         break;
     }
     case 8:
-        textFormatBuffer(text, "%s", FUN_0015f858(ui->helpValue, 0));
+        textFormatBuffer(text, "%s", dataFindKindRecordWithAocOverrides(ui->helpValue, 0));
         FUN_002c13b0((s16)ui->helpValue);
         if (FUN_003f2448(ui->scriptUnit) != 0 && btlScriptUnitHasFlags(ui->scriptUnit) == 0) {
-            FUN_002c13d4((s16)ui->helpValue, FUN_001ba3d4(ui->helpValue) + 1);
+            FUN_002c13d4((s16)ui->helpValue, flagValueRead(ui->helpValue) + 1);
         }
         break;
     case 9:

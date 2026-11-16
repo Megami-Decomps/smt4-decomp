@@ -29,7 +29,7 @@ typedef char BattleObjectBindingLayoutCheck[sizeof(BattleObjectBinding) == 0x28 
     offsetof(BattleObjectBinding, unitIndex) == 0x1C &&
     offsetof(BattleBoundObject, weight) == 0x1FC ? 1 : -1];
 extern "C" {
-void FUN_003fe86c(BattleBoundObject *, s32, s32, f32, f32);
+void modelPlayClip(BattleBoundObject *, s32, s32, f32, f32);
 }
 
 extern "C" void btlResetMatchingBoundObjects(BattleObjectBindings *bindings, s32 first, s32 second)
@@ -39,7 +39,7 @@ extern "C" void btlResetMatchingBoundObjects(BattleObjectBindings *bindings, s32
         if (!(binding->flags & 8) && binding->handle != NULL &&
             binding->first == first && binding->second == second) {
             BattleBoundObject *object = binding->handle->object;
-            FUN_003fe86c(object, 0, 2, 0.0f, 0.0f);
+            modelPlayClip(object, 0, 2, 0.0f, 0.0f);
             object->weight = 1.0f;
             object->flags &= ~3;
             binding->flags |= 8;

@@ -3,11 +3,11 @@
 #include "gamedata/GameDataAccess_Smt4.h"
 
 extern "C" {
-s32 FUN_002497f8(const KindComparisonKey *left, const KindComparisonKey *right);
+s32 itemSortCompareByCategoryAndId(const KindComparisonKey *left, const KindComparisonKey *right);
 }
 
 /* Orders two keys by rank (ids above 400 rank 99, others by recordKindRank); ties go to
- * FUN_002497f8. */
+ * itemSortCompareByCategoryAndId. */
 static __inline s32 kindKeyCompareRank(const KindComparisonKey &left, const KindComparisonKey &right)
 {
     s32 leftRank;
@@ -28,7 +28,7 @@ static __inline s32 kindKeyCompareRank(const KindComparisonKey &left, const Kind
     if (order != 0) {
         return order;
     }
-    return FUN_002497f8(&left, &right);
+    return itemSortCompareByCategoryAndId(&left, &right);
 }
 
 extern "C" {

@@ -70,7 +70,7 @@ extern int dialogIsActive(void);
 /* Supplied declaration required: infoWinSetText. */
 /* Supplied declaration required: uiNavigatorStart. */
 /* Supplied declaration required: stateFinishIfPresent. */
-extern int FUN_003eb1cc(int);
+extern int btlStateHasSelectionGateFlag(int);
 extern unsigned int contentGetFirstFlaggedValue(void);
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_003f1b3c. */
@@ -296,7 +296,7 @@ LAB_004e0ac0:
     } while (temp_v2 < 0x6d);
   }
   temp_v2 = FUN_004e83ac(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a));
-  if (((temp_v2 == 0) && ((*param_2 & 4) == 0)) && (temp_v2 = FUN_003eb1cc(*param_1), temp_v2 == 0)) {
+  if (((temp_v2 == 0) && ((*param_2 & 4) == 0)) && (temp_v2 = btlStateHasSelectionGateFlag(*param_1), temp_v2 == 0)) {
     temp_v4 = *(unsigned int *)(*param_1 + 0x45a0);
     temp_v7 = *(unsigned int *)(*param_1 + 0x45a4);
     if (((DAT_005712c0 & temp_v4) == 0 && (DAT_005712c4 & temp_v7) == 0) &&

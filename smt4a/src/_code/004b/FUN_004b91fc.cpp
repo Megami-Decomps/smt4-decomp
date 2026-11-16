@@ -35,7 +35,7 @@ typedef struct SceneSetupWork {
 
 s32 sceneTexturesAreLoaded(void);
 s32 isFlag1F0Set(void *flags);
-SceneScriptProcess *FUN_00275bc8(void *data, u32 size);
+SceneScriptProcess *scrScriptProcessCreate(void *data, u32 size);
 void __ARM_common_memcpy4_6(void *position, void *rotation);
 void mikadoLoadSceneResources(SceneSetupWork *work);
 void FUN_004b7d88(SceneSetupWork *work);
@@ -62,9 +62,9 @@ void FUN_004b91fc(SceneSetupWork *work)
     if (block->scripts[1].data == NULL || block->scripts[1].size == 0) {
         return;
     }
-    block->scripts[0].process = FUN_00275bc8(block->scripts[0].data, block->scripts[0].size);
+    block->scripts[0].process = scrScriptProcessCreate(block->scripts[0].data, block->scripts[0].size);
     block->scripts[0].process->mode = 2;
-    block->scripts[1].process = FUN_00275bc8(block->scripts[1].data, block->scripts[1].size);
+    block->scripts[1].process = scrScriptProcessCreate(block->scripts[1].data, block->scripts[1].size);
     block->scripts[1].process->mode = 2;
     if (work->flags & 0x10) {
         sceneSetupPlace(work);

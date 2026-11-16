@@ -13,7 +13,7 @@ s32 questRequirementsMet(u16 questIndex);
 QuestRecordView* dataTable1bOr1cGetRecord(u16 questIndex);
 void flagEntryReset(u16 questIndex);
 void jyoucyuGetTableEntry(u32 index);
-void FUN_00348e10(u32 matchingValue);
+void questRaiseMaxAvailableForArea(u32 matchingValue);
 
 // Reset eligible quest entries whose nonzero record field matches the supplied value.
 s32 questResetEligibleEntriesMatchingValue(u32 matchingValue)
@@ -36,7 +36,7 @@ s32 questResetEligibleEntriesMatchingValue(u32 matchingValue)
     }
 
     if (changed != 0)
-        FUN_00348e10(matchingValue);
+        questRaiseMaxAvailableForArea(matchingValue);
     return changed;
 }
 }

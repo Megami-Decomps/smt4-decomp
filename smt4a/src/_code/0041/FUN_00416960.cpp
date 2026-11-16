@@ -25,10 +25,10 @@ typedef char PartnerMessageViewOffsets[offsetof(PartnerMessageOwnerView, source)
 
 extern "C" {
 void asdMemFreeSlot(void **object);
-void FUN_0014e188(UiSpriteState *sprite, u32 kind, u32 color, const UiSpriteSource *source, u16 priority, f32 scale);
+void uiSpriteStateInitFromSource(UiSpriteState *sprite, u32 kind, u32 color, const UiSpriteSource *source, u16 priority, f32 scale);
 void pairSetFirstResetSecond(UiSpriteState *sprite, s32 image);
 void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 image, s32 frame);
-void FUN_0019e330(UiSpriteState *sprite, s32 mode, s32 state);
+void rangeSelectionSelectEndpoint(UiSpriteState *sprite, s32 mode, s32 state);
 void FUN_002a1850(f32 *screen, s32 display, const ProjectionMatrices *camera, const f32 *world);
 PartnerMessageOffset FUN_00416388(PartnerMessageOwnerView *owner, s32 index, UiSpriteState *sprite);
 void pairSetHalves(UiSpriteState *sprite, s32 x, s32 y);
@@ -58,11 +58,11 @@ void FUN_00416960(PartnerMessageOwnerView *owner, s32 index, u32 message, Vector
     slot->state = 1;
     slot->messageId = message;
     slot->frame = 0;
-    FUN_0014e188(&slot->sprite, 8, ~0u, &owner->source, 11, 1.0f);
+    uiSpriteStateInitFromSource(&slot->sprite, 8, ~0u, &owner->source, 11, 1.0f);
     pairSetFirstResetSecond(&slot->sprite, 139);
     uiSpriteSetImageKeyframe(&slot->sprite, 4, 0);
-    FUN_0019e330(&slot->sprite, 6, 0);
-    FUN_002a1850(&slot->position.x, 0, reinterpret_cast<const ProjectionMatrices *>(FUN_00152f54()), &world.x);
+    rangeSelectionSelectEndpoint(&slot->sprite, 6, 0);
+    FUN_002a1850(&slot->position.x, 0, reinterpret_cast<const ProjectionMatrices *>(asdCameraGetSavedRenderPairs()), &world.x);
     PartnerMessageOffset offset = FUN_00416388(owner, index, &slot->sprite);
     slot->position.x += offset.x;
     slot->position.y += offset.y;

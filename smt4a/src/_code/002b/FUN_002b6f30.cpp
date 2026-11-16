@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0019e3d0(...);
 int mapRenderApplyPrimary(void);
-int FUN_0050d8e4(void);
+int __hardfp_atan2f(void);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(unsigned int, int);
 int nn_math_ARMv6_VEC3TransformAsm_2AD44C(float *, float *, float *);
@@ -71,7 +71,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0019e3d0. */
 /* Supplied declaration required: mapRenderApplyPrimary. */
-/* Supplied declaration required: FUN_0050d8e4. */
+/* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
 
@@ -189,7 +189,7 @@ LAB_002b6ffc:
                 *(float *)(temp_v4 + 0x18c) = temp_v22;
                 *(float *)(temp_v4 + 400) = temp_v19;
                 temp_v9 = *(float *)(g_lmapView + 0x50) - temp_v18;
-                FUN_0050d8e4();
+                __hardfp_atan2f();
                 temp_v9 = temp_v9 * temp_v26 * (float)temp_v27;
                 temp_v10 = 0;
                 in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(0.0f <= temp_v9) << 0x1d);

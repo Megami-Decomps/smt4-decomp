@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_0022e0fc(int, int);
+int entryCollectionSortByMode(int, int);
 int recordAppendFloatEntry(int, unsigned char [8]);
 int FUN_0022e17c(unsigned char [8], int, int);
 void entryTableClear(void *table);
@@ -31,7 +31,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char gaugePercent(int, unsigned int);
-/* Supplied declaration required: FUN_0022e0fc. */
+/* Supplied declaration required: entryCollectionSortByMode. */
 /* Supplied declaration required: recordAppendFloatEntry. */
 /* Supplied declaration required: FUN_0022e17c. */
 /* Supplied declaration required: entryTableClear. */
@@ -117,7 +117,7 @@ void FUN_0022d434(int param_1)
       if ((*pbVar7 & 0x80) != 0) {
         temp_v0 = temp_v0 + '\x01';
       }
-      FUN_0022e0fc(temp_v2,temp_v0);
+      entryCollectionSortByMode(temp_v2,temp_v0);
     }
     listScrollerInitialize(param_1 + 0x20,10,(int)*(short *)(param_1 + 0x5a8),0,1,1);
     *(unsigned char *)(param_1 + 0x2d) = 1;

@@ -4,7 +4,7 @@
 
 extern "C" {
 extern const char DAT_005332c4[];
-u32 FUN_0015f858(u32 sound, u32 mode);
+u32 dataFindKindRecordWithAocOverrides(u32 sound, u32 mode);
 s32 scrRunOpcodesStub(u32 script);
 u32 scrScriptProcessStartEntry(u32 script, s32 entry);
 s32 panelIsMissingOrFlagClear();
@@ -18,11 +18,11 @@ void FUN_003e65a4(ShopItemDescription *work)
     switch (work->state) {
     case 0:
         if (work->initialVoice.sound != 0)
-            FUN_003180c4(0, reinterpret_cast<const char *>(FUN_0015f858(work->initialVoice.sound, 0)));
+            scrSetStringSlot(0, reinterpret_cast<const char *>(dataFindKindRecordWithAocOverrides(work->initialVoice.sound, 0)));
         if (work->entries[0].voice.sound != 0)
-            FUN_003180c4(1, reinterpret_cast<const char *>(FUN_0015f858(work->entries[0].voice.sound, 0)));
+            scrSetStringSlot(1, reinterpret_cast<const char *>(dataFindKindRecordWithAocOverrides(work->entries[0].voice.sound, 0)));
         if (work->entries[1].voice.sound != 0)
-            FUN_003180c4(2, reinterpret_cast<const char *>(FUN_0015f858(work->entries[1].voice.sound, 0)));
+            scrSetStringSlot(2, reinterpret_cast<const char *>(dataFindKindRecordWithAocOverrides(work->entries[1].voice.sound, 0)));
         // Fall through: the initial voices and subsequent descriptions use the same selection entry.
     case 1: {
         FUN_003c1060();

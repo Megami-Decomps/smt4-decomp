@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-extern "C" void *FUN_00178b04(u32 size, const char *file, s32 line);
+extern "C" void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 extern "C" void _ZN4__rw15__rw_deallocateEPvji(void *block, s32 count, s32 flags);
 
 /* An object the owner deletes through its virtual destructor. */
@@ -37,7 +37,7 @@ public:
     virtual ~Obj557b58();
 
     /* The engine's allocator with source location (file, line). */
-    static void *operator new(u32 size, const char *file, s32 line) throw() { return FUN_00178b04(size, file, line); }
+    static void *operator new(u32 size, const char *file, s32 line) throw() { return asdMemoryAllocTraced(size, file, line); }
 
 protected:
     /* 0x00: vtable pointer */

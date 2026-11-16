@@ -12,8 +12,8 @@ extern GameStateView g_gameState;
 
 
 int randRange(...);
-int FUN_001bbf0c(void);
-int FUN_001bc124(int, int);
+int libm_cosf(void);
+int libm_sinf(int, int);
 int FUN_002296b0(int);
 int FUN_00281b94(...);
 int FUN_002c5468(void);
@@ -47,8 +47,8 @@ extern unsigned char DAT_0060ff9c; /* 0x60ff9c */
 /* Supplied declaration required: randRange. */
 extern int gameFlagsGetBlock(void);
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_002296b0. */
 extern int gameDataIsFlagByteSet(int);
 /* Supplied declaration required: FUN_00281b94. */
@@ -263,8 +263,8 @@ void FUN_00239c24(void)
       temp_v5 = *(char *)(temp_v3 + 0xe0b) * 700 + 0x15e;
       VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_001bc124(temp_v4,temp_v5);
-      FUN_001bbf0c();
+      libm_sinf(temp_v4,temp_v5);
+      libm_cosf();
       temp_v4 = FUN_003857c8((int)*(float *)(temp_v3 + 0x15c4));
       if ((((*(char *)(temp_v3 + 0xe09) == '\0') || (temp_v5 = gameDataIsFlagByteSet(temp_v4), temp_v5 != 0)) ||
           (*(int *)(temp_v3 + 0x15d0) != 0)) || (temp_v3 = flagCategoryIsAvailable(temp_v4), temp_v3 != 0)) {

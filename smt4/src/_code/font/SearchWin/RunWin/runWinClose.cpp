@@ -5,7 +5,7 @@
 extern "C" {
 
 int spriteStartAnimationByIndex(void *ui, int arg);
-int FUN_002bf810(int id);
+int soundPlaySeUnpanned(int id);
 
 extern RunWinWork *g_runWin;
 
@@ -19,7 +19,7 @@ void runWinClose(void)
         run->nextState = 3;
     }
     spriteStartAnimationByIndex(run->ui, 1);
-    FUN_002bf810(0x10001fe);
+    soundPlaySeUnpanned(0x10001fe);
 }
 
 } /* extern "C" */

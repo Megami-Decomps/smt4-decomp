@@ -10,7 +10,7 @@ void FUN_00220984(void);
 void FUN_002ae028(u8 *help);
 void FUN_002b8454(u8 slot, u8 kind, u16 value, s32 defer);
 void FUN_002b8ee0(ButtonHelpDisplayUnit *unit, s32 flag);
-void FUN_002bf818(ButtonHelpDisplayUnit *unit);
+void uiSpriteAdvanceAnimation(ButtonHelpDisplayUnit *unit);
 void buttonHelpSetPreset(u32 preset);
 s8 uiSpriteGetCompletionState(const ButtonHelpDisplayUnit *record);
 
@@ -26,7 +26,7 @@ u32 FUN_001c0c38(void)
         if (work->state == 1) {
             for (s32 i = 0; i < 2; i++) {
                 if (work->mode != 1) {
-                    FUN_002bf818(&work->units[i]);
+                    uiSpriteAdvanceAnimation(&work->units[i]);
                 } else if (work->unk04C6[0] != 0) {
                     FUN_002b8ee0(&work->units[i], 0);
                 }
@@ -34,7 +34,7 @@ u32 FUN_001c0c38(void)
             for (s32 i = 0; i < 6; i++) {
                 if (selection->kinds[i].kind != 0) {
                     if (i < work->transition.phase) {
-                        FUN_002bf818(&selection->units[i]);
+                        uiSpriteAdvanceAnimation(&selection->units[i]);
                     }
                     last = i;
                 }
@@ -46,12 +46,12 @@ u32 FUN_001c0c38(void)
         } else if (work->state != 2) {
             if (work->state == 3) {
                 for (s32 i = 0; i < 2; i++) {
-                    FUN_002bf818(&work->units[i]);
+                    uiSpriteAdvanceAnimation(&work->units[i]);
                 }
                 for (s32 i = 0; i < 6; i++) {
                     if (selection->kinds[i].kind != 0) {
                         if (i < work->transition.phase) {
-                            FUN_002bf818(&selection->units[i]);
+                            uiSpriteAdvanceAnimation(&selection->units[i]);
                         }
                         last = i;
                     }

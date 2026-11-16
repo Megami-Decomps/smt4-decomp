@@ -18,7 +18,7 @@ struct LookupView {
 
 } // namespace
 
-extern "C" LookupView* FUN_0027da30(ContextView* context, s32 key);
+extern "C" LookupView* btlFindEntryBlockByMemberId(ContextView* context, s32 key);
 
 // Search eligible slots 4 through 53 for a lookup containing the requested value.
 extern "C" u32 FUN_00336e44(ContextView* context, u32 value)
@@ -29,7 +29,7 @@ extern "C" u32 FUN_00336e44(ContextView* context, u32 value)
             continue;
         }
 
-        const LookupView* lookup = FUN_0027da30(context, slot->members.ids[0]);
+        const LookupView* lookup = btlFindEntryBlockByMemberId(context, slot->members.ids[0]);
         if (lookup != 0) {
             for (s32 valueIndex = 0; valueIndex < 50; ++valueIndex) {
                 if (lookup->values[valueIndex] == value) {

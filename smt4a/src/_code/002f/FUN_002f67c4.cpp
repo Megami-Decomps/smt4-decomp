@@ -55,24 +55,24 @@ void FUN_002f67c4(int param_1,int param_2,int param_3,int param_4)
   temp_v5 = 0xffffffff;
   temp_v0 = *(short *)(g_statusDown + 0x24ac + param_1 * 8);
   efctSetSpeed();
-  FUN_001835b4(2,0x12,0x556,param_2,param_3,param_4);
-  FUN_001835b4(2,0x12,0x557,param_2,param_3,param_4);
-  FUN_001835b4(2,0x12,0x558,param_2,param_3,param_4);
-  FUN_001835b4(2,0x12,0x5bd,param_2,param_3,param_4);
-  FUN_001835b4(2,0x12,0x5be,param_2,param_3,param_4);
+  texDrawTableEntryAtStoredOrigin(2,0x12,0x556,param_2,param_3,param_4);
+  texDrawTableEntryAtStoredOrigin(2,0x12,0x557,param_2,param_3,param_4);
+  texDrawTableEntryAtStoredOrigin(2,0x12,0x558,param_2,param_3,param_4);
+  texDrawTableEntryAtStoredOrigin(2,0x12,0x5bd,param_2,param_3,param_4);
+  texDrawTableEntryAtStoredOrigin(2,0x12,0x5be,param_2,param_3,param_4);
   if ((*(char *)(temp_v2 + 0x24f0) != '\0') && (*(int *)(temp_v2 + 0x24f4) == param_1)) {
     temp_v5 = 0xff;
-    FUN_001835b4(2,0x12,0x559,param_2,param_3,param_4 + 3);
+    texDrawTableEntryAtStoredOrigin(2,0x12,0x559,param_2,param_3,param_4 + 3);
   }
   temp_v4 = param_4 + 5;
   if (*(int *)(temp_v2 + 0x24ec) <= param_1) {
-    FUN_001835b4(2,0x12,0x58e,param_2,param_3,temp_v4);
+    texDrawTableEntryAtStoredOrigin(2,0x12,0x58e,param_2,param_3,temp_v4);
     return;
   }
   if (temp_v0 != 0) {
-    FUN_001835b4(2,0x12,0x55d,param_2,param_3,temp_v4);
-    FUN_001835b4(2,0x12,0x55e,param_2,param_3,temp_v4);
-    FUN_001835b4(2,0x12,0x55f,param_2,param_3,temp_v4);
+    texDrawTableEntryAtStoredOrigin(2,0x12,0x55d,param_2,param_3,temp_v4);
+    texDrawTableEntryAtStoredOrigin(2,0x12,0x55e,param_2,param_3,temp_v4);
+    texDrawTableEntryAtStoredOrigin(2,0x12,0x55f,param_2,param_3,temp_v4);
     temp_v4 = asdTMTexTableEntryAt(0x12,0x560);
     if (*(short *)(temp_v2 + 0x598) < 1) {
       FUN_00185e84((int)temp_v0,*(short *)(temp_v4 + 8) + param_2,*(short *)(temp_v4 + 10) + param_3,

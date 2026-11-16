@@ -12,13 +12,13 @@ struct Table00FlagEntry {
 };
 
 extern "C" {
-Table02Record *FUN_004bb80c(s32 index);
+Table02Record *dataTable02GetRecordWithAocPackage(s32 index);
 const Table00FlagEntry *dataTable00FindById(u16 id);
 
 
 u32 dataTable02RecordHasFlaggedLink(s32 index)
 {
-    const Table02LinkedIds *record = (const Table02LinkedIds *)FUN_004bb80c(index);
+    const Table02LinkedIds *record = (const Table02LinkedIds *)dataTable02GetRecordWithAocPackage(index);
     if (record != NULL) {
         for (s32 slot = 0; slot < 6; ++slot) {
             u16 id = record->ids[slot];

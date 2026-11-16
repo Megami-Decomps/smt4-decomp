@@ -9,7 +9,7 @@ extern "C" {
 extern AocMain *g_aocMain;
 void _ZN7AocMain12queueRequestE17RequestParametersji(QueuedRequestState *state, const RequestParameters *parameters, u32 argument, s32 mode);
 void scrScriptProcessDestroy(ScriptState *process);
-ScriptState *FUN_00297060(void *script, void *messages);
+ScriptState *scrScriptProcessCreate(void *script, void *messages);
 void msgWindowReset();
 void messageBannerBeginClose();
 void ifTouchRegionRemove();
@@ -28,7 +28,7 @@ void AocMenu::returnToScript()
         }
         scrScriptProcessDestroy(work->process);
         work->process = NULL;
-        ScriptState *process = FUN_00297060(work->script, work->messages);
+        ScriptState *process = scrScriptProcessCreate(work->script, work->messages);
         work->process = process;
         ((ScriptStateModeView *)process)->mode = 2;
         msgWindowReset();

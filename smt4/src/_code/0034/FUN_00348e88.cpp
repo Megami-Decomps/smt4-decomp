@@ -32,7 +32,7 @@ static __inline void questMarkChanged(u16 quest)
 {
     reinterpret_cast<QuestItemFlagBanks *>(gameGetFlagBlock())->quests[quest].changed |= 2;
 }
-u32 FUN_0028fb40(u32 item);
+u32 flagValueRead(u32 item);
 QuestItemGoalRecord *dataTable1bOr1cGetRecord(u16 quest);
 SaveWork *gameGetMapBlock(void);
 
@@ -52,7 +52,7 @@ void FUN_00348e88(u32 item, u32 amount)
             if (record != NULL && record->disabled == 0) {
                 for (s32 j = 0; j < 6; ++j) {
                     if (record->goals[j].kind == 1 && record->goals[j].item == item) {
-                        u32 current = FUN_0028fb40(item);
+                        u32 current = flagValueRead(item);
                         if (record->goals[j].required > current) {
                             questMarkChanged(i);
                             if (record->goals[j].required <= amount + current) {

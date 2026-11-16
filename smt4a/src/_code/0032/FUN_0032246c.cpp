@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_0019c0e0(...);
+int effectNodeUpdateTransform(...);
 int resOwnerRunNodeHandlers(...);
 int FUN_001ac8ec(...);
 int FUN_001b4eb8(...);
@@ -75,7 +75,7 @@ extern float DAT_00647354; /* 0x647354 */
 extern float DAT_00647358; /* 0x647358 */
 
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-/* Supplied declaration required: FUN_0019c0e0. */
+/* Supplied declaration required: effectNodeUpdateTransform. */
 /* Supplied declaration required: resOwnerRunNodeHandlers. */
 /* Supplied declaration required: FUN_001ac8ec. */
 /* Supplied declaration required: FUN_001b4eb8. */
@@ -199,7 +199,7 @@ void FUN_0032246c(fn_0032246c_arg0 *param_1)
               DAT_00647348 = temp_v0;
               FUN_001ac8ec(*puVar3);
               FUN_001b4eb8(*puVar3,&temp_v27);
-              FUN_0019c0e0(*puVar3);
+              effectNodeUpdateTransform(*puVar3);
             }
             temp_v1 = temp_v1 + 1;
             pfVar2 = pfVar2 + 10;
@@ -217,7 +217,7 @@ void FUN_0032246c(fn_0032246c_arg0 *param_1)
             if (-1 < (int)pfVar2[4]) {
               FUN_001ac8ec(*puVar3);
               FUN_001b4eb8(*puVar3,pfVar2);
-              FUN_0019c0e0(*puVar3);
+              effectNodeUpdateTransform(*puVar3);
             }
             temp_v1 = temp_v1 + 1;
             pfVar2 = pfVar2 + 10;

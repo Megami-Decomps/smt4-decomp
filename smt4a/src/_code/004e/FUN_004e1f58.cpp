@@ -4,7 +4,7 @@
 #include "shard/W4_W4Match2_BtlUnits.h"
 
 extern "C" {
-BattleMotionSubject *FUN_001568f8(BtlMainStateA *battle, s32 parameterIndex);
+BattleMotionSubject *btlFindEntryBlockByMemberId(BtlMainStateA *battle, s32 parameterIndex);
 s32 idSetFindSubjectIndex(BtlMainStateA *battle, const BattleRosterRecordA *record);
 
 // Retain one identity/pose snapshot per eligible roster model, without duplicating existing entries.
@@ -27,7 +27,7 @@ void FUN_004e1f58(BtlMainGlobalsA *globals, const BattleActionUnit *action, s32 
         }
         if (record->liveFlags.unk10C & 2)
             continue;
-        BattleMotionSubject *subject = FUN_001568f8(battle, record->combatant.parameterIndex);
+        BattleMotionSubject *subject = btlFindEntryBlockByMemberId(battle, record->combatant.parameterIndex);
         if (!subject)
             continue;
         s32 subjectIndex = idSetFindSubjectIndex(globals->state, record);

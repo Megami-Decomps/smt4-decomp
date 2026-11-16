@@ -27,7 +27,7 @@ extern "C" u32 scrollListSetSelection(ScrollList* list, s32 index);
 extern "C" {
 #endif
 
-u32 FUN_002896bc(void);
+u32 screenFadesAllReady(void);
 
 #ifdef __cplusplus
 }

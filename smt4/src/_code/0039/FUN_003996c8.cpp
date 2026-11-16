@@ -42,7 +42,7 @@ extern int FUN_00288f78(unsigned int);
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
 extern int gameGetMapBlock(void);
-extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
+extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0039af94. */
 /* Supplied declaration required: FUN_0039cddc. */
 /* Supplied declaration required: FUN_0039d0d0. */
@@ -165,7 +165,7 @@ LAB_003998fc:
     pfVar5 = (float *)NaviMain_GetCursorPos(temp_v3);
     temp_v11 = *pfVar5;
     temp_v12 = pfVar5[1];
-    temp_v4 = FUN_002c5d80(1,0);
+    temp_v4 = renderCtxPackPassFlags(1,0);
     renderStackPushIndexed(g_titleScene,3,temp_v4);
     if ((*(unsigned int *)(param_1 + 0x10) & 0x20000) == 0) {
       temp_v1 = 1;

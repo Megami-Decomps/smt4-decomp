@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e3140(unsigned int, int, int, int);
+int resultHandleFailure(unsigned int, int, int, int);
 int _ZN18OnlineResultRecordaSERKS_(unsigned int, unsigned int);
 int FUN_002ea5b8(void);
 int FUN_00442218(void);
@@ -16,7 +16,7 @@ typedef struct {
 } param_2_stack;
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: resultHandleFailure. */
 extern unsigned int _ZN12OnlineResultC1ERKj(unsigned char *, unsigned int *);
 /* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
 /* Supplied declaration required: FUN_002ea5b8. */
@@ -36,7 +36,7 @@ unsigned int FUN_004d99f8(int param_1,unsigned int param_2)
   temp_v0 = *(unsigned int *)(param_1 + 0x6c);
   software_interrupt(0x24);
   if (-((int)temp_v0 >> 0x1f) != 0) {
-    FUN_002e3140(temp_v0,-((int)temp_v0 >> 0x1f),30000000,0);
+    resultHandleFailure(temp_v0,-((int)temp_v0 >> 0x1f),30000000,0);
   }
   temp_v1 = -0x800000;
   if ((temp_v0 & 0x3ff) == 0x3fe) {

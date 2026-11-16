@@ -3,7 +3,7 @@
 extern "C" {
 
 extern s32 gameFlagIsSet(s32 id);
-extern u8 *FUN_002c2710(void);
+extern u8 *saveGetFlagRowTable(void);
 
 /* Sets or clears bit `bit` of a byte-packed bit array. */
 static __inline void bitArrayWrite(u8 *bits, u32 bit, s32 set)
@@ -20,7 +20,7 @@ static __inline void bitArrayWrite(u8 *bits, u32 bit, s32 set)
 /* Sets or clears flag `bit` (0-63) of `group` in the save data, unless the 0x4F/0x41 conditions block it. */
 void FUN_00408338(s32 group, u32 bit, s32 value)
 {
-    u8 *base = FUN_002c2710();
+    u8 *base = saveGetFlagRowTable();
 
     if (gameFlagIsSet(0x4F) == 0 || gameFlagIsSet(0x41) != 0) {
         u8 *flags;

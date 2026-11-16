@@ -17,9 +17,9 @@ int FUN_00319f64(int);
 int gameFlagsWriteBankBit(int, int);
 int FUN_003b51a4(void);
 int sysPlayVoice(void);
-int FUN_003fd7c0(...);
+int moriModelUnitStartMaterialAnimation(...);
 int FUN_003fd924(...);
-int FUN_003fe86c(...);
+int modelPlayClip(...);
 int candidateGetPreferredValue(int);
 int FUN_004ff98c(...);
 int VectorSignedToFloat(int, int);
@@ -55,10 +55,10 @@ extern int gameTestFlagBlockBit(int);
 /* Supplied declaration required: FUN_003b51a4. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: controllerSetDestination. */
-/* Supplied declaration required: FUN_003fd7c0. */
+/* Supplied declaration required: moriModelUnitStartMaterialAnimation. */
 /* Supplied declaration required: FUN_003fd924. */
 /* Supplied declaration required: controllerSetRotationEulerDegrees. */
-/* Supplied declaration required: FUN_003fe86c. */
+/* Supplied declaration required: modelPlayClip. */
 extern int FUN_0040ab8c(int);
 /* Supplied declaration required: candidateGetPreferredValue. */
 extern int FUN_004ff970(unsigned int);
@@ -66,7 +66,7 @@ extern int FUN_004ff970(unsigned int);
 extern int animationIsClipComplete(unsigned int);
 extern int FUN_004ffa14(int);
 extern int slots4FGetActiveValue(int);
-extern int FUN_004ffba8(int);
+extern int animationChannelsAllFinished(int);
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -172,7 +172,7 @@ void FUN_002737a8(void)
                 break;
               case 1:
                 in_s0 = (int)temp_v9;
-                FUN_003fe86c(temp_v1,0,2);
+                modelPlayClip(temp_v1,0,2);
                 temp_v2 = 2;
                 g_mapGimic[0x1b] = temp_v2;
                 break;
@@ -191,10 +191,10 @@ void FUN_002737a8(void)
                 in_s0 = (int)temp_v8;
                 g_mapGimic[0x1c] = g_mapGimic[0x1c] + 1;
                 mapTableValueSet(in_s0);
-                temp_v2 = FUN_004ffba8(temp_v1);
+                temp_v2 = animationChannelsAllFinished(temp_v1);
                 if (temp_v2 == 0) break;
                 in_s0 = (int)temp_v9;
-                FUN_003fe86c(temp_v1,1,2);
+                modelPlayClip(temp_v1,1,2);
                 temp_v2 = 4;
                 g_mapGimic[0x1b] = temp_v2;
                 break;
@@ -219,15 +219,15 @@ void FUN_002737a8(void)
               break;
             case 1:
               in_s0 = (int)temp_v9;
-              FUN_003fe86c(temp_v1,1,2);
+              modelPlayClip(temp_v1,1,2);
               temp_v2 = 2;
               g_mapGimic[0x1d] = temp_v2;
               break;
             case 2:
-              temp_v2 = FUN_004ffba8(temp_v1);
+              temp_v2 = animationChannelsAllFinished(temp_v1);
               if (temp_v2 == 0) break;
               in_s0 = (int)temp_v9;
-              FUN_003fe86c(temp_v1,2);
+              modelPlayClip(temp_v1,2);
               g_mapGimic[0x1d] = 3;
               break;
             case 3:
@@ -243,15 +243,15 @@ void FUN_002737a8(void)
               break;
             case 1:
               in_s0 = (int)temp_v9;
-              FUN_003fe86c(temp_v1,1,2);
+              modelPlayClip(temp_v1,1,2);
               temp_v2 = 2;
               g_mapGimic[0x1e] = temp_v2;
               break;
             case 2:
-              temp_v2 = FUN_004ffba8(temp_v1);
+              temp_v2 = animationChannelsAllFinished(temp_v1);
               if (temp_v2 == 0) break;
               in_s0 = (int)temp_v9;
-              FUN_003fe86c(temp_v1,2);
+              modelPlayClip(temp_v1,2);
               temp_v2 = 3;
               g_mapGimic[0x1e] = temp_v2;
               break;
@@ -268,15 +268,15 @@ void FUN_002737a8(void)
               break;
             case 1:
               in_s0 = (int)temp_v9;
-              FUN_003fe86c(temp_v1,1,2);
+              modelPlayClip(temp_v1,1,2);
               temp_v2 = 2;
               g_mapGimic[0x1f] = temp_v2;
               break;
             case 2:
-              temp_v2 = FUN_004ffba8(temp_v1);
+              temp_v2 = animationChannelsAllFinished(temp_v1);
               if (temp_v2 == 0) break;
               in_s0 = (int)temp_v9;
-              FUN_003fe86c(temp_v1,2);
+              modelPlayClip(temp_v1,2);
               temp_v2 = 3;
               g_mapGimic[0x1f] = temp_v2;
               break;
@@ -290,17 +290,17 @@ void FUN_002737a8(void)
           if ((*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xa6) == 0x55) &&
              (temp_v2 = gameFlagIsSet(0x1120), temp_v2 != 0)) {
             in_s0 = (int)temp_v9;
-            FUN_003fd7c0(temp_v1,2);
+            moriModelUnitStartMaterialAnimation(temp_v1,2);
           }
           if ((*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xa6) == 0x56) &&
              (temp_v2 = gameFlagIsSet(0x1122), temp_v2 != 0)) {
             in_s0 = (int)temp_v9;
-            FUN_003fd7c0(temp_v1,2);
+            moriModelUnitStartMaterialAnimation(temp_v1,2);
           }
           if ((*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xa6) == 0x57) &&
              (temp_v2 = gameFlagIsSet(0x1121), temp_v2 != 0)) {
             in_s0 = (int)temp_v9;
-            FUN_003fd7c0(temp_v1,2);
+            moriModelUnitStartMaterialAnimation(temp_v1,2);
           }
           if (*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xa6) == 0x4d) {
             temp_v2 = gameTestFlagBlockBit((int)*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xb2));
@@ -308,7 +308,7 @@ void FUN_002737a8(void)
               if ((short)piVar1[temp_v4 * 0xf + 0x29] == 2) goto LAB_00273ee8;
               in_s0 = (int)temp_v9;
               *(unsigned short *)(piVar1 + temp_v4 * 0xf + 0x29) = 2;
-              FUN_003fe86c(temp_v1,2,2);
+              modelPlayClip(temp_v1,2,2);
             }
             if ((short)piVar1[temp_v4 * 0xf + 0x29] == 0) {
               temp_v8 = (float)piVar1[temp_v4 * 0xf + 0x25];
@@ -317,7 +317,7 @@ void FUN_002737a8(void)
               in_s0 = temp_v2;
               if (temp_v2 < 0x3e9) {
                 in_s0 = (int)temp_v9;
-                FUN_003fe86c(temp_v1,1,2);
+                modelPlayClip(temp_v1,1,2);
                 *(unsigned short *)(piVar1 + temp_v4 * 0xf + 0x29) = 1;
                 if (temp_v2 >= 200) {
                   sysPlayVoice();
@@ -334,7 +334,7 @@ void FUN_002737a8(void)
                 (temp_v2 = FUN_004ff98c(temp_v1), temp_v2 == 1)) &&
                (temp_v2 = FUN_004ffa14(temp_v1), temp_v2 != 0)) {
               in_s0 = (int)temp_v9;
-              FUN_003fe86c(temp_v1,2);
+              modelPlayClip(temp_v1,2);
               gameFlagsWriteBankBit((int)*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xb2),1);
               *(int *)(temp_v1 + 0x1fc) = (int)((unsigned long long)temp_v10 >> 0x20);
               *(unsigned short *)(piVar1 + temp_v4 * 0xf + 0x29) = 2;
@@ -364,7 +364,7 @@ joined_r0x00273f44:
                   *(unsigned short *)(piVar1 + temp_v4 * 0xf + 0x29) = 2;
                   FUN_003fd924(temp_v1,2,2);
                   in_s0 = (int)temp_v9;
-                  FUN_003fd7c0(temp_v1,2);
+                  moriModelUnitStartMaterialAnimation(temp_v1,2);
                 }
               }
             }
@@ -376,7 +376,7 @@ joined_r0x00273f44:
                   *(unsigned short *)(piVar1 + temp_v4 * 0xf + 0x29) = 2;
                   FUN_003fd924(temp_v1,2,2);
                   in_s0 = (int)temp_v9;
-                  FUN_003fd7c0(temp_v1,2);
+                  moriModelUnitStartMaterialAnimation(temp_v1,2);
                 }
               }
             }
@@ -418,7 +418,7 @@ joined_r0x00273f44:
               *(unsigned short *)(piVar1 + temp_v4 * 0xf + 0x29) = 2;
               FUN_003fd924(temp_v1,2,2);
               in_s0 = (int)temp_v9;
-              FUN_003fd7c0(temp_v1,2);
+              moriModelUnitStartMaterialAnimation(temp_v1,2);
             }
           }
 LAB_0027412c:
@@ -429,18 +429,18 @@ LAB_0027412c:
               default:
                 break;
               case 1:
-                FUN_003fe86c(temp_v1,1,2);
+                modelPlayClip(temp_v1,1,2);
                 temp_v3 = 2;
                 in_s0 = temp_v2;
                 g_mapGimic[0x21] = temp_v3;
                 break;
               case 2:
-                temp_v2 = FUN_004ffba8(temp_v1);
+                temp_v2 = animationChannelsAllFinished(temp_v1);
                 if (temp_v2 == 0) break;
                 g_mapGimic[0x21] = 3;
                 break;
               case 3:
-                FUN_003fe86c(temp_v1,2);
+                modelPlayClip(temp_v1,2);
                 FUN_00319f64((int)(short)piVar1[temp_v4 * 0xf + 0x2b]);
                 temp_v3 = 4;
                 in_s0 = temp_v2;
@@ -454,19 +454,19 @@ LAB_0027412c:
               default:
                 break;
               case 1:
-                FUN_003fe86c(temp_v1,1,2);
+                modelPlayClip(temp_v1,1,2);
                 temp_v3 = 2;
                 in_s0 = temp_v2;
                 g_mapGimic[0x22] = temp_v3;
                 break;
               case 2:
-                temp_v2 = FUN_004ffba8(temp_v1);
+                temp_v2 = animationChannelsAllFinished(temp_v1);
                 if (temp_v2 != 0) {
                   g_mapGimic[0x22] = 3;
                 }
                 break;
               case 3:
-                FUN_003fe86c(temp_v1,2);
+                modelPlayClip(temp_v1,2);
                 FUN_00319f64((int)(short)piVar1[temp_v4 * 0xf + 0x2b]);
                 temp_v3 = 4;
                 in_s0 = temp_v2;
@@ -480,19 +480,19 @@ LAB_0027412c:
               default:
                 break;
               case 1:
-                FUN_003fe86c(temp_v1,1,2);
+                modelPlayClip(temp_v1,1,2);
                 temp_v3 = 2;
                 in_s0 = temp_v2;
                 g_mapGimic[0x23] = temp_v3;
                 break;
               case 2:
-                temp_v2 = FUN_004ffba8(temp_v1);
+                temp_v2 = animationChannelsAllFinished(temp_v1);
                 if (temp_v2 != 0) {
                   g_mapGimic[0x23] = 3;
                 }
                 break;
               case 3:
-                FUN_003fe86c(temp_v1,2);
+                modelPlayClip(temp_v1,2);
                 FUN_00319f64((int)(short)piVar1[temp_v4 * 0xf + 0x2b]);
                 temp_v3 = 4;
                 in_s0 = temp_v2;
@@ -533,13 +533,13 @@ LAB_00274348:
               temp_v4 = piVar1[temp_v0 * 6 + 0x234];
               piVar1[temp_v0 * 6 + 0x234] = temp_v4 - 1;
               if (temp_v4 - 1 < 1) {
-                FUN_003fd7c0(temp_v7,(int)*(short *)((int)piVar1 + temp_v0 * 0x18 + 0x8d6),2);
+                moriModelUnitStartMaterialAnimation(temp_v7,(int)*(short *)((int)piVar1 + temp_v0 * 0x18 + 0x8d6),2);
                 piVar1[temp_v0 * 6 + 0x234] = 0;
                 *(unsigned char *)(piVar1 + temp_v0 * 6 + 0x235) = 0;
                 *(unsigned short *)((int)piVar1 + temp_v0 * 0x18 + 0x8d6) = 0;
               }
               else {
-                FUN_003fd7c0(temp_v7,(int)*(short *)((int)piVar1 + temp_v0 * 0x18 + 0x8c6),2);
+                moriModelUnitStartMaterialAnimation(temp_v7,(int)*(short *)((int)piVar1 + temp_v0 * 0x18 + 0x8c6),2);
               }
             }
           }
@@ -554,14 +554,14 @@ LAB_00274348:
                 temp_v1 = FUN_004ff98c(temp_v4);
                 if (temp_v1 != 2) {
                   FUN_003fd924(temp_v4,2);
-                  FUN_003fd7c0(temp_v4,0,2);
+                  moriModelUnitStartMaterialAnimation(temp_v4,0,2);
                 }
               }
               else {
                 temp_v1 = FUN_004ff98c(temp_v4);
                 if (temp_v1 == 2) {
                   FUN_003fd924(temp_v4,0,2);
-                  FUN_003fd7c0(temp_v4,0,2);
+                  moriModelUnitStartMaterialAnimation(temp_v4,0,2);
                 }
               }
             }
@@ -573,7 +573,7 @@ LAB_00274348:
             temp_v4 = FUN_004ff98c(temp_v7);
             if (temp_v4 == 2) {
               FUN_003fd924(temp_v7,0,2);
-              FUN_003fd7c0(temp_v7,0,2);
+              moriModelUnitStartMaterialAnimation(temp_v7,0,2);
             }
             *(unsigned char *)(piVar1 + temp_v0 * 6 + 0x236) = 0;
           }

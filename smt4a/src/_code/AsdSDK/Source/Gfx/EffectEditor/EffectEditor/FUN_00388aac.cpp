@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_0019c0e0(...);
+int effectNodeUpdateTransform(...);
 int FUN_001abbc4(void);
 int FUN_001ac8ec(...);
 int FUN_001acb48(void);
@@ -103,7 +103,7 @@ extern int slotIsActive(unsigned int);
 /* Supplied declaration required: padButtonIsPressed. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0019c0e0. */
+/* Supplied declaration required: effectNodeUpdateTransform. */
 /* Supplied declaration required: FUN_001abbc4. */
 /* Supplied declaration required: FUN_001ac8ec. */
 /* Supplied declaration required: FUN_001acb48. */
@@ -615,7 +615,7 @@ LAB_00389604:
           temp_v0 = DAT_0059dbe1;
         }
         if (DAT_0059dbe9 == 2 && temp_v0 == 0) {
-          FUN_0019c0e0(DAT_0059dbf0);
+          effectNodeUpdateTransform(DAT_0059dbf0);
         }
       }
       else {
@@ -624,16 +624,16 @@ LAB_00389604:
           FUN_00202178(1);
           temp_v3 = padButtonIsPressed();
           if (temp_v3 != 0) {
-            FUN_0019c0e0(DAT_0059dbf0);
+            effectNodeUpdateTransform(DAT_0059dbf0);
           }
         }
         else {
-          FUN_0019c0e0(DAT_0059dbf0);
+          effectNodeUpdateTransform(DAT_0059dbf0);
         }
       }
     }
     else {
-      FUN_0019c0e0(DAT_0059dbf0);
+      effectNodeUpdateTransform(DAT_0059dbf0);
     }
     FUN_00323bc4(DAT_0059dbf0);
     temp_v3 = effResourceListHasActiveData(reinterpret_cast<LinkedItems*>(DAT_0059dbf0));

@@ -10,14 +10,14 @@ struct ConditionalUiScreen {
 
 extern "C" {
 u32 FUN_0048e40c(void);
-s32 FUN_00163aa4(UiTexSprite* sprite, f32 speed);
+s32 uiSpriteAdvanceAnimation(UiTexSprite* sprite, f32 speed);
 s8 uiSpriteGetCompletionState(const UiTexSprite *sprite);
 
 // Advances the sprite while conditions hold and switches state when its flag is set.
 void _ZN9Obj53230032uiAdvanceConditionalScreenSpriteEv(ConditionalUiScreen* screen)
 {
     if (FUN_0048e40c() != 0) {
-        FUN_00163aa4(&screen->sprite, 1.0f);
+        uiSpriteAdvanceAnimation(&screen->sprite, 1.0f);
         if (uiSpriteGetCompletionState(&screen->sprite) != 0) {
             screen->state = 2;
             screen->step = 0;

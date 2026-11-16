@@ -8,7 +8,7 @@
 extern "C" {
 extern AocSystem *g_aocSystem;
 Table4SearchRecordIV *recordTableFindById(AocSystem *system, u32 id);
-s32 FUN_00145a98(const void *key, const void *entry);
+s32 passiveSkillCompareById(const void *key, const void *entry);
 void *libc_bsearch(const void *key, const void *entries, u32 count,
                    u32 entrySize, s32 (*compare)(const void *, const void *));
 }
@@ -25,7 +25,7 @@ static __inline Table4SearchRecordIV *aocExtraRecordFind(u32 id)
         // The comparator key's only initialized member in retail.
         key.id = static_cast<u16>(id);
         record = static_cast<Table4SearchRecordIV *>(
-            libc_bsearch(&key, entries, count, 0x3C, FUN_00145a98));
+            libc_bsearch(&key, entries, count, 0x3C, passiveSkillCompareById));
     }
     return record;
 }

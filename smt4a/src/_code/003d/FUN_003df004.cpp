@@ -15,7 +15,7 @@ struct QuestObjectiveCountsA {
 };
 extern "C" {
 QuestObjectiveDefinitionA *dataTable1bOr1cGetRecord(u32 quest);
-s32 FUN_001ba3d4(u16 item);
+s32 flagValueRead(u16 item);
 void *gameFindRosterEntry(u32 quest);
 s32 partyFindSlotById(u16 id);
 
@@ -32,7 +32,7 @@ s32 FUN_003df004(u32 quest, s32 index, QuestRequirementProgress *progress)
     switch ((u16)objective->kind) {
     case 1:
         result = 1;
-        progress->current = FUN_001ba3d4(objective->id);
+        progress->current = flagValueRead(objective->id);
         progress->isItem = 1;
         progress->id = objective->id;
         progress->remaining = objective->count - progress->current;

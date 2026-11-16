@@ -29,8 +29,8 @@ void FUN_004042fc(u8 *list, s32 x, s32 y, f32 speed)
     s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
     efctSetSpeed(speed);
     x += parallax;
-    FUN_001835b4(2, 0x32, 0x2A, x, y, 0xC9);
-    FUN_001835b4(2, 0x32, 0xC, x, y, 0xC9);
+    texDrawTableEntryAtStoredOrigin(2, 0x32, 0x2A, x, y, 0xC9);
+    texDrawTableEntryAtStoredOrigin(2, 0x32, 0xC, x, y, 0xC9);
 
     s32 thumbOffset = 0;
     TextureTableEntryIV *frame = asdTMTexTableEntryAt(0x32, 0xD);
@@ -55,7 +55,7 @@ void FUN_004042fc(u8 *list, s32 x, s32 y, f32 speed)
         restore = true;
     }
     FUN_00168e00(frame->x + x, frame->y + y + thumbOffset, frame->placement->width, thumbHeight);
-    FUN_001835b4(2, 0x32, 0xD, x, y, 0xCE);
+    texDrawTableEntryAtStoredOrigin(2, 0x32, 0xD, x, y, 0xCE);
     context = reinterpret_cast<ScrollBarStateStackView *>(g_renderCtx);
     if (restore)
         renderStackSet(&context->stacks[0], 3);

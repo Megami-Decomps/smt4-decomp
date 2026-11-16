@@ -5,7 +5,7 @@ extern "C" {
 
 /* Converts `text` to two-byte character codes in `out` (default 0x100-byte buffer when NULL, size 0 = 0x100)
  * and returns the default buffer. */
-char *FUN_001654f8(const char *text, char *out, s32 size);
+char *textExpandGlyphsToBuffer(const char *text, char *out, s32 size);
 
 /* Draws the whole text at integer x/y with an 8-bit fade amount and a scale. */
 void FUN_0025cc78(const void *text, s32 x, s32 y, s32 fade, f32 scale);

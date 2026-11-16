@@ -13,8 +13,8 @@ typedef char DemonTextureDrawRecordOffsets[offsetof(DemonTextureDrawRecord, alte
 extern "C" {
 extern u32 g_aocSystem;
 DemonTextureDrawRecord *dataTable00FindById(u32 id);
-void FUN_002ae9ec(s32 layer, s32 category, s32 resource, u32 first, u32 second, u32 third);
-void FUN_002bf380(s32 layer, s32 category, s32 variant, u32 first, u32 second, u32 third);
+void texTableRecordCallWithParams(s32 layer, s32 category, s32 resource, u32 first, u32 second, u32 third);
+void texDrawCompositeSprite(s32 layer, s32 category, s32 variant, u32 first, u32 second, u32 third);
 void FUN_00389ddc(u32 system, s32 id, s32 layer, s32 resource, s32 mode, u32 first, u32 second, u32 third);
 
 static inline s32 isDemonTextureLoaded(s32 id, s32 resolve)
@@ -74,9 +74,9 @@ void FUN_001ee4e4(s32 id, u32 first, u32 second, u32 third, s32 resolve)
         if (aocRunByName(g_aocSystem, category, resource, 1)) {
             FUN_00389ddc(g_aocSystem, id, 2, resource, 0, first, second, third);
         } else if (variant > 0) {
-            FUN_002bf380(2, category, variant, first, second, third);
+            texDrawCompositeSprite(2, category, variant, first, second, third);
         } else {
-            FUN_002ae9ec(2, category, resource * 1000, first, second, third);
+            texTableRecordCallWithParams(2, category, resource * 1000, first, second, third);
         }
     }
 }

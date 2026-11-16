@@ -104,7 +104,7 @@ void FUN_003a6f80(DevilListInput *work)
         u32 id = work->rows[flaggedValueHolderGetTotal(work->cursor)].id;
         u8 record[0x610];
 
-        libc_strcpy(reinterpret_cast<unsigned int *>(record), reinterpret_cast<unsigned int *>((u32)FUN_002bd06c(id)));
+        libc_strcpy(reinterpret_cast<unsigned int *>(record), reinterpret_cast<unsigned int *>((u32)dataTable01FindByIdWithAoc(id)));
         textEncodeFontSlot(8, record);
         libc_strcpy(reinterpret_cast<unsigned int *>(record), reinterpret_cast<unsigned int *>(demonGetRaceLabel(id, 1)));
         textEncodeFontSlot(0x10, record);

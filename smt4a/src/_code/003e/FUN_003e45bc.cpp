@@ -9,7 +9,7 @@ void FUN_002f0bd8(u32 cost);
 void updateUnlockedEntryCount();
 
 AppUnlockState *gameDataBlockGetArea2D68();
-s32 FUN_003e4230(u32 id);
+s32 shopGetEntryAvailability(u32 id);
 
 // Unlock or preview an app purchase, charging points and updating category counts and unlock flags.
 u32 FUN_003e45bc(u32 id, s32 ignoreRequirements, s32 preview)
@@ -17,7 +17,7 @@ u32 FUN_003e45bc(u32 id, s32 ignoreRequirements, s32 preview)
     AppUnlockState *state = gameDataBlockGetArea2D68();
     const AppUnlockState *current = gameDataBlockGetArea2D68();
     if ((current->unlocked[id >> 3] & (1 << (id & 7))) != 0 ||
-        (ignoreRequirements == 0 && FUN_003e4230(id) != 0)) {
+        (ignoreRequirements == 0 && shopGetEntryAvailability(id) != 0)) {
         return 0;
     }
     if (preview == 0) {

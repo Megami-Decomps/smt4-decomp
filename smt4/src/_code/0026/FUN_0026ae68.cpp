@@ -5,7 +5,7 @@
 extern "C" {
 
 int ifTouchRegionAdd(int, int, int, int);
-int FUN_002b8584(...);
+int ifTouchRegionAddRequested(...);
 int ifTouchRegionRemove(void);
 int __aeabi_memset4(int, int, unsigned int);
 
@@ -13,7 +13,7 @@ extern int g_statusDown; /* 0x44e190 */
 
 /* Supplied declaration required: ifTouchRegionAdd. */
 extern int FUN_0029ee54(int);
-/* Supplied declaration required: FUN_002b8584. */
+/* Supplied declaration required: ifTouchRegionAddRequested. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
@@ -49,7 +49,7 @@ void FUN_0026ae68(void)
     temp_v4 = FUN_0029ee54(temp_v0 + 0x4d4);
     if (0 < temp_v4) {
       do {
-        temp_v1 = FUN_002b8584(0x1a,temp_v2 + 0x414);
+        temp_v1 = ifTouchRegionAddRequested(0x1a,temp_v2 + 0x414);
         temp_v4 = temp_v2 * 2;
         temp_v2 = temp_v2 + 1;
         *(unsigned short *)(temp_v0 + temp_v4 + 0x42c) = temp_v1;
@@ -57,9 +57,9 @@ void FUN_0026ae68(void)
         temp_v4 = FUN_0029ee54(temp_v0 + 0x4d4);
       } while (temp_v2 < temp_v4);
     }
-    temp_v1 = FUN_002b8584(0x1a,0x50f);
+    temp_v1 = ifTouchRegionAddRequested(0x1a,0x50f);
     *(unsigned short *)(temp_v0 + 0x47a) = temp_v1;
-    temp_v1 = FUN_002b8584(0x1a,0x50e);
+    temp_v1 = ifTouchRegionAddRequested(0x1a,0x50e);
     *(unsigned short *)(temp_v0 + 0x47c) = temp_v1;
     temp_v3 = *(char *)(temp_v0 + 0x480) + '\x02';
     break;
@@ -68,7 +68,7 @@ void FUN_0026ae68(void)
     temp_v4 = FUN_0029ee54(temp_v0 + 0x4d4);
     if (0 < temp_v4) {
       do {
-        temp_v1 = FUN_002b8584(0x1a,temp_v2 + 0x414);
+        temp_v1 = ifTouchRegionAddRequested(0x1a,temp_v2 + 0x414);
         temp_v4 = temp_v2 * 2;
         temp_v2 = temp_v2 + 1;
         *(unsigned short *)(temp_v0 + temp_v4 + 0x42c) = temp_v1;
@@ -84,7 +84,7 @@ void FUN_0026ae68(void)
     temp_v4 = FUN_0029ee54(temp_v0 + 0x4d4);
     if (0 < temp_v4) {
       do {
-        temp_v1 = FUN_002b8584(0x1a,temp_v2 + 0x414);
+        temp_v1 = ifTouchRegionAddRequested(0x1a,temp_v2 + 0x414);
         temp_v4 = temp_v2 * 2;
         temp_v2 = temp_v2 + 1;
         *(unsigned short *)(temp_v0 + temp_v4 + 0x42c) = temp_v1;
@@ -92,7 +92,7 @@ void FUN_0026ae68(void)
         temp_v4 = FUN_0029ee54(temp_v0 + 0x4d4);
       } while (temp_v2 < temp_v4);
     }
-    temp_v1 = FUN_002b8584(0x1a,0x4f1);
+    temp_v1 = ifTouchRegionAddRequested(0x1a,0x4f1);
     *(unsigned short *)(temp_v0 + (unsigned int)*(unsigned char *)(temp_v0 + 0x480) * 2 + 0x42c) = temp_v1;
     *(char *)(temp_v0 + 0x480) = *(char *)(temp_v0 + 0x480) + '\x01';
     return;
@@ -104,7 +104,7 @@ void FUN_0026ae68(void)
     }
     if (0 < temp_v4 - 1) {
       do {
-        temp_v1 = FUN_002b8584(0x1a,temp_v2 + 0x414);
+        temp_v1 = ifTouchRegionAddRequested(0x1a,temp_v2 + 0x414);
         temp_v4 = temp_v2 * 2;
         temp_v2 = temp_v2 + 1;
         *(unsigned short *)(temp_v0 + temp_v4 + 0x42c) = temp_v1;
@@ -125,7 +125,7 @@ void FUN_0026ae68(void)
     do {
       temp_v2 = gameFlagIsSet(0x410);
       if ((temp_v2 != 0) || (!(temp_v4 == 1 || temp_v4 == 2))) {
-        temp_v1 = FUN_002b8584(0x1a,temp_v4 + 0x466);
+        temp_v1 = ifTouchRegionAddRequested(0x1a,temp_v4 + 0x466);
         *(unsigned short *)(temp_v0 + temp_v4 * 2 + 0x42c) = temp_v1;
       }
       else {
@@ -134,9 +134,9 @@ void FUN_0026ae68(void)
       temp_v4 = temp_v4 + 1;
       *(char *)(temp_v0 + 0x480) = *(char *)(temp_v0 + 0x480) + '\x01';
     } while (temp_v4 < 7);
-    temp_v1 = FUN_002b8584(0x1a,0x50f);
+    temp_v1 = ifTouchRegionAddRequested(0x1a,0x50f);
     *(unsigned short *)(temp_v0 + 0x47a) = temp_v1;
-    temp_v1 = FUN_002b8584(0x1a,0x50e);
+    temp_v1 = ifTouchRegionAddRequested(0x1a,0x50e);
     *(unsigned short *)(temp_v0 + 0x47c) = temp_v1;
     *(char *)(temp_v0 + 0x480) = *(char *)(temp_v0 + 0x480) + '\x02';
     return;
@@ -144,22 +144,22 @@ void FUN_0026ae68(void)
     temp_v4 = 0;
     pcVar7 = (char *)(temp_v0 + 0x480);
     do {
-      temp_v1 = FUN_002b8584(0x1a,temp_v4 + 0x44c);
+      temp_v1 = ifTouchRegionAddRequested(0x1a,temp_v4 + 0x44c);
       temp_v2 = temp_v4 * 2;
       temp_v4 = temp_v4 + 1;
       *(unsigned short *)(temp_v0 + temp_v2 + 0x42c) = temp_v1;
       *pcVar7 = *(char *)(temp_v0 + 0x480) + '\x01';
     } while (temp_v4 < 0xb);
-    temp_v1 = FUN_002b8584(0x1a,0x4e7);
+    temp_v1 = ifTouchRegionAddRequested(0x1a,0x4e7);
     *(unsigned short *)(temp_v0 + 0x476) = temp_v1;
-    temp_v1 = FUN_002b8584(0x1a,0x4e8);
+    temp_v1 = ifTouchRegionAddRequested(0x1a,0x4e8);
     *(unsigned short *)(temp_v0 + 0x478) = temp_v1;
-    temp_v1 = FUN_002b8584(0x1a,0x4e9);
+    temp_v1 = ifTouchRegionAddRequested(0x1a,0x4e9);
     *(unsigned short *)(temp_v0 + 0x474) = temp_v1;
     *pcVar7 = *(char *)(temp_v0 + 0x480) + '\x03';
-    temp_v1 = FUN_002b8584(0x1a,0x50f);
+    temp_v1 = ifTouchRegionAddRequested(0x1a,0x50f);
     *(unsigned short *)(temp_v0 + 0x47a) = temp_v1;
-    temp_v1 = FUN_002b8584(0x1a,0x50e);
+    temp_v1 = ifTouchRegionAddRequested(0x1a,0x50e);
     *(unsigned short *)(temp_v0 + 0x47c) = temp_v1;
     *pcVar7 = *pcVar7 + '\x02';
     return;
@@ -171,39 +171,39 @@ void FUN_0026ae68(void)
       do {
         temp_v5 = temp_v2 + temp_v4 * 4;
         if (*(short *)(temp_v0 + 0x2232) <= temp_v5) break;
-        temp_v1 = FUN_002b8584(0x1a,temp_v5 + 0x4ae);
+        temp_v1 = ifTouchRegionAddRequested(0x1a,temp_v5 + 0x4ae);
         temp_v2 = temp_v2 + 1;
         *(unsigned short *)(temp_v0 + temp_v5 * 2 + 0x42c) = temp_v1;
         *pcVar7 = *(char *)(temp_v0 + 0x480) + '\x01';
       } while (temp_v2 < 4);
       temp_v4 = temp_v4 + 1;
       if (temp_v4 >= 9) {
-        temp_v1 = FUN_002b8584(0x1a,0x4e7);
+        temp_v1 = ifTouchRegionAddRequested(0x1a,0x4e7);
         *(unsigned short *)(temp_v0 + 0x476) = temp_v1;
-        temp_v1 = FUN_002b8584(0x1a,0x4e8);
+        temp_v1 = ifTouchRegionAddRequested(0x1a,0x4e8);
         *(unsigned short *)(temp_v0 + 0x478) = temp_v1;
-        temp_v1 = FUN_002b8584(0x1a,0x4e9);
+        temp_v1 = ifTouchRegionAddRequested(0x1a,0x4e9);
         *(unsigned short *)(temp_v0 + 0x474) = temp_v1;
         *pcVar7 = *(char *)(temp_v0 + 0x480) + '\x03';
-        temp_v1 = FUN_002b8584(0x1a,0x50f);
+        temp_v1 = ifTouchRegionAddRequested(0x1a,0x50f);
         *(unsigned short *)(temp_v0 + 0x47a) = temp_v1;
-        temp_v1 = FUN_002b8584(0x1a,0x50e);
+        temp_v1 = ifTouchRegionAddRequested(0x1a,0x50e);
         *(unsigned short *)(temp_v0 + 0x47c) = temp_v1;
         *pcVar7 = *pcVar7 + '\x02';
         return;
       }
     } while( 1 );
   case 0x15:
-    temp_v1 = FUN_002b8584(0x1a,0x4ea);
+    temp_v1 = ifTouchRegionAddRequested(0x1a,0x4ea);
     *(unsigned short *)(temp_v0 + 0x476) = temp_v1;
-    temp_v1 = FUN_002b8584(0x1a,0x4eb);
+    temp_v1 = ifTouchRegionAddRequested(0x1a,0x4eb);
     *(unsigned short *)(temp_v0 + 0x478) = temp_v1;
-    temp_v1 = FUN_002b8584(0x1a,0x4ec);
+    temp_v1 = ifTouchRegionAddRequested(0x1a,0x4ec);
     *(unsigned short *)(temp_v0 + 0x474) = temp_v1;
     *(char *)(temp_v0 + 0x480) = *(char *)(temp_v0 + 0x480) + '\x03';
-    temp_v1 = FUN_002b8584(0x1a,0x50f);
+    temp_v1 = ifTouchRegionAddRequested(0x1a,0x50f);
     *(unsigned short *)(temp_v0 + 0x47a) = temp_v1;
-    temp_v1 = FUN_002b8584(0x1a,0x50e);
+    temp_v1 = ifTouchRegionAddRequested(0x1a,0x50e);
     *(unsigned short *)(temp_v0 + 0x47c) = temp_v1;
     *(char *)(temp_v0 + 0x480) = *(char *)(temp_v0 + 0x480) + '\x02';
     return;
@@ -219,7 +219,7 @@ void FUN_0026ae68(void)
     }
     if (0 < temp_v2 - 1) {
       do {
-        temp_v1 = FUN_002b8584(0x1a,temp_v5 + 0x414);
+        temp_v1 = ifTouchRegionAddRequested(0x1a,temp_v5 + 0x414);
         temp_v2 = temp_v5 * 2;
         temp_v5 = temp_v5 + 1;
         *(unsigned short *)(temp_v0 + temp_v2 + 0x42c) = temp_v1;
@@ -227,7 +227,7 @@ void FUN_0026ae68(void)
         temp_v2 = FUN_0029ee54(temp_v4);
       } while (temp_v5 < temp_v2 - 1);
     }
-    temp_v1 = FUN_002b8584(0x1a,0x54a);
+    temp_v1 = ifTouchRegionAddRequested(0x1a,0x54a);
     temp_v4 = FUN_0029ee54(temp_v4);
     *(unsigned short *)(temp_v0 + temp_v4 * 2 + 0x42a) = temp_v1;
     temp_v3 = *(char *)(temp_v0 + 0x480) + '\x01';

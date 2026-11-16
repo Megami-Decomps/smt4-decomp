@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
+int libm_cosf(void);
+int libm_sinf(void);
 int distSpatial(void);
 int FUN_0032714c(void);
 int mathPositionHeadingDegrees(void);
@@ -16,7 +16,7 @@ int FUN_00379344(int);
 int mathAbsHeadingErrorToPoint(void);
 int FUN_003856f8(int);
 int FUN_00385798(int);
-int FUN_003d4ed8(unsigned int);
+int soundActorStartOnFreeChannel(unsigned int);
 int countersAddSaturating(int, int);
 int SBORROW4(int, int);
 int VectorSignedToFloat(...);
@@ -45,8 +45,8 @@ extern unsigned short DAT_005f19e8; /* 0x5f19e8 */
 extern int gameFlagsGetBlock(void);
 extern int gameGetPlayerData(void);
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
+/* Supplied declaration required: libm_cosf. */
+/* Supplied declaration required: libm_sinf. */
 extern unsigned int gameDataGetTableValue(void);
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_0032714c. */
@@ -61,7 +61,7 @@ extern int FUN_0036d984(int, unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_003856f8. */
 /* Supplied declaration required: FUN_00385798. */
 extern int FUN_003d21dc(void);
-/* Supplied declaration required: FUN_003d4ed8. */
+/* Supplied declaration required: soundActorStartOnFreeChannel. */
 extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: countersAddSaturating. */
 
@@ -203,7 +203,7 @@ unsigned int FUN_0033b100(int param_1)
         else {
           temp_v6 = 0x1000225;
         }
-        FUN_003d4ed8(temp_v6);
+        soundActorStartOnFreeChannel(temp_v6);
         return 1;
       }
     }
@@ -237,8 +237,8 @@ unsigned int FUN_0033b100(int param_1)
       DAT_005f19c4 = 2;
       return 0;
     }
-    FUN_001bc124();
-    FUN_001bbf0c();
+    libm_sinf();
+    libm_cosf();
     temp_v12 = DAT_005f17b0;
     distSpatial();
     if ((int)temp_v12 >= 0x43af0000) {
@@ -310,7 +310,7 @@ unsigned int FUN_0033b100(int param_1)
   else {
     temp_v6 = 0x1000225;
   }
-  FUN_003d4ed8(temp_v6);
+  soundActorStartOnFreeChannel(temp_v6);
   return 1;
 }
 

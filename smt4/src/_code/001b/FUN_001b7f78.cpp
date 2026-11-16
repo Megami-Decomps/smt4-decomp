@@ -79,14 +79,14 @@ int FUN_00270384(...);
 int mapInitializeSavedAndTargetState(void);
 int navigationRequestFieldMode(...);
 int FUN_0027052c(void);
-int FUN_00270f70(...);
+int mapAdjustPositionToGround(...);
 int FUN_00271010(...);
 int FUN_002712dc(void);
 int FUN_00273358(...);
 int frameTexStartFade(...);
 int FUN_0027eee0(void);
 int FUN_002878e4(void);
-int FUN_00289574(...);
+int gameStateSetJumpRequest(...);
 int slotSetRequest(...);
 int naviMainStartStateTimer(void);
 int aocFindSupplementalRecordIndex(...);
@@ -157,7 +157,7 @@ int navigationApplyArguments(...);
 int buttonHelpSetPreset(...);
 int eventQueueAddUnique(...);
 int libc_strcpy(...);
-int FUN_002bf810(...);
+int soundPlaySeUnpanned(...);
 int FUN_002bfc24(...);
 int gameMapBitSet(...);
 int FUN_001d2f48(void);
@@ -188,7 +188,7 @@ int tableGroupFindEntryIndex(...);
 int textEncodeFontSlot(...);
 int FUN_002a04f0(...);
 int FUN_002bd158(void);
-int FUN_002be650(...);
+int dataFindKindRecordWithAocOverrides(...);
 int FUN_002c29d8(...);
 int MapEpl_Init(...);
 int mapEnemySelectUpdatePhase(...);
@@ -239,8 +239,8 @@ int FUN_0027d5ac(...);
 int FUN_0028527c(...);
 int naviRegisterTransitionsAndRequest(...);
 int FUN_00285574(void);
-int FUN_00289880(void);
-int FUN_00297060(...);
+int commonBgStopChildAndBeginTransition(void);
+int scrScriptProcessCreate(...);
 int textFormatBuffer(...);
 int NaviMain_SetCurrentMap(...);
 void NaviMain_Start(int unused, int requestId);
@@ -507,7 +507,7 @@ extern int FUN_0021e4bc(void);
 /* Supplied declaration required: navigationRequestFieldMode. */
 /* Supplied declaration required: FUN_0027052c. */
 extern int FUN_00270e34(void);
-/* Supplied declaration required: FUN_00270f70. */
+/* Supplied declaration required: mapAdjustPositionToGround. */
 /* Supplied declaration required: FUN_00271010. */
 /* Supplied declaration required: FUN_002712dc. */
 /* Supplied declaration required: FUN_00273358. */
@@ -629,13 +629,13 @@ extern int dataTable2fSub1GetRecord(int);
 /* Supplied declaration required: FUN_00287c34. */
 /* Supplied declaration required: mapConsumePendingJumpRequest. */
 /* Supplied declaration required: gameJumpRequestClear. */
-/* Supplied declaration required: FUN_00289574. */
+/* Supplied declaration required: gameStateSetJumpRequest. */
 /* Supplied declaration required: FUN_002895a8. */
 /* Supplied declaration required: FUN_00289608. */
-extern int FUN_002896bc(void);
+extern int screenFadesAllReady(void);
 /* Supplied declaration required: FUN_002897f0. */
 extern unsigned int scrScriptProcessGetEntry(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00289880. */
+/* Supplied declaration required: commonBgStopChildAndBeginTransition. */
 /* Supplied declaration required: aocBufferQueueDisplay. */
 /* Supplied declaration required: FUN_00289de4. */
 extern int aocPackageGrantsItem(int, unsigned int, unsigned int);
@@ -649,7 +649,7 @@ extern int FUN_002903f0(void);
 /* Supplied declaration required: FUN_00294834. */
 /* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_00297060. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: FUN_00297a00. */
 /* Supplied declaration required: FUN_0029ae60. */
@@ -660,16 +660,16 @@ extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: asdModelSlotRelease. */
 extern int gameCountUnits(void);
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
-extern int FUN_002b6b04(void);
+extern int infoWindowIsActive(void);
 extern int FUN_002b8694(void);
 /* Supplied declaration required: buttonHelpSetPresetDefault. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: FUN_002bd158. */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002be650. */
+/* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_002bf810. */
+/* Supplied declaration required: soundPlaySeUnpanned. */
 /* Supplied declaration required: FUN_002bfc24. */
 extern unsigned int FUN_002bfdc4(void);
 extern unsigned int FUN_002bfdd4(void);
@@ -1163,7 +1163,7 @@ LAB_001b848c:
       naviRegisterTransitionsAndRequest(0x59,1,0);
     }
     if (g_gameState == 0x24) {
-      FUN_00289880();
+      commonBgStopChildAndBeginTransition();
     }
     if (DAT_0049f942 == '\0') {
       temp_v9 = puVar14[9] + 1;
@@ -1247,7 +1247,7 @@ LAB_001b8b9c:
     temp_v9 = DAT_0049fba4;
     puVar14[0x13] = DAT_0049fba4;
     puVar14[0x14] = DAT_0049fba8;
-    FUN_00297060();
+    scrScriptProcessCreate();
     puVar14[0x15] = temp_v9;
     *(unsigned int *)(temp_v9 + 0x108) = 3;
     textFormatBuffer(temp_v21,0x1b8f68,puVar14[0xb],puVar14[0xb]);
@@ -1257,7 +1257,7 @@ LAB_001b8b9c:
     temp_v16 = asdLoadFileSyncDefault(temp_v21);
     puVar14[0x17] = temp_v16;
     temp_v9 = puVar14[0x16];
-    FUN_00297060(temp_v9,temp_v16);
+    scrScriptProcessCreate(temp_v9,temp_v16);
     puVar14[0x18] = temp_v9;
     *(unsigned int *)(temp_v9 + 0x108) = 3;
     puVar14[9] = puVar14[9] + 1;
@@ -1629,7 +1629,7 @@ LAB_001b9210:
       DAT_0049f934 = 1;
       DAT_0049f93c = 1;
       DAT_0049f9ac = *(float *)(g_lmapScene + 0x50);
-      FUN_002be650(DAT_0049f9cc,0);
+      dataFindKindRecordWithAocOverrides(DAT_0049f9cc,0);
       FUN_002bd158();
       textEncodeFontSlot(0,temp_v22);
       __aeabi_memcpy4(&DAT_0049f978,0x1b95f8,0x16);
@@ -2169,7 +2169,7 @@ LAB_001ba78c:
                             FUN_00276138();
                             FUN_0027d5ac(0);
                             FUN_0028527c(0);
-                            FUN_002bf810(0x10000bc);
+                            soundPlaySeUnpanned(0x10000bc);
                             lmapSetSceneId(2);
                             uStack_1c4 = (unsigned int)DAT_0049fa19;
                             uStack_1c8 = (unsigned int)DAT_0049fa18;
@@ -2948,7 +2948,7 @@ LAB_001bb1d4:
   case 0x17:
     if (puVar14[10] == 0) {
       if (iRam00447e2c % 3 == 0) {
-        FUN_002bf810(0x1000241,(iRam00447e2c / 3) * -3,iRam00447e2c * 0x55555556);
+        soundPlaySeUnpanned(0x1000241,(iRam00447e2c / 3) * -3,iRam00447e2c * 0x55555556);
       }
       temp_v9 = g_lmapScene;
       iRam00447e2c = iRam00447e2c + 1;
@@ -3342,7 +3342,7 @@ LAB_001bc008:
       return 0;
     }
     if (DAT_0049f9d0 < 99) {
-      FUN_002bf810(DAT_0049f9d0 + 0x10000af);
+      soundPlaySeUnpanned(DAT_0049f9d0 + 0x10000af);
     }
     temp_v8 = *(short *)(temp_v9 + 0x28);
     if (temp_v8 != 1) {
@@ -3395,7 +3395,7 @@ LAB_001bc008:
       }
       else if (DAT_0049fa58 != '\0') {
         buttonHelpSetPresetDefault();
-        FUN_002be650(DAT_0049fa5c,1);
+        dataFindKindRecordWithAocOverrides(DAT_0049fa5c,1);
         FUN_002bd158();
         textEncodeFontSlot(0,temp_v22);
         FUN_002bff50();
@@ -3515,7 +3515,7 @@ LAB_001bc008:
       VectorSignedToFloat((int)*(short *)(temp_v9 + 0x36),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v9 + 0x34),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_00289574((int)*(short *)(temp_v9 + 0x2e),(int)*(short *)(temp_v9 + 0x30),
+      gameStateSetJumpRequest((int)*(short *)(temp_v9 + 0x2e),(int)*(short *)(temp_v9 + 0x30),
                    *(unsigned int *)(temp_v9 + 0xddc),temp_v10);
     }
     temp_v9 = 0x6c;
@@ -3572,7 +3572,7 @@ LAB_001bc008:
         temp_v9 = dataTable2fSub0GetRecord((int)temp_v7);
         DAT_0049f970 = (unsigned int)*(short *)(temp_v9 + 0x12);
         libc_strcpy(&DAT_0049f978,temp_v9 + 0x14);
-        FUN_002bf810(0x10000bc);
+        soundPlaySeUnpanned(0x10000bc);
         puVar14[9] = 0x6c;
         puVar14[10] = 0;
         *(unsigned char *)(puVar14 + 5) = 1;
@@ -3582,7 +3582,7 @@ LAB_001bc008:
         if (temp_v8 != 3) {
           return 0;
         }
-        FUN_002bf810(0x10000bc);
+        soundPlaySeUnpanned(0x10000bc);
         DAT_0049f970 = 0x382;
         DAT_0049f978 = 0x38393865;
         DAT_0049f97c = &LAB_0031305f;
@@ -3608,17 +3608,17 @@ LAB_001bc008:
     DAT_0049f97c = &LAB_0031305f;
     FUN_0027d5ac(0);
     FUN_0028527c(0);
-    FUN_002bf810(0x10000bc);
+    soundPlaySeUnpanned(0x10000bc);
     puVar14[9] = 0x6c;
     puVar14[10] = 0;
     *(unsigned char *)(puVar14 + 5) = 1;
     break;
   case 0x2c:
     if (g_gameState == 4) {
-      FUN_002bf810(0x10000b6);
+      soundPlaySeUnpanned(0x10000b6);
     }
     if (g_gameState == 0x20) {
-      FUN_002bf810(0x10000be);
+      soundPlaySeUnpanned(0x10000be);
     }
     mapDepartSetTarget(0x18,1,0);
     puVar14[9] = 0x6c;
@@ -3780,7 +3780,7 @@ LAB_001bc008:
     if (temp_v9 == 0) {
       if ((DAT_0049f9d4 != '\0') && (DAT_0049f9d5 == '\x05')) {
         DAT_0049f9d4 = '\0';
-        FUN_00270f70(&DAT_0049f9b0);
+        mapAdjustPositionToGround(&DAT_0049f9b0);
         temp_v4 = DAT_0049f9b8;
         temp_v3 = DAT_0049f9b4;
         temp_v2 = DAT_0049f9b0;
@@ -4013,7 +4013,7 @@ joined_r0x001bce40:
     break;
   case 0x3b:
     mapPerFrameUpdate();
-    temp_v9 = FUN_002896bc();
+    temp_v9 = screenFadesAllReady();
     if (temp_v9 == 0) {
       return 0;
     }
@@ -4037,7 +4037,7 @@ joined_r0x001bce40:
     break;
   case 0x3d:
     mapPerFrameUpdate();
-    temp_v9 = FUN_002896bc();
+    temp_v9 = screenFadesAllReady();
     if (temp_v9 == 0) {
       return 0;
     }
@@ -4061,7 +4061,7 @@ joined_r0x001bce40:
       DAT_0049fba0 = '\0';
     }
     else {
-      FUN_00270f70(&DAT_0049f9b0);
+      mapAdjustPositionToGround(&DAT_0049f9b0);
       DAT_0049fc14 = '\x01';
       DAT_0049fc18 = puVar23[0xb];
       DAT_0049fc1c = puVar23[0xc];
@@ -4428,7 +4428,7 @@ LAB_001bd824:
     puVar14[10] = temp_v16;
     break;
   case 0x43:
-    temp_v9 = FUN_002896bc();
+    temp_v9 = screenFadesAllReady();
     if (temp_v9 != 0) {
       lmapSetSceneId(0x1e);
       *(unsigned char *)((int)puVar14 + 0x47) = 0;
@@ -4476,11 +4476,11 @@ LAB_001bd824:
     }
     mapPerFrameUpdate();
     puVar14[10] = puVar14[10] + 1;
-    temp_v9 = FUN_002896bc();
+    temp_v9 = screenFadesAllReady();
     if (temp_v9 == 0) {
       return 0;
     }
-    temp_v9 = FUN_002b6b04();
+    temp_v9 = infoWindowIsActive();
     if (temp_v9 != 0) {
       return 0;
     }
@@ -4650,7 +4650,7 @@ LAB_001bd824:
     }
     mapPerFrameUpdate();
     puVar14[10] = puVar14[10] + 1;
-    temp_v9 = FUN_002896bc();
+    temp_v9 = screenFadesAllReady();
     if (temp_v9 != 0) {
       mapDepartSetTarget(0xffffffff,0xffffffff);
       DAT_0049f970 = 0;
@@ -4695,7 +4695,7 @@ LAB_001bd824:
     temp_v16 = asdLoadFileSyncDefault(0x1be790);
     puVar14[0x28] = temp_v16;
     temp_v9 = puVar14[0x27];
-    FUN_00297060(temp_v9,temp_v16);
+    scrScriptProcessCreate(temp_v9,temp_v16);
     puVar14[0x29] = temp_v9;
     *(unsigned int *)(temp_v9 + 0x108) = 3;
     temp_v16 = tableGroupFindEntryIndex(puVar14[0x27],0x1be7a8);
@@ -4747,7 +4747,7 @@ LAB_001bd824:
       puVar23[0x24] = temp_v9;
 LAB_001be80c:
       temp_v10 = puVar23[0x23];
-      FUN_00297060(temp_v10,temp_v9);
+      scrScriptProcessCreate(temp_v10,temp_v9);
       puVar23[0x25] = temp_v10;
       *(unsigned int *)(temp_v10 + 0x108) = 2;
       temp_v16 = scrScriptProcessGetEntry(puVar23[0x25],puVar23[0x22]);
@@ -4931,13 +4931,13 @@ LAB_001bebac:
           if (DAT_0049f954 != 2) goto LAB_001bec78;
           goto LAB_001bec3c;
         }
-        temp_v10 = FUN_002896bc();
+        temp_v10 = screenFadesAllReady();
       }
       else {
 LAB_001bec3c:
         if ((DAT_0049f958 != 0x2802001) || (temp_v10 = gameFlagIsSet(0x291), temp_v10 == 0))
         goto LAB_001bec78;
-        temp_v10 = FUN_002896bc();
+        temp_v10 = screenFadesAllReady();
       }
       if (temp_v10 == 0) {
         return 0;
@@ -5558,7 +5558,7 @@ LAB_001bfc30:
     FUN_00276a3c();
     FUN_00273fc0();
     puVar14[10] = puVar14[10] + 1;
-    temp_v9 = FUN_002896bc();
+    temp_v9 = screenFadesAllReady();
 joined_r0x001bfcb4:
     if (temp_v9 == 0) {
       return 0;
@@ -5576,7 +5576,7 @@ joined_r0x001bfcb4:
     FUN_00276a3c();
     FUN_00273fc0();
     puVar14[10] = puVar14[10] + 1;
-    temp_v9 = FUN_002896bc();
+    temp_v9 = screenFadesAllReady();
     if (temp_v9 == 0) {
       return 0;
     }

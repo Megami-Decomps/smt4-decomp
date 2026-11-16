@@ -17,7 +17,7 @@ extern SlotPool *g_deferredMapModels;
 
 extern void mapDeferredModelsReset(void);
 extern void asdMdlManagerDestroy(void *resource);
-extern void FUN_002e0094(void);
+extern void vectorQueueClearActiveSlots(void);
 
 void slotPoolReleaseResources(void)
 {
@@ -29,7 +29,7 @@ void slotPoolReleaseResources(void)
             g_deferredMapModels->slots[i].resource = NULL;
         }
     }
-    FUN_002e0094();
+    vectorQueueClearActiveSlots();
     mapDeferredModelsReset();
 }
 

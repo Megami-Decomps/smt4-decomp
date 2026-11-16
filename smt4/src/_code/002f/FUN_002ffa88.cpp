@@ -4,7 +4,7 @@
 extern "C" {
 u32 scrGetArg(s32);
 u32 btlScriptResolveGroupArg(u32);
-void FUN_002499fc(u32, s32 *, s32 *);
+void btlSideGetEntryRange(u32, s32 *, s32 *);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *);
 void scrSetResult(s32);
 
@@ -15,7 +15,7 @@ u32 FUN_002ffa88()
     s32 status = scrGetArg(1);
     u32 group = btlScriptResolveGroupArg(scrGetArg(2));
     s32 first, count;
-    FUN_002499fc(group, &first, &count);
+    btlSideGetEntryRange(group, &first, &count);
     for (s32 i = first; i < first + count; ++i) {
         BtlEntry *unit = &btlGetMainState()->entries[i];
         if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && unit->id == groupId &&

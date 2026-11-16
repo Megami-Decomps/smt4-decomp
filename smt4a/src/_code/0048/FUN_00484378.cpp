@@ -70,7 +70,7 @@ void FUN_00484378(NameInputView *menu)
     if (menu->confirming == 0) {
         if (messageMainIsIdle() != 0) {
             nameEntryCopyEditedName(reinterpret_cast<NameEntryMenu *>(menu), name);
-            FUN_003180c4(0x32, reinterpret_cast<const char *>(name));
+            scrSetStringSlot(0x32, reinterpret_cast<const char *>(name));
             scrScriptProcessStartEntry(menu->script, 1);
             menu->confirming = 1;
             sysPlaySe(0x9c);

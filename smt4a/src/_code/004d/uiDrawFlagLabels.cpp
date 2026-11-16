@@ -15,7 +15,7 @@ extern const char DAT_00528140[];
 u32 entryTableCallSlot3(u32 table);
 void textFormatBuffer(char *output, const char *format, ...);
 const char *gameGetPlayerName();
-const char *FUN_00180118(u16 message);
+const char *dataTable01GetRecordWithAocOverride(u16 message);
 void textDrawDefaultString(const char *text, f32 x, f32 y);
 }
 
@@ -32,13 +32,13 @@ extern "C" void uiDrawFlagLabels(void *, const FlagLabelRecord *record)
         description = gameGetPlayerName();
     } else if (record->flags & DAT_005715f8[3]) {
         textFormatBuffer(label, DAT_00528130);
-        description = FUN_00180118(record->message);
+        description = dataTable01GetRecordWithAocOverride(record->message);
     } else if (record->flags & DAT_005715f8[5]) {
         textFormatBuffer(label, DAT_00528138);
-        description = FUN_00180118(record->message);
+        description = dataTable01GetRecordWithAocOverride(record->message);
     } else if (record->flags & DAT_005715f8[4]) {
         textFormatBuffer(label, DAT_00528140);
-        description = FUN_00180118(record->message);
+        description = dataTable01GetRecordWithAocOverride(record->message);
     }
     textDrawDefaultString(label, 228.0f, 42.0f);
     textDrawDefaultString(description, 228.0f, static_cast<f32>(lineHeight) + 42.0f);

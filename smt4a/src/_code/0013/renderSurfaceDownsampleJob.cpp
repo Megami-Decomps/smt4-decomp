@@ -27,7 +27,7 @@ typedef char DownsampleWorkLayoutCheck[
     offsetof(DownsampleWork, separateBuffers) == 0x1494 &&
     sizeof(DownsampleWork) == 0x14A0 ? 1 : -1];
 extern "C" {
-u8 FUN_00154edc(u32, JobSurface *);
+u8 gxCopyFramebufferToSurface(u32, JobSurface *);
 s32 stateValuesGetBySelector(u32);
 void surfaceCopy(JobSurface *, JobSurface *);
 
@@ -36,10 +36,10 @@ s32 renderSurfaceDownsampleJob(u32 job)
     DownsampleWork *work = (DownsampleWork *)jobGetWork(job);
     work->done = 0;
     if (work->active && work->enabled && work->source && !work->blocked) {
-        FUN_00157558(g_renderCtx);
+        renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         work->source->width = 512;
         work->source->height = 512;
-        work->copyResult = FUN_00154edc(0, work->source);
+        work->copyResult = gxCopyFramebufferToSurface(0, work->source);
         s32 mode = stateValuesGetBySelector(0);
         s32 levels = work->levels;
         if (!mode && levels > 1) {

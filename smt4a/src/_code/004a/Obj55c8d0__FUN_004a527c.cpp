@@ -22,7 +22,7 @@ typedef struct MotionScreenWork {
 
 s32 FUN_0026c3a0(void);
 void FUN_002c8538(s32 enabled);
-s32 FUN_00163aa4(void *motion, f32 step);
+s32 uiSpriteAdvanceAnimation(void *motion, f32 step);
 s32 vec2GetXInt(void *vec);
 s32 vec2GetYInt(void *vec);
 void pointConvertToFloat(void *point, s32 x, s32 y);
@@ -40,7 +40,7 @@ void Obj55c8d0::FUN_004a527c()
     }
     UiMotionSprite *motion = &work->motion;
     work->mode = 9;
-    FUN_00163aa4(motion, 1.0f);
+    uiSpriteAdvanceAnimation(motion, 1.0f);
     pointConvertToFloat(work->position, vec2GetXInt(motion), vec2GetYInt(motion));
     if (FUN_0026c3a0() && uiSpriteGetCompletionState(motion) != 0 && FUN_002e19f8() && !utilityReturnSuccess(work->unk0096)) {
         work->state = 7;

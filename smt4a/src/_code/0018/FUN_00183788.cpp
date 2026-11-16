@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_00185dd4(...);
+int texDrawTableEntrySized(...);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -43,7 +43,7 @@ extern unsigned int DAT_0063077c; /* 0x63077c */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00185dd4. */
+/* Supplied declaration required: texDrawTableEntrySized. */
 
 
 void FUN_00183788(int param_1,int param_2,int param_3,int param_4,unsigned int param_5,
@@ -95,7 +95,7 @@ void FUN_00183788(int param_1,int param_2,int param_3,int param_4,unsigned int p
     if ((unsigned int)(param_1 << 0xc) <= temp_v2) {
       param_6 = param_9;
     }
-    FUN_00185dd4(2,param_5,param_6,param_10,temp_v11,temp_v9,(int)psVar4[1],temp_v12);
+    texDrawTableEntrySized(2,param_5,param_6,param_10,temp_v11,temp_v9,(int)psVar4[1],temp_v12);
     DAT_00630724 = 0x3f800000;
     DAT_00630728 = 0x3f800000;
     DAT_0063072c = 0x3f800000;
@@ -154,7 +154,7 @@ void FUN_00183788(int param_1,int param_2,int param_3,int param_4,unsigned int p
       temp_v9 = temp_v7;
     }
     if (param_12 == 0) {
-      FUN_00185dd4(2,param_5,param_6,param_10,temp_v11,temp_v9,(int)psVar4[1],temp_v12);
+      texDrawTableEntrySized(2,param_5,param_6,param_10,temp_v11,temp_v9,(int)psVar4[1],temp_v12);
     }
     temp_v1 = g_renderCtx;
     if (temp_v5 == 0) {
@@ -186,7 +186,7 @@ void FUN_00183788(int param_1,int param_2,int param_3,int param_4,unsigned int p
         *(unsigned char *)(temp_v1 + 0x12d0) = 0;
       }
     }
-    FUN_00185dd4(2,param_5,param_7,param_10 + temp_v9,(int)param_11,temp_v5,
+    texDrawTableEntrySized(2,param_5,param_7,param_10 + temp_v9,(int)param_11,temp_v5,
                  (int)*(short *)(*(int *)(temp_v0 + 0xc) + 2),(int)((unsigned long long)param_11 >> 0x20));
     temp_v1 = g_renderCtx;
     temp_v0 = packNibblesAndByte(6, 7, 0);
@@ -229,7 +229,7 @@ void FUN_00183788(int param_1,int param_2,int param_3,int param_4,unsigned int p
       temp_v5 = 0;
     }
     if (param_12 == 0) {
-      FUN_00185dd4(2,param_5,param_6,param_10,temp_v11,temp_v7,(int)psVar4[1],temp_v12);
+      texDrawTableEntrySized(2,param_5,param_6,param_10,temp_v11,temp_v7,(int)psVar4[1],temp_v12);
     }
     temp_v1 = g_renderCtx;
     if (temp_v5 == 0) {
@@ -261,7 +261,7 @@ void FUN_00183788(int param_1,int param_2,int param_3,int param_4,unsigned int p
         *(unsigned char *)(temp_v1 + 0x12d0) = 0;
       }
     }
-    FUN_00185dd4(2,param_5,param_8,param_10 + temp_v7,(int)param_11,temp_v5,
+    texDrawTableEntrySized(2,param_5,param_8,param_10 + temp_v7,(int)param_11,temp_v5,
                  (int)*(short *)(*(int *)(temp_v0 + 0xc) + 2),(int)((unsigned long long)param_11 >> 0x20));
     temp_v1 = g_renderCtx;
     temp_v0 = packNibblesAndByte(6, 7, 0);

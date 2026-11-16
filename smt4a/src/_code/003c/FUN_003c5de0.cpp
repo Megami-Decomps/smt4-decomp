@@ -21,7 +21,7 @@ extern "C" {
 extern const AnimatedIconLookup g_engineObjectLookup[10];
 f32 jobGetScalarValue();
 void efctSetSpeed(f32 speed);
-void FUN_00185dd4(s32 layer, s32 group, u32 sprite, s32 x, s32 y, u32 width, u32 height, u32 color);
+void texDrawTableEntrySized(s32 layer, s32 group, u32 sprite, s32 x, s32 y, u32 width, u32 height, u32 color);
 }
 
 static inline s32 findAnimatedIcon(s32 id)
@@ -60,7 +60,7 @@ extern "C" void FUN_003c5de0(s32 id, s32 time, s32 x, s32 y, u32 color, f32 scal
     f32 size = scale * 12.0f;
     u32 pixels = (u32)size;
     f32 margin = (size - 12.0f) * 0.5f;
-    FUN_00185dd4(2, 0xb, sprite, (s32)((f32)x - margin), (s32)((f32)y - margin),
+    texDrawTableEntrySized(2, 0xb, sprite, (s32)((f32)x - margin), (s32)((f32)y - margin),
                   pixels, pixels, color);
     efctSetSpeed(previousSpeed);
 }

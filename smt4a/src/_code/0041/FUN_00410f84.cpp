@@ -69,7 +69,7 @@ s32 btlStageGetModeIndex(u32 context);
 s32 FUN_00411c04(StageState *state, s32 flag);
 s32 partyCountActiveSlots(void);
 s32 controllerGroupSetPosition(u32 model, f32 x, f32 y, f32 z);
-BattleUnitBlock *FUN_003eaf20(void);
+BattleUnitBlock *btlFindFirstEntryMatchingCategoryAndRequiredMask(void);
 u32 partyFindActiveRecordById(u32 id);
 u32 saveSlotFindSelected(void);
 s32 FUN_003ecfb4(BtlMainView *mainState, void *unit, u32 record, s32 flag);
@@ -131,7 +131,7 @@ void FUN_00410f84(StageState *state)
     }
     case 5: {
         BtlMainView *mainState = reinterpret_cast<BtlMainView *>(btlGetMainState());
-        BattleUnitBlock *block = FUN_003eaf20();
+        BattleUnitBlock *block = btlFindFirstEntryMatchingCategoryAndRequiredMask();
         u32 record = partyFindActiveRecordById((u16)state->value);
         FUN_003ecfb4(mainState, (u8 *)block + 0x164, record, 1);
         block->activeRecord = record;
@@ -143,7 +143,7 @@ void FUN_00410f84(StageState *state)
     }
     case 6: {
         BtlMainView *mainState = reinterpret_cast<BtlMainView *>(btlGetMainState());
-        BattleUnitBlock *block = FUN_003eaf20();
+        BattleUnitBlock *block = btlFindFirstEntryMatchingCategoryAndRequiredMask();
         u32 record = saveSlotFindSelected();
         FUN_003ecfb4(mainState, (u8 *)block + 0x164, record, 0);
         block->activeRecord = record;
@@ -151,7 +151,7 @@ void FUN_00410f84(StageState *state)
         s16 sumB = 0;
         for (s32 i = 1; i < 12; i++) {
             u8 *slot = (u8 *)FUN_003e503c((u16)i);
-            if (FUN_00187168((const void *)((u32)slot)) != 0) {
+            if (partySlotIsOccupied((const void *)((u32)slot)) != 0) {
                 sumA = (s16)(*(u16 *)(slot + 0x12) + sumA);
                 sumB = (s16)(*(u16 *)(slot + 0x14) + sumB);
             }

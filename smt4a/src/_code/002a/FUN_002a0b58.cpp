@@ -36,7 +36,7 @@ unsigned int FUN_002a0b58(void)
   case 0:
     iVar2 = FUN_0018206c(0x24,0);
     if (iVar2 != 0) {
-      iVar2 = FUN_00163aa4(iVar6 + 0x5c);
+      iVar2 = uiSpriteAdvanceAnimation(iVar6 + 0x5c);
       bVar10 = iVar2 != 0;
       iVar2 = 0;
       if (bVar10) {
@@ -64,7 +64,7 @@ unsigned int FUN_002a0b58(void)
         buttonHelpSetText(iVar4 + (iVar3 + iVar2) * 0x94 + 0x14,0xf4f4f4ff);
         func_0x0024b0e8();
         uVar8 = *(unsigned int *)(iVar6 + 0x154);
-        FUN_00275bc8(uVar8,*(unsigned int *)(iVar6 + 0x158));
+        scrScriptProcessCreate(uVar8,*(unsigned int *)(iVar6 + 0x158));
         *(unsigned int *)(iVar6 + 8) = 1;
         *(unsigned int *)(iVar6 + 0x15c) = uVar8;
       }
@@ -82,7 +82,7 @@ unsigned int FUN_002a0b58(void)
       iVar4 = recordGetModeForId();
       if (iVar4 != 6) {
         iVar4 = 9;
-        FUN_001517b4(9,1);
+        padQueryLogicalKey(9,1);
         if (iVar4 == 0) goto code_r0x002a0df0;
       }
       if (uVar9 != 0) {
@@ -136,7 +136,7 @@ code_r0x002a0df0:
     }
     if (!bVar10) {
       iVar4 = 4;
-      FUN_001517b4(4,0);
+      padQueryLogicalKey(4,0);
       if (iVar4 != 0) {
         iVar4 = *(int *)(iVar2 + 0x28) - 1;
         *(int *)(iVar2 + 0x28) = iVar4;
@@ -145,11 +145,11 @@ code_r0x002a0df0:
         }
         *(int *)(iVar2 + 0x28) = iVar4;
         uVar8 = 4;
-        FUN_001517b4(uVar8,0);
+        padQueryLogicalKey(uVar8,0);
       }
       else if (!bVar11) {
         iVar4 = 3;
-        FUN_001517b4(3,0);
+        padQueryLogicalKey(3,0);
         if (iVar4 != 0) goto code_r0x002a0ee4;
         iVar4 = recordGetModeForId((int)*(short *)(iVar6 + 0x22));
         if ((iVar4 == 1) || (iVar4 == 2)) {
@@ -169,7 +169,7 @@ code_r0x002a0ee4:
         }
         *(int *)(iVar2 + 0x28) = iVar4;
         uVar8 = 3;
-        FUN_001517b4(uVar8,0);
+        padQueryLogicalKey(uVar8,0);
       }
     }
     else {
@@ -180,7 +180,7 @@ code_r0x002a0ee4:
       }
       *(int *)(iVar2 + 0x28) = iVar4;
       uVar8 = 4;
-      FUN_001517b4(uVar8,0);
+      padQueryLogicalKey(uVar8,0);
     }
     DAT_00588fc0 = func_0x002bd718(*(unsigned int *)(iVar6 + 0x28));
     DAT_00588fc1 = func_0x002a0a20(*(unsigned int *)(iVar6 + 0x2c));
@@ -222,7 +222,7 @@ code_r0x002a0ee4:
           if ((iVar4 != iVar3) &&
              (iVar7 = recordGetModeForId((int)*(short *)(iVar2 + iVar4 * 2 + 0x14)), iVar7 == 6)) {
             FUN_00169ddc(0x100020d);
-            FUN_002a4964(iVar2 + 0xf0,iVar4);
+            scrollListSetSelectionTracked(iVar2 + 0xf0,iVar4);
             iVar6 = DAT_00589164;
             iVar2 = resourceRunOperationIfUnblocked(DAT_00589164 + 0xf0);
             iVar6 = FUN_002a4894(iVar6 + 0xf0);
@@ -235,7 +235,7 @@ code_r0x002a0ee4:
           iVar4 = iVar4 + 1;
         } while (iVar4 < 3);
         iVar2 = 0;
-        FUN_001517b4(0,1);
+        padQueryLogicalKey(0,1);
         if (iVar2 != 0) {
           FUN_001641b4(0x100020e);
           FUN_00275f44(*(unsigned int *)(iVar6 + 0x15c),6);
@@ -243,7 +243,7 @@ code_r0x002a0ee4:
         }
         else {
           iVar2 = 1;
-          FUN_001517b4();
+          padQueryLogicalKey();
           if (iVar2 == 0) {
             return 0;
           }
@@ -294,7 +294,7 @@ code_r0x002a0ee4:
     }
     break;
   case 3:
-    iVar2 = FUN_00163aa4(iVar6 + 0x5c);
+    iVar2 = uiSpriteAdvanceAnimation(iVar6 + 0x5c);
     if (iVar2 != 0) {
       *(unsigned int *)(iVar6 + 8) = 4;
     }

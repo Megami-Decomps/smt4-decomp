@@ -27,7 +27,7 @@ extern u8 FUN_0011bd5c;
 
 extern s32 FUN_0011cec8(u32 **out);
 extern u32 FUN_002bcc60(u32 *dst, CallbackList *callbacks, void *main, void **context, RegisterInfo info);
-extern void FUN_002c526c(void);
+extern void resultHandleFailure(void);
 extern void FUN_0011cd24(void);
 
 /* Fetches g_modelWorkHandle, then registers the callbacks for g_modelWorkThread. */
@@ -53,7 +53,7 @@ s32 FUN_0010ffdc(void)
         info.priority = -2;
         info.unused = 0;
         if (FUN_002bcc60(&g_modelWorkThread, &callbacks, &FUN_00123cb0, &context, info) < 0) {
-            FUN_002c526c();
+            resultHandleFailure();
         }
     }
     return result;

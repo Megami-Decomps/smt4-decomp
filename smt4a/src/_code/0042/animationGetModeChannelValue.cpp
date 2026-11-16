@@ -17,7 +17,7 @@ struct AnimationModeState {
 };
 
 extern "C" {
-AnimationModeChannel* FUN_0040619c(AnimationModeTarget* target, u32 mode);
+AnimationModeChannel* ptrVectorAt(AnimationModeTarget* target, u32 mode);
 f32 candidateGetPreferredValue(AnimationModeChannel* channel);
 
 // Read the selected animation-mode channel, returning zero when it is unavailable.
@@ -31,7 +31,7 @@ f32 animationGetModeChannelValue(AnimationModeState* state)
         mode = 2;
     }
     if (state->owner != NULL) {
-        AnimationModeChannel* channel = FUN_0040619c(state->owner->target, mode);
+        AnimationModeChannel* channel = ptrVectorAt(state->owner->target, mode);
         if (channel != NULL) {
             value = candidateGetPreferredValue(channel);
         }

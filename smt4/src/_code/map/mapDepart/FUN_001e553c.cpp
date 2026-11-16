@@ -19,14 +19,14 @@ int navigationResetTimer(void);
 int FUN_002897f0(int, unsigned char *);
 int messageSlotSet(int);
 int scrScriptProcessStartEntry(...);
-int FUN_00297060(...);
+int scrScriptProcessCreate(...);
 int fileSlotLoad(int);
 int gameCounterAddSaturating(...);
 int scrScriptProcessDestroy(...);
 int buttonHelpSetPresetDefault(void);
 int asdMemFree(...);
 int jyoucyuGetTableEntry(int);
-int FUN_002c58c8(int, int);
+int asdTMTexTablePrepareNodeImage(int, int);
 int mapIfRequestRecordById(unsigned int);
 int FUN_002f364c(...);
 
@@ -77,7 +77,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: messageSlotSet. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_00297060. */
+/* Supplied declaration required: scrScriptProcessCreate. */
 extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: fileSlotLoad. */
 /* Supplied declaration required: gameCounterAddSaturating. */
@@ -89,7 +89,7 @@ extern int gameFlagIsSet(unsigned int);
 extern int asdTMTexTableGetNodeTexture(unsigned int, unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
-/* Supplied declaration required: FUN_002c58c8. */
+/* Supplied declaration required: asdTMTexTablePrepareNodeImage. */
 extern unsigned int asdLoadFileSyncDefault(unsigned char *);
 /* Supplied declaration required: mapIfRequestRecordById. */
 /* Supplied declaration required: FUN_002f364c. */
@@ -121,7 +121,7 @@ unsigned int FUN_001e553c(void)
   temp_v2 = g_mapDepart;
   switch(*(unsigned int *)(g_mapDepart + 0x18)) {
   case 0:
-    FUN_002c58c8(10,4);
+    asdTMTexTablePrepareNodeImage(10,4);
     temp_v4 = asdTMTexTableGetNodeTexture(10,4);
     *(int *)(temp_v2 + 0x7c) = temp_v4;
     *(unsigned int *)(temp_v4 + 0x3c) = 1;
@@ -195,7 +195,7 @@ unsigned int FUN_001e553c(void)
       temp_v3 = asdLoadFileSyncDefault(&LAB_001e59a4);
       *(unsigned int *)(temp_v2 + 0x5c) = temp_v3;
       temp_v4 = *(int *)(temp_v2 + 0x58);
-      FUN_00297060(temp_v4,temp_v3);
+      scrScriptProcessCreate(temp_v4,temp_v3);
       *(int *)(temp_v2 + 0x60) = temp_v4;
       *(unsigned int *)(temp_v4 + 0x108) = 2;
       temp_v3 = 0x47;
@@ -310,10 +310,10 @@ unsigned int FUN_001e553c(void)
           soundActorPositionFromArray(reinterpret_cast<const f32 *>(g_lmapScene + 0x1c));
       soundPosition.y += 30.0f;
       if (g_gameState < 100) {
-        FUN_00291e40(0x1000200, soundPosition);
+        soundActorStartOnFreeChannel(0x1000200, soundPosition);
       }
       else {
-        FUN_00291e40(0x1000200, soundActorScalePosition(soundPosition, 1.0f / 3.0f));
+        soundActorStartOnFreeChannel(0x1000200, soundActorScalePosition(soundPosition, 1.0f / 3.0f));
       }
     }
     if (*(int *)(temp_v2 + 0x1c) == 7) {
@@ -393,7 +393,7 @@ LAB_001e5a1c:
     temp_v3 = asdLoadFileSyncDefault(&LAB_001e5d54);
     *(unsigned int *)(temp_v2 + 0x5c) = temp_v3;
     temp_v4 = *(int *)(temp_v2 + 0x58);
-    FUN_00297060(temp_v4,temp_v3);
+    scrScriptProcessCreate(temp_v4,temp_v3);
     *(int *)(temp_v2 + 0x60) = temp_v4;
     *(unsigned int *)(temp_v4 + 0x108) = 3;
     scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x60),1);
@@ -427,7 +427,7 @@ LAB_001e5a1c:
     temp_v3 = asdLoadFileSyncDefault(&LAB_001e5d54);
     *(unsigned int *)(temp_v2 + 0x5c) = temp_v3;
     temp_v4 = *(int *)(temp_v2 + 0x58);
-    FUN_00297060(temp_v4,temp_v3);
+    scrScriptProcessCreate(temp_v4,temp_v3);
     *(int *)(temp_v2 + 0x60) = temp_v4;
     *(unsigned int *)(temp_v4 + 0x108) = 3;
     if (g_gameState < 100) {

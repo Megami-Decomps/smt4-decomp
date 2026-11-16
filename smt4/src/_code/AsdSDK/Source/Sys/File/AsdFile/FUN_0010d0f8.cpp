@@ -47,7 +47,7 @@ void FUN_0010d0f8(void)
     s32 result = FUN_002bcc60(g_asdFileThread, &descriptor, asdFileThreadMain, &argument,
                               info->address + info->size, 18, -2, 0);
     if (nnResultIsFailureExceptSummary(result, 3)) {
-        FUN_002c526c(result);
+        resultHandleFailure(result);
     }
 }
 }

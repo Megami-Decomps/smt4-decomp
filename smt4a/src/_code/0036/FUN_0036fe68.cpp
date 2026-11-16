@@ -26,7 +26,7 @@ void soundActorQueueStartPending(void);
 void sub68OwnerCall3(void);
 void resourceTableReleaseHandles(void);
 void mapRecordResumePoint(void);
-void FUN_002c2358(void);
+void frameTexturesRelease(void);
 void FUN_002235f4(void);
 void naviMainEnterState4IfActive(void);
 void frameTransitionSetMode(s32 arg);
@@ -101,7 +101,7 @@ u32 FUN_0036fe68(void)
     }
     if (DAT_005806b4.frame < 100) {
         if (DAT_005806b4.frame > 12 && naviMainIsActive() != 0) {
-            FUN_002c2358();
+            frameTexturesRelease();
             mapRecordResumePoint();
             resourceTableReleaseHandles();
             FUN_002c3398(0, 0);

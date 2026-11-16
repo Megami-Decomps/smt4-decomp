@@ -15,7 +15,7 @@ void *dataTable25FindById(u32 id);
 s32 aocContentGetIndexedRecord(void *definition, s32 enabled);
 s32 FUN_002c1d5c(void);
 s32 aocRunByName(AocSystem *system, s32 table, s32 node, s32 enabled);
-u32 FUN_002c58c8(s32 table, s32 node);
+u32 asdTMTexTablePrepareNodeImage(s32 table, s32 node);
 s32 FUN_001ce4a4(u32 handle);
 void asdMTeXReleaseJobContext(u32 handle);
 
@@ -44,7 +44,7 @@ void FUN_0030ac54(u32 id, s32 keepPlacement)
             if (aocRunByName(g_aocSystem, work->table, work->node, 1))
                 work->texture = FUN_002ae8e4(reinterpret_cast<u32>(g_aocSystem), work->table, work->node, 0x10000);
             else
-                work->texture = FUN_002c58c8(work->table, work->node);
+                work->texture = asdTMTexTablePrepareNodeImage(work->table, work->node);
         }
         work->deferred = 0;
     }

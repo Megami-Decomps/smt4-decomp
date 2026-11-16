@@ -20,7 +20,7 @@ struct UnitSlotRecord {
 extern "C" {
 s32 idIsAbove400(s32 id);
 UnitSlotRecord *gameGetSlotRecord(s32 slot);
-s32 FUN_003811ec(const UnitSortEntry *a, const UnitSortEntry *b);
+s32 itemSortCompareByCategoryAndId(const UnitSortEntry *a, const UnitSortEntry *b);
 
 static __inline u32 unitSortLevel(const UnitSortEntry *entry)
 {
@@ -30,7 +30,7 @@ static __inline u32 unitSortLevel(const UnitSortEntry *entry)
     return ((UnitLowRecord *)dataTable04FindById(entry->id))->level;
 }
 
-/* Tie-break by the slots' ranks, higher first (0 without a slot), then FUN_003811ec. */
+/* Tie-break by the slots' ranks, higher first (0 without a slot), then itemSortCompareByCategoryAndId. */
 static __inline s32 compareSlotRanks(const UnitSortEntry *a, const UnitSortEntry *b)
 {
     u16 rankA;
@@ -51,10 +51,10 @@ static __inline s32 compareSlotRanks(const UnitSortEntry *a, const UnitSortEntry
     if (diff != 0) {
         return diff;
     }
-    return FUN_003811ec(a, b);
+    return itemSortCompareByCategoryAndId(a, b);
 }
 
-/* Sort comparator: higher level first, then higher slot rank, then FUN_003811ec. */
+/* Sort comparator: higher level first, then higher slot rank, then itemSortCompareByCategoryAndId. */
 s32 FUN_003758d8(const UnitSortEntry *a, const UnitSortEntry *b)
 {
     u32 levelA = unitSortLevel(a);

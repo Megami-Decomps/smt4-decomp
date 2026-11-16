@@ -7,7 +7,7 @@
 extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
 
 /* Test the chosen combatant range and optional special unit for an ID and threshold. */
 u32 FUN_0038cab4()
@@ -16,7 +16,7 @@ u32 FUN_0038cab4()
     s32 threshold = scrGetArg(1);
     u32 choice = btlResolveEntryChoice(scrGetArg(2));
     s32 first, count;
-    FUN_00301a08(choice, &first, &count);
+    btlGetEntryChoiceRange(choice, &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlMainStateA *state = btlGetMainState();
         BtlCombatantEntryA *entry = &state->entries[index];
@@ -29,7 +29,7 @@ u32 FUN_0038cab4()
         }
     }
     if (btlGetMainState()->unk4cd1) {
-        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL && entry->id == unitId &&
             threshold <= entry->thresholdView.unk27A) {
             scrSetResult(1);

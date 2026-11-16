@@ -53,7 +53,7 @@ s32 FUN_003c7760(BtlTask *task, BtlMainState *state)
         if ((state->flags & BTL_FLAG_ACTIVE) != 0) {
             battleSelectButtonHelpPreset(0);
             if ((state->flags & BTL_FLAG_UI) != 0) {
-                FUN_00242914(g_btlUiBlock, 0);
+                btlUiObjCSetActive(g_btlUiBlock, 0);
                 state->flags &= ~BTL_FLAG_UI;
             }
         }

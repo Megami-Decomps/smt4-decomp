@@ -4,7 +4,7 @@
 
 extern "C" {
 extern void *g_btlMain;
-s32 FUN_001692ac(u32 kind, u32 flags);
+s32 renderCtxPackPassFlags(u32 kind, u32 flags);
 void FUN_0014e314(u32 topLeft, u32 topRight, u32 bottomLeft, u32 bottomRight,
                   f32 left, f32 top, f32 right, f32 bottom, f32 depth);
 void FUN_002371b0(void);
@@ -19,8 +19,8 @@ u32 FUN_002df4b0(void)
     };
     u32 color = static_cast<BattleBackgroundView *>(g_btlMain)->color;
     RenderCtxA *context = g_renderCtx;
-    renderCtxPushA(context, FUN_001692ac(1, 0));
-    FUN_00157558(g_renderCtx);
+    renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     renderCtxSelectTexture(g_renderCtx, 0);
     FUN_0014e314(color, color, color, color, 0.0f, 0.0f, 320.0f, 240.0f, 0.0f);
     FUN_002371b0();

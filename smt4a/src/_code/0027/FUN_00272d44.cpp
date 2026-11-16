@@ -12,7 +12,7 @@ extern "C" {
 extern GameStateA g_gameState;
 
 s32 gameFlagsTestThirdBank(void);
-AreaEventRecord *FUN_0015fa74(s32 mode, s32 submode);
+AreaEventRecord *dataTable02FindConditionalMapRecord(s32 mode, s32 submode);
 f32 partyGetAverageLevel(s32 kind);
 void gameFlagsWriteBit(s32 flag, s32 value);
 s32 randRange(u32 max);
@@ -53,7 +53,7 @@ s32 FUN_00272d44(void)
     if (flagsBit7Get(g_gameState.mode, g_gameState.submode) == 0) {
         return 0;
     }
-    record = FUN_0015fa74(g_gameState.mode, g_gameState.submode);
+    record = dataTable02FindConditionalMapRecord(g_gameState.mode, g_gameState.submode);
     if ((s32)partyGetAverageLevel(2) >= record->threshold) {
         return 0;
     }

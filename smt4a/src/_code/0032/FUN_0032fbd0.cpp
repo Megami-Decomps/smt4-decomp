@@ -82,7 +82,7 @@ typedef struct LiveUnit {
 
 void devilGetRecord(u32 id);
 void sysMemClear(void *block, u32 size);
-void FUN_004bcd90(RebuiltRecord *record);
+void unitRecomputeDerivedStats(RebuiltRecord *record);
 u16 recordGetScaledMaximum(RebuiltRecord *record);
 s32 getUnlockedSlotCount(LiveUnit *unit);
 
@@ -123,7 +123,7 @@ s32 FUN_0032fbd0(LiveUnit *unit)
     record.skills = entry.skills;
     record.experience = entry.experience;
     record.count = (entry.flags >> 2) & 0xF;
-    FUN_004bcd90(&record);
+    unitRecomputeDerivedStats(&record);
     record.scaledMaximum = recordGetScaledMaximum(&record);
     record.copy10 = record.w10;
     if (record.key != unit->key || record.experience != unit->experience) {

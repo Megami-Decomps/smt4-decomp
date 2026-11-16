@@ -6,7 +6,7 @@
 #include "script/ScriptArgs.h"
 extern "C" {
 s32 btlResolveEntryChoice(s32 choice);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
 void scrSetResult(s32 result);
 
 // Test whether a matching active unit has a positive value in the selected battle stat.
@@ -28,7 +28,7 @@ u32 FUN_003b82e0()
         stat = 11;
     s32 group = btlResolveEntryChoice(scrGetArg(2));
     s32 first, count;
-    FUN_00301a08(group, &first, &count);
+    btlGetEntryChoiceRange(group, &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlMainStateA *state = btlGetMainState();
         BtlCombatantEntryA *entry = &state->entries[index];
@@ -41,7 +41,7 @@ u32 FUN_003b82e0()
         }
     }
     if (btlGetMainState()->unk4cd1) {
-        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry && entry->id == unitId && reinterpret_cast<StatView *>(entry)->values[stat] >= 1) {
             scrSetResult(1);
             return 1;

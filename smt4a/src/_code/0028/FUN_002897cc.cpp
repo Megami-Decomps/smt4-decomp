@@ -6,7 +6,7 @@
 
 extern "C" {
 
-int FUN_0014afd0(...);
+int asdTMTexTablePrepareNodeImage(...);
 int jobStop(...);
 int eventQueueAddUnique(int);
 int asdTMTexTableReleaseNode(...);
@@ -69,7 +69,7 @@ static float romwright_fabs_4(float value)
 }
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Supplied declaration required: FUN_0014afd0. */
+/* Supplied declaration required: asdTMTexTablePrepareNodeImage. */
 extern int engineCleanupIsDone(void);
 extern int FUN_00162ea4(void);
 /* Supplied declaration required: jobStop. */
@@ -130,13 +130,13 @@ unsigned int FUN_002897cc(fn_002897cc_arg0 *param_1)
         aocLoadTextureNode(g_aocSystem, *(unsigned int *)(temp_v1 + 0x40), *(unsigned int *)(temp_v1 + 0x44), 0x10000);
       }
       else {
-        FUN_0014afd0(*(unsigned int *)(temp_v1 + 0x40),*(unsigned int *)(temp_v1 + 0x44));
+        asdTMTexTablePrepareNodeImage(*(unsigned int *)(temp_v1 + 0x40),*(unsigned int *)(temp_v1 + 0x44));
       }
       *(unsigned int *)(temp_v1 + 0xc) = 0;
       if (*(char *)(temp_v1 + 0x88) == '\0') {
         return 0;
       }
-      FUN_0014afd0(0x27,0);
+      asdTMTexTablePrepareNodeImage(0x27,0);
       return 0;
     }
     if (temp_v2 == 2) {

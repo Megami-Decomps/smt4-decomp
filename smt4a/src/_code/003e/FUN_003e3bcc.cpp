@@ -5,7 +5,7 @@
 extern "C" {
 
 int sysPlaySe(...);
-int FUN_00180118(unsigned int);
+int dataTable01GetRecordWithAocOverride(unsigned int);
 int buttonHelpSetText(...);
 int FUN_0022e774(void);
 int FUN_0023b45c(...);
@@ -13,7 +13,7 @@ int scrScriptProcessStartEntry(...);
 int FUN_002a5e7c(int);
 int statusDownRestartTransition(void);
 int FUN_002c8538(...);
-int FUN_003180c4(int, unsigned int);
+int scrSetStringSlot(int, unsigned int);
 int panelSetMode3(int, int);
 int FUN_00333dc8(...);
 int FUN_003343f0(...);
@@ -25,7 +25,7 @@ int FUN_003c1060(void);
 int FUN_003c3e14(void);
 int messageMainSetTargetFlags(...);
 int partyAddMoneyClamped(int);
-int FUN_004bcd90(int);
+int unitRecomputeDerivedStats(int);
 int dispatchIfFound(unsigned int, int, int);
 int FUN_004bd6b0(int, int, int);
 int FUN_004cd4b8(int, int);
@@ -59,7 +59,7 @@ extern unsigned char LAB_003e3ff8; /* 0x3e3ff8 */
 extern unsigned char LAB_003e400c; /* 0x3e400c */
 
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00180118. */
+/* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
 /* Supplied declaration required: buttonHelpSetText. */
 extern int slotRecordFindById(unsigned short);
 extern unsigned int *gameGetSlotTable(void);
@@ -73,7 +73,7 @@ extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002a5e7c. */
 /* Supplied declaration required: statusDownRestartTransition. */
 /* Supplied declaration required: FUN_002c8538. */
-/* Supplied declaration required: FUN_003180c4. */
+/* Supplied declaration required: scrSetStringSlot. */
 /* Supplied declaration required: panelSetMode3. */
 /* Supplied declaration required: FUN_00333dc8. */
 /* Supplied declaration required: FUN_003343f0. */
@@ -87,7 +87,7 @@ extern int panelStateIs0(void);
 /* Supplied declaration required: FUN_003c3e14. */
 /* Supplied declaration required: messageMainSetTargetFlags. */
 /* Supplied declaration required: partyAddMoneyClamped. */
-/* Supplied declaration required: FUN_004bcd90. */
+/* Supplied declaration required: unitRecomputeDerivedStats. */
 extern int getUnlockedSlotCount(unsigned int);
 /* Supplied declaration required: dispatchIfFound. */
 /* Supplied declaration required: FUN_004bd6b0. */
@@ -146,7 +146,7 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
     *(unsigned short *)(temp_v1 + 8) = (*(unsigned short *)((unsigned char *)&temp_v8 + 2));
     *(unsigned short *)(temp_v1 + 10) = (unsigned short)temp_v9;
     *(unsigned short *)(temp_v1 + 0xc) = (*(unsigned short *)((unsigned char *)&temp_v9 + 2));
-    FUN_004bcd90(temp_v1);
+    unitRecomputeDerivedStats(temp_v1);
     temp_v2 = FUN_004cc8d8(*(unsigned short *)(temp_v1 + 0x62),*(unsigned short *)(temp_v1 + 100));
     temp_v6 = 0;
     *(int *)(temp_v1 + 0x30) = temp_v2 - 1;
@@ -228,8 +228,8 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
     FUN_0037c8e4(1,0);
     panelSetTarget(-*(int *)((int)param_1 + *(int *)&param_1[5].field_0x14 * 0x24 + 0x24),0);
     temp_v5 = (unsigned int)*(unsigned short *)((int)param_1 + *(int *)&param_1[5].field_0x14 * 0x24 + 0x22);
-    FUN_00180118(temp_v5);
-    FUN_003180c4(0,temp_v5);
+    dataTable01GetRecordWithAocOverride(temp_v5);
+    scrSetStringSlot(0,temp_v5);
     FUN_00359974(0x19,*(unsigned int *)((int)param_1 + *(int *)&param_1[5].field_0x14 * 0x24 + 0x24),
                  0xffffffff,0);
     FUN_003c1060();

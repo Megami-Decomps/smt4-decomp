@@ -12,10 +12,10 @@ int partyPanelSortEntries(...);
 int FUN_0028c040(...);
 int asdLoadFileAsyncSimple(...);
 int FUN_0029e788(...);
-int FUN_0029f848(...);
+int gridNavigationConfigure(...);
 int gameGetSlotTable(...);
 int timerStart(...);
-int FUN_002bd954(...);
+int uiSpriteStateInitFromSource(...);
 int spriteStartAnimationByIndex(...);
 int asdOperatorNew(...);
 
@@ -52,12 +52,12 @@ extern unsigned int *g_partyPanel; /* 0x43dcf0 */
 /* Supplied declaration required: FUN_0028c040. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: FUN_0029e788. */
-/* Supplied declaration required: FUN_0029e874. */
-/* Supplied declaration required: FUN_0029f848. */
+/* Supplied declaration required: gameSetIconDisplayEnabled. */
+/* Supplied declaration required: gridNavigationConfigure. */
 extern int FUN_002a0d0c(void);
 /* Supplied declaration required: gameGetSlotTable. */
 /* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002bd954. */
+/* Supplied declaration required: uiSpriteStateInitFromSource. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: paramsInit. */
@@ -101,11 +101,11 @@ void FUN_0028b7f8(int param_1)
   asdLoadFileAsyncSimple("camp/partypanel.bf",puVar2 + 4,1);
   FUN_0028c040();
   if (param_1 != 0) {
-    FUN_0029e874(1);
+    gameSetIconDisplayEnabled(1);
     FUN_0029e788();
   }
   else {
-    FUN_0029e874(0);
+    gameSetIconDisplayEnabled(0);
   }
   temp_v1 = 0x180;
   asdOperatorNew();
@@ -145,33 +145,33 @@ void FUN_0028b7f8(int param_1)
   drawParameterBlockClear(puVar8);
   paramsInit(reinterpret_cast<UiResourceParameters *>(puVar2 + 0x12), &DAT_00402a4c,0x6c,&DAT_00402ab8,0x3c,&DAT_00402af4,0x18,0,0,
                &DAT_00402b0c,0x1f8);
-  FUN_002bd954(puVar2 + 0x1a,0x19,0x24,puVar2 + 0x12,0x6a);
+  uiSpriteStateInitFromSource(puVar2 + 0x1a,0x19,0x24,puVar2 + 0x12,0x6a);
   spriteStartAnimationByIndex(puVar2 + 0x1a,0);
-  FUN_002bd954(puVar2 + 0x3d,0x19,0x25,puVar2 + 0x12,0x6a);
+  uiSpriteStateInitFromSource(puVar2 + 0x3d,0x19,0x25,puVar2 + 0x12,0x6a);
   spriteStartAnimationByIndex(puVar2 + 0x3d,1);
-  FUN_002bd954(puVar2 + 0x60,0x19,0,puVar2 + 0x12,0x6a);
+  uiSpriteStateInitFromSource(puVar2 + 0x60,0x19,0,puVar2 + 0x12,0x6a);
   timerStart(puVar2 + 0x60,4,0);
-  FUN_002bd954(puVar2 + 0x83,0x19,0,puVar2 + 0x12,0x6a);
+  uiSpriteStateInitFromSource(puVar2 + 0x83,0x19,0,puVar2 + 0x12,0x6a);
   spriteStartAnimationByIndex(puVar2 + 0x83,2);
   temp_v1 = 0;
   do {
-    FUN_002bd954(puVar2 + temp_v1 * 0x23 + 0xa6,0x19,0,puVar2 + 0x12,0x6a);
+    uiSpriteStateInitFromSource(puVar2 + temp_v1 * 0x23 + 0xa6,0x19,0,puVar2 + 0x12,0x6a);
     timerStart(puVar2 + temp_v1 * 0x23 + 0xa6,4,0);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 4);
   puVar8 = puVar2 + 0x132;
-  FUN_002bd954(puVar8,0x19,0,puVar2 + 0x12,0x6a);
+  uiSpriteStateInitFromSource(puVar8,0x19,0,puVar2 + 0x12,0x6a);
   if (*(char *)((int)puVar2 + 0x42) != '\0') {
     timerStart(puVar8,6,0);
   }
   else {
     timerStart(puVar8,4,0);
   }
-  FUN_002bd954(puVar2 + 0x155,0x19,1000,puVar2 + 0x12,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x155,0x19,1000,puVar2 + 0x12,0xc9);
   spriteStartAnimationByIndex(puVar2 + 0x155,3);
-  FUN_002bd954(puVar2 + 0x178,0x19,1000,puVar2 + 0x12,0xc9);
+  uiSpriteStateInitFromSource(puVar2 + 0x178,0x19,1000,puVar2 + 0x12,0xc9);
   spriteStartAnimationByIndex(puVar2 + 0x178,4);
-  FUN_0029f848(puVar2 + 0x237,4,1,4,1,1);
+  gridNavigationConfigure(puVar2 + 0x237,4,1,4,1,1);
   temp_v1 = gameGetSlotTable();
   temp_v0 = *(unsigned char *)(temp_v1 + 0x910b);
   temp_v4 = (unsigned int)temp_v0;
@@ -180,20 +180,20 @@ void FUN_0028b7f8(int param_1)
     temp_v5 = temp_v5 + 1;
   }
   if (temp_v4 < 0xc) {
-    FUN_0029f848(puVar2 + 0x250,temp_v4,temp_v5,4,1,1);
-    FUN_0029f848(puVar2 + 0x282,*(unsigned char *)(temp_v1 + 0x910b) + 4,temp_v5 + 1,4,1,1);
+    gridNavigationConfigure(puVar2 + 0x250,temp_v4,temp_v5,4,1,1);
+    gridNavigationConfigure(puVar2 + 0x282,*(unsigned char *)(temp_v1 + 0x910b) + 4,temp_v5 + 1,4,1,1);
   }
   else if (puVar2[0xb] != 0) {
-    FUN_0029f848(puVar2 + 0x250,temp_v4 - 0xc,3,4,1,1);
-    FUN_0029f848(puVar2 + 0x282,*(unsigned char *)(temp_v1 + 0x910b) - 8,4,4,1,1);
+    gridNavigationConfigure(puVar2 + 0x250,temp_v4 - 0xc,3,4,1,1);
+    gridNavigationConfigure(puVar2 + 0x282,*(unsigned char *)(temp_v1 + 0x910b) - 8,4,4,1,1);
   }
   else {
-    FUN_0029f848(puVar2 + 0x250,0xc,3,4,1,1);
-    FUN_0029f848(puVar2 + 0x282,0x10,4,4,1,1);
+    gridNavigationConfigure(puVar2 + 0x250,0xc,3,4,1,1);
+    gridNavigationConfigure(puVar2 + 0x282,0x10,4,4,1,1);
   }
-  FUN_0029f848(puVar2 + 0x269,*(unsigned char *)(temp_v1 + 0x910b),temp_v5,4,1,1);
-  FUN_0029f848(puVar2 + 0x29b,*(unsigned char *)(temp_v1 + 0x910b) + 4,temp_v5 + 1,4,1,1);
-  FUN_0029f848(puVar2 + 0x2b4,6,6,1,1,1);
+  gridNavigationConfigure(puVar2 + 0x269,*(unsigned char *)(temp_v1 + 0x910b),temp_v5,4,1,1);
+  gridNavigationConfigure(puVar2 + 0x29b,*(unsigned char *)(temp_v1 + 0x910b) + 4,temp_v5 + 1,4,1,1);
+  gridNavigationConfigure(puVar2 + 0x2b4,6,6,1,1,1);
   puVar2[0x19c] = 0xffffffff;
   puVar2[0x19d] = 0xffffffff;
   FUN_0026b9bc();

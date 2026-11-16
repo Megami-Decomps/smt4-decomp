@@ -20,9 +20,9 @@ typedef struct TitleOverlay {
 extern RenderCtx *g_titleScene;
 
 void renderCtxSelectStereoLayout(RenderCtx *ctx);
-void FUN_002bed3c(void);
+void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 speed);
-s32 FUN_002c5d80(u32 kind, u32 arg);
+s32 renderCtxPackPassFlags(u32 kind, u32 arg);
 u32 asdGxPresetsGetByKind(u32 kind);
 u32 asdGxPresetsGetHeightByKind(u32 kind);
 void FUN_002c0944(u32 a, u32 b, u32 c, u32 d, f32 e, f32 f, f32 g, f32 h, f32 i);
@@ -38,13 +38,13 @@ void FUN_003844a0(TitleOverlay *overlay)
         return;
     }
     renderCtxSelectStereoLayout(g_titleScene);
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
-    renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
+    renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
     if ((overlay->flags & 0x80) != 0) {
         u8 alpha = (u8)(u32)(vec2GetSpeed(&overlay->fadeAnimation) * 192.0f);
 
-        renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
+        renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
         renderCtxSelectTexture(g_titleScene, 0);
         f32 preset = (f32)asdGxPresetsGetByKind(*(u32 *)((u8 *)g_titleScene + 0x528));
         f32 factor = (f32)asdGxPresetsGetHeightByKind(*(u32 *)((u8 *)g_titleScene + 0x528));
@@ -53,7 +53,7 @@ void FUN_003844a0(TitleOverlay *overlay)
     }
     FUN_0038368c(overlay);
     renderStackPop(&g_titleScene->stackA);
-    FUN_002bed3c();
+    gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
     renderCtxApplyTransforms(g_titleScene);
     renderCtxResetColorScale(g_titleScene);

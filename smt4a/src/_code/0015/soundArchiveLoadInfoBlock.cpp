@@ -18,8 +18,8 @@ typedef struct SoundArchiveLoader {
 
 u32 FUN_00178540(void *header);
 u32 nw_snd_internal_SoundArchiveFile_FileHeader_GetInfoBlockSize(void *header);
-bool FUN_00174a64(void *file, u32 offset, s32 origin);
-bool FUN_00174a00(void *file, void *buffer, u32 size, u32 *readSize);
+bool fileHandleSeek(void *file, u32 offset, s32 origin);
+bool fileHandleRead(void *file, void *buffer, u32 size, u32 *readSize);
 void FUN_001757b8(void *header, void *infoBlock);
 
 /* Reads the sound archive's info block into the buffer and attaches it to the header. */
@@ -32,14 +32,14 @@ bool soundArchiveLoadInfoBlock(SoundArchiveLoader *loader, void *buffer, u32 buf
     if (size > bufferSize) {
         return false;
     }
-    bool seekSucceeded = FUN_00174a64(loader->stream.file, offset, 0);
+    bool seekSucceeded = fileHandleSeek(loader->stream.file, offset, 0);
     SoundArchiveStream *stream = &loader->stream;
     if (!seekSucceeded) {
         loader->lastResult = stream->result;
         return false;
     }
     readSize = 0;
-    if (!FUN_00174a00(loader->stream.file, buffer, size, &readSize)) {
+    if (!fileHandleRead(loader->stream.file, buffer, size, &readSize)) {
         loader->lastResult = stream->result;
         return false;
     }

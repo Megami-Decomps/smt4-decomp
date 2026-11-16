@@ -11,7 +11,7 @@ u32 uiSelectedRecordGetFourth(void)
     if (owner->index < 0) {
         return 0;
     }
-    return FUN_002613f0(owner->index)->values[3];
+    return saveGetSelectedRecordSlot(owner->index)->values[3];
 }
 
 } /* extern "C" */

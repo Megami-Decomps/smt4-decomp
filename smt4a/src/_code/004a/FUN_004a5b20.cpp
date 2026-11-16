@@ -65,10 +65,10 @@ extern GameStateFlag g_gameState;
 
 OccurrenceEntry *dataTableFindEntryOccurrenceByBytePair(u32 table, s32 first, s32 second);
 Table02Slot *dataTableGetRecord02(u16 key);
-ItemRecord *FUN_004bb80c(u32 id);
+ItemRecord *dataTable02GetRecordWithAocPackage(u32 id);
 Table00Record *dataTable00FindById(u32 id);
 u16 *devilGetRecord(u32 id);
-s32 FUN_0026264c(u32 id);
+s32 itemIsCollectedWithRelated(u32 id);
 void campFillUnitComparison(ListEntry *out, u32 id, s32 arg);
 void FUN_004a833c(void *list, ListEntry *entry);
 void listScrollerInitialize(Unk4cfeb0Scroller *scroller, s32 visible, s32 total,
@@ -100,7 +100,7 @@ void FUN_004a5b20(EntryListWork *work)
                     if (slots[i].id == 0) {
                         continue;
                     }
-                    ItemRecord *item = FUN_004bb80c(slots[i].id);
+                    ItemRecord *item = dataTable02GetRecordWithAocPackage(slots[i].id);
 
                     if (item == NULL) {
                         continue;
@@ -115,7 +115,7 @@ void FUN_004a5b20(EntryListWork *work)
                         Table00Record *record = dataTable00FindById(id);
 
                         if (named != NULL && record != NULL
-                            && (g_gameState.showAll != 0 || ((record->flags & 1) != 0 && FUN_0026264c(*named) != 0))) {
+                            && (g_gameState.showAll != 0 || ((record->flags & 1) != 0 && itemIsCollectedWithRelated(*named) != 0))) {
                             ListEntry listEntry;
                             u32 value = 0;
 

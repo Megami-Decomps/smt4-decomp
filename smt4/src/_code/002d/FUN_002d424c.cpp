@@ -73,9 +73,9 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: FUN_00282390. */
-/* Supplied declaration required: FUN_0028250c. */
-extern int FUN_002896bc(void);
-/* Supplied declaration required: FUN_00291e40. */
+/* Supplied declaration required: mathRemPio2f. */
+extern int screenFadesAllReady(void);
+/* Supplied declaration required: soundActorStartOnFreeChannel. */
 extern int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: buttonHelpSetPreset. */
@@ -144,7 +144,7 @@ void FUN_002d424c(void)
           lmapSetSceneId(0x14);
         }
         else {
-          temp_v2 = FUN_002896bc();
+          temp_v2 = screenFadesAllReady();
           temp_v0 = DAT_004474f4;
           if (temp_v2 == 0) {
             FUN_002804ec(g_lmapScene + 0x28);
@@ -244,7 +244,7 @@ void FUN_002d424c(void)
       *(unsigned int *)(temp_v0 + 0x28) = g_gameState.f0049f9a0;
       *(unsigned int *)(temp_v0 + 0x2c) = temp_v4;
       *(unsigned int *)(temp_v0 + 0x30) = temp_v1;
-      *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + FUN_0028250c(g_gameState.f0049f9bc * 0.017453292f) * 25.0f;
+      *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + mathRemPio2f(g_gameState.f0049f9bc * 0.017453292f) * 25.0f;
       *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + FUN_00282390(g_gameState.f0049f9bc * 0.017453292f) * 25.0f;
       temp_v0 = g_lmapScene;
       *(unsigned int *)(temp_v0 + 0x50) = g_gameState.f0049f9ac;
@@ -261,7 +261,7 @@ void FUN_002d424c(void)
         return;
       }
       if ((g_gameState.f0049f958 == 0x3303001) && (temp_v0 = gameFlagIsSet(0x292), temp_v0 != 0)) {
-        temp_v0 = FUN_002896bc();
+        temp_v0 = screenFadesAllReady();
         if (temp_v0 == 0) {
           FUN_002804ec(g_lmapScene + 0x28);
           mapSelectContainingRegions();
@@ -293,33 +293,33 @@ void FUN_002d424c(void)
       FUN_0027fae4();
       switch(g_gameState.f0049f94a) {
       case 0:
-        FUN_00291e40(0x100021b, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+        soundActorStartOnFreeChannel(0x100021b, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
         break;
       case 1:
         temp_v4 = 0x100021d;
-        FUN_00291e40(temp_v4, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+        soundActorStartOnFreeChannel(temp_v4, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
         break;
       case 2:
         temp_v4 = 0x100021f;
-        FUN_00291e40(temp_v4, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+        soundActorStartOnFreeChannel(temp_v4, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
         break;
       case 3:
         temp_v4 = 0x1000221;
-        FUN_00291e40(temp_v4, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+        soundActorStartOnFreeChannel(temp_v4, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
         break;
       case 4:
         temp_v4 = 0x1000223;
-        FUN_00291e40(temp_v4, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
+        soundActorStartOnFreeChannel(temp_v4, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
         break;
       default:
       }
       FUN_0027fca0(0xffffffff);
       SoundActorQueuePosition position;
-      position.x = *(float *)(g_lmapScene + 0x1c) + FUN_0028250c(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
+      position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
       position.z = *(float *)(g_lmapScene + 0x24) + FUN_00282390(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
       position.y = *(float *)(g_lmapScene + 0x20) + 150.0f;
       temp_v0 = randBetween(0,1);
-      FUN_00291e40(temp_v0 + 0x100023c, position);
+      soundActorStartOnFreeChannel(temp_v0 + 0x100023c, position);
       if ((g_gameState.f0049f958 == 0x3303001) && (temp_v0 = gameFlagIsSet(0x292), temp_v0 != 0)) {
         slotSetRequest(0,0xf,0xff);
         temp_v1 = 0xf;

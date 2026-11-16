@@ -37,12 +37,12 @@ struct Table00Record {
 extern "C" {
 
 void campCommonBgAcquire(void);
-void FUN_003b61ec(void);
+void commonBgStopChildAndBeginTransition(void);
 void campButtonHelpLoad(void);
 void campButtonHelpAcquire(void);
 void asdTMTexTableLoadSprites(s32 table);
 u32 npcCreateTextureEffectJob(u32 id, s32 x, s32 y);
-void FUN_0039af48(u32 id, s32 x, s32 y);
+void npc2dCreatePortraitJob(u32 id, s32 x, s32 y);
 void FUN_0031bca4(void);
 void resourceReleaseReference(void);
 Table00Record *dataTable00FindById(s32 id);
@@ -57,12 +57,12 @@ void FUN_0049669c(ShopScene *shop)
     s32 npcId = 0;
 
     campCommonBgAcquire();
-    FUN_003b61ec();
+    commonBgStopChildAndBeginTransition();
     campButtonHelpLoad();
     campButtonHelpAcquire();
     asdLoadFileAsyncSimple("shop/shop.bf", &shop->layoutFile, 0);
     asdTMTexTableLoadSprites(0x20);
-    FUN_0014afd0(0x20, 0);
+    asdTMTexTablePrepareNodeImage(0x20, 0);
     if (shop->kind == SHOP_KIND_WEAPONS) {
         backdropId = shop->district;
         if (backdropId != 8) {
@@ -119,7 +119,7 @@ void FUN_0049669c(ShopScene *shop)
     }
     shop->backdropJob = npcCreateTextureEffectJob(backdropId, 0, 0);
     if (overlayId != 0) {
-        FUN_0039af48(overlayId, 0, 0);
+        npc2dCreatePortraitJob(overlayId, 0, 0);
         shop->overlayId = overlayId;
         FUN_0031bca4();
         return;

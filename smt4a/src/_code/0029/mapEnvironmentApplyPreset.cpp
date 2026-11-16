@@ -111,7 +111,7 @@ void mapEnvironmentApplyPreset(u32 preset, s32 transition)
     if (id > 49) {
         g_mapTable.texture = 0;
     }
-    FUN_0014afd0(45, g_mapTable.texture);
+    asdTMTexTablePrepareNodeImage(45, g_mapTable.texture);
     g_mapTable.textureLoaded = asdTMTexTableGetHeaderValue(45, g_mapTable.texture);
     g_mapTable.unk0c = entry->unk02;
     g_mapTable.unk10 = 0.0f;

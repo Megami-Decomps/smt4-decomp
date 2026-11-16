@@ -53,7 +53,7 @@ ValueRecord *dataTable08Sub1GetRecord(s32 id);
 BattleEntry *btlMainFindEntryByListedId(BtlMainState *battle, s32 id);
 void FUN_00247478(ActionInfo *info, BtlMainState *battle, BattleEntry *entry);
 s32 FUN_003be918(s32 skill, s32 attacker, s32 target, s32 column, s32 row, f32 power, f32 multiplier);
-UnitStats *FUN_0027da30(BtlMainState *battle, s32 id);
+UnitStats *btlFindEntryBlockByMemberId(BtlMainState *battle, s32 id);
 UnitRecord *gameGetUnitRecord(s32 index);
 s32 flagWordTestBit(void *record, u32 bit);
 s32 randRange(u32 limit);
@@ -110,7 +110,7 @@ s32 FUN_003be334(s32 wantDamage, s32 skillId, u32 unused, s32 recordId, f32 mult
     if (record->fixedValue != 0)
         value = record->fixedValue;
     if (record->percent != 0) {
-        s32 base = target < 109 ? FUN_0027da30(battle, target)->stat : gameGetUnitRecord(target - 109)->stat;
+        s32 base = target < 109 ? btlFindEntryBlockByMemberId(battle, target)->stat : gameGetUnitRecord(target - 109)->stat;
         value = (s32)((f32)(s16)(base * record->percent) * 0.01f);
     }
     if (wantDamage != 0)

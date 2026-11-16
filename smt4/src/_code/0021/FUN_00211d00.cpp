@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c58c8(int table, int index);
+int asdTMTexTablePrepareNodeImage(int table, int index);
 
 extern s8 DAT_0043dc70;
 
@@ -17,7 +17,7 @@ void FUN_00211d00(void)
         asdTMTexTableLoadSprites(19);
         i = 0;
         do {
-            FUN_002c58c8(19, i);
+            asdTMTexTablePrepareNodeImage(19, i);
             i++;
         } while (i < 8);
     }

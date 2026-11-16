@@ -5,7 +5,7 @@
 #include <stddef.h>
 
 extern "C" {
-void FUN_002bf380(s32 layer, s32 bank, s32 sprite, s32 x, s32 y, s32 depth);
+void texDrawCompositeSprite(s32 layer, s32 bank, s32 sprite, s32 x, s32 y, s32 depth);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *sprite);
 const u16 *dataTable24Sub0GetRecordS90(u32 id);
@@ -21,20 +21,20 @@ void FUN_001a7810(void *owner, u32 id, s32 x, s32 y, s32 highlighted, s32 altern
     typedef char LabelOwnerSpeedOffset[offsetof(LabelOwnerView, effect.effectSpeed) == 0x15C ? 1 : -1];
     u32 color;
     if (highlighted != 0) {
-        FUN_002bf380(2, 0x24, 11, x, y, 101);
+        texDrawCompositeSprite(2, 0x24, 11, x, y, 101);
         color = 0xFFFFFFFF;
         efctSetSpeed(vec2GetSpeed(&static_cast<LabelOwnerView *>(owner)->effect) * 0.5f + 0.5f);
     } else if (alternate != 0) {
-        FUN_002bf380(2, 0x24, 10, x, y, 101);
+        texDrawCompositeSprite(2, 0x24, 10, x, y, 101);
         color = 0xFF;
     } else {
-        FUN_002bf380(2, 0x24, 9, x, y, 101);
+        texDrawCompositeSprite(2, 0x24, 9, x, y, 101);
         color = 0xFF;
     }
     if (alternate != 0)
-        FUN_002bf288(2, 0x24, 0xA0, x, y, 111);
+        texDrawTableEntryAtStoredOrigin(2, 0x24, 0xA0, x, y, 111);
     else
-        FUN_002bf288(2, 0x24, 0x9C, x, y, 111);
+        texDrawTableEntryAtStoredOrigin(2, 0x24, 0x9C, x, y, 111);
     efctSetSpeed(speed);
     const u16 *text = dataTable24Sub0GetRecordS90(id);
     const UiTextMetrics *position = asdTMTexTableEntryAt(0x24, 0xA4);

@@ -4,7 +4,7 @@ extern "C" {
 
 struct SoundHandle;
 extern SoundHeapOwner DAT_004e2f68;
-void FUN_002bda30(SoundHandle *handle, s32 frames);
+void basicSoundStopOrFadeOut(SoundHandle *handle, s32 frames);
 
 /* Apply a transition to an existing slot handle; an empty valid slot still succeeds. */
 s32 soundSlotApplyTransition(u32 index, s32 frames)
@@ -16,7 +16,7 @@ s32 soundSlotApplyTransition(u32 index, s32 frames)
     }
     SoundHandle *handle = (SoundHandle *)slot->handles[index];
     if (handle != NULL) {
-        FUN_002bda30(handle, frames);
+        basicSoundStopOrFadeOut(handle, frames);
     }
     return 1;
 }

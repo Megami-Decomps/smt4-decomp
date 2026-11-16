@@ -20,7 +20,7 @@ typedef struct SaveData {
 } SaveData;
 
 
-extern s32 FUN_00148d68(u32 a, u32 b, s32 c);
+extern s32 weightedTableRollNextValue(u32 a, u32 b, s32 c);
 
 /* Clears the first byte and both nibbles of the second byte of every save entry of the table and applies each (a, b) pair. */
 void FUN_004bb880(void)
@@ -35,7 +35,7 @@ void FUN_004bb880(void)
         save->entries[i].first = 0;
         save->entries[i].secondLow = 0;
         save->entries[i].secondHigh = 0;
-        FUN_00148d68(pairs[i * 2], pairs[i * 2 + 1], 1);
+        weightedTableRollNextValue(pairs[i * 2], pairs[i * 2 + 1], 1);
     }
 }
 

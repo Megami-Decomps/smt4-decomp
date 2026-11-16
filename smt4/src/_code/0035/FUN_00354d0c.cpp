@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002bbb2c(unsigned int, int, int, int);
+int sysReportCheckFailure(unsigned int, int, int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_002bbb2c. */
+/* Supplied declaration required: sysReportCheckFailure. */
 extern unsigned int nn_fs_detail_FileBase_TrySeek(unsigned int, long long, int);
 
 
@@ -30,7 +30,7 @@ void FUN_00354d0c(int param_1)
   temp_v0 = nn_fs_detail_FileBase_TrySeek
                     (param_1 + 4,romwright_piece_4_4(in_lr,in_stack_00000000),in_stack_00000000);
   if (-((int)temp_v0 >> 0x1f) != 0) {
-    FUN_002bbb2c(temp_v0,0x354d28,-((int)temp_v0 >> 0x1f),in_stack_00000000);
+    sysReportCheckFailure(temp_v0,0x354d28,-((int)temp_v0 >> 0x1f),in_stack_00000000);
     return;
   }
   return;

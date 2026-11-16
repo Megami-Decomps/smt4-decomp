@@ -7,9 +7,9 @@ extern "C" {
 
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
-s32 FUN_002b54a0(BtlCombatantEntryA *entry, s32 arg);
+s32 btlCombatantHasSkillAction(BtlCombatantEntryA *entry, s32 arg);
 
-// Report whether any eligible battle entry passes FUN_002b54a0 with the script argument.
+// Report whether any eligible battle entry passes btlCombatantHasSkillAction with the script argument.
 u32 btlScriptAnyEntryPassesCheck(void)
 {
     s32 arg = scrGetArg(0);
@@ -18,7 +18,7 @@ u32 btlScriptAnyEntryPassesCheck(void)
         if ((entry->flags & g_btlCandidateMasks.unavailable) &&
             (entry->flags & g_btlCandidateMasks.required) &&
             !(g_btlCandidateMasks.excluded & entry->flags) &&
-            FUN_002b54a0(entry, arg)) {
+            btlCombatantHasSkillAction(entry, arg)) {
             scrSetResult(1);
             return 1;
         }

@@ -25,7 +25,7 @@ struct ScenePassRecording {
 };
 
 extern "C" {
-void FUN_002c35b0(u32 flags);
+void renderCtxResetFrameState(u32 flags);
 void asdGxCommandListStartRecord(u32 list);
 extern u32 DAT_004720f0;
 extern ScenePassRecording g_asdLightCount[2];
@@ -48,7 +48,7 @@ static __inline void modelSelectMaterial(ModelMaterialContext *context, s32 inde
 // Bind the selected material, then restart recording on the first pass's command list.
 void FUN_0034914c(const ModelDrawSelection *selection, ModelMaterialContext *context)
 {
-    FUN_002c35b0(0);
+    renderCtxResetFrameState(0);
     modelSelectMaterial(context, selection->materialIndex);
     asdGxCommandListStartRecord(g_asdLightCount[0].recorder);
 }

@@ -47,7 +47,7 @@ void Obj55c89c::FUN_004a40f4()
     } else if (useCounterGetCurrentValue() != 0x69) {
         g_animatedPageSelection.selection = -1;
         if ((s16)owner->selection.value != 0) {
-            u8 *variant = &reinterpret_cast<ItemVariantStateView *>(FUN_0026140c())->variant;
+            u8 *variant = &reinterpret_cast<ItemVariantStateView *>(saveGetUserSettingsBlock())->variant;
             s8 animation;
             switch (*variant & 0x7f) {
             case 1: animation = 6; break;

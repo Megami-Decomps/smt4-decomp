@@ -24,7 +24,7 @@ typedef struct Request {
 } Request;
 
 extern Node *_ZN21WindowOperationResultC1Eh(u32 arg, s32 index);
-extern nn::Result FUN_001a0380(NameBuffer *name);
+extern nn::Result fsUnmountByName(NameBuffer *name);
 extern Pair *_ZN18WindowStatusResultC1Ej(Pair *out, s32 code);
 
 /* Consumes the request's pending name: clears it and, when its lookup code has the high bit set, copies the resulting pair into the node. */
@@ -33,7 +33,7 @@ void _ZN10AocSystemA17getPendingRequestEv(u32 arg, Request *request)
     Node *node = _ZN21WindowOperationResultC1Eh(arg, 0);
 
     if (request->pending != 0) {
-        nn::Result code = FUN_001a0380(&request->name);
+        nn::Result code = fsUnmountByName(&request->name);
         Pair local;
 
         request->name.words[0] = 0;

@@ -33,7 +33,7 @@ typedef struct Entry {
 s32 textureGetIndexedResource(u32 texId);
 s32 asdTMTexTableLoadTmx(u32 texId, s32 arg);
 s32 FUN_00403a34(Entry *entry, u32 id);
-s32 FUN_00203b40(void *sprite, u32 resource, s32 a, s32 b, s32 c, s32 d);
+s32 gridNavigationConfigure(void *sprite, u32 resource, s32 a, s32 b, s32 c, s32 d);
 s32 flagsSetOrClearBit(void *sprite, s32 arg);
 s32 tableFlagBit1(u16 id);
 s32 tableFlagBit2(u16 id);
@@ -65,7 +65,7 @@ void FUN_00404974(Entry *entry)
         asdTMTexLoadMainHeap(texId, texSub);
     }
     FUN_00403a34(entry, entry->info->id);
-    FUN_00203b40(entry->sprite, entry->resource, 8, 1, 0, 1);
+    gridNavigationConfigure(entry->sprite, entry->resource, 8, 1, 0, 1);
     flagsSetOrClearBit(entry->sprite, 0);
     entry->unk108 = 0;
     entry->unk08c = 0;

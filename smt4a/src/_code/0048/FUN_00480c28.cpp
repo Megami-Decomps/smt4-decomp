@@ -6,7 +6,7 @@ extern u32 DAT_0057f6f8[2][11];
 extern u32 DAT_0057f750[11];
 extern u32 DAT_0057f77c[11];
 extern u32 DAT_0057f7a8[11];
-s32 FUN_001ba3d4(u32 value);
+s32 flagValueRead(u32 value);
 
 // Sum five tiers of counters using their respective score weights.
 s32 FUN_00480c28()
@@ -19,11 +19,11 @@ s32 FUN_00480c28()
     const u32 *firstTier = DAT_0057f6f8[0];
     const u32 *secondTier = DAT_0057f6f8[1];
     for (s32 i = 0; i < 11; ++i) {
-        first += FUN_001ba3d4(firstTier[i]);
-        second += FUN_001ba3d4(secondTier[i]);
-        third += FUN_001ba3d4(DAT_0057f750[i]);
-        fourth += FUN_001ba3d4(DAT_0057f77c[i]);
-        fifth += FUN_001ba3d4(DAT_0057f7a8[i]);
+        first += flagValueRead(firstTier[i]);
+        second += flagValueRead(secondTier[i]);
+        third += flagValueRead(DAT_0057f750[i]);
+        fourth += flagValueRead(DAT_0057f77c[i]);
+        fifth += flagValueRead(DAT_0057f7a8[i]);
     }
     return (s32)((f32)first * 70.4f + (f32)second * 300.8f + (f32)third * 800.0f
                  + (f32)fourth * 2120.0f + (f32)fifth * 5600.0f);

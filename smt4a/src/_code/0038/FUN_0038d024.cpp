@@ -7,7 +7,7 @@
 extern "C" {
 s32 scrGetArg(s32 argument);
 s32 btlResolveEntryChoice(s32 choice);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
 void scrSetResult(s32 result);
 
 // Query the selected group's encoded affinity class, including the active special combatant.
@@ -17,7 +17,7 @@ u32 FUN_0038d024()
     s32 group = btlResolveEntryChoice(scrGetArg(1));
     if (affinity < 21) {
         s32 first, count;
-        FUN_00301a08(group, &first, &count);
+        btlGetEntryChoiceRange(group, &first, &count);
         for (s32 index = first; index < first + count; ++index) {
             BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
             if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
@@ -29,7 +29,7 @@ u32 FUN_0038d024()
             }
         }
         if (btlGetMainState()->unk4cd1) {
-            BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+            BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
             if (entry && entry->encodedStats.values[affinity] >> 10 == 5) {
                 scrSetResult(1);
                 return 1;

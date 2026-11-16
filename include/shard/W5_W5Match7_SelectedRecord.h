@@ -25,7 +25,7 @@ typedef char SelectionOwnerLayoutCheck[sizeof(SelectionOwner) == 0x30 &&
     offsetof(CallbackLoadedObject, unk108) == 0x108 ? 1 : -1];
 extern "C" {
 extern SelectionOwner *g_callbackWork;
-SelectedRecord *FUN_002613f0(s32 index);
+SelectedRecord *saveGetSelectedRecordSlot(s32 index);
 }
 #ifdef __cplusplus
 extern "C" {

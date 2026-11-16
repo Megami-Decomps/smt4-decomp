@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
-int FUN_002c526c(void);
+int resultHandleFailure(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: FUN_002c526c. */
+/* Supplied declaration required: resultHandleFailure. */
 
 
 void nn_os_Thread_FinalizeImpl(unsigned int *param_1)
@@ -29,7 +29,7 @@ void nn_os_Thread_FinalizeImpl(unsigned int *param_1)
     puVar1 = temp_v0;
     FUN_002c40f8(puVar1,&uStack_10,1,0,0xffffffff,0xffffffff);
     if ((int)puVar1 < 0) {
-      FUN_002c526c();
+      resultHandleFailure();
     }
     *(unsigned char *)(param_1 + 1) = 1;
   }

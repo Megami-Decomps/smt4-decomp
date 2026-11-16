@@ -5,7 +5,7 @@
 extern "C" {
 extern TitleScene *g_titleScene;
 extern f32 DAT_004724cc[2];
-s32 FUN_002c5d80(u32 first, u32 second);
+s32 renderCtxPackPassFlags(u32 first, u32 second);
 void FUN_002c0944(u32 firstColor, u32 secondColor, u32 thirdColor, u32 fourthColor, f32 x, f32 y, f32 width, f32 height, f32 depth);
 }
 
@@ -29,7 +29,7 @@ void FUN_002c733c(s32 x, s32 y, s32 width, s32 height, u32 firstColor, u32 secon
     firstColor = menuReverseColorBytes(firstColor);
     secondColor = menuReverseColorBytes(secondColor);
     RenderCtx *context = g_titleScene;
-    renderCtxPushA(context, FUN_002c5d80(1, 1));
+    renderCtxPushA(context, renderCtxPackPassFlags(1, 1));
     renderCtxSelectTexture(g_titleScene, 0);
     FUN_002c0944(firstColor, firstColor, secondColor, secondColor,
         (f32)pixelX, (f32)pixelY, (f32)width, (f32)height, depth);
