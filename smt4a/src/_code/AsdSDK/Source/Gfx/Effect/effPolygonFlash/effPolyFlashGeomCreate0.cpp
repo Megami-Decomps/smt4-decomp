@@ -1,10 +1,10 @@
 /* NON_MATCHING: allocation head matches retail (plain static allocGeomBlock keeps the element size in a register); params/size swap r4/r5, the two stack constants load in the other order and the 72 tag lands in r1 instead of r2. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
-void *memAlloc(int, int, int, int size, int align, int);
 PolyGeom *FUN_002b3b58(u32 count, int w, int h, u8 *table, int tableSize);
 extern u8 DAT_005c1f28;
 

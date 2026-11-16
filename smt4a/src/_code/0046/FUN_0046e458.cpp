@@ -20,9 +20,7 @@ struct IdTable {
     u32 find(u16 wanted) const
     {
         u32 model = (u32)-1;
-        s32 i;
-
-        for (i = 0; i < count; i++) {
+        for (s32 i = 0; i < count; i++) {
             if (entries[i].id == wanted) {
                 model = models[i];
                 break;

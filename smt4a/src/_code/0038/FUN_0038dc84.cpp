@@ -1,4 +1,4 @@
-/* NON_MATCHING: population counting uses an ascending bound instead of a countdown; signed-mask registers and result allocation differ. */
+/* NON_MATCHING: only register allocation differs (retail keeps the population count in r0 and the scratch ORs in r1/r2; the build uses r1 for the count and r0/r2). */
 #include "common.h"
 #include "script/ScriptArgs.h"
 
@@ -10,23 +10,23 @@ u32 FUN_0038dc84(void)
 {
     s64 first = scrGetArg(0);
     s64 second = scrGetArg(1);
+    s32 result = 0;
     s32 count = 0;
     if (first == 0 && second == 0) {
         scrSetResult(0);
         return 1;
     }
-    for (u32 bit = 0; bit < 32; ++bit) {
+    for (s32 bit = 0; bit < 32; ++bit) {
         s32 mask = 1 << bit;
-        if (mask & (first) != 0) {
+        if ((mask & first) != 0) {
             ++count;
         }
-        if (mask & (second) != 0) {
+        if ((mask & second) != 0) {
             ++count;
         }
     }
     s32 ordinal = randBetween(0, count - 1);
     s32 seen = 0;
-    s32 result = 0;
     for (s32 bit = 0; bit < 32; ++bit) {
         if ((first & (1 << bit)) != 0) {
             if (ordinal == seen) {

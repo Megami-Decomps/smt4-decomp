@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `nw_gfx_res_ResMaterial_CacheUserUniformIndex` (_code @ 0x1a3dc0, 0xd0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include <string.h>
 
 extern "C" {
 
-int libc_strcmp(int, int);
 
-/* Supplied declaration required: libc_strcmp. */
+/* Supplied declaration required: strcmp. */
 
 
 void nw_gfx_res_ResMaterial_CacheUserUniformIndex(int *param_1,int param_2,int param_3)
@@ -57,7 +57,7 @@ void nw_gfx_res_ResMaterial_CacheUserUniformIndex(int *param_1,int param_2,int p
               temp_v2 = temp_v2 + (int)piVar2;
             }
             temp_v0 = unaff_r10;
-            libc_strcmp(unaff_r10,temp_v2);
+            strcmp((const char *)unaff_r10,(const char *)temp_v2);
             if (temp_v0 == 0) {
               piVar7[1] = temp_v1;
               break;

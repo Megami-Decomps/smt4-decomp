@@ -26,7 +26,7 @@ u32 btlScriptAnyEntryHpAtMost(void)
     for (s32 i = first; i < first + count; ++i) {
         BtlMainStateA *state = btlGetMainState();
         BtlCombatantEntryA *entry = &state->entries[i];
-        if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
+        if (!(g_btlCandidateMasks.unavailable & entry->flags) &&
             (entry->flags & g_btlCandidateMasks.required) &&
             !(g_btlCandidateMasks.excluded & entry->flags) &&
             entryHpPercentage(entry) <= percent) {

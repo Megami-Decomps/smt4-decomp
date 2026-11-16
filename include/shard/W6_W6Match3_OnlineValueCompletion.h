@@ -31,7 +31,7 @@ s32 *asdListBoxGetIntValuePtr(u32 listBox, s32 id);
 extern "C" {
 #endif
 
-unsigned int libc_strcmp(unsigned int *param_1,unsigned int *param_2);
+unsigned int strcmp(unsigned int *param_1,unsigned int *param_2);
 
 #ifdef __cplusplus
 }

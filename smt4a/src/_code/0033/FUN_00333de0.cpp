@@ -32,7 +32,7 @@ void FUN_00333de0(s32 selected)
             sysPlaySe(0x2D);
         }
     }
-    status->unk598 = (u16)selected;
+    status->unk598 = (s16)selected;
     if (selected >= 0 && gameWorkStateGet()) {
         u32 directory = FUN_0046fca8(g_aocSystem, selected);
         if (directory == 0)

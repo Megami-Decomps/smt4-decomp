@@ -17,14 +17,14 @@ u32 devilCalculateRankCost(u32 id, s32 rank, s32 level);
 }
 
 /* Progress is fixed-point with twelve fractional bits; the cached width is in sprite pixels. */
-static __inline s32 experienceBarWidth(u64 progress, u64 required, const SpriteInfo *sprite)
+static s32 experienceBarWidth(u64 progress, u64 required, const SpriteInfo *sprite)
 {
     f32 current = (f32)(progress >> 12);
     f32 maximum = (f32)required;
     return (s32)((current / maximum) * (f32)*sprite->size);
 }
 
-static __inline void experienceBarUpdateUnit(ExperienceBarStateIV *work, s32 index, const SpriteInfo *sprite)
+static void experienceBarUpdateUnit(ExperienceBarStateIV *work, s32 index, const SpriteInfo *sprite)
 {
     const SavedBattleInitialViewIV *unit = reinterpret_cast<const SavedBattleInitialViewIV *>(gameGetUnitRecord(index));
     if (unit != NULL) {

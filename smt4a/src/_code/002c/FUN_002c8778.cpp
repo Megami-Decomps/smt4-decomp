@@ -1,4 +1,4 @@
-/* NON_MATCHING: counter-sprite address registers and menu-state stores differ; both versions have 71 instructions. */
+/* NON_MATCHING: remaining: the menu-state store group: retail emits `stmib r0!, {r1, r2}` then `str r6, [r0, #8]`, the build stores the timer first and uses `stm` with an extra add (72 vs 71 rows) */
 #include "shard/W5_W5Match7_UiQuest.h"
 #include "ui/UiSpriteState.h"
 #include <stddef.h>
@@ -40,9 +40,8 @@ void FUN_002c8778(u16 questId)
         uiSpriteSetImageKeyframe(&menu->details[1], 11, 0);
         uiSpriteSelectAnim(&menu->details[2], 6);
         uiSpriteSelectAnim(&menu->details[3], 7);
-        UiSpriteState *counterSprite = &menu->details[4];
-        uiSpriteSelectAnim(counterSprite, 8);
-        spriteSetLayer(counterSprite, 2);
+        uiSpriteSelectAnim(&menu->details[4], 8);
+        spriteSetLayer(&menu->details[4], 2);
         uiSpriteSelectAnim(&menu->details[5], 10);
         menu->firstCounter = 0;
         menu->secondCounter = 0;

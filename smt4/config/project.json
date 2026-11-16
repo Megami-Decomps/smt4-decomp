@@ -54125,12 +54125,12 @@
     },
     {
       "address": "0x2aa568",
-      "function": "libc_strcmp",
+      "function": "strcmp",
       "module": "_code",
-      "object": "build/obj/_code/002a/libc_strcmp.o",
+      "object": "build/obj/_code/002a/strcmp.o",
       "size": 184,
-      "source": "src/_code/002a/libc_strcmp.cpp",
-      "target": "orig/target/_code/002a/libc_strcmp.o",
+      "source": "src/_code/002a/strcmp.cpp",
+      "target": "orig/target/_code/002a/strcmp.o",
       "thumb": false
     },
     {

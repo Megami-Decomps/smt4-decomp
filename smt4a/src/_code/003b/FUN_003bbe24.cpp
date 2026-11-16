@@ -22,14 +22,14 @@ BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
 /* Test eligible group entries and the special active entry for a positive counter. */
 u32 FUN_003bbe24(void)
 {
-    u32 group = btlResolveEntryChoice(scrGetArg(0));
+    u32 choice = scrGetArg(0);
     s32 first, count;
-    FUN_00301a08(group, &first, &count);
+    FUN_00301a08(btlResolveEntryChoice(choice), &first, &count);
     for (s32 i = first; i < first + count; ++i) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
-        if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
+        if (!(g_btlCandidateMasks.unavailable & entry->flags) &&
             (entry->flags & g_btlCandidateMasks.required) &&
-            !(g_btlCandidateMasks.excluded & entry->flags)) {
+            !(entry->flags & g_btlCandidateMasks.excluded)) {
             const BattleCandidateCounterView *counters = (const BattleCandidateCounterView *)entry;
             if (counters->primary > 0 || counters->secondary > 0) {
                 scrSetResult(1);
@@ -40,7 +40,7 @@ u32 FUN_003bbe24(void)
     if (btlGetMainState()->unk4cd1) {
         BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
         const BattleCandidateCounterView *counters = (const BattleCandidateCounterView *)entry;
-        if (entry && (counters->primary > 0 || counters->secondary > 0)) {
+        if (entry && (0 < counters->primary || 0 < counters->secondary)) {
             scrSetResult(1);
             return 1;
         }

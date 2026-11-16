@@ -1970,7 +1970,7 @@
 00295720 btlTalkBustUpCreate
 00201398 scrComm_Job_StopAndWait
 0015f834 svcCloseHandle
-002aa568 libc_strcmp
+002aa568 strcmp
 002b5a48 wstrlenU16
 002bcd60 rt_memcpy_w144
 002f102c scrComm_Battle_GetWorkSlot

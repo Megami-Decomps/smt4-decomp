@@ -1,6 +1,7 @@
 /* NON_MATCHING: the retail build has a stripped debug call (file/line setup + nop) before the request allocation. */
 #include "AsdSDK/Source/Sys/File/AsdFile.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include <string.h>
 
 extern "C" {
 extern AsdFileGlobals g_asdFile;
@@ -11,7 +12,6 @@ s32 FUN_002c5254(s32 *out, u32 handle);
 void FUN_002c526c(void);
 void memClear(void *buf, u32 size);
 s32 libc_strlen(const char *s);
-s32 libc_strcmp(const char *a, const char *b);
 char *libc_strcpy(char *dst, const char *src);
 s32 textFormatBuffer(char *dst, const char *format, ...);
 
@@ -58,9 +58,9 @@ AsdFileRequest *asdFileQueueRequest(const char *path, u8 flag)
     }
     if (hasDevice) {
         libc_strcpy(request->path, path);
-    } else if (libc_strcmp(path, "battle/event/BtlEvent064/BtlEvent064.mbm") == 0 ||
-               libc_strcmp(path, "event/e007/e007.mbm") == 0 ||
-               libc_strcmp(path, "event/quest/quest122.mbm") == 0) {
+    } else if (strcmp(path, "battle/event/BtlEvent064/BtlEvent064.mbm") == 0 ||
+               strcmp(path, "event/e007/e007.mbm") == 0 ||
+               strcmp(path, "event/quest/quest122.mbm") == 0) {
         textFormatBuffer(request->path, "patch:/%s", path);
     } else {
         textFormatBuffer(request->path, "rom:/%s", path);

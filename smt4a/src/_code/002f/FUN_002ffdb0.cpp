@@ -1,12 +1,12 @@
-/* NON_MATCHING: portable 16-bit byte swaps expand to shifts instead of retail REV16, with different socket/address registers. */
+/* NON_MATCHING: the byte swaps are REV16 now; remaining: retail keeps the socket in r6 and the address in r5 across the calls (Thumb register choice). */
 #include "common.h"
 
 struct SocketAddressView {
     u8 unk00[6];
     u16 networkPort;
 
-    u16 port() const { return (u16)((networkPort << 8) | (networkPort >> 8)); }
-    void setPort(u16 value) { networkPort = (u16)((value << 8) | (value >> 8)); }
+    u16 port() const { return (u16)(((networkPort & 0xff) << 8) | ((networkPort >> 8) & 0xff)); }
+    void setPort(u16 value) { networkPort = (u16)(((value & 0xff) << 8) | ((value >> 8) & 0xff)); }
 };
 
 struct SocketState;

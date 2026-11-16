@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation of the mask AND/ORR chain differs (the active-entry byte already folds with the s8 flag). */
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -60,9 +59,9 @@ u32 FUN_0038c888(void)
     FUN_00301a08(btlResolveEntryChoice(scrGetArg(1)), &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
-        if ((g_btlCandidateMasks.unavailable & entry->flags) == 0 &&
+        if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
             (entry->flags & g_btlCandidateMasks.required) != 0 &&
-            (g_btlCandidateMasks.excluded & entry->flags) == 0 && entry->id == id &&
+            (entry->flags & g_btlCandidateMasks.excluded) == 0 && entry->id == id &&
             unitHasCategoryThreeSkill(entry)) {
             scrSetResult(1);
             return 1;

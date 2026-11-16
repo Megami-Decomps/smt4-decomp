@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail uses `ldr r1, [pc, #48]` where armcc emits `ldr r1, [pc, #44]`. */
+/* NON_MATCHING: retail places the 0.0f literal before g_messageMain in the pool. */
 #include "common.h"
 
 extern "C" {
@@ -9,8 +9,8 @@ extern MessageMain g_messageMain;
 
 f32 messageGetActiveValue(u32 index)
 {
-    MessageState *state = g_messageMain.state;
     f32 value = 0.0f;
+    MessageState *state = g_messageMain.state;
     if (state->active && index < 3) {
         value = state->values[index];
     }

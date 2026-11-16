@@ -20,20 +20,21 @@ s32 onesRoomIsRunning(void);
 u32 FUN_0039a7ac(void)
 {
     CommonBackgroundChild *overlay = g_commonBg.owned;
-    if (overlay->fadeMode != 0) {
-        if (overlay->fadeMode == 1) {
-            overlay->fade -= 0.1f;
-            if (overlay->fade <= 0.0f) {
-                overlay->fade = 0.0f;
-                overlay->fadeMode = 0;
-            }
-        } else if (overlay->fadeMode == 2) {
-            overlay->fade += 0.1f;
-            if (overlay->fade >= overlay->fadeMax) {
-                overlay->fade = overlay->fadeMax;
-                overlay->fadeMode = 3;
-            }
+    switch (overlay->fadeMode) {
+    case 1:
+        overlay->fade -= 0.1f;
+        if (overlay->fade <= 0.0f) {
+            overlay->fade = 0.0f;
+            overlay->fadeMode = 0;
         }
+        break;
+    case 2:
+        overlay->fade += 0.1f;
+        if (overlay->fade >= overlay->fadeMax) {
+            overlay->fade = overlay->fadeMax;
+            overlay->fadeMode = 3;
+        }
+        break;
     }
 
     u8 shown;

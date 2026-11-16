@@ -1,4 +1,3 @@
-/* NON_MATCHING: shared handler-release tail is laid out at the end (retail keeps it in the first path, falling into the common epilogue) and the zero/g_aocMain registers are swapped (r6/r5). */
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
 #include "classes/WindowStatus.h"
@@ -7,7 +6,6 @@
 /* An object the menu owns and releases through its deleting destructor. */
 class AocConfirmHandler {
 public:
-    virtual void vfunc00();
     virtual ~AocConfirmHandler();
 };
 
@@ -19,7 +17,7 @@ struct AocConfirmMenu {
     /* 0x00C */ u8 unk00C[0x1FC];
     /* 0x208 */ AocConfirmHandler *handler;
     /* 0x20C */ u8 unk20C[4];
-    /* 0x210 */ WindowStatusOperationResult result;
+    /* 0x210 */ RequestParameters result;
     /* 0x224 */ u8 unk224[0x90];
     /* 0x2B4 */ u8 notice[0x34];
     /* 0x2E8 */ u8 touchRegions[0x68];
@@ -66,11 +64,29 @@ void messageBannerRestartOrClear(void);
 void messageClearActiveFlags(void);
 void ifTouchRegionRemove(void);
 
+/* Switches the menu to the given state and releases its handler. */
+static __inline void closeConfirmation(AocConfirmMenu *menu, s32 state)
+{
+    menu->state = state;
+    menu->step = 0;
+    if (menu->handler != NULL) {
+        delete menu->handler;
+        menu->handler = NULL;
+    }
+}
+
 /* Per-frame update of the "is connected" confirmation: opens the script, waits for its choice, then closes. */
 void AocMenu::runConfirmation()
 {
     AocConfirmMenu * menu = reinterpret_cast<AocConfirmMenu *>(this);
-    if (menu->step == 0) {
+    switch (menu->step) {
+    case 2:
+        if (FUN_002e19f8() == 0) {
+            return;
+        }
+        closeConfirmation(menu, 4);
+        return;
+    case 0:
         FUN_00169548(0);
         g_aocSystem->getPendingRequest();
         menu->flags &= ~0x10;
@@ -83,54 +99,36 @@ void AocMenu::runConfirmation()
         FUN_00477d10(menu, 0, 1);
         menu->step = 1;
         return;
-    }
-    if (menu->step == 1) {
+    case 1:
         if (scrRunOpcodesStub(menu->script) == 2) {
             s32 choice = messageGetChoiceResult();
             if (choice == 0) {
                 menu->step = 2;
                 FUN_0016ccb4((u8 *)g_aocMain + 0x80);
-                WindowStatusOperationResult operation(0);
-                menu->result = operation;
+                menu->result = RequestParameters((u8)0);
                 FUN_00477d10(menu, 0xFFFFFFFF, 0);
                 FUN_0021c118(0x1000001, 10);
                 return;
             }
-            if (choice != 1) {
-                return;
+            if (choice == 1) {
+                closeConfirmation(menu, 15);
             }
-        } else {
-            if (obj04StateIs4() == 0) {
-                return;
-            }
-            if (FUN_001517b4(1, 1) == 0) {
-                return;
-            }
-            eventQueueAddUniqueIfValid(0x100020e);
-            msgWindowReset();
-            messageBannerRestartOrClear();
-            messageClearActiveFlags();
-            ifTouchRegionRemove();
-            ifTouchRegionRemove();
-        }
-        menu->state = 15;
-        menu->step = 0;
-        if (menu->handler != NULL) {
-            delete menu->handler;
-            menu->handler = NULL;
-        }
-        return;
-    }
-    if (menu->step == 2) {
-        if (FUN_002e19f8() == 0) {
             return;
         }
-        menu->state = 4;
-        menu->step = 0;
-        if (menu->handler != NULL) {
-            delete menu->handler;
-            menu->handler = NULL;
+        if (obj04StateIs4() == 0) {
+            return;
         }
+        if (FUN_001517b4(1, 1) == 0) {
+            return;
+        }
+        eventQueueAddUniqueIfValid(0x100020e);
+        msgWindowReset();
+        messageBannerRestartOrClear();
+        messageClearActiveFlags();
+        ifTouchRegionRemove();
+        ifTouchRegionRemove();
+        closeConfirmation(menu, 15);
+        return;
     }
 }
 

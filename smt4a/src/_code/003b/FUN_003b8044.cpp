@@ -37,9 +37,9 @@ s32 FUN_003b8044(void)
     }
     for (s32 index = 0; index < 109; ++index) {
         EntryQueryView *entry = &((EntryQueryView *)btlGetMainState()->entries)[index];
-        if ((g_btlCandidateMasks.unavailable & entry->flags) != 0 &&
-            (g_btlCandidateMasks.required & entry->flags) != 0 &&
-            (g_btlCandidateMasks.excluded & entry->flags) == 0 &&
+        if ((entry->flags & g_btlCandidateMasks.unavailable) &&
+            (entry->flags & g_btlCandidateMasks.required) &&
+            !(g_btlCandidateMasks.excluded & entry->flags) &&
             entry->id == id && entry->categoryValues[valueIndex] >= 1) {
             scrSetResult(1);
             return 1;

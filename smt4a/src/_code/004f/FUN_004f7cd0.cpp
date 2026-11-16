@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail loads the reserved-name globals inside the null-guarded tests (not before) and keeps the 128-byte buffer address in sl; stack frame 260 vs 256. */
 #include "battle/btlEffect.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"
+#include <string.h>
 
 namespace {
 /* The version slots are beyond the canonical effect owner's shared prefix. */
@@ -15,7 +16,6 @@ extern "C" {
 extern BtlEffectGlobals g_btlEffect;
 extern const char DAT_00528544[], DAT_0052853c[], DAT_005284c0[];
 u32 libc_strlen(const char *text);
-s32 libc_strcmp(const char *first, const char *second);
 s32 libc_strncmp(const char *first, const char *second, u32 bytes);
 void sysMemClear(void *memory, u32 bytes);
 s32 textFormatBuffer(char *output, const char *format, ...);
@@ -30,7 +30,7 @@ static __inline bool nameHasPrefix(const char *name, const char *prefix)
 
 static __inline bool nameEquals(const char *name, const char *other)
 {
-    return name != NULL && libc_strcmp(name, other) == 0;
+    return name != NULL && strcmp(name, other) == 0;
 }
 
 void FUN_004f7cd0(BtlEffectOwnerA *effect)
@@ -40,8 +40,8 @@ void FUN_004f7cd0(BtlEffectOwnerA *effect)
     BattleEffectVersionOwnerView *owner = reinterpret_cast<BattleEffectVersionOwnerView *>(effect);
     for (s32 index = 0; index < BTL_EFFECT_SLOTS; ++index) {
         const char *name = effect->slots->entries[index].name;
-        if (libc_strlen(name) == 0 || libc_strcmp(name, DAT_00528544) == 0 ||
-            libc_strcmp(DAT_0052853c, name) == 0)
+        if (libc_strlen(name) == 0 || strcmp(name, DAT_00528544) == 0 ||
+            strcmp(DAT_0052853c, name) == 0)
             continue;
         if (nameHasPrefix(name, g_btlEffect.prefix) || nameEquals(name, g_btlEffect.reserved.name) ||
             nameHasPrefix(name, g_btlEffect.otherPrefix) || nameEquals(name, g_btlEffect.reserved.otherName))

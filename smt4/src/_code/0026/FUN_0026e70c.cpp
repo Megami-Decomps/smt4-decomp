@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the interpolation product's destination register differs (retail writes it over `time` in s3, the build into s1). */
 #include "common.h"
 
 // Interpolate over the duration, retaining the start value before time zero.
@@ -13,5 +12,7 @@ extern "C" f32 FUN_0026e70c(f32 start, f32 end, f32 duration, f32 time)
     if (time >= duration) {
         return end;
     }
-    return start + (end - start) * time / duration;
+    f32 delta = end - start;
+    f32 progress = delta * time / duration;
+    return progress + start;
 }

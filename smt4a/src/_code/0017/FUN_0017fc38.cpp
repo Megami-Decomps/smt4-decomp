@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses vmul.f32 s3, s0, s4 where the compiled block uses vmul.f32 s0, s0, s4. */
 #include "common.h"
 
 struct InterpolationState {
@@ -8,6 +7,7 @@ struct InterpolationState {
     s32 elapsed;     // 0x0C
 };
 
+// Linear interpolation from start to end; returns end once elapsed reaches duration.
 extern "C" f32 FUN_0017fc38(const InterpolationState* state)
 {
     f32 result = state->end;
@@ -16,9 +16,9 @@ extern "C" f32 FUN_0017fc38(const InterpolationState* state)
 
     if (elapsed < duration) {
         f32 start = state->start;
-        f32 difference = result - start;
-        f32 scaled = difference * static_cast<f32>(elapsed);
-        result = scaled / static_cast<f32>(duration) + start;
+        result -= start;
+        result = result * static_cast<f32>(elapsed) / static_cast<f32>(duration);
+        result += start;
     }
 
     return result;

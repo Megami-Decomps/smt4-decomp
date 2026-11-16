@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail keeps the zero path as an unpredicated block after the epilogue and loads both constants up front; built predicates the zero store and loads the constants late. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "shard/JobWork.h"
@@ -30,10 +29,11 @@ u32 FUN_0031bed8(void)
     SlideJob *work = (SlideJob *)jobGetWork(job);
     if (steps == 0) {
         work->start = 0.0f;
-        return 1;
+        work->step = 0.0f;
+    } else {
+        work->start = 1.0f;
+        work->step = -1.0f / steps;
     }
-    work->start = 1.0f;
-    work->step = -1.0f / steps;
     return 1;
 }
 

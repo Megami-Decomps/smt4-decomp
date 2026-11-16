@@ -1,5 +1,6 @@
 /* NON_MATCHING: the null checks on the name come out as `cmp; beq` with the argument moved afterwards, where retail tests the argument register itself (`movs r0, r6`) and loads the table field after the test; the frame setup and the hoisted slot base register differ accordingly */
 #include "battle/BtlEffectLoad.h"
+#include <string.h>
 
 extern "C" {
 
@@ -9,7 +10,6 @@ extern const char DAT_00400904[];
 extern const char DAT_004008c4[];
 
 u32 libc_strlen(const char *text);
-s32 libc_strcmp(const char *a, const char *b);
 s32 libc_strncmp(const char *a, const char *b, u32 count);
 char *libc_strcpy(char *destination, const char *source);
 void memClear(void *buffer, s32 size);
@@ -32,8 +32,8 @@ u32 FUN_003da5e8(BtlEffectWork *work)
         char path[128];
         char file[128];
 
-        if (libc_strlen(name) != 0 && libc_strcmp(name, "0") != 0) {
-            if (libc_strcmp(DAT_0040090c, name) != 0 && (name == NULL || libc_strcmp(name, g_btlEffect.ignoredName) != 0)) {
+        if (libc_strlen(name) != 0 && strcmp(name, "0") != 0) {
+            if (strcmp(DAT_0040090c, name) != 0 && (name == NULL || strcmp(name, g_btlEffect.ignoredName) != 0)) {
                 if (name != NULL) {
                     if (libc_strncmp(name, g_btlEffect.ignoredPrefix, libc_strlen(g_btlEffect.ignoredPrefix)) == 0) {
                         continue;
@@ -44,7 +44,7 @@ u32 FUN_003da5e8(BtlEffectWork *work)
                         bool found = false;
                         for (s32 n = 0; n < 11; n++) {
                             textFormatBuffer(file, DAT_00400904, g_btlEffect.numberedPrefix, n);
-                            if (libc_strcmp(file, name) == 0) {
+                            if (strcmp(file, name) == 0) {
                                 FUN_002276f8(work);
                                 work->numberedEffect = FUN_00246644(n & 0xff, 7, 0);
                                 work->numberedIndex = n;
@@ -57,7 +57,7 @@ u32 FUN_003da5e8(BtlEffectWork *work)
                         }
                     }
                 }
-                if (name == NULL || libc_strcmp(name, g_btlEffect.ignoredNameB) != 0) {
+                if (name == NULL || strcmp(name, g_btlEffect.ignoredNameB) != 0) {
                     memClear(path, 0x80);
                     memClear(file, 0x80);
                     textFormatBuffer(file, DAT_004008c4, name);

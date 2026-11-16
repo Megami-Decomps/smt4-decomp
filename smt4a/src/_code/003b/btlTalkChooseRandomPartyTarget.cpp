@@ -62,7 +62,7 @@ u32 btlTalkChooseRandomPartyTarget()
             s8 seen = 0;
             for (s32 entryIndex = 0; entryIndex < 0x6d; ++entryIndex) {
                 BtlCombatantEntryA *entry = &btlGetMainState()->entries[entryIndex];
-                if ((entry->flags & g_btlMessageFlagMasks.eligible) && !(entry->flags & g_btlMessageFlagMasks.excluded) &&
+                if ((g_btlMessageFlagMasks.eligible & entry->flags) && !(entry->flags & g_btlMessageFlagMasks.excluded) &&
                     entry->unitIndex >= 0 && (entry->flags & g_btlMessageFlagMasks.required)) {
                     if (selected == seen) {
                         result = entry->unitIndex;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: instruction selection/order differs: retail vcvt.u32.f32 s2, s0; compiler vcvt.u32.f32 s0, s0. */
+/* NON_MATCHING (b1454): only the vcvt.u32.f32 destination differs (retail s2, built s0). */
 #include "common.h"
 
 extern "C" {

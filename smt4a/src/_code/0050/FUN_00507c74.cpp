@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00507c74` (_code @ 0x507c74, 0x48 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include <string.h>
 
 extern "C" {
 
-int libc_strcmp(int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -13,7 +13,7 @@ typedef struct {
 } param_3_stack;
 
 extern int libc_strlen(int);
-/* Supplied declaration required: libc_strcmp. */
+/* Supplied declaration required: strcmp. */
 
 
 /* WARNING: Removing unreachable block (ram,0x00508660) */
@@ -67,7 +67,7 @@ void FUN_00507c74(int param_1,int param_2,unsigned int param_3)
       if ((temp_v3 != 0xffffffff) && (temp_v1 = *(int *)(temp_v1 + 4) + temp_v1, temp_v1 != 0)) {
         temp_v4 = temp_v1 + *(int *)(temp_v1 + temp_v3 * 0xc + 8);
       }
-      libc_strcmp(param_2,temp_v4);
+      strcmp((const char *)param_2,(const char *)temp_v4);
     }
   }
   return;

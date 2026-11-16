@@ -1,5 +1,6 @@
 #include "common.h"
 #include "battle/BtlMainAccess.h"
+#include <string.h>
 
 struct EffectSlot {
     char name[0x10];  // 0x00
@@ -22,7 +23,6 @@ static const char g_noEffectName[] = "NOT_EFT";
 extern "C" {
 
 s32 btlScriptUnitHasFlags(void);
-s32 libc_strcmp(const char *a, const char *b);
 
 /* Finds the id of the first of the unit's four effect slots named "NOT_EFT"; 30 when none, -1 when the script unit has flags. */
 s32 FUN_004f6478(EffectBattleState *state)
@@ -36,7 +36,7 @@ s32 FUN_004f6478(EffectBattleState *state)
     for (s32 i = 0; i < 4; i++) {
         EffectSlot *slot = &state->unit->slots[i];
 
-        if (libc_strcmp(g_noEffectName, slot->name) == 0) {
+        if (strcmp(g_noEffectName, slot->name) == 0) {
             return slot->id;
         }
     }

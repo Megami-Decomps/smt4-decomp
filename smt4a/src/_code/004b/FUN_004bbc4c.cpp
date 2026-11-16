@@ -1,13 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004bbc4c` (_code @ 0x4bbc4c, 0x674 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include <string.h>
 struct AocSystemA;
 struct Table03Record;
 
 extern "C" {
 
 int sysMemClear(unsigned int *, int);
-int libc_strcmp(unsigned char *, unsigned int *);
 Table03Record *aocFindTable03RecordByKey(AocSystemA *, unsigned int);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
@@ -23,7 +23,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int *dataTableGetEntries(unsigned int);
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: libc_strcmp. */
+/* Supplied declaration required: strcmp. */
 
 
 void FUN_004bbc4c(unsigned int *param_1,unsigned int param_2,unsigned char param_3,unsigned char param_4)
@@ -196,7 +196,7 @@ void FUN_004bbc4c(unsigned int *param_1,unsigned int param_2,unsigned char param
   *(short *)((int)param_1 + 0x5a) = (short)puVar5[0x10];
   *(unsigned short *)(param_1 + 0x17) = *(unsigned short *)((int)puVar5 + 0x42);
   puVar6 = &LAB_004bc2c0;
-  libc_strcmp(&LAB_004bc2c0,puVar5 + 0x12);
+  strcmp((const char *)&LAB_004bc2c0,(const char *)(puVar5 + 0x12));
   if (puVar6 == (unsigned char *)0x0) {
     *(unsigned char *)(param_1 + 0x19) = 0;
   }

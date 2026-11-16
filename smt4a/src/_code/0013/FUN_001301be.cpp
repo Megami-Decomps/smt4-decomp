@@ -10,6 +10,23 @@ struct OnlineTreeCopyState {
     u8 unk1a[2];
 };
 
+/* Leftmost / rightmost node of the subtree below `node`. */
+static TreeCopyNode* treeMinimum(TreeCopyNode* node)
+{
+    while (node->left != NULL) {
+        node = node->left;
+    }
+    return node;
+}
+
+static TreeCopyNode* treeMaximum(TreeCopyNode* node)
+{
+    while (node->right != NULL) {
+        node = node->right;
+    }
+    return node;
+}
+
 extern "C" {
 TreeCopyNode* FUN_00301df0(ChunkPool* pool);
 TreeCopyNode* FUN_00309fcc(OnlineRecordTree* tree, const TreeCopyNode* source, TreeCopyNode* parent);
@@ -32,16 +49,10 @@ OnlineRecordTree* FUN_001301be(OnlineRecordTree* destination, const OnlineRecord
     state->sentinel->parent = root;
     TreeCopyNode* sentinel = state->sentinel;
     if (root != NULL) {
-        TreeCopyNode* left = root;
-        while (left->left != NULL) {
-            left = left->left;
-        }
+        TreeCopyNode* left = treeMinimum(root);
         sentinel->left = left;
-        TreeCopyNode* right = state->sentinel->parent;
-        while (right->right != NULL) {
-            right = right->right;
-        }
-        state->sentinel->right = right;
+        TreeCopyNode* last = state->sentinel;
+        last->right = treeMaximum(last->parent);
     } else {
         sentinel->left = sentinel;
         state->sentinel->right = state->sentinel;

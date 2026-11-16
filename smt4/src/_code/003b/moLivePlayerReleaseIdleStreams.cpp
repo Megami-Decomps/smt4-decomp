@@ -1,3 +1,4 @@
+/* NON_MATCHING: inlined iterator increment compares the copied node (r1) where retail compares the iterator register (r4); one instruction. */
 #include "mobiclip/MoLiveContainers.h"
 #include "mobiclip/MoLiveObjectHandleMap.h"
 
@@ -27,8 +28,10 @@ struct IdleStreamPlayer {
 extern "C" void moLivePlayerReleaseIdleStreams(IdleStreamPlayer *player)
 {
     ObjectHandleMap::iterator it = player->streams.begin();
+    ObjectHandleMap::iterator current;
     while (it != player->streams.end()) {
-        ObjectHandleMap::iterator current = it++;
+        current = it;
+        it++;
         IdleStream *stream = static_cast<IdleStreamEntry *>(current->second.object)->stream;
         if (stream->active != 0 || stream->queued != 0) {
             stream->active = 0;

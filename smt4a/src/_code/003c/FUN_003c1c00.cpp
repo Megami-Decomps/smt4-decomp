@@ -20,7 +20,7 @@ u32 FUN_003c1c00()
     FUN_00301a08(group, &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
-        if (!(g_btlCandidateMasks.unavailable & entry->flags) &&
+        if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
             (entry->flags & g_btlCandidateMasks.required) &&
             !(g_btlCandidateMasks.excluded & entry->flags) &&
             entry->id == unitId && FUN_003248e4(entry)) {

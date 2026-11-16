@@ -19,13 +19,12 @@ char *FUN_001b43f0(s32 category, s32 id)
     if (category == 0x18) {
         return g_textCategoryTexts[id];
     }
-    TextEntry *table = g_textEntryTable;
     for (s32 i = 0; i < 0x3E7; i++) {
-        if (table[i].category == -1) {
+        if (g_textEntryTable[i].category == -1) {
             return NULL;
         }
-        if (table[i].category == category && table[i].id == id) {
-            return table[i].text;
+        if (g_textEntryTable[i].category == category && g_textEntryTable[i].id == id) {
+            return g_textEntryTable[i].text;
         }
     }
     return NULL;

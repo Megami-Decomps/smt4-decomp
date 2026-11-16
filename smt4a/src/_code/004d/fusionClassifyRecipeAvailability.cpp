@@ -26,9 +26,7 @@ u32 fusionClassifyRecipeAvailability(u32 unused, u32 recipeId, u16 *statuses)
                 if (stock->slots[slot] >= 0) {
                     SlotRecord *record = gameGetSlotRecord(stock->slots[slot]);
                     if (!bitsAt60Test(record, 10)) {
-                        u32 heldId = record->entryId;
-                        u32 ingredientId = recipe->ingredients[i];
-                        if (heldId == ingredientId) {
+                        if (record->entryId == recipe->ingredients[i]) {
                             statuses[i] = 1;
                             break;
                         }

@@ -70,7 +70,9 @@ extern "C" void FUN_0037723c(s32 immediate)
                 flag = canonicalAreaFlag(flag);
                 s32 word = flag / 32;
                 s32 bit = flag % 32;
-                flags->bits[word] |= 1u << bit;
+                u32 bits = flags->bits[word];
+                bits |= 1u << bit;
+                flags->bits[word] = bits;
             }
         }
         for (s32 j = 0; j < 21; ++j) {

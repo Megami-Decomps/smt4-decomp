@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail places the frames == 0 arm (alpha = 0, step = 0) out of line and divides into s1; armcc predicates the first store of that arm, shares the last one and divides into s0. */
+/* NON_MATCHING: layout matches (zero arm first); only the two constants swap registers (retail -1.0f in s2, 1.0f in s1). */
 #include "shard/W6_W6Match2_JobBlend.h"
 
 struct AlphaFadeJob {
@@ -14,12 +14,12 @@ extern "C" u32 scrCommJobStartAlphaFadeOut(void)
     u32 job = scrGetArg(0);
     s32 frames = scrGetArg(1);
     AlphaFadeJob* work = (AlphaFadeJob*)jobGetWork(job);
-    if (frames != 0) {
-        work->alpha = 1.0f;
-        work->alphaStep = -1.0f / (f32)frames;
-    } else {
+    if (frames == 0) {
         work->alpha = 0.0f;
         work->alphaStep = 0.0f;
+    } else {
+        work->alpha = 1.0f;
+        work->alphaStep = -1.0f / (f32)frames;
     }
     return 1;
 }

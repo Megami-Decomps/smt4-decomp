@@ -1,7 +1,7 @@
-/* NON_MATCHING: split points are signed like retail; retail evaluates both segment-length operands before the zero-duration test and schedules the key loads after them. */
+/* NON_MATCHING (b1454): plain `static` progress helper now gives retail's both-operands-first zero test; remaining: retail does not merge the per-arm divisions (98 rows vs 90) and loads the keys after the segment lengths. */
 #include "gfx/SegmentedScalarCurve.h"
 
-static __inline f32 segmentProgress(f32 frame, f32 duration)
+static f32 segmentProgress(f32 frame, f32 duration)
 {
     return duration != 0.0f ? frame / duration : 1.0f;
 }

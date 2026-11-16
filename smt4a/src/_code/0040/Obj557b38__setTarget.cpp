@@ -1,4 +1,3 @@
-/* NON_MATCHING: store scheduling only: armcc merges the stores at 0x10/0x14 into stm and the two float steps into vstm; retail keeps them separate. */
 #include "common.h"
 
 struct RampParameter {
@@ -15,10 +14,9 @@ extern "C" {
 /* Virtual slot: sets the rise, hold and fall lengths (in frames) and the per-frame steps of the rise and fall. */
 void _ZN9Obj557b389setTargetEjjj(RampParameter *self, s32 rise, s32 hold, s32 fall)
 {
-    s32 holdEnd = rise + hold;
     self->riseEnd = rise;
-    self->fallEnd = holdEnd + fall;
-    self->holdEnd = holdEnd;
+    self->holdEnd = hold + rise;
+    self->fallEnd = self->holdEnd + fall;
     self->riseStep = 1.0f / static_cast<f32>(rise);
     self->fallStep = 1.0f / static_cast<f32>(fall);
 }

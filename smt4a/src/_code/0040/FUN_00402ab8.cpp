@@ -3,6 +3,7 @@
 #include "gfx/StereoParallax.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
+#include <string.h>
 
 // Placement record of a sprite part: position and a pointer to its extra metrics.
 struct SpriteRect {
@@ -42,7 +43,6 @@ extern u8* g_renderCtx;
 extern const char DAT_0052d134[];
 
 void efctSetSpeed(f32 speed);
-s32 libc_strcmp(const char* a, const char* b);
 void gameGetPlayerData(void);
 const char* gameGetPlayerName(void);
 void textFormatBuffer(char* out, const char* format, ...);
@@ -59,7 +59,7 @@ void FUN_00402ab8(CaptionPanel* panel, s32 x, s32 y, f32 speed)
     renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
     efctSetSpeed(speed);
     const char* name = panel->record->name;
-    if (libc_strcmp(name, DAT_0052d134) == 0) {
+    if (strcmp(name, DAT_0052d134) == 0) {
         gameGetPlayerData();
         name = gameGetPlayerName();
     }

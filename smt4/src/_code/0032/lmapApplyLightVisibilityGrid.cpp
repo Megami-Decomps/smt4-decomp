@@ -6,6 +6,19 @@ extern s8 DAT_0049f08c[80];
 void sceneAttachLightChild(void *, s32);
 void FUN_00265b78(s32, s32);
 
+/* Copies the visible (non-9) cells of the 8x10 grid, column by column, into DAT_0049f08c. */
+static void collectVisible(const s8 *grid)
+{
+    s32 count = 0;
+    for (s32 column = 0; column < 8; ++column) {
+        for (s32 row = 0; row < 10; ++row) {
+            s8 visible = grid[row * 8 + column];
+            if (visible != 9)
+                DAT_0049f08c[count++] = visible;
+        }
+    }
+}
+
 void lmapApplyLightVisibilityGrid(const s8 *grid)
 {
     // The light collection and per-child state lie beyond the shared recovered map-state prefix.
@@ -18,14 +31,7 @@ void lmapApplyLightVisibilityGrid(const s8 *grid)
         LightState children[1];
     };
     MapLightView *work = reinterpret_cast<MapLightView *>(g_lmapMainState);
-    s32 count = 0;
-    for (s32 column = 0; column < 8; ++column) {
-        for (s32 row = 0; row < 10; ++row) {
-            s8 visible = grid[row * 8 + column];
-            if (visible != 9)
-                DAT_0049f08c[count++] = visible;
-        }
-    }
+    collectVisible(grid);
     for (s32 i = 0; i < work->collection->count; ++i) {
         if (DAT_0049f08c[i] == 1) {
             sceneAttachLightChild(work->collection, i);

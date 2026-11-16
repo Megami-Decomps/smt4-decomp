@@ -2841,7 +2841,7 @@
 0030c6a2 rangeIsEmpty4
 0030c77c rangeIsEmpty5
 0030ccc0 onlineObjectListRemove
-0030ea58 libc_strcmp
+0030ea58 strcmp
 0030ed4e wstrstrU16Scan
 0030ee34 mapIsEmpty
 0030f66c mapIteratorNext9

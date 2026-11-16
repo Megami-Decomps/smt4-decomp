@@ -40,8 +40,8 @@ void partyModelSlotsLoad(PartyModelWork *work)
     s32 i;
 
     for (u32 slot = 0; slot < 42; slot++) {
-        work->slots[slot].unk00 = 0;
         work->slots[slot].modelId = -1;
+        work->slots[slot].unk00 = 0;
     }
     for (i = 0; i < 12; i++) {
         PartyMember *member = FUN_003e503c(i);

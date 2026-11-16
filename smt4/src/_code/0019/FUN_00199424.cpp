@@ -1,4 +1,4 @@
-/* NON_MATCHING: page-entry count blocks match, but retail cross-jumps the page-0 tail into the other page's `add r1,#1` (bne back) while the build keeps it inline, the first slot-table read orders base/index swapped (page vs table+0x9107), and the page-0 loop counter lands in r2/r3 swapped. */
+/* NON_MATCHING (b1454): needs inlined.txt row `btlMainStateGetPartyCaptureId = 0xe1d00bf4` (ldrsh r0,[r0,#180]; retail site 0x199660, after btlGetMainState + two hook nops); with it the rows match (249/249) and only the page-0 tail cross-jump (retail `beq 1f4; add r1,r1,#1` shared with the other page, build `bne 1f0; b 1f4`) and branch targets differ. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "AsdSDK/AsdMemUtil.h"
@@ -38,7 +38,7 @@ struct PartyMenu {
 /* The player record: two ids at +2 and +4. */
 struct PlayerData {
     u8 unk00[2];
-    s16 first;
+    u16 first;
     u16 second;
 };
 
@@ -131,12 +131,12 @@ void FUN_00199424(PartyMenu *menu)
                 if (gameGetSlotTable()->active[menu->page - 1] >= 0) {
                     UnitRecord *unit = gameGetUnitRecord(gameGetSlotTable()->active[menu->page - 1]);
                     if (unit != NULL && FUN_00394d90(id, unit) != 0) {
-                        menu->usable[usableCount] = (s16)id;
+                        menu->usable[usableCount] = (u16)id;
                         usableCount++;
                     }
                 }
             } else {
-                menu->usable[usableCount] = (s16)id;
+                menu->usable[usableCount] = (u16)id;
                 usableCount++;
             }
         }

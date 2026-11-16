@@ -1,4 +1,4 @@
-/* NON_MATCHING: entry-table and scaled-index address registers r0/r1 are exchanged; special-member handling now agrees. */
+/* NON_MATCHING: only the entry-table and scaled-index address registers r0/r1 are exchanged (retail adds the pointer offsets into r1, the index multiply into r0). */
 #include "battle/BtlMainAccess.h"
 #include "shard/W5_W5Match7_BattleMask.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -22,7 +22,7 @@ u32 FUN_0039d87c(void)
     s32 candidateCount = 0;
     s32 first, count;
     FUN_00301a08(group, &first, &count);
-    for (s32 index = first; index < count + first; ++index) {
+    for (s32 index = first; index < first + count; ++index) {
         BtlMainStateA *state = btlGetMainState();
         BtlCombatantEntryA *entry = &state->entries[index];
         u64 flags = entry->flags;

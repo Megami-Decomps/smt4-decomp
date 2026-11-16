@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0015e6f4` (_code @ 0x15e6f4, 0x1b8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include <string.h>
 
 extern "C" {
 
 int FUN_0015e8c4(int, int, unsigned int, int);
 int _ZN21WindowOperationResultC1Eh(...);
-int libc_strcmp(int, unsigned int *);
 int _ZN18WindowStatusResultC1Ej(...);
 int _ZN18WindowStatusResultC1Ev(int *);
 int jyoucyuGetTableEntry(int);
@@ -33,7 +33,7 @@ extern int g_aocMain; /* 0x432fc8 */
 /* Supplied declaration required: FUN_0015e8c4. */
 /* Supplied declaration required: _ZN21WindowOperationResultC1Eh. */
 extern int legacyResourceIdRemap(unsigned int *);
-/* Supplied declaration required: libc_strcmp. */
+/* Supplied declaration required: strcmp. */
 extern int FUN_002ad1e0(int);
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ev. */
@@ -68,7 +68,7 @@ void FUN_0015e6f4(unsigned int *param_1,int param_2,unsigned int *param_3,unsign
   temp_v0 = param_2 + 0x331;
   puVar3 = (unsigned int *)&temp_v2;
   temp_v1 = temp_v0;
-  libc_strcmp(temp_v0,param_3);
+  strcmp((const char *)temp_v0,(const char *)param_3);
   if (temp_v1 != 0) {
     if (*(char *)(param_2 + 0x330) != '\0') {
       temp_v1 = FUN_002c3dfc(temp_v0);

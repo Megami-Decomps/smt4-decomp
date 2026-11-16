@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail loads the 1.0f/0.0f constants after jobGetWork into s0/s1; built hoists them into callee-saved s16/s17 and branches around the clamp (duplicating the jobGetWork call) */
 #include "common.h"
 #include "shard/JobWork.h"
 #include "code/Code0020.h"
@@ -17,15 +16,20 @@ struct JobStepWork {
 
 s32 scrGetArg(u32 index);
 
+// Division counts are limited to 4 while FUN_00203d74 reports true.
+static __inline s32 limitDivisions(s32 divisions)
+{
+    if (FUN_00203d74() != 0 && divisions > 4) {
+        divisions = 4;
+    }
+    return divisions;
+}
+
 /* Script command: sets the job's start/step pair from a division count (capped at 4 when FUN_00203d74 is set). */
 u32 FUN_002e52f8(void)
 {
     u32 job = scrGetArg(0);
-    s32 divisions = scrGetArg(1);
-
-    if (FUN_00203d74() != 0 && divisions > 4) {
-        divisions = 4;
-    }
+    s32 divisions = limitDivisions(scrGetArg(1));
     JobStepWork *work = (JobStepWork *)jobGetWork(job);
     if (divisions == 0) {
         work->range = Vec2(1.0f, 0.0f);

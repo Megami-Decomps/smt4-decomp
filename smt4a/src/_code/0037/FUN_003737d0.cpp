@@ -19,10 +19,9 @@ u32 FUN_003737d0(void)
     FUN_00301a08(choice, &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
-        u64 flags = entry->flags;
-        if ((g_btlCandidateMasks.unavailable & flags) == 0 &&
-            (g_btlCandidateMasks.required & flags) != 0 &&
-            (g_btlCandidateMasks.excluded & flags) == 0 &&
+        if ((g_btlCandidateMasks.unavailable & entry->flags) == 0 &&
+            (g_btlCandidateMasks.required & entry->flags) != 0 &&
+            (g_btlCandidateMasks.excluded & entry->flags) == 0 &&
             (entry->encodedStats.values[statistic] >> 10) == 2) {
             scrSetResult(1);
             return 1;

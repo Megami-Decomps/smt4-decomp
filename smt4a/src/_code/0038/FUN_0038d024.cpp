@@ -18,10 +18,10 @@ u32 FUN_0038d024()
     if (affinity < 21) {
         s32 first, count;
         FUN_00301a08(group, &first, &count);
-        for (s32 index = first; index < count + first; ++index) {
+        for (s32 index = first; index < first + count; ++index) {
             BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
-            if (!(g_btlCandidateMasks.unavailable & entry->flags) &&
-                (g_btlCandidateMasks.required & entry->flags) &&
+            if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
+                (entry->flags & g_btlCandidateMasks.required) &&
                 !(entry->flags & g_btlCandidateMasks.excluded) &&
                 entry->encodedStats.values[affinity] >> 10 == 5) {
                 scrSetResult(1);

@@ -107198,13 +107198,13 @@
       "target_path": "orig/target/_code/002a/FUN_002aa278.o"
     },
     {
-      "base_path": "build/obj/_code/002a/libc_strcmp.o",
+      "base_path": "build/obj/_code/002a/strcmp.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "libc_strcmp",
+            "name": "strcmp",
             "size": 184,
             "vram": "0x2aa568"
           }
@@ -107212,10 +107212,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002a/libc_strcmp.cpp"
+        "source_path": "src/_code/002a/strcmp.cpp"
       },
-      "name": "_code/002a/libc_strcmp",
-      "target_path": "orig/target/_code/002a/libc_strcmp.o"
+      "name": "_code/002a/strcmp",
+      "target_path": "orig/target/_code/002a/strcmp.o"
     },
     {
       "base_path": "build/obj/_code/002a/FUN_002aa624.o",

@@ -16,7 +16,7 @@ u32 FUN_0038bf08(void)
     for (s32 i = 0; i < 0x6d; i++) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
         if ((entry->flags & g_btlCandidateMasks.unavailable) &&
-            (g_btlCandidateMasks.required & entry->flags) &&
+            (entry->flags & g_btlCandidateMasks.required) &&
             !(entry->flags & g_btlCandidateMasks.excluded) &&
             entry->id == id && entry->thresholdView.unk27A >= minimum) {
             scrSetResult(1);

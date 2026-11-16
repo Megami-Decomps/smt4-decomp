@@ -2,11 +2,11 @@
 #include "battle/btlReflect.h"
 #include "battle/btlMain.h"
 #include "battle/btlDebug.h"
+#include <string.h>
 
 extern "C" {
 extern BtlAuxA* g_btlAux;
 
-s32 libc_strcmp(const char* first, const char* second);
 
 ReflectAction* FUN_004fdcd8(s32 actor, u32 options, u32 first, s32 target,
                            u32 third, u32 fourth, u32 value, const char* name)
@@ -36,7 +36,7 @@ ReflectAction* FUN_004fdcd8(s32 actor, u32 options, u32 first, s32 target,
     reinterpret_cast<FloatPayloadView*>(action)->second = 0.0f;
     action->parameter = 0;
     action->word50 = 1;
-    if (name && (!libc_strcmp("Dead_12", name) || !libc_strcmp("Dead_13", name))) {
+    if (name && (!strcmp("Dead_12", name) || !strcmp("Dead_13", name))) {
         action->specialDeath.enabled = 1;
     }
     return action;

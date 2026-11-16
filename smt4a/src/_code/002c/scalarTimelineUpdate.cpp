@@ -1,4 +1,4 @@
-/* NON_MATCHING: saved-register allocation and keyframe-loop guard lowering differ from retail. */
+/* NON_MATCHING: loop head now matches (`s32 offset = 1` before the `*nextKey < 3` guard folds the cc chain); remaining: argument loads (retail `ldm` of the stack args into r5/lr/r4, lr as a general register) and per-key loads are not coalesced into ldrd/ldm in retail */
 #include "shard/W6_W6Match8_ColorKeys.h"
 
 extern "C" void FUN_00229264(f32 *value, f32 step, f32 target);
@@ -14,8 +14,9 @@ extern "C" void scalarTimelineUpdate(const ScalarTimeline *timeline, s32 *elapse
     if (*duration < *elapsed) {
         *elapsed = 0;
         *step = 0.0f;
+        s32 offset = 1;
         if (*nextKey < 3) {
-            for (s32 offset = 1; *nextKey + offset < 4; ++offset) {
+            for (; *nextKey + offset < 4; ++offset) {
                 *duration = timeline->keys[*nextKey + offset].frame - timeline->keys[*nextKey].frame;
                 if (*duration > 0) {
                     *step = (f32)(timeline->keys[*nextKey + offset].value - timeline->keys[*nextKey].value)

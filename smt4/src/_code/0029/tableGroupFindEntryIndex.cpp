@@ -1,7 +1,7 @@
 /* NON_MATCHING: retail unrolls the name-search loop in pairs; this loop remains scalar. */
 #include "gamedata/TableGroup.h"
+#include <string.h>
 
-extern "C" int libc_strcmp(const char *left, const char *right);
 
 // Find a name in the group's fixed-width name section.
 extern "C" s32 tableGroupFindEntryIndex(TableGroupHeader *table, const char *name)
@@ -21,7 +21,7 @@ extern "C" s32 tableGroupFindEntryIndex(TableGroupHeader *table, const char *nam
             return -1;
         }
         for (s32 index = 0; index < section->count; ++index) {
-            if (libc_strcmp(names[index], name) == 0) {
+            if (strcmp(names[index], name) == 0) {
                 return index;
             }
         }

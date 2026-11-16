@@ -13,7 +13,7 @@ typedef struct Tracker {
     /* 0x4125 */ u8 mode[5];
 } Tracker;
 
-static __inline void trackerStoreByte(u8 *field, u32 value)
+static __inline void trackerStoreByte(u8 *field, s32 value)
 {
     *field = value;
 }

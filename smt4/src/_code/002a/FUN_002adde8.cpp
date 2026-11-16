@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the dictionary relative pointer is added as offset+base (retail `addne r2, r3, r0`) and the translation copy loads y,x,z with a str + strd store pair instead of stm + str. */
+/* NON_MATCHING: only the translation copy differs: retail loads y,x,z and stores with a str + strd pair, armcc here uses stm + str. */
 #include "AsdSDK/Source/Gfx/Model/AsdMotionModel.h"
 #include "gfx/ModelBoneLookup.h"
 extern "C" {
@@ -20,10 +20,8 @@ static __inline s32 findBone(ResDicPatricia **dictionary, const char *name)
 u32 FUN_002adde8(AsdMotionModel *model, const char *name, SkeletonVector3 *position)
 {
     ModelBoneResource *resource = ModelBoneResource::cast(model->owner->model.resource);
-    RelativePointer *skeletonReference = &resource->skeleton;
-    ModelBoneSkeleton *skeleton = static_cast<ModelBoneSkeleton *>(skeletonReference->get());
-    RelativePointer *dictionaryReference = &skeleton->dictionary;
-    ResDicPatricia *dictionary = static_cast<ResDicPatricia *>(dictionaryReference->get());
+    ModelBoneSkeleton *skeleton = resource->skeleton.get();
+    ResDicPatricia *dictionary = skeleton->dictionary.get();
     s32 bone = findBone(&dictionary, name);
     if (bone < 0) {
         position->values[0] = 0.0f;

@@ -24,7 +24,7 @@ f32 __hardfp_floorf(f32 value);
 CurveKey *FUN_003f887c(Curve *curve, f32 time)
 {
     f32 position = time / curve->duration * 32.0f;
-    u32 frame = (s32)__hardfp_floorf(position + 0.5f);
+    u32 frame = (s32)__hardfp_floorf(0.5f + position);
     CurveKey *key = &curve->keys[0];
     if (frame < key->frame) {
         return key;

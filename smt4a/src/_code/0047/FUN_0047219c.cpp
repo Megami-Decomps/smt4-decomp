@@ -17,7 +17,7 @@ u32 FUN_0047219c(void)
     RequestParameters request;
     request.kind = 1;
     request.word3 = 0;
-    request.result = WindowStatusResult(0);
+    request.result = WindowStatusResult(request.word3);
     request.kind = 100;
 
     if (sysLightEventTryWait(&g_aocMain->objB) != 0) {

@@ -3,6 +3,7 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
+#include <string.h>
 
 extern "C" {
 
@@ -37,7 +38,6 @@ u32 FUN_004038e0(TalkWindow *window, u16 id);
 void drawSetColorFromRGBA8(u32 color);
 TalkLayout *asdTMTexTableEntryAt(u32 group, u32 id);
 void FUN_00183bb0(void);
-s32 libc_strcmp(const char *a, const char *b);
 void *gameGetPlayerData(void);
 const char *gameGetPlayerName(void);
 void textFormatBuffer(void *buffer, const char *format, const char *text);
@@ -99,7 +99,7 @@ void FUN_004045ac(TalkWindow *window, s32 x, s32 y, f32 scale)
         const char *name = window->message->speaker;
         char text[64];
 
-        if (libc_strcmp(name, DAT_0052d134) == 0) {
+        if (strcmp(name, DAT_0052d134) == 0) {
             gameGetPlayerData();
             name = gameGetPlayerName();
         }

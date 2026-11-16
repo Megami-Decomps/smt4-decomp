@@ -1,4 +1,4 @@
-/* NON_MATCHING: layout and sxtb match; retail keeps the quotient in s2 and loads the maximum argument before the coin test, the build uses s0 and a predicated move. */
+/* NON_MATCHING: retail copies maximum into r1 once before the coin branch (`mov r1, r5; beq`), the build predicates it per arm (`moveq r1, r5` / `mov r1, r5`). */
 #include "common.h"
 
 extern "C" s32 randBetween(s32 minimum, s32 maximum);

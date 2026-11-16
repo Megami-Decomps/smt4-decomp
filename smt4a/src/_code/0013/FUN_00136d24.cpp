@@ -1,3 +1,4 @@
+/* NON_MATCHING: retail allocates interpolation start/end to s17/s16 with separate vmoveq per arm; build gives s16/s17 and merges them into one vmoveq.f64. */
 #include "common.h"
 
 /* A 0..1 fader: 0 = off, 1 = fading in, 2 = fading out, 3 = on. */

@@ -1,3 +1,4 @@
+/* NON_MATCHING: retail loads DAT_00589280 into r2 before the push (r0 and r1 stay live, so r0 holds the zero and `strd r0, [sp]` stores the two stack arguments); the build loads it into r0 and stores the stack arguments separately. */
 #include "common.h"
 
 typedef void (*FatalBreakCallback)(u32, u32, u32, u32, u32, u32);

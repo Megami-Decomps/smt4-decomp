@@ -1,4 +1,4 @@
-/* NON_MATCHING: scalar vector subtraction load grouping, float comparisons, and loop branch layout differ. */
+/* NON_MATCHING (b1454): arm layout and the absolute-value compare match; retail loads previous/point as vldmia triples (vldm, vstmia {s1-s3}) and keeps the point kind load per arm. */
 #include "shard/W6_W6Match2_VectorQueue.h"
 
 extern "C" {
@@ -11,7 +11,12 @@ void FUN_001e33e4(void)
     VectorQueue *queue = &g_vectorQueueWork->queues[g_vectorQueueWork->activeQueue];
     for (s32 index = 0; index < (s32)queue->count; ++index) {
         QueuedVector *point = &queue->entries[index];
-        if (index != 0) {
+        if (index == 0) {
+            point->kind |= ~1U;
+            point->direction.x = 0.0f;
+            point->direction.y = 0.0f;
+            point->direction.z = 0.0f;
+        } else {
             point->kind |= 1;
             QueuedVector *previous = point - 1;
             f32 distance = mathDistanceBetweenPoints(point->x, point->y, point->z,
@@ -30,11 +35,6 @@ void FUN_001e33e4(void)
             point->direction.x = x;
             point->direction.y = y;
             point->direction.z = z;
-        } else {
-            point->kind |= ~1U;
-            point->direction.x = 0.0f;
-            point->direction.y = 0.0f;
-            point->direction.z = 0.0f;
         }
     }
     ++g_vectorQueueWork->activeQueue;

@@ -1,4 +1,3 @@
-/* NON_MATCHING: same arithmetic; armcc predicates the span <= 0 arm (vldrle/vstrle) where retail branches around it, and the two stores of the step differ in register. */
 #include "classes/Obj4727e8.h"
 
 extern "C" {
@@ -19,14 +18,14 @@ void Obj4727e8::initEntries()
     u32 count;
     u32 i;
 
-    if (span <= 0) {
-        table->base = start;
-        table->step = 0.0f;
-    } else {
+    if (span > 0) {
         f32 end = ((1.0f - counter->endBlend) + shiftRandomNextFraction(0) * counter->endBlend) * counter->endScale;
 
         table->base = start;
         table->step = (end - start) / (f32)span;
+    } else {
+        table->base = start;
+        table->step = 0.0f;
     }
     count = counter->count;
     for (i = 0; i < count; i++) {

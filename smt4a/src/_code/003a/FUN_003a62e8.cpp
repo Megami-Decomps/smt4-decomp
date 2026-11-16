@@ -1,4 +1,3 @@
-/* NON_MATCHING: slot return and replacement value swap r4/r5 at the final update. */
 #include "shard/W5_W5Match7_SelectedRecord.h"
 #include "shard/W5_W5Match2_PairedIds.h"
 
@@ -6,13 +5,14 @@ extern "C" {
 s32 recordContainsPairedId(const PairedIdList *, u32 id);
 u16 FUN_003f3104(const void *owner);
 
-static __inline s32 findOrAllocateSelection(u16 id)
+static s32 findOrAllocateSelection(u16 id)
 {
-    for (s32 index = 0; index < 24; ++index) {
+    s32 index;
+    for (index = 0; index < 24; ++index) {
         if (FUN_002613f0(index)->values[0] == id)
             return index;
     }
-    for (s32 index = 0; index < 24; ++index) {
+    for (index = 0; index < 24; ++index) {
         if (FUN_002613f0(index)->values[0] == 0) {
             SelectedRecord *empty = FUN_002613f0(index);
             empty->values[0] = 0;

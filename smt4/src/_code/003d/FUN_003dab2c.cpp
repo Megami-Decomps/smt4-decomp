@@ -1,5 +1,6 @@
 /* NON_MATCHING: the stack layout and register allocation differ - retail keeps the current name pointer in the first word of the 128-byte text buffer and fetches the effect work through r7/r8; the control flow and calls are the same. */
 #include "common.h"
+#include <string.h>
 
 extern "C" {
 
@@ -27,7 +28,6 @@ extern const char DAT_00400904[];           /* "%s%02d" */
 extern const char DAT_004008c4[];           /* "battle/effect/%s.eft" */
 
 u32 libc_strlen(const char *s);
-s32 libc_strcmp(const char *a, const char *b);
 s32 libc_strncmp(const char *a, const char *b, u32 n);
 char *libc_strcpy(char *destination, const char *source);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
@@ -52,13 +52,13 @@ u32 FUN_003dab2c(EffectWork *work)
         if (libc_strlen(name) == 0) {
             continue;
         }
-        if (libc_strcmp(name, "0") == 0) {
+        if (strcmp(name, "0") == 0) {
             continue;
         }
-        if (libc_strcmp(DAT_0040090c, name) == 0) {
+        if (strcmp(DAT_0040090c, name) == 0) {
             continue;
         }
-        if (name != NULL && libc_strcmp(name, g_btlEffect[4]) == 0) {
+        if (name != NULL && strcmp(name, g_btlEffect[4]) == 0) {
             continue;
         }
         if (name != NULL && libc_strncmp(name, g_btlEffect[3], libc_strlen(g_btlEffect[3])) == 0) {
@@ -68,7 +68,7 @@ u32 FUN_003dab2c(EffectWork *work)
         if (name != NULL && libc_strncmp(name, g_btlEffect[0], libc_strlen(g_btlEffect[0])) == 0) {
             for (u32 j = 0; j < 11; j++) {
                 textFormatBuffer(text, DAT_00400904, g_btlEffect[0], j);
-                if (libc_strcmp(text, name) == 0) {
+                if (strcmp(text, name) == 0) {
                     FUN_002276f8(work);
                     *reinterpret_cast<u32 *>(reinterpret_cast<u8 *>(work) + 0x3034) = FUN_00246644(j & 0xff, 7, 0);
                     *(reinterpret_cast<u8 *>(work) + 0x3038) = j;
@@ -80,7 +80,7 @@ u32 FUN_003dab2c(EffectWork *work)
                 continue;
             }
         }
-        if (name != NULL && libc_strcmp(name, g_btlEffect[5]) == 0) {
+        if (name != NULL && strcmp(name, g_btlEffect[5]) == 0) {
             continue;
         }
         memClear(path, 0x80);

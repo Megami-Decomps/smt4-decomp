@@ -1,5 +1,6 @@
 #include "common.h"
 #include "battle/BtlMainAccess.h"
+#include <string.h>
 
 extern "C" {
 
@@ -17,7 +18,6 @@ struct EffectTable {
 
 extern const char DAT_0040090c[]; /* "NOT_EFT" */
 s32 FUN_00293230(void);
-s32 libc_strcmp(const char *a, const char *b);
 
 /* Returns the value of the first of four entries named "NOT_EFT"; -1 while busy, 30 if none. */
 s32 FUN_002281a4(EffectTable *table)
@@ -33,7 +33,7 @@ s32 FUN_002281a4(EffectTable *table)
     result = 30;
     for (i = 0; i < 4; i++) {
         EffectEntry *entry = &((EffectEntry *)(table->base + 0x58))[i];
-        if (libc_strcmp(DAT_0040090c, entry->name) == 0) {
+        if (strcmp(DAT_0040090c, entry->name) == 0) {
             return entry->value;
         }
     }

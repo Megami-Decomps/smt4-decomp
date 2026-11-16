@@ -2,6 +2,7 @@
 #include "common.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/BattleHelpers.h"
+#include <string.h>
 
 struct BattleMessageEntry {
     char text[0x10]; /* 0x00 */
@@ -27,7 +28,6 @@ extern "C" {
 extern void *g_btlAux;
 extern BattleMessageMask g_btlMessageFlagMasks;
 s32 libc_strlen(const char *);
-s32 libc_strcmp(const char *, const char *);
 BattleMessageFlags *FUN_003f0e20(void *battle, s32 target);
 void FUN_004fdcd8(s32 value, s32, u32, s32, s32, u32, u16, const char *);
 
@@ -38,7 +38,7 @@ void btlEmitMessageTableEntries(s32 actor, u32 unused, BattleMessageTable *table
     void *battle = btlGetMainState();
     for (s32 index = 0; index < 4; ++index) {
         const char *text = table->entries[index].text;
-        if (libc_strlen(text) != 0 && libc_strcmp(text, "0") != 0) {
+        if (libc_strlen(text) != 0 && strcmp(text, "0") != 0) {
             u16 type = table->entries[index].type;
             s32 value = btlUnitGetSkillValue(g_btlAux) * multiplier;
             u32 side = 1;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: signed enable flag recovers the split address, but prologue placement and state/marker scratch registers still differ. */
+/* NON_MATCHING: only the hide arm's shown && enabled test differs (retail if-converts it: cmp; ldrbne; cmpne; the build branches). */
 #include "common.h"
 #include "classes/Obj4209cc.h"
 
@@ -16,7 +16,7 @@ typedef struct LmapMarkerModel {
 
 typedef struct LmapMarker {
     /* 0x00 */ s8 enabled;
-    /* 0x01 */ u8 shown;
+    /* 0x01 */ s8 shown;
     /* 0x02 */ u8 unk02[0x86];
 } LmapMarker;
 

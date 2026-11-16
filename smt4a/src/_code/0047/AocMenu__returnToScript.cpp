@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail makes a20-byte argument snapshot before queueing; canonical const-pointer API does not model the unresolved invisible-reference value ABI. No steering-only copy added. */
+/* NON_MATCHING: layout, request snapshot (real AocMain::queueRequest), tst/tsteq and flag-bit tests match; retail keeps state=3/substate=0 as one STM per arm without hoisting, while the build hoists the constant 3 (two STRs) and the flags address. */
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match8_AocQuestReturn.h"
@@ -7,12 +7,17 @@
 
 extern "C" {
 extern AocMain *g_aocMain;
-void _ZN7AocMain12queueRequestE17RequestParametersji(QueuedRequestState *state, const RequestParameters *parameters, u32 argument, s32 mode);
 void scrScriptProcessDestroy(ScriptState *process);
 ScriptState *FUN_00275bc8(void *script, void *messages);
 void msgWindowReset();
 void messageBannerRestartOrClear();
 void ifTouchRegionRemove();
+
+/* Bit `bit` of a flag word, as 0 or 1. */
+static __inline u32 flagBit(u32 flags, u32 bit)
+{
+    return (flags & (1u << bit)) >> bit;
+}
 
 void AocMenu::returnToScript()
 {
@@ -23,7 +28,10 @@ void AocMenu::returnToScript()
             return;
         }
         u32 flags = g_aocMain->flags;
-        if ((flags & 4) != 0 || (flags & 8) != 0) {
+        if ((flags & 4) != 0) {
+            return;
+        }
+        if ((flags & 8) != 0) {
             return;
         }
         scrScriptProcessDestroy(work->process);
@@ -35,31 +43,37 @@ void AocMenu::returnToScript()
         messageBannerRestartOrClear();
         ifTouchRegionRemove();
         ifTouchRegionRemove();
-    } else {
-        u32 flags = g_aocMain->flags;
-        g_aocMain->flags = flags & ~0x70;
-        if ((flags & 0x10) == 0) {
-            RequestParameters parameters;
-            parameters.kind = 1;
-            parameters.word3 = 0;
-            parameters.result = WindowStatusResult(0);
-            parameters.kind = 200;
-            u32 argument;
-            if (work->contentCode == 0x6a) {
-                argument = work->argument;
-            } else {
-                argument = (g_aocMain->flags & 0x100) != 0 ? 2 : 1;
-            }
-            _ZN7AocMain12queueRequestE17RequestParametersji((QueuedRequestState *)g_aocMain, &parameters, argument, 0);
-            work->substate = 1;
-            return;
+        work->state = 3;
+        work->substate = 0;
+        if (work->child != NULL) {
+            delete work->child;
+            work->child = NULL;
         }
+        return;
     }
-    work->state = 3;
-    work->substate = 0;
-    if (work->child != NULL) {
-        delete work->child;
-        work->child = NULL;
+    u32 closing = flagBit(g_aocMain->flags, 4);
+    g_aocMain->flags &= ~0x70;
+    if (closing) {
+        work->state = 3;
+        work->substate = 0;
+        if (work->child != NULL) {
+            delete work->child;
+            work->child = NULL;
+        }
+        return;
     }
+    RequestParameters parameters;
+    parameters.kind = 1;
+    parameters.word3 = 0;
+    parameters.result = WindowStatusResult(parameters.word3);
+    parameters.kind = 200;
+    u32 argument;
+    if (work->contentCode == 0x6a) {
+        argument = work->argument;
+    } else {
+        argument = (g_aocMain->flags & 0x100) != 0 ? 2 : 1;
+    }
+    g_aocMain->queueRequest(parameters, argument, 0);
+    work->substate = 1;
 }
 }

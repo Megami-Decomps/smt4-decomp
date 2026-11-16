@@ -45,8 +45,8 @@ are listed in `config/third_party.txt` and not counted ([what counts](docs/proje
 
 | Version | First-party functions | Proven by relink | Readable | Third-party (not counted) |
 |---|---|---|---|---|
-| `smt4` | 7,784 | 4,931 | 2,053 | 3,105 |
-| `smt4a` | 9,579 | 5,956 | 2,507 | 7,757 |
+| `smt4` | 7,784 | 4,964 | 2,066 | 3,105 |
+| `smt4a` | 9,579 | 6,041 | 2,524 | 7,757 |
 
 "Proven" is the number that counts: objdiff ignores some operand differences, relink does not. The
 [project notes](docs/project.md#proof) explain the measurements and the six functions per game that

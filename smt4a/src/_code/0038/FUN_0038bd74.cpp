@@ -16,9 +16,8 @@ u32 FUN_0038bd74(void)
     u32 id = scrGetArg(0);
     for (s32 slot = 0; slot < 109; ++slot) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[slot];
-        u64 flags = entry->flags;
-        if ((flags & g_btlCandidateMasks.unavailable) && (flags & g_btlCandidateMasks.required) &&
-                !(flags & g_btlCandidateMasks.excluded) && entry->id == id) {
+                if ((g_btlCandidateMasks.unavailable & entry->flags) && (g_btlCandidateMasks.required & entry->flags) &&
+                !(g_btlCandidateMasks.excluded & entry->flags) && entry->id == id) {
             if (entry->record) {
                 for (s32 i = 0; i < 8; ++i) {
                     Table04Record *skill = dataTable04FindById(entry->record->skills[i]);

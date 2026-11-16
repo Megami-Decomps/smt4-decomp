@@ -1,7 +1,11 @@
-/* NON_MATCHING: the port byte swap is expanded into shifts instead of rev16 and Thumb register allocation differs; the dispatch on the packet flags and the call sequence are the same. */
+/* NON_MATCHING: both port byte swaps are REV16 now; Thumb register allocation and the stack frame (retail 52 bytes) differ; the dispatch on the packet flags and the call sequence are the same. */
 #include "common.h"
 
 extern "C" {
+static __inline u16 byteSwap16(u16 value)
+{
+    return (u16)(((value & 0xff) << 8) | ((value >> 8) & 0xff));
+}
 
 /* The result object the dispatcher returns through a hidden pointer. */
 typedef struct OnlineResult OnlineResult;
@@ -119,8 +123,8 @@ void FUN_002ef34c(OnlineResult *result, OnlineClient *client, OnlinePacket *pack
 
         onlineSockAddrConstruct(&address);
         onlineSockAddrCopy(&address, DAT_005949d8.peers + 8);
-        u16 port = onlineUrlGetAddress(url)->port;
-        address.port = (u16)((port << 8) | (port >> 8));
+        u16 port = byteSwap16(onlineUrlGetAddress(url)->port);
+        address.port = byteSwap16(port);
         FUN_002eb17c(packet, &address);
         client->relayCountA++;
         client->relayBytesA += FUN_002eed8c(packet);

@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the u64 mask loads of the `required` and `excluded` tests differ (retail loads the first as two ldr into ip/r3 and the third with ldm; the build the other way round); the range struct, loop and the other tests match. */
 #include "battle/BtlMainAccess.h"
 #include "battle/BattleHelpers.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -25,8 +24,8 @@ u32 FUN_0034e27c(void)
         BtlMainStateA *state = btlGetMainState();
         BtlCombatantEntryA *entry = &state->entries[index];
         if (!(g_btlCandidateMasks.unavailable & entry->flags) &&
-            (g_btlCandidateMasks.required & entry->flags) &&
-            !(entry->flags & g_btlCandidateMasks.excluded) && entry->id == id) {
+            (entry->flags & g_btlCandidateMasks.required) &&
+            !(g_btlCandidateMasks.excluded & entry->flags) && entry->id == id) {
             scrSetResult(1);
             return 1;
         }

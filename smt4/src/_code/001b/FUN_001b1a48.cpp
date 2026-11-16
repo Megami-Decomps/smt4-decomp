@@ -1,10 +1,10 @@
 #include "battle/BtlMainAccess.h"
+#include <string.h>
 
 extern "C" {
 void FUN_00282820(s32 position, u32 first, u32 second, s32 listedId, s32 layer, u32 mode, u32 kind, const char *text);
 BtlEntry *btlMainFindEntryByListedId(BtlMainState *, s32 id);
 s32 FUN_0028299c(u32 context);
-s32 libc_strcmp(const char *first, const char *second);
 u32 libc_strlen(const char *text);
 extern const char DAT_00400440[];
 extern u32 DAT_00435d18;
@@ -23,7 +23,7 @@ void FUN_001b1a48(s32 side, u32 first, const void *configuration, s32 spacing, u
     BtlMainState *battle = btlGetMainState();
     for (s32 index = 0; index < 4; ++index) {
         const char *text = config->entries[index].text;
-        if (libc_strlen(text) && libc_strcmp(text, DAT_00400440)) {
+        if (libc_strlen(text) && strcmp(text, DAT_00400440)) {
             u32 kind = config->entries[index].kind;
             s32 offset = FUN_0028299c(DAT_00435d18) * spacing;
             u32 mode = 2;

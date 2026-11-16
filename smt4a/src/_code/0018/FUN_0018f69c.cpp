@@ -3,6 +3,7 @@
 #include "shard/S2GrTexture.h"
 #include "classes/Texture.h"
 #include <new>
+#include <string.h>
 
 #define MATERIAL_ENTRY_COUNT 6
 #define NAME_NOT_FOUND 0xFFFF
@@ -80,7 +81,6 @@ inline void applyTextureSampler(GrTextureUnit *unit, const NamedModelTexture *bo
 extern "C" {
 u32 libc_strlen(const u16 *text);
 s32 FUN_001a7a20(void *names, const void *name, u32 length);
-s32 libc_strcmp(const char *first, const char *second);
 void gfxModelRebuildTextureCommands(ModelTextureBindings *model, MaterialTextureCommands *commands,
                                     MaterialTextureState *state, const MaterialTextureSampler *first,
                                     const MaterialTextureSampler *second, const MaterialTextureSampler *third,
@@ -115,7 +115,7 @@ u32 FUN_0018f69c(ModelTextureBindings *model, ModelBindOwner *owner, u8 *replace
                         MaterialEntry *entry = table->entries;
                         MaterialEntry *tableEnd = table->entries + table->count;
                         for (; entry != tableEnd; ++entry) {
-                            if (libc_strcmp(entry->name, material->entryNames[slot]) == 0)
+                            if (strcmp(entry->name, material->entryNames[slot]) == 0)
                                 break;
                         }
                         if (entry == table->entries + table->count)

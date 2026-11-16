@@ -1,11 +1,11 @@
 /* NON_MATCHING: directory subobject addressing and scan-loop control match; saved binding/status registers and the first error assignment differ. */
 #include "gfx/NamedSubresourceSelection.h"
 #include "gfx/NamedResourceBindings.h"
+#include <string.h>
 
 extern "C" {
 u32 libc_strlen(const char *);
 u32 FUN_001a7a20(const void *, const char *, u32);
-s32 libc_strcmp(const char *, const char *);
 }
 
 static __inline NamedSubresourceEntry *findSubresource(NamedSubresourceGroup *group, const char *name)
@@ -13,7 +13,7 @@ static __inline NamedSubresourceEntry *findSubresource(NamedSubresourceGroup *gr
     if (name) {
         NamedSubresourceEntry *entry = group->entries;
         NamedSubresourceEntry *end = entry + group->count;
-        while (entry != end && libc_strcmp(entry->name, name) != 0)
+        while (entry != end && strcmp(entry->name, name) != 0)
             ++entry;
         if (entry != group->entries + group->count)
             return entry;

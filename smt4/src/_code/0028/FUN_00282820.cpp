@@ -1,11 +1,11 @@
 /* NON_MATCHING: reflection factory arguments and special-name comparisons use different saved registers. */
 /* Creates a named reflection action and marks the two special death animations. */
 #include "battle/btlReflect.h"
+#include <string.h>
 
 extern "C" {
 extern void *DAT_00435d18;
 u32 FUN_003d98a0(void *table, const char *name);
-s32 libc_strcmp(const char *first, const char *second);
 
 __softfp ReflectAction *FUN_00282820(s32 actor, u32 options, u16 first, s32 target,
     s16 third, s16 fourth, f32 value, const char *name)
@@ -26,7 +26,7 @@ __softfp ReflectAction *FUN_00282820(s32 actor, u32 options, u16 first, s32 targ
     action->extraIds.fourth = fourth;
     action->scalar = value;
     if (name != NULL &&
-        (libc_strcmp("Dead_12", name) == 0 || libc_strcmp("Dead_13", name) == 0)) {
+        (strcmp("Dead_12", name) == 0 || strcmp("Dead_13", name) == 0)) {
         action->specialDeath.enabled = 1;
     }
     return action;

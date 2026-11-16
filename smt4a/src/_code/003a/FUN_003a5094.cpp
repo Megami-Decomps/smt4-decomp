@@ -1,4 +1,3 @@
-/* NON_MATCHING: profile comparisons load halfwords individually instead of retail's packed-word snapshot. */
 #include "camp/CampCec/CecProfile.h"
 #include "camp/CampCec/CampCecEdit.h"
 #include "gamedata/PlayerDataBlock.h"
@@ -16,15 +15,17 @@ u32 FUN_003a5094(void)
     };
     EditProfileView *edit = (EditProfileView *)g_campCecEdit;
     if (edit != NULL) {
-        const CecProfile *current = reinterpret_cast<const CecProfile *>(gameGetPlayerData());
+        /* The player's profile is snapshotted as one 16-byte word block (an ldm), then compared by halfword. */
+        union ProfileWords { u32 words[4]; u16 values[8]; };
+        ProfileWords current = *reinterpret_cast<const ProfileWords *>(gameGetPlayerData());
         CecProfile saved = edit->saved;
-        return current->values[0] != saved.values[0] ||
-               current->values[1] != saved.values[1] ||
-               current->values[2] != saved.values[2] ||
-               current->values[3] != saved.values[3] ||
-               current->values[4] != saved.values[4] ||
-               current->values[5] != saved.values[5] ||
-               saved.values[6] != current->values[6];
+        return current.values[0] != saved.values[0] ||
+               current.values[1] != saved.values[1] ||
+               current.values[2] != saved.values[2] ||
+               current.values[3] != saved.values[3] ||
+               current.values[4] != saved.values[4] ||
+               current.values[5] != saved.values[5] ||
+               current.values[6] != saved.values[6];
     }
     return 0;
 }

@@ -67,7 +67,7 @@ void FUN_0039c728(MapNaviDisplay *display)
         f32 scale = naviMainGetParameter(mapState);
         CursorPosition position = *NaviMain_GetCursorPos(mapState);
         position.x = work->velocityX / scale + position.x;
-        position.y = work->velocityY / scale + position.y;
+        position.y = work->velocityY / position.y + scale;
         NaviMain_SetCursorPos(mapState, &position);
         work->overlayDirty = 1;
     }

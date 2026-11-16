@@ -26,8 +26,7 @@ void uiTexLoaderUpdate(UiTexLoader *loader)
 
     if (loader->next.keyframe != UI_TEX_NONE && asdTMTexTableNodeIsLoaded(UI_TEX_TABLE, loader->next.keyframe) != 0 && uiSpriteGetCompletionState((const UiAnimatedSprite *)&loader->sprite) != 0) {
         s32 entryFrame = loader->entries[flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(loader))]->frame + 1;
-        s32 keyframe = loader->next.keyframe;
-        if (keyframe == entryFrame) {
+        if (loader->next.keyframe == entryFrame) {
             loader->pending.node = loader->next.node;
             loader->pending.keyframe = loader->next.keyframe;
             loader->next.node = UI_TEX_NONE;

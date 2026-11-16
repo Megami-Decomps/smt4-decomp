@@ -1,4 +1,3 @@
-/* NON_MATCHING: texture is saved to r5 early and dimension/store addresses use r0 instead of retail r1, matching the IV image-attachment near miss. Candidate O2. */
 #include "AsdSDK/Source/Gfx/Effect/AsdEffectTexture.h"
 #include "shard/W6_W6Match5_TextureAttachment.h"
 
@@ -15,7 +14,8 @@ void textureAttachmentSetEffectImage(TextureAttachment* attachment, EffectTextur
     f32 height = (f32)texture->dimensions.height;
     attachment->halfWidth = width * 0.5f * 0.0625f;
     attachment->halfHeight = height * 0.5f * 0.0625f;
-    attachment->content->model->texture = texture;
+    TextureAttachmentModel* model = attachment->content->model;
+    model->texture = texture;
     refCountIncrement(texture);
     asdTextureRelease(texture);
 }

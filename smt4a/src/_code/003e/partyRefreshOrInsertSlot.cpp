@@ -7,9 +7,9 @@ void battleRecordInitializeFromDefinition(PartySlotA *record, u32 definition);
 
 static __inline PartySlotA *resolvePartyRecord(u16 index)
 {
-    if (index >= 12)
-        return NULL;
-    return &gameGetSlotTable()->slots[index];
+    if (index < 12)
+        return &gameGetSlotTable()->slots[index];
+    return NULL;
 }
 
 // Refresh an existing party record or insert it into the first empty slot.

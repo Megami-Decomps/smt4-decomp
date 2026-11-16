@@ -27,7 +27,7 @@ u32 FUN_00373364()
         BtlMainStateA *state = btlGetMainState();
         BtlCombatantEntryA *entry = &state->entries[index];
         if (!(g_btlCandidateMasks.unavailable & entry->flags) &&
-            (g_btlCandidateMasks.required & entry->flags) &&
+            (entry->flags & g_btlCandidateMasks.required) &&
             !(entry->flags & g_btlCandidateMasks.excluded) && entry->id == unitId &&
             entryHpPercentage(entry) <= percentage) {
             scrSetResult(1);

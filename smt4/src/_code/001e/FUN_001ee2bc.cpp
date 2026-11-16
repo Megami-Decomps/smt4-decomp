@@ -1,4 +1,4 @@
-/* NON_MATCHING: key-search loop lowering and final interpolation register allocation differ. */
+/* NON_MATCHING (b1454): only the key-field load order (retail: start.frame, start.value, end.frame, end.value) and the integer/VFP registers of the final segment differ. */
 #include "AsdSDK/Source/Gfx/Effect/EffectResourceKeys.h"
 
 extern "C" f32 FUN_00291620(s32, s32, s32);
@@ -7,28 +7,26 @@ extern "C" f32 FUN_00291620(s32, s32, s32);
 extern "C" void FUN_001ee2bc(EffectResourceKeyTrack *track,
                             const EffectResourceKeyTrack *source)
 {
-    s32 distance = 1;
     if (track->index >= 3)
         track->index = 4;
     s32 current = track->index;
-    if (current + 1 < 4) {
-        while ((track->duration = source->keys[current + distance].frame -
-                                 source->keys[current].frame) <= 0) {
-            ++distance;
-            if (current + distance >= 4)
-                return;
-        }
+    for (s32 distance = 1; current + distance < 4; ++distance) {
+        track->duration = source->keys[current + distance].frame - source->keys[current].frame;
+        if (track->duration <= 0)
+            continue;
         if (track->keys[current + distance].value != 0 &&
             track->keys[current + distance].resource > 0) {
             f32 adjustment = FUN_00291620(2, track->keys[current + distance].resource, 1);
             track->keys[track->index + distance].value -= (s32)adjustment;
         }
         s32 nextIndex = track->index + distance;
+        const EffectResourceKey *start = &track->keys[track->index];
         const EffectResourceKey *next = &track->keys[nextIndex];
-        f32 duration = (f32)(next->frame - track->keys[track->index].frame);
-        f32 difference = (f32)(next->value - track->keys[track->index].value);
-        track->step = difference / duration;
+        s32 frameCount = next->frame - start->frame;
+        s32 valueChange = next->value - start->value;
+        track->step = (f32)valueChange / (f32)frameCount;
         track->target = (f32)next->value;
         track->index = nextIndex;
+        return;
     }
 }

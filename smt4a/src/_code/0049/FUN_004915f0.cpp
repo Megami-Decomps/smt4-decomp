@@ -1,3 +1,4 @@
+/* NON_MATCHING: register allocation only: retail scales the entry index (index * 3) in r0, the build uses r2 for that temporary. */
 #include "ui/NaviCategorySelection.h"
 
 struct NaviAvailabilityEntry {
@@ -13,11 +14,7 @@ struct NaviAvailabilityEntry {
 };
 // This aligned view leaves the shared work's odd-address byte padding unchanged.
 struct NaviAvailabilityView {
-    u8 unk00000[0x64];
-    s8 selection;
-    u8 unk00065[0x7B92 - 0x65];
-    u8 refresh;
-    u8 unk07B93[0x965];
+    u8 unk00000[0x84F8];
     NaviAvailabilityEntry entries[2048];
     s32 count;
     u32 mode;
@@ -25,7 +22,7 @@ struct NaviAvailabilityView {
 typedef char NaviAvailabilityLayoutCheck[
     sizeof(NaviAvailabilityEntry) == 0x30 && offsetof(NaviAvailabilityEntry, category) == 6 &&
     offsetof(NaviAvailabilityEntry, completionFlag) == 8 &&
-    offsetof(NaviAvailabilityView, selection) == 0x64 && offsetof(NaviAvailabilityView, entries) == 0x84F8 &&
+    offsetof(NaviAvailabilityView, entries) == 0x84F8 &&
     offsetof(NaviAvailabilityView, count) == 0x204F8 &&
     offsetof(NaviAvailabilityView, mode) == 0x204FC ? 1 : -1];
 
@@ -41,7 +38,7 @@ void FUN_004915f0(NaviCategorySelectionWork *work)
     s32 index;
     for (index = 0; index < state->count; ++index) {
         NaviAvailabilityEntry *entry = &state->entries[index];
-        if (entry->category != state->selection) {
+        if (entry->category != work->selection) {
             entry->active = 0;
         } else if (entry->completionFlag != -1) {
             if (FUN_004083a8(entry->kind, entry->condition)) {
@@ -71,6 +68,6 @@ void FUN_004915f0(NaviCategorySelectionWork *work)
     default:
         break;
     }
-    state->refresh = 0;
+    work->discovered = 0;
 }
 }

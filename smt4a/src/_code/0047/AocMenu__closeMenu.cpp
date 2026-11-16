@@ -93,17 +93,21 @@ void AocMenu::closeMenu()
         }
         break;
     case 9999:
-        if (!flagBit(flags, 2) && !flagBit(flags, 3)) {
-            aocClearDisplayFlag(g_aocSystem);
-            aocReleasePackageOwner(g_aocSystem);
-            if (sysLightEventTryWait(reinterpret_cast<u8 *>(g_aocMain) + 0x98) != 0)
-                g_aocMain->flags &= ~0x10000u;
-            menu->step = 3;
-            menu->substep = 0;
-            if (menu->window != NULL) {
-                delete menu->window;
-                menu->window = NULL;
-            }
+        if ((flags & 4) != 0) {
+            break;
+        }
+        if ((flags & 8) != 0) {
+            break;
+        }
+        aocClearDisplayFlag(g_aocSystem);
+        aocReleasePackageOwner(g_aocSystem);
+        if (sysLightEventTryWait(reinterpret_cast<u8 *>(g_aocMain) + 0x98) != 0)
+            g_aocMain->flags &= ~0x10000u;
+        menu->step = 3;
+        menu->substep = 0;
+        if (menu->window != NULL) {
+            delete menu->window;
+            menu->window = NULL;
         }
         break;
     }

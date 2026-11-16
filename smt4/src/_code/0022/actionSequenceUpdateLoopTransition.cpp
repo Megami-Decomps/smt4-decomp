@@ -16,7 +16,7 @@ void actionSequenceUpdateLoopTransition(ActionController *controller)
     if (FUN_0034c794(controller->animation)) {
         s16 frame = (s32)FUN_00226bc0(controller->animation);
         s16 previousFrame = controller->previousFrame;
-        if (frame < previousFrame) {
+        if (previousFrame > frame) {
             controller->loopLength = previousFrame;
             controller->previousFrame = 0;
             ++controller->loops;

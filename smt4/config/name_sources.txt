@@ -4438,3 +4438,4 @@
 002cedd8 searchWinInitialize inferred [high] Twin of smt4a FUN_00333318.
 002319e0 mapExplorationCellIsMarked inferred [med] Tests one cell of the 5x7 exploration grid (regions 101-103) in the map block bitmask; returns false when out of bounds.
 00231ad4 mapExplorationCellMark inferred [med] Sets one cell of the 5x7 exploration grid bitmask (regions 101-103); setter twin of FUN_002319e0.
+002aa568 strcmp evidence twin of the same libc function (0x2aa568)

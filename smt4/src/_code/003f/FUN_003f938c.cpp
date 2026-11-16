@@ -4,12 +4,12 @@
 extern "C" {
 const AnimKey *FUN_003f887c(const QuantizedAnimCurve *, f32);
 
-static __inline f32 animKeyTime(const QuantizedAnimCurve *curve, const AnimKey *key)
+static f32 animKeyTime(const QuantizedAnimCurve *curve, const AnimKey *key)
 {
     return curve->timeScale * (static_cast<f32>(key->frame) * 0.03125f);
 }
 
-static __inline f32 animKeyValue(const QuantizedAnimCurve *curve, const AnimKey *key)
+static f32 animKeyValue(const QuantizedAnimCurve *curve, const AnimKey *key)
 {
     return curve->valueBase + static_cast<f32>(key->unk02[0]) * curve->valueScale;
 }

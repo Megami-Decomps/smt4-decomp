@@ -1,4 +1,5 @@
 #include "common.h"
+#include <string.h>
 
 struct ResourceNameGroup {
     /* 0x00 */ u32 unk00;
@@ -33,7 +34,6 @@ struct NamedResourceOwner {
 };
 
 extern "C" {
-s32 libc_strcmp(const char *first, const char *second);
 
 s32 resourceNameGroupFindIndex(const NamedResourceOwner *owner, const char *name)
 {
@@ -45,7 +45,8 @@ s32 resourceNameGroupFindIndex(const NamedResourceOwner *owner, const char *name
     for (u32 groupIndex = 0; groupIndex < table->count; ++groupIndex) {
         const ResourceNameGroup *group = &table->groups[groupIndex];
         for (u32 index = 0; index < group->count; ++index) {
-            if (libc_strcmp(group->names[index], name) == 0) {
+            const char *entry = group->names[index];
+            if (strcmp(entry, name) == 0) {
                 return groupIndex;
             }
         }

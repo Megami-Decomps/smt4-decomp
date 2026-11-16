@@ -16,7 +16,7 @@ u32 FUN_00121030(AsdSndDataManagerView *manager, void *archive, void *buffer, u3
 
     manager->tableState.fileTable = static_cast<SoundDataFileTable *>(buffer);
     manager->tableState.fileTable->count = FUN_00141fb4(archive);
-    for (u32 i = 0; i < manager->tableState.fileTable->count; ++i)
+    for (u32 i = 0; manager->tableState.fileTable->count > i; ++i)
         manager->tableState.fileTable->files[i] = NULL;
     manager->loader.archive = archive;
 

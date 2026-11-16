@@ -1,4 +1,4 @@
-/* NON_MATCHING: render-command stores and dirty-flag branching differ; retail also retains an unreachable negative node-count clamp. */
+/* NON_MATCHING: same code and row count as retail (including its unreachable negative node-count clamp); armcc stores the two command words as one strd where retail stores them separately, and keeps the node pointer/clamp in different registers (retail also hoists the constant 1 for the texture update). */
 #include "shard/W6_W6Match8_ModelRefresh.h"
 
 extern "C" {
@@ -29,9 +29,10 @@ void asdModelRefreshRenderData(ModelRefreshState *state)
                 FUN_001c9a30(state, index, state->materials[index]);
             }
             u32 color = DAT_005c0f00 | (DAT_005c0f04 << 8) | (DAT_005c0f08 << 24);
-            g_commandBufferCursor[1] = 0xb01c4;
-            g_commandBufferCursor[0] = color;
-            g_commandBufferCursor += 2;
+            u32 *cursor = g_commandBufferCursor;
+            cursor[1] = 0xb01c4;
+            cursor[0] = color;
+            g_commandBufferCursor = cursor + 2;
         }
         if (state->stateDirty) {
             shaderEmitLightVectors(state);
@@ -39,7 +40,9 @@ void asdModelRefreshRenderData(ModelRefreshState *state)
         if (state->nodesDirty && state->nodeCount > 0) {
             s32 count = state->nodeCount;
             if (state->node->info->count > 0) {
-                state->node->commandFlags = ((count - 1) & 0xff) | 0x10000;
+                s32 last = count - 1;
+                s32 clamped = last >= 0 ? last : 0;
+                state->node->commandFlags = (clamped & 0xff) | 0x10000;
             }
             s32 index = 0;
             do {

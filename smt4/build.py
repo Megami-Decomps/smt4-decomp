@@ -79,7 +79,7 @@ def launcher():
 
 def compiler_version(compiler):
     probe = "--vsn" if FAMILY == "armcc" else "--version"
-    done = subprocess.run(launcher() + [compiler, probe], capture_output=True, text=True)
+    done = subprocess.run(launcher() + [compiler, probe], capture_output=True, text=True, encoding="utf-8", errors="replace")
     lines = (done.stdout or done.stderr).strip().splitlines()
     return lines[0].strip() if lines else "unknown"
 
@@ -506,7 +506,7 @@ def finish_object(compiler, unit, source, obj):
     if not name_static_initialiser(obj, unit) and needs_carving(obj, unit):
         split_command = command(compiler, unit, source, obj)
         split_command.insert(split_command.index("-o"), "--split_sections")
-        done = subprocess.run(split_command, capture_output=True, text=True, cwd=ROOT)
+        done = subprocess.run(split_command, capture_output=True, text=True, encoding="utf-8", errors="replace", cwd=ROOT)
         if done.returncode == 0:
             carve(obj, unit)
     link_aliases(obj)
@@ -519,7 +519,7 @@ def compile_unit(compiler, unit, newest_header, force):
     if not force and obj.exists() and obj.stat().st_mtime >= max(source.stat().st_mtime, newest_header):
         return unit, "cached", ""
     obj.parent.mkdir(parents=True, exist_ok=True)
-    done = subprocess.run(command(compiler, unit, source, obj), capture_output=True, text=True, cwd=ROOT)
+    done = subprocess.run(command(compiler, unit, source, obj), capture_output=True, text=True, encoding="utf-8", errors="replace", cwd=ROOT)
     if done.returncode == 0:
         finish_object(compiler, unit, source, obj)
         return unit, "ok", ""

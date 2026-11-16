@@ -7,11 +7,9 @@ extern "C" {
 s32 btlFindNthActiveSpecialEntry(BtlMainState *owner, s32 n)
 {
     s32 matched = 0;
-    s32 i;
 
-    for (i = 0; i < 109; i++) {
-        u32 flags = owner->entries[i].flags;
-        if ((flags & 1) && (flags & 0x100)) {
+    for (s32 i = 0; i < 109; i++) {
+        if ((owner->entries[i].flags & 1) && (owner->entries[i].flags & 0x100)) {
             matched++;
             if (matched == n) {
                 return owner->entries[i].selectionIndex;

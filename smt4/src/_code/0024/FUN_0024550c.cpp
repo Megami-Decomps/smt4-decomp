@@ -1,13 +1,13 @@
 /* NON_MATCHING: retail computes the state pointer before the frame setup, keeps a zero in r8 and loads g_btlEffect inside each state branch; armcc here hoists the global load above the state tests and tail-merges the return-1 paths. */
 #include "battle/BtlEffectLoad.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include <string.h>
 
 extern "C" {
 
 extern const char DAT_00400804[];
 extern const char DAT_004008c4[];
 
-s32 libc_strcmp(const char *a, const char *b);
 char *libc_strcpy(char *destination, const char *source);
 void memClear(void *buffer, s32 size);
 void textFormatBuffer(char *buffer, const char *format, ...);

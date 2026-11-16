@@ -1,4 +1,4 @@
-/* NON_MATCHING: squared-distance temp, division and store order differ in the overlap branch (VFP register allocation). */
+/* NON_MATCHING: store/divide schedule: retail issues both vdivs before the x store and stores y between x and z; the build hoists the y store. */
 #include "shard/W6_W6Match6_CollisionQuad.h"
 #include <math.h>
 

@@ -1,3 +1,4 @@
+/* NON_MATCHING: register allocation only: in the compaction loop retail keeps the slot address in r3 and the loaded handle in ip, the build uses ip for the address and r3 for the handle. */
 #include "event/2dEvent/2dEventTex.h"
 
 extern "C" {

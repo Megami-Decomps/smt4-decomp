@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail narrows the next segment index twice (call-site cast, then after the s16 store) and converts the frame count into s2; ours narrows once and converts in place. */
+/* NON_MATCHING (b1454): retail narrows the next segment index twice (call-site cast, then again after the s16 store inside the start helper) and lays the inlined reverse select out differently; the scale add order now matches. */
 #include "common.h"
 
 struct ScaleSegment {
@@ -98,7 +98,7 @@ extern "C" void controllerUpdateUniformScaleTrack(ScaleController *controller)
             step = (segment->end - segment->start) / (f32)frames;
         }
         ++controller->frame;
-        controller->scale[0] = step + controller->scale[0];
+        controller->scale[0] = controller->scale[0] + step;
     }
     controller->scale[1] = controller->scale[0];
     controller->scale[2] = controller->scale[0];

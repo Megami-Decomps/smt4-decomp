@@ -1,3 +1,4 @@
+/* NON_MATCHING: retail allocates interpolation start/end to s17/s16 with separate vmoveq per arm; build gives s16/s17 and merges them into one vmoveq.f64. */
 #include "common.h"
 
 /* A 0..1 fader: 0 = off, 1 = fading in, 2 = fading out, 3 = on. */
@@ -16,42 +17,45 @@ extern Fader DAT_004d9758[2];
 
 f32 mathInterpolateTimed(s32 duration, s32 frame, f32 from, f32 to);
 
+/* Step one fader by one frame. */
+static __inline void faderStep(Fader *fader)
+{
+    f32 from;
+    f32 to;
+    u8 state = fader->state;
+    s32 frame = ++fader->frame;
+    if (state == 2) {
+        from = 1.0f;
+        to = 0.0f;
+    } else if (state == 1) {
+        from = 0.0f;
+        to = 1.0f;
+    } else if (state == 0) {
+        fader->value = 0.0f;
+        return;
+    } else if (state == 3) {
+        fader->value = 1.0f;
+        return;
+    }
+    if (fader->duration <= frame) {
+        if (state == 2) {
+            fader->frame = 0;
+            fader->state = 0;
+        } else if (state == 1) {
+            fader->frame = 0;
+            fader->state = 3;
+        }
+        fader->value = to;
+    } else {
+        fader->value = mathInterpolateTimed(fader->duration, frame, from, to);
+    }
+}
+
 /* Step both faders by one frame. */
 void FUN_00102438(void)
 {
-    /* Declared outside the loop: the interpolation endpoints stay set from the previous fader (the
-     * original left them uninitialised for the states that skip the fade). */
-    f32 from;
-    f32 to;
     for (u8 i = 0; i < 2; ++i) {
-        Fader *fader = &DAT_004d9758[i];
-        u8 state = fader->state;
-        s32 frame = ++fader->frame;
-        if (state == 2) {
-            from = 1.0f;
-            to = 0.0f;
-        } else if (state == 1) {
-            from = 0.0f;
-            to = 1.0f;
-        } else if (state == 0) {
-            fader->value = 0.0f;
-            continue;
-        } else if (state == 3) {
-            fader->value = 1.0f;
-            continue;
-        }
-        if (fader->duration <= frame) {
-            if (state == 2) {
-                fader->frame = 0;
-                fader->state = 0;
-            } else if (state == 1) {
-                fader->frame = 0;
-                fader->state = 3;
-            }
-            fader->value = to;
-        } else {
-            fader->value = mathInterpolateTimed(fader->duration, frame, from, to);
-        }
+        faderStep(&DAT_004d9758[i]);
     }
 }
 

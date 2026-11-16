@@ -1,4 +1,4 @@
-/* NON_MATCHING: final segment-delta loads and VFP register allocation differ; all 72 instructions and control flow otherwise agree. */
+/* NON_MATCHING (b1454): only the load order of the four key fields differs (retail loads start.frame, start.value, end.frame, end.value; built loads frames first) and the regs that follow. */
 #include "gfx/ScalarCurveTransition.h"
 extern "C" {
 f32 FUN_00291620(s32 mode, s32 maximum, u32 divisor);
@@ -21,9 +21,9 @@ void FUN_002031dc(ScalarCurveTransition *curve, const ScalarCurveTransition *tim
         s32 nextIndex = curve->currentKey + step;
         const ScalarCurveKey *start = &curve->keys[curve->currentKey];
         const ScalarCurveKey *end = &curve->keys[nextIndex];
-        f32 frames = static_cast<f32>(end->frame - start->frame);
-        f32 difference = static_cast<f32>(end->value - start->value);
-        curve->slope = difference / frames;
+        s32 frameCount = end->frame - start->frame;
+        s32 valueChange = end->value - start->value;
+        curve->slope = static_cast<f32>(valueChange) / static_cast<f32>(frameCount);
         curve->target = static_cast<f32>(end->value);
         curve->currentKey = static_cast<s8>(nextIndex);
         return;

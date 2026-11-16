@@ -9,7 +9,7 @@ int keyedRecordSetVectorPair3(...);
 int keyedRecordSetVectorPair0(...);
 int keyedRecordSetVectorPair1(...);
 int keyedCopyPayload(...);
-int libc_strcmp(int, unsigned char *);
+int strcmp(int, unsigned char *);
 int asdMemFree(...);
 int memClear(void);
 int asdMemAlloc(...);
@@ -67,7 +67,7 @@ extern unsigned char LAB_0024a638; /* 0x24a638 */
 /* Supplied declaration required: keyedRecordSetVectorPair1. */
 /* Supplied declaration required: keyedCopyPayload. */
 extern unsigned int effectTextureFindOrReserve(int);
-/* Supplied declaration required: libc_strcmp. */
+/* Supplied declaration required: strcmp. */
 extern int libc_strlen(int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: memClear. */
@@ -328,8 +328,8 @@ LAB_0024a200:
           temp_v11 = temp_v11 + temp_v5;
           temp_v6 = temp_v11 + 0x201;
           temp_v5 = temp_v6;
-          libc_strcmp(temp_v6,&LAB_0024a634);
-          if ((temp_v5 == 0) || (libc_strcmp(temp_v6,&LAB_0024a638), temp_v6 == 0)) {
+          strcmp(temp_v6,&LAB_0024a634);
+          if ((temp_v5 == 0) || (strcmp(temp_v6,&LAB_0024a638), temp_v6 == 0)) {
             *(unsigned char *)(temp_v11 + 0x201) = 0;
           }
         }

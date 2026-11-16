@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the VFP schedule differs: retail converts the duration and subtracts the Z ends before converting the frame. */
 #include "common.h"
 
 /* A linear move from a start to an end point over a frame range. */
@@ -27,7 +26,8 @@ u8 FUN_0035e6d4(LinearMove35e6d4 *move)
     s32 duration = move->endFrame - move->startFrame;
     s32 x = (move->endX - move->startX) / duration * frame + move->startX;
     s32 y = (move->endY - move->startY) / duration * frame + move->startY;
-    f32 z = move->startZ + (move->endZ - move->startZ) / duration * frame;
+    f32 startZ = move->startZ;
+    f32 z = startZ + (move->endZ - startZ) / duration * frame;
     u8 running = 1;
     if (frame >= move->endFrame) {
         x = move->endX;

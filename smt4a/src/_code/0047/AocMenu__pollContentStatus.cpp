@@ -65,8 +65,7 @@ void AocMenu::pollContentStatus()
         }
         return;
     case 1: {
-        RequestParameters polled = menu->handler->poll();
-        result = polled;
+        result = menu->handler->poll();
         if (isEmptyString(&result) != 0) {
             menu->step = 2;
             return;
@@ -74,23 +73,25 @@ void AocMenu::pollContentStatus()
         if (byteIsAtLeast100(reinterpret_cast<const u8 *>(&result)) == 0) {
             return;
         }
-        if (result.kind == 0x66) {
+        switch (result.kind) {
+        case 0x66: {
             RequestParameters copy = result;
             FUN_0047bc90(menu, &copy);
             return;
         }
-        if (result.kind != 0x67) {
+        default:
             menu->step = 9999;
             menu->result = result;
             return;
+        case 0x67:
+            break;
         }
         menu->step = 5;
         menu->counter = 3;
         return;
     }
     case 3: {
-        RequestParameters polled = menu->handler->poll();
-        result = polled;
+        result = menu->handler->poll();
         if (isEmptyString(&result) != 0) {
             menu->step = 4;
             return;
@@ -98,15 +99,18 @@ void AocMenu::pollContentStatus()
         if (byteIsAtLeast100(reinterpret_cast<const u8 *>(&result)) == 0) {
             return;
         }
-        if (result.kind == 0x66) {
+        switch (result.kind) {
+        case 0x66: {
             RequestParameters copy = result;
             FUN_0047bc90(menu, &copy);
             return;
         }
-        if (result.kind != 0x67) {
+        default:
             menu->step = 9999;
             menu->result = result;
             return;
+        case 0x67:
+            break;
         }
         menu->step = 5;
         menu->counter = 3;

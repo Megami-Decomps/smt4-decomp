@@ -29,8 +29,8 @@ u16 FUN_003c9948(LeveledLists *owner, s32 list, u8 level)
         for (i = 0; i < owner->counts[list]; i++) {
             if (owner->lists[list][i].level >= level && owner->lists[list][i].level - level < bestDiff &&
                 devilIsAvailable(owner, owner->lists[list][i].id)) {
-                best = owner->lists[list][i].id;
                 bestDiff = owner->lists[list][i].level - level;
+                best = owner->lists[list][i].id;
             }
         }
     }

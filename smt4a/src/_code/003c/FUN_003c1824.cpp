@@ -15,9 +15,9 @@ extern "C" u32 FUN_003c1824(void)
     };
     for (s32 index = 0; index < 109; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
-        if ((g_btlCandidateMasks.unavailable & entry->flags) &&
-            (g_btlCandidateMasks.required & entry->flags) &&
-            !(g_btlCandidateMasks.excluded & entry->flags) &&
+        if ((entry->flags & g_btlCandidateMasks.unavailable) &&
+            (entry->flags & g_btlCandidateMasks.required) &&
+            !(entry->flags & g_btlCandidateMasks.excluded) &&
             reinterpret_cast<CandidateAvailabilityView *>(entry)->value > 0) {
             scrSetResult(1);
             return 1;

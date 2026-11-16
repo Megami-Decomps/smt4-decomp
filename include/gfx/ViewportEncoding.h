@@ -20,4 +20,22 @@ static __inline u32 gpuViewportEncode(f32 value)
         (static_cast<u32>(exponent) << FractionBits) |
         (encoding.ieee.sign << (FractionBits + 7));
 }
+// Inverse extents use 23 fraction bits. The fraction is read in both arms, as retail's code does.
+static __inline u32 gpuViewportEncodeInverse(f32 value)
+{
+    GpuFloatEncoding encoding;
+    encoding.value = value;
+    s32 exponent = encoding.bits & 0x7FFFFFFF;
+    u32 fraction;
+    if (exponent != 0) {
+        fraction = encoding.ieee.fraction;
+        exponent = ((encoding.bits >> 23) & 0xFF) - 64;
+        if (exponent < 0) {
+            return encoding.ieee.sign << 30;
+        }
+    } else {
+        fraction = encoding.ieee.fraction;
+    }
+    return fraction | (static_cast<u32>(exponent) << 23) | (encoding.ieee.sign << 30);
+}
 #endif

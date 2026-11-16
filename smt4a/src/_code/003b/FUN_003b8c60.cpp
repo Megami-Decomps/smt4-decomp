@@ -17,7 +17,7 @@ u32 FUN_003b8c60(void)
 
         if (entry != NULL && (entry->flags & g_battleMaskPresets.eligibility.active) != 0
             && (entry->flags & g_battleMaskPresets.eligibility.excluded) == 0
-            && (g_battleMaskPresets.eligibility.required & entry->flags) == 0
+            && (entry->flags & g_battleMaskPresets.eligibility.required) == 0
             && (entry->flags & g_battleMaskPresets.eligibility.unk10) == 0) {
             btlAdjustPropertyClamped(entry->unitIndex, 24, 1, 0);
         }

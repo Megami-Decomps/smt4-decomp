@@ -1,4 +1,4 @@
-/* NON_MATCHING: mode is read from the fade directly (matches retail's r1/r2 roles); the float divisor lands in s0 not s2 and the 240.0f/400.0f/320.0f pool order and final argument setup are scheduled differently. */
+/* NON_MATCHING (b1454): pool order and divisor register now match; only the position of one `vmov.f32 s1, s0` in the argument setup differs (retail places it after `mov r2, r3`). */
 #include "ui/ByteScreenFade.h"
 #include "camp/RenderCtx.h"
 
@@ -43,10 +43,11 @@ void FUN_003c28dc(ByteScreenFade* fade)
     s16 alpha = (s16)((f32)fade->frame * alphaScale);
     u32 color = baseColor + (u8)alpha;
     renderCtxSelectTexture(g_titleScene, 0);
+    f32 height = 240.0f;
     f32 width = 400.0f;
     if (fade->screen == 1) {
         width = 320.0f;
     }
-    FUN_002c0944(color, color, color, color, 0.0f, 0.0f, width, 240.0f, 0.0f);
+    FUN_002c0944(color, color, color, color, 0.0f, 0.0f, width, height, 0.0f);
 }
 }

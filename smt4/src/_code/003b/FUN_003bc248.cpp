@@ -4,6 +4,7 @@
 #include "shard/W6_W6Match1_Table03Record.h"
 #include <stddef.h>
 #include "AsdSDK/AsdMemUtil.h"
+#include <string.h>
 
 struct AocSystem;
 
@@ -104,7 +105,6 @@ struct SpriteDescriptor {
 extern "C" {
 extern AocSystem *g_aocSystem;
 Table03Record *aocFindTable03RecordByKey(AocSystem *system, u32 index);
-s32 libc_strcmp(const char *a, const char *b);
 /* Initialize sprite descriptor `sprite` from record `index` of table 03; the bank and page
    given here replace the record's own when it does not set both. */
 void FUN_003bc248(SpriteDescriptor *sprite, s32 index, u8 bank, u8 page)
@@ -215,7 +215,7 @@ void FUN_003bc248(SpriteDescriptor *sprite, s32 index, u8 bank, u8 page)
     sprite->ratioPercent = record->ratio != 0 ? 100 : 0;
     sprite->ratio = record->ratio;
     sprite->ratioExtra = record->ratioExtra;
-    if (libc_strcmp("0", reinterpret_cast<const char *>(record->block.name)) == 0) {
+    if (strcmp("0", reinterpret_cast<const char *>(record->block.name)) == 0) {
         sprite->hasBlock = 0;
     } else {
         sprite->block = record->block;

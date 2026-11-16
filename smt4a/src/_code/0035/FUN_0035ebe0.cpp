@@ -12,7 +12,7 @@ u32 FUN_0035ebe0(void)
 {
     for (s32 i = 0; i < 0x6d; i++) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
-        if ((entry->flags & g_btlCandidateMasks.unavailable) &&
+        if ((g_btlCandidateMasks.unavailable & entry->flags) &&
             (entry->flags & g_btlCandidateMasks.required) &&
             !(entry->flags & g_btlCandidateMasks.excluded) &&
             FUN_00184310(entry->id)->categoryView.category == 4) {

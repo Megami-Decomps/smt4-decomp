@@ -1,3 +1,4 @@
+/* NON_MATCHING: retail keeps scale*(total*0.01f) as two vmuls; armcc folds the known 1.0f scale into one. */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "shard/PassiveSkill.h"

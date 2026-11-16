@@ -2,11 +2,11 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+int strcmp(int, unsigned int);
 extern "C" {
 
-int libc_strcmp(int, unsigned int);
 
-/* Supplied declaration required: libc_strcmp. */
+/* Supplied declaration required: strcmp. */
 
 
 unsigned int FUN_001a73fc(unsigned int param_1,int *param_2,int *param_3)
@@ -24,7 +24,7 @@ unsigned int FUN_001a73fc(unsigned int param_1,int *param_2,int *param_3)
   }
   if (temp_v0 <= temp_v2) {
     temp_v1 = *(int *)(param_2[1] + 0x28);
-    libc_strcmp(temp_v1,*(unsigned int *)(param_3[1] + 0x28));
+    strcmp(temp_v1,*(unsigned int *)(param_3[1] + 0x28));
     if (temp_v1 != 0) {
       if (-1 < temp_v1) {
         return 0;

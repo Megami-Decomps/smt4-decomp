@@ -16,7 +16,7 @@ void FUN_0033adf8(BtlPartyInitializationStateIV *world, u32 row);
 void btlInitializePlayerUnitData(u32 world, BtlUnitData *data, const PlayerInitialRecordIV *player);
 void FUN_00255e38(SlotWorld *world, UnitRecordIn *record, s32 kind, s32 index, s32 extra);
 SavedUnitRecord *saveResolvePartySlot(u32 slot);
-u16 gameSlotFindByCategory(const SavedUnitRecord *record);
+s16 gameSlotFindByCategory(const SavedUnitRecord *record);
 u32 randomGetLowerTenBits(u32 record, u32 index);
 u32 randomGetUpperSixBits(u32 record, u32 index);
 
@@ -31,7 +31,7 @@ void FUN_003370ac(BtlPartyInitializationStateIV *world)
     BtlEntryInitializationIV entry;
     btlInitializePlayerUnitData((u32)world, reinterpret_cast<BtlUnitData *>(&entry.unit), player);
     FUN_00255e38(reinterpret_cast<SlotWorld *>(world), reinterpret_cast<UnitRecordIn *>(&entry.unit), 0, 0, 0);
-    for (u16 slot = 0; slot < 3; ++slot) {
+    for (s16 slot = 0; slot < 3; ++slot) {
         if (slots->active[slot] >= 0) {
             const SavedBattleInitialViewIV *saved = reinterpret_cast<const SavedBattleInitialViewIV *>(saveResolvePartySlot(slot));
             BtlUnitInitializationIV *unit = &entry.unit;

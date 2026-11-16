@@ -18,8 +18,9 @@ u32 FUN_0034e3c0(void)
 {
     s32 threshold = scrGetArg(0);
     for (s32 i = 0; i < 109; ++i) {
-        BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
-        if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
+        BtlMainStateA *state = btlGetMainState();
+        BtlCombatantEntryA *entry = &state->entries[i];
+        if ((g_btlCandidateMasks.unavailable & entry->flags) == 0 &&
             (g_btlCandidateMasks.required & entry->flags) != 0 &&
             (entry->flags & g_btlCandidateMasks.excluded) == 0 &&
             remainingPercent(entry->mp, entry->maxMp) <= threshold) {

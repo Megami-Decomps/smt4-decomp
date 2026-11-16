@@ -13,16 +13,16 @@ struct SlotOwner {
     /* 0x10 */ s32 total;
     /* 0x14 */ s32 unique;
     /* 0x18 */ SlotObject *slots[32];
-
-    /* Takes one destroyed object out of the counts (shared objects were never counted as unique). */
-    void release(s32 shared)
-    {
-        if (shared == 0) {
-            unique--;
-        }
-        total--;
-    }
 };
+
+/* Takes one destroyed object out of the counts (shared objects were never counted as unique). */
+static __inline void slotOwnerRelease(SlotOwner *owner, s32 shared)
+{
+    if (shared == 0) {
+        owner->unique--;
+    }
+    owner->total--;
+}
 
 /* Destroys every object held in the owner's 32 slots and updates the owner's counts. */
 void slotOwnerDestroyAllSlots(SlotOwner *owner)
@@ -36,7 +36,7 @@ void slotOwnerDestroyAllSlots(SlotOwner *owner)
         if (object != NULL) {
             object->destroy();
             owner->slots[i] = NULL;
-            owner->release(shared);
+            slotOwnerRelease(owner, shared);
         }
     }
 }

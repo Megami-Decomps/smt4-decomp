@@ -1,5 +1,6 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include <string.h>
 
 namespace {
 
@@ -23,7 +24,6 @@ struct BattleEffectView {
 
 extern "C" {
 s32 btlScriptUnitHasFlags(void);
-s32 libc_strcmp(const char* left, const char* right);
 extern BattleEffectView g_btlEffect;
 }
 
@@ -39,7 +39,7 @@ extern "C" s32 FUN_004fa030(EffectOwnerView* owner)
     if (owner->unk1F58 != 0) {
         for (s32 index = 0; index < 4; ++index) {
             EffectEntryView* entry = owner->unk1F58 + index;
-            if (entry != 0 && libc_strcmp(entry->name, g_btlEffect.unk14) == 0) {
+            if (entry != 0 && strcmp(entry->name, g_btlEffect.unk14) == 0) {
                 entry = owner->unk1F58 + index;
                 if (entry != 0) {
                     result = entry->unk10;

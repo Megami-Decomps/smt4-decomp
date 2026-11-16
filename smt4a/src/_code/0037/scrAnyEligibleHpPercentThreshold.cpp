@@ -20,14 +20,14 @@ BtlCombatantEntryA* FUN_003eaf20(BtlMainStateA*);
 /* Check eligible HP percentages, preserving the special entry's opposite comparison. */
 u32 scrAnyEligibleHpPercentThreshold(void)
 {
-    const s32 threshold = scrGetArg(0);
-    const s32 kind = btlResolveEntryChoice(scrGetArg(1));
+    s32 threshold = scrGetArg(0);
+    u32 choice = scrGetArg(1);
     s32 first, count;
-    FUN_00301a08(kind, reinterpret_cast<s32 *>(reinterpret_cast<u32*>(&first)), reinterpret_cast<s32 *>(reinterpret_cast<u32*>(&count)));
+    FUN_00301a08(btlResolveEntryChoice(choice), &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         const BtlCombatantEntryA* entry = &btlGetMainState()->entries[index];
         if (!(g_btlCandidateMasks.unavailable & entry->flags) &&
-            (entry->flags & g_btlCandidateMasks.required) && !(entry->flags & g_btlCandidateMasks.excluded) &&
+            (g_btlCandidateMasks.required & entry->flags) && !(g_btlCandidateMasks.excluded & entry->flags) &&
             hpPercent(entry->hp, entry->maxHp) >= threshold) {
             scrSetResult(1);
             return 1;

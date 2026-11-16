@@ -25,10 +25,9 @@ u32 btlScriptGetEncodedCombatantStat()
     for (s32 index = first; index < static_cast<s32>(first + count); ++index) {
         BtlMainStateA *battle = btlGetMainState();
         BtlCombatantEntryA *entry = &battle->entries[index];
-        u64 flags = entry->flags;
-        if ((flags & g_btlCandidateMasks.unavailable) == 0 &&
-            (flags & g_btlCandidateMasks.required) != 0 &&
-            (flags & g_btlCandidateMasks.excluded) == 0 &&
+                if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
+            (entry->flags & g_btlCandidateMasks.required) != 0 &&
+            (entry->flags & g_btlCandidateMasks.excluded) == 0 &&
             entry->id == id && (entry->encodedStats.values[stat] >> 10) == 1) {
             scrSetResult(1);
             return 1;

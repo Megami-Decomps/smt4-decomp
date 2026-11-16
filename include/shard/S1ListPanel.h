@@ -44,14 +44,14 @@ static __inline bool renderCtxSuspendScissor(RenderCtxScissorA *ctx)
     if (ctx->scissor.entries[ctx->scissor.count] != RENDER_STATE_SCISSOR) {
         return false;
     }
-    renderStackSet(&ctx->scissor, 0);
+    renderStackSetCounted(&ctx->scissor, 0);
     return true;
 }
 
 /* Turn scissoring back on. */
 static __inline void renderCtxResumeScissor(RenderCtxScissorA *ctx)
 {
-    renderStackSet(&ctx->scissor, RENDER_STATE_SCISSOR);
+    renderStackSetCounted(&ctx->scissor, RENDER_STATE_SCISSOR);
 }
 
 /* One visible range of rows (28 bytes). */

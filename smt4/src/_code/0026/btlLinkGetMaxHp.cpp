@@ -8,7 +8,8 @@ extern "C" {
 s32 btlLinkGetMaxHp(BtlUnitLink *record)
 {
     s32 maxHp = record->maxHp;
-    if (g_btlMainState.state != NULL && g_btlMainState.state->core.mode != 0x15) {
+    BtlMainState *state = g_btlMainState.state;
+    if (state != NULL && state->core.mode != 0x15) {
         for (s32 index = 0; index < 0x6d; ++index) {
             BtlEntry *unit = &g_btlMainState.state->entries[index];
             if ((unit->flags & 1) && !(unit->flags & 0x40) &&

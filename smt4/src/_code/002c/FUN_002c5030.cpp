@@ -1,3 +1,4 @@
+/* NON_MATCHING: retail forms &addresses[selected] before the constant stack arguments and reuses r7 for the sp+12 base; build schedules it later and uses ip. */
 /* Binds the requested render preset and its active color buffer unless rendering is suspended. */
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 

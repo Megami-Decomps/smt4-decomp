@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0016a438` (_code @ 0x16a438, 0xa5c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include <string.h>
 
 extern "C" {
 
@@ -11,7 +12,6 @@ int FUN_001940b0(...);
 int FUN_001986c4(unsigned int, float *);
 int FUN_00198848(unsigned int, float *);
 int FUN_001b4030(void);
-int libc_strcmp(int, int);
 int hardfp_floorf(void);
 int __aeabi_memcpy4(...);
 
@@ -56,7 +56,7 @@ extern unsigned int FUN_001988bc(unsigned int, unsigned char *);
 extern int FUN_001a7a20(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001b4030. */
 extern unsigned int libc_strlen(unsigned int);
-/* Supplied declaration required: libc_strcmp. */
+/* Supplied declaration required: strcmp. */
 /* Supplied declaration required: hardfp_floorf. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
@@ -176,7 +176,7 @@ void FUN_0016a438(int param_1,int param_2)
                   temp_v6 = temp_v5 + *(int *)(pcVar11 + 0x78) * 0x10;
                   for (; temp_v5 != temp_v6; temp_v5 = temp_v5 + 0x10) {
                     temp_v2 = *(int *)(temp_v5 + 0xc);
-                    libc_strcmp(temp_v2,temp_v1);
+                    strcmp((const char *)temp_v2,(const char *)temp_v1);
                     if (temp_v2 == 0) break;
                   }
                   if (*(int *)(pcVar11 + 0x74) + *(int *)(pcVar11 + 0x78) * 0x10 == temp_v5) {
@@ -190,7 +190,7 @@ void FUN_0016a438(int param_1,int param_2)
                   temp_v6 = temp_v5 + *(int *)(pcVar11 + 0x78) * 0x10;
                   for (; temp_v5 != temp_v6; temp_v5 = temp_v5 + 0x10) {
                     temp_v2 = *(int *)(temp_v5 + 0xc);
-                    libc_strcmp(temp_v2,temp_v1);
+                    strcmp((const char *)temp_v2,(const char *)temp_v1);
                     if (temp_v2 == 0) break;
                   }
                   if (*(int *)(pcVar11 + 0x74) + *(int *)(pcVar11 + 0x78) * 0x10 == temp_v5) {
@@ -387,7 +387,7 @@ void FUN_0016a438(int param_1,int param_2)
                   temp_v6 = temp_v5 + *(int *)(pcVar11 + 0x78) * 0x10;
                   for (; temp_v5 != temp_v6; temp_v5 = temp_v5 + 0x10) {
                     temp_v2 = *(int *)(temp_v5 + 0xc);
-                    libc_strcmp(temp_v2,temp_v1);
+                    strcmp((const char *)temp_v2,(const char *)temp_v1);
                     if (temp_v2 == 0) break;
                   }
                   if (*(int *)(pcVar11 + 0x74) + *(int *)(pcVar11 + 0x78) * 0x10 == temp_v5) {
@@ -401,7 +401,7 @@ void FUN_0016a438(int param_1,int param_2)
                   temp_v6 = temp_v5 + *(int *)(pcVar11 + 0x78) * 0x10;
                   for (; temp_v5 != temp_v6; temp_v5 = temp_v5 + 0x10) {
                     temp_v2 = *(int *)(temp_v5 + 0xc);
-                    libc_strcmp(temp_v2,temp_v1);
+                    strcmp((const char *)temp_v2,(const char *)temp_v1);
                     if (temp_v2 == 0) break;
                   }
                   if (*(int *)(pcVar11 + 0x74) + *(int *)(pcVar11 + 0x78) * 0x10 == temp_v5) {

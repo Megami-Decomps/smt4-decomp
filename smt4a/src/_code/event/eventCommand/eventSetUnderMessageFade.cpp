@@ -1,4 +1,4 @@
-/* NON_MATCHING: O3 merges positive/negative ramp stores and epilogues and reuses s0 for the quotient; O2 may preserve retail's separate paths. The second draw owner load uses r0 instead of r1. */
+/* NON_MATCHING: only the second taskCreateDraw's owner reload differs: retail `ldr r1, [r4]`, build `ldr r0, [r4]`. */
 #include "event/eventCommand.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdDebug.h"

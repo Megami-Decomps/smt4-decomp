@@ -10,9 +10,9 @@ void FUN_002bc644(u32 x, s32 y, s32 width, s32 height)
     f32 widthValue = static_cast<f32>(width);
     f32 heightValue = static_cast<f32>(height);
     u32 halfWidth = gpuViewportEncode<16>(widthValue * 0.5f);
-    u32 inverseWidth = gpuViewportEncode<23>(2.0f / widthValue) << 1;
+    u32 inverseWidth = gpuViewportEncodeInverse(2.0f / widthValue) << 1;
     u32 halfHeight = gpuViewportEncode<16>(heightValue * 0.5f);
-    u32 inverseHeight = gpuViewportEncode<23>(2.0f / heightValue) << 1;
+    u32 inverseHeight = gpuViewportEncodeInverse(2.0f / heightValue) << 1;
     u32* begin = FUN_002b7148();
     u32* cursor = begin;
     *cursor++ = halfWidth;

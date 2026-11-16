@@ -1,3 +1,4 @@
+/* NON_MATCHING: retail ends the callback path with `movne r0,#1; beq epilogue; pop`; build merges it into one pop. */
 #include "common.h"
 
 struct RangeDispatchView {

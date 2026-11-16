@@ -42,10 +42,9 @@ extern "C" u32 FUN_0038c6dc(void)
     for (s32 index = first; index < first + count; ++index) {
         BtlMainStateA *state = btlGetMainState();
         BtlCombatantEntryA *entry = &state->entries[index];
-        u64 flags = entry->flags;
-        if ((flags & g_btlCandidateMasks.unavailable) == 0 &&
-            (flags & g_btlCandidateMasks.required) != 0 &&
-            (flags & g_btlCandidateMasks.excluded) == 0 &&
+                if ((g_btlCandidateMasks.unavailable & entry->flags) == 0 &&
+            (entry->flags & g_btlCandidateMasks.required) != 0 &&
+            (g_btlCandidateMasks.excluded & entry->flags) == 0 &&
             entry->id == id && candidateEqualityStat(entry, stat) == value) {
             scrSetResult(1);
             return 1;

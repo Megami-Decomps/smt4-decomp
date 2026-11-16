@@ -1,10 +1,10 @@
 #include "gfx/NamedTextureCache.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include <string.h>
 
 extern "C" {
 extern BattleEffectTextureSlot g_pendingTextures[26];
 extern NamedTextureCache g_textureCache;
-s32 libc_strcmp(const char *left, const char *right);
 char *strncpy(char *destination, const char *source, u32 count);
 AsdTexture *asdTextureCreate(u32 flags);
 }
@@ -13,13 +13,13 @@ static __inline AsdTexture *findNamedTexture(const char *name)
 {
     BattleEffectTextureSlot *entry = g_pendingTextures;
     for (s32 index = 0; index < 26; ++index, ++entry) {
-        if (libc_strcmp(entry->name, name) == 0) {
+        if (strcmp(entry->name, name) == 0) {
             return entry->texture;
         }
     }
     entry = g_textureCache.entries;
     for (s32 index = 0; index < g_textureCache.count; ++index, ++entry) {
-        if (entry->texture != 0 && libc_strcmp(entry->name, name) == 0) {
+        if (entry->texture != 0 && strcmp(entry->name, name) == 0) {
             return entry->texture;
         }
     }

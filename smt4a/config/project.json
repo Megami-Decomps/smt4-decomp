@@ -91953,12 +91953,12 @@
     },
     {
       "address": "0x30ea58",
-      "function": "libc_strcmp",
+      "function": "strcmp",
       "module": "_code",
-      "object": "build/obj/_code/0030/libc_strcmp.o",
+      "object": "build/obj/_code/0030/strcmp.o",
       "size": 184,
-      "source": "src/_code/0030/libc_strcmp.cpp",
-      "target": "orig/target/_code/0030/libc_strcmp.o",
+      "source": "src/_code/0030/strcmp.cpp",
+      "target": "orig/target/_code/0030/strcmp.o",
       "thumb": false
     },
     {

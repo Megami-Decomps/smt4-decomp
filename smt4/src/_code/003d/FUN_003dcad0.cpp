@@ -1,9 +1,9 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include <string.h>
 
 extern "C" {
 
-s32 libc_strcmp(const char *a, const char *b);
 s32 FUN_00227668(void *unit);
 s32 FUN_00293230(void);
 
@@ -36,8 +36,8 @@ static BtlNameBonus *btlFindNameBonus(BtlBonusUnit *unit)
 
     if (unit->bonusTable != NULL) {
         for (i = 0; i < 4; i++) {
-            char *name = unit->bonusTable->entries[i].name;
-            if (name != NULL && libc_strcmp(name, g_btlEffect.name) == 0) {
+            BtlNameBonus *entry = &unit->bonusTable->entries[i];
+            if (entry->name != NULL && strcmp(entry->name, g_btlEffect.name) == 0) {
                 return &unit->bonusTable->entries[i];
             }
         }

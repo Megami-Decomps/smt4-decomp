@@ -25,11 +25,10 @@ IdList *idListFind(u32 id);
 bool idChainMatchSequence(IdSequence *sequence, IdChainCursor *cursor, u32 start, u32 count)
 {
     u32 end = start + count;
-    u32 i;
 
-    for (i = start; i < end; i++) {
+    for (u32 i = start; i < end; i++) {
         u16 nodeId = cursor->node->id;
-        if (sequence->ids[i] != nodeId) {
+        if (nodeId != sequence->ids[i]) {
             IdList *aliases = idListFind(nodeId);
             if (aliases == NULL) {
                 return false;
@@ -37,7 +36,7 @@ bool idChainMatchSequence(IdSequence *sequence, IdChainCursor *cursor, u32 start
             if (aliases->ids[0] == 0) {
                 return false;
             }
-            if (sequence->ids[i] != aliases->ids[0]) {
+            if (aliases->ids[0] != sequence->ids[i]) {
                 if (aliases->ids[1] == 0) {
                     return false;
                 }

@@ -14,7 +14,7 @@ u32 scrCommBattleAnyEntryLacksStatus(void)
 
     for (s32 i = 0; i < 0x6D; i++) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
-        if ((entry->flags & g_btlCandidateMasks.unavailable) && (g_btlCandidateMasks.required & entry->flags) &&
+        if ((entry->flags & g_btlCandidateMasks.unavailable) && (entry->flags & g_btlCandidateMasks.required) &&
             !(entry->flags & g_btlCandidateMasks.excluded) && !(entry->statusFlags & (1 << (u8)status))) {
             scrSetResult(1);
             return 1;

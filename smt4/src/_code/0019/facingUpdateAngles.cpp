@@ -1,4 +1,4 @@
-/* NON_MATCHING: target coordinates use scalar VLDRs instead of retail's VLDMIA pair (after the direction loads); the zero/Y load order in mode 1 differs. */
+/* NON_MATCHING (b1454): target pair now loads with vldmia like retail (named direction/target locals); only the order of the two direction loads before it (retail y then x) differs. */
 #include "shard/W6_W6Match7_FacingAngles.h"
 
 extern "C" u32 FUN_00360d38(f32 y, f32 x);
@@ -39,7 +39,11 @@ extern "C" void facingUpdateAngles(FacingAngles *state, s32 reverse)
         return;
     }
     if (state->mode == 2) {
-        u32 angle = FUN_00360d38(state->direction.y - state->target.y, state->direction.x - state->target.x);
+        f32 directionX = state->direction.x;
+        f32 directionY = state->direction.y;
+        f32 targetX = state->target.x;
+        f32 targetY = state->target.y;
+        u32 angle = FUN_00360d38(directionY - targetY, directionX - targetX);
         u32 degrees = (static_cast<u16>(angle - 0x4000) * 360u) >> 16;
         state->yaw = degrees;
         if (reverse) {

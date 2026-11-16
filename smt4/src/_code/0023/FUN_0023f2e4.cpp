@@ -1,10 +1,10 @@
 /* NON_MATCHING: retail 54 vs built 55 rows; model-slot pointer addressing and destruction branch layout differ. */
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include <string.h>
 
 extern "C" {
 void asdMdlManagerMarkDestroy(void *);
-s32 libc_strcmp(const char *, const char *);
 char *strncpy(char *, const char *, u32);
 
 void FUN_0023f2e4(void *owner, s32 index, const char *name, u16 id)
@@ -28,7 +28,7 @@ void FUN_0023f2e4(void *owner, s32 index, const char *name, u16 id)
     ModelSlot *slot = &state->slots[index];
     slot->id = id;
     if (slot->model != NULL) {
-        if (libc_strcmp(slot->name, name) == 0)
+        if (strcmp(slot->name, name) == 0)
             return;
         if (slot->model != NULL) {
             slot->state = 2;

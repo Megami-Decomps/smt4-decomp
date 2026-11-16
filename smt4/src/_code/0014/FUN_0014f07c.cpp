@@ -11,8 +11,7 @@ ModelBoneAnimationInstance *FUN_0014f07c(AsdTrackOwner *owner, void *resource, u
 {
     ModelBoneAnimationTarget *target = owner->activeTarget;
     ModelBoneResource *modelResource = ModelBoneResource::cast(owner->model.resource);
-    RelativePointer *skeletonReference = &modelResource->skeleton;
-    ModelBoneSkeleton *skeleton = static_cast<ModelBoneSkeleton *>(skeletonReference->get());
+    ModelBoneSkeleton *skeleton = modelResource->skeleton.get();
     if (nw_anim_res_ResAnim_IsFullBakedAnim(&resource))
         nw_gfx_SkeletalModel_SetFullBakedAnimEnabled(owner, 1);
     void *animationResource = resource;

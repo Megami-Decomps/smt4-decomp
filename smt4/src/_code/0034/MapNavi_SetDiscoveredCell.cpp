@@ -13,5 +13,5 @@ extern "C" u8 MapNavi_SetDiscoveredCell(u32 cell, s32 discovered)
     u8 mask = 1u << (cell & 7);
     u32 updated = discovered != 0 ? mask | previous : previous & ~mask;
     *byte = updated;
-    return (u8)updated != previous;
+    return (u8)previous != updated;
 }

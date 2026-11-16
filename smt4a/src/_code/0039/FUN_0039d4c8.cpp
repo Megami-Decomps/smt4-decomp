@@ -19,7 +19,7 @@ u32 FUN_0039d4c8(void)
     FUN_00301a08(btlResolveEntryChoice(scrGetArg(1)), &first, &count);
     for (s32 i = first; i < first + count; ++i) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
-        if ((g_btlCandidateMasks.unavailable & entry->flags) == 0 &&
+        if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
             (entry->flags & g_btlCandidateMasks.required) != 0 &&
             (entry->flags & g_btlCandidateMasks.excluded) == 0 &&
             amount <= entry->maxHp - entry->hp) {

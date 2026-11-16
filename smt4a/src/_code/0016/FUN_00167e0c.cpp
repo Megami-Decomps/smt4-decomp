@@ -1,4 +1,3 @@
-/* NON_MATCHING: the clear value and loaded entry use r4/ip opposite to retail. */
 #include "common.h"
 
 extern "C" {
@@ -12,7 +11,8 @@ struct ResourceTable {
 };
 void FUN_00167e0c(void *unused, ResourceTable *table)
 {
-    for (s32 index = 0; index < table->count; index++) {
+    s32 count = table->count;
+    for (s32 index = 0; index < count; index++) {
         if (table->entries[index] != NULL) {
             table->entries[index] = NULL;
         }

@@ -29,8 +29,10 @@ extern "C" s32 renderCtxSetMirroredScissorRect(s32 x, s32 y, s32 width, s32 heig
         }
         break;
     }
-    s32 minimumX = maximumX - (width + x) + 1;
+    s32 minimumX = maximumX - (x + width) + 1;
     s32 endX = maximumX - x;
+    s32 minimumY = maximumY - (y + height) + 1;
+    s32 endY = maximumY - y;
     if (minimumX < 0)
         minimumX = 0;
     if (endX < 0)
@@ -39,8 +41,6 @@ extern "C" s32 renderCtxSetMirroredScissorRect(s32 x, s32 y, s32 width, s32 heig
         minimumX = maximumX;
     if (endX > maximumX)
         endX = maximumX;
-    s32 minimumY = maximumY - (y + height) + 1;
-    s32 endY = maximumY - y;
     if (minimumY < 0)
         minimumY = 0;
     if (endY < 0)
@@ -51,6 +51,6 @@ extern "C" s32 renderCtxSetMirroredScissorRect(s32 x, s32 y, s32 width, s32 heig
         endY = maximumY;
     renderStackSet(&g_renderCtx->scissorMinimum, static_cast<u32>(minimumY) | (static_cast<u32>(minimumX) << 16));
     renderStackSet(&g_renderCtx->scissorMaximum, static_cast<u32>(endY) | (static_cast<u32>(endX) << 16));
-    renderCtxResumeScissor(g_renderCtx);
+    renderStackSetCounted(&g_renderCtx->scissor, RENDER_STATE_SCISSOR);
     return 1;
 }

@@ -36,8 +36,8 @@ struct BtlLoader {
     /* 0x2250 */ u32 script;
     /* 0x2254 */ ScriptProcess *process;
     /* 0x2258 */ u8 unk2258[0x27A4];
-    /* 0x49FC */ u16 flags;
-    /* 0x49FE */ u16 step;
+    /* 0x49FC */ s16 flags;
+    /* 0x49FE */ s16 step;
     /* 0x4A00 */ u8 lock[1];
 };
 

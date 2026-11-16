@@ -3,6 +3,7 @@
 #include "shard/S2GrTexture.h"
 #include "classes/Texture.h"
 #include <new>
+#include <string.h>
 
 
 namespace {
@@ -47,7 +48,6 @@ void gfxModelRebuildTextureCommands(ModelTextureBindings* model, MaterialTexture
                  MaterialTextureState* state, const MaterialTextureSampler* first,
                  const MaterialTextureSampler* second, const MaterialTextureSampler* third,
                  u8* replacementCommands, const u8* originalCommands);
-s32 libc_strcmp(const char* first, const char* second);
 
 // Bind missing texture references by name and rebuild only changed materials.
 u32 gfxModelBindTextureByName(ModelTextureBindings* model, const char* name,
@@ -71,7 +71,7 @@ u32 gfxModelBindTextureByName(ModelTextureBindings* model, const char* name,
         for (s32 slot = 0; slot < 3; ++slot) {
             NamedModelTexture*& bound = *references[slot];
             if (bound == NULL && binding->textureNames[slot] != NULL) {
-                if (libc_strcmp(binding->textureNames[slot], name) != 0) {
+                if (strcmp(binding->textureNames[slot], name) != 0) {
                     result |= 0x80000008;
                 } else {
                     ++added;

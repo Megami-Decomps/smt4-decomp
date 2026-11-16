@@ -75,7 +75,7 @@ void FUN_0037e8a4(SaveSlotHud* hud, f32 alpha)
     s32 cardY = vec2GetYInt(cardSprite);
     TextureTableEntryIV* frame = asdTMTexTableEntryAt(0x14, 0xbd9);
     s32 frameX = cardX + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f) + frame->x;
-    s32 frameY = frame->y + cardY;
+    s32 frameY = cardY + frame->y;
     setDrawState(packNibblesAndByte(6, 1, 0));
     for (s32 i = 0; i < 3; i++) FUN_001835b4(2, 0x14, 0xbe2 + i, frameX, frameY, 0xbf);
 

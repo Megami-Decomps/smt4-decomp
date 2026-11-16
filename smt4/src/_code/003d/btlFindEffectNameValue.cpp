@@ -1,5 +1,6 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include <string.h>
 
 struct BtlMainState;
 
@@ -26,7 +27,6 @@ static __inline EffectNameEntryView *effectNameTableGetEntry(EffectNameTableView
 }
 extern "C" {
 s32 FUN_00293230(BtlMainState *mainState);
-s32 libc_strcmp(const char* left, const char* right);
 extern BattleEffectView g_btlEffect;
 }
 
@@ -41,7 +41,7 @@ extern "C" s32 btlFindEffectNameValue(EffectNameTableView* table)
     if (table->entries != 0) {
         for (s32 index = 0; index < 4; ++index) {
             EffectNameEntryView* entry = effectNameTableGetEntry(table, index);
-            if (entry != 0 && libc_strcmp(entry->name, g_btlEffect.name) == 0) {
+            if (entry != 0 && strcmp(entry->name, g_btlEffect.name) == 0) {
                 entry = effectNameTableGetEntry(table, index);
                 if (entry != 0) {
                     result = entry->unk10;

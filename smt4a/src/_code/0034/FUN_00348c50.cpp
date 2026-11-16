@@ -1,4 +1,4 @@
-/* NON_MATCHING: callback now freeCameraProcessUpdate with real process types; retail picks r1 for the pooled callback temp and copies the process id through r1 before the stm, built uses r0. */
+/* NON_MATCHING: only scheduling differs: retail loads the pooled callback into r1 after the `g_freeCamera` store, the build loads it into r2 first. */
 #include "common.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
@@ -19,8 +19,8 @@ s32 freeCameraProcessUpdate(u32 handle);
 
 void FUN_00348c50(u32 mode)
 {
-    FreeCameraWork* work = static_cast<FreeCameraWork*>(asdOperatorNew(sizeof(FreeCameraWork)));
-    g_freeCamera = work;
+    g_freeCamera = static_cast<FreeCameraWork*>(asdOperatorNew(sizeof(FreeCameraWork)));
+    FreeCameraWork* work = g_freeCamera;
     u32 process = asdProcessCreateSimple("FreeCamera PROC", 4, 0, 0, freeCameraProcessUpdate, 0, 0);
     work->process = process;
     work->mode = mode;

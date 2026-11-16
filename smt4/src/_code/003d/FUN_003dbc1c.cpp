@@ -2,6 +2,7 @@
 #include "common.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
+#include <string.h>
 
 extern "C" {
 
@@ -26,7 +27,6 @@ extern const char DAT_0040090c[];           /* "NOT_EFT" */
 extern const char DAT_004008c4[];           /* "battle/effect/%s.eft" */
 
 u32 libc_strlen(const char *s);
-s32 libc_strcmp(const char *a, const char *b);
 s32 libc_strncmp(const char *a, const char *b, u32 n);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 u32 keyedRecordRegisterName(void *record);
@@ -52,7 +52,7 @@ static __inline bool nameStartsWith(const char *name, const char *prefix)
 
 static __inline bool nameEquals(const char *name, const char *other)
 {
-    return name != NULL && libc_strcmp(name, other) == 0;
+    return name != NULL && strcmp(name, other) == 0;
 }
 
 /* Resolves each of the four effect names to an effect id: names that are empty or special are
@@ -69,10 +69,10 @@ void FUN_003dbc1c(EffectWork *work)
         if (libc_strlen(name) == 0) {
             continue;
         }
-        if (libc_strcmp(name, "0") == 0) {
+        if (strcmp(name, "0") == 0) {
             continue;
         }
-        if (libc_strcmp(DAT_0040090c, name) == 0) {
+        if (strcmp(DAT_0040090c, name) == 0) {
             continue;
         }
         if (nameStartsWith(name, g_btlEffect[0])) {

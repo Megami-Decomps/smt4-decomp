@@ -1,4 +1,3 @@
-/* NON_MATCHING: the rectangle copy and rows now match retail; only the VFP registers of the snapped sums/conversions differ (retail writes the sums over s0 and converts in place). */
 #include "classes/SelectionState.h"
 #include "text/TextDraw.h"
 
@@ -9,8 +8,7 @@ extern "C" f32 drawTextAtSnappedRectangle(const SelectionRectangle *rectangle, u
                                           f32 opacity)
 {
     SelectionRectangle bounds = *rectangle;
-    return textDrawString(layer, color, text,
-                        (f32)(s32)(bounds.x + bounds.width + x),
-                        (f32)(s32)(bounds.y + bounds.height + y),
-                        depth, spacing, opacity);
+    f32 snappedX = (f32)(s32)(bounds.x + bounds.width + x);
+    f32 snappedY = (f32)(s32)(bounds.y + bounds.height + y);
+    return textDrawString(layer, color, text, snappedX, snappedY, depth, spacing, opacity);
 }

@@ -7,9 +7,10 @@ const SpriteInfo *asdTMTexTableEntryAt(u32 archive, s32 index);
 // Draw a three-by-three loading grid with two rotating bright dots and their trails.
 void uiDrawRotatingLoadingGrid(s32 firstPosition, s32 frame)
 {
-    s32 first = (frame / 5) % 8;
+    s32 phase = frame / 5;
+    s32 first = phase % 8;
     s32 firstTrail = (first + 7) % 8;
-    s32 second = (frame / 5 + 4) % 8;
+    s32 second = (phase + 4) % 8;
     s32 secondTrail = (second + 7) % 8;
     for (s32 row = 0; row < 3; ++row) {
         for (s32 column = 0; column < 3; ++column) {

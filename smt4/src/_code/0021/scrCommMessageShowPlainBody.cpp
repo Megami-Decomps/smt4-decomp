@@ -1,3 +1,4 @@
+/* NON_MATCHING: retail loads the zero stack arguments into ip and stores them after the register arguments; build stores them first from r1/r3. */
 /* Script body: shows a plain message made from the script argument and scrGetCommandFrame's result, for the given battle unit. `unit` is what the stub in front passes in r0. */
 #include "common.h"
 

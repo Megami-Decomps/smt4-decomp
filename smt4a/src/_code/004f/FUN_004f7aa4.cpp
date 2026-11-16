@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps the NULL result in r7 and the string-table base in r9 (one more saved register) and zeroes the index before the preferFirst test. */
 #include "common.h"
+#include <string.h>
 
 struct BtlEffectNameEntry {
     /* 0x00 */ char name[0x16];
@@ -23,7 +24,6 @@ struct BtlEffectNames {
 
 extern "C" {
 extern BtlEffectNames g_btlEffect;
-s32 libc_strcmp(const char *left, const char *right);
 
 /* Finds the entry named like the preferred effect (first, when `preferFirst` is positive) or the fallback; NULL if none. */
 char *FUN_004f7aa4(BtlEffectNameOwner *owner, s32 preferFirst)
@@ -33,15 +33,15 @@ char *FUN_004f7aa4(BtlEffectNameOwner *owner, s32 preferFirst)
     if (owner->names != NULL) {
         if (preferFirst > 0) {
             for (i = 0; i < 4; i++) {
-                if (libc_strcmp(owner->names->entries[i].name, g_btlEffect.preferredName) == 0) {
+                if (strcmp(owner->names->entries[i].name, g_btlEffect.preferredName) == 0) {
                     return owner->names->entries[i].name;
                 }
             }
         }
         for (i = 0; i < 4; i++) {
             char *name = owner->names->entries[i].name;
-            if (name != NULL && (libc_strcmp(name, g_btlEffect.fallbackName) == 0 ||
-                                 libc_strcmp(name, g_btlEffect.preferredName) == 0)) {
+            if (name != NULL && (strcmp(name, g_btlEffect.fallbackName) == 0 ||
+                                 strcmp(name, g_btlEffect.preferredName) == 0)) {
                 return owner->names->entries[i].name;
             }
         }

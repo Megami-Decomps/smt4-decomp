@@ -22,18 +22,17 @@ SpriteTemplateRecord *aocFindSpriteTemplateByKey(AocSystem *system, u32 index);
 SpriteTemplateDevil *dataTable00FindById(u32 id);
 
 /* Same as dataTable02GetEntryByIndex: the add-on record for a valid index, else the table 2 section 2 record. */
-static __inline SpriteTemplateRecord *spriteTemplateGet(s32 index)
+static SpriteTemplateRecord *spriteTemplateGet(s32 index)
 {
     void *section = dataTableGet(2, 2);
     SpriteTemplateRecord *entries = (SpriteTemplateRecord *)dataTableGetEntries(section);
-    if (index < 0 || (u32)index >= dataTableGetCount(section)) {
-        return entries;
-    }
-    SpriteTemplateRecord *download = aocFindSpriteTemplateByKey(g_aocSystem, index);
-    if (download != NULL) {
-        entries = download;
-    } else {
-        entries = &entries[index];
+    if (index >= 0 && (u32)index < dataTableGetCount(section)) {
+        SpriteTemplateRecord *download = aocFindSpriteTemplateByKey(g_aocSystem, index);
+        if (download != NULL) {
+            entries = download;
+        } else {
+            entries = &entries[index];
+        }
     }
     return entries;
 }

@@ -1,6 +1,5 @@
 #include "battle/BtlMainAccess.h"
 #include "code/Code003e.h"
-/* NON_MATCHING: scripted effect argument scheduling has not matched retail. */
 #include "battle/btlUnit.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "battle/btlMain.h"
@@ -25,7 +24,8 @@ u32 FUN_0038d8a0(void)
     BtlSkillA *skill = FUN_003f0e20(btlGetMainState(), skillId);
     FUN_003ee0c0(btlGetMainState());
     BtlMainStateA *battle = btlGetMainState();
-    FUN_004fc094(0, unit, 0, &battle->roster[skill->effect.rosterIndex],
+    BattleRosterRecordA *record = &battle->roster[skill->effect.rosterIndex];
+    FUN_004fc094(0, unit, 0, record,
         0, effectValue, 0xFFFFFFFF, 0xFFFFFFFF, skill->unk258, skill->unk25C,
         0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1);
     FUN_004fb43c(0, unit, 0x01000223, 0, 0, 0, 0);

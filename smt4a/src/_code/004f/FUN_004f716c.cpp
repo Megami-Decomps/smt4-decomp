@@ -2,6 +2,7 @@
 #include "common.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "gamedata/GameDataAccess.h"
+#include <string.h>
 
 extern "C" {
 
@@ -29,7 +30,6 @@ extern const char DAT_00528534[];           /* "%s%02d" */
 extern const char DAT_005284c0[];           /* "battle/effect/%s.eft" */
 
 u32 libc_strlen(const char *s);
-s32 libc_strcmp(const char *a, const char *b);
 s32 libc_strncmp(const char *a, const char *b, u32 n);
 char *libc_strcpy(char *destination, const char *source);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
@@ -52,13 +52,13 @@ u32 FUN_004f716c(EffectWork *work)
         if (libc_strlen(name) == 0) {
             continue;
         }
-        if (libc_strcmp(name, "0") == 0) {
+        if (strcmp(name, "0") == 0) {
             continue;
         }
-        if (libc_strcmp(DAT_0052853c, name) == 0) {
+        if (strcmp(DAT_0052853c, name) == 0) {
             continue;
         }
-        if (name != NULL && libc_strcmp(name, g_btlEffect[4]) == 0) {
+        if (name != NULL && strcmp(name, g_btlEffect[4]) == 0) {
             continue;
         }
         if (name != NULL && libc_strncmp(name, g_btlEffect[3], libc_strlen(g_btlEffect[3])) == 0) {
@@ -68,7 +68,7 @@ u32 FUN_004f716c(EffectWork *work)
         if (name != NULL && libc_strncmp(name, g_btlEffect[0], libc_strlen(g_btlEffect[0])) == 0) {
             for (u32 j = 0; j < 11; j++) {
                 textFormatBuffer(text, DAT_00528534, g_btlEffect[0], j);
-                if (libc_strcmp(text, name) == 0) {
+                if (strcmp(text, name) == 0) {
                     btlCameraFinishTransition(work);
                     *reinterpret_cast<u32 *>(reinterpret_cast<u8 *>(work) + 0x33a8) = FUN_002282c8(j & 0xff, 7, 0);
                     *(reinterpret_cast<u8 *>(work) + 0x33ac) = j;
@@ -80,7 +80,7 @@ u32 FUN_004f716c(EffectWork *work)
                 continue;
             }
         }
-        if (name != NULL && libc_strcmp(name, g_btlEffect[5]) == 0) {
+        if (name != NULL && strcmp(name, g_btlEffect[5]) == 0) {
             continue;
         }
         sysMemClear(path, 0x80);

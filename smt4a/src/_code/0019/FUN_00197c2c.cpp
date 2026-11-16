@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00197c2c` (_code @ 0x197c2c, 0x40 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include <string.h>
 
 extern "C" {
 
-int libc_strcmp(void);
 
-/* Supplied declaration required: libc_strcmp. */
+/* Supplied declaration required: strcmp. */
 
 
 char * FUN_00197c2c(unsigned int param_1,char *param_2)
@@ -17,7 +17,7 @@ char * FUN_00197c2c(unsigned int param_1,char *param_2)
   
   if ((param_2 != (char *)0x0) && (*param_2 != '\0')) {
     pcVar1 = "SJIS";
-    libc_strcmp();
+    strcmp("SJIS",param_2);
     if (pcVar1 != (char *)0x0) {
       return (char *)0x0;
     }

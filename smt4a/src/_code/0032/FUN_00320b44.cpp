@@ -1,4 +1,4 @@
-/* NON_MATCHING: only eye-norm/relative-vector VFP scheduling and result registers differ. */
+/* NON_MATCHING: schedule now matches (vectorLength helper); only VFP temp registers differ (retail vmul s4/vsqrt s3, build s3/s4). */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
@@ -10,6 +10,11 @@ void idSetFindSubjectIndex(BtlMainStateA *, BattleRosterRecordA *);
 void *FUN_001568f8(BtlMainStateA *, s32);
 Vec3f FUN_003ecab8(BtlMainStateA *, s32, s32);
 f32 sqrtf(f32);
+
+static __inline f32 vectorLength(f32 x, f32 y, f32 z)
+{
+    return sqrtf(x * x + y * y + z * z);
+}
 
 /* Scale an eligible combatant's camera effect by its relative eye distance. */
 u8 FUN_00320b44(f32 *output, s32 unitIndex, s32 mode)
@@ -32,11 +37,11 @@ u8 FUN_00320b44(f32 *output, s32 unitIndex, s32 mode)
                 const CameraEyeView *camera = (const CameraEyeView *)FUN_00152f54();
                 Vec3f eye = camera->eye;
                 Vec3f position = FUN_003ecab8(btlGetMainState(), unitIndex, 0);
-                f32 eyeDistance = sqrtf(eye.x * eye.x + eye.y * eye.y + eye.z * eye.z);
+                f32 eyeDistance = vectorLength(eye.x, eye.y, eye.z);
                 f32 x = eye.x - position.x;
                 f32 y = eye.y - position.y;
                 f32 z = eye.z - position.z;
-                f32 relativeDistance = sqrtf(x * x + y * y + z * z);
+                f32 relativeDistance = vectorLength(x, y, z);
                 *output = relativeDistance / eyeDistance * 5.6f;
                 flagged = 1;
             }

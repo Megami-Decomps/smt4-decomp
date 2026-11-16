@@ -1,3 +1,4 @@
+/* NON_MATCHING: retail loads the tail-call arguments r1=15, r2=0 then r0=-1; build loads r2, r1, r0. */
 #include "common.h"
 #include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 

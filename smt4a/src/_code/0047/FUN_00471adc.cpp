@@ -1,15 +1,16 @@
-/* NON_MATCHING: result-value copy ABI and array allocator's extra argument differ. */
+/* NON_MATCHING: array allocator's uninitialised owner argument now matches; retail tests the call's result in place (a removed one-instruction call, linked as a nop, sits before byteIsAtLeast100) while the build copies the 20-byte result first. */
 #include "addon/AocPackageMountBatch.h"
 #include "util/BitsAndBytes.h"
 
 extern "C" {
-void *asdOperatorNewE(u32 bytes);
+void *asdOperatorNewE(u32 bytes, ...);
 WindowOperationResult FUN_0047402c(WindowOperationState *state, const WindowOperationRequest *request);
 }
 
 inline void *Obj4221d4::operator new[](u32 bytes) throw()
 {
-    return asdOperatorNewE(bytes);
+    void *owner; /* the original passes this uninitialised too */
+    return asdOperatorNewE(bytes, owner);
 }
 
 // Construct package states and retain the first failed mount operation, or success.
@@ -18,9 +19,9 @@ extern "C" void FUN_00471adc(AocPackageMountBatch *batch)
     WindowOperationResult result(0);
     batch->packages = new Obj4221d4[batch->count];
     for (s32 index = 0; index < batch->count; ++index) {
-        WindowOperationResult operation = FUN_0047402c(
+        WindowOperationResult operation(FUN_0047402c(
             (WindowOperationState *)&batch->packages[index],
-            (const WindowOperationRequest *)&batch->entries[index]);
+            (const WindowOperationRequest *)&batch->entries[index]));
         if (byteIsAtLeast100(reinterpret_cast<const u8 *>(&operation))) {
             result = operation;
             break;

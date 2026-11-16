@@ -1,211 +1,222 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00468fec` (_code @ 0x468fec, 0x3cc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: typed rewrite; everything matches except register allocation of the four-slot copy (retail temporaries r2/r3/ip and a shared r0+256 base for the last record, build uses r3 and per-record bases). */
+#include "common.h"
+#include "gfx/ControllerModel.h"
+#include "code/Code003a.h"
+#include "code/Code0034.h"
+#include "code/Code0037.h"
+#include "ui/QuestSelectionState.h"
+#include "ui/UiControl.h"
 #include "code/Code0021_Smt4a.h"
+#include "shard/W6_W6Match2_EffectEditor.h"
+
+/* A model whose blend weight lives at 0x1FC. */
+struct QuestControllerModel : ControllerModel {
+    u8 unk08[0x1F4];
+    f32 weight; // 0x1FC
+};
+
+/* A holder whose second word points at its model. */
+struct QuestModelHolder {
+    u8 unk00[4];
+    QuestControllerModel *model;
+};
+
+/* One of the four candidate quests the chooser lists. */
+struct QuestMatchRecord {
+    u8 unk00[8];
+    u16 value;      // 0x08
+    u8 unk0A[0x48];
+    u8 first;       // 0x52
+    u8 second;      // 0x53
+};
+
+/* The chooser's copy of one candidate. */
+struct QuestChoiceSlot {
+    u8 first;
+    u8 unk01;
+    u16 value;
+    u8 second;
+    u8 unk05[5];
+};
+
+/* The quest-center interaction work as the choice step uses it. */
+struct QuestChoiceWork {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ s32 state;
+    /* 0x008 */ s32 counter;
+    /* 0x00C */ u8 unk00C[4];
+    /* 0x010 */ u8 kind;
+    /* 0x011 */ u8 unk011[7];
+    /* 0x018 */ u8 interactive;
+    /* 0x019 */ u8 entryToken[0x29B];
+    /* 0x2B4 */ u32 *script;
+    /* 0x2B8 */ u8 unk2B8[0x770];
+    /* 0xA28 */ QuestModelHolder *pointerHolder;
+    /* 0xA2C */ u8 unkA2C[0x20];
+    /* 0xA4C */ QuestModelHolder *cursorHolder;
+    /* 0xA50 */ u8 unkA50[0x290];
+    /* 0xCE0 */ u32 cursorMode;
+    /* 0xCE4 */ u8 unkCE4[8];
+    /* 0xCEC */ s32 choice;
+    /* 0xCF0 */ u8 unkCF0[4];
+    /* 0xCF4 */ u16 matchesLoaded;
+    /* 0xCF6 */ u8 unkCF6[0x154];
+    /* 0xE4A */ QuestChoiceSlot slots[4];
+};
 
 extern "C" {
+extern const u8 DAT_005333b8[];
+extern const u8 DAT_005333bb[];
 
-int messageGetChoiceResult(void);
-int dataTableFindMatching35(void);
-int messageBannerRestartOrClear(void);
-int panelSetTarget(int, int);
-int FUN_0037c8e4(int, int);
-int FUN_0037d6e4(int);
-int messageDismissNumericBanner(int);
-int FUN_003a7630(int);
-int messageMainSetTargetFlags(int);
-int FUN_003fe86c(int, int);
+s32 scrRunOpcodesStub(u32 handle);
+s32 messageWindowIsState1(void);
+s32 messageMainGetValue(void);
+const s8 *dataTable28Type1GetEntry(const void *token, u8 index);
+void buttonHelpSetText(const s8 *text, u32 color);
+void FUN_0037c8e4(s32 first, s32 second);
+void messageMainSetTargetFlags(s32 flags);
+s32 panelIsActiveState2(void);
+u8 gameFlagIsSet(u32 flag);
+QuestMatchRecord *dataTableFindMatching35(void);
+s32 messageGetChoiceResult(void);
+void messageBannerRestartOrClear(void);
 
-extern unsigned char DAT_005333bb; /* 0x5333bb */
-
-extern int gameFlagIsSet(unsigned int);
-extern unsigned int buttonHelpSetText(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00214da4. */
-extern int scrRunOpcodesStub(unsigned int);
-extern int messageMainGetValue(void);
-/* Supplied declaration required: messageGetChoiceResult. */
-/* Supplied declaration required: dataTableFindMatching35. */
-extern int messageWindowIsState1(void);
-/* Supplied declaration required: messageBannerRestartOrClear. */
-extern int FUN_0034919c(void);
-extern int panelIsActiveState2(void);
-/* Supplied declaration required: panelSetTarget. */
-/* Supplied declaration required: FUN_0037c8e4. */
-/* Supplied declaration required: FUN_0037d6e4. */
-/* Supplied declaration required: messageDismissNumericBanner. */
-/* Supplied declaration required: FUN_003a7630. */
-/* Supplied declaration required: messageMainSetTargetFlags. */
-/* Supplied declaration required: FUN_003fe86c. */
-extern int FUN_00467df8(void);
-extern unsigned int dataTable28Type1GetEntry(int, unsigned char);
-
-
-void FUN_00468fec(unsigned int *param_1)
-
+/* Makes the cursor model visible when it is hidden. */
+static __inline void showModel(ControllerModel *model)
 {
-/* irregular: 11 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned char temp_v4;
-  
-  temp_v0 = scrRunOpcodesStub(*(unsigned int *)param_1[0xad]);
-  if (temp_v0 != 2) {
-    temp_v0 = messageWindowIsState1();
-    if (temp_v0 != 0) {
-      temp_v0 = messageMainGetValue();
-      if ((char)param_1[6] == '\0') {
-        temp_v4 = *(unsigned char *)(temp_v0 + 0x5333b8);
-      }
-      else {
-        temp_v4 = (&DAT_005333bb)[temp_v0];
-        if ((temp_v0 == 0) && (temp_v1 = FUN_00467df8(), temp_v1 == 0)) {
-          temp_v4 = 7;
-        }
-      }
-      temp_v2 = dataTable28Type1GetEntry((int)param_1 + 0x19,temp_v4);
-      temp_v3 = buttonHelpSetText(temp_v2,0xf4f4f4ff);
-      if (temp_v0 != -1) {
-        temp_v3 = (unsigned int)(unsigned char)param_1[6];
-      }
-      if (temp_v0 != -1 && temp_v3 != 0) {
-        if (temp_v0 != 0) {
-          temp_v1 = panelIsActiveState2();
-          if (temp_v1 != 0) {
-            messageDismissNumericBanner(0);
-          }
-        }
-        else {
-          temp_v1 = FUN_0034919c();
-          if (temp_v1 == 0) {
-            FUN_0037c8e4(1,0);
-            temp_v1 = FUN_00467df8();
-            if (temp_v1 != 0) {
-              panelSetTarget(-temp_v1,0);
-            }
-            messageMainSetTargetFlags(1);
-          }
-        }
-        if (((char)param_1[4] == '\x0e') && (temp_v1 = gameFlagIsSet(0x491), temp_v1 == 0)) {
-          if (temp_v0 != 3) {
-            if (param_1[0x338] != 0) {
-              param_1[0x338] = 0;
-              temp_v3 = *(unsigned int *)(*(int *)(param_1[0x293] + 4) + 4);
-              if ((temp_v3 & 1) == 0) {
-                *(unsigned int *)(*(int *)(param_1[0x293] + 4) + 4) = temp_v3 | 1;
-              }
-            }
-            temp_v0 = *(int *)(param_1[0x293] + 4);
-            if ((*(unsigned int *)(temp_v0 + 4) & 1) == 0) {
-              temp_v3 = *(unsigned int *)(temp_v0 + 4) | 1;
-              *(unsigned int *)(temp_v0 + 4) = temp_v3;
-              return;
-            }
-          }
-          else {
-            if (param_1[0x338] != 7) {
-              param_1[0x338] = 7;
-            }
-            temp_v0 = *(int *)(param_1[0x293] + 4);
-            if ((*(unsigned int *)(temp_v0 + 4) & 1) != 0) {
-              temp_v3 = *(unsigned int *)(temp_v0 + 4) & 0xfffffffe;
-              *(unsigned int *)(temp_v0 + 4) = temp_v3;
-              return;
-            }
-          }
-        }
-      }
+    if ((model->flags & 1) == 0) {
+        model->flags |= 1;
     }
-  }
-  else {
-    if ((char)param_1[6] == '\0') {
-      FUN_003a7630(0);
-      *param_1 = *param_1 | 0x200;
-      FUN_0037d6e4(1);
-      temp_v0 = 1;
-      *(unsigned short *)(param_1 + 0x33d) = 1;
-      dataTableFindMatching35();
-      if (temp_v0 != 0) {
-        *(unsigned char *)((int)param_1 + 0xe4a) = *(unsigned char *)(temp_v0 + 0x52);
-        *(unsigned short *)(param_1 + 0x393) = *(unsigned short *)(temp_v0 + 8);
-        *(unsigned char *)((int)param_1 + 0xe4e) = *(unsigned char *)(temp_v0 + 0x53);
-        *(unsigned char *)(param_1 + 0x395) = *(unsigned char *)(temp_v0 + 0xa6);
-        *(unsigned short *)((int)param_1 + 0xe56) = *(unsigned short *)(temp_v0 + 0x5c);
-        *(unsigned char *)(param_1 + 0x396) = *(unsigned char *)(temp_v0 + 0xa7);
-        *(unsigned char *)((int)param_1 + 0xe5e) = *(unsigned char *)(temp_v0 + 0xfa);
-        *(unsigned short *)(param_1 + 0x398) = *(unsigned short *)(temp_v0 + 0xb0);
-        *(unsigned char *)((int)param_1 + 0xe62) = *(unsigned char *)(temp_v0 + 0xfb);
-        *(unsigned char *)(param_1 + 0x39a) = *(unsigned char *)(temp_v0 + 0x14e);
-        *(unsigned short *)((int)param_1 + 0xe6a) = *(unsigned short *)(temp_v0 + 0x104);
-        *(unsigned char *)(param_1 + 0x39b) = *(unsigned char *)(temp_v0 + 0x14f);
-      }
-      FUN_00214da4();
-      param_1[1] = 8;
-      param_1[2] = 0;
-      return;
+}
+
+/* Drives the quest-center choice: shows the help text for the highlighted entry, or reacts to the finished script's answer. */
+void FUN_00468fec(QuestChoiceWork *work)
+{
+    if (scrRunOpcodesStub(*work->script) != 2) {
+        if (messageWindowIsState1() == 0) {
+            return;
+        }
+        s32 value = messageMainGetValue();
+        u8 text;
+        if (work->interactive == 0) {
+            text = DAT_005333b8[value];
+        } else {
+            text = DAT_005333bb[value];
+            if (value == 0 && FUN_00467df8() == 0) {
+                text = 7;
+            }
+        }
+        buttonHelpSetText(dataTable28Type1GetEntry(work->entryToken, text), 0xf4f4f4ff);
+        if (value == -1 || work->interactive == 0) {
+            return;
+        }
+        if (value == 0) {
+            if (FUN_0034919c() == 0) {
+                FUN_0037c8e4(1, 0);
+                u32 target = FUN_00467df8();
+                if (target != 0) {
+                    panelSetTarget(-target, 0);
+                }
+                messageMainSetTargetFlags(1);
+            }
+        } else if (panelIsActiveState2() != 0) {
+            messageDismissNumericBanner(0);
+        }
+        if (work->kind == 14 && gameFlagIsSet(0x491) == 0) {
+            if (value != 3) {
+                if (work->cursorMode != 0) {
+                    work->cursorMode = 0;
+                    showModel(work->cursorHolder->model);
+                }
+                showModel(work->cursorHolder->model);
+            } else {
+                if (work->cursorMode != 7) {
+                    work->cursorMode = 7;
+                }
+                ControllerModel *model = work->cursorHolder->model;
+                if ((model->flags & 1) != 0) {
+                    model->flags &= ~1u;
+                }
+            }
+        }
+        return;
+    }
+    if (work->interactive == 0) {
+        FUN_003a7630(0);
+        work->flags |= 0x200;
+        FUN_0037d6e4(1);
+        work->matchesLoaded = 1;
+        QuestMatchRecord *records = dataTableFindMatching35();
+        if (records != NULL) {
+            work->slots[0].first = records[0].first;
+            work->slots[0].value = records[0].value;
+            work->slots[0].second = records[0].second;
+            work->slots[1].first = records[1].first;
+            work->slots[1].value = records[1].value;
+            work->slots[1].second = records[1].second;
+            work->slots[2].first = records[2].first;
+            work->slots[2].value = records[2].value;
+            work->slots[2].second = records[2].second;
+            work->slots[3].first = records[3].first;
+            work->slots[3].value = records[3].value;
+            work->slots[3].second = records[3].second;
+        }
+        FUN_00214da4();
+        work->state = 8;
+        work->counter = 0;
+        return;
     }
     FUN_003a7630(0);
-    temp_v2 = messageGetChoiceResult();
-    switch(temp_v2) {
+    switch (messageGetChoiceResult()) {
+    case -1:
+        if (FUN_0034919c() != 0) {
+            messageDismissNumericBanner(0);
+        }
+        messageBannerRestartOrClear();
+        work->state = 17;
+        work->counter = 0;
+        break;
     case 0:
-      FUN_00214da4();
-      param_1[2] = 0;
-      param_1[1] = 7;
-      break;
+        FUN_00214da4();
+        work->counter = 0;
+        work->state = 7;
+        break;
     case 1:
-      temp_v0 = FUN_0034919c();
-      if (temp_v0 != 0) {
-        messageDismissNumericBanner(0);
-      }
-      FUN_00214da4();
-      param_1[1] = 8;
-      param_1[2] = 0;
-      break;
+        if (FUN_0034919c() != 0) {
+            messageDismissNumericBanner(0);
+        }
+        FUN_00214da4();
+        work->state = 8;
+        work->counter = 0;
+        break;
     case 2:
-      temp_v0 = FUN_0034919c();
-      if (temp_v0 != 0) {
+        if (FUN_0034919c() != 0) {
+            messageDismissNumericBanner(0);
+        }
+        FUN_00214da4();
+        work->state = 9;
+        work->counter = 0;
         messageDismissNumericBanner(0);
-      }
-      FUN_00214da4();
-      param_1[1] = 9;
-      param_1[2] = 0;
-      messageDismissNumericBanner(0);
-      break;
-    case 3:
-      temp_v0 = FUN_0034919c();
-      if (temp_v0 != 0) {
-        messageDismissNumericBanner(0);
-      }
-      FUN_00214da4();
-      param_1[1] = 10;
-      param_1[2] = 0;
-      temp_v0 = *(int *)(param_1[0x28a] + 4);
-      FUN_003fe86c(temp_v0,0);
-      *(unsigned int *)(temp_v0 + 0x1fc) = 0x3f800000;
-      temp_v3 = *(unsigned int *)(*(int *)(param_1[0x293] + 4) + 4);
-      if ((temp_v3 & 1) == 0) {
-        *(unsigned int *)(*(int *)(param_1[0x293] + 4) + 4) = temp_v3 | 1;
-      }
-      break;
-    case 0xffffffff:
-      temp_v0 = FUN_0034919c();
-      if (temp_v0 != 0) {
-        messageDismissNumericBanner(0);
-      }
-      messageBannerRestartOrClear();
-      param_1[1] = 0x11;
-      param_1[2] = 0;
+        break;
+    case 3: {
+        if (FUN_0034919c() != 0) {
+            messageDismissNumericBanner(0);
+        }
+        FUN_00214da4();
+        work->state = 10;
+        work->counter = 0;
+        QuestControllerModel *model = work->pointerHolder->model;
+        FUN_003fe86c(model, 0, 0, 0.0f, 0.0f);
+        model->weight = 1.0f;
+        showModel(work->cursorHolder->model);
+        break;
     }
-    temp_v0 = messageGetChoiceResult();
-    if (temp_v0 != -1) {
-      temp_v3 = messageGetChoiceResult();
-      param_1[0x33b] = temp_v3;
-      return;
     }
-    param_1[0x33b] = 0;
-  }
-  return;
+    if (messageGetChoiceResult() != -1) {
+        work->choice = messageGetChoiceResult();
+        return;
+    }
+    work->choice = 0;
 }
 
 } /* extern "C" */

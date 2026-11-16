@@ -20,13 +20,13 @@ typedef struct TableOwner {
 
 void dataTableFileGetTable(void *file, s32 index);
 TableEntry *dataTableGetEntries(void);
-u32 dataTableGetCount(void);
+s32 dataTableGetCount(void);
 
 /* Return 0 when any used entry of the owner's table has no data yet, else 1. */
 s32 FUN_0038ba40(TableOwner *owner)
 {
     TableEntry *entries;
-    u32 count;
+    s32 count;
 
     if (owner->entries == NULL) {
         return 1;
@@ -41,7 +41,7 @@ s32 FUN_0038ba40(TableOwner *owner)
     dataTableFileGetTable(owner->file, 0);
     count = dataTableGetCount();
     entries = count != 0 ? owner->entries : NULL;
-    for (u32 i = 0; i < count; i++) {
+    for (s32 i = 0; i < count; i++) {
         if (entries[i].used && entries[i].data == NULL) {
             return 0;
         }

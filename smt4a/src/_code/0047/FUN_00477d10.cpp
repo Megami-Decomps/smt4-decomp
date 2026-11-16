@@ -1,180 +1,156 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00477d10` (_code @ 0x477d10, 0x440 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "classes/AocMenu.h"
+#include "classes/Obj422214Owner.h"
+#include "shard/Shard004A.h"
+#include "shard/W6_W6Match2_StatusBytes.h"
+
+/* The part of the add-on main block that holds the per-slot records (0x9c8 bytes each). */
+struct AocSlotTableView {
+    /* 0x000 */ u8 unk000[0x678];
+    /* 0x678 */ Obj422214Owner *records;
+    /* 0x67C */ u32 count;
+};
+typedef char AocSlotTableViewOffsets[
+    offsetof(AocSlotTableView, records) == 0x678 && offsetof(AocSlotTableView, count) == 0x67c ? 1 : -1];
 
 extern "C" {
+extern AocSlotTableView *g_aocMain;
 
-int sysPlaySe(...);
-int FUN_00182084(void);
-int buttonHelpBeginExit(...);
-int FUN_00183f58(...);
-int ifTouchDecrementTimer(void);
-int buttonHelpSetText(...);
-int FUN_002bf4f4(int);
-int buttonHelpSetSelectedId(int);
-int flaggedValueHolderGetTotal(unsigned int *);
+void sysPlaySe(u32 id);
+void FUN_00182084(void);
+void buttonHelpBeginExit(s32 clearKinds);
+void FUN_00183f58(u32 index, u32 kind, u32 value, u32 queue);
+void ifTouchDecrementTimer(void);
+void buttonHelpSetText(const s8 *text, u32 color);
+void FUN_002bf4f4(u8 value);
+void buttonHelpSetSelectedId(u16 value);
+u8 countOwnerIsValidIndex(const AocSlotTableView *owner, u32 index);
+u32 statusDecodeActivityState(const StatusBytes *status);
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_3_stack;
+enum {
+    AOC_HELP_COLOR = 0xf4f4f4ff,
+    AOC_MENU_HELP_SHOWN = 0x100000
+};
 
-extern int g_aocMain; /* 0x570260 */
-
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00182084. */
-/* Supplied declaration required: buttonHelpBeginExit. */
-/* Supplied declaration required: FUN_00183f58. */
-/* Supplied declaration required: ifTouchDecrementTimer. */
-/* Supplied declaration required: buttonHelpSetText. */
-/* Supplied declaration required: FUN_002bf4f4. */
-/* Supplied declaration required: buttonHelpSetSelectedId. */
-extern int countOwnerIsValidIndex(int, unsigned int);
-extern int statusDecodeActivityState(int);
-/* Supplied declaration required: flaggedValueHolderGetTotal. */
-
-
-void FUN_00477d10(unsigned int *param_1,unsigned int param_2,int param_3)
-
+/* Releases the six touch registrations of the help panel. */
+static __inline void releaseTouchRegistrations(void)
 {
-/* irregular: 9 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  buttonHelpSetSelectedId(0);
-  switch(param_2) {
-  case 0:
-    *param_1 = *param_1 | 0x100000;
-    sysPlaySe(0xcb);
-    temp_v2 = 0;
-    do {
-      ifTouchDecrementTimer();
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 6);
-    FUN_00182084();
-    return;
-  case 1:
-    *param_1 = *param_1 | 0x100000;
-    if (param_3 != 0) {
-      sysPlaySe(0xcc);
-      temp_v2 = 0;
-      do {
+    for (s32 index = 0; index < 6; ++index) {
         ifTouchDecrementTimer();
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < 6);
-      FUN_00182084();
     }
-    FUN_00183f58(0,0x11,0,1);
-    FUN_00183f58(1,0);
-    FUN_00183f58(2,0xb,0x4b,1);
-    FUN_00183f58(3,0,0,1);
-    FUN_00183f58(4,0x10,0x4f,1);
-    FUN_00183f58(5,0,0,1);
-    return;
-  case 2:
-    *param_1 = *param_1 | 0x100000;
-    temp_v2 = g_aocMain;
-    flaggedValueHolderGetTotal(param_1 + 0x90);
-    if (param_3 != 0) {
-      sysPlaySe(0xcd);
-      temp_v1 = 0;
-      do {
-        ifTouchDecrementTimer();
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 6);
-      FUN_00182084();
-    }
-    FUN_00183f58(0,10,0x4a,1);
-    FUN_00183f58(1,0);
-    FUN_00183f58(2,0xb,0x4b,1);
-    FUN_00183f58(3,0,0,1);
-    temp_v0 = flaggedValueHolderGetTotal(param_1 + 0x90);
-    temp_v1 = countOwnerIsValidIndex(temp_v2,temp_v0);
-    if (temp_v1 != 0) {
-      temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x90);
-      if (*(char *)(*(int *)(temp_v2 + 0x678) + temp_v1 * 0x9c8 + 0x9b3) != '\0') {
-        FUN_00183f58(4,0xf,0x4f,0);
-        FUN_00183f58(5,0,0);
-        FUN_002bf4f4(1);
-        buttonHelpSetText(param_1 + 0x44c,0xf4f4f4ff);
-        return;
-      }
-      temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x90);
-      temp_v2 = statusDecodeActivityState(*(int *)(temp_v2 + 0x678) + temp_v1 * 0x9c8);
-      if (temp_v2 == 0) {
-        FUN_00183f58(4,0xc,0x4c,0);
-        FUN_00183f58(5,0,0);
-        FUN_002bf4f4(1);
-        buttonHelpSetText(param_1 + 0x44c,0xf4f4f4ff);
-        return;
-      }
-      if (temp_v2 == 1) {
-        FUN_00183f58(4,0xd,0x4d,0);
-        FUN_00183f58(5,0,0);
-        FUN_002bf4f4(1);
-        buttonHelpSetText(param_1 + 0x44c,0xf4f4f4ff);
-        return;
-      }
-      if (temp_v2 == 2) {
-        FUN_00183f58(4,0xe,0x4e,0);
-        FUN_00183f58(5,0,0);
-        FUN_002bf4f4(1);
-        buttonHelpSetText(param_1 + 0x44c,0xf4f4f4ff);
-        return;
-      }
-      if (temp_v2 != 3) {
-        FUN_00183f58(5,0,0);
-        FUN_002bf4f4(1);
-        buttonHelpSetText(param_1 + 0x44c,0xf4f4f4ff);
-        return;
-      }
-    }
-    FUN_00183f58(4,0x11,0);
-    FUN_00183f58(5,0,0);
+}
+
+/* The slot the menu's selection currently points at. */
+static __inline u32 selectedSlot(const AocMenu *menu)
+{
+    return flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(&menu->selection));
+}
+
+static __inline Obj422214Owner *selectedRecord(AocSlotTableView *main, const AocMenu *menu)
+{
+    return &main->records[selectedSlot(menu)];
+}
+
+/* Clears the last unit and applies the prompt text and its color. */
+static __inline void finishFooter(AocMenu *menu)
+{
+    FUN_00183f58(5, 0, 0, 0);
     FUN_002bf4f4(1);
-    buttonHelpSetText(param_1 + 0x44c,0xf4f4f4ff);
-    return;
-  case 3:
-    *param_1 = *param_1 | 0x100000;
-    if (param_3 != 0) {
-      sysPlaySe(0xcc);
-      temp_v2 = 0;
-      do {
-        ifTouchDecrementTimer();
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < 6);
-      FUN_00182084();
+    buttonHelpSetText(reinterpret_cast<const s8 *>(menu->prompt), AOC_HELP_COLOR);
+}
+
+/* Lays out the menu's six button-help units for the given selection (-1 closes them) and, when `mode` is set, announces the change. */
+void FUN_00477d10(AocMenu *menu, u32 selection, s32 mode)
+{
+    buttonHelpSetSelectedId(0);
+    switch (selection) {
+    case 0xffffffff:
+        if ((menu->flags & AOC_MENU_HELP_SHOWN) != 0) {
+            menu->flags &= ~AOC_MENU_HELP_SHOWN;
+            buttonHelpBeginExit(0);
+            releaseTouchRegistrations();
+        }
+        return;
+    case 0:
+        menu->flags |= AOC_MENU_HELP_SHOWN;
+        sysPlaySe(0xcb);
+        releaseTouchRegistrations();
+        FUN_00182084();
+        return;
+    case 1:
+        menu->flags |= AOC_MENU_HELP_SHOWN;
+        if (mode != 0) {
+            sysPlaySe(0xcc);
+            releaseTouchRegistrations();
+            FUN_00182084();
+        }
+        FUN_00183f58(0, 0x11, 0, 1);
+        FUN_00183f58(1, 0, 0, 1);
+        FUN_00183f58(2, 0xb, 0x4b, 1);
+        FUN_00183f58(3, 0, 0, 1);
+        FUN_00183f58(4, 0x10, 0x4f, 1);
+        FUN_00183f58(5, 0, 0, 1);
+        return;
+    case 2: {
+        menu->flags |= AOC_MENU_HELP_SHOWN;
+        AocSlotTableView *main = g_aocMain;
+        selectedSlot(menu);
+        if (mode != 0) {
+            sysPlaySe(0xcd);
+            releaseTouchRegistrations();
+            FUN_00182084();
+        }
+        FUN_00183f58(0, 0xa, 0x4a, 1);
+        FUN_00183f58(1, 0, 0, 1);
+        FUN_00183f58(2, 0xb, 0x4b, 1);
+        FUN_00183f58(3, 0, 0, 1);
+        if (countOwnerIsValidIndex(main, selectedSlot(menu))) {
+            if (selectedRecord(main, menu)->flags[7] != 0) {
+                FUN_00183f58(4, 0xf, 0x4f, 0);
+            } else {
+                switch (statusDecodeActivityState(reinterpret_cast<const StatusBytes *>(selectedRecord(main, menu)))) {
+                case 0:
+                    FUN_00183f58(4, 0xc, 0x4c, 0);
+                    break;
+                case 1:
+                    FUN_00183f58(4, 0xd, 0x4d, 0);
+                    break;
+                case 2:
+                    FUN_00183f58(4, 0xe, 0x4e, 0);
+                    break;
+                case 3:
+                    FUN_00183f58(4, 0x11, 0, 0);
+                    break;
+                }
+            }
+        } else {
+            FUN_00183f58(4, 0x11, 0, 0);
+        }
+        finishFooter(menu);
+        return;
     }
-    FUN_00183f58(0,0x11,0,1);
-    FUN_00183f58(1,0);
-    FUN_00183f58(2,0x11,0,1);
-    FUN_00183f58(3,0,0,1);
-    FUN_00183f58(4,0x10,0x4f,1);
-    FUN_00183f58(5,0,0,1);
-    FUN_002bf4f4(0);
-    buttonHelpSetText(0,0xf4f4f4ff);
-    return;
-  case 4:
-    *param_1 = *param_1 | 0x100000;
-    if (param_3 != 0) {
-      sysPlaySe(0xd0);
-      return;
+    case 3:
+        menu->flags |= AOC_MENU_HELP_SHOWN;
+        if (mode != 0) {
+            sysPlaySe(0xcc);
+            releaseTouchRegistrations();
+            FUN_00182084();
+        }
+        FUN_00183f58(0, 0x11, 0, 1);
+        FUN_00183f58(1, 0, 0, 1);
+        FUN_00183f58(2, 0x11, 0, 1);
+        FUN_00183f58(3, 0, 0, 1);
+        FUN_00183f58(4, 0x10, 0x4f, 1);
+        FUN_00183f58(5, 0, 0, 1);
+        FUN_002bf4f4(0);
+        buttonHelpSetText(NULL, AOC_HELP_COLOR);
+        return;
+    case 4:
+        menu->flags |= AOC_MENU_HELP_SHOWN;
+        if (mode != 0) {
+            sysPlaySe(0xd0);
+        }
+        return;
     }
-    break;
-  case 0xffffffff:
-    if ((*param_1 & 0x100000) != 0) {
-      *param_1 = *param_1 & 0xffefffff;
-      buttonHelpBeginExit(0);
-      temp_v2 = 0;
-      do {
-        ifTouchDecrementTimer();
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < 6);
-      return;
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

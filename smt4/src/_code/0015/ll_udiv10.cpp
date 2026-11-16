@@ -14,9 +14,9 @@ extern "C" __value_in_regs LongDivisionResult ll_udiv10(u64 dividend)
     remainder -= (quotient + (quotient << 2)) << 1;
     LongDivisionResult result;
     result.quotient = quotient;
-    result.remainder = static_cast<u32>(remainder);
+    result.remainder = static_cast<s32>(remainder);
     if (static_cast<s64>(remainder) < 0) {
-        result.remainder = static_cast<u32>(remainder) + 10;
+        result.remainder = static_cast<s32>(remainder) + 10;
     } else {
         ++result.quotient;
     }

@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `nw_ut_ResDicPatricia_Get` (_code @ 0x1b36d8, 0xa8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include <string.h>
 
 extern "C" {
 
-int libc_strcmp(int, unsigned int);
 
-/* Supplied declaration required: libc_strcmp. */
+/* Supplied declaration required: strcmp. */
 
 
 void nw_ut_ResDicPatricia_Get(int *param_1,int param_2,unsigned int param_3)
@@ -37,7 +37,7 @@ void nw_ut_ResDicPatricia_Get(int *param_1,int param_2,unsigned int param_3)
     } while (*puVar4 < temp_v2);
   }
   if (puVar4[2] != 0) {
-    libc_strcmp(param_2,(int)puVar4 + puVar4[2] + 8);
+    strcmp((const char *)param_2,(const char *)((int)puVar4 + puVar4[2] + 8));
   }
   return;
 }

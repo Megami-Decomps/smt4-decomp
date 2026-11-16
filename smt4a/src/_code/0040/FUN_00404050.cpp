@@ -3,6 +3,7 @@
 #include "addon/PackageSelection.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
+#include <string.h>
 
 struct EffectPlacement {
     u8 unk00[8];
@@ -20,7 +21,6 @@ EffectPlacement *asdTMTexTableEntryAt(u32 table, u32 id);
 s32 FUN_004038e0(u32 unused, u32 kind);
 void drawSetColorFromRGBA8(u32 rgba);
 void FUN_00183bb0(void);
-s32 libc_strcmp(const char *a, const char *b);
 void gameGetPlayerData(void);
 const char *gameGetPlayerName(void);
 void textFormatBuffer(char *buffer, const char *format, ...);
@@ -81,7 +81,7 @@ void FUN_00404050(u32 effect, f32 speed, u32 handle, s32 x, s32 y, s32 useFirstS
         }
         placement = asdTMTexTableEntryAt(0x32, 100);
         name = entry->content.name;
-        if (libc_strcmp(name, DAT_0052d134) == 0) {
+        if (strcmp(name, DAT_0052d134) == 0) {
             gameGetPlayerData();
             name = gameGetPlayerName();
         }

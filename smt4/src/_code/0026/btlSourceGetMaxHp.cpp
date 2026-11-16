@@ -9,7 +9,8 @@ extern "C" {
 s32 btlSourceGetMaxHp(const BtlUnitSource *source)
 {
     s32 maxHp = source->maxHp;
-    if (g_btlMainState.state != NULL && g_btlMainState.state->core.mode != 0x15) {
+    BtlMainState *state = g_btlMainState.state;
+    if (state != NULL && state->core.mode != 0x15) {
         for (s32 i = 0; i < 0x6d; ++i) {
             BtlEntry *unit = &g_btlMainState.state->entries[i];
             if ((unit->flags & 1) && !(unit->flags & 0x40) &&

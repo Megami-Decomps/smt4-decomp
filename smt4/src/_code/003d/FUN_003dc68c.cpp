@@ -38,7 +38,6 @@ extern const char DAT_0040090c[];   /* "NOT_EFT" */
 extern const char DAT_00400904[];   /* "%s%02d" */
 extern const char DAT_004008c4[];   /* "battle/effect/%s.eft" */
 u32 libc_strlen(const char *text);
-s32 libc_strcmp(const char *a, const char *b);
 s32 libc_strncmp(const char *a, const char *b, u32 count);
 char *libc_strcpy(char *dest, const char *src);
 void memClear(void *buffer, s32 size);
@@ -52,7 +51,7 @@ void asdLoadFileAsyncSimple(const char *path, void **file, s32 flags);
 
 static __inline bool nameEquals(const char *name, const char *other)
 {
-    return name != 0 && libc_strcmp(name, other) == 0;
+    return name != 0 && strcmp(name, other) == 0;
 }
 
 static __inline bool nameStartsWith(const char *name, const char *prefix)
@@ -69,11 +68,11 @@ extern "C" u32 FUN_003dc68c(BtlEffectWork *work)
     char buffer[128];
     for (s32 i = 0; i < 4; i++) {
         const char *name = work->names + 0x108 + i * 0x16;
-        if (libc_strlen(name) == 0 || libc_strcmp(name, "0") == 0)
+        if (libc_strlen(name) == 0 || strcmp(name, "0") == 0)
             continue;
-        if (libc_strcmp(DAT_0040090c, name) == 0)
+        if (strcmp(DAT_0040090c, name) == 0)
             continue;
-        if (name != 0 && (libc_strcmp(name, g_btlEffect.reservedA) == 0 || libc_strcmp(name, g_btlEffect.reservedB) == 0))
+        if (name != 0 && (strcmp(name, g_btlEffect.reservedA) == 0 || strcmp(name, g_btlEffect.reservedB) == 0))
             continue;
         if (nameEquals(name, g_btlEffect.reservedC))
             continue;
@@ -83,7 +82,7 @@ extern "C" u32 FUN_003dc68c(BtlEffectWork *work)
             bool found = false;
             for (s32 n = 0; n < 11; n++) {
                 textFormatBuffer(buffer, DAT_00400904, g_btlEffect.bufferPrefix, n);
-                if (libc_strcmp(buffer, name) == 0) {
+                if (strcmp(buffer, name) == 0) {
                     FUN_002276f8(work);
                     work->bufferHandle = FUN_00246644(n & 0xFF, 7, 0);
                     work->bufferIndex = n;

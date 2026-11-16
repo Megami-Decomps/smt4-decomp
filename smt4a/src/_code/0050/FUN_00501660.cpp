@@ -9,9 +9,9 @@ extern "C" u32* FUN_00501660(const RenderPassViewportState* state, u32* cursor)
 {
     const ViewportObjectView* viewport = reinterpret_cast<const ViewportObjectView*>(state);
     u32 halfWidth = gpuViewportEncode<16>(static_cast<f32>(viewport->width) * 0.5f);
-    u32 inverseWidth = gpuViewportEncode<23>(2.0f / static_cast<f32>(viewport->width)) << 1;
+    u32 inverseWidth = gpuViewportEncodeInverse(2.0f / static_cast<f32>(viewport->width)) << 1;
     u32 halfHeight = gpuViewportEncode<16>(static_cast<f32>(viewport->height) * 0.5f);
-    u32 inverseHeight = gpuViewportEncode<23>(2.0f / static_cast<f32>(viewport->height)) << 1;
+    u32 inverseHeight = gpuViewportEncodeInverse(2.0f / static_cast<f32>(viewport->height)) << 1;
     *cursor++ = halfWidth;
     *cursor++ = 0x70041;
     *cursor++ = inverseWidth;

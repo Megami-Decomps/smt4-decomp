@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail keeps both `table + index * 0x5c` (r6) and the slot address (r4 = r6 + 0x1c) live and addresses some fields from each; branch layout differs accordingly. */
 #include "common.h"
 #include "code/Code001c.h"
+#include <string.h>
 
 struct NamedResourceObject {
     /* 0x0 */ u8 unk0[4];
@@ -33,7 +34,6 @@ struct NamedResourceTable {
 extern "C" {
 extern void *g_handleRegistry;
 s32 FUN_0040ab8c(NamedResourceHandle *handle);
-s32 libc_strcmp(const char *a, const char *b);
 char *strncpy(char *destination, const char *source, u32 count);
 void ptrListRemoveClearOwner(void *list, NamedResourceObject *object);
 
@@ -47,7 +47,7 @@ void FUN_003e573c(NamedResourceTable *table, s32 index, const char *name, u16 ki
     if (FUN_0040ab8c(slot->handle) != 0) {
         NamedResourceObject *object;
 
-        if (libc_strcmp(slot->name, name) == 0) {
+        if (strcmp(slot->name, name) == 0) {
             return;
         }
         object = slot->handle->object;

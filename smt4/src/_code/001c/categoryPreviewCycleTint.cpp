@@ -46,7 +46,7 @@ void FUN_0029d8f4(const CategoryPreviewRecord *record, s32 enabled, u8 mode);
 void statusPanelSetOpen(s32 enabled);
 }
 
-static inline void categoryPreviewUpdate(const CategoryPreviewWork *work, s32 index)
+static void categoryPreviewUpdate(const CategoryPreviewWork *work, s32 index)
 {
     CategoryPreviewRecord record;
     FUN_0026a858(work->entries[index].id, &record);

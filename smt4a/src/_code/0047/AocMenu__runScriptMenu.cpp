@@ -52,7 +52,7 @@ extern AocGlobals *g_aocMain;
 void FUN_0047bcdc(AocMenuProcess *process, s32 value);
 void FUN_00477d10(AocMenuProcess *process, s32 a, s32 b);
 void FUN_00476e58(AocMenuProcess *process, s32 unused, s32 next);
-void *windowCreateStatusOperation(AocMenuObject *object, s32 kind);
+AocMenuObject *windowCreateStatusOperation(AocMenuObject *object, s32 kind);
 s32 tableGroupFindEntryIndex(void *table, const char *name);
 void scrScriptProcessStartEntry(void *script, s32 entry);
 void scrRunOpcodesStub(void *script);
@@ -83,8 +83,7 @@ void AocMenu::runScriptMenu()
     case 1:
         if (FUN_002e19f8() != 0 && (process->flags & 0x200) != 0) {
             scrRunOpcodesStub(process->script);
-            AocMenuObject *object = (AocMenuObject *)&process->unk20C;
-            windowCreateStatusOperation(object, 3);
+            AocMenuObject *object = windowCreateStatusOperation((AocMenuObject *)&process->unk20C, 3);
             process->active = object;
             object->result[4] = *(u16 *)(aoc->units + flaggedValueHolderGetTotal(process->holder) * 0x9c8 + 0x9aa);
             process->phase = 2;

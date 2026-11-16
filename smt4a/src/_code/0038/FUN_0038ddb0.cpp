@@ -1,4 +1,3 @@
-/* NON_MATCHING: status removal and feedback branches are laid out in a different order. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/BattleUnit.h"
@@ -22,20 +21,20 @@ u32 FUN_0038ddb0(void)
     s32 checkResistance = scrGetArg(2);
     u32 options = (u32)btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit));
     BtlMainStateA *battle = btlGetMainState();
-    if (apply) {
+    if (!apply) {
+        FUN_004fcffc(0, options, battle->roster, 1u << status);
+    } else {
         if (checkResistance &&
             (FUN_004c8340(-1, 0, FUN_004bf9a0(status), 2, -1) & 0x10000)) {
             FUN_004fda78(0, 0, options, battle->roster, 4, 0);
             FUN_004fb43c(0, options, reinterpret_cast<void *>(0x100028c), 0, 1, 0, 0);
         } else {
             FUN_004fdb18(0, options, battle->roster, 1u << status, 1);
-            if (status != 4)
-                FUN_004fb43c(0, options, reinterpret_cast<void *>(0x100025f), 0, 0, 0, 0);
-            else
+            if (status == 4)
                 FUN_004fb43c(0, options, reinterpret_cast<void *>(0x1000275), 0, 0, 0, 0);
+            else
+                FUN_004fb43c(0, options, reinterpret_cast<void *>(0x100025f), 0, 0, 0, 0);
         }
-    } else {
-        FUN_004fcffc(0, options, battle->roster, 1u << status);
     }
     return 1;
 }

@@ -60,14 +60,20 @@ struct EffectIntegerKeySource {
 typedef char EffectIntegerKeySizeCheck[sizeof(EffectIntegerKey) == 0x18 ? 1 : -1];
 typedef char EffectIntegerKeySourceOffsetCheck[offsetof(EffectIntegerKeySource, keys) == 0x44 ? 1 : -1];
 
+/* Legacy key records start at offset 0 of their owner; the frame sits 0x18 into the record. */
+struct EffectScalarKeyLegacy {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ s32 frame;
+    /* 0x1C */ u8 unk1C[0x1C];
+    /* 0x38 */ f32 value;
+    /* 0x3C */ u8 unk3C[0x8];
+};
 struct EffectScalarKeyLegacySource {
-    u8 unk000[0x18];
-    EffectScalarKey keys[4]; // 0x18
+    EffectScalarKeyLegacy keys[4]; // 0x00
 };
 struct EffectScalarKeyLegacyTrack {
-    u8 unk000[0x18];
-    EffectScalarKey keys[4]; // 0x18
-    u8 unk128[0xf8];
+    EffectScalarKeyLegacy keys[4]; // 0x00
+    u8 unk110[0x110];
     f32 step; // 0x220
     u8 unk224[0x28];
     f32 target; // 0x24c
@@ -76,8 +82,9 @@ struct EffectScalarKeyLegacyTrack {
     u8 unk2e4[0x38];
     s32 duration; // 0x31c
 };
+typedef char EffectScalarKeyLegacySizeCheck[sizeof(EffectScalarKeyLegacy) == 0x44 ? 1 : -1];
 typedef char EffectScalarKeyLegacyTrackOffsetCheck[
-    offsetof(EffectScalarKeyLegacyTrack, keys) == 0x18 &&
+    offsetof(EffectScalarKeyLegacyTrack, keys) == 0 &&
     offsetof(EffectScalarKeyLegacyTrack, step) == 0x220 &&
     offsetof(EffectScalarKeyLegacyTrack, target) == 0x24c &&
     offsetof(EffectScalarKeyLegacyTrack, index) == 0x2e3 &&

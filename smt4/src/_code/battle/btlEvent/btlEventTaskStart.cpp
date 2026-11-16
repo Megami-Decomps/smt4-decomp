@@ -1,5 +1,6 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include <string.h>
 
 extern "C" {
 
@@ -19,7 +20,6 @@ typedef struct BtlEventTask001e2240 {
 
 s32 jobIsValid(u32 handle);
 u32 taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, void (*update)(void), void (*destroy)(void), void *owner, u32 id);
-s32 libc_strcmp(const char *a, const char *b);
 s32 libc_strlen(const char *s);
 void btlEventUpdateCurrentWork(void);
 void btlEventDestroy(void);
@@ -37,7 +37,7 @@ void btlEventTaskStart(BtlEventTask001e2240 *task)
         asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\btlEvent.cpp", 653);
         state = g_btlEvent = (EventState001e2240 *)asdMemAlloc(0x100, 0x100, 0, 0x30, 1);
         state->active = 0;
-        if (libc_strcmp(task->script, DAT_00400988) != 0 && libc_strlen(task->script) != 0) {
+        if (strcmp(task->script, DAT_00400988) != 0 && libc_strlen(task->script) != 0) {
             state->active = 1;
             state->unk2c = 0;
         }

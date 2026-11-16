@@ -4,11 +4,12 @@
 /* Skip equal-time keys and set up interpolation toward the next alpha key. */
 extern "C" void FUN_001dd974(EffectAlphaKeyState *state, const EffectAlphaKey *source)
 {
+    s32 distance = 1;
     if (state->index >= 3) {
         state->index = 4;
     }
     s32 current = state->index;
-    for (s32 distance = 1; current + distance < 4; ++distance) {
+    for (; current + distance < 4; ++distance) {
         state->duration = source[current + distance].frame - source[current].frame;
         if (state->duration > 0) {
             const EffectAlphaKey *from = &state->keys[current];
@@ -16,7 +17,7 @@ extern "C" void FUN_001dd974(EffectAlphaKeyState *state, const EffectAlphaKey *s
             state->step = (f32)((s32)to->alpha - (s32)from->alpha) /
                           (f32)(to->frame - from->frame);
             state->target = (f32)(u32)to->alpha;
-            state->index = (s8)(current + distance);
+            state->index = (s8)(distance + current);
             return;
         }
     }

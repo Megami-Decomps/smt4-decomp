@@ -2,6 +2,7 @@
 #include "shard/W6_W6Match6_EffectLoader.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
+#include <string.h>
 
 struct VersionEffectNames : EffectNameTable {
     char versionNames[4][0x16]; // 0x108
@@ -14,7 +15,6 @@ extern "C" {
 extern BtlEffectGlobals g_btlEffect;
 extern const char DAT_00400914[], DAT_0040090c[], DAT_004008c4[];
 u32 libc_strlen(const char *);
-s32 libc_strcmp(const char *, const char *);
 s32 libc_strncmp(const char *, const char *, u32);
 
 static __inline bool nameStartsWith(const char *name, const char *prefix)
@@ -24,7 +24,7 @@ static __inline bool nameStartsWith(const char *name, const char *prefix)
 
 static __inline bool nameEquals(const char *name, const char *other)
 {
-    return name && !libc_strcmp(name, other);
+    return name && !strcmp(name, other);
 }
 
 void textFormatBuffer(char *, const char *, ...);
@@ -37,8 +37,8 @@ void battleLoadVersionEffectResources(VersionEffectLoader *loader)
         for (s32 slot = 0; slot < 4; ++slot) {
             const char *name = static_cast<VersionEffectNames *>(loader->names)->versionNames[slot];
             const char *const *reservedNames = reinterpret_cast<const char *const *>(g_btlEffect.unk04);
-            if (!libc_strlen(name) || !libc_strcmp(name, DAT_00400914) ||
-                !libc_strcmp(DAT_0040090c, name))
+            if (!libc_strlen(name) || !strcmp(name, DAT_00400914) ||
+                !strcmp(DAT_0040090c, name))
                 continue;
             if (nameStartsWith(name, g_btlEffect.prefix))
                 continue;

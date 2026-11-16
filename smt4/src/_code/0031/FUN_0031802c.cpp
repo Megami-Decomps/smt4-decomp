@@ -23,7 +23,8 @@ s32 FUN_0031802c(void)
     s8 maxTargets = 1;
     s8 targetCount = 0;
     for (i = 4; i < 0x36; i++) {
-        u32 flags = btlGetMainState()->entries[i].flags;
+        BtlMainState *state = btlGetMainState();
+        u32 flags = state->entries[i].flags;
         if (flags & BTL_ENTRY_FLAG_ACTIVE) {
             continue;
         }

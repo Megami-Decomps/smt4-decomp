@@ -11,7 +11,7 @@
 struct RequestParameters {
     RequestParameters();
     /* An idle request of the given kind. */
-    explicit RequestParameters(u8 initialKind) : kind(initialKind), word3(0), word4(0) { result = WindowStatusResult(0); }
+    explicit RequestParameters(u8 initialKind) : kind(initialKind), word3(0), word4(0) { result = WindowStatusResult(word4); }
     /* A request holding the given five words. */
     RequestParameters(u32 w0, u32 w1, u32 w2, u32 w3, u32 w4)
     {

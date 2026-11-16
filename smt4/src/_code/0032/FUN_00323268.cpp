@@ -21,8 +21,9 @@ s32 FUN_00323268(void)
     s32 count;
 
     FUN_002499fc(btlScriptResolveGroupArg(scrGetArg(1)), &first, &count);
-    for (s32 i = first; i < first + count; i++) {
-        BtlEntry *entry = &btlGetMainState()->entries[i];
+    for (s32 i = first; i < count + first; i++) {
+        BtlMainState *state = btlGetMainState();
+        BtlEntry *entry = &state->entries[i];
         if ((entry->flags & 0x10) == 0 && (entry->flags & 1) != 0 && (entry->flags & 0x40) == 0
             && btlCommandOwnerHasSlotId(entry, slot) != 0) {
             scrSetResult(1);

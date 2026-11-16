@@ -22,8 +22,8 @@ void FUN_003a35a4(void)
     NaviMapRequest request = {destination->mapId, destination->unk30, destination->unk32};
     main->mapRequest = request;
     pair20638Set(&main->transition, destination->unk32, destination->unk34, destination->unk36);
-    u32 currentMap = main->currentMap;
-    if ((u32)destination->mapId != currentMap) {
+    s32 currentMap = main->currentMap;
+    if (currentMap != destination->mapId) {
         menuEnterState11(&main->transition);
     } else {
         g_gameState.navigation.naviMapPending = 1;

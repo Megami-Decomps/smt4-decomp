@@ -3,6 +3,7 @@
 #include "addon/PackageSelection.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
+#include <string.h>
 
 /* A layout point (position in pixels). */
 struct CardPoint {
@@ -18,7 +19,6 @@ u32 FUN_004038e0(u32 effect, u16 kind);
 CardPoint *asdTMTexTableEntryAt(s32 group, s32 part);
 void drawSetColorFromRGBA8(u32 color);
 void FUN_00183bb0(void);
-s32 libc_strcmp(const char *a, const char *b);
 void *gameGetPlayerData(void);
 const char *gameGetPlayerName(void);
 void textFormatBuffer(u8 *buffer, const char *format, ...);
@@ -59,7 +59,7 @@ void FUN_00404f40(u32 effect, u16 cardId, s32 x, s32 y, f32 speed, u32 arg5, u32
     s16 nameX = namePoint->x;
     s16 nameY = namePoint->y;
     const char *name = card->content.name;
-    if (libc_strcmp(card->content.name, "<pc 0>") == 0) {
+    if (strcmp(card->content.name, "<pc 0>") == 0) {
         gameGetPlayerData();
         name = gameGetPlayerName();
     }

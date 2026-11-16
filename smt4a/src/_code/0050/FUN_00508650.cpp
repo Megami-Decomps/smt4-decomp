@@ -1,13 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00508650` (_code @ 0x508650, 0xe8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include <string.h>
 
 extern "C" {
 
-int libc_strcmp(int, int);
 
 extern int libc_strlen(int);
-/* Supplied declaration required: libc_strcmp. */
+/* Supplied declaration required: strcmp. */
 
 
 void FUN_00508650(int param_1,unsigned int param_2,int param_3)
@@ -50,7 +50,7 @@ void FUN_00508650(int param_1,unsigned int param_2,int param_3)
       if ((temp_v2 != 0xffffffff) && (param_1 = *(int *)(param_1 + 4) + param_1, param_1 != 0)) {
         temp_v3 = param_1 + *(int *)(param_1 + temp_v2 * 0xc + 8);
       }
-      libc_strcmp(param_3,temp_v3);
+      strcmp((const char *)param_3,(const char *)temp_v3);
     }
   }
   return;

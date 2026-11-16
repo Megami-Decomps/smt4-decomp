@@ -3,6 +3,7 @@
 #include "battle/btlEffect.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "gamedata/GameDataAccess.h"
+#include <string.h>
 
 /* The effect names of one battle, 0x16 bytes each, after a 0x108 byte header. */
 struct BtlEffectNameTable {
@@ -42,7 +43,6 @@ extern const char DAT_00528534[]; /* "%s%02d" */
 extern const char DAT_005284c0[]; /* "battle/effect/%s.eft" */
 
 u32 libc_strlen(const char *text);
-s32 libc_strcmp(const char *a, const char *b);
 s32 libc_strncmp(const char *a, const char *b, u32 count);
 char *libc_strcpy(char *dest, const char *src);
 void textFormatBuffer(char *buffer, const char *format, ...);
@@ -65,20 +65,20 @@ u32 FUN_004f9764(BtlEffectWork *work)
         char text[128];
         s32 n;
 
-        if (libc_strlen(name) == 0 || libc_strcmp(name, "0") == 0) {
+        if (libc_strlen(name) == 0 || strcmp(name, "0") == 0) {
             continue;
         }
-        if (libc_strcmp(DAT_0052853c, name) != 0 &&
-            (name == NULL || (libc_strcmp(name, g_btlEffect.skipped.skipFirst) != 0 &&
-                              libc_strcmp(name, g_btlEffect.skipped.skipSecond) != 0)) &&
-            (name == NULL || libc_strcmp(name, g_btlEffect.reserved.name) != 0)) {
+        if (strcmp(DAT_0052853c, name) != 0 &&
+            (name == NULL || (strcmp(name, g_btlEffect.skipped.skipFirst) != 0 &&
+                              strcmp(name, g_btlEffect.skipped.skipSecond) != 0)) &&
+            (name == NULL || strcmp(name, g_btlEffect.reserved.name) != 0)) {
             if (name != NULL && libc_strncmp(name, g_btlEffect.otherPrefix, libc_strlen(g_btlEffect.otherPrefix)) == 0) {
                 continue;
             }
             if (name != NULL && libc_strncmp(name, g_btlEffect.prefix, libc_strlen(g_btlEffect.prefix)) == 0) {
                 for (n = 0; n < 11; n++) {
                     textFormatBuffer(text, DAT_00528534, g_btlEffect.prefix, n);
-                    if (libc_strcmp(text, name) == 0) {
+                    if (strcmp(text, name) == 0) {
                         btlCameraFinishTransition(work);
                         work->transition = FUN_002282c8(n & 0xff, 7, 0);
                         work->transitionEffect = n;
@@ -89,7 +89,7 @@ u32 FUN_004f9764(BtlEffectWork *work)
                     continue;
                 }
             }
-            if (name == NULL || libc_strcmp(name, g_btlEffect.reserved.otherName) != 0) {
+            if (name == NULL || strcmp(name, g_btlEffect.reserved.otherName) != 0) {
                 sysMemClear(path, sizeof(path));
                 sysMemClear(text, sizeof(text));
                 textFormatBuffer(text, DAT_005284c0, name);

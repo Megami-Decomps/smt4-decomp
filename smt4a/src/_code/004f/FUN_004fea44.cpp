@@ -1,6 +1,7 @@
 /* NON_MATCHING: only callee-saved register assignment differs (retail keeps id in r8, target in r4, value28 in r9). */
 #include "battle/btlReflect.h"
 #include "battle/btlDebug.h"
+#include <string.h>
 
 extern "C" {
 
@@ -18,7 +19,6 @@ typedef char ReflectMotionOffsetCheck[
     offsetof(ReflectMotionOffsets, offset) == 0x34 ? 1 : -1];
 
 extern u32 g_btlAux;
-s32 libc_strcmp(const char *a, const char *b);
 
 /* Starts the action-reflect record for motion `name` (state 4 when btlEffectNameHasPrefix accepts it), flagging the death motions. */
 ReflectAction *FUN_004fea44(s32 id, u32 target, u16 value48, u32 value28, const char *name, u32 value50,
@@ -43,7 +43,7 @@ ReflectAction *FUN_004fea44(s32 id, u32 target, u16 value48, u32 value28, const 
     } else {
         reflect->parameter = 0;
     }
-    if (name != NULL && (libc_strcmp("Dead_12", name) == 0 || libc_strcmp("Dead_13", name) == 0)) {
+    if (name != NULL && (strcmp("Dead_12", name) == 0 || strcmp("Dead_13", name) == 0)) {
         reflect->specialDeath.enabled = 1;
     }
     return reflect;

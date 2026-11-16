@@ -2,6 +2,7 @@
 #include "battle/BtlEffectLoad.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "gamedata/GameDataAccess.h"
+#include <string.h>
 
 extern "C" {
 
@@ -11,7 +12,6 @@ extern const char DAT_00528534[];
 extern const char DAT_005284c0[];
 
 u32 libc_strlen(const char *text);
-s32 libc_strcmp(const char *a, const char *b);
 s32 libc_strncmp(const char *a, const char *b, u32 count);
 char *libc_strcpy(char *destination, const char *source);
 void sysMemClear(void *buffer, s32 size);
@@ -32,8 +32,8 @@ u32 FUN_004f828c(BtlEffectWorkA *work)
         char path[128];
         char file[128];
 
-        if (libc_strlen(name) != 0 && libc_strcmp(name, "0") != 0) {
-            if (libc_strcmp(DAT_0052853c, name) != 0 && (name == NULL || libc_strcmp(name, g_btlEffect.ignoredName) != 0)) {
+        if (libc_strlen(name) != 0 && strcmp(name, "0") != 0) {
+            if (strcmp(DAT_0052853c, name) != 0 && (name == NULL || strcmp(name, g_btlEffect.ignoredName) != 0)) {
                 if (name != NULL) {
                     if (libc_strncmp(name, g_btlEffect.ignoredPrefix, libc_strlen(g_btlEffect.ignoredPrefix)) == 0) {
                         continue;
@@ -44,7 +44,7 @@ u32 FUN_004f828c(BtlEffectWorkA *work)
                         bool found = false;
                         for (s32 n = 0; n < 11; n++) {
                             textFormatBuffer(file, DAT_00528534, g_btlEffect.numberedPrefix, n);
-                            if (libc_strcmp(file, name) == 0) {
+                            if (strcmp(file, name) == 0) {
                                 btlCameraFinishTransition(work);
                                 work->numberedEffect = FUN_002282c8(n & 0xff, 7, 0);
                                 work->numberedIndex = n;
@@ -57,7 +57,7 @@ u32 FUN_004f828c(BtlEffectWorkA *work)
                         }
                     }
                 }
-                if (name == NULL || libc_strcmp(name, g_btlEffect.ignoredNameB) != 0) {
+                if (name == NULL || strcmp(name, g_btlEffect.ignoredNameB) != 0) {
                     sysMemClear(path, 0x80);
                     sysMemClear(file, 0x80);
                     textFormatBuffer(file, DAT_005284c0, name);

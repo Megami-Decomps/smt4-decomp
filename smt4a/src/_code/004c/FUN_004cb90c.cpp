@@ -1,4 +1,4 @@
-/* NON_MATCHING: projection arithmetic recovered; fast floating-point mode folds angle constants and VFP temporary allocation differs from retail. */
+/* NON_MATCHING: angle is now built from named half-angle with three separate multiplies (matches retail's three vmuls); remaining: constant register numbering (retail loads 0.5/1/180/pi into s2,s1,s0) and pool order */
 #include "common.h"
 
 struct BattleCameraProjection {
@@ -20,7 +20,9 @@ float FUN_004cb90c(s32 plane)
     BattleCameraProjection* camera = g_btlCamera;
     float scale = 0.1f;
     float height = camera->height;
-    float tangent = FUN_0050dda4(3.1415927f * ((1.0f / 180.0f) * (camera->fieldOfView * 0.5f)));
+    float halfAngle = camera->fieldOfView * 0.5f;
+    float angle = halfAngle * 0.0055555557f * 3.1415927f;
+    float tangent = FUN_0050dda4(angle);
     float projected = height / (120.0f / tangent);
     switch (plane) {
     case 0:

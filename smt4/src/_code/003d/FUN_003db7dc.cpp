@@ -1,5 +1,6 @@
 /* NON_MATCHING: null-check/branch shapes now match retail; remaining: the frame setup (retail `sub sp` after the table load), `work`/`path` held in a second register (`mov r6,r8` / `mov r6,sp`) where the build keeps them, and the hoisted slot base register */
 #include "battle/BtlEffectLoad.h"
+#include <string.h>
 
 extern "C" {
 
@@ -9,7 +10,6 @@ extern const char DAT_00400904[];
 extern const char DAT_004008c4[];
 
 u32 libc_strlen(const char *text);
-s32 libc_strcmp(const char *a, const char *b);
 s32 libc_strncmp(const char *a, const char *b, u32 count);
 char *libc_strcpy(char *destination, const char *source);
 void memClear(void *buffer, s32 size);
@@ -22,12 +22,12 @@ void asdLoadFileAsyncSimple(const char *path, void **resource, s32 mode);
 
 static __inline bool isIgnoredName(const char *name)
 {
-    return name != NULL && libc_strcmp(name, g_btlEffect.ignoredName) == 0;
+    return name != NULL && strcmp(name, g_btlEffect.ignoredName) == 0;
 }
 
 static __inline bool isIgnoredNameB(const char *name)
 {
-    return name != NULL && libc_strcmp(name, g_btlEffect.ignoredNameB) == 0;
+    return name != NULL && strcmp(name, g_btlEffect.ignoredNameB) == 0;
 }
 
 static __inline bool hasIgnoredPrefix(const char *name)
@@ -54,8 +54,8 @@ u32 FUN_003db7dc(BtlEffectWork *work)
         char path[128];
         char file[128];
 
-        if (libc_strlen(name) != 0 && libc_strcmp(name, "0") != 0) {
-            if (libc_strcmp(DAT_0040090c, name) != 0 && !isIgnoredName(name)) {
+        if (libc_strlen(name) != 0 && strcmp(name, "0") != 0) {
+            if (strcmp(DAT_0040090c, name) != 0 && !isIgnoredName(name)) {
                 if (hasIgnoredPrefix(name)) {
                     continue;
                 }
@@ -64,7 +64,7 @@ u32 FUN_003db7dc(BtlEffectWork *work)
                         bool found = false;
                         for (s32 n = 0; n < 11; n++) {
                             textFormatBuffer(file, DAT_00400904, g_btlEffect.numberedPrefix, n);
-                            if (libc_strcmp(file, name) == 0) {
+                            if (strcmp(file, name) == 0) {
                                 selectNumberedEffect(work, n);
                                 found = true;
                                 break;

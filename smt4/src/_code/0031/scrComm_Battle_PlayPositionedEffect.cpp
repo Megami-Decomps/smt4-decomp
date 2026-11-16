@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rewrite compiles (169 vs 170 rows); stack frame (84 vs 92 bytes) and register allocation differ */
 #include "battle/BtlMainAccess.h"
 #include "battle/BattleUnitSlot.h"
+#include <string.h>
 
 // Effect request handed to the battle effect queue (32 bytes). It first carries the
 // effect set's name, then is reused for one request per matching effect slot.
@@ -55,7 +56,6 @@ s32 FUN_0024550c(void);
 void FUN_00282820(s32 value, u32 user, s32 target, s32 targetCopy);
 u32* btlMainFindEntryByListedId(BattleMain* main, s32 id);
 s32 scrGetArg(s32 index);
-s32 libc_strcmp(const char* a, const char* b);
 s32 libc_strlen(const char* s);
 s32 FUN_0027e3b8(u32 event);
 s32 FUN_0028299c(BattleEffectState* state);
@@ -94,7 +94,7 @@ void scrComm_Battle_PlayPositionedEffect(void)
         BattleMain* current = reinterpret_cast<BattleMain *>(btlGetMainState());
         for (s32 slot = 0; slot < 4; slot++) {
             BattleEffectSlot* effect = reinterpret_cast<BattleEffectSlot*>(effectSlots + slot * 0x16);
-            if (libc_strlen(effect->name) == 0 || libc_strcmp(effect->name, DAT_00400440) == 0) continue;
+            if (libc_strlen(effect->name) == 0 || strcmp(effect->name, DAT_00400440) == 0) continue;
             u32 type = effect->type;
             s32 base = FUN_0028299c(DAT_00435d18);
             s32 sideCode = direction < 0 ? 3 : 2;

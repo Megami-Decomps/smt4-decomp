@@ -48,7 +48,7 @@ s32 battleCountActionsByAttribute(const BtlCombatantEntryA *combatant, u32 attri
 {
     const BattleActionCountView *actions = reinterpret_cast<const BattleActionCountView *>(combatant);
     s32 count = 0;
-    if ((combatant->flags & g_btlCandidateMasks.unavailable) ||
+    if ((g_btlCandidateMasks.unavailable & combatant->flags) ||
         (combatant->flags & g_btlCandidateMasks.singleAction)) {
         if (actions->selected.kind == 2 || actions->selected.kind == 3) {
             const BattleActionSkill *skill = (const BattleActionSkill *)dataTable04FindById(actions->selected.id);

@@ -1,6 +1,7 @@
 #ifndef GFX_MODELBONELOOKUP_H
 #define GFX_MODELBONELOOKUP_H
 #include "shard/S1NwGfx.h"
+#include "shard/W6_W6Match4_RelativeResourceGraph.h"
 #include "gfx/SkeletonInstanceBuffers.h"
 #include <stddef.h>
 
@@ -8,7 +9,7 @@ struct ResDicPatriciaNode { u8 data[0x10]; };
 struct ResDicPatricia { u8 header[0x1c]; ResDicPatriciaNode nodes[1]; };
 struct ModelBoneSkeleton {
     u8 unk00[0x1c];
-    RelativePointer dictionary;
+    ResourceRelativePointer<ResDicPatricia> dictionary;
     u8 unk20[8];
     u32 flags;
     bool hasFlags(u32 mask) const
@@ -28,7 +29,7 @@ struct ModelBoneResource {
             u8 unkcc[0x14];
         } meshes;
     };
-    RelativePointer skeleton;
+    ResourceRelativePointer<ModelBoneSkeleton> skeleton;
     static ModelBoneResource *cast(ModelBoneResource *resource)
     {
         return resource != NULL && (~resource->flags & 0x40000092u) != 0 ? NULL : resource;

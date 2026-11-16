@@ -1,4 +1,3 @@
-/* NON_MATCHING: reset stores share the loop-counter zero register and the initial position address is calculated later. */
 #include "map/mapGimic.h"
 
 /* The shared byte-padding region begins at five; a typed union there would shift its alignment. */
@@ -26,19 +25,22 @@ void FUN_00319f64(s32 entryId);
 void FUN_003538d0(void)
 {
     MapGimicResetView *state = reinterpret_cast<MapGimicResetView *>(g_mapGimic);
+    u32 *position = state->position;
+    s32 index;
     state->ready = 1;
     state->job = 0;
     state->state = 0;
     state->tableIndex = 0;
     state->count = 0;
     state->pending = 0;
-    wordTripleClear(state->position);
+    wordTripleClear(position);
     state = reinterpret_cast<MapGimicResetView *>(g_mapGimic);
-    for (u32 index = 0; index < 10; ++index) {
+    for (index = 0; index < 10; ++index) {
         state->settings[index] = 0;
     }
-    for (s32 index = 0; index < MAP_GIMIC_ENTRIES; ++index) {
-        MapGimicEntry *entry = &g_mapGimic->entries[index];
+    for (index = 0; index < MAP_GIMIC_ENTRIES; ++index) {
+        MapGimic *gimic = g_mapGimic;
+        MapGimicEntry *entry = &gimic->entries[index];
         if (entry->active) {
             if (entry->id != 0x4D) {
                 s32 required = entry->gates.required;

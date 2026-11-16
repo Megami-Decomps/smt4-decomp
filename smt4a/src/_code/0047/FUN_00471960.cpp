@@ -28,12 +28,10 @@ typedef struct AocSdOwner {
  * add-on availability flag. */
 u32 FUN_00471960(AocSdOwner *owner)
 {
-    s32 i;
-
     if (asdFsIsSdCardDetected() == 0) {
         g_aocMain->flags &= ~0x10000;
     } else if (objGetFlagBit16(g_aocMain) != 0) {
-        for (i = 0; i < owner->slotCount; i++) {
+        for (s32 i = 0; i < owner->slotCount; i++) {
             AocSdSlot *slot = &owner->slots[i];
             if (slot->present && !slot->opened && slot->handle == 0) {
                 return 0;

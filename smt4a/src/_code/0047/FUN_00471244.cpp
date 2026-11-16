@@ -59,7 +59,6 @@ u32 FUN_00471244(u32 a, u32 unused, u32 target, u32 key, s32 id, s32 x, s32 y, s
     PlacementRecord *record = packageFindFileRefByName(a, 0x17, key);
     PlacementOwner *owner;
     PlacementGroup *group;
-    s32 i;
 
     if (record == NULL || (owner = record->owner) == NULL) {
         return 0;
@@ -71,7 +70,7 @@ u32 FUN_00471244(u32 a, u32 unused, u32 target, u32 key, s32 id, s32 x, s32 y, s
     if (group == NULL) {
         return 0;
     }
-    for (i = 0; i < group->count; i++) {
+    for (s32 i = 0; i < group->count; i++) {
         PlacementEntry *entry = &group->entries[i];
         spriteDrawFromTextureTable(owner->handle, target, 0xf, key, entry->major * 1000 + entry->minor, entry->x + x, entry->y + y,
                      entry->z + z);

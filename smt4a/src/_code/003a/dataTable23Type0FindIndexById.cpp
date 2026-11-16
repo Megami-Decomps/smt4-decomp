@@ -1,5 +1,6 @@
-/* NON_MATCHING: retail keeps NULL in a saved register (r9, with sl saved too) for the out-of-range entry, loads the add-on pointer unconditionally and materialises dataTableGet arguments as r0 then r1. */
+/* NON_MATCHING: retail loads the add-on entries pointer before the range compare (and adds base count + add-on count in that operand order); the build loads it only on the taken path. */
 #include "gamedata/DataTable.h"
+#include "shard/W4_W4Match5_DataTable.h"
 
 /* Table 0x23 section 0 record (0x20 bytes). */
 struct Table23Type0Entry {
@@ -19,12 +20,12 @@ struct Table23Type0Extra {
 extern "C" {
 extern Table23Type0Extra *g_aocSystem;
 
-static __inline s32 table23Type0Count(void)
+static s32 table23Type0Count(void)
 {
-    return dataTableGetCount(dataTableGet(0x23, 0)) + g_aocSystem->count;
+    return dataTableGetCount(dataTableGetSection(0x23, 0)) + g_aocSystem->count;
 }
 
-static __inline Table23Type0Entry *table23Type0Get(u32 index)
+static Table23Type0Entry *table23Type0Get(u32 index)
 {
     void *section = dataTableGet(0x23, 0);
     Table23Type0Entry *entries = (Table23Type0Entry *)dataTableGetEntries(section);

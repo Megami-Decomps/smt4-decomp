@@ -6916,3 +6916,4 @@
 0034543c gameSavedItemClearCounter inferred [med] Clears the counter halfword of saved item record `index` (0-0x500).
 00333318 searchWinInitialize inferred [high] Creates the search window work area, its update process, two stereo draw tasks and the animated sprite.
 00331410 gameSavedItemsPromoteFlagState inferred [med] Rewrites flag state 01 to 10 (keeping the low six bits) in saved item records 1-0x500.
+0030ea58 strcmp evidence armcc only auto-unrolls (peel count&1 + 2x pairs) loops calling the real <string.h> strcmp; tableGroupFindEntryIndex retail unrolled form reproduced with strcmp(): row count 65=65 vs 37 with libc_strcmp. Callers should use <string.h> strcmp.

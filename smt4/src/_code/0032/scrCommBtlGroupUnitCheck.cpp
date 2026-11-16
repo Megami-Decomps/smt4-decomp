@@ -20,8 +20,9 @@ u32 scrCommBtlGroupUnitCheck(void)
     s32 index;
 
     FUN_002499fc(btlScriptResolveGroupArg(scrGetArg(1)), &start, &count);
-    for (index = start; index < start + count; index++) {
-        BtlEntry *unit = &btlGetMainState()->entries[index];
+    for (index = start; index < count + start; index++) {
+        BtlMainState *state = btlGetMainState();
+        BtlEntry *unit = &state->entries[index];
 
         if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && btlEntryHasActionSkillCategory(unit, arg) != 0) {
             scrSetResult(1);

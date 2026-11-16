@@ -16,7 +16,7 @@ u32 btlScriptAnyEntryHasStatusBit(void)
     for (i = 0; i < 109; i++) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
         if ((entry->flags & g_btlCandidateMasks.unavailable) &&
-            (g_btlCandidateMasks.required & entry->flags) &&
+            (entry->flags & g_btlCandidateMasks.required) &&
             !(entry->flags & g_btlCandidateMasks.excluded) &&
             (entry->statusFlags & (1 << bit))) {
             scrSetResult(1);

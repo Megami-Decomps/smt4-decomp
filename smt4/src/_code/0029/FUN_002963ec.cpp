@@ -1,4 +1,3 @@
-/* NON_MATCHING: VFP register reuse differs and the two mode bytes are cleared with separate stores. */
 #include "ui/ScaledSpritePosition.h"
 
 // Move the sprite in pixel space, compensating for scale when requested.
@@ -13,6 +12,5 @@ extern "C" void FUN_002963ec(ScaledSpritePosition *sprite, s32 deltaX, s32 delta
         sprite->placement.pixelOffsetX += deltaX;
         sprite->placement.pixelOffsetY += deltaY;
     }
-    sprite->placement.useGeometry = 0;
-    sprite->placement.lockVertical = 0;
+    sprite->placement.modeBits = 0;
 }

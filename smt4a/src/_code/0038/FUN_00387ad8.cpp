@@ -1,4 +1,3 @@
-/* NON_MATCHING: branch layout only: retail shares the frame increment between the two arms and ends with a single conditional move for the result; the build lays the done store out inline in the opening arm. */
 #include "common.h"
 
 extern "C" {
@@ -9,7 +8,7 @@ typedef struct SlideFadeWindow {
     /* 0x38 */ u8 fade[4];
     /* 0x3C */ u8 slide[8];
     /* 0x44 */ s32 frame;
-    /* 0x48 */ u8 done;
+    /* 0x48 */ s8 done;
 } SlideFadeWindow;
 
 u32 FUN_00318e08(void *slide, s32 mode, s32 offsetX, s32 offsetY, s32 frame);

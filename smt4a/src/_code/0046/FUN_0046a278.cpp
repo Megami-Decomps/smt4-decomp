@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only at the top of the loop: retail loads the count into r1 and reuses r1 for the index (r3 for the cursor), built uses r2/r3 */
 #include "common.h"
 
 extern "C" {
@@ -34,8 +33,6 @@ typedef struct Menu {
  * every item except the one under the cursor. */
 void FUN_0046a278(Menu *menu, s32 index)
 {
-    s32 i;
-
     if (index != -1) {
         menu->mode = menu->entries[menu->order[index]].type;
         if (menu->entries[menu->order[index]].type == 8) {
@@ -44,7 +41,7 @@ void FUN_0046a278(Menu *menu, s32 index)
         if (menu->entries[menu->order[index]].type == 9) {
             menu->mode = 4;
         }
-        for (i = 0; i < menu->count; i++) {
+        for (s32 i = 0; i < menu->count; i++) {
             ItemState *state = menu->items[menu->entries[menu->order[i]].type]->state;
 
             if (menu->cursor == i) {

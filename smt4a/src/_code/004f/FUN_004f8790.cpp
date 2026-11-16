@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps &formatted (sp+128) in saved sl for the whole loop and spills the inlined reference search's `name` to the stack slot at sp+128 (reused after formatted); ours keeps name in fp and recomputes the address (147 rows against 150). */
 #include "common.h"
+#include <string.h>
 
 /* One effect slot of the battle effect set (0x8C bytes). */
 struct BtlEffectEntry {
@@ -27,7 +28,6 @@ extern const char DAT_005284c0[];  /* battle/effect/%s.eft */
 extern const char DAT_00528220[];  /* table of the 11 reference effect names, 32 bytes each */
 
 s32 libc_strlen(const char *text);
-s32 libc_strcmp(const char *first, const char *second);
 s32 libc_strncmp(const char *first, const char *second, s32 count);
 void libc_strcpy(char *destination, const char *source);
 void sysMemClear(void *memory, u32 size);
@@ -38,7 +38,7 @@ u32 FUN_003478dc(u32 value, const char *script);
 /* True when `name` is set and equals `text`. */
 static inline bool nameIs(const char *name, const char *text)
 {
-    return name != NULL && libc_strcmp(name, text) == 0;
+    return name != NULL && strcmp(name, text) == 0;
 }
 
 /* Index of the reference effect whose name starts `name`, or -1. */
@@ -73,7 +73,7 @@ void FUN_004f8790(BtlEffectWork *work)
         const char *script;
         s32 k;
 
-        if (libc_strlen(name) == 0 || libc_strcmp(name, "0") == 0 || libc_strcmp(DAT_0052853c, name) == 0) {
+        if (libc_strlen(name) == 0 || strcmp(name, "0") == 0 || strcmp(DAT_0052853c, name) == 0) {
             continue;
         }
         if (name != NULL && libc_strncmp(name, g_btlEffect[0], libc_strlen(g_btlEffect[0])) == 0) {

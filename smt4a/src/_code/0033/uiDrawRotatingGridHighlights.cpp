@@ -7,9 +7,10 @@ const PanelTextLayoutEntryPrefixA *asdTMTexTableEntryAt(u32 resource, s32 index)
 /* Draw the nine grid cells with two opposing highlights and their trailing frames. */
 void uiDrawRotatingGridHighlights(s32 firstEntry, s32 frame)
 {
-    s32 firstHighlight = (frame / 5) % 8;
+    s32 step = frame / 5;
+    s32 firstHighlight = step % 8;
     s32 firstTrailing = (firstHighlight + 7) % 8;
-    s32 secondHighlight = (frame / 5 + 4) % 8;
+    s32 secondHighlight = (step + 4) % 8;
     s32 secondTrailing = (secondHighlight + 7) % 8;
     for (s32 row = 0; row < 3; ++row) {
         for (s32 column = 0; column < 3; ++column) {

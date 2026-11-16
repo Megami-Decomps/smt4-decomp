@@ -18,7 +18,7 @@ u32 FUN_0033361c(void)
     if (jyoucyuGetTableEntry(1) != 0) {
         return 0;
     }
-    for (s32 i = 0; i < 2; i++) {
+    for (u32 i = 0; i < 2; i++) {
         u32 flags = DAT_004c53c4[i].flags;
         if ((flags & 2) != 0 && (flags & 0x20) != 0) {
             return 1;

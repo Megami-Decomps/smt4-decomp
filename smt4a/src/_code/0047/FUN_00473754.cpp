@@ -1,4 +1,4 @@
-/* NON_MATCHING: byte swapping expands to shifts and OR instead of REV16; control-code branches and loop registers differ. */
+/* NON_MATCHING: the masked byte swap now emits REV16; retail additionally spills the `lines` pointer to the stack (frame pad r3) and reloads text[i] for the store, and its 0xffff test is a subtract chain; loop registers differ. */
 #include "common.h"
 
 extern "C" {
@@ -15,8 +15,7 @@ s32 FUN_00473754(void *, const u16 *text, u16 (*lines)[64])
     s32 lineCount = 1;
     s32 column = 0;
     for (s32 i = 0; i < length; ++i) {
-        u16 character = text[i];
-        u32 code = (u16)((character << 8) | (character >> 8));
+        u32 code = ((text[i] & 0xff) << 8) | ((text[i] >> 8) & 0xff);
         if (code == 0xf890 || code == 0xffff)
             return column ? lineCount : lineCount - 1;
         if (code == 0xf801) {
@@ -27,7 +26,7 @@ s32 FUN_00473754(void *, const u16 *text, u16 (*lines)[64])
             ++lineCount;
             rt_memclr(lines, sizeof(*lines));
         } else {
-            (*lines)[column++] = character;
+            (*lines)[column++] = text[i];
         }
     }
     return lineCount;

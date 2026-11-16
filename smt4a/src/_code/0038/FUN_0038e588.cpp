@@ -1,4 +1,4 @@
-/* NON_MATCHING: clear-loop registers and selected-entry scan trip-count handling differ. */
+/* NON_MATCHING: constant 0/1 register allocation and the inner scan's trip-count form (retail: signed countdown compare, constant 1 held in fp) differ. */
 #include "shard/W9_W9Match7_BufferedValueState.h"
 
 extern "C" u64 runtimeShiftLeftWide(u64 value, s32 shift);
@@ -6,7 +6,7 @@ extern "C" u64 runtimeShiftLeftWide(u64 value, s32 shift);
 // Mark buffered entries selected by the target mask and record whether multiple entries match.
 extern "C" void FUN_0038e588(BufferedValueState *state, u32, u64 targets)
 {
-    for (u32 index = 0; index < state->count; ++index)
+    for (s32 index = 0; index < state->count; ++index)
         state->entries[index].ready = 0;
     s32 selected = 0;
     for (s32 target = 0; target < state->count; ++target) {

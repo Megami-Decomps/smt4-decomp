@@ -9,8 +9,7 @@ void MoLivePlayer::releaseIdleStreams()
 {
     ObjectHandleMap::iterator it = streams.begin();
     while (it != streams.end()) {
-        ObjectHandleMap::iterator current = it;
-        ++it;
+        ObjectHandleMap::iterator current = it++;
         Stream *stream = static_cast<StreamEntry *>(current->second.object)->stream;
         if (stream->active != 0 || stream->queue.count != 0) {
             stream->active = 0;

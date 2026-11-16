@@ -19,7 +19,7 @@ s32 scrBtlAnyCombatantHasFlag(void)
         for (i = 0; i < 109; i++) {
             BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
 
-            if ((entry->flags & g_btlCandidateMasks.unavailable) != 0 &&
+            if ((g_btlCandidateMasks.unavailable & entry->flags) != 0 &&
                 (g_btlCandidateMasks.required & entry->flags) != 0 &&
                 (entry->flags & g_btlCandidateMasks.excluded) == 0 &&
                 entry->indexedFlags.values[index] != 0) {

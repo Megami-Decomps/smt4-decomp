@@ -44,8 +44,13 @@ struct BattleSpritePlacement {
     f32 offsetY;                           // 0x14
     s16 pixelOffsetX;                      // 0x18
     s16 pixelOffsetY;                      // 0x1a
-    u8 useGeometry;                        // 0x1c
-    u8 lockVertical;                       // 0x1d
+    union {
+        struct {
+            u8 useGeometry;                // 0x1c
+            u8 lockVertical;               // 0x1d
+        } mode;
+        u16 modeBits;                      // 0x1c
+    };
 };
 
 extern "C" void enemyDrawComputeSpriteAnchorOffset(const BattleSpritePlacement *placement,

@@ -17,7 +17,7 @@ void enemyDrawComputeSpriteAnchorOffset(const BattleSpritePlacement *placement, 
     f32 width;
     f32 height;
     f32 bottom;
-    if (placement->useGeometry) {
+    if (placement->mode.useGeometry) {
         const BattleSpriteGeometry *geometry = placement->geometry->geometry;
         height = (f32)geometry->height;
         width = (f32)geometry->width;
@@ -34,7 +34,7 @@ void enemyDrawComputeSpriteAnchorOffset(const BattleSpritePlacement *placement, 
     }
     output->y = 0.0f;
     output->y += (verticalOrigin - bottom) - (f32)squarePadding;
-    if (!placement->useGeometry && !placement->lockVertical) {
+    if (!placement->mode.useGeometry && !placement->mode.lockVertical) {
         output->y += placement->offsetY * 2.0f;
     }
     output->y *= scale;
@@ -42,7 +42,7 @@ void enemyDrawComputeSpriteAnchorOffset(const BattleSpritePlacement *placement, 
     output->x = 0.0f;
     s32 horizontalAnchor = frame->anchorX - (frame->left + (frame->width >> 1));
     output->x -= (f32)horizontalAnchor;
-    if (placement->useGeometry) {
+    if (placement->mode.useGeometry) {
         output->x += (f32)placement->pixelOffsetX;
     } else {
         output->x += placement->offsetX;

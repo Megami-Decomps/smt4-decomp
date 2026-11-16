@@ -1,7 +1,7 @@
 /* NON_MATCHING: segment dispatch, floating-point register allocation and zero-duration ratio paths differ. */
 #include "gfx/SegmentedScalarCurve.h"
 
-static __inline f32 segmentProgress(f32 frame, f32 duration)
+static f32 segmentProgress(f32 frame, f32 duration)
 {
     return duration != 0.0f ? frame / duration : 1.0f;
 }
@@ -37,7 +37,7 @@ extern "C" f32 FUN_0034f8b4(const void *data, s32 frame, s32 duration)
             end = curve->firstValue;
             progress = static_cast<f32>(frame) / static_cast<f32>(first);
         } else {
-            u32 second = static_cast<s32>(curve->secondFraction * total);
+            s32 second = static_cast<s32>(curve->secondFraction * total);
             if (frame < second) {
                 start = curve->firstValue;
                 end = curve->secondValue;

@@ -10,7 +10,8 @@ void FUN_0025247c(f32 *out, f32 fromX, f32 fromY, f32 fromZ, f32 toX, f32 toY, f
     f32 dx = toX - fromX;
     f32 dy = toY - fromY;
     f32 dz = toZ - fromZ;
-    f32 scale = 1.0f / sqrtf(dx * dx + dy * dy + dz * dz);
+    f32 lengthSquared = dx * dx + dy * dy + dz * dz;
+    f32 scale = 1.0f / sqrtf(lengthSquared);
 
     out[0] = dx * scale;
     out[1] = dy * scale;

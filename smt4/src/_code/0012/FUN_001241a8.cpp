@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the in-place vmul/vdiv register of the angle computation differs. */
 #include "common.h"
 
 extern "C" {
@@ -19,7 +18,8 @@ f32 FUN_001241a8(f32 from, f32 to, f32 duration, f32 time)
         return to;
     }
     f32 delta = to - from;
-    u16 angle = (u16)(time * 16384.0f / duration + 49152.0f);
+    f32 phase = time * 16384.0f / duration;
+    u16 angle = (u16)(phase + 49152.0f);
     f32 weight = mathInterpolatePackedTable(angle) + 1.0f;
     f32 offset = weight * delta;
 

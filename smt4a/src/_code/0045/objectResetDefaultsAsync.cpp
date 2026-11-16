@@ -1,4 +1,4 @@
-/* NON_MATCHING: byte-array clears merge to word stores; floating-zero store selection, initialization schedule, and queue/notification registers differ. O2 candidate. */
+/* NON_MATCHING: explicit byte stores now keep retail's strb run (row count 106 = retail); remaining: retail stores the offset zeros of the three parameter blocks and `extra` through the integer zero register (vstr s0 = 1.0, str r0 = 0) and keeps different float constants in s0/s1, plus the serial counter/mvn scheduling. */
 #include "common.h"
 #include "shard/S1NnOs.h"
 #include "shard/S1Mover.h"
@@ -81,12 +81,14 @@ void objectResetDefaultsAsync(DeferredResetObject *object)
     for (u32 i = 0; i < 5; ++i) {
         object->values1c[i] = 0;
     }
-    for (u32 i = 0; i < 4; ++i) {
-        object->flagsA0[i] = 0;
-    }
-    for (u32 i = 0; i < 4; ++i) {
-        object->flags98[i] = 0;
-    }
+    object->flagsA0[0] = 0;
+    object->flagsA0[1] = 0;
+    object->flagsA0[2] = 0;
+    object->flagsA0[3] = 0;
+    object->flags98[0] = 0;
+    object->flags98[1] = 0;
+    object->flags98[2] = 0;
+    object->flags98[3] = 0;
     object->status.state = 0;
     for (u32 i = 0; i < 3; ++i) {
         object->valuesA4[i] = 0;

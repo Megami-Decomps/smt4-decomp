@@ -1,5 +1,6 @@
 /* NON_MATCHING: every call, filter and the record offset match; retail keeps `sp + 128` hoisted in sl with a 260-byte frame (one extra register and word) for the strcpy source, which this build recomputes with a 256-byte frame. */
 #include "common.h"
+#include <string.h>
 
 struct BattleNameRecord {
     u8 value;               // 0x00
@@ -14,7 +15,6 @@ extern const char DAT_0052853c[];
 extern const char DAT_005284c0[];
 extern const char* g_btlEffect[6];
 s32 libc_strlen(const char* text);
-s32 libc_strcmp(const char* a, const char* b);
 s32 libc_strncmp(const char* a, const char* b, u32 count);
 char* libc_strcpy(char* dest, const char* src);
 void sysMemClear(void* memory, u32 size);
@@ -25,13 +25,13 @@ u8 FUN_003478dc(u8 key, const char* path);
 // Whether `name` is the effect name `g_btlEffect[index]`.
 static __inline bool nameEquals(const char* name, s32 index)
 {
-    return name != NULL && libc_strcmp(name, g_btlEffect[index]) == 0;
+    return name != NULL && strcmp(name, g_btlEffect[index]) == 0;
 }
 
 // Whether `name` is the effect name `g_btlEffect[first]` or `g_btlEffect[second]`.
 static __inline bool nameEqualsEither(const char* name, s32 first, s32 second)
 {
-    return name != NULL && (libc_strcmp(name, g_btlEffect[first]) == 0 || libc_strcmp(name, g_btlEffect[second]) == 0);
+    return name != NULL && (strcmp(name, g_btlEffect[first]) == 0 || strcmp(name, g_btlEffect[second]) == 0);
 }
 
 // Whether `name` starts with the effect name `g_btlEffect[index]`.
@@ -54,10 +54,10 @@ void FUN_004f9e0c(u8* world)
         if (libc_strlen(name) == 0) {
             continue;
         }
-        if (libc_strcmp(name, DAT_00528544) == 0) {
+        if (strcmp(name, DAT_00528544) == 0) {
             continue;
         }
-        if (libc_strcmp(DAT_0052853c, name) == 0) {
+        if (strcmp(DAT_0052853c, name) == 0) {
             continue;
         }
         if (nameStartsWith(name, 0)) {

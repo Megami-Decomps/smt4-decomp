@@ -1,4 +1,3 @@
-/* NON_MATCHING: the 7-slot search is now the plain per-slot loop with separate halfword loads (retail shape); remaining: the rank shift is written to r3 where retail uses r1 (the freed slot-id register). */
 #include "common.h"
 
 /* A save-data slot: an ID and a packed word whose bits 10+ hold a rank. */
@@ -31,18 +30,23 @@ s32 gameFlagIsSet(u32 flag);
 /* With flags 0x45b and 0x4f7 set, returns whether the slot with ID `id` has a rank of 1-3. */
 u32 FUN_003453b0(u32 id)
 {
-    if (gameFlagIsSet(0x45b) != 0 && gameFlagIsSet(0x4f7) != 0) {
-        SaveRanks *save = &g_gameDataBlocks.block->save;
+    if (gameFlagIsSet(0x45b) == 0) {
+        return 0;
+    }
+    if (gameFlagIsSet(0x4f7) == 0) {
+        return 0;
+    }
+    SaveRanks *save = &g_gameDataBlocks.block->save;
 
-        for (s32 i = 0; i < 7; i++) {
-            u32 slotId = save->slots[i].id;
-            u32 rank = save->slots[i].packed >> 10;
-            if (slotId == id) {
-                if (rank - 1 <= 2) {
-                    return 1;
-                }
-                return 0;
+    for (s32 i = 0; i < 7; i++) {
+        u32 slotId = save->slots[i].id;
+        u32 packed = save->slots[i].packed;
+        u32 rank = packed >> 10;
+        if (slotId == id) {
+            if (rank - 1 <= 2) {
+                return 1;
             }
+            return 0;
         }
     }
     return 0;

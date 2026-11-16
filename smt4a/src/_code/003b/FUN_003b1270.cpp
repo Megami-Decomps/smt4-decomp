@@ -18,11 +18,11 @@ u32 FUN_003b1270(void)
     if (flag < 21) {
         s32 first, count;
         FUN_00301a08(choice, &first, &count);
-        for (s32 index = first; index < count + first; ++index) {
+        for (s32 index = first; index < first + count; ++index) {
             BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
             if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
                 (entry->flags & g_btlCandidateMasks.required) != 0 &&
-                (g_btlCandidateMasks.excluded & entry->flags) == 0 &&
+                !(entry->flags & g_btlCandidateMasks.excluded) &&
                 entry->indexedFlags.values[flag] != 0) {
                 scrSetResult(1);
                 return 1;

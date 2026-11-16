@@ -22,7 +22,7 @@ void FUN_00145e54(CameraLookAt *camera)
     sideZ *= inverseSideLength;
     f32 upX = y * sideZ - z * sideY;
     f32 upY = z * sideX - x * sideZ;
-    f32 upZ = x * sideY - y * sideX;
+    f32 upZ = x * sideY - sideX * y;
     f32 sine, cosine;
     FUN_002ad314(&sine, &cosine, camera->rollRadians * 40.743664f);
     camera->up[0] = upX * cosine - sine * sideX;

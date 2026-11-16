@@ -1,4 +1,4 @@
-/* NON_MATCHING: armcc hoists the argument set-up of both seek calls above the tracking test; retail sets it up after the test (only the sign extension is shared). */
+/* NON_MATCHING: only the tail differs: retail stores the result before `asr r0, r0, #31` (destination r0), the build sign-extends into r1 first. */
 #include "common.h"
 #include "util/PlatformResultCheck.h"
 
@@ -13,7 +13,7 @@ extern "C" {
 
 u32 nn_fs_detail_FileBase_TrySeek(void *file, s64 offset, s32 origin);
 
-static __inline u32 seekFile(SeekableFile *file, s32 offset, s32 mode)
+static __inline u32 seekFile(SeekableFile *file, s64 offset, s32 mode)
 {
     return nn_fs_detail_FileBase_TrySeek(file->base, offset, mode);
 }

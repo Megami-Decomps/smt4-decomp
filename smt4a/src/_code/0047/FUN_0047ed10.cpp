@@ -2,6 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
+#include <string.h>
 
 /* One effect set: the file name stem and the (up to) four effects started for it. */
 struct BtlEffectSetEntry {
@@ -22,7 +23,6 @@ struct BtlMainStateEffectSet {
 
 extern "C" {
 s32 textFormatBuffer(char *destination, const char *format, ...);
-s32 libc_strcmp(const char *first, const char *second);
 void FUN_004fb43c(s32 actor, u32 options, void *payload, s32 initializeValue, s32 suppressDuplicate,
                   u32 parameterBits, s32 firstId);
 u32 jyoucyuGetTableEntry(s32 index);
@@ -36,7 +36,7 @@ static BtlEffectSetEntry *findEffectSet(const char *name)
     for (s32 i = 0; i < 0x1F6; i++) {
         char file[0x20] = {0};
         textFormatBuffer(file, "%s.eft", g_btlEffectSetTable[i].name);
-        if (libc_strcmp(file, name) == 0) {
+        if (strcmp(file, name) == 0) {
             return &g_btlEffectSetTable[i];
         }
     }
@@ -102,7 +102,7 @@ u32 FUN_0047ed10(const char *name, u32 target, s32 mode, f32 x)
     for (s32 i = 0; i < 3; i++) {
         char file[0x20] = {0};
         textFormatBuffer(file, "%s.eft", g_btlAssistEffectSetNames[i]);
-        if (libc_strcmp(file, name) == 0) {
+        if (strcmp(file, name) == 0) {
             state->effectSet = -1;
             return 1;
         }

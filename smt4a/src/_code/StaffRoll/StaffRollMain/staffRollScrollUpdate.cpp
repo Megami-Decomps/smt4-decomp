@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps the constant 1 in r5 and reloads the global pointer in the state stores; loop and register allocation differ slightly */
+/* NON_MATCHING: the frames increment uses r3 (retail r1) and the final state stores are if-converted (ldrne/movne) where retail branches (ldr r1,[r6]; mov r0,#N; str). */
 /* Staff roll, scrolling state: moves the lines up, ends the roll when the last line passes the
  * end or the player skips it. */
 #include "common.h"
@@ -15,11 +15,11 @@ void staffRollScrollUpdate(void)
     StaffRollWork *roll = g_staffRoll;
     int i;
 
-    if (g_staffRoll->lineA[11].y < g_staffRoll->endY) {
+    if (roll->lineA[11].y < roll->endY) {
         g_staffRoll->skip = 1;
         roll->finished = 1;
     } else {
-        g_staffRoll->frames++;
+        roll->frames++;
         for (i = 0; i < 12; i++) {
             roll->lineA[i].y -= roll->speed;
             roll->lineB[i].y -= roll->speed;

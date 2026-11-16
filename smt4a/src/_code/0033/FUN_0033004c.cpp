@@ -55,7 +55,7 @@ u32 FUN_0033004c(void)
             }
         } else {
             drained = 1;
-            while (process->produced != process->consumed) {
+            while (process->consumed != process->produced) {
                 process->consumed++;
             }
         }

@@ -9,7 +9,7 @@ extern "C" f32 FUN_00291620(s32 mode, s32 maximum, u32 divisor)
     f32 result = 0.0f;
     switch (mode) {
     case 2: {
-        s8 coin = randBetween(0, 1);
+        u8 coin = randBetween(0, 1);
         if (coin == 0) {
             result = -(static_cast<f32>(randBetween(0, maximum)) / static_cast<f32>(divisor));
             break;

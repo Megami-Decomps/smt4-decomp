@@ -1,3 +1,4 @@
+/* NON_MATCHING: only the compare operand order differs: retail loads the retired unit's resource id and the resource id in this order and compares `cmp r0, r1` (resource id first); with the same loads the build emits `cmp r1, r0`. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
@@ -21,7 +22,7 @@ extern "C" void battleReleaseRetiredUnitResources(BtlMainStateA *state)
         if (state->retiredUnit.resource != NULL) {
             for (s32 index = 0; index < 42; ++index) {
                 BattleCleanupResource *resource = state->resourceCleanup.resources[index];
-                if (resource != NULL && resource->id == state->retiredUnit.resource->id &&
+                if (resource != NULL && state->retiredUnit.resource->id == resource->id &&
                     !isRetainedResource(state, (s16)resource->id)) {
                     resourceReleaseReference(resource);
                     state->resourceCleanup.resources[index] = NULL;

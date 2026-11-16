@@ -1,4 +1,3 @@
-/* NON_MATCHING: division temporary uses S1 rather than S3 and final sign branch is not placed after the epilogue; -O2 candidate. */
 #include "event/bustupEvent/BustupShake.h"
 #include "shard/JobWork.h"
 
@@ -27,12 +26,12 @@ s32 randomOffsetJobUpdate(u32 job)
     if (work->offsetX == 0.0f && work->offsetY == 0.0f) {
         work->offsetX = magnitudeX * randomX;
         work->offsetY = magnitudeY * randomY;
-    } else if (work->offsetX != 0.0f && (work->offsetY == 0.0f || randBetween(0, 1))) {
-        work->offsetX = magnitudeX * previousSignX;
-        work->offsetY = magnitudeY * randomY;
-    } else {
+    } else if (work->offsetX == 0.0f || (work->offsetY != 0.0f && !randBetween(0, 1))) {
         work->offsetX = magnitudeX * randomX;
         work->offsetY = magnitudeY * previousSignY;
+    } else {
+        work->offsetX = magnitudeX * previousSignX;
+        work->offsetY = magnitudeY * randomY;
     }
     *work->outputX = work->offsetX;
     *work->outputY = work->offsetY;

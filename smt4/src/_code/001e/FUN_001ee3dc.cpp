@@ -7,9 +7,9 @@ extern "C" void FUN_001ee3dc(EffectScalarKeyState *state, const EffectScalarKeyS
     if (state->index >= 3) {
         state->index = 4;
     }
-    s32 current = state->index;
-    for (s32 distance = 1; current + distance < 4; ++distance) {
-        s32 next = current + distance;
+    u32 current = state->index;
+    for (u32 distance = 1; current + 4 > distance; ++distance) {
+        u32 next = current + distance;
         state->duration = source->keys[next].frame - source->keys[current].frame;
         if (state->duration > 0) {
             f32 frames = (f32)(state->keys[next].frame - state->keys[current].frame);

@@ -30,11 +30,12 @@ u8 FUN_001c3bb8(NativeShaderPrefix *shader, ShaderBindSymbol *binding, const cha
     ShaderExecutableSymbolsView *binary = lookup->executables[executable];
     const ShaderUniformSymbolRecordView *symbols = (const ShaderUniformSymbolRecordView *)((const u8 *)binary + binary->symbolsOffset);
     const char *strings = (const char *)binary + binary->stringsOffset;
+    const s8 *signedStrings = (const s8 *)strings; /* retail reads the terminator as a signed byte */
     u32 length = libc_strlen(name);
     for (u32 i = 0; i < binary->symbolCount; ++i) {
         const ShaderUniformSymbolRecordView *entry = &symbols[i];
         if (libc_strncmp(name, strings + entry->nameOffset, length) != 0 ||
-            (strings[entry->nameOffset + length] != '\0' && strings[entry->nameOffset + length] != '.')) {
+            (signedStrings[entry->nameOffset + length] != '\0' && signedStrings[entry->nameOffset + length] != '.')) {
             continue;
         }
         binding->uniform.name = strings + entry->nameOffset;

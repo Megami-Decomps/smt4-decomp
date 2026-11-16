@@ -13,15 +13,16 @@ struct ObjectPool {
     s32 count;          // 0x10
     s32 ownedCount;     // 0x14
     PoolObject *slots[32]; // 0x18
-
-    void forget(s32 shared)
-    {
-        if (shared == 0) {
-            ownedCount--;
-        }
-        count--;
-    }
 };
+
+// Drops one object from the counters; shared objects are not counted as owned.
+static __inline void poolForget(ObjectPool *pool, s32 shared)
+{
+    if (shared == 0) {
+        pool->ownedCount--;
+    }
+    pool->count--;
+}
 
 extern "C" {
 
@@ -34,7 +35,7 @@ void FUN_00483294(ObjectPool *pool)
             s32 shared = object->shared;
             delete object;
             pool->slots[i] = NULL;
-            pool->forget(shared);
+            poolForget(pool, shared);
         }
     }
 }

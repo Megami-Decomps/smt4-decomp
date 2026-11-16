@@ -1,5 +1,5 @@
 #include "gamedata/DataTableAccess_VariantE_EntrySort.h"
-/* NON_MATCHING: retail uses `mov r8, r0` where armcc emits `mov r6, r0`. */
+/* NON_MATCHING: register assignment (retail keeps the two records in r8/r9 and loads the first FUN_00345098 argument before the rank). */
 #include "shard/W5_W5Match7_EntrySort.h"
 
 extern "C" {
@@ -14,7 +14,7 @@ s32 uiCompareEntryRanksDescending(const SortItem *left, const SortItem *right)
     s32 rightScore = 0;
     s32 leftRank = DAT_0052b8ac[1].left;
     s32 rightRank = DAT_0052b8ac[1].right;
-    for (s32 i = 0; i < 8; i++) {
+    for (s32 i = 0; i <= 7; i++) {
         if (FUN_00345098(leftScore, leftData->ranks[i] >> 10) > 0) {
             leftRank = i;
             leftScore = leftData->ranks[i] >> 10;

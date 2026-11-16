@@ -1,8 +1,8 @@
 #include "gamedata/NamedVariantTable.h"
+#include <string.h>
 
 extern "C" {
 extern const NamedVariantTableKey DAT_00439d20[455];
-s32 libc_strcmp(const char *left, const char *right);
 void *fileSlotGetBuffer(u32 table);
 u32 binFileGetValue(void *file);
 void *FUN_0024ba44(void *file, u32 block);
@@ -26,7 +26,7 @@ static inline const NamedVariantTableKey *namedVariantFind(const char *name)
 {
     const NamedVariantTableKey *key = DAT_00439d20;
     for (s32 index = 0; index < 455; ++index, ++key) {
-        if (libc_strcmp(name, key->name) == 0)
+        if (strcmp(name, key->name) == 0)
             return key;
     }
     return NULL;

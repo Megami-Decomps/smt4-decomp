@@ -1,3 +1,4 @@
+/* NON_MATCHING: retail loads the fade `mov r1, #15` before the zero mode `mov r2, #0` ahead of the tail call to bgmStop; the build emits the two in the other order. */
 #include "common.h"
 #include "kernel/jyoucyuGetTableEntry.h"
 

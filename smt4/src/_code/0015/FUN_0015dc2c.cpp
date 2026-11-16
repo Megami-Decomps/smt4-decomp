@@ -2,10 +2,10 @@
 #include "addon/aocMain.h"
 #include "addon/AocPackage.h"
 #include "classes/WindowOperation.h"
+#include <string.h>
 
 extern "C" {
 s32 libc_strlen(const char *text);
-s32 libc_strcmp(const char *left, const char *right);
 WindowOperationResult FUN_0015e6f4(AocSystem *system, const char *mountName,
                                    u32 archive, u32 flags, u32 id);
 
@@ -25,7 +25,7 @@ WindowOperationResult FUN_0015dc2c(AocSystem *system, const char *path)
                 if (mountName[0] == 'a' && mountName[1] == 'o' && mountName[2] == 'c') {
                     for (s32 packageIndex = 0; packageIndex < system->packages.count; ++packageIndex) {
                         AocPackage *package = &system->packages.entries[packageIndex];
-                        if (libc_strcmp(mountName, package->mountName) == 0) {
+                        if (strcmp(mountName, package->mountName) == 0) {
                             return FUN_0015e6f4(system, package->mountName, package->archive,
                                                 package->flags, package->id);
                         }

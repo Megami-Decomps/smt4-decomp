@@ -51,7 +51,8 @@ extern "C" void FUN_00338458(void *state)
     if (battle->cache == NULL)
         return;
     for (s32 actionIndex = 4; actionIndex < 54; ++actionIndex) {
-        BtlActionRecord *action = &battle->actions[actionIndex];
+        BtlActionRecord *actions = battle->actions;
+        BtlActionRecord *action = &actions[actionIndex];
         if ((action->status & 1) && (action->status & 0x80)) {
             IdentityView *combatant = (IdentityView *)findCombatantByMember(battle, action->memberId);
             const CombatantIdentity *identity = &combatant->identity;

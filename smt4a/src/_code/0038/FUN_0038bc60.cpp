@@ -1,4 +1,4 @@
-/* NON_MATCHING: entry-address registers differ, and required mask uses two LDRs instead of one LDM. */
+/* NON_MATCHING: only the entry-address registers differ (retail adds the pointer offsets into r1 and the index multiply into r0; the build swaps them). */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -27,10 +27,11 @@ u32 FUN_0038bc60(void)
         property = 11;
     u32 value = scrGetArg(2);
     for (s32 index = 0; index < 109; ++index) {
-        BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
+        BtlMainStateA *state = btlGetMainState();
+        BtlCombatantEntryA *entry = &state->entries[index];
         u64 flags = entry->flags;
-        if (flags & (g_btlCandidateMasks.unavailable) != 0 &&
-            (g_btlCandidateMasks.required & flags) != 0 &&
+        if ((flags & g_btlCandidateMasks.unavailable) != 0 &&
+            (flags & g_btlCandidateMasks.required) != 0 &&
             (flags & g_btlCandidateMasks.excluded) == 0 &&
             entry->id == unitId &&
             reinterpret_cast<const PropertyView *>(entry)->values[property] == value) {

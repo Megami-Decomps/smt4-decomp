@@ -5,10 +5,11 @@ extern "C" f32 FUN_002039d0(s32 mode, s32 range, s32 positive);
 /* Advance to the next later key, randomize its value, and prepare the linear slope. */
 extern "C" void FUN_002c793c(ScalarEffectKeys *work, const ScalarEffectKeys *source)
 {
+    s32 distance = 1;
     if (work->nextKey >= 3)
         work->nextKey = 4;
     s32 current = work->nextKey;
-    for (s32 distance = 1; current + distance < 4; ++distance) {
+    for (; current + distance < 4; ++distance) {
         work->duration = source->keys[current + distance].frame - source->keys[current].frame;
         if (work->duration <= 0)
             continue;
