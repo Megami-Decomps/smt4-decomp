@@ -21,7 +21,7 @@ void rt_memclr(u32 base, u32 size);
 void heapOwnerCreate(void *expHeap, u32 base, u32 size, u32 flags);
 void nn_os_CriticalSection_Initialize(void *lock);
 void FUN_0011bfec(void *expHeap, u32 block, u32 size);
-void FUN_0010a174(u32 mainBase, u32 mainSize, u32 extraBase, u32 extraSize, u32 vramABase, u32 vramASize, u32 vramBBase, u32 vramBSize);
+void memoryDebugSetRegions(u32 mainBase, u32 mainSize, u32 extraBase, u32 extraSize, u32 vramABase, u32 vramASize, u32 vramBBase, u32 vramBSize);
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void asdVramBlockListInsert(void *list, AsdVramBlock *block);
 
@@ -96,7 +96,7 @@ void asdMemoryInit(void)
     g_asdMemory.system->vramB.base = vramAreaGetBaseAddress(ASD_HEAP_VRAM_B);
     g_asdMemory.system->vramB.size = nngxGetVramEndAddr(ASD_HEAP_VRAM_B) - g_asdMemory.system->vramB.base;
     g_asdMemory.system->vramBBase = g_asdMemory.system->vramB.base;
-    FUN_0010a174(g_asdMemory.system->main.base, g_asdMemory.system->main.size, g_asdMemory.system->extra.base, g_asdMemory.system->extra.size,
+    memoryDebugSetRegions(g_asdMemory.system->main.base, g_asdMemory.system->main.size, g_asdMemory.system->extra.base, g_asdMemory.system->extra.size,
                  g_asdMemory.system->vramA.base, g_asdMemory.system->vramA.size, g_asdMemory.system->vramB.base, g_asdMemory.system->vramB.size);
 
     /* Each VRAM bank starts as one free block covering the whole bank. */

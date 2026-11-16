@@ -1,4 +1,4 @@
-/* NON_MATCHING: table/index/source-loop registers differ despite matching instruction row counts. */
+/* NON_MATCHING: only the destination search loop differs: retail keeps the record table in r3 and the index in r2, the build swaps them. */
 #include "gamedata/DestinationConnections.h"
 
 extern "C" {
@@ -20,9 +20,9 @@ u32 FUN_0040b11c(u32 unused, s32 kind, s32 area, s32 point, u32 current)
         current = kind == 1 ? player->first : player->second;
     }
     const DestinationCoordinates *source = dataTable08Sub2GetRecord(current);
-    const DestinationConnection *records = &DAT_00588358.single;
     s32 count = 1;
     const DestinationConnection *connection = NULL;
+    const DestinationConnection *records = &DAT_00588358.single;
     if (kind == 2) {
         ++records;
         count = 59;
@@ -37,7 +37,7 @@ u32 FUN_0040b11c(u32 unused, s32 kind, s32 area, s32 point, u32 current)
             break;
         }
     }
-    s16 sourceId = source->point + source->area * 1000;
+    u16 sourceId = source->point + source->area * 1000;
     if (connection != NULL) {
         for (s32 index = 0; index < connection->count; ++index) {
             if (connection->sources[index] == sourceId) {

@@ -1,17 +1,20 @@
-/* NON_MATCHING: compiler combines the two flag tests into one mask; retail tests the flags separately. */
 #include "battle/BattleUnitSlot.h"
 
 namespace { struct Unit { u32 flags; }; }
 
 extern "C" {
-/* Reads or updates the requested state. */
 extern u32 g_btlScriptUnit;
+
+/* Returns whether the script's battle unit has flag 0x80 or 0x1000 set. */
 s32 FUN_00293230(void)
 {
     Unit *unit = reinterpret_cast<Unit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
-    if (unit != NULL && ((unit->flags & 0x80) != 0 || (unit->flags & 0x1000) != 0)) {
+    if (unit == NULL)
+        return 0;
+    if (unit->flags & 0x80)
         return 1;
-    }
+    if (unit->flags & 0x1000)
+        return 1;
     return 0;
 }
 }

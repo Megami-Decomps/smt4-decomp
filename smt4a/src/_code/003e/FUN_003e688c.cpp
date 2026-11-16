@@ -1,4 +1,3 @@
-/* NON_MATCHING: The shared transition-to-cleanup block is placed after the load phase rather than the run phase. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlAIScript.h"
 #include "script/scrScriptProcess.h"
@@ -35,19 +34,17 @@ s32 FUN_003e688c(BtlAiScript *runner)
         }
         break;
     case 2:
-        if (runner->data == NULL) {
-            return 0;
+        if (runner->data != NULL) {
+            runner->process = FUN_00275bc8(runner->data, 0);
+            ((ScriptRunState *)runner->process)->mode = 1;
+            scrScriptProcessStartEntry(runner->process, 0);
+            runner->unk0C = 3;
         }
-        runner->process = FUN_00275bc8(runner->data, 0);
-        ((ScriptRunState *)runner->process)->mode = 1;
-        scrScriptProcessStartEntry(runner->process, 0);
-        runner->unk0C = 3;
         break;
     case 3:
-        if (scrRunOpcodesStub(runner->process) != 2) {
-            return 0;
+        if (scrRunOpcodesStub(runner->process) == 2) {
+            runner->unk0C = 4;
         }
-        runner->unk0C = 4;
         break;
     case 4:
         if (runner->process != NULL) {

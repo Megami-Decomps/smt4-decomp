@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only: when clearing the UI and active flags retail loads the flags word into r1 (and hoists the pool load of DAT_00435d18 between), built uses r0 */
+/* NON_MATCHING: stores and pool order now match; only the UI-flag clear after FUN_00242914 uses r0 (retail r1) and the zero stored into task->state r1 (retail r0). */
 #include "common.h"
 #include "code/Code0024.h"
 #include "battle/btlEditor.h"
@@ -58,9 +58,10 @@ s32 FUN_003c7760(BtlTask *task, BtlMainState *state)
                 state->flags &= ~BTL_FLAG_UI;
             }
         }
-        state->flags &= ~BTL_FLAG_ACTIVE;
         task->state = 0;
-        battleResetCounterAndFlag(DAT_00435d18);
+        u32 *resetCounter = &DAT_00435d18;
+        state->flags &= ~BTL_FLAG_ACTIVE;
+        battleResetCounterAndFlag(*resetCounter);
     }
     if (task->frames < 0xFFFF) {
         task->frames++;

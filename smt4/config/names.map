@@ -4871,3 +4871,11 @@
 0034f800 mobiclipAudioDecoderCreate
 0023a1b8 _ZN19AocAuxBufferRequestD1Ev
 0023a1bc _ZN14AocRequestBaseD1Ev
+00129b14 nn_gxlow_CTR_AcquireGpuRight
+0010a174 memoryDebugSetRegions
+001dd8c0 npcRoomIsOpen
+00153068 textureEntryAttachStex
+002ad8b4 ARM_common_memcpy4_8
+002637c8 placeWinCreate
+002a7838 mikadoCameraTeardown
+0028bf2c btlTalkBustUpReleaseTexture

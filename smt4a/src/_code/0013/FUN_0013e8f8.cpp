@@ -1,4 +1,4 @@
-/* NON_MATCHING: the flag tests now match; retail clears the g_frameTex bytes through a pooled 0x1414 register offset, this source gets add/add pairs. */
+/* NON_MATCHING: the g_frameTex clear now matches; retail returns through a shared `mov r0, #0` (the cleared path branches to it, the `!shown` test straight to the pop), built gives the cleared path its own return. */
 #include "common.h"
 #include "shard/JobWork.h"
 #include "camp/RenderCtx.h"
@@ -50,16 +50,15 @@ u8 FUN_0013e8f8(u32 job)
             } else {
                 work->fadeOutFrames++;
                 if (work->fadeOutFrames > FRAME_TEX_FADE_OUT_FRAMES) {
-                    FrameTexFade *tex = g_frameTex;
-                    tex->enabled = 0;
-                    tex->fadeInFrames = 0;
-                    tex->fadeOutFrames = 0;
-                    tex->frame = 0;
-                    tex->captured = 0;
-                    tex->shown = 0;
-                    tex->unk1418 = 0;
-                    tex->unk1419 = 0;
-                    tex->unk144c = 0;
+                    g_frameTex->enabled = 0;
+                    g_frameTex->fadeInFrames = 0;
+                    g_frameTex->fadeOutFrames = 0;
+                    g_frameTex->frame = 0;
+                    g_frameTex->captured = 0;
+                    g_frameTex->shown = 0;
+                    g_frameTex->unk1418 = 0;
+                    g_frameTex->unk1419 = 0;
+                    g_frameTex->unk144c = 0;
                     return 0;
                 }
             }

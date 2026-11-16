@@ -46,7 +46,7 @@ void *rt_memcpy(void *, const void *, u32);
 EffectSelectionParts *FUN_002b30e4(EffectSelectionItem *);
 void *resourceResolveHeaderPointer(EffectSelectionBlock *);
 void effPartSetData(EffectSelectionBlock *, void *, u32, u16);
-void *FUN_00243c24(EffectSelectionBlock *);
+void *effBlockCreateFromBlock(EffectSelectionBlock *);
 void objectRegistryInsert(void *, s32);
 u32 FUN_003c378c(EffectEditorSnapshot *, s32);
 void FUN_00390038(const EffectPositionControl *);
@@ -221,7 +221,7 @@ extern "C" u32 effectEditorActivateSelection()
     if (parts->data != NULL) {
         effPartSetData(g_effectEditor.selection.block, parts->data, parts->size, parts->id);
     }
-    void *instance = FUN_00243c24(g_effectEditor.selection.block);
+    void *instance = effBlockCreateFromBlock(g_effectEditor.selection.block);
     effectEditorApplyHandlerState(static_cast<EffectHandlerRequest *>(instance));
     g_effectEditor.selection.instance = instance;
     g_effectEditor.selection.object = findEditorTemplate(item->block);

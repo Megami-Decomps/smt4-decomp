@@ -1,4 +1,4 @@
-/* NON_MATCHING: store order now matches retail (terminator through a pointer); register assignment differs (retail keeps the index in ip and 0xf890 in r4, ours index in r6, 0xf890 in ip). */
+/* NON_MATCHING: loop registers now match retail (index in ip, 0xf890 in r4); only the zero for the stores after the match lands in r5 where retail rematerializes it in ip. */
 #include "shard/W6_W6Match5_SentinelLookup.h"
 
 extern "C" {
@@ -7,7 +7,8 @@ extern SentinelLookupEntry g_sentinelLookupEntries[];
 // Append a new key/value pair, keeping the following terminator initialized.
 void FUN_0013f444(u32 key, u32 value, s8 flags)
 {
-    for (s32 index = 0; ; ++index) {
+    s32 index = 0;
+    while (true) {
         SentinelLookupEntry *entry = &g_sentinelLookupEntries[index];
         if (entry->key == 0xf890) {
             entry->key = key;
@@ -23,6 +24,7 @@ void FUN_0013f444(u32 key, u32 value, s8 flags)
         }
         if (entry->key == key)
             return;
+        ++index;
     }
 }
 }

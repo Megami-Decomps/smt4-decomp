@@ -1,4 +1,3 @@
-/* NON_MATCHING: register choice only: retail holds the zero in r0 and the work pointer in r1; the build swaps them. */
 #include "common.h"
 
 extern "C" {
@@ -21,16 +20,14 @@ extern MapDepartWork *g_mapDepartWork; /* 0x58069c */
 /* Clears the map departure work's request fields. */
 void FUN_00244220(void)
 {
-    MapDepartWork *work = g_mapDepartWork;
-
-    work->unk18 = 0;
-    work->unk24 = 0;
-    work->unk28 = 0;
-    work->unk2C = 0;
-    work->unk30 = 0;
-    work->unk0C = 0;
-    work->unk10 = 0;
-    work->unk14 = 0;
+    g_mapDepartWork->unk18 = 0;
+    g_mapDepartWork->unk24 = 0;
+    g_mapDepartWork->unk28 = 0;
+    g_mapDepartWork->unk2C = 0;
+    g_mapDepartWork->unk30 = 0;
+    g_mapDepartWork->unk0C = 0;
+    g_mapDepartWork->unk10 = 0;
+    g_mapDepartWork->unk14 = 0;
 }
 
 } /* extern "C" */

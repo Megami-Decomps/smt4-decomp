@@ -1,9 +1,8 @@
-/* NON_MATCHING: identical except the prologue move order (retail copies the size into r6 before the entry into r4); same near miss as the Apocalypse twin FUN_001b5154. */
 #include "gfx/StexLoad.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 extern "C" {
-extern const char DAT_00409268[]; // STEX signature
+extern const char g_stexMagic[]; // STEX signature
 StexHeader *asdTMSprDecompress(StexHeader *data, u32 mode, u32 alignment);
 s32 rt_memcmp(const void *first, const void *second, u32 bytes);
 void asdMemFree(void *memory);
@@ -18,12 +17,9 @@ static __inline void assignVramBank(TextureHeapEntry *entry, u32 heap, u32 mode)
     }
 }
 
-// Keep the loaded allocation alive for its texture's pixel storage, then upload it.
-void FUN_00153068(StexHeader *data, TextureHeapEntry *entry, u32 size)
+/* Takes over a loaded (and decompressed if needed) STEX file of `size` bytes as the entry's texture. */
+static __inline void textureEntryAttachStex(StexHeader *data, u32 size, TextureHeapEntry *entry)
 {
-    if (data == NULL) {
-        return;
-    }
     if (entry->node->compressed) {
         u32 flags = 1;
         if (entry->flags & TEXENTRY_RETRY) {
@@ -31,7 +27,7 @@ void FUN_00153068(StexHeader *data, TextureHeapEntry *entry, u32 size)
         }
         data = asdTMSprDecompress(data, flags, 128);
     }
-    if (rt_memcmp(data, DAT_00409268, 4) != 0) {
+    if (rt_memcmp(data, g_stexMagic, 4) != 0) {
         asdMemFree(data);
         return;
     }
@@ -70,5 +66,14 @@ void FUN_00153068(StexHeader *data, TextureHeapEntry *entry, u32 size)
         asdTextureSetImage(entry->texture);
         entry->flags |= 4;
     }
+}
+
+// Keep the loaded allocation alive for its texture's pixel storage, then upload it.
+void textureEntryAttachStex(StexHeader *data, TextureHeapEntry *entry, u32 size)
+{
+    if (data == NULL) {
+        return;
+    }
+    textureEntryAttachStex(data, size, entry);
 }
 }

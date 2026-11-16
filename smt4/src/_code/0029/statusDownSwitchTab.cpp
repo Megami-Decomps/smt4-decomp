@@ -1,4 +1,3 @@
-/* NON_MATCHING: with the smt4a twin's flat if-chain the status/current registers match; retail shares one `str r0, [r5, #1032]` for tabs 1-4 (and stores tabs 0 and 5 directly) where the chain stores in every arm. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
@@ -56,15 +55,15 @@ void statusDownSwitchTab(u32 tab)
     current->state = 2;
     if (tab == 0)
         status->icon = 0;
-    else if (tab == 1)
+    if (tab == 1)
         status->icon = 3;
-    else if (tab == 2)
+    if (tab == 2)
         status->icon = 0x10;
-    else if (tab == 3)
+    if (tab == 3)
         status->icon = 0x11;
-    else if (tab == 4)
+    if (tab == 4)
         status->icon = 0x13;
-    else if (tab == 5)
+    if (tab == 5)
         status->icon = 0x15;
     FUN_0029ee6c(0, 0x323232FF);
 }

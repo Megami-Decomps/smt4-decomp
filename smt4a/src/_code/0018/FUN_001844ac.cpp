@@ -1,4 +1,5 @@
-/* NON_MATCHING: alignment narrowing and metadata stores schedule differently; -O2 reduces register use but is not identical. */
+/* NON_MATCHING: retail narrows the stored alignment with `uxth` after the header stores and keeps the address math in r1-r3
+ * (one saved register); with u16 parameters armcc skips the narrowing and needs r4 for the header end. */
 #include "common.h"
 
 struct AllocationHeader {
@@ -15,7 +16,7 @@ extern "C" {
 void FUN_0019a64c(AllocationHeader *header);
 
 // Align the user allocation after its header and install the preceding back-pointer.
-void *FUN_001844ac(AllocationHeader *header, u32 size, u32 alignment, u32 flags)
+void *FUN_001844ac(AllocationHeader *header, u32 size, u16 alignment, u16 flags)
 {
     header->size = size;
     header->alignment = alignment;
@@ -25,8 +26,10 @@ void *FUN_001844ac(AllocationHeader *header, u32 size, u32 alignment, u32 flags)
     u32 padding = (boundary - ((u32)(header + 1) & mask)) & mask;
     header->unk0c = 0;
     header->unk10 = 0;
-    u8 *data = (u8 *)(header + 1) + padding;
-    ((AllocationHeader **)data)[-1] = header;
+    /* The user data starts `padding` bytes after the header; the word just before it points back at the header. */
+    u8 *data = (u8 *)header + padding;
+    ((AllocationHeader **)data)[sizeof(AllocationHeader) / sizeof(AllocationHeader *) - 1] = header;
+    data += sizeof(AllocationHeader);
     FUN_0019a64c(header);
     return data;
 }

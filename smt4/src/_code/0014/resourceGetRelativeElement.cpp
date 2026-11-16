@@ -1,4 +1,4 @@
-/* NON_MATCHING: a null table skips the record lookup (no early return, like retail); remaining diff: retail keeps NULL in a hoisted register (`moveq rX, r0` after the add), compares the first result again and adds the last offset as `offset + base`. */
+/* NON_MATCHING: IDENTICAL when the unit is compiled with -O2 (needs a cflags entry: -O2 -Otime); under the default -O3 retail's hoisted NULL register and offset + base order differ. */
 #include "shard/W6_W6Match4_RelativeResourceGraph.h"
 
 extern "C" {

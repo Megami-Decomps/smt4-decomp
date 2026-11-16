@@ -4,7 +4,7 @@ extern "C" {
 
 extern s32 nn_cec_CTR_MessageBox_GetMessHeader(u32 box, s32 index, u32 flags);
 extern u32 releaseOrCopyHandle(u8 *buffer, s32 source);
-extern void wordPairCopy(u32 *dest, u32 src);
+extern void ARM_common_memcpy4_8(u32 *dest, u32 src);
 
 u32 nn_cec_CTR_MessageBox_GetMessageId(u32 box, u32 *out, s32 index, u32 flags)
 {
@@ -18,7 +18,7 @@ u32 nn_cec_CTR_MessageBox_GetMessageId(u32 box, u32 *out, s32 index, u32 flags)
     } else {
         if (out != 0) {
             id = releaseOrCopyHandle(buffer, header + 0x20);
-            wordPairCopy(out, id);
+            ARM_common_memcpy4_8(out, id);
         }
         id = 0;
     }

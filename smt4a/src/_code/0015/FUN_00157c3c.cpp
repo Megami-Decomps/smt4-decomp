@@ -42,8 +42,8 @@ void FUN_00157c3c(ModelMatrixUploadOwner *owner, ModelMatrixUploadSource *source
             *writer->segmentSize = (reinterpret_cast<u32>(commands) -
                 reinterpret_cast<u32>(writer->segmentBegin)) >> 3;
         }
-        writer->segmentBegin = writer->cursor;
         writer->segmentSize = sizePatch;
+        writer->segmentBegin = writer->cursor;
         if (writer->firstSegmentBytes == 0) {
             writer->firstSegmentBytes = (reinterpret_cast<u32>(writer->cursor) -
                 reinterpret_cast<u32>(writer->begin)) & ~3u;

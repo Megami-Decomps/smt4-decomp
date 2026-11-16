@@ -25004,12 +25004,12 @@
     },
     {
       "address": "0x13ea48",
-      "function": "FUN_0013ea48",
+      "function": "memoryDebugSetRegions",
       "module": "_code",
-      "object": "build/obj/_code/0013/FUN_0013ea48.o",
+      "object": "build/obj/_code/0013/memoryDebugSetRegions.o",
       "size": 44,
-      "source": "src/_code/0013/FUN_0013ea48.cpp",
-      "target": "orig/target/_code/0013/FUN_0013ea48.o",
+      "source": "src/_code/0013/memoryDebugSetRegions.cpp",
+      "target": "orig/target/_code/0013/memoryDebugSetRegions.o",
       "thumb": false
     },
     {
@@ -27739,7 +27739,17 @@
       "size": 168,
       "source": "src/_code/0015/FUN_00151340.cpp",
       "target": "orig/target/_code/0015/FUN_00151340.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O2",
+        "-Otime"
+      ]
     },
     {
       "address": "0x1513ec",
@@ -38334,12 +38344,12 @@
     },
     {
       "address": "0x18b1d0",
-      "function": "FUN_0018b1d0",
+      "function": "nn_gxlow_CTR_AcquireGpuRight",
       "module": "_code",
-      "object": "build/obj/_code/0018/FUN_0018b1d0.o",
+      "object": "build/obj/_code/0018/nn_gxlow_CTR_AcquireGpuRight.o",
       "size": 96,
-      "source": "src/_code/0018/FUN_0018b1d0.cpp",
-      "target": "orig/target/_code/0018/FUN_0018b1d0.o",
+      "source": "src/_code/0018/nn_gxlow_CTR_AcquireGpuRight.cpp",
+      "target": "orig/target/_code/0018/nn_gxlow_CTR_AcquireGpuRight.o",
       "thumb": false
     },
     {
@@ -40641,7 +40651,17 @@
       "size": 80,
       "source": "src/_code/0019/sysFatalBreak.cpp",
       "target": "orig/target/_code/0019/sysFatalBreak.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O2",
+        "-Otime"
+      ]
     },
     {
       "address": "0x19601c",
@@ -41487,7 +41507,17 @@
       "size": 96,
       "source": "src/_code/0019/resourceGetRelativeElement.cpp",
       "target": "orig/target/_code/0019/resourceGetRelativeElement.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O2",
+        "-Otime"
+      ]
     },
     {
       "address": "0x19c4fc",
@@ -43146,12 +43176,12 @@
     },
     {
       "address": "0x1a28a8",
-      "function": "FUN_001a28a8",
+      "function": "nn_gxlow_CTR_InterruptRelayQueueRx_SuppressPdcEvents",
       "module": "_code",
-      "object": "build/obj/_code/001a/FUN_001a28a8.o",
+      "object": "build/obj/_code/001a/nn_gxlow_CTR_InterruptRelayQueueRx_SuppressPdcEvents.o",
       "size": 60,
-      "source": "src/_code/001a/FUN_001a28a8.cpp",
-      "target": "orig/target/_code/001a/FUN_001a28a8.o",
+      "source": "src/_code/001a/nn_gxlow_CTR_InterruptRelayQueueRx_SuppressPdcEvents.cpp",
+      "target": "orig/target/_code/001a/nn_gxlow_CTR_InterruptRelayQueueRx_SuppressPdcEvents.o",
       "thumb": false
     },
     {
@@ -44637,12 +44667,12 @@
     },
     {
       "address": "0x1a9110",
-      "function": "wordPairCopy",
+      "function": "ARM_common_memcpy4_8",
       "module": "_code",
-      "object": "build/obj/_code/001a/wordPairCopy.o",
+      "object": "build/obj/_code/001a/ARM_common_memcpy4_8.o",
       "size": 20,
-      "source": "src/_code/001a/wordPairCopy.cpp",
-      "target": "orig/target/_code/001a/wordPairCopy.o",
+      "source": "src/_code/001a/ARM_common_memcpy4_8.cpp",
+      "target": "orig/target/_code/001a/ARM_common_memcpy4_8.o",
       "thumb": false
     },
     {
@@ -47135,12 +47165,12 @@
     },
     {
       "address": "0x1b5154",
-      "function": "FUN_001b5154",
+      "function": "textureEntryAttachStex",
       "module": "_code",
-      "object": "build/obj/_code/001b/FUN_001b5154.o",
+      "object": "build/obj/_code/001b/textureEntryAttachStex.o",
       "size": 444,
-      "source": "src/_code/001b/FUN_001b5154.cpp",
-      "target": "orig/target/_code/001b/FUN_001b5154.o",
+      "source": "src/_code/001b/textureEntryAttachStex.cpp",
+      "target": "orig/target/_code/001b/textureEntryAttachStex.o",
       "thumb": false
     },
     {
@@ -56198,12 +56228,12 @@
     {
       "address": "0x222180",
       "file": "AsdSDK/Source/Gfx/Effect/effParts",
-      "function": "FUN_00222180",
+      "function": "effBlockClone",
       "module": "_code",
-      "object": "build/obj/_code/AsdSDK/Source/Gfx/Effect/effParts/FUN_00222180.o",
+      "object": "build/obj/_code/AsdSDK/Source/Gfx/Effect/effParts/effBlockClone.o",
       "size": 184,
-      "source": "src/_code/AsdSDK/Source/Gfx/Effect/effParts/FUN_00222180.cpp",
-      "target": "orig/target/_code/AsdSDK/Source/Gfx/Effect/effParts/FUN_00222180.o",
+      "source": "src/_code/AsdSDK/Source/Gfx/Effect/effParts/effBlockClone.cpp",
+      "target": "orig/target/_code/AsdSDK/Source/Gfx/Effect/effParts/effBlockClone.o",
       "thumb": false
     },
     {
@@ -59175,12 +59205,12 @@
     {
       "address": "0x243c24",
       "file": "AsdSDK/Source/Gfx/Effect/effParts",
-      "function": "FUN_00243c24",
+      "function": "effBlockCreateFromBlock",
       "module": "_code",
-      "object": "build/obj/_code/AsdSDK/Source/Gfx/Effect/effParts/FUN_00243c24.o",
+      "object": "build/obj/_code/AsdSDK/Source/Gfx/Effect/effParts/effBlockCreateFromBlock.o",
       "size": 188,
-      "source": "src/_code/AsdSDK/Source/Gfx/Effect/effParts/FUN_00243c24.cpp",
-      "target": "orig/target/_code/AsdSDK/Source/Gfx/Effect/effParts/FUN_00243c24.o",
+      "source": "src/_code/AsdSDK/Source/Gfx/Effect/effParts/effBlockCreateFromBlock.cpp",
+      "target": "orig/target/_code/AsdSDK/Source/Gfx/Effect/effParts/effBlockCreateFromBlock.o",
       "thumb": false
     },
     {
@@ -62793,12 +62823,12 @@
     },
     {
       "address": "0x284d94",
-      "function": "FUN_00284d94",
+      "function": "npcRoomIsOpen",
       "module": "_code",
-      "object": "build/obj/_code/0028/FUN_00284d94.o",
+      "object": "build/obj/_code/0028/npcRoomIsOpen.o",
       "size": 36,
-      "source": "src/_code/0028/FUN_00284d94.cpp",
-      "target": "orig/target/_code/0028/FUN_00284d94.o",
+      "source": "src/_code/0028/npcRoomIsOpen.cpp",
+      "target": "orig/target/_code/0028/npcRoomIsOpen.o",
       "thumb": false
     },
     {
@@ -63540,7 +63570,17 @@
       "size": 148,
       "source": "src/_code/0029/FUN_002909f8.cpp",
       "target": "orig/target/_code/0029/FUN_002909f8.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O2",
+        "-Otime"
+      ]
     },
     {
       "address": "0x290a8c",
@@ -96475,12 +96515,12 @@
     {
       "address": "0x31e198",
       "file": "font/PlaceWin/PlaceWin",
-      "function": "FUN_0031e198",
+      "function": "placeWinCreate",
       "module": "_code",
-      "object": "build/obj/_code/font/PlaceWin/PlaceWin/FUN_0031e198.o",
+      "object": "build/obj/_code/font/PlaceWin/PlaceWin/placeWinCreate.o",
       "size": 312,
-      "source": "src/_code/font/PlaceWin/PlaceWin/FUN_0031e198.cpp",
-      "target": "orig/target/_code/font/PlaceWin/PlaceWin/FUN_0031e198.o",
+      "source": "src/_code/font/PlaceWin/PlaceWin/placeWinCreate.cpp",
+      "target": "orig/target/_code/font/PlaceWin/PlaceWin/placeWinCreate.o",
       "thumb": false
     },
     {
@@ -116649,7 +116689,17 @@
       "size": 52,
       "source": "src/_code/0039/messageGetActiveValue.cpp",
       "target": "orig/target/_code/0039/messageGetActiveValue.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O2",
+        "-Otime"
+      ]
     },
     {
       "address": "0x39bf08",
@@ -129958,7 +130008,17 @@
       "size": 48,
       "source": "src/_code/003e/controllerClearVectorState.cpp",
       "target": "orig/target/_code/003e/controllerClearVectorState.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O2",
+        "-Otime"
+      ]
     },
     {
       "address": "0x3edbd0",
@@ -164276,7 +164336,17 @@
       "size": 88,
       "source": "src/_code/004c/FUN_004c8bb8.cpp",
       "target": "orig/target/_code/004c/FUN_004c8bb8.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O2",
+        "-Otime"
+      ]
     },
     {
       "address": "0x4c8c10",
@@ -170889,7 +170959,17 @@
       "size": 132,
       "source": "src/_code/0050/FUN_00501b90.cpp",
       "target": "orig/target/_code/0050/FUN_00501b90.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O2",
+        "-Otime"
+      ]
     },
     {
       "address": "0x501c20",

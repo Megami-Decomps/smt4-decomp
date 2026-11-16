@@ -1,4 +1,4 @@
-/* NON_MATCHING: sprite member base, result zero and predicated animation stores now match; the frame-counter load temp register and the effect-state write-back (`str lr,[r0,#100]!`) differ. */
+/* NON_MATCHING: sprite member base, result zero, predicated animation stores and the effect-state stores now match; remaining: the frame counters are loaded through a temp (retail increments in r5 directly) and the reloaded trap pointer uses r2 where retail uses r0. */
 #include "map/mapTrap.h"
 
 struct FloatTable;
@@ -78,8 +78,8 @@ u32 FUN_002242a0(void)
         break;
     case 1:
         trap->sprite.effect->flags->flags &= ~3u;
-        trap->effectState = 2;
         trap->effectFrame = 0;
+        trap->effectState = 2;
         break;
     case 2: {
         union { f32 value; s32 bits; } scalar;

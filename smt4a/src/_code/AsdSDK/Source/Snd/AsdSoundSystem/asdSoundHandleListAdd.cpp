@@ -1,4 +1,4 @@
-/* NON_MATCHING: debug trace and list/count struct now match; remaining difference is register allocation (retail keeps 0 in r2 and uses r5/r6/r7 for id, flag and the loop temp). */
+/* NON_MATCHING: the search loop and both append tails now line up; retail compares the id through r7 (ip here) and the first tail sets the result in r1 and shares `mov r0, r1` with the second, built returns directly. */
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
@@ -12,26 +12,27 @@ struct SoundHandleList {
 extern "C" {
 extern SoundHandleList g_soundHandleList;
 
-
 /* Registers sound `id` (with a flag byte) at the end of the list. Returns 0 if it is already registered. */
 u32 asdSoundHandleListAdd(s32 id, u8 flag)
 {
+    SoundHandleList *list = &g_soundHandleList;
     AsdSndHandleNode *node;
     AsdSndHandleNode *last;
+    u32 result = 0;
     s32 i = 0;
 
-    node = g_soundHandleList.head;
-    if (0 < g_soundHandleList.count) {
+    node = list->head;
+    if (0 < list->count) {
         do {
             if (node == NULL) {
                 break;
             }
             if (node->id == id) {
-                return 0;
+                return result;
             }
             node = node->next;
             i++;
-        } while (i < g_soundHandleList.count);
+        } while (i < list->count);
     }
 
     asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Snd\\AsdSoundSystem.cpp", 4263);
@@ -39,19 +40,22 @@ u32 asdSoundHandleListAdd(s32 id, u8 flag)
     node->id = id;
     node->unk0d = 0;
     node->unk0f = flag;
-    if (g_soundHandleList.head != NULL) {
-        for (last = g_soundHandleList.head; last->next != NULL; last = last->next) {
+    if (list->head != NULL) {
+        for (last = list->head; last->next != NULL; last = last->next) {
         }
         node->prev = last;
         node->next = NULL;
         last->next = node;
-    } else {
-        node->prev = NULL;
-        node->next = NULL;
-        g_soundHandleList.head = node;
+        list->count++;
+        result = 1;
+        return result;
     }
-    g_soundHandleList.count++;
-    return 1;
+    node->prev = NULL;
+    node->next = NULL;
+    list->head = node;
+    list->count++;
+    result = 1;
+    return result;
 }
 
 } /* extern "C" */

@@ -1,4 +1,4 @@
-/* NON_MATCHING: takes no parameter (scrGetArg(1)); retail predicates `value > 4` (cmpne r4, #4; movgt) and shares the `return 1` block between the branches, the build branches. */
+/* NON_MATCHING: takes no parameter (scrGetArg(1)); an unknown mode returns 1 as in retail (bne to the shared `return 1`); retail still predicates `value > 4` (cmpne r4, #4; movgt) without the compiler nops and shares one `return 1`/`return 0` block between the branches, the build duplicates them. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "script/ScriptArgs.h"
@@ -28,7 +28,8 @@ u32 FUN_002deae0(void)
     if (mode == 0 || mode == 1) {
         FUN_003d54f8(0, value);
         FUN_003d54f8(1, value);
+        return 0;
     }
-    return 0;
+    return 1;
 }
 }

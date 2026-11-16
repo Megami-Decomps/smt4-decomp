@@ -1,4 +1,3 @@
-/* NON_MATCHING: the first flag-byte store is moved after record initialization. */
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include <stddef.h>
 
@@ -6,6 +5,7 @@ extern "C" {
 extern MapWorkEntries *DAT_00581280;
 void FUN_002241d0();
 
+/* Clears the controller work and its 64 records to their defaults, then finishes the reset. */
 void FUN_0020ef94()
 {
     // This controller variant has larger records and more entries than the shared prefix.
@@ -50,6 +50,7 @@ void FUN_0020ef94()
     work->unkf4c = 0;
     work->selected = -1;
     for (s32 index = 0; index < 64; ++index) {
+        work->records[index].active = 0;
         work->records[index].firstFlag = 0;
         work->records[index].secondFlag = 0;
         work->records[index].secondId = -1;
@@ -68,7 +69,6 @@ void FUN_0020ef94()
         work->records[index].unk2a = 0;
         work->records[index].unk38 = 0;
         work->records[index].ready = 0;
-        work->records[index].active = 0;
     }
     FUN_002241d0();
 }

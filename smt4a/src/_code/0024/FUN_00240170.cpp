@@ -1,4 +1,3 @@
-/* NON_MATCHING: native CameraPosition restores all coordinate lifetimes and VFP arithmetic; only initial X/Y constant-load and pool order differ. */
 #include "shard/Shard0033.h"
 #include "gfx/CameraVector3.h"
 extern "C" {
@@ -8,7 +7,8 @@ void statusCameraSetEye(f32, f32, f32);
 // Raises the status camera according to the selected model's size category.
 void FUN_00240170(void)
 {
-    CameraPosition eye(0.0f, 6.3f, 4.5f);
+    f32 baseHeight = 6.3f; /* eye height before the size adjustment */
+    CameraPosition eye(0.0f, baseHeight, 4.5f);
     s32 size = g_gameGlobals.instance->statusCameraHeightOffset;
     if (size > 0) {
         switch (g_gameGlobals.instance->statusCameraHeightMode) {

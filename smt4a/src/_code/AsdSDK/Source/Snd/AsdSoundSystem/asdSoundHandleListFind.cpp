@@ -1,4 +1,4 @@
-/* NON_MATCHING: list head and count now load with one ldm like retail; remaining: retail keeps the id in r0 and the result in r3 with a shared epilogue, the build moves the id to ip. */
+/* NON_MATCHING: the walk matches; retail returns the found value from inside the loop (shared `mov r0, r3` exit) where the build branches to one exit that masks the u32 result to u8. */
 #include "common.h"
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
@@ -9,23 +9,29 @@ struct SoundHandleList {
 };
 extern SoundHandleList g_soundHandleList;
 
+/* The value byte registered with sound `id`, or 0 when it is not registered or has no handle. */
 u8 asdSoundHandleListFind(s32 id)
 {
-    u8 result = 0;
-    AsdSndHandleNode *node = g_soundHandleList.head;
-    s32 count = g_soundHandleList.count;
+    SoundHandleList *list = &g_soundHandleList;
+    AsdSndHandleNode *node;
+    u32 result = 0;
+    s32 i = 0;
 
-    for (s32 index = 0; index < count; ++index) {
-        if (node == NULL) {
-            break;
-        }
-        if (node->id == id) {
-            if (node->handle != NULL) {
-                result = node->value;
+    node = list->head;
+    if (0 < list->count) {
+        do {
+            if (node == NULL) {
+                break;
             }
-            break;
-        }
-        node = node->next;
+            if (node->id == id) {
+                if (node->handle != 0) {
+                    result = node->value;
+                }
+                break;
+            }
+            node = node->next;
+            i++;
+        } while (i < list->count);
     }
     return result;
 }

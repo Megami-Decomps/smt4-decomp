@@ -1,4 +1,3 @@
-/* NON_MATCHING: Compiler shrink-wraps the register save after the inactive-stage check instead of saving at entry. */
 /* Returns 1 if the object's sub-state is active and gameFlagIsSet accepts its handle, else 0. */
 #include "common.h"
 
@@ -22,10 +21,10 @@ extern Object *g_mapGimic;
 u32 FUN_003bf574(void)
 {
     SubState *sub = &g_mapGimic->sub;
-    if (sub->active == 0) {
-        return 0;
+    if (sub->active != 0) {
+        return gameFlagIsSet(sub->handle) != 0;
     }
-    return gameFlagIsSet(sub->handle) != 0;
+    return 0;
 }
 
 }

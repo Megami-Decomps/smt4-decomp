@@ -50,7 +50,7 @@ extern u32 DAT_005e20f4[];    /* cached extra block words */
 SaveProcessJob *jobGetWork(void);
 void *asdMemoryAlloc(s32 heap, s32 align, s32 unk08, u32 size, s32 fromFront);
 void asdMemFree(void *block);
-void wordPairCopy(void *destination, u32 source);
+void ARM_common_memcpy4_8(void *destination, u32 source);
 u32 *gameDataGetExtraBlock(void);
 void FUN_00268250(u8 mode, u32 arg0, u32 arg1, void *buffer, u32 size);
 void FUN_002c9104(void);
@@ -136,7 +136,7 @@ u32 FUN_00371750(void)
         s8 stored = job->kind == 1 ? slot : slot - 1;
         gameDataBlocksGetSaveData()[3] = stored;
         rt_memcpy(job->buffer, reinterpret_cast<void *>(gameDataBlocksGetTable()), SAVE_TABLE_SIZE);
-        wordPairCopy(job->buffer + SAVE_TABLE_SIZE, configGetSettings());
+        ARM_common_memcpy4_8(job->buffer + SAVE_TABLE_SIZE, configGetSettings());
         u8 *body = job->buffer + SAVE_BODY_OFFSET;
         __aeabi_memcpy4(body, gameDataBlocksGetSaveData(), SAVE_FULL_BODY_SIZE);
         *reinterpret_cast<u16 *>(body) = 4;

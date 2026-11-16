@@ -49803,13 +49803,13 @@
       "target_path": "orig/target/_code/0013/FUN_0013e9e4.o"
     },
     {
-      "base_path": "build/obj/_code/0013/FUN_0013ea48.o",
+      "base_path": "build/obj/_code/0013/memoryDebugSetRegions.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0013ea48",
+            "name": "memoryDebugSetRegions",
             "size": 44,
             "vram": "0x13ea48"
           }
@@ -49817,10 +49817,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0013/FUN_0013ea48.cpp"
+        "source_path": "src/_code/0013/memoryDebugSetRegions.cpp"
       },
-      "name": "_code/0013/FUN_0013ea48",
-      "target_path": "orig/target/_code/0013/FUN_0013ea48.o"
+      "name": "_code/0013/memoryDebugSetRegions",
+      "target_path": "orig/target/_code/0013/memoryDebugSetRegions.o"
     },
     {
       "base_path": "build/obj/_code/0013/FUN_0013ea78.o",
@@ -76213,13 +76213,13 @@
       "target_path": "orig/target/_code/0018/nn_gxlow_CTR_FlushDataCache.o"
     },
     {
-      "base_path": "build/obj/_code/0018/FUN_0018b1d0.o",
+      "base_path": "build/obj/_code/0018/nn_gxlow_CTR_AcquireGpuRight.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0018b1d0",
+            "name": "nn_gxlow_CTR_AcquireGpuRight",
             "size": 96,
             "vram": "0x18b1d0"
           }
@@ -76227,10 +76227,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0018/FUN_0018b1d0.cpp"
+        "source_path": "src/_code/0018/nn_gxlow_CTR_AcquireGpuRight.cpp"
       },
-      "name": "_code/0018/FUN_0018b1d0",
-      "target_path": "orig/target/_code/0018/FUN_0018b1d0.o"
+      "name": "_code/0018/nn_gxlow_CTR_AcquireGpuRight",
+      "target_path": "orig/target/_code/0018/nn_gxlow_CTR_AcquireGpuRight.o"
     },
     {
       "base_path": "build/obj/_code/0018/nn_gxlow_CTR_ReleaseGpuRight.o",
@@ -85825,13 +85825,13 @@
       "target_path": "orig/target/_code/001a/FUN_001a283c.o"
     },
     {
-      "base_path": "build/obj/_code/001a/FUN_001a28a8.o",
+      "base_path": "build/obj/_code/001a/nn_gxlow_CTR_InterruptRelayQueueRx_SuppressPdcEvents.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001a28a8",
+            "name": "nn_gxlow_CTR_InterruptRelayQueueRx_SuppressPdcEvents",
             "size": 60,
             "vram": "0x1a28a8"
           }
@@ -85839,10 +85839,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/001a/FUN_001a28a8.cpp"
+        "source_path": "src/_code/001a/nn_gxlow_CTR_InterruptRelayQueueRx_SuppressPdcEvents.cpp"
       },
-      "name": "_code/001a/FUN_001a28a8",
-      "target_path": "orig/target/_code/001a/FUN_001a28a8.o"
+      "name": "_code/001a/nn_gxlow_CTR_InterruptRelayQueueRx_SuppressPdcEvents",
+      "target_path": "orig/target/_code/001a/nn_gxlow_CTR_InterruptRelayQueueRx_SuppressPdcEvents.o"
     },
     {
       "base_path": "build/obj/_code/001a/nn_gxlow_CTR_Gpu_ReadHWRegs.o",
@@ -88806,13 +88806,13 @@
       "target_path": "orig/target/_code/001a/FUN_001a9104.o"
     },
     {
-      "base_path": "build/obj/_code/001a/wordPairCopy.o",
+      "base_path": "build/obj/_code/001a/ARM_common_memcpy4_8.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "wordPairCopy",
+            "name": "ARM_common_memcpy4_8",
             "size": 20,
             "vram": "0x1a9110"
           }
@@ -88820,10 +88820,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/001a/wordPairCopy.cpp"
+        "source_path": "src/_code/001a/ARM_common_memcpy4_8.cpp"
       },
-      "name": "_code/001a/wordPairCopy",
-      "target_path": "orig/target/_code/001a/wordPairCopy.o"
+      "name": "_code/001a/ARM_common_memcpy4_8",
+      "target_path": "orig/target/_code/001a/ARM_common_memcpy4_8.o"
     },
     {
       "base_path": "build/obj/_code/001a/FUN_001a9124.o",
@@ -93751,13 +93751,13 @@
       "target_path": "orig/target/_code/001b/FUN_001b4eb8.o"
     },
     {
-      "base_path": "build/obj/_code/001b/FUN_001b5154.o",
+      "base_path": "build/obj/_code/001b/textureEntryAttachStex.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001b5154",
+            "name": "textureEntryAttachStex",
             "size": 444,
             "vram": "0x1b5154"
           }
@@ -93765,10 +93765,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/001b/FUN_001b5154.cpp"
+        "source_path": "src/_code/001b/textureEntryAttachStex.cpp"
       },
-      "name": "_code/001b/FUN_001b5154",
-      "target_path": "orig/target/_code/001b/FUN_001b5154.o"
+      "name": "_code/001b/textureEntryAttachStex",
+      "target_path": "orig/target/_code/001b/textureEntryAttachStex.o"
     },
     {
       "base_path": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_001b5314.o",
@@ -111694,13 +111694,13 @@
       "target_path": "orig/target/_code/0022/eventDispatch.o"
     },
     {
-      "base_path": "build/obj/_code/AsdSDK/Source/Gfx/Effect/effParts/FUN_00222180.o",
+      "base_path": "build/obj/_code/AsdSDK/Source/Gfx/Effect/effParts/effBlockClone.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00222180",
+            "name": "effBlockClone",
             "size": 184,
             "vram": "0x222180"
           }
@@ -111709,10 +111709,10 @@
           "_code",
           "AsdSDK/Source/Gfx/Effect/effParts"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Gfx/Effect/effParts/FUN_00222180.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Gfx/Effect/effParts/effBlockClone.cpp"
       },
-      "name": "_code/AsdSDK/Source/Gfx/Effect/effParts/FUN_00222180",
-      "target_path": "orig/target/_code/AsdSDK/Source/Gfx/Effect/effParts/FUN_00222180.o"
+      "name": "_code/AsdSDK/Source/Gfx/Effect/effParts/effBlockClone",
+      "target_path": "orig/target/_code/AsdSDK/Source/Gfx/Effect/effParts/effBlockClone.o"
     },
     {
       "base_path": "build/obj/_code/0022/requestDispatch.o",
@@ -117531,13 +117531,13 @@
       "target_path": "orig/target/_code/0024/FUN_00241b24.o"
     },
     {
-      "base_path": "build/obj/_code/AsdSDK/Source/Gfx/Effect/effParts/FUN_00243c24.o",
+      "base_path": "build/obj/_code/AsdSDK/Source/Gfx/Effect/effParts/effBlockCreateFromBlock.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00243c24",
+            "name": "effBlockCreateFromBlock",
             "size": 188,
             "vram": "0x243c24"
           }
@@ -117546,10 +117546,10 @@
           "_code",
           "AsdSDK/Source/Gfx/Effect/effParts"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Gfx/Effect/effParts/FUN_00243c24.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Gfx/Effect/effParts/effBlockCreateFromBlock.cpp"
       },
-      "name": "_code/AsdSDK/Source/Gfx/Effect/effParts/FUN_00243c24",
-      "target_path": "orig/target/_code/AsdSDK/Source/Gfx/Effect/effParts/FUN_00243c24.o"
+      "name": "_code/AsdSDK/Source/Gfx/Effect/effParts/effBlockCreateFromBlock",
+      "target_path": "orig/target/_code/AsdSDK/Source/Gfx/Effect/effParts/effBlockCreateFromBlock.o"
     },
     {
       "base_path": "build/obj/_code/0024/asdDebugLog.o",
@@ -124590,13 +124590,13 @@
       "target_path": "orig/target/_code/0028/mobiclipProcessUpdate.o"
     },
     {
-      "base_path": "build/obj/_code/0028/FUN_00284d94.o",
+      "base_path": "build/obj/_code/0028/npcRoomIsOpen.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00284d94",
+            "name": "npcRoomIsOpen",
             "size": 36,
             "vram": "0x284d94"
           }
@@ -124604,10 +124604,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0028/FUN_00284d94.cpp"
+        "source_path": "src/_code/0028/npcRoomIsOpen.cpp"
       },
-      "name": "_code/0028/FUN_00284d94",
-      "target_path": "orig/target/_code/0028/FUN_00284d94.o"
+      "name": "_code/0028/npcRoomIsOpen",
+      "target_path": "orig/target/_code/0028/npcRoomIsOpen.o"
     },
     {
       "base_path": "build/obj/_code/0028/FUN_00284dbc.o",
@@ -188794,13 +188794,13 @@
       "target_path": "orig/target/_code/0031/FUN_0031db84.o"
     },
     {
-      "base_path": "build/obj/_code/font/PlaceWin/PlaceWin/FUN_0031e198.o",
+      "base_path": "build/obj/_code/font/PlaceWin/PlaceWin/placeWinCreate.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0031e198",
+            "name": "placeWinCreate",
             "size": 312,
             "vram": "0x31e198"
           }
@@ -188809,10 +188809,10 @@
           "_code",
           "font/PlaceWin/PlaceWin"
         ],
-        "source_path": "src/_code/font/PlaceWin/PlaceWin/FUN_0031e198.cpp"
+        "source_path": "src/_code/font/PlaceWin/PlaceWin/placeWinCreate.cpp"
       },
-      "name": "_code/font/PlaceWin/PlaceWin/FUN_0031e198",
-      "target_path": "orig/target/_code/font/PlaceWin/PlaceWin/FUN_0031e198.o"
+      "name": "_code/font/PlaceWin/PlaceWin/placeWinCreate",
+      "target_path": "orig/target/_code/font/PlaceWin/PlaceWin/placeWinCreate.o"
     },
     {
       "base_path": "build/obj/_code/0031/questCenterInitializeDisplay.o",

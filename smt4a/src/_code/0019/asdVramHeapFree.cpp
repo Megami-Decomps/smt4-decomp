@@ -1,4 +1,4 @@
-/* NON_MATCHING: search branch structure matches; null setup, saved-register roles and merge link loads differ. */
+/* NON_MATCHING: the search and null setup now match (IV's while-loop search); retail keeps the heap in r5 and the block in r4 (swapped here) and loads the second merge's links into r2/r1 (r1/r2 here). */
 #include "common.h"
 
 // Apocalypse's block nodes have a pool field before their links, unlike the shared IV prefix.
@@ -26,7 +26,7 @@ extern "C" {
 extern VramMemoryGlobalsA g_asdMemory;
 void FUN_0019c920(VramFreeListA *, VramFreeNodeA *);
 
-static void unlinkBlock(VramFreeListA *list, VramFreeNodeA *block)
+static __inline void unlinkBlock(VramFreeListA *list, VramFreeNodeA *block)
 {
     VramFreeNodeA *previous = block->previous;
     VramFreeNodeA *next = block->next;
@@ -43,26 +43,36 @@ static void unlinkBlock(VramFreeListA *list, VramFreeNodeA *block)
     --list->count;
 }
 
-static void mergeNext(VramHeapStateA *heap, VramFreeNodeA *block)
+/* Returns a node to the node pool. */
+static __inline void releaseNode(VramFreeNodeA *node)
 {
-    if (block != NULL && block->next != NULL && block->address + block->size == block->next->address) {
+    node->allocated = 0;
+    node->address = 0;
+    node->size = 0;
+    node->previous = NULL;
+    node->next = NULL;
+    ++g_asdMemory.pool->available;
+}
+
+static __inline void mergeNext(VramFreeListA *list, VramFreeNodeA *block)
+{
+    if (block != NULL) {
         VramFreeNodeA *next = block->next;
-        block->size += next->size;
-        unlinkBlock(&heap->free, next);
-        next->allocated = 0;
-        next->address = 0;
-        next->size = 0;
-        next->previous = NULL;
-        next->next = NULL;
-        ++g_asdMemory.pool->available;
+        if (next != NULL && block->address + block->size == next->address) {
+            block->size += next->size;
+            unlinkBlock(list, next);
+            releaseNode(next);
+        }
     }
 }
 
-static VramFreeNodeA *findBlock(VramFreeListA *list, u32 address)
+static __inline VramFreeNodeA *findBlock(VramFreeListA *list, u32 address)
 {
-    for (VramFreeNodeA *block = list->first; block != NULL; block = block->next) {
+    VramFreeNodeA *block = list->first;
+    while (block != NULL) {
         if (block->address == address)
             return block;
+        block = block->next;
     }
     return NULL;
 }
@@ -74,7 +84,7 @@ void asdVramHeapFree(VramHeapStateA *heap, u32 address)
     unlinkBlock(&heap->used, block);
     heap->freeBytes += block->size;
     FUN_0019c920(&heap->free, block);
-    mergeNext(heap, block);
-    mergeNext(heap, block->previous);
+    mergeNext(&heap->free, block);
+    mergeNext(&heap->free, block->previous);
 }
 }

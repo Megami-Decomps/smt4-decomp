@@ -63,7 +63,7 @@ struct SelectionScene {
 extern "C" {
 void FUN_0049669c(SelectionScene *scene);
 void FUN_0049a9a8(void);
-void FUN_0031e198(void);
+void placeWinCreate(void);
 void FUN_004cf7cc(void *timers);
 void rectangleInitializeSelection(SelectionRectangle *rectangle, s32 width, s32 a, s32 b);
 void campButtonHelpLoad(void);
@@ -120,7 +120,7 @@ SelectionScene *FUN_0049c3c0(SelectionScene *scene, u32 mode, s32 kind, s32 subK
     scene->touch.unk34 = (u32)window;
     scene->tailA = 0;
     scene->tailB = 0;
-    FUN_0031e198();
+    placeWinCreate();
     s16 *progress = statisticsGetCounter((u8)scene->kind, scene->subKind, scene->kind == 0 ? 6 : 1);
     s32 sub = scene->subKind;
     FUN_00148bb8(sub, (u8)scene->kind);

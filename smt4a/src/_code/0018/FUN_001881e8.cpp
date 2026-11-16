@@ -1,4 +1,4 @@
-/* NON_MATCHING: position/result stack slots are exchanged and the initial constant store is scheduled later. */
+/* NON_MATCHING: stack slots now match (locals declared up front); only the 1.0f load is scheduled after `mov r6, r1` instead of before it. */
 #include "gfx/NamedEffectAttachment.h"
 #include "gfx/QuaternionWorkspace.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
@@ -23,24 +23,24 @@ void FUN_001881e8(AsdMdlObject *model, NamedEffectAttachment *attachments)
         f32 scale;
     };
     EffectAttachmentPosition position;
+    char name[32];
+    nw::math::VEC3 jointPosition;
+    RotationQuaternion rotation;
+    RotationQuaternion inverse;
     position.w = 1.0f;
     AsdMdlNode *node = model->node;
     if (attachments->count != 0) {
         for (s32 index = 0; index < attachments->count; ++index) {
             EffectJointEntry *entry = attachments->entries[index];
             void *effect = entry->effect;
-            char name[32];
             memClearWords(name, sizeof(name));
             textFormatBuffer(name, DAT_0052607c, entry->index);
-            nw::math::VEC3 jointPosition;
             if (lookupNameEntry(node, reinterpret_cast<u32>(name), reinterpret_cast<u32 *>(&jointPosition))) {
                 position.x = jointPosition.x;
                 position.y = jointPosition.y;
                 position.z = jointPosition.z;
                 FUN_001b4eb8(effect, &position);
-                RotationQuaternion rotation;
                 FUN_0019f30c(node, name, &rotation);
-                RotationQuaternion inverse;
                 inverse.x = -rotation.x;
                 inverse.y = -rotation.y;
                 inverse.z = -rotation.z;

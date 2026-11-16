@@ -1,4 +1,4 @@
-/* NON_MATCHING: armcc merges the flag store of states 0 and 2 into one predicated tail where retail stores and returns in each case (switch, if-chain and bitfield forms tried; smt4a twin FUN_0048d11c has the same shape). */
+/* NON_MATCHING: IDENTICAL when the unit is compiled with -O2 (needs a cflags entry: -O2 -Otime); under the default -O3 armcc merges the flag stores of states 0 and 2 into one predicated tail. */
 #include "common.h"
 #include "shard/W5_W5Match2_ScalarArguments.h"
 

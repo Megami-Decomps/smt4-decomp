@@ -1,4 +1,3 @@
-/* NON_MATCHING: render-stack push schedules its second address add earlier and the last call's 0x81 is rematerialised in r7 instead of reusing fp. */
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 #include "Model/MoriModelShadowMap.h"
@@ -36,6 +35,20 @@ s32 numberPanelGetFirst(MenuSlider *panel);
 s32 numberPanelGetSecond(MenuSlider *panel);
 }
 
+/* Draws the number panel's digits (or blanks when it is hidden) at `priority`. */
+static __inline void numberPanelDraw(MenuSlider *panel, u32 priority)
+{
+    s32 a = numberPanelGetValue(panel);
+    s32 b = numberPanelGetFirst(panel);
+    s32 c = numberPanelGetSecond(panel);
+    if (!panel->shown) {
+        a = -1;
+        b = -1;
+        c = -1;
+    }
+    FUN_00344cd0(panel->sprite, 0, 0, 0x2F, 0x4B, 0x4C, 0x4D, 0x47, 0x49, 0x48, 0x4A, a, b, c, priority, 0);
+}
+
 struct ListMenu {
     u32 flags;
     u8 unk04[0x23C];
@@ -67,16 +80,7 @@ extern "C" void FUN_0047a484(ListMenu *menu)
     FUN_001835b4(2, 0x2F, 0x51, 0, 0, 0x81);
     s32 last = FUN_0031d174(menu->holder);
     size40Set(&menu->slider, FUN_002a482c(menu->holder), last);
-    MenuSlider *panel = &menu->slider;
-    s32 a = numberPanelGetValue(panel);
-    s32 b = numberPanelGetFirst(panel);
-    s32 c = numberPanelGetSecond(panel);
-    if (!panel->shown) {
-        a = -1;
-        b = -1;
-        c = -1;
-    }
-    FUN_00344cd0(panel->sprite, 0, 0, 0x2F, 0x4B, 0x4C, 0x4D, 0x47, 0x49, 0x48, 0x4A, a, b, c, 0x81, 0);
+    numberPanelDraw(&menu->slider, 0x81);
     renderStackPop(&g_renderCtx->stackA);
     FUN_00183bb0();
     efctSetSpeed(1.0f);

@@ -1,11 +1,11 @@
-/* NON_MATCHING: build hoists the 10 ms sleep constant out of the loop (r6), retail loads it inside the branch. */
+#include "nn/fnd/TimeSpan.h"
 #include "common.h"
 #include "nn/Result.h"
 
 extern "C" {
 
 s32 FUN_0017145c(u32 arg0, u32 arg1);
-void svcSleepThread(u32 nanosecondsLow, u32 nanosecondsHigh);
+void svcSleepThread(nn::fnd::TimeSpan span);
 
 #define RESULT_DONE 0xC8A0CFFC   /* error result that ends the retry loop like a success */
 #define RESULT_BUSY 0xE0A0CC08   /* error result: sleep, then retry */
@@ -20,7 +20,7 @@ void FUN_001a1f60(void)
             break;
         }
         if (result == (s32)RESULT_BUSY) {
-            svcSleepThread(10000000, 0);
+            svcSleepThread(nn::fnd::TimeSpan::FromMilliSeconds(10));
         }
     }
 }

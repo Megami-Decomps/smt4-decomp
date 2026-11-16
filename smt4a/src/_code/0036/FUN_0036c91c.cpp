@@ -1,4 +1,3 @@
-/* NON_MATCHING: The upper-arrow flag load and group argument are scheduled around stack stores differently. */
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -19,8 +18,10 @@ void FUN_0036c91c(SegmentedScrollbarAnchor *anchor, s32 x, s32 y, u32 upEnabled,
     if (hiddenRows > 0) {
         FUN_001835b4(2, 46, 57, anchor->x + x, y, 100);
         FUN_001835b4(2, 46, 62, anchor->x + x, y, 100);
-        FUN_001835b4(2, 46, upEnabled != 0 ? 60 : 58, anchor->x + x, y, 101);
-        FUN_001835b4(2, 46, downEnabled != 0 ? 61 : 59, anchor->x + x, y, 101);
+        s32 upArrow = upEnabled != 0 ? 60 : 58;
+        FUN_001835b4(2, 46, upArrow, anchor->x + x, y, 101);
+        s32 downArrow = downEnabled != 0 ? 61 : 59;
+        FUN_001835b4(2, 46, downArrow, anchor->x + x, y, 101);
         u32 thumb = thumbActive != 0 ? 64 : 63;
         TextureTableEntryIV *sprite = asdTMTexTableEntryAt(46, thumb);
         s32 height = sprite->placement->height;

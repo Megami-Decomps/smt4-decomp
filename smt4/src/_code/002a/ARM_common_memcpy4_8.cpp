@@ -5,7 +5,7 @@ struct WordPair { u32 first; u32 second; };
 
 extern "C" {
 /* Copies the pair of words. */
-void FUN_002ad8b4(WordPair *destination, const WordPair *source)
+void ARM_common_memcpy4_8(WordPair *destination, const WordPair *source)
 {
     u32 second = source->second;
     destination->first = source->first;

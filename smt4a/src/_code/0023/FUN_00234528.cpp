@@ -38,8 +38,8 @@ u32 FUN_00234528(s32 action, s32 count)
         return 0;
     if (gameFlagIsSet(0x1A2) && randRange(99) + 1 <= 50)
         return 0;
-    PopupSubstitutionNames labels = DAT_00531a98;
     s32 category = count >= 3 ? 13 : 12;
+    PopupSubstitutionNames labels = DAT_00531a98;
     if (action == 11)
         category = 23;
     work = static_cast<PopupFormattingView *>(g_popupState);

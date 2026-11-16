@@ -1,25 +1,18 @@
-/* NON_MATCHING: merged retail boundary: sound-volume setter ends at0x38; a separate applet sleep-event query starts at0x3c and ends at0x5c inside this unit. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the enabled-flag address differs: retail forms it as (base + 0x1254) + 0x88 (a block at 0x1254 that is
+ * not recovered yet), built as (base + 0x12DC). */
+#include "sound/SoundSystemVolume.h"
 
 extern "C" {
+extern SoundSystemVolumeView g_asdSoundSystem;
+void FUN_0015e304(SoundParameter* parameter, f32 level);
 
-extern unsigned int DAT_0063f448; /* 0x63f448 */
-extern unsigned int DAT_0063f4b4; /* 0x63f4b4 */
-extern signed char DAT_0063f4c4; /* 0x63f4c4 */
-
-
-void FUN_00144a54(void)
-
+/* Stores the level and applies it to the sound parameter while the sound layer is enabled. */
+void FUN_00144a54(f32 level)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  unsigned int in_s0;
-  
-  if (DAT_0063f4c4 != '\0') {
-    DAT_0063f4b4 = in_s0;
-    DAT_0063f448 = in_s0;
-    return;
-  }
-  return;
+    SoundVolumeBlock *block = &g_asdSoundSystem.block;
+    if (block->enabled != 0) {
+        block->level = level;
+        FUN_0015e304(&block->parameter, level);
+    }
 }
-
-} /* extern "C" */
+}

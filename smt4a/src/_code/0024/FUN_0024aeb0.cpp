@@ -1,4 +1,3 @@
-/* NON_MATCHING: global-state and zero saved registers swap; reverse-motion counter scratch registers also differ. */
 #include "map/mapTrap.h"
 #include "shard/W5_W5Match7_ControllerPose.h"
 
@@ -24,13 +23,13 @@ void controllerSetRotationEulerDegrees(ControllerPose* controller, f32 x, f32 y,
 void controllerSetPosition(ControllerPose* controller, f32 x, f32 y, f32 z);
 void FUN_003fe86c(ControllerPose* controller, u32 kind, s32 option, f32 first, f32 second);
 
+/* Per-frame update of the trap's display model: visibility, the swinging motion and pending placement. */
 void FUN_0024aeb0(void)
 {
-    MapTrapA* work = g_mapTrap;
-    MapTrapDisplayView* display = reinterpret_cast<MapTrapDisplayView*>(&work->display.phase);
+    MapTrapDisplayView* display = reinterpret_cast<MapTrapDisplayView*>(&g_mapTrap->display.phase);
     if (display) {
         MapTrapControllerLink* owner;
-        if (!work->motion.alternateController) {
+        if (!g_mapTrap->motion.alternateController) {
             owner = display->primary;
         } else {
             owner = display->secondary;
@@ -46,31 +45,31 @@ void FUN_0024aeb0(void)
             } else {
                 controller->flags.value |= 3;
             }
-            if (work->motion.active && display->mode == 1) {
-                s32 frame = work->motion.alternating ? work->motion.count : work->motion.reverseCount;
-                f32 offset = FUN_001f3f34(work->motion.initialValue, 0.0f,
-                    static_cast<f32>(work->motion.halfCount), static_cast<f32>(frame));
-                MapTrapA* motion = g_mapTrap;
-                if (motion->motion.alternating) {
-                    motion->motion.alternating = 0;
-                    ++motion->motion.count;
+            if (g_mapTrap->motion.active && display->mode == 1) {
+                s32 frame = g_mapTrap->motion.alternating ? g_mapTrap->motion.count : g_mapTrap->motion.reverseCount;
+                f32 offset = FUN_001f3f34(g_mapTrap->motion.initialValue, 0.0f,
+                    static_cast<f32>(g_mapTrap->motion.halfCount), static_cast<f32>(frame));
+                MapTrapA* trap = g_mapTrap;
+                if (trap->motion.alternating) {
+                    trap->motion.alternating = 0;
+                    ++trap->motion.count;
                 } else {
                     offset = -offset;
-                    motion->motion.alternating = 1;
-                    ++motion->motion.reverseCount;
+                    ++trap->motion.reverseCount;
+                    trap->motion.alternating = 1;
                 }
                 s32 integralOffset = static_cast<s32>(offset);
-                motion->motion.delta = static_cast<f32>(integralOffset);
-                motion->motion.previousDelta = static_cast<f32>(integralOffset);
-                display->destination.x += motion->motion.delta;
-                display->destination.z += motion->motion.previousDelta;
+                trap->motion.delta = static_cast<f32>(integralOffset);
+                trap->motion.previousDelta = static_cast<f32>(integralOffset);
+                display->destination.x += trap->motion.delta;
+                display->destination.z += trap->motion.previousDelta;
                 controllerSetDestination(controller, &display->destination);
-                motion = g_mapTrap;
-                if (motion->motion.count >= motion->motion.halfCount) {
-                    motion->motion.halfCount = 0;
-                    motion->motion.active = 0;
-                    motion->motion.delta = 0.0f;
-                    motion->motion.previousDelta = 0.0f;
+                trap = g_mapTrap;
+                if (trap->motion.count >= trap->motion.halfCount) {
+                    trap->motion.halfCount = 0;
+                    trap->motion.active = 0;
+                    trap->motion.delta = 0.0f;
+                    trap->motion.previousDelta = 0.0f;
                 }
             }
             if (display->dirty) {

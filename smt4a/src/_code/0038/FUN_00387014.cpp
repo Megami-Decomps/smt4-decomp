@@ -1,4 +1,3 @@
-/* NON_MATCHING: Code matches, but the game-state and map-state global addresses occupy opposite literal-pool slots. */
 #include "map/mapDepart.h"
 #include "map/lmapMain.h"
 
@@ -17,8 +16,9 @@ void FUN_003699e4(void);
 /* Performs the field-map startup sequence and its optional final initialization. */
 void FUN_00387014(void)
 {
+    GameStateA *game = &g_gameState;
     LmapMainStateA *state = g_lmapMainState;
-    if (g_gameState.unk5C8 == 0) {
+    if (game->unk5C8 == 0) {
         if (state->unk0B != 0) {
             FUN_00386720();
         } else {

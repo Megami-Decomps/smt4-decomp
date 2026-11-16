@@ -8,7 +8,7 @@ inline void MikadoCamera::operator delete(void *block)
 
 extern "C" {
 extern MikadoGlobals g_mikado;
-void FUN_002a7838(MikadoCamera *camera);
+void mikadoCameraTeardown(MikadoCamera *camera);
 void asdMemFreeNonNull(void *block);
 s32 jyoucyuGetTableEntry(s32 index);
 
@@ -18,7 +18,7 @@ void mikadoDestroyCameraCallback(u32 handle)
     MikadoWork *work = g_mikado.work;
     work->done = 1;
     if (work->camera != NULL) {
-        FUN_002a7838(work->camera);
+        mikadoCameraTeardown(work->camera);
         if (work->camera != NULL)
             delete work->camera;
         work->camera = NULL;

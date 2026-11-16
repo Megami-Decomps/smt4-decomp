@@ -38,8 +38,8 @@ void FUN_005116f4(HeapOwner *owner)
     owner->words[3] = 0;
     owner->words[4] = 0;
     owner->words[5] = 0;
-    owner->vtable = &DAT_005583d8;
     owner->tail = 0;
+    owner->vtable = &DAT_005583d8;
     __aeabi_atexit(owner, (void (*)(void *))expHeapBaseDestroyA, &entry);
 
     DAT_006475e4.head = 0;

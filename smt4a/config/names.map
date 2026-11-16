@@ -2528,7 +2528,7 @@
 001a8e24 nw_snd_internal_SoundArchiveFileReader_ReadWaveSoundInfo
 001a8e90 nw_snd_internal_SoundArchiveFileReader_ReadSoundGroupInfo
 001a8ecc nw_snd_internal_SoundArchiveFileReader_ReadSequenceSoundInfo
-001a9110 wordPairCopy
+001a9110 ARM_common_memcpy4_8
 001ab854 gameGetSlotRecord
 001ab878 asdFileRequestRelease
 001ab888 gameGetSlotTable
@@ -6468,3 +6468,11 @@
 004837ac objectPoolUpdate
 00482f20 controllerPoolUpdate
 00422bf0 movieAudioDeviceRunLoop
+0018b1d0 nn_gxlow_CTR_AcquireGpuRight
+001a28a8 nn_gxlow_CTR_InterruptRelayQueueRx_SuppressPdcEvents
+00284d94 npcRoomIsOpen
+001b5154 textureEntryAttachStex
+00222180 effBlockClone
+00243c24 effBlockCreateFromBlock
+0013ea48 memoryDebugSetRegions
+0031e198 placeWinCreate

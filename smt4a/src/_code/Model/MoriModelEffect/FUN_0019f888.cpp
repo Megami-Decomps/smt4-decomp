@@ -53,8 +53,8 @@ void FUN_0019f888(MoriModelEffect* effect)
     effect->keyCount = 0;
     for (s32 entry = 0; entryCount > entry; entry++) {
         AtbcCursor* cursor = static_cast<AtbcCursor*>(FUN_001ad70c(table, entry));
-        u32 index = cursor->first;
         u32 key = 0xffffffff;
+        u32 index = cursor->first;
         if ((cursor->flags & 1) == 0) key = cursor->key;
         for (; (s32)index <= (s32)cursor->last; index++) {
             void *memory = FUN_00178b04(sizeof(ModelEffectKey),

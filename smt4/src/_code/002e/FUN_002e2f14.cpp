@@ -28,7 +28,9 @@ void FUN_002e2f14(ThreadOwner *owner)
         FUN_002c526c(result, failed);
     }
     owner->thread.joined = 1;
-    owner->thread.~NnOsThread();
+    /* Joined above: finalize the thread, then close its handle through the handle's destructor. */
+    owner->thread.finalize();
+    owner->thread.NnOsHandle::~NnOsHandle();
     FUN_002c3f5c(owner->state);
     if (owner->buffer != NULL) {
         asdMemFree(owner->buffer);

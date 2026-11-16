@@ -1,4 +1,3 @@
-/* NON_MATCHING: stripped asdDebugTrace and the DAT_00409d80 name now match; argument staging for asdProcessCreateSimple and the row height/count stores (strd here, two str in retail) still differ. */
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -40,8 +39,8 @@ u32 asdListBoxCreate(void *parent, s32 group, s32 x, s32 y, u8 flag)
     box->rowHeight = 13;
     box->rowCount = 10;
     box->flags |= 4;
-    box->unk68 = 10;
-    rowWidgetInit(box->widget, 10, 0);
+    box->unk68 = box->rowCount;
+    rowWidgetInit(box->widget, box->rowCount, 0);
     colorSetRgba(box->widget, 6, 5, 32, 32);
     box->unk34 = 0;
     return handle;

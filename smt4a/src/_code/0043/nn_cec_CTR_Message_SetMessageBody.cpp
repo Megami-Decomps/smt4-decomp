@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int wordPairCopy(unsigned char [8], unsigned int);
+int ARM_common_memcpy4_8(unsigned char [8], unsigned int);
 int releaseOrCopyHandle(unsigned char [8], int);
 int _ZN12CecMessageIdC1Ev(unsigned char [8]);
 
-/* Supplied declaration required: wordPairCopy. */
+/* Supplied declaration required: ARM_common_memcpy4_8. */
 /* Supplied declaration required: releaseOrCopyHandle. */
 /* Supplied declaration required: _ZN12CecMessageIdC1Ev. */
 extern unsigned char nn_cec_CTR_MessageId_IsEmpty(unsigned int);
@@ -40,7 +40,7 @@ unsigned int nn_cec_CTR_Message_SetMessageBody(int param_1,int param_2,unsigned 
     if (((param_3 + 0x70 < 0x19001) && (param_3 != 0)) && (param_3 < 0x18001)) {
       _ZN12CecMessageIdC1Ev(temp_v7);
       temp_v3 = releaseOrCopyHandle(temp_v9,param_1 + 0x20);
-      wordPairCopy(temp_v7,temp_v3);
+      ARM_common_memcpy4_8(temp_v7,temp_v3);
       releaseOrCopyHandle(temp_v8,param_1 + 0x20);
       if ((*(char *)(param_1 + 0x131) != '\0') ||
          (temp_v1 = nn_cec_CTR_MessageId_IsEmpty((unsigned int)temp_v7), !temp_v1)) {

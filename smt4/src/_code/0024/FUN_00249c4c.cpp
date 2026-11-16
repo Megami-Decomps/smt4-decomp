@@ -1,4 +1,4 @@
-/* NON_MATCHING: release-node argument recovered; snapshot store, cached-node clear register and immediate/queued tail placement differ. */
+/* NON_MATCHING: only the register of the -1 stored into the cached node differs (r1 against retail's r0). */
 #include "ui/SpriteTransition.h"
 #include "shard/JobWork.h"
 
@@ -53,17 +53,17 @@ void FUN_00249c4c(u32 job, u32 resourceId, s32 immediate)
         work->state = 2;
         break;
     case 2:
-        if (immediate)
-            bustupSpriteStartTransition(work, 6, 0);
-        else
+        if (!immediate)
             bustupSpriteStartTransition(work, 7, 0);
+        else
+            bustupSpriteStartTransition(work, 6, 0);
         work->state = 2;
         break;
     case 3: {
         bustupSpriteStartTransition(work, 5, 0);
         SpriteTransitionWork *current = (SpriteTransitionWork *)jobGetWork(job);
-        current->state = 1;
         current->start = reinterpret_cast<SpriteResourceView *>(current)->position;
+        current->state = 1;
         FUN_002a4e18(&work->target, work->unk08);
         break;
     }

@@ -8,7 +8,7 @@ extern "C" {
 int asdMemoryAllocTracked(int, int, int, int, int);
 int dataTable08Sub2GetRecord(void);
 int asdMemFree(void);
-int wordPairCopy(...);
+int ARM_common_memcpy4_8(...);
 int dataTable04FindById(void);
 int sysMemClear(int [109], int);
 int FUN_003e8bb0(...);
@@ -44,7 +44,7 @@ extern int randRange(unsigned int);
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: wordPairCopy. */
+/* Supplied declaration required: ARM_common_memcpy4_8. */
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003e8bb0. */
@@ -115,7 +115,7 @@ unsigned int FUN_004e933c(int *param_1,int param_2)
             if ((temp_v3 & 0x70000) != 0) {
               temp_v1 = temp_v7 + temp_v6 * 8;
               aiStack_220[temp_v6] = (int)puVar6;
-              wordPairCopy(temp_v1,temp_v2);
+              ARM_common_memcpy4_8(temp_v1,temp_v2);
               temp_v6 = temp_v6 + 1;
               goto LAB_004e960c;
             }
@@ -132,7 +132,7 @@ unsigned int FUN_004e933c(int *param_1,int param_2)
         if ((temp_v3 & 0x70000) != 0) {
           temp_v2 = temp_v7 + temp_v6 * 8;
           aiStack_220[temp_v6] = (int)puVar6;
-          wordPairCopy(temp_v2,temp_v1);
+          ARM_common_memcpy4_8(temp_v2,temp_v1);
           temp_v6 = temp_v6 + 1;
           break;
         }
@@ -151,7 +151,7 @@ unsigned int FUN_004e933c(int *param_1,int param_2)
             if ((temp_v3 & 0x70000) != 0) {
               temp_v2 = temp_v7 + temp_v6 * 8;
               aiStack_220[temp_v6] = (int)puVar6;
-              wordPairCopy(temp_v2,temp_v1);
+              ARM_common_memcpy4_8(temp_v2,temp_v1);
               temp_v6 = temp_v6 + 1;
               break;
             }
@@ -163,7 +163,7 @@ LAB_004e960c:
     } while ((int)temp_v5 < (int)temp_v12);
     if (temp_v6 != 0) {
       temp_v1 = randRange((temp_v6 - 1U) & 0xffff);
-      wordPairCopy(temp_v9,temp_v7 + temp_v1 * 8);
+      ARM_common_memcpy4_8(temp_v9,temp_v7 + temp_v1 * 8);
       temp_v1 = aiStack_220[temp_v1];
       FUN_003e8bb0(&temp_v8,*param_1,*(unsigned int *)(param_2 + 0x20));
       temp_v0 = (**(unsigned int **)(param_2 + 0x20) & DAT_00571168) == 0 &&

@@ -4,11 +4,11 @@
 extern "C" {
 extern AsdCecGlobals g_asdCec;
 
-void wordPairCopy(u32 arg, void *work);
+void ARM_common_memcpy4_8(u32 arg, void *work);
 
 void asdCecCopySettings(u32 arg)
 {
-    wordPairCopy(arg, g_asdCec.cec->work);
+    ARM_common_memcpy4_8(arg, g_asdCec.cec->work);
 }
 
 } /* extern "C" */

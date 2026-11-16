@@ -1,4 +1,3 @@
-/* NON_MATCHING: debug trace and the .constdata process name now match; retail stores rowHeight/rowCount separately (r0=13, r1=10) where the build merges them into strd, and keeps the process-create arguments in different registers. */
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdDebug.h"
@@ -40,8 +39,8 @@ u32 asdListBoxCreate(void *parent, s32 group, s32 x, s32 y, u8 flag)
     box->rowHeight = 13;
     box->rowCount = 10;
     box->flags |= 4;
-    box->unk68 = 10;
-    rowWidgetInit(box->widget, 10, 0);
+    box->unk68 = box->rowCount;
+    rowWidgetInit(box->widget, box->rowCount, 0);
     colorSlotSet(box->widget, 6, 5, 32, 32);
     box->unk34 = 0;
     return handle;

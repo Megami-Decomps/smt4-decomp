@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail reads the id with ldrh+sxth (this source folds it to ldrsh) and reaches `source` through a menu+0x500 base held in r7, saving two more registers. */
+/* NON_MATCHING: the id getter now gives retail's ldrh+sxth; retail still reaches `source` through a menu+0x500 base held in r7 (a sub-object pointer: with one, armcc pads the 0x610 frame instead of pushing r8) and swaps r5/r6. */
 #include "common.h"
 
 struct UnitListEntry {
@@ -21,6 +21,12 @@ struct UnitStatusBuffer {
     /* 0x000 */ u8 data[0x610];
 };
 
+/* The unit id of a list entry. */
+static __inline u16 unitListEntryGetId(const UnitListEntry *entry)
+{
+    return entry->id;
+}
+
 extern "C" {
 
 s32 flaggedValueHolderGetTotal(u8 *cursor);
@@ -32,14 +38,14 @@ void FUN_0029da34(s32 screen, s32 mode, u16 id, void *status);
 void FUN_0029d960(UnitListMenu *menu)
 {
     UnitListEntry *entries = menu->entries;
-    s16 id = entries[flaggedValueHolderGetTotal(menu->cursor)].id;
+    s16 id = unitListEntryGetId(&entries[flaggedValueHolderGetTotal(menu->cursor)]);
 
     if (!menu->previewOnly) {
         UnitStatusBuffer status;
         unitInitializeFromSavedRecord(id, &status);
         FUN_0029da34(0, 1, id, &status);
     } else {
-        id = entries[flaggedValueHolderGetTotal(menu->cursor)].id;
+        id = unitListEntryGetId(&entries[flaggedValueHolderGetTotal(menu->cursor)]);
         if (menu->source == 1) {
             FUN_0029da34(0, 1, id, partyMemberFindById(id));
         } else {

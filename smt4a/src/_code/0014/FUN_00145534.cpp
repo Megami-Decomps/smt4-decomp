@@ -1,4 +1,4 @@
-/* NON_MATCHING: message advance, slot refresh and display toggle restored; only the saved registers holding module globals and input flags are exchanged. */
+/* NON_MATCHING: message advance, slot refresh and display toggle restored; only r4/r5 are exchanged (retail keeps messageId in r4 and &g_messageMain in r5). */
 #include "ui/MessageMain.h"
 #include "code/Code0015.h"
 
@@ -21,11 +21,12 @@ void eventQueueAddUniqueIfValid(u32 event);
 // Handle message advance, active-slot refresh and display visibility toggling.
 u32 FUN_00145534(u32 messageId)
 {
-    if (messageObjectGetBox(reinterpret_cast<MessageObject *>(g_messageMain.panel)) == messageId)
+    MessageGlobalsA *messages = &g_messageMain;
+    if (messageObjectGetBox(reinterpret_cast<MessageObject *>(messages->panel)) == messageId)
         return 0;
     if (FUN_001517b4(0, 1) != 0 || FUN_001517b4(9, 2) != 0 ||
         slotIsActive(6) != 0 || DAT_005e2040.suppressAdvanceSound != 0 ||
-        (g_messageMain.state->box == messageId && g_messageMain.state->unk19E8 == 1 &&
+        (messages->state->box == messageId && messages->state->unk19E8 == 1 &&
             FUN_001517b4(1, 1) != 0)) {
         u8 queueSound = 1;
         if (FUN_001517b4(9, 2) != 0 || slotIsActive(6) != 0)
@@ -41,7 +42,7 @@ u32 FUN_00145534(u32 messageId)
     if (FUN_001517b4(9, 2) == 0 && slotIsActive(6) == 0)
         FUN_0015059c(0);
     if (FUN_001517b4(8, 1) != 0) {
-        u8 mode = g_messageMain.state->mode;
+        u8 mode = messages->state->mode;
         if (mode == 7 || mode == 8 || mode == 9)
             return 0;
         u8 wasHidden = DAT_005e2040.hidden;

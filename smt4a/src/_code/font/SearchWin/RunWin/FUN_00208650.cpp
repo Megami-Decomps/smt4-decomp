@@ -42,8 +42,8 @@ u8 FUN_00208650(void)
         s32 x = vec2GetXInt(win->anchor) + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
         s32 y = vec2GetYInt(win->anchor);
         efctSetSpeed(win->alpha);
-        FUN_00164b5c(2, 8, 19, x, y, 110);
         RenderCtxA *scene = g_renderCtx;
+        FUN_00164b5c(2, 8, 19, x, y, 110);
         s32 state = packNibblesAndByte(6, 1, 0);
         renderStackPushCountedDirect(&scene->stackB, state);
         FUN_001835b4(2, 8, 0x150, x, 0, 111);

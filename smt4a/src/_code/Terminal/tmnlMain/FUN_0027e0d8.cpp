@@ -75,7 +75,7 @@ int FUN_00275bc8(...);
 int scrScriptProcessStartEntry(...);
 int FUN_003180c4(...);
 int campCommonBgAcquire(void);
-int FUN_0031e198(void);
+int placeWinCreate(void);
 int campButtonHelpAcquire(void);
 int FUN_0036b824(...);
 int FUN_003870a8(...);
@@ -218,7 +218,7 @@ extern int useCounterGetCurrentValue(void);
 /* Supplied declaration required: naviMainSetFlagsAndActivate. */
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: campCommonBgAcquire. */
-/* Supplied declaration required: FUN_0031e198. */
+/* Supplied declaration required: placeWinCreate. */
 /* Supplied declaration required: sortMenuAcquire. */
 extern int FUN_00323bc4(unsigned int);
 /* Supplied declaration required: mapPlaceSet. */
@@ -452,7 +452,7 @@ unsigned int FUN_0027e0d8(void)
     FUN_001523b8(puVar8 + 0x16,1);
     FUN_0036b824(puVar8 + 0x16);
     *(unsigned int **)(g_handleRegistry + 0xc) = puVar8 + 0x16;
-    FUN_0031e198();
+    placeWinCreate();
     campCommonBgAcquire();
     campButtonHelpAcquire();
     puVar9 = &LAB_0027e888;

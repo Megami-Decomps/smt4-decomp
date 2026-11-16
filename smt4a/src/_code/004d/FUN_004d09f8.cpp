@@ -4,8 +4,8 @@
 extern "C" void FUN_004d09f8(const ScrollbarGeometry *bar, s32 *x, s32 *y,
                              s32 *width, s32 *height)
 {
-    s32 totalCount = bar->totalCount;
     s32 visibleCount = bar->visibleCount;
+    s32 totalCount = bar->totalCount;
     s32 trackHeight = bar->trackHeight;
     s32 scrollOffset = bar->scrollOffset;
     f32 thumbHeight = (f32)trackHeight * ((f32)visibleCount / (f32)totalCount);

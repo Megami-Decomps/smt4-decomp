@@ -1,4 +1,3 @@
-/* NON_MATCHING: the pool address is loaded into r0 and the constant 1 after the global load; retail loads the pool word into r1 and materialises 1 first. */
 #include "common.h"
 
 extern "C" {
@@ -18,10 +17,9 @@ extern StatusDown *g_statusDown;
 /* Whether the status screen is absent or its cursor is in mode 5. */
 u32 FUN_003a7bac(void)
 {
-    StatusDown *down = g_statusDown;
     u32 result = 1;
 
-    if (down != NULL) {
+    if (StatusDown *down = g_statusDown) {
         StatusCursor *cursor = &down->cursor;
 
         if (cursor->mode != 5) {

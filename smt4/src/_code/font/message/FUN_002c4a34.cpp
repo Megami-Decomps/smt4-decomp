@@ -1,4 +1,3 @@
-/* NON_MATCHING: only final paramsInit address/count argument scheduling differs; allocation, text defaults and all jobs match. */
 #include "ui/MessageMain.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers_AsdText.h"
@@ -37,7 +36,50 @@ typedef char MessageInitializationOffsetsCheck[sizeof(MessageInitializationView)
 }
 
 extern "C" {
-extern const u8 DAT_00403df8[];
+/* The message window's sprite resource packets, in retail's order (0x78, 0x48, 0x54 and 0x310 bytes). */
+static const u32 sMessagePacketA[30] = {
+    0xff38, 0xa, 6, 0xa, 0, 2, 0x140, 0xffec,
+    6, 0, 0xfec0, 4, 0xfec0, 0, 8, 0,
+    2, 2, 2, 0, 3, 0, 0x20000, 8,
+    0, 0xff06, 6, 0xff06, 0, 6,
+};
+static const u32 sMessagePacketB[18] = {
+    0, 0x3f800000, 8, 0, 0x3f800000, 4, 0x3f800000, 0,
+    4, 0x3f800000, 0x3dcccccd, 0x10014, 0, 0x3f800000, 8, 0x3f800000,
+    0, 3,
+};
+static const u32 sMessagePacketC[21] = {
+    0, 0x3f800000, 8, 0, 0x3f800000, 2, 0x3f8ccccd, 0x3f800000,
+    4, 0, 0x3fa66666, 0x10014, 0, 0x3f8ccccd, 8, 0x3f8ccccd,
+    0x3f800000, 2, 0, 0x3f800000, 4,
+};
+static const u32 sMessagePacketD[196] = {
+    0xfffffffd, 0, 0xfffffffd, 0, 0, 0, 0, 0xffffffff,
+    0, 0xffffffff, 0xffffffff, 0, 0xffffffff, 0, 0, 0,
+    0xfffffffd, 0, 0, 0xfffffffd, 0, 1, 0, 0xffffffff,
+    0xffffffff, 0, 0xffffffff, 0, 0xffffffff, 0, 0, 0,
+    0, 0, 0, 0xfffffffd, 0, 0xfffffffd, 2, 0,
+    0xfffffffd, 0, 0xffffffff, 0, 0xffffffff, 0xffffffff, 0, 0xffffffff,
+    0, 0xfffffffd, 0, 0xfffffffd, 1, 0, 2, 0,
+    0xffffffff, 0, 0xffffffff, 0xffffffff, 0, 0xffffffff, 0, 7,
+    0, 0xfffffffd, 0xfffffffd, 0, 0xfffffffd, 0, 7, 1,
+    0xfffffffd, 0xfffffffd, 0, 0xfffffffd, 0, 0xfffffffe, 0, 0xfffffffd,
+    0xfffffffd, 0, 0xfffffffd, 0, 0xffffffff, 0, 0xffffffff, 0xffffffff,
+    0, 0xffffffff, 0, 0xfffffffd, 0, 0xfffffffd, 0, 0,
+    4, 0, 0xfffffffd, 0, 0xfffffffd, 0xfffffffd, 0, 5,
+    0, 0xffffffff, 0, 0xffffffff, 0xffffffff, 0, 0xffffffff, 0,
+    2, 0, 0xfffffffd, 0, 0, 0xfffffffd, 0, 0xffffffff,
+    0, 0xffffffff, 0xffffffff, 0, 0xffffffff, 0, 3, 0,
+    0xffffffff, 0xffffffff, 0, 0xffffffff, 0, 0xffffffff, 0, 0,
+    0, 0, 0, 0, 4, 0, 0xffffffff, 0xffffffff,
+    0, 0xffffffff, 0, 0xffffffff, 0, 0, 0, 0,
+    0, 0, 5, 0, 0xfffffffd, 0xfffffffd, 0, 0xfffffffd,
+    0, 6, 0, 0xfffffffd, 0xfffffffd, 0, 0xfffffffd, 0,
+    0xfffffffe, 0, 0xffffffff, 0xffffffff, 0, 0xffffffff, 0, 0xffffffff,
+    0, 0, 0, 0, 0, 0, 0xfffffffd, 0,
+    0xfffffffd, 4, 0, 6, 0, 0xffffffff, 0, 0,
+    0, 0, 0, 0,
+};
 void FUN_002bc0e0(void);
 AsdText *asdTextCreate(u32 flags);
 void asdTextSetValueFlagsAndScalar(AsdText *text, u32 value, u32 flags, f32 scalar);
@@ -77,8 +119,8 @@ MessageWork *FUN_002c4a34(void)
     taskCreateDraw(reinterpret_cast<const s8 *>("MESS_U RIGHT"), 0xDF, 0, 0,
         FUN_00116a54, NULL, reinterpret_cast<u32>(work), reinterpret_cast<void *>(work->job));
     drawParameterBlockClear(&work->parameters);
-    // Three contiguous parameter streams precede the final resource stream.
-    paramsInit(&work->parameters, DAT_00403df8 - 0x54 - 0x48 - 0x78, 0x78, DAT_00403df8 - 0x54 - 0x48, 0x48, DAT_00403df8 - 0x54, 0x54, 0, 0, DAT_00403df8, 0x310);
+    paramsInit(&work->parameters, sMessagePacketA, sizeof(sMessagePacketA), sMessagePacketB, sizeof(sMessagePacketB),
+               sMessagePacketC, sizeof(sMessagePacketC), NULL, 0, sMessagePacketD, sizeof(sMessagePacketD));
     return reinterpret_cast<MessageWork *>(work);
 }
 }

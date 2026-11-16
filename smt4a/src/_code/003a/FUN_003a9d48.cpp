@@ -6,7 +6,7 @@
 #include "script/ScriptArgs.h"
 
 extern "C" {
-void wordPairCopy(BattleChoiceRow* destination, const BattleChoiceRow* source);
+void ARM_common_memcpy4_8(BattleChoiceRow* destination, const BattleChoiceRow* source);
 s32 randRange(u16 maximum);
 
 s32 FUN_003a9d48(void)
@@ -19,7 +19,7 @@ s32 FUN_003a9d48(void)
     table = btlGetTable(btlGetMainState(), 7);
     BattleChoiceRow* weightRows = static_cast<BattleChoiceRow*>(dataTableGetEntries(table));
     BattleChoiceRow weights;
-    wordPairCopy(&weights, &weightRows[row]);
+    ARM_common_memcpy4_8(&weights, &weightRows[row]);
     s32 total = 0;
     if (!candidates[row].values[0]) {
         weights.values[0] = 0;

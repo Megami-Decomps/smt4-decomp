@@ -1,4 +1,4 @@
-/* NON_MATCHING: integer flag normalization uses cmp/movne/moveq; retail copies the zero byte with adds and conditionally sets one. */
+/* NON_MATCHING: only the flag register differs: retail loads flag42 into r0 and normalizes it into r3 with `adds r3, r0, #0; movne r3, #1`; built loads straight into r3 and compares. */
 #include "common.h"
 
 extern "C" {
@@ -28,7 +28,7 @@ void FUN_00284ee4(s32 start)
         panel->flag34 = 0;
         panel->flag35 = 0;
         if (start != 0) {
-            FUN_00230ac0(4, -1, 0, panel->flag42 != 0);
+            FUN_00230ac0(4, -1, 0, panel->flag42 ? 1 : panel->flag42);
         }
         if (panel->state != 0 && panel->state != 1) {
             FUN_0023fc38();

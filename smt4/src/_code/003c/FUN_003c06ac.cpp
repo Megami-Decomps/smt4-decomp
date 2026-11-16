@@ -1,4 +1,4 @@
-/* NON_MATCHING: the final control call is now tail-called as in retail (path buffer scoped to the file-loading helper); retail saves `work` after the unit-lookup argument loads and stores `ready` before reloading g_btlMain. */
+/* NON_MATCHING: only the first instructions differ: retail loads work->selector (`ldr r1, [r0, #32]`) before saving work in r4. */
 #include "battle/BattleAssetWork.h"
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
@@ -43,7 +43,8 @@ u32 FUN_003c06ac(BattleTalkWork *work)
     battleTalkLoadFiles(work, record);
     FUN_003dadd8(DAT_00435d18);
     work->ready = 1;
-    if (g_btlMain->talk.unitIndex >= 0 && FUN_00256940(g_btlMain, work->unitId, 1)) {
+    BtlMainState *battle = g_btlMain;
+    if (battle->talk.unitIndex >= 0 && FUN_00256940(battle, work->unitId, 1)) {
         btlReflectQueueKind34(0, 0);
     }
     return FUN_00256898(1, 0);

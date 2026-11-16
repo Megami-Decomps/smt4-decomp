@@ -22,7 +22,7 @@ struct BattleTalkWork {
 
 extern "C" {
 void btlTalkBustUpReleaseAllSlots(void);
-void FUN_0028bf2c(void);
+void btlTalkBustUpReleaseTexture(void);
 s32 btlTalkBustUpGetValue(void);
 void textEncodeFontSlot(s32 slot, u8 *text);
 void FUN_00295a18(u32 item, s32 amount);
@@ -124,7 +124,7 @@ u32 FUN_002110ac(BattleTalkWork *work)
         if (battleTalkIsBustReady() == 0)
             return 0;
         work->state = 0;
-        FUN_0028bf2c();
+        btlTalkBustUpReleaseTexture();
         work->result = 6;
         return 2;
     default:

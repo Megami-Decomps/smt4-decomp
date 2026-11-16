@@ -1,4 +1,4 @@
-/* NON_MATCHING: branch layout of the visible-count test now matches retail; the count field address (add r6) is hoisted above the first loop here, retail forms it after the handle reset, and the zero register differs. */
+/* NON_MATCHING: only the count field address (`add r6, r4, #0xa00`) is hoisted above the first loop here; retail forms it after the handle reset. */
 #include "ui/PartyPanelState.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
 #include "gamedata/SaveSlotTable.h"
@@ -9,26 +9,34 @@ void ifTouchRegionRemove(void);
 u16 FUN_001643b4(u32, s32);
 void __aeabi_memset4(void *, u32, s32);
 
-void FUN_0023e908(void)
+// These aligned touch fields lie inside the canonical panel's byte-aligned animation padding.
+struct TouchPanelView {
+    u8 prefix[0x2C];
+    s32 page;
+    u8 unk30[0x12];
+    u8 alternate;
+    u8 unk43[0x981];
+    u16 handles[30];
+    s32 count;
+};
+struct RosterCountView { u8 prefix[0x1CA3]; u8 count; };
+typedef char TouchPanelOffsets[offsetof(TouchPanelView, handles) == 0x9C4 &&
+    offsetof(TouchPanelView, count) == 0xA00 ? 1 : -1];
+
+// Removes the panel's touch regions and clears its handle table.
+static __inline void touchPanelClearRegions(TouchPanelView *panel)
 {
-    // These aligned touch fields lie inside the canonical panel's byte-aligned animation padding.
-    struct TouchPanelView {
-        u8 prefix[0x2C];
-        s32 page;
-        u8 unk30[0x12];
-        u8 alternate;
-        u8 unk43[0x981];
-        u16 handles[30];
-        s32 count;
-    };
-    struct RosterCountView { u8 prefix[0x1CA3]; u8 count; };
-    typedef char TouchPanelOffsets[offsetof(TouchPanelView, handles) == 0x9C4 &&
-        offsetof(TouchPanelView, count) == 0xA00 ? 1 : -1];
-    TouchPanelView *panel = reinterpret_cast<TouchPanelView *>(g_partyPanel);
     for (s32 i = 0; i < panel->count; ++i)
         ifTouchRegionRemove();
     panel->count = 0;
     __aeabi_memset4(panel->handles, sizeof(panel->handles), -1);
+}
+
+// Rebuilds the party panel's touch regions for the current page or the alternate roster view.
+void FUN_0023e908(void)
+{
+    TouchPanelView *panel = reinterpret_cast<TouchPanelView *>(g_partyPanel);
+    touchPanelClearRegions(panel);
     if (panel->alternate) {
         for (s32 i = 0; i < 4; ++i) {
             panel->handles[i] = FUN_001643b4(0x11, i + 0x57);

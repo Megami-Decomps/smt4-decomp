@@ -51,7 +51,7 @@ int placeWinStartText(...);
 int FUN_00275bc8(...);
 int scrScriptProcessStartEntry(...);
 int campCommonBgAcquire(void);
-int FUN_0031e198(void);
+int placeWinCreate(void);
 int campButtonHelpAcquire(void);
 int soundChannelRequestIfEnabled(...);
 int FUN_003d54f8(...);
@@ -164,7 +164,7 @@ extern int messageGetChoiceResult(void);
 /* Supplied declaration required: gameStateClearFlag. */
 /* Supplied declaration required: naviMainSetFlagsAndActivate. */
 /* Supplied declaration required: campCommonBgAcquire. */
-/* Supplied declaration required: FUN_0031e198. */
+/* Supplied declaration required: placeWinCreate. */
 extern int FUN_00323bc4(unsigned int);
 /* Supplied declaration required: mapPlaceSet. */
 /* Supplied declaration required: FUN_00324c48. */
@@ -375,7 +375,7 @@ unsigned int FUN_00328838(void)
     FUN_001523b8(temp_v4 + 0x40,1);
     FUN_0036b824(temp_v4 + 0x40);
     *(int *)(g_handleRegistry + 0xc) = temp_v4 + 0x40;
-    FUN_0031e198();
+    placeWinCreate();
     campCommonBgAcquire();
     campButtonHelpAcquire();
     puVar5 = &LAB_0032904c;

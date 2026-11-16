@@ -1,4 +1,3 @@
-/* NON_MATCHING: null/zero setup and adjacent-node link loads schedule differently. */
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 extern "C" {
 void asdVramBlockListInsert(AsdVramBlockList *list, AsdVramBlock *block);
@@ -36,9 +35,11 @@ static __inline void vramMergeNext(AsdVramBlockList *list, AsdVramBlock *block)
 
 static __inline AsdVramBlock *vramFindBlock(AsdVramBlockList *list, u32 address)
 {
-    for (AsdVramBlock *block = list->head; block != NULL; block = block->next) {
+    AsdVramBlock *block = list->head;
+    while (block != NULL) {
         if (block->addr == address)
             return block;
+        block = block->next;
     }
     return NULL;
 }

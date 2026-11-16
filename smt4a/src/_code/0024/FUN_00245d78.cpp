@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses ldr r1, [pc, #176] where the compiled block uses mov r2, #1. */
 #include "common.h"
 
 struct MapEntry {
@@ -35,11 +34,14 @@ void FUN_0029aa60(s32 mode);
 void FUN_00311b74(f32 firstX, f32 firstY, f32 firstZ, f32 scalar,
                   f32 secondX, f32 secondY, f32 secondZ);
 
+/* Marks the active map entries busy, runs three map update passes (refreshing the scene's camera when
+ * asked), then restarts the timers of the active entries still counting. */
 void FUN_00245d78(s32 updateScene)
 {
+    s32 index;
     MapInterface* map = g_mapIf;
 
-    for (s32 index = 0; index < 128; ++index) {
+    for (index = 0; index < 128; ++index) {
         MapEntry& entry = map->entries[index];
         if (entry.active != 0) {
             entry.state = 1;
@@ -56,7 +58,7 @@ void FUN_00245d78(s32 updateScene)
         }
     }
 
-    for (s32 index = 0; index < 128; ++index) {
+    for (index = 0; index < 128; ++index) {
         MapEntry& entry = map->entries[index];
         if (entry.active != 0 && entry.timer > 0) {
             entry.timer = 16;

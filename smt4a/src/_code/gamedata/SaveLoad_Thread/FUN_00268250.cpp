@@ -1,4 +1,3 @@
-/* NON_MATCHING: r2/r3 swap between the thread base and the -1 constant, and retail builds the arg0/arg1 stm base in ip. */
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
@@ -49,8 +48,8 @@ void FUN_00268250(u8 mode, u32 arg0, u32 arg1, u32 arg2, u32 arg3)
     g_saveLoadThread.job = job;
     job->mode = mode;
     job->unk20 = -1;
-    job->unk24 = -1;
     job->arg0 = arg0;
+    job->unk24 = -1;
     job->arg1 = arg1;
     job->arg2 = arg2;
     job->arg3 = arg3;

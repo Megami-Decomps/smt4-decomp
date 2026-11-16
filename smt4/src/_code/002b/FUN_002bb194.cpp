@@ -13,7 +13,7 @@ typedef struct {
 
 extern unsigned char DAT_0044e360; /* 0x44e360 */
 
-extern unsigned int FUN_00129b14(void);
+extern unsigned int nn_gxlow_CTR_AcquireGpuRight(void);
 /* Supplied declaration required: FUN_002c131c. */
 extern unsigned int nn_gxlow_CTR_ReleaseGpuRight(void);
 
@@ -28,7 +28,7 @@ void FUN_002bb194(int param_1)
   
   if (param_1 != 0) {
     (*(signed char *)((unsigned char *)&DAT_0044e360 + 0x3)) = 1;
-    temp_v0 = FUN_00129b14();
+    temp_v0 = nn_gxlow_CTR_AcquireGpuRight();
     temp_v1 = 0x2bb1b8;
   }
   else {

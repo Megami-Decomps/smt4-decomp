@@ -48,7 +48,7 @@ void paramsClearPacket(UiResourceParameters*);
 
 void dataTable27Load(u8* state);
 void dataTable28Load(u8* state);
-void FUN_0031e198();
+void placeWinCreate();
 void messageSetMode(s32 mode);
 void qcMainSetMode(s32 mode);
 QuestDefinitionPrefix* FUN_001ad9b4(u16 id);
@@ -79,7 +79,7 @@ void questCenterInitEntry(void* context)
     work->wordce0 = 0;
     work->wordab8 = 0;
     work->interaction.scriptActive = 0;
-    FUN_0031e198();
+    placeWinCreate();
     messageSetMode(0);
     qcMainSetMode(0);
     u16 id = 0x15e;

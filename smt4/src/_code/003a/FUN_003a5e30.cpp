@@ -53,7 +53,7 @@ extern "C" {
 void FUN_003a4518(SelectionScene *scene);
 void shopLoadMessageBankAndSound(SelectionScene *scene);
 void FUN_003a45fc(void);
-void FUN_002637c8(void);
+void placeWinCreate(void);
 void FUN_00282bfc(s32 channel, s32 value);
 void FUN_002a03d8(s32 a, s32 b);
 s16 *statisticsGetCounter(u8 kind, u32 sub);
@@ -105,7 +105,7 @@ SelectionScene *FUN_003a5e30(SelectionScene *scene, u32 mode, s32 kind, s32 subK
     rectangleInitializeSelection(&scene->secondRectangle, 0x140, 0, 0x2B);
     Obj4223ac *window = new Obj4223ac;
     scene->touch.unk34 = (u32)window;
-    FUN_002637c8();
+    placeWinCreate();
     if (*statisticsGetCounter((u8)scene->kind, scene->subKind) != 0)
         scene->hasProgress = 1;
     if (scene->mode == 1) {

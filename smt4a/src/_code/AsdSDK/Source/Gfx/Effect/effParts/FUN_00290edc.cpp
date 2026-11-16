@@ -1,31 +1,14 @@
-/* NON_MATCHING: source/destination registers swap and memcpy reuses the allocation instead of reloading dataA. */
-#include "AsdSDK/Source/Gfx/Effect/effPartsBlock.h"
-#include "AsdSDK/AsdDebug.h"
-#include "AsdSDK/AsdMemAlloc.h"
+/* NON_MATCHING: with effBlockAllocate inlined the registers match; only retail's reload of dataA for the rt_memcpy destination is missing: the build reuses the allocation in r0. */
+#include "AsdSDK/Source/Gfx/Effect/effPartsAlloc.h"
 #include "AsdSDK/AsdMemCopy.h"
 
 extern "C" {
-extern const char g_effPartsSourcePath[];
 void effBlockCopyDataB(EffBlock* block, const void* data, s32 size, u16 tag);
 
 // Duplicate the block and take ownership of independent copies of both data blobs.
 EffBlock* FUN_00290edc(EffBlock* source)
 {
-    u16 kind = source->kind;
-    asdDebugTrace(g_effPartsSourcePath, 46);
-    EffBlock* block = static_cast<EffBlock*>(memAlloc(0x10000, 0x100, 0, sizeof(EffBlock), 16, 1));
-    block->flags = 0;
-    block->unk08 = 0;
-    block->unk0c = 0;
-    block->dataA = NULL;
-    block->sizeA = 0;
-    block->ownedA = NULL;
-    block->unk1c = 0;
-    block->dataB = NULL;
-    block->sizeB = 0;
-    block->ownedB = NULL;
-    block->id = 0xDC;
-    block->kind = kind;
+    EffBlock* block = effBlockAllocate(source->kind);
     block->id = source->id;
     s32 size = source->sizeA;
     if (size != 0) {

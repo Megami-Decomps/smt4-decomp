@@ -48,8 +48,8 @@ void FUN_0023466c(s32 id, s32 argument)
             record->argument == argument) {
             PopupMessageResource *message = FUN_00365bc4(record->message);
             PopupTriggerStateView *popup = g_popupState;
-            popup->phase = 0;
             popup->state = 9;
+            popup->phase = 0;
             popup->text = message->text;
             popup->trigger = record->id;
             popup->header = message->header;

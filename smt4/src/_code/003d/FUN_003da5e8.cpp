@@ -46,8 +46,8 @@ u32 FUN_003da5e8(BtlEffectWork *work)
                             textFormatBuffer(file, DAT_00400904, g_btlEffect.numberedPrefix, n);
                             if (strcmp(file, name) == 0) {
                                 FUN_002276f8(work);
-                                work->numberedEffect = FUN_00246644(n & 0xff, 7, 0);
                                 work->numberedIndex = n;
+                                work->numberedEffect = FUN_00246644(n & 0xff, 7, 0);
                                 found = true;
                                 break;
                             }

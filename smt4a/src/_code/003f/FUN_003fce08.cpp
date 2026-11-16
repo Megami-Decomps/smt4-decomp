@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail loads resource->value before starter->key; built loads them the other way round */
 /* Starts the object once: records the resource's value in its first slot, then runs the start callback. */
 #include "common.h"
 #include "addon/AocSystem.h"
@@ -36,6 +35,17 @@ extern u8 resourceIsReady(Resource *resource);
 extern void FUN_003fc294(Starter *starter, u32 arg);
 extern s32 aocTextureRequestHasNewContent(Starter *starter);
 
+/* Marks the starter started and records a value/key pair in slot `index` when it exists. */
+static __inline void starterSetSlot(Starter *starter, s32 index, u32 value, u32 key)
+{
+    starter->started = 1;
+    if (index < starter->slotSet->count) {
+        Slot *slot = &starter->slots[index];
+        slot->value = value;
+        slot->key = key;
+    }
+}
+
 s32 FUN_003fce08(Starter *starter, u32 arg)
 {
     Resource *resource = asdTMTexTableGetNode(starter->owner, starter->key);
@@ -47,15 +57,7 @@ s32 FUN_003fce08(Starter *starter, u32 arg)
         if (aocTextureRequestHasNewContent(starter) != 0) {
             aocReleaseObjectBufferAndFlag(starter);
         }
-        u32 key = starter->key;
-        u32 value = resource->value;
-        starter->started = 1;
-        s32 slotCount = starter->slotSet->count;
-        if (slotCount > 0) {
-            Slot *slot = starter->slots;
-            slot->value = value;
-            slot->key = key;
-        }
+        starterSetSlot(starter, 0, resource->value, starter->key);
         FUN_003fc294(starter, arg);
     }
     return 1;

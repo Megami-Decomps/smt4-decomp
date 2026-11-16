@@ -23,7 +23,7 @@ int objectFlagsClear(...);
 int FUN_00262f78(void);
 int FUN_00262f94(void);
 int btlTalkBustUpReleaseAllSlots(void);
-int FUN_0028bf2c(void);
+int btlTalkBustUpReleaseTexture(void);
 int statusDownSwitchTab(...);
 int FUN_00293f10(...);
 int FUN_002942c4(unsigned int, int);
@@ -53,7 +53,7 @@ extern int battleTalkIsBustReady(void);
 /* Supplied declaration required: FUN_0026d670. */
 extern int buttonHelpHasEnabledEntryForId(unsigned int);
 /* Supplied declaration required: btlTalkBustUpReleaseAllSlots. */
-/* Supplied declaration required: FUN_0028bf2c. */
+/* Supplied declaration required: btlTalkBustUpReleaseTexture. */
 /* Supplied declaration required: statusDownSwitchTab. */
 extern int FUN_00293aac(void);
 /* Supplied declaration required: FUN_00293f10. */
@@ -300,7 +300,7 @@ unsigned int FUN_001dbf34(int param_1)
     if (temp_v2 == 0) {
       return 0;
     }
-    FUN_0028bf2c();
+    btlTalkBustUpReleaseTexture();
     btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v3 + 0x46),1);
     *(unsigned char *)(param_1 + 0xd62) = 0;
     FUN_0029e874(1);
@@ -384,7 +384,7 @@ LAB_001dc504:
     *(unsigned char *)(param_1 + 0xd64) = 0;
     break;
   case 10:
-    FUN_0028bf2c();
+    btlTalkBustUpReleaseTexture();
     *(unsigned int *)(param_1 + 0xd2c) = 6;
     temp_v6 = 2;
     *(unsigned int *)(param_1 + 0xd38) = 0;

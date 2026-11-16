@@ -26,19 +26,7 @@ public:
     Obj422318(s32 mode);
     static void *operator new(u32, void *storage) throw() { return storage; }
     static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
-    /* Deletes the child, then marks the handle for destruction and destroys it. */
-    virtual ~Obj422318()
-    {
-        if (child != NULL) {
-            delete child;
-            child = NULL;
-        }
-        if (handle != 0) {
-            asdMdlManagerMarkDestroy(handle);
-            asdMdlManagerDestroy(reinterpret_cast<AsdMdlObject *>(handle));
-            handle = 0;
-        }
-    }
+    virtual ~Obj422318();
     static void operator delete(void *block) { asdMemFreeNonNull(block); }
     virtual void start(); /* +0x08 */
     virtual void update(); /* +0x0C */
@@ -67,5 +55,24 @@ public:
     /* 0x6C */ u32 handle;
     /* 0x70 */ u32 flags;
 };
+
+/* Deletes the child, then marks the handle for destruction and destroys it. Inline for the derived
+ * classes (their deleting destructors inline it); the D0 unit defines it out of line, as armcc
+ * emitted it with the vtable. */
+#ifndef OBJ422318_DESTRUCTOR_DEFINITION
+inline
+#endif
+Obj422318::~Obj422318()
+{
+    if (child != NULL) {
+        delete child;
+        child = NULL;
+    }
+    if (handle != 0) {
+        asdMdlManagerMarkDestroy(handle);
+        asdMdlManagerDestroy(reinterpret_cast<AsdMdlObject *>(handle));
+        handle = 0;
+    }
+}
 
 #endif

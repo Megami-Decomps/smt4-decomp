@@ -41,7 +41,7 @@ void buttonHelpSetText(s32 channel, u32 color);
 GameDataBlock *gameDataBlocksGetSaveData(void);
 u32 findByteThresholdTier(u8 value);
 u32 thresholdIndexFind(u8 value);
-void wordPairCopy(void *destination, const void *source);
+void ARM_common_memcpy4_8(void *destination, const void *source);
 
 /* Creates the config menu: its block, process and draw task, window sprite and cursor, then loads
  * the saved settings (or the defaults) into the menu. */
@@ -82,7 +82,7 @@ void FUN_0037a2e4(void)
     config->settingIndex[0] = categoryGetThresholdIndex(DAT_00588fc0.music);
     config->settingIndex[1] = findByteThresholdTier(DAT_00588fc0.sound);
     config->settingIndex[2] = thresholdIndexFind(DAT_00588fc0.voice);
-    wordPairCopy(config->saved, &DAT_00588fc0);
+    ARM_common_memcpy4_8(config->saved, &DAT_00588fc0);
 }
 
 } /* extern "C" */

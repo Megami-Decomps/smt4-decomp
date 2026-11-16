@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps a hoisted zero in sl and the global in fp (eleven saved registers); the build rematerialises the zero and needs eight. */
+/* NON_MATCHING: with the status-change queue in a helper the instructions and saved registers match retail; the registers are permuted (retail: target r5, actor r9, options r7, flags r4, global fp, zero sl). */
 #include "battle/btlReflect.h"
 #include "battle/BtlMainAccess.h"
 
@@ -20,12 +20,8 @@ u32 FUN_00246d38(s32 actor, u32 options, ReflectTarget *target, u32 mask)
             flags = member->flags;
     }
     if (mask) {
-        ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, options);
-        action->kind = 29;
-        action->target = (u32)target;
+        btlReflectQueueStatusChange((s16)actor, options, target, 0, mask);
         flags &= ~mask;
-        action->value = 0;
-        action->parameter = mask;
     }
     if (!nonRoster) {
         if (!(flags & 0x586)) {

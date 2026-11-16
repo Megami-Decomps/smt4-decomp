@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps the first argument in r7 (stored alone, then stm of three) and copies the stack floats before the argument moves; tail-array addressing matches. */
+/* NON_MATCHING: argument registers (r7 first, r4-r6 for the stm) now match; retail still moves the arguments around the stack-float copy in another order and uses ip/r1/r2 where the build uses r3/r2/r1. */
 #include "AsdSDK/Source/Gfx/Effect/effMenu.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -14,10 +14,10 @@ __softfp void FUN_002826d4(u32 first, u32 second, u32 third, u32 fourth,
     asdDebugTrace(DAT_004102c8, 641);
     EffMenuRenderNode *node = (EffMenuRenderNode *)memAlloc(0x10000, 0x100, 0,
         sizeof(EffMenuRenderNode), 0x10, 1);
-    node->unk08 = first;
     node->unk0c = second;
     node->unk10 = third;
     node->unk14 = fourth;
+    node->unk08 = first;
     node->horizontal = horizontal;
     node->vertical = vertical;
     node->unk04 = 5;

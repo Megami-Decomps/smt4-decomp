@@ -2,11 +2,11 @@
 
 extern "C" {
 
-int FUN_002ad8b4(u32 a, u32 b);
+int ARM_common_memcpy4_8(u32 a, u32 b);
 
 void FUN_003e0bbc(u32 a, u32 b)
 {
-    FUN_002ad8b4(b, a);
+    ARM_common_memcpy4_8(b, a);
 }
 
 } /* extern "C" */

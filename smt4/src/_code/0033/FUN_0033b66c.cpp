@@ -1,70 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033b66c` (_code @ 0x33b66c, 0xdc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+/* The 3D sound manager the sound system embeds: its two vtable pointers and its entry array. */
+struct SoundSystemManager3d {
+    /* 0x00 */ const void *vtables[2];
+    /* 0x08 */ u8 unk08[0x34];
+    /* 0x3C */ u8 entries[16][0x84];
+};
+
+/* The sound system's object: NintendoWare sound members behind a base, with arrays of handles and
+ * handle owners. Only the members its destructor touches are laid out. */
+struct SoundSystem {
+    /* 0x000 */ u8 base[0x184];
+    /* 0x184 */ u8 member184[0xC0];      /* destroyed by FUN_00378b40 */
+    /* 0x244 */ u8 member244[0x278];     /* destroyed by FUN_00377414 */
+    /* 0x4BC */ u8 objs50[4][0x50];      /* SoundObj50 */
+    /* 0x5FC */ u8 detachObjs[2][0x3C];
+    /* 0x674 */ u8 handlePairs[2][0x10];
+    /* 0x694 */ u8 objs3c[4][0x3C];      /* SoundObj3c */
+    /* 0x784 */ SoundSystemManager3d manager3d;
+    /* 0x1000 */ u8 handles[16][4];      /* SoundHandle */
+};
+
+typedef void *(*ElementDestructor)(void *element);
 
 extern "C" {
+extern u8 _ZTV9Obj421948[];
+void *__aeabi_vec_dtor(void *array, ElementDestructor destroy, u32 size, u32 count);
+void *_ZN11SoundHandleD1Ev(void *handle);
+void *FUN_00376d74(void *entry);
+void *_ZN10SoundObj3cD1Ev(void *object);
+void *soundHandlePairDetach(void *pair);
+void *soundObjDetachHandles(void *object);
+void *_ZN10SoundObj50D1Ev(void *object);
+u8 *FUN_00377414(void *member);
+u8 *FUN_00378b40(void *member);
+void *FUN_0037b540(void *base);
 
-int FUN_00140f3c(...);
-int __aeabi_vec_dtor(...);
-int FUN_001404c4(...);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern int FUN_003406b4(...); /* 0x3406b4 */
-extern int FUN_003472f0(...); /* 0x3472f0 */
-extern int soundHandlePairDetach(...); /* 0x349500 */
-extern int FUN_00376974(...); /* 0x376974 */
-extern int FUN_00376d74(...); /* 0x376d74 */
-extern int soundObjDetachHandles(...); /* 0x38097c */
-extern unsigned char DAT_0042198c; /* 0x42198c */
-extern unsigned char DAT_004219ac; /* 0x4219ac */
-extern unsigned char DAT_00421c78; /* 0x421c78 */
-
-/* Supplied declaration required: FUN_00140f3c. */
-/* Supplied declaration required: __aeabi_vec_dtor. */
-extern int FUN_00377414(int);
-extern int FUN_00378b40(int);
-/* Supplied declaration required: FUN_001404c4. */
-extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
-
-
-unsigned int * FUN_0033b66c(int param_1)
-
+/* Destroys the sound system's members in reverse order, then its base; returns the object. */
+void *FUN_0033b66c(SoundSystem *system)
 {
-/* irregular: 9 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  
-  __aeabi_vec_dtor(param_1 + 0x1000,FUN_00376974,4,0x10);
-  __aeabi_vec_dtor(param_1 + 0x7c0,FUN_00376d74,0x84,0x10);
-  *(unsigned char **)(param_1 + 0x784) = &DAT_0042198c;
-  *(unsigned char **)(param_1 + 0x788) = &DAT_004219ac;
-  __aeabi_vec_dtor(param_1 + 0x694,FUN_003472f0,0x3c,4);
-  __aeabi_vec_dtor(param_1 + 0x674,soundHandlePairDetach,0x10,2);
-  __aeabi_vec_dtor(param_1 + 0x5fc,soundObjDetachHandles,0x3c,2);
-  __aeabi_vec_dtor(param_1 + 0x4bc,FUN_003406b4,0x50,4);
-  temp_v0 = FUN_00377414(param_1 + 0x244);
-  temp_v0 = FUN_00378b40(temp_v0 - 0xc0);
-  puVar2 = (unsigned int *)(temp_v0 - 0x184);
-  *puVar2 = (unsigned int)&DAT_00421c78;
-  if (*(char *)(temp_v0 - 4) != '\0') {
-    if ((*(unsigned int *)(temp_v0 - 0x74) & 0xfffffffe) != 0) {
-      nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(*(unsigned int *)(temp_v0 - 0x74) & 0xfffffffe);
-      *(unsigned int *)(temp_v0 - 0x74) = 0;
-    }
-    FUN_00140f3c(temp_v0 - 0x58);
-    *(unsigned char *)(temp_v0 - 4) = 0;
-  }
-  FUN_001404c4(puVar2);
-  *(unsigned int *)(temp_v0 - 8) = 0xffffffff;
-  if ((*(unsigned int *)(temp_v0 - 0x74) & 0xfffffffe) != 0) {
-    nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(*(unsigned int *)(temp_v0 - 0x74) & 0xfffffffe);
-    *(unsigned int *)(temp_v0 - 0x74) = 0;
-  }
-  return puVar2;
+    SoundSystemManager3d *manager3d = &system->manager3d;
+
+    __aeabi_vec_dtor(system->handles, _ZN11SoundHandleD1Ev, 4, 16);
+    __aeabi_vec_dtor(manager3d->entries, FUN_00376d74, 0x84, 16);
+    manager3d->vtables[0] = _ZTV9Obj421948 + 0x44;
+    manager3d->vtables[1] = _ZTV9Obj421948 + 0x64;
+    __aeabi_vec_dtor(system->objs3c, _ZN10SoundObj3cD1Ev, 0x3C, 4);
+    __aeabi_vec_dtor(system->handlePairs, soundHandlePairDetach, 0x10, 2);
+    __aeabi_vec_dtor(system->detachObjs, soundObjDetachHandles, 0x3C, 2);
+    __aeabi_vec_dtor(system->objs50, _ZN10SoundObj50D1Ev, 0x50, 4);
+    u8 *member = FUN_00377414(system->member244);
+    member = FUN_00378b40(member - 0xC0);
+    return FUN_0037b540(member - 0x184);
 }
 
 } /* extern "C" */

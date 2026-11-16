@@ -7,7 +7,7 @@ char *libc_strcat(char *dst, const char *src);
 u32 libc_strlen(const char *s);
 typedef void (*AsdLoadCallback)(void *userData);
 s32 asdLoadFileAsync(const char *path, s32 offset, u32 loadFlags, AsdLoadCallback callback, void *userData, s32 size);
-void FUN_00153068(void *userData);
+void textureEntryAttachStex(void *userData);
 
 /* Build the entry's file path (directory + name + extension) and start its asynchronous load. */
 TexTableNamedEntry *FUN_002a6114(TexTableNamedEntry *entry, u32 mode)
@@ -55,7 +55,7 @@ TexTableNamedEntry *FUN_002a6114(TexTableNamedEntry *entry, u32 mode)
                 loadFlags |= 2;
             }
         }
-        asdLoadFileAsync(path, 0, loadFlags, FUN_00153068, entry, 0x80);
+        asdLoadFileAsync(path, 0, loadFlags, textureEntryAttachStex, entry, 0x80);
     }
     return entry;
 }

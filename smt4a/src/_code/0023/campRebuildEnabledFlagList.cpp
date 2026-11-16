@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the initial mode compare is scheduled after `mov r9, r0` and the first literal load (retail compares r0 first; 4 diff lines); the switch already gives retail's r8/r9 allocation. */
 #include "common.h"
 #include "gamedata/FlagValueIsPositive.h"
 
@@ -28,24 +27,25 @@ void campRebuildEnabledFlagList(s32 mode)
     s32 first, last;
     s16 *entries;
     CampFlagMenu *menu;
+    CampFlagLists *camp = g_camp;
     switch (mode) {
     case 11:
         first = 1;
         last = 0x3c;
-        entries = g_camp->first;
-        menu = &g_camp->firstMenu;
+        entries = camp->first;
+        menu = &camp->firstMenu;
         break;
     case 13:
         first = 0x3b7;
         last = 0x47e;
-        entries = g_camp->second;
-        menu = &g_camp->secondMenu;
+        entries = camp->second;
+        menu = &camp->secondMenu;
         break;
     case 14:
         first = 0x33f;
         last = 0x3b6;
-        entries = g_camp->third;
-        menu = &g_camp->thirdMenu;
+        entries = camp->third;
+        menu = &camp->thirdMenu;
         break;
     default:
         return;

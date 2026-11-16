@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation at entry only: retail loads g_aocSystem straight into r0 and keeps the ID in r1 for both the stack key and the add-on lookup call; the build moves them around (extra mov r1, r0 / mov r0, r2). */
+/* NON_MATCHING: with the lookup in a helper taking the system the entry registers match; only the system load is scheduled before the key store (retail: strh key, then ldr). */
 #include "gamedata/DataTable.h"
 #include "gamedata/Table8Type5Record.h"
 
@@ -17,13 +17,13 @@ s32 compareLookupKey(const void *left, const void *right);
 
 extern AocSystemView *g_aocSystem; /* 0x433158 */
 
-/* Returns the value of the table 8 type 5 record for `id`: the add-on's record when it has one, else the one found in the table. */
-u16 FUN_00288e68(u16 id)
+/* The table 8 type 5 record for `id`: the add-on's record when the system has one, else the one found in the table. */
+static __inline Table8Type5Record *table8Type5Lookup(AocSystemView *system, u16 id)
 {
     Table8Type5Record key;
     Table8Type5Record *record;
     key.id = id;
-    if (g_aocSystem->lookupEnabled == 0 || (record = FUN_002b4504(g_aocSystem, id)) == NULL) {
+    if (system->lookupEnabled == 0 || (record = FUN_002b4504(system, id)) == NULL) {
         void *table = dataTableGet(8, 5);
         record = (Table8Type5Record *)table;
         if (table != NULL) {
@@ -32,7 +32,13 @@ u16 FUN_00288e68(u16 id)
             record = (Table8Type5Record *)libc_bsearch(&key, entries, count, sizeof(Table8Type5Record), compareLookupKey);
         }
     }
-    return record->value;
+    return record;
+}
+
+/* Returns the value of the table 8 type 5 record for `id`. */
+u16 FUN_00288e68(u16 id)
+{
+    return table8Type5Lookup(g_aocSystem, id)->value;
 }
 
 } /* extern "C" */

@@ -1,4 +1,4 @@
-/* NON_MATCHING: controller state reload after btlGetMainState uses r0 rather than retail's r1 and is scheduled after the result copy. */
+/* NON_MATCHING: only the state reload after btlGetMainState differs: retail loads it into r1 before copying the battle pointer, the build copies first and loads into r0. */
 #include "battle/BtlMainAccess.h"
 #include "shard/Shard0034.h"
 
@@ -28,10 +28,9 @@ f32 asdAnimGetTrackLastFrame(void *animation, u32 track);
 // Apply state transitions, advance looping animation slots and saturate the elapsed-frame count.
 u32 FUN_0041210c(BattleAnimationControllerView *controller)
 {
-    s32 state = controller->state;
     s32 requested = controller->requested;
-    if (state != requested) {
-        controller->previous = state;
+    if (controller->state != requested) {
+        controller->previous = controller->state;
         controller->state = requested;
         FUN_00410f84(controller);
         controller->frames = 0;

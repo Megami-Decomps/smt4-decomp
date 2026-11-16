@@ -1,4 +1,4 @@
-/* NON_MATCHING: final callback arguments are split across stack stores instead of retail's single STM. */
+/* NON_MATCHING: the callbacks' pool order now matches; retail stores the region before loading them into r0/r1 and pushes all three stack arguments with one stm, the build loads them into r1/r2 first. */
 #include "event/NpcTextureWork.h"
 #include "gamedata/Table00.h"
 #include "AsdSDK/AsdDebug.h"
@@ -52,6 +52,7 @@ void FUN_00252190(u32 npcId, u32 mode, s32 x)
     }
     work->display.screenRegion = region;
     work->speed = 0.33f;
-    asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00403570), 2, 0, 0, FUN_001dfc64, FUN_002db92c, reinterpret_cast<u32>(work));
+    AsdProcUpdateFunc update = FUN_001dfc64;
+    asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00403570), 2, 0, 0, update, FUN_002db92c, reinterpret_cast<u32>(work));
 }
 }

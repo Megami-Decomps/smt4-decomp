@@ -1,4 +1,4 @@
-/* NON_MATCHING: scanner owner recovery and thread-member writeback differ after module-state initialization. */
+/* Static initializer of the text scanner module: its state, counters and the global scanner g_asdNgc. */
 #include "classes/ThreadedTextScanner.h"
 
 struct TextScannerModuleState {

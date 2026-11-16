@@ -12,7 +12,7 @@ int FUN_001acb48(void);
 int FUN_001b4c1c(...);
 int FUN_001b4eb8(...);
 int eventDispatch(...);
-int FUN_00243c24(void);
+int effBlockCreateFromBlock(void);
 int FUN_002b30e4(void);
 int FUN_00323bc4(...);
 int swapSlotExchange(...);
@@ -113,7 +113,7 @@ extern unsigned char *FUN_00200bcc(unsigned char *);
 /* Supplied declaration required: FUN_00202178. */
 /* Supplied declaration required: effEditorNodeChainApply. */
 /* Supplied declaration required: eventDispatch. */
-/* Supplied declaration required: FUN_00243c24. */
+/* Supplied declaration required: effBlockCreateFromBlock. */
 /* Supplied declaration required: asdDebugLog. */
 /* Supplied declaration required: effPartCreate. */
 /* Supplied declaration required: FUN_002b30e4. */
@@ -579,7 +579,7 @@ LAB_003894e4:
       }
       temp_v3 = linkedFindItemByIndex(DAT_0059dbf4,temp_v10);
       temp_v4 = *(int *)(temp_v3 + 0x90);
-      FUN_00243c24();
+      effBlockCreateFromBlock();
       DAT_0059dc00 = temp_v4;
       __aeabi_memcpy4(&g_effectEditorSavedSnapshot,temp_v3,0x80);
     }

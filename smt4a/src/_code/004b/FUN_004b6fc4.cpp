@@ -68,7 +68,7 @@ void dataTable33Load(void *table);
 void resetFlagGroup1F(void *selection);
 void FUN_0022677c(u32 index, u32 value);
 void soundResetSpatialState(void);
-void FUN_0031e198(void);
+void placeWinCreate(void);
 
 void FUN_004b6fc4(MikadoCameraWork *camera)
 {
@@ -112,6 +112,6 @@ void FUN_004b6fc4(MikadoCameraWork *camera)
     FUN_0022677c(1, 0xFF);
     camera->cache = new (owner) MikadoImageCache;
     soundResetSpatialState();
-    FUN_0031e198();
+    placeWinCreate();
 }
 }

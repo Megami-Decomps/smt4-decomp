@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_002a7838(void);
+int mikadoCameraTeardown(void);
 int asdMemFreeNonNull(int object);
 int jobFind(u32 task);                /* nonzero while the task exists */
 int asdMemFree(void *ptr);               /* heap free */
@@ -25,7 +25,7 @@ u32 mikadoPollShutdown(void)
         if (work != NULL) {
             work->done = 1;
             if (work->camera != NULL) {
-                FUN_002a7838();
+                mikadoCameraTeardown();
                 if (work->camera != NULL) {
                     asdMemFreeNonNull(_ZN9Obj55ca08D1Ev(&work->camera->sub) - 0x110);
                 }

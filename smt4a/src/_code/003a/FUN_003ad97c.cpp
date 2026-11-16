@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail returns before pushing registers when the count is zero (shrink-wrapped) and keeps the loop in r0-r7; built pushes first. */
+/* NON_MATCHING: shrink-wrapped zero-count exit, pointer-walked entries and pool order now match retail; remaining: the prologue load order (retail zeroes the index before reading the source) and the loop register assignment (r4-r7 roles). */
 #include "common.h"
 
 struct Color4003ad97c {
@@ -43,17 +43,18 @@ extern u8 DAT_005c1130[4];
 void FUN_003ad97c(Object003ad97c *object)
 {
     Table003ad97c *table = object->table;
-    Source003ad97c *source = object->source;
-    Entry003ad97c *entries = table->entries;
-    u32 count = source->count;
+    u32 count = object->source->count;
+    Entry003ad97c *entry = table->entries;
 
-    for (u32 i = 0; i < count; i++) {
+    for (u32 i = 0; i < count; i++, entry++) {
+        const f32 scale = 0.003921569f;
+        const u8 *bytes = DAT_005c1130;
         Color4003ad97c *color = &table->colors->colors[(u16)i];
-        color->r = (f32)DAT_005c1130[0] * 0.003921569f * 0.003921569f;
-        color->g = (f32)DAT_005c1130[1] * 0.003921569f * 0.003921569f;
-        color->b = (f32)DAT_005c1130[2] * 0.003921569f * 0.003921569f;
-        color->a = (f32)DAT_005c1130[3] * 0.003921569f * 0.003921569f;
-        entries[i].id = -1;
+        color->r = (f32)bytes[0] * scale * scale;
+        color->g = (f32)bytes[1] * scale * scale;
+        color->b = (f32)bytes[2] * scale * scale;
+        color->a = (f32)bytes[3] * scale * scale;
+        entry->id = -1;
     }
 }
 

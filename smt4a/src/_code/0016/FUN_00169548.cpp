@@ -1,4 +1,4 @@
-/* NON_MATCHING: only register assignment differs: retail forms the tail pointer (add r2, r1, #1280) before the enabled store and keeps the zero in r3. */
+/* NON_MATCHING: only the zero register differs (retail keeps it in r3 and schedules the stores around the resetState address; built uses r0). */
 #include "common.h"
 
 struct ButtonHelpTail {
@@ -25,13 +25,12 @@ void FUN_001a90e0(u8* state);
 
 void FUN_00169548(s32 enabled)
 {
-    ButtonHelpState* state = g_buttonHelp.state;
-    ButtonHelpTail* tail = &state->tail;
-    state->tail.enabled = (u8)enabled;
+    ButtonHelpTail* tail = &g_buttonHelp.state->tail;
+    g_buttonHelp.state->tail.enabled = (u8)enabled;
     if (enabled != 0) {
-        state->tail.counter = 0;
+        g_buttonHelp.state->tail.counter = 0;
         tail->timer = 0;
-        FUN_001a90e0(state->tail.resetState);
+        FUN_001a90e0(g_buttonHelp.state->tail.resetState);
     }
 }
 }

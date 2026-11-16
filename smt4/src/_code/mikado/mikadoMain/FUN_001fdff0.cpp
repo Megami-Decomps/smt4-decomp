@@ -11,7 +11,7 @@ inline void MikadoCamera::operator delete(void *block)
 extern "C" {
 extern MikadoGlobals g_mikado;
 void FUN_003ba734(MikadoCamera *camera, const UShortVec3 *start);
-void FUN_002a7838(MikadoCamera *camera);
+void mikadoCameraTeardown(MikadoCamera *camera);
 void sceneUpdateHandlerAndWidget(MikadoCamera *camera);
 
 /* Steps the mikado controller's state machine: creates the camera, runs its scene, then tears it
@@ -41,7 +41,7 @@ u32 FUN_001fdff0(void)
         work->state = 3;
         work->done = 1;
         if (work->camera != NULL) {
-            FUN_002a7838(work->camera);
+            mikadoCameraTeardown(work->camera);
             if (work->camera != NULL) {
                 delete work->camera;
             }

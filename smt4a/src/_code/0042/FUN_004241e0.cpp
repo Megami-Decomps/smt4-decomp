@@ -1,8 +1,8 @@
-/* NON_MATCHING: armcc hoists the 500000 ns sleep constant into r5 out of the loop; retail reloads it from the pool each iteration (everything else matches). */
 #include "shard/ThreadControl.h"
+#include "nn/fnd/TimeSpan.h"
 
 extern "C" {
-void svcSleepThread(s64 nanoseconds);
+void svcSleepThread(nn::fnd::TimeSpan span);
 void nn_os_LightEvent_Signal(void *event);
 void nn_os_CriticalSection_Enter(void *criticalSection);
 void nn_os_CriticalSection_Leave(void *criticalSection);
@@ -24,7 +24,7 @@ u32 FUN_004241e0(ThreadControl *control)
             if (control->state == 7 || control->state == 1) {
                 return 0;
             }
-            svcSleepThread(500000);
+            svcSleepThread(nn::fnd::TimeSpan::FromMicroSeconds(500));
         }
     }
     return 0;

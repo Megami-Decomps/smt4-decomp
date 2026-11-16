@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler removes the first unscaled step store and groups the other two, changing VFP allocation and scaling-store order. */
+/* NON_MATCHING: through a step pointer the scaled stores match; the compiler still drops the unscaled step.x store and pairs y/z into a vstmia (retail stores all three singly), and retail's g_lmapScene pool word has no relocation in the target object. */
 #include "shard/W5_W5Match7_SceneState.h"
 #include "shard/W6_W6Match3_MapSceneTransition.h"
 
@@ -16,12 +16,13 @@ void lmapSceneBeginPositionTransition(f32 x, f32 y, f32 z, f32 endX, f32 endY, f
     MapVector from = {x, y, z};
     MapVector to = {endX, endY, endZ};
     LmapScene *scene = g_lmapScene;
-    scene->transition.step.x = to.x - from.x;
-    scene->transition.step.y = to.y - from.y;
-    scene->transition.step.z = to.z - from.z;
+    MapVector *step = &scene->transition.step;
+    step->x = to.x - from.x;
+    step->y = to.y - from.y;
+    step->z = to.z - from.z;
     scene->transition.start = from;
     scene->transition.end = to;
-    scaleMapVector(&scene->transition.step, 1.0f / 18.0f);
+    scaleMapVector(step, 1.0f / 18.0f);
     g_lmapScene->targetHeading = mathPositionHeadingDegrees(from, to);
 }
 

@@ -1,4 +1,3 @@
-/* NON_MATCHING: ARMCC keeps x in r6 from entry instead of copying r4 to r6, and omits retail's nop before the member-speed call. */
 #include "ui/PartyPanel.h"
 #include "shard/TextureDrawCall.h"
 #include "result/WhisperEffect.h"
@@ -6,6 +5,23 @@
 extern "C" {
 PartyMember* partyPanelGetMember(s32 index);
 void efctSetSpeed(f32 speed);
+f32 vec2GetSpeed(const void *object);
+}
+
+/* Starts the panel's main effect and the three member effects at (x, y); each member effect runs at
+ * the member's own speed scaled by `speed`. */
+static __inline void startPanelEffects(u32 x, u32 y, f32 speed)
+{
+    efctSetSpeed(speed);
+    FUN_001835b4(2, 0x11, 0xB5, x, y, 0xC9);
+    for (s32 index = 0; index < 3; ++index) {
+        PartyMember* member = partyPanelGetMember(index + 13);
+        if (member != NULL) {
+            efctSetSpeed(vec2GetSpeed(member) * speed);
+        }
+        FUN_001835b4(2, 0x11, index + 0xB8, x, y, 0xCE);
+        efctSetSpeed(speed);
+    }
 }
 
 // Apply the panel effect speed to its main effect and three member effects.
@@ -16,15 +32,6 @@ extern "C" void FUN_003f3d90(void* context, u32 x, u32 y, s32 enabled, f32 speed
     }
     u32 flag = partyPanelGetFlag();
     if (flag == 1 || flag == 4 || flag == 12 || flag == 15 || flag == 17) {
-        efctSetSpeed(speed);
-        FUN_001835b4(2, 0x11, 0xB5, x, y, 0xC9);
-        for (s32 index = 0; index < 3; ++index) {
-            PartyMember* member = partyPanelGetMember(index + 13);
-            if (member != NULL) {
-                efctSetSpeed(member->effectSpeed * speed);
-            }
-            FUN_001835b4(2, 0x11, index + 0xB8, x, y, 0xCE);
-            efctSetSpeed(speed);
-        }
+        startPanelEffects(x, y, speed);
     }
 }

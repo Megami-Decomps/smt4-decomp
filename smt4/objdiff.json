@@ -5498,13 +5498,13 @@
       "target_path": "orig/target/_code/0010/FUN_0010a110.o"
     },
     {
-      "base_path": "build/obj/_code/0010/FUN_0010a174.o",
+      "base_path": "build/obj/_code/0010/memoryDebugSetRegions.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0010a174",
+            "name": "memoryDebugSetRegions",
             "size": 44,
             "vram": "0x10a174"
           }
@@ -5512,10 +5512,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0010/FUN_0010a174.cpp"
+        "source_path": "src/_code/0010/memoryDebugSetRegions.cpp"
       },
-      "name": "_code/0010/FUN_0010a174",
-      "target_path": "orig/target/_code/0010/FUN_0010a174.o"
+      "name": "_code/0010/memoryDebugSetRegions",
+      "target_path": "orig/target/_code/0010/memoryDebugSetRegions.o"
     },
     {
       "base_path": "build/obj/_code/0010/paramTripleSet.o",
@@ -16615,13 +16615,13 @@
       "target_path": "orig/target/_code/0012/FUN_00129b04.o"
     },
     {
-      "base_path": "build/obj/_code/0012/FUN_00129b14.o",
+      "base_path": "build/obj/_code/0012/nn_gxlow_CTR_AcquireGpuRight.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00129b14",
+            "name": "nn_gxlow_CTR_AcquireGpuRight",
             "size": 96,
             "vram": "0x129b14"
           }
@@ -16629,10 +16629,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0012/FUN_00129b14.cpp"
+        "source_path": "src/_code/0012/nn_gxlow_CTR_AcquireGpuRight.cpp"
       },
-      "name": "_code/0012/FUN_00129b14",
-      "target_path": "orig/target/_code/0012/FUN_00129b14.o"
+      "name": "_code/0012/nn_gxlow_CTR_AcquireGpuRight",
+      "target_path": "orig/target/_code/0012/nn_gxlow_CTR_AcquireGpuRight.o"
     },
     {
       "base_path": "build/obj/_code/0012/nn_gxlow_CTR_ReleaseGpuRight.o",
@@ -31730,13 +31730,13 @@
       "target_path": "orig/target/_code/0015/settings5BClearFlags.o"
     },
     {
-      "base_path": "build/obj/_code/0015/FUN_00153068.o",
+      "base_path": "build/obj/_code/0015/textureEntryAttachStex.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00153068",
+            "name": "textureEntryAttachStex",
             "size": 444,
             "vram": "0x153068"
           }
@@ -31744,10 +31744,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0015/FUN_00153068.cpp"
+        "source_path": "src/_code/0015/textureEntryAttachStex.cpp"
       },
-      "name": "_code/0015/FUN_00153068",
-      "target_path": "orig/target/_code/0015/FUN_00153068.o"
+      "name": "_code/0015/textureEntryAttachStex",
+      "target_path": "orig/target/_code/0015/textureEntryAttachStex.o"
     },
     {
       "base_path": "build/obj/_code/0015/lookupListFindByKey.o",
@@ -49106,13 +49106,13 @@
       "target_path": "orig/target/_code/001d/FUN_001dd280.o"
     },
     {
-      "base_path": "build/obj/_code/001d/FUN_001dd8c0.o",
+      "base_path": "build/obj/_code/001d/npcRoomIsOpen.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001dd8c0",
+            "name": "npcRoomIsOpen",
             "size": 36,
             "vram": "0x1dd8c0"
           }
@@ -49120,10 +49120,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/001d/FUN_001dd8c0.cpp"
+        "source_path": "src/_code/001d/npcRoomIsOpen.cpp"
       },
-      "name": "_code/001d/FUN_001dd8c0",
-      "target_path": "orig/target/_code/001d/FUN_001dd8c0.o"
+      "name": "_code/001d/npcRoomIsOpen",
+      "target_path": "orig/target/_code/001d/npcRoomIsOpen.o"
     },
     {
       "base_path": "build/obj/_code/001d/FUN_001dd8e8.o",
@@ -85672,13 +85672,13 @@
       "target_path": "orig/target/_code/0026/placeWinStartText.o"
     },
     {
-      "base_path": "build/obj/_code/font/PlaceWin/PlaceWin/FUN_002637c8.o",
+      "base_path": "build/obj/_code/font/PlaceWin/PlaceWin/placeWinCreate.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002637c8",
+            "name": "placeWinCreate",
             "size": 312,
             "vram": "0x2637c8"
           }
@@ -85687,10 +85687,10 @@
           "_code",
           "font/PlaceWin/PlaceWin"
         ],
-        "source_path": "src/_code/font/PlaceWin/PlaceWin/FUN_002637c8.cpp"
+        "source_path": "src/_code/font/PlaceWin/PlaceWin/placeWinCreate.cpp"
       },
-      "name": "_code/font/PlaceWin/PlaceWin/FUN_002637c8",
-      "target_path": "orig/target/_code/font/PlaceWin/PlaceWin/FUN_002637c8.o"
+      "name": "_code/font/PlaceWin/PlaceWin/placeWinCreate",
+      "target_path": "orig/target/_code/font/PlaceWin/PlaceWin/placeWinCreate.o"
     },
     {
       "base_path": "build/obj/_code/0026/FUN_00263988.o",
@@ -95443,13 +95443,13 @@
       "target_path": "orig/target/_code/0028/btlTalkBustUpReleaseAllSlots.o"
     },
     {
-      "base_path": "build/obj/_code/0028/FUN_0028bf2c.o",
+      "base_path": "build/obj/_code/0028/btlTalkBustUpReleaseTexture.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0028bf2c",
+            "name": "btlTalkBustUpReleaseTexture",
             "size": 104,
             "vram": "0x28bf2c"
           }
@@ -95457,10 +95457,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0028/FUN_0028bf2c.cpp"
+        "source_path": "src/_code/0028/btlTalkBustUpReleaseTexture.cpp"
       },
-      "name": "_code/0028/FUN_0028bf2c",
-      "target_path": "orig/target/_code/0028/FUN_0028bf2c.o"
+      "name": "_code/0028/btlTalkBustUpReleaseTexture",
+      "target_path": "orig/target/_code/0028/btlTalkBustUpReleaseTexture.o"
     },
     {
       "base_path": "build/obj/_code/0028/playSceneTimerSubStartReverse.o",
@@ -106175,13 +106175,13 @@
       "target_path": "orig/target/_code/002a/asdMemFreeSlot.o"
     },
     {
-      "base_path": "build/obj/_code/002a/FUN_002a7838.o",
+      "base_path": "build/obj/_code/002a/mikadoCameraTeardown.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002a7838",
+            "name": "mikadoCameraTeardown",
             "size": 88,
             "vram": "0x2a7838"
           }
@@ -106189,10 +106189,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002a/FUN_002a7838.cpp"
+        "source_path": "src/_code/002a/mikadoCameraTeardown.cpp"
       },
-      "name": "_code/002a/FUN_002a7838",
-      "target_path": "orig/target/_code/002a/FUN_002a7838.o"
+      "name": "_code/002a/mikadoCameraTeardown",
+      "target_path": "orig/target/_code/002a/mikadoCameraTeardown.o"
     },
     {
       "base_path": "build/obj/_code/002a/placeWinRelease.o",
@@ -108560,13 +108560,13 @@
       "target_path": "orig/target/_code/002a/FUN_002ad8a8.o"
     },
     {
-      "base_path": "build/obj/_code/002a/FUN_002ad8b4.o",
+      "base_path": "build/obj/_code/002a/ARM_common_memcpy4_8.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002ad8b4",
+            "name": "ARM_common_memcpy4_8",
             "size": 20,
             "vram": "0x2ad8b4"
           }
@@ -108574,10 +108574,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002a/FUN_002ad8b4.cpp"
+        "source_path": "src/_code/002a/ARM_common_memcpy4_8.cpp"
       },
-      "name": "_code/002a/FUN_002ad8b4",
-      "target_path": "orig/target/_code/002a/FUN_002ad8b4.o"
+      "name": "_code/002a/ARM_common_memcpy4_8",
+      "target_path": "orig/target/_code/002a/ARM_common_memcpy4_8.o"
     },
     {
       "base_path": "build/obj/_code/002a/nn_fs_ipc_FileSystem_CloseArchive.o",

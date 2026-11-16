@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail multiplies index*25 before loading g_eplSlots (r0 reused); built loads g_eplSlots into r2 first. */
 #include "common.h"
 #include "classes/Obj557dcc.h"
 
@@ -24,7 +23,8 @@ extern void asdMemFree(void *resource);
 /* Frees the two resources of effect slot `index` and clears the slot's dirty byte. */
 void FUN_0024483c(s32 index)
 {
-    EplSlot *slot = &g_eplSlots->slots[index];
+    EplSlots *slots = g_eplSlots;
+    EplSlot *slot = &slots->slots[index];
 
     if (slot->resourceA != NULL) {
         resourceListDestroy(slot->resourceA);

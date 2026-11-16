@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern void wordPairCopy(u32 *dest, u32 *src);
+extern void ARM_common_memcpy4_8(u32 *dest, u32 *src);
 
 void FUN_00501fa4(u32 *a, u32 *b)
 {
-    wordPairCopy(b, a);
+    ARM_common_memcpy4_8(b, a);
 }
 
 } /* extern "C" */

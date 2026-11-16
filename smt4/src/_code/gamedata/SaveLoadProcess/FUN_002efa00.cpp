@@ -17,7 +17,7 @@ s32 FUN_001a1d08();
 void FUN_00247af8(s32 operation, s32 flags, u32 slot, void *buffer, u32 size);
 void *asdMemoryAlloc(s32 heap, s32 alignment, s32 flags, u32 size, s32 clear);
 void *gameDataBlocksGetTable();
-void FUN_002ad8b4(void *settings, const void *savedSettings);
+void ARM_common_memcpy4_8(void *settings, const void *savedSettings);
 GameSaveData *gameDataBlocksGetSaveData();
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_0026b4cc();
@@ -41,7 +41,7 @@ s32 FUN_002efa00(u32 job)
             } else {
                 const SaveFilePayloadIV *payload = static_cast<const SaveFilePayloadIV *>(work->buffer);
                 __aeabi_memcpy4(gameDataBlocksGetTable(), payload->table, sizeof(payload->table));
-                FUN_002ad8b4(configGetSettings(), payload->settings);
+                ARM_common_memcpy4_8(configGetSettings(), payload->settings);
                 __aeabi_memcpy4(gameDataBlocksGetSaveData(), payload->save, sizeof(payload->save));
                 gameDataBlocksGetSaveData()->metadata.option = work->option;
                 FUN_0026b4cc();

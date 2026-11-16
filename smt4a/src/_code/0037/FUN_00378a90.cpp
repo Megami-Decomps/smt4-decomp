@@ -5,7 +5,7 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int wordPairCopy(...);
+int ARM_common_memcpy4_8(...);
 int FUN_001ac2d4(...);
 int lightOwnerRegister(...);
 int nodeSetTranslation(...);
@@ -18,7 +18,7 @@ extern int *DAT_00581270; /* 0x581270 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: wordPairCopy. */
+/* Supplied declaration required: ARM_common_memcpy4_8. */
 extern int modelHasLoadedAttachment(int);
 /* Supplied declaration required: FUN_001ac2d4. */
 extern int asdMdlManagerClone(int, unsigned int);
@@ -222,7 +222,7 @@ LAB_00379048:
               ;
               piVar3[temp_v3 * 0x11 + 0xd] = temp_v2;
               piVar3[temp_v3 * 0x11 + 0xe] = 2;
-              wordPairCopy(piVar3 + temp_v3 * 0x11 + 0x10,pcVar4 + 0xc);
+              ARM_common_memcpy4_8(piVar3 + temp_v3 * 0x11 + 0x10,pcVar4 + 0xc);
               piVar3[temp_v3 * 0x11 + 0x15] = -1;
               piVar3 = DAT_00581270;
               DAT_00581270[1] = DAT_00581270[1] + 1;

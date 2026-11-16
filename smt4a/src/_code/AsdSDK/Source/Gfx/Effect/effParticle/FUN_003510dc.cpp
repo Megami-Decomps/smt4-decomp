@@ -13,10 +13,10 @@ int FUN_001abbc4(void);
 int refCountIncrement(...);
 int spriteGroupCreateFromFile(void);
 int handleBlockRefDrop(void);
-int FUN_00222180(void);
+int effBlockClone(void);
 int effTlpCreate(void);
 int handleBlockUnref(void);
-int FUN_00243c24(void);
+int effBlockCreateFromBlock(void);
 int FUN_00291038(void);
 int FUN_002b2d74(unsigned int, unsigned int, unsigned int);
 int objectBufferFree(void);
@@ -53,10 +53,10 @@ typedef struct {
 /* Supplied declaration required: refCountIncrement. */
 /* Supplied declaration required: spriteGroupCreateFromFile. */
 /* Supplied declaration required: handleBlockRefDrop. */
-/* Supplied declaration required: FUN_00222180. */
+/* Supplied declaration required: effBlockClone. */
 /* Supplied declaration required: effTlpCreate. */
 /* Supplied declaration required: handleBlockUnref. */
-/* Supplied declaration required: FUN_00243c24. */
+/* Supplied declaration required: effBlockCreateFromBlock. */
 extern unsigned int *resourceResolveDataPointer(fn_003510dc_arg0 *);
 /* Supplied declaration required: FUN_00291038. */
 /* Supplied declaration required: FUN_002b2d74. */
@@ -165,13 +165,13 @@ unsigned int * FUN_003510dc(fn_003510dc_arg0 *param_1)
         memAlloc(0x10000,0x100,0,temp_v0 << 2,0x10,1);
         puVar3[0xe] = temp_v3;
         puVar3[0xd] = temp_v3;
-        FUN_00243c24();
+        effBlockCreateFromBlock();
         temp_v3 = 1;
         *(unsigned int **)puVar3[0xd] = puVar4;
         if (temp_v0 >= 2) {
           do {
             temp_v2 = *(unsigned int *)puVar3[0xd];
-            FUN_00222180();
+            effBlockClone();
             *(unsigned int *)(puVar3[0xd] + temp_v3 * 4) = temp_v2;
             temp_v3 = temp_v3 + 1;
           } while (temp_v3 < temp_v0);

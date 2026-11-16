@@ -1,4 +1,4 @@
-/* NON_MATCHING: shared destination-copy block is placed after the first mode rather than the third, and the allocated-work global store uses different registers. */
+/* NON_MATCHING: with the copy in a helper the shared destination block is placed after mode 2 as in retail; armcc still branches `bne end; b mode2` where retail has `beq mode2; b end`, and stores the work global from r4 instead of r0. */
 #include "map/mapDepart.h"
 #include "shard/SaveWork.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -43,6 +43,17 @@ void FUN_002f4b2c(u32 process);
 u32 taskCreateDraw(const s8 *name, s32 priority, u16 firstDelay, u16 lastDelay,
     AsdProcUpdateFunc update, AsdProcFunc end, void *work, u32 parent);
 
+/* Past story stage 100 the request also carries the destination's state. */
+static __inline void mapDepartCopyDestination(MapDepartureInitView *work, const MapDepartureRequest *request)
+{
+    if (g_gameState.unk000 >= 100) {
+        work->destinationState[0] = request->destinationState[0];
+        work->destinationState[1] = request->destinationState[1];
+        work->destinationState[2] = request->destinationState[2];
+        work->destinationState[3] = request->destinationState[3];
+    }
+}
+
 void MapDepart_Init(const MapDepartureRequest *request)
 {
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\map\\mapDepart.cpp", 173);
@@ -56,34 +67,19 @@ void MapDepart_Init(const MapDepartureRequest *request)
             work->mode = 0;
             work->map = request->map;
             location->map = request->map;
-            if (g_gameState.unk000 >= 100) {
-                work->destinationState[0] = request->destinationState[0];
-                work->destinationState[1] = request->destinationState[1];
-                work->destinationState[2] = request->destinationState[2];
-                work->destinationState[3] = request->destinationState[3];
-            }
+            mapDepartCopyDestination(work, request);
             break;
         case 1:
             MapDepart_InitState(&work->prefix, 0);
             work->mode = 1;
             work->entry = request->entry;
-            if (g_gameState.unk000 >= 100) {
-                work->destinationState[0] = request->destinationState[0];
-                work->destinationState[1] = request->destinationState[1];
-                work->destinationState[2] = request->destinationState[2];
-                work->destinationState[3] = request->destinationState[3];
-            }
+            mapDepartCopyDestination(work, request);
             break;
         case 2:
             MapDepart_InitState(&work->prefix, 0);
             work->mode = 2;
             work->entry = request->entry;
-            if (g_gameState.unk000 >= 100) {
-                work->destinationState[0] = request->destinationState[0];
-                work->destinationState[1] = request->destinationState[1];
-                work->destinationState[2] = request->destinationState[2];
-                work->destinationState[3] = request->destinationState[3];
-            }
+            mapDepartCopyDestination(work, request);
             break;
         }
     } else {

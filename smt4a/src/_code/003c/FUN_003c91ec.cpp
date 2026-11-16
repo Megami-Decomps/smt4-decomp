@@ -25,7 +25,7 @@ extern u32 g_aocSystem;
 void *gameDataBlocksGetTable(void);
 void *configGetSettings(void);
 void __aeabi_memcpy4(void *dest, const void *src, u32 size);
-void wordPairCopy(void *dest, void *src);
+void ARM_common_memcpy4_8(void *dest, void *src);
 void FUN_00358cbc(void);
 void titleConfigApply(void);
 void aocActivateFileGroupFlags(u32 system);
@@ -36,7 +36,7 @@ void FUN_003c91ec(void)
 {
     if (g_saveLoadUIBase.snapshotA != NULL) {
         __aeabi_memcpy4(gameDataBlocksGetTable(), g_saveLoadUIBase.snapshotA, 0x80);
-        wordPairCopy(configGetSettings(), g_saveLoadUIBase.snapshotB);
+        ARM_common_memcpy4_8(configGetSettings(), g_saveLoadUIBase.snapshotB);
         __aeabi_memcpy4(gameDataBlocksGetSaveData(), g_saveLoadUIBase.snapshotC, 0x2a71c);
         FUN_00358cbc();
         titleConfigApply();

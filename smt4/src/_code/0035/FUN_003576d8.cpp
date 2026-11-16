@@ -5,7 +5,7 @@ extern "C" {
 /* Closes the kernel handle if one is held. */
 NnOsHandle *FUN_003576d8(NnOsHandle *handle)
 {
-    handle->~NnOsHandle();
+    handle->close();
     return handle;
 }
 

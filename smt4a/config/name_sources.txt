@@ -6940,3 +6940,12 @@
 004837ac objectPoolUpdate inferred [med] Walks 32 pool slots: updates live objects (vtable +0x10), deletes finished ones, decrements the count and primary-kind count.
 00482f20 controllerPoolUpdate inferred [med] Same shape as objectPoolUpdate over ControllerPool: updates controllers with flag bit 0, deletes the rest, adjusts count/firstKindCount.
 00422bf0 movieAudioDeviceRunLoop inferred [med] Sets the audio device run byte, then loops FUN_00422c48 + FUN_001c76b8 + a 0.5 ms sleep until another thread clears it.
+0018b1d0 nn_gxlow_CTR_AcquireGpuRight inferred [med] Twin of smt4 FUN_00129b14.
+001a28a8 nn_gxlow_CTR_InterruptRelayQueueRx_SuppressPdcEvents inferred [high] Called at the same site in FUN_0018b1d0 as smt4 nn_gxlow_CTR_InterruptRelayQueueRx_SuppressPdcEvents in the twin.
+00284d94 npcRoomIsOpen inferred [med] Twin of smt4 FUN_001dd8c0.
+001b5154 textureEntryAttachStex inferred [med] Twin of smt4 FUN_00153068.
+00222180 effBlockClone inferred [high] Same source as smt4 effBlockClone (both IDENTICAL).
+00243c24 effBlockCreateFromBlock inferred [high] Same source as smt4 effBlockCreateFromBlock (both IDENTICAL).
+001a9110 ARM_common_memcpy4_8 inferred [high] Same bytes as smt4 ARM_common_memcpy4_8 (armcc 8-byte copy helper).
+0013ea48 memoryDebugSetRegions inferred [med] Twin of smt4 FUN_0010a174 (same asdMemoryInit call, same source shape).
+0031e198 placeWinCreate inferred [med] Twin of smt4 FUN_002637c8 (same PlaceWin packets and tasks).

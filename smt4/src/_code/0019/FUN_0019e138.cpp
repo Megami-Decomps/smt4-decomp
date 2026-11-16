@@ -43,7 +43,7 @@ int FUN_0028b7f8(...);
 int playSceneFadeInStart(...);
 int FUN_0028be84(void);
 int btlTalkBustUpReleaseAllSlots(void);
-int FUN_0028bf2c(void);
+int btlTalkBustUpReleaseTexture(void);
 int FUN_0028cb40(...);
 int btlTalkBustUpSetUnk2F4(int);
 int btlTalkBustUpSetDemonTexture(int, int);
@@ -122,7 +122,7 @@ extern int battleTalkGetBustState(void);
 /* Supplied declaration required: FUN_0028be84. */
 extern int playSceneIsFadeOutDone(int);
 /* Supplied declaration required: btlTalkBustUpReleaseAllSlots. */
-/* Supplied declaration required: FUN_0028bf2c. */
+/* Supplied declaration required: btlTalkBustUpReleaseTexture. */
 /* Supplied declaration required: playSceneTimerSubStartReverse. */
 /* Supplied declaration required: playSceneFadeOutStart. */
 /* Supplied declaration required: FUN_0028bfe4. */
@@ -404,7 +404,7 @@ int FUN_0019e138(unsigned int job)
         }
         else {
           g_btlUi = 0;
-          FUN_0028bf2c();
+          btlTalkBustUpReleaseTexture();
           btlTalkBustUpSetDemonTexture(*puVar7,1);
           btlTalkBustUpSetUnk2F4(1);
           temp_v12 = reinterpret_cast<int>(btlGetMainState());

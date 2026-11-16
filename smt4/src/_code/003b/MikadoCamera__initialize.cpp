@@ -21,7 +21,7 @@ void FUN_00240cec(s32 arg);
 void spriteTable2aLoad(SelectionFlags *panel);
 void FUN_00282bfc(s32 slot, u32 value);
 void FUN_00235250(Mover *mover);
-void FUN_002637c8(void);
+void placeWinCreate(void);
 }
 
 void MikadoCamera::initialize()
@@ -65,5 +65,5 @@ void MikadoCamera::initialize()
     FUN_00282bfc(1, 0xFF);
     talkWork = new MikadoTalkWork;
     FUN_00235250(reinterpret_cast<Mover *>(talkWork));
-    FUN_002637c8();
+    placeWinCreate();
 }

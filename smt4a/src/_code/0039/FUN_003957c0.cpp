@@ -1,4 +1,4 @@
-/* NON_MATCHING: same loop and arithmetic, but retail shrink-wraps the zero-count exit (bxls lr before the push), reloads the colour table address every iteration and loads the cursor pair with a writeback; registers differ. */
+/* NON_MATCHING: shrink-wrapped zero-count exit and pool order now match retail (twin body of FUN_003ad97c); remaining: the prologue load order (retail zeroes the index before reading the params) and the loop register assignment (r4-r7 roles). */
 #include "common.h"
 
 struct Obj3957c0Segment {
@@ -39,13 +39,14 @@ extern "C" void FUN_003957c0(Obj3957c0 *obj)
     Obj3957c0Block *block = obj->block;
     u32 count = obj->params->count;
     Obj3957c0Segment *segment = block->segments;
-    for (u32 i = 0; i < count; i++) {
+    for (u32 i = 0; i < count; i++, segment++) {
+        const f32 scale = 0.003921569f;  /* 1/255 */
+        const u8 *bytes = DAT_005c1130;
         Obj3957c0Color *color = &block->geom->colors[(u16)i];
-        color->r = DAT_005c1130[0] * 0.003921569f * 0.003921569f;
-        color->g = DAT_005c1130[1] * 0.003921569f * 0.003921569f;
-        color->b = DAT_005c1130[2] * 0.003921569f * 0.003921569f;
-        color->a = DAT_005c1130[3] * 0.003921569f * 0.003921569f;
+        color->r = bytes[0] * scale * scale;
+        color->g = bytes[1] * scale * scale;
+        color->b = bytes[2] * scale * scale;
+        color->a = bytes[3] * scale * scale;
         segment->id = -1;
-        segment++;
     }
 }

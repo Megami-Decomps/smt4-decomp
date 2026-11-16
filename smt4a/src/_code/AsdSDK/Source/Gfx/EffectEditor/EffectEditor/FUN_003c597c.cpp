@@ -16,7 +16,7 @@ EffectSelectionParts *FUN_002b30e4(EffectSelectionItem *item);
 char *libc_strcpy(char *destination, const char *source);
 void *resourceResolveHeaderPointer(EffectSelectionBlock *block);
 void effPartSetData(EffectSelectionBlock *block, void *data, u32 size, u16 id);
-void *FUN_00243c24(EffectSelectionBlock *block);
+void *effBlockCreateFromBlock(EffectSelectionBlock *block);
 void effectEditorApplyHandlerState(void *instance);
 u32 nodeChainCount(void *owner);
 void objectRegistryInsert(void *resource, s32 mode);
@@ -60,7 +60,7 @@ extern "C" u32 FUN_003c597c()
         rt_memcpy(parts->data, resourceResolveHeaderPointer(g_effectEditor.selection.block), parts->size);
     if (parts->data != NULL)
         effPartSetData(g_effectEditor.selection.block, parts->data, parts->size, parts->id);
-    void *instance = FUN_00243c24(g_effectEditor.selection.block);
+    void *instance = effBlockCreateFromBlock(g_effectEditor.selection.block);
     effectEditorApplyHandlerState(instance);
     g_effectEditor.selection.instance = instance;
     g_effectEditor.selection.object = findTemplate(copy->block);

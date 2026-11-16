@@ -1,4 +1,3 @@
-/* NON_MATCHING: equivalent status-mask code, but compiler shares the final OR tail from the opposite cure branch. */
 #include "common.h"
 #include <stddef.h>
 
@@ -29,6 +28,7 @@ u32 FUN_003d2c20(const ActiveSkillStatusView *skill, u32 ailments)
             if (ailments & 0x800) result |= 0x800;
             if (ailments & 0x1000) result |= 0x1000;
             if (ailments & 0x2000) result |= 0x2000;
+            return result;
         } else if (effect == 23) {
             if (ailments & 0x80) result = 0x80;
         } else if (effect == 28) {

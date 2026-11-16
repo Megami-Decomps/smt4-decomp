@@ -10,8 +10,8 @@ extern const char DAT_00544b70[]; /* __FILE__ of effParticle.cpp */
 void *memAlloc(int, int, int, u32, int, int);
 void asdMemFree(void *ptr);
 void resourceDestroy(void *handle);
-void *FUN_00222180(void *handle);
-void *FUN_00243c24(void *init);
+void *effBlockClone(void *handle);
+void *effBlockCreateFromBlock(void *init);
 
 void effParticleRebuildHandles(EffParticleParam *param, void *init)
 {
@@ -31,9 +31,9 @@ void effParticleRebuildHandles(EffParticleParam *param, void *init)
         asdDebugTrace(DAT_00544b70, 0x242);
         param->buffer38 = memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
         param->handles34 = (void **)param->buffer38;
-        param->handles34[0] = FUN_00243c24(init);
+        param->handles34[0] = effBlockCreateFromBlock(init);
         for (i = 1; i < count; i++) {
-            param->handles34[i] = FUN_00222180(param->handles34[0]);
+            param->handles34[i] = effBlockClone(param->handles34[0]);
         }
     }
 }

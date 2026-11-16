@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00241d58(...);
 int statusCameraDestroy(void);
-int FUN_0028bf2c(void);
+int btlTalkBustUpReleaseTexture(void);
 int statusCameraSelectPreset(...);
 int resourceReleaseReference(...);
 int FUN_002958f8(...);
@@ -85,7 +85,7 @@ extern int effectAreAllCompletionChecksReady(unsigned int);
 extern unsigned int asdCameraLoadFromFile(unsigned char *);
 /* Supplied declaration required: FUN_00282bfc. */
 /* Supplied declaration required: statusCameraDestroy. */
-/* Supplied declaration required: FUN_0028bf2c. */
+/* Supplied declaration required: btlTalkBustUpReleaseTexture. */
 /* Supplied declaration required: asdAnimGetTrackLastFrame. */
 /* Supplied declaration required: statusCameraSelectPreset. */
 /* Supplied declaration required: resourceReleaseReference. */
@@ -534,7 +534,7 @@ LAB_0032a1a4:
       FUN_00241d58(temp_v2 + 0x38);
       resourceReleaseReference(*(unsigned int *)(temp_v2 + 0x80));
       *(unsigned int *)(temp_v2 + 0x80) = 0;
-      FUN_0028bf2c();
+      btlTalkBustUpReleaseTexture();
       asdMdlManagerMarkDestroy(*(unsigned int *)(temp_v2 + 0x88));
       asdMdlManagerDestroy(*(unsigned int *)(temp_v2 + 0x88));
       *(unsigned int *)(temp_v2 + 0x88) = 0;

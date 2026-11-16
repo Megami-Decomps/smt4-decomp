@@ -52,7 +52,7 @@ void drawParameterBlockClear(UiResourceParameters *parameters);
 void dataTable27Load(u32 *control);
 void asdTMTexTableLoadEntryAsync(u32 table, s32 entry);
 u32 asdTextCreate(u32 options);
-void FUN_002637c8(void);
+void placeWinCreate(void);
 void messageStatesSetFirst(s32 state);
 void qcMainSetMode(s32 mode);
 const QuestRuntimeDefinition *dataTable1bOr1cGetRecord(u32 id);
@@ -97,7 +97,7 @@ void FUN_00381b8c(QuestCenterScreenStateIV *work)
         work->texts[index] = 0;
         work->texts[index] = asdTextCreate(0);
     }
-    FUN_002637c8();
+    placeWinCreate();
     messageStatesSetFirst(0);
     qcMainSetMode(0);
     for (u16 id = 350; id < 400; ++id) {

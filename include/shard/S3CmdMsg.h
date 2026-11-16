@@ -4,6 +4,7 @@
 #define SHARD_S3CMDMSG_H
 
 #include "common.h"
+#include <stddef.h>
 
 typedef struct CmdMsg {
     /* 0x00 */ u8 type;
@@ -25,9 +26,18 @@ typedef struct CmdQueue {
     u8 unk00[4];
 } CmdQueue;
 
+/* The GPU interrupt relay queue's receiving end (nn::gxlow::CTR::InterruptRelayQueueRx). */
+typedef struct InterruptRelayQueueRx {
+    u8 unk00[4];
+} InterruptRelayQueueRx;
+
 typedef struct CmdManager {
-    /* 0x00 */ u8 unk00[0x58];
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ InterruptRelayQueueRx relayRx;
+    /* 0x34 */ u8 unk34[0x24];
     /* 0x58 */ CmdQueue queue;
 } CmdManager;
+
+typedef char CmdManagerOffsetCheck[offsetof(CmdManager, relayRx) == 0x30 && offsetof(CmdManager, queue) == 0x58 ? 1 : -1];
 
 #endif

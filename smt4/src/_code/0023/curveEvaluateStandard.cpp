@@ -1,7 +1,10 @@
-/* NON_MATCHING: compiler schedules the constant-one floating move differently around curve setup. */
-#include "common.h"
+/* NON_MATCHING: retail loads the -20.0f y argument (vldr s1) after `mov r1, #1`; the build loads it before. */
+#include "text/TextDraw.h"
+
 extern "C" {
-f32 textDrawString(u32 value,u32 mode,u32 argument,f32 first,f32 second,f32 third,f32 fourth,f32 scale);
-/* Evaluate the standard curve and truncate its floating result. */
-s32 curveEvaluateStandard(u32 argument,u32 value) { return (s32)textDrawString(value,1,argument,0.0f,-20.0f,0.0f,0.0f,1.0f); }
+/* Draws `text` on `layer` in colour 1, 20 units up, and returns the drawn extent truncated to an integer. */
+s32 curveEvaluateStandard(const char *text, u32 layer)
+{
+    return (s32)textDrawString(layer, 1, text, 0.0f, -20.0f, 0.0f, 0.0f, 1.0f);
+}
 }

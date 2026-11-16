@@ -39,6 +39,7 @@ void rt_memclr(void *destination, u32 size);
 /* Creates the decoder state and frame buffers for the given size; returns 1 on success. */
 u32 FUN_0023c168(MobiclipFrameSet *set, u32 width, u32 height, u32 frameCount, s32 flags, s32 mode)
 {
+    u32 i;
     if (mode == 0 || mode != 1)
         return 0;
     if (!(width <= 0x400 && flags == 0))
@@ -69,7 +70,7 @@ u32 FUN_0023c168(MobiclipFrameSet *set, u32 width, u32 height, u32 frameCount, s
     if (set->frames == NULL)
         return 0;
     u32 total = set->stride * (height + (height >> 1) + 1);
-    for (u32 i = 0; i < frameCount; i++) {
+    for (i = 0; i < frameCount; i++) {
         u8 *frame = (u8 *)callGlobalHook(total);
         set->frames[i] = frame;
         if (frame == NULL)

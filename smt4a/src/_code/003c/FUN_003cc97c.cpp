@@ -1,4 +1,4 @@
-/* NON_MATCHING: the sleep loop is laid out differently (retail jumps into a bottom test and reloads the 100000 constant in the loop; the build hoists it into r5 and tests at the top). */
+#include "nn/fnd/TimeSpan.h"
 #include "nn/svc.h"
 #include "nn/Result.h"
 #include "sys/ResultReport.h"
@@ -16,7 +16,7 @@ struct WaitObject {
 extern "C" {
 
 s32 FUN_0019a364(u32 *out, u32 handle, s32 value);
-void svcSleepThread(s64 nanoseconds);
+void svcSleepThread(nn::fnd::TimeSpan span);
 
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
 
@@ -37,7 +37,7 @@ void FUN_003cc97c(WaitObject *object, u32 state)
         FUN_002e3140(started, failed);
     }
     while (object->state != 0xffffffff || object->done != 0) {
-        svcSleepThread(100000);
+        svcSleepThread(nn::fnd::TimeSpan::FromMicroSeconds(100));
     }
 }
 

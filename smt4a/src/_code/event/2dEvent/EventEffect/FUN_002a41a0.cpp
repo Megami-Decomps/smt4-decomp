@@ -1,4 +1,4 @@
-/* NON_MATCHING: jump table and fade-out bhi now match; retail reads the filter textures through their own literal (DAT_0057f3e8, not a g_eventEffect offset), orders the pool as 0.0f/1.0f first, converts the duration into s2 (vcvt/vdiv write a fresh register) and indexes the texture table through r0. */
+/* NON_MATCHING: only the literal pool order differs: retail places the g_eventEffect address before the 1.0f constant. */
 #include "event/2dEvent/EventFilter.h"
 #include "code/Code0020.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -45,8 +45,8 @@ u32 FUN_002a41a0(void)
                 finished = work->opacity <= 0.0f;
             }
             if (finished) {
-                work->state = 5;
                 work->frame = 0;
+                work->state = 5;
                 work->opacity = 0.0f;
             }
         }

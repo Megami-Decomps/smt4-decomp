@@ -105,6 +105,7 @@ void uiSpriteSelectAnim(SceneSprite *sprite, s32 animation);
 /* Clear the scene's work areas; when `savePoint` is set, record the current map point into the flags block first. */
 void FUN_0029a794(SceneWork *work, s32 savePoint)
 {
+    s32 i;
     FlagWorkBanks *flags = gameFlagsGetBlock();
     work->unk048 = 0;
     work->unk04c = 0;
@@ -152,7 +153,7 @@ void FUN_0029a794(SceneWork *work, s32 savePoint)
     work->unk0b0[18] = 0;
     work->unk0b0[19] = 0;
     work->unk0b0[8] = 0;
-    for (s32 i = 0; i < 10; i++) {
+    for (i = 0; i < 10; i++) {
         work->unk4a0[i] = 0;
     }
     mapProbePositionDownward(&g_gameState.point.position);
@@ -184,7 +185,7 @@ void FUN_0029a794(SceneWork *work, s32 savePoint)
     work->unk490 = 0;
     FUN_0014e188(&work->sprite, 0x1d, 0, &work->packet, 1, 1.0f);
     uiSpriteSetKeyframe(&work->sprite, 0, 0);
-    for (s32 i = 0; i < 5; i++) {
+    for (i = 0; i < 5; i++) {
         FUN_0014e188(&work->sprites[i], 0x13, 0x11d4, &work->packet, 0xb, 1.0f);
         uiSpriteSelectAnim(&work->sprites[i], 0);
     }

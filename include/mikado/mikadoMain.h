@@ -15,6 +15,7 @@
 class MikadoTalkWork {
 public:
     static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
+    static void operator delete(void *block);
     u8 unk000[0x4CC];
     FloatState state;
     u8 unk52C[0x17F0 - 0x4CC - sizeof(FloatState)];

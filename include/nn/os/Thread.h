@@ -1,7 +1,8 @@
 /* nn::os::Thread as the games embed it: the kernel handle and a flag that says the thread has been
  * joined. The destructor finalizes the thread (joining it if that has not happened) and closes
- * whatever handle is left; owners reach it as `thread.~NnOsThread()` or through their own
- * destructor. */
+ * whatever handle is left (finalize(), then close(): the zero for the cleared handle reuses r0).
+ * An owner that has joined the thread itself finalizes it and closes the handle through
+ * NnOsHandle's destructor (FUN_002e2f14). */
 #ifndef NN_OS_THREAD_H
 #define NN_OS_THREAD_H
 
@@ -17,6 +18,13 @@ struct NnOsThread : NnOsHandle {
     /* 0x05 */ u8 unk05[3];
 
     ~NnOsThread()
+    {
+        finalize();
+        close();
+    }
+
+    /* Joins the thread unless that already happened. */
+    void finalize()
     {
         nn_os_Thread_FinalizeImpl(&handle);
     }

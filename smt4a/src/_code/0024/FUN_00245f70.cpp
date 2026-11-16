@@ -1,4 +1,4 @@
-/* NON_MATCHING: reset constants use different registers and the literal-pool order differs. */
+/* NON_MATCHING: pool order and the conditional sound call match; only the final reset stores differ (retail sets 7 in r1 and the zero in r0 and stores state first). */
 #include "map/mapIf.h"
 #include "map/mapDepart.h"
 
@@ -14,6 +14,7 @@ extern MapIfStateA *g_mapIf;
 extern GameStateA g_gameState;
 s32 FUN_003d4ed8(u32 sound, MapVector position);
 
+/* Finds the waiting map record of group `id`, plays its sound (unless input is blocked) and advances it to state 7. */
 void FUN_00245f70(s32 id)
 {
     for (s32 index = 0; index < 128; ++index) {
@@ -22,13 +23,14 @@ void FUN_00245f70(s32 id)
             (record->display.category == 0x25 || record->display.category == 0x28) &&
             record->state == 6 && record->groupView.id == id) {
             MapIfSoundView *details = (MapIfSoundView *)record;
+            GameStateA *state = &g_gameState;
             MapVector position = details->position;
             position.y += 120.0f;
-            if (g_gameState.inputBlocked == 0) {
+            if (state->inputBlocked == 0) {
                 FUN_003d4ed8(0x010002ab, position);
             }
-            record->state = 7;
             details->unk2c = 0;
+            record->state = 7;
             return;
         }
     }

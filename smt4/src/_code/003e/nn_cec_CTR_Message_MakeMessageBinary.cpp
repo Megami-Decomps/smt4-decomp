@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002ad8b4(int, int);
+int ARM_common_memcpy4_8(int, int);
 int rt_memcpy(...);
 
-/* Supplied declaration required: FUN_002ad8b4. */
+/* Supplied declaration required: ARM_common_memcpy4_8. */
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -26,7 +26,7 @@ unsigned int nn_cec_CTR_Message_MakeMessageBinary(int param_1,int param_2)
   if ((int)temp_v0 != 0) {
     do {
       temp_v2 = param_1 + temp_v1 * 0xc;
-      FUN_002ad8b4(param_2,temp_v2 + 0x70);
+      ARM_common_memcpy4_8(param_2,temp_v2 + 0x70);
       rt_memcpy(param_2 + 8,*(unsigned int *)(temp_v2 + 0x78),*(unsigned int *)(temp_v2 + 0x74));
       temp_v1 = temp_v1 + 1;
       param_2 = param_2 + 8 + ((*(int *)(temp_v2 + 0x74) + 3U) & 0xfffffffc);

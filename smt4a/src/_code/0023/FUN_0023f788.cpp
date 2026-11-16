@@ -1,4 +1,3 @@
-/* NON_MATCHING: snapshot default clears and optional-subject guards recovered; snapshot copy splits its third word out of retail's ldm/stm group. */
 #include "battle/BattleCommandTargets.h"
 #include "shard/Shard0032.h"
 #include "gamedata/Table04Record.h"
@@ -29,9 +28,10 @@ void FUN_0023f788(BattleCommandTargets *command)
         offsetof(SkillSelectionView, subjects) == 0x4210 ? 1 : -1];
     SkillSelectionView *selection = reinterpret_cast<SkillSelectionView *>(command);
     selection->skills = SkillLists();
+    s16 id;
     for (s32 subject = 0; subject < 4; ++subject) {
         SkillList skills = {0};
-        s16 id = selection->subjects[subject];
+        id = selection->subjects[subject];
         if (id == -4)
             continue;
         UnitRecord *unit;

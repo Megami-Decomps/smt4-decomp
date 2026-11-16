@@ -1,15 +1,16 @@
-/* NON_MATCHING: compiler hoists and shares the zero argument setup, changing instruction scheduling and literal-pool order; default and O2 agree on the mismatch. */
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 s32 FUN_0021073c(u32 handle);
-extern s32 DAT_004e3f64;
-extern void (*DAT_00465108)();
+extern s32 DAT_004e3f64;        /* process group the start menu runs in */
+extern void (*DAT_00465108)();  /* optional hook run after the menu starts */
 
 // Start the menu process, then invoke the optional start callback.
 void startMenuCreateProcess()
 {
-    asdProcessCreateSimple((const s8*)"StartMenu", DAT_004e3f64, 0, 0, FUN_0021073c, NULL, 0);
+    s32 *group = &DAT_004e3f64;
+
+    asdProcessCreateSimple((const s8*)"StartMenu", *group, 0, 0, FUN_0021073c, NULL, 0);
     if (DAT_00465108 != NULL) {
         DAT_00465108();
     }

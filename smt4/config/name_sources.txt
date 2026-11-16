@@ -4463,3 +4463,11 @@
 0034f800 mobiclipAudioDecoderCreate inferred [med] Twin of smt4a FUN_00423e14.
 0023a1b8 _ZN19AocAuxBufferRequestD1Ev inferred [high] Twin of smt4a _ZN19AocAuxBufferRequestD1Ev (0x4285cc): its tail call to the base D1 was turned into a NOP by armlink; already the alias at this address.
 0023a1bc _ZN14AocRequestBaseD1Ev inferred [high] Twin of smt4a _ZN14AocRequestBaseD1Ev (0x4285d0), the empty base destructor; smt4 _ZN16AocBufferRequestD1Ev branches here.
+00129b14 nn_gxlow_CTR_AcquireGpuRight inferred [med] Calls nn_gxlow_CTR_Gpu_AcquireRight and SuppressPdcEvents(0); mirror of nn_gxlow_CTR_ReleaseGpuRight placed right after it (0x129b7c).
+0010a174 memoryDebugSetRegions inferred [med] asdMemoryInit passes main/extra/VRAM A/VRAM B base and size; stores them into the memory debug state read by memoryDebugRefresh.
+001dd8c0 npcRoomIsOpen inferred [med] Returns !(g_npcRoom == NULL || state == NPC_ROOM_STATE_DONE); counterpart of npcRoomIsDone.
+00153068 textureEntryAttachStex inferred [med] Checks the STEX signature, creates the AsdTexture from the header and uploads it for a texture heap entry.
+002ad8b4 ARM_common_memcpy4_8 inferred [high] armcc 8-byte copy helper (ldr r2/ldr r3/str/str/bx), byte-identical to its generated __ARM_common_memcpy4_8; same family as ARM_common_memcpy4_6/7/9.
+002637c8 placeWinCreate inferred [med] PlaceWin.cpp debug trace; creates the PlaceWin Calc process and the PlaceWin DrawUpLeft/Right tasks.
+002a7838 mikadoCameraTeardown inferred [med] Called with work->camera by FUN_001fdff0 and mikadoDestroyCameraCallback; deletes camera->talkWork and runs into placeWinRelease.
+0028bf2c btlTalkBustUpReleaseTexture inferred [med] On g_btlTalkBustUp releases texture table 0x18 node via asdTMTexTableReleaseNode, then sets state 3.

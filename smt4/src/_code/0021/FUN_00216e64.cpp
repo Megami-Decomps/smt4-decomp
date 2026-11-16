@@ -15,7 +15,7 @@ int statusReplaceSkillList(int);
 int FUN_001ddbbc(void);
 int FUN_00215b40(int);
 int FUN_0026a978(...);
-int FUN_0028bf2c(void);
+int btlTalkBustUpReleaseTexture(void);
 int FUN_002954bc(...);
 int btlTalkBustUpSetUnk2F4(...);
 int btlTalkBustUpSetDemonTexture(...);
@@ -61,7 +61,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00215b40. */
 /* Supplied declaration required: FUN_0026a978. */
 extern int FUN_0026a9cc(unsigned short, unsigned char, int, short *, unsigned char);
-/* Supplied declaration required: FUN_0028bf2c. */
+/* Supplied declaration required: btlTalkBustUpReleaseTexture. */
 /* Supplied declaration required: resultUnitStepFinish. */
 /* Supplied declaration required: FUN_002954bc. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
@@ -150,7 +150,7 @@ void FUN_00216e64(int param_1)
     FUN_002bf818(temp_v14);
     if (*piVar17 == 0x10) {
       btlTalkBustUpSetUnk2F4(0);
-      FUN_0028bf2c();
+      btlTalkBustUpReleaseTexture();
       *(unsigned char *)(temp_v11 + 0x3c70) = 0;
       *(unsigned char *)(temp_v11 + 0x3c71) = 0;
       *(unsigned char *)(temp_v11 + 0x3c72) = 0;

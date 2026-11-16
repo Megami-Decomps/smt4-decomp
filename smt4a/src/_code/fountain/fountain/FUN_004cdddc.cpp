@@ -52,7 +52,7 @@ void FUN_001523b8(CameraMatrixCache *camera, u32 pivot, f32 first, f32 second, f
 void campCommonBgAcquire();
 void campButtonHelpAcquire();
 void asdLoadFileAsyncSimple(const char *name, void **output, u32 mode);
-void FUN_0031e198();
+void placeWinCreate();
 
 void FUN_004cdddc(FountainInitializationView *work)
 {
@@ -100,6 +100,6 @@ void FUN_004cdddc(FountainInitializationView *work)
     asdLoadFileAsyncSimple("fountain/fountain.bf", &work->effectFile, 0);
     asdLoadFileAsyncSimple("fountain/mes_data.mbm", &work->messageFile, 0);
     asdLoadFileAsyncSimple("fountain/Fountain.tbb", &work->tableFile, 0);
-    FUN_0031e198();
+    placeWinCreate();
 }
 }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: same stores and barrier; only the constant registers for the final two stores are allocated the other way round (r1/r2 swapped) */
+/* NON_MATCHING: constant registers now match; only the final two stores are in the other order (retail stores DAT_0059dba8 before the ready flag). */
 #include "nn/svc.h"
 
 struct AsdSoundStatus143800 {
@@ -28,7 +28,7 @@ void FUN_00143800(void)
     thread->unk1ec = 0;
     nn::os::DataMemoryBarrier();
     thread->callback = FUN_00154320;
-    DAT_0059dba8 = 20;
     g_asdSoundStatus.ready = 1;
+    DAT_0059dba8 = 20;
 }
 }

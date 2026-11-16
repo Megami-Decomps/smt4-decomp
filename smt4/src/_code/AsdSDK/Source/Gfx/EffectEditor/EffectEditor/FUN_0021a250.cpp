@@ -1,5 +1,5 @@
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers_effMenu.h"
-/* NON_MATCHING: rectangle copy register allocation adds one store; matrix load scheduling differs. */
+/* NON_MATCHING: IDENTICAL when the unit is compiled with -O2 (needs a cflags entry: -O2 -Otime); under the default -O3 the rectangle copy adds one store and the matrix loads are scheduled differently. */
 #include "AsdSDK/Source/Gfx/Effect/effMenuMatrix.h"
 #include "AsdSDK/AsdDebug.h"
 #include <string.h>

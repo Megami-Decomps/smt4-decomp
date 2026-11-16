@@ -1,4 +1,3 @@
-/* NON_MATCHING: g_gameState literal/count load precedes g_mapTrap literal/pointer load; model allocation, paths and enable operations match. */
 #include "map/mapTrap.h"
 #include "map/mapDepart.h"
 #include "Model/ModelList.h"
@@ -33,10 +32,9 @@ void FUN_00224498(s32 area, s32 map)
     };
     typedef char DisplayModelsOffsetsCheck[offsetof(DisplayModels, models) == 0x1C ? 1 : -1];
     mapTrapClearState();
-    MapTrapA *trap = g_mapTrap;
-    trap->setup.count = g_gameState.trapSetup.count;
-    if (trap->setup.count > 0) {
-        DisplayModels *display = reinterpret_cast<DisplayModels *>(&trap->display.phase);
+    g_mapTrap->setup.count = g_gameState.trapSetup.count;
+    if (g_mapTrap->setup.count > 0) {
+        DisplayModels *display = reinterpret_cast<DisplayModels *>(&g_mapTrap->display.phase);
         display->phase = 0;
         ModelList *first = static_cast<ModelList *>(FUN_00178b04(sizeof(ModelList),
             "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTrap.cpp", 0x7E));

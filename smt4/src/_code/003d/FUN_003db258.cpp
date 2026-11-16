@@ -28,10 +28,9 @@ u32 FUN_003db258(VersionedTextureOwner *owner, const char *effect)
     memClear(formatted, 0x80);
     textFormatBuffer(formatted, DAT_004008c4, effect);
     libc_strcpy(path, formatted);
-    char *fullPath = path;
-    libc_strcpy(request->name, FUN_002522e0(fullPath, '/') + 1);
+    libc_strcpy(request->name, FUN_002522e0(path, '/') + 1);
     if (keyedRecordFindByName(request->name) == 0xff) {
-        asdLoadFileAsyncSimple(fullPath, reinterpret_cast<u32 *>(&request->format), 0);
+        asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&request->format), 0);
         request->flags |= 1;
     }
     return 1;

@@ -1,4 +1,3 @@
-/* NON_MATCHING: default result is preserved correctly; forwarded fade argument is still shared before the family test rather than set in each tail-call branch. */
 #include "common.h"
 #include "kernel/jyoucyuGetTableEntry.h"
 
@@ -14,10 +13,10 @@ u32 FUN_003d2158(s32 soundId, u32 value)
     u32 result = 0;
     if (jyoucyuGetTableEntry(1) == NULL) {
         if (soundId >= 100000) {
-            return asdSoundApplyBankValue(soundId - 100000, value);
-        } else {
-            return asdSoundStopSlot(soundId, value);
+            soundId -= 100000;
+            return asdSoundApplyBankValue(soundId, value);
         }
+        return asdSoundStopSlot(soundId, value);
     }
     return result;
 }

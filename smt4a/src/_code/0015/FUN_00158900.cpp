@@ -1,4 +1,4 @@
-/* NON_MATCHING: cursor initialization and final text-load argument setup are scheduled differently. */
+/* NON_MATCHING: only the final call's argument setup order differs (retail sets r1, r0, then r2 = options; built sets r2 first). */
 #include "common.h"
 
 struct DecodeStateView {
@@ -26,8 +26,8 @@ void FUN_00158900(TextObjectView* object, const char* source, u32 options)
 {
     u16 text[264];
     DecodeStateView state = {0, 0};
-    u16* output = text;
     const char* cursor = source;
+    u16* output = text;
 
     refIsNullOrZero(&state);
     for (;;) {

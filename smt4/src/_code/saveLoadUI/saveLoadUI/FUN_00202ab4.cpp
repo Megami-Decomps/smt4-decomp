@@ -12,7 +12,7 @@ extern "C" {
 int fileSlotLoad(...);
 int asdLoadFileAsyncSimple(...);
 int asdTMTexTableLoadEntryAsync(...);
-int FUN_002ad8b4(...);
+int ARM_common_memcpy4_8(...);
 int buttonHelpSetPreset(...);
 int timerStart(...);
 int FUN_002bd954(...);
@@ -61,7 +61,7 @@ extern unsigned int gameDataBlocksGetTable(void);
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
-/* Supplied declaration required: FUN_002ad8b4. */
+/* Supplied declaration required: ARM_common_memcpy4_8. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
@@ -114,7 +114,7 @@ void FUN_00202ab4(void)
   temp_v0 = gameDataBlocksGetTable();
   __aeabi_memcpy4(puVar1[0xdf],temp_v0,0x80);
   temp_v0 = configGetSettings();
-  FUN_002ad8b4(puVar1[0xe0],temp_v0);
+  ARM_common_memcpy4_8(puVar1[0xe0],temp_v0);
   temp_v0 = gameDataBlocksGetSaveData();
   __aeabi_memcpy4(puVar1[0xe1],temp_v0,0x24d28);
   temp_v1 = gameDataBlocksGetSaveData();

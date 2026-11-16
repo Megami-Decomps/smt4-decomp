@@ -13,7 +13,7 @@ int cecProcessForward(...);
 int FUN_00262f78(void);
 int objectFlagSetBit(...);
 int btlTalkBustUpReleaseAllSlots(void);
-int FUN_0028bf2c(void);
+int btlTalkBustUpReleaseTexture(void);
 int btlTalkBustUpSetUnk2F4(...);
 int btlTalkBustUpSetDemonTexture(...);
 int textEncodeFontSlot(...);
@@ -61,7 +61,7 @@ extern int battleTalkIsBustReady(void);
 /* Supplied declaration required: FUN_0026b9bc. */
 /* Supplied declaration required: objectFlagSetBit. */
 /* Supplied declaration required: btlTalkBustUpReleaseAllSlots. */
-/* Supplied declaration required: FUN_0028bf2c. */
+/* Supplied declaration required: btlTalkBustUpReleaseTexture. */
 extern unsigned int aocEntryDataById(unsigned char, unsigned int);
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
@@ -177,7 +177,7 @@ unsigned int FUN_001ebedc(int param_1)
     }
     temp_v7 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xd04));
     if (temp_v7 == 2) {
-      FUN_0028bf2c();
+      btlTalkBustUpReleaseTexture();
       break;
     }
     return temp_v18;
@@ -439,7 +439,7 @@ LAB_001ec4d0:
     temp_v7 = battleTalkIsBustReady();
     if (temp_v7 != 0) {
       *(unsigned int *)(param_1 + 0xd38) = 0;
-      FUN_0028bf2c();
+      btlTalkBustUpReleaseTexture();
       temp_v18 = 2;
       *(unsigned int *)(param_1 + 0xd2c) = 6;
     }

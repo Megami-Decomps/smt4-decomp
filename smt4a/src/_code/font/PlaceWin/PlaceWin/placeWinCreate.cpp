@@ -1,18 +1,25 @@
-/* NON_MATCHING: packet-template final pointer/size stores are paired in a different register order. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "font/PlaceWin.h"
 #include "AsdSDK/AsdDebug.h"
 #include <stddef.h>
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
-struct PlaceWindowResourceTable {
-    u8 first[0x18];
-    u8 second[0x18];
-    u8 third[0x70];
+/* The place window's image, scale, and animation parameter packets. */
+static const u32 sPlaceWinPacketA[6] = {
+    0x00000000, 0x00000000, 0x00000000, 0x0000FEC0, 0x00000000, 0x00000008
+};
+static const u32 sPlaceWinPacketB[6] = {
+    0x3F800000, 0x3F800000, 0x00000000, 0x3F800000, 0x00000000, 0x00000004
+};
+static const u32 sPlaceWinPacketC[28] = {
+    0x00000001, 0x00000000, 0xFFFFFFFD, 0x00000000, 0x00000000, 0xFFFFFFFD,
+    0x00000000, 0xFFFFFFFF, 0x00000000, 0xFFFFFFFF, 0xFFFFFFFF, 0x00000000,
+    0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFFD, 0x00000001,
+    0x00000000, 0xFFFFFFFD, 0x00000000, 0xFFFFFFFF, 0x00000000, 0xFFFFFFFF,
+    0xFFFFFFFF, 0x00000000, 0xFFFFFFFF, 0x00000000
 };
 extern "C" {
 extern PlaceWindow *g_placeWin;
-extern const u8 DAT_0052fb5c[];
 void *asdMemoryAllocTracked(u32 pool, u32 alignment, u32 flags, u32 bytes, u32 clear);
 void sysMemClear(void *destination, u32 bytes);
 u32 placeWindowUpdateAnimation(u32 job);
@@ -25,7 +32,7 @@ void FUN_0014e188(void *animation, u32 layer, u32 resource, const void *packet, 
 void uiSpriteSelectAnim(void *animation, u32 index);
 
 /* Allocate the place caption window, create its update/draw jobs and initialize its animation. */
-void FUN_0031e198(void)
+void placeWinCreate(void)
 {
     if (g_placeWin == NULL) {
         asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\font\\PlaceWin\\PlaceWin.cpp", 166);
@@ -39,11 +46,9 @@ void FUN_0031e198(void)
     taskCreateDraw("PlaceWin DrawUpRight", 0xE2, 0, 0, placeWinDraw, 0, 0, window->job);
     window = g_placeWin;
     paramsClearPacket(window->parameters.packet);
-    /* Retail's symbol anchors the final subtable of the contiguous packet template. */
-    const PlaceWindowResourceTable *defaults = reinterpret_cast<const PlaceWindowResourceTable *>(
-        DAT_0052fb5c - offsetof(PlaceWindowResourceTable, third));
-    paramsInit(reinterpret_cast<UiResourceParameters *>(window->parameters.packet), defaults->first, 0x18, defaults->second, 0x18,
-               0, 0, 0, 0, defaults->third, 0x70);
+    paramsInit(reinterpret_cast<UiResourceParameters *>(window->parameters.packet),
+               sPlaceWinPacketA, sizeof(sPlaceWinPacketA), sPlaceWinPacketB, sizeof(sPlaceWinPacketB),
+               NULL, 0, NULL, 0, sPlaceWinPacketC, sizeof(sPlaceWinPacketC));
     FUN_0014e188(window->animation, 8, 0x87, window->parameters.packet, 1, 1.0f);
     uiSpriteSelectAnim(window->animation, 0);
 }

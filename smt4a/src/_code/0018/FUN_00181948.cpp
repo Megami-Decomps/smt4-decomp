@@ -1,4 +1,4 @@
-/* NON_MATCHING: duration division overwrites s0 instead of using s2; next-key address/load scheduling differs. */
+/* NON_MATCHING: control flow and stores match; the frame-key address is formed after the step store (retail before it) and the sequence-step lookup allocates r2/r5/r6 differently. */
 #include "ui/UiSpriteState.h"
 
 static inline UiSpriteFrameKey *spriteFrameSet(UiSpriteSource *source, s16 requested)
@@ -34,9 +34,8 @@ extern "C" void FUN_00181948(UiSpriteState *sprite, f32 rate)
     if (image == -1) {
         if (sprite->frameSequenceState.enabled != 0 && sprite->frameSequence != NULL &&
             sprite->frameSequence[sprite->frameSequenceState.step].key != -1) {
-            UiSpriteFrameSequenceStep *sequence = sprite->frameSequence;
             ++sprite->frameSequenceState.step;
-            s32 next = sequence[sprite->frameSequenceState.step].key;
+            s32 next = sprite->frameSequence[sprite->frameSequenceState.step].key;
             if (next != -1 && next != -3) {
                 keys = spriteFrameSet(sprite->source, (s16)next);
                 sprite->frameKeys = keys;
@@ -61,6 +60,6 @@ extern "C" void FUN_00181948(UiSpriteState *sprite, f32 rate)
         sprite->unk08 = ~0u;
         return;
     }
-    sprite->unk04 = image;
     sprite->unk08 = ~0u;
+    sprite->unk04 = image;
 }

@@ -133,6 +133,18 @@ extern "C" ReflectContext *g_btlActionReflect;
 extern "C" ReflectAction *btlQueueReflectAction(ReflectContext *context,
     s32 actor, s32 secondary, u32 options);
 
+/* Queues a status change (action 29) on `target`: `value` and the status `mask`. Inlined into the
+ * action builders, which evaluate the value and mask before the queue call. */
+static __inline void btlReflectQueueStatusChange(s16 actor, u32 options, const void *target,
+    u32 value, u32 mask)
+{
+    ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, actor, 0, options);
+    action->kind = 29;
+    action->target = (u32)target;
+    action->value = value;
+    action->parameter = mask;
+}
+
 #ifdef __cplusplus
 extern "C" {
 #endif

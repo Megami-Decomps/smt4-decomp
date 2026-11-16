@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses mov r4, #0 where the compiled block uses mov r3, #0. */
 #include "common.h"
 
 struct ResetState {
@@ -48,8 +47,10 @@ extern "C" {
 extern ResetState g_gameState;
 extern EntryCollection* g_mapEnemy;
 
+/* Clears the shared game state counters and resets every eligible map enemy entry. */
 void FUN_00272f88(void)
 {
+    s32 index;
     EntryCollection* collection = g_mapEnemy;
     const f32 resetValue = 0.0f;
     g_gameState.active = 0;
@@ -68,7 +69,7 @@ void FUN_00272f88(void)
     g_gameState.value1e4 = resetValue;
     g_gameState.value1e8 = resetValue;
 
-    for (s32 index = 0; index < 40; ++index) {
+    for (index = 0; index < 40; ++index) {
         ResetEntry& entry = collection->entries[index];
         if (entry.active != 0 && entry.category != 0 &&
             entry.category < 11 && entry.blocked == 0 &&

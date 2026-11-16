@@ -1,11 +1,11 @@
-/* NON_MATCHING: the 10 ms sleep constant is hoisted into a fourth saved register; retail loads it at the call. */
+#include "nn/fnd/TimeSpan.h"
 #include "common.h"
 #include "nn/Result.h"
 
 extern "C" {
 
 extern s32 FUN_001a3010(u32 request);
-extern void svcSleepThread(u32 low, u32 high);
+extern void svcSleepThread(nn::fnd::TimeSpan span);
 
 /* Retries request 0x407 until it succeeds or fails with the final error; sleeps 10 ms
  * whenever the service answers that it is busy. */
@@ -18,7 +18,7 @@ void FUN_0043bffc(void)
             return;
         }
         if (result == (s32)0xe0a0cc08) {
-            svcSleepThread(10000000, 0);
+            svcSleepThread(nn::fnd::TimeSpan::FromMilliSeconds(10));
         }
     }
 }

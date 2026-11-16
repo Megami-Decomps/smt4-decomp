@@ -8,7 +8,7 @@ extern "C" {
 int gameDataBlocksGetSaveData(void);
 int asdMemoryAlloc(int, int, int, unsigned int, int);
 int asdMemFree(unsigned int);
-int wordPairCopy(unsigned int, int);
+int ARM_common_memcpy4_8(unsigned int, int);
 int FUN_00268250(...);
 int FUN_002c9104(void);
 int gameApplyFlagTriggers(void);
@@ -35,7 +35,7 @@ extern int DAT_0057f6c4; /* 0x57f6c4 */
 extern int jobGetWork(void);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: wordPairCopy. */
+/* Supplied declaration required: ARM_common_memcpy4_8. */
 extern int gameGetSlotRecord(int);
 extern int gameGetSlotTable(void);
 extern int partyFindSlotById(unsigned int);
@@ -99,7 +99,7 @@ unsigned int FUN_003712a4(void)
       temp_v6 = gameDataBlocksGetTable();
       __aeabi_memcpy4(temp_v6,temp_v4,0x80);
       temp_v6 = configGetSettings();
-      wordPairCopy(temp_v6,temp_v4 + 0x80);
+      ARM_common_memcpy4_8(temp_v6,temp_v4 + 0x80);
       temp_v6 = gameDataBlocksGetSaveData();
       __aeabi_memcpy4(temp_v6,temp_v4 + 0x88,0x2a71c);
       gameApplyFlagTriggers();

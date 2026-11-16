@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002399ec(int *);
 int _ZN12CecMessageIdC1Ev(unsigned char [8]);
 int FUN_002ad66c(int *, int **);
-int FUN_002ad8b4(...);
+int ARM_common_memcpy4_8(...);
 int FUN_002c567c(int **);
 int FUN_003588fc(void);
 int FUN_003e0578(...);
@@ -43,7 +43,7 @@ extern int *FUN_002399bc(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002399ec. */
 /* Supplied declaration required: _ZN12CecMessageIdC1Ev. */
 /* Supplied declaration required: FUN_002ad66c. */
-/* Supplied declaration required: FUN_002ad8b4. */
+/* Supplied declaration required: ARM_common_memcpy4_8. */
 /* Supplied declaration required: FUN_002c567c. */
 /* Supplied declaration required: FUN_003588fc. */
 /* Supplied declaration required: FUN_003e0578. */
@@ -332,8 +332,8 @@ int * FUN_00357a38(int *param_1,int param_2,int param_3,unsigned int param_4,int
   temp_v0 = nn_cec_CTR_MessageId_IsEmpty((unsigned int)temp_v12);
   if (temp_v0) {
     temp_v4 = FUN_002393a4((unsigned int *)&temp_v9,(unsigned int *)&temp_v13);
-    FUN_002ad8b4(temp_v12,temp_v4);
-    FUN_002ad8b4(temp_v25,temp_v12);
+    ARM_common_memcpy4_8(temp_v12,temp_v4);
+    ARM_common_memcpy4_8(temp_v25,temp_v12);
   }
   if (param_3 == 1 && !temp_v8) {
     temp_v9 = 2;

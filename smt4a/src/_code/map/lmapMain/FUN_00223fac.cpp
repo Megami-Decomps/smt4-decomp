@@ -1,4 +1,4 @@
-/* NON_MATCHING: cold initialization now sits out of line as in retail; remaining: retail predicates the countdown reset (ldrle/movle/strle) before the decrement, ours branches, and the popup-state constants are scheduled differently. */
+/* NON_MATCHING: cold initialization out of line and popup stores match; retail predicates the countdown reset (ldrle/movle/strle) before the decrement, ours branches. */
 #include "map/mapDepart.h"
 #include "gamedata/GameFlags.h"
 
@@ -30,8 +30,8 @@ void FUN_00223fac(void)
         }
         if (g_gameState.popup.countdown <= 0) {
             g_gameState.popup.countdown = 5;
-            g_popupState->state = 20;
             g_popupState->timer = 0;
+            g_popupState->state = 20;
             g_popupState->process = FUN_002d8b58(21, 187);
         } else {
             --g_gameState.popup.countdown;

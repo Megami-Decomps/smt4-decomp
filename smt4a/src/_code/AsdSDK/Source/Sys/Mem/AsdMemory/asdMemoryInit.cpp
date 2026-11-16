@@ -21,7 +21,7 @@ void rt_memclr(u32 base, u32 size);
 void heapOwnerCreate(void *expHeap, u32 base, u32 size, u32 flags);
 void nn_os_CriticalSection_Initialize(void *lock);
 void FUN_00159138(void *expHeap, u32 block, u32 size);
-void FUN_0013ea48(u32 mainBase, u32 mainSize, u32 extraBase, u32 extraSize, u32 vramABase, u32 vramASize, u32 vramBBase, u32 vramBSize);
+void memoryDebugSetRegions(u32 mainBase, u32 mainSize, u32 extraBase, u32 extraSize, u32 vramABase, u32 vramASize, u32 vramBBase, u32 vramBSize);
 void FUN_00140728(AsdVramHeap *heap, u32 base, u32 size);
 void *asdMemoryAllocTracked(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
@@ -57,7 +57,7 @@ void asdMemoryInit(void)
     sys->vramB.base = vramAreaGetBaseAddress(ASD_HEAP_VRAM_B);
     sys->vramB.size = nngxGetVramEndAddr(ASD_HEAP_VRAM_B) - sys->vramB.base;
     sys->vramBBase = sys->vramB.base;
-    FUN_0013ea48(sys->main.base, sys->main.size, sys->extra.base, sys->extra.size,
+    memoryDebugSetRegions(sys->main.base, sys->main.size, sys->extra.base, sys->extra.size,
                  sys->vramA.base, sys->vramA.size, sys->vramB.base, sys->vramB.size);
 
     table = (AsdMemTable *)asdMemoryAllocTracked(ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, sizeof(AsdMemTable), 1);

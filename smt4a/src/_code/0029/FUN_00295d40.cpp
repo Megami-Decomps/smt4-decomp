@@ -18,8 +18,8 @@ void FUN_00295d40(void)
             entry->direction.y = 0.0f;
             entry->direction.z = 0.0f;
         } else {
-            entry->kind |= 1;
             QueuedVector *previous = entry - 1;
+            entry->kind |= 1;
             f32 length = distSpatial(entry->x, entry->y, entry->z,
                                      previous->x, previous->y, previous->z);
             if (length < 0.0f)

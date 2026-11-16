@@ -124,7 +124,9 @@ typedef struct BtlMainState {
             /* 0x3F4 */ BtlEncounterEntry records[50];
         } encounter;
         struct {
-            u8 unk0000[0x84];
+            u8 unk0000[0x7C];
+            /* 0x7C */ u32 flags;  /* bit 0 picks action kind 10 over 11 */
+            u8 unk80[4];
             /* 0x84 */ s32 index;
             /* 0x88 */ s32 mode;
         } actionState;

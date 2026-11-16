@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002399ec(int);
-int FUN_002ad8b4(int *, int);
+int ARM_common_memcpy4_8(int *, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
@@ -18,7 +18,7 @@ typedef struct {
 
 extern int FUN_002399bc(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002399ec. */
-/* Supplied declaration required: FUN_002ad8b4. */
+/* Supplied declaration required: ARM_common_memcpy4_8. */
 
 
 unsigned int nn_cec_CTR_MessageBox_ReadOutBoxIndex(int *param_1)
@@ -47,7 +47,7 @@ unsigned int nn_cec_CTR_MessageBox_ReadOutBoxIndex(int *param_1)
         temp_v2 = (**(romwright_code **)(*param_1 + 0x34))(param_1,temp_v1,temp_v3,&temp_v4,param_1[1],5,0x12);
         if (-1 < temp_v2) {
           if (temp_v4 != 0) {
-            FUN_002ad8b4(param_1 + 0x157,temp_v1);
+            ARM_common_memcpy4_8(param_1 + 0x157,temp_v1);
           }
           if (((short)param_1[0x157] == 0x6767) && (param_1[0x158] == (temp_v3 - 8U) >> 3)) {
 LAB_00239350:
@@ -56,7 +56,7 @@ LAB_00239350:
             if (param_1[0x158] != 0) {
               do {
                 temp_v2 = temp_v2 + 8;
-                FUN_002ad8b4(param_1 + temp_v0 * 2 + 0x159,temp_v2);
+                ARM_common_memcpy4_8(param_1 + temp_v0 * 2 + 0x159,temp_v2);
                 temp_v0 = temp_v0 + 1;
               } while (temp_v0 < (unsigned int)param_1[0x158]);
             }
@@ -70,7 +70,7 @@ LAB_00239350:
               temp_v2 = (**(romwright_code **)(*param_1 + 0x34))
                                 (param_1,temp_v1,temp_v3,&temp_v4,param_1[1],5,0x12);
               if (((-1 < temp_v2) &&
-                  (FUN_002ad8b4(param_1 + 0x157,temp_v1), (short)param_1[0x157] == 0x6767)) &&
+                  (ARM_common_memcpy4_8(param_1 + 0x157,temp_v1), (short)param_1[0x157] == 0x6767)) &&
                  (param_1[0x158] == (temp_v3 - 8U) >> 3)) goto LAB_00239350;
             }
             param_1[0x158] = 0;

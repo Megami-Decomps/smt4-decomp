@@ -1,7 +1,6 @@
-/* NON_MATCHING: structure matches retail; register allocation is permuted (retail keeps the part in r5 and the zero in r9, the kind in sl) and the inlined block clone narrows the handler index differently, as in FUN_00222180. */
+/* NON_MATCHING: structure matches retail and the inlined block clone (effBlockAllocate) now re-extends the kind as retail does; register allocation is still permuted (retail keeps the part in r5, the zero in r9 and the kind in sl). */
 #include "AsdSDK/Source/Gfx/Effect/effParts.h"
-#include "AsdSDK/Source/Gfx/Effect/effPartsBlock.h"
-#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Gfx/Effect/effPartsAlloc.h"
 
 struct EffPartNode;
 
@@ -45,9 +44,6 @@ struct EffOrientation {
 };
 
 extern "C" {
-extern const char g_effPartsSourcePath[];
-extern EffBlockHandler g_handlerTable[];
-void *memAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 category, u32 track);
 void sysMemClear(void *block, s32 size);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_001b4ddc(void *part);
@@ -68,27 +64,13 @@ static inline EffPartList *effPartNew(void)
     return part;
 }
 
-/* Create a block like `source` with its own copy of the data object (the body of FUN_00222180). */
+/* Create a block like `source` with its own copy of the data object (the body of effBlockClone). */
 static inline EffBlock *effBlockClone(EffBlock *source)
 {
-    u16 kind = source->kind;
-    asdDebugTrace(g_effPartsSourcePath, 46);
-    EffBlock *block = (EffBlock *)memAlloc(0x10000, 0x100, 0, sizeof(EffBlock), 0x10, 1);
-    block->flags = 0;
-    block->unk08 = 0;
-    block->unk0c = 0;
-    block->dataA = NULL;
-    block->sizeA = 0;
-    block->ownedA = NULL;
-    block->unk1c = 0;
-    block->dataB = NULL;
-    block->sizeB = 0;
-    block->ownedB = NULL;
-    block->id = 0xDC;
-    block->kind = kind;
+    EffBlock *block = effBlockAllocate(source->kind);
     block->tagA = source->tagA;
     block->tagB = source->tagB;
-    block->unk08 = (u32)g_handlerTable[kind].clone((void *)source->unk08);
+    block->unk08 = (u32)g_handlerTable[block->kind].clone((void *)source->unk08);
     return block;
 }
 

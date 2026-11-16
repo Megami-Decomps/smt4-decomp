@@ -19,8 +19,8 @@ void FUN_0013c1fc(void)
     } else {
         DAT_005b4000.available = 0;
     }
-    s32 available = DAT_005b4000.available;
     const InputCounterBinding *binding = DAT_0053d740;
+    s32 available = DAT_005b4000.available;
     u32 *counter = DAT_00640000;
     for (s32 index = 0; index < 31; ++index, ++binding, ++counter) {
         u32 buttons;

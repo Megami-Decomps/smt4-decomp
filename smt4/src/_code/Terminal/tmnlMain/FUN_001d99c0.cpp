@@ -65,7 +65,7 @@ int FUN_002c29d8(...);
 int FUN_002cf570(...);
 int FUN_002fc008(...);
 
-int FUN_002637c8(void);
+int placeWinCreate(void);
 int FUN_00263988(...);
 int FUN_00281bb0(unsigned int);
 int gameDataGetPlayerName(void);
@@ -137,7 +137,7 @@ extern int FUN_0025a030(unsigned int);
 /* Supplied declaration required: FUN_002636d0. */
 extern int effectAreAllCompletionChecksReady(unsigned int);
 extern int effTimelineIsDone(unsigned int);
-/* Supplied declaration required: FUN_002637c8. */
+/* Supplied declaration required: placeWinCreate. */
 /* Supplied declaration required: FUN_00263988. */
 extern unsigned int asdCameraLoadFromFile(unsigned char *);
 /* Supplied declaration required: FUN_0026e70c. */
@@ -343,7 +343,7 @@ unsigned int FUN_001d99c0(void)
         FUN_002c1edc(puVar7 + 0x12,temp_v7,temp_v8,temp_v9);
         FUN_002c1e30(puVar7 + 0x12,1);
         FUN_00298d50(puVar7 + 0x12);
-        FUN_002637c8();
+        placeWinCreate();
         FUN_002898e4();
         buttonHelpCreate();
         temp_v3 = asdLoadFileSync(&LAB_001d9e0c,temp_v11,1,0x80);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: block order only: retail falls through from the 70% test into the shared `return 5` and places the 3/4 choice after it. */
+/* NON_MATCHING: block order only (the 3/4 choice now compares with 39 as retail): retail falls through from the 70% test into the shared `return 5` and places the 3/4 choice after it. */
 #include "common.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/btlAction.h"
@@ -28,9 +28,10 @@ u32 FUN_0024b96c(void)
             if (total != 0) {
                 percent = active * 100 / total;
             }
-            if (percent < 70) {
-                return (percent < 40) ? 3 : 4;
+            if (percent >= 70) {
+                return 5;
             }
+            return (percent <= 39) ? 3 : 4;
         }
     }
     return 5;

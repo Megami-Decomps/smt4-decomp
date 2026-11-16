@@ -7,14 +7,14 @@
 extern "C" {
 extern u32 DAT_00471ba4; /* 0x471ba4 */
 
-void FUN_002ad8b4(u32 *destination, const u32 *source);
+void ARM_common_memcpy4_8(u32 *destination, const u32 *source);
 
 /* Sends command 0x50100 carrying a pair of words and a 64-bit value; on success stores the third reply word. */
 s32 FUN_00129628(u32 *reply, const u32 *pair, u64 value)
 {
     nn::os::IpcCommandBuffer *command = nn::os::GetIpcCommandBuffer();
     nn::os::SetIpcWord(command, 0, 0x50100);
-    FUN_002ad8b4(&command->words[0], pair);
+    ARM_common_memcpy4_8(&command->words[0], pair);
     memcpy(&command->words[2], &value, sizeof value);
     s32 result = nn::svc::SendSyncRequest(DAT_00471ba4);
     if (nnResultIsSuccess(result)) {

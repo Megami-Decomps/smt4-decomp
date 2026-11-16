@@ -1,22 +1,24 @@
-/* NON_MATCHING: contiguous template arguments use different stack-store grouping and base-relative arithmetic. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "font/PlaceWin.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "sys/Task.h"
-#include <stddef.h>
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/AsdMemUtil.h"
 
-struct PlaceWindowTemplateResources {
-    u8 first[0x18];
-    u8 second[0x18];
-    u8 commands[0x70];
-};
-
 extern "C" {
 extern PlaceWindow *g_placeWin;
-extern const u8 DAT_00403a58[];
+/* The place window's sprite resource packets, in retail's order (0x18, 0x18 and 0x70 bytes). */
+static const u32 sPlaceWinPacketA[6] = {
+    0, 0, 0, 0xfec0, 0, 8,
+};
+static const u32 sPlaceWinPacketB[6] = {
+    0x3f800000, 0x3f800000, 0, 0x3f800000, 0, 4,
+};
+static const u32 sPlaceWinPacketC[28] = {
+    1, 0, 0xfffffffd, 0, 0, 0xfffffffd, 0, 0xffffffff, 0, 0xffffffff, 0xffffffff, 0, 0xffffffff, 0,
+    0, 0, 0xfffffffd, 1, 0, 0xfffffffd, 0, 0xffffffff, 0, 0xffffffff, 0xffffffff, 0, 0xffffffff, 0,
+};
 s32 FUN_0032a9fc(u32);
 void placeWindowDrawLabel(void *);
 u32 taskCreateDraw(const char *, s32, s32, s32, TaskFunc, TaskFunc, void *, u32);
@@ -26,7 +28,7 @@ void FUN_002bd954(void *, u32, u32, void *, u32, f32);
 void spriteStartAnimationByIndex(void *, u32);
 
 /* Create the place-name window's update process, stereo draw tasks and animation data. */
-void FUN_002637c8()
+void placeWinCreate()
 {
     if (g_placeWin == NULL) {
         asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\font\\PlaceWin\\PlaceWin.cpp", 166);
@@ -39,12 +41,8 @@ void FUN_002637c8()
     taskCreateDraw("PlaceWin DrawUpRight", 0xdf, 0, 0, placeWindowDrawLabel, NULL, NULL, window->job);
     window = g_placeWin;
     drawParameterBlockClear(window->parameters.packet);
-    /* The retail symbol names the command member of this contiguous resource block. */
-    const PlaceWindowTemplateResources *resources = reinterpret_cast<const PlaceWindowTemplateResources *>(
-        DAT_00403a58 - offsetof(PlaceWindowTemplateResources, commands));
-    paramsInit(reinterpret_cast<UiResourceParameters *>(window->parameters.packet), resources->first, sizeof(resources->first),
-               resources->second, sizeof(resources->second), NULL, 0, NULL, 0,
-               resources->commands, sizeof(resources->commands));
+    paramsInit(reinterpret_cast<UiResourceParameters *>(window->parameters.packet), sPlaceWinPacketA, sizeof(sPlaceWinPacketA),
+               sPlaceWinPacketB, sizeof(sPlaceWinPacketB), NULL, 0, NULL, 0, sPlaceWinPacketC, sizeof(sPlaceWinPacketC));
     FUN_002bd954(window->animation, 0xe, 0x87, window->parameters.packet, 1, 1.0f);
     spriteStartAnimationByIndex(window->animation, 0);
 }

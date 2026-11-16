@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail stores the state/step pair with STRD and forms the flags write-back address from a base register (ldrh [r0,#4]!). */
+/* NON_MATCHING: only the target flag update differs: retail forms the flags address with a write-back load (ldrh r1, [r0, #4]!; strh r1, [r0]), the build addresses [r0, #4] twice. */
 #include "classes/Obj55c8d0.h"
 #include "classes/Obj55c89c.h"
 #include "shard/S1ListMenu.h"
@@ -34,7 +34,12 @@ void FUN_004d05c4(Obj55ca08 *, s32, s32, s32);
 void Obj55c89c::FUN_004a15a0()
 {
     Obj55c8d0 * menu = reinterpret_cast<Obj55c8d0 *>(this);
-    struct StateView { u8 prefix[0x14]; u32 state; u32 step; };
+    struct StatePair {
+        StatePair(u32 state, u32 step) : state(state), step(step) {}
+        u32 state;
+        u32 step;
+    };
+    struct StateView { u8 prefix[0x14]; StatePair pair; };
     struct CountView { u8 prefix[8]; s32 count; };
     struct SelectionView {
         u8 prefix[0xFC];
@@ -60,8 +65,7 @@ void Obj55c89c::FUN_004a15a0()
         sysPlaySe(block->variant == 1 ? 0x4E : 0x4F);
     FUN_0032cfe0(menu);
     FUN_003343f0(0);
-    state->state = 2;
-    state->step = 0;
+    state->pair = StatePair(2, 0);
     pointConvertToFloat(&menu->rectangle, 0, 0);
     BibleSelectionTarget *target = reinterpret_cast<BibleSelectionTarget *>(menu->touchSelection.unk34);
     target->vtbl->apply(target, &menu->flags);

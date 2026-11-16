@@ -1,4 +1,3 @@
-/* NON_MATCHING: first animated-member address is placed directly in r0 rather than passed through r1. */
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -7,6 +6,8 @@ void efctSetSpeed(f32 speed);
 void FUN_00493518(TextLayoutContextA *context, s32 sprite, s32 x, s32 y, u32 flags, f32 scale);
 f32 vec2GetSpeed(const void *object);
 
+/* Draws the panel decoration sprites at the layout position of `row`: the first group runs at the first
+ * animated member's speed, the last sprite at the last member's; `alternate` picks the second sprite set. */
 void FUN_004a80d8(PanelTextOwnerPrefixA *owner, s32 row, u32 flags, s32 alternate, f32 scale)
 {
     // Layout and animated member data extend beyond the shared text-owner prefix.
@@ -31,7 +32,8 @@ void FUN_004a80d8(PanelTextOwnerPrefixA *owner, s32 row, u32 flags, s32 alternat
         reinterpret_cast<TextLayoutContextA *>(panel->layout), row + 0x42F));
     s32 x = position->x;
     s32 y = position->y;
-    efctSetSpeed(vec2GetSpeed(&panel->first) * scale);
+    const AnimatedMember *first = &panel->first;
+    efctSetSpeed(vec2GetSpeed(first) * scale);
     FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x426, x, y, flags, scale);
     FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x426, x, y, flags, scale);
     FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x428, x, y, flags, scale);

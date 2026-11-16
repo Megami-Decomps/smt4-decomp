@@ -13,7 +13,7 @@ int FUN_00202178(int);
 int effEditorNodeChainApply(unsigned int *);
 int effBlockCreate(void);
 int effBlockLoadClone(...);
-int FUN_00243c24(void);
+int effBlockCreateFromBlock(void);
 int effBlockCopyDataB(unsigned int, unsigned int [2], int);
 int taskRunWithObject(unsigned int, int, int);
 int effPartSetData(void);
@@ -77,7 +77,7 @@ extern unsigned int DAT_0059ea30; /* 0x59ea30 */
 /* Supplied declaration required: effEditorNodeChainApply. */
 /* Supplied declaration required: effBlockCreate. */
 /* Supplied declaration required: effBlockLoadClone. */
-/* Supplied declaration required: FUN_00243c24. */
+/* Supplied declaration required: effBlockCreateFromBlock. */
 /* Supplied declaration required: effBlockCopyDataB. */
 /* Supplied declaration required: taskRunWithObject. */
 extern unsigned int resourceResolveHeaderPointer(void);
@@ -222,7 +222,7 @@ LAB_0039ab4c:
       effPartSetData();
     }
     temp_v2 = DAT_0059dbfc;
-    FUN_00243c24();
+    effBlockCreateFromBlock();
     effectEditorApplyHandlerState();
     DAT_0059dc18 = piVar3[1];
     DAT_0059dbf8 = temp_v2;
@@ -268,7 +268,7 @@ LAB_0039ab4c:
         g_effectEditorSavedSnapshot.payload.saved.words[2] = *(unsigned int *)(param_2 + 0x14);
         temp_v5 = effBlockLoadClone(*(unsigned int *)(param_2 + 8));
         temp_v6 = temp_v5;
-        FUN_00243c24();
+        effBlockCreateFromBlock();
         DAT_0059dc00 = temp_v6;
         objectRegistryInsert(temp_v5,3);
       }

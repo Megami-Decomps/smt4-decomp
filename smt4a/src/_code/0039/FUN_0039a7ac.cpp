@@ -11,7 +11,7 @@ s32 campIsState85(void);
 s32 sub68OwnerCall2(void);
 s32 namePollShutdown(void);
 s32 titleMainIsRunning(void);
-s32 FUN_00284d94(void);
+s32 npcRoomIsOpen(void);
 s32 QuestCenterMode_IsBusy(void);
 s32 shopPollShutdown(void);
 s32 onesRoomIsRunning(void);
@@ -51,7 +51,7 @@ u32 FUN_0039a7ac(void)
                 if (campIsState85() != 0) {
                     shown = 1;
                 } else if (((sub68OwnerCall2() == 0 || campIsState85() != 0) || namePollShutdown() != 0) &&
-                           titleMainIsRunning() == 0 && FUN_00284d94() == 0 && QuestCenterMode_IsBusy() == 0 &&
+                           titleMainIsRunning() == 0 && npcRoomIsOpen() == 0 && QuestCenterMode_IsBusy() == 0 &&
                            shopPollShutdown() == 0 && onesRoomIsRunning() == 0 && FUN_00270a70() == 0) {
                     shown = 1;
                 }

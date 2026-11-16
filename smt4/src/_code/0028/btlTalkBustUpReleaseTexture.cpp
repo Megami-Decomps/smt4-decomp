@@ -1,4 +1,3 @@
-/* NON_MATCHING: recovered texture table/index release arguments; reset zeros remain hoisted across calls. */
 #include "common.h"
 #include "shard/W6_W6Match3_WaveArchiveReader.h"
 
@@ -19,22 +18,29 @@ extern u32 g_aocSystem;
 
 void asdTMTexTableReleaseNode(s32 table, s32 node);
 
+/* Sets the talk bust-up's loaded flag, if it exists. */
+static __inline void btlTalkBustUpSetLoaded(u8 loaded)
+{
+    BustUp *bustUp = g_btlTalkBustUp;
+    if (bustUp != NULL) {
+        bustUp->loaded = loaded;
+    }
+}
+
 /* Releases the talk bust-up's texture slot (if it has one) and resets it to state 3. */
-void FUN_0028bf2c(void)
+void btlTalkBustUpReleaseTexture(void)
 {
     BustUp *bustUp = g_btlTalkBustUp;
 
     if (bustUp != NULL) {
         if (bustUp->slot >= 0) {
             asdTMTexTableReleaseNode(0x18, bustUp->slot);
-            if (g_btlTalkBustUp != NULL) {
-                g_btlTalkBustUp->loaded = 0;
-            }
+            btlTalkBustUpSetLoaded(0);
             FUN_002a60cc(g_aocSystem, 0x18, bustUp->slot);
             bustUp->slot = -1;
         }
-        bustUp->state = 3;
         bustUp->unk2EC = 0;
+        bustUp->state = 3;
     }
 }
 

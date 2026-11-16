@@ -1,4 +1,3 @@
-/* NON_MATCHING: block layout: retail ends the top-entry path with the shared state store and return, and the no-healing path branches back to it; armcc places the store after both paths. */
 #include "common.h"
 #include "code/Code0034.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
@@ -33,27 +32,27 @@ void FUN_004cdbd4(FountainMenu *menu)
     if (scrRunOpcodesStub(menu->script) != 2)
         return;
     messageBannerRestartOrClear();
-    if (messageMainGetValue() != 0) {
+    if (messageMainGetValue() == 0) {
+        menu->state = 7;
+        if (FUN_004ced50(menu) != 0) {
+            menu->state = 8;
+            FUN_004ce300(menu);
+            return;
+        }
+        if (FUN_0034919c() != 0)
+            messageDismissNumericBanner(0);
+        index = tableGroupFindEntryIndex(menu->tableGroup, DAT_00530cc8);
+        if (index >= 0)
+            scrScriptProcessStartEntry(menu->script, index);
+        menu->state = 10;
+    } else {
         if (FUN_0034919c() != 0)
             messageDismissNumericBanner(0);
         index = tableGroupFindEntryIndex(menu->tableGroup, DAT_00530cdc);
         if (index >= 0)
             scrScriptProcessStartEntry(menu->script, index);
         menu->state = 5;
-        return;
     }
-    menu->state = 7;
-    if (FUN_004ced50(menu) != 0) {
-        menu->state = 8;
-        FUN_004ce300(menu);
-        return;
-    }
-    if (FUN_0034919c() != 0)
-        messageDismissNumericBanner(0);
-    index = tableGroupFindEntryIndex(menu->tableGroup, DAT_00530cc8);
-    if (index >= 0)
-        scrScriptProcessStartEntry(menu->script, index);
-    menu->state = 10;
 }
 
 } /* extern "C" */

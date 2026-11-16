@@ -1,47 +1,36 @@
-/* NON_MATCHING: the global base address is loaded after the first call instead of before it. */
+/* NON_MATCHING: retail loads g_btlUi's address before uiFadeRelease (owner r5, g_btlUi r6, ui r4); here it is loaded after the call. A local pointer to g_btlUi hoists the load but renumbers owner/global/ui to r6/r4/r5. */
 #include "common.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "battle/btlUI.h"
 
 extern "C" {
 
-typedef struct Workspace {
-    /* 0x0000 */ u8 unk0000[0x2460];
-    /* 0x2460 */ u8 buffer[0x59C0];
-    /* 0x7E20 */ u32 handle;
-} Workspace;
-
-typedef struct WorkspaceHolder {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ Workspace *workspace;
-} WorkspaceHolder;
-
-typedef struct Owner {
+/* The battle UI job's work: the job it runs on. */
+typedef struct BtlUiJobWork {
     /* 0x00 */ u8 unk00[0x54];
-    /* 0x54 */ void *context;
-} Owner;
+    /* 0x54 */ u32 job;
+} BtlUiJobWork;
 
-extern WorkspaceHolder g_btlUi;
+extern BtlUiGlobals g_btlUi;
 
-int FUN_00287188(void *buffer);
+int FUN_00287188(BtlUiObjC *object);
 int uiFadeRelease(void);
 int asdMemFreeNonNull(u32 handle);
-int jobStop(void *context, int arg);
+int jobStop(u32 job, int delay);
 
-/* Tears down the global workspace: releases its buffer and handle, frees it, then frees the owner's context. */
-void FUN_001e1874(Owner *owner)
+/* Tears down the battle UI: releases its widget and panel memory, frees the UI block, then stops the owner's job. */
+void FUN_001e1874(BtlUiJobWork *owner)
 {
-    Workspace *workspace;
-
     uiFadeRelease();
-    workspace = g_btlUi.workspace;
-    FUN_00287188(workspace->buffer);
-    asdMemFreeNonNull(workspace->handle);
-    workspace->handle = 0;
-    if (g_btlUi.workspace != NULL) {
-        asdMemFree(g_btlUi.workspace);
-        g_btlUi.workspace = NULL;
+    BtlUi *ui = g_btlUi.ui;
+    FUN_00287188(&ui->objC);
+    asdMemFreeNonNull(ui->panelState.unk20);
+    ui->panelState.unk20 = 0;
+    if (g_btlUi.ui != NULL) {
+        asdMemFree(g_btlUi.ui);
+        g_btlUi.ui = NULL;
     }
-    jobStop(owner->context, 0);
+    jobStop(owner->job, 0);
 }
 
 } /* extern "C" */

@@ -1,4 +1,3 @@
-/* NON_MATCHING: paramsInit's stack-argument scratch register differs (retail keeps the second byte count 36 in r2, built uses r0). */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "shard/W6_W6Match6_SortMenu.h"
 #include "AsdSDK/AsdDebug.h"
@@ -8,19 +7,22 @@
 #include "AsdSDK/AsdMemUtil.h"
 #include "font/ComWin/ComWin.h"
 
-/* The sort menu's image, scale, and animation parameter tables are compiled together. */
-struct SortMenuParameterData { u32 first[6], second[9], third[42]; };
-extern "C" const SortMenuParameterData DAT_00402d1c = {
-    {0x00000082, 0x0000FFC8, 0x00010028, 0x00000014, 0x00000000, 0x00000004},
-    {0x00000000, 0x3F800000, 0x00000004, 0x3F800000, 0x3F000000, 0x00000014,
-     0x3F000000, 0x3F800000, 0x00000028},
-    {0xFFFFFFFD, 0x00000000, 0xFFFFFFFD, 0x00000001, 0x00000000, 0xFFFFFFFD,
-     0x00000000, 0xFFFFFFFD, 0x00000000, 0xFFFFFFFD, 0x00000002, 0x00000000,
-     0xFFFFFFFD, 0x00000000, 0xFFFFFFFE, 0x00000000, 0xFFFFFFFD, 0xFFFFFFFE,
-     0x00000000, 0xFFFFFFFD, 0x00000000, 0xFFFFFFFF, 0x00000000, 0xFFFFFFFF,
-     0xFFFFFFFF, 0x00000000, 0xFFFFFFFF, 0x00000000, 0x00000001, 0x00000000,
-     0xFFFFFFFD, 0x00000000, 0x00000000, 0xFFFFFFFD, 0x00000000, 0xFFFFFFFF,
-     0x00000000, 0xFFFFFFFF, 0xFFFFFFFF, 0x00000000, 0xFFFFFFFF, 0x00000000}
+/* The sort menu's sprite resource packets, in retail's order (0x18, 0x24 and 0xa8 bytes). */
+static const u32 sSortMenuPacketA[6] = {
+    0x00000082, 0x0000FFC8, 0x00010028, 0x00000014, 0x00000000, 0x00000004,
+};
+static const u32 sSortMenuPacketB[9] = {
+    0x00000000, 0x3F800000, 0x00000004, 0x3F800000, 0x3F000000, 0x00000014,
+    0x3F000000, 0x3F800000, 0x00000028,
+};
+static const u32 sSortMenuPacketC[42] = {
+    0xFFFFFFFD, 0x00000000, 0xFFFFFFFD, 0x00000001, 0x00000000, 0xFFFFFFFD,
+    0x00000000, 0xFFFFFFFD, 0x00000000, 0xFFFFFFFD, 0x00000002, 0x00000000,
+    0xFFFFFFFD, 0x00000000, 0xFFFFFFFE, 0x00000000, 0xFFFFFFFD, 0xFFFFFFFE,
+    0x00000000, 0xFFFFFFFD, 0x00000000, 0xFFFFFFFF, 0x00000000, 0xFFFFFFFF,
+    0xFFFFFFFF, 0x00000000, 0xFFFFFFFF, 0x00000000, 0x00000001, 0x00000000,
+    0xFFFFFFFD, 0x00000000, 0x00000000, 0xFFFFFFFD, 0x00000000, 0xFFFFFFFF,
+    0x00000000, 0xFFFFFFFF, 0xFFFFFFFF, 0x00000000, 0xFFFFFFFF, 0x00000000,
 };
 
 extern "C" {
@@ -48,9 +50,9 @@ void sortMenuCreate(u32 owner, u8 option)
         work->draw = taskCreateDraw("SORT DDRAW", 231, 0, 0, FUN_001a26dc, NULL, 0, work->calculate);
         SortMenuWork *current = g_useCounter.work;
         drawParameterBlockClear(&current->parameters);
-        paramsInit(&current->parameters, DAT_00402d1c.first, sizeof(DAT_00402d1c.first),
-                   DAT_00402d1c.second, sizeof(DAT_00402d1c.second), NULL, 0, NULL, 0,
-                   DAT_00402d1c.third, sizeof(DAT_00402d1c.third));
+        paramsInit(&current->parameters, sSortMenuPacketA, sizeof(sSortMenuPacketA),
+                   sSortMenuPacketB, sizeof(sSortMenuPacketB), NULL, 0, NULL, 0,
+                   sSortMenuPacketC, sizeof(sSortMenuPacketC));
         for (s32 i = 0; i < 13; ++i) {
             FUN_002bd954(&current->sprites[i], 30, 0, &current->parameters, 1, 1.0f);
             uiSpriteSetImageKeyframe(&current->sprites[i], 0, 0);

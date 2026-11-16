@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation (retail keeps the save block in sl and recomputes the 0x21e14 float address instead of holding it) */
+/* NON_MATCHING: the save-block pointer and the &g_gameDataBlocks base swap sl/fp, and retail addresses the 0x21e14 float from the save block (0x21c00 + 0x214) where the build goes through the game data (+0x88, +0x18c). */
 #include "common.h"
 #include "gamedata/GameFlags.h"
 
@@ -39,8 +39,7 @@ void __aeabi_memcpy4(void *dst, void *src, u32 size);
  * values at 0x8c, 0x21e14 and 0x27ec5; when keep is 1, those and flags 0x556/0x557/0x421 are restored. */
 void FUN_00239b10(s32 keep)
 {
-    SaveBlock *block = g_gameDataBlocks.saveBlock;
-    GameData *data = &block->gameData;
+    GameData *data = &g_gameDataBlocks.saveBlock->gameData;
     u8 saved27e3d = data->unk27e3d;
     f32 saved04 = data->unk04;
     s32 flag556 = gameFlagIsSet(0x556);

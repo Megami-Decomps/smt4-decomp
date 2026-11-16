@@ -1,4 +1,4 @@
-/* NON_MATCHING: upload-entry indexing and the double-buffer selection use different address registers. */
+/* NON_MATCHING: entry addressing now matches; retail selects the buffer (mov #0/movne #1) and loads it before computing the size, the build computes the size first and selects with movne/moveq. */
 #include "common.h"
 
 struct GpuUploadEntry {
@@ -26,10 +26,9 @@ u32 FUN_002c2424(u32 buffer, u32 size);
 u32 FUN_002c2390(GpuUploadState *state)
 {
     for (s32 index = 0; index < state->entryCount; ++index) {
-        GpuUploadEntry *entry = &state->entries[index];
-        if (entry->active) {
-            FUN_002c2424(entry->buffers[state->bufferIndex != 0],
-                         state->vertexCount * entry->componentCount * 4);
+        if (state->entries[index].active) {
+            FUN_002c2424(state->entries[index].buffers[state->bufferIndex != 0],
+                         state->vertexCount * state->entries[index].componentCount * 4);
         }
     }
     return FUN_002c2424(state->buffers[state->bufferIndex != 0], state->vertexCount << 1);

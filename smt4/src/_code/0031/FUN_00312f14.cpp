@@ -7,7 +7,7 @@
 #include "script/ScriptArgs.h"
 
 extern "C" {
-void FUN_002ad8b4(BattleChoiceRow* destination, const BattleChoiceRow* source);
+void ARM_common_memcpy4_8(BattleChoiceRow* destination, const BattleChoiceRow* source);
 
 s32 FUN_00312f14(void)
 {
@@ -19,7 +19,7 @@ s32 FUN_00312f14(void)
     table = btlMainGetDataTable(btlGetMainState(), 7);
     BattleChoiceRow* weightRows = static_cast<BattleChoiceRow*>(dataTableGetEntries(table));
     BattleChoiceRow weights;
-    FUN_002ad8b4(&weights, &weightRows[row]);
+    ARM_common_memcpy4_8(&weights, &weightRows[row]);
     s32 total = 0;
     if (!candidates[row].values[0]) {
         weights.values[0] = 0;

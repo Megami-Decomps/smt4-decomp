@@ -1,4 +1,3 @@
-/* NON_MATCHING: tail layout only: retail ends the third choice with `mov r6, r1; b <shared scrSetResult tail>`; built duplicates the scrSetResult/return sequence for it. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
@@ -14,6 +13,19 @@ typedef struct GameOptions {
 s32 scrSetResult(s32 value);
 GameOptions *gameGetSupportUnitData(void);
 s32 randNextInRange(u16 range);
+
+/* Counts down to the picked one of the non-zero choices: true when `choice` is it. */
+static __inline bool choiceIsPicked(u16 choice, s32 &pick)
+{
+    if (choice == 0) {
+        return false;
+    }
+    if (pick == 0) {
+        return true;
+    }
+    pick--;
+    return false;
+}
 
 /* Script command: with gameGetOptionProgressStatus() == 1, picks one of the options' non-zero choices at random; the result defaults to 2. */
 u32 FUN_002f607c(void)
@@ -35,28 +47,12 @@ u32 FUN_002f607c(void)
             count++;
         }
         pick = randNextInRange(count);
-        if (options->choiceA != 0) {
-            if (pick == 0) {
-                result = options->choiceA;
-                scrSetResult(result);
-                return 1;
-            }
-            pick--;
-        }
-        if (options->choiceB != 0) {
-            if (pick == 0) {
-                result = options->choiceB;
-                scrSetResult(result);
-                return 1;
-            }
-            pick--;
-        }
-        if (options->choiceC != 0) {
-            if (pick == 0) {
-                result = options->choiceC;
-                scrSetResult(result);
-                return 1;
-            }
+        if (choiceIsPicked(options->choiceA, pick)) {
+            result = options->choiceA;
+        } else if (choiceIsPicked(options->choiceB, pick)) {
+            result = options->choiceB;
+        } else if (choiceIsPicked(options->choiceC, pick)) {
+            result = options->choiceC;
         }
     }
     scrSetResult(result);

@@ -12,7 +12,7 @@
 class Obj42247c : public BibleView {
 public:
     Obj42247c();
-    virtual ~Obj42247c() {}
+    virtual ~Obj42247c();
     static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
     static void operator delete(void *block) { asdMemFreeNonNull(block); }
     virtual void start() = 0;
@@ -50,5 +50,14 @@ public:
     /* 0x59C */ u32 unk59c;
     /* 0x5A0 */ u32 unk5a0;
 };
+
+/* Destroys the embedded touch selection. Inline for the derived classes (their deleting destructors
+ * inline it); the D0 unit defines it out of line, as armcc emitted it with the vtable. */
+#ifndef OBJ42247C_DESTRUCTOR_DEFINITION
+inline
+#endif
+Obj42247c::~Obj42247c()
+{
+}
 
 #endif

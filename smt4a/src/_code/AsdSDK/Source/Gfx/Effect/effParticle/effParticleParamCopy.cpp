@@ -10,7 +10,7 @@ void resourceDestroy(void *handle);
 void asdMemFree(void *ptr);
 void *memAlloc(int heap, int alignClass, int unk08, u32 size, int align, int fromFront);
 void *FUN_00291038(void *handle);
-void *FUN_00222180(void *handle);
+void *effBlockClone(void *handle);
 void *handleRefIncrement(void *object);
 void *handleBlockRefCreate(void *object);
 void handleBlockUnref(void *object);
@@ -56,7 +56,7 @@ void effParticleParamCopy(EffParticleParam *dst, EffParticleParam *src)
         dst->buffer38 = memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
         dst->handles34 = (void **)dst->buffer38;
         for (i = 0; i < count; i++) {
-            dst->handles34[i] = FUN_00222180(src->handles34[0]);
+            dst->handles34[i] = effBlockClone(src->handles34[0]);
         }
         break;
     case 6:

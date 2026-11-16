@@ -13,8 +13,9 @@ s32 ifTouchRegionAdd(s32 x, s32 y, s32 width, s32 height);
 
 void FUN_0024b0e8()
 {
+    s32 index;
     TitleConfigA *menu = g_titleConfig;
-    for (s32 index = 0; index < menu->countB; ++index) {
+    for (index = 0; index < menu->countB; ++index) {
         ifTouchRegionRemove();
     }
     fillTwoWordsWithByte(menu->touchRegions, 0xffffffff);

@@ -46,10 +46,7 @@ static __inline void *effBlockDataA(EffBlock *block)
     if (block->ownedA != NULL) {
         return block->dataA;
     }
-    if (block->dataA != NULL) {
-        return (u8 *)block + (u32)block->dataA;
-    }
-    return NULL;
+    return block->dataA != NULL ? (u8 *)block + (u32)block->dataA : NULL;
 }
 
 /* Blob B's data address, or NULL if it has none. */

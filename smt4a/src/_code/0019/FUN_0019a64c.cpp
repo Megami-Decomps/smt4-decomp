@@ -1,16 +1,16 @@
-/* NON_MATCHING: only register numbering differs: retail loads the usage pointer into r2 and the allocation size into r1 for both category updates (build: usage r1, size r2). */
+/* NON_MATCHING: the first category update now matches; in the payload update retail loads usage into r3 and the alignment into r1 (build: r1 and r3). */
 #include "sys/AllocationTracking.h"
 
 extern "C" {
 extern AllocationTracking g_allocationAddressRanges;
 u32 FUN_0019c40c(AllocationHeaderA *allocation);
 
-static void addCategoryBytes(AllocationUsage *usage, u32 category, u32 bytes)
+static void addCategoryBytes(u32 bytes, AllocationUsage *usage, u32 category)
 {
     usage->categoryBytes[category] = bytes + usage->categoryBytes[category];
 }
 
-static void addCategoryPayloadBytes(AllocationUsage *usage, u32 category, u32 bytes)
+static void addCategoryPayloadBytes(u32 bytes, AllocationUsage *usage, u32 category)
 {
     usage->categoryPayloadBytes[category] = bytes + usage->categoryPayloadBytes[category];
 }
@@ -23,9 +23,9 @@ void FUN_0019a64c(AllocationHeaderA *allocation)
     usage->bytes += allocation->size;
     if ((usage->tag & 0xff) < 8) {
         u32 category = FUN_0019c40c(allocation);
-        addCategoryBytes(g_allocationAddressRanges.usage, category, allocation->size);
+        addCategoryBytes(allocation->size, g_allocationAddressRanges.usage, category);
         category = FUN_0019c40c(allocation);
-        addCategoryPayloadBytes(g_allocationAddressRanges.usage, category, allocation->size - allocation->alignment - 0x40);
+        addCategoryPayloadBytes(allocation->size - allocation->alignment - 0x40, g_allocationAddressRanges.usage, category);
     }
     usage = g_allocationAddressRanges.usage;
     AllocationLink *link = &allocation->link;

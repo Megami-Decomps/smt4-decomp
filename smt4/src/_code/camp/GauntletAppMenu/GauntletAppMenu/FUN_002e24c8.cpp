@@ -1,4 +1,3 @@
-/* NON_MATCHING: paramsInit's stack-argument constant 48 uses r0 instead of r2; its third table relocates as DAT_004028f0 + 0x54 instead of DAT_00402944. */
 /* Creates the Gauntlet app menu: work area, processes, sprites and its resource files. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
@@ -31,13 +30,27 @@ void gauntletAppMenuExit(void);
 extern GauntletAppMenuWork *g_gauntletAppMenu;
 extern const char DAT_00402a08[];
 
-/* The menu's draw parameter tables, consecutive in the rodata. */
-struct GauntletParamTables {
-    u8 first[0x24];
-    u8 second[0x30];
-    u8 third[0xC4];
+/* A fade key of the menu's draw parameters: the value moves from `from` to `to` over `frames`. */
+struct GauntletFadeKey {
+    f32 from;
+    f32 to;
+    s32 frames;
 };
-extern const GauntletParamTables DAT_004028f0;
+
+/* The menu's draw parameter tables for paramsInit; the original file defined them statically. */
+static const s32 sGauntletParamsFirst[9] = { 320, 0, 8, 0, 0xFEC0, 4, 300, 0xFFC4, 0x10028 };
+static const GauntletFadeKey sGauntletParamsSecond[4] = {
+    { 1.0f, 0.5f, 20 }, { 0.5f, 1.0f, 40 }, { 0.0f, 1.0f, 5 }, { 1.0f, 0.0f, 25 },
+};
+static const s32 sGauntletParamsThird[49] = {
+    -3, 0, -3, 0, 0, -3, 0,
+    -3, 0, -3, 1, 0, -3, 0,
+    -3, 0, -3, -2, 0, -3, 0,
+    -1, 0, -1, -1, 0, -1, 0,
+    -3, 0, -3, 2, 0, 0, 0,
+    -3, 0, -3, 3, 0, 1, 0,
+    -1, 0, -1, -1, 0, -1, 0,
+};
 
 u32 FUN_002e24c8(void)
 {
@@ -67,8 +80,9 @@ u32 FUN_002e24c8(void)
     menu->list.table = dataTableGetEntries(table);
     menu->list.tableCount = dataTableGetCount(table);
     drawParameterBlockClear(menu->list.params);
-    paramsInit(reinterpret_cast<UiResourceParameters *>(menu->list.params), DAT_004028f0.first, 0x24, DAT_004028f0.second, 0x30, NULL, 0, NULL, 0,
-               DAT_004028f0.third, 0xC4);
+    paramsInit(reinterpret_cast<UiResourceParameters *>(menu->list.params), sGauntletParamsFirst, sizeof(sGauntletParamsFirst),
+               sGauntletParamsSecond, sizeof(sGauntletParamsSecond), NULL, 0, NULL, 0,
+               sGauntletParamsThird, sizeof(sGauntletParamsThird));
     FUN_002bd954(&menu->list.sprites[0], 29, 0, menu->list.params, 1.0f, 201);
     timerStart(&menu->list.sprites[0], 0, 0);
     FUN_002bd954(&menu->list.sprites[1], 29, 0, menu->list.params, 1.0f, 201);

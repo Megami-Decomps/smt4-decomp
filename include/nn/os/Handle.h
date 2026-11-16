@@ -18,6 +18,15 @@ struct NnOsHandle {
             handle = 0;
         }
     }
+
+    /* Closes the handle if one is held, keeping the object. */
+    void close()
+    {
+        if (handle != 0) {
+            nn::svc::CloseHandle(handle);
+            handle = 0;
+        }
+    }
 };
 
 typedef char NnOsHandleLayoutCheck[
