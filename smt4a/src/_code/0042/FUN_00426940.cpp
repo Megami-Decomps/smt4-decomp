@@ -1,5 +1,6 @@
-/* NON_MATCHING: the mode byte and the push {r0-r3, r4-r6, lr} spill match (memcpy of the parameter); retail copies the three stack words with integer ldm/stm, armcc uses vldm/vstm for the 12-byte copy (the library's integer copy needs --fpu=none, which also changes the strd) */
+/* NON_MATCHING: IDENTICAL when compiled with --cpu=MPCore --fpu=softvfp (no VFP: retail copies the three stack words (ldm/stm) with core registers); the default build uses VFP. Needs that unit cflags. */
 #include "nn/svc.h"
+#include "nn/os/IpcStaticBuffer.h"
 #include "nn/Result.h"
 #include <string.h>
 
@@ -17,12 +18,12 @@ s32 FUN_00426940(u32 *out, u32 handle, s32 count, u8 mode, u32 a, u32 b, u32 c)
     command->words[2] = a;
     command->words[3] = b;
     command->words[4] = c;
-    command->words[5] = (count * 0x180) | 0xc;
+    command->words[5] = ipcMappedBufferDescriptor(count * 24, 0xc);
     command->words[6] = handle;
     s32 result = nn::svc::SendSyncRequest(DAT_005c149c);
     if (nnResultIsSuccess(result)) {
         *out = command->words[1];
-        return command->words[0];
+        result = command->words[0];
     }
     return result;
 }

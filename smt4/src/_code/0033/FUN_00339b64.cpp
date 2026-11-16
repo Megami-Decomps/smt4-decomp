@@ -1,4 +1,4 @@
-/* NON_MATCHING: the middle word of the three-word script-handle copy uses r1 instead of retail r2; all instructions otherwise agree. */
+/* NON_MATCHING: the middle word of the three-word script-handle copy uses r1 instead of retail r2, and the last step stores the done flag before the step (retail: step first, flag loaded before it); all instructions otherwise agree. */
 #include "common.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
 #include "battle/btlMain.h"
@@ -36,8 +36,8 @@ struct BtlLoader {
     /* 0x2250 */ u32 script;
     /* 0x2254 */ ScriptProcess *process;
     /* 0x2258 */ u8 unk2258[0x27A4];
-    /* 0x49FC */ s16 flags;
-    /* 0x49FE */ s16 step;
+    /* 0x49FC */ u16 flags;
+    /* 0x49FE */ u16 step;
     /* 0x4A00 */ u8 lock[1];
 };
 
@@ -130,8 +130,8 @@ void FUN_00339b64(BtlLoader *loader)
         case 12:
             loader->step++;
         case 13:
-            loader->step++;
             loader->flags |= LOADER_DONE;
+            loader->step++;
         }
     } while ((loader->flags & LOADER_DONE) == 0);
 }

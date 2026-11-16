@@ -1,4 +1,3 @@
-/* NON_MATCHING: the loop now carries retail's separate index and down-counter; retail pairs the state/unk08 stores with stm (r4=6, r5=1) after an add, this build uses strd with a writeback load. */
 #include "map/mapIf.h"
 
 struct MapIfResetState {
@@ -13,21 +12,23 @@ struct MapIfResetRecord {
 extern "C" {
 extern MapIfState *g_mapIf;
 
+/* Clears the interface flag and returns every active record in states 8-16 (even) to state 6, except the categories 0x1D-0x1F and 0x25-0x26. */
 void FUN_0021dfbc()
 {
     MapIfState *state = g_mapIf;
     ((MapIfResetState *)state)->unk17 = 0;
-    for (s32 index = 0, left = 128; left != 0; --left, ++index) {
-        MapIfRecord *record = &state->records[index];
-        if (record->active && record->display.category != 0x1d &&
-            record->display.category != 0x26 && record->display.category != 0x1e &&
-            record->display.category != 0x1f && record->display.category != 0x25) {
-            if (record->state == 8 || record->state == 10 ||
-                record->state == 12 || record->state == 14 || record->state == 16) {
-                record->state = 6;
-                ((MapIfResetRecord *)record)->unk08 = 1;
+    s32 index = 0;
+    for (u32 left = 128; left != 0; --left) {
+        if (state->records[index].active && state->records[index].display.category != 0x1d &&
+            state->records[index].display.category != 0x26 && state->records[index].display.category != 0x1e &&
+            state->records[index].display.category != 0x1f && state->records[index].display.category != 0x25) {
+            if (state->records[index].state == 8 || state->records[index].state == 10 ||
+                state->records[index].state == 12 || state->records[index].state == 14 || state->records[index].state == 16) {
+                state->records[index].state = 6;
+                ((MapIfResetRecord *)&state->records[index])->unk08 = 1;
             }
         }
+        index++;
     }
 }
 }

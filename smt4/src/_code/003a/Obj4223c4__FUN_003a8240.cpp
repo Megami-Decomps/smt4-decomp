@@ -1,4 +1,3 @@
-/* NON_MATCHING: item id now goes through the inlined shopListItemGetId (ldrh, sxth, uxth match); retail schedules `mov r2, #0` before the getter, the build leaves a `nop {0}` there and moves the mov after it (the caller would need the getter's clobber set). */
 #include "common.h"
 #include "classes/Obj4223c4.h"
 #include "status/StatusCamera.h"
@@ -27,23 +26,27 @@ struct ShopConfirm {
     /* 0x5a8 */ ShopListItem items[1];
 };
 
+/* The item's id (a getter armlink inlined and removed). */
+static __inline u16 shopListItemGetId(const ShopListItem *item)
+{
+    return item->itemId;
+}
+
 extern "C" {
 s32 scrRunOpcodesStub(u32 script);
 s32 messageMainGetChoiceResult(void);
 void messageMainSetTargetFlags(u32 flags);
 void buttonHelpSetPreset(s32 preset);
 s32 flaggedValueHolderGetTotal(u8 *cursor);
-u16 shopListItemGetId(const ShopListItem *item);
 s32 FUN_0029ce60(u16 itemId, u8 quantity, s32 mode, s32 discounted, s32 extra);
 void FUN_002e3150(void);
+}
 
 /* Waits for the confirmation script; on "yes" pays for the selected item and moves to state 4,
  * otherwise returns to state 2. */
-}
-
 void Obj4223c4::FUN_003a8240()
 {
-    ShopConfirm * shop = reinterpret_cast<ShopConfirm *>(this);
+    ShopConfirm *shop = reinterpret_cast<ShopConfirm *>(this);
     if (scrRunOpcodesStub(shop->script) != 2) {
         return;
     }
@@ -56,8 +59,7 @@ void Obj4223c4::FUN_003a8240()
         return;
     }
     ShopListItem *items = shop->items;
-    ShopListItem *item = &items[flaggedValueHolderGetTotal(shop->cursor)];
-    s16 itemId = shopListItemGetId(item);
+    s16 itemId = shopListItemGetId(&items[flaggedValueHolderGetTotal(shop->cursor)]);
     s32 price = FUN_0029ce60(itemId, shop->quantity, 0, shop->rank >= 100, 0);
     FUN_0029c43c(-price, 0);
     FUN_002a0cc8(1);

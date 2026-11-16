@@ -1,4 +1,3 @@
-/* NON_MATCHING: negotiation-mask loads choose LDRD/LDM differently and battle/mask saved-register allocation differs. */
 #include "battle/DebugPanel.h"
 #include "battle/btlMain.h"
 #include "AsdSDK/Source/Util/AsdListBox.h"
@@ -29,7 +28,7 @@ void FUN_004d2124(BattleDebugPanelWork *work, BtlMainStateA *battle)
     asdListBoxAddItems(work->panelJob, DAT_00572a80, 5);
     asdListBoxSetByteValue(work->panelJob, 1);
     jobSetText(work->panelJob, DAT_005280e8);
-    asdListBoxSetToggleItem(work->panelJob, 0, (DAT_005715f8.talkAll & battle->markerMasks.bits) != 0);
+    asdListBoxSetToggleItem(work->panelJob, 0, (battle->markerMasks.bits & DAT_005715f8.talkAll) != 0);
     asdListBoxSetToggleItem(work->panelJob, 1, (battle->markerMasks.bits & DAT_005715f8.bustup) != 0);
     asdListBoxSetIntItem(work->panelJob, 2, battle->negotiation.bustupIndex, 0, 600, 0);
     asdListBoxSetToggleItem(work->panelJob, 3, (battle->stateFlags64.bits & DAT_005715f8.messageWindow) != 0);

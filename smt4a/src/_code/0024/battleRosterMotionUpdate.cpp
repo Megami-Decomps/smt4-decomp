@@ -27,7 +27,7 @@ BattleMotionSelection *FUN_003eca48(BtlMainStateA *battle, u32 id);
 s32 FUN_003ec668(BtlMainStateA *battle, s32 kind, u32 action);
 void FUN_003f2638(BtlMainStateA *battle, u32 action, BattleRosterRecordA *record, u32 flags);
 void FUN_004cae58(BtlMainStateA *battle, BattleRosterRecordA *record);
-f32 FUN_0025cb1c(void);
+f32 randomGetNormalizedFloat(void);
 f32 FUN_001a1ee0(f32 angle);
 void halfRecClear(BtlMainStateA *battle, BattleMotionSubject *subject);
 void flagSelectionRebuild(void *selection, u32 flags);
@@ -112,7 +112,7 @@ u32 battleRosterMotionUpdate(u32 job)
                 motion.stateFrame = 0;
                 motion.motionDuration = 0;
             } else if ((motion.flags & 2) != 0) {
-                f32 random = FUN_0025cb1c();
+                f32 random = randomGetNormalizedFloat();
                 f32 displacement = motion.amount * motion.motionScale * random;
                 if ((motion.stateFrame & 1) != 0) {
                     displacement = -displacement;

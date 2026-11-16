@@ -1,4 +1,3 @@
-/* NON_MATCHING: same stores; retail allocates r2 to the constant 150 and r3 to the zero, this build swaps the two registers. */
 #include "common.h"
 
 struct Inner {
@@ -15,11 +14,17 @@ struct Object {
     /* 0x1C */ s32 state;
 };
 
+static __inline void innerSetValue(Inner *inner, s32 value)
+{
+    inner->value = value;
+}
+
+/* Primes the inner value with 150, then sets it from the inner source and resets the state. */
 extern "C" void FUN_00481d90(Object *object)
 {
     Inner *inner = object->inner;
 
-    inner->value = 150;
-    inner->value = object->inner->source;
+    innerSetValue(inner, 150);
+    innerSetValue(inner, object->inner->source);
     object->state = 0;
 }

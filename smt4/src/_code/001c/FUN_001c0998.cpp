@@ -1,4 +1,3 @@
-/* NON_MATCHING: group-root loads and the traversal-bank selection are scheduled differently. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
@@ -19,6 +18,7 @@ extern SceneLightCounter g_asdLightCount[2];
 void nw_gfx_SceneNode_AttachChild(SceneNode *parent, SceneNode *child);
 void sceneTraverserVisit(SceneTraverser *traverser, ModelTransformBuilder *builder);
 
+/* Attaches a node under its group's scene root (activating the group light for 2 and 5) and revisits that bank's scene. */
 void FUN_001c0998(SceneNode *node, s32 group)
 {
     SceneNode *root;
@@ -40,9 +40,13 @@ void FUN_001c0998(SceneNode *node, s32 group)
     default:
         return;
     }
-    if (root) {
-        nw_gfx_SceneNode_AttachChild(root, node);
-        u32 bank = group >= 3;
+    if (SceneNode *parent = root) {
+        nw_gfx_SceneNode_AttachChild(parent, node);
+        s32 bank;
+        if (group < 3)
+            bank = 0;
+        else
+            bank = 1;
         sceneTraverserVisit(DAT_00464b7c[bank], g_asdModelTransformBuilder[bank]);
         ++g_asdLightCount[bank].count;
     }

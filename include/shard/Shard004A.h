@@ -104,6 +104,24 @@ struct ShortValueDecoder {
     /* 0x23 */ u8 sixth;
 };
 
+/* Byte-stream readers of the decoders: each returns the bytes it consumed, or -1 when the
+ * stream is too short. */
+static __inline s32 decoderReadByteWord(u32 *value, const u8 *source, u32 size)
+{
+    if (size == 0)
+        return -1;
+    *value = *source;
+    return 1;
+}
+
+static __inline s32 decoderReadByte(u8 *value, const u8 *source, u32 size)
+{
+    if (size == 0)
+        return -1;
+    *value = *source;
+    return 1;
+}
+
 static __inline u16 decoderReadBigEndian16(const u8 *data)
 {
     return (u16)(((u32)data[0] << 8) | data[1]);

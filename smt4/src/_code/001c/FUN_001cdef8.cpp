@@ -1,4 +1,3 @@
-/* NON_MATCHING: native animation speed getters and render-context push recovered; initial global/stack clears and final early-return epilogue schedule differ. */
 #include "shard/GameGlobals.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
@@ -20,11 +19,15 @@ void unitGetStereoScreenPosition(s32 *x, s32 *y, s32 location, f32 depth);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *object);
 
+/* Draws the three animated game icons at their stereo screen positions while icon mode 3 or 9 is shown. */
 u8 FUN_001cdef8(void)
 {
-    s32 x = 0, y = 0;
     GameData *game = g_gameGlobals.data;
-    if (game->unk1E61 && (game->unk1E67 == 3 || game->unk1E67 == 9)) {
+    s32 x = 0;
+    s32 y = 0;
+    if (game->unk1E61 == 0)
+        return 0;
+    if (game->unk1E67 == 3 || game->unk1E67 == 9) {
         renderCtxSelectStereoLayout(g_titleScene);
         renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
         const GameIconAnimationView *animation = reinterpret_cast<const GameIconAnimationView *>(game);

@@ -1,4 +1,3 @@
-/* NON_MATCHING: -O2 candidate; two coordinate-conversion scratch registers/schedules and final zero/4.0f register lifetimes differ. */
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -7,67 +6,67 @@ struct UiCoordinatePair {
     Point2 second;
 };
 struct UiCoordinateLayout {
-    u8 items[0x360];
-    s32 state;
-    s32 selection;
-    s32 previousSelection;
-    Point2 header;
-    Point2 anchors[3];
-    Point2 reflected;
-    UiCoordinatePair pairs[5];
-    Point2 footer[4];
-    f32 topY;
-    f32 bottomY;
-    s32 mode;
-    f32 speed;
-    f32 offsetX;
-    f32 offsetY;
-    f32 offsetZ;
+    /* 0x000 */ u8 items[0x360];
+    /* 0x360 */ s32 state;
+    /* 0x364 */ s32 selection;
+    /* 0x368 */ s32 previousSelection;
+    /* 0x36C */ Point2 header;
+    /* 0x374 */ Point2 anchors[3];
+    /* 0x38C */ Point2 reflected;
+    /* 0x394 */ UiCoordinatePair pairs[5];
+    /* 0x3E4 */ Point2 footer[4];
+    /* 0x404 */ f32 topY;
+    /* 0x408 */ f32 bottomY;
+    /* 0x40C */ s32 mode;
+    /* 0x410 */ f32 speed;
+    /* 0x414 */ f32 offset[3];
 };
+typedef char UiCoordinateLayoutSizeCheck[sizeof(UiCoordinateLayout) == 0x420 ? 1 : -1];
 extern "C" {
 void sysMemClear(void *memory, u32 size);
 }
 
-static __inline const TextureTableEntryIV *layoutSprite(s32 index)
+/* Sets the layout's three offset components. */
+static __inline void uiCoordinateLayoutSetOffset(UiCoordinateLayout *layout, f32 x, f32 y, f32 z)
 {
-    return asdTMTexTableEntryAt(12, index);
+    layout->offset[0] = x;
+    layout->offset[1] = y;
+    layout->offset[2] = z;
 }
 
+/* Reads the layout's anchor points from texture table 12 and resets its state, offset, speed and mode. */
 extern "C" void uiCoordinateLayoutInitialize(UiCoordinateLayout *layout)
 {
     for (s32 i = 0; i < 5; ++i) {
-        const TextureTableEntryIV *first = layoutSprite(0x8f + i);
-        layout->pairs[i].first.x = (f32)first->x;
-        layout->pairs[i].first.y = (f32)first->y;
-        const TextureTableEntryIV *second = layoutSprite(0x94 + i);
-        layout->pairs[i].second.x = (f32)second->x;
-        layout->pairs[i].second.y = (f32)second->y;
+        const TextureTableEntryIV *point = asdTMTexTableEntryAt(12, i + 0x8f);
+        layout->pairs[i].first.x = point->x;
+        layout->pairs[i].first.y = point->y;
+        point = asdTMTexTableEntryAt(12, i + 0x94);
+        layout->pairs[i].second.x = point->x;
+        layout->pairs[i].second.y = point->y;
     }
-    const TextureTableEntryIV *header = layoutSprite(0x61);
-    layout->header.x = (f32)header->x;
-    layout->header.y = (f32)header->y;
+    const TextureTableEntryIV *header = asdTMTexTableEntryAt(12, 0x61);
+    layout->header.x = header->x;
+    layout->header.y = header->y;
     for (s32 i = 0; i < 3; ++i) {
-        const TextureTableEntryIV *sprite = layoutSprite(100 - i);
-        layout->anchors[i].x = (f32)sprite->x;
-        layout->anchors[i].y = (f32)sprite->y;
+        const TextureTableEntryIV *point = asdTMTexTableEntryAt(12, 100 - i);
+        layout->anchors[i].x = point->x;
+        layout->anchors[i].y = point->y;
     }
     layout->reflected.y = layout->anchors[2].y;
-    layout->reflected.x = (layout->anchors[2].x - layout->anchors[1].x)
-                       + layout->anchors[2].x;
+    layout->reflected.x = (layout->anchors[2].x - layout->anchors[1].x) + layout->anchors[2].x;
     for (s32 i = 0; i < 4; ++i) {
-        const TextureTableEntryIV *sprite = layoutSprite(0x65 + i);
-        layout->footer[i].x = (f32)sprite->x;
-        layout->footer[i].y = (f32)sprite->y;
+        const TextureTableEntryIV *point = asdTMTexTableEntryAt(12, i + 0x65);
+        layout->footer[i].x = point->x;
+        layout->footer[i].y = point->y;
     }
-    layout->bottomY = (f32)layoutSprite(0x6a)->y;
-    layout->topY = (f32)layoutSprite(0x69)->y;
+    layout->bottomY = asdTMTexTableEntryAt(12, 0x6a)->y;
+    layout->topY = asdTMTexTableEntryAt(12, 0x69)->y;
     sysMemClear(layout->items, sizeof(layout->items));
     layout->selection = -1;
     layout->state = 0;
     layout->previousSelection = -1;
-    layout->offsetX = 0.0f;
-    layout->offsetY = 0.0f;
-    layout->offsetZ = 0.0f;
+    uiCoordinateLayoutSetOffset(layout, 0.0f, 0.0f, 0.0f);
     layout->speed = 4.0f;
     layout->mode = 4;
 }

@@ -36,7 +36,7 @@ int FUN_003180c4(int, unsigned char [36]);
 int FUN_0031cf00(void);
 int btlTalkBustUpReleaseAllSlots(void);
 int btlTalkBustUpSetDemonTexture(...);
-int btlTalkBustUpReleaseContent(void);
+int btlTalkBustUpReleaseTexture(void);
 int btlTalkBustUpSetUnk2F4(...);
 int FUN_00371c3c(unsigned int, int);
 int FUN_004bcd90(...);
@@ -80,7 +80,7 @@ extern int partyPanelIsActive(void);
 extern int battleTalkIsBustReady(void);
 /* Supplied declaration required: FUN_00359974. */
 extern int FUN_0035db94(void);
-/* Supplied declaration required: btlTalkBustUpReleaseContent. */
+/* Supplied declaration required: btlTalkBustUpReleaseTexture. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: FUN_00371c3c. */
 extern int maskToCode(void);
@@ -298,7 +298,7 @@ unsigned int FUN_003193a8(int param_1)
     if (temp_v3 == 0) {
       return 0;
     }
-    btlTalkBustUpReleaseContent();
+    btlTalkBustUpReleaseTexture();
     btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v6 + 0x62),1);
     *(unsigned char *)(param_1 + 0x3e6) = 0;
     FUN_002c8538(1);
@@ -398,7 +398,7 @@ unsigned int FUN_003193a8(int param_1)
     }
     break;
   case 10:
-    btlTalkBustUpReleaseContent();
+    btlTalkBustUpReleaseTexture();
     *(unsigned int *)(param_1 + 0x3bc) = 0;
     FUN_003343f0(0);
     temp_v8 = 3;

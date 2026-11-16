@@ -1,33 +1,30 @@
-/* NON_MATCHING: retail loads the constants 6 and 1 into callee-saved registers before the calls (build materializes them at the last call) and uses a wider register set. */
-#include "common.h"
+#include "ui/MessageMain.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
 
-void FUN_0021bdac(u32 arg0, s32 arg1, u32 frame, s32 arg3, s32 arg4, s32 arg5);
+extern MessageGlobalsA g_messageMain;
+s32 FUN_0021bdac(u32 owner, u32 text, u32 frame, s32 mode, s32 wait, s32 flags);
 
-typedef struct MessageMain {
-    /* 0x0000 */ u8 unk0000[4];
-    /* 0x0004 */ u8 *window;
-} MessageMain;
+/* Shows the script command's first argument as a message with message state `mode`. */
+static void showMessage(s32 mode, s32 wait)
+{
+    u32 owner = scrGetCommandOwner();
+    u32 text = scrGetArg(0);
+    u32 frame = scrGetCommandFrame();
 
-#define MESSAGE_WINDOW_MODE 0x19C5  /* byte of the window object set to 0x15 */
+    FUN_0021bdac(owner, text, frame, mode, wait, 0);
+}
 
-extern MessageMain g_messageMain;
-
-/* Script command body: resets message state scrCommMessageSetMode(0), sets the window mode byte to 0x15
- * if a window exists, then queues the command. */
+/* Script command: resets the message mode, puts the message window in display mode 0x15 and shows
+ * the first argument with message state 6, waiting for it. */
 void FUN_002a33f0(void)
 {
     scrCommMessageSetMode(0);
-    if (g_messageMain.window != NULL) {
-        g_messageMain.window[MESSAGE_WINDOW_MODE] = 0x15;
+    if (g_messageMain.state != NULL) {
+        g_messageMain.state->displayMode = 0x15;
     }
-    u32 owner = scrGetCommandOwner();
-    s32 arg = scrGetArg(0);
-    u32 frame = scrGetCommandFrame();
-
-    FUN_0021bdac(owner, arg, frame, 6, 1, 0);
+    showMessage(6, 1);
 }
 
 } /* extern "C" */

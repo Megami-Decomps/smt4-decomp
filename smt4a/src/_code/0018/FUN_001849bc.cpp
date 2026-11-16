@@ -1,4 +1,3 @@
-/* NON_MATCHING: stack frame and member-wise rectangle copy now match retail; only the scheduling/registers of the id % 1000 frame lookup differ. */
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "gfx/SpriteTextureRect.h"
 
@@ -20,8 +19,7 @@ void FUN_00184efc(TexNode *texture, const TexturedRectangleFrame *frame, const T
 void FUN_001849bc(u32 flags, u32 group, s32 id, u32 color, u64 payload, const TexturedRectangle *rectangle)
 {
     TexNode *texture = asdTMTexTableCallFileC(group, id);
-    const TexturedRectangleFrame *frames = *(const TexturedRectangleFrame **)texture->set;
-    const TexturedRectangleFrame *frame = &frames[id % 1000];
+    const TexturedRectangleFrame *frame = &(*(const TexturedRectangleFrame **)texture->set)[id % 1000];
     TexturedRectangleRequest request;
     request.flags = flags;
     request.color = color;

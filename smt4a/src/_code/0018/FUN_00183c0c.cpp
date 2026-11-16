@@ -1,5 +1,6 @@
-/* NON_MATCHING: the touch count stores through a hoisted pointer (as in buttonHelpBeginExit) and the halfword handle stores now match retail; the build keeps g_buttonHelp in r7 (retail r8) and addresses the selected halfword (work+0x5D8) through a literal-pool offset where retail uses `add r1, r5, #1280; strh [r1, #216]`. */
+/* NON_MATCHING: the six-byte clear now forms retail's work+0x500 base; the build keeps g_buttonHelp in r7 (retail r8), recomputes the base for the FUN_001a90e0 argument instead of sharing retail's two adds, and swaps r7/r8 in the double-icon case. */
 #include "ui/ButtonHelp.h"
+#include <string.h>
 #include "ui/UiSpriteState.h"
 
 extern "C" {
@@ -39,8 +40,7 @@ extern "C" void FUN_00183c0c(void)
             }
         }
     }
-    work->cleared.low = 0;
-    work->cleared.high = 0;
+    memset(work->clear.active, 0, sizeof(work->clear.active));
     FUN_001a90e0(work->clear.unk5DA);
     work->unk5E2[0] = 0;
     ButtonHelpWorkA *current = g_buttonHelp.work;

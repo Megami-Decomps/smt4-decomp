@@ -20,7 +20,7 @@ struct ParticleEmitterSpec {
 };
 
 extern "C" {
-f32 FUN_0025cb1c(void);
+f32 randomGetNormalizedFloat(void);
 void FUN_001aff14(Matrix34Data *matrix, s32 clearTranslation, f32 x, f32 y, f32 z);
 }
 
@@ -34,26 +34,26 @@ extern "C" Obj557d90 *FUN_0041aca8(const ParticleEmitterSpec *spec, AsdMdlObject
     particle->unk08 = spec->unk04;
 
     Matrix34Data rotation;
-    FUN_001aff14(&rotation, 1, 0.0f, 0.0f, FUN_0025cb1c() * 256.0f);
+    FUN_001aff14(&rotation, 1, 0.0f, 0.0f, randomGetNormalizedFloat() * 256.0f);
     f32 dirX = rotation.values[0] * 1.0f + rotation.values[1] * 0.0f + rotation.values[2] * 0.0f;
     f32 dirY = rotation.values[4] * 1.0f + rotation.values[5] * 0.0f + rotation.values[6] * 0.0f;
-    f32 spread = (FUN_0025cb1c() - 0.5f) * 2.0f * spec->spread;
+    f32 spread = (randomGetNormalizedFloat() - 0.5f) * 2.0f * spec->spread;
     particle->unk0C.x = dirX * spread * particle->unk30.x * 0.5f;
     particle->unk0C.y = dirY * spread * particle->unk30.y * 0.5f + particle->unk30.y * 0.5f;
     particle->unk0C.z = 0.0f;
 
-    f32 pitch = FUN_0025cb1c() * -spec->angleBase;
-    f32 yaw = (FUN_0025cb1c() - 0.5f) * 2.0f * spec->angleVariance;
+    f32 pitch = randomGetNormalizedFloat() * -spec->angleBase;
+    f32 yaw = (randomGetNormalizedFloat() - 0.5f) * 2.0f * spec->angleVariance;
     FUN_001aff14(&rotation, 1, pitch * degreesToPhase, 0.0f, yaw * degreesToPhase);
     f32 axisX = rotation.values[0] * 0.0f + rotation.values[1] * 1.0f + rotation.values[2] * 0.0f;
     f32 axisY = rotation.values[4] * 0.0f + rotation.values[5] * 1.0f + rotation.values[6] * 0.0f;
     f32 axisZ = rotation.values[8] * 0.0f + rotation.values[9] * 1.0f + rotation.values[10] * 0.0f;
-    f32 speed = spec->speedBase + spec->speedVariance * ((FUN_0025cb1c() - 0.5f) * 2.0f);
+    f32 speed = spec->speedBase + spec->speedVariance * ((randomGetNormalizedFloat() - 0.5f) * 2.0f);
     particle->unk3C[0].set(axisX * speed, axisY * speed, axisZ * speed);
 
-    f32 targetX = spec->positionBase[0] + spec->positionVariance[0] * ((FUN_0025cb1c() - 0.5f) * 2.0f);
-    f32 targetY = spec->positionBase[1] + spec->positionVariance[1] * ((FUN_0025cb1c() - 0.5f) * 2.0f);
-    f32 targetZ = spec->positionBase[2] + spec->positionVariance[2] * ((FUN_0025cb1c() - 0.5f) * 2.0f);
+    f32 targetX = spec->positionBase[0] + spec->positionVariance[0] * ((randomGetNormalizedFloat() - 0.5f) * 2.0f);
+    f32 targetY = spec->positionBase[1] + spec->positionVariance[1] * ((randomGetNormalizedFloat() - 0.5f) * 2.0f);
+    f32 targetZ = spec->positionBase[2] + spec->positionVariance[2] * ((randomGetNormalizedFloat() - 0.5f) * 2.0f);
     particle->unk3C[2].set(targetX, targetY, targetZ);
     ((u32 *)&particle->unk3C[1])[0] = spec->color[0];
     ((u32 *)&particle->unk3C[1])[1] = spec->color[1];

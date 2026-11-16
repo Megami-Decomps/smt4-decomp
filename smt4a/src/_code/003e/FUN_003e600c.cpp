@@ -1,4 +1,4 @@
-/* NON_MATCHING: The offer pair loads as LDM; offer-copy and item-count/final-state registers differ. */
+/* NON_MATCHING: the state-entry helper gives retail's final state stores; remaining: the offer pair loads as LDM (retail two ldr), and the offer-copy and item-count registers differ. */
 #include "gamedata/DataTable.h"
 #include "script/scrScriptProcess.h"
 #include "code/Code0035.h"
@@ -25,6 +25,14 @@ extern "C" {
 s32 loadSlotIsLoaded(u32 slot);
 ScriptRunState *FUN_00275bc8(void *resource, void *screen);
 u32 FUN_001ba3d4(u32 item);
+
+/* Moves the exchange work to `state`, remembering the state it left and restarting its timer. */
+static inline void itemExchangeEnterState(ItemExchangeWork *work, u32 state)
+{
+    work->previousState = work->state;
+    work->state = state;
+    work->timer = 0;
+}
 
 /* Starts the loaded exchange script, collects up to three offers and publishes the three held-item counts. */
 void FUN_003e600c(ItemExchangeWork *work)
@@ -61,9 +69,7 @@ void FUN_003e600c(ItemExchangeWork *work)
         FUN_00359974(0x19, second, 0xFFFFFFFF, 0);
         FUN_00359974(0x1A, third, 0xFFFFFFFF, 0);
         screenStartOrClear(reinterpret_cast<s32>(work->screen), 0x15);
-        work->previousState = work->state;
-        work->state = 3;
-        work->timer = 0;
+        itemExchangeEnterState(work, 3);
     }
 }
 }

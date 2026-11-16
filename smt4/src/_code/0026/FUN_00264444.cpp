@@ -1,4 +1,3 @@
-/* NON_MATCHING: counter decrements reuse r0 rather than retail's separate r1 subtraction results; the remaining instructions match. */
 #include "map/lmapMain.h"
 
 class LmapOwnedEntry {
@@ -14,6 +13,15 @@ struct LmapEntryPool {
     LmapOwnedEntry *entries[32]; // 0x18
 };
 
+/* Removes one entry of the category from the pool's counts. */
+static __inline void lmapEntryPoolUncount(LmapEntryPool *pool, s32 category)
+{
+    if (category == 0)
+        --pool->categoryZeroCount;
+    --pool->count;
+}
+
+/* Deletes every entry the pool owns and clears its slots. */
 extern "C" void FUN_00264444(LmapObj *object)
 {
     LmapEntryPool *pool = reinterpret_cast<LmapEntryPool *>(object);
@@ -23,9 +31,7 @@ extern "C" void FUN_00264444(LmapObj *object)
             s32 category = entry->category;
             delete entry;
             pool->entries[index] = NULL;
-            if (category == 0)
-                --pool->categoryZeroCount;
-            --pool->count;
+            lmapEntryPoolUncount(pool, category);
         }
     }
 }

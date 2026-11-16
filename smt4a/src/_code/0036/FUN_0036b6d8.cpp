@@ -1,4 +1,4 @@
-/* NON_MATCHING: armcc hoists the constant 1 into r8 (retail rematerialises it, so the final `state`/`unk0C` stores become one stm) and orders the literal pool differently. */
+/* NON_MATCHING: the state-entry helper gives retail's final `state`/`unk0C` stm (no hoisted 1); remaining: retail places g_engineCleanupOwner first in the literal pool and schedules the process-creation arguments around its store, and clears unk10 from a fresh zero. */
 #include "shard/S1ArousalSkill.h"
 #include "code/Code002c.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
@@ -21,6 +21,14 @@ void stateHolderMarkAndInit2588(void);
 void campButtonHelpAcquire(void);
 void sysPlaySe(s32 id);
 void buttonHelpSetText(s32 a, u32 color);
+
+/* Moves the scene to `state` with its counters cleared. */
+static inline void arousalSkillSceneEnter(ArousalSkillScene *scene, s32 state)
+{
+    scene->unk10 = 0;
+    scene->state = state;
+    scene->unk0C = 0;
+}
 
 /* Create the Arousal Skill scene process and its state, then load its resources and start it. */
 void FUN_0036b6d8(s32 mode, u32 id)
@@ -61,9 +69,7 @@ void FUN_0036b6d8(s32 mode, u32 id)
     campButtonHelpAcquire();
     sysPlaySe(244);
     buttonHelpSetText(0, 0xF4F4F4FF);
-    scene->unk10 = 0;
-    scene->state = 1;
-    scene->unk0C = 0;
+    arousalSkillSceneEnter(scene, 1);
 }
 
 } /* extern "C" */

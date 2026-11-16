@@ -1,4 +1,3 @@
-/* NON_MATCHING: loop shape: retail clears entry 0 first and then runs the (2x unrolled) loop from entry 1 with the index scaled by 0x288 each time; written that way the build rebases the induction variable (mov r3, #648). */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 
@@ -8,7 +7,7 @@ extern "C" {
 void FUN_00229098(BtlMainState **battle)
 {
     for (s32 i = 0; i < 109; i++) {
-        (*battle)->entries[i].flags &= ~0x400u;
+        (*battle)->entries[i].flagMask &= ~0x400ULL;
     }
 }
 

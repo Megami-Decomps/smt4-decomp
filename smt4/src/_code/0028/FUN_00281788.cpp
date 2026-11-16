@@ -1,5 +1,4 @@
-/* NON_MATCHING: literal pool order (retail places the 0.0f before the table address) swaps r5/r6
- * and moves two scheduled instructions; the stores otherwise match. */
+/* NON_MATCHING: only r5/r6 swap (retail keeps the counts in r6 and the volume table in r5). */
 #include "shard/S1Mover.h"
 
 /* One culling volume (0x178 bytes): eight corners, a center and six bounding planes. */
@@ -41,22 +40,25 @@ extern GameStateCullView g_gameState;
 /* Clears every culling volume and the volume counts. */
 void FUN_00281788(void)
 {
+    f32 zero = 0.0f;
+    s32 i;
+    s32 j;
     DAT_00447a28.count = 0;
-    for (s32 i = 0; i < 160; i++) {
+    for (i = 0; i < 160; i++) {
         CullVolume *volume = &DAT_004a1264[i];
-        for (s32 j = 0; j < 8; j++) {
-            volume->corners[j].x = 0.0f;
-            volume->corners[j].y = 0.0f;
-            volume->corners[j].z = 0.0f;
+        for (j = 0; j < 8; j++) {
+            volume->corners[j].x = zero;
+            volume->corners[j].y = zero;
+            volume->corners[j].z = zero;
         }
-        volume->center.x = 0.0f;
-        volume->center.y = 0.0f;
-        volume->center.z = 0.0f;
-        for (s32 j = 0; j < 6; j++) {
-            volume->planeNormals[j].x = 0.0f;
-            volume->planeNormals[j].y = 0.0f;
-            volume->planeNormals[j].z = 0.0f;
-            volume->planeDistances[j] = 0.0f;
+        volume->center.x = zero;
+        volume->center.y = zero;
+        volume->center.z = zero;
+        for (j = 0; j < 6; j++) {
+            volume->planeNormals[j].x = zero;
+            volume->planeNormals[j].y = zero;
+            volume->planeNormals[j].z = zero;
+            volume->planeDistances[j] = zero;
         }
         volume->unk174 = 0;
         volume->unk176 = 0;

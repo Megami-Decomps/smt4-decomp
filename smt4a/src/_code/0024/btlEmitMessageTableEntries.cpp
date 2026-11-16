@@ -1,4 +1,3 @@
-/* NON_MATCHING: flag-pair load selection and loop register allocation differ from retail. */
 #include "common.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/BattleHelpers.h"
@@ -14,21 +13,16 @@ struct BattleMessageTable {
     u8 unk00[0x58];
     BattleMessageEntry entries[4]; /* 0x58 */
 };
-struct BattleMessageFlags {
-    u32 low;
-    u32 high;
-};
 struct BattleMessageMask {
     u8 unk00[0x10];
-    u32 low;  /* 0x10 */
-    u32 high; /* 0x14 */
+    u64 mask; /* 0x10: battle flags that let a type-12 entry through */
 };
 
 extern "C" {
 extern void *g_btlAux;
 extern BattleMessageMask g_btlMessageFlagMasks;
 s32 libc_strlen(const char *);
-BattleMessageFlags *FUN_003f0e20(void *battle, s32 target);
+u64 *FUN_003f0e20(void *battle, s32 target);
 void FUN_004fdcd8(s32 value, s32, u32, s32, s32, u32, u16, const char *);
 
 // Emit the supported entries, filtering type 12 against the target's battle flags.
@@ -54,9 +48,8 @@ void btlEmitMessageTableEntries(s32 actor, u32 unused, BattleMessageTable *table
             case 5:
             case 12:
                 if (type == 12 && target >= 0) {
-                    BattleMessageFlags *flags = FUN_003f0e20(battle, target);
-                    if (flags != NULL &&
-                        ((flags->low & g_btlMessageFlagMasks.low) | (flags->high & g_btlMessageFlagMasks.high)) == 0) {
+                    u64 *flags = FUN_003f0e20(battle, target);
+                    if (flags != NULL && (*flags & g_btlMessageFlagMasks.mask) == 0) {
                         break;
                     }
                 }

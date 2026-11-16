@@ -1,3 +1,4 @@
+/* NON_MATCHING: IDENTICAL when compiled with --cpu=MPCore --fpu=softvfp (no VFP: retail copies the saved descriptor pair (ldrd/strd r6:r7) with core registers); the default build uses VFP. Needs that unit cflags. */
 #include "nn/Result.h"
 #include "nn/svc.h"
 #include "nn/os/IpcCommandBuffer.h"
@@ -16,8 +17,8 @@ s32 FUN_00426634(u32 buffer)
     s64 *receive = reinterpret_cast<s64 *>(nn::os::GetIpcCommandBuffer() + 1);
     s64 saved = *receive;
     u32 *words = reinterpret_cast<u32 *>(receive);
-    words[1] = buffer;
     words[0] = 0x00800002;
+    words[1] = buffer;
     s32 result = nn::svc::SendSyncRequest(DAT_005b4438);
     *receive = saved;
     if (nnResultIsSuccess(result)) {

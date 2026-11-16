@@ -39,7 +39,7 @@ void soundChannelStopAll(s32 frames);
 void bgmPlay(u32 sound, s32 channel, s32 frames);
 void bgmStopNoForce(u32 sound, s32 frames);
 
-u32 FUN_001e960c()
+u32 soundTestActionMenuUpdate()
 {
     SoundTestControlView *work = reinterpret_cast<SoundTestControlView *>(DAT_0044e110);
     if (work->state != 99 && padIsButtonPressed(2)) {

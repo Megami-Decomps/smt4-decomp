@@ -1,4 +1,3 @@
-/* NON_MATCHING: paramsInit size-argument scheduling adds one move, shifting the literal pool. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "font/GuestWin/GuestWin.h"
 #include "sys/Task.h"
@@ -12,14 +11,21 @@ struct GuestWinAllocationView {
     GuestWinWork prefix;
     /* 0x50 */ u8 uiTail[0x6C];
 };
-struct GuestWinParameterDefaults {
-    u8 first[0x18];
-    u8 second[0x18];
-    u8 geometry[0x70];
-};
 extern "C" {
 extern GuestWinWork* g_guestWin;
-extern const GuestWinParameterDefaults DAT_00403964;
+/* The guest window's sprite resource packets, in retail's order (0x18, 0x18 and 0x70 bytes). */
+static const u32 sGuestWinPacketA[6] = {
+    0x0, 0x0, 0x0, 0x140, 0x0, 0x8,
+};
+static const u32 sGuestWinPacketB[6] = {
+    0x3f800000, 0x3f800000, 0x0, 0x3f800000, 0x0, 0x4,
+};
+static const u32 sGuestWinPacketE[28] = {
+    0x1, 0x0, 0xfffffffd, 0x0, 0x0, 0xfffffffd, 0x0, 0xffffffff,
+    0x0, 0xffffffff, 0xffffffff, 0x0, 0xffffffff, 0x0, 0x0, 0x0,
+    0xfffffffd, 0x1, 0x0, 0xfffffffd, 0x0, 0xffffffff, 0x0, 0xffffffff,
+    0xffffffff, 0x0, 0xffffffff, 0x0,
+};
 u32 taskCreateDraw(const char* name, u32 priority, u32 size, u32 flags,
                    TaskFunc update, TaskFunc destroy, void* work, u32 parent);
 void guestWinUpdate(void* work);
@@ -45,9 +51,8 @@ void FUN_0010b3c0(void)
     taskCreateDraw("GuestWin DrawUpRight", 0xDF, 0, 0, FUN_0011aa94, NULL, NULL, work->job);
     work = g_guestWin;
     drawParameterBlockClear(work->unk10);
-    paramsInit(reinterpret_cast<UiResourceParameters *>(work->unk10), DAT_00403964.first, 0x18,
-        DAT_00403964.second, 0x18, 0, 0, 0, 0,
-        DAT_00403964.geometry, 0x70);
+    paramsInit(reinterpret_cast<UiResourceParameters *>(work->unk10), sGuestWinPacketA, sizeof(sGuestWinPacketA),
+        sGuestWinPacketB, sizeof(sGuestWinPacketB), NULL, 0, NULL, 0, sGuestWinPacketE, sizeof(sGuestWinPacketE));
     FUN_002bd954(work->ui, 14, 0x87, work->unk10, 1, 1.0f);
     spriteStartAnimationByIndex(work->ui, 0);
 }

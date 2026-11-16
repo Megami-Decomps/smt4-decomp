@@ -15,7 +15,7 @@ int uiSetFloatPair(unsigned char *);
 int FUN_0014f0dc(...);
 int FUN_001523b8(...);
 int gameFlagsGetBlock(void);
-int FUN_0025cb1c(void);
+int randomGetNormalizedFloat(void);
 int residentApplyFallbackValues(void);
 int FUN_003033d4(void);
 int lmapUpdateCameraDistancePair(void);
@@ -75,7 +75,7 @@ static float romwright_sqrt_4(float value)
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
-/* Supplied declaration required: FUN_0025cb1c. */
+/* Supplied declaration required: randomGetNormalizedFloat. */
 /* Supplied declaration required: residentApplyFallbackValues. */
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: mathAngleDeltaDegrees. */
@@ -210,7 +210,7 @@ void FUN_00292b84(void)
         pfVar8 = temp_v24 + temp_v2;
         temp_v15 = *pfVar8;
         if (temp_v15 != (float)((unsigned long long)temp_v16 >> 0x20)) {
-          FUN_0025cb1c();
+          randomGetNormalizedFloat();
           temp_v19 = *pfVar8;
           piVar5 = g_lmapView + temp_v2;
           temp_v27 = (float)piVar5[0xa7];
@@ -225,7 +225,7 @@ void FUN_00292b84(void)
             }
           }
           else {
-            FUN_0025cb1c();
+            randomGetNormalizedFloat();
             piVar5 = g_lmapView + temp_v2;
             temp_v27 = (float)piVar5[0xa7] + (temp_v27 - temp_v18) * temp_v15 * temp_v12;
             piVar5[0xa7] = (int)temp_v27;

@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the item-2 marker-mask test differs: retail keeps the mask pool pointer in r2 and the bits pointer in r0 with and(bits,mask) operand order; the build uses r1/r2 (and ldrd for the bits when written bits-first). Everything else matches. */
 #include "battle/DebugPanel.h"
 #include "battle/btlCamera.h"
 #include "battle/btlMain.h"
@@ -65,7 +64,7 @@ void FUN_004d5578(BattleDebugPanelWork *work, BtlMainStateA *battle)
     jobSetText(work->panelJob, "Attack Camera Menu");
     asdListBoxSetToggleItem(work->panelJob, 0, (g_btlCamera->flags & 0x100) >> 8);
     asdListBoxSetFloatItem(work->panelJob, 1, reinterpret_cast<CameraEffectView *>(g_btlCamera)->value, -10, 10);
-    asdListBoxSetToggleItem(work->panelJob, 2, (DAT_005715f8.markerMask & battle->markerMasks.bits) != 0);
+    asdListBoxSetToggleItem(work->panelJob, 2, (battle->markerMasks.bits & DAT_005715f8.markerMask) != 0);
     asdListBoxSetFloatItem(work->panelJob, 3, DAT_005e1554[0], -100, 100);
     asdListBoxSetFloatItem(work->panelJob, 4, DAT_005e1554[2], -100, 100);
     asdListBoxSetFloatItem(work->panelJob, 5, DAT_00571570, -100, 100);

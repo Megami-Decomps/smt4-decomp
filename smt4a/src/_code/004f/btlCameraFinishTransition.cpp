@@ -1,4 +1,3 @@
-/* NON_MATCHING: final camera-flag update materializes flags' address in r1, adding two instructions instead of retail's immediate-offset load/store. */
 #include "battle/btlMain.h"
 
 struct BattleCameraTransition {
@@ -13,6 +12,10 @@ extern "C" {
 void objDestroyIfSet(void *object);
 extern BtlMainA *g_btlCamera;
 
+static __inline void flagsClearBits(u32 *flags, u32 bits)
+{
+    *flags &= ~bits;
+}
 
 // Release the transition object and clear its pending battle-camera flag.
 void btlCameraFinishTransition(BattleCameraTransition *transition)
@@ -25,7 +28,7 @@ void btlCameraFinishTransition(BattleCameraTransition *transition)
     transition->flags &= ~2u;
     BtlMainA *camera = g_btlCamera;
     if (camera != NULL) {
-        camera->flags &= ~0x04000000u;
+        flagsClearBits(&camera->flags, 0x04000000u);
     }
 }
 }

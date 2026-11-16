@@ -1,4 +1,3 @@
-/* NON_MATCHING: rounding constant load placement and initial VFP division registers differ. */
 #include "shard/AnimCurve.h"
 
 extern "C" f32 hardfp_floorf(f32 value);
@@ -19,8 +18,10 @@ extern "C" const PackedScalarAnimKey *FUN_0051d658(const PackedScalarAnimCurve *
     typedef char SampledCurveLayoutCheck[
         offsetof(SampledCurveView, inverseDuration) == 4 &&
         offsetof(SampledCurveView, keys) == 0x14 ? 1 : -1];
+    f32 half = 0.5f; /* rounds the scaled frame to the nearest key frame */
     const SampledCurveView *source = (const SampledCurveView *)curve;
-    u32 roundedFrame = (u32)hardfp_floorf(frame / source->timeScale + 0.5f);
+    f32 scaled = frame / source->timeScale;
+    u32 roundedFrame = (u32)hardfp_floorf(scaled + half);
     const PackedScalarAnimKey *key = source->keys;
     if (key->frame <= roundedFrame) {
         key = source->keys + source->keyCount - 1;

@@ -8,7 +8,7 @@ typedef char CheckWhisperLineSize[sizeof(WhisperLineAnimation) == 0x34 ? 1 : -1]
 typedef char CheckWhisperLinesOffset[offsetof(WhisperAnimationView, lines) == 0xb4 ? 1 : -1];
 typedef char CheckWhisperViewSize[sizeof(WhisperAnimationView) == 0x1b8 ? 1 : -1];
 
-extern "C" f32 FUN_0025cb1c();
+extern "C" f32 randomGetNormalizedFloat();
 extern "C" s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 
 static __inline void updateWhisperLine(WhisperLineAnimation *line)
@@ -62,8 +62,8 @@ extern "C" u32 whisperAdvanceAnimations(u32 job)
             WhisperParticleAnimation *particle = &effect->particles[i];
             if (++particle->jitterFrame >= 3) {
                 particle->jitterFrame -= 3;
-                particle->x = 200.0f + (FUN_0025cb1c() - 0.5f) * 10.0f;
-                particle->y = 128.0f + (FUN_0025cb1c() - 0.5f) * 10.0f;
+                particle->x = 200.0f + (randomGetNormalizedFloat() - 0.5f) * 10.0f;
+                particle->y = 128.0f + (randomGetNormalizedFloat() - 0.5f) * 10.0f;
             }
             if (particle->scaleFrame < 300)
                 ++particle->scaleFrame;

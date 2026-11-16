@@ -1130,23 +1130,24 @@ typedef char PanelTextDefaultsPrefixALayoutCheck[
     offsetof(PanelTextDefaultsPrefixA, fallbackTextValue) == 4 &&
     sizeof(PanelTextDefaultsPrefixA) == 8 ? 1 : -1];
 
-/* Observed input prefix only; the complete caller-owned object's extent is unknown. */
-struct RectangleDrawInputPrefixIV {
-    /* 0x00 */ u32 color;
+/* A rectangle drawn in one colour (SMT IV drawColoredRectangle, Apocalypse drawColoredRectangle).
+ * Observed prefix only; the complete caller-owned object's extent is unknown. */
+struct ColoredRectangle {
+    /* 0x00 */ u8 rgba[4];
     /* 0x04 */ u8 unk04[4];
     /* 0x08 */ f32 left;
     /* 0x0C */ f32 top;
     /* 0x10 */ f32 right;
     /* 0x14 */ f32 bottom;
 };
-typedef char RectangleDrawInputPrefixIVLayoutCheck[
-    offsetof(RectangleDrawInputPrefixIV, color) == 0 &&
-    offsetof(RectangleDrawInputPrefixIV, unk04) == 4 &&
-    offsetof(RectangleDrawInputPrefixIV, left) == 8 &&
-    offsetof(RectangleDrawInputPrefixIV, top) == 0xC &&
-    offsetof(RectangleDrawInputPrefixIV, right) == 0x10 &&
-    offsetof(RectangleDrawInputPrefixIV, bottom) == 0x14 &&
-    sizeof(RectangleDrawInputPrefixIV) == 0x18 ? 1 : -1];
+typedef char ColoredRectangleLayoutCheck[
+    offsetof(ColoredRectangle, rgba) == 0 &&
+    offsetof(ColoredRectangle, unk04) == 4 &&
+    offsetof(ColoredRectangle, left) == 8 &&
+    offsetof(ColoredRectangle, top) == 0xC &&
+    offsetof(ColoredRectangle, right) == 0x10 &&
+    offsetof(ColoredRectangle, bottom) == 0x14 &&
+    sizeof(ColoredRectangle) == 0x18 ? 1 : -1];
 
 // Observed prefix of SMT IV's g_camp object; not its complete extent.
 // The supplied CampStateA is an Apocalypse layout, not this object layout.

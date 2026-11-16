@@ -16,7 +16,7 @@ extern GameStateView g_gameState;
 
 
 int dialogClose(...);
-int FUN_0025cb1c(void);
+int randomGetNormalizedFloat(void);
 
 int CONCAT44(double, double);
 int FUN_0018a924(...);
@@ -82,7 +82,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0018a924. */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: dialogClose. */
-/* Supplied declaration required: FUN_0025cb1c. */
+/* Supplied declaration required: randomGetNormalizedFloat. */
 extern int FUN_0029d6f0(void);
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: mathAngleDeltaDegrees. */
@@ -1535,7 +1535,7 @@ joined_r0x0029d070:
         pfVar16 = temp_v27 + temp_v8;
         temp_v18 = *pfVar16;
         if (temp_v18 != (float)((unsigned long long)temp_v24 >> 0x20)) {
-          FUN_0025cb1c();
+          randomGetNormalizedFloat();
           temp_v19 = *pfVar16;
           temp_v9 = temp_v5 + temp_v8 * 4;
           temp_v17 = *(float *)(temp_v9 + 0xccfc);
@@ -1550,7 +1550,7 @@ joined_r0x0029d070:
             *(float *)(temp_v9 + 0xccfc) = temp_v17;
           }
           else {
-            FUN_0025cb1c();
+            randomGetNormalizedFloat();
             *(float *)(temp_v9 + 0xccfc) =
                  *(float *)(temp_v9 + 0xccfc) + (temp_v17 - temp_v16) * temp_v18 * (float)temp_v23;
           }

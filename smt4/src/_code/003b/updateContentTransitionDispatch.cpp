@@ -1,4 +1,4 @@
-/* NON_MATCHING: flag disjunctions fold into two aggregate-mask tests and state-store registers/branch layout differ; -O2 candidate. */
+/* NON_MATCHING: only the flag reload after FUN_0022b8c0 differs: retail stores the saved token before reloading the flags, the build hoists the load above the store. */
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match6_ContentTransition.h"
 
@@ -34,56 +34,100 @@ void FUN_0022b778(ContentTransition *);
 void uiClampScrollOffset(ContentTransition *, void *);
 void FUN_00341a3c(u32);
 
-void updateContentTransitionDispatch(ContentTransition *scene)
+/* True when any of the move/step request flags is set. */
+static __inline bool transitionHasPendingMove(u32 flags)
 {
-    ContentTransitionUpdate *update = (ContentTransitionUpdate *)scene;
+    if (flags & 0x10)
+        return true;
+    if (flags & 0x200000)
+        return true;
+    if (flags & 0x40000)
+        return true;
+    if (flags & 0x800000)
+        return true;
+    if (flags & 0x4000000)
+        return true;
+    if (flags & 0x1000000)
+        return true;
+    if (flags & 0x2000000)
+        return true;
+    if (flags & 0x8000000)
+        return true;
+    if (flags & 0x20000000)
+        return true;
+    return false;
+}
+
+/* True when any of the selection-change request flags is set. */
+static __inline bool transitionHasSelectionChange(u32 flags)
+{
+    if (flags & 0x800000)
+        return true;
+    if (flags & 0x1000000)
+        return true;
+    if (flags & 0x2000000)
+        return true;
+    if (flags & 0x8000000)
+        return true;
+    if (flags & 0x100000)
+        return true;
+    if (flags & 0x80000)
+        return true;
+    if (flags & 0x200000)
+        return true;
+    if (flags & 0x40000)
+        return true;
+    if (flags & 0x4000000)
+        return true;
+    if (flags & 0x20000000)
+        return true;
+    return false;
+}
+
+/* Starts the requested content transition (forced states, add-on loss, moves, the message window)
+ * or runs the idle update, then refreshes the scene's scroll and transform. */
+void updateContentTransitionDispatch(ContentTransitionUpdate *update)
+{
     if (g_gameState.requests.state13) {
-        scene->state = 13;
-        scene->phase = 0;
+        update->scene.state = 13;
+        update->scene.phase = 0;
         g_gameState.requests.state13 = 0;
     } else if (g_gameState.requests.state12) {
-        scene->state = 12;
-        scene->phase = 0;
+        update->scene.state = 12;
+        update->scene.phase = 0;
         g_gameState.requests.state12 = 0;
     } else if (aocSelectedRecordIsUnavailable(g_aocSystem)) {
-        scene->state = 14;
-        scene->phase = 0;
+        update->scene.state = 14;
+        update->scene.phase = 0;
     } else {
-        u32 flags = scene->flags;
+        u32 flags = update->scene.flags;
         if (flags & 0x400000) {
             slotSetRequest(0, 30, 0xff);
-            scene->phase = 0;
-            scene->state = 16;
-        } else if ((flags & 0x10) || (flags & 0x200000) ||
-                   (flags & 0x40000) || (flags & 0x800000) ||
-                   (flags & 0x4000000) || (flags & 0x1000000) ||
-                   (flags & 0x2000000) || (flags & 0x8000000) || (flags & 0x20000000)) {
+            update->scene.phase = 0;
+            update->scene.state = 16;
+        } else if (transitionHasPendingMove(flags)) {
             if (!(flags & 0x100))
                 slotSetRequest(0, 10, 0xff);
-            flags = scene->flags;
-            if (((flags & 0x800000) || (flags & 0x1000000) ||
-                 (flags & 0x2000000) || (flags & 0x8000000) ||
-                 (flags & 0x100000) || (flags & 0x80000) ||
-                 (flags & 0x200000) || (flags & 0x40000) ||
-                 (flags & 0x4000000) || (flags & 0x20000000)) && !(flags & 0x100))
+            flags = update->scene.flags;
+            if (transitionHasSelectionChange(flags) && !(flags & 0x100))
                 slotSetRequest(1, 10, 0xff);
-            scene->phase = 0;
-            scene->state = 16;
+            update->scene.phase = 0;
+            update->scene.state = 16;
         } else if (flags & 0x2000) {
             if (flags & 0x40) {
-                scene->flags = flags & ~0x40U;
+                update->scene.flags = flags & ~0x40;
                 messageMainFinishWindow();
             }
-            scene->state = 6;
-            scene->phase = 0;
+            update->scene.state = 6;
+            update->scene.phase = 0;
             update->savedToken = FUN_0022b8c0(update->tokens);
-            scene->flags &= ~0x2000U;
+            update->scene.flags &= ~0x2000;
         } else {
-            FUN_003b875c(scene);
+            FUN_003b875c(&update->scene);
         }
     }
-    FUN_0022b778(scene);
-    uiClampScrollOffset(scene, update->input);
+    FUN_0022b778(&update->scene);
+    uiClampScrollOffset(&update->scene, update->input);
     if (update->processActive)
         FUN_00341a3c(update->process);
 }

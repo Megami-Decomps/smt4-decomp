@@ -1,4 +1,3 @@
-/* NON_MATCHING: in the unit-key compare retail copies `a` to r6 and computes a's unit key in r4; built keeps `a` in r4 and the key in r6. */
 #include "shard/PassiveSkill.h"
 #include "gamedata/DataTable40.h"
 
@@ -23,13 +22,28 @@ static u16 skillSortKey(const SkillListEntry *entry)
     return reinterpret_cast<const ActiveSkillRecord *>(dataTable40FindById(entry->skillId))->sortKey;
 }
 
-/* The holding unit's sort key, 0 without a unit. */
-static u16 skillUnitSortKey(const SkillListEntry *entry)
+/* Tie-break by the holding units' sort keys (0 without a unit), then FUN_00257568 (FUN_00219208's body). */
+static __inline s32 compareUnitSortKeys(const SkillListEntry *a, const SkillListEntry *b)
 {
-    if (entry->unit < 0) {
-        return 0;
+    u16 keyA;
+    u16 keyB;
+    s32 diff;
+
+    if (a->unit < 0) {
+        keyA = 0;
+    } else {
+        keyA = gameGetUnitRecord(a->unit)->sortKey;
     }
-    return gameGetUnitRecord(entry->unit)->sortKey;
+    if (b->unit < 0) {
+        keyB = 0;
+    } else {
+        keyB = gameGetUnitRecord(b->unit)->sortKey;
+    }
+    diff = keyA - keyB;
+    if (diff != 0) {
+        return diff;
+    }
+    return FUN_00257568(a, b);
 }
 
 /* Skill list sort comparator: by skill sort key, then by unit sort key, then FUN_00257568. */
@@ -39,11 +53,7 @@ s32 FUN_00219148(const SkillListEntry *a, const SkillListEntry *b)
     if (diff != 0) {
         return diff;
     }
-    diff = skillUnitSortKey(a) - skillUnitSortKey(b);
-    if (diff != 0) {
-        return diff;
-    }
-    return FUN_00257568(a, b);
+    return compareUnitSortKeys(a, b);
 }
 
 } /* extern "C" */

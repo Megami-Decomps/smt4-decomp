@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail predicates the volume clamp in r1 and sets the ramp argument before testing the sound pointer; this source uses a clamp branch and a later ramp move. */
+/* NON_MATCHING: the clamp is now predicated as in retail, but the build masks the level to a byte before the compare (retail tests the raw value and masks only on the conversion path) and sets the ramp argument after the sound-pointer test. */
 #include "common.h"
 
 struct SoundVolumeOwner {
@@ -20,10 +20,10 @@ extern "C" void audioApplyChannelVolume(u32 slot, u32 value, s32 frames)
         SoundVolumeOwner *owner = g_asdSound.owners[slot];
         if (owner) {
             owner->volume = value;
-            if (value > 127) {
-                value = 127;
-                owner->volume = value;
+            if (owner->volume > 127) {
+                owner->volume = 127;
             }
+            value = owner->volume;
             f32 volume;
             if (value == 0)
                 volume = 0.0f;

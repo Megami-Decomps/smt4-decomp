@@ -56,7 +56,7 @@ s32 nw_snd_SoundArchive_IsAvailable(void *archive);
 void FUN_00154890(u32 arg);
 void FUN_00169614(u32 arg);
 void FUN_00173a94(void *streamSource);
-void FUN_00173c1c(void *animPlayer);
+void soundObjectPostStop(void *animPlayer);
 void FUN_00173c7c(void *streamPlayer);
 void asdSoundObjectStop(s32 handle, s32 arg);
 void uiTextStateReset(void *system);
@@ -125,7 +125,7 @@ void FUN_00150784(void)
         asdMemFree(system->streamBuffer);
     }
     system->archiveLoaded = 0;
-    FUN_00173c1c(system->animPlayer);
+    soundObjectPostStop(system->animPlayer);
     FUN_00173c7c(system->streamPlayer);
     uiTextStateReset(system);
     if (system->workBuffer != NULL)

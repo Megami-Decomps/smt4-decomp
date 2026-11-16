@@ -1,4 +1,5 @@
-/* NON_MATCHING: retail predicates the empty-list case (movcs/strcs) and compares as `cmp start, count` / `cmp remaining, capacity`; built branches and swaps the compare operands */
+/* NON_MATCHING: retail predicates the empty-list case (movcs r1, #0; strcs r1) with the zero result in r1;
+ * built branches, materialising it in r0 first. */
 #include "classes/WindowStatus.h"
 #include "nn/Result.h"
 
@@ -19,11 +20,13 @@ WindowStatusResult FUN_003df7d4(TextListEntry **entry, u32 *outCount, s32 code, 
 {
     TextListEntry *list = *entry;
 
-    if (start >= list->itemCount) {
+    u32 count = list->itemCount;
+
+    if (start >= count) {
         code = 0;
         *outCount = 0;
     } else {
-        u32 remaining = list->itemCount - start;
+        u32 remaining = count - start;
 
         if (remaining < capacity) {
             capacity = remaining;

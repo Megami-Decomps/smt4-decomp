@@ -4484,3 +4484,7 @@
 0027d614 conditionalMessageFind inferred [med] First table 0x23 section 8 (plus add-on) message with matching category/kind and allowed flags. Twin of smt4a FUN_003cdd3c.
 002cc1c0 asd3dSoundActorSetPosition inferred [med] Stores the 3D actor position and calls nw_snd_Sound3DActor_SetPosition, guarded by the manager's active flag.
 0024db9c __aeabi_llsl inferred [high] The ARM runtime 64-bit left shift (value in r0:r1, count in r2; subs r3,r2,#32 / bpl / lsl+orr+lsr), hand-written in the runtime library.
+0025086c textFormatFullWidthTwoDigits inferred [med] Writes one or two Shift-JIS full-width digits (0x824F + n) and a terminator. Twin of smt4a FUN_002d2350.
+001e960c soundTestActionMenuUpdate inferred [high] Twin of smt4a soundTestActionMenuUpdate, matched from the same source.
+0019d9d4 drawColoredRectangle inferred [med] Twin of smt4a FUN_00221ddc (same source).
+003f89f8 animCurveFindPackedKey inferred [med] Rounds time/timeScale to a frame and searches the packed 12-bit-frame keys. Twin of smt4a FUN_0051d95c.

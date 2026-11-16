@@ -1,4 +1,4 @@
-/* NON_MATCHING: count-address hoisting and short-page branch placement differ; -O2 candidate. */
+/* NON_MATCHING: the touch-count address (r6) is hoisted to the entry instead of after the memset; everything else matches. */
 #include "ui/PartyPanelState.h"
 #include "gamedata/SaveSlotTableIV.h"
 
@@ -27,31 +27,34 @@ u16 FUN_002b8584(s32, s32);
 void partyPanelRebuildTouchRegions()
 {
     PartyTouchPanel *panel = (PartyTouchPanel *)g_partyPanel;
-    for (s32 i = 0; i < panel->touch.count; ++i)
+    s32 i;
+    for (i = 0; i < panel->touch.count; ++i)
         ifTouchRegionRemove();
     panel->touch.count = 0;
     __aeabi_memset4(&panel->touch, 0x3c, 0xffffffff);
     if (panel->alternate != 0) {
-        for (s32 i = 0; i < 4; ++i) {
+        for (i = 0; i < 4; ++i) {
             panel->touch.characters[i] = FUN_002b8584(0x19, i + 0x57);
             ++panel->touch.count;
         }
-        for (s32 i = 0; i < gameGetSlotTable()->stockCount; ++i) {
+        for (i = 0; i < gameGetSlotTable()->stockCount; ++i) {
             panel->touch.demons[i] = FUN_002b8584(0x19, i + 0x5b);
             ++panel->touch.count;
         }
         return;
     }
-    for (s32 i = 0; i < 4; ++i) {
+    for (i = 0; i < 4; ++i) {
         panel->touch.characters[i] = FUN_002b8584(0x19, i + 0x2d);
         ++panel->touch.count;
     }
     s32 visible = 12;
-    if (panel->page)
+    if (panel->page == 0) {
+        if (gameGetSlotTable()->stockCount < 12)
+            visible = gameGetSlotTable()->stockCount;
+    } else {
         visible = gameGetSlotTable()->stockCount - 12;
-    else if (gameGetSlotTable()->stockCount < 12)
-        visible = gameGetSlotTable()->stockCount;
-    for (s32 i = 0; i < visible; ++i) {
+    }
+    for (i = 0; i < visible; ++i) {
         panel->touch.demons[i] = FUN_002b8584(0x19, i + 0x31);
         ++panel->touch.count;
     }

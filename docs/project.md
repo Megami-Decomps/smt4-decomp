@@ -24,6 +24,7 @@ tools/units.py        fixes the function list: splits merged units, adds the cod
                       (branch targets, callbacks, stub bodies), extends cut-short ones, moves late starts
 tools/scope.py        lists the third-party functions progress does not count (config/third_party.txt)
 tools/progress_site.py  renders both games' proven progress as a static site (build/site/)
+tools/similar.py      finds, for each unproven function, the proven functions whose retail code looks most alike
 tools/triage.py       sorts the unproven functions by what their fdiff shows (order, operands, registers, shape)
 tools/worktrees.py    git worktrees for parallel work: each links orig/ and build/tools/ to this checkout,
                       builds and relinks on its own, and hands back its changes as a patch

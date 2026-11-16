@@ -1,4 +1,4 @@
-/* NON_MATCHING: phase 15 is hoisted into an extra saved register; auxiliary resource store uses different address decomposition. */
+/* NON_MATCHING: the fallback transition through btlStepEnter no longer hoists phase 15; remaining: the auxiliary resource store at +0x9C70 is addressed as add #0x9000/#0xC70 with [r1] (retail add #0x9C00 with [r1, #0x70]), which also reorders the 0x166 pool word. */
 #include "battle/btlMain.h"
 #include "battle/btlCamera.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -68,9 +68,7 @@ void FUN_003e025c(BtlStep *step, BtlMainStateA *battle)
             }
         }
     }
-    step->counters.unk10 = 0;
-    step->state = 15;
-    step->counters.unk0C = 0;
+    btlStepEnter(step, 15);
     FUN_003e1068(step, battle);
 }
 }

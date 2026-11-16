@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler forwards stack arguments through VFP while retail uses core-register block copies; candidate O2. */
+/* NON_MATCHING: IDENTICAL when compiled with --cpu=MPCore --fpu=softvfp (retail forwards the stack words with core ldm/stm, as its neighbours FUN_00426634/FUN_00426940 that need the same flag); the default build copies them through VFP. Needs that unit cflags. */
 #include "shard/W6_W6Match2_HandleRequest.h"
 #include "nn/Result.h"
 

@@ -48,7 +48,7 @@ struct MapMain {
 extern "C" {
 extern GameStateView g_gameState;
 extern MapMain *g_mapMain;
-extern MusicSlot DAT_00582364[];
+extern MusicSlot g_textEntryTable[];
 
 u8 *FUN_003cb88c(s32 area, s32 sub);
 void soundActorQueueStartPending(void);
@@ -85,7 +85,7 @@ void mapSelectRoomMusic(void)
     if (map->area == 24) {
         lmapGetSpawnIndex();
     } else if (gameFlagsValueGet(map->area) == 1) {
-        MusicSlot *slot = &DAT_00582364[slotFindByPair(map->area, map->sub)];
+        MusicSlot *slot = &g_textEntryTable[slotFindByPair(map->area, map->sub)];
         if (slot->alternateBgm != 0) {
             g_gameState.bgm = slot->alternateBgm;
             s32 state = bgmGetStateById(slot->alternateBgm);
@@ -94,7 +94,7 @@ void mapSelectRoomMusic(void)
             return;
         }
     }
-    MusicSlot *slot = &DAT_00582364[slotFindByPair(map->area, map->area != 24 ? map->sub : 1)];
+    MusicSlot *slot = &g_textEntryTable[slotFindByPair(map->area, map->area != 24 ? map->sub : 1)];
     g_gameState.bgm = slot->defaultBgm;
     if (slot->flaggedBgm != 0 && (slot->flagA == 0 || gameFlagIsSet(slot->flagA) != 0) &&
         (slot->flagB == 0 || gameFlagIsSet(slot->flagB) == 0))

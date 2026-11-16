@@ -1,9 +1,12 @@
-/* NON_MATCHING: allocation initialization uses a branch instead of predication; terminal-state tests and constant-one lifetime differ. */
+/* NON_MATCHING: the constructor gives retail's predicated allocation and the state-entry helper its final stores; remaining: retail keeps the constant 1 of ownsSlot in r8 (saving r8, 16-byte frame), and does not thread the terminal-state test (state 0 falls through to a second null test of the work). */
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 struct SaintGermainScriptWork {
+    SaintGermainScriptWork() : messages(NULL), scriptData(NULL), process(NULL) {}
+    static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
+
     u32 job;
     s32 state;
     u32 frame;
@@ -36,16 +39,19 @@ void dataTableFree(u32);
 void jobStop(u32, s32);
 void asdOperatorDelete(void *);
 
+/* Moves the script work to `state`, remembering the state it left and restarting its frame count. */
+static inline void saintGermainEnterState(SaintGermainScriptWork *work, s32 state)
+{
+    work->previousState = work->state;
+    work->state = state;
+    work->frame = 0;
+}
+
 u32 FUN_003ca3d0()
 {
     if (scrGetCommandFrame() == 0) {
         u32 argument = scrGetArg(0);
-        SaintGermainScriptWork *work = static_cast<SaintGermainScriptWork *>(asdOperatorNew(sizeof(SaintGermainScriptWork)));
-        if (work) {
-            work->messages = NULL;
-            work->scriptData = NULL;
-            work->process = NULL;
-        }
+        SaintGermainScriptWork *work = new SaintGermainScriptWork;
         DAT_00588130 = work;
         work->job = asdProcessCreateSimple(DAT_00533364, 4, 0, 0, FUN_00349b14, NULL, 0);
         taskCreateDraw(DAT_00533350, 0xEB, 0, 0, FUN_003710f8, NULL, 0, reinterpret_cast<void *>(work->job));
@@ -58,9 +64,7 @@ u32 FUN_003ca3d0()
             work->ownsSlot = 1;
         }
         campButtonHelpAcquire();
-        work->previousState = work->state;
-        work->state = 1;
-        work->frame = 0;
+        saintGermainEnterState(work, 1);
     }
     SaintGermainScriptWork *work = DAT_00588130;
     if (work && work->state != 0 && work->state != 8)

@@ -17,14 +17,14 @@ struct Object00219fa8 {
 
 extern "C" {
 
-void FUN_0019d9d4(Part00219fa8 *part);
+void drawColoredRectangle(Part00219fa8 *part);
 
 /* Passes the owner's part (0xc0) on when it is active. */
 void FUN_00219fa8(Object00219fa8 *object)
 {
     Part00219fa8 *part = &object->owner->part;
     if (part->active != 0)
-        FUN_0019d9d4(part);
+        drawColoredRectangle(part);
 }
 
 } /* extern "C" */

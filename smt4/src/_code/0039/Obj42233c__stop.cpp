@@ -1,93 +1,71 @@
-/* NON_MATCHING: Distance testing and node-transform updates use different floating-point register allocation and branch scheduling. */
-#include "romwright_types.h"
+/* NON_MATCHING: the placement and show/hide tail match; in the camera-distance test retail reloads `flags` after the square root (the build keeps it in r1) and allocates the deltas to s1/s2/s0, and the rise step's float registers differ. */
 #include "classes/Obj42233c.h"
+#include "map/mapDepart.h"
+#include "shard/W6_W6Match3_NodeEnable.h"
+
+/* The part of the local map scene read here: the camera's position. */
+struct LmapSceneCamera {
+    /* 0x00 */ u8 unk00[0x1c];
+    /* 0x1C */ MapVector position;
+};
 
 extern "C" {
-
-int nodeSetScale(unsigned int, int);
-int FUN_0028c618(unsigned int, int);
-int nodeSetTranslation(unsigned int, int, float *);
-
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern int g_lmapScene; /* 0x447e88 */
-extern unsigned char g_gameState; /* 0x49f91c */
-
-#ifndef ROMWRIGHT_SQRT_4_DEFINED
-#define ROMWRIGHT_SQRT_4_DEFINED
-double sqrt(double);
-static float romwright_sqrt_4(float value)
-{
-    return (float)sqrt((double)value);
+extern GameState g_gameState;
+extern LmapSceneCamera *g_lmapScene;
+f32 sqrtf(f32 value);
+void nodeSetTranslation(NodeEnableResource *node, s32 index, const f32 *position);
+void FUN_0028c618(NodeEnableResource *node, s32 index, f32 x, f32 y, f32 z);
+void nodeSetScale(NodeEnableResource *node, s32 index, f32 x, f32 y, f32 z);
 }
-#endif
-/* Supplied declaration required: nodeSetScale. */
-/* Supplied declaration required: FUN_0028c618. */
-/* Supplied declaration required: nodeSetTranslation. */
 
-
-} /* extern "C" */
-
+/* Starts sinking once the camera is more than 300 units away, raises the model back by 50 a frame
+ * until it is level again, then places the model and shows or hides it with the map range. */
 void Obj42233c::stop()
-
 {
-    int param_1 = (int)this;
-/* irregular: 3 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  float temp_v1;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  float temp_v5;
-  float temp_v6;
-  
-  if (((*(unsigned int *)(param_1 + 0x70) & 4) != 0) &&
-     (temp_v2 = *(float *)(param_1 + 0x28) - *(float *)(g_lmapScene + 0x1c),
-     temp_v3 = *(float *)(param_1 + 0x2c) - *(float *)(g_lmapScene + 0x20),
-     temp_v1 = *(float *)(param_1 + 0x30) - *(float *)(g_lmapScene + 0x24),
-     (int)romwright_sqrt_4(temp_v2 * temp_v2 + temp_v3 * temp_v3 + temp_v1 * temp_v1) >= 0x43960001)) {
-    *(unsigned int *)(param_1 + 0x70) = (*(unsigned int *)(param_1 + 0x70) & 0xfffffffb) | 1;
-  }
-  if (((*(unsigned int *)(param_1 + 0x70) & 1) != 0) &&
-     (temp_v1 = *(float *)(param_1 + 0x94) + 50.0f, *(float *)(param_1 + 0x94) = temp_v1, 0.0f < temp_v1)) {
-    *(unsigned int *)(param_1 + 0x94) = 0;
-    *(unsigned int *)(param_1 + 0x70) = *(unsigned int *)(param_1 + 0x70) & 0xfffffffe;
-    *(unsigned char *)(param_1 + 8) = *(unsigned char *)(param_1 + 8) & 0xfb;
-  }
-  if (*(int *)(param_1 + 0x6c) != 0) {
-    temp_v4 = *(float *)(param_1 + 0x28) + *(float *)(param_1 + 0x90);
-    temp_v5 = *(float *)(param_1 + 0x2c) + *(float *)(param_1 + 0x94);
-    temp_v6 = *(float *)(param_1 + 0x30) + *(float *)(param_1 + 0x98);
-    nodeSetTranslation(*(unsigned int *)(*(int *)(param_1 + 0x6c) + 8),0,&temp_v4);
-    FUN_0028c618(*(unsigned int *)(*(int *)(param_1 + 0x6c) + 8),0);
-    nodeSetScale(*(unsigned int *)(*(int *)(param_1 + 0x6c) + 8),0);
-    if ((*(unsigned int *)(param_1 + 0x70) & 4) != 0) {
-      puVar1 = *(unsigned int **)(param_1 + 0x6c);
-      temp_v0 = *puVar1;
-    }
-    else {
-      puVar1 = *(unsigned int **)(param_1 + 0x6c);
-      if ((*(signed char *)((unsigned char *)&g_gameState + 0x22)) == '\0') {
-        if ((*puVar1 & 2) == 0) {
-          return;
+    if ((flags & 4) != 0) {
+        f32 dx = basePosition[0] - g_lmapScene->position.x;
+        f32 dy = basePosition[1] - g_lmapScene->position.y;
+        f32 dz = basePosition[2] - g_lmapScene->position.z;
+        if (sqrtf(dx * dx + dy * dy + dz * dz) > 300.0f) {
+            flags = (flags & ~4) | 1;
         }
-        *puVar1 = *puVar1 & 0xfffffffd;
-        *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 1;
-        return;
-      }
-      temp_v0 = *puVar1;
     }
-    if ((temp_v0 & 2) == 0) {
-      *puVar1 = temp_v0 | 2;
-      *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 0;
+    if ((flags & 1) != 0) {
+        offset[1] += 50.0f;
+        if (offset[1] > 0) {
+            offset[1] = 0;
+            flags &= ~1;
+            timerFlags &= ~4;
+        }
     }
-  }
-  return;
+    if (handle != 0) {
+        f32 translated[3] = {
+            basePosition[0] + offset[0],
+            basePosition[1] + offset[1],
+            basePosition[2] + offset[2]
+        };
+        NodeEnableNode *node = (NodeEnableNode *)handle;
+        nodeSetTranslation(node->resource, 0, translated);
+        FUN_0028c618(((NodeEnableNode *)handle)->resource, 0, rotation[0], rotation[1], rotation[2]);
+        nodeSetScale(((NodeEnableNode *)handle)->resource, 0, scale[0], scale[1], scale[2]);
+        if ((flags & 4) != 0) {
+            node = (NodeEnableNode *)handle;
+            if ((node->flags & 2) == 0) {
+                node->flags |= 2;
+                node->resource->target->enabled = 0;
+            }
+        } else if (g_gameState.controllerFlags.mapRangeModelsHidden) {
+            node = (NodeEnableNode *)handle;
+            if ((node->flags & 2) == 0) {
+                node->flags |= 2;
+                node->resource->target->enabled = 0;
+            }
+        } else {
+            node = (NodeEnableNode *)handle;
+            if ((node->flags & 2) != 0) {
+                node->flags &= ~2;
+                node->resource->target->enabled = 1;
+            }
+        }
+    }
 }
-

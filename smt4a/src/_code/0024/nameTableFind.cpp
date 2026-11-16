@@ -18,7 +18,7 @@ typedef char NameTableEntrySizeCheck[sizeof(NameTableEntry) == 0x5c ? 1 : -1];
 extern "C" {
 
 extern const FixedNameList DAT_00532210;
-extern NameTableEntry DAT_00582364[999];
+extern NameTableEntry g_textEntryTable[999];
 
 /* The name for (kind, index): a fixed name for kind 24, else the matching name table row; NULL if none. */
 const char *nameTableFind(s32 kind, s32 index)
@@ -28,11 +28,11 @@ const char *nameTableFind(s32 kind, s32 index)
         return fixed.names[index];
     }
     for (s32 i = 0; i < 999; ++i) {
-        if (DAT_00582364[i].kind == -1) {
+        if (g_textEntryTable[i].kind == -1) {
             break;
         }
-        if (DAT_00582364[i].kind == kind && DAT_00582364[i].index == index) {
-            return DAT_00582364[i].name;
+        if (g_textEntryTable[i].kind == kind && g_textEntryTable[i].index == index) {
+            return g_textEntryTable[i].name;
         }
     }
     return NULL;

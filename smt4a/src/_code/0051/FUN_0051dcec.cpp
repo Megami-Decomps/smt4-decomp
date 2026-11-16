@@ -1,14 +1,17 @@
-/* NON_MATCHING: retail uses vmov s0, r0 where the compiled block uses vldr s0, [r4, #12]. */
 #include "shard/W5_W5Match5_TwinRecords.h"
 
 using namespace SampleRange;
 
-
-
 extern "C" Sample* FUN_0051d7e0(SampleTransform* transform);
 
+/* The sample's raw value as a float. */
+static __inline f32 sampleGetValue(const Sample* sample)
+{
+    return sample->value;
+}
+
+/* The transform's current sample, scaled and offset into its output range. */
 extern "C" f32 FUN_0051dcec(SampleTransform* transform)
 {
-    Sample* sample = FUN_0051d7e0(transform);
-    return static_cast<f32>(static_cast<u32>(sample->value)) * transform->scale + transform->bias;
+    return sampleGetValue(FUN_0051d7e0(transform)) * transform->scale + transform->bias;
 }

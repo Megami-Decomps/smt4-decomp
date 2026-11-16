@@ -5,7 +5,7 @@ extern "C" {
 extern MapIfGlobals g_mapIf;
 u32 FUN_002bfdd4();
 u32 FUN_002bfdc4();
-void FUN_0025086c(s32, char *);
+void textFormatFullWidthTwoDigits(s32, char *);
 u32 FUN_002be650(u32, s32);
 const char *textConvertToGlyphPairs(u32, s32);
 void textFormatBuffer(char *, const char *, ...);
@@ -29,7 +29,7 @@ void mapIfShowItemResultMessage(u32 result, u32 item, s32 count)
         message = 0x7a906;
         break;
     case 1:
-        FUN_0025086c(count, countText);
+        textFormatFullWidthTwoDigits(count, countText);
         textFormatBuffer(text, "\x25\x73\x81\x40\x82\x94\x82\x99\x82\x90\x82\x85\x81\x69\x82\x93\x81\x6a\x81\x40\x82\x8f\x82\x86\x81\x40\x82\x89\x82\x94\x82\x85\x82\x8d\x81\x40\x82\x92\x82\x85\x82\x8d\x82\x81\x82\x89\x82\x8e\x82\x89\x82\x8e\x82\x87\x81\x44", countText);
         message = 0x61abf;
         break;
@@ -38,7 +38,7 @@ void mapIfShowItemResultMessage(u32 result, u32 item, s32 count)
     case 5:
     {
         u32 entry = FUN_002be650(item, 0);
-        FUN_0025086c(count, countText);
+        textFormatFullWidthTwoDigits(count, countText);
         textFormatBuffer(text, "\x25\x73\x81\x46\x81\x40\x25\x73\x81\x40\x82\x71\x82\x85\x82\x8d\x82\x81\x82\x89\x82\x8e\x82\x89\x82\x8e\x82\x87", textConvertToGlyphPairs(entry, 0), countText);
         break;
     }

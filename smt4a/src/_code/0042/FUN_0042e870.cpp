@@ -1,4 +1,4 @@
-/* NON_MATCHING: scoped critical-section guards and ordered message clears recovered; virtual-read result/guard stack layout and saved registers differ. */
+/* NON_MATCHING: frame and stores match; callee-saved registers are permuted (retail: preserveOpen r7, section r6, flags r8, zero r5, state section r9). */
 #include "shard/CecMessageBox.h"
 #include "shard/W6_W6Match6_CecMessageBox.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
@@ -41,8 +41,8 @@ void FUN_0042e870(MessageBox *box, s32 preserveOpen)
             if (box->unk008[3])
                 nn_cec_CTR_MessageBox_WriteBoxInfo(box, 1, &work->outbox, work->outboxData);
             if (flags->prefix.open) {
-                u32 result[2];
-                box->vtbl->read(box, box->id, 0x96, 0x14, result);
+                u32 result;
+                box->vtbl->read(box, box->id, 0x96, 0x14, &result);
                 nn_cec_CTR_MessageBox_WriteMessageBoxInfo(box);
             }
         }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: mask operand/load ordering (retail stores the 64-bit state flags as two word stores) and step reset stores differ. */
+/* NON_MATCHING: the final step transition (btlStepEnter) and the word-wise stores of both mask ORs now match; retail loads the state mask of the initial test with ldrd (built: two ldr) and the state mask of the second OR with ldm (built: two ldr). */
 #include "battle/btlMain.h"
 
 extern "C" {
@@ -33,7 +33,7 @@ void FUN_003e26f0(BtlStep *step, BtlMainStateA *battle)
     if ((g_btlEncount.initial & battle->stateFlags64.bits) == 0) {
         FUN_003ed6e8(battle);
         FUN_003f26d4(battle);
-        battle->stateFlags64.bits = battle->stateFlags64.bits | g_btlEncount.transition | g_btlEncount.finished;
+        battle->stateFlags64.bits = g_btlEncount.transition | battle->stateFlags64.bits | g_btlEncount.finished;
         FUN_004aa2e0(g_btlUiBlock, 0);
     } else {
         FUN_003ed6e8(battle);
@@ -42,9 +42,7 @@ void FUN_003e26f0(BtlStep *step, BtlMainStateA *battle)
         if (FUN_003eebf4(battle, 1) < 0 && (battle->encounter.controlFlags & 0x20) == 0)
             FUN_0047f444(3);
     }
-    step->counters.unk10 = 0;
-    step->counters.unk0C = 0;
-    step->state = 25;
+    btlStepEnter(step, 25);
     FUN_003e0cd4(step, battle);
 }
 }

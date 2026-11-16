@@ -8,15 +8,15 @@ struct PackedHermiteCurve {
     PackedAnimKeyWide keys[1];
 };
 extern "C" {
-const PackedAnimKeyWide *FUN_0051d95c(const PackedHermiteCurve *curve, f32 frame);
+const PackedAnimKeyWide *animCurveFindPackedKey(const PackedHermiteCurve *curve, f32 frame);
 f32 nn_math_ARMv6_HermiteC_FAST(f32 value, f32 outgoing, f32 nextValue, f32 incoming, f32 elapsed, f32 duration);
 
 // Sample a packed Hermite curve, scaling its integer values and fixed-point tangents.
 f32 FUN_0051ea74(const PackedHermiteCurve *curve, f32 frame)
 {
-    FUN_0051d95c(curve, frame);
+    animCurveFindPackedKey(curve, frame);
     const PackedAnimKeyWide *last = &curve->keys[curve->keyCount - 1];
-    const PackedAnimKeyWide *key = FUN_0051d95c(curve, frame);
+    const PackedAnimKeyWide *key = animCurveFindPackedKey(curve, frame);
     f32 keyFrame = (f32)key->frame * curve->frameScale;
     if (keyFrame == frame || key == last)
         return curve->valueOffset + (f32)key->value * curve->valueScale;

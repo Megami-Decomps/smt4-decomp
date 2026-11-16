@@ -1,4 +1,3 @@
-/* NON_MATCHING: Retail mov r5, #1 differs from recovered mov r2, #0. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlReflect.h"
 #include "common.h"
@@ -24,6 +23,15 @@ s32 FUN_0027e3e8(BattleEvent* event, ReflectSourceView* source, u32 mode);
 
 extern BattleEvent* g_btlEvent;
 
+// Queues a reflection action of kind 0x24 on the entry.
+static __inline void queueEntryAction(s32 actionId, u32 argument, ListedBattleEntryView* entry, s32 value)
+{
+    ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actionId, 0, argument);
+    action->kind = 0x24;
+    action->wordValues.unk18 = (u32)entry;
+    action->value = value;
+}
+
 // Mark the listed entry and enqueue a reflection action when the event permits it.
 u32 FUN_00250680(s32 actionId, u32 argument, ReflectSourceView* source)
 {
@@ -34,11 +42,7 @@ u32 FUN_00250680(s32 actionId, u32 argument, ReflectSourceView* source)
 
         if (FUN_0027e3e8(g_btlEvent, source, 1) == 0 ||
             (entry->flags & 0x10) == 0) {
-            ReflectAction *action =
-                btlQueueReflectAction(g_btlActionReflect, (s16)actionId, 0, argument);
-            action->kind = 0x24;
-            action->wordValues.unk18 = (u32)entry;
-            action->value = 1;
+            queueEntryAction(actionId, argument, entry, 1);
         }
     }
     return 1;

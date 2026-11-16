@@ -9645,7 +9645,18 @@
       "size": 72,
       "source": "src/_code/0013/FUN_0013727c.cpp",
       "target": "orig/target/_code/0013/FUN_0013727c.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x1372c8",
@@ -20956,12 +20967,12 @@
     },
     {
       "address": "0x19d9d4",
-      "function": "FUN_0019d9d4",
+      "function": "drawColoredRectangle",
       "module": "_code",
-      "object": "build/obj/_code/0019/FUN_0019d9d4.o",
+      "object": "build/obj/_code/0019/drawColoredRectangle.o",
       "size": 252,
-      "source": "src/_code/0019/FUN_0019d9d4.cpp",
-      "target": "orig/target/_code/0019/FUN_0019d9d4.o",
+      "source": "src/_code/0019/drawColoredRectangle.cpp",
+      "target": "orig/target/_code/0019/drawColoredRectangle.o",
       "thumb": false
     },
     {
@@ -25673,12 +25684,12 @@
     {
       "address": "0x1e960c",
       "file": "sound/soundTest",
-      "function": "FUN_001e960c",
+      "function": "soundTestActionMenuUpdate",
       "module": "_code",
-      "object": "build/obj/_code/sound/soundTest/FUN_001e960c.o",
+      "object": "build/obj/_code/sound/soundTest/soundTestActionMenuUpdate.o",
       "size": 504,
-      "source": "src/_code/sound/soundTest/FUN_001e960c.cpp",
-      "target": "orig/target/_code/sound/soundTest/FUN_001e960c.o",
+      "source": "src/_code/sound/soundTest/soundTestActionMenuUpdate.cpp",
+      "target": "orig/target/_code/sound/soundTest/soundTestActionMenuUpdate.o",
       "thumb": false
     },
     {
@@ -40595,12 +40606,12 @@
     },
     {
       "address": "0x25086c",
-      "function": "FUN_0025086c",
+      "function": "textFormatFullWidthTwoDigits",
       "module": "_code",
-      "object": "build/obj/_code/0025/FUN_0025086c.o",
+      "object": "build/obj/_code/0025/textFormatFullWidthTwoDigits.o",
       "size": 132,
-      "source": "src/_code/0025/FUN_0025086c.cpp",
-      "target": "orig/target/_code/0025/FUN_0025086c.o",
+      "source": "src/_code/0025/textFormatFullWidthTwoDigits.cpp",
+      "target": "orig/target/_code/0025/textFormatFullWidthTwoDigits.o",
       "thumb": false
     },
     {
@@ -86164,7 +86175,18 @@
       "size": 116,
       "source": "src/_code/0035/FUN_00359f90.cpp",
       "target": "orig/target/_code/0035/FUN_00359f90.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x35a010",
@@ -110400,12 +110422,12 @@
     },
     {
       "address": "0x3f89f8",
-      "function": "FUN_003f89f8",
+      "function": "animCurveFindPackedKey",
       "module": "_code",
-      "object": "build/obj/_code/003f/FUN_003f89f8.o",
+      "object": "build/obj/_code/003f/animCurveFindPackedKey.o",
       "size": 212,
-      "source": "src/_code/003f/FUN_003f89f8.cpp",
-      "target": "orig/target/_code/003f/FUN_003f89f8.o",
+      "source": "src/_code/003f/animCurveFindPackedKey.cpp",
+      "target": "orig/target/_code/003f/animCurveFindPackedKey.o",
       "thumb": false
     },
     {

@@ -1,4 +1,4 @@
-/* NON_MATCHING: the cursor local now lives in an inner scope so armcc tail-calls the final builder like retail; only the initial argument setup (retail keeps node->data in r3 and copies node to r1 first) is scheduled differently. */
+/* NON_MATCHING: only the entry schedule differs: retail copies the parameter after the push and keeps node->data in r3 (built: r0, begin in r3). */
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 struct NodeInitializationData {
@@ -14,15 +14,19 @@ void FUN_002a9834(u8** cursor, AsdMdlNode* node, u32 parameter, u32 flags);
 void FUN_001457ec(AsdMdlNode* node, u32 parameter);
 void FUN_002a9244(AsdMdlNode* node);
 
-// Resets the model data cursor, initializes its records, and builds the node state.
-void asdMdlNodeInit(AsdMdlNode* node, u32 parameter)
+// Rewinds the node's data cursor and builds its records from the beginning of the data.
+static __inline void asdMdlNodeBuildRecords(AsdMdlNode* node, u32 parameter)
 {
     NodeInitializationData* data = static_cast<NodeInitializationData*>(node->data);
     data->cursor = data->begin;
-    {
-        u8* cursor = static_cast<NodeInitializationData*>(node->data)->begin;
-        FUN_002a9834(&cursor, node, parameter, 0);
-    }
+    u8* cursor = static_cast<NodeInitializationData*>(node->data)->begin;
+    FUN_002a9834(&cursor, node, parameter, 0);
+}
+
+// Resets the model data cursor, initializes its records, and builds the node state.
+void asdMdlNodeInit(AsdMdlNode* node, u32 parameter)
+{
+    asdMdlNodeBuildRecords(node, parameter);
     FUN_001457ec(node, static_cast<NodeInitializationData*>(node->data)->parameter);
     FUN_002a9244(node);
 }

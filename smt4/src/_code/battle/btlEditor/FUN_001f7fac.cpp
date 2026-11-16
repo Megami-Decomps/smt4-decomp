@@ -1,4 +1,4 @@
-/* NON_MATCHING: editor flag address register and literal-pool order differ from retail. */
+/* NON_MATCHING: the 0x1E9D field offset lands in the literal pool before DAT_00435ce8 (retail: after), so the post-alloc loads use r2/r3 the other way round. */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/EnemyEditor.h"
@@ -53,8 +53,9 @@ void FUN_001f7fac(BtlMainState *battle)
             btlReflectQueueKind34(0, 0);
         FUN_00256898(1, 0);
     }
-    battle->editorControl.flags |= 0x80000;
-    if (g_btlUiBlock)
-        FUN_0025c2d0(reinterpret_cast<u32>(g_btlUiBlock), 1);
+    battle->editorMask |= 0x80000;
+    BtlUi *ui = g_btlUiBlock;
+    if (ui)
+        FUN_0025c2d0(reinterpret_cast<u32>(ui), 1);
 }
 }

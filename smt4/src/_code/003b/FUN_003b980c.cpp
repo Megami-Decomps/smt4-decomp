@@ -1,12 +1,11 @@
-/* NON_MATCHING: slot addresses are now kept across the release calls like retail (slots indexed as an array); only the first slot address is formed as base+36 instead of one add of 3472. */
 #include "script/scrScriptProcess.h"
 #include <stddef.h>
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct ScriptScreenBundleView {
-    void *bytecode;
-    void *messages;
-    ScriptRunState *script;
+    /* 0x0 */ void *bytecode;
+    /* 0x4 */ void *messages;
+    /* 0x8 */ ScriptRunState *script;
 };
 struct ScriptScreenCleanupView {
     u8 unk000[0x9c];
@@ -31,36 +30,33 @@ void buttonHelpTexturesUnref();
 void uiFadeRelease();
 }
 
-struct ScriptScreenSlots {
-    u8 unk000[0xd6c];
-    void *slots[13];
-};
-
-static void releaseScript(ScriptScreenSlots *work, s32 index)
-{
-    if (work->slots[index] != NULL) {
-        scrScriptProcessDestroy(static_cast<ScriptRunState *>(work->slots[index]));
-        work->slots[index] = NULL;
-    }
-}
-static void releaseBuffer(ScriptScreenSlots *work, s32 index)
-{
-    if (work->slots[index] != NULL) {
-        asdMemFree(work->slots[index]);
-        work->slots[index] = NULL;
-    }
-}
-
 /* Release both script bundles and the screen's shared UI resources. */
 extern "C" void FUN_003b980c(ScriptScreenCleanupView *work)
 {
-    ScriptScreenSlots *slots = reinterpret_cast<ScriptScreenSlots *>(work);
-    releaseScript(slots, 9);
-    releaseBuffer(slots, 7);
-    releaseBuffer(slots, 8);
-    releaseScript(slots, 6);
-    releaseBuffer(slots, 4);
-    releaseBuffer(slots, 5);
+    if (work->secondary.script != NULL) {
+        scrScriptProcessDestroy(work->secondary.script);
+        work->secondary.script = NULL;
+    }
+    if (work->secondary.bytecode != NULL) {
+        asdMemFree(work->secondary.bytecode);
+        work->secondary.bytecode = NULL;
+    }
+    if (work->secondary.messages != NULL) {
+        asdMemFree(work->secondary.messages);
+        work->secondary.messages = NULL;
+    }
+    if (work->primary.script != NULL) {
+        scrScriptProcessDestroy(work->primary.script);
+        work->primary.script = NULL;
+    }
+    if (work->primary.bytecode != NULL) {
+        asdMemFree(work->primary.bytecode);
+        work->primary.bytecode = NULL;
+    }
+    if (work->primary.messages != NULL) {
+        asdMemFree(work->primary.messages);
+        work->primary.messages = NULL;
+    }
     spriteTable2aFree(work->sprites);
     FUN_003bbafc(work->fileSlot);
     soundRequestEnd();

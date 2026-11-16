@@ -1,4 +1,4 @@
-/* NON_MATCHING: stripped debug traces (lines 93, 98), the 4-byte size slot and the register-resident zero match retail; retail returns that zero through a predicated mov r0,r5 on the null path and indexes the entries with r0/r2 swapped, with a writeback entry pointer. */
+/* NON_MATCHING: stripped debug traces (lines 93, 98), the 4-byte size slot, the register-resident zero and the early return (moveq r0, r5) match retail; the entry loop keeps the index in r2 and folds the source pointer into a write-back load, where retail keeps the index in r0 and writes back the entry pointer. */
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "bible/bibleAnalyze.h"
 #include "AsdSDK/AsdDebug.h"
@@ -21,27 +21,28 @@ u32 asdTMTexTableLoadList(u32 handle)
     u32 *src;
     s32 i;
 
-    if (file != NULL) {
-        asdDebugTrace(DAT_00409270, 93);
-        g_texTable.header = (TexTableHeader *)asdMemAlloc(0x100, 0x100, 0, 0x104, 1);
-        rt_memcpy(g_texTable.header, file, 0x104);
-        asdDebugTrace(DAT_00409270, 98);
-        g_texTable.entries = (TexTableEntry *)asdMemAlloc(0x100, 0x100, 0, g_texTable.header->count * 0x18, 1);
-        src = (u32 *)(file + 0x104);
-        for (i = 0; i < g_texTable.header->count; i++) {
-            TexTableEntry *entry = &g_texTable.entries[i];
-            u32 *name = (u32 *)entry->name;
-
-            entry->file = NULL;
-            entry->sprites = NULL;
-            name[0] = src[0];
-            name[1] = src[1];
-            name[2] = src[2];
-            name[3] = src[3];
-            src += 0x18;
-        }
-        asdMemFree(file);
+    if (file == NULL) {
+        return result;
     }
+    asdDebugTrace(DAT_00409270, 93);
+    g_texTable.header = (TexTableHeader *)asdMemAlloc(0x100, 0x100, 0, 0x104, 1);
+    rt_memcpy(g_texTable.header, file, 0x104);
+    asdDebugTrace(DAT_00409270, 98);
+    g_texTable.entries = (TexTableEntry *)asdMemAlloc(0x100, 0x100, 0, g_texTable.header->count * 0x18, 1);
+    src = (u32 *)(file + 0x104);
+    for (i = 0; i < g_texTable.header->count; i++) {
+        TexTableEntry *entry = &g_texTable.entries[i];
+        u32 *name = (u32 *)entry->name;
+
+        entry->file = NULL;
+        entry->sprites = NULL;
+        name[0] = src[0];
+        name[1] = src[1];
+        name[2] = src[2];
+        name[3] = src[3];
+        src += 0x18;
+    }
+    asdMemFree(file);
     return result;
 }
 

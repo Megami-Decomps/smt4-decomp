@@ -26,17 +26,18 @@ public:
     /* 0x14 */ u8 unk14[0xC];
 };
 
-/* The non-virtual base of Obj420a2c: the owner and the first source (stored at +4, after the
+/* The non-virtual base of Obj420a2c: the owner and both sources (stored from +4, after the
  * derived class's vtable pointer). */
 class Obj420a2cBase {
 public:
     Obj420a2cBase()
-        : owner(NULL), sourceA(NULL)
+        : owner(NULL), sourceA(NULL), sourceB(NULL)
     {
     }
 
     /* 0x04 */ Obj420a2cOwner *owner;
     /* 0x08 */ Obj420a2cSource *sourceA;
+    /* 0x0C */ Obj420a2cSource *sourceB;
 };
 
 /* An object that builds up to three entries from two sources (vtable at 0x420a2c, named after it
@@ -52,7 +53,6 @@ public:
     virtual u32 getOutput(u32) const; /* +0x0c */
 
     /* 0x00: vtable pointer */
-    /* 0x0C */ Obj420a2cSource *sourceB;
     /* 0x10 */ u32 handles[3];
     /* 0x1C */ u32 outA[2];
     /* 0x24 */ u32 outB[2];
@@ -62,7 +62,7 @@ public:
     /* 0x40 */ Obj420a2cEntry entries[3];
     /* 0xA0 */ u32 unkA0;
 };
-typedef char Obj420a2cLayoutCheck[sizeof(Obj420a2cBase) == 8 &&
+typedef char Obj420a2cLayoutCheck[sizeof(Obj420a2cBase) == 12 &&
     sizeof(Obj420a2cEntry) == 0x20 && sizeof(Obj420a2c) == 0xA4 ? 1 : -1];
 
 #endif

@@ -42014,13 +42014,13 @@
       "target_path": "orig/target/_code/battle/btlAction/btlActionAllocData.o"
     },
     {
-      "base_path": "build/obj/_code/0019/FUN_0019d9d4.o",
+      "base_path": "build/obj/_code/0019/drawColoredRectangle.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0019d9d4",
+            "name": "drawColoredRectangle",
             "size": 252,
             "vram": "0x19d9d4"
           }
@@ -42028,10 +42028,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0019/FUN_0019d9d4.cpp"
+        "source_path": "src/_code/0019/drawColoredRectangle.cpp"
       },
-      "name": "_code/0019/FUN_0019d9d4",
-      "target_path": "orig/target/_code/0019/FUN_0019d9d4.o"
+      "name": "_code/0019/drawColoredRectangle",
+      "target_path": "orig/target/_code/0019/drawColoredRectangle.o"
     },
     {
       "base_path": "build/obj/_code/0019/matrixGetTranslation.o",
@@ -51200,13 +51200,13 @@
       "target_path": "orig/target/_code/001e/mapMainDrawOrdinaryPass.o"
     },
     {
-      "base_path": "build/obj/_code/sound/soundTest/FUN_001e960c.o",
+      "base_path": "build/obj/_code/sound/soundTest/soundTestActionMenuUpdate.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001e960c",
+            "name": "soundTestActionMenuUpdate",
             "size": 504,
             "vram": "0x1e960c"
           }
@@ -51215,10 +51215,10 @@
           "_code",
           "sound/soundTest"
         ],
-        "source_path": "src/_code/sound/soundTest/FUN_001e960c.cpp"
+        "source_path": "src/_code/sound/soundTest/soundTestActionMenuUpdate.cpp"
       },
-      "name": "_code/sound/soundTest/FUN_001e960c",
-      "target_path": "orig/target/_code/sound/soundTest/FUN_001e960c.o"
+      "name": "_code/sound/soundTest/soundTestActionMenuUpdate",
+      "target_path": "orig/target/_code/sound/soundTest/soundTestActionMenuUpdate.o"
     },
     {
       "base_path": "build/obj/_code/kernel/jyoucyu/FUN_001e981c.o",
@@ -80433,13 +80433,13 @@
       "target_path": "orig/target/_code/0025/uiQuestLoadResources.o"
     },
     {
-      "base_path": "build/obj/_code/0025/FUN_0025086c.o",
+      "base_path": "build/obj/_code/0025/textFormatFullWidthTwoDigits.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0025086c",
+            "name": "textFormatFullWidthTwoDigits",
             "size": 132,
             "vram": "0x25086c"
           }
@@ -80447,10 +80447,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0025/FUN_0025086c.cpp"
+        "source_path": "src/_code/0025/textFormatFullWidthTwoDigits.cpp"
       },
-      "name": "_code/0025/FUN_0025086c",
-      "target_path": "orig/target/_code/0025/FUN_0025086c.o"
+      "name": "_code/0025/textFormatFullWidthTwoDigits",
+      "target_path": "orig/target/_code/0025/textFormatFullWidthTwoDigits.o"
     },
     {
       "base_path": "build/obj/_code/map/mapDepart/FUN_0025090c.o",
@@ -218320,13 +218320,13 @@
       "target_path": "orig/target/_code/003f/FUN_003f8940.o"
     },
     {
-      "base_path": "build/obj/_code/003f/FUN_003f89f8.o",
+      "base_path": "build/obj/_code/003f/animCurveFindPackedKey.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_003f89f8",
+            "name": "animCurveFindPackedKey",
             "size": 212,
             "vram": "0x3f89f8"
           }
@@ -218334,10 +218334,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/003f/FUN_003f89f8.cpp"
+        "source_path": "src/_code/003f/animCurveFindPackedKey.cpp"
       },
-      "name": "_code/003f/FUN_003f89f8",
-      "target_path": "orig/target/_code/003f/FUN_003f89f8.o"
+      "name": "_code/003f/animCurveFindPackedKey",
+      "target_path": "orig/target/_code/003f/animCurveFindPackedKey.o"
     },
     {
       "base_path": "build/obj/_code/003f/FUN_003f8ad0.o",

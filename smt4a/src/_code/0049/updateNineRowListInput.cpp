@@ -1,5 +1,4 @@
 #include "code/Code002a_VariantA.h"
-/* NON_MATCHING: compiler rotates the repeated-input loop and removes four branch/NOP rows; -O2 candidate. */
 #include "shard/Shard0031.h"
 
 struct NineRowListInput {
@@ -16,17 +15,19 @@ u32 flaggedEntryGetValueA(FlaggedEntry *);
 void scrollOwnerSetValue(FlaggedEntry *, s32);
 void eventQueueAddUniqueIfValid(u32);
 
+/* Keeps the nine-row list's top row in step with its cursor and scrolls it on the up/down buttons. */
 void updateNineRowListInput(NineRowListInput *list)
 {
     s32 previousTop = resourceRunOperationIfUnblocked(&list->grid);
     if (FUN_00228b04(&list->grid, 0)) {
         if (objectApplyIfUnblocked(&list->grid) > 9) {
             resourceRunOperationIfUnblocked(&list->grid);
-            while (resourceRunOperationIfUnblocked(&list->grid) == previousTop &&
-                   (resourceRunOperationIfUnblocked(&list->grid) != 0 || FUN_002a4894(reinterpret_cast<const Object *>(&list->grid)) != 0)) {
-                s32 top = resourceRunOperationIfUnblocked(&list->grid);
-                s32 count = objectApplyIfUnblocked(&list->grid);
-                if (top == count - 9 && FUN_002a4894(reinterpret_cast<const Object *>(&list->grid)) == 8)
+            while (resourceRunOperationIfUnblocked(&list->grid) == previousTop) {
+                if (resourceRunOperationIfUnblocked(&list->grid) == 0 &&
+                    FUN_002a4894(reinterpret_cast<const Object *>(&list->grid)) == 0)
+                    break;
+                if (resourceRunOperationIfUnblocked(&list->grid) == objectApplyIfUnblocked(&list->grid) - 9 &&
+                    FUN_002a4894(reinterpret_cast<const Object *>(&list->grid)) == 8)
                     break;
                 FUN_00228b04(&list->grid, 0);
             }

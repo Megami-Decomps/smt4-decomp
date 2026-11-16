@@ -6,7 +6,7 @@
 extern "C" {
 
 int screenDrawShadedRect(...);
-int FUN_0025086c(...);
+int textFormatFullWidthTwoDigits(...);
 int FUN_0025090c(...);
 float FUN_0028f4b4(const char *, unsigned int, float);
 int FUN_002907c4(...);
@@ -69,7 +69,7 @@ extern int g_titleScene; /* 0x44ea00 */
 #define romwright_piece_1_3(upper, lower) ((unsigned int)(((unsigned int)(unsigned char)(upper) << 24) | ((unsigned int)(lower) & 0xffffffULL)))
 #endif
 /* Supplied declaration required: screenDrawShadedRect. */
-/* Supplied declaration required: FUN_0025086c. */
+/* Supplied declaration required: textFormatFullWidthTwoDigits. */
 /* Supplied declaration required: FUN_0025090c. */
 /* Supplied declaration required: FUN_0028f4b4. */
 /* Supplied declaration required: FUN_002907c4. */
@@ -264,10 +264,10 @@ unsigned int FUN_00214a60(void)
           temp_v16 = (temp_v10 >> 5) - (temp_v10 >> 0x1f);
           temp_v10 = temp_v14 + ((temp_v15 >> 5) - (temp_v15 >> 0x1f)) * -0x3c;
           FUN_002907c4(temp_v28,(temp_v9 >> 0xb) - (temp_v9 >> 0x1f));
-          FUN_0025086c(temp_v16 / 10,temp_v33);
-          FUN_0025086c(temp_v16 % 10,temp_v30);
-          FUN_0025086c(temp_v10 / 10,temp_v31);
-          FUN_0025086c(temp_v10 % 10,temp_v32);
+          textFormatFullWidthTwoDigits(temp_v16 / 10,temp_v33);
+          textFormatFullWidthTwoDigits(temp_v16 % 10,temp_v30);
+          textFormatFullWidthTwoDigits(temp_v10 / 10,temp_v31);
+          textFormatFullWidthTwoDigits(temp_v10 % 10,temp_v32);
           puStack_120 = temp_v32;
           textFormatBuffer(temp_v27,"%s\x81F%s%s\x81F%s%s",temp_v28,temp_v33,temp_v30,temp_v31);
           temp_v9 = libc_strlen(temp_v27);

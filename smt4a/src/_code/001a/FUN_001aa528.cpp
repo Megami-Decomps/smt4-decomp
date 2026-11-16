@@ -1,37 +1,35 @@
-/* NON_MATCHING: uninitialized-copy loop register roles, null predication and final field writeback differ. */
-#include "classes/AllocatorWordVector.h"
+#include "classes/AllocatedArray.h"
 
-// Grow an owning word vector without changing the number of live elements.
-extern "C" bool FUN_001aa528(AllocatorWordVector *vector, s32 capacity)
+extern "C" {
+
+/* Grows the array to hold `count` words; returns whether it does (or already did): false when it
+ * does not own its storage or the allocation fails. */
+bool FUN_001aa528(AllocatedArray<u32> *array, s32 count)
 {
-    if ((s32)(vector->capacityFlags & 0x3fffffff) >= capacity)
+    if (array->capacity() >= count) {
         return true;
-    if (vector->allocator == NULL || (vector->capacityFlags & 0xc0000000) != 0x40000000)
-        return false;
-
-    u32 *allocation = (u32 *)vector->allocator->allocate(capacity * sizeof(u32), 32);
-    if (allocation == NULL)
-        return false;
-
-    s32 count = 0;
-    u32 *source = vector->begin;
-    u32 *sourceEnd = vector->end;
-    u32 *destination = allocation;
-    if (source != sourceEnd) {
-        do {
-            if (destination != NULL)
-                new (destination) u32(*source);
-            ++source;
-            ++destination;
-        } while (source != sourceEnd);
-        count = vector->end - vector->begin;
     }
-    if (vector->begin != NULL) {
-        vector->end = vector->begin;
-        vector->allocator->release(vector->begin);
+    AsdAllocatorObject *allocator = array->allocator;
+    if (allocator != NULL && (array->capacityFlags & 0xc0000000u) == 0x40000000u) {
+        u32 *storage = static_cast<u32 *>(allocator->allocate(count * sizeof(u32), 0x20));
+        if (storage == NULL) {
+            return false;
+        }
+        s32 size = 0;
+        if (array->begin != array->end) {
+            std::uninitialized_copy(array->begin, array->end, storage);
+            size = array->size();
+        }
+        if (array->begin != NULL) {
+            array->end = array->begin;
+            array->allocator->release(array->begin);
+        }
+        array->end = storage + size;
+        array->begin = storage;
+        array->setCapacity(count);
+        return true;
     }
-    vector->end = allocation + count;
-    vector->begin = allocation;
-    vector->capacityFlags = (vector->capacityFlags & 0xc0000000) | capacity;
-    return true;
+    return false;
 }
+
+} /* extern "C" */

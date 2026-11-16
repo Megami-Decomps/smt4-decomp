@@ -1,4 +1,3 @@
-/* NON_MATCHING: ternary now gives retail's predicated mvneq; remaining difference is one compiler nop hint before the final scrSetResult call (and the pool offset it shifts) */
 #include "battle/BtlMainAccess.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "script/ScriptArgs.h"
@@ -18,10 +17,9 @@ u32 FUN_0031f400(void)
     BtlEntry *player;
     u8 count;
     int i;
-    int id;
 
     player = btlMainFindEntryByListedId(btlGetMainState(), btlGetMainState()->playerCheck.checkId);
-    reinterpret_cast<int>(memClear(reinterpret_cast<void*>(candidates), sizeof(candidates)));
+    memClear(candidates, sizeof(candidates));
     count = 0;
     i = 0;
     do {
@@ -36,8 +34,11 @@ u32 FUN_0031f400(void)
         }
         i++;
     } while (i < ENTITY_COUNT);
-    id = count == 0 ? -1 : candidates[randNextInRange((count - 1) & 0xffff)]->members.ids[0];
-    scrSetResult(id);
+    if (count == 0) {
+        scrSetResult(-1);
+    } else {
+        scrSetResult(candidates[randNextInRange((count - 1) & 0xffff)]->members.ids[0]);
+    }
     return 1;
 }
 

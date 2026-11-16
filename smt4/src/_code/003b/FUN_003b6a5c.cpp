@@ -22,7 +22,7 @@ struct CounterWork {
 extern "C" {
 
 ImagePlacement *asdTMTexTableEntryAt(s32 group, s32 image);
-void FUN_0025086c(u32 digit, char *text);
+void textFormatFullWidthTwoDigits(u32 digit, char *text);
 void textDrawString(s32 layer, u32 color, const char *text, f32 x, f32 y, f32 a, f32 b, f32 c);
 void FUN_002bed3c(void);
 
@@ -51,7 +51,7 @@ void FUN_003b6a5c(CounterWork *work, s32 x, s32 y)
     thousands = value / 1000;
     value %= 1000;
     if (thousands != 0) {
-        FUN_0025086c(thousands, text);
+        textFormatFullWidthTwoDigits(thousands, text);
         textDrawString(3, COUNTER_TEXT_COLOR, text, (f32)(frame->x + digit->x + x), (f32)(frame->y + digit->y + y),
                      0.0f, 0.0f, 1.0f);
     }
@@ -59,19 +59,19 @@ void FUN_003b6a5c(CounterWork *work, s32 x, s32 y)
     value %= 100;
     if (thousands != 0 || hundreds != 0) {
         digit = asdTMTexTableEntryAt(COUNTER_GROUP, 0xC9);
-        FUN_0025086c(hundreds, text);
+        textFormatFullWidthTwoDigits(hundreds, text);
         textDrawString(3, COUNTER_TEXT_COLOR, text, (f32)(frame->x + digit->x + x), (f32)(frame->y + digit->y + y),
                      0.0f, 0.0f, 1.0f);
     }
     tens = value / 10;
     if (thousands != 0 || hundreds != 0 || tens != 0) {
         digit = asdTMTexTableEntryAt(COUNTER_GROUP, 0xC8);
-        FUN_0025086c(tens, text);
+        textFormatFullWidthTwoDigits(tens, text);
         textDrawString(3, COUNTER_TEXT_COLOR, text, (f32)(frame->x + digit->x + x), (f32)(frame->y + digit->y + y),
                      0.0f, 0.0f, 1.0f);
     }
     digit = asdTMTexTableEntryAt(COUNTER_GROUP, 0xC7);
-    FUN_0025086c(value % 10, text);
+    textFormatFullWidthTwoDigits(value % 10, text);
     textDrawString(3, COUNTER_TEXT_COLOR, text, (f32)(frame->x + digit->x + x), (f32)(frame->y + digit->y + y),
                  0.0f, 0.0f, 1.0f);
     FUN_002bed3c();

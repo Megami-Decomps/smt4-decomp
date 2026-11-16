@@ -13,7 +13,7 @@ int scrScriptProcessDestroy(...);
 int slotSetRequest(...);
 int FUN_003180c4(...);
 int btlTalkBustUpSetDemonTexture(...);
-int btlTalkBustUpReleaseContent(void);
+int btlTalkBustUpReleaseTexture(void);
 int btlTalkBustUpSetUnk2F4(...);
 int FUN_0038b3f8(...);
 int soundChannelStopAll(...);
@@ -103,7 +103,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: uniteCameraDestroy. */
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
-/* Supplied declaration required: btlTalkBustUpReleaseContent. */
+/* Supplied declaration required: btlTalkBustUpReleaseTexture. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: FUN_0038b3f8. */
 /* Supplied declaration required: sysPlayVoice. */
@@ -664,7 +664,7 @@ LAB_003cf9bc:
       workOwnerRelease(temp_v2 + 0x38);
       resourceReleaseReference(*(unsigned int *)(temp_v2 + 0x8c));
       *(unsigned int *)(temp_v2 + 0x8c) = 0;
-      btlTalkBustUpReleaseContent();
+      btlTalkBustUpReleaseTexture();
       ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v2 + 0x94) + 4));
       if (*(int **)(temp_v2 + 0x94) != (int *)0x0) {
         (**(romwright_code **)(**(int **)(temp_v2 + 0x94) + 4))();

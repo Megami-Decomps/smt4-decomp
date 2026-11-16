@@ -1,4 +1,4 @@
-/* NON_MATCHING: the (-1, 0x80) pair is stored with stm (retail strd r0,r1) because the colour pointer sits in r0 instead of r2; the VFP colour copy matches now */
+/* NON_MATCHING: the (-1, 0x80) pair lands in r1/r2 and is stored with add+stm (retail r0/r1 strd) because the colour pointer takes r0 instead of r2. */
 #include "common.h"
 #include <string.h>
 #include "AsdSDK/AsdMemUtil.h"
@@ -43,9 +43,9 @@ void FUN_002a3d58(PolyDefaultsLocalView *record)
     memset(&record->unk50, 0, sizeof(record->unk50));
     record->unk50.v[3] = 1.0f;
 
+    record->unk20 = g_polyDefaultColor;
     record->unk60 = 1.0f;
     record->unk74 = 1.0f;
-    record->unk20 = g_polyDefaultColor;
     record->unk64 = -1;
     record->unk68 = 0x80;
 }

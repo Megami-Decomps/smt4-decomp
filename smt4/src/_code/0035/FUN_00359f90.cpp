@@ -1,4 +1,4 @@
-/* NON_MATCHING: the two limit bytes load in the opposite order (retail loads byte 0x2C into r4 first, then 0x2D into r5). */
+/* NON_MATCHING: IDENTICAL when compiled with --cpu=MPCore --fpu=softvfp (the SDK-side build without VFP, as its neighbours FUN_00426634/FUN_00426940 need); the default build loads the two limit bytes into swapped registers. Needs that unit cflags. */
 #include "common.h"
 #include "nn/Result.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
@@ -36,8 +36,8 @@ u8 FUN_00359f90(void)
         nn_os_CriticalSection_Leave(&g_moduleCriticalSection1);
         return 0;
     }
-    u32 limitHigh = DAT_0042f000.limit[1];
     u32 limitLow = DAT_0042f000.limit[0];
+    u32 limitHigh = DAT_0042f000.limit[1];
     nn_os_CriticalSection_Leave(&g_moduleCriticalSection1);
     u32 limit = limitLow | (limitHigh << 8);
     return info.value >= limit;

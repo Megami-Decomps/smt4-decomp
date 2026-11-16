@@ -1,4 +1,3 @@
-/* NON_MATCHING: saved group/set registers r5/r6 are exchanged; byte-address writeback matches retail. */
 #include "common.h"
 
 extern "C" {
@@ -10,10 +9,9 @@ typedef struct MapBlock {
 
 extern MapBlock *FUN_0023d2ec(void);
 
-/* Sets or clears bit `bit` of group `group`'s bit table. */
-void FUN_0024c2a8(s32 group, u32 bit, s32 set)
+/* Sets or clears bit `bit` of a bit table. */
+static __inline void bitTableSet(u8 *table, u32 bit, s32 set)
 {
-    u8 *table = FUN_0023d2ec()->bits + group * 8;
     u8 *byte = table + (bit >> 3);
     u8 mask = 1 << (bit & 7);
 
@@ -22,6 +20,12 @@ void FUN_0024c2a8(s32 group, u32 bit, s32 set)
     } else {
         *byte = *byte & ~mask;
     }
+}
+
+/* Sets or clears bit `bit` of group `group`'s bit table. */
+void FUN_0024c2a8(s32 group, u32 bit, s32 set)
+{
+    bitTableSet(FUN_0023d2ec()->bits + group * 8, bit, set);
 }
 
 }

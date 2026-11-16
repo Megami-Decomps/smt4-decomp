@@ -24289,12 +24289,12 @@
     },
     {
       "address": "0x13a7a0",
-      "function": "FUN_0013a7a0",
+      "function": "soundFlushEventQueue",
       "module": "_code",
-      "object": "build/obj/_code/0013/FUN_0013a7a0.o",
+      "object": "build/obj/_code/0013/soundFlushEventQueue.o",
       "size": 244,
-      "source": "src/_code/0013/FUN_0013a7a0.cpp",
-      "target": "orig/target/_code/0013/FUN_0013a7a0.o",
+      "source": "src/_code/0013/soundFlushEventQueue.cpp",
+      "target": "orig/target/_code/0013/soundFlushEventQueue.o",
       "thumb": false
     },
     {
@@ -26109,12 +26109,12 @@
     },
     {
       "address": "0x144a54",
-      "function": "FUN_00144a54",
+      "function": "asdSnd3dSetOutputVolume",
       "module": "_code",
-      "object": "build/obj/_code/0014/FUN_00144a54.o",
+      "object": "build/obj/_code/0014/asdSnd3dSetOutputVolume.o",
       "size": 60,
-      "source": "src/_code/0014/FUN_00144a54.cpp",
-      "target": "orig/target/_code/0014/FUN_00144a54.o",
+      "source": "src/_code/0014/asdSnd3dSetOutputVolume.cpp",
+      "target": "orig/target/_code/0014/asdSnd3dSetOutputVolume.o",
       "thumb": false
     },
     {
@@ -34642,12 +34642,12 @@
     },
     {
       "address": "0x173c1c",
-      "function": "FUN_00173c1c",
+      "function": "soundObjectPostStop",
       "module": "_code",
-      "object": "build/obj/_code/0017/FUN_00173c1c.o",
+      "object": "build/obj/_code/0017/soundObjectPostStop.o",
       "size": 96,
-      "source": "src/_code/0017/FUN_00173c1c.cpp",
-      "target": "orig/target/_code/0017/FUN_00173c1c.o",
+      "source": "src/_code/0017/soundObjectPostStop.cpp",
+      "target": "orig/target/_code/0017/soundObjectPostStop.o",
       "thumb": false
     },
     {
@@ -35638,7 +35638,18 @@
       "size": 180,
       "source": "src/_code/0017/FUN_0017cdcc.cpp",
       "target": "orig/target/_code/0017/FUN_0017cdcc.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x17ce88",
@@ -35648,7 +35659,18 @@
       "size": 72,
       "source": "src/_code/0017/FUN_0017ce88.cpp",
       "target": "orig/target/_code/0017/FUN_0017ce88.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x17ced4",
@@ -56176,12 +56198,12 @@
     },
     {
       "address": "0x221ddc",
-      "function": "FUN_00221ddc",
+      "function": "drawColoredRectangle",
       "module": "_code",
-      "object": "build/obj/_code/0022/FUN_00221ddc.o",
+      "object": "build/obj/_code/0022/drawColoredRectangle.o",
       "size": 252,
-      "source": "src/_code/0022/FUN_00221ddc.cpp",
-      "target": "orig/target/_code/0022/FUN_00221ddc.o",
+      "source": "src/_code/0022/drawColoredRectangle.cpp",
+      "target": "orig/target/_code/0022/drawColoredRectangle.o",
       "thumb": false
     },
     {
@@ -59931,12 +59953,12 @@
     },
     {
       "address": "0x25cb1c",
-      "function": "FUN_0025cb1c",
+      "function": "randomGetNormalizedFloat",
       "module": "_code",
-      "object": "build/obj/_code/0025/FUN_0025cb1c.o",
+      "object": "build/obj/_code/0025/randomGetNormalizedFloat.o",
       "size": 52,
-      "source": "src/_code/0025/FUN_0025cb1c.cpp",
-      "target": "orig/target/_code/0025/FUN_0025cb1c.o",
+      "source": "src/_code/0025/randomGetNormalizedFloat.cpp",
+      "target": "orig/target/_code/0025/randomGetNormalizedFloat.o",
       "thumb": false
     },
     {
@@ -61062,12 +61084,12 @@
     },
     {
       "address": "0x270c18",
-      "function": "FUN_00270c18",
+      "function": "lcgRandomGetNormalizedFloat",
       "module": "_code",
-      "object": "build/obj/_code/0027/FUN_00270c18.o",
+      "object": "build/obj/_code/0027/lcgRandomGetNormalizedFloat.o",
       "size": 52,
-      "source": "src/_code/0027/FUN_00270c18.cpp",
-      "target": "orig/target/_code/0027/FUN_00270c18.o",
+      "source": "src/_code/0027/lcgRandomGetNormalizedFloat.cpp",
+      "target": "orig/target/_code/0027/lcgRandomGetNormalizedFloat.o",
       "thumb": false
     },
     {
@@ -70337,12 +70359,12 @@
     },
     {
       "address": "0x2d2350",
-      "function": "FUN_002d2350",
+      "function": "textFormatFullWidthTwoDigits",
       "module": "_code",
-      "object": "build/obj/_code/002d/FUN_002d2350.o",
+      "object": "build/obj/_code/002d/textFormatFullWidthTwoDigits.o",
       "size": 132,
-      "source": "src/_code/002d/FUN_002d2350.cpp",
-      "target": "orig/target/_code/002d/FUN_002d2350.o",
+      "source": "src/_code/002d/textFormatFullWidthTwoDigits.cpp",
+      "target": "orig/target/_code/002d/textFormatFullWidthTwoDigits.o",
       "thumb": false
     },
     {
@@ -106704,12 +106726,12 @@
     },
     {
       "address": "0x35fc4c",
-      "function": "btlTalkBustUpReleaseContent",
+      "function": "btlTalkBustUpReleaseTexture",
       "module": "_code",
-      "object": "build/obj/_code/0035/btlTalkBustUpReleaseContent.o",
+      "object": "build/obj/_code/0035/btlTalkBustUpReleaseTexture.o",
       "size": 104,
-      "source": "src/_code/0035/btlTalkBustUpReleaseContent.cpp",
-      "target": "orig/target/_code/0035/btlTalkBustUpReleaseContent.o",
+      "source": "src/_code/0035/btlTalkBustUpReleaseTexture.cpp",
+      "target": "orig/target/_code/0035/btlTalkBustUpReleaseTexture.o",
       "thumb": false
     },
     {
@@ -138373,7 +138395,18 @@
       "size": 84,
       "source": "src/_code/0042/FUN_004264d0.cpp",
       "target": "orig/target/_code/0042/FUN_004264d0.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x426530",
@@ -138423,7 +138456,18 @@
       "size": 72,
       "source": "src/_code/0042/FUN_00426634.cpp",
       "target": "orig/target/_code/0042/FUN_00426634.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x426684",
@@ -138533,7 +138577,18 @@
       "size": 32,
       "source": "src/_code/0042/FUN_00426800.cpp",
       "target": "orig/target/_code/0042/FUN_00426800.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x426820",
@@ -138663,7 +138718,18 @@
       "size": 124,
       "source": "src/_code/0042/FUN_00426e18.cpp",
       "target": "orig/target/_code/0042/FUN_00426e18.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x426e94",
@@ -138683,7 +138749,18 @@
       "size": 168,
       "source": "src/_code/0042/FUN_00426eb8.cpp",
       "target": "orig/target/_code/0042/FUN_00426eb8.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x426fe4",
@@ -138763,7 +138840,18 @@
       "size": 124,
       "source": "src/_code/0042/FUN_0042792c.cpp",
       "target": "orig/target/_code/0042/FUN_0042792c.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x4279a8",
@@ -138913,7 +139001,18 @@
       "size": 108,
       "source": "src/_code/0042/FUN_00427ff4.cpp",
       "target": "orig/target/_code/0042/FUN_00427ff4.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x428060",
@@ -139383,7 +139482,18 @@
       "size": 88,
       "source": "src/_code/0042/handleRequestSubmit.cpp",
       "target": "orig/target/_code/0042/handleRequestSubmit.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x429fcc",
@@ -141553,7 +141663,18 @@
       "size": 116,
       "source": "src/_code/0043/FUN_004310c0.cpp",
       "target": "orig/target/_code/0043/FUN_004310c0.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x431140",
@@ -176629,12 +176750,12 @@
     },
     {
       "address": "0x51d95c",
-      "function": "FUN_0051d95c",
+      "function": "animCurveFindPackedKey",
       "module": "_code",
-      "object": "build/obj/_code/0051/FUN_0051d95c.o",
+      "object": "build/obj/_code/0051/animCurveFindPackedKey.o",
       "size": 212,
-      "source": "src/_code/0051/FUN_0051d95c.cpp",
-      "target": "orig/target/_code/0051/FUN_0051d95c.o",
+      "source": "src/_code/0051/animCurveFindPackedKey.cpp",
+      "target": "orig/target/_code/0051/animCurveFindPackedKey.o",
       "thumb": false
     },
     {

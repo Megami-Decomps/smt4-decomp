@@ -834,6 +834,16 @@ typedef char BtlStepCompletionOffsetsCheck[
     offsetof(BtlStep, completion.kind) == 0x24 &&
     offsetof(BtlStep, completion.pendingChanges) == 0x28 &&
     sizeof(BtlStep) == 0x30 ? 1 : -1];
+
+/* Moves the step to `state` with both of its counters cleared (the encounter transitions end so
+ * before running the next state's handler). */
+static __inline void btlStepEnter(BtlStep *step, u32 state)
+{
+    step->counters.unk10 = 0;
+    step->counters.unk0C = 0;
+    step->state = state;
+}
+
 typedef char BtlMainStateAFlaggedRosterCountOffsetCheck[
     offsetof(BtlMainStateA, flaggedRoster.count) == 0x1ED9 ? 1 : -1];
 

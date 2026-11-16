@@ -1,7 +1,8 @@
-/* NON_MATCHING: the flag byte and the push {r0-r3} spill match (memcpy of the parameter); armcc orders the count/descriptor stores differently from retail (stm vs singles) */
+/* NON_MATCHING: the flag byte, the push {r0-r3} spill and the first descriptor match (ipcMappedBufferDescriptor keeps its constant bits in a register); in the second descriptor the count*3 and constant 12 registers are swapped (retail r1/r2). */
 #include "nn/Result.h"
 #include "nn/svc.h"
 #include "nn/os/IpcCommandBuffer.h"
+#include "nn/os/IpcStaticBuffer.h"
 #include <string.h>
 
 extern "C" {
@@ -17,9 +18,9 @@ s32 FUN_004269b4(void *output, u8 flag, const void *input, s32 count)
     nn::os::SetIpcWord(cmd, 0, 0x10050084);
     memcpy(&cmd->words[0], &flag, sizeof(flag));
     nn::os::SetIpcWord(cmd, 2, count);
-    nn::os::SetIpcWord(cmd, 3, (count << 7) | 10);
+    nn::os::SetIpcWord(cmd, 3, ipcMappedBufferDescriptor(count * 8, 10));
     nn::os::SetIpcWord(cmd, 4, (u32)input);
-    nn::os::SetIpcWord(cmd, 5, ((count * 3) << 7) | 12);
+    nn::os::SetIpcWord(cmd, 5, ipcMappedBufferDescriptor(count * 24, 12));
     nn::os::SetIpcWord(cmd, 6, (u32)output);
     s32 result = nn::svc::SendSyncRequest(DAT_005c149c);
     if (nnResultIsSuccess(result)) {

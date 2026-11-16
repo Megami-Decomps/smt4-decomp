@@ -1,4 +1,4 @@
-/* NON_MATCHING: hoisted next-key/texture addresses use swapped r6/r7 and queued-key reload scheduling differs. */
+/* NON_MATCHING: only the hoisted &nextTex/&nextKey addresses take r7/r6 where retail uses r6/r7. */
 #include "common.h"
 #include "shard/S3SceneWidget.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -21,14 +21,11 @@ void FUN_003bb454(SceneWidget *widget)
         widget->frame = (widget->frame + 1) % 16;
     }
     if (widget->queuedKey != -1 && asdTMTexTableNodeIsLoaded(SCENE_TEXTURE_TABLE, widget->queuedKey) != 0 && uiSpriteGetCompletionState(&widget->sprite) != 0) {
-        s32 index = flaggedValueHolderGetTotal(widget);
-
-        if (widget->queuedKey == widget->entries[index]->lastKey + 1) {
-            s32 queuedTex = widget->queuedTex;
-
+        s32 entryKey = widget->entries[flaggedValueHolderGetTotal(widget)]->lastKey + 1;
+        if (widget->queuedKey == entryKey) {
+            widget->nextTex = widget->queuedTex;
             widget->nextKey = widget->queuedKey;
             widget->queuedTex = -1;
-            widget->nextTex = queuedTex;
             widget->queuedKey = -1;
             uiSpriteSetImageKeyframe(&widget->sprite, 1, 0);
         }
@@ -36,8 +33,8 @@ void FUN_003bb454(SceneWidget *widget)
     if (widget->nextTex != -1 && FUN_002bf818(&widget->sprite) != 0) {
         widget->shownTex = widget->nextTex;
         widget->shownKey = widget->nextKey;
-        widget->nextKey = -1;
         widget->nextTex = -1;
+        widget->nextKey = -1;
     }
     for (s32 i = 0; i < SCENE_TEXTURE_COUNT; i++) {
         if (widget->loaded[i] != 0

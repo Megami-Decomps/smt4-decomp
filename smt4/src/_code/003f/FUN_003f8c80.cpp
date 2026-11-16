@@ -1,11 +1,12 @@
-/* NON_MATCHING: packed-scalar constants and VFP loads are scheduled differently. */
+/* NON_MATCHING: only the rounding divide differs: retail divides the incoming s0 while the build divides the s16 copy. */
 #include "shard/AnimCurve.h"
 
 extern "C" f32 __hardfp_floorf(f32 value);
 
-extern "C" f32 FUN_003f8c80(const PackedScalarAnimCurve *curve, f32 frame)
+/* The key immediately preceding the rounded sample frame. */
+static __inline const PackedScalarAnimKey *findKey(const PackedScalarAnimCurve *curve, f32 frame)
 {
-    // An aligned estimate-rate word overlays the shared header's byte padding.
+    // A float at offset four cannot be added inside the halfword-aligned unk02 padding.
     struct SampledCurveView {
         u16 keyCount;
         u16 unk02;
@@ -15,7 +16,8 @@ extern "C" f32 FUN_003f8c80(const PackedScalarAnimCurve *curve, f32 frame)
         f32 timeScale;
         PackedScalarAnimKey keys[1];
     };
-    typedef char SampledCurveLayoutCheck[offsetof(SampledCurveView, inverseDuration) == 4 &&
+    typedef char SampledCurveLayoutCheck[
+        offsetof(SampledCurveView, inverseDuration) == 4 &&
         offsetof(SampledCurveView, keys) == 0x14 ? 1 : -1];
     const SampledCurveView *source = (const SampledCurveView *)curve;
     u32 roundedFrame = (u32)__hardfp_floorf(frame / source->timeScale + 0.5f);
@@ -37,5 +39,17 @@ extern "C" f32 FUN_003f8c80(const PackedScalarAnimCurve *curve, f32 frame)
             }
         }
     }
-    return source->valueBase + (f32)key->value * source->valueScale;
+    return key;
+}
+
+/* The key's value field as a float. */
+static __inline f32 keyGetValue(const PackedScalarAnimKey *key)
+{
+    return key->value;
+}
+
+/* The curve's value at `frame`: its preceding key's value, scaled and offset. */
+extern "C" f32 FUN_003f8c80(const PackedScalarAnimCurve *curve, f32 frame)
+{
+    return keyGetValue(findKey(curve, frame)) * curve->valueScale + curve->valueBase;
 }

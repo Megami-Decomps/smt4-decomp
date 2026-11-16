@@ -1,4 +1,4 @@
-/* NON_MATCHING: flag reload and camera-duration branch layout now match; retail tests the flag with ands (not tst), loads the battle mask with ldrd (r0:r1) before the encounter mask, and orders the final step stores differently. */
+/* NON_MATCHING: flag reload, camera-duration branch layout and the final step transition (btlStepEnter) now match, as in FUN_003e1a30; retail tests the flag with ands (not tst), and loads the 64-bit masks of the initial test (ldrd into r0:r1) and the transition|finished OR (state word-wise, finished with ldrd) in other registers. */
 #include "battle/btlMain.h"
 
 extern "C" {
@@ -45,15 +45,13 @@ void FUN_003e2a88(BtlStep *step, BtlMainStateA *battle)
             FUN_004f1c5c(g_btlCamera, 120);
         else
             FUN_004f1c5c(g_btlCamera, g_btlCamera->duration);
-        if ((battle->stateFlags64.bits & g_btlEncount.initial) == 0) {
+        if ((g_btlEncount.initial & battle->stateFlags64.bits) == 0) {
             FUN_003ed6e8(battle);
             FUN_003f26d4(battle);
-            battle->stateFlags64.bits = g_btlEncount.transition | battle->stateFlags64.bits | g_btlEncount.finished;
+            battle->stateFlags64.bits |= g_btlEncount.transition | g_btlEncount.finished;
             FUN_004aa2e0(g_btlUiBlock, 0);
         }
-        step->counters.unk10 = 0;
-        step->counters.unk0C = 0;
-        step->state = 25;
+        btlStepEnter(step, 25);
         FUN_003e0cd4(step, battle);
     }
 }

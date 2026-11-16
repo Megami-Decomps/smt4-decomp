@@ -34,7 +34,7 @@ int statusDisplayBindUnitRecord(int, int, int);
 int btlTalkBustUpSetDemonTexture(...);
 int gameClearOwnedSlot(int);
 int FUN_0035da20(...);
-int btlTalkBustUpReleaseContent(void);
+int btlTalkBustUpReleaseTexture(void);
 int btlTalkBustUpSetUnk2F4(...);
 int FUN_003f33b0(int, unsigned int, int);
 int FUN_004bcb54(...);
@@ -98,7 +98,7 @@ extern int btlTalkBustUpGetValue(void);
 /* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 /* Supplied declaration required: gameClearOwnedSlot. */
 /* Supplied declaration required: FUN_0035da20. */
-/* Supplied declaration required: btlTalkBustUpReleaseContent. */
+/* Supplied declaration required: btlTalkBustUpReleaseTexture. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: roundObjFinish. */
 /* Supplied declaration required: FUN_003f33b0. */
@@ -158,7 +158,7 @@ void FUN_002f5064(int param_1)
     temp_v20 = param_1 + 0x7500;
     if (*(int *)(param_1 + 0x437c) == 0x10) {
       btlTalkBustUpSetUnk2F4(0);
-      btlTalkBustUpReleaseContent();
+      btlTalkBustUpReleaseTexture();
       *(unsigned char *)(temp_v11 + 0x4578) = 0;
       *(unsigned char *)(temp_v11 + 0x4579) = 0;
       *(unsigned char *)(temp_v11 + 0x457a) = 0;

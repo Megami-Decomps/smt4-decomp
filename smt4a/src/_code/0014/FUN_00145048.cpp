@@ -1,5 +1,3 @@
-/* NON_MATCHING: only the enabled-flag address differs: retail forms it as (base + 0x1254) + 0x88 (a block at 0x1254 that is
- * not recovered yet), built as (base + 0x12DC). */
 #include "sound/SoundSystemVolume.h"
 
 extern "C" {

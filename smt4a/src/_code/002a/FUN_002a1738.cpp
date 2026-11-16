@@ -1,4 +1,4 @@
-/* NON_MATCHING: The shared slot-table address is kept in r0 instead of r1 across the initial-frame branch. */
+/* NON_MATCHING: only the out-of-range slot: retail selects NULL with a predicated movcs after the index scaling, the build clears the result first. */
 #include "common.h"
 
 namespace {
@@ -19,11 +19,21 @@ extern ScriptWaitSlots DAT_0061978c;
 u32 scrGetCommandFrame(void);
 u32 FUN_001628c0(u32 slot, u32 mode, u32 flags, s32 enabled, f32 first, f32 second);
 
+/* The wait slot at `index`, or NULL when the index is out of range. */
+static __inline ScriptWaitSlot *waitSlotAt(u32 index)
+{
+    ScriptWaitSlot *slot = NULL;
+    if (index < 4) {
+        slot = &DAT_0061978c.slots[index];
+    }
+    return slot;
+}
+
 /* Starts the selected asynchronous slot on the first script frame, then waits for completion. */
 u32 FUN_002a1738(s32 mode, u32 slot)
 {
     if (scrGetCommandFrame() != 0) {
-        ScriptWaitSlot *work = DAT_00588fcc < 4 ? &DAT_0061978c.slots[DAT_00588fcc] : NULL;
+        ScriptWaitSlot *work = waitSlotAt(DAT_00588fcc);
         if (work->state == 2) {
             return 1;
         }

@@ -1,8 +1,7 @@
-/* NON_MATCHING: base-field/vptr stores and pointer post-increments differ from retail. */
 #include "classes/Obj420a2c.h"
 
 /* Starts with no owner, no sources and no handles. */
-Obj420a2c::Obj420a2c() : sourceB(NULL)
+Obj420a2c::Obj420a2c()
 {
     handles[0] = 0;
     handles[1] = 0;

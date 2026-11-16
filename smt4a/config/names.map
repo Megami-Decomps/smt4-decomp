@@ -3268,7 +3268,7 @@
 00336da0 uiWorkEndState1
 00398328 slotFindByPair
 0030b190 mapIteratorNextAlt
-0035fc4c btlTalkBustUpReleaseContent
+0035fc4c btlTalkBustUpReleaseTexture
 004708a0 contentEntryGetFromFiles2
 004707d0 contentEntryGetFromFiles1
 00493154 texSetRelease
@@ -6483,3 +6483,11 @@
 003cdd3c conditionalMessageFind
 004cceb8 playerGetGrowthParameters
 004ccf78 playerResetToStartingStats
+002d2350 textFormatFullWidthTwoDigits
+0025cb1c randomGetNormalizedFloat
+00270c18 lcgRandomGetNormalizedFloat
+0013a7a0 soundFlushEventQueue
+00144a54 asdSnd3dSetOutputVolume
+00173c1c soundObjectPostStop
+00221ddc drawColoredRectangle
+0051d95c animCurveFindPackedKey

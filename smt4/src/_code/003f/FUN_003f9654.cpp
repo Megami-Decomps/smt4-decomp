@@ -1,12 +1,12 @@
 /* NON_MATCHING: the last-key address and the combined key compare now match; the packed interpolation VFP scheduling differs. */
 #include "shard/AnimCurve.h"
 
-extern "C" const PackedAnimKeyWide *FUN_003f89f8(const PackedAnimCurveWide *curve, f32 frame);
+extern "C" const PackedAnimKeyWide *animCurveFindPackedKey(const PackedAnimCurveWide *curve, f32 frame);
 
 // Linearly sample an inline curve whose packed keys include an auxiliary word.
 extern "C" f32 FUN_003f9654(const PackedAnimCurveWide *curve, f32 frame)
 {
-    const PackedAnimKeyWide *key = FUN_003f89f8(curve, frame);
+    const PackedAnimKeyWide *key = animCurveFindPackedKey(curve, frame);
     f32 keyFrame = curve->timeScale * (f32)key->frame;
     const PackedAnimKeyWide *last = &curve->keys[curve->keyCount - 1];
     if (keyFrame == frame || last == key) {

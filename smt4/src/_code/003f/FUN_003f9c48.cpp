@@ -19,13 +19,13 @@ typedef struct PackedHermiteCurve {
     /* 0x14 */ PackedHermiteKey keys[1];
 } PackedHermiteCurve;
 
-PackedHermiteKey *FUN_003f89f8(PackedHermiteCurve *curve, f32 time);
+PackedHermiteKey *animCurveFindPackedKey(PackedHermiteCurve *curve, f32 time);
 f32 nn_math_ARMv6_HermiteC_FAST(f32 v0, f32 t0, f32 v1, f32 t1, f32 s, f32 d);
 
 /* Evaluates the curve at `time`, interpolating between the key at or before it and the next one. */
 f32 FUN_003f9c48(PackedHermiteCurve *curve, f32 time)
 {
-    PackedHermiteKey *key = FUN_003f89f8(curve, time);
+    PackedHermiteKey *key = animCurveFindPackedKey(curve, time);
     f32 keyTime = curve->frameScale * (f32)(key->packed & 0xfff);
     if (keyTime != time && key != &curve->keys[curve->keyCount - 1]) {
         PackedHermiteKey *next = key + 1;

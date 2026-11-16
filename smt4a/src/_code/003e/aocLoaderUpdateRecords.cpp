@@ -1,4 +1,3 @@
-/* NON_MATCHING: store scheduling only in the final reset: retail materialises 0 in r1 for both clears and loads 12 afterwards (str 16; str 12; mov r0,#12; str 0); built hoists both constants. */
 #include "common.h"
 
 /* A record the loader copies out of the resource table: polymorphic, so a copy leaves its vtable
@@ -46,6 +45,14 @@ typedef struct AocLoaderTask {
     /* 0x10 */ u32 unk10;
 } AocLoaderTask;
 
+/* Moves the task to `state` with both of its arguments cleared. */
+static inline void aocLoaderTaskEnter(AocLoaderTask *task, u32 state)
+{
+    task->unk10 = 0;
+    task->unkC = 0;
+    task->state = state;
+}
+
 extern "C" {
 
 AocRecord *stateEntryFindById(AocLoader *loader, u32 id);
@@ -60,7 +67,7 @@ AocLoaderTask *FUN_003e0510(AocLoaderTask *task, AocLoader *loader);
 extern "C" {
 
 /* Called while the loader task waits on its requested records: starts each record's request,
- * copies the finished ones into the loader, and once every slot is done enters state 6. */
+ * copies the finished ones into the loader, and once every slot is done enters state 12. */
 AocLoaderTask *aocLoaderUpdateRecords(AocLoaderTask *task, AocLoader *loader)
 {
     s32 i;
@@ -90,9 +97,7 @@ AocLoaderTask *aocLoaderUpdateRecords(AocLoaderTask *task, AocLoader *loader)
     if (ready == 0) {
         return NULL;
     }
-    task->unk10 = 0;
-    task->unkC = 0;
-    task->state = 0xC;
+    aocLoaderTaskEnter(task, 0xC);
     return FUN_003e0510(task, loader);
 }
 

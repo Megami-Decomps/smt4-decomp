@@ -38,7 +38,7 @@ int asdProcessSetGroupEnabled(...);
 int asdGxPresetsGetDepth(...);
 int titleCloseMoviePlayer(...);
 int asdGxSetChannelFlags(...);
-int FUN_0013a7a0(...);
+int soundFlushEventQueue(...);
 int FUN_0013ab18(...);
 int titleConfigApplyTarget(...);
 int dataTable02Sub3GetRecord(...);
@@ -354,7 +354,7 @@ extern unsigned int FUN_0013a608(unsigned int);
 /* Supplied declaration required: asdMemorySetUseAllocatorA. */
 /* Supplied declaration required: asdGxSetChannelFlags. */
 /* Supplied declaration required: soundInitializePersistentSlots. */
-/* Supplied declaration required: FUN_0013a7a0. */
+/* Supplied declaration required: soundFlushEventQueue. */
 /* Supplied declaration required: soundSetupArchiveAndSlots. */
 /* Supplied declaration required: FUN_0013ab18. */
 /* Supplied declaration required: FUN_0013ae58. */
@@ -721,7 +721,7 @@ LAB_00136430:
           temp_v4 = (unsigned int)g_mobiclipProcess;
           if (temp_v4 == 0) {
             FUN_0013ab18();
-            FUN_0013a7a0();
+            soundFlushEventQueue();
             temp_v4 = FUN_0013af10();
           }
           asdPrimSwapBuffers(temp_v4);

@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only: the same code with different scratch registers (retail keeps the table in r2, the argument copy in r3 and the loaded id in ip) */
 #include "common.h"
 
 extern "C" {
@@ -16,15 +15,11 @@ extern Slot0026fa44 g_textEntryTable[SLOT_COUNT_0026FA44]; /* 0x448e18 */
 /* Index of the slot holding the pair (a, b), -1 when absent. */
 s32 slotFindByPair(s32 a, s32 b)
 {
-    s32 i;
-
-    for (i = 0; i < SLOT_COUNT_0026FA44; i++) {
-        s32 id = g_textEntryTable[i].idA;
-
-        if (id == -1) {
+    for (s32 i = 0; i < SLOT_COUNT_0026FA44; i++) {
+        if (g_textEntryTable[i].idA == -1) {
             return -1;
         }
-        if (id == a && g_textEntryTable[i].idB == b) {
+        if (g_textEntryTable[i].idA == a && g_textEntryTable[i].idB == b) {
             return i;
         }
     }

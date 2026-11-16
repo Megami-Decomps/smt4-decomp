@@ -1,4 +1,4 @@
-/* NON_MATCHING: Animation-load scheduling and the state-update STM grouping differ from retail. */
+/* NON_MATCHING: the state change (state 20, previous state, timer 0) stores as str timer + add/stm; retail writes stmib with writeback and the timer through it. The restore-flag 1 is built in r1 instead of r0. */
 #include "shard/W4_W4Match2_UiQuest.h"
 #include "code/Code0029.h"
 extern "C" s32 FUN_0029ee54(void *cursor);
@@ -53,7 +53,7 @@ void FUN_002902a0(u32 questId, s32 restoreSelection)
     quest = g_uiQuest;
     quest->previousState = quest->state;
     quest->state = 20;
-    quest->nextState = 0;
+    quest->timer = 0;
     buttonHelpSetPreset(26);
     FUN_002bf810(0x100025E);
 }

@@ -1,9 +1,13 @@
 #ifndef NPC_SHOP_DEVIL_MARKET_H
 #define NPC_SHOP_DEVIL_MARKET_H
 #include "common.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include <stddef.h>
 
 struct DevilMarketWork {
+    DevilMarketWork() : messages(NULL), scriptFile(NULL), scriptProcess(NULL) {}
+    static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
+
     /* 0x00 */ u32 process;
     /* 0x04 */ u32 state;
     /* 0x08 */ u32 started;

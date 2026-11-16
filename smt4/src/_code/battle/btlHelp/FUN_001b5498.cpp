@@ -1,4 +1,4 @@
-/* NON_MATCHING: layout, switches, flag tests and calls now match; retail loads the kind-2 flag words separately (B then A, no ldrd) and re-reads flagsA for the player-name test, and places two `mov r0,r6/r4` differently. */
+/* NON_MATCHING: the entry flags are one u64 mask (ldrd test as retail in the kind-1 path); in the kind-2 path retail loads the two words separately (high then low) and re-reads the low word for the player-name test, and the frame-counter update and list unlink use different registers. */
 #include "common.h"
 
 /* One queued help message (Shin Megami Tensei IV layout, observed fields). */
@@ -9,8 +9,7 @@ struct BtlHelpEntry {
     /* 0x006 */ u8 unk006[2];
     /* 0x008 */ u32 messageId;
     /* 0x00C */ u32 infoWindow;
-    /* 0x010 */ u32 flagsA;        /* bit 1: use the player name */
-    /* 0x014 */ u32 flagsB;
+    /* 0x010 */ u64 flags;         /* bit 1: use the player name */
     /* 0x018 */ u8 unk018[0xC6];
     /* 0x0DE */ u16 nameId;
     /* 0x0E0 */ u8 unk0E0[0x1B8];
@@ -69,8 +68,8 @@ u32 FUN_001b5498(void)
                     memClear(name, 0x60);
                     switch (entry->kind) {
                     case 1:
-                        if (*reinterpret_cast<u64 *>(&entry->flagsA) != 0 && entry->textSlot >= 0) {
-                            if ((entry->flagsA & 2) != 0) {
+                        if (entry->flags != 0 && entry->textSlot >= 0) {
+                            if ((entry->flags & 2) != 0) {
                                 libc_strcpy(name, gameGetPlayerName());
                             } else {
                                 libc_strcpy(name, FUN_002bd06c(entry->nameId));
@@ -83,8 +82,8 @@ u32 FUN_001b5498(void)
                         dialogOpen(entry->dialogIndex, 1);
                         break;
                     case 2:
-                        if ((entry->flagsB | entry->flagsA) != 0 && entry->textSlot >= 0) {
-                            if ((entry->flagsA & 2) != 0) {
+                        if (entry->flags != 0 && entry->textSlot >= 0) {
+                            if ((entry->flags & 2) != 0) {
                                 libc_strcpy(name, gameGetPlayerName());
                             } else {
                                     libc_strcpy(name, FUN_002bd06c(entry->nameId));

@@ -16,7 +16,7 @@ private:
     /* 0x74 */ u8 flag;
     /* 0x75 */ u8 unk75[3];
     /* 0x78 */ u32 words[6];
-    /* 0x90 */ u8 unk90[0xc];
+    /* 0x90 */ f32 offset[3];      /* added to the base position when placing the model */
 };
 
 typedef char Obj42233cSizeCheck[sizeof(Obj422318) == 0x74 &&

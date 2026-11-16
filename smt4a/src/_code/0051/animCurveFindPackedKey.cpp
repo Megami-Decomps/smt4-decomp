@@ -1,10 +1,9 @@
-/* NON_MATCHING: the initial half-frame constant load and VFP divide/add registers differ from retail. */
 #include "shard/AnimCurve.h"
 
 extern "C" f32 hardfp_floorf(f32 value);
 
 /* Find the packed twelve-bit frame key at or immediately before playback time. */
-extern "C" const PackedAnimKeyWide *FUN_0051d95c(const QuantizedAnimCurve *curve, f32 time)
+extern "C" const PackedAnimKeyWide *animCurveFindPackedKey(const QuantizedAnimCurve *curve, f32 time)
 {
     /* Adding this word to the shared header's odd-aligned prefix would shift its fields. */
     struct WideCurveView {
@@ -16,8 +15,10 @@ extern "C" const PackedAnimKeyWide *FUN_0051d95c(const QuantizedAnimCurve *curve
         f32 timeScale;
         PackedAnimKeyWide keys[1];
     };
+    f32 half = 0.5f; /* rounds the scaled time to the nearest frame */
     const WideCurveView *view = reinterpret_cast<const WideCurveView *>(curve);
-    u32 frame = (u32)hardfp_floorf(time / view->timeScale + 0.5f);
+    f32 scaled = time / view->timeScale;
+    u32 frame = (u32)hardfp_floorf(scaled + half);
     const PackedAnimKeyWide *key = view->keys;
     if (key->frame <= frame) {
         key = &view->keys[view->keyCount - 1];

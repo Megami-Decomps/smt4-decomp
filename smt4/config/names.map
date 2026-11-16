@@ -4887,3 +4887,7 @@
 0027d7b0 table23FindRecordByKey
 0027d614 conditionalMessageFind
 002cc1c0 asd3dSoundActorSetPosition
+0025086c textFormatFullWidthTwoDigits
+001e960c soundTestActionMenuUpdate
+0019d9d4 drawColoredRectangle
+003f89f8 animCurveFindPackedKey

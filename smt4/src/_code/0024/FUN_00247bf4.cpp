@@ -1,4 +1,4 @@
-/* NON_MATCHING: same control flow, but armcc loads 1.0f into s0 and 0.0f into s1 (retail: 0.0f in s0, 1.0f in s1), so the literal pool order and the stores' registers are swapped. */
+/* NON_MATCHING: only the flipped reciprocal differs: retail converts the extent in place (vcvt s2, s2; vdiv s0, s1, s2), the build converts into s0. */
 #include "common.h"
 #include "shard/JobWork.h"
 
@@ -16,25 +16,27 @@ struct JobAxisWork {
 void FUN_00247bf4(u32 handle, s32 extent, s32 flip)
 {
     JobAxisWork *work = (JobAxisWork *)jobGetWork(handle);
+    f32 zero = 0.0f;
+    f32 one = 1.0f;
 
     if (flip != 0) {
         if (extent == 0) {
-            work->axisX = 0.0f;
+            work->axisX = zero;
         } else {
-            work->axisX = 1.0f;
+            work->axisX = one;
             work->axisY = -1.0f / (f32)extent;
             return;
         }
     } else {
         if (extent == 0) {
-            work->axisX = 1.0f;
+            work->axisX = one;
         } else {
-            work->axisX = 0.0f;
-            work->axisY = 1.0f / (f32)extent;
+            work->axisX = zero;
+            work->axisY = one / (f32)extent;
             return;
         }
     }
-    work->axisY = 0.0f;
+    work->axisY = zero;
 }
 
 } /* extern "C" */

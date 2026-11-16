@@ -1,4 +1,4 @@
-/* NON_MATCHING: the 0.8f scale is loaded into s16 right after the first frame call and moved to s0 in each branch (branches not predicated); the build predicates the first/second moves and loads the constant later. */
+/* NON_MATCHING: with a call per frame the 0.8f scale is hoisted into s16 after the first frame call as in retail; retail then cross-jumps the two eventSetUnderMessageFade calls into one (b to a shared bl, then b to the return-0 epilogue) and places the not-0x15 return right after the third test. */
 #include "common.h"
 
 extern "C" {
@@ -13,22 +13,17 @@ u32 FUN_001ed418(void)
     if (FUN_002c1d5c() != 0) {
         return 1;
     }
-    s32 first;
-    s32 second;
-
     if (scrGetCommandFrame() == 0) {
-        first = 10;
-        second = 1;
-    } else if (scrGetCommandFrame() == 9) {
-        first = 12;
-        second = 0;
-    } else {
-        if (scrGetCommandFrame() == 0x15) {
-            return 1;
-        }
+        eventSetUnderMessageFade(0xffffffff, 10, 1, 0.8f);
         return 0;
     }
-    eventSetUnderMessageFade(0xffffffff, first, second, 0.8f);
+    if (scrGetCommandFrame() == 9) {
+        eventSetUnderMessageFade(0xffffffff, 12, 0, 0.8f);
+        return 0;
+    }
+    if (scrGetCommandFrame() == 0x15) {
+        return 1;
+    }
     return 0;
 }
 

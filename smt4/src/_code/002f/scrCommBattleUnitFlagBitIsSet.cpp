@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail loads the entry's flag halfword into r1 and branches to two shared 'mov r0,#1/#0; b scrSetResult' blocks at the end of the function; the build tests with ands and falls through */
+/* NON_MATCHING: the bit tests and the shared set/clear blocks now match; retail places the shared `bl scrSetResult; b <return>` block right after the entry test (the build puts it at the end with its own return). */
 #include "battle/BattleUnitSlot.h"
 #include "battle/BtlMainAccess.h"
 #include "gamedata/FlagBitTests.h"
@@ -21,29 +21,26 @@ s32 scrCommBattleUnitFlagBitIsSet(void)
 {
     s32 id = scrGetArg(0);
     u32 bit = (u16)scrGetArg(1);
-    s32 set;
+    bool set;
 
     btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit));
     if (id < 0x6d) {
         MainEntry002f7cc4 *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
 
-        if (entry == NULL) {
+        if (entry != NULL) {
+            set = entry->flagBits & (1 << bit);
+        } else {
             scrSetResult(0);
             return 1;
         }
-        if (entry->flagBits & (1 << bit)) {
-            set = 1;
-        } else {
-            set = 0;
-        }
     } else {
-        if (flagWordTestBit(gameGetUnitRecord(id - 0x6d), bit) != 0) {
-            set = 1;
-        } else {
-            set = 0;
-        }
+        set = flagWordTestBit(gameGetUnitRecord(id - 0x6d), bit);
     }
-    scrSetResult(set);
+    if (!set) {
+        scrSetResult(0);
+    } else {
+        scrSetResult(1);
+    }
     return 1;
 }
 

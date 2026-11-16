@@ -33,7 +33,7 @@ extern PopupFormatView *g_popupState;
 s32 gameFlagIsSet(s32 flag);
 PopupMessageResource *FUN_00365bc4(s32 message);
 void rt_memcpy(void *destination, const void *source, u32 size);
-void FUN_002d2350(s32 value, u8 *output);
+void textFormatFullWidthTwoDigits(s32 value, u8 *output);
 const char *FUN_0015f858(s32 value, s32 option);
 const char *FUN_00180118(s32 value);
 s32 textFormatBuffer(char *destination, const char *format, ...);
@@ -67,7 +67,7 @@ void FUN_00246450(s32 context, s32 value, s32 count)
                 return;
             }
             if (context == 1 || context == 5) {
-                FUN_002d2350(count, number);
+                textFormatFullWidthTwoDigits(count, number);
                 textFormatBuffer(g_popupState->formatted, format, number);
                 g_popupState->message = g_popupState->formatted;
                 return;
@@ -79,13 +79,13 @@ void FUN_00246450(s32 context, s32 value, s32 count)
             }
             if (context == 3) {
                 const char *name = FUN_0015f858(value, 0);
-                FUN_002d2350(count, number);
+                textFormatFullWidthTwoDigits(count, number);
                 textFormatBuffer(g_popupState->formatted, format, name, number);
                 g_popupState->message = g_popupState->formatted;
                 return;
             }
             if (context == 6) {
-                FUN_002d2350(count, number);
+                textFormatFullWidthTwoDigits(count, number);
                 textFormatBuffer(g_popupState->formatted, format, FUN_00180118(value), number);
                 g_popupState->message = g_popupState->formatted;
             }

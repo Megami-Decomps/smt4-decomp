@@ -1,4 +1,4 @@
-/* NON_MATCHING: the status is an nn::Result from a callee declared returning nn::Result (classes/WindowStatus.h), which fixes retail's lsrs-before-copy order; remaining: retail saves the owner in r5 and the output in r6 (ours r6/r5). */
+/* NON_MATCHING: IDENTICAL when compiled with --cpu=MPCore --fpu=softvfp (the no-VFP build of this request library, see FUN_00426634/FUN_00426940); the default build saves the owner and output in swapped registers (r6/r5). */
 #include "classes/WindowStatus.h"
 #include "nn/Result.h"
 

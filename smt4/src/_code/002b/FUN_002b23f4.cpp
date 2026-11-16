@@ -1,16 +1,16 @@
-/* NON_MATCHING: the list arms now match retail's layout; the category counters are addressed as `mov r2, #60; add r0, r2, r0, lsl #2; [state, r0]` where retail folds the constant offset into the ldr/str (`[r0, #60]`). */
+/* NON_MATCHING: the byte counter now matches; the payload counter loads usage/alignment into r1/r3 where retail uses r3/r1. */
 #include "sys/AllocationTracking.h"
 
 extern "C" {
 extern AllocationTracking DAT_00465120;
 u32 FUN_002b30fc(const AllocationHeader *);
 
-static void addCategoryBytes(AllocationUsage *usage, u32 category, u32 bytes)
+static void addCategoryBytes(u32 bytes, AllocationUsage *usage, u32 category)
 {
     usage->categoryBytes[category] = bytes + usage->categoryBytes[category];
 }
 
-static void addCategoryPayloadBytes(AllocationUsage *usage, u32 category, u32 bytes)
+static void addCategoryPayloadBytes(u32 bytes, AllocationUsage *usage, u32 category)
 {
     usage->categoryPayloadBytes[category] = bytes + usage->categoryPayloadBytes[category];
 }
@@ -23,9 +23,9 @@ void FUN_002b23f4(AllocationHeader *block)
     usage->bytes += block->size;
     if ((usage->tag & 0xff) < 8) {
         u32 category = FUN_002b30fc(block);
-        addCategoryBytes(DAT_00465120.usage, category, block->size);
+        addCategoryBytes(block->size, DAT_00465120.usage, category);
         category = FUN_002b30fc(block);
-        addCategoryPayloadBytes(DAT_00465120.usage, category, block->size - block->alignment - sizeof(AllocationHeader));
+        addCategoryPayloadBytes(block->size - block->alignment - sizeof(AllocationHeader), DAT_00465120.usage, category);
     }
     usage = DAT_00465120.usage;
     AllocationLink *link = &block->link;

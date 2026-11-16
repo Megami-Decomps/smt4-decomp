@@ -1,27 +1,31 @@
-/* NON_MATCHING: consumed-byte cursor is recovered, but the compiler folds header count/address updates into CMP and indexed/writeback loads. */
 #include "shard/Shard004A.h"
+
+/* Reads the four big-endian halfword and two byte values. */
+static __inline s32 decoderReadShortValues(ShortValueDecoder *decoder, const u8 *source, u32 size)
+{
+    if (size < 10)
+        return -1;
+    decoder->first = decoderReadBigEndian16(source);
+    decoder->second = decoderReadBigEndian16(source + 2);
+    decoder->third = decoderReadBigEndian16(source + 4);
+    decoder->fourth = decoderReadBigEndian16(source + 6);
+    decoder->fifth = source[8];
+    decoder->sixth = source[9];
+    return 10;
+}
 
 /* Decode the header, four big-endian short values, and two trailing byte values. */
 extern "C" s32 shortValueRecordDecode(ShortValueDecoder *decoder, const u8 *data, u32 size)
 {
-    u32 consumed = 0;
-    if (size - consumed == 0) {
+    s32 used = decoderReadByteWord(&decoder->type, data, size);
+    if (used < 0)
         return -1;
-    }
-    decoder->type = data[consumed++];
-    if (size - consumed == 0) {
+    s32 read = decoderReadByte(&decoder->flags, data + used, size - used);
+    if (read < 0)
         return -1;
-    }
-    decoder->flags = data[consumed++];
-    if (size - consumed < 10) {
+    used += read;
+    read = decoderReadShortValues(decoder, data + used, size - used);
+    if (read < 0)
         return -1;
-    }
-    data += consumed;
-    decoder->first = decoderReadBigEndian16(data);
-    decoder->second = decoderReadBigEndian16(data + 2);
-    decoder->third = decoderReadBigEndian16(data + 4);
-    decoder->fourth = decoderReadBigEndian16(data + 6);
-    decoder->fifth = data[8];
-    decoder->sixth = data[9];
-    return consumed + 10;
+    return used + read;
 }

@@ -38,7 +38,7 @@ int state339CFinish(void);
 int FUN_004fbeac(...);
 int FUN_004fed5c(...);
 
-int FUN_00270c18(void);
+int lcgRandomGetNormalizedFloat(void);
 int btlEventTaskCreate(...);
 void FUN_002b4f28(BtlMainStateA *, unsigned int mode, int combatantIndex, BattleActionScale scale, unsigned int option);
 int FUN_002cf698(...);
@@ -191,7 +191,7 @@ extern unsigned int gameGetSaveSlotData(unsigned int);
 /* Supplied declaration required: btlCreateUiDrawJobs. */
 /* Supplied declaration required: messageForwardDefaultMode. */
 extern int dialogIsActive(void);
-/* Supplied declaration required: FUN_00270c18. */
+/* Supplied declaration required: lcgRandomGetNormalizedFloat. */
 /* Supplied declaration required: btlAutoStartCalculation. */
 /* Supplied declaration required: FUN_0027249c. */
 /* Supplied declaration required: FUN_002726b8. */
@@ -552,7 +552,7 @@ LAB_002bb220:
                    ((temp_v9 & DAT_00573990) == 0 && (temp_v10 & DAT_00573994) == 0)) &&
                   (((short)puVar20[0x9d] == 0 || ((short)puVar20[0x9d] == 4)))) && (temp_v12 < temp_v6))
               {
-                FUN_00270c18();
+                lcgRandomGetNormalizedFloat();
                 if (temp_v19 < temp_v21) {
                   temp_v19 = temp_v19 + temp_v20;
                 }

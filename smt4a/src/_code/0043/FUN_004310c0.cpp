@@ -1,3 +1,4 @@
+/* NON_MATCHING: IDENTICAL when compiled with --cpu=MPCore --fpu=softvfp (the SDK-side build without VFP, as its neighbours FUN_00426634/FUN_00426940 need); the default build loads the two limit bytes into swapped registers. Needs that unit cflags. */
 #include "common.h"
 #include "nn/Result.h"
 #include "util/PlatformResultCheck.h"

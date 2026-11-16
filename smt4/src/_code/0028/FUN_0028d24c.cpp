@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only: retail keeps the owner in r5 and the rank in r6 (swapped here). */
 #include "common.h"
 #include "gamedata/DataTable40.h"
 
@@ -21,19 +20,26 @@ typedef struct SlotOwner {
 
 extern Slot *saveGetIndexedMapValue(int index);
 
+/* Number of the twelve map slots that are active. */
+static __inline s32 countActiveSlots(void)
+{
+    s32 count = 0;
+    for (s32 i = 0; i < 12; i++) {
+        if (saveGetIndexedMapValue(i)->active != 0) {
+            count++;
+        }
+    }
+    return count;
+}
+
 /* Finds the id in the owner's list whose slot has the owner's rank (or, with no valid rank, the number of active slots). */
 u32 FUN_0028d24c(SlotOwner *owner)
 {
-    int rank = owner->rank;
-    int i;
+    s32 rank = owner->rank;
+    s32 i;
 
     if ((u32)(rank - 1) > 3) {
-        rank = 0;
-        for (i = 0; i < 12; i++) {
-            if (saveGetIndexedMapValue(i)->active != 0) {
-                rank++;
-            }
-        }
+        rank = countActiveSlots();
     }
     if (rank >= 1) {
         for (i = 0; i < owner->idCount; i++) {

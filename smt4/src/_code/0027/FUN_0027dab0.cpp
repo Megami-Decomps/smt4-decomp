@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler swaps the entry pointer and searched ID between R1/R2 and reverses comparison operands; loop structure, two-way unrolling, and calls otherwise match. */
+/* NON_MATCHING: only the entry pointer and the reloaded member id swap r1/r2 (retail: entry r2, id r1). */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 
@@ -17,9 +17,8 @@ s32 FUN_0027dab0(BtlMainState* state, const ListedMember* member)
     if (entry == NULL) {
         return -1;
     }
-    s16 id = member->id;
     for (s32 index = 0; index < 50; ++index) {
-        if (id == entry->members.ids[index]) {
+        if (member->id == entry->members.ids[index]) {
             return index;
         }
     }

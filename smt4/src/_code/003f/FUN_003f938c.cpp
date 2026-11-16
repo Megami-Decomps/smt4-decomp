@@ -1,4 +1,4 @@
-/* NON_MATCHING: short-circuit compiles to retail's vcmp/cmpne/bne; only VFP scheduling of the interpolation differs and the build shares the final vmla/pop tail that retail keeps separate. */
+/* NON_MATCHING: the early return now matches (raw value converted through an inline getter); the interpolation still loads the scale/base pair late with vldmia where retail loads the scale and 1.0f before the vdiv. */
 #include "shard/AnimCurve.h"
 
 extern "C" {
@@ -9,9 +9,14 @@ static f32 animKeyTime(const QuantizedAnimCurve *curve, const AnimKey *key)
     return curve->timeScale * (static_cast<f32>(key->frame) * 0.03125f);
 }
 
+static __inline f32 animKeyRawValue(const AnimKey *key)
+{
+    return key->data.value;
+}
+
 static f32 animKeyValue(const QuantizedAnimCurve *curve, const AnimKey *key)
 {
-    return curve->valueBase + static_cast<f32>(key->unk02[0]) * curve->valueScale;
+    return animKeyRawValue(key) * curve->valueScale + curve->valueBase;
 }
 
 // Linearly interpolate the unsigned key values and apply the curve's scale and bias.

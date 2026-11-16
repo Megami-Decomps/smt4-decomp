@@ -7,7 +7,7 @@ extern "C" {
 
 int FUN_002237a0(void);
 int FUN_00234b30(void);
-int FUN_0025cb1c(void);
+int randomGetNormalizedFloat(void);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_002d88e0(void);
 int FUN_0031297c(void);
@@ -59,7 +59,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_002237a0. */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00234b30. */
-/* Supplied declaration required: FUN_0025cb1c. */
+/* Supplied declaration required: randomGetNormalizedFloat. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002d88e0. */
 /* Supplied declaration required: FUN_0031297c. */
@@ -258,7 +258,7 @@ void FUN_003401a4(int param_1)
         pfVar9 = temp_v14 + temp_v7;
         temp_v9 = *pfVar9;
         if (temp_v9 != temp_v11) {
-          FUN_0025cb1c();
+          randomGetNormalizedFloat();
           temp_v10 = *pfVar9;
           temp_v3 = param_1 + temp_v7 * 4;
           temp_v8 = *(float *)(temp_v3 + 0x9348);
@@ -273,7 +273,7 @@ void FUN_003401a4(int param_1)
             *(float *)(temp_v3 + 0x9348) = temp_v8;
           }
           else {
-            FUN_0025cb1c();
+            randomGetNormalizedFloat();
             *(float *)(temp_v3 + 0x9348) =
                  *(float *)(temp_v3 + 0x9348) + (temp_v8 - temp_v13) * temp_v9 * temp_v12;
           }

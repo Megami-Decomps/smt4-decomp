@@ -15,7 +15,7 @@ struct SoundTestWork {
 extern "C" {
 extern SoundTestWork *DAT_0044e110;
 u32 taskCreateDraw(const char *name, u32 priority, u32 workSize, u32 flags, void (*update)(), void (*destroy)(), u32 argument, u32 parent);
-void FUN_001e960c();
+void soundTestActionMenuUpdate();
 void callbackStateEnable();
 void soundTestDrawJobUpdate();
 void FUN_002f4b34();
@@ -29,7 +29,7 @@ void FUN_001ea8fc()
     work->selectedBank = 0;
     work->playingSound = 0;
     work->active = 0;
-    work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("ST C"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_001e960c), reinterpret_cast<AsdProcFunc>(callbackStateEnable), 0);
+    work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("ST C"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(soundTestActionMenuUpdate), reinterpret_cast<AsdProcFunc>(callbackStateEnable), 0);
     taskCreateDraw("ST D", 230, 0, 0, soundTestDrawJobUpdate, FUN_002f4b34, 0, work->process);
 }
 }

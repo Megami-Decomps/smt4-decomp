@@ -1,4 +1,5 @@
-/* NON_MATCHING: Retail retains an unreachable debug branch after a stripped zero-returning query; this source expresses only the reachable transitions. */
+/* NON_MATCHING: retail inlines the stripped query (a `mov r0, #0` body, smt4's FUN_0023dcb8) in place of
+   its call; needs a config/inlined.txt entry for btlDebugQueryEnabled. */
 #include "common.h"
 
 namespace {
@@ -9,15 +10,23 @@ struct BattleSelectionTransition {
 }
 extern "C" {
 void FUN_0020ad6c(BattleSelectionTransition *state, s32 nextState, s32 enabled);
+s32 btlDebugQueryEnabled(void);
+u32 FUN_002cc9e0(BattleSelectionTransition *state, s32 inBattle);
+void screenSetContextHint(BattleSelectionTransition *state, u32 kind, u32 parameter);
 
 /* Stores the selection parameter and enters the normal or alternate transition state. */
 void FUN_0020acd8(BattleSelectionTransition *state, u32 parameter, s32 enabled)
 {
     state->parameter = parameter;
-    if (enabled != 0) {
-        FUN_0020ad6c(state, 9, 1);
-    } else {
+    if (enabled == 0) {
         FUN_0020ad6c(state, 0x29, 1);
+        return;
     }
+    if (parameter == 0 && btlDebugQueryEnabled() != 0) {
+        FUN_0020ad6c(state, 1, 1);
+        screenSetContextHint(state, FUN_002cc9e0(state, 1), state->parameter);
+        return;
+    }
+    FUN_0020ad6c(state, 9, 1);
 }
 }

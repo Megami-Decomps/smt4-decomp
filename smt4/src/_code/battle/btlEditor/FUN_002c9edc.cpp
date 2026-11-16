@@ -1,4 +1,4 @@
-/* NON_MATCHING: explicit job forwarding and independent restore guards recovered; null-branch folding and editor flag registers differ. */
+/* NON_MATCHING: armcc threads the failed first actions check past the second loop; retail re-tests battle and actions (beq 80). Splitting the guards into inline helpers keeps the re-test but swaps r0/r1. */
 #include "battle/btlAction.h"
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
@@ -34,7 +34,7 @@ void FUN_002c9edc(u32 job)
                 action->editorRestore.current = action->editorRestore.saved;
             }
         }
-        battle->editorControl.flags &= ~0x80000;
+        battle->editorMask &= ~0x80000ULL;
         asdMemFree(DAT_00435ce8);
         DAT_00435ce8 = NULL;
     }

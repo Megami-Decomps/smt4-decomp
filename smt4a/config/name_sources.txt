@@ -6961,3 +6961,13 @@
 002e5ac0 __aeabi_llsl inferred [high] Same 40-byte runtime body as smt4 __aeabi_llsl.
 004cceb8 playerGetGrowthParameters inferred [med] Builds StatGrowthParameters (kind 1) from data table 9 section 0, the hero record; inlined by FUN_004ccf78.
 004ccf78 playerResetToStartingStats inferred [med] Sets the hero to level 1 and zero exp, copies table 9's starting stats, recomputes max HP/MP and the FUN_003df7c4 totals.
+00582364 g_textEntryTable inferred [high] Twin of smt4 g_textEntryTable: slotFindByPair in both games is identical code over this 0x3e7-entry, 0x5c-byte slot table.
+002d2350 textFormatFullWidthTwoDigits inferred [med] Twin of smt4 FUN_0025086c (identical source).
+0025cb1c randomGetNormalizedFloat inferred [high] Same code as smt4 randomGetNormalizedFloat (LCG on g_randState, high halfword * 1/65535).
+00270c18 lcgRandomGetNormalizedFloat inferred [med] Same body as randomGetNormalizedFloat on g_lcgRandomRangeState, the state lcgRandomRange uses.
+0013a7a0 soundFlushEventQueue inferred [high] Same structure as smt4 soundFlushEventQueue (plays and clears g_eventQueueEntries[32], then stops sounds while suspended).
+00144a54 asdSnd3dSetOutputVolume inferred [med] Same code shape as smt4 asdSnd3dSetOutputVolume: stores the forwarded scalar and forwards it while the layer is enabled.
+00173c1c soundObjectPostStop inferred [med] Same instruction sequence as smt4 soundObjectPostStop (queues a 5-word command, flushes, clears 0x218/0x21C); kind 0x33 instead of 0x32.
+00221ddc drawColoredRectangle inferred [med] Draws a rectangle in its RGBA colour under a temporary render-state preset. Twin of smt4 FUN_0019d9d4.
+0051d95c animCurveFindPackedKey inferred [med] Twin of smt4 FUN_003f89f8 (same source).
+0035fc4c btlTalkBustUpReleaseTexture inferred [high] Twin of smt4 btlTalkBustUpReleaseTexture: same body (texture-node release, 0x2F4 flag clear, add-on slot release, timer=0/state=3) with table 0x10 instead of 0x18.

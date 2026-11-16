@@ -1,4 +1,3 @@
-/* NON_MATCHING: restored native script result/mode, work-save choices and explicit switch cases; the game-state resume word now goes through g_gameState.resume.mode; BGM arguments and skip-restore branching still differ. */
 #include "common.h"
 #include "gamedata/Table1bOr1c.h"
 #include "map/mapDepart.h"
@@ -40,7 +39,7 @@ extern GameState g_gameState;
 
 void FUN_0022b29c(MapSceneView *scene, s32 mode, u32 flag);
 void bgmReleaseStopped(void);
-void mapDepartSetTarget(u32 first, u32 second);
+void mapDepartSetTarget(s32 first, s32 second, u32 third);
 s32 FUN_0027d8c8(void);
 void gameRestoreWorkSave(s32 kind);
 ScriptProcessWork *FUN_00297060(ScriptFile *file, u32 owner);
@@ -85,8 +84,7 @@ void FUN_003ba754(MapSceneView *scene)
         bgm = 0x1000057;
     }
     if (scene->bgm != bgm) {
-        scene->bgm = bgm;
-        soundChannelRequestIfEnabled(bgm, 0, 0x3c);
+        soundChannelRequestIfEnabled(scene->bgm = bgm, 0, 0x3c);
     }
     if (g_gameState.unk2F8 != 0) {
         if (restoreFlag) {
@@ -104,22 +102,18 @@ void FUN_003ba754(MapSceneView *scene)
                 scene->result = 2;
                 break;
             }
-        } else if (g_aocMain->skipRestore == 0 && FUN_0027d98c() != 6) {
-            if (FUN_0027d98c() != 1) {
-                if (FUN_0027d98c() == 5) {
-                    gameRestoreWorkSave(2);
-                    FUN_0027db24(0);
-                }
+        } else if (g_aocMain->skipRestore != 0 || FUN_0027d98c() == 6) {
+            gameRestoreWorkSave(2);
+            FUN_0027db24(0);
+        } else if (FUN_0027d98c() == 1) {
+            gameRestoreWorkSave(1);
+            FUN_0027db24(0);
+            if (FUN_0027d8c8() != 0) {
+                scene->result = 3;
             } else {
-                gameRestoreWorkSave(1);
-                FUN_0027db24(0);
-                if (FUN_0027d8c8() != 0) {
-                    scene->result = 3;
-                } else {
-                    scene->result = 4;
-                }
+                scene->result = 4;
             }
-        } else {
+        } else if (FUN_0027d98c() == 5) {
             gameRestoreWorkSave(1);
             FUN_0027db24(0);
             scene->result = 4;
@@ -129,6 +123,6 @@ void FUN_003ba754(MapSceneView *scene)
     g_gameState.unk000 = mode + 200;
     g_gameState.resume.mode = 3;
     g_gameState.unk2F8 = 0;
-    mapDepartSetTarget(0xffffffff, 0xffffffff);
+    mapDepartSetTarget(-1, -1, 0xffffffff);
 }
 }

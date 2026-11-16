@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only: retail loads the tick counter into r2 and the 0x708 limit into r3, and the second timer loop counts down in r3; built uses r3/r2 */
 #include "common.h"
 #include "gamedata/GameDataAccess.h"
 
@@ -30,7 +29,8 @@ void FUN_00139b6c(void)
     FlagsBlock *flags = reinterpret_cast<FlagsBlock *>(gameFlagsGetBlock());
     s32 i;
 
-    if (++g_gameState.ticks > TIMER_PERIOD) {
+    g_gameState.ticks = g_gameState.ticks + 1;
+    if (g_gameState.ticks > TIMER_PERIOD) {
         g_gameState.ticks = 0;
         for (i = 0; i < 64; i++) {
             if (flags->timersA[i] != 0 && flags->timersA[i] != 255) {

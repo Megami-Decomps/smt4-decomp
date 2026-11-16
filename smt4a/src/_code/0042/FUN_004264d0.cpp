@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail copies the 8-byte descriptor pair with ldrd/strd in r6:r7 (frame push {r4-r8, lr}); armcc copies it through VFP d8 (vldm/vstm) and the command stores pair into strd */
+/* NON_MATCHING: IDENTICAL when compiled with --cpu=MPCore --fpu=softvfp (no VFP: retail copies the saved descriptor pair (ldrd/strd r6:r7) with core registers); the default build uses VFP. Needs that unit cflags. */
 /* Sends service command 0x24 (header 0x240042) with a value, a buffer handle and a static buffer descriptor for `buffer`,
  * restoring the thread's previous static-buffer slots afterwards; returns the reply word on success. */
 #include "nn/Result.h"
