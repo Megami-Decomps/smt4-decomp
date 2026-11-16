@@ -32,8 +32,8 @@ typedef struct JobWork {
     /* 0x0095 */ u8 unk0095[0x23];
     /* 0x00B8 */ u8 unk00B8;
     /* 0x00B9 */ u8 unk00B9[0xF3B];
-    /* 0x0FF4 */ u8 captureEnabled;
-    /* 0x0FF5 */ u8 captureRequested;
+    /* 0x0FF4 */ s8 captureEnabled;
+    /* 0x0FF5 */ s8 captureRequested;
     /* 0x0FF6 */ u8 unk0FF6[0x6];
     /* 0x0FFC */ u8 captureResult;
     /* 0x0FFD */ u8 captured;

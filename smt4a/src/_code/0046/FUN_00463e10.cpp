@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001bd53c(int, int);
-int ARM_common_memcpy4_6(...);
+int __ARM_common_memcpy4_6(...);
 int FUN_004638ac(int, int, int *);
 int FUN_004639e4(int);
 int __aeabi_uidivmod(unsigned int, unsigned int);
@@ -38,7 +38,7 @@ typedef struct {
 extern unsigned char DAT_00647d80; /* 0x647d80 */
 
 /* Supplied declaration required: FUN_001bd53c. */
-/* Supplied declaration required: ARM_common_memcpy4_6. */
+/* Supplied declaration required: __ARM_common_memcpy4_6. */
 extern int FUN_004616ac(int, unsigned short *, int *, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004638ac. */
 /* Supplied declaration required: FUN_004639e4. */
@@ -270,13 +270,13 @@ FUN_00463e10(int param_1,int param_2,int param_3,unsigned int param_4,int param_
         if (*(unsigned int *)(temp_v26 + 0x20) != 0) {
           temp_v9 = *(unsigned int *)(temp_v26 + 0x20) & 1;
           if (temp_v9 == 1) {
-            ARM_common_memcpy4_6(param_2 + 0x2a,temp_v26 + 0xbbc);
+            __ARM_common_memcpy4_6(param_2 + 0x2a,temp_v26 + 0xbbc);
           }
           temp_v8 = (unsigned int)(temp_v9 == 1);
           if (temp_v9 < *(unsigned int *)(temp_v26 + 0x20)) {
             do {
-              ARM_common_memcpy4_6((int)puVar6 + temp_v8 * 6 + 0x12,temp_v26 + temp_v8 * 0x2c + 0xbbc);
-              ARM_common_memcpy4_6((int)puVar6 + (temp_v8 + 1) * 6 + 0x12,
+              __ARM_common_memcpy4_6((int)puVar6 + temp_v8 * 6 + 0x12,temp_v26 + temp_v8 * 0x2c + 0xbbc);
+              __ARM_common_memcpy4_6((int)puVar6 + (temp_v8 + 1) * 6 + 0x12,
                            temp_v26 + (temp_v8 + 1) * 0x2c + 0xbbc);
               temp_v9 = temp_v9 + 2;
               temp_v8 = temp_v8 + 2;
@@ -289,13 +289,13 @@ FUN_00463e10(int param_1,int param_2,int param_3,unsigned int param_4,int param_
         if (*(unsigned int *)(temp_v26 + 0x20) != 0) {
           temp_v9 = *(unsigned int *)(temp_v26 + 0x20) & 1;
           if (temp_v9 == 1) {
-            ARM_common_memcpy4_6(param_2 + 0x2a,temp_v26 + 0xcfc);
+            __ARM_common_memcpy4_6(param_2 + 0x2a,temp_v26 + 0xcfc);
           }
           temp_v8 = (unsigned int)(temp_v9 == 1);
           if (temp_v9 < *(unsigned int *)(temp_v26 + 0x20)) {
             do {
-              ARM_common_memcpy4_6((int)puVar6 + temp_v8 * 6 + 0x12,temp_v26 + temp_v8 * 6 + 0xcfc);
-              ARM_common_memcpy4_6((int)puVar6 + (temp_v8 + 1) * 6 + 0x12,temp_v26 + (temp_v8 + 1) * 6 + 0xcfc
+              __ARM_common_memcpy4_6((int)puVar6 + temp_v8 * 6 + 0x12,temp_v26 + temp_v8 * 6 + 0xcfc);
+              __ARM_common_memcpy4_6((int)puVar6 + (temp_v8 + 1) * 6 + 0x12,temp_v26 + (temp_v8 + 1) * 6 + 0xcfc
                           );
               temp_v9 = temp_v9 + 2;
               temp_v8 = temp_v8 + 2;
@@ -307,13 +307,13 @@ FUN_00463e10(int param_1,int param_2,int param_3,unsigned int param_4,int param_
     else if (*(unsigned int *)(temp_v26 + 0x20) != 0) {
       temp_v9 = *(unsigned int *)(temp_v26 + 0x20) & 1;
       if (temp_v9 == 1) {
-        ARM_common_memcpy4_6(param_2 + 0x2a,temp_v26 + 0xbb6);
+        __ARM_common_memcpy4_6(param_2 + 0x2a,temp_v26 + 0xbb6);
       }
       temp_v8 = (unsigned int)(temp_v9 == 1);
       if (temp_v9 < *(unsigned int *)(temp_v26 + 0x20)) {
         do {
-          ARM_common_memcpy4_6((int)puVar6 + temp_v8 * 6 + 0x12,temp_v26 + temp_v8 * 0x2c + 0xbb6);
-          ARM_common_memcpy4_6((int)puVar6 + (temp_v8 + 1) * 6 + 0x12,temp_v26 + (temp_v8 + 1) * 0x2c + 0xbb6)
+          __ARM_common_memcpy4_6((int)puVar6 + temp_v8 * 6 + 0x12,temp_v26 + temp_v8 * 0x2c + 0xbb6);
+          __ARM_common_memcpy4_6((int)puVar6 + (temp_v8 + 1) * 6 + 0x12,temp_v26 + (temp_v8 + 1) * 0x2c + 0xbb6)
           ;
           temp_v9 = temp_v9 + 2;
           temp_v8 = temp_v8 + 2;

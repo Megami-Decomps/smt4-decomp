@@ -1,4 +1,5 @@
-/* NON_MATCHING: recovered scalar range outputs occupy nonadjacent stack slots; candidate mask load grouping/registers differ. */
+/* NON_MATCHING: with entry->flags read directly only the third mask test (excluded) differs: retail
+ * ands flags & mask low words first (and r0, r0, r3 / and r1, r1, ip), the build the mask first. */
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -21,10 +22,9 @@ s32 FUN_0037fc54(void)
     for (s32 index = first; index < first + count; ++index) {
         BtlMainStateA *state = btlGetMainState();
         BtlCombatantEntryA* entry = &state->entries[index];
-        u64 flags = entry->flags;
-        if (!(flags & g_btlCandidateMasks.unavailable) &&
-            (g_btlCandidateMasks.required & flags) &&
-            !(flags & g_btlCandidateMasks.excluded) &&
+        if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
+            (g_btlCandidateMasks.required & entry->flags) &&
+            !(entry->flags & g_btlCandidateMasks.excluded) &&
             entry->id == demonId && (entry->statusFlags & (1u << statusBit))) {
             scrSetResult(1);
             return 1;

@@ -80,9 +80,9 @@ typedef struct FrameWorkA {
     /* 0x0004 */ void * bufferA;
     /* 0x0008 */ JobSurface * surface;
     /* 0x000C */ u8 unk000C[0xF98];
-    /* 0x0FA4 */ u8 unkFA4;
-    /* 0x0FA5 */ u8 unk0FA5[0x8];
-    /* 0x0FAD */ u8 unkFAD;
+    /* 0x0FA4 */ s8 unkFA4;
+    /* 0x0FA5 */ s8 unk0FA5[0x8];
+    /* 0x0FAD */ s8 unkFAD;
     /* 0x0FAE */ u8 unkFAE;
     /* 0x0FAF */ u8 unk0FAF[0x45];
     /* 0x0FF4 */ u8 unkFF4;
@@ -114,7 +114,7 @@ typedef struct FrameWorkA {
     /* 0x141A */ u8 unk141A[0x33];
     /* 0x144D */ u8 dirty;
     /* 0x144E */ u8 unk144E[0x3E];
-    /* 0x148C */ u8 unk148C;
+    /* 0x148C */ s8 unk148C;
 } FrameWorkA;
 
 /* Retail 32-bit layout invariants. */

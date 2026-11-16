@@ -19,7 +19,7 @@ struct BtlUiColumnSelectionView {
 };
 typedef char BtlUiSelectionColumnSizeCheck[sizeof(BtlUiSelectableColumn) == 0x2C ? 1 : -1];
 
-extern "C" u64 runtimeShiftLeftWide(u64 value, s32 shift);
+extern "C" u64 __aeabi_llsl(u64 value, s32 shift);
 
 /* Marks all columns whose ids occur in mask and records whether more than one column matched. */
 extern "C" void FUN_003009fc(BtlUiObjC *object, u64 mask)
@@ -31,7 +31,7 @@ extern "C" void FUN_003009fc(BtlUiObjC *object, u64 mask)
     u8 *multiple = &view->multiple;
     s32 matches = 0;
     for (s32 id = 0; id < view->count; ++id) {
-        if (runtimeShiftLeftWide(1, id) & mask) {
+        if (__aeabi_llsl(1, id) & mask) {
             for (s32 column = 0; column < view->count; ++column) {
                 if (view->columns[column].id == id) {
                     ++matches;

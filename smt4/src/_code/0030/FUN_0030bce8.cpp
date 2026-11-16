@@ -1,23 +1,49 @@
-/* NON_MATCHING: stack-key addresses are recomputed for the fallback call instead of retained across rank queries. */
 #include "gamedata/ReferencedKindRecord.h"
 #include "gamedata/Table8Type5Lookup.h"
 #include "gamedata/GameDataAccess_Smt4.h"
 
 extern "C" {
 s32 FUN_002497f8(const KindComparisonKey *left, const KindComparisonKey *right);
+}
 
+/* Orders two keys by rank (ids above 400 rank 99, others by recordKindRank); ties go to
+ * FUN_002497f8. */
+static __inline s32 kindKeyCompareRank(const KindComparisonKey &left, const KindComparisonKey &right)
+{
+    s32 leftRank;
+    s32 rightRank;
+
+    if (idIsAbove400(left.id) != 0) {
+        leftRank = 99;
+    } else {
+        leftRank = recordKindRank(left.id);
+    }
+    if (idIsAbove400(right.id) != 0) {
+        rightRank = 99;
+    } else {
+        rightRank = recordKindRank(right.id);
+    }
+    s32 order = rightRank - leftRank;
+
+    if (order != 0) {
+        return order;
+    }
+    return FUN_002497f8(&left, &right);
+}
+
+extern "C" {
+
+/* Sort compare of two type-5 table-8 entries by the rank of the items they refer to. */
 s32 FUN_0030bce8(const u16 *left, const u16 *right)
 {
     Table8Type5Record *leftRecord = table8Type5FindById(*left);
     Table8Type5Record *rightRecord = table8Type5FindById(*right);
-    KindComparisonKey leftKey = {leftRecord->value, 0};
-    KindComparisonKey rightKey = {rightRecord->value, 0};
-    s32 leftRank = idIsAbove400(leftKey.id) ? 99 : recordKindRank(leftKey.id);
-    s32 rightRank = idIsAbove400(rightKey.id) ? 99 : recordKindRank(rightKey.id);
-    s32 difference = rightRank - leftRank;
-    if (difference == 0) {
-        return FUN_002497f8(&leftKey, &rightKey);
-    }
-    return difference;
+    KindComparisonKey leftKey;
+    KindComparisonKey rightKey;
+    leftKey.id = leftRecord->value;
+    leftKey.unk04 = 0;
+    rightKey.id = rightRecord->value;
+    rightKey.unk04 = 0;
+    return kindKeyCompareRank(leftKey, rightKey);
 }
 }

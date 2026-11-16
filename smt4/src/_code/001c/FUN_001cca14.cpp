@@ -8,7 +8,7 @@
 extern "C" {
 
 int FUN_00204ed0(...);
-int FUN_00288e68(...);
+int table8Type5GetValue(...);
 int fadeObjectResetIfActive(...);
 int FUN_0029a284(...);
 int fontMeasureLineAdvance(...);
@@ -65,7 +65,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_00187114. */
 /* Supplied declaration required: FUN_00204ed0. */
 extern unsigned long long statusGetAvailableChoiceCount(void);
-/* Supplied declaration required: FUN_00288e68. */
+/* Supplied declaration required: table8Type5GetValue. */
 /* Supplied declaration required: FUN_00290994. */
 /* Supplied declaration required: FUN_0029a17c. */
 /* Supplied declaration required: fadeObjectResetIfActive. */
@@ -551,7 +551,7 @@ LAB_001ccb9c:
         temp_v9 = (unsigned int)*(unsigned short *)(temp_v10 + temp_v12 * 2 + 0x2370);
         temp_v8 = 0;
         if (temp_v9 != 0) {
-          FUN_00288e68(temp_v9,(int)(temp_v15 >> 0x20),0);
+          table8Type5GetValue(temp_v9,(int)(temp_v15 >> 0x20),0);
           temp_v8 = temp_v9;
         }
         FUN_00204ed0(temp_v1 + (int)temp_v15,temp_v2,temp_v8,temp_v12 + 0x414,temp_v14);
@@ -566,7 +566,7 @@ LAB_001cdb08:
         if (temp_v12 == temp_v7 - 1) goto LAB_001cdd1c;
       }
       temp_v8 = (unsigned int)*(unsigned short *)(temp_v10 + 0x2380);
-      FUN_00288e68(temp_v8);
+      table8Type5GetValue(temp_v8);
       FUN_002bf288(2,0x1a,0x4e3,temp_v1,temp_v2,0xb3);
       FUN_002bf288(2,0x1a,0x4e4,temp_v1,temp_v2,0xb3);
       FUN_002bf288(2,0x1a,0x4e5,temp_v1,temp_v2,0xb3);
@@ -590,7 +590,7 @@ LAB_001cdb08:
         temp_v9 = (unsigned int)*(unsigned short *)(temp_v10 + temp_v12 * 2 + 0x2370);
         temp_v8 = 0;
         if (temp_v9 != 0) {
-          FUN_00288e68();
+          table8Type5GetValue();
           temp_v8 = temp_v9;
         }
         temp_v17 = (unsigned char *)0x1;
@@ -627,7 +627,7 @@ LAB_001cdd1c:
       temp_v13 = FUN_0029ee54((const void *)(temp_v19));
       if (temp_v13 - 1 == temp_v12) {
         temp_v8 = (unsigned int)*(unsigned short *)(temp_v10 + 0x2380);
-        FUN_00288e68(temp_v8);
+        table8Type5GetValue(temp_v8);
         temp_v17 = (unsigned char *)0x1;
         temp_v18 = 0;
         FUN_0029a284(temp_v1,temp_v2,temp_v8,0x435,0,0);
@@ -636,7 +636,7 @@ LAB_001cdd1c:
         temp_v9 = (unsigned int)*(unsigned short *)(temp_v10 + temp_v12 * 2 + 0x2370);
         temp_v8 = 0;
         if (temp_v9 != 0) {
-          FUN_00288e68();
+          table8Type5GetValue();
           temp_v8 = temp_v9;
         }
         temp_v17 = (unsigned char *)0x1;

@@ -6,12 +6,12 @@
 extern "C" {
 extern LmapScene *g_lmapScene;
 extern SceneViewHeading *DAT_004474f4;
-u32 FUN_0027d7b0(void);
+u32 table23FindRecordByKey(void);
 
 /* Restores the spawn position, both position snapshots, and the scene and view headings. */
 void FUN_002d4e58(void)
 {
-    SceneSpawnRecord *record = reinterpret_cast<SceneSpawnRecord *>(dataTableGetRecord23(FUN_0027d7b0()));
+    SceneSpawnRecord *record = reinterpret_cast<SceneSpawnRecord *>(dataTableGetRecord23(table23FindRecordByKey()));
     LmapScene *scene = g_lmapScene;
     scene->transform.position[0] = static_cast<f32>(record->x);
     scene->transform.position[1] = static_cast<f32>(record->y);

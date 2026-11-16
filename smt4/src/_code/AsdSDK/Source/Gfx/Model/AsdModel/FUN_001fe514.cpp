@@ -1,4 +1,3 @@
-/* NON_MATCHING: identical except the 0.0f offset constant, which this build keeps in s1 while retail reuses s0 after the 1.0f color stores. */
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemUtil.h"
 
@@ -35,6 +34,14 @@ extern u8 DAT_004dae48[]; /* model list */
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void asdListAdd(void *list, void *item, s32 flags);
 
+/* Sets the three components of a vector (written from z down to x). */
+static __inline void vec3Set(f32 *v, f32 x, f32 y, f32 z)
+{
+    v[2] = z;
+    v[1] = y;
+    v[0] = x;
+}
+
 /* Allocate a cleared model, set its defaults, and add it to the model list. */
 AsdModel *FUN_001fe514(void)
 {
@@ -62,9 +69,7 @@ AsdModel *FUN_001fe514(void)
     model->color[2] = 1.0f;
     model->color[3] = 1.0f;
     model->unk90 = 0;
-    model->offset[2] = 0.0f;
-    model->offset[1] = 0.0f;
-    model->offset[0] = 0.0f;
+    vec3Set(model->offset, 0.0f, 0.0f, 0.0f);
     asdListAdd(DAT_004dae48, model, 0);
     g_gfxSettings.modelCount++;
     return model;

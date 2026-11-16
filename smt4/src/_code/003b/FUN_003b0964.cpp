@@ -1,5 +1,5 @@
-/* NON_MATCHING: retail looks like an inlined std::map iterator (operand order of the node compares, r2 in the
- * parent walk, and a branch instead of conditional stores around the ready flag); the plain C walk differs there. */
+/* NON_MATCHING: the map walk is now an inlined iterator (node compares and parent walk match); retail
+ * still branches around the ready-flag store where the build predicates it (ldrne/strbne). */
 #include "common.h"
 
 extern "C" {
@@ -42,19 +42,12 @@ typedef struct ModelLoader {
 
 s32 moLiveNodeSourceAcquireHeader(ModelEntry *entry);
 
-/* Checks every model in the loader's map, marking the loaded ones ready; returns whether all have loaded. */
-u32 FUN_003b0964(ModelLoader *loader)
-{
-    ModelMap *models = &loader->models;
-    u32 allLoaded = 1;
+/* The map's iterator: an in-order walk of the red-black tree. */
+struct ModelMapIterator {
+    ModelMapNode *node;
 
-    for (ModelMapNode *node = models->header->left; models->header != node;) {
-        ModelEntry *entry = node->slot->entry;
-        if (moLiveNodeSourceAcquireHeader(entry) == 0) {
-            allLoaded = 0;
-        } else {
-            entry->resource->ready = 1;
-        }
+    void increment()
+    {
         ModelMapNode *next = node->right;
         if (next != NULL) {
             do {
@@ -63,7 +56,7 @@ u32 FUN_003b0964(ModelLoader *loader)
             } while (next != NULL);
         } else {
             ModelMapNode *parent = node->parent;
-            while (parent->right == node) {
+            while (node == parent->right) {
                 node = parent;
                 parent = parent->parent;
             }
@@ -71,6 +64,39 @@ u32 FUN_003b0964(ModelLoader *loader)
                 node = parent;
             }
         }
+    }
+    bool operator!=(const ModelMapIterator &other) const { return node != other.node; }
+};
+
+static __inline ModelMapIterator modelMapBegin(ModelMap *map)
+{
+    ModelMapIterator it = {map->header->left};
+    return it;
+}
+
+static __inline ModelMapIterator modelMapEnd(ModelMap *map)
+{
+    ModelMapIterator it = {map->header};
+    return it;
+}
+
+/* Checks every model in the loader's map, marking the loaded ones ready; returns whether all have loaded. */
+u32 FUN_003b0964(ModelLoader *loader)
+{
+    ModelMap *models = &loader->models;
+    u32 allLoaded = 1;
+
+    ModelMapIterator it = modelMapBegin(models);
+    if (it != modelMapEnd(models)) {
+        do {
+            ModelEntry *entry = it.node->slot->entry;
+            if (moLiveNodeSourceAcquireHeader(entry) == 0) {
+                allLoaded = 0;
+            } else {
+                entry->resource->ready = 1;
+            }
+            it.increment();
+        } while (it != modelMapEnd(models));
     }
     return allLoaded;
 }

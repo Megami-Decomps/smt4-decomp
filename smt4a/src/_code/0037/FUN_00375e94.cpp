@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail runs an empty counting loop over the slots that falls off the end without a return value when the flag byte is clear (r0 keeps the pool pointer); retail keeps the pool pointer in r0 and branches, the build predicates. */
 #include "common.h"
 
 struct Pool {
@@ -12,15 +11,18 @@ struct Object {
     /* 0x24 */ u8 *owner;
 };
 
-/* Walks the pool's slots once its flag byte is set (the per-slot work is gone from this build). */
+/* Walks the pool's slots once its flag byte is set (the per-slot work is gone from this build) and
+ * returns how many it walked. With the flag byte clear it returns nothing (retail's r0 still holds
+ * the pool). */
 extern "C" s32 FUN_00375e94(Object *object)
 {
     Pool *pool = (Pool *)(object->owner + 0xC0);
-    s32 i = 0;
 
     if (pool->flags & 0xFF000000) {
-        for (i = 0; i < pool->count; i++) {
+        s32 i = 0;
+        while (i < pool->count) {
+            i++;
         }
+        return i;
     }
-    return i;
 }

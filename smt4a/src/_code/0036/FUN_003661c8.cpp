@@ -35,7 +35,7 @@ int FUN_002d1f40(...);
 int FUN_00317af8(...);
 int FUN_00324e38(...);
 int FUN_00352308(void);
-int FUN_003b5714(unsigned int, unsigned int, unsigned int);
+int table23FindRecordByKey(unsigned int, unsigned int, unsigned int);
 int sysPlayVoice(...);
 int VectorSignedToFloat(...);
 
@@ -96,7 +96,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: FUN_0033abd4. */
 /* Supplied declaration required: FUN_00352308. */
 extern int dataTableGetRecord23(void);
-/* Supplied declaration required: FUN_003b5714. */
+/* Supplied declaration required: table23FindRecordByKey. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d4ed8. */
 extern int inputIsQuestMenuPressed(void);
@@ -337,7 +337,7 @@ void FUN_003661c8(void)
       FUN_00233e10(1,g_gameState.f005f16ac);
       temp_v1 = FUN_004d0584();
       if (temp_v1 != 0) {
-        FUN_003b5714(g_gameState.f005f16a0,g_gameState.f005f16a4,g_gameState.f005f16a8);
+        table23FindRecordByKey(g_gameState.f005f16a0,g_gameState.f005f16a4,g_gameState.f005f16a8);
         temp_v2 = dataTableGetRecord23();
         temp_v1 = g_lmapScene;
         if (g_gameState.f005f164c != 0) {

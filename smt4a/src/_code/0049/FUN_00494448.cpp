@@ -1,16 +1,25 @@
-/* NON_MATCHING: retail copies right to r6 before secondary comparison; compiled code omits the copy and retains left key in r5. */
 #include "common.h"
 
 extern "C" {
 s32 shopGetEntryPrice(const u16* entry);
 u16 FUN_0049c9a0(const u16* entry);
 
+/* Orders two entries by their secondary key. */
+static s32 compareOrder(const u16 *left, const u16 *right)
+{
+    s32 leftOrder = FUN_0049c9a0(left);
+    s32 rightOrder = FUN_0049c9a0(right);
+    return leftOrder - rightOrder;
+}
+
 // Compare entries by the primary key, then by the secondary key.
 s32 FUN_00494448(const u16* left, const u16* right)
 {
-    s32 result = shopGetEntryPrice(left) - shopGetEntryPrice(right);
+    s32 leftPrice = shopGetEntryPrice(left);
+    s32 rightPrice = shopGetEntryPrice(right);
+    s32 result = leftPrice - rightPrice;
     if (result == 0)
-        result = FUN_0049c9a0(left) - FUN_0049c9a0(right);
+        result = compareOrder(left, right);
     return result;
 }
 }

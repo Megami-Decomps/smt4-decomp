@@ -43,9 +43,9 @@ void FUN_0027e5e4(BattleUnitStateWork* work)
         BtlEntry* entry = &btlGetMainState()->entries[work->actor];
         if (entry != NULL) {
             if (data->unk0FA & 0x3E8) {
-                entry->flags |= 0x80000;
+                entry->flagMask |= 0x80000;
             } else {
-                entry->flags &= ~0x80000;
+                entry->flagMask &= ~0x80000ULL;
             }
         }
     }

@@ -26,7 +26,7 @@ u32 FUN_00246454(s32 actor, u32 options, BtlEntry *unit)
             }
         }
     }
-    unit->flags |= 0x40;
+    unit->flagMask |= 0x40;
     ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)(actor + 20), 0, options);
     action->kind = 0x24;
     action->wordValues.unk18 = reinterpret_cast<u32>(unit);

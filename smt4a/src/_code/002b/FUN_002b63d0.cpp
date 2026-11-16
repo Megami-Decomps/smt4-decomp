@@ -1,51 +1,59 @@
-/* NON_MATCHING: only the warp-id load differs: retail loads the halfword sign-extended (ldrsh), the build zero-extends (ldrh) for the != 0 test; the id now comes from g_gameState+0x288 (pool anchor matches). */
 #include "common.h"
 
 extern "C" {
-// The warp id field of g_gameState.
+
+/* The pending warp id in g_gameState (0 when no warp is pending). */
 struct WarpGlobals {
-    u8 unk000[0x288];
-    s16 warpId; // 0x288
+    /* 0x000 */ u8 unk000[0x288];
+    /* 0x288 */ s16 warpId;
 };
 extern WarpGlobals g_gameState;
+
 struct WarpVec3 {
     f32 x, y, z;
 };
-void *FUN_003c316c(void);
-void FUN_00377acc(void *, s32, s32);
 
+/* An Apocalypse map enemy slot (0x188 bytes, larger than IV's shared enemy-slot layout). */
+struct EnemyWarpSlotA {
+    /* 0x000 */ u8 active;
+    /* 0x001 */ u8 unk001[7];
+    /* 0x008 */ WarpVec3 position;
+    /* 0x014 */ u8 unk014[0xC];
+    /* 0x020 */ WarpVec3 snapshot;
+    /* 0x02C */ f32 heading;
+    /* 0x030 */ u8 unk030[0x4D];
+    /* 0x07D */ u8 blocked;
+    /* 0x07E */ u8 unk07E[6];
+    /* 0x084 */ u32 state;
+    /* 0x088 */ u32 elapsed;
+    /* 0x08C */ u8 unk08C[0xF0];
+    /* 0x17C */ s32 kind;
+    /* 0x180 */ u8 unk180[8];
+};
+
+struct EnemyWarpStateView {
+    /* 0x000 */ u8 unk000[0x34];
+    /* 0x034 */ EnemyWarpSlotA entries[40];
+};
+
+/* A warp point record of data table 41: its position and heading. */
+struct WarpPoint {
+    /* 0x00 */ u16 unk00;
+    /* 0x02 */ s16 x, y, z;
+    /* 0x08 */ s16 heading;
+};
+
+extern EnemyWarpStateView *g_mapEnemy;
+void *FUN_003c316c(s32 id);
+void FUN_00377acc(void *enemy, s32 warpId, s32 mode);
+
+/* When a warp is pending, moves the first active, unblocked enemy of kind 1-10 in state 2 to the
+ * warp point and puts it in the warp state (28). */
 void FUN_002b63d0(void)
 {
-    struct EnemyWarpSlotA {
-        u8 active;
-        u8 unk001[7];
-        WarpVec3 position;
-        u8 unk014[0xC];
-        WarpVec3 snapshot;
-        f32 heading;
-        u8 unk030[0x4D];
-        u8 blocked;
-        u8 unk07E[6];
-        u32 state;
-        u32 elapsed;
-        u8 unk08C[0xF0];
-        s32 kind;
-        u8 unk180[8];
-    };
-    // Apocalypse's 0x188-byte slots exceed the shared IV enemy-slot layout.
-    struct EnemyWarpStateView {
-        u8 unk000[0x34];
-        EnemyWarpSlotA entries[40];
-    };
-    struct WarpPoint {
-        u16 unk00;
-        s16 x, y, z;
-        s16 heading;
-    };
-    extern EnemyWarpStateView *g_mapEnemy;
     EnemyWarpStateView *state = g_mapEnemy;
     if (g_gameState.warpId != 0) {
-        const WarpPoint *point = static_cast<const WarpPoint *>(FUN_003c316c());
+        const WarpPoint *point = static_cast<const WarpPoint *>(FUN_003c316c(g_gameState.warpId));
         if (point != NULL) {
             for (s32 index = 0; index < 40; ++index) {
                 EnemyWarpSlotA *entry = &state->entries[index];
@@ -65,4 +73,5 @@ void FUN_002b63d0(void)
         }
     }
 }
-}
+
+} /* extern "C" */

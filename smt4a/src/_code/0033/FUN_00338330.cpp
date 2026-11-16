@@ -1,4 +1,4 @@
-/* NON_MATCHING: the shared member-wise vector copy now matches retail (ported from smt4 FUN_00246afc); the stack layout differs (retail: vector at sp+4 then the three matrices, 220-byte frame, &matrix cached in r7) and is independent of declaration order. */
+/* NON_MATCHING: stack slots only: retail puts the caller's matrix at sp+80 below the rotation at sp+144 (220-byte frame); ours places the rotation at sp+80 and the matrix at sp+160 (228 bytes). Every declaration order and nesting tried keeps the caller's matrix last. */
 #include "shard/X14_ModelTransform.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexTMX.h"
 
@@ -14,13 +14,15 @@ void matrixCopyFull(TransformMtx44 *destination, const TransformMtx44 *source);
 void FUN_002a2048(TransformMtx44 *matrix, const TransformVec3 *translation, u32 mode);
 void matrixApplyByMode(void *transform, const TransformMtx44 *matrix, u32 flags);
 
-// Compose optional scale, rotation and translation, then install the model transform.
-void FUN_00338330(TransformOwnerA *owner, const TransformVec3 *translation, const void *rotationSource, const TransformVec3 *scale)
+}
+
+// Compose optional scale, rotation and translation into a transform matrix.
+static void matrixComposeScaleRotateTranslate(TransformMtx44 *matrix, const TransformVec3 *translation,
+                                              const void *rotationSource, const TransformVec3 *scale)
 {
-    TransformVec3 value;
     TransformMtx44 scaleMatrix;
-    TransformMtx44 matrix;
     TransformRotation rotation;
+    TransformVec3 value;
     if (scale) {
         value.x = scale->x;
         value.y = scale->y;
@@ -31,16 +33,23 @@ void FUN_00338330(TransformOwnerA *owner, const TransformVec3 *translation, cons
     }
     if (rotationSource) {
         FUN_002b4c30(&rotation, rotationSource);
-        matrix43Multiply(&matrix, &scaleMatrix, &rotation);
+        matrix43Multiply(matrix, &scaleMatrix, &rotation);
     } else {
-        matrixCopyFull(&matrix, &scaleMatrix);
+        matrixCopyFull(matrix, &scaleMatrix);
     }
     if (translation) {
         value.x = translation->x;
         value.y = translation->y;
         value.z = translation->z;
-        FUN_002a2048(&matrix, &value, 2);
+        FUN_002a2048(matrix, &value, 2);
     }
-    matrixApplyByMode(owner->transform, &matrix, 0);
 }
+
+// Compose optional scale, rotation and translation, then install the model transform.
+extern "C" void FUN_00338330(TransformOwnerA *owner, const TransformVec3 *translation, const void *rotationSource,
+                             const TransformVec3 *scale)
+{
+    TransformMtx44 matrix;
+    matrixComposeScaleRotateTranslate(&matrix, translation, rotationSource, scale);
+    matrixApplyByMode(owner->transform, &matrix, 0);
 }

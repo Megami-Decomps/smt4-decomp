@@ -26,7 +26,7 @@ struct MapTransitionChoices {
 extern "C" {
 extern MapTransitionChoices DAT_005f19fc;
 s32 scrGetArg(u32 index);
-s32 FUN_003b5714(s32 map, u32 area, u32 object);
+s32 table23FindRecordByKey(s32 map, u32 area, u32 object);
 const MapTransitionRecord *dataTableGetRecord23(u32 index);
 
 /* Stores the two script-selected map transition records. */
@@ -40,7 +40,7 @@ u32 FUN_0039bd24(void)
     s32 secondMap = scrGetArg(3);
     u32 secondArea = scrGetArg(4);
     u32 secondObject = scrGetArg(5);
-    s32 index = FUN_003b5714(firstMap, firstArea, firstObject);
+    s32 index = table23FindRecordByKey(firstMap, firstArea, firstObject);
     if (index != -1) {
         const MapTransitionRecord *record = dataTableGetRecord23(index);
         DAT_005f19fc.firstKind = record->kind;
@@ -52,7 +52,7 @@ u32 FUN_0039bd24(void)
         DAT_005f19fc.firstMap = firstMap;
         DAT_005f19fc.firstArea = firstArea;
     }
-    index = FUN_003b5714(secondMap, secondArea, secondObject);
+    index = table23FindRecordByKey(secondMap, secondArea, secondObject);
     if (index != -1) {
         const MapTransitionRecord *record = dataTableGetRecord23(index);
         DAT_005f19fc.secondPosition.x = record->x;

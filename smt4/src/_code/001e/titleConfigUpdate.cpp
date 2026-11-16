@@ -40,7 +40,7 @@ void FUN_002bfc24(u32 player, u32 sound, u32 bank, u32 priority);
 s32 FUN_0029efd8(void *cursor, u32 enabled);
 void scrScriptProcessStartEntry(void *process, u32 entry);
 void timerStart(void *window, s32 period, s32 value);
-void ARM_common_memcpy4_8(TitleConfigValues *values, const void *saved);
+void __ARM_common_memcpy4_8(TitleConfigValues *values, const void *saved);
 s32 scrRunOpcodesStub(void *process);
 s32 messageMainGetChoiceResult(void);
 
@@ -163,7 +163,7 @@ u32 titleConfigUpdate(void)
         } else if (FUN_002c1658(1, 1)) {
             eventQueueAddUniqueIfValid(0x100016E);
             timerStart(work->window, 1, 0);
-            ARM_common_memcpy4_8(&g_titleConfigValues, work->saved);
+            __ARM_common_memcpy4_8(&g_titleConfigValues, work->saved);
             titleConfigApplyAudio();
             audioApplyChannelVolume(0, titleConfigGetModeFlag(), 1);
             audioApplyChannelVolume(1, titleConfigGetModeFlag(), 1);

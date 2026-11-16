@@ -7,7 +7,7 @@
 extern "C" {
 
 int mapIfActivateRecord(...);
-int FUN_0027d7b0(unsigned int, unsigned int, unsigned int);
+int table23FindRecordByKey(unsigned int, unsigned int, unsigned int);
 int FUN_0027f958(...);
 int FUN_0027fca0(...);
 int FUN_002879dc(...);
@@ -54,7 +54,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapInterfaceSetStateTwo. */
 extern int inputIsQuestMenuPressed(void);
 extern int dataTableGetRecord23(void);
-/* Supplied declaration required: FUN_0027d7b0. */
+/* Supplied declaration required: table23FindRecordByKey. */
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_0027f958. */
 /* Supplied declaration required: lmapSetSceneId. */
@@ -308,7 +308,7 @@ void FUN_002e8fdc(void)
       mapIfActivateRecord(1,DAT_0049f99c);
       temp_v0 = FUN_0027ee9c();
       if (temp_v0 != 0) {
-        FUN_0027d7b0(DAT_0049f990,DAT_0049f994,DAT_0049f998);
+        table23FindRecordByKey(DAT_0049f990,DAT_0049f994,DAT_0049f998);
         temp_v1 = dataTableGetRecord23();
         temp_v0 = g_lmapScene;
         if (DAT_0049f968 != 0) {

@@ -100,7 +100,7 @@ unsigned int FUN_001c8e28(void)
       uVar9 = FUN_0026b5dc();
       FUN_002bcd68(uVar9,puVar2[0xdf],0x80);
       uVar9 = FUN_0026b5c8();
-      ARM_common_memcpy4_8(uVar9,puVar2[0xe0]);
+      __ARM_common_memcpy4_8(uVar9,puVar2[0xe0]);
       uVar9 = FUN_002c09bc();
       FUN_002bcd68(uVar9,puVar2[0xe1],0x24d28);
       iVar8 = 0;
@@ -451,7 +451,7 @@ code_r0x001c9900:
     uVar9 = FUN_0026b5dc();
     FUN_002bcd68(uVar9,puVar2[0xdf],0x80);
     uVar9 = FUN_0026b5c8();
-    ARM_common_memcpy4_8(uVar9,puVar2[0xe0]);
+    __ARM_common_memcpy4_8(uVar9,puVar2[0xe0]);
     uVar9 = FUN_002c09bc();
     FUN_002bcd68(uVar9,puVar2[0xe1],0x24d28);
     FUN_002b827c(3);
@@ -548,13 +548,13 @@ code_r0x001c9900:
     uVar9 = FUN_0026b5dc();
     FUN_002bcd68(DAT_0044de38,uVar9,0x80);
     uVar9 = FUN_0026b5c8();
-    ARM_common_memcpy4_8(DAT_0044de3c,uVar9);
+    __ARM_common_memcpy4_8(DAT_0044de3c,uVar9);
     uVar9 = FUN_002c09bc();
     FUN_002bcd68(DAT_0044de40,uVar9,0x24d28);
     uVar9 = FUN_0026b5dc();
     FUN_002bcd68(uVar9,puVar2[0xdf],0x80);
     uVar9 = FUN_0026b5c8();
-    ARM_common_memcpy4_8(uVar9,puVar2[0xe0]);
+    __ARM_common_memcpy4_8(uVar9,puVar2[0xe0]);
     uVar9 = FUN_002c09bc();
     FUN_002bcd68(uVar9,puVar2[0xe1],0x24d28);
     puVar2[2] = 0x10;
@@ -648,7 +648,7 @@ code_r0x001c9900:
           uVar9 = FUN_0026b5dc();
           FUN_002bcd68(uVar9,puVar4[0xdf],0x80);
           uVar9 = FUN_0026b5c8();
-          ARM_common_memcpy4_8(uVar9,puVar4[0xe0]);
+          __ARM_common_memcpy4_8(uVar9,puVar4[0xe0]);
           uVar9 = FUN_002c09bc();
           FUN_002bcd68(uVar9,puVar4[0xe1],0x24d28);
           FUN_00296f4c(puVar4[0x92],1);

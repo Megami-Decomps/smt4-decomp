@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail initialises the handle with three separate stores (post-indexed) and the desc tail with stm {0, 1}; ours merges id/resource into one stm and swaps r5/r6. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/asdMemoryGetDefaultAllocator.h"
@@ -46,6 +45,15 @@ void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFron
 AsdAmbientLightResource *_ZN9Obj4210946createEPvP18AsdAllocatorObject(const AsdAmbientLightDesc *desc, void *allocator);
 u32 nw_ut_FloatColor_ToPicaU32(const AsdFloatColor *color);
 
+/* Sets all four channels of a float colour. */
+static void floatColorSet(AsdFloatColor *color, f32 r, f32 g, f32 b, f32 a)
+{
+    color->r = r;
+    color->g = g;
+    color->b = b;
+    color->a = a;
+}
+
 /* Creates an ambient light with a dim grey (0.2) colour. */
 AsdAmbientLight *FUN_002cb80c(void)
 {
@@ -56,8 +64,8 @@ AsdAmbientLight *FUN_002cb80c(void)
     asdDebugTrace(DAT_00409488, 688);
     light = (AsdAmbientLight *)asdMemoryAlloc(0x100, 0x100, 0, sizeof(AsdAmbientLight), 1);
     light->resource = NULL;
-    light->id = -1;
     light->data = NULL;
+    light->id = -1;
     allocator = asdMemoryGetDefaultAllocator();
     desc.unk00 = 1;
     desc.unk01 = 1;
@@ -66,10 +74,7 @@ AsdAmbientLight *FUN_002cb80c(void)
     desc.unk0C = 1;
     light->resource = _ZN9Obj4210946createEPvP18AsdAllocatorObject(&desc, allocator);
     light->data = light->resource->data;
-    light->data->color.r = 0.2f;
-    light->data->color.g = 0.2f;
-    light->data->color.b = 0.2f;
-    light->data->color.a = 1.0f;
+    floatColorSet(&light->data->color, 0.2f, 0.2f, 0.2f, 1.0f);
     light->data->picaColor = nw_ut_FloatColor_ToPicaU32(&light->data->color);
     return light;
 }

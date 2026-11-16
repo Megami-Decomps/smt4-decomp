@@ -59,7 +59,7 @@ void uiDrawScrollingSelectionEntry(RowPanel *panel, s32 index, s32 alpha, s32 ro
 void drawTextAtSnappedRectangle(u8 *layout, s32 style, u32 color, const char *text, f32 x, f32 y, f32 scale, f32 c, f32 d);
 void FUN_00231bcc(u8 *layout, u32 image, s32 x, s32 y, s32 alpha, u32 flags);
 s32 FUN_00262cb0(u16 id);
-s32 FUN_00288e68(s32 id);
+s32 table8Type5GetValue(s32 id);
 void FUN_002b6c34(s16 id, s32 x, s32 y, s32 alpha, s32 a, s32 b);
 void pairCopy(u8 *layout, ScreenPoint *point);
 s32 textFormatBuffer(char *destination, const char *format, ...);
@@ -108,7 +108,7 @@ void FUN_003abae8(RowPanel *panel, s32 index, s32 row, s32 selected, s32 alpha)
     pairCopy(panel->layout, &origin);
     f32 iconX = (f32)(icon->x + baseX) + origin.x;
     f32 iconY = (f32)(icon->y + baseY) + origin.y;
-    s32 shown = FUN_00288e68(id);
+    s32 shown = table8Type5GetValue(id);
     FUN_002b6c34((s16)shown, (s32)iconX, (s32)iconY, alpha, 0, 0);
     textFormatBuffer(text, "%8d", panel->list.entries[row].count);
     LayoutSlot *countBox;

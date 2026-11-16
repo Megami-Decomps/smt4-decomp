@@ -1,4 +1,4 @@
-/* NON_MATCHING: blocked early-exit zeroing and one height-copy register pair differ; signed state bytes now match all folded flag loads. */
+/* NON_MATCHING: the gates now match (signed blocked byte gives the shared 0x1400 base); remaining: retail zeroes r0 on the blocked exit (movne r0, #0) and branches past the final `mov r0, #0`, which it schedules before the pending store, and one height copy swaps r0/r1. */
 #include "shard/JobWork.h"
 #include "camp/RenderCtx.h"
 #include "Model/MoriModelShadowMap.h"
@@ -13,7 +13,7 @@ struct DownsampleWork {
     u8 done; // 0xfad
     u8 pending; // 0xfae
     u8 unkfaf[0x4dd];
-    u8 blocked; // 0x148c
+    s8 blocked; // 0x148c
     u8 unk148d[3];
     JobSurface *source; // 0x1490
     s8 separateBuffers; // 0x1494

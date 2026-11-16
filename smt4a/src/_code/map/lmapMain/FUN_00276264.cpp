@@ -6,7 +6,7 @@ struct ScriptHolder;
 
 extern "C" {
 
-int ARM_common_memcpy4_9(...);
+int __ARM_common_memcpy4_9(...);
 int asdSequenceRequest(...);
 int randRange(...);
 int jobStop(...);
@@ -212,7 +212,7 @@ int FUN_00376fa4(...);
 int dataTableGetRecord23(void);
 int gameApplyCurrentFlagTableEntry(void);
 int sysClearCachedFlag(void);
-int FUN_003b5714(...);
+int table23FindRecordByKey(...);
 int gameFlagSetEligibleEntryFlagsAtThreshold(int);
 int countersAddSaturating(int, int);
 int FUN_0040ae70(...);
@@ -384,7 +384,7 @@ extern unsigned int DAT_005f1cb0; /* 0x5f1cb0 */
 #define ROMWRIGHT_PIECE_1_3_DEFINED
 #define romwright_piece_1_3(upper, lower) ((unsigned int)(((unsigned int)(unsigned char)(upper) << 24) | ((unsigned int)(lower) & 0xffffffULL)))
 #endif
-/* Supplied declaration required: ARM_common_memcpy4_9. */
+/* Supplied declaration required: __ARM_common_memcpy4_9. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: asdCameraInitializeDefaults. */
@@ -556,7 +556,7 @@ extern int FUN_003ae4d0(unsigned int);
 /* Supplied declaration required: naviMainFinishRequest. */
 /* Supplied declaration required: sysClearCachedFlag. */
 /* Supplied declaration required: FUN_003b5064. */
-/* Supplied declaration required: FUN_003b5714. */
+/* Supplied declaration required: table23FindRecordByKey. */
 /* Supplied declaration required: FUN_003b5c54. */
 /* Supplied declaration required: FUN_003c91e8. */
 /* Supplied declaration required: messageStartIntroAnimation. */
@@ -872,7 +872,7 @@ unsigned int FUN_00276264(void)
       DAT_005f1604 = DAT_005f1ca4;
       if (DAT_005f1ca0 != -1) {
         temp_v8 = puVar2[0x10];
-        FUN_003b5714(temp_v8,puVar2[0x12]);
+        table23FindRecordByKey(temp_v8,puVar2[0x12]);
         if (temp_v8 != -1) {
           temp_v5 = dataTableGetRecord23();
           temp_v8 = g_lmapScene;
@@ -4255,7 +4255,7 @@ LAB_0027ca0c:
     fireEntriesMatchingPair(DAT_005f1729,DAT_005f172a);
     puVar2[4] = 0;
     temp_v8 = DAT_005f16a0;
-    FUN_003b5714(DAT_005f16a0,DAT_005f16a4,DAT_005f16a8);
+    table23FindRecordByKey(DAT_005f16a0,DAT_005f16a4,DAT_005f16a8);
     if (temp_v8 != -1) {
       pcVar11 = (char *)dataTableGetRecord23();
       mapPlaceSet((int)*pcVar11,(int)pcVar11[1],pcVar11[2]);
@@ -4277,7 +4277,7 @@ LAB_0027ca0c:
     puVar2[0x10] = g_mapSelection;
     DAT_005f1600 = DAT_005f1c9c;
     puVar2[0x12] = DAT_005f1c9c;
-    FUN_003b5714(puVar2[0x10],puVar2[0x12],DAT_005f1ca0);
+    table23FindRecordByKey(puVar2[0x10],puVar2[0x12],DAT_005f1ca0);
     temp_v5 = dataTableGetRecord23();
     temp_v8 = g_lmapScene;
     temp_v22 = VectorSignedToFloat((int)*(short *)(temp_v5 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -4555,7 +4555,7 @@ joined_r0x0027ce58:
         DAT_005f1634 = '\0';
         uStack_b0 = 1;
         uStack_ac = 0xffffffff;
-        ARM_common_memcpy4_9(&uStack_a8,0x27d668);
+        __ARM_common_memcpy4_9(&uStack_a8,0x27d668);
         temp_v22 = 0x20;
         puVar17 = &uStack_b0;
         temp_v9 = 4;

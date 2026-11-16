@@ -616,7 +616,7 @@
 0050c8b8 nw_anim_res_ResTextureCoordinatorMember_SetValue
 0050c99c nw_font_ResFontBase_FindGlyphIndex
 0050cab8 nw_font_ResFontBase_GetGlyph
-0050d75c ARM_common_memcpy4_9
+0050d75c __ARM_common_memcpy4_9
 0050db54 mathlib_ceilf
 00513670 mwmofilterDeblockerRelease
 005137b0 mwmoimaadpcmDecoderRelease
@@ -2528,7 +2528,7 @@
 001a8e24 nw_snd_internal_SoundArchiveFileReader_ReadWaveSoundInfo
 001a8e90 nw_snd_internal_SoundArchiveFileReader_ReadSoundGroupInfo
 001a8ecc nw_snd_internal_SoundArchiveFileReader_ReadSequenceSoundInfo
-001a9110 ARM_common_memcpy4_8
+001a9110 __ARM_common_memcpy4_8
 001ab854 gameGetSlotRecord
 001ab878 asdFileRequestRelease
 001ab888 gameGetSlotTable
@@ -3389,7 +3389,7 @@
 00493660 rectangleInitializeSelection
 004275c8 recordClearWideHandle
 00300778 linkedFindItemByIndex
-002e5ac0 runtimeShiftLeftWide
+002e5ac0 __aeabi_llsl
 0049c760 itemGetNameOrFallback
 0034efb0 battleTalkIsBustReady
 004d0464 inputIsQuestRepeatRight
@@ -5885,7 +5885,7 @@
 00221754 battleUnitHasElementEntry
 0028b088 campShowSelectedEntryHelp
 001b4874 __aeabi_ul2f
-0050d740 ARM_common_memcpy4_7
+0050d740 __ARM_common_memcpy4_7
 00226c70 inputApplyDeadZone
 00384830 mathAbsHeadingErrorToPoint
 004fef70 btlReflectCreateKind42
@@ -6453,7 +6453,7 @@
 0013c7dc jobDisplayFlushIfIdle
 00409bc8 materialUploadChangedParameterVector
 004f5e6c btlCameraReleaseTransientResources
-001d1438 ARM_common_memcpy4_6
+001d1438 __ARM_common_memcpy4_6
 0016fba0 mtx44Perspective
 00145f04 statisticsGetCounter
 002e09b4 romFileStreamOpen
@@ -6476,3 +6476,10 @@
 00243c24 effBlockCreateFromBlock
 0013ea48 memoryDebugSetRegions
 0031e198 placeWinCreate
+002a2d28 jobSetFlagsByMode
+00261840 scrollSelectionClampToCount
+00480da8 table8Type5GetValue
+003b5714 table23FindRecordByKey
+003cdd3c conditionalMessageFind
+004cceb8 playerGetGrowthParameters
+004ccf78 playerResetToStartingStats

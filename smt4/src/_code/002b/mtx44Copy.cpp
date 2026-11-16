@@ -1,3 +1,4 @@
+/* NON_MATCHING: retail branches around the copy (bxeq lr before an unpredicated vldmia/vstmia); armcc predicates the 16-register copy. */
 #include "common.h"
 
 struct Matrix44 { f32 values[16]; };

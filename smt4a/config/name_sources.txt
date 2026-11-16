@@ -6949,3 +6949,15 @@
 001a9110 ARM_common_memcpy4_8 inferred [high] Same bytes as smt4 ARM_common_memcpy4_8 (armcc 8-byte copy helper).
 0013ea48 memoryDebugSetRegions inferred [med] Twin of smt4 FUN_0010a174 (same asdMemoryInit call, same source shape).
 0031e198 placeWinCreate inferred [med] Twin of smt4 FUN_002637c8 (same PlaceWin packets and tasks).
+001d1438 __ARM_common_memcpy4_6 evidence armcc 4.1 emits and calls this helper under that name: strcpy of a literal or a fixed-size struct copy compiles to `bl __ARM_common_memcpy4_6` with an i.__ARM_common_memcpy4_6 section byte-identical to retail
+0050d740 __ARM_common_memcpy4_7 evidence armcc 4.1 emits and calls this helper under that name: strcpy of a literal or a fixed-size struct copy compiles to `bl __ARM_common_memcpy4_7` with an i.__ARM_common_memcpy4_7 section byte-identical to retail
+001a9110 __ARM_common_memcpy4_8 evidence armcc 4.1 emits and calls this helper under that name: strcpy of a literal or a fixed-size struct copy compiles to `bl __ARM_common_memcpy4_8` with an i.__ARM_common_memcpy4_8 section byte-identical to retail
+0050d75c __ARM_common_memcpy4_9 evidence armcc 4.1 emits and calls this helper under that name: strcpy of a literal or a fixed-size struct copy compiles to `bl __ARM_common_memcpy4_9` with an i.__ARM_common_memcpy4_9 section byte-identical to retail
+002a2d28 jobSetFlagsByMode inferred [med] Twin of smt4 FUN_001ec9e4 (identical retail code).
+00261840 scrollSelectionClampToCount inferred [med] Twin of smt4 FUN_001c3600.
+00480da8 table8Type5GetValue inferred [med] Twin of smt4 FUN_00288e68.
+003b5714 table23FindRecordByKey inferred [med] Twin of smt4 FUN_0027d7b0.
+003cdd3c conditionalMessageFind inferred [med] Twin of smt4 FUN_0027d614.
+002e5ac0 __aeabi_llsl inferred [high] Same 40-byte runtime body as smt4 __aeabi_llsl.
+004cceb8 playerGetGrowthParameters inferred [med] Builds StatGrowthParameters (kind 1) from data table 9 section 0, the hero record; inlined by FUN_004ccf78.
+004ccf78 playerResetToStartingStats inferred [med] Sets the hero to level 1 and zero exp, copies table 9's starting stats, recomputes max HP/MP and the FUN_003df7c4 totals.

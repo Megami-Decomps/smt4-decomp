@@ -1,4 +1,5 @@
-/* NON_MATCHING: the third 64-bit mask test (excluded) allocates its AND/ORR registers differently (retail ands the low words into the mask pair); the rest matches with the `first + count` bound. */
+/* NON_MATCHING: only the third 64-bit mask test (excluded) allocates its AND/ORR registers
+ * differently (retail ands the low words into the mask pair and or's the high result first). */
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "util/SlotRangeSelect.h"
@@ -35,12 +36,11 @@ u32 FUN_003c1964(void)
     s32 group = btlResolveEntryChoice(scrGetArg(2));
     s32 first, count;
     FUN_00301a08(group, &first, &count);
-    for (s32 index = first; index < first + count; ++index) {
+    for (s32 index = first; index < count + first; ++index) {
         BattleThresholdEntryView *entry = &((BattleThresholdEntryView *)btlGetMainState()->entries)[index];
-        u64 flags = entry->flags;
-        if ((flags & g_btlCandidateMasks.unavailable) == 0 &&
-            (flags & g_btlCandidateMasks.required) != 0 &&
-            (flags & g_btlCandidateMasks.excluded) == 0 && entry->values[property] > threshold) {
+        if ((g_btlCandidateMasks.unavailable & entry->flags) == 0 &&
+            (entry->flags & g_btlCandidateMasks.required) != 0 &&
+            (g_btlCandidateMasks.excluded & entry->flags) == 0 && entry->values[property] > threshold) {
             scrSetResult(1);
             return 1;
         }

@@ -696,7 +696,7 @@ code_r0x0032d518:
         if (!(iVar13 == 0 && acStack_634[0] == '\0')) {
           uVar20 = (unsigned int)*(unsigned short *)((int)puVar17 + (iVar7 + iVar19) * 2 + 0x1db4);
           if (uVar20 == 0) break;
-          FUN_00288e68();
+          table8Type5GetValue();
           iVar7 = FUN_00298848();
           if (iVar7 != 0) {
             iVar7 = FUN_0028d1f4(uVar20);
@@ -773,7 +773,7 @@ code_r0x0032d518:
         iVar7 = 0;
         while( 1 ) {
           iVar19 = FUN_00262cb0(uVar20 & 0xffff);
-          if ((iVar19 != 0) && (uVar8 = uVar20, FUN_00288e68(), uVar8 != 0)) {
+          if ((iVar19 != 0) && (uVar8 = uVar20, table8Type5GetValue(), uVar8 != 0)) {
             iVar19 = iVar7 * 2;
             iVar7 = iVar7 + 1;
             *(short *)((int)puVar9 + iVar19 + 0x1db4) = (short)uVar20;
@@ -1102,7 +1102,7 @@ code_r0x0032d518:
       iVar7 = 0;
       while( 1 ) {
         iVar19 = FUN_00262cb0(uVar20 & 0xffff);
-        if ((iVar19 != 0) && (uVar8 = uVar20, FUN_00288e68(), uVar8 != 0)) {
+        if ((iVar19 != 0) && (uVar8 = uVar20, table8Type5GetValue(), uVar8 != 0)) {
           iVar19 = iVar7 * 2;
           iVar7 = iVar7 + 1;
           *(short *)((int)puVar17 + iVar19 + 0x1db4) = (short)uVar20;
@@ -1273,7 +1273,7 @@ code_r0x0032d518:
       iVar7 = 0;
       while( 1 ) {
         iVar19 = FUN_00262cb0(uVar20 & 0xffff);
-        if ((iVar19 != 0) && (uVar8 = uVar20, FUN_00288e68(), uVar8 != 0)) {
+        if ((iVar19 != 0) && (uVar8 = uVar20, table8Type5GetValue(), uVar8 != 0)) {
           iVar19 = iVar7 * 2;
           iVar7 = iVar7 + 1;
           *(short *)((int)puVar17 + iVar19 + 0x1db4) = (short)uVar20;

@@ -1,10 +1,18 @@
-/* NON_MATCHING: Comparator locals use a different saved-register allocation and omit retail's extra right-entry pointer copy on a tie. */
+/* NON_MATCHING: only the two ids swap callee-saved registers (retail keeps the left id in r9 and the right id in r8). */
 #include "common.h"
 
 extern "C" {
 s32 contentGetKindValue(u32 id);
 u16 FUN_00230f44(const u16 *entry);
 u32 contentGetEntryKind(u32 id);
+
+/* Orders two entries by their secondary key. */
+static s32 compareOrder(const u16 *left, const u16 *right)
+{
+    s32 leftOrder = FUN_00230f44(left);
+    s32 rightOrder = FUN_00230f44(right);
+    return leftOrder - rightOrder;
+}
 
 /* Sorts selected content kinds by descending kind value, then by the entry's secondary key. */
 s32 FUN_003a05e8(const u16 *left, const u16 *right)
@@ -23,9 +31,7 @@ s32 FUN_003a05e8(const u16 *left, const u16 *right)
     }
     s32 order = rightValue - leftValue;
     if (order == 0) {
-        u16 leftOrder = FUN_00230f44(left);
-        u16 rightOrder = FUN_00230f44(right);
-        order = leftOrder - rightOrder;
+        order = compareOrder(left, right);
     }
     return order;
 }

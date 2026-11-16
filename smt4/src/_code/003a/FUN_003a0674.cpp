@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail copies the second slot (mov r6, r4) and holds the first rank in r4; this matches byte-for-byte only with FUN_00230f44 declared as returning s16 (grouped s16 ranks), which contradicts its u16 definition. */
 #include "common.h"
 
 struct ItemSlot;
@@ -8,19 +7,25 @@ extern "C" {
 extern s32 FUN_00230e04(ItemSlot *slot);
 extern u16 FUN_00230f44(const u16 *id);
 
+/* Orders two slots by their record's order key. */
+static s32 compareOrder(ItemSlot *first, ItemSlot *second)
+{
+    s32 rankA = FUN_00230f44(reinterpret_cast<const u16 *>(first));
+    s32 rankB = FUN_00230f44(reinterpret_cast<const u16 *>(second));
+    return rankA - rankB;
+}
+
 /* qsort comparison of item slots: by price, then by the record's order key. */
 s32 FUN_003a0674(ItemSlot *first, ItemSlot *second)
 {
-    s32 diff = FUN_00230e04(first) - FUN_00230e04(second);
+    s32 priceA = FUN_00230e04(first);
+    s32 priceB = FUN_00230e04(second);
+    s32 diff = priceA - priceB;
 
-    if (diff != 0) {
-        return diff;
+    if (diff == 0) {
+        diff = compareOrder(first, second);
     }
-    const u16 *a = reinterpret_cast<const u16 *>(first);
-    const u16 *b = reinterpret_cast<const u16 *>(second);
-    u16 rankA = FUN_00230f44(a);
-    u16 rankB = FUN_00230f44(b);
-    return rankA - rankB;
+    return diff;
 }
 
 } /* extern "C" */

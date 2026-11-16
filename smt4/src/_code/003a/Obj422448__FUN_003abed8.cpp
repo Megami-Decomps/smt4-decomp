@@ -60,7 +60,7 @@ s32 stateCounterBelowLimit(ShopHolder *holder, u32 value);
 s32 FUN_00262cb0(u16 id);
 s32 gameSlotTableGetHeader(void);
 int scrScriptProcessStartEntry(u32 process, s32 entry);
-int FUN_00288e68(...);
+int table8Type5GetValue(...);
 u32 aocIndexValueOrDefault(void);
 int libc_strcpy(...);
 int textEncodeFontSlot(...);
@@ -112,7 +112,7 @@ void Obj422448::FUN_003abed8()
             screen->state = 8;
             screen->substate = 0;
         } else {
-            FUN_00288e68(*(u16 *)(rowBase + flaggedValueHolderGetTotal(&screen->holder) * 0x20 + 4));
+            table8Type5GetValue(*(u16 *)(rowBase + flaggedValueHolderGetTotal(&screen->holder) * 0x20 + 4));
             u8 text[36];
             libc_strcpy(text, aocIndexValueOrDefault());
             textEncodeFontSlot(20, text);

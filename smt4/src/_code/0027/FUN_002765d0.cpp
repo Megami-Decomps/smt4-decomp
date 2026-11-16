@@ -1,4 +1,4 @@
-/* NON_MATCHING: near (199 rows against 203): same table walk, flag tests and constants; retail keeps the table id in a stack slot (push {r3,...}), hoists 0xFFFFFFFF into r8 and the match-test constant in fp, evaluates dataTableGet(0x23,7) args in the other order inside the size test and splits the flagB test differently */
+/* NON_MATCHING: table helpers now follow the shared add-on table walk; remaining: retail hoists 0xFFFFFFFF into r8 and keeps the section pointer in a stack slot (push {r3,...}), so the saved registers and the flag-test splitting differ. */
 #include "gamedata/DataTable.h"
 typedef unsigned char u8;
 typedef signed char s8;
@@ -57,15 +57,18 @@ static EventEntry *eventTableEntry(u32 index)
     if (index < count) {
         return &entries[index];
     }
-    if (index < count + g_aocSystem->extraCount) {
-        return &g_aocSystem->extraEntries[index - count];
+    AocSystem *extension = g_aocSystem;
+    EventEntry *extra = extension->extraEntries;
+    u32 extraCount = extension->extraCount;
+    if (index < count + extraCount) {
+        return &extra[index - count];
     }
     return 0;
 }
 
-static s32 eventTableSize(void)
+static u32 tableSectionCount(s32 table, s32 section)
 {
-    return dataTableGetCount(dataTableGet(0x23, 7)) + g_aocSystem->extraCount;
+    return dataTableGetCount(dataTableGet(table, section));
 }
 
 /* The flag requirements of an event entry: flagA (when given) must be set, flagB (when given) clear. */
@@ -103,7 +106,7 @@ EventEntry *FUN_002765d0(void)
     if (g_gameState.spawnMode != 0) {
         u32 spawn = FUN_00285574();
         if (spawn != 0) {
-            for (s32 i = 0; i < eventTableSize(); i++) {
+            for (s32 i = 0; i < (s32)(tableSectionCount(0x23, 7) + g_aocSystem->extraCount); i++) {
                 EventEntry *entry = eventTableEntry(i);
                 if (entry->kind == 2 && entry->spawn == (s32)spawn && eventEntryAvailable(entry, hasSpecial)) {
                     if (flags->lastEvent == (u32)i) {
@@ -115,7 +118,7 @@ EventEntry *FUN_002765d0(void)
             }
         }
     } else {
-        for (s32 i = 0; i < eventTableSize(); i++) {
+        for (s32 i = 0; i < (s32)(tableSectionCount(0x23, 7) + g_aocSystem->extraCount); i++) {
             EventEntry *entry = eventTableEntry(i);
             if (entry->kind == 1 && entry->stateA == g_gameState.state && entry->stateB == g_gameState.area &&
                 eventEntryAvailable(entry, hasSpecial)) {

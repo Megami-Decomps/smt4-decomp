@@ -1,4 +1,4 @@
-/* NON_MATCHING: narrowed-id/entry/default-value registers, level-load order and final comparison orientation differ from retail. */
+/* NON_MATCHING: register allocation only: retail keeps `need` in r8 and the narrowed id in r7 (here swapped), and the entry in r5 / flag in r6 (here swapped); the final need > FUN_00295cec() comparison now matches. Declaration order does not affect it. */
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include "gamedata/DataTable.h"
 #include "gamedata/PlayerDataBlock.h"
@@ -79,7 +79,7 @@ u8 appCheckPurchaseRequirements(u32 id)
             need = entry->need;
         }
     }
-    return FUN_00295cec() < need;
+    return need > FUN_00295cec();
 }
 
 } /* extern "C" */

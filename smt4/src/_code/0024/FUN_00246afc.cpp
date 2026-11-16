@@ -1,54 +1,56 @@
-/* NON_MATCHING: stack layout differs (retail: vector at sp+4, matrices at sp+16/+80/+144 in a 220-byte frame, &matrix cached in r7); member-wise vector copies match. */
-#include "status/StatusCamera.h"
+/* NON_MATCHING: stack slots only: retail puts the caller's matrix at sp+80 below the rotation at sp+144 (220-byte frame); ours places the rotation at sp+80 and the matrix at sp+160 (228 bytes). Every declaration order and nesting tried keeps the caller's matrix last. */
+#include "shard/X14_ModelTransform.h"
+
+/* The object whose transform is set; the transform lives at 0x10. */
+struct TransformOwner10 {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u8 transform[4];
+};
 
 extern "C" {
-
-typedef struct Mtx44 {
-    /* 0x00 */ f32 m[4][4];
-} Mtx44;
-
-/* The 0x4C-byte rotation matrix FUN_0025009c builds. */
-typedef struct RotationMtx {
-    /* 0x00 */ Mtx44 matrix;
-    /* 0x40 */ u8 unk40[0xC];
-} RotationMtx;
-void mathMatrixApplyScale(Mtx44 *out, Vec3 *scale, s32 mode);
-void matrix44SetIdentity(Mtx44 *out);
-void FUN_0025009c(RotationMtx *out, void *rotation);
-void matrix43Multiply(Mtx44 *out, Mtx44 *a, RotationMtx *b);
-void matrixCopyFull(Mtx44 *out, Mtx44 *in);
-void FUN_0024fd70(Mtx44 *out, Vec3 *translation, s32 mode);
-void matrixApplyByMode(void *transform, Mtx44 *matrix, s32 mode);
-
-/* Builds a scale * rotation * translation matrix (each part optional) and stores it in the transform at 0x10. */
-void FUN_00246afc(u8 *object, Vec3 *translation, void *rotation, Vec3 *scale)
-{
-    Vec3 vector;
-    Mtx44 scaled;
-    Mtx44 matrix;
-    RotationMtx rotated;
-
-    if (scale != NULL) {
-        vector.x = scale->x;
-        vector.y = scale->y;
-        vector.z = scale->z;
-        mathMatrixApplyScale(&scaled, &vector, 0);
-    } else {
-        matrix44SetIdentity(&scaled);
-    }
-    if (rotation != NULL) {
-        FUN_0025009c(&rotated, rotation);
-        matrix43Multiply(&matrix, &scaled, &rotated);
-    } else {
-        matrixCopyFull(&matrix, &scaled);
-    }
-    if (translation != NULL) {
-        vector.x = translation->x;
-        vector.y = translation->y;
-        vector.z = translation->z;
-        FUN_0024fd70(&matrix, &vector, 2);
-    }
-    matrixApplyByMode(object + 0x10, &matrix, 0);
+void mathMatrixApplyScale(TransformMtx44 *matrix, const TransformVec3 *scale, s32 mode);
+void matrix44SetIdentity(TransformMtx44 *matrix);
+void FUN_0025009c(TransformRotation *rotation, const void *source);
+void matrix43Multiply(TransformMtx44 *result, const TransformMtx44 *left, const TransformRotation *right);
+void matrixCopyFull(TransformMtx44 *destination, const TransformMtx44 *source);
+void FUN_0024fd70(TransformMtx44 *matrix, const TransformVec3 *translation, s32 mode);
+void matrixApplyByMode(void *transform, const TransformMtx44 *matrix, s32 mode);
 }
 
-} /* extern "C" */
+// Compose optional scale, rotation and translation into a transform matrix.
+static void matrixComposeScaleRotateTranslate(TransformMtx44 *matrix, const TransformVec3 *translation,
+                                              const void *rotationSource, const TransformVec3 *scale)
+{
+    TransformMtx44 scaleMatrix;
+    TransformRotation rotation;
+    TransformVec3 value;
+    if (scale != NULL) {
+        value.x = scale->x;
+        value.y = scale->y;
+        value.z = scale->z;
+        mathMatrixApplyScale(&scaleMatrix, &value, 0);
+    } else {
+        matrix44SetIdentity(&scaleMatrix);
+    }
+    if (rotationSource != NULL) {
+        FUN_0025009c(&rotation, rotationSource);
+        matrix43Multiply(matrix, &scaleMatrix, &rotation);
+    } else {
+        matrixCopyFull(matrix, &scaleMatrix);
+    }
+    if (translation != NULL) {
+        value.x = translation->x;
+        value.y = translation->y;
+        value.z = translation->z;
+        FUN_0024fd70(matrix, &value, 2);
+    }
+}
+
+/* Builds a scale * rotation * translation matrix (each part optional) and stores it in the transform at 0x10. */
+extern "C" void FUN_00246afc(TransformOwner10 *owner, const TransformVec3 *translation, const void *rotationSource,
+                             const TransformVec3 *scale)
+{
+    TransformMtx44 matrix;
+    matrixComposeScaleRotateTranslate(&matrix, translation, rotationSource, scale);
+    matrixApplyByMode(owner->transform, &matrix, 0);
+}

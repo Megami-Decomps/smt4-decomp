@@ -24,10 +24,9 @@ u32 btlScriptChooseRandomMatchingEntry(void)
     for (s32 index = start; index < start + count; ++index) {
         BtlMainStateA *state = btlGetMainState();
         BtlCombatantEntryA *entry = &state->entries[index];
-        u64 flags = entry->flags;
-        if ((g_btlCandidateMasks.unavailable & flags) == 0 &&
-            (g_btlCandidateMasks.required & flags) != 0 &&
-            (g_btlCandidateMasks.excluded & flags) == 0 &&
+        if ((g_btlCandidateMasks.unavailable & entry->flags) == 0 &&
+            (g_btlCandidateMasks.required & entry->flags) != 0 &&
+            (g_btlCandidateMasks.excluded & entry->flags) == 0 &&
             FUN_002b54a0(entry, condition)) {
             candidates[candidateCount++] = entry->id;
         }

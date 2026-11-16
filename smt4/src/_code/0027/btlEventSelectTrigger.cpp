@@ -72,7 +72,7 @@ u32 btlEventSelectTrigger(BattleEventController *controller, u32 type, s32 slot,
             case 7:
             case 8:
             case 9:
-                ((BtlMainState *)battle)->battleFlags |= 0x100000;
+                ((BtlMainState *)battle)->battleMask |= 0x100000;
                 break;
             }
         }

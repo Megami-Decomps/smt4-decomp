@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int ARM_common_memcpy4_6(unsigned char *, int);
+int __ARM_common_memcpy4_6(unsigned char *, int);
 int rt_memcpy(unsigned char *, int, int);
 
-/* Supplied declaration required: ARM_common_memcpy4_6. */
+/* Supplied declaration required: __ARM_common_memcpy4_6. */
 extern int offsetRefResolveCAlt(int);
 extern unsigned int offsetRefAddAtBase4(int, int);
 extern int nw_snd_internal_WaveFile_InfoBlockBody_GetChannelInfo(int, int);
@@ -41,7 +41,7 @@ unsigned int nw_snd_internal_WaveFileReader_ReadWaveInfo(int *param_1,unsigned c
       if (*(int *)(temp_v1 + 0xc) != 0) {
         temp_v2 = offsetRefResolveCAlt(temp_v1);
         rt_memcpy(param_2 + temp_v4 * 0x30 + 0x18,temp_v2,0x26);
-        ARM_common_memcpy4_6(param_2 + temp_v4 * 0x30 + 0x3e,temp_v2 + 0x26);
+        __ARM_common_memcpy4_6(param_2 + temp_v4 * 0x30 + 0x3e,temp_v2 + 0x26);
       }
       temp_v3 = offsetRefAddAtBase4(temp_v1,param_1[1]);
       *(unsigned int *)(param_2 + temp_v4 * 0x30 + 0x14) = temp_v3;

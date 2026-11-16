@@ -22,7 +22,7 @@ struct ListWindow {
     /* 0x030 */ u8 unk030[0xc];
     /* 0x03c */ s16 selected;
     /* 0x03e */ u8 unk03e[4];
-    /* 0x042 */ u8 cursor[0x5a];         /* handed to ARM_common_memcpy4_6 */
+    /* 0x042 */ u8 cursor[0x5a];         /* handed to __ARM_common_memcpy4_6 */
     /* 0x09c */ u8 list[0x52c];
     /* 0x5c8 */ s32 entryCount;
     /* 0x5cc */ u8 unk5cc[0x102];
@@ -48,7 +48,7 @@ s32 scrRunOpcodesStub(u32 script);
 s32 gameFlagIsSet(u32 flag);
 void listScrollToId(void *list, s32 id);
 s32 listGetEntryCount(const void *list);
-void ARM_common_memcpy4_6(void *cursor, u16 *vector);
+void __ARM_common_memcpy4_6(void *cursor, u16 *vector);
 void messageMainFinishWindow(void);
 void FUN_0022b29c(ListWindow *window, s32 selected, s32 kind);
 void FUN_0022afc4(u32 animation, s32 a, s32 b);
@@ -96,7 +96,7 @@ void FUN_003b9c00(ListWindow *window)
         if (noPassingEntry != 0 && gameFlagIsSet(0x15) != 0) {
             vector[0] = 4;
             listScrollToId(window->list, 0xff);
-            ARM_common_memcpy4_6(window->cursor, vector);
+            __ARM_common_memcpy4_6(window->cursor, vector);
             u32 flags = window->flags | 0x10;
             window->flags = flags;
             if ((flags & 0x40) != 0) {

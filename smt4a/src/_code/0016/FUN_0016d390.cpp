@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int ARM_common_memcpy4_8(...);
+int __ARM_common_memcpy4_8(...);
 
 /* stack frame of param_4: 19 slot(s), 76 byte(s) */
 typedef struct {
@@ -29,7 +29,7 @@ typedef struct {
     unsigned int sp258; /* 0x258: local_258 */
 } param_4_stack;
 
-/* Supplied declaration required: ARM_common_memcpy4_8. */
+/* Supplied declaration required: __ARM_common_memcpy4_8. */
 
 
 unsigned int * FUN_0016d390(int param_1,unsigned int *param_2,int param_3,int param_4)
@@ -182,15 +182,15 @@ unsigned int * FUN_0016d390(int param_1,unsigned int *param_2,int param_3,int pa
       puVar5 = (unsigned int *)temp_v13;
       temp_v3 = temp_v5 - 8;
       if ((*(unsigned int *)(temp_v24 + 0x2c) & 1) != 0) {
-        ARM_common_memcpy4_8(&uStack_2a8,temp_v5);
+        __ARM_common_memcpy4_8(&uStack_2a8,temp_v5);
         puVar5 = (unsigned int *)&uStack_2a8;
         temp_v3 = temp_v5;
       }
       for (temp_v2 = *(unsigned int *)(temp_v24 + 0x2c) >> 1; temp_v2 != 0; temp_v2 = temp_v2 - 1) {
-        ARM_common_memcpy4_8((unsigned char *)((int)puVar5 + 8),temp_v3 + 8);
+        __ARM_common_memcpy4_8((unsigned char *)((int)puVar5 + 8),temp_v3 + 8);
         puVar5 = (unsigned int *)((int)puVar5 + 0x10);
         temp_v3 = temp_v3 + 0x10;
-        ARM_common_memcpy4_8();
+        __ARM_common_memcpy4_8();
       }
     }
     temp_v21 = *(int *)(temp_v24 + 0x2c);

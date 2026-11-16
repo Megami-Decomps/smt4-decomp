@@ -1,4 +1,4 @@
-/* NON_MATCHING: recovered minimum reduction-level clamp; grouped flag bases and surface-copy register allocation still differ. */
+/* NON_MATCHING: the readiness gates now match (s8 flags, early returns); remaining: the level count and the quarter-surface slot pointer swap registers (retail r6/r5), and the first reduction step loads its two surfaces in the opposite registers. */
 #include "gfx/FrameTextureWork.h"
 #include "shard/JobWork.h"
 #include "camp/RenderCtx.h"
@@ -26,7 +26,13 @@ extern "C" s32 FUN_0013cd7c(u32 job)
     SurfaceReductionWork *work = (SurfaceReductionWork *)jobGetWork(job);
     FrameTextureWork *frame = &work->frame;
     frame->unkFAE = 0;
-    if (stateValuesGetBySelector(0) || !frame->unkFA4 || !frame->unkFA5 || !frame->unk1490 || frame->unk148C)
+    if (stateValuesGetBySelector(0) || !frame->unkFA4)
+        return 0;
+    if (!frame->unkFA5)
+        return 0;
+    if (!frame->unk1490)
+        return 0;
+    if (frame->unk148C)
         return 0;
     JobSurface *&surface = reinterpret_cast<JobSurface *&>(frame->unk1490);
     FUN_00157558(g_renderCtx);

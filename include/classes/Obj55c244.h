@@ -9,6 +9,41 @@ extern "C" void nn_os_LightEvent_Initialize(void *event, s32 clearMode);
 extern "C" void nn_os_LightEvent_Signal(void *event);
 
 
+/* A light event cleared and initialized on construction. */
+struct Obj55c244Event {
+    explicit Obj55c244Event(s32 clearMode)
+    {
+        event.state = 0;
+        event.lock = 0;
+        nn_os_LightEvent_Initialize(&event, clearMode);
+    }
+    LightEvent event;
+};
+
+/* Playback state of Obj55c244 (offsets relative to it; it sits at 0x14). */
+struct Obj55c244Playback {
+    Obj55c244Playback()
+    {
+        unk00 = 1.0f;
+        unk04 = 1.0f;
+        unk08 = 0.0f;
+        unk0c = 0.0f;
+        unk10 = 0.0f;
+        unk1a = 0;
+        unk18 = 0xff;
+        unk14 = 0.0f;
+    }
+    /* 0x00 */ f32 unk00;
+    /* 0x04 */ f32 unk04;
+    /* 0x08 */ f32 unk08;
+    /* 0x0C */ f32 unk0c;
+    /* 0x10 */ f32 unk10;
+    /* 0x14 */ f32 unk14;
+    /* 0x18 */ u8 unk18;
+    /* 0x19 */ u8 unk19;
+    /* 0x1A */ u8 unk1a;
+};
+
 /* The object whose vtable is at 0x55c244 (named after it until its real name is known): a base
  * class that owns a signalled light event and playback state. Slots 0/1 are the (pure)
  * destructor, slots 2-6 are overridden by its derived classes. */
@@ -24,21 +59,13 @@ public:
 
 protected:
     /* 0x00: vtable pointer */
-    /* 0x04 */ LightEvent event;
+    /* 0x04 */ Obj55c244Event event;
     /* 0x0C */ u8 unk0c;
     /* 0x0D */ u8 unk0d;
     /* 0x0E */ u8 unk0e;
     /* 0x0F */ u8 unk0f;
     /* 0x10 */ u8 unk10;
-    /* 0x14 */ f32 unk14;
-    /* 0x18 */ f32 unk18;
-    /* 0x1C */ f32 unk1c;
-    /* 0x20 */ f32 unk20;
-    /* 0x24 */ f32 unk24;
-    /* 0x28 */ f32 unk28;
-    /* 0x2C */ u8 unk2c;
-    /* 0x2D */ u8 unk2d;
-    /* 0x2E */ u8 unk2e;
+    /* 0x14 */ Obj55c244Playback playback;
     /* 0x30 */ f32 unk30;
     /* 0x34 */ u8 unk34;
     /* 0x35 */ u8 unk35;

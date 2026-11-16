@@ -8,7 +8,7 @@ typedef struct StreamSoundFile {
     /* 0x04 */ u32 infoBlockBody;
 } StreamSoundFile;
 
-int ARM_common_memcpy4_6(void *dst, u8 *src);
+int __ARM_common_memcpy4_6(void *dst, u8 *src);
 int FUN_001d284c(u32 channelInfoTable, u32 channel);
 void *rt_memcpy(void *dst, const void *src, u32 size);
 u8 *nw_snd_internal_StreamSoundFile_ChannelInfo_GetDspAdpcmChannelInfo(void);
@@ -23,7 +23,7 @@ bool FUN_00508fac(StreamSoundFile *file, void *outParam, void *outContext, u32 c
     info = nw_snd_internal_StreamSoundFile_ChannelInfo_GetDspAdpcmChannelInfo();
     if (info != NULL) {
         rt_memcpy(outParam, info, 0x26);
-        ARM_common_memcpy4_6(outContext, info + 0x26);
+        __ARM_common_memcpy4_6(outContext, info + 0x26);
     }
     return info != NULL;
 }

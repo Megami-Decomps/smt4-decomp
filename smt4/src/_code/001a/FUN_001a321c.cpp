@@ -9,7 +9,7 @@ int messageKindForward(...);
 int FUN_00288844(...);
 int FUN_0028886c(void);
 int FUN_002888a8(...);
-int FUN_00288e68(...);
+int table8Type5GetValue(...);
 int FUN_002b0750(...);
 int FUN_002b64b8(void);
 int FUN_002b659c(...);
@@ -119,7 +119,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002888a8. */
 extern int isLowThreshold(int, int);
 extern unsigned int FUN_00288ddc(int, int);
-/* Supplied declaration required: FUN_00288e68. */
+/* Supplied declaration required: table8Type5GetValue. */
 /* Supplied declaration required: unitGetStereoScreenPosition. */
 /* Supplied declaration required: FUN_00293ac0. */
 extern int FUN_0029e9cc(unsigned short);
@@ -1681,7 +1681,7 @@ LAB_001a68b0:
           unitGetStereoScreenPosition(&temp_v28,&temp_v30,0xe);
           FUN_002bf288(2,0x1a,0xc2,temp_v28,temp_v30,0xdd);
           temp_v8 = (unsigned int)*(unsigned short *)(temp_v5 + 0x1eb6);
-          FUN_00288e68(temp_v8);
+          table8Type5GetValue(temp_v8);
           temp_v13 = asdTMTexTableEntryAt(0x1a,0xc3);
           FUN_002b6c34((int)(short)temp_v8,
                        (unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v13 + 8)),

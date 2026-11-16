@@ -1,4 +1,3 @@
-/* NON_MATCHING: instruction/control-flow layout matches, but item ids and first/second priority values trade r4/r5. */
 #include "gamedata/ItemPriorityRecords.h"
 #include "addon/AocEntryKind.h"
 #include "gamedata/DataTableAccess_VariantD_Table8Record.h"
@@ -38,6 +37,14 @@ static inline u32 itemPriority(const u16 *item)
     return priority;
 }
 
+/* Orders two entries by their secondary key. */
+static s32 compareOrder(const u16 *left, const u16 *right)
+{
+    s32 leftOrder = FUN_0049c9a0(left);
+    s32 rightOrder = FUN_0049c9a0(right);
+    return leftOrder - rightOrder;
+}
+
 // Compare mixed item ids by their category's priority field, breaking ties by secondary ordering.
 extern "C" s32 FUN_0049393c(const u16 *left, const u16 *right)
 {
@@ -45,7 +52,7 @@ extern "C" s32 FUN_0049393c(const u16 *left, const u16 *right)
     u32 second = itemPriority(right);
     s32 difference = first - second;
     if (difference == 0) {
-        difference = FUN_0049c9a0(left) - FUN_0049c9a0(right);
+        difference = compareOrder(left, right);
     }
     return difference;
 }

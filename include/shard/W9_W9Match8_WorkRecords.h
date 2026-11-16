@@ -1277,17 +1277,20 @@ typedef char Table4SearchRecordIVLayoutCheck[
     sizeof(Table4SearchRecordIV) == 0x3C ? 1 : -1];
 
 // Observed prefix returned by dataTable40FindById, not a recovered object boundary.
-// Only even byte positions in slotBytes are read here; no slot semantics
-// or independent two-byte record boundaries are asserted.
+// Eight two-byte slots follow at 0x58; a slot is free while its first byte is zero.
+struct RecordSlotIV {
+    u8 used;
+    u8 unk01;
+};
 struct RecordSlotQueryPrefixIV {
     u8 unk00[0x38];
     u32 flags;
     u8 unk3C[0x1C];
-    u8 slotBytes[0x10];
+    RecordSlotIV slots[8];
 };
 typedef char RecordSlotQueryPrefixIVLayoutCheck[
     offsetof(RecordSlotQueryPrefixIV, flags) == 0x38 &&
-    offsetof(RecordSlotQueryPrefixIV, slotBytes) == 0x58 &&
+    offsetof(RecordSlotQueryPrefixIV, slots) == 0x58 &&
     sizeof(RecordSlotQueryPrefixIV) == 0x68 ? 1 : -1];
 
 /* Observed prefix of g_btlTalkBustUp's IV object, not its allocation size.

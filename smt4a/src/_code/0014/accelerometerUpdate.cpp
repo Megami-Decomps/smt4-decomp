@@ -14,7 +14,7 @@ s32 __aeabi_atexit(void *object, void (*destructor)(void *), void *module);
 u32 FUN_0015959c(void);
 AccelerometerFullState *FUN_0015976c(AccelerometerFullState *state, u32 handle);
 void FUN_001597f4(void *state);
-void ARM_common_memcpy4_6(void *status);
+void __ARM_common_memcpy4_6(void *status);
 void nn_hid_CTR_AccelerometerReader_ReadLatest(AccelerometerFullState *reader, s16 *raw);
 void nn_hid_CTR_AccelerometerReader_ConvertToAcceleration(
     AccelerometerFullState *reader, f32 *acceleration, u32 count, const s16 *raw, s32 scale);
@@ -43,7 +43,7 @@ extern "C" bool accelerometerUpdate(void)
         g_accelerometerState.reader.centerY = g_accelerometerLiveState.centerY;
         g_accelerometerLiveState.calibrationPending = 0;
     }
-    ARM_common_memcpy4_6(&g_accelerometerRawSample.status);
+    __ARM_common_memcpy4_6(&g_accelerometerRawSample.status);
     g_accelerometerState.live.previousAcceleration[0] = g_accelerometerState.live.acceleration[0];
     g_accelerometerState.live.previousAcceleration[1] = g_accelerometerState.live.acceleration[1];
     g_accelerometerState.live.previousAcceleration[2] = g_accelerometerState.live.acceleration[2];

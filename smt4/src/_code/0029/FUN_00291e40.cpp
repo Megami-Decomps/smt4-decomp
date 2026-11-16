@@ -6,7 +6,7 @@
 extern "C" {
 s32 FUN_002c1d5c(void);
 s32 asd3dSoundActorIsPlaying(s32 slot);
-void FUN_002cc1c0(u32 slot, const SoundActorQueuePosition *position);
+void asd3dSoundActorSetPosition(u32 slot, const SoundActorQueuePosition *position);
 void FUN_002ebc68(u32 sound, s32 slot);
 void FUN_002cc08c(u32 sound, s32 slot);
 void *FUN_002ebc34(s32 slot);
@@ -21,7 +21,7 @@ u32 FUN_00291e40(u32 sound, SoundActorQueuePosition position)
     if (jyoucyuGetTableEntry(1) == 0 && FUN_002c1d5c() == 0) {
         for (s32 slot = 0; slot < 16; ++slot) {
             if (asd3dSoundActorIsPlaying(slot) == 0) {
-                FUN_002cc1c0(selected = slot, &position);
+                asd3dSoundActorSetPosition(selected = slot, &position);
                 if (sound - 0x0100006C <= 255) {
                     FUN_002ebc68(sound, selected);
                     selected += 100000;

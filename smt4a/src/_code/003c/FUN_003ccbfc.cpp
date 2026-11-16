@@ -1,5 +1,3 @@
-/* NON_MATCHING: candidate counter tests use a different literal-pool layout and conditional sequence. */
-/* Tests whether the requested candidate has a positive value in either action counter. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -8,6 +6,8 @@
 
 extern "C" {
 
+/* Script command: reports whether the eligible combatant with the requested id has a positive
+ * value in either action counter. */
 u32 FUN_003ccbfc(void)
 {
     /* Adding words in the shared byte region starting at 0x00A would shift its alignment. */
@@ -23,9 +23,9 @@ u32 FUN_003ccbfc(void)
     u32 id = scrGetArg(0);
     for (s32 i = 0; i < 109; ++i) {
         CombatantCounterView *entry = (CombatantCounterView *)&btlGetMainState()->entries[i];
-        if ((g_btlCandidateMasks.unavailable & entry->flags) != 0 &&
+        if ((entry->flags & g_btlCandidateMasks.unavailable) != 0 &&
             (entry->flags & g_btlCandidateMasks.required) != 0 &&
-            (g_btlCandidateMasks.excluded & entry->flags) == 0 && entry->id == id) {
+            (entry->flags & g_btlCandidateMasks.excluded) == 0 && entry->id == id) {
             if (entry->first > 0 || entry->second > 0) {
                 scrSetResult(1);
                 return 1;

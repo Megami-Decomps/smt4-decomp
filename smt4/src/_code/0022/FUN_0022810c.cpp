@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail tests flag 2 with `and`/`movs` (the masked value stays in r0); built uses a single `tst`. */
 #include "battle/BtlMainAccess.h"
 
 extern "C" {
@@ -14,19 +13,18 @@ typedef struct {
     Entry *entry;       /* 0x1cfc */
 } Owner;
 
-int FUN_00293230(void);
+s32 FUN_00293230(void);
 
-/* Returns the owner's entry index, 0 when the state's flag 2 is set, or -1 when there is no usable entry. */
-int FUN_0022810c(Owner *owner, int strict)
+/* Returns the owner's entry index, 0 when the battle editor's option bit 33 is set, or -1 when
+ * there is no usable entry. */
+s32 FUN_0022810c(Owner *owner, s32 strict)
 {
     if (owner->entry == NULL || owner->entry->index < 0) {
         return -1;
     }
     btlGetMainState();
     if (FUN_00293230() != 0) {
-        u32 masked = btlGetMainState()->editorControl.flags44AC & 2;
-
-        if (masked != 0) {
+        if (btlGetMainState()->editorMask & (2ULL << 32)) {
             return 0;
         }
     }

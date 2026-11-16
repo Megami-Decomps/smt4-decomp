@@ -4471,3 +4471,16 @@
 002637c8 placeWinCreate inferred [med] PlaceWin.cpp debug trace; creates the PlaceWin Calc process and the PlaceWin DrawUpLeft/Right tasks.
 002a7838 mikadoCameraTeardown inferred [med] Called with work->camera by FUN_001fdff0 and mikadoDestroyCameraCallback; deletes camera->talkWork and runs into placeWinRelease.
 0028bf2c btlTalkBustUpReleaseTexture inferred [med] On g_btlTalkBustUp releases texture table 0x18 node via asdTMTexTableReleaseNode, then sets state 3.
+002bd808 __ARM_common_memcpy4_6 evidence armcc 4.1 emits and calls this helper under that name: strcpy of a literal or a fixed-size struct copy compiles to `bl __ARM_common_memcpy4_6` with an i.__ARM_common_memcpy4_6 section byte-identical to retail
+0024ee4c __ARM_common_memcpy4_7 evidence armcc 4.1 emits and calls this helper under that name: strcpy of a literal or a fixed-size struct copy compiles to `bl __ARM_common_memcpy4_7` with an i.__ARM_common_memcpy4_7 section byte-identical to retail
+002ad8b4 __ARM_common_memcpy4_8 evidence armcc 4.1 emits and calls this helper under that name: strcpy of a literal or a fixed-size struct copy compiles to `bl __ARM_common_memcpy4_8` with an i.__ARM_common_memcpy4_8 section byte-identical to retail
+002454f0 __ARM_common_memcpy4_9 evidence armcc 4.1 emits and calls this helper under that name: strcpy of a literal or a fixed-size struct copy compiles to `bl __ARM_common_memcpy4_9` with an i.__ARM_common_memcpy4_9 section byte-identical to retail
+0021ec34 btlDebugClose inferred [med] Inverse of btlDebugOpen: clears the editorMask bit 0 btlDebugOpen sets, stops the owner job it creates and frees g_btlDebugState.work.
+00207f68 btlEncountInitialize inferred [med] Creates the "btlEncount Calc" task with btlEncountDestroy, allocates g_btlEncount and resets the 50 encounter records (unit battle/btlEncount).
+001ec9e4 jobSetFlagsByMode inferred [med] Sets or clears flag bits on one process, every other, all, or a node and its children (jobSetFlagsRecursive). Twin of smt4a FUN_002a2d28.
+001c3600 scrollSelectionClampToCount inferred [med] Clamps the paired row/column selection to the last entry when it is past entryCount. Twin of smt4a FUN_00261840.
+00288e68 table8Type5GetValue inferred [med] Returns table8Type5FindById(id)->value (the matched lookup inlined). Twin of smt4a FUN_00480da8.
+0027d7b0 table23FindRecordByKey inferred [med] Index of the table 0x23 section 1 (plus add-on) record whose category/subtype/variant match. Twin of smt4a FUN_003b5714.
+0027d614 conditionalMessageFind inferred [med] First table 0x23 section 8 (plus add-on) message with matching category/kind and allowed flags. Twin of smt4a FUN_003cdd3c.
+002cc1c0 asd3dSoundActorSetPosition inferred [med] Stores the 3D actor position and calls nw_snd_Sound3DActor_SetPosition, guarded by the manager's active flag.
+0024db9c __aeabi_llsl inferred [high] The ARM runtime 64-bit left shift (value in r0:r1, count in r2; subs r3,r2,#32 / bpl / lsl+orr+lsr), hand-written in the runtime library.

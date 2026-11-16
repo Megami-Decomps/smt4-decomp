@@ -1,10 +1,18 @@
-/* NON_MATCHING: Comparator values use different saved registers and omit retail's extra pointer copy for the tie break. */
+/* NON_MATCHING: the tie-break (with retail's copy of the right entry) matches; only the two ids swap callee-saved registers (retail keeps the left id in r9 and the right id in r8). */
 #include "common.h"
 #include "addon/AocEntryKind.h"
 #include "shop/shopMain.h"
 #include "shard/W6_W6Match7_NumericStepper.h"
 
 extern "C" {
+
+/* Orders two entries by their secondary key. */
+static s32 compareOrder(const u16 *left, const u16 *right)
+{
+    s32 leftOrder = FUN_0049c9a0(left);
+    s32 rightOrder = FUN_0049c9a0(right);
+    return leftOrder - rightOrder;
+}
 
 /* Sorts selected content kinds by ascending kind value, then by the entry's secondary key. */
 s32 FUN_00493d88(const u16 *left, const u16 *right)
@@ -23,7 +31,7 @@ s32 FUN_00493d88(const u16 *left, const u16 *right)
     }
     s32 order = leftValue - rightValue;
     if (order == 0) {
-        order = FUN_0049c9a0(left) - FUN_0049c9a0(right);
+        order = compareOrder(left, right);
     }
     return order;
 }

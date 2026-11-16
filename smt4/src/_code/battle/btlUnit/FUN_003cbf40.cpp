@@ -80,7 +80,7 @@ static __inline void markPickableUnits(BtlMainState **block)
         BtlEntry *entry = &(*block)->entries[i];
         if (entry->selectionIndex >= 0 && (entry->flags & 1) != 0 && (entry->flags & 0x40) == 0 &&
             (entry->flags & 0x10) != 0)
-            entry->flags |= 0x400;
+            entry->flagMask |= 0x400;
     }
 }
 

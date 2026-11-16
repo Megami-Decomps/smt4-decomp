@@ -1,6 +1,6 @@
-/* NON_MATCHING: paired mask loads and positive-value branch lowering differ. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "script/ScriptArgs.h"
 
@@ -22,16 +22,11 @@ u32 FUN_003c45ec(void)
     };
     u32 id = scrGetArg(0);
     for (s32 index = 0; index < 109; ++index) {
-        CandidateEntryView *entries = reinterpret_cast<CandidateEntryView *>(btlGetMainState()->entries);
-        CandidateEntryView *entry = &entries[index];
-        u64 flags = entry->flags;
-        if ((g_btlCandidateMasks.unavailable & flags) != 0 &&
-            (g_btlCandidateMasks.required & flags) != 0 &&
-            (flags & g_btlCandidateMasks.excluded) == 0 && entry->id == id) {
-            s32 value = entry->primary;
-            if (value < 1)
-                value = entry->fallback;
-            if (value > 0) {
+        CandidateEntryView *entry = (CandidateEntryView *)&btlGetMainState()->entries[index];
+        if ((entry->flags & g_btlCandidateMasks.unavailable) != 0 &&
+            (entry->flags & g_btlCandidateMasks.required) != 0 &&
+            (entry->flags & g_btlCandidateMasks.excluded) == 0 && entry->id == id) {
+            if (entry->primary > 0 || entry->fallback > 0) {
                 scrSetResult(1);
                 return 1;
             }

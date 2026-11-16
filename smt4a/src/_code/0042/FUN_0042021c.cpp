@@ -78,7 +78,7 @@ DataBlockTable *gameDataBlocksGetTable(void);
 void *gameDataBlocksGetSaveData(void);
 void *configGetSettings(void);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
-void ARM_common_memcpy4_8(void *destination, const void *source);
+void __ARM_common_memcpy4_8(void *destination, const void *source);
 s32 gameFlagIsSet(s32 flag);
 
 void gameDataAddHomeButtonHold(s32 value);
@@ -118,7 +118,7 @@ static __inline s8 saveLoadUiEntryReady(SaveLoadUi *ui)
 static __inline void saveLoadUiCommit(SaveLoadUi *ui)
 {
     __aeabi_memcpy4(gameDataBlocksGetTable(), ui->tableBuffer, 128);
-    ARM_common_memcpy4_8(configGetSettings(), ui->settingsBuffer);
+    __ARM_common_memcpy4_8(configGetSettings(), ui->settingsBuffer);
     __aeabi_memcpy4(gameDataBlocksGetSaveData(), ui->saveBuffer, 0x2A71C);
 }
 

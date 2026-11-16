@@ -268,7 +268,7 @@ extern int FUN_002e2054(void);
 /* Supplied declaration required: FUN_002e26a4. */
 /* Supplied declaration required: FUN_002e26c4. */
 extern int FUN_002e27b8(void);
-extern unsigned long long runtimeShiftLeftWide(unsigned int, unsigned int, int);
+extern unsigned long long __aeabi_llsl(unsigned int, unsigned int, int);
 /* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: FUN_002e738c. */
 extern int FUN_002ebce4(void);
@@ -1209,7 +1209,7 @@ LAB_003d6870:
       }
       temp_v11 = 0;
       do {
-        temp_v14 = runtimeShiftLeftWide(1,0,temp_v11);
+        temp_v14 = __aeabi_llsl(1,0,temp_v11);
         if (((unsigned int)temp_v14 & temp_v7) != 0 || ((unsigned int)((unsigned long long)temp_v14 >> 0x20) & temp_v1) != 0) {
           temp_v12 = temp_v11 - 1;
           break;

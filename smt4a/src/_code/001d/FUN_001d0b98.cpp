@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int ARM_common_memcpy4_6(int, unsigned int);
+int __ARM_common_memcpy4_6(int, unsigned int);
 int FUN_001d22f4(int *, int *, int);
 
 typedef int romwright_code(...);
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp2C; /* 0x2c: local_2c */
 } param_6_stack;
 
-/* Supplied declaration required: ARM_common_memcpy4_6. */
+/* Supplied declaration required: __ARM_common_memcpy4_6. */
 /* Supplied declaration required: FUN_001d22f4. */
 extern void nn_snd_CTR_InitializeWaveBuffer(unsigned int);
 extern int nw_snd_internal_driver_Voice_FrameToByte(int, unsigned char);
@@ -51,7 +51,7 @@ unsigned char FUN_001d0b98(int *param_1,int param_2,int *param_3,int param_4,int
           piVar3 = param_1 + temp_v1 * 0xf2 + temp_v0 * 6 + 0x8c;
           if ((char)param_3[4] != '\0') {
             temp_v2 = (int)param_1 + temp_v0 * 6 + temp_v1 * 0x3c8 + 0x530;
-            ARM_common_memcpy4_6(temp_v2,(int)param_3 + temp_v1 * 6 + 0x12);
+            __ARM_common_memcpy4_6(temp_v2,(int)param_3 + temp_v1 * 6 + 0x12);
           }
           nn_snd_CTR_InitializeWaveBuffer((unsigned int)piVar3);
           param_1[temp_v1 * 0xf2 + temp_v0 * 6 + 0x8e] = temp_v2;

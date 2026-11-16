@@ -2,5 +2,5 @@
 #include "common.h"
 extern "C" {
 /* Shift a full sixty-four-bit value left. */
-u64 runtimeShiftLeftWide(u64 value,u32 shift) { return value<<shift; }
+u64 __aeabi_llsl(u64 value,u32 shift) { return value<<shift; }
 }

@@ -258,7 +258,7 @@ int questClassifyCompletionNotification(void);
 int mapMarkVisitedAndUpdateRegionFlags(unsigned int, unsigned int);
 int actorApplyAlpha(void);
 int dataTableGetRecord23(...);
-int FUN_0027d7b0(...);
+int table23FindRecordByKey(...);
 int mapIfSetMode2(void);
 int FUN_0027d8b4(...);
 int mapClearPendingEntries(void);
@@ -591,9 +591,9 @@ extern int questMapSetCursor(unsigned int, unsigned int);
 /* Supplied declaration required: mapSkyTableLoad. */
 /* Supplied declaration required: FUN_0027d5ac. */
 /* Supplied declaration required: actorApplyAlpha. */
-extern int FUN_0027d614(unsigned int, unsigned int);
+extern int conditionalMessageFind(unsigned int, unsigned int);
 /* Supplied declaration required: dataTableGetRecord23. */
-/* Supplied declaration required: FUN_0027d7b0. */
+/* Supplied declaration required: table23FindRecordByKey. */
 /* Supplied declaration required: mapIfSetMode2. */
 /* Supplied declaration required: FUN_0027d8b4. */
 extern int FUN_0027d8c8(void);
@@ -974,7 +974,7 @@ LAB_001b848c:
       DAT_0049f924 = DAT_0049fd20;
       if (DAT_0049fd1c != 0xffffffff) {
         temp_v9 = puVar14[0xb];
-        FUN_0027d7b0(temp_v9,puVar14[0xc]);
+        table23FindRecordByKey(temp_v9,puVar14[0xc]);
         if (temp_v9 != -1) {
           temp_v10 = dataTableGetRecord23();
           temp_v9 = g_lmapScene;
@@ -1026,7 +1026,7 @@ LAB_001b848c:
       if ((((*(char *)(puVar14 + 0x12) == '\0') && (puVar14[0x10] != 1)) && (puVar14[0x10] != 2)) &&
          (((DAT_0049fa61 == '\0' && (DAT_0049fa1a == '\0')) &&
           ((temp_v9 = FUN_001e2760(puVar14[0xb]), temp_v9 == 0 &&
-           (temp_v9 = FUN_0027d614(g_gameState,DAT_0049f920), temp_v9 == 0)))))) {
+           (temp_v9 = conditionalMessageFind(g_gameState,DAT_0049f920), temp_v9 == 0)))))) {
         *(unsigned char *)(puVar14 + 0x11) = 1;
       }
     }
@@ -1325,7 +1325,7 @@ LAB_001b8c80:
         if (DAT_0049f943 != '\0') {
           temp_v16 = FUN_00285574();
           temp_v9 = puVar14[0xb];
-          FUN_0027d7b0(temp_v9,temp_v16,DAT_0049fd1c);
+          table23FindRecordByKey(temp_v9,temp_v16,DAT_0049fd1c);
           if (temp_v9 != -1) {
             temp_v10 = dataTableGetRecord23();
             temp_v9 = g_lmapScene;
@@ -1443,7 +1443,7 @@ LAB_001b8e80:
     if (((((DAT_0049fb9c != 0) && (DAT_0049fa61 == '\0')) &&
          ((DAT_0049fa38 != '\0' &&
           ((*(char *)((int)puVar14 + 0x45) == '\0' && (*(char *)((int)puVar14 + 0x46) == '\0'))))))
-        && (temp_v9 = FUN_0027d614(puVar14[0xb],puVar14[0xc]), temp_v9 == 0)) &&
+        && (temp_v9 = conditionalMessageFind(puVar14[0xb],puVar14[0xc]), temp_v9 == 0)) &&
        (temp_v9 = FUN_002c2a04(1), temp_v9 == 3)) {
       FUN_002c29d8(1,10,0xff);
     }
@@ -1471,7 +1471,7 @@ LAB_001b8e80:
     if (((DAT_0049fa61 == '\0') && (DAT_0049fa38 != '\0')) &&
        ((*(char *)((int)puVar14 + 0x45) == '\0' &&
         ((*(char *)((int)puVar14 + 0x46) == '\0' &&
-         (temp_v9 = FUN_0027d614(puVar14[0xb],puVar14[0xc]), temp_v9 == 0)))))) {
+         (temp_v9 = conditionalMessageFind(puVar14[0xb],puVar14[0xc]), temp_v9 == 0)))))) {
       temp_v9 = FUN_002c2a04(0);
       if (temp_v9 == 3) {
         FUN_002c29d8(0,10,0xff);
@@ -1554,7 +1554,7 @@ LAB_001b9210:
         textFormatBuffer(puVar14 + 0x1a,&DAT_0049fa68);
         return 0;
       }
-      temp_v9 = FUN_0027d614(puVar14[0xb],puVar14[0xc]);
+      temp_v9 = conditionalMessageFind(puVar14[0xb],puVar14[0xc]);
       if (temp_v9 != 0) {
         DAT_0049f934 = 1;
         DAT_0049f93c = 1;
@@ -1812,7 +1812,7 @@ LAB_001b9210:
           if ((temp_v19 && temp_v14 == 0) && (temp_v10 = padIsButtonPressed(6), temp_v10 != 0)) {
             DAT_0049f968 = 0;
             temp_v14 = DAT_0049f990;
-            FUN_0027d7b0(DAT_0049f990,DAT_0049f994,DAT_0049f998);
+            table23FindRecordByKey(DAT_0049f990,DAT_0049f994,DAT_0049f998);
             if (temp_v14 != 0xffffffff) {
               pcVar13 = (char *)dataTableGetRecord23();
               if ((puVar14[0xb] == (int)*pcVar13) && (puVar14[0xc] == (int)pcVar13[1])) {
@@ -2365,7 +2365,7 @@ LAB_001baf1c:
                                          (temp_v10 = padIsButtonPressed(6), temp_v10 != 0)) {
                                         DAT_0049f968 = 0;
                                         temp_v14 = DAT_0049f990;
-                                        FUN_0027d7b0(DAT_0049f990,DAT_0049f994,DAT_0049f998);
+                                        table23FindRecordByKey(DAT_0049f990,DAT_0049f994,DAT_0049f998);
                                         if (temp_v14 != 0xffffffff) {
                                           pcVar13 = (char *)dataTableGetRecord23();
                                           if ((puVar14[0xb] == (int)*pcVar13) &&
@@ -2399,7 +2399,7 @@ LAB_001baf1c:
 LAB_001bad4c:
                                       DAT_0049f968 = 0;
                                       temp_v14 = DAT_0049f990;
-                                      FUN_0027d7b0(DAT_0049f990,DAT_0049f994,DAT_0049f998);
+                                      table23FindRecordByKey(DAT_0049f990,DAT_0049f994,DAT_0049f998);
                                       if (temp_v14 != 0xffffffff) {
                                         pcVar13 = (char *)dataTableGetRecord23();
                                         if ((puVar14[0xb] == (int)*pcVar13) &&
@@ -3934,7 +3934,7 @@ joined_r0x001bce40:
         puVar14[9] = temp_v9;
         break;
       }
-      FUN_0027d7b0(temp_v14,puVar14[0xc],DAT_0049fd1c);
+      table23FindRecordByKey(temp_v14,puVar14[0xc],DAT_0049fd1c);
       if (temp_v14 != 0xffffffff) {
         temp_v10 = dataTableGetRecord23();
         temp_v9 = g_lmapScene;
@@ -4346,7 +4346,7 @@ LAB_001bd824:
             DAT_0049fb46 = 1;
             DAT_0049f934 = 0;
             DAT_0049f93c = 0;
-            FUN_0027d7b0(DAT_0049f990,DAT_0049f994,DAT_0049f998);
+            table23FindRecordByKey(DAT_0049f990,DAT_0049f994,DAT_0049f998);
             pcVar13 = (char *)dataTableGetRecord23();
             g_gameState = (unsigned int)*pcVar13;
             puVar14[0xb] = g_gameState;
@@ -4363,7 +4363,7 @@ LAB_001bd824:
             return 0;
           }
           *(unsigned char *)((int)puVar14 + 0x1d) = 1;
-          FUN_0027d7b0(DAT_0049f990,DAT_0049f994,DAT_0049f998);
+          table23FindRecordByKey(DAT_0049f990,DAT_0049f994,DAT_0049f998);
           pcVar13 = (char *)dataTableGetRecord23();
           temp_v9 = g_lmapScene;
           puVar23 = (unsigned int *)(g_lmapScene + 0x30);
@@ -4570,7 +4570,7 @@ LAB_001bd824:
     }
     temp_v14 = puVar14[0xb];
     if ((temp_v14 == DAT_0049fd14) && (puVar14[0xc] == DAT_0049fd18)) {
-      FUN_0027d7b0(temp_v14,puVar14[0xc],DAT_0049fd1c);
+      table23FindRecordByKey(temp_v14,puVar14[0xc],DAT_0049fd1c);
       if (temp_v14 != 0xffffffff) {
         temp_v10 = dataTableGetRecord23();
         temp_v9 = g_lmapScene;
@@ -4802,7 +4802,7 @@ LAB_001be80c:
     break;
   case 0x4f:
     if (puVar14[10] == 0) {
-      FUN_0027d7b0(DAT_0049f990,DAT_0049f994,DAT_0049f998);
+      table23FindRecordByKey(DAT_0049f990,DAT_0049f994,DAT_0049f998);
       temp_v9 = dataTableGetRecord23();
       VectorSignedToFloat((int)*(short *)(temp_v9 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v9 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -4822,7 +4822,7 @@ LAB_001be80c:
     FUN_0027fc14(0);
     FUN_00273840(0);
     mapCompleteActiveAndPendingGroups();
-    FUN_0027d7b0(DAT_0049f990,DAT_0049f994,DAT_0049f998);
+    table23FindRecordByKey(DAT_0049f990,DAT_0049f994,DAT_0049f998);
     pcVar13 = (char *)dataTableGetRecord23();
     temp_v9 = (int)*pcVar13;
     if ((puVar14[0xb] != temp_v9) || (puVar14[0xc] != (int)pcVar13[1])) {
@@ -4978,7 +4978,7 @@ LAB_001bec78:
     else if ((int)DAT_0049f990 >= 100) {
       puVar14[9] = 0x6f;
       temp_v14 = DAT_0049f990;
-      FUN_0027d7b0(DAT_0049f990,DAT_0049f994,DAT_0049f998);
+      table23FindRecordByKey(DAT_0049f990,DAT_0049f994,DAT_0049f998);
       mapDepartSetTarget(DAT_0049f990,DAT_0049f994,DAT_0049f998);
       temp_v10 = dataTableGetRecord23(temp_v14);
       temp_v9 = g_lmapScene;
@@ -5016,7 +5016,7 @@ LAB_001bec78:
       uStack_1c8 = *(unsigned int *)(g_lmapScene + 0x1c);
       uStack_1c4 = *(unsigned int *)(g_lmapScene + 0x20);
       uStack_1c0 = *(unsigned int *)(g_lmapScene + 0x24);
-      FUN_0027d7b0(DAT_0049f990,DAT_0049f994,DAT_0049f998);
+      table23FindRecordByKey(DAT_0049f990,DAT_0049f994,DAT_0049f998);
       pcVar13 = (char *)dataTableGetRecord23();
       temp_v10 = g_lmapScene;
       temp_v16 = VectorSignedToFloat((int)*(short *)(pcVar13 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);

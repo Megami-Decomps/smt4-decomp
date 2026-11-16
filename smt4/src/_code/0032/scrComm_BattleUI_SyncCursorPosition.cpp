@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail does not reuse the first load of the flag word for the clear: it reloads it (ldr r2, [r0]; bic; str) after the test. */
 #include "common.h"
 #include "battle/BtlMainAccess.h"
 
@@ -17,8 +16,8 @@ u32 scrComm_BattleUI_SyncCursorPosition(void)
     state->menuCursor.x = state->menuCursor.targetX;
     state->menuCursor.y = state->menuCursor.targetY;
     btlUiInvalidateIndexedEntries(g_btlUiBlock);
-    if ((state->battleFlags & 0x1000) != 0) {
-        state->battleFlags &= ~0x1000;
+    if ((state->battleMask & 0x1000) != 0) {
+        state->battleMask &= ~0x1000ULL;
         FUN_00254f58(state);
     }
     FUN_00338060(state, 1);

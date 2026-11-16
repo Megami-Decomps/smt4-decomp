@@ -1,4 +1,5 @@
-/* NON_MATCHING: entry-argument setup, busy/first-frame branch placement and terminal call form differ. */
+/* NON_MATCHING: block layout now matches retail; only the channel test differs: retail tests
+ * `channel != 0 && channel != 1` as cmp/cmpne/bne, the build as two branches with a nop {0}. */
 #include "common.h"
 #include "camp/Unite/UniteEffect.h"
 
@@ -16,19 +17,23 @@ u32 FUN_00314c8c(void)
     s32 duration = scrGetArg(1);
     if (FUN_00203d74() && duration > 4)
         duration = 4;
-    if (scrGetCommandFrame() != 0) {
-        if (!FUN_00163e84(0)) {
-            if (FUN_00162ea4())
-                FUN_00212204(0);
-            return 0;
-        }
-    } else {
+    switch (scrGetCommandFrame()) {
+    case 0: {
         s32 channel = scrGetArg(0);
-        if (channel == 0 || channel == 1) {
-            FUN_003d54f8(0, duration);
-            return 0;
+        if (channel != 0 && channel != 1) {
+            return 1;
         }
+        FUN_003d54f8(0, duration);
+        break;
     }
-    return 1;
+    default:
+        if (FUN_00163e84(0)) {
+            return 1;
+        }
+        if (FUN_00162ea4())
+            FUN_00212204(0);
+        break;
+    }
+    return 0;
 }
 }

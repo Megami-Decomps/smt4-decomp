@@ -1,26 +1,25 @@
-/* NON_MATCHING: retail keeps the constant 0 in r7 (hoisted out of the loop, pushes r7/r8) for the out-of-range row; built materialises it with movge r0, #0 */
-#include "gamedata/DataTable.h"
+#include "gamedata/LevelTable.h"
 
 extern "C" {
 
-/* Subtracts the thresholds of data table 9/1 (99 rows) from *remaining starting at row `start`; returns rows consumed. */
+/* Spends experience from *remaining on level-ups starting at level `start` (up to 99); returns the
+ * levels gained. */
 int FUN_003c1de8(int start, u32 *remaining)
 {
-    int i = start;
+    int level = start;
 
     for (;;) {
-        if (i == 99) {
+        if (level == 99) {
             break;
         }
-        const u32 *entries = (const u32 *)dataTableGetEntries(dataTableGet(9, 1));
-        u32 need = i < 99 ? entries[i - 1] : 0;
+        u32 need = levelExpRequirement(level);
         if (need > *remaining) {
             break;
         }
         *remaining -= need;
-        i++;
+        level++;
     }
-    return i - start;
+    return level - start;
 }
 
 } /* extern "C" */

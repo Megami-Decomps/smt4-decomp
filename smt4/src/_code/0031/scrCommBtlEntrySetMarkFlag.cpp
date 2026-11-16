@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only: retail keeps the loaded flag word in r2, built in r1. */
 #include "common.h"
 #include "battle/BtlMainAccess.h"
 #include "shard/W4_Match6_BtlEntry.h"
@@ -17,9 +16,9 @@ u32 scrCommBtlEntrySetMarkFlag(void)
 
     if (entry != NULL) {
         if (on > 0) {
-            entry->flags |= 0x10000;
+            entry->flagMask |= 0x10000;
         } else {
-            entry->flags &= ~0x10000;
+            entry->flagMask &= ~0x10000ULL;
         }
     }
     return 1;

@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern void ARM_common_memcpy4_6(u8 *dest, const void *src);
+extern void __ARM_common_memcpy4_6(u8 *dest, const void *src);
 
 void menu4CSetValue42(Menu4C *obj, const void *src)
 {
-    ARM_common_memcpy4_6(obj->value42, src);
+    __ARM_common_memcpy4_6(obj->value42, src);
     obj->flags = obj->flags | 0x10;
 }
 

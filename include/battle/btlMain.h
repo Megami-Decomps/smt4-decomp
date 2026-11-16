@@ -186,32 +186,38 @@ typedef struct BtlMainState {
             /* 0x2F06 */ s16 order[12];
         } turnOrder;
     };
-    /* 0x44A0 */ u32 battleFlags;
     union {
-        /* 0x44A4 */ u8 unk44a4[0x49BC - 0x44A4];
-        /* 0x44A4 */ u32 spriteFlags;
+        /* 0x44A0 */ u32 battleFlags;
+        /* 0x44A0 */ u64 battleMask;      /* battleFlags (low word) and sprite.flags (high word) as one mask */
         struct {
-            u8 unk44a4[4];
+            u32 unk44A0;
+            /* 0x44A4 */ u32 flags;
+        } sprite;
+    };
+    union {
+        /* 0x44A8 */ u8 unk44a8[0x49B8 - 0x44A8];
+        /* 0x44A8 */ u64 editorMask;     /* the battle editor's options, tested as one 64-bit mask */
+        struct {
             /* 0x44A8 */ u32 flags;
             /* 0x44AC */ u32 flags44AC;
         } editorControl;
         struct {
-            u8 unk44a4[0x10];
+            u8 unk44a8[0xC];
             /* 0x44B4 */ u8 busyA;
             /* 0x44B5 */ u8 bonus;
             /* 0x44B6 */ u8 difficulty;
             /* 0x44B7 */ u8 blocked;
         } encounterControl;
         struct {
-            u8 unk44a4[0x414];
+            u8 unk44a8[0x410];
             /* 0x48B8 */ u32 minimumPercentApplied;   /* set once an affinity query raised its percent to the minimum */
         } affinity;
         struct {
-            u8 unk44a4[0x14];
+            u8 unk44a8[0x10];
             /* 0x44B8 */ BtlScriptStatusRecord records[128];
         } unitStatus;
         struct {
-            u8 unk44a4[0x4968 - 0x44A4];
+            u8 unk44a8[0x4968 - 0x44A8];
             /* 0x4968 */ s16 x;
             /* 0x496A */ s16 y;
             /* 0x496C */ u8 unk496C[4];
@@ -219,10 +225,11 @@ typedef struct BtlMainState {
             /* 0x4972 */ s16 targetY;
         } menuCursor;
         struct {
-            u8 unk44a4[0x4978 - 0x44A4];
+            u8 unk44a8[0x4978 - 0x44A8];
             /* 0x4978 */ s32 complete;
         } completion;
     };
+    /* 0x49B8 */ u32 unk49B8;
     /* 0x49BC */ u32 flags49BC;
     /* 0x49C0 */ s32 selectedGroup;  /* 0xff when no group is selected */
     /* 0x49C4 */ u8 unk49c4;
@@ -259,8 +266,8 @@ typedef char BtlMainStateBodyOffsetCheck[
     offsetof(BtlMainState, playerCheck.checkId) == 0x225A && offsetof(BtlMainState, actionCleanup.selectedAction) == 0x4454 &&
     offsetof(BtlMainState, actionCleanup.selectedResource) == 0x4458 ? 1 : -1];
 typedef char BtlMainStateTailOffsetCheck[
-    offsetof(BtlMainState, battleFlags) == 0x44A0 && offsetof(BtlMainState, spriteFlags) == 0x44A4 &&
-    offsetof(BtlMainState, editorControl.flags) == 0x44A8 && offsetof(BtlMainState, editorControl.flags44AC) == 0x44AC &&
+    offsetof(BtlMainState, battleFlags) == 0x44A0 && offsetof(BtlMainState, battleMask) == 0x44A0 && offsetof(BtlMainState, sprite.flags) == 0x44A4 &&
+    offsetof(BtlMainState, editorMask) == 0x44A8 && offsetof(BtlMainState, editorControl.flags) == 0x44A8 && offsetof(BtlMainState, editorControl.flags44AC) == 0x44AC &&
     offsetof(BtlMainState, encounterControl.blocked) == 0x44B7 && offsetof(BtlMainState, affinity.minimumPercentApplied) == 0x48B8 &&
     offsetof(BtlMainState, flags49BC) == 0x49BC && offsetof(BtlMainState, selectedGroup) == 0x49C0 &&
     offsetof(BtlMainState, hasActiveEntry) == 0x49C5 && offsetof(BtlMainState, flags49D0) == 0x49D0 &&

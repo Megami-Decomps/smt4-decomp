@@ -38,7 +38,7 @@ u32 FUN_00240678(CompletionState *completion, BtlMainState *battle)
             BtlEntry *entry = &battle->entries[index];
             u32 flags = entry->flags;
             if ((flags & BTL_ENTRY_FLAG_ACTIVE) && !(flags & BTL_ENTRY_FLAG_BLOCKED) && (flags & BTL_ENTRY_FLAG_PRESENT))
-                entry->flags |= 0x00800000;
+                entry->flagMask |= 0x00800000;
         }
         for (s32 index = 4; index < 54; ++index) {
             BtlActionRecord *action = &battle->actions[index];

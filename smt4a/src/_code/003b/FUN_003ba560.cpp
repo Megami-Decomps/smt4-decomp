@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler hoists the shared clamp callback into r8 and predicates its stores; retail loads it separately inside each non-null track branch. */
 #include "classes/Obj55b87c.h"
 #include <stddef.h>
 
@@ -17,13 +16,24 @@ void FUN_0032c518(void *model, s32 slot);
 void FUN_0018e9d8(u32 node, u32 value);
 void settings5BAddFlags(u32 flags);
 void effApplyModelLight(s32 slot);
+f32 nw_anim_PlayPolicy_Loop(f32 lower, f32 upper, f32 value);
 }
 
-static __inline void modelLightResetClamp(Obj55b87c *track)
+typedef f32 (*AnimPlayPolicy)(f32 lower, f32 upper, f32 value);
+
+// Gives the track the looping or the clamping play policy.
+static void trackSetLoopPolicy(Obj55b87c *track, s32 loop)
 {
     if (track != NULL) {
+        AnimPlayPolicy policy;
+
+        if (loop == 0) {
+            policy = mathClampFloat;
+        } else {
+            policy = nw_anim_PlayPolicy_Loop;
+        }
         track->enabled = 1;
-        track->clamp = mathClampFloat;
+        track->clamp = policy;
     }
 }
 
@@ -37,12 +47,12 @@ extern "C" void FUN_003ba560(ModelLightBinding *binding, s32 slot)
             return;
         FUN_0018e9d8(node, binding->value);
         settings5BAddFlags(2);
-        modelLightResetClamp(binding->track);
+        trackSetLoopPolicy(binding->track, 0);
         effApplyModelLight(1);
     } else {
         FUN_0018e9d8(node, binding->value);
         settings5BAddFlags(1);
-        modelLightResetClamp(binding->track);
+        trackSetLoopPolicy(binding->track, 0);
         effApplyModelLight(0);
     }
 }

@@ -33,7 +33,7 @@ s32 FUN_003bf0a4(void)
         offsetof(EventView, bonus) == 0x44B5 ? 1 : -1];
     BtlMainState *battle = btlGetMainState();
     EventView *event = (EventView *)battle;
-    if ((event->flags & 0x20) != 0) {
+    if ((battle->editorMask & (0x20ULL << 32)) != 0) {
         if (event->state >= 13) {
             event->state = 2;
         }

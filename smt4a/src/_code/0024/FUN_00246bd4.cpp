@@ -85,7 +85,7 @@ int FUN_00325ba4(...);
 int mapIfReleaseRequestObject(...);
 int FUN_00352308(...);
 int mapIfReleaseSlot1(...);
-int FUN_003b5714(...);
+int table23FindRecordByKey(...);
 
 int soundVolumeSettingSet(...);
 int FUN_0014af98(...);
@@ -393,7 +393,7 @@ extern int dataTableGetRecord23(void);
 /* Supplied declaration required: naviMainSetRequestTriple. */
 /* Supplied declaration required: uiPlayGatedActionFeedback. */
 extern unsigned int asdModelGetStatic38(void);
-/* Supplied declaration required: FUN_003b5714. */
+/* Supplied declaration required: table23FindRecordByKey. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d2158. */
 /* Supplied declaration required: FUN_003d4ed8. */
@@ -2778,7 +2778,7 @@ LAB_003270bc:
         FUN_00233e10(1,DAT_005f16ac);
         temp_v32 = FUN_004d0584();
         if (temp_v32 != 0) {
-          FUN_003b5714(DAT_005f16a0,DAT_005f16a4,DAT_005f16a8);
+          table23FindRecordByKey(DAT_005f16a0,DAT_005f16a4,DAT_005f16a8);
           temp_v32 = dataTableGetRecord23();
           piVar18 = g_lmapScene;
           if (DAT_005f164c != 0) {
@@ -3452,7 +3452,7 @@ LAB_00366704:
                   FUN_00233e10(1,DAT_005f16ac);
                   temp_v32 = FUN_004d0584();
                   if (temp_v32 != 0) {
-                    FUN_003b5714(DAT_005f16a0,DAT_005f16a4,DAT_005f16a8);
+                    table23FindRecordByKey(DAT_005f16a0,DAT_005f16a4,DAT_005f16a8);
                     piVar18 = g_lmapScene;
                     g_lmapScene[0x28] = (int)DAT_005f16b0;
                     piVar18[0x29] = (int)(DAT_005f16b4 - 500.0f);
@@ -4932,7 +4932,7 @@ LAB_002da3cc:
               DAT_005f19d0 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
             }
             else {
-              FUN_003b5714(puVar6,(unsigned int *)(unsigned int)*(unsigned short *)(temp_v32 + 0x14),
+              table23FindRecordByKey(puVar6,(unsigned int *)(unsigned int)*(unsigned short *)(temp_v32 + 0x14),
                            *(unsigned short *)(temp_v32 + 0x16));
               if (puVar6 != (unsigned int *)0xffffffff) {
                 temp_v6 = dataTableGetRecord23();

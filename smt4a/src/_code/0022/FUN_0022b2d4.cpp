@@ -29,7 +29,7 @@ int compareWithFeedbackColor(...);
 int FUN_0025e704(...);
 int FUN_00334e1c(...);
 int FUN_00345098(void);
-int FUN_00480da8(...);
+int table8Type5GetValue(...);
 int VectorUnsignedToFloat(...);
 
 int textFormatBuffer(...);
@@ -159,7 +159,7 @@ extern int FUN_003e4d68(unsigned int);
 /* Supplied declaration required: spriteDrawAnimationUnplaced. */
 /* Supplied declaration required: FUN_0047fc38. */
 extern int equipmentHasPositiveUpgrade(unsigned int);
-/* Supplied declaration required: FUN_00480da8. */
+/* Supplied declaration required: table8Type5GetValue. */
 
 
 unsigned char FUN_0022b2d4(void)
@@ -1404,7 +1404,7 @@ LAB_0022b9b8:
     temp_v24 = 3.09687e-43f;
     FUN_001835b4(2,0x12,0xc2,temp_v27[5],temp_v27[6]);
     temp_v10 = (unsigned int)*(unsigned short *)(temp_v2 + 0x20ae);
-    FUN_00480da8(temp_v10);
+    table8Type5GetValue(temp_v10);
     temp_v4 = asdTMTexTableEntryAt(0x12,0xc3);
     temp_v24 = 0.0f;
     FUN_00185e84((int)(short)temp_v10,temp_v27[5] + *(short *)(temp_v4 + 8),

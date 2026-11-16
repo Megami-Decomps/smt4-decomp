@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail materializes the zero stored to the handle slot (mov r5, #0, r5 saved) before the delete's null test; this build stores it afterwards from r0 */
+/* NON_MATCHING: branches now match (the slot is cleared only when it held a handle); retail still materializes the zero stored to the slot in a saved register (mov r5, #0) before the null test, this build after the call. */
 #include "common.h"
 
 /* A registered handle object with a virtual destructor (vtable slot 1 is the deleting variant). */
@@ -35,8 +35,10 @@ void FUN_0049af90(HandleOwner *owner)
             FUN_00345718(0);
             if (owner->handle != NULL) {
                 ptrListRemoveClearOwner(g_handleRegistry, owner->handle->id);
-                delete owner->handle;
-                owner->handle = NULL;
+                if (owner->handle != NULL) {
+                    delete owner->handle;
+                    owner->handle = NULL;
+                }
             }
         }
     }

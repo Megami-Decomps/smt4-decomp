@@ -25,9 +25,8 @@ u32 FUN_003c46c0()
     FUN_00301a08(btlResolveEntryChoice(scrGetArg(1)), &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
-        u64 flags = entry->flags;
-        if (!(flags & g_btlCandidateMasks.unavailable) &&
-            (flags & g_btlCandidateMasks.required) && !(flags & g_btlCandidateMasks.excluded) &&
+        if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
+            (g_btlCandidateMasks.required & entry->flags) && !(entry->flags & g_btlCandidateMasks.excluded) &&
             entry->id == id) {
             const EffectCountersView *counters = reinterpret_cast<const EffectCountersView *>(entry);
             if (counters->primary > 0 || counters->secondary > 0) {

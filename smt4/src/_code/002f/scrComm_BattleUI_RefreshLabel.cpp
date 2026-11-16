@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only: retail keeps the battle state in r4 and the option label in r5 (and loads g_btlUiBlock's address before the flag update); built swaps r4/r5 and loads it after. */
+/* NON_MATCHING: register allocation only: retail keeps the battle state in r4 and the option label in r5; built swaps r4/r5. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 
@@ -35,7 +35,7 @@ u32 scrComm_BattleUI_RefreshLabel(void)
     labelB = gameGetSupportUnitData()->labelB;
     label = supportUnitGetEntry(gameGetSupportUnitData()->labelA, labelB);
     FUN_002942c4((s16)(label->number + 1), 0);
-    state->battleFlags |= 0x2000000;
+    state->battleMask |= 0x2000000;
     FUN_003ae620(g_btlUiBlock);
     return 1;
 }

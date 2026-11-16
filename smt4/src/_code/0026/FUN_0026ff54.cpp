@@ -4,7 +4,7 @@
 extern "C" {
 
 void aocActivateFileGroupFlags(u32 system);
-void ARM_common_memcpy4_8(u32 settings, void *backup);
+void __ARM_common_memcpy4_8(u32 settings, void *backup);
 void asdMemFree(void *block);
 void titleConfigApplyAudio(void);
 void titleSynchronizeSavedConfig(void);
@@ -20,7 +20,7 @@ void FUN_0026ff54(void)
 {
     if (g_saveLoadUIFlags.backupTable != NULL) {
         __aeabi_memcpy4(gameDataBlocksGetTable(), g_saveLoadUIFlags.backupTable, 0x80);
-        ARM_common_memcpy4_8(configGetSettings(), g_saveLoadUIFlags.backupConfig);
+        __ARM_common_memcpy4_8(configGetSettings(), g_saveLoadUIFlags.backupConfig);
         __aeabi_memcpy4(gameDataBlocksGetSaveData(), g_saveLoadUIFlags.backupSave, 0x24d28);
         titleSynchronizeSavedConfig();
         titleConfigApplyAudio();

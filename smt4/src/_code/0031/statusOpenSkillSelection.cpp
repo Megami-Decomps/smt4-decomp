@@ -31,7 +31,7 @@ static __inline void statusSkillSelectionEnter(StatusSkillSelection *screen, s32
 extern "C" {
 extern StatusSkillSelection *g_statusDown;
 s32 FUN_00262cb0(u16 id);
-s32 FUN_00288e68(u32 id);
+s32 table8Type5GetValue(u32 id);
 void uniteRequestScriptEntry(s32 mode);
 void buttonHelpSetPreset(s32 preset);
 void timerStart(void *timer, s32 running, s32 initial);
@@ -50,7 +50,7 @@ void statusOpenSkillSelection(u16 selectedId, u8 mode)
     screen->skills.words[2] = 0;
     screen->skills.words[3] = 0;
     for (u32 id = 0x79f; id <= 0x802; ++id) {
-        if (FUN_00262cb0(static_cast<u16>(id)) && FUN_00288e68(id)) {
+        if (FUN_00262cb0(static_cast<u16>(id)) && table8Type5GetValue(id)) {
             screen->skills.ids[count++] = id;
         }
     }

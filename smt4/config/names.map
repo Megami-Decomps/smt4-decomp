@@ -477,7 +477,7 @@
 00239c54 n_dbm_HierarchicalRomFileTableTemplate_nn_fs_CTR_MPCore_detail_RomFsArchive_RomFsStorage_nn_fs_CTR_MPCore_detail_RomFsArchive_RomFsStorage_nn_fs_CTR_MPCore_detail_RomFsArchive_RomF
 0023d240 nn_math_ARMv6_MTX34MultTranslateAsm
 0023d304 nn_gr_CTR_Vertex_LoadArray_DisableAll
-002454f0 ARM_common_memcpy4_9
+002454f0 __ARM_common_memcpy4_9
 0024726c MapNaviTable_GetCategoryRecord
 002472a8 MapNaviTable_GetCategoryCount
 00248ce8 nn_cec_CTR_MessageBox_SetMessageBoxData
@@ -2612,7 +2612,7 @@
 00234974 recordClearWideHandle
 0023adf4 modelSetPosition
 002468e0 linkedFindItemByIndex
-0024db9c runtimeShiftLeftWide
+0024db9c __aeabi_llsl
 00255158 battleGetEntryHalfword
 0026e5ec saveGetMapFlag
 00276238 navigationResetTimer
@@ -4398,7 +4398,7 @@
 003c5384 talkCtrlDebugMenuBuild
 001a8748 mapSystemLoadSharedFiles
 002d9384 statusDownCreate
-0024ee4c ARM_common_memcpy4_7
+0024ee4c __ARM_common_memcpy4_7
 0024dd80 padAlternateButtonIndex
 0019ff5c inputApplyDeadZone
 00287a78 mathAbsHeadingErrorToPoint
@@ -4855,7 +4855,7 @@
 002be56c drawTextAtSnappedRectangle
 00388f3c aocEnumerateContentRecords
 003c8c2c fusionClassifyPair
-002bd808 ARM_common_memcpy4_6
+002bd808 __ARM_common_memcpy4_6
 003bb0ac contentTransitionInstallDispatch
 002b72dc mtx44Perspective
 002c0a2c statisticsGetCounter
@@ -4875,7 +4875,15 @@
 0010a174 memoryDebugSetRegions
 001dd8c0 npcRoomIsOpen
 00153068 textureEntryAttachStex
-002ad8b4 ARM_common_memcpy4_8
+002ad8b4 __ARM_common_memcpy4_8
 002637c8 placeWinCreate
 002a7838 mikadoCameraTeardown
 0028bf2c btlTalkBustUpReleaseTexture
+0021ec34 btlDebugClose
+00207f68 btlEncountInitialize
+001ec9e4 jobSetFlagsByMode
+001c3600 scrollSelectionClampToCount
+00288e68 table8Type5GetValue
+0027d7b0 table23FindRecordByKey
+0027d614 conditionalMessageFind
+002cc1c0 asd3dSoundActorSetPosition

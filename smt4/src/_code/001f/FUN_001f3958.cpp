@@ -6,7 +6,7 @@
 
 extern "C" {
 
-int FUN_00288e68(void);
+int table8Type5GetValue(void);
 int FUN_0028f694(...);
 int FUN_0028f870(...);
 int FUN_002b6c34(...);
@@ -33,7 +33,7 @@ extern int g_camp; /* 0x43da90 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int statusGetAvailableChoiceCount(void);
-/* Supplied declaration required: FUN_00288e68. */
+/* Supplied declaration required: table8Type5GetValue. */
 /* Supplied declaration required: FUN_0028d1f4. */
 /* Supplied declaration required: FUN_0028f694. */
 /* Supplied declaration required: FUN_0028f870. */
@@ -96,7 +96,7 @@ void FUN_001f3958(int param_1,int param_2,int param_3)
                    0x6a);
       FUN_002bf288(2,0x1d,0x452,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,
                    0x6f);
-      if ((temp_v7 != 0) && (FUN_00288e68(), temp_v10 = temp_v7, temp_v7 != 0)) {
+      if ((temp_v7 != 0) && (table8Type5GetValue(), temp_v10 = temp_v7, temp_v7 != 0)) {
         temp_v2 = asdTMTexTableEntryAt(0x1d,0x454);
         temp_v3 = aocIndexValueOrDefault(temp_v10);
         if (temp_v3 != 0) {
@@ -158,7 +158,7 @@ void FUN_001f3958(int param_1,int param_2,int param_3)
   temp_v0 = FUN_0029efa8(temp_v0);
   FUN_0028f694(*(short *)(temp_v6 + 8) + param_1,*(short *)(temp_v6 + 10) + param_2,
                (int)*(short *)(temp_v5 + temp_v0 * 2 + 0xe0c));
-  if ((temp_v7 == 0) || (FUN_00288e68(), temp_v7 == 0)) {
+  if ((temp_v7 == 0) || (table8Type5GetValue(), temp_v7 == 0)) {
     temp_v5 = asdTMTexTableEntryAt(0x1d,0x460);
     textFormatBuffer(temp_v9,&LAB_001f40c0);
     VectorSignedToFloat((int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v5 + 10) + param_2,

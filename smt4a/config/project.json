@@ -44667,12 +44667,12 @@
     },
     {
       "address": "0x1a9110",
-      "function": "ARM_common_memcpy4_8",
+      "function": "__ARM_common_memcpy4_8",
       "module": "_code",
-      "object": "build/obj/_code/001a/ARM_common_memcpy4_8.o",
+      "object": "build/obj/_code/001a/__ARM_common_memcpy4_8.o",
       "size": 20,
-      "source": "src/_code/001a/ARM_common_memcpy4_8.cpp",
-      "target": "orig/target/_code/001a/ARM_common_memcpy4_8.o",
+      "source": "src/_code/001a/__ARM_common_memcpy4_8.cpp",
+      "target": "orig/target/_code/001a/__ARM_common_memcpy4_8.o",
       "thumb": false
     },
     {
@@ -51768,12 +51768,12 @@
     },
     {
       "address": "0x1d1438",
-      "function": "ARM_common_memcpy4_6",
+      "function": "__ARM_common_memcpy4_6",
       "module": "_code",
-      "object": "build/obj/_code/001d/ARM_common_memcpy4_6.o",
+      "object": "build/obj/_code/001d/__ARM_common_memcpy4_6.o",
       "size": 20,
-      "source": "src/_code/001d/ARM_common_memcpy4_6.cpp",
-      "target": "orig/target/_code/001d/ARM_common_memcpy4_6.o",
+      "source": "src/_code/001d/__ARM_common_memcpy4_6.cpp",
+      "target": "orig/target/_code/001d/__ARM_common_memcpy4_6.o",
       "thumb": false
     },
     {
@@ -60425,12 +60425,12 @@
     },
     {
       "address": "0x261840",
-      "function": "FUN_00261840",
+      "function": "scrollSelectionClampToCount",
       "module": "_code",
-      "object": "build/obj/_code/0026/FUN_00261840.o",
+      "object": "build/obj/_code/0026/scrollSelectionClampToCount.o",
       "size": 136,
-      "source": "src/_code/0026/FUN_00261840.cpp",
-      "target": "orig/target/_code/0026/FUN_00261840.o",
+      "source": "src/_code/0026/scrollSelectionClampToCount.cpp",
+      "target": "orig/target/_code/0026/scrollSelectionClampToCount.o",
       "thumb": false
     },
     {
@@ -65043,12 +65043,12 @@
     },
     {
       "address": "0x2a2d28",
-      "function": "FUN_002a2d28",
+      "function": "jobSetFlagsByMode",
       "module": "_code",
-      "object": "build/obj/_code/002a/FUN_002a2d28.o",
+      "object": "build/obj/_code/002a/jobSetFlagsByMode.o",
       "size": 364,
-      "source": "src/_code/002a/FUN_002a2d28.cpp",
-      "target": "orig/target/_code/002a/FUN_002a2d28.o",
+      "source": "src/_code/002a/jobSetFlagsByMode.cpp",
+      "target": "orig/target/_code/002a/jobSetFlagsByMode.o",
       "thumb": false
     },
     {
@@ -73041,12 +73041,12 @@
     },
     {
       "address": "0x2e5ac0",
-      "function": "runtimeShiftLeftWide",
+      "function": "__aeabi_llsl",
       "module": "_code",
-      "object": "build/obj/_code/002e/runtimeShiftLeftWide.o",
+      "object": "build/obj/_code/002e/__aeabi_llsl.o",
       "size": 40,
-      "source": "src/_code/002e/runtimeShiftLeftWide.cpp",
-      "target": "orig/target/_code/002e/runtimeShiftLeftWide.o",
+      "source": "src/_code/002e/__aeabi_llsl.cpp",
+      "target": "orig/target/_code/002e/__aeabi_llsl.o",
       "thumb": false
     },
     {
@@ -121370,12 +121370,12 @@
     },
     {
       "address": "0x3b5714",
-      "function": "FUN_003b5714",
+      "function": "table23FindRecordByKey",
       "module": "_code",
-      "object": "build/obj/_code/003b/FUN_003b5714.o",
+      "object": "build/obj/_code/003b/table23FindRecordByKey.o",
       "size": 220,
-      "source": "src/_code/003b/FUN_003b5714.cpp",
-      "target": "orig/target/_code/003b/FUN_003b5714.o",
+      "source": "src/_code/003b/table23FindRecordByKey.cpp",
+      "target": "orig/target/_code/003b/table23FindRecordByKey.o",
       "thumb": false
     },
     {
@@ -126159,12 +126159,12 @@
     },
     {
       "address": "0x3cdd3c",
-      "function": "FUN_003cdd3c",
+      "function": "conditionalMessageFind",
       "module": "_code",
-      "object": "build/obj/_code/003c/FUN_003cdd3c.o",
+      "object": "build/obj/_code/003c/conditionalMessageFind.o",
       "size": 304,
-      "source": "src/_code/003c/FUN_003cdd3c.cpp",
-      "target": "orig/target/_code/003c/FUN_003cdd3c.o",
+      "source": "src/_code/003c/conditionalMessageFind.cpp",
+      "target": "orig/target/_code/003c/conditionalMessageFind.o",
       "thumb": false
     },
     {
@@ -155699,12 +155699,12 @@
     },
     {
       "address": "0x480da8",
-      "function": "FUN_00480da8",
+      "function": "table8Type5GetValue",
       "module": "_code",
-      "object": "build/obj/_code/0048/FUN_00480da8.o",
+      "object": "build/obj/_code/0048/table8Type5GetValue.o",
       "size": 128,
-      "source": "src/_code/0048/FUN_00480da8.cpp",
-      "target": "orig/target/_code/0048/FUN_00480da8.o",
+      "source": "src/_code/0048/table8Type5GetValue.cpp",
+      "target": "orig/target/_code/0048/table8Type5GetValue.o",
       "thumb": false
     },
     {
@@ -164825,22 +164825,22 @@
     },
     {
       "address": "0x4cceb8",
-      "function": "FUN_004cceb8",
+      "function": "playerGetGrowthParameters",
       "module": "_code",
-      "object": "build/obj/_code/004c/FUN_004cceb8.o",
+      "object": "build/obj/_code/004c/playerGetGrowthParameters.o",
       "size": 192,
-      "source": "src/_code/004c/FUN_004cceb8.cpp",
-      "target": "orig/target/_code/004c/FUN_004cceb8.o",
+      "source": "src/_code/004c/playerGetGrowthParameters.cpp",
+      "target": "orig/target/_code/004c/playerGetGrowthParameters.o",
       "thumb": false
     },
     {
       "address": "0x4ccf78",
-      "function": "FUN_004ccf78",
+      "function": "playerResetToStartingStats",
       "module": "_code",
-      "object": "build/obj/_code/004c/FUN_004ccf78.o",
+      "object": "build/obj/_code/004c/playerResetToStartingStats.o",
       "size": 336,
-      "source": "src/_code/004c/FUN_004ccf78.cpp",
-      "target": "orig/target/_code/004c/FUN_004ccf78.o",
+      "source": "src/_code/004c/playerResetToStartingStats.cpp",
+      "target": "orig/target/_code/004c/playerResetToStartingStats.o",
       "thumb": false
     },
     {
@@ -174213,22 +174213,22 @@
     },
     {
       "address": "0x50d740",
-      "function": "ARM_common_memcpy4_7",
+      "function": "__ARM_common_memcpy4_7",
       "module": "_code",
-      "object": "build/obj/_code/0050/ARM_common_memcpy4_7.o",
+      "object": "build/obj/_code/0050/__ARM_common_memcpy4_7.o",
       "size": 28,
-      "source": "src/_code/0050/ARM_common_memcpy4_7.cpp",
-      "target": "orig/target/_code/0050/ARM_common_memcpy4_7.o",
+      "source": "src/_code/0050/__ARM_common_memcpy4_7.cpp",
+      "target": "orig/target/_code/0050/__ARM_common_memcpy4_7.o",
       "thumb": false
     },
     {
       "address": "0x50d75c",
-      "function": "ARM_common_memcpy4_9",
+      "function": "__ARM_common_memcpy4_9",
       "module": "_code",
-      "object": "build/obj/_code/0050/ARM_common_memcpy4_9.o",
+      "object": "build/obj/_code/0050/__ARM_common_memcpy4_9.o",
       "size": 28,
-      "source": "src/_code/0050/ARM_common_memcpy4_9.cpp",
-      "target": "orig/target/_code/0050/ARM_common_memcpy4_9.o",
+      "source": "src/_code/0050/__ARM_common_memcpy4_9.cpp",
+      "target": "orig/target/_code/0050/__ARM_common_memcpy4_9.o",
       "thumb": false
     },
     {

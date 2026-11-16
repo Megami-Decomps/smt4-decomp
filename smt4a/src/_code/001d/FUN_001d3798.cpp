@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int ARM_common_memcpy4_6(unsigned int *);
+int __ARM_common_memcpy4_6(unsigned int *);
 
 extern unsigned int FUN_001c6da0(unsigned int, unsigned int);
 extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
-/* Supplied declaration required: ARM_common_memcpy4_6. */
+/* Supplied declaration required: __ARM_common_memcpy4_6. */
 
 
 unsigned int FUN_001d3798(int param_1,int param_2,unsigned int *param_3,unsigned int param_4)
@@ -84,7 +84,7 @@ LAB_001d3810:
     puVar8[param_4 * 5 + 0x13] = (temp_v2 >> 0x10) | (temp_v2 << 0x10);
     puVar8[param_4 * 5 + 0x14] = (temp_v6 >> 0x10) | (temp_v6 << 0x10);
     if (param_3[2] != 0) {
-      ARM_common_memcpy4_6(puVar8 + param_4 * 5 + 0x15);
+      __ARM_common_memcpy4_6(puVar8 + param_4 * 5 + 0x15);
       *(unsigned char *)((int)puVar8 + temp_v1 + 0x5a) = 1;
     }
     else {

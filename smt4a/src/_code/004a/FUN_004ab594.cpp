@@ -13,7 +13,7 @@ struct BattlePartySelectionView {
 extern "C" {
 extern BtlUiGlobalsA g_btlUi;
 s32 FUN_002cc9e0(BtlUiObjCA *widget, u32 mode);
-u64 runtimeShiftLeftWide(u64 value, u32 count);
+u64 __aeabi_llsl(u64 value, u32 count);
 
 /* The slot chosen from the reserve mask and from the active-party mask (-1 when none). */
 struct PartySelection {
@@ -38,7 +38,7 @@ u32 FUN_004ab594(void)
     }
     u64 activeMask = selection->activeMask;
     for (s32 i = 0; i < 24; ++i) {
-        if (activeMask & runtimeShiftLeftWide(1, i + 1))
+        if (activeMask & __aeabi_llsl(1, i + 1))
             chosen.active = i;
     }
     s8 reserveId = -1;

@@ -9,7 +9,7 @@ int nodeSetTranslation(...);
 int FUN_0029bb14(...);
 int lightOwnerRegister(...);
 int modelSelectPrimaryMotion(...);
-int ARM_common_memcpy4_8(...);
+int __ARM_common_memcpy4_8(...);
 int textFormatBuffer(...);
 int dataTable2cSub1GetCount(void);
 int VectorSignedToFloat(...);
@@ -24,7 +24,7 @@ extern int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_0029bb14. */
 /* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: modelSelectPrimaryMotion. */
-/* Supplied declaration required: ARM_common_memcpy4_8. */
+/* Supplied declaration required: __ARM_common_memcpy4_8. */
 extern int modelHasLoadedAttachment(int);
 /* Supplied declaration required: textFormatBuffer. */
 extern char *dataTable2cSub1GetRecord(int);
@@ -222,7 +222,7 @@ LAB_002f45c4:
               ;
               piVar3[temp_v3 * 0x11 + 0xd] = temp_v2;
               piVar3[temp_v3 * 0x11 + 0xe] = 2;
-              ARM_common_memcpy4_8(piVar3 + temp_v3 * 0x11 + 0x10,pcVar4 + 0xc);
+              __ARM_common_memcpy4_8(piVar3 + temp_v3 * 0x11 + 0x10,pcVar4 + 0xc);
               piVar3[temp_v3 * 0x11 + 0x15] = -1;
               piVar3 = DAT_00447e10;
               DAT_00447e10[1] = DAT_00447e10[1] + 1;

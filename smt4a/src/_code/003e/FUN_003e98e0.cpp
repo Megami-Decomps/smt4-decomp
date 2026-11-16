@@ -1,4 +1,6 @@
-/* NON_MATCHING: load form of the 64-bit marker flags: retail loads the two words with separate ldr (register r1 base) and both mask words first; the build uses ldm and a different order. */
+/* NON_MATCHING: with the mask read first the loads, their order and every offset match retail; only
+ * the registers of the four words differ (retail: flags in r2/r1 based on r1, mask in r3/ip based on
+ * ip; and the high words are or'ed first). */
 #include "common.h"
 #include "gamedata/GameDataAccess_VariantJ.h"
 
@@ -28,7 +30,8 @@ extern MarkerMasks g_btlMain; /* 0x573920 */
 /* Returns 1 when a marker flag is set, the phase is 1-4, or any of the 32 mark entries has a count; else 0. */
 u32 FUN_003e98e0(MarkerBattleState *battle)
 {
-    if ((battle->markerFlags & g_btlMain.markerMask) == 0 && (u32)(battle->phase - 1) > 3) {
+    u64 mask = g_btlMain.markerMask;
+    if ((battle->markerFlags & mask) == 0 && (u32)(battle->phase - 1) > 3) {
         s32 used = 0;
 
         for (s32 i = 0; i < 0x20; i++) {

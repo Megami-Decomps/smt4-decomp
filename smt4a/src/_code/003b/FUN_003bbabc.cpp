@@ -1,4 +1,3 @@
-/* NON_MATCHING: required-mask load grouping and AND instruction scheduling differ. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -29,10 +28,9 @@ u32 FUN_003bbabc()
     }
     for (s32 slot = 0; slot < 109; ++slot) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[slot];
-        u64 flags = entry->flags;
-        if ((g_btlCandidateMasks.unavailable & flags) &&
-            (g_btlCandidateMasks.required & flags) &&
-            !(flags & g_btlCandidateMasks.excluded) &&
+        if ((entry->flags & g_btlCandidateMasks.unavailable) &&
+            (entry->flags & g_btlCandidateMasks.required) &&
+            !(g_btlCandidateMasks.excluded & entry->flags) &&
             entry->id == unitId &&
             reinterpret_cast<ModifierView *>(entry)->values[index] <= -1) {
             scrSetResult(1);

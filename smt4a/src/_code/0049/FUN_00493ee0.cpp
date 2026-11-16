@@ -1,4 +1,3 @@
-/* NON_MATCHING: The inlined value helper interchanges r4/r5 for record ids and the two comparison values. */
 #include "gamedata/Table8Record.h"
 #include "addon/AocEntryKind.h"
 #include "gamedata/DataTableAccess_VariantD_Table8Record.h"
@@ -46,6 +45,14 @@ static __inline u32 equipmentGetTypeSortValue(u32 id)
     return value;
 }
 
+/* Orders two entries by their secondary key. */
+static s32 compareOrder(const u16 *left, const u16 *right)
+{
+    s32 leftOrder = FUN_0049c9a0(left);
+    s32 rightOrder = FUN_0049c9a0(right);
+    return leftOrder - rightOrder;
+}
+
 /* Sorts descending by the type-specific equipment value, using the normal item order for ties. */
 extern "C" s32 FUN_00493ee0(const u16 *left, const u16 *right)
 {
@@ -53,7 +60,7 @@ extern "C" s32 FUN_00493ee0(const u16 *left, const u16 *right)
     u32 rightValue = equipmentGetTypeSortValue(*right);
     s32 result = rightValue - leftValue;
     if (result == 0) {
-        result = FUN_0049c9a0(left) - FUN_0049c9a0(right);
+        result = compareOrder(left, right);
     }
     return result;
 }

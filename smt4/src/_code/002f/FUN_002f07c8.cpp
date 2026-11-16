@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail's loop-hit exit is `bl scrSetResult; nop; nop; b epilogue` (shared `mov r0,r7` return with r7 = 1) and builds the active-entry result with movne/mov before one shared scrSetResult; the build duplicates the epilogue and keeps the result in r7. */
+/* NON_MATCHING: the active-entry result now matches; retail's loop-hit exit is still `bl scrSetResult; nop; nop; b epilogue` with the shared `mov r0,r7` return (r7 = 1), where the build duplicates the epilogue with `mov r0,#1`. */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
@@ -38,7 +38,11 @@ u32 FUN_002f07c8(void)
             return 1;
         }
     }
-    scrSetResult(activeEntryHasGroupBit(flag));
+    if (activeEntryHasGroupBit(flag)) {
+        scrSetResult(1);
+    } else {
+        scrSetResult(0);
+    }
     return 1;
 }
 }

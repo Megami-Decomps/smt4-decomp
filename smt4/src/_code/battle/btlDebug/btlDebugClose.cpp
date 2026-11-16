@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only: the final flag clear reuses r5 (the job owner) here; retail forms the address in r1 and the value in r2 */
 #include "shard/W6_W6Match8_BattleDebug.h"
 #include "map/mapDepart.h"
 #include "shard/JobWork.h"
@@ -13,8 +12,8 @@ extern void jobStop(u32 job, s32 arg);
 extern void asdMemFree(void *block);
 extern void FUN_0024ef90(u32 job);
 
-/* Shuts down the battle UI block and the popup job, then clears the owner's flag 0. */
-void FUN_0021ec34(u32 handle)
+/* Shuts down the battle UI block and the popup job, then clears the debug-menu bit of the editor mask. */
+void btlDebugClose(u32 handle)
 {
     BattleDebugOwnerView *owner = (BattleDebugOwnerView *)jobGetWork(handle);
 
@@ -35,7 +34,7 @@ void FUN_0021ec34(u32 handle)
     if (jobIsValid(owner->job) != 0) {
         jobStop(owner->job, 0);
     }
-    owner->flags &= ~1;
+    owner->editorMask &= ~1ULL;
 }
 
 } /* extern "C" */

@@ -1,4 +1,3 @@
-/* NON_MATCHING: tie-break item pointer and first order-key result occupy different saved registers; retail copies the second pointer to r6. */
 #include "gamedata/AocItemRef.h"
 
 extern "C" {
@@ -6,15 +5,23 @@ extern "C" {
 extern s32 aocItemGetPrice(const AocItemRef *ref);
 extern u16 FUN_00230f44(const u16 *entry);
 
-/* Compare item references by price, then by the record's order key. */
-s32 FUN_003a06b8(const void *left, const void *right)
+/* Orders two item references by their record's order key. */
+static s32 compareOrder(const AocItemRef *a, const AocItemRef *b)
 {
-    const AocItemRef *a = static_cast<const AocItemRef *>(left);
-    const AocItemRef *b = static_cast<const AocItemRef *>(right);
-    s32 result = aocItemGetPrice(a) - aocItemGetPrice(b);
+    s32 rankA = FUN_00230f44(&a->id);
+    s32 rankB = FUN_00230f44(&b->id);
+    return rankA - rankB;
+}
+
+/* Compare item references by price, then by the record's order key. */
+s32 FUN_003a06b8(const AocItemRef *a, const AocItemRef *b)
+{
+    s32 priceA = aocItemGetPrice(a);
+    s32 priceB = aocItemGetPrice(b);
+    s32 result = priceA - priceB;
 
     if (result == 0) {
-        result = FUN_00230f44(&a->id) - FUN_00230f44(&b->id);
+        result = compareOrder(a, b);
     }
     return result;
 }

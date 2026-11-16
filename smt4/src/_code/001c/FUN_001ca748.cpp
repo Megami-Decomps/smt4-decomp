@@ -8,7 +8,7 @@ extern "C" {
 
 unsigned short* dataTable0cSub1GetText(unsigned short id);
 int dataTable0cLookupById(...);
-int FUN_00288e68(void);
+int table8Type5GetValue(void);
 int FUN_0029212c(...);
 int FUN_0029bd4c(void);
 int buttonHelpShowSkillDetails(...);
@@ -77,7 +77,7 @@ extern int uniteNotBusy(void);
 /* Supplied declaration required: FUN_0026ab64. */
 /* Supplied declaration required: FUN_0026adb4. */
 /* Supplied declaration required: FUN_0026ae68. */
-/* Supplied declaration required: FUN_00288e68. */
+/* Supplied declaration required: table8Type5GetValue. */
 /* Supplied declaration required: FUN_0029212c. */
 extern int FUN_00293ac0(void);
 /* Supplied declaration required: devilCreateRaceEffect. */
@@ -1350,7 +1350,7 @@ LAB_001cc6b4:
   if (temp_v15 == temp_v8 - 1) {
     temp_v1 = *(unsigned short *)(temp_v2 + 0x2380);
     temp_v11 = (unsigned int)temp_v1;
-    FUN_00288e68();
+    table8Type5GetValue();
     if (temp_v11 != 0) {
       buttonHelpShowSkillDetails();
       *(int *)(temp_v2 + 0x40c) = *(int *)(temp_v2 + 0x40c) + 1;
@@ -1363,7 +1363,7 @@ LAB_001cc6b4:
       temp_v6 = FUN_0029efa8(temp_v6);
       temp_v1 = *(unsigned short *)(temp_v2 + temp_v6 * 2 + 0x2370);
       temp_v11 = (unsigned int)temp_v1;
-      FUN_00288e68();
+      table8Type5GetValue();
       if (temp_v11 != 0) {
         buttonHelpShowSkillDetails();
         *(int *)(temp_v2 + 0x40c) = *(int *)(temp_v2 + 0x40c) + 1;

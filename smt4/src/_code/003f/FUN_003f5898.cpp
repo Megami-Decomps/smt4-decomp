@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int ARM_common_memcpy4_6(unsigned char [8], int);
+int __ARM_common_memcpy4_6(unsigned char [8], int);
 int nn_snd_CTR_DecodeAdpcmData(int, int, int, unsigned char [8], unsigned int);
 
 typedef int romwright_code(...);
@@ -16,7 +16,7 @@ typedef struct {
 extern romwright_code *DAT_0044e918; /* 0x44e918 */
 extern romwright_code *DAT_0044e91c; /* 0x44e91c */
 
-/* Supplied declaration required: ARM_common_memcpy4_6. */
+/* Supplied declaration required: __ARM_common_memcpy4_6. */
 extern unsigned int FUN_00360060(int, unsigned int, unsigned int);
 extern int __aeabi_uidivmod(unsigned int, unsigned int);
 /* Supplied declaration required: nn_snd_CTR_DecodeAdpcmData. */
@@ -86,7 +86,7 @@ unsigned int FUN_003f5898(int *param_1,int param_2,unsigned int param_3)
       temp_v4 = 0;
       if (temp_v4 < temp_v3) {
         do {
-          ARM_common_memcpy4_6(temp_v7,param_2 + 0x20);
+          __ARM_common_memcpy4_6(temp_v7,param_2 + 0x20);
           nn_snd_CTR_DecodeAdpcmData(param_2 + 0x26,param_1[3],param_2,temp_v7,temp_v1);
           puVar4 = (unsigned short *)(param_1[3] + 0x20);
           if (0 < (int)(temp_v1 - 0x20)) {
@@ -111,7 +111,7 @@ unsigned int FUN_003f5898(int *param_1,int param_2,unsigned int param_3)
       }
     }
     else {
-      ARM_common_memcpy4_6(temp_v7,param_2 + 0x20);
+      __ARM_common_memcpy4_6(temp_v7,param_2 + 0x20);
       nn_snd_CTR_DecodeAdpcmData(param_2 + 0x26,*param_1,param_2,temp_v7,temp_v1);
     }
   }

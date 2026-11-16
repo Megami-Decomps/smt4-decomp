@@ -12,7 +12,7 @@ struct BattleDebugOwnerView {
     u8 unk0000[0x5c];
     u32 job;
     u8 unk0060[0x4448];
-    u32 flags;
+    u64 editorMask;     /* 0x44A8: BtlMainState::editorMask, bit 0 = the debug menu is open */
 };
 struct BattleDebugWork {
     u32 state;
@@ -32,7 +32,7 @@ extern "C" {
 extern BattleDebugGlobals g_btlDebugState;
 void btlDebugOpen(BtlMainState *state, s32 menuMode);
 s32 btlDebugDispatchCurrentJob(u32 handle);
-void FUN_0021ec34(u32 handle);
+void btlDebugClose(u32 handle);
 }
 
 extern "C" {

@@ -2,7 +2,7 @@
 #include "classes/Obj557f00.h"
 extern "C" {
 u64 resourceGetWideHandle(u32 handle);
-u64 runtimeShiftLeftWide(u64 value, u32 shift);
+u64 __aeabi_llsl(u64 value, u32 shift);
 void *rt_memcpy(void *destination, const void *source, u32 size);
 s32 deferredTransferEnqueue(u32 handle, const void *pixels, u32 size);
 }
@@ -10,7 +10,7 @@ s32 deferredTransferEnqueue(u32 handle, const void *pixels, u32 size);
 bool Obj557f00::read(void *source, u32 size)
 {
     u64 previous = submitted;
-    u64 consumed = runtimeShiftLeftWide(resourceGetWideHandle(handle), description->height);
+    u64 consumed = __aeabi_llsl(resourceGetWideHandle(handle), description->height);
     u32 available = capacity - (u32)(previous - consumed);
     u32 tailSpace = capacity - cursor;
     u32 offset = cursor;

@@ -1,4 +1,3 @@
-/* NON_MATCHING: Readiness tests are if-converted and large byte-field offsets use separate literals instead of shared subobject bases. */
 #include "gfx/FrameTextureWork.h"
 #include "shard/JobWork.h"
 
@@ -11,8 +10,16 @@ s32 stateValuesGetBySelector(u32 selector);
 u32 FUN_0013c6d4(u32 job)
 {
     FrameTextureWork *work = (FrameTextureWork *)jobGetWork(job);
-    if (stateValuesGetBySelector(0) == 0 && work->unkFA4 && work->unkFA5 &&
-        work->unkFAE && work->unk1490 && !work->unk148C) {
+    if (stateValuesGetBySelector(0) != 0 || !work->unkFA4 || !work->unkFA5) {
+        return 0;
+    }
+    if (!work->unkFAE) {
+        return 0;
+    }
+    if (!work->unk1490) {
+        return 0;
+    }
+    if (!work->unk148C) {
         if (work->unk1494) {
             FUN_001537b0(0);
         } else {

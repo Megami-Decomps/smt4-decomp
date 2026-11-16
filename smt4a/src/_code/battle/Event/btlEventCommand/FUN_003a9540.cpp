@@ -1,4 +1,3 @@
-/* NON_MATCHING: uniform-scale helper restores XYZ argument allocation; success-result materialization and shared return branches remain different. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 
@@ -17,7 +16,8 @@ static __inline void battleModelSetUniformScale(u32 *owner, f32 scale)
     callOnHandleField4D(owner, scale, scale, scale);
 }
 
-// Load the scripted battle model, then finish once its asynchronous load completes.
+/* Script command: on frame zero starts loading the battle model named by argument 0 (unless one
+ * is already loaded); later frames finish once the asynchronous load completes (scale 0.01). */
 u32 FUN_003a9540(void)
 {
     BtlMainStateA *state = btlGetMainState();
@@ -27,22 +27,20 @@ u32 FUN_003a9540(void)
             FUN_004d854c(state->eventModel.owner);
             battleModelSetUniformScale(state->eventModel.owner, 0.01f);
             state->eventModel.loaded = 1;
-            ready = 1;
         }
-        return ready;
-    } else {
-        const char *name = scrGetArgString(0);
-        char path[64] = {};
-        textFormatBuffer(path, "battle/model/%s.bam", name);
-        if (state->eventModel.owner == NULL) {
-            u32 *owner = (u32 *)FUN_00178b04(0x24,
-                "c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\Event\\btlEventCommand.cpp", 0x54b);
-            if (owner != NULL)
-                owner = battleModelOwnerInitialize(owner);
-            state->eventModel.owner = owner;
-            modelOwnerLoadNamed(owner, path);
-            return 0;
-        }
+        return ready != 0;
+    }
+    const char *name = scrGetArgString(0);
+    char path[64] = {};
+    textFormatBuffer(path, "battle/model/%s.bam", name);
+    if (state->eventModel.owner == NULL) {
+        u32 *owner = (u32 *)FUN_00178b04(0x24,
+            "c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\Event\\btlEventCommand.cpp", 0x54b);
+        if (owner != NULL)
+            owner = battleModelOwnerInitialize(owner);
+        state->eventModel.owner = owner;
+        modelOwnerLoadNamed(owner, path);
+        return 0;
     }
     return 1;
 }

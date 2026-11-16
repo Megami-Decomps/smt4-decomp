@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler places the shared zero-HP store in the demon branch rather than the player branch. */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "shard/Shard0031.h"
@@ -23,13 +22,15 @@ void FUN_0033a670(BtlMainState *battle)
             if (entry->equipA != NULL) {
                 unitStateClearEventBits(&reinterpret_cast<PlayerEventView *>(entry->equipA)->flags);
                 BtlEquip *unit = entry->equipA;
-                if (reinterpret_cast<PlayerEventView *>(unit)->flags & 2)
-                    unit->hp = 0;
+                if (!(reinterpret_cast<PlayerEventView *>(unit)->flags & 2))
+                    continue;
+                unit->hp = 0;
             } else if (entry->equipB != NULL) {
                 unitStateClearEventBits(&reinterpret_cast<DemonEventView *>(entry->equipB)->flags);
                 BtlEquip *unit = entry->equipB;
-                if (reinterpret_cast<DemonEventView *>(unit)->flags & 2)
-                    unit->hp = 0;
+                if (!(reinterpret_cast<DemonEventView *>(unit)->flags & 2))
+                    continue;
+                unit->hp = 0;
             } else if (entry->reserve != NULL) {
                 unitStateClearEventBits(&reinterpret_cast<DemonEventView *>(entry->reserve)->flags);
             }

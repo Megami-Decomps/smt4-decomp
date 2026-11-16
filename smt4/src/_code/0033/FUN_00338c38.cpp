@@ -1,4 +1,3 @@
-/* NON_MATCHING: the final flags |= 0x8000000 uses r0 as its temporary; retail uses r1. */
 #include "battle/BattleUnitSlot.h"
 #include "shard/W4_Match6_BtlScript.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
@@ -22,10 +21,10 @@ void FUN_00338c38(BtlMainState *script)
         if (unit == NULL || (unit->flags & BTL_UNIT_FLAG_BUSY_A) == 0) {
             if (unit == NULL || (unit->flags & BTL_UNIT_FLAG_BUSY_B) == 0) {
                 if (FUN_002b6ad0() != 0 && btlFindNthActiveSpecialEntry(script, 1) < 0) {
-                    if ((script->battleFlags & 0x200) == 0) {
-                        if ((script->battleFlags & 0x8000000) == 0) {
+                    if ((script->battleMask & 0x200) == 0) {
+                        if ((script->battleMask & 0x8000000) == 0) {
                             script->pending = FUN_00245a7c(0, script->pending);
-                            script->battleFlags |= 0x8000000;
+                            script->battleMask |= 0x8000000;
                         }
                     }
                 }

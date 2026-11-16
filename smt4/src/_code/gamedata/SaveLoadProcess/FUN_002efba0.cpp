@@ -29,7 +29,7 @@ const void *gameDataBlocksGetTable(void);
 const void *configGetSettings(void);
 void rt_memcpy(void *destination, const void *source, u32 size);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
-void ARM_common_memcpy4_8(void *destination, const void *settings);
+void __ARM_common_memcpy4_8(void *destination, const void *settings);
 void FUN_0026b4cc(void);
 void FUN_00247af8(s32 operation, s32 flags, u32 slot, void *buffer, u32 size);
 extern SaveByteSettings g_byteSettings;
@@ -46,7 +46,7 @@ s32 FUN_002efba0(u32 process)
         titleConfigStoreOptions();
         gameDataBlocksGetSaveData()->metadata.option = work->option;
         rt_memcpy(work->buffer, gameDataBlocksGetTable(), 0x80);
-        ARM_common_memcpy4_8(((SaveFilePayloadIV *)work->buffer)->settings, configGetSettings());
+        __ARM_common_memcpy4_8(((SaveFilePayloadIV *)work->buffer)->settings, configGetSettings());
         SaveWriteBodyPrefix *body = (SaveWriteBodyPrefix *)((SaveFilePayloadIV *)work->buffer)->save;
         __aeabi_memcpy4(body, gameDataBlocksGetSaveData(), 0x24D28);
         body->version = 3;

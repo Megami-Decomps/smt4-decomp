@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only in the last 64-bit mask AND (retail writes the result over the loaded mask: and r0,r0,r2 / and r1,r1,r3). */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -39,9 +38,8 @@ u32 FUN_0038b8b8(void)
     if (enabled != 0 && state->idsBegin != state->idsEnd) {
         for (s32 i = 0; i < 109; i++) {
             BtlCombatantEntryA *record = &btlGetMainState()->entries[i];
-            u64 mask = record->flags;
-            if ((g_btlCandidateMasks.unavailable & mask) != 0 && (g_btlCandidateMasks.required & mask) != 0 &&
-                (g_btlCandidateMasks.excluded & mask) == 0) {
+            if ((g_btlCandidateMasks.unavailable & record->flags) != 0 && (g_btlCandidateMasks.required & record->flags) != 0 &&
+                (g_btlCandidateMasks.excluded & record->flags) == 0) {
                 for (s32 slot = 0; slot < 21; slot++) {
                     if (group == record->encodedStats.values[slot] >> 10) {
                         for (const u16 *id = state->idsBegin; id != state->idsEnd; id++) {

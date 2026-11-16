@@ -18,7 +18,7 @@ u32 FUN_00334140(BattleArrangementWork *work, BtlMainState *battle)
 {
     s32 index = btlFindNthActiveSpecialEntry(battle, 1);
     if (index >= 0) {
-        battle->battleFlags |= 0x4000000;
+        battle->battleMask |= 0x4000000;
         const Table00Record *record = dataTable00FindById(battle->entries[index].id);
         char path[128];
         memClear(path, sizeof(path));

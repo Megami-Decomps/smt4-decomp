@@ -8,16 +8,16 @@ typedef struct Record {
 } Record;
 
 Record *table8Type5FindById(u32 id);
-int FUN_00288e68(u32 id);
+int table8Type5GetValue(u32 id);
 int FUN_0028d1f4(int value);
 
-/* Comparator on two u16 ids: orders by the FUN_0028d1f4(FUN_00288e68(id)) key, then by the records' `order`. */
+/* Comparator on two u16 ids: orders by the FUN_0028d1f4(table8Type5GetValue(id)) key, then by the records' `order`. */
 int FUN_002dcce0(u16 *a, u16 *b)
 {
     Record *recordA = table8Type5FindById(*a);
     Record *recordB = table8Type5FindById(*b);
-    int keyA = FUN_0028d1f4(FUN_00288e68(*a));
-    int keyB = FUN_0028d1f4(FUN_00288e68(*b));
+    int keyA = FUN_0028d1f4(table8Type5GetValue(*a));
+    int keyB = FUN_0028d1f4(table8Type5GetValue(*b));
     int result = keyA - keyB;
 
     if (result == 0) {

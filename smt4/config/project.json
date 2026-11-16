@@ -23287,12 +23287,12 @@
     },
     {
       "address": "0x1c3600",
-      "function": "FUN_001c3600",
+      "function": "scrollSelectionClampToCount",
       "module": "_code",
-      "object": "build/obj/_code/001c/FUN_001c3600.o",
+      "object": "build/obj/_code/001c/scrollSelectionClampToCount.o",
       "size": 136,
-      "source": "src/_code/001c/FUN_001c3600.cpp",
-      "target": "orig/target/_code/001c/FUN_001c3600.o",
+      "source": "src/_code/001c/scrollSelectionClampToCount.cpp",
+      "target": "orig/target/_code/001c/scrollSelectionClampToCount.o",
       "thumb": false
     },
     {
@@ -25958,12 +25958,12 @@
     },
     {
       "address": "0x1ec9e4",
-      "function": "FUN_001ec9e4",
+      "function": "jobSetFlagsByMode",
       "module": "_code",
-      "object": "build/obj/_code/001e/FUN_001ec9e4.o",
+      "object": "build/obj/_code/001e/jobSetFlagsByMode.o",
       "size": 364,
-      "source": "src/_code/001e/FUN_001ec9e4.cpp",
-      "target": "orig/target/_code/001e/FUN_001ec9e4.o",
+      "source": "src/_code/001e/jobSetFlagsByMode.cpp",
+      "target": "orig/target/_code/001e/jobSetFlagsByMode.o",
       "thumb": false
     },
     {
@@ -28793,12 +28793,12 @@
     {
       "address": "0x207f68",
       "file": "battle/btlEncount",
-      "function": "FUN_00207f68",
+      "function": "btlEncountInitialize",
       "module": "_code",
-      "object": "build/obj/_code/battle/btlEncount/FUN_00207f68.o",
+      "object": "build/obj/_code/battle/btlEncount/btlEncountInitialize.o",
       "size": 296,
-      "source": "src/_code/battle/btlEncount/FUN_00207f68.cpp",
-      "target": "orig/target/_code/battle/btlEncount/FUN_00207f68.o",
+      "source": "src/_code/battle/btlEncount/btlEncountInitialize.cpp",
+      "target": "orig/target/_code/battle/btlEncount/btlEncountInitialize.o",
       "thumb": false
     },
     {
@@ -31346,12 +31346,12 @@
     {
       "address": "0x21ec34",
       "file": "battle/btlDebug",
-      "function": "FUN_0021ec34",
+      "function": "btlDebugClose",
       "module": "_code",
-      "object": "build/obj/_code/battle/btlDebug/FUN_0021ec34.o",
+      "object": "build/obj/_code/battle/btlDebug/btlDebugClose.o",
       "size": 160,
-      "source": "src/_code/battle/btlDebug/FUN_0021ec34.cpp",
-      "target": "orig/target/_code/battle/btlDebug/FUN_0021ec34.o",
+      "source": "src/_code/battle/btlDebug/btlDebugClose.cpp",
+      "target": "orig/target/_code/battle/btlDebug/btlDebugClose.o",
       "thumb": false
     },
     {
@@ -38534,12 +38534,12 @@
     },
     {
       "address": "0x2454f0",
-      "function": "ARM_common_memcpy4_9",
+      "function": "__ARM_common_memcpy4_9",
       "module": "_code",
-      "object": "build/obj/_code/0024/ARM_common_memcpy4_9.o",
+      "object": "build/obj/_code/0024/__ARM_common_memcpy4_9.o",
       "size": 28,
-      "source": "src/_code/0024/ARM_common_memcpy4_9.cpp",
-      "target": "orig/target/_code/0024/ARM_common_memcpy4_9.o",
+      "source": "src/_code/0024/__ARM_common_memcpy4_9.cpp",
+      "target": "orig/target/_code/0024/__ARM_common_memcpy4_9.o",
       "thumb": false
     },
     {
@@ -40085,12 +40085,12 @@
     },
     {
       "address": "0x24db9c",
-      "function": "runtimeShiftLeftWide",
+      "function": "__aeabi_llsl",
       "module": "_code",
-      "object": "build/obj/_code/0024/runtimeShiftLeftWide.o",
+      "object": "build/obj/_code/0024/__aeabi_llsl.o",
       "size": 40,
-      "source": "src/_code/0024/runtimeShiftLeftWide.cpp",
-      "target": "orig/target/_code/0024/runtimeShiftLeftWide.o",
+      "source": "src/_code/0024/__aeabi_llsl.cpp",
+      "target": "orig/target/_code/0024/__aeabi_llsl.o",
       "thumb": false
     },
     {
@@ -40225,12 +40225,12 @@
     },
     {
       "address": "0x24ee4c",
-      "function": "ARM_common_memcpy4_7",
+      "function": "__ARM_common_memcpy4_7",
       "module": "_code",
-      "object": "build/obj/_code/0024/ARM_common_memcpy4_7.o",
+      "object": "build/obj/_code/0024/__ARM_common_memcpy4_7.o",
       "size": 28,
-      "source": "src/_code/0024/ARM_common_memcpy4_7.cpp",
-      "target": "orig/target/_code/0024/ARM_common_memcpy4_7.o",
+      "source": "src/_code/0024/__ARM_common_memcpy4_7.cpp",
+      "target": "orig/target/_code/0024/__ARM_common_memcpy4_7.o",
       "thumb": false
     },
     {
@@ -45886,12 +45886,12 @@
     },
     {
       "address": "0x27d614",
-      "function": "FUN_0027d614",
+      "function": "conditionalMessageFind",
       "module": "_code",
-      "object": "build/obj/_code/0027/FUN_0027d614.o",
+      "object": "build/obj/_code/0027/conditionalMessageFind.o",
       "size": 304,
-      "source": "src/_code/0027/FUN_0027d614.cpp",
-      "target": "orig/target/_code/0027/FUN_0027d614.o",
+      "source": "src/_code/0027/conditionalMessageFind.cpp",
+      "target": "orig/target/_code/0027/conditionalMessageFind.o",
       "thumb": false
     },
     {
@@ -45906,12 +45906,12 @@
     },
     {
       "address": "0x27d7b0",
-      "function": "FUN_0027d7b0",
+      "function": "table23FindRecordByKey",
       "module": "_code",
-      "object": "build/obj/_code/0027/FUN_0027d7b0.o",
+      "object": "build/obj/_code/0027/table23FindRecordByKey.o",
       "size": 220,
-      "source": "src/_code/0027/FUN_0027d7b0.cpp",
-      "target": "orig/target/_code/0027/FUN_0027d7b0.o",
+      "source": "src/_code/0027/table23FindRecordByKey.cpp",
+      "target": "orig/target/_code/0027/table23FindRecordByKey.o",
       "thumb": false
     },
     {
@@ -47776,12 +47776,12 @@
     },
     {
       "address": "0x288e68",
-      "function": "FUN_00288e68",
+      "function": "table8Type5GetValue",
       "module": "_code",
-      "object": "build/obj/_code/0028/FUN_00288e68.o",
+      "object": "build/obj/_code/0028/table8Type5GetValue.o",
       "size": 128,
-      "source": "src/_code/0028/FUN_00288e68.cpp",
-      "target": "orig/target/_code/0028/FUN_00288e68.o",
+      "source": "src/_code/0028/table8Type5GetValue.cpp",
+      "target": "orig/target/_code/0028/table8Type5GetValue.o",
       "thumb": false
     },
     {
@@ -54867,12 +54867,12 @@
     },
     {
       "address": "0x2ad8b4",
-      "function": "ARM_common_memcpy4_8",
+      "function": "__ARM_common_memcpy4_8",
       "module": "_code",
-      "object": "build/obj/_code/002a/ARM_common_memcpy4_8.o",
+      "object": "build/obj/_code/002a/__ARM_common_memcpy4_8.o",
       "size": 20,
-      "source": "src/_code/002a/ARM_common_memcpy4_8.cpp",
-      "target": "orig/target/_code/002a/ARM_common_memcpy4_8.o",
+      "source": "src/_code/002a/__ARM_common_memcpy4_8.cpp",
+      "target": "orig/target/_code/002a/__ARM_common_memcpy4_8.o",
       "thumb": false
     },
     {
@@ -58526,12 +58526,12 @@
     },
     {
       "address": "0x2bd808",
-      "function": "ARM_common_memcpy4_6",
+      "function": "__ARM_common_memcpy4_6",
       "module": "_code",
-      "object": "build/obj/_code/002b/ARM_common_memcpy4_6.o",
+      "object": "build/obj/_code/002b/__ARM_common_memcpy4_6.o",
       "size": 20,
-      "source": "src/_code/002b/ARM_common_memcpy4_6.cpp",
-      "target": "orig/target/_code/002b/ARM_common_memcpy4_6.o",
+      "source": "src/_code/002b/__ARM_common_memcpy4_6.cpp",
+      "target": "orig/target/_code/002b/__ARM_common_memcpy4_6.o",
       "thumb": false
     },
     {
@@ -62215,12 +62215,12 @@
     },
     {
       "address": "0x2cc1c0",
-      "function": "FUN_002cc1c0",
+      "function": "asd3dSoundActorSetPosition",
       "module": "_code",
-      "object": "build/obj/_code/002c/FUN_002cc1c0.o",
+      "object": "build/obj/_code/002c/asd3dSoundActorSetPosition.o",
       "size": 104,
-      "source": "src/_code/002c/FUN_002cc1c0.cpp",
-      "target": "orig/target/_code/002c/FUN_002cc1c0.o",
+      "source": "src/_code/002c/asd3dSoundActorSetPosition.cpp",
+      "target": "orig/target/_code/002c/asd3dSoundActorSetPosition.o",
       "thumb": false
     },
     {

@@ -16,7 +16,7 @@ int partyPanelHasSlotValue(...);
 int FUN_00262d40(void);
 int campRebuildOwnedInventoryCategory(...);
 int FUN_00282f80(...);
-int FUN_00288e68(void);
+int table8Type5GetValue(void);
 int FUN_002898e4(void);
 int FUN_0028b7f8(...);
 int buttonHelpCreate(void);
@@ -71,7 +71,7 @@ extern int FUN_00262cb0(unsigned int);
 extern unsigned int statusGetAvailableChoiceCount(void);
 /* Supplied declaration required: FUN_0026c868. */
 /* Supplied declaration required: FUN_00282f80. */
-/* Supplied declaration required: FUN_00288e68. */
+/* Supplied declaration required: table8Type5GetValue. */
 /* Supplied declaration required: FUN_002898e4. */
 /* Supplied declaration required: FUN_0028b7f8. */
 /* Supplied declaration required: buttonHelpCreate. */
@@ -180,7 +180,7 @@ void FUN_0028a420(void)
   temp_v6 = 0;
   while( 1 ) {
     temp_v0 = FUN_00262cb0(temp_v7 & 0xffff);
-    if ((temp_v0 != 0) && (temp_v1 = temp_v7, FUN_00288e68(), temp_v1 != 0)) {
+    if ((temp_v0 != 0) && (temp_v1 = temp_v7, table8Type5GetValue(), temp_v1 != 0)) {
       temp_v0 = temp_v6 * 2;
       temp_v6 = temp_v6 + 1;
       *(short *)((int)puVar1 + temp_v0 + 0x1db4) = (short)temp_v7;

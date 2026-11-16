@@ -1,5 +1,5 @@
-/* NON_MATCHING: only the zero-fill differs: retail reloads the work pointer from the global after the allocation join and fills it before the process literal load; the build forwards the allocation result and stores first. */
 #include "event/2dEvent/EventEffect.h"
+#include <string.h>
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -27,6 +27,8 @@ u32 taskCreateDraw(const char *name, s32 priority, s32 flags, s32 owner,
 void *textureGetIndexedResource(u32 index);
 void asdTMTexTableLoadTmx(u32 table, s32 flags);
 
+/* Starts the event screen filter `kind`: (re)allocates and clears its work, creates its update
+ * process and the two upper-screen draw tasks, and loads the filter's texture. */
 void eventFilterStart(u32 kind)
 {
     if (g_eventEffect.filterState.work == NULL) {
@@ -34,10 +36,8 @@ void eventFilterStart(u32 kind)
         g_eventEffect.filterState.work = static_cast<EventFilterWork *>(
             asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(EventFilterWork), 1));
     }
+    memset(g_eventEffect.filterState.work, 0, sizeof(EventFilterWork));
     EventFilterWork *work = g_eventEffect.filterState.work;
-    for (u32 word = 0; word < sizeof(EventFilterWork) / sizeof(u32); ++word) {
-        reinterpret_cast<u32 *>(work)[word] = 0;
-    }
     work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EvtFilter Calc"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_002a41a0), NULL, NULL);
     taskCreateDraw("EvtFilter DrawUpLeft", 0x85, 0, 0, FUN_002a3f54, NULL, NULL, work->job);
     taskCreateDraw("EvtFilter DrawUpRight", 0xe1, 0, 0, FUN_002a3f54, NULL, NULL, work->job);

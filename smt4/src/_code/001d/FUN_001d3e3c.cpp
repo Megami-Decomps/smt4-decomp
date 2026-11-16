@@ -159,7 +159,7 @@ int navigationSetArguments(...);
 int FUN_0027d5ac(...);
 int actorApplyAlpha(void);
 int dataTableGetRecord23(void);
-int FUN_0027d7b0(...);
+int table23FindRecordByKey(...);
 int mapIfSetMode2(void);
 int FUN_0027d8b4(...);
 int mapClearPendingEntries(void);
@@ -443,7 +443,7 @@ extern int questMapSetCursor(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0027d5ac. */
 /* Supplied declaration required: actorApplyAlpha. */
 /* Supplied declaration required: dataTableGetRecord23. */
-/* Supplied declaration required: FUN_0027d7b0. */
+/* Supplied declaration required: table23FindRecordByKey. */
 /* Supplied declaration required: mapIfSetMode2. */
 /* Supplied declaration required: FUN_0027d8b4. */
 extern int FUN_0027d8c8(void);
@@ -712,7 +712,7 @@ unsigned int FUN_001d3e3c(void)
       DAT_0049f924 = DAT_0049fd20;
       if (DAT_0049fd1c != -1) {
         temp_v6 = puVar7[0x10];
-        FUN_0027d7b0(temp_v6,puVar7[0x12]);
+        table23FindRecordByKey(temp_v6,puVar7[0x12]);
         if (temp_v6 != -1) {
           temp_v4 = dataTableGetRecord23();
           temp_v6 = g_lmapScene;
@@ -3077,7 +3077,7 @@ LAB_001d884c:
     }
     puVar7[4] = 0;
     temp_v6 = DAT_0049f990;
-    FUN_0027d7b0(DAT_0049f990,DAT_0049f994,DAT_0049f998);
+    table23FindRecordByKey(DAT_0049f990,DAT_0049f994,DAT_0049f998);
     if (temp_v6 != -1) {
       pcVar9 = (char *)dataTableGetRecord23();
       mapDepartSetTarget((int)*pcVar9,(int)pcVar9[1],pcVar9[2]);
@@ -3097,7 +3097,7 @@ LAB_001d884c:
     puVar7[0x10] = DAT_0049fd14;
     DAT_0049f920 = DAT_0049fd18;
     puVar7[0x12] = DAT_0049fd18;
-    FUN_0027d7b0(puVar7[0x10],puVar7[0x12],DAT_0049fd1c);
+    table23FindRecordByKey(puVar7[0x10],puVar7[0x12],DAT_0049fd1c);
     temp_v4 = dataTableGetRecord23();
     temp_v6 = g_lmapScene;
     temp_v7 = VectorSignedToFloat((int)*(short *)(temp_v4 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);

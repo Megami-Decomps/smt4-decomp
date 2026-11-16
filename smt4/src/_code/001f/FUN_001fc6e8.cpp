@@ -37,7 +37,7 @@ int FUN_003d9be4(...);
 int FUN_001d2628(...);
 int btlEventTaskStart(...);
 int btlEffectCreate(...);
-int FUN_00207f68(...);
+int btlEncountInitialize(...);
 int FUN_0021ae40(...);
 int btlUiRefreshSlotRanks(...);
 int pickerAdvance(...);
@@ -128,7 +128,7 @@ extern int DAT_0049fb9c; /* 0x49fb9c */
 /* Supplied declaration required: FUN_001f7fac. */
 /* Supplied declaration required: btlEffectCreate. */
 /* Supplied declaration required: FUN_001f8290. */
-/* Supplied declaration required: FUN_00207f68. */
+/* Supplied declaration required: btlEncountInitialize. */
 /* Supplied declaration required: FUN_0021ae40. */
 /* Supplied declaration required: btlGameOverCreateTasks. */
 extern int gameDataEntryGetLevel(short);
@@ -415,7 +415,7 @@ void FUN_001fc6e8(unsigned int param_1)
     if (temp_v3 == 0) {
       btlEventTaskStart(temp_v4);
     }
-    FUN_00207f68(temp_v4);
+    btlEncountInitialize(temp_v4);
     return;
   case 5:
     if ((*(unsigned int *)(temp_v4 + 0x44a0) & 0x200) == 0) {

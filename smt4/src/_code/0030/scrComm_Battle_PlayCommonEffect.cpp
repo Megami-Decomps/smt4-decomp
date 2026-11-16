@@ -14,7 +14,7 @@ extern const char DAT_00400434[];
 s32 scrGetArg(s32 index);
 s32 FUN_0027e3b8(u32 event);
 s32 FUN_0024550c(BtlEffectOwner *owner);
-void ARM_common_memcpy4_9(char *destination, const char *source);
+void __ARM_common_memcpy4_9(char *destination, const char *source);
 void FUN_00245420(s32 actor, u32 unit, BtlActionRecord *target, u32 value, s32 effect, s32 lookup, s32 extra);
 void FUN_001b1a48(s32 effect, u32 unit, BtlEffectSlotBlock *slots, s32 flags, s32 firstMember, s32 secondMember);
 
@@ -28,7 +28,7 @@ u32 scrComm_Battle_PlayCommonEffect(void)
     if (effect != 0) {
         {
             char name[32] = {0};
-            ARM_common_memcpy4_9(name, effect < 0 ? DAT_00400428 : DAT_00400434);
+            __ARM_common_memcpy4_9(name, effect < 0 ? DAT_00400428 : DAT_00400434);
             FUN_002454c4(DAT_00435d18, reinterpret_cast<u32>(name), 1, 0);
         }
         u32 unit = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));

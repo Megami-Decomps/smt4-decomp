@@ -33,7 +33,7 @@ NewGameSlotTable *gameGetSlotTable(void);
 void flagValueAdd(s32 flag, s32 amount);
 void sysMemClear(void *block, u32 size);
 char *strncpy(char *destination, const char *source, u32 count);
-void FUN_004ccf78(s32 arg);
+void playerResetToStartingStats(s32 arg);
 void FUN_003df7c4(s32 arg);
 void FUN_00284fdc(void);
 void gameDataBlocksClearSlots(void);
@@ -72,7 +72,7 @@ void FUN_00283d74(s32 loaded)
     *(u16 *)(player + 0x60) = 0;
     strncpy(record->name, DAT_005311fc, 0x12);
     player[0x5D] = 0;
-    FUN_004ccf78(0);
+    playerResetToStartingStats(0);
     for (u32 i = 0; i < 7; i++) {
         record->stock[i] = stockIds[i];
     }

@@ -58,11 +58,13 @@ struct BtlUnitSource {
 };
 
 typedef struct BtlEntry {
-    /* 0x000 */ u32 flags;
     union {
-        /* 0x004 */ u8 unk004[0x6A];
+        /* 0x000 */ u32 flags;
+        /* 0x000 */ u64 flagMask;       /* flags (low word) and the next word, updated as one mask */
+    };
+    union {
+        /* 0x008 */ u8 unk008[0x66];
         struct {
-            /* 0x004 */ u8 unk004[4];
             /* 0x008 */ s16 ids[50];
         } members;
     };

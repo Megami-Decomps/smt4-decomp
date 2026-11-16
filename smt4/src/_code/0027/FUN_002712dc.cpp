@@ -41,7 +41,7 @@ int mapIfReleaseSlot1(void);
 int mapDestroySecondaryModel(...);
 int mapIfReleaseSlot2(void);
 int mapIfReleaseSlot3(void);
-int FUN_0027d7b0(...);
+int table23FindRecordByKey(...);
 int slotSetRequest(...);
 int FUN_002bf810(...);
 int lmapFindNearestMatchingTargetPoint(...);
@@ -236,7 +236,7 @@ extern int mapIfHasSelection(void);
 extern int inputIsQuestMenuPressed(void);
 /* Supplied declaration required: mapIfSetMode1. */
 extern int dataTableGetRecord23(void);
-/* Supplied declaration required: FUN_0027d7b0. */
+/* Supplied declaration required: table23FindRecordByKey. */
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: partyApplyStatusMask. */
 /* Supplied declaration required: partyApplyPercentHealthDamage. */
@@ -2131,7 +2131,7 @@ LAB_002c9a70:
         mapIfActivateRecord(1,DAT_0049f99c);
         temp_v7 = FUN_0027ee9c();
         if (temp_v7 != 0) {
-          FUN_0027d7b0(DAT_0049f990,DAT_0049f994,DAT_0049f998);
+          table23FindRecordByKey(DAT_0049f990,DAT_0049f994,DAT_0049f998);
           temp_v7 = dataTableGetRecord23();
           piVar22 = g_lmapScene;
           if (DAT_0049f968 != 0) {
@@ -2802,7 +2802,7 @@ LAB_002e94f0:
                   mapIfActivateRecord(1,DAT_0049f99c);
                   temp_v7 = FUN_0027ee9c();
                   if (temp_v7 != 0) {
-                    FUN_0027d7b0(DAT_0049f990,DAT_0049f994,DAT_0049f998);
+                    table23FindRecordByKey(DAT_0049f990,DAT_0049f994,DAT_0049f998);
                     piVar22 = g_lmapScene;
                     g_lmapScene[0x28] = DAT_0049f9a0;
                     piVar22[0x29] = (int)(DAT_0049f9a4 - 500.0f);

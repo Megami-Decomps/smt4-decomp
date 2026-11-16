@@ -1,18 +1,18 @@
-/* NON_MATCHING: register pressure: retail spills the last result to the outgoing-argument slot and keeps the stack arguments in core registers; ours keeps the result in r4 and the fifth argument in d8 (vpush). */
-#include "common.h"
+/* NON_MATCHING: as an nn::Result the result lives in the outgoing-argument slot like retail; remaining register pressure: retail spills r0-r3 in its push and rereads the third argument from that slot, the build keeps the fifth argument in d8 (vpush). */
+#include "nn/Result.h"
 
 extern "C" {
 
 extern u8 g_asdCecModuleFlags[];
-s32 FUN_00358f1c(s32 a, s32 b, s32 c, s32 d, s32 e);
+nn::Result FUN_00358f1c(s32 a, s32 b, s32 c, s32 d, s32 e);
 void FUN_00238d3c(s32 a, s32 b);
 
-#define CEC_RESULT_RETRY ((s32)0xC8A10BF0)
+#define CEC_RESULT_RETRY 0xC8A10BF0u
 
 /* Runs the CEC request, retrying up to three times while it reports the retryable result. */
-s32 FUN_003e0764(s32 unused, s32 a, s32 b, s32 c, s32 d, s32 e)
+nn::Result FUN_003e0764(s32 unused, s32 a, s32 b, s32 c, s32 d, s32 e)
 {
-    s32 result;
+    nn::Result result;
 
     for (s32 attempt = 0; attempt < 3; attempt++) {
         result = FUN_00358f1c(a, b, c, d, e);

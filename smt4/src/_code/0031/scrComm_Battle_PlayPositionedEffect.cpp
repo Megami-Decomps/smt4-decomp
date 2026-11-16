@@ -49,7 +49,7 @@ extern u32 g_btlScriptUnit;
 extern BattleEffectState* DAT_00435d18;
 extern u32 g_btlEvent;
 
-void ARM_common_memcpy4_9(void* dst, const char* src);
+void __ARM_common_memcpy4_9(void* dst, const char* src);
 void FUN_00245420(s32 slot, u32 unit, void* entry, u32 effect);
 void FUN_002454c4(BattleEffectState* state, EffectRequest* request, s32 a, s32 b);
 s32 FUN_0024550c(void);
@@ -70,7 +70,7 @@ void scrComm_Battle_PlayPositionedEffect(void)
 
     EffectRequest request = { 0, 0, 0, NULL, 0, 0, 0, 0 };
     const char* setName = direction < 0 ? "commonDw" : "commonUp";
-    ARM_common_memcpy4_9(&request, setName);
+    __ARM_common_memcpy4_9(&request, setName);
     FUN_002454c4(DAT_00435d18, &request, 1, 0);
 
     BattleMain* main = reinterpret_cast<BattleMain *>(btlGetMainState());

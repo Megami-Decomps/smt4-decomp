@@ -5,7 +5,7 @@ extern "C" {
 extern LmapMainStateA *g_lmapMainState;
 extern LmapSceneA *g_lmapScene;
 extern GameStateA g_gameState;
-u32 FUN_003b5714(s32 category, s32 subtype, u32 variant);
+u32 table23FindRecordByKey(s32 category, s32 subtype, u32 variant);
 Table23Record *dataTableGetRecord23(u32 index);
 f32 distSpatial(f32 x1, f32 y1, f32 z1, f32 x2, f32 y2, f32 z2);
 
@@ -29,14 +29,14 @@ void FUN_00291e50(s32 startId, u32 startVariant, s32 endId, u32 endVariant)
     typedef char PathViewOffset[offsetof(PathView, start) == 0x9310 && offsetof(PathView, duration) == 0x933C ? 1 : -1];
     PathView *path = (PathView *)g_lmapMainState;
     if (startId) {
-        const WaypointView *point = (const WaypointView *)dataTableGetRecord23(FUN_003b5714(path->map, startId, startVariant));
+        const WaypointView *point = (const WaypointView *)dataTableGetRecord23(table23FindRecordByKey(path->map, startId, startVariant));
         path->start.x = (f32)point->x;
         path->start.y = (f32)point->y;
         path->start.z = (f32)point->z;
     } else {
         path->start = *(const MapVector *)g_lmapScene->transform.position;
     }
-    const WaypointView *point = (const WaypointView *)dataTableGetRecord23(FUN_003b5714(path->map, endId, endVariant));
+    const WaypointView *point = (const WaypointView *)dataTableGetRecord23(table23FindRecordByKey(path->map, endId, endVariant));
     path->end.x = (f32)point->x;
     path->end.y = (f32)point->y;
     path->end.z = (f32)point->z;

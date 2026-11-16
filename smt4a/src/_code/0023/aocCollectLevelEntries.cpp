@@ -6,7 +6,7 @@ extern "C" {
 extern u32 dataTableGet(u32 table, u32 index);
 extern u32 dataTableGetCount(u32 table);
 extern LevelEntry *dataTableGetEntries(void);
-extern int ARM_common_memcpy4_8(LevelEntry *dst, const LevelEntry *src);
+extern int __ARM_common_memcpy4_8(LevelEntry *dst, const LevelEntry *src);
 
 /* Collects the table 9/4 entries of `kind` whose level is at most `maxLevel` into `out`, then appends a default entry; *count receives the number written. */
 void aocCollectLevelEntries(LevelEntry *out, int *count, u32 kind, int maxLevel)
@@ -19,7 +19,7 @@ void aocCollectLevelEntries(LevelEntry *out, int *count, u32 kind, int maxLevel)
     *count = 0;
     for (i = 0; i < numEntries; i++) {
         if (entries[i].kind == kind && entries[i].level <= maxLevel) {
-            ARM_common_memcpy4_8(&out[*count], &entries[i]);
+            __ARM_common_memcpy4_8(&out[*count], &entries[i]);
             *count = *count + 1;
         }
     }

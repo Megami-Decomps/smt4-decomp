@@ -1,4 +1,4 @@
-/* NON_MATCHING: restored script argument0; switch compares the saved type rather than retail's forwarded R0 copy. */
+/* NON_MATCHING: with the dispatch as an inline helper the argument copies and the compare tree match; only the jump-table index differs (retail `cmp r4, #11; ldrcc pc, [pc, r4, lsl #2]` on the saved type, build uses the r0 copy). */
 #include "common.h"
 
 extern "C" {
@@ -7,13 +7,9 @@ s32 scrGetArg(s32 index);
 void FUN_00282a08(s32 type, s32 kind);
 void FUN_002a33f0(void);
 
-/* Script command: accepts only argument 1 == 13 and one of a fixed set of argument 0 values; any
- * other call goes to FUN_00282a08, the rest to FUN_002a33f0 (the function that follows). */
-void FUN_002a3348(void)
+/* Runs FUN_002a33f0 for the accepted (type, 13) pairs and passes any other pair to FUN_00282a08. */
+static __inline void dispatchCommand(s32 type, s32 kind)
 {
-    s32 type = scrGetArg(0);
-    s32 kind = scrGetArg(1);
-
     if (kind != 13) {
         FUN_00282a08(type, kind);
         return;
@@ -34,12 +30,20 @@ void FUN_002a3348(void)
     case 42:
     case 71:
     case 73:
-        break;
-    default:
-        FUN_00282a08(type, kind);
+        FUN_002a33f0();
         return;
     }
-    FUN_002a33f0();
+    FUN_00282a08(type, kind);
+}
+
+/* Script command: argument 1 must be 13 and argument 0 one of a fixed set for FUN_002a33f0 (the
+ * function that follows); any other pair goes to FUN_00282a08. */
+void FUN_002a3348(void)
+{
+    s32 type = scrGetArg(0);
+    s32 kind = scrGetArg(1);
+
+    dispatchCommand(type, kind);
 }
 
 } /* extern "C" */

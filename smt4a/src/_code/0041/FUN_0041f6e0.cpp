@@ -60,7 +60,7 @@ extern void *gameDataBlocksGetSaveData(void);
 extern PlayerData *gameGetPlayerData(void);
 extern void __aeabi_memcpy4(void *dest, const void *src, u32 size);
 extern void sysMemClear(void *block, s32 size);
-extern void ARM_common_memcpy4_8(void *dest, void *src);
+extern void __ARM_common_memcpy4_8(void *dest, void *src);
 extern s32 FUN_0040ab8c(u32 request);
 extern void saveLoadProcessCreate(s32 step, s32 arg);
 extern void FUN_00275bc8(void);
@@ -146,7 +146,7 @@ void FUN_0041f6e0(SaveLoadTask *task)
                     task->handleC = handle;
                 }
                 __aeabi_memcpy4(gameDataBlocksGetTable(), task->snapshotTable, 0x80);
-                ARM_common_memcpy4_8(configGetSettings(), task->snapshotConfig);
+                __ARM_common_memcpy4_8(configGetSettings(), task->snapshotConfig);
                 __aeabi_memcpy4(gameDataBlocksGetSaveData(), task->snapshotSave, 0x2A71C);
                 for (i = 0; i < SLOT_COUNT; i++) {
                     if (task->slotValid[i] == 0) {

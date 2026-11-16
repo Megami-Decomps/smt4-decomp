@@ -5,7 +5,7 @@
 extern "C" {
 
 int cecMessageIdClear(void);
-int ARM_common_memcpy4_8(...);
+int __ARM_common_memcpy4_8(...);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 
 extern unsigned int FUN_00238c80(unsigned char *, int);
 /* Supplied declaration required: cecMessageIdClear. */
-/* Supplied declaration required: ARM_common_memcpy4_8. */
+/* Supplied declaration required: __ARM_common_memcpy4_8. */
 
 
 unsigned int nn_cec_CTR_Message_GetMessageId(unsigned int param_1,int param_2,int param_3)
@@ -26,10 +26,10 @@ unsigned int nn_cec_CTR_Message_GetMessageId(unsigned int param_1,int param_2,in
   
   if (param_3 != 0) {
     temp_v0 = FUN_00238c80(temp_v1,param_2 + 0x20);
-    ARM_common_memcpy4_8(param_3,temp_v0);
+    __ARM_common_memcpy4_8(param_3,temp_v0);
   }
   if (param_2 != -0x20) {
-    ARM_common_memcpy4_8();
+    __ARM_common_memcpy4_8();
   }
   else {
     cecMessageIdClear();

@@ -40,7 +40,7 @@ int FUN_00324e38(unsigned int);
 int FUN_00327ee8(void);
 int FUN_0033abd4(void);
 int mathPositionHeadingDegrees(void);
-int FUN_003b5714(unsigned int, unsigned int, unsigned int);
+int table23FindRecordByKey(unsigned int, unsigned int, unsigned int);
 int sysPlayVoice(...);
 int FUN_003d4ed8(unsigned int);
 
@@ -82,7 +82,7 @@ extern int FUN_002e07f4(void);
 /* Supplied declaration required: FUN_00327ee8. */
 /* Supplied declaration required: FUN_0033abd4. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
-/* Supplied declaration required: FUN_003b5714. */
+/* Supplied declaration required: table23FindRecordByKey. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d4ed8. */
 extern int inputIsQuestMenuPressed(void);
@@ -236,7 +236,7 @@ LAB_00367d2c:
             FUN_00233e10(1,g_gameState.f005f16ac);
             temp_v1 = FUN_004d0584();
             if (temp_v1 != 0) {
-              FUN_003b5714(g_gameState.f005f16a0,g_gameState.f005f16a4,g_gameState.f005f16a8);
+              table23FindRecordByKey(g_gameState.f005f16a0,g_gameState.f005f16a4,g_gameState.f005f16a8);
               temp_v1 = g_lmapScene;
               *(unsigned int *)(g_lmapScene + 0xa0) = g_gameState.f005f16b0;
               *(float *)(temp_v1 + 0xa4) = g_gameState.f005f16b4 - 500.0f;

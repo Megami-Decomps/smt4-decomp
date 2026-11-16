@@ -1,17 +1,25 @@
-/* NON_MATCHING: The flattened HP members use a different addressing base and multiply-result register. */
-#include "shard/W4_W4Match2_BtlUnits.h"
+#include "battle/EntryStats.h"
+#include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
+
 extern "C" {
 
+// Script result: 1 when any active, unblocked entry is at or above the HP percentage.
 u32 FUN_002f0388(void)
 {
-    s32 threshold = scrGetArg(0);
-    for (s32 index = 0; index < 109; ++index) {
-        BtlEntry* unit = &btlGetMainState()->entries[index];
-        if ((unit->flags & 0x10) != 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0) {
-            s32 percent = unit->hp * 100 / unit->maxHp;
-            if (percent >= threshold) {
+    s32 percent = scrGetArg(0);
+
+    for (s32 i = 0; i < BTL_ENTRY_COUNT; ++i) {
+        BtlEntry *unit = &btlGetMainState()->entries[i];
+        BtlEntryStatsView *entry = reinterpret_cast<BtlEntryStatsView *>(unit);
+        u32 flags = entry->flags;
+        if ((flags & BTL_ENTRY_FLAG_PRESENT) && (flags & BTL_ENTRY_FLAG_ACTIVE) &&
+            !(flags & BTL_ENTRY_FLAG_BLOCKED)) {
+            BtlEntryStats *stats = &entry->stats;
+            s32 hp = stats->hp;
+            s32 maxHp = stats->maxHp;
+            if (hp * 100 / maxHp >= percent) {
                 scrSetResult(1);
                 return 1;
             }

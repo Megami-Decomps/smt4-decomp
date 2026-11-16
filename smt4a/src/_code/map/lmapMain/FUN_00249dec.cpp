@@ -13,7 +13,7 @@ int FUN_00378964(void);
 int FUN_00378a1c(void);
 int sysPlayVoice(...);
 
-int ARM_common_memcpy4_9(...);
+int __ARM_common_memcpy4_9(...);
 int eventQueueAddUnique(...);
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
@@ -103,7 +103,7 @@ extern unsigned char DAT_005f19ed; /* 0x5f19ed */
 extern signed char DAT_005f1bc4; /* 0x5f1bc4 */
 extern int DAT_005f1be4; /* 0x5f1be4 */
 
-/* Supplied declaration required: ARM_common_memcpy4_9. */
+/* Supplied declaration required: __ARM_common_memcpy4_9. */
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: eventQueueAddUnique. */
 extern int dataTableGet(unsigned int, unsigned int);
@@ -345,10 +345,10 @@ joined_r0x00249fd4:
                     DAT_005f174a = 1;
                     DAT_005f174c = 500;
                     if (g_gameState >= 0x65) {
-                      ARM_common_memcpy4_9(&DAT_005f1750,"e500_01L");
+                      __ARM_common_memcpy4_9(&DAT_005f1750,"e500_01L");
                     }
                     else {
-                      ARM_common_memcpy4_9(&DAT_005f1750,"e500_01M");
+                      __ARM_common_memcpy4_9(&DAT_005f1750,"e500_01M");
                     }
                   }
                   if (*(short *)(temp_v4 + 0x16) != 0) {
@@ -534,7 +534,7 @@ LAB_0024a684:
           if ((temp_v4 != 0) && (temp_v4 = gameFlagIsSet(0x51), temp_v4 == 0)) {
             DAT_005f1775 = 1;
             DAT_005f174c = 1;
-            ARM_common_memcpy4_9(&DAT_005f1750,"e001_006");
+            __ARM_common_memcpy4_9(&DAT_005f1750,"e001_006");
           }
           if (DAT_005f1768 == '\0') {
             temp_v1 = *(short *)(temp_v8 + 200);

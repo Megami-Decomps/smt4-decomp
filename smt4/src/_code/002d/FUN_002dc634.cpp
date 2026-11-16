@@ -1,4 +1,4 @@
-/* NON_MATCHING: structure and calls match; armcc schedules the sort-key stores differently (retail stores each key's id and 0 separately and interleaves them with the second record load) and allocates r4/r6 differently */
+/* NON_MATCHING: only the two key addresses swap callee-saved registers (retail keeps &firstKey in r5 and &secondKey in r6). */
 #include "common.h"
 #include "gamedata/Table8Type5Lookup.h"
 #include "gamedata/DataTable40.h"
@@ -30,19 +30,42 @@ PassiveSkillRecord *passiveSkillLookupRecord(u32 id);
 UnitRecord *gameGetUnitRecord(s32 unit);
 s32 FUN_00257568(SkillSortKey *first, SkillSortKey *second);
 
-/* The skill's own sort key. */
-static inline s32 skillSortValue(SkillSortKey *key)
+/* Orders skills by ascending sort key, then by their unit's key, then by the final tie-break. */
+static __inline s32 skillSortCompare(SkillSortKey &a, SkillSortKey &b)
 {
-    if (idIsAbove400(key->skillId) != 0) {
-        return passiveSkillLookupRecord(key->skillId)->sortKey;
+    u16 skillA;
+    u16 skillB;
+    if (idIsAbove400(a.skillId) != 0) {
+        skillA = passiveSkillLookupRecord(a.skillId)->sortKey;
+    } else {
+        skillA = reinterpret_cast<SkillRecord *>(dataTable40FindById(a.skillId))->sortKey;
     }
-    return reinterpret_cast<SkillRecord *>(dataTable40FindById(key->skillId))->sortKey;
-}
-
-/* The sort key of the unit the skill belongs to; 0 without one. */
-static inline s32 unitSortValue(SkillSortKey *key)
-{
-    return key->unit < 0 ? 0 : gameGetUnitRecord(key->unit)->sortKey;
+    if (idIsAbove400(b.skillId) != 0) {
+        skillB = passiveSkillLookupRecord(b.skillId)->sortKey;
+    } else {
+        skillB = reinterpret_cast<SkillRecord *>(dataTable40FindById(b.skillId))->sortKey;
+    }
+    s32 difference = skillA - skillB;
+    if (difference != 0) {
+        return difference;
+    }
+    u16 unitA;
+    u16 unitB;
+    if (a.unit < 0) {
+        unitA = 0;
+    } else {
+        unitA = gameGetUnitRecord(a.unit)->sortKey;
+    }
+    if (b.unit < 0) {
+        unitB = 0;
+    } else {
+        unitB = gameGetUnitRecord(b.unit)->sortKey;
+    }
+    difference = unitA - unitB;
+    if (difference != 0) {
+        return difference;
+    }
+    return FUN_00257568(&a, &b);
 }
 
 /* Compares two skills for sorting: by their sort keys, then by their unit's key, then by the final tie-break. */
@@ -52,20 +75,10 @@ s32 FUN_002dc634(const u16 *first, const u16 *second)
     Table8Type5Record *secondOwner = table8Type5FindById(*second);
     SkillSortKey firstKey;
     SkillSortKey secondKey;
-    SkillSortKey *a = &firstKey;
-    SkillSortKey *b = &secondKey;
-    a->skillId = firstOwner->value;
-    a->unit = 0;
-    b->skillId = secondOwner->value;
-    b->unit = 0;
-
-    s32 difference = skillSortValue(a) - skillSortValue(b);
-    if (difference == 0) {
-        difference = unitSortValue(a) - unitSortValue(b);
-        if (difference == 0) {
-            difference = FUN_00257568(a, b);
-        }
-    }
-    return difference;
+    firstKey.skillId = firstOwner->value;
+    firstKey.unit = 0;
+    secondKey.skillId = secondOwner->value;
+    secondKey.unit = 0;
+    return skillSortCompare(firstKey, secondKey);
 }
 }

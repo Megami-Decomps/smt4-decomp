@@ -8,7 +8,7 @@ extern MapMainA *g_mapMain;
 extern LmapSceneA *g_lmapScene;
 extern LmapExtraA *g_lmapView;
 extern GameStateA g_gameState;
-u32 FUN_003b5714(s32, s32, u32);
+u32 table23FindRecordByKey(s32, s32, u32);
 const SceneSpawnRecord *dataTableGetRecord23(u32);
 void navigationSetArguments(s32, s32, f32);
 void naviMainSetRequestTriple(s32, s32, u32);
@@ -23,7 +23,7 @@ void FUN_00365c94(s32 map, s32 area, u32 point)
     struct NavigationRegion { s32 map; s32 area; };
     MapMainA *main = g_mapMain;
     reinterpret_cast<StartupFlags *>(main)->started = 1;
-    const SceneSpawnRecord *spawn = dataTableGetRecord23(FUN_003b5714(map, area, point));
+    const SceneSpawnRecord *spawn = dataTableGetRecord23(table23FindRecordByKey(map, area, point));
     LmapSceneTransform *transform = &g_lmapScene->transform;
     MapVector *position = reinterpret_cast<MapVector *>(transform->position);
     position->x = static_cast<f32>(spawn->x);

@@ -15,7 +15,7 @@ s32 objectPartRunUnlessLocked(GridNavigation *grid);
 s32 FUN_0029efa8(const GridNavigation *grid);
 void FUN_0029f848(GridNavigation *grid, s32 count, s32 visibleRows, s32 columns, s32 wrap, s32 alternateKeys);
 void scrollOwnerSelectIndex(GridNavigation *grid, s32 index);
-void FUN_001c3600(GridNavigation *grid);
+void scrollSelectionClampToCount(GridNavigation *grid);
 
 void FUN_002937e0(void)
 {
@@ -45,7 +45,7 @@ void FUN_002937e0(void)
     FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(&panel->capacityGrids.base), firstColumn);
     scrollOwnerSelectIndex(&panel->capacityGrids.expanded, secondRow);
     FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(&panel->capacityGrids.expanded), secondColumn);
-    FUN_001c3600(&panel->capacityGrids.base);
-    FUN_001c3600(&panel->capacityGrids.expanded);
+    scrollSelectionClampToCount(&panel->capacityGrids.base);
+    scrollSelectionClampToCount(&panel->capacityGrids.expanded);
 }
 }

@@ -28,7 +28,7 @@ extern WorkRecord *gameGetPlayerData(void);
 extern void sysMemClear(void *buffer, s32 size);
 extern void FUN_003df7c4(s32 arg);
 extern void playerAdvanceLevelsAndRecover(WorkRecord *record, s32 levels, s32 arg);
-extern void FUN_004ccf78(s32 arg);
+extern void playerResetToStartingStats(s32 arg);
 extern char *strncpy(char *dest, const char *src, u32 count);
 
 void FUN_003dff6c(s32 level, const char *name, const u16 *stats)
@@ -40,7 +40,7 @@ void FUN_003dff6c(s32 level, const char *name, const u16 *stats)
     record->unk60 = 0;
     strncpy(record->name, name, 0x12);
     record->name[0x11] = 0;
-    FUN_004ccf78(0);
+    playerResetToStartingStats(0);
     if (level > 1) {
         playerAdvanceLevelsAndRecover(record, (s16)(level - 1), 1);
     }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: signed alternating index now follows retail; position vector VFP registers and load scheduling still differ. */
+/* NON_MATCHING: pool order and loads now match; only the callee-saved VFP registers of the three coordinates differ (retail x/y/z in s18/s17/s16) with the jitter adds commuted. */
 #include "map/lmapMain.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 
@@ -14,12 +14,11 @@ void FUN_0027fca0(s32 variant)
     ++DAT_00447538;
     DAT_00447538 &= 1;
     SoundActorQueuePosition position;
-    position.x = g_lmapScene->transform.position[0];
-    position.y = g_lmapScene->transform.position[1] + 140.0f;
-    position.z = g_lmapScene->transform.position[2];
-    position.y = position.y + static_cast<f32>(randBetween(-10, 10));
-    position.x = position.x + static_cast<f32>(randBetween(-15, 15));
-    position.z = position.z + static_cast<f32>(randBetween(-15, 15));
+    position = *reinterpret_cast<const SoundActorQueuePosition *>(g_lmapScene->transform.position);
+    position.y += 140.0f;
+    position.y += randBetween(-10, 10);
+    position.x += randBetween(-15, 15);
+    position.z += randBetween(-15, 15);
     if (variant == 0) {
         DAT_00447538 = 0;
     } else if (variant == 1) {

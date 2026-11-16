@@ -7,7 +7,7 @@
 
 extern "C" {
 
-int FUN_00480da8(void);
+int table8Type5GetValue(void);
 
 int textFormatBuffer(...);
 int buttonHelpSetText(...);
@@ -150,7 +150,7 @@ extern int fieldStateAllowsAction(void);
 extern unsigned int sysPlayVoice(unsigned int);
 /* Supplied declaration required: FUN_003d4104. */
 /* Supplied declaration required: FUN_003e40d0. */
-/* Supplied declaration required: FUN_00480da8. */
+/* Supplied declaration required: table8Type5GetValue. */
 
 
 unsigned int FUN_00268770(void)
@@ -1604,7 +1604,7 @@ LAB_0026adc4:
   if (temp_v14 == temp_v8 - 1) {
     temp_v1 = *(unsigned short *)(temp_v2 + 0x2498);
     temp_v11 = (unsigned int)temp_v1;
-    FUN_00480da8();
+    table8Type5GetValue();
     if (temp_v11 != 0) {
       skillHelpUpdateAttributeAndTarget();
       *(int *)(temp_v2 + 0x524) = *(int *)(temp_v2 + 0x524) + 1;
@@ -1617,7 +1617,7 @@ LAB_0026adc4:
       temp_v6 = FUN_002a4894(temp_v6);
       temp_v1 = *(unsigned short *)(temp_v2 + temp_v6 * 2 + 0x2488);
       temp_v11 = (unsigned int)temp_v1;
-      FUN_00480da8();
+      table8Type5GetValue();
       if (temp_v11 != 0) {
         skillHelpUpdateAttributeAndTarget();
         *(int *)(temp_v2 + 0x524) = *(int *)(temp_v2 + 0x524) + 1;

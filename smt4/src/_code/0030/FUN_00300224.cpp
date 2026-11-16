@@ -1,4 +1,3 @@
-/* NON_MATCHING: the flag read-modify-write temp is r1 (retail r2, with the argument constant loaded before the OR). */
 #include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
 
@@ -15,11 +14,11 @@ u32 FUN_00300224(void)
     if (entry != NULL) {
         switch (mode) {
         case 1:
-            entry->flags |= 0x20000;
+            entry->flagMask |= 0x20000;
             FUN_00255180(id, 0x15, 1);
             break;
         case 2:
-            entry->flags |= 0x40000;
+            entry->flagMask |= 0x40000;
             FUN_00255180(id, 0x15, 2);
             break;
         }

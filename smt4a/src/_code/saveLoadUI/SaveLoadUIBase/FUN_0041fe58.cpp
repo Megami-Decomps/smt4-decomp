@@ -77,7 +77,7 @@ void *gameDataBlocksGetTable(void);
 void *configGetSettings(void);
 void *gameDataBlocksGetSaveData(void);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
-void ARM_common_memcpy4_8(void *destination, const void *source);
+void __ARM_common_memcpy4_8(void *destination, const void *source);
 s32 gameFlagIsSet(u32 flag);
 void asdTMTexTableLoadSprites(u32 table);
 void loadSlotRequestAsync(u32 slot, u32 arg);
@@ -106,7 +106,7 @@ void FUN_0041fe58(SaveLoadUI *ui, s32 isLoad, u8 option)
     ui->settingsCopy = asdMemoryAlloc(0x10000, 0x100, 0, 8, 1);
     ui->saveCopy = asdMemoryAlloc(0x10000, 0x100, 0, 0x2A71C, 1);
     __aeabi_memcpy4(ui->tableCopy, gameDataBlocksGetTable(), 0x80);
-    ARM_common_memcpy4_8(ui->settingsCopy, configGetSettings());
+    __ARM_common_memcpy4_8(ui->settingsCopy, configGetSettings());
     __aeabi_memcpy4(ui->saveCopy, gameDataBlocksGetSaveData(), 0x2A71C);
     __aeabi_memcpy4(ui->header, (u8 *)gameDataBlocksGetSaveData() + 8, 0xE);
     asdLoadFileAsyncSimple("saveLoadUI/saveloadUI.bf", &ui->uiScript, 0);

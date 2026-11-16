@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail addresses the id (0xf26) and the final flag store separately from the flag test (writeback ldrb + recomputed entry address); built shares one entry pointer. */
 #include "common.h"
 
 struct MapBlockEntry {
@@ -25,12 +24,12 @@ MapBlock *gameGetMapBlock(void);
 // Mark the first used, pending map block entry that belongs to the object.
 void FUN_00253c70(MapObject *object)
 {
+    s32 i;
     MapBlock *block = gameGetMapBlock();
     s16 id = object->id;
-    for (s32 i = 0; i < 16; i++) {
-        MapBlockEntry *entry = &block->entries[i];
-        if ((entry->flags & 1) != 0 && (entry->flags & 4) != 0 && entry->id == id) {
-            entry->flags |= 0x10;
+    for (i = 0; i < 16; i++) {
+        if ((block->entries[i].flags & 1) != 0 && (block->entries[i].flags & 4) != 0 && block->entries[i].id == id) {
+            block->entries[i].flags |= 0x10;
             return;
         }
     }

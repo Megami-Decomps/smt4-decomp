@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail keeps two registers for the quest pointer (a copy in r5 for the release steps, `movs r5, r7`, the original in r7 for jobStop and the free) and the g_uiQuest address in r8; the build coalesces them */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "gamedata/DataTableSections.h"
@@ -33,6 +32,7 @@ typedef struct UiQuest {
 
 extern UiQuest *g_uiQuest;
 
+/* Removes the quest screen's touch regions and frees its scripts, buffers, textures and table. */
 static __inline void uiQuestRelease(UiQuest *quest)
 {
     s32 i;
@@ -54,12 +54,13 @@ static __inline void uiQuestRelease(UiQuest *quest)
     uiFadeSetVisible(1);
 }
 
+/* Closes the quest screen: releases its resources, stops its job and frees it. */
 void FUN_0034aae4(void)
 {
     UiQuest *quest = g_uiQuest;
 
     if (quest != NULL) {
-        uiQuestRelease(quest);
+        uiQuestRelease(g_uiQuest);
         jobStop(quest->job, 0);
         asdMemFree(quest);
         g_uiQuest = NULL;

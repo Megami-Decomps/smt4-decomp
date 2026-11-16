@@ -34,7 +34,7 @@ s32 rangeLimitMin(void *cursor);
 u32 flaggedEntryGetValueByState(void *cursor);
 s32 flaggedValueHolderGetTotal(void *cursor);
 void FUN_003abae8(SkillListRenderView *view, s32 row, s32 item, s32 selected, s32 depth);
-void FUN_00288e68(s32 id);
+void table8Type5GetValue(s32 id);
 void buttonHelpShowSkillDetails(void);
 void FUN_0022d7b0(SkillListRenderView *view, s32 depth);
 
@@ -56,7 +56,7 @@ static void drawSkillListContents(SkillListRenderView *view, s32 depth)
         FUN_003abae8(view, row, item, 1, depth + 1);
         SkillListRow *rows = view->rows;
         item = flaggedValueHolderGetTotal(&view->cursor);
-        FUN_00288e68(rows[item].id);
+        table8Type5GetValue(rows[item].id);
         buttonHelpShowSkillDetails();
     }
     FUN_0022d7b0(view, depth);

@@ -9,7 +9,7 @@
 
 extern "C" {
 
-int ARM_common_memcpy4_9(...);
+int __ARM_common_memcpy4_9(...);
 int asdSequenceRequest(...);
 int configOpen(...);
 int FUN_00202ea4(void);
@@ -78,7 +78,7 @@ extern unsigned int DAT_005f1be8; /* 0x5f1be8 */
 extern int g_mapSelection; /* 0x5f1c98 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: ARM_common_memcpy4_9. */
+/* Supplied declaration required: __ARM_common_memcpy4_9. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
@@ -896,7 +896,7 @@ LAB_0029fb00:
           DAT_005f1be8 = 1;
           temp_v13 = 1;
           uStack_a4 = 0xffffffff;
-          ARM_common_memcpy4_9(temp_v14,&LAB_002a0964);
+          __ARM_common_memcpy4_9(temp_v14,&LAB_002a0964);
           asdSequenceRequest(4,&temp_v13,0x20);
         }
       }
@@ -910,7 +910,7 @@ LAB_0029fb00:
           DAT_005f1be8 = 1;
           temp_v13 = 1;
           uStack_a4 = 0xffffffff;
-          ARM_common_memcpy4_9(temp_v14,&LAB_002a0964);
+          __ARM_common_memcpy4_9(temp_v14,&LAB_002a0964);
           temp_v8 = 0x20;
           temp_v6 = 4;
           piVar10 = &temp_v13;

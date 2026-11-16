@@ -1,4 +1,3 @@
-/* NON_MATCHING: direct stores now match retail registers; armcc cross-jumps the byte stores into case 1 (retail: case 3) and orders case 4/6 address/value loads the other way round. */
 #include "common.h"
 #include "battle/btlHelp.h"
 
@@ -35,7 +34,7 @@ void FUN_003c49bc(DebugSettingsMenu *menu)
         break;
     case 3:
         DAT_00435e03 = *asdListBoxGetItemValuePtr(menu->listBox, 3);
-        break;
+        return;
     case 4:
         DAT_00435e04 = *asdListBoxGetItemValuePtr(menu->listBox, 4);
         break;
@@ -44,7 +43,7 @@ void FUN_003c49bc(DebugSettingsMenu *menu)
         break;
     case 6:
         DAT_00435e20 = *asdListBoxGetItemText(menu->listBox, 6);
-        break;
+        return;
     }
 }
 

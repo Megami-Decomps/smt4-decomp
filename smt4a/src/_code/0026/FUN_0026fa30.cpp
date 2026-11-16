@@ -11,7 +11,7 @@ BtlPartyBlockA *gameGetSlotTable();
 void FUN_00203b40(GridNavigation *, s32, s32, s32, s32, s32);
 void scrollOwnerSelectIndex(GridNavigation *, s32);
 void FUN_002a4964(GridNavigation *, s32);
-void FUN_00261840(GridNavigation *);
+void scrollSelectionClampToCount(GridNavigation *);
 
 void FUN_0026fa30()
 {
@@ -55,7 +55,7 @@ void FUN_0026fa30()
     FUN_002a4964(&grids->primary, primaryRow);
     scrollOwnerSelectIndex(&grids->secondary, secondaryColumn);
     FUN_002a4964(&grids->secondary, secondaryRow);
-    FUN_00261840(&grids->primary);
-    FUN_00261840(&grids->secondary);
+    scrollSelectionClampToCount(&grids->primary);
+    scrollSelectionClampToCount(&grids->secondary);
 }
 }

@@ -1,4 +1,3 @@
-/* NON_MATCHING: range reload uses one LDRD instead of retail's separate count/first LDRs. */
 #include "battle/EntryStats.h"
 #include "util/SlotRangeSelect.h"
 #include "battle/btlMain.h"
@@ -18,7 +17,7 @@ u32 FUN_002f0a0c()
     s32 first;
     s32 count;
     FUN_002499fc(group, &first, &count);
-    for (s32 index = first; index < count + first; ++index) {
+    for (s32 index = first; index < first + count; ++index) {
         BtlEntry *entry = &btlGetMainState()->entries[index];
         if ((entry->flags & BTL_ENTRY_FLAG_PRESENT) == 0 &&
             (entry->flags & BTL_ENTRY_FLAG_ACTIVE) != 0 &&

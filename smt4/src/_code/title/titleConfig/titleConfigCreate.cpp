@@ -55,7 +55,7 @@ void FUN_0029ee6c(s32 first, u32 color);
 u32 bgmVolumeToStep(u8 volume);
 u32 classifyValueByThreshold(u8 volume);
 u32 calcByteThresholdRank(u8 volume);
-void ARM_common_memcpy4_8(TitleConfigWordPair *destination, const TitleConfigWordPair *source);
+void __ARM_common_memcpy4_8(TitleConfigWordPair *destination, const TitleConfigWordPair *source);
 }
 
 /* Allocate the title configuration menu, its rendering task and its resource requests. */
@@ -82,5 +82,5 @@ extern "C" void titleConfigCreate(void)
     work->musicStep = bgmVolumeToStep(g_titleConfigValues.values.music);
     work->effectsStep = classifyValueByThreshold(g_titleConfigValues.values.effects);
     work->voiceStep = calcByteThresholdRank(g_titleConfigValues.values.voice);
-    ARM_common_memcpy4_8(&work->savedOptions, &g_titleConfigValues.words);
+    __ARM_common_memcpy4_8(&work->savedOptions, &g_titleConfigValues.words);
 }

@@ -1,4 +1,5 @@
 /* NON_MATCHING: equipment-label zero caching, panel register lifetimes, and portrait-release guard/loop layout differ from retail. */
+#include <string.h>
 #include "common.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -53,7 +54,6 @@ const char *dataTable4AGetEntry2C(u32 id);
 const char *fileSectionGetData(void *file, u32 entry, u32 table);
 const char *FUN_0015f858(u32 equipment, u32 flags);
 const char *FUN_00180118(u32 demon);
-void ARM_common_memcpy4_7(char *destination, const char *source);
 const char *FUN_0014bf3c(u32 demon, u32 flags);
 void FUN_001a90f0(char *destination, const char *source);
 void textFormatBuffer(char *destination, const char *format, ...);
@@ -117,7 +117,7 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanelA *panel, const Cha
     if (record->owner)
         FUN_001654f8(FUN_00180118(record->demon), buffer, 0);
     else
-        ARM_common_memcpy4_7(buffer, "\x81\x7c\x81\x7c\x81\x7c");
+        strcpy(buffer, "\x81\x7c\x81\x7c\x81\x7c");
     asdTextFormatStream(panel->demonName, 1, -1u, 0, 0, buffer);
     panel->demonNameWidth = (s32)FUN_00168594(buffer, 1, 0.0f);
     if (record->owner)

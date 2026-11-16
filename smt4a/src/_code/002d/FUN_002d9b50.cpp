@@ -28,7 +28,7 @@ int mapTrapEnable(...);
 int FUN_00365c94(...);
 int naviMainSetRequestTriple(...);
 int uiPlayGatedActionFeedback(...);
-int FUN_003b5714(...);
+int table23FindRecordByKey(...);
 int FUN_003d2158(...);
 int playerSetClampedValue(...);
 int flagValueSub(...);
@@ -123,7 +123,7 @@ extern int mapJobIsDone(void);
 extern int dataTableGetRecord23(void);
 /* Supplied declaration required: naviMainSetRequestTriple. */
 /* Supplied declaration required: uiPlayGatedActionFeedback. */
-/* Supplied declaration required: FUN_003b5714. */
+/* Supplied declaration required: table23FindRecordByKey. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d2158. */
 /* Supplied declaration required: FUN_003d4ed8. */
@@ -562,7 +562,7 @@ LAB_002da3cc:
             DAT_005f19d0 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
           }
           else {
-            FUN_003b5714(temp_v3,(unsigned int)*(unsigned short *)(temp_v6 + 0x14),*(unsigned short *)(temp_v6 + 0x16));
+            table23FindRecordByKey(temp_v3,(unsigned int)*(unsigned short *)(temp_v6 + 0x14),*(unsigned short *)(temp_v6 + 0x16));
             if (temp_v3 != 0xffffffff) {
               temp_v4 = dataTableGetRecord23();
               temp_v0 = g_lmapScene;

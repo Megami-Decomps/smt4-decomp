@@ -1,4 +1,3 @@
-/* NON_MATCHING: mask halves use different load and AND operand registers; the fallback-value test is if-converted differently. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -19,14 +18,10 @@ u32 FUN_003caa2c()
 {
     for (s32 i = 0; i < 109; ++i) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
-        u64 flags = entry->flags;
-        if ((flags & g_btlCandidateMasks.unavailable) &&
-            (flags & g_btlCandidateMasks.required) && !(flags & g_btlCandidateMasks.excluded)) {
+        if ((g_btlCandidateMasks.unavailable & entry->flags) &&
+            (entry->flags & g_btlCandidateMasks.required) && !(entry->flags & g_btlCandidateMasks.excluded)) {
             CandidateValueView *values = (CandidateValueView *)entry;
-            s32 value = values->primary;
-            if (value < 1)
-                value = values->secondary;
-            if (value > 0) {
+            if (values->primary > 0 || values->secondary > 0) {
                 scrSetResult(1);
                 return 1;
             }

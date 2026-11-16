@@ -39,12 +39,12 @@ void FUN_0027dc24(BtlMainState *battle, PackedRenderState *sprite, s32 allowOver
             static_cast<s8>(battle->spriteSource.bank), static_cast<s8>(battle->spriteSource.page));
     }
     if ((sprite->mode & 4) != 0)
-        battle->battleFlags |= 0x40000;
+        battle->battleMask |= 0x40000;
     else
-        battle->battleFlags &= ~0x40000;
+        battle->battleMask &= ~0x40000ULL;
     if (FUN_0029022c() != 0 && idIsAtLeast350(FUN_002903f0()) != 0)
-        battle->spriteFlags |= 4;
+        battle->battleMask |= 4ULL << 32;
     else
-        battle->spriteFlags &= ~4;
+        battle->battleMask &= ~(4ULL << 32);
 }
 }

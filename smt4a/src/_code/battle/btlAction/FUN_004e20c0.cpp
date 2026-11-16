@@ -16,7 +16,7 @@ int FUN_004c5ec0(void);
 int FUN_004d7a60(...);
 int battleApplyInteractionSelection(...);
 
-int ARM_common_memcpy4_9(...);
+int __ARM_common_memcpy4_9(...);
 int FUN_001568f8(...);
 int btlSlotSetStoreValue(...);
 int btlCombatantGetSummaryValues(...);
@@ -33,7 +33,7 @@ void FUN_004fd1b8(int actor, unsigned int flags, unsigned int value,
                   unsigned int parameter, unsigned int auxiliary);
 int FUN_004fec2c(...);
 int btlReflectCreateKind41(...);
-int ARM_common_memcpy4_7(...);
+int __ARM_common_memcpy4_7(...);
 int __aeabi_memcpy4(...);
 
 int FUN_003e8bb0(...);
@@ -230,7 +230,7 @@ extern unsigned int g_btlEvent; /* 0x573898 */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: ARM_common_memcpy4_9. */
+/* Supplied declaration required: __ARM_common_memcpy4_9. */
 extern char randRange(unsigned int);
 /* Supplied declaration required: FUN_001568f8. */
 extern int gameFlagIsSet(unsigned int);
@@ -303,7 +303,7 @@ extern int FUN_004f9ae4(int, unsigned int);
 /* Supplied declaration required: FUN_004fe764. */
 /* Supplied declaration required: FUN_004fec2c. */
 /* Supplied declaration required: btlReflectCreateKind41. */
-/* Supplied declaration required: ARM_common_memcpy4_7. */
+/* Supplied declaration required: __ARM_common_memcpy4_7. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
@@ -1189,23 +1189,23 @@ LAB_004e34b8:
         switch((unsigned int)puVar12) {
         case (unsigned int)0x0:
           temp_v18 = 0x4e3f7c;
-          ARM_common_memcpy4_9(&temp_v61,temp_v18);
+          __ARM_common_memcpy4_9(&temp_v61,temp_v18);
           break;
         case (unsigned int)0x1:
           temp_v18 = 0x4e3f88;
-          ARM_common_memcpy4_7(&temp_v61,temp_v18);
+          __ARM_common_memcpy4_7(&temp_v61,temp_v18);
           break;
         case (unsigned int)0x2:
           temp_v18 = 0x4e3f90;
-          ARM_common_memcpy4_9(&temp_v61,temp_v18);
+          __ARM_common_memcpy4_9(&temp_v61,temp_v18);
           break;
         case (unsigned int)0x3:
           temp_v18 = 0x4e3f9c;
-          ARM_common_memcpy4_7(&temp_v61,temp_v18);
+          __ARM_common_memcpy4_7(&temp_v61,temp_v18);
           break;
         case (unsigned int)0x4:
           temp_v18 = 0x4e3fa4;
-          ARM_common_memcpy4_9(&temp_v61,temp_v18);
+          __ARM_common_memcpy4_9(&temp_v61,temp_v18);
           break;
         case (unsigned int)0x5:
           __aeabi_memcpy4(&temp_v61,&LAB_004e3fb0,0xb);
@@ -1215,7 +1215,7 @@ LAB_004e34b8:
           break;
         case (unsigned int)0x7:
           temp_v18 = 0x4e3fc8;
-          ARM_common_memcpy4_9(&temp_v61,temp_v18);
+          __ARM_common_memcpy4_9(&temp_v61,temp_v18);
         }
         temp_v5 = g_btlAux;
         resolveBattleValue(g_btlAux,temp_v100);
@@ -1277,23 +1277,23 @@ LAB_004e34b8:
       switch((unsigned int)temp_v39) {
       case (unsigned int)0x0:
         temp_v18 = 0x4e3f7c;
-        ARM_common_memcpy4_9(&temp_v23,temp_v18);
+        __ARM_common_memcpy4_9(&temp_v23,temp_v18);
         break;
       case (unsigned int)0x1:
         temp_v18 = 0x4e3f88;
-        ARM_common_memcpy4_7(&temp_v23,temp_v18);
+        __ARM_common_memcpy4_7(&temp_v23,temp_v18);
         break;
       case (unsigned int)0x2:
         temp_v18 = 0x4e3f90;
-        ARM_common_memcpy4_9(&temp_v23,temp_v18);
+        __ARM_common_memcpy4_9(&temp_v23,temp_v18);
         break;
       case (unsigned int)0x3:
         temp_v18 = 0x4e3f9c;
-        ARM_common_memcpy4_7(&temp_v23,temp_v18);
+        __ARM_common_memcpy4_7(&temp_v23,temp_v18);
         break;
       case (unsigned int)0x4:
         temp_v18 = 0x4e3fa4;
-        ARM_common_memcpy4_9(&temp_v23,temp_v18);
+        __ARM_common_memcpy4_9(&temp_v23,temp_v18);
         break;
       case (unsigned int)0x5:
         __aeabi_memcpy4(&temp_v23,&LAB_004e3fb0,0xb);
@@ -1303,7 +1303,7 @@ LAB_004e34b8:
         break;
       case (unsigned int)0x7:
         temp_v18 = 0x4e3fc8;
-        ARM_common_memcpy4_9(&temp_v23,temp_v18);
+        __ARM_common_memcpy4_9(&temp_v23,temp_v18);
       }
       temp_v5 = g_btlAux;
       resolveBattleValue(g_btlAux,temp_v100);

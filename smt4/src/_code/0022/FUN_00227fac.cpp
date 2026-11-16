@@ -1,4 +1,3 @@
-/* NON_MATCHING: final entry flag update uses r0 instead of retail r1. */
 #include "common.h"
 #include "shard/PassiveSkill.h"
 #include "shard/W4_Match6_BtlEntry.h"
@@ -30,10 +29,10 @@ u32 FUN_00227fac(u32 listedId)
         return 0;
     switch (affinity) {
     case 1:
-        entry->flags |= 0x2000;
+        entry->flagMask |= 0x2000;
         break;
     case 2:
-        entry->flags |= 0x4000;
+        entry->flagMask |= 0x4000;
         break;
     }
     return affinity;

@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail loads the required mask with one ldm (r3/r6); this loads its words separately, adding a row */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -15,9 +14,8 @@ u32 FUN_003c9adc(void)
     for (i = 0; i < 0x6d; i++) {
         BtlMainStateA *state = btlGetMainState();
         BtlCombatantEntryA *entry = &state->entries[i];
-        u64 flags = entry->flags;
-        if ((flags & g_btlCandidateMasks.unavailable) && (flags & g_btlCandidateMasks.required) &&
-            !(flags & g_btlCandidateMasks.excluded) && btlFindEntryValue(entry->unitIndex, 0x13) > 0) {
+        if ((entry->flags & g_btlCandidateMasks.unavailable) && (entry->flags & g_btlCandidateMasks.required) &&
+            !(g_btlCandidateMasks.excluded & entry->flags) && btlFindEntryValue(entry->unitIndex, 0x13) > 0) {
             scrSetResult(1);
             return 1;
         }

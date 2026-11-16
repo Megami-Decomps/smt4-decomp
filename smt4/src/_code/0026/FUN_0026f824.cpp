@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail retains default-name base in r5; compiler reloads it and emits a second string-pool relocation. */
+/* NON_MATCHING: only two moves before the equipment loop are swapped (retail sets the index register before the equipment base). */
 #include "gamedata/PlayerInitialization.h"
 #include <string.h>
 #include "AsdSDK/AsdMemUtil.h"
@@ -27,7 +27,12 @@ void FUN_001dd930(void);
 char *gameDataGetPlayerName(void);
 void textFormatBuffer(char *destination, const char *format, ...);
 extern const InitialEquipment DAT_00404378;
-extern const char DAT_00404360[];
+/* The default player name and the format the player's display name is built with. */
+struct DefaultPlayerTexts {
+    char name[11];
+    char nameFormat[13];
+};
+extern const DefaultPlayerTexts DAT_00404360;
 
 // Initialize a new game's player record, starting equipment, and inventory capacity.
 void FUN_0026f824(s32 mode)
@@ -38,15 +43,17 @@ void FUN_0026f824(s32 mode)
         slots->flags = 0;
         slots->stockCapacity = 8;
         InitialEquipment equipment = DAT_00404378;
+        const u16 *id = equipment.ids;
         for (u32 index = 0; index < 7; ++index) {
-            if (equipment.ids[index])
-                FUN_00295a18(equipment.ids[index], 1);
+            if (id[index])
+                FUN_00295a18(id[index], 1);
         }
+        const DefaultPlayerTexts *texts = &DAT_00404360;
         PlayerInitialRecordIV *player = gameGetPlayerData();
         memClear(player, sizeof(*player));
         player->enabled = 1;
         player->counter = 0;
-        strncpy(player->name, DAT_00404360, sizeof(player->name));
+        strncpy(player->name, texts->name, sizeof(player->name));
         player->name[sizeof(player->name) - 1] = 0;
         FUN_003c1ef4(0);
         player->equipment[0] = equipment.ids[0];
@@ -60,7 +67,7 @@ void FUN_0026f824(s32 mode)
         player->hp = player->maximumHp;
         player->mp = player->maximumMp;
         FUN_001dd930();
-        textFormatBuffer(gameDataGetPlayerName(), DAT_00404360 + 11);
+        textFormatBuffer(gameDataGetPlayerName(), texts->nameFormat);
         FUN_00295a18(0x370, 1);
     }
 }

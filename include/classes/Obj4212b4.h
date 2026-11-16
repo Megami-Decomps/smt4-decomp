@@ -17,7 +17,7 @@ struct Obj4212b4Request {
  * name is known). */
 class Obj4212b4 : public Obj421230 {
 public:
-    Obj4212b4(const Obj4212b4Request *request, AsdAllocatorObject *allocator);
+    Obj4212b4(const Obj4212b4Request *request, AsdAllocatorObject *allocator, Obj421230Res *res);
     static Obj4212b4 *create(const Obj4212b4Request *request, AsdAllocatorObject *allocator);
 
     /* 0x148 */ u8 unk148;

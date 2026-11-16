@@ -12,7 +12,7 @@ extern "C" {
 int gameDataBlocksReleaseHold(int);
 int gameDataBlocksGetSaveData(void);
 int sysPlaySe(...);
-int ARM_common_memcpy4_8(unsigned int, unsigned int);
+int __ARM_common_memcpy4_8(unsigned int, unsigned int);
 int FUN_002299b0(void);
 int scrScriptProcessStartEntry(unsigned int, int);
 int FUN_002c9104(void);
@@ -43,7 +43,7 @@ extern unsigned int DAT_00588e28; /* 0x588e28 */
 /* Supplied declaration required: gameDataBlocksGetSaveData. */
 /* Supplied declaration required: sysPlaySe. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: ARM_common_memcpy4_8. */
+/* Supplied declaration required: __ARM_common_memcpy4_8. */
 extern int scrRunOpcodesStub(unsigned int);
 extern unsigned int configGetSettings(void);
 /* Supplied declaration required: FUN_002299b0. */
@@ -104,7 +104,7 @@ void FUN_0041de6c(int param_1)
     temp_v1 = gameDataBlocksGetTable();
     __aeabi_memcpy4(temp_v1,*(unsigned int *)(param_1 + 0x1c),0x80);
     temp_v1 = configGetSettings();
-    ARM_common_memcpy4_8(temp_v1,*(unsigned int *)(param_1 + 0x20));
+    __ARM_common_memcpy4_8(temp_v1,*(unsigned int *)(param_1 + 0x20));
     temp_v1 = gameDataBlocksGetSaveData();
     __aeabi_memcpy4(temp_v1,*(unsigned int *)(param_1 + 0x24),0x2a71c);
     if ((DAT_00588e16 != '\0') && (temp_v0 = gameFlagIsSet(0x470), temp_v0 == 0)) {

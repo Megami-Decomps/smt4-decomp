@@ -19,7 +19,7 @@ int navigationSetFieldValue(...);
 int mapDepartSetTarget(...);
 int FUN_0027d0ec(void);
 int navigationSetArguments(...);
-int FUN_0027d7b0(...);
+int table23FindRecordByKey(...);
 int lmapSetSceneId(...);
 int FUN_0027fc14(...);
 int naviRegisterTransitionsAndRequest(...);
@@ -83,7 +83,7 @@ extern int FUN_0026f950(void);
 /* Supplied declaration required: FUN_0027d0ec. */
 /* Supplied declaration required: navigationSetArguments. */
 extern int dataTableGetRecord23(void);
-/* Supplied declaration required: FUN_0027d7b0. */
+/* Supplied declaration required: table23FindRecordByKey. */
 /* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: FUN_0027fc14. */
 /* Supplied declaration required: naviRegisterTransitionsAndRequest. */
@@ -215,7 +215,7 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
       *(unsigned int *)(temp_v2 + 0x24) = 0x6f;
       return;
     }
-    FUN_0027d7b0(temp_v1,temp_v3,DAT_0049fd1c);
+    table23FindRecordByKey(temp_v1,temp_v3,DAT_0049fd1c);
     if (temp_v1 != -1) {
       temp_v3 = dataTableGetRecord23();
       temp_v1 = g_lmapScene;

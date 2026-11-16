@@ -20,9 +20,8 @@ u32 FUN_003a8c10()
     for (s32 index = first; index < first + count; ++index) {
         BtlMainStateA *state = btlGetMainState();
         BtlCombatantEntryA *entry = &state->entries[index];
-        u64 flags = entry->flags;
-        if (!(flags & g_btlCandidateMasks.unavailable) &&
-            (flags & g_btlCandidateMasks.required) && !(flags & g_btlCandidateMasks.excluded) &&
+        if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
+            (entry->flags & g_btlCandidateMasks.required) && !(g_btlCandidateMasks.excluded & entry->flags) &&
             entry->id == id && (entry->encodedStats.values[stat] >> 10) == 4) {
             scrSetResult(1);
             return 1;

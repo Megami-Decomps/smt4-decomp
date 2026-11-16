@@ -44,7 +44,7 @@ extern "C" {
 PlayerStats *gameGetPlayerData(void);
 EquipmentRecord *dataTable08Sub2GetRecord(u32 id);
 void equipmentGetCappedUpgradeBonuses(u32 id, UpgradeBonuses *out);
-void FUN_004cceb8(StatGrowthParameters *out, s32 arg);
+void playerGetGrowthParameters(StatGrowthParameters *out, s32 arg);
 void FUN_004cc6a4(s32 level, u16 *totals, const StatGrowthParameters *parameters);
 s16 FUN_003da998(s32 kind, const StatGrowthParameters *parameters);
 s16 FUN_003daaf4(s32 kind, const StatGrowthParameters *parameters);
@@ -90,7 +90,7 @@ void FUN_003df7c4(PlayerStats *stats)
         stats->total[i] = (u16)value;
     }
     StatGrowthParameters parameters;
-    FUN_004cceb8(&parameters, 0);
+    playerGetGrowthParameters(&parameters, 0);
     FUN_004cc6a4(stats->level, stats->total, &parameters);
     s32 hpGrowth = stats->base[0] - FUN_003da998(1, &parameters);
     s32 mpGrowth = stats->base[1] - FUN_003daaf4(1, &parameters);

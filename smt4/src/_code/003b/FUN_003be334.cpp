@@ -96,7 +96,7 @@ s32 FUN_003be334(s32 wantDamage, s32 skillId, u32 unused, s32 recordId, f32 mult
                     damage += damage * 25 / 100;
             }
         }
-        if (!(battle->battleFlags & 0x40000) && scaled && damage > 0 && !(battle->editorControl.flags44AC & 0x40) &&
+        if (!(battle->battleMask & 0x40000) && scaled && damage > 0 && !(battle->editorMask & (0x40ULL << 32)) &&
             !(battle->encounter.flags & 0x20000000))
             damage += randRange(15);
         if (wantDamage == 0)

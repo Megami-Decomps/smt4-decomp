@@ -88,7 +88,7 @@ u32 FUN_003d317c(BtlMainState **block, CommandState *work)
     reinterpret_cast<CommandStartView *>(*block)->unk2f04 = 0;
     (*block)->pendingAction = 0;
     (*block)->secondaryPendingAction = 0;
-    (*block)->spriteFlags &= ~2u;
+    (*block)->battleMask &= ~(2ULL << 32);
     (*block)->core.firstBonus = -1;
     (*block)->core.secondBonus = -1;
     FUN_00250720(*block);

@@ -35,7 +35,7 @@ extern CampLists *g_camp;
 u32 FUN_0029efc0(const GridNavigation *grid);
 void buttonHelpShowSkillDetails(u32 id);
 void FUN_0029212c(u32 id);
-u32 FUN_00288e68(void);
+u32 table8Type5GetValue(void);
 void FUN_0029ee6c(s32 mode, u32 color);
 
 /* The index of the grid's highlighted entry. */
@@ -57,7 +57,7 @@ void FUN_00299900(u32 list)
         break;
     case 10:
         if (camp->listE[selectedIndex(&camp->grids[4])] != 0) {
-            buttonHelpShowSkillDetails(FUN_00288e68());
+            buttonHelpShowSkillDetails(table8Type5GetValue());
         } else {
             FUN_0029ee6c(0, 0x323232FF);
         }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail tests the nine ailment bits one by one (tst/tsteq chains after a bic of the alternate bit, repeated at both uses) and keeps the status as an unreduced halfword (uxth at each use); armcc folds our mask test into one bic/bics pair (174 rows against 206). Logic, offsets and the linked-record updates follow retail. */
+/* NON_MATCHING: the ailment test is now retail's tst/tsteq chain (statusHasAilment) and the block layout (unit-record branch first) matches; remaining: retail keeps status in r5 and the entry/record pointer in r4 and widens status with uxth before each OR into a record (an unreduced halfword), 197 rows against 206. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 
@@ -50,8 +50,30 @@ struct BtlStateRecords {
     /* 0x1FC4 */ u16 woken;
 };
 
-/* The ailment bits of a status word (everything but the alternate bit and bit 0). */
-#define STATUS_AILMENT_MASK 0x7EE
+/* Whether `status` holds an ailment bit (the alternate bit does not count). */
+static __inline bool statusHasAilment(u32 status)
+{
+    status &= ~STATUS_BIT_ALT;
+    if (status & 0x2)
+        return true;
+    if (status & 0x20)
+        return true;
+    if (status & 0x40)
+        return true;
+    if (status & 0x80)
+        return true;
+    if (status & 0x100)
+        return true;
+    if (status & 0x200)
+        return true;
+    if (status & 0x400)
+        return true;
+    if (status & 0x4)
+        return true;
+    if (status & 0x8)
+        return true;
+    return false;
+}
 
 extern "C" {
 
@@ -68,10 +90,25 @@ void FUN_003bcdb0(s32 id, s32 set, u16 status)
     BtlStateRecords *state = reinterpret_cast<BtlStateRecords *>(btlGetMainState());
     BtlStatusEntry *entry = btlMainFindEntryByListedId(state, id);
 
-    if (entry != NULL) {
+    if (entry == NULL) {
+        if (id - 0x6D >= 0) {
+            BtlStatusRecord *record = gameGetUnitRecord(id - 0x6D);
+
+            if (record != NULL) {
+                if (set == 0) {
+                    record->status = record->status & ~status;
+                } else {
+                    if (statusHasAilment(status)) {
+                        record->status = record->status & ~STATUS_BIT_ALT;
+                    }
+                    record->status = record->status | status;
+                }
+            }
+        }
+    } else {
         if ((entry->flags & ENTRY_FLAG_DOWN) == 0) {
             if (set != 0) {
-                if ((status & ~STATUS_BIT_ALT & STATUS_AILMENT_MASK) != 0) {
+                if (statusHasAilment(status)) {
                     btlTargetSetFlag10(state, id, 0);
                 }
                 entry->lower.status = entry->lower.status | status;
@@ -151,19 +188,6 @@ void FUN_003bcdb0(s32 id, s32 set, u16 status)
                     state->woken++;
                     return;
                 }
-            }
-        }
-    } else if (id - 0x6D >= 0) {
-        BtlStatusRecord *record = gameGetUnitRecord(id - 0x6D);
-
-        if (record != NULL) {
-            if (set == 0) {
-                record->status = record->status & ~status;
-            } else {
-                if ((status & ~STATUS_BIT_ALT & STATUS_AILMENT_MASK) != 0) {
-                    record->status = record->status & ~STATUS_BIT_ALT;
-                }
-                record->status = record->status | status;
             }
         }
     }

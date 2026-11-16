@@ -1,4 +1,4 @@
-/* NON_MATCHING: initial guaranteed flag, saved unit/flags registers and final boolean branch layout differ. */
+/* NON_MATCHING: the editor-mask test now matches; retail keeps the found unit in r5 (the listedId register) and its flags in r6, armcc swaps them. */
 #include "battle/BtlMainAccess.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "battle/BattleBalanceRow.h"
@@ -11,7 +11,7 @@ s32 randRange(u32);
 u32 FUN_00228808(s32 listedId, u32 unused, s32 mode)
 {
     BtlMainState *state = btlGetMainState();
-    if (state->editorControl.flags44AC & 1)
+    if (state->editorMask & (1ULL << 32))
         return 1;
     s32 chance = 40;
     BtlEntry *unit = btlMainFindEntryByListedId(state, listedId);

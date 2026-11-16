@@ -22,7 +22,7 @@ int naviMainSetRequestValue(...);
 int FUN_0036b004(void);
 int FUN_003a2278(...);
 int naviMainSetRequestTriple(...);
-int FUN_003b5714(...);
+int table23FindRecordByKey(...);
 int FUN_003b5d20(void);
 int VectorSignedToFloat(...);
 
@@ -96,7 +96,7 @@ extern int lmapGetSpawnIndex(void);
 extern int dataTableGetRecord23(void);
 /* Supplied declaration required: FUN_003a2278. */
 /* Supplied declaration required: naviMainSetRequestTriple. */
-/* Supplied declaration required: FUN_003b5714. */
+/* Supplied declaration required: table23FindRecordByKey. */
 /* Supplied declaration required: FUN_003b5d20. */
 /* Supplied declaration required: sysPlayVoice. */
 
@@ -233,7 +233,7 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
         DAT_005f1add = '\0';
       }
       else {
-        FUN_003b5714(temp_v3,temp_v5,DAT_005f1ca0);
+        table23FindRecordByKey(temp_v3,temp_v5,DAT_005f1ca0);
         if (temp_v3 != -1) {
           temp_v5 = dataTableGetRecord23();
           temp_v1 = g_lmapScene;

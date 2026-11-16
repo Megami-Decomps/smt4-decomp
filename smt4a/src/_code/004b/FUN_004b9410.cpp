@@ -11,7 +11,7 @@ void FUN_004a0bac(s32 option, s32 enabled);
 void FUN_003d54f8(s32 option, s32 frames);
 void FUN_004b7a54(ContentTransition *work);
 void mikadoLoadSceneResources(ContentTransition *work);
-void ARM_common_memcpy4_6(ShortJumpDestination *source, ShortJumpDestination *destination);
+void __ARM_common_memcpy4_6(ShortJumpDestination *source, ShortJumpDestination *destination);
 
 /* True when a pending request flag that supersedes the departure is set. */
 static __inline bool departureIsSuperseded(u32 flags)
@@ -75,7 +75,7 @@ void FUN_004b9410(ContentTransition *work)
             }
         } else {
             FUN_004b7a54(work);
-            ARM_common_memcpy4_6(reinterpret_cast<ShortJumpDestination *>(&work->sourceMap), &work->destination);
+            __ARM_common_memcpy4_6(reinterpret_cast<ShortJumpDestination *>(&work->sourceMap), &work->destination);
             mikadoLoadSceneResources(work);
             work->state = 2;
             work->phase = 0;

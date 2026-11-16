@@ -22,7 +22,7 @@ void gameCounterAddSaturating(s32, s32);
 void frameTexApplyMode(s32);
 
 /* Initialize encounter tracking, its update task and the battle's entry records. */
-void FUN_00207f68(BtlMainState *battle)
+void btlEncountInitialize(BtlMainState *battle)
 {
     battle->encounter.drawJob = taskCreateDraw("btlEncount Calc", 2, 0, 0, battleQueryEncounter,
                                               btlEncountDestroy, battle, battle->job);
@@ -46,7 +46,7 @@ void FUN_00207f68(BtlMainState *battle)
         !(battle->encounter.flags & 0x2000000) && !(battle->battleFlags & 2) &&
         !(battle->battleFlags & 0x40000000)) {
         frameTexApplyMode(2);
-        battle->battleFlags |= 0x40000000;
+        battle->battleMask |= 0x40000000;
     }
 }
 }

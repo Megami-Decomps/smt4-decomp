@@ -88806,13 +88806,13 @@
       "target_path": "orig/target/_code/001a/FUN_001a9104.o"
     },
     {
-      "base_path": "build/obj/_code/001a/ARM_common_memcpy4_8.o",
+      "base_path": "build/obj/_code/001a/__ARM_common_memcpy4_8.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "ARM_common_memcpy4_8",
+            "name": "__ARM_common_memcpy4_8",
             "size": 20,
             "vram": "0x1a9110"
           }
@@ -88820,10 +88820,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/001a/ARM_common_memcpy4_8.cpp"
+        "source_path": "src/_code/001a/__ARM_common_memcpy4_8.cpp"
       },
-      "name": "_code/001a/ARM_common_memcpy4_8",
-      "target_path": "orig/target/_code/001a/ARM_common_memcpy4_8.o"
+      "name": "_code/001a/__ARM_common_memcpy4_8",
+      "target_path": "orig/target/_code/001a/__ARM_common_memcpy4_8.o"
     },
     {
       "base_path": "build/obj/_code/001a/FUN_001a9124.o",
@@ -102898,13 +102898,13 @@
       "target_path": "orig/target/_code/001d/FUN_001d13e8.o"
     },
     {
-      "base_path": "build/obj/_code/001d/ARM_common_memcpy4_6.o",
+      "base_path": "build/obj/_code/001d/__ARM_common_memcpy4_6.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "ARM_common_memcpy4_6",
+            "name": "__ARM_common_memcpy4_6",
             "size": 20,
             "vram": "0x1d1438"
           }
@@ -102912,10 +102912,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/001d/ARM_common_memcpy4_6.cpp"
+        "source_path": "src/_code/001d/__ARM_common_memcpy4_6.cpp"
       },
-      "name": "_code/001d/ARM_common_memcpy4_6",
-      "target_path": "orig/target/_code/001d/ARM_common_memcpy4_6.o"
+      "name": "_code/001d/__ARM_common_memcpy4_6",
+      "target_path": "orig/target/_code/001d/__ARM_common_memcpy4_6.o"
     },
     {
       "base_path": "build/obj/_code/001d/nn_snd_CTR_DspFxManager_GetDspCycles.o",
@@ -119892,13 +119892,13 @@
       "target_path": "orig/target/_code/0026/gameDataGetPlayerName.o"
     },
     {
-      "base_path": "build/obj/_code/0026/FUN_00261840.o",
+      "base_path": "build/obj/_code/0026/scrollSelectionClampToCount.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00261840",
+            "name": "scrollSelectionClampToCount",
             "size": 136,
             "vram": "0x261840"
           }
@@ -119906,10 +119906,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0026/FUN_00261840.cpp"
+        "source_path": "src/_code/0026/scrollSelectionClampToCount.cpp"
       },
-      "name": "_code/0026/FUN_00261840",
-      "target_path": "orig/target/_code/0026/FUN_00261840.o"
+      "name": "_code/0026/scrollSelectionClampToCount",
+      "target_path": "orig/target/_code/0026/scrollSelectionClampToCount.o"
     },
     {
       "base_path": "build/obj/_code/0026/FUN_002618c8.o",
@@ -128903,13 +128903,13 @@
       "target_path": "orig/target/_code/002a/asdProcessClearSelectedFlags.o"
     },
     {
-      "base_path": "build/obj/_code/002a/FUN_002a2d28.o",
+      "base_path": "build/obj/_code/002a/jobSetFlagsByMode.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002a2d28",
+            "name": "jobSetFlagsByMode",
             "size": 364,
             "vram": "0x2a2d28"
           }
@@ -128917,10 +128917,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002a/FUN_002a2d28.cpp"
+        "source_path": "src/_code/002a/jobSetFlagsByMode.cpp"
       },
-      "name": "_code/002a/FUN_002a2d28",
-      "target_path": "orig/target/_code/002a/FUN_002a2d28.o"
+      "name": "_code/002a/jobSetFlagsByMode",
+      "target_path": "orig/target/_code/002a/jobSetFlagsByMode.o"
     },
     {
       "base_path": "build/obj/_code/map/collision/FUN_002a2e98.o",
@@ -144411,13 +144411,13 @@
       "target_path": "orig/target/_code/002e/FUN_002e5a98.o"
     },
     {
-      "base_path": "build/obj/_code/002e/runtimeShiftLeftWide.o",
+      "base_path": "build/obj/_code/002e/__aeabi_llsl.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "runtimeShiftLeftWide",
+            "name": "__aeabi_llsl",
             "size": 40,
             "vram": "0x2e5ac0"
           }
@@ -144425,10 +144425,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002e/runtimeShiftLeftWide.cpp"
+        "source_path": "src/_code/002e/__aeabi_llsl.cpp"
       },
-      "name": "_code/002e/runtimeShiftLeftWide",
-      "target_path": "orig/target/_code/002e/runtimeShiftLeftWide.o"
+      "name": "_code/002e/__aeabi_llsl",
+      "target_path": "orig/target/_code/002e/__aeabi_llsl.o"
     },
     {
       "base_path": "build/obj/_code/002e/readerSeek.o",
@@ -237831,13 +237831,13 @@
       "target_path": "orig/target/_code/003b/dataTable23Type1CountWithAoc.o"
     },
     {
-      "base_path": "build/obj/_code/003b/FUN_003b5714.o",
+      "base_path": "build/obj/_code/003b/table23FindRecordByKey.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_003b5714",
+            "name": "table23FindRecordByKey",
             "size": 220,
             "vram": "0x3b5714"
           }
@@ -237845,10 +237845,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/003b/FUN_003b5714.cpp"
+        "source_path": "src/_code/003b/table23FindRecordByKey.cpp"
       },
-      "name": "_code/003b/FUN_003b5714",
-      "target_path": "orig/target/_code/003b/FUN_003b5714.o"
+      "name": "_code/003b/table23FindRecordByKey",
+      "target_path": "orig/target/_code/003b/table23FindRecordByKey.o"
     },
     {
       "base_path": "build/obj/_code/003b/dataTableGetRecordFortyNine.o",
@@ -247350,13 +247350,13 @@
       "target_path": "orig/target/_code/003c/FUN_003cdd2c.o"
     },
     {
-      "base_path": "build/obj/_code/003c/FUN_003cdd3c.o",
+      "base_path": "build/obj/_code/003c/conditionalMessageFind.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_003cdd3c",
+            "name": "conditionalMessageFind",
             "size": 304,
             "vram": "0x3cdd3c"
           }
@@ -247364,10 +247364,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/003c/FUN_003cdd3c.cpp"
+        "source_path": "src/_code/003c/conditionalMessageFind.cpp"
       },
-      "name": "_code/003c/FUN_003cdd3c",
-      "target_path": "orig/target/_code/003c/FUN_003cdd3c.o"
+      "name": "_code/003c/conditionalMessageFind",
+      "target_path": "orig/target/_code/003c/conditionalMessageFind.o"
     },
     {
       "base_path": "build/obj/_code/003c/FUN_003cde70.o",
@@ -305787,13 +305787,13 @@
       "target_path": "orig/target/_code/0048/aocRecordLookup84.o"
     },
     {
-      "base_path": "build/obj/_code/0048/FUN_00480da8.o",
+      "base_path": "build/obj/_code/0048/table8Type5GetValue.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00480da8",
+            "name": "table8Type5GetValue",
             "size": 128,
             "vram": "0x480da8"
           }
@@ -305801,10 +305801,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0048/FUN_00480da8.cpp"
+        "source_path": "src/_code/0048/table8Type5GetValue.cpp"
       },
-      "name": "_code/0048/FUN_00480da8",
-      "target_path": "orig/target/_code/0048/FUN_00480da8.o"
+      "name": "_code/0048/table8Type5GetValue",
+      "target_path": "orig/target/_code/0048/table8Type5GetValue.o"
     },
     {
       "base_path": "build/obj/_code/0048/flagValueAdd.o",
@@ -323728,13 +323728,13 @@
       "target_path": "orig/target/_code/004c/FUN_004ccdb8.o"
     },
     {
-      "base_path": "build/obj/_code/004c/FUN_004cceb8.o",
+      "base_path": "build/obj/_code/004c/playerGetGrowthParameters.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_004cceb8",
+            "name": "playerGetGrowthParameters",
             "size": 192,
             "vram": "0x4cceb8"
           }
@@ -323742,19 +323742,19 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004c/FUN_004cceb8.cpp"
+        "source_path": "src/_code/004c/playerGetGrowthParameters.cpp"
       },
-      "name": "_code/004c/FUN_004cceb8",
-      "target_path": "orig/target/_code/004c/FUN_004cceb8.o"
+      "name": "_code/004c/playerGetGrowthParameters",
+      "target_path": "orig/target/_code/004c/playerGetGrowthParameters.o"
     },
     {
-      "base_path": "build/obj/_code/004c/FUN_004ccf78.o",
+      "base_path": "build/obj/_code/004c/playerResetToStartingStats.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_004ccf78",
+            "name": "playerResetToStartingStats",
             "size": 336,
             "vram": "0x4ccf78"
           }
@@ -323762,10 +323762,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004c/FUN_004ccf78.cpp"
+        "source_path": "src/_code/004c/playerResetToStartingStats.cpp"
       },
-      "name": "_code/004c/FUN_004ccf78",
-      "target_path": "orig/target/_code/004c/FUN_004ccf78.o"
+      "name": "_code/004c/playerResetToStartingStats",
+      "target_path": "orig/target/_code/004c/playerResetToStartingStats.o"
     },
     {
       "base_path": "build/obj/_code/004c/FUN_004cd0c8.o",
@@ -342311,13 +342311,13 @@
       "target_path": "orig/target/_code/0050/clearTwoWordsAndByte.o"
     },
     {
-      "base_path": "build/obj/_code/0050/ARM_common_memcpy4_7.o",
+      "base_path": "build/obj/_code/0050/__ARM_common_memcpy4_7.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "ARM_common_memcpy4_7",
+            "name": "__ARM_common_memcpy4_7",
             "size": 28,
             "vram": "0x50d740"
           }
@@ -342325,19 +342325,19 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0050/ARM_common_memcpy4_7.cpp"
+        "source_path": "src/_code/0050/__ARM_common_memcpy4_7.cpp"
       },
-      "name": "_code/0050/ARM_common_memcpy4_7",
-      "target_path": "orig/target/_code/0050/ARM_common_memcpy4_7.o"
+      "name": "_code/0050/__ARM_common_memcpy4_7",
+      "target_path": "orig/target/_code/0050/__ARM_common_memcpy4_7.o"
     },
     {
-      "base_path": "build/obj/_code/0050/ARM_common_memcpy4_9.o",
+      "base_path": "build/obj/_code/0050/__ARM_common_memcpy4_9.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "ARM_common_memcpy4_9",
+            "name": "__ARM_common_memcpy4_9",
             "size": 28,
             "vram": "0x50d75c"
           }
@@ -342345,10 +342345,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0050/ARM_common_memcpy4_9.cpp"
+        "source_path": "src/_code/0050/__ARM_common_memcpy4_9.cpp"
       },
-      "name": "_code/0050/ARM_common_memcpy4_9",
-      "target_path": "orig/target/_code/0050/ARM_common_memcpy4_9.o"
+      "name": "_code/0050/__ARM_common_memcpy4_9",
+      "target_path": "orig/target/_code/0050/__ARM_common_memcpy4_9.o"
     },
     {
       "base_path": "build/obj/_code/0050/fillThreeWordsWithByte.o",

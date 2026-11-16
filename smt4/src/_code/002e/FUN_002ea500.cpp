@@ -14,7 +14,7 @@ int FUN_002bf810(...);
 
 int mapIfReleaseSlot2(void);
 int mapIfActivateRecord(int, unsigned int);
-int FUN_0027d7b0(unsigned int, unsigned int, unsigned int);
+int table23FindRecordByKey(unsigned int, unsigned int, unsigned int);
 int FUN_0027fae4(void);
 int FUN_0027fc14(...);
 int FUN_0027fca0(unsigned int);
@@ -46,7 +46,7 @@ extern unsigned char DAT_0049fb46; /* 0x49fb46 */
 /* Supplied declaration required: FUN_00248114. */
 /* Supplied declaration required: mapIfActivateRecord. */
 extern int inputIsQuestMenuPressed(void);
-/* Supplied declaration required: FUN_0027d7b0. */
+/* Supplied declaration required: table23FindRecordByKey. */
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: FUN_0027fae4. */
@@ -111,7 +111,7 @@ void FUN_002ea500(void)
                 mapIfActivateRecord(1,DAT_0049f99c);
                 temp_v0 = FUN_0027ee9c();
                 if (temp_v0 != 0) {
-                  FUN_0027d7b0(DAT_0049f990,DAT_0049f994,DAT_0049f998);
+                  table23FindRecordByKey(DAT_0049f990,DAT_0049f994,DAT_0049f998);
                   temp_v0 = g_lmapScene;
                   *(unsigned int *)(g_lmapScene + 0xa0) = DAT_0049f9a0;
                   *(float *)(temp_v0 + 0xa4) = DAT_0049f9a4 - 500.0f;

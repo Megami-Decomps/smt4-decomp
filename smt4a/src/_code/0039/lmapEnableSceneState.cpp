@@ -1,13 +1,18 @@
-/* NON_MATCHING: retail loads g_gameState+0x461 (ldrb, result unused) before the tail call, with no frame; a linker-inlined getter call leaves a push/pop in the build (tried gameStateGetNavigationFlag461 = 0xe5d00461), a plain dead read is dropped. */
-#include "common.h"
+#include "shard/W5_W5Match7_SceneState.h"
 
 extern "C" {
 
-void mapOverlaySetOpen(s32 enabled);
+void mapOverlaySetOpen(s32 open);
 
+/* Opens the map overlay. Both navigation modes (g_gameState's byte 0x461) open it the same way;
+ * retail still reads the mode before the shared tail call. */
 void lmapEnableSceneState(void)
 {
-    mapOverlaySetOpen(1);
+    if (g_gameState.navigation.unk461 != 0) {
+        mapOverlaySetOpen(1);
+    } else {
+        mapOverlaySetOpen(1);
+    }
 }
 
 } /* extern "C" */

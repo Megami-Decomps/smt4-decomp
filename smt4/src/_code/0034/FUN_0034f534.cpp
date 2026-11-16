@@ -4,14 +4,14 @@
 
 extern "C" {
 u64 resourceGetWideHandle(u32 index);
-u64 runtimeShiftLeftWide(u64 value, u32 shift);
+u64 __aeabi_llsl(u64 value, u32 shift);
 s32 deferredTransferEnqueue(u32 handle, const void *buffer, u32 size);
 void rt_memcpy(void *destination, const void *source, u32 size);
 
 u8 FUN_0034f534(Obj557f00 *stream, const void *source, u32 size)
 {
     u64 submitted = stream->submitted;
-    u64 consumed = runtimeShiftLeftWide(resourceGetWideHandle(stream->handle), stream->description->height);
+    u64 consumed = __aeabi_llsl(resourceGetWideHandle(stream->handle), stream->description->height);
     u32 available = stream->capacity - (u32)(submitted - consumed);
     u32 tailSpace = stream->capacity - stream->cursor;
     u32 offset = stream->cursor;
