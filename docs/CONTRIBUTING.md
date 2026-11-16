@@ -309,6 +309,26 @@ calling a difference a register tie-break:
 - **Locals declared at the top of the function** (C89 style), a loop index declared once and reused,
   or a positive-first `if (x) { ...; return 1; } return 0;` (stops shrink-wrapping) each fixed
   several functions.
+- **Start from a look-alike**: `python -B tools/similar.py` lists, for every unproven function, the
+  proven functions (either game) with the most similar retail code. Copy that source's shape (types,
+  helpers, statement order) with the target's own callees and constants; this was the most
+  productive method of Waves 37-38.
+- **Small static helpers, not just inlines**: list cursors (`getTop`/`getPosition`/`set`), message
+  commands (`showMessage(mode, wait)`), table walks (`tableEntry(section, index)`) and draw bodies
+  between a render push and pop are each a separate non-inline `static` function in retail's shape.
+- **State machines**: a `stepEnter(step, state)` helper that clears the counters and then stores the
+  state gives retail's store order; a status local (`s32 result = 1;`) after the argument read keeps
+  a shared constant in a callee-saved register.
+- **Integer-to-float conversions** through `static __inline f32 get(p) { return p->field; }`;
+  rounding as `f32 half = 0.5f;` declared first, then `floorf(scaled + half)`.
+- **Loop bounds read from the structure** (`i < table->count`, `index < first + count`) rather than
+  cached in a local; a `u32` index gives retail's count-down loop.
+- **Signed byte fields** (`s8`) at large offsets give retail's literal base registers
+  (`add #0xF00`, `g_gameState+0x100`).
+- **Constructors**: `new (alloc) T` with a constructor and a class `operator new` gives retail's
+  predicated allocation; members of types with their own zeroing constructors give its registers.
+- **Code built without VFP** (retail copies 8/12-byte values through core registers where our build
+  uses `vldm`/`vstm`) takes `--fpu=softvfp` in its unit `cflags`, like its module neighbours.
 - **A lone load or move in the middle of retail code** may be a getter armlink inlined: check
   `config/inlined.txt` (and the target objects for one-instruction functions) before calling it
   allocation.
