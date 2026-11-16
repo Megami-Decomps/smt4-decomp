@@ -12,8 +12,8 @@ PlayerData *gameGetPlayerData(void);
  * flags, and doubles when either demon belongs to race 35. */
 bool FUN_004da520(u32 unused, ScaledRecordValues *first, ScaledRecordValues *second)
 {
-    DevilRecordA *firstRecord = FUN_00184310(first->id);
-    DevilRecordA *secondRecord = FUN_00184310(second->id);
+    DevilRecordA *firstRecord = devilGetRecord(first->id);
+    DevilRecordA *secondRecord = devilGetRecord(second->id);
     u16 chance = 1;
 
     if (gameGetPlayerData()->unk5E & 0x200) {

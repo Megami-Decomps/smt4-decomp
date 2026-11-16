@@ -13,7 +13,7 @@ void optionsSetFlag1();
 void uiQuestRefreshDetailPages(u32 questId);
 void uiSpriteSelectAnim(void *sprite, s32 animation);
 void FUN_003dea6c(u32 questId, s32 state, s32 enabled);
-QuestRequirementDefinition *FUN_001ad9b4(u32 questId);
+QuestRequirementDefinition *dataTable1bOr1cGetRecord(u32 questId);
 s32 scrScriptProcessStartEntry(u32 script, u32 entry);
 const char *FUN_0015f858(u32 textId, s32 mode);
 char *libc_strcpy(char *destination, const char *source);
@@ -50,7 +50,7 @@ void FUN_0021a4b0()
     uiQuestRefreshDetailPages(questId);
     uiSpriteSelectAnim(quest->acceptance.sprite, 2);
     FUN_003dea6c(questId, 0, 1);
-    QuestRequirementDefinition *definition = FUN_001ad9b4(questId);
+    QuestRequirementDefinition *definition = dataTable1bOr1cGetRecord(questId);
     if (definition && definition->kind == 11) {
         const SpecialQuestMetadata *metadata = reinterpret_cast<const SpecialQuestMetadata *>(definition);
         char text[132];

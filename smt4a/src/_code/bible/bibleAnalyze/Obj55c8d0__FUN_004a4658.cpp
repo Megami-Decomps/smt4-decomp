@@ -77,7 +77,7 @@ void Obj55c8d0::FUN_004a4658()
     BibleAnalyzeListEntry *entries = reinterpret_cast<AnalyzeEntryListView *>(screen)->entries;
     if (screen->unk0860 == 0) {
         s32 index = flaggedValueHolderGetTotal(&screen->selection.holder);
-        const AnalyzeDemonFlagsView *record = reinterpret_cast<const AnalyzeDemonFlagsView *>(FUN_00184310(entries[index].id));
+        const AnalyzeDemonFlagsView *record = reinterpret_cast<const AnalyzeDemonFlagsView *>(devilGetRecord(entries[index].id));
         sysPlaySe((record->flags & 2) ? 0x121 : 0x30);
     } else {
         sysPlaySe(0x48);

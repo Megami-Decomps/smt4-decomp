@@ -6,14 +6,14 @@
 extern "C" {
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size,
                    s32 (*compare)(const void *, const void *));
-s32 FUN_001ab89c(const void *left, const void *right);
+s32 dataTable00CompareRecordIds(const void *left, const void *right);
 extern AocSystemA *g_aocSystem;
 
 static inline Table00Record *table00FindRecord(const Table00Record *key,
     const Table00Record *records, u32 count)
 {
     return (Table00Record *)libc_bsearch(key, records, count, sizeof(*key),
-        FUN_001ab89c);
+        dataTable00CompareRecordIds);
 }
 
 /* Prefers add-on records, then searches the base table by identifier. */

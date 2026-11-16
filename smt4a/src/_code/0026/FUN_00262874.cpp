@@ -33,7 +33,7 @@ int bitsAt60Clear(...);
 int FUN_004bd6b0(...);
 int FUN_004d0d70(void);
 
-int FUN_00184310(void);
+int devilGetRecord(void);
 int buttonHelpSetText(...);
 int slotRecordFindById(...);
 int menuStateStartConfirm(void);
@@ -145,7 +145,7 @@ extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: eventQueueAddUnique. */
 extern unsigned short recordGetScaledMaximum(int);
 extern unsigned int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_00184310. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 extern int gameFlagIsSet(unsigned int);
@@ -2191,7 +2191,7 @@ LAB_00265c00:
         FUN_001517b4(0,1);
         if (temp_v14 != 0) {
           temp_v5 = (*(unsigned int *)(temp_v1 + 0xe94) & 0x1ffff) >> 2;
-          FUN_00184310();
+          devilGetRecord();
           temp_v8 = computeCountLimit();
           if (*(unsigned short *)(temp_v5 + 6) <= temp_v8) {
             temp_v14 = 0;

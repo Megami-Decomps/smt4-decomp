@@ -15,7 +15,7 @@ u32 FUN_0035ebe0(void)
         if ((g_btlCandidateMasks.unavailable & entry->flags) &&
             (entry->flags & g_btlCandidateMasks.required) &&
             !(entry->flags & g_btlCandidateMasks.excluded) &&
-            FUN_00184310(entry->id)->categoryView.category == 4) {
+            devilGetRecord(entry->id)->categoryView.category == 4) {
             scrSetResult(1);
             return 1;
         }

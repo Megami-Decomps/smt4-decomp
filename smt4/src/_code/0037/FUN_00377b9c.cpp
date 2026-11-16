@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00141fd0(...);
+int nw_snd_SoundArchive_GetSoundType(...);
 int FUN_002bda30(...);
 int FUN_00377a10(...);
 int FUN_003784a4(...);
@@ -51,7 +51,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: UnsignedSaturate (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: UnsignedDoesSaturate (CALLOTHER). */
-/* Supplied declaration required: FUN_00141fd0. */
+/* Supplied declaration required: nw_snd_SoundArchive_GetSoundType. */
 extern int FUN_0014d3fc(unsigned int, unsigned int, unsigned char *);
 extern int FUN_0014d478(unsigned int, unsigned int, unsigned char *);
 extern int FUN_0014d530(unsigned int, unsigned int, unsigned int *);
@@ -192,7 +192,7 @@ unsigned int FUN_00377b9c(unsigned int param_1,int *param_2,unsigned int param_3
   temp_v4 = *(int *)(param_1 + 4);
   piVar14 = (int *)0x0;
   piVar17 = (int *)0x0;
-  FUN_00141fd0(temp_v4,temp_v32);
+  nw_snd_SoundArchive_GetSoundType(temp_v4,temp_v32);
   if (temp_v4 != 1) {
     if (temp_v4 != 2) {
       if (temp_v4 != 3) {
@@ -371,7 +371,7 @@ joined_r0x00377e5c:
   if (temp_v4 != 0) {
     soundObjectPostByte0b(piVar9,(int)temp_v16);
     temp_v4 = *(int *)(param_1 + 4);
-    FUN_00141fd0(temp_v4,temp_v32);
+    nw_snd_SoundArchive_GetSoundType(temp_v4,temp_v32);
     if (temp_v4 != 1) {
       if (temp_v4 != 2) {
         if (temp_v4 != 3) {

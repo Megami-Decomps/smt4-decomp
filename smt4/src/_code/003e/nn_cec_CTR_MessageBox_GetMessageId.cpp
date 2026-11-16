@@ -3,7 +3,7 @@
 extern "C" {
 
 int __ARM_common_memcpy4_8(int dst, u32 value);
-extern u32 FUN_00238c80(u8 *buffer, int source);
+extern u32 releaseOrCopyHandle(u8 *buffer, int source);
 extern u32 nn_cec_CTR_MessageBox_GetMessHeader(u32 box, int a, u32 b);
 
 u32 nn_cec_CTR_MessageBox_GetMessageId(u32 box, int out, int a, u32 b)
@@ -17,7 +17,7 @@ u32 nn_cec_CTR_MessageBox_GetMessageId(u32 box, int out, int a, u32 b)
         result = 0xc8810bef;
     } else {
         if (out != 0) {
-            result = FUN_00238c80(buffer, header + 0x20);
+            result = releaseOrCopyHandle(buffer, header + 0x20);
             __ARM_common_memcpy4_8(out, result);
         }
         result = 0;

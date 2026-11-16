@@ -137,7 +137,7 @@ void FUN_0032360c(ResModelOwner *owner, TextureSource *source, UvTextureRequests
                             uv[0] += transform.offsetU;
                             uv[1] += transform.offsetV;
                         }
-                        FUN_002c2424((u32)(resolveOffset(&block->dataOffset)), block->dataSize);
+                        nn_gxlow_CTR_FlushDataCacheForward((u32)(resolveOffset(&block->dataOffset)), block->dataSize);
                     }
                     break;
                 }

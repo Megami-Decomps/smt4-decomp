@@ -32,7 +32,7 @@ extern "C" {
 extern const f32 DAT_0057a6a8[7];       /* damage scale by affinity step, attacker side */
 extern const f32 DAT_0057a6c4[7];       /* damage scale by affinity step, defender side */
 extern u32 g_btlScriptUnit;
-BtlUnitView *FUN_003f0e20(void *state, s32 unit);
+BtlUnitView *btlMainFindEntryByListedId(void *state, s32 unit);
 void FUN_003e8bb0(BtlCommandView *command, void *state, BtlUnitView *unit);
 
 /* The damage multiplier of attack kind `kind` (7..11) against `unit`: the affinity step scale combined with
@@ -41,20 +41,20 @@ f32 FUN_004bf6e0(s32 kind, f32 unitValue)
 {
     s32 unit = (s32)unitValue;
     f32 scale = 1.0f;
-    BtlUnitView *defender = FUN_003f0e20(btlGetMainState(), unit);
+    BtlUnitView *defender = btlMainFindEntryByListedId(btlGetMainState(), unit);
     s32 step = 0;
     if (defender != NULL) {
         step = defender->affinity[kind];
     }
     s32 inverse = -step;
-    BtlUnitView *target = FUN_003f0e20(btlGetMainState(), unit);
+    BtlUnitView *target = btlMainFindEntryByListedId(btlGetMainState(), unit);
     switch (kind) {
     case 7:
     case 8:
         scale = DAT_0057a6a8[step + 3];
         if ((target->statusFlags & 0x10) != 0) {
             scale *= 1.2f;
-            BtlUnitView *other = FUN_003f0e20(btlGetMainState(), unit);
+            BtlUnitView *other = btlMainFindEntryByListedId(btlGetMainState(), unit);
             if (other != NULL && other->buffBC > 0) {
                 scale *= 10.0f;
             }
@@ -62,7 +62,7 @@ f32 FUN_004bf6e0(s32 kind, f32 unitValue)
         break;
     case 9: {
         scale = DAT_0057a6c4[inverse + 3];
-        BtlUnitView *other = FUN_003f0e20(btlGetMainState(), unit);
+        BtlUnitView *other = btlMainFindEntryByListedId(btlGetMainState(), unit);
         s32 weak = 0;
         if (other != NULL) {
             weak = other->buffA4;
@@ -75,7 +75,7 @@ f32 FUN_004bf6e0(s32 kind, f32 unitValue)
         break;
     case 11: {
         scale = DAT_0057a6c4[step + 3];
-        BtlUnitView *other = FUN_003f0e20(btlGetMainState(), unit);
+        BtlUnitView *other = btlMainFindEntryByListedId(btlGetMainState(), unit);
         s32 strong = 0;
         if (other != NULL) {
             strong = other->buffA4;
@@ -86,19 +86,19 @@ f32 FUN_004bf6e0(s32 kind, f32 unitValue)
     }
     if ((*reinterpret_cast<u32 *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit))) & 0x200) == 0) {
         if (kind == 8) {
-            BtlUnitView *other = FUN_003f0e20(btlGetMainState(), unit);
+            BtlUnitView *other = btlMainFindEntryByListedId(btlGetMainState(), unit);
             if (other != NULL && other->buffB0 > 0) {
                 scale *= 2.2f;
             }
-            other = FUN_003f0e20(btlGetMainState(), unit);
+            other = btlMainFindEntryByListedId(btlGetMainState(), unit);
             if (other != NULL && other->buffA8 > 0) {
                 scale *= 1.25f;
             }
-            other = FUN_003f0e20(btlGetMainState(), unit);
+            other = btlMainFindEntryByListedId(btlGetMainState(), unit);
             if (other != NULL && other->buffB8 > 0) {
                 scale *= 3.0f;
             }
-            other = FUN_003f0e20(btlGetMainState(), unit);
+            other = btlMainFindEntryByListedId(btlGetMainState(), unit);
             if (other != NULL && other->buff11C > 0) {
                 BtlCommandView command;
                 FUN_003e8bb0(&command, btlGetMainState(), target);
@@ -107,11 +107,11 @@ f32 FUN_004bf6e0(s32 kind, f32 unitValue)
                 }
             }
         } else if (kind == 7) {
-            BtlUnitView *other = FUN_003f0e20(btlGetMainState(), unit);
+            BtlUnitView *other = btlMainFindEntryByListedId(btlGetMainState(), unit);
             if (other != NULL && other->buffAC > 0) {
                 scale *= 2.2f;
             }
-            other = FUN_003f0e20(btlGetMainState(), unit);
+            other = btlMainFindEntryByListedId(btlGetMainState(), unit);
             if (other != NULL && other->buffB4 > 0) {
                 scale *= 3.0f;
             }

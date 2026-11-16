@@ -44,7 +44,7 @@ struct SinCosEntry {
 extern "C" {
 extern SinCosEntry DAT_00407ed0[256];
 
-void FUN_0023b49c(XPolyFilter *filter, u32 argument, u32 base);
+void btlFilterLoadTexture(XPolyFilter *filter, u32 argument, u32 base);
 void *asdMemoryAlloc(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);
 void mtx44Copy(void *destination, const nw::math::MTX44 *source);
 
@@ -66,7 +66,7 @@ static __inline void sinCosUnits(f32 units, f32 *sinOut, f32 *cosOut)
 void FUN_003482e4(XPolyFilter *filter, XPolyParams *params, u32 argument)
 {
     filter->params = params;
-    FUN_0023b49c(filter, argument, params->baseArgument);
+    btlFilterLoadTexture(filter, argument, params->baseArgument);
     asdDebugTrace(XPOLY_SOURCE, 48);
     filter->vertices = static_cast<XPolyVertex *>(asdMemoryAlloc(0x100, 0x100, 0, (filter->params->segments + 1) * sizeof(XPolyVertex), 1));
     filter->indices = asdOperatorNewB((filter->params->segments + 1) * 12, reinterpret_cast<void *>(1));

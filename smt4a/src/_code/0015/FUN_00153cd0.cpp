@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0018a45c(int);
+int soundBlockGetPayloadEnd(int);
 int FUN_0018a8a8(int, int);
 int FUN_0018a8c8(int, int);
 int FUN_001b6390(int);
@@ -22,7 +22,7 @@ extern unsigned char FUN_00167e0c; /* 0x167e0c */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_0018a45c. */
+/* Supplied declaration required: soundBlockGetPayloadEnd. */
 extern int FUN_0018a46c(int);
 extern int FUN_0018a480(int, unsigned int);
 extern int FUN_0018a4d0(int, int);
@@ -64,7 +64,7 @@ void FUN_00153cd0(int *param_1,int param_2,unsigned int param_3,int param_4)
       param_1[0x39] = -1;
       param_1[0x3c] = param_4;
       param_1[0x3d] = 1;
-      temp_v0 = FUN_0018a45c(param_2);
+      temp_v0 = soundBlockGetPayloadEnd(param_2);
       *param_1 = temp_v0;
       temp_v0 = FUN_0018a46c(param_2);
       temp_v4 = 0;
@@ -73,7 +73,7 @@ void FUN_00153cd0(int *param_1,int param_2,unsigned int param_3,int param_4)
         temp_v9 = 0;
         temp_v8 = 0x3f000000;
         do {
-          pcVar2 = (char *)FUN_0018a45c(param_2);
+          pcVar2 = (char *)soundBlockGetPayloadEnd(param_2);
           if (*pcVar2 == '\x02') {
             unaff_r11 = FUN_0018a480(param_2,0);
           }

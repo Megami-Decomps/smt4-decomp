@@ -17,7 +17,7 @@ struct QuestGoalRecord {
 };
 
 extern "C" {
-QuestGoalRecord *FUN_001ad9b4(u16 quest);
+QuestGoalRecord *dataTable1bOr1cGetRecord(u16 quest);
 u32 FUN_001ba3d4(u32 id);
 
 static __inline PartyEntryB *questGetFlags(u16 quest)
@@ -41,7 +41,7 @@ void FUN_0041849c(u32 id, u32 amount)
     for (s32 i = 0; i < 400; ++i) {
         u32 isActive = (questGetFlags(i)->flags & 2) >> 1;
         if (isActive) {
-            QuestGoalRecord *record = FUN_001ad9b4((u16)i);
+            QuestGoalRecord *record = dataTable1bOr1cGetRecord((u16)i);
             if (record != NULL && record->disabled == 0) {
                 for (s32 j = 0; j < 4; ++j) {
                     if (record->goals[j].kind == 1 && record->goals[j].id == id) {

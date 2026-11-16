@@ -22,11 +22,11 @@ u32 FUN_003de75c(u32 id)
     if (!FUN_003df390()) {
         return 0;
     }
-    record = FUN_001ad9b4(id);
+    record = dataTable1bOr1cGetRecord(id);
     if (gameFlagEntryGetBit(id, 3) && record->ordering.sortGroup != ITEM_GROUP_KEY) {
         return 0;
     }
-    if (id >= ITEM_FIRST_LATE_ID && (late = FUN_001ad9b4(id)) != NULL
+    if (id >= ITEM_FIRST_LATE_ID && (late = dataTable1bOr1cGetRecord(id)) != NULL
         && late->ordering.sortGroup == ITEM_GROUP_KEY && g_gameState.mode == GAME_MODE_KEY_ITEMS_LOCKED) {
         return 0;
     }

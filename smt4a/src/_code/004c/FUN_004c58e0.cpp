@@ -11,7 +11,7 @@ int dataTable04FindById(void);
 int FUN_00243d30(...);
 int FUN_0028cb6c(void);
 int FUN_003e8bb0(...);
-int FUN_003f0e20(...);
+int btlMainFindEntryByListedId(...);
 int FUN_004bf6e0(int);
 int btlCalcAilmentRateScale(...);
 int FUN_004c3bc0(int, unsigned int);
@@ -63,7 +63,7 @@ extern unsigned int DAT_0057149c; /* 0x57149c */
 /* Supplied declaration required: FUN_00243d30. */
 /* Supplied declaration required: FUN_0028cb6c. */
 /* Supplied declaration required: FUN_003e8bb0. */
-/* Supplied declaration required: FUN_003f0e20. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_004bf6e0. */
 /* Supplied declaration required: btlCalcAilmentRateScale. */
 /* Supplied declaration required: FUN_004c3bc0. */
@@ -182,10 +182,10 @@ int FUN_004c58e0(fn_004c58e0_arg0 *param_1,int param_2,int param_3,unsigned int 
   temp_v24 = CONCAT44(temp_v9,temp_v6);
   temp_v1 = reinterpret_cast<int>(btlGetMainState());
   temp_v4 = temp_v1;
-  FUN_003f0e20(temp_v1,param_3);
+  btlMainFindEntryByListedId(temp_v1,param_3);
   if (temp_v4 != 0) {
     temp_v2 = temp_v1;
-    FUN_003f0e20(temp_v1,param_4);
+    btlMainFindEntryByListedId(temp_v1,param_4);
     temp_v0 = '\0';
     if (temp_v2 != 0) {
       temp_v0 = *(char *)(temp_v2 + 0x239);
@@ -202,7 +202,7 @@ int FUN_004c58e0(fn_004c58e0_arg0 *param_1,int param_2,int param_3,unsigned int 
   btlCalcAilmentRateScale(param_3,param_4);
   temp_v6 = (float)temp_v23 * (float)((unsigned long long)temp_v23 >> 0x20) * (float)temp_v24 * temp_v9 * temp_v6;
   pbVar7 = pbVar2;
-  FUN_003f0e20(pbVar2,param_3);
+  btlMainFindEntryByListedId(pbVar2,param_3);
   temp_v25 = (float)((unsigned long long)temp_v24 >> 0x20);
   FUN_003e8bb0(temp_v27,pbVar2,pbVar7);
   uStack_c0 = uStack_8c;
@@ -286,7 +286,7 @@ int FUN_004c58e0(fn_004c58e0_arg0 *param_1,int param_2,int param_3,unsigned int 
     }
     temp_v10 = temp_v7 * temp_v10;
   }
-  FUN_003f0e20(pbVar2,param_4);
+  btlMainFindEntryByListedId(pbVar2,param_4);
   if (*(int *)(pbVar2 + 0x160) != 0) {
     temp_v7 = (float)VectorUnsignedToFloat
                               (*(int *)(pbVar2 + 0x160) + 100,(unsigned char)(in_fpscr >> 0x16) & 3);

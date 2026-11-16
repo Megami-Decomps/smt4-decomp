@@ -86,7 +86,7 @@ int btlReflectRequestPairScalar(...);
 int asdMemFree(void);
 int libc_strlen(short *);
 int FUN_003e7840(unsigned int, int);
-int FUN_003f0e20(...);
+int btlMainFindEntryByListedId(...);
 int btlResetSlot(...);
 int FUN_003f2280(...);
 int FUN_0040cd6c(int *, short *);
@@ -202,7 +202,7 @@ extern int btlSlotStateIsNot456(unsigned int, unsigned int);
 extern int FUN_003ec77c(int);
 extern int FUN_003ec7b0(int);
 /* Supplied declaration required: FUN_003edfd4. */
-/* Supplied declaration required: FUN_003f0e20. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlResetSlot. */
 /* Supplied declaration required: FUN_003f2280. */
 /* Supplied declaration required: FUN_003f2498. */
@@ -395,7 +395,7 @@ LAB_0040deb4:
     break;
   case '\x03':
     puVar6 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(puVar6,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
+    btlMainFindEntryByListedId(puVar6,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
     if (puVar6 != (unsigned int *)0x0) {
       if ((puVar6[1] & DAT_0057131c) == 0 && (*puVar6 & DAT_00571318) == 0) {
         temp_v6 = (int)*(short *)((int)puVar6 + 0x6e);
@@ -471,7 +471,7 @@ LAB_0040deb4:
     break;
   case '\t':
     puVar6 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(puVar6,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
+    btlMainFindEntryByListedId(puVar6,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
     if (puVar6 != (unsigned int *)0x0) {
       temp_v7 = *puVar6;
       temp_v5 = puVar6[1];
@@ -845,7 +845,7 @@ joined_r0x0040ec14:
   case '\x1b':
     puVar5 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
     puVar6 = puVar5;
-    FUN_003f0e20(puVar5,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
+    btlMainFindEntryByListedId(puVar5,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
     if (puVar6 != (unsigned int *)0x0) {
       if ((char)psVar2[2] != '\x1a') {
         if ((char)psVar2[2] == '\x1b') {
@@ -875,7 +875,7 @@ joined_r0x0040ec14:
     break;
   case '\x1c':
     puVar6 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(puVar6,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
+    btlMainFindEntryByListedId(puVar6,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
     if (puVar6 != (unsigned int *)0x0) {
       if (!(((DAT_00571318 | DAT_00571330) & *puVar6) != 0 ||
            ((DAT_00571334 | DAT_0057131c) & puVar6[1]) != 0)) {
@@ -895,7 +895,7 @@ joined_r0x0040ec14:
     break;
   case '\x1d':
     temp_v3 = reinterpret_cast<int>(btlGetMainState());
-    temp_v3 = FUN_003f0e20(temp_v3,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
+    temp_v3 = btlMainFindEntryByListedId(temp_v3,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
     if (temp_v3 != 0) {
       FUN_004cb8a0(reinterpret_cast<TransitionView *>(*(int *)(psVar2 + 10)));
     }
@@ -994,7 +994,7 @@ joined_r0x0040ec14:
     break;
   case '%':
     puVar6 = (unsigned int *)*param_1;
-    FUN_003f0e20(puVar6,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
+    btlMainFindEntryByListedId(puVar6,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
     if (!((*(unsigned int *)(*param_1 + 0x45ac) & uRam005713ac) != 0 ||
          (*(unsigned int *)(*param_1 + 0x45a8) & uRam005713a8) != 0)) {
       temp_v3 = gameFlagIsSet(0x591);
@@ -1027,7 +1027,7 @@ LAB_0040f258:
     if ((*(unsigned int *)(psVar2 + 0x26) & 0x10) != 0) {
       puVar6 = (unsigned int *)*param_1;
       if (*(int *)(psVar2 + 0x14) != 0) {
-        FUN_003f0e20(puVar6,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
+        btlMainFindEntryByListedId(puVar6,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
         temp_v5 = *puVar6;
         temp_v7 = puVar6[1];
         if ((!((temp_v7 & DAT_00571304) == 0 && (temp_v5 & DAT_00571300) == 0)) ||
@@ -1048,7 +1048,7 @@ LAB_0040f258:
         }
       }
       else {
-        FUN_003f0e20(puVar6,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
+        btlMainFindEntryByListedId(puVar6,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
         if (puVar6 != (unsigned int *)0x0) {
           temp_v5 = ~uRam00571308;
           puVar6[1] = puVar6[1] & ~uRam0057130c;
@@ -1187,7 +1187,7 @@ LAB_0040f684:
     temp_v8 = reinterpret_cast<int>(btlGetMainState());
     FUN_003e77cc(reinterpret_cast<BtlMainStateA *>(temp_v8),6,(int)temp_v4,0,reinterpret_cast<u32>(unaff_r8));
     puVar6 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(puVar6,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
+    btlMainFindEntryByListedId(puVar6,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
     if (puVar6 != (unsigned int *)0x0) {
       temp_v5 = ~DAT_00571338;
       puVar6[1] = puVar6[1] & ~DAT_0057133c;
@@ -1373,7 +1373,7 @@ LAB_0040fb78:
     if ((puVar6[0x116c] & 1) == 0) {
       temp_v3 = *(int *)(psVar2 + 10);
       if (((*(unsigned int *)(temp_v3 + 0x50) & 1) != 0) && ((*(unsigned int *)(temp_v3 + 0x50) & 0x80) != 0)) {
-        FUN_003f0e20(puVar6,(int)*(short *)(temp_v3 + 0x6a));
+        btlMainFindEntryByListedId(puVar6,(int)*(short *)(temp_v3 + 0x6a));
         temp_v5 = *puVar6;
         temp_v7 = puVar6[1];
         if ((DAT_005712f8 & temp_v5) != 0 || (DAT_005712fc & temp_v7) != 0) {
@@ -1452,7 +1452,7 @@ LAB_0040fb78:
     if ((temp_v3 != 0) &&
        (!((*(unsigned int *)(temp_v3 + 0x50) & 1) == 0 || (*(unsigned int *)(temp_v3 + 0x50) & 0x80) == 0))) {
       puVar6 = (unsigned int *)*param_1;
-      FUN_003f0e20(puVar6,(int)*(short *)(temp_v3 + 0x6a));
+      btlMainFindEntryByListedId(puVar6,(int)*(short *)(temp_v3 + 0x6a));
       if (!((DAT_005712fc & puVar6[1]) == 0 && (DAT_005712f8 & *puVar6) == 0)) {
         switch(*(unsigned short *)(temp_v3 + 0x1c8)) {
         case 0:

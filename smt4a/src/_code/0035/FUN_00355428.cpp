@@ -10,7 +10,7 @@ extern "C" {
 int textFormatBuffer(...);
 int FUN_0015f858(...);
 int textDrawString(...);
-int FUN_001634b4(...);
+int effectRenderTransformedInstance(...);
 int FUN_00164b5c(...);
 int efctSetSpeed(...);
 int asdTMTexTableEntryAt(...);
@@ -52,7 +52,7 @@ extern short DAT_005f1e1a; /* 0x5f1e1a */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0015f858. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: FUN_001634b4. */
+/* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
@@ -214,7 +214,7 @@ void FUN_00355428(void)
           efctSetSpeed();
           pairSetHalves(temp_v9 + 0x148,(int)(short)(*(short *)(temp_v14 + 8) + (short)temp_v7),
                        (int)*(short *)(temp_v14 + 10));
-          FUN_001634b4(temp_v9 + 0x148);
+          effectRenderTransformedInstance(temp_v9 + 0x148);
           efctSetSpeed();
           temp_v9 = g_renderCtx;
           temp_v5 = packNibblesAndByte(6, 7, 0);

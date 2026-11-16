@@ -63,7 +63,7 @@ struct PartyBlock {
 
 extern "C" {
 
-DemonModelInfo *FUN_00184310(u32 id);
+DemonModelInfo *devilGetRecord(u32 id);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 /* Registers the demon with the given id in the compendium from the party member that currently
@@ -119,7 +119,7 @@ void FUN_002a5e7c(u32 id)
         listed = 0;
         seen = 0;
         for (index = 0; index < 0x4FF; index++) {
-            DemonModelInfo *info = FUN_00184310((u16)(index + 1));
+            DemonModelInfo *info = devilGetRecord((u16)(index + 1));
 
             if (info != NULL && (info->flags & COMPENDIUM_LISTED) != 0) {
                 listed++;

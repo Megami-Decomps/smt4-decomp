@@ -4,7 +4,7 @@
 
 extern "C" {
 extern AsdSoundSystem g_asdSound;
-s32 FUN_00141fd0(AsdSoundSystem *, u32);
+s32 nw_snd_SoundArchive_GetSoundType(AsdSoundSystem *, u32);
 s32 asd3dSoundActorIsPlaying(u32);
 s32 FUN_001388dc(u32);
 u32 nw_snd_SoundStartable_StartSound(SpatialSoundActor *, u32 *, u32, u32);
@@ -15,8 +15,8 @@ u8 FUN_002ebc68(u32 soundId, u32 actorIndex)
     AsdSndSlotA *slot = g_asdSound.currentSlotA;
     u8 started = 0;
     if (playback->enabled && actorIndex < 16 && FUN_002bf684(&g_asdSound) &&
-        FUN_00141fd0(&g_asdSound, soundId) && slot && !asd3dSoundActorIsPlaying(actorIndex)) {
-        s32 kind = FUN_00141fd0(&g_asdSound, soundId);
+        nw_snd_SoundArchive_GetSoundType(&g_asdSound, soundId) && slot && !asd3dSoundActorIsPlaying(actorIndex)) {
+        s32 kind = nw_snd_SoundArchive_GetSoundType(&g_asdSound, soundId);
         if (slot->hasHeap && kind == 3) {
             if (!FUN_001388dc(soundId))
                 return 0;

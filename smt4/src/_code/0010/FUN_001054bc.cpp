@@ -67,7 +67,7 @@ void nngxDisplayEnv(u32 arg);
 void FUN_0010ea10(u32 a, u32 b, u32 c);
 void asdGxCommandListSetLists(void *lists);
 void asdGxCommandListSetNewListId(u32 id);
-void FUN_002bef68(void *list, u32 arg);
+void asdGxBindCmdlistAt(void *list, u32 arg);
 void asdGfxSetTargetParameter(u32 id, const void *data);
 void FUN_001131f8(u32 id, u32 flag, const void *data);
 void FUN_0010a544(void);
@@ -118,7 +118,7 @@ void FUN_001054bc(GxConfig *config)
     u32 listId;
     gfxCmdListSetInit(&listId, 1, config->listB[0], config->listB[1]);
     asdGxCommandListSetNewListId(listId);
-    FUN_002bef68(&DAT_004e3b1c, 0);
+    asdGxBindCmdlistAt(&DAT_004e3b1c, 0);
     DAT_004e3b54 = 0x3E800000;
     DAT_004e3b58 = 0x3E800000;
     DAT_004e3b5c = 0x3E800000;

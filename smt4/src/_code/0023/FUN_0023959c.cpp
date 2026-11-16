@@ -38,7 +38,7 @@ struct CecModuleView {
 extern "C" {
 extern CecModuleFlags g_asdCecModuleFlags;
 extern CriticalSection g_asdCecMessageBoxCriticalSection, g_asdCecMessageBoxStateCriticalSection;
-u32 FUN_002399bc(u32 size, u32 alignment);
+u32 handlerRefForward(u32 size, u32 alignment);
 void FUN_002399ec(u32 buffer);
 void rt_memcpy(void *destination, const void *source, u32 bytes);
 
@@ -78,7 +78,7 @@ s32 FUN_0023959c(MessageBox *box, CecMessageIndexHeader *header, const void **en
                     FUN_002399ec(view->outboxBuffer);
                     flags->outboxOwned = 0;
                 }
-                view->outboxBuffer = FUN_002399bc(bufferSize, 4);
+                view->outboxBuffer = handlerRefForward(bufferSize, 4);
                 if (view->outboxBuffer != 0) {
                     flags->outboxOwned = 1;
                     status = 0;
@@ -110,7 +110,7 @@ s32 FUN_0023959c(MessageBox *box, CecMessageIndexHeader *header, const void **en
                     FUN_002399ec(view->inboxBuffer);
                     flags->inboxOwned = 0;
                 }
-                view->inboxBuffer = FUN_002399bc(bufferSize, 4);
+                view->inboxBuffer = handlerRefForward(bufferSize, 4);
                 if (view->inboxBuffer != 0) {
                     flags->inboxOwned = 1;
                     status = 0;

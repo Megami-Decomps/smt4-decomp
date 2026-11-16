@@ -6,7 +6,7 @@
 extern "C" {
 
 int FUN_003ee0c0(void);
-int FUN_003f0e20(int, int);
+int btlMainFindEntryByListedId(int, int);
 int bitsAt60Set(...);
 int FUN_004fb43c(...);
 int FUN_004fbc30(...);
@@ -42,7 +42,7 @@ extern unsigned int g_btlScriptUnit; /* 0x57113c */
 extern int gameGetSlotRecord(int);
 extern int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_003ee0c0. */
-/* Supplied declaration required: FUN_003f0e20. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: bitsAt60Set. */
 extern unsigned int btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_004fb43c. */
@@ -67,7 +67,7 @@ unsigned int FUN_002f8edc(void)
     temp_v2 = reinterpret_cast<int>(btlGetMainState());
     temp_v3 = *(int *)(temp_v2 + 0x1ed4) + temp_v0 * 0x1d0;
     temp_v2 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v2,temp_v0);
+    btlMainFindEntryByListedId(temp_v2,temp_v0);
     reinterpret_cast<int>(btlGetMainState());
     FUN_003ee0c0();
     FUN_004fc094(0,temp_v1,0,temp_v3,0,*(unsigned int *)(temp_v2 + 0x25c),0xffffffff,0xffffffff,

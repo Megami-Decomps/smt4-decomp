@@ -32,7 +32,7 @@ typedef struct BtlTrackSource {
     /* 0x0C */ s32 value;
 } BtlTrackSource;
 
-/* What FUN_003f0e20 returns for a unit id. */
+/* What btlMainFindEntryByListedId returns for a unit id. */
 typedef struct BtlTrackInfo {
     /* 0x000 */ u8 unk000[0x6E];
     /* 0x06E */ s16 owner;
@@ -47,7 +47,7 @@ typedef struct BtlTrackState {
     /* 0x1FF8 */ BtlTrackSlot *slots;
 } BtlTrackState;
 
-BtlTrackInfo *FUN_003f0e20(BtlTrackState *state, s32 unitId);
+BtlTrackInfo *btlMainFindEntryByListedId(BtlTrackState *state, s32 unitId);
 
 /* Gives every active tracked unit (4..53) a free tracking slot filled from its info. */
 void FUN_003edbd0(BtlTrackState *state)
@@ -62,7 +62,7 @@ void FUN_003edbd0(BtlTrackState *state)
         BtlTrackUnit *unit = &state->units[i];
 
         if ((unit->flags & BTL_UNIT_FLAG_ACTIVE) && (unit->flags & BTL_UNIT_FLAG_TRACKED)) {
-            BtlTrackInfo *info = FUN_003f0e20(state, unit->id);
+            BtlTrackInfo *info = btlMainFindEntryByListedId(state, unit->id);
             BtlTrackSource *source = &info->source;
 
             for (j = 0; j < 50; j++) {

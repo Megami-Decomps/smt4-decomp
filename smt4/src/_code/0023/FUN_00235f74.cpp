@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002a666c(int *, int, unsigned int);
-int FUN_002c2424(int, unsigned int);
+int nn_gxlow_CTR_FlushDataCacheForward(int, unsigned int);
 int nnnstdMemCpy(int, int, unsigned int);
 
 typedef int romwright_code(...);
@@ -17,7 +17,7 @@ typedef struct {
 extern romwright_code *g_gfxAllocateCallback; /* 0x44e330 */
 
 /* Supplied declaration required: FUN_002a666c. */
-/* Supplied declaration required: FUN_002c2424. */
+/* Supplied declaration required: nn_gxlow_CTR_FlushDataCacheForward. */
 /* Supplied declaration required: nnnstdMemCpy. */
 
 
@@ -44,7 +44,7 @@ void FUN_00235f74(unsigned int param_1,int *param_2,unsigned int param_3)
         temp_v1 = (*g_gfxAllocateCallback)(0x10000,0x101,param_1,temp_v3);
         if ((param_2[3] != 0) && (temp_v2 = (int)param_2 + param_2[3] + 0xc, temp_v2 != 0)) {
           nnnstdMemCpy(temp_v1,temp_v2,temp_v3);
-          FUN_002c2424(temp_v1,temp_v3);
+          nn_gxlow_CTR_FlushDataCacheForward(temp_v1,temp_v3);
         }
         param_2[6] = temp_v1;
         param_2[7] = 0x10000;
@@ -71,7 +71,7 @@ void FUN_00235f74(unsigned int param_1,int *param_2,unsigned int param_3)
   if (temp_v2 != 0) {
     temp_v1 = temp_v2 + (int)(param_2 + 3);
   }
-  FUN_002c2424(temp_v1,temp_v3);
+  nn_gxlow_CTR_FlushDataCacheForward(temp_v1,temp_v3);
   return;
 }
 

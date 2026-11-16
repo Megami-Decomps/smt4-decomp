@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_003f0e20(int, int);
+int btlMainFindEntryByListedId(int, int);
 int FUN_004a9308(...);
 int btlAdjustPropertyClamped(...);
 int FUN_004c9160(...);
@@ -31,7 +31,7 @@ extern unsigned int DAT_005711a8; /* 0x5711a8 */
 extern unsigned int DAT_005711ac; /* 0x5711ac */
 extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
-/* Supplied declaration required: FUN_003f0e20. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_004a9308. */
 extern int btlFindEntryValue(int, unsigned int);
 /* Supplied declaration required: btlAdjustPropertyClamped. */
@@ -63,7 +63,7 @@ unsigned int FUN_004ed14c(int *param_1,unsigned int *param_2)
   do {
     param_2[temp_v9 * 4 + 0x279] = 0;
     temp_v2 = *param_1;
-    FUN_003f0e20(temp_v2,temp_v9);
+    btlMainFindEntryByListedId(temp_v2,temp_v9);
     if (temp_v2 != 0) {
       param_2[temp_v9 * 4 + 0x279] = *(unsigned int *)(temp_v2 + 600);
       param_2[temp_v9 * 4 + 0x27a] = *(unsigned int *)(temp_v2 + 0x25c);

@@ -50,7 +50,7 @@ typedef char ObjectPriorityListLayoutCheck[sizeof(ObjectList) == 0x14 &&
 
 extern "C" {
 void FUN_00173818(u8 *effect);
-void FUN_0018c87c(void *list, void *node);
+void nw_ut_internal_LinkListImpl_erase_2BAE30(void *list, void *node);
 void nw_ut_internal_LinkListImpl_insert(void *list, void *end, void *node);
 void *__aeabi_vec_ctor_nocookie_nodtor(void *begin, void (*construct)(void *), u32 stride, u32 count);
 void *objectCommandQueueGet(void);
@@ -72,7 +72,7 @@ static __inline void sortByPriority(ObjectList *list)
     __aeabi_vec_ctor_nocookie_nodtor(buckets, Construct, sizeof(PriorityBucket), 128);
     while (list->count != 0) {
         ListedObject *object = (ListedObject *)((u8 *)list->first - 0xF8);
-        FUN_0018c87c(&list->count, list->first);
+        nw_ut_internal_LinkListImpl_erase_2BAE30(&list->count, list->first);
         s32 priority = object->layer + object->basePriority;
         priority = priority < 0 ? 0 : (priority > 127 ? 127 : priority);
         nw_ut_internal_LinkListImpl_insert(&buckets[priority], &buckets[priority].first, &object->link);
@@ -80,7 +80,7 @@ static __inline void sortByPriority(ObjectList *list)
     for (s32 i = 0; i < 128; i++) {
         while (buckets[i].count != 0) {
             PriorityLink *node = buckets[i].first;
-            FUN_0018c87c(&buckets[i], node);
+            nw_ut_internal_LinkListImpl_erase_2BAE30(&buckets[i], node);
             nw_ut_internal_LinkListImpl_insert(&list->count, &list->first, node);
         }
     }

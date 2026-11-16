@@ -11,7 +11,7 @@ int sysMemClear(...);
 int dataTable41FindById(...);
 int FUN_003e8bb0(...);
 int counterIncrementSaturating(...);
-int FUN_003f0e20(...);
+int btlMainFindEntryByListedId(...);
 int FUN_004bf9a0(...);
 int source4CCopyHalves(...);
 int FUN_004c60c0(...);
@@ -78,7 +78,7 @@ extern int FUN_0028cb6c(void);
 /* Supplied declaration required: dataTable41FindById. */
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: counterIncrementSaturating. */
-/* Supplied declaration required: FUN_003f0e20. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_004bf9a0. */
 /* Supplied declaration required: source4CCopyHalves. */
 extern unsigned int FUN_004c53fc(unsigned int);
@@ -189,17 +189,17 @@ FUN_004bfcfc(int param_1,unsigned int param_2,fn_004bfcfc_arg2 *param_3,unsigned
     }
   }
   puVar7 = temp_v29;
-  FUN_003f0e20(temp_v29,temp_v41);
+  btlMainFindEntryByListedId(temp_v29,temp_v41);
   puVar4 = temp_v29;
   temp_v30 = puVar7;
-  FUN_003f0e20(temp_v29,param_5);
+  btlMainFindEntryByListedId(temp_v29,param_5);
   temp_v8 = temp_v41;
   if (puVar4 == (unsigned int *)0x0) {
     return 0;
   }
   temp_v38 = temp_v30 + 0x59;
   temp_v3 = btlGetMainState();
-  FUN_003f0e20(temp_v3,temp_v8);
+  btlMainFindEntryByListedId(temp_v3,temp_v8);
   temp_v4 = btlGetMainState();
   FUN_003e8bb0(temp_v19 + 1,temp_v4,temp_v3);
   temp_v8 = temp_v19[1] >> 0x10;
@@ -353,7 +353,7 @@ FUN_004bfcfc(int param_1,unsigned int param_2,fn_004bfcfc_arg2 *param_3,unsigned
             if (((temp_v8 | temp_v7) & 0x170000) == 0) {
               temp_v8 = param_5;
               temp_v10 = btlGetMainState();
-              FUN_003f0e20(temp_v10,temp_v8);
+              btlMainFindEntryByListedId(temp_v10,temp_v8);
               if ((temp_v10 != 0) && (*(int *)(temp_v10 + 0xd8) != 0)) {
                 temp_v8 = 0;
                 switch(temp_v9) {
@@ -409,7 +409,7 @@ FUN_004bfcfc(int param_1,unsigned int param_2,fn_004bfcfc_arg2 *param_3,unsigned
     }
   }
   puVar7 = temp_v29;
-  FUN_003f0e20(temp_v29,temp_v41);
+  btlMainFindEntryByListedId(temp_v29,temp_v41);
   if ((*puVar7 & DAT_00571430) != 0 || (puVar7[1] & DAT_00571434) != 0) {
     return 1;
   }
@@ -426,7 +426,7 @@ FUN_004bfcfc(int param_1,unsigned int param_2,fn_004bfcfc_arg2 *param_3,unsigned
     temp_v8 = temp_v41;
     if ((*puVar7 & 0x200) == 0) {
       temp_v5 = btlGetMainState();
-      FUN_003f0e20(temp_v5,temp_v8);
+      btlMainFindEntryByListedId(temp_v5,temp_v8);
       if (((temp_v5 != 0) && (0 < *(int *)(temp_v5 + 0xc0))) && (temp_v17 == 0)) {
         return 1;
       }
@@ -469,7 +469,7 @@ FUN_004bfcfc(int param_1,unsigned int param_2,fn_004bfcfc_arg2 *param_3,unsigned
         }
         temp_v15 = 0x3f800000;
         temp_v6 = btlGetMainState();
-        FUN_003f0e20(temp_v6,temp_v8);
+        btlMainFindEntryByListedId(temp_v6,temp_v8);
         temp_v12 = (float)temp_v15;
         if (temp_v6 != 0) {
           temp_v19[0] = 0;
@@ -519,7 +519,7 @@ LAB_004c070c:
         }
         temp_v3 = FUN_004c53fc(0x23);
         temp_v5 = btlGetMainState();
-        FUN_003f0e20(temp_v5,temp_v8);
+        btlMainFindEntryByListedId(temp_v5,temp_v8);
         if (temp_v5 != 0) {
           *(unsigned int *)(temp_v5 + 0x100) = temp_v3;
         }

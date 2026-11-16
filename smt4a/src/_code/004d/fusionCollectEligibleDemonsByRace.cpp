@@ -29,7 +29,7 @@ s32 fusionCollectEligibleDemonsByRace(const FusionRaceSelection *selection, s16 
         sysMemClear(allowedRaces, sizeof(allowedRaces));
         u32 race;
         if (hasDevil) {
-            race = FUN_00184310(selection->devilId)->race;
+            race = devilGetRecord(selection->devilId)->race;
         } else {
             race = selection->race;
         }
@@ -49,7 +49,7 @@ s32 fusionCollectEligibleDemonsByRace(const FusionRaceSelection *selection, s16 
         s32 first = gameDataGetSmallBlock()->first;
         s32 last = gameDataGetSmallBlock()->last;
         for (s32 id = first; id <= last; ++id) {
-            if (FUN_002a4b28(id) && allowedRaces[FUN_00184310(static_cast<u16>(id))->race]) {
+            if (FUN_002a4b28(id) && allowedRaces[devilGetRecord(static_cast<u16>(id))->race]) {
                 outIds[count++] = id;
             }
         }

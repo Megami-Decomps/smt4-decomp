@@ -39,7 +39,7 @@ s32 textFormatBuffer(char *output, const char *format, ...);
 void FUN_00282780(u32 x, u32 y, u32 width, u32 height);
 void FUN_002826d4(u32 x, u32 y, u32 width, u32 height, u32 alpha, u32 flags);
 extern EffMenuLists DAT_004ea7e0;
-u32 FUN_0024c3c8(s32 index);
+u32 sysGetTableWord(s32 index);
 void *asdLoadFileSync(const char *path, u32 *size, u32 flags, u32 alignment);
 extern const char DAT_004102f0[]; /* "%s" */
 }
@@ -170,7 +170,7 @@ u64 FUN_002f82ac(EffMenuBrowser *menu)
                         menu->previewKind = 2;
                         menu->hasPreview = 1;
                     } else if (entry->kind == 8) {
-                        menu->tableWord = FUN_0024c3c8(entry->resource & 0xffff);
+                        menu->tableWord = sysGetTableWord(entry->resource & 0xffff);
                         menu->previewKind = 8;
                         menu->hasPreview = 1;
                     } else {

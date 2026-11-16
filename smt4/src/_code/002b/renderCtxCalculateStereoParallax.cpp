@@ -3,7 +3,7 @@
 
 extern "C" {
 s32 FUN_002c5210(void);
-u32 FUN_002c15ac(u32 index);
+u32 asdGxPresetsGetHeightByKind(u32 index);
 f32 nn_ulcd_CTR_StereoCamera_GetParallax(void *camera, f32 value);
 
 // Transform and clamp a stereo depth before applying the active eye's parallax scale.
@@ -27,7 +27,7 @@ f32 renderCtxCalculateStereoParallax(void *handle, f32 value)
     if (mode == 0) {
         parallax = -parallax;
     }
-    result = (f32)FUN_002c15ac(0) * parallax;
+    result = (f32)asdGxPresetsGetHeightByKind(0) * parallax;
     return result;
 }
 }

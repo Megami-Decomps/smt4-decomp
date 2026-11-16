@@ -39,7 +39,7 @@ inline u16 slotStatusMask(const SlotRecord* record)
 extern "C" {
 PlayerStatusView* gameGetPlayerData();
 SlotRecord* btlMainGetUnk14();
-void FUN_003f3e64(StatusIconWork*, s32* x, s32* y);
+void slotPlacementGetPosition(StatusIconWork*, s32* x, s32* y);
 
 void partyStatusIconTick(void* data)
 {
@@ -77,7 +77,7 @@ void partyStatusIconTick(void* data)
         if (work->frame >= 8) {
             s32 targetX = 0;
             s32 targetY = 0;
-            FUN_003f3e64(work, &targetX, &targetY);
+            slotPlacementGetPosition(work, &targetX, &targetY);
             work->screen.x = targetX;
             work->screen.y = targetY;
             work->state = 0;

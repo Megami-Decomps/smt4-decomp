@@ -43,7 +43,7 @@ s32 textFormatBuffer(char *buffer, const char *format, ...);
 s32 playerPrimaryGetKindValue(void);
 s32 playerSecondaryGetKindValue(void);
 s32 menuStateSetMode4(s32 mode);
-DataRecord *FUN_00184310(u32 id);
+DataRecord *devilGetRecord(u32 id);
 s32 dataRecordGetKindValue(u32 id);
 UnitState *btlUnitGet(u32 unit);
 s32 FUN_002e4308(s32 value, s32 mode, s32 flag);
@@ -94,7 +94,7 @@ void FUN_004aa3d4(u32 unused, s32 kind, s32 value, s32 partyMember, u32 recordId
             textFormatBuffer(text, "\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b");
             kindValue = FUN_0022fcb8();
         } else {
-            DataRecord *record = FUN_00184310(recordId);
+            DataRecord *record = devilGetRecord(recordId);
             textFormatBuffer(text, "\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b", record->kind);
             kindValue = dataRecordGetKindValue(recordId);
         }

@@ -12,7 +12,7 @@ int FUN_0023d078(...);
 int FUN_0023d158(...);
 int matrixScaleColumns(...);
 int FUN_0023d274(...);
-int FUN_002bc7f4(int, int [3]);
+int gxGetCommandListParameter(int, int [3]);
 int FUN_00349cdc(int, int, int, unsigned char [52]);
 int FUN_00349d88(...);
 unsigned int *commandProfileWriteDefault(unsigned int *commands);
@@ -82,7 +82,7 @@ extern unsigned int resourceGetIndexedEntry(int, unsigned int);
 /* Supplied declaration required: matrixScaleColumns. */
 /* Supplied declaration required: FUN_0023d274. */
 /* Supplied declaration required: asdModelAdvanceCommandCursor. */
-/* Supplied declaration required: FUN_002bc7f4. */
+/* Supplied declaration required: gxGetCommandListParameter. */
 /* Supplied declaration required: FUN_00349cdc. */
 /* Supplied declaration required: FUN_00349d88. */
 /* Supplied declaration required: FUN_00349e34. */
@@ -167,7 +167,7 @@ void FUN_0034a28c(int param_1,unsigned int param_2)
   temp_v44 = *(int *)(param_1 + 4) + 0x8c;
   iStack_2c = param_1;
   temp_v51 = param_2;
-  FUN_002bc7f4(0x208,temp_v23);
+  gxGetCommandListParameter(0x208,temp_v23);
   temp_v5 = 0;
   temp_v6 = 0;
   temp_v7 = 0;

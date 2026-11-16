@@ -49,7 +49,7 @@ unsigned int FUN_0032e4a4(int param_1)
     }
     FUN_0035fd38(1);
     uVar4 = (unsigned int)*(unsigned short *)(param_1 + 0x14e);
-    FUN_00184310();
+    devilGetRecord();
     uVar8 = FUN_002c1ce4(*(unsigned char *)(uVar4 + 2),0);
     FUN_002e342c(auStack_d0,uVar8);
     FUN_003180c4(0,auStack_d0);
@@ -133,7 +133,7 @@ unsigned int FUN_0032e4a4(int param_1)
       FUN_004bcd90(param_1 + 0x218);
       FUN_004bd3ec(iVar9,2);
       uVar4 = (unsigned int)*(unsigned short *)(iVar9 + 0x62);
-      FUN_00184310();
+      devilGetRecord();
       iVar12 = FUN_004bd21c(iVar9);
       iVar3 = 0;
       iVar14 = 0;
@@ -253,7 +253,7 @@ code_r0x0032ea88:
     btlTalkBustUpSetDemonTexture(uVar2,1);
     uVar4 = FUN_002a469c();
     uVar4 = uVar4 & 0xffff;
-    FUN_00184310();
+    devilGetRecord();
     uVar8 = FUN_002c1ce4(*(unsigned char *)(uVar4 + 2),0);
     FUN_002e342c(auStack_d0,uVar8);
     FUN_003180c4(0,auStack_d0);

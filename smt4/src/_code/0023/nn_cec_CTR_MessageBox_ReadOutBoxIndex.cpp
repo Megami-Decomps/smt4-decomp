@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_1_stack;
 
-extern int FUN_002399bc(unsigned int, unsigned int);
+extern int handlerRefForward(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002399ec. */
 /* Supplied declaration required: __ARM_common_memcpy4_8. */
 
@@ -39,7 +39,7 @@ unsigned int nn_cec_CTR_MessageBox_ReadOutBoxIndex(int *param_1)
        (((temp_v3 != 0 &&
          ((((temp_v0 & 0x3fc00) != 0x4400 || ((temp_v0 & 0x3ff) < 100)) || ((temp_v0 & 0x3ff) >= 0xb4))))
         || (temp_v1 = (**(romwright_code **)(*param_1 + 0x28))(param_1,param_1[1],0,0,0), -1 < temp_v1)))) {
-      temp_v1 = FUN_002399bc(800,4);
+      temp_v1 = handlerRefForward(800,4);
       if (temp_v1 == 0) {
         param_1[0x158] = 0;
       }

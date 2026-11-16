@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001b6668(int *, int *);
+int nw_ut_internal_LinkListImpl_erase_2B743C(int *, int *);
 int FUN_001b9f70(int *);
 int nw_snd_internal_driver_Voice_Free(void);
 
@@ -15,7 +15,7 @@ typedef struct {
 } param_3_stack;
 
 extern int *FUN_00191548(void);
-/* Supplied declaration required: FUN_001b6668. */
+/* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2B743C. */
 /* Supplied declaration required: FUN_001b9f70. */
 /* Supplied declaration required: nw_snd_internal_driver_Voice_Free. */
 
@@ -50,7 +50,7 @@ void FUN_001b1fb8(unsigned int param_1,int param_2,int *param_3)
   *(unsigned char *)((int)param_3 + 0x139) = 0;
   *(unsigned char *)((int)param_3 + 0x13a) = 0;
   piVar1 = (int *)FUN_00191548();
-  FUN_001b6668(piVar1 + 1,param_3 + 0x6c);
+  nw_ut_internal_LinkListImpl_erase_2B743C(piVar1 + 1,param_3 + 0x6c);
   if (param_3 != (int *)0x0) {
     FUN_001b9f70(param_3);
     *param_3 = *piVar1;

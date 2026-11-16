@@ -102,7 +102,7 @@ EffMenuNode* effMenuNodeCreate(const char* name);
 extern "C" {
 #endif
 
-unsigned int FUN_0024c3c8(int param_1);
+unsigned int sysGetTableWord(int param_1);
 
 #ifdef __cplusplus
 }

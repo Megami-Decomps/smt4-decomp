@@ -7,7 +7,7 @@ PartyDamageSlotsIV *gameGetSlotTable();
 s32 FUN_0029efa8(void *selection);
 s32 objectPartRunUnlessLocked(void *selection);
 void btlItemComputeValues(s32 unit, u16 item, s32 *first, s32 *second);
-void FUN_00292be4(PartyPanelWidget *widget, s32 first, s32 second);
+void pair40Set(PartyPanelWidget *widget, s32 first, s32 second);
 void FUN_00298d28(s32 first, s32 second);
 void FUN_0026cba4(s32 unit, s32 index, u32 isStock);
 
@@ -37,7 +37,7 @@ void FUN_0026d3e0(void *selection, s32 stockOnly)
             } else {
                 btlItemComputeValues(-1, panel->previewItem, &first, &second);
             }
-            FUN_00292be4(panel->characters[index], first, second);
+            pair40Set(panel->characters[index], first, second);
             FUN_00298d28(first, second);
             FUN_0026cba4(unit, index, 0);
             return;
@@ -52,7 +52,7 @@ void FUN_0026d3e0(void *selection, s32 stockOnly)
         index -= 4;
     }
     btlItemComputeValues(panel->previewUnits[index].packedIndex, panel->previewItem, &first, &second);
-    FUN_00292be4(panel->demons[index], first, second);
+    pair40Set(panel->demons[index], first, second);
     FUN_00298d28(first, second);
     FUN_0026cba4(panel->previewUnits[index].packedIndex, index, 1);
 }

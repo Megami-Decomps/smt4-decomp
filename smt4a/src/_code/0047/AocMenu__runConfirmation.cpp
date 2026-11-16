@@ -51,7 +51,7 @@ void releaseEntriesB(void *regions);
 void releaseEntriesA(void *notice);
 u32 tableGroupFindEntryIndex(u32 resource, const char *name);
 void scrScriptProcessStartEntry(u32 process, u32 entry);
-void FUN_00477d10(AocConfirmMenu *menu, u32 state, s32 enabled);
+void aocMenuSetButtonHelp(AocConfirmMenu *menu, u32 state, s32 enabled);
 s32 scrRunOpcodesStub(u32 script);
 s32 messageGetChoiceResult(void);
 void FUN_0016ccb4(void *owner);
@@ -96,7 +96,7 @@ void AocMenu::runConfirmation()
         releaseEntriesA(menu->notice);
         ((AocConfirmMainModes *)g_aocMain)->mode = 2;
         scrScriptProcessStartEntry(menu->script, tableGroupFindEntryIndex(menu->resource, "aoc_IsConnect"));
-        FUN_00477d10(menu, 0, 1);
+        aocMenuSetButtonHelp(menu, 0, 1);
         menu->step = 1;
         return;
     case 1:
@@ -106,7 +106,7 @@ void AocMenu::runConfirmation()
                 menu->step = 2;
                 FUN_0016ccb4((u8 *)g_aocMain + 0x80);
                 menu->result = RequestParameters((u8)0);
-                FUN_00477d10(menu, 0xFFFFFFFF, 0);
+                aocMenuSetButtonHelp(menu, 0xFFFFFFFF, 0);
                 FUN_0021c118(0x1000001, 10);
                 return;
             }

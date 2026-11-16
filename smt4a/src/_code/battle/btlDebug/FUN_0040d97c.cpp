@@ -40,7 +40,7 @@ extern u8* g_btlUiBlock;
 extern u8 g_btlActionReflect[];
 extern const Vec3 DAT_005e1c2c;
 
-BtlSide* FUN_003f0e20(void* main, s32 index);
+BtlSide* btlMainFindEntryByListedId(void* main, s32 index);
 Vec3 FUN_003e7fa4(void* main, s32 index, s32 arg);
 s16 FUN_004aa0b0(u8* ui, s32 a, s32 b, f32 x, f32 y, f32 z);
 s16 FUN_004aace8(u8* ui, s32 id, s32 a, s32 x, s32 y);
@@ -53,7 +53,7 @@ s32 FUN_004aa1e8(u8* ui, s32 handle);
 void FUN_0040d97c(u32 unused, MarkerStep* step)
 {
     void* main = btlGetMainState();
-    BtlSide* side = FUN_003f0e20(main, step->actor->index);
+    BtlSide* side = btlMainFindEntryByListedId(main, step->actor->index);
     if (side == NULL) {
         step->done = 0;
         return;

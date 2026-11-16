@@ -11,14 +11,14 @@ struct BattleTintOwner {
 
 extern "C" {
 extern BattleEffectGlobals g_battleEffectSettings;
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, s32 group);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, s32 group);
 s32 FUN_001f3e80(s32 first, s32 second, s32 period, s32 time, s32 invert);
 
 u32 battleEffectGetTint(BattleTintOwner *owner, s32 index)
 {
     BtlMainStateA *battle = owner->battle;
     BattleEffectSetup *effect = &battle->roster[index].render;
-    BtlCombatantEntryA *combatant = FUN_003f0e20(battle, effect->group);
+    BtlCombatantEntryA *combatant = btlMainFindEntryByListedId(battle, effect->group);
     if (effect->flags & 8) {
         s32 healthPercent = (combatant->hp * 100) / combatant->maxHp;
         s32 time = owner->battle->drawCounters.markerTimer;

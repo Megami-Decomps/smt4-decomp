@@ -9,7 +9,7 @@ typedef struct Request {
     /* 0x18 */ u32 second;
 } Request;
 
-extern void FUN_002bc7f4(s32 id, s32 *value);
+extern void gxGetCommandListParameter(s32 id, s32 *value);
 extern void FUN_001373f0(s32 value, u32 first, u32 second);
 extern void nngxGetError(void);
 
@@ -18,7 +18,7 @@ void FUN_002c4e98(Request *request)
     s32 setting;
 
     if (request->first != 0) {
-        FUN_002bc7f4(0x207, &setting);
+        gxGetCommandListParameter(0x207, &setting);
         FUN_001373f0(setting, request->first, request->second);
         nngxGetError();
     }

@@ -6,7 +6,7 @@ extern "C" {
 u32 systemKeyboardReadUtf8(AocMainA *main, char *output, const u16 *hint, u32 capacity, s32 password, s32 filter, void *requestOption);
 void multibyteToUtf16(u16 *destination, const char *source, u32 capacity);
 void FUN_0047bcdc(SelectionTransition *transition, u32 request);
-void FUN_00477d10(SelectionTransition *transition, u32 selection, s32 mode);
+void aocMenuSetButtonHelp(SelectionTransition *transition, u32 selection, s32 mode);
 
 // Read the add-on code through the numeric software keyboard, retrying after a cancelled input.
 void AocMenu::readContentCode()
@@ -41,7 +41,7 @@ void AocMenu::readContentCode()
             transition->resource = 0;
         }
         FUN_0047bcdc(transition, 0);
-        FUN_00477d10(transition, -1, 0);
+        aocMenuSetButtonHelp(transition, -1, 0);
     } else if (transition->progress == 2 && --transition->timer <= 0) {
         TransitionResource *resource = transition->resource;
         transition->state = 6;

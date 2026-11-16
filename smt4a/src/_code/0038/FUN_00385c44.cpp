@@ -7,7 +7,7 @@ extern "C" {
 
 int FUN_003ed6e8(...);
 int FUN_003f0070(...);
-int FUN_003f0e20(...);
+int btlMainFindEntryByListedId(...);
 int FUN_003f26d4(...);
 int itemEffectPlay(...);
 void btlUiStartCommandSelection(unsigned int, int, signed char, signed char, bool, bool);
@@ -81,7 +81,7 @@ extern int FUN_003e48bc(void);
 extern int FUN_003e4978(void);
 /* Supplied declaration required: FUN_003ed6e8. */
 /* Supplied declaration required: FUN_003f0070. */
-/* Supplied declaration required: FUN_003f0e20. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_003f26d4. */
 /* Supplied declaration required: itemEffectPlay. */
 /* Supplied declaration required: FUN_004a9c84. */
@@ -244,7 +244,7 @@ void FUN_00385c44(unsigned int *param_1)
         btlAdjustPropertyClamped(temp_v12,0x25,0xffffffff,0);
       }
       puVar20 = param_1;
-      FUN_003f0e20(param_1,temp_v12);
+      btlMainFindEntryByListedId(param_1,temp_v12);
       if (puVar20 != (unsigned int *)0x0) {
         *(unsigned int *)((int)puVar20 + 0x2f5) = 0;
         *(unsigned int *)((int)puVar20 + 0x2f9) = 0;

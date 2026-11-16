@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00431e8c(int);
+int nn_fnd_detail_DestroyHeap(int);
 
-/* Supplied declaration required: FUN_00431e8c. */
+/* Supplied declaration required: nn_fnd_detail_DestroyHeap. */
 
 
 void FUN_00431dc0(int param_1)
@@ -15,7 +15,7 @@ void FUN_00431dc0(int param_1)
 /* irregular: 1 native warning(s); review required */
   *(unsigned int *)(param_1 + 0x54) = 0;
   if (*(int *)(param_1 + 0x18) != 0) {
-    FUN_00431e8c(param_1 + 0x18);
+    nn_fnd_detail_DestroyHeap(param_1 + 0x18);
     *(unsigned int *)(param_1 + 0x18) = 0;
   }
   return;

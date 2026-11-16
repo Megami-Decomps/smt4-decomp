@@ -3,7 +3,7 @@
 
 extern "C" void partyIdsActivateEntry(PartySlots* party, u32 id)
 {
-    const DevilTableRecordA* record = (const DevilTableRecordA*)FUN_00184310(id);
+    const DevilTableRecordA* record = (const DevilTableRecordA*)devilGetRecord(id);
     if (record == NULL || record->unk9C >= 0x27F) {
         return;
     }

@@ -46,7 +46,7 @@ extern int DAT_00465138; /* 0x465138 */
 /* Supplied declaration required: FUN_002b7c54. */
 extern int padIsButtonRepeat(unsigned int);
 extern int padIsButtonPressed(unsigned int);
-extern int FUN_002c15fc(unsigned int);
+extern int slotIsActive(unsigned int);
 /* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: memClear. */
@@ -93,7 +93,7 @@ unsigned int FUN_00115cd0(int param_1,int param_2,int param_3)
     return 0;
   }
   if (DAT_00465138 != 0) {
-    temp_v0 = FUN_002c15fc(8);
+    temp_v0 = slotIsActive(8);
     if ((temp_v0 != 0) && (temp_v0 = padIsButtonPressed(2), temp_v0 != 0)) {
       for (temp_v0 = *DAT_00465128; temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 4)) {
       }
@@ -108,27 +108,27 @@ unsigned int FUN_00115cd0(int param_1,int param_2,int param_3)
   temp_v18 = 0;
   temp_v19 = 0xf0;
   if (DAT_00465138 != 0) {
-    temp_v0 = FUN_002c15fc(0xd);
+    temp_v0 = slotIsActive(0xd);
     if (temp_v0 != 0) {
       temp_v4 = (short)DAT_00465128[5] - 4;
       *(short *)(DAT_00465128 + 5) = temp_v4;
     }
     else {
       if (DAT_00465138 == 0) goto LAB_00115e6c;
-      temp_v0 = FUN_002c15fc(0xc);
+      temp_v0 = slotIsActive(0xc);
       if (temp_v0 != 0) {
         temp_v4 = (short)DAT_00465128[5] + 4;
         *(short *)(DAT_00465128 + 5) = temp_v4;
       }
     }
     if (DAT_00465138 != 0) {
-      temp_v0 = FUN_002c15fc(0xf);
+      temp_v0 = slotIsActive(0xf);
       if (temp_v0 != 0) {
         temp_v4 = *(short *)((int)DAT_00465128 + 0x16) + 4;
         *(short *)((int)DAT_00465128 + 0x16) = temp_v4;
       }
       else if (DAT_00465138 != 0) {
-        temp_v0 = FUN_002c15fc(0xe);
+        temp_v0 = slotIsActive(0xe);
         if (temp_v0 != 0) {
           temp_v4 = *(short *)((int)DAT_00465128 + 0x16) - 4;
           *(short *)((int)DAT_00465128 + 0x16) = temp_v4;
@@ -142,7 +142,7 @@ LAB_00115e6c:
   if (DAT_00465138 != 0) {
     temp_v0 = padIsButtonRepeat(4);
     if (temp_v0 != 0) {
-      if ((DAT_00465138 != 0) && (temp_v0 = FUN_002c15fc(10), temp_v0 != 0)) {
+      if ((DAT_00465138 != 0) && (temp_v0 = slotIsActive(10), temp_v0 != 0)) {
         temp_v0 = DAT_00465128[4] + 10;
       }
       else {
@@ -157,7 +157,7 @@ LAB_00115e6c:
       if (DAT_00465138 == 0) goto LAB_00115f7c;
       temp_v0 = padIsButtonRepeat(3);
       if (temp_v0 == 0) goto LAB_00115f7c;
-      if ((DAT_00465138 != 0) && (temp_v0 = FUN_002c15fc(10), temp_v0 != 0)) {
+      if ((DAT_00465138 != 0) && (temp_v0 = slotIsActive(10), temp_v0 != 0)) {
         temp_v0 = DAT_00465128[4] - 10;
       }
       else {

@@ -11,7 +11,7 @@ int FUN_001aff14(float *, int);
 int FUN_003e7fa4(...);
 int btlScriptUnitHasFlags(void);
 Vec3f FUN_003ecab8(BtlMainStateA *, s32 index, s32 forceAttachment);
-int FUN_003f0e20(unsigned int *, unsigned int);
+int btlMainFindEntryByListedId(unsigned int *, unsigned int);
 int FUN_0043ba3c(...);
 
 /* stack frame of param_4: 30 slot(s), 120 byte(s) */
@@ -61,7 +61,7 @@ extern unsigned int DAT_00573824; /* 0x573824 */
 /* Supplied declaration required: FUN_003e7fa4. */
 /* Supplied declaration required: btlScriptUnitHasFlags. */
 /* Supplied declaration required: FUN_003ecab8. */
-/* Supplied declaration required: FUN_003f0e20. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_0043ba3c. */
 
 
@@ -118,7 +118,7 @@ void FUN_004fad68(unsigned int param_1,unsigned int param_2,unsigned int param_3
     break;
   case 2:
     puVar2 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(puVar2,param_3);
+    btlMainFindEntryByListedId(puVar2,param_3);
     if (puVar2 == (unsigned int *)0x0) {
       return;
     }
@@ -139,7 +139,7 @@ void FUN_004fad68(unsigned int param_1,unsigned int param_2,unsigned int param_3
     break;
   case 5:
     puVar2 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(puVar2,param_4);
+    btlMainFindEntryByListedId(puVar2,param_4);
     if (puVar2 == (unsigned int *)0x0) {
       return;
     }

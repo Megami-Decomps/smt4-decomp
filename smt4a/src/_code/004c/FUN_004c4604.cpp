@@ -9,7 +9,7 @@ int dataTable8FindRecord(void);
 int dataTable04FindById(void);
 int sysMemClear(...);
 int FUN_003e8bb0(unsigned char [2], unsigned int, unsigned int *);
-int FUN_003f0e20(...);
+int btlMainFindEntryByListedId(...);
 int FUN_004bf6e0(...);
 int FUN_004bf9a0(...);
 int FUN_004c0f74(unsigned int *, unsigned int);
@@ -66,7 +66,7 @@ extern int lcgRandomRange(unsigned int);
 extern int FUN_0028cb6c(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003e8bb0. */
-/* Supplied declaration required: FUN_003f0e20. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_004bf6e0. */
 /* Supplied declaration required: FUN_004bf9a0. */
 /* Supplied declaration required: FUN_004c0f74. */
@@ -138,9 +138,9 @@ FUN_004c4604(int param_1,unsigned int param_2,int param_3,unsigned int param_4,u
   temp_v38 = param_4;
   puVar3 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
   puVar4 = puVar3;
-  FUN_003f0e20(puVar3,temp_v38);
+  btlMainFindEntryByListedId(puVar3,temp_v38);
   puVar5 = puVar3;
-  FUN_003f0e20(puVar3,param_5);
+  btlMainFindEntryByListedId(puVar3,param_5);
   *param_8 = '\0';
   switch(temp_v37) {
   case 0xb:
@@ -400,7 +400,7 @@ LAB_004c4810:
               temp_v9 = temp_v23[temp_v8];
               if (((temp_v2 | temp_v6) & 0x170000) == 0) {
                 temp_v5 = reinterpret_cast<int>(btlGetMainState());
-                FUN_003f0e20(temp_v5,param_5);
+                btlMainFindEntryByListedId(temp_v5,param_5);
                 if ((temp_v5 != 0) && (*(int *)(temp_v5 + 0xd8) != 0)) {
                   temp_v2 = 0;
                   switch(temp_v9) {
@@ -457,7 +457,7 @@ LAB_004c4810:
           temp_v2 = temp_v38;
           if ((*puVar3 & 0x200) == 0) {
             temp_v4 = reinterpret_cast<int>(btlGetMainState());
-            FUN_003f0e20(temp_v4,temp_v2);
+            btlMainFindEntryByListedId(temp_v4,temp_v2);
             if ((temp_v4 != 0) && (0 < *(int *)(temp_v4 + 0xc0))) {
               if (!temp_v1) {
                 return 0;

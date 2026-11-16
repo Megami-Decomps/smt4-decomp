@@ -5,10 +5,10 @@ struct NnosAddressSpaceManager;
 
 extern "C" {
 extern NnosAddressSpaceManager g_nnosAddressSpaceManager;
-void FUN_001a0af4(NnosAddressSpaceManager *manager, u32 address, u32 size, u32 alignment);
+void nn_os_AddressSpaceManager_Allocate(NnosAddressSpaceManager *manager, u32 address, u32 size, u32 alignment);
 
 void FUN_0042d30c(u32 address, u32 size)
 {
-    FUN_001a0af4(&g_nnosAddressSpaceManager, address, size, 0);
+    nn_os_AddressSpaceManager_Allocate(&g_nnosAddressSpaceManager, address, size, 0);
 }
 }

@@ -54,7 +54,7 @@ struct EnemyDrawObject;
 
 extern "C" {
 BattleRosterEntry* FUN_001568f8(BattleWorldView* world, s32 index);
-BattleSlotList* FUN_003f0e20(BattleWorldView* world, s32 slotId);
+BattleSlotList* btlMainFindEntryByListedId(BattleWorldView* world, s32 slotId);
 void* dataTableFileGetTable(void* file, u32 section);
 BattleVec3* FUN_00348ee8(void* anchor);
 EnemyDrawObject* stateEntryFindById(BattleWorldView* world, s32 id);
@@ -100,7 +100,7 @@ BattleVec3 FUN_003e7fa4(BattleWorldView* world, s32 index, s32 force)
     } else {
         const f32 lift = 2.0f;
         if (!(actor->flags & 0x10) || force != 0) {
-            BattleSlotList* slots = FUN_003f0e20(world, actor->slotId);
+            BattleSlotList* slots = btlMainFindEntryByListedId(world, actor->slotId);
             s32 slot = slotIndexOf(slots, actor->slotId);
             if (slot < 0) {
                 slot = 0;

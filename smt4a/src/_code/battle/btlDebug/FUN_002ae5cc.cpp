@@ -11,7 +11,7 @@ extern "C" {
 int dataTable25FindById(...);
 int FUN_00164b5c(...);
 int FUN_0018152c(...);
-int FUN_00184310(void);
+int devilGetRecord(void);
 int FUN_0034ea70(...);
 int FUN_003a6404(...);
 
@@ -121,7 +121,7 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00183788. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
-/* Supplied declaration required: FUN_00184310. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: jobGetScalarValue. */
@@ -1183,7 +1183,7 @@ LAB_002afb00:
               temp_v4 = temp_v3;
             }
             temp_v11 = (unsigned int)*(unsigned short *)(temp_v4 + 0x62);
-            FUN_00184310();
+            devilGetRecord();
             devilDispatchTextureResource((int)(short)(*(short *)(temp_v11 + 0x9c) + 1),*(short *)(temp_v5 + 8) + temp_v16,
                          (int)*(short *)(temp_v5 + 10),0x54,0);
             temp_v3 = g_renderCtx;

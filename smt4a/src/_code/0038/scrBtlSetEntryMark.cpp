@@ -14,7 +14,7 @@ extern "C" {
 
 extern BattleMarkMasks g_btlMessageFlagMasks;
 s32 scrGetArg(s32 index);
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, u32 id);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, u32 id);
 void btlSlotSetStoreValue(u32 id, s32 slot, s32 value);
 
 /* Script command: give an entry mark 1 or 2 and record it in its slot store. */
@@ -22,7 +22,7 @@ u32 scrBtlSetEntryMark(void)
 {
     u32 id = scrGetArg(0);
     s32 mark = scrGetArg(1);
-    BtlCombatantEntryA *entry = FUN_003f0e20(btlGetMainState(), id);
+    BtlCombatantEntryA *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
 
     if (entry != NULL) {
         switch (mark) {

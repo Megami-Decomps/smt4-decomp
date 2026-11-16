@@ -10,13 +10,13 @@ struct Entry003a94f4 {
 
 u32 scrGetArg(u32 index);
 void scrSetResult(u32 value);
-Entry003a94f4 *FUN_00184310(u32 id);
+Entry003a94f4 *devilGetRecord(u32 id);
 
 u32 FUN_003a94f0(void)
 {
     u16 id = scrGetArg(0);
     u32 result = 0;
-    Entry003a94f4 *entry = FUN_00184310(id);
+    Entry003a94f4 *entry = devilGetRecord(id);
 
     if (entry != NULL) {
         result = entry->value;

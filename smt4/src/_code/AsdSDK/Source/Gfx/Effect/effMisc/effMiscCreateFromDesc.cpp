@@ -7,7 +7,7 @@ extern const char DAT_00410204[]; /* __FILE__ */
 EffMiscObject *effMiscCreate(u32 kind, void *params);
 void *resourceResolveHeaderPointer(EffMiscDesc *desc);
 u32 *resourceResolveDataPointer(EffMiscDesc *desc);
-void *FUN_0024c3c8(u32 id);
+void *sysGetTableWord(u32 id);
 void *textureCreateFromImage(u32 *resource);
 void *asdEffectTextureCreate(u32 *resource);
 void *memAlloc(int, int, int, int size, int align, int);
@@ -36,7 +36,7 @@ static __inline void effMiscAttachShared(EffMiscObject *obj, u32 type, u32 *reso
         shared->resource = asdEffectTextureCreate(resource);
         break;
     case 4:
-        shared->resource = FUN_0024c3c8(*resource & 0xffff);
+        shared->resource = sysGetTableWord(*resource & 0xffff);
         break;
     }
     obj->shared = shared;

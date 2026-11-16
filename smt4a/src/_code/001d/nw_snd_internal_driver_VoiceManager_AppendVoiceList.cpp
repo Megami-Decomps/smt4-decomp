@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001b6668(int, int);
+int nw_ut_internal_LinkListImpl_erase_2B743C(int, int);
 int nw_ut_internal_LinkListImpl_insert(int, int, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_001b6668. */
+/* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2B743C. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
 
 
@@ -23,7 +23,7 @@ void nw_snd_internal_driver_VoiceManager_AppendVoiceList(int param_1,int param_2
   int temp_v0;
   int temp_v1;
   
-  FUN_001b6668(param_1 + 0x10,param_2 + 0x58);
+  nw_ut_internal_LinkListImpl_erase_2B743C(param_1 + 0x10,param_2 + 0x58);
   temp_v1 = param_1 + 8;
   if (temp_v1 != *(int *)(param_1 + 8)) {
     do {

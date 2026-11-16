@@ -8,7 +8,7 @@
 extern "C" {
 
 int FUN_0015f858(...);
-int FUN_001634b4(...);
+int effectRenderTransformedInstance(...);
 int vec2GetXInt(...);
 int efctSetSpeed(...);
 int pairSetHalves(...);
@@ -70,7 +70,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_0015f858. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: FUN_001634b4. */
+/* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: vec2GetXInt. */
 extern int vec2GetYInt(int);
@@ -567,7 +567,7 @@ LAB_004b0b54:
       do {
         if (temp_v16 <= *(unsigned int *)(param_1 + temp_v4 * 0x28 + 0x7870)) {
           VectorSignedToFloat(temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_001634b4(param_1 + (temp_v15 * 7 + temp_v7 + 0x20) * 0x8c + 0x20,temp_v5);
+          effectRenderTransformedInstance(param_1 + (temp_v15 * 7 + temp_v7 + 0x20) * 0x8c + 0x20,temp_v5);
         }
         temp_v5 = temp_v16 * 5;
         temp_v7 = temp_v7 + 1;
@@ -601,7 +601,7 @@ LAB_004b0b54:
           }
         }
         VectorSignedToFloat(temp_v16,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_001634b4(param_1 + temp_v7 * 0x8c + 0x24c4);
+        effectRenderTransformedInstance(param_1 + temp_v7 * 0x8c + 0x24c4);
         temp_v4 = temp_v4 + 1;
       }
     }
@@ -756,7 +756,7 @@ LAB_004b13b4:
                      (int)(short)((short)(int)(temp_v19 * ((float)temp_v20 - *(float *)(temp_v7 + 0x3cf8))
                                               ) + (short)temp_v13 + *(short *)(temp_v5 + 10)));
         efctSetSpeed();
-        FUN_001634b4(temp_v7 + 0x3cd4);
+        effectRenderTransformedInstance(temp_v7 + 0x3cd4);
       }
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 6);

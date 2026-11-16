@@ -5,12 +5,12 @@
 extern "C" {
 
 int nn_os_LightEvent_Wait(...);
-int FUN_001b6668(int, int *);
+int nw_ut_internal_LinkListImpl_erase_2B743C(int, int *);
 int slistPushFront(int, int *);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: nn_os_LightEvent_Wait. */
-/* Supplied declaration required: FUN_001b6668. */
+/* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2B743C. */
 /* Supplied declaration required: slistPushFront. */
 
 
@@ -29,7 +29,7 @@ void FUN_004637fc(int param_1)
       piVar3 = piVar1 + -0x14;
       piVar2 = (int *)*piVar1;
       nn_os_LightEvent_Wait(piVar1 + -0x11);
-      FUN_001b6668(param_1 + 0x84,piVar1);
+      nw_ut_internal_LinkListImpl_erase_2B743C(param_1 + 0x84,piVar1);
       if (piVar3 != (int *)0x0) {
         (**(romwright_code **)*piVar3)(piVar3);
         slistPushFront(param_1 + 0x90,piVar3);

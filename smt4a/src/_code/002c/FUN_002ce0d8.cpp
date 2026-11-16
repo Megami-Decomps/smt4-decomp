@@ -15,7 +15,7 @@ typedef struct Record {
     /* 0x6 */ u16 order;
 } Record;
 
-Record *FUN_00184310(u32 id);
+Record *devilGetRecord(u32 id);
 
 /* Compares two refs: refs without a group sort last, then by group, record kind, order (higher first) and id. */
 u32 FUN_002ce0d8(Ref *a, Ref *b)
@@ -31,8 +31,8 @@ u32 FUN_002ce0d8(Ref *a, Ref *b)
     } else {
         result = a->group - groupB;
         if (result == 0) {
-            Record *recordA = FUN_00184310(a->id);
-            Record *recordB = FUN_00184310(b->id);
+            Record *recordA = devilGetRecord(a->id);
+            Record *recordB = devilGetRecord(b->id);
 
             result = recordA->kind - recordB->kind;
             if (result == 0) {

@@ -25,7 +25,7 @@ void FUN_003bb50c(s32 id, s32 x, s32 y, s32 z, s32 resolve,
         if (id < 0) {
             image = gameFlagIsSet(17) ? 0 : 0x25e;
         } else {
-            const DevilTableRecordA *record = reinterpret_cast<const DevilTableRecordA *>(FUN_00184310(static_cast<u16>(id)));
+            const DevilTableRecordA *record = reinterpret_cast<const DevilTableRecordA *>(devilGetRecord(static_cast<u16>(id)));
             if (record == NULL)
                 return;
             const Table00Record *base = dataTable00FindById(static_cast<u16>(id));

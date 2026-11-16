@@ -3,7 +3,7 @@
 #include "code/Code002b.h"
 extern "C" {
 extern AsdSoundSystem g_asdSound;
-s32 FUN_00141fd0(AsdSoundSystem *system, s32 sound);
+s32 nw_snd_SoundArchive_GetSoundType(AsdSoundSystem *system, s32 sound);
 void FUN_002bda30(s32 handle, s32 frames);
 u32 nw_snd_SoundStartable_StartSound(void *player, s32 *handle, s32 sound, void *parameters);
 void nw_snd_internal_BasicSound_SetVolume(s32 handle, s32 frames, f32 volume);
@@ -13,7 +13,7 @@ u32 FUN_0010ddcc(u32 slotIndex, s32 sound, u32 level, s32 frames)
 {
     if (slotIndex != 0 && slotIndex != 1)
         return 0;
-    if (!FUN_002bf684(&g_asdSound) || !FUN_00141fd0(&g_asdSound, sound))
+    if (!FUN_002bf684(&g_asdSound) || !nw_snd_SoundArchive_GetSoundType(&g_asdSound, sound))
         return 0;
     AsdSndSlotC *slot = slotIndex == 0 ? g_asdSound.outputC0 : g_asdSound.outputC1;
     if (slot == NULL)

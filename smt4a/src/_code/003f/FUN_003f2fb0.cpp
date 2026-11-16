@@ -2,14 +2,14 @@
 #include "gamedata/DevilRecordA.h"
 
 extern "C" {
-s32 FUN_0031cfd0(u32 id);
+s32 saveIsRecordValueBounded(u32 id);
 bool gameDataFlagTestBit(u32 bit);
 s32 randRange(u32 limit);
 
 bool FUN_003f2fb0(PartySlotA *unit, s32 attempts, s32 force)
 {
-    DevilRecordA *record = FUN_00184310(unit->unk62);
-    s32 value = FUN_0031cfd0(unit->unk62);
+    DevilRecordA *record = devilGetRecord(unit->unk62);
+    s32 value = saveIsRecordValueBounded(unit->unk62);
     s32 chance = value / 400 + ((record->fusionRestrictions >> 7) & 0x7f);
     if (gameDataFlagTestBit(6)) {
         chance += 40;

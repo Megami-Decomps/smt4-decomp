@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00140bfc(int, int, unsigned int, unsigned int, unsigned int);
-int FUN_00141fd0(int, unsigned int);
+int nw_snd_SoundArchive_GetSoundType(int, unsigned int);
 int nw_snd_internal_SoundArchiveLoader_LoadImpl(int, unsigned int, unsigned int, unsigned int, int);
 int nw_snd_internal_SoundArchiveLoader_LoadWaveSound(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
@@ -25,7 +25,7 @@ typedef struct {
 } param_5_stack;
 
 /* Supplied declaration required: FUN_00140bfc. */
-/* Supplied declaration required: FUN_00141fd0. */
+/* Supplied declaration required: nw_snd_SoundArchive_GetSoundType. */
 extern int FUN_0014d4ec(unsigned int, unsigned int, unsigned int *);
 extern int FUN_0014d530(unsigned int, unsigned int, unsigned int *);
 extern unsigned int FUN_002ac780(unsigned int, unsigned int);
@@ -60,7 +60,7 @@ nw_snd_internal_SoundArchiveLoader_LoadSoundGroup
   }
   if (temp_v4 != 0xffffffff) {
     temp_v0 = *(int *)(param_1 + 4);
-    FUN_00141fd0(temp_v0,temp_v4);
+    nw_snd_SoundArchive_GetSoundType(temp_v0,temp_v4);
     if (temp_v0 != 1) {
       if ((temp_v0 == 3) && (temp_v3 = temp_v4, temp_v4 <= temp_v5)) {
         do {

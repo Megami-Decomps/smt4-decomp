@@ -8,7 +8,7 @@
 
 extern "C" {
 
-int FUN_001634b4(...);
+int effectRenderTransformedInstance(...);
 int efctSetSpeed(void);
 int asdTMTexTableEntryAt(...);
 int FUN_00183bb0(void);
@@ -38,7 +38,7 @@ extern unsigned int DAT_00588c50; /* 0x588c50 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001634b4. */
+/* Supplied declaration required: effectRenderTransformedInstance. */
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
@@ -275,7 +275,7 @@ void FUN_004b2e50(int param_1,int param_2,int param_3)
           (**(romwright_code **)(temp_v13 + 0x12d4))();
           *(unsigned char *)(temp_v13 + 0x12d0) = 0;
         }
-        FUN_001634b4(param_1 + temp_v4 * 0x8c + 0x24c4);
+        effectRenderTransformedInstance(param_1 + temp_v4 * 0x8c + 0x24c4);
         temp_v13 = g_renderCtx;
         temp_v4 = packNibblesAndByte(6, 7, 0);
         piVar14 = (int *)(temp_v13 + 0x12b8);
@@ -352,7 +352,7 @@ void FUN_004b2e50(int param_1,int param_2,int param_3)
             (**(romwright_code **)(temp_v11 + 0x12d4))();
             *(unsigned char *)(temp_v11 + 0x12d0) = 0;
           }
-          FUN_001634b4(param_1 + (temp_v9 + 0x19) * 0x8c + 0x24c4);
+          effectRenderTransformedInstance(param_1 + (temp_v9 + 0x19) * 0x8c + 0x24c4);
           temp_v11 = g_renderCtx;
           temp_v3 = packNibblesAndByte(6, 7, 0);
           piVar14 = (int *)(temp_v11 + 0x12b8);

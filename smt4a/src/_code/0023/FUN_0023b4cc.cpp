@@ -36,7 +36,7 @@ void uiFadeDraw(u32 id);
 void partyDrawCategorySelectionIcon(u16 category, s32 x, s32 y, u32 tag);
 u32 FUN_00156850(u16 category, s32 arg);
 void textFormatBuffer(void *buffer, const char *format, u32 value);
-void FUN_001634b4(void *panel, f32 offset);
+void effectRenderTransformedInstance(void *panel, f32 offset);
 u32 packNibblesAndByte(u32 a, u32 b, u32 c);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
@@ -114,7 +114,7 @@ u32 FUN_0023b4cc(void)
 
         textFormatBuffer(text, "%s", FUN_00156850(category, 0));
         textDrawString(3, -1, text, (f32)(label->x + x), (f32)(label->y + y), 0.375f, 0.0f, speed);
-        FUN_001634b4(ui->panel, (f32)(s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.28f));
+        effectRenderTransformedInstance(ui->panel, (f32)(s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.28f));
         efctSetSpeed(1.0f);
         break;
     }

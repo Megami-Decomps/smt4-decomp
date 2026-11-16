@@ -14,7 +14,7 @@ typedef struct BattleUnit {
 } BattleUnit;
 
 s32 scrGetArg(u32 index);
-BattleUnit *FUN_003f0e20(void *state, s32 index);
+BattleUnit *btlMainFindEntryByListedId(void *state, s32 index);
 SlotRecord *gameGetSlotRecord(s32 slot);
 int scrSetResult(s32 value);
 
@@ -25,7 +25,7 @@ u32 FUN_003359b4(void)
     SlotRecord *record;
 
     if (index < 0x6D) {
-        record = FUN_003f0e20(static_cast<void *>(btlGetMainState()), index)->record;
+        record = btlMainFindEntryByListedId(static_cast<void *>(btlGetMainState()), index)->record;
     } else {
         record = gameGetSlotRecord(index - 0x6D);
     }

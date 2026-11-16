@@ -6,7 +6,7 @@
 
 extern "C" {
 
-int FUN_003f0e20(...);
+int btlMainFindEntryByListedId(...);
 int FUN_003f21ec(void);
 int FUN_003f24e0(unsigned int *, int);
 int FUN_003f2aac(unsigned int *, int, int);
@@ -32,7 +32,7 @@ extern unsigned int DAT_0057148c; /* 0x57148c */
 /* Supplied declaration required: btlGetMainState. */
 extern int gameFlagIsSet(unsigned int);
 extern int gameGetSlotRecord(void);
-/* Supplied declaration required: FUN_003f0e20. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_003f21ec. */
 /* Supplied declaration required: FUN_003f24e0. */
 /* Supplied declaration required: FUN_003f2aac. */
@@ -56,7 +56,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   
   puVar2 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
   puVar3 = puVar2;
-  FUN_003f0e20(puVar2,param_1);
+  btlMainFindEntryByListedId(puVar2,param_1);
   if (puVar3 == (unsigned int *)0x0) {
     if ((-1 < param_1 - 0x6d) && (temp_v1 = gameGetSlotRecord(), temp_v1 != 0)) {
       if (param_2 == 0) {
@@ -179,7 +179,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   if ((param_3 & 0x80) != 0) {
     temp_v3 = FUN_004c53fc(0x1b);
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v1,param_1);
+    btlMainFindEntryByListedId(temp_v1,param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xe0) = temp_v3;
     }
@@ -187,7 +187,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   if ((param_3 & 0x40) != 0) {
     temp_v3 = FUN_004c53fc(0x1c);
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v1,param_1);
+    btlMainFindEntryByListedId(temp_v1,param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xe4) = temp_v3;
     }
@@ -195,7 +195,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   if ((param_3 & 0x100) != 0) {
     temp_v3 = FUN_004c53fc(0x1d);
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v1,param_1);
+    btlMainFindEntryByListedId(temp_v1,param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xe8) = temp_v3;
     }
@@ -203,7 +203,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   if ((param_3 & 8) != 0) {
     temp_v3 = FUN_004c53fc(0x1e);
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v1,param_1);
+    btlMainFindEntryByListedId(temp_v1,param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xec) = temp_v3;
     }
@@ -211,7 +211,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   if ((param_3 & 0x800) != 0) {
     temp_v3 = FUN_004c53fc(0x1f);
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v1,param_1);
+    btlMainFindEntryByListedId(temp_v1,param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xf0) = temp_v3;
     }
@@ -219,7 +219,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   if ((param_3 & 0x1000) != 0) {
     temp_v3 = FUN_004c53fc(0x20);
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v1,param_1);
+    btlMainFindEntryByListedId(temp_v1,param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xf4) = temp_v3;
     }
@@ -227,7 +227,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   if ((param_3 & 0x2000) != 0) {
     temp_v3 = FUN_004c53fc(0x21);
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v1,param_1);
+    btlMainFindEntryByListedId(temp_v1,param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xf8) = temp_v3;
     }
@@ -235,7 +235,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   if ((param_3 & 0x10) != 0) {
     temp_v3 = FUN_004c53fc(0x22);
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v1,param_1);
+    btlMainFindEntryByListedId(temp_v1,param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xfc) = temp_v3;
     }

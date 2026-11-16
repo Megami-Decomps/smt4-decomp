@@ -5,13 +5,13 @@
 #include "gamedata/Table04Record.h"
 
 extern "C" {
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, u32 id);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, u32 id);
 void source4CCopyHalves(const BtlCombatantEntryA *entry, u16 *values);
 
 /* Tests the first nine copied source IDs for the metadata flag. */
 u16 FUN_004c6e24(u32 id)
 {
-    BtlCombatantEntryA *entry = FUN_003f0e20(btlGetMainState(), id);
+    BtlCombatantEntryA *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
     u16 values[10] = {0};
     source4CCopyHalves(entry, values);
     for (s32 i = 0; i < 9; ++i) {

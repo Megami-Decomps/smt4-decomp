@@ -19,7 +19,7 @@ NnDateTime FUN_0030fc80(void);
 s32 nn_fnd_DateTime_GetDay(const NnDateTime *dateTime);
 s32 nn_fnd_DateTime_GetMonth(const NnDateTime *dateTime);
 s32 nn_fnd_DateTime_GetYear(const NnDateTime *dateTime);
-s32 FUN_001a1564(s32 year, s32 month, s32 day);
+s32 nn_fnd_DateTime_DateToDays(s32 year, s32 month, s32 day);
 s32 FUN_005020c0(const NnDateTime *dateTime);
 s32 FUN_005021d8(const NnDateTime *dateTime);
 s32 FUN_00502244(const NnDateTime *dateTime);
@@ -34,7 +34,7 @@ void clockRecordStartSeconds(void)
     now = FUN_0030fc80();
     s32 day = nn_fnd_DateTime_GetDay(&now);
     s32 month = nn_fnd_DateTime_GetMonth(&now);
-    seconds = FUN_001a1564(nn_fnd_DateTime_GetYear(&now), month, day);
+    seconds = nn_fnd_DateTime_DateToDays(nn_fnd_DateTime_GetYear(&now), month, day);
     seconds *= 24;
     seconds += FUN_005020c0(&now);
     seconds *= 60;

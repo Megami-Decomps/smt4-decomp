@@ -6,7 +6,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 extern "C" {
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *, s32);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *, s32);
 void *FUN_003f0254(BtlMainStateA *, BtlActionRecord *);
 void *FUN_003f06b4(BtlMainStateA *, BtlActionRecord *);
 
@@ -25,7 +25,7 @@ u32 FUN_004fbc30(s32 actorId, u32 parameter, BtlActionRecord *command, s32)
     extern EventDebugMasksView DAT_00573c08;
     if ((command->status & 1) && (command->status & 0x80)) {
         BtlMainStateA *state = btlGetMainState();
-        BtlCombatantEntryA *entry = FUN_003f0e20(state, command->apocalypse.memberId);
+        BtlCombatantEntryA *entry = btlMainFindEntryByListedId(state, command->apocalypse.memberId);
         entry->flags |= DAT_00573c08.secondary | DAT_00573c08.primary;
         if (FUN_004d7a60(g_btlEvent.owner, command, 1) == 0 ||
             (FUN_003f06b4(state, command) != NULL && FUN_003f0254(state, command) == NULL) ||

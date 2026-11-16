@@ -16,7 +16,7 @@ u32 FUN_003ded68(s32 id)
         return 0;
     }
     if (FUN_003df390(id) != 0) {
-        ItemDataRecord* record = FUN_001ad9b4(id);
+        ItemDataRecord* record = dataTable1bOr1cGetRecord(id);
         if (record != NULL) {
             u32 value = gameGetPlayerData()->value;
             if (record->eligibilityThreshold != 0 && record->eligibilityThreshold <= (s32)value) {

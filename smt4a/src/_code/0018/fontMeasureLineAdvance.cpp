@@ -1,12 +1,12 @@
 #include "font/FontStringReader.h"
 extern "C" {
-FontRegisteredRecord *FUN_0019dc44(u32 index);
+FontRegisteredRecord *recordTableGet(u32 index);
 void FUN_001a64f4(NwFontGlyph *glyph);
 
 // Sum character advances up to the first newline or string terminator.
 s32 fontMeasureLineAdvance(const void *text, s32 fontIndex)
 {
-    FontEncodingSource *font = static_cast<FontEncodingSource *>(FUN_0019dc44(fontIndex)->font);
+    FontEncodingSource *font = static_cast<FontEncodingSource *>(recordTableGet(fontIndex)->font);
     s32 characterCount = 0;
     s32 width = 0;
     FontStringReader reader;

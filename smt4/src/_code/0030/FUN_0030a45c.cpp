@@ -18,7 +18,7 @@ struct BustupJobWork {
 
 extern SlotTransitionRequest DAT_0043e068;
 s32 scrGetArg(u32 index);
-void FUN_002bf6fc(void *cut, s32 slot, s32 first, s32 second, s32 third);
+void bustupCutStartSlotTransition(void *cut, s32 slot, s32 first, s32 second, s32 third);
 s32 gameFlagIsSet(u32 flag);
 
 s32 FUN_0030a45c(void)
@@ -26,7 +26,7 @@ s32 FUN_0030a45c(void)
     void *cut = ((BustupJobWork *)jobGetWork(scrGetArg(0)))->cut;
     s32 slot = scrGetArg(1);
 
-    FUN_002bf6fc(cut, slot, 1, 1, -1);
+    bustupCutStartSlotTransition(cut, slot, 1, 1, -1);
     if (gameFlagIsSet(0x522) != 0) {
         DAT_0043e068.pending = 1;
         DAT_0043e068.slot = slot;

@@ -9,7 +9,7 @@ extern "C" {
 
 void FUN_00319aec(u8 value);
 
-u16 FUN_0031cfd0(u32 index);
+u16 saveIsRecordValueBounded(u32 index);
 
 s32 binFileGetValue(BinFile *file);
 

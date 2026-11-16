@@ -3,7 +3,7 @@
 extern "C" {
 s32 scrollListGetTop(const ScrollList *list);
 s32 scrollListGetOffset(const ScrollList *list);
-s32 FUN_002fc240(const ScrollList *list);
+s32 objectGetLengthField(const ScrollList *list);
 }
 
 // Clamps a paired row/column selection to the last available entry.
@@ -20,7 +20,7 @@ extern "C" void scrollSelectionClampToCount(ScrollSelectionOwner* owner)
 
         rowOffset = scrollListGetTop(&owner->primary);
         rowTop = scrollListGetOffset(&owner->primary);
-        columns = FUN_002fc240(&owner->list);
+        columns = objectGetLengthField(&owner->list);
         column = scrollListGetOffset(&owner->list);
         count = owner->entryCount;
         lastColumn = (count - 1) % columns;

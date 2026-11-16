@@ -7,7 +7,7 @@ extern "C" {
 
 int qsort(unsigned short *, int, int, unsigned char *);
 int FUN_00180118(unsigned int);
-int FUN_00184310(void);
+int devilGetRecord(void);
 int __ARM_common_memcpy4_8(unsigned short *, unsigned short *);
 int libc_strcpy(unsigned short *, unsigned int);
 int sysMemClear(unsigned short *, int, int, unsigned int *, unsigned int *);
@@ -24,7 +24,7 @@ extern unsigned char g_gameGlobals; /* 0x588fd0 */
 
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_00180118. */
-/* Supplied declaration required: FUN_00184310. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: __ARM_common_memcpy4_8. */
 extern unsigned int FUN_002b4dcc(int);
 /* Supplied declaration required: libc_strcpy. */
@@ -228,7 +228,7 @@ void FUN_0026fd50(unsigned short *param_1,int param_2,int param_3,unsigned int *
     __ARM_common_memcpy4_8(param_1 + 0x30d,param_1 + 0x1d);
   }
   temp_v4 = (unsigned int)*(unsigned short *)(param_2 + 0x62);
-  FUN_00184310();
+  devilGetRecord();
   *(unsigned char *)(temp_v1 + 0x2010) = (*(unsigned char *)(temp_v4 + 0xb3) & 2) == 0;
   return;
 }

@@ -51,7 +51,7 @@ struct SlotSortInfo {
 extern "C" {
 extern GameDataBlocksA g_gameDataBlocks;
 SlotRecord *gameGetSlotRecord(s32 slotIndex);
-SlotSortInfo *FUN_00184310(u16 entryId);
+SlotSortInfo *devilGetRecord(u16 entryId);
 }
 
 #ifdef __cplusplus

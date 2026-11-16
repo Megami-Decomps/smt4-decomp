@@ -39,7 +39,7 @@ extern "C" {
 extern EffectEditorIV g_effectEditor;
 extern EditorSharedIV DAT_0044f858;
 
-s32 FUN_002c15fc(s32 id);
+s32 slotIsActive(s32 id);
 // Platform stub (`mov r0, #0; bx lr`) that armlink inlines at the call: the analog read never writes x/y.
 s32 FUN_002ca07c(f32 *x, f32 *y, s32 first, s32 second, s32 third);
 s32 padIsButtonPressed(s32 id);
@@ -88,7 +88,7 @@ u32 FUN_001dcc64(void)
     }
     f32 x;
     f32 y;
-    if (FUN_002c15fc(28)) {
+    if (slotIsActive(28)) {
         FUN_002ca07c(&x, &y, 0, 0, 0);
     } else {
         x = 0.0f;
@@ -103,7 +103,7 @@ u32 FUN_001dcc64(void)
     effMenuListsClear();
     FUN_002fcd98(0);
     asdDebugHookVoid();
-    if (FUN_002c15fc(28) && padIsButtonPressed(27)) {
+    if (slotIsActive(28) && padIsButtonPressed(27)) {
         if (g_effectEditor.toggle == 0) {
             g_effectEditor.toggle = 1;
         } else {

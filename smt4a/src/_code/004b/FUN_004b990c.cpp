@@ -40,7 +40,7 @@ int dataTable33TypeCount(...);
 
 int asdMemFree(void);
 int cameraResourcesRelease(unsigned int);
-int FUN_001ad9b4(void);
+int dataTable1bOr1cGetRecord(void);
 int slotSetRequest(int, int, int);
 int dialogClose(int);
 int FUN_00214da4(void);
@@ -90,7 +90,7 @@ extern int gameFlagsGetBlock(void);
 extern int gameFlagIsSet(void);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: cameraResourcesRelease. */
-/* Supplied declaration required: FUN_001ad9b4. */
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
 /* Supplied declaration required: slotSetRequest. */
 extern int campIsState51(void);
 /* Supplied declaration required: dialogOpen. */
@@ -231,7 +231,7 @@ void FUN_004b990c(int param_1)
     if (pcVar4[4] != '\0') {
       if (pcVar4[1] != '\0') {
         temp_v3 = (unsigned int)*(unsigned short *)(pcVar4 + 8);
-        FUN_001ad9b4();
+        dataTable1bOr1cGetRecord();
         g_gameState.f005f1796 = *(unsigned short *)(temp_v3 + 2);
         libc_strcpy(&g_gameState.f005f1798,temp_v3 + 0xc4);
         g_gameState.f005f1794 = 1;

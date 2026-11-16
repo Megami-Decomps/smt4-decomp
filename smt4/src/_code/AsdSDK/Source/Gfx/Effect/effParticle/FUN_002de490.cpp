@@ -48,7 +48,7 @@ typedef struct {
 /* Supplied declaration required: spriteGroupCreateFromFile. */
 /* Supplied declaration required: FUN_002493a4. */
 /* Supplied declaration required: effTlpCreate. */
-extern int FUN_0024c3c8(unsigned int);
+extern int sysGetTableWord(unsigned int);
 extern unsigned int *resourceResolveDataPointer(fn_002de490_arg0 *);
 extern unsigned int resourceResolveHeaderPointer(void);
 /* Supplied declaration required: effBlockClone. */
@@ -130,7 +130,7 @@ unsigned int * FUN_002de490(fn_002de490_arg0 *param_1)
       break;
     case 4:
       FUN_002493a4(puVar3,*(unsigned int *)(puVar3[0x13] + 8),4);
-      temp_v1 = FUN_0024c3c8(*puVar4 & 0xffff);
+      temp_v1 = sysGetTableWord(*puVar4 & 0xffff);
       temp_v4 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v1 + 0x14),(unsigned char)(in_fpscr >> 0x16) & 3)
       ;
       temp_v5 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v1 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3)

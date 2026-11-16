@@ -20,7 +20,7 @@ struct SaveEntry4daf18 {
 
 extern "C" {
 
-EntryDef4daf18 *FUN_00184310(u16 id);
+EntryDef4daf18 *devilGetRecord(u16 id);
 s32 gameFlagIsSet(u32 flag);
 u32 gameDataCopySaveEntry(u32 index, void *dest);
 
@@ -36,7 +36,7 @@ static inline u32 saveEntryIsActive(u32 index)
 // Whether the entry with this ID is available: not excluded, its flag set and its save entry valid.
 u32 entryDefIsAvailable(void *unused, u16 id)
 {
-    EntryDef4daf18 *entry = FUN_00184310(id);
+    EntryDef4daf18 *entry = devilGetRecord(id);
     if (entry != NULL && !(entry->attributes & 0x200000) &&
         (entry->requiredFlag == 0 || gameFlagIsSet(entry->requiredFlag))) {
         if (entry->saveLink & 1) {

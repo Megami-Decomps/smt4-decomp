@@ -7,12 +7,12 @@ typedef struct ExpHeapBase {
     /* 0x18 */ u32 block;
 } ExpHeapBase;
 
-extern void FUN_00431e8c(u32 *block);
+extern void nn_fnd_detail_DestroyHeap(u32 *block);
 
 void nn_fnd_ExpHeapBase_Finalize(ExpHeapBase *heap)
 {
     if (heap->block != 0) {
-        FUN_00431e8c(&heap->block);
+        nn_fnd_detail_DestroyHeap(&heap->block);
         heap->block = 0;
     }
 }

@@ -21,16 +21,16 @@ struct GpuUploadState {
 };
 
 extern "C" {
-u32 FUN_002c2424(u32 buffer, u32 size);
+u32 nn_gxlow_CTR_FlushDataCacheForward(u32 buffer, u32 size);
 
 u32 FUN_002c2390(GpuUploadState *state)
 {
     for (s32 index = 0; index < state->entryCount; ++index) {
         if (state->entries[index].active) {
-            FUN_002c2424(state->entries[index].buffers[state->bufferIndex != 0],
+            nn_gxlow_CTR_FlushDataCacheForward(state->entries[index].buffers[state->bufferIndex != 0],
                          state->vertexCount * state->entries[index].componentCount * 4);
         }
     }
-    return FUN_002c2424(state->buffers[state->bufferIndex != 0], state->vertexCount << 1);
+    return nn_gxlow_CTR_FlushDataCacheForward(state->buffers[state->bufferIndex != 0], state->vertexCount << 1);
 }
 }

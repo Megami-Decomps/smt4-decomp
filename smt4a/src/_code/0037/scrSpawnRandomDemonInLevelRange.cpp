@@ -28,7 +28,7 @@ s32 scrGetArg(u32 index);
 u32 scrWorkGetValue(u32 slot);
 void scrWorkSetValue(u32 slot, u32 value);
 void jyoucyuGetTableEntry(s32 index);
-DevilRecord *FUN_00184310(u32 id);
+DevilRecord *devilGetRecord(u32 id);
 u32 randRange(u32 maximum);
 u32 partyFindFirstUnusedEntry(void);
 void dispatchIfFound(u32 arg, u32 id, s32 flag);
@@ -66,7 +66,7 @@ u32 scrSpawnRandomDemonInLevelRange(void)
         s32 count = 0;
         for (s32 id = 1; id < 0x500; id++) {
             candidates[id] = 0;
-            DevilRecord *record = FUN_00184310((u16)id);
+            DevilRecord *record = devilGetRecord((u16)id);
             if (record == NULL || (record->flags & 1) == 0 || minimum > record->level || record->level > maximum)
                 continue;
             candidates[count] = id;
@@ -107,7 +107,7 @@ u32 scrSpawnRandomDemonInLevelRange(void)
     case 4: {
         char name[128];
         char race[128];
-        FUN_00184310((u16)scrWorkGetValue(1));
+        devilGetRecord((u16)scrWorkGetValue(1));
         sysMemClear(name, 0x80);
         sysMemClear(race, 0x80);
         libc_strcpy(name, FUN_00180118((u16)scrWorkGetValue(1)));

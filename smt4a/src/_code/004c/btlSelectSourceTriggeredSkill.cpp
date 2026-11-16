@@ -5,7 +5,7 @@
 #include "gamedata/Table04Record.h"
 
 extern "C" {
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *, u32);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *, u32);
 void source4CCopyHalves(const BtlCombatantEntryA *, u16 *);
 s32 FUN_003ec77c(BtlMainStateA *);
 s32 lcgRandomRange(u32);
@@ -14,7 +14,7 @@ s32 lcgRandomRange(u32);
 s32 btlSelectSourceTriggeredSkill(u32 id, s32 randomize)
 {
     BtlMainStateA *state = btlGetMainState();
-    BtlCombatantEntryA *entry = FUN_003f0e20(state, id);
+    BtlCombatantEntryA *entry = btlMainFindEntryByListedId(state, id);
     /* This unknown byte at 0x45B9 overrides the current-action exclusions. */
     if (!state->reinforcementChance.chanceBonus) {
         switch (state->activity.currentAction) {

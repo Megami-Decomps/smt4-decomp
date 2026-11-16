@@ -21,7 +21,7 @@ static __inline bool fsResultInRange390(nn::Result result)
 
 extern "C" {
 extern u8 DAT_00465210;
-u32 FUN_002c3414();
+u32 globalBlockGetFirst();
 nn::Result FUN_00354b88(u32 handle);
 
 // Poll content mounting, caching success and classifying the supported filesystem error ranges.
@@ -31,7 +31,7 @@ u32 FUN_002103dc()
     nn::Result result;
     if (DAT_00465210)
         return 2;
-    result = FUN_00354b88(FUN_002c3414());
+    result = FUN_00354b88(globalBlockGetFirst());
     FUN_002c3510(result);
     u32 failed = result & 0x80000000;
     if ((s32)failed >= 0) {

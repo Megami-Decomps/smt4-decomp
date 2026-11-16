@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_001b24c0(int, int);
-int FUN_001b6668(int, int);
+int nw_ut_internal_LinkListImpl_erase_2B743C(int, int);
 int nw_ut_internal_LinkListImpl_erase_2AC900(int, unsigned int, int);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: FUN_001b24c0. */
-/* Supplied declaration required: FUN_001b6668. */
+/* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2B743C. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2AC900. */
 
 
@@ -41,7 +41,7 @@ void nw_snd_internal_FrameHeap_ClearSection(int param_1)
       }
     }
     nw_ut_internal_LinkListImpl_erase_2AC900(temp_v2 + 8,*(unsigned int *)(temp_v2 + 0xc),temp_v2 + 0xc);
-    FUN_001b6668(param_1 + 4,temp_v2);
+    nw_ut_internal_LinkListImpl_erase_2B743C(param_1 + 4,temp_v2);
   }
   return;
 }

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-EffMiscObject *FUN_00271be0(u32 kind, void *params);
+EffMiscObject *effMiscCreate(u32 kind, void *params);
 
 extern EffMiscKind g_effMiscKinds[];
 
@@ -11,7 +11,7 @@ extern EffMiscKind g_effMiscKinds[];
 EffMiscObject *effMiscClone(EffMiscObject *src)
 {
     u16 kind = src->kind;
-    EffMiscObject *obj = FUN_00271be0(kind, src->work);
+    EffMiscObject *obj = effMiscCreate(kind, src->work);
     EffMiscShared *shared = src->shared;
 
     if (shared != NULL && g_effMiscKinds[obj->kind].sharesData != 0) {

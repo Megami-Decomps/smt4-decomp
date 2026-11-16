@@ -14,7 +14,7 @@ int FUN_004fcde0(...);
 int infoWinSetText(unsigned int, unsigned int);
 int uiNavigatorStart(int, int, int, int, int);
 int stateFinishIfPresent(int);
-int FUN_003f0e20(...);
+int btlMainFindEntryByListedId(...);
 int FUN_003f1b3c(int, unsigned int, unsigned int, unsigned int *, int *);
 int FUN_0047f4cc(int);
 int FUN_004aa878(void);
@@ -72,7 +72,7 @@ extern int dialogIsActive(void);
 /* Supplied declaration required: stateFinishIfPresent. */
 extern int FUN_003eb1cc(int);
 extern unsigned int contentGetFirstFlaggedValue(void);
-/* Supplied declaration required: FUN_003f0e20. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_003f1b3c. */
 extern int chainCountIdUnflagged(unsigned int);
 /* Supplied declaration required: FUN_0047f4cc. */
@@ -127,7 +127,7 @@ unsigned int FUN_004e05d4(int *param_1,unsigned int *param_2)
       if (((*(unsigned int *)(*(int *)(*param_1 + 0x1ed4) + temp_v2 * 0x1d0 + 0x50) & 1) != 0) &&
          (temp_v3 = FUN_004e83ac(param_1,param_2,temp_v2), temp_v3 == 0)) {
         temp_v3 = *param_1;
-        FUN_003f0e20(temp_v3,temp_v2);
+        btlMainFindEntryByListedId(temp_v3,temp_v2);
         if ((*(short *)(temp_v3 + 0x276) != 0) &&
            (*(short *)(temp_v3 + 0x274) == 0 || *(short *)(temp_v3 + 0x274) == 4)) {
           if ((*(int *)(*param_1 + 0x4bc0) != 0) && (temp_v2 = FUN_004c8a9c(), temp_v2 != 0)) {
@@ -264,7 +264,7 @@ LAB_004e0ac0:
       if (((*(unsigned int *)(*(int *)(*param_1 + 0x1ed4) + temp_v2 * 0x1d0 + 0x50) & 1) != 0) &&
          (temp_v3 = FUN_004e83ac(param_1,param_2,temp_v2), temp_v3 == 0)) {
         puVar7 = (unsigned int *)*param_1;
-        FUN_003f0e20(puVar7,temp_v2);
+        btlMainFindEntryByListedId(puVar7,temp_v2);
         temp_v12 = puVar7;
         if ((short)puVar7[0x9e] != 0) {
           FUN_004fcffc(0,param_2,*(int *)(*param_1 + 0x1ed4) + temp_v2 * 0x1d0,0x10);

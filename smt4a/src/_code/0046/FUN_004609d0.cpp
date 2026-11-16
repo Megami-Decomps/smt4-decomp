@@ -43,7 +43,7 @@ static __inline ListEnd listEnd(ListNode **slot)
     return end;
 }
 
-int FUN_001b6668(void *list, ListNode *node);
+int nw_ut_internal_LinkListImpl_erase_2B743C(void *list, ListNode *node);
 int FUN_0045f834(Actor *actor);
 int nw_ut_internal_LinkListImpl_insert(ListEnd head, ListEnd tail, ListNode *node);
 
@@ -61,7 +61,7 @@ void FUN_004609d0(Actor *actor)
     actor->visible = 0;
     FUN_0045f834(actor);
     manager = actor->manager;
-    FUN_001b6668(manager->activeList, &actor->node);
+    nw_ut_internal_LinkListImpl_erase_2B743C(manager->activeList, &actor->node);
     actor->vtbl->onDeactivate(actor);
     head = listEnd(&manager->head);
     tail = listEnd(&manager->tail);

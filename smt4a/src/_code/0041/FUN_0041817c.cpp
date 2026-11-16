@@ -11,7 +11,7 @@ struct GoalRequirement {
     /* 0x04 */ u32 threshold;
 };
 
-/* Goal definition returned by FUN_001ad9b4: only the fields read here. */
+/* Goal definition returned by dataTable1bOr1cGetRecord: only the fields read here. */
 struct GoalRecord {
     /* 0x00 */ u16 id;
     /* 0x02 */ u8 unk02[4];
@@ -35,7 +35,7 @@ struct GoalProgressBank {
 };
 
 extern "C" {
-GoalRecord *FUN_001ad9b4(u32 id);
+GoalRecord *dataTable1bOr1cGetRecord(u32 id);
 s32 goalConditionsSatisfied(u32 id);
 
 /* The flag bytes of a goal in the game-flag block. */
@@ -58,7 +58,7 @@ static __inline void goalAddProgress(GoalSlot *counters, u16 goalId, u16 target,
     if (goalId == 0) {
         return;
     }
-    GoalRecord *goal = FUN_001ad9b4(goalId);
+    GoalRecord *goal = dataTable1bOr1cGetRecord(goalId);
     if (goal->category != 1) {
         return;
     }

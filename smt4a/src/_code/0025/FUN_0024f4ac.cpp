@@ -35,7 +35,7 @@ unsigned int FUN_0024f4ac(void)
     DAT_005f1a50 = 0xffffffff;
     iVar5 = FUN_004186e0();
     if ((iVar5 != 0) && (iVar6 = FUN_001bd118(), iVar6 == 6)) {
-      FUN_001ad9b4();
+      dataTable1bOr1cGetRecord();
       FUN_00270c58(*(unsigned short *)(iVar5 + 0xd4));
       return 0xffffffff;
     }

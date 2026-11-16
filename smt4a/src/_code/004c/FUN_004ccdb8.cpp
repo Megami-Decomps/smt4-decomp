@@ -7,7 +7,7 @@ struct UnitGrowthCostRecord {
     u16 level;
 };
 
-extern "C" const UnitGrowthCostRecord *FUN_00184310(u32 unit);
+extern "C" const UnitGrowthCostRecord *devilGetRecord(u32 unit);
 
 static inline u32 unitBaseGrowthCost(s32 level)
 {
@@ -30,7 +30,7 @@ extern "C" u32 FUN_004ccdb8(u32 unit, s32 level, s32 referenceLevel)
         return 0;
     }
     u32 cost = unitBaseGrowthCost(level);
-    s32 difference = referenceLevel - FUN_00184310(unit)->level + 1;
+    s32 difference = referenceLevel - devilGetRecord(unit)->level + 1;
     u32 scale;
     if (difference <= 0) {
         scale = 100;

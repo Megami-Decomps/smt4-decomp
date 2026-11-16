@@ -4,7 +4,7 @@
 
 extern "C" {
 extern AocSystemA *g_aocSystem;
-s32 FUN_001ab89c(const void *left, const void *right);
+s32 dataTable00CompareRecordIds(const void *left, const void *right);
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size,
                    s32 (*compare)(const void *, const void *));
 
@@ -20,13 +20,13 @@ static __inline Table00Record *findTable00RecordWithOverride(u16 id)
     key.id = id;
     Table00Record *record = NULL;
     if (g_aocSystem->table00.records != NULL) {
-        record = searchTable00(&key, g_aocSystem->table00.records, g_aocSystem->table00.count, FUN_001ab89c);
+        record = searchTable00(&key, g_aocSystem->table00.records, g_aocSystem->table00.count, dataTable00CompareRecordIds);
     }
     if (record == NULL) {
         void *table = dataTableGet(0, 1);
         void *entries = dataTableGetEntries(table);
         u32 entryCount = dataTableGetCount(table);
-        record = searchTable00(&key, entries, entryCount, FUN_001ab89c);
+        record = searchTable00(&key, entries, entryCount, dataTable00CompareRecordIds);
     }
     return record;
 }

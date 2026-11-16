@@ -13,7 +13,7 @@ struct BattleModelActionKeyView {
 
 extern "C" {
 void modelEffectReleaseEntry(MaterialMergeOwner *owner, s32 index);
-s32 FUN_0027dab0(BtlMainState *battle, const BtlActionRecord *action);
+s32 idSetFindSubjectIndex(BtlMainState *battle, const BtlActionRecord *action);
 MaterialMergeVariants *FUN_0027da30(BtlMainState *battle, s32 memberId);
 MaterialMergeModel *asdMdlManagerClone(MaterialMergeModel *model, u32 flags);
 
@@ -38,7 +38,7 @@ void FUN_003dc924(MaterialMergeOwner *owner, s32 effectKind, s32 allActors)
         s32 memberId = action->memberId;
         if (owner->state.slots[index].handle >= 0)
             continue;
-        s32 variant = FUN_0027dab0(btlGetMainState(), action);
+        s32 variant = idSetFindSubjectIndex(btlGetMainState(), action);
         if (variant < 0)
             variant = 0;
         const MaterialMergeVariants *variants = FUN_0027da30(btlGetMainState(), memberId);

@@ -51,7 +51,7 @@ typedef char BattlePositionQueryOffsets[
 }
 extern "C" {
 BattleAppearancePositionView *FUN_001568f8(BtlMainStateA *state, s32 index);
-BattleGroupPositionMembersView *FUN_003f0e20(BtlMainStateA *state, s16 group);
+BattleGroupPositionMembersView *btlMainFindEntryByListedId(BtlMainStateA *state, s16 group);
 EnemyDrawOffsetOwner *stateEntryFindById(BtlMainStateA *state, u32 id);
 void btlEnemyDrawCalcVerticalOffset(const EnemyDrawOffsetOwner *owner, BattleVector3 *output, f32 scale);
 const u8 *FUN_00348f74(const VersionedResourceHeader *resource);
@@ -80,7 +80,7 @@ Vec3f FUN_003ecab8(BtlMainStateA *state, s32 index, s32 forceAttachment)
         /* This mode requires a matching position record; retail dereferences it without a guard. */
         position = selected->position;
     } else if ((roster->motion.flags & 0x10) == 0 || forceAttachment != 0) {
-        BattleGroupPositionMembersView *group = FUN_003f0e20(state, roster->motion.group);
+        BattleGroupPositionMembersView *group = btlMainFindEntryByListedId(state, roster->motion.group);
         s32 attachment = group != NULL ? battleFindPositionMember(group, roster->motion.group) : -1;
         if (attachment < 0)
             attachment = 0;

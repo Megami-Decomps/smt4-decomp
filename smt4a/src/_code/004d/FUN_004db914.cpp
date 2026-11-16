@@ -45,7 +45,7 @@ struct DataTable5 {
 extern "C" {
 
 s32 FUN_004dc3b4(UniteContext* ctx, u16* first, u16* second, FusionResult* result);
-DevilInfo* FUN_00184310(u32 id);
+DevilInfo* devilGetRecord(u32 id);
 u32 randRange(u32 range);
 s32 slotRecordFindById(u32 id);
 u32 FUN_0023e32c(u16* first, u16* second, u32 id, u32 level);
@@ -62,7 +62,7 @@ u32 FUN_004db914(UniteContext* ctx, u16* first, u16* second, FusionResult* resul
     DataTable5* levels = (DataTable5 *)dataTable5GetEntries();
     if (FUN_004dc3b4(ctx, first, second, result) == 0) return 0;
 
-    DevilInfo* info = FUN_00184310(result->product);
+    DevilInfo* info = devilGetRecord(result->product);
     u16 level = dataTableChooseWeightedByteId() + info->level;
     if (randRange(99) < 5) {
         if (slotRecordFindById(0x218) == 0) {
@@ -78,14 +78,14 @@ u32 FUN_004db914(UniteContext* ctx, u16* first, u16* second, FusionResult* resul
     {
         u32 base = 25;
         for (u32 id = 0; id <= 1200; id++) {
-            if (FUN_00184310(id & 0xffff)->race == 0x33 && FUN_002a4b28(id & 0xffff) != 0) {
+            if (devilGetRecord(id & 0xffff)->race == 0x33 && FUN_002a4b28(id & 0xffff) != 0) {
                 base = 10;
                 break;
             }
         }
         u8 limit = base + 25;
         for (u32 id = 0; id <= 1200; id++) {
-            if (FUN_00184310(id & 0xffff)->race == 0x2a && FUN_002a4b28(id & 0xffff) != 0) {
+            if (devilGetRecord(id & 0xffff)->race == 0x2a && FUN_002a4b28(id & 0xffff) != 0) {
                 limit = base + 10;
                 break;
             }
@@ -105,7 +105,7 @@ u32 FUN_004db914(UniteContext* ctx, u16* first, u16* second, FusionResult* resul
             do {
                 u32 candidateId = uniteFindClosestEligibleCandidate(ctx, race & 0xff, wanted, 1);
                 found = candidateId;
-                DevilInfo* candidate = FUN_00184310(candidateId);
+                DevilInfo* candidate = devilGetRecord(candidateId);
                 if (info->id != candidate->id && candidate->id != *first && candidate->id != *second && candidate->level <= wanted) {
                     s32 slot;
                     for (slot = 0; slot < 24; slot++) {

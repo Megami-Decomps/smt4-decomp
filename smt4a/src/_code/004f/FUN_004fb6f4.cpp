@@ -12,7 +12,7 @@ struct ReflectTargetA {
 }
 extern "C" {
 
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, s32 listedId);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, s32 listedId);
 
 /* Queues a target action with an integer payload and an optional battle-unit follow-up. */
 u32 FUN_004fb6f4(u32 actorId, u32 options, ReflectTargetA *target, u32 value, u32 parameter,
@@ -24,7 +24,7 @@ u32 FUN_004fb6f4(u32 actorId, u32 options, ReflectTargetA *target, u32 value, u3
     request->value = value;
     request->parameter = parameter;
     if (followupActor >= 0) {
-        BtlCombatantEntryA *entry = FUN_003f0e20(btlGetMainState(), target->listedId);
+        BtlCombatantEntryA *entry = btlMainFindEntryByListedId(btlGetMainState(), target->listedId);
         if (entry != NULL && followupValue >= 0) {
             request = btlQueueReflectAction(g_btlActionReflect, static_cast<s16>(followupActor), 0, options);
             request->kind = 7;

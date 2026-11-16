@@ -22,7 +22,7 @@ extern "C" {
 extern void *g_btlAux;
 extern BattleMessageMask g_btlMessageFlagMasks;
 s32 libc_strlen(const char *);
-u64 *FUN_003f0e20(void *battle, s32 target);
+u64 *btlMainFindEntryByListedId(void *battle, s32 target);
 void FUN_004fdcd8(s32 value, s32, u32, s32, s32, u32, u16, const char *);
 
 // Emit the supported entries, filtering type 12 against the target's battle flags.
@@ -48,7 +48,7 @@ void btlEmitMessageTableEntries(s32 actor, u32 unused, BattleMessageTable *table
             case 5:
             case 12:
                 if (type == 12 && target >= 0) {
-                    u64 *flags = FUN_003f0e20(battle, target);
+                    u64 *flags = btlMainFindEntryByListedId(battle, target);
                     if (flags != NULL && (*flags & g_btlMessageFlagMasks.mask) == 0) {
                         break;
                     }

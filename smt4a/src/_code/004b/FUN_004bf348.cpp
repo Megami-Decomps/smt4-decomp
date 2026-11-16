@@ -52,14 +52,14 @@ extern "C" {
 extern BtlAiKinds DAT_005713f0;
 
 s32 gameFlagIsSet(u32 flag);
-BtlAiUnit *FUN_003f0e20(BtlAiState *state, void *actor);
+BtlAiUnit *btlMainFindEntryByListedId(BtlAiState *state, void *actor);
 BtlAiScales *FUN_0028cb6c(void);
 s32 lcgRandomRange(u32 limit);
 
 /* Whether the actor's unit already has an action queued. */
 static __inline bool btlAiUnitHasQueuedAction(void *actor)
 {
-    BtlAiUnit *unit = FUN_003f0e20(reinterpret_cast<BtlAiState *>(btlGetMainState()), actor);
+    BtlAiUnit *unit = btlMainFindEntryByListedId(reinterpret_cast<BtlAiState *>(btlGetMainState()), actor);
 
     return unit != NULL && unit->queuedAction > 0;
 }
@@ -81,7 +81,7 @@ u32 FUN_004bf348(void *actor, s32 mode, s32 flag)
         return 0;
     }
     chance = 40;
-    unit = FUN_003f0e20(state, actor);
+    unit = btlMainFindEntryByListedId(state, actor);
     if (unit != NULL) {
         u64 input = unit->input;
 

@@ -9,7 +9,7 @@ extern const char DAT_00410408[]; /* effPolygonFlash.cpp: __FILE__ */
 void *memAlloc(int, int, int, int size, int align, int);
 PolyGeom *FUN_00247334(u32 count, int w, int h, u8 *table, int tableSize);
 void textureSlotReplace(PolyGeom *geom, void *texture);
-u32 FUN_0024c3c8(int id);
+u32 sysGetTableWord(int id);
 extern u8 DAT_004737c2;
 
 /* Allocates a geometry block (16-byte header plus `payloadBytes`), recording the allocation site first. */
@@ -31,7 +31,7 @@ PolyGeomBlock *effPolyFlashGeomTexCreate1(PolyParams *params, void *texture)
     geom = FUN_00247334(params->segments & 0xffff, 2, 4, &DAT_004737c2, 76);
     block->geom = geom;
     if (texture == NULL) {
-        geom->unk04 = FUN_0024c3c8(19);
+        geom->unk04 = sysGetTableWord(19);
         refCountIncrement(reinterpret_cast<int *>(geom->unk04));
     } else {
         textureSlotReplace(geom, texture);

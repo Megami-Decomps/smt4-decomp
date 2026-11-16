@@ -14,7 +14,7 @@ extern "C" {
 
 Table21Entry * FUN_00292844(u32 id);
 
-void FUN_00292be4(Obj *obj, u32 a, u32 b);
+void pair40Set(Obj *obj, u32 a, u32 b);
 
 u32 FUN_00297ca4(BattleCommandMenu *menu, s32 confirm);
 

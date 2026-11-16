@@ -7,7 +7,7 @@ struct BattleValueShareMasks {
     u64 enabled;
 };
 extern "C" {
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *, u32);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *, u32);
 void source4CCopyHalves(const BtlCombatantEntryA *, u16 *);
 void dataTable41FindById(u32);
 extern BattleValueShareMasks DAT_005713f0;
@@ -17,11 +17,11 @@ extern BattleValueShareMasks DAT_005713f0;
 extern "C" f32 FUN_004c3bc0(u32 sourceId, u32 targetId)
 {
     f32 result = 1.0f;
-    BtlCombatantEntryA *source = FUN_003f0e20(btlGetMainState(), sourceId);
+    BtlCombatantEntryA *source = btlMainFindEntryByListedId(btlGetMainState(), sourceId);
     if (source == NULL) {
         return result;
     }
-    BtlCombatantEntryA *target = FUN_003f0e20(btlGetMainState(), targetId);
+    BtlCombatantEntryA *target = btlMainFindEntryByListedId(btlGetMainState(), targetId);
     if (target != NULL && (target->flags & DAT_005713f0.enabled) != 0) {
         u16 values[10] = {0};
         source4CCopyHalves(source, values);

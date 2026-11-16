@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00467840(float *);
+int thresholdDispatchOutsideRange(float *);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(int, int);
 
@@ -20,7 +20,7 @@ struct fn_004676c8_arg0 {
 
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00467840. */
+/* Supplied declaration required: thresholdDispatchOutsideRange. */
 
 
 void FUN_004676c8(fn_004676c8_arg0 *param_1,unsigned int *param_2,float *param_3)
@@ -43,7 +43,7 @@ void FUN_004676c8(fn_004676c8_arg0 *param_1,unsigned int *param_2,float *param_3
     in_s0 = *param_3;
   }
   else {
-    FUN_00467840(param_3);
+    thresholdDispatchOutsideRange(param_3);
   }
   temp_v3 = VectorFloatToUnsigned(in_s0,3);
   temp_v4 = (float)VectorUnsignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -64,7 +64,7 @@ void FUN_004676c8(fn_004676c8_arg0 *param_1,unsigned int *param_2,float *param_3
       return;
     }
     in_s0 = in_s0 + 1.0f;
-    FUN_00467840(param_3);
+    thresholdDispatchOutsideRange(param_3);
     temp_v1 = VectorFloatToUnsigned(in_s0,3);
     temp_v6 = param_3[temp_v3 * 4 + 4];
     temp_v5 = param_3[temp_v3 * 4 + 5];

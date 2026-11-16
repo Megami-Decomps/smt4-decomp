@@ -39,7 +39,7 @@ struct StatusTintRecord {
 
 extern "C" {
 extern BattleEffectTintSettings g_battleEffectSettings;
-BattleTintUnit *FUN_003f0e20(void *owner, s32 unitIndex);
+BattleTintUnit *btlMainFindEntryByListedId(void *owner, s32 unitIndex);
 
 /* Advances the tint of a status icon: picks the color of the unit's current status and fades toward it,
  * then steps on to the next active status once the fade has held. */
@@ -49,7 +49,7 @@ void FUN_004cb394(void *owner, StatusTintRecord *record)
     if ((record->flags & 2) == 0) {
         return;
     }
-    BattleTintUnit *unit = FUN_003f0e20(owner, record->unitIndex);
+    BattleTintUnit *unit = btlMainFindEntryByListedId(owner, record->unitIndex);
     if (unit == NULL) {
         return;
     }

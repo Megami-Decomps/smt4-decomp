@@ -6,7 +6,7 @@ void aocSlotRelease(SpriteTransitionWork *work);
 s32 bustupCutAnimAssignSlot(u32 job, u32 portrait);
 void bustupSpriteStartTransition(SpriteTransitionWork *work, u32 mode, u32 flags);
 void FUN_002a4e18(Vec3f *target, u32 portrait);
-void FUN_002bf6fc(u32 job, u32 first, u32 second, u32 third, u32 flags);
+void bustupCutStartSlotTransition(u32 job, u32 first, u32 second, u32 third, u32 flags);
 
 void bustupConfigureSlotTransition(u32 job, u32 portrait, s32 mode, u32 first, u32 second, u32 third)
 {
@@ -37,10 +37,10 @@ void bustupConfigureSlotTransition(u32 job, u32 portrait, s32 mode, u32 first, u
         } else if (mode == 1) {
             bustupSpriteStartTransition(work, 6, 0);
         } else if (mode == 2) {
-            FUN_002bf6fc(work->job, first, second, third, 0xFFFFFFFF);
+            bustupCutStartSlotTransition(work->job, first, second, third, 0xFFFFFFFF);
             bustupSpriteStartTransition(work, 7, 0);
         } else if (mode == 3) {
-            FUN_002bf6fc(work->job, first, second, third, 0xFFFFFFFF);
+            bustupCutStartSlotTransition(work->job, first, second, third, 0xFFFFFFFF);
             bustupSpriteStartTransition(work, 6, 0);
         }
         work->state = 2;

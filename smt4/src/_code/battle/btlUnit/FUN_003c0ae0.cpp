@@ -58,7 +58,7 @@ extern s32 DAT_00439ce8;     /* debug override of the camera kind, negative: non
 extern u32 DAT_00439cf8;     /* action tint colour */
 
 void FUN_0027da30(void *unit, s32 animation);
-s32 FUN_0027dab0(void *unit, BtlUnitAction *action);
+s32 idSetFindSubjectIndex(void *unit, BtlUnitAction *action);
 s32 btlFindNthActiveSpecialEntry(void *unit, s32 arg);
 f32 FUN_002881bc(void);
 s32 asdAnimGetTrackLastFrame(u32 track, s32 index);
@@ -129,7 +129,7 @@ void FUN_003c0ae0(u8 *unit, BtlUnitAction *action)
         }
         action->color = DAT_00439cf8;
         action->colorB = DAT_00439cf8;
-        s32 track = FUN_0027dab0(unit, action);
+        s32 track = idSetFindSubjectIndex(unit, action);
         if (track < 0)
             track = 0;
         FUN_0027da30(unit, action->animation);

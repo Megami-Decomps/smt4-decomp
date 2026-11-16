@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void FUN_001b6668(LinkList *list);
+void nw_ut_internal_LinkListImpl_erase_2B743C(LinkList *list);
 void nw_ut_internal_LinkListImpl_insert(LinkList *list, ListNode *pos, ListNode *node);
 void FUN_001743b8(PlayerSound *sound);
 void FUN_001738a4(SoundPlayer *player, s32 reverse);
@@ -17,7 +17,7 @@ void FUN_00173818(SoundPlayer *player)
         do {
             LinkListIterator cur = it++;
             if (pendingSoundFromNode(cur.node)->state == 2) {
-                FUN_001b6668(&player->pendingList);
+                nw_ut_internal_LinkListImpl_erase_2B743C(&player->pendingList);
                 nw_ut_internal_LinkListImpl_insert(&player->readyList, &player->readyList.node, cur.node);
             }
         } while (it != linkListEndIter(&player->pendingList));

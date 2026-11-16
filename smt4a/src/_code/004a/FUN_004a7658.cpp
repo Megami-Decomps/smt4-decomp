@@ -10,15 +10,15 @@ struct SortMetadata {
 };
 
 extern "C" {
-SortMetadata* FUN_00184310(u16 id);
+SortMetadata* devilGetRecord(u16 id);
 
 // Sorts by entry rank descending, metadata key ascending, then ID descending.
 s32 FUN_004a7658(const RankedEntry* first, const RankedEntry* second)
 {
     s32 order = second->rank - first->rank;
     if (order == 0) {
-        SortMetadata* a = FUN_00184310(first->id);
-        SortMetadata* b = FUN_00184310(second->id);
+        SortMetadata* a = devilGetRecord(first->id);
+        SortMetadata* b = devilGetRecord(second->id);
         order = a->key - b->key;
         if (order == 0) {
             order = second->id - first->id;

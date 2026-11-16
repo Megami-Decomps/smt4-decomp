@@ -5,7 +5,7 @@
 extern "C" {
 extern EffectColorProductState DAT_006471dc;
 f32 FUN_0034f8b4(const u8 *, s32, s32);
-f32 FUN_002914e8(f32 radius);
+f32 screenEffectProjectWorldRadius(f32 radius);
 u32 FUN_0038136c(const u8 *, const ScreenEffectWeightTrack *, s32, s32);
 void renderCtxSetPackedColor(u32 color);
 
@@ -34,7 +34,7 @@ void radialScreenEffectUpdate(RadialScreenEffectJob *job)
         output->maximum.y = radius + 120.0f;
     } else {
         DAT_006471dc.color = job->position;
-        radius = FUN_002914e8(job->radiusScale * radius);
+        radius = screenEffectProjectWorldRadius(job->radiusScale * radius);
         f32 x = DAT_006471dc.color.red;
         f32 y = DAT_006471dc.color.green;
         output->center.x = x;

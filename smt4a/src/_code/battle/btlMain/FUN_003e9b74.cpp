@@ -17,7 +17,7 @@ static inline BattleRosterRecordA *findFirstMarkedOpponent(BtlMainStateA *state)
 extern "C" {
 void *FUN_00178b04(u32 size, const char *file, s32 line);
 u32 *battleModelOwnerInitialize(u32 *owner);
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, s32 group);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, s32 group);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 void modelOwnerLoadNamed(u32 *owner, const char *name);
 
@@ -35,7 +35,7 @@ void FUN_003e9b74(BtlMainStateA *state)
     state->environmentModel.owner = owner != NULL ? battleModelOwnerInitialize(owner) : NULL;
     char name[64] = {};
     BattleRosterRecordA *selected = findFirstMarkedOpponent(state);
-    BtlCombatantEntryA *entry = FUN_003f0e20(state, selected->motion.group);
+    BtlCombatantEntryA *entry = btlMainFindEntryByListedId(state, selected->motion.group);
     EnvironmentResourceView *resource = (EnvironmentResourceView *)entry->candidate.record;
     textFormatBuffer(name, "battle/model/en%03d_sub.bam", resource->identifier);
     modelOwnerLoadNamed(state->environmentModel.owner, name);

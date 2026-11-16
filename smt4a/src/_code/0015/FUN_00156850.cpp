@@ -7,11 +7,11 @@ struct LookupEntry {
     u8 payload[1]; // 0x08
 };
 
-extern "C" LookupEntry* FUN_001ad9b4(void* context, u32 key);
+extern "C" LookupEntry* dataTable1bOr1cGetRecord(void* context, u32 key);
 
 static __inline LookupEntry* findEntry(void* context, u32 key)
 {
-    return FUN_001ad9b4(context, key);
+    return dataTable1bOr1cGetRecord(context, key);
 }
 
 extern "C" u8* FUN_00156850(void* context, u32 key)

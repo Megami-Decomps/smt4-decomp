@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern UnitTemplate *FUN_00184310(s32 id);
+extern UnitTemplate *devilGetRecord(s32 id);
 extern void sysMemClear(void *ptr, u32 size);
 extern void __aeabi_memcpy4(void *dst, const void *src, u32 size);
 extern void FUN_004bd6b0(UnitRecord *unit, u16 skill, s32 slot);
@@ -12,7 +12,7 @@ extern u16 recordGetScaledMaximum(UnitRecord *unit);
 /* Builds unit record `out` from table entry `id`. */
 void unitRecordBuild(s32 id, UnitRecord *out)
 {
-    UnitTemplate *entry = FUN_00184310(id);
+    UnitTemplate *entry = devilGetRecord(id);
     s32 i;
 
     sysMemClear(out, 300);

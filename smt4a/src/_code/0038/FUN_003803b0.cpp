@@ -10,7 +10,7 @@ extern "C" {
 extern u32 g_btlScriptUnit;
 
 s32 scrGetArg(u32 index);
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, s32 index);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, s32 index);
 void FUN_004fb798(s32 a, u32 unit, s32 b, BattleRosterRecordA *target, s32 c, s32 damage, s32 d, s32 e,
                   s32 effect, s32 f, s32 g, s32 kind, s32 h, s32 i, s32 j);
 void FUN_004fb43c(s32 a, u32 unit, u32 message, s32 b, s32 c, s32 d, s32 e);
@@ -21,7 +21,7 @@ u32 FUN_003803b0(void)
     s32 target = scrGetArg(0);
     s32 percent = scrGetArg(1);
     u32 unit = (u32)btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit));
-    s32 damage = FUN_003f0e20(btlGetMainState(), target)->maxHp * percent / 100;
+    s32 damage = btlMainFindEntryByListedId(btlGetMainState(), target)->maxHp * percent / 100;
 
     if (damage == 0) {
         damage = -1;

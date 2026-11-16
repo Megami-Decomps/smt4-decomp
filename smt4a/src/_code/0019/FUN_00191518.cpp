@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_001b6668(int, int);
+int nw_ut_internal_LinkListImpl_erase_2B743C(int, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_001b6668. */
+/* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2B743C. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -21,7 +21,7 @@ void FUN_00191518(int param_1,int param_2)
 {
 /* irregular: 1 native warning(s); review required */
   nn_os_CriticalSection_Enter(param_1 + 0x1c4);
-  FUN_001b6668(param_1 + 0x1d0,param_2 + 4);
+  nw_ut_internal_LinkListImpl_erase_2B743C(param_1 + 0x1d0,param_2 + 4);
   nn_os_CriticalSection_Leave(param_1 + 0x1c4);
   return;
 }

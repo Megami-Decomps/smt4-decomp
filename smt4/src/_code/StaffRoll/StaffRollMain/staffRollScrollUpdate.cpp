@@ -3,7 +3,6 @@
  * end or the player skips it. */
 #include "common.h"
 #include "StaffRoll/StaffRollMain.h"
-#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
 
@@ -25,7 +24,7 @@ void staffRollScrollUpdate(void)
             roll->lineB[i].y -= roll->speed;
         }
     }
-    if ((FUN_002c15fc(9) != 0 || FUN_002c15fc(6) != 0) && roll->skip == 0 && gameFlagIsSet(0x565) != 0) {
+    if ((slotIsActive(9) != 0 || slotIsActive(6) != 0) && roll->skip == 0 && gameFlagIsSet(0x565) != 0) {
         roll->skip = 1;
     }
     if (roll->finished != 0) {

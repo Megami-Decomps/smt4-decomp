@@ -18,7 +18,7 @@ extern "C" {
 
 
 ReflectRecord *FUN_0027da30(void *battle, s16 id);
-s32 FUN_0027dab0(void *battle, ReflectUnit *unit);
+s32 idSetFindSubjectIndex(void *battle, ReflectUnit *unit);
 
 /* Registers a type-0x25 reflect entry for the unit under `key` unless the unit lacks flag 1 or
  * the entry already exists; returns the new entry or NULL. */
@@ -40,7 +40,7 @@ ReflectAction *btlQueueUnitReflectAction25(s32 id, u32 key, ReflectUnit *unit, u
     }
     action = btlQueueReflectAction(g_btlActionReflect, (s16)id, 0, key);
     record = FUN_0027da30(static_cast<void *>(btlGetMainState()), unit->id);
-    index = FUN_0027dab0(static_cast<void *>(btlGetMainState()), unit);
+    index = idSetFindSubjectIndex(static_cast<void *>(btlGetMainState()), unit);
     if (index < 0) {
         index = 0;
     }

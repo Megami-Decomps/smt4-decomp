@@ -21,7 +21,7 @@ int FUN_0026c868(void);
 int FUN_0026c9c0(void);
 int FUN_0026d144(...);
 int FUN_0026d3e0(...);
-int FUN_00292be4(unsigned int, int);
+int pair40Set(unsigned int, int);
 int partyPanelSetState(...);
 int FUN_0029e874(int);
 int gameGetUnitRecord(...);
@@ -50,7 +50,7 @@ extern int g_partyPanel; /* 0x43dcf0 */
 /* Supplied declaration required: FUN_0026c9c0. */
 /* Supplied declaration required: FUN_0026d144. */
 /* Supplied declaration required: FUN_0026d3e0. */
-/* Supplied declaration required: FUN_00292be4. */
+/* Supplied declaration required: pair40Set. */
 /* Supplied declaration required: partyPanelSetState. */
 /* Supplied declaration required: FUN_0029378c. */
 /* Supplied declaration required: FUN_0029e874. */
@@ -109,7 +109,7 @@ void FUN_0028a924(int param_1,unsigned int param_2,unsigned short param_3)
     *(unsigned char *)(*(int *)(temp_v9 + 0x6c8) + 0x25) = 0;
     *(unsigned char *)(*(int *)(temp_v9 + 0x6c8) + 0x27) = 0;
     *(unsigned char *)(*(int *)(temp_v9 + 0x6c8) + 0x26) = 0;
-    FUN_00292be4(*(unsigned int *)(temp_v9 + 0x6c8),0);
+    pair40Set(*(unsigned int *)(temp_v9 + 0x6c8),0);
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 4);
   temp_v3 = 0;
@@ -118,7 +118,7 @@ void FUN_0028a924(int param_1,unsigned int param_2,unsigned short param_3)
     *(unsigned char *)(*(int *)(temp_v9 + 0x6d8) + 0x25) = 0;
     *(unsigned char *)(*(int *)(temp_v9 + 0x6d8) + 0x27) = 0;
     *(unsigned char *)(*(int *)(temp_v9 + 0x6d8) + 0x26) = 0;
-    FUN_00292be4(*(unsigned int *)(temp_v9 + 0x6d8),0);
+    pair40Set(*(unsigned int *)(temp_v9 + 0x6d8),0);
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 0x18);
   switch(param_1) {

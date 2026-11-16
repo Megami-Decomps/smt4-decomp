@@ -5,7 +5,7 @@
 
 struct ExperienceDefinition { u8 unk00[6]; u16 level; };
 
-extern "C" const ExperienceDefinition *FUN_00184310(u32 id);
+extern "C" const ExperienceDefinition *devilGetRecord(u32 id);
 
 /* The capped level requirement, scaled by the distance from the definition's base level. */
 extern "C" u32 FUN_004cc8d8(u32 id, s32 level)
@@ -28,7 +28,7 @@ extern "C" u32 FUN_004cc8d8(u32 id, s32 level)
             base = amount > 999999 ? 999999 : amount;
         }
     }
-    distance = level - FUN_00184310(id)->level + 1;
+    distance = level - devilGetRecord(id)->level + 1;
     if (distance <= 0) {
         percentage = 100;
     } else {

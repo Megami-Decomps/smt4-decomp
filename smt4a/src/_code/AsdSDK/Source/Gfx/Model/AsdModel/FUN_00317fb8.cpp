@@ -5,7 +5,6 @@ extern "C" {
 extern GfxModelState g_gfxSettings;
 extern ModelResourceList DAT_00636ee0;
 extern void* DAT_005b3c74;
-void runtimeDispatchObjectRelease(void**);
 void FUN_00451550(void**);
 
 void FUN_00317fb8(void)
@@ -17,7 +16,7 @@ void FUN_00317fb8(void)
         if (DAT_00636ee0.begin != DAT_00636ee0.end) {
             --DAT_00636ee0.end;
         }
-        runtimeDispatchObjectRelease(&DAT_005b3c74);
+        runtimeDispatchObjectRelease(reinterpret_cast<u32 **>(&DAT_005b3c74));
         FUN_00451550(&DAT_005b3c74);
         g_gfxSettings.unk02 = 0;
     }

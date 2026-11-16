@@ -18,14 +18,14 @@ struct AilmentMasks {
 extern "C" {
 extern AilmentMasks DAT_005713f0;
 
-BattleUnit *FUN_003f0e20(BtlMainStateA *battle, u32 id);
+BattleUnit *btlMainFindEntryByListedId(BtlMainStateA *battle, u32 id);
 void textFormatBuffer(char *buffer, const char *text);
 u32 lcgRandomRange(u32 limit);
 
 /* The resistance of the unit to the property (0 without a unit). */
 static s32 resistanceOf(u32 id, s32 property)
 {
-    BattleUnit *unit = FUN_003f0e20(btlGetMainState(), id);
+    BattleUnit *unit = btlMainFindEntryByListedId(btlGetMainState(), id);
     return unit != NULL ? unit->properties[property] : 0;
 }
 
@@ -36,7 +36,7 @@ static s32 resistanceOf(u32 id, s32 property)
 u32 FUN_004c1114(u32 id, s32 kind)
 {
     BtlMainStateA *battle = btlGetMainState();
-    BattleUnit *unit = FUN_003f0e20(battle, id);
+    BattleUnit *unit = btlMainFindEntryByListedId(battle, id);
     f32 base = 0.0f;
     s32 property;
     const char *name = NULL;

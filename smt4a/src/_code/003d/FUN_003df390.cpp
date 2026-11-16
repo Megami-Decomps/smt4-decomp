@@ -12,14 +12,14 @@ typedef struct UnlockRecord {
     /* 0x126 */ u16 requiredMembers[3];
 } UnlockRecord;
 
-UnlockRecord *FUN_001ad9b4(u32 id);
+UnlockRecord *dataTable1bOr1cGetRecord(u32 id);
 s32 gameFlagIsSet(u32 flag);
 u32 partyEntryFlagsBit3(s32 member);
 
 /* Return 1 when the record's required game flag and party members are all satisfied. */
 s32 FUN_003df390(u32 id)
 {
-    UnlockRecord *record = FUN_001ad9b4(id);
+    UnlockRecord *record = dataTable1bOr1cGetRecord(id);
 
     if (record == NULL) {
         return 0;

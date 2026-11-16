@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00451644(int *);
 int FUN_004529a0(int *);
-int FUN_00456624(int *, int);
+int nw_gfx_Material_DestroyResFragmentShader(int *, int);
 int nw_gfx_res_ResMaterial_Cleanup(int *);
 
 typedef int romwright_code(...);
@@ -18,7 +18,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00451644. */
 /* Supplied declaration required: FUN_004529a0. */
-/* Supplied declaration required: FUN_00456624. */
+/* Supplied declaration required: nw_gfx_Material_DestroyResFragmentShader. */
 /* Supplied declaration required: nw_gfx_res_ResMaterial_Cleanup. */
 
 
@@ -46,7 +46,7 @@ void nw_gfx_Material_DestroyResMaterial(int *param_1,int param_2)
     else {
       temp_v1 = 0;
     }
-    FUN_00456624(param_1,temp_v1);
+    nw_gfx_Material_DestroyResFragmentShader(param_1,temp_v1);
     temp_v1 = *(int *)(temp_v4 + 0x280);
     if (temp_v1 != 0) {
       temp_v0 = temp_v4 + 0x280 + temp_v1;

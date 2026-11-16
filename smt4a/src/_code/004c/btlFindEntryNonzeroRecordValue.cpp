@@ -11,13 +11,13 @@ typedef struct IdRecord {
     /* 0x3C */ s16 value;
 } IdRecord;
 
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, u32 id);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, u32 id);
 void source4CCopyHalves(BtlCombatantEntryA *entry, u16 *output);
 
 /* Collects the entry's ids and returns the value of the first one whose record has a nonzero value, else 0. */
 s32 btlFindEntryNonzeroRecordValue(u32 id)
 {
-    BtlCombatantEntryA *entry = FUN_003f0e20(btlGetMainState(), id);
+    BtlCombatantEntryA *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
     u16 ids[10] = {0};
 
     source4CCopyHalves(entry, ids);

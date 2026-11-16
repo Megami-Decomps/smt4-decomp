@@ -73,19 +73,19 @@ void FUN_0026413c(void)
     }
     if (g_gameState.busy == 0 && g_gameState.owner == NULL) {
         if (camera->turning == 0) {
-            if (camera->held != 0 && FUN_002c15fc(8) == 0 && FUN_002c15fc(7) == 0) {
+            if (camera->held != 0 && slotIsActive(8) == 0 && slotIsActive(7) == 0) {
                 DAT_004474f4->held = 0;
             }
             if (DAT_004474f4->cooldown <= 6) {
-                if (FUN_002c15fc(8) != 0) {
+                if (slotIsActive(8) != 0) {
                     left = 1;
                 }
-                if (FUN_002c15fc(7) != 0) {
+                if (slotIsActive(7) != 0) {
                     right = 1;
                 }
                 if (DAT_004474f4->cooldown == 0
                     && (inputIsQuestMenuPressed() != 0
-                        || (FUN_002c15fc(8) != 0 && FUN_002c15fc(7) != 0 && padIsButtonPressed(8) == 0
+                        || (slotIsActive(8) != 0 && slotIsActive(7) != 0 && padIsButtonPressed(8) == 0
                             && padIsButtonPressed(7) == 0 && DAT_004474f4->held == 0))) {
                     left = 0;
                     right = 0;

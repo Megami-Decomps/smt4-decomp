@@ -23,7 +23,7 @@ s32 listBoxItemHasOwner(u32 listBox, u32 item);
 u32 asdListBoxGetSelectedItemId(u32 listBox);
 u32 *asdListBoxGetItemValuePtr(u32 listBox, u32 item);
 BtlEntry *FUN_002561d8(BtlMainState *state, s32 index, u32 mode);
-s32 FUN_002c15fc(s32 mode);
+s32 slotIsActive(s32 mode);
 void FUN_00246e24(s32 a, BattleActionUnit *unit, BtlActionRecord *action, u32 mask, s32 b);
 void FUN_00246d38(s32 a, BattleActionUnit *unit, BtlActionRecord *action, u32 mask);
 SaveSlotTable *gameGetSlotTable(void);
@@ -124,7 +124,7 @@ void FUN_003c33c8(StatusFlagEditor *screen, BtlMainState *battle)
             screen->mask &= ~0x8u;
         return;
     case 13:
-        if (FUN_002c15fc(0) == 0)
+        if (slotIsActive(0) == 0)
             return;
         if (screen->onlyAllies != 0 || screen->onlyEnemies != 0) {
             do {
@@ -157,7 +157,7 @@ void FUN_003c33c8(StatusFlagEditor *screen, BtlMainState *battle)
         }
         return;
     case 14:
-        if (FUN_002c15fc(0) == 0)
+        if (slotIsActive(0) == 0)
             return;
         if (screen->onlyAllies != 0 || screen->onlyEnemies != 0) {
             do {

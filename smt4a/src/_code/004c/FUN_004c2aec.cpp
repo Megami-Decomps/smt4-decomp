@@ -6,7 +6,7 @@
 #include "shard/Shard004B.h"
 
 extern "C" {
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, s32 id);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, s32 id);
 ScaledRecordValues *gameGetSlotRecord(s32 slot);
 s32 recordGetScaledMaximum(const ScaledRecordValues *record);
 s32 FUN_004c55e4(s32 unit, u32 skill);
@@ -15,8 +15,8 @@ f32 FUN_004c28b4(s32 unit, s32 kind);
 
 s32 FUN_004c2aec(u32 skill, s32 sourceId, s32 targetId, s32 percentage, f32 amount)
 {
-    BtlCombatantEntryA *source = FUN_003f0e20(btlGetMainState(), sourceId);
-    BtlCombatantEntryA *target = FUN_003f0e20(btlGetMainState(), targetId);
+    BtlCombatantEntryA *source = btlMainFindEntryByListedId(btlGetMainState(), sourceId);
+    BtlCombatantEntryA *target = btlMainFindEntryByListedId(btlGetMainState(), targetId);
     if (percentage > 0) {
         s32 bonus;
         if (target) {

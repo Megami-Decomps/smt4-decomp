@@ -50,7 +50,7 @@ struct EscapeSlotTable {
 extern "C" {
 s32 lcgRandomRange(s32 range);
 EscapePlayer *gameGetPlayerData(void);
-EscapeModel *FUN_00184310(u32 id);
+EscapeModel *devilGetRecord(u32 id);
 EscapeSlotTable *gameGetSlotTable(void);
 s32 gameDataBlocksGetTableFlag(void);
 EscapeSaveSlot *gameGetSaveSlotData(s32 slot);
@@ -105,7 +105,7 @@ void FUN_003ef1e4(EscapeBattle *battle, s32 forced)
         for (s32 i = 0;; i++) {
             u32 id = battle->enemies[i];
             if (id != 0) {
-                EscapeModel *model = FUN_00184310(id & 0xffff);
+                EscapeModel *model = devilGetRecord(id & 0xffff);
                 if (model != NULL && model->kind == 39) {
                     break;
                 }

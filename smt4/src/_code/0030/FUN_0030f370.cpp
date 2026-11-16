@@ -17,7 +17,7 @@ struct EmitterResource {
 extern "C" {
 s32 resourceResolveDataPointer(EmitterResource *resource);
 EmitterHeader *resourceResolveHeaderPointer(EmitterResource *resource);
-void FUN_0024f8a4(ResourceEmitter *emitter, u32 id, const EmitterArguments *arguments);
+void polygonTrackRebuildResources(ResourceEmitter *emitter, u32 id, const EmitterArguments *arguments);
 void *FUN_002691d8(u16 id, u32 key, void *data);
 void effEmitterReplaceResourceByKind(ResourceEmitter *owner, u32 kind, const u32 *resource);
 
@@ -34,7 +34,7 @@ static inline ResourceEmitter *createEmitter(EmitterResource *resource)
 {
     u8 *header = reinterpret_cast<u8 *>(resourceResolveHeaderPointer(resource));
     ResourceEmitter *emitter = reinterpret_cast<ResourceEmitter *>(effEmitterCreateSmall(reinterpret_cast<EffEmitterDesc *>(header + 0x1c)));
-    FUN_0024f8a4(emitter, resource->kind, (const EmitterArguments *)header);
+    polygonTrackRebuildResources(emitter, resource->kind, (const EmitterArguments *)header);
     replaceEmitterBuffer(emitter, resource->kind, header + 0x1c);
     return emitter;
 }

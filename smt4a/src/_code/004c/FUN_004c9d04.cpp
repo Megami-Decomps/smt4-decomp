@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_00184310(...);
+int devilGetRecord(...);
 int __aeabi_memset4(...);
 int asdOperatorDelete(...);
 int sysMemClear(...);
@@ -67,7 +67,7 @@ extern unsigned int DAT_0057aa74; /* 0x57aa74 */
 extern unsigned int DAT_0057aa78; /* 0x57aa78 */
 extern unsigned int DAT_0057aa7c; /* 0x57aa7c */
 
-/* Supplied declaration required: FUN_00184310. */
+/* Supplied declaration required: devilGetRecord. */
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: asdOperatorDelete. */
@@ -214,7 +214,7 @@ void FUN_004c9d04(fn_004c9d04_arg0 *param_1,unsigned int param_2,unsigned int pa
         } while (puVar13[0xeb] != temp_v6);
         countersAddSaturating(1);
         temp_v6 = (unsigned int)*(unsigned short *)puVar13[0x101];
-        FUN_00184310();
+        devilGetRecord();
         if ((temp_v6 != 0) && (*(char *)(temp_v6 + 2) == '\'')) {
           countersAddSaturating(2,1);
         }

@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_001b6668(int, int);
+int nw_ut_internal_LinkListImpl_erase_2B743C(int, int);
 int nw_snd_internal_driver_VoiceManager_AppendVoiceList(int, int);
 int nw_snd_internal_driver_Voice_UpdateVoicesPriority(int *);
 int nw_ut_internal_LinkListImpl_insert(int, int, int);
 
-/* Supplied declaration required: FUN_001b6668. */
+/* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2B743C. */
 /* Supplied declaration required: nw_snd_internal_driver_VoiceManager_AppendVoiceList. */
 /* Supplied declaration required: nw_snd_internal_driver_Voice_UpdateVoicesPriority. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
@@ -21,7 +21,7 @@ void nw_snd_internal_driver_VoiceManager_ChangeVoicePriority(int param_1,int par
 /* irregular: 4 native warning(s); review required */
   int *piVar1;
   
-  FUN_001b6668(param_1 + 4,param_2 + 0x58);
+  nw_ut_internal_LinkListImpl_erase_2B743C(param_1 + 4,param_2 + 0x58);
   nw_ut_internal_LinkListImpl_insert(param_1 + 0x10,param_1 + 0x14,param_2 + 0x58);
   nw_snd_internal_driver_VoiceManager_AppendVoiceList(param_1,param_2);
   for (piVar1 = (int *)(param_2 + 0x58); (piVar1 != (int *)(param_1 + 8) && (piVar1[-6] >= 2));

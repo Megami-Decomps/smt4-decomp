@@ -17,7 +17,7 @@ struct ChanceSkillMasks {
 
 extern "C" {
 extern ChanceSkillMasks DAT_005713f0;
-ChanceSkillUnit *FUN_003f0e20(BtlMainStateA *state, u32 unitId);
+ChanceSkillUnit *btlMainFindEntryByListedId(BtlMainStateA *state, u32 unitId);
 void source4CCopyHalves(ChanceSkillUnit *unit, u16 *skills);
 s32 lcgRandomRange(u32 range);
 
@@ -25,7 +25,7 @@ s32 lcgRandomRange(u32 range);
 u16 FUN_004c5ec0(u32 unitId)
 {
     ChanceBattleFlags *battle = (ChanceBattleFlags *)btlGetMainState();
-    ChanceSkillUnit *unit = FUN_003f0e20((BtlMainStateA *)battle, unitId);
+    ChanceSkillUnit *unit = btlMainFindEntryByListedId((BtlMainStateA *)battle, unitId);
     u16 skills[10] = {0};
     s32 i;
 

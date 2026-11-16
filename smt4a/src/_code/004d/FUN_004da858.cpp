@@ -17,7 +17,7 @@ s32 gameDataCopySaveEntry(u16 id, SaveEntryCopy *out);
 /* Whether a demon is available: its unlock flag is set and, when it requires a saved entry, that entry exists and is active. */
 s32 FUN_004da858(void *owner, u32 id)
 {
-    const DevilRecordA *record = FUN_00184310(id);
+    const DevilRecordA *record = devilGetRecord(id);
     SaveEntryCopy entry;
     u16 requirement;
     s32 found;

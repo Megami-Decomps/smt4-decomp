@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00164b5c(int, int, int, unsigned int, unsigned int, unsigned int);
 int FUN_001835b4(...);
-int FUN_001ad9b4(void);
+int dataTable1bOr1cGetRecord(void);
 
 /* stack frame of param_6: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -20,7 +20,7 @@ extern int g_uiQuest; /* 0x57f28c */
 
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_001ad9b4. */
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
 extern int FUN_003de75c(void);
 extern int recordIsAvailable(int);
 extern int recordCategoryNineIsActiveInMode24(int);
@@ -81,7 +81,7 @@ FUN_0023dedc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
     }
   }
   else {
-    FUN_001ad9b4();
+    dataTable1bOr1cGetRecord();
     if (param_1 == 0) {
       return temp_v2;
     }

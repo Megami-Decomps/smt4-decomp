@@ -12,7 +12,7 @@ int messageArmMenuAnimation(...);
 int FUN_0015f858(unsigned int, int);
 int FUN_00180118(unsigned int);
 int gameGetSlotRecord(...);
-int FUN_001ad9b4(void);
+int dataTable1bOr1cGetRecord(void);
 int messageForwardDefaultMode(...);
 int scrWorkGetValue(...);
 int scrWorkSetValue(...);
@@ -39,7 +39,7 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: gameGetSlotRecord. */
 extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_001ad9b4. */
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
 /* Supplied declaration required: FUN_002292ac. */
 /* Supplied declaration required: messageForwardDefaultMode. */
 extern int messageMainIsIdle(void);
@@ -113,7 +113,7 @@ unsigned int FUN_002c4b48(void)
   temp_v14 = 0;
   QuestCenter_GetActiveEntry();
   temp_v4 = idOwnerGetRecordHalf() & 0xffff;
-  FUN_001ad9b4();
+  dataTable1bOr1cGetRecord();
   temp_v3 = scrWorkGetValue(3);
   if (temp_v3 < 4) {
     temp_v9 = temp_v4 + temp_v3 * 8;

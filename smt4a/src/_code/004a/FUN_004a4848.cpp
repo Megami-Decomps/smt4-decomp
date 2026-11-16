@@ -62,7 +62,7 @@ void FUN_004a4848(Screen4A *owner)
     if (work->alternate == 0) {
         s32 total = 0;
         for (s32 id = 1; id < 0x500; ++id) {
-            DevilRecordA *candidate = FUN_00184310((u16)id);
+            DevilRecordA *candidate = devilGetRecord((u16)id);
             Table00Record *record = dataTable00FindById((u16)id);
             if (candidate != NULL && record != NULL && (record->flags & 1) != 0) {
                 ++total;

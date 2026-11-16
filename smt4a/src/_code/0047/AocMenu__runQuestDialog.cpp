@@ -3,7 +3,7 @@
 
 extern "C" {
 void FUN_0047306c(u32 *dialog, s32 value, s32 mode, s32 flags);
-void FUN_00477d10(SceneWindowWork *window, s32 value, s32 mode);
+void aocMenuSetButtonHelp(SceneWindowWork *window, s32 value, s32 mode);
 void jobOwnerFreeSlotAndStop(u32 *dialog);
 void flagObjAdvance(u32 *dialog);
 s32 FUN_004d0584(void);
@@ -19,14 +19,14 @@ void AocMenu::runQuestDialog()
     switch (window->transition.phase) {
     case 0:
         FUN_0047306c(dialog, 100, 1, 0);
-        FUN_00477d10(window, 0, 1);
+        aocMenuSetButtonHelp(window, 0, 1);
         window->transition.phase = 1;
         break;
     case 1:
         if (uiSpriteGetCompletionState(&window->dialog.cursor) != 0) {
             if (FUN_004d0584() != 0) {
                 eventQueueAddUniqueIfValid(0x0100020E);
-                FUN_00477d10(window, -1, 0);
+                aocMenuSetButtonHelp(window, -1, 0);
                 flagObjAdvance(dialog);
                 window->transition.phase = 2;
             } else if (inputIsQuestMenuPressed() != 0) {

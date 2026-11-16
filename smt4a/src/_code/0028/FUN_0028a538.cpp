@@ -46,7 +46,7 @@ extern "C" {
 
 extern UniteLists* g_unite;
 
-DevilInfo* FUN_00184310(u32 product);
+DevilInfo* devilGetRecord(u32 product);
 SkillMetadata* findSkillMetadataById(u32 skill);
 s32 arrayContainsU16(const u16* array, s32 count, u32 value);
 void FUN_00203b40(void* listBox, s32 count, s32 a, s32 b, s32 c, s32 d);
@@ -78,7 +78,7 @@ static inline void collectSkills(UniteLists* lists, DevilInfo* info, PartyUnit* 
 // (skipping duplicates and the product's own skills) and primes the list box.
 void FUN_0028a538(u32 unused, PartyUnit* first, PartyUnit* second, u32 product)
 {
-    DevilInfo* info = FUN_00184310(product);
+    DevilInfo* info = devilGetRecord(product);
     UniteLists* lists = g_unite;
     for (s32 i = 0; i < 0x18; i++) {
         lists->primary[i] = 0;

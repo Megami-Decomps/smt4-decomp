@@ -89,7 +89,7 @@ void FUN_00258170(u8 *context)
                         vertex[0] = u + offset[0];
                         vertex[1] = v + offset[1];
                     }
-                    FUN_002c2424((u32)(vertexData), node[5]);
+                    nn_gxlow_CTR_FlushDataCacheForward((u32)(vertexData), node[5]);
                 }
                 break;
             }

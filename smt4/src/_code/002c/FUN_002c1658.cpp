@@ -5,7 +5,7 @@ extern "C" {
 bool buttonHelpIsButtonEnabled(u32);
 u32 padIsButtonRepeat(u32);
 u32 padIsButtonPressed(u32);
-u8 FUN_002c15fc(u32);
+u8 slotIsActive(u32);
 s32 buttonHelpKindIsTriggered(s8);
 s32 buttonHelpKindIsPressed(s8);
 }
@@ -15,7 +15,7 @@ static inline u32 queryPadButton(u32 button, s32 mode)
     switch (mode) {
     case 0: return padIsButtonRepeat(button);
     case 1: return padIsButtonPressed(button);
-    case 2: return FUN_002c15fc(button);
+    case 2: return slotIsActive(button);
     default: return 0;
     }
 }

@@ -9,7 +9,7 @@ int FUN_001517b4(...);
 int FUN_00163aa4(...);
 int eventQueueAddUniqueIfValid(...);
 int sysPlaySe(...);
-int FUN_00184310(void);
+int devilGetRecord(void);
 int dataTable00FindById(void);
 int FUN_0021a6c8(int);
 int statusPanelSetOpen(...);
@@ -46,7 +46,7 @@ extern int ifTouchGetSelectionMode(void);
 extern unsigned short FUN_001643b4(unsigned int, unsigned int);
 extern int ifTouchGetSelectedRegion(void);
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00184310. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_0021a6c8. */
 extern int FUN_0026264c(unsigned short);
@@ -173,7 +173,7 @@ LAB_002f9458:
         sysPlaySe(0x35);
         temp_v5 = 0;
         if (temp_v6 != 0) {
-          FUN_00184310();
+          devilGetRecord();
           temp_v5 = temp_v6;
         }
         if ((!temp_v0) && ((temp_v5 == 0 || ((*(unsigned char *)(temp_v5 + 0xb3) & 2) == 0)))) break;
@@ -375,7 +375,7 @@ LAB_002f9924:
       puVar7 = (unsigned short *)FUN_002c7e24();
       puVar9 = (unsigned short *)FUN_002c7e24();
       temp_v6 = (unsigned int)*puVar9;
-      FUN_00184310();
+      devilGetRecord();
       sysPlaySe(0x35);
       if ((*(unsigned char *)(temp_v6 + 0xb3) & 2) != 0) {
         sysPlaySe(0x11b);

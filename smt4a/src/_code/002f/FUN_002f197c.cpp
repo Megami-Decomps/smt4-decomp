@@ -17,7 +17,7 @@ int asdTMTexTableEntryAt(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(...);
 int fontMeasureLineAdvance(...);
-int FUN_00184310(...);
+int devilGetRecord(...);
 int drawSetColorFromRGBA8(...);
 int slotRecordFindById(...);
 int FUN_0020caec(...);
@@ -86,7 +86,7 @@ extern int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
-/* Supplied declaration required: FUN_00184310. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: slotRecordFindById. */
 extern int *gameGetSlotTable(void);
@@ -166,7 +166,7 @@ void FUN_002f197c(fn_002f197c_arg0 *param_1,int param_2)
   FUN_001835b4(2,0x1a,0x14d,param_1,param_2,0x6a);
   FUN_001835b4(2,0x1a,0x4f,param_1,param_2,0x6a);
   puVar6 = (unsigned short *)(unsigned int)*(unsigned short *)(puVar2 + 0x148e);
-  FUN_00184310();
+  devilGetRecord();
   temp_v2 = asdTMTexTableEntryAt(0x1a,0x4d);
   temp_v8 = 0xffffffff;
   temp_v11 = 0xffffffff;
@@ -319,7 +319,7 @@ LAB_002f2034:
     do {
       temp_v7 = asdTMTexTableEntryAt(0x1a,temp_v1 + 0x157);
       psVar10 = (short *)(unsigned int)*(unsigned short *)((int)puVar2 + temp_v1 * 2 + 0x523a);
-      FUN_00184310();
+      devilGetRecord();
       if ((temp_v1 & 1) != 0) {
         FUN_001835b4(2,0x1a,0x134,(int)&param_1->field_0x0 + (int)*(short *)(temp_v7 + 8),
                      *(short *)(temp_v7 + 10) + param_2,0x83);

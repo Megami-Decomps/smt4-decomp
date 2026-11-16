@@ -46,7 +46,7 @@ u8 FUN_004da344(UniteWork *work, u32 first, u32 second, s32 special, FusionAvail
     }
     if (output != NULL)
         output->resultId = result.resultIdentifier;
-    const LevelView *record = reinterpret_cast<LevelView *>(FUN_00184310(result.resultIdentifier));
+    const LevelView *record = reinterpret_cast<LevelView *>(devilGetRecord(result.resultIdentifier));
     if (record != NULL && computeCountLimit() < record->level) {
         available = 0;
         if (output != NULL)

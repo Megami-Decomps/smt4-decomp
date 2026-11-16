@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_001aa14c(void);
+int nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_Dequeue(void);
 int nw_snd_internal_TaskManager_GetNextTask(...);
 
-/* Supplied declaration required: FUN_001aa14c. */
+/* Supplied declaration required: nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_Dequeue. */
 /* Supplied declaration required: nw_snd_internal_TaskManager_GetNextTask. */
 
 
@@ -36,7 +36,7 @@ void nw_snd_internal_TaskManager_WaitTask(int param_1)
       return;
     }
     temp_v0 = param_1 + 0x38;
-    FUN_001aa14c();
+    nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_Dequeue();
     if (temp_v0 == 0) {
       return;
     }

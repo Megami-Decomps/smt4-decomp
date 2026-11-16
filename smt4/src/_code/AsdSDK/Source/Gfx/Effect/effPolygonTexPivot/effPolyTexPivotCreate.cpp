@@ -19,7 +19,7 @@ u32 *resourceResolveDataPointer(PolyTexDesc *desc);
 void rt_memcpy(void *dst, const void *src, int size);
 void textureSlotReplace(PolyGeom *geom, u32 *resource);
 void *spriteGroupCreateFromFile(u32 *resource);
-u32 FUN_0024c3c8(int id);
+u32 sysGetTableWord(int id);
 void refCountIncrement(u32 texture);
 void *effTlpCreate(u32 *resource);
 
@@ -59,7 +59,7 @@ PolyTexPivotObject *effPolyTexPivotCreate(PolyTexDesc *desc)
             case 4:
                 {
                     PolyGeom *geom = obj->geom;
-                    geom->unk04 = FUN_0024c3c8(*resource & 0xffff);
+                    geom->unk04 = sysGetTableWord(*resource & 0xffff);
                     refCountIncrement(geom->unk04);
                 }
                 break;

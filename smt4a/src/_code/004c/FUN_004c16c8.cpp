@@ -6,7 +6,7 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_00184310(void);
+int devilGetRecord(void);
 int dataTable8FindRecord(void);
 int dataTable04FindById(void);
 int sysMemClear(...);
@@ -14,7 +14,7 @@ int FUN_002efc44(...);
 int dataTable41FindById(void);
 int FUN_0034a304(...);
 int FUN_003e8bb0(...);
-int FUN_003f0e20(...);
+int btlMainFindEntryByListedId(...);
 int FUN_003f21ec(void);
 int FUN_004bd098(...);
 int FUN_004c0f74(...);
@@ -112,7 +112,7 @@ extern unsigned int uRam005714dc; /* 0x5714dc */
 #endif
 /* Supplied declaration required: btlGetMainState. */
 extern int lcgRandomRange(unsigned int);
-/* Supplied declaration required: FUN_00184310. */
+/* Supplied declaration required: devilGetRecord. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: dataTable8FindRecord. */
 extern unsigned int padGetMappedValue(unsigned int);
@@ -124,7 +124,7 @@ extern int FUN_0028cb6c(void);
 /* Supplied declaration required: FUN_0034a304. */
 extern unsigned int FUN_0034ef58(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003e8bb0. */
-/* Supplied declaration required: FUN_003f0e20. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_003f21ec. */
 /* Supplied declaration required: FUN_004bd098. */
 extern unsigned int FUN_004bf9a0(unsigned int);
@@ -220,10 +220,10 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
     temp_v1 = temp_v2;
   }
   puVar4 = temp_v45;
-  FUN_003f0e20(temp_v45,temp_v53);
+  btlMainFindEntryByListedId(temp_v45,temp_v53);
   puVar5 = temp_v45;
   temp_v43 = puVar4;
-  FUN_003f0e20(temp_v45,temp_v54);
+  btlMainFindEntryByListedId(temp_v45,temp_v54);
   temp_v47 = puVar5 + 0x59;
   temp_v49 = temp_v43 + 0x59;
   temp_v50 = puVar5;
@@ -272,7 +272,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
   }
   temp_v3 = temp_v53;
   temp_v5 = reinterpret_cast<int>(btlGetMainState());
-  FUN_003f0e20(temp_v5,temp_v3);
+  btlMainFindEntryByListedId(temp_v5,temp_v3);
   temp_v6 = reinterpret_cast<int>(btlGetMainState());
   FUN_003e8bb0(&temp_v31,temp_v6,temp_v5);
   temp_v46 = (unsigned int *)(int)temp_v32;
@@ -447,7 +447,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
       if (((temp_v10 | temp_v8) & 0x170000) == 0) {
         temp_v34 = temp_v54;
         temp_v7 = reinterpret_cast<int>(btlGetMainState());
-        FUN_003f0e20(temp_v7,temp_v34);
+        btlMainFindEntryByListedId(temp_v7,temp_v34);
         if ((temp_v7 != 0) && (*(int *)(temp_v7 + 0xd8) != 0)) {
           temp_v10 = 0;
           switch(temp_v12) {
@@ -636,7 +636,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
                                     (temp_v44[temp_v19 + 0xe] & 0xffff,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v22 = CONCAT44(temp_v16 * temp_v17,temp_v18 + temp_v14 + temp_v15);
           puVar11 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
-          FUN_003f0e20(puVar11,temp_v10);
+          btlMainFindEntryByListedId(puVar11,temp_v10);
           temp_v10 = *puVar11;
           temp_v8 = puVar11[1];
           if (!((DAT_005713f8 & temp_v10) == 0 && (DAT_005713fc & temp_v8) == 0)) {
@@ -684,7 +684,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
               }
               else {
                 temp_v2 = (unsigned int)*(unsigned short *)((int)puVar11 + 0x166);
-                FUN_00184310();
+                devilGetRecord();
                 temp_v20 = 0;
                 if (temp_v2 != 0) {
                   temp_v20 = (int)*(char *)(temp_v2 + temp_v0 + 0xa0);
@@ -700,7 +700,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
               }
               else {
                 temp_v2 = (unsigned int)*(unsigned short *)((int)temp_v46 + 0x66);
-                FUN_00184310();
+                devilGetRecord();
                 temp_v20 = 0;
                 if (temp_v2 != 0) {
                   temp_v20 = (int)*(char *)(temp_v2 + temp_v0 + 0xa0);
@@ -731,7 +731,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
           temp_v10 = temp_v44[temp_v19] & 0xffff;
           temp_v22 = CONCAT44(temp_v6,temp_v18 + temp_v16 * temp_v17 * temp_v18);
           temp_v20 = reinterpret_cast<int>(btlGetMainState());
-          FUN_003f0e20(temp_v20,temp_v2);
+          btlMainFindEntryByListedId(temp_v20,temp_v2);
           if (temp_v20 == 0) {
             temp_v18 = (float)((unsigned long long)temp_v21 >> 0x20);
           }

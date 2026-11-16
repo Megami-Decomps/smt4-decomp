@@ -65,7 +65,7 @@ extern u32 g_btlActionReflect;
 extern u32 g_btlUiBlock;
 
 SideRecord* FUN_001568f8(BattleMain* battle, u32 id);
-DevilInfo* FUN_00184310(u32 id);
+DevilInfo* devilGetRecord(u32 id);
 void textFormatBuffer(char* out, const char* format, ...);
 void asdLoadFileAsyncSimple(const char* path, u32* out, s32 flag);
 void FUN_004f741c(u8* aux);
@@ -91,7 +91,7 @@ s32 FUN_004c97cc(BtlTalkWindow* window, s32 unused)
     switch (window->state) {
     case 0: {
         SideRecord* side = FUN_001568f8(window->battle, window->sideId);
-        DevilInfo* info = FUN_00184310(side->id);
+        DevilInfo* info = devilGetRecord(side->id);
         textFormatBuffer(path, "battle/talk/Tone%s.tbb", g_btlTalkToneNames[info->tone]);
         asdLoadFileAsyncSimple(path, &window->toneFile, 1);
         window->modeA = info->tone;

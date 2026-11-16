@@ -12,7 +12,7 @@ struct RecruitmentMasks {
 };
 extern "C" {
 extern RecruitmentMasks g_btlMessageFlagMasks;
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, s32 group);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, s32 group);
 u32 randRange(u32 maximum);
 void sysMemClear(void *memory, u32 bytes);
 void scrSetResult(s32 result);
@@ -21,7 +21,7 @@ u32 FUN_002a4b28(u32 id);
 u32 FUN_003bcb64(void)
 {
     s16 group = btlGetMainState()->motionGroup.group;
-    BtlCombatantEntryA *actor = FUN_003f0e20(btlGetMainState(), group);
+    BtlCombatantEntryA *actor = btlMainFindEntryByListedId(btlGetMainState(), group);
     BtlCombatantEntryA *candidates[109];
     u32 fallback = 0;
     do {

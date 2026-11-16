@@ -4,7 +4,7 @@
 
 struct Source4C;
 extern "C" {
-Source4C *FUN_003f0e20(BtlMainStateA *battle, u32 unit);
+Source4C *btlMainFindEntryByListedId(BtlMainStateA *battle, u32 unit);
 void source4CCopyHalves(Source4C *source, u16 *skills);
 s32 lcgRandomRange(u32 maximum);
 
@@ -20,7 +20,7 @@ s32 FUN_004c5da4(u32 unit, s32 rollChance)
     u64 flags = battle->stateFlags64.bits;
     if ((flags & DAT_005713f0.blockedStates) != 0)
         return 0;
-    Source4C *source = FUN_003f0e20(battle, unit);
+    Source4C *source = btlMainFindEntryByListedId(battle, unit);
     switch (battle->activity.currentAction) {
     case 0x169:
     case 0x16a:

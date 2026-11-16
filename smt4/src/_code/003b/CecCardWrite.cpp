@@ -25,7 +25,7 @@ s32 FUN_0021f57c(const char *, const void *, u32, u32, u32);
 void FUN_002d55f0(void *);
 
 // Write a communication card and translate platform errors into menu status bits.
-u32 FUN_003bbb98(CecCardOwner *owner, u32 argument)
+u32 cecSendCardData(CecCardOwner *owner, u32 argument)
 {
     u32 status = 0;
     cecSettingsSet(2, 3, 255, 0);

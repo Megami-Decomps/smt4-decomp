@@ -30,7 +30,7 @@ extern int saveSlotIsActiveWithId(fn_004ccb0c_arg1 *);
 void unitBuildStatGrowthPacket(unsigned int *param_1, fn_004ccb0c_arg1 *param_2)
 {
     const fn_004ccb0c_arg1 *record = (const fn_004ccb0c_arg1 *)
-        FUN_00184310((u32)param_2);
+        devilGetRecord((u32)param_2);
     StatGrowthParameters parameters = {};
     parameters.baseHp = record->field_0x18;
     parameters.baseMp = record->field_0x1a;

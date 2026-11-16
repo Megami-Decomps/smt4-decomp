@@ -84,7 +84,7 @@ TexTableNamedEntry *asdTMTexTableLoadEntryAsync(s32 table, s32 index);
 extern "C" {
 #endif
 
-FontRegisteredRecord *FUN_0019dc44(u32 index);
+FontRegisteredRecord *recordTableGet(u32 index);
 
 #ifdef __cplusplus
 }

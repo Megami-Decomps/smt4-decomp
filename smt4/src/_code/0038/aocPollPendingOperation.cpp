@@ -10,7 +10,7 @@ s32 FUN_00394230(void *request, nn::Result *code, u32 *detail);
 WindowStatusResult FUN_0038b25c(ResourceLookup *lookup);
 void FUN_002b4810(AocMain *main);
 s32 FUN_0038b44c(AocMain *main);
-s32 FUN_0038b3e8(AocMain *main);
+s32 block88OwnerCheck(AocMain *main);
 
 // Poll an addon request and translate failures into the operation's result/status output.
 WindowStatusOperationResult aocPollPendingOperation(AocPollStep *step)
@@ -54,7 +54,7 @@ WindowStatusOperationResult aocPollPendingOperation(AocPollStep *step)
         }
         break;
     case 2:
-        if (FUN_0038b3e8(main)) {
+        if (block88OwnerCheck(main)) {
             step->phase = 3;
             output.status = 0;
         }

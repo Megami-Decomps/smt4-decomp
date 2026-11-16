@@ -11,12 +11,12 @@ struct ContentIdSet {
     s16 ids[50];  // 0x08
 };
 
-extern "C" ContentIdSet* FUN_003f0e20(void* context, s32 id);
+extern "C" ContentIdSet* btlMainFindEntryByListedId(void* context, s32 id);
 
 // Resolve the subject's ID set and return the matching slot, or -1.
 extern "C" s32 idSetFindSubjectIndex(void* context, const ContentIdSubject* subject)
 {
-    ContentIdSet* set = FUN_003f0e20(context, subject->id);
+    ContentIdSet* set = btlMainFindEntryByListedId(context, subject->id);
     if (set != NULL) {
         for (s32 index = 0; index < 50; ++index) {
             if (subject->id == set->ids[index]) {

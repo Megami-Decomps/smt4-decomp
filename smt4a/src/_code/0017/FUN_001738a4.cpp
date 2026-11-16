@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void FUN_0018c87c(LinkList *list, ListNode *node);
+void nw_ut_internal_LinkListImpl_erase_2BAE30(LinkList *list, ListNode *node);
 void nw_ut_internal_LinkListImpl_insert(LinkList *list, ListNode *pos, ListNode *node);
 
 enum { PRIORITY_BUCKETS = 128 };
@@ -21,7 +21,7 @@ void FUN_001738a4(SoundPlayer *player, s32 reverse)
         ListNode *node = player->priorityList.node.next;
         PlayerSound *sound = playerSoundFromPriorityNode(node);
 
-        FUN_0018c87c(&player->priorityList, node);
+        nw_ut_internal_LinkListImpl_erase_2BAE30(&player->priorityList, node);
         LinkList *bucket = &buckets[__usat(sound->playerPriority + sound->priority, 7)];
         nw_ut_internal_LinkListImpl_insert(bucket, &bucket->node, node);
     }
@@ -30,12 +30,12 @@ void FUN_001738a4(SoundPlayer *player, s32 reverse)
             if (reverse) {
                 PlayerSound *sound = playerSoundFromPriorityNode(buckets[i].node.prev);
 
-                FUN_0018c87c(&buckets[i], &sound->priorityNode);
+                nw_ut_internal_LinkListImpl_erase_2BAE30(&buckets[i], &sound->priorityNode);
                 nw_ut_internal_LinkListImpl_insert(&player->priorityList, &player->priorityList.node, &sound->priorityNode);
             } else {
                 ListNode *node = buckets[i].node.next;
 
-                FUN_0018c87c(&buckets[i], node);
+                nw_ut_internal_LinkListImpl_erase_2BAE30(&buckets[i], node);
                 nw_ut_internal_LinkListImpl_insert(&player->priorityList, &player->priorityList.node, node);
             }
         }

@@ -86,7 +86,7 @@ extern int msgBoxFlagsTestAny(unsigned int, unsigned int);
 extern int querySlotHasHandle(void);
 /* Supplied declaration required: FUN_002bf818. */
 extern int jobGetWork(void);
-extern int FUN_002c15fc(unsigned int);
+extern int slotIsActive(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: objFlagsSetBits. */
 /* Supplied declaration required: mathInterpolateTimed. */
@@ -305,7 +305,7 @@ unsigned int FUN_00114474(void)
             temp_v6 = 9;
             FUN_002c1658(9,2);
             if ((temp_v6 != 0) ||
-               ((*(char *)(temp_v3 + 0x83) == '\0' && (temp_v6 = FUN_002c15fc(6), temp_v6 != 0))))
+               ((*(char *)(temp_v3 + 0x83) == '\0' && (temp_v6 = slotIsActive(6), temp_v6 != 0))))
             goto LAB_001149c8;
           }
           goto LAB_001149b8;
@@ -371,11 +371,11 @@ LAB_001149c8:
           temp_v4 = padIsButtonRepeat(6);
           if (temp_v4 == 0) {
             temp_v4 = padIsButtonRepeat(0xe);
-            if (((temp_v4 == 0) || (temp_v4 = FUN_002c15fc(5), temp_v4 != 0)) ||
-               (temp_v4 = FUN_002c15fc(6), temp_v4 != 0)) {
+            if (((temp_v4 == 0) || (temp_v4 = slotIsActive(5), temp_v4 != 0)) ||
+               (temp_v4 = slotIsActive(6), temp_v4 != 0)) {
               temp_v4 = padIsButtonRepeat(0xf);
-              if (((temp_v4 == 0) || (temp_v4 = FUN_002c15fc(6), temp_v4 != 0)) ||
-                 (temp_v4 = FUN_002c15fc(5), temp_v4 != 0)) {
+              if (((temp_v4 == 0) || (temp_v4 = slotIsActive(6), temp_v4 != 0)) ||
+                 (temp_v4 = slotIsActive(5), temp_v4 != 0)) {
                 if (*(char *)(temp_v3 + 0x83) == '\0') {
                   temp_v4 = 0;
                   FUN_002c1658(0,1);
@@ -609,7 +609,7 @@ joined_r0x00114a10:
       if (temp_v6 == 0) {
         temp_v6 = 9;
         FUN_002c1658(9,2);
-        if (((temp_v6 != 0) || (temp_v6 = FUN_002c15fc(6), temp_v6 != 0)) || (DAT_00493828 != '\0'))
+        if (((temp_v6 != 0) || (temp_v6 = slotIsActive(6), temp_v6 != 0)) || (DAT_00493828 != '\0'))
         goto LAB_001151a8;
 LAB_001151d8:
         if (*(char *)(temp_v3 + 0x5f) == '\0') goto LAB_001151e4;

@@ -11,7 +11,7 @@ struct TalkRecord {
     /* 0xE0 */ u16 setFlags[3];
     /* 0xE6 */ u16 clearFlags[3];
 };
-TalkRecord *FUN_001ad9b4(u32 id);
+TalkRecord *dataTable1bOr1cGetRecord(u32 id);
 s32 goalConditionsSatisfied(u32 id);
 u32 scrWorkGetValue(s32 index);
 void scrWorkSetValue(s32 index, u32 value);
@@ -45,7 +45,7 @@ u32 scrCommTalkBustUpShow(void)
         s32 i;
 
         scrWorkSetValue(0, 0);
-        record = FUN_001ad9b4(id);
+        record = dataTable1bOr1cGetRecord(id);
         if (goalConditionsSatisfied(id) == 0) {
             scrSetResult(0);
             return 1;
@@ -64,7 +64,7 @@ u32 scrCommTalkBustUpShow(void)
         s32 phase;
 
         dataTableValueOrZero(30);
-        FUN_001ad9b4(id);
+        dataTable1bOr1cGetRecord(id);
         phase = scrWorkGetValue(0);
         if (phase == 0) {
             if (FUN_0035fcbc() == 0) {

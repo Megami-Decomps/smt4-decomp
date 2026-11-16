@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00170d8c(int, int, int, int, int, int);
+int nn_applet_CTR_detail_CallUtility(int, int, int, int, int, int);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -13,14 +13,14 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-/* Supplied declaration required: FUN_00170d8c. */
+/* Supplied declaration required: nn_applet_CTR_detail_CallUtility. */
 
 
 void nn_applet_CTR_detail_SleepIfShellClosed(void)
 
 {
 /* irregular: 2 native warning(s); review required */
-  FUN_00170d8c(4,0,0,0,0,0);
+  nn_applet_CTR_detail_CallUtility(4,0,0,0,0,0);
                     /* WARNING: Treating indirect jump as return */
   return;
 }

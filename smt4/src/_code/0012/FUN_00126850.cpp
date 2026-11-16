@@ -4,7 +4,7 @@
 
 extern "C" {
 extern AsdSoundSystem g_asdSound;
-u32 FUN_00141fd0(void *archive, s32 id);
+u32 nw_snd_SoundArchive_GetSoundType(void *archive, s32 id);
 s32 FUN_001388dc(s32 id);
 u32 nw_snd_SoundStartable_StartSound(void *player, s32 *handle, s32 id, u32 flags);
 void nw_snd_internal_BasicSound_SetVolume(s32 sound, u32 frames, f32 volume);
@@ -28,10 +28,10 @@ s32 FUN_00126850(s32 id, u32 volume, u32 fadeFrames)
     } else {
         return -1;
     }
-    if (!FUN_002bf684(sound) || !FUN_00141fd0(sound, id)) {
+    if (!FUN_002bf684(sound) || !nw_snd_SoundArchive_GetSoundType(sound, id)) {
         return index;
     }
-    u32 type = FUN_00141fd0(sound, id);
+    u32 type = nw_snd_SoundArchive_GetSoundType(sound, id);
     if (slot->hasHeap) {
         if (type == 3) {
             if (!FUN_001388dc(id)) {

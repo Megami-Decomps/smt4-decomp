@@ -11,7 +11,7 @@ int asdLoadFileAsyncSimple(...);
 int messageDismissNumericBanner(void);
 int messageMainStartMenuAnimationIfEnabled(void);
 
-int FUN_00184310(void);
+int devilGetRecord(void);
 int randBetween(...);
 int __aeabi_memset4(...);
 int FUN_00280250(void);
@@ -75,7 +75,7 @@ extern int g_campCecRecv; /* 0x57f128 */
 /* Supplied declaration required: gameDataBlocksReleaseHold. */
 /* Supplied declaration required: sysPlaySe. */
 extern int itemGetStackLimit(short);
-/* Supplied declaration required: FUN_00184310. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: randBetween. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: messageSetMode. */
@@ -510,7 +510,7 @@ joined_r0x003a5980:
                 ((int)(short)*puVar15 != (unsigned int)*(unsigned short *)(param_1 + 0x14e))) &&
                (temp_v11 = gameStockContainsEntry(*puVar15), temp_v11 == 0)) {
               temp_v13 = (unsigned int)*puVar15;
-              FUN_00184310();
+              devilGetRecord();
               if ((unsigned int)*(unsigned short *)(temp_v13 + 6) <= *(unsigned short *)(temp_v19 + 0x66) + 1) {
                 temp_v15[temp_v8] = temp_v4;
                 temp_v8 = temp_v8 + 1;
@@ -678,7 +678,7 @@ LAB_003a5cfc:
       if (temp_v14 && puVar15 != (unsigned short *)0x0) {
         temp_v4 = (unsigned int)*puVar15;
       }
-      FUN_00184310();
+      devilGetRecord();
       temp_v8 = FUN_003316b4((int)*(char *)(temp_v4 + 0x38));
       textFormatBuffer(temp_v15,&LAB_003a6090,temp_v8 + 1);
       asdLoadFileAsyncSimple(temp_v15,param_1 + 0x35c,0);

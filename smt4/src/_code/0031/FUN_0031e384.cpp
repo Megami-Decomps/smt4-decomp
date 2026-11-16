@@ -45,11 +45,11 @@ u8 FUN_0031e384(void)
     const f32 reverse[12] = { 45.0f, 90.0f, 135.0f, 180.0f, 225.0f, 270.0f,
                               45.0f, 90.0f, 135.0f, 180.0f, 225.0f, 270.0f };
     u8 flags = g_gameDataBlocks.work->flags;
-    if (FUN_002c15fc(7) == 0) {
+    if (slotIsActive(7) == 0) {
         g_gameDataBlocks.sequenceStep = 0;
         return flags;
     }
-    if (FUN_002c15fc(8) == 0) {
+    if (slotIsActive(8) == 0) {
         g_gameDataBlocks.sequenceStep = 0;
         return flags;
     }

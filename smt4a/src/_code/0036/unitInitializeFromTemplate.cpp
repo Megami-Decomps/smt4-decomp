@@ -43,7 +43,7 @@ void unitInitializeFromTemplate(u32 id, UnitRecord *unit)
     unit->skillList.skills[5] = table->skillList.ids[5];
     unit->skillList.skills[6] = table->skillList.ids[6];
     unit->skillList.skills[7] = table->skillList.ids[7];
-    const DevilNameView *devil = reinterpret_cast<const DevilNameView *>(FUN_00184310(id));
+    const DevilNameView *devil = reinterpret_cast<const DevilNameView *>(devilGetRecord(id));
     __aeabi_memcpy4(unit->name, devil->name, sizeof(unit->name));
     unit->unk2A = *reinterpret_cast<const u16 *>(unit->unk0E);
     unit->unk2C = unit->unk10;

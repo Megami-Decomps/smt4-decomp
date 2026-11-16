@@ -132,7 +132,7 @@ void FUN_004b82a0(SceneWork *work)
         if (entry != NULL && FUN_001bd118() == 6) {
             work->record = menu4CGetCurrentEntry(work->sprites);
             FUN_004b7a08(work);
-            FUN_00270c58(*(u16 *)(reinterpret_cast<u8 *>(FUN_001ad9b4((u32)(entry))) + 0xD4));
+            FUN_00270c58(*(u16 *)(reinterpret_cast<u8 *>(dataTable1bOr1cGetRecord((u32)(entry))) + 0xD4));
         }
     } else if (work->requestEnding != 0) {
         bgmReleaseStopped();

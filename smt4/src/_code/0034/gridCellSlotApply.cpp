@@ -18,7 +18,7 @@ typedef struct GridOwner0034d884 {
     /* 0x04 */ Grid0034d884 *grid;
 } GridOwner0034d884;
 
-s32 FUN_0027dab0(Grid0034d884 *grid, GridCell0034d884 *cell);
+s32 idSetFindSubjectIndex(Grid0034d884 *grid, GridCell0034d884 *cell);
 Grid0034d884 *FUN_0027da30(Grid0034d884 *grid, s32 id);
 void FUN_0027d9e8(Grid0034d884 *grid, u32 slot);
 
@@ -26,7 +26,7 @@ void FUN_0027d9e8(Grid0034d884 *grid, u32 slot);
 void gridCellSlotApply(GridOwner0034d884 *owner, s32 index)
 {
     GridCell0034d884 *cell = (GridCell0034d884 *)(owner->grid->cells + index * 0x114);
-    s32 slot = FUN_0027dab0(owner->grid, cell);
+    s32 slot = idSetFindSubjectIndex(owner->grid, cell);
 
     FUN_0027d9e8(owner->grid, FUN_0027da30(owner->grid, cell->id)->slots[slot]);
 }

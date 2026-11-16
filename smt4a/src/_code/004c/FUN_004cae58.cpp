@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_003ec668(...);
-int FUN_003f0e20(...);
+int btlMainFindEntryByListedId(...);
 int FUN_003f2638(...);
 int callOnHandleField4A(...);
 int FUN_004d8668(...);
@@ -53,7 +53,7 @@ extern int querySlotHasHandle(void);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_003ec668. */
 extern unsigned long long FUN_003eca48(fn_004cae58_arg0 *, unsigned short);
-/* Supplied declaration required: FUN_003f0e20. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_003f2638. */
 /* Supplied declaration required: callOnHandleField4A. */
 extern int holderObjectCall(unsigned int);
@@ -90,7 +90,7 @@ void FUN_004cae58(fn_004cae58_arg0 *param_1,int param_2)
   unsigned long long temp_v11;
   
   pfVar3 = param_1;
-  FUN_003f0e20(param_1,(int)*(short *)(param_2 + 0x6a));
+  btlMainFindEntryByListedId(param_1,(int)*(short *)(param_2 + 0x6a));
   temp_v4 = (unsigned int)*(unsigned short *)&pfVar3->field_0x166;
   if (temp_v4 == 0x35b) {
     temp_v2 = gameFlagIsSet(0x592);

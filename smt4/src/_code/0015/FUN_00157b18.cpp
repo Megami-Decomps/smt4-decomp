@@ -8,7 +8,7 @@ int FUN_0015c404(int, unsigned char [36], int, int, unsigned int);
 int FUN_0015c6bc(int, int, int, unsigned char *, int *);
 int FUN_0015d240(int, int);
 int FUN_002a1f84(unsigned int, int);
-int FUN_002aa278(int, unsigned int, int, int);
+int __aeabi_uldivmod(int, unsigned int, int, int);
 int nw_snd_internal_driver_StreamBufferPool_Free(int);
 int nw_snd_internal_driver_Voice_Free(void);
 int __aeabi_memcpy4(int *, unsigned int, int);
@@ -25,7 +25,7 @@ extern unsigned char LAB_0015c7dc; /* 0x15c7dc */
 /* Supplied declaration required: FUN_0015c6bc. */
 /* Supplied declaration required: FUN_0015d240. */
 /* Supplied declaration required: FUN_002a1f84. */
-/* Supplied declaration required: FUN_002aa278. */
+/* Supplied declaration required: __aeabi_uldivmod. */
 extern int FUN_002baf30(void);
 extern unsigned int __aeabi_uidivmod(unsigned int);
 /* Supplied declaration required: nw_snd_internal_driver_StreamBufferPool_Free. */
@@ -120,14 +120,14 @@ unsigned int FUN_00157b18(int *param_1,int param_2,unsigned int param_3,int para
             else if ((char)param_1[0x1d] == '\x01') {
               temp_v3 = param_1[0x1e];
               temp_v7 = param_1[0x20];
-              FUN_002aa278((int)((unsigned long long)temp_v7 * (unsigned long long)temp_v3),
+              __aeabi_uldivmod((int)((unsigned long long)temp_v7 * (unsigned long long)temp_v3),
                            ((int)temp_v3 >> 0x1f) * temp_v7 +
                            (int)((unsigned long long)temp_v7 * (unsigned long long)temp_v3 >> 0x20),1000,0);
               if (temp_v5 != 0) {
                 temp_v6 = -1;
               }
               else {
-                temp_v6 = FUN_002aa278((int)((unsigned long long)temp_v7 * (unsigned long long)temp_v3),
+                temp_v6 = __aeabi_uldivmod((int)((unsigned long long)temp_v7 * (unsigned long long)temp_v3),
                                      ((int)temp_v3 >> 0x1f) * temp_v7 +
                                      (int)((unsigned long long)temp_v7 * (unsigned long long)temp_v3 >> 0x20),1000,0);
               }

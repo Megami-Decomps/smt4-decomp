@@ -23,7 +23,7 @@ typedef struct {
 /* Supplied declaration required: scrollListSetSelection. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int padIsButtonPressed(unsigned char);
-extern int FUN_002c15fc(void);
+extern int slotIsActive(void);
 /* Supplied declaration required: FUN_002d56c4. */
 /* Supplied declaration required: labelsReset. */
 /* Supplied declaration required: __aeabi_idivmod. */
@@ -109,10 +109,10 @@ unsigned char FUN_0029efd8(int param_1,int param_2)
     do {
       temp_v9 = param_1 + temp_v4;
       temp_v15 = 0;
-      if ((*(char *)(temp_v9 + 4) != ' ') && (temp_v10 = FUN_002c15fc(), temp_v10 != 0)) {
+      if ((*(char *)(temp_v9 + 4) != ' ') && (temp_v10 = slotIsActive(), temp_v10 != 0)) {
         temp_v15 = 1;
       }
-      if (((*(char *)(temp_v9 + 8) != ' ') && (temp_v10 = FUN_002c15fc(), temp_v10 != 0)) || (temp_v15)) {
+      if (((*(char *)(temp_v9 + 8) != ' ') && (temp_v10 = slotIsActive(), temp_v10 != 0)) || (temp_v15)) {
         temp_v0 = *(char *)(temp_v9 + 4);
         puVar12 = (unsigned short *)(param_1 + 0x5c);
         if (temp_v0 == '\x05') {
@@ -158,10 +158,10 @@ unsigned char FUN_0029efd8(int param_1,int param_2)
     do {
       temp_v9 = param_1 + temp_v4;
       temp_v15 = 0;
-      if ((*(char *)(temp_v9 + 0x2c) != ' ') && (temp_v10 = FUN_002c15fc(), temp_v10 != 0)) {
+      if ((*(char *)(temp_v9 + 0x2c) != ' ') && (temp_v10 = slotIsActive(), temp_v10 != 0)) {
         temp_v15 = 1;
       }
-      if (((*(char *)(temp_v9 + 0x30) != ' ') && (temp_v10 = FUN_002c15fc(), temp_v10 != 0)) || (temp_v15))
+      if (((*(char *)(temp_v9 + 0x30) != ' ') && (temp_v10 = slotIsActive(), temp_v10 != 0)) || (temp_v15))
       {
         temp_v0 = *(char *)(temp_v9 + 0x2c);
         puVar12 = (unsigned short *)(param_1 + 0x5e);

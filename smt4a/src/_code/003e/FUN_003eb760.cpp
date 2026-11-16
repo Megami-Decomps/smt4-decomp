@@ -75,7 +75,7 @@ u32 FUN_004da0b4(u32 index);
 u32 randomGetLowerTenBits(MemberSource* member, u32 index);
 u32 randomGetUpperSixBits(MemberSource* member, u32 index);
 CategoryEntry* dataTableGetCategoryEntry(s32 category, u16 variant);
-DevilInfo* FUN_00184310(u16 id);
+DevilInfo* devilGetRecord(u16 id);
 void clearTwoWords(void* words);
 void rt_memclr(void* block, u32 size);
 
@@ -128,7 +128,7 @@ void FUN_003eb760(void* unused, BattleEntry* entry, MemberSource* member)
             entry->slotsB[i].high = six;
             entry->slotsC[i] = six & 0x3f;
         }
-        DevilInfo* info = FUN_00184310(entry->id);
+        DevilInfo* info = devilGetRecord(entry->id);
         entry->unk1bb_[0] = info->rate;
         if (info->type == 1) {
             entry->unk1bc_[0] = 1;

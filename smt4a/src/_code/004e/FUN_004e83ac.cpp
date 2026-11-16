@@ -36,12 +36,12 @@ extern "C" {
 
 extern BtlActionGlobals g_btlAction;
 
-ActionTargetEntry *FUN_003f0e20(ActionTargetBattle *battle, s32 index);
+ActionTargetEntry *btlMainFindEntryByListedId(ActionTargetBattle *battle, s32 index);
 
 /* Whether the combatant at index (or the one it redirects to) is free and targetable. */
 u32 FUN_004e83ac(ActionTargetOwner *owner, ActionTargetSlots *table, s32 index)
 {
-    ActionTargetEntry *target = FUN_003f0e20(owner->battle, index);
+    ActionTargetEntry *target = btlMainFindEntryByListedId(owner->battle, index);
     if (target != NULL) {
         index = target->selectionIndex;
     }

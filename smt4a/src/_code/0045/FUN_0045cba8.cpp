@@ -11,7 +11,7 @@ int nw_snd_SoundHandle_detail_AttachSound(...);
 int FUN_0015fe40(int, int *);
 int asdSoundObjectStop(...);
 int FUN_001756d0(...);
-int FUN_0018c87c(...);
+int nw_ut_internal_LinkListImpl_erase_2BAE30(...);
 int nw_snd_SoundArchive_GetSoundType(int, int *);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
 int FUN_0045db6c(...);
@@ -77,7 +77,7 @@ extern int nw_snd_SoundArchive_IsAvailable(void);
 /* Supplied declaration required: asdSoundObjectStop. */
 /* Supplied declaration required: FUN_001756d0. */
 extern unsigned long long FUN_00178400(unsigned int, int *, unsigned char *);
-/* Supplied declaration required: FUN_0018c87c. */
+/* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2BAE30. */
 extern int FUN_0019472c(unsigned int, int *, unsigned int **);
 extern int soundInfoOwnerReadInfo(unsigned int, int *, unsigned int **);
 /* Supplied declaration required: nw_snd_SoundArchive_GetSoundType. */
@@ -454,7 +454,7 @@ LAB_0045d4ac:
         }
         temp_v3 = *(int *)(param_1 + 0x84);
         piVar4 = (int *)(temp_v3 - 0xf8);
-        FUN_0018c87c(param_1 + 0x80);
+        nw_ut_internal_LinkListImpl_erase_2BAE30(param_1 + 0x80);
         piVar11 = temp_v18;
       } while (piVar4 == (int *)0x0);
       (**(romwright_code **)(*piVar4 + 0xc))(piVar4);
@@ -529,7 +529,7 @@ LAB_0045d328:
         }
         temp_v3 = *(int *)(param_1 + 0xd0);
         piVar4 = (int *)(temp_v3 - 0xf8);
-        FUN_0018c87c(param_1 + 0xcc);
+        nw_ut_internal_LinkListImpl_erase_2BAE30(param_1 + 0xcc);
         piVar11 = temp_v14;
       } while (piVar4 == (int *)0x0);
       (**(romwright_code **)(*piVar4 + 0xc))(piVar4);
@@ -605,7 +605,7 @@ LAB_0045d0e4:
       }
       temp_v3 = *(int *)(param_1 + 0x38);
       piVar4 = (int *)(temp_v3 - 0xf8);
-      FUN_0018c87c(param_1 + 0x34);
+      nw_ut_internal_LinkListImpl_erase_2BAE30(param_1 + 0x34);
       piVar11 = temp_v9;
     } while (piVar4 == (int *)0x0);
     (**(romwright_code **)(*piVar4 + 0xc))(piVar4);

@@ -18,7 +18,7 @@ extern u64 g_battleMotionCombatantClearMask;
 BtlMainStateA *jobGetWork(u32 job);
 s32 idSetFindSubjectIndex(BtlMainStateA *battle, const BattleRosterRecordA *record);
 BattleMotionSubject *FUN_001568f8(BtlMainStateA *battle, s32 group);
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, s32 group);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, s32 group);
 u32 randBetween(u32 minimum, u32 maximum);
 void *stateEntryFindById(BtlMainStateA *battle, s32 id);
 f32 asdAnimGetTrackLastFrame(void *animation, u32 track);
@@ -60,7 +60,7 @@ u32 battleRosterMotionUpdate(u32 job)
         if (subject != NULL && (subject->status & 0x10) != 0) {
             ++motion.pulseFrame;
             if ((subject->appearance.flags & 3) != 0 && motion.pulseFrame >= motion.pulseDuration) {
-                FUN_003f0e20(battle, motion.group);
+                btlMainFindEntryByListedId(battle, motion.group);
                 motion.pulseDuration = randBetween(2, 6) * 30;
                 motion.pulseFrame = 0;
             }
@@ -89,7 +89,7 @@ u32 battleRosterMotionUpdate(u32 job)
                         motion.flags &= ~0x400000;
                     }
                 } else {
-                    BtlCombatantEntryA *unit = FUN_003f0e20(battle, motion.group);
+                    BtlCombatantEntryA *unit = btlMainFindEntryByListedId(battle, motion.group);
                     if (unit->motion.state == 0 || (motion.flags & 0x800000) != 0) {
                         BattleMotionSelection *selection = FUN_003eca48(battle, unit->id);
                         if (selection != NULL && FUN_003ec668(battle, selection->kind, 6)) {

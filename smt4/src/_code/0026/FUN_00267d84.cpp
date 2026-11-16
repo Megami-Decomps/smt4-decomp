@@ -6,8 +6,8 @@ extern "C" {
 
 int handlerTableCallWithValue(...);
 void requestDispatch(void *request);
-int FUN_0024f880(...);
-int FUN_0024f890(...);
+int quadHolderCopyOut(...);
+int quadSourceCopyOut(...);
 int FUN_00256a50(...);
 int FUN_00256dbc(...);
 int entryListSetPhase(...);
@@ -106,8 +106,8 @@ extern unsigned int tableOwnerGetEntry(unsigned int, unsigned int);
 /* Supplied declaration required: handlerTableCallWithValue. */
 extern int effectQuerySelectedBehavior(void *);
 /* Supplied declaration required: requestDispatch. */
-/* Supplied declaration required: FUN_0024f880. */
-/* Supplied declaration required: FUN_0024f890. */
+/* Supplied declaration required: quadHolderCopyOut. */
+/* Supplied declaration required: quadSourceCopyOut. */
 /* Supplied declaration required: FUN_00256a50. */
 /* Supplied declaration required: FUN_00256dbc. */
 /* Supplied declaration required: entryListSetPhase. */
@@ -236,8 +236,8 @@ void FUN_00267d84(fn_00267d84_arg0 *param_1)
       FUN_00257374(temp_v8,4,&temp_v47);
       FUN_00257374(temp_v8,0x20,&temp_v48);
       if ((*(unsigned int *)((int)pvVar11 + 0xc) & 1) != 0) {
-        FUN_0024f890(pvVar11,&temp_v59);
-        FUN_0024f880(pvVar11,&temp_v35);
+        quadSourceCopyOut(pvVar11,&temp_v59);
+        quadHolderCopyOut(pvVar11,&temp_v35);
         DAT_004ea91c = temp_v59;
         DAT_004ea920 = fStack_84;
         DAT_004ea924 = fStack_80;
@@ -404,8 +404,8 @@ void FUN_00267d84(fn_00267d84_arg0 *param_1)
       refCountIncrement();
       temp_v14 = (float)temp_v29;
       if ((*(unsigned int *)((int)pvVar11 + 0xc) & 1) != 0) {
-        FUN_0024f890(pvVar11,&temp_v59);
-        FUN_0024f880(pvVar11,&temp_v35);
+        quadSourceCopyOut(pvVar11,&temp_v59);
+        quadHolderCopyOut(pvVar11,&temp_v35);
         DAT_004ea91c = temp_v59;
         DAT_004ea920 = fStack_84;
         DAT_004ea924 = fStack_80;

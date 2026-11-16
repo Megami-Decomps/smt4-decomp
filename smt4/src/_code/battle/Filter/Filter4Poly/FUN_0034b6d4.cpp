@@ -11,7 +11,7 @@ void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFron
 void FUN_0034b884(Obj42094c *filter);
 u32 _ZN2nw4math5MTX448IdentityEv(void);
 void mtx44Copy(void *dest, u32 source);
-void FUN_0023b49c(Obj42094c *filter, u32 flags, u32 textureId);
+void btlFilterLoadTexture(Obj42094c *filter, u32 flags, u32 textureId);
 }
 
 /* Builds the four-polygon filter over `config`: a colour child (flat or fading), the vertex and
@@ -27,7 +27,7 @@ extern "C" Obj42094c *FUN_0034b6d4(Filter4PolyConfig *config, u32 flags, s32 fad
     void *memory = Obj420794::operator new(sizeof(Obj42094c), flags);
     Obj42094c *filter = memory != NULL ? ::new (memory) Obj42094c(child) : NULL;
     filter->setConfig(config);
-    FUN_0023b49c(filter, flags, config->unk1c);
+    btlFilterLoadTexture(filter, flags, config->unk1c);
     asdDebugTrace(DAT_003ff7fc, 296);
     filter->setBuffer(asdMemoryAlloc(0x100, 0x100, 0, 0x50, 1));
     asdDebugTrace(DAT_003ff7fc, 297);

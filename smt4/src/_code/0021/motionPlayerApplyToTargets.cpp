@@ -30,8 +30,8 @@ typedef struct MotionPlayer {
     /* 0x30 */ MotionSource *source;
 } MotionPlayer;
 
-void FUN_0024f890(MotionSource *source, f32 *offset);
-void FUN_0024f880(MotionSource *source, f32 *rotation);
+void quadSourceCopyOut(MotionSource *source, f32 *offset);
+void quadHolderCopyOut(MotionSource *source, f32 *rotation);
 void FUN_0024f7d4(u32 target, f32 *rotation, f32 *offset, f32 weight);
 void FUN_00267d84(u32 sound, f32 speed);
 void FUN_0024f5ec(u32 target, u16 frame);
@@ -48,8 +48,8 @@ void motionPlayerApplyToTargets(MotionPlayer *player)
     MotionTargets *targets = player->targets;
     MotionInfo *info = player->source->info;
     if (player->source->flags & 1) {
-        FUN_0024f890(player->source, offset);
-        FUN_0024f880(player->source, rotation);
+        quadSourceCopyOut(player->source, offset);
+        quadHolderCopyOut(player->source, rotation);
         FUN_0024f7d4(targets->first, rotation, offset, 1.0f);
         FUN_0024f7d4(targets->second, rotation, offset, 1.0f);
     }

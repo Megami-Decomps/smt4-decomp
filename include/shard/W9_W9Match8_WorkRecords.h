@@ -1089,7 +1089,7 @@ typedef char FlagGatePrefixALayoutCheck[
     offsetof(FlagGatePrefixA, flagId) == 0x56 &&
     sizeof(FlagGatePrefixA) == 0x58 ? 1 : -1];
 
-/* Observed prefix of the record returned by FUN_001ad9b4 in Apocalypse.
+/* Observed prefix of the record returned by dataTable1bOr1cGetRecord in Apocalypse.
  * This describes the accessed prefix, not the complete allocation extent. */
 struct EntryAttributePrefixA {
     /* 0x00 */ u8 unk00[7];
@@ -1314,7 +1314,7 @@ typedef char BattleTalkBustUpPrefixIVLayoutCheck[
     offsetof(BattleTalkBustUpPrefixIV, devilId) == 0x308 &&
     sizeof(BattleTalkBustUpPrefixIV) == 0x30C ? 1 : -1];
 
-// Accessed prefix of FUN_00184310's returned record in Apocalypse.
+// Accessed prefix of devilGetRecord's returned record in Apocalypse.
 // Comparison-role names do not imply recovered database field meanings.
 // sizeof describes this view, not the full underlying record or its stride.
 struct UniteSortRecordPrefixA {

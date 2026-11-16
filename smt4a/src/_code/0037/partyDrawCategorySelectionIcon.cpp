@@ -25,7 +25,7 @@ void partyDrawCategorySelectionIcon(s32 id, u32 x, u32 y, u32 flags)
     } else if (idIsAtLeast350(id)) {
         sprite = highlighted ? 0x41b : 0x41a;
     } else {
-        switch (reinterpret_cast<PartyCategoryRecord *>(FUN_001ad9b4(id))->category) {
+        switch (reinterpret_cast<PartyCategoryRecord *>(dataTable1bOr1cGetRecord(id))->category) {
         case 0:
             sprite = highlighted ? 0x40a : 0x403;
             break;

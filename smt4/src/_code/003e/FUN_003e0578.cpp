@@ -5,7 +5,7 @@
 extern "C" {
 extern const char DAT_004656f1[];
 const CecMessageKeyHeader *nn_cec_CTR_MessageBox_GetMessHeader(AsdCecMessageBox *box, s32 kind, u32 index);
-CecMessageKey *FUN_00238c80(CecMessageKey *key, const CecMessageKey *source);
+CecMessageKey *releaseOrCopyHandle(CecMessageKey *key, const CecMessageKey *source);
 CecMessageKey *FUN_002393a4(CecMessageKey *key, const char *source);
 s32 rt_memcmp(const void *first, const void *second, u32 size);
 
@@ -23,7 +23,7 @@ s32 FUN_003e0578(AsdCecMessageBox *box, s32 kind, const u8 *messageId)
         const CecMessageKey *source = header != NULL ? &header->key : NULL;
         CecMessageKey key;
         if (source != NULL) {
-            FUN_00238c80(&key, source);
+            releaseOrCopyHandle(&key, source);
         } else {
             FUN_002393a4(&key, DAT_004656f1);
         }

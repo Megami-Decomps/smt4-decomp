@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_3_stack;
 
-extern unsigned int FUN_001a0050(unsigned int *, unsigned int);
+extern unsigned int nn_fs_CTR_MPCore_detail_UserFileSystem_TryGetFileSize(unsigned int *, unsigned int);
 extern unsigned int nn_fs_detail_FileBase_TrySetPosition(unsigned int, long long);
 
 
@@ -27,7 +27,7 @@ unsigned int nn_fs_detail_FileBase_TrySeek(unsigned int *param_1,long long param
       temp_v0 = 0xe0e046bd;
     }
     else {
-      temp_v0 = FUN_001a0050(&temp_v1,*param_1 & 0xfffffffe);
+      temp_v0 = nn_fs_CTR_MPCore_detail_UserFileSystem_TryGetFileSize(&temp_v1,*param_1 & 0xfffffffe);
       if (-1 < (int)temp_v0) {
         param_1[4] = temp_v2;
         param_1[3] = temp_v1;

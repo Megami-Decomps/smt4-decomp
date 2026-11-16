@@ -30,7 +30,7 @@ s32 byteIsAtLeast100(RequestParameters *event);
 void jobFlagsWorkStop(u32 *job);
 void windowCreateStatusOperation(void *operation, s32 mode);
 void FUN_0047bcdc(u32 *job, s32 mode);
-void FUN_00477d10(u32 *job, s32 a, s32 b);
+void aocMenuSetButtonHelp(u32 *job, s32 a, s32 b);
 void FUN_0047bc90(u32 *job, RequestParameters *event);
 void releaseEntriesB(u32 *regions);
 void releaseEntriesA(u32 *entries);
@@ -51,7 +51,7 @@ void AocMenu::runWindowOperation()
     WindowOperation *operation = reinterpret_cast<WindowOperation *>(job[0x82]);
     switch (job[2]) {
     case 0:
-        FUN_00477d10(job, 0xffffffff, 0);
+        aocMenuSetButtonHelp(job, 0xffffffff, 0);
         job[2] = 1;
         return;
     case 1:
@@ -127,7 +127,7 @@ void AocMenu::runWindowOperation()
                 FUN_004d05c4(job + 0xad, 0x2f, 0x88, limit);
                 reinterpret_cast<u8 *>(job)[0x2c4] = 1;
                 reinterpret_cast<u8 *>(job)[0x2e6] = 0;
-                FUN_00477d10(job, 2, 1);
+                aocMenuSetButtonHelp(job, 2, 1);
                 current = reinterpret_cast<WindowOperation *>(job[0x82]);
                 job[1] = 6;
                 job[2] = 0;

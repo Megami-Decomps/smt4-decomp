@@ -36,7 +36,7 @@ void rebuildFusionCatalogLists()
     s32 demonCount = 0, raceCount = 0;
     for (u16 id = 0; id <= 1200; ++id) {
         if (entryDefIsAvailable(work->context, id)) {
-            const DevilRecordA *demon = FUN_00184310(id);
+            const DevilRecordA *demon = devilGetRecord(id);
             if ((FUN_002a4b28(demon->id) || FUN_0026264c(demon->id)) &&
                 (!filter->race || filter->race == demon->race) &&
                 (!filter->levelBand || FUN_004da77c(reinterpret_cast<u32>(work->context), demon->level, filter->levelBand))) {

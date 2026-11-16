@@ -21,7 +21,7 @@ bool devilIsTextureLoaded(s32 id, s32 resolve)
             index = gameFlagIsSet(17) ? 0 : 0x25e;
         } else {
             const DevilTableRecordA *record =
-                (const DevilTableRecordA *)FUN_00184310((u16)id);
+                (const DevilTableRecordA *)devilGetRecord((u16)id);
             if (!record) {
                 return false;
             }

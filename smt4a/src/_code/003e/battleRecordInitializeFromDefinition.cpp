@@ -37,7 +37,7 @@ struct BattleStatDefinition {
 extern "C" {
 void sysMemClear(void *buffer, u32 size);
 u16 FUN_0019e52c(u16 id);
-BattleStatDefinition *FUN_00184310(u16 id);
+BattleStatDefinition *devilGetRecord(u16 id);
 void FUN_004bcd90(BattleStatRecord *record);
 s32 unitHasRankingBonus(u16 id);
 void FUN_002a6894(BattleStatRecord *record);
@@ -55,7 +55,7 @@ extern "C" void battleRecordInitializeFromDefinition(BattleStatRecord *record, u
     if (id == 0)
         return;
     record->id = id;
-    BattleStatDefinition *definition = FUN_00184310(id);
+    BattleStatDefinition *definition = devilGetRecord(id);
     record->type = definition->type;
     record->base[0] = definition->first;
     record->base[1] = definition->second;

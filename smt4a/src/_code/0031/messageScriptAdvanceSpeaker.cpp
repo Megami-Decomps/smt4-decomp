@@ -17,7 +17,7 @@ void FUN_001695a0(void);
 s32 messageForwardDefaultMode(s32 message, s32 mode, s32 frame, s32 flags, s32 unused);
 s32 FUN_004186a4(void);
 u32 FUN_004186e0(void);
-MessageSpeaker *FUN_001ad9b4(u32 id);
+MessageSpeaker *dataTable1bOr1cGetRecord(u32 id);
 void optionsSetFlag1(void);
 
 // Advance the speaker's message and update the option state on completion.
@@ -38,8 +38,8 @@ u32 messageScriptAdvanceSpeaker(void)
         if (result == 1) {
             scrWorkSetValue(1, 0);
             if (FUN_004186a4()) {
-                MessageSpeaker *previous = FUN_001ad9b4(FUN_004186e0());
-                MessageSpeaker *current = FUN_001ad9b4(speakerId);
+                MessageSpeaker *previous = dataTable1bOr1cGetRecord(FUN_004186e0());
+                MessageSpeaker *current = dataTable1bOr1cGetRecord(speakerId);
                 if (previous && current &&
                     ((previous->kind != 5 && previous->kind != 4 && previous->kind != 1) ||
                      (current->kind != 0 && current->kind != 10)))

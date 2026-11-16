@@ -4,13 +4,13 @@
 extern "C" {
 
 void FUN_00138810(u32 a, u32 b, u32 c, u32 d, u32 e, u32 f, u32 g);
-void FUN_00145d6c(s32 enable);
+void dataSubmitSelectedPresetBlock(s32 enable);
 
 /* Turns the texture binding on or off, unless it is already in that state. */
 static void setBindingState(RenderCtx *context, u8 state)
 {
     if (context->depthStacks.selectedTextureState != state) {
-        FUN_00145d6c(state);
+        dataSubmitSelectedPresetBlock(state);
         context->depthStacks.selectedTextureState = state;
     }
 }

@@ -30,7 +30,7 @@ void uiQuestSpritesCreate(void);
 void FUN_003d498c(s32 questId, s32 mode);
 void uiSpriteSetKeyframe(void* sprite, s32 keyframe, s32 option);
 void uiSpriteSetImageKeyframe(void* sprite, s32 keyframe, s32 option);
-QuestEntryView* FUN_001ad9b4(s32 questId);
+QuestEntryView* dataTable1bOr1cGetRecord(s32 questId);
 
 // Initialize the quest UI and select its mode from the quest entry's flag.
 void FUN_002f1554(s32 questId)
@@ -51,7 +51,7 @@ void FUN_002f1554(s32 questId)
     currentState->unk10 = 0;
     questState->unk0C = 29;
 
-    QuestEntryView* questEntry = FUN_001ad9b4(questId);
+    QuestEntryView* questEntry = dataTable1bOr1cGetRecord(questId);
     if (questEntry->unk07 & 0x20) {
         questState->unk910 = 2;
     } else {

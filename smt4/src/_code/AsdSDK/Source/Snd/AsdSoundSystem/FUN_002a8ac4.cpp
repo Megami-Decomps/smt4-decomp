@@ -51,7 +51,7 @@ extern float DAT_004efd34; /* 0x4efd34 */
 /* Supplied declaration required: cameraSetViewMatrix. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern int __cxa_guard_acquire(unsigned int *);
-extern unsigned int FUN_002c15ac(unsigned int);
+extern unsigned int asdGxPresetsGetHeightByKind(unsigned int);
 extern unsigned int asdGxPresetsGetByKind(unsigned int);
 /* Supplied declaration required: FUN_002c1ac8. */
 /* Supplied declaration required: renderCtxSelectTexture. */
@@ -234,7 +234,7 @@ unsigned int FUN_002a8ac4(unsigned short *param_1,unsigned int *param_2,int para
   if ((*param_2 & 0x80000000) != 0) {
     temp_v14 = temp_v17;
     temp_v15 = temp_v18;
-    temp_v4 = FUN_002c15ac(*(unsigned int *)(g_titleScene + 0x528));
+    temp_v4 = asdGxPresetsGetHeightByKind(*(unsigned int *)(g_titleScene + 0x528));
     temp_v12 = (float)VectorUnsignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v4 = asdGxPresetsGetByKind(*(unsigned int *)(g_titleScene + 0x528));
     temp_v7 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v17 < temp_v12) << 0x1f) |

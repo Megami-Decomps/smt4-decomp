@@ -21,7 +21,7 @@ static inline CallerA *callerFromPendingNode(CallerListLink *node)
 extern "C" {
 u32 FUN_00462964(CallerA *caller);
 void callerARelease3C(CallerA *caller);
-void FUN_001b6668(CallerList *list, CallerListLink *node);
+void nw_ut_internal_LinkListImpl_erase_2B743C(CallerList *list, CallerListLink *node);
 CallerListLink *nw_ut_internal_LinkListImpl_insert(
     CallerList *list, CallerListLink *position, CallerListLink *node);
 
@@ -34,7 +34,7 @@ void callerQueuesRecycleInactive(CallerQueues *queues)
             node = node->next;
             if (FUN_00462964(callerFromPendingNode(current)) == 0) {
                 callerARelease3C(callerFromPendingNode(current));
-                FUN_001b6668(&queues->pending, current);
+                nw_ut_internal_LinkListImpl_erase_2B743C(&queues->pending, current);
                 nw_ut_internal_LinkListImpl_insert(
                     &queues->available, &queues->available.sentinel, current);
             }

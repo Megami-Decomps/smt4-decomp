@@ -11,7 +11,7 @@ typedef char OpposingCandidateMasksOffsetCheck[offsetof(OpposingCandidateMasks, 
 
 extern "C" {
 extern OpposingCandidateMasks DAT_005713f0;
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, s32 selection);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, s32 selection);
 
 s32 FUN_004c600c(s32 selection)
 {
@@ -32,7 +32,7 @@ s32 FUN_004c600c(s32 selection)
         BtlCombatantEntryA *entry = &state->entries[index];
         if ((DAT_005713f0.required & entry->flags) != 0 && (entry->flags & DAT_005713f0.excluded) == 0) {
             s16 candidateSelection = entry->indexView.selectionIndex;
-            BtlCombatantEntryA *candidate = FUN_003f0e20(btlGetMainState(), candidateSelection);
+            BtlCombatantEntryA *candidate = btlMainFindEntryByListedId(btlGetMainState(), candidateSelection);
             if (candidate != NULL && ((CandidateValueView *)candidate)->value > 0) {
                 return entry->indexView.selectionIndex;
             }

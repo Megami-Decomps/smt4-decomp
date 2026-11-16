@@ -24339,13 +24339,13 @@
       "target_path": "orig/target/_code/0014/FUN_00141fbc.o"
     },
     {
-      "base_path": "build/obj/_code/0014/FUN_00141fd0.o",
+      "base_path": "build/obj/_code/0014/nw_snd_SoundArchive_GetSoundType.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00141fd0",
+            "name": "nw_snd_SoundArchive_GetSoundType",
             "size": 8,
             "vram": "0x141fd0"
           }
@@ -24353,10 +24353,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0014/FUN_00141fd0.cpp"
+        "source_path": "src/_code/0014/nw_snd_SoundArchive_GetSoundType.cpp"
       },
-      "name": "_code/0014/FUN_00141fd0",
-      "target_path": "orig/target/_code/0014/FUN_00141fd0.o"
+      "name": "_code/0014/nw_snd_SoundArchive_GetSoundType",
+      "target_path": "orig/target/_code/0014/nw_snd_SoundArchive_GetSoundType.o"
     },
     {
       "base_path": "build/obj/_code/0014/FUN_00141fd8.o",
@@ -25322,13 +25322,13 @@
       "target_path": "orig/target/_code/0014/FUN_00145d5c.o"
     },
     {
-      "base_path": "build/obj/_code/0014/FUN_00145d6c.o",
+      "base_path": "build/obj/_code/0014/dataSubmitSelectedPresetBlock.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00145d6c",
+            "name": "dataSubmitSelectedPresetBlock",
             "size": 160,
             "vram": "0x145d6c"
           }
@@ -25336,10 +25336,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0014/FUN_00145d6c.cpp"
+        "source_path": "src/_code/0014/dataSubmitSelectedPresetBlock.cpp"
       },
-      "name": "_code/0014/FUN_00145d6c",
-      "target_path": "orig/target/_code/0014/FUN_00145d6c.o"
+      "name": "_code/0014/dataSubmitSelectedPresetBlock",
+      "target_path": "orig/target/_code/0014/dataSubmitSelectedPresetBlock.o"
     },
     {
       "base_path": "build/obj/_code/0014/FUN_00145e10.o",
@@ -36355,13 +36355,13 @@
       "target_path": "orig/target/_code/0015/FUN_0015d7f0.o"
     },
     {
-      "base_path": "build/obj/_code/0015/FUN_0015d91c.o",
+      "base_path": "build/obj/_code/0015/handlerTableDispatch2.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0015d91c",
+            "name": "handlerTableDispatch2",
             "size": 48,
             "vram": "0x15d91c"
           }
@@ -36369,10 +36369,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0015/FUN_0015d91c.cpp"
+        "source_path": "src/_code/0015/handlerTableDispatch2.cpp"
       },
-      "name": "_code/0015/FUN_0015d91c",
-      "target_path": "orig/target/_code/0015/FUN_0015d91c.o"
+      "name": "_code/0015/handlerTableDispatch2",
+      "target_path": "orig/target/_code/0015/handlerTableDispatch2.o"
     },
     {
       "base_path": "build/obj/_code/0015/FUN_0015d950.o",
@@ -48484,13 +48484,13 @@
       "target_path": "orig/target/_code/001d/FUN_001dba90.o"
     },
     {
-      "base_path": "build/obj/_code/001d/FUN_001dbba8.o",
+      "base_path": "build/obj/_code/001d/jobDetachFromParent.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001dbba8",
+            "name": "jobDetachFromParent",
             "size": 144,
             "vram": "0x1dbba8"
           }
@@ -48498,10 +48498,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/001d/FUN_001dbba8.cpp"
+        "source_path": "src/_code/001d/jobDetachFromParent.cpp"
       },
-      "name": "_code/001d/FUN_001dbba8",
-      "target_path": "orig/target/_code/001d/FUN_001dbba8.o"
+      "name": "_code/001d/jobDetachFromParent",
+      "target_path": "orig/target/_code/001d/jobDetachFromParent.o"
     },
     {
       "base_path": "build/obj/_code/001d/FUN_001dbc3c.o",
@@ -54784,13 +54784,13 @@
       "target_path": "orig/target/_code/title/titleMain/titleMainIsRunning.o"
     },
     {
-      "base_path": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_001fe514.o",
+      "base_path": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/asdMdlObjectAlloc.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001fe514",
+            "name": "asdMdlObjectAlloc",
             "size": 216,
             "vram": "0x1fe514"
           }
@@ -54799,10 +54799,10 @@
           "_code",
           "AsdSDK/Source/Gfx/Model/AsdModel"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_001fe514.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Gfx/Model/AsdModel/asdMdlObjectAlloc.cpp"
       },
-      "name": "_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_001fe514",
-      "target_path": "orig/target/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_001fe514.o"
+      "name": "_code/AsdSDK/Source/Gfx/Model/AsdModel/asdMdlObjectAlloc",
+      "target_path": "orig/target/_code/AsdSDK/Source/Gfx/Model/AsdModel/asdMdlObjectAlloc.o"
     },
     {
       "base_path": "build/obj/_code/001f/FUN_001fe640.o",
@@ -72039,13 +72039,13 @@
       "target_path": "orig/target/_code/0023/nn_cec_CTR_Message_GetMessageId.o"
     },
     {
-      "base_path": "build/obj/_code/0023/FUN_00238c80.o",
+      "base_path": "build/obj/_code/0023/releaseOrCopyHandle.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00238c80",
+            "name": "releaseOrCopyHandle",
             "size": 40,
             "vram": "0x238c80"
           }
@@ -72053,10 +72053,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0023/FUN_00238c80.cpp"
+        "source_path": "src/_code/0023/releaseOrCopyHandle.cpp"
       },
-      "name": "_code/0023/FUN_00238c80",
-      "target_path": "orig/target/_code/0023/FUN_00238c80.o"
+      "name": "_code/0023/releaseOrCopyHandle",
+      "target_path": "orig/target/_code/0023/releaseOrCopyHandle.o"
     },
     {
       "base_path": "build/obj/_code/0023/nn_cec_CTR_MessageBox_WriteMessageBoxList.o",
@@ -72279,13 +72279,13 @@
       "target_path": "orig/target/_code/0023/FUN_0023959c.o"
     },
     {
-      "base_path": "build/obj/_code/0023/FUN_002399bc.o",
+      "base_path": "build/obj/_code/0023/handlerRefForward.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002399bc",
+            "name": "handlerRefForward",
             "size": 44,
             "vram": "0x2399bc"
           }
@@ -72293,10 +72293,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0023/FUN_002399bc.cpp"
+        "source_path": "src/_code/0023/handlerRefForward.cpp"
       },
-      "name": "_code/0023/FUN_002399bc",
-      "target_path": "orig/target/_code/0023/FUN_002399bc.o"
+      "name": "_code/0023/handlerRefForward",
+      "target_path": "orig/target/_code/0023/handlerRefForward.o"
     },
     {
       "base_path": "build/obj/_code/0023/FUN_002399ec.o",
@@ -73281,13 +73281,13 @@
       "target_path": "orig/target/_code/0023/gfxTexFormatGetBitsPerPixel.o"
     },
     {
-      "base_path": "build/obj/_code/0023/FUN_0023b49c.o",
+      "base_path": "build/obj/_code/0023/btlFilterLoadTexture.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0023b49c",
+            "name": "btlFilterLoadTexture",
             "size": 88,
             "vram": "0x23b49c"
           }
@@ -73295,10 +73295,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0023/FUN_0023b49c.cpp"
+        "source_path": "src/_code/0023/btlFilterLoadTexture.cpp"
       },
-      "name": "_code/0023/FUN_0023b49c",
-      "target_path": "orig/target/_code/0023/FUN_0023b49c.o"
+      "name": "_code/0023/btlFilterLoadTexture",
+      "target_path": "orig/target/_code/0023/btlFilterLoadTexture.o"
     },
     {
       "base_path": "build/obj/_code/0023/FUN_0023b4f4.o",
@@ -79207,13 +79207,13 @@
       "target_path": "orig/target/_code/0024/handlerTableCall.o"
     },
     {
-      "base_path": "build/obj/_code/0024/FUN_0024c3c8.o",
+      "base_path": "build/obj/_code/0024/sysGetTableWord.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0024c3c8",
+            "name": "sysGetTableWord",
             "size": 12,
             "vram": "0x24c3c8"
           }
@@ -79221,10 +79221,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0024/FUN_0024c3c8.cpp"
+        "source_path": "src/_code/0024/sysGetTableWord.cpp"
       },
-      "name": "_code/0024/FUN_0024c3c8",
-      "target_path": "orig/target/_code/0024/FUN_0024c3c8.o"
+      "name": "_code/0024/sysGetTableWord",
+      "target_path": "orig/target/_code/0024/sysGetTableWord.o"
     },
     {
       "base_path": "build/obj/_code/0024/resourceResolveDataPointer.o",
@@ -80027,13 +80027,13 @@
       "target_path": "orig/target/_code/0024/FUN_0024f7d4.o"
     },
     {
-      "base_path": "build/obj/_code/0024/FUN_0024f880.o",
+      "base_path": "build/obj/_code/0024/quadHolderCopyOut.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0024f880",
+            "name": "quadHolderCopyOut",
             "size": 16,
             "vram": "0x24f880"
           }
@@ -80041,19 +80041,19 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0024/FUN_0024f880.cpp"
+        "source_path": "src/_code/0024/quadHolderCopyOut.cpp"
       },
-      "name": "_code/0024/FUN_0024f880",
-      "target_path": "orig/target/_code/0024/FUN_0024f880.o"
+      "name": "_code/0024/quadHolderCopyOut",
+      "target_path": "orig/target/_code/0024/quadHolderCopyOut.o"
     },
     {
-      "base_path": "build/obj/_code/0024/FUN_0024f890.o",
+      "base_path": "build/obj/_code/0024/quadSourceCopyOut.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0024f890",
+            "name": "quadSourceCopyOut",
             "size": 20,
             "vram": "0x24f890"
           }
@@ -80061,19 +80061,19 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0024/FUN_0024f890.cpp"
+        "source_path": "src/_code/0024/quadSourceCopyOut.cpp"
       },
-      "name": "_code/0024/FUN_0024f890",
-      "target_path": "orig/target/_code/0024/FUN_0024f890.o"
+      "name": "_code/0024/quadSourceCopyOut",
+      "target_path": "orig/target/_code/0024/quadSourceCopyOut.o"
     },
     {
-      "base_path": "build/obj/_code/AsdSDK/Source/Gfx/Effect/effPolygonTrack/FUN_0024f8a4.o",
+      "base_path": "build/obj/_code/AsdSDK/Source/Gfx/Effect/effPolygonTrack/polygonTrackRebuildResources.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0024f8a4",
+            "name": "polygonTrackRebuildResources",
             "size": 520,
             "vram": "0x24f8a4"
           }
@@ -80082,10 +80082,10 @@
           "_code",
           "AsdSDK/Source/Gfx/Effect/effPolygonTrack"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Gfx/Effect/effPolygonTrack/FUN_0024f8a4.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Gfx/Effect/effPolygonTrack/polygonTrackRebuildResources.cpp"
       },
-      "name": "_code/AsdSDK/Source/Gfx/Effect/effPolygonTrack/FUN_0024f8a4",
-      "target_path": "orig/target/_code/AsdSDK/Source/Gfx/Effect/effPolygonTrack/FUN_0024f8a4.o"
+      "name": "_code/AsdSDK/Source/Gfx/Effect/effPolygonTrack/polygonTrackRebuildResources",
+      "target_path": "orig/target/_code/AsdSDK/Source/Gfx/Effect/effPolygonTrack/polygonTrackRebuildResources.o"
     },
     {
       "base_path": "build/obj/_code/AsdSDK/Source/Gfx/Effect/effMisc/effEmitterCreateSmall.o",
@@ -88182,13 +88182,13 @@
       "target_path": "orig/target/_code/0026/FUN_0026e630.o"
     },
     {
-      "base_path": "build/obj/_code/0026/FUN_0026e68c.o",
+      "base_path": "build/obj/_code/0026/jobSetWork31.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0026e68c",
+            "name": "jobSetWork31",
             "size": 20,
             "vram": "0x26e68c"
           }
@@ -88196,10 +88196,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0026/FUN_0026e68c.cpp"
+        "source_path": "src/_code/0026/jobSetWork31.cpp"
       },
-      "name": "_code/0026/FUN_0026e68c",
-      "target_path": "orig/target/_code/0026/FUN_0026e68c.o"
+      "name": "_code/0026/jobSetWork31",
+      "target_path": "orig/target/_code/0026/jobSetWork31.o"
     },
     {
       "base_path": "build/obj/_code/0026/FUN_0026e6a0.o",
@@ -89683,13 +89683,13 @@
       "target_path": "orig/target/_code/0027/mapRangeUpdateModelVisibilityAndTransforms.o"
     },
     {
-      "base_path": "build/obj/_code/0027/FUN_00275714.o",
+      "base_path": "build/obj/_code/0027/soundActorQueueStartPending.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00275714",
+            "name": "soundActorQueueStartPending",
             "size": 144,
             "vram": "0x275714"
           }
@@ -89697,10 +89697,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0027/FUN_00275714.cpp"
+        "source_path": "src/_code/0027/soundActorQueueStartPending.cpp"
       },
-      "name": "_code/0027/FUN_00275714",
-      "target_path": "orig/target/_code/0027/FUN_00275714.o"
+      "name": "_code/0027/soundActorQueueStartPending",
+      "target_path": "orig/target/_code/0027/soundActorQueueStartPending.o"
     },
     {
       "base_path": "build/obj/_code/0027/FUN_002757a8.o",
@@ -89743,13 +89743,13 @@
       "target_path": "orig/target/_code/0027/mapEnemyHasAvailableSecondaryState.o"
     },
     {
-      "base_path": "build/obj/_code/0027/FUN_0027581c.o",
+      "base_path": "build/obj/_code/0027/resourceTableReleaseHandles.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0027581c",
+            "name": "resourceTableReleaseHandles",
             "size": 184,
             "vram": "0x27581c"
           }
@@ -89757,10 +89757,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0027/FUN_0027581c.cpp"
+        "source_path": "src/_code/0027/resourceTableReleaseHandles.cpp"
       },
-      "name": "_code/0027/FUN_0027581c",
-      "target_path": "orig/target/_code/0027/FUN_0027581c.o"
+      "name": "_code/0027/resourceTableReleaseHandles",
+      "target_path": "orig/target/_code/0027/resourceTableReleaseHandles.o"
     },
     {
       "base_path": "build/obj/_code/0027/FUN_002758d8.o",
@@ -91104,13 +91104,13 @@
       "target_path": "orig/target/_code/0027/FUN_0027da30.o"
     },
     {
-      "base_path": "build/obj/_code/0027/FUN_0027dab0.o",
+      "base_path": "build/obj/_code/0027/idSetFindSubjectIndex.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0027dab0",
+            "name": "idSetFindSubjectIndex",
             "size": 88,
             "vram": "0x27dab0"
           }
@@ -91118,10 +91118,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0027/FUN_0027dab0.cpp"
+        "source_path": "src/_code/0027/idSetFindSubjectIndex.cpp"
       },
-      "name": "_code/0027/FUN_0027dab0",
-      "target_path": "orig/target/_code/0027/FUN_0027dab0.o"
+      "name": "_code/0027/idSetFindSubjectIndex",
+      "target_path": "orig/target/_code/0027/idSetFindSubjectIndex.o"
     },
     {
       "base_path": "build/obj/_code/0027/FUN_0027db08.o",
@@ -97848,13 +97848,13 @@
       "target_path": "orig/target/_code/0029/FUN_00292bcc.o"
     },
     {
-      "base_path": "build/obj/_code/0029/FUN_00292be4.o",
+      "base_path": "build/obj/_code/0029/pair40Set.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00292be4",
+            "name": "pair40Set",
             "size": 12,
             "vram": "0x292be4"
           }
@@ -97862,10 +97862,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0029/FUN_00292be4.cpp"
+        "source_path": "src/_code/0029/pair40Set.cpp"
       },
-      "name": "_code/0029/FUN_00292be4",
-      "target_path": "orig/target/_code/0029/FUN_00292be4.o"
+      "name": "_code/0029/pair40Set",
+      "target_path": "orig/target/_code/0029/pair40Set.o"
     },
     {
       "base_path": "build/obj/_code/0029/FUN_00292bf0.o",
@@ -104045,13 +104045,13 @@
       "target_path": "orig/target/_code/002a/nw_snd_internal_MoveValue_float_int_SetTarget.o"
     },
     {
-      "base_path": "build/obj/_code/002a/FUN_002a2058.o",
+      "base_path": "build/obj/_code/002a/handlerTableDispatch1.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002a2058",
+            "name": "handlerTableDispatch1",
             "size": 48,
             "vram": "0x2a2058"
           }
@@ -104059,10 +104059,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002a/FUN_002a2058.cpp"
+        "source_path": "src/_code/002a/handlerTableDispatch1.cpp"
       },
-      "name": "_code/002a/FUN_002a2058",
-      "target_path": "orig/target/_code/002a/FUN_002a2058.o"
+      "name": "_code/002a/handlerTableDispatch1",
+      "target_path": "orig/target/_code/002a/handlerTableDispatch1.o"
     },
     {
       "base_path": "build/obj/_code/002a/FUN_002a208c.o",
@@ -107198,13 +107198,13 @@
       "target_path": "orig/target/_code/002a/renderCtxBindTextureMode.o"
     },
     {
-      "base_path": "build/obj/_code/002a/FUN_002aa278.o",
+      "base_path": "build/obj/_code/002a/__aeabi_uldivmod.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002aa278",
+            "name": "__aeabi_uldivmod",
             "size": 688,
             "vram": "0x2aa278"
           }
@@ -107212,10 +107212,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002a/FUN_002aa278.cpp"
+        "source_path": "src/_code/002a/__aeabi_uldivmod.cpp"
       },
-      "name": "_code/002a/FUN_002aa278",
-      "target_path": "orig/target/_code/002a/FUN_002aa278.o"
+      "name": "_code/002a/__aeabi_uldivmod",
+      "target_path": "orig/target/_code/002a/__aeabi_uldivmod.o"
     },
     {
       "base_path": "build/obj/_code/002a/strcmp.o",
@@ -115127,13 +115127,13 @@
       "target_path": "orig/target/_code/002b/FUN_002bc7e4.o"
     },
     {
-      "base_path": "build/obj/_code/002b/FUN_002bc7f4.o",
+      "base_path": "build/obj/_code/002b/gxGetCommandListParameter.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002bc7f4",
+            "name": "gxGetCommandListParameter",
             "size": 448,
             "vram": "0x2bc7f4"
           }
@@ -115141,10 +115141,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002b/FUN_002bc7f4.cpp"
+        "source_path": "src/_code/002b/gxGetCommandListParameter.cpp"
       },
-      "name": "_code/002b/FUN_002bc7f4",
-      "target_path": "orig/target/_code/002b/FUN_002bc7f4.o"
+      "name": "_code/002b/gxGetCommandListParameter",
+      "target_path": "orig/target/_code/002b/gxGetCommandListParameter.o"
     },
     {
       "base_path": "build/obj/_code/002b/FUN_002bc9cc.o",
@@ -116370,13 +116370,13 @@
       "target_path": "orig/target/_code/002b/uiSpriteInitializeState.o"
     },
     {
-      "base_path": "build/obj/_code/002b/FUN_002bef68.o",
+      "base_path": "build/obj/_code/002b/asdGxBindCmdlistAt.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002bef68",
+            "name": "asdGxBindCmdlistAt",
             "size": 8,
             "vram": "0x2bef68"
           }
@@ -116384,10 +116384,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002b/FUN_002bef68.cpp"
+        "source_path": "src/_code/002b/asdGxBindCmdlistAt.cpp"
       },
-      "name": "_code/002b/FUN_002bef68",
-      "target_path": "orig/target/_code/002b/FUN_002bef68.o"
+      "name": "_code/002b/asdGxBindCmdlistAt",
+      "target_path": "orig/target/_code/002b/asdGxBindCmdlistAt.o"
     },
     {
       "base_path": "build/obj/_code/002b/nngxBindCmdlist.o",
@@ -116690,13 +116690,13 @@
       "target_path": "orig/target/_code/002b/libc_strcpy.o"
     },
     {
-      "base_path": "build/obj/_code/002b/FUN_002bf6fc.o",
+      "base_path": "build/obj/_code/002b/bustupCutStartSlotTransition.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002bf6fc",
+            "name": "bustupCutStartSlotTransition",
             "size": 172,
             "vram": "0x2bf6fc"
           }
@@ -116704,10 +116704,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002b/FUN_002bf6fc.cpp"
+        "source_path": "src/_code/002b/bustupCutStartSlotTransition.cpp"
       },
-      "name": "_code/002b/FUN_002bf6fc",
-      "target_path": "orig/target/_code/002b/FUN_002bf6fc.o"
+      "name": "_code/002b/bustupCutStartSlotTransition",
+      "target_path": "orig/target/_code/002b/bustupCutStartSlotTransition.o"
     },
     {
       "base_path": "build/obj/_code/002b/nw_gfx_TransformNode_DynamicBuilder_Create.o",
@@ -117772,13 +117772,13 @@
       "target_path": "orig/target/_code/002c/FUN_002c159c.o"
     },
     {
-      "base_path": "build/obj/_code/002c/FUN_002c15ac.o",
+      "base_path": "build/obj/_code/002c/asdGxPresetsGetHeightByKind.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002c15ac",
+            "name": "asdGxPresetsGetHeightByKind",
             "size": 36,
             "vram": "0x2c15ac"
           }
@@ -117786,10 +117786,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002c/FUN_002c15ac.cpp"
+        "source_path": "src/_code/002c/asdGxPresetsGetHeightByKind.cpp"
       },
-      "name": "_code/002c/FUN_002c15ac",
-      "target_path": "orig/target/_code/002c/FUN_002c15ac.o"
+      "name": "_code/002c/asdGxPresetsGetHeightByKind",
+      "target_path": "orig/target/_code/002c/asdGxPresetsGetHeightByKind.o"
     },
     {
       "base_path": "build/obj/_code/002c/asdGxPresetsGetByKind.o",
@@ -117812,13 +117812,13 @@
       "target_path": "orig/target/_code/002c/asdGxPresetsGetByKind.o"
     },
     {
-      "base_path": "build/obj/_code/002c/FUN_002c15fc.o",
+      "base_path": "build/obj/_code/002c/slotIsActive.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002c15fc",
+            "name": "slotIsActive",
             "size": 76,
             "vram": "0x2c15fc"
           }
@@ -117826,10 +117826,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002c/FUN_002c15fc.cpp"
+        "source_path": "src/_code/002c/slotIsActive.cpp"
       },
-      "name": "_code/002c/FUN_002c15fc",
-      "target_path": "orig/target/_code/002c/FUN_002c15fc.o"
+      "name": "_code/002c/slotIsActive",
+      "target_path": "orig/target/_code/002c/slotIsActive.o"
     },
     {
       "base_path": "build/obj/_code/002c/FUN_002c1658.o",
@@ -118234,13 +118234,13 @@
       "target_path": "orig/target/_code/002c/FUN_002c2390.o"
     },
     {
-      "base_path": "build/obj/_code/002c/FUN_002c2424.o",
+      "base_path": "build/obj/_code/002c/nn_gxlow_CTR_FlushDataCacheForward.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002c2424",
+            "name": "nn_gxlow_CTR_FlushDataCacheForward",
             "size": 4,
             "vram": "0x2c2424"
           }
@@ -118248,10 +118248,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002c/FUN_002c2424.cpp"
+        "source_path": "src/_code/002c/nn_gxlow_CTR_FlushDataCacheForward.cpp"
       },
-      "name": "_code/002c/FUN_002c2424",
-      "target_path": "orig/target/_code/002c/FUN_002c2424.o"
+      "name": "_code/002c/nn_gxlow_CTR_FlushDataCacheForward",
+      "target_path": "orig/target/_code/002c/nn_gxlow_CTR_FlushDataCacheForward.o"
     },
     {
       "base_path": "build/obj/_code/002c/asdModelResetCommandBuffer.o",
@@ -118757,13 +118757,13 @@
       "target_path": "orig/target/_code/002c/memAlloc.o"
     },
     {
-      "base_path": "build/obj/_code/002c/FUN_002c3364.o",
+      "base_path": "build/obj/_code/002c/runtimeDispatchObjectRelease.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002c3364",
+            "name": "runtimeDispatchObjectRelease",
             "size": 104,
             "vram": "0x2c3364"
           }
@@ -118771,10 +118771,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002c/FUN_002c3364.cpp"
+        "source_path": "src/_code/002c/runtimeDispatchObjectRelease.cpp"
       },
-      "name": "_code/002c/FUN_002c3364",
-      "target_path": "orig/target/_code/002c/FUN_002c3364.o"
+      "name": "_code/002c/runtimeDispatchObjectRelease",
+      "target_path": "orig/target/_code/002c/runtimeDispatchObjectRelease.o"
     },
     {
       "base_path": "build/obj/_code/002c/nn_os_CriticalSection_TryEnter.o",
@@ -118797,13 +118797,13 @@
       "target_path": "orig/target/_code/002c/nn_os_CriticalSection_TryEnter.o"
     },
     {
-      "base_path": "build/obj/_code/002c/FUN_002c3414.o",
+      "base_path": "build/obj/_code/002c/globalBlockGetFirst.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002c3414",
+            "name": "globalBlockGetFirst",
             "size": 12,
             "vram": "0x2c3414"
           }
@@ -118811,10 +118811,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002c/FUN_002c3414.cpp"
+        "source_path": "src/_code/002c/globalBlockGetFirst.cpp"
       },
-      "name": "_code/002c/FUN_002c3414",
-      "target_path": "orig/target/_code/002c/FUN_002c3414.o"
+      "name": "_code/002c/globalBlockGetFirst",
+      "target_path": "orig/target/_code/002c/globalBlockGetFirst.o"
     },
     {
       "base_path": "build/obj/_code/002c/nn_os_LightEvent_Wait.o",
@@ -118917,13 +118917,13 @@
       "target_path": "orig/target/_code/002c/FUN_002c3520.o"
     },
     {
-      "base_path": "build/obj/_code/002c/FUN_002c3530.o",
+      "base_path": "build/obj/_code/002c/renderTargetClear.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002c3530",
+            "name": "renderTargetClear",
             "size": 124,
             "vram": "0x2c3530"
           }
@@ -118931,10 +118931,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002c/FUN_002c3530.cpp"
+        "source_path": "src/_code/002c/renderTargetClear.cpp"
       },
-      "name": "_code/002c/FUN_002c3530",
-      "target_path": "orig/target/_code/002c/FUN_002c3530.o"
+      "name": "_code/002c/renderTargetClear",
+      "target_path": "orig/target/_code/002c/renderTargetClear.o"
     },
     {
       "base_path": "build/obj/_code/002c/FUN_002c35b0.o",
@@ -139843,13 +139843,13 @@
       "target_path": "orig/target/_code/002f/FUN_002fc1a8.o"
     },
     {
-      "base_path": "build/obj/_code/002f/FUN_002fc240.o",
+      "base_path": "build/obj/_code/002f/objectGetLengthField.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002fc240",
+            "name": "objectGetLengthField",
             "size": 8,
             "vram": "0x2fc240"
           }
@@ -139857,10 +139857,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002f/FUN_002fc240.cpp"
+        "source_path": "src/_code/002f/objectGetLengthField.cpp"
       },
-      "name": "_code/002f/FUN_002fc240",
-      "target_path": "orig/target/_code/002f/FUN_002fc240.o"
+      "name": "_code/002f/objectGetLengthField",
+      "target_path": "orig/target/_code/002f/objectGetLengthField.o"
     },
     {
       "base_path": "build/obj/_code/002f/FUN_002fc248.o",
@@ -141751,13 +141751,13 @@
       "target_path": "orig/target/_code/0030/indexedObjectInvalidateEntries.o"
     },
     {
-      "base_path": "build/obj/_code/0030/FUN_00300b8c.o",
+      "base_path": "build/obj/_code/0030/uiCompareBytePriorityThenKey.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00300b8c",
+            "name": "uiCompareBytePriorityThenKey",
             "size": 36,
             "vram": "0x300b8c"
           }
@@ -141765,10 +141765,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0030/FUN_00300b8c.cpp"
+        "source_path": "src/_code/0030/uiCompareBytePriorityThenKey.cpp"
       },
-      "name": "_code/0030/FUN_00300b8c",
-      "target_path": "orig/target/_code/0030/FUN_00300b8c.o"
+      "name": "_code/0030/uiCompareBytePriorityThenKey",
+      "target_path": "orig/target/_code/0030/uiCompareBytePriorityThenKey.o"
     },
     {
       "base_path": "build/obj/_code/0030/FUN_00300bb0.o",
@@ -165191,13 +165191,13 @@
       "target_path": "orig/target/_code/0035/FUN_00351c88.o"
     },
     {
-      "base_path": "build/obj/_code/0035/FUN_00351ca0.o",
+      "base_path": "build/obj/_code/0035/resetFlag5891A4And65f8.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00351ca0",
+            "name": "resetFlag5891A4And65f8",
             "size": 44,
             "vram": "0x351ca0"
           }
@@ -165205,10 +165205,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0035/FUN_00351ca0.cpp"
+        "source_path": "src/_code/0035/resetFlag5891A4And65f8.cpp"
       },
-      "name": "_code/0035/FUN_00351ca0",
-      "target_path": "orig/target/_code/0035/FUN_00351ca0.o"
+      "name": "_code/0035/resetFlag5891A4And65f8",
+      "target_path": "orig/target/_code/0035/resetFlag5891A4And65f8.o"
     },
     {
       "base_path": "build/obj/_code/0035/FUN_00351cd0.o",
@@ -171771,13 +171771,13 @@
       "target_path": "orig/target/_code/0035/FUN_0035c000.o"
     },
     {
-      "base_path": "build/obj/_code/0035/FUN_0035c02c.o",
+      "base_path": "build/obj/_code/0035/listHeaderInit.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0035c02c",
+            "name": "listHeaderInit",
             "size": 36,
             "vram": "0x35c02c"
           }
@@ -171785,10 +171785,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0035/FUN_0035c02c.cpp"
+        "source_path": "src/_code/0035/listHeaderInit.cpp"
       },
-      "name": "_code/0035/FUN_0035c02c",
-      "target_path": "orig/target/_code/0035/FUN_0035c02c.o"
+      "name": "_code/0035/listHeaderInit",
+      "target_path": "orig/target/_code/0035/listHeaderInit.o"
     },
     {
       "base_path": "build/obj/_code/0035/FUN_0035c050.o",
@@ -171851,13 +171851,13 @@
       "target_path": "orig/target/_code/0035/FUN_0035c11c.o"
     },
     {
-      "base_path": "build/obj/_code/0035/FUN_0035c43c.o",
+      "base_path": "build/obj/_code/0035/words2Clear.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0035c43c",
+            "name": "words2Clear",
             "size": 16,
             "vram": "0x35c43c"
           }
@@ -171865,10 +171865,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0035/FUN_0035c43c.cpp"
+        "source_path": "src/_code/0035/words2Clear.cpp"
       },
-      "name": "_code/0035/FUN_0035c43c",
-      "target_path": "orig/target/_code/0035/FUN_0035c43c.o"
+      "name": "_code/0035/words2Clear",
+      "target_path": "orig/target/_code/0035/words2Clear.o"
     },
     {
       "base_path": "build/obj/_code/0035/FUN_0035c44c.o",
@@ -172651,13 +172651,13 @@
       "target_path": "orig/target/_code/0035/FUN_0035ea88.o"
     },
     {
-      "base_path": "build/obj/_code/0035/FUN_0035eaa8.o",
+      "base_path": "build/obj/_code/0035/words3Clear2.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0035eaa8",
+            "name": "words3Clear2",
             "size": 20,
             "vram": "0x35eaa8"
           }
@@ -172665,10 +172665,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0035/FUN_0035eaa8.cpp"
+        "source_path": "src/_code/0035/words3Clear2.cpp"
       },
-      "name": "_code/0035/FUN_0035eaa8",
-      "target_path": "orig/target/_code/0035/FUN_0035eaa8.o"
+      "name": "_code/0035/words3Clear2",
+      "target_path": "orig/target/_code/0035/words3Clear2.o"
     },
     {
       "base_path": "build/obj/_code/0035/FUN_0035eabc.o",
@@ -181541,13 +181541,13 @@
       "target_path": "orig/target/_code/0037/Obj421aa4__vfunc18.o"
     },
     {
-      "base_path": "build/obj/_code/0037/FUN_003799bc.o",
+      "base_path": "build/obj/_code/0037/soundOwnerDetach.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_003799bc",
+            "name": "soundOwnerDetach",
             "size": 8,
             "vram": "0x3799bc"
           }
@@ -181555,10 +181555,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0037/FUN_003799bc.cpp"
+        "source_path": "src/_code/0037/soundOwnerDetach.cpp"
       },
-      "name": "_code/0037/FUN_003799bc",
-      "target_path": "orig/target/_code/0037/FUN_003799bc.o"
+      "name": "_code/0037/soundOwnerDetach",
+      "target_path": "orig/target/_code/0037/soundOwnerDetach.o"
     },
     {
       "base_path": "build/obj/_code/0037/FUN_003799c4.o",
@@ -184521,13 +184521,13 @@
       "target_path": "orig/target/_code/0037/nw_snd_internal_driver_BasicSoundPlayer_Initialize.o"
     },
     {
-      "base_path": "build/obj/_code/0037/FUN_0037e730.o",
+      "base_path": "build/obj/_code/0037/constructTrackBase.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0037e730",
+            "name": "constructTrackBase",
             "size": 20,
             "vram": "0x37e730"
           }
@@ -184535,10 +184535,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0037/FUN_0037e730.cpp"
+        "source_path": "src/_code/0037/constructTrackBase.cpp"
       },
-      "name": "_code/0037/FUN_0037e730",
-      "target_path": "orig/target/_code/0037/FUN_0037e730.o"
+      "name": "_code/0037/constructTrackBase",
+      "target_path": "orig/target/_code/0037/constructTrackBase.o"
     },
     {
       "base_path": "build/obj/_code/0037/nw_snd_internal_driver_VoiceManager_ChangeVoicePriority.o",
@@ -188666,13 +188666,13 @@
       "target_path": "orig/target/_code/addon/aocApplication/aocApplicationRecreateDecoder.o"
     },
     {
-      "base_path": "build/obj/_code/0038/FUN_0038b3e8.o",
+      "base_path": "build/obj/_code/0038/block88OwnerCheck.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0038b3e8",
+            "name": "block88OwnerCheck",
             "size": 24,
             "vram": "0x38b3e8"
           }
@@ -188680,10 +188680,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0038/FUN_0038b3e8.cpp"
+        "source_path": "src/_code/0038/block88OwnerCheck.cpp"
       },
-      "name": "_code/0038/FUN_0038b3e8",
-      "target_path": "orig/target/_code/0038/FUN_0038b3e8.o"
+      "name": "_code/0038/block88OwnerCheck",
+      "target_path": "orig/target/_code/0038/block88OwnerCheck.o"
     },
     {
       "base_path": "build/obj/_code/0038/FUN_0038b400.o",
@@ -201108,13 +201108,13 @@
       "target_path": "orig/target/_code/003b/resourceLookupWithFallback.o"
     },
     {
-      "base_path": "build/obj/_code/003b/FUN_003bbb98.o",
+      "base_path": "build/obj/_code/003b/cecSendCardData.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_003bbb98",
+            "name": "cecSendCardData",
             "size": 200,
             "vram": "0x3bbb98"
           }
@@ -201122,10 +201122,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/003b/FUN_003bbb98.cpp"
+        "source_path": "src/_code/003b/cecSendCardData.cpp"
       },
-      "name": "_code/003b/FUN_003bbb98",
-      "target_path": "orig/target/_code/003b/FUN_003bbb98.o"
+      "name": "_code/003b/cecSendCardData",
+      "target_path": "orig/target/_code/003b/cecSendCardData.o"
     },
     {
       "base_path": "build/obj/_code/003b/FUN_003bbc7c.o",

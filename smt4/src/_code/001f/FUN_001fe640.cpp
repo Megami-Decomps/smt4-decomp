@@ -67,7 +67,7 @@ extern int padIsButtonRepeat(unsigned int);
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: padIsButtonPressed. */
 /* Supplied declaration required: jobGetWork. */
-extern int FUN_002c15fc(unsigned int);
+extern int slotIsActive(unsigned int);
 /* Supplied declaration required: renderCtxSelectTexture. */
 extern int libc_strlen(void);
 
@@ -144,9 +144,9 @@ LAB_001ff420:
     temp_v3 = 3;
     goto LAB_001fe69c;
   case 3:
-    temp_v1 = FUN_002c15fc(7);
+    temp_v1 = slotIsActive(7);
     temp_v8 = temp_v1 != 0;
-    if ((!(unsigned char)temp_v8) && (temp_v1 = FUN_002c15fc(8), temp_v1 != 0)) {
+    if ((!(unsigned char)temp_v8) && (temp_v1 = slotIsActive(8), temp_v1 != 0)) {
       temp_v8 = '\x02';
     }
     temp_v9 = *(char *)((int)piVar2 + 0x3d) == '\0';

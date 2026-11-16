@@ -11,14 +11,14 @@ extern "C" {
 
 extern BtlMessageMasks g_btlMessageFlagMasks; /* 0x5710e0 */
 s32 scrGetArg(s32 index);
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, s32 id);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, s32 id);
 
 /* Script command: sets (argument 2 positive) or clears the script flag on the battle entry with the given id. */
 u32 scrBtlSetEntryScriptFlag(void)
 {
     s32 id = scrGetArg(0);
     s32 enable = scrGetArg(1);
-    BtlCombatantEntryA *entry = FUN_003f0e20(btlGetMainState(), id);
+    BtlCombatantEntryA *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
 
     if (entry != NULL) {
         if (enable > 0) {

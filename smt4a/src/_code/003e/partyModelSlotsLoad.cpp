@@ -31,7 +31,7 @@ typedef struct DevilModelData {
 
 PartyMember *FUN_003e503c(u16 index);
 s32 FUN_00187168(PartyMember *member);
-DevilModelData *FUN_00184310(u16 devilId);
+DevilModelData *devilGetRecord(u16 devilId);
 u32 FUN_00409fe8(u32 modelId, s32 a, s32 b);
 
 /* Clears the model slots, then loads the model of each of the 12 party members present. */
@@ -51,7 +51,7 @@ void partyModelSlotsLoad(PartyModelWork *work)
         if (FUN_00187168(member) == 0) {
             continue;
         }
-        data = FUN_00184310(member->devilId);
+        data = devilGetRecord(member->devilId);
         if (data == NULL) {
             continue;
         }

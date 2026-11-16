@@ -10,7 +10,7 @@ int countersRaiseA(...);
 
 int qsort(int [5], int, int, unsigned char *);
 int FUN_001568f8(int, int);
-int FUN_003f0e20(unsigned int *, int);
+int btlMainFindEntryByListedId(unsigned int *, int);
 int FUN_00408184(...);
 
 int btlCombatantGetSummaryValues(...);
@@ -62,7 +62,7 @@ extern unsigned char DAT_0057a574; /* 0x57a574 */
 extern int btlScriptUnitHasFlags(unsigned int *);
 extern int FUN_003eb1cc(void);
 extern int idSetFindSubjectIndex(unsigned int, int);
-/* Supplied declaration required: FUN_003f0e20. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: countersRaiseA. */
 extern int btlStatusFlagsHaveAilment(int);
@@ -131,7 +131,7 @@ FUN_004fc094(int param_1,unsigned int param_2,int param_3,int param_4,int param_
   temp_v21 = param_1 + param_17;
   temp_v23 = &DAT_0057a574 + param_14 * 0xc;
   temp_v18 = puVar5;
-  FUN_003f0e20(puVar5,(int)*(short *)(param_4 + 0x6a));
+  btlMainFindEntryByListedId(puVar5,(int)*(short *)(param_4 + 0x6a));
   temp_v22 = 1;
   temp_v0 = *(short *)(param_4 + 0x6a) < 0x6d;
   temp_v2 = (short)param_1;

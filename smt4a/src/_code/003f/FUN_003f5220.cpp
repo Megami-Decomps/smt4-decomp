@@ -13,12 +13,12 @@ struct State {
 }
 
 extern "C" {
-void FUN_003f3e64(State *state, u32 *x, u32 *y);
+void slotPlacementGetPosition(State *state, u32 *x, u32 *y);
 void FUN_003f5220(State *state, u32 slot)
 {
     state->slot = slot;
     Position position = {0, 0};
-    FUN_003f3e64(state, &position.x, &position.y);
+    slotPlacementGetPosition(state, &position.x, &position.y);
     state->position = position;
 }
 }

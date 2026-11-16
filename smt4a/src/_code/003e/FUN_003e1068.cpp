@@ -20,7 +20,7 @@ typedef struct BtlObject {
     /* 0x00 */ u8 unk00[4];
 } BtlObject;
 
-extern SkillSlot *FUN_003f0e20(BtlObject *obj, int skillId);
+extern SkillSlot *btlMainFindEntryByListedId(BtlObject *obj, int skillId);
 extern SkillInfo *FUN_003eca48(BtlObject *obj, u16 infoId);
 extern int FUN_003e9b74(BtlObject *obj);
 extern int FUN_003ece50(BtlObject *obj);
@@ -35,7 +35,7 @@ void FUN_003e1068(BtlStep *step, BtlObject *obj)
     SkillSlot *slot;
 
     if (info != NULL) {
-        slot = FUN_003f0e20(obj, info->skillId);
+        slot = btlMainFindEntryByListedId(obj, info->skillId);
         if (slot != NULL) {
             info = FUN_003eca48(obj, slot->infoId);
             if (info != NULL && (info->flags & 2) != 0) {

@@ -6,7 +6,7 @@ extern "C" {
 
 extern unsigned char g_dspsndState; /* 0x6433d0 */
 
-extern unsigned char *FUN_0018a45c(unsigned int);
+extern unsigned char *soundBlockGetPayloadEnd(unsigned int);
 extern int FUN_0018a480(unsigned int, unsigned int);
 extern unsigned char nn_snd_CTR_Dspsnd_SetChannelAdpcmParam(unsigned int, unsigned char, unsigned int);
 
@@ -20,7 +20,7 @@ FUN_0018a7cc(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
   unsigned char *pbVar2;
   int temp_v1;
   
-  pbVar2 = (unsigned char *)FUN_0018a45c(param_2);
+  pbVar2 = (unsigned char *)soundBlockGetPayloadEnd(param_2);
   if ((*pbVar2 == 2) && (temp_v1 = FUN_0018a480(param_2,param_5), temp_v1 != 0)) {
     nn_snd_CTR_Dspsnd_SetChannelAdpcmParam((unsigned int)&g_dspsndState,(unsigned char)*param_1,temp_v1);
   }

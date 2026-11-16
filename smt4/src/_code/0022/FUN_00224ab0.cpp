@@ -12,7 +12,7 @@ struct BattleDistanceReference {
 };
 }
 extern "C" {
-void FUN_0027dab0(BtlMainState *, BtlActionRecord *);
+void idSetFindSubjectIndex(BtlMainState *, BtlActionRecord *);
 void FUN_0027da30(BtlMainState *, s32 index);
 BattleVector3 FUN_0024d434(BtlMainState *, s32 index, s32 mode);
 
@@ -29,7 +29,7 @@ bool FUN_00224ab0(f32 *scale, s32 index, s32 mode)
     BtlActionRecord *action = &btlGetMainState()->actions[index];
     if (!action)
         return false;
-    FUN_0027dab0(btlGetMainState(), action);
+    idSetFindSubjectIndex(btlGetMainState(), action);
     FUN_0027da30(btlGetMainState(), index);
     bool enabled = false;
     if (action->status & 0x10)

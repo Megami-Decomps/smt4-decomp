@@ -3,7 +3,7 @@
 
 extern "C" {
 extern PartyPanelState *g_partyPanel;
-void FUN_00292be4(PartyPanelWidget *widget, s32 first, s32 second);
+void pair40Set(PartyPanelWidget *widget, s32 first, s32 second);
 void FUN_00292bcc(PartyPanelWidget *widget, u32 value);
 void FUN_00298d28(s32, s32);
 void partyWidgetSetTransitionActive(PartyPanelWidget *widget, u8 value);
@@ -23,12 +23,12 @@ void partyPanelSetState(s32 state, s32 rememberPrevious)
     }
     if (state == 19) {
         for (s32 index = 0; index < 4; ++index) {
-            FUN_00292be4(panel->characters[index], 0, 0);
+            pair40Set(panel->characters[index], 0, 0);
             partyWidgetSetTransitionActive(panel->characters[index], 0);
             partyWidgetSetTransitionPending(panel->characters[index], 0);
         }
         for (s32 index = 0; index < 24; ++index) {
-            FUN_00292be4(panel->demons[index], 0, 0);
+            pair40Set(panel->demons[index], 0, 0);
             partyWidgetSetTransitionActive(panel->demons[index], 0);
             partyWidgetSetTransitionPending(panel->demons[index], 0);
         }
@@ -36,12 +36,12 @@ void partyPanelSetState(s32 state, s32 rememberPrevious)
     }
     if (panel->sceneState == 20) {
         for (s32 index = 0; index < 4; ++index) {
-            FUN_00292be4(panel->characters[index], 0, 0);
+            pair40Set(panel->characters[index], 0, 0);
             partyWidgetSetTransitionActive(panel->characters[index], 0);
             partyWidgetSetTransitionPending(panel->characters[index], 0);
         }
         for (s32 index = 0; index < 24; ++index) {
-            FUN_00292be4(panel->demons[index], 0, 0);
+            pair40Set(panel->demons[index], 0, 0);
             partyWidgetSetTransitionActive(panel->demons[index], 0);
             partyWidgetSetTransitionPending(panel->demons[index], 0);
         }

@@ -9,7 +9,7 @@ int FUN_001029f4(...);
 int FUN_00102bbc(...);
 int jyoucyuGetTableEntry(...);
 int FUN_0019a46c(...);
-int FUN_001a1564(int, int, int);
+int nn_fnd_DateTime_DateToDays(int, int, int);
 int libc_strcpy(...);
 int asdOperatorDeleteB(...);
 int __aeabi_vec_delete(int, unsigned char *);
@@ -77,7 +77,7 @@ extern int g_aocMain; /* 0x570260 */
 /* Supplied declaration required: FUN_00102bbc. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_0019a46c. */
-/* Supplied declaration required: FUN_001a1564. */
+/* Supplied declaration required: nn_fnd_DateTime_DateToDays. */
 extern unsigned char objGetFlagBit0(int);
 extern unsigned char objGetFlagBit1(int);
 extern int legacyResourceIdRemap(int);
@@ -280,7 +280,7 @@ int FUN_00474d0c(int param_1)
       temp_v9 = nn_fnd_DateTime_GetDay((unsigned int)&temp_v47);
       temp_v4 = nn_fnd_DateTime_GetMonth((unsigned int)&temp_v47);
       temp_v5 = nn_fnd_DateTime_GetYear((unsigned int)&temp_v47);
-      FUN_001a1564(temp_v5,temp_v4,temp_v9);
+      nn_fnd_DateTime_DateToDays(temp_v5,temp_v4,temp_v9);
       if (temp_v5 <= *(int *)(temp_v51 + 0x18)) {
         temp_v4 = *(int *)(temp_v8 + 0x678) + temp_v18 * 0x9c8;
         temp_v45 = temp_v4 + 0x900;

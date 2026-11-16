@@ -21,14 +21,14 @@ struct AffinityUnit {
 }
 
 extern "C" {
-DevilAffinityRecord *FUN_00184310(u16 id);
+DevilAffinityRecord *devilGetRecord(u16 id);
 u32 passiveSkillResolveAffinity(const u16 *skills, u32 kind);
 u32 affinityShouldReplaceState(s32 current, s32 incoming);
 
 /* Resolve one affinity of a unit: the demon's base response, overridden by its passive skills. */
 void affinityResolveUnitSlot(AffinitySlot *out, AffinityUnit *unit, s32 kind)
 {
-    DevilAffinityRecord *record = FUN_00184310(unit->devilId);
+    DevilAffinityRecord *record = devilGetRecord(unit->devilId);
     s32 state;
 
     out->id = record->affinities[kind].id;

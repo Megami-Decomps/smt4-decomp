@@ -35,14 +35,14 @@ s32 FUN_002b28d8(const u16 *left, const u16 *right)
     if (result == 0) {
         u16 leftId = work->pairList.pairs[*left].packedIds & 0x7FFF;
         u16 rightId = work->pairList.pairs[*right].packedIds & 0x7FFF;
-        const FusionSortRecord *a = reinterpret_cast<FusionSortRecord *>(FUN_00184310(leftId));
-        const FusionSortRecord *b = reinterpret_cast<FusionSortRecord *>(FUN_00184310(rightId));
+        const FusionSortRecord *a = reinterpret_cast<FusionSortRecord *>(devilGetRecord(leftId));
+        const FusionSortRecord *b = reinterpret_cast<FusionSortRecord *>(devilGetRecord(rightId));
         result = compareFusionComponents(a, b);
         if (result == 0) {
             leftId = (work->pairList.pairs[*left].packedIds & 0x3FFFFFFF) >> 15;
             rightId = (work->pairList.pairs[*right].packedIds & 0x3FFFFFFF) >> 15;
-            a = reinterpret_cast<FusionSortRecord *>(FUN_00184310(leftId));
-            b = reinterpret_cast<FusionSortRecord *>(FUN_00184310(rightId));
+            a = reinterpret_cast<FusionSortRecord *>(devilGetRecord(leftId));
+            b = reinterpret_cast<FusionSortRecord *>(devilGetRecord(rightId));
             result = compareFusionComponents(a, b);
         }
     }

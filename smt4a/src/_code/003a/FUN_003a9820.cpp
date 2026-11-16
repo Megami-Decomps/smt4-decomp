@@ -13,7 +13,7 @@ u32 FUN_003a9820(void)
     BtlMainStateA *state = btlGetMainState();
     if ((state->stateFlags64.bits & g_battleMaskPresets.blockedView.blockedMask) == 0) {
         u16 devil = state->devil.devilId;
-        if (devil != 0 && FUN_00184310(devil) != 0) {
+        if (devil != 0 && devilGetRecord(devil) != 0) {
             FUN_0015f490(devil, 3, 1, 0, 1.0f);
         }
     }

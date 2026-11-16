@@ -27,7 +27,7 @@ extern "C" {
 void textFormatBuffer(char *buffer, const char *format, ...);
 void *FUN_00178b04(u32 size, const char *file, s32 line);
 u32 *battleModelOwnerInitialize(u32 *word);
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, s32 group);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, s32 group);
 BtlUnitDataA *FUN_001568f8(BtlMainStateA *state, s32 group);
 void btlUiAddRequest(void *ui, u16 id);
 void FUN_004cb9d0(BattleEffectSetup *render);
@@ -49,7 +49,7 @@ void battleUnitUpdateModelLoad(BtlMainStateA *state, BattleModelRecord *record)
         if (render.renderFlags & 0x10) {
             if (record->model.owner == NULL) {
                 const BattleEntryModelView *entry = (const BattleEntryModelView *)
-                    FUN_003f0e20(state, render.group);
+                    btlMainFindEntryByListedId(state, render.group);
                 ModelOwner *owner = (ModelOwner *)FUN_00178b04(0x24, g_battleUnitSourceFile, 0x642);
                 if (owner != NULL) {
                     owner = (ModelOwner *)battleModelOwnerInitialize((u32 *)owner);

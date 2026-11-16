@@ -20,7 +20,7 @@ void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFron
 void texturedQuadSetCentered(Obj42080c *filter);
 u32 _ZN2nw4math5MTX448IdentityEv(void);
 void mtx44Copy(void *dest, u32 source);
-void FUN_0023b49c(Obj42080c *filter, u32 arg, u32 textureId);
+void btlFilterLoadTexture(Obj42080c *filter, u32 arg, u32 textureId);
 }
 
 /* Builds a four-polygon filter over `source`: a colour child (flat or fading), the quad buffer, the
@@ -41,7 +41,7 @@ extern "C" Obj42080c *filterCreateQuad(Filter4PolySource *source, u32 flags, s32
     texturedQuadSetCentered(filter);
     filter->refreshTextureCoordinates();
     mtx44Copy(filter->matrixSlot(), _ZN2nw4math5MTX448IdentityEv());
-    FUN_0023b49c(filter, flags, static_cast<Filter4PolySource *>(filter->getRect())->textureId);
+    btlFilterLoadTexture(filter, flags, static_cast<Filter4PolySource *>(filter->getRect())->textureId);
     child->setTarget(source->colorA, source->colorB, source->colorC);
     return filter;
 }

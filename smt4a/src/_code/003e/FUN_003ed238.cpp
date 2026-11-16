@@ -8,7 +8,7 @@ extern "C" {
 int FUN_001568f8(int, int);
 void battleRosterAssignGroupXOrder(BtlMainStateA*, unsigned int);
 int FUN_003e7cc8(int, unsigned int);
-int FUN_003f0e20(int, int);
+int btlMainFindEntryByListedId(int, int);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(unsigned int, int);
 
@@ -31,7 +31,7 @@ extern int dataTableGetEntries(void);
 extern unsigned int dataTableFileGetTable(int, unsigned int);
 /* Supplied declaration required: battleRosterAssignGroupXOrder. */
 /* Supplied declaration required: FUN_003e7cc8. */
-/* Supplied declaration required: FUN_003f0e20. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 
 
 void FUN_003ed238(int param_1,unsigned int param_2)
@@ -94,7 +94,7 @@ void FUN_003ed238(int param_1,unsigned int param_2)
           if ((((temp_v1 & 1) != 0 && (temp_v1 & 0x80) != 0) && ((temp_v1 & 0x10) == 0)) &&
              ((temp_v1 & 0x200000) != 0)) {
             temp_v9 = temp_v27;
-            FUN_003f0e20(temp_v27,(int)*(short *)(*piVar14 + temp_v10 * 0x1d0 + 0x6a));
+            btlMainFindEntryByListedId(temp_v27,(int)*(short *)(*piVar14 + temp_v10 * 0x1d0 + 0x6a));
             temp_v0 = *(unsigned short *)(temp_v9 + 0x166);
             psVar5 = (short *)0x0;
             if (*(int *)(param_1 + 0x2294) != 0) {

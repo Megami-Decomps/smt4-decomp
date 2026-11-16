@@ -11,7 +11,7 @@ extern TitleScene *g_titleScene; /* 0x44ea00 */
 
 extern int FUN_002c35b0(int mode);
 extern void FUN_002bdb44(void);
-extern int FUN_002c3530(int a, int b);
+extern int renderTargetClear(int a, int b);
 extern int FUN_002c3a14(TitleScene *scene);
 void renderCtxSetStereoMode(TitleScene *scene, u32 mode);
 
@@ -20,7 +20,7 @@ u32 FUN_00103dd8(void)
 {
     FUN_002c35b0(2);
     FUN_002bdb44();
-    FUN_002c3530(2, 0);
+    renderTargetClear(2, 0);
     renderCtxSetStereoMode(g_titleScene, 2);
     FUN_002c3a14(g_titleScene);
     return 0;

@@ -27,7 +27,7 @@ extern "C" {
 
 void efctSetSpeed(f32 speed);
 LayoutEntry* asdTMTexTableEntryAt(u32 group, u32 index);
-IconInfo* FUN_00184310(u32 code);
+IconInfo* devilGetRecord(u32 code);
 void FUN_00169a1c(s32 sprite, s32 x, s32 y, s32 z);
 const char* FUN_003f74a8(u32 id, PanelRecord* record);
 void textFormatBuffer(char* out, const char* format, ...);
@@ -53,7 +53,7 @@ static __inline u16 panelIconSprite(u32 category)
     case 9: slot = 0xbb; break;
     default: slot = -1; break;
     }
-    IconInfo* icon = FUN_00184310(slot < 0 ? 0 : category == 9 ? 0x29d : FUN_0019e52c((u16)slot));
+    IconInfo* icon = devilGetRecord(slot < 0 ? 0 : category == 9 ? 0x29d : FUN_0019e52c((u16)slot));
     if (icon == NULL) {
         return 0;
     }

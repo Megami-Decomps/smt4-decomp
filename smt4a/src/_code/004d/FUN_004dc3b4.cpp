@@ -27,8 +27,8 @@ extern "C" u32 FUN_004dc3b4(void *context, u16 firstId, u16 secondId, PackedIden
         accepted = FUN_004db2b8(context, firstId, secondId, output);
         break;
     case 4: {
-        const DevilRecordA *first = FUN_00184310(firstId);
-        const DevilRecordA *second = FUN_00184310(secondId);
+        const DevilRecordA *first = devilGetRecord(firstId);
+        const DevilRecordA *second = devilGetRecord(secondId);
         const RaceFusionRecipe *recipe = dataTable05FindByPriorityAndKey(first->race, second->race);
         if (firstId != secondId && recipe != NULL) {
             output->firstIdentifier = firstId;

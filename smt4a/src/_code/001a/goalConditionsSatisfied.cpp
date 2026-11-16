@@ -30,7 +30,7 @@ struct RosterEntry {
 
 extern "C" {
 
-GoalDefinition* FUN_001ad9b4(s32 id);
+GoalDefinition* dataTable1bOr1cGetRecord(s32 id);
 s32 gameOptionsClassifyMode(void);
 s32 FUN_001ba570(void);
 s32 gameDataTableGetFlag(void);
@@ -46,7 +46,7 @@ RosterEntry* gameFindRosterEntry(s32 id);
 // Returns whether every condition of goal `id` is currently satisfied.
 s32 goalConditionsSatisfied(s32 id)
 {
-    GoalDefinition* goal = FUN_001ad9b4(id);
+    GoalDefinition* goal = dataTable1bOr1cGetRecord(id);
     s32 result = 1;
     if (goal == NULL) return 0;
 

@@ -30,7 +30,7 @@ void partyReleasePreviewResources(PartyResourceWork *work)
         PartyTextureSlot *slot = FUN_003e4d68((u16)i);
         if (FUN_00187168(slot)) {
             /* The canonical DevilRecordA is only the 0x40-byte prefix. */
-            const DevilTableRecordA *record = (const DevilTableRecordA *)FUN_00184310(slot->id);
+            const DevilTableRecordA *record = (const DevilTableRecordA *)devilGetRecord(slot->id);
             statusBustUpPortraitRelease((s16)(record->unk9C + 1), 0);
         }
     }

@@ -10,7 +10,7 @@ int recordSetClampedCurrent(...);
 
 int recordGetScaledMaximum(...);
 int dataTable04FindById(void);
-int FUN_003f0e20(...);
+int btlMainFindEntryByListedId(...);
 int FUN_004c53fc(...);
 int btlAdjustPropertyClamped(...);
 
@@ -100,7 +100,7 @@ extern unsigned int DAT_00571414; /* 0x571414 */
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: playerSetClampedStat. */
 extern int FUN_003ea278(unsigned int *, unsigned int *);
-/* Supplied declaration required: FUN_003f0e20. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: recordSetClampedCurrent. */
 /* Supplied declaration required: FUN_004c53fc. */
 /* Supplied declaration required: btlAdjustPropertyClamped. */
@@ -126,7 +126,7 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
   temp_v6 = 0;
   puVar2 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
   puVar3 = puVar2;
-  FUN_003f0e20(puVar2,param_1);
+  btlMainFindEntryByListedId(puVar2,param_1);
   dataTable04FindById();
   if (param_2 == (fn_004c6edc_arg1 *)0x0) {
     return 0;
@@ -134,7 +134,7 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
   temp_v7 = 0;
   if ((param_2->field_0x33 != '\0') && (temp_v1 = FUN_003ea278(puVar2,puVar3), temp_v1 == 0)) {
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v1,param_1);
+    btlMainFindEntryByListedId(temp_v1,param_1);
     if (temp_v1 != 0) {
       temp_v1 = *(int *)(temp_v1 + 0x128);
     }
@@ -156,7 +156,7 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
             else {
               temp_v2 = FUN_004c53fc(7);
               temp_v1 = reinterpret_cast<int>(btlGetMainState());
-              FUN_003f0e20(temp_v1,param_1);
+              btlMainFindEntryByListedId(temp_v1,param_1);
               unaff_r8 = temp_v2;
               if (temp_v1 != 0) {
                 *(int *)(temp_v1 + 0x90) = unaff_r8;
@@ -165,13 +165,13 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
           }
           else {
             temp_v1 = reinterpret_cast<int>(btlGetMainState());
-            FUN_003f0e20(temp_v1,param_1);
+            btlMainFindEntryByListedId(temp_v1,param_1);
             if (temp_v1 != 0) {
               unaff_r8 = *(int *)(temp_v1 + 0x90);
             }
             if (temp_v1 != 0 && unaff_r8 != 0) {
               temp_v2 = reinterpret_cast<int>(btlGetMainState());
-              FUN_003f0e20(temp_v2,param_1);
+              btlMainFindEntryByListedId(temp_v2,param_1);
               temp_v1 = 0;
               if (temp_v2 != 0) {
                 temp_v1 = *(int *)(temp_v2 + 0x120);
@@ -181,7 +181,7 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
                   unaff_r8 = -unaff_r8;
                 }
                 temp_v1 = reinterpret_cast<int>(btlGetMainState());
-                FUN_003f0e20(temp_v1,param_1);
+                btlMainFindEntryByListedId(temp_v1,param_1);
                 temp_v2 = 0;
                 temp_v6 = unaff_r8;
                 unaff_r8 = temp_v2;
@@ -194,11 +194,11 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
         }
         else {
           temp_v1 = reinterpret_cast<int>(btlGetMainState());
-          FUN_003f0e20(temp_v1,param_1);
+          btlMainFindEntryByListedId(temp_v1,param_1);
           if ((temp_v1 != 0) && (*(int *)(temp_v1 + 0x90) < 0)) {
             unaff_r8 = -*(int *)(temp_v1 + 0x90);
             temp_v1 = reinterpret_cast<int>(btlGetMainState());
-            FUN_003f0e20(temp_v1,param_1);
+            btlMainFindEntryByListedId(temp_v1,param_1);
             temp_v2 = 0;
             temp_v6 = unaff_r8;
             unaff_r8 = temp_v2;
@@ -210,7 +210,7 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
       }
       else {
         temp_v2 = reinterpret_cast<int>(btlGetMainState());
-        FUN_003f0e20(temp_v2,param_1);
+        btlMainFindEntryByListedId(temp_v2,param_1);
         temp_v1 = 0;
         if (temp_v2 != 0) {
           temp_v1 = *(int *)(temp_v2 + 0x90);
@@ -218,14 +218,14 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
         }
         if ((temp_v2 != 0 && unaff_r8 != 0) && -1 < temp_v1) {
           temp_v2 = reinterpret_cast<int>(btlGetMainState());
-          FUN_003f0e20(temp_v2,param_1);
+          btlMainFindEntryByListedId(temp_v2,param_1);
           temp_v1 = 0;
           if (temp_v2 != 0) {
             temp_v1 = *(int *)(temp_v2 + 0x120);
           }
           if (temp_v2 == 0 || temp_v1 == 0) {
             temp_v1 = reinterpret_cast<int>(btlGetMainState());
-            FUN_003f0e20(temp_v1,param_1);
+            btlMainFindEntryByListedId(temp_v1,param_1);
             temp_v2 = 0;
             temp_v6 = unaff_r8;
             unaff_r8 = temp_v2;
@@ -240,7 +240,7 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
   }
   if ((param_2->field_0x32 != '\0') && (temp_v1 = FUN_003ea278(puVar2,puVar3), temp_v1 == 0)) {
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v1,param_1);
+    btlMainFindEntryByListedId(temp_v1,param_1);
     if (temp_v1 != 0) {
       temp_v1 = *(int *)(temp_v1 + 300);
     }
@@ -263,7 +263,7 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
             else {
               unaff_r8 = FUN_004c53fc(8);
               temp_v1 = reinterpret_cast<int>(btlGetMainState());
-              FUN_003f0e20(temp_v1,param_1);
+              btlMainFindEntryByListedId(temp_v1,param_1);
               if (temp_v1 != 0) {
                 *(int *)(temp_v1 + 0x94) = unaff_r8;
               }
@@ -271,13 +271,13 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
           }
           else {
             temp_v1 = reinterpret_cast<int>(btlGetMainState());
-            FUN_003f0e20(temp_v1,param_1);
+            btlMainFindEntryByListedId(temp_v1,param_1);
             if (temp_v1 != 0) {
               unaff_r8 = *(int *)(temp_v1 + 0x94);
             }
             if (temp_v1 != 0 && unaff_r8 != 0) {
               temp_v2 = reinterpret_cast<int>(btlGetMainState());
-              FUN_003f0e20(temp_v2,param_1);
+              btlMainFindEntryByListedId(temp_v2,param_1);
               temp_v1 = 0;
               if (temp_v2 != 0) {
                 temp_v1 = *(int *)(temp_v2 + 0x120);
@@ -287,7 +287,7 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
                   unaff_r8 = -unaff_r8;
                 }
                 temp_v1 = reinterpret_cast<int>(btlGetMainState());
-                FUN_003f0e20(temp_v1,param_1);
+                btlMainFindEntryByListedId(temp_v1,param_1);
                 temp_v6 = temp_v6 + unaff_r8;
                 unaff_r8 = 0;
                 if (temp_v1 != 0) {
@@ -299,11 +299,11 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
         }
         else {
           temp_v1 = reinterpret_cast<int>(btlGetMainState());
-          FUN_003f0e20(temp_v1,param_1);
+          btlMainFindEntryByListedId(temp_v1,param_1);
           if ((temp_v1 != 0) && (*(int *)(temp_v1 + 0x94) < 0)) {
             unaff_r8 = -*(int *)(temp_v1 + 0x94);
             temp_v1 = reinterpret_cast<int>(btlGetMainState());
-            FUN_003f0e20(temp_v1,param_1);
+            btlMainFindEntryByListedId(temp_v1,param_1);
             temp_v6 = temp_v6 + unaff_r8;
             unaff_r8 = 0;
             if (temp_v1 != 0) {
@@ -314,7 +314,7 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
       }
       else {
         temp_v2 = reinterpret_cast<int>(btlGetMainState());
-        FUN_003f0e20(temp_v2,param_1);
+        btlMainFindEntryByListedId(temp_v2,param_1);
         temp_v1 = 0;
         if (temp_v2 != 0) {
           temp_v1 = *(int *)(temp_v2 + 0x94);
@@ -322,7 +322,7 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
         }
         if ((temp_v2 != 0 && unaff_r8 != 0) && -1 < temp_v1) {
           temp_v2 = reinterpret_cast<int>(btlGetMainState());
-          FUN_003f0e20(temp_v2,param_1);
+          btlMainFindEntryByListedId(temp_v2,param_1);
           temp_v1 = 0;
           if (temp_v2 != 0) {
             temp_v1 = *(int *)(temp_v2 + 0x120);
@@ -331,7 +331,7 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
             temp_v6 = temp_v6 + unaff_r8;
             unaff_r8 = 0;
             temp_v1 = reinterpret_cast<int>(btlGetMainState());
-            FUN_003f0e20(temp_v1,param_1);
+            btlMainFindEntryByListedId(temp_v1,param_1);
             if (temp_v1 != 0) {
               *(int *)(temp_v1 + 0x94) = unaff_r8;
             }
@@ -343,7 +343,7 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
   }
   if ((param_2->field_0x35 != '\0') && (temp_v1 = FUN_003ea278(puVar2,puVar3), temp_v1 == 0)) {
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v1,param_1);
+    btlMainFindEntryByListedId(temp_v1,param_1);
     if (temp_v1 != 0) {
       temp_v1 = *(int *)(temp_v1 + 0x130);
     }
@@ -367,13 +367,13 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
             else {
               temp_v4 = FUN_004c53fc(0xb);
               temp_v1 = reinterpret_cast<int>(btlGetMainState());
-              FUN_003f0e20(temp_v1,param_1);
+              btlMainFindEntryByListedId(temp_v1,param_1);
               if (temp_v1 != 0) {
                 *(unsigned int *)(temp_v1 + 0xa0) = temp_v4;
               }
               unaff_r8 = FUN_004c53fc(9);
               temp_v1 = reinterpret_cast<int>(btlGetMainState());
-              FUN_003f0e20(temp_v1,param_1);
+              btlMainFindEntryByListedId(temp_v1,param_1);
               if (temp_v1 != 0) {
                 *(int *)(temp_v1 + 0x98) = unaff_r8;
               }
@@ -381,13 +381,13 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
           }
           else {
             temp_v1 = reinterpret_cast<int>(btlGetMainState());
-            FUN_003f0e20(temp_v1,param_1);
+            btlMainFindEntryByListedId(temp_v1,param_1);
             if (temp_v1 != 0) {
               unaff_r8 = *(int *)(temp_v1 + 0xa0);
             }
             if (temp_v1 != 0 && unaff_r8 != 0) {
               temp_v2 = reinterpret_cast<int>(btlGetMainState());
-              FUN_003f0e20(temp_v2,param_1);
+              btlMainFindEntryByListedId(temp_v2,param_1);
               temp_v1 = 0;
               if (temp_v2 != 0) {
                 temp_v1 = *(int *)(temp_v2 + 0x120);
@@ -399,42 +399,42 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
                 temp_v6 = temp_v6 + unaff_r8;
                 unaff_r8 = 0;
                 temp_v1 = reinterpret_cast<int>(btlGetMainState());
-                FUN_003f0e20(temp_v1,param_1);
+                btlMainFindEntryByListedId(temp_v1,param_1);
                 if (temp_v1 != 0) {
                   *(unsigned int *)(temp_v1 + 0xa0) = 0;
                 }
               }
             }
             temp_v2 = reinterpret_cast<int>(btlGetMainState());
-            FUN_003f0e20(temp_v2,param_1);
+            btlMainFindEntryByListedId(temp_v2,param_1);
             temp_v1 = 0;
             if (temp_v2 != 0) {
               temp_v1 = *(int *)(temp_v2 + 0x98);
             }
             if (temp_v2 != 0 && temp_v1 != 0) {
               temp_v1 = reinterpret_cast<int>(btlGetMainState());
-              FUN_003f0e20(temp_v1,param_1);
+              btlMainFindEntryByListedId(temp_v1,param_1);
               goto joined_r0x004c7570;
             }
           }
         }
         else {
           temp_v1 = reinterpret_cast<int>(btlGetMainState());
-          FUN_003f0e20(temp_v1,param_1);
+          btlMainFindEntryByListedId(temp_v1,param_1);
           if ((temp_v1 != 0) && (*(int *)(temp_v1 + 0xa0) < 0)) {
             temp_v6 = temp_v6 - *(int *)(temp_v1 + 0xa0);
             unaff_r8 = 0;
             temp_v1 = reinterpret_cast<int>(btlGetMainState());
-            FUN_003f0e20(temp_v1,param_1);
+            btlMainFindEntryByListedId(temp_v1,param_1);
             if (temp_v1 != 0) {
               *(unsigned int *)(temp_v1 + 0xa0) = 0;
             }
           }
           temp_v1 = reinterpret_cast<int>(btlGetMainState());
-          FUN_003f0e20(temp_v1,param_1);
+          btlMainFindEntryByListedId(temp_v1,param_1);
           if ((temp_v1 != 0) && (*(int *)(temp_v1 + 0x98) < 0)) {
             temp_v1 = reinterpret_cast<int>(btlGetMainState());
-            FUN_003f0e20(temp_v1,param_1);
+            btlMainFindEntryByListedId(temp_v1,param_1);
 joined_r0x004c7570:
             unaff_r8 = 0;
             if (temp_v1 != 0) {
@@ -445,7 +445,7 @@ joined_r0x004c7570:
       }
       else {
         temp_v2 = reinterpret_cast<int>(btlGetMainState());
-        FUN_003f0e20(temp_v2,param_1);
+        btlMainFindEntryByListedId(temp_v2,param_1);
         temp_v1 = 0;
         if (temp_v2 != 0) {
           temp_v1 = *(int *)(temp_v2 + 0xa0);
@@ -453,7 +453,7 @@ joined_r0x004c7570:
         }
         if ((temp_v2 != 0 && unaff_r8 != 0) && -1 < temp_v1) {
           temp_v2 = reinterpret_cast<int>(btlGetMainState());
-          FUN_003f0e20(temp_v2,param_1);
+          btlMainFindEntryByListedId(temp_v2,param_1);
           temp_v1 = 0;
           if (temp_v2 != 0) {
             temp_v1 = *(int *)(temp_v2 + 0x120);
@@ -462,14 +462,14 @@ joined_r0x004c7570:
             temp_v6 = temp_v6 + unaff_r8;
             unaff_r8 = 0;
             temp_v1 = reinterpret_cast<int>(btlGetMainState());
-            FUN_003f0e20(temp_v1,param_1);
+            btlMainFindEntryByListedId(temp_v1,param_1);
             if (temp_v1 != 0) {
               *(unsigned int *)(temp_v1 + 0xa0) = 0;
             }
           }
         }
         temp_v2 = reinterpret_cast<int>(btlGetMainState());
-        FUN_003f0e20(temp_v2,param_1);
+        btlMainFindEntryByListedId(temp_v2,param_1);
         temp_v1 = 0;
         if (temp_v2 != 0) {
           temp_v1 = *(int *)(temp_v2 + 0x98);
@@ -477,7 +477,7 @@ joined_r0x004c7570:
         if ((temp_v2 != 0 && temp_v1 != 0) && -1 < temp_v1) {
           unaff_r8 = 0;
           temp_v1 = reinterpret_cast<int>(btlGetMainState());
-          FUN_003f0e20(temp_v1,param_1);
+          btlMainFindEntryByListedId(temp_v1,param_1);
           if (temp_v1 != 0) {
             *(int *)(temp_v1 + 0x98) = unaff_r8;
           }
@@ -489,7 +489,7 @@ joined_r0x004c7570:
   }
   if ((param_2->field_0x34 != '\0') && (temp_v1 = FUN_003ea278(puVar2,puVar3), temp_v1 == 0)) {
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v1,param_1);
+    btlMainFindEntryByListedId(temp_v1,param_1);
     if (temp_v1 != 0) {
       temp_v1 = *(int *)(temp_v1 + 0x134);
     }
@@ -512,7 +512,7 @@ joined_r0x004c7570:
             else {
               temp_v4 = FUN_004c53fc(10);
               temp_v1 = reinterpret_cast<int>(btlGetMainState());
-              FUN_003f0e20(temp_v1,param_1);
+              btlMainFindEntryByListedId(temp_v1,param_1);
               if (temp_v1 != 0) {
                 *(unsigned int *)(temp_v1 + 0x9c) = temp_v4;
               }
@@ -520,13 +520,13 @@ joined_r0x004c7570:
           }
           else {
             temp_v1 = reinterpret_cast<int>(btlGetMainState());
-            FUN_003f0e20(temp_v1,param_1);
+            btlMainFindEntryByListedId(temp_v1,param_1);
             if (temp_v1 != 0) {
               unaff_r8 = *(int *)(temp_v1 + 0x9c);
             }
             if (temp_v1 != 0 && unaff_r8 != 0) {
               temp_v2 = reinterpret_cast<int>(btlGetMainState());
-              FUN_003f0e20(temp_v2,param_1);
+              btlMainFindEntryByListedId(temp_v2,param_1);
               temp_v1 = 0;
               if (temp_v2 != 0) {
                 temp_v1 = *(int *)(temp_v2 + 0x120);
@@ -536,7 +536,7 @@ joined_r0x004c7570:
                   unaff_r8 = -unaff_r8;
                 }
                 temp_v1 = reinterpret_cast<int>(btlGetMainState());
-                FUN_003f0e20(temp_v1,param_1);
+                btlMainFindEntryByListedId(temp_v1,param_1);
                 temp_v4 = 0;
                 temp_v6 = temp_v6 + unaff_r8;
                 if (temp_v1 != 0) {
@@ -548,11 +548,11 @@ joined_r0x004c7570:
         }
         else {
           temp_v1 = reinterpret_cast<int>(btlGetMainState());
-          FUN_003f0e20(temp_v1,param_1);
+          btlMainFindEntryByListedId(temp_v1,param_1);
           if ((temp_v1 != 0) && (*(int *)(temp_v1 + 0x9c) < 0)) {
             unaff_r8 = -*(int *)(temp_v1 + 0x9c);
             temp_v1 = reinterpret_cast<int>(btlGetMainState());
-            FUN_003f0e20(temp_v1,param_1);
+            btlMainFindEntryByListedId(temp_v1,param_1);
             temp_v4 = 0;
             temp_v6 = temp_v6 + unaff_r8;
             if (temp_v1 != 0) {
@@ -563,7 +563,7 @@ joined_r0x004c7570:
       }
       else {
         temp_v2 = reinterpret_cast<int>(btlGetMainState());
-        FUN_003f0e20(temp_v2,param_1);
+        btlMainFindEntryByListedId(temp_v2,param_1);
         temp_v1 = 0;
         if (temp_v2 != 0) {
           temp_v1 = *(int *)(temp_v2 + 0x9c);
@@ -571,7 +571,7 @@ joined_r0x004c7570:
         }
         if ((temp_v2 != 0 && unaff_r8 != 0) && -1 < temp_v1) {
           temp_v2 = reinterpret_cast<int>(btlGetMainState());
-          FUN_003f0e20(temp_v2,param_1);
+          btlMainFindEntryByListedId(temp_v2,param_1);
           temp_v1 = 0;
           if (temp_v2 != 0) {
             temp_v1 = *(int *)(temp_v2 + 0x120);
@@ -580,7 +580,7 @@ joined_r0x004c7570:
             temp_v6 = temp_v6 + unaff_r8;
             temp_v4 = 0;
             temp_v1 = reinterpret_cast<int>(btlGetMainState());
-            FUN_003f0e20(temp_v1,param_1);
+            btlMainFindEntryByListedId(temp_v1,param_1);
             if (temp_v1 != 0) {
               *(unsigned int *)(temp_v1 + 0x9c) = temp_v4;
             }
@@ -592,7 +592,7 @@ joined_r0x004c7570:
   }
   if ((param_2->field_0x38 & 1) != 0) {
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v1,param_1);
+    btlMainFindEntryByListedId(temp_v1,param_1);
     if (temp_v1 != 0) {
       temp_v1 = *(int *)(temp_v1 + 0x90);
     }
@@ -600,12 +600,12 @@ joined_r0x004c7570:
       temp_v1 = 0;
     }
     temp_v2 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v2,param_1);
+    btlMainFindEntryByListedId(temp_v2,param_1);
     if (temp_v2 != 0) {
       *(int *)(temp_v2 + 0x90) = -temp_v1;
     }
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v1,param_1);
+    btlMainFindEntryByListedId(temp_v1,param_1);
     if (temp_v1 != 0) {
       temp_v1 = *(int *)(temp_v1 + 0x94);
     }
@@ -613,12 +613,12 @@ joined_r0x004c7570:
       temp_v1 = 0;
     }
     temp_v2 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v2,param_1);
+    btlMainFindEntryByListedId(temp_v2,param_1);
     if (temp_v2 != 0) {
       *(int *)(temp_v2 + 0x94) = -temp_v1;
     }
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v1,param_1);
+    btlMainFindEntryByListedId(temp_v1,param_1);
     if (temp_v1 != 0) {
       temp_v1 = *(int *)(temp_v1 + 0x98);
     }
@@ -626,12 +626,12 @@ joined_r0x004c7570:
       temp_v1 = 0;
     }
     temp_v2 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v2,param_1);
+    btlMainFindEntryByListedId(temp_v2,param_1);
     if (temp_v2 != 0) {
       *(int *)(temp_v2 + 0x98) = -temp_v1;
     }
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v1,param_1);
+    btlMainFindEntryByListedId(temp_v1,param_1);
     if (temp_v1 != 0) {
       temp_v1 = *(int *)(temp_v1 + 0x9c);
     }
@@ -639,31 +639,31 @@ joined_r0x004c7570:
       temp_v1 = 0;
     }
     temp_v2 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v2,param_1);
+    btlMainFindEntryByListedId(temp_v2,param_1);
     if (temp_v2 != 0) {
       *(int *)(temp_v2 + 0x9c) = -temp_v1;
     }
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v1,param_1);
+    btlMainFindEntryByListedId(temp_v1,param_1);
     if (temp_v1 != 0) {
       temp_v7 = *(int *)(temp_v1 + 0xa0);
     }
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v1,param_1);
+    btlMainFindEntryByListedId(temp_v1,param_1);
     if (temp_v1 != 0) {
       *(int *)(temp_v1 + 0xa0) = -temp_v7;
     }
   }
   if ((param_2->field_0x38 & 2) != 0) {
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v1,param_1);
+    btlMainFindEntryByListedId(temp_v1,param_1);
     temp_v7 = 0;
     if (temp_v1 != 0) {
       temp_v7 = *(int *)(temp_v1 + 0xa8);
     }
     if (temp_v1 == 0 || temp_v7 == 0) {
       temp_v7 = reinterpret_cast<int>(btlGetMainState());
-      FUN_003f0e20(temp_v7,param_1);
+      btlMainFindEntryByListedId(temp_v7,param_1);
       if (temp_v7 != 0) {
         *(unsigned int *)(temp_v7 + 0xa8) = 3;
       }
@@ -734,14 +734,14 @@ joined_r0x004c7570:
   }
   if ((param_2->field_0x38 & 8) != 0) {
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v7,param_1);
+    btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {
       *(unsigned int *)(temp_v7 + 0xc4) = 0;
     }
   }
   if ((param_2->field_0x38 & 0x10) != 0) {
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v7,param_1);
+    btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {
       *(unsigned int *)(temp_v7 + 200) = 0;
     }
@@ -825,37 +825,37 @@ joined_r0x004c7570:
   if ((param_2->field_0x39 & 0x10) != 0) {
     temp_v4 = FUN_004c53fc(0x13);
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v7,param_1);
+    btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {
       *(unsigned int *)(temp_v7 + 0xc0) = temp_v4;
     }
     temp_v4 = FUN_004c53fc(0x16);
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v7,param_1);
+    btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {
       *(unsigned int *)(temp_v7 + 0xcc) = temp_v4;
     }
     temp_v4 = FUN_004c53fc(0x11);
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v7,param_1);
+    btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {
       *(unsigned int *)(temp_v7 + 0xb8) = temp_v4;
     }
     temp_v4 = FUN_004c53fc(0xf);
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v7,param_1);
+    btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {
       *(unsigned int *)(temp_v7 + 0xb0) = temp_v4;
     }
     temp_v4 = FUN_004c53fc(0x10);
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v7,param_1);
+    btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {
       *(unsigned int *)(temp_v7 + 0xb4) = temp_v4;
     }
     temp_v4 = FUN_004c53fc(0xe);
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v7,param_1);
+    btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {
       *(unsigned int *)(temp_v7 + 0xac) = temp_v4;
     }
@@ -872,43 +872,43 @@ joined_r0x004c7570:
     }
     temp_v4 = FUN_004c53fc(0x18);
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v7,param_1);
+    btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {
       *(unsigned int *)(temp_v7 + 0xd4) = temp_v4;
     }
     temp_v4 = FUN_004c53fc(0x19);
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v7,param_1);
+    btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {
       *(unsigned int *)(temp_v7 + 0xd8) = temp_v4;
     }
     temp_v4 = FUN_004c53fc(0xd);
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v7,param_1);
+    btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {
       *(unsigned int *)(temp_v7 + 0xa8) = temp_v4;
     }
     temp_v4 = FUN_004c53fc(0x2a);
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v7,param_1);
+    btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {
       *(unsigned int *)(temp_v7 + 0x11c) = temp_v4;
     }
     temp_v4 = FUN_004c53fc(0x27);
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v7,param_1);
+    btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {
       *(unsigned int *)(temp_v7 + 0x110) = temp_v4;
     }
     temp_v4 = FUN_004c53fc(0x28);
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v7,param_1);
+    btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {
       *(unsigned int *)(temp_v7 + 0x114) = temp_v4;
     }
     temp_v4 = FUN_004c53fc(0x29);
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v7,param_1);
+    btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {
       *(unsigned int *)(temp_v7 + 0x118) = temp_v4;
     }

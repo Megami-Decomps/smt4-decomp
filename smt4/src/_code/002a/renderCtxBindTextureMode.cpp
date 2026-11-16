@@ -3,13 +3,13 @@
 
 extern "C" {
 void FUN_0014e850(u32 width, u32 height, u32 format, u32 address);
-void FUN_00145d6c(s32 enable);
+void dataSubmitSelectedPresetBlock(s32 enable);
 
 /* Selects the texture-environment mode, unless it is already active. */
 static void setBindingState(RenderCtx *context, u8 state)
 {
     if (context->depthStacks.selectedTextureState != state) {
-        FUN_00145d6c(state);
+        dataSubmitSelectedPresetBlock(state);
         context->depthStacks.selectedTextureState = state;
     }
 }

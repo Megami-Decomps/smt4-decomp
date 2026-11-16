@@ -2,7 +2,7 @@
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 extern "C" {
 extern u32 g_aocSystem;
-DevilRecordA *FUN_00184310(u32 id);
+DevilRecordA *devilGetRecord(u32 id);
 void *dataTable00FindById(u32 id);
 s32 gameFlagIsSet(u32 flag);
 s32 aocRunByName(u32 system, s32 category, s32 id, s32 mode);
@@ -28,7 +28,7 @@ void devilDrawResolvedTexture(s32 id, u32 first, u32 second, u32 third, s32 reso
         if (id < 0) {
             resource = !gameFlagIsSet(17) ? 606 : 0;
         } else {
-            const DevilTableRecordA *devil = (const DevilTableRecordA *)FUN_00184310((u16)id);
+            const DevilTableRecordA *devil = (const DevilTableRecordA *)devilGetRecord((u16)id);
             const TextureRecordView *record = (const TextureRecordView *)dataTable00FindById((u16)id);
             if (devil == NULL)
                 return;

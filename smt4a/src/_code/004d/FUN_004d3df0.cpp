@@ -45,8 +45,8 @@ s32 listBoxItemHasOwner(u32 listBox, u32 id);
 void asdListBoxSetToggleItem(u32 listBox, s32 id, s32 value);
 void asdListBoxSetFloatItem(u32 listBox, u32 id, s32 minimum, s32 maximum, f32 value);
 BtlCombatantEntryA *FUN_003e83b4(BtlMainStateA *state, s32 index, s32 matches);
-u16 FUN_0031cfd0(u32 index);
-s32 FUN_0031f0f4(u32 index, s32 value);
+u16 saveIsRecordValueBounded(u32 index);
+s32 gameRecordSetValueClamped(u32 index, s32 value);
 s32 btlFindEntryValue(s32 id, u32 index);
 void btlSlotSetStoreValue(u32 key, s32 index, u32 value);
 
@@ -76,7 +76,7 @@ void FUN_004d3df0(CombatantEditor *editor, BtlMainStateA *battle)
             asdListBoxSetToggleItem(editor->listBox, 10, (entry->flags & DAT_005715f8.toggleMaskA) != 0);
             asdListBoxSetToggleItem(editor->listBox, 11, (entry->flags & DAT_005715f8.toggleMaskB) != 0);
             if ((entry->flags & DAT_005715f8.editableMask) != 0)
-                asdListBoxSetIntItem(editor->listBox, 12, FUN_0031cfd0(entry->id), 0, 100, 0);
+                asdListBoxSetIntItem(editor->listBox, 12, saveIsRecordValueBounded(entry->id), 0, 100, 0);
             else
                 asdListBoxSetIntItem(editor->listBox, 12, 0, 0, 100, 0);
             if (entry->unitIndex >= 0 && (DAT_005715f8.editableMask & entry->flags) != 0) {
@@ -176,7 +176,7 @@ void FUN_004d3df0(CombatantEditor *editor, BtlMainStateA *battle)
         break;
     case 12:
         if (entry != NULL && (entry->flags & DAT_005715f8.editableMask) != 0) {
-            FUN_0031f0f4(entry->id, *asdListBoxGetIntValuePtr(editor->listBox, selected));
+            gameRecordSetValueClamped(entry->id, *asdListBoxGetIntValuePtr(editor->listBox, selected));
             return;
         }
         break;

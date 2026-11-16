@@ -20,7 +20,7 @@ struct CharacterRow {
 }
 
 extern "C" {
-DevilRecord *FUN_00184310(u16 id);
+DevilRecord *devilGetRecord(u16 id);
 CharacterRow *dataTableLookupCharacter(u16 character);
 s32 randRange(u32 limit);
 s32 gameDataFlagTestBit(u32 bit);
@@ -28,7 +28,7 @@ s32 gameDataFlagTestBit(u32 bit);
 // Pick a random entry of the demon's character row: the first 12 are chosen on a roll, the rest otherwise.
 u16 FUN_003f3104(CharacterUnit *unit)
 {
-    DevilRecord *devil = FUN_00184310(unit->devilId);
+    DevilRecord *devil = devilGetRecord(unit->devilId);
     CharacterRow *row = dataTableLookupCharacter(devil->characterId);
     s32 index = randRange(11);
     s32 roll = randRange(13);

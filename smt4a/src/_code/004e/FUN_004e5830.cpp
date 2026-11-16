@@ -53,7 +53,7 @@ u32 lcgRandomRange(s32 limit);
 u32 FUN_004c8340(u32 a, s32 id, u32 b, u32 c, u32 d);
 u32 FUN_004c60c0(s32 id, u32 b);
 void FUN_004fdb18(u32 arg0, u32 arg1, ReactionRoster *record, u32 mask, u32 flag);
-void *FUN_003f0e20(ReactionBattle *battle, s32 unit);
+void *btlMainFindEntryByListedId(ReactionBattle *battle, s32 unit);
 void FUN_004c9160(u32 id, void *target, u32 a, u32 b);
 
 /* Lets a random eligible ally react: collects the entries that qualify, and with a small chance
@@ -88,7 +88,7 @@ void FUN_004e5830(ReactionOwner *owner, u32 arg1, u32 arg2)
         s32 pick = lcgRandomRange((u16)(count - 1));
         ReactionRoster *record = &owner->battle->roster[ids[pick]];
         FUN_004fdb18(arg2, arg1, record, 0x200, 1);
-        void *target = FUN_003f0e20(owner->battle, record->unit);
+        void *target = btlMainFindEntryByListedId(owner->battle, record->unit);
         ((u16 *)target)[0x276 / 2] = 0;
         ((u16 *)target)[0x278 / 2] |= 0x10;
         FUN_004c9160(0x1C, target, 0, 1);

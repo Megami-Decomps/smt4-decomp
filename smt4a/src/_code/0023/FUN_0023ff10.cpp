@@ -52,7 +52,7 @@ extern GameStateView g_gameState;
 
 void sysPlaySe(u32 id);
 void FUN_00183f58(s32 a, s32 b, s32 c, s32 d);
-EntryKindRecord *FUN_001ad9b4(u32 id);
+EntryKindRecord *dataTable1bOr1cGetRecord(u32 id);
 s32 resourceRunOperationIfUnblocked(void *list);
 void *questUiGetList(QuestUiLower *lower);
 s32 partyEntryFlagsBit3(u32 id);
@@ -135,7 +135,7 @@ void FUN_0023ff10(void)
     pageOffset = resourceRunOperationIfUnblocked(list);
     row = FUN_002a4894(reinterpret_cast<const Object *>(list));
     id = ui->ids[pageOffset + row];
-    record = FUN_001ad9b4(id);
+    record = dataTable1bOr1cGetRecord(id);
     if (flags->locked != 0) {
         FUN_00183f58(5, 1, 0x32, 1);
         FUN_00183f58(2, 0x12, 0, 1);

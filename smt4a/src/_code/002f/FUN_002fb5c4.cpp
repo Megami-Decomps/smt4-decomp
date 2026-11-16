@@ -6,7 +6,7 @@
 
 extern "C" {
 
-int FUN_001634b4(int);
+int effectRenderTransformedInstance(int);
 int renderCtxCalculateStereoParallax(int);
 int VectorSignedToFloat(int, int);
 
@@ -16,7 +16,7 @@ extern unsigned int DAT_00573c74; /* 0x573c74 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001634b4. */
+/* Supplied declaration required: effectRenderTransformedInstance. */
 extern int vec2GetXInt(int);
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 
@@ -57,7 +57,7 @@ void FUN_002fb5c4(int param_1)
       temp_v4 = param_1 + temp_v5 * 0x8c;
       if (*(char *)(temp_v4 + 0x1685) != '\0') {
         VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_001634b4(temp_v4 + 0x1600);
+        effectRenderTransformedInstance(temp_v4 + 0x1600);
       }
       temp_v1 = g_renderCtx;
       temp_v2 = packNibblesAndByte(6, 7, 0);
@@ -70,7 +70,7 @@ void FUN_002fb5c4(int param_1)
       }
       if (*(char *)(temp_v4 + 0xa5) != '\0') {
         VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_001634b4(temp_v4 + 0x20);
+        effectRenderTransformedInstance(temp_v4 + 0x20);
       }
       temp_v1 = g_renderCtx;
       temp_v2 = packNibblesAndByte(6, 1, 0);
@@ -83,7 +83,7 @@ void FUN_002fb5c4(int param_1)
       }
       if (*(char *)(temp_v4 + 0x110d) != '\0') {
         VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_001634b4(temp_v4 + 0x1088);
+        effectRenderTransformedInstance(temp_v4 + 0x1088);
       }
       temp_v1 = g_renderCtx;
       temp_v2 = packNibblesAndByte(6, 7, 0);
@@ -96,7 +96,7 @@ void FUN_002fb5c4(int param_1)
       }
       if (*(char *)(temp_v4 + 0x61d) != '\0') {
         VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_001634b4(temp_v4 + 0x598);
+        effectRenderTransformedInstance(temp_v4 + 0x598);
       }
       temp_v4 = g_renderCtx;
       temp_v5 = temp_v5 + 1;
@@ -116,7 +116,7 @@ void FUN_002fb5c4(int param_1)
         if (*(char *)(temp_v4 + 0xa5) != '\0') {
           *(unsigned int *)(temp_v4 + 0x50) = *(unsigned int *)(param_1 + 0x2444);
           VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_001634b4(temp_v4 + 0x20);
+          effectRenderTransformedInstance(temp_v4 + 0x20);
         }
         temp_v5 = temp_v5 + 1;
       } while (temp_v5 < 0x1e);
@@ -136,7 +136,7 @@ void FUN_002fb5c4(int param_1)
           temp_v2 = param_1 + ((temp_v4 - temp_v1) + 0x13) * 0x8c;
           *(unsigned int *)(temp_v2 + 0x50) = *(unsigned int *)(param_1 + 0x2444);
           VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_001634b4(temp_v2 + 0x20);
+          effectRenderTransformedInstance(temp_v2 + 0x20);
           temp_v1 = temp_v1 + 1;
         } while (temp_v1 < temp_v5);
       }
@@ -165,9 +165,9 @@ void FUN_002fb5c4(int param_1)
       if (*(char *)(temp_v4 + 0xa5) != '\0') {
         *(unsigned int *)(temp_v4 + 0x50) = *(unsigned int *)(param_1 + (temp_v5 - 0x32) * 4 + 0x2478);
         VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_001634b4(temp_v4 + 0x20);
+        effectRenderTransformedInstance(temp_v4 + 0x20);
         VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_001634b4(temp_v4 + 0x20);
+        effectRenderTransformedInstance(temp_v4 + 0x20);
       }
       temp_v4 = g_renderCtx;
       temp_v5 = temp_v5 + 1;

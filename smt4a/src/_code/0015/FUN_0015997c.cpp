@@ -12,7 +12,7 @@ extern u32 g_ipcServiceSessionHandle[];    /* 0x472ad8 */
 
 void FUN_0016f864(void);
 u32 libc_strlen(const char *text);
-s32 FUN_0016f988(u32 *session, const char *name, u32 length, u32 flags);
+s32 asdModelForwardChecked(u32 *session, const char *name, u32 length, u32 flags);
 
 /* Opens the "ndm:u" service session on the first reference; returns the failure result or 0. */
 s32 FUN_0015997c(void)
@@ -21,7 +21,7 @@ s32 FUN_0015997c(void)
 
     if (DAT_005c0ac4 == 0) {
         FUN_0016f864();
-        s32 result = FUN_0016f988(g_ipcServiceSessionHandle, g_ndmServiceName, libc_strlen(g_ndmServiceName), 0);
+        s32 result = asdModelForwardChecked(g_ipcServiceSessionHandle, g_ndmServiceName, libc_strlen(g_ndmServiceName), 0);
         if (nnResultIsFailure(result)) {
             return result;
         }

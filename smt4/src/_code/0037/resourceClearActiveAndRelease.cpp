@@ -5,7 +5,7 @@ struct RelativeResource {
     /* 0x0c */ u8 unk0c[32];
     /* 0x2c */ u32 active;
 };
-extern "C" void FUN_002c3364(void **resource);
+extern "C" void runtimeDispatchObjectRelease(void **resource);
 /* The node a self-relative offset field points at, or NULL for a zero offset. */
 static __inline void *linkResolve(s32 *field)
 {
@@ -22,5 +22,5 @@ extern "C" void resourceClearActiveAndRelease(RelativeResource *owner)
     owner->active = 0;
     void *resource = linkResolve(&owner->offset);
     if (resource)
-        FUN_002c3364(&resource);
+        runtimeDispatchObjectRelease(&resource);
 }

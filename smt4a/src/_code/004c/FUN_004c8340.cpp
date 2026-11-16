@@ -7,7 +7,7 @@ extern "C" {
 
 int dataTable41FindById(void);
 int FUN_003e8bb0(unsigned int [9], int, int);
-int FUN_003f0e20(...);
+int btlMainFindEntryByListedId(...);
 int source4CCopyHalves(void);
 int kindIdStore(unsigned int, int [2]);
 
@@ -27,7 +27,7 @@ typedef struct {
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: dataTable41FindById. */
 /* Supplied declaration required: FUN_003e8bb0. */
-/* Supplied declaration required: FUN_003f0e20. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: source4CCopyHalves. */
 /* Supplied declaration required: kindIdStore. */
 
@@ -68,14 +68,14 @@ unsigned int FUN_004c8340(int param_1,unsigned int param_2,unsigned int param_3,
   temp_v9 = 0;
   temp_v12 = temp_v1;
   if (-1 < param_1) {
-    FUN_003f0e20(temp_v1,param_1);
+    btlMainFindEntryByListedId(temp_v1,param_1);
     temp_v9 = temp_v1;
   }
   temp_v1 = temp_v12;
-  FUN_003f0e20(temp_v12,param_2);
+  btlMainFindEntryByListedId(temp_v12,param_2);
   if (param_3 == 6 || param_3 == 7) {
     temp_v2 = (int)btlGetMainState();
-    FUN_003f0e20(temp_v2,param_2);
+    btlMainFindEntryByListedId(temp_v2,param_2);
     temp_v3 = 0;
     if (temp_v2 != 0) {
       temp_v3 = *(int *)(temp_v2 + 0xcc);
@@ -84,7 +84,7 @@ unsigned int FUN_004c8340(int param_1,unsigned int param_2,unsigned int param_3,
       temp_v6 = 0x10000;
     }
     temp_v2 = (int)btlGetMainState();
-    FUN_003f0e20(temp_v2,param_2);
+    btlMainFindEntryByListedId(temp_v2,param_2);
     temp_v3 = 0;
     if (temp_v2 != 0) {
       temp_v3 = *(int *)(temp_v2 + 200);
@@ -97,7 +97,7 @@ unsigned int FUN_004c8340(int param_1,unsigned int param_2,unsigned int param_3,
     if (param_4 != 0) {
       if ((param_4 == 1) && ((-1 >= param_5 || (param_5 != 0x14)))) {
         temp_v2 = (int)btlGetMainState();
-        FUN_003f0e20(temp_v2,param_2);
+        btlMainFindEntryByListedId(temp_v2,param_2);
         temp_v3 = 0;
         if (temp_v2 != 0) {
           temp_v3 = *(int *)(temp_v2 + 200);
@@ -109,7 +109,7 @@ unsigned int FUN_004c8340(int param_1,unsigned int param_2,unsigned int param_3,
     }
     else {
       temp_v3 = (int)btlGetMainState();
-      FUN_003f0e20(temp_v3,param_2);
+      btlMainFindEntryByListedId(temp_v3,param_2);
       if ((temp_v3 != 0) && (*(int *)(temp_v3 + 0xc4) >= 1)) {
         temp_v6 = temp_v6 | 0x20000;
       }
@@ -139,7 +139,7 @@ unsigned int FUN_004c8340(int param_1,unsigned int param_2,unsigned int param_3,
     temp_v8 = 0;
     temp_v13[0] = param_3;
     temp_v4 = (unsigned int)btlGetMainState();
-    FUN_003f0e20(temp_v4,param_2);
+    btlMainFindEntryByListedId(temp_v4,param_2);
     temp_v10[0] = 0;
     temp_v10[1] = 0;
     temp_v10[2] = 0;
@@ -176,7 +176,7 @@ unsigned int FUN_004c8340(int param_1,unsigned int param_2,unsigned int param_3,
   }
   if ((temp_v6 & 0x800000) != 0) {
     temp_v2 = (int)btlGetMainState();
-    FUN_003f0e20(temp_v2,param_2);
+    btlMainFindEntryByListedId(temp_v2,param_2);
     temp_v3 = 0;
     if (temp_v2 != 0) {
       temp_v3 = *(int *)(temp_v2 + 0x118);

@@ -30,7 +30,7 @@ extern "C" {
 extern RenderCtxA *g_renderCtx;
 extern u64 DAT_0057a9b0; /* battle state flags that hide the panel's frame */
 
-void FUN_001634b4(TitleDrawElement *element, f32 offset);
+void effectRenderTransformedInstance(TitleDrawElement *element, f32 offset);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *element);
 void FUN_003b21a4(ResultPanel *panel);
@@ -49,7 +49,7 @@ void FUN_003217d0(ResultPanel *panel)
     s32 frame = (s32)renderCtxCalculateStereoParallax(g_renderCtx, RESULT_PANEL_STEREO_SCALE);
     BtlMainStateA *battle = btlGetMainState();
     if ((battle->stateFlags64.bits & DAT_0057a9b0) == 0)
-        FUN_001634b4(&panel->elements[5], (f32)frame);
+        effectRenderTransformedInstance(&panel->elements[5], (f32)frame);
 
     frame = (s32)renderCtxCalculateStereoParallax(g_renderCtx, RESULT_PANEL_STEREO_SCALE);
     if (flags->drawGlow != 0) {
@@ -69,14 +69,14 @@ void FUN_003217d0(ResultPanel *panel)
         }
     }
     if (flags->drawLayers != 0) {
-        FUN_001634b4(&panel->elements[0], (f32)frame);
-        FUN_001634b4(&panel->elements[3], (f32)frame);
+        effectRenderTransformedInstance(&panel->elements[0], (f32)frame);
+        effectRenderTransformedInstance(&panel->elements[3], (f32)frame);
         RenderCtxA *context = g_renderCtx;
         renderCtxSetB(context, packNibblesAndByte(6, 1, 0));
-        FUN_001634b4(&panel->elements[2], (f32)frame);
+        effectRenderTransformedInstance(&panel->elements[2], (f32)frame);
         context = g_renderCtx;
         renderCtxSetB(context, packNibblesAndByte(6, 7, 0));
-        FUN_001634b4(&panel->elements[1], (f32)frame);
+        effectRenderTransformedInstance(&panel->elements[1], (f32)frame);
     }
 }
 

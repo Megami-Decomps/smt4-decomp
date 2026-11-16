@@ -11,7 +11,7 @@ s32 partyEntryFlagsBit3(u16 id);
 s32 goalConditionsSatisfied(u16 id);
 s32 FUN_001ba3d4(u32 index);
 s32 FUN_003df390(u16 id);
-UnlockLevelRequirementView *FUN_001ad9b4(u16 id);
+UnlockLevelRequirementView *dataTable1bOr1cGetRecord(u16 id);
 PlayerData *gameGetPlayerData(void);
 
 s32 textureEntryMeetsUnlockRequirements(u32 index)
@@ -42,7 +42,7 @@ s32 textureEntryMeetsUnlockRequirements(u32 index)
     }
     if (FUN_003df390(entry->id) == 0)
         return 0;
-    UnlockLevelRequirementView *requirement = FUN_001ad9b4(entry->id);
+    UnlockLevelRequirementView *requirement = dataTable1bOr1cGetRecord(entry->id);
     if (requirement == NULL)
         return 0;
     u16 playerLevel = gameGetPlayerData()->unk62;

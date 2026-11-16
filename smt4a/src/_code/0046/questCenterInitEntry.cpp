@@ -51,7 +51,7 @@ void dataTable28Load(u8* state);
 void placeWinCreate();
 void messageSetMode(s32 mode);
 void qcMainSetMode(s32 mode);
-QuestDefinitionPrefix* FUN_001ad9b4(u16 id);
+QuestDefinitionPrefix* dataTable1bOr1cGetRecord(u16 id);
 s32 gameFlagEntryGetBit(u32 id, u32 bit);
 void FUN_00417e08(u32 id);
 void rt_memclr(void* data, u32 size);
@@ -84,7 +84,7 @@ void questCenterInitEntry(void* context)
     qcMainSetMode(0);
     u16 id = 0x15e;
     do {
-        const QuestDefinitionPrefix* record = FUN_001ad9b4(id);
+        const QuestDefinitionPrefix* record = dataTable1bOr1cGetRecord(id);
         if (record && !record->state && !gameFlagEntryGetBit(id, 1)) {
             FUN_00417e08(id);
         }

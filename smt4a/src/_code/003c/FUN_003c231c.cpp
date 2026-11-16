@@ -7,7 +7,7 @@
 extern "C" {
 u32 scrGetArg(u32);
 u32 btlUnitGet(u32);
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *, u32);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *, u32);
 void FUN_004fc094(s32, u32, s32, BattleRosterRecordA *, s32, u32, s32, s32,
                  s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32,
                  s32, s32, s32, s32, s32, s32);
@@ -19,7 +19,7 @@ extern "C" u32 FUN_003c231c(void)
     u32 targetId = scrGetArg(0);
     u32 amount = scrGetArg(1);
     u32 unit = btlUnitGet(g_btlScriptUnit);
-    BtlCombatantEntryA *target = FUN_003f0e20(btlGetMainState(), targetId);
+    BtlCombatantEntryA *target = btlMainFindEntryByListedId(btlGetMainState(), targetId);
     FUN_003ee0c0(btlGetMainState());
     BattleRosterRecordA *roster = &btlGetMainState()->roster[target->unitIndex];
     FUN_004fc094(0, unit, 0, roster, 0, amount, -1, -1, target->hp, target->maxHp,

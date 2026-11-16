@@ -4,7 +4,7 @@
 extern "C" {
 
 AsdMdlObject *asdMdlObjectNew(void);
-void FUN_0021230c(AsdMdlNode *node, AsdMdlNode *src, u32 arg);
+void asdMdlNodeCopyData(AsdMdlNode *node, AsdMdlNode *src, u32 arg);
 void asdListAdd(u32 *list, AsdMdlObject *obj, s32 arg);
 
 extern u32 g_asdMdlList;
@@ -15,7 +15,7 @@ AsdMdlObject *asdMdlManagerClone(AsdMdlObject *src, u32 arg)
     AsdMdlObject *obj = asdMdlObjectNew();
 
     obj->node->param = src->node->param;
-    FUN_0021230c(obj->node, src->node, arg);
+    asdMdlNodeCopyData(obj->node, src->node, arg);
     asdListAdd(&g_asdMdlList, obj, 0);
     return obj;
 }

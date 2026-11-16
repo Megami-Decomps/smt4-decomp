@@ -1,6 +1,6 @@
 #include "gfx/StexLoad.h"
 extern "C" {
-StexHeader *FUN_001ba204(StexHeader *data, u32 mode, u32 alignment);
+StexHeader *aocTexExpandCompressedData(StexHeader *data, u32 mode, u32 alignment);
 s32 rt_memcmp(const void *left, const void *right, u32 size);
 AsdTexture *asdTextureCreate(s32 shared);
 void asdTextureSelectHeap(TextureHeapEntry *entry, u32 heap);
@@ -16,7 +16,7 @@ void texTableEntryAttachStex(TextureHeapEntry ***reference, const StexLoadPacket
         u32 mode = 1;
         if (entry->flags & 0x10000)
             mode = 3;
-        header = FUN_001ba204(header, mode, 0x80);
+        header = aocTexExpandCompressedData(header, mode, 0x80);
     }
     if (rt_memcmp(header, "STEX", 4) != 0)
         return;

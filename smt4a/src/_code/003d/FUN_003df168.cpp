@@ -63,7 +63,7 @@ extern AocDropSource *g_aocSystem;
 s32 randRange(u16 maximum);
 u32 gameGetUnlockedCountLimit(void);
 u32 FUN_004ccbf0(u32 level);
-EncounterRecord *FUN_001ad9b4(s32 index);
+EncounterRecord *dataTable1bOr1cGetRecord(s32 index);
 
 // The drop table entry `id`: from the add-on content when it provides one, else from the base game's table.
 static __inline DropEntry *findDropEntry(u16 id)
@@ -85,7 +85,7 @@ static __inline DropEntry *findDropEntry(u16 id)
 // Rolls the reward of encounter `index` into `result`.
 void FUN_003df168(RewardResult *result, s32 index)
 {
-    EncounterRecord *encounter = FUN_001ad9b4(index);
+    EncounterRecord *encounter = dataTable1bOr1cGetRecord(index);
     if (encounter == NULL) {
         return;
     }

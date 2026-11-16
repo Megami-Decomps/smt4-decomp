@@ -15,7 +15,7 @@ typedef struct Record {
     /* 0x6 */ u16 order;
 } Record;
 
-extern Record *FUN_00184310(u32 id);
+extern Record *devilGetRecord(u32 id);
 
 /* Sort comparison of two items: ungrouped ones last, otherwise by order (higher first), rank ascending and id ascending. */
 s32 itemSortCompare(Item *a, Item *b)
@@ -33,8 +33,8 @@ s32 itemSortCompare(Item *a, Item *b)
     if (b->group == 0) {
         return -1;
     }
-    recordA = FUN_00184310(a->id);
-    recordB = FUN_00184310(b->id);
+    recordA = devilGetRecord(a->id);
+    recordB = devilGetRecord(b->id);
     diff = recordB->order - recordA->order;
     if (diff == 0) {
         diff = recordA->rank - recordB->rank;

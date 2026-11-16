@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001b24c0(void);
-int FUN_001b6668(unsigned int *, int);
+int nw_ut_internal_LinkListImpl_erase_2B743C(unsigned int *, int);
 int nw_snd_internal_FrameHeap_ClearSection(void);
 int nw_snd_internal_FrameHeap_NewSection(unsigned int *);
 int nw_ut_FrameHeap_Free(unsigned int, int);
@@ -20,7 +20,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_001b24c0. */
-/* Supplied declaration required: FUN_001b6668. */
+/* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2B743C. */
 /* Supplied declaration required: nw_snd_internal_FrameHeap_ClearSection. */
 /* Supplied declaration required: nw_snd_internal_FrameHeap_NewSection. */
 /* Supplied declaration required: nw_ut_FrameHeap_Free. */
@@ -62,7 +62,7 @@ void nw_snd_internal_FrameHeap_LoadState(unsigned int *param_1,int param_2)
       }
     }
     nw_ut_internal_LinkListImpl_erase_2AC900(temp_v1 + 8,*(unsigned int *)(temp_v1 + 0xc),temp_v1 + 0xc);
-    FUN_001b6668(param_1 + 1,temp_v1);
+    nw_ut_internal_LinkListImpl_erase_2B743C(param_1 + 1,temp_v1);
   }
   nw_ut_FrameHeap_FreeByState(*param_1,param_2);
   nw_ut_FrameHeap_RecordState(*param_1,param_1[1]);

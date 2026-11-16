@@ -8,7 +8,7 @@
 extern "C" {
 
 int FUN_001568f8(...);
-int FUN_003f0e20(int, int);
+int btlMainFindEntryByListedId(int, int);
 
 int btlAdjustPropertyClamped(int, int, int, int);
 int FUN_004fb43c(...);
@@ -30,7 +30,7 @@ typedef struct {
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001568f8. */
 extern int FUN_003eb1cc(void);
-/* Supplied declaration required: FUN_003f0e20. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlAdjustPropertyClamped. */
 /* Supplied declaration required: FUN_004fb43c. */
 /* Supplied declaration required: FUN_004fd0ec. */
@@ -58,7 +58,7 @@ FUN_004fb798(int param_1,unsigned int param_2,int param_3,int param_4,unsigned i
   temp_v1 = (short)param_1 + (short)param_10;
   if (-1 < param_10) {
     temp_v2 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003f0e20(temp_v2,(int)*(short *)(param_4 + 0x6a));
+    btlMainFindEntryByListedId(temp_v2,(int)*(short *)(param_4 + 0x6a));
     if (((temp_v0) && (temp_v2 != 0)) && (-1 < param_12)) {
       temp_v4 = reinterpret_cast<int>(btlQueueReflectAction(g_btlActionReflect,(int)temp_v1,0,param_2));
       *(unsigned char *)(temp_v4 + 4) = 7;

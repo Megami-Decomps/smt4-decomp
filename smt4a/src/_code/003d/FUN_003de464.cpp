@@ -21,14 +21,14 @@ typedef struct FlagEntry {
 } FlagEntry;
 
 FlagEntry *gameFlagBlockGetEntry(void);
-KindRecord *FUN_001ad9b4(u32 id);
+KindRecord *dataTable1bOr1cGetRecord(u32 id);
 
 /* The message id describing record `id`: by its kind, the id of its first slot and how many of
  * its four slots are used. Returns -1 when there is none. */
 s32 FUN_003de464(u32 id, u8 mask)
 {
     FlagEntry *entry = gameFlagBlockGetEntry();
-    KindRecord *record = FUN_001ad9b4(id);
+    KindRecord *record = dataTable1bOr1cGetRecord(id);
 
     if (record == NULL) {
         return -1;

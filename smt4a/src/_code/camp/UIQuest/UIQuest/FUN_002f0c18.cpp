@@ -17,7 +17,7 @@ int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
 int uiSpriteSetImageKeyframe(...);
 int pairSetHalves(...);
-int FUN_001ad9b4(...);
+int dataTable1bOr1cGetRecord(...);
 int FUN_001ff724(...);
 int asdLoadFileSyncDefault(...);
 int uiFadeSetVisible(...);
@@ -63,7 +63,7 @@ extern unsigned int *g_uiQuest; /* 0x57f28c */
 /* Supplied declaration required: pairSetHalves. */
 extern int gameFlagEntryGetBit(unsigned short, unsigned int);
 extern int gameFlagBlockGet(void);
-/* Supplied declaration required: FUN_001ad9b4. */
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
 /* Supplied declaration required: FUN_001ff724. */
 /* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: uiFadeSetVisible. */
@@ -120,7 +120,7 @@ void FUN_002f0c18(void)
   temp_v4 = 0x65;
   do {
     temp_v1 = temp_v4;
-    FUN_001ad9b4();
+    dataTable1bOr1cGetRecord();
     if (temp_v1 == 0) {
       temp_v2 = gameFlagBlockGet();
       pbVar6 = (unsigned char *)(temp_v2 + temp_v4 * 4 + 0x2a0);

@@ -13,7 +13,7 @@ int SBORROW4(...);
 int textFormatBuffer(...);
 int FUN_0015f858(...);
 int textDrawString(...);
-int FUN_001634b4(...);
+int effectRenderTransformedInstance(...);
 int FUN_00164168(...);
 int FUN_00164b5c(...);
 int vec2GetXInt(...);
@@ -22,7 +22,7 @@ int FUN_00180310(...);
 int asdTMTexTableEntryAt(...);
 int renderCtxCalculateStereoParallax(...);
 int gameFlagBlockGet(void);
-int FUN_001ad9b4(void);
+int dataTable1bOr1cGetRecord(void);
 int FUN_002c0940(...);
 int partyDrawCategorySelectionIcon(...);
 int VectorSignedToFloat(...);
@@ -55,7 +55,7 @@ extern unsigned int FUN_00156850(unsigned int, unsigned int);
 extern unsigned int FUN_00156868(unsigned int);
 /* Supplied declaration required: FUN_0015f858. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: FUN_001634b4. */
+/* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: FUN_00164168. */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: vec2GetXInt. */
@@ -71,7 +71,7 @@ extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 extern int idIsAtLeast350(unsigned int);
 /* Supplied declaration required: gameFlagBlockGet. */
-/* Supplied declaration required: FUN_001ad9b4. */
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
 extern short *dataTableGetEntry37(unsigned int);
 extern int resourceRunOperationIfUnblocked(int);
 extern int FUN_002a4894(int);
@@ -158,7 +158,7 @@ void FUN_00218640(void)
   temp_v19 = 0;
   temp_v25 = temp_v7;
   if (temp_v7 != 0) {
-    FUN_001ad9b4();
+    dataTable1bOr1cGetRecord();
     temp_v19 = temp_v7;
   }
   temp_v18 = (float)((unsigned long long)temp_v20 >> 0x20);
@@ -346,7 +346,7 @@ LAB_00218d20:
     return;
   }
   temp_v19 = temp_v25;
-  FUN_001ad9b4();
+  dataTable1bOr1cGetRecord();
   temp_v29 = temp_v19;
   if (*(char *)(temp_v30 + 0xc) != '\0') {
     temp_v9 = partyEntryFlagsBit3(temp_v25);
@@ -372,7 +372,7 @@ LAB_00218d20:
           }
           else {
             VectorSignedToFloat(temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_001634b4(temp_v3 + 0x264);
+            effectRenderTransformedInstance(temp_v3 + 0x264);
           }
         }
         else {

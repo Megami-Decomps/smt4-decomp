@@ -28,7 +28,7 @@ static __inline CallerA *activityCaller(CallerListLink *link)
 extern "C" {
 u32 FUN_0046588c(CallerA *caller);
 void callerARelease78(CallerA *caller);
-void FUN_001b6668(CallerActivityList *list, CallerListLink *link);
+void nw_ut_internal_LinkListImpl_erase_2B743C(CallerActivityList *list, CallerListLink *link);
 void nw_ut_internal_LinkListImpl_insert(CallerActivityList *list,
                                        CallerListLink *position, CallerListLink *link);
 
@@ -41,7 +41,7 @@ void FUN_0051d5f4(CallerActivityOwner *owner)
         cursor = cursor->next;
         if (FUN_0046588c(activityCaller(current)) == 0) {
             callerARelease78(activityCaller(current));
-            FUN_001b6668(&owner->active, current);
+            nw_ut_internal_LinkListImpl_erase_2B743C(&owner->active, current);
             nw_ut_internal_LinkListImpl_insert(&owner->idle, &owner->idle.end, current);
         }
     }

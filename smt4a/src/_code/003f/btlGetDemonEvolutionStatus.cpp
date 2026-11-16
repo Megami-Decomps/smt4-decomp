@@ -7,7 +7,7 @@ struct DemonEvolutionData {
 };
 
 extern "C" {
-const DemonEvolutionData* FUN_00184310(u16 id);
+const DemonEvolutionData* devilGetRecord(u16 id);
 u32 gameStockContainsEntry(u32 id);
 
 static __inline u8 demonEvolutionStatus(const UnitRecord *unit, const DemonEvolutionData *evolution)
@@ -22,6 +22,6 @@ static __inline u8 demonEvolutionStatus(const UnitRecord *unit, const DemonEvolu
 // Report evolution availability, excluding a target already present in the party.
 u8 btlGetDemonEvolutionStatus(const UnitRecord *unit)
 {
-    return demonEvolutionStatus(unit, FUN_00184310(unit->id));
+    return demonEvolutionStatus(unit, devilGetRecord(unit->id));
 }
 }

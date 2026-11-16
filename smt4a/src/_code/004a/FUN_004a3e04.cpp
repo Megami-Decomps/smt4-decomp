@@ -15,7 +15,7 @@ struct SpriteOffset {
 
 extern "C" {
 s32 rangeGetMinimumLimit(void *list);
-StatRecord *FUN_00184310(u32 id);
+StatRecord *devilGetRecord(u32 id);
 SpriteOffset *layoutFindTableEntry(void *sprites, s32 index);
 u32 FUN_004a8750(u32 id, u32 kind, bool flag, bool high, u32 extra);
 int textFormatBuffer(char *buffer, const char *format, u32 value);
@@ -53,7 +53,7 @@ static u32 statGetValue(const StatEntry *entry, bool compare, u32 kind)
     u32 value = 0;
     if (!compare) {
         if (kind == 0) {
-            StatRecord *record = FUN_00184310((u16)entry->id);
+            StatRecord *record = devilGetRecord((u16)entry->id);
             if (record != 0)
                 value = record->value;
         } else if (kind == 1) {

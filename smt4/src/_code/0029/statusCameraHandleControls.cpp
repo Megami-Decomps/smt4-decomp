@@ -8,7 +8,7 @@ struct StatusCameraControls {
 };
 
 extern "C" {
-s32 FUN_002c15fc(u32 input);
+s32 slotIsActive(u32 input);
 void FUN_00254650(StatusCameraControls *controls, u32 action);
 s32 padIsButtonPressed(u32 button);
 void statusCameraApply();
@@ -20,13 +20,13 @@ extern "C" void statusCameraHandleControls(StatusCameraControls *controls)
 {
     if (controls == NULL)
         return;
-    if (FUN_002c15fc(14))
+    if (slotIsActive(14))
         FUN_00254650(controls, 0);
-    if (FUN_002c15fc(15))
+    if (slotIsActive(15))
         FUN_00254650(controls, 1);
-    if (FUN_002c15fc(13))
+    if (slotIsActive(13))
         FUN_00254650(controls, 3);
-    if (FUN_002c15fc(12))
+    if (slotIsActive(12))
         FUN_00254650(controls, 2);
     if (padIsButtonPressed(2)) {
         ++controls->mode;

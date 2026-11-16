@@ -119,7 +119,7 @@ void *asdOperatorNew(u32 size, ...);
 extern "C" {
 #endif
 
-u32 FUN_002c2424(u32 first, u32 second);
+u32 nn_gxlow_CTR_FlushDataCacheForward(u32 first, u32 second);
 
 #ifdef __cplusplus
 }

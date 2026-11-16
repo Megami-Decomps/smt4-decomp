@@ -39,7 +39,7 @@ typedef struct {
 extern unsigned int g_asdCecMessageBoxCriticalSection; /* 0x4e62a8 */
 
 extern unsigned int FUN_002393a4(unsigned int *, unsigned int *);
-extern int *FUN_002399bc(unsigned int, unsigned int);
+extern int *handlerRefForward(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002399ec. */
 /* Supplied declaration required: _ZN12CecMessageIdC1Ev. */
 /* Supplied declaration required: FUN_002ad66c. */
@@ -248,7 +248,7 @@ int * FUN_00357a38(int *param_1,int param_2,int param_3,unsigned int param_4,int
   else if (!temp_v8) {
     temp_v15 = 1;
   }
-  temp_v20 = (int *)FUN_002399bc(*(unsigned int *)(param_2 + 4),4);
+  temp_v20 = (int *)handlerRefForward(*(unsigned int *)(param_2 + 4),4);
   if (temp_v20 == (int *)0x0) {
     nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
     return (int *)0xc8610bf3;

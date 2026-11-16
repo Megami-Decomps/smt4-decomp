@@ -3,7 +3,7 @@
 extern "C" {
 
 void FUN_002bdb44(void);
-void FUN_002c3530(s32 a, s32 b);
+void renderTargetClear(s32 a, s32 b);
 void FUN_002c35b0(s32 arg);
 void renderCtxSelectStereoLayout(TitleScene *scene);
 void FUN_002c3a14(TitleScene *scene);
@@ -24,7 +24,7 @@ u32 renderCtxBeginPass(void)
         scene = g_titleScene;
         scene->stereoMode = 1;
         FUN_002bdb44();
-        FUN_002c3530(1, 0);
+        renderTargetClear(1, 0);
         FUN_002c3a14(g_titleScene);
         renderCtxSelectStereoLayout(g_titleScene);
     }

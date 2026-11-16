@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001a5db8(...);
-int FUN_001aa14c(void);
+int nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_Dequeue(void);
 
 typedef struct fn_0019102c_arg0 fn_0019102c_arg0;
 struct fn_0019102c_arg0 {
@@ -30,7 +30,7 @@ typedef struct {
 
 extern int FUN_001911a4(fn_0019102c_arg0 *, unsigned int);
 /* Supplied declaration required: FUN_001a5db8. */
-/* Supplied declaration required: FUN_001aa14c. */
+/* Supplied declaration required: nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_Dequeue. */
 extern int nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_TryDequeue(void **, int **);
 
 
@@ -81,7 +81,7 @@ joined_r0x001910b4:
           temp_v0 = FUN_001911a4(param_1,1);
           do {
             ppvVar3 = &param_1->field_0xb4;
-            FUN_001aa14c();
+            nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_Dequeue();
             param_1->field_0x178 = (int)ppvVar3[2];
             ppvVar8 = ppvVar3;
             if (ppvVar3 != (void **)0x0) {

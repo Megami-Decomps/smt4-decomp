@@ -19,7 +19,7 @@ void FUN_002e5924(s32 a);
 void *FUN_004186e0(void);
 s32 FUN_001bd118(void);
 void qcMainSetMode(s32 mode);
-QuestRecord *FUN_001ad9b4(void *source);
+QuestRecord *dataTable1bOr1cGetRecord(void *source);
 void FUN_00270c58(u16 id);
 void campButtonHelpRelease(void);
 
@@ -53,7 +53,7 @@ void FUN_00469d38(StepWork *work)
         source = FUN_004186e0();
         if (source != NULL && FUN_001bd118() == 6) {
             qcMainSetMode(1);
-            FUN_00270c58(FUN_001ad9b4(source)->id);
+            FUN_00270c58(dataTable1bOr1cGetRecord(source)->id);
             campButtonHelpRelease();
         }
         break;

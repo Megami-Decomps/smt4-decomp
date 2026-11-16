@@ -72,13 +72,13 @@ void FUN_001ff724(void)
     for (u16 id = 0; id < 400; id++) {
         if (id < 0x15E && gameFlagEntryGetBit(id, 0) == 0)
             continue;
-        if (id < 0x15E || FUN_001ad9b4(id) != NULL) {
+        if (id < 0x15E || dataTable1bOr1cGetRecord(id) != NULL) {
             if (FUN_001bd100(id) != 0) {
                 menu->primaryList[primaryCount++] = id;
             } else {
                 bool include = true;
                 if (menu->filtered != 0) {
-                    ItemDataRecord *quest = FUN_001ad9b4(id);
+                    ItemDataRecord *quest = dataTable1bOr1cGetRecord(id);
                     if (quest == NULL || quest->ordering.sortGroup != 0)
                         continue;
                     if (questRequirementBlocks(id))
@@ -124,7 +124,7 @@ void FUN_001ff724(void)
     }
     for (s32 i = 0; i < alternateCount; i++) {
         if (partyEntryFlagsBit1(menu->alternateList[i]) != 0) {
-            ItemDataRecord *quest = FUN_001ad9b4(menu->alternateList[i]);
+            ItemDataRecord *quest = dataTable1bOr1cGetRecord(menu->alternateList[i]);
             if (quest != NULL && quest->ordering.sortGroup != 0 && quest->ordering.sortGroup != 10) {
                 FUN_002a4964(&menu->alternateCursor, i);
                 break;

@@ -2,7 +2,7 @@
 #include "battle/btlMain.h"
 
 extern "C" {
-void *FUN_003f0e20(BtlMainStateA *, s32);
+void *btlMainFindEntryByListedId(BtlMainStateA *, s32);
 s32 gameFlagIsSet(u32);
 
 u8 FUN_004e5f2c(BtlMainStateA **owner, void *values, s32 index, s32 change)
@@ -31,7 +31,7 @@ u8 FUN_004e5f2c(BtlMainStateA **owner, void *values, s32 index, s32 change)
         return 0;
     s32 *slotValue = &static_cast<ValueSlotsView *>(values)->words[index * 4 + 0x279];
     s32 value = *slotValue + change;
-    MinimumValueEntryView *entry = static_cast<MinimumValueEntryView *>(FUN_003f0e20(state, index));
+    MinimumValueEntryView *entry = static_cast<MinimumValueEntryView *>(btlMainFindEntryByListedId(state, index));
     if (entry != NULL && entry->minimumPercent > 0) {
         s32 minimum = (entry->maximum * entry->minimumPercent) / 100;
         if (minimum <= 0)

@@ -6995,3 +6995,45 @@
 00188688 fsGetUserMountHandle inferred [med] Twin of smt4 FUN_002bbaf8 (same source and flags).
 0057a650 g_btlPaletteColors inferred Same palette table read by FUN_003f2280, twin of smt4 FUN_00244fb0.
 0032cef8 renderStatePush inferred [high] Same source as smt4 renderStatePush (push on draw-context stack B).
+00158dc0 nn_os_SimpleLock_TryLock inferred Twin of smt4 nn_os_SimpleLock_TryLock: same-named callers reference them at the same place (1 callers).
+001634b4 effectRenderTransformedInstance inferred Twin of smt4 effectRenderTransformedInstance: same-named callers reference them at the same place (1 callers).
+0016e8c4 dateConvertDaysToCalendar inferred Twin of smt4 dateConvertDaysToCalendar: same-named callers reference them at the same place (3 callers).
+0016f988 asdModelForwardChecked inferred Twin of smt4 asdModelForwardChecked: same-named callers reference them at the same place (2 callers).
+00170d8c nn_applet_CTR_detail_CallUtility inferred Twin of smt4 nn_applet_CTR_detail_CallUtility: same-named callers reference them at the same place (3 callers).
+00180280 texTableRecordCall inferred Twin of smt4 texTableRecordCall: same-named callers reference them at the same place (1 callers).
+00184310 devilGetRecord inferred Twin of smt4 devilGetRecord: same-named callers reference them at the same place (2 callers).
+0018a45c soundBlockGetPayloadEnd inferred Twin of smt4 soundBlockGetPayloadEnd: same-named callers reference them at the same place (1 callers).
+0018c87c nw_ut_internal_LinkListImpl_erase_2BAE30 inferred Twin of smt4 nw_ut_internal_LinkListImpl_erase_2BAE30: same-named callers reference them at the same place (1 callers).
+001927c0 slotOwnerDestroyAllSlots inferred Twin of smt4 slotOwnerDestroyAllSlots: same-named callers reference them at the same place (1 callers).
+0019dc44 recordTableGet inferred Twin of smt4 recordTableGet: same-named callers reference them at the same place (1 callers).
+001a0050 nn_fs_CTR_MPCore_detail_UserFileSystem_TryGetFileSize inferred Twin of smt4 nn_fs_CTR_MPCore_detail_UserFileSystem_TryGetFileSize: same-named callers reference them at the same place (3 callers).
+001a0af4 nn_os_AddressSpaceManager_Allocate inferred Twin of smt4 nn_os_AddressSpaceManager_Allocate: same-named callers reference them at the same place (2 callers).
+001a1564 nn_fnd_DateTime_DateToDays inferred Twin of smt4 nn_fnd_DateTime_DateToDays: same-named callers reference them at the same place (3 callers).
+001a6c40 _ZN9Obj422224C1Ev inferred Twin of smt4 _ZN9Obj422224C1Ev: same-named callers reference them at the same place (2 callers).
+001aa14c nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_Dequeue inferred Twin of smt4 nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_Dequeue: same-named callers reference them at the same place (1 callers).
+001ab89c dataTable00CompareRecordIds inferred Twin of smt4 dataTable00CompareRecordIds: same-named callers reference them at the same place (1 callers).
+001ad9b4 dataTable1bOr1cGetRecord inferred Twin of smt4 dataTable1bOr1cGetRecord: same-named callers reference them at the same place (3 callers).
+001b6668 nw_ut_internal_LinkListImpl_erase_2B743C inferred Twin of smt4 nw_ut_internal_LinkListImpl_erase_2B743C: same-named callers reference them at the same place (1 callers).
+001ba204 aocTexExpandCompressedData inferred Twin of smt4 aocTexExpandCompressedData: same-named callers reference them at the same place (1 callers).
+001bad18 nw_gfx_SceneBuilder_CreateObjectByResourceType inferred Twin of smt4 nw_gfx_SceneBuilder_CreateObjectByResourceType: same-named callers reference them at the same place (2 callers).
+001c5be4 titleContentStreamCreate inferred Twin of smt4 titleContentStreamCreate: same-named callers reference them at the same place (1 callers).
+001d3de0 matrixScaleColumnsAlt inferred Twin of smt4 matrixScaleColumnsAlt: same-named callers reference them at the same place (2 callers).
+0021230c asdMdlNodeCopyData inferred Twin of smt4 asdMdlNodeCopyData: same-named callers reference them at the same place (1 callers).
+00271be0 effMiscCreate inferred Twin of smt4 effMiscCreate: same-named callers reference them at the same place (1 callers).
+00280c70 sceneNodeCollectionRegisterGroup inferred Twin of smt4 sceneNodeCollectionRegisterGroup: same-named callers reference them at the same place (1 callers).
+00282b9c dataTable12FindBySortKey inferred Twin of smt4 dataTable12FindBySortKey: same-named callers reference them at the same place (2 callers).
+002914e8 screenEffectProjectWorldRadius inferred Twin of smt4 screenEffectProjectWorldRadius: same-named callers reference them at the same place (1 callers).
+0031cfd0 saveIsRecordValueBounded inferred Twin of smt4 saveIsRecordValueBounded: same-named callers reference them at the same place (1 callers).
+0031f0f4 gameRecordSetValueClamped inferred Twin of smt4 gameRecordSetValueClamped: same-named callers reference them at the same place (1 callers).
+0032cc8c asd3dSoundActorSetPosition inferred Twin of smt4 asd3dSoundActorSetPosition: same-named callers reference them at the same place (1 callers).
+0037a7d8 cecOutboxPost inferred Twin of smt4 cecOutboxPost: same-named callers reference them at the same place (1 callers).
+003f0e20 btlMainFindEntryByListedId inferred Twin of smt4 btlMainFindEntryByListedId: same-named callers reference them at the same place (3 callers).
+003f3e64 slotPlacementGetPosition inferred Twin of smt4 slotPlacementGetPosition: same-named callers reference them at the same place (2 callers).
+00431e8c nn_fnd_detail_DestroyHeap inferred Twin of smt4 nn_fnd_detail_DestroyHeap: same-named callers reference them at the same place (1 callers).
+00456624 nw_gfx_Material_DestroyResFragmentShader inferred Twin of smt4 nw_gfx_Material_DestroyResFragmentShader: same-named callers reference them at the same place (1 callers).
+00466f98 soundRequestPostType30 inferred Twin of smt4 soundRequestPostType30: same-named callers reference them at the same place (1 callers).
+00467040 _ZN9Obj421f54C1Ev inferred Twin of smt4 _ZN9Obj421f54C1Ev: same-named callers reference them at the same place (1 callers).
+00467840 thresholdDispatchOutsideRange inferred Twin of smt4 thresholdDispatchOutsideRange: same-named callers reference them at the same place (1 callers).
+00477d10 aocMenuSetButtonHelp inferred Twin of smt4 aocMenuSetButtonHelp: same-named callers reference them at the same place (1 callers).
+004d8d40 btlStageUpdate inferred Twin of smt4 btlStageUpdate: same-named callers reference them at the same place (1 callers).
+00501b90 nn_cec_CTR_MessageBox_ReadMessageBoxInfo inferred Twin of smt4 nn_cec_CTR_MessageBox_ReadMessageBoxInfo: same-named callers reference them at the same place (1 callers).

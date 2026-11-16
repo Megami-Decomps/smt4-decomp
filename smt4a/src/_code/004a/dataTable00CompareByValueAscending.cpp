@@ -13,7 +13,7 @@ typedef struct DevilRecord {
 } DevilRecord;
 
 extern TableRecord *dataTable00FindById(u16 id);
-extern DevilRecord *FUN_00184310(u16 id);
+extern DevilRecord *devilGetRecord(u16 id);
 
 /* qsort-style comparison of two ids by the table record value, then devil grade, then id. */
 s32 dataTable00CompareByValueAscending(u16 *a, u16 *b)
@@ -23,8 +23,8 @@ s32 dataTable00CompareByValueAscending(u16 *a, u16 *b)
     s32 result = recordA->value - recordB->value;
 
     if (result == 0) {
-        DevilRecord *devilA = FUN_00184310(*a);
-        DevilRecord *devilB = FUN_00184310(*b);
+        DevilRecord *devilA = devilGetRecord(*a);
+        DevilRecord *devilB = devilGetRecord(*b);
 
         result = devilB->grade - devilA->grade;
         if (result == 0) {

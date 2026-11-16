@@ -42,7 +42,7 @@ SlotRecordId *gameGetSlotRecord(s32 slot);
 s32 recordContainsPairedId(const void *record, u32 id);
 s32 loadSlotIsLoaded(u32 index);
 u8 *FUN_00275bc8(void *first, void *second);
-DevilBase *FUN_00184310(u16 id);
+DevilBase *devilGetRecord(u16 id);
 s32 FUN_003316b4(s8 variant);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void *asdLoadFileSyncDefault(const char *path);
@@ -98,7 +98,7 @@ void FUN_004cbb38(TalkScene *scene)
     SavedPair *pair = FUN_002613f0(scene->pairIndex);
     SlotRecordId *record = gameGetSlotRecord(scene->slot);
     char path[64];
-    textFormatBuffer(path, DAT_0052c7c0, FUN_003316b4(FUN_00184310(record->id)->variant) + 1);
+    textFormatBuffer(path, DAT_0052c7c0, FUN_003316b4(devilGetRecord(record->id)->variant) + 1);
     scene->portraitFile = asdLoadFileSyncDefault(path);
     scene->portrait = FUN_00275bc8(scene->portraitData, scene->portraitFile);
     btlTalkBustUpCreate();

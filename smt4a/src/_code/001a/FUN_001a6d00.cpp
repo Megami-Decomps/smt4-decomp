@@ -8,7 +8,7 @@ int libc_strcat(...);
 int asdMemFree(int);
 int asdTextureCreate(void);
 int FUN_001b2ebc(int, unsigned char [128], unsigned char [128], int *, unsigned int, int, unsigned int);
-int FUN_001ba204(int, unsigned int, int);
+int aocTexExpandCompressedData(int, unsigned int, int);
 int libc_strcpy(...);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
@@ -26,7 +26,7 @@ extern int g_aocDisplay; /* 0x57027c */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdTextureCreate. */
 /* Supplied declaration required: FUN_001b2ebc. */
-/* Supplied declaration required: FUN_001ba204. */
+/* Supplied declaration required: aocTexExpandCompressedData. */
 extern int libc_strlen(unsigned int);
 /* Supplied declaration required: libc_strcpy. */
 extern int rt_memcmp(int, unsigned char *, unsigned int);
@@ -84,7 +84,7 @@ unsigned int FUN_001a6d00(unsigned int param_1,int *param_2,unsigned int param_3
       FUN_001b2ebc(g_aocDisplay,temp_v6,temp_v5,&temp_v4,temp_v0,0x80,param_3);
       if (temp_v2 != 0) {
         if (*(char *)(param_2[1] + 0xd) != '\0') {
-          FUN_001ba204(temp_v2,temp_v3,0x80);
+          aocTexExpandCompressedData(temp_v2,temp_v3,0x80);
         }
         temp_v1 = rt_memcmp(temp_v2,&LAB_001a6f58,4);
         if (temp_v1 == 0) {

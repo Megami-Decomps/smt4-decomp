@@ -8,7 +8,7 @@
 extern "C" {
 
 int FUN_00169a1c(...);
-int FUN_00184310(void);
+int devilGetRecord(void);
 
 int textFormatBuffer(...);
 int FUN_001527d8(...);
@@ -59,7 +59,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_00184310. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern unsigned int FUN_0019acdc(short, unsigned int);
@@ -336,7 +336,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
             FUN_001835b4(2,0x2e,0x11d,param_4,param_5,0x74);
           }
           temp_v10 = temp_v10 & 0xffff;
-          FUN_00184310();
+          devilGetRecord();
           temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x106));
           FUN_00169a1c(*(unsigned short *)(temp_v10 + 0x9c),*(short *)(temp_v5 + 8) + param_4,
                        *(short *)(temp_v5 + 10) + param_5,0x74);

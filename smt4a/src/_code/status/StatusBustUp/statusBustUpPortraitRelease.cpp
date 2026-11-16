@@ -19,7 +19,7 @@ void statusBustUpPortraitRelease(s32 id, s32 resolveRecord)
         if (id < 0) {
             id = gameFlagIsSet(17) ? 0 : 606;
         } else {
-            DevilTableRecordA *record = (DevilTableRecordA *)FUN_00184310((u16)id);
+            DevilTableRecordA *record = (DevilTableRecordA *)devilGetRecord((u16)id);
             if (record == NULL)
                 return;
             // The alternate portrait metadata extends the shared table-zero view.

@@ -16,8 +16,8 @@ int FUN_0035fe34(const DevilStock *a, const DevilStock *b)
     if (b->count == 0) {
         return -1;
     }
-    const DevilRecordA *devilA = FUN_00184310(a->id);
-    const DevilRecordA *devilB = FUN_00184310(b->id);
+    const DevilRecordA *devilA = devilGetRecord(a->id);
+    const DevilRecordA *devilB = devilGetRecord(b->id);
     result = devilB->race - devilA->race;
     if (result == 0) {
         result = devilA->level - devilB->level;

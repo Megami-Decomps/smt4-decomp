@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c2424(unsigned int, int);
+int nn_gxlow_CTR_FlushDataCacheForward(unsigned int, int);
 int FUN_003deae0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int, unsigned char *, unsigned int, unsigned int);
 
 /* stack frame of param_5: 4 slot(s), 16 byte(s) */
@@ -16,7 +16,7 @@ typedef struct {
 } param_5_stack;
 
 extern unsigned int osVirtToPhysAddress(unsigned int);
-/* Supplied declaration required: FUN_002c2424. */
+/* Supplied declaration required: nn_gxlow_CTR_FlushDataCacheForward. */
 /* Supplied declaration required: FUN_003deae0. */
 
 
@@ -75,8 +75,8 @@ void FUN_0035708c(int param_1,unsigned char *param_2,unsigned int param_3,unsign
       psVar17 = psVar17 + 6;
     } while (temp_v6 != 0);
   }
-  FUN_002c2424(*(unsigned int *)(param_1 + 8),*(int *)(param_1 + 4) * 0x90);
-  FUN_002c2424(*(unsigned int *)(param_1 + 0xc),*(int *)(param_1 + 4) * 0xc);
+  nn_gxlow_CTR_FlushDataCacheForward(*(unsigned int *)(param_1 + 8),*(int *)(param_1 + 4) * 0x90);
+  nn_gxlow_CTR_FlushDataCacheForward(*(unsigned int *)(param_1 + 0xc),*(int *)(param_1 + 4) * 0xc);
   temp_v4 = osVirtToPhysAddress(*(unsigned int *)(param_1 + 0xc));
   *(unsigned int *)(param_1 + 0x7a0) = temp_v4;
   *(unsigned char *)(param_1 + 0x7a8) = 0;

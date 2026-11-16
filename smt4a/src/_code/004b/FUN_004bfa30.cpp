@@ -9,7 +9,7 @@
 extern "C" {
 extern const u8 DAT_005713f0[];
 Table8Record *dataTable8FindRecord(u32 id);
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, u32 subject);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, u32 subject);
 void FUN_003e8bb0(void *snapshot, BtlMainStateA *battle, BtlCombatantEntryA *subject);
 s32 FUN_004bd098(u32 source, u32 item);
 BtlUnitDataA *FUN_001568f8(BtlMainStateA *battle, s32 index);
@@ -31,7 +31,7 @@ u32 FUN_004bfa30(u32 itemId, u32 skillId, u32 subjectId, s32 target)
     if (skill != NULL && (properties->target & 0x7F) == 0 && !(properties->flags & 4))
         return 0;
     BtlMainStateA *battle = btlGetMainState();
-    BtlCombatantEntryA *subject = FUN_003f0e20(battle, subjectId);
+    BtlCombatantEntryA *subject = btlMainFindEntryByListedId(battle, subjectId);
     struct Snapshot { u32 prefix[10]; u16 kind; u8 restricted; u8 tail[9]; } snapshot;
     FUN_003e8bb0(&snapshot, battle, subject);
     if (snapshot.restricted) {

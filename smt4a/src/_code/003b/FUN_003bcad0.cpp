@@ -9,14 +9,14 @@ struct BtlCombatantValueRingView {
 
 extern "C" {
 u32 scrGetArg(u32 index);
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, u32 id);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, u32 id);
 
 // Append a script value to the selected combatant's six-entry cyclic buffer.
 u32 FUN_003bcad0(void)
 {
     u32 id = scrGetArg(0);
     u32 value = scrGetArg(1);
-    BtlCombatantEntryA *entry = FUN_003f0e20(btlGetMainState(), id);
+    BtlCombatantEntryA *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
     if (entry != NULL) {
         BtlCombatantValueRingView *ring = reinterpret_cast<BtlCombatantValueRingView *>(entry);
         s32 &next = ring->next;

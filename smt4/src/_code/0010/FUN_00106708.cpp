@@ -150,7 +150,7 @@ void FUN_00106708(void)
             voice->state = 0;
         }
     }
-    if (DAT_004c581a == 1 && FUN_002c1658(9, 2) == 0 && FUN_002c15fc(6) == 0)
+    if (DAT_004c581a == 1 && FUN_002c1658(9, 2) == 0 && slotIsActive(6) == 0)
         DAT_004c581a = 0;
 }
 

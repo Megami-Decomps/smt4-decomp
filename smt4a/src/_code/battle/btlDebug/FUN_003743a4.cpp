@@ -10,7 +10,7 @@ extern "C" {
 int FUN_0015f858(...);
 int effectDispatchSelector(...);
 int FUN_00167860(...);
-int FUN_00184310(void);
+int devilGetRecord(void);
 int statDrawClampedDelta(...);
 int dataRecordGetKindValue(...);
 int playerSecondaryGetKindValue(void);
@@ -68,7 +68,7 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
-/* Supplied declaration required: FUN_00184310. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_00185e84. */
 /* Supplied declaration required: dataTable00FindById. */
 extern unsigned char *gameGetSlotRecord(void);
@@ -522,7 +522,7 @@ void FUN_003743a4(int param_1)
       }
       else {
         temp_v5 = (unsigned int)*(unsigned short *)(temp_v17 + 0x62);
-        FUN_00184310();
+        devilGetRecord();
         if (*(char *)(temp_v5 + 0xc) != '\x01') {
           textFormatBuffer(temp_v19,"%s","\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b");
         }

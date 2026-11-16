@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail keeps duplicate scan indices; the readable loop shares them and changes comparison/register allocation. */
 #include "gamedata/BattleUnitSkills.h"
 #include "gamedata/DevilRecord.h"
+#define DEVIL_RECORD_A_OWN_PROTOTYPE /* devilGetRecord comes from gamedata/DevilRecord.h */
 #include "shard/W6_W6Match8_DevilRecordA.h"
 
 // Both shared record types expose only prefixes; these views preserve their boundaries.
@@ -26,7 +27,7 @@ u32 FUN_004cd0c8(BattleUnitSkillProgressViewA* unit, s32 levelIncrease, u16* out
     if (unit->blocked) {
         return 0;
     }
-    DevilLearnedSkillsViewA* demon = reinterpret_cast<DevilLearnedSkillsViewA*>(FUN_00184310(unit->id));
+    DevilLearnedSkillsViewA* demon = reinterpret_cast<DevilLearnedSkillsViewA*>(devilGetRecord(unit->id));
     DevilLearnedSkill candidates[8] = {0};
     s32 candidateCount = 0;
     s32 thresholdIndex = 0;

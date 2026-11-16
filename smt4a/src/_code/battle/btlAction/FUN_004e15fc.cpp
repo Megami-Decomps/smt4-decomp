@@ -9,7 +9,7 @@ int FUN_001568f8(...);
 int dataTable04FindById(int);
 int sysMemClear(int *, int);
 int FUN_003e8bb0(unsigned char [28], int, unsigned int);
-int FUN_003f0e20(int, int);
+int btlMainFindEntryByListedId(int, int);
 int FUN_0047fa50(...);
 int btlUIClearWorkTables(...);
 int FUN_004aba84(unsigned int, unsigned int *, unsigned int, unsigned int);
@@ -52,7 +52,7 @@ extern int padButtonIsPressed(unsigned int);
 extern int FUN_002a7410(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003e8bb0. */
-/* Supplied declaration required: FUN_003f0e20. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_0047fa50. */
 /* Supplied declaration required: btlUIClearWorkTables. */
 extern int FUN_004aa098(unsigned int, unsigned int);
@@ -224,7 +224,7 @@ int FUN_004e15fc(int *param_1,unsigned int *param_2)
         temp_v11 = *param_1;
         puVar10 = (unsigned int *)(*(int *)(temp_v11 + 0x1ed4) + temp_v3 * 0x1d0);
         if (((puVar10[0x14] & 8) != 0) &&
-           (FUN_003f0e20(temp_v11,(int)*(short *)((int)puVar10 + 0x6a)), puVar10 = temp_v7,
+           (btlMainFindEntryByListedId(temp_v11,(int)*(short *)((int)puVar10 + 0x6a)), puVar10 = temp_v7,
            temp_v11 != 0)) {
           temp_v6 = 0x85;
           puVar13 = param_2 + 0x51;

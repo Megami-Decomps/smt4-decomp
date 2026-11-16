@@ -67,7 +67,7 @@ OccurrenceEntry *dataTableFindEntryOccurrenceByBytePair(u32 table, s32 first, s3
 Table02Slot *dataTableGetRecord02(u16 key);
 ItemRecord *FUN_004bb80c(u32 id);
 Table00Record *dataTable00FindById(u32 id);
-u16 *FUN_00184310(u32 id);
+u16 *devilGetRecord(u32 id);
 s32 FUN_0026264c(u32 id);
 void campFillUnitComparison(ListEntry *out, u32 id, s32 arg);
 void FUN_004a833c(void *list, ListEntry *entry);
@@ -111,7 +111,7 @@ void FUN_004a5b20(EntryListWork *work)
                         if (id == 0 || dataTable00FindById(id) == NULL) {
                             continue;
                         }
-                        u16 *named = FUN_00184310(id);
+                        u16 *named = devilGetRecord(id);
                         Table00Record *record = dataTable00FindById(id);
 
                         if (named != NULL && record != NULL

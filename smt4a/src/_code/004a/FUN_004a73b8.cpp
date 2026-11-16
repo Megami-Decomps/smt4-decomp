@@ -14,8 +14,8 @@ s32 FUN_004a73b8(const u16* first, const u16* second)
     const PrimarySortRecord* b = dataTable00FindById(*second);
     s32 order = b->key - a->key;
     if (order == 0) {
-        const DevilRecordA* firstDevil = FUN_00184310(*first);
-        const DevilRecordA* secondDevil = FUN_00184310(*second);
+        const DevilRecordA* firstDevil = devilGetRecord(*first);
+        const DevilRecordA* secondDevil = devilGetRecord(*second);
         order = firstDevil->level - secondDevil->level;
         if (order == 0) {
             order = *second - *first;

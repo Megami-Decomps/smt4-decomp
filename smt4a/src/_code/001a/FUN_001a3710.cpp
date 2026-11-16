@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001b6668(unsigned char *, int);
+int nw_ut_internal_LinkListImpl_erase_2B743C(unsigned char *, int);
 
 extern unsigned char DAT_0064be60; /* 0x64be60 */
 
-/* Supplied declaration required: FUN_001b6668. */
+/* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2B743C. */
 extern int nw_ut_HeapBase_FindContainHeap(unsigned char *, int);
 
 
@@ -24,7 +24,7 @@ void FUN_001a3710(int param_1)
   if (temp_v0 != 0) {
     puVar2 = (unsigned char *)(temp_v0 + 0x18);
   }
-  FUN_001b6668(puVar2,param_1 + 4);
+  nw_ut_internal_LinkListImpl_erase_2B743C(puVar2,param_1 + 4);
   *(unsigned int *)(param_1 + 0x14) = 0;
   return;
 }

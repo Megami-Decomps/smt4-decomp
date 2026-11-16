@@ -126,7 +126,7 @@ extern unsigned int vec2GetXInt(char *);
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: FUN_002bf818. */
 extern int padIsButtonPressed(unsigned int);
-extern int FUN_002c15fc(unsigned int);
+extern int slotIsActive(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: __aeabi_uidivmod. */
@@ -551,7 +551,7 @@ LAB_0018fe5c:
       if (pcVar4[0x1e65] == '\0') {
 LAB_0018ffcc:
         if (*(short *)(pcVar4 + 0x12fe) < 0) {
-          temp_v7 = FUN_002c15fc(0xe);
+          temp_v7 = slotIsActive(0xe);
           temp_v12 = 0.0005f;
           if (temp_v7 != 0) {
             if ((int)*(float *)(pcVar4 + 0x1e9c) < 0x3cf5c28f) {
@@ -561,7 +561,7 @@ LAB_0018ffcc:
             nodeGroupSetScale(*(unsigned int *)(pcVar4 + 0x1e80));
             FUN_00294d6c();
           }
-          temp_v7 = FUN_002c15fc(0xf);
+          temp_v7 = slotIsActive(0xf);
           if (temp_v7 != 0) {
             if ((int)*(float *)(pcVar4 + 0x1e9c) >= 0x3c449ba7) {
               *(float *)(pcVar4 + 0x1e9c) = *(float *)(pcVar4 + 0x1e9c) - temp_v12;
@@ -570,7 +570,7 @@ LAB_0018ffcc:
             nodeGroupSetScale(*(unsigned int *)(pcVar4 + 0x1e80));
             FUN_00294d6c();
           }
-          temp_v7 = FUN_002c15fc(0xd);
+          temp_v7 = slotIsActive(0xd);
           temp_v12 = 5.0f;
           temp_v13 = 360.0f;
           if (temp_v7 != 0) {
@@ -584,7 +584,7 @@ LAB_0018ffcc:
               *(float *)(pcVar4 + 0x1e94) = temp_v9 + 360.0f;
             }
           }
-          temp_v7 = FUN_002c15fc(0xc);
+          temp_v7 = slotIsActive(0xc);
           if (temp_v7 != 0) {
             temp_v12 = *(float *)(pcVar4 + 0x1e94) + temp_v12;
             *(float *)(pcVar4 + 0x1e94) = temp_v12;

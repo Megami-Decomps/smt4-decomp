@@ -22,7 +22,7 @@ struct SkillInfo {
 
 extern "C" {
 extern u64 DAT_00571408;
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, s32 group);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, s32 group);
 void source4CCopyHalves(BtlCombatantEntryA *entry, u16 *skills);
 void FUN_003e8bb0(SkillInfo *info, BtlMainStateA *battle, BtlCombatantEntryA *entry);
 s32 FUN_004bd098(u32 owner, s32 skillId);
@@ -31,7 +31,7 @@ s32 FUN_004bd098(u32 owner, s32 skillId);
 f32 FUN_004c28b4(s32 group, s32 kind)
 {
     f32 rate = 1.0f;
-    BtlCombatantEntryA *entry = FUN_003f0e20(btlGetMainState(), group);
+    BtlCombatantEntryA *entry = btlMainFindEntryByListedId(btlGetMainState(), group);
     u16 skills[10] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     source4CCopyHalves(entry, skills);
     for (s32 i = 0; i < 9; i++) {

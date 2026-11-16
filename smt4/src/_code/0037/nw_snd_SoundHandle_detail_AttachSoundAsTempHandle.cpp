@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_003799bc(int);
+int soundOwnerDetach(int);
 
-/* Supplied declaration required: FUN_003799bc. */
+/* Supplied declaration required: soundOwnerDetach. */
 extern int FUN_00379a04(int);
 
 
@@ -19,7 +19,7 @@ void nw_snd_SoundHandle_detail_AttachSoundAsTempHandle(int *param_1,int param_2)
   *param_1 = param_2;
   temp_v0 = FUN_00379a04(param_2);
   if (temp_v0 != 0) {
-    FUN_003799bc(*param_1);
+    soundOwnerDetach(*param_1);
   }
   *(int **)(*param_1 + 0xc) = param_1;
   return;

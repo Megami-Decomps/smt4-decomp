@@ -60,7 +60,7 @@ SkillCategoryView *dataTable04FindById(u32 id);
 SkillLinkRecordA *dataTable8FindRecord(u32 id);
 void __aeabi_memset4(void *block, u32 size, s32 value);
 void *rt_memclr(void *block, u32 size);
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, s32 id);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, s32 id);
 void FUN_004aa798(u32 ui, void *arg, s32 count);
 u32 FUN_004aaebc(u32 ui, u32 kind, u32 parameter, u16 option, u16 variant, u16 flags, const void *label,
                  f32 x, f32 y, f32 z);
@@ -160,7 +160,7 @@ void FUN_004dd0c4(BtlMainStateA **block, CommandStateA *state)
         BattleRosterRecordA *action = &(*block)->roster[index];
         if ((action->liveFlags.unk50 & 4) == 0 || (action->liveFlags.unk50 & 0x400) == 0)
             continue;
-        BtlCombatantEntryA *entry = FUN_003f0e20(*block, action->combatant.parameterIndex);
+        BtlCombatantEntryA *entry = btlMainFindEntryByListedId(*block, action->combatant.parameterIndex);
         if ((entry->flags & g_btlAction.interaction.requiredMask) == 0)
             continue;
         if ((entry->flags & actionMask(MASK_LEADER)) != 0 && entry->unitIndex != action->combatant.parameterIndex)

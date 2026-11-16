@@ -81,7 +81,7 @@ struct BtlActionMasks {
 
 extern "C" {
 extern BtlActionMasks g_btlAction;
-BtlUnitRecord *FUN_003f0e20(BtlBattleData *data, s32 index);
+BtlUnitRecord *btlMainFindEntryByListedId(BtlBattleData *data, s32 index);
 void FUN_004fcde0(s32 arg, BtlAiAction *action, BtlUnitRecord *record);
 void FUN_004fd508(s32 arg, BtlAiAction *action, u32 kind, u32 uiIndex, s32 flag);
 
@@ -89,7 +89,7 @@ void FUN_004fd508(s32 arg, BtlAiAction *action, u32 kind, u32 uiIndex, s32 flag)
    and commands, and refreshes the action's per-unit command table. */
 void FUN_004e7168(BtlUnitHandle *handle, BtlAiAction *action)
 {
-    BtlUnitRecord *unit = FUN_003f0e20(handle->data, handle->data->actor);
+    BtlUnitRecord *unit = btlMainFindEntryByListedId(handle->data, handle->data->actor);
     if (unit != NULL && (g_btlAction.mask0f8 & handle->data->flags) == 0) {
         if (unit->priority > handle->data->highestPriority) {
             handle->data->highestPriority = unit->priority;
@@ -129,7 +129,7 @@ void FUN_004e7168(BtlUnitHandle *handle, BtlAiAction *action)
             break;
         }
         if (handle->data->trigger == 2) {
-            BtlUnitRecord *record = FUN_003f0e20(handle->data, handle->data->actor);
+            BtlUnitRecord *record = btlMainFindEntryByListedId(handle->data, handle->data->actor);
             if (record != NULL) {
                 FUN_004fcde0(0, action, record);
             }
@@ -151,7 +151,7 @@ void FUN_004e7168(BtlUnitHandle *handle, BtlAiAction *action)
     btlUnitClearRecordFields(handle, handle->data->unitIndex);
     for (s32 i = 0; i < 109; i++) {
         action->commands[i].commandA = 0;
-        BtlUnitRecord *record = FUN_003f0e20(handle->data, i);
+        BtlUnitRecord *record = btlMainFindEntryByListedId(handle->data, i);
         if (record != NULL) {
             action->commands[i].commandA = record->commandA;
             action->commands[i].commandB = record->commandB;

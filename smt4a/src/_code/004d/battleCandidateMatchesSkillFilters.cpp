@@ -19,13 +19,13 @@ struct BattleSkillFilter {
 };
 struct SkillFilterDefinition { u8 unk00[0x70]; u16 resistances[16]; };
 extern "C" {
-const SkillFilterDefinition *FUN_00184310(u32);
+const SkillFilterDefinition *devilGetRecord(u32);
 s32 halfwordKeyEmptyLastCompare(const u16 *, const u16 *);
 const u16 *libc_bsearch(const u16 *, const u16 *, u32, u32, s32 (*)(const u16 *, const u16 *));
 
 u32 battleCandidateMatchesSkillFilters(const BattleSkillFilter *filter, u32, u32, u32 demonId)
 {
-    const SkillFilterDefinition *definition = FUN_00184310(demonId);
+    const SkillFilterDefinition *definition = devilGetRecord(demonId);
     if (filter->requireSkill) {
         if (!libc_bsearch(&filter->skill, filter->skills, filter->skillCount, sizeof(u16), halfwordKeyEmptyLastCompare))
             return 0;

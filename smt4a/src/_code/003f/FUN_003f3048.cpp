@@ -20,8 +20,8 @@ struct SkillRollMetadata {
 
 extern "C" {
 
-SkillRollRecord *FUN_00184310(u16 id);
-s32 FUN_0031cfd0(u16 id);
+SkillRollRecord *devilGetRecord(u16 id);
+s32 saveIsRecordValueBounded(u16 id);
 s32 gameDataFlagTestBit(u32 bit);
 s32 randRange(u32 max);
 SkillRollMetadata *findSkillMetadataById(u16 id);
@@ -36,8 +36,8 @@ s32 FUN_003f3048(SkillRollUnit *unit, s32 tries, s32 force)
     if (tries <= 0) {
         return 0;
     }
-    record = FUN_00184310(unit->id);
-    chance = FUN_0031cfd0(unit->id) / 500 + record->level;
+    record = devilGetRecord(unit->id);
+    chance = saveIsRecordValueBounded(unit->id) / 500 + record->level;
     if (gameDataFlagTestBit(5) != 0) {
         chance += 30;
     }

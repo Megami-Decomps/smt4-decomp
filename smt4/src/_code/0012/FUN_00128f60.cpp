@@ -27,7 +27,7 @@ void FUN_00128f60(void)
     iVar1 = _DAT_0044e7c8 * 2;
     uStack_20 = 0x2e;
     if (*(int *)(iVar1 + 0x14) != 0) {
-      FUN_002bc7f4(0x207,&iStack_28);
+      gxGetCommandListParameter(0x207,&iStack_28);
       FUN_001373f0(iStack_28,*(unsigned int *)(iVar1 + 0x14),*(unsigned int *)(iVar1 + 0x18));
       FUN_002bf0dc();
     }

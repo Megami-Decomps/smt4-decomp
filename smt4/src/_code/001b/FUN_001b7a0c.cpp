@@ -37,7 +37,7 @@ extern int g_btlMain; /* 0x4342c8 */
 /* Supplied declaration required: randomGetNormalizedFloat. */
 extern unsigned int FUN_0027d9e8(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_0027da30. */
-extern int FUN_0027dab0(unsigned char *, int);
+extern int idSetFindSubjectIndex(unsigned char *, int);
 extern int FUN_0027db08(unsigned int);
 /* Supplied declaration required: FUN_00281e34. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
@@ -112,7 +112,7 @@ unsigned int FUN_001b7a0c(void)
   do {
     temp_v10 = *(int *)(pbVar1 + 0x1e98) + temp_v0 * 0x114;
     if ((temp_v10 != 0) && ((*(unsigned int *)(temp_v10 + 0x50) & 1) != 0)) {
-      temp_v1 = FUN_0027dab0(pbVar1,temp_v10);
+      temp_v1 = idSetFindSubjectIndex(pbVar1,temp_v10);
       if (temp_v1 < 0) {
         temp_v1 = 0;
       }

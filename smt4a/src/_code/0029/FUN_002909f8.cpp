@@ -23,8 +23,8 @@ s32 FUN_002909f8(const s32 *leftSlot, const s32 *rightSlot)
     if (difference != 0) {
         return difference;
     }
-    SlotSortInfo *leftInfo = FUN_00184310(leftRecord->entryId);
-    SlotSortInfo *rightInfo = FUN_00184310(rightRecord->entryId);
+    SlotSortInfo *leftInfo = devilGetRecord(leftRecord->entryId);
+    SlotSortInfo *rightInfo = devilGetRecord(rightRecord->entryId);
     difference = rightInfo->priority - leftInfo->priority;
     if (difference != 0) {
         return difference;

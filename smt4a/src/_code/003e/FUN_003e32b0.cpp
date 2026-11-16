@@ -41,7 +41,7 @@ void sysPlaySe(s32 se);
 void FUN_003c3e14(void);
 void FUN_003c1060(void);
 void fillThreeWordsWithByte(s32 *words, u32 value);
-ShopEntryRecord *FUN_00184310(u32 id);
+ShopEntryRecord *devilGetRecord(u32 id);
 u32 FUN_00180118(u32 id);
 s32 gameFlagIsSet(u32 flag);
 s32 gameDataCopySaveEntry(u16 id, u8 *out);
@@ -56,7 +56,7 @@ void FUN_003e32b0(NpcShopSelect *scene)
         fillThreeWordsWithByte(scene->choices, 0xFFFFFFFF);
         ShopSlot *slots = (ShopSlot *)scene;
         for (s32 i = 0; i < 3; i++) {
-            ShopEntryRecord *record = FUN_00184310(slots[i].id);
+            ShopEntryRecord *record = devilGetRecord(slots[i].id);
             if (record == NULL)
                 continue;
             if (record->requiredFlag != 0 && gameFlagIsSet(record->requiredFlag) == 0)

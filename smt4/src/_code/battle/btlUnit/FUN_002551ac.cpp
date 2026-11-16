@@ -52,7 +52,7 @@ extern unsigned char DAT_00439960; /* 0x439960 */
 /* Supplied declaration required: btlAdjustPropertyClamped. */
 extern short battleGetEntryHalfword(int, unsigned int);
 /* Supplied declaration required: FUN_0027da30. */
-extern int FUN_0027dab0(unsigned int, int);
+extern int idSetFindSubjectIndex(unsigned int, int);
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 extern int FUN_00293230(unsigned int *);
 /* Supplied declaration required: btlGetMainState. */
@@ -280,7 +280,7 @@ FUN_002551ac(int param_1,unsigned int param_2,int param_3,int param_4,int param_
                       FUN_0027da30(temp_v6,(int)*(short *)(temp_v4 + 0x62));
                       temp_v17 = temp_v6;
                       temp_v5 = reinterpret_cast<int>(btlGetMainState());
-                      temp_v6 = FUN_0027dab0(temp_v5,temp_v4);
+                      temp_v6 = idSetFindSubjectIndex(temp_v5,temp_v4);
                       if (temp_v6 < 0) {
                         temp_v6 = 0;
                       }

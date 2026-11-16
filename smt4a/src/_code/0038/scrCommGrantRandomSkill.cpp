@@ -5,7 +5,7 @@
 extern "C" {
 
 void gameSavedFlagSet(s16 skill);
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, u32 id);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, u32 id);
 s32 nkmGrowthLearnRandomSkill(u32 record);
 void scrSetResult(s32 result);
 s32 scrGetArg(s32 index);
@@ -16,7 +16,7 @@ u32 scrCommGrantRandomSkill(void)
     u32 record;
     if (id < 0x6d) {
         btlGetMainState();
-        record = FUN_003f0e20(btlGetMainState(), id)->sourceId;
+        record = btlMainFindEntryByListedId(btlGetMainState(), id)->sourceId;
     } else {
         record = reinterpret_cast<u32>(gameGetSlotRecord(id - 0x6d));
     }

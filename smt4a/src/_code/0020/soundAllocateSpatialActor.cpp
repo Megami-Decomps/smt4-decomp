@@ -1,7 +1,7 @@
 #include "shard/W5_W5Match1_RecordKeys.h"
 
 extern "C" {
-void FUN_0032cc8c(s32, const Vector4 *);
+void asd3dSoundActorSetPosition(s32, const Vector4 *);
 void FUN_00359768(u32, s32, u32);
 void FUN_0036bca0(u32, s32);
 s32 asd3dSoundActorIsPlaying(s32);
@@ -23,7 +23,7 @@ s32 soundAllocateSpatialActor(u32 sound, Vector4 position)
         for (s32 actor = 0; actor < 16; ++actor) {
             if (!asd3dSoundActorIsPlaying(actor)) {
                 selected = actor;
-                FUN_0032cc8c(selected, &position);
+                asd3dSoundActorSetPosition(selected, &position);
                 if (sound - 0x100007cu <= 400) {
                     FUN_0036bca0(sound, selected);
                     selected += 100000;

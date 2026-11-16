@@ -20,7 +20,7 @@ int table8Type5GetValue(void);
 int FUN_002898e4(void);
 int FUN_0028b7f8(...);
 int buttonHelpCreate(void);
-int FUN_00292be4(...);
+int pair40Set(...);
 int FUN_00297408(void);
 int FUN_00298ad8(void);
 int campRefreshEquipmentCategory(...);
@@ -76,7 +76,7 @@ extern unsigned int statusGetAvailableChoiceCount(void);
 /* Supplied declaration required: FUN_0028b7f8. */
 /* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: FUN_00292bcc. */
-/* Supplied declaration required: FUN_00292be4. */
+/* Supplied declaration required: pair40Set. */
 /* Supplied declaration required: FUN_0029378c. */
 /* Supplied declaration required: FUN_00297408. */
 /* Supplied declaration required: FUN_00298ad8. */
@@ -221,7 +221,7 @@ void FUN_0028a420(void)
     *(unsigned char *)(*(int *)(temp_v5 + 0x6c8) + 0x25) = 0;
     *(unsigned char *)(*(int *)(temp_v5 + 0x6c8) + 0x27) = 0;
     *(unsigned char *)(*(int *)(temp_v5 + 0x6c8) + 0x26) = 0;
-    FUN_00292be4(*(unsigned int *)(temp_v5 + 0x6c8),0);
+    pair40Set(*(unsigned int *)(temp_v5 + 0x6c8),0);
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 4);
   temp_v0 = 0;
@@ -230,7 +230,7 @@ void FUN_0028a420(void)
     *(unsigned char *)(*(int *)(temp_v5 + 0x6d8) + 0x25) = 0;
     *(unsigned char *)(*(int *)(temp_v5 + 0x6d8) + 0x27) = 0;
     *(unsigned char *)(*(int *)(temp_v5 + 0x6d8) + 0x26) = 0;
-    FUN_00292be4(*(unsigned int *)(temp_v5 + 0x6d8),0);
+    pair40Set(*(unsigned int *)(temp_v5 + 0x6d8),0);
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 0x18);
   temp_v0 = 0;
@@ -448,7 +448,7 @@ LAB_0028b6d0:
       temp_v6 = 0;
       do {
         temp_v5 = temp_v0 + temp_v6 * 4;
-        FUN_00292be4(*(unsigned int *)(temp_v5 + 0x6c8),0);
+        pair40Set(*(unsigned int *)(temp_v5 + 0x6c8),0);
         *(unsigned char *)(*(int *)(temp_v5 + 0x6c8) + 0x25) = 0;
         *(unsigned char *)(*(int *)(temp_v5 + 0x6c8) + 0x27) = 0;
         temp_v6 = temp_v6 + 1;
@@ -456,7 +456,7 @@ LAB_0028b6d0:
       temp_v6 = 0;
       do {
         temp_v5 = temp_v0 + temp_v6 * 4;
-        FUN_00292be4(*(unsigned int *)(temp_v5 + 0x6d8),0);
+        pair40Set(*(unsigned int *)(temp_v5 + 0x6d8),0);
         *(unsigned char *)(*(int *)(temp_v5 + 0x6d8) + 0x25) = 0;
         *(unsigned char *)(*(int *)(temp_v5 + 0x6d8) + 0x27) = 0;
         temp_v6 = temp_v6 + 1;
@@ -467,7 +467,7 @@ LAB_0028b6d0:
       temp_v6 = 0;
       do {
         temp_v5 = temp_v0 + temp_v6 * 4;
-        FUN_00292be4(*(unsigned int *)(temp_v5 + 0x6c8),0);
+        pair40Set(*(unsigned int *)(temp_v5 + 0x6c8),0);
         *(unsigned char *)(*(int *)(temp_v5 + 0x6c8) + 0x25) = 0;
         *(unsigned char *)(*(int *)(temp_v5 + 0x6c8) + 0x27) = 0;
         temp_v6 = temp_v6 + 1;
@@ -475,7 +475,7 @@ LAB_0028b6d0:
       temp_v6 = 0;
       do {
         temp_v5 = temp_v0 + temp_v6 * 4;
-        FUN_00292be4(*(unsigned int *)(temp_v5 + 0x6d8),0);
+        pair40Set(*(unsigned int *)(temp_v5 + 0x6d8),0);
         *(unsigned char *)(*(int *)(temp_v5 + 0x6d8) + 0x25) = 0;
         *(unsigned char *)(*(int *)(temp_v5 + 0x6d8) + 0x27) = 0;
         temp_v6 = temp_v6 + 1;

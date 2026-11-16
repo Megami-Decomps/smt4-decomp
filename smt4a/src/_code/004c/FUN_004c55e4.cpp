@@ -7,16 +7,16 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 extern "C" {
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, u32 id);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, u32 id);
 u32 padGetMappedValue(u32 id);
 s32 FUN_002efc44(Table04Record *skill, u32 value, s32 mode);
 s32 FUN_0034a304(Table04Record *skill, s32 value, s32 mode);
 s32 FUN_004bd098(u32 source, u32 skillId);
-void *FUN_00184310(u16 id);
+void *devilGetRecord(u16 id);
 
 s32 FUN_004c55e4(u32 unitId, u32 skillId)
 {
-    BtlCombatantEntryA *unit = FUN_003f0e20(btlGetMainState(), unitId);
+    BtlCombatantEntryA *unit = btlMainFindEntryByListedId(btlGetMainState(), unitId);
     if (DAT_005713f0.mappedValue & unit->flags) {
         Table04Record *skill = dataTable04FindById(skillId);
         if (skill) {
@@ -38,7 +38,7 @@ s32 FUN_004c55e4(u32 unitId, u32 skillId)
             s16 id = reinterpret_cast<const SignedIdView *>(unit)->id;
             u16 kind = reinterpret_cast<const ReferencedKindRecord *>(skill)->kind;
             if (kind < 18) {
-                const AffinityView *record = static_cast<const AffinityView *>(FUN_00184310(id));
+                const AffinityView *record = static_cast<const AffinityView *>(devilGetRecord(id));
                 if (record) {
                     value = record->responses[kind];
                 }

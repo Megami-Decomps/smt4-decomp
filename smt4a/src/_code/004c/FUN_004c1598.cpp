@@ -4,7 +4,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 extern "C" {
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, u32 actor);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, u32 actor);
 void FUN_003e8bb0(BattleActionEvaluation *result, BtlMainStateA *state, BtlCombatantEntryA *actor);
 u32 FUN_004c8340(u32 actor, u32 target, u32 skill, s32 kind, s32 flags);
 void kindIdStore(u32 skill, u32 *kind);
@@ -16,7 +16,7 @@ f32 FUN_004c1598(u32 actorId, u32 targetId)
 {
     f32 multiplier = 1.0f;
     BtlMainStateA *state = btlGetMainState();
-    BtlCombatantEntryA *actor = FUN_003f0e20(btlGetMainState(), actorId);
+    BtlCombatantEntryA *actor = btlMainFindEntryByListedId(btlGetMainState(), actorId);
     BattleActionEvaluation evaluation;
     FUN_003e8bb0(&evaluation, btlGetMainState(), actor);
     u16 skill = evaluation.skill;
@@ -26,7 +26,7 @@ f32 FUN_004c1598(u32 actorId, u32 targetId)
     s32 percentage = (u16)result;
     if ((result & 0x60000) && percentage == 0)
         percentage = 100;
-    actor = FUN_003f0e20(state, actorId);
+    actor = btlMainFindEntryByListedId(state, actorId);
     u32 kind;
     kindIdStore(skill, &kind);
     if (FUN_004c0f74(actor, kind & 0xFF)) {

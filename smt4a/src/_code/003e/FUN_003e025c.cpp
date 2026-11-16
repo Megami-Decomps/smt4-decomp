@@ -35,7 +35,7 @@ extern "C" {
 extern BtlAuxA *g_btlAux;
 extern BtlCameraA *g_btlCamera;
 extern const char DAT_00528568[];
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, s32 parameterIndex);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, s32 parameterIndex);
 BattleCameraDefinition *FUN_003eca48(BtlMainStateA *battle, u16 id);
 void textFormatBuffer(char *output, const char *format, ...);
 void FUN_004f2abc(BtlCameraA *camera, const char *path);
@@ -48,7 +48,7 @@ void FUN_003e025c(BtlStep *step, BtlMainStateA *battle)
 {
     BattleRosterRecordA *record = btlFindMarkedReserveRecord(battle);
     if (record != NULL) {
-        BtlCombatantEntryA *entry = FUN_003f0e20(battle, record->combatant.parameterIndex);
+        BtlCombatantEntryA *entry = btlMainFindEntryByListedId(battle, record->combatant.parameterIndex);
         if (entry != NULL) {
             BattleCameraDefinition *definition = FUN_003eca48(battle, entry->id);
             BattleCameraAuxCamera *auxCamera = &reinterpret_cast<BattleCameraAuxView *>(g_btlAux)->camera;

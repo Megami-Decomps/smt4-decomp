@@ -5,7 +5,7 @@
 #include "shard/W6_W6Match7_MaterialAnimationFlags.h"
 
 extern "C" {
-s32 FUN_0027dab0(BtlMainState *state, BtlActionRecord *action);
+s32 idSetFindSubjectIndex(BtlMainState *state, BtlActionRecord *action);
 MaterialMergeVariants *FUN_0027da30(BtlMainState *state, s32 member);
 u32 FUN_00337ba0(BtlMainState *state, s16 selection, u16 kind);
 void FUN_00340ad4(BattleSpritePlacement *placement, u32 mask, u32 flags, u32 variant);
@@ -17,7 +17,7 @@ u32 FUN_003db0c0(MaterialMergeOwner *owner, BtlActionRecord *action)
         return 1;
     }
     BtlMainState *state = btlGetMainState();
-    s32 variantIndex = FUN_0027dab0(state, action);
+    s32 variantIndex = idSetFindSubjectIndex(state, action);
     if (variantIndex < 0) {
         variantIndex = 0;
     }

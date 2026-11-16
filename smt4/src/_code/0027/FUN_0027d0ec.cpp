@@ -20,7 +20,7 @@ extern GameStateView g_gameState;
 int FUN_001b49c0(unsigned int, unsigned int);
 int bgmReleaseStopped(void);
 int slotFindByPair(int, unsigned int);
-int FUN_00275714(void);
+int soundActorQueueStartPending(void);
 int FUN_00287328(int);
 int bgmGetStateById(...);
 int gameFlagIsSet(...);
@@ -42,7 +42,7 @@ extern int FUN_001fb4d8(void);
 extern int gameMapBlockGetValue(void);
 /* Supplied declaration required: bgmReleaseStopped. */
 /* Supplied declaration required: slotFindByPair. */
-/* Supplied declaration required: FUN_00275714. */
+/* Supplied declaration required: soundActorQueueStartPending. */
 extern int FUN_00285574(void);
 /* Supplied declaration required: FUN_00287328. */
 /* Supplied declaration required: bgmGetStateById. */
@@ -76,7 +76,7 @@ void FUN_0027d0ec(void)
   temp_v0 = FUN_001fb4d8();
   if (temp_v0 != 0) {
     if (*(int *)(temp_v2 + 0x24) != 0x17 && *(int *)(temp_v2 + 0x24) != 0x18) {
-      FUN_00275714();
+      soundActorQueueStartPending();
     }
   }
   else {

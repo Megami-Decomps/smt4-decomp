@@ -13,7 +13,7 @@ typedef struct {
 } param_2_stack;
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern unsigned int FUN_001a0050(unsigned int *, unsigned int);
+extern unsigned int nn_fs_CTR_MPCore_detail_UserFileSystem_TryGetFileSize(unsigned int *, unsigned int);
 
 
 unsigned int nn_fs_detail_FileBase_TrySetPosition(unsigned int *param_1,long long param_2)
@@ -36,7 +36,7 @@ unsigned int nn_fs_detail_FileBase_TrySetPosition(unsigned int *param_1,long lon
       param_1[2] = in_r3;
       return 0;
     }
-    temp_v0 = FUN_001a0050(&temp_v2,*param_1 & 0xfffffffe);
+    temp_v0 = nn_fs_CTR_MPCore_detail_UserFileSystem_TryGetFileSize(&temp_v2,*param_1 & 0xfffffffe);
     if ((int)temp_v0 >= 0) {
       param_1[4] = temp_v3;
       param_1[3] = temp_v2;

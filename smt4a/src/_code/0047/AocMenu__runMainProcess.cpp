@@ -19,7 +19,7 @@ int FUN_00426fe4(unsigned int *, unsigned int *, unsigned int *);
 int recordClearWideHandle(unsigned int *);
 int FUN_00473910(...);
 int countOwnerIsValidIndex(...);
-int FUN_00477d10(...);
+int aocMenuSetButtonHelp(...);
 int flaggedValueHolderGetTotal(...);
 int sub10OwnerStart(unsigned int *);
 int listCursorSetPosition(unsigned int *, int);
@@ -68,7 +68,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: recordClearWideHandle. */
 /* Supplied declaration required: FUN_00473910. */
 /* Supplied declaration required: countOwnerIsValidIndex. */
-/* Supplied declaration required: FUN_00477d10. */
+/* Supplied declaration required: aocMenuSetButtonHelp. */
 extern int statusDecodeActivityState(int);
 /* Supplied declaration required: flaggedValueHolderGetTotal. */
 extern int FUN_004d0058(unsigned int *, unsigned int);
@@ -229,7 +229,7 @@ void AocMenu::runMainProcess()
           FUN_0036bea0(*temp_v10,3,0xffffffff,0);
         }
       }
-      FUN_00477d10(param_1,2,0);
+      aocMenuSetButtonHelp(param_1,2,0);
     }
     if (*(char *)((int)param_1 + 0x2c6) != '\0') {
       temp_v1 = selectOwnerGetSelected(param_1 + 0xad);

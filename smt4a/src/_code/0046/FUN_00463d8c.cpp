@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001b6668(int, int *);
+int nw_ut_internal_LinkListImpl_erase_2B743C(int, int *);
 int slistPushFront(int, int *);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_001b6668. */
+/* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2B743C. */
 /* Supplied declaration required: slistPushFront. */
 
 
@@ -28,7 +28,7 @@ void FUN_00463d8c(int param_1)
       if ((char)piVar2[-0xf] != '\x03') {
         return;
       }
-      FUN_001b6668(param_1 + 0x84,piVar2);
+      nw_ut_internal_LinkListImpl_erase_2B743C(param_1 + 0x84,piVar2);
       if (piVar1 != (int *)0x0) {
         (**(romwright_code **)*piVar1)(piVar1);
         slistPushFront(param_1 + 0x90,piVar1);

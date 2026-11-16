@@ -19,7 +19,7 @@ void questMarkSelectedSpecialDetail(void);
 
 static inline const QuestPageMetadata *questPageMetadata(s32 id)
 {
-    return reinterpret_cast<const QuestPageMetadata *>(FUN_001ad9b4(id));
+    return reinterpret_cast<const QuestPageMetadata *>(dataTable1bOr1cGetRecord(id));
 }
 
 extern "C" void uiQuestRefreshDetailPages(s32 id)

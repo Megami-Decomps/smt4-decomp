@@ -2,11 +2,11 @@
 #include "shard/W6_W6Match6_TextChannelMatch.h"
 
 extern "C" {
-void FUN_0035eaa8(TextMatchArena *);
+void words3Clear2(TextMatchArena *);
 void FUN_0035ea88(TextMatchArena *, u8 *);
 void *FUN_00238aac(TextMatchArena *, u32);
-void FUN_0035c02c(TextMatchSyntax *);
-void FUN_0035c43c(TextMatchSimple *);
+void listHeaderInit(TextMatchSyntax *);
+void words2Clear(TextMatchSimple *);
 void FUN_0035d7c0(TextMatchMask *);
 void FUN_0035e584(TextMatchCompiled *);
 u32 FUN_0035b154(TextMatchSyntax *, TextMatchArena *, const u16 *, s32);
@@ -19,15 +19,15 @@ void textChannelMatchExpression(TextChannelParser *parser, u32 *flags, const u16
                   s32 length, TextChannel **channels, u32 count)
 {
     TextMatchArena arena;
-    FUN_0035eaa8(&arena);
+    words3Clear2(&arena);
     FUN_0035ea88(&arena, ((TextMatchArenaSource *)parser)->buffer);
     TextMatchSyntax *syntax = (TextMatchSyntax *)FUN_00238aac(&arena, 2);
     if (syntax) {
-        FUN_0035c02c(syntax);
+        listHeaderInit(syntax);
     }
     TextMatchSimple *simple = (TextMatchSimple *)FUN_00238aac(&arena, 1);
     if (simple) {
-        FUN_0035c43c(simple);
+        words2Clear(simple);
     }
     TextMatchMask *mask = (TextMatchMask *)FUN_00238aac(&arena, 2);
     if (mask) {

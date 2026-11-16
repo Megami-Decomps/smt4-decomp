@@ -1,5 +1,4 @@
 #include "shard/W6_W6Match5_DevilSort.h"
-#include "shard/W5_W5Match5_GameSaveViews.h"
 
 struct SlotSecondarySortInfo {
     u8 unk00[6];
@@ -12,9 +11,9 @@ extern "C" s32 btlDevilCompareRankOrderAndId(const RankedDevilEntry *first, cons
     s32 order = first->rank - second->rank;
     if (order == 0) {
         const SlotSecondarySortInfo *firstRecord =
-            reinterpret_cast<const SlotSecondarySortInfo *>(FUN_00184310(first->id));
+            reinterpret_cast<const SlotSecondarySortInfo *>(devilGetRecord(first->id));
         const SlotSecondarySortInfo *secondRecord =
-            reinterpret_cast<const SlotSecondarySortInfo *>(FUN_00184310(second->id));
+            reinterpret_cast<const SlotSecondarySortInfo *>(devilGetRecord(second->id));
         order = secondRecord->secondaryOrder - firstRecord->secondaryOrder;
         if (order == 0)
             order = first->id - second->id;

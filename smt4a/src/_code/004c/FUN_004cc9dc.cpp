@@ -32,7 +32,7 @@ static __inline u32 experienceForLevel(s32 level)
 s32 FUN_004cc9dc(u32 id, s32 level, u32 *experience)
 {
     s32 startingLevel = level;
-    s32 distance = level - FUN_00184310(id)->level + 1;
+    s32 distance = level - devilGetRecord(id)->level + 1;
     u32 percentage;
     if (distance <= 0) {
         percentage = 100;

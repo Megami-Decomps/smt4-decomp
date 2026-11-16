@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001b6668(int, int *);
+int nw_ut_internal_LinkListImpl_erase_2B743C(int, int *);
 int FUN_0045f834(int *);
 int FUN_00463df8(int *);
 int nw_ut_internal_LinkListImpl_insert(int, int, int *);
@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001b6668. */
+/* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2B743C. */
 /* Supplied declaration required: FUN_0045f834. */
 /* Supplied declaration required: FUN_00463df8. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
@@ -32,7 +32,7 @@ void FUN_0045ffb4(int *param_1)
     FUN_00463df8(param_1 + 0x8c5);
     FUN_0045f834(param_1);
     temp_v0 = param_1[0xc11];
-    FUN_001b6668(temp_v0 + 8,param_1 + 0x3e);
+    nw_ut_internal_LinkListImpl_erase_2B743C(temp_v0 + 8,param_1 + 0x3e);
     (**(romwright_code **)(*param_1 + 0x10))(param_1);
     nw_ut_internal_LinkListImpl_insert(temp_v0 + 0x14,temp_v0 + 0x18,param_1 + 0x3e);
     return;

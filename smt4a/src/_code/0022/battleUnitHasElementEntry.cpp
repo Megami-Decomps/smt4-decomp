@@ -20,7 +20,7 @@ struct SkillRecord {
     u8 special;     /* 0x31: counts as element 12 */
 };
 
-/* Record of the demon table (FUN_00184310). */
+/* Record of the demon table (devilGetRecord). */
 struct DemonRecord {
     u8 unk00[0xe];
     u8 element;     /* 0x0e */
@@ -63,7 +63,7 @@ const s32 ELEMENT_ANY = 12;
 }
 
 extern "C" {
-DemonRecord *FUN_00184310(u32 id);
+DemonRecord *devilGetRecord(u32 id);
 EquipRecord *dataTable08Sub2GetRecord(u32 id);
 SkillListRecord *dataTable00FindById(u32 id);
 
@@ -110,7 +110,7 @@ u32 battleUnitHasElementEntry(BattleUnit *unit, u32 wanted, s32 restricted)
     }
     if (unit->demonSkills != NULL) {
         if (restricted == 0) {
-            DemonRecord *demon = FUN_00184310(unit->demonId);
+            DemonRecord *demon = devilGetRecord(unit->demonId);
             if (demon->element == wanted || (wanted == ELEMENT_ANY && demon->special != 0)) {
                 return 1;
             }

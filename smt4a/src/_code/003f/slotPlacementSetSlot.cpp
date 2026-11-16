@@ -14,7 +14,7 @@ typedef struct SlotPlacement {
     /* 0x38 */ s32 slot;
 } SlotPlacement;
 
-extern void FUN_003f3e64(SlotPlacement *placement, s32 *x, s32 *y);
+extern void slotPlacementGetPosition(SlotPlacement *placement, s32 *x, s32 *y);
 
 /* Moves the placement to `slot` and caches the slot's screen position. */
 void slotPlacementSetSlot(SlotPlacement *placement, s32 slot)
@@ -24,7 +24,7 @@ void slotPlacementSetSlot(SlotPlacement *placement, s32 slot)
     placement->slot = slot;
     position.x = 0;
     position.y = 0;
-    FUN_003f3e64(placement, &position.x, &position.y);
+    slotPlacementGetPosition(placement, &position.x, &position.y);
     placement->position = position;
 }
 

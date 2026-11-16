@@ -21,7 +21,7 @@ extern "C" {
 extern BattleActionCamera *g_btlCamera;
 extern BattleVector3 DAT_005e1554;
 s32 FUN_004f2708(BattleActionCamera *, BtlMainStateA *, s32);
-const BattleFormationDemon *FUN_00184310(u32);
+const BattleFormationDemon *devilGetRecord(u32);
 
 void btlCameraSetFormationSlot(BattleActionCamera *camera, BtlMainStateA *battle, s32 slot)
 {
@@ -62,7 +62,7 @@ void btlCameraSetFormationSlot(BattleActionCamera *camera, BtlMainStateA *battle
     if (entry->flags & masks->zeroHeight) {
         camera->formation.position.y = 0.0f;
     } else if (entry->flags & masks->demonHeight) {
-        const BattleFormationDemon *demon = FUN_00184310(entry->id);
+        const BattleFormationDemon *demon = devilGetRecord(entry->id);
         switch (demon->appearance.height) {
         case 0: camera->formation.position.y = 0.0f; break;
         case 1: camera->formation.position.y = -3.5f; break;

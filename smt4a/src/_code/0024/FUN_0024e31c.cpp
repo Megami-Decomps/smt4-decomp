@@ -8,7 +8,7 @@
 extern "C" {
 
 int textDrawString(...);
-int FUN_001634b4(int);
+int effectRenderTransformedInstance(int);
 int FUN_00164034(...);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
@@ -46,7 +46,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: FUN_001634b4. */
+/* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: FUN_00164034. */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -134,7 +134,7 @@ unsigned int FUN_0024e31c(void)
           pairSetHalves(temp_v5 + 0x11914,(int)(short)(int)*(float *)(temp_v5 + 0x11a38),
                        (int)(short)(int)*(float *)(temp_v5 + 0x11a3c));
           VectorSignedToFloat((int)temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_001634b4(temp_v5 + 0x11914);
+          effectRenderTransformedInstance(temp_v5 + 0x11914);
           temp_v2 = g_renderCtx;
           if (*(char *)(temp_v5 + 0x11a25) != '\0') {
             temp_v3 = packNibblesAndByte(6,1,0);
@@ -150,9 +150,9 @@ unsigned int FUN_0024e31c(void)
                          (int)(short)(int)*(float *)(temp_v5 + 0x11a3c));
             *(unsigned int *)(temp_v5 + 0x119d0) = *(unsigned int *)(temp_v5 + 0x11a30);
             VectorSignedToFloat((int)temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_001634b4(temp_v2);
+            effectRenderTransformedInstance(temp_v2);
             VectorSignedToFloat((int)temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_001634b4(temp_v2);
+            effectRenderTransformedInstance(temp_v2);
             temp_v5 = g_renderCtx;
             temp_v2 = packNibblesAndByte(6,7,0);
             piVar6 = (int *)(temp_v5 + 0x12b8);

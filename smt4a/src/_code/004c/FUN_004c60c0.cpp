@@ -5,13 +5,13 @@
 struct BtlMainStateA;
 struct Source4C;
 extern "C" {
-Source4C *FUN_003f0e20(BtlMainStateA *, u32);
+Source4C *btlMainFindEntryByListedId(BtlMainStateA *, u32);
 void source4CCopyHalves(Source4C *, u16 *);
 
 u32 FUN_004c60c0(u32 unitId, u32 property)
 {
     u32 result = 0;
-    Source4C *source = FUN_003f0e20(btlGetMainState(), unitId);
+    Source4C *source = btlMainFindEntryByListedId(btlGetMainState(), unitId);
     u16 skills[10];
     memset(skills, 0, sizeof(skills));
     source4CCopyHalves(source, skills);

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001a1564(int, unsigned int, unsigned int);
+int nn_fnd_DateTime_DateToDays(int, unsigned int, unsigned int);
 
-/* Supplied declaration required: FUN_001a1564. */
+/* Supplied declaration required: nn_fnd_DateTime_DateToDays. */
 
 
 void nn_fnd_DateTime_FromParameters
@@ -15,7 +15,7 @@ void nn_fnd_DateTime_FromParameters
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_001a1564(param_2,param_3,param_4);
+  nn_fnd_DateTime_DateToDays(param_2,param_3,param_4);
   *param_1 = (long long)param_2 * 86400000 +
              (long long)param_5 * 3600000 + (long long)param_8 +
              (long long)param_7 * 1000 + (long long)param_6 * 60000;

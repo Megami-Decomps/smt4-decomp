@@ -5,7 +5,7 @@ extern u8 DAT_005c0b48;
 nn::Result FUN_0016f864();
 void sysFatalBreak();
 u32 libc_strlen(const char *text);
-s32 FUN_0016f988(u32 *handle, const char *name, u32 length, u32 flags);
+s32 asdModelForwardChecked(u32 *handle, const char *name, u32 length, u32 flags);
 s32 FUN_0043ab50();
 s32 svcCloseHandle(u32 handle);
 
@@ -18,7 +18,7 @@ bool modelServiceEnsureOpen(u32 *handle, const char *name)
     if (nnResultIsFailure((s32)FUN_0016f864())) {
         sysFatalBreak();
     }
-    s32 result = FUN_0016f988(handle, name, libc_strlen(name), 1);
+    s32 result = asdModelForwardChecked(handle, name, libc_strlen(name), 1);
     if ((s32)(result & 0x80000000) < 0) {
         if ((u32)result == 0xd0401834) {
             return false;

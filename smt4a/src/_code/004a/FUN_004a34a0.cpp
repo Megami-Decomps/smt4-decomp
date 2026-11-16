@@ -31,7 +31,7 @@ u32 FUN_004a34a0(Screen4A *screen, u32 id)
     s32 selection = flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(view->selection));
     Candidate *selected = &view->candidates[selection];
     if (view->mode == 0) {
-        FUN_00184310(selected->id);
+        devilGetRecord(selected->id);
     }
     u8 reason;
     if (!FUN_002a4b28(id)) {

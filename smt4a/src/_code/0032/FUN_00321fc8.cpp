@@ -4,7 +4,7 @@
 extern "C" {
 extern const char DAT_005449ec[]; /* __FILE__ */
 
-EffMiscObject *FUN_00271be0(u32 kind, void *params);
+EffMiscObject *effMiscCreate(u32 kind, void *params);
 void *resourceResolveHeaderPointer(EffMiscDesc *desc);
 u32 *resourceResolveDataPointer(EffMiscDesc *desc);
 void *sysGetTableWord(u32 id);
@@ -48,7 +48,7 @@ EffMiscObject *FUN_00321fc8(EffMiscDesc *desc)
 {
     void *params = resourceResolveHeaderPointer(desc);
     u32 kind = desc->kind;
-    EffMiscObject *obj = FUN_00271be0(kind, params);
+    EffMiscObject *obj = effMiscCreate(kind, params);
     u32 *resource = resourceResolveDataPointer(desc);
 
     if (resource != NULL && g_effMiscKinds[obj->kind].sharesData != 0) {

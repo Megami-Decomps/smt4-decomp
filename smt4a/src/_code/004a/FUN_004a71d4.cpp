@@ -11,13 +11,13 @@ struct SlotSortKeysView {
 extern "C" s32 FUN_004a71d4(const u16 *left, const u16 *right)
 {
     const SlotSortKeysView *leftRecord =
-        reinterpret_cast<const SlotSortKeysView *>(FUN_00184310(*left));
+        reinterpret_cast<const SlotSortKeysView *>(devilGetRecord(*left));
     const SlotSortKeysView *rightRecord =
-        reinterpret_cast<const SlotSortKeysView *>(FUN_00184310(*right));
+        reinterpret_cast<const SlotSortKeysView *>(devilGetRecord(*right));
     s32 comparison = leftRecord->primary - rightRecord->primary;
     if (comparison == 0) {
-        leftRecord = reinterpret_cast<const SlotSortKeysView *>(FUN_00184310(*left));
-        rightRecord = reinterpret_cast<const SlotSortKeysView *>(FUN_00184310(*right));
+        leftRecord = reinterpret_cast<const SlotSortKeysView *>(devilGetRecord(*left));
+        rightRecord = reinterpret_cast<const SlotSortKeysView *>(devilGetRecord(*right));
         comparison = rightRecord->secondary - leftRecord->secondary;
         if (comparison == 0)
             comparison = *left - *right;

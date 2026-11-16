@@ -9,13 +9,13 @@ typedef struct Widget {
     /* 0x62 */ u8 hidden;
 } Widget;
 
-s32 FUN_002fc240(u8 *sub);
+s32 objectGetLengthField(u8 *sub);
 
 /* Runs the sub-object's update unless the widget is hidden; returns 0 when hidden. */
 s32 FUN_0028cfbc(Widget *widget)
 {
     if (widget->hidden == 0) {
-        return FUN_002fc240(widget->sub);
+        return objectGetLengthField(widget->sub);
     }
     return 0;
 }

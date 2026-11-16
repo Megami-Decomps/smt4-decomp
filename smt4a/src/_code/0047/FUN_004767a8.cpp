@@ -3,7 +3,7 @@
 
 extern "C" {
 
-int FUN_001a1564(...);
+int nn_fnd_DateTime_DateToDays(...);
 int legacyResourceIdRemap(...);
 int FUN_00426e18(...);
 int FUN_00426eb8(...);
@@ -35,7 +35,7 @@ typedef struct {
 
 extern int g_aocMain; /* 0x570260 */
 
-/* Supplied declaration required: FUN_001a1564. */
+/* Supplied declaration required: nn_fnd_DateTime_DateToDays. */
 /* Supplied declaration required: legacyResourceIdRemap. */
 /* Supplied declaration required: FUN_00426e18. */
 /* Supplied declaration required: FUN_00426eb8. */
@@ -254,7 +254,7 @@ void FUN_004767a8(int param_1)
       temp_v1 = nn_fnd_DateTime_GetDay((unsigned int)&temp_v16);
       temp_v4 = nn_fnd_DateTime_GetMonth((unsigned int)&temp_v16);
       temp_v5 = nn_fnd_DateTime_GetYear((unsigned int)&temp_v16);
-      FUN_001a1564(temp_v5,temp_v4,temp_v1);
+      nn_fnd_DateTime_DateToDays(temp_v5,temp_v4,temp_v1);
       *(int *)(param_1 + 0x18) = temp_v5;
       temp_v1 = param_1;
       FUN_004760bc();

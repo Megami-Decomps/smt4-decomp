@@ -5,8 +5,8 @@
 extern "C" {
 
 int CONCAT44(double, double);
-int FUN_0024f880(...);
-int FUN_0024f890(...);
+int quadHolderCopyOut(...);
+int quadSourceCopyOut(...);
 int gfxResolveTimedTextureFrame(unsigned int, double, unsigned char [16]);
 int forwardRecoveredCallback(...);
 int FUN_0028c92c(...);
@@ -112,8 +112,8 @@ extern float DAT_004ea998; /* 0x4ea998 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_0024f880. */
-/* Supplied declaration required: FUN_0024f890. */
+/* Supplied declaration required: quadHolderCopyOut. */
+/* Supplied declaration required: quadSourceCopyOut. */
 /* Supplied declaration required: gfxResolveTimedTextureFrame. */
 /* Supplied declaration required: forwardRecoveredCallback. */
 /* Supplied declaration required: FUN_0028c92c. */
@@ -208,7 +208,7 @@ void FUN_002c7d18(fn_002c7d18_arg0 *param_1)
   pfVar4 = param_1->field_0x4c;
   pfVar3 = (float *)pfVar4->field_0x18;
   DAT_004ea928 = temp_v4;
-  FUN_0024f880(pfVar4,&temp_v20);
+  quadHolderCopyOut(pfVar4,&temp_v20);
   FUN_0028c92c(temp_v30);
   temp_v31 = 0;
   temp_v32 = 0;
@@ -231,8 +231,8 @@ void FUN_002c7d18(fn_002c7d18_arg0 *param_1)
   if (param_1->field_0xc == 7) {
     temp_v17 = 255.0f;
     if ((pfVar4->field_0xc & 1) != 0) {
-      FUN_0024f890(pfVar4,&temp_v46);
-      FUN_0024f880(pfVar4,&temp_v20);
+      quadSourceCopyOut(pfVar4,&temp_v46);
+      quadHolderCopyOut(pfVar4,&temp_v20);
       pfVar7 = &temp_v46;
       DAT_004ea91c = temp_v46;
       DAT_004ea920 = fStack_7c;

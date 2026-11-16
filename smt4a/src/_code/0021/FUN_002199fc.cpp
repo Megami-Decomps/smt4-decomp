@@ -14,7 +14,7 @@ int efctSetSpeed(...);
 int FUN_00180310(...);
 int asdTMTexTableEntryAt(...);
 int fontMeasureLineAdvance(...);
-int FUN_00184310(void);
+int devilGetRecord(void);
 int FUN_0035ae58(...);
 int devilDispatchTextureResource(...);
 int VectorSignedToFloat(...);
@@ -50,7 +50,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
-/* Supplied declaration required: FUN_00184310. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_0035ae58. */
 /* Supplied declaration required: devilDispatchTextureResource. */
 
@@ -116,7 +116,7 @@ void FUN_002199fc(int param_1,int param_2,int param_3)
   if (param_1 < (int)(unsigned int)*(unsigned short *)(temp_v5 + 0x1e)) {
     temp_v15 = temp_v5 + param_1 * 2;
     psVar5 = (short *)(unsigned int)*(unsigned short *)(temp_v15 + 0xe);
-    FUN_00184310();
+    devilGetRecord();
     if (temp_v17 == 0) {
       temp_v7 = asdTMTexTableEntryAt(0x1a,0xd2);
       temp_v3 = g_renderCtx;

@@ -1,7 +1,7 @@
 /* NON_MATCHING: stack arguments use VFP copying instead of retail integer block transfers, with different saved registers/frame size. */
 #include "shard/W6_W6Match5_RecordCallParameters.h"
 
-extern "C" void FUN_00180280(u32, s32, RecordCallParameters *);
+extern "C" void texTableRecordCall(u32, s32, RecordCallParameters *);
 
 extern "C" void FUN_0017ffa8(u32 first, u32 table, s32 index, u32 second, u32 third, u32 fourth)
 {
@@ -14,5 +14,5 @@ extern "C" void FUN_0017ffa8(u32 first, u32 table, s32 index, u32 second, u32 th
     parameters.fourth = fourth;
     parameters.firstFlag = 1;
     parameters.secondFlag = 1;
-    FUN_00180280(table, index, &parameters);
+    texTableRecordCall(table, index, &parameters);
 }

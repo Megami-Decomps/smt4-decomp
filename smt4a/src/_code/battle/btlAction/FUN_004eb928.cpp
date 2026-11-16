@@ -78,7 +78,7 @@ int sysMemClear(int, int);
 int FUN_003756c8(int);
 int messageDismissNumericBanner(...);
 int FUN_003e8bb0(...);
-int FUN_003f0e20(...);
+int btlMainFindEntryByListedId(...);
 int FUN_003f2aac(...);
 int FUN_004a92d0(int, int, int);
 int FUN_004a9308(int, int, int, int);
@@ -188,7 +188,7 @@ extern int FUN_003eca48(int, unsigned short);
 /* Supplied declaration required: halfRecClear. */
 /* Supplied declaration required: FUN_003ee0c0. */
 /* Supplied declaration required: FUN_003efb18. */
-/* Supplied declaration required: FUN_003f0e20. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_003f20f0. */
 /* Supplied declaration required: FUN_003f2594. */
 /* Supplied declaration required: FUN_003f2638. */
@@ -498,7 +498,7 @@ LAB_004ebd00:
       if (*psVar17 < 0) break;
       temp_v26 = *piStack_30;
       temp_v9 = iStack_4c;
-      FUN_003f0e20();
+      btlMainFindEntryByListedId();
       acStack_44[0] = '\0';
       temp_v18 = uStack_74;
       FUN_004c4604(uStack_74,temp_v7,(int)*(short *)(*(int *)(temp_v20 + 0x2c) + 0x1be),
@@ -585,7 +585,7 @@ LAB_004ebd00:
       case 7:
         temp_v13 = (int)*psVar17;
         puVar20 = (unsigned int *)*piStack_30;
-        FUN_003f0e20(puVar20,temp_v13);
+        btlMainFindEntryByListedId(puVar20,temp_v13);
         temp_v10 = FUN_004f6478(g_btlAux);
         if ((DAT_00571160 & *puVar20) == 0 && (DAT_00571164 & puVar20[1]) == 0) {
           FUN_004fda78(temp_v10 + temp_v14,0,puVar25,*(int *)(*piVar16 + 0x1ed4) + temp_v13 * 0x1d0,3,0);
@@ -611,7 +611,7 @@ LAB_004ebd00:
       case 0xb:
         temp_v2 = *psVar17;
         temp_v13 = *piStack_30;
-        FUN_003f0e20(temp_v13,(int)temp_v2);
+        btlMainFindEntryByListedId(temp_v13,(int)temp_v2);
         FUN_004fcde0(temp_v10 + temp_v5 + 0x28,puVar25,temp_v13);
         btlCommandExtendAnimationWindow((BtlActorRef*)piVar16,(BtlCommand*)puVar25,(int)temp_v2,temp_v10 + temp_v5,0x1e,0x1e);
         break;
@@ -713,7 +713,7 @@ LAB_004ebd00:
         temp_v13 = FUN_004f5a40(g_btlAux);
         temp_v17 = uStack_74;
         temp_v14 = *piStack_30;
-        FUN_003f0e20(temp_v14,(int)temp_v2);
+        btlMainFindEntryByListedId(temp_v14,(int)temp_v2);
         dataTable04FindById();
         temp_v19 = '\0';
         if ((temp_v17 != 0) && (temp_v0 = *(char *)(temp_v17 + 0x4d), temp_v0 == '\x01' || temp_v0 == '\x02'))
@@ -740,7 +740,7 @@ LAB_004ebd00:
               case 0xc:
                 if ((temp_v2 == 0xc) && (-1 < *psVar17)) {
                   puVar20 = (unsigned int *)*piStack_30;
-                  FUN_003f0e20();
+                  btlMainFindEntryByListedId();
                   if ((puVar20 != (unsigned int *)0x0) &&
                      ((*puVar20 & DAT_00571150) == 0 && (puVar20[1] & DAT_00571154) == 0)) break;
                 }
@@ -1429,7 +1429,7 @@ code_r0x004f054c:
     do {
       puVar25[temp_v3 * 4 + 0x279] = 0;
       temp_v20 = *param_1;
-      FUN_003f0e20(temp_v20,temp_v3);
+      btlMainFindEntryByListedId(temp_v20,temp_v3);
       if (temp_v20 != 0) {
         puVar25[temp_v3 * 4 + 0x279] = *(unsigned int *)(temp_v20 + 600);
         puVar25[temp_v3 * 4 + 0x27a] = *(unsigned int *)(temp_v20 + 0x25c);

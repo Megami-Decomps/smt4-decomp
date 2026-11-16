@@ -16,16 +16,16 @@ extern "C" s32 FUN_00337110(const UnitePairEntryIV *firstPair, const UnitePairEn
 {
     const WideFusionPairView *first = (const WideFusionPairView *)firstPair;
     const WideFusionPairView *second = (const WideFusionPairView *)secondPair;
-    const DevilRecordA *a = FUN_00184310(first->resultId);
-    const DevilRecordA *b = FUN_00184310(second->resultId);
+    const DevilRecordA *a = devilGetRecord(first->resultId);
+    const DevilRecordA *b = devilGetRecord(second->resultId);
     s32 result = a->race - b->race;
     if (!result) {
         result = b->level - a->level;
         if (!result)
             result = first->resultId - second->resultId;
     }
-    a = FUN_00184310(first->firstId);
-    b = FUN_00184310(second->firstId);
+    a = devilGetRecord(first->firstId);
+    b = devilGetRecord(second->firstId);
     if (!result) {
         result = a->race - b->race;
         if (!result) {
@@ -37,8 +37,8 @@ extern "C" s32 FUN_00337110(const UnitePairEntryIV *firstPair, const UnitePairEn
             }
         }
     }
-    a = FUN_00184310(first->secondId);
-    b = FUN_00184310(second->secondId);
+    a = devilGetRecord(first->secondId);
+    b = devilGetRecord(second->secondId);
     if (!result) {
         result = a->race - b->race;
         if (!result) {

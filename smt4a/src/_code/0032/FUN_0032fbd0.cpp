@@ -80,7 +80,7 @@ typedef struct LiveUnit {
     /* 0x0AC */ u16 bonus[5];
 } LiveUnit;
 
-void FUN_00184310(u32 id);
+void devilGetRecord(u32 id);
 void sysMemClear(void *block, u32 size);
 void FUN_004bcd90(RebuiltRecord *record);
 u16 recordGetScaledMaximum(RebuiltRecord *record);
@@ -100,7 +100,7 @@ s32 FUN_0032fbd0(LiveUnit *unit)
     if (gameDataCopySaveEntry(id, saved) == 0) {
         return matches;
     }
-    FUN_00184310(id);
+    devilGetRecord(id);
     gameDataCopySaveEntry(id, &entry);
     sysMemClear(&record, 300);
     record.key = entry.key;

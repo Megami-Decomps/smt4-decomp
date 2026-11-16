@@ -6,7 +6,7 @@
 extern "C" {
 
 int FUN_001527d8(...);
-int FUN_001634b4(...);
+int effectRenderTransformedInstance(...);
 int FUN_00163ec4(...);
 int FUN_00164034(...);
 int FUN_00164168(...);
@@ -56,7 +56,7 @@ extern signed char DAT_005e204c; /* 0x5e204c */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: textDrawString. */
 extern int FUN_00162848(unsigned int);
-/* Supplied declaration required: FUN_001634b4. */
+/* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: FUN_00163ec4. */
 /* Supplied declaration required: FUN_00164034. */
 /* Supplied declaration required: FUN_00164168. */
@@ -386,7 +386,7 @@ char FUN_0014f3f4(void)
         temp_v16 = temp_v24;
         renderCtxCalculateStereoParallax(g_renderCtx);
         VectorSignedToFloat((int)temp_v24,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_001634b4(temp_v5 + temp_v6 * 0x8c + 0x588);
+        effectRenderTransformedInstance(temp_v5 + temp_v6 * 0x8c + 0x588);
         temp_v24 = temp_v16;
       }
       temp_v6 = temp_v6 + 1;
@@ -401,7 +401,7 @@ char FUN_0014f3f4(void)
       temp_v24 = 0.27f;
       renderCtxCalculateStereoParallax(g_renderCtx);
       VectorSignedToFloat((int)temp_v24,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_001634b4(temp_v5 + *(short *)(temp_v5 + 0x56) * 0x8c + 0x844);
+      effectRenderTransformedInstance(temp_v5 + *(short *)(temp_v5 + 0x56) * 0x8c + 0x844);
     }
   }
   renderCtxPopState(g_renderCtx,3);

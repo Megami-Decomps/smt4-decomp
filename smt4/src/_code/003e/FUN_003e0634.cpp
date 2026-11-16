@@ -3,7 +3,7 @@
 #include "nn/cec/MessageKey.h"
 
 extern "C" {
-CecMessageKey *FUN_00238c80(CecMessageKey *destination, const CecMessageKey *source);
+CecMessageKey *releaseOrCopyHandle(CecMessageKey *destination, const CecMessageKey *source);
 CecMessageKey *FUN_002393a4(CecMessageKey *destination, const char *source);
 s32 FUN_003e0b90(const CecMessageKey *key, const CecMessageKey *candidate);
 CecMessageKeyHeader *nn_cec_CTR_MessageBox_GetMessHeader(AsdCecMessageBox *box, s32 kind, u32 index);
@@ -17,7 +17,7 @@ u32 FUN_003e0634(AsdCecMessageBox *box, s32 kind, const CecMessageKey *key)
         CecMessageKey candidate;
         CecMessageKeyHeader *header = nn_cec_CTR_MessageBox_GetMessHeader(box, kind, index);
         if (header != NULL && (u32)header != 0xffffffe0) {
-            FUN_00238c80(&candidate, &header->key);
+            releaseOrCopyHandle(&candidate, &header->key);
         } else {
             FUN_002393a4(&candidate, DAT_004656f1);
         }

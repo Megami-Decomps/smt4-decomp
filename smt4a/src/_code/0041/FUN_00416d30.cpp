@@ -37,7 +37,7 @@ void FUN_00416d30(ResultInputWork *work)
             libc_strcpy(name, FUN_0014bf3c(slot->id, 0));
             FUN_003180c4(0x10, name);
             asdLoadFileAsyncSimple(DAT_00533c70, reinterpret_cast<u32 *>(&work->resources.levelUpScript), 0);
-            s8 voiceCategory = (s8)devilGetVoiceCategory(FUN_00184310(slot->id));
+            s8 voiceCategory = (s8)devilGetVoiceCategory(devilGetRecord(slot->id));
             DataTableView<DemonMessageArchiveRow> messages(0x25, 0);
             DemonMessageArchiveRow *entry = messages.entries;
             u32 index;

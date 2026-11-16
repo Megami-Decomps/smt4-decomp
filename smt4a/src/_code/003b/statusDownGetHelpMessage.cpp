@@ -15,7 +15,7 @@ extern StatusDownState *g_statusDown;
 u8 FUN_002c7e3c(void);
 u8 FUN_002c7e54(void);
 u16 *FUN_002c7e24(void);
-StatusDownRecord *FUN_00184310(u16 id);
+StatusDownRecord *devilGetRecord(u16 id);
 u32 FUN_00334044(void);
 u32 fieldStateAllowsAction(void);
 
@@ -32,7 +32,7 @@ u32 statusDownGetHelpMessage(s32 kind)
         }
         if (kind == 1) {
             if (inBattle != 0) {
-                if ((FUN_00184310(*FUN_002c7e24())->flags & 2) == 0) {
+                if ((devilGetRecord(*FUN_002c7e24())->flags & 2) == 0) {
                     message = 49;
                 } else {
                     message = 241;

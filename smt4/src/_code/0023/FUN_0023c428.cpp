@@ -5,7 +5,7 @@
 
 extern "C" {
 void lightOwnerRegister(MaterialMergeModel *model, s32 mode);
-s32 FUN_0027dab0(BtlMainState *battle, BtlActionRecord *action);
+s32 idSetFindSubjectIndex(BtlMainState *battle, BtlActionRecord *action);
 MaterialMergeVariants *FUN_0027da30(BtlMainState *battle, s32 member);
 void effectComputeScaledImageBounds(const BattleSpritePlacement *placement, f32 *output, f32 scale);
 void modelSetPosition(MaterialMergePose *pose, s32 node, const f32 *position);
@@ -20,7 +20,7 @@ void FUN_0023c428(MaterialMergeOwner *owner, s32 index)
         if (model->pose->state < 0)
             lightOwnerRegister(model, 1);
         BtlActionRecord *action = &btlGetMainState()->actions[index];
-        s32 variant = FUN_0027dab0(btlGetMainState(), action);
+        s32 variant = idSetFindSubjectIndex(btlGetMainState(), action);
         if (variant < 0)
             variant = 0;
         MaterialMergePlacement *selected = NULL;

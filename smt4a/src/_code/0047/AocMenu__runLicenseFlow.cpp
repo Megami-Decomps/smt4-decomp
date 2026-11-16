@@ -45,7 +45,7 @@ extern AocLicenseMain *g_aocMain;
 void sysMemClear(void *destination, u32 size);
 AocLicenseHandler *windowCreateStatusOperation(u8 *storage, s32 kind);
 void FUN_00476e58(AocLicenseMenu *menu, s32 first, s32 second);
-void FUN_00477d10(AocLicenseMenu *menu, s32 selection, s32 mode);
+void aocMenuSetButtonHelp(AocLicenseMenu *menu, s32 selection, s32 mode);
 void jobFlagsWorkStop(AocLicenseMenu *menu);
 void FUN_0047bc90(AocLicenseMenu *menu, RequestParameters *parameters);
 void FUN_0047bcdc(AocLicenseMenu *menu, s32 value);
@@ -172,14 +172,14 @@ void AocMenu::runLicenseFlow()
             delete menu->handler;
             menu->handler = NULL;
         }
-        FUN_00477d10(menu, 2, 1);
+        aocMenuSetButtonHelp(menu, 2, 1);
         return;
     case 9999:
         FUN_00476e58(menu, 14, 6);
         if (menu->state != 6) {
             return;
         }
-        FUN_00477d10(menu, 2, 1);
+        aocMenuSetButtonHelp(menu, 2, 1);
         return;
     }
     switch (result.kind) {

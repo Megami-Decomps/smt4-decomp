@@ -14,7 +14,7 @@ struct BattleMemberResources {
 extern "C" {
 extern void *g_btlUiBlock;
 extern BattleVersionResources *DAT_00435d18;
-s32 FUN_0027dab0(BtlMainState *state, const BtlActionRecord *action);
+s32 idSetFindSubjectIndex(BtlMainState *state, const BtlActionRecord *action);
 BattleMemberResources *FUN_0027da30(BtlMainState *state, s32 memberId);
 s32 entryContainsIdentifier(BtlMainState *state, u32 id);
 u32 FUN_00294090(u32 id, s32 mode);
@@ -43,7 +43,7 @@ void battleActionPollMemberResources(BtlMainState *state, BtlActionRecord *actio
     }
     if (flags & 2) {
         if (flags & 0x10) {
-            s32 index = FUN_0027dab0(state, action);
+            s32 index = idSetFindSubjectIndex(state, action);
             if (index < 0)
                 index = 0;
             BattleMemberResources *resources = FUN_0027da30(state, action->memberId);
@@ -57,7 +57,7 @@ void battleActionPollMemberResources(BtlMainState *state, BtlActionRecord *actio
             }
             action->flags &= ~0x10u;
         }
-        s32 index = FUN_0027dab0(state, action);
+        s32 index = idSetFindSubjectIndex(state, action);
         if (index < 0)
             index = 0;
         BattleMemberResources *resources = FUN_0027da30(state, action->memberId);

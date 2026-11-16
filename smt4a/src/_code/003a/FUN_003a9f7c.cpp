@@ -11,7 +11,7 @@ extern "C" {
 extern const u32 DAT_00573c70[2];
 extern RenderCtxA* g_renderCtx;
 f32 renderCtxCalculateStereoParallax(RenderCtxA* context, f32 depth);
-void FUN_001634b4(UiSpriteState* sprite, f32 horizontalOffset);
+void effectRenderTransformedInstance(UiSpriteState* sprite, f32 horizontalOffset);
 
 // Draw the active panel frame and its four entry sprites at the current eye's parallax.
 void FUN_003a9f7c(BtlUiObjAA* object)
@@ -40,9 +40,9 @@ void FUN_003a9f7c(BtlUiObjAA* object)
     for (s32 i = 0; i < 10; ++i) {
         if (i <= 3 && panel->frame.visibility.active != 0) {
             if (i == 0) {
-                FUN_001634b4(&panel->frame, (f32)x);
+                effectRenderTransformedInstance(&panel->frame, (f32)x);
             }
-            FUN_001634b4(&panel->entries[i], (f32)x);
+            effectRenderTransformedInstance(&panel->entries[i], (f32)x);
         }
     }
 }

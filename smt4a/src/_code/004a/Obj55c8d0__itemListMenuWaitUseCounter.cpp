@@ -29,7 +29,7 @@ typedef struct ItemRecord {
 s32 useCounterIsFinished(void);
 void useCounterRelease(void);
 s32 flaggedValueHolderGetTotal(void *cursor);
-ItemRecord *FUN_00184310(u16 itemId);
+ItemRecord *devilGetRecord(u16 itemId);
 void sysPlaySe(s32 se);
 void FUN_003343f0(s32 value);
 s32 useCounterGetCurrentValue(void);
@@ -46,7 +46,7 @@ void Obj55c8d0::itemListMenuWaitUseCounter()
             sysPlaySe(0x48);
         } else if (menu->mode == 0) {
             ItemListEntry *entries = menu->entries;
-            ItemRecord *item = FUN_00184310(entries[flaggedValueHolderGetTotal(menu->cursor)].itemId);
+            ItemRecord *item = devilGetRecord(entries[flaggedValueHolderGetTotal(menu->cursor)].itemId);
 
             sysPlaySe((item->flags & 2) ? 0x121 : 0x30);
         } else {

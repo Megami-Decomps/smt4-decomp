@@ -13,7 +13,7 @@ struct DemonRecordFamily {
 extern "C" {
 
 void scrSetResult(s32 result);
-DemonRecordFamily *FUN_00184310(u32 id);
+DemonRecordFamily *devilGetRecord(u32 id);
 
 /* Script command: whether any eligible battle entry is a demon of family 5. */
 u32 FUN_0037f218(void)
@@ -23,7 +23,7 @@ u32 FUN_0037f218(void)
         if ((g_btlCandidateMasks.unavailable & entry->flags) &&
             (entry->flags & g_btlCandidateMasks.required) &&
             !(entry->flags & g_btlCandidateMasks.excluded) &&
-            FUN_00184310(entry->id)->family == 5) {
+            devilGetRecord(entry->id)->family == 5) {
             scrSetResult(1);
             return 1;
         }

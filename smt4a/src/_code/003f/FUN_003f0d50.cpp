@@ -4,7 +4,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
-extern "C" BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, s32 group);
+extern "C" BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, s32 group);
 
 /* Refresh matching cached positions for live non-party roster records. */
 extern "C" void FUN_003f0d50(BtlMainStateA *battle)
@@ -18,7 +18,7 @@ extern "C" void FUN_003f0d50(BtlMainStateA *battle)
         for (s32 index = 4; index < 0x36; ++index) {
             BattleRosterRecordA *roster = &battle->roster[index];
             if ((roster->liveFlags.unk50 & 1) && (roster->liveFlags.unk50 & 0x80)) {
-                BtlCombatantEntryA *combatant = FUN_003f0e20(battle, roster->motion.group);
+                BtlCombatantEntryA *combatant = btlMainFindEntryByListedId(battle, roster->motion.group);
                 const BattleCombatantStatusKey *status =
                     &reinterpret_cast<const CombatantStatusView *>(combatant)->status;
                 for (s32 cacheIndex = 0; cacheIndex < 50; ++cacheIndex) {

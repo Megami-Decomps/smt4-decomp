@@ -7,7 +7,7 @@
 extern "C" {
 
 int textDrawString(...);
-int FUN_001634b4(unsigned int *);
+int effectRenderTransformedInstance(unsigned int *);
 int FUN_00164168(...);
 int efctSetSpeed(void);
 int renderCtxResetColorScale(...);
@@ -34,7 +34,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: FUN_001634b4. */
+/* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: FUN_00164168. */
 extern int vec2GetXInt(void);
 extern int vec2GetYInt(unsigned int *);
@@ -102,7 +102,7 @@ s32 FUN_00472820(u32 job)
       *(unsigned char *)(temp_v2 + 0x12d0) = 0;
     }
     VectorSignedToFloat(temp_v14,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_001634b4(puVar2 + 0x156);
+    effectRenderTransformedInstance(puVar2 + 0x156);
     temp_v2 = g_renderCtx;
     temp_v1 = packNibblesAndByte(6,7,0);
     piVar12 = (int *)(temp_v2 + 0x12b8);
@@ -113,7 +113,7 @@ s32 FUN_00472820(u32 job)
       *(unsigned char *)(temp_v2 + 0x12d0) = 0;
     }
     VectorSignedToFloat(temp_v14,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_001634b4(puVar2 + 0x110);
+    effectRenderTransformedInstance(puVar2 + 0x110);
     temp_v2 = g_renderCtx;
     piVar12 = (int *)(g_renderCtx + 0x1258);
     temp_v1 = *piVar12;

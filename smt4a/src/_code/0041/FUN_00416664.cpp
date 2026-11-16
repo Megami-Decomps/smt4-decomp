@@ -26,7 +26,7 @@ s32 FUN_001692ac(u32 first, u32 second);
 void efctSetSpeed(f32 speed);
 void FUN_00183bb0(void);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
-void FUN_001634b4(UiAnimatedSprite *sprite, f32 offset);
+void effectRenderTransformedInstance(UiAnimatedSprite *sprite, f32 offset);
 void FUN_00164168(u32 message, s32 x, s32 y, u32 color, s32 mode, s32 flags, f32 scale);
 
 void FUN_00416664(BattleLabelEntryViewA *entries)
@@ -39,7 +39,7 @@ void FUN_00416664(BattleLabelEntryViewA *entries)
         BattleLabelEntryViewA *entry = &entries[index];
         if (entry->active) {
             f32 offset = (f32)(s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.27f);
-            FUN_001634b4(&entry->sprite, offset);
+            effectRenderTransformedInstance(&entry->sprite, offset);
         }
         if (entry->active) {
             s32 offset = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.27f);

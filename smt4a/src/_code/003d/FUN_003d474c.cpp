@@ -34,7 +34,7 @@ s32 partyEntryFlagsBit3(u32 id);
 s32 partyEntryBitsBit4(u32 id);
 u32 questHasSpecialDetailPage(u32 id);
 u32 FUN_004186e0(void);
-QuestRecord *FUN_001ad9b4(u32 id);
+QuestRecord *dataTable1bOr1cGetRecord(u32 id);
 s32 FUN_003de75c(u32 id);
 s32 FUN_00284dbc(u32 id); /* a `mov r0, #0` stub armlink inlines */
 void *dataTableGet(u32 table, u32 section);
@@ -67,7 +67,7 @@ void FUN_003d474c(void)
             state = partyEntryFlagsBit3(id) != 0 ? 3 : 6;
         }
     } else {
-        QuestRecord *record = FUN_001ad9b4(id);
+        QuestRecord *record = dataTable1bOr1cGetRecord(id);
 
         if (record->kind == 6 || record->kind == 9 || record->kind == 11) {
             if (FUN_003de75c(id) == 0 && FUN_00284dbc(id) == 0) {

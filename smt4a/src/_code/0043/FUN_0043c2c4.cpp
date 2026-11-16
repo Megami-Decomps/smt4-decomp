@@ -23,7 +23,7 @@ void FUN_0043c2c4(void)
     return;
   }
   DAT_005891f4 = 1;
-  FUN_00170d8c(4,0,0,0);
+  nn_applet_CTR_detail_CallUtility(4,0,0,0);
                     /* WARNING: Treating indirect jump as return * /
   return;
 }

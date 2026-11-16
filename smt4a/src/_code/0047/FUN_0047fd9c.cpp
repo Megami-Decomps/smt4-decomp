@@ -24,7 +24,7 @@ typedef struct SkillData {
     /* 0x33 */ u8 category;
 } SkillData;
 
-EquipmentData *FUN_00184310(u16 id);
+EquipmentData *devilGetRecord(u16 id);
 EntryData *dataTable8FindRecord(s32 id);
 SkillData *dataTable41FindById(u16 id);
 
@@ -33,7 +33,7 @@ SkillData *dataTable41FindById(u16 id);
 s32 FUN_0047fd9c(s32 id, UnitRecord *unit)
 {
     if ((u32)(id - 1) <= 59 || (u32)(id - 0x79f) <= 63) {
-        EquipmentData *equipment = FUN_00184310(unit->equipment);
+        EquipmentData *equipment = devilGetRecord(unit->equipment);
         if (equipment != NULL && (equipment->flags & 4)) {
             return 1;
         }

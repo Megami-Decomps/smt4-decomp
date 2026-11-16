@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0016e8c4(int, int, unsigned int [2], int);
+int dateConvertDaysToCalendar(int, int, unsigned int [2], int);
 
-/* Supplied declaration required: FUN_0016e8c4. */
+/* Supplied declaration required: dateConvertDaysToCalendar. */
 extern int ll_sdiv(int, int, unsigned int, unsigned int);
 
 
@@ -20,7 +20,7 @@ unsigned int FUN_00502064(unsigned int *param_1,unsigned int param_2,unsigned in
   temp_v1[0] = param_4;
   temp_v0 = ll_sdiv(*param_1 + 0x7cfc8400,param_1[1] + 0x395f + (unsigned int)(0x83037bff < *param_1),86400000
                   ,0);
-  FUN_0016e8c4(0,0,temp_v1,temp_v0 - 0xb2407);
+  dateConvertDaysToCalendar(0,0,temp_v1,temp_v0 - 0xb2407);
   return temp_v1[0];
 }
 

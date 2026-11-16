@@ -8,16 +8,16 @@ struct Table00OrderRecord {
 };
 
 extern "C" {
-const Table00OrderRecord *FUN_00184310(u16 id);
+const Table00OrderRecord *devilGetRecord(u16 id);
 
 s32 dataTable00CompareOrderKeys(const u16 *left, const u16 *right)
 {
-    const Table00OrderRecord *leftRecord = FUN_00184310(*left);
-    const Table00OrderRecord *rightRecord = FUN_00184310(*right);
+    const Table00OrderRecord *leftRecord = devilGetRecord(*left);
+    const Table00OrderRecord *rightRecord = devilGetRecord(*right);
     s32 comparison = leftRecord->primaryKey - rightRecord->primaryKey;
     if (comparison == 0) {
-        leftRecord = FUN_00184310(*left);
-        rightRecord = FUN_00184310(*right);
+        leftRecord = devilGetRecord(*left);
+        rightRecord = devilGetRecord(*right);
         comparison = rightRecord->secondaryKey - leftRecord->secondaryKey;
         if (comparison == 0) {
             comparison = *left - *right;

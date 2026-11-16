@@ -7,7 +7,7 @@
 
 extern "C" {
 
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *, s32);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *, s32);
 }
 
 extern "C" u32 FUN_004fdb18(s32 actor, u32 options, BattleRosterRecordA *target,
@@ -28,7 +28,7 @@ extern "C" u32 FUN_004fdb18(s32 actor, u32 options, BattleRosterRecordA *target,
     action->value = 1;
     action->parameter = parameter;
     if (checkStatus) {
-        const BtlCombatantEntryA *entry = FUN_003f0e20(btlGetMainState(), target->motion.group);
+        const BtlCombatantEntryA *entry = btlMainFindEntryByListedId(btlGetMainState(), target->motion.group);
         if (entry->statusFlags & 0x10) {
             action = btlQueueReflectAction(g_btlActionReflect, nextActor, 0, options);
             action->kind = 38;

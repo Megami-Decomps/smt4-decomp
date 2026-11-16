@@ -21,7 +21,7 @@ int FUN_00180310(...);
 int FUN_0018152c(...);
 int asdTMTexTableEntryAt(...);
 int fontMeasureLineAdvance(...);
-int FUN_00184310(void);
+int devilGetRecord(void);
 int FUN_001fc720(int, int);
 int statusDownDrawIndicatorPairs(...);
 int resourceRunOperationIfUnblocked(...);
@@ -61,7 +61,7 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: FUN_0018152c. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
-/* Supplied declaration required: FUN_00184310. */
+/* Supplied declaration required: devilGetRecord. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001fc720. */
 /* Supplied declaration required: statusDownDrawIndicatorPairs. */
@@ -466,7 +466,7 @@ LAB_0026b644:
     FUN_00164b5c(2,0x12,0xe,temp_v0,temp_v1,0xb3);
     statusDownDrawIndicatorPairs(temp_v0,temp_v1);
     temp_v9 = (unsigned int)*(unsigned short *)(temp_v4 + 0x598);
-    FUN_00184310();
+    devilGetRecord();
     if (temp_v9 != 0) {
       if (*(char *)(temp_v9 + 9) == '\x01') {
         FUN_001835b4(2,0x12,0x483,temp_v0,temp_v1,0xbf);

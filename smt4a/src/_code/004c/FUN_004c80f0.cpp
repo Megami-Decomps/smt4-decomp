@@ -18,7 +18,7 @@ static inline s32 clampVital(s32 value, s32 maximum)
 
 extern "C" {
 BattleCombatantStatusKey *FUN_001568f8(BtlMainStateA *state, s32 id);
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, s32 id);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, s32 id);
 ScaledRecordValues *gameGetSlotRecord(s32 slot);
 s32 recordGetScaledMaximum(const ScaledRecordValues *record);
 
@@ -47,7 +47,7 @@ void FUN_004c80f0(s32 id, s32 kind, s32 delta)
             s32 maxMp = vitals->maxMp;
             vitals->mp = clampVital(mp + delta, maxMp);
         }
-        BtlCombatantEntryA *entry = FUN_003f0e20(state, id);
+        BtlCombatantEntryA *entry = btlMainFindEntryByListedId(state, id);
         if (entry->record) {
             reinterpret_cast<ScaledRecordValues *>(entry->record)->current = vitals->hp;
             reinterpret_cast<ScaledRecordValues *>(entry->record)->secondaryCurrent = vitals->mp;

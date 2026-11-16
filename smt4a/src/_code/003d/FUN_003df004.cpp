@@ -14,7 +14,7 @@ struct QuestObjectiveCountsA {
     u16 counts[1];
 };
 extern "C" {
-QuestObjectiveDefinitionA *FUN_001ad9b4(u32 quest);
+QuestObjectiveDefinitionA *dataTable1bOr1cGetRecord(u32 quest);
 s32 FUN_001ba3d4(u16 item);
 void *gameFindRosterEntry(u32 quest);
 s32 partyFindSlotById(u16 id);
@@ -24,7 +24,7 @@ s32 FUN_003df004(u32 quest, s32 index, QuestRequirementProgress *progress)
 {
     s32 result = 0;
     progress->unk07 = 0;
-    QuestObjectiveDefinitionA *definition = FUN_001ad9b4(quest);
+    QuestObjectiveDefinitionA *definition = dataTable1bOr1cGetRecord(quest);
     if (definition == NULL) {
         return result;
     }

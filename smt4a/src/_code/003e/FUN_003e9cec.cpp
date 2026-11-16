@@ -10,7 +10,7 @@ u32 partySlotFindIndex(UnitSourceRecord *record);
 void clearTwoWords(void *words);
 void rt_memclr(void *memory, u32 size);
 void sysMemClear(void *memory, u32 size);
-DemonModelInfo *FUN_00184310(u32 id);
+DemonModelInfo *devilGetRecord(u32 id);
 
 /* Initializes a battle unit's state block from a party demon record; `enemy` marks a unit that is not
  * one of the party's slots. */
@@ -31,7 +31,7 @@ void FUN_003e9cec(u32 unused, BattleUnitState *unit, UnitSourceRecord *record, s
     unit->clearedD4[0] = 0;
     unit->clearedD4[1] = 0;
     unit->clearedD4[2] = 0;
-    model = FUN_00184310(unit->sourceId);
+    model = devilGetRecord(unit->sourceId);
     if ((model->flagsB3 & 1) != 0) {
         unit->clearedD4[3] = 0;
     } else {

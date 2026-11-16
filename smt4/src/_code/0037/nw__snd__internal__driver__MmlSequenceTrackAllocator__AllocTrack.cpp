@@ -20,7 +20,7 @@ struct SequenceTrack {
 
 extern "C" {
 void *nw_snd_internal_PoolImpl_AllocImpl(void *pool);
-nw::snd::internal::driver::SequenceTrack *FUN_0037e730(void *memory);   /* constructs a track in `memory` */
+nw::snd::internal::driver::SequenceTrack *constructTrackBase(void *memory);   /* constructs a track in `memory` */
 }
 
 namespace nw {
@@ -34,7 +34,7 @@ SequenceTrack *MmlSequenceTrackAllocator::AllocTrack(void *player)
 {
     SequenceTrack *track = (SequenceTrack *)nw_snd_internal_PoolImpl_AllocImpl(pool);
 
-    if (track != NULL && (track = FUN_0037e730(track)) != NULL) {
+    if (track != NULL && (track = constructTrackBase(track)) != NULL) {
         track->player = player;
         track->userData = userData;
     }

@@ -10,7 +10,7 @@ int FUN_00368d74(...);
 int FUN_00368e10(...);
 int FUN_003e7fa4(...);
 int FUN_003e8bb0(...);
-int FUN_003f0e20(...);
+int btlMainFindEntryByListedId(...);
 int FUN_004c0f74(...);
 int btlFindEntryValue(...);
 int kindIdStore(...);
@@ -44,7 +44,7 @@ extern unsigned int DAT_0057116c; /* 0x57116c */
 /* Supplied declaration required: FUN_00368e10. */
 /* Supplied declaration required: FUN_003e7fa4. */
 /* Supplied declaration required: FUN_003e8bb0. */
-/* Supplied declaration required: FUN_003f0e20. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_004c0f74. */
 /* Supplied declaration required: btlFindEntryValue. */
 /* Supplied declaration required: kindIdStore. */
@@ -95,7 +95,7 @@ void FUN_004eae30(unsigned int *param_1,int param_2,int param_3,int param_4)
     g_btlAction = param_3;
     FUN_003e7fa4(*param_1,param_3,0);
     temp_v1 = *param_1;
-    FUN_003f0e20(temp_v1,(int)*(short *)(temp_v0 + param_3 * 0x1d0 + 0x6a));
+    btlMainFindEntryByListedId(temp_v1,(int)*(short *)(temp_v0 + param_3 * 0x1d0 + 0x6a));
     temp_v0 = __aeabi_idivmod(*(int *)(temp_v1 + 600) * 100,*(unsigned int *)(temp_v1 + 0x25c));
     temp_v11[2] = (unsigned int)(temp_v0 < 0x14);
     temp_v2 = reinterpret_cast<int>(btlGetMainState());
@@ -112,7 +112,7 @@ void FUN_004eae30(unsigned int *param_1,int param_2,int param_3,int param_4)
     default:
       temp_v4 = 0;
       temp_v0 = reinterpret_cast<int>(btlGetMainState());
-      FUN_003f0e20(temp_v0,param_3);
+      btlMainFindEntryByListedId(temp_v0,param_3);
       if (temp_v0 != 0) {
         temp_v9 = 0;
         temp_v10 = 0;
@@ -228,7 +228,7 @@ LAB_004eafdc:
       default:
         temp_v7 = 0;
         temp_v4 = reinterpret_cast<int>(btlGetMainState());
-        FUN_003f0e20(temp_v4,temp_v1);
+        btlMainFindEntryByListedId(temp_v4,temp_v1);
         if (temp_v4 != 0) {
           temp_v10 = 0;
           temp_v11[0] = 0;

@@ -2,14 +2,14 @@
 #include "shard/Shard004B.h"
 #include "gamedata/Table04Record.h"
 
-extern "C" s32 FUN_00184310(u16 id);
+extern "C" s32 devilGetRecord(u16 id);
 
 // Apply each item's category modifier, clamping its signed rank to -9..9.
 extern "C" void FUN_004bd17c(ItemRankRecord *record)
 {
     if (record == NULL)
         return;
-    if (record->id && FUN_00184310(record->id)) {
+    if (record->id && devilGetRecord(record->id)) {
         for (s32 i = 0; i < 8; ++i) {
             if (record->items[i]) {
                 ItemRankDefinition *item = (ItemRankDefinition *)dataTable04FindById(record->items[i]);

@@ -6,7 +6,7 @@
 extern "C" {
 extern void *g_btlUiBlock;
 
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, s32 group);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, s32 group);
 void FUN_003f2aec(BtlMainStateA *battle);
 void btlUiIdsRefresh(void *block);
 
@@ -16,7 +16,7 @@ void FUN_003f24e0(BtlMainStateA *battle, s32 group)
     u32 flags = battle->roster[group].liveFlags.unk50;
 
     if ((flags & 1) != 0 && (flags & 0x80) != 0) {
-        s16 selectionIndex = FUN_003f0e20(battle, group)->indexView.selectionIndex;
+        s16 selectionIndex = btlMainFindEntryByListedId(battle, group)->indexView.selectionIndex;
 
         for (s32 i = battle->turnOrder.position + 1; i < 12; i++) {
             if (battle->turnOrder.indices[i] < 0) {

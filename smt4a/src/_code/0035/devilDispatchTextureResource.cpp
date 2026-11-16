@@ -4,7 +4,7 @@
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
-const void *FUN_00184310(u32);
+const void *devilGetRecord(u32);
 const void *dataTable00FindById(u32);
 s32 gameFlagIsSet(u32);
 struct AocSystem;
@@ -37,7 +37,7 @@ void devilDispatchTextureResource(u32 id, u32 argument, u32 first, u32 second, s
         if ((s32)id < 0) {
             resource = gameFlagIsSet(0x11) ? 0 : 0x25E;
         } else {
-            const SavedTextureView *saved = (const SavedTextureView *)FUN_00184310((u16)id);
+            const SavedTextureView *saved = (const SavedTextureView *)devilGetRecord((u16)id);
             if (saved == NULL) {
                 return;
             }

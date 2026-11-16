@@ -16,7 +16,7 @@ void FUN_0010421c(void)
         if (DAT_004dae60.begin != DAT_004dae60.end) {
             --DAT_004dae60.end;
         }
-        FUN_002c3364(reinterpret_cast<u32 **>(&DAT_00464b70));
+        runtimeDispatchObjectRelease(reinterpret_cast<u32 **>(&DAT_00464b70));
         FUN_001108e4(&DAT_00464b70);
         g_gfxSettings.unk02 = 0;
     }

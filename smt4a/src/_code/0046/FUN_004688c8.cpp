@@ -11,7 +11,7 @@ extern "C" {
 int sysPlaySe(int);
 int buttonHelpSetText(int, unsigned int);
 int messageSetMode(int);
-int FUN_001ad9b4(void);
+int dataTable1bOr1cGetRecord(void);
 int partyFindSlotById(int);
 int resultCreate(int);
 int FUN_002f0c18(void);
@@ -58,7 +58,7 @@ extern int engineCleanupIsDone(void);
 /* Supplied declaration required: messageSetMode. */
 extern int idIsAtLeast350(unsigned int);
 extern int gameFlagEntryGetBit(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001ad9b4. */
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
 extern int goalConditionsSatisfied(unsigned int);
 /* Supplied declaration required: partyFindSlotById. */
 extern int scrRunOpcodesStub(unsigned int);
@@ -113,7 +113,7 @@ void FUN_004688c8(unsigned int *param_1)
     temp_v4 = 0;
     do {
       temp_v1 = temp_v4;
-      FUN_001ad9b4();
+      dataTable1bOr1cGetRecord();
       if (((temp_v1 != 0) && (*(char *)(temp_v1 + 6) == '\0')) &&
          (temp_v2 = gameFlagEntryGetBit(temp_v4,1), temp_v2 != 0)) {
         temp_v0 = *(short *)(temp_v1 + 0x124);
@@ -228,9 +228,9 @@ LAB_004689f8:
     }
     else {
       puVar4 = (unsigned short *)(param_1[0x283] & 0xffff);
-      FUN_001ad9b4();
+      dataTable1bOr1cGetRecord();
       temp_v4 = (unsigned int)*puVar4;
-      FUN_001ad9b4();
+      dataTable1bOr1cGetRecord();
       temp_v2 = 0;
       do {
         temp_v3 = temp_v4 + temp_v2 * 8;
@@ -274,15 +274,15 @@ LAB_004689f8:
       temp_v15 = 0;
       temp_v16 = 0;
       puVar5 = (unsigned short *)(param_1[0x283] & 0xffff);
-      FUN_001ad9b4();
+      dataTable1bOr1cGetRecord();
       FUN_003df168(&temp_v5,*puVar5);
       FUN_00331714(&temp_v5);
       puVar5 = (unsigned short *)(param_1[0x283] & 0xffff);
-      FUN_001ad9b4();
+      dataTable1bOr1cGetRecord();
       temp_v2 = FUN_001bd118(*puVar5);
       if (temp_v2 == 0) {
         puVar5 = (unsigned short *)(param_1[0x283] & 0xffff);
-        FUN_001ad9b4();
+        dataTable1bOr1cGetRecord();
         FUN_00417e08(*puVar5);
       }
       temp_v4 = 7;
@@ -296,7 +296,7 @@ LAB_004689f8:
     uniteReleaseExit();
     FUN_001695a0();
     puVar5 = (unsigned short *)(param_1[0x283] & 0xffff);
-    FUN_001ad9b4();
+    dataTable1bOr1cGetRecord();
     FUN_00417a60(*puVar5);
     FUN_003dec50();
     sysPlaySe(0xa5);

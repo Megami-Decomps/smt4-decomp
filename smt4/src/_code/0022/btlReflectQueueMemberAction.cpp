@@ -11,7 +11,7 @@ struct ReflectedMemberActions {
 extern "C" {
 
 ReflectedMemberActions *FUN_0027da30(BtlMainState *battle, s32 member);
-s32 FUN_0027dab0(BtlMainState *battle, const BtlActionRecord *member);
+s32 idSetFindSubjectIndex(BtlMainState *battle, const BtlActionRecord *member);
 
 // Queue a member reflection action only when an equivalent action is not already pending.
 ReflectAction *btlReflectQueueMemberAction(s32 actor, u32 options, BtlActionRecord *target, u32 value)
@@ -26,7 +26,7 @@ ReflectAction *btlReflectQueueMemberAction(s32 actor, u32 options, BtlActionReco
     }
     ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, options);
     ReflectedMemberActions *members = FUN_0027da30(btlGetMainState(), target->memberId);
-    s32 index = FUN_0027dab0(btlGetMainState(), target);
+    s32 index = idSetFindSubjectIndex(btlGetMainState(), target);
     if (index < 0)
         index = 0;
     action->kind = 38;

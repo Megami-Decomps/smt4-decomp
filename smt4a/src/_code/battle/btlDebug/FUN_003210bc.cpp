@@ -8,7 +8,7 @@
 extern "C" {
 extern f32 DAT_00573c00;
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
-void FUN_001634b4(UiSpriteState *sprite, f32 parallax);
+void effectRenderTransformedInstance(UiSpriteState *sprite, f32 parallax);
 s32 btlFloatingNumberComparePriorityDescending(const void *, const void *);
 
 void FUN_003210bc(BtlUiA *ui, s32 eye)
@@ -54,15 +54,15 @@ void FUN_003210bc(BtlUiA *ui, s32 eye)
         s32 index = order[position].index;
         Number *number = &overlays->numbers[index];
         if (number->active && number->eye == eye) {
-            if (number->value >= 10000) FUN_001634b4(&number->digits[4], (f32)parallax);
-            if (number->value >= 1000) FUN_001634b4(&number->digits[3], (f32)parallax);
-            if (number->value >= 100) FUN_001634b4(&number->digits[2], (f32)parallax);
-            if (number->value >= 10) FUN_001634b4(&number->digits[1], (f32)parallax);
-            FUN_001634b4(&number->digits[0], (f32)parallax);
+            if (number->value >= 10000) effectRenderTransformedInstance(&number->digits[4], (f32)parallax);
+            if (number->value >= 1000) effectRenderTransformedInstance(&number->digits[3], (f32)parallax);
+            if (number->value >= 100) effectRenderTransformedInstance(&number->digits[2], (f32)parallax);
+            if (number->value >= 10) effectRenderTransformedInstance(&number->digits[1], (f32)parallax);
+            effectRenderTransformedInstance(&number->digits[0], (f32)parallax);
         }
         Label *label = &overlays->labels[index];
         if (label->active && label->eye == eye)
-            FUN_001634b4(&label->sprite, (f32)parallax);
+            effectRenderTransformedInstance(&label->sprite, (f32)parallax);
     }
 }
 }

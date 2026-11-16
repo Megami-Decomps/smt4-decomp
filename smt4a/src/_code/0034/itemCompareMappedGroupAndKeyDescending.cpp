@@ -4,8 +4,8 @@ extern "C" s32 FUN_002f744c(u8);
 // Sorts items by descending mapped group, breaking ties by descending record sort key.
 extern "C" s32 itemCompareMappedGroupAndKeyDescending(const u16* leftId, const u16* rightId)
 {
-    ItemDataRecord* left = FUN_001ad9b4(*leftId);
-    ItemDataRecord* right = FUN_001ad9b4(*rightId);
+    ItemDataRecord* left = dataTable1bOr1cGetRecord(*leftId);
+    ItemDataRecord* right = dataTable1bOr1cGetRecord(*rightId);
     if (left == NULL) {
         return 0;
     }
@@ -18,8 +18,8 @@ extern "C" s32 itemCompareMappedGroupAndKeyDescending(const u16* leftId, const u
     if (result != 0) {
         return result;
     }
-    left = FUN_001ad9b4(*leftId);
-    right = FUN_001ad9b4(*rightId);
+    left = dataTable1bOr1cGetRecord(*leftId);
+    right = dataTable1bOr1cGetRecord(*rightId);
     s32 keyDifference = 0;
     if (left != NULL && right != NULL) {
         keyDifference = right->ordering.sortKey - left->ordering.sortKey;

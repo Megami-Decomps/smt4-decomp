@@ -44,7 +44,7 @@ extern RenderCtx* g_renderCtx;
 void efctSetSpeed(f32 speed);
 f32 FUN_001a1ee0(f32 angle);
 void pairSetHalves(void* sprite, s16 first, s16 second);
-void FUN_001634b4(void* sprite, f32 offset);
+void effectRenderTransformedInstance(void* sprite, f32 offset);
 void FUN_00387240(void* sprite, s32 a, s32 index);
 void FUN_0036b63c(void* sprite, s32 arg);
 
@@ -101,16 +101,16 @@ void FUN_003b21a4(CardPanel* panel)
         pairSetHalves(PANEL_SPRITE(panel, 0x368), (s16)offsetY, (s16)offsetX);
         pairSetHalves(PANEL_SPRITE(panel, 0x1c4), (s16)offsetY, (s16)offsetX);
     }
-    FUN_001634b4(PANEL_SPRITE(panel, 0x20), (f32)x);
+    effectRenderTransformedInstance(PANEL_SPRITE(panel, 0x20), (f32)x);
     FUN_00387240(PANEL_SPRITE(panel, 0x20), 12, 41);
     PANEL_SPRITE(panel, 0x20)->visible = 1;
-    FUN_001634b4(PANEL_SPRITE(panel, 0x1c4), (f32)x);
+    effectRenderTransformedInstance(PANEL_SPRITE(panel, 0x1c4), (f32)x);
     FUN_00387240(PANEL_SPRITE(panel, 0x1c4), 12, 45);
     PANEL_SPRITE(panel, 0x1c4)->visible = 1;
-    FUN_001634b4(PANEL_SPRITE(panel, 0xac), (f32)x);
+    effectRenderTransformedInstance(PANEL_SPRITE(panel, 0xac), (f32)x);
     FUN_00387240(PANEL_SPRITE(panel, 0xac), 12, 43);
     PANEL_SPRITE(panel, 0xac)->visible = 1;
-    FUN_001634b4(PANEL_SPRITE(panel, 0x368), (f32)x);
+    effectRenderTransformedInstance(PANEL_SPRITE(panel, 0x368), (f32)x);
     FUN_00387240(PANEL_SPRITE(panel, 0x368), 12, 41);
     FUN_0036b63c(PANEL_SPRITE(panel, 0x368), 1);
 }

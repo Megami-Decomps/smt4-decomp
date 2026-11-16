@@ -62,7 +62,7 @@ s32 gameFlagIsSet(u32 flag);
 s32 gameDataFlagTestBit(u32 flag);
 s32 idListHasFlaggedRecord(MemberRecord *member);
 s32 FUN_00291e14(void);
-EquipmentInfo *FUN_00184310(u32 equipment);
+EquipmentInfo *devilGetRecord(u32 equipment);
 s32 FUN_002b24fc(void);
 
 /* Whether a target command is usable by the member: allowed by the member's equipment when no
@@ -71,7 +71,7 @@ static bool targetCommandAllowed(CommandEntry *entry, MemberRecord *member)
 {
     if ((entry->attributes & 1) || FUN_00291e14() == 0 || FUN_00291e14() == 0)
         return false;
-    EquipmentInfo *info = FUN_00184310(member->equipment);
+    EquipmentInfo *info = devilGetRecord(member->equipment);
     return info != NULL && (info->flags & 4) != 0;
 }
 

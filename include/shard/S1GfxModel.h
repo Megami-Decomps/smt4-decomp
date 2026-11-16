@@ -90,7 +90,7 @@ typedef struct ModelOwner {
 extern "C" {
 #endif
 /* Canonical declaration (matches the definition). */
-void FUN_002c3364(u32 **ref);
+void runtimeDispatchObjectRelease(u32 **ref);
 #ifdef __cplusplus
 }
 #endif

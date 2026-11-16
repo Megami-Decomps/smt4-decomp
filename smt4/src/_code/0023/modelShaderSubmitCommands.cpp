@@ -17,7 +17,7 @@ struct ModelShaderCommands {
     VertexAttributeConstant constants[12]; // 0x6a0
 };
 extern "C" {
-void FUN_002bc7f4(u32, u32 **);
+void gxGetCommandListParameter(u32, u32 **);
 u32 *FUN_0023bba0(ModelShaderCommands *, u32 *);
 u32 *FUN_0023bb00(ModelShaderCommands *, u32 *, const void *);
 void *__aeabi_memcpy4(void *, const void *, u32);
@@ -51,7 +51,7 @@ static inline u32 *appendAttributeReset(u32 *cursor, const ModelShaderCommands *
 extern "C" void modelShaderSubmitCommands(void *, ModelShaderCommands *shader, const void *draw)
 {
     u32 *cursor;
-    FUN_002bc7f4(0x208, &cursor);
+    gxGetCommandListParameter(0x208, &cursor);
     u32 *start = cursor;
     *cursor++ = 0x100;
     *cursor++ = 0x20229;

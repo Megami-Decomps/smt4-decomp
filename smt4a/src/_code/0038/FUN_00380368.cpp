@@ -8,12 +8,12 @@ struct Obj380368Record {
 extern "C" {
 s32 scrGetArg(u32 index);
 void scrSetResult(s32 result);
-Obj380368Record *FUN_00184310(u32 id);
+Obj380368Record *devilGetRecord(u32 id);
 
-/* Script command: sets the result to the byte at 2 of the record FUN_00184310 finds for its first argument. */
+/* Script command: sets the result to the byte at 2 of the record devilGetRecord finds for its first argument. */
 s32 FUN_00380368(void)
 {
-    scrSetResult(FUN_00184310((u16)scrGetArg(0))->value);
+    scrSetResult(devilGetRecord((u16)scrGetArg(0))->value);
     return 1;
 }
 }

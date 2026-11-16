@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00238c80(...);
+int releaseOrCopyHandle(...);
 int _ZN12CecMessageIdC1Ev(unsigned char [8]);
 int __ARM_common_memcpy4_8(unsigned char [8], unsigned int);
 int nn_cec_CTR_Message_SetExHeaderWithoutCalc(unsigned int, unsigned int, unsigned int, unsigned int);
 
-/* Supplied declaration required: FUN_00238c80. */
+/* Supplied declaration required: releaseOrCopyHandle. */
 /* Supplied declaration required: _ZN12CecMessageIdC1Ev. */
 /* Supplied declaration required: __ARM_common_memcpy4_8. */
 extern unsigned char nn_cec_CTR_MessageId_IsEmpty(unsigned int);
@@ -32,9 +32,9 @@ unsigned int nn_cec_CTR_Message_SetExHeader(unsigned int param_1,unsigned int pa
   unsigned char temp_v9 [12];
   
   _ZN12CecMessageIdC1Ev(temp_v7);
-  temp_v2 = FUN_00238c80(temp_v9,param_1 + 0x20);
+  temp_v2 = releaseOrCopyHandle(temp_v9,param_1 + 0x20);
   __ARM_common_memcpy4_8(temp_v7,temp_v2);
-  FUN_00238c80(temp_v8,param_1 + 0x20);
+  releaseOrCopyHandle(temp_v8,param_1 + 0x20);
   if ((*(char *)(param_1 + 0x131) == '\0') &&
      (temp_v1 = nn_cec_CTR_MessageId_IsEmpty((unsigned int)temp_v7), temp_v1)) {
     temp_v4 = param_1;

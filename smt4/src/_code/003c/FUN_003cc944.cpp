@@ -29,7 +29,7 @@ struct BattleMemberKeysView {
 
 extern "C" {
 BattleCombatantStatusKey *FUN_0027da30(BtlMainState *battle, s32 id);
-s32 FUN_0027dab0(BtlMainState *battle, const BtlActionRecord *action);
+s32 idSetFindSubjectIndex(BtlMainState *battle, const BtlActionRecord *action);
 
 void FUN_003cc944(BtlMainState **battle, const BtlScriptActor *actor, s32 allActors)
 {
@@ -51,7 +51,7 @@ void FUN_003cc944(BtlMainState **battle, const BtlScriptActor *actor, s32 allAct
         const BattleCombatantStatusKey *member = FUN_0027da30(state, action->memberId);
         if (!member)
             continue;
-        s32 memberIndex = FUN_0027dab0(*battle, action);
+        s32 memberIndex = idSetFindSubjectIndex(*battle, action);
         if (memberIndex < 0)
             memberIndex = 0;
         s32 model = ((const BattleMemberKeysView *)member)->keys[memberIndex];

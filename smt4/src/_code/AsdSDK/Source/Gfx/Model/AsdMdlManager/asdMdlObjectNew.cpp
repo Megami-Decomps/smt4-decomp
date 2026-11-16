@@ -6,7 +6,7 @@ extern "C" {
 extern const char g_asdMdlManagerSourcePath[]; /* "c:\SMT4\XRD686\sdds4\Patch\AsdSDK\Source\Gfx\Model\AsdMdlManager.cpp": __FILE__ */
 
 void *asdMemoryAlloc(int, int, int, s32 size, int align);
-AsdMdlNode *FUN_001fe514(void);
+AsdMdlNode *asdMdlObjectAlloc(void);
 
 /* Allocates a zeroed model object and gives it a node. */
 AsdMdlObject *asdMdlObjectNew(void)
@@ -21,7 +21,7 @@ AsdMdlObject *asdMdlObjectNew(void)
     obj->unk10 = 0;
     obj->unk14 = 0;
     obj->records = NULL;
-    obj->node = FUN_001fe514();
+    obj->node = asdMdlObjectAlloc();
     obj->flags |= 0x200000;
     return obj;
 }

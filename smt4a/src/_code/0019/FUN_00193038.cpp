@@ -5,7 +5,7 @@
 
 extern "C" {
 __value_in_regs LongDivisionResult ll_sdiv(s64 dividend, s64 divisor);
-void FUN_0016e8c4(s32 *year, s32 *month, s32 *day, s32 epochDay);
+void dateConvertDaysToCalendar(s32 *year, s32 *month, s32 *day, s32 epochDay);
 
 // Split the SDK millisecond timestamp into calendar date, weekday and time of day.
 SaveCalendarTime FUN_00193038(const DateTimeValue *value)
@@ -14,7 +14,7 @@ SaveCalendarTime FUN_00193038(const DateTimeValue *value)
     s32 epochDay = (s32)divided.quotient - 730119;
     s32 dayMilliseconds = (s32)divided.remainder;
     s32 year, month, day;
-    FUN_0016e8c4(&year, &month, &day, epochDay);
+    dateConvertDaysToCalendar(&year, &month, &day, epochDay);
     SaveCalendarTime calendar;
     calendar.month = month;
     calendar.day = day;

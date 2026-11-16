@@ -21,7 +21,7 @@ struct CleanupStateView {
 
 extern "C" {
 extern u8 DAT_00646e74;
-void FUN_001b6668(void* entries, u32 context);
+void nw_ut_internal_LinkListImpl_erase_2B743C(void* entries, u32 context);
 void FUN_001915c4(void* storage, u32 first, u32 second);
 }
 
@@ -42,7 +42,7 @@ extern "C" u8 FUN_00173a94(CleanupStateView* state)
     for (;;) {
         if (state->entries == 0)
             break;
-        FUN_001b6668(&state->entries, state->entryContext);
+        nw_ut_internal_LinkListImpl_erase_2B743C(&state->entries, state->entryContext);
     }
 
     FUN_001915c4(&state->storage, state->storageFirst, state->storageSecond);

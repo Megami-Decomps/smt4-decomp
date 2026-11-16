@@ -22,7 +22,7 @@ extern unsigned int g_moduleDeferredCriticalSection1; /* 0x62d298 */
 extern unsigned int g_moduleCriticalSection8; /* 0x62d2a4 */
 
 extern unsigned int FUN_0016f864(void);
-extern unsigned int FUN_0016f988(unsigned int *, unsigned char *, unsigned int, unsigned int);
+extern unsigned int asdModelForwardChecked(unsigned int *, unsigned char *, unsigned int, unsigned int);
 /* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 extern unsigned int libc_strlen(unsigned char *);
 extern int FUN_00442280(void);
@@ -60,7 +60,7 @@ unsigned int FUN_00441f84(void)
       temp_v2 = FUN_0016f864();
       if (-1 < (int)temp_v2) {
         temp_v1 = libc_strlen(&LAB_004420e4);
-        temp_v2 = FUN_0016f988(&DAT_005c0a98,&LAB_004420e4,temp_v1,0);
+        temp_v2 = asdModelForwardChecked(&DAT_005c0a98,&LAB_004420e4,temp_v1,0);
         if (-1 < (int)temp_v2) {
           DAT_00589384 = DAT_00589384 + 1;
           FUN_00442800(0xb0101c8);

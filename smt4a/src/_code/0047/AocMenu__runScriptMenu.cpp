@@ -50,7 +50,7 @@ extern "C" {
 extern AocGlobals *g_aocMain;
 
 void FUN_0047bcdc(AocMenuProcess *process, s32 value);
-void FUN_00477d10(AocMenuProcess *process, s32 a, s32 b);
+void aocMenuSetButtonHelp(AocMenuProcess *process, s32 a, s32 b);
 void FUN_00476e58(AocMenuProcess *process, s32 unused, s32 next);
 AocMenuObject *windowCreateStatusOperation(AocMenuObject *object, s32 kind);
 s32 tableGroupFindEntryIndex(void *table, const char *name);
@@ -78,7 +78,7 @@ void AocMenu::runScriptMenu()
         FUN_0047bcdc(process, 3);
         scrScriptProcessStartEntry(process->script, tableGroupFindEntryIndex(process->table, "aoc_ExeDelete"));
         process->phase = 1;
-        FUN_00477d10(process, -1, 0);
+        aocMenuSetButtonHelp(process, -1, 0);
         return;
     case 1:
         if (FUN_002e19f8() != 0 && (process->flags & 0x200) != 0) {
@@ -112,7 +112,7 @@ void AocMenu::runScriptMenu()
         if (messageMainIsIdle() != 0) {
             scrScriptProcessStartEntry(process->script, tableGroupFindEntryIndex(process->table, "aoc_Deleted"));
             FUN_00169548(0);
-            FUN_00477d10(process, 3, 1);
+            aocMenuSetButtonHelp(process, 3, 1);
             process->phase = 4;
             return;
         }

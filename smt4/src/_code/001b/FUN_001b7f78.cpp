@@ -129,10 +129,10 @@ int FUN_00274fac(void);
 int FUN_0027522c(void);
 int FUN_00275364(void);
 int mapRangeUpdateModelVisibilityAndTransforms(void);
-int FUN_00275714(void);
+int soundActorQueueStartPending(void);
 int FUN_002757a8(void);
 int mapEnemyHasAvailableSecondaryState(void);
-int FUN_0027581c(void);
+int resourceTableReleaseHandles(void);
 int FUN_002758d8(void);
 int FUN_002759bc(void);
 int mapDepartSyncModelVisibility(void);
@@ -536,10 +536,10 @@ extern char *campGetState(void);
 /* Supplied declaration required: FUN_0027522c. */
 /* Supplied declaration required: FUN_00275364. */
 /* Supplied declaration required: mapRangeUpdateModelVisibilityAndTransforms. */
-/* Supplied declaration required: FUN_00275714. */
+/* Supplied declaration required: soundActorQueueStartPending. */
 /* Supplied declaration required: FUN_002757a8. */
 /* Supplied declaration required: mapEnemyHasAvailableSecondaryState. */
-/* Supplied declaration required: FUN_0027581c. */
+/* Supplied declaration required: resourceTableReleaseHandles. */
 /* Supplied declaration required: FUN_002758d8. */
 /* Supplied declaration required: FUN_002759bc. */
 /* Supplied declaration required: mapDepartSyncModelVisibility. */
@@ -2975,7 +2975,7 @@ LAB_001bb1d4:
     if (temp_v9 + 1 >= 0xd) {
       FUN_002759bc();
       FUN_002758d8();
-      FUN_0027581c();
+      resourceTableReleaseHandles();
       temp_v5 = mapEnemyHasAvailableSecondaryState();
       *(unsigned char *)((int)puVar14 + 0xbb) = temp_v5;
       FUN_0028a420(0);
@@ -3006,7 +3006,7 @@ LAB_001bb1d4:
     FUN_00280ac0(1);
     DAT_0049f93e = 0;
     FUN_002757a8();
-    FUN_00275714();
+    soundActorQueueStartPending();
     mapEntryTriggerForScene(puVar14[0xc]);
     mapRangeUpdateModelVisibilityAndTransforms();
     FUN_00275364();

@@ -13,7 +13,7 @@ int sysMemClear(unsigned int *, int);
 int FUN_003ece9c(...);
 int btlResetEntryCounters(int);
 int FUN_003eebf4(int, int);
-int FUN_003f0e20(int, int);
+int btlMainFindEntryByListedId(int, int);
 int FUN_003f2498(...);
 int FUN_0047f08c(...);
 int FUN_0047f584(void);
@@ -50,7 +50,7 @@ extern int btlScriptUnitHasFlags(int);
 /* Supplied declaration required: FUN_003ece9c. */
 /* Supplied declaration required: btlResetEntryCounters. */
 /* Supplied declaration required: FUN_003eebf4. */
-/* Supplied declaration required: FUN_003f0e20. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_003f2498. */
 /* Supplied declaration required: FUN_0047f08c. */
 /* Supplied declaration required: FUN_0047f584. */
@@ -116,7 +116,7 @@ void FUN_004ee5b4(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
   do {
     param_2[temp_v3 * 4 + 0x279] = 0;
     temp_v5 = *param_1;
-    FUN_003f0e20(temp_v5,temp_v3);
+    btlMainFindEntryByListedId(temp_v5,temp_v3);
     if (temp_v5 != 0) {
       param_2[temp_v3 * 4 + 0x279] = *(unsigned int *)(temp_v5 + 600);
       param_2[temp_v3 * 4 + 0x27a] = *(unsigned int *)(temp_v5 + 0x25c);

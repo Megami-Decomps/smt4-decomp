@@ -3,13 +3,13 @@
 
 extern "C" {
 
-void FUN_00351ca0(void);
+void resetFlag5891A4And65f8(void);
 
 /* Stops the owner if it was started and closes its handle. */
 HandleOwner *handleOwnerClose(HandleOwner *owner)
 {
     if (owner->started == 1) {
-        FUN_00351ca0();
+        resetFlag5891A4And65f8();
         owner->started = 0;
     }
     if (owner->handle != 0) {

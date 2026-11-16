@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_001757d0(int);
-int FUN_0018c87c(char *);
+int nw_ut_internal_LinkListImpl_erase_2BAE30(char *);
 int nw_snd_internal_driver_Voice_Free(int);
 int nw_snd_internal_driver_Voice_Stop(int);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: FUN_001757d0. */
-/* Supplied declaration required: FUN_0018c87c. */
+/* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2BAE30. */
 /* Supplied declaration required: nw_snd_internal_driver_Voice_Free. */
 /* Supplied declaration required: nw_snd_internal_driver_Voice_Stop. */
 
@@ -35,7 +35,7 @@ void nw_snd_internal_driver_VoiceManager_Finalize(char *param_1)
     }
     while (*(int *)(param_1 + 0x10) != 0) {
       temp_v0 = *(int *)(param_1 + 0x14);
-      FUN_0018c87c(param_1 + 0x10);
+      nw_ut_internal_LinkListImpl_erase_2BAE30(param_1 + 0x10);
       FUN_001757d0(temp_v0 - 0x58);
     }
     *param_1 = '\0';

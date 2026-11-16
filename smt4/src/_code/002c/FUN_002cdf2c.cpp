@@ -55,7 +55,7 @@ s32 mapMainIsBusy(void);
 s32 lmapMainIsRunning(void);
 void bgmReleaseStopped(void);
 void soundChannelStopAll(s32 channel);
-void FUN_0027581c(void);
+void resourceTableReleaseHandles(void);
 s32 FUN_0033361c(void);
 void bgmRequestSelectedChannelFade(u32 frames);
 void soundChannelRequestIfEnabled(u32 id, s32 arg);
@@ -80,7 +80,7 @@ void FUN_002cdf2c(BattleSpoils *spoils)
     if (mapMainIsBusy() != 0 || lmapMainIsRunning() != 0) {
         bgmReleaseStopped();
         soundChannelStopAll(15);
-        FUN_0027581c();
+        resourceTableReleaseHandles();
     } else if (FUN_0033361c() == 0) {
         bgmRequestSelectedChannelFade(30);
     }

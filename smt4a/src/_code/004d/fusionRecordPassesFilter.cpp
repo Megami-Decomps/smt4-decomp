@@ -54,14 +54,14 @@ typedef char RecordFilterOffsets[sizeof(RecordFilter) == 0x1B8 &&
 
 extern "C" {
 
-FilterRecord *FUN_00184310(u32 id);
+FilterRecord *devilGetRecord(u32 id);
 s32 slotRecordFindById(u32 id);
 SlotRecord *gameGetSlotRecord(s32 slot);
 
 /* Whether the record `recordId` passes the filter, with the two member ids given for the party-slot conditions. */
 s32 fusionRecordPassesFilter(RecordFilter *filter, u32 memberA, u32 memberB, u32 recordId)
 {
-    FilterRecord *record = FUN_00184310(recordId);
+    FilterRecord *record = devilGetRecord(recordId);
     FilterRecord *first;
     FilterRecord *second;
     s32 count;
@@ -150,8 +150,8 @@ s32 fusionRecordPassesFilter(RecordFilter *filter, u32 memberA, u32 memberB, u32
     if (filter->limitCount && slotRecordFindById(record->id) != 0) {
         return 0;
     }
-    first = FUN_00184310(memberA);
-    second = FUN_00184310(memberB);
+    first = devilGetRecord(memberA);
+    second = devilGetRecord(memberB);
     if (!filter->allowExcludedCategory) {
         if (first->category == 0x26 || second->category == 0x26) {
             return 0;

@@ -7,7 +7,7 @@ extern "C" {
 int coproc_movefrom_User_R_Thread_and_Process_ID(void);
 
 /* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
-extern int FUN_00158dc0(int);
+extern int nn_os_SimpleLock_TryLock(int);
 
 
 unsigned char nn_os_CriticalSection_TryEnter(int param_1)
@@ -19,7 +19,7 @@ unsigned char nn_os_CriticalSection_TryEnter(int param_1)
   
   temp_v0 = coproc_movefrom_User_R_Thread_and_Process_ID();
   if (temp_v0 != *(int *)(param_1 + 4)) {
-    temp_v0 = FUN_00158dc0(param_1);
+    temp_v0 = nn_os_SimpleLock_TryLock(param_1);
     if (temp_v0 == 0) {
       return 0;
     }

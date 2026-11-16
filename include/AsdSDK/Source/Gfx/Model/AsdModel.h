@@ -178,7 +178,7 @@ s32 fontMeasureLineAdvance(const void *text, s32 fontIndex);
 }
 
 extern "C" {
-u8 FUN_002c15fc(u32 index);
+u8 slotIsActive(u32 index);
 }
 
 extern "C" {
@@ -223,7 +223,7 @@ s32 FUN_00132da4(SoundArchiveLoader *loader, u32 item, u32 flags);
 extern "C" {
 #endif
 
-void FUN_00145d6c(s32 mode);
+void dataSubmitSelectedPresetBlock(s32 mode);
 
 #ifdef __cplusplus
 }

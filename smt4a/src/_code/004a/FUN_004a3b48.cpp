@@ -53,7 +53,7 @@ void FUN_0033449c(s32 value);
 void FUN_002f0420(s32 value);
 StatusSlotTable *gameGetSlotTable(void);
 s32 FUN_00372014(void);
-void FUN_00184310(u32 id);
+void devilGetRecord(u32 id);
 void __aeabi_memcpy4(void *destination, const void *source, s32 size);
 void FUN_004bcd90(UnitRecord *unit);
 u16 recordGetScaledMaximum(UnitRecord *unit);
@@ -107,7 +107,7 @@ void FUN_004a3b48(StatusPanel *panel)
             if (previous == 5 && FUN_00372014() != 0) {
                 objBInitBlock12DC5();
             }
-            FUN_00184310(id);
+            devilGetRecord(id);
             UnitRecord unit;
             __aeabi_memcpy4(&unit, member, sizeof(UnitRecord));
             for (s32 i = 0; i < 0x40; i++) {

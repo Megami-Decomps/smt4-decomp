@@ -27,7 +27,7 @@ void eventTexUpdateScreenShake(void* owner);
 void eventTextureRelease(void* owner);
 s32 FUN_001f42d4(u32 job);
 s32 jobIsValid(u32 job);
-void FUN_0026e68c(u32 job, u8 value);
+void jobSetWork31(u32 job, u8 value);
 void jobSetParent(u32 parent, u32 job);
 s32 jobGetStatus(u32 job);
 
@@ -46,7 +46,7 @@ u32 FUN_002ee6f8(void)
 
         for (s32 n = 0; n < 4; n++) {
             if (!jobIsValid(g_eventTexHandles[n])) continue;
-            FUN_0026e68c(g_eventTexHandles[n], 1);
+            jobSetWork31(g_eventTexHandles[n], 1);
             jobSetParent(g_eventTex->process, g_eventTexHandles[n]);
 
             manager = g_eventTex;

@@ -22,7 +22,7 @@ int flagValueSub(...);
 int FUN_004d0d70(void);
 
 int sysPlaySe(int);
-int FUN_001ad9b4(void);
+int dataTable1bOr1cGetRecord(void);
 int scrWorkGetValue(...);
 int scrWorkSetValue(...);
 int messageSlotSet(int);
@@ -69,7 +69,7 @@ extern int gameFlagsGetBlock(void);
 extern int dataTableValueOrZero(unsigned int);
 /* Supplied declaration required: FUN_00180118. */
 extern int gameGetOptions(void);
-/* Supplied declaration required: FUN_001ad9b4. */
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
 extern int goalConditionsSatisfied(unsigned int);
 /* Supplied declaration required: partyFindSlotById. */
 /* Supplied declaration required: FUN_002292ac. */
@@ -147,7 +147,7 @@ unsigned int FUN_002ebdcc(void)
   if (temp_v2 == 0) {
     scrWorkSetValue(0);
     temp_v4 = temp_v1;
-    FUN_001ad9b4();
+    dataTable1bOr1cGetRecord();
     temp_v2 = goalConditionsSatisfied(temp_v1);
     if (temp_v2 != 0) {
       if (*(char *)(temp_v4 + 6) != '\0') {
@@ -192,7 +192,7 @@ unsigned int FUN_002ebdcc(void)
   }
   temp_v2 = dataTableValueOrZero(0x1e);
   temp_v4 = temp_v1;
-  FUN_001ad9b4();
+  dataTable1bOr1cGetRecord();
   temp_v3 = scrWorkGetValue(0);
   switch(temp_v3) {
   case 0:

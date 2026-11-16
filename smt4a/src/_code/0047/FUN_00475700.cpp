@@ -6,7 +6,7 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_001a1564(...);
+int nn_fnd_DateTime_DateToDays(...);
 int legacyResourceIdRemap(...);
 int FUN_00426eb8(int *, int, unsigned int, unsigned int);
 int FUN_00426fe4(int *, int, int);
@@ -37,7 +37,7 @@ typedef struct {
 extern int g_aocMain; /* 0x570260 */
 
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_001a1564. */
+/* Supplied declaration required: nn_fnd_DateTime_DateToDays. */
 /* Supplied declaration required: legacyResourceIdRemap. */
 /* Supplied declaration required: FUN_00426eb8. */
 /* Supplied declaration required: FUN_00426fe4. */
@@ -227,7 +227,7 @@ int * FUN_00475700(int param_1)
           temp_v1 = nn_fnd_DateTime_GetDay((unsigned int)&temp_v18);
           temp_v5 = nn_fnd_DateTime_GetMonth((unsigned int)&temp_v18);
           temp_v6 = nn_fnd_DateTime_GetYear((unsigned int)&temp_v18);
-          FUN_001a1564(temp_v6,temp_v5,temp_v1);
+          nn_fnd_DateTime_DateToDays(temp_v6,temp_v5,temp_v1);
           *(int *)(param_1 + 0x18) = temp_v6;
           temp_v1 = param_1;
           FUN_00474d0c();

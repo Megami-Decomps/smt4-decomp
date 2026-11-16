@@ -6,7 +6,7 @@ extern "C" {
 typedef s32 (*RecordCompare)(const void *, const void *);
 
 s32 uiCompareBytePriorityAndKey(const void *, const void *);
-s32 FUN_00300b8c(const void *, const void *);
+s32 uiCompareBytePriorityThenKey(const void *, const void *);
 s32 FUN_002d06dc(const void *, const void *);
 s32 recordCompareUnsignedValue(const void *, const void *);
 s32 tableCompareWordByteKeys(const void *, const void *);
@@ -32,7 +32,7 @@ void FUN_00317e78(void)
     int *block;
 
     registerSection(5, 1, 4, uiCompareBytePriorityAndKey);
-    registerSection(5, 2, 4, FUN_00300b8c);
+    registerSection(5, 2, 4, uiCompareBytePriorityThenKey);
     registerSection(5, 3, 4, FUN_002d06dc);
     registerSection(5, 4, 0x1c, recordCompareUnsignedValue);
     registerSection(5, 7, 4, tableCompareWordByteKeys);

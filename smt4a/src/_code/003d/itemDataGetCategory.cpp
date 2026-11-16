@@ -6,7 +6,7 @@ extern "C" {
 
 u32 itemDataGetCategory(u32 id)
 {
-    ItemDataRecord *record = FUN_001ad9b4(id);
+    ItemDataRecord *record = dataTable1bOr1cGetRecord(id);
     return record != NULL ? record->category : 0;
 }
 

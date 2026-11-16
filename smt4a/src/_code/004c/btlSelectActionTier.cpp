@@ -22,7 +22,7 @@ struct ActionTierMasks {
 };
 extern "C" {
 extern ActionTierMasks DAT_005713f0;
-ActionTierUnit *FUN_003f0e20(BtlMainStateA *, u32);
+ActionTierUnit *btlMainFindEntryByListedId(BtlMainStateA *, u32);
 s32 btlAnyEventFilterMatches(BtlMainStateA *, ActionTierUnit *, u32);
 s32 lcgRandomRange(u32);
 s32 gameFlagIsSet(u32);
@@ -30,9 +30,9 @@ void source4CCopyHalves(ActionTierUnit *, u16 *);
 
 u32 btlSelectActionTier(u32 unitId)
 {
-    ActionTierUnit *unit = FUN_003f0e20(btlGetMainState(), unitId);
+    ActionTierUnit *unit = btlMainFindEntryByListedId(btlGetMainState(), unitId);
     s32 tier = 0;
-    ActionTierUnit *special = FUN_003f0e20(btlGetMainState(), unitId);
+    ActionTierUnit *special = btlMainFindEntryByListedId(btlGetMainState(), unitId);
     if (special && special->specialCounter > 0 && !btlAnyEventFilterMatches(btlGetMainState(), unit, 3)) {
         s32 roll = lcgRandomRange(99);
         ActionTierBattleFlags *battle = (ActionTierBattleFlags *)btlGetMainState();

@@ -47,7 +47,7 @@ u8 FUN_00417a60(u32 id)
     entry->flags = (entry->flags & ~2) | 0x1C;
     entry->bits &= ~4;
     if (FUN_001bd100(id)) {
-        if (reinterpret_cast<EntrySortRecord *>(FUN_001ad9b4(id))->category == 1) {
+        if (reinterpret_cast<EntrySortRecord *>(dataTable1bOr1cGetRecord(id))->category == 1) {
             RoleSlotsView *roles = reinterpret_cast<RoleSlotsView *>(block);
             for (s32 index = 0; index < 4; ++index) {
                 if (roles->slots[index].id == id) {

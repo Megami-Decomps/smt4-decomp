@@ -23,9 +23,9 @@ void FUN_00274798(void);
 void FUN_00274fac(void);
 void FUN_0027522c(void);
 void FUN_00275364(void);
-void FUN_00275714(void);
+void soundActorQueueStartPending(void);
 void FUN_002757a8(void);
-void FUN_0027581c(void);
+void resourceTableReleaseHandles(void);
 void FUN_002758d8(void);
 void FUN_002759bc(void);
 void mapDepartSyncModelVisibility(void);
@@ -104,7 +104,7 @@ u32 FUN_002eeb80(void)
         if (DAT_00447518.frame > 12 && NaviMain_IsCreated() != 0) {
             FUN_002759bc();
             FUN_002758d8();
-            FUN_0027581c();
+            resourceTableReleaseHandles();
             FUN_0028a420(0, 0);
             FUN_00294834(200, 200, 200, 130, 130, 130, 30, 30, 30, 150, 150, 150, 90.0f, -0.5f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 30.0f, 1.5f);
             DAT_00447518.frame = 100;
@@ -116,7 +116,7 @@ u32 FUN_002eeb80(void)
         FUN_00280ac0(1);
         g_gameState.controllerFlags.loading = 0;
         FUN_002757a8();
-        FUN_00275714();
+        soundActorQueueStartPending();
         mapEntryTriggerForScene(g_gameState.submode);
         FUN_00275364();
         FUN_0027522c();

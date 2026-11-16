@@ -65,7 +65,7 @@ s32 randRange(u32 maximum);
 HintCandidates *FUN_004bb80c(u32 owner);
 PlayerView *gameGetPlayerData(void);
 HintRecord *dataTable00FindById(u32 id);
-HintRecord *FUN_00184310(u32 id);
+HintRecord *devilGetRecord(u32 id);
 void *FUN_002d8b58(s32 kind, u32 id);
 void rt_memcpy(void *destination, const void *source, u32 size);
 const char *FUN_00180118(u32 id);
@@ -102,7 +102,7 @@ void FUN_00294cfc(u32 owner)
         if (FUN_002a4b28(id) != 0)
             continue;
         HintRecord *record = dataTable00FindById(id);
-        if ((FUN_00184310(id)->flagsB & 1) != 0 && (dataTable00FindById((u16)id)->flagsA & 4) != 0
+        if ((devilGetRecord(id)->flagsB & 1) != 0 && (dataTable00FindById((u16)id)->flagsA & 4) != 0
             && !hintInList(DAT_005f190c, HINT_KNOWN_COUNT, id)
             && !hintInList(DAT_005f18ec, HINT_RECENT_COUNT, id)) {
             s32 requirement = record->levelRequirement & 0x7FFF;

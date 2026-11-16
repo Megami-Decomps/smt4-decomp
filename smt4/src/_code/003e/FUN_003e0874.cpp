@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern int FUN_002399bc(unsigned int, unsigned int);
+extern int handlerRefForward(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002399ec. */
 extern int FUN_00354b70(int);
 /* Supplied declaration required: FUN_0035511c. */
@@ -33,7 +33,7 @@ int FUN_003e0874(int *param_1)
   
   temp_v1 = (**(romwright_code **)(*param_1 + 0x2c))(param_1,temp_v4,2,1,0,0);
   if (-1 < temp_v1) {
-    temp_v2 = FUN_002399bc(0x36c0,4);
+    temp_v2 = handlerRefForward(0x36c0,4);
     if (temp_v2 == 0) {
       temp_v1 = -0x379ef40d;
     }

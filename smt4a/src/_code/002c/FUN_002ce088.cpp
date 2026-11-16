@@ -10,13 +10,13 @@ typedef struct Record {
     /* 0x6 */ u16 order;
 } Record;
 
-extern Record *FUN_00184310(u32 id);
+extern Record *devilGetRecord(u32 id);
 
 /* Sort comparison of two ids: lower rank first, then higher order, then lower id. */
 s32 FUN_002ce088(u16 *idA, u16 *idB)
 {
-    Record *recordA = FUN_00184310(*idA);
-    Record *recordB = FUN_00184310(*idB);
+    Record *recordA = devilGetRecord(*idA);
+    Record *recordB = devilGetRecord(*idB);
     s32 diff = recordA->rank - recordB->rank;
 
     if (diff == 0) {

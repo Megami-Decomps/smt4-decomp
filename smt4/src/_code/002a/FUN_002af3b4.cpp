@@ -13,7 +13,7 @@ struct SoundLoader {
 extern "C" {
 s32 FUN_002bf684(void);
 u32 FUN_002ac780(void *archive, u32 id);
-s32 FUN_00141fd0(void *archive, u32 id);
+s32 nw_snd_SoundArchive_GetSoundType(void *archive, u32 id);
 s32 FUN_001308dc(SoundLoader *loader, s32 impl, s32 arg, u32 extra);
 s32 FUN_00140bfc(SoundLoader *loader, u32 id, s32 arg, u32 flags, u32 extra);
 s32 nw_snd_internal_SoundArchiveLoader_LoadImpl(SoundLoader *loader, u32 id, s32 arg, u32 extra, s32 flag);
@@ -34,7 +34,7 @@ s32 FUN_002af3b4(SoundLoader *loader, u32 id, s32 arg, u32 flags, u32 extra)
     } else {
         switch (id >> 24) {
         case 1: {
-            s32 kind = FUN_00141fd0(loader->archive, id);
+            s32 kind = nw_snd_SoundArchive_GetSoundType(loader->archive, id);
             if (kind == 1)
                 result = nw_snd_internal_SoundArchiveLoader_LoadSequenceSound(loader, id, arg, flags, extra);
             else if (kind == 3)

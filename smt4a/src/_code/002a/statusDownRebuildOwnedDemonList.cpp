@@ -17,7 +17,7 @@ void statusDownRebuildOwnedDemonList(const u8 *quantities)
     state->inventory.ownedCount = 0;
     sysMemClear(state->inventory.entryData, sizeof(state->inventory.entryData));
     for (u16 id = 0; id < 0x500; ++id) {
-        const DevilRecordA *record = FUN_00184310(id);
+        const DevilRecordA *record = devilGetRecord(id);
         if (record != NULL && (record->flags & 1) != 0 && quantities[record->id] != 0) {
             state->inventory.entries[state->inventory.count][0] = record->id;
             u8 quantity = quantities[record->id];

@@ -22,9 +22,9 @@ u32 FUN_0010edf8(u32 box)
 {
     if (g_messageMain.banner->box == box)
         return 0;
-    if (FUN_002c1658(0, 1) || FUN_002c1658(9, 2) || FUN_002c15fc(6) || DAT_0049381c.suppressed ||
+    if (FUN_002c1658(0, 1) || FUN_002c1658(9, 2) || slotIsActive(6) || DAT_0049381c.suppressed ||
         (g_messageMain.state->box == box && g_messageMain.state->unkA34 == 1 && FUN_002c1658(1, 1))) {
-        if (FUN_002c1658(9, 2) || FUN_002c15fc(6))
+        if (FUN_002c1658(9, 2) || slotIsActive(6))
             FUN_001175d4(1);
         if (querySlotHasHandle() && (FUN_002bfdd4() & 1))
             workCommandRefreshActiveSlots();
@@ -32,7 +32,7 @@ u32 FUN_0010edf8(u32 box)
             eventQueueAddUniqueIfValid(0x100016C);
         return 1;
     }
-    if (!FUN_002c1658(9, 2) && !FUN_002c15fc(6))
+    if (!FUN_002c1658(9, 2) && !slotIsActive(6))
         FUN_001175d4(0);
     if (FUN_002c1658(8, 1)) {
         u8 mode = g_messageMain.state->mode;

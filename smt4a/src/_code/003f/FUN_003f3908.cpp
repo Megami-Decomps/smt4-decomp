@@ -7,11 +7,11 @@ typedef struct Rec32 {
     /* 0x32 */ u16 unk32;
 } Rec32;
 
-extern Rec32 *FUN_00184310(u16 id);
+extern Rec32 *devilGetRecord(u16 id);
 
 u16 FUN_003f3908(Lookup62 *unit)
 {
-    Rec32 *rec = FUN_00184310(unit->id);
+    Rec32 *rec = devilGetRecord(unit->id);
 
     return rec->unk32;
 }

@@ -6,13 +6,13 @@
 
 extern "C" {
 extern UniteWork *g_unite;
-UniteSortRecordPrefixA *FUN_00184310(u32 id);
+UniteSortRecordPrefixA *devilGetRecord(u32 id);
 }
 
 static inline s32 compareFusionRecords(u32 leftId, u32 rightId)
 {
-    const UniteSortRecordPrefixA *left = FUN_00184310(leftId);
-    const UniteSortRecordPrefixA *right = FUN_00184310(rightId);
+    const UniteSortRecordPrefixA *left = devilGetRecord(leftId);
+    const UniteSortRecordPrefixA *right = devilGetRecord(rightId);
     s32 result = s32(right->categoryKey) - s32(left->categoryKey);
     if (result == 0) {
         result = s32(left->ascendingKey) - s32(right->ascendingKey);

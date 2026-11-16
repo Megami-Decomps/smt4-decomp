@@ -5,7 +5,7 @@
 extern "C" {
 extern BtlMain g_btlMain;
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
-DevilRecordA *FUN_00184310(u32 id);
+DevilRecordA *devilGetRecord(u32 id);
 s32 gameFlagIsSet(u32 flag);
 u32 lcgRandomRange(s32 limit);
 
@@ -46,7 +46,7 @@ u32 FUN_003ed6e8(BtlMainStateA *state)
         const BattleSlotSourceRecordA *source = (const BattleSlotSourceRecordA *)entry->specialMaximum.record;
         if (!source)
             return 0;
-        const DevilTableRecordA *devil = (const DevilTableRecordA *)FUN_00184310(source->id);
+        const DevilTableRecordA *devil = (const DevilTableRecordA *)devilGetRecord(source->id);
         if (!devil || !devil->extraAction.chance)
             return 0;
         if (!(state->stateFlags64.bits & masks->forced)) {

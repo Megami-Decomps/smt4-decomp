@@ -25,7 +25,7 @@ __softfp void FUN_0023a62c(AsdTextureRegion *region, s32 textureWidth, s32 textu
     f32 bytesPerPixel = FUN_002a66e0(format, type, &region->texture->image.hardwareFormat);
     u32 bytes = static_cast<u32>(static_cast<f32>(region->texture->dimensions.width *
                                                region->texture->dimensions.height) * bytesPerPixel);
-    FUN_002c2424((u32)(region->texture->storage.pixels), bytes);
+    nn_gxlow_CTR_FlushDataCacheForward((u32)(region->texture->storage.pixels), bytes);
     region->texture->image.physicalAddress = osVirtToPhysAddress(region->texture->storage.pixels);
     region->scale = 1.0f;
     region->flags[0] = 0;

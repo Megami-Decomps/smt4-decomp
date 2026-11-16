@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0018c87c(int);
+int nw_ut_internal_LinkListImpl_erase_2BAE30(int);
 int nn_os_LightEvent_ClearSignal(int);
 int FUN_001b4a58(unsigned int, int *, int, int, int, int, unsigned int, unsigned int);
 int FUN_001cc6c0(unsigned int, int);
@@ -24,7 +24,7 @@ typedef struct {
 extern unsigned int DAT_005c0ad8; /* 0x5c0ad8 */
 
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
-/* Supplied declaration required: FUN_0018c87c. */
+/* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2BAE30. */
 /* Supplied declaration required: nn_os_LightEvent_ClearSignal. */
 extern int FUN_001b1998(void);
 extern unsigned int _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
@@ -115,7 +115,7 @@ LAB_00462fb0:
       return;
     }
     temp_v1 = *(int *)(temp_v6 + 0x18);
-    FUN_0018c87c(temp_v6 + 0x14);
+    nw_ut_internal_LinkListImpl_erase_2BAE30(temp_v6 + 0x14);
     if (temp_v1 - 0x44 == 0) {
       return;
     }

@@ -10,13 +10,13 @@ typedef struct Record {
     /* 0x6 */ u16 order;
 } Record;
 
-Record *FUN_00184310(u32 id);
+Record *devilGetRecord(u32 id);
 
 /* Compares two record ids by kind (higher first), then by order (lower first), then by id (higher first). */
 s32 recordKindOrderCompare(u16 *a, u16 *b)
 {
-    Record *recordA = FUN_00184310(*a);
-    Record *recordB = FUN_00184310(*b);
+    Record *recordA = devilGetRecord(*a);
+    Record *recordB = devilGetRecord(*b);
     s32 diff = recordB->kind - recordA->kind;
 
     if (diff == 0) {

@@ -15,7 +15,7 @@ extern "C" {
 
 extern u32 g_aocSystem; /* 0x570280 */
 
-extern DevilRecordA *FUN_00184310(u32 id);
+extern DevilRecordA *devilGetRecord(u32 id);
 extern AddonRaceLabelA *entryListFindById(u32 system, u32 id);
 
 /* The add-on text for `race` when the add-on system has some, else the built-in table's label (`alternate` selects its second half). */
@@ -37,7 +37,7 @@ static __inline const char *findRaceLabel(u32 race, s32 alternate)
 /* Selects the demon's race label, preferring add-on text over the built-in table. */
 const char *FUN_0014bf3c(u16 id, s32 alternate)
 {
-    DevilRecordA *demon = FUN_00184310(id);
+    DevilRecordA *demon = devilGetRecord(id);
     if (demon != NULL) {
         return findRaceLabel(demon->race, alternate);
     }

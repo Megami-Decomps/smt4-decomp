@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0018c87c(int);
+int nw_ut_internal_LinkListImpl_erase_2BAE30(int);
 
-/* Supplied declaration required: FUN_0018c87c. */
+/* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2BAE30. */
 
 
 int FUN_0045b9a0(int param_1)
@@ -17,7 +17,7 @@ int FUN_0045b9a0(int param_1)
   
   if (*(int *)(param_1 + 0x18) != 0) {
     temp_v0 = *(int *)(param_1 + 0x1c);
-    FUN_0018c87c(param_1 + 0x18);
+    nw_ut_internal_LinkListImpl_erase_2BAE30(param_1 + 0x18);
     return temp_v0 - 0x1c;
   }
   return 0;

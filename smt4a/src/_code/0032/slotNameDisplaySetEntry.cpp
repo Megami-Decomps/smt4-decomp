@@ -34,7 +34,7 @@ void slotNameDisplaySetEntry(SlotNameDisplay *display, s32 entryId)
     if (entryId == 0) {
         display->selectedId = 0;
         display->entryId = 536;
-        DisplaySlotInfo *info = (DisplaySlotInfo *)FUN_00184310(536);
+        DisplaySlotInfo *info = (DisplaySlotInfo *)devilGetRecord(536);
         display->sortKey = info->sortKey;
         FUN_002e59f8(info->name, display->name, 16);
         return;

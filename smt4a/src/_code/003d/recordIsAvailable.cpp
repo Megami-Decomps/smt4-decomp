@@ -8,14 +8,14 @@ typedef struct Record {
     /* 0x132 */ u16 flagB;
 } Record;
 
-extern Record *FUN_001ad9b4(s32 id);
+extern Record *dataTable1bOr1cGetRecord(s32 id);
 extern s32 FUN_003df390(s32 id);
 extern s32 gameFlagIsSet(u32 flag);
 
 /* 1 when the id has a record that is available; 0 if there is none, or flag A is set while flag B is not. */
 u32 recordIsAvailable(s32 id)
 {
-    Record *record = FUN_001ad9b4(id);
+    Record *record = dataTable1bOr1cGetRecord(id);
 
     if (record == NULL) {
         return 0;

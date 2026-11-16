@@ -10,14 +10,14 @@ struct BattlePercentSummary {
 };
 
 extern "C" {
-BtlCombatantEntryA* FUN_003f0e20(BtlMainStateA* state, s32 index);
+BtlCombatantEntryA* btlMainFindEntryByListedId(BtlMainStateA* state, s32 index);
 void FUN_003e8bb0(BattlePercentSummary* summary, BtlMainStateA* state,
                   const BtlCombatantEntryA* entry);
 
 // Return the combatant summary's byte percentage as a fractional float.
 f32 btlGetSummaryPercentFraction(s32 index)
 {
-    BtlCombatantEntryA* entry = FUN_003f0e20(btlGetMainState(), index);
+    BtlCombatantEntryA* entry = btlMainFindEntryByListedId(btlGetMainState(), index);
     BattlePercentSummary summary;
     FUN_003e8bb0(&summary, btlGetMainState(), entry);
     return (f32)summary.percent * 0.01f;

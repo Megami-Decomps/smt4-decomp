@@ -28,7 +28,7 @@ struct BattlePlacementTransitionViewA {
 struct BattleTransitionCommandA { u32 unk00; s16 kind; };
 struct BattleTransitionStatusViewA { u8 prefix[0x164]; BattleCombatantStatusKey status; };
 extern "C" {
-BtlCombatantEntryA* FUN_003f0e20(BtlMainStateA* battle, s32 group);
+BtlCombatantEntryA* btlMainFindEntryByListedId(BtlMainStateA* battle, s32 group);
 s32 state2CIsNot1(State2C* controller);
 void FUN_00421514(State2C* controller, BattleTransitionAssetA* asset, f32 scale);
 void attachmentsSetOffset(State2C* controller, const f32* position);
@@ -42,7 +42,7 @@ void FUN_004fa64c(BattlePlacementTransitionViewA* work)
     if (!state2CIsNot1(work->controller)) {
         return;
     }
-    BtlCombatantEntryA* combatant = FUN_003f0e20(btlGetMainState(), work->roster->motion.group);
+    BtlCombatantEntryA* combatant = btlMainFindEntryByListedId(btlGetMainState(), work->roster->motion.group);
     u32 key = reinterpret_cast<BattleTransitionStatusViewA*>(combatant)->status.key;
     BattleTransitionPlacementA* placement = NULL;
     for (s32 index = 0; index < 50; ++index) {

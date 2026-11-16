@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00170d8c(int, unsigned char [8], int, int, int, int);
+int nn_applet_CTR_detail_CallUtility(int, unsigned char [8], int, int, int, int);
 
 /* stack frame of param_1: 4 slot(s), 13 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_00170d8c. */
+/* Supplied declaration required: nn_applet_CTR_detail_CallUtility. */
 
 
 void FUN_0043ca60(unsigned char param_1)
@@ -24,7 +24,7 @@ void FUN_0043ca60(unsigned char param_1)
   unsigned char temp_v0 [8];
   
   temp_v0[0] = param_1;
-  FUN_00170d8c(0x10,temp_v0,1,0,0,0);
+  nn_applet_CTR_detail_CallUtility(0x10,temp_v0,1,0,0,0);
                     /* WARNING: Treating indirect jump as return */
   return;
 }

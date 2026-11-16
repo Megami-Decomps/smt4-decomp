@@ -60,7 +60,7 @@ int CONCAT44(unsigned int, double);
 int dataTable04FindById(void);
 int dataTable41FindById(void);
 int btlScriptUnitHasFlags(...);
-int FUN_003f0e20(...);
+int btlMainFindEntryByListedId(...);
 int FUN_003f2aac(...);
 int FUN_004bf348(...);
 int FUN_004bfa30(unsigned int *, unsigned int, int, int, int);
@@ -245,7 +245,7 @@ extern int FUN_003ec668(unsigned int, int, int);
 extern int FUN_003eca48(unsigned int, unsigned short);
 /* Supplied declaration required: FUN_003f0254. */
 /* Supplied declaration required: FUN_003f06b4. */
-/* Supplied declaration required: FUN_003f0e20. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_003f21ec. */
 /* Supplied declaration required: FUN_003f2aac. */
 /* Supplied declaration required: FUN_004bf348. */
@@ -527,7 +527,7 @@ void FUN_004e20c0(unsigned int *param_1,unsigned int *param_2,int param_3,unsign
           FUN_003f2aac(*param_1,param_8,1);
         }
         temp_v13 = *param_1;
-        FUN_003f0e20(temp_v13,param_7);
+        btlMainFindEntryByListedId(temp_v13,param_7);
         if ((*(unsigned short *)(temp_v13 + 0x274) & 0x10) == 0) {
           FUN_003f2aac(*param_1,param_7,0);
         }
@@ -549,7 +549,7 @@ void FUN_004e20c0(unsigned int *param_1,unsigned int *param_2,int param_3,unsign
         FUN_003f2aac(*param_1,param_8,1);
       }
       temp_v13 = *param_1;
-      FUN_003f0e20(temp_v13,param_7);
+      btlMainFindEntryByListedId(temp_v13,param_7);
       if ((*(unsigned short *)(temp_v13 + 0x274) & 0x10) == 0) {
         FUN_003f2aac(*param_1,param_7,0);
       }
@@ -560,7 +560,7 @@ void FUN_004e20c0(unsigned int *param_1,unsigned int *param_2,int param_3,unsign
       temp_v88 = (unsigned int *)0x0;
       temp_v94 = 1;
       puVar9 = (unsigned int *)*param_1;
-      FUN_003f0e20(puVar9,param_8);
+      btlMainFindEntryByListedId(puVar9,param_8);
       puVar13 = (unsigned int *)(*param_1 + 0x45a0);
       temp_v13 = *puVar13;
       temp_v7 = *(unsigned int *)(*param_1 + 0x45a4);
@@ -571,9 +571,9 @@ void FUN_004e20c0(unsigned int *param_1,unsigned int *param_2,int param_3,unsign
   }
   else {
     puVar9 = (unsigned int *)*param_1;
-    FUN_003f0e20(puVar9,param_8);
+    btlMainFindEntryByListedId(puVar9,param_8);
     temp_v13 = *param_1;
-    FUN_003f0e20(temp_v13,param_7);
+    btlMainFindEntryByListedId(temp_v13,param_7);
     if ((puVar9[1] & DAT_005711d4) != 0 || (*puVar9 & DAT_005711d0) != 0) {
       temp_v95 = 1;
     }
@@ -633,7 +633,7 @@ LAB_004e2728:
   }
   if (((unsigned int)temp_v88 & 0x400) != 0) {
     puVar9 = (unsigned int *)*param_1;
-    FUN_003f0e20(puVar9,param_8);
+    btlMainFindEntryByListedId(puVar9,param_8);
     if ((*puVar9 & DAT_00571160) != 0 || (puVar9[1] & DAT_00571164) != 0) {
       temp_v5 = gameFlagIsSet(0x4b6);
       if (temp_v5 != 0) {
@@ -981,7 +981,7 @@ LAB_004e32dc:
         temp_v6 != 0) {
       temp_v6 = 0;
     }
-    FUN_003f0e20(puVar12,param_8);
+    btlMainFindEntryByListedId(puVar12,param_8);
     if (puVar12 != (unsigned int *)0x0) {
       if (((DAT_005711b4 & puVar12[1]) != 0 || (DAT_005711b0 & *puVar12) != 0) && temp_v6 != 0) {
         temp_v6 = 0;
@@ -1017,7 +1017,7 @@ LAB_004e34b8:
     }
     temp_v22 = (unsigned int *)0x1;
     puVar12 = (unsigned int *)*param_1;
-    FUN_003f0e20(puVar12,param_7);
+    btlMainFindEntryByListedId(puVar12,param_7);
     if ((puVar12[1] & DAT_00571174) != 0 || (*puVar12 & DAT_00571170) != 0) {
       temp_v22 = (unsigned int *)0x0;
     }
@@ -1361,7 +1361,7 @@ LAB_004e4280:
     }
     if (temp_v6 != 1) {
       puVar9 = (unsigned int *)*param_1;
-      FUN_003f0e20(puVar9,param_8);
+      btlMainFindEntryByListedId(puVar9,param_8);
       temp_v5 = btlUnitGetSkillValue(g_btlAux);
       temp_v5 = temp_v5 * (param_11 + temp_v52);
       if (puVar9 != (unsigned int *)0x0) {
@@ -1548,7 +1548,7 @@ LAB_004e45bc:
           if ((temp_v15) && ((temp_v89[0xe] & 2) == 0)) goto LAB_004e4cac;
         }
         puVar9 = (unsigned int *)*param_1;
-        FUN_003f0e20(puVar9,param_7);
+        btlMainFindEntryByListedId(puVar9,param_7);
         temp_v21 = puVar9;
         if ((temp_v45 != '\0') &&
            ((temp_v5 = FUN_004c6b8c(puVar9,temp_v108), temp_v5 != 0 || ((temp_v21[0x9d] & 0x10) == 0))))
@@ -1564,7 +1564,7 @@ LAB_004e45bc:
                        *(int *)(*param_1 + 0x1ed4) + param_8 * 0x1d0,temp_v5 + temp_v12,temp_v18);
         btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,param_8,temp_v48,10,0xf);
           puVar13 = (unsigned int *)*param_1;
-          FUN_003f0e20(puVar13,param_8);
+          btlMainFindEntryByListedId(puVar13,param_8);
           puVar9 = temp_v89;
           if (*(char *)((int)temp_v89 + 0x23) != '\x04') {
             temp_v4 = *(char *)((int)temp_v89 + 0x33);
@@ -1754,7 +1754,7 @@ LAB_004e4cac:
       temp_v12 = FUN_004e83ac(param_1,param_2,param_7);
       if ((temp_v12 == 0) && (temp_v12 = valueRangeSameSide(param_7,param_8), temp_v12 == 0)) {
         temp_v13 = *param_1;
-        FUN_003f0e20(temp_v13,param_8);
+        btlMainFindEntryByListedId(temp_v13,param_8);
         if (((*(unsigned short *)(temp_v13 + 0x274) & 0x11c0) == 0) &&
            (temp_v12 = param_8, FUN_004c14c8(), temp_v12 != 0)) {
           temp_v5 = *(int *)(*param_1 + 0x1ed4);
@@ -1776,7 +1776,7 @@ LAB_004e4cac:
           if (((temp_v14 && temp_v15) && temp_v12 != param_8) &&
              (temp_v5 = valueRangeSameSide(temp_v12,temp_v5), temp_v5 != 0)) {
             temp_v13 = *param_1;
-            FUN_003f0e20(temp_v13,temp_v12);
+            btlMainFindEntryByListedId(temp_v13,temp_v12);
             if (((*(unsigned short *)(temp_v13 + 0x274) & 0x11c0) == 0) &&
                (temp_v5 = temp_v12, FUN_004c5ec0(), temp_v5 != 0)) {
               temp_v8 = *(int *)(*param_1 + 0x1ed4);
@@ -1792,7 +1792,7 @@ LAB_004e4cac:
       temp_v12 = FUN_004e83ac(param_1,param_2,param_7);
       if (temp_v12 == 0) {
         temp_v13 = *param_1;
-        FUN_003f0e20(temp_v13,param_8);
+        btlMainFindEntryByListedId(temp_v13,param_8);
         if (((*(unsigned short *)(temp_v13 + 0x274) & 0x11c0) == 0) &&
            (temp_v12 = FUN_004c65e8(param_8), temp_v12 != 0)) {
           temp_v5 = *(int *)(*param_1 + 0x1ed4);
@@ -1812,7 +1812,7 @@ LAB_004e4cac:
   if ((((temp_v6 == 0) && (temp_v59 != 0)) &&
       ((temp_v47 == (unsigned int *)0x2 || ((temp_v13 & 0x800000) != 0)))) &&
      (temp_v12 = FUN_004e83ac(param_1,param_2,param_7), temp_v12 == 0)) {
-    FUN_003f0e20(*param_1,param_8);
+    btlMainFindEntryByListedId(*param_1,param_8);
     temp_v12 = param_8;
     FUN_004c5848();
     if ((temp_v12 != 0) && (temp_v12 = btlFindEntryValue(param_8,0x2c), temp_v12 < 1)) {

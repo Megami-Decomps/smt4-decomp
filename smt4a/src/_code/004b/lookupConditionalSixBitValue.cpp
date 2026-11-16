@@ -16,7 +16,7 @@ s32 partyEntryFlagsBit3(u16);
 s32 goalConditionsSatisfied(u16);
 s32 FUN_001ba3d4(u32);
 s32 FUN_003df390(u16);
-const PackedValueOwner *FUN_001ad9b4(u16);
+const PackedValueOwner *dataTable1bOr1cGetRecord(u16);
 const PackedValuePlayer *gameGetPlayerData();
 
 u32 lookupConditionalSixBitValue(u32 id)
@@ -43,7 +43,7 @@ u32 lookupConditionalSixBitValue(u32 id)
             }
         }
         if (FUN_003df390(entry->ownerId)) {
-            const PackedValueOwner *owner = FUN_001ad9b4(entry->ownerId);
+            const PackedValueOwner *owner = dataTable1bOr1cGetRecord(entry->ownerId);
             if (owner) {
                 u16 playerValue = gameGetPlayerData()->value;
                 if (owner->requiredValue && owner->requiredValue <= playerValue)

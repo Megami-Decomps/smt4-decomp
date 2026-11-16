@@ -7,13 +7,13 @@ struct WordRecord {
 
 extern "C" {
 
-extern WordRecord *FUN_001ad9b4(u32 index);
+extern WordRecord *dataTable1bOr1cGetRecord(u32 index);
 
 /* Compares the record keys selected by two halfword identifiers. */
 s32 dataTable1bOr1cCompareRecordKeys(const u16 *left, const u16 *right)
 {
-    WordRecord *a = FUN_001ad9b4(*left);
-    WordRecord *b = FUN_001ad9b4(*right);
+    WordRecord *a = dataTable1bOr1cGetRecord(*left);
+    WordRecord *b = dataTable1bOr1cGetRecord(*right);
     if (a == NULL) {
         return 0;
     }

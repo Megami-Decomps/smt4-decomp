@@ -11,7 +11,7 @@ typedef struct DevilKindData {
 } DevilKindData;
 
 void scrSetResult(s32 result);
-DevilKindData *FUN_00184310(u16 devilId);
+DevilKindData *devilGetRecord(u16 devilId);
 
 // Report whether any eligible battle entry is a devil of kind 1.
 u32 FUN_0039d0b8(void)
@@ -21,7 +21,7 @@ u32 FUN_0039d0b8(void)
         if ((g_btlCandidateMasks.unavailable & entry->flags) &&
             (entry->flags & g_btlCandidateMasks.required) &&
             !(entry->flags & g_btlCandidateMasks.excluded) &&
-            FUN_00184310(entry->id)->kind == 1) {
+            devilGetRecord(entry->id)->kind == 1) {
             scrSetResult(1);
             return 1;
         }

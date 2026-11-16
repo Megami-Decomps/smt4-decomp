@@ -7,7 +7,7 @@ extern "C" {
 
 int textFormatBuffer(unsigned char [64], unsigned char *, unsigned int);
 int textDrawString(int, unsigned int, unsigned char [64]);
-int FUN_001634b4(...);
+int effectRenderTransformedInstance(...);
 int vec2GetXInt(...);
 int vec2GetYInt(...);
 int efctSetSpeed(void);
@@ -36,7 +36,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_00156850(unsigned int, unsigned int);
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: FUN_001634b4. */
+/* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -99,7 +99,7 @@ void FUN_002f6048(int param_1)
   temp_v9 = temp_v11;
   renderCtxCalculateStereoParallax(g_renderCtx);
   VectorSignedToFloat((int)temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_001634b4(param_1 + 0x5ac);
+  effectRenderTransformedInstance(param_1 + 0x5ac);
   temp_v3 = asdTMTexTableEntryAt(0x1e,0x51);
   temp_v8 = *(unsigned short *)(temp_v3 + 4) & 0xffff7fff;
   temp_v3 = asdTMTexTableEntryAt(0x1e,0x56);
@@ -137,7 +137,7 @@ void FUN_002f6048(int param_1)
     *(unsigned char *)(temp_v3 + 0x12d0) = 0;
   }
   VectorSignedToFloat(temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_001634b4(param_1 + 0x868);
+  effectRenderTransformedInstance(param_1 + 0x868);
   temp_v3 = g_renderCtx;
   temp_v2 = packNibblesAndByte(6,7,0);
   piVar10 = (int *)(temp_v3 + 0x12b8);
@@ -148,7 +148,7 @@ void FUN_002f6048(int param_1)
     *(unsigned char *)(temp_v3 + 0x12d0) = 0;
   }
   VectorSignedToFloat(temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_001634b4(param_1 + 0x6c4);
+  effectRenderTransformedInstance(param_1 + 0x6c4);
   efctSetSpeed();
   temp_v3 = g_renderCtx;
   temp_v2 = packNibblesAndByte(6,1,0);

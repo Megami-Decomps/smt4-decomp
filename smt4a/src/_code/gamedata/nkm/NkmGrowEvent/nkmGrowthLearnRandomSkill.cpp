@@ -19,7 +19,7 @@ struct GrowDefinition {
 extern "C" {
 void *asdMemoryAlloc(u32, u32, u32, u32, u32);
 void asdMemFree(void *);
-const GrowDefinition *FUN_00184310(u32);
+const GrowDefinition *devilGetRecord(u32);
 s32 randRange(u32);
 s32 uiCompareHalfwordKeysDescending(const void *, const void *);
 void qsort(void *, u32, u32, s32 (*)(const void *, const void *));
@@ -32,7 +32,7 @@ u16 nkmGrowthLearnRandomSkill(GrowDemon *demon)
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\gamedata\\nkm\\NkmGrowEvent.cpp", 598);
     u16 *candidates = (u16 *)asdMemoryAlloc(0x100, 0x100, 0, 0x3ea, 1);
     s32 rank = 0;
-    const GrowDefinition *definition = FUN_00184310(demon->id);
+    const GrowDefinition *definition = devilGetRecord(demon->id);
     for (s32 i = 0; i < 8; ++i) {
         if (definition->skills[i]) {
             const CompactSortRecord *skill = findSkillMetadataById(definition->skills[i]);

@@ -7,11 +7,11 @@ typedef struct IdOwnerA0C {
     /* 0xA0C */ u32 unkA0C;
 } IdOwnerA0C;
 
-extern u16 *FUN_001ad9b4(u32 id);
+extern u16 *dataTable1bOr1cGetRecord(u32 id);
 
 u16 idOwnerGetRecordHalf(IdOwnerA0C *obj)
 {
-    u16 *record = FUN_001ad9b4(obj->unkA0C & 0xFFFF);
+    u16 *record = dataTable1bOr1cGetRecord(obj->unkA0C & 0xFFFF);
 
     return *record;
 }

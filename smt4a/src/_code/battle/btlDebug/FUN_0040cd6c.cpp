@@ -55,7 +55,7 @@ extern u8 g_btlActionReflect[];
 extern s16 DAT_0057a664[];
 extern const Vec3 DAT_005e1c2c;
 
-BtlSide *FUN_003f0e20(void *main, s32 index);
+BtlSide *btlMainFindEntryByListedId(void *main, s32 index);
 Vec3 FUN_003e7fa4(void *main, s32 index, s32 arg);
 s32 randBetween(s32 minimum, s32 maximum);
 u32 FUN_004a94a8(u32 block, s32 bank);
@@ -69,7 +69,7 @@ u32 FUN_004a9f00(u32 block, s32 category, u32 text, u32 color, u32 style, u32 va
 void FUN_0040cd6c(u32 unused, EffectStep *step)
 {
     void *main = btlGetMainState();
-    BtlSide *side = FUN_003f0e20(main, step->side->slotId);
+    BtlSide *side = btlMainFindEntryByListedId(main, step->side->slotId);
     if (side == NULL) {
         step->result = 0;
         return;

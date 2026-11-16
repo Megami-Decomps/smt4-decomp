@@ -8,8 +8,8 @@ int CONCAT44(double, double);
 int eventDispatchIfSet(...);
 int requestHandlerDispatch(...);
 int handlerTableCall(...);
-int FUN_0024f880(...);
-int FUN_0024f890(...);
+int quadHolderCopyOut(...);
+int quadSourceCopyOut(...);
 int eventDispatch(...);
 int FUN_00281bb0(...);
 int gfxQuaternionWorkspaceBuildMatrix(...);
@@ -78,8 +78,8 @@ extern float DAT_004ea998; /* 0x4ea998 */
 /* Supplied declaration required: eventDispatchIfSet. */
 /* Supplied declaration required: requestHandlerDispatch. */
 /* Supplied declaration required: handlerTableCall. */
-/* Supplied declaration required: FUN_0024f880. */
-/* Supplied declaration required: FUN_0024f890. */
+/* Supplied declaration required: quadHolderCopyOut. */
+/* Supplied declaration required: quadSourceCopyOut. */
 /* Supplied declaration required: eventDispatch. */
 /* Supplied declaration required: FUN_00281bb0. */
 /* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
@@ -138,8 +138,8 @@ void FUN_002c74ac(fn_002c74ac_arg0 *param_1)
       pfVar2 = (float *)pfVar4->field_0x18;
       temp_v2 = pfVar4->field_0x8;
       if ((pfVar4->field_0xc & 1) != 0) {
-        FUN_0024f890(pfVar4,&temp_v26);
-        FUN_0024f880(pfVar4,&temp_v22);
+        quadSourceCopyOut(pfVar4,&temp_v26);
+        quadHolderCopyOut(pfVar4,&temp_v22);
         DAT_004ea91c = temp_v26;
         DAT_004ea920 = fStack_84;
         DAT_004ea924 = fStack_80;
@@ -233,8 +233,8 @@ void FUN_002c74ac(fn_002c74ac_arg0 *param_1)
     pfVar2 = (float *)pfVar4->field_0x18;
     temp_v2 = pfVar4->field_0x8;
     if ((pfVar4->field_0xc & 1) != 0) {
-      FUN_0024f890(pfVar4,&temp_v26);
-      FUN_0024f880(pfVar4,&temp_v22);
+      quadSourceCopyOut(pfVar4,&temp_v26);
+      quadHolderCopyOut(pfVar4,&temp_v22);
       DAT_004ea91c = temp_v26;
       DAT_004ea920 = fStack_84;
       DAT_004ea924 = fStack_80;

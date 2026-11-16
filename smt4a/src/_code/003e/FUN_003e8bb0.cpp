@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00184310(void);
+int devilGetRecord(void);
 int dataTable8FindRecord(void);
 int dataTable08Sub2GetRecord(void);
 int dataTable04FindById(void);
@@ -47,7 +47,7 @@ extern unsigned int DAT_0057399c; /* 0x57399c */
 #define ROMWRIGHT_PIECE_1_1_DEFINED
 #define romwright_piece_1_1(upper, lower) ((unsigned short)(((unsigned short)(unsigned char)(upper) << 8) | (unsigned char)(lower)))
 #endif
-/* Supplied declaration required: FUN_00184310. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: dataTable04FindById. */
@@ -169,7 +169,7 @@ void FUN_003e8bb0(unsigned int *param_1,unsigned int param_2,unsigned int *param
         temp_v15 = temp_v15 | ((*(unsigned char *)(temp_v5 + 0x18) & 0x3f) >> 3);
         temp_v9 = ((unsigned int)*(unsigned char *)(temp_v5 + 0x1b) << 8) | ((unsigned int)*(unsigned char *)(temp_v5 + 0x1c) << 0x10);
         temp_v5 = (unsigned int)*(unsigned short *)((int)param_3 + 0x166);
-        FUN_00184310();
+        devilGetRecord();
         temp_v11 = (unsigned int)romwright_piece_1_1(*(unsigned char *)(temp_v5 + 0x13),temp_v1);
       }
       else if (((temp_v5 & DAT_00573998) != 0 || (temp_v6 & DAT_0057399c) != 0) && (param_3[0x100] != 0)
@@ -178,7 +178,7 @@ void FUN_003e8bb0(unsigned int *param_1,unsigned int param_2,unsigned int *param
     else {
 LAB_003e9284:
       temp_v8 = (unsigned int)*(unsigned short *)((int)param_3 + 0x166);
-      FUN_00184310();
+      devilGetRecord();
       temp_v5 = (unsigned int)*(unsigned short *)(temp_v8 + 10);
       temp_v14 = ((unsigned int)*(unsigned short *)(temp_v8 + 0x16) << 0x10) | 100;
       temp_v13 = (unsigned int)*(unsigned char *)(temp_v8 + 0xd) << 0x10;
@@ -287,13 +287,13 @@ LAB_003e9384:
     else if ((!((temp_v5 & DAT_00573998) == 0 && (temp_v6 & DAT_0057399c) == 0)) &&
             (param_3[0x100] != 0)) {
       temp_v5 = (unsigned int)*(unsigned short *)((int)param_3 + 0x166);
-      FUN_00184310();
+      devilGetRecord();
       temp_v14 = (unsigned int)*(unsigned short *)(temp_v5 + 0x14) | (temp_v14 & 0xffff0000);
     }
   }
   else {
     temp_v5 = (unsigned int)*(unsigned short *)((int)param_3 + 0x166);
-    FUN_00184310();
+    devilGetRecord();
     temp_v14 = (unsigned int)*(unsigned short *)(temp_v5 + 0x14) | (temp_v14 & 0xffff0000);
   }
   *param_1 = temp_v10;

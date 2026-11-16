@@ -6,7 +6,7 @@
 
 extern "C" {
 EffEmitter *effEmitterCreate(u32 count);
-void FUN_0024f8a4(ResourceEmitter *emitter, u32 id, const EmitterArguments *arguments);
+void polygonTrackRebuildResources(ResourceEmitter *emitter, u32 id, const EmitterArguments *arguments);
 void objectBufferFree(void *buffer);
 void *FUN_002691d8(u16 kind, u32 count, EffEmitterDesc *descriptor);
 void *FUN_00268fc4(void *auxiliary);
@@ -31,7 +31,7 @@ EffEmitter *FUN_002c7c28(EmitterResourceRequest *request)
     ParticleRequest *arguments = (ParticleRequest *)request;
     EffEmitterDesc *descriptor = (EffEmitterDesc *)request->source->data;
     EffEmitter *emitter = effEmitterCreateSmall(descriptor);
-    FUN_0024f8a4((ResourceEmitter *)emitter, request->source->id, &request->arguments);
+    polygonTrackRebuildResources((ResourceEmitter *)emitter, request->source->id, &request->arguments);
     particleCreateBuffer(emitter, request->source->id, descriptor);
     if (emitter->particle.parameter == NULL) {
         emitter->particle.parameter = (EffParticleParam *)effEmitterCreate(emitter->maxCount);

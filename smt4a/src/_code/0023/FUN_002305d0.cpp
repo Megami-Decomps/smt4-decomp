@@ -78,7 +78,7 @@ void FUN_002a6894(DemonRecord* record);
 /* Adds each skill's affinity growth to its affinity bonus, clamped to [-9, 9]. */
 static __inline void demonApplySkillAffinities(DemonRecord *record)
 {
-    if (record == NULL || record->id == 0 || FUN_00184310(record->id) == NULL)
+    if (record == NULL || record->id == 0 || devilGetRecord(record->id) == NULL)
         return;
     for (s32 i = 0; i < 8; i++) {
         if (record->skills[i] == 0) continue;
@@ -110,7 +110,7 @@ void FUN_002305d0(DemonRecord* record, u32 slot, u32 id, s32 kind)
         gameItemSetFlag((u16)id, 1);
         FUN_002854d8((u16)id, 1);
     }
-    const DevilTableRecordA* info = reinterpret_cast<const DevilTableRecordA *>(FUN_00184310((u16)id));
+    const DevilTableRecordA* info = reinterpret_cast<const DevilTableRecordA *>(devilGetRecord((u16)id));
     s16 hp = 0;
     switch (kind) {
     case 0:

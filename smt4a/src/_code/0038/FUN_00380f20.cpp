@@ -33,7 +33,7 @@ extern "C" {
 extern const u64 g_battleMaskPresets[];
 
 s32 scrGetArg(u32 index);
-SkillHp *FUN_003f0e20(BtlMainStateA *battle, s32 index);
+SkillHp *btlMainFindEntryByListedId(BtlMainStateA *battle, s32 index);
 EntryRef *FUN_003eca48(BtlMainStateA *battle, u32 id);
 s32 FUN_003ec668(BtlMainStateA *battle, s32 slot, s32 kind);
 void FUN_003f2638(BtlMainStateA *battle, s32 kind, BattleRosterRecordA *record, s32 flag);
@@ -56,7 +56,7 @@ u32 FUN_00380f20(void)
             break;
         }
     }
-    SkillHp *skill = FUN_003f0e20(battle, record->combatant.parameterIndex);
+    SkillHp *skill = btlMainFindEntryByListedId(battle, record->combatant.parameterIndex);
     EntryRef *ref = FUN_003eca48(battle, skill->entryId);
 
     if (ref != NULL) {

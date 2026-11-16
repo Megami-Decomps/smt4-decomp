@@ -61,7 +61,7 @@ void FUN_0036e8e4(VertexDataList **resource, AsdAllocatorObject *allocator)
         void *tag = results[i];
         u32 kind = memoryType & 0xffff0000;
         if (kind == 0x2010000) {
-            FUN_002c2424((u32)(block->source.get()), size);
+            nn_gxlow_CTR_FlushDataCacheForward((u32)(block->source.get()), size);
         } else if (kind > 0x2010000) {
             if (kind == 0x2020000 || kind == 0x2030000) {
                 u32 pool = memoryType & 0x30000;
@@ -73,7 +73,7 @@ void FUN_0036e8e4(VertexDataList **resource, AsdAllocatorObject *allocator)
         } else if (kind == 0x1010000) {
             void *memory = g_gfxAllocateCallback(0x10000, 0x102, tag, size);
             nnnstdMemCpy(memory, block->source.get(), size);
-            FUN_002c2424((u32)(memory), size);
+            nn_gxlow_CTR_FlushDataCacheForward((u32)(memory), size);
             block->deviceMemory = memory;
             block->deviceMemoryType = 0x10000;
         }

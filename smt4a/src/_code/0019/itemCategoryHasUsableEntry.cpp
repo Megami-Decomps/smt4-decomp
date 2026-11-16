@@ -15,7 +15,7 @@ u32 itemCategoryHasUsableEntry(const void *work)
     u32 found = 0;
     const ItemFilterView *filter = static_cast<const ItemFilterView *>(work);
     for (u16 id = 0; id < 400; ++id) {
-        ItemDataRecord *record = FUN_001ad9b4(id);
+        ItemDataRecord *record = dataTable1bOr1cGetRecord(id);
         if (record == NULL || record->ordering.sortGroup != 0 || gameFlagEntryGetBit(id, 1) == 0)
             continue;
         u16 kind = record->filter.kind;

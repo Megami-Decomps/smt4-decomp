@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00184310(void);
+int devilGetRecord(void);
 int dataTable04FindById(void);
 int FUN_002a2cbc(void);
 int FUN_002e6340(void);
@@ -23,7 +23,7 @@ int __aeabi_memcpy4(unsigned short *, unsigned short *, int);
 extern int DAT_0057f69c; /* 0x57f69c */
 extern unsigned int *DAT_0057f6a4; /* 0x57f6a4 */
 
-/* Supplied declaration required: FUN_00184310. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_002a2cbc. */
 /* Supplied declaration required: FUN_002e6340. */
@@ -83,7 +83,7 @@ void FUN_0022838c(void)
   *(unsigned short *)((int)puVar1 + 10) = 0;
   do {
     puVar3 = (unsigned short *)((temp_v0 + 1U) & 0xffff);
-    FUN_00184310();
+    devilGetRecord();
     puVar1 = DAT_0057f6a4;
     if (puVar3 != (unsigned short *)0x0) {
       if ((puVar3[5] & 1) != 0) {

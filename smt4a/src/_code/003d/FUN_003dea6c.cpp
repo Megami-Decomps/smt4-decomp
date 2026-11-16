@@ -16,7 +16,7 @@ struct DefinitionMessageDescriptor {
     char suffix[1];
 };
 extern "C" {
-DefinitionMessageRecord* FUN_001ad9b4(u16 id);
+DefinitionMessageRecord* dataTable1bOr1cGetRecord(u16 id);
 const char* FUN_0015f858(u16 id, s32 converted);
 const char* FUN_00180118(u16 id);
 const char* dataTable0cFindByKey(u16 id);
@@ -30,13 +30,13 @@ void FUN_003dea6c(u16 definitionId, s32 includeArguments, s32 convertTitle)
     char converted[128];
     const char* title = NULL;
     if (!convertTitle) {
-        DefinitionMessageRecord* definition = FUN_001ad9b4(definitionId);
+        DefinitionMessageRecord* definition = dataTable1bOr1cGetRecord(definitionId);
         if (definition) {
             title = definition->title;
         }
         FUN_003180c4(40, title);
     } else {
-        DefinitionMessageRecord* definition = FUN_001ad9b4(definitionId);
+        DefinitionMessageRecord* definition = dataTable1bOr1cGetRecord(definitionId);
         if (definition) {
             title = definition->title;
         }
@@ -45,7 +45,7 @@ void FUN_003dea6c(u16 definitionId, s32 includeArguments, s32 convertTitle)
         FUN_003180c4(40, converted);
     }
     if (includeArguments) {
-        DefinitionMessageRecord* definition = FUN_001ad9b4(definitionId);
+        DefinitionMessageRecord* definition = dataTable1bOr1cGetRecord(definitionId);
         if (definition) {
             for (s32 index = 0; index < 4; ++index) {
                 DefinitionMessageArgument* argument = &definition->arguments[index];

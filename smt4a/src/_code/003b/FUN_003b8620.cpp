@@ -9,14 +9,14 @@ struct CombatantFlagFilter {
 };
 
 extern "C" {
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, u32 id);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, u32 id);
 extern CombatantFlagFilter g_btlMessageFlagMasks;
 
 // Return whether the requested combatant has any flags selected by the current filter.
 u32 FUN_003b8620(void)
 {
     u32 id = scrGetArg(0);
-    BtlCombatantEntryA *entry = FUN_003f0e20(btlGetMainState(), id);
+    BtlCombatantEntryA *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
     if (entry != NULL) {
         if (entry->flags & g_btlMessageFlagMasks.mask) {
             scrSetResult(1);

@@ -170,8 +170,8 @@ unsigned int FUN_001dd280(void)
   case 5:
     iVar6 = FUN_0032b9e0();
     if (iVar6 != 0) {
-      iVar6 = FUN_002c15fc(9);
-      if (((iVar6 == 0) && (iVar6 = FUN_002c15fc(6), iVar6 == 0)) ||
+      iVar6 = slotIsActive(9);
+      if (((iVar6 == 0) && (iVar6 = slotIsActive(6), iVar6 == 0)) ||
          (*(char *)(iVar1 + 0x1a) == '\0')) {
         if (!(*(int *)(iVar1 + 0x10) == 5 || *(int *)(iVar1 + 0x10) == 6)) goto code_r0x001dd71c;
         return 0;

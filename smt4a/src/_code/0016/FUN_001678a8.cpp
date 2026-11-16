@@ -40,7 +40,7 @@ s32 renderCtxPopState(RenderCtxA *, s32);
 void efctSetSpeed(f32);
 void FUN_00183bb0();
 f32 renderCtxCalculateStereoParallax(RenderCtxA *, f32);
-void FUN_001634b4(UiSpriteState *, f32);
+void effectRenderTransformedInstance(UiSpriteState *, f32);
 void pairSetSecondResetFirst(UiSpriteState *, u32);
 
 void FUN_001678a8(MessageWorkA *message)
@@ -55,7 +55,7 @@ void FUN_001678a8(MessageWorkA *message)
     if (work->mode == 7 || work->mode == 8 || work->mode == 9) {
         RenderCtxA *context = g_renderCtx;
         renderCtxSetB(context, packNibblesAndByte(6, 1, 0));
-        FUN_001634b4(&work->special, static_cast<f32>(parallax));
+        effectRenderTransformedInstance(&work->special, static_cast<f32>(parallax));
         context = g_renderCtx;
         renderCtxSetB(context, packNibblesAndByte(6, 7, 0));
     }
@@ -70,12 +70,12 @@ void FUN_001678a8(MessageWorkA *message)
         pairSetSecondResetFirst(&work->category, 30);
     else
         pairSetSecondResetFirst(&work->category, 29);
-    FUN_001634b4(&work->first, static_cast<f32>(parallax));
-    FUN_001634b4(&work->category, static_cast<f32>(parallax));
-    FUN_001634b4(&work->third, static_cast<f32>(parallax));
+    effectRenderTransformedInstance(&work->first, static_cast<f32>(parallax));
+    effectRenderTransformedInstance(&work->category, static_cast<f32>(parallax));
+    effectRenderTransformedInstance(&work->third, static_cast<f32>(parallax));
     if (work->mode == 11)
-        FUN_001634b4(&work->modeExtra, static_cast<f32>(parallax));
-    FUN_001634b4(&work->fourth, static_cast<f32>(parallax));
+        effectRenderTransformedInstance(&work->modeExtra, static_cast<f32>(parallax));
+    effectRenderTransformedInstance(&work->fourth, static_cast<f32>(parallax));
     renderCtxPopState(g_renderCtx, 3);
 }
 }

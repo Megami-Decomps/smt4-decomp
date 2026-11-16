@@ -15,8 +15,8 @@ extern "C" s32 FUN_00241874(const s32 *first, const s32 *second)
     } else {
         SlotRecord *firstRecord = gameGetSlotRecord(*first);
         SlotRecord *secondRecord = gameGetSlotRecord(*second);
-        SlotSortInfo *firstInfo = FUN_00184310(firstRecord->entryId);
-        SlotSortInfo *secondInfo = FUN_00184310(secondRecord->entryId);
+        SlotSortInfo *firstInfo = devilGetRecord(firstRecord->entryId);
+        SlotSortInfo *secondInfo = devilGetRecord(secondRecord->entryId);
         result = firstInfo->priority - secondInfo->priority;
         if (result == 0)
             return FUN_0020e83c(first, second);

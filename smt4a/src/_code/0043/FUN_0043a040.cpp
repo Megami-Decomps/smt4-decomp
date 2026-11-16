@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-extern unsigned int FUN_0016f988(unsigned int *, unsigned int, unsigned int, unsigned int);
+extern unsigned int asdModelForwardChecked(unsigned int *, unsigned int, unsigned int, unsigned int);
 extern unsigned int libc_strlen(unsigned int);
 
 
@@ -22,7 +22,7 @@ unsigned int FUN_0043a040(unsigned int *param_1,unsigned int param_2)
   
   temp_v2 = 0;
   temp_v0 = libc_strlen(param_2);
-  temp_v1 = FUN_0016f988((unsigned int *)&temp_v2,param_2,temp_v0,0);
+  temp_v1 = asdModelForwardChecked((unsigned int *)&temp_v2,param_2,temp_v0,0);
   if ((temp_v1 & 0x80000000) == 0) {
     *param_1 = temp_v2;
   }

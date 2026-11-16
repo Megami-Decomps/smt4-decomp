@@ -15,7 +15,7 @@ void nameFormSetCharacter(NameForm *form, s32 index, u32 code)
 {
     if (code != 0xFFFFFFFF) {
         if (code != 0) {
-            FontGlyphResourceOwner *resource = FUN_0019dc44(3);
+            FontGlyphResourceOwner *resource = recordTableGet(3);
             FontGlyphLookup *font = resource->font;
             if (!font->vtable->hasGlyph(font, (u16)code)) {
                 code = 0xFFFF8140;

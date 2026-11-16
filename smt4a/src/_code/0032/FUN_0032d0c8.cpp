@@ -26,7 +26,7 @@ struct ButtonHelpTextGlobals {
 
 extern "C" {
 extern ButtonHelpTextGlobals g_buttonHelp;
-SkillHelpRecord *FUN_00184310(u16 id);
+SkillHelpRecord *devilGetRecord(u16 id);
 void FUN_00359974(s32 index, u32 a, u32 b, u32 c);
 void FUN_002c0940(char *output, s32 value);
 s32 textFormatBuffer(char *destination, const char *format, ...);
@@ -39,7 +39,7 @@ void asdTextDrawDirectoryEntry(AsdText *text, u32 font, s32 mode, s32 x, s32 y, 
 void FUN_0032d0c8(RelativeDirectory *directory, u32 index, u16 skillId, u32 extra)
 {
     ButtonHelpWorkA *work = g_buttonHelp.prefix.work;
-    SkillHelpRecord *skill = FUN_00184310(skillId);
+    SkillHelpRecord *skill = devilGetRecord(skillId);
 
     char text[128];
 

@@ -4,7 +4,7 @@
 extern "C" {
 
 void FUN_003ee0c0(void);
-BtlSkillA *FUN_003f0e20(BtlMainStateA *main, s32 index);
+BtlSkillA *btlMainFindEntryByListedId(BtlMainStateA *main, s32 index);
 void FUN_004fbc30(s32, BtlUnitA *, u32, s32);
 void FUN_004fc094(s32, BtlUnitA *, s32, u32, s32, u32, s32, s32, u32, u32, s32, s32, s32, s32, s32, s32, s32, s32, s32,
                   s32, s32, s32, s32, s32, s32, s32);
@@ -16,7 +16,7 @@ extern u32 g_btlScriptUnit;
 s32 scrComm_Battle_StartUnitAction(void)
 {
     u32 target = btlGetMainState()->unk1ED4;
-    BtlSkillA *skill = FUN_003f0e20(btlGetMainState(), 0);
+    BtlSkillA *skill = btlMainFindEntryByListedId(btlGetMainState(), 0);
     BtlUnitA *unit = btlUnitGet(g_btlScriptUnit);
 
     btlGetMainState();

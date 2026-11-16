@@ -55,7 +55,7 @@ void *asdOperatorNewD(u32 size);
 void asdOperatorDeleteC(void *block);
 PickRecord *gameGetSlotRecord(s32 index);
 s32 bitsAt60Test(PickRecord *record, u32 bit);
-u8 *FUN_00184310(u32 id);
+u8 *devilGetRecord(u32 id);
 void qsort(void *base, u32 count, s32 size, s32 (*compare)(const void *, const void *));
 s32 FUN_003d2d7c(const void *a, const void *b);
 
@@ -90,7 +90,7 @@ void FUN_004e980c(PickOwner *owner, u8 *flags)
         if (record != NULL && bitsAt60Test(record, 1) == 0 && bitsAt60Test(record, 10) == 0) {
             candidates[found].slot = (u8)i;
             candidates[found].key = record->key;
-            candidates[found].rank = FUN_00184310(record->kind)[2];
+            candidates[found].rank = devilGetRecord(record->kind)[2];
             found++;
         }
     }

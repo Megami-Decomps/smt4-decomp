@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00140918(unsigned int *[3]);
-int FUN_00141fd0(...);
+int nw_snd_SoundArchive_GetSoundType(...);
 int soundArchiveReadBankInfo(...);
 int FUN_0014d530(...);
 int _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv(unsigned char [20], int);
@@ -46,7 +46,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00140918. */
 extern unsigned int optionalNestedValueGet(unsigned int **);
-/* Supplied declaration required: FUN_00141fd0. */
+/* Supplied declaration required: nw_snd_SoundArchive_GetSoundType. */
 /* Supplied declaration required: soundArchiveReadBankInfo. */
 extern int FUN_0014d3fc(int, unsigned int, unsigned int *);
 extern int FUN_0014d478(int, unsigned int, unsigned int *);
@@ -169,7 +169,7 @@ void FUN_001308dc(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
           }
           if (temp_v0 != 0 && temp_v1 != 0xffffffff) {
             temp_v0 = param_1[1];
-            FUN_00141fd0(temp_v0,temp_v1);
+            nw_snd_SoundArchive_GetSoundType(temp_v0,temp_v1);
             temp_v1 = temp_v13;
             if (temp_v0 != 1) {
               if (((temp_v0 == 3) && (temp_v13 != 0xffffffff)) &&
@@ -230,7 +230,7 @@ void FUN_001308dc(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
       }
       else {
         temp_v0 = param_1[1];
-        FUN_00141fd0(temp_v0,temp_v20);
+        nw_snd_SoundArchive_GetSoundType(temp_v0,temp_v20);
         if (temp_v0 == 1) {
           temp_v15 = 0;
           temp_v13 = 0;

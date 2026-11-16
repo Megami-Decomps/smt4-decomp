@@ -13,8 +13,8 @@ s32 FUN_003759f0(const u16 *left, const u16 *right)
     ItemDataRecord *rightRecord;
     s32 diff;
 
-    leftRecord = FUN_001ad9b4(*left);
-    rightRecord = FUN_001ad9b4(*right);
+    leftRecord = dataTable1bOr1cGetRecord(*left);
+    rightRecord = dataTable1bOr1cGetRecord(*right);
     if (leftRecord == NULL || rightRecord == NULL) {
         return 0;
     }
@@ -23,8 +23,8 @@ s32 FUN_003759f0(const u16 *left, const u16 *right)
         return diff;
     }
 
-    leftRecord = FUN_001ad9b4(*left);
-    rightRecord = FUN_001ad9b4(*right);
+    leftRecord = dataTable1bOr1cGetRecord(*left);
+    rightRecord = dataTable1bOr1cGetRecord(*right);
     if (leftRecord == NULL || rightRecord == NULL) {
         return 0;
     }
@@ -33,8 +33,8 @@ s32 FUN_003759f0(const u16 *left, const u16 *right)
         return diff;
     }
 
-    leftRecord = FUN_001ad9b4(*left);
-    rightRecord = FUN_001ad9b4(*right);
+    leftRecord = dataTable1bOr1cGetRecord(*left);
+    rightRecord = dataTable1bOr1cGetRecord(*right);
     if (leftRecord == NULL || rightRecord == NULL) {
         return 0;
     }

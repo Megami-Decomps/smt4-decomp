@@ -14,8 +14,8 @@ static __inline s32 compareSortKeys(const ItemDataRecord* left, const ItemDataRe
 // Sorts items by mapped group, breaking ties by the record's sort key.
 extern "C" s32 FUN_002b2b34(const u16* leftId, const u16* rightId)
 {
-    ItemDataRecord* left = FUN_001ad9b4(*leftId);
-    ItemDataRecord* right = FUN_001ad9b4(*rightId);
+    ItemDataRecord* left = dataTable1bOr1cGetRecord(*leftId);
+    ItemDataRecord* right = dataTable1bOr1cGetRecord(*rightId);
     if (left == NULL || right == NULL) {
         return 0;
     }
@@ -23,5 +23,5 @@ extern "C" s32 FUN_002b2b34(const u16* leftId, const u16* rightId)
     if (result != 0) {
         return result;
     }
-    return compareSortKeys(FUN_001ad9b4(*leftId), FUN_001ad9b4(*rightId));
+    return compareSortKeys(dataTable1bOr1cGetRecord(*leftId), dataTable1bOr1cGetRecord(*rightId));
 }

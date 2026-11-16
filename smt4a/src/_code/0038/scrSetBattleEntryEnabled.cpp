@@ -10,13 +10,13 @@ typedef struct Entry {
 } Entry;
 
 extern s32 scrGetArg(s32 index);
-extern Entry *FUN_003f0e20(void *owner, u32 id);
+extern Entry *btlMainFindEntryByListedId(void *owner, u32 id);
 
 u32 scrSetBattleEntryEnabled(void)
 {
     u32 id = scrGetArg(0);
     s32 enabled = scrGetArg(1);
-    Entry *entry = FUN_003f0e20(static_cast<void *>(btlGetMainState()), id);
+    Entry *entry = btlMainFindEntryByListedId(static_cast<void *>(btlGetMainState()), id);
 
     if (entry != NULL) {
         entry->flag = enabled != 0;

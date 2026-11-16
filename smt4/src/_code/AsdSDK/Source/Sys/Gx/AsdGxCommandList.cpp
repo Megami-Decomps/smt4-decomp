@@ -14,7 +14,7 @@ u32 g_asdGxNewListId;
 s32 g_asdGxListDepth;
 u32 g_asdGxCommandLists[2];
 
-void FUN_002bc7f4(u32 param, u32 *out);
+void gxGetCommandListParameter(u32 param, u32 *out);
 void FUN_002bdb48(void);
 void FUN_001376d8(u32 *a, u32 *b, u32 *c, u32 *d);
 void asdGxCommandListRefreshCopy(AsdGxCommandList *list);
@@ -54,7 +54,7 @@ void asdGxCommandListSetNewListId(u32 cmdList)
 /* Starts recording into the current command list: remembers the list bound before it. */
 void asdGxCommandListStartRecord(AsdGxCommandList *list)
 {
-    FUN_002bc7f4(0x207, &list->entries[0].values[1]);
+    gxGetCommandListParameter(0x207, &list->entries[0].values[1]);
     nngxBindCmdlist(g_asdGxCommandLists[g_asdGxState]);
     list->entries[0].values[2] = 1;
     u32 cursor = FUN_002b7148();
@@ -78,7 +78,7 @@ void asdGxCommandListBegin(AsdGxCommandList *list)
 {
     AsdGxCommandList *outer;
 
-    FUN_002bc7f4(0x207, &list->boundList);
+    gxGetCommandListParameter(0x207, &list->boundList);
     if (g_asdGxListDepth != 0) {
         outer = g_asdGxCommandListStack[g_asdGxListDepth - 1];
         FUN_002bdb48();

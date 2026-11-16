@@ -1,7 +1,7 @@
 #include "common.h"
 #include "gamedata/GameFlags.h"
 
-// Private view of the record returned by FUN_001ad9b4.
+// Private view of the record returned by dataTable1bOr1cGetRecord.
 namespace {
 
 struct EntryRecordView {
@@ -16,7 +16,7 @@ struct EntryRecordView {
 extern "C" {
 u8* gameFlagBlockGetEntry(u16 entryId);
 s32 FUN_003df390(u16 entryId);
-EntryRecordView* FUN_001ad9b4(u16 entryId);
+EntryRecordView* dataTable1bOr1cGetRecord(u16 entryId);
 
 
 // Set the associated flags for eligible entries whose nonzero threshold has been reached.
@@ -30,12 +30,12 @@ void gameFlagSetEligibleEntryFlagsAtThreshold(s32 threshold)
             continue;
         }
 
-        EntryRecordView* record = FUN_001ad9b4((u16)entryId);
+        EntryRecordView* record = dataTable1bOr1cGetRecord((u16)entryId);
         if (record == 0 || record->unk120 == 0 || record->unk120 > threshold) {
             continue;
         }
 
-        record = FUN_001ad9b4((u16)entryId);
+        record = dataTable1bOr1cGetRecord((u16)entryId);
         if (record != 0 && record->unkEC != 0) {
             gameFlagSetValue(record->unkEC, 1, 1);
         }

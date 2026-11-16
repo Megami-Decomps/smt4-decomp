@@ -40,7 +40,7 @@ public:
 extern "C" {
 #endif
 
-void FUN_002c3530(s32 preset, u32 arg, u32 unused, s32 index);
+void renderTargetClear(s32 preset, u32 arg, u32 unused, s32 index);
 
 #ifdef __cplusplus
 }

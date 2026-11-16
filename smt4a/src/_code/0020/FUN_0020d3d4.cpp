@@ -42,7 +42,7 @@ s32 FUN_00291e14(void);
 s8 *gameGetSlotTable(void);
 BtlDebugUnitRecord *gameGetSlotRecord(s32 slot);
 s32 idListHasFlaggedRecord(BtlDebugUnitRecord *record);
-BtlDebugDemon *FUN_00184310(u16 id);
+BtlDebugDemon *devilGetRecord(u16 id);
 void FUN_00203b40(void *list, s32 count, s32 a, s32 b, s32 c, s32 d);
 
 /* Sets up the debug menu's lists: the number of visible entries of the shared page, and for each of
@@ -113,7 +113,7 @@ void FUN_0020d3d4(BtlDebugMenuLists *menu)
                         if ((entry->flags & 1) != 0 || FUN_00291e14() == 0 || FUN_00291e14() == 0) {
                             continue;
                         }
-                        demon = FUN_00184310(record->demonId);
+                        demon = devilGetRecord(record->demonId);
                         if (demon == NULL || (demon->flags & 4) == 0) {
                             continue;
                         }

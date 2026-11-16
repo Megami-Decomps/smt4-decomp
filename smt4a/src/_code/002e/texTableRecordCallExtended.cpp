@@ -1,7 +1,7 @@
 #include "shard/W6_W6Match5_RecordCallParameters.h"
 #include "shard/W6_W6Match3_ExtendedRecordCall.h"
 
-extern "C" void FUN_00180280(u32 table, s32 index, RecordCallParameters* parameters);
+extern "C" void texTableRecordCall(u32 table, s32 index, RecordCallParameters* parameters);
 
 extern "C" void texTableRecordCallExtended(u32 flags, u32 table, s32 index, u32 second, u32 third,
                              u32 firstExtra, u32 secondExtra, u32 fourth)
@@ -16,5 +16,5 @@ extern "C" void texTableRecordCallExtended(u32 flags, u32 table, s32 index, u32 
     parameters.reserved[2] = secondExtra;
     parameters.firstFlag = 1;
     parameters.secondFlag = 1;
-    FUN_00180280(table, index, &parameters);
+    texTableRecordCall(table, index, &parameters);
 }

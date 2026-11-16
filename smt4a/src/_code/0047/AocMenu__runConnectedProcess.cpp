@@ -14,7 +14,7 @@ int scrScriptProcessStartEntry(...);
 int asdFsIsSdCardDetected(...);
 int windowCreateStatusOperation(...);
 int FUN_00476e58(...);
-int FUN_00477d10(...);
+int aocMenuSetButtonHelp(...);
 int jobFlagsWorkStop(...);
 int FUN_0047bc90(...);
 int FUN_0047bcdc(...);
@@ -52,7 +52,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: asdFsIsSdCardDetected. */
 /* Supplied declaration required: windowCreateStatusOperation. */
 /* Supplied declaration required: FUN_00476e58. */
-/* Supplied declaration required: FUN_00477d10. */
+/* Supplied declaration required: aocMenuSetButtonHelp. */
 /* Supplied declaration required: jobFlagsWorkStop. */
 /* Supplied declaration required: FUN_0047bc90. */
 /* Supplied declaration required: FUN_0047bcdc. */
@@ -121,7 +121,7 @@ void AocMenu::runConnectedProcess()
           temp_v1 = isEmptyString(&record.word(0));
           if (temp_v1 != 0) {
             *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) | 0x100;
-            FUN_00477d10(param_1,1);
+            aocMenuSetButtonHelp(param_1,1);
             param_1[2] = 2;
             jobFlagsWorkStop(param_1);
             return;

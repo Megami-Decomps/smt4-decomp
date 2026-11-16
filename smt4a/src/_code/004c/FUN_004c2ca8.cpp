@@ -12,7 +12,7 @@ int dataTable08Sub2GetRecord(void);
 int gameGetSlotRecord(...);
 int dataTable04FindById(void);
 int FUN_003e8bb0(...);
-int FUN_003f0e20(...);
+int btlMainFindEntryByListedId(...);
 int FUN_004bd098(...);
 int FUN_004c4178(unsigned int, unsigned int, int, int, int);
 int FUN_004c58e0(...);
@@ -63,7 +63,7 @@ extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: gameGetSlotRecord. */
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_003e8bb0. */
-/* Supplied declaration required: FUN_003f0e20. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_004bd098. */
 extern int bitsAt60Test(unsigned int, unsigned int);
 extern unsigned int FUN_004c2aec(unsigned int, unsigned int, int);
@@ -122,9 +122,9 @@ unsigned int FUN_004c2ca8(int param_1,unsigned int param_2,int param_3,int param
   dataTable04FindById();
   dataTable8FindRecord();
   puVar5 = puVar4;
-  FUN_003f0e20(puVar4,param_5);
+  btlMainFindEntryByListedId(puVar4,param_5);
   puVar6 = puVar4;
-  FUN_003f0e20(puVar4,param_6);
+  btlMainFindEntryByListedId(puVar4,param_6);
   FUN_003e8bb0(temp_v14,puVar4,puVar5);
   temp_v7 = 0xffffffff;
   temp_v8 = 0xffffffff;
@@ -139,8 +139,8 @@ unsigned int FUN_004c2ca8(int param_1,unsigned int param_2,int param_3,int param
     VectorUnsignedToFloat((unsigned int)*(unsigned short *)(temp_v6 + 0x2c),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v3 = btlGetMainState((unsigned int)*(unsigned short *)(temp_v6 + 0x2c));
     temp_v4 = temp_v3;
-    FUN_003f0e20(temp_v3,param_5);
-    if ((((temp_v3 != 0) && (temp_v13 = temp_v4, FUN_003f0e20(temp_v4,param_6), temp_v4 != 0)) &&
+    btlMainFindEntryByListedId(temp_v3,param_5);
+    if ((((temp_v3 != 0) && (temp_v13 = temp_v4, btlMainFindEntryByListedId(temp_v4,param_6), temp_v4 != 0)) &&
         (FUN_003e8bb0(temp_v23,temp_v13,temp_v3), temp_v24 != 0)) &&
        ((temp_v4 = flagsCountSelectedBits(*(unsigned short *)(temp_v4 + 0x274)), temp_v4 != 0 &&
         (temp_v0 = (unsigned int)temp_v24 * temp_v4, temp_v0 != 0)))) {

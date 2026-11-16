@@ -10,7 +10,7 @@ extern "C" {
 int qsort(...);
 int FUN_0014e188(...);
 int uiSpriteInitializeState(...);
-int FUN_00184310(void);
+int devilGetRecord(void);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
 int uiSpriteSetImageKeyframe(...);
@@ -55,7 +55,7 @@ extern unsigned int DAT_005e1560; /* 0x5e1560 */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: uiSpriteInitializeState. */
 /* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: FUN_00184310. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
@@ -280,7 +280,7 @@ void FUN_0021c45c(int param_1,int param_2)
     temp_v5 = FUN_00187168((const void *)temp_v1);
     if (temp_v5 != 0) {
       temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 0x62);
-      FUN_00184310();
+      devilGetRecord();
       statusBustUpPortraitAcquire((int)(short)(*(short *)(temp_v3 + 0x9c) + 1),0);
     }
     temp_v7 = temp_v7 + 1;

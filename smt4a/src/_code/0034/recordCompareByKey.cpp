@@ -13,13 +13,13 @@ struct Entry0034f378 {
     /* 0x02 */ u16 id;
 };
 
-Record0034f378 *FUN_00282b9c(u32 id);
+Record0034f378 *dataTable12FindBySortKey(u32 id);
 
 s32 recordCompareByKey(Entry0034f378 *a, Entry0034f378 *b)
 {
-    Record0034f378 *first = FUN_00282b9c(a->id);
+    Record0034f378 *first = dataTable12FindBySortKey(a->id);
 
-    return FUN_00282b9c(b->id)->key - first->key;
+    return dataTable12FindBySortKey(b->id)->key - first->key;
 }
 
 }

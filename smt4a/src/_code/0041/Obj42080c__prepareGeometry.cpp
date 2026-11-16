@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001d3de0(float *, float *, float *);
+int matrixScaleColumnsAlt(float *, float *, float *);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(unsigned int, int);
 int __aeabi_idivmod(undefined4);
@@ -61,7 +61,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001d3de0. */
+/* Supplied declaration required: matrixScaleColumnsAlt. */
 /* Supplied declaration required: __aeabi_idivmod. */
 
 
@@ -198,7 +198,7 @@ void Obj42080c::prepareGeometry()
   param_1->field_0x5c = temp_v15;
   uStack_28 = 0x3f800000;
   temp_v16 = temp_v15;
-  FUN_001d3de0(&param_1->field_0x18,&param_1->field_0x18,&temp_v15);
+  matrixScaleColumnsAlt(&param_1->field_0x18,&param_1->field_0x18,&temp_v15);
   return;
 }
 

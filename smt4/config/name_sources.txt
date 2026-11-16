@@ -4520,3 +4520,41 @@
 00296934 uiQuestClose inferred [med] Releases g_uiQuest's touch regions, scripts and buffers, stops its job, frees it and clears g_uiQuest. Twin of smt4a FUN_0034aae4.
 002bbaf8 fsGetUserMountHandle inferred [med] Returns the user file-system mount handle and reports result 0xE0A046DB when it is not mounted. Twin of smt4a FUN_00188688.
 00439a3c g_btlPaletteColors inferred FUN_00244fb0 indexes it by palette and byte-swaps the entry into the unit fade colour; smt4a twin DAT_0057a650.
+00141fd0 nw_snd_SoundArchive_GetSoundType inferred Twin of smt4a nw_snd_SoundArchive_GetSoundType: same-named callers reference them at the same place (1 callers).
+00145d6c dataSubmitSelectedPresetBlock inferred Twin of smt4a dataSubmitSelectedPresetBlock: same-named callers reference them at the same place (2 callers).
+0015d91c handlerTableDispatch2 inferred Twin of smt4a handlerTableDispatch2: same-named callers reference them at the same place (1 callers).
+001dbba8 jobDetachFromParent inferred Twin of smt4a jobDetachFromParent: same-named callers reference them at the same place (2 callers).
+001fe514 asdMdlObjectAlloc inferred Twin of smt4a asdMdlObjectAlloc: same-named callers reference them at the same place (1 callers).
+00238c80 releaseOrCopyHandle inferred Twin of smt4a releaseOrCopyHandle: same-named callers reference them at the same place (1 callers).
+002399bc handlerRefForward inferred Twin of smt4a handlerRefForward: same-named callers reference them at the same place (1 callers).
+0023b49c btlFilterLoadTexture inferred Twin of smt4a btlFilterLoadTexture: same-named callers reference them at the same place (1 callers).
+0024c3c8 sysGetTableWord inferred Twin of smt4a sysGetTableWord: same-named callers reference them at the same place (3 callers).
+0024f880 quadHolderCopyOut inferred Twin of smt4a quadHolderCopyOut: same-named callers reference them at the same place (2 callers).
+0024f890 quadSourceCopyOut inferred Twin of smt4a quadSourceCopyOut: same-named callers reference them at the same place (2 callers).
+0024f8a4 polygonTrackRebuildResources inferred Twin of smt4a polygonTrackRebuildResources: same-named callers reference them at the same place (1 callers).
+0026e68c jobSetWork31 inferred Twin of smt4a jobSetWork31: same-named callers reference them at the same place (2 callers).
+00275714 soundActorQueueStartPending inferred Twin of smt4a soundActorQueueStartPending: same-named callers reference them at the same place (1 callers).
+0027581c resourceTableReleaseHandles inferred Twin of smt4a resourceTableReleaseHandles: same-named callers reference them at the same place (1 callers).
+0027dab0 idSetFindSubjectIndex inferred Twin of smt4a idSetFindSubjectIndex: same-named callers reference them at the same place (1 callers).
+00292be4 pair40Set inferred Twin of smt4a pair40Set: same-named callers reference them at the same place (1 callers).
+002a2058 handlerTableDispatch1 inferred Twin of smt4a handlerTableDispatch1: same-named callers reference them at the same place (2 callers).
+002aa278 __aeabi_uldivmod inferred Twin of smt4a __aeabi_uldivmod: same-named callers reference them at the same place (1 callers).
+002bc7f4 gxGetCommandListParameter inferred Twin of smt4a gxGetCommandListParameter: same-named callers reference them at the same place (3 callers).
+002bef68 asdGxBindCmdlistAt inferred Twin of smt4a asdGxBindCmdlistAt: same-named callers reference them at the same place (1 callers).
+002bf6fc bustupCutStartSlotTransition inferred Twin of smt4a bustupCutStartSlotTransition: same-named callers reference them at the same place (1 callers).
+002c15ac asdGxPresetsGetHeightByKind inferred Twin of smt4a asdGxPresetsGetHeightByKind: same-named callers reference them at the same place (1 callers).
+002c15fc slotIsActive inferred Twin of smt4a slotIsActive: same-named callers reference them at the same place (1 callers).
+002c2424 nn_gxlow_CTR_FlushDataCacheForward inferred Twin of smt4a nn_gxlow_CTR_FlushDataCacheForward: same-named callers reference them at the same place (1 callers).
+002c3364 runtimeDispatchObjectRelease inferred Twin of smt4a runtimeDispatchObjectRelease: same-named callers reference them at the same place (2 callers).
+002c3414 globalBlockGetFirst inferred Twin of smt4a globalBlockGetFirst: same-named callers reference them at the same place (1 callers).
+002c3530 renderTargetClear inferred Twin of smt4a renderTargetClear: same-named callers reference them at the same place (1 callers).
+002fc240 objectGetLengthField inferred Twin of smt4a objectGetLengthField: same-named callers reference them at the same place (1 callers).
+00300b8c uiCompareBytePriorityThenKey inferred Twin of smt4a uiCompareBytePriorityThenKey: same-named callers reference them at the same place (1 callers).
+00351ca0 resetFlag5891A4And65f8 inferred Twin of smt4a resetFlag5891A4And65f8: same-named callers reference them at the same place (1 callers).
+0035c02c listHeaderInit inferred Twin of smt4a listHeaderInit: same-named callers reference them at the same place (1 callers).
+0035c43c words2Clear inferred Twin of smt4a words2Clear: same-named callers reference them at the same place (1 callers).
+0035eaa8 words3Clear2 inferred Twin of smt4a words3Clear2: same-named callers reference them at the same place (1 callers).
+003799bc soundOwnerDetach inferred Twin of smt4a soundOwnerDetach: same-named callers reference them at the same place (1 callers).
+0037e730 constructTrackBase inferred Twin of smt4a constructTrackBase: same-named callers reference them at the same place (1 callers).
+0038b3e8 block88OwnerCheck inferred Twin of smt4a block88OwnerCheck: same-named callers reference them at the same place (1 callers).
+003bbb98 cecSendCardData inferred Twin of smt4a cecSendCardData: same-named callers reference them at the same place (1 callers).

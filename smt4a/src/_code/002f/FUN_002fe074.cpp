@@ -11,7 +11,7 @@ typedef struct Record {
 } Record;
 
 extern u32 FUN_002a4b28(u16 id);
-extern Record *FUN_00184310(u32 id);
+extern Record *devilGetRecord(u32 id);
 
 /* Sort comparison of two ids: by their FUN_002a4b28 bit sets (a set containing bits the other lacks sorts first), then by rank ascending, order descending and id ascending. */
 s32 FUN_002fe074(u16 *idA, u16 *idB)
@@ -28,8 +28,8 @@ s32 FUN_002fe074(u16 *idA, u16 *idB)
     if ((setA & ~setB) != 0) {
         return 1;
     }
-    recordA = FUN_00184310(*idA);
-    recordB = FUN_00184310(*idB);
+    recordA = devilGetRecord(*idA);
+    recordB = devilGetRecord(*idB);
     diff = recordA->rank - recordB->rank;
     if (diff == 0) {
         diff = recordB->order - recordA->order;

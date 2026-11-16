@@ -70,7 +70,7 @@ void releaseEntriesB(void *panel);
 void releaseEntriesA(void);
 void slotPoolResetTrackedState(void);
 SlotTable *gameGetSlotTable(void);
-EntryRecord *FUN_00184310(u16 index);
+EntryRecord *devilGetRecord(u16 index);
 EntryRecord *dataTable0ProbeEntryById(u16 index);
 s32 FUN_0032fbd0(void *slot);
 s32 FUN_002a4b28(u16 id);
@@ -103,7 +103,7 @@ void FUN_004a1958(EntryScreen *screen)
                 PartySlot *slot = (PartySlot *)((u8 *)table + member * 300);
 
                 if (FUN_0032fbd0((u8 *)slot + 0x68) == 0) {
-                    EntryRecord *record = FUN_00184310(slot->entryId);
+                    EntryRecord *record = devilGetRecord(slot->entryId);
                     u8 entry[8];
 
                     campFillUnitComparison(entry, record->id, 1);
@@ -137,7 +137,7 @@ void FUN_004a1958(EntryScreen *screen)
         s32 index = 0;
 
         do {
-            EntryRecord *record = FUN_00184310((u16)(index + 1));
+            EntryRecord *record = devilGetRecord((u16)(index + 1));
 
             if (record != NULL && (record->flags & 1) != 0) {
                 if (index == 9 && gameFlagIsSet(0x441) == 0) {

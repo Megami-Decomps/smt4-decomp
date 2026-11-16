@@ -13,7 +13,7 @@ typedef void (*VoidFunc)(void);
 int randBetween(int low, int high);                    /* random integer in [low, high] */
 int soundChannelStopAll(int id);
 int soundChannelRequestIfEnabled(u32 handle, int arg1, int arg2);
-int FUN_00184310(void);
+int devilGetRecord(void);
 int sysMemClear(void *ptr, int size);                  /* zero a block */
 u32 taskCreateDraw(VoidFunc fn, int priority, int arg2, int arg3, VoidFunc cb, int arg5, void *work, u32 parent);
 void *asdMemoryAlloc(int heap, int align, int arg2, int size, int arg4);
@@ -90,7 +90,7 @@ void whisperEffectStart(u32 devilId)
     }
 
     devilId &= 0xffff;
-    FUN_00184310();
+    devilGetRecord();
     fx = g_whisperEffect;
     fx->handle = ((u8 *)devilId)[0x3a] + 0x1000097;
     fx->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>(LAB_0037e4ec), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(whisperAdvanceAnimations), reinterpret_cast<AsdProcFunc>(whisperEffectDestroy), reinterpret_cast<u32>(fx));

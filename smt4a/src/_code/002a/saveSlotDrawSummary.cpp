@@ -11,7 +11,7 @@ void FUN_00183bb0(void);
 void efctSetSpeed(f32 alpha);
 void FUN_00164b5c(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 depth);
 const MessageDrawPosition *asdTMTexTableEntryAt(u32 group, u32 index);
-const SaveSlotPortraitResource *FUN_00184310(u32 portrait);
+const SaveSlotPortraitResource *devilGetRecord(u32 portrait);
 void FUN_00169a1c(u32 image, s32 x, s32 y, s32 depth);
 u32 FUN_0036fcd0(void *unit, u32 mode);
 void drawSetColorFromRGBA8(u32 color);
@@ -64,14 +64,14 @@ void saveSlotDrawSummary(const SaveSlotTextObjects *texts, const SaveSlotDisplay
     }
     FUN_001835b4(2, 0x2E, 0x5A, x, y, 0x66);
     if (record->portrait != 0) {
-        const SaveSlotPortraitResource *portrait = FUN_00184310(record->portrait);
+        const SaveSlotPortraitResource *portrait = devilGetRecord(record->portrait);
         position = asdTMTexTableEntryAt(0x2E, 0x78);
         FUN_00169a1c(portrait->image, position->x + x, position->y + y, 0x67);
     }
     if (record->secondaryPortrait != 0) {
         void *unit = reinterpret_cast<void *>(FUN_0019acdc(record->secondaryPortrait, 0));
         u16 id = FUN_0036fcd0(unit, 0);
-        const SaveSlotPortraitResource *portrait = FUN_00184310(FUN_0019e52c(id));
+        const SaveSlotPortraitResource *portrait = devilGetRecord(FUN_0019e52c(id));
         position = asdTMTexTableEntryAt(0x2E, 0x100);
         FUN_00169a1c(portrait->image, position->x + x, position->y + y, 0x67);
     }

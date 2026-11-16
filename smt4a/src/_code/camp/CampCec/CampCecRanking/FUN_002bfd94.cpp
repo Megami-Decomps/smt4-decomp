@@ -15,7 +15,7 @@ int FUN_00169a1c(...);
 int FUN_00180310(...);
 
 int FUN_00183bb0(void);
-int FUN_00184310(void);
+int devilGetRecord(void);
 int drawSetColorFromRGBA8(...);
 int FUN_0025cc78(...);
 
@@ -44,7 +44,7 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_00184310. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0025cc78. */
@@ -159,7 +159,7 @@ int FUN_002bfd94(void)
               temp_v16 = 0x3fa;
             }
             if (temp_v10 != 0) {
-              FUN_00184310();
+              devilGetRecord();
               temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,temp_v12));
               FUN_00169a1c(*(unsigned short *)(temp_v10 + 0x9c),temp_v4 + *(short *)(temp_v6 + 8) + temp_v8,
                            temp_v3 + *(short *)(temp_v6 + 10) + temp_v5,0x65);

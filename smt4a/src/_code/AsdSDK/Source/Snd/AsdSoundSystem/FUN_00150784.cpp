@@ -61,7 +61,7 @@ void FUN_00173c7c(void *streamPlayer);
 void asdSoundObjectStop(s32 handle, s32 arg);
 void uiTextStateReset(void *system);
 void asdMemFree(void *block);
-void FUN_001b6668(void *queue, void *work);
+void nw_ut_internal_LinkListImpl_erase_2B743C(void *queue, void *work);
 void nw_snd_SoundHandle_DetachSound(s32 *handle);
 
 static __inline void asdSoundHandleRelease(s32 *handle)
@@ -120,7 +120,7 @@ void FUN_00150784(void)
     if (system->hasStream == 1) {
         for (u8 i = 0; i < 0x10; i++)
             asdSoundHandleRelease(&system->streamHandles[i].handle);
-        FUN_001b6668(system->streamQueue, system->streamWork);
+        nw_ut_internal_LinkListImpl_erase_2B743C(system->streamQueue, system->streamWork);
         FUN_00173a94(system->streamSource);
         asdMemFree(system->streamBuffer);
     }

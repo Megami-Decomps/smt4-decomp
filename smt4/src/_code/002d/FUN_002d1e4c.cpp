@@ -46,7 +46,7 @@ extern int lmapSceneGetUnk0(void);
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: mathGetShortestAngleDelta. */
 extern int padIsButtonPressed(unsigned int);
-extern int FUN_002c15fc(unsigned int);
+extern int slotIsActive(unsigned int);
 extern int gameGetMapBlock(void);
 
 
@@ -117,14 +117,14 @@ void FUN_002d1e4c(void)
         temp_v6 = (unsigned int)*(unsigned char *)(temp_v2 + 0xb0);
       }
       if (DAT_0049f938 == 0 && temp_v6 == 0) {
-        if (((*(char *)(temp_v2 + 0xb1) != '\0') && (temp_v4 = FUN_002c15fc(8), temp_v4 == 0)) &&
-           (temp_v4 = FUN_002c15fc(7), temp_v4 == 0)) {
+        if (((*(char *)(temp_v2 + 0xb1) != '\0') && (temp_v4 = slotIsActive(8), temp_v4 == 0)) &&
+           (temp_v4 = slotIsActive(7), temp_v4 == 0)) {
           *(unsigned char *)(DAT_004474f4 + 0xb1) = 0;
         }
         if (*(short *)(DAT_004474f4 + 0xb2) < 7) {
-          temp_v4 = FUN_002c15fc(8);
+          temp_v4 = slotIsActive(8);
           temp_v7 = temp_v4 != 0;
-          temp_v4 = FUN_002c15fc(7);
+          temp_v4 = slotIsActive(7);
           temp_v8 = temp_v4 != 0;
           temp_v4 = padIsButtonPressed(4);
           temp_v9 = temp_v4 != 0;
@@ -140,7 +140,7 @@ void FUN_002d1e4c(void)
         }
         if (((temp_v10 && temp_v2 == 0) && (temp_v4 = lmapSceneGetUnk0(), temp_v4 == 1)) &&
            ((temp_v4 = inputIsQuestMenuPressed(), temp_v4 != 0 ||
-            (((temp_v4 = FUN_002c15fc(8), temp_v4 != 0 && (temp_v4 = FUN_002c15fc(7), temp_v4 != 0)) &&
+            (((temp_v4 = slotIsActive(8), temp_v4 != 0 && (temp_v4 = slotIsActive(7), temp_v4 != 0)) &&
              ((temp_v4 = padIsButtonPressed(8), temp_v4 == 0 &&
               ((temp_v4 = padIsButtonPressed(7), temp_v4 == 0 && (*(char *)(DAT_004474f4 + 0xb1) == '\0'))))))
             )))) {
@@ -154,9 +154,9 @@ void FUN_002d1e4c(void)
     }
   }
   else {
-    temp_v4 = FUN_002c15fc(8);
+    temp_v4 = slotIsActive(8);
     temp_v7 = temp_v4 != 0;
-    temp_v4 = FUN_002c15fc(7);
+    temp_v4 = slotIsActive(7);
     temp_v8 = temp_v4 != 0;
   }
   temp_v15 = 7.0f;

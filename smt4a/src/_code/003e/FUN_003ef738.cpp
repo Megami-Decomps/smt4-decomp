@@ -38,7 +38,7 @@ typedef struct BtlUnit {
 extern u32 g_btlScriptUnit;
 extern u32 g_btlUiBlock;
 
-s32 FUN_00184310(u32 id);
+s32 devilGetRecord(u32 id);
 s32 FUN_004aba3c(u32 block);
 
 /* Whether the script unit's character is of the given kind. */
@@ -75,15 +75,15 @@ s32 FUN_003ef738(void)
     }
     if (scriptUnitIsKind(1)) {
         if (record->words[0] != 0) {
-            return FUN_00184310(record->words[0]) != 0 ? (s16)record->words[0] : 0;
+            return devilGetRecord(record->words[0]) != 0 ? (s16)record->words[0] : 0;
         }
     } else if (scriptUnitIsKind(4)) {
         if (record->words[1] != 0) {
-            return FUN_00184310(record->words[1]) != 0 ? (s16)record->words[1] : 0;
+            return devilGetRecord(record->words[1]) != 0 ? (s16)record->words[1] : 0;
         }
     } else if (scriptUnitIsKind(3)) {
         if (record->words[2] != 0) {
-            return FUN_00184310(record->words[2]) != 0 ? (s16)record->words[2] : 0;
+            return devilGetRecord(record->words[2]) != 0 ? (s16)record->words[2] : 0;
         }
     }
     return 0;

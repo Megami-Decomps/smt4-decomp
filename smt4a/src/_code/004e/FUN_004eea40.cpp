@@ -128,7 +128,7 @@ void FUN_004eea40(int *param_1,unsigned int *param_2)
     if (*psVar15 < 0) break;
     iVar28 = *piStack_30;
     iVar8 = iStack_4c;
-    FUN_003f0e20();
+    btlMainFindEntryByListedId();
     acStack_44[0] = '\0';
     uVar20 = uStack_74;
     FUN_004c4604(uStack_74,iVar6,(int)*(short *)(param_2[10] + 0x1be),
@@ -215,7 +215,7 @@ void FUN_004eea40(int *param_1,unsigned int *param_2)
     case 7:
       iVar12 = (int)*psVar15;
       puVar18 = (unsigned int *)*piStack_30;
-      FUN_003f0e20(puVar18,iVar12);
+      btlMainFindEntryByListedId(puVar18,iVar12);
       iVar9 = FUN_004f6478(DAT_00573808);
       if ((DAT_00571160 & *puVar18) == 0 && (DAT_00571164 & puVar18[1]) == 0) {
         FUN_004fda78(iVar9 + iVar13,0,param_2,*(int *)(*piVar14 + 0x1ed4) + iVar12 * 0x1d0,3,0);
@@ -241,7 +241,7 @@ void FUN_004eea40(int *param_1,unsigned int *param_2)
     case 0xb:
       sVar3 = *psVar15;
       iVar12 = *piStack_30;
-      FUN_003f0e20(iVar12,(int)sVar3);
+      btlMainFindEntryByListedId(iVar12,(int)sVar3);
       FUN_004fcde0(iVar9 + iVar4 + 0x28,param_2,iVar12);
       FUN_004e0114(piVar14,param_2,(int)sVar3,iVar9 + iVar4,0x1e,0x1e);
       break;
@@ -343,7 +343,7 @@ void FUN_004eea40(int *param_1,unsigned int *param_2)
       iVar12 = FUN_004f5a40(DAT_00573808);
       uVar17 = uStack_74;
       iVar13 = *piStack_30;
-      FUN_003f0e20(iVar13,(int)sVar3);
+      btlMainFindEntryByListedId(iVar13,(int)sVar3);
       FUN_001aba54();
       cVar21 = '\0';
       if ((uVar17 != 0) && (cVar1 = *(char *)(uVar17 + 0x4d), cVar1 == '\x01' || cVar1 == '\x02')) {
@@ -369,7 +369,7 @@ void FUN_004eea40(int *param_1,unsigned int *param_2)
             case 0xc:
               if ((sVar3 == 0xc) && (-1 < *psVar15)) {
                 puVar18 = (unsigned int *)*piStack_30;
-                FUN_003f0e20();
+                btlMainFindEntryByListedId();
                 if ((puVar18 != (unsigned int *)0x0) &&
                    ((*puVar18 & DAT_00571150) == 0 && (puVar18[1] & DAT_00571154) == 0)) break;
               }

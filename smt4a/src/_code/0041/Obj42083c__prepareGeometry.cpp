@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001d3de0(float *, float *, float *);
+int matrixScaleColumnsAlt(float *, float *, float *);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(unsigned int, int);
 
@@ -61,7 +61,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001d3de0. */
+/* Supplied declaration required: matrixScaleColumnsAlt. */
 
 
 /* WARNING: Removing unreachable block (ram,0x00415af8) */
@@ -165,7 +165,7 @@ void Obj42083c::prepareGeometry()
   param_1->field_0x5c = temp_v17;
   temp_v19 = 0x3f800000;
   temp_v18 = temp_v17;
-  FUN_001d3de0(&param_1->field_0x18,&param_1->field_0x18,&temp_v17);
+  matrixScaleColumnsAlt(&param_1->field_0x18,&param_1->field_0x18,&temp_v17);
   return;
 }
 

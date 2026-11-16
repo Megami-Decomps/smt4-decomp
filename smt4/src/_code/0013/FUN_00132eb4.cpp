@@ -6,7 +6,7 @@ extern "C" {
 
 s32 FUN_0014d4ec(void *archive, u32 item, SoundArchiveIdRange *range);
 s32 FUN_0014d478(void *archive, u32 item, u32 *size);
-s32 FUN_00141fd0(void *archive, u32 item);
+s32 nw_snd_SoundArchive_GetSoundType(void *archive, u32 item);
 s32 FUN_00141e48(SoundArchiveLoader *loader, u32 item, u32 flags);
 u32 FUN_002ac780(void *archive, u32 item);
 void _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv(WaveSoundFileReader *reader, u32 file);
@@ -29,7 +29,7 @@ s32 FUN_00132eb4(SoundArchiveLoader *loader, u32 item, u32 flags)
     if (FUN_0014d4ec(loader->archive, item, &range) == 0) {
         return 0;
     }
-    s32 kind = FUN_00141fd0(loader->archive, range.first);
+    s32 kind = nw_snd_SoundArchive_GetSoundType(loader->archive, range.first);
 
     if (kind == 1) {
         for (u32 id = range.first; id <= range.last; id++) {

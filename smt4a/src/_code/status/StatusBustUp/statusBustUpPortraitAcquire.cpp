@@ -37,7 +37,7 @@ void statusBustUpPortraitAcquire(s32 id, s32 byDevilId)
         if (id < 0) {
             id = gameFlagIsSet(17) ? 0 : 606;
         } else {
-            PortraitDevilRecordAView *devil = (PortraitDevilRecordAView *)FUN_00184310((u16)id);
+            PortraitDevilRecordAView *devil = (PortraitDevilRecordAView *)devilGetRecord((u16)id);
             if (devil == NULL)
                 return;
             PortraitOverrideAView *override = dataTable00FindById((u16)id);

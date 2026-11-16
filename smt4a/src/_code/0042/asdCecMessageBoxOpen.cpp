@@ -6,7 +6,7 @@ extern "C" {
 extern CecModuleFlags g_asdCecModuleFlags;
 extern CriticalSection g_asdCecMessageBoxCriticalSection;
 void moduleStartOnce(void);
-s32 FUN_00501b90(AsdCecMessageBox* box, CecMessageBoxInfo* info, u32 id);
+s32 nn_cec_CTR_MessageBox_ReadMessageBoxInfo(AsdCecMessageBox* box, CecMessageBoxInfo* info, u32 id);
 void FUN_0042e870(AsdCecMessageBox* box, s32 release);
 void FUN_0042d5b4(s32 enabled);
 void __aeabi_memcpy4(void* destination, const void* source, u32 bytes);
@@ -25,7 +25,7 @@ s32 asdCecMessageBoxOpen(AsdCecMessageBox* box, u32 id, u32 expectedTag)
     state->id = id;
 
     CecMessageBoxInfo info;
-    const s32 infoResult = FUN_00501b90(box, &info, id);
+    const s32 infoResult = nn_cec_CTR_MessageBox_ReadMessageBoxInfo(box, &info, id);
     if ((s32)(infoResult & 0x80000000) < 0) {
         state->id = 0;
         FUN_0042e870(box, 1);

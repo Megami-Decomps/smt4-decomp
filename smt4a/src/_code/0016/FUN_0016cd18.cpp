@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001c5be4(int **, int *, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+int titleContentStreamCreate(int **, int *, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 typedef int romwright_code(...);
 /* stack frame of param_10: 6 slot(s), 24 byte(s) */
@@ -18,7 +18,7 @@ typedef struct {
 } param_10_stack;
 
 extern int FUN_001aeefc(unsigned int, int *);
-/* Supplied declaration required: FUN_001c5be4. */
+/* Supplied declaration required: titleContentStreamCreate. */
 
 
 void FUN_0016cd18(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
@@ -40,7 +40,7 @@ void FUN_0016cd18(unsigned int param_1,unsigned int param_2,unsigned int param_3
   temp_v2 = param_3;
   uStack_24 = param_4;
   temp_v3 = param_2;
-  FUN_001c5be4(ppiVar1,&temp_v2,param_6,param_7,param_8,param_9,param_10);
+  titleContentStreamCreate(ppiVar1,&temp_v2,param_6,param_7,param_8,param_9,param_10);
   if ((-1 < (int)ppiVar1) && (temp_v0 = FUN_001aeefc(param_1,temp_v1), temp_v0 < 0)) {
     (**(romwright_code **)(*temp_v1 + 0x30))();
   }

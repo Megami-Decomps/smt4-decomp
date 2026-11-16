@@ -38,7 +38,7 @@ extern unsigned int DAT_00439cf8; /* 0x439cf8 */
 
 /* Supplied declaration required: FUN_00240520. */
 /* Supplied declaration required: FUN_002408ac. */
-extern int FUN_0027dab0(int, int);
+extern int idSetFindSubjectIndex(int, int);
 /* Supplied declaration required: btlFindNthActiveSpecialEntry. */
 /* Supplied declaration required: FUN_002881bc. */
 /* Supplied declaration required: dataTable00FindById. */
@@ -210,8 +210,8 @@ LAB_003343b0:
            ((temp_v12 = *piVar9 + *(short *)(temp_v4 + 8) * 0x114, *(int *)(temp_v12 + 0xfc) != temp_v27
             || (*(float *)(temp_v6 + 0xc) * *(float *)(temp_v6 + 0xc) <
                 *(float *)(temp_v12 + 0xc) * *(float *)(temp_v12 + 0xc))))) {
-          temp_v10 = FUN_0027dab0(temp_v29,temp_v12);
-          temp_v13 = FUN_0027dab0(temp_v29,temp_v6);
+          temp_v10 = idSetFindSubjectIndex(temp_v29,temp_v12);
+          temp_v13 = idSetFindSubjectIndex(temp_v29,temp_v6);
           temp_v13 = temp_v4 + 0xcc + temp_v13 * 4;
           temp_v10 = temp_v4 + 0xcc + temp_v10 * 4;
           temp_v9 = *(unsigned int *)(temp_v10 + 0xc);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001b6668(int, int);
+int nw_ut_internal_LinkListImpl_erase_2B743C(int, int);
 int nw_ut_internal_LinkListImpl_insert(int, int *, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001b6668. */
+/* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2B743C. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
 
 
@@ -34,7 +34,7 @@ void FUN_0045fe24(int param_1)
   else if (temp_v3 < 0) {
     temp_v3 = 0;
   }
-  FUN_001b6668(temp_v2 + 8,param_1 + 0xf8);
+  nw_ut_internal_LinkListImpl_erase_2B743C(temp_v2 + 8,param_1 + 0xf8);
   piVar2 = *(int **)(temp_v2 + 0xc);
   if (piVar2 != (int *)(temp_v2 + 0xc)) {
     do {

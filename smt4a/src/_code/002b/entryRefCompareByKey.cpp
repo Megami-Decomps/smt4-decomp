@@ -12,13 +12,13 @@ typedef struct SortRef {
     /* 0x2 */ u16 id;
 } SortRef;
 
-extern SortEntry *FUN_00282b9c(u32 id);
+extern SortEntry *dataTable12FindBySortKey(u32 id);
 
 /* Comparator: orders two references by their entry's sort key. */
 s32 entryRefCompareByKey(SortRef *a, SortRef *b)
 {
-    SortEntry *entryA = FUN_00282b9c(a->id);
-    SortEntry *entryB = FUN_00282b9c(b->id);
+    SortEntry *entryA = dataTable12FindBySortKey(a->id);
+    SortEntry *entryB = dataTable12FindBySortKey(b->id);
 
     return entryA->key - entryB->key;
 }

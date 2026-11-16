@@ -21,7 +21,7 @@ extern MessageMainState g_messageMain;
 extern Unk49381c DAT_0049381c;
 
 s32 FUN_002c1658(s32 id, s32 mode);
-s32 FUN_002c15fc(s32 id);
+s32 slotIsActive(s32 id);
 
 /* Reports whether the given owner is still busy: any of the checked activities runs, or the first
  * message window belongs to it and is still waiting. */
@@ -29,7 +29,7 @@ s32 FUN_0010efd8(s32 owner)
 {
     MessageWindow *window;
 
-    if (FUN_002c1658(0, 1) != 0 || FUN_002c1658(9, 2) != 0 || FUN_002c15fc(6) != 0 ||
+    if (FUN_002c1658(0, 1) != 0 || FUN_002c1658(9, 2) != 0 || slotIsActive(6) != 0 ||
         FUN_002c1658(10, 2) != 0 || DAT_0049381c.busy != 0) {
         return 1;
     }

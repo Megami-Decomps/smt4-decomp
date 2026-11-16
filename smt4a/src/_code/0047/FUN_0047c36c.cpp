@@ -44,7 +44,7 @@ extern AocSystem *g_aocSystem;
 
 s32 sysLightEventTryWait(AocObjB *event);
 void FUN_00163aa4(PanelSprite *panel, f32 step);
-void FUN_00477d10(SceneWindowWork *window, s32 value, s32 mode);
+void aocMenuSetButtonHelp(SceneWindowWork *window, s32 value, s32 mode);
 void jobOwnerFreeSlotAndStop(JobOwner *owner);
 void jobFlagsWorkStop(JobFlagsWork *work);
 u32 jobIsValid(u32 job);
@@ -59,7 +59,7 @@ void FUN_0047c36c(QuestScene *scene)
 {
     if ((u32)(scene->state - 4) < 11 && sysLightEventTryWait(&g_aocMain->objB) != 0) {
         g_aocMain->flags &= ~0x10000;
-        FUN_00477d10((SceneWindowWork *)scene, -1, 0);
+        aocMenuSetButtonHelp((SceneWindowWork *)scene, -1, 0);
         jobOwnerFreeSlotAndStop((JobOwner *)scene->owner);
         jobFlagsWorkStop((JobFlagsWork *)scene);
         if (jobIsValid(scene->childJob)) {

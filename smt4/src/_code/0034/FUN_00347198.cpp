@@ -29,19 +29,19 @@ void FUN_00347198(DynamicMesh *mesh, u32 mask)
         return;
     }
     if ((mesh->flags & 0x1) && (mask & 0x1)) {
-        FUN_002c2424((u32)(mesh->positions), mesh->vertexCount * 12);
+        nn_gxlow_CTR_FlushDataCacheForward((u32)(mesh->positions), mesh->vertexCount * 12);
     }
     if ((mesh->flags & 0x2) && (mask & 0x2)) {
-        FUN_002c2424((u32)(mesh->colors), mesh->vertexCount * 16);
+        nn_gxlow_CTR_FlushDataCacheForward((u32)(mesh->colors), mesh->vertexCount * 16);
     }
     if ((mesh->flags & 0x20) && (mask & 0x20)) {
-        FUN_002c2424((u32)(mesh->packed), mesh->vertexCount * 4);
+        nn_gxlow_CTR_FlushDataCacheForward((u32)(mesh->packed), mesh->vertexCount * 4);
     }
     if ((mesh->flags & 0x4) && (mask & 0x4)) {
-        FUN_002c2424((u32)(mesh->texCoords), mesh->vertexCount * 8);
+        nn_gxlow_CTR_FlushDataCacheForward((u32)(mesh->texCoords), mesh->vertexCount * 8);
     }
     if ((mesh->flags & 0x80) && (mask & 0x80)) {
-        FUN_002c2424((u32)(mesh->indices), mesh->indexCount * 2);
+        nn_gxlow_CTR_FlushDataCacheForward((u32)(mesh->indices), mesh->indexCount * 2);
     }
 }
 

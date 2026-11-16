@@ -59,5 +59,5 @@ struct ItemEligibilityStateA {
     /* 0x00 */ u8 unk00[0x62];
     /* 0x62 */ u16 value;
 };
-extern "C" ItemDataRecord *FUN_001ad9b4(u32 id);
+extern "C" ItemDataRecord *dataTable1bOr1cGetRecord(u32 id);
 #endif

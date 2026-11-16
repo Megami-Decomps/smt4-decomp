@@ -36,7 +36,7 @@ CombatantAffinityPreview FUN_003e8bb0(BtlMainStateA *battle, BtlCombatantEntryA 
 void source4CCopyHalves(BtlCombatantEntryA *entry, u16 *skills);
 s32 FUN_004bd098(u32 source, s32 skill);
 void kindIdStore(u32 kind, u32 *value);
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, s32 index);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, s32 index);
 extern u32 DAT_005713f0[8];
 
 u32 FUN_004c0f74(BtlCombatantEntryA *entry, u32 element)
@@ -73,7 +73,7 @@ u32 FUN_004c0f74(BtlCombatantEntryA *entry, u32 element)
         if (skills[0] == element)
             return 1;
     }
-    CombatantAffinityValueView *unit = (CombatantAffinityValueView *)FUN_003f0e20(btlGetMainState(), entry->unitIndex);
+    CombatantAffinityValueView *unit = (CombatantAffinityValueView *)btlMainFindEntryByListedId(btlGetMainState(), entry->unitIndex);
     if (unit != NULL && unit->value > 0 && (element == 2 || element == 3 || element == 20))
         return 1;
     return 0;

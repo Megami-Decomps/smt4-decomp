@@ -9,7 +9,7 @@ extern "C" {
 
 int effectDispatchSelector(...);
 int FUN_00167860(...);
-int FUN_00184310(void);
+int devilGetRecord(void);
 int dataTable04FindById(void);
 int FUN_00344cd0(...);
 int statDrawClampedDelta(...);
@@ -81,7 +81,7 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00184310. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_00185e84. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: gameGetSlotRecord. */
@@ -437,7 +437,7 @@ void FUN_0028d270(int param_1)
             }
             else {
               temp_v10 = (unsigned int)*(unsigned short *)(temp_v18 + 0x62);
-              FUN_00184310();
+              devilGetRecord();
               if (*(char *)(temp_v10 + 0xc) != '\x01') {
                 textFormatBuffer(temp_v20,"%s","\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b");
               }
@@ -884,7 +884,7 @@ LAB_0028d9e0:
       }
       else {
         temp_v10 = (unsigned int)*(unsigned short *)(temp_v18 + 0x62);
-        FUN_00184310();
+        devilGetRecord();
         if (*(char *)(temp_v10 + 0xc) != '\x01') {
           textFormatBuffer(temp_v20,"%s","\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b");
         }

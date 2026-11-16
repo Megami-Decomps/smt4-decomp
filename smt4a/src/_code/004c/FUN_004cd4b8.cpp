@@ -42,7 +42,7 @@ void FUN_004cd4b8(int param_1,int param_2)
   }
   uVar2 = *(unsigned short *)(param_1 + 0x62);
   uVar14 = (unsigned int)uVar2;
-  FUN_00184310();
+  devilGetRecord();
   uStack_50 = 0;
   uStack_4c = 0;
   iStack_58 = (unsigned int)*(unsigned short *)(uVar14 + 0x18) << 0x10;
@@ -218,8 +218,8 @@ void FUN_004cd4b8(int param_1,int param_2)
           *(short *)(param_1 + 0x22) = *(short *)(param_1 + 0x22) + 1;
         }
       }
-      iVar15 = FUN_0031cfd0(*(unsigned short *)(param_1 + 0x62));
-      FUN_0031f0f4(*(unsigned short *)(param_1 + 0x62),iVar15 + 0x32);
+      iVar15 = saveIsRecordValueBounded(*(unsigned short *)(param_1 + 0x62));
+      gameRecordSetValueClamped(*(unsigned short *)(param_1 + 0x62),iVar15 + 0x32);
       iVar9 = iVar9 + 1;
     } while (iVar9 < param_2);
   }

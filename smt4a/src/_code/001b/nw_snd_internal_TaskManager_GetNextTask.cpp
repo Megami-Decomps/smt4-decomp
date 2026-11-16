@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0018c87c(void);
+int nw_ut_internal_LinkListImpl_erase_2BAE30(void);
 
-/* Supplied declaration required: FUN_0018c87c. */
+/* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2BAE30. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -23,7 +23,7 @@ int nw_snd_internal_TaskManager_GetNextTask(int param_1,int param_2,int param_3)
   if (*(int *)(param_1 + param_2 * 0xc) != 0) {
     temp_v0 = *(int *)(param_1 + param_2 * 0xc + 4);
     if (param_3 != 0) {
-      FUN_0018c87c();
+      nw_ut_internal_LinkListImpl_erase_2BAE30();
     }
     nn_os_CriticalSection_Leave(temp_v1);
     return temp_v0 - 4;

@@ -9,7 +9,7 @@ struct BattleRateAnalysis {
     u16 unk32;
 };
 extern "C" {
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, u32 id);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, u32 id);
 void FUN_003e8bb0(BattleRateAnalysis *analysis, BtlMainStateA *battle, BtlCombatantEntryA *source);
 
 // Use the source's analyzed percentage for affected target statuses, otherwise return full rate.
@@ -17,9 +17,9 @@ f32 btlCalcAilmentRateScale(u32 sourceId, u32 targetId)
 {
     f32 rate = 1.0f;
     BtlMainStateA *battle = btlGetMainState();
-    BtlCombatantEntryA *source = FUN_003f0e20(battle, sourceId);
+    BtlCombatantEntryA *source = btlMainFindEntryByListedId(battle, sourceId);
     if (source) {
-        BtlCombatantEntryA *target = FUN_003f0e20(battle, targetId);
+        BtlCombatantEntryA *target = btlMainFindEntryByListedId(battle, targetId);
         if (target) {
             BattleRateAnalysis analysis;
             FUN_003e8bb0(&analysis, battle, source);

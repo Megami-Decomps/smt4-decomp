@@ -18,7 +18,7 @@ typedef char CubeTextureResourceLayoutCheck[sizeof(CubeTextureResourceView) == 0
 extern "C" {
 extern void *(*g_gfxAllocateCallback)(u32 memoryArea, u32 usage, TextureResourceHeaderView *owner, u32 size);
 void *nnnstdMemCpy(void *destination, const void *source, u32 size);
-void FUN_002c2424(const void *memory, u32 size);
+void nn_gxlow_CTR_FlushDataCacheForward(const void *memory, u32 size);
 void FUN_002a666c(const void *source, void *destination, u32 size);
 
 void FUN_0036f28c(TextureResourceHeaderView *original)
@@ -53,7 +53,7 @@ void FUN_0036f28c(TextureResourceHeaderView *original)
                         const void *source = image->data.get();
                         if (source != NULL) {
                             nnnstdMemCpy(memory, source, size);
-                            FUN_002c2424(memory, size);
+                            nn_gxlow_CTR_FlushDataCacheForward(memory, size);
                         }
                         image->address = memory;
                         image->memoryArea = 0x10000;
@@ -69,7 +69,7 @@ void FUN_0036f28c(TextureResourceHeaderView *original)
                     image->memoryArea = memoryArea;
                 }
             } else {
-                FUN_002c2424(image->data.get(), size);
+                nn_gxlow_CTR_FlushDataCacheForward(image->data.get(), size);
             }
         }
     }

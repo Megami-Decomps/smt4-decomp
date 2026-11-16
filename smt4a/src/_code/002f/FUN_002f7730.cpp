@@ -5,10 +5,10 @@
 
 extern "C" {
 
-int FUN_001ad9b4(void);
+int dataTable1bOr1cGetRecord(void);
 
 extern int idIsAtLeast350(int);
-/* Supplied declaration required: FUN_001ad9b4. */
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
 extern int partyEntryFlagsBit3(int);
 extern int partyEntryFlagsBit1(int);
 extern int partyEntryGetByte1(int);
@@ -26,7 +26,7 @@ int FUN_002f7730(int param_1,int param_2)
   int temp_v5;
   int temp_v6;
   
-  if ((param_2 == 0) || (temp_v1 = param_2, FUN_001ad9b4(), temp_v1 == 0)) {
+  if ((param_2 == 0) || (temp_v1 = param_2, dataTable1bOr1cGetRecord(), temp_v1 == 0)) {
     return -1;
   }
   temp_v0 = 0;

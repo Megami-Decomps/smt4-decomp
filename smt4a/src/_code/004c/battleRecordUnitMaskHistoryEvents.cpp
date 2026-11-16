@@ -14,13 +14,13 @@ struct HistoryEventMasks {
 
 extern "C" {
 extern HistoryEventMasks DAT_005713f0;
-HistoryUnit *FUN_003f0e20(BtlMainStateA *state, u32 unitId);
+HistoryUnit *btlMainFindEntryByListedId(BtlMainStateA *state, u32 unitId);
 void battleRecordCombatantHistoryEvent(BtlMainStateA *state, HistoryUnit *unit, s32 kind);
 
 /* Records history events 1-3 for the unit according to which event masks its flags hit. */
 void battleRecordUnitMaskHistoryEvents(u32 unitId)
 {
-    HistoryUnit *unit = FUN_003f0e20(btlGetMainState(), unitId);
+    HistoryUnit *unit = btlMainFindEntryByListedId(btlGetMainState(), unitId);
 
     if (unit->flags & DAT_005713f0.first) {
         battleRecordCombatantHistoryEvent(btlGetMainState(), unit, 1);

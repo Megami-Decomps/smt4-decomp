@@ -5,7 +5,7 @@
 extern "C" {
 
 int jyoucyuGetTableEntry(...);
-int FUN_00184310(void);
+int devilGetRecord(void);
 int dataTableGet(...);
 int dataTableGetEntries(void);
 int FUN_001a9698(void);
@@ -60,7 +60,7 @@ extern signed char DAT_0057f0ac; /* 0x57f0ac */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
-/* Supplied declaration required: FUN_00184310. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: dataTableGet. */
 /* Supplied declaration required: dataTableGetEntries. */
 /* Supplied declaration required: FUN_001a9698. */
@@ -144,7 +144,7 @@ unsigned int FUN_004a8750(unsigned int param_1,int param_2,int param_3,unsigned 
   iStack_30 = param_2;
   iStack_2c = param_3;
   uStack_28 = param_4;
-  FUN_00184310();
+  devilGetRecord();
   temp_v40 = param_1;
   if (param_3 != 0) {
     if (param_2 != 0) {
@@ -331,7 +331,7 @@ LAB_004a8864:
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 8);
   temp_v7 = (unsigned int)*(unsigned short *)(puVar12 + 0x62);
-  FUN_00184310();
+  devilGetRecord();
   temp_v2 = 0;
   temp_v3 = 0;
   do {

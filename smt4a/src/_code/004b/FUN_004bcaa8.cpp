@@ -13,7 +13,7 @@ typedef struct EquipmentData {
     /* 0x50 */ EquipmentSkill skills[8];
 } EquipmentData;
 
-EquipmentData *FUN_00184310(u16 id);
+EquipmentData *devilGetRecord(u16 id);
 
 /* Collects into `out` the skills of equipment `id` unlocked above `level` that are not already in
  * `known` (8 entries); returns how many were added, none when `skip` is set. */
@@ -23,7 +23,7 @@ s32 FUN_004bcaa8(u16 id, u32 level, const u16 *known, s16 *out, s32 skip)
         return 0;
     }
     s32 count = 0;
-    EquipmentData *equipment = FUN_00184310(id);
+    EquipmentData *equipment = devilGetRecord(id);
     for (s32 i = 0; i < 8; i++) {
         u16 skill = equipment->skills[i].skill;
         if (skill != 0 && equipment->skills[i].level > level) {

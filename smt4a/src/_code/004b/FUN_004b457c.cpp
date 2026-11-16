@@ -6,7 +6,7 @@
 extern "C" {
 
 int textDrawString(...);
-int FUN_001634b4(...);
+int effectRenderTransformedInstance(...);
 int dataTable25FindById(...);
 int efctSetSpeed(void);
 int FUN_00180310(...);
@@ -57,7 +57,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 extern int saveSlotFindSelected(void);
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: FUN_001634b4. */
+/* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: dataTable25FindById. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -251,7 +251,7 @@ void FUN_004b457c(int param_1,int param_2,int param_3)
     do {
       if (temp_v3 <= *(unsigned int *)(param_1 + 0x7c58)) {
         VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_001634b4(param_1 + (temp_v2 + 0x3c) * 0x8c + 0x20);
+        effectRenderTransformedInstance(param_1 + (temp_v2 + 0x3c) * 0x8c + 0x20);
       }
       temp_v1 = g_renderCtx;
       temp_v2 = temp_v2 + 1;
@@ -267,7 +267,7 @@ void FUN_004b457c(int param_1,int param_2,int param_3)
         *(unsigned char *)(temp_v1 + 0x12d0) = 0;
       }
       VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_001634b4(param_1 + 0x3270);
+      effectRenderTransformedInstance(param_1 + 0x3270);
       temp_v2 = g_renderCtx;
       temp_v1 = packNibblesAndByte(6,7,0);
       piVar8 = (int *)(temp_v2 + 0x12b8);

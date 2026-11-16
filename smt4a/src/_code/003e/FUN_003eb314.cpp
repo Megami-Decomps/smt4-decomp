@@ -36,7 +36,7 @@ extern "C" {
 void sysMemClear(void *memory, u32 size);
 void clearTwoWords(void *words);
 void rt_memclr(void *memory, u32 size);
-DemonModelInfo *FUN_00184310(u32 id);
+DemonModelInfo *devilGetRecord(u32 id);
 u32 gameDataGetTableValue(void);
 s32 FUN_001f4da0(s32 sourceId);
 
@@ -93,7 +93,7 @@ void FUN_003eb314(EnemyBattle *battle, BattleUnitState *unit, EnemyRecord *recor
         unit->learnableCategory[i] = unit->learnable[i].category;
     }
     unit->unk1BB = record->category;
-    DemonModelInfo *model = FUN_00184310(unit->sourceId);
+    DemonModelInfo *model = devilGetRecord(unit->sourceId);
     if (model->kind == 1) {
         unit->unk1BC = 1;
     } else if (model->kind == 4) {

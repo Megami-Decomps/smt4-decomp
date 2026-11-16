@@ -7,17 +7,17 @@ struct RecordOrderKeys {
     u16 primary;    // 0x1a
 };
 
-extern "C" RecordOrderKeys* FUN_00184310(u16);
+extern "C" RecordOrderKeys* devilGetRecord(u16);
 
 // Compare descending primary key, ascending secondary key, then descending ID.
 extern "C" s32 FUN_004a7524(const u16* leftId, const u16* rightId)
 {
-    RecordOrderKeys* left = FUN_00184310(*leftId);
-    RecordOrderKeys* right = FUN_00184310(*rightId);
+    RecordOrderKeys* left = devilGetRecord(*leftId);
+    RecordOrderKeys* right = devilGetRecord(*rightId);
     s32 difference = right->primary - left->primary;
     if (difference == 0) {
-        RecordOrderKeys* leftSecondary = FUN_00184310(*leftId);
-        RecordOrderKeys* rightSecondary = FUN_00184310(*rightId);
+        RecordOrderKeys* leftSecondary = devilGetRecord(*leftId);
+        RecordOrderKeys* rightSecondary = devilGetRecord(*rightId);
         difference = leftSecondary->secondary - rightSecondary->secondary;
         if (difference == 0) {
             difference = *rightId - *leftId;

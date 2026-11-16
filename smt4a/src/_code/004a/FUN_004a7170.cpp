@@ -13,7 +13,7 @@ typedef struct Record {
 } Record;
 
 Entry *dataTable00FindById(u32 id);
-Record *FUN_00184310(u32 id);
+Record *devilGetRecord(u32 id);
 
 /* Compares two ids by entry rank (ascending), then record order (higher first), then id (ascending). */
 s32 FUN_004a7170(u16 *a, u16 *b)
@@ -23,8 +23,8 @@ s32 FUN_004a7170(u16 *a, u16 *b)
     s32 diff = entryA->rank - entryB->rank;
 
     if (diff == 0) {
-        Record *recordA = FUN_00184310(*a);
-        Record *recordB = FUN_00184310(*b);
+        Record *recordA = devilGetRecord(*a);
+        Record *recordB = devilGetRecord(*b);
 
         diff = recordB->order - recordA->order;
         if (diff == 0) {

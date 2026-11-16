@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001b6668(int, int *);
+int nw_ut_internal_LinkListImpl_erase_2B743C(int, int *);
 int word14Clear(int *, unsigned int);
 int FUN_0045f818(int *, int);
 
-/* Supplied declaration required: FUN_001b6668. */
+/* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2B743C. */
 /* Supplied declaration required: word14Clear. */
 /* Supplied declaration required: FUN_0045f818. */
 
@@ -25,7 +25,7 @@ void FUN_0046135c(int param_1,unsigned int param_2)
     do {
       piVar2 = (int *)*piVar1;
       word14Clear(piVar1 + -0x44,param_2);
-      FUN_001b6668(param_1,piVar1);
+      nw_ut_internal_LinkListImpl_erase_2B743C(param_1,piVar1);
       FUN_0045f818(piVar1 + -0x44,param_1);
       piVar1 = piVar2;
     } while (piVar2 != (int *)(param_1 + 4));

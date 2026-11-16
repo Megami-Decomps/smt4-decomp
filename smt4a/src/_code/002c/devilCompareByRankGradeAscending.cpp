@@ -10,13 +10,13 @@ typedef struct DevilRecord {
     /* 0x6 */ u16 grade;
 } DevilRecord;
 
-extern DevilRecord *FUN_00184310(u16 id);
+extern DevilRecord *devilGetRecord(u16 id);
 
 /* qsort-style comparison of two devil ids by rank (ascending), grade (descending) and id (ascending). */
 s32 devilCompareByRankGradeAscending(u16 *a, u16 *b)
 {
-    DevilRecord *recordA = FUN_00184310(*a);
-    DevilRecord *recordB = FUN_00184310(*b);
+    DevilRecord *recordA = devilGetRecord(*a);
+    DevilRecord *recordB = devilGetRecord(*b);
     s32 result = recordA->rank - recordB->rank;
 
     if (result == 0) {

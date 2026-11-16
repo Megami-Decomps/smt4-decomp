@@ -66,7 +66,7 @@ int FUN_0026cba4(...);
 int partyPanelHandleCursorEdgeInput(...);
 int FUN_0026d144(...);
 int FUN_0026d3e0(...);
-int FUN_00292be4(...);
+int pair40Set(...);
 int FUN_0029378c(...);
 int menuSetModeAndResetTransitions(...);
 int FUN_0029e890(...);
@@ -156,7 +156,7 @@ extern unsigned char FUN_00282e70(void);
 /* Supplied declaration required: FUN_0028d1f4. */
 extern int FUN_0028fb40(unsigned short);
 /* Supplied declaration required: FUN_00292bcc. */
-/* Supplied declaration required: FUN_00292be4. */
+/* Supplied declaration required: pair40Set. */
 /* Supplied declaration required: partyPanelToggleRefresh. */
 /* Supplied declaration required: FUN_002932d8. */
 /* Supplied declaration required: partyPanelSetState. */
@@ -692,7 +692,7 @@ LAB_001c4748:
         } while ((*(char *)(temp_v9 + temp_v16 + 0x90f0) < '\0') &&
                 (temp_v11 = temp_v11 + 1, temp_v11 < 0x19));
         if (temp_v16 != temp_v4) {
-          FUN_00292be4(*(unsigned int *)(temp_v1 + temp_v4 * 4 + 0x6d8),0);
+          pair40Set(*(unsigned int *)(temp_v1 + temp_v4 * 4 + 0x6d8),0);
           if (*(char *)(temp_v1 + 0x42) != '\0') {
             *(unsigned int *)(temp_v1 + 0x2c) = 0;
             scrollOwnerSelectIndex(temp_v24,temp_v16 % 4);
@@ -780,7 +780,7 @@ LAB_001c4df0:
           temp_v11 = temp_v11 + temp_v6 * 4 + temp_v4 * 0xc;
         }
         if (temp_v16 != temp_v11) {
-          FUN_00292be4(*(unsigned int *)(temp_v1 + temp_v16 * 4 + 0x6d8),0);
+          pair40Set(*(unsigned int *)(temp_v1 + temp_v16 * 4 + 0x6d8),0);
         }
       }
       else {
@@ -848,7 +848,7 @@ LAB_001c4df0:
               do {
                 temp_v4 = temp_v1 + temp_v6 * 4;
                 *(unsigned char *)(*(int *)(temp_v4 + 0x6d8) + 0x27) = 0;
-                FUN_00292be4(*(unsigned int *)(temp_v4 + 0x6d8),0);
+                pair40Set(*(unsigned int *)(temp_v4 + 0x6d8),0);
                 temp_v6 = temp_v6 + 1;
               } while (temp_v6 < 0x18);
               FUN_0029dfc0(0);
@@ -1044,7 +1044,7 @@ LAB_001c545c:
               FUN_0026cba4((int)*(char *)(temp_v4 + temp_v24 + 0x9107),temp_v24,0);
             }
             if (temp_v6 != temp_v24) {
-              FUN_00292be4(*(unsigned int *)(temp_v1 + temp_v6 * 4 + 0x6c8),0);
+              pair40Set(*(unsigned int *)(temp_v1 + temp_v6 * 4 + 0x6c8),0);
             }
           }
         }
@@ -1112,7 +1112,7 @@ LAB_001c545c:
               if (*(char *)(temp_v1 + 0x66c) == '\t') {
                 FUN_0026cba4(*(unsigned int *)(temp_v1 + temp_v6 * 8 + 0x738),temp_v6,1);
               }
-              FUN_00292be4(*(unsigned int *)(temp_v1 + temp_v24 * 4 + 0x6d8),0);
+              pair40Set(*(unsigned int *)(temp_v1 + temp_v24 * 4 + 0x6d8),0);
             }
           }
         }
@@ -1144,7 +1144,7 @@ LAB_001c589c:
           FUN_0029dfc0(0);
           temp_v6 = 0;
           do {
-            FUN_00292be4(*(unsigned int *)(temp_v1 + temp_v6 * 4 + 0x6d8),0);
+            pair40Set(*(unsigned int *)(temp_v1 + temp_v6 * 4 + 0x6d8),0);
             temp_v6 = temp_v6 + 1;
           } while (temp_v6 < 0x18);
         }
@@ -1169,14 +1169,14 @@ LAB_001c659c:
           temp_v6 = 0;
           do {
             temp_v4 = temp_v1 + temp_v6 * 4;
-            FUN_00292be4(*(unsigned int *)(temp_v4 + 0x6c8),0);
+            pair40Set(*(unsigned int *)(temp_v4 + 0x6c8),0);
             *(unsigned char *)(*(int *)(temp_v4 + 0x6c8) + 0x27) = 0;
             temp_v6 = temp_v6 + 1;
           } while (temp_v6 < 4);
           temp_v6 = 0;
           do {
             temp_v4 = temp_v1 + temp_v6 * 4;
-            FUN_00292be4(*(unsigned int *)(temp_v4 + 0x6d8),0);
+            pair40Set(*(unsigned int *)(temp_v4 + 0x6d8),0);
             *(unsigned char *)(*(int *)(temp_v4 + 0x6d8) + 0x27) = 0;
             temp_v6 = temp_v6 + 1;
           } while (temp_v6 < 0x18);

@@ -7,7 +7,7 @@ void eventQueueAddUniqueIfValid(u32);
 void flagObjAdvance(void *);
 void FUN_0047306c(void *, u32, u32, u32);
 void jobOwnerFreeSlotAndStop(void *);
-void FUN_00477d10(ScreenTransitionState *, s32, u32);
+void aocMenuSetButtonHelp(ScreenTransitionState *, s32, u32);
 s32 FUN_002e1a18(u32);
 s8 uiSpriteGetCompletionState(const void *record);
 
@@ -21,14 +21,14 @@ void AocMenu::waitCloseAnimation()
     switch (transition->phase) {
     case 0:
         FUN_0047306c(animation, 0x67, 0, 0);
-        FUN_00477d10(transition, 3, 1);
+        aocMenuSetButtonHelp(transition, 3, 1);
         transition->phase = 1;
         break;
     case 1:
         if (uiSpriteGetCompletionState(&view->dialog.cursor) && FUN_002e1a18(0x10)) {
             eventQueueAddUniqueIfValid(0x100020e);
             flagObjAdvance(animation);
-            FUN_00477d10(transition, -1, 0);
+            aocMenuSetButtonHelp(transition, -1, 0);
             transition->phase = 2;
         }
         break;

@@ -24,7 +24,7 @@ int twoObjectsRelease(...);
 int sub68OwnerDestroyAll(void);
 int jobFlagObjStop(void);
 
-int FUN_001927c0(...);
+int slotOwnerDestroyAllSlots(...);
 int ptrListRemoveClearOwner(...);
 int asdEnvResetModelBank(...);
 int dialogClose(...);
@@ -69,7 +69,7 @@ int FUN_00245d78(...);
 int naviMainRequestProcessing(...);
 int recTableFireType3(void);
 
-int FUN_001ad9b4(void);
+int dataTable1bOr1cGetRecord(void);
 int slotSetRequest(...);
 void frameTransitionSetMode(int);
 int FUN_002c2358(void);
@@ -409,10 +409,10 @@ extern int infoWinHasValue(void);
 extern int gameGetPlayerData(void);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
-/* Supplied declaration required: FUN_001927c0. */
+/* Supplied declaration required: slotOwnerDestroyAllSlots. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_001ad9b4. */
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
 /* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: resourceOwnerReleaseAndReset. */
 extern int gameSlotTableFindFree(void);
@@ -2366,7 +2366,7 @@ LAB_00279444:
     }
     if (pcVar11[1] != '\0') {
       temp_v10 = (unsigned int)*(unsigned short *)(pcVar11 + 8);
-      FUN_001ad9b4();
+      dataTable1bOr1cGetRecord();
       DAT_005f1796 = *(short *)(temp_v10 + 2);
       libc_strcpy(&DAT_005f1798,temp_v10 + 0xc4);
       DAT_005f1794 = 1;
@@ -3149,7 +3149,7 @@ LAB_0027a030:
       temp_v8 = FUN_00398024();
       if (temp_v8 != -1) {
         temp_v10 = FUN_00398024() & 0xffff;
-        FUN_001ad9b4();
+        dataTable1bOr1cGetRecord();
         DAT_005f1658 = (unsigned int)*(unsigned short *)(temp_v10 + 2);
         libc_strcpy(&DAT_005f1660,temp_v10 + 0xb4);
         puVar2[0x281] = DAT_005f1658;
@@ -3734,7 +3734,7 @@ LAB_0027a030:
       (**(romwright_code **)(*(int *)puVar2[0x36] + 4))();
       puVar2[0x36] = unaff_r7;
     }
-    FUN_001927c0(puVar2 + 0x3d);
+    slotOwnerDestroyAllSlots(puVar2 + 0x3d);
     resourceSlotsRelease();
     temp_v22 = FUN_002ba30c();
     mapReleaseTableTexture(temp_v22);
@@ -4534,7 +4534,7 @@ joined_r0x0027ce58:
       (**(romwright_code **)(*(int *)puVar2[0x36] + 4))();
       puVar2[0x36] = unaff_r7;
     }
-    FUN_001927c0(puVar2 + 0x3d);
+    slotOwnerDestroyAllSlots(puVar2 + 0x3d);
     resourceSlotsRelease();
     FUN_002ba30c();
     temp_v22 = FUN_00294854();
@@ -4572,7 +4572,7 @@ joined_r0x0027ce58:
     else if (*(char *)((int)puVar2 + 9) != '\0') {
       temp_v8 = FUN_004186e0();
       if ((temp_v8 != 0) && (temp_v5 = FUN_001bd118(), temp_v5 == 6)) {
-        FUN_001ad9b4();
+        dataTable1bOr1cGetRecord();
         FUN_00270c58(*(unsigned short *)(temp_v8 + 0xd4));
         return 0xffffffff;
       }

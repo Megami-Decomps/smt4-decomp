@@ -9,14 +9,14 @@ struct BtlPropertyEntry {
 
 extern "C" {
 
-BtlPropertyEntry *FUN_003f0e20(BtlMainStateA *battle, u32 id);
+BtlPropertyEntry *btlMainFindEntryByListedId(BtlMainStateA *battle, u32 id);
 s32 btlGetPropertyMaximum(u32 property);
 s32 FUN_004c53fc(u32 category);
 
 /* Changes property `property` of the battle entry `id` by `delta`, clamped to its range (left alone when `preview` is set); returns the change. */
 s32 btlAdjustPropertyClamped(u32 id, s32 property, s32 delta, s32 preview)
 {
-    BtlPropertyEntry *entry = FUN_003f0e20(btlGetMainState(), id);
+    BtlPropertyEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
 
     if (entry == NULL) {
         return 0;

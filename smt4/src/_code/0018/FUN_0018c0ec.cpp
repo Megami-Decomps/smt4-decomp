@@ -101,7 +101,7 @@ int messageBannerInitSelection(int, int);
 int soundChannelRequestIfEnabled(int, int);
 int gameGetUnitRecord(...);
 int gameGetSlotTable(...);
-int FUN_002aa278(...);
+int __aeabi_uldivmod(...);
 int uiSpriteSetImageKeyframe(...);
 int pairSetHalves(int, int, int);
 int gameGetPlayerData(void);
@@ -216,7 +216,7 @@ extern int flagWordTestBit(int, unsigned int);
 extern int sys43e188GetState(void);
 /* Supplied declaration required: gameGetUnitRecord. */
 /* Supplied declaration required: gameGetSlotTable. */
-/* Supplied declaration required: FUN_002aa278. */
+/* Supplied declaration required: __aeabi_uldivmod. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: gameGetPlayerData. */
@@ -535,7 +535,7 @@ LAB_0018c354:
         *temp_v32 = '\x01';
       }
       else {
-        temp_v23 = FUN_002aa278(temp_v21 << 0xc,temp_v21 >> 0x14,0x3c,0);
+        temp_v23 = __aeabi_uldivmod(temp_v21 << 0xc,temp_v21 >> 0x14,0x3c,0);
         temp_v1 = temp_v23 + temp_v1;
         temp_v14 = (unsigned int)((unsigned long long)temp_v1 >> 0x20);
         if (temp_v21 >> 0x14 < temp_v14 ||
@@ -655,7 +655,7 @@ LAB_0018c354:
               *puVar12 = 1;
             }
             else {
-              temp_v25 = FUN_002aa278(temp_v39 << 0xc,temp_v39 >> 0x14,0x3c,0);
+              temp_v25 = __aeabi_uldivmod(temp_v39 << 0xc,temp_v39 >> 0x14,0x3c,0);
               temp_v21 = (unsigned int)((unsigned long long)(temp_v25 + temp_v1) >> 0x20);
               if (temp_v39 >> 0x14 < temp_v21 ||
                   temp_v21 - (temp_v39 >> 0x14) < (unsigned int)(temp_v39 << 0xc <= (unsigned int)(temp_v25 + temp_v1))) {
@@ -1874,7 +1874,7 @@ joined_r0x0018edf0:
       scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x3568));
       temp_v4 = FUN_00295cec();
       temp_v16 = temp_v4 - *(int *)(temp_v2 + 0xd54c);
-      temp_v4 = FUN_002aa278(temp_v16 * 0x1000,temp_v16 >> 0x14,0x14,0);
+      temp_v4 = __aeabi_uldivmod(temp_v16 * 0x1000,temp_v16 >> 0x14,0x14,0);
       puVar13 = (unsigned int *)(temp_v2 + 0xd550);
       *puVar13 = *puVar13 + temp_v4;
       temp_v16 = FUN_00295cec();

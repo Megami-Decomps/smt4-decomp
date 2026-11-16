@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0018c87c(int);
+int nw_ut_internal_LinkListImpl_erase_2BAE30(int);
 int nn_os_LightEvent_ClearSignal(int);
 int FUN_001b4a58(unsigned int, int *, int, int);
 int FUN_001cb774(int *, unsigned int);
@@ -48,7 +48,7 @@ extern unsigned int DAT_005c0ad8; /* 0x5c0ad8 */
 
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0018c87c. */
+/* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2BAE30. */
 /* Supplied declaration required: nn_os_LightEvent_ClearSignal. */
 extern int FUN_001b1998(void);
 /* Supplied declaration required: FUN_001b4a58. */
@@ -113,7 +113,7 @@ void FUN_00465cbc(int *param_1)
       return;
     }
     temp_v2 = *(int *)(temp_v5 + 0x18);
-    FUN_0018c87c(temp_v5 + 0x14);
+    nw_ut_internal_LinkListImpl_erase_2BAE30(temp_v5 + 0x14);
     if (temp_v2 - 0x80 == 0) {
       return;
     }

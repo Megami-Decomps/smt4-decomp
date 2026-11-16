@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001b6668(int, int);
+int nw_ut_internal_LinkListImpl_erase_2B743C(int, int);
 int UnsignedDoesSaturate(int, int);
 int UnsignedSaturate(int, int);
 int nw_ut_internal_LinkListImpl_insert(int, int *, int);
@@ -16,7 +16,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: UnsignedSaturate (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: UnsignedDoesSaturate (CALLOTHER). */
-/* Supplied declaration required: FUN_001b6668. */
+/* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2B743C. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
 
 
@@ -33,7 +33,7 @@ void FUN_00466dfc(int param_1)
   temp_v1 = (unsigned int)*(unsigned char *)(param_1 + 0x9d) + *(int *)(param_1 + 0x50);
   temp_v0 = UnsignedSaturate(temp_v1,7);
   UnsignedDoesSaturate(temp_v1,7);
-  FUN_001b6668(temp_v2 + 8,param_1 + 0xf8);
+  nw_ut_internal_LinkListImpl_erase_2B743C(temp_v2 + 8,param_1 + 0xf8);
   piVar3 = *(int **)(temp_v2 + 0xc);
   if (piVar3 != (int *)(temp_v2 + 0xc)) {
     do {

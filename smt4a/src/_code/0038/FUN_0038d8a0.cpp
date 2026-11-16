@@ -8,7 +8,7 @@ extern "C" {
 extern u32 g_btlScriptUnit;
 u32 scrGetArg(u32 index);
 BtlUnitA *btlUnitGet(u32 index);
-BtlSkillA *FUN_003f0e20(BtlMainStateA *battle, u32 skill);
+BtlSkillA *btlMainFindEntryByListedId(BtlMainStateA *battle, u32 skill);
 void FUN_004fc094(s32, BtlUnitA *, s32, BattleRosterRecordA *,
                   u32, u32, u32, u32, u32, u32, u32, u32, u32,
                   u32, u32, u32, u32, u32, u32, u32, u32, u32,
@@ -21,7 +21,7 @@ u32 FUN_0038d8a0(void)
     u32 skillId = scrGetArg(0);
     u32 effectValue = scrGetArg(1);
     BtlUnitA *unit = btlUnitGet(g_btlScriptUnit);
-    BtlSkillA *skill = FUN_003f0e20(btlGetMainState(), skillId);
+    BtlSkillA *skill = btlMainFindEntryByListedId(btlGetMainState(), skillId);
     FUN_003ee0c0(btlGetMainState());
     BtlMainStateA *battle = btlGetMainState();
     BattleRosterRecordA *record = &battle->roster[skill->effect.rosterIndex];

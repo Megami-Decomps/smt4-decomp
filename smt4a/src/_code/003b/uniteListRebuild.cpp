@@ -15,7 +15,7 @@ typedef struct Unite {
 
 extern Unite *g_unite;
 
-u16 *FUN_00184310(void *source);
+u16 *devilGetRecord(void *source);
 int unitRecordBuild(u32 id, u8 *record);
 u32 getUnlockedSlotCount(u8 *record);
 void __aeabi_memset4(void *block, u32 size, u32 value);
@@ -29,7 +29,7 @@ void uniteListRebuild(void *source)
 
     u32 slotCount;
 
-    unitRecordBuild(*FUN_00184310(source), record);
+    unitRecordBuild(*devilGetRecord(source), record);
     slotCount = getUnlockedSlotCount(record);
     unite->selection = 0;
     FUN_00203b40(unite->list, slotCount, 8, 1, 1, 1);

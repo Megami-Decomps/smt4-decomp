@@ -6,8 +6,8 @@ extern "C" {
 
 int CONCAT44(...);
 int FUN_001a9f6c(...);
-int FUN_0024f880(...);
-int FUN_0024f890(...);
+int quadHolderCopyOut(...);
+int quadSourceCopyOut(...);
 int mathMatrixApplyTranslation(...);
 int mathMatrixApplyScale(...);
 int matrix44SetIdentity(...);
@@ -156,8 +156,8 @@ extern float DAT_004ea998; /* 0x4ea998 */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001a9f6c. */
-/* Supplied declaration required: FUN_0024f880. */
-/* Supplied declaration required: FUN_0024f890. */
+/* Supplied declaration required: quadHolderCopyOut. */
+/* Supplied declaration required: quadSourceCopyOut. */
 /* Supplied declaration required: mathMatrixApplyTranslation. */
 /* Supplied declaration required: mathMatrixApplyScale. */
 /* Supplied declaration required: matrix44SetIdentity. */
@@ -284,8 +284,8 @@ void FUN_002e7278(fn_002e7278_arg0 *param_1)
       temp_v13 = CONCAT44(0x3f000000,DAT_004ea920);
       temp_v16 = (unsigned long long)(unsigned int)DAT_004ea924 << 0x20;
       if ((pfVar2->field_0xc & 1) != 0) {
-        FUN_0024f890(pfVar2,&temp_v26);
-        FUN_0024f880(param_1->field_0x9c,&temp_v62);
+        quadSourceCopyOut(pfVar2,&temp_v26);
+        quadHolderCopyOut(param_1->field_0x9c,&temp_v62);
         DAT_004ea91c = temp_v26;
         DAT_004ea920 = fStack_1b4;
         DAT_004ea924 = fStack_1b0;
@@ -426,7 +426,7 @@ void FUN_002e7278(fn_002e7278_arg0 *param_1)
         }
       }
       else {
-        FUN_0024f890(pfVar2,&temp_v26);
+        quadSourceCopyOut(pfVar2,&temp_v26);
         DAT_004ea91c = temp_v26;
         DAT_004ea920 = fStack_1b4;
         DAT_004ea924 = fStack_1b0;

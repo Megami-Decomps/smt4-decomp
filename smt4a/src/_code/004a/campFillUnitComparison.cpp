@@ -33,7 +33,7 @@ s32 recordGetScaledMaximum(const UnitRecord *);
 
 void campFillUnitComparison(CampUnitComparison *row, u32 id, s32 compareParty)
 {
-    DevilRecordA *metadata = FUN_00184310(id);
+    DevilRecordA *metadata = devilGetRecord(id);
     row->id = metadata->id;
     row->race = metadata->race;
     row->category = metadata->unk08[0];

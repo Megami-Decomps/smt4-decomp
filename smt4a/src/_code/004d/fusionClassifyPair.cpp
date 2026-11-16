@@ -12,8 +12,8 @@ void *dataFindSymmetricPair(u8 firstRace, u8 secondRace);
 // Distinguish special two-ingredient recipes, race exceptions and ordinary race-pair fusion.
 u8 fusionClassifyPair(void *owner, u16 firstId, u16 secondId)
 {
-    const DevilRecordA *first = FUN_00184310(firstId);
-    const DevilRecordA *second = FUN_00184310(secondId);
+    const DevilRecordA *first = devilGetRecord(firstId);
+    const DevilRecordA *second = devilGetRecord(secondId);
     if (first->id == second->id)
         return 0;
     for (u16 index = 0; index < dataTable5Count(); ++index) {

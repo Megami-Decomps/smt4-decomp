@@ -6,7 +6,7 @@
 
 static __inline void nameFormSetCharacter(NameFormStateA *form, s8 index, u16 character)
 {
-    FontGlyphLookup *font = FUN_0019dc44(3)->font;
+    FontGlyphLookup *font = recordTableGet(3)->font;
     font->vtable->hasGlyph(font, (u16)character);
     form->text.characters[index].high = (s8)((u16)character >> 8);
     form->text.characters[index].low = (s8)character;

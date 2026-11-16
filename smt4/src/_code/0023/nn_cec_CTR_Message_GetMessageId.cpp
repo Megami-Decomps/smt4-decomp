@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_3_stack;
 
-extern unsigned int FUN_00238c80(unsigned char *, int);
+extern unsigned int releaseOrCopyHandle(unsigned char *, int);
 /* Supplied declaration required: cecMessageIdClear. */
 /* Supplied declaration required: __ARM_common_memcpy4_8. */
 
@@ -25,7 +25,7 @@ unsigned int nn_cec_CTR_Message_GetMessageId(unsigned int param_1,int param_2,in
   unsigned char temp_v1 [8];
   
   if (param_3 != 0) {
-    temp_v0 = FUN_00238c80(temp_v1,param_2 + 0x20);
+    temp_v0 = releaseOrCopyHandle(temp_v1,param_2 + 0x20);
     __ARM_common_memcpy4_8(param_3,temp_v0);
   }
   if (param_2 != -0x20) {

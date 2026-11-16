@@ -13,7 +13,7 @@ extern "C" {
 
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
-BattleScriptDemon *FUN_003f0e20(void *state, s32 id);
+BattleScriptDemon *btlMainFindEntryByListedId(void *state, s32 id);
 void *btlUnitGet(u32 unit);
 s32 bitsAt60Test(void *slot, u32 flag);
 
@@ -27,7 +27,7 @@ s32 FUN_0038097c(void)
 
     btlUnitGet(g_btlScriptUnit);
     if (id < 109) {
-        BattleScriptDemon *demon = FUN_003f0e20(static_cast<void *>(btlGetMainState()), id);
+        BattleScriptDemon *demon = btlMainFindEntryByListedId(static_cast<void *>(btlGetMainState()), id);
         if (demon == NULL) {
             scrSetResult(0);
             return 1;

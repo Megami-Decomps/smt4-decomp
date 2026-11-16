@@ -17,7 +17,7 @@ extern "C" {
 
 extern BtlPassiveFlagMasks DAT_005713f0;
 
-BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, u32 id);
+BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, u32 id);
 void source4CCopyHalves(BtlCombatantEntryA *entry, u16 *skillIds);
 s32 lcgRandomRange(s32 max);
 
@@ -26,7 +26,7 @@ s32 lcgRandomRange(s32 max);
 u16 FUN_004c14c8(u32 listedId)
 {
     BtlMainStateA *state = btlGetMainState();
-    BtlCombatantEntryA *entry = FUN_003f0e20(state, listedId);
+    BtlCombatantEntryA *entry = btlMainFindEntryByListedId(state, listedId);
     u16 skillIds[10] = {0};
     u16 result;
     s32 i;

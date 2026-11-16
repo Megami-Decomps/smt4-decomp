@@ -12,7 +12,7 @@ void textDrawEncodedGlyph(void *, u32 code, s32 x, s32 y, s32 dim, s32 highlight
     if (code == 0xFFFFFFFF) {
         return;
     }
-    FontGlyphResourceOwner *resource = FUN_0019dc44(3);
+    FontGlyphResourceOwner *resource = recordTableGet(3);
     FontGlyphLookup *font = resource->font;
     if (!font->vtable->hasGlyph(font, (u16)code) && code != 0) {
         code = 0xFFFF8140;

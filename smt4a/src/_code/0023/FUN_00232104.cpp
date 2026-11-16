@@ -18,8 +18,8 @@ s32 FUN_00232104(const s32 *left, const s32 *right)
         return -1;
     SlotRecord *leftSlot = gameGetSlotRecord(*left);
     SlotRecord *rightSlot = gameGetSlotRecord(*right);
-    const SortInfoView *leftInfo = reinterpret_cast<const SortInfoView *>(FUN_00184310(leftSlot->entryId));
-    const SortInfoView *rightInfo = reinterpret_cast<const SortInfoView *>(FUN_00184310(rightSlot->entryId));
+    const SortInfoView *leftInfo = reinterpret_cast<const SortInfoView *>(devilGetRecord(leftSlot->entryId));
+    const SortInfoView *rightInfo = reinterpret_cast<const SortInfoView *>(devilGetRecord(rightSlot->entryId));
     s32 difference = leftInfo->category - rightInfo->category;
     if (difference == 0) {
         if (*left < 0)
@@ -28,8 +28,8 @@ s32 FUN_00232104(const s32 *left, const s32 *right)
             return -1;
         leftSlot = gameGetSlotRecord(*left);
         rightSlot = gameGetSlotRecord(*right);
-        SlotSortInfo *leftPriority = FUN_00184310(leftSlot->entryId);
-        SlotSortInfo *rightPriority = FUN_00184310(rightSlot->entryId);
+        SlotSortInfo *leftPriority = devilGetRecord(leftSlot->entryId);
+        SlotSortInfo *rightPriority = devilGetRecord(rightSlot->entryId);
         difference = leftPriority->priority - rightPriority->priority;
         if (difference == 0)
             difference = FUN_0020e83c(left, right);
