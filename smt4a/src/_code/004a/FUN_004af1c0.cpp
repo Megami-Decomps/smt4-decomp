@@ -1,4 +1,3 @@
-/* NON_MATCHING: sentinel and ancestor-right equality comparisons reverse CMP operands; one ancestor-right scratch uses r1 instead of retail r2. */
 #include "common.h"
 
 namespace {
@@ -31,18 +30,16 @@ struct ObjectLocalView {
 
 extern "C" s32 FUN_004ac9d0(void* object);
 
-// Visit all tree entries and return whether every helper call succeeded.
-extern "C" u32 FUN_004af1c0(ObjectLocalView* object)
-{
-    u32 allSucceeded = 1;
-    TreeLocalView* tree = &object->tree;
-    TreeNodeLocalView* node = tree->sentinel->left;
+namespace {
 
-    while (tree->sentinel != node) {
-        if (FUN_004ac9d0(node->entry->unk10) == 0) {
-            allSucceeded = 0;
-        }
+// In-order iterator over the tree's nodes.
+struct TreeIterator {
+    TreeNodeLocalView* node;
 
+    TreeIterator(TreeNodeLocalView* start) : node(start) {}
+    bool operator!=(TreeNodeLocalView* other) const { return node != other; }
+    TreeIterator& operator++()
+    {
         TreeNodeLocalView* next = node->right;
         if (next != 0) {
             do {
@@ -51,13 +48,29 @@ extern "C" u32 FUN_004af1c0(ObjectLocalView* object)
             } while (next != 0);
         } else {
             next = node->parent;
-            while (next->right == node) {
+            while (node == next->right) {
                 node = next;
                 next = node->parent;
             }
             if (node->right != next) {
                 node = next;
             }
+        }
+        return *this;
+    }
+};
+
+} // namespace
+
+// Visit all tree entries and return whether every helper call succeeded.
+extern "C" u32 FUN_004af1c0(ObjectLocalView* object)
+{
+    u32 allSucceeded = 1;
+    TreeLocalView* tree = &object->tree;
+
+    for (TreeIterator it(tree->sentinel->left); it != tree->sentinel; ++it) {
+        if (FUN_004ac9d0(it.node->entry->unk10) == 0) {
+            allSucceeded = 0;
         }
     }
 

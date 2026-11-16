@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail has two extra nops after the strcpy arm and recomputes the stack-argument base (add ip, sp, #4) for each taskCreateDraw where armcc keeps one copy in r6. */
 #include "common.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "code/Code002c_Smt4.h"
@@ -40,7 +39,7 @@ s32 FUN_002ca07c(void);
 void FUN_002f4b28(void);
 
 /* Creates the add-on content job: opens `target` when given, or else loads the default tables and adds the draw tasks. */
-void FUN_001e1e1c(const AocJobTarget *target)
+void aocJobCreate(const AocJobTarget *target)
 {
     AocJobState *job = g_aocJob;
     for (s32 i = 0; i < 6; i++) {
@@ -74,7 +73,7 @@ void FUN_001e1e1c(const AocJobTarget *target)
         }
         job->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EVENT VIEW CALC"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_001e4d70), reinterpret_cast<AsdProcFunc>(aocJobEnable), 0);
         taskCreateDraw(reinterpret_cast<const s8 *>("EVENT VIEW UDRAW"), 0x73, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(campQueryFalse), reinterpret_cast<AsdProcFunc>(noopCallback), 0, reinterpret_cast<void *>(job->process));
-        taskCreateDraw(reinterpret_cast<const s8 *>("EVENT VIEW DRAW"), 0xe6, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_002ca07c), reinterpret_cast<AsdProcFunc>(FUN_002f4b28), 0, reinterpret_cast<void *>(job->process));
+        taskCreateDraw(reinterpret_cast<const s8 *>("EVENT VIEW DDRAW"), 0xe6, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_002ca07c), reinterpret_cast<AsdProcFunc>(FUN_002f4b28), 0, reinterpret_cast<void *>(job->process));
     }
 }
 

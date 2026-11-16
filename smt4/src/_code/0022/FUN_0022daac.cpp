@@ -10,7 +10,7 @@ static __inline UiLayoutResourceIV *ownerResource(void *owner)
 
 extern "C" {
 UiLayoutEntryPrefixIV *FUN_002bf4f0(UiLayoutResourceIV *resource, u32 entryId);
-void FUN_002be56c(UiLayoutResourceIV *resource, u32 layer, u32 mask,
+void drawTextAtSnappedRectangle(UiLayoutResourceIV *resource, u32 layer, u32 mask,
                   u32 convertedValue, f32 x, f32 y, f32 opacity,
                   f32 rotation, f32 scale);
 
@@ -43,7 +43,7 @@ void FUN_0022daac(void *owner, u32 value, u32 entryIndex,
     const UiLayoutEntryPrefixIV *anchor = FUN_002bf4f0(ownerResource(owner), anchorId);
     const s32 y = anchor->y + entryY;
     const s32 x = anchor->x + entryX;
-    FUN_002be56c(ownerResource(owner), layer, mask, convertedValue,
+    drawTextAtSnappedRectangle(ownerResource(owner), layer, mask, convertedValue,
                  static_cast<f32>(x), static_cast<f32>(y),
                  opacity, 0.0f, 1.0f);
 }

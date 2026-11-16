@@ -17,7 +17,7 @@ extern "C" {
 
 u8 keyedRecordRegisterName(void *record);
 u8 FUN_003478dc(u32 code, const char *name);
-void FUN_003afd30(void);
+void textureCachePollReady(void);
 
 // Register every slot whose name starts with "VER" and refresh its code.
 u32 FUN_004f89e8(NameOwner *owner)
@@ -30,7 +30,7 @@ u32 FUN_004f89e8(NameOwner *owner)
             slot->code = FUN_003478dc(slot->code, name);
         }
     }
-    FUN_003afd30();
+    textureCachePollReady();
     return 1;
 }
 

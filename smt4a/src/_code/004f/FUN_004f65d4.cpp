@@ -12,7 +12,7 @@ int handleRegistryRegisterObject(...);
 int asdOperatorNew(void);
 int FUN_00178b04(...);
 int FUN_003478dc(unsigned int, char *);
-int FUN_003afd30(void);
+int textureCachePollReady(void);
 int pairSourceGet(unsigned int, unsigned int *, int);
 int FUN_003d8f24(unsigned int);
 int FUN_003fd924(...);
@@ -50,7 +50,7 @@ extern int g_btlStageModel; /* 0x57a4f8 */
 extern int rangeIsValid(void);
 extern unsigned int keyedRecordRegisterName(int);
 /* Supplied declaration required: FUN_003478dc. */
-/* Supplied declaration required: FUN_003afd30. */
+/* Supplied declaration required: textureCachePollReady. */
 extern int FUN_003c5d8c(void);
 /* Supplied declaration required: pairSourceGet. */
 /* Supplied declaration required: FUN_003d8f24. */
@@ -167,7 +167,7 @@ void FUN_004f65d4(int param_1)
       }
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 3);
-    FUN_003afd30();
+    textureCachePollReady();
     *(unsigned char *)(param_1 + 0x33b4) = 4;
     break;
   case 3:
@@ -192,7 +192,7 @@ void FUN_004f65d4(int param_1)
       }
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 3);
-    FUN_003afd30();
+    textureCachePollReady();
     *(unsigned char *)(param_1 + 0x33b4) = 4;
     break;
   case 4:

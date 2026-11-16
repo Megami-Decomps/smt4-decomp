@@ -12,7 +12,7 @@ struct FusionAvailability {
     u16 resultId;
 };
 extern "C" {
-s32 FUN_004da980(UniteWork *, u32, u32);
+s32 fusionClassifyPair(UniteWork *, u32, u32);
 s32 entryDefIsAvailable(UniteWork *, u32);
 s32 FUN_004db65c(UniteWork *, u32, u32, PackedIdentifiers *);
 s32 FUN_004dc3b4(UniteWork *, u32, u32, PackedIdentifiers *);
@@ -66,7 +66,7 @@ u8 FUN_004da344(UniteWork *work, u32 first, u32 second, s32 special, FusionAvail
             output->reason = 3;
     }
     if (output != NULL) {
-        if (FUN_004da980(work, first, second) == 5 || !entryDefIsAvailable(work, result.resultIdentifier))
+        if (fusionClassifyPair(work, first, second) == 5 || !entryDefIsAvailable(work, result.resultIdentifier))
             output->reason = 1;
         output->available = available;
     }

@@ -1,4 +1,3 @@
-/* NON_MATCHING: upper-level bound compares record level against maximum in the opposite operand order. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
@@ -51,7 +50,7 @@ void jobStop(u32 job, s32 arg);
 /* Script command: spawns a random demon whose level lies in [arg0, arg1] as an NPC, shows its name and race in a
    message and then removes or hides it. Runs as a step machine over script work slot 0; returns 1 when done
    (or when no demon qualifies), 0 while running. */
-u32 FUN_003707a8(void)
+u32 scrSpawnRandomDemonInLevelRange(void)
 {
     if (scrGetCommandFrame() == 0) {
         jyoucyuGetTableEntry(0);
@@ -68,10 +67,10 @@ u32 FUN_003707a8(void)
         for (s32 id = 1; id < 0x500; id++) {
             candidates[id] = 0;
             DevilRecord *record = FUN_00184310((u16)id);
-            if (record != NULL && (record->flags & 1) != 0 && minimum <= record->level && record->level <= maximum) {
-                candidates[count] = id;
-                count++;
-            }
+            if (record == NULL || (record->flags & 1) == 0 || minimum > record->level || record->level > maximum)
+                continue;
+            candidates[count] = id;
+            count++;
         }
         if (count <= 0) {
             return 1;

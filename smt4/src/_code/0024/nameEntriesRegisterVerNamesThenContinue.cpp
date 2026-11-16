@@ -20,9 +20,9 @@ struct NameOwner {
 
 u8 keyedRecordRegisterName(NameRecord *record);
 u8 FUN_00249e54(u8 id, const char *name);
-void FUN_0024679c(void);
+void textureCachePollReady(void);
 
-/* Registers every entry whose name starts with "VER", replacing its id with the one the name resolves to, then continues with FUN_0024679c. */
+/* Registers every entry whose name starts with "VER", replacing its id with the one the name resolves to, then continues with textureCachePollReady. */
 void nameEntriesRegisterVerNamesThenContinue(NameOwner *owner)
 {
     s32 i;
@@ -36,7 +36,7 @@ void nameEntriesRegisterVerNamesThenContinue(NameOwner *owner)
             entry->id = FUN_00249e54(entry->id, name);
         }
     }
-    FUN_0024679c();
+    textureCachePollReady();
 }
 
 } /* extern "C" */

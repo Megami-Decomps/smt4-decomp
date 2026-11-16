@@ -14,7 +14,7 @@ struct EffectFileOwner {
 extern "C" {
 u32 keyedRecordRegisterName(const char *name);
 u32 FUN_00249e54(u32 index, char *data);
-u32 FUN_0024679c(void);
+u32 textureCachePollReady(void);
 
 // Register and parse a VER-prefixed effect resource, then update texture readiness.
 u32 eftLoadFileRegisterAndParseHeader(EffectFileOwner *owner)
@@ -26,7 +26,7 @@ u32 eftLoadFileRegisterAndParseHeader(EffectFileOwner *owner)
         header->recordIndex = index;
         header->recordIndex = FUN_00249e54(index, data);
     }
-    FUN_0024679c();
+    textureCachePollReady();
     return 1;
 }
 }

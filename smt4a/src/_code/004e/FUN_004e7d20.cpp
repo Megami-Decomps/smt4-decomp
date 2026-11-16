@@ -1,4 +1,4 @@
-/* NON_MATCHING: instruction count and control flow match (58 rows); retail loads the mask pair through a pre-indexed ldr! base, materializes the marking constant 1 before the final branch and addresses the byte as [index, base]. */
+/* NON_MATCHING: only the mask-pair load differs: retail reads it through a pre-indexed `ldr ip, [r6, #88]!` base (r6), the build through r7 without writeback. */
 /* Marks the requested descending-HP rank among eligible combatants as a target. */
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
@@ -26,16 +26,11 @@ void FUN_004e7d20(BtlMainStateA **owner, s32 rank)
             ++count;
         }
     }
-    u8 *targets;
-    s32 index;
     if (count >= rank) {
         qsort(entries, count, sizeof(*entries), callbackCompareDescendingState);
-        targets = ((TargetView *)btlUnitGet(owner))->targets;
-        index = entries[rank - 1].index;
+        ((TargetView *)btlUnitGet(owner))->targets[entries[rank - 1].index] = 1;
     } else {
-        targets = ((TargetView *)btlUnitGet(owner))->targets;
-        index = entries[0].index;
+        ((TargetView *)btlUnitGet(owner))->targets[entries[0].index] = 1;
     }
-    targets[index] = 1;
 }
 }

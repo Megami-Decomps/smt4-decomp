@@ -1,14 +1,14 @@
-/* NON_MATCHING: instructions match, but the global-address literal follows the float constants instead of preceding them. */
-/* Resets map camera controls, scalar tracks, and transition defaults. */
 #include "map/MapCameraWork.h"
 
 extern "C" {
 extern MapCameraGlobals DAT_004474f0;
 void FUN_002df5f8(void);
 
-void FUN_001b3da4(void)
+/* Resets map camera controls, scalar tracks, and transition defaults. */
+void mapCameraResetControls(void)
 {
-    MapCameraWork *work = DAT_004474f0.work;
+    MapCameraGlobals *globals = &DAT_004474f0;
+    MapCameraWork *work = globals->work;
     work->states[0] = 0;
     work->states[1] = 0;
     work->states[2] = 0;

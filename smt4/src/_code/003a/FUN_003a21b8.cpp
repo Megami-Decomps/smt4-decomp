@@ -10,7 +10,7 @@ void FUN_00230d2c(const OffsetPosition2D*, u32, s32, s32, s32, s32);
 int FUN_00230d84(int, int, int, int, int);
 void gxSetClippedBottomScreenScissor(int, int, int, int);
 int FUN_00231bcc(...);
-int FUN_002be56c(...);
+int drawTextAtSnappedRectangle(...);
 int textFormatBuffer(...);
 int FUN_002bf4f0(...);
 int efctSetSpeed(void);
@@ -46,7 +46,7 @@ extern unsigned int itemGetNameOrFallback(short, unsigned int);
 /* Supplied declaration required: FUN_00230d84. */
 /* Supplied declaration required: FUN_00231bcc. */
 extern unsigned int aocItemGetPrice(unsigned int *);
-/* Supplied declaration required: FUN_002be56c. */
+/* Supplied declaration required: drawTextAtSnappedRectangle. */
 /* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(void);
@@ -160,7 +160,7 @@ void FUN_003a21b8(int param_1,int param_2,int param_3,int param_4)
     temp_v4 = FUN_002bf4f0(param_1 + 0x380,temp_v8);
     VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002be56c(param_1 + 0x380,temp_v12,temp_v11,temp_v7);
+    drawTextAtSnappedRectangle(param_1 + 0x380,temp_v12,temp_v11,temp_v7);
     temp_v4 = FUN_0022f1b8(temp_v1);
     if (temp_v4 != 0) {
       temp_v12 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v12 + 2)),temp_v1) & 0xfc00ffff;
@@ -210,7 +210,7 @@ void FUN_003a21b8(int param_1,int param_2,int param_3,int param_4)
       temp_v4 = FUN_002bf4f0(param_1 + 0x380,temp_v8);
       VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_002be56c(param_1 + 0x380,temp_v12,temp_v11,temp_v7);
+      drawTextAtSnappedRectangle(param_1 + 0x380,temp_v12,temp_v11,temp_v7);
     }
     if (param_3 != 0) {
       temp_v4 = FUN_002bf4f0(param_1 + 0x380,0xf4);

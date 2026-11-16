@@ -14,7 +14,7 @@ struct VersionLoadState {
 extern "C" {
 u32 keyedRecordRegisterName(const char *);
 u32 FUN_003478dc(u32, const char *);
-u32 FUN_003afd30(void);
+u32 textureCachePollReady(void);
 
 u32 FUN_004f94b8(VersionLoadState *state)
 {
@@ -25,7 +25,7 @@ u32 FUN_004f94b8(VersionLoadState *state)
         request->recordId = id;
         request->recordId = FUN_003478dc(id, command);
     }
-    FUN_003afd30();
+    textureCachePollReady();
     return 1;
 }
 }

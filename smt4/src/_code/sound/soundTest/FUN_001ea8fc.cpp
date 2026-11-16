@@ -29,7 +29,7 @@ void FUN_001ea8fc()
     work->selectedBank = 0;
     work->playingSound = 0;
     work->active = 0;
-    work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("ST Cont"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_001e960c), reinterpret_cast<AsdProcFunc>(callbackStateEnable), 0);
-    taskCreateDraw("ST Draw", 230, 0, 0, soundTestDrawJobUpdate, FUN_002f4b34, 0, work->process);
+    work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("ST C"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_001e960c), reinterpret_cast<AsdProcFunc>(callbackStateEnable), 0);
+    taskCreateDraw("ST D", 230, 0, 0, soundTestDrawJobUpdate, FUN_002f4b34, 0, work->process);
 }
 }

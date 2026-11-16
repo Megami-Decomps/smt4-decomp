@@ -3,7 +3,7 @@
 extern "C" {
 u32 keyedRecordRegisterName(const char *);
 u32 FUN_003478dc(u32, const char *);
-void FUN_003afd30(void);
+void textureCachePollReady(void);
 }
 
 /* Register named VER resources and bind the resulting version handles. */
@@ -28,6 +28,6 @@ extern "C" u32 FUN_004f950c(PendingResourceOwner *owner, s32 allRecords)
             record->registeredId = (u8)FUN_003478dc(id, resource);
         }
     }
-    FUN_003afd30();
+    textureCachePollReady();
     return 1;
 }

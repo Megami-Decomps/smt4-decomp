@@ -1,4 +1,3 @@
-/* NON_MATCHING: selected primary/secondary track pointers occupy opposite r0/r1 registers; floating operations and control flow agree. */
 #include "common.h"
 
 struct AnimationFrameTrack {
@@ -15,7 +14,7 @@ struct AnimationFrameState {
 };
 
 // Return the furthest current frame of the selected animation-channel pair.
-extern "C" f32 FUN_00226bc0(const AnimationFrameState *animation)
+extern "C" f32 animationGetFurthestFrame(const AnimationFrameState *animation)
 {
     s32 channel = 0;
     f32 frame = 0.0f;
@@ -24,12 +23,10 @@ extern "C" f32 FUN_00226bc0(const AnimationFrameState *animation)
     else if (animation->mode == 5)
         channel = 2;
     if (animation->active != 0) {
-        AnimationFrameTrack *first = animation->primary[channel];
-        AnimationFrameTrack *second = animation->secondary[channel];
-        if (first != NULL)
-            frame = first->frame;
-        if (second != NULL && second->frame > frame)
-            frame = second->frame;
+        if (animation->primary[channel] != NULL)
+            frame = animation->primary[channel]->frame;
+        if (animation->secondary[channel] != NULL && animation->secondary[channel]->frame > frame)
+            frame = animation->secondary[channel]->frame;
     }
     return frame;
 }

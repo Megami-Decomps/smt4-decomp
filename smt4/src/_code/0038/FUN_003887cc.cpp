@@ -20,7 +20,7 @@ int FUN_002c526c(...);
 int jyoucyuGetTableEntry(...);
 int FUN_00385f74(...);
 int aocFinishHandleOperation(...);
-int FUN_00388f3c(...);
+int aocEnumerateContentRecords(...);
 int FUN_0038b4f0(...);
 int FUN_0038b760(...);
 int aocEntryBeginBaseLoad(...);
@@ -64,7 +64,7 @@ extern int *_ZN18WindowStatusResultC1Ev(unsigned char *);
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_00385f74. */
 /* Supplied declaration required: aocFinishHandleOperation. */
-/* Supplied declaration required: FUN_00388f3c. */
+/* Supplied declaration required: aocEnumerateContentRecords. */
 /* Supplied declaration required: FUN_0038b4f0. */
 /* Supplied declaration required: FUN_0038b760. */
 /* Supplied declaration required: aocEntryBeginBaseLoad. */
@@ -151,7 +151,7 @@ void FUN_003887cc(unsigned char *param_1,int param_2)
         piVar1[3] = iStack_60;
         break;
       }
-      FUN_00388f3c(&temp_v15,param_2);
+      aocEnumerateContentRecords(&temp_v15,param_2);
       temp_v8 = temp_v15;
       temp_v9 = iStack_38;
       temp_v10 = temp_v16;

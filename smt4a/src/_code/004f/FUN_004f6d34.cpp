@@ -5,7 +5,7 @@
 extern "C" {
 u32 keyedRecordRegisterName(const char *name);
 u32 FUN_003478dc(u32 key, const char *data);
-s32 FUN_003afd30(void);
+s32 textureCachePollReady(void);
 s32 FUN_003c5d8c(void);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
@@ -47,7 +47,7 @@ u32 FUN_004f6d34(void *object)
             work->request.key = (u8)key;
             work->request.key = (u8)FUN_003478dc(key, data);
         }
-        FUN_003afd30();
+        textureCachePollReady();
     }
     return (work->flags & 0x10000) != 0 && (work->flags & 0x20000) != 0;
 }

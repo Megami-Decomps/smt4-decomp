@@ -4847,3 +4847,11 @@
 002cedd8 searchWinInitialize
 002319e0 mapExplorationCellIsMarked
 00231ad4 mapExplorationCellMark
+0024679c textureCachePollReady
+00201148 effectColorInitDefault
+00226bc0 animationGetFurthestFrame
+001e1e1c aocJobCreate
+001b3da4 mapCameraResetControls
+002be56c drawTextAtSnappedRectangle
+00388f3c aocEnumerateContentRecords
+003c8c2c fusionClassifyPair

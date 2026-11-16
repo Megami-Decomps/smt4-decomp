@@ -10,7 +10,7 @@ void gxSetClippedBottomScreenScissor(int, int, int, int);
 int FUN_00231bcc(...);
 int dataTable00FindById(void);
 int FUN_002bd06c(void);
-int FUN_002be56c(...);
+int drawTextAtSnappedRectangle(...);
 int textFormatBuffer(...);
 int FUN_002bf4f0(...);
 int efctSetSpeed(void);
@@ -38,7 +38,7 @@ extern int curveEvaluateStandard(unsigned int, unsigned int);
 /* Supplied declaration required: dataTable00FindById. */
 extern unsigned int demonGetRaceLabel(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
-/* Supplied declaration required: FUN_002be56c. */
+/* Supplied declaration required: drawTextAtSnappedRectangle. */
 /* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(void);
@@ -140,7 +140,7 @@ void FUN_003aa044(int param_1,int param_2,int param_3,unsigned int param_4)
     VectorSignedToFloat(*(short *)(temp_v5 + 10) + temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((temp_v11 + (int)**(short **)(temp_v5 + 0xc) / 2 + (int)*(short *)(temp_v5 + 8)) -
                         temp_v4 / 2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002be56c(param_1 + 200,temp_v14,temp_v12,temp_v7,temp_v7,temp_v4);
+    drawTextAtSnappedRectangle(param_1 + 200,temp_v14,temp_v12,temp_v7,temp_v7,temp_v4);
     temp_v8 = param_4;
     FUN_002bd06c();
     if (param_3 == 0) {
@@ -154,7 +154,7 @@ void FUN_003aa044(int param_1,int param_2,int param_3,unsigned int param_4)
     temp_v5 = FUN_002bf4f0(param_1 + 200,temp_v7);
     VectorSignedToFloat(*(short *)(temp_v5 + 10) + temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v5 + 8) + temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002be56c(param_1 + 200,temp_v14,temp_v9,temp_v8,temp_v8,temp_v4);
+    drawTextAtSnappedRectangle(param_1 + 200,temp_v14,temp_v9,temp_v8,temp_v8,temp_v4);
     temp_v8 = param_4;
     temp_v13 = 0;
     dataTable00FindById();

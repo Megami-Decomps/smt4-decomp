@@ -22,7 +22,7 @@ void FUN_004f8790(VersionLoadSet *set);
 void FUN_004f7cd0(VersionLoadSet *set);
 void FUN_004f9278(VersionLoadSet *set);
 void FUN_004f9e0c(VersionLoadSet *set);
-void FUN_003afd30(void);
+void textureCachePollReady(void);
 
 /* Unless the script unit holds its flags, registers every "VER" request's record, then runs the set's follow-up loaders. */
 void FUN_004f64f4(VersionLoadSet *set)
@@ -44,7 +44,7 @@ void FUN_004f64f4(VersionLoadSet *set)
     FUN_004f7cd0(set);
     FUN_004f9278(set);
     FUN_004f9e0c(set);
-    FUN_003afd30();
+    textureCachePollReady();
 }
 
 } /* extern "C" */

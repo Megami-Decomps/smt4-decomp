@@ -1,4 +1,3 @@
-/* NON_MATCHING: only initial model-slot reset stores and their compare are scheduled differently. */
 #include "shard/W6_W6Match7_MaterialAnimationFlags.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"
 #include "shard/W6_W6Match2_KeyedValueTable.h"
@@ -16,6 +15,7 @@ void asdMdlManagerDestroy(AsdMdlObject *);
 void asdMemFree(void *);
 }
 
+/* Release the owner's merged materials, model slots, sprite placements and pending resources. */
 extern "C" void FUN_003d971c(MaterialMergeOwner *owner)
 {
     struct DeletingMethods {
@@ -50,8 +50,8 @@ extern "C" void FUN_003d971c(MaterialMergeOwner *owner)
     for (s32 i = 0; i < 50; ++i) {
         KeyedValueSlot *slot = &models->slots[i];
         slot->firstKey = -1;
-        slot->action.flags = 0;
         slot->secondKey = -1;
+        slot->action.flags = 0;
         slot->action.index = 0;
         if (slot->action.unk20 != 0) {
             void *child = reinterpret_cast<void *>(slot->action.unk20);

@@ -1,4 +1,3 @@
-/* NON_MATCHING: final menu state and script-phase reset use exchanged r0/r1 registers. */
 #include "camp/CecMenu.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "event/2dEvent/Npc2d.h"
@@ -54,8 +53,8 @@ u32 FUN_002ece60(CampCecMenu *work)
         break;
     case 2:
         if (scrRunOpcodesStub(work->script.process) == 2) {
-            work->state = 15;
             work->scriptFlow.phase = 0;
+            work->state = 15;
             result = 2;
         }
         break;

@@ -4439,3 +4439,11 @@
 002319e0 mapExplorationCellIsMarked inferred [med] Tests one cell of the 5x7 exploration grid (regions 101-103) in the map block bitmask; returns false when out of bounds.
 00231ad4 mapExplorationCellMark inferred [med] Sets one cell of the 5x7 exploration grid bitmask (regions 101-103); setter twin of FUN_002319e0.
 002aa568 strcmp evidence twin of the same libc function (0x2aa568)
+0024679c textureCachePollReady inferred [med] Returns 1 while any g_textureCache entry has no image, else sets cache state 4 and returns 0. Twin of smt4a FUN_003afd30.
+00201148 effectColorInitDefault inferred [med] Writes opaque 0.5 gray unless the effect RGB override is enabled. Twin of smt4a FUN_002c1c88.
+00226bc0 animationGetFurthestFrame inferred [med] Returns the max frame of the selected primary/secondary channel pair.
+001e1e1c aocJobCreate inferred [med] Creates the add-on content job and its EVENT CALC / EVENT VIEW processes.
+001b3da4 mapCameraResetControls inferred [med] Resets map camera work states, scalar tracks and transition defaults.
+002be56c drawTextAtSnappedRectangle inferred [high] Twin of smt4a drawTextAtSnappedRectangle (same source).
+00388f3c aocEnumerateContentRecords inferred [high] Twin of smt4a aocEnumerateContentRecords (same source).
+003c8c2c fusionClassifyPair inferred [med] 0 for the same demon, 5 for a special two-ingredient recipe, 4 for a race-pair exception, 2/3 from the race rule kind, else whether a symmetric race pair exists. Twin of smt4a FUN_004da980.

@@ -1,4 +1,4 @@
-/* NON_MATCHING: VFP register numbering after the sine/cosine call (retail allocates s2-s6 one higher around the divides); the angle multiplies now match. */
+/* NON_MATCHING: scheduling only: retail stores the x scale (m[0][0]) before the m[2][2]/m[2][3] stores, the build stores it after them. */
 #include "common.h"
 
 /* A 4x4 matrix, row by row. */
@@ -19,26 +19,27 @@ ProjectionMtx *FUN_002b72dc(ProjectionMtx *mtx, f32 fovy, f32 aspect, f32 nearZ,
     f32 depthScale;
 
     /* The sine table angle unit: 256 per turn. */
-    f32 halfFov = fovy * 0.5f;
-    FUN_002ad314(&sine, &cosine, halfFov * 40.743664f);
+    f32 halfFovy = fovy * 0.5f;
+    FUN_002ad314(&sine, &cosine, halfFovy * 40.743664f);
     cotangent = cosine / sine;
     depthScale = 1.0f / (farZ - nearZ);
-    mtx->m[3][2] = -1.0f;
+    f32 xScale = cotangent / aspect;
+    mtx->m[0][0] = xScale;
     mtx->m[0][1] = 0.0f;
     mtx->m[0][2] = 0.0f;
     mtx->m[0][3] = 0.0f;
     mtx->m[1][0] = 0.0f;
+    mtx->m[1][1] = cotangent;
     mtx->m[1][2] = 0.0f;
     mtx->m[1][3] = 0.0f;
     mtx->m[2][0] = 0.0f;
     mtx->m[2][1] = 0.0f;
-    mtx->m[3][0] = 0.0f;
-    mtx->m[3][1] = 0.0f;
-    mtx->m[3][3] = 0.0f;
-    mtx->m[1][1] = cotangent;
-    mtx->m[0][0] = cotangent / aspect;
     mtx->m[2][2] = farZ * depthScale;
     mtx->m[2][3] = farZ * nearZ * depthScale;
+    mtx->m[3][0] = 0.0f;
+    mtx->m[3][1] = 0.0f;
+    mtx->m[3][2] = -1.0f;
+    mtx->m[3][3] = 0.0f;
     return mtx;
 }
 

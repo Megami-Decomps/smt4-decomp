@@ -1,4 +1,4 @@
-/* NON_MATCHING: existing row-ID getter restores ldrh/sxth/uxth, but its clobber set delays mov r2,0; refresh stores also choose swapped scratch registers. */
+/* NON_MATCHING: retail sets r2 = 0 before the linker-inlined row-id getter (shopListItemGetId), i.e. it knew the getter keeps r2 (multifile), where this build emits a nop there and loads r2 later; after FUN_002328b4 the flag/notify stores also use swapped scratch registers (retail r1, build r0). */
 #include "common.h"
 #include "bible/bibleDevil.h"
 #include "code/Code0029.h"
@@ -51,7 +51,7 @@ s32 gameGetFlagByte12e8(void);
 void FUN_00233240(BibleDevilWidget *, s32);
 s32 flaggedValueHolderGetTotal(void *);
 u16 shopListItemGetId(const BibleDevilRow *);
-s32 FUN_0029ce60(u32, s32, s32, s32, s32);
+s32 FUN_0029ce60(u16, s32, s32, s32, s32);
 void messageBannerInitSelection(s32, s32);
 void messageTargetSetValue(s32, s32);
 u32 flaggedEntryGetValueByState(void *);
@@ -88,7 +88,7 @@ void FUN_003a72a4(BibleDevilScreen *screen)
         if (screen->mode == 0) {
             BibleDevilRow *rows = screen->rows;
             s16 id = shopListItemGetId(&rows[flaggedValueHolderGetTotal(screen->cursor)]);
-            s32 delta = FUN_0029ce60(static_cast<s16>(id), static_cast<u8>(screen->page), 0, screen->level >= 100, 0);
+            s32 delta = FUN_0029ce60(id, static_cast<u8>(screen->page), 0, screen->level >= 100, 0);
             messageBannerInitSelection(1, 0);
             messageTargetSetValue(-delta, 0);
         }

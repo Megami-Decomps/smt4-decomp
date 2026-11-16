@@ -6445,3 +6445,11 @@
 0034543c gameSavedItemClearCounter
 00333318 searchWinInitialize
 00331410 gameSavedItemsPromoteFlagState
+003afd30 textureCachePollReady
+003cd764 asdModelSlotSetColor
+002c1c88 effectColorInitDefault
+004da980 fusionClassifyPair
+003707a8 scrSpawnRandomDemonInLevelRange
+0013c7dc jobDisplayFlushIfIdle
+00409bc8 materialUploadChangedParameterVector
+004f5e6c btlCameraReleaseTransientResources

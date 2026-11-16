@@ -5,7 +5,7 @@ extern "C" {
 
 void jobStop(u32 job, s32 arg);
 void asdMemFree(void *block);
-void FUN_004f5e6c(void *block, BtlEffectJobA *job);
+void btlCameraReleaseTransientResources(void *block, BtlEffectJobA *job);
 
 extern BtlEffectGlobals g_btlEffect;
 
@@ -15,7 +15,7 @@ void btlEffectDestroy(u32 job)
     BtlEffectJobA *effects = reinterpret_cast<BtlEffectJobA *>(jobGetWork(job));
 
     if (g_btlEffect.data != NULL) {
-        FUN_004f5e6c(g_btlEffect.data, effects);
+        btlCameraReleaseTransientResources(g_btlEffect.data, effects);
         asdMemFree(g_btlEffect.data);
         g_btlEffect.data = NULL;
     }

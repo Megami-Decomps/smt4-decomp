@@ -1,4 +1,3 @@
-/* NON_MATCHING: literal pool order: retail holds the DAT_004474f0 address first, then 0.0f and 1.0f; this build emits 0.0f and 1.0f first */
 #include "common.h"
 
 extern "C" {
@@ -27,7 +26,8 @@ extern EffectHolder DAT_004474f0;
 /* Resets the effect state: stores the handle and restarts the 10-frame, scale 1 parameters. */
 void FUN_00273358(u32 handle)
 {
-    EffectState *state = DAT_004474f0.state;
+    EffectHolder *holder = &DAT_004474f0;
+    EffectState *state = holder->state;
 
     state->handle = handle;
     state->unk0b0 = 0;

@@ -14,7 +14,7 @@ int actionSequenceUpdateLoopTransition(...);
 int FUN_00226fc0(int);
 int FUN_0023aa28(unsigned int, unsigned int *, int);
 int animationSelectThirdPart(...);
-int FUN_0024679c(void);
+int textureCachePollReady(void);
 int FUN_00249e54(unsigned int, char *);
 int FUN_002505c0(...);
 int FUN_00257e74(unsigned int);
@@ -75,7 +75,7 @@ extern int rangeIsValid(void);
 /* Supplied declaration required: FUN_0023aa28. */
 /* Supplied declaration required: animationSelectThirdPart. */
 extern int FUN_00246708(void);
-/* Supplied declaration required: FUN_0024679c. */
+/* Supplied declaration required: textureCachePollReady. */
 /* Supplied declaration required: FUN_00249e54. */
 extern unsigned int keyedRecordRegisterName(int);
 /* Supplied declaration required: FUN_002505c0. */
@@ -225,7 +225,7 @@ void FUN_003da0ec(int param_1)
       }
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 3);
-    FUN_0024679c();
+    textureCachePollReady();
     *(unsigned char *)(param_1 + 0x3040) = 4;
     break;
   case 3:
@@ -250,7 +250,7 @@ void FUN_003da0ec(int param_1)
       }
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 3);
-    FUN_0024679c();
+    textureCachePollReady();
     *(unsigned char *)(param_1 + 0x3040) = 4;
     break;
   case 4:

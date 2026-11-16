@@ -1,4 +1,3 @@
-/* NON_MATCHING: only register choice for the {0.0f, 1.0f} pair store (retail r3, built r2) and the literal-pool layout differ */
 #include "common.h"
 
 struct Vec3f {
@@ -44,7 +43,8 @@ void FUN_003079b4(void);
 /* Resets the view state for the given mode (modes 8 and 9 start at heading 180). */
 void FUN_0027fc14(s32 mode)
 {
-    ViewState *state = DAT_004474f0.state;
+    ViewGlobals *globals = &DAT_004474f0;
+    ViewState *state = globals->state;
 
     state->unk21C = 0;
     state->mode = mode;

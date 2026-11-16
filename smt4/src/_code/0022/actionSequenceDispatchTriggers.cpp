@@ -2,7 +2,7 @@
 
 extern "C" {
 s32 gaugePairIsWithinLimits(void *animation);
-f32 FUN_00226bc0(void *animation);
+f32 animationGetFurthestFrame(void *animation);
 void actionCreateKindFive(s32, s32, s32);
 void FUN_0023c700(ActionController *, s32, s32, s32, s32, s32, f32, f32);
 u32 FUN_0023f27c(s32, u32, u32, u32, void *, s32, s32, s32, s32);
@@ -13,7 +13,7 @@ void FUN_00226a90(ActionController *, s16, s32);
 void actionSequenceDispatchTriggers(ActionController *controller)
 {
     if (!gaugePairIsWithinLimits(controller->animation)) {
-        s32 frame = (s32)FUN_00226bc0(controller->animation);
+        s32 frame = (s32)animationGetFurthestFrame(controller->animation);
         if (controller->tracks[0].trigger == frame)
             actionCreateKindFive(0, 0, controller->tracks[0].value);
         ActionSequence *sequence = controller->sequence;

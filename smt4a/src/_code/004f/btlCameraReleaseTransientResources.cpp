@@ -1,6 +1,11 @@
-/* NON_MATCHING: direct resource-array accesses match; camera flag write still forms a split address. */
 #include "battle/btlCamera.h"
 #include "AsdSDK/AsdMemUtil.h"
+
+// Clears the given camera flag bits.
+static __inline void btlCameraClearFlags(BtlCameraA *camera, u32 mask)
+{
+    camera->flags &= ~mask;
+}
 
 extern "C" {
 void asdMemFree(void *allocation);
@@ -15,7 +20,7 @@ void FUN_004f8fa0(void *controller);
 extern BtlCameraA *g_btlCamera;
 
 // Release transient camera panels and resources and clear the active transition state.
-void FUN_004f5e6c(void *controller)
+void btlCameraReleaseTransientResources(void *controller)
 {
     struct ResourceSlot { s32 id; u32 state; u8 owner[0x30]; u32 pending; };
     struct PanelSlot {
@@ -61,7 +66,7 @@ void FUN_004f5e6c(void *controller)
     keyedRecordsFreeAll();
     textureCacheReleaseAll();
     if (g_btlCamera != NULL) {
-        g_btlCamera->flags = g_btlCamera->flags & ~0x8000000;
+        btlCameraClearFlags(g_btlCamera, 0x08000000);
     }
     FUN_004f8fa0(controller);
     obj4FSlots28Reset(controller);

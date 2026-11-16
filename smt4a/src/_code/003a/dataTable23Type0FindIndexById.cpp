@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail loads the add-on entries pointer before the range compare (and adds base count + add-on count in that operand order); the build loads it only on the taken path. */
 #include "gamedata/DataTable.h"
 #include "shard/W4_W4Match5_DataTable.h"
 
@@ -33,8 +32,11 @@ static Table23Type0Entry *table23Type0Get(u32 index)
     if (index < count) {
         return &entries[index];
     }
-    if (index < count + g_aocSystem->count) {
-        return &g_aocSystem->entries[index - count];
+    Table23Type0Extra *extra = g_aocSystem;
+    s32 extraCount = extra->count;
+    Table23Type0Entry *extraEntries = extra->entries;
+    if (index < count + extraCount) {
+        return &extraEntries[index - count];
     }
     return NULL;
 }

@@ -28,7 +28,7 @@ extern void frameTexReleaseWork(unsigned int job); /* 0x13c1a0 */
 extern int FUN_0013c660(unsigned int job); /* 0x13c660 */
 extern int FUN_0013c6d4(...); /* 0x13c6d4 */
 extern int FUN_0013c764(unsigned int job); /* 0x13c764 */
-extern int FUN_0013c7dc(unsigned int job); /* 0x13c7dc */
+extern int jobDisplayFlushIfIdle(unsigned int job); /* 0x13c7dc */
 extern int renderSurfaceDownsampleJob(unsigned int job); /* 0x13cb90 */
 extern int FUN_0013cd7c(unsigned int job); /* 0x13cd7c */
 extern int FUN_0013cf80(unsigned int job); /* 0x13cf80 */
@@ -116,7 +116,7 @@ void FUN_00138e14(void)
   taskCreateDraw("ZanCL",0x6f,0,0,FUN_0013cf80,0,g_frameTex,*puVar2);
   taskCreateDraw("ZanCR",0xd1,0,0,FUN_0013d030,0,g_frameTex,*puVar2);
   taskCreateDraw("ZanDL",0x6e,0,0,FUN_0013c764,0,g_frameTex,*puVar2);
-  taskCreateDraw("ZanDR",0xd0,0,0,FUN_0013c7dc,0,g_frameTex,*puVar2);
+  taskCreateDraw("ZanDR",0xd0,0,0,jobDisplayFlushIfIdle,0,g_frameTex,*puVar2);
   taskCreateDraw("CAMPCL",0x7b,0,0,frameTexRenderBackdropOnce,0,g_frameTex,*puVar2);
   taskCreateDraw("CAMPCR",0xd7,0,0,jobRenderOnce,0,g_frameTex,*puVar2);
   taskCreateDraw("CAMPDL",0x65,0,0,panelUpdateAnimatedScale,0,g_frameTex,*puVar2);

@@ -11,7 +11,7 @@ extern "C" {
 SaveWork *gameGetMapBlock(void);
 void FUN_00280ac0(s32 value);
 void controllerPoolReset(LmapObj *obj);
-void FUN_001b3da4(void);
+void mapCameraResetControls(void);
 u32 FUN_001d3e3c();
 void lmapMainRequest(void);
 s32 FUN_001fd9f4();
@@ -104,7 +104,7 @@ void FUN_001d2c14(void)
     state->unkE1 = 0;
     state->unkE4 = 0x38;
     state->unkE8 = 40.0f;
-    FUN_001b3da4();
+    mapCameraResetControls();
     save->mapRegistration.pending = 0;
     g_gameState.mapRegistration.pending = 0;
     state->freeOnEnd = 0;

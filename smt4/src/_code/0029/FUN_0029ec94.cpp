@@ -1,4 +1,4 @@
-/* NON_MATCHING: eight membership equality comparisons use reversed operands; every other instruction matches. */
+/* NON_MATCHING: the four membership comparisons of the first (loaded-slot) loop use reversed operands; every other instruction matches. */
 #include "shard/W5_W5Match2_UniteWork.h"
 
 extern "C" {
@@ -27,11 +27,11 @@ void FUN_0029ec94(void)
         }
     }
     for (s32 entry = 0; entry < 4; ++entry) {
-        u32 id = work->portraitSelectionIV.desired[first + entry];
-        if (id && (u16)work->portraitSelectionIV.loaded[0] != id &&
-            (u16)work->portraitSelectionIV.loaded[1] != id &&
-            (u16)work->portraitSelectionIV.loaded[2] != id &&
-            (u16)work->portraitSelectionIV.loaded[3] != id) {
+        if (work->portraitSelectionIV.desired[first + entry] &&
+            work->portraitSelectionIV.desired[first + entry] != (u16)work->portraitSelectionIV.loaded[0] &&
+            work->portraitSelectionIV.desired[first + entry] != (u16)work->portraitSelectionIV.loaded[1] &&
+            work->portraitSelectionIV.desired[first + entry] != (u16)work->portraitSelectionIV.loaded[2] &&
+            work->portraitSelectionIV.desired[first + entry] != (u16)work->portraitSelectionIV.loaded[3]) {
             for (s32 slot = 0; slot < 4; ++slot) {
                 if (!work->portraitSelectionIV.loaded[slot]) {
                     FUN_002942c4((s16)work->portraitSelectionIV.desired[first + entry], 1);

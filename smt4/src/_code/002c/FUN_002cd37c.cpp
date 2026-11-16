@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the operand order of the skill compare in the unrolled search differs (retail `cmp skill,fresh`, ours `cmp fresh,skill`); 179 rows each. */
 #include "common.h"
 #include <stddef.h>
 #include "AsdSDK/AsdMemUtil.h"
@@ -149,11 +148,10 @@ u32 FUN_002cd37c(SavedUnit *saved)
     }
     s32 slots = flagCountUnlockedSlots(saved);
     for (s32 i = 0; i < slots; i++) {
-        u16 skill = saved->skills[i];
-        if (skill != 0) {
+        if (saved->skills[i] != 0) {
             s32 k;
             for (k = 0; k < slots; k++) {
-                if (skill == fresh.skills[k]) {
+                if (saved->skills[i] == fresh.skills[k]) {
                     break;
                 }
             }

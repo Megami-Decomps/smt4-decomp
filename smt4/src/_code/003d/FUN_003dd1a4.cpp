@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00201148(...);
+int effectColorInitDefault(...);
 int FUN_002276f8(...);
 int asdModelClearSlotColors(...);
 int modelSetAnimationChannels(...);
@@ -34,7 +34,7 @@ typedef struct {
 extern int g_btlMain; /* 0x4342c8 */
 extern unsigned int DAT_00435d18; /* 0x435d18 */
 
-/* Supplied declaration required: FUN_00201148. */
+/* Supplied declaration required: effectColorInitDefault. */
 /* Supplied declaration required: FUN_002276f8. */
 /* Supplied declaration required: asdModelClearSlotColors. */
 /* Supplied declaration required: modelSetAnimationChannels. */
@@ -96,11 +96,11 @@ unsigned int FUN_003dd1a4(int param_1,unsigned int param_2,unsigned int param_3,
     }
   }
   if ((*(unsigned int *)(param_1 + 0x3028) & 4) != 0) {
-    FUN_00201148(temp_v8);
+    effectColorInitDefault(temp_v8);
     asdModelClearSlotColors(param_2);
   }
   if ((*(unsigned int *)(param_1 + 0x3028) & 8) != 0) {
-    FUN_00201148(temp_v8);
+    effectColorInitDefault(temp_v8);
     asdModelClearSlotColors(param_2);
     temp_v2 = gameObjectFlagIsSet();
     if (temp_v2 == 0) {

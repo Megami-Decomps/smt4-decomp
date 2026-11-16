@@ -33,7 +33,7 @@ int FUN_0041817c(...);
 int FUN_004aa854(...);
 int FUN_004bcb54(void);
 int btlHelpFreeEntries(void);
-int FUN_004f5e6c(...);
+int btlCameraReleaseTransientResources(...);
 int state339CFinish(void);
 int FUN_004fbeac(...);
 int FUN_004fed5c(...);
@@ -261,7 +261,7 @@ extern int isEntryUsable(int);
 /* Supplied declaration required: state4DStop. */
 /* Supplied declaration required: state4DStart. */
 extern unsigned int *btlUnitGet(unsigned int);
-/* Supplied declaration required: FUN_004f5e6c. */
+/* Supplied declaration required: btlCameraReleaseTransientResources. */
 /* Supplied declaration required: state339CFinish. */
 /* Supplied declaration required: btlStageResetAndClearCameraFlag. */
 /* Supplied declaration required: btlQueueDuplicateSuppressedAction. */
@@ -1045,7 +1045,7 @@ LAB_002bbdec:
     if ((*(unsigned int *)(temp_v7 + 0x110) & 2) == 0) {
       soundChannelStopAll(0xf);
     }
-    FUN_004f5e6c(g_btlAux,temp_v7);
+    btlCameraReleaseTransientResources(g_btlAux,temp_v7);
     temp_v9 = ~DAT_00573a08;
     temp_v10 = ~DAT_00573a18;
     *(unsigned int *)(temp_v7 + 0x45a4) = *(unsigned int *)(temp_v7 + 0x45a4) & ~DAT_00573a0c & ~DAT_00573a1c;

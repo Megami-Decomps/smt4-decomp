@@ -56,7 +56,7 @@ extern "C" {
 s8 uiSubStateGetSelected(const CursorState *cursor);
 LayoutSlot *FUN_002bf4f0(u8 *layout, u32 id);
 void uiDrawScrollingSelectionEntry(RowPanel *panel, s32 index, s32 alpha, s32 row);
-void FUN_002be56c(u8 *layout, s32 style, u32 color, const char *text, f32 x, f32 y, f32 scale, f32 c, f32 d);
+void drawTextAtSnappedRectangle(u8 *layout, s32 style, u32 color, const char *text, f32 x, f32 y, f32 scale, f32 c, f32 d);
 void FUN_00231bcc(u8 *layout, u32 image, s32 x, s32 y, s32 alpha, u32 flags);
 s32 FUN_00262cb0(u16 id);
 s32 FUN_00288e68(s32 id);
@@ -95,7 +95,7 @@ void FUN_003abae8(RowPanel *panel, s32 index, s32 row, s32 selected, s32 alpha)
         color = 0x5A5A5AFF;
     const char *name = panel->list.entries[row].name;
     LayoutSlot *box = FUN_002bf4f0(panel->layout, nameBox);
-    FUN_002be56c(panel->layout, style, color, name, (f32)(box->x + baseX), (f32)(box->y + baseY), scale, 1.0f, 0.0f);
+    drawTextAtSnappedRectangle(panel->layout, style, color, name, (f32)(box->x + baseX), (f32)(box->y + baseY), scale, 1.0f, 0.0f);
     u32 iconBox;
     if (selected == 0) {
         iconBox = 0x4CD;

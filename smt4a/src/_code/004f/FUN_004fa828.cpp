@@ -7,7 +7,7 @@ extern "C" {
 int textFormatBuffer(...);
 int btlGetMainState(...);
 int asdLoadFileAsyncSimple(...);
-int FUN_002c1c88(...);
+int effectColorInitDefault(...);
 int libc_strcpy(...);
 int sysMemClear(...);
 int FUN_003e7840(...);
@@ -39,7 +39,7 @@ extern unsigned int g_btlAux; /* 0x573808 */
 extern int FUN_00100d60(unsigned char *, unsigned int);
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: FUN_002c1c88. */
+/* Supplied declaration required: effectColorInitDefault. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 extern int gameObjectFlagIsSet(void);
@@ -100,11 +100,11 @@ unsigned int FUN_004fa828(int param_1,unsigned int param_2,unsigned int param_3,
     }
   }
   if ((*(unsigned int *)(param_1 + 0x339c) & 4) != 0) {
-    FUN_002c1c88(temp_v10);
+    effectColorInitDefault(temp_v10);
     FUN_003e7840(param_2);
   }
   if ((*(unsigned int *)(param_1 + 0x339c) & 8) != 0) {
-    FUN_002c1c88(temp_v10);
+    effectColorInitDefault(temp_v10);
     FUN_003e7840(param_2);
     temp_v4 = gameObjectFlagIsSet();
     if (temp_v4 == 0) {

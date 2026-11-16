@@ -7,7 +7,7 @@ struct RaceFusionRecipe {
     u16 result;
 };
 extern "C" {
-u8 FUN_004da980(void *context, u16 firstId, u16 secondId);
+u8 fusionClassifyPair(void *context, u16 firstId, u16 secondId);
 u32 FUN_004db198(void *context, u16 firstId, u16 secondId, PackedIdentifiers *output);
 u32 FUN_004db2b8(void *context, u16 firstId, u16 secondId, PackedIdentifiers *output);
 RaceFusionRecipe *dataTable05FindByPriorityAndKey(u32, u32);
@@ -16,7 +16,7 @@ RaceFusionRecipe *dataTable05FindByPriorityAndKey(u32, u32);
 extern "C" u32 FUN_004dc3b4(void *context, u16 firstId, u16 secondId, PackedIdentifiers *output)
 {
     u32 accepted = 0;
-    switch (FUN_004da980(context, firstId, secondId)) {
+    switch (fusionClassifyPair(context, firstId, secondId)) {
     case 0:
         break;
     case 1:

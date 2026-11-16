@@ -11,7 +11,7 @@ void FUN_003dbc1c(BattleVersionResources *resources);
 void btlEffectLoadVersionedResources(BattleVersionResources *resources);
 void btlEffectLoadSecondaryResources(BattleVersionResources *resources);
 void battleLoadVersionEffectResources(BattleVersionResources *resources);
-void FUN_0024679c(void);
+void textureCachePollReady(void);
 
 /* Registers every "VER"-named resource slot, then loads the battle's versioned effect resources. */
 void FUN_003da010(BattleVersionResources *resources)
@@ -35,7 +35,7 @@ void FUN_003da010(BattleVersionResources *resources)
     btlEffectLoadVersionedResources(resources);
     btlEffectLoadSecondaryResources(resources);
     battleLoadVersionEffectResources(resources);
-    FUN_0024679c();
+    textureCachePollReady();
 }
 
 } /* extern "C" */

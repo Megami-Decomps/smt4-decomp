@@ -1,12 +1,11 @@
-/* NON_MATCHING: count/end-pointer zero initialization moves are emitted in the opposite order. */
 #include "shard/W6_W6Match4_RelativeDirectory.h"
 
 extern "C" {
 // Recover the directory length from the start of the first nonempty data block.
 void FUN_0038e2ac(RelativeDirectory *directory)
 {
-    DirectoryRecord *dataBegin = NULL;
     s32 count = 0;
+    DirectoryRecord *dataBegin = NULL;
     for (;; ++count) {
         DirectoryRecord *record = (DirectoryRecord *)((u8 *)directory + directory->recordsOffset) + count;
         if (record == dataBegin) {

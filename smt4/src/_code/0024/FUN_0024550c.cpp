@@ -18,7 +18,7 @@ u32 FUN_00249e54(u32 handle, const void *file);
 void asdMemFree(void);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 s32 FUN_00246708(void);
-void FUN_0024679c(void);
+void textureCachePollReady(void);
 }
 
 /* The battle effect work past the unit loaders: five move-out effect files and their load state. */
@@ -92,7 +92,7 @@ u32 FUN_0024550c(MoveOutEffectWork *loader)
             slot->handle = FUN_00249e54(slot->handle, file);
         }
     }
-    FUN_0024679c();
+    textureCachePollReady();
     loader->state = 2;
     if (FUN_00246708() != 0) {
         loader->state = 3;

@@ -3,7 +3,7 @@
 
 extern "C" {
 s32 FUN_0034c794(void *);
-f32 FUN_00226bc0(void *);
+f32 animationGetFurthestFrame(void *);
 void FUN_00226a90(ActionController *, s16, s32);
 void FUN_0023c700(ActionController *, s32, s32, s32, s32, s32, f32, f32);
 void animationSelectThirdPart(void *);
@@ -14,7 +14,7 @@ void FUN_002505c0(s32, s32, u32, s32, s32, s32, s32);
 void actionSequenceUpdateLoopTransition(ActionController *controller)
 {
     if (FUN_0034c794(controller->animation)) {
-        s16 frame = (s32)FUN_00226bc0(controller->animation);
+        s16 frame = (s32)animationGetFurthestFrame(controller->animation);
         s16 previousFrame = controller->previousFrame;
         if (previousFrame > frame) {
             controller->loopLength = previousFrame;
@@ -38,7 +38,7 @@ void actionSequenceUpdateLoopTransition(ActionController *controller)
                          (f32)sequence->startX, (f32)sequence->startY);
         }
         FUN_00226a90(controller, totalFrame, 2);
-        controller->previousFrame = (s32)FUN_00226bc0(controller->animation);
+        controller->previousFrame = (s32)animationGetFurthestFrame(controller->animation);
     }
     if (!FUN_0034c794(controller->animation) || (controller->flags & 0x1000)) {
         animationSelectThirdPart(controller->animation);

@@ -1,4 +1,3 @@
-/* NON_MATCHING: a single compare - retail tests the upper level bound as `cmp max, level; strge` while armcc emits the operands the other way round (`cmp level, max; strle`); everything else is identical. */
 #include "common.h"
 #include "shard/JobWork.h"
 #include "bible/bibleDevil.h"
@@ -69,10 +68,11 @@ u32 scrComm_Npc_SpawnRandomInRange(void)
         for (s32 id = 1; id < 0x500; id++) {
             candidates[id] = 0;
             DevilRecord *record = devilGetRecord((u16)id);
-            if (record != NULL && (record->flags & 1) != 0 && minimum <= record->level && record->level <= maximum) {
-                candidates[count] = id;
-                count++;
+            if (record == NULL || (record->flags & 1) == 0 || record->level < minimum || record->level > maximum) {
+                continue;
             }
+            candidates[count] = id;
+            count++;
         }
         if (count <= 0) {
             return 1;

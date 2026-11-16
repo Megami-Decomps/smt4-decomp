@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the loop comparison operands differ (retail `cmp index, count; blt`, built `cmp count, index; bgt`). */
 #include "addon/AocContentEnumeration.h"
 #include "addon/aocMain.h"
 #include "nn/Result.h"
@@ -21,7 +20,7 @@ static void aocJobSetRetry(AocHandleJob *request, s32 delay, s32 state)
 }
 
 // Enumerate installed content, retaining enabled entries and counting flagged ones.
-void FUN_00388f3c(u32 job, AocContentEnumeration *content)
+void aocEnumerateContentRecords(u32 job, AocContentEnumeration *content)
 {
     AocHandleJob *request = _ZN21WindowOperationResultC1Eh(job, 0);
     AocContentRecord records[32];
@@ -39,12 +38,15 @@ void FUN_00388f3c(u32 job, AocContentEnumeration *content)
     }
     content->count = 0;
     content->flaggedCount = 0;
-    for (s32 index = 0; index < enumeration.count; index++) {
-        if (objGetFlagBit1(&records[index])) {
-            content->entries[content->count++] = records[index];
-            if (objGetFlagBit0(&records[index]))
-                ++content->flaggedCount;
-        }
+    s32 index = 0;
+    if (enumeration.count > 0) {
+        do {
+            if (objGetFlagBit1(&records[index])) {
+                content->entries[content->count++] = records[index];
+                if (objGetFlagBit0(&records[index]))
+                    ++content->flaggedCount;
+            }
+        } while (++index < enumeration.count);
     }
 }
 }

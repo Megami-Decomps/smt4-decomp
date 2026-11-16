@@ -24690,12 +24690,12 @@
     },
     {
       "address": "0x13c7dc",
-      "function": "FUN_0013c7dc",
+      "function": "jobDisplayFlushIfIdle",
       "module": "_code",
-      "object": "build/obj/_code/0013/FUN_0013c7dc.o",
+      "object": "build/obj/_code/0013/jobDisplayFlushIfIdle.o",
       "size": 140,
-      "source": "src/_code/0013/FUN_0013c7dc.cpp",
-      "target": "orig/target/_code/0013/FUN_0013c7dc.o",
+      "source": "src/_code/0013/jobDisplayFlushIfIdle.cpp",
+      "target": "orig/target/_code/0013/jobDisplayFlushIfIdle.o",
       "thumb": false
     },
     {
@@ -68295,12 +68295,12 @@
     },
     {
       "address": "0x2c1c88",
-      "function": "FUN_002c1c88",
+      "function": "effectColorInitDefault",
       "module": "_code",
-      "object": "build/obj/_code/002c/FUN_002c1c88.o",
+      "object": "build/obj/_code/002c/effectColorInitDefault.o",
       "size": 80,
-      "source": "src/_code/002c/FUN_002c1c88.cpp",
-      "target": "orig/target/_code/002c/FUN_002c1c88.o",
+      "source": "src/_code/002c/effectColorInitDefault.cpp",
+      "target": "orig/target/_code/002c/effectColorInitDefault.o",
       "thumb": false
     },
     {
@@ -108751,12 +108751,12 @@
     },
     {
       "address": "0x3707a8",
-      "function": "FUN_003707a8",
+      "function": "scrSpawnRandomDemonInLevelRange",
       "module": "_code",
-      "object": "build/obj/_code/0037/FUN_003707a8.o",
+      "object": "build/obj/_code/0037/scrSpawnRandomDemonInLevelRange.o",
       "size": 984,
-      "source": "src/_code/0037/FUN_003707a8.cpp",
-      "target": "orig/target/_code/0037/FUN_003707a8.o",
+      "source": "src/_code/0037/scrSpawnRandomDemonInLevelRange.cpp",
+      "target": "orig/target/_code/0037/scrSpawnRandomDemonInLevelRange.o",
       "thumb": false
     },
     {
@@ -120380,12 +120380,12 @@
     },
     {
       "address": "0x3afd30",
-      "function": "FUN_003afd30",
+      "function": "textureCachePollReady",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003afd30.o",
+      "object": "build/obj/_code/003a/textureCachePollReady.o",
       "size": 180,
-      "source": "src/_code/003a/FUN_003afd30.cpp",
-      "target": "orig/target/_code/003a/FUN_003afd30.o",
+      "source": "src/_code/003a/textureCachePollReady.cpp",
+      "target": "orig/target/_code/003a/textureCachePollReady.o",
       "thumb": false
     },
     {
@@ -125969,12 +125969,12 @@
     },
     {
       "address": "0x3cd764",
-      "function": "FUN_003cd764",
+      "function": "asdModelSlotSetColor",
       "module": "_code",
-      "object": "build/obj/_code/003c/FUN_003cd764.o",
+      "object": "build/obj/_code/003c/asdModelSlotSetColor.o",
       "size": 56,
-      "source": "src/_code/003c/FUN_003cd764.cpp",
-      "target": "orig/target/_code/003c/FUN_003cd764.o",
+      "source": "src/_code/003c/asdModelSlotSetColor.cpp",
+      "target": "orig/target/_code/003c/asdModelSlotSetColor.o",
       "thumb": false
     },
     {
@@ -133771,12 +133771,12 @@
     },
     {
       "address": "0x409bc8",
-      "function": "FUN_00409bc8",
+      "function": "materialUploadChangedParameterVector",
       "module": "_code",
-      "object": "build/obj/_code/0040/FUN_00409bc8.o",
+      "object": "build/obj/_code/0040/materialUploadChangedParameterVector.o",
       "size": 148,
-      "source": "src/_code/0040/FUN_00409bc8.cpp",
-      "target": "orig/target/_code/0040/FUN_00409bc8.o",
+      "source": "src/_code/0040/materialUploadChangedParameterVector.cpp",
+      "target": "orig/target/_code/0040/materialUploadChangedParameterVector.o",
       "thumb": false
     },
     {
@@ -166875,12 +166875,12 @@
     },
     {
       "address": "0x4da980",
-      "function": "FUN_004da980",
+      "function": "fusionClassifyPair",
       "module": "_code",
-      "object": "build/obj/_code/004d/FUN_004da980.o",
+      "object": "build/obj/_code/004d/fusionClassifyPair.o",
       "size": 372,
-      "source": "src/_code/004d/FUN_004da980.cpp",
-      "target": "orig/target/_code/004d/FUN_004da980.o",
+      "source": "src/_code/004d/fusionClassifyPair.cpp",
+      "target": "orig/target/_code/004d/fusionClassifyPair.o",
       "thumb": false
     },
     {
@@ -168638,12 +168638,12 @@
     },
     {
       "address": "0x4f5e6c",
-      "function": "FUN_004f5e6c",
+      "function": "btlCameraReleaseTransientResources",
       "module": "_code",
-      "object": "build/obj/_code/004f/FUN_004f5e6c.o",
+      "object": "build/obj/_code/004f/btlCameraReleaseTransientResources.o",
       "size": 288,
-      "source": "src/_code/004f/FUN_004f5e6c.cpp",
-      "target": "orig/target/_code/004f/FUN_004f5e6c.o",
+      "source": "src/_code/004f/btlCameraReleaseTransientResources.cpp",
+      "target": "orig/target/_code/004f/btlCameraReleaseTransientResources.o",
       "thumb": false
     },
     {

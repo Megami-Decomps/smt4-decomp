@@ -6917,3 +6917,11 @@
 00333318 searchWinInitialize inferred [high] Creates the search window work area, its update process, two stereo draw tasks and the animated sprite.
 00331410 gameSavedItemsPromoteFlagState inferred [med] Rewrites flag state 01 to 10 (keeping the low six bits) in saved item records 1-0x500.
 0030ea58 strcmp evidence armcc only auto-unrolls (peel count&1 + 2x pairs) loops calling the real <string.h> strcmp; tableGroupFindEntryIndex retail unrolled form reproduced with strcmp(): row count 65=65 vs 37 with libc_strcmp. Callers should use <string.h> strcmp.
+003afd30 textureCachePollReady inferred [med] Twin of smt4 FUN_0024679c.
+003cd764 asdModelSlotSetColor inferred [high] Twin of smt4 asdModelSlotSetColor (same source).
+002c1c88 effectColorInitDefault inferred [med] Twin of smt4 FUN_00201148.
+004da980 fusionClassifyPair inferred [med] Twin of smt4 FUN_003c8c2c (same source).
+003707a8 scrSpawnRandomDemonInLevelRange inferred [med] Script command: picks a random summonable demon with level in [arg0, arg1], shows its portrait, name and race message, then hides it.
+0013c7dc jobDisplayFlushIfIdle inferred [med] Returns the pending display request, or flushes the render context when the job is shown, ready and not busy.
+00409bc8 materialUploadChangedParameterVector inferred [med] Four-float version of materialUploadChangedParameters (same MaterialParameterWork layout).
+004f5e6c btlCameraReleaseTransientResources inferred [med] Resets 11 panel slots, releases the backend, finishes the transition, frees keyed records and texture cache, clears camera flag 0x08000000, resets 50 resource slots.

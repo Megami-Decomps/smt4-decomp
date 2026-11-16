@@ -10,7 +10,7 @@ extern "C" {
 SpriteInfo *FUN_002bf4f0(UiSpriteState *, u32);
 const char *demonGetRaceLabel(u16, u32);
 s32 curveEvaluateStandard(const char *, u32);
-void FUN_002be56c(UiSpriteState *, u32, u32, const char *, f32, f32, f32, f32, f32);
+void drawTextAtSnappedRectangle(UiSpriteState *, u32, u32, const char *, f32, f32, f32, f32, f32);
 }
 
 extern "C" void FUN_0022db94(ListLabelWork *work, u32 id, s32 row, s32 highlighted, s32 depth)
@@ -38,5 +38,5 @@ extern "C" void FUN_0022db94(ListLabelWork *work, u32 id, s32 row, s32 highlight
     SpriteInfo *frame = FUN_002bf4f0(&work->sprite, background);
     s32 x = rowX + frame->size[0] / 2 + frame->x - width / 2;
     s32 y = frame->y + rowY;
-    FUN_002be56c(&work->sprite, font, color, text, f32(x), f32(y), z, 0.0f, 1.0f);
+    drawTextAtSnappedRectangle(&work->sprite, font, color, text, f32(x), f32(y), z, 0.0f, 1.0f);
 }

@@ -5,7 +5,7 @@ extern "C" {
 void *__aeabi_memcpy4(void *output, const void *input, u32 size);
 u32 keyedRecordRegisterName(const char *name);
 u32 FUN_00249e54(u32 id, const char *format);
-s32 FUN_0024679c(void);
+s32 textureCachePollReady(void);
 s32 FUN_00246708(void);
 
 u32 FUN_00246f18(VersionedTextureOwner *owner)
@@ -25,7 +25,7 @@ u32 FUN_00246f18(VersionedTextureOwner *owner)
             request->id = static_cast<u8>(id);
             request->id = static_cast<u8>(FUN_00249e54(id, format));
         }
-        FUN_0024679c();
+        textureCachePollReady();
     } else {
         if (flags & 0x20000) {
             return 1;

@@ -13,7 +13,7 @@ int contentGetKindValue(...);
 void gxSetClippedBottomScreenScissor(int, int, int, int);
 int FUN_00231bcc(...);
 int gameGetPlayerData(...);
-int FUN_002be56c(...);
+int drawTextAtSnappedRectangle(...);
 int textFormatBuffer(...);
 int FUN_002bf4f0(...);
 int efctSetSpeed(void);
@@ -51,7 +51,7 @@ extern unsigned int FUN_00230e04(unsigned short *);
 /* Supplied declaration required: FUN_00231bcc. */
 extern unsigned int FUN_0028fb3c(unsigned int);
 /* Supplied declaration required: gameGetPlayerData. */
-/* Supplied declaration required: FUN_002be56c. */
+/* Supplied declaration required: drawTextAtSnappedRectangle. */
 /* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(void);
@@ -210,7 +210,7 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
   temp_v5 = FUN_002bf4f0(param_1 + 0x380,temp_v19);
   VectorSignedToFloat(*(short *)(temp_v5 + 10) + temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v5 + 8) + temp_v13,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002be56c(param_1 + 0x380,temp_v8,temp_v14,temp_v9);
+  drawTextAtSnappedRectangle(param_1 + 0x380,temp_v8,temp_v14,temp_v9);
   temp_v5 = contentGetKindValue(temp_v22);
   temp_v3 = 0;
   switch(*(unsigned int *)(param_1 + 0x860)) {

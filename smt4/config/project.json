@@ -22653,12 +22653,12 @@
     },
     {
       "address": "0x1b3da4",
-      "function": "FUN_001b3da4",
+      "function": "mapCameraResetControls",
       "module": "_code",
-      "object": "build/obj/_code/001b/FUN_001b3da4.o",
+      "object": "build/obj/_code/001b/mapCameraResetControls.o",
       "size": 228,
-      "source": "src/_code/001b/FUN_001b3da4.cpp",
-      "target": "orig/target/_code/001b/FUN_001b3da4.o",
+      "source": "src/_code/001b/mapCameraResetControls.cpp",
+      "target": "orig/target/_code/001b/mapCameraResetControls.o",
       "thumb": false
     },
     {
@@ -25143,12 +25143,12 @@
     },
     {
       "address": "0x1e1e1c",
-      "function": "FUN_001e1e1c",
+      "function": "aocJobCreate",
       "module": "_code",
-      "object": "build/obj/_code/001e/FUN_001e1e1c.o",
+      "object": "build/obj/_code/001e/aocJobCreate.o",
       "size": 396,
-      "source": "src/_code/001e/FUN_001e1e1c.cpp",
-      "target": "orig/target/_code/001e/FUN_001e1e1c.o",
+      "source": "src/_code/001e/aocJobCreate.cpp",
+      "target": "orig/target/_code/001e/aocJobCreate.o",
       "thumb": false
     },
     {
@@ -27792,12 +27792,12 @@
     },
     {
       "address": "0x201148",
-      "function": "FUN_00201148",
+      "function": "effectColorInitDefault",
       "module": "_code",
-      "object": "build/obj/_code/0020/FUN_00201148.o",
+      "object": "build/obj/_code/0020/effectColorInitDefault.o",
       "size": 80,
-      "source": "src/_code/0020/FUN_00201148.cpp",
-      "target": "orig/target/_code/0020/FUN_00201148.o",
+      "source": "src/_code/0020/effectColorInitDefault.cpp",
+      "target": "orig/target/_code/0020/effectColorInitDefault.o",
       "thumb": false
     },
     {
@@ -32843,12 +32843,12 @@
     },
     {
       "address": "0x226bc0",
-      "function": "FUN_00226bc0",
+      "function": "animationGetFurthestFrame",
       "module": "_code",
-      "object": "build/obj/_code/0022/FUN_00226bc0.o",
+      "object": "build/obj/_code/0022/animationGetFurthestFrame.o",
       "size": 92,
-      "source": "src/_code/0022/FUN_00226bc0.cpp",
-      "target": "orig/target/_code/0022/FUN_00226bc0.o",
+      "source": "src/_code/0022/animationGetFurthestFrame.cpp",
+      "target": "orig/target/_code/0022/animationGetFurthestFrame.o",
       "thumb": false
     },
     {
@@ -38694,12 +38694,12 @@
     },
     {
       "address": "0x24679c",
-      "function": "FUN_0024679c",
+      "function": "textureCachePollReady",
       "module": "_code",
-      "object": "build/obj/_code/0024/FUN_0024679c.o",
+      "object": "build/obj/_code/0024/textureCachePollReady.o",
       "size": 180,
-      "source": "src/_code/0024/FUN_0024679c.cpp",
-      "target": "orig/target/_code/0024/FUN_0024679c.o",
+      "source": "src/_code/0024/textureCachePollReady.cpp",
+      "target": "orig/target/_code/0024/textureCachePollReady.o",
       "thumb": false
     },
     {
@@ -58617,12 +58617,12 @@
     },
     {
       "address": "0x2be56c",
-      "function": "FUN_002be56c",
+      "function": "drawTextAtSnappedRectangle",
       "module": "_code",
-      "object": "build/obj/_code/002b/FUN_002be56c.o",
+      "object": "build/obj/_code/002b/drawTextAtSnappedRectangle.o",
       "size": 56,
-      "source": "src/_code/002b/FUN_002be56c.cpp",
-      "target": "orig/target/_code/002b/FUN_002be56c.o",
+      "source": "src/_code/002b/drawTextAtSnappedRectangle.cpp",
+      "target": "orig/target/_code/002b/drawTextAtSnappedRectangle.o",
       "thumb": false
     },
     {
@@ -94891,12 +94891,12 @@
     },
     {
       "address": "0x388f3c",
-      "function": "FUN_00388f3c",
+      "function": "aocEnumerateContentRecords",
       "module": "_code",
-      "object": "build/obj/_code/0038/FUN_00388f3c.o",
+      "object": "build/obj/_code/0038/aocEnumerateContentRecords.o",
       "size": 320,
-      "source": "src/_code/0038/FUN_00388f3c.cpp",
-      "target": "orig/target/_code/0038/FUN_00388f3c.o",
+      "source": "src/_code/0038/aocEnumerateContentRecords.cpp",
+      "target": "orig/target/_code/0038/aocEnumerateContentRecords.o",
       "thumb": false
     },
     {
@@ -103263,12 +103263,12 @@
     },
     {
       "address": "0x3c8c2c",
-      "function": "FUN_003c8c2c",
+      "function": "fusionClassifyPair",
       "module": "_code",
-      "object": "build/obj/_code/003c/FUN_003c8c2c.o",
+      "object": "build/obj/_code/003c/fusionClassifyPair.o",
       "size": 372,
-      "source": "src/_code/003c/FUN_003c8c2c.cpp",
-      "target": "orig/target/_code/003c/FUN_003c8c2c.o",
+      "source": "src/_code/003c/fusionClassifyPair.cpp",
+      "target": "orig/target/_code/003c/fusionClassifyPair.o",
       "thumb": false
     },
     {

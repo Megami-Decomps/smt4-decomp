@@ -1,4 +1,3 @@
-/* NON_MATCHING: final area-type lookup compares entry/player keys in r2/r1 rather than retail r1/r2; scene reset now agrees. */
 #include "common.h"
 #include "gfx/ObjectRegistry.h"
 
@@ -131,10 +130,11 @@ extern "C" void FUN_002d8ef8(void)
     for (s32 i = 0; i < dataTable2EType1Count(); i++) {
         DataTableEntry *entry = dataTable2EType1GetEntry(i);
         if (entry->key == player->areaKeyB) {
-            if (g_gameState.areaTypeOverrideB == -1) {
+            s32 areaTypeOverride = g_gameState.areaTypeOverrideB;
+            if (areaTypeOverride == -1) {
                 g_gameState.areaTypeB = entry->value;
             } else {
-                g_gameState.areaTypeB = g_gameState.areaTypeOverrideB;
+                g_gameState.areaTypeB = areaTypeOverride;
             }
             break;
         }
