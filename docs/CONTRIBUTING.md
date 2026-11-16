@@ -283,6 +283,21 @@ calling a difference a register tie-break:
 - **Types**: `u16`/`u8` parameters, an `s8` flag, `char name[0x12]` sized to what is copied into it,
   and arguments the decompiler dropped (read the callers) each fixed functions.
 - **Data another thread changes** (a run flag, a polled state) is `volatile` where retail reloads it.
+- **`paramsInit` packets and other constant tables addressed from one anchor** (a `sub` chain from
+  one pool word) are `static const` arrays defined in the unit with the image's bytes; `relink.py`
+  places them and checks the bytes.
+- **A creator inlined into its callers** (retail repeats an allocator's body, e.g. `effBlockCreate`):
+  give the body a `static __inline` copy in a header and call that.
+- **Constructors whose stores come out of order**: a polymorphic base class taking the value in its
+  constructor (`Base(kind) : kind(kind)`) gives retail's order.
+- **Sleeps and timeouts**: pass an `nn::fnd::TimeSpan` (`FromMicroSeconds`, `FromMilliSeconds`) by
+  value; the constant is then rematerialised at each call, as in retail.
+- **Locals declared at the top of the function** (C89 style), a loop index declared once and reused,
+  or a positive-first `if (x) { ...; return 1; } return 0;` (stops shrink-wrapping) each fixed
+  several functions.
+- **A lone load or move in the middle of retail code** may be a getter armlink inlined: check
+  `config/inlined.txt` (and the target objects for one-instruction functions) before calling it
+  allocation.
 
 ## Readability standard
 
