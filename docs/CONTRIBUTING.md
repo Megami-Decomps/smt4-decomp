@@ -7,7 +7,10 @@ original source**. Both games are one build tree, so most work lands twice: fix 
 ## The loop
 
 1. Pick a function. `build/report.json` (after `python -B build.py report`) scores every function;
-   `python -B tools/shared.py --list ported` lists functions matched in one game and not its twin.
+   `python -B tools/shared.py --list ported` lists functions matched in one game and not its twin;
+   `python -B tools/triage.py` sorts the unproven ones by what their diff looks like, and
+   `python -B tools/similar.py` names, for each, the proven functions whose retail code is most alike
+   (start from that function's source: see [Matching techniques](#matching-techniques)).
    Only first-party code counts: skip the functions in `config/third_party.txt` (Nintendo's SDK,
    NintendoWare, NEX, Mobiclip, the ARM runtime).
 2. `python -B tools/fdiff.py <game> <function>` compiles that one source and diffs its disassembly
@@ -25,8 +28,11 @@ Every match must be one a programmer could have written for a reason.
 
 - **Not allowed:** register pinning (`register ... __asm("rN")`), `__asm`, `__svc`/`__swi`,
   `volatile` added to steer code, `#pragma`, `__align`/`aligned(...)` without a real alignment,
-  dead or no-op code (`if (0)`, empty `do {} while (0)`, self-assignments), and temporaries,
-  gotos or declaration tricks whose only purpose is steering register allocation. The one
+  dead or no-op code retail does not contain (`if (0)`, empty `do {} while (0)`, self-assignments),
+  and temporaries, gotos or declaration tricks whose only purpose is steering register allocation.
+  Code retail does contain is written as the original had it, even when it has no visible effect: a
+  counting loop whose body was compiled out, a running minimum computed and never read, two branches
+  calling the same function. The one
   exception is `include/nn/svc.h`, which declares the CTR-SDK's system calls, thread-local storage
   and barriers with armcc's `__svc` and cp15 intrinsics as the SDK did; game code calls them
   through that header and nowhere else.
@@ -55,93 +61,12 @@ Every match must be one a programmer could have written for a reason.
   A no-argument wrapper can accidentally consume the incoming `r0` unchanged: check the real
   callee and restore explicit pointer/handle forwarding. For registered process/draw callbacks,
   compare the body with its registrar and recover the callback parameter and result types too.
-  `shard/JobWork.h` declares the canonical `JobWork *jobGetWork(u32 job)` accessor:
-  pass the incoming handle explicitly, use `s32 (u32 job)` for process/draw updates and
-  `void (u32 job)` for destruction callbacks, and keep the registrar's declarations in sync.
-  Callers keep their own typed view of the work area with a C cast
-  (`MyWork *work = (MyWork *)jobGetWork(job);`) and never declare a local `JobWork` or prototype.
-  `text/TextDraw.h` declares `f32 FUN_00162790(layer, color, text, x, y, z, width, height)` (smt4's
-  `FUN_002be5a4`): the last three floats are depth, letter spacing and opacity and are always
-  passed (a caller with fewer arguments reuses retail's `s2`-`s4` values; check them in the
-  retail call site); the result is the drawn advance. Text held as bytes or `u16` is cast to `const char *`.
-  `gamedata/Table04Record.h` owns data table 4's 0x88-byte record (the search stride and the key
-  buffer prove it) and the `dataTable04FindById` declaration; callers that read other fields
-  cast the result to their own view. `gamedata/SaveSlotTable.h` owns the save block's slot table
-  returned by `gameGetSlotTable()` (money, party/reserve slot maps, player and 0x134-byte slot records).
-  `shard/W6_W6Match1_CriticalSection.h` has the only scoped critical-section lock
-  (`ScopedCriticalLock lock(section)`): near misses holding a section in a callee-saved register
-  across a body are this lock.
-  `gamedata/GameFlags.h` declares `void gameFlagSetValue(u32 id, s32 value, s32 notify)`
-  for both games. Pass the retail third argument explicitly: normal setters notify with `1`,
-  while the flag-change handlers use `0` to avoid redispatch. The setter has no result;
-  recover any subsequent value from the actual producer rather than assigning its stale `r0`.
-  `sys/ResultReport.h` (per game) declares the failed-result reporter variadically
-  (`void FUN_002c526c(u32 result, ...)`, smt4a `FUN_002e3140`): retail has sites that keep the tested
-  failure flag and pass it as a second argument (`bool failed = nnResultIsFailure(r); if (failed)
-  report(r, failed);` gives retail's `lsrs r1, r0, #31 … blne`), and sites that pass only the result
-  (constant codes, summary-guarded `(r & 0x7e00000) != 0x600000 && nnResultIsFailure(r)`); the
-  definition lives in its own file and never reads the flag. smt4 `sys/HandleWait.h` owns the
-  single-handle wait helper (`handleWait(handle, timeout)` plus `FUN_002c40f8`) and
-  `sys/KernelThread.h` the thread object; `nn/Result.h` has the native description tests
-  (`nnResultIsNotTimeout`: a bitfield compare of the description against 0x3fe).
-  A call to the remap `legacyResourceIdRemap(const PackedResourceId *)` (`AsdSDK/Source/Gfx/Model/AsdEnv.h`)
-  is the multifile case: retail pushes only `lr` around it (no alignment pad); compare the masked
-  module field in place (`(r & 0x3fc00) == (0x4e << 10)`), not an extracted value.
-  `gfx/EffectEditorParameters.h` owns both games' four-argument parameter-editor contracts.
-  Their two option-list pointers are real arguments: a table base kept in `r3` while `r2`
-  addresses a later entry is not merely missed literal folding. Preserve both pointers and
-  use the native integer status mask rather than treating values such as `0x400003` as addresses.
-  `gfx/CameraMotion.h` owns Apocalypse camera sampling and reset forwarding: preserve the
-  output pose and clip index through `controllerRefreshAtUnitScale`, and pass the sampler's
-  `f32` delta explicitly (unit step, 60/480-frame advance, or the converted transition count).
-  Its 0x44-byte output extends, rather than enlarges, the shared 0x38-byte look-at camera.
-  Sound-stop wrappers also forward the incoming fade duration: Apocalypse's registered-handle
-  retirement, handler finish, and ordinary slot-stop functions take `(id, s32 frames)`.
-  Keep the second argument through `asdSoundObjectStop`; a callee that leaves `r1` untouched
-  is forwarding it, not proving that the stop function takes only one argument.
-  At large byte-field offsets, check signedness before reshaping the layout: an `s8` flag can
-  reproduce a folded `add`/`ldrb` even when a zero test makes the load itself unsigned.
-  Keep packing local to genuinely unaligned members, with size/offset assertions; packing an
-  entire record can incorrectly downgrade its otherwise-aligned word accesses.
-  A float-shaped stack argument does not alone prove a variadic callee: a one-word integer/float
-  payload union can have the same calling convention.
-  Preserve explicit switch cases even when a case and `default` perform the same operation:
-  collapsing them into adjacent labels can change armcc's entire decision tree. The Apocalypse
-  title overlay matches with separate case-7/default bodies and context lookup inside its drawing cases.
-  A wrapper that retail shrink-wraps (`ldr ip,[r0,#N]; cmp ip,#0; bxeq lr` before its `push`) keeps
-  the guarded body in a `static __inline` helper (`FUN_003fabfc`/`FUN_0033d3f8`: the helper builds the
-  by-value `SpriteDrawOptions` and forwards). The draw-state ring flush callback takes the new state
-  (`void (*flush)(s32 state)`, `ring->flush(value)`): retail keeps r0=value live across the `blx`.
-  `addon/AocRequestMemory.h` (per game) names the deallocator `delete` of an application request
-  calls (smt4a `asdOperatorDelete`, smt4 `asdMemFreeNonNull`) so `addon/AocBufferRequest.h` serves both games.
 - Shared record layouts must have one definition in a common header. Include that header from
   each user; unrelated layouts with coincidentally identical names need distinct type names.
   Check which class owns a tail field before extending a base: sibling classes can have
   different fields at the same offset. Assert both the base extent and each derived layout.
   Recheck every previously matching consumer of either affected header with `fdiff`.
-  UI sprite resource packets use `UiResourceParameters` and the shared `paramsInit` declaration in
-  `shard/W6_W6Match8_UiResourceParameters.h`: five `u16` byte counts followed by five resource
-  pointers, in a 0x20-byte block. Pass all five pointer/count pairs, including unused `NULL, 0`
-  pairs; do not redeclare the initializer with word-sized counts or variadic arguments.
-  Reflection queue creation likewise uses the shared `btlQueueReflectAction` declaration in
-  `battle/btlReflect.h`. Its actor selectors are word-sized arguments even though the allocator
-  stores their low halfwords; preserve the caller's explicit signed-halfword conversions and
-  consume the returned action, not the queue context, when filling a newly queued payload.
-  Render-state caches use `gfx/RenderStateStack.h` and `camp/RenderCtx.h`: use `RenderCtx`
-  for IV and `RenderCtxA` for Apocalypse, with the context push/set wrappers when the state
-  argument is evaluated before locating the stack. `shard/S1ListPanel.h` supplies only the
-  derived Apocalypse scissor extension; do not recreate the removed cached-state/context types.
-  The script interpreter has one definition: `script/ScriptVm.h` owns `ScriptVmProcess` (the
-  process every opcode and command receives: `pc`, `depth`, tags, `ScriptVmValue` stack,
-  `commandOwner`/`commandFrame`/`workValues`, variable tables) and `ScriptContext`/`g_scrContext`
-  (the operand registers of the binary operators plus `active`, the running process), with
-  `g_scrIntVars`/`g_scrFloatVars` and `scrPopInt`/`scrPopFloat`. `script/ScriptArgs.h` declares
-  `scrGetCommandOwner`, `scrCommMessageSetMode` and `scrGetCommandFrame` (the frame counter).
-  Do not declare local process/context views or these callees.
-  Battle commands of IV take the battle block from `battle/BtlMainAccess.h` (`btlGetMainState()`);
-  `BtlMainState` (`battle/btlMain.h`, 0x4A58 bytes as allocated, entries are `BtlEntry` from
-  `shard/W4_Match6_BtlEntry.h`) is the only definition: add fields as views of its unions with
-  offset asserts instead of writing a per-function state or entry view.
+  [Shared declarations](#shared-declarations) lists the headers that own such types and contracts.
 - Function declarations live in subsystem headers (`ui/UiControl.h`, `gamedata/GameDataAccess.h`,
   `battle/BattleHelpers.h`, `AsdSDK/Source/Gfx/AsdGfxHelpers.h`, ...), never in a header named after
   one function (renames break those). A function with no known subsystem is declared in
@@ -158,7 +83,15 @@ Every match must be one a programmer could have written for a reason.
     `-Ospace` (the STL and SDK containers were built that way). Write `/` and `%` and set the flag;
     never call the helper by hand;
   - `--cpu=5TE` (Thumb register moves written `movs rd, rm` where MPCore armcc writes `mov`: runtime
-    and library code), `-O2`: only when the function is IDENTICAL with the flag and not without it.
+    and library code), `-O2`: only when the function is IDENTICAL with the flag and not without it;
+  - `--fpu=softvfp`: code built without VFP. Retail copies 8- and 12-byte values through core
+    registers (`ldrd`/`strd`, `ldm`/`stm`) where a VFP build uses `vldm`/`vstm` (Apocalypse's request
+    and IPC library, the cfg stubs, the GPU command-buffer module). Prefer the flag when the module's
+    neighbours or the function's twin carry it too; a register-only difference alone is weak evidence;
+  - runtime helpers armcc emits itself are reached through the C that produces them, never called by
+    name: `/` and `%` for the division helpers, `strcpy` of a literal or a packed-record assignment for
+    `__ARM_common_memcpy4_N`. The exceptions are helpers b1454 never emits from C, `__aeabi_memset4`
+    for a word-aligned fill and `ll_sdiv` for a 64-bit division, which callers name directly.
 - **The original was built with armcc `--multifile`.** A caller knew which registers its callees
   really clobber: retail keeps a value in a caller-saved register (`r1`-`r3`, `ip`) across a `bl`,
   or pushes fewer registers than a unit compiled alone does, yet the callees stay out of line. A
@@ -168,17 +101,16 @@ Every match must be one a programmer could have written for a reason.
   must clobber what retail's do (matched callees are best).
 - **The compiler is armcc 4.1 b1454 throughout** (`config/toolchain.json`). Builds up to b713
   never fuse a halfword multiply-add into `smlabb` and write a `vdiv`/`vcvt` result over one of its
-  operands; retail does neither, and b791 and later reproduce both. With the sources tuned for b713
-  over thirty waves, b1454 still matched more of both games than b713 when the project switched; the
-  functions it lost were b713 register tie-breaks. Fix the source; don't change the compiler per
-  unit.
+  operands; retail does neither, and b791 and later reproduce both. When the project switched from
+  b713, b1454 matched more of both games; the functions it lost were b713 register tie-breaks. Fix the
+  source; don't change the compiler per unit.
 - **Linker NOPs are calls.** armcc never emits `mov r0, r0` (ARM) or `mov r8, r8` twice (Thumb);
   armlink writes them over a branch it removed. `build.py` and `fdiff` do the same after compiling,
   so write the call:
   - **a call to a real empty function** (a unit whose whole body is `bx lr`; ~150 per game): armlink's
     `--inline` replaces every `bl` to it with a NOP, so the image never calls one. `build.py` does the
     same. If retail keeps values in caller-saved registers across such a NOP, the callee was in the
-    same `--multifile` run: ask Main for `multifile` with that empty unit;
+    same `--multifile` run: give the unit a `multifile` entry naming that empty unit;
   - **a call to a `__weak` function the release build didn't link**: mostly the engine's debug hook,
     called with `__FILE__` and `__LINE__` (retail still loads the file name into r0, the line into
     r1). Write `asdDebugTrace(DAT_00409c64, 172);` with `include/AsdSDK/AsdDebug.h` when retail
@@ -215,8 +147,9 @@ Every match must be one a programmer could have written for a reason.
   bytes are not checked.
 - **A pool word inside a named global** reads `g_obj+off` only when `symbols.txt` gives the object a
   `size:`; without one, retail's word prints as `DAT_<address>` and code-identical functions differ.
-  Ask Main to size the object (evidence: the asserted `sizeof` of its type, the offsets its users
-  touch, never past the next symbol).
+  Size the object with `tools/names.py` (a row repeating the global's name with a note starting
+  `size:0x..`; evidence: the asserted `sizeof` of its type, the offsets its users touch, never past
+  the next symbol).
 - **A number that falls inside a data section** (an IPC command header, a status code) is still a
   number: `<game>/config/numbers.txt` lists such values (`0x<value> // evidence`), and the target
   objects then keep the plain word. Write the constant in source, never `&DAT_…`.
@@ -256,82 +189,183 @@ Every match must be one a programmer could have written for a reason.
   load the value itself.
   Never call a `func_0x<address>` placeholder: the target has a symbol once its unit exists.
 
-## Source shapes that matched
+## Matching techniques
 
-Near misses that resisted plain rewording, and what fixed them (Waves 33 and 34). Try these before
-calling a difference a register tie-break:
+Source shapes that fixed near misses after plain rewording failed. Try them before calling a
+difference a register tie-break.
 
-- **A result reported through `FUN_002c3510` (smt4a `FUN_0013ebd8`)** is an `nn::Result`
-  (`nn/Result.h`): declare and return it as one. `nn::Result result;` constructs 0xE7E3FFFF.
-- **A 64-bit flag mask** is a real `u64`, tested as `if (a & mask) return 1; return 0;` (or
-  `if (...) f(1); else f(0);`) for retail's `movne`/`moveq`; word pairs and `!= 0` differ. A flag
-  `|=`/`&=` whose temporary lands in r1/r2 where armcc would use r0, or an `and rX, #N; movs rY, rX`
-  test, is a u64 field (`BtlMainState::battleMask`/`editorMask`, `BtlEntry::flagMask`). Read the
-  field in each test (no `u64 flags = entry->flags;` copy) and pick `(flags & mask)` or
+**Start from a look-alike.** `python -B tools/similar.py` lists, for every unproven function, the
+proven functions (either game) whose retail code is most similar; a score of 1.00 is the same
+instruction sequence. Copy that source's shape (types, helpers, statement order, declarations) with
+the target's own callees, globals and constants. This is the most productive method there is: a twin,
+a sibling setter or another user of the same lookup is usually written the same way.
+
+**Signatures and types**
+- A value retail keeps live in `r1`/`r2` across a call is usually an argument the decompiler dropped:
+  read the callers and the callee. Recover return types too (`s32` against `void`, `bool`, `u16`).
+- Width and signedness: `u16`/`u8` parameters, `s8` flags, buffers sized to what is copied into them
+  (`char name[0x12]`), halfword stack parameters that retail loads with `ldr` (they are `u32`), and
+  `u64` parameters for values passed in `r2:r3`.
+- An `s8` field at a large offset gives retail's literal base register (`add #0xF00`,
+  `g_gameState+0x100`), even when a zero test makes the load itself unsigned. Check signedness before
+  reshaping a layout.
+- Keep packing local to genuinely unaligned members, with size and offset assertions: packing a whole
+  record downgrades its aligned word accesses.
+- A float-shaped stack argument does not prove a variadic callee: a one-word integer/float payload
+  union has the same calling convention.
+- A result reported through `FUN_002c3510` (smt4a `FUN_0013ebd8`) is an `nn::Result`
+  (`nn/Result.h`): declare and return it as one. `nn::Result result;` constructs `0xE7E3FFFF`.
+
+**64-bit flag masks**
+- A flag mask is a real `u64`, tested as `if (a & mask) return 1; return 0;` (or
+  `if (...) f(1); else f(0);`) for retail's `movne`/`moveq`; word pairs and `!= 0` compile differently.
+- A flag `|=`/`&=` whose temporary lands in `r1`/`r2` where armcc would use `r0`, or an
+  `and rX, #N; movs rY, rX` test, is a `u64` field (`BtlMainState::battleMask`/`editorMask`,
+  `BtlEntry::flagMask`).
+- Read the field in each test (no `u64 flags = entry->flags;` copy) and choose `(flags & mask)` or
   `(mask & flags)` per test.
-- **Comparators and tie-breaks**: retail's `mov r6, r4` copy before a tie-break comes from a
-  non-inline `static s32 compare(a, b)` whose body uses named locals
-  (`s32 x = F(a); s32 y = F(b); return x - y;`). A comparator over a lookup sets its `{id, 0}` keys
-  with separate stores and calls the lookup's body as a `static __inline` taking the keys by reference.
-- **A function shaped like an already-matched one** (either game): copy that one's static helpers.
-  This was the fastest route to a match in Wave 36.
-- **armcc's copy helpers** `__ARM_common_memcpy4_N` are called for `strcpy` of an N-byte literal
-  into an aligned buffer and for copies of N-byte packed records: write `strcpy`/the assignment,
-  never the call. A caller that retail compiled against an opaque copy (it keeps a dead store into
-  the copied record) declares `ARM_common_memcpy4_6_call`, an alias in `config/symbols.txt`.
-- **A vtable whose slots 0/1 are destructors**: declare a virtual destructor and write `delete`;
-  it fixes the predication around the call. Not when slot 0 is an ordinary method.
-- **Offsets split into two adds** (`add #0x400; add #0x384`): retail reaches a sub-struct through a
-  pointer. Give the sub-struct a type and go through `&work->sub`.
-- **Literal-pool order**: a local pointer to a global moves its pool word earlier; a constant passed
-  through a `static __inline` helper's parameter moves it later; named locals declared in retail's
-  pool order fix the order of constants.
-- **A stack key or temporary in scope at the end** (a `bsearch` key, a copied struct) blocks retail's
+
+**Control flow**
+- `if (T *p = field)` keeps a null check armcc would otherwise merge away; `a == NULL || b == NULL`
+  written as two early returns returns `r0` directly.
+- A positive-first `if (x) { ...; return 1; } return 0;` stops shrink-wrapping; a wrapper that retail
+  does shrink-wrap (`ldr ip, [r0, #N]; cmp ip, #0; bxeq lr` before its `push`) keeps the guarded body
+  in a `static __inline` helper.
+- Switch layout: an explicit `case` for the default value, `return` instead of `break` in one case,
+  or indexing with the switch variable rather than literal indices moves armcc's tail merge. Keep
+  explicit cases even when a case and `default` do the same thing: merging them changes the whole
+  decision tree.
+- Two identical branches that retail cross-jumps come from one inline helper called in both.
+
+**Locals, constants and literal pools**
+- A local pointer to a global moves its pool word earlier; a constant passed through a
+  `static __inline` helper's parameter moves it later, or keeps it in a callee-saved register;
+  named locals declared in retail's pool order fix the order of constants.
+- Locals declared at the top of the function (C89 style), or one loop index reused by two loops,
+  change their registers.
+- Assigning a global and then reading it back into a local (`g = alloc(); T *p = g;`) gives retail's
+  reload.
+- A status local (`s32 result = 1;`) after the argument read keeps a constant shared by a shift and
+  the return value in a callee-saved register.
+- Conversions through `static __inline f32 get(p) { return p->field; }`; rounding as
+  `f32 half = 0.5f;` declared first, then `floorf(scaled + half)`.
+
+**Helpers**
+- A stack key or temporary in scope at the end (a `bsearch` key, a copied struct) blocks retail's
   tail call or predication: move the lookup into a `static __inline` helper so its scope ends there.
-- **Jump threading**: `if (T *p = field)` keeps a null check armcc would otherwise merge away;
-  `a == NULL || b == NULL` written as two early returns returns r0 directly.
-- **Switch layout**: an explicit `case` for the default value, `return` instead of `break` in one
-  case, or indexing with the switch variable instead of literal indices moves armcc's tail merge.
-- **Loops**: armcc rerolls consecutive copies from an indexed source array into a loop (name the
-  entries as struct members); an `entry = &entries[i]` local can stop it unrolling a search.
-- **Types**: `u16`/`u8` parameters, an `s8` flag, `char name[0x12]` sized to what is copied into it,
-  and arguments the decompiler dropped (read the callers) each fixed functions.
-- **Data another thread changes** (a run flag, a polled state) is `volatile` where retail reloads it.
-- **`paramsInit` packets and other constant tables addressed from one anchor** (a `sub` chain from
-  one pool word) are `static const` arrays defined in the unit with the image's bytes; `relink.py`
-  places them and checks the bytes.
-- **A creator inlined into its callers** (retail repeats an allocator's body, e.g. `effBlockCreate`):
-  give the body a `static __inline` copy in a header and call that.
-- **Constructors whose stores come out of order**: a polymorphic base class taking the value in its
-  constructor (`Base(kind) : kind(kind)`) gives retail's order.
-- **Sleeps and timeouts**: pass an `nn::fnd::TimeSpan` (`FromMicroSeconds`, `FromMilliSeconds`) by
-  value; the constant is then rematerialised at each call, as in retail.
-- **Locals declared at the top of the function** (C89 style), a loop index declared once and reused,
-  or a positive-first `if (x) { ...; return 1; } return 0;` (stops shrink-wrapping) each fixed
-  several functions.
-- **Start from a look-alike**: `python -B tools/similar.py` lists, for every unproven function, the
-  proven functions (either game) with the most similar retail code. Copy that source's shape (types,
-  helpers, statement order) with the target's own callees and constants; this was the most
-  productive method of Waves 37-38.
-- **Small static helpers, not just inlines**: list cursors (`getTop`/`getPosition`/`set`), message
-  commands (`showMessage(mode, wait)`), table walks (`tableEntry(section, index)`) and draw bodies
-  between a render push and pop are each a separate non-inline `static` function in retail's shape.
-- **State machines**: a `stepEnter(step, state)` helper that clears the counters and then stores the
-  state gives retail's store order; a status local (`s32 result = 1;`) after the argument read keeps
-  a shared constant in a callee-saved register.
-- **Integer-to-float conversions** through `static __inline f32 get(p) { return p->field; }`;
-  rounding as `f32 half = 0.5f;` declared first, then `floorf(scaled + half)`.
-- **Loop bounds read from the structure** (`i < table->count`, `index < first + count`) rather than
-  cached in a local; a `u32` index gives retail's count-down loop.
-- **Signed byte fields** (`s8`) at large offsets give retail's literal base registers
-  (`add #0xF00`, `g_gameState+0x100`).
-- **Constructors**: `new (alloc) T` with a constructor and a class `operator new` gives retail's
-  predicated allocation; members of types with their own zeroing constructors give its registers.
-- **Code built without VFP** (retail copies 8/12-byte values through core registers where our build
-  uses `vldm`/`vstm`) takes `--fpu=softvfp` in its unit `cflags`, like its module neighbours.
-- **A lone load or move in the middle of retail code** may be a getter armlink inlined: check
-  `config/inlined.txt` (and the target objects for one-instruction functions) before calling it
-  allocation.
+- A body retail repeats in its callers (an allocator such as `effBlockCreate`, a sibling function from
+  the same file) is a `static __inline` copy of that body.
+- Some retail shapes need small non-inline `static` functions instead: list cursors
+  (`getTop`/`getPosition`/`set`), message commands (`showMessage(mode, wait)`), table walks
+  (`tableEntry(section, index)`), comparator tie-breaks (`s32 x = F(a); s32 y = F(b); return x - y;`)
+  and draw bodies between a render push and pop.
+- A state machine's `stepEnter(step, state)` helper that clears the counters and then stores the
+  state gives retail's store order.
+- A comparator over a lookup sets its `{id, 0}` keys with separate stores and calls the lookup's body
+  as a `static __inline` taking the keys by reference.
+
+**Loops and data**
+- Read the bound from the structure (`i < table->count`, `index < first + count`) instead of caching
+  it; a `u32` index gives retail's count-down loop; an `entry = &entries[i]` local can stop armcc
+  unrolling a search.
+- armcc rerolls consecutive copies from an indexed source array into a loop: name the entries as
+  struct members.
+- Offsets split into two adds (`add #0x400; add #0x384`) mean retail reaches a sub-struct through a
+  pointer: give the sub-struct a type and go through `&work->sub`.
+- Constant tables addressed from one anchor (a `sub` chain from one pool word, such as `paramsInit`
+  packets) are `static const` arrays in the unit holding the image's bytes; `relink.py` places them
+  and checks the bytes.
+- Data another thread changes (a run flag, a polled state) is `volatile` under the rules above.
+- Sleeps and timeouts take an `nn::fnd::TimeSpan` (`FromMicroSeconds`, `FromMilliSeconds`) by value,
+  which rematerialises the constant at each call as retail does.
+
+**Classes**
+- A vtable whose slots 0/1 are destructors: declare a virtual destructor and write `delete`; it fixes
+  the predication around the call. Not when slot 0 is an ordinary method.
+- Constructor stores out of order: a base class taking the value in its constructor
+  (`Base(kind) : kind(kind)`) gives retail's order; members of types with their own zeroing
+  constructors give its registers.
+- `new (alloc) T` with a constructor and a class `operator new` gives retail's predicated allocation.
+
+**armcc's copy helpers** `__ARM_common_memcpy4_N` are emitted for `strcpy` of an N-byte literal into
+an aligned buffer and for copies of N-byte packed records: write `strcpy` or the assignment. A caller
+that retail compiled against an opaque copy (it keeps a dead store into the copied record) declares
+`ARM_common_memcpy4_6_call`, an alias in `config/symbols.txt`.
+
+## Shared declarations
+
+These headers own a type or a calling contract for both games. Include them instead of writing a
+local view or prototype, and keep the contract.
+
+- **`shard/JobWork.h`**: the canonical `JobWork *jobGetWork(u32 job)` accessor. Pass the incoming
+  handle explicitly, use `s32 (u32 job)` for process and draw updates and `void (u32 job)` for
+  destruction callbacks, and keep the registrar's declarations in sync. Callers keep their own typed
+  view of the work area with a cast (`MyWork *work = (MyWork *)jobGetWork(job);`). For registered
+  process or draw callbacks, compare the body with its registrar and recover the callback's parameter
+  and result types too.
+- **`text/TextDraw.h`**: `f32 FUN_00162790(layer, color, text, x, y, z, width, height)` (smt4's
+  `FUN_002be5a4`). The last three floats are depth, letter spacing and opacity and are always passed
+  (a caller with fewer arguments reuses retail's `s2`-`s4` values: check them at the retail call
+  site); the result is the drawn advance. Text held as bytes or `u16` is cast to `const char *`.
+- **`gamedata/Table04Record.h`**: data table 4's 0x88-byte record (the search stride and the key
+  buffer prove it) and `dataTable04FindById`; callers that read other fields cast the result to their
+  own view. **`gamedata/SaveSlotTable.h`**: the save block's slot table returned by
+  `gameGetSlotTable()` (money, party and reserve slot maps, player and 0x134-byte slot records).
+- **`shard/W6_W6Match1_CriticalSection.h`**: the only scoped critical-section lock
+  (`ScopedCriticalLock lock(section)`). Near misses holding a section in a callee-saved register
+  across a body are this lock.
+- **`gamedata/GameFlags.h`**: `void gameFlagSetValue(u32 id, s32 value, s32 notify)` for both games.
+  Pass the third argument retail passes: normal setters notify with `1`, flag-change handlers use `0`
+  to avoid redispatch. The setter returns nothing; take any later value from its actual producer, not
+  from a stale `r0`.
+- **`sys/ResultReport.h`** (per game): the failed-result reporter, declared variadically
+  (`void FUN_002c526c(u32 result, ...)`, smt4a `FUN_002e3140`). Some sites keep the tested failure
+  flag and pass it as a second argument (`bool failed = nnResultIsFailure(r); if (failed)
+  report(r, failed);` gives retail's `lsrs r1, r0, #31 … blne`); others pass only the result (constant
+  codes, summary-guarded `(r & 0x7e00000) != 0x600000 && nnResultIsFailure(r)`). The definition lives
+  in its own file and never reads the flag.
+- **`sys/HandleWait.h`** (smt4): the single-handle wait helper (`handleWait(handle, timeout)` and
+  `FUN_002c40f8`); **`sys/KernelThread.h`**: the thread object; **`nn/Result.h`**: the native
+  description tests (`nnResultIsNotTimeout`, a bitfield compare of the description against 0x3fe).
+- **`AsdSDK/Source/Gfx/Model/AsdEnv.h`**: `legacyResourceIdRemap(const PackedResourceId *)`. Calls to
+  it are the multifile case (retail pushes only `lr` around them, no alignment pad); compare the masked
+  module field in place (`(r & 0x3fc00) == (0x4e << 10)`), not an extracted value.
+- **`gfx/EffectEditorParameters.h`**: both games' four-argument parameter-editor contracts. Their two
+  option-list pointers are real arguments (a table base kept in `r3` while `r2` addresses a later
+  entry is not missed literal folding); keep both and use the integer status mask rather than
+  treating values such as `0x400003` as addresses.
+- **`gfx/CameraMotion.h`**: Apocalypse camera sampling and reset forwarding. Preserve the output pose
+  and clip index through `controllerRefreshAtUnitScale` and pass the sampler's `f32` delta explicitly
+  (unit step, 60/480-frame advance or the converted transition count). Its 0x44-byte output extends,
+  rather than enlarges, the shared 0x38-byte look-at camera.
+- **Sound stops**: Apocalypse's registered-handle retirement, handler finish and slot-stop functions
+  take `(id, s32 frames)` and forward the fade duration through `asdSoundObjectStop`. A callee that
+  leaves `r1` untouched is forwarding it, not proof that the stop takes one argument.
+- **Draw-state ring**: the flush callback takes the new state (`void (*flush)(s32 state)`,
+  `ring->flush(value)`); retail keeps `r0` = value live across the `blx`.
+- **`addon/AocRequestMemory.h`** (per game): the deallocator an application request's `delete` calls
+  (smt4a `asdOperatorDelete`, smt4 `asdMemFreeNonNull`), so `addon/AocBufferRequest.h` serves both games.
+- **`shard/W6_W6Match8_UiResourceParameters.h`**: UI sprite resource packets (`UiResourceParameters`)
+  and the shared `paramsInit` declaration: five `u16` byte counts followed by five resource pointers,
+  in a 0x20-byte block. Pass all five pointer/count pairs, including unused `NULL, 0` pairs; do not
+  redeclare the initialiser with word-sized counts or variadic arguments.
+- **`battle/btlReflect.h`**: `btlQueueReflectAction`. Its actor selectors are word-sized arguments
+  even though the allocator stores their low halfwords: keep the caller's explicit signed-halfword
+  conversions, and fill a newly queued payload through the returned action, not the queue context.
+- **`gfx/RenderStateStack.h`** and **`camp/RenderCtx.h`**: render-state caches. Use `RenderCtx` for
+  IV and `RenderCtxA` for Apocalypse, with the context push/set wrappers when the state argument is
+  evaluated before locating the stack. `shard/S1ListPanel.h` supplies only the derived Apocalypse
+  scissor extension.
+- **`script/ScriptVm.h`**: the script interpreter. `ScriptVmProcess` is the process every opcode and
+  command receives (`pc`, `depth`, tags, `ScriptVmValue` stack, `commandOwner`/`commandFrame`/
+  `workValues`, variable tables); `ScriptContext`/`g_scrContext` holds the binary operators' operand
+  registers and `active`, the running process; plus `g_scrIntVars`/`g_scrFloatVars` and
+  `scrPopInt`/`scrPopFloat`. **`script/ScriptArgs.h`** declares `scrGetCommandOwner`,
+  `scrCommMessageSetMode` and `scrGetCommandFrame` (the frame counter).
+- **`battle/BtlMainAccess.h`** and **`battle/btlMain.h`**: IV's battle commands take the battle block
+  from `btlGetMainState()`. `BtlMainState` (0x4A58 bytes as allocated; entries are `BtlEntry` from
+  `shard/W4_Match6_BtlEntry.h`) is the only definition: add fields as views of its unions with offset
+  asserts, never a per-function state or entry view.
 
 ## Readability standard
 
@@ -410,6 +444,20 @@ Constructors and destructors are written as such (`Obj55afc4::~Obj55afc4()`, ref
   the unit's own function; the vtable stays the retail bytes. A `D0` unit can be written the same way
   when armcc's deleting variant matches retail's; retail's often only calls `D1` and frees, from
   another file, so keep it in C form when it does not.
+- Member signatures must account for ARM's hidden result storage. The window-status operations
+  return `WindowStatusOperationResult` by value, and queue erasure returns a `SharedQueueIterator`
+  with a nontrivial copy constructor; the first decompiled pointer can therefore be the output, not
+  `this`. armcc only constructs a named by-value result directly in the hidden return storage (no
+  stack local and block copy) when the class is non-trivial. `WindowStatusOperationResult` therefore
+  has the native `(u32 status)` constructor (status, the default `WindowStatusResult`, zeroed
+  reserved words, then `result = WindowStatusResult(0)`) and an empty destructor; write
+  `WindowStatusOperationResult out(1);`, never an aggregate initialiser. `TableEntryRef`
+  (`gamedata/TableEntryRef.h`) is a scoped item-table lookup whose destructor is a linker-NOPed
+  debug hook.
+- Some proven deleting wrappers and owner-destruction chains still use C declarations of destructor
+  entry points: retail consumes the ABI's returned `this` directly, while a native explicit
+  destructor call makes armcc save and restore the owner. Keep these documented exceptions when
+  `fdiff` proves that the native call changes the retail instructions.
 
 ## Names
 

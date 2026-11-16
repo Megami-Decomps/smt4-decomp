@@ -8,8 +8,8 @@
 __pycache__/
 /build/
 /gen-*.log
-.romwright/*.sqlite-shm
-.romwright/*.sqlite-wal
+# Local state of the analysis tool that generated the projects (src/ is the source of truth now).
+.romwright/
 
 # Scratch output: never committed (sources, config and docs only).
 /*.txt

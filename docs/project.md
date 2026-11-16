@@ -30,32 +30,19 @@ tools/worktrees.py    git worktrees for parallel work: each links orig/ and buil
                       builds and relinks on its own, and hands back its changes as a patch
 ```
 
-Every function is its own `.cpp`, compiled by armcc 4.1 (`--cpp --no_rtti -O3 -Otime`). The games are
+Every function is its own `.cpp`, compiled by armcc 4.1 [Build 1454] (`--cpp --no_rtti -O3 -Otime`; a unit
+whose retail code shows another build, such as `-O2`, `-Ospace` or `--fpu=softvfp`, carries its own `cflags`). The games are
 C++ (their asserts name 168 `.cpp` source files and 4 `.c`). Recovered classes have shared declarations
 in `include/classes/` and native member definitions outside `extern "C"`; functions not established
 as members retain C linkage so their symbols keep the names objdiff and relink pair them by.
-
-Member signatures must account for ARM's hidden result storage. The window-status operations return
-`WindowStatusOperationResult` by value, and queue erasure returns a `SharedQueueIterator` with a
-nontrivial copy constructor; the first decompiled pointer can therefore be the output, not `this`.
-armcc only constructs a named by-value result directly in the hidden return storage (no stack local
-and block copy) when the class is non-trivial. `WindowStatusOperationResult` therefore has the native
-`(u32 status)` constructor (status, the default `WindowStatusResult`, zeroed reserved words, then
-`result = WindowStatusResult(0)`) and an empty destructor; write `WindowStatusOperationResult out(1);`,
-never an aggregate initialiser. `TableEntryRef` (`gamedata/TableEntryRef.h`) is a scoped item-table
-lookup whose destructor is a linker-NOPed debug hook.
-Some proven deleting wrappers and owner-destruction chains still use C declarations of destructor
-entry points: retail consumes the ABI's returned `this` directly, while a native explicit destructor
-call makes armcc save and restore the owner. Keep these documented exceptions when `fdiff` proves
-that the native call changes the retail instructions.
 
 ## Shared code
 
 Both games come from one build tree: the engine `AsdSDK`, Nintendo's SDK, and most of `sdds4`. The
 same original file has the same path in both (`AsdSDK/Source/Sys/File/AsdFile`, `camp/IfTouch`), and
-167 of Apocalypse's 215 placed files are also IV files. `python -B tools/shared.py` pairs the 3,782
-functions with the same code in both games (41% of IV's, 25% of Apocalypse's): same instructions, same
-constants and floats, only branch targets and image addresses free. A function matched in one game
+167 of Apocalypse's 215 placed files are also IV files. `python -B tools/shared.py` pairs the
+functions with the same code in both games (about 4,300: 40% of IV's, 25% of Apocalypse's): same
+instructions, same constants and floats, only branch targets and image addresses free. A function matched in one game
 and not the other is a porting candidate (`--list ported`): its source very likely matches the twin too.
 
 ## Names
@@ -94,10 +81,16 @@ history.
 
 `build.py report` scores each function with objdiff. objdiff ignores some operand differences, so a
 function counts as proven only when `tools/relink.py --matched` links its compiled object into the
-retail `.code` and the result is byte-identical; relink lists every function it keeps as retail bytes,
-and why. Six functions per game that objdiff scores 100% stay retail bytes:
-`nw_gfx_internal_NWCopyVec4Reverse`, `NWCopyMtx24Reverse` and their copies load with `vldmia r1!`, a
-writeback armcc emits only when the pointer is used afterwards, so they were hand-written assembly.
+retail `.code` and the result is byte-identical. relink lists every function objdiff scores 100% that
+it still links as retail bytes, with the reason:
+
+- its instructions differ in operands objdiff does not compare. Six per game are hand-written
+  assembly: `nw_gfx_internal_NWCopyVec4Reverse`, `NWCopyMtx24Reverse` and their copies load with
+  `vldmia r1!`, a writeback armcc emits only when the pointer is used afterwards;
+- its compiled section has another size than retail's;
+- its own data (`.bss`, `.data`, `.init_array`, `.constdata`: static initialisers, constant tables)
+  cannot be tied by a retail pool word to an address holding the same bytes, so relink cannot prove
+  where it goes.
 
 The compiled objects never went through armlink, so `build.py` repeats what armlink did to retail
 after each compile: a branch to an undefined `__weak` function or to the very next instruction

@@ -28,9 +28,10 @@ reconstruction against the original executables. Progress, per game and per func
 
 ## Status and versions
 
-Every function compiles, but most are still the decompiler's first pass. A function counts once its
-source compiles to the retail bytes and `tools/relink.py` links it back into a byte-identical
-executable; names, types and source organization are still being recovered.
+Every function compiles, and about two thirds of the first-party ones are proven; the rest are
+still being matched. A function counts once its source compiles to the retail bytes and
+`tools/relink.py` links it back into a byte-identical executable; names, types and source organization
+are still being recovered.
 
 | Version | Game | Build | `.code` SHA-256 |
 |---|---|---|---|
