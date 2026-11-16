@@ -264,7 +264,21 @@ calling a difference a register tie-break:
 - **A result reported through `FUN_002c3510` (smt4a `FUN_0013ebd8`)** is an `nn::Result`
   (`nn/Result.h`): declare and return it as one. `nn::Result result;` constructs 0xE7E3FFFF.
 - **A 64-bit flag mask** is a real `u64`, tested as `if (a & mask) return 1; return 0;` (or
-  `if (...) f(1); else f(0);`) for retail's `movne`/`moveq`; word pairs and `!= 0` differ.
+  `if (...) f(1); else f(0);`) for retail's `movne`/`moveq`; word pairs and `!= 0` differ. A flag
+  `|=`/`&=` whose temporary lands in r1/r2 where armcc would use r0, or an `and rX, #N; movs rY, rX`
+  test, is a u64 field (`BtlMainState::battleMask`/`editorMask`, `BtlEntry::flagMask`). Read the
+  field in each test (no `u64 flags = entry->flags;` copy) and pick `(flags & mask)` or
+  `(mask & flags)` per test.
+- **Comparators and tie-breaks**: retail's `mov r6, r4` copy before a tie-break comes from a
+  non-inline `static s32 compare(a, b)` whose body uses named locals
+  (`s32 x = F(a); s32 y = F(b); return x - y;`). A comparator over a lookup sets its `{id, 0}` keys
+  with separate stores and calls the lookup's body as a `static __inline` taking the keys by reference.
+- **A function shaped like an already-matched one** (either game): copy that one's static helpers.
+  This was the fastest route to a match in Wave 36.
+- **armcc's copy helpers** `__ARM_common_memcpy4_N` are called for `strcpy` of an N-byte literal
+  into an aligned buffer and for copies of N-byte packed records: write `strcpy`/the assignment,
+  never the call. A caller that retail compiled against an opaque copy (it keeps a dead store into
+  the copied record) declares `ARM_common_memcpy4_6_call`, an alias in `config/symbols.txt`.
 - **A vtable whose slots 0/1 are destructors**: declare a virtual destructor and write `delete`;
   it fixes the predication around the call. Not when slot 0 is an ordinary method.
 - **Offsets split into two adds** (`add #0x400; add #0x384`): retail reaches a sub-struct through a
