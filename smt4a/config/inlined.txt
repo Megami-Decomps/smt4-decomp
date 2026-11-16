@@ -51,3 +51,4 @@ renderCtxGetStereoMode = 0xe590052c; // 0x345c18 (FUN_00345b94, after ldr r0, [r
 touchSelectionGetSelected = 0xe1d001d1; // 0x4a5f24, 0x4a5f7c (FUN_004a5ea0, after mov r0, r8 = the touch selection at panel+0x818)
 scrMessageKindGetValue = 0xe3a00015; // 0x36dea8 (FUN_0036de98), 0x2378c0 (FUN_002378b8), 0x282a18 (FUN_00282a08): constant 21 compared and normalised to 5 right after
 effMenuNodeGetState = 0xe5900008; // 0x3b6694 (FUN_003b665c, same shape as smt4 effectEditorUpdate)
+questControlsGetCursorRow = 0xe1d001d2; // 0x4a1714 (FUN_004a16bc) 0x4a42a8 (FUN_004a41d8), both after add r0, r4, #2048; add r0, r0, #24 (the s8 cursor row at QuestControls+0x12)

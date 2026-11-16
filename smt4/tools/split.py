@@ -158,6 +158,19 @@ def switch_table(code, at):
     return None
 
 
+def string_end(code, to):
+    """One past the terminator of the string literal at `to`, or -1 when `code` ends first. A UTF-16
+    literal (L"..." whose first unit is a Latin character, so its second byte is 0) ends at its
+    first aligned 0x0000 unit, not at its first zero byte."""
+    if to + 1 < len(code) and code[to] and not code[to + 1]:
+        for at in range(to, len(code) - 1, 2):
+            if not code[at] and not code[at + 1]:
+                return at + 2
+        return -1
+    stop = code.find(b"\0", to)
+    return stop + 1 if stop >= 0 else -1
+
+
 def literal_pools(entry, code, thumb):
     """(merged data ranges, words a PC-relative LDR reads, end) of an ARM/Thumb function, as
     byte offsets: A32 LDR/LDRD/VLDR and Thumb LDR with PC as the base. One pass in address
@@ -251,11 +264,10 @@ def literal_pools(entry, code, thumb):
             if to < length + 4096:
                 reach = max(reach, word_end(to + 1))
             continue
-        stop = code.find(b"\0", to) if to >= 0 else -1
+        stop = string_end(code, to) if to >= 0 else -1
         if stop < 0:
             reach = max(reach, word_end(length + 1))
             continue
-        stop += 1
         ranges.append((to, min(length, stop + (4 - (stop + skew) % 4) % 4)))
     merged = []
     for start, end in sorted(ranges):

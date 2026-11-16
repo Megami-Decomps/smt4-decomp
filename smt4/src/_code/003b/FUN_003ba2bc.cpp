@@ -34,7 +34,7 @@ extern "C" {
 s32 stageAssetsLoaded(void);
 s32 spriteTable2aIsLoaded(void *sprites);
 Unk3ba2bcPart *FUN_00297060(void *resourceA, void *resourceB);
-void FUN_002bd808(void *a, void *b);
+void ARM_common_memcpy4_6(void *a, void *b);
 void mikadoLoadSceneResources(Unk3ba2bcOwner *owner);
 void scriptProcessSetMode(Unk3ba2bcPart *part, s32 mode);
 void buttonHelpSelectByProgress(Unk3ba2bcOwner *owner);
@@ -53,7 +53,7 @@ void FUN_003ba2bc(Unk3ba2bcOwner *owner)
     owner->secondPart = FUN_00297060(owner->secondResourceA, owner->secondResourceB);
     scriptProcessSetMode(owner->secondPart, 2);
     if (owner->flags & UNK3BA2BC_FLAG_PENDING) {
-        FUN_002bd808(owner->unk03C, owner->unk042);
+        ARM_common_memcpy4_6(owner->unk03C, owner->unk042);
         mikadoLoadSceneResources(owner);
         owner->step = 2;
         owner->stepTimer = 0;

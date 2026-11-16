@@ -102898,13 +102898,13 @@
       "target_path": "orig/target/_code/001d/FUN_001d13e8.o"
     },
     {
-      "base_path": "build/obj/_code/001d/FUN_001d1438.o",
+      "base_path": "build/obj/_code/001d/ARM_common_memcpy4_6.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001d1438",
+            "name": "ARM_common_memcpy4_6",
             "size": 20,
             "vram": "0x1d1438"
           }
@@ -102912,10 +102912,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/001d/FUN_001d1438.cpp"
+        "source_path": "src/_code/001d/ARM_common_memcpy4_6.cpp"
       },
-      "name": "_code/001d/FUN_001d1438",
-      "target_path": "orig/target/_code/001d/FUN_001d1438.o"
+      "name": "_code/001d/ARM_common_memcpy4_6",
+      "target_path": "orig/target/_code/001d/ARM_common_memcpy4_6.o"
     },
     {
       "base_path": "build/obj/_code/001d/nn_snd_CTR_DspFxManager_GetDspCycles.o",

@@ -17,6 +17,6 @@ int FUN_00288ddc(int limit, u32 id);
 
 void FUN_0028f694(s32 x, s32 y, u32 region);
 
-u16 FUN_0028fb40(s32 id);
+s32 FUN_0028fb40(s32 id);
 
 } /* extern "C" */

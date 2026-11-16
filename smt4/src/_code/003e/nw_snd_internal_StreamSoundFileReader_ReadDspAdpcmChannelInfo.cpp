@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002bd808(unsigned int, int);
+int ARM_common_memcpy4_6(unsigned int, int);
 int nw_snd_internal_StreamSoundFile_ChannelInfoTable_GetChannelInfo(unsigned int, unsigned int);
 int rt_memcpy(unsigned int, int, int);
 
-/* Supplied declaration required: FUN_002bd808. */
+/* Supplied declaration required: ARM_common_memcpy4_6. */
 /* Supplied declaration required: nw_snd_internal_StreamSoundFile_ChannelInfoTable_GetChannelInfo. */
 extern int nw_snd_internal_StreamSoundFile_ChannelInfo_GetDspAdpcmChannelInfo(void);
 extern unsigned int nw_snd_internal_StreamSoundFile_InfoBlockBody_GetChannelInfoTable(unsigned int);
@@ -29,7 +29,7 @@ unsigned char nw_snd_internal_StreamSoundFileReader_ReadDspAdpcmChannelInfo
   temp_v1 = nw_snd_internal_StreamSoundFile_ChannelInfo_GetDspAdpcmChannelInfo();
   if (temp_v1 != 0) {
     rt_memcpy(param_2,temp_v1,0x26);
-    FUN_002bd808(param_3,temp_v1 + 0x26);
+    ARM_common_memcpy4_6(param_3,temp_v1 + 0x26);
   }
   return temp_v1 != 0;
 }

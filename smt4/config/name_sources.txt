@@ -4447,3 +4447,4 @@
 002be56c drawTextAtSnappedRectangle inferred [high] Twin of smt4a drawTextAtSnappedRectangle (same source).
 00388f3c aocEnumerateContentRecords inferred [high] Twin of smt4a aocEnumerateContentRecords (same source).
 003c8c2c fusionClassifyPair inferred [med] 0 for the same demon, 5 for a special two-ingredient recipe, 4 for a race-pair exception, 2/3 from the race rule kind, else whether a symmetric race pair exists. Twin of smt4a FUN_004da980.
+002bd808 ARM_common_memcpy4_6 inferred [high] armcc's 6-byte struct-copy helper (ldr/str word, ldrh/strh r3 at +4): ARM_common_memcpy4_7 without its trailing byte. Twin of smt4a FUN_001d1438.

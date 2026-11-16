@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail sets r2 = 0 before the linker-inlined row-id getter (shopListItemGetId), i.e. it knew the getter keeps r2 (multifile), where this build emits a nop there and loads r2 later; after FUN_002328b4 the flag/notify stores also use swapped scratch registers (retail r1, build r0). */
+/* NON_MATCHING: after FUN_002328b4 the pageChanged/selected stores use swapped scratch registers (retail r1 for the constant and the pointer, this build r0). The row-id getter is an inline definition: armlink inlined and removed shopListItemGetId, and retail's `mov r2, #0` before its ldrh shows the caller saw its body. */
 #include "common.h"
 #include "bible/bibleDevil.h"
 #include "code/Code0029.h"
@@ -37,6 +37,12 @@ struct BibleDevilScreen {
 };
 struct BibleDevilTasks { void *work; s32 selected; };
 
+/* The row's id (a getter armlink inlined and removed). */
+static __inline u16 shopListItemGetId(const BibleDevilRow *row)
+{
+    return row->id;
+}
+
 extern "C" {
 
 extern BibleDevilTasks DAT_0043d9c8;
@@ -50,7 +56,6 @@ s32 gameGetNavigationState(void);
 s32 gameGetFlagByte12e8(void);
 void FUN_00233240(BibleDevilWidget *, s32);
 s32 flaggedValueHolderGetTotal(void *);
-u16 shopListItemGetId(const BibleDevilRow *);
 s32 FUN_0029ce60(u16, s32, s32, s32, s32);
 void messageBannerInitSelection(s32, s32);
 void messageTargetSetValue(s32, s32);

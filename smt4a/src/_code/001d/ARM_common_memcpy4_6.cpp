@@ -9,7 +9,7 @@ typedef struct Value6 {
     /* 0x04 */ u16 half;
 } Value6;
 
-void FUN_002bd808(Value6 *dest, const Value6 *src)
+void ARM_common_memcpy4_6(Value6 *dest, const Value6 *src)
 {
     dest->word = src->word;
     dest->half = src->half;

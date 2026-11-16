@@ -27,7 +27,7 @@ typedef char MapMenuActionOffsets[
     offsetof(MapMenuActionRecord, action) == 0x21 &&
     offsetof(MapMenuActionRecord, destination) == 0x54 ? 1 : -1];
 extern "C" {
-void FUN_001d1438(MapMenuDestination *, const MapMenuDestination *);
+void ARM_common_memcpy4_6(MapMenuDestination *, const MapMenuDestination *);
 void FUN_004b7a08(MapMenuActionWork *);
 void FUN_004b6bc4(MapMenuActionWork *, s32, s32);
 
@@ -42,14 +42,14 @@ void FUN_004b726c(MapMenuActionWork *work, const MapMenuActionRecord *record)
     switch (record->action) {
     case 1:
         destination.values[0] = record->destination.values[0];
-        FUN_001d1438(&work->destination, &destination);
+        ARM_common_memcpy4_6(&work->destination, &destination);
         work->flags |= 0x10;
         break;
     case 2:
         destination.values[0] = record->destination.values[0];
         destination.values[1] = record->destination.values[1];
         destination.values[2] = record->destination.values[2];
-        FUN_001d1438(&work->destination, &destination);
+        ARM_common_memcpy4_6(&work->destination, &destination);
         work->flags |= 0x100010;
         MapMenuMotion reset;
         reset.mode = 5;

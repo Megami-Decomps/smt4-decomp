@@ -22,7 +22,7 @@ typedef char MovieAdpcmDecoderLayout[
 extern "C" {
 extern MovieAdpcmAllocator DAT_00589508;
 u32 FUN_00439e0c(u32 bytes, s32 encoding, s32 channels);
-void FUN_001d1438(MovieAdpcmContext *destination, const void *source);
+void ARM_common_memcpy4_6(MovieAdpcmContext *destination, const void *source);
 void nn_snd_CTR_DecodeAdpcmData(const u8 *source, s16 *destination, const void *coefficients, MovieAdpcmContext *context, u32 samples);
 
 u32 FUN_00512f0c(MovieAdpcmDecoder *decoder, const u8 *data, u32 bytes)
@@ -56,11 +56,11 @@ u32 FUN_00512f0c(MovieAdpcmDecoder *decoder, const u8 *data, u32 bytes)
     decoder->outputBytes = outputBytes;
     MovieAdpcmContext context;
     if (channels == 1) {
-        FUN_001d1438(&context, data + 32);
+        ARM_common_memcpy4_6(&context, data + 32);
         nn_snd_CTR_DecodeAdpcmData(data + 38, decoder->output, data, &context, samples);
     } else {
         for (u32 channel = 0; channel < channels; ++channel, data += channelBytes) {
-            FUN_001d1438(&context, data + 32);
+            ARM_common_memcpy4_6(&context, data + 32);
             nn_snd_CTR_DecodeAdpcmData(data + 38, decoder->channelBuffer, data, &context, samples);
             const s16 *source = decoder->channelBuffer + 16;
             s16 *destination = decoder->output + channel;

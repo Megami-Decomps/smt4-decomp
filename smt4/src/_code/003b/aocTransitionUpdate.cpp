@@ -22,7 +22,7 @@ void gameCopyPersistentSave();
 void gameSynchronizeMapState(ContentTransition *);
 void gameJumpRequestClear();
 void buttonHelpSelectByProgress(ContentTransition *);
-void FUN_002bd808(ShortJumpDestination *, const ShortJumpDestination *);
+void ARM_common_memcpy4_6(ShortJumpDestination *, const ShortJumpDestination *);
 }
 
 static inline void saveSourcePosition(ContentTransition *scene)
@@ -52,7 +52,7 @@ extern "C" void aocTransitionUpdate(ContentTransition *scene)
             saveSourcePosition(scene);
             ShortJumpDestination destination = {(u16)DAT_0049fd14.map, (u16)DAT_0049fd14.area,
                                                  (u16)DAT_0049fd14.place};
-            FUN_002bd808(&scene->destination, &destination);
+            ARM_common_memcpy4_6(&scene->destination, &destination);
             scene->flags |= 0x10;
             if (DAT_0049fd14.map < 200)
                 scene->flags |= 0x100100;

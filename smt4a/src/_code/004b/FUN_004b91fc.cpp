@@ -36,14 +36,14 @@ typedef struct SceneSetupWork {
 s32 sceneTexturesAreLoaded(void);
 s32 isFlag1F0Set(void *flags);
 SceneScriptProcess *FUN_00275bc8(void *data, u32 size);
-void FUN_001d1438(void *position, void *rotation);
+void ARM_common_memcpy4_6(void *position, void *rotation);
 void mikadoLoadSceneResources(SceneSetupWork *work);
 void FUN_004b7d88(SceneSetupWork *work);
 
 /* Places the scene, moves setup on to step 2 and clears the pending flag. */
 static __inline void sceneSetupPlace(SceneSetupWork *scene)
 {
-    FUN_001d1438(scene->position, scene->rotation);
+    ARM_common_memcpy4_6(scene->position, scene->rotation);
     mikadoLoadSceneResources(scene);
     scene->stepAndFrame = 2;
     scene->flags &= ~0x10;

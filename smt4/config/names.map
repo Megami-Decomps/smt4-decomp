@@ -4855,3 +4855,4 @@
 002be56c drawTextAtSnappedRectangle
 00388f3c aocEnumerateContentRecords
 003c8c2c fusionClassifyPair
+002bd808 ARM_common_memcpy4_6

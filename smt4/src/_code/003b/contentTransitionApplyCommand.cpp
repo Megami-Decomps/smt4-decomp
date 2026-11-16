@@ -11,7 +11,7 @@ struct ContentTransitionCommand {
 extern "C" {
 void FUN_0022b29c(ContentTransition *transition, s32 sourceMap, u32 destinationMap);
 void gameSynchronizeMapState(ContentTransition *transition);
-void FUN_002bd808(ShortJumpDestination *destination, const ShortJumpDestination *source);
+void ARM_common_memcpy4_6(ShortJumpDestination *destination, const ShortJumpDestination *source);
 
 void contentTransitionApplyCommand(ContentTransition *transition, const void *commandContext)
 {
@@ -28,14 +28,14 @@ void contentTransitionApplyCommand(ContentTransition *transition, const void *co
         return;
     case 1:
         destination.map = command->destination.map;
-        FUN_002bd808(&transition->destination, &destination);
+        ARM_common_memcpy4_6(&transition->destination, &destination);
         flags = transition->flags | 0x10;
         break;
     case 2:
         destination.map = command->destination.map;
         destination.area = command->destination.area;
         destination.place = command->destination.place;
-        FUN_002bd808(&transition->destination, &destination);
+        ARM_common_memcpy4_6(&transition->destination, &destination);
         transition->flags |= 0x100010;
         transition->phase = 0;
         transition->state = 5;

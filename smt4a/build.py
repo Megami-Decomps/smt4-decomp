@@ -27,6 +27,7 @@ import shlex
 import shutil
 import subprocess
 import sys
+import threading
 import time
 from pathlib import Path
 
@@ -143,6 +144,8 @@ def symbol_addresses():
     return _SYMBOL_ADDRESSES
 
 
+# Tables the compile threads share: built under the lock, published only when complete.
+_CACHE_LOCK = threading.Lock()
 _INLINED = None
 
 
@@ -155,9 +158,11 @@ def inlined_bodies():
     ones armlink then removed as unreferenced (no copy left in the image) from
     `config/inlined.txt`: `<symbol> = 0x<instruction>; // <call sites>`."""
     global _INLINED
-    if _INLINED is None:
+    with _CACHE_LOCK:
+        if _INLINED is not None:
+            return _INLINED
         import struct
-        _INLINED = {}
+        inlined = {}
         for unit in PROJECT["units"]:
             target = ROOT / unit["target"]
             if unit.get("thumb") or unit["size"] not in (4, 8) or not target.exists():
@@ -170,19 +175,21 @@ def inlined_bodies():
             if unit["size"] == 4:
                 # An empty function (`bx lr`): armlink's --inline leaves a NOP where it was called.
                 if struct.unpack_from("<I", data, body["offset"])[0] == 0xE12FFF1E:
-                    _INLINED[unit["function"]] = 0xE1A00000
+                    inlined[unit["function"]] = 0xE1A00000
                 continue
             word, ret = struct.unpack_from("<II", data, body["offset"])
             svc = word >> 24 & 0xF == 0xF
             if (ret == 0xE12FFF1E and word >> 28 == 0xE and word not in (0xE1A00000, 0xE320F000)
                     and word >> 25 & 7 != 5 and (svc or 15 not in (word >> 16 & 0xF, word >> 12 & 0xF))):
-                _INLINED[unit["function"]] = word
+                inlined[unit["function"]] = word
         listed = ROOT / "config" / "inlined.txt"
         if listed.exists():
             for line in listed.read_text(encoding="utf-8").splitlines():
                 match = re.match(r"^(\S+) = 0x([0-9a-fA-F]{8});", line)
                 if match:
-                    _INLINED[match[1]] = int(match[2], 16)
+                    inlined[match[1]] = int(match[2], 16)
+        # Publish only the finished table: compile threads read it while another may still build it.
+        _INLINED = inlined
     return _INLINED
 
 
@@ -195,10 +202,12 @@ def veneer_stubs():
     armlink sends every ARM `b` and conditional `bl` to a Thumb function through it (they cannot
     change the instruction set), so retail's relocation names the stub."""
     global _VENEERS
-    if _VENEERS is None:
+    with _CACHE_LOCK:
+        if _VENEERS is not None:
+            return _VENEERS
         import struct
         by_address = {int(unit["address"], 16): unit for unit in PROJECT["units"]}
-        _VENEERS = {}
+        veneers = {}
         for unit in PROJECT["units"]:
             target = ROOT / unit["target"] if "target" in unit else None
             thumb = by_address.get(int(unit["address"], 16) + 8)
@@ -207,7 +216,8 @@ def veneer_stubs():
             data = target.read_bytes()
             body = next((s for s in read_elf(data)[0] if s["name"] == ".text"), None)
             if body and body["size"] >= 8 and struct.unpack_from("<II", data, body["offset"]) == (0xE28FC001, 0xE12FFF1C):
-                _VENEERS[thumb["function"]] = unit["function"]
+                veneers[thumb["function"]] = unit["function"]
+        _VENEERS = veneers
     return _VENEERS
 
 

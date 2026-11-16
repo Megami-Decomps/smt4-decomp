@@ -5,7 +5,7 @@ extern "C" {
 MapJumpRequest *gameBlockGetArea27E98(void);
 void FUN_004731d8(void);
 void FUN_00324c48(s32, s32, s32, f32, f32, f32, f32, f32);
-void FUN_001d1438(MapJumpDestination *, const MapJumpDestination *);
+void ARM_common_memcpy4_6(MapJumpDestination *, const MapJumpDestination *);
 extern GameStateA g_gameState;
 }
 
@@ -31,7 +31,7 @@ extern "C" void FUN_004b9118(MapJumpTransition *work)
         MapJumpDestination destination;
         mapJumpDestinationClear(&destination);
         destination.map = request->map;
-        FUN_001d1438(&work->destination, &destination);
+        ARM_common_memcpy4_6(&work->destination, &destination);
         work->flags |= 0x10;
         break;
     }

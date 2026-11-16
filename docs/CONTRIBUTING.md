@@ -234,6 +234,11 @@ Every match must be one a programmer could have written for a reason.
   `vstr s0, [r0, #N]`, a `mov r0, #0` stub, an SDK svc wrapper's `svc N`. A lone instruction like
   that in the middle of retail code is such a call: write the call. `build.py` and `fdiff` do the
   same replacement (the bodies come from the target objects; a NOP body is called, not inlined).
+  When retail schedules an unrelated instruction into the slot before that instruction (where a
+  build that calls the getter has `nop {0}` and sets the register after it), the caller saw the
+  getter's body: write the getter as a `static __inline` function in the unit (FUN_003a72a4's
+  `shopListItemGetId`). That keeps retail's separate widening (`ldrh` then `sxth`), which a direct
+  field read would fold into `ldrsh`.
 - **`nop {0}` (`e320f000`) is the compiler's**, not the linker's: armcc places these hints itself
   in some branch and `switch` layouts. Plain C reproduces them; never infer a missing call from them.
 - **A function that starts with a NOP before its `push`** is two functions the analysis merged: a

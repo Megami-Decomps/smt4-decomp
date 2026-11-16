@@ -6925,3 +6925,4 @@
 0013c7dc jobDisplayFlushIfIdle inferred [med] Returns the pending display request, or flushes the render context when the job is shown, ready and not busy.
 00409bc8 materialUploadChangedParameterVector inferred [med] Four-float version of materialUploadChangedParameters (same MaterialParameterWork layout).
 004f5e6c btlCameraReleaseTransientResources inferred [med] Resets 11 panel slots, releases the backend, finishes the transition, frees keyed records and texture cache, clears camera flag 0x08000000, resets 50 resource slots.
+001d1438 ARM_common_memcpy4_6 inferred [high] armcc's 6-byte struct-copy helper; twin of smt4 FUN_002bd808 (same bytes).

@@ -38,7 +38,7 @@ s32 FUN_0047e150(AocMainAObjC *);
 void helpResourcesRelease(AocMainAObjC *);
 void gameDataSaveSetValues(const MapReturnSaveValuesA *);
 void gameDataCopySaveToWork();
-void FUN_001d1438(void *, const u16 *);
+void ARM_common_memcpy4_6(void *, const u16 *);
 void FUN_004b7a08(Menu4C *);
 void FUN_004731d8();
 void FUN_004b7d88(Menu4C *);
@@ -65,7 +65,7 @@ void FUN_004b8f18(Menu4C *work)
                 location[0] = static_cast<u16>(g_mapSelection.id);
                 location[1] = static_cast<u16>(g_mapSelection.kind);
                 location[2] = static_cast<u16>(g_mapSelection.counter);
-                FUN_001d1438(work->value42, location);
+                ARM_common_memcpy4_6(work->value42, location);
                 work->flags |= 0x10;
                 if (g_mapSelection.id < 200)
                     work->flags |= 0x100100;

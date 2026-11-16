@@ -30,7 +30,7 @@ typedef char AccelerometerStateSizeCheck[sizeof(AccelerometerState) == 0x60 ? 1 
 extern "C" {
 extern AccelerometerState g_accelerometerState;
 void *FUN_0011c454(void);
-void FUN_002bd808(u16 *value);
+void ARM_common_memcpy4_6(u16 *value);
 bool nn_hid_CTR_AccelerometerReader_ReadLatest(nn::hid::CTR::AccelerometerReader *reader,
                                              AccelerometerRawSample *sample);
 void nn_hid_CTR_AccelerometerReader_ConvertToAcceleration(nn::hid::CTR::AccelerometerReader *reader,
@@ -57,7 +57,7 @@ extern "C" s32 accelerometerUpdate(void)
         reader.capacity = state->sensitivity;
         state->calibrationPending = 0;
     }
-    FUN_002bd808(&state->sample.auxiliary);
+    ARM_common_memcpy4_6(&state->sample.auxiliary);
     state->previous = state->acceleration;
     nn_hid_CTR_AccelerometerReader_ReadLatest(&reader, &state->sample);
     if (state->transformEnabled == 1) {

@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002bd808(unsigned int *);
+int ARM_common_memcpy4_6(unsigned int *);
 
 extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
-/* Supplied declaration required: FUN_002bd808. */
+/* Supplied declaration required: ARM_common_memcpy4_6. */
 
 
 unsigned int
@@ -65,7 +65,7 @@ nn_snd_CTR_Dspsnd_AppendChannelNextBuffer(int param_1,int param_2,unsigned int *
         puVar6[param_4 * 5 + 0x13] = ((temp_v3 + 0xc000000) >> 0x10) | (temp_v3 << 0x10);
         puVar6[param_4 * 5 + 0x14] = (temp_v4 >> 0x10) | (temp_v4 << 0x10);
         if (param_3[2] != 0) {
-          FUN_002bd808(puVar6 + param_4 * 5 + 0x15);
+          ARM_common_memcpy4_6(puVar6 + param_4 * 5 + 0x15);
           *(unsigned char *)((int)puVar6 + temp_v0 + 0x5a) = 1;
         }
         else {

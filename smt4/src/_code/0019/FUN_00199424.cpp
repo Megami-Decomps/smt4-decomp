@@ -1,4 +1,4 @@
-/* NON_MATCHING (b1454): needs inlined.txt row `btlMainStateGetPartyCaptureId = 0xe1d00bf4` (ldrsh r0,[r0,#180]; retail site 0x199660, after btlGetMainState + two hook nops); with it the rows match (249/249) and only the page-0 tail cross-jump (retail `beq 1f4; add r1,r1,#1` shared with the other page, build `bne 1f0; b 1f4`) and branch targets differ. */
+/* NON_MATCHING (b1454): only the page-count tails' cross-jump differs (retail keeps `beq 1f4; add r1,r1,#1` in the page != 0 branch and the page-0 branch jumps into it; this build keeps it in the page-0 branch) and the branch targets after it. Swapped branches, a ternary base, an entries pointer, `continue` and `total += x != 0` forms keep or worsen it. btlMainStateGetPartyCaptureId is linker-inlined (config/inlined.txt). */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "AsdSDK/AsdMemUtil.h"
