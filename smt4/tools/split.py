@@ -30,16 +30,17 @@ import argparse
 import bisect
 import hashlib
 import json
+import os
 import re
 import struct
 import sys
 import time
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(os.path.abspath(__file__)).parent))
 import n3ds  # noqa: E402
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(os.path.abspath(__file__)).parent.parent
 MAX_FUNCTION_BYTES = 1 << 20
 # The 3DS target: Tag_CPU_name, Tag_CPU_arch (v6K), Tag_FP_arch (VFPv2).
 CPU = ("MPCore", 9, 2)

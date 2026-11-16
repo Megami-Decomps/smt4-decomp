@@ -34,15 +34,16 @@ import argparse
 import bisect
 import importlib.util
 import json
+import os
 import re
 import struct
 import subprocess
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(os.path.abspath(__file__)).parent.parent
 GAMES = ("smt4", "smt4a")
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(os.path.abspath(__file__)).parent))
 
 
 def module(game, name):

@@ -21,10 +21,11 @@ names starting with `asd`. Run it again after naming passes.
 import argparse
 import importlib.util
 import json
+import os
 import re
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(os.path.abspath(__file__)).parent.parent
 GAMES = ("smt4", "smt4a")
 THIRD_PARTY = re.compile(r"^(?:nn_|nw_|nngx|nnos|nnsnd|libc_|rt_|__|svc[A-Z]|online|nex|NEX|mwmo|mobiclip|Mobiclip"
                          r"|vldtr_|streamReader|streamWriter|sharedRef|wstr|_Z\w*(?:2nn|2nw)"

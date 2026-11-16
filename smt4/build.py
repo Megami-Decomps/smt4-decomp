@@ -30,7 +30,7 @@ import sys
 import time
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(os.path.abspath(__file__)).parent
 PROJECT = json.loads((ROOT / "config" / "project.json").read_text())
 UNITS_BY_FUNCTION = {unit["function"]: unit for unit in PROJECT["units"]}
 BUILD = ROOT / "build"
@@ -540,7 +540,7 @@ def build(args):
     wanted = [a for a in args.paths]
     if wanted:
         by_object = {unit["object"]: unit for unit in units}
-        relative = (Path(os.path.relpath(Path(w).resolve(), ROOT)).as_posix() for w in wanted)
+        relative = (Path(os.path.relpath(os.path.abspath(w), ROOT)).as_posix() for w in wanted)
         units = [by_object[w] for w in relative if w in by_object]
     if args.only:
         units = [unit for unit in units if args.only in unit["source"]]

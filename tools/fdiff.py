@@ -16,12 +16,13 @@ import difflib
 import glob
 import importlib.util
 import json
+import os
 import re
 import subprocess
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(os.path.abspath(__file__)).parent.parent
 
 
 def objdump(game):
@@ -31,11 +32,20 @@ def objdump(game):
     return found[0]
 
 
+def run_objdump(tool, *args):
+    """objdump's stdout. An object objdump cannot read must stop the diff: an empty listing on both
+    sides would compare equal and print IDENTICAL."""
+    done = subprocess.run([tool, *map(str, args)], capture_output=True, text=True, errors="replace")
+    if done.returncode or not done.stdout.strip():
+        raise SystemExit(f"objdump failed on {args[-1]}: {(done.stderr or 'no output').strip()}")
+    return done.stdout
+
+
 def listing(tool, obj):
     """[text] for .text: one row per instruction or data word, relocations folded in. The
     objects' mapping symbols ($a/$t/$d) tell objdump ARM, Thumb and pool words apart."""
     # -z: print zero words (a 0.0f pool word) instead of eliding them as "...".
-    out = subprocess.run([tool, "-drz", "-j", ".text", "--no-show-raw-insn", str(obj)], capture_output=True, text=True).stdout
+    out = run_objdump(tool, "-drz", "-j", ".text", "--no-show-raw-insn", obj)
     rows = []
     for line in out.splitlines():
         reloc = re.match(r"\s+[0-9a-f]+: (R_ARM_\w+)\s+(\S+)", line)
@@ -56,7 +66,7 @@ def listing(tool, obj):
 
 def text_bytes(tool, obj):
     """The raw bytes of .text."""
-    out = subprocess.run([tool, "-s", "-j", ".text", str(obj)], capture_output=True, text=True).stdout
+    out = run_objdump(tool, "-s", "-j", ".text", obj)
     data = bytearray()
     for line in out.splitlines():
         m = re.match(r"\s+[0-9a-f]+ ((?:[0-9a-f]{2,8} ?){1,4})", line)
@@ -166,6 +176,9 @@ def main():
     tool = objdump(args.game)
     retail = listing(tool, ROOT / args.game / unit["target"])
     built = listing(tool, ROOT / args.game / unit["object"])
+    for side, rows in (("retail", retail), ("built", built)):
+        if not rows:
+            raise SystemExit(f"{args.game} {args.function}: the {side} listing is empty, nothing to compare")
     data_as_bytes(retail, built, text_bytes(tool, ROOT / args.game / unit["target"]), text_bytes(tool, ROOT / args.game / unit["object"]))
     by_section = data_relocations(retail, built)
     integer_words(retail, built)

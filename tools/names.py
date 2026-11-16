@@ -20,15 +20,16 @@ reruns `build.py split` for each game it changed (the dump has to be in `orig/`)
 
 import argparse
 import json
+import os
 import re
 import subprocess
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(os.path.abspath(__file__)).parent))
 from cxxnames import file_stem  # noqa: E402
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(os.path.abspath(__file__)).parent.parent
 IDENT = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 
 

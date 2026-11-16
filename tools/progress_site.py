@@ -40,10 +40,10 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(os.path.abspath(__file__)).parent))
 from cxxnames import demangle  # noqa: E402
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(os.path.abspath(__file__)).parent.parent
 
 GAMES = {
     "smt4": {"title": "Shin Megami Tensei IV", "short": "IV", "theme": "iv",

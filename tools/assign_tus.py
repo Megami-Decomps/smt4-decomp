@@ -31,13 +31,14 @@ import argparse
 import bisect
 import collections
 import json
+import os
 import random
 import re
 import struct
 import sys
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent.parent
+REPO = Path(os.path.abspath(__file__)).parent.parent
 # The build trees: `c:\SMT4\XRD686\` (IV) and `c:\SMT4F\SMT4F\` (Apocalypse). Each game's own sources
 # sit below `sdds4\program\` (IV 1.0, Apocalypse) or `sdds4\Patch\` (IV 1.2.0), the engine (`AsdSDK\`)
 # beside or below it; both prefixes are dropped so one file has one path in both games.
@@ -185,7 +186,7 @@ def main():
     parser.add_argument("--out", help="default: <project>/config/tus.json")
     parser.add_argument("--holdout", type=float, help="hide this share of anchors and report how many come back right")
     args = parser.parse_args()
-    root = (REPO / args.project).resolve()
+    root = Path(os.path.abspath(REPO / args.project))
     sys.path.insert(0, str(root / "tools"))
     from n3ds import load_code
 

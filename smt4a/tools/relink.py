@@ -38,6 +38,7 @@ import argparse
 import bisect
 import hashlib
 import json
+import os
 import re
 import shutil
 import struct
@@ -46,8 +47,8 @@ import sys
 import time
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+ROOT = Path(os.path.abspath(__file__)).parent.parent
+sys.path.insert(0, str(Path(os.path.abspath(__file__)).parent))
 import n3ds  # noqa: E402
 import split  # noqa: E402
 

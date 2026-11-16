@@ -26,12 +26,13 @@ import argparse
 import collections
 import importlib.util
 import json
+import os
 import re
 import struct
 import sys
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent.parent
+REPO = Path(os.path.abspath(__file__)).parent.parent
 GAMES = ("smt4", "smt4a")
 SYMBOL = re.compile(r"(\S+) = \S+:0x([0-9a-fA-F]+); // type:function size:0x([0-9a-fA-F]+) mode:(\w+)")
 
