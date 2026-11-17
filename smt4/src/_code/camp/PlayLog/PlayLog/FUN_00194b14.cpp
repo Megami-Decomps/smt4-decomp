@@ -1,13 +1,7 @@
 /* NON_MATCHING: draws the camp play log list rows (cursor frame, entry name and its value as text, number or play time h/m); written from the decompilation, argument evaluation and the float conversions of the text positions not compared with retail */
 #include "gamedata/DataTable.h"
 #include "code/Code0029.h"
-
-struct PlayLogFrame {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-    /* 0x0C */ s16 *size;
-};
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct PlayLogEntry {
     /* 0x00 */ u8 unk00[2];
@@ -49,7 +43,6 @@ void uiDrawListScrollBar(void *list, s32 x, s32 a, s32 table, s32 s0, s32 s1, s3
                   s32 barC, s32 barA, s32 barB, s32 flags, s32 extra);
 void FUN_002907c4(char *out, u32 value);
 void texDrawCompositeSprite(u32 layer, u32 table, u32 sprite, s32 x, s32 y, u32 flags);
-PlayLogFrame *asdTMTexTableEntryAt(u32 table, u32 index);
 s32 vec2GetXInt(void *row);
 void textFormatBuffer(char *out, const char *format, ...);
 void textDrawString(u32 layer, u32 color, const char *text, f32 x, f32 y);
@@ -65,7 +58,7 @@ void FUN_00194b14(void)
         if ((s32)FUN_0029d644(log->list) - 1 == row) {
             uiDrawListScrollBar(log->list, x, 0, PLAYLOG_FONT_TABLE, 7, 8, 9, 3, 5, 4, 6, log->barC, log->barA, log->barB, 0xB, 0);
         }
-        PlayLogFrame *frame = asdTMTexTableEntryAt(PLAYLOG_FONT_TABLE, row + 0x15);
+        TextureTableEntryIV *frame = asdTMTexTableEntryAt(PLAYLOG_FONT_TABLE, row + 0x15);
         texDrawCompositeSprite(2, PLAYLOG_FONT_TABLE, 1, frame->x + x, frame->y, 0xB);
 
         u32 entryId = *(s16 *)((u8 *)log + PLAYLOG_IDS_OFFSET + (resourceRunOperationIfUnblocked(log->list) + row) * 2);
@@ -76,12 +69,12 @@ void FUN_00194b14(void)
         if (entry == NULL)
             continue;
 
-        PlayLogFrame *nameFrame = asdTMTexTableEntryAt(PLAYLOG_FONT_TABLE, 0x13);
+        TextureTableEntryIV *nameFrame = asdTMTexTableEntryAt(PLAYLOG_FONT_TABLE, 0x13);
         char text[64];
         textFormatBuffer(text, "%s", entry->name);
         textDrawString(2, PLAYLOG_NAME_COLOR, text, (f32)(nameFrame->x + frame->x + x), (f32)(nameFrame->y + frame->y));
 
-        PlayLogFrame *valueFrame = asdTMTexTableEntryAt(PLAYLOG_FONT_TABLE, 0x14);
+        TextureTableEntryIV *valueFrame = asdTMTexTableEntryAt(PLAYLOG_FONT_TABLE, 0x14);
         char first[16];
         char second[28];
         if (entry->kind != 1) {
@@ -102,7 +95,7 @@ void FUN_00194b14(void)
         }
         s32 width = fontMeasureLineAdvance(text, 2);
         textDrawString(2, PLAYLOG_VALUE_COLOR, text,
-                     (f32)(frame->x + x + (valueFrame->x + *valueFrame->size - width)),
+                     (f32)(frame->x + x + (valueFrame->x + valueFrame->placement->width - width)),
                      (f32)(frame->y + valueFrame->y));
     }
 }

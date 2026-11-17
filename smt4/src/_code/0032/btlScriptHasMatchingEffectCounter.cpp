@@ -1,4 +1,4 @@
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
@@ -18,7 +18,7 @@ u32 btlScriptHasMatchingEffectCounter()
     for (s32 index = first; index < first + count; ++index) {
         BtlEntry *entry = &btlGetMainState()->entries[index];
         if (!(entry->flags & BTL_ENTRY_FLAG_PRESENT) && (entry->flags & BTL_ENTRY_FLAG_ACTIVE) &&
-            !(entry->flags & BTL_ENTRY_FLAG_BLOCKED) && entry->id == id) {
+            !(entry->flags & BTL_ENTRY_FLAG_BLOCKED) && entry->data.id == id) {
             if (entry->effects.primary > 0 || entry->effects.secondary > 0) {
                 scrSetResult(1);
                 return 1;
@@ -27,7 +27,7 @@ u32 btlScriptHasMatchingEffectCounter()
     }
     if (btlGetMainState()->hasActiveEntry) {
         BtlEntry *entry = btlMainFindActiveEntry(btlGetMainState());
-        if (entry != NULL && entry->id == id) {
+        if (entry != NULL && entry->data.id == id) {
             if (entry->effects.primary > 0 || entry->effects.secondary > 0) {
                 scrSetResult(1);
                 return 1;

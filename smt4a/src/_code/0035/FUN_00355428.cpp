@@ -4,6 +4,7 @@
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
 #include "util/BitsAndBytes.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ int textDrawString(...);
 int effectRenderTransformedInstance(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(...);
-int asdTMTexTableEntryAt(...);
 int pairSetHalves(...);
 int FUN_003799d0(...);
 int SBORROW4(...);
@@ -110,7 +110,7 @@ void FUN_00355428(void)
       temp_v11 = temp_v11 + -400.0f;
     }
     if (*(int *)(g_mapDepart + 0xc) == 0) {
-      temp_v3 = asdTMTexTableEntryAt(8,0x10b);
+      temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0x10b));
       temp_v14 = (int)temp_v11;
       temp_v7 = 0x107;
       do {
@@ -137,11 +137,11 @@ void FUN_00355428(void)
     temp_v3 = 0;
     if ((*(unsigned int *)(temp_v1 + 0xc) < 2) || (*(char *)(temp_v1 + 0x4c8) == '\x01')) {
       temp_v7 = panelInitBlockB00();
-      temp_v25 = asdTMTexTableEntryAt(0x13,0x11ce);
-      temp_v26 = asdTMTexTableEntryAt(0x13,0x11ca);
-      temp_v27 = asdTMTexTableEntryAt(0x13,0x11cb);
-      temp_v28 = asdTMTexTableEntryAt(0x13,0x11cc);
-      temp_v29 = asdTMTexTableEntryAt(0x13,0x11cd);
+      temp_v25 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,0x11ce));
+      temp_v26 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,0x11ca));
+      temp_v27 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,0x11cb));
+      temp_v28 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,0x11cc));
+      temp_v29 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,0x11cd));
       efctSetSpeed();
       temp_v2 = 0 < *(int *)(temp_v1 + 0xbc);
       if (0 < *(int *)(temp_v1 + 0xc0)) {
@@ -175,7 +175,7 @@ void FUN_00355428(void)
         }
         if (!temp_v10 && temp_v5 < 0 == (temp_v8 >= 10000 && SBORROW4(temp_v8,9999))) {
           temp_v8 = temp_v14 + 1;
-          temp_v14 = asdTMTexTableEntryAt(0x13,temp_v14 + 0x11cf);
+          temp_v14 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,temp_v14 + 0x11cf));
           VectorSignedToFloat(*(short *)(temp_v14 + 8) + temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v14 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
           textDrawString(2,0xffffffff,temp_v20 + temp_v3 * 0x10);
@@ -252,13 +252,13 @@ void FUN_00355428(void)
     temp_v3 = 0;
     if (temp_v3 < DAT_005f1d72) {
       do {
-        temp_v14 = asdTMTexTableEntryAt(0x13,temp_v17 + temp_v3);
-        temp_v9 = asdTMTexTableEntryAt(0x13,temp_v16 + temp_v3);
-        temp_v8 = asdTMTexTableEntryAt(0x13,0x1101);
-        temp_v5 = asdTMTexTableEntryAt(0x13,0x1100);
-        temp_v23 = asdTMTexTableEntryAt(0x13,0x1104);
-        temp_v22 = asdTMTexTableEntryAt(0x13,0x1102);
-        temp_v21 = asdTMTexTableEntryAt(0x13,0x1103);
+        temp_v14 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,temp_v17 + temp_v3));
+        temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,temp_v16 + temp_v3));
+        temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,0x1101));
+        temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,0x1100));
+        temp_v23 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,0x1104));
+        temp_v22 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,0x1102));
+        temp_v21 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,0x1103));
         temp_v7 = temp_v3 * 2;
         temp_v12 = (float)VectorSignedToFloat((int)*(short *)(temp_v14 + 8),(unsigned char)(in_fpscr >> 0x16) & 3
                                            );
@@ -334,13 +334,13 @@ void FUN_00355428(void)
         temp_v19 = 0x1146;
         temp_v21 = 0x114c;
 LAB_00355f74:
-        temp_v14 = asdTMTexTableEntryAt(0x13,temp_v19);
-        temp_v9 = asdTMTexTableEntryAt(0x13,temp_v21);
-        temp_v8 = asdTMTexTableEntryAt(0x13,0x1101);
-        temp_v5 = asdTMTexTableEntryAt(0x13,0x1100);
-        temp_v24 = asdTMTexTableEntryAt(0x13,0x1104);
-        temp_v22 = asdTMTexTableEntryAt(0x13,0x1102);
-        temp_v23 = asdTMTexTableEntryAt(0x13,0x1103);
+        temp_v14 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,temp_v19));
+        temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,temp_v21));
+        temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,0x1101));
+        temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,0x1100));
+        temp_v24 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,0x1104));
+        temp_v22 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,0x1102));
+        temp_v23 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,0x1103));
         temp_v7 = temp_v3 * 2;
         temp_v12 = (float)VectorSignedToFloat((int)*(short *)(temp_v14 + 8),(unsigned char)(in_fpscr >> 0x16) & 3
                                            );

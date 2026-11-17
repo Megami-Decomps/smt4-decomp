@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "event/2dEvent/SmokeFade.h"
 #include "camp/UIFade/UIFade.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -56,7 +57,6 @@ extern int g_camp; /* 0x57f108 */
 extern unsigned short ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 extern int gameGetPlayerData(void);
-extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: gameGetSlotRecord. */
@@ -251,7 +251,7 @@ void FUN_001ffe84(void)
     }
   }
   temp_v9[0] = '\0';
-  temp_v7 = asdTMTexTableEntryAt(0x14,0x56d);
+  temp_v7 = reinterpret_cast<unsigned int>(asdTMTexTableEntryAt(0x14,0x56d));
   temp_v4 = temp_v8 + 0x1ec;
   FUN_003450d4(temp_v4,temp_v7,temp_v8 + 0x1b3e,(int)*(short *)(temp_v8 + 0x1b34),
                (int)*(short *)(temp_v8 + 0x1b36),(int)*(short *)(temp_v8 + 0x1b38),temp_v9,0,1);

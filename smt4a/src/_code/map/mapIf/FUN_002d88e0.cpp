@@ -1,11 +1,10 @@
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 #include "event/bustupEvent/BustupTex.h"
 
 namespace {
 struct MapIfSpawnPose { f32 x, y, z, heading; };
 }
 extern "C" {
-extern MapIfStateA *g_mapIf;
 extern void *g_handleRegistry;
 s32 textFormatBuffer(char *output, const char *format, ...);
 void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
@@ -22,16 +21,15 @@ void modelPlayClip(u32 handle, s32 first, s32 second, f32 x, f32 y);
 // Create the map's lmap fast model at the supplied position and heading.
 void FUN_002d88e0(MapIfSpawnPose pose)
 {
-    MapIfStateA *mapIf = g_mapIf;
-    MapIfSlotA *slot = &mapIf->slots[0];
-    MapIfFastModelState *state = reinterpret_cast<MapIfFastModelState *>(slot);
-    state->active = 1;
-    state->first = 0;
-    state->second = 0;
-    state->position[0] = pose.x;
-    state->position[1] = pose.y;
-    state->position[2] = pose.z;
-    state->heading = pose.heading;
+    MapIfStateA *mapIf = g_mapIf.state;
+    MapIfModelSlotA *slot = &mapIf->slots[0];
+    slot->active = 1;
+    slot->state = 0;
+    slot->timer = 0;
+    slot->position.x = pose.x;
+    slot->position.y = pose.y;
+    slot->position.z = pose.z;
+    slot->position.w = pose.heading;
     char path[128];
     textFormatBuffer(path, "map/all/lmap_fast.bam");
     MapIfResource *resource = static_cast<MapIfResource *>(
@@ -43,8 +41,8 @@ void FUN_002d88e0(MapIfSpawnPose pose)
     moriModelContentLoadBody(slot->resource, 0);
     u32 handle = slot->resource->handle;
     handleRegistryRegisterObject(g_handleRegistry, handle);
-    controllerSetDestination(handle, state->position);
-    controllerSetRotationEulerDegrees(handle, 0.0f, state->heading, 0.0f);
+    controllerSetDestination(handle, &slot->position.x);
+    controllerSetRotationEulerDegrees(handle, 0.0f, slot->position.w, 0.0f);
     controllerSetPosition(handle, 50.0f, 50.0f, 50.0f);
     modelPlayClip(handle, 0, 2, 0.0f, 0.0f);
     asdTMTexTablePrepareNodeImage(4, 0x25);

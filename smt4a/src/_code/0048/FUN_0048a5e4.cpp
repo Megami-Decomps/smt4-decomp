@@ -2,6 +2,8 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "util/BitsAndBytes.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 // The fields of g_gameState this function uses.
@@ -50,7 +52,6 @@ typedef struct {
 } param_1_stack;
 
 extern int DAT_00587f20; /* 0x587f20 */
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 
 
@@ -65,7 +66,6 @@ extern unsigned int gameGetIndexedSlotMember(unsigned int);
 extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
-extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: libc_strcpy. */
 extern int FUN_00325064(void);
@@ -190,7 +190,7 @@ void FUN_0048a5e4(int param_1)
   if (*(char *)(param_1 + 0x205ac) != '\0') {
     temp_v2 = curveEvaluateStandard(temp_v9,2);
     temp_v14 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v5 = asdTMTexTableEntryAt(0x13,0xfb4);
+    temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,0xfb4));
     temp_v11 = (float)VectorSignedToFloat((int)*(short *)(temp_v5 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v13 = (float)VectorSignedToFloat((int)*(short *)(temp_v5 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v11 = (float)VectorSignedToFloat((int)(temp_v11 + temp_v15) +

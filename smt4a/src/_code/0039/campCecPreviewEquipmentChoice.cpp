@@ -1,10 +1,10 @@
 #include "shard/Shard0032.h"
 #include "camp/CampCec/OutfitPreview.h"
 #include "gamedata/EquipmentRecordA.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 extern StateAtF4 *g_campCecEdit;
-const OutfitPreviewEquipment *gameGetPlayerData(void);
 s32 unitMatchesAlignment(u32 itemId);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 s32 FUN_002e2114(OutfitPreview *preview);

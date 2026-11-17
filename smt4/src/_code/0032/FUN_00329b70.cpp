@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00329b70` (_code @ 0x329b70, 0xce0 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -113,7 +114,6 @@ extern int FUN_002b89a4(unsigned int);
 extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: dataTable01FindByIdWithAoc. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
-extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: soundPlaySeUnpanned. */
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
@@ -208,8 +208,8 @@ unsigned int FUN_00329b70(void)
   case 3:
     *(int *)(temp_v2 + 0x78) = *(int *)(temp_v2 + 0x78) + 1;
     temp_v7 = g_screenStateWork;
-    temp_v10 = asdTMTexTableEntryAt(0x24,0x20b);
-    temp_v14[0] = asdTMTexTableEntryAt(0x24,0x20e);
+    temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x20b));
+    temp_v14[0] = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x20e));
     temp_v0 = *(short *)(temp_v7 + 0x1e);
     pcVar14 = (char *)0x0;
     if (temp_v0 == 2) {

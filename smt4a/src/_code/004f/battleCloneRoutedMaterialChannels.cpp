@@ -3,11 +3,11 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "shard/W6_W6Match7_MaterialAnimationFlags.h"
+#include "battle/BtlEntryLookup.h"
 
 extern "C" {
 void handleSlotRelease(MaterialMergeOwner *owner, s32 slot);
 s32 idSetFindSubjectIndex(BtlMainStateA *battle, const BattleRosterRecordA *record);
-const MaterialMergeVariants *btlFindEntryBlockByMemberId(BtlMainStateA *battle, s32 group);
 MaterialMergeModel *asdMemoryAllocTraced(u32 bytes, const char *file, u32 line);
 MaterialMergeModel *modelListInit(MaterialMergeModel *model);
 void moriModelContentCopyBody(MaterialMergeModel *destination, const MaterialMergeModel *source, u32 flags);
@@ -28,13 +28,13 @@ void battleCloneRoutedMaterialChannels(MaterialMergeOwner *owner, u32 kind, s32 
     if (variant < 0) {
         variant = 0;
     }
-    const MaterialMergeVariants *variants = btlFindEntryBlockByMemberId(btlGetMainState(), group);
+    const BtlUnitDataA *variants = btlFindEntryBlockByMemberId(btlGetMainState(), group);
     if (variants == NULL) {
         return;
     }
     for (s32 originalIndex = 0; originalIndex < 50; ++originalIndex) {
         const MaterialMergeOriginal *original = &owner->models.originals[originalIndex];
-        if (variants->keys[variant] != original->key ||
+        if (variants->parts[variant] != original->key ||
             btlGetMainState()->roster[slot].modelMatch.key != original->context) {
             continue;
         }

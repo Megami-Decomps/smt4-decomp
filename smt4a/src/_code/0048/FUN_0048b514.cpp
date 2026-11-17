@@ -4,6 +4,7 @@
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxA.h"
 
 /* The menu work block (only the fields the spinner uses). */
 struct SpinnerWork {
@@ -29,12 +30,11 @@ struct FloatPoint {
 };
 
 extern "C" {
-extern u32 g_renderCtx;
 extern UiTextFontSettings g_uiTextFontSettings;
 
 u32 renderCtxPackPassFlags(s32 a, s32 b);
-void renderStackPushIndexed(u32 context, s32 index, u32 value);
-void renderCtxPopState(u32 context, s32 index);
+void renderStackPushIndexed(RenderCtxA *context, s32 index, u32 value);
+void renderCtxPopState(RenderCtxA *context, s32 index);
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite(void);
 void texDrawCompositeSprite(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);

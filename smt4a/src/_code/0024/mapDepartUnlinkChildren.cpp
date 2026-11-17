@@ -1,6 +1,7 @@
 /* Matches with -O2 (requested): built at a lower optimisation level than the game code. */
 /* Calls ptrListRemoveClearOwner for the linked child of each of the two entries, if present. */
 #include "common.h"
+#include "Model/MoriModelManager.h"
 
 extern "C" {
 
@@ -16,9 +17,6 @@ typedef struct Holder {
 } Holder;
 
 extern Holder *g_mapDepartWork;
-extern u32 g_handleRegistry;
-
-extern void ptrListRemoveClearOwner(u32 arg, void *child);
 
 void mapDepartUnlinkChildren(void)
 {

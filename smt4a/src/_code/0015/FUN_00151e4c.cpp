@@ -2,6 +2,8 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 
@@ -12,8 +14,7 @@ int efctSetSpeed(void);
 int FUN_00168bec(...);
 int FUN_001696d4(void *, int);
 int renderCtxPopState(...);
-int renderStackPushIndexed(unsigned int, int, unsigned int);
-int asdTMTexTableEntryAt(...);
+int renderStackPushIndexed(RenderCtxA *, int, unsigned int);
 int gxResetColorQuadToWhite(void);
 int VectorSignedToFloat(...);
 
@@ -39,8 +40,6 @@ typedef struct {
     unsigned int sp68; /* 0x68: local_68 */
 } param_1_stack;
 
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
@@ -60,7 +59,6 @@ extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderStackPushIndexed. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
-
 
 void FUN_00151e4c(fn_00151e4c_arg0 *param_1)
 
@@ -91,11 +89,11 @@ void FUN_00151e4c(fn_00151e4c_arg0 *param_1)
       renderCtxPopState(g_renderCtx,3);
       return;
     }
-    temp_v1 = asdTMTexTableEntryAt(0x2f,0x97);
+    temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2f,0x97));
     temp_v3 = 0;
     if (temp_v3 < param_1->field_0x20) {
       do {
-        temp_v2 = asdTMTexTableEntryAt(0x2f,temp_v3 + 0x98);
+        temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2f,temp_v3 + 0x98));
         if (param_1->field_0x18 == temp_v3) {
           texDrawCompositeSprite(2,0x2f,0x12,(int)*(short *)(temp_v2 + 8),(int)*(short *)(temp_v2 + 10),0xb);
           pvVar4 = param_1->field_0x4;
@@ -142,7 +140,7 @@ void FUN_00151e4c(fn_00151e4c_arg0 *param_1)
     if (0 < temp_v1) {
       temp_v8 = 0xc0a0000043700000;
       do {
-        temp_v1 = asdTMTexTableEntryAt(8,temp_v9[temp_v3 + temp_v4]);
+        temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,temp_v9[temp_v3 + temp_v4]));
         if (param_1->field_0x18 == temp_v4) {
           *(unsigned int *)((int)param_1->field_0x4 + 0xb0) = 10;
           positionStateSet(param_1->field_0x4,0,0xffffffff);

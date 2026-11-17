@@ -22,12 +22,12 @@ u32 FUN_00228808(s32 listedId, u32 unused, s32 mode)
             if (mode == 1)
                 chance = 85;
         } else if (!(flags & 0x20) && (flags & 0x10)) {
-            if ((unit->values[10] >> 10) == 1)
+            if ((unit->data.values[10] >> 10) == 1)
                 return 0;
             if (mode == 1)
                 chance = 85;
         }
-        if ((flags & 0x10) && unit->hp * 100 / unit->maxHp <= 40 && chance < 70)
+        if ((flags & 0x10) && unit->data.hp * 100 / unit->data.maxHp <= 40 && chance < 70)
             chance = 70;
         if (flags & 10)
             chance = static_cast<s32>(FUN_0023ea94()->partyMultiplier * static_cast<f32>(chance));

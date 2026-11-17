@@ -3,6 +3,7 @@
 #include "camp/RenderCtxA.h"
 #include "shard/S1ListPanel.h"
 #include "util/BitsAndBytes.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 void efctSetSpeed(f32 speed);
@@ -22,7 +23,7 @@ static void markerDrawBody(s32 x, s32 y, f32 speed)
 }
 
 /* Draw the marker with its local speed and restore the renderer's blend state. */
-void FUN_0041c45c(const UiScaledDrawPosition *position, const SpriteInfo *sprite)
+void FUN_0041c45c(const UiScaledDrawPosition *position, const TextureTableEntryIV *sprite)
 {
     markerDrawBody(position->x + sprite->x, position->y + sprite->y, position->speed);
 }

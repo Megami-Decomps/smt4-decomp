@@ -2,6 +2,7 @@
 #include "common.h"
 #include "gamedata/AocItemRef.h"
 #include "code/Code002a.h"
+#include "gamedata/GamePlayerData.h"
 
 class PanelWidget {
 public:
@@ -19,7 +20,6 @@ struct ListPanel {
 };
 
 extern "C" {
-u16 *gameGetPlayerData(void);
 s32 FUN_0031d174(void *list);
 void FUN_0049339c(void *rect, u32 style, s32 a, s32 b, u32 context);
 void FUN_0049368c(void *rect, s32 sprite, s32 a, s32 b, u32 context, s32 c);
@@ -71,25 +71,25 @@ extern "C" void FUN_004986b0(ListPanel *panel, u32 frameStyle)
     u16 value = 0;
     switch (PANEL_WORD(panel, 0xB40)) {
     case 0:
-        value = gameGetPlayerData()[0];
+        value = gameGetPlayerData()->equipment[0];
         break;
     case 1:
-        value = gameGetPlayerData()[1];
+        value = gameGetPlayerData()->equipment[1];
         break;
     case 2:
-        value = gameGetPlayerData()[2];
+        value = gameGetPlayerData()->equipment[2];
         break;
     case 3:
-        value = gameGetPlayerData()[3];
+        value = gameGetPlayerData()->equipment[3];
         break;
     case 4:
-        value = gameGetPlayerData()[4];
+        value = gameGetPlayerData()->equipment[4];
         break;
     case 5:
-        value = gameGetPlayerData()[5];
+        value = gameGetPlayerData()->equipment[5];
         break;
     case 6:
-        value = gameGetPlayerData()[6];
+        value = gameGetPlayerData()->equipment[6];
     }
     headerValue.id = value;
     FUN_00495b04(panel, 0, 0, &headerValue);

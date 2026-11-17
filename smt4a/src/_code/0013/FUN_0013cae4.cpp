@@ -1,17 +1,13 @@
 /* NON_MATCHING: all retail operations match except the 1.0f load is scheduled two instructions too early before the combatant voice call. */
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlEntryLookup.h"
 #include "battle/btlMain.h"
 #include "code/Code0014.h"
 #include "code/Code0015.h"
-
-struct BattleSoundIdentity {
-    /* 0x00 */ u16 kind;
-    /* 0x02 */ u16 id;
-};
+#include "battle/BtlEntryLookup.h"
 
 extern "C" {
 void FUN_001566a8(s32 category, u32 sound, u32 volume, u32 flags, s32 enabled, float left, float right);
-BattleSoundIdentity* btlFindEntryBlockByMemberId(BtlMainStateA* battle, s32 group);
 void FUN_0015f490(u32 id, s32 sound, u32 enabled, u32 flags, f32 volume);
 
 // Play a battle sound, resolving category ten through the current combatant group.
@@ -27,7 +23,7 @@ u32 FUN_0013cae4(s32 category, u32 sound)
     } else {
         BtlMainStateA* battle = btlGetMainState();
         if (battle != NULL) {
-            BattleSoundIdentity* identity = btlFindEntryBlockByMemberId(battle, battle->motionGroup.group);
+            BtlUnitDataA* identity = btlFindEntryBlockByMemberId(battle, battle->motionGroup.group);
             if (identity != NULL) {
                 FUN_0015f490(identity->id, sound, 1, 0, 1.0f);
             }

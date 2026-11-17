@@ -4,6 +4,7 @@
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "camp/RenderCtx.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
+#include "camp/RenderCtxTitle.h"
 
 /* A loaded texture the title scene can bind (the AsdTexture at +8). */
 struct TitleTexture {
@@ -43,7 +44,6 @@ struct TitleFadeWork {
 
 extern "C" {
 
-extern RenderCtx *g_titleScene;
 
 TitleFadeWork *jobGetWork(void);
 s32 FUN_002c1d5c(void);

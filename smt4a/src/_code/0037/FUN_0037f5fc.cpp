@@ -25,7 +25,7 @@ s32 FUN_0037f5fc(void)
         if ((flags & g_btlCandidateMasks.excluded) != 0) {
             continue;
         }
-        u16 value = entry->encodedStats.values[stat];
+        u16 value = entry->data.values[stat];
         if ((value & 0xfc00) != 0 && (value >> 10) != 2) {
             continue;
         }

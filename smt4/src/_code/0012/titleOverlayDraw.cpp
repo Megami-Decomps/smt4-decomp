@@ -3,10 +3,10 @@
 #include "camp/RenderCtx.h"
 #include "util/BitsAndBytes_VariantA.h"
 #include "shard/W6_W6Match8_TitleOverlay.h"
+#include "camp/RenderCtxTitle.h"
 
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 u32 renderCtxPackPassFlags(u32 slot, u32 flags);
 void renderStackPushIndexed(RenderCtx *context, s32 stack, u32 value);
 void efctSetSpeed(f32 speed);

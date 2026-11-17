@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -9,23 +10,16 @@ typedef struct DrawPlacement {
     /* 0x08 */ s32 y;
 } DrawPlacement;
 
-typedef struct ImageRect {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-} ImageRect;
-
 void texDrawCompositeSprite(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 depth);
 void efctSetSpeed(f32 alpha);
 void gxResetColorQuadToWhite(void);
 void drawSetColorFromRGBA8(u32 color);
-ImageRect *asdTMTexTableEntryAt(s32 group, s32 image);
 void FUN_002e1b64(u32 value, s32 x, s32 y, s32 depth);
 
 /* Draws a frame (image 8 when selected, 7 otherwise) with a number on it, faded by the placement's alpha. */
 void uiDrawNumberFrame(DrawPlacement *placement, s32 x, s32 y, u32 value, s32 selected)
 {
-    ImageRect *rect;
+    TextureTableEntryIV *rect;
 
     gxResetColorQuadToWhite();
     efctSetSpeed(placement->alpha);

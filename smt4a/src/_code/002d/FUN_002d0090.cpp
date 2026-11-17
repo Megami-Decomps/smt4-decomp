@@ -1,5 +1,6 @@
 #include "battle/btlView.h"
 #include <stddef.h>
+#include "Model/MoriModelManager.h"
 
 typedef char CheckViewStateSize[sizeof(BattleViewState) == 0xd4 ? 1 : -1];
 typedef char CheckViewChildrenOffset[offsetof(BattleViewState, children) == 0xc8 ? 1 : -1];
@@ -7,14 +8,12 @@ typedef char CheckViewPrimaryOffset[offsetof(BattleViewState, attachments.primar
 
 extern "C" {
 extern BattleViewState g_battleViewState;
-extern void *g_handleRegistry;
 s32 gameFlagIsSet(u32 flag);
 s32 FUN_0040ab8c(BattleViewOwner *owner);
 void FUN_0040ab7c(BattleViewOwner *owner, s32 mode);
 void moriModelContentLoadBody(BattleViewOwner *owner, BattleViewObject *parent);
 void controllerSetPositionXyz(BattleViewObject *object, f32 x, f32 y, f32 z);
 void modelPlayClip(BattleViewObject *object, s32 first, s32 second, f32 x, f32 y);
-void handleRegistryRegisterObject(void *registry, BattleViewObject *object);
 }
 
 static inline void activateBattleView(BattleViewOwner **slot)

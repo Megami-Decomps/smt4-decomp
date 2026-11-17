@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b6c34` (_code @ 0x2b6c34, 0x15c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -30,7 +31,6 @@ extern unsigned int categoryIdFromIndex(unsigned int);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
-extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 
 
 void FUN_002b6c34(unsigned int param_1,int param_2,int param_3,int param_4,int param_5,int param_6)
@@ -76,10 +76,10 @@ void FUN_002b6c34(unsigned int param_1,int param_2,int param_3,int param_4,int p
     }
     if (temp_v2 >= 2) {
       drawSetColorFromRGBA8();
-      temp_v1 = asdTMTexTableEntryAt(0x13,0x402);
+      temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,0x402));
       FUN_002bdf94(2,*(short *)(temp_v1 + 8) + param_2,*(short *)(temp_v1 + 10) + param_3,0,1,
                    param_4 + 1,&LAB_002b6da8);
-      temp_v1 = asdTMTexTableEntryAt(0x13,0x401);
+      temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,0x401));
       FUN_002bdf94(2,*(short *)(temp_v1 + 8) + param_2,*(short *)(temp_v1 + 10) + param_3,0,1,
                    param_4 + 1,&LAB_002b6dac,temp_v2 - 1);
       gxResetColorQuadToWhite();

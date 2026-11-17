@@ -1,11 +1,5 @@
 #include "common.h"
-
-/* A layout part layoutFindTableEntry finds by id. */
-struct LayoutPart {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0a */ s16 y;
-};
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* The window that shows a percentage. */
 struct PercentWindow {
@@ -17,7 +11,6 @@ struct PercentWindow {
 
 extern "C" {
 s32 textFormatBuffer(char *output, const char *format, ...);
-LayoutPart *layoutFindTableEntry(void *layout, u32 partId);
 void drawTextAtRelativePosition(void *layout, u32 drawContext, s32 x, s32 y, u32 option0, u32 option1,
                   u32 color, u32 alpha, const char *text);
 void uiDrawTableTextureAtRectCorner(void *layout, u32 partId, u32 option0, u32 option1, u32 alpha);
@@ -27,7 +20,7 @@ void FUN_004a7950(PercentWindow *window, s32 value, u32 alpha)
 {
     char text[32];
     u32 color = 0xffffffff;
-    LayoutPart *part;
+    TextureTableEntryIV *part;
 
     uiDrawTableTextureAtRectCorner(window->layout, 0x407, 0, 0, alpha);
     textFormatBuffer(text, "%3d", value);

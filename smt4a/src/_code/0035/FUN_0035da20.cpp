@@ -1,5 +1,4 @@
-#include "status/StatusDown.h"
-extern "C" StatusDownStateA *g_statusDown;
+#include "status/StatusDownA.h"
 
 
 struct StatusDownFilterView {

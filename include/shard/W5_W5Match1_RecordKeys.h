@@ -333,11 +333,6 @@ struct VectorDefaultsState {
     /* 0x10 */ Vector4 second;
 };
 
-struct CampWorker {
-    /* 0x00 */ u8 unk00[0x18];
-    /* 0x18 */ u32 state;
-};
-
 struct JobRecordBase {
     /* 0x00 */ u8 unk00[8];
     /* 0x08 */ u32 base;

@@ -1,7 +1,8 @@
 /* NON_MATCHING: retail spills r0-r3 in the prologue and reads x/y back from the stack, scans the icon mask with the shift in the register-offset tst form and tail-calls effectDispatchSelector for the single-icon case; this build keeps x/y in registers and lays the loops out differently. */
-#include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "gamedata/SaveSlotRecord.h"
 
 
 /* The panel's per-slot cycling state. */
@@ -11,16 +12,8 @@ struct CyclingPanel {
     /* 0x7ECC */ s32 cursor[24];
 };
 
-/* The render context with its fifth stack. */
-struct PanelRenderCtx : RenderCtxA {
-    /* 0x12D8 */ u8 unk12D8[0x40];
-    /* 0x1318 */ RenderStateStack stackE;
-};
-
 extern "C" {
-extern PanelRenderCtx *g_renderCtx;
 
-SlotRecordA *gameGetSlotRecord(s32 slotIndex);
 void FUN_0035ae58(s32 x, s32 y, s32 width, s32 height, s32 bottomScreen);
 void effectDispatchSelector(s32 icon, s32 x, s32 y, s32 z, f32 scale);
 }
@@ -35,7 +28,7 @@ extern "C" void FUN_004b42b0(CyclingPanel *panel, s32 slot, s32 x, s32 y)
     s16 current = 0;
     s16 next = 0;
     if (slot >= 0) {
-        mask = gameGetSlotRecord(slot)->statusMask;
+        mask = gameGetSlotRecord(slot)->ailments;
     }
     s32 *cursor = &panel->cursor[slot];
     for (s32 icon = 1; icon <= 13; icon++) {
@@ -61,12 +54,12 @@ extern "C" void FUN_004b42b0(CyclingPanel *panel, s32 slot, s32 x, s32 y)
                     nextIndex++;
                 }
             }
-            renderStackSet(&g_renderCtx->stackE, 3);
+            renderStackSet(&g_renderCtx->scissor, 3);
             FUN_0035ae58(x + entry->x, y + entry->y, entry->placement->width, entry->placement->height, 1);
             s32 slide = (*timer - 20) * -3;
             effectDispatchSelector(current, entry->x + slide + x, entry->y + y, 0x7e, 1.0f);
             effectDispatchSelector(next, entry->x + x + slide + 13, entry->y + y, 0x7e, 1.0f);
-            renderStackSet(&g_renderCtx->stackE, 0);
+            renderStackSet(&g_renderCtx->scissor, 0);
             if (*timer >= 24) {
                 *cursor = (*cursor + 1) % count;
                 *timer = 0;

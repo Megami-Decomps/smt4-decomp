@@ -1,16 +1,10 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (213 vs 259 rows); retail returns the position in s0-s2 keeping it in d8/s18 across the switch, this version builds it through a struct and does not reproduce that */
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlEntryLookup.h"
 #include "common.h"
 
 struct Vec3 {
     f32 x, y, z;
-};
-
-// Battle entry: only the fields the offset lookup reads.
-struct BattleEntry {
-    u32 flags;          // 0x00, bit 5: off-screen/hidden
-    u8 unk04[0x6a];
-    s16 facing;         // 0x6e: 0..3
 };
 
 // Battle camera/main object: the position, its offset and the orbit distance.
@@ -30,7 +24,6 @@ extern BattleMain* g_btlMain;
 
 Vec3 FUN_0023cd08(void* battle, u32 id, s32 mode);
 Vec3 FUN_0024d434(void* battle, u32 id, s32 mode);
-BattleEntry* btlMainFindEntryByListedId(void* battle, u32 id);
 
 // Position `distance` units along the camera direction from the main object's anchor.
 static Vec3 cameraRelativePoint()
@@ -48,21 +41,21 @@ static Vec3 cameraRelativePoint()
 static Vec3 entrySlotPoint(u32 listedId)
 {
     Vec3 point = { 0.0f, 0.0f, 0.0f };
-    BattleEntry* entry = btlMainFindEntryByListedId(static_cast<void *>(btlGetMainState()), listedId);
+    BtlEntry* entry = btlMainFindEntryByListedId(btlGetMainState(), listedId);
     if (entry != NULL) {
         if ((entry->flags & 0x20) != 0) {
             point.x = 0.0f;
             point.y = -1.5f;
-        } else if (entry->facing == 0) {
+        } else if (entry->selectionIndex == 0) {
             point.x = -2.975f;
             point.y = 0.6f;
-        } else if (entry->facing == 1) {
+        } else if (entry->selectionIndex == 1) {
             point.x = -1.0f;
             point.y = 0.6f;
-        } else if (entry->facing == 2) {
+        } else if (entry->selectionIndex == 2) {
             point.x = 0.975f;
             point.y = 0.6f;
-        } else if (entry->facing == 3) {
+        } else if (entry->selectionIndex == 3) {
             point.x = 2.95f;
             point.y = 0.6f;
         }

@@ -1,5 +1,5 @@
 /* NON_MATCHING: retail 64 vs built 55 rows; scissor stack addressing, clamp branches, and output registers differ. */
-#include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 s32 asdGxGetCurrentPresetKind(void);
@@ -11,22 +11,15 @@ extern u32 g_modelCommandWordCount;
 
 void FUN_003097ac(u32 extent)
 {
-    // These stacks are beyond the shared RenderCtx prefix.
-    struct ScissorContextView {
-        u8 unk0000[0x130C];
-        RenderStateStack enabled;
-        RenderStateStack origin;
-    };
-    extern ScissorContextView *g_titleScene;
     u32 width = FUN_002ae210(asdGxGetCurrentPresetKind());
     u32 height = FUN_002ae1e8(asdGxGetCurrentPresetKind());
     cursorResetFromParam();
     u32 command;
-    ScissorContextView *context = g_titleScene;
-    if (context->enabled.entries[context->enabled.count] == 0) {
+    RenderCtx *context = g_titleScene;
+    if (context->scissor.entries[context->scissor.count] == 0) {
         command = 0;
     } else {
-        u32 origin = context->origin.entries[context->origin.count];
+        u32 origin = context->scissorMinimum.entries[context->scissorMinimum.count];
         u32 bottom = (origin >> 16) + (extent >> 16) - 1;
         if (static_cast<s32>(bottom) < 0)
             bottom = 0;

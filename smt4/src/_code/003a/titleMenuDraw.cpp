@@ -1,4 +1,5 @@
 #include "common.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 
@@ -13,11 +14,10 @@ struct TitleMenu {
 
 struct TitleScene;
 
-extern TitleScene *g_titleScene;
 
 void gxResetColorQuadToWhite(void);
-void renderCtxApplyTransforms(TitleScene *scene);
-void renderCtxResetColorScale(TitleScene *scene);
+void renderCtxApplyTransforms(RenderCtx *scene);
+void renderCtxResetColorScale(RenderCtx *scene);
 void FUN_003a9648(TitleMenu *menu);
 void scrollMenuDrawVisibleEntries(TitleMenu *menu);
 

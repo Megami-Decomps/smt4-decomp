@@ -1,4 +1,5 @@
 #include "nw/math/MTX34.h"
+#include "camp/RenderCtxA.h"
 
 using nw::math::MTX34;
 
@@ -8,14 +9,9 @@ struct Matrix44Rows {
     f32 last[4];
 };
 
-struct RenderCtxView {
-    /* 0x000 */ u8 unk000[0x6FC];
-    /* 0x6FC */ u8 *camera;
-};
 
 extern "C" {
 
-extern RenderCtxView *g_renderCtx;
 
 s32 nn_math_ARMv6_MTX34InverseAsm(MTX34 *out, const void *source);
 void nn_math_ARMv6_MTX34CopyAsm(MTX34 *destination, const MTX34 *source);

@@ -1,30 +1,17 @@
 /* NON_MATCHING: animated-position speed getter calls match; effect IDs and alternate mode retain different saved-register roles. */
-#include "status/StatusDown.h"
+#include "status/StatusDownA.h"
 #include "shard/TextureDrawCall.h"
 #include <stddef.h>
 
-// The effect speeds belong to animated-position subobjects in the status work.
-struct StatusDownEffectPositionView {
-    u8 prefix[0xB4];
-    u8 panelPosition[0x24];
-    u8 betweenPositions[0xF4];
-    u8 accentPosition[0x24];
-};
-typedef char StatusDownEffectPositionOffsets[
-    offsetof(StatusDownEffectPositionView, panelPosition) == 0xB4 &&
-    offsetof(StatusDownEffectPositionView, accentPosition) == 0x1CC ? 1 : -1];
-
 extern "C" {
-extern StatusDownStateA *g_statusDown;
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *position);
 
 // Build the status-down panel and its mode-specific accents.
 void statusDownCreatePanelEffects(u32 target, u32 flags, s32 alternate)
 {
-    StatusDownEffectPositionView *status =
-        reinterpret_cast<StatusDownEffectPositionView *>(g_statusDown);
-    efctSetSpeed(vec2GetSpeed(status->panelPosition));
+    StatusDownStateA *status = g_statusDown;
+    efctSetSpeed(vec2GetSpeed(&status->sprites[1]));
     for (s32 i = 0; i < 3; ++i)
         texDrawTableEntryAtStoredOrigin(2, 0x12, 0x56f + i, target, flags, 0xbf);
     efctSetSpeed(1.0f);
@@ -44,7 +31,7 @@ void statusDownCreatePanelEffects(u32 target, u32 flags, s32 alternate)
     texDrawTableEntryAtStoredOrigin(2, 0x12, panel, target, flags, 0xc1);
     texDrawTableEntryAtStoredOrigin(2, 0x12, firstAccent, target, flags, 0xc1);
     texDrawTableEntryAtStoredOrigin(2, 0x12, secondAccent, target, flags, 0xc2);
-    efctSetSpeed(vec2GetSpeed(status->accentPosition));
+    efctSetSpeed(vec2GetSpeed(&status->sprites[3]));
     texDrawTableEntryAtStoredOrigin(2, 0x12, finalAccent, target, flags, 0xc4);
     efctSetSpeed(1.0f);
 }

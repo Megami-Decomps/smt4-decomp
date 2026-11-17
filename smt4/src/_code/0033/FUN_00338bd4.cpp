@@ -1,6 +1,6 @@
 /* NON_MATCHING: armcc hoists entry-index arithmetic before the prologue and schedules the reflection arguments differently from retail. */
 #include "common.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 
 #include "shard/Shard0034.h"
 struct ReflectBattleState {
@@ -16,7 +16,7 @@ extern "C" void FUN_00338bd4(ReflectBattleState *state, s32 index)
 {
     if (index < 0)
         return;
-    s16 model = state->entries[index].members.ids[0];
+    s16 model = state->entries[index].ids[0];
     if (model >= 0)
         btlReflectInitKind9(0, 0, &state->records[model], 8, 5);
 }

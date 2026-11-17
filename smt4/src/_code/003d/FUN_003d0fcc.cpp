@@ -1,6 +1,6 @@
 /* NON_MATCHING: loops are the retail countdown shape; with multifile [btlUnitGet] the remaining difference is where the entries table is loaded (retail loads it after the mode == 2 compare, build hoists it above). */
 #include "battle/BattleUnitSlot.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 
 extern "C" {

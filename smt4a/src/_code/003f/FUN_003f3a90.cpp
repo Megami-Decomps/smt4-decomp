@@ -1,22 +1,8 @@
 /* NON_MATCHING: twin of smt4 FUN_0033c1bc; everything up to the setDrawState inlines matches retail, which keeps the ring pointer through a temporary (ldr r1,[g_renderCtx]; add r4,r1,...) and loads the dirty flag / flush callback into r2/r1 instead of r0. */
+#include "camp/RenderCtxA.h"
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "gamedata/GamePlayerData.h"
-
-// Draw-state stack embedded in the title scene.
-struct DrawRing {
-    s32 index;              // 0x00
-    s32 unk04;
-    s32 slots[4];           // 0x08
-    u8 dirty;               // 0x18
-    u8 unk19[3];
-    void (*flush)(s32 state);   // 0x1c
-};
-
-struct RenderCtx {
-    u8 unk0000[0x1318];
-    DrawRing ring;          // 0x1318
-};
 
 // Status icon strip of one party member: only the fields used here.
 struct StatusStrip {
@@ -38,7 +24,6 @@ struct UnitStatus {
 
 extern "C" {
 
-extern RenderCtx* g_renderCtx;
 
 UnitStatus* gameGetSlotRecord(s32 index);
 UnitStatus* btlMainGetUnk14(void);
@@ -47,13 +32,7 @@ void FUN_0035ae58(s32 x, s32 y, s32 w, s32 h, s32 arg);
 
 static void setDrawState(s32 value)
 {
-    DrawRing* ring = &g_renderCtx->ring;
-    s32 previous = ring->slots[ring->index];
-    ring->slots[ring->index] = value;
-    if (ring->dirty != 0 || previous != value) {
-        ring->flush(value);
-        ring->dirty = 0;
-    }
+    renderStackSet(&g_renderCtx->scissor, value);
 }
 
 // Draws the status ailment icons of a member; with two or more it also draws the

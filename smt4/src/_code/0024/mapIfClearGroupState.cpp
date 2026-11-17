@@ -1,8 +1,7 @@
 #include "shard/Shard0036.h"
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 
 extern "C" {
-extern MapIfGlobals g_mapIf;
 
 // Clear the state of active map-interface records belonging to the requested group.
 void mapIfClearGroupState(s32 group)

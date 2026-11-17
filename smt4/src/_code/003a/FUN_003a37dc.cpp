@@ -1,9 +1,8 @@
 #include "title/TitleJobWork.h"
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
-extern RenderCtx *g_titleScene;
-void renderCtxSelectStereoLayout(RenderCtx *context);
 void gxResetColorQuadToWhite(void);
 s32 renderCtxPackPassFlags(u32 kind, u32 mode);
 s32 jobIsValid(u32 job);

@@ -1,7 +1,6 @@
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 
 extern "C" {
-extern ButtonHelpGlobalsA g_buttonHelp;
 void uiSpriteSelectAnim(void *sprite, s32 animation);
 void uiSpriteSetKeyframe(void *sprite, s32 frame, s32 initial);
 void uiSpriteSetImageKeyframe(void *sprite, s32 frame, s32 initial);

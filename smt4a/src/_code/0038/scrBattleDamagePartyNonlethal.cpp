@@ -29,20 +29,20 @@ u32 scrBattleDamagePartyNonlethal()
         BtlMainStateA *battle = btlGetMainState();
         BtlCombatantEntryA *target = &battle->entries[slot];
         if ((target->flags & g_btlMessageFlagMasks.active) &&
-            !(target->flags & g_btlMessageFlagMasks.excluded) && target->unitIndex >= 0) {
+            !(target->flags & g_btlMessageFlagMasks.excluded) && target->ids[0] >= 0) {
             s32 damage = 0;
             switch (mode) {
-            case 0: damage = target->maxHp * amount / 100; break;
-            case 1: damage = target->hp * amount / 100; break;
+            case 0: damage = target->data.maxHp * amount / 100; break;
+            case 1: damage = target->data.hp * amount / 100; break;
             case 2: damage = amount; break;
             }
-            if (damage >= target->hp)
-                damage = target->hp - 1;
+            if (damage >= target->data.hp)
+                damage = target->data.hp - 1;
             btlSlotManagerResetStates(btlGetMainState());
             battle = btlGetMainState();
-            ResourceUnit *unit = &((ResourceUnit *)battle->unk1ED4)[target->unitIndex];
+            ResourceUnit *unit = &((ResourceUnit *)battle->unk1ED4)[target->ids[0]];
             FUN_004fc094(0, source, 0, unit, 0, damage, -1,
-                          -1, target->hp, target->maxHp, 0, 0, 0, 0, 1, 0,
+                          -1, target->data.hp, target->data.maxHp, 0, 0, 0, 0, 1, 0,
                           slot << 3, slot << 3, slot << 3, slot << 3, 1, 0, 1, 1, 0, 1);
             btlQueueActionMessage(0, source, 0x1000223, 0, 0, 0, 0);
         }

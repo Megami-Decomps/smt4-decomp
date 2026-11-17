@@ -3,13 +3,13 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "code/Code0029.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 int textDrawString(...);
 int textFormatBuffer(...);
 int texDrawCompositeSprite(...);
-int asdTMTexTableEntryAt(...);
 int dataTableGet(...);
 int VectorSignedToFloat(...);
 
@@ -146,7 +146,7 @@ unsigned int FUN_002cb054(void)
         temp_v0 = 1;
         temp_v29 = 0x72e027ff;
       }
-      temp_v5 = asdTMTexTableEntryAt(0x2f,temp_v8 + 0x1f);
+      temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2f,temp_v8 + 0x1f));
       temp_v4 = g_titleScene;
       temp_v27 = *(short *)(temp_v5 + 8) + temp_v2;
       temp_v9 = *(short *)(temp_v5 + 10) + temp_v3;
@@ -195,7 +195,7 @@ unsigned int FUN_002cb054(void)
           *(unsigned char *)(temp_v4 + 0x12c4) = 0;
         }
       }
-      temp_v4 = asdTMTexTableEntryAt(0x2f,0x1a);
+      temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2f,0x1a));
       temp_v6 = resourceRunOperationIfUnblocked(temp_v1 + 0xe8);
       if ((unsigned int)(temp_v6 + temp_v8) < 3) {
         dataTableGet(0x3a,1);
@@ -242,7 +242,7 @@ unsigned int FUN_002cb054(void)
       temp_v4 = g_titleConfig;
       temp_v5 = *(int *)(temp_v1 + (temp_v5 + temp_v8) * 4 + 0x28);
       texDrawCompositeSprite(2,0x2f,3,temp_v27,temp_v6,0x1f);
-      temp_v5 = asdTMTexTableEntryAt(0x2f,temp_v5 + 0x5b);
+      temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2f,temp_v5 + 0x5b));
       if (temp_v0) {
         temp_v7 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v4 + 0x1e));
         if (!((temp_v7 == 1 || temp_v7 == 2) || temp_v7 == 6)) {

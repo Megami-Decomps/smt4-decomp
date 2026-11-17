@@ -16,10 +16,10 @@ u32 btlScriptDamageFirstCombatantNonlethally()
     s32 damage = scrGetArg(0);
     ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
     btlSlotManagerResetStates(btlGetMainState());
-    if (btlGetMainState()->entries[0].hp <= damage)
-        damage = btlGetMainState()->entries[0].hp - 1;
-    u32 maxHp = btlGetMainState()->entries[0].maxHp;
-    u32 hp = btlGetMainState()->entries[0].hp;
+    if (btlGetMainState()->entries[0].data.hp <= damage)
+        damage = btlGetMainState()->entries[0].data.hp - 1;
+    u32 maxHp = btlGetMainState()->entries[0].data.maxHp;
+    u32 hp = btlGetMainState()->entries[0].data.hp;
     BattleRosterRecordA *roster = btlGetMainState()->roster;
     FUN_004fc094(0, unit, 0, roster, 0, damage, -1, -1, hp, maxHp,
                  0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1);

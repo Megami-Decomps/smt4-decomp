@@ -1,8 +1,6 @@
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 
 extern "C" {
-
-extern UniteWork *g_unite;
 
 /* Unite is available in state two while its blocking flag is clear. */
 s32 uniteIsAvailable(void)

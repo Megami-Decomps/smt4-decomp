@@ -15,7 +15,7 @@ u32 FUN_003c9adc(void)
         BtlMainStateA *state = btlGetMainState();
         BtlCombatantEntryA *entry = &state->entries[i];
         if ((entry->flags & g_btlCandidateMasks.unavailable) && (entry->flags & g_btlCandidateMasks.required) &&
-            !(g_btlCandidateMasks.excluded & entry->flags) && btlFindEntryValue(entry->unitIndex, 0x13) > 0) {
+            !(g_btlCandidateMasks.excluded & entry->flags) && btlFindEntryValue(entry->ids[0], 0x13) > 0) {
             scrSetResult(1);
             return 1;
         }

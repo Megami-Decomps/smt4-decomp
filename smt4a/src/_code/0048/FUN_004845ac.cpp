@@ -2,13 +2,13 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "util/BitsAndBytes.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 int textDrawString(int, unsigned int, unsigned char [4]);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
-int asdTMTexTableEntryAt(...);
 int texDrawTableEntryAtStoredOrigin(...);
 int FUN_00485108(...);
 int textDrawEncodedGlyph(int, int, int, int);
@@ -71,11 +71,11 @@ void FUN_004845ac(int param_1)
         temp_v9 = *(short *)(
                            "艠艡艢艣艤芁节芃芄芅艏艐艑艒艓艥艦艧艨艩芆芇芈芉芊艔艕艖艗艘艪艫艬艭艮芋芌芍芎芏腉膗膔膓腏良艰艱色艳芐芑芒芓芔膕膖腩腪腻艴艵艶艷艸芕芖芗芘芙腼膁膃膄腈艹腀腀腀腀芚腀腀腀腀腞腃腄腆腇腉腈腠膏膑膒膓膕腇腩腪膃膄腫腬腭腮腯腰腱腲腳腴腵腶腷腸腹腺腞腟腑腐腢腻腼腾膀膁膖腅腁腂腄腣腤腥腦腧腨膋膍腕腔腓腒腗腖腘腙膧膔致至臉臈腌腍腎腽膙膚膠膡膞膟膤膥膢膣膛膜臵臶膉膊膘膦膨膪膩膫腆膎臍臝臎蝔蝕蝖蝗蝘蝙蝚蝛蝜蝝蝀蝁蝂蝃蝄蝅蝆蝇蝈蝉臷膝腉腈腠膏膑膒膓膕腇腩腪膃膄腫腬腭腮腯腰腱腲腳腴腵腶腷腸腹腺腞腟腑腐腢腻腼腾膀膁膖腅腁腂腄腣腤腥腦腧腨膋膍腕腔腓腒腗腖腘腙膧膔致至臉臈腌腍腎腽膙膚膠膡膞膟膤膥膢膣膛膜臵臶膉膊膘膦膨膪膩膫腆膎臍臝臎艐艑艒艓艔艕艖艗艘艏艐艑艒艓艔艕艖艗艘艏臷膝艐艑艒艓艔艕艖艗艘艏腀腀腀腀蝀蝁蝂蝃蝄蝅蝆蝇蝈蝉腀腀腀腀蝔蝕蝖蝗蝘蝙蝚蝛蝜蝝腀腀腀腀艐艑艒艓艔艕艖艗艘艏腀腀腀腀艐艑艒艓艔艕艖艗艘艏腀腀腀腀艐艑艒艓艔艕艖艗艘艏腀腀腀腀ŀ"
                            + temp_v8 * 2 + temp_v10 * 0x1e);
-        temp_v5 = asdTMTexTableEntryAt(0x23,temp_v10 * 0xf + temp_v8 + 0x56);
+        temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x23,temp_v10 * 0xf + temp_v8 + 0x56));
         (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v5 + 10);
         temp_v13 = 0x15;
         texDrawCompositeSprite(2,0x23,1,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v5 + 8));
-        temp_v6 = asdTMTexTableEntryAt(0x23,0x1a);
+        temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x23,0x1a));
         temp_v7 = *(int *)(param_1 + 0xa4);
         temp_v0 = *(short *)(temp_v6 + 8);
         temp_v1 = *(short *)(temp_v5 + 8);
@@ -106,11 +106,11 @@ void FUN_004845ac(int param_1)
     temp_v9 = *(short *)(
                        "艠艡艢艣艤芁节芃芄芅艏艐艑艒艓艥艦艧艨艩芆芇芈芉芊艔艕艖艗艘艪艫艬艭艮芋芌芍芎芏腉膗膔膓腏良艰艱色艳芐芑芒芓芔膕膖腩腪腻艴艵艶艷艸芕芖芗芘芙腼膁膃膄腈艹腀腀腀腀芚腀腀腀腀腞腃腄腆腇腉腈腠膏膑膒膓膕腇腩腪膃膄腫腬腭腮腯腰腱腲腳腴腵腶腷腸腹腺腞腟腑腐腢腻腼腾膀膁膖腅腁腂腄腣腤腥腦腧腨膋膍腕腔腓腒腗腖腘腙膧膔致至臉臈腌腍腎腽膙膚膠膡膞膟膤膥膢膣膛膜臵臶膉膊膘膦膨膪膩膫腆膎臍臝臎蝔蝕蝖蝗蝘蝙蝚蝛蝜蝝蝀蝁蝂蝃蝄蝅蝆蝇蝈蝉臷膝腉腈腠膏膑膒膓膕腇腩腪膃膄腫腬腭腮腯腰腱腲腳腴腵腶腷腸腹腺腞腟腑腐腢腻腼腾膀膁膖腅腁腂腄腣腤腥腦腧腨膋膍腕腔腓腒腗腖腘腙膧膔致至臉臈腌腍腎腽膙膚膠膡膞膟膤膥膢膣膛膜臵臶膉膊膘膦膨膪膩膫腆膎臍臝臎艐艑艒艓艔艕艖艗艘艏艐艑艒艓艔艕艖艗艘艏臷膝艐艑艒艓艔艕艖艗艘艏腀腀腀腀蝀蝁蝂蝃蝄蝅蝆蝇蝈蝉腀腀腀腀蝔蝕蝖蝗蝘蝙蝚蝛蝜蝝腀腀腀腀艐艑艒艓艔艕艖艗艘艏腀腀腀腀艐艑艒艓艔艕艖艗艘艏腀腀腀腀艐艑艒艓艔艕艖艗艘艏腀腀腀腀ŀ"
                        + *(int *)(param_1 + 0x10) * 2 + *(int *)(param_1 + 0x14) * 0x1e);
-    temp_v10 = asdTMTexTableEntryAt(0x23,*(int *)(param_1 + 0x14) * 0xf + 0x56 + *(int *)(param_1 + 0x10));
+    temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x23,*(int *)(param_1 + 0x14) * 0xf + 0x56 + *(int *)(param_1 + 0x10)));
     (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v10 + 10);
     temp_v13 = 0x15;
     texDrawCompositeSprite(2,0x23,2,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v10 + 8));
-    temp_v8 = asdTMTexTableEntryAt(0x23,0x22);
+    temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x23,0x22));
     temp_v13 = 1;
     (*(unsigned int *)temp_v12) = 0x0;
     textDrawEncodedGlyph(param_1,(int)temp_v9,
@@ -152,7 +152,7 @@ void FUN_004845ac(int param_1)
     temp_v10 = uiSearchSecondary(param_1 + 0x1fc);
     if (0 < temp_v10) {
       do {
-        temp_v10 = asdTMTexTableEntryAt(0x23,temp_v8 + 0xc6);
+        temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x23,temp_v8 + 0xc6));
         if (temp_v8 != 3) {
           (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v10 + 10);
           temp_v13 = 0x15;
@@ -182,7 +182,7 @@ void FUN_004845ac(int param_1)
     }
     if (*(char *)(param_1 + 0x260) != '\0') {
       temp_v10 = listCursorGetRowOfChildIfUnblocked(param_1 + 0x1fc);
-      temp_v8 = asdTMTexTableEntryAt(0x23,temp_v10 + 0xc6);
+      temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x23,temp_v10 + 0xc6));
       if (temp_v10 != 3) {
         (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v8 + 10);
         temp_v13 = 0x1f;

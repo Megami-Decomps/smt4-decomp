@@ -4,6 +4,7 @@
 #include <stddef.h>
 #include "Model/MoriModelShadowMap.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct AocDrawPosition { f32 x, y; };
 struct AocDrawWork {
@@ -28,7 +29,6 @@ u32 renderCtxPackPassFlags(s32 mode, s32 option);
 void texDrawCompositeSprite(s32 layer, s32 group, s32 sprite, s32 x, s32 y, u32 flags);
 s32 FUN_00473910(AocMainA *main, s32 id);
 s32 FUN_00473754(AocMainA *main, s32 id, AocDrawText *text);
-SpriteInfo *asdTMTexTableEntryAt(s32 group, s32 sprite);
 }
 
 // Draw the expansion-content information panel at its mode-selected position.
@@ -54,7 +54,7 @@ extern "C" s32 FUN_0047a298(u32 job)
         u32 color = 0xfc4f46ff;
         s32 count = FUN_00473754(main, FUN_00473910(main, 101), text);
         for (s32 i = 0; i < count; ++i) {
-            SpriteInfo *sprite = asdTMTexTableEntryAt(47, 67 + i);
+            TextureTableEntryIV *sprite = asdTMTexTableEntryAt(47, 67 + i);
             s32 textX = sprite->x + x;
             s32 textY = sprite->y + y;
             textDrawString(3, color, (const char *)&text[i], static_cast<f32>(textX), static_cast<f32>(textY), 0.5f, 0.0f, 1.0f);

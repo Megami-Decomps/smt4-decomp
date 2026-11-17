@@ -1,5 +1,5 @@
 /* NON_MATCHING: clear-mode stores/calls are predicated, while global-work loading, mode-loop NOP placement and the common exit differ. */
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 
 struct ButtonHelpContextRecord {
     u8 unk00[0xC];
@@ -8,7 +8,6 @@ struct ButtonHelpContextRecord {
 };
 
 extern "C" {
-extern ButtonHelpGlobals g_buttonHelp;
 ButtonHelpContextRecord *dataTableGetEntry0e(u32 context);
 void spriteStartAnimationByIndex(ButtonHelpDisplayUnit *unit, s32 selected);
 void ifTouchDecrementTimer(void);

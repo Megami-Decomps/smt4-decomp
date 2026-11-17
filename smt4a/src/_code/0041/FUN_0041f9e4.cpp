@@ -1,6 +1,7 @@
 /* NON_MATCHING: compiler duplicates the row-render call rather than merging it into retail's shared call; 71 versus 65 instructions. */
 #include "common.h"
 #include <stddef.h>
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 namespace {
 struct MenuRowRecord { u8 data[0x80]; };
@@ -23,9 +24,8 @@ struct MenuRowRefreshView {
 typedef char MenuRowRefreshLayoutCheck[offsetof(MenuRowRefreshView, records) == 0x6c && offsetof(MenuRowRefreshView, occupied) == 0x2ec && offsetof(MenuRowRefreshView, rows) == 0x664 && offsetof(MenuRowRefreshView, selection) == 0x6ec ? 1 : -1];
 }
 extern "C" {
-const void *asdTMTexTableEntryAt(u32 archive, s32 index);
-void FUN_0041b360(MenuRowWidget *, MenuRowRecord *, const void *, s32, s32, s32);
-void FUN_0041c45c(void *, const void *);
+void FUN_0041b360(MenuRowWidget *, MenuRowRecord *, const TextureTableEntryIV *, s32, s32, s32);
+void FUN_0041c45c(void *, const TextureTableEntryIV *);
 
 // Refresh the visible record rows and their selection indicator.
 void FUN_0041f9e4(MenuRowRefreshView *menu)
@@ -35,7 +35,7 @@ void FUN_0041f9e4(MenuRowRefreshView *menu)
         baseIndex = 0x83;
     for (s32 row = 0; row < menu->visibleCount; ++row) {
         s32 recordIndex = menu->firstIndex + menu->pageOffset + row;
-        const void *layout = asdTMTexTableEntryAt(0x2b, baseIndex + row);
+        const TextureTableEntryIV *layout = asdTMTexTableEntryAt(0x2b, baseIndex + row);
         s32 selected = menu->selectedRow == row;
         if (menu->occupied[recordIndex]) {
             FUN_0041b360(&menu->rows[row], &menu->records[recordIndex], layout,
@@ -46,7 +46,7 @@ void FUN_0041f9e4(MenuRowRefreshView *menu)
                         recordIndex + 1, selected, enabled);
         }
     }
-    const void *layout = asdTMTexTableEntryAt(0x2b, menu->selectedRow + baseIndex);
+    const TextureTableEntryIV *layout = asdTMTexTableEntryAt(0x2b, menu->selectedRow + baseIndex);
     FUN_0041c45c(menu->selection, layout);
 }
 }

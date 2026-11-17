@@ -1,13 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003172e0` (_code @ 0x3172e0, 0x774 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 int characterInfoPanelPopulate(...);
 int buttonHelpSetPreset(...);
 int padIsButtonRepeat(...);
-int asdTMTexTableEntryAt(...);
 int soundPlaySeUnpanned(...);
 int padIsButtonPressed(...);
 int uiPointerHitsRect(...);
@@ -85,7 +85,7 @@ unsigned int FUN_003172e0(int param_1)
   if (*(char *)(param_1 + 0x9c) != '\x01') {
     return 0;
   }
-  temp_v1 = asdTMTexTableEntryAt(0x39,0x42);
+  temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x39,0x42));
   temp_v16 = 0;
   temp_v2 = (int)*(short *)(temp_v1 + 8);
   uiPointerHitsRect(temp_v2,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
@@ -97,7 +97,7 @@ unsigned int FUN_003172e0(int param_1)
     temp_v3 = *(unsigned int *)(param_1 + 0x130) & 0xfffffffe;
   }
   *(unsigned int *)(param_1 + 0x130) = temp_v3;
-  temp_v1 = asdTMTexTableEntryAt(0x39,0x43);
+  temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x39,0x43));
   temp_v16 = 0;
   temp_v2 = (int)*(short *)(temp_v1 + 8);
   uiPointerHitsRect(temp_v2,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
@@ -109,7 +109,7 @@ unsigned int FUN_003172e0(int param_1)
     temp_v3 = *(unsigned int *)(param_1 + 0x130) & 0xfffffffd;
   }
   *(unsigned int *)(param_1 + 0x130) = temp_v3;
-  temp_v1 = asdTMTexTableEntryAt(0x39,0x41);
+  temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x39,0x41));
   temp_v16 = 0;
   temp_v2 = (int)*(short *)(temp_v1 + 8);
   uiPointerHitsRect(temp_v2,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
@@ -124,7 +124,7 @@ unsigned int FUN_003172e0(int param_1)
   *(unsigned int *)(param_1 + 0x130) = temp_v3;
   do {
     if (temp_v1 < *(int *)(param_1 + 0x138)) {
-      temp_v2 = asdTMTexTableEntryAt(0x39,temp_v1 + 0xd1);
+      temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x39,temp_v1 + 0xd1));
       temp_v16 = 0;
       temp_v4 = (int)*(short *)(temp_v2 + 8);
       uiPointerHitsRect(temp_v4,(int)*(short *)(temp_v2 + 10),(int)**(short **)(temp_v2 + 0xc),
@@ -160,7 +160,7 @@ unsigned int FUN_003172e0(int param_1)
       *(unsigned int *)(param_1 + 0x150) = 0;
     }
   }
-  temp_v1 = asdTMTexTableEntryAt(0x39,*(int *)(param_1 + 0x13c) + 0xe6);
+  temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x39,*(int *)(param_1 + 0x13c) + 0xe6));
   temp_v16 = 3;
   temp_v2 = (int)*(short *)(temp_v1 + 8);
   uiPointerHitsRect(temp_v2,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
@@ -228,7 +228,7 @@ unsigned int FUN_003172e0(int param_1)
   else if ((temp_v3 & 4) != 0) {
     temp_v2 = *(int *)(param_1 + 0x13c);
     touchGetPointByMode(&uStack_34,&temp_v16,0);
-    temp_v6 = asdTMTexTableEntryAt(0x39,0x41);
+    temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x39,0x41));
     temp_v16 = temp_v16 - *(short *)(temp_v6 + 10);
     temp_v1 = *(int *)(param_1 + 0x138);
     temp_v14 = (float)VectorSignedToFloat(temp_v16,(unsigned char)(in_fpscr >> 0x16) & 3);

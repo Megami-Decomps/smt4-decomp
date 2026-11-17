@@ -25,14 +25,14 @@ u32 btlScriptGetEncodedCombatantStat()
         if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
             (entry->flags & g_btlCandidateMasks.required) != 0 &&
             (entry->flags & g_btlCandidateMasks.excluded) == 0 &&
-            entry->id == id && (entry->encodedStats.values[stat] >> 10) == 1) {
+            entry->data.id == id && (entry->data.values[stat] >> 10) == 1) {
             scrSetResult(1);
             return 1;
         }
     }
     if (btlGetMainState()->unk4cd1) {
         BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
-        if (entry != NULL && entry->id == id && (entry->encodedStats.values[stat] >> 10) == 1) {
+        if (entry != NULL && entry->data.id == id && (entry->data.values[stat] >> 10) == 1) {
             scrSetResult(1);
             return 1;
         }

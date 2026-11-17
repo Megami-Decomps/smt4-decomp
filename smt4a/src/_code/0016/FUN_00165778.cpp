@@ -5,6 +5,7 @@
 #include "shard/W6_W6Match6_ItemIcon.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxA.h"
 
 // Row-major 4x4 matrix.
 struct Mtx44 {
@@ -34,16 +35,15 @@ struct ItemBadge {
 
 extern "C" {
 
-extern u8* g_renderCtx;
 
 s32 fontMeasureLineAdvance(const char* text, s32 font);
-void skinObjectUpdateMatrices(u8* ctx);
+void skinObjectUpdateMatrices(RenderCtxA *ctx);
 void FUN_00180310(s32 a, s32 x, s32 y, s32 b, s32 c, s32 d, const char* format, s32 value);
 const Mtx44* _ZN2nw4math5MTX448IdentityEv(void);
 void mtx44Copy(Mtx44* dst, const Mtx44* src);
 void nn_math_ARMv6_MTX44MultAsm(Mtx44* out, const Mtx44* a, const Mtx44* b);
-void FUN_0019a0dc(Mtx44* out, u8* ctx);
-void camSetMatrixA(u8* ctx, const Mtx44* matrix);
+void FUN_0019a0dc(Mtx44* out, RenderCtxA* ctx);
+void camSetMatrixA(RenderCtxA *ctx, const Mtx44* matrix);
 
 // Draws an item badge: the caption centred in `frame`, the category icon and the count
 // (two digits once it reaches ten), the count part scaled around its anchor while it pops in.

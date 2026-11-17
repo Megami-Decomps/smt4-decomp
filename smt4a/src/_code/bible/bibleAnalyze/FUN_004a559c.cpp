@@ -1,6 +1,7 @@
 /* NON_MATCHING: stack frame (retail reserves 108 bytes and an extra saved register), VFP argument setup and pool-constant loads are scheduled differently; the draw sequence is the same. */
 #include "common.h"
 #include "code/Code002a.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -12,12 +13,6 @@ typedef struct AnalyzeRow {
 } AnalyzeRow;
 
 /* A text layout record: a position at 8/10 and a pointer to the box size. */
-typedef struct AnalyzeTextBox {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-    /* 0x0C */ s16 *size;
-} AnalyzeTextBox;
 
 /* The analyze screen's work block (only the fields drawn here). */
 typedef struct AnalyzeWork {
@@ -50,7 +45,6 @@ void FUN_0049339c(void *panel, s32 id, s32 a, s32 b, s32 slide, f32 offset);
 void FUN_0049368c(void *panel, s32 id, s32 a, s32 b, s32 slide, s32 c);
 u32 dataLookupDisplayName(u8 *out, u32 id);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
-AnalyzeTextBox *layoutFindTableEntry(void *panel, u32 id);
 s32 curveEvaluateStandard(const char *text, s32 mode);
 void drawTextAtSnappedRectangle(void *panel, s32 a, s32 b, const char *text, f32 x, f32 y, f32 scale, f32 c, f32 d);
 s32 FUN_0031d174(void *list);
@@ -78,9 +72,9 @@ void FUN_004a559c(AnalyzeWork *work)
     u32 name = dataLookupDisplayName(nameBuffer, ((AnalyzeWorkView *)work)->targetId);
 
     textFormatBuffer(text, "%s%s", name, DAT_0057f0a0[1]);
-    AnalyzeTextBox *box = layoutFindTableEntry(work->panel, 0x102B);
+    TextureTableEntryIV *box = layoutFindTableEntry(work->panel, 0x102B);
 
-    drawTextAtSnappedRectangle(work->panel, 2, -1, text, (f32)(box->x + *box->size / 2 - curveEvaluateStandard(text, 2) / 2), (f32)box->y,
+    drawTextAtSnappedRectangle(work->panel, 2, -1, text, (f32)(box->x + box->placement->width / 2 - curveEvaluateStandard(text, 2) / 2), (f32)box->y,
                  opacity, 1.0f, 0.0f);
 
     s32 first = FUN_002a482c(work->list);

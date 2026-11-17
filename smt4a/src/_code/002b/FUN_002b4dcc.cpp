@@ -17,8 +17,8 @@ u32 FUN_002b4dcc(u32 sourceId)
             if ((entry->flags & g_btlMain.combatantMasks.required) &&
                 !(entry->flags & g_btlMain.exclusionMask) &&
                 (entry->flags & g_btlMain.actorCategories[1]) &&
-                entry->sourceId == sourceId) {
-                fallback = entry->maxHp;
+                entry->data.sourceId == sourceId) {
+                fallback = entry->data.maxHp;
                 break;
             }
         }

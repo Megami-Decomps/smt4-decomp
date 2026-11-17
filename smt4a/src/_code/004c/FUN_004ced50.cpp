@@ -1,5 +1,5 @@
 /* NON_MATCHING: party-slot addressing, short-circuit compare scheduling and final zero-result register differ. */
-#include "shard/W6_W6Match1_PartySlot.h"
+#include "gamedata/SaveSlotRecord.h"
 #include "shard/Shard0031.h"
 #include "gamedata/PlayerDataBlock.h"
 #include "code/Code0018.h"
@@ -11,8 +11,7 @@ s32 FUN_003e0034();
 s32 FUN_003e0164();
 s32 gameSlotTableFindFree();
 SlotTable *gameGetSlotTable();
-PartySlotA *gameGetSlotRecord(s32 slot);
-s32 recordGetScaledMaximum(PartySlotA *unit);
+s32 recordGetScaledMaximum(SlotRecordA *unit);
 PartySlotA *partyGetSlot(u16 slot);
 
 // Check whether the player, stored party, or support roster needs HP/MP/status recovery.
@@ -30,22 +29,22 @@ u32 FUN_004ced50()
     SlotTable *party = gameGetSlotTable();
     for (s32 index = 0; index < count; ++index) {
         if (party->slots[index] >= 0) {
-            PartySlotA *unit = gameGetSlotRecord(party->slots[index]);
-            s32 hp = unit->unk2A;
+            SlotRecordA *unit = gameGetSlotRecord(party->slots[index]);
+            s32 hp = unit->hp;
             s32 maxHp = recordGetScaledMaximum(unit);
-            if (hp < maxHp || (s16)unit->unk2C < (s16)unit->unk10)
+            if (hp < maxHp || unit->mp < unit->maxMp)
                 return 1;
-            if (unit->unk60 & ~4)
+            if (unit->ailments & ~4)
                 return 1;
         }
     }
     for (s32 index = 0; index < 12; ++index) {
         PartySlotA *unit = partyGetSlot((u16)index);
         if (partySlotIsOccupied(unit)) {
-            s16 hp = unit->unk2A;
-            if (hp < recordGetScaledMaximum(unit))
+            s16 hp = unit->record.hp;
+            if (hp < recordGetScaledMaximum(&unit->record))
                 return 1;
-            if ((s16)unit->unk2C < (s16)unit->unk10 || unit->unk60 != 0)
+            if (unit->record.mp < unit->record.maxMp || unit->record.ailments != 0)
                 return 1;
         }
     }

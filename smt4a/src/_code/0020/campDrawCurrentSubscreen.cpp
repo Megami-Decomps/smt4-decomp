@@ -1,23 +1,15 @@
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
+#include "camp/CampStateA.h"
 
-/* The camp state fields the draw step reads. */
-struct CampDrawView {
-    u8 unk00[0x1C];
-    s32 screen;         // 0x1C
-    u8 unk20[0x20];
-    u8 list[0x64];      // 0x40
-    s8 category;        // 0xA4
-};
 
 extern "C" {
-extern CampDrawView *g_camp;
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 s32 renderCtxPackPassFlags(u32 kind, bool enabled);
 u32 listCursorGetRowOfChildIfUnblocked(void *list);
 s32 FUN_003da8f4(s32 category, u32 selection);
 s32 partyCountOccupiedSlots(void);
-void FUN_00335060(CampDrawView *camp);
+void FUN_00335060(CampStateA *camp);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
 
@@ -31,7 +23,7 @@ static __inline bool entryKindIsExcluded(s32 kind)
 
 static __inline void drawPartySubscreen()
 {
-    CampDrawView *camp = g_camp;
+    CampStateA *camp = g_camp;
     if (partyCountOccupiedSlots() > 0)
         FUN_00335060(camp);
 }
@@ -39,11 +31,11 @@ static __inline void drawPartySubscreen()
 /* Draw the camp's party sub-screen when the current screen has one. */
 u32 campDrawCurrentSubscreen(void)
 {
-    CampDrawView *camp = g_camp;
+    CampStateA *camp = g_camp;
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, false));
-    s32 entryKind = FUN_003da8f4(camp->category, listCursorGetRowOfChildIfUnblocked(camp->list));
-    switch (camp->screen) {
+    s32 entryKind = FUN_003da8f4(camp->menuGroup, listCursorGetRowOfChildIfUnblocked(&camp->menuGrid));
+    switch (camp->state) {
     case 1: case 2: case 3: case 4: case 5: case 6: case 7:
     case 9: case 10: case 11: case 15: case 16:
     case 0x1E: case 0x1F: case 0x20: case 0x21: case 0x22:

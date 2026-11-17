@@ -1,6 +1,7 @@
 /* NON_MATCHING: the 0.0f spawn depth is loaded into s23 at the top in retail (here after FUN_002573d8), the colour word/alpha loads use different registers, and the pool loads of the angle constants are ordered differently. */
 #include "camp/RenderCtx.h"
 #include "shard/Shard0036.h"
+#include "camp/RenderCtxTitle.h"
 
 struct TitleGradientPoint {
     f32 x, y;
@@ -19,7 +20,6 @@ typedef char TitleRadialGradientOffsets[offsetof(TitleRadialGradient, block) == 
     offsetof(TitleGradientBlock, first) == 8 && offsetof(TitleGradientBlock, last) == 0x10 ? 1 : -1];
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 s32 renderCtxPackPassFlags(u32, u32);
 void FUN_002573d8(void);
 void effectSpawnPositionDefault(RgbaWord, f32, f32, f32);

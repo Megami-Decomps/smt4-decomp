@@ -1,4 +1,4 @@
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 #include "gamedata/NkmBaseRecordA.h"
 
 static inline s32 compareFusionComponents(const NkmBaseRecordA *left, const NkmBaseRecordA *right)
@@ -13,7 +13,6 @@ static inline s32 compareFusionComponents(const NkmBaseRecordA *left, const NkmB
 }
 
 extern "C" {
-extern UniteWork *g_unite;
 
 // Sort fusion pairs by rank, then each component's category, level and identifier.
 s32 FUN_002b28d8(const u16 *left, const u16 *right)
@@ -22,7 +21,7 @@ s32 FUN_002b28d8(const u16 *left, const u16 *right)
         u8 prefix[0x73F0];
         s32 values[1];
     };
-    UniteWork *work = g_unite;
+    UniteWorkA *work = g_unite;
     PairRankView *ranks = reinterpret_cast<PairRankView *>(work);
     s32 result = ranks->values[*left] - ranks->values[*right];
     if (result == 0) {

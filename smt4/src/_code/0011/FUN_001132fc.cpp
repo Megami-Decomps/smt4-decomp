@@ -1,11 +1,10 @@
 /* NON_MATCHING: float constants, UV division scheduling and quad-argument register reuse differ; 64 built versus 68 retail rows. */
-#include "ui/FrameTex.h"
+#include "frame_tex/FrameTex.h"
 #include "camp/RenderCtx.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
-extern FrameWork *g_frameTex;
-extern RenderCtx *g_titleScene;
 void FUN_002ba1e0(u32 color0, u32 color1, u32 color2, u32 color3,
     f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1,
     f32 x2, f32 y2, f32 z2, f32 x3, f32 y3, f32 z3,
@@ -13,14 +12,14 @@ void FUN_002ba1e0(u32 color0, u32 color1, u32 color2, u32 color3,
 
 void FUN_001132fc(s32 alternate)
 {
-    FrameWork *work = g_frameTex;
-    u32 color = work->color;
-    f32 textureExtent = work->useStandardTextureExtent ? 240.0f : 480.0f;
+    FrameTexWork *work = g_frameTex;
+    u32 color = work->fadeColor;
+    f32 textureExtent = work->fadeCaptureResult ? 240.0f : 480.0f;
     AsdTexture *surface;
-    if (alternate == 0 && work->unkF9D) {
-        surface = reinterpret_cast<AsdTexture *>(work->surface);
+    if (alternate == 0 && work->fadeCapturedRight) {
+        surface = work->surfaceRight;
     } else {
-        surface = static_cast<AsdTexture *>(work->bufferA);
+        surface = work->surfaceLeft;
     }
     surface->filterX = 1;
     surface->filterY = 1;

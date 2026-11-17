@@ -1,8 +1,7 @@
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 #include "gamedata/SavedUnitSelection.h"
 
 extern "C" {
-extern ButtonHelpGlobalsA g_buttonHelp;
 
 typedef struct Entry {
     /* 0x00 */ u8 unk00[0x0C];

@@ -1,6 +1,7 @@
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* A list screen whose rows draw data-table entries (observed fields). */
 struct EntryListScreen {
@@ -17,7 +18,6 @@ s32 selectionGetValidatedField(void);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *position);
 void texDrawCompositeSprite(u32 layer, u32 group, s32 sprite, s32 x, s32 y, u32 priority);
-const SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 sprite);
 void contentFormatEntryName(EntryListScreen *screen, u32 entry, s32 field, char *text);
 
 /* Draws one row of the list: its frame and icons, the entry's name and its detail text. */
@@ -55,9 +55,9 @@ void uiDrawDataEntryRow(EntryListScreen *screen, s32 index, s32 x, s32 y, f32 ba
         detailColor = 0xffffffff;
     }
     const char *name = dataTableGetEntry24Member(screen->entries[index]);
-    const SpriteInfo *namePos = asdTMTexTableEntryAt(0x1a, 0xa4);
+    const TextureTableEntryIV *namePos = asdTMTexTableEntryAt(0x1a, 0xa4);
     textDrawString(2, nameColor, name, namePos->x + x, namePos->y + y, 0.55f, 0.0f, baseSpeed * speed);
-    const SpriteInfo *detailPos = asdTMTexTableEntryAt(0x1a, 0xa6);
+    const TextureTableEntryIV *detailPos = asdTMTexTableEntryAt(0x1a, 0xa6);
     contentFormatEntryName(screen, entry, field, detail);
     textDrawString(2, detailColor, detail, detailPos->x + x, detailPos->y + y, 0.55f, 0.0f, baseSpeed * speed);
 }

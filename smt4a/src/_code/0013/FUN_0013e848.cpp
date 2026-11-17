@@ -1,30 +1,28 @@
-#include "shard/JobWork.h"
+#include "frame_tex/FrameTexA.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 
-void renderCtxSelectDisplayAreaForStereoMode(u32 renderCtx);
-u8 gxCopyFramebufferToSurface(u32 mode, JobSurface *surface);
+u8 gxCopyFramebufferToSurface(u32 mode, AsdTexture *surface);
 s32 stateValuesGetBySelector(u32 selector);
 
-extern u32 g_renderCtx;
-
-/* Captures the screen once (512x512 into the job's surface) while fading; a state selector skips it. */
+/* "XFADECR" capture: captures the right screen once (512x512 into the right texture) while the cross-fade is enabled; a state selector marks it pending. */
 s32 FUN_0013e848(u32 job)
 {
-    JobWork *work = jobGetWork(job);
+    FrameTexWorkA *work = (FrameTexWorkA *)jobGetWork(job);
 
     if (stateValuesGetBySelector(0) != 0) {
-        work->fadeCaptureSkipped = 1;
+        work->fadePendingRight = 1;
         return 0;
     }
-    if (!work->fadeActive || work->fadeCaptured || work->fadeCaptureSkipped) {
+    if (!work->fadeEnabled || work->fadeCapturedRight || work->fadePendingRight) {
         return 0;
     }
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
-    work->surface->width = 512;
-    work->surface->height = 512;
-    work->fadeCaptureResult = gxCopyFramebufferToSurface(0, work->surface);
-    work->fadeCaptured = 1;
+    work->surfaceRight->dimensions.width = 512;
+    work->surfaceRight->dimensions.height = 512;
+    work->fadeCaptureResult = gxCopyFramebufferToSurface(0, work->surfaceRight);
+    work->fadeCapturedRight = 1;
     return 0;
 }
 

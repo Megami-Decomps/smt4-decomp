@@ -25,10 +25,10 @@ u32 btlScriptFindEligibleEntryValueById(void)
 
         if (!(entry->flags & g_btlMessageFlagMasks.eligible))
             continue;
-        if (entry->id != requestedId)
+        if (entry->data.id != requestedId)
             continue;
 
-        result = entry->unitIndex;
+        result = entry->ids[0];
         break;
     }
 

@@ -1,9 +1,8 @@
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 #include "shard/Shard0034.h"
 #include "event/eventCommand.h"
 
 extern "C" {
-extern ButtonHelpGlobalsA g_buttonHelp;
 
 void FUN_00342334(u8 value)
 {

@@ -1,5 +1,6 @@
 /* NON_MATCHING: draws the title map's location markers (16 entries, scaled into the view around the cursor, only the active ones); written from the decompilation, conversions of the s16 intermediates and the efctSetSpeed argument are not compared with retail */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 struct MapMarkerEntry {
     /* 0x00 */ u8 unk00[2];
@@ -43,7 +44,6 @@ struct MapBlockLayout {
 #define MARKER_FLAG_FIXED 0x20
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 
 MapBlockLayout *gameGetMapBlock(void);
 f32 *NaviMain_GetCursorPos(void);

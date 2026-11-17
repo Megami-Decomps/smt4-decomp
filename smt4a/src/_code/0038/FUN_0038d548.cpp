@@ -1,6 +1,6 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
-#include "shard/W6_W6Match1_PartySlot.h"
+#include "gamedata/GameSaveDataA.h"
 #include "gamedata/SupportUnitRecord.h"
 
 struct CategoryEntry {
@@ -27,7 +27,7 @@ u32 FUN_0038d548(void)
 
     battleApplyOptionOverrides(state);
     const CategoryEntry *category = reinterpret_cast<const CategoryEntry *>(
-        dataTableGetCategoryEntry((s16)gameGetOptions()->id, gameGetOptions()->unk12e));
+        dataTableGetCategoryEntry((s16)gameGetOptions()->id, gameGetOptions()->slotIndex));
     statusBustUpPortraitAcquire(category->value + 1, 0);
     state->stateFlags64.bits |= g_btlStartFlags;
     FUN_004aa1d0(g_btlUiBlock);

@@ -1,4 +1,4 @@
-#include "shard/X14_StatusDown.h"
+#include "status/StatusDownA.h"
 #include "shard/TextureDrawCall.h"
 
 extern "C" {
@@ -7,9 +7,9 @@ s32 FUN_00230544();
 // Draw both status indicators using the active or inactive image pair.
 void statusDownDrawIndicatorPairs(s32 x, s32 y)
 {
-    StatusDown *screen = g_statusDown;
+    StatusDownStateA *screen = g_statusDown;
     if (FUN_00230544()) {
-        s32 first = screen->indicators.first;
+        s32 first = screen->indicatorFirst;
         if (first == 1 || first == 2) {
             texDrawTableEntryAtStoredOrigin(2, 0x12, 0x4d5, x, y, 0xba);
             texDrawTableEntryAtStoredOrigin(2, 0x12, 0x4d9, x, y, 0xba);
@@ -17,7 +17,7 @@ void statusDownDrawIndicatorPairs(s32 x, s32 y)
             texDrawTableEntryAtStoredOrigin(2, 0x12, 0x4d3, x, y, 0xba);
             texDrawTableEntryAtStoredOrigin(2, 0x12, 0x4d7, x, y, 0xba);
         }
-        s32 second = screen->indicators.second;
+        s32 second = screen->indicatorSecond;
         if (second == 1 || second == 2) {
             texDrawTableEntryAtStoredOrigin(2, 0x12, 0x4d4, x, y, 0xba);
             texDrawTableEntryAtStoredOrigin(2, 0x12, 0x4d8, x, y, 0xba);

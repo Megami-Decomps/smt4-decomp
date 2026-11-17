@@ -1,6 +1,8 @@
 #include "battle/btlReflect.h"
+#include "battle/BtlEntryLookup.h"
 #include "common.h"
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlEntryLookup.h"
 
 struct ReflectUnit {
     /* 0x00 */ u8 unk00[0x50];
@@ -9,16 +11,9 @@ struct ReflectUnit {
     /* 0x62 */ s16 id;
 };
 
-struct ReflectRecord {
-    /* 0x00 */ u8 unk00[0xC];
-    /* 0x0C */ u32 values[1];
-};
-
 extern "C" {
 
-
-ReflectRecord *btlFindEntryBlockByMemberId(void *battle, s16 id);
-s32 idSetFindSubjectIndex(void *battle, ReflectUnit *unit);
+s32 idSetFindSubjectIndex(BtlMainState *battle, ReflectUnit *unit);
 
 /* Registers a type-0x25 reflect entry for the unit under `key` unless the unit lacks flag 1 or
  * the entry already exists; returns the new entry or NULL. */
@@ -26,7 +21,7 @@ ReflectAction *btlQueueUnitReflectAction25(s32 id, u32 key, ReflectUnit *unit, u
 {
     ReflectAction *action;
     ReflectAction *next;
-    ReflectRecord *record;
+    BtlUnitData *record;
     s32 index;
 
     if (!(unit->flags & 1)) {
@@ -39,15 +34,15 @@ ReflectAction *btlQueueUnitReflectAction25(s32 id, u32 key, ReflectUnit *unit, u
         }
     }
     action = btlQueueReflectAction(g_btlActionReflect, (s16)id, 0, key);
-    record = btlFindEntryBlockByMemberId(static_cast<void *>(btlGetMainState()), unit->id);
-    index = idSetFindSubjectIndex(static_cast<void *>(btlGetMainState()), unit);
+    record = btlFindEntryBlockByMemberId(btlGetMainState(), unit->id);
+    index = idSetFindSubjectIndex(btlGetMainState(), unit);
     if (index < 0) {
         index = 0;
     }
     action->kind = 0x25;
     action->target = reinterpret_cast<u32>(unit);
     action->value = param;
-    action->first = record->values[index];
+    action->first = record->parts[index];
     return action;
 }
 

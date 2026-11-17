@@ -1,8 +1,7 @@
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 #include "shard/Shard0036.h"
 
 extern "C" {
-extern MapIfGlobals g_mapIf;
 
 // Return the selected active map-interface categories from state eight to six.
 void FUN_002f3bc0(void)

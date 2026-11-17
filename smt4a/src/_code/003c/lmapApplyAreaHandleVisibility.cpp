@@ -1,6 +1,7 @@
 #include "shard/W5_W5Match7_SceneState.h"
 #include "game/GameStateA.h"
 #include "shard/W4_Match1b_RegisteredHandle.h"
+#include "Model/MoriModelManager.h"
 
 struct LmapHandleTable {
     /* 0x00 */ u8 unk00[0x10];
@@ -28,13 +29,11 @@ struct LmapHandleMain {
 
 extern "C" {
 extern LmapHandleMain *g_lmapMainState;
-extern void *g_handleRegistry;
 extern const u8 DAT_0058024c[], DAT_0058029c[], DAT_005802ec[];
 extern const u8 DAT_0058033c[], DAT_0058038c[], DAT_005803dc[];
 extern const u8 DAT_0058042c[], DAT_0058047c[], DAT_005804cc[];
 void FUN_003cb948(const u8 *mask);
 RegisteredHandle *ptrVectorAt(LmapHandleTable *, u32 index);
-void handleRegistryRegisterObject(void *registry, RegisteredHandle *handle);
 void FUN_00399290(u32 index, s32 enabled);
 
 // Apply the special-area visibility mask, or enable every map handle.

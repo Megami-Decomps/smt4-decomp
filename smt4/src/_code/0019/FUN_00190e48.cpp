@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -55,7 +56,6 @@ extern int g_titleScene; /* 0x44ea00 */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
 /* Supplied declaration required: texDrawCompositeSprite. */
-extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int dataTable0eSub1GetId(unsigned short);
@@ -302,7 +302,7 @@ void FUN_00190e48(void)
                           temp_v19 = 6;
                         }
                         temp_v20 = 0xe;
-                        temp_v8 = asdTMTexTableEntryAt(0x12,0x57);
+                        temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x57));
                         temp_v8 = (int)*(short *)(temp_v8 + 8);
                       }
                     }

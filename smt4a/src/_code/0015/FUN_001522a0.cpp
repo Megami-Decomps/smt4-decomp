@@ -1,5 +1,6 @@
 /* NON_MATCHING: rectangle semantics restored; float-register scheduling and color initialization order differ. */
 #include "shard/W6_W6Match3_EffectColor.h"
+#include "camp/RenderCtxA.h"
 
 struct ColoredRectangle {
     f32 left;
@@ -10,8 +11,6 @@ struct ColoredRectangle {
 };
 
 extern "C" {
-extern u32 g_renderCtx;
-void renderCtxSelectTexture(u32 scene, s32 mode);
 void gfxDrawQuadFourColors(const EffectColor *topLeft, const EffectColor *topRight,
                   const EffectColor *bottomLeft, const EffectColor *bottomRight,
                   f32 x, f32 y, f32 width, f32 height, f32 depth);

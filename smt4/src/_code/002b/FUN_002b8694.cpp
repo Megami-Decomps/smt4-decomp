@@ -1,10 +1,8 @@
-#include "common.h"
-
-namespace { struct CampState { u8 padding[0x18]; s32 state; }; }
+#include "camp/CampState.h"
 
 extern "C" {
-/* Reads or updates the requested state. */
-extern CampState *g_camp;
+
+/* Whether the camp is open and not in state 54. */
 s32 FUN_002b8694(void)
 {
     if (g_camp == NULL) {
@@ -14,4 +12,5 @@ s32 FUN_002b8694(void)
         return 0;
     return 1;
 }
+
 }

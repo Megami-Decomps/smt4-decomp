@@ -2,6 +2,7 @@
 #include <stddef.h>
 #include "util/BitsAndBytes.h"
 #include "code/Code002a_Smt4a.h"
+#include "gamedata/SaveSlotRecord.h"
 
 /* A demon skill-like record as the fusion/search filter reads it. */
 
@@ -32,11 +33,6 @@ struct RecordFilter {
     /* 0x1B5 */ s8 limitCount;
 };
 
-struct SlotRecord {
-    /* 0x00 */ u8 unk00[0x62];
-    /* 0x62 */ u16 id;
-};
-
 typedef char RecordFilterOffsets[sizeof(RecordFilter) == 0x1B8 &&
     offsetof(RecordFilter, bracket) == 0x154 &&
     offsetof(RecordFilter, requiredSlotA) == 0x170 &&
@@ -47,7 +43,6 @@ typedef char RecordFilterOffsets[sizeof(RecordFilter) == 0x1B8 &&
 extern "C" {
 
 s32 slotRecordFindById(u32 id);
-SlotRecord *gameGetSlotRecord(s32 slot);
 
 /* Whether the record `recordId` passes the filter, with the two member ids given for the party-slot conditions. */
 s32 fusionRecordPassesFilter(RecordFilter *filter, u32 memberA, u32 memberB, u32 recordId)
@@ -150,14 +145,14 @@ s32 fusionRecordPassesFilter(RecordFilter *filter, u32 memberA, u32 memberB, u32
     }
     if (filter->requireMembers) {
         if ((u32)filter->requiredSlotA < 24) {
-            SlotRecord *slot = gameGetSlotRecord(filter->requiredSlotA);
+            SlotRecordA *slot = gameGetSlotRecord(filter->requiredSlotA);
 
             if (slot->id != memberA && slot->id != memberB) {
                 return 0;
             }
         }
         if ((u32)filter->requiredSlotB < 24) {
-            SlotRecord *slot = gameGetSlotRecord(filter->requiredSlotB);
+            SlotRecordA *slot = gameGetSlotRecord(filter->requiredSlotB);
 
             if (slot->id != memberA && slot->id != memberB) {
                 return 0;
@@ -166,14 +161,14 @@ s32 fusionRecordPassesFilter(RecordFilter *filter, u32 memberA, u32 memberB, u32
     }
     if (filter->excludeMembers) {
         if ((u32)filter->excludedSlotA < 24) {
-            SlotRecord *slot = gameGetSlotRecord(filter->excludedSlotA);
+            SlotRecordA *slot = gameGetSlotRecord(filter->excludedSlotA);
 
             if (slot->id == memberA || slot->id == memberB) {
                 return 0;
             }
         }
         if ((u32)filter->excludedSlotB < 24) {
-            SlotRecord *slot = gameGetSlotRecord(filter->excludedSlotB);
+            SlotRecordA *slot = gameGetSlotRecord(filter->excludedSlotB);
 
             if (slot->id == memberA || slot->id == memberB) {
                 return 0;

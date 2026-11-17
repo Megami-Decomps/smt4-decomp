@@ -2,34 +2,13 @@
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "util/BitsAndBytes.h"
-#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
-
-struct FrameTexQuad {
-    /* 0x00 */ f32 x[4];
-    /* 0x10 */ f32 y[4];
-};
-
-struct FrameTex {
-    /* 0x0000 */ u8 unk0000[0xFA8];
-    /* 0x0FA8 */ s32 downscale;        /* capture was taken at 1/2^n size */
-    /* 0x0FAC */ u8 fullWidth;
-    /* 0x0FAD */ u8 unk0FAD[3];
-    /* 0x0FB0 */ FrameTexQuad quad;
-    /* 0x0FD0 */ u8 unk0FD0[8];
-    /* 0x0FD8 */ u32 color;
-    /* 0x0FDC */ f32 depth;
-    /* 0x0FE0 */ s32 blendMode;        /* 0 normal, 1 additive, 2 subtractive */
-    /* 0x0FE4 */ u8 filtered;
-    /* 0x0FE5 */ u8 unk0FE5[0x4AB];
-    /* 0x1490 */ AsdTexture *surface;
-};
+#include "frame_tex/FrameTexA.h"
 
 #define FRAME_TEX_WIDTH_HALF 240.0f
 #define FRAME_TEX_WIDTH_FULL 480.0f
 #define FRAME_TEX_HEIGHT 400.0f
 
 extern "C" {
-extern FrameTex *g_frameTex;
 
 s32 stateValuesGetBySelector(u32 selector);
 s32 renderCtxPackPassFlags(u32 a, u32 b);
@@ -41,14 +20,14 @@ void FUN_0019e3d0(u32 c0, u32 c1, u32 c2, u32 c3,
 
 void FUN_001509fc(s32 wide)
 {
-    FrameTex *tex = g_frameTex;
+    FrameTexWorkA *tex = g_frameTex;
     f32 extentU = FRAME_TEX_WIDTH_HALF;
     f32 extentV = FRAME_TEX_HEIGHT;
-    if (tex->fullWidth == 0 && wide != 0)
+    if (tex->hdr.captureResult == 0 && wide != 0)
         extentU = FRAME_TEX_WIDTH_FULL;
 
     s32 selector = stateValuesGetBySelector(0);
-    s32 level = tex->downscale;
+    s32 level = tex->hdr.levels;
     if (selector == 0 && level > 1) {
         level = level - 1;
         if (level < 1)
@@ -60,14 +39,14 @@ void FUN_001509fc(s32 wide)
         extentU = extentU / scale;
     }
 
-    AsdTexture *surface = tex->surface;
-    if (tex->filtered != 0) {
+    AsdTexture *surface = tex->sceneSurface;
+    if (tex->hdr.filtered != 0) {
         surface->filterX = 1;
         surface->filterY = 1;
     }
     f32 width = (f32)surface->dimensions.width;
     f32 height = (f32)surface->dimensions.height;
-    if (tex->filtered == 0) {
+    if (tex->hdr.filtered == 0) {
         surface->filterX = 0;
         surface->filterY = 0;
     }
@@ -78,7 +57,7 @@ void FUN_001509fc(s32 wide)
     s32 state = renderCtxPackPassFlags(1, 0);
     renderStackPush(&context->stackA, state);
     context = g_renderCtx;
-    switch (tex->blendMode) {
+    switch (tex->hdr.blendMode) {
     case 0:
         state = packNibblesAndByte(6, 7, 0);
         renderStackSet(&context->stackB, state);
@@ -93,14 +72,14 @@ void FUN_001509fc(s32 wide)
         break;
     }
     renderCtxSelectTexture(g_renderCtx, surface);
-    u32 color = tex->color;
-    f32 z = tex->depth;
+    u32 color = tex->hdr.color;
+    f32 z = tex->hdr.depth;
     FUN_0019e3d0(color, color, color, color,
-                 tex->quad.x[0], tex->quad.y[0], z, tex->quad.x[1], tex->quad.y[1], z,
-                 tex->quad.x[2], tex->quad.y[2], z, tex->quad.x[3], tex->quad.y[3], z,
+                 tex->hdr.x[0], tex->hdr.y[0], z, tex->hdr.x[1], tex->hdr.y[1], z,
+                 tex->hdr.x[2], tex->hdr.y[2], z, tex->hdr.x[3], tex->hdr.y[3], z,
                  maxU, 0.0f, maxU, maxV, 0.0f, 0.0f, 0.0f, maxV);
     context = g_renderCtx;
-    if (tex->blendMode != 0) {
+    if (tex->hdr.blendMode != 0) {
         state = packNibblesAndByte(6, 7, 0);
         renderStackSet(&context->stackB, state);
     }

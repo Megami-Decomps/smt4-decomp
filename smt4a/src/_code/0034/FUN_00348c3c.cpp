@@ -1,5 +1,4 @@
-#include "ui/FrameTex.h"
-extern "C" FrameWorkA *g_frameTex;
+#include "frame_tex/FrameTexA.h"
 
 extern "C" {
 
@@ -7,7 +6,7 @@ extern "C" {
 
 void FUN_00348c3c(u8 value)
 {
-    g_frameTex->unkFF4 = value;
+    g_frameTex->zan.enabled = value;
 }
 
 } /* extern "C" */

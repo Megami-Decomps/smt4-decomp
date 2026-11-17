@@ -1,5 +1,5 @@
 /* NON_MATCHING: result code three is not retained across skill validation, and shared return-zero/three blocks have different placement. */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "gamedata/SkillDataRecord.h"
 #include <stddef.h>

@@ -2,6 +2,7 @@
 #include "gamedata/DataTable.h"
 #include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
+#include "map/PopupStateA.h"
 
 struct PopupEntry {
     /* 0x00 */ s32 id;
@@ -12,13 +13,6 @@ struct PopupEntry {
     /* 0x0E */ u8 unk0E[0x12];
 };
 
-struct PopupState {
-    /* 0x00 */ s32 state;
-    /* 0x04 */ s32 unk04;
-    /* 0x08 */ u8 unk08[0xC];
-    /* 0x14 */ s32 kindId;
-    /* 0x18 */ s32 entryId;
-};
 
 #define POPUP_STATE_STORY 0x12
 #define POPUP_KIND_STORY 0x13
@@ -27,14 +21,13 @@ struct PopupState {
 #define POPUP_COOLDOWN 10
 
 extern "C" {
-extern PopupState *g_popupState;
 extern s32 DAT_005f1994;
 
 s32 gameFlagIsSet(s32 flag);
 
 s32 randRange(u32 maximum);
 void popupQueueInsertUnique(s32 state);
-s32 popupSelectWeightedMessage(s32 kind);
+const char *popupSelectWeightedMessage(s32 kind);
 
 /* Picks a story popup. `immediate` skips the random gates. */
 void FUN_00295108(s32 immediate)
@@ -87,10 +80,10 @@ void FUN_00295108(s32 immediate)
                 return;
             if (DAT_005f1994 == 0) {
                 DAT_005f1994 = 1;
-                g_popupState->entryId = entry->id;
-                g_popupState->kindId = popupSelectWeightedMessage(POPUP_KIND_STORY);
+                g_popupState->speakerId = entry->id;
+                g_popupState->message = popupSelectWeightedMessage(POPUP_KIND_STORY);
                 g_popupState->state = POPUP_STATE_STORY;
-                g_popupState->unk04 = 0;
+                g_popupState->timer = 0;
                 return;
             }
         }

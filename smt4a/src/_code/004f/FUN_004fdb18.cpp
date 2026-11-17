@@ -25,7 +25,7 @@ extern "C" u32 FUN_004fdb18(s32 actor, u32 options, BattleRosterRecordA *target,
     action->parameter = parameter;
     if (checkStatus) {
         const BtlCombatantEntryA *entry = btlMainFindEntryByListedId(btlGetMainState(), target->motion.group);
-        if (entry->statusFlags & 0x10) {
+        if (entry->data.statusFlags & 0x10) {
             action = btlQueueReflectAction(g_btlActionReflect, nextActor, 0, options);
             action->kind = 38;
             action->target = reinterpret_cast<u32>(target);

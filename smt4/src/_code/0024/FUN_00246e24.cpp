@@ -23,7 +23,7 @@ u32 FUN_00246e24(s32 actor, u32 options, BtlActionRecord *target, u32 value, s32
     btlReflectQueueStatusChange((s16)actor, options, target, 1, value);
     if (clearStatus) {
         BtlEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), target->memberId);
-        if ((entry->groupMask & 0x10) != 0) {
+        if ((entry->data.statusFlags & 0x10) != 0) {
             btlReflectQueueStatusChange(linkedActor, options, target, 0, 0x10);
         }
     }

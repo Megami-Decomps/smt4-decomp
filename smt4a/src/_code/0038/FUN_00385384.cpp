@@ -1,9 +1,8 @@
 /* NON_MATCHING: retail 48 vs built 48 rows; spatial argument preservation and record-loop register allocation differ. */
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 
 extern "C" {
-extern MapIfGlobalsA g_mapIf;
 f32 distSpatial(f32, f32, f32, f32, f32, f32);
 s32 soundActorStartOnFreeChannel(u32 sound, BattleVector3 position);
 

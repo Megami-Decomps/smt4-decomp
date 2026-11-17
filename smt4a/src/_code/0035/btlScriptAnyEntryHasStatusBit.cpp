@@ -18,7 +18,7 @@ u32 btlScriptAnyEntryHasStatusBit(void)
         if ((entry->flags & g_btlCandidateMasks.unavailable) &&
             (entry->flags & g_btlCandidateMasks.required) &&
             !(entry->flags & g_btlCandidateMasks.excluded) &&
-            (entry->statusFlags & (1 << bit))) {
+            (entry->data.statusFlags & (1 << bit))) {
             scrSetResult(1);
             return 1;
         }

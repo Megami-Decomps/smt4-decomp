@@ -23,7 +23,7 @@ s32 FUN_002f7418(void)
         BtlEntry *unit = &btlGetMainState()->entries[i];
 
         if ((unit->flags & 0x10) == 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0
-            && unit->values[slot] >> 10 == 1) {
+            && unit->data.values[slot] >> 10 == 1) {
             scrSetResult(1);
             return 1;
         }
@@ -31,7 +31,7 @@ s32 FUN_002f7418(void)
     if (btlGetMainState()->hasActiveEntry != 0) {
         BtlEntry *active = btlMainFindActiveEntry(btlGetMainState());
 
-        if (active != NULL && active->values[slot] >> 10 == 1) {
+        if (active != NULL && active->data.values[slot] >> 10 == 1) {
             scrSetResult(1);
             return 1;
         }

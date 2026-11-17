@@ -1,9 +1,10 @@
 /* NON_MATCHING: cache-array addressing and source position copy grouping differ, with different action/state register roles. */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "shard/BtlScriptTargets.h"
 #include "battle/btlAction.h"
 #include "battle/BattleRosterCache.h"
+#include "battle/BtlEntryLookup.h"
 
 struct BattleActionCacheRecord {
     s32 model;
@@ -22,13 +23,8 @@ struct BattleActionCacheKeyView {
     u32 key;
 };
 /* Lookup returns a subobject whose common key is followed by further member keys. */
-struct BattleMemberKeysView {
-    u8 unk00[0xc];
-    s32 keys[50];
-};
 
 extern "C" {
-BattleCombatantStatusKey *btlFindEntryBlockByMemberId(BtlMainState *battle, s32 id);
 s32 idSetFindSubjectIndex(BtlMainState *battle, const BtlActionRecord *action);
 
 void FUN_003cc944(BtlMainState **battle, const BtlScriptActor *actor, s32 allActors)
@@ -48,13 +44,13 @@ void FUN_003cc944(BtlMainState **battle, const BtlScriptActor *actor, s32 allAct
         }
         if (action->stateFlags & 2)
             continue;
-        const BattleCombatantStatusKey *member = btlFindEntryBlockByMemberId(state, action->memberId);
+        const BtlUnitData *member = btlFindEntryBlockByMemberId(state, action->memberId);
         if (!member)
             continue;
         s32 memberIndex = idSetFindSubjectIndex(*battle, action);
         if (memberIndex < 0)
             memberIndex = 0;
-        s32 model = ((const BattleMemberKeysView *)member)->keys[memberIndex];
+        s32 model = member->parts[memberIndex];
         BattleActionCacheView *cache = (BattleActionCacheView *)*battle;
         const BattleActionCacheKeyView *identity = (const BattleActionCacheKeyView *)action;
         bool present = false;

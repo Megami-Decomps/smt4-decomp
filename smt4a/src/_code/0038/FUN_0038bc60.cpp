@@ -33,7 +33,7 @@ u32 FUN_0038bc60(void)
         if ((flags & g_btlCandidateMasks.unavailable) != 0 &&
             (flags & g_btlCandidateMasks.required) != 0 &&
             (flags & g_btlCandidateMasks.excluded) == 0 &&
-            entry->id == unitId &&
+            entry->data.id == unitId &&
             reinterpret_cast<const PropertyView *>(entry)->values[property] == value) {
             scrSetResult(1);
             return 1;

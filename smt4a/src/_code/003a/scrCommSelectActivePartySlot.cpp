@@ -1,4 +1,4 @@
-#include "shard/W6_W6Match1_PartySlot.h"
+#include "gamedata/GameSaveDataA.h"
 
 extern "C" {
 u32 scrGetArg(u32 index);

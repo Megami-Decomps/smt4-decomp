@@ -26,8 +26,8 @@ u32 FUN_0039e588(void)
     for (s32 i = 4; i < 54; ++i) {
         BtlCombatantEntryA* entry = &battle->entries[i];
         if ((entry->flags & active) != 0 && (entry->flags & g_battleMaskPresets[3]) == 0 &&
-            (entry->flags & g_battleMaskPresets[1]) != 0 && entry->selection.marked != 0 &&
-            entry->id == id) {
+            (entry->flags & g_battleMaskPresets[1]) != 0 && entry->data.marked != 0 &&
+            entry->data.id == id) {
             reinterpret_cast<ScriptUnitValueView*>(reinterpret_cast<BtlUnitA *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit))))->targetValue = value;
             break;
         }

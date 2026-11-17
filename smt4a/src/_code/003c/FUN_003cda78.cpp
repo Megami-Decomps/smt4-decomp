@@ -25,7 +25,7 @@ struct SkillCommandWork {
 
 static __inline const u16 *slotSkillWords(const SlotRecordA *record)
 {
-    return reinterpret_cast<const u16 *>(record->unk000 + 0x34);
+    return record->skills;
 }
 
 extern "C" {

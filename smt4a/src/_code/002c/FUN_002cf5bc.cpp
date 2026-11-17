@@ -24,9 +24,9 @@ u8 *FUN_002cf5bc(void)
         return NULL;
     }
     for (s32 i = 0; i < 21; i++) {
-        entry->encodedLevels.levels[i] = (u8)(entry->encodedStats.values[i] >> 10);
+        entry->data.levels[i] = (u8)(entry->data.values[i] >> 10);
     }
-    return entry->encodedLevels.levels;
+    return entry->data.levels;
 }
 
 } /* extern "C" */

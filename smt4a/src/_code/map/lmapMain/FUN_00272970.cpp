@@ -3,6 +3,7 @@
 #include "game/GameStateA.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "gamedata/GameDataAccess.h"
+#include "shard/W5_W5Match7_FlagBanks.h"
 
 /* One of the 0x88-byte lmap slots; the first three bytes are cleared here. The last slot of the
  * first array also holds three words that are set separately. */

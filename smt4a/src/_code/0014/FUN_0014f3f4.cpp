@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "util/BitsAndBytes.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -29,7 +30,6 @@ int renderCtxSelectTexture(...);
 int renderCtxPopState(...);
 int renderStackPushIndexed(...);
 int texTableRecordCallWithParams(int, int, int, int);
-int asdTMTexTableEntryAt(...);
 int texDrawTableEntryAtStoredOrigin(...);
 int fontMeasureLineAdvance(...);
 int renderCtxCalculateStereoParallax(...);
@@ -146,8 +146,8 @@ char FUN_0014f3f4(void)
       renderStackPushIndexed(g_renderCtx,3,temp_v7);
       temp_v8 = gameGetIndexedSlotMember(0);
       if (temp_v8 != 0) {
-        temp_v22 = asdTMTexTableEntryAt(0x13,0x11f1);
-        temp_v23 = asdTMTexTableEntryAt(0x13,0x11f2);
+        temp_v22 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,0x11f1));
+        temp_v23 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,0x11f2));
         temp_v14 = fontMeasureTextWidth(reinterpret_cast<const char *>(temp_v8), 3, 0.0f);
         temp_v21 = 0xb;
         temp_v20 = temp_v6;
@@ -199,7 +199,7 @@ char FUN_0014f3f4(void)
       temp_v21 = 0x15;
       temp_v20 = temp_v8;
       texDrawTableEntryAtStoredOrigin(2,4,0xabea,temp_v12 + temp_v15);
-      temp_v11 = asdTMTexTableEntryAt(4,0xabeb);
+      temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(4,0xabeb));
       temp_v20 = -0xff01;
       temp_v21 = temp_v6 * 3;
       temp_v6 = temp_v6 * 0xc;
@@ -214,7 +214,7 @@ char FUN_0014f3f4(void)
       VectorSignedToFloat(*(short *)(temp_v11 + 10) + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
       textDrawString(2,temp_v20,&temp_v22,temp_v10);
-      temp_v11 = asdTMTexTableEntryAt(4,0xabec);
+      temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(4,0xabec));
       temp_v20 = *(int *)("\xe4f8U\xe516U\xe507U\xe525UഗV\xe534U\xe551UഗV\xe4e1Uͼ" + temp_v6 + 8)
       ;
       textFormatBuffer(&temp_v22,"%s\x81|%s\x81|%s",
@@ -323,7 +323,7 @@ char FUN_0014f3f4(void)
               }
             }
             else {
-              temp_v11 = asdTMTexTableEntryAt(8,0xe0);
+              temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0xe0));
               temp_v20 = (int)*(short *)(temp_v11 + 10);
               temp_v21 = 0x13;
               texDrawTableEntryAtStoredOrigin(2,8,0xdf,*(short *)(temp_v11 + 8) + temp_v6);
@@ -333,7 +333,7 @@ char FUN_0014f3f4(void)
             }
           }
           else {
-            temp_v11 = asdTMTexTableEntryAt(8,0xe1);
+            temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0xe1));
             temp_v20 = (int)*(short *)(temp_v11 + 10);
             temp_v21 = 0x13;
             texDrawTableEntryAtStoredOrigin(2,8,0xdf,*(short *)(temp_v11 + 8) + temp_v6);
@@ -454,7 +454,7 @@ LAB_0014fe60:
     if (*(char *)(temp_v5 + 8) == '\x01' || *(char *)(temp_v5 + 8) == '\x04') {
       temp_v12 = ifTouchIsActive();
       if (temp_v12 != 0) {
-        temp_v12 = asdTMTexTableEntryAt(8,0x7d8);
+        temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0x7d8));
         temp_v22 = (int)temp_v17;
         temp_v11 = 0x3eccccce;
         temp_v20 = (int)((unsigned long long)temp_v17 >> 0x20);
@@ -466,7 +466,7 @@ LAB_0014fe60:
         VectorSignedToFloat((int)(*(short **)(temp_v12 + 0xc))[1],(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)**(short **)(temp_v12 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_00164034(&temp_v20);
-        temp_v12 = asdTMTexTableEntryAt(8,0x7d9);
+        temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0x7d9));
         VectorSignedToFloat((int)*(short *)(temp_v12 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v12 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)(*(short **)(temp_v12 + 0xc))[1],(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -476,13 +476,13 @@ LAB_0014fe60:
         temp_v21 = (int)((unsigned long long)temp_v17 >> 0x20);
         temp_v22 = temp_v21;
         temp_v23 = temp_v11;
-        temp_v12 = asdTMTexTableEntryAt(8,0x7da);
+        temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0x7da));
         VectorSignedToFloat((int)*(short *)(temp_v12 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v12 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)(*(short **)(temp_v12 + 0xc))[1],(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)**(short **)(temp_v12 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_00164034(&temp_v20);
-        temp_v12 = asdTMTexTableEntryAt(8,0x7db);
+        temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0x7db));
         VectorSignedToFloat((int)*(short *)(temp_v12 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)(*(short **)(temp_v12 + 0xc))[1],(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v12 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -492,7 +492,7 @@ LAB_0014fe60:
         temp_v21 = (int)temp_v17;
         temp_v22 = temp_v20;
         temp_v23 = temp_v11;
-        temp_v12 = asdTMTexTableEntryAt(8,0x42);
+        temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0x42));
         VectorSignedToFloat((int)*(short *)(temp_v12 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v12 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)(*(short **)(temp_v12 + 0xc))[1],(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -504,7 +504,7 @@ LAB_0014fe60:
       if (temp_v12 < temp_v8) {
         do {
           temp_v24 = temp_v18;
-          temp_v11 = asdTMTexTableEntryAt(8,temp_v6 + temp_v12);
+          temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,temp_v6 + temp_v12));
           temp_v18 = temp_v24;
           renderCtxCalculateStereoParallax(g_renderCtx);
           temp_v20 = 6;
@@ -517,19 +517,19 @@ LAB_0014fe60:
       if (temp_v6 != 0) {
         temp_v1 = *(unsigned short *)(*(int *)(temp_v5 + 4) + 0x48);
         if (temp_v1 < 3) {
-          temp_v6 = asdTMTexTableEntryAt(8,0x2f);
+          temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0x2f));
         }
         else if (temp_v1 < 5) {
-          temp_v6 = asdTMTexTableEntryAt(8,0x1f);
+          temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0x1f));
         }
         else if (temp_v1 < 7) {
-          temp_v6 = asdTMTexTableEntryAt(8,0x23);
+          temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0x23));
         }
         else if (temp_v1 < 9) {
-          temp_v6 = asdTMTexTableEntryAt(8,0x42);
+          temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0x42));
         }
         else {
-          temp_v6 = asdTMTexTableEntryAt(8,0x28);
+          temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0x28));
         }
         renderCtxCalculateStereoParallax(g_renderCtx);
         FUN_00163ec4(*(unsigned int *)(temp_v5 + 4),(int)*(short *)(temp_v6 + 8) + (int)temp_v18,
@@ -545,7 +545,7 @@ LAB_0014fe60:
     temp_v18 = 0.27f;
     renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v22 = FUN_001688c4(*(unsigned int *)(temp_v5 + 4));
-    temp_v6 = asdTMTexTableEntryAt(8,0x8e);
+    temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0x8e));
     temp_v2 = *(short *)(temp_v6 + 8);
     temp_v3 = *(short *)(temp_v6 + 10);
     temp_v8 = 0;
@@ -577,7 +577,7 @@ LAB_0014fe60:
     renderStackPushIndexed(g_renderCtx,3,temp_v7);
     temp_v18 = 0.27f;
     renderCtxCalculateStereoParallax(g_renderCtx);
-    temp_v6 = asdTMTexTableEntryAt(8,0x8e);
+    temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0x8e));
     if ((*(char *)(temp_v5 + 0x5c) != '\0') &&
        (temp_v8 = temp_v5 + *(short *)(temp_v5 + 0x56) * 0x8c,
        (*(unsigned char *)(temp_v8 + 0x8cc) & *(unsigned char *)(temp_v8 + 0x8cb)) != 0)) {

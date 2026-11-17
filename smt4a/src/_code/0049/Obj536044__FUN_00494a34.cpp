@@ -1,5 +1,6 @@
 /* NON_MATCHING: the two item-scan loops and the shared script-start tail are merged differently by armcc than retail, which keeps each copy; the shop step logic is the same. */
 #include "common.h"
+#include "game/GameStateA.h"
 #include "gamedata/FlagValueIsPositive.h"
 
 extern "C" {
@@ -23,7 +24,6 @@ typedef struct ShopMain {
     /* 0x1604C */ u8 introMode;
 } ShopMain;
 
-extern u32 DAT_005f1990;
 
 s32 sysPlaySe(s32 id);
 void buttonHelpSetText(s32 a, u32 color);
@@ -115,7 +115,7 @@ void _ZN9Obj53604412FUN_00494a34Ev(ShopMain *shop)
         FUN_0049a5b4(shop);
         sysPlaySe(0x77);
         buttonHelpSetText(0, 0x323232FF);
-        DAT_005f1990 = 0;
+        g_gameState.giftCounter = 0;
     }
 }
 

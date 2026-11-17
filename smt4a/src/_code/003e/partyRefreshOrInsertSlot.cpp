@@ -1,4 +1,4 @@
-#include "shard/W6_W6Match1_PartySlot.h"
+#include "gamedata/GameSaveDataA.h"
 #include "gamedata/SaveSlotTable.h"
 
 extern "C" {
@@ -31,6 +31,6 @@ extern "C" void partyRefreshOrInsertSlot(u32 id, u32 definition)
     PartySlotA *record = resolvePartyRecord((u16)emptySlot);
     record->id = (u16)id;
     record->flags |= 1;
-    record->unk12e = (u16)emptySlot;
+    record->slotIndex = (u16)emptySlot;
     battleRecordInitializeFromDefinition(record, definition);
 }

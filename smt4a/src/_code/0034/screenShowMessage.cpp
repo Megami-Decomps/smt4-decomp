@@ -1,8 +1,7 @@
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 #include "shard/Shard0034.h"
 
 extern "C" {
-extern ButtonHelpGlobalsA g_buttonHelp;
 
 extern u32 g_aocSystem;
 extern s32 FUN_0046e458(u32 system, s32 id);

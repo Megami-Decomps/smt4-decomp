@@ -104,7 +104,7 @@ s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 extern "C" {
 #endif
 /* Looks up a table entry in the file of a layout (tail call to asdTMTexTableEntryAt, linked as a nop). */
-u16 *layoutFindTableEntry(void *layout, s32 index);
+struct TextureTableEntryIV *layoutFindTableEntry(void *layout, s32 index);
 #ifdef __cplusplus
 }
 #endif

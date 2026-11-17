@@ -20,7 +20,7 @@ u32 FUN_002684d0(s32 skillId, s32 target)
         if (scope == 3 || scope == 8) {
             return FUN_002a690c(target, skillId, 1) == 0;
         }
-        SaveSlotTable *party = gameGetSlotTable();
+        SaveSlotTableA *party = gameGetSlotTable();
         for (s32 i = -1; i < 24; ++i) {
             s32 result;
             if (i < 0) {

@@ -35,7 +35,7 @@ u32 FUN_0038b8b8(void)
             if ((g_btlCandidateMasks.unavailable & record->flags) != 0 && (g_btlCandidateMasks.required & record->flags) != 0 &&
                 (g_btlCandidateMasks.excluded & record->flags) == 0) {
                 for (s32 slot = 0; slot < 21; slot++) {
-                    if (group == record->encodedStats.values[slot] >> 10) {
+                    if (group == record->data.values[slot] >> 10) {
                         for (const u16 *id = state->idsBegin; id != state->idsEnd; id++) {
                             TableEntry *entry = (TableEntry *)skillDataFindById(itemTableGetItemRecord(*id)->skillId);
                             if (entry != NULL && (entry->flags << 16) >> 27 == slot) {

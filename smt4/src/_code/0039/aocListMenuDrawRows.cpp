@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 /* The embedded number panel (0x2E8); `shown` is the byte at 0x64. */
 struct MenuSlider {
@@ -22,7 +23,6 @@ struct ListMenu {
 };
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 void renderCtxSelectStereoLayout(RenderCtx *context);
 void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 speed);

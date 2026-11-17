@@ -1,7 +1,7 @@
 /* NON_MATCHING: retail places the "return 0" exit after the copy and assigns r4-r6 in a different
  * order; the loop body otherwise matches. */
 #include "common.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 
 /* One recorded move (0x10 bytes). */
@@ -39,7 +39,7 @@ s32 FUN_0033b3c4(BoardState *board, BoardHistoryEntry *out)
                 break;
             }
         } else if (board->history[board->historyCount].kind != 4 ||
-                   !(board->units[board->history[board->historyCount].unit].groupMask & 0x1c0)) {
+                   !(board->units[board->history[board->historyCount].unit].data.statusFlags & 0x1c0)) {
             break;
         }
     }

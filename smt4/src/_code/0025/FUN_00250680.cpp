@@ -1,14 +1,11 @@
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlEntryLookup.h"
 #include "battle/btlReflect.h"
 #include "common.h"
+#include "battle/BtlEntryLookup.h"
 
 // Private views of the battle records used by this function.
-struct BattleMainState;
 struct BattleEvent;
-
-struct ListedBattleEntryView {
-    u32 flags; // 0x00
-};
 
 struct ReflectSourceView {
     u8 unk00[0x50]; // 0x00
@@ -18,13 +15,12 @@ struct ReflectSourceView {
 };
 
 extern "C" {
-ListedBattleEntryView* btlMainFindEntryByListedId(BattleMainState* state, s32 listedId);
 s32 FUN_0027e3e8(BattleEvent* event, ReflectSourceView* source, u32 mode);
 
 extern BattleEvent* g_btlEvent;
 
 // Queues a reflection action of kind 0x24 on the entry.
-static __inline void queueEntryAction(s32 actionId, u32 argument, ListedBattleEntryView* entry, s32 value)
+static __inline void queueEntryAction(s32 actionId, u32 argument, BtlEntry* entry, s32 value)
 {
     ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actionId, 0, argument);
     action->kind = 0x24;
@@ -36,8 +32,8 @@ static __inline void queueEntryAction(s32 actionId, u32 argument, ListedBattleEn
 u32 FUN_00250680(s32 actionId, u32 argument, ReflectSourceView* source)
 {
     if ((source->flags & 1) != 0 && (source->flags & 0x80) != 0) {
-        ListedBattleEntryView* entry =
-            btlMainFindEntryByListedId(reinterpret_cast<BattleMainState *>(btlGetMainState()), source->listedId);
+        BtlEntry* entry =
+            btlMainFindEntryByListedId(btlGetMainState(), source->listedId);
         entry->flags |= 0x240;
 
         if (FUN_0027e3e8(g_btlEvent, source, 1) == 0 ||

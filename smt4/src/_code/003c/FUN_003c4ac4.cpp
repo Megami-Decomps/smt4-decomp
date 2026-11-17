@@ -2,7 +2,7 @@
 #include "battle/btlHelp.h"
 #include "AsdSDK/Source/Util/AsdListHelpers.h"
 #include "code/Code0025_Smt4.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 
 /* The entry editor screen: its list box and the index of the entry being edited. */
 struct EntryEditorScreen {
@@ -66,7 +66,7 @@ void FUN_003c4ac4(EntryEditorScreen *screen, BtlMainState *battle)
             asdListBoxSetItemMode2(screen->listBox, 10, (entry->flags & 0x1000) >> 12);
             asdListBoxSetItemMode2(screen->listBox, 11, (entry->flags & 0x4000000) >> 26);
             if ((entry->flags & 0x10) != 0) {
-                asdListBoxSetItemMode3(screen->listBox, 12, saveIsRecordValueBounded(entry->id), 0, 9999, 0);
+                asdListBoxSetItemMode3(screen->listBox, 12, saveIsRecordValueBounded(entry->data.id), 0, 9999, 0);
             } else {
                 asdListBoxSetItemMode3(screen->listBox, 12, 0, 0, 9999, 0);
             }
@@ -75,14 +75,14 @@ void FUN_003c4ac4(EntryEditorScreen *screen, BtlMainState *battle)
     case 1:
         if (stats != NULL) {
             stats->hp = *asdListBoxGetItemValuePtr(reinterpret_cast<void *>(screen->listBox), item);
-            if (entry->equipA != NULL) {
-                entry->equipA->hp = stats->hp;
+            if (entry->data.equipA != NULL) {
+                entry->data.equipA->hp = stats->hp;
             }
-            if (entry->equipB != NULL) {
-                entry->equipB->hp = stats->hp;
+            if (entry->data.equipB != NULL) {
+                entry->data.equipB->hp = stats->hp;
             }
-            if (entry->reserve != NULL) {
-                entry->reserve->hp = stats->hp;
+            if (entry->data.reserve != NULL) {
+                entry->data.reserve->hp = stats->hp;
             }
         }
         break;
@@ -94,14 +94,14 @@ void FUN_003c4ac4(EntryEditorScreen *screen, BtlMainState *battle)
     case 3:
         if (stats != NULL) {
             stats->mp = *asdListBoxGetItemValuePtr(reinterpret_cast<void *>(screen->listBox), item);
-            if (entry->equipA != NULL) {
-                entry->equipA->mp = stats->mp;
+            if (entry->data.equipA != NULL) {
+                entry->data.equipA->mp = stats->mp;
             }
-            if (entry->equipB != NULL) {
-                entry->equipB->mp = stats->mp;
+            if (entry->data.equipB != NULL) {
+                entry->data.equipB->mp = stats->mp;
             }
-            if (entry->reserve != NULL) {
-                entry->reserve->mp = stats->mp;
+            if (entry->data.reserve != NULL) {
+                entry->data.reserve->mp = stats->mp;
             }
         }
         break;
@@ -155,7 +155,7 @@ void FUN_003c4ac4(EntryEditorScreen *screen, BtlMainState *battle)
         break;
     case 12:
         if (entry != NULL && (entry->flags & 0x10) != 0) {
-            gameRecordSetValueClamped(entry->id, *asdListBoxGetItemValuePtr(reinterpret_cast<void *>(screen->listBox), item));
+            gameRecordSetValueClamped(entry->data.id, *asdListBoxGetItemValuePtr(reinterpret_cast<void *>(screen->listBox), item));
         }
         break;
     }

@@ -1,5 +1,6 @@
 /* Callback-table view of the Bible menu object: its selected-entry index, state word and member-callback table. */
 #include "common.h"
+#include "camp/RenderCtxA.h"
 
 struct CallbackSelectionWorkA {
     typedef void (CallbackSelectionWorkA::*Callback)();
@@ -13,9 +14,8 @@ struct CallbackSelectionWorkA {
 
 extern "C" {
 void gxResetColorQuadToWhite(void);
-void renderCtxResetColorScale(void*);
-void skinObjectUpdateMatrices(void*);
-extern void* g_renderCtx;
+void renderCtxResetColorScale(RenderCtxA *);
+void skinObjectUpdateMatrices(RenderCtxA *);
 
 // Commits the current selection, invokes its member callback, and refreshes the scene.
 void _ZN9Obj55c89c6renderEv(CallbackSelectionWorkA* work)

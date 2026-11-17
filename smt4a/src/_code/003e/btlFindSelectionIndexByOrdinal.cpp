@@ -15,7 +15,7 @@ s32 btlFindSelectionIndexByOrdinal(const BtlMainStateA *state, s32 ordinal)
             (flags & g_btlMain.selectionMask) != 0) {
             ++found;
             if (found == ordinal) {
-                return state->entries[index].indexView.selectionIndex;
+                return state->entries[index].selectionIndex;
             }
         }
     }

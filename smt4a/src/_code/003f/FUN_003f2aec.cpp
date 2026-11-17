@@ -4,9 +4,9 @@
 #include <stddef.h>
 
 typedef char CombatantSortBaseOffsetCheck[
-    offsetof(BtlCombatantEntryA, sortBase.value) == 0x26E ? 1 : -1];
+    offsetof(BtlCombatantEntryA, data.agility) == 0x26E ? 1 : -1];
 typedef char CombatantSortBonusOffsetCheck[
-    offsetof(BtlCombatantEntryA, sortBonus.value) == 0x390 ? 1 : -1];
+    offsetof(BtlCombatantEntryA, data.speedBonus) == 0x390 ? 1 : -1];
 typedef char CombatantSortSizeCheck[sizeof(BtlCombatantEntryA) == 0x408 ? 1 : -1];
 typedef char TurnOrderOffsetCheck[
     offsetof(BtlMainStateA, turnOrder.indices) == 0x3006 ? 1 : -1];
@@ -22,10 +22,10 @@ extern "C" void FUN_003f2aec(BtlMainStateA* battle, s32 firstSlot)
                     s16 currentIndex = battle->turnOrder.indices[slot];
                     const BtlCombatantEntryA* current = &battle->entries[currentIndex];
                     const BtlCombatantEntryA* other = &battle->entries[candidateIndex];
-                    s16 currentSpeed = current->sortBase.value + current->sortBonus.value;
-                    s16 otherSpeed = other->sortBase.value + other->sortBonus.value;
+                    s16 currentSpeed = current->data.agility + current->data.speedBonus;
+                    s16 otherSpeed = other->data.agility + other->data.speedBonus;
                     if (currentSpeed < otherSpeed ||
-                        (currentSpeed == otherSpeed && other->unitIndex < current->unitIndex)) {
+                        (currentSpeed == otherSpeed && other->ids[0] < current->ids[0])) {
                         battle->turnOrder.indices[slot] = candidateIndex;
                         battle->turnOrder.indices[candidate] = currentIndex;
                     }

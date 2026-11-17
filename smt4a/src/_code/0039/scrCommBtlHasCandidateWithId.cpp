@@ -17,7 +17,7 @@ u32 scrCommBtlHasCandidateWithId(void)
     for (s32 i = 0; i < 109; i++) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
         if ((entry->flags & g_btlCandidateMasks.unavailable) != 0 && (entry->flags & g_btlCandidateMasks.required) != 0 &&
-            (entry->flags & g_btlCandidateMasks.excluded) == 0 && entry->id == id && FUN_003248e4(entry) != 0) {
+            (entry->flags & g_btlCandidateMasks.excluded) == 0 && entry->data.id == id && FUN_003248e4(entry) != 0) {
             scrSetResult(1);
             return 1;
         }

@@ -95,14 +95,14 @@ extern "C" s32 FUN_004cc34c(CallbackWorkflow *work)
             if (!FUN_0026c3a0() || !FUN_002effbc())
                 break;
             if (!btlTalkBustUpGetValue()) {
-                btlTalkBustUpSetDemonTexture(record->entryId, 1);
+                btlTalkBustUpSetDemonTexture(record->id, 1);
                 btlTalkBustUpSetUnk2F4(1);
             }
             scrScriptProcessStartEntry(work->process, 13);
             ++work->step;
             break;
         case 2:
-            if (btlTalkBustupMatchesEntry(record->entryId) && bgmGetStateById(0x100002d) == 1)
+            if (btlTalkBustupMatchesEntry(record->id) && bgmGetStateById(0x100002d) == 1)
                 ++work->step;
             break;
         case 3:

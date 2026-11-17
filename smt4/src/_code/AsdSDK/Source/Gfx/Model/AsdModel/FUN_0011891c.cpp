@@ -1,14 +1,14 @@
 /* NON_MATCHING: slotFlags is now read through its own pointer as in retail, but the build forms it before the enable test (retail after the light count test) and materialises the final zero late (retail keeps it in r5). */
 #include "shard/Sys464af0.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 
 extern s32 g_asdLightCount; /* 0x4dad80 */
 extern u32 g_asdModelSlotArray3; /* 0x464bb4 */
-extern u32 g_titleScene; /* 0x44ea00 */
 s32 sceneQueryFalse(void);
 void FUN_0013290c(u32 a, u32 b);
-void FUN_002c3a14(u32 scene);
+void FUN_002c3a14(RenderCtx *scene);
 void registerBlockRequestGroups(u32 groups);
 
 // Refresh the title scene when the graphics settings are enabled and lights or the first model slot are active.

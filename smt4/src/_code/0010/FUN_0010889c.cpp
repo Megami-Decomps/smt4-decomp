@@ -1,30 +1,8 @@
 /* NON_MATCHING: VFP register allocation of the easing temporaries, the table-copy (ldm/str pairs vs retail's grouped stm) and the early-return merging differ; the transition logic is the same. */
 #include "common.h"
-#include "shard/JobWork.h"
-#include "ui/UiSpriteState.h"
+#include "frame_tex/FrameTex.h"
 
 extern "C" {
-
-/* The menu transition's work block (only the fields the tick touches). */
-typedef struct TransitionWork {
-    /* 0x000 */ u8 unk000[0x1C];
-    /* 0x01C */ s8 active;
-    /* 0x01D */ u8 unk01d[3];
-    /* 0x020 */ s32 frame;
-    /* 0x024 */ s8 closing;
-    /* 0x025 */ u8 unk025[3];
-    /* 0x028 */ f32 widthScale;
-    /* 0x02C */ f32 heightScale;
-    /* 0x030 */ f32 speed;
-    /* 0x034 */ u8 unk034[0x20];
-    /* 0x054 */ UiSpriteState items[24];
-    /* 0xD74 */ UiSpriteState frameWidget;
-    /* 0xE00 */ UiSpriteState closeWidget;
-    /* 0xE8C */ u8 unke8c[0x9C];
-    /* 0xF28 */ s8 enabled;
-    /* 0xF29 */ u8 unkf29[2];
-    /* 0xF2B */ s8 ready;
-} TransitionWork;
 
 s32 uiSpriteAdvanceAnimation(void *widget);
 void soundPlaySeUnpanned(u32 sound);
@@ -35,61 +13,61 @@ s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
  * their widgets, and finishes by notifying the controller. Always returns 0. */
 s32 FUN_0010889c(u32 job)
 {
-    TransitionWork *work = (TransitionWork *)jobGetWork(job);
+    FrameTexWork *work = (FrameTexWork *)jobGetWork(job);
 
-    if (work->enabled == 0) {
+    if (work->campEnabled == 0) {
         return 0;
     }
-    if (work->ready == 0) {
+    if (work->campCapturedLeft == 0) {
         return 0;
     }
-    if (work->active == 0) {
+    if (work->campActive == 0) {
         return 0;
     }
     /* The frame at which each item appears or disappears. */
     s8 frames[24] = {1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 8, 8, 9};
-    if (work->closing != 0) {
-        work->frame++;
-        if (work->widthScale > 0.25f) {
-            work->widthScale -= 0.13f / work->speed;
+    if (work->campClosing != 0) {
+        work->campFrame++;
+        if (work->campWidthScale > 0.25f) {
+            work->campWidthScale -= 0.13f / work->campSpeed;
         }
-        work->widthScale = work->widthScale > 0.25f ? work->widthScale : 0.25f;
-        if (work->heightScale > 0.25f) {
-            work->heightScale -= 0.11f / work->speed;
+        work->campWidthScale = work->campWidthScale > 0.25f ? work->campWidthScale : 0.25f;
+        if (work->campHeightScale > 0.25f) {
+            work->campHeightScale -= 0.11f / work->campSpeed;
         }
-        work->heightScale = work->heightScale > 0.25f ? work->heightScale : 0.25f;
+        work->campHeightScale = work->campHeightScale > 0.25f ? work->campHeightScale : 0.25f;
         for (s32 i = 0; i < 24; i++) {
-            if (work->frame >= frames[i]) {
-                work->items[i].visibility.active = 0;
+            if (work->campFrame >= frames[i]) {
+                work->campItems[i].visibility.active = 0;
             }
         }
-        if (work->items[23].visibility.active == 0) {
-            uiSpriteAdvanceAnimation(&work->frameWidget);
+        if (work->campItems[23].visibility.active == 0) {
+            uiSpriteAdvanceAnimation(&work->campFrameWidget);
         }
     } else {
-        if (work->widthScale < 0.38f) {
-            work->widthScale += 0.13f / work->speed;
+        if (work->campWidthScale < 0.38f) {
+            work->campWidthScale += 0.13f / work->campSpeed;
         }
-        work->widthScale = work->widthScale > 0.38f ? 0.38f : work->widthScale;
-        if (work->heightScale < 0.36f) {
-            work->heightScale += 0.11f / work->speed;
+        work->campWidthScale = work->campWidthScale > 0.38f ? 0.38f : work->campWidthScale;
+        if (work->campHeightScale < 0.36f) {
+            work->campHeightScale += 0.11f / work->campSpeed;
         }
-        work->heightScale = work->heightScale > 0.36f ? 0.36f : work->heightScale;
-        if (uiSpriteAdvanceAnimation(&work->frameWidget) == 0) {
+        work->campHeightScale = work->campHeightScale > 0.36f ? 0.36f : work->campHeightScale;
+        if (uiSpriteAdvanceAnimation(&work->campFrameWidget) == 0) {
             FUN_0011340c(1);
             return 0;
         }
-        work->frame++;
-        if (work->frame == 1) {
+        work->campFrame++;
+        if (work->campFrame == 1) {
             soundPlaySeUnpanned(0x100025A);
         }
         for (s32 i = 0; i < 24; i++) {
-            if (work->frame >= frames[i]) {
-                uiSpriteAdvanceAnimation(&work->items[i]);
+            if (work->campFrame >= frames[i]) {
+                uiSpriteAdvanceAnimation(&work->campItems[i]);
             }
         }
-        if (uiSpriteGetCompletionState(&work->items[23]) != 0) {
-            uiSpriteAdvanceAnimation(&work->closeWidget);
+        if (uiSpriteGetCompletionState(&work->campItems[23]) != 0) {
+            uiSpriteAdvanceAnimation(&work->campCloseWidget);
         }
     }
     FUN_0011340c(1);

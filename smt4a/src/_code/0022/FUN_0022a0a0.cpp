@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "event/2dEvent/2dEventTex.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -32,7 +33,6 @@ extern int DAT_0057f280; /* 0x57f280 */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_001643b4. */
-extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: FUN_00228b04. */
 extern unsigned int mapGetDisplayName(unsigned char);
@@ -145,7 +145,7 @@ unsigned int FUN_0022a0a0(void)
     }
     temp_v5 = resourceRunOperationIfUnblocked(temp_v8);
     temp_v6 = listCursorGetRowIfUnblocked(temp_v8);
-    temp_v7 = asdTMTexTableEntryAt(0x15,0x48);
+    temp_v7 = reinterpret_cast<unsigned int>(asdTMTexTableEntryAt(0x15,0x48));
     temp_v9 = temp_v8;
     FUN_003450d4(temp_v8,temp_v7,temp_v0 + 0x772,(int)*(short *)(temp_v0 + 0x770),
                  (int)*(short *)(temp_v0 + 0x76c),(int)*(short *)(temp_v0 + 0x76e),temp_v10,0,1);

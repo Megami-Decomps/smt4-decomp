@@ -1,12 +1,10 @@
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 
 extern "C" {
 
 void infoWinStartTimer(s32 arg);
 void jobStop(u32 job, s32 arg);
 s32 infoWindowIsActive(void);
-
-extern MapIfGlobals g_mapIf;
 
 void mapIfDestroy(void)
 {

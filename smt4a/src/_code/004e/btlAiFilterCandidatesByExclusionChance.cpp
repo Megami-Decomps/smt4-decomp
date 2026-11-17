@@ -13,7 +13,7 @@ s32 btlAiFilterCandidatesByExclusionChance(BtlMainStateA **owner, s32 *indices, 
     }
     u8 changed = 0;
     for (s32 i = 0; i < count; ++i) {
-        s32 chance = btlFindEntryNonzeroRecordValue((*owner)->entries[indices[i]].unitIndex);
+        s32 chance = btlFindEntryNonzeroRecordValue((*owner)->entries[indices[i]].ids[0]);
         if (chance != 0 && (force != 0 || (s32)lcgRandomRange(99) <= chance)) {
             indices[i] = -1;
             changed = 1;

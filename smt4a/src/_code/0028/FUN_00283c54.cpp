@@ -1,11 +1,10 @@
 /* NON_MATCHING: the byte flag parameter is now an s32 (callers declare FUN_00283c54(f32, f32, u32, u32, s32, s32)); remaining: retail interleaves the second clamp compare after the global load and literal loads (prologue/literal-pool scheduling). */
-#include "gfx/FrameTextureWork.h"
+#include "frame_tex/FrameTexA.h"
 
 extern "C" {
-extern FrameTextureWork *g_frameTex;
 
-/* Expands frame-transition bounds around the screen and stores its timing and mode. */
-void FUN_00283c54(u32 state, u32 duration, s32 active, u32 mode, f32 horizontal, f32 vertical)
+/* Starts the HDR layer as a quad padded around the 400x240 screen, with its colour, blending, filtering and downsample levels. */
+void FUN_00283c54(u32 blendMode, u32 color, s32 filtered, u32 levels, f32 horizontal, f32 vertical)
 {
     union FloatWord { f32 value; s32 bits; } width, height;
     width.value = horizontal;
@@ -16,20 +15,20 @@ void FUN_00283c54(u32 state, u32 duration, s32 active, u32 mode, f32 horizontal,
     if (height.bits < 0x3f800000) {
         vertical = 1.0f;
     }
-    FrameTextureWork *work = g_frameTex;
-    work->bounds[0] = -horizontal;
-    work->bounds[1] = horizontal + 400.0f;
-    work->bounds[2] = -horizontal;
-    work->bounds[3] = horizontal + 400.0f;
-    work->bounds[4] = -vertical;
-    work->bounds[5] = -vertical;
-    work->bottom[0] = vertical + 240.0f;
-    work->bottom[1] = vertical + 240.0f;
-    work->duration = duration;
-    work->time = 0.0f;
-    work->active = active;
-    work->state = state;
-    work->mode = mode;
-    work->unkFA5 = 1;
+    FrameTexWorkA *work = g_frameTex;
+    work->hdr.x[0] = -horizontal;
+    work->hdr.x[1] = horizontal + 400.0f;
+    work->hdr.x[2] = -horizontal;
+    work->hdr.x[3] = horizontal + 400.0f;
+    work->hdr.y[0] = -vertical;
+    work->hdr.y[1] = -vertical;
+    work->hdr.y[2] = vertical + 240.0f;
+    work->hdr.y[3] = vertical + 240.0f;
+    work->hdr.color = color;
+    work->hdr.depth = 0.0f;
+    work->hdr.filtered = filtered;
+    work->hdr.blendMode = blendMode;
+    work->hdr.levels = levels;
+    work->hdr.ready = 1;
 }
 }

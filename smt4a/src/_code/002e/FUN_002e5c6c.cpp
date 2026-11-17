@@ -1,5 +1,5 @@
 /* NON_MATCHING: directory/entry lifetimes swap r5/r6; width comparison and text-right addition scheduling differ. */
-#include "shard/W4_Match3_InfoWindow.h"
+#include "font/InfoWinA.h"
 
 extern "C" {
 void *FUN_00333750(void);
@@ -16,7 +16,7 @@ void FUN_002e5c6c(u32 entry)
 {
     void *directory = FUN_00333750();
     if (fileSectionGetData(directory, entry, 0)) {
-        InfoWindow *window = g_infoWin;
+        InfoWindowA *window = g_infoWin;
         window->hasText = 0;
         if (directory) {
             window->hasText = 1;
@@ -30,8 +30,8 @@ void FUN_002e5c6c(u32 entry)
             } else {
                 window->wideText = 0;
             }
-            uiSpriteSetKeyframe(window->labelSprite, 2, 0);
-            s32 x = vec2GetXInt(window->labelSprite);
+            uiSpriteSetKeyframe(&window->label, 2, 0);
+            s32 x = vec2GetXInt(&window->label);
             window->labelX = x;
             window->textRight = (x + window->textWidth) + 42;
             if (window->state == 3)
@@ -40,8 +40,8 @@ void FUN_002e5c6c(u32 entry)
         }
         window = g_infoWin;
         window->state = 1;
-        uiSpriteSetKeyframe(window->sprite, 0, 0);
-        uiSpriteSetImageKeyframe(window->sprite, 0, 0);
+        uiSpriteSetKeyframe(&window->background, 0, 0);
+        uiSpriteSetImageKeyframe(&window->background, 0, 0);
         window->style = 1;
         window->shown = 1;
         window->active = 0;

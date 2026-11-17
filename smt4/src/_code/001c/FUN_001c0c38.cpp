@@ -1,9 +1,8 @@
 /* NON_MATCHING: retail hoists `work + 0x400` for the 0x4C6 flag read and lays the mode == 1 branch of the first loop out of line; ours keeps both inline (flag read directly through work) */
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 
 extern "C" {
 
-extern ButtonHelpPresetGlobals g_buttonHelp;
 extern ButtonHelpQueuedSelections DAT_0043da50;
 
 void FUN_00220984(void);
@@ -18,7 +17,7 @@ s8 uiSpriteGetCompletionState(const ButtonHelpDisplayUnit *record);
  * a preset that was waiting and the queued selections, then advances the frame counter. */
 u32 FUN_001c0c38(void)
 {
-    ButtonHelpWork *work = g_buttonHelp.prefix.work;
+    ButtonHelpWork *work = g_buttonHelp.work;
     ButtonHelpSelectionViewIV *selection = reinterpret_cast<ButtonHelpSelectionViewIV *>(work);
     s32 last = 0;
 
@@ -40,8 +39,8 @@ u32 FUN_001c0c38(void)
                 }
             }
             if (work->transition.phase > last && uiSpriteGetCompletionState(&selection->units[last]) != 0) {
-                g_buttonHelp.prefix.work->state = 2;
-                g_buttonHelp.prefix.work->transition.phase = 0;
+                g_buttonHelp.work->state = 2;
+                g_buttonHelp.work->transition.phase = 0;
             }
         } else if (work->state != 2) {
             if (work->state == 3) {
@@ -61,8 +60,8 @@ u32 FUN_001c0c38(void)
                         selection->active[i] = 0;
                     }
                     FUN_002ae028(selection->unk4BE);
-                    g_buttonHelp.prefix.work->state = 0;
-                    g_buttonHelp.prefix.work->transition.phase = 0;
+                    g_buttonHelp.work->state = 0;
+                    g_buttonHelp.work->transition.phase = 0;
                 }
             }
         } else {

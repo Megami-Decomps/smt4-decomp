@@ -1,11 +1,10 @@
 /* NON_MATCHING: retail addresses the entry as (state + index * 0x194) plus constant field offsets and does not keep a separate pointer to the record; the build folds the 0x1dc record base into the pointer and orders the state tests differently. */
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 #include "game/GameStateA.h"
 #include "map/mapDepart.h"
 #include "map/lmapMain.h"
 
 extern "C" {
-extern MapIfGlobalsA g_mapIf;
 extern LmapExtraA *g_lmapView;
 
 void soundActorStartOnFreeChannel(u32 sound);
@@ -17,12 +16,12 @@ void FUN_0050245c(f32 x, f32 y, f32 z);
 u32 FUN_00233e10(u8 blocked, s32 index)
 {
     MapIfStateA *state = g_mapIf.state;
-    state->head.unk1C = blocked;
+    state->unk1C = blocked;
     MapIfRecord *record = &g_mapIf.state->records[index];
     if (index != -1 && record->active != 0 && g_lmapView->unkB0 != record->navigation.destination) {
-        state->head.unk1C = 0;
+        state->unk1C = 0;
     }
-    if (state->head.unk1C == 0) {
+    if (state->unk1C == 0) {
         for (s32 i = 0; i < 128; i++) {
             MapIfRecord *entry = &state->records[i];
             if (entry->active != 0) {

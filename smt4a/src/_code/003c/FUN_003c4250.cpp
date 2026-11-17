@@ -1,3 +1,4 @@
+#include "camp/RenderCtxA.h"
 /* NON_MATCHING: the gauge width helper is inlined with different register allocation and the stack argument stores differ from retail (238 vs 231 rows); the gauge drawing is the same. */
 #include "common.h"
 #include "camp/RenderCtx.h"
@@ -15,7 +16,6 @@ typedef struct GaugeOwner {
     /* 0x2018 */ u8 mode;
 } GaugeOwner;
 
-extern u8 *g_renderCtx;
 
 f32 jobGetScalarValue(void);
 void efctSetSpeed(f32 speed);
@@ -60,9 +60,9 @@ void FUN_003c4250(GaugeOwner *owner, s32 x, s32 y, s32 target, s32 current, s32 
         flash = gaugeWidth(0x76, (s16)chunk, &flashHeight);
         texDrawTableEntrySized(2, 0x12, 0x76, x + width, y, flash, flashHeight, 0xDD);
         efctSetSpeed(owner->closingSpeed * scale);
-        renderStackSet((RenderStateStack *)(g_renderCtx + 0x12B8), packNibblesAndByte(6, 1, 0));
+        renderStackSet(&g_renderCtx->stackB, packNibblesAndByte(6, 1, 0));
         texDrawTableEntrySized(2, 0x12, 0x77, x + width, y, flash, flashHeight, 0xDE);
-        renderStackSet((RenderStateStack *)(g_renderCtx + 0x12B8), packNibblesAndByte(6, 7, 0));
+        renderStackSet(&g_renderCtx->stackB, packNibblesAndByte(6, 7, 0));
         efctSetSpeed(scale);
     }
     texDrawTableEntrySized(2, 0x12, 0x6E, x, y, width, height, 0xDD);

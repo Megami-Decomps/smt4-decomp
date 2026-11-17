@@ -1,10 +1,9 @@
 /* NON_MATCHING: global/zero saved registers and the selection-array address scratch register differ. */
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 #include "font/ComWin/ComWin.h"
 
 extern "C" {
 
-extern ButtonHelpGlobals g_buttonHelp;
 
 void ifTouchDecrementTimer(void);
 void timerStart(ButtonHelpDisplayUnit *part, s32 kind, s32 arg);

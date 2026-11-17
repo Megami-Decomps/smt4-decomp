@@ -2,14 +2,8 @@
 #include "gamedata/DataTable.h"
 #include "code/Code0015.h"
 #include "gamedata/SaveSlotTable.h"
+#include "map/PopupStateA.h"
 
-struct PopupState {
-    /* 0x00 */ s32 state;
-    /* 0x04 */ u32 step;
-    /* 0x08 */ u8 unk08[0xc];
-    /* 0x14 */ u32 handle;
-    /* 0x18 */ u32 selection;
-};
 struct PopupSaveSlot {
     /* 0x000 */ u8 unk000[0x12c];
     /* 0x12C */ u16 selection;
@@ -24,10 +18,9 @@ struct PopupEventRecord {
 };
 
 extern "C" {
-extern PopupState *g_popupState;
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(s32 maximum);
-u32 popupSelectWeightedMessage(s32 type);
+const char *popupSelectWeightedMessage(s32 type);
 }
 
 /* Queue a selected-slot popup, subject to its flags and probability table. */
@@ -46,9 +39,9 @@ extern "C" void FUN_00294a84(s32 immediate)
         return;
     }
     if (immediate != 0) {
-        g_popupState->selection = slot->selection;
-        g_popupState->handle = popupSelectWeightedMessage(6);
-        g_popupState->step = 0;
+        g_popupState->speakerId = slot->selection;
+        g_popupState->message = popupSelectWeightedMessage(6);
+        g_popupState->timer = 0;
         g_popupState->state = 4;
         return;
     }
@@ -68,9 +61,9 @@ extern "C" void FUN_00294a84(s32 immediate)
         if (entry->probability < randRange(99) + 1) {
             continue;
         }
-        g_popupState->selection = slot->selection;
-        g_popupState->handle = popupSelectWeightedMessage(5);
-        g_popupState->step = 0;
+        g_popupState->speakerId = slot->selection;
+        g_popupState->message = popupSelectWeightedMessage(5);
+        g_popupState->timer = 0;
         g_popupState->state = 4;
         return;
     }

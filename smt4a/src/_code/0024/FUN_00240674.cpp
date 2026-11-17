@@ -2,12 +2,7 @@
 #include "common.h"
 #include "sys/RuntimeObjects.h"
 #include "gamedata/GamePlayerData.h"
-
-/* The 16-bit gauge width an icon frame carries. */
-struct GaugeIcon {
-    /* 0x00 */ u8 unk00[0xc];
-    /* 0x0c */ u16 *width;
-};
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* One experience-gauge entry of the result screen (0x28 bytes). */
 struct ExpGaugeEntry {
@@ -44,7 +39,6 @@ struct PartyMemberRecord {
 
 extern "C" {
 PartySlotTable *gameGetSlotTable(void);
-GaugeIcon *asdTMTexTableEntryAt(u32 table, u32 sprite);
 PartyMemberRecord *gameGetSlotRecord(s32 slot);
 PartyMemberRecord *partyGetSlotPreferredFirst(u16 index);
 s32 partySlotMatchesSelected(PartyMemberRecord *record);
@@ -56,12 +50,12 @@ u32 FUN_004ccdb8(u16 expCurve, s32 level, s32 expBonus);
 extern "C" void FUN_00240674(ExpResultWork *work)
 {
     PartySlotTable *table = gameGetSlotTable();
-    GaugeIcon *icon = asdTMTexTableEntryAt(0x1d, 0x14);
+    TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x1d, 0x14);
     u64 needed = levelGetExpRequirement(gameGetPlayerData()->level + work->leader.levelOffset);
     if (work->leader.maxed) {
-        work->leader.gauge = *icon->width;
+        work->leader.gauge = icon->placement->width;
     } else {
-        work->leader.gauge = (s32)((f32)(work->leader.exp >> 12) / (f32)needed * (f32)(s16)*icon->width);
+        work->leader.gauge = (s32)((f32)(work->leader.exp >> 12) / (f32)needed * (f32)icon->placement->width);
     }
 
     for (s32 i = 0; i < 3; i++) {
@@ -71,9 +65,9 @@ extern "C" void FUN_00240674(ExpResultWork *work)
             if (record != NULL) {
                 u64 needed = FUN_004ccdb8(record->expCurve, record->level + work->members[slot].levelOffset, work->members[slot].expBonus);
                 if (work->members[slot].maxed) {
-                    work->members[slot].gauge = *icon->width;
+                    work->members[slot].gauge = icon->placement->width;
                 } else {
-                    work->members[slot].gauge = (s32)((f32)(work->members[slot].exp >> 12) / (f32)needed * (f32)(s16)*icon->width);
+                    work->members[slot].gauge = (s32)((f32)(work->members[slot].exp >> 12) / (f32)needed * (f32)icon->placement->width);
                 }
             }
         }
@@ -92,9 +86,9 @@ extern "C" void FUN_00240674(ExpResultWork *work)
             if (record != NULL) {
                 u64 needed = FUN_004ccdb8(record->expCurve, record->level + work->members[slot].levelOffset, work->members[slot].expBonus);
                 if (work->members[slot].maxed) {
-                    work->members[slot].gauge = *icon->width;
+                    work->members[slot].gauge = icon->placement->width;
                 } else {
-                    work->members[slot].gauge = (s32)((f32)(work->members[slot].exp >> 12) / (f32)needed * (f32)(s16)*icon->width);
+                    work->members[slot].gauge = (s32)((f32)(work->members[slot].exp >> 12) / (f32)needed * (f32)icon->placement->width);
                 }
             }
         }
@@ -114,9 +108,9 @@ extern "C" void FUN_00240674(ExpResultWork *work)
                 icon = asdTMTexTableEntryAt(0x1d, 0x5f);
             }
             if ((&work->leader)[index].maxed) {
-                (&work->leader)[index].gauge = *icon->width;
+                (&work->leader)[index].gauge = icon->placement->width;
             } else {
-                (&work->leader)[index].gauge = (s32)((f32)((&work->leader)[index].exp >> 12) / (f32)needed * (f32)(s16)*icon->width);
+                (&work->leader)[index].gauge = (s32)((f32)((&work->leader)[index].exp >> 12) / (f32)needed * (f32)icon->placement->width);
             }
         }
     }

@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 /* The context's seven render-state stacks as one array (D, E, F, A, C, G, B; see renderStackPushIndexed). */
 struct RenderStateBank {
@@ -14,7 +15,6 @@ static __inline void renderCtxPushIndexed(RenderStateBank *context, s32 index, s
 }
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 
 /* Pushes a render state on the title scene's last stack (B); when it changes (or the stack is dirty) the new state is applied. */
 void renderStatePush(s32 value)

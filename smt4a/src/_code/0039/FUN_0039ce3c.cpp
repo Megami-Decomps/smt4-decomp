@@ -15,7 +15,7 @@ u32 FUN_0039ce3c(void)
     for (s32 i = 0; i < 109; i++) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
         if ((entry->flags & g_btlCandidateMasks.unavailable) != 0 && (entry->flags & g_btlCandidateMasks.required) != 0 &&
-            (entry->flags & g_btlCandidateMasks.excluded) == 0 && entry->maxHp - entry->hp >= amount) {
+            (entry->flags & g_btlCandidateMasks.excluded) == 0 && entry->data.maxHp - entry->data.hp >= amount) {
             scrSetResult(1);
             return 1;
         }

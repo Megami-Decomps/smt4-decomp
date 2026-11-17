@@ -1,20 +1,12 @@
 #include "common.h"
+#include "battle/BtlEntryLookup.h"
 
 extern "C" {
 
-typedef struct UnitStats {
-    /* 0x000 */ u8 unk000[0x152];
-    /* 0x152 */ u16 slots[1];   /* per-slot words: bits 10 and up hold the slot's kind */
-} UnitStats;
 
-typedef struct BtlUnit {
-    /* 0x00 */ u8 unk00[0x28];
-    /* 0x28 */ UnitStats *stats;
-} BtlUnit;
 
 extern u32 g_btlScriptUnit;
 
-BtlUnit *btlUnitGet(u32 id);
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 value);
 
@@ -22,9 +14,10 @@ void scrSetResult(s32 value);
 u32 scrCommUnitSlotKindIs3(void)
 {
     s32 slot = scrGetArg(0);
-    UnitStats *stats = btlUnitGet(g_btlScriptUnit)->stats;
+    /* g_btlScriptUnit is the slot block pointer; btlUnitGet takes it as the context reference. */
+    BtlUnitDataA *stats = btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit))->data;
 
-    scrSetResult(stats->slots[slot] >> 10 == 3);
+    scrSetResult(stats->values[slot] >> 10 == 3);
     return 1;
 }
 

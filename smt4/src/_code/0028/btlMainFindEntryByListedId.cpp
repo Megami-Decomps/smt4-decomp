@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail addresses the id list as record + (8 + j * 2) through a register offset and keeps the loop counters in separate registers; ours differs in the inner-loop form. */
 #include "common.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlGlobals.h"
 
@@ -16,7 +16,7 @@ BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 id)
     for (s32 i = 0; i < 109; i++) {
         BtlEntry *record = &records[i];
         for (s32 j = 0; j < 50; j++) {
-            s32 entry = record->members.ids[j];
+            s32 entry = record->ids[j];
             if (entry < 0) {
                 break;
             }

@@ -4,19 +4,12 @@
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
 #include <string.h>
-
-/* A layout point (position in pixels). */
-struct CardPoint {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-};
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 void sysMemClear(void *block, s32 bytes);
 void efctSetSpeed(f32 speed);
 u32 FUN_004038e0(u32 effect, u16 kind);
-CardPoint *asdTMTexTableEntryAt(s32 group, s32 part);
 void drawSetColorFromRGBA8(u32 color);
 void gxResetColorQuadToWhite(void);
 void *gameGetPlayerData(void);
@@ -37,9 +30,9 @@ void FUN_00404f40(u32 effect, u16 cardId, s32 x, s32 y, f32 speed, u32 arg5, u32
     switch (card->content.kind) {
     case 2: case 4: case 6: case 8: case 10: case 12: case 14: case 16: case 18: {
         drawSetColorFromRGBA8(0x57D8FFFF);
-        CardPoint *shadow = asdTMTexTableEntryAt(0x32, 0x97);
+        TextureTableEntryIV *shadow = asdTMTexTableEntryAt(0x32, 0x97);
         texDrawTableEntryAtStoredOrigin(2, 0x32, 1000, shadow->x + x, shadow->y + y, 0x6A);
-        CardPoint *frame = asdTMTexTableEntryAt(0x32, 0x96);
+        TextureTableEntryIV *frame = asdTMTexTableEntryAt(0x32, 0x96);
         s32 frameX = frame->x + x;
         s32 frameY = frame->y + y;
         texDrawTableEntryAtStoredOrigin(2, 0x32, frameSprite, frameX, frameY, 0x6B);
@@ -48,14 +41,14 @@ void FUN_00404f40(u32 effect, u16 cardId, s32 x, s32 y, f32 speed, u32 arg5, u32
         break;
     }
     default: {
-        CardPoint *shadow = asdTMTexTableEntryAt(0x32, 0x97);
+        TextureTableEntryIV *shadow = asdTMTexTableEntryAt(0x32, 0x97);
         texDrawTableEntryAtStoredOrigin(2, 0x32, 1000, shadow->x + x, shadow->y + y, 0x6A);
-        CardPoint *frame = asdTMTexTableEntryAt(0x32, 0x96);
+        TextureTableEntryIV *frame = asdTMTexTableEntryAt(0x32, 0x96);
         texDrawTableEntryAtStoredOrigin(2, 0x32, frameSprite, frame->x + x, frame->y + y, 0x6B);
         break;
     }
     }
-    CardPoint *namePoint = asdTMTexTableEntryAt(0x32, 0x98);
+    TextureTableEntryIV *namePoint = asdTMTexTableEntryAt(0x32, 0x98);
     s16 nameX = namePoint->x;
     s16 nameY = namePoint->y;
     const char *name = card->content.name;
@@ -65,11 +58,11 @@ void FUN_00404f40(u32 effect, u16 cardId, s32 x, s32 y, f32 speed, u32 arg5, u32
     }
     textFormatBuffer(text, "%s", name);
     textDrawString(3, font, (const char *)text, (f32)(nameX + x), (f32)(nameY + y), 0.56640625f, 0.0f, speed);
-    CardPoint *badge = asdTMTexTableEntryAt(0x32, 0x99);
+    TextureTableEntryIV *badge = asdTMTexTableEntryAt(0x32, 0x99);
     efctPlayVariantSet(effect, badge->x + x, badge->y + y, 0x79, arg5, arg6);
     if (card->content.badge != 0) {
         efctSetSpeed(speed);
-        CardPoint *mark = asdTMTexTableEntryAt(0x32, 0x9A);
+        TextureTableEntryIV *mark = asdTMTexTableEntryAt(0x32, 0x9A);
         x += mark->x;
         y += mark->y;
         texDrawTableEntryAtStoredOrigin(2, 0x32, 0x9C, x, y, 0x79);

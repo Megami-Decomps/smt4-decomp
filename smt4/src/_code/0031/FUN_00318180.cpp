@@ -1,6 +1,6 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "script/ScriptArgs.h"
 
@@ -20,8 +20,8 @@ u32 FUN_00318180(void)
     for (i = 0; i < 109; i++) {
         BtlEntry *unit = &reinterpret_cast<BtlMainState *>(btlGetMainState())->entries[i];
 
-        if ((unit->flags & 0x10) != 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0 && unit->id == id &&
-            (unit->groupMask & (1 << (bit & 0xFF))) == 0) {
+        if ((unit->flags & 0x10) != 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0 && unit->data.id == id &&
+            (unit->data.statusFlags & (1 << (bit & 0xFF))) == 0) {
             scrSetResult(0);
             return 1;
         }

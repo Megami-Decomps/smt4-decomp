@@ -2,7 +2,7 @@
 #include "shard/PlayScene.h"
 #include "gamedata/GameDataAccess.h"
 #include "gamedata/GameDataAccess_VariantE.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 #include "gamedata/UnitRecordAccess.h"

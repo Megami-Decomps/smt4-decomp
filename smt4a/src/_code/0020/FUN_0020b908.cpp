@@ -15,7 +15,7 @@ struct UnitePairBits {
     u64 unknown : 15;
 };
 
-/* The unite screen's work past UniteWork's modelled prefix (only the fields used here). */
+/* The unite screen's work past UniteWorkA's modelled prefix (only the fields used here). */
 struct UniteMenuWork {
     /* 0x0000 */ u8 unk0000[0x3FC];
     /* 0x03FC */ u32 frame;

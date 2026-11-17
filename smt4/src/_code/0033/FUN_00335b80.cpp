@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ int nn_math_ARMv6_MTX34AddTranslateAsm(...);
 int nn_math_ARMv6_MTX34MultTranslateAsm_2A3504(...);
 int renderCtxCalculateStereoParallax(...);
 int gxResetColorQuadToWhite(void);
-int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int renderCtxApplyTransforms(...);
 int VectorSignedToFloat(...);
@@ -133,7 +133,7 @@ unsigned int FUN_00335b80(int *param_1)
     }
     efctSetSpeed();
     gxResetColorQuadToWhite();
-    temp_v1 = asdTMTexTableEntryAt(0x2d,0x7d2);
+    temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2d,0x7d2));
     temp_v9[0] = param_1[0xb];
     temp_v20 = 0;
     uStack_44 = VectorSignedToFloat(-(int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -159,7 +159,7 @@ unsigned int FUN_00335b80(int *param_1)
     nn_math_ARMv6_MTX34MultTranslateAsm_2A3504(temp_v9,temp_v9,&temp_v19);
     nn_math_ARMv6_MTX34AddTranslateAsm(temp_v9,&temp_v21);
     renderCtxCallB(temp_v9);
-    temp_v1 = asdTMTexTableEntryAt(0x2d,2000);
+    temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2d,2000));
     temp_v8 = 0.3f;
     temp_v4 = temp_v8;
     renderCtxCalculateStereoParallax(g_titleScene);
@@ -189,7 +189,7 @@ unsigned int FUN_00335b80(int *param_1)
     nn_math_ARMv6_MTX34MultTranslateAsm_2A3504(temp_v9,temp_v9,&temp_v19);
     nn_math_ARMv6_MTX34AddTranslateAsm(temp_v9,&temp_v21);
     renderCtxCallB(temp_v9);
-    temp_v1 = asdTMTexTableEntryAt(0x2d,0x7d1);
+    temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2d,0x7d1));
     renderCtxCalculateStereoParallax(g_titleScene);
     temp_v8 = (float)VectorSignedToFloat((int)temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v4 = (float)VectorSignedToFloat(-(int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);

@@ -2,11 +2,12 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 
 int renderCtxPopState(...);
-int renderStackPushIndexed(unsigned int, int, unsigned int);
+int renderStackPushIndexed(RenderCtxA *, int, unsigned int);
 int gxResetColorQuadToWhite(void);
 int drawSetColorFromRGBA8(unsigned int);
 int texDrawTableEntrySized(...);
@@ -26,7 +27,6 @@ typedef struct {
     unsigned int sp88; /* 0x88: local_88 */
 } param_1_stack;
 
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
 extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */

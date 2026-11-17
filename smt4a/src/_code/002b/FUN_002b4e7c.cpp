@@ -23,8 +23,8 @@ s32 FUN_002b4e7c(BtlUnitRecordA *record)
 
             if ((entry->flags & btlMainPtr->combatantMasks.required) != 0 &&
                 (entry->flags & btlMainPtr->exclusionMask) == 0 &&
-                (entry->flags & btlMainPtr->actorCategories[0]) != 0 && entry->record == record) {
-                maxHp = entry->maxHp;
+                (entry->flags & btlMainPtr->actorCategories[0]) != 0 && entry->data.record == record) {
+                maxHp = entry->data.maxHp;
                 break;
             }
         }

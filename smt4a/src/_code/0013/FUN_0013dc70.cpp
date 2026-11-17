@@ -1,28 +1,28 @@
 #include "common.h"
-#include "shard/JobWork.h"
+#include "frame_tex/FrameTexA.h"
 
 extern "C" {
 
 void FUN_0014a960(s32 enable);
 
-/* Advances the job's white fade-in by one frame, ending it after fadeFrames frames. */
+/* "XFADEDL" draw: advances the white cross-fade by one frame, ending it after fadeDuration frames. */
 s32 FUN_0013dc70(u32 job)
 {
-    JobWork *work = (JobWork *)jobGetWork(job);
+    FrameTexWorkA *work = (FrameTexWorkA *)jobGetWork(job);
     s32 alpha;
 
-    if (!work->fadeActive) {
-        return 0;
-    }
     if (!work->fadeEnabled) {
         return 0;
     }
-    work->fadeFrame++;
-    if (work->fadeFrame > work->fadeFrames) {
-        work->fadeActive = 0;
+    if (!work->fadeCapturedLeft) {
         return 0;
     }
-    alpha = 255 - work->fadeFrame * 255 / work->fadeFrames;
+    work->fadeElapsed++;
+    if (work->fadeElapsed > work->fadeDuration) {
+        work->fadeEnabled = 0;
+        return 0;
+    }
+    alpha = 255 - work->fadeElapsed * 255 / work->fadeDuration;
     if (alpha > 255) {
         alpha = 255;
     } else if (alpha < 0) {

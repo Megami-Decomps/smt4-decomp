@@ -4,6 +4,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -17,7 +18,6 @@ int libc_bsearch(...);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
-int asdTMTexTableEntryAt(...);
 int fontMeasureLineAdvance(...);
 int FUN_00261468(...);
 int gameDataGetPlayerName(void);
@@ -146,7 +146,7 @@ unsigned int FUN_0022a5d8(void)
       }
       texDrawTableEntryAtStoredOrigin(2,0x15,0x28,0,temp_v2,0xc9);
       texDrawTableEntryAtStoredOrigin(2,0x15,0x29,0,temp_v2,0xc9);
-      temp_v6 = asdTMTexTableEntryAt(0x15,0x2a);
+      temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x2a));
       temp_v7 = FUN_00358e28(*(unsigned int *)(temp_v1 + 0x7ec));
       if (temp_v7 != 0) {
         textFormatBuffer(temp_v17,"%s",temp_v7);
@@ -167,10 +167,10 @@ unsigned int FUN_0022a5d8(void)
       if ((temp_v8 == 1) || (temp_v6 = listCursorGetRowIfUnblocked(temp_v19), temp_v6 != temp_v2)) {
         efctSetSpeed();
         if (*(char *)(temp_v1 + 0x74e) != '\x02') {
-          temp_v6 = asdTMTexTableEntryAt(0x15,temp_v2 + 7);
+          temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,temp_v2 + 7));
         }
         else {
-          temp_v6 = asdTMTexTableEntryAt(0x15,temp_v2 + 0x2b);
+          temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,temp_v2 + 0x2b));
         }
         texDrawCompositeSprite(2,0x15,1,(int)*(short *)(temp_v6 + 8),(int)*(short *)(temp_v6 + 10),0xd3);
         temp_v7 = -1;
@@ -277,7 +277,7 @@ unsigned int FUN_0022a5d8(void)
           tmnlGetEntryText(temp_v4);
           textFormatBuffer(temp_v17,"%s",temp_v4);
         }
-        temp_v3 = asdTMTexTableEntryAt(0x15,6);
+        temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,6));
         puVar4 = temp_v17;
         fontMeasureLineAdvance(puVar4,2);
         temp_v9 = (int)**(short **)(temp_v3 + 0xc);
@@ -313,10 +313,10 @@ unsigned int FUN_0022a5d8(void)
       temp_v2 = listCursorGetRowIfUnblocked(temp_v19);
       temp_v8 = -0x60180001;
       if (*(char *)(temp_v1 + 0x74e) != '\x02') {
-        temp_v6 = asdTMTexTableEntryAt(0x15,temp_v2 + 0x18);
+        temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,temp_v2 + 0x18));
       }
       else {
-        temp_v6 = asdTMTexTableEntryAt(0x15,temp_v2 + 0x35);
+        temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,temp_v2 + 0x35));
       }
       efctSetSpeed();
       texDrawCompositeSprite(2,0x15,2,(int)*(short *)(temp_v6 + 8),(int)*(short *)(temp_v6 + 10),0xdd);
@@ -384,7 +384,7 @@ unsigned int FUN_0022a5d8(void)
           temp_v8 = temp_v3;
         }
       }
-      temp_v2 = asdTMTexTableEntryAt(0x15,0x17);
+      temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x17));
       puVar4 = temp_v17;
       fontMeasureLineAdvance(puVar4,3);
       temp_v7 = (int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v6 + 8) +

@@ -1,4 +1,4 @@
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 
 #include "battle/BtlMainAccess.h"
@@ -37,7 +37,7 @@ u32 FUN_00324d70()
         BtlEntry *entry = &btlGetMainState()->entries[index];
         u32 flags = entry->flags;
         if ((flags & BTL_ENTRY_FLAG_PRESENT) != 0 && (flags & BTL_ENTRY_FLAG_ACTIVE) != 0 &&
-            (flags & BTL_ENTRY_FLAG_BLOCKED) == 0 && entry->id == id) {
+            (flags & BTL_ENTRY_FLAG_BLOCKED) == 0 && entry->data.id == id) {
             found = 1;
             if (entry->stat[stat] < 1) {
                 scrSetResult(0);

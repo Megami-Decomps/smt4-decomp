@@ -13,7 +13,7 @@ u32 FUN_003a8734(void)
     s32 index = scrGetArg(0);
     BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
     if (entry != NULL) {
-        u16 encoded = entry->encodedStats.values[index];
+        u16 encoded = entry->data.values[index];
         if ((encoded & 0xfc00) == 0 || (encoded >> 10) == 2) {
             scrSetResult(1);
             return 1;

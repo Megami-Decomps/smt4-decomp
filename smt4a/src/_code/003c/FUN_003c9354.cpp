@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c9354` (_code @ 0x3c9354, 0x768 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -45,7 +46,6 @@ typedef struct {
 /* Supplied declaration required: padQueryLogicalKey. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
-extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: FUN_0020b908. */
 /* Supplied declaration required: FUN_00228b04. */
@@ -106,7 +106,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
   iStack_30 = param_1;
   temp_v18 = param_2;
   puStack_28 = param_3;
-  temp_v3 = asdTMTexTableEntryAt(0x1a,0x1f6);
+  temp_v3 = reinterpret_cast<unsigned int>(asdTMTexTableEntryAt(0x1a,0x1f6));
   temp_v11 = (int)*(short *)(param_1 + 0x474);
   temp_v13 = 1;
   temp_v12 = (unsigned int *)&temp_v18;

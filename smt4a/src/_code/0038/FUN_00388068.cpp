@@ -1,5 +1,5 @@
 /* NON_MATCHING: saved-unit list address decomposes as 0x28000+0x310 rather than retail 0x28300+0x10. HP clamp now matches. */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "gamedata/GameFlags.h"
 #include "shard/Shard003D.h"
 #include "addon/aocMain.h"

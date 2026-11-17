@@ -3,6 +3,8 @@
 #include "shard/TextureDrawCall.h"
 #include "Model/MoriModelShadowMap.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "map/MapIfGlobals.h"
 
 #define NOTICE_STATE_IDLE 0
 #define NOTICE_STATE_SLIDE_IN 1
@@ -26,31 +28,12 @@ struct MapNoticeEntry {
     /* 0x20 */ s16 id;
 };
 
-struct NoticeFrame {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-};
-
-struct MapInterface {
-    /* 0x0000 */ u8 unk0000[0x3C];
-    /* 0x003C */ s32 overlayShown;
-    /* 0x0040 */ u32 overlayId;
-    /* 0x0044 */ u8 unk0044[0xCCA4];
-    /* 0xCCE8 */ s16 state;
-    /* 0xCCEA */ s16 frame;
-    /* 0xCCEC */ s16 entryId;
-    /* 0xCCEE */ s16 entrySub;
-};
-
 extern "C" {
-extern MapInterface *g_mapIf;
 
 s32 renderCtxPackPassFlags(u32 a, u32 b);
 void gxSubmitDrawZeroExtraParams(u32 first, u32 second, u32 third, u32 fourth,
                   f32 x, f32 y, f32 width, f32 height, f32 depth);
 void FUN_002371b0(void);
-NoticeFrame *asdTMTexTableEntryAt(u32 table, u32 index);
 s32 dataTable2ECount(void);
 MapNoticeEntry *dataTable2EGetEntry(s32 index);
 s32 findKeyedRecord(s32 id, s32 sub);
@@ -58,10 +41,10 @@ void FUN_003849cc(s32 id, s32 sub, s32 flag, char *buffer, s32 level);
 
 s32 FUN_00315d34(u32 handle)
 {
-    MapInterface *screen = g_mapIf;
+    MapIfStateA *screen = g_mapIf.state;
 
-    if (screen->overlayShown != 0) {
-        u32 overlay = screen->overlayId;
+    if (screen->unk3C != 0) {
+        u32 overlay = screen->unk40;
         RenderCtxA *context = g_renderCtx;
         s32 state = renderCtxPackPassFlags(5, 1);
         renderCtxPushA(context, state);
@@ -72,44 +55,44 @@ s32 FUN_00315d34(u32 handle)
         renderStackPop(&g_renderCtx->stackA);
     }
 
-    screen = g_mapIf;
-    NoticeFrame *frame = asdTMTexTableEntryAt(8, 0x10B);
+    screen = g_mapIf.state;
+    TextureTableEntryIV *frame = asdTMTexTableEntryAt(8, 0x10B);
     f32 offset = 0.0f;
     s32 frameNumber;
-    switch (screen->state) {
+    switch (screen->notice.state) {
     case NOTICE_STATE_IDLE:
         return 0;
     case NOTICE_STATE_SLIDE_IN:
-        screen->frame++;
-        frameNumber = screen->frame;
+        screen->notice.frame++;
+        frameNumber = screen->notice.frame;
         offset = (f32)(frameNumber * (s32)NOTICE_SLIDE_SPEED) + NOTICE_SLIDE_START;
         if (frameNumber >= NOTICE_SLIDE_FRAMES) {
-            screen->state = NOTICE_STATE_HOLD;
-            screen->frame = 0;
+            screen->notice.state = NOTICE_STATE_HOLD;
+            screen->notice.frame = 0;
         }
         break;
     case NOTICE_STATE_HOLD:
-        screen->frame++;
+        screen->notice.frame++;
         break;
     case NOTICE_STATE_SLIDE_OUT_LONG:
-        screen->frame++;
-        frameNumber = screen->frame;
+        screen->notice.frame++;
+        frameNumber = screen->notice.frame;
         if (frameNumber >= NOTICE_LONG_START)
             offset = -(f32)((frameNumber - NOTICE_LONG_START) * (s32)NOTICE_SLIDE_SPEED);
         if (frameNumber > NOTICE_LONG_END) {
-            screen->state = NOTICE_STATE_IDLE;
-            screen->frame = 0;
+            screen->notice.state = NOTICE_STATE_IDLE;
+            screen->notice.frame = 0;
             return 0;
         }
         break;
     case NOTICE_STATE_SLIDE_OUT_SHORT:
-        screen->frame++;
-        frameNumber = screen->frame;
+        screen->notice.frame++;
+        frameNumber = screen->notice.frame;
         if (frameNumber >= NOTICE_SHORT_START)
             offset = -(f32)((frameNumber - NOTICE_SHORT_START) * (s32)NOTICE_SLIDE_SPEED);
         if (frameNumber > NOTICE_SHORT_END) {
-            screen->state = NOTICE_STATE_IDLE;
-            screen->frame = 0;
+            screen->notice.state = NOTICE_STATE_IDLE;
+            screen->notice.frame = 0;
             return 0;
         }
         break;
@@ -119,18 +102,18 @@ s32 FUN_00315d34(u32 handle)
         s32 id = dataTable2EGetEntry(i)->id;
         if (id == NOTICE_ENTRY_NONE)
             return 0;
-        if (screen->entryId == id)
+        if (screen->notice.id == id)
             break;
     }
 
-    if (screen->entryId == NOTICE_ENTRY_SPECIAL || findKeyedRecord(screen->entryId, screen->entrySub) != 0) {
+    if (screen->notice.id == NOTICE_ENTRY_SPECIAL || findKeyedRecord(screen->notice.id, screen->notice.arg) != 0) {
         RenderCtxA *context = g_renderCtx;
         s32 state = renderCtxPackPassFlags(1, 0);
         renderCtxPushA(context, state);
         for (s32 sprite = NOTICE_FRAME_FIRST; sprite <= NOTICE_FRAME_LAST; sprite++)
             texDrawTableEntryAtStoredOrigin(2, 8, sprite, (s32)offset, 0, 0xB);
         char text[128];
-        FUN_003849cc(screen->entryId, screen->entrySub, 0, text, -1);
+        FUN_003849cc(screen->notice.id, screen->notice.arg, 0, text, -1);
         textDrawString(3, 0xFFFFFFFF, text, (f32)frame->x + offset, (f32)frame->y,
                       0.0f, 1.0f, 1.0f);
         renderStackPop(&g_renderCtx->stackA);

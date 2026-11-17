@@ -1,3 +1,4 @@
+#include "camp/RenderCtxA.h"
 #include "gamedata/TextureIdTable.h"
 #include "camp/RenderCtx.h"
 #include "gamedata/DataTable.h"
@@ -25,7 +26,6 @@ typedef struct ItemWindow {
 } ItemWindow;
 
 extern ItemWindow *g_sWin;
-extern u8 *g_renderCtx;
 
 s32 renderCtxPackPassFlags(s32 a, s32 b);
 void efctSetSpeed(f32 speed);
@@ -54,7 +54,7 @@ u32 sWinDrawItemIcon(void)
     s32 texture = findIconTexture(window->item) * 1000;
     TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x34, texture);
 
-    renderCtxPushA(reinterpret_cast<RenderCtxA *>(g_renderCtx), renderCtxPackPassFlags(1, 0));
+    renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
     u32 width = (u32)((f32)(icon->width & 0x7FFF) * window->scaleX);
     u32 height = (u32)((f32)(icon->height & 0x7FFF) * window->scaleY);
     TextureTableEntryIV *frame = asdTMTexTableEntryAt(0x27, 13);
@@ -72,7 +72,7 @@ u32 sWinDrawItemIcon(void)
         texDrawTableEntrySized(2, 0x34, texture, x, y, width, height, 21);
     }
     efctSetSpeed(1.0f);
-    renderStackPop((RenderStateStack *)(g_renderCtx + 0x1258));
+    renderStackPop(&g_renderCtx->stackA);
     return 0;
 }
 

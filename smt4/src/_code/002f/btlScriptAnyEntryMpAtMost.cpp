@@ -21,7 +21,7 @@ u32 btlScriptAnyEntryMpAtMost(void)
         if (!(entry->flags & BTL_ENTRY_FLAG_PRESENT) &&
             (entry->flags & BTL_ENTRY_FLAG_ACTIVE) &&
             !(entry->flags & BTL_ENTRY_FLAG_BLOCKED) &&
-            entry->id == id) {
+            entry->data.id == id) {
             BtlEntryMpStats *stats = btlEntryGetStats(entry);
             s32 mp = stats->mp;
             s32 maxMp = stats->maxMp;
@@ -33,7 +33,7 @@ u32 btlScriptAnyEntryMpAtMost(void)
     }
     if (btlGetMainState()->hasActiveEntry) {
         BtlEntry *entry = btlMainFindActiveEntry(btlGetMainState());
-        if (entry && entry->id == id) {
+        if (entry && entry->data.id == id) {
             BtlEntryMpStats *stats = btlEntryGetStats(entry);
             s32 mp = stats->mp;
             s32 maxMp = stats->maxMp;

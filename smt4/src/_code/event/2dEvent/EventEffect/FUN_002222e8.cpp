@@ -1,11 +1,11 @@
 #include "event/2dEvent/BlinkFade.h"
 #include "camp/RenderCtx.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 extern BlinkFadeWork *g_eventEffect;
 extern BlinkFadeTexture DAT_0043df00[2];
-extern RenderCtx *g_titleScene;
 void gxResetColorQuadToWhite();
 void renderCtxSelectStereoLayout(RenderCtx *context);
 u32 renderCtxPackPassFlags(u32 value, bool enabled);

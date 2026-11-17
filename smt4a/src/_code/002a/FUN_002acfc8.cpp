@@ -1,11 +1,10 @@
 /* NON_MATCHING: prefix-length argument setup adds an instruction; segment buffer/source and width saved registers differ. */
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 #include <stddef.h>
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
-extern ButtonHelpGlobalsA g_buttonHelp;
 void *rt_memcpy(void *destination, const void *source, u32 size);
 }
 

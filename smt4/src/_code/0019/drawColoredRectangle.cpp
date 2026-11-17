@@ -1,9 +1,9 @@
 #include "common.h"
 #include "camp/RenderCtx.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 u32 renderCtxPackPassFlags(u32 mode, bool enabled);
 void gxSubmitDrawZeroExtraParams(u32 color0, u32 color1, u32 color2, u32 color3,
                   f32 x, f32 y, f32 width, f32 height, f32 depth);

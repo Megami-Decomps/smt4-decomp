@@ -1,14 +1,6 @@
 /* NON_MATCHING: -O2 candidate; clipping branches fold, coordinate packing merges, and zero/origin register roles differ. */
-#include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 
-struct ScissorRenderContext {
-    u8 unk0000[0x1318];
-    RenderStateStack mode;
-    RenderStateStack origin;
-    RenderStateStack size;
-};
-
-extern "C" ScissorRenderContext* g_renderCtx;
 
 namespace {
 inline void clipScissorAxis(s32& start, s32& extent, s32 maximum)
@@ -37,11 +29,11 @@ extern "C" void renderSetClippedScissor(s32 x, s32 y, s32 width, s32 height)
     const f32 bottom = static_cast<f32>(y + height);
     const s32 originX = static_cast<s32>(320.0f - right);
     const s32 originY = static_cast<s32>(240.0f - bottom);
-    renderStackSet(&g_renderCtx->mode, 3);
-    renderStackSet(&g_renderCtx->origin,
+    renderStackSet(&g_renderCtx->scissor, 3);
+    renderStackSet(&g_renderCtx->scissorMinimum,
                    static_cast<s32>(static_cast<u32>(originX) |
                                     (static_cast<u32>(originY) << 16)));
-    renderStackSet(&g_renderCtx->size,
+    renderStackSet(&g_renderCtx->scissorMaximum,
                    static_cast<s32>(static_cast<u32>(width) |
                                     (static_cast<u32>(height) << 16)));
 }

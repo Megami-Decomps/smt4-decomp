@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -42,7 +43,6 @@ extern unsigned char DAT_00533f4c; /* 0x533f4c */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: uiDrawItemOrStatusIcon. */
-extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -107,7 +107,7 @@ void FUN_0041b360(int *param_1,int param_2,int param_3,unsigned int param_4,int 
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 3);
   texDrawTableEntryAtStoredOrigin(2,0x2b,0x4b,temp_v6,temp_v7,2);
-  temp_v3 = asdTMTexTableEntryAt(0x2b,0x2f);
+  temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2b,0x2f));
   temp_v5 = temp_v6 + *(short *)(temp_v3 + 8);
   temp_v4 = temp_v7 + *(short *)(temp_v3 + 10);
   textFormatBuffer(temp_v9,&DAT_00533f4c,param_2,(int)*(short *)(temp_v3 + 10));
@@ -116,16 +116,16 @@ void FUN_0041b360(int *param_1,int param_2,int param_3,unsigned int param_4,int 
   textDrawString(4,0xffffffff,temp_v9);
   temp_v3 = gameFlagIsSet(0x534);
   if ((temp_v3 != 0) || (*(unsigned short *)(param_2 + 100) >= 100)) {
-    temp_v3 = asdTMTexTableEntryAt(0x2b,0x89);
+    temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2b,0x89));
     temp_v2 = 3;
   }
   else {
-    temp_v3 = asdTMTexTableEntryAt(0x2b,0x3a);
+    temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2b,0x3a));
     temp_v2 = 2;
   }
   FUN_00180310(6,temp_v6 + *(short *)(temp_v3 + 8),temp_v7 + *(short *)(temp_v3 + 10),1,temp_v2,2,
                &DAT_00533f48,*(unsigned short *)(param_2 + 100));
-  temp_v3 = asdTMTexTableEntryAt(0x2b,0x2a);
+  temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2b,0x2a));
   temp_v1 = (unsigned int)*(unsigned short *)(param_2 + 0x58);
   if (temp_v1 != 0) {
     if (temp_v1 - 200 < 100) {
@@ -143,7 +143,7 @@ void FUN_0041b360(int *param_1,int param_2,int param_3,unsigned int param_4,int 
   if (*(short *)(param_2 + 0x66) != 0) {
     texDrawTableEntryAtStoredOrigin(2,0x2b,0x6e,temp_v6,temp_v7,2);
     drawSetColorFromRGBA8(0x57d8ffff);
-    temp_v3 = asdTMTexTableEntryAt(0x2b,0x72);
+    temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2b,0x72));
     FUN_00180310(6,temp_v6 + *(short *)(temp_v3 + 8),*(short *)(temp_v3 + 10) + temp_v7,1,4,2,
                  &DAT_00533f48,*(unsigned short *)(param_2 + 0x66) + 1);
     gxResetColorQuadToWhite();
@@ -157,7 +157,7 @@ void FUN_0041b360(int *param_1,int param_2,int param_3,unsigned int param_4,int 
   texDrawTableEntryAtStoredOrigin(2,0x2b,0x1c,temp_v6,temp_v7,0xb);
   temp_v0 = *(short *)(param_2 + 0x68);
   if (temp_v0 != 0) {
-    temp_v3 = asdTMTexTableEntryAt(0x2b,0x1d);
+    temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2b,0x1d));
     texDrawTableEntryAtStoredOrigin(2,0x2b,0x16,temp_v6 + *(short *)(temp_v3 + 8),temp_v7 + *(short *)(temp_v3 + 10),0xb)
     ;
     temp_v0 = dataTable10FindValue(temp_v0);
@@ -168,7 +168,7 @@ void FUN_0041b360(int *param_1,int param_2,int param_3,unsigned int param_4,int 
   rt_memcpy(temp_v9,temp_v2,0x40);
   puVar3 = temp_v9;
   fontMeasureLineAdvance(puVar3,2);
-  temp_v3 = asdTMTexTableEntryAt(0x2b,0x25);
+  temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2b,0x25));
   temp_v4 = *(short *)(temp_v3 + 10) + temp_v7;
   VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v3 + 8) + temp_v6 +

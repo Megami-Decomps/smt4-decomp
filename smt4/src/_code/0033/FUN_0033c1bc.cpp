@@ -3,21 +3,8 @@
 #include "ui/UiControl.h"
 #include "gamedata/GamePlayerData.h"
 #include "gamedata/UnitRecordAccess.h"
-
-// Draw-state stack embedded in the title scene.
-struct DrawRing {
-    s32 index;              // 0x00
-    s32 unk04;
-    s32 slots[4];           // 0x08
-    u8 dirty;               // 0x18
-    u8 unk19[3];
-    void (*flush)(s32 state);   // 0x1c
-};
-
-struct TitleScene {
-    u8 unk0000[0x130c];
-    DrawRing ring;          // 0x130c
-};
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxTitle.h"
 
 // Status icon strip of one party member: only the fields used here.
 struct StatusStrip {
@@ -32,29 +19,13 @@ struct StatusStrip {
     s32 member;             // 0x34: unit index, negative for the player
 };
 
-struct LayoutEntry {
-    u8 unk00[8];
-    s16 x;                  // 0x08
-    s16 y;                  // 0x0a
-    s16* size;              // 0x0c
-};
-
 extern "C" {
 
-extern TitleScene* g_titleScene;
-
-LayoutEntry* asdTMTexTableEntryAt(u32 group, u32 index);
 void FUN_0029a17c(s32 x, s32 y, s32 w, s32 h, s32 arg);
 
 static void setDrawState(s32 value)
 {
-    DrawRing* ring = &g_titleScene->ring;
-    s32 previous = ring->slots[ring->index];
-    ring->slots[ring->index] = value;
-    if (ring->dirty != 0 || previous != value) {
-        ring->flush(value);
-        ring->dirty = 0;
-    }
+    renderStackSet(&g_titleScene->scissor, value);
 }
 
 // Draws the status ailment icons of a member; with two or more it also draws the
@@ -63,7 +34,7 @@ void FUN_0033c1bc(StatusStrip* strip, s32 x, s32 y)
 {
     u32 slot = 0x12;
     if (strip->isPlayerVariant != 0) slot = 0x50;
-    LayoutEntry* layout = asdTMTexTableEntryAt(0x19, slot);
+    TextureTableEntryIV* layout = asdTMTexTableEntryAt(0x19, slot);
     s32 count, n, current, following;
     count = n = current = following = 0;
     u32 ailments;
@@ -94,7 +65,7 @@ void FUN_0033c1bc(StatusStrip* strip, s32 x, s32 y)
             }
         }
         setDrawState(3);
-        FUN_0029a17c(strip->originX + layout->x, strip->originY + layout->y, layout->size[0], layout->size[1], 1);
+        FUN_0029a17c(strip->originX + layout->x, strip->originY + layout->y, layout->placement->width, layout->placement->height, 1);
         s32 shift = (strip->scroll - 0x14) * -3;
         messageKindForward((s16)current, layout->x + shift + x, layout->y + y, 0x7e);
         messageKindForward((s16)following, layout->x + x + shift + 0xd, layout->y + y, 0x7e);

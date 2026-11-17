@@ -1,5 +1,5 @@
 /* NON_MATCHING: only the initial button-help global/work loads are scheduled differently around saved argument moves. */
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 #include "gamedata/NkmBaseRecord.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
@@ -7,7 +7,6 @@
 #include "util/MemoryHelpers.h"
 
 extern "C" {
-extern ButtonHelpGlobals g_buttonHelp;
 void FUN_001f4568(s32 mode, u32 context, u32 devil, char *output);
 void skillFormatTargetLabel(char *output, s32 target);
 s32 btlFormatCategoryLabel(char *output, s32 category);

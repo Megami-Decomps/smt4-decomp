@@ -1,5 +1,6 @@
 /* NON_MATCHING: list construction omits mode/normalized-ID arguments; request-record publication and exit-state data accesses also differ. */
 #include "common.h"
+#include "game/GameStateA.h"
 
 #define SHOP_STATE_OPEN 0
 #define SHOP_STATE_WAIT_LIST 1
@@ -36,7 +37,6 @@ struct ShopSession {
 extern "C" {
 extern ShopSession *g_shop;
 extern ShopRequestRecord *DAT_00588eec;
-extern s32 DAT_005f1b74;
 
 void *asdOperatorNew(u32 size);
 void asdOperatorDelete(void *block);
@@ -135,7 +135,7 @@ s32 FUN_0027dda4(u32 process)
             s32 *args = NULL;
             s32 size = 0;
             if (gameStateIsFlagSetAndLarge() != 0) {
-                slot[0] = DAT_005f1b74 - 200;
+                slot[0] = g_gameState.savedMapId - 200;
                 args = slot;
                 type = 0xE;
                 size = 4;

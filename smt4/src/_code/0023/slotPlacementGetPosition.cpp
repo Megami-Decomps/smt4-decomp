@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation only: retail keeps the placement in r5 and the x output pointer in r4 (built swaps them). */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -11,19 +12,11 @@ typedef struct SlotPlacement {
     /* 0x3C */ s32 mirrored;
 } SlotPlacement;
 
-typedef struct PlacementRow {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-} PlacementRow;
-
-extern PlacementRow *asdTMTexTableEntryAt(s32 table, s32 row);
-
 /* Looks up the screen position of the placement's slot; slots 4..15 are shifted by 400 px to one side, 16+ to the other. */
 void slotPlacementGetPosition(SlotPlacement *placement, s32 *x, s32 *y)
 {
     s32 slot = placement->slot;
-    PlacementRow *row;
+    TextureTableEntryIV *row;
     s32 shifted;
 
     if (placement->special != 0) {

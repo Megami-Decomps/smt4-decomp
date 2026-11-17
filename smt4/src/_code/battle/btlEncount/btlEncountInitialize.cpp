@@ -1,6 +1,6 @@
 /* NON_MATCHING: only the final battle-flag load/OR/store uses r0 instead of retail r1. */
 #include "battle/btlEncount.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "sys/Task.h"
 #include "AsdSDK/AsdDebug.h"

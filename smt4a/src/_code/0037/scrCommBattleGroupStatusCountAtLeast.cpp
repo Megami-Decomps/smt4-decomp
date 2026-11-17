@@ -24,14 +24,14 @@ u32 scrCommBattleGroupStatusCountAtLeast()
         if (!(g_btlCandidateMasks.unavailable & entry->flags) &&
             (g_btlCandidateMasks.required & entry->flags) &&
             !(entry->flags & g_btlCandidateMasks.excluded)) {
-            if (entry->statusFlags & (1u << bit)) {
+            if (entry->data.statusFlags & (1u << bit)) {
                 ++matches;
             }
         }
     }
     if (btlGetMainState()->unk4cd1) {
         const BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
-        if (entry != NULL && (entry->statusFlags & (1u << bit))) {
+        if (entry != NULL && (entry->data.statusFlags & (1u << bit))) {
             ++matches;
         }
     }

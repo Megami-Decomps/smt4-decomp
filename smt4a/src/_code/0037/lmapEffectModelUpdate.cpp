@@ -1,4 +1,5 @@
 #include "common.h"
+#include "Model/MoriModelManager.h"
 
 /* The part of the lmap scene that drives the floating effect model (state machine at 0x250). */
 struct EffectController {
@@ -33,12 +34,10 @@ struct LmapSceneGlobals {
 
 extern "C" {
 extern LmapSceneGlobals g_lmapScene;
-extern void *g_handleRegistry;
 
 f32 libm_sinf(f32 value);
 f32 floatInterpolateOverDuration(f32 start, f32 end, f32 duration, f32 time);
 void controllerSetDestination(EffectController *controller, const Vec3F *destination);
-void ptrListRemoveClearOwner(void *registry, EffectController *controller);
 
 /* Runs the effect model: bob and scale while it shows, then unregister, then delete it. */
 void lmapEffectModelUpdate(void)

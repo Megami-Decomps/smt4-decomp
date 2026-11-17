@@ -1,11 +1,9 @@
 /* NON_MATCHING: the screen-width select now matches (320 then moveq 400); retail's parameter-copy and callee-saved register assignment differ. */
 #include "common.h"
-#include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
-extern TitleSceneRectanglePrefixIV *g_titleScene;
-
 void FUN_0029a17c(s32 x, s32 y, u32 width, s32 height,
                   s32 useNarrowScreen)
 {
@@ -30,11 +28,11 @@ void FUN_0029a17c(s32 x, s32 y, u32 width, s32 height,
         top = 0;
     }
 
-    renderStackSet(&g_titleScene->rectangleOrigin,
+    renderStackSet(&g_titleScene->scissorMinimum,
                    static_cast<s32>(left | (top << 16)));
 
     // The first callback may replace the global scene pointer.
-    renderStackSet(&g_titleScene->rectangleExtent,
+    renderStackSet(&g_titleScene->scissorMaximum,
                    static_cast<s32>(clippedWidth | (clippedHeight << 16)));
 }
 }

@@ -1,4 +1,5 @@
 #include "shard/Shard0048.h"
+#include "Model/MoriModelManager.h"
 
 extern "C" {
 
@@ -15,8 +16,6 @@ typedef struct Owner1D {
 } Owner1D;
 
 extern u8 _ZTV9Obj55c81c[];
-extern u32 g_handleRegistry;
-extern void ptrListRemoveClearOwner(u32 a, u8 *data);
 
 /* Destroy hook: restores the vtable and releases the two owned objects. */
 Owner1D *owner1DDestroy(Owner1D *obj)

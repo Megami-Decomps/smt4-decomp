@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int textDrawString(...);
 int textFormatBuffer(unsigned char [64], unsigned char *);
 int texDrawCompositeSprite(...);
-int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int FUN_002e1ed4(...);
 int VectorSignedToFloat(...);
@@ -106,8 +106,8 @@ void FUN_0032bc00(int param_1,int param_2)
   do {
     temp_v6 = temp_v2 + (temp_v4 + temp_v5) * 4;
     if (*(short *)(temp_v6 + 0x5ca) != 0) {
-      temp_v7 = asdTMTexTableEntryAt(0x1a,temp_v5 + 0x44c);
-      temp_v8 = asdTMTexTableEntryAt(0x1a,1099);
+      temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,temp_v5 + 0x44c));
+      temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,1099));
       if (temp_v1) {
         textFormatBuffer(temp_v14,&LAB_0032bffc);
         VectorSignedToFloat((int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v8 + 10) + param_2,
@@ -127,7 +127,7 @@ void FUN_0032bc00(int param_1,int param_2)
           textDrawString(2,0xff,temp_v9,(int)*(short *)(temp_v7 + 8));
         }
       }
-      temp_v8 = asdTMTexTableEntryAt(0x1a,0x449);
+      temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x449));
       if (temp_v1) {
         temp_v0 = *(short *)(temp_v8 + 10);
         temp_v8 = (int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v7 + 8);
@@ -140,7 +140,7 @@ void FUN_0032bc00(int param_1,int param_2)
       }
       uiDrawDemonIcon(temp_v10,temp_v8 + param_1,(int)*(short *)(temp_v7 + 10) + (int)temp_v0 + param_2,0xb5,0
                   );
-      temp_v8 = asdTMTexTableEntryAt(0x1a,0x44a);
+      temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x44a));
       FUN_002e1ed4(*(unsigned short *)(temp_v6 + 0x5ca),
                    (int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v8 + 8) + param_1,
                    (int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v8 + 10) + param_2,0xb5);
@@ -149,7 +149,7 @@ void FUN_0032bc00(int param_1,int param_2)
   } while (temp_v5 < 0xb);
   if ((*(int *)(temp_v2 + 0x400) == 0x11) &&
      (temp_v4 = temp_v2 + (temp_v3 + temp_v4) * 4, temp_v5 = temp_v4 + 0x500, *(short *)(temp_v4 + 0x5ca) != 0)) {
-    temp_v4 = asdTMTexTableEntryAt(0x1a,temp_v3 + 0x42c);
+    temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,temp_v3 + 0x42c));
     efctSetSpeed();
     texDrawCompositeSprite(2,0x1a,8,*(short *)(temp_v4 + 8) + param_1,*(short *)(temp_v4 + 10) + param_2,0xbf);
     efctSetSpeed();
@@ -179,7 +179,7 @@ void FUN_0032bc00(int param_1,int param_2)
                 );
     texDrawTableEntryAtStoredOrigin(2,0x1a,0x457,*(short *)(temp_v4 + 8) + param_1,*(short *)(temp_v4 + 10) + param_2,0xc4)
     ;
-    temp_v6 = asdTMTexTableEntryAt(0x1a,0x420);
+    temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x420));
     temp_v3 = g_titleScene;
     piVar14 = (int *)(g_titleScene + 0x130c);
     temp_v7 = piVar14[*piVar14 + 2];
@@ -204,7 +204,7 @@ void FUN_0032bc00(int param_1,int param_2)
       (**(romwright_code **)(temp_v3 + 0x1328))();
       *(unsigned char *)(temp_v3 + 0x1324) = 0;
     }
-    temp_v3 = asdTMTexTableEntryAt(0x1a,0x458);
+    temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x458));
     if (temp_v1) {
       temp_v0 = *(short *)(temp_v3 + 10);
       temp_v3 = (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8);
@@ -216,7 +216,7 @@ void FUN_0032bc00(int param_1,int param_2)
       temp_v6 = (int)*(short *)(temp_v5 + 200);
     }
     uiDrawDemonIcon(temp_v6,temp_v3 + param_1,(int)*(short *)(temp_v4 + 10) + (int)temp_v0 + param_2,0xc9,0);
-    temp_v3 = asdTMTexTableEntryAt(0x1a,0x459);
+    temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x459));
     FUN_002e1ed4(*(unsigned short *)(temp_v5 + 0xca),
                  (int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + param_1,
                  (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,0xc9);

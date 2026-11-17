@@ -17,27 +17,27 @@ u32 FUN_0038bd74(void)
     for (s32 slot = 0; slot < 109; ++slot) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[slot];
                 if ((g_btlCandidateMasks.unavailable & entry->flags) && (g_btlCandidateMasks.required & entry->flags) &&
-                !(g_btlCandidateMasks.excluded & entry->flags) && entry->id == id) {
-            if (entry->record) {
+                !(g_btlCandidateMasks.excluded & entry->flags) && entry->data.id == id) {
+            if (entry->data.record) {
                 for (s32 i = 0; i < 8; ++i) {
-                    SkillDataRecordA *skill = skillDataFindById(entry->record->skills[i]);
+                    SkillDataRecordA *skill = skillDataFindById(entry->data.record->skills[i]);
                     if (skill && skill->sort.category == 3) {
                         scrSetResult(1);
                         return 1;
                     }
                 }
             }
-            if (entry->secondaryRecord) {
+            if (entry->data.secondaryRecord) {
                 for (s32 i = 0; i < 8; ++i) {
-                    SkillDataRecordA *skill = skillDataFindById(entry->secondaryRecord->skills[i]);
+                    SkillDataRecordA *skill = skillDataFindById(entry->data.secondaryRecord->skills[i]);
                     if (skill && skill->sort.category == 3) {
                         scrSetResult(1);
                         return 1;
                     }
                 }
             }
-            if (entry->candidate.record) {
-                NkmEnemyRecordA *record = nkmEnemyFindById(entry->id);
+            if (entry->data.candidate) {
+                NkmEnemyRecordA *record = nkmEnemyFindById(entry->data.id);
                 for (s32 i = 0; i < 8; ++i) {
                     SkillDataRecordA *skill = skillDataFindById(record->skills[i]);
                     if (skill && skill->sort.category == 3) {

@@ -5,6 +5,7 @@
 #include "camp/Unite/UniteEffect.h"
 #include "ui/UiControl.h"
 #include "event/2dEvent/SmokeFade.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -87,7 +88,6 @@ extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: asdMemoryAllocTraced. */
 /* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
-extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_0019eb14. */
@@ -250,8 +250,8 @@ unsigned int FUN_003cf02c(void)
   case 3:
     *(int *)(temp_v2 + 0x84) = *(int *)(temp_v2 + 0x84) + 1;
     temp_v6 = DAT_0057f2c4;
-    temp_v10 = asdTMTexTableEntryAt(0x1a,0x20b);
-    temp_v17[0] = asdTMTexTableEntryAt(0x1a,0x20e);
+    temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x20b));
+    temp_v17[0] = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x20e));
     temp_v14 = (float)((unsigned long long)temp_v15 >> 0x20);
     temp_v13 = (float)temp_v18;
     temp_v0 = *(short *)(temp_v6 + 0x1e);

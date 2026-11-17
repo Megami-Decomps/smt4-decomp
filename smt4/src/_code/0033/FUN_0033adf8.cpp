@@ -2,6 +2,7 @@
 #include "gamedata/DataTable.h"
 #include "gamedata/UnitRecordAccess.h"
 #include "code/Code0029.h"
+#include "gamedata/GamePlayerData.h"
 
 // Row of the debug scenario table (0x74 bytes): the state the game is set to.
 struct ScenarioRow {
@@ -24,15 +25,6 @@ struct ScenarioRow {
 };
 
 
-struct PlayerData {
-    u8 unk00[0x12];
-    u16 stats[5];           // 0x12
-    u16 hp;                 // 0x1c
-    u16 mp;                 // 0x1e
-    u8 unk20[0x0a];
-    u16 hpMax;              // 0x2a
-    u16 mpMax;              // 0x2c
-};
 
 struct SlotTable {
     u32 macca;              // 0x00
@@ -66,7 +58,6 @@ void FUN_00334058(u32 id);
 u8 gameSlotFindByCategory(StatBlock* record);
 SlotTable* gameGetSlotTable(void);
 void *dataTableFileGetTable(void *file, s32 arg);
-PlayerData* gameGetPlayerData(void);
 const char* gameGetPlayerName(void);
 
 // Debug: loads scenario row `row` into the running game (player, party, skills, stock).
@@ -88,16 +79,16 @@ void FUN_0033adf8(BattleMainBlock* battle, u32 row)
     for (s32 i = 0; i < 7; i++) look[i] = scenario->look[i];
     playerUnitRecordInit((s8)scenario->playerKind, name, look);
 
-    PlayerData* player = gameGetPlayerData();
-    for (s32 i = 0; i < 5; i++) player->stats[i] = scenario->stats[i];
+    PlayerDataIV* player = gameGetPlayerData();
+    for (s32 i = 0; i < 5; i++) player->baseStats.stats[i] = scenario->stats[i];
     playerRecalcStatsFromEquipment(0);
     if (scenario->hp > 0) {
+        player->maxHp = scenario->hp;
         player->hp = scenario->hp;
-        player->hpMax = scenario->hp;
     }
     if (scenario->mp > 0) {
+        player->maxMp = scenario->mp;
         player->mp = scenario->mp;
-        player->mpMax = scenario->mp;
     }
     for (s32 i = 0; i < 8; i++) {
         if (scenario->itemIds[i] != 0) FUN_00334058(scenario->itemIds[i]);

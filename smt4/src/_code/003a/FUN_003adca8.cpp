@@ -1,12 +1,6 @@
 /* NON_MATCHING: readable rebuild of the battle UI's number popup setup (five digit sprites plus two label sprites); the draft's floats arrive in s0-s2 (x, y, z) ahead of three stack ints, which armcc here places the same way, but the digit loop's divisor update and the per-digit sprite id selection are scheduled differently. */
 #include "common.h"
-
-/* A layout rectangle's size words (the high bit is a flag). */
-struct LayoutSize {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ u16 width;
-    /* 0x06 */ u16 height;
-};
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* The battle UI's global: a pointer to the popup block at +0x20. */
 struct BattleUiGlobal {
@@ -23,7 +17,6 @@ void spriteStartAnimationByIndex(u8 *sprite, s32 animation);
 void uiStoreTextureEntryCenter(u8 *sprite, s32 group, s32 part);
 void FUN_002963ec(u8 *sprite, s32 x, s32 y);
 void pairSetFirstResetSecond(u8 *sprite, s32 id);
-LayoutSize *asdTMTexTableEntryAt(s32 group, u32 part);
 s32 __aeabi_idivmod(s32 a, s32 b);
 
 /* Sets up popup slot `slot`: shows `value` as five digit sprites (the sprite set depends on
@@ -83,7 +76,7 @@ void FUN_003adca8(u32 unused1, s32 slot, s32 value, u32 unused2, f32 x, f32 y, f
     }
     uiStoreTextureEntryCenter(first, 0x15, 0x419);
     uiStoreTextureEntryCenter(second, 0x15, 0x418);
-    LayoutSize *size = asdTMTexTableEntryAt(0x15, *(u32 *)(popup + 0x820C));
+    TextureTableEntryIV *size = asdTMTexTableEntryAt(0x15, *(u32 *)(popup + 0x820C));
     FUN_002963ec(first, -((size->width & 0x7FFF) >> 1), -((size->height & 0x7FFF) >> 1));
     FUN_002963ec(first, (s16)(s32)position[0], (s16)(s32)position[1]);
     size = asdTMTexTableEntryAt(0x15, *(u32 *)(popup + 0x8298));

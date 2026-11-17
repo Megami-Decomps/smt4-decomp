@@ -1,8 +1,7 @@
 /* NON_MATCHING: saved float and loop registers differ; retail saves the three coordinates separately rather than pairing x/y. */
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 
 extern "C" {
-extern MapIfGlobals g_mapIf;
 f32 mathDistanceBetweenPoints(f32 x, f32 y, f32 z, f32 targetX, f32 targetY, f32 targetZ);
 
 // Activate the first eligible map marker within ten units of the supplied position.

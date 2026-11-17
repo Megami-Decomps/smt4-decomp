@@ -15,8 +15,8 @@ u32 scrCommGetBattleEntryValue(void)
     for (i = 0; i < 109; i++) {
         BtlEntry *entry = &btlGetMainState()->entries[i];
 
-        if ((entry->flags & 0x10) && entry->id == key) {
-            result = entry->members.ids[0];
+        if ((entry->flags & 0x10) && entry->data.id == key) {
+            result = entry->ids[0];
             break;
         }
     }

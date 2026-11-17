@@ -1,29 +1,28 @@
-#include "shard/W6_W6Match8_CampInventory.h"
+#include "camp/CampState.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "gamedata/UnitStats.h"
 #include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
-extern CampInventoryLists *g_camp;
 PartyDamageSlotsIV *gameGetSlotTable();
 StatBlock *gameGetUnitRecord(s32);
 void FUN_00283f30(UnitSummarySkills *, s32);
-void gridNavigationConfigure(CampInventoryController *, u32, s32, s32, s32, s32);
+void gridNavigationConfigure(GridNavigation *, u32, s32, s32, s32, s32);
 void FUN_00282f80(s32);
 
 void FUN_00262d40()
 {
-    CampInventoryLists *work = g_camp;
+    CampState *work = g_camp;
     PartyDamageSlotsIV *slots = gameGetSlotTable();
     u32 count = 0;
-    memClear(work->skills.entries, sizeof(work->skills.entries));
+    memClear(work->skills, sizeof(work->skills));
     UnitSummarySkills playerSkills;
     FUN_00283f30(&playerSkills, 0);
     for (s32 index = 0; index < 8; ++index) {
         u16 skill = playerSkills.ids[index];
         if (skill) {
-            work->skills.entries[count].skill = skill;
-            work->skills.entries[count].unit = -1;
+            work->skills[count].skill = skill;
+            work->skills[count].unit = -1;
             ++count;
         }
     }
@@ -36,13 +35,13 @@ void FUN_00262d40()
         for (s32 index = 0; index < 8; ++index) {
             u16 skill = unit->skills.ids[index];
             if (skill) {
-                work->skills.entries[count].skill = skill;
-                work->skills.entries[count].unit = slots->stock[slot];
+                work->skills[count].skill = skill;
+                work->skills[count].unit = slots->stock[slot];
                 ++count;
             }
         }
     }
-    gridNavigationConfigure(&work->categories.controller, count, 11, 1, 1, 1);
+    gridNavigationConfigure(&work->grids[3], count, 11, 1, 1, 1);
     FUN_00282f80(9);
 }
 }

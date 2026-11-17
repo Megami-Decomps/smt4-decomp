@@ -1,36 +1,24 @@
-#include "common.h"
+#include "font/InfoWinA.h"
 
 extern "C" {
 
-void uiSpriteSetKeyframe(u8 *member, s32 a, s32 b);
-void uiSpriteSetImageKeyframe(u8 *member, s32 a, s32 b);
+void uiSpriteSetKeyframe(UiSpriteState *sprite, s32 a, s32 b);
+void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 a, s32 b);
 
-typedef struct Scene {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s32 state;
-    /* 0x0C */ u8 unk0C[4];
-    /* 0x10 */ s32 timer;
-    /* 0x14 */ u8 unk14[0x0C];
-    /* 0x20 */ s32 mode;
-    /* 0x24 */ u8 unk24[0x30];
-    /* 0x54 */ u8 member54[0x8C];
-    /* 0xE0 */ u8 memberE0[1];
-} Scene;
-extern Scene *g_infoWin;
 
 /* If the scene is running, moves it to state 5 with a 30-frame timer and restarts its members (the second one too in mode 2).
  * Callers pass an `immediate` flag that this function does not read. */
 void dialogClose(s32 immediate)
 {
-    Scene *scene = g_infoWin;
+    InfoWindowA *scene = g_infoWin;
 
     if (scene->state != 0) {
         scene->state = 5;
         scene->timer = 0x1E;
-        uiSpriteSetKeyframe(scene->member54, 1, 0);
-        uiSpriteSetImageKeyframe(scene->member54, 1, 0);
-        if (scene->mode == 2) {
-            uiSpriteSetKeyframe(scene->memberE0, 4, 0);
+        uiSpriteSetKeyframe(&scene->background, 1, 0);
+        uiSpriteSetImageKeyframe(&scene->background, 1, 0);
+        if (scene->active == 2) {
+            uiSpriteSetKeyframe(&scene->content, 4, 0);
             return;
         }
     }

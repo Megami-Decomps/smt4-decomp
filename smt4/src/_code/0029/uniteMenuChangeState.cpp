@@ -1,10 +1,9 @@
 /* NON_MATCHING: the dense 36-entry table now matches (explicit labels); retail keeps an extra zero in r9 and saves a larger register set. */
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 #include "status/StatusCamera.h"
 #include "code/Code0029_Smt4.h"
 
 extern "C" {
-extern UniteWork *g_unite;
 void buttonHelpSetPreset(u32 preset);
 const void *dataTableGet(u32 table, u32 group);
 const UniteDescriptionEntry *dataTableGetEntries(const void *table);

@@ -2,6 +2,8 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 
@@ -10,11 +12,10 @@ int textDrawString(...);
 int effectDispatchSelector(...);
 int efctSetSpeed(void);
 int uiDrawItemOrStatusIcon(...);
-int asdTMTexTableEntryAt(...);
 int gxResetColorQuadToWhite(void);
 int fontMeasureLineAdvance(...);
 int drawSetColorFromRGBA8(void);
-int renderCtxCalculateStereoParallax(unsigned int);
+int renderCtxCalculateStereoParallax(RenderCtxA *);
 int markerKindGetColor(...);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
@@ -34,7 +35,6 @@ typedef struct {
 extern unsigned char LAB_003f9308; /* 0x3f9308 */
 extern unsigned char LAB_003f9310; /* 0x3f9310 */
 extern unsigned char DAT_00528004; /* 0x528004 */
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
@@ -262,12 +262,12 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
     else {
       temp_v22 = 1;
     }
-    temp_v1 = asdTMTexTableEntryAt(0xc,temp_v16 + 0x94);
+    temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xc,temp_v16 + 0x94));
     temp_v23 = (int)**(short **)(temp_v1 + 0xc);
     puVar3 = temp_v19;
     fontMeasureLineAdvance(puVar3,2);
     temp_v6 = 0;
-    temp_v1 = asdTMTexTableEntryAt(0xc,0x9b);
+    temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xc,0x9b));
     if (temp_v22 != 0) {
       temp_v6 = (int)**(short **)(temp_v1 + 0xc);
     }
@@ -280,7 +280,7 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
         temp_v9 = (float)VectorSignedToFloat(temp_v22,(unsigned char)(in_fpscr >> 0x16) & 3);
         texDrawTableEntryAtStoredOrigin(temp_v21,0xc,0x9e,(int)(*(float *)(temp_v17 + 0x39c) + in_s0 + temp_v9) + temp_v8,
                      (int)(*(float *)(temp_v17 + 0x3a0) + temp_v12 + in_s1),temp_v20);
-        temp_v1 = asdTMTexTableEntryAt(0xc,0x9e);
+        temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xc,0x9e));
         temp_v1 = *(int *)(temp_v1 + 0xc);
         temp_v12 = (float)temp_v13;
         temp_v10 = VectorFloatToUnsigned(*(float *)(temp_v1 + 0x10) * temp_v12,3);
@@ -295,7 +295,7 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
         temp_v9 = (float)VectorSignedToFloat(temp_v22,(unsigned char)(in_fpscr >> 0x16) & 3);
         texDrawTableEntryAtStoredOrigin(temp_v21,0xc,0x9d,(int)(*(float *)(temp_v17 + 0x39c) + in_s0 + temp_v9) + temp_v8,
                      (int)(*(float *)(temp_v17 + 0x3a0) + temp_v12 + in_s1),temp_v20);
-        temp_v1 = asdTMTexTableEntryAt(0xc,0x9d);
+        temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xc,0x9d));
         temp_v1 = *(int *)(temp_v1 + 0xc);
         temp_v12 = (float)temp_v13;
         temp_v11 = VectorFloatToUnsigned(*(float *)(temp_v1 + 0x10) * temp_v12,3);
@@ -310,7 +310,7 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
       temp_v9 = (float)VectorSignedToFloat(temp_v22,(unsigned char)(in_fpscr >> 0x16) & 3);
       texDrawTableEntryAtStoredOrigin(temp_v21,0xc,0x9a,(int)(*(float *)(temp_v17 + 0x39c) + in_s0 + temp_v9) + temp_v8,
                    (int)(*(float *)(temp_v17 + 0x3a0) + temp_v12 + in_s1),temp_v20);
-      temp_v1 = asdTMTexTableEntryAt(0xc,0x9a);
+      temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xc,0x9a));
       temp_v1 = *(int *)(temp_v1 + 0xc);
       temp_v12 = (float)temp_v13;
       temp_v11 = VectorFloatToUnsigned(*(float *)(temp_v1 + 0x10) * temp_v12,3);
@@ -324,7 +324,7 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
       temp_v9 = (float)VectorSignedToFloat(temp_v22,(unsigned char)(in_fpscr >> 0x16) & 3);
       texDrawTableEntryAtStoredOrigin(temp_v21,0xc,0x99,(int)(*(float *)(temp_v17 + 0x39c) + in_s0 + temp_v9) + temp_v8,
                    (int)(*(float *)(temp_v17 + 0x3a0) + temp_v12 + in_s1),temp_v20);
-      temp_v1 = asdTMTexTableEntryAt(0xc,0x99);
+      temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xc,0x99));
       temp_v1 = *(int *)(temp_v1 + 0xc);
       temp_v12 = (float)temp_v13;
       temp_v10 = VectorFloatToUnsigned(*(float *)(temp_v1 + 0x10) * temp_v12,3);

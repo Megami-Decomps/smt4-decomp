@@ -28,8 +28,8 @@ void FUN_004dcb40(BattleUnitRecordState* state, BtlMainStateA* battle, u32 mode,
     slot->combatant = combatant;
     slot->roster = NULL;
     if (!(slot->combatant->flags & g_btlAction.noRoster))
-        slot->roster = &battle->roster[combatant->unitIndex];
-    slot->parameters = &combatant->unitParameters.parameterBlock;
+        slot->roster = &battle->roster[combatant->ids[0]];
+    slot->parameters = &combatant->data;
     slot->combatantIndex = combatantIndex;
     slot->mode = mode;
     slot->scale = scale.f;

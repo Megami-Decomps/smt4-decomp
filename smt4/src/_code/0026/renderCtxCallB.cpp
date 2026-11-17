@@ -1,10 +1,10 @@
 #include "title/titleMain.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 
-void cameraSetViewMatrix(TitleScene *scene, u32 value);
+void cameraSetViewMatrix(RenderCtx *scene, u32 value);
 
-extern TitleScene *g_titleScene;
 
 void renderCtxCallB(u32 value)
 {

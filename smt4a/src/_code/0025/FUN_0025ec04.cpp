@@ -1,9 +1,8 @@
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
-#include "camp/CampState.h"
+#include "camp/CampStateA.h"
 
 extern "C" {
-extern CampStateA *g_camp;
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 s32 renderCtxPackPassFlags(u32 enabled, u32 mode);
 u32 listCursorGetRowOfChildIfUnblocked(const void *selection);
@@ -19,12 +18,12 @@ u32 FUN_0025ec04(void)
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     RenderCtxA *context = g_renderCtx;
     renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
-    s32 menu = camp->menu.current;
+    s32 menu = camp->state;
     if (menu == 0x47)
-        menu = camp->menu.previous;
+        menu = camp->previousState;
     switch (menu) {
     case 0x24:
-        if (FUN_003da8f4(camp->unkA4, listCursorGetRowOfChildIfUnblocked(camp->block40)) != 0x1B)
+        if (FUN_003da8f4(camp->menuGroup, listCursorGetRowOfChildIfUnblocked(&camp->menuGrid)) != 0x1B)
             break;
         // This menu shares the pass only for the selected special entry.
     case 4: case 5: case 10: case 15: case 16: case 17: case 19: case 29:

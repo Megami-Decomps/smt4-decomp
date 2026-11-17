@@ -1,6 +1,6 @@
 /* NON_MATCHING: pending-action resets use different saved registers (retail keeps 96, 204 and zero in r6-r8). */
 #include "battle/btlAction.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 
 struct UnitActionView {

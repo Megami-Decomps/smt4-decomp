@@ -2,6 +2,7 @@
 #include "shard/S2Scene3a.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
+#include "gamedata/GamePlayerData.h"
 
 class PanelWidget {
 public:
@@ -13,7 +14,6 @@ public:
 };
 
 extern "C" {
-u16 *gameGetPlayerData(void);
 s32 FUN_0029e924(const FlaggedValueHolder *holder);
 s32 flaggedEntryGetValueByState(const FlaggedValueHolder *holder);
 void uiRectDrawAtBottomRight(const AsdTextureRegion *, u32 image, s32 x, s32 y, u32 color);
@@ -63,13 +63,13 @@ void FUN_003a2960(Scene3a *scene, u32 image)
     header.unk02 = bits;
     u16 value = 0;
     switch (view->category) {
-    case 0: value = gameGetPlayerData()[0]; break;
-    case 1: value = gameGetPlayerData()[1]; break;
-    case 2: value = gameGetPlayerData()[2]; break;
-    case 3: value = gameGetPlayerData()[3]; break;
-    case 4: value = gameGetPlayerData()[4]; break;
-    case 5: value = gameGetPlayerData()[5]; break;
-    case 6: value = gameGetPlayerData()[6]; break;
+    case 0: value = gameGetPlayerData()->equipment[0]; break;
+    case 1: value = gameGetPlayerData()->equipment[1]; break;
+    case 2: value = gameGetPlayerData()->equipment[2]; break;
+    case 3: value = gameGetPlayerData()->equipment[3]; break;
+    case 4: value = gameGetPlayerData()->equipment[4]; break;
+    case 5: value = gameGetPlayerData()->equipment[5]; break;
+    case 6: value = gameGetPlayerData()->equipment[6]; break;
     }
     header.id = value;
     FUN_0022ea70(scene, 0, 0, &header);

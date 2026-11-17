@@ -1,8 +1,7 @@
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 #include "shard/Shard0031.h"
 
 extern "C" {
-extern ButtonHelpGlobalsA g_buttonHelp;
 
 void buttonHelpSetHelpState(u8 value)
 {

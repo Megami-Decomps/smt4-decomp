@@ -1,8 +1,9 @@
 /* NON_MATCHING: status-bit loop control, cycle-array addressing and scratch registers differ. */
-#include "camp/CampState.h"
+#include "camp/CampStateA.h"
 #include "gamedata/SelectedUnitQuery.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
 #include "code/Code002a_VariantA.h"
+#include "gamedata/GamePlayerData.h"
 struct PlayerData;
 
 namespace {
@@ -15,8 +16,7 @@ struct CampStatusSelectionView {
 };
 /* The selected-unit and cycle tables are beyond CampStateA's shared prefix. */
 struct CampStatusCyclesView {
-    CampStateA camp;
-    u8 unk1B24[0x50];
+    u8 unk0000[0x1B74];
     SelectedUnitListEntry entries[25];
     u8 unk1C3C[0x1540];
     s32 elapsed[25];
@@ -31,11 +31,9 @@ typedef char CampStatusCycleOffsets[
     offsetof(CampStatusCyclesView, colors) == 0x3244 ? 1 : -1];
 }
 extern "C" {
-extern CampStateA *g_camp;
 s32 objectApplyIfUnblocked(void *selector);
 s32 resourceRunOperationIfUnblocked(void *selector);
 void sysMemClear(void *memory, u32 bytes);
-PlayerData *gameGetPlayerData();
 u32 markerKindGetColor(s16 status);
 void mapBlockSetRequest(u32 color);
 
@@ -58,13 +56,9 @@ void FUN_003d386c(s32 useSelector)
         s32 statusCount = 0;
         if (slot < 0) {
             /* PlayerData's legacy header redeclares GameDataBlocks; keep that dependency out of this unit. */
-            struct PlayerStatusView {
-                u8 unk00[0x5E];
-                u16 mask;
-            };
-            status = reinterpret_cast<const PlayerStatusView *>(gameGetPlayerData())->mask;
+            status = gameGetPlayerData()->ailments;
         } else {
-            status = gameGetSlotRecord(slot)->statusMask;
+            status = gameGetSlotRecord(slot)->ailments;
             for (s32 bit = 1; bit < 14; ++bit) {
                 if (bit != 2 && (status & (1u << bit)) != 0)
                     ++statusCount;

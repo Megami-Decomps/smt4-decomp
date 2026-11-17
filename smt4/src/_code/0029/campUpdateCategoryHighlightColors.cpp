@@ -1,27 +1,26 @@
-#include "shard/W6_W6Match8_CampInventory.h"
+#include "camp/CampState.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "gamedata/GamePlayerData.h"
 #include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
-extern CampInventoryLists *g_camp;
-s32 FUN_0029ee54(CampInventoryController *controller);
-s32 listCursorGetRowIfUnblocked(CampInventoryController *controller);
-s32 resourceRunOperationIfUnblocked(CampInventoryController *controller);
+s32 FUN_0029ee54(GridNavigation *controller);
+s32 listCursorGetRowIfUnblocked(GridNavigation *controller);
+s32 resourceRunOperationIfUnblocked(GridNavigation *controller);
 u32 categoryGetColor(s16 category);
 void FUN_0026dafc(u32 color);
 
 void campUpdateCategoryHighlightColors()
 {
-    CampInventoryLists *work = g_camp;
-    s32 count = FUN_0029ee54(&work->categories.controller);
-    if (FUN_0029ee54(&work->categories.controller) < count) {
-        count = FUN_0029ee54(&work->categories.controller);
+    CampState *work = g_camp;
+    s32 count = FUN_0029ee54(&work->grids[3]);
+    if (FUN_0029ee54(&work->grids[3]) < count) {
+        count = FUN_0029ee54(&work->grids[3]);
     }
     u32 processed[25];
     memClear(processed, sizeof(processed));
     for (s32 row = 0; row < count; ++row) {
-        s32 unit = reinterpret_cast<CampInventorySlot *>(work->categories.slotData)[row].unit;
+        s32 unit = work->skills[row].unit;
         if (processed[unit + 1] != 0) {
             continue;
         }
@@ -51,8 +50,8 @@ void campUpdateCategoryHighlightColors()
             work->categoryTimers[unit + 1] = 0;
         }
     }
-    s32 page = resourceRunOperationIfUnblocked(&work->categories.controller);
-    s32 row = listCursorGetRowIfUnblocked(&work->categories.controller);
-    FUN_0026dafc(work->categoryColors[reinterpret_cast<CampInventorySlot *>(work->categories.slotData)[page + row].unit + 1]);
+    s32 page = resourceRunOperationIfUnblocked(&work->grids[3]);
+    s32 row = listCursorGetRowIfUnblocked(&work->grids[3]);
+    FUN_0026dafc(work->categoryColors[work->skills[page + row].unit + 1]);
 }
 }

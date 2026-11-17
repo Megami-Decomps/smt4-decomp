@@ -11,8 +11,8 @@ BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStat
 
 static __inline s32 entryHpPercentage(const BtlCombatantEntryA *entry)
 {
-    s32 hp = entry->hp;
-    s32 maximum = entry->maxHp;
+    s32 hp = entry->data.hp;
+    s32 maximum = entry->data.maxHp;
     return hp * 100 / maximum;
 }
 
@@ -28,7 +28,7 @@ u32 FUN_00373364()
         BtlCombatantEntryA *entry = &state->entries[index];
         if (!(g_btlCandidateMasks.unavailable & entry->flags) &&
             (entry->flags & g_btlCandidateMasks.required) &&
-            !(entry->flags & g_btlCandidateMasks.excluded) && entry->id == unitId &&
+            !(entry->flags & g_btlCandidateMasks.excluded) && entry->data.id == unitId &&
             entryHpPercentage(entry) <= percentage) {
             scrSetResult(1);
             return 1;
@@ -36,7 +36,7 @@ u32 FUN_00373364()
     }
     if (btlGetMainState()->unk4cd1) {
         BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
-        if (entry && entry->id == unitId && entryHpPercentage(entry) <= percentage) {
+        if (entry && entry->data.id == unitId && entryHpPercentage(entry) <= percentage) {
             scrSetResult(1);
             return 1;
         }

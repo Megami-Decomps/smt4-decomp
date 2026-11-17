@@ -21,7 +21,7 @@ s32 btlScrAnyStatLevelFive(void)
             if ((entry->flags & g_btlCandidateMasks.unavailable) != 0 &&
                 (entry->flags & g_btlCandidateMasks.required) != 0 &&
                 (entry->flags & g_btlCandidateMasks.excluded) == 0 &&
-                (entry->encodedStats.values[stat] >> 10) == 5) {
+                (entry->data.values[stat] >> 10) == 5) {
                 scrSetResult(1);
                 return 1;
             }

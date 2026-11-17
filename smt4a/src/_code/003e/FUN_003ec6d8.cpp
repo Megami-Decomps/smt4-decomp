@@ -12,7 +12,7 @@ bool FUN_003ec6d8(const BtlMainStateA *state, u32 id)
         u64 flags = unit->flags;
         if ((flags & g_btlMain.combatantMasks.required) &&
             !(flags & g_btlMain.exclusionMask) &&
-            (flags & g_btlMain.actorCategories[1]) && unit->id == id) {
+            (flags & g_btlMain.actorCategories[1]) && unit->data.id == id) {
             return true;
         }
     }

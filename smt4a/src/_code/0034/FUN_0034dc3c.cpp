@@ -4,9 +4,9 @@
 #include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
-extern RenderCtxScissorA *g_renderCtx;
 void FUN_00168e00(s32, s32, s32, s32);
 void renderPopStateStacks(void);
 

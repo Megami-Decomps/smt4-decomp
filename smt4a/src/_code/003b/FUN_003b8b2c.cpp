@@ -23,10 +23,10 @@ s32 FUN_003b8b2c(void)
     for (i = 4; i < 54; i++) {
         BtlCombatantEntryA *entry = &state->entries[i];
         if ((entry->flags & active) && !(entry->flags & excluded) && (entry->flags & required) &&
-            entry->id == unitId) {
+            entry->data.id == unitId) {
             entry->flags &= ~downed;
-            if (entry->hp == 0) {
-                entry->hp = 1;
+            if (entry->data.hp == 0) {
+                entry->data.hp = 1;
             }
         }
     }

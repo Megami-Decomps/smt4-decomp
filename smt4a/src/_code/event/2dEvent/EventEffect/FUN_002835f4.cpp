@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002835f4` (_code @ 0x2835f4, 0x454 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -50,7 +51,6 @@ extern int jobGetWork(void);
 /* Supplied declaration required: efctSetSpeed. */
 extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxSelectTexture. */
-extern int asdTMTexTableEntryAt(unsigned int, int);
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
@@ -157,7 +157,7 @@ unsigned int FUN_002835f4(void)
     temp_v22 = temp_v14;
     temp_v26 = temp_v18;
   }
-  temp_v3 = asdTMTexTableEntryAt(*(unsigned int *)(*(int *)(temp_v0 + 0x24) * 0x10 + 0x57f43c),temp_v1 * 1000);
+  temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(*(unsigned int *)(*(int *)(temp_v0 + 0x24) * 0x10 + 0x57f43c),temp_v1 * 1000));
   temp_v1 = *(int *)(temp_v0 + 0x24);
   if (temp_v1 != 0) {
     if (temp_v1 != 1) {

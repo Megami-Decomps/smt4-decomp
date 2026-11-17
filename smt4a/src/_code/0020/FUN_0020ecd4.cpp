@@ -5,6 +5,7 @@
 #include "code/Code0015.h"
 #include "mapnavi/naviMain.h"
 #include "gamedata/SaveSlotTable.h"
+#include "map/PopupStateA.h"
 
 struct StatusEventRecord {
     u32 id;
@@ -15,26 +16,15 @@ struct StatusEventRecord {
     u8 unk0E[0x12];
 };
 
-struct StatusPopupState {
-    s32 state;
-    s32 phase;
-    u8 unk08[0x0C];
-    char *content;
-    s32 value;
-    u8 unk1C[9];
-    char text[0x40];
-};
-
 struct SaveSlotView {
     u8 unk00[0x12C];
     u16 statusId;
 };
 
 extern "C" {
-extern StatusPopupState *g_popupState;
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(s32 max);
-char *popupSelectWeightedMessage(u32 kind, u32 id);
+const char *popupSelectWeightedMessage(u32 kind, u32 id);
 void *rt_memcpy(void *dest, const void *src, u32 size);
 int textFormatBuffer(char *dest, const char *name, const char *format);
 
@@ -73,15 +63,15 @@ u32 FUN_0020ecd4(void)
                 if (randRange(99) + 1 > record->chance)
                     continue;
                 g_popupState->state = 6;
-                g_popupState->phase = 0;
-                g_popupState->value = slot->statusId;
-                g_popupState->content = popupSelectWeightedMessage(4, slot->statusId);
-                rt_memcpy(name, g_popupState->content, 0x40);
+                g_popupState->timer = 0;
+                g_popupState->speakerId = slot->statusId;
+                g_popupState->message = popupSelectWeightedMessage(4, slot->statusId);
+                rt_memcpy(name, g_popupState->message, 0x40);
                 if (playerHasFlagBit(5) != 0)
                     textFormatBuffer(g_popupState->text, name, "\x82\x6f\x82\x8f\x82\x89\x82\x93\x82\x8f\x82\x8e");
                 else if (playerHasFlagBit(9) != 0)
                     textFormatBuffer(g_popupState->text, name, "\x82\x72\x82\x89\x82\x83\x82\x8b");
-                g_popupState->content = g_popupState->text;
+                g_popupState->message = g_popupState->text;
                 return 1;
             }
         }

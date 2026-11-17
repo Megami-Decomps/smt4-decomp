@@ -25,7 +25,7 @@ u32 FUN_004e7080(BtlMainStateA **state, u8 *output, s32 selectionId)
         const BtlCombatantEntryA &entry = entries[i];
         if ((entry.flags & requiredAny) != 0 &&
             (entry.flags & excluded) == 0 &&
-            entry.indexView.selectionIndex == selectionId) {
+            entry.selectionIndex == selectionId) {
             (output + selectionId)[0x38] = 1;
             return 1;
         }

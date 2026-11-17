@@ -2,9 +2,9 @@
 #include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "util/BitsAndBytes.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 extern "C" {
 void efctSetSpeed(f32 speed);
-SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 image);
 void uiDrawItemOrStatusIcon(u32 value, s32 x, s32 y, s32 priority, s32 flags);
 
 // Draw the layered HUD ornament with additive and normal-alpha blend sections.
@@ -21,7 +21,7 @@ void btlDrawLayeredHud(u32 context, s32 x, s32 y, u32 value, f32 speed)
     render = g_renderCtx;
     blend = packNibblesAndByte(6, 7, 0);
     renderStackSet(&render->stackB, blend);
-    SpriteInfo *layout = asdTMTexTableEntryAt(12, 133);
+    TextureTableEntryIV *layout = asdTMTexTableEntryAt(12, 133);
     uiDrawItemOrStatusIcon(value, layout->x + x, layout->y + y, 26, 0);
     efctSetSpeed(1.0f);
 }

@@ -39,9 +39,9 @@ SlotRecord *unitRecordBuild(u32 info);
 s32 FUN_0034c340(s16 skills[16], s32 count, u64 *packed, s32 flag);
 SkillMetadata *findSkillMetadataById(u32 id);
 s32 unitRecomputeDerivedStats(void *record);
-s32 recordMergeByteMasks(UniteWork *unite, SlotRecord *a, SlotRecord *b, s32 flag, void *record);
-s32 wordAt1B0Clear(UniteWork *unite);
-s32 FUN_004db650(UniteWork *unite, SlotRecord *a, SlotRecord *b, u64 *packed);
+s32 recordMergeByteMasks(UniteWorkA *unite, SlotRecord *a, SlotRecord *b, s32 flag, void *record);
+s32 wordAt1B0Clear(UniteWorkA *unite);
+s32 FUN_004db650(UniteWorkA *unite, SlotRecord *a, SlotRecord *b, u64 *packed);
 s32 FUN_004dc3a8(void);
 s32 getUnlockedSlotCount(void *record);
 

@@ -1,4 +1,4 @@
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 
 extern "C" {
 
@@ -10,7 +10,6 @@ typedef struct ButtonHelpTouchSlots {
     /* 0x5D4 */ u8 active[7];
 } ButtonHelpTouchSlots;
 
-extern ButtonHelpGlobalsA g_buttonHelp;
 
 extern s32 ifTouchIsRepeatingSelection(s32 region);
 

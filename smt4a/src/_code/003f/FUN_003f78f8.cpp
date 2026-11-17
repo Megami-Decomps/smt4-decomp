@@ -2,6 +2,7 @@
 #include "common.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 
@@ -12,11 +13,10 @@ typedef struct NoticeWork {
 } NoticeWork;
 
 
-extern void *g_renderCtx;
 
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_003f707c(NoticeWork *work, s32 x, s32 y, s32 a, s32 b, s32 c, s32 d, s32 e, f32 speed);
-f32 renderCtxCalculateStereoParallax(void *ctx, f32 depth);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *ctx, f32 depth);
 void efctSetSpeed(f32 speed);
 void fontMeasureLineAdvance(const char *text, s32 mode);
 void FUN_003f757c(NoticeWork *work, s32 x, s32 y, s32 a, const char *text, s32 b, s32 c, s32 d, s32 e, f32 speed);

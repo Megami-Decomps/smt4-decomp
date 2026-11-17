@@ -45,14 +45,14 @@ extern "C" u32 FUN_0038c6dc(void)
                 if ((g_btlCandidateMasks.unavailable & entry->flags) == 0 &&
             (entry->flags & g_btlCandidateMasks.required) != 0 &&
             (g_btlCandidateMasks.excluded & entry->flags) == 0 &&
-            entry->id == id && candidateEqualityStat(entry, stat) == value) {
+            entry->data.id == id && candidateEqualityStat(entry, stat) == value) {
             scrSetResult(1);
             return 1;
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
         BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
-        if (entry != NULL && entry->id == id && candidateEqualityStat(entry, stat) == value) {
+        if (entry != NULL && entry->data.id == id && candidateEqualityStat(entry, stat) == value) {
             scrSetResult(1);
             return 1;
         }

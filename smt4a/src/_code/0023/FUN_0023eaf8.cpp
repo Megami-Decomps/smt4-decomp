@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023eaf8` (_code @ 0x23eaf8, 0x81c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -46,7 +47,6 @@ extern int g_uiQuest; /* 0x57f28c */
 extern int campIsState85(void);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: sysPlaySe. */
-extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: asdMemFree. */
@@ -130,7 +130,7 @@ void FUN_0023eaf8(void)
     temp_v4 = listCursorGetRowIfUnblocked(temp_v11);
     temp_v1 = *(short *)(temp_v8 + (temp_v4 + temp_v3) * 2);
     temp_v15[0] = '\0';
-    temp_v5 = asdTMTexTableEntryAt(0x1e,0xc1);
+    temp_v5 = reinterpret_cast<unsigned int>(asdTMTexTableEntryAt(0x1e,0xc1));
     temp_v3 = temp_v11;
     FUN_003450d4(temp_v11,temp_v5,temp_v2 + 0xd28,(int)*(short *)(temp_v2 + 0xd42),
                  (int)*(short *)(temp_v2 + 0xd3e),(int)*(short *)(temp_v2 + 0xd40),temp_v15,0,1);

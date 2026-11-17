@@ -16,7 +16,7 @@ u32 scrCommBattleHasCandidateId(void)
         const BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         if ((entry->flags & g_btlCandidateMasks.unavailable) != 0 &&
             (entry->flags & g_btlCandidateMasks.required) != 0 &&
-            (entry->flags & g_btlCandidateMasks.excluded) == 0 && entry->id == id) {
+            (entry->flags & g_btlCandidateMasks.excluded) == 0 && entry->data.id == id) {
             scrSetResult(1);
             return 1;
         }

@@ -18,7 +18,7 @@ u32 FUN_003b0d84(void)
         if (g_btlCandidateMasks.unavailable & (entry->flags) &&
             (g_btlCandidateMasks.required & entry->flags) &&
             !(entry->flags & g_btlCandidateMasks.excluded) &&
-            entry->id == id && FUN_003020fc(entry, value)) {
+            entry->data.id == id && FUN_003020fc(entry, value)) {
             scrSetResult(1);
             return 1;
         }

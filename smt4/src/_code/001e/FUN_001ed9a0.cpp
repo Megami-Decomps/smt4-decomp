@@ -1,5 +1,6 @@
 /* NON_MATCHING: near (209 rows against 209): same flow, constants, render-target push/pop and float maths; retail reads `visible` through a pointer to a 0x300 sub-block of the save/load UI (add r0,r4,#768; ldrb [r0,#84]) and the entry-lock byte as (ui+index)+844, keeps the zero constant in r7 instead of r6, and loads the three globals in a different order, which a flat struct does not reproduce */
 #include "gamedata/DataTable.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 typedef unsigned char u8;
 typedef signed char s8;
 typedef unsigned short u16;
@@ -50,13 +51,6 @@ struct SaveLoadGlobals {
     s32 entryIndex;            /* 0x08 */
 };
 
-struct TitleCaption {
-    u8 pad00[8];
-    s16 x;                     /* 0x08 */
-    s16 y;                     /* 0x0A */
-    s16 *size;                 /* 0x0C: glyph width/height pair */
-};
-
 struct CaptionRecord {
     u8 pad00[0x54];
 };
@@ -68,7 +62,6 @@ s32 FUN_002996d8(s32 arg);
 void gxResetColorQuadToWhite(void);
 u32 renderCtxPackPassFlags(s32 a, s32 b);
 void efctSetSpeed(f32 speed);
-TitleCaption *asdTMTexTableEntryAt(s32 a, s32 b);
 f32 renderCtxCalculateStereoParallax(TitleScene *scene, f32 scale);
 s32 texDrawCompositeSprite(s32 a, s32 b, s32 c, s32 d, s32 e, s32 f);
 s32 libc_strlen(const u8 *text);
@@ -118,12 +111,12 @@ u8 FUN_001ed9a0(void)
                 renderTargetPush(g_titleScene, renderCtxPackPassFlags(1, 0));
                 efctSetSpeed(1.0f);
                 asdTMTexTableEntryAt(0x36, 0x56);
-                TitleCaption *caption = asdTMTexTableEntryAt(0x36, 0x59);
+                TextureTableEntryIV *caption = asdTMTexTableEntryAt(0x36, 0x59);
                 s32 parallax = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.305f);
                 texDrawCompositeSprite(2, 0x36, 7, parallax, 0, 0xF1);
                 s32 entry = cursorUi->hasCursor;
-                s32 width = caption->size[0];
-                s32 height = caption->size[1];
+                s32 width = caption->placement->width;
+                s32 height = caption->placement->height;
                 void *section = dataTableGet(0x3D, 0);
                 const u8 *text = static_cast<const u8 *>(dataTableGetEntries(section)) + entry * 0x54;
                 s32 length = libc_strlen(text);

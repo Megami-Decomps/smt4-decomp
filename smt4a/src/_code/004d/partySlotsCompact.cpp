@@ -5,7 +5,7 @@
 // Keep occupied party slots contiguous while preserving their relative order.
 extern "C" void partySlotsCompact(void)
 {
-    SaveSlotTable *table = gameGetSlotTable();
+    SaveSlotTableA *table = gameGetSlotTable();
     for (s32 index = 0; index < 24; ++index) {
         if (table->party[index] < 0) {
             s32 next = index + 1;

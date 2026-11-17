@@ -3,6 +3,7 @@
 #include "game/GameStateA.h"
 #include "code/Code0015.h"
 #include "shard/W6_W6Match8_StatGrowth.h"
+#include "map/PopupStateA.h"
 
 extern "C" {
 
@@ -11,18 +12,11 @@ typedef struct FlagBlock {
     /* 0xDD0 */ u8 seen[0x12];   /* one bit per id */
 } FlagBlock;
 
-typedef struct PopupState {
-    /* 0x00 */ u32 type;
-    /* 0x04 */ u32 state;
-    /* 0x08 */ u8 unk08[0x0C];
-    /* 0x14 */ void *text;
-} PopupState;
 
 extern u8 DAT_00531ac8; /* 0x531ac8 */
-extern PopupState *g_popupState; /* 0x58104c */
-extern u8 DAT_0060a198; /* 0x60a198 */
+extern char DAT_0060a198[]; /* 0x60a198 */
 
-extern int textFormatBuffer(u8 *dst, u8 *src);
+extern int textFormatBuffer(char *dst, u8 *src);
 extern FlagBlock *gameFlagsGetBlock(void);
 extern int gameFlagIsSet(u32 flag);
 extern int shopGetEntryAvailability(u32 id);
@@ -49,10 +43,10 @@ void FUN_00353b00(int popupOpen)
         }
     }
     if (popupOpen == 0 && marked && g_gameState.mapId != 0x24 && gameFlagIsSet(0x408) != 0) {
-        textFormatBuffer(&DAT_0060a198, &DAT_00531ac8);
-        g_popupState->type = 0x18;
-        g_popupState->state = 0;
-        g_popupState->text = &DAT_0060a198;
+        textFormatBuffer(DAT_0060a198, &DAT_00531ac8);
+        g_popupState->state = 0x18;
+        g_popupState->timer = 0;
+        g_popupState->message = DAT_0060a198;
     }
 }
 

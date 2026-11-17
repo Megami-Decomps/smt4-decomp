@@ -20,7 +20,7 @@ extern "C" s32 fusionComparePairPriority(const u16 *first, const u16 *second)
         u8 unk0000[0x73f0];
         s32 priorities[1]; // 0x73f0
     };
-    UniteWork *work = g_unite;
+    UniteWorkA *work = g_unite;
     const PairPriorityView *priority = reinterpret_cast<const PairPriorityView *>(work);
     s32 result = priority->priorities[*second] - priority->priorities[*first];
     if (result == 0) {

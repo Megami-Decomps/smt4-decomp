@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation only (retail keeps the y offset in r7 and the constant 1 in r9, ours the other way round, so the two stack-argument stores use strd instead of stm; the frame setup order differs likewise) */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 /* The position record the sprite table returns for an id. */
 struct SpritePosition {
@@ -32,7 +33,6 @@ struct ChoicePanel {
 
 extern "C" {
 
-extern RenderCtx *g_titleScene;
 
 u32 flaggedEntryGetValueByState(const ChoicePanelEntry *entry);
 const SpritePosition *FUN_002bf4f0(void *sprites, u32 id);

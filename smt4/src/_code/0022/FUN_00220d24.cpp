@@ -1,8 +1,7 @@
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 #include "status/StatusCamera.h"
 
 extern "C" {
-extern ButtonHelpGlobals g_buttonHelp;
 
 void FUN_00220d24(u8 value)
 {

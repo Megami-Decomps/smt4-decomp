@@ -1,5 +1,6 @@
 /* NON_MATCHING: the 64-bit flag-mask tests (ldrd/ldm pairs and the orrs combine) and the register allocation of the two loops differ from retail; the candidate selection logic is the same. */
 #include "common.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -29,21 +30,7 @@ typedef struct CandidateState {
 } CandidateState;
 
 /* The slice of g_btlMain holding the masks tested against the flag words. */
-typedef struct CandidateMasks {
-    /* 0x000 */ u8 unk000[0x58];
-    /* 0x058 */ u64 eligibleMask;
-    /* 0x060 */ u64 boostMask;
-    /* 0x068 */ u8 unk068[0x18];
-    /* 0x080 */ u64 excludedMask;
-    /* 0x088 */ u8 unk088[0x48];
-    /* 0x0D0 */ u64 bossStateMask;
-    /* 0x0D8 */ u8 unk0d8[0x30];
-    /* 0x108 */ u64 reserveStateMask;
-    /* 0x110 */ u8 unk110[0x20];
-    /* 0x130 */ u64 noJitterMask;
-} CandidateMasks;
 
-extern CandidateMasks g_btlMain;
 
 void FUN_003f2aec(CandidateState *state, s32 count);
 s16 FUN_0034ef58(s32 low, s32 high);
@@ -55,7 +42,7 @@ enum {
 /* Whether the entry flags pass the eligibility masks. */
 static __inline bool entryEligible(u64 flags)
 {
-    return (flags & g_btlMain.eligibleMask) != 0 && (flags & g_btlMain.excludedMask) == 0;
+    return (flags & g_btlMain.combatantMasks.required) != 0 && (flags & g_btlMain.exclusionMask) == 0;
 }
 
 /* Collects the entries that may act into the candidate list and picks the first one. */
@@ -78,10 +65,10 @@ void FUN_003efc40(CandidateState *state)
 
     s32 start;
     s32 length;
-    if ((g_btlMain.bossStateMask & state->flags) != 0) {
+    if ((g_btlMain.partyTarget.mask & state->flags) != 0) {
         start = 4;
         length = 50;
-    } else if ((state->flags & g_btlMain.reserveStateMask) != 0) {
+    } else if ((state->flags & g_btlMain.transition.mask) != 0) {
         start = 54;
         length = 1;
     } else {
@@ -97,10 +84,10 @@ void FUN_003efc40(CandidateState *state)
         if (entryEligible(entry->flags)) {
             state->candidates[found] = entry->id;
             entry->value = 0;
-            if ((entry->flags & g_btlMain.boostMask) != 0) {
+            if ((entry->flags & g_btlMain.actorCategories[0]) != 0) {
                 entry->value = 5;
             }
-            if ((state->flags & g_btlMain.noJitterMask) == 0) {
+            if ((state->flags & g_btlMain.fixedScore.mask) == 0) {
                 entry->value += FUN_0034ef58(-3, 3);
             }
             found++;

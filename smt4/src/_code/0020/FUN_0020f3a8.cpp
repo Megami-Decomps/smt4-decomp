@@ -1,5 +1,6 @@
 /* NON_MATCHING: render-stack address scheduling and draw-call NOP slots differ. */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 namespace {
 /* Local view: the shared battle layout does not extend to the overlay color. */
@@ -11,7 +12,6 @@ struct BattleOverlayView {
 
 extern "C" {
 extern BattleOverlayView *g_btlMainState;
-extern RenderCtx *g_titleScene;
 s32 renderCtxPackPassFlags(u32 mode, u32 flags);
 void gxSubmitDrawZeroExtraParams(u32 topLeft, u32 topRight, u32 bottomLeft, u32 bottomRight,
                   f32 x, f32 y, f32 width, f32 height, f32 depth);

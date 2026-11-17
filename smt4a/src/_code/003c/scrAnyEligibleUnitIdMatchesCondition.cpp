@@ -22,14 +22,14 @@ u32 scrAnyEligibleUnitIdMatchesCondition()
         BtlCombatantEntryA* entry = &btlGetMainState()->entries[index];
         if (!(entry->flags & g_btlCandidateMasks.unavailable)
             && (entry->flags & g_btlCandidateMasks.required) && !(entry->flags & g_btlCandidateMasks.excluded)
-            && entry->id == id && FUN_003020fc(entry, condition)) {
+            && entry->data.id == id && FUN_003020fc(entry, condition)) {
             scrSetResult(1);
             return 1;
         }
     }
     if (btlGetMainState()->unk4cd1) {
         BtlCombatantEntryA* entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
-        if (entry && entry->id == id && FUN_003020fc(entry, condition)) {
+        if (entry && entry->data.id == id && FUN_003020fc(entry, condition)) {
             scrSetResult(1);
             return 1;
         }

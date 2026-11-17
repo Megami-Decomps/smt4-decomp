@@ -1,6 +1,6 @@
 /* NON_MATCHING: member lookup is not pair-unrolled, saved state/index/part roles differ and vector-return epilogues merge; arrangement kind 1 now has its explicit zero-height case. */
 #include "battle/btlAction.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_EnemyDrawOffset.h"
 #include "gamedata/NkmEnemyRecord.h"
@@ -12,7 +12,7 @@
 static inline s32 findBattleMemberPart(const BtlEntry *entry, s16 id)
 {
     for (s32 member = 0; member < 50; ++member) {
-        if (id == entry->members.ids[member])
+        if (id == entry->ids[member])
             return member;
     }
     return -1;

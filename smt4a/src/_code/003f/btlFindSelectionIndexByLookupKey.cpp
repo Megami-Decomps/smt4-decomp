@@ -5,8 +5,8 @@
 extern "C" s32 btlFindSelectionIndexByLookupKey(const BtlMainStateA* state, s32 key)
 {
     for (s32 index = 0; index < 109; ++index) {
-        if (state->entries[index].lookupView.lookupKey == key) {
-            return state->entries[index].indexView.selectionIndex;
+        if (state->entries[index].data.lookupKey == key) {
+            return state->entries[index].selectionIndex;
         }
     }
     return -1;

@@ -1,9 +1,8 @@
 #include "status/StatusDown.h"
 
 extern "C" {
-extern StatusDownState *g_statusDown;
 
-int asdMemFreeSlot(u32 value);
+int asdMemFreeSlot(AsdText *text);
 int ifTouchRegionRemove(void);
 int asdMemFree(StatusDownState *ptr);
 int __aeabi_memset4(void *dst, int size, u32 value);
@@ -19,7 +18,7 @@ void statusDownDestroy(void)
     }
     block->touchRegionCount = 0;
     __aeabi_memset4(block->slots, 0x29, 0xffffffff);
-    asdMemFreeSlot(block->memorySlot);
+    asdMemFreeSlot(block->text);
     jobStop(block->job, 0);
     asdMemFree(block);
     g_statusDown = NULL;

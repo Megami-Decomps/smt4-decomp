@@ -19,14 +19,14 @@ u32 btlScriptAnyLiveUnitHasFlag(void)
     for (s32 index = first; index < count + first; ++index) {
         BtlEntry* unit = &btlGetMainState()->entries[index];
         if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) &&
-            (unit->groupMask & (1u << flag))) {
+            (unit->data.statusFlags & (1u << flag))) {
             scrSetResult(1);
             return 1;
         }
     }
     if (btlGetMainState()->hasActiveEntry != 0) {
         BtlEntry* active = btlMainFindActiveEntry(btlGetMainState());
-        if (active != NULL && (active->groupMask & (1u << flag))) {
+        if (active != NULL && (active->data.statusFlags & (1u << flag))) {
             scrSetResult(1);
             return 1;
         }

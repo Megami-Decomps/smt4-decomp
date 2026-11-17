@@ -16,7 +16,7 @@ u32 scrCommGrantRandomSkill(void)
     u32 record;
     if (id < 0x6d) {
         btlGetMainState();
-        record = btlMainFindEntryByListedId(btlGetMainState(), id)->sourceId;
+        record = btlMainFindEntryByListedId(btlGetMainState(), id)->data.sourceId;
     } else {
         record = reinterpret_cast<u32>(gameGetSlotRecord(id - 0x6d));
     }

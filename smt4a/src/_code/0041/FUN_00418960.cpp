@@ -2,6 +2,7 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "gfx/StereoParallax.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 
@@ -27,7 +28,6 @@ typedef struct MarkerPanel {
     /* 0x58 */ f32 scale[2];
 } MarkerPanel;
 
-extern u32 g_renderCtx;
 
 void FUN_003d3020(u32 id, s32 a, s32 b, f32 x, f32 y, f32 scaleX, f32 scaleY);
 

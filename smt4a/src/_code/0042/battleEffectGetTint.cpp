@@ -20,7 +20,7 @@ u32 battleEffectGetTint(BattleTintOwner *owner, s32 index)
     BattleEffectSetup *effect = &battle->roster[index].render;
     BtlCombatantEntryA *combatant = btlMainFindEntryByListedId(battle, effect->group);
     if (effect->flags & 8) {
-        s32 healthPercent = (combatant->hp * 100) / combatant->maxHp;
+        s32 healthPercent = (combatant->data.hp * 100) / combatant->data.maxHp;
         s32 time = owner->battle->drawCounters.markerTimer;
         if (healthPercent < 20) {
             return static_cast<u32>(FUN_001f3e80(0, 255, 30, time, 0)) << 24;
@@ -28,7 +28,7 @@ u32 battleEffectGetTint(BattleTintOwner *owner, s32 index)
         u32 intensity = FUN_001f3e80(0, 128, 30, time, 0);
         return (intensity << 24) | (intensity << 16) | (intensity << 8);
     }
-    if (combatant != NULL && (g_battleEffectSettings.flashMask & combatant->flags) != 0 && (combatant->statusFlags & 0x10) != 0) {
+    if (combatant != NULL && (g_battleEffectSettings.flashMask & combatant->flags) != 0 && (combatant->data.statusFlags & 0x10) != 0) {
         u8 scaledRed = static_cast<u32>(static_cast<f32>(static_cast<u32>(g_battleEffectSettings.red)) * g_battleEffectSettings.scale);
         u8 scaledGreen = static_cast<u32>(static_cast<f32>(static_cast<u32>(g_battleEffectSettings.green)) * g_battleEffectSettings.scale);
         u8 scaledBlue = static_cast<u32>(static_cast<f32>(static_cast<u32>(g_battleEffectSettings.blue)) * g_battleEffectSettings.scale);

@@ -21,15 +21,15 @@ u32 scrCheckUnitStatStageThree()
         const BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
             (entry->flags & g_btlCandidateMasks.required) && !(entry->flags & g_btlCandidateMasks.excluded) &&
-            entry->id == id && (entry->encodedStats.values[stat] >> 10) == 3) {
+            entry->data.id == id && (entry->data.values[stat] >> 10) == 3) {
             scrSetResult(1);
             return 1;
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
         const BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
-        if (entry != NULL && entry->id == id &&
-            (entry->encodedStats.values[stat] >> 10) == 3) {
+        if (entry != NULL && entry->data.id == id &&
+            (entry->data.values[stat] >> 10) == 3) {
             scrSetResult(1);
             return 1;
         }

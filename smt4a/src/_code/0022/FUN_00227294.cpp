@@ -1,6 +1,6 @@
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-#include "camp/CampState.h"
+#include "camp/CampStateA.h"
 
 struct CampSpritePivot {
     f32 depth;
@@ -9,7 +9,6 @@ struct CampSpritePivot {
 };
 extern "C" {
 f32 vec2GetSpeed(const void *vector); /* linker-inlined: vldr s0, [r0, #0x20] */
-extern CampStateA *g_camp;
 f32 jobGetScalarValue();
 void efctSetSpeed(f32 speed);
 void FUN_00281000(CampSpritePivot *pivot, f32 depth, s32 horizontalMode, s32 verticalMode, s32 x, s32 y);
@@ -21,7 +20,7 @@ void FUN_00227294(s32 x, s32 y, s32 scale)
     CampStateA *camp = g_camp;
     if (camp != NULL && camp->spriteState != 0 && camp->spriteState != 4) {
         f32 previousSpeed = jobGetScalarValue();
-        efctSetSpeed(vec2GetSpeed(camp->transitionSprite) * static_cast<f32>(scale));
+        efctSetSpeed(vec2GetSpeed(&camp->sprites[36]) * static_cast<f32>(scale));
         texDrawTableEntryAtStoredOrigin(2, 20, 0x5ca, x, y, 11);
         texDrawTableEntryAtStoredOrigin(2, 20, 0x5cb, x, y, 11);
         texDrawTableEntryAtStoredOrigin(2, 20, 0x5cc, x, y, 11);

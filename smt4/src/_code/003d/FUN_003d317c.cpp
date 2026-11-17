@@ -140,7 +140,7 @@ u32 FUN_003d317c(BtlMainState **block, CommandState *work)
         work->itemSlot = 0;
         memClear(work->targetMarks, sizeof(work->targetMarks));
         btlClearActionMarksAndSelectTarget(block, work, work->target);
-        reinterpret_cast<CommandStartView *>(*block)->checkId = (*block)->entries[work->target].members.ids[0];
+        reinterpret_cast<CommandStartView *>(*block)->checkId = (*block)->entries[work->target].ids[0];
         setPendingAction(block, 11);
         return 1;
     }

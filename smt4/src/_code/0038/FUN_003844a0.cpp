@@ -1,6 +1,7 @@
 /* NON_MATCHING: real fade-animation speed getter recovered; effect/draw VFP argument placement and render-state pop bookkeeping differ. */
 #include "common.h"
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 
@@ -17,9 +18,7 @@ typedef struct TitleOverlay {
     /* 0x1E8 */ TitleFadeAnimation fadeAnimation;
 } TitleOverlay;
 
-extern RenderCtx *g_titleScene;
 
-void renderCtxSelectStereoLayout(RenderCtx *ctx);
 void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 speed);
 s32 renderCtxPackPassFlags(u32 kind, u32 arg);

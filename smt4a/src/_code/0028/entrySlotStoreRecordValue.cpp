@@ -46,7 +46,7 @@ s32 entrySlotStoreRecordValue(SlotRecordA *record)
     if (record == NULL) {
         return 0;
     }
-    index = entrySlotFind(record->entryId);
+    index = entrySlotFind(record->id);
     if (index < 0) {
         return 0;
     }
@@ -54,7 +54,7 @@ s32 entrySlotStoreRecordValue(SlotRecordA *record)
     if (value == 0) {
         return 0;
     }
-    saveGetSelectedRecordSlot(index)->entryId = record->entryId;
+    saveGetSelectedRecordSlot(index)->entryId = record->id;
     saveGetSelectedRecordSlot(index)->value = value;
     return 1;
 }

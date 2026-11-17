@@ -6,12 +6,12 @@
 #include "text/TextDraw.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
 #include "code/Code0019.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 alpha);
 void texDrawCompositeSprite(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 depth);
-const MessageDrawPosition *asdTMTexTableEntryAt(u32 group, u32 index);
 void FUN_00169a1c(u32 image, s32 x, s32 y, s32 depth);
 u32 FUN_0036fcd0(void *unit, u32 mode);
 void drawSetColorFromRGBA8(u32 color);
@@ -53,7 +53,7 @@ void saveSlotDrawSummary(const SaveSlotTextObjects *texts, const SaveSlotDisplay
             nameColor = 0xE6C80000;
         }
     }
-    const MessageDrawPosition *position = asdTMTexTableEntryAt(0x2E, 0x75);
+    const TextureTableEntryIV *position = asdTMTexTableEntryAt(0x2E, 0x75);
     uiObjectSetColorRgb((u32)texts->name, nameColor);
     FUN_0025cc78(texts->name, position->x + x, position->y + y, 0x66, 1.0f);
     if ((record->flags & 2) != 0) {

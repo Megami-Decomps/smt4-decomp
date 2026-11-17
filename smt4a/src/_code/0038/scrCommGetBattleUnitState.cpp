@@ -13,7 +13,7 @@ s32 scrCommGetBattleUnitState(void)
     s32 id = scrGetArg(0);
     BtlCombatantEntryA *unit = btlMainFindEntryByListedId(btlGetMainState(), id);
     if (unit != NULL) {
-        state = unit->unitState.state;
+        state = unit->data.state;
     }
     scrSetResult(state);
     return 1;

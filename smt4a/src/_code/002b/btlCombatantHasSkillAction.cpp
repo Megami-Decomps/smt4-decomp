@@ -8,15 +8,15 @@ u32 btlCombatantHasSkillAction(const BtlCombatantEntryA* combatant, s32 skill)
 {
     if ((combatant->flags & g_btlCandidateMasks.unavailable) != 0 ||
         (g_btlCandidateMasks.singleAction & combatant->flags) != 0) {
-        s16 kind = combatant->actionList.single.kind;
-        if ((kind == 2 || kind == 3) && combatant->actionList.single.id == skill) {
+        s16 kind = combatant->data.actionList.single.kind;
+        if ((kind == 2 || kind == 3) && combatant->data.actionList.single.id == skill) {
             return 1;
         }
     } else {
         s32 i = 0;
         do {
-            s16 kind = combatant->actionList.available[i].kind;
-            if ((kind == 2 || kind == 3) && combatant->actionList.available[i].id == skill) {
+            s16 kind = combatant->data.actionList.available[i].kind;
+            if ((kind == 2 || kind == 3) && combatant->data.actionList.available[i].id == skill) {
                 return 1;
             }
             ++i;

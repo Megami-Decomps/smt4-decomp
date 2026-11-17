@@ -1,6 +1,7 @@
 /* Marks the linked child of each of the four entries as touched (flags |= 3) and notifies it. */
 #include "common.h"
 #include "code/Code003e_Smt4a.h"
+#include "Model/MoriModelManager.h"
 
 extern "C" {
 
@@ -25,10 +26,6 @@ typedef struct Holder {
     /* 0x0C */ u8 unk0C[0x18];
     /* 0x24 */ Slot slots[3];
 } Holder;
-
-extern u32 g_handleRegistry;
-
-extern void ptrListRemoveClearOwner(u32 arg, Child *child);
 
 void FUN_003e55f4(Holder *holder)
 {

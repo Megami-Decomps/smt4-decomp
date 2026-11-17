@@ -25,8 +25,8 @@ static __inline void groupAddHp(s32 group, HpSums *sums)
         BtlEntry *unit = &btlGetMainState()->entries[index];
 
         if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40)) {
-            sums->maximum += unit->maxHp;
-            sums->current += unit->hp;
+            sums->maximum += unit->data.maxHp;
+            sums->current += unit->data.hp;
         }
     }
 }
@@ -45,8 +45,8 @@ u32 scrCommBtlGroupHpPercentWithin(void)
     if (btlGetMainState()->hasActiveEntry != 0) {
         BtlEntry *active = btlMainFindActiveEntry(btlGetMainState());
         if (active != NULL) {
-            sums.maximum += active->maxHp;
-            sums.current += active->hp;
+            sums.maximum += active->data.maxHp;
+            sums.current += active->data.hp;
         }
     }
     scrSetResult(sums.current * 100 / sums.maximum <= limit);

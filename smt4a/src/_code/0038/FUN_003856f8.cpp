@@ -1,21 +1,7 @@
 #include "common.h"
-
-namespace {
-
-struct LmapSceneEntryView {
-    u32 unk00; // 0x00
-    u32 unk04; // 0x04
-};
-
-struct LmapSceneView {
-    u8 unk00[0x18c]; // 0x00
-    LmapSceneEntryView* unk18C; // 0x18c
-};
-
-}
+#include "map/LmapGlobals.h"
 
 extern "C" {
-extern LmapSceneView* g_lmapScene;
 extern s32 gameFlagIsSet(u32 flag);
 extern s32 saveSlotSelectedIsId175(void);
 extern void moriModelUnitStartMaterialAnimation(u32 target, u32 mode, u32 option, f32 amount);
@@ -24,16 +10,16 @@ extern void moriModelUnitStartMaterialAnimation(u32 target, u32 mode, u32 option
 // Apply the requested mode, with a mode-3, amount-10 override when required by game state.
 extern "C" void FUN_003856f8(u32 mode)
 {
-    if (g_lmapScene->unk18C == 0) {
+    if (g_lmapScene->models[7] == 0) {
         return;
     }
 
     s32 flagSet = gameFlagIsSet(0x4c9);
     f32 amount = 0.0f;
     if (flagSet != 0 && saveSlotSelectedIsId175() == 0) {
-        moriModelUnitStartMaterialAnimation(g_lmapScene->unk18C->unk04, 3, 2, 10.0f);
+        moriModelUnitStartMaterialAnimation(g_lmapScene->models[7]->controller, 3, 2, 10.0f);
         return;
     }
 
-    moriModelUnitStartMaterialAnimation(g_lmapScene->unk18C->unk04, mode, 2, amount);
+    moriModelUnitStartMaterialAnimation(g_lmapScene->models[7]->controller, mode, 2, amount);
 }

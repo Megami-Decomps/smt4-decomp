@@ -1,9 +1,9 @@
 #include "title/titleMain.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 
-extern TitleScene *g_titleScene;
-extern void renderCtxSelectStereoLayout(TitleScene *scene);
+extern void renderCtxSelectStereoLayout(RenderCtx *scene);
 
 /* Updates the title scene and reports success. */
 s32 titleUpdateScene(void)

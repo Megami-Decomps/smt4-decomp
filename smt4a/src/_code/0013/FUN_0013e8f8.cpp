@@ -1,64 +1,45 @@
 /* NON_MATCHING: the g_frameTex clear now matches; retail returns through a shared `mov r0, #0` (the cleared path branches to it, the `!shown` test straight to the pop), built gives the cleared path its own return. */
 #include "common.h"
 #include "camp/RenderCtxA.h"
-#include "shard/JobWork.h"
+#include "frame_tex/FrameTexA.h"
 #include "camp/RenderCtx.h"
-
-/* Frame texture fade state (Apocalypse layout). */
-struct FrameTexFade {
-    /* 0x0000 */ u8 unk0000[0xc];
-    /* 0x000c */ u8 enabled;
-    /* 0x000d */ u8 unk000d[3];
-    /* 0x0010 */ s32 fadeInFrames;
-    /* 0x0014 */ s32 fadeOutFrames;
-    /* 0x0018 */ s32 frame;
-    /* 0x001c */ u8 unk001c[0x13f8];
-    /* 0x1414 */ s8 captured;
-    /* 0x1415 */ u8 unk1415[2];
-    /* 0x1417 */ s8 shown;
-    /* 0x1418 */ u8 unk1418;
-    /* 0x1419 */ u8 unk1419;
-    /* 0x141a */ u8 unk141a[0x32];
-    /* 0x144c */ u8 unk144c;
-};
 
 /* Frames a fade-out lasts before the frame texture is released. */
 #define FRAME_TEX_FADE_OUT_FRAMES 30
 
 extern "C" {
-extern FrameTexFade *g_frameTex;
 
 void FUN_0014b01c(s32 value);
 
-/* Job update: advances the frame texture's fade in or out, clearing it once a fade-out ends. */
+/* "ENCEFFDL" draw: advances the ENCEFF fade in or out, clearing the effect once a fade-out ends. */
 u8 FUN_0013e8f8(u32 job)
 {
-    FrameTexFade *work = (FrameTexFade *)jobGetWork(job);
+    FrameTexWorkA *work = (FrameTexWorkA *)jobGetWork(job);
 
-    if (!work->captured) {
+    if (!work->encEffEnabled) {
         return 0;
     }
-    if (!work->shown) {
+    if (!work->encEffCapturedLeft) {
         return 0;
     }
-    if (work->enabled) {
+    if (work->encEffFadeActive) {
         renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
-        if (work->fadeInFrames > 0 || work->fadeOutFrames > 0) {
-            work->frame++;
-            if (work->fadeOutFrames <= 0) {
-                work->fadeInFrames++;
+        if (work->encEffFadeInFrames > 0 || work->encEffFadeOutFrames > 0) {
+            work->encEffFrame++;
+            if (work->encEffFadeOutFrames <= 0) {
+                work->encEffFadeInFrames++;
             } else {
-                work->fadeOutFrames++;
-                if (work->fadeOutFrames > FRAME_TEX_FADE_OUT_FRAMES) {
-                    g_frameTex->enabled = 0;
-                    g_frameTex->fadeInFrames = 0;
-                    g_frameTex->fadeOutFrames = 0;
-                    g_frameTex->frame = 0;
-                    g_frameTex->captured = 0;
-                    g_frameTex->shown = 0;
-                    g_frameTex->unk1418 = 0;
-                    g_frameTex->unk1419 = 0;
-                    g_frameTex->unk144c = 0;
+                work->encEffFadeOutFrames++;
+                if (work->encEffFadeOutFrames > FRAME_TEX_FADE_OUT_FRAMES) {
+                    g_frameTex->encEffFadeActive = 0;
+                    g_frameTex->encEffFadeInFrames = 0;
+                    g_frameTex->encEffFadeOutFrames = 0;
+                    g_frameTex->encEffFrame = 0;
+                    g_frameTex->encEffEnabled = 0;
+                    g_frameTex->encEffCapturedLeft = 0;
+                    g_frameTex->encEffCapturedRight = 0;
+                    g_frameTex->encEffPendingRight = 0;
+                    g_frameTex->unk144C = 0;
                     return 0;
                 }
             }

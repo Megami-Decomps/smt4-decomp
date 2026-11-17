@@ -5,6 +5,7 @@
 #include "romwright_types.h"
 #include "shard/Shard0031.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -17,7 +18,6 @@ int uiSpriteAdvanceAnimation(...);
 int eventQueueAddUniqueIfValid(...);
 int ifTouchRegionRemove(void);
 int eventQueueAddUnique(...);
-int asdTMTexTableEntryAt(int, int);
 int uiSpriteSetKeyframe(...);
 int uiSpriteSetImageKeyframe(...);
 int dataTableGet(...);
@@ -145,7 +145,7 @@ void FUN_00202ea4(void)
       temp_v11 = 0;
       if (temp_v11 < temp_v6) {
         do {
-          temp_v1 = asdTMTexTableEntryAt(0x24,temp_v3 + temp_v11);
+          temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,temp_v3 + temp_v11));
           temp_v2 = (int)*(short *)(temp_v1 + 8);
           ifTouchRegionAdd(temp_v2,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
                        (int)(*(short **)(temp_v1 + 0xc))[1]);

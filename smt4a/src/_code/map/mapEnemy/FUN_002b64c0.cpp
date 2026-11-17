@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail spills r0-r2 and d0-d1 in the prologue (a variadic-style frame), keeps the resource name in a 32-byte buffer at sp, reads the kind back from the stack and runs an empty 21-iteration count-down loop before textFormatBuffer (not reproducible with honest code); this build uses a 0x54-byte buffer and no such loop. */
 #include "Model/ModelList.h"
 #include "shard/W9_W9Match7_EnemyModelSources.h"
+#include "Model/MoriModelManager.h"
 
 /* One extra-model slot of the enemy owner (Apocalypse layout). */
 struct ExtraModelSlot {
@@ -43,14 +44,12 @@ extern "C" {
 extern EnemyOwner *g_mapEnemy;
 extern EnemyExtraModelSource DAT_00582204[];
 extern u8 DAT_005806e0[]; /* the model slot of each selected candidate */
-extern void *g_handleRegistry;
 void textFormatBuffer(char *, const char *, ...);
 void *asdMemoryAllocTraced(u32, const char *, u32);
 ModelList *modelListInit(ModelList *);
 void resourceOwnerLoadFileSync(ModelList *, const char *);
 void moriModelContentLoadBody(ModelList *, u32);
 void modelPlayClip(MoriModelBody *, u32, u8, f32, f32);
-void handleRegistryRegisterObject(void *, MoriModelBody *);
 s32 FUN_004bc2dc(s32 kind, s32 flag);
 s32 dataSelectPrioritizedCandidate(s32 index);
 }

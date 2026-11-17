@@ -6,7 +6,7 @@ extern "C" {
 s32 btlFindEntrySelectionByKey(const BtlMainState *state, s32 key)
 {
     for (s32 i = 0; i < 109; ++i) {
-        if (state->entries[i].unk0D4 == key) {
+        if (state->entries[i].data.model == key) {
             return state->entries[i].selectionIndex;
         }
     }

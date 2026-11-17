@@ -1,26 +1,25 @@
-#include "gfx/FrameTextureWork.h"
-#include "shard/JobWork.h"
+#include "frame_tex/FrameTexA.h"
 
 extern "C" {
 void FUN_001509fc(u32 value);
 void FUN_001537b0(u32 value);
 s32 stateValuesGetBySelector(u32 selector);
 
-/* Runs the selected frame-texture action only when all readiness gates permit it. */
+/* "HDRDR" draw: draws the HDR layer on the right screen once both captures are ready (in passes through the downsample chain when it exists). */
 u32 FUN_0013c6d4(u32 job)
 {
-    FrameTextureWork *work = (FrameTextureWork *)jobGetWork(job);
-    if (stateValuesGetBySelector(0) != 0 || !work->unkFA4 || !work->unkFA5) {
+    FrameTexWorkA *work = (FrameTexWorkA *)jobGetWork(job);
+    if (stateValuesGetBySelector(0) != 0 || !work->hdr.enabled || !work->hdr.ready) {
         return 0;
     }
-    if (!work->unkFAE) {
+    if (!work->hdr.capturedRight) {
         return 0;
     }
-    if (!work->unk1490) {
+    if (work->sceneSurface == NULL) {
         return 0;
     }
-    if (!work->unk148C) {
-        if (work->unk1494) {
+    if (!work->captureBlocked) {
+        if (work->hdrDownsampleChain) {
             FUN_001537b0(0);
         } else {
             FUN_001509fc(0);

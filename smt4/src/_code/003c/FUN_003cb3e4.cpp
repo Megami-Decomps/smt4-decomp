@@ -145,7 +145,7 @@ u32 FUN_003cb3e4(BtlMainState **block, CommandState *work)
             s32 alive = 0;
             for (s32 i = 0; i < 4; ++i) {
                 BtlEntry *entry = &(*block)->entries[i];
-                if ((entry->flags & 1) != 0 && (entry->flags & 0x40) == 0 && (entry->groupMask & 0x10) != 0)
+                if ((entry->flags & 1) != 0 && (entry->flags & 0x40) == 0 && (entry->data.statusFlags & 0x10) != 0)
                     ++alive;
             }
             if (alive == 4)
@@ -174,7 +174,7 @@ u32 FUN_003cb3e4(BtlMainState **block, CommandState *work)
 
     for (s32 i = 0; i < 109; ++i) {
         BtlEntry *entry = &(*block)->entries[i];
-        if ((entry->flags & 1) != 0 && (entry->flags & 0x40) == 0 && (entry->groupMask & 0x400) != 0) {
+        if ((entry->flags & 1) != 0 && (entry->flags & 0x40) == 0 && (entry->data.statusFlags & 0x400) != 0) {
             FUN_0022a5d8(22, entry, 1);
             FUN_00246454(0, work, entry);
             handled = true;
@@ -183,7 +183,7 @@ u32 FUN_003cb3e4(BtlMainState **block, CommandState *work)
 
     BtlEntry *active = btlMainFindActiveEntry(*block);
     if (active != NULL) {
-        BtlActionRecord *activeAction = &(*block)->actions[active->members.ids[0]];
+        BtlActionRecord *activeAction = &(*block)->actions[active->ids[0]];
         s32 held = battleGetEntryHalfword(0, 2);
         s32 quest = questGetCurrentRecordValue6();
         if (quest != 0 && held > 0) {

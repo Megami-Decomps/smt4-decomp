@@ -1,8 +1,7 @@
 /* NON_MATCHING: large-offset snapshot copies and 64-bit packed-pair setter registers/stores differ. */
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 
 extern "C" {
-extern UniteWork *g_unite;
 void FUN_002f3bc4(void *list, s32 selection, s32 mode);
 void FUN_0033449c(s32 mode);
 void FUN_0031f718(s32 id, s32 first, s32 second);

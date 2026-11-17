@@ -8,8 +8,8 @@ BattleRosterRecordA *btlFindMarkedReserveRecord(BtlMainStateA *state)
 {
     for (s32 index = 4; index < 54; ++index) {
         BtlCombatantEntryA *entry = &state->entries[index];
-        if (entry->selection.marked != 0) {
-            return &state->roster[entry->unitIndex];
+        if (entry->data.marked != 0) {
+            return &state->roster[entry->ids[0]];
         }
     }
     return NULL;

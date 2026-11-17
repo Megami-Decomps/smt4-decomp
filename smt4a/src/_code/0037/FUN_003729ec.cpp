@@ -22,7 +22,7 @@ u32 FUN_003729ec(void)
     for (s32 index = 0; index < 109; ++index) {
         const BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         if ((g_btlCandidateMasks.unavailable & entry->flags) && (g_btlCandidateMasks.required & entry->flags) &&
-            !(g_btlCandidateMasks.excluded & entry->flags) && (entry->statusFlags & (1 << bit))) {
+            !(g_btlCandidateMasks.excluded & entry->flags) && (entry->data.statusFlags & (1 << bit))) {
             return commandResult(1);
         }
     }

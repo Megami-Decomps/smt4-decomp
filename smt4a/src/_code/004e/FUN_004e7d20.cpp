@@ -21,8 +21,8 @@ void FUN_004e7d20(BtlMainStateA **owner, s32 rank)
     BtlCombatantEntryA *combatants = (*owner)->entries;
     for (s32 i = 0; i < 109; ++i) {
         if ((combatants[i].flags & g_btlAction.clearedFlags.mask) != 0) {
-            entries[count].index = combatants[i].indexView.selectionIndex;
-            entries[count].score = combatants[i].hp;
+            entries[count].index = combatants[i].selectionIndex;
+            entries[count].score = combatants[i].data.hp;
             ++count;
         }
     }

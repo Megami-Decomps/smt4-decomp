@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail copies the sprite y word through a VFP register (s16) and keeps edit+0x100 in r8, the build uses integer registers and a different saved set; draw sequence and arguments are the same. */
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* The camp CEC edit screen work (accessed fields). */
 struct CampCecEdit {
@@ -23,7 +24,6 @@ void texDrawCompositeSprite(u32 screen, u32 table, u32 frame, s32 x, s32 y, u32 
 void efctSetSpeed(f32 speed);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
-void asdTMTexTableEntryAt(u32 table, u32 frame);
 void gxResetColorQuadToWhite(void);
 void uiSpawnSlotMarkers(void *screen, s32 a, s32 b, s32 c, s32 d, s32 e);
 void FUN_003426c0(void *screen, u32 a, u32 b, s32 c, s32 d, s32 e, s32 f);

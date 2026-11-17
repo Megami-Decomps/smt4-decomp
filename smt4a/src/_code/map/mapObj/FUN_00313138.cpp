@@ -2,6 +2,7 @@
 #include "Model/ModelList.h"
 #include "shard/W9_W9Match7_EnemyModelSources.h"
 #include "code/Code001c.h"
+#include "Model/MoriModelManager.h"
 
 /* A record of the map object table (data table 45): its key, kind, position and name. */
 struct MapObjRecord {
@@ -51,7 +52,6 @@ struct MapObjWork {
 
 extern "C" {
 extern MapObjWork *g_mapObj;
-extern void *g_handleRegistry;
 
 s32 dataTableGetRecordFortyFive(void);
 MapObjRecord *mapObjGetCombinedEntry(s32 index);
@@ -60,7 +60,6 @@ void *asdMemoryAllocTraced(u32, const char *, u32);
 ModelList *modelListInit(ModelList *);
 u8 FUN_0040ab8c(ModelList *model);
 void moriModelContentLoadBody(ModelList *model, u32 mode);
-void handleRegistryRegisterObject(void *, void *);
 char *libc_strcpy(char *, const char *);
 
 /* Loads the placed map objects one record per call; returns 1 when done. */

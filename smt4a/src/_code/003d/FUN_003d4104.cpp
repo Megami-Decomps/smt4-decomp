@@ -1,10 +1,9 @@
-#include "status/StatusDown.h"
+#include "status/StatusDownA.h"
 #include <stdlib.h>
 #include "event/2dEvent/2dEventTex.h"
 
 
 extern "C" {
-extern StatusDownStateA *g_statusDown;
 void arraySortQsort(void *entries, u32 count, u32 elementSize, int (*compare)(const void *, const void *));
 int FUN_0035fe34(const void *, const void *);
 int devilSlotCompareRaceThenLevel(const void *, const void *);

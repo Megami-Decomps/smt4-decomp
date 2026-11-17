@@ -1,17 +1,16 @@
-#include "ui/FrameTex.h"
-extern "C" FrameWork *g_frameTex;
+#include "frame_tex/FrameTex.h"
 
 extern "C" {
 
 void frameTexInitActive(void)
 {
-    FrameWork *block = g_frameTex;
+    FrameTexWork *block = g_frameTex;
 
-    g_frameTex->unkF60 = 1;
-    block->unkF63 = 0;
-    block->unkF64 = 0;
-    block->unkF65 = 0;
-    block->unkF99 = 1;
+    g_frameTex->encEffEnabled = 1;
+    block->encEffCapturedLeft = 0;
+    block->encEffCapturedRight = 0;
+    block->encEffPendingRight = 0;
+    block->encEffAlternate = 1;
 }
 
 } /* extern "C" */

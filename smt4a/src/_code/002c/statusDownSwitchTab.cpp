@@ -1,8 +1,7 @@
-#include "status/StatusDown.h"
+#include "status/StatusDownA.h"
 #include "ui/UiControl.h"
 
 extern "C" {
-extern StatusDownStateA *g_statusDown;
 s32 FUN_0035db94();
 void statusDownSetSpriteMode(u32 direction, u32 selection, s32 mode);
 void ifTouchRegionRemove();
@@ -13,7 +12,7 @@ void __aeabi_memset4(void *destination, s32 size, s32 value);
 void statusDownSwitchTab(u32 tab)
 {
     StatusDownStateA *screen = g_statusDown;
-    u8 *currentTab = &screen->unk514;
+    u8 *currentTab = &screen->tab;
     if (*currentTab == tab)
         return;
     screen->unk515[0] = *currentTab;
@@ -28,24 +27,24 @@ void statusDownSwitchTab(u32 tab)
     state->touchRegionCount = 0;
     __aeabi_memset4(state->slots, sizeof(state->slots), -1);
     state = g_statusDown;
-    state->timer = 0;
+    state->stateTimer = 0;
     u32 previous = state->track.state;
     state->track.state = 2;
     state->track.previous = previous;
     if (tab == 0)
-        screen->unk520 = 0;
+        screen->nextState = 0;
     else if (tab == 1)
-        screen->unk520 = 3;
+        screen->nextState = 3;
     else if (tab == 2)
-        screen->unk520 = 0x13;
+        screen->nextState = 0x13;
     else if (tab == 3)
-        screen->unk520 = 0x14;
+        screen->nextState = 0x14;
     else if (tab == 4)
-        screen->unk520 = 0x16;
+        screen->nextState = 0x16;
     else if (tab == 5)
-        screen->unk520 = 0x18;
+        screen->nextState = 0x18;
     else if (tab == 6)
-        screen->unk520 = 0x1f;
+        screen->nextState = 0x1f;
     buttonHelpSetText(0, 0xf4f4f4ff);
 }
 }

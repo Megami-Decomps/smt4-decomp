@@ -2,16 +2,14 @@
 #include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
 #include "map/mapDepart.h"
-#include "shard/W9_W9Match8_WorkRecords.h"
+#include "map/PopupStateA.h"
 #include "gamedata/GameDataAccess_Smt4a.h"
 
 extern "C" {
-extern MapRandomPopupPrefixA *g_popupState;
-
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(u32 range);
 
-s32 popupSelectWeightedMessage(u32 group, u32 entry);
+const char *popupSelectWeightedMessage(u32 kind, u32 speakerId);
 
 void FUN_002240f0(void)
 {
@@ -41,9 +39,9 @@ void FUN_002240f0(void)
     g_gameState.randomPopupCountdown = 5;
     if (!suppressPopup) {
         g_popupState->state = 0x15;
-        g_popupState->phase = 0;
-        s32 contentValue = popupSelectWeightedMessage(0x16, 0xbb);
-        g_popupState->contentValue = contentValue;
+        g_popupState->timer = 0;
+        const char *message = popupSelectWeightedMessage(0x16, 0xbb);
+        g_popupState->message = message;
     }
 }
 }

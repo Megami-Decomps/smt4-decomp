@@ -14,7 +14,7 @@ s32 scrComm_Battle_UnitDataAtLeast(void)
     s32 value = scrGetArg(0);
     BtlUnit *unit = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
 
-    scrSetResult(value <= (s32)unit->data->unk100);
+    scrSetResult(value <= (s32)unit->data->level);
     return 1;
 }
 

@@ -4,11 +4,9 @@
 #include "gamedata/UnitStats.h"
 #include "gamedata/SaveSlotTableIV.h"
 
-/* The exclusion byte follows the shared widget prefix. */
-struct PartyPanelExclusionWidgetView { PartyPanelWidget widget; u8 excluded; };
 static void setWidgetExcluded(PartyPanelWidget *widget, u8 excluded)
 {
-    reinterpret_cast<PartyPanelExclusionWidgetView *>(widget)->excluded = excluded;
+    widget->marked = excluded;
 }
 extern "C" {
 const StatBlock *partyMemberFindById(u16);

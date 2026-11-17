@@ -27,7 +27,7 @@ u32 scrCommBattleHasAffectedGroupUnit(void)
         do {
             unit = &btlGetMainState()->entries[i];
             if (((((unit->flags & 0x10) == 0) && ((unit->flags & 1) != 0)) && ((unit->flags & 0x40) == 0)) &&
-                (unit->values[slot] >> 10 == 4)) {
+                (unit->data.values[slot] >> 10 == 4)) {
                 scrSetResult(1);
                 return 1;
             }
@@ -37,7 +37,7 @@ u32 scrCommBattleHasAffectedGroupUnit(void)
     if (btlGetMainState()->hasActiveEntry != 0) {
         btlGetMainState();
         extra = btlMainFindActiveEntry();
-        if ((extra != NULL) && (extra->values[slot] >> 10 == 4)) {
+        if ((extra != NULL) && (extra->data.values[slot] >> 10 == 4)) {
             scrSetResult(1);
             return 1;
         }

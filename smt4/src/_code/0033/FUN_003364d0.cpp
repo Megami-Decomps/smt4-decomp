@@ -1,5 +1,5 @@
 /* NON_MATCHING: same code size and shape as retail, but armcc lays out the group-insertion block and allocates r8/ip/r1 differently in the two grouping loops (retail puts the shared insertion block first and keeps the action table pointer in ip). */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 

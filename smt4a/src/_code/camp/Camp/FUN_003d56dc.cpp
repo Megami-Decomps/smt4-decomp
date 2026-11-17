@@ -5,6 +5,7 @@
 #include "map/mapRndMaze.h"
 #include "gamedata/FlagValueIsPositive.h"
 #include "camp/CampCec/CampCecView.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -120,7 +121,6 @@ int FUN_003dc628(void);
 int uiSpriteAdvanceAnimation(...);
 int FUN_001643b4(...);
 int sysPlaySe(...);
-int asdTMTexTableEntryAt(...);
 int buttonHelpSetText(...);
 int FUN_0020d700(void);
 void campSetSpriteAnimationPreset(int, int, int, unsigned int);
@@ -535,20 +535,20 @@ unsigned int FUN_003d56dc(void)
               puVar7 = &temp_v15;
               FUN_002f3bc4(&temp_v15,temp_v4,0);
               if (puVar7 != (unsigned int *)0x0) {
-                temp_v10 = asdTMTexTableEntryAt(0x1a,temp_v4 + 0x87);
+                temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,temp_v4 + 0x87));
                 temp_v3 = FUN_001643b4(0x1a,temp_v4 + 0x87);
                 *(unsigned short *)((int)puVar12 + temp_v4 * 2 + 0x1b54) = temp_v3;
-                temp_v12 = asdTMTexTableEntryAt(0x1a,0x7f);
+                temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x7f));
                 temp_v11 = (int)(short)(*(short *)(temp_v10 + 8) + *(short *)(temp_v12 + 8));
                 ifTouchRegionAdd(temp_v11,(int)(short)(*(short *)(temp_v10 + 10) + *(short *)(temp_v12 + 10)),
                              (int)**(short **)(temp_v12 + 0xc),(int)(*(short **)(temp_v12 + 0xc))[1]);
                 *(short *)((int)puVar12 + temp_v4 * 6 + 0x1b5a) = (short)temp_v11;
-                temp_v12 = asdTMTexTableEntryAt(0x1a,0x80);
+                temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x80));
                 temp_v11 = (int)(short)(*(short *)(temp_v10 + 8) + *(short *)(temp_v12 + 8));
                 ifTouchRegionAdd(temp_v11,(int)(short)(*(short *)(temp_v10 + 10) + *(short *)(temp_v12 + 10)),
                              (int)**(short **)(temp_v12 + 0xc),(int)(*(short **)(temp_v12 + 0xc))[1]);
                 *(short *)((int)puVar12 + temp_v4 * 6 + 0x1b5c) = (short)temp_v11;
-                temp_v12 = asdTMTexTableEntryAt(0x1a,0x81);
+                temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x81));
                 temp_v11 = (int)(short)(*(short *)(temp_v10 + 8) + *(short *)(temp_v12 + 8));
                 ifTouchRegionAdd(temp_v11,(int)(short)(*(short *)(temp_v10 + 10) + *(short *)(temp_v12 + 10)),
                              (int)**(short **)(temp_v12 + 0xc),(int)(*(short **)(temp_v12 + 0xc))[1]);

@@ -2,6 +2,7 @@
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 #include "ui/UiSpriteState.h"
+#include "camp/RenderCtxTitle.h"
 /* Float aliases in the shared byte padding at +0x301 would shift its alignment. */
 struct GameIconAnimationView {
     u8 prefix[0x418];
@@ -13,7 +14,6 @@ typedef char GameIconAnimationOffsets[
     offsetof(GameIconAnimationView, third) == 0x4A4 &&
     offsetof(GameIconAnimationView, first) == 0x530 ? 1 : -1];
 extern "C" {
-extern RenderCtx *g_titleScene;
 s32 renderCtxPackPassFlags(u32 mode, u32 flags);
 void unitGetStereoScreenPosition(s32 *x, s32 *y, s32 location, f32 depth);
 void efctSetSpeed(f32 speed);

@@ -1,5 +1,5 @@
 /* NON_MATCHING: compiler merges positional sound calls and hoists inactive-pool reset block; -O2 candidate. */
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 #include "map/mapDepart.h"
 #include "shard/Shard0036.h"
 #include "shard/S1Mover.h"
@@ -12,10 +12,6 @@ static __inline SoundActorQueuePosition soundPosition(const Vec3f &value)
     return position;
 }
 
-struct MapIfActivation {
-    u8 unk00[0x17];
-    u8 enabled;
-};
 struct MapActivationRecord {
     u8 unk00[0x20];
     s32 destination;
@@ -33,20 +29,18 @@ struct MapActivationContext {
 };
 
 extern "C" {
-extern MapIfState *g_mapIf;
 extern MapActivationContext *DAT_004474f4;
 Vec3f FUN_003e0e60(const Vec3f *value, f32 scale);
 
 u32 mapIfActivateRecord(u8 enabled, s32 index)
 {
-    MapIfState *state = g_mapIf;
-    MapIfActivation *activation = reinterpret_cast<MapIfActivation *>(state);
-    activation->enabled = enabled;
-    MapIfRecord *record = index == -1 ? NULL : &g_mapIf->records[index];
+    MapIfState *state = g_mapIf.state;
+    state->unk17 = enabled;
+    MapIfRecord *record = index == -1 ? NULL : &g_mapIf.state->records[index];
     MapActivationRecord *details = reinterpret_cast<MapActivationRecord *>(record);
     if (index != -1 && record->active && DAT_004474f4->destination != details->destination)
-        activation->enabled = 0;
-    if (activation->enabled == 0) {
+        state->unk17 = 0;
+    if (state->unk17 == 0) {
         MapIfRecord *records = state->records;
         for (s32 slot = 0; slot < 128; ++slot) {
             MapIfRecord *entry = &records[slot];

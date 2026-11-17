@@ -15,8 +15,8 @@ void btlActionMarkRandomStatusTarget(BtlMainStateA **context, u32 status)
     s32 count = 0;
     BtlCombatantEntryA *entry = (*context)->entries;
     for (s32 remaining = 109; remaining != 0; --remaining, ++entry) {
-        if ((entry->flags & g_btlTargetableMask) && (entry->statusFlags & (1u << status)))
-            candidates[count++] = entry->indexView.selectionIndex;
+        if ((entry->flags & g_btlTargetableMask) && (entry->data.statusFlags & (1u << status)))
+            candidates[count++] = entry->selectionIndex;
     }
     s16 eligibleCount = btlAiFilterCandidatesByExclusionChance(context, candidates, count, 1);
     u32 selected = lcgRandomRange((u16)(eligibleCount - 1));

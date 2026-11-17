@@ -1,7 +1,7 @@
 /* NON_MATCHING: retail retains the channel-body pointer rather than record base, changing write offsets and flag-state branch placement. */
 #include "battle/btlAction.h"
 #include "battle/ActionStateChannels.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlGlobals.h"
 
@@ -28,7 +28,7 @@ void FUN_001f7d50(ActionStateChannelOwner *owner, s32 mode, s32 index, s32 argum
     BtlEntry *entry = &battle->entries[index];
     channel->action.entry = entry;
     if ((entry->flags & 0x80) == 0)
-        channel->action.record = &battle->actions[entry->members.ids[0]];
+        channel->action.record = &battle->actions[entry->ids[0]];
     channel->action.parameters = reinterpret_cast<u8 *>(entry) + 0xCC;
     channel->action.index = index;
     channel->action.phase = 0;

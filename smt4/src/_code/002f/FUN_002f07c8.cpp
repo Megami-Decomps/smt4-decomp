@@ -1,5 +1,5 @@
 /* NON_MATCHING: only the final return differs: retail returns the shift-base 1 kept in r7 (`mov r0, r7`), the build writes `mov r0, #1`. */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 #include "util/SlotRangeSelect.h"
@@ -20,14 +20,14 @@ static __inline void groupMemberBitResult(s32 flag, s32 group)
     for (s32 index = first; index < count + first; ++index) {
         BtlEntry *entry = &btlGetMainState()->entries[index];
         if ((entry->flags & 0x10) == 0 && (entry->flags & 1) != 0 &&
-            (entry->flags & 0x40) == 0 && (entry->groupMask & (1 << flag)) != 0) {
+            (entry->flags & 0x40) == 0 && (entry->data.statusFlags & (1 << flag)) != 0) {
             scrSetResult(1);
             return;
         }
     }
     if (btlGetMainState()->hasActiveEntry != 0) {
         BtlEntry *entry = btlMainFindActiveEntry(btlGetMainState());
-        if (entry != NULL && (entry->groupMask & (1 << flag)) != 0) {
+        if (entry != NULL && (entry->data.statusFlags & (1 << flag)) != 0) {
             scrSetResult(1);
             return;
         }

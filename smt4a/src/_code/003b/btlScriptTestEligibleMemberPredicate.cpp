@@ -18,7 +18,7 @@ u32 btlScriptTestEligibleMemberPredicate()
         u64 flags = entry->flags;
         if ((flags & g_btlCandidateMasks.unavailable) &&
             (flags & g_btlCandidateMasks.required) && !(flags & g_btlCandidateMasks.excluded) &&
-            entry->id == id && btlCombatantHasSkillAction(entry, value)) {
+            entry->data.id == id && btlCombatantHasSkillAction(entry, value)) {
             scrSetResult(1);
             return 1;
         }

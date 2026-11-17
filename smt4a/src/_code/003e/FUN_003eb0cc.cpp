@@ -30,7 +30,7 @@ void FUN_003eb0cc(BtlMainStateA* battle, s32 mode)
                 continue;
             }
         }
-        sysMemClear(entry->indexedFlags.values, sizeof(entry->indexedFlags.values));
+        sysMemClear(entry->data.slotFlags, sizeof(entry->data.slotFlags));
     }
 }
 }

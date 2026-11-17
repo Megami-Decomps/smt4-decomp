@@ -16,7 +16,7 @@ void FUN_003ae34c(u32 unused, BtlUiUnitRecord *record)
     for (s32 i = 0; i < 4; i++) {
         BtlEntry *unit = &((BtlMainState *)ui->owner)->entries[i];
 
-        if (unit != NULL && unit->link != NULL && unit->link->id == record->unitId) {
+        if (unit != NULL && unit->data.link != NULL && unit->data.link->id == record->unitId) {
             __aeabi_memcpy4(&ui->objC.unitRecords.records[i], record, sizeof(BtlUiUnitRecord));
             return;
         }

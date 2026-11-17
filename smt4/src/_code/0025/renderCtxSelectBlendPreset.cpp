@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 static __inline void renderCtxSetBlend(RenderCtx *context, s32 state)
 {
@@ -6,7 +7,6 @@ static __inline void renderCtxSetBlend(RenderCtx *context, s32 state)
 }
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 u32 packNibblesAndByte(s32, s32, u32);
 
 /* Select the packed blend-state preset for the requested draw mode. */

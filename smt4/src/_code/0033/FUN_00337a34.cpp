@@ -1,5 +1,5 @@
 /* NON_MATCHING: retained-id scan now uses the twin's plain static helper and matches; only the entry-flags clear differs (retail zeroes the two words with `stm {r3, ip}` from two zero registers, the u64 view stores through one register). */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 

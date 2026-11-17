@@ -1,60 +1,39 @@
-#include "shard/JobWork.h"
+#include "frame_tex/FrameTex.h"
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 
-typedef struct TitleState {
-    /* 0x00 */ u8 unk00[0x60];
-    /* 0x60 */ u8 active;
-    /* 0x61 */ u8 unk61;
-    /* 0x62 */ u8 unk62;
-    /* 0x63 */ u8 unk63;
-    /* 0x64 */ u8 captured;
-    /* 0x65 */ u8 busy;
-    /* 0x66 */ u8 unk66[0x33];
-    /* 0x99 */ u8 ready;
-} TitleState;
-
-typedef struct TitleWork {
-    /* 0x000 */ u8 unk000[8];
-    /* 0x008 */ JobSurface *surface;
-    /* 0x00C */ u8 unk00C[0xEF4];
-    /* 0xF00 */ TitleState state;
-} TitleWork;
-
-extern RenderCtx *g_titleScene;
-
-s32 surfaceCopy(JobSurface *dest, JobSurface *src);
-s32 FUN_002bfadc(s32 arg, JobSurface *surface);
+s32 surfaceCopy(AsdTexture *dest, AsdTexture *src);
+s32 FUN_002bfadc(s32 arg, AsdTexture *surface);
 s32 stateValuesGetBySelector(s32 arg);
 
-/* Title job step: once idle and ready, renders the scene into the surface at half size and marks it captured. */
+/* Second ENCEFF set's right capture: captures the right screen once (at half size), or marks the capture pending while a state selector is set. */
 s32 FUN_0010b2d0(u32 job)
 {
-    TitleWork *work = (TitleWork *)jobGetWork(job);
+    FrameTexWork *work = (FrameTexWork *)jobGetWork(job);
 
     if (stateValuesGetBySelector(0) != 0) {
-        work->state.busy = 1;
+        work->encEffPendingRight = 1;
         return 0;
     }
-    TitleState *state = &work->state;
-    if (state->active == 0) {
+    if (work->encEffEnabled == 0) {
         return 0;
     }
-    if (state->captured != 0 || state->busy != 0) {
+    if (work->encEffCapturedRight != 0 || work->encEffPendingRight != 0) {
         return 0;
     }
-    if (state->ready == 0) {
+    if (work->encEffAlternate == 0) {
         return 0;
     }
     renderCtxSelectStereoLayout(g_titleScene);
-    work->surface->width = 0x200;
-    work->surface->height = 0x200;
-    work->state.unk62 = FUN_002bfadc(0, work->surface);
-    surfaceCopy(work->surface, work->surface);
-    work->surface->width >>= 1;
-    work->surface->height >>= 1;
-    work->state.captured = 1;
+    work->surfaceRight->dimensions.width = 0x200;
+    work->surfaceRight->dimensions.height = 0x200;
+    work->encEffCaptureResult = FUN_002bfadc(0, work->surfaceRight);
+    surfaceCopy(work->surfaceRight, work->surfaceRight);
+    work->surfaceRight->dimensions.width >>= 1;
+    work->surfaceRight->dimensions.height >>= 1;
+    work->encEffCapturedRight = 1;
     return 0;
 }
 

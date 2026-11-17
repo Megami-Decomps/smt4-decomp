@@ -1,15 +1,8 @@
 /* NON_MATCHING: only the saved registers of the flag-id temporaries differ (retail keeps them in r6/r7, the build in r4/r6); the button arms and tail now match. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-
-/* A layout entry of table 0x2f: a position and a size pair. */
-typedef struct UiRect {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-    /* 0x0C */ const s16 *size;
-} UiRect;
 
 /* The part of the config screen block this function rebuilds. */
 typedef struct ConfigScreen {
@@ -28,14 +21,13 @@ s32 gameFlagIsSet(u32 flag);
 s32 dataTableGetCount(u32 table);
 s32 dataTableGetEntries(void);
 u32 dataTableGet(u32 table, u32 index);
-UiRect *asdTMTexTableEntryAt(u32 table, u32 id);
 
 extern ConfigScreen *g_config;
 
 /* Adds a touch region for `button` placed inside `frame` and returns its x. */
-static s16 addButtonRegion(const UiRect *frame, const UiRect *button)
+static s16 addButtonRegion(const TextureTableEntryIV *frame, const TextureTableEntryIV *button)
 {
-    return ifTouchRegionAdd((s16)(frame->x + button->x), (s16)(frame->y + button->y), button->size[0], button->size[1]);
+    return ifTouchRegionAdd((s16)(frame->x + button->x), (s16)(frame->y + button->y), button->placement->width, button->placement->height);
 }
 
 void FUN_001d15fc(void)
@@ -54,7 +46,7 @@ void FUN_001d15fc(void)
     u32 table = dataTableGet(0x36, 0);
     dataTableGetEntries();
     dataTableGetCount(table);
-    UiRect *frame = asdTMTexTableEntryAt(0x2f, 0x20);
+    TextureTableEntryIV *frame = asdTMTexTableEntryAt(0x2f, 0x20);
     u16 count;
     if (config->extraButton == 0) {
         config->regionX[0] = addButtonRegion(frame, asdTMTexTableEntryAt(0x2f, 0x42));

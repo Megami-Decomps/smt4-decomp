@@ -1,4 +1,5 @@
 #include "common.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 
@@ -11,11 +12,10 @@ typedef struct TitleState001027d4 {
 
 s32 gxIsStereoscopic3dEnabled(void);
 s32 asdCameraGetSavedRenderPairs(void);
-void effectRestoreSavedRenderPairs(u32 scene, s32 arg);
+void effectRestoreSavedRenderPairs(RenderCtx *scene, s32 arg);
 void FUN_002c4e98(u32 arg);
 
 extern TitleState001027d4 g_titleFlags; /* 0x446db0 */
-extern u32 g_titleScene; /* 0x44ea00 */
 
 /* Title scene step: when gxIsStereoscopic3dEnabled reports 1 and the title is ready, forwards the pending value and starts the scene unless skipped. */
 u32 titleSceneStep(void)

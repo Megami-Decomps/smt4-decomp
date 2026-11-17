@@ -3,7 +3,7 @@
 #define SHARD_W4_W4MATCH2_BTLUNITS_H
 
 #include "common.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/BtlUnitWork.h"
 
 #endif

@@ -1,25 +1,13 @@
 #include "common.h"
+#include "map/LmapGlobals.h"
 
 extern "C" {
-
-typedef struct Vec3002ba400 {
-    f32 x;
-    f32 y;
-    f32 z;
-} Vec3002ba400;
-
-typedef struct Scene002ba400 {
-    /* 0x00 */ u8 unk00[0x1c];
-    /* 0x1c */ Vec3002ba400 pos;
-    /* 0x28 */ u8 unk28[0x24];
-    /* 0x4c */ s32 angle;
-} Scene002ba400;
 
 typedef struct Armed002ba400 {
     /* 0x00 */ u8 active;
     /* 0x01 */ u8 unk01[3];
-    /* 0x04 */ Vec3002ba400 pos;
-    /* 0x10 */ s32 angle;
+    /* 0x04 */ MapVector pos;
+    /* 0x10 */ f32 angle;
     /* 0x14 */ s32 unk14;
     /* 0x18 */ u8 unk18;
     /* 0x19 */ u8 unk19[3];
@@ -38,14 +26,13 @@ typedef struct Trap002ba400 {
     /* 0x6c */ u8 unk6c;
 } Trap002ba400;
 
-extern Scene002ba400 *g_lmapScene; /* 0x581288 */
 extern Trap002ba400 *g_mapTrap;    /* 0x587f0c */
 
 /* Arms the map trap (state 1 -> 2) at the scene's position and angle; `hide` sets the hidden flag. */
 void mapTrapArm(s32 hide)
 {
     Trap002ba400 *trap = g_mapTrap;
-    Scene002ba400 *scene;
+    LmapSceneA *scene;
     Armed002ba400 *armed;
 
     if (trap->state == 1) {
@@ -61,8 +48,8 @@ void mapTrapArm(s32 hide)
         armed = &trap->armed;
         armed->active = 1;
         scene = g_lmapScene;
-        armed->pos = scene->pos;
-        armed->angle = scene->angle;
+        armed->pos = scene->pose.position;
+        armed->angle = scene->pose.heading;
         armed->unk14 = 0;
         armed->unk18 = 1;
     }

@@ -13,8 +13,8 @@ void btlPlayEntrySound(u32 id, f32 volume)
 {
     BtlCombatantEntryA *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
 
-    if (entry != NULL && (entry->flags & DAT_00573cc0) != 0 && entry->id != 0) {
-        FUN_0015f490(entry->id, 4, 0, 0, volume);
+    if (entry != NULL && (entry->flags & DAT_00573cc0) != 0 && entry->data.id != 0) {
+        FUN_0015f490(entry->data.id, 4, 0, 0, volume);
     }
 }
 

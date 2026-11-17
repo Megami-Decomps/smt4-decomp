@@ -2,16 +2,10 @@
 #include "common.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "code/Code002a.h"
-
-struct SpriteOffset {
-    u8 unk00[8];
-    s16 x;
-    s16 y;
-};
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 s32 rangeGetMinimumLimit(void *list);
-SpriteOffset *layoutFindTableEntry(void *sprites, s32 index);
 u32 FUN_004a8750(u32 id, u32 kind, bool flag, bool high, u32 extra);
 int textFormatBuffer(char *buffer, const char *format, u32 value);
 extern s32 g_animatedPageSelection[];
@@ -91,7 +85,7 @@ extern "C" void FUN_004a3e04(StatMenu *menu)
         g_entryWindowNumberFirst[i] = value;
         g_entryWindowNumberFirst[10 + i] = color;
         bool flag = menu->mode != 0;
-        SpriteOffset *offset = layoutFindTableEntry(menu->sprites, i + 0x42F);
+        TextureTableEntryIV *offset = layoutFindTableEntry(menu->sprites, i + 0x42F);
         s16 x = offset->x;
         s16 y = offset->y;
         u32 shown = FUN_004a8750((u16)id, menu->kind, flag, menu->level >= 100, 0);

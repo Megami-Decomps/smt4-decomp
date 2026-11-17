@@ -8,8 +8,8 @@ static inline BattleRosterRecordA *findFirstMarkedOpponent(BtlMainStateA *state)
 {
     for (s32 index = 4; index < 54; ++index) {
         BtlCombatantEntryA *entry = &state->entries[index];
-        if (entry->selection.marked != 0) {
-            return &state->roster[entry->unitIndex];
+        if (entry->data.marked != 0) {
+            return &state->roster[entry->ids[0]];
         }
     }
     return NULL;
@@ -36,7 +36,7 @@ void FUN_003e9b74(BtlMainStateA *state)
     char name[64] = {};
     BattleRosterRecordA *selected = findFirstMarkedOpponent(state);
     BtlCombatantEntryA *entry = btlMainFindEntryByListedId(state, selected->motion.group);
-    EnvironmentResourceView *resource = (EnvironmentResourceView *)entry->candidate.record;
+    EnvironmentResourceView *resource = (EnvironmentResourceView *)entry->data.candidate;
     textFormatBuffer(name, "battle/model/en%03d_sub.bam", resource->identifier);
     modelOwnerLoadNamed(state->environmentModel.owner, name);
     state->environmentModel.loaded = 1;

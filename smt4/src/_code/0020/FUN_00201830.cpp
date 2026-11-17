@@ -1,6 +1,7 @@
 /* NON_MATCHING: float-constant registers are loaded in the opposite order (retail s17=0.0, s16=1.0), the render-stack push is scheduled differently, and the list branch is laid out before the overlay branch; 160 rows each. */
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match3_EffectColor.h"
+#include "camp/RenderCtxTitle.h"
 
 /* The debug list job's work (observed fields). */
 struct DebugListWork {
@@ -18,7 +19,6 @@ struct DebugListWork {
 
 extern "C" {
 
-extern RenderCtx *g_titleScene;
 
 DebugListWork *jobGetWork(void);
 void renderCtxResetColorScale(RenderCtx *context);

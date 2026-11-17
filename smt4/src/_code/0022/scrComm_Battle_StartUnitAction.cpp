@@ -1,10 +1,10 @@
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlEntryLookup.h"
 #include "battle/btlUnit.h"
 #include "battle/BattleUnitSlot.h"
 
 extern "C" {
 
-BtlSkill *btlMainFindEntryByListedId(BtlMainState *main, s32 index);
 void FUN_00250680(s32, BtlUnit *, u32, s32);
 void FUN_00250720(void);
 void btlQueueKeyedScalarReflectAction(s32, BtlUnit *, s32, s32, s32, s32, s32);
@@ -17,12 +17,12 @@ extern u32 g_btlScriptUnit;
 s32 scrComm_Battle_StartUnitAction(void)
 {
     u32 target = reinterpret_cast<u32>(btlGetMainState()->actions);
-    BtlSkill *skill = btlMainFindEntryByListedId(btlGetMainState(), 0);
+    BtlEntry *skill = btlMainFindEntryByListedId(btlGetMainState(), 0);
     BtlUnit *unit = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
 
     btlGetMainState();
     FUN_00250720();
-    FUN_002551ac(0, unit, target, 0, skill->unk1B6, -1, -1, skill->unk1B4, skill->unk1B6, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+    FUN_002551ac(0, unit, target, 0, skill->data.maxHp, -1, -1, skill->data.hp, skill->data.maxHp, 0, 0, 1, 0, 0, 0, 0, 0, 0,
                  0, 1, 0, 1, 1, 0, 1);
     btlQueueKeyedScalarReflectAction(0, unit, 0x1000178, 0, 0, 0, 0);
     FUN_00250680(0x19, unit, target, 0);

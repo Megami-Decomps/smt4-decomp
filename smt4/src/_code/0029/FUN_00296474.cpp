@@ -5,32 +5,32 @@
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "shard/S1ListPanel.h"
 #include "gamedata/UnitRecordAccess.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct SavedUnitRecord;
 
 extern "C" {
 PartyDamageSlotsIV *gameGetSlotTable();
-SpriteInfo *asdTMTexTableEntryAt(u32 table, u32 index);
 u32 dataTable9EntryOrZero(s32 rank);
 u32 devilCalculateRankCost(u32 id, s32 rank, s32 level);
 }
 
 /* Progress is fixed-point with twelve fractional bits; the cached width is in sprite pixels. */
-static s32 experienceBarWidth(u64 progress, u64 required, const SpriteInfo *sprite)
+static s32 experienceBarWidth(u64 progress, u64 required, const TextureTableEntryIV *sprite)
 {
     f32 current = (f32)(progress >> 12);
     f32 maximum = (f32)required;
-    return (s32)((current / maximum) * (f32)*sprite->size);
+    return (s32)((current / maximum) * (f32)sprite->placement->width);
 }
 
-static void experienceBarUpdateUnit(ExperienceBarStateIV *work, s32 index, const SpriteInfo *sprite)
+static void experienceBarUpdateUnit(ExperienceBarStateIV *work, s32 index, const TextureTableEntryIV *sprite)
 {
     const SavedBattleInitialViewIV *unit = reinterpret_cast<const SavedBattleInitialViewIV *>(gameGetUnitRecord(index));
     if (unit != NULL) {
         u32 required = devilCalculateRankCost(unit->id,
             unit->enabled + work->unitRankDelta[index], work->unitRankMode[index]);
         if (work->unitFull[index] != 0) {
-            work->unitWidths[index] = (u16)*sprite->size;
+            work->unitWidths[index] = (u16)sprite->placement->width;
         } else {
             work->unitWidths[index] = experienceBarWidth(work->unitProgress[index], required, sprite);
         }
@@ -41,11 +41,11 @@ static void experienceBarUpdateUnit(ExperienceBarStateIV *work, s32 index, const
 extern "C" void FUN_00296474(ExperienceBarStateIV *work)
 {
     PartyDamageSlotsIV *slots = gameGetSlotTable();
-    SpriteInfo *sprite = asdTMTexTableEntryAt(0x28, 0x14);
+    TextureTableEntryIV *sprite = asdTMTexTableEntryAt(0x28, 0x14);
     const PlayerDataIV *player = gameGetPlayerData();
     u32 required = dataTable9EntryOrZero(player->level + work->playerRankDelta);
     if (work->playerFull != 0) {
-        work->playerWidth = (u16)*sprite->size;
+        work->playerWidth = (u16)sprite->placement->width;
     } else {
         work->playerWidth = experienceBarWidth(work->playerProgress, required, sprite);
     }

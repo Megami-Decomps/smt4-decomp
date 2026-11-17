@@ -2,7 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/W6_W6Match1_PositionedStream.h"
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteWork.h"
 
 extern "C" {
 
@@ -20,7 +20,6 @@ extern int gameSlotTableFindFree(void);
 /* Supplied declaration required: FUN_003df57c. */
 extern int FUN_004a0404(void);
 /* Supplied declaration required: skillGetAdjustedCost. */
-
 
 unsigned int FUN_004a0f5c(void)
 

@@ -18,24 +18,24 @@ void scrSetResult(s32 result);
 /* Whether any of the unit's skill sources lists a category-three skill. */
 static inline u32 unitHasCategoryThreeSkill(BtlCombatantEntryA *unit)
 {
-    if (unit->record != NULL) {
+    if (unit->data.record != NULL) {
         for (s32 i = 0; i < 8; ++i) {
-            SkillDataRecordA *skill = skillDataFindById(unit->record->skills[i]);
+            SkillDataRecordA *skill = skillDataFindById(unit->data.record->skills[i]);
             if (skill != NULL && skill->sort.category == 3) {
                 return 1;
             }
         }
     }
-    if (unit->secondaryRecord != NULL) {
+    if (unit->data.secondaryRecord != NULL) {
         for (s32 i = 0; i < 8; ++i) {
-            SkillDataRecordA *skill = skillDataFindById(unit->secondaryRecord->skills[i]);
+            SkillDataRecordA *skill = skillDataFindById(unit->data.secondaryRecord->skills[i]);
             if (skill != NULL && skill->sort.category == 3) {
                 return 1;
             }
         }
     }
-    if (unit->candidate.record != NULL) {
-        NkmEnemyRecordA *record = nkmEnemyFindById(unit->id);
+    if (unit->data.candidate != NULL) {
+        NkmEnemyRecordA *record = nkmEnemyFindById(unit->data.id);
         for (s32 i = 0; i < 8; ++i) {
             SkillDataRecordA *skill = skillDataFindById(record->skills[i]);
             if (skill != NULL && skill->sort.category == 3) {
@@ -61,7 +61,7 @@ u32 FUN_0038c888(void)
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
             (entry->flags & g_btlCandidateMasks.required) != 0 &&
-            (entry->flags & g_btlCandidateMasks.excluded) == 0 && entry->id == id &&
+            (entry->flags & g_btlCandidateMasks.excluded) == 0 && entry->data.id == id &&
             unitHasCategoryThreeSkill(entry)) {
             scrSetResult(1);
             return 1;
@@ -69,7 +69,7 @@ u32 FUN_0038c888(void)
     }
     if (btlGetMainState()->unk4cd1 != 0) {
         BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
-        if (entry != NULL && entry->id == id && btlEntryHasCategoryThreeSkill(entry) != 0) {
+        if (entry != NULL && entry->data.id == id && btlEntryHasCategoryThreeSkill(entry) != 0) {
             scrSetResult(1);
             return 1;
         }

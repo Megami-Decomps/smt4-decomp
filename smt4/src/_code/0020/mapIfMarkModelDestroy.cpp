@@ -1,15 +1,14 @@
-#include "shard/W5_W5Match2_MapInterfaceWork.h"
+#include "map/MapIfGlobals.h"
 
 extern "C" {
 
-extern MapInterfaceWork *g_mapIf;
-s32 asdMdlManagerMarkDestroy(u32 model);
+s32 asdMdlManagerMarkDestroy(AsdMdlObject *model);
 
-/* Mark the map interface's model for destruction. */
+/* Mark the map interface's fast-travel marker model for destruction. */
 void mapIfMarkModelDestroy(void)
 {
-    MapInterfaceModelBlock *block = &g_mapIf->modelBlock;
-    asdMdlManagerMarkDestroy(block->model);
+    MapIfModelSlot *slot = &g_mapIf.state->slots[0];
+    asdMdlManagerMarkDestroy(slot->model);
 }
 
 }

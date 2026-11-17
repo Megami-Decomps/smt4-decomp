@@ -19,19 +19,19 @@ void FUN_004e6880(BtlMainStateA **context, u32 status)
         if ((entry->flags & g_btlTargetableMask) != 0) {
             if (status != 22) {
                 if (status != 28) {
-                    u16 flags = entry->statusFlags;
+                    u16 flags = entry->data.statusFlags;
                     if (status != 31) {
                         if ((flags & (1U << status)) != 0) {
-                            candidates[count++] = entry->indexView.selectionIndex;
+                            candidates[count++] = entry->selectionIndex;
                         }
                     } else if ((flags & 0x220) != 0) {
-                        candidates[count++] = entry->indexView.selectionIndex;
+                        candidates[count++] = entry->selectionIndex;
                     }
-                } else if ((entry->statusFlags & 0x39C0) != 0) {
-                    candidates[count++] = entry->indexView.selectionIndex;
+                } else if ((entry->data.statusFlags & 0x39C0) != 0) {
+                    candidates[count++] = entry->selectionIndex;
                 }
-            } else if ((entry->statusFlags & 0x3BE0) != 0) {
-                candidates[count++] = entry->indexView.selectionIndex;
+            } else if ((entry->data.statusFlags & 0x3BE0) != 0) {
+                candidates[count++] = entry->selectionIndex;
             }
         }
     }

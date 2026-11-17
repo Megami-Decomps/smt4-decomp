@@ -1,6 +1,6 @@
 #include "common.h"
 #include "gamedata/NkmBaseRecord.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 #include "util/SlotRangeSelect.h"
@@ -19,24 +19,24 @@ extern int scrSetResult(s32 value);
 /* Whether one of the entry's equipped items or its demon's items is of kind 3. */
 static __inline u32 entryHasKindThreeItem(const BtlEntry *entry)
 {
-    if (entry->equipA != NULL) {
+    if (entry->data.equipA != NULL) {
         for (s32 j = 0; j < 8; j++) {
-            const SkillDataRecord *item = skillDataFindById(entry->equipA->items[j]);
+            const SkillDataRecord *item = skillDataFindById(entry->data.equipA->items[j]);
             if (item != NULL && item->sort.category == ITEM_KIND_3) {
                 return 1;
             }
         }
     }
-    if (entry->equipB != NULL) {
+    if (entry->data.equipB != NULL) {
         for (s32 j = 0; j < 8; j++) {
-            const SkillDataRecord *item = skillDataFindById(entry->equipB->items[j]);
+            const SkillDataRecord *item = skillDataFindById(entry->data.equipB->items[j]);
             if (item != NULL && item->sort.category == ITEM_KIND_3) {
                 return 1;
             }
         }
     }
-    if (entry->devil != NULL) {
-        NkmBaseRecord *devil = nkmBaseGetRecord(entry->id);
+    if (entry->data.devil != NULL) {
+        NkmBaseRecord *devil = nkmBaseGetRecord(entry->data.id);
 
         for (s32 j = 0; j < 8; j++) {
             const SkillDataRecord *item = skillDataFindById(devil->skills[j]);
@@ -60,14 +60,14 @@ u32 FUN_002ff77c(void)
         BtlEntry *entry = &btlGetMainState()->entries[i];
 
         if ((entry->flags & BTL_ENTRY_FLAG_PRESENT) == 0 && (entry->flags & BTL_ENTRY_FLAG_ACTIVE) != 0 &&
-            (entry->flags & BTL_ENTRY_FLAG_BLOCKED) == 0 && entry->id == id && entryHasKindThreeItem(entry)) {
+            (entry->flags & BTL_ENTRY_FLAG_BLOCKED) == 0 && entry->data.id == id && entryHasKindThreeItem(entry)) {
             scrSetResult(1);
             return 1;
         }
     }
     if (btlGetMainState()->hasActiveEntry != 0) {
         BtlEntry *entry = btlMainFindActiveEntry(btlGetMainState());
-        if (entry != NULL && entry->id == id && btlEntryHasCategoryThreeSkill(entry) != 0) {
+        if (entry != NULL && entry->data.id == id && btlEntryHasCategoryThreeSkill(entry) != 0) {
             scrSetResult(1);
             return 1;
         }

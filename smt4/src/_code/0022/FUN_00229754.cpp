@@ -1,5 +1,5 @@
 /* NON_MATCHING: channel byte addressing, event-condition block layout and action-call argument scheduling differ. */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "battle/btlAction.h"

@@ -36,7 +36,7 @@ s32 FUN_003beba8(s32 partyId, s32 mode, s32 attackerId, s32 defenderId, f32 powe
     BtlUnitData* defender = btlFindEntryBlockByMemberId(main, defenderId);
     if (attacker->flags & 4) scale = 0.8f;
 
-    f32 magic = (f32)attacker->magic;
+    f32 dexterity = (f32)attacker->dexterity;
     f32 strength = (f32)attacker->strength;
     f32 rateA = FUN_0022a690(7, (f32)attackerId);
     f32 rateB = FUN_0022a690(10, (f32)defenderId);
@@ -56,10 +56,10 @@ s32 FUN_003beba8(s32 partyId, s32 mode, s32 attackerId, s32 defenderId, f32 powe
     f32 divisor = (f32)(bonusA + bonusB) * 0.5f;
     f32 damage;
     if (partyId > 0) {
-        f32 stat = magic + strength * 0.5f;
+        f32 stat = dexterity + strength * 0.5f;
         damage = (power + stat * 4.5f) * 0.33333334f * modifier * base * scale * percent / divisor;
     } else if (mode != 1) {
-        damage = (magic + (f32)baseStat) * 0.33333334f * power * modifier * base * scale * percent;
+        damage = (dexterity + (f32)baseStat) * 0.33333334f * power * modifier * base * scale * percent;
     } else {
         damage = (strength + (f32)baseStat) * 0.33333334f * power * modifier * base * scale * percent;
     }

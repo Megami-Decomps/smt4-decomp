@@ -90,7 +90,7 @@ struct GameStateA {
     /* 0x10C */ f32 scriptCameraFov;
     /* 0x110 */ MapVector rayStart;
     /* 0x11C */ MapVector rayEnd;
-    /* 0x128 */ u8 unk128;
+    /* 0x128 */ u8 targetIconNear; /* the nearest map target is close enough to show its icon */
     /* 0x129 */ s8 unk129;
     /* 0x12A */ u8 unk12A;
     /* 0x12B */ s8 unk12B;
@@ -139,7 +139,8 @@ struct GameStateA {
     /* 0x1E0 */ f32 unk1E0;
     /* 0x1E4 */ f32 unk1E4;
     /* 0x1E8 */ f32 unk1E8;
-    /* 0x1EC */ u8 unk1EC[8];
+    /* 0x1EC */ s32 talkMarker;
+    /* 0x1F0 */ u32 talkMarkerArg;
     /* 0x1F4 */ s32 unk1F4;
     /* 0x1F8 */ s32 result;              /* the value scripts read back as their result */
     /* 0x1FC */ u8 unk1FC[4];
@@ -196,13 +197,14 @@ struct GameStateA {
     /* 0x2C9 */ u8 unk2C9;
     /* 0x2CA */ u8 unk2CA[0x1E];
     /* 0x2E8 */ s32 unk2E8;
-    /* 0x2EC */ u8 unk2EC[0x1C];
+    /* 0x2EC */ u32 chosenTalkId;
+    /* 0x2F0 */ u8 unk2F0[0x18];
     /* 0x308 */ u32 unk308;
     /* 0x30C */ s32 popupElapsedFrames;
     /* 0x310 */ u32 pendingEntryIds[32];
     /* 0x390 */ s32 statusTimer;
     /* 0x394 */ s32 giftCounter;
-    /* 0x398 */ u8 unk398[4];
+    /* 0x398 */ s32 popupCooldown; /* frames since the last story popup */
     /* 0x39C */ s32 unk39C;
     /* 0x3A0 */ u8 unk3A0[2];
     /* 0x3A2 */ s8 unk3A2;
@@ -240,7 +242,8 @@ struct GameStateA {
     /* 0x451 */ u8 unk451;
     /* 0x452 */ u8 unk452[2];
     /* 0x454 */ s32 unk454;
-    /* 0x458 */ u8 unk458[8];
+    /* 0x458 */ u8 unk458[4];
+    /* 0x45C */ s32 talkRewardId;
     /* 0x460 */ u8 alternateNaviMap;
     /* 0x461 */ u8 unk461;
     /* 0x462 */ s8 naviMapPending;
@@ -312,11 +315,13 @@ struct GameStateA {
     /* 0x5A0 */ MapVector targetPosition;
     /* 0x5AC */ f32 targetHeading;
     /* 0x5B0 */ f32 targetHeadingCopy;
-    /* 0x5B4 */ u8 unk5B4[0x14];
+    /* 0x5B4 */ u32 targetKind;
+    /* 0x5B8 */ u8 unk5B8[0x10];
     /* 0x5C8 */ u8 unk5C8;
     /* 0x5C9 */ u8 unk5C9[3];
     /* 0x5CC */ s32 collisionDebugMode;  /* 1: draw every collision shape, 2: only those near the player */
-    /* 0x5D0 */ u8 unk5D0[0x20];
+    /* 0x5D0 */ u8 unk5D0[0x1C];
+    /* 0x5EC */ s32 talkFlagsEnabled;
     /* 0x5F0 */ u32 unk5F0;
     /* 0x5F4 */ u8 unk5F4[0x1C];
     /* 0x610 */ s32 environmentPreset;
@@ -334,7 +339,10 @@ struct GameStateA {
     /* 0x640 */ s32 overlayRed;
     /* 0x644 */ s32 overlayGreen;
     /* 0x648 */ s32 overlayBlue;
-    /* 0x64C */ u8 unk64C[0x14];
+    /* 0x64C */ u8 unk64C[4];
+    /* 0x650 */ s32 lastWallPass; /* pass of the last wall hit (-1: none) */
+    /* 0x654 */ s32 lastWallPlane; /* plane index of the last wall hit (-1: none) */
+    /* 0x658 */ u8 unk658[8];
     /* 0x660 */ s32 showAllEntries;      /* nonzero: every entry is visible, requirements ignored */
     /* 0x664 */ u8 unk664[8];
     /* 0x66C */ s32 stageOverride;       /* -1: derive the stage from the data table */

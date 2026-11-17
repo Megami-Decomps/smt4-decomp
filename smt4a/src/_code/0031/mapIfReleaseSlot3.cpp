@@ -1,15 +1,14 @@
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 
 extern "C" {
 
 void ptrListRemoveClearOwner(u32 gfx, u32 handle);
 
-extern MapIfGlobalsA g_mapIf;
 extern u32 g_handleRegistry;
 
 void mapIfReleaseSlot3(void)
 {
-    MapIfSlotA *slot = &g_mapIf.state->slots[3];
+    MapIfModelSlotA *slot = &g_mapIf.state->slots[3];
 
     ptrListRemoveClearOwner(g_handleRegistry, slot->resource->handle);
 }

@@ -1,13 +1,7 @@
-#include "common.h"
+#include "gamedata/SaveSlotRecord.h"
 
 extern "C" {
 
-struct UnitSortRecord {
-    /* 0x00 */ u8 unk00[0x10];
-    /* 0x10 */ s16 sortKey;
-};
-
-UnitSortRecord *gameGetSlotRecord(s32 index);
 s32 FUN_002909f8(const s32 *left, const s32 *right);
 
 /* Put invalid units last; sort valid units by ascending sort key, then by FUN_002909f8. */
@@ -22,9 +16,9 @@ s32 FUN_00290a8c(const s32 *left, const s32 *right)
     } else if (*right < 0) {
         difference = -1;
     } else {
-        UnitSortRecord *first = gameGetSlotRecord(*left);
-        UnitSortRecord *second = gameGetSlotRecord(*right);
-        difference = first->sortKey - second->sortKey;
+        SlotRecordA *first = gameGetSlotRecord(*left);
+        SlotRecordA *second = gameGetSlotRecord(*right);
+        difference = first->maxMp - second->maxMp;
         if (difference == 0) {
             return FUN_002909f8(left, right);
         }

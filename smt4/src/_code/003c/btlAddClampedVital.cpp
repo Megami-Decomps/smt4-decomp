@@ -1,5 +1,5 @@
 /* NON_MATCHING: id/kind registers are reversed and the compiler places the shared clamping and persistent-copy tails differently from retail. */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 #include "gamedata/UnitRecordAccess.h"
@@ -30,19 +30,19 @@ void btlAddClampedVital(s32 id, s32 kind, s32 amount)
         else if (kind == 1)
             addClampedVital(&live->mp, live->maxMp, amount);
         BtlEntry *entry = btlMainFindEntryByListedId(state, id);
-        if (entry->equipA) {
-            entry->equipA->hp = live->hp;
-            entry->equipA->mp = live->mp;
-        } else if (entry->equipB) {
-            entry->equipB->hp = live->hp;
-            entry->equipB->mp = live->mp;
-        } else if (entry->reserve) {
-            entry->reserve->hp = live->hp;
-            entry->reserve->mp = live->mp;
+        if (entry->data.equipA) {
+            entry->data.equipA->hp = live->hp;
+            entry->data.equipA->mp = live->mp;
+        } else if (entry->data.equipB) {
+            entry->data.equipB->hp = live->hp;
+            entry->data.equipB->mp = live->mp;
+        } else if (entry->data.reserve) {
+            entry->data.reserve->hp = live->hp;
+            entry->data.reserve->mp = live->mp;
         }
         return;
     }
-    /* battle entries view the unit record through BtlEquip (shard/W4_Match6_BtlEntry.h) */
+    /* battle entries view the unit record through BtlEquip (battle/BtlEntry.h) */
     BtlEquip *unit = reinterpret_cast<BtlEquip *>(gameGetUnitRecord(id - BTL_ENTRY_COUNT));
     if (kind == 0)
         addClampedVital(&unit->hp, unit->maxHp, amount);

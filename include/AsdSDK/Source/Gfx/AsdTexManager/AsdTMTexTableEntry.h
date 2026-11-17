@@ -7,8 +7,10 @@
 
 #ifdef __cplusplus
 /* Placement record of a table entry. The texture draw reads the first two halfwords as the
- * request's x/y, the UI code as the sprite's width/height; `mode` and `flags` are observed only
- * by the texture draw. Observed prefix, not a recovered record stride. */
+ * request's x/y, the UI code as the sprite's width/height (preferred over the entry's own size
+ * when the record is present); `mode` is 1 when that size applies (the touch-region and size
+ * lookups test it), `flags` is observed only by the texture draw. Observed prefix, not a
+ * recovered record stride. */
 struct TexturePlacementPrefixIV {
     /* 0x00 */ union {
         s16 x;
@@ -23,15 +25,18 @@ struct TexturePlacementPrefixIV {
     /* 0x0C */ u8 flags;
 };
 
-/* One 0x14-byte entry of a TMX file's sprite table. */
+/* One 0x14-byte entry of a TMX file's sprite table, as returned by asdTMTexTableEntryAt(file, index)
+ * and layoutFindTableEntry() in both games (one layout for IV and Apocalypse). The UI code reads
+ * (x, y) as the sprite's layout position and adds it to its panel origin; a few size lookups read
+ * the same pair as a width and height. */
 struct TextureTableEntryIV {
     /* 0x00 */ u16 originX;  /* source origin of the sprite in its texture (a crop's left/top) */
     /* 0x02 */ u16 originY;
-    /* 0x04 */ u16 width;    /* bit 15 is a flag */
-    /* 0x06 */ u16 height;
+    /* 0x04 */ u16 width;    /* bit 15 is a flag; callers mask it (& 0x7FFF) for the size */
+    /* 0x06 */ u16 height;   /* bit 15 likewise */
     /* 0x08 */ s16 x;
     /* 0x0A */ s16 y;
-    /* 0x0C */ TexturePlacementPrefixIV *placement;
+    /* 0x0C */ TexturePlacementPrefixIV *placement; /* NULL when the entry's own size applies */
     /* 0x10 */ u8 unk10[4];
 };
 

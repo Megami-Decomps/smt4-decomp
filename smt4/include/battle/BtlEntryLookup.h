@@ -6,7 +6,7 @@
 #include "common.h"
 #include "battle/btlMain.h"
 #include "battle/BattleUnitSlot.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 
 extern "C" {
 

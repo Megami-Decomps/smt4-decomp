@@ -29,9 +29,9 @@ void FUN_004ecd7c(BtlMainStateA **owner, BtlUnit *unit)
             u64 flags = entry->flags;
             if ((flags & g_btlAction.targetableMask) != 0 &&
                 (flags & g_btlAction.interaction.excludedMask) == 0 &&
-                entry->unitIndex >= 0 &&
+                entry->ids[0] >= 0 &&
                 (flags & g_btlAction.interaction.requiredMask) != 0) {
-                subject = entry->unitIndex;
+                subject = entry->ids[0];
                 break;
             }
         }

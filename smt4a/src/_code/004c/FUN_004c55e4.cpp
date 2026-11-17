@@ -25,7 +25,7 @@ s32 FUN_004c55e4(u32 unitId, u32 skillId)
     } else if (unit->flags & DAT_005713f0.sourceValue) {
         SkillDataRecordA *skill = skillDataFindById(skillId);
         if (skill) {
-            return FUN_0034a304(skill, FUN_004bd098(unit->sourceId, skillId), 2);
+            return FUN_0034a304(skill, FUN_004bd098(unit->data.sourceId, skillId), 2);
         }
     } else if (unit->flags & DAT_005713f0.affinity) {
         SkillDataRecordA *skill = skillDataFindById(skillId);

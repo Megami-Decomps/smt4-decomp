@@ -1,8 +1,7 @@
 /* NON_MATCHING: the queued kinds/values arrays are now defined here (same-file data), so the values base is `kinds + 24` in a register like retail; the shared index*35 unit offset, the if-converted selection stores and the kinds/values register numbering still differ. */
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 
 extern "C" {
-extern ButtonHelpGlobalsA g_buttonHelp;
 s32 g_buttonHelpQueuedKinds[6] = { -1, -1, -1, -1, -1, -1 };
 s32 g_buttonHelpQueuedValues[6] = { -1, -1, -1, -1, -1, -1 };
 

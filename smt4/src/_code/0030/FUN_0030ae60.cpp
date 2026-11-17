@@ -12,7 +12,7 @@ u32 FUN_0030ae60(void)
     for (s32 index = 0; index < 0x6d; ++index) {
         BtlEntry *unit = &btlGetMainState()->entries[index];
         if ((unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) &&
-            !(unit->groupMask & mask)) {
+            !(unit->data.statusFlags & mask)) {
             scrSetResult(0);
             return 1;
         }

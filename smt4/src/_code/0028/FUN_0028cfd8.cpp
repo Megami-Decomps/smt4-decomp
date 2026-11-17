@@ -42,16 +42,16 @@ u32 FUN_0028cfd8(u32 skillId)
             need |= 2;
         if (skill->target & 0x7F)
             need |= 4;
-        if ((need & 1) && !(member->groupMask & 2) && member->hp != member->maxHp)
+        if ((need & 1) && !(member->data.statusFlags & 2) && member->data.hp != member->data.maxHp)
             have = 1;
-        if ((need & 2) && member->mp != member->maxMp)
+        if ((need & 2) && member->data.mp != member->data.maxMp)
             have |= 2;
         if ((need & 1) && (need & 2) && (have & 3))
             have |= 3;
         if (need & 4) {
             u16 mask = 0;
             FUN_0023dc38(&mask, skill->target & 0x7F);
-            if (mask & member->groupMask)
+            if (mask & member->data.statusFlags)
                 have |= 4;
         }
         if (need == have)

@@ -1,7 +1,8 @@
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteWork.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 u32 dataTableGetEntry24Byte0(u32 id);
@@ -10,7 +11,6 @@ s32 saveOptionIsEnabled(u32 option);
 void efctSetSpeed(f32 value);
 f32 vec2GetSpeed(const void *object);
 void texDrawCompositeSprite(u32 layer, u32 group, s32 image, s32 x, s32 y, s32 order);
-PanelTextLayoutEntryPrefixA *asdTMTexTableEntryAt(u32 group, u32 image);
 
 /* The speed object the option pulse reads sits at 0x13C of the work; its speed is the f32 at +0x20. */
 struct OptionSpeedView {
@@ -18,7 +18,7 @@ struct OptionSpeedView {
     u8 speedObject[0x24];
 };
 
-void FUN_0023dcec(UniteWork *work, s32 row, s32 x, s32 y, s32 selected,
+void FUN_0023dcec(UniteWorkA *work, s32 row, s32 x, s32 y, s32 selected,
                   f32 baseScale, f32 factor)
 {
     u32 option = dataTableGetEntry24Byte0(work->optionNamesA.ids[row]);
@@ -47,7 +47,7 @@ void FUN_0023dcec(UniteWork *work, s32 row, s32 x, s32 y, s32 selected,
         style = ~0u;
     }
     const char *text = dataTableGetEntry24Member(work->optionNamesA.ids[row]);
-    const PanelTextLayoutEntryPrefixA *anchor = asdTMTexTableEntryAt(0x1A, 0xA4);
+    const TextureTableEntryIV *anchor = asdTMTexTableEntryAt(0x1A, 0xA4);
     textDrawString(2, style, text, (f32)(anchor->x + x), (f32)(anchor->y + y),
                  0.55f, 0.0f, scale);
 }

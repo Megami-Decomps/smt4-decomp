@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -51,7 +52,6 @@ int gameGetUnitRecord(...);
 int skillDataFindById(void);
 int buttonHelpSetPreset(...);
 int spriteStartAnimationByIndex(...);
-int asdTMTexTableEntryAt(...);
 
 void battleSelectButtonHelpPreset(int);
 int flagBitIsSet(...);
@@ -547,7 +547,7 @@ LAB_0019ade4:
     temp_v5 = gameFlagIsSet(0x525);
     FUN_00297ca4(param_1,1);
     if (temp_v5 == 0) {
-      temp_v9 = asdTMTexTableEntryAt(0x15,200);
+      temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,200));
       temp_v32 = (unsigned int)*(short *)(param_1 + 0x572a);
       temp_v33 = temp_v36;
       temp_v34 = 0;
@@ -958,7 +958,7 @@ LAB_0019b924:
       FUN_00292f4c(param_1);
     }
     if (*(char *)(param_1 + 0x307c) != '\0') break;
-    temp_v9 = asdTMTexTableEntryAt(0x15,200);
+    temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,200));
     temp_v32 = (unsigned int)*(short *)(param_1 + 0x572a);
     temp_v33 = temp_v36;
     temp_v34 = 0;
@@ -1104,7 +1104,7 @@ LAB_0019b924:
     FUN_00292f4c(param_1);
 LAB_0019bce0:
     if (*(char *)(param_1 + 0x307c) != '\0') break;
-    temp_v9 = asdTMTexTableEntryAt(0x15,200);
+    temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,200));
     temp_v32 = (unsigned int)*(short *)(param_1 + 0x572a);
     temp_v33 = temp_v36;
     temp_v34 = 0;
@@ -1785,7 +1785,7 @@ LAB_0019cf8c:
       break;
     case 4:
       if (*(unsigned short *)(temp_v7 + 0x595a) < 6) {
-        temp_v8 = asdTMTexTableEntryAt(0x15,0xbba);
+        temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0xbba));
         temp_v18 = param_1 + temp_v5 * 0x8c;
         temp_v14 = *(short *)(temp_v7 + 0x595a) + 1;
         temp_v25 = *(float *)(temp_v18 + 0x1628);

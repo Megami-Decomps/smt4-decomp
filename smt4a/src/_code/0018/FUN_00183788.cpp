@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "util/BitsAndBytes.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -42,7 +43,6 @@ extern unsigned int DAT_0063077c; /* 0x63077c */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: texDrawTableEntrySized. */
 
 
@@ -69,7 +69,7 @@ void FUN_00183788(int param_1,int param_2,int param_3,int param_4,unsigned int p
   unsigned int temp_v11;
   unsigned int temp_v12;
   
-  temp_v0 = asdTMTexTableEntryAt(param_5,param_6);
+  temp_v0 = reinterpret_cast<int>(asdTMTexTableEntryAt(param_5,param_6));
   psVar4 = *(short **)(temp_v0 + 0xc);
   temp_v1 = param_1;
   if (param_2 < param_1) {

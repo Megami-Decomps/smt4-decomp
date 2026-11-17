@@ -1,4 +1,4 @@
-#include "camp/CampState.h"
+#include "camp/CampStateA.h"
 
 extern "C" {
 
@@ -13,7 +13,6 @@ void aocScriptReleaseTableAndReset(void);
 void asdMemFree(void *memory);
 s32 jobStop(u32 job, s32 flag);
 
-extern CampStateA *g_camp;
 
 /* Shuts the game screen down: runs the clean-up calls, stops its job, frees it and clears the global. */
 void campShutdown(void)

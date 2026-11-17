@@ -28,14 +28,14 @@ u32 scrAnyEligibleHpPercentThreshold(void)
         const BtlCombatantEntryA* entry = &btlGetMainState()->entries[index];
         if (!(g_btlCandidateMasks.unavailable & entry->flags) &&
             (g_btlCandidateMasks.required & entry->flags) && !(g_btlCandidateMasks.excluded & entry->flags) &&
-            hpPercent(entry->hp, entry->maxHp) >= threshold) {
+            hpPercent(entry->data.hp, entry->data.maxHp) >= threshold) {
             scrSetResult(1);
             return 1;
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
         const BtlCombatantEntryA* entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
-        if (entry != NULL && hpPercent(entry->hp, entry->maxHp) <= threshold) {
+        if (entry != NULL && hpPercent(entry->data.hp, entry->data.maxHp) <= threshold) {
             scrSetResult(1);
             return 1;
         }

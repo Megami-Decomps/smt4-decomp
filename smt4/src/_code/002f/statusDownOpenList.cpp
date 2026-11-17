@@ -1,59 +1,41 @@
-#include "common.h"
-#include "shard/W6_W6Match3_ScrollSelection.h"
+#include "status/StatusDown.h"
 
 extern "C" {
 
-typedef struct StatusDown {
-    /* 0x000 */ u8 unk000[0x400];
-    /* 0x400 */ s32 state;
-    /* 0x404 */ s32 previousState;
-    /* 0x408 */ s32 icon;
-    /* 0x40C */ s32 unk40C;
-    /* 0x410 */ u8 unk410;
-    /* 0x411 */ u8 unk411[0x1B];
-    /* 0x42C */ u8 slots[0x29];      /* filled with 0xFF */
-    /* 0x455 */ u8 unk455[0x2B];
-    /* 0x480 */ u8 regionCount;
-    /* 0x481 */ u8 unk481[0x53];
-    /* 0x4D4 */ u8 list[0x6C];
-    /* 0x540 */ u32 unk540;
-    /* 0x544 */ u32 unk544;
-} StatusDown;
 
-extern StatusDown *g_statusDown;
 
-s32 FUN_0029ee54(void *list);
-void gridNavigationConfigure(void *list, s32 count, s32 a, s32 b, s32 c, s32 d);
+s32 FUN_0029ee54(ScrollSelection *list);
+void gridNavigationConfigure(ScrollSelection *list, s32 count, s32 a, s32 b, s32 c, s32 d);
 void ifTouchRegionRemove(void);
 void *__aeabi_memset4(void *dest, s32 size, s32 value);
 void FUN_0026ae68(void);
 
-static __inline void *statusGetList(StatusDown *status)
+static __inline ScrollSelection *statusGetList(StatusDownState *status)
 {
-    return status->list;
+    return &status->list;
 }
 
 /* Stores the two values, appends an entry to the status list and selects it, drops the touch regions and moves to state 11. */
 void statusDownOpenList(u32 first, u32 second)
 {
-    StatusDown *status = g_statusDown;
-    StatusDown *current;
+    StatusDownState *status = g_statusDown;
+    StatusDownState *current;
 
-    status->unk544 = first;
+    status->selection = first;
     status->unk540 = second;
     gridNavigationConfigure(statusGetList(status), FUN_0029ee54(statusGetList(status)) + 1, 9, 1, 0, 1);
-    scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(statusGetList(status)), FUN_0029ee54(statusGetList(status)) - 1);
-    status->unk410 = 1;
+    scrollListSetSelectionMarkChanged(statusGetList(status), FUN_0029ee54(statusGetList(status)) - 1);
+    status->listActive = 1;
     current = g_statusDown;
-    for (s32 i = 0; i < current->regionCount; i++) {
+    for (s32 i = 0; i < current->touchRegionCount; i++) {
         ifTouchRegionRemove();
     }
-    current->regionCount = 0;
+    current->touchRegionCount = 0;
     __aeabi_memset4(current->slots, 0x29, -1);
     current = g_statusDown;
-    current->unk40C = 0;
-    current->previousState = current->state;
-    current->state = 11;
+    current->stateTimer = 0;
+    current->track.previous = current->track.state;
+    current->track.state = 11;
     FUN_0026ae68();
 }
 

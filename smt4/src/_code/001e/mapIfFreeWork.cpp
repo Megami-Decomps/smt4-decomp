@@ -1,17 +1,15 @@
-#include "common.h"
+#include "map/MapIfGlobals.h"
 
 extern "C" {
 
-struct MapInterfaceWork;
-extern MapInterfaceWork *g_mapIf;
 s32 asdMemFree(void *block);
 
-/* Free the map interface work and clear its owner pointer. */
+/* Free the map interface's state block and clear its pointer. */
 void mapIfFreeWork(void)
 {
-    if (g_mapIf != NULL) {
-        asdMemFree(g_mapIf);
-        g_mapIf = NULL;
+    if (g_mapIf.state != NULL) {
+        asdMemFree(g_mapIf.state);
+        g_mapIf.state = NULL;
     }
 }
 

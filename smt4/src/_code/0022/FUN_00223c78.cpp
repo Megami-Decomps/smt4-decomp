@@ -2,7 +2,6 @@
 #include "status/StatusDown.h"
 
 extern "C" {
-extern StatusDownState *g_statusDown;
 
 s32 FUN_00223c78(void)
 {
@@ -12,7 +11,7 @@ s32 FUN_00223c78(void)
     if (obj == NULL) {
         return 0;
     }
-    if (obj->state == 20) {
+    if (obj->track.state == 20) {
         result = 1;
     }
     return result;

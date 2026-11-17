@@ -1,5 +1,5 @@
 /* NON_MATCHING: retail selects side values before storing; conditional-store tail sharing and saved-register allocation differ. */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "gamedata/EquipmentTable.h"
 #include "gamedata/SkillDataLookup.h"
 

@@ -16,9 +16,9 @@ u32 scrCommBattleGroupMpPercentAtMost(void)
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
         if ((g_btlCandidateMasks.unavailable & entry->flags) != 0 &&
             (entry->flags & g_btlCandidateMasks.required) != 0 &&
-            (g_btlCandidateMasks.excluded & entry->flags) == 0 && entry->id == id) {
-            s32 mp = entry->mp;
-            s32 maxMp = entry->maxMp;
+            (g_btlCandidateMasks.excluded & entry->flags) == 0 && entry->data.id == id) {
+            s32 mp = entry->data.mp;
+            s32 maxMp = entry->data.maxMp;
             if (mp * 100 / maxMp <= threshold) {
                 scrSetResult(1);
                 return 1;

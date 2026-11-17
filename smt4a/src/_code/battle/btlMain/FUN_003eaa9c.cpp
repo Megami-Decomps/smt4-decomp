@@ -3,6 +3,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "gamedata/DataTable.h"
+#include "battle/BtlEntryLookup.h"
 
 namespace {
 struct EnvironmentCopyView {
@@ -30,7 +31,6 @@ void FUN_004d854c(u32 *owner);
 void *asdMemoryAllocTraced(u32 bytes, const char *file, s32 line);
 u32 *battleModelOwnerInitialize(u32 *owner);
 void btlModelCopyContentIfMissing(u32 *destination, const u32 *source);
-BattleCombatantStatusKey *btlFindEntryBlockByMemberId(BtlMainStateA *state, s32 parameterIndex);
 void *dataTableFileGetTable(void *file, u32 index);
 BattleVector3 FUN_00201950(u32 index);
 BattleVector3 FUN_00201984(u32 index);
@@ -57,8 +57,8 @@ void FUN_003eaa9c(BtlMainStateA *state)
     BattleRosterRecordA *selected = NULL;
     for (s32 i = 4; i < 0x36; ++i) {
         BtlCombatantEntryA *entry = &state->entries[i];
-        if (entry->selection.marked != 0) {
-            selected = &state->roster[entry->unitIndex];
+        if (entry->data.marked != 0) {
+            selected = &state->roster[entry->ids[0]];
             break;
         }
     }

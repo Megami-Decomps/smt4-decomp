@@ -1,8 +1,7 @@
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 #include "code/Code002a.h"
 
 extern "C" {
-extern ButtonHelpGlobalsA g_buttonHelp;
 
 s32 scrRunOpcodesStub(u32 handle);
 

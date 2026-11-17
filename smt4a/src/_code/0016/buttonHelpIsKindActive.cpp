@@ -1,5 +1,4 @@
-#include "ui/ButtonHelp.h"
-extern "C" ButtonHelpGlobalsA g_buttonHelp;
+#include "ui/ButtonHelpGlobal.h"
 
 /* Check active button-help entries, including the components of combined kinds. */
 extern "C" s32 buttonHelpIsKindActive(u32 kind)

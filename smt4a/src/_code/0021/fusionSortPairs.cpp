@@ -1,4 +1,4 @@
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 #include <stdlib.h>
 #include "event/2dEvent/2dEventTex.h"
 
@@ -21,7 +21,6 @@ struct FusionSortPreferences {
 };
 
 extern "C" {
-extern UniteWork *g_unite;
 s32 FUN_002b27d4(const void *a, const void *b);
 s32 FUN_0034f0b4(const void *a, const void *b);
 s32 uniteComparePairsAscending(const void *a, const void *b);
@@ -36,7 +35,7 @@ void arraySortQsort(void *base, u32 count, u32 size, s32 (*compare)(const void *
 /* Sort the fusion pair list by the key the player selected. */
 void fusionSortPairs(void)
 {
-    UniteWork *work = g_unite;
+    UniteWorkA *work = g_unite;
     const u8 *setting = &reinterpret_cast<FusionSortPreferences *>(saveGetUserSettingsBlock())->setting;
     bool ascending = (*setting & 0x80) == 0;
     if ((*setting & 0x7f) == 1) {

@@ -26,7 +26,7 @@ void FUN_003eed44(BtlMainStateA *battle)
                     BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(battle);
                     battle->specialEffect = 0;
                     if (entry != NULL) {
-                        const ScriptEntryInfo *record = reinterpret_cast<const ScriptEntryInfo *>(entry->specialMaximum.record);
+                        const ScriptEntryInfo *record = reinterpret_cast<const ScriptEntryInfo *>(entry->data.specialRecord);
                         u32 category = FUN_0019acdc(record->id, 1);
                         u32 selectedEntry;
                         u32 sound;

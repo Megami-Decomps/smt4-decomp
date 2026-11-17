@@ -18,8 +18,8 @@ u32 scrBattleQueueHpAdjustment(void)
     s32 amount = scrGetArg(0);
     u32 unit = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
     btlSlotManagerResetStates(btlGetMainState());
-    s32 maxHp = btlGetMainState()->entries->maxHp;
-    s32 hp = btlGetMainState()->entries->hp;
+    s32 maxHp = btlGetMainState()->entries->data.maxHp;
+    s32 hp = btlGetMainState()->entries->data.hp;
     FUN_004fc094(0, unit, 0, btlGetMainState()->roster, 0, -1, amount, -1,
         hp, maxHp, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1);
     btlQueueActionMessage(0, unit, 0x1000257, 0, 0, 0, 0);

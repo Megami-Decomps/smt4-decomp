@@ -66,14 +66,14 @@ u32 FUN_004c0f74(BtlCombatantEntryA *entry, u32 element)
             }
         }
     }
-    if (action.enabled && (entry->statusFlags & 16) &&
+    if (action.enabled && (entry->data.statusFlags & 16) &&
         (!(entry->flags & (((u64)DAT_005713f0[7] << 32) | DAT_005713f0[6])) ||
-            FUN_004bd098(entry->sourceId, action.skill) >= 0)) {
+            FUN_004bd098(entry->data.sourceId, action.skill) >= 0)) {
         kindIdStore(action.targetKind, skills);
         if (skills[0] == element)
             return 1;
     }
-    CombatantAffinityValueView *unit = (CombatantAffinityValueView *)btlMainFindEntryByListedId(btlGetMainState(), entry->unitIndex);
+    CombatantAffinityValueView *unit = (CombatantAffinityValueView *)btlMainFindEntryByListedId(btlGetMainState(), entry->ids[0]);
     if (unit != NULL && unit->value > 0 && (element == 2 || element == 3 || element == 20))
         return 1;
     return 0;

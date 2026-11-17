@@ -1,59 +1,34 @@
 /* NON_MATCHING: O3 unrolls the four-character reset and partially unrolls the 24-slot reset; matched widget writes reuse sl instead of retail's fresh r1 constant. O2 may retain retail's loops. */
-#include "shard/W6_W6Match6_PartyPanel.h"
+#include "ui/PartyPanelStateA.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
 #include "gamedata/SaveSlotTable.h"
 
-struct PartyFilterWidget {
-    PartyPanelWidget transition;
-    /* 0x28 */ u8 marked;
-};
-
-struct PartyFilterSlot {
-    s32 index;
-    u16 marked;
-    u8 unk06[2];
-};
-
-struct PartyFilterState {
-    /* 0x000 */ u8 unk000[0x9c0];
-    /* 0x9c0 */ u8 characterFlags[4];
-    /* 0x9c4 */ u8 unk9c4[0x4c];
-    /* 0xa10 */ PartyFilterWidget *characters[4];
-    /* 0xa20 */ PartyFilterWidget *demons[24];
-    /* 0xa80 */ PartyFilterSlot slots[24];
-    /* 0xb40 */ u8 unkb40[0x33c];
-    /* 0xe7c */ s32 filterIds[2];
-    /* 0xe84 */ s32 filterCount;
-};
-
-
 extern "C" {
-extern PartyFilterState *g_partyPanel;
 SlotRecordA *slotRecordFindById(u16 id);
 void __aeabi_memset4(void *, u32 bytes, s32 value);
 
 // Reset party-panel marks and match active party/storage slots against filter IDs.
 void partyPanelRefreshFilterMarks(void)
 {
-    PartyFilterState *panel = g_partyPanel;
-    SaveSlotTable *order = gameGetSlotTable();
+    PartyPanelStateA *panel = g_partyPanel;
+    SaveSlotTableA *order = gameGetSlotTable();
     for (s32 index = 0; index < 4; ++index) {
-        panel->characterFlags[index] = 0;
+        panel->activeSlots[index] = 0;
         panel->characters[index]->marked = 0;
     }
     for (s32 index = 0; index < 24; ++index) {
-        panel->slots[index].marked = 0;
+        panel->entries[index].available = 0;
         panel->demons[index]->marked = 0;
     }
-    __aeabi_memset4(panel->characterFlags, sizeof(panel->characterFlags), 1);
-    panel->characterFlags[0] = 0;
+    __aeabi_memset4(panel->activeSlots, sizeof(panel->activeSlots), 1);
+    panel->activeSlots[0] = 0;
     for (s32 index = 0; index < 24; ++index) {
-        if (panel->slots[index].index < 0) {
-            panel->slots[index].marked = 1;
+        if ((s32)panel->entries[index].packedIndex < 0) { /* the index is signed */
+            panel->entries[index].available = 1;
         }
     }
-    for (s32 filter = 0; filter < panel->filterCount; ++filter) {
-        s32 id = panel->filterIds[filter];
+    for (s32 filter = 0; filter < panel->fusionParentCount; ++filter) {
+        s32 id = panel->fusionParentIds[filter];
         if (id < 0) {
             continue;
         }
@@ -63,15 +38,15 @@ void partyPanelRefreshFilterMarks(void)
         }
         for (s32 index = 0; index < 3; ++index) {
             s32 slot = order->reserve[index];
-            if (slot >= 0 && gameGetSlotRecord(slot)->entryId == record->entryId) {
-                panel->characterFlags[index + 1] = 1;
+            if (slot >= 0 && gameGetSlotRecord(slot)->id == record->id) {
+                panel->activeSlots[index + 1] = 1;
                 panel->characters[index + 1]->marked = 1;
             }
         }
         for (s32 index = 0; index < 24; ++index) {
-            s32 slot = panel->slots[index].index;
-            if (slot >= 0 && gameGetSlotRecord(slot)->entryId == record->entryId) {
-                panel->slots[index].marked = 1;
+            s32 slot = panel->entries[index].packedIndex;
+            if (slot >= 0 && gameGetSlotRecord(slot)->id == record->id) {
+                panel->entries[index].available = 1;
                 panel->demons[index]->marked = 1;
             }
         }

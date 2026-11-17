@@ -1,6 +1,7 @@
 /* NON_MATCHING: the 4x4 matrix copy loads and stores through different VFP register groups (retail copies two eight-float blocks with vldmia/vstmia and patches the last column), and the two inlined state pops lay out differently. */
 #include "common.h"
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 
@@ -17,7 +18,6 @@ typedef struct DrawPacket {
     /* 0x54 */ u32 pending;
 } DrawPacket;
 
-extern RenderCtx *g_titleScene;
 
 s32 renderCtxPackPassFlags(u32 kind, u32 arg);
 void FUN_001f6b74(u32 aux);

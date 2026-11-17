@@ -1,9 +1,9 @@
 /* NON_MATCHING: same loads and calls; the scheduler stores the height argument (str r0, [sp]) before loading the width, and retail uses ip for the height in the second and third calls. */
 #include "classes/Obj4221a4.h"
 #include "classes/Obj422594.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-Obj4221a4Entry *asdTMTexTableEntryAt(u32 table, u32 id);
 void touchRegionOwnerAddRegion(Obj4221a4 *obj, s32 x, s32 y, s32 width, s32 height);
 void touchRegisterSecondRegion(Obj4221a4 *obj, s32 x, s32 y, s32 width, s32 height);
 void touchRegisterFirstRegion(Obj4221a4 *obj, s32 x, s32 y, s32 width, s32 height);
@@ -12,24 +12,24 @@ void touchRegisterFirstRegion(Obj4221a4 *obj, s32 x, s32 y, s32 width, s32 heigh
 /* Reads rows 79, 80 and 78 of table 58 and hands each to one of the object's setters. */
 void Obj4221a4::initialize(const void *param)
 {
-    Obj4221a4Entry *entry;
-    Obj4221a4Size *size;
+    TextureTableEntryIV *entry;
+    TexturePlacementPrefixIV *size;
     s32 x;
     s32 y;
 
     Obj422594::initialize(param);
     entry = asdTMTexTableEntryAt(58, 79);
-    size = entry->size;
+    size = entry->placement;
     x = entry->x;
     y = entry->y;
     touchRegisterFirstRegion(this, x, y, size->width, size->height);
     entry = asdTMTexTableEntryAt(58, 80);
-    size = entry->size;
+    size = entry->placement;
     x = entry->x;
     y = entry->y;
     touchRegisterSecondRegion(this, x, y, size->width, size->height);
     entry = asdTMTexTableEntryAt(58, 78);
-    size = entry->size;
+    size = entry->placement;
     x = entry->x;
     y = entry->y;
     touchRegionOwnerAddRegion(this, x, y, size->width, size->height);

@@ -1,5 +1,6 @@
 #include "shard/S1ListPanel.h"
 #include "ui/UiSpriteState.h"
+#include "camp/RenderCtxTitle.h"
 struct ScrollingWidgetView {
     u8 prefix[0xC8];
     u8 sprites[0x14C];
@@ -9,7 +10,6 @@ struct ScrollingWidgetView {
 typedef char ScrollingWidgetOffsets[offsetof(ScrollingWidgetView, entrance) == 0x214 &&
     offsetof(ScrollingWidgetView, scroll) == 0x2A0 ? 1 : -1];
 extern "C" {
-extern RenderCtx *g_titleScene;
 SpriteInfo *FUN_002bf4f0(void *sprites, u32 id);
 void efctSetSpeed(f32 speed);
 void FUN_00230d84(void *sprites, u32 id, s32 x, s32 y, u32 color);
@@ -47,9 +47,6 @@ void uiDrawScrollingSelectionEntry(ScrollingWidgetView *widget, s32 index, u32 c
     s32 contentX = scrollX + x - (content->bounds.width & 0x7FFF);
     s32 contentY = vec2GetYInt(scroll) + y;
     FUN_00231bcc(widget->sprites, 0x42C, contentX, contentY, color, 1);
-    struct BaseRenderScissorView { u8 prefix[0x130C]; RenderStateStack state; };
-    typedef char BaseRenderScissorOffsets[offsetof(BaseRenderScissorView, state) == 0x130C &&
-        sizeof(BaseRenderScissorView) == 0x132C ? 1 : -1];
-    renderStackSet(&((BaseRenderScissorView *)g_titleScene)->state, 0);
+    renderStackSet(&g_titleScene->scissor, 0);
 }
 }

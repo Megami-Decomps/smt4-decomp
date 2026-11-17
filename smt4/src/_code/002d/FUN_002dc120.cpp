@@ -1,15 +1,8 @@
 /* NON_MATCHING: register allocation only: the y/x offset loads use r1/r2/r3 where retail reuses the pool-constant register (r2, r1); the FUN_0029a17c argument loads are scheduled in a different order. */
-#include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 #include "util/BitsAndBytes_VariantA.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
-
-/* A texture-table entry as the draw routine reads it. */
-struct IconTextureEntry {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-    /* 0x0C */ s16 *size; /* width, height */
-};
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* Fixed-point (20.12) position pair. */
 struct FixedPosition {
@@ -37,20 +30,12 @@ struct IconScroller {
     /* 0x3888 */ s32 offsetY;
 };
 
-/* The title scene's draw context, which carries one more render-state stack. */
-struct TitleRenderCtx : RenderCtx {
-    /* 0x12CC */ u8 unk12CC[0x40];
-    /* 0x130C */ RenderStateStack stackE;
-};
-
 extern "C" {
-extern TitleRenderCtx *g_titleScene;
 
 s32 vec2GetXInt(FixedPosition *position);
 s32 vec2GetYInt(FixedPosition *position);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const IconFade *fade);
-IconTextureEntry *asdTMTexTableEntryAt(u32 file, s32 index);
 void texDrawTableEntryAtStoredOrigin(u32 flags, u32 table, s32 entry, u32 argument, TextureDrawPayloadIV payload);
 void FUN_0029a17c(s32 x, s32 y, u32 width, s32 height, s32 useNarrowScreen);
 
@@ -80,16 +65,16 @@ void FUN_002dc120(IconScroller *scroller, s32 amount)
     x = x + scroller->offsetX;
     y = y + scroller->offsetY;
     efctSetSpeed(vec2GetSpeed(&scroller->fade));
-    IconTextureEntry *entry = asdTMTexTableEntryAt(0x15, scroller->icon + 0x52);
+    TextureTableEntryIV *entry = asdTMTexTableEntryAt(0x15, scroller->icon + 0x52);
     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
     texDrawTableEntryAtStoredOrigin(2, 0x15, 0x4f, entry->x + x, payloadAt(entry->y + y));
     texDrawTableEntryAtStoredOrigin(2, 0x15, 0x4e, entry->x + x, payloadAt(entry->y + y - amount));
-    renderStackSetCounted(&g_titleScene->stackE, 3);
-    FUN_0029a17c(entry->x + x, entry->y + y, entry->size[0], entry->size[1] - amount, 1);
+    renderStackSetCounted(&g_titleScene->scissor, 3);
+    FUN_0029a17c(entry->x + x, entry->y + y, entry->placement->width, entry->placement->height - amount, 1);
     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
     texDrawTableEntryAtStoredOrigin(2, 0x15, 0x50, entry->x + x, payloadAt(entry->y + y));
     texDrawTableEntryAtStoredOrigin(2, 0x15, 0x51, entry->x + x, payloadAt(entry->y + y));
-    renderStackSetCounted(&g_titleScene->stackE, 0);
+    renderStackSetCounted(&g_titleScene->scissor, 0);
     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
     efctSetSpeed(1.0f);
 }

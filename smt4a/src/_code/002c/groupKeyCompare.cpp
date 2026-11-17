@@ -1,13 +1,7 @@
-#include "common.h"
+#include "gamedata/SaveSlotRecord.h"
 
 extern "C" {
 
-typedef struct Group {
-    /* 0x00 */ u8 unk00[0x62];
-    /* 0x62 */ u16 key;
-} Group;
-
-Group *gameGetSlotRecord(int id);
 int dataTableGetEntry0102Value(u16 key);
 
 /* Comparator: entries without a group (id < 0) sort last; otherwise orders by the groups' keys (a - b). */
@@ -21,10 +15,10 @@ int groupKeyCompare(int *b, int *a)
         }
     } else {
         if (*a >= 0) {
-            Group *groupB = gameGetSlotRecord(*b);
-            Group *groupA = gameGetSlotRecord(*a);
-            int keyB = dataTableGetEntry0102Value(groupB->key);
-            int keyA = dataTableGetEntry0102Value(groupA->key);
+            SlotRecordA *groupB = gameGetSlotRecord(*b);
+            SlotRecordA *groupA = gameGetSlotRecord(*a);
+            int keyB = dataTableGetEntry0102Value(groupB->id);
+            int keyA = dataTableGetEntry0102Value(groupA->id);
 
             return keyA - keyB;
         }

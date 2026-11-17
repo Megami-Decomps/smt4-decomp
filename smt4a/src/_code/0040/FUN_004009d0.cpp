@@ -161,7 +161,7 @@ u32 FUN_004009d0(s32 id, s32 flag)
         }
     }
     if (checkParty) {
-        SaveSlotTable *table = gameGetSlotTable();
+        SaveSlotTableA *table = gameGetSlotTable();
 
         for (s32 i = -1; i < (s32)table->count; i++) {
             if (FUN_00400564(i, 0, skill) == 0) {

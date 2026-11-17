@@ -1,15 +1,12 @@
-#include "ui/FrameTex.h"
-extern "C" FrameWorkA *g_frameTex;
+#include "frame_tex/FrameTexA.h"
 
-
-
-// Enable the frame-texture state, clear its three flags, and mark it dirty.
+// Enable the second ENCEFF capture set: clear its capture flags and select the alternate set.
 extern "C" void frameTexEnableAndClearFlags()
 {
-    FrameWorkA *state = g_frameTex;
-    state->enabled = 1;
-    state->first = 0;
-    state->second = 0;
-    state->third = 0;
-    state->dirty = 1;
+    FrameTexWorkA *state = g_frameTex;
+    state->encEffEnabled = 1;
+    state->encEffCapturedLeft = 0;
+    state->encEffCapturedRight = 0;
+    state->encEffPendingRight = 0;
+    state->encEffAlternate = 1;
 }

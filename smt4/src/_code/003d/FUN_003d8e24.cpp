@@ -1,9 +1,9 @@
 /* NON_MATCHING: guide positions and modes reconstructed; constant hoisting and VFP allocation differ. */
 #include "gfx/DebugGuides.h"
 #include "title/titleMain.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
-extern TitleScene *g_titleScene;
 s32 padIsButtonPressed(u32 button);
 void gxSubmitDrawZeroExtraParams(u32 color0, u32 color1, u32 color2, u32 color3,
                   f32 x, f32 y, f32 width, f32 height, f32 z);

@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "camp/PartyPanel/PartyPanel.h"
 #include "code/Code0031_Smt4a.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -25,7 +26,6 @@ typedef struct {
 /* Supplied declaration required: uiPointerHitsRect. */
 extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
-extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: messageSetMode. */
 /* Supplied declaration required: FUN_00215bbc. */
@@ -51,7 +51,7 @@ unsigned int FUN_00318e84(int param_1)
   unsigned int temp_v2;
   
   temp_v2 = 0;
-  temp_v0 = asdTMTexTableEntryAt(0x2e,0x97);
+  temp_v0 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x97));
   temp_v1 = (int)*(short *)(temp_v0 + 8);
   uiPointerHitsRect(temp_v1,(int)*(short *)(temp_v0 + 10),(int)**(short **)(temp_v0 + 0xc),
                (int)(*(short **)(temp_v0 + 0xc))[1],0);

@@ -1,12 +1,10 @@
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 
 extern "C" {
 
 void asdTMTexTablePrepareNodeImage(s32 group, s32 id);
 MapIfWidget *asdTMTexTableGetNodeTexture(s32 group, s32 id);
 void asdTMTexTableLoadTmx(s32 group, s32 arg);
-
-extern MapIfGlobals g_mapIf;
 
 /* Loads the interface's widgets from resource group 10. */
 void mapIfLoadWidgets(void)

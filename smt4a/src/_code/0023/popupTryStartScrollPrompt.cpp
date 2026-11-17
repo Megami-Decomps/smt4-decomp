@@ -1,15 +1,8 @@
 /* Starts the mode-10 popup when the scroll position passes the entry's height (adjusted per direction) and a candidate exists. */
 #include "common.h"
+#include "map/PopupStateA.h"
 
 extern "C" {
-
-typedef struct {
-    s32 mode;      /* 0x00 */
-    s32 unk04;     /* 0x04 */
-    s32 unk08[3];  /* 0x08 */
-    s32 handle;    /* 0x14 */
-    s32 candidate; /* 0x18 */
-} PopupState;
 
 typedef struct {
     u8 unk00[8];   /* 0x00 */
@@ -21,14 +14,12 @@ typedef struct {
     u16 id;        /* 0x12c */
 } PopupCandidate;
 
-extern PopupState *g_popupState;
-
 s32 randRange(u32 id);
 PopupCandidate *saveSlotFindSelected(void);
 PopupEntry *dataTable02FindConditionalMapRecord(u32 a, u32 b);
 s32 gameFlagIsSet(u32 flag);
 s32 gameDataBlocksGetTableFlag(void);
-s32 popupSelectWeightedMessage(u32 kind, u16 id);
+const char *popupSelectWeightedMessage(u32 kind, u16 id);
 f32 partyGetAverageLevel(s32 index);
 
 void popupTryStartScrollPrompt(u32 arg1, u32 arg2)
@@ -38,7 +29,7 @@ void popupTryStartScrollPrompt(u32 arg1, u32 arg2)
     PopupEntry *entry;
     PopupCandidate *candidate;
 
-    if (g_popupState->mode != 0) {
+    if (g_popupState->state != 0) {
         return;
     }
 
@@ -64,10 +55,10 @@ void popupTryStartScrollPrompt(u32 arg1, u32 arg2)
         candidate = saveSlotFindSelected();
         if (candidate != NULL) {
             if (gameFlagIsSet(0x1a2) == 0 || randRange(99) + 1 > 50) {
-                g_popupState->mode = 10;
-                g_popupState->unk04 = 0;
-                g_popupState->candidate = candidate->id;
-                g_popupState->handle = popupSelectWeightedMessage(3, candidate->id);
+                g_popupState->state = 10;
+                g_popupState->timer = 0;
+                g_popupState->speakerId = candidate->id;
+                g_popupState->message = popupSelectWeightedMessage(3, candidate->id);
             }
         }
     }

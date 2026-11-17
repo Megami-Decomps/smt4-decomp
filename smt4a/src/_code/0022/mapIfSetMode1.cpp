@@ -1,8 +1,6 @@
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 
 extern "C" {
-
-extern MapIfGlobalsA g_mapIf;
 
 void mapIfSetMode1(void)
 {

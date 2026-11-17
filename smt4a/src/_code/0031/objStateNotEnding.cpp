@@ -1,8 +1,7 @@
-#include "status/StatusDown.h"
+#include "status/StatusDownA.h"
 #include "shard/Shard0031.h"
 
 extern "C" {
-extern StatusDownStateA *g_statusDown;
 
 /* True unless the global object's state is 0x15 or 0x17. */
 u8 objStateNotEnding(void)

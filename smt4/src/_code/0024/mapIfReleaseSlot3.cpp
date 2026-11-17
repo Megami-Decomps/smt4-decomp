@@ -1,16 +1,14 @@
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 
 extern "C" {
 
-void asdMdlManagerMarkDestroy(u32 handle);
-
-extern MapIfGlobals g_mapIf;
+void asdMdlManagerMarkDestroy(AsdMdlObject *model);
 
 void mapIfReleaseSlot3(void)
 {
-    MapIfSlot *slot = &g_mapIf.state->slots[3];
+    MapIfModelSlot *slot = &g_mapIf.state->slots[4];
 
-    asdMdlManagerMarkDestroy(slot->handle);
+    asdMdlManagerMarkDestroy(slot->model);
 }
 
 } /* extern "C" */

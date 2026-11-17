@@ -1,4 +1,4 @@
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "gamedata/UnitStats.h"
@@ -46,9 +46,9 @@ u32 btlScriptChooseEligiblePartyDemon()
         for (s32 index = 0; index < BTL_ENTRY_COUNT; ++index) {
             BtlEntry *entry = &btlGetMainState()->entries[index];
             if ((entry->flags & BTL_ENTRY_FLAG_ACTIVE) && !(entry->flags & BTL_ENTRY_FLAG_BLOCKED) &&
-                entry->members.ids[0] >= 0 && (entry->flags & 8)) {
+                entry->ids[0] >= 0 && (entry->flags & 8)) {
                 if (choice == found) {
-                    result = entry->members.ids[0];
+                    result = entry->ids[0];
                     break;
                 }
                 found = static_cast<s8>(found + 1);

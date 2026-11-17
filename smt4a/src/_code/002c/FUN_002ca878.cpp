@@ -3,12 +3,12 @@
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxA.h"
 
 
 extern "C" {
-extern void *g_renderCtx;
 
-f32 renderCtxCalculateStereoParallax(void *context, f32 scale);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 scale);
 f32 jobGetScalarValue(void);
 void efctSetSpeed(f32 speed);
 u32 FUN_00180114(u32 id);

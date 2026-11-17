@@ -1,14 +1,10 @@
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlEntryLookup.h"
 #include "common.h"
+#include "battle/BtlEntryLookup.h"
 
 extern "C" {
 
-typedef struct BtlEntry {
-    /* 0x000 */ u8 unk000[0x25C];
-    /* 0x25C */ u32 value;
-} BtlEntry;
-
-extern BtlEntry *btlMainFindEntryByListedId(void *state, u32 id);
 extern u32 scrGetArg(u32 index);
 extern int scrSetResult(u32 value);
 
@@ -17,10 +13,10 @@ u32 scrBtlGetEntryValueByListedId(void)
 {
     u32 id = scrGetArg(0);
     u32 result = 0;
-    BtlEntry *entry = btlMainFindEntryByListedId(static_cast<void *>(btlGetMainState()), id);
+    BtlCombatantEntryA *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
 
     if (entry != NULL) {
-        result = entry->value;
+        result = entry->data.maxHp;
     }
     scrSetResult(result);
     return 1;

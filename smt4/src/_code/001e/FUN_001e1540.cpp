@@ -1,9 +1,8 @@
 /* NON_MATCHING: extracted ID/register lifetimes and second-ingredient helper inlining use different saved registers. */
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 
 extern "C" {
-extern UniteWork *g_unite;
 }
 
 static inline s32 fusionCompareRaceLevelIdIV(u16 firstId, u16 secondId)

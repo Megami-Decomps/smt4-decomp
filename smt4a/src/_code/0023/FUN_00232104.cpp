@@ -19,8 +19,8 @@ s32 FUN_00232104(const s32 *left, const s32 *right)
         return -1;
     SlotRecordA *leftSlot = gameGetSlotRecord(*left);
     SlotRecordA *rightSlot = gameGetSlotRecord(*right);
-    const SortInfoView *leftInfo = reinterpret_cast<const SortInfoView *>(nkmBaseGetRecord(leftSlot->entryId));
-    const SortInfoView *rightInfo = reinterpret_cast<const SortInfoView *>(nkmBaseGetRecord(rightSlot->entryId));
+    const SortInfoView *leftInfo = reinterpret_cast<const SortInfoView *>(nkmBaseGetRecord(leftSlot->id));
+    const SortInfoView *rightInfo = reinterpret_cast<const SortInfoView *>(nkmBaseGetRecord(rightSlot->id));
     s32 difference = leftInfo->category - rightInfo->category;
     if (difference == 0) {
         if (*left < 0)
@@ -29,8 +29,8 @@ s32 FUN_00232104(const s32 *left, const s32 *right)
             return -1;
         leftSlot = gameGetSlotRecord(*left);
         rightSlot = gameGetSlotRecord(*right);
-        NkmBaseRecordA *leftPriority = nkmBaseGetRecord(leftSlot->entryId);
-        NkmBaseRecordA *rightPriority = nkmBaseGetRecord(rightSlot->entryId);
+        NkmBaseRecordA *leftPriority = nkmBaseGetRecord(leftSlot->id);
+        NkmBaseRecordA *rightPriority = nkmBaseGetRecord(rightSlot->id);
         difference = leftPriority->race - rightPriority->race;
         if (difference == 0)
             difference = FUN_0020e83c(left, right);

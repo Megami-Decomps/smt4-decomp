@@ -4,6 +4,7 @@
 #include "nw/math/MTX44.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W5_W5Match2_PlainData.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 
@@ -42,22 +43,21 @@ struct EffectInstance {
 struct TitleScene;
 
 extern "C" {
-extern TitleScene* g_titleScene;
 
 void mtx44Copy(Matrix44* destination, const Matrix44* source);
 void nn_math_ARMv6_MTX44MultAsm(
     Matrix44* destination, const Matrix44* left, const Matrix44* right);
 void FUN_002b2144(Matrix44* destination, float x, float y, float z);
 void efctSetSpeed(float speed);
-void cameraSetViewMatrix(TitleScene* scene, const Matrix44* matrix);
+void cameraSetViewMatrix(RenderCtx *scene, const Matrix44* matrix);
 
 
 void quadSetOrderedVectors(
     const Vector4 &first, const Vector4 &second,
     const Vector4 &third, const Vector4 &fourth,
     s32 argument4, s32 argument5);
-void renderCtxApplyTransforms(TitleScene* scene);
-void renderCtxResetColorScale(TitleScene* scene);
+void renderCtxApplyTransforms(RenderCtx *scene);
+void renderCtxResetColorScale(RenderCtx *scene);
 }
 
 namespace {

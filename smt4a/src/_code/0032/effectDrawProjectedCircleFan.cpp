@@ -3,10 +3,10 @@
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include "shard/S1Mover.h"
 #include "code/Code0015.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
-extern void *g_renderCtx;
-const Matrix44 *block5B8OwnerGetBlock(void *owner);
+const Matrix44 *block5B8OwnerGetBlock(RenderCtxA *owner);
 void memCopyWords(const void *source, void *destination, u32 bytes);
 void FUN_002a1850(Vec3f *out, s32 screen, void *projection, const Vec3f *position);
 f32 FUN_001b63b0(f32 phase);

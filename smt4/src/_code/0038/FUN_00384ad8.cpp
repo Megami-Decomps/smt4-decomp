@@ -1,8 +1,8 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 
-extern RenderCtx *g_titleScene;
 void renderCtxSelectStereoLayout(RenderCtx *context);
 void gxResetColorQuadToWhite(void);
 u32 renderCtxPackPassFlags(u32 slot, u32 flags);

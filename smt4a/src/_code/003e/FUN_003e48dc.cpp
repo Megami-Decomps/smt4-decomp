@@ -1,4 +1,4 @@
-#include "shard/W6_W6Match1_PartySlot.h"
+#include "gamedata/GameSaveDataA.h"
 #include "ui/MessageMainA.h"
 #include "gamedata/SaveSlotTable.h"
 

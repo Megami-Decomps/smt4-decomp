@@ -10,7 +10,7 @@ u32 FUN_004d0d70(u32 slot)
 {
     if (slot < 24) {
         gameGetSlotRecord(slot)->id = 0;
-        SaveSlotTable *table = gameGetSlotTable();
+        SaveSlotTableA *table = gameGetSlotTable();
         if ((u32)table->reserve[0] == slot) {
             table->reserve[0] = -1;
         } else if ((u32)table->reserve[1] == slot) {
@@ -28,7 +28,7 @@ u32 FUN_004d0d70(u32 slot)
                 break;
             }
         }
-        SaveSlotTable *compact = gameGetSlotTable();
+        SaveSlotTableA *compact = gameGetSlotTable();
         for (s32 index = 0; index < 24; ++index) {
             if (compact->party[index] < 0) {
                 s32 next = index + 1;

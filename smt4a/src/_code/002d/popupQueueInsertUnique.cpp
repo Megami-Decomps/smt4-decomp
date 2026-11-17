@@ -1,11 +1,5 @@
 #include "common.h"
-
-struct PopupQueueState {
-    u8 unk00[0xb0]; // 0x00
-    s32 pending[16]; // 0xb0
-};
-
-extern "C" PopupQueueState* g_popupState;
+#include "map/PopupStateA.h"
 
 // Queue one of the supported popup kinds unless it is already present.
 extern "C" void popupQueueInsertUnique(s32 kind)

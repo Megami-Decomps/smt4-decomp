@@ -3,6 +3,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ int textFormatBuffer(...);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(...);
-int asdTMTexTableEntryAt(...);
 int FUN_0023dedc(...);
 int uiDrawListScrollBar(...);
 int FUN_0035ae58(...);
@@ -114,13 +114,13 @@ void FUN_0022ecfc(void)
       if ((*(int *)(temp_v0 + 4) != 2) || (temp_v4 = listCursorGetRowIfUnblocked(temp_v3), temp_v4 != temp_v10)) {
         temp_v4 = resourceRunOperationIfUnblocked(temp_v3);
         temp_v11 = (unsigned int)*(unsigned short *)(temp_v12 + (temp_v4 + temp_v10) * 2);
-        temp_v4 = asdTMTexTableEntryAt(0x1e,temp_v10 + 0x9e);
+        temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,temp_v10 + 0x9e));
         if (temp_v11 != 0) {
-          temp_v5 = asdTMTexTableEntryAt(0x1e,0x9c);
+          temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,0x9c));
           temp_v6 = temp_v11;
           FUN_0023dedc(temp_v11,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v1,
                        (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0x6f,0,0);
-          temp_v5 = asdTMTexTableEntryAt(0x1e,0x9b);
+          temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,0x9b));
           temp_v7 = FUN_00156850(temp_v11,0);
           textFormatBuffer(temp_v16,"%s",temp_v7);
           VectorSignedToFloat((int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,
@@ -128,10 +128,10 @@ void FUN_0022ecfc(void)
           VectorSignedToFloat((int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v1,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           textDrawString(2,temp_v6,temp_v16,(int)*(short *)(temp_v4 + 8));
-          temp_v5 = asdTMTexTableEntryAt(0x1e,0x9a);
+          temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,0x9a));
           partyDrawCategorySelectionIcon(temp_v11,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                        (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0x6f);
-          temp_v5 = asdTMTexTableEntryAt(0x1e,0x9d);
+          temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,0x9d));
           temp_v8 = partyEntryGetBit5(temp_v11);
           if (temp_v8 != 0) {
             texDrawCompositeSprite(2,0x1e,0xf,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v1,
@@ -165,7 +165,7 @@ void FUN_0022ecfc(void)
      (((temp_v4 = *(int *)(temp_v0 + 4), temp_v4 == 2 || temp_v4 == 6 || (temp_v4 == 7 || temp_v4 == 8)) ||
       (temp_v4 == 9 || temp_v4 == 10)))) {
     temp_v4 = listCursorGetRowIfUnblocked(temp_v3);
-    temp_v10 = asdTMTexTableEntryAt(0x1e,temp_v4 + 0xb5);
+    temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,temp_v4 + 0xb5));
     temp_v5 = resourceRunOperationIfUnblocked(temp_v3);
     temp_v11 = (unsigned int)*(unsigned short *)(temp_v12 + (temp_v5 + temp_v4) * 2);
     efctSetSpeed();
@@ -204,7 +204,7 @@ void FUN_0022ecfc(void)
       texDrawTableEntryAtStoredOrigin(2,0x1e,0xac,*(short *)(temp_v10 + 8) + temp_v1,*(short *)(temp_v10 + 10) + temp_v2,0xa1);
       texDrawTableEntryAtStoredOrigin(2,0x1e,0xad,*(short *)(temp_v10 + 8) + temp_v1,*(short *)(temp_v10 + 10) + temp_v2,0xa1);
     }
-    temp_v4 = asdTMTexTableEntryAt(0x1e,0xac);
+    temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,0xac));
     temp_v5 = vec2GetXInt(reinterpret_cast<const void *>(temp_v0 + 0x14c));
     temp_v8 = vec2GetYInt(temp_v0 + 0x14c);
     temp_v12 = g_renderCtx;
@@ -228,12 +228,12 @@ void FUN_0022ecfc(void)
       (**(romwright_code **)(temp_v12 + 0x1334))();
       *(unsigned char *)(temp_v12 + 0x1330) = 0;
     }
-    temp_v12 = asdTMTexTableEntryAt(0x1e,0xb3);
+    temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,0xb3));
     temp_v6 = temp_v11;
     FUN_0023dedc(temp_v11,(int)*(short *)(temp_v12 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v1,
                  (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v2,0xab,1,
                  (temp_v13 || temp_v14) || temp_v15);
-    temp_v12 = asdTMTexTableEntryAt(0x1e,0xb2);
+    temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,0xb2));
     temp_v7 = FUN_00156850(temp_v6,0);
     textFormatBuffer(temp_v16,"%s",temp_v7);
     VectorSignedToFloat((int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v2,
@@ -250,10 +250,10 @@ void FUN_0022ecfc(void)
     else {
       texDrawTableEntryAtStoredOrigin(2,0x1e,0xaf,temp_v5,temp_v4,0xab);
     }
-    temp_v12 = asdTMTexTableEntryAt(0x1e,0xb1);
+    temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,0xb1));
     partyDrawCategorySelectionIcon(temp_v6,(int)*(short *)(temp_v12 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v1,
                  (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v2,0xb0);
-    temp_v12 = asdTMTexTableEntryAt(0x1e,0xb4);
+    temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,0xb4));
     temp_v4 = partyEntryGetBit5(temp_v6);
     if (temp_v4 != 0) {
       texDrawCompositeSprite(2,0x1e,0xf,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v1,

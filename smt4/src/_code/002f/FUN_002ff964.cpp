@@ -20,14 +20,14 @@ u32 FUN_002ff964(void)
     for (s32 index = start; index < start + count; ++index) {
         BtlEntry *entry = &btlGetMainState()->entries[index];
         if ((entry->flags & 0x10) == 0 && (entry->flags & 1) != 0 && (entry->flags & 0x40) == 0 &&
-            entry->id == id && entry->level >= minimumLevel) {
+            entry->data.id == id && entry->data.level >= minimumLevel) {
             scrSetResult(1);
             return 1;
         }
     }
     if (btlGetMainState()->hasActiveEntry != 0) {
         BtlEntry *entry = btlMainFindActiveEntry(btlGetMainState());
-        if (entry != NULL && entry->id == id && entry->level >= minimumLevel) {
+        if (entry != NULL && entry->data.id == id && entry->data.level >= minimumLevel) {
             scrSetResult(1);
             return 1;
         }

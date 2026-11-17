@@ -1,16 +1,10 @@
 #include "shard/Shard0031.h"
 #include "shard/Shard0034.h"
 #include "gamedata/GamePlayerData.h"
-
-/* A party slot's demon record, as far as its level. */
-struct SlotDemonLevel {
-    /* 0x00 */ u8 unk00[0x64];
-    /* 0x64 */ u16 level;
-};
+#include "gamedata/SaveSlotRecord.h"
 
 extern "C" {
 PartyStatusSlots *gameGetSlotTable(void);
-SlotDemonLevel *gameGetSlotRecord(s32 slot);
 s32 gameSlotTableFindFree(void);
 
 /* Returns the average level of a party group: 0 = player and active demons, 1 = active demons,

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "Model/MoriModelManager.h"
 
 extern "C" {
 
@@ -27,7 +28,6 @@ typedef struct MoveCameraCtrl {
 } MoveCameraCtrl;
 
 extern const char DAT_0053295c[]; /* "c:\\SMT4F\\SMT4F\\sdds4\\program\\mikado\\moveCamera\\MoveCameraCtrl.cpp" */
-extern u32 g_handleRegistry;
 
 extern CameraCtrlEntry *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 extern CameraCtrlEntry *modelListInit(CameraCtrlEntry *memory);
@@ -35,7 +35,6 @@ extern void resourceOwnerLoadFileSync(CameraCtrlEntry *entry, u32 arg);
 extern void FUN_0040ab7c(CameraCtrlEntry *entry, s32 arg);
 extern void moriModelContentLoadBody(CameraCtrlEntry *entry, s32 arg);
 extern void FUN_0045b538(void *position);
-extern void handleRegistryRegisterObject(u32 registry, CameraChild *child);
 extern void modelPlayClip(CameraChild *child, s32 a, s32 b, f32 x, f32 y);
 
 /* Creates camera entry `index` (allocated at MoveCameraCtrl.cpp:0x1a3), initialises it and registers its child. */

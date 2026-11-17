@@ -1,11 +1,10 @@
 #include "battle/btlView.h"
 #include "map/MapSelection.h"
+#include "Model/MoriModelManager.h"
 
 extern "C" {
 extern BattleViewState g_battleViewState;
-extern void *g_handleRegistry;
 s32 gameFlagIsSet(u32 flag);
-void ptrListRemoveClearOwner(void *registry, BattleViewObject *object);
 }
 
 static inline void unregisterAttachment(BattleViewOwner *owner)

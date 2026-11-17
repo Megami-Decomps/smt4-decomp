@@ -1,5 +1,5 @@
 /* NON_MATCHING: Member-search base registers and history-identity address materialization differ. */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BattleActionHistory.h"
 #include "battle/btlAction.h"
@@ -9,7 +9,7 @@ static __inline BtlEntry *findHistoryCombatant(
 {
     for (s32 index = 0; index < 109; ++index) {
         for (s32 slot = 0; slot < 50; ++slot) {
-            s16 id = combatants[index].members.ids[slot];
+            s16 id = combatants[index].ids[slot];
             if (id < 0) {
                 break;
             }
@@ -34,7 +34,7 @@ extern "C" void FUN_0033a144(BtlMainState *battle)
             for (s32 historyIndex = 0; historyIndex < 50; ++historyIndex) {
                 BattleActionHistoryEntry *entry = &battle->history[historyIndex];
                 if (entry->combatant == combatant->selectionIndex && entry->member == action->memberId &&
-                    entry->group == combatant->id && entry->identity == combatant->identity) {
+                    entry->group == combatant->data.id && entry->identity == combatant->data.parts[0]) {
                     entry->value = action->history.value;
                     break;
                 }

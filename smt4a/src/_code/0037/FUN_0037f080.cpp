@@ -19,8 +19,8 @@ u32 FUN_0037f080(void)
         if ((entry->flags & g_btlCandidateMasks.unavailable) != 0 &&
             (entry->flags & g_btlCandidateMasks.required) != 0 &&
             (entry->flags & g_btlCandidateMasks.excluded) == 0) {
-            maxHp += entry->maxHp;
-            hp += entry->hp;
+            maxHp += entry->data.maxHp;
+            hp += entry->data.hp;
         }
     }
     scrSetResult(hp * 100 / maxHp <= percent);

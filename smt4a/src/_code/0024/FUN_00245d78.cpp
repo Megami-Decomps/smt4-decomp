@@ -1,22 +1,7 @@
-#include "common.h"
+#include "map/MapIfGlobals.h"
 #include "map/LmapGlobals.h"
 
-struct MapEntry {
-    u8 active;                 // 0x00
-    u8 reserved01[0x07];
-    s32 state;                 // 0x08
-    u8 reserved0c[0x38];
-    s32 timer;                 // 0x44
-    u8 reserved48[0x14C];
-};
-
-struct MapInterface {
-    u8 reserved00[0x1DC];
-    MapEntry entries[128]; // 0x1DC, stride 0x194
-};
-
 extern "C" {
-extern MapInterface* g_mapIf;
 
 void FUN_0029aa60(s32 mode);
 void FUN_00311b74(f32 firstX, f32 firstY, f32 firstZ, f32 scalar,
@@ -27,12 +12,12 @@ void FUN_00311b74(f32 firstX, f32 firstY, f32 firstZ, f32 scalar,
 void FUN_00245d78(s32 updateScene)
 {
     s32 index;
-    MapInterface* map = g_mapIf;
+    MapIfStateA* map = g_mapIf.state;
 
     for (index = 0; index < 128; ++index) {
-        MapEntry& entry = map->entries[index];
+        MapIfRecord& entry = map->records[index];
         if (entry.active != 0) {
-            entry.state = 1;
+            entry.transition.restart = 1;
         }
     }
 
@@ -47,9 +32,9 @@ void FUN_00245d78(s32 updateScene)
     }
 
     for (index = 0; index < 128; ++index) {
-        MapEntry& entry = map->entries[index];
-        if (entry.active != 0 && entry.timer > 0) {
-            entry.timer = 16;
+        MapIfRecord& entry = map->records[index];
+        if (entry.active != 0 && entry.update.timer > 0) {
+            entry.update.timer = 16;
         }
     }
 }

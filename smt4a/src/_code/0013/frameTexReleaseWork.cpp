@@ -1,21 +1,19 @@
-#include "ui/FrameTex.h"
-#include "shard/JobWork.h"
+#include "frame_tex/FrameTexA.h"
 
 extern "C" {
 
 void asdTextureRelease(void *buffer);
 void asdMemFree(void *memory);
-extern FrameWorkA *g_frameTex;
 
-/* Frees the job work area's four buffers and the area itself, and clears the global that referred to it. */
+/* "HDRCL" destruction: frees the four capture textures and the work area, and clears g_frameTex. */
 void frameTexReleaseWork(u32 job)
 {
-    JobWork *work = jobGetWork(job);
+    FrameTexWorkA *work = (FrameTexWorkA *)jobGetWork(job);
 
-    asdTextureRelease(work->bufferA);
-    asdTextureRelease(work->surface);
-    asdTextureRelease(work->bufferB);
-    asdTextureRelease(work->bufferC);
+    asdTextureRelease(work->surfaceLeft);
+    asdTextureRelease(work->surfaceRight);
+    asdTextureRelease(work->zanSurfaceLeft);
+    asdTextureRelease(work->zanSurfaceRight);
     asdMemFree(work);
     g_frameTex = NULL;
 }

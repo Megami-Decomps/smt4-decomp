@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -43,7 +44,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00168e00. */
 /* Supplied declaration required: FUN_001692d4. */
 /* Supplied declaration required: FUN_00180310. */
-extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_003d3020. */
 /* Supplied declaration required: drawFacingElbowSegments. */
@@ -155,7 +155,7 @@ void FUN_00408c3c(int param_1)
   texDrawTableEntryAtStoredOrigin(2,0xc,0x36,(int)((float)((unsigned long long)temp_v12 >> 0x20) + temp_v13),
                (int)(float)((unsigned long long)temp_v9 >> 0x20),0x41);
   if (*(char *)(param_1 + 0xec) != '\0') {
-    temp_v1 = asdTMTexTableEntryAt(0xc,0x7f);
+    temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xc,0x7f));
     temp_v11 = (float)VectorSignedToFloat((int)temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v13 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v8 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);

@@ -19,7 +19,7 @@ u32 FUN_003b8a24(void)
         if ((flags & g_battleMaskPresets.eligibility.active) != 0 &&
             (flags & g_battleMaskPresets.eligibility.excluded) == 0 &&
             (flags & g_battleMaskPresets.eligibility.required) != 0 &&
-            entry->selection.marked != 0 && entry->id == id) {
+            entry->data.marked != 0 && entry->data.id == id) {
             if (holderObjectCall(state->roster[index].script.holder) != 0)
                 return 1;
             break;

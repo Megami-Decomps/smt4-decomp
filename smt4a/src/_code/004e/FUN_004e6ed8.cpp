@@ -25,9 +25,9 @@ void FUN_004e6ed8(BtlPickContext *context, s32 shuffle)
     BtlCombatantEntryA *entry = context->state->entries;
 
     for (s32 i = 0; i < BTL_ENTRY_COUNT_A; i++, entry++) {
-        if ((entry->flags & g_btlAction.clearedFlags.mask) && bestHp <= entry->hp) {
-            candidates[count++] = entry->indexView.selectionIndex;
-            bestHp = entry->hp;
+        if ((entry->flags & g_btlAction.clearedFlags.mask) && bestHp <= entry->data.hp) {
+            candidates[count++] = entry->selectionIndex;
+            bestHp = entry->data.hp;
         }
     }
     if (shuffle) {

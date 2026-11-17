@@ -20,7 +20,7 @@ u32 FUN_003803b0(void)
     s32 target = scrGetArg(0);
     s32 percent = scrGetArg(1);
     u32 unit = (u32)btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit));
-    s32 damage = btlMainFindEntryByListedId(btlGetMainState(), target)->maxHp * percent / 100;
+    s32 damage = btlMainFindEntryByListedId(btlGetMainState(), target)->data.maxHp * percent / 100;
 
     if (damage == 0) {
         damage = -1;

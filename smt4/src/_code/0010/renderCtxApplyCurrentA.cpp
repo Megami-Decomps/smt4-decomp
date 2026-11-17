@@ -1,11 +1,11 @@
 #include "title/titleMain.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 
-void effectRestoreSavedRenderPairs(TitleScene *scene, u32 value);
+void effectRestoreSavedRenderPairs(RenderCtx *scene, u32 value);
 u32 asdCameraGetSavedRenderPairs(void);
 
-extern TitleScene *g_titleScene;
 
 u32 renderCtxApplyCurrentA(void)
 {

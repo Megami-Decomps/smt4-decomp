@@ -5,6 +5,7 @@
 #include "shard/W6_W6Match3_UnitStatusRequest.h"
 #include "mapnavi/naviMain.h"
 #include "event/2dEvent/SmokeFade.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -119,7 +120,6 @@ int padQueryLogicalKey(...);
 int saveSlotFindSelected(void);
 int uiSpriteAdvanceAnimation(...);
 int gameGetPlayerData(void);
-int asdTMTexTableEntryAt(...);
 int pairSetFirstResetSecond(...);
 int pairSetHalves(...);
 int gameGetSlotRecord(...);
@@ -527,12 +527,12 @@ LAB_0020448c:
         }
         temp_v7 = temp_v7 * 10;
       } while (temp_v7 < 1000000);
-      temp_v7 = asdTMTexTableEntryAt(0x1d,0x2e);
+      temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x2e));
       temp_v24 = *(short *)(temp_v7 + 8);
-      temp_v7 = asdTMTexTableEntryAt(0x1d,0x28);
+      temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x28));
       temp_v23 = *(short *)(temp_v7 + 8);
       temp_v1 = **(short **)(temp_v7 + 0xc);
-      temp_v9 = asdTMTexTableEntryAt(0x1d,temp_v9 + 0x27);
+      temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,temp_v9 + 0x27));
       temp_v10 = 0;
       temp_v46 = -(((((int)temp_v23 + (int)temp_v1) - (int)temp_v24) -
                    (((int)**(short **)(temp_v7 + 0xc) + (int)*(short *)(temp_v7 + 8)) -
@@ -545,11 +545,11 @@ LAB_0020448c:
           temp_v28 = temp_v6 + (temp_v7 + 0x26) * 0x8c;
           pairSetFirstResetSecond(temp_v28 + 0x20,temp_v9 + 0x80c);
           temp_v8 = temp_v8 - temp_v9 * temp_v13;
-          temp_v7 = asdTMTexTableEntryAt(0x1d,temp_v16 + 0x30);
+          temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,temp_v16 + 0x30));
           pairSetHalves(temp_v28 + 0x20,(int)*(short *)(temp_v7 + 8),(int)*(short *)(temp_v7 + 10));
-          temp_v7 = asdTMTexTableEntryAt(0x1d,0x2e - temp_v10);
+          temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x2e - temp_v10));
           temp_v9 = __aeabi_idivmod(temp_v8,temp_v13);
-          temp_v9 = asdTMTexTableEntryAt(7,temp_v9 + 0x80c);
+          temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(7,temp_v9 + 0x80c));
           FUN_00358e94(temp_v28 + 0x20,
                        (int)(short)((*(short *)(temp_v7 + 8) + (short)temp_v46) -
                                    *(short *)(temp_v9 + 8)),
@@ -584,12 +584,12 @@ LAB_00204688:
                 temp_v27 = temp_v27 + 1;
               }
             }
-            temp_v8 = asdTMTexTableEntryAt(0x1d,0x17e);
+            temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x17e));
             temp_v24 = *(short *)(temp_v8 + 8);
-            temp_v8 = asdTMTexTableEntryAt(0x1d,0x178);
+            temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x178));
             temp_v23 = *(short *)(temp_v8 + 8);
             temp_v1 = **(short **)(temp_v8 + 0xc);
-            temp_v27 = asdTMTexTableEntryAt(0x1d,temp_v27 + 0x177);
+            temp_v27 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,temp_v27 + 0x177));
             temp_v2 = *(short *)(temp_v8 + 8);
             temp_v3 = *(short *)(temp_v27 + 8);
             temp_v27 = 0;
@@ -600,9 +600,9 @@ LAB_00204688:
                 temp_v10 = temp_v6 + (0x42 - temp_v27) * 0x8c;
                 pairSetFirstResetSecond(temp_v10 + 0x20,(int)temp_v43 + 0x80c);
                 temp_v7 = temp_v7 - (int)temp_v43 * temp_v13;
-                temp_v8 = asdTMTexTableEntryAt(0x1d,0x17e - temp_v27);
+                temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x17e - temp_v27));
                 temp_v9 = __aeabi_idivmod(temp_v7,temp_v13);
-                temp_v9 = asdTMTexTableEntryAt(7,temp_v9 + 0x80c);
+                temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(7,temp_v9 + 0x80c));
                 pairSetHalves(temp_v10 + 0x20,
                              (int)(short)((*(short *)(temp_v8 + 8) -
                                           (short)(((((int)temp_v23 + (int)temp_v1) - (int)temp_v24) -
@@ -781,7 +781,7 @@ LAB_00204688:
             uiSpriteSelectAnim(temp_v7,2);
             pairSetFirstResetSecond(temp_v7,0x1a);
             uiStoreTextureEntryCenter(temp_v7,0x1d,0x2f);
-            temp_v16 = asdTMTexTableEntryAt(0x1d,0x30);
+            temp_v16 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x30));
             FUN_00358e94(temp_v7,(int)*(short *)(temp_v16 + 8),(int)*(short *)(temp_v16 + 10));
             temp_v7 = temp_v18;
           }
@@ -893,8 +893,8 @@ LAB_00204688:
                   uiSpriteSelectAnim(temp_v27,4);
                   pairSetFirstResetSecond(temp_v27,0x15c);
                   uiStoreTextureEntryCenter(temp_v27,0x1d,0x14e);
-                  temp_v16 = asdTMTexTableEntryAt(0x1d,0x14e);
-                  temp_v8 = asdTMTexTableEntryAt(0x1d,0x137);
+                  temp_v16 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x14e));
+                  temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x137));
                   FUN_00358e94(temp_v27,(int)(short)(*(short *)(temp_v8 + 8) - *(short *)(temp_v16 + 8)),
                                (int)(short)(*(short *)(temp_v8 + 10) - *(short *)(temp_v16 + 10)));
                   temp_v13 = temp_v20;
@@ -904,7 +904,7 @@ LAB_00204688:
                   uiSpriteSelectAnim(temp_v27,3);
                   pairSetFirstResetSecond(temp_v27,0x62);
                   uiStoreTextureEntryCenter(temp_v27,0x1d,0x67);
-                  temp_v16 = asdTMTexTableEntryAt(0x1d,(int)temp_v45 + 0x152);
+                  temp_v16 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,(int)temp_v45 + 0x152));
                   FUN_00358e94(temp_v27,(int)*(short *)(temp_v16 + 8),(int)*(short *)(temp_v16 + 10));
                   temp_v45 = (int *)((int)temp_v45 + 1);
                   temp_v13 = temp_v21;

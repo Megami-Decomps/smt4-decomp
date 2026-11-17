@@ -1,10 +1,9 @@
 /* NON_MATCHING: selection-store scheduling allows the saved-zero value to reuse the selection-address register. */
-#include "status/StatusDown.h"
+#include "status/StatusDownA.h"
 #include "addon/aocMain.h"
 #include "addon/AocSystemA.h"
 
 extern "C" {
-extern StatusDownStateA *g_statusDown;
 s32 FUN_002c7e3c();
 void sysPlaySe(u32 sound);
 s32 fieldStateAllowsAction();
@@ -20,7 +19,7 @@ void flagsSetOrClearBit(GridNavigation *navigation, s32 enabled);
 void FUN_00333de0(s32 selected)
 {
     StatusDownStateA *status = g_statusDown;
-    if ((s16)status->unk598 < 0 && selected >= 0 && status->unk514 == 1) {
+    if ((s16)status->selectedEntry < 0 && selected >= 0 && status->tab == 1) {
         s32 mode = FUN_002c7e3c();
         if (mode == 14 || mode == 7) {
             sysPlaySe(0x33);
@@ -32,18 +31,18 @@ void FUN_00333de0(s32 selected)
             sysPlaySe(0x2D);
         }
     }
-    status->unk598 = (s16)selected;
+    status->selectedEntry = (s16)selected;
     if (selected >= 0 && gameWorkStateGet()) {
         u32 directory = dataArchiveSetFindFileWithEntry(g_aocSystem, selected);
         if (directory == 0)
             directory = dataTableValueOrZero(0x3F);
-        asdTextDrawDirectoryEntry(status->caption.text, 3, -1, 0, 3, directory, selected);
+        asdTextDrawDirectoryEntry(status->text, 3, -1, 0, 3, directory, selected);
     } else {
-        asdTextDrawDirectoryEntry(status->caption.text, 3, -1, 0, 3, dataTableValueOrZero(0x3F), 0);
+        asdTextDrawDirectoryEntry(status->text, 3, -1, 0, 3, dataTableValueOrZero(0x3F), 0);
     }
-    s32 count = FUN_001688c4(status->caption.text);
-    gridNavigationConfigure(&status->caption.navigation, count, 10, 1, 0, 1);
-    flagsSetOrClearBit(&status->caption.navigation, 0);
-    status->inventoryDirty = 1;
+    s32 count = FUN_001688c4(status->text);
+    gridNavigationConfigure(&status->grid, count, 10, 1, 0, 1);
+    flagsSetOrClearBit(&status->grid, 0);
+    status->listActive = 1;
 }
 }

@@ -3,16 +3,14 @@
 #include "battle/btlMain.h"
 #include <stddef.h>
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlEntryLookup.h"
 
-/* No canonical IV listed-entry layout is identified by this caller. */
-struct BattleEntry;
 
 extern "C" {
-BattleEntry *btlMainFindEntryByListedId(BtlMainState *, s32);
-void btlEntryBuildSummary(void *, BtlMainState *, BattleEntry *);
+void btlEntryBuildSummary(void *, BtlMainState *, BtlEntry *);
 u32 FUN_00246134(u32, u32, s32, u32);
 void selectionCopySupportedValue(u32, u32 *);
-s32 btlEntryHasSkillCategory(BattleEntry *, u32);
+s32 btlEntryHasSkillCategory(BtlEntry *, u32);
 f32 battleGetPassiveAffinityMultiplier(u32, u32);
 
 f32 FUN_003bd1d8(u32 listedId, u32 request)
@@ -32,7 +30,7 @@ f32 FUN_003bd1d8(u32 listedId, u32 request)
         offsetof(QueryStorageIV, remainingCapacity) == 6 ? 1 : -1];
 
     BtlMainState *mainState = btlGetMainState();
-    BattleEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), listedId);
+    BtlEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), listedId);
     QueryStorageIV query;
     btlEntryBuildSummary(&query, btlGetMainState(), entry);
 

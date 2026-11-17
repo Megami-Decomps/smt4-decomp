@@ -3,7 +3,7 @@
 #include "battle/btlAction.h"
 #include "battle/btlUnit.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 
 extern "C" u32 btlClearActionMarksAndSelectTarget(BtlMainState **owner, BtlUnit *target, s32 selection)
 {

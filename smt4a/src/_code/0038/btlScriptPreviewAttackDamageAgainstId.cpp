@@ -37,23 +37,23 @@ u32 btlScriptPreviewAttackDamageAgainstId(void)
             u64 flags = entry->flags;
             if ((flags & g_battleMaskPresets.eligibility.active) != 0 &&
                 (flags & g_battleMaskPresets.eligibility.excluded) == 0 &&
-                (flags & g_battleMaskPresets.eligibility.required) != 0 && entry->id == id) {
+                (flags & g_battleMaskPresets.eligibility.required) != 0 && entry->data.id == id) {
                 if (entry != NULL) {
-                    s16 oldKind = entries->attackSelection.kind;
-                    s16 oldVariant = entries->attackSelection.variant;
-                    entries->attackSelection.kind = 1;
-                    entries->attackSelection.variant = 1;
+                    s16 oldKind = entries->data.actionKind;
+                    s16 oldVariant = entries->data.actionArg;
+                    entries->data.actionKind = 1;
+                    entries->data.actionArg = 1;
                     BattleAttackPreview attack;
                     btlEntryBuildSummary(&attack, battle, entries);
                     u32 statKind = 0;
                     kindIdStore(attack.data.kind, &statKind);
                     s32 sign = attack.data.sign;
-                    f32 affinity = static_cast<f32>(static_cast<s32>(entry->encodedStats.values[statKind] & 0x3ff)) * 0.01f;
-                    result = FUN_004c58e0(NULL, entries->attackSelection.variant,
-                        entries->unitIndex, entry->unitIndex, attack.data.modifier, 1, 0,
+                    f32 affinity = static_cast<f32>(static_cast<s32>(entry->data.values[statKind] & 0x3ff)) * 0.01f;
+                    result = FUN_004c58e0(NULL, entries->data.actionArg,
+                        entries->ids[0], entry->ids[0], attack.data.modifier, 1, 0,
                         1.0f, affinity) * sign;
-                    entries->attackSelection.kind = oldKind;
-                    entries->attackSelection.variant = oldVariant;
+                    entries->data.actionKind = oldKind;
+                    entries->data.actionArg = oldVariant;
                 }
                 break;
             }

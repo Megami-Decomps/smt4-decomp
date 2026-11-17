@@ -1,14 +1,15 @@
-#include "common.h"
+#include "map/MapIfGlobals.h"
 
 extern "C" {
 
-extern void *g_mapIf;
 void asdMemFree(void *block);
+
+/* Frees the map interface's state block and clears its pointer. */
 void mapIfFree(u32 handle)
 {
-    if (g_mapIf != NULL) {
-        asdMemFree(g_mapIf);
-        g_mapIf = NULL;
+    if (g_mapIf.state != NULL) {
+        asdMemFree(g_mapIf.state);
+        g_mapIf.state = NULL;
     }
 }
 

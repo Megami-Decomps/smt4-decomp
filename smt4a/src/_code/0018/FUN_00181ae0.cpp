@@ -2,11 +2,12 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "font/FontStringReader.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 
 int FUN_0019af70(...);
-int renderCtxBindTextureMode(unsigned int, unsigned int, int);
+int renderCtxBindTextureMode(RenderCtxA *, unsigned int, int);
 int materialUploadChangedParameters(...);
 int nwFontGlyphInit(unsigned char [4]);
 int VectorSignedToFloat(...);
@@ -32,7 +33,6 @@ typedef struct {
     unsigned int sp98; /* 0x98: local_98 */
 } param_4_stack;
 
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
 extern int DAT_005b3bc0; /* 0x5b3bc0 */
 extern unsigned int *DAT_005b3bc4; /* 0x5b3bc4 */
 

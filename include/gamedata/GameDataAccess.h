@@ -25,9 +25,6 @@ u32 gameDataGetSmallBlock(void);
 
 u32 gameFlagEntryGetBit(u32 id, u32 which);
 
-/* The flag banks of the game-data table; callers view them as the sub-structure they use. */
-struct FlagWorkBanks *gameFlagsGetBlock(void);
-
 int gameGetOptions(void);
 
 u8 *gameGetPlayerName(void);

@@ -24,8 +24,8 @@ u32 scrCommBattleGroupHpPercentAtMost()
         if ((g_btlCandidateMasks.unavailable & entry->flags) == 0 &&
             (g_btlCandidateMasks.required & entry->flags) != 0 &&
             (g_btlCandidateMasks.excluded & entry->flags) == 0) {
-            s32 hp = entry->hp;
-            s32 maxHp = entry->maxHp;
+            s32 hp = entry->data.hp;
+            s32 maxHp = entry->data.maxHp;
             totalHp += hp;
             totalMaxHp += maxHp;
         }
@@ -33,8 +33,8 @@ u32 scrCommBattleGroupHpPercentAtMost()
     if (btlGetMainState()->unk4cd1) {
         const BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL) {
-            s32 hp = entry->hp;
-            s32 maxHp = entry->maxHp;
+            s32 hp = entry->data.hp;
+            s32 maxHp = entry->data.maxHp;
             totalHp += hp;
             totalMaxHp += maxHp;
         }

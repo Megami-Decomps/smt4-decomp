@@ -1,9 +1,8 @@
 /* Button-help text setter: stores the color and splits the text at its first newline into two display lines. */
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 #include <string.h>
 
 extern "C" {
-extern ButtonHelpGlobalsA g_buttonHelp;
 void *rt_memcpy(void *destination, const void *source, u32 size);
 
 // Set the button-help text color and split at most two newline-delimited display lines.

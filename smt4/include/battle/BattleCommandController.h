@@ -3,7 +3,7 @@
 
 #include "common.h"
 #include <stddef.h>
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 
 struct BtlActionRecord;
 

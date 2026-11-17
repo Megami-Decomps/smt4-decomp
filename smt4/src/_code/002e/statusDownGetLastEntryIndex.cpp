@@ -1,9 +1,8 @@
 #include "status/StatusDown.h"
 
 extern "C" {
-extern StatusDownState *g_statusDown;
 
-extern int FUN_0029ee54(u8 *block);
+extern int FUN_0029ee54(ScrollSelection *list);
 
 int statusDownGetLastEntryIndex(void)
 {
@@ -12,7 +11,7 @@ int statusDownGetLastEntryIndex(void)
     if (g_statusDown == NULL) {
         return 0;
     }
-    count = FUN_0029ee54(g_statusDown->list);
+    count = FUN_0029ee54(&g_statusDown->list);
     return count - 1;
 }
 

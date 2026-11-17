@@ -1,8 +1,6 @@
 /* NON_MATCHING: fusion-pair array base and packed-ID extraction use different address registers. */
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 #include "shard/W6_W6Match5_DevilSort.h"
-
-extern "C" UniteWork *g_unite;
 
 static inline s32 compareFusionDemons(u16 first, u16 second)
 {

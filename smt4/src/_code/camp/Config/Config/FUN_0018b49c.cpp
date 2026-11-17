@@ -2,6 +2,7 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "code/Code0029_VariantB.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 // Title/menu scene: the draw-state ring the config screen writes into.
 struct TitleScene {
@@ -11,12 +12,6 @@ struct TitleScene {
     u8 dirty;               // 0x12c4
     u8 unk12c5[3];
     void (*flush)(s32 state);   // 0x12c8
-};
-
-struct LayoutEntry {
-    u8 unk00[8];
-    s16 x;                  // 0x08
-    s16 y;                  // 0x0a
 };
 
 struct ConfigMenu {
@@ -33,7 +28,6 @@ extern TitleScene* g_titleScene;
 
 s32 resourceRunOperationIfUnblocked(ConfigMenu* menu);
 void texDrawCompositeSprite(s32 a, s32 b, s32 c, s32 x, s32 y, s32 d);
-LayoutEntry* asdTMTexTableEntryAt(u32 group, u32 index);
 s32 packNibblesAndByte(u32 a, u32 b, u32 c);
 s32 gameFlagIsSet(u32 flag);
 u32 dataTableGet(u32 table, u32 arg);
@@ -66,7 +60,7 @@ void FUN_0018b49c(s32 x, s32 y)
     listCursorGetRowIfUnblocked(menu);
     texDrawCompositeSprite(2, 0x2f, 0, x, y, 0xb);
     u32 color = 0xe09800ff;
-    LayoutEntry* frame = asdTMTexTableEntryAt(0x2f, 0x20);
+    TextureTableEntryIV* frame = asdTMTexTableEntryAt(0x2f, 0x20);
     s32 rowX = frame->x + x;
     s32 rowY = frame->y + y;
     setDrawState(packNibblesAndByte(6, 1, 0));
@@ -87,7 +81,7 @@ void FUN_0018b49c(s32 x, s32 y)
     u32 count = dataTableGetCount(table);
     if (variant < count && (entries + variant * 0x80) != NULL) {
         u8* entry = entries + variant * 0x80;
-        LayoutEntry* label = asdTMTexTableEntryAt(0x2f, 0x1a);
+        TextureTableEntryIV* label = asdTMTexTableEntryAt(0x2f, 0x1a);
         u8 text[64];
         textFormatBuffer(text, LAB_0018b754, entry);
         textDrawString(2, color, text, label->x, (f32)(frame->x + label->x + x), (f32)(frame->y + label->y + y));

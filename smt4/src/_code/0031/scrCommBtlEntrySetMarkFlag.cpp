@@ -1,6 +1,6 @@
 #include "common.h"
 #include "battle/BtlMainAccess.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/BtlGlobals.h"
 
 extern "C" {

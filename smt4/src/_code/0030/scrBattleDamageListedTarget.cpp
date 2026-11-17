@@ -1,4 +1,4 @@
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
@@ -23,8 +23,8 @@ u32 scrBattleDamageListedTarget(void)
     ScriptUnit *source = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     BtlEntry *target = btlMainFindEntryByListedId(btlGetMainState(), targetId);
     FUN_00250720(btlGetMainState());
-    BtlActionRecord *action = &btlGetMainState()->actions[target->members.ids[0]];
-    FUN_002551ac(0, source, action, 0, amount, -1, -1, target->hp, target->maxHp,
+    BtlActionRecord *action = &btlGetMainState()->actions[target->ids[0]];
+    FUN_002551ac(0, source, action, 0, amount, -1, -1, target->data.hp, target->data.maxHp,
                  0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1);
     btlQueueKeyedScalarReflectAction(0, source, 0x1000185, 0, 0, 0, 0);
     return 1;

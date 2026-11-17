@@ -2,13 +2,13 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 int FUN_0029a17c(int, int, int, int, int);
 int effectRenderTransformedInstance(int);
 int gxResetColorQuadToWhite(void);
-int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int FUN_003b65a4(int, int, int, int, int, int, int, int, int, int);
 int VectorSignedToFloat(int, int);
@@ -103,16 +103,16 @@ void FUN_003b5f30(int param_1,int param_2,int param_3)
         if (temp_v12 != 2) {
           if (temp_v12 != 4) {
             if (temp_v12 == 6) {
-              DAT_0044dc38 = asdTMTexTableEntryAt(0x28,0x5f);
+              DAT_0044dc38 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x28,0x5f));
             }
           }
           else {
-            DAT_0044dc38 = asdTMTexTableEntryAt(0x28,0x66);
+            DAT_0044dc38 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x28,0x66));
             DAT_0044dc3c = 0;
           }
         }
         else {
-          DAT_0044dc38 = asdTMTexTableEntryAt(0x28,100);
+          DAT_0044dc38 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x28,100));
           DAT_0044dc3c = 0;
         }
       }
@@ -201,7 +201,7 @@ void FUN_003b5f30(int param_1,int param_2,int param_3)
           temp_v3 = vec2GetYInt(temp_v9 + 0xac);
           temp_v1 = temp_v1 + temp_v3;
           if (*(char *)(param_1 + temp_v8 + 0xd4fe) != '\0') {
-            temp_v3 = asdTMTexTableEntryAt(0x28,temp_v7 + 0x68);
+            temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x28,temp_v7 + 0x68));
             temp_v2 = g_titleScene;
             piVar12 = (int *)(g_titleScene + 0x130c);
             temp_v9 = piVar12[*piVar12 + 2];
@@ -255,7 +255,7 @@ void FUN_003b5f30(int param_1,int param_2,int param_3)
           else if ((0 < *(short *)(param_1 + temp_v8 * 2 + 0xd49a)) ||
                   ((int)*(char *)(param_1 + temp_v8 + 0xd530) < (int)(unsigned int)*(unsigned char *)(temp_v2 + 0x48)))
           {
-            temp_v2 = asdTMTexTableEntryAt(0x28,temp_v7 + 0x68);
+            temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x28,temp_v7 + 0x68));
             texDrawTableEntryAtStoredOrigin(2,0x28,99,*(short *)(temp_v2 + 8) + temp_v5,*(short *)(temp_v2 + 10) + temp_v1,0xce
                         );
           }

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct PanelSizeObjectA { u8 unk00[0x18]; u16 width, height; };
 struct IndexedPanelSizeWorkA {
@@ -15,7 +16,6 @@ struct IndexedPanelSizeWorkA {
     u8 unk48c[0x1420];
     PanelSizeObjectA overlay;
 };
-struct SpriteSizeRecordA { u8 unk00[8]; s16 width, height; };
 struct SpriteIndices2 { u32 ids[2]; };
 struct SpriteIndices3 { u32 ids[3]; };
 struct SpriteIndices4 { u32 ids[4]; };
@@ -34,14 +34,13 @@ struct PanelSizePairIndexSetsA {
 extern "C" {
 extern const PanelSizeIndexSetsA DAT_00530a4c;
 extern const PanelSizePairIndexSetsA DAT_0052fe4c;
-const SpriteSizeRecordA *asdTMTexTableEntryAt(u32 table, u32 sprite);
 void pairSetHalves(PanelSizeObjectA *object, s32 width, s32 height);
 
 // Apply the sprite dimensions chosen for a two-, three- or four-column panel.
 void uiApplyIndexedPanelSpriteSizes(IndexedPanelSizeWorkA *work)
 {
-    const SpriteSizeRecordA *first = NULL;
-    const SpriteSizeRecordA *second = NULL;
+    const TextureTableEntryIV *first = NULL;
+    const TextureTableEntryIV *second = NULL;
     if (work->kind == 11) {
         switch (work->columns) {
         case 2: {
@@ -69,8 +68,8 @@ void uiApplyIndexedPanelSpriteSizes(IndexedPanelSizeWorkA *work)
     } else if (work->kind == 20) {
         return;
     }
-    pairSetHalves(&work->first, first->width, first->height);
-    pairSetHalves(&work->overlay, first->width, first->height);
-    pairSetHalves(&work->second, second->width, second->height);
+    pairSetHalves(&work->first, first->x, first->y);
+    pairSetHalves(&work->overlay, first->x, first->y);
+    pairSetHalves(&work->second, second->x, second->y);
 }
 }

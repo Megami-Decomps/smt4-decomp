@@ -17,7 +17,7 @@ u32 FUN_003b892c(void)
         if ((entry->flags & g_battleMaskPresets.eligibility.active) != 0 &&
             (entry->flags & g_battleMaskPresets.eligibility.excluded) == 0 &&
             (entry->flags & g_battleMaskPresets.eligibility.required) != 0 &&
-            entry->selection.marked != 0 && entry->id == id) {
+            entry->data.marked != 0 && entry->data.id == id) {
             if (state->roster[i].classification.category >= 3) {
                 scrSetResult(0);
                 return 0;

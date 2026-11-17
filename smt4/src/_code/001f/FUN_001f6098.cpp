@@ -1,5 +1,5 @@
 /* NON_MATCHING: initial global/ID loads are reordered and first/second index registers exchanged; all 75 instructions otherwise agree. */
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 
 static __inline s32 compareFusionComponent(u16 leftId, u16 rightId)
@@ -15,7 +15,6 @@ static __inline s32 compareFusionComponent(u16 leftId, u16 rightId)
     return difference;
 }
 extern "C" {
-extern UniteWork *g_unite;
 
 // Sort fusion pairs by score, then each component's race, descending level and ID.
 s32 FUN_001f6098(const u16 *left, const u16 *right)

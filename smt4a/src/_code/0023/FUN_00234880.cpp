@@ -4,13 +4,8 @@
 #include "gamedata/DataTable.h"
 #include "code/Code0015.h"
 #include "gamedata/SaveSlotTable.h"
+#include "map/PopupStateA.h"
 
-struct PopupState {
-    s32 state;      // 0x00
-    s32 arg;        // 0x04
-    u8 unk08[0x0c];
-    s32 message;    // 0x14
-};
 
 struct SaveSlot {
     u8 unk00[0x12c];
@@ -29,7 +24,6 @@ struct RatioMessage {
 
 extern "C" {
 
-extern PopupState* g_popupState;
 
 s32 gameFlagIsSet(s32 flag);
 s32 randRange(s32 range);
@@ -39,7 +33,7 @@ s32 gameSlotTableFindFree(void);
 s32 gameGetSlotRecord(s32 slot);
 s32 recordGetScaledMaximum(s32 record);
 
-s32 popupSelectWeightedMessage(s32 kind, s32 id);
+const char *popupSelectWeightedMessage(s32 kind, s32 id);
 
 // Opens the popup for the first ratio message matching the selected slot.
 void FUN_00234880(void)
@@ -85,7 +79,7 @@ void FUN_00234880(void)
         if (row->kind == 8) {
             if (threshold <= percent) {
                 g_popupState->state = 5;
-                g_popupState->arg = 0;
+                g_popupState->timer = 0;
                 if (special) {
                     g_popupState->message = popupSelectWeightedMessage(8, 0xad);
                     return;
@@ -95,7 +89,7 @@ void FUN_00234880(void)
             }
         } else if (percent <= threshold) {
             g_popupState->state = 5;
-            g_popupState->arg = 0;
+            g_popupState->timer = 0;
             if (special) {
                 g_popupState->message = popupSelectWeightedMessage(9, 0xad);
                 return;

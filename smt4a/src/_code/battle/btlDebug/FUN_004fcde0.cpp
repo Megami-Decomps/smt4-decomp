@@ -17,7 +17,7 @@ extern BattleReflectMarkingState DAT_00573c08;
 u32 FUN_004fcde0(s32 actor, u32 options, BtlCombatantEntryA* combatant)
 {
     for (s32 index = 0; index < 109; ++index) {
-        s16 selected = combatant->indexView.selectionIndex;
+        s16 selected = combatant->selectionIndex;
         if (selected >= 0 && selected < 109) {
             BattleRosterRecordA* roster = &btlGetMainState()->roster[index];
             if (roster != NULL && (roster->motion.flags & 1) && (roster->motion.flags & 2) &&

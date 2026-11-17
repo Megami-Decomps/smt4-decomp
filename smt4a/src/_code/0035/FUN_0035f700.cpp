@@ -20,23 +20,23 @@ u32 FUN_0035f700(void)
     s32 percentage = scrGetArg(0);
     BtlMainStateA *battle = btlGetMainState();
     BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask();
-    s32 damage = entry->maxHp * percentage / 100;
+    s32 damage = entry->data.maxHp * percentage / 100;
     ScriptUnit *source = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
     bool defeated = false;
     if (jobIsValid(battle->auxiliaryTask.job) != 0) {
-        if (entry->hp <= damage)
+        if (entry->data.hp <= damage)
             defeated = true;
-    } else if (entry->hp <= damage) {
-        damage = entry->hp - 1;
+    } else if (entry->data.hp <= damage) {
+        damage = entry->data.hp - 1;
     }
-    if (entry->unitIndex >= 0) {
+    if (entry->ids[0] >= 0) {
         btlSlotManagerResetStates(battle);
-        FUN_004fc094(0, source, 0, &battle->roster[entry->unitIndex],
-            0, damage, -1, -1, entry->hp, entry->maxHp,
+        FUN_004fc094(0, source, 0, &battle->roster[entry->ids[0]],
+            0, damage, -1, -1, entry->data.hp, entry->data.maxHp,
             0, 0, defeated, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1);
         btlQueueActionMessage(0, source, 0x01000257, 0, 0, 0, 0);
         if (defeated)
-            btlQueueKeyedScalarReflectAction(25, source, &battle->roster[entry->unitIndex], 0);
+            btlQueueKeyedScalarReflectAction(25, source, &battle->roster[entry->ids[0]], 0);
     }
     return 1;
 }

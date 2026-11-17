@@ -24,8 +24,8 @@ u32 scrCommBtlGroupUnitSlotKindIsThree(void)
     for (index = start; index < start + count; index++) {
         BtlEntry *unit = &btlGetMainState()->entries[index];
 
-        if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && unit->id == id
-            && unit->values[slot] >> 10 == 3) {
+        if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && unit->data.id == id
+            && unit->data.values[slot] >> 10 == 3) {
             scrSetResult(1);
             return 1;
         }
@@ -35,7 +35,7 @@ u32 scrCommBtlGroupUnitSlotKindIsThree(void)
 
         btlGetMainState();
         active = btlMainFindActiveEntry();
-        if (active != NULL && active->id == id && active->values[slot] >> 10 == 3) {
+        if (active != NULL && active->data.id == id && active->data.values[slot] >> 10 == 3) {
             scrSetResult(1);
             return 1;
         }

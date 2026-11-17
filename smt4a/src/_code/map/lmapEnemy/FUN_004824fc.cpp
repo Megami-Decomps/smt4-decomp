@@ -1,4 +1,5 @@
 #include "common.h"
+#include "Model/MoriModelManager.h"
 
 struct Vec3f {
     /* 0x0 */ f32 x;
@@ -27,12 +28,9 @@ struct MapEnemy {
 
 extern "C" {
 
-extern void *g_handleRegistry;
-
 void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 EnemyModelList *modelListInit(void *memory);
 void moriModelContentCopyBody(EnemyModelList *list, void *source, u32 flags);
-void handleRegistryRegisterObject(void *registry, EnemyModel *model);
 void controllerSetDestination(EnemyModel *model, Vec3f *position);
 void controllerSetRotationEulerDegrees(EnemyModel *model, f32 x, f32 y, f32 z);
 void controllerSetPosition(EnemyModel *model, f32 x, f32 y, f32 z);

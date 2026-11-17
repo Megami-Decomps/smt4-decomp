@@ -1,4 +1,4 @@
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "shard/W6_W6Match5_DevilSort.h"

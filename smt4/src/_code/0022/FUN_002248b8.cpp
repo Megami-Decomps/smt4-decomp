@@ -1,9 +1,9 @@
 #include "camp/RenderCtx.h"
 #include "shard/JobWork.h"
 #include "code/Code0028.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 s32 renderCtxPackPassFlags(u32 mode, u32 flags);
 s32 packNibblesAndByte(u32 first, u32 second, u32 value);
 void effectNodeUpdatePlacedChildren(u32 handle);

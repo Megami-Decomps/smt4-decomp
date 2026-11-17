@@ -4,12 +4,7 @@
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
 #include <string.h>
-
-struct EffectPlacement {
-    u8 unk00[8];
-    s16 x;         /* 0x08 */
-    s16 y;         /* 0x0A */
-};
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -17,7 +12,6 @@ extern const char DAT_0052d134[]; /* "<pc 0>" */
 
 void sysMemClear(void *buffer, u32 bytes);
 void efctSetSpeed(f32 speed);
-EffectPlacement *asdTMTexTableEntryAt(u32 table, u32 id);
 s32 FUN_004038e0(u32 unused, u32 kind);
 void drawSetColorFromRGBA8(u32 rgba);
 void gxResetColorQuadToWhite(void);
@@ -31,7 +25,7 @@ void FUN_00404050(u32 effect, f32 speed, u32 handle, s32 x, s32 y, s32 useFirstS
 {
     PackageSelectableRecord *entry = contentFindRecordById((u16)handle);
     char text[128];
-    EffectPlacement *placement;
+    TextureTableEntryIV *placement;
     s32 frameId;
     s32 framed;
     s32 frameX;

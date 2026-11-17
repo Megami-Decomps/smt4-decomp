@@ -1,6 +1,6 @@
 #include "common.h"
 #include "battle/BtlMainAccess.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "script/ScriptArgs.h"
 
@@ -24,7 +24,7 @@ s32 FUN_002f0ee0(void)
     for (s32 i = first; i < first + count; i++) {
         BtlEntry *entry = &btlGetMainState()->entries[i];
         if ((entry->flags & 0x10) == 0 && (entry->flags & 1) != 0 && (entry->flags & 0x40) == 0
-            && entry->values[slot] >> 10 == 2) {
+            && entry->data.values[slot] >> 10 == 2) {
             scrSetResult(1);
             return 1;
         }
@@ -32,7 +32,7 @@ s32 FUN_002f0ee0(void)
     if (btlGetMainState()->hasActiveEntry != 0) {
         btlGetMainState();
         BtlEntry *entry = btlMainFindActiveEntry();
-        if (entry != NULL && entry->values[slot] >> 10 == 2) {
+        if (entry != NULL && entry->data.values[slot] >> 10 == 2) {
             scrSetResult(1);
             return 1;
         }

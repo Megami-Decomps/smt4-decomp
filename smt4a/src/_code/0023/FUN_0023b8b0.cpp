@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -53,7 +54,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
-extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: debugDrawText. */
 extern int saveGetUserSettingsBlock(void);
 /* Supplied declaration required: FUN_00285b58. */
@@ -236,7 +236,7 @@ unsigned int FUN_0023b8b0(void)
     if (temp_v11 && temp_v6 != 0) {
       texDrawTableEntryAtStoredOrigin(2,0x1a,0x1d9,0,0,0xfb);
       texDrawCompositeSprite(2,0x1a,0x13,0,0,0xfb);
-      temp_v2 = asdTMTexTableEntryAt(0x1a,0x1dc);
+      temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x1dc));
       VectorSignedToFloat((int)*(short *)(temp_v2 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v2 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
       textDrawString(4,0x57d8ffff,&LAB_0023c044);

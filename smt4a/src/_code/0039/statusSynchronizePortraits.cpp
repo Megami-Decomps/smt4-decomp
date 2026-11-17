@@ -1,15 +1,8 @@
-#include "shard/W6_W6Match1_PartySlot.h"
+#include "gamedata/SaveSlotRecord.h"
+#include "gamedata/SaveSlotTable.h"
 
-namespace {
-struct PortraitSlotTableView {
-    u8 prefix[0x1C9F];
-    s8 active[4];
-};
-}
 extern "C" {
-PortraitSlotTableView *gameGetSlotTable();
-PartySlotA *gameGetSlotRecord();
-PartySlotA *btlMainGetUnk14();
+SlotRecordA *btlMainGetUnk14();
 void btlCommandMenuEnterMode(void *work, s32 state, s32 initial);
 void statusBustUpPortraitAcquire(s16 id, s32 enabled);
 void statusBustUpPortraitRelease(s16 id, s32 enabled);
@@ -38,13 +31,16 @@ void statusSynchronizePortraits(void *work, s32 mode)
         if (index == 0 && mode == 0) {
             id = (u32)-1;
         } else if (index == 0 && mode == 1) {
-            PartySlotA *slot = btlMainGetUnk14();
+            SlotRecordA *slot = btlMainGetUnk14();
             if (slot != NULL)
-                id = slot->unk62;
-        } else if (gameGetSlotTable()->active[index] >= 0) {
-            PartySlotA *slot = gameGetSlotRecord();
-            if (slot != NULL)
-                id = slot->unk62;
+                id = slot->id;
+        } else {
+            s32 entry = gameGetSlotTable()->reserve[index - 1];
+            if (entry >= 0) {
+                SlotRecordA *slot = gameGetSlotRecord(entry);
+                if (slot != NULL)
+                    id = slot->id;
+            }
         }
         u32 *portrait = &view->portraits[index];
         if (*portrait != id) {

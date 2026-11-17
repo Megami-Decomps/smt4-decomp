@@ -1,9 +1,9 @@
 #include "battle/Talk/btlTalkBustUp.h"
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 extern BtlTalkBustUp *g_btlTalkBustUp;
-extern RenderCtx *g_titleScene;
 void renderCtxSelectStereoLayout(RenderCtx *);
 s32 renderCtxPackPassFlags(u32, u32);
 f32 renderCtxCalculateStereoParallax(RenderCtx *, f32);

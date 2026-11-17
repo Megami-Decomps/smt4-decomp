@@ -1,7 +1,6 @@
 #include "status/StatusDown.h"
 
 extern "C" {
-extern StatusDownState *g_statusDown;
 
 int timerStart(void *timer, s32 arg0, s32 arg1);
 int ifTouchRegionRemove(void);
@@ -15,17 +14,17 @@ void FUN_0029bd4c(void)
     s32 previous;
     s32 i;
 
-    if (screen->state == 0) {
+    if (screen->track.state == 0) {
         return;
     }
-    timerStart(screen->timer, 2, 0);
+    timerStart(screen->sprites, 2, 0);
     status = g_statusDown;
-    status->unk40C = 0;
-    previous = status->state;
-    status->state = 2;
-    status->previousState = previous;
-    screen->unk408 = 0;
-    screen->unk3FC = 0;
+    status->stateTimer = 0;
+    previous = status->track.state;
+    status->track.state = 2;
+    status->track.previous = previous;
+    screen->nextState = 0;
+    screen->tab = 0;
     for (i = 0; i < status->touchRegionCount; i++) {
         ifTouchRegionRemove();
     }

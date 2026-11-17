@@ -1,12 +1,7 @@
-#include "common.h"
+#include "font/InfoWinA.h"
 
 extern "C" {
 
-typedef struct Scene {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s32 state;
-} Scene;
-extern Scene *g_infoWin;
 
 /* Returns 1 when the scene state is 1, 2, 3 or 4. */
 u32 dialogIsActive(void)

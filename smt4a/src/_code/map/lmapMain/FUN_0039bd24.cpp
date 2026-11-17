@@ -9,23 +9,7 @@ struct MapTransitionRecord {
     /* 0x08 */ s16 z;
     /* 0x0A */ s16 heading;
 };
-struct MapTransitionChoices {
-    /* 0x000 */ u8 unk000[0x178];
-    /* 0x178 */ s32 firstMap;
-    /* 0x17C */ u32 firstArea;
-    /* 0x180 */ u32 firstKind;
-    /* 0x184 */ MapVector firstPosition;
-    /* 0x190 */ f32 firstHeading;
-    /* 0x194 */ f32 firstTargetHeading;
-    /* 0x198 */ s32 secondMap;
-    /* 0x19C */ u32 secondArea;
-    /* 0x1A0 */ MapVector secondPosition;
-    /* 0x1AC */ f32 secondHeading;
-    /* 0x1B0 */ f32 secondTargetHeading;
-    /* 0x1B4 */ u32 secondKind;
-};
 extern "C" {
-extern MapTransitionChoices DAT_005f19fc;
 s32 scrGetArg(u32 index);
 s32 table23FindRecordByKey(s32 map, u32 area, u32 object);
 const MapTransitionRecord *dataTableGetRecord23(u32 index);
@@ -44,26 +28,26 @@ u32 FUN_0039bd24(void)
     s32 index = table23FindRecordByKey(firstMap, firstArea, firstObject);
     if (index != -1) {
         const MapTransitionRecord *record = dataTableGetRecord23(index);
-        DAT_005f19fc.firstKind = record->kind;
-        DAT_005f19fc.firstPosition.x = record->x;
-        DAT_005f19fc.firstPosition.y = record->y;
-        DAT_005f19fc.firstPosition.z = record->z;
-        DAT_005f19fc.firstHeading = record->heading;
-        DAT_005f19fc.firstTargetHeading = record->heading;
-        DAT_005f19fc.firstMap = firstMap;
-        DAT_005f19fc.firstArea = firstArea;
+        g_gameState.savedObjectId = record->kind;
+        g_gameState.savedPosition.x = record->x;
+        g_gameState.savedPosition.y = record->y;
+        g_gameState.savedPosition.z = record->z;
+        g_gameState.savedHeading = record->heading;
+        g_gameState.savedHeadingCopy = record->heading;
+        g_gameState.savedMapId = firstMap;
+        g_gameState.savedAreaId = firstArea;
     }
     index = table23FindRecordByKey(secondMap, secondArea, secondObject);
     if (index != -1) {
         const MapTransitionRecord *record = dataTableGetRecord23(index);
-        DAT_005f19fc.secondPosition.x = record->x;
-        DAT_005f19fc.secondKind = record->kind;
-        DAT_005f19fc.secondPosition.y = record->y;
-        DAT_005f19fc.secondPosition.z = record->z;
-        DAT_005f19fc.secondHeading = record->heading;
-        DAT_005f19fc.secondTargetHeading = record->heading;
-        DAT_005f19fc.secondMap = secondMap;
-        DAT_005f19fc.secondArea = secondArea;
+        g_gameState.targetPosition.x = record->x;
+        g_gameState.targetKind = record->kind;
+        g_gameState.targetPosition.y = record->y;
+        g_gameState.targetPosition.z = record->z;
+        g_gameState.targetHeading = record->heading;
+        g_gameState.targetHeadingCopy = record->heading;
+        g_gameState.targetMapId = secondMap;
+        g_gameState.targetAreaId = secondArea;
     }
     return 1;
 }

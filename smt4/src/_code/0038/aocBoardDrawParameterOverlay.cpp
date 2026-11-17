@@ -2,6 +2,7 @@
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 #include "shard/JobWork.h"
+#include "camp/RenderCtxTitle.h"
 
 namespace {
 // The speed belongs beyond the canonical draw-owner prefix, whose size remains 0x440.
@@ -14,7 +15,6 @@ typedef char ParameterOverlayWorkSpeedOffsetCheck[
 }
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 s32 renderCtxPackPassFlags(u32 preset, u32 index);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *animation);

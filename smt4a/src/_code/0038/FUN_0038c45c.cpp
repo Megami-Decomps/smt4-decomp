@@ -18,12 +18,12 @@ u32 FUN_0038c45c(void)
             (entry->flags & g_btlCandidateMasks.required) != 0 &&
             (entry->flags & g_btlCandidateMasks.excluded) == 0) {
             if ((entry->flags & g_btlCandidateMasks.maximumSource.direct) != 0) {
-                if (entry->maxHp <= entry->record->maximum.maxHp) {
+                if (entry->data.maxHp <= entry->data.record->maximum.maxHp) {
                     scrSetResult(1);
                     return 1;
                 }
             } else if ((entry->flags & g_btlCandidateMasks.maximumSource.scaled) != 0 &&
-                       entry->maxHp <= recordGetScaledMaximum(entry->secondaryRecord)) {
+                       entry->data.maxHp <= recordGetScaledMaximum(entry->data.secondaryRecord)) {
                 scrSetResult(1);
                 return 1;
             }
@@ -31,7 +31,7 @@ u32 FUN_0038c45c(void)
     }
     if (btlGetMainState()->unk4cd1 != 0) {
         BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
-        if (entry != NULL && entry->maxHp <= recordGetScaledMaximum(entry->specialMaximum.record)) {
+        if (entry != NULL && entry->data.maxHp <= recordGetScaledMaximum(entry->data.specialRecord)) {
             scrSetResult(1);
             return 1;
         }

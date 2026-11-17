@@ -1,14 +1,13 @@
 #include "shard/JobWork.h"
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 s32 gxPackFadeKindAlphaWord(u32, f32);
 s32 renderCtxPackPassFlags(u32, u32);
 s32 packNibblesAndByte(u32, u32, u32);
 void taskRunPhase(u32);
 void renderCtxResetColorScale(RenderCtx *);
-void renderCtxSelectStereoLayout(RenderCtx *);
 
 s32 renderScopedTaskPhaseOne(u32 job)
 {

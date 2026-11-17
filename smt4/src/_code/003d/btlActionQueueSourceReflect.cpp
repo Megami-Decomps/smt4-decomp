@@ -1,24 +1,18 @@
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlEntryLookup.h"
 #include "battle/btlReflect.h"
 #include "battle/btlAction.h"
+#include "battle/BtlEntryLookup.h"
 
 extern "C" {
-
-struct BattleMember {
-    /* 0x00 */ u8 unk00[0xc];
-    /* 0x0C */ u32 id;
-};
-
-
-BattleMember *btlFindEntryBlockByMemberId(void *state, s32 memberId);
 
 /* Queues a kind-0x27 reflect action for an active source record unless one with the same argument is already queued. */
 ReflectAction *btlActionQueueSourceReflect(s32 id, u32 argument, BtlActionRecord *source)
 {
     ReflectAction *action;
     ReflectAction *next;
-    BattleMember *member;
-    void *state;
+    BtlUnitData *member;
+    BtlMainState *state;
 
     if (!(source->status & 1)) {
         return NULL;
@@ -29,12 +23,12 @@ ReflectAction *btlActionQueueSourceReflect(s32 id, u32 argument, BtlActionRecord
             return NULL;
         }
     }
-    state = static_cast<void *>(btlGetMainState());
+    state = btlGetMainState();
     action = btlQueueReflectAction(g_btlActionReflect, (s16)id, 0, argument);
     member = btlFindEntryBlockByMemberId(state, source->memberId);
     action->kind = 0x27;
     action->target = (u32)source;
-    action->first = member->id;
+    action->first = member->parts[0];
     return action;
 }
 

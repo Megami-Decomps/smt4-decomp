@@ -1,8 +1,7 @@
 /* Releases button help when its last user leaves, including outstanding touch timers. */
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 
 extern "C" {
-extern ButtonHelpGlobalsA g_buttonHelp;
 void jobStop(u32 job, s32 mode);
 void uiSpriteSelectAnim(ButtonHelpUnit *unit, s32 animation);
 void asdMemFree(void *block);

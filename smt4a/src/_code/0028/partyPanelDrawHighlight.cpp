@@ -3,15 +3,9 @@
 #include "shard/TextureDrawCall.h"
 #include "ui/PartyPanelStateA.h"
 #include "util/BitsAndBytes.h"
-
-struct PanelSpriteOrigin {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0a */ s16 y;
-};
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-PanelSpriteOrigin *asdTMTexTableEntryAt(u32 table, s32 index);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *object);
 
@@ -19,7 +13,7 @@ f32 vec2GetSpeed(const void *object);
 void partyPanelDrawHighlight(s32 index, s32 x, s32 y, u32 flags, s32 highlighted, f32 speed)
 {
     PartyPanelStateA *panel = g_partyPanel;
-    PanelSpriteOrigin *origin = asdTMTexTableEntryAt(0x11, index + 0x57);
+    TextureTableEntryIV *origin = asdTMTexTableEntryAt(0x11, index + 0x57);
     if (highlighted) {
         efctSetSpeed(vec2GetSpeed(&panel->sprites[PARTY_PANEL_SPRITE_HIGHLIGHT]) * speed);
         RenderCtxA *context = g_renderCtx;

@@ -22,8 +22,8 @@ void FUN_0047f444(u32 sound)
 
     if (selection >= 0) {
         BtlCombatantEntryA *entry = &battle->entries[selection];
-        if ((entry->flags & DAT_00573cc0.selected) != 0 && (s16)entry->id >= 0) {
-            FUN_0015f490((s16)entry->id, sound, 1, 0, 1.0f);
+        if ((entry->flags & DAT_00573cc0.selected) != 0 && (s16)entry->data.id >= 0) {
+            FUN_0015f490((s16)entry->data.id, sound, 1, 0, 1.0f);
         }
     }
 }

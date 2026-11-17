@@ -1,9 +1,8 @@
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 #include "shard/Shard0037.h"
 #include "ui/UiControl.h"
 
 extern "C" {
-extern ButtonHelpGlobalsA g_buttonHelp;
 
 extern void asdTextDrawDirectoryEntry(u32 a, s32 b, s32 c, s32 d, s32 e, s32 f, u32 g);
 

@@ -2,11 +2,11 @@
 #include "shard/W5_W5Match2_PlainData.h"
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include "shard/S1Mover.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
-extern void *g_titleScene;
 void *asdCameraGetSavedRenderPairs();
-const Matrix44 *FUN_00343318(void *owner);
+const Matrix44 *FUN_00343318(RenderCtx *owner);
 void memCopyWords(const void *source, void *destination, u32 bytes);
 void FUN_002630e0(Vec3f *out, s32 screen, void *projection, const Vec3f *position);
 f32 phaseCosInterpolate(f32 phase);

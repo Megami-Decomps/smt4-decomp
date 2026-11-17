@@ -2,10 +2,10 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "game/GameStateA.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 
-int renderCtxSelectDisplayAreaForStereoMode(...);
 int renderCtxResetColorScale(...);
 int skinObjectUpdateMatrices(...);
 int gxResetColorQuadToWhite(void);
@@ -39,7 +39,6 @@ extern unsigned char DAT_005324b8; /* 0x5324b8 */
 extern unsigned char DAT_00532500; /* 0x532500 */
 extern unsigned char DAT_00532548; /* 0x532548 */
 extern unsigned char DAT_00532590; /* 0x532590 */
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
 extern int DAT_005f1604; /* 0x5f1604 */
 extern signed char DAT_005f1622; /* 0x5f1622 */
 extern signed char DAT_005f1a5e; /* 0x5f1a5e */

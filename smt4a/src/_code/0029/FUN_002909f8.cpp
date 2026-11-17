@@ -20,17 +20,17 @@ s32 FUN_002909f8(const s32 *leftSlot, const s32 *rightSlot)
     }
     SlotRecordA *leftRecord = gameGetSlotRecord(leftIndex);
     SlotRecordA *rightRecord = gameGetSlotRecord(*rightSlot);
-    s32 difference = leftRecord->sortKey - rightRecord->sortKey;
+    s32 difference = leftRecord->level - rightRecord->level;
     if (difference != 0) {
         return difference;
     }
-    NkmBaseRecordA *leftInfo = nkmBaseGetRecord(leftRecord->entryId);
-    NkmBaseRecordA *rightInfo = nkmBaseGetRecord(rightRecord->entryId);
+    NkmBaseRecordA *leftInfo = nkmBaseGetRecord(leftRecord->id);
+    NkmBaseRecordA *rightInfo = nkmBaseGetRecord(rightRecord->id);
     difference = rightInfo->race - leftInfo->race;
     if (difference != 0) {
         return difference;
     }
-    return rightRecord->entryId - leftRecord->entryId;
+    return rightRecord->id - leftRecord->id;
 }
 
 } /* extern "C" */

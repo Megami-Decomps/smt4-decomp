@@ -1,22 +1,19 @@
-#include "ui/FrameTex.h"
-#include "shard/JobWork.h"
+#include "frame_tex/FrameTex.h"
 
 extern "C" {
 
 int asdTextureRelease(void *resource);
 int asdMemFree(void *ptr);
 
-extern FrameWork *g_frameTex;
-
-/* Releases the four resources held by the job's work area, then the work area itself. */
+/* Releases the four capture textures held by the job's work area, then the work area itself. */
 void frameTexReleaseWork(u32 job)
 {
-    FrameWork *work = (FrameWork *)jobGetWork(job);
+    FrameTexWork *work = (FrameTexWork *)jobGetWork(job);
 
-    asdTextureRelease(work->bufferA);
-    asdTextureRelease(work->surface);
-    asdTextureRelease(work->bufferB);
-    asdTextureRelease(work->bufferC);
+    asdTextureRelease(work->surfaceLeft);
+    asdTextureRelease(work->surfaceRight);
+    asdTextureRelease(work->zanSurfaceLeft);
+    asdTextureRelease(work->zanSurfaceRight);
     asdMemFree(work);
     g_frameTex = NULL;
 }

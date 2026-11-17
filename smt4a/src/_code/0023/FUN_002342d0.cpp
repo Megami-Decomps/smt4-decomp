@@ -1,13 +1,12 @@
 /* NON_MATCHING: identical except for the push helper's address computation (retail keeps index+1 in r2 and reuses r3), the load order of two float constants and the operand order of the final vmul. */
 #include "camp/RenderCtx.h"
+#include "map/MapIfGlobals.h"
 #include "camp/RenderCtxA.h"
 #include "game/GameStateA.h"
 #include "shard/TextureDrawCall.h"
-#include "map/mapIf.h"
 #include "map/mapDepart.h"
 
 extern "C" {
-extern MapIfGlobalsA g_mapIf;
 
 u32 renderCtxPackPassFlags(u32 first, u32 second);
 void efctSetSpeed(f32 speed);

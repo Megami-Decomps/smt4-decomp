@@ -1,5 +1,5 @@
 /* NON_MATCHING: control flow, frame and shared epilogue now match; id and the shifted bit mask swap r6/r7, and retail returns the shift-base 1 from r8 (`mov r0, r8`) where the build writes `mov r0, #1`. */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "util/SlotRangeSelect.h"
 #include "battle/BtlMainAccess.h"
@@ -18,14 +18,14 @@ static __inline void groupEntryBitResult(u32 id, u32 bit, u32 group)
     for (s32 i = first; i < first + count; ++i) {
         BtlEntry *entry = &btlGetMainState()->entries[i];
         if (!(entry->flags & 0x10) && (entry->flags & 1) && !(entry->flags & 0x40) &&
-            entry->id == id && (entry->groupMask & (1u << bit))) {
+            entry->data.id == id && (entry->data.statusFlags & (1u << bit))) {
             scrSetResult(1);
             return;
         }
     }
     if (btlGetMainState()->hasActiveEntry) {
         BtlEntry *entry = btlMainFindActiveEntry(btlGetMainState());
-        if (entry && (entry->groupMask & (1u << bit))) {
+        if (entry && (entry->data.statusFlags & (1u << bit))) {
             scrSetResult(1);
             return;
         }

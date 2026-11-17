@@ -1,6 +1,7 @@
 /* NON_MATCHING: matrix element store scheduling differs (retail stores the -1.0/-0.0 pair separately and the constants are loaded in another order) */
 #include "camp/RenderCtx.h"
 #include "code/Code0028.h"
+#include "camp/RenderCtxTitle.h"
 
 /* A 4x4 matrix stored row by row. */
 struct Matrix44 {
@@ -41,7 +42,6 @@ struct TitleLogoRequest {
 };
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 void FUN_002f5288(ScreenHolder *holder, s32 mode);
 void FUN_00343324(RenderCtx *context, const Matrix44 *projection, s32 mode);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);

@@ -1,5 +1,5 @@
 /* NON_MATCHING: exact 92-row control/instruction sequence except work base R7 and +0x100 view R8 are swapped from retail; alternate allocation/optimization candidate. */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "gamedata/FlagBitTests.h"
 #include "gamedata/UnitRecordAccess.h"
 

@@ -18,7 +18,7 @@ u32 FUN_0038bfec(void)
         if ((entry->flags & g_btlCandidateMasks.unavailable) &&
             (entry->flags & g_btlCandidateMasks.required) &&
             !(entry->flags & g_btlCandidateMasks.excluded) &&
-            entry->id == id && entry->encodedStats.values[stat] >> 10 == 2) {
+            entry->data.id == id && entry->data.values[stat] >> 10 == 2) {
             scrSetResult(1);
             return 1;
         }

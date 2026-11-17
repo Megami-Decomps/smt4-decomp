@@ -39,10 +39,10 @@ void FUN_0033b1ac(BtlMainState *battle, s32 listedId)
                     s16 firstId = turns->turnOrder.order[first];
                     const BtlEntry *firstUnit = &turns->entries[firstId];
                     const BtlEntry *secondUnit = &turns->entries[secondId];
-                    s16 firstSpeed = firstUnit->speed + firstUnit->speedBonus;
-                    s16 secondSpeed = secondUnit->speed + secondUnit->speedBonus;
+                    s16 firstSpeed = firstUnit->data.agility + firstUnit->data.speedBonus;
+                    s16 secondSpeed = secondUnit->data.agility + secondUnit->data.speedBonus;
                     if (firstSpeed < secondSpeed ||
-                        (firstSpeed == secondSpeed && secondUnit->members.ids[0] < firstUnit->members.ids[0])) {
+                        (firstSpeed == secondSpeed && secondUnit->ids[0] < firstUnit->ids[0])) {
                         turns->turnOrder.order[first] = secondId;
                         turns->turnOrder.order[second] = firstId;
                     }

@@ -1,4 +1,4 @@
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 
 struct BattleMatchFlag {
@@ -21,13 +21,13 @@ extern "C" u32 btlQueryMatchingFlagColumn(const BtlMainState *battle, const BtlE
             if (!(record.categories & 2) || record.id != -1)
                 continue;
         } else if (entry->flags & 8) {
-            if (!(record.categories & 8) || record.id != entry->id)
+            if (!(record.categories & 8) || record.id != entry->data.id)
                 continue;
         } else if (entry->flags & 0x10) {
-            if (!(record.categories & 0x10) || record.id != entry->id)
+            if (!(record.categories & 0x10) || record.id != entry->data.id)
                 continue;
         } else if (entry->flags & 0x20) {
-            if (!(record.categories & 0x20) || record.id != entry->id)
+            if (!(record.categories & 0x20) || record.id != entry->data.id)
                 continue;
         } else {
             continue;

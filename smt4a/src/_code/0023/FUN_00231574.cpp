@@ -1,16 +1,15 @@
 /* NON_MATCHING: eight equality comparisons use reversed CMP operands; control flow and instruction count match. */
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
-extern UniteWork* g_unite;
 void statusBustUpPortraitRelease(s32 demonId, s32 bank);
 void statusBustUpPortraitAcquire(s32 demonId, s32 bank);
 
 // Keep the four preview portrait slots synchronized with the current fusion selection.
 void FUN_00231574(void)
 {
-    UniteWork* work = g_unite;
+    UniteWorkA* work = g_unite;
     s32 selected = resourceRunEmbeddedOperationIfUnblocked(work->portraitSelectionA.cursor);
     if (work->menu.mode == 2) {
         selected = resourceRunEmbeddedOperationIfUnblocked(work->portraitSelectionA.alternateCursor);

@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -43,7 +44,6 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
-extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: pairSetSecondResetFirst. */
 /* Supplied declaration required: FUN_002199fc. */
 /* Supplied declaration required: fadeObjectResetIfActive. */
@@ -171,7 +171,7 @@ unsigned int FUN_003da030(void)
     if (*(int *)(temp_v3 + 4) < 3) {
       temp_v2 = vec2GetXInt(temp_v3 + 0x590);
       temp_v3 = vec2GetYInt(temp_v3 + 0x590);
-      temp_v1 = asdTMTexTableEntryAt(0x1a,0x21d);
+      temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x21d));
       VectorSignedToFloat(*(short *)(temp_v1 + 10) + temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(*(short *)(temp_v1 + 8) + temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
       textDrawString(4,0x57d8ffff,"\x82e\x82\x95\x82\x93\x82\x89\x82\x8e\x82\x87\x81D\x81D\x81D");
@@ -181,14 +181,14 @@ unsigned int FUN_003da030(void)
       temp_v1 = vec2GetYInt(temp_v3 + 0x61c);
       if (*(char *)(temp_v3 + 0x20) != '\0') {
         if (*(int *)(temp_v3 + 8) % 0x14 >= 11) {
-          temp_v3 = asdTMTexTableEntryAt(0x1a,0x21f);
+          temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x21f));
           VectorSignedToFloat(*(short *)(temp_v3 + 10) + temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat(*(short *)(temp_v3 + 8) + temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
           textDrawString(4,0xdc0f14ff,&LAB_003da674);
         }
       }
       else {
-        temp_v3 = asdTMTexTableEntryAt(0x1a,0x21e);
+        temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x21e));
         VectorSignedToFloat(*(short *)(temp_v3 + 10) + temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(*(short *)(temp_v3 + 8) + temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
         textDrawString(4,0x57d8ffff,&LAB_003da698);
@@ -196,14 +196,14 @@ unsigned int FUN_003da030(void)
     }
     else if ((*(char *)(temp_v3 + 0x20) != '\0') && (*(int *)(temp_v3 + 8) >= temp_v1)) {
       if (*(int *)(temp_v3 + 8) % 0x14 >= 11) {
-        temp_v3 = asdTMTexTableEntryAt(0x1a,0x21f);
+        temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x21f));
         VectorSignedToFloat(*(short *)(temp_v3 + 10) + temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(temp_v2 + *(short *)(temp_v3 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         textDrawString(4,0xdc0f14ff,&LAB_003da674);
       }
     }
     else {
-      temp_v2 = asdTMTexTableEntryAt(0x1a,0x21d);
+      temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x21d));
       VectorSignedToFloat((int)*(short *)(temp_v2 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v2 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
       textDrawString(4,0x57d8ffff,"\x82e\x82\x95\x82\x93\x82\x89\x82\x8e\x82\x87\x81D\x81D\x81D");

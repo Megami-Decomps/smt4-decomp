@@ -1,14 +1,12 @@
 /* NON_MATCHING: separate scaled-height/baseline products recover retail arithmetic; zero/constants and initial roster address registers differ. */
 #include "battle/btlMain.h"
+#include "battle/BtlEntryLookup.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "shard/W6_W6Match8_BattleSpritePlacement.h"
 #include "shard/JobWork.h"
+#include "battle/BtlEntryLookup.h"
 
 namespace {
-struct RosterSpriteId {
-    u8 unk00[0xC];
-    u32 id;
-};
 struct RosterSpriteFrame {
     u8 unk00[0x10];
     BattleSpriteFrame *frame;
@@ -17,7 +15,6 @@ struct RosterSpriteFrame {
 
 extern "C" {
 void gxResetColorQuadToWhite(void);
-RosterSpriteId *btlFindEntryBlockByMemberId(BtlMainStateA *state, s32 index);
 RosterSpriteFrame *stateEntryFindById(BtlMainStateA *state, u32 id);
 void FUN_0041a534(void *marker, const BattleVector3 *position, f32 alpha);
 void FUN_0041a834(void *marker, const BattleVector3 *position, f32 alpha);
@@ -41,8 +38,8 @@ u32 FUN_002df754(u32 job)
                     FUN_0041a834(record->motion.selection, &position,
                         static_cast<f32>(record->motion.color & 0xFF) * (1.0f / 255.0f));
                 } else {
-                    RosterSpriteId *sprite = btlFindEntryBlockByMemberId(state, record->combatant.parameterIndex);
-                    const BattleSpriteFrame *frame = stateEntryFindById(state, sprite->id)->frame;
+                    BtlUnitDataA *sprite = btlFindEntryBlockByMemberId(state, record->combatant.parameterIndex);
+                    const BattleSpriteFrame *frame = stateEntryFindById(state, sprite->parts[0])->frame;
                     BattleVector3 position = *reinterpret_cast<BattleVector3 *>(record->motion.position);
                     const u32 height = frame->height;
                     f32 scale = record->motion.scale;

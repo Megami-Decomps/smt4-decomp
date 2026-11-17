@@ -1,11 +1,8 @@
 /* NON_MATCHING: stack frame is 80 bytes against retail's 48 (armcc copies the by-value Vector3 arguments of distSpatial/mathPositionHeadingDegrees through temporaries; retail loads them straight from the probe locals with vldmia), and the step-sign compare is emitted with swapped operands. */
 #include "common.h"
+#include "game/GameStateA.h"
 
-struct Vector3 {
-    f32 x;
-    f32 y;
-    f32 z;
-};
+typedef MapVector Vector3;
 
 /* The battle/map view state: where the camera stands and which way it faces. */
 struct ViewState {
@@ -23,21 +20,10 @@ struct MapViewState {
 };
 
 /* The ray the collision test works on: from the camera position outwards. */
-struct CameraRay {
-    /* 0x00 */ Vector3 start;
-    /* 0x0C */ Vector3 end;
-};
-
-struct CameraScratch {
-    /* 0x000 */ u8 unk000[0x110];
-    /* 0x110 */ CameraRay ray;
-};
-
 extern "C" {
 
 extern ViewState g_battleViewState;
 extern MapViewState *g_lmapView;
-extern CameraScratch g_gameState;
 
 f32 libm_sinf(f32 radians);
 f32 libm_cosf(f32 radians);
@@ -69,20 +55,20 @@ void FUN_002d0480(s32 enabled)
         return;
     }
     bestHeading = g_battleViewState.heading;
-    g_gameState.ray.start.x = g_battleViewState.position.x;
+    g_gameState.rayStart.x = g_battleViewState.position.x;
     if (g_lmapView->raised != 0.0f) {
         extra = 60.0f;
         distance = 150.0f;
     }
     height = extra + 100.0f;
-    g_gameState.ray.start.y = g_battleViewState.position.y + height;
-    g_gameState.ray.start.z = g_battleViewState.position.z;
+    g_gameState.rayStart.y = g_battleViewState.position.y + height;
+    g_gameState.rayStart.z = g_battleViewState.position.z;
     radians = bestHeading * 0.017453292f;
-    g_gameState.ray.end.x = g_battleViewState.position.x + libm_sinf(radians) * distance;
-    g_gameState.ray.end.y = g_battleViewState.position.y + height;
-    g_gameState.ray.end.z = g_battleViewState.position.z + libm_cosf(radians) * distance;
-    start = g_gameState.ray.start;
-    end = g_gameState.ray.end;
+    g_gameState.rayEnd.x = g_battleViewState.position.x + libm_sinf(radians) * distance;
+    g_gameState.rayEnd.y = g_battleViewState.position.y + height;
+    g_gameState.rayEnd.z = g_battleViewState.position.z + libm_cosf(radians) * distance;
+    start = g_gameState.rayStart;
+    end = g_gameState.rayEnd;
     if (FUN_00330108(&end, &start, hit) == -1) {
         return;
     }
@@ -97,10 +83,10 @@ void FUN_002d0480(s32 enabled)
         f32 candidate;
 
         radians = heading * 0.017453292f;
-        g_gameState.ray.end.x = g_battleViewState.position.x + libm_sinf(radians) * distance;
-        g_gameState.ray.end.z = g_battleViewState.position.z + libm_cosf(radians) * distance;
-        start = g_gameState.ray.start;
-        end = g_gameState.ray.end;
+        g_gameState.rayEnd.x = g_battleViewState.position.x + libm_sinf(radians) * distance;
+        g_gameState.rayEnd.z = g_battleViewState.position.z + libm_cosf(radians) * distance;
+        start = g_gameState.rayStart;
+        end = g_gameState.rayEnd;
         if (FUN_00330108(&end, &start, hit) == -1) {
             g_battleViewState.heading = heading;
             return;
@@ -113,9 +99,9 @@ void FUN_002d0480(s32 enabled)
         offset += step;
     }
     radians = bestHeading * 0.017453292f;
-    g_gameState.ray.end.x = g_battleViewState.position.x + libm_sinf(radians) * distance;
-    g_gameState.ray.end.y = g_battleViewState.position.y + height;
-    g_gameState.ray.end.z = g_battleViewState.position.z + libm_cosf(radians) * distance;
+    g_gameState.rayEnd.x = g_battleViewState.position.x + libm_sinf(radians) * distance;
+    g_gameState.rayEnd.y = g_battleViewState.position.y + height;
+    g_gameState.rayEnd.z = g_battleViewState.position.z + libm_cosf(radians) * distance;
 }
 
 } /* extern "C" */

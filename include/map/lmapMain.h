@@ -271,18 +271,6 @@ typedef struct LmapExtraGlobalsA {
     /* 0x04 */ LmapExtraA *extra;
 } LmapExtraGlobalsA;
 
-/* The map's event state machine block (Apocalypse layout), kept by a module global. */
-typedef struct LmapEventA {
-    /* 0x00 */ s32 state;
-    /* 0x04 */ s32 unk04;
-    /* 0x08 */ s32 unk08;
-    /* 0x0C */ s32 unk0C;
-    /* 0x10 */ u8 unk10[4];
-    /* 0x14 */ s32 unk14;
-} LmapEventA;
-
-
-
 /* An actor the Apocalypse map scene drives: its controller handle at 0x04. */
 typedef struct LmapActorA {
     /* 0x00 */ u32 unk00;

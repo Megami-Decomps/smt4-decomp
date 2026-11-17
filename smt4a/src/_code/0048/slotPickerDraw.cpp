@@ -6,15 +6,9 @@
 #include "Model/MoriModelShadowMap.h"
 #include "util/BitsAndBytes.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-
-/* A layout record (only the fields read here). */
-typedef struct SlotLayout {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-} SlotLayout;
 
 /* The fade controller inside the picker: its speed is at +0x20. */
 typedef struct SlotFade {
@@ -36,12 +30,10 @@ typedef struct SlotPicker {
     /* 0x3AC */ SlotFade fade;
 } SlotPicker;
 
-
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *object);
 void gxResetColorQuadToWhite(void);
 s32 renderCtxPackPassFlags(s32 a, s32 b);
-SlotLayout *asdTMTexTableEntryAt(u32 group, u32 id);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
 
@@ -68,7 +60,7 @@ void slotPickerDraw(SlotPicker *picker)
     char label[3] = {0, 0, 0};
 
     for (s32 i = 0; i < 8; i++) {
-        SlotLayout *slot = asdTMTexTableEntryAt(0x23, i + 8);
+        TextureTableEntryIV *slot = asdTMTexTableEntryAt(0x23, i + 8);
 
         if (picker->mode != 4) {
             if (picker->slotText[i][0] == 0 && picker->slotText[i][1] == 0) {
@@ -86,7 +78,7 @@ void slotPickerDraw(SlotPicker *picker)
                 texDrawTableEntryAtStoredOrigin(2, 0x23, 6, slot->x + parallax, slot->y, 0x10);
             }
         }
-        SlotLayout *text = asdTMTexTableEntryAt(0x23, 7);
+        TextureTableEntryIV *text = asdTMTexTableEntryAt(0x23, 7);
 
         label[0] = picker->slotText[i][0];
         label[1] = picker->slotText[i][1];

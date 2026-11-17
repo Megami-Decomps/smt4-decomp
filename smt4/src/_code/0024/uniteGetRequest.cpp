@@ -1,8 +1,6 @@
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 
 extern "C" {
-
-extern UniteWork *g_unite;
 
 /* Return the current request, or -1 while the unite work is absent. */
 u32 uniteGetRequest(void)

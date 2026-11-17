@@ -1,5 +1,5 @@
 /* NON_MATCHING: IDENTICAL with unit cflags `--fpu=softvfp` (default flags otherwise); under the default VFP build only the entry pointer and the reloaded member id swap r1/r2 (retail: entry r2, id r1). */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlGlobals.h"
 
@@ -18,7 +18,7 @@ s32 idSetFindSubjectIndex(BtlMainState* state, const ListedMember* member)
         return -1;
     }
     for (s32 index = 0; index < 50; ++index) {
-        if (member->id == entry->members.ids[index]) {
+        if (member->id == entry->ids[index]) {
             return index;
         }
     }

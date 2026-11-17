@@ -1,10 +1,9 @@
 /* NON_MATCHING: the six-byte clear now forms retail's work+0x500 base; the build keeps g_buttonHelp in r7 (retail r8), recomputes the base for the FUN_001a90e0 argument instead of sharing retail's two adds, and swaps r7/r8 in the double-icon case. */
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 #include <string.h>
 #include "ui/UiSpriteState.h"
 
 extern "C" {
-extern ButtonHelpGlobalsA g_buttonHelp;
 u16 FUN_0019d890(u32 group, s32 sprite);
 void FUN_001a90e0(void *pair);
 }

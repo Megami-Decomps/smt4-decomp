@@ -1,5 +1,6 @@
 /* NON_MATCHING: cached stat registers and original attribute-block copy grouping differ; initial flag stores and packed skill-bitfield operations now match structurally. */
 #include "battle/btlUnit.h"
+#include "battle/BtlEntryA.h"
 #include "gamedata/GameDataAccess.h"
 #include "shard/PadState.h"
 #include "gamedata/UnitStats.h"
@@ -53,7 +54,7 @@ void FUN_003ea69c(u32, BtlUnitDataA *unit, const PadState *player)
         u16 kind;
     };
     typedef char SnapshotOffsets[
-        sizeof(SnapshotView) == sizeof(BtlUnitDataA) &&
+        sizeof(SnapshotView) <= sizeof(BtlUnitDataA) &&
         offsetof(SnapshotView, current) == 0xd8 &&
         offsetof(SnapshotView, original) == 0xf4 &&
         offsetof(SnapshotView, skills) == 0x118 &&

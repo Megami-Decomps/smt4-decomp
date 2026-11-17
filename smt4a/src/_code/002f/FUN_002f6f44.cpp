@@ -1,11 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f6f44` (_code @ 0x2f6f44, 0xe8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 
 int texDrawTableEntrySized(int, int, unsigned int, int, int, unsigned int, unsigned int, unsigned int);
-int renderCtxCalculateStereoParallax(unsigned int);
+int renderCtxCalculateStereoParallax(RenderCtxA *);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(int, int);
 
@@ -17,11 +19,9 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_4_stack;
 
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: texDrawTableEntrySized. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 
@@ -44,7 +44,7 @@ void FUN_002f6f44(unsigned int param_1,unsigned int param_2,int param_3,int para
   
   temp_v1 = 0;
   temp_v2 = 0;
-  temp_v0 = asdTMTexTableEntryAt(0x1e,param_1);
+  temp_v0 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,param_1));
   temp_v3 = 0.26f;
   renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v5 = (float)VectorSignedToFloat((int)**(short **)(temp_v0 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3);

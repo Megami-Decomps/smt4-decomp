@@ -1,5 +1,6 @@
 /* NON_MATCHING: near (213 rows against 209, same 92-byte frame): same calls, layout ids and float arguments; retail keeps the entry/index in sl/r9 and the x offset in fp where ours uses fp/sl (fp/sl swapped), loads the layout bank id after the parameter spills and reads the rectangle x/y pair in the other order */
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 typedef unsigned char u8;
 typedef unsigned short u16;
 typedef short s16;
@@ -10,13 +11,6 @@ typedef float f32;
 extern "C" {
 
 #define LAYOUT_BANK 0x31
-
-/* Layout rectangle record (observed fields only). */
-struct LayoutPart {
-    u8 pad00[8];
-    s16 x;            /* 0x08 */
-    s16 y;            /* 0x0A */
-};
 
 /* Header word pair at the entry: type in the high byte of the second halfword. */
 struct CardEntry {
@@ -29,7 +23,6 @@ struct IconRecord {
     s16 iconLayout;   /* 0x9C */
 };
 
-LayoutPart *asdTMTexTableEntryAt(s32 bank, s32 id);
 void texDrawTableEntryAtStoredOrigin(s32 layer, s32 bank, s32 id, s32 x, s32 y, s32 depth);
 void efctSetSpeed(f32 speed);
 IconRecord *dataTable10FindValue(s32 id);
@@ -45,13 +38,13 @@ void FUN_003f7164(u32 id, CardEntry *entry, s32 index, u32 arg, s32 offsetX, s32
 {
     char label[0x40];
 
-    LayoutPart *base = asdTMTexTableEntryAt(LAYOUT_BANK, index + 0x88);
+    TextureTableEntryIV *base = asdTMTexTableEntryAt(LAYOUT_BANK, index + 0x88);
     s32 x = base->x + offsetX;
     s32 y = base->y + offsetY;
     efctSetSpeed(speed);
     texDrawTableEntryAtStoredOrigin(2, LAYOUT_BANK, 0x7B, x, y, depth);
     texDrawTableEntryAtStoredOrigin(2, LAYOUT_BANK, 0x7C, x, y, depth);
-    LayoutPart *part = asdTMTexTableEntryAt(LAYOUT_BANK, index + 0x91);
+    TextureTableEntryIV *part = asdTMTexTableEntryAt(LAYOUT_BANK, index + 0x91);
     texDrawTableEntryAtStoredOrigin(2, LAYOUT_BANK, 0x90, part->x + offsetX, part->y + offsetY, depth);
 
     part = asdTMTexTableEntryAt(LAYOUT_BANK, 0x7D);

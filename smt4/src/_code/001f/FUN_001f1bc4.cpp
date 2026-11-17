@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "code/Code0029_VariantA.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ int FUN_001b079c(...);
 int FUN_0029a17c(...);
 int resourceRunOperationIfUnblocked(...);
 int textDrawString(...);
-int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int VectorSignedToFloat(...);
 
@@ -70,7 +70,7 @@ void FUN_001f1bc4(int param_1,int param_2)
     temp_v3 = listCursorGetRowIfUnblocked(temp_v1);
     temp_v4 = dataTable24Sub0GetRecordS90X(temp_v3 + temp_v2);
     temp_v2 = listCursorGetRowIfUnblocked(temp_v1);
-    temp_v2 = asdTMTexTableEntryAt(0x24,temp_v2 + 0xb6);
+    temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,temp_v2 + 0xb6));
     if (*(int *)(temp_v0 + 0x3fc) >= 4) {
       texDrawTableEntryAtStoredOrigin(2,0x24,0xb5,param_1,param_2,0x97);
     }
@@ -78,7 +78,7 @@ void FUN_001f1bc4(int param_1,int param_2)
     temp_v3 = resourceRunOperationIfUnblocked();
     temp_v11 = 0;
     do {
-      temp_v5 = asdTMTexTableEntryAt(0x24,temp_v11 + 0xb6);
+      temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,temp_v11 + 0xb6));
       temp_v8 = *(int *)(temp_v0 + 0x3fc);
       temp_v10 = (int)*(short *)(temp_v5 + 8);
       if (temp_v8 >= 4) {
@@ -96,7 +96,7 @@ void FUN_001f1bc4(int param_1,int param_2)
       temp_v8 = FUN_0029ee54((const void *)(temp_v13));
       temp_v6 = temp_v3 + temp_v11;
       if (temp_v6 < temp_v8) {
-        temp_v7 = asdTMTexTableEntryAt(0x24,0xb2);
+        temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0xb2));
         temp_v8 = temp_v0;
         FUN_001b079c(temp_v0,temp_v4,temp_v12,temp_v6);
         if (temp_v8 == 0) {
@@ -114,11 +114,11 @@ void FUN_001f1bc4(int param_1,int param_2)
       temp_v11 = temp_v11 + 1;
     } while (temp_v11 < 8);
     temp_v1 = listCursorGetRowIfUnblocked(temp_v1);
-    temp_v1 = asdTMTexTableEntryAt(0x24,temp_v1 + 200);
+    temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,temp_v1 + 200));
     temp_v2 = resourceRunOperationIfUnblocked(temp_v13);
     temp_v3 = listCursorGetRowIfUnblocked(temp_v13);
     temp_v11 = listCursorGetRowIfUnblocked(temp_v13);
-    temp_v11 = asdTMTexTableEntryAt(0x24,temp_v11 + 200);
+    temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,temp_v11 + 200));
     temp_v5 = *(int *)(temp_v0 + 0x3fc);
     if (temp_v5 >= 4) {
       temp_v8 = (int)*(short *)(temp_v11 + 8);
@@ -148,7 +148,7 @@ void FUN_001f1bc4(int param_1,int param_2)
     else {
       texDrawTableEntryAtStoredOrigin(2,0x24,0xc3,param_1,temp_v1,0xba);
     }
-    temp_v5 = asdTMTexTableEntryAt(0x24,0xc2);
+    temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0xc2));
     temp_v11 = g_titleScene;
     piVar13 = (int *)(g_titleScene + 0x130c);
     temp_v8 = piVar13[*piVar13 + 2];
@@ -170,7 +170,7 @@ void FUN_001f1bc4(int param_1,int param_2)
       (**(romwright_code **)(temp_v11 + 0x1328))(0);
       *(unsigned char *)(temp_v11 + 0x1324) = 0;
     }
-    temp_v11 = asdTMTexTableEntryAt(0x24,0xc5);
+    temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0xc5));
     FUN_001b079c(temp_v0,temp_v4,temp_v12,temp_v2 + temp_v3);
     if (temp_v0 == 0) {
       temp_v4 = 0xffffffff;

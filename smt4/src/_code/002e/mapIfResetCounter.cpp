@@ -1,16 +1,14 @@
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 
 extern "C" {
 
-void asdMdlManagerMarkDestroy(u32 handle);
-
-extern MapIfGlobals g_mapIf;
+void asdMdlManagerMarkDestroy(AsdMdlObject *model);
 
 void mapIfResetCounter(void)
 {
     MapIfState *state = g_mapIf.state;
 
-    asdMdlManagerMarkDestroy(state->unkCBEC);
+    asdMdlManagerMarkDestroy(state->slots[0].model);
     state->unkCCD8 = 0;
     state->unkCCDC = 0;
 }

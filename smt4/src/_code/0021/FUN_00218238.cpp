@@ -1,9 +1,9 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 void FUN_00224ce0(u32 id, s32 *firstOut, s32 *secondOut, s32 flag);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(void *vec);

@@ -46,12 +46,12 @@ void FUN_00254f58(BtlMainState *owner)
     for (s32 i = first; end > i; ++i) {
         if ((work->units[i].flags & 1) && !(work->units[i].flags & 0x40)) {
             work->order[entries] = work->units[i].selectionIndex;
-            ((BtlEntry *)&work->units[i])->speedBonus = 0;
+            ((BtlEntry *)&work->units[i])->data.speedBonus = 0;
             if (work->units[i].flags & 2)
-                ((BtlEntry *)&work->units[i])->speedBonus = 5;
+                ((BtlEntry *)&work->units[i])->data.speedBonus = 5;
             if (!(work->flags & 0x40000)) {
                 s16 variation = FUN_00255de0(-3, 3);
-                ((BtlEntry *)&work->units[i])->speedBonus += variation;
+                ((BtlEntry *)&work->units[i])->data.speedBonus += variation;
             }
             ++entries;
         }

@@ -9,8 +9,8 @@ s32 scrGetArg(s32 index);
 
 static __inline s32 entryHpPercentage(const BtlCombatantEntryA *entry)
 {
-    s32 hp = entry->hp;
-    s32 maximum = entry->maxHp;
+    s32 hp = entry->data.hp;
+    s32 maximum = entry->data.maxHp;
     return hp * 100 / maximum;
 }
 

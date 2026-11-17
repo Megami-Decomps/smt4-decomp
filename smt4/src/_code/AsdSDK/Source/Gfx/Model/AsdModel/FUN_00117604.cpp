@@ -3,6 +3,7 @@
 #include "nw/gfx/SceneNode.h"
 #include "shard/Sys464af0.h"
 #include "shard/S1Light.h"
+#include "camp/RenderCtxTitle.h"
 
 using nw::gfx::SceneNode;
 
@@ -17,7 +18,6 @@ extern u32 DAT_00464b10;
 extern u32 DAT_00464b14;
 extern u32 DAT_00464b18;
 extern u32 DAT_00464b00;
-extern u32 g_titleScene;
 void FUN_001325c4(ModelOwner *slots, u32 traverser, u32 state, u32 flags);
 void FUN_00131c98(ModelOwner *slots, u32 traverser, u32 flags);
 void FUN_0013231c(ModelOwner *slots, u32 state, s32 mode, s32 flags);
@@ -30,7 +30,7 @@ s32 gxIsStereoscopic3dEnabled();
 void nw_gfx_RenderContext_ResetState_2B7478(void *context);
 s32 sceneQueryFalse();
 void registerBlockRequestGroups(u32 groups);
-void FUN_002c3a14(u32 scene);
+void FUN_002c3a14(RenderCtx *scene);
 
 /* Render the first model pass, temporarily excluding the light-only scene root when required. */
 void FUN_00117604()

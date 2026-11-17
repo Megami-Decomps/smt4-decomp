@@ -1,4 +1,4 @@
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
@@ -13,7 +13,7 @@ u32 scrCommBtlActiveEntryValueKindOk(void)
     s32 index = scrGetArg(0);
     BtlEntry *entry = btlMainFindActiveEntry(btlGetMainState());
     if (entry != NULL) {
-        u16 value = entry->values[index];
+        u16 value = entry->data.values[index];
         bool hasKind = (value & 0xFC00) != 0;
         u32 expected = 2;
         if (!hasKind || expected == (u32)(value >> 10)) {

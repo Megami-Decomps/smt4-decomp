@@ -1,16 +1,12 @@
 /* NON_MATCHING: register allocation of the gauge fields (retail loads time/duration with one vldmia and shares the fill loops' tail) and the loop code shape differ; the logic is the same. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 namespace {
 /* A view of a float whose ordering the engine tests through its (signed) bit pattern. */
 union OrderedFloat {
     f32 value;
     s32 bits;
-};
-
-struct GaugeSegmentSource {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ u16 widthAndFlag;         /* bit 15 is a flag; the rest is the segment width */
 };
 
 /* The segmented gauge's work block. */
@@ -35,7 +31,6 @@ struct GaugeWork {
 }
 
 extern "C" {
-GaugeSegmentSource *asdTMTexTableEntryAt(u32 group, u32 index);
 
 /* Advances the gauge one frame: its scroll and spin, the position approaching the target and the fill of
    the lit segments. */
@@ -78,17 +73,17 @@ void FUN_0040898c(GaugeWork *gauge)
     }
     gauge->position = gauge->target / gauge->duration + gauge->position;
     if (gauge->litCount != 0) {
-        GaugeSegmentSource *source = asdTMTexTableEntryAt(12, 55);
+        TextureTableEntryIV *source = asdTMTexTableEntryAt(12, 55);
         if (gauge->litCount < 8) {
             f32 remaining = gauge->target - gauge->position;
-            f32 reach = gauge->span - (f32)((source->widthAndFlag & ~0x8000) * gauge->litCount);
+            f32 reach = gauge->span - (f32)((source->width & ~0x8000) * gauge->litCount);
             if (!(reach < remaining)) {
                 do {
                     gauge->litCount++;
                     if (gauge->litCount >= 8) {
                         break;
                     }
-                    reach = gauge->span - (f32)((source->widthAndFlag & ~0x8000) * gauge->litCount);
+                    reach = gauge->span - (f32)((source->width & ~0x8000) * gauge->litCount);
                 } while (!(reach < remaining));
             }
         }

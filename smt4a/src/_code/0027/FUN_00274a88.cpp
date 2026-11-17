@@ -1,11 +1,9 @@
 #include "map/mapDepart.h"
+#include "map/MapIfGlobals.h"
 #include "game/GameStateA.h"
-#include "map/mapIf.h"
 #include "shard/W5_W5Match7_FlagBanks.h"
 
 extern "C" {
-
-extern MapIfGlobalsA g_mapIf;
 
 f32 FUN_001f3f34(f32 from, f32 to, f32 duration, f32 time);
 f32 FUN_0016242c(f32 from, f32 to, f32 duration, f32 time);

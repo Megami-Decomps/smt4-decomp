@@ -44,7 +44,7 @@ void FUN_004e69e8(BtlMainStateA **owner, BtlUnitA *unit, s32 forced)
     for (s16 index = 4; index < 0x36; ++index) {
         BtlCombatantEntryA *entry = &state->entries[index];
         if ((entry->flags & g_btlAction.targetableMask) != 0 &&
-            (g_btlAction.interaction.excludedMask & entry->flags) == 0 && entry->selection.marked != 0)
+            (g_btlAction.interaction.excludedMask & entry->flags) == 0 && entry->data.marked != 0)
             return;
     }
     s16 kind = unit->data->actionKind;

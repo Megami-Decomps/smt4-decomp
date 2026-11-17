@@ -3,6 +3,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ int textFormatBuffer(...);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
-int asdTMTexTableEntryAt(...);
 int resourceRunOperationIfUnblocked(...);
 int uiDrawListScrollBar(...);
 int VectorSignedToFloat(...);
@@ -77,14 +77,14 @@ void FUN_002c8940(int param_1,int param_2)
   if (0 < temp_v4) {
     do {
       if ((*(char *)(temp_v1 + 0x252) == '\0') || (temp_v4 = listCursorGetRowIfUnblocked(temp_v2), temp_v4 != temp_v8)) {
-        temp_v4 = asdTMTexTableEntryAt(0x1a,temp_v8 + 0x2e);
+        temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,temp_v8 + 0x2e));
         temp_v5 = temp_v1 + (temp_v3 + temp_v8) * 2;
         temp_v6 = FUN_002861fc(*(unsigned short *)(temp_v5 + 0x90a8));
         if (temp_v6 != 0) {
           texDrawTableEntryAtStoredOrigin(2,0x1a,0x1d3,*(short *)(temp_v4 + 8) + param_1,*(short *)(temp_v4 + 10) + param_2
                        ,0x6a);
           textFormatBuffer(temp_v9,"%s",temp_v6 + 8);
-          temp_v6 = asdTMTexTableEntryAt(0x1a,0x1d5);
+          temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x1d5));
           VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v6 + 10) + param_2,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v6 + 8) + param_1,
@@ -92,7 +92,7 @@ void FUN_002c8940(int param_1,int param_2)
           textDrawString(2,0xffffffff,temp_v9,(int)*(short *)(temp_v6 + 10));
           temp_v5 = bitTableIndexIsClear(*(unsigned short *)(temp_v5 + 0x90a8));
           if (temp_v5 != 0) {
-            temp_v5 = asdTMTexTableEntryAt(0x1a,0x1d4);
+            temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x1d4));
             texDrawCompositeSprite(2,0x1a,7,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + param_1,
                          (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,0x6a);
           }
@@ -115,7 +115,7 @@ void FUN_002c8940(int param_1,int param_2)
     return;
   }
   temp_v8 = listCursorGetRowIfUnblocked(temp_v2);
-  temp_v8 = asdTMTexTableEntryAt(0x1a,temp_v8 + 0x3f);
+  temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,temp_v8 + 0x3f));
   efctSetSpeed();
   texDrawTableEntryAtStoredOrigin(2,0x1a,0x38,*(short *)(temp_v8 + 8) + param_1,*(short *)(temp_v8 + 10) + param_2,0x79);
   texDrawTableEntryAtStoredOrigin(2,0x1a,0x39,*(short *)(temp_v8 + 8) + param_1,*(short *)(temp_v8 + 10) + param_2,0x79);
@@ -164,7 +164,7 @@ void FUN_002c8940(int param_1,int param_2)
   efctSetSpeed();
   texDrawTableEntryAtStoredOrigin(2,0x1a,0x1d6,*(short *)(temp_v8 + 8) + param_1,*(short *)(temp_v8 + 10) + param_2,0x83);
   textFormatBuffer(temp_v9,"%s",temp_v4 + 8);
-  temp_v4 = asdTMTexTableEntryAt(0x1a,0x1d8);
+  temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x1d8));
   temp_v6 = (int)*(short *)(temp_v4 + 10);
   VectorSignedToFloat(*(short *)(temp_v8 + 10) + temp_v6 + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v4 + 8) + param_1,
@@ -177,7 +177,7 @@ void FUN_002c8940(int param_1,int param_2)
   }
   temp_v3 = bitTableIndexIsClear(*(unsigned short *)(temp_v3 + 0x90a8));
   if (temp_v3 != 0) {
-    temp_v3 = asdTMTexTableEntryAt(0x1a,0x1d7);
+    temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x1d7));
     texDrawCompositeSprite(2,0x1a,7,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v8 + 8) + param_1,
                  (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v8 + 10) + param_2,0x83);
   }

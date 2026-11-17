@@ -2,7 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "battle/btlMain.h"
-#include "shard/W6_W6Match1_PartySlot.h"
+#include "gamedata/GameSaveDataA.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
 #include "camp/Unite/UniteEffect.h"
 

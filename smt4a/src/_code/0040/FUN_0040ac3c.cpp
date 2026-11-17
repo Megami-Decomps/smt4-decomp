@@ -1,5 +1,6 @@
 /* NON_MATCHING: the vtable word now names _ZTV9Obj4207d0 (retail); retail loads the vtable address before the push, keeps `this` in r0 until the handle load and holds the handle in r1 (the build copies this to r4 first). */
 #include "common.h"
+#include "Model/MoriModelManager.h"
 
 extern "C" {
 
@@ -23,11 +24,9 @@ typedef struct HandleOwner {
     /* 0x10 */ u32 unk10;
 } HandleOwner;
 
-void ptrListRemoveClearOwner(u32 registry, HandleObject *owner);
 void asdOperatorDelete(void *p);
 void FUN_003fd790(HandleObject *object);
 
-extern u32 g_handleRegistry; /* 0x56fcc0 */
 extern const u8 _ZTV9Obj4207d0[];
 
 /* Unregisters an owner's handle, releases its three objects and frees the owner. */

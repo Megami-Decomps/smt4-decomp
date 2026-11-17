@@ -1,40 +1,25 @@
 #include "shard/Shard0049.h"
 #include "gfx/RenderStateStack.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
-typedef struct RectPair {
-    /* 0x00 */ s16 first;
-    /* 0x02 */ s16 second;
-} RectPair;
-
-typedef struct RectRec {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ u16 unk04;
-    /* 0x06 */ u16 unk06;
-    /* 0x08 */ s16 unk08;
-    /* 0x0A */ s16 unk0A;
-    /* 0x0C */ RectPair *rect;
-} RectRec;
-
-extern RectRec *asdTMTexTableEntryAt(u32 a, u32 b);
-
-/* Reads the record's two shorts (+8/+0xA) and its rect pair (from +0xC, or +4/+6 with bit 15 masked off). */
-void rectRecRead(u32 unused, u32 index, s32 *a, s32 *b, u32 *c, u32 *d)
+/* Reads the entry's position and size (its placement's size, or its own with bit 15 masked off). */
+void rectRecRead(u32 file, u32 index, s32 *x, s32 *y, u32 *width, u32 *height)
 {
-    RectRec *rec = asdTMTexTableEntryAt(unused, index);
-    u32 second;
+    TextureTableEntryIV *entry = asdTMTexTableEntryAt(file, index);
+    u32 value;
 
-    *a = rec->unk08;
-    *b = rec->unk0A;
-    if (rec->rect != NULL) {
-        *c = rec->rect->first;
-        second = rec->rect->second;
+    *x = entry->x;
+    *y = entry->y;
+    if (entry->placement != NULL) {
+        *width = entry->placement->width;
+        value = entry->placement->height;
     } else {
-        *c = rec->unk04 & 0xFFFF7FFF;
-        second = rec->unk06 & 0xFFFF7FFF;
+        *width = entry->width & 0xFFFF7FFF;
+        value = entry->height & 0xFFFF7FFF;
     }
-    *d = second;
+    *height = value;
 }
 
 } /* extern "C" */

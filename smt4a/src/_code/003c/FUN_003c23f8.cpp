@@ -27,20 +27,20 @@ u32 FUN_003c23f8(void)
         BtlMainStateA *battle = btlGetMainState();
         BtlCombatantEntryA *entry = &battle->entries[slot];
         if ((entry->flags & g_battleMaskPresets.eligibility.active) &&
-            !(entry->flags & g_battleMaskPresets.eligibility.excluded) && entry->unitIndex >= 0) {
+            !(entry->flags & g_battleMaskPresets.eligibility.excluded) && entry->ids[0] >= 0) {
             s32 damage = 0;
             switch (mode) {
-            case 0: damage = entry->maxHp * amount / 100; break;
-            case 1: damage = entry->hp * amount / 100; break;
+            case 0: damage = entry->data.maxHp * amount / 100; break;
+            case 1: damage = entry->data.hp * amount / 100; break;
             case 2: damage = amount; break;
             }
-            if (damage >= entry->hp)
-                damage = entry->hp - 1;
+            if (damage >= entry->data.hp)
+                damage = entry->data.hp - 1;
             btlSlotManagerResetStates(btlGetMainState());
             battle = btlGetMainState();
-            BattleRosterRecordA *target = &battle->roster[entry->unitIndex];
+            BattleRosterRecordA *target = &battle->roster[entry->ids[0]];
             FUN_004fc094(0, actor, 0, target, 0, damage, -1, ~0u,
-                         entry->hp, entry->maxHp, 0, 0, 0, 0, 1, 0,
+                         entry->data.hp, entry->data.maxHp, 0, 0, 0, 0, 1, 0,
                          slot << 3, slot << 3, slot << 3, slot << 3,
                          1, 0, 1, 1, 0, 1);
         }

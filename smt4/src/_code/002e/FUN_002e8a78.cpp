@@ -1,17 +1,16 @@
 /* NON_MATCHING: loop/record and saved X/Z registers are swapped; effect vector load/multiply scheduling differs. */
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 #include "map/mapDepart.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "game/GameState.h"
 
 extern "C" {
-extern MapIfState *g_mapIf;
 f32 mathDistanceBetweenPoints(f32, f32, f32, f32, f32, f32);
 
 // Trigger the first nearby waiting map marker and place its appearance effect above the player.
 void FUN_002e8a78(f32 x, f32 y, f32 z)
 {
-    MapIfState *work = g_mapIf;
+    MapIfState *work = g_mapIf.state;
     for (s32 i = 0; i < 128; ++i) {
         MapIfRecord *record = &work->records[i];
         if (record->active &&

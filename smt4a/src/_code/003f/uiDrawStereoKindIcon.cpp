@@ -2,9 +2,9 @@
 #include "camp/RenderCtxA.h"
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-const SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 image);
 void efctSetSpeed(f32 speed);
 
 static inline s32 iconImageForKind(u32 kind)
@@ -34,7 +34,7 @@ void uiDrawStereoKindIcon(u32 context, s32 x, s32 y, u32 color, u32 kind, u32 an
         return;
     }
     s32 parallax = renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
-    const SpriteInfo *anchor = asdTMTexTableEntryAt(49, anchorImage);
+    const TextureTableEntryIV *anchor = asdTMTexTableEntryAt(49, anchorImage);
     s32 drawX = anchor->x + (x + parallax);
     s32 drawY = anchor->y + y;
     efctSetSpeed(speed);

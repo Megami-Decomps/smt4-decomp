@@ -48,7 +48,7 @@ void FUN_004eb740(BtlMainStateA **reference, const BattleEventCandidate *candida
         BattleCommandValue payload;
         payload.real = value;
         FUN_003e77cc(state, 1, state->roster->combatant.combatantIndex,
-                     entry->indexView.selectionIndex, payload);
+                     entry->selectionIndex, payload);
         reinterpret_cast<BattleCommandSaveView *>(gameDataBlocksGetSaveData())->pending = 0;
     }
     reinterpret_cast<BattleCommandSlot *>(g_btlAction.slots)[(*reference)->unitRecord.currentSlot].setCommand(0x26);

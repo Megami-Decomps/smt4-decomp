@@ -1,4 +1,4 @@
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "battle/BattleUnitSlot.h"
@@ -21,22 +21,22 @@ u32 FUN_0030074c()
     u32 actor = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     for (s32 i = 0; i < 4; ++i) {
         BtlEntry *entry = &state->entries[i];
-        if ((entry->flags & 1) && !(entry->flags & 0x40) && entry->members.ids[0] >= 0) {
+        if ((entry->flags & 1) && !(entry->flags & 0x40) && entry->ids[0] >= 0) {
             s32 amount = 0;
             switch (mode) {
             case 0:
-                amount = entry->maxMp * value / 100;
+                amount = entry->data.maxMp * value / 100;
                 break;
             case 1:
-                amount = entry->mp * value / 100;
+                amount = entry->data.mp * value / 100;
                 break;
             case 2:
                 amount = value;
                 break;
             }
             FUN_00250720(state);
-            FUN_002551ac(0, actor, &state->actions[entry->members.ids[0]], 0,
-                -1, amount, -1, entry->hp, entry->maxHp, 0, 0, 0, 0,
+            FUN_002551ac(0, actor, &state->actions[entry->ids[0]], 0,
+                -1, amount, -1, entry->data.hp, entry->data.maxHp, 0, 0, 0, 0,
                 1, 0, i << 3, i << 3, i << 3, i << 3, 1, 0, 1, 1, 0, 1);
             btlQueueKeyedScalarReflectAction(0, actor, 0x10001B5, 0, 0, 0, 0);
         }

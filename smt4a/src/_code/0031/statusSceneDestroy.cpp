@@ -1,12 +1,11 @@
 #include "shard/Shard0031.h"
+#include "Model/MoriModelManager.h"
 
 extern "C" {
 
 extern void statusCameraDestroy(void);
 extern s32 lmapSceneGetScript(void);
 extern void FUN_003857b4(u8 value);
-extern void resourceOwnerReleaseAndReset(u32 handle);
-extern u32 g_handleRegistry;
 
 void statusSceneDestroy(StatusScene *scene)
 {

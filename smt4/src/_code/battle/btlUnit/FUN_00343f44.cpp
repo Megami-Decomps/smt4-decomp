@@ -1,5 +1,5 @@
 /* NON_MATCHING: action-index addressing, successful phase-store predication and draw-default load order differ; the fourth alpha-fade argument is restored. */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"

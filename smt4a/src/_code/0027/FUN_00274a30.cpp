@@ -1,14 +1,15 @@
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 #include "shard/Shard0036.h"
 
 extern "C" {
-extern MapIfStateA *g_mapIf;
 
 // Advance active category-37/40 map records from state eight to state six.
 void FUN_00274a30(void)
 {
-    for (s32 index = 0; index < 128; ++index) {
-        MapIfRecord *record = &g_mapIf->records[index];
+    s32 index = 0;
+    MapIfStateA *state = g_mapIf.state;
+    for (; index < 128; ++index) {
+        MapIfRecord *record = &state->records[index];
         if (record->active != 0 &&
             (record->display.category == 37 || record->display.category == 40) &&
             record->state == 8) {

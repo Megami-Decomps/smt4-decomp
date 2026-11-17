@@ -1,6 +1,6 @@
 /* NON_MATCHING: armcc threads the failed first actions check past the second loop; retail re-tests battle and actions (beq 80). Splitting the guards into inline helpers keeps the re-test but swaps r0/r1. */
 #include "battle/btlAction.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "map/mapDepart.h"
 #include "shard/JobWork.h"

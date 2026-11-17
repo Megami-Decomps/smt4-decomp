@@ -1,4 +1,6 @@
 #include "camp/RenderCtx.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxTitle.h"
 struct SceneArrowDrawWork {
     u8 unk00[0x10];
     u32 mode;
@@ -7,22 +9,14 @@ struct SceneArrowDrawWork {
     u8 firstArrow;
 };
 struct SpriteInfo;
-/* SpriteInfo's header also defines the incompatible Apocalypse RenderCtx. */
-struct SpriteOriginView {
-    u8 unk00[8];
-    s16 x, y;
-};
 struct ArrowSpritePositions { u32 ids[2]; };
 extern "C" {
-extern RenderCtx *g_titleScene;
 extern const ArrowSpritePositions DAT_00407540;
-void renderCtxSelectStereoLayout(RenderCtx *context);
 void gxResetColorQuadToWhite(void);
 s32 renderCtxPackPassFlags(u32 mode, u32 flags);
 void FUN_003a37dc(SceneArrowDrawWork *work);
 s32 placeWinGetValue(void);
 s32 FUN_001dd910(void);
-const SpriteInfo *asdTMTexTableEntryAt(u32 table, u32 sprite);
 u32 texDrawCompositeSprite(u32 flags, u32 table, u32 spriteId, s32 x, s32 y, s32 z);
 void renderCtxResetColorScale(RenderCtx *context);
 
@@ -43,14 +37,14 @@ void hintWindowDrawArrows(SceneArrowDrawWork *work)
             ArrowSpritePositions positions = DAT_00407540;
             u32 position = 0;
             if (work->firstArrow) {
-                const SpriteOriginView *origin = reinterpret_cast<const SpriteOriginView *>(asdTMTexTableEntryAt(0x2B, positions.ids[position]));
+                const TextureTableEntryIV *origin = asdTMTexTableEntryAt(0x2B, positions.ids[position]);
                 s32 arrowX = origin->x + offset.x;
                 s32 arrowY = origin->y + offset.y;
                 texDrawCompositeSprite(2, 0x2B, 6, arrowX, arrowY, depth);
                 ++position;
             }
             if (work->secondArrow) {
-                const SpriteOriginView *origin = reinterpret_cast<const SpriteOriginView *>(asdTMTexTableEntryAt(0x2B, positions.ids[position]));
+                const TextureTableEntryIV *origin = asdTMTexTableEntryAt(0x2B, positions.ids[position]);
                 s32 arrowX = origin->x + offset.x;
                 s32 arrowY = origin->y + offset.y;
                 texDrawCompositeSprite(2, 0x2B, 7, arrowX, arrowY, depth);

@@ -3,6 +3,7 @@
 #include "battle/btlMain.h"
 #include "gamedata/DataTable.h"
 #include "util/Random.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -16,12 +17,7 @@ typedef struct EffectChoice {
 } EffectChoice;
 
 /* The slice of g_btlMain this function reads. */
-typedef struct EffectChoiceMasks {
-    /* 0x000 */ u8 unk000[0x130];
-    /* 0x130 */ u64 choiceMask;
-} EffectChoiceMasks;
 
-extern EffectChoiceMasks g_btlMain;
 
 void *asdOperatorNewD(u32 size);
 void asdOperatorDeleteC(void *block);
@@ -71,12 +67,12 @@ void FUN_003f1b3c(BtlMainStateA *state, s32 section, s32 kind, u32 *effect, u32 
                     lastTier = 0;
                 }
             } else if (tier == 99) {
-                if ((state->stateFlags64.bits & g_btlMain.choiceMask) == 0 && gameFlagIsSet(record->flagId)) {
+                if ((state->stateFlags64.bits & g_btlMain.fixedScore.mask) == 0 && gameFlagIsSet(record->flagId)) {
                     candidates[candidateCount++] = record;
                     lastTier = 99;
                 }
             } else {
-                if ((state->stateFlags64.bits & g_btlMain.choiceMask) == 0 && lastTier != 99 && lastTier <= tier
+                if ((state->stateFlags64.bits & g_btlMain.fixedScore.mask) == 0 && lastTier != 99 && lastTier <= tier
                     && (tier == 1 || gameFlagIsSet(record->flagId))) {
                     candidates[candidateCount++] = record;
                     lastTier = record->tier;

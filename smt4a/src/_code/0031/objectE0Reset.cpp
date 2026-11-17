@@ -1,19 +1,17 @@
-#include "shard/Shard0031.h"
+#include "frame_tex/FrameTexA.h"
 
 extern "C" {
 
-extern ObjectE0 *g_frameTex;
-
-void objectE0Reset(u32 value)
+/* Starts the XFADE cross-fade over `frames` frames: enables it and clears its captures. */
+void objectE0Reset(u32 frames)
 {
-    ObjectE0 *obj = g_frameTex;
-
-    obj->unk144E = 1;
-    obj->unk1450 = 0;
-    obj->unk1451 = 0;
-    obj->unk1452 = 0;
-    obj->unk1484 = 0;
-    obj->unk1488 = value;
+    FrameTexWorkA *obj = g_frameTex;
+    obj->fadeEnabled = 1;
+    obj->fadeCapturedLeft = 0;
+    obj->fadeCapturedRight = 0;
+    obj->fadePendingRight = 0;
+    obj->fadeElapsed = 0;
+    obj->fadeDuration = frames;
 }
 
 } /* extern "C" */

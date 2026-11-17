@@ -8,6 +8,8 @@
 #include "gfx/StereoParallax.h"
 #include "util/BitsAndBytes_VariantA.h"
 #include "camp/RenderCtx.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxTitle.h"
 
 /* Pushes the evaluated state on the title scene's first stack. */
 static __inline void titleScenePushFirst(RenderCtx *scene, s32 state)
@@ -47,17 +49,9 @@ struct RunWin {
     /* 0xC4 */ u8 label[1];
 };
 
-struct LayoutPoint {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-};
-
 extern "C" {
 extern RunWin *DAT_0043e170;
-extern RenderCtx *g_titleScene;
 
-LayoutPoint *asdTMTexTableEntryAt(s32 group, s32 part);
 void gxResetColorQuadToWhite(void);
 s32 vec2GetYInt(void *vec);
 void efctSetSpeed(f32 alpha);
@@ -80,7 +74,7 @@ u8 FUN_001acdd8(void)
         titleScenePushSecond(scene, packNibblesAndByte(6, 1, 0));
         texDrawCompositeSprite(2, 14, 0x15, x, y, 102);
         titleScenePopSecond(g_titleScene);
-        LayoutPoint *labelPoint = asdTMTexTableEntryAt(14, 0x16F);
+        TextureTableEntryIV *labelPoint = asdTMTexTableEntryAt(14, 0x16F);
         textDrawString(4, 0xF49800FF, reinterpret_cast<const char *>(win->label), (f32)(labelPoint->x + x), (f32)(labelPoint->y + y), 0.56640625f, 0.0f,
                      win->alpha);
         s32 step = win->frame / 5;
@@ -91,7 +85,7 @@ u8 FUN_001acdd8(void)
         for (s32 row = 0; row < 3; row++) {
             for (s32 column = 0; column < 3; column++) {
                 s32 index = row * 3 + column;
-                LayoutPoint *dot = asdTMTexTableEntryAt(14, 0x170 + index);
+                TextureTableEntryIV *dot = asdTMTexTableEntryAt(14, 0x170 + index);
                 if (lit == index || lit2 == index)
                     texDrawTableEntryAtStoredOrigin(2, 14, 0x155, dot->x + x, dot->y, 111);
                 else if (litPrevious == index || lit2Previous == index)

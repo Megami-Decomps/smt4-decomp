@@ -3,10 +3,10 @@
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match8_FadeQuad.h"
 #include "shard/JobWork.h"
+#include "camp/RenderCtxTitle.h"
 
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 u32 renderCtxPackPassFlags(u32 state, u32 flags);
 u32 asdGxPresetsGetByKind(u32 target);
 u32 asdGxPresetsGetHeightByKind(u32 target);

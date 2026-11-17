@@ -1,17 +1,14 @@
-#include "map/lmapMain.h"
-#include "map/mapDepart.h"
+#include "map/PopupStateA.h"
 
 extern "C" {
 
 void popupQueueInsertUnique(s32 state);
 s32 gameDataStatusFlagGet(s32 arg);
-s32 popupSelectWeightedMessage(s32 a, s32 b);
-
-extern LmapEventA *g_popupState;
+const char *popupSelectWeightedMessage(s32 kind, s32 speakerId);
 
 void FUN_002466a8(void)
 {
-    LmapEventA *event = g_popupState;
+    PopupStateA *popup = g_popupState;
 
     if (g_popupState->state != 0) {
         if (g_popupState->state != 0x10) {
@@ -20,12 +17,12 @@ void FUN_002466a8(void)
         }
     } else {
         g_popupState->state = 0x10;
-        event->unk04 = 0;
+        popup->timer = 0;
         if (gameDataStatusFlagGet(6) == 1) {
-            g_popupState->unk14 = popupSelectWeightedMessage(0x18, 0);
+            g_popupState->message = popupSelectWeightedMessage(0x18, 0);
             return;
         }
-        g_popupState->unk14 = popupSelectWeightedMessage(0x11, 0);
+        g_popupState->message = popupSelectWeightedMessage(0x11, 0);
     }
 }
 

@@ -35,7 +35,7 @@ u32 FUN_003bbf60(void)
         u64 flags = entry->flags;
         if (!(flags & g_btlCandidateMasks.unavailable) &&
             (flags & g_btlCandidateMasks.required) &&
-            !(flags & g_btlCandidateMasks.excluded) && entry->id == id &&
+            !(flags & g_btlCandidateMasks.excluded) && entry->data.id == id &&
             reinterpret_cast<const PropertyView *>(entry)->values[property] <= -1) {
             scrSetResult(1);
             return 1;
@@ -43,7 +43,7 @@ u32 FUN_003bbf60(void)
     }
     if (btlGetMainState()->unk4cd1) {
         BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
-        if (entry && entry->id == id &&
+        if (entry && entry->data.id == id &&
             reinterpret_cast<const PropertyView *>(entry)->values[property] <= -1) {
             scrSetResult(1);
             return 1;

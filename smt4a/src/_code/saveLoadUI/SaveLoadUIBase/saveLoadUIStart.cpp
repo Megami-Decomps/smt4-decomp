@@ -1,4 +1,5 @@
 #include "common.h"
+#include "Model/MoriModelManager.h"
 
 struct SaveLoadScreenModels {
     /* 0x00 */ u32 unk00;
@@ -37,7 +38,6 @@ static inline void saveLoadSetState(SaveLoadScreen *screen, u8 state)
 extern "C" {
 extern const char DAT_00533ec0[];
 extern const char DAT_00533f34[];
-extern void *g_handleRegistry;
 void FUN_002c7e6c(void);
 void FUN_002c85b0(s32 value);
 void gameGlobalsSetMenuOpenFlag(s32 value);
@@ -52,7 +52,6 @@ void resourceOwnerLoadFileSync(SaveLoadScreenModels *list, const char *name);
 void FUN_0040ab7c(SaveLoadScreenModels *list, s32 value);
 void moriModelContentLoadBody(SaveLoadScreenModels *list, s32 mode);
 void FUN_0045b538(void *object);
-void handleRegistryRegisterObject(void *registry, SaveLoadScreenObject *object);
 void modelPlayClip(SaveLoadScreenObject *object, s32 index, s32 mode, f32 first, f32 second);
 void controllerSetPositionXyz(SaveLoadScreenObject *object, f32 x, f32 y, f32 z);
 void saveLoadProcessCreate(s32 slot, s32 mode);

@@ -2,6 +2,8 @@
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxTitle.h"
 
 struct TitleLoadingScene {
     /* 0x000 */ u8 unk000[0x9ED];
@@ -19,16 +21,9 @@ struct LoadingDot {
     f32 y;
 };
 
-struct LoadingSpriteFrame {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-};
-
 #define LOADING_DOT_COUNT 9
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 extern s32 DAT_0044cdc8;   /* frames per ring step */
 extern u32 DAT_0044cdd0;   /* caption colour */
 
@@ -38,7 +33,6 @@ void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite(void);
 s32 vec2GetXInt(void *state);
 void texDrawCompositeSprite(u32 layer, u32 bank, u32 sprite, s32 x, s32 y, u32 flags);
-LoadingSpriteFrame *asdTMTexTableEntryAt(u32 bank, u32 sprite);
 s32 renderCtxPopState(RenderCtx *context, s32 stack);
 void uiSpriteAdvanceAnimation(void *state);
 
@@ -63,7 +57,7 @@ void FUN_0039bd04(TitleLoadingScene *scene)
 
     LoadingDot dots[LOADING_DOT_COUNT];
     for (s32 i = 0; i < LOADING_DOT_COUNT; i++) {
-        LoadingSpriteFrame *frame = asdTMTexTableEntryAt(0x1C, i + 0x1124);
+        TextureTableEntryIV *frame = asdTMTexTableEntryAt(0x1C, i + 0x1124);
         dots[i].x = (f32)frame->x;
         dots[i].y = (f32)frame->y;
         texDrawTableEntryAtStoredOrigin(1, 0x1C, 0x1121, vec2GetXInt(origin) + frame->x, frame->y, 6);
@@ -75,7 +69,7 @@ void FUN_0039bd04(TitleLoadingScene *scene)
     texDrawTableEntryAtStoredOrigin(1, 0x1C, 0x1123, (s32)((f32)vec2GetXInt(origin) + dots[opposite].x), (s32)dots[opposite].y, 6);
     texDrawTableEntryAtStoredOrigin(1, 0x1C, 0x1122, (s32)((f32)vec2GetXInt(origin) + dots[oppositeNext].x), (s32)dots[oppositeNext].y, 6);
 
-    LoadingSpriteFrame *caption = asdTMTexTableEntryAt(0x1C, 0x1120);
+    TextureTableEntryIV *caption = asdTMTexTableEntryAt(0x1C, 0x1120);
     char text[0x1B] = "\x82\x60\x82\x83\x82\x94\x82\x89\x82\x96\x82\x81\x82\x94\x82\x89\x82\x8E\x82\x87\x81\x44\x81\x44\x81\x44";
     textDrawString(4, DAT_0044cdd0, text, (f32)(vec2GetXInt(origin) - 0xE + caption->x), (f32)caption->y, 0.0f, 0.0f, 1.0f);
     renderCtxPopState(g_titleScene, 3);

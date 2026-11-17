@@ -5,6 +5,7 @@
 #include "shard/TextureDrawCall.h"
 #include "util/BitsAndBytes.h"
 #include "camp/RenderCtx.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -15,7 +16,6 @@ int vec2GetYInt(int);
 int efctSetSpeed(void);
 int renderCtxResetColorScale(...);
 int skinObjectUpdateMatrices(...);
-int asdTMTexTableEntryAt(...);
 int fontMeasureLineAdvance(...);
 int configDrawRowFrame(...);
 int resourceRunOperationIfUnblocked(int);
@@ -125,7 +125,7 @@ void FUN_002027fc(void)
     if (temp_v10 < temp_v1) {
       do {
         temp_v11 = temp_v5 + temp_v10;
-        temp_v6 = asdTMTexTableEntryAt(0x24,temp_v11);
+        temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,temp_v11));
         temp_v13 = temp_v0 + temp_v10 * 0x8c;
         temp_v7 = vec2GetXInt(reinterpret_cast<const void *>(temp_v13 + 0x174));
         temp_v13 = vec2GetYInt(temp_v13 + 0x174);
@@ -141,7 +141,7 @@ void FUN_002027fc(void)
           }
           configDrawRowFrame(*(short *)(temp_v6 + 8) + temp_v7,*(short *)(temp_v6 + 10) + temp_v13,1,
                        (temp_v14 || temp_v15) || temp_v16,0);
-          temp_v8 = asdTMTexTableEntryAt(0x24,temp_v11);
+          temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,temp_v11));
           temp_v11 = g_renderCtx;
           temp_v9 = packNibblesAndByte(6, 1, 0);
           piVar15 = (int *)(temp_v11 + 0x12b8);
@@ -189,7 +189,7 @@ void FUN_002027fc(void)
         }
         textFormatBuffer(temp_v18,"%s",
                      temp_v2 + *(int *)(temp_v0 + temp_v10 * 8 + 0x98) * 0xc + 0x1e);
-        temp_v11 = asdTMTexTableEntryAt(0x24,0x74);
+        temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x74));
         puVar11 = temp_v18;
         fontMeasureLineAdvance(puVar11,2);
         VectorSignedToFloat((int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v11 + 10) + temp_v13,

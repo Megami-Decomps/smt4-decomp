@@ -1,5 +1,6 @@
 /* NON_MATCHING: identical calls and branches; retail keeps 0 in r7 (the touched flag) and 1 in r6 across the calls with a 28-byte frame, armcc here allocates r6 for the flag and re-materialises 1. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* The list menu scene (only the fields this update reads or writes). */
 struct ListMenu {
@@ -40,12 +41,11 @@ void FUN_00228b04(void *list, s32 arg);
 void useCounterStart(void);
 void FUN_0031f208(s32 id);
 void sortMenuAcquire(s32 id, s32 arg);
-s32 FUN_003450d4(void *list, u32 handle, void *area, s32 x, s32 y, s32 w, u8 *flag, s32 a, s32 b);
+s32 FUN_003450d4(void *list, const TextureTableEntryIV *touchArea, void *area, s32 x, s32 y, s32 w, u8 *flag, s32 a, s32 b);
 u32 contentFindRecordById(void);
 void FUN_004029f4(ListMenu *menu, s32 a, s32 b);
 void FUN_00404974(ListMenu *menu);
 s32 ifTouchGetSelectionMode(void);
-u32 asdTMTexTableEntryAt(u32 a, u32 b);
 s32 resourceRunOperationIfUnblocked(void *list);
 s32 listCursorGetRowIfUnblocked(void *list);
 
@@ -62,8 +62,8 @@ void FUN_00403e2c(ListMenu *menu)
     ((ListMenuTail *)((u8 *)menu + 0x664))->selectedCopy = contentFindRecordById();
     u8 touched = 0;
     s32 mode = ifTouchGetSelectionMode();
-    u32 handle = asdTMTexTableEntryAt(50, 139);
-    if (FUN_003450d4(menu->list, handle, menu->area, menu->areaX, menu->areaY, menu->areaWidth, &touched, 0, 1))
+    const TextureTableEntryIV *touchArea = asdTMTexTableEntryAt(50, 139);
+    if (FUN_003450d4(menu->list, touchArea, menu->area, menu->areaX, menu->areaY, menu->areaWidth, &touched, 0, 1))
         return;
     if (padQueryLogicalKey(0, 1) || mode == 6) {
         eventQueueAddUniqueIfValid(0x0100020E);

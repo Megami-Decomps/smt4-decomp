@@ -1,9 +1,10 @@
 #include "code/Code002a_VariantA.h"
 /* NON_MATCHING: constant-zero return and input/work register lifetimes save one fewer register; packed result ID uses two loads instead of retail LDM. */
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteWork.h"
 #include "shard/Shard0031.h"
 #include "shard/Shard0032.h"
-#include "ui/TouchRectangleRequest.h"
+#include "ui/IfTouch.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 namespace {
 struct FusionInheritanceInputView {
@@ -39,7 +40,7 @@ typedef char FusionInheritanceInputLayoutCheck[
 }
 
 extern "C" {
-u32 FUN_003450d4(FlaggedEntry *entry, const TouchRectangleRequest *rectangle, const s16 *ids,
+u32 FUN_003450d4(FlaggedEntry *entry, const TextureTableEntryIV *rectangle, const s16 *ids,
     u32 firstKey, u32 secondKey, u32 thirdKey, bool *blockedMode, s32 secondary, s32 notify);
 s32 FUN_00228b04(FlaggedEntry *entry, s32 mode);
 s32 resourceRunOperationIfUnblocked(const FlaggedEntry *entry);
@@ -50,7 +51,7 @@ void unitRecordBuild(u32 id, UnitRecord *record);
 void FUN_0020b908(u32 channel, u32 mode);
 void eventQueueAddUniqueIfValid(u32 event);
 
-u32 FUN_003cca18(UniteWork *work, s8 blocked, u32 *selected)
+u32 FUN_003cca18(UniteWorkA *work, s8 blocked, u32 *selected)
 {
     FusionInheritanceInputView *input = reinterpret_cast<FusionInheritanceInputView *>(work);
     if (FUN_003450d4(&input->primary, NULL, input->modeKeys, -1, -1, -1,

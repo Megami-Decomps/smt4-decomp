@@ -43,8 +43,8 @@ s32 FUN_004c67d0(void)
     for (s32 i = 0; i < 4; i++) {
         if (isFighting(&units[i])) {
             partyCount++;
-            partyLevel += units[i].levelStats.level;
-            partyAgility += units[i].levelStats.agility;
+            partyLevel += units[i].data.agility;
+            partyAgility += units[i].data.luck;
         }
     }
     partyLevel = __aeabi_idivmod(partyLevel, partyCount);
@@ -55,8 +55,8 @@ s32 FUN_004c67d0(void)
     for (s32 i = 4; i < 0x36; i++) {
         if (isFighting(&units[i])) {
             enemyCount++;
-            enemyLevel += units[i].levelStats.level;
-            enemyAgility += units[i].levelStats.agility;
+            enemyLevel += units[i].data.agility;
+            enemyAgility += units[i].data.luck;
         }
     }
     enemyLevel = __aeabi_idivmod(enemyLevel, enemyCount);

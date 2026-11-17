@@ -24,7 +24,7 @@ u32 FUN_0027de98(BattleActionListState *state)
     for (s32 index = 0; index < state->count; ++index) {
         s32 kind = state->actions[index].kind;
         if (state->mode == 0) {
-            if (kind != 4 || (state->units[state->actions[index].unitIndex].groupMask & 0x1C0) == 0) {
+            if (kind != 4 || (state->units[state->actions[index].unitIndex].data.statusFlags & 0x1C0) == 0) {
                 return 1;
             }
         } else if (kind == 5) {

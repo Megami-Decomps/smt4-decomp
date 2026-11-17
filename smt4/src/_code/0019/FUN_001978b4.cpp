@@ -2,7 +2,8 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteWork.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -37,12 +38,10 @@ extern int ifTouchGetSelectionModeForRegion(int);
 extern unsigned int FUN_0029e958(int);
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: vec2GetXInt. */
-extern int asdTMTexTableEntryAt(unsigned int, int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int gameFlagIsSet(unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002ccc28. */
-
 
 void FUN_001978b4(void)
 
@@ -117,7 +116,7 @@ void FUN_001978b4(void)
           if ((temp_v4 & 1) != 0) {
             temp_v11 = temp_v21;
           }
-          temp_v11 = asdTMTexTableEntryAt(0x1d,temp_v11 + temp_v10);
+          temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,temp_v11 + temp_v10));
           texDrawTableEntryAtStoredOrigin(2,0x1d,0x22,*(short *)(temp_v11 + 8) + temp_v1,*(short *)(temp_v11 + 10) + temp_v2,
                        0xce);
           temp_v2 = *(short *)(temp_v11 + 10) + temp_v2;
@@ -170,7 +169,7 @@ void FUN_001978b4(void)
           temp_v9 = 0x1b;
         }
         temp_v8 = objectPartRunUnlessLocked(temp_v0 + 0x34);
-        temp_v7 = asdTMTexTableEntryAt(0x1d,temp_v8 + temp_v9 + temp_v7 / 2);
+        temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,temp_v8 + temp_v9 + temp_v7 / 2));
         temp_v12 = temp_v12 + temp_v2;
         temp_v1 = temp_v1 + temp_v11;
         texDrawTableEntryAtStoredOrigin(2,0x1d,0x23,*(short *)(temp_v7 + 8) + temp_v1,*(short *)(temp_v7 + 10) + temp_v12,0xd8)

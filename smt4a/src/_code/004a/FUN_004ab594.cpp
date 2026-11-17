@@ -27,7 +27,7 @@ u32 FUN_004ab594(void)
     BtlUiA *ui = g_btlUi.ui;
     if (FUN_002cc9e0(&ui->objC, 1) != 10)
         return ~0u;
-    SaveSlotTable *party = gameGetSlotTable();
+    SaveSlotTableA *party = gameGetSlotTable();
     const BattlePartySelectionView *selection = (const BattlePartySelectionView *)ui;
     PartySelection chosen = {-1, -1};
     for (s32 i = -1; i < 3; ++i) {

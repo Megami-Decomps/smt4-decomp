@@ -4,6 +4,8 @@
 #include "ui/MessageMainA.h"
 #include "shard/TextureDrawCall.h"
 #include "addon/LookupRecord.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 
@@ -14,7 +16,7 @@ int textDrawString(...);
 int vec2GetXInt(...);
 int vec2GetYInt(...);
 int efctSetSpeed(void);
-int renderStackPushIndexed(unsigned int, int, unsigned int);
+int renderStackPushIndexed(RenderCtxA *, int, unsigned int);
 int FUN_00180310(...);
 int uiDrawItemOrStatusIcon(...);
 int gxResetColorQuadToWhite(void);
@@ -34,7 +36,6 @@ typedef struct {
 
 extern unsigned char DAT_00530b54; /* 0x530b54 */
 extern unsigned char DAT_00530b58; /* 0x530b58 */
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
@@ -47,7 +48,6 @@ extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderStackPushIndexed. */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: uiDrawItemOrStatusIcon. */
-extern int asdTMTexTableEntryAt(unsigned int, int);
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -124,7 +124,7 @@ void FUN_00165b08(void)
       renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v4 = (int)temp_v13 + temp_v4;
       efctSetSpeed();
-      temp_v8 = asdTMTexTableEntryAt(0x14,temp_v10 + 0xc34);
+      temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,temp_v10 + 0xc34));
       temp_v6 = (int)*(short *)(temp_v8 + 10);
       temp_v11 = temp_v6 + temp_v5;
       temp_v8 = *(short *)(temp_v8 + 8) + temp_v4;
@@ -143,14 +143,14 @@ void FUN_00165b08(void)
         gxResetColorQuadToWhite();
       }
       texDrawTableEntryAtStoredOrigin(2,0x14,temp_v16,temp_v8,temp_v11,0xbf);
-      temp_v8 = asdTMTexTableEntryAt(0x14,temp_v10 + 0xc42);
+      temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,temp_v10 + 0xc42));
       uiDrawItemOrStatusIcon((int)*(short *)(temp_v3 + 0x62),*(short *)(temp_v8 + 8) + temp_v4,
                    *(short *)(temp_v8 + 10) + temp_v5,0xc4,0);
-      temp_v8 = asdTMTexTableEntryAt(0x14,temp_v10 + 0xc3b);
+      temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,temp_v10 + 0xc3b));
       texDrawTableEntryAtStoredOrigin(2,0x14,0xbc2,*(short *)(temp_v8 + 8) + temp_v4,*(short *)(temp_v8 + 10) + temp_v5,0xbf)
       ;
       textFormatBuffer(temp_v18,&DAT_00530b58,*(unsigned short *)(temp_v3 + 100));
-      temp_v8 = asdTMTexTableEntryAt(0x14,temp_v10 * 3 + 0xc52);
+      temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,temp_v10 * 3 + 0xc52));
       temp_v0 = *(short *)(temp_v8 + 8);
       temp_v1 = *(short *)(temp_v8 + 10);
       drawSetColorFromRGBA8(0xffffffff);
@@ -159,7 +159,7 @@ void FUN_00165b08(void)
       rt_aeabi_memclr(temp_v17,0x40);
       temp_v2 = (unsigned int)FUN_00180114(*(unsigned short *)(temp_v3 + 0x62));
       textFormatBuffer(temp_v17,&DAT_00530b54,temp_v2);
-      temp_v3 = asdTMTexTableEntryAt(0x14,temp_v10 + 0xc49);
+      temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,temp_v10 + 0xc49));
       puVar8 = temp_v17;
       fontMeasureLineAdvance(puVar8,2);
       temp_v4 = temp_v4 + (int)*(short *)(temp_v3 + 8) +
@@ -186,7 +186,7 @@ LAB_00165eec:
       temp_v4 = vec2GetXInt(((int)g_messageMain.banner) + temp_v9 * 0x8c + 0xdbc);
       temp_v5 = vec2GetYInt(((int)g_messageMain.banner) + temp_v9 * 0x8c + 0xdbc);
       efctSetSpeed();
-      temp_v8 = asdTMTexTableEntryAt(0x14,temp_v10 + 0xc34);
+      temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,temp_v10 + 0xc34));
       temp_v6 = (int)*(short *)(temp_v8 + 10);
       temp_v11 = temp_v6 + temp_v5;
       temp_v8 = *(short *)(temp_v8 + 8) + temp_v4;
@@ -205,14 +205,14 @@ LAB_00165eec:
         gxResetColorQuadToWhite();
       }
       texDrawTableEntryAtStoredOrigin(2,0x14,temp_v16,temp_v8,temp_v11,0xbf);
-      temp_v8 = asdTMTexTableEntryAt(0x14,temp_v10 + 0xc42);
+      temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,temp_v10 + 0xc42));
       uiDrawItemOrStatusIcon((int)*(short *)(temp_v3 + 0x62),*(short *)(temp_v8 + 8) + temp_v4,
                    *(short *)(temp_v8 + 10) + temp_v5,0xc4,0);
-      temp_v8 = asdTMTexTableEntryAt(0x14,temp_v10 + 0xc3b);
+      temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,temp_v10 + 0xc3b));
       texDrawTableEntryAtStoredOrigin(2,0x14,0xbc2,*(short *)(temp_v8 + 8) + temp_v4,*(short *)(temp_v8 + 10) + temp_v5,0xbf)
       ;
       textFormatBuffer(temp_v18,&DAT_00530b58,*(unsigned short *)(temp_v3 + 100));
-      temp_v8 = asdTMTexTableEntryAt(0x14,temp_v10 * 3 + 0xc52);
+      temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,temp_v10 * 3 + 0xc52));
       temp_v0 = *(short *)(temp_v8 + 8);
       temp_v1 = *(short *)(temp_v8 + 10);
       drawSetColorFromRGBA8(0xffffffff);
@@ -221,7 +221,7 @@ LAB_00165eec:
       rt_aeabi_memclr(temp_v17,0x40);
       temp_v2 = (unsigned int)FUN_00180114(*(unsigned short *)(temp_v3 + 0x62));
       textFormatBuffer(temp_v17,&DAT_00530b54,temp_v2);
-      temp_v3 = asdTMTexTableEntryAt(0x14,temp_v10 + 0xc49);
+      temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,temp_v10 + 0xc49));
       puVar8 = temp_v17;
       fontMeasureLineAdvance(puVar8,2);
       temp_v4 = temp_v4 + (int)*(short *)(temp_v3 + 8) +
@@ -240,7 +240,7 @@ LAB_00165eec:
     efctSetSpeed();
     temp_v7 = FUN_00184ed0();
     if (-1 < temp_v7) {
-      temp_v7 = asdTMTexTableEntryAt(0x14,temp_v7 + 0xc34);
+      temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,temp_v7 + 0xc34));
       temp_v9 = (int)*(short *)(temp_v7 + 8) + ((int)temp_v13 - 2);
       temp_v7 = *(short *)(temp_v7 + 10) - 2;
       efctSetSpeed();

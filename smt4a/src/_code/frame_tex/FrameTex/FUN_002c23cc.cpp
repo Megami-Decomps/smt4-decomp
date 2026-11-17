@@ -1,11 +1,9 @@
 /* NON_MATCHING: texture setup store grouping, allocation constants/live registers and preserved argument stack layout differ. */
-#include "ui/FrameTex.h"
-#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
+#include "frame_tex/FrameTexA.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
-extern FrameWorkA *g_frameTex;
 AsdTexture *asdTextureCreate(s32);
 void *asdMemoryAlloc(u32, u32, u32, u32, u32);
 u32 asdGxGetPhysicalAddress(const void *);
@@ -29,40 +27,26 @@ static inline void configureFrameCaptureTexture(AsdTexture *texture, s32 width, 
 
 extern "C" void FUN_002c23cc(s32 useVramB)
 {
-    // The capture slots follow, rather than enlarge, the shared FrameWorkA prefix.
-    struct CaptureView {
-        FrameWorkA prefix;
-        AsdTexture *main;
-        u8 vramA;
-        u8 unk1495[3];
-        AsdTexture *medium;
-        AsdTexture *small;
-    };
-    typedef char CaptureOffsets[
-        offsetof(CaptureView, main) == 0x1490 &&
-        offsetof(CaptureView, vramA) == 0x1494 &&
-        offsetof(CaptureView, medium) == 0x1498 &&
-        offsetof(CaptureView, small) == 0x149c ? 1 : -1];
-    CaptureView *work = reinterpret_cast<CaptureView *>(g_frameTex);
+    FrameTexWorkA *work = g_frameTex;
     AsdTexture *texture = asdTextureCreate(0);
-    if (work->main)
+    if (work->sceneSurface)
         return;
     if (useVramB) {
-        work->vramA = 0;
+        work->hdrDownsampleChain = 0;
         configureFrameCaptureTexture(texture, 512, 400, 0x64000, ASD_HEAP_VRAM_B, 606);
-        work->main = texture;
+        work->sceneSurface = texture;
     } else {
-        work->vramA = 1;
+        work->hdrDownsampleChain = 1;
         configureFrameCaptureTexture(texture, 512, 400, 0x64000, ASD_HEAP_VRAM_A, 546);
-        work->main = texture;
+        work->sceneSurface = texture;
         texture = asdTextureCreate(0);
         configureFrameCaptureTexture(texture, 256, 256, 0x20000, ASD_HEAP_VRAM_A, 565);
-        work->medium = texture;
+        work->hdrSurfaceHalf = texture;
         texture = asdTextureCreate(0);
         configureFrameCaptureTexture(texture, 128, 128, 0x8000, ASD_HEAP_VRAM_A, 584);
-        work->small = texture;
+        work->hdrSurfaceQuarter = texture;
     }
-    work->prefix.unk148C = 0;
-    work->prefix.unkFAE = 0;
-    work->prefix.unkFAD = 0;
+    work->captureBlocked = 0;
+    work->hdr.capturedRight = 0;
+    work->hdr.capturedLeft = 0;
 }

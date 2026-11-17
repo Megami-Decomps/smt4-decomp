@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00285584` (_code @ 0x285584, 0x70c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -16,7 +17,6 @@ int renderCtxCalculateStereoParallax(int);
 int gxResetColorQuadToWhite(void);
 int texDrawTableEntryAtStoredOrigin(...);
 int texDrawCompositeSprite(...);
-int asdTMTexTableEntryAt(int, int);
 int efctSetSpeed(void);
 int renderCtxApplyTransforms(...);
 int spriteDrawAnimationUnplaced(...);

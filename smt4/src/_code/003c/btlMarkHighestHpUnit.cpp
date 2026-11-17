@@ -11,9 +11,9 @@ extern "C" void btlMarkHighestHpUnit(BtlMainState **owner)
     s32 maximumHp = 0;
     BtlMainState *battle = *owner;
     for (s32 index = 0; index < 109; ++index) {
-        if ((battle->entries[index].flags & 0x400) && battle->entries[index].hp >= maximumHp) {
+        if ((battle->entries[index].flags & 0x400) && battle->entries[index].data.hp >= maximumHp) {
             candidates[candidateCount++] = battle->entries[index].selectionIndex;
-            maximumHp = battle->entries[index].hp;
+            maximumHp = battle->entries[index].data.hp;
         }
     }
     btlUnitGet(owner)->targets[candidates[candidateCount - 1]] = 1;

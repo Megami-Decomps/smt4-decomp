@@ -1,15 +1,7 @@
 /* NON_MATCHING: default optimization combines repeated slot/source loads and omits retail inline-getter hints (95/81 rows, six versus eight saved GPRs); O2 candidate. */
 #include "ui/PartyPanelState.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "gamedata/UnitRecordAccess.h"
-
-namespace {
-struct PartyStatusWidget {
-    PartyPanelWidget common;
-    u8 unk28[0xc];
-    s32 source;
-};
-}
 
 extern "C" {
 void FUN_0033c468(PartyPanelWidget* widget);
@@ -20,7 +12,7 @@ s32 FUN_0028dbe0(PartyPanelWidget* widget);
 namespace {
 inline s32 widgetSource(PartyPanelWidget* widget)
 {
-    return reinterpret_cast<const PartyStatusWidget*>(widget)->source;
+    return widget->slot;
 }
 
 // Keep the slot by reference: callbacks may replace its widget.

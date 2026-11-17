@@ -1,12 +1,6 @@
-#include "common.h"
+#include "camp/Unite/UniteGlobals.h"
 
 extern "C" {
-
-typedef struct Record {
-    /* 0x000 */ u8 unk000[0x400];
-    /* 0x400 */ s32 state;
-} Record;
-extern Record *g_unite;
 
 /* Returns whether there is no record or its state is 0x28. */
 u8 uniteStateIsDone(void)

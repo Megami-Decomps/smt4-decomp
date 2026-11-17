@@ -1,7 +1,6 @@
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 
 extern "C" {
-extern ButtonHelpGlobals g_buttonHelp;
 
 s32 asdTMTexTableLoadSprites(s32 id);
 s32 asdTMTexTablePrepareNodeImage(s32 id, s32 arg);

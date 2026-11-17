@@ -1,9 +1,8 @@
 /* NON_MATCHING: Glyph-case tail layout, work/index saved registers, timer argument scheduling and the selected-field address differ. */
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 #include <stddef.h>
 
 extern "C" {
-extern ButtonHelpGlobals g_buttonHelp;
 void spriteStartAnimationByIndex(ButtonHelpDisplayUnit *unit, s32 value);
 u16 FUN_002aa024(s32 resource, s32 glyph);
 void FUN_002a9fdc(ButtonHelpDisplayUnit *unit, s32 value);

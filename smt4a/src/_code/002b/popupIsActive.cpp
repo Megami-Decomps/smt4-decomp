@@ -1,9 +1,6 @@
-#include "map/lmapMain.h"
-#include "map/mapDepart.h"
+#include "map/PopupStateA.h"
 
 extern "C" {
-
-extern LmapEventA *g_popupState;
 
 bool popupIsActive(void)
 {

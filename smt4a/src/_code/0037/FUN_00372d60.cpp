@@ -19,7 +19,7 @@ u32 FUN_00372d60()
         if ((flags & g_btlCandidateMasks.unavailable) &&
             (flags & g_btlCandidateMasks.required) && !(g_btlCandidateMasks.excluded & flags)) {
             ++count;
-            total += entry->thresholdView.unk27A;
+            total += entry->data.unk116;
         }
     }
     scrSetResult(threshold <= total / count);

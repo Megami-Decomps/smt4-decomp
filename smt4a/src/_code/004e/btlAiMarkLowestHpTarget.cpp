@@ -25,9 +25,9 @@ void btlAiMarkLowestHpTarget(BattleAiContext *context)
     BtlMainStateA *battle = context->state;
 
     for (s32 i = 0; i < 109; ++i) {
-        if ((battle->entries[i].flags & g_btlAction.clearedFlags.mask) != 0 && battle->entries[i].hp <= lowestHp) {
-            candidates[count++] = battle->entries[i].indexView.selectionIndex;
-            lowestHp = battle->entries[i].hp;
+        if ((battle->entries[i].flags & g_btlAction.clearedFlags.mask) != 0 && battle->entries[i].data.hp <= lowestHp) {
+            candidates[count++] = battle->entries[i].selectionIndex;
+            lowestHp = battle->entries[i].data.hp;
         }
     }
     s32 pick = btlAiFilterCandidatesByExclusionChance(&context->state, candidates, count, 1);

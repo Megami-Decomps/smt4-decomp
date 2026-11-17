@@ -1,6 +1,6 @@
 /* NON_MATCHING: vector copies split into two-word plus scalar transfers rather than retail's three-word LDM/STM; selection/gate address materialization differs. */
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 
@@ -60,7 +60,7 @@ void FUN_003d6644(BattleVectorTransition *camera, BtlMainState *battle, s32 slot
     }
     BtlEntry *entry = &battle->entries[slot];
     if (!(entry->flags & 2) && (entry->flags & 8)) {
-        const DevilBodyAttributes *attributes = reinterpret_cast<const DevilBodyAttributes *>(nkmBaseGetRecord(entry->id));
+        const DevilBodyAttributes *attributes = reinterpret_cast<const DevilBodyAttributes *>(nkmBaseGetRecord(entry->data.id));
         switch ((attributes->flags >> 25) & 15) {
         case 0: camera->axis.current.y = 0.0f; break;
         case 1: camera->axis.current.y = -3.5f; break;

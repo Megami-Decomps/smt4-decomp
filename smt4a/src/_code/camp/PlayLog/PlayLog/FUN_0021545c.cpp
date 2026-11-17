@@ -6,7 +6,8 @@
 #include "shard/W6_W6Match3_ScrollSelection.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
-#include "ui/TouchRectangleRequest.h"
+#include "ui/IfTouch.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* One page of the play log: its values and their details. */
 struct PlayLogPageView {
@@ -57,9 +58,8 @@ void eventQueueAddUniqueIfValid(s32 event);
 void FUN_002007f4(void *work);
 u8 FUN_00228b04(ScrollSelection *list, s32 mode);
 u32 FUN_002e50d4(void);
-u32 FUN_003450d4(ScrollSelection *list, const TouchRectangleRequest *rectangle, const s16 *ids, u32 firstKey,
+u32 FUN_003450d4(ScrollSelection *list, const TextureTableEntryIV *rectangle, const s16 *ids, u32 firstKey,
                  u32 secondKey, u32 thirdKey, bool *blocked, s32 secondary, s32 notify);
-TouchRectangleRequest *asdTMTexTableEntryAt(u32 file, s32 index);
 s32 resourceRunOperationIfUnblocked(ScrollSelection *list);
 s32 listCursorGetRowIfUnblocked(const void *object);
 s32 objectApplyIfUnblocked(ScrollSelection *list);
@@ -96,7 +96,7 @@ void FUN_0021545c(void)
             }
         }
         bool blocked = false;
-        TouchRectangleRequest *rectangle = asdTMTexTableEntryAt(0x25, 0x1C);
+        TextureTableEntryIV *rectangle = asdTMTexTableEntryAt(0x25, 0x1C);
         s32 before = resourceRunOperationIfUnblocked(&work->list);
         if (FUN_003450d4(&work->list, rectangle, NULL, work->touchRegions[2], work->touchRegions[0],
                          work->touchRegions[1], &blocked, 0, 0) != 0) {

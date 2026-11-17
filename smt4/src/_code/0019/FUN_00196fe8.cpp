@@ -2,6 +2,7 @@
 #include "shard/S1ListPanel.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 namespace {
 struct ConfigurationChoices {
@@ -11,7 +12,6 @@ struct ConfigurationChoices {
 }
 extern "C" {
 extern const char DAT_004028ec[];
-const SpriteInfo *asdTMTexTableEntryAt(u32 archive, s32 index);
 void texDrawCompositeSprite(s32 layer, u32 archive, u32 image, s32 x, s32 y, s32 priority);
 s32 textFormatBuffer(char *destination, const char *format, ...);
 
@@ -22,7 +22,7 @@ void FUN_00196fe8(s32 count, s32 x, s32 y, s32 selected, const ConfigurationChoi
     if (count > 2)
         firstPosition = 0x44;
     for (s32 index = 0; index < count; ++index) {
-        const SpriteInfo *position = asdTMTexTableEntryAt(0x2f, firstPosition + index);
+        const TextureTableEntryIV *position = asdTMTexTableEntryAt(0x2f, firstPosition + index);
         u32 color;
         if (selected == index) {
             color = 0xff;
@@ -33,9 +33,9 @@ void FUN_00196fe8(s32 count, s32 x, s32 y, s32 selected, const ConfigurationChoi
         }
         char text[64];
         textFormatBuffer(text, DAT_004028ec, choices->labels[index]);
-        const SpriteInfo *label = asdTMTexTableEntryAt(0x2f, 0x41);
+        const TextureTableEntryIV *label = asdTMTexTableEntryAt(0x2f, 0x41);
         s32 width = fontMeasureLineAdvance(text, 2);
-        s32 labelX = position->x + (x + (label->x + (label->size[0] - width) / 2));
+        s32 labelX = position->x + (x + (label->x + (label->placement->width - width) / 2));
         s32 labelY = position->y + label->y + y;
         textDrawString(2, color, text, static_cast<f32>(labelX), static_cast<f32>(labelY), 0.0f, 0.0f, 1.0f);
     }

@@ -2,27 +2,20 @@
 #include "shard/TextureDrawCall.h"
 
 extern "C" {
-extern StatusDownState *g_statusDown;
 
 // Draw paired status indicators using their active or inactive sprite variants.
 void FUN_0029ab54(s32 x, s32 y)
 {
-    // The shared padding begins unaligned; keep this aligned view local.
-    struct StatusIndicatorView {
-        u8 unk000[0x424];
-        s32 first;
-        s32 second;
-    };
-    StatusIndicatorView *status = reinterpret_cast<StatusIndicatorView *>(g_statusDown);
+    StatusDownState *status = g_statusDown;
     if (FUN_00288498()) {
-        if (status->first == 1 || status->first == 2) {
+        if (status->indicatorFirst == 1 || status->indicatorFirst == 2) {
             texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x4D5, x, y, 0xBA);
             texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x4D9, x, y, 0xBA);
         } else {
             texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x4D3, x, y, 0xBA);
             texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x4D7, x, y, 0xBA);
         }
-        if (status->second == 1 || status->second == 2) {
+        if (status->indicatorSecond == 1 || status->indicatorSecond == 2) {
             texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x4D4, x, y, 0xBA);
             texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x4D8, x, y, 0xBA);
             return;

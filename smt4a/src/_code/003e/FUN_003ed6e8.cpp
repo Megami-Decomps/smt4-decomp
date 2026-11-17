@@ -42,7 +42,7 @@ u32 FUN_003ed6e8(BtlMainStateA *state)
     if (!entry)
         return 0;
     if ((entry->flags & masks->required) && !(entry->flags & masks->excluded)) {
-        const BattleSlotSourceRecordA *source = (const BattleSlotSourceRecordA *)entry->specialMaximum.record;
+        const BattleSlotSourceRecordA *source = (const BattleSlotSourceRecordA *)entry->data.specialRecord;
         if (!source)
             return 0;
         const NkmBaseRecordA *devil = nkmBaseGetRecord(source->id);

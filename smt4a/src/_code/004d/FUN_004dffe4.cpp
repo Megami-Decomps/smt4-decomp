@@ -23,7 +23,7 @@ void FUN_004dffe4(BattleTargetSelectionView *context)
     for (s32 index = 0; index < 109; ++index) {
         BtlCombatantEntryA *entry = &context->battle->entries[index];
         if ((g_btlAction.clearedFlags.mask & entry->flags) != 0) {
-            s32 chance = btlFindEntryNonzeroRecordValue(entry->unitIndex);
+            s32 chance = btlFindEntryNonzeroRecordValue(entry->ids[0]);
             if (chance > 0 && (s32)lcgRandomRange(99) > chance)
                 context->battle->entries[index].flags &= ~g_btlAction.clearedFlags.mask;
             else

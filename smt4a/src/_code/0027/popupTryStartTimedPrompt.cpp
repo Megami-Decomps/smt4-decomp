@@ -1,26 +1,20 @@
 /* NON_MATCHING: named game-state view recovers r4; popup-global slot and zero value remain swapped between r5/r6. */
-#include "map/lmapMain.h"
+#include "map/PopupStateA.h"
 #include "game/GameStateA.h"
 #include "map/mapDepart.h"
 
-struct PopupTimeoutState {
-    LmapEventA event;
-    s32 eventId;  // 0x18
-};
-
 extern "C" {
 
-extern PopupTimeoutState* g_popupState;
-s32 popupSelectWeightedMessage(s32 kind, s32 eventId);
+const char *popupSelectWeightedMessage(s32 kind, s32 speakerId);
 
 void popupTryStartTimedPrompt(void)
 {
     GameStateA *game = &g_gameState;
-    if (game->popupElapsedFrames >= 18000 && g_popupState->event.state == 0) {
-        g_popupState->eventId = 0xad;
-        g_popupState->event.state = 11;
-        g_popupState->event.unk04 = 0;
-        g_popupState->event.unk14 = popupSelectWeightedMessage(2, g_popupState->eventId);
+    if (game->popupElapsedFrames >= 18000 && g_popupState->state == 0) {
+        g_popupState->speakerId = 0xad;
+        g_popupState->state = 11;
+        g_popupState->timer = 0;
+        g_popupState->message = popupSelectWeightedMessage(2, g_popupState->speakerId);
         game->popupElapsedFrames = 0;
     }
 }

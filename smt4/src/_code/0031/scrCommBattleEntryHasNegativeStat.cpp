@@ -1,4 +1,4 @@
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 
@@ -22,7 +22,7 @@ u32 scrCommBattleEntryHasNegativeStat()
     for (s32 index = 0; index < BTL_ENTRY_COUNT; ++index) {
         const BtlEntry *entry = &btlGetMainState()->entries[index];
         if ((entry->flags & BTL_ENTRY_FLAG_PRESENT) && (entry->flags & BTL_ENTRY_FLAG_ACTIVE) &&
-            !(entry->flags & BTL_ENTRY_FLAG_BLOCKED) && entry->id == id &&
+            !(entry->flags & BTL_ENTRY_FLAG_BLOCKED) && entry->data.id == id &&
             entry->stat[stat] <= -1) {
             scrSetResult(1);
             return 1;

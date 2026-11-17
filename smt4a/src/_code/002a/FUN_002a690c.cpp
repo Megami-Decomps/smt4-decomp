@@ -1,7 +1,7 @@
 /* NON_MATCHING: source/preview registers differ and the compiler merges the MP deduction/clamp branches. */
 #include "shard/PassiveSkill.h"
 #include "shard/Shard0031.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "shard/Shard004B.h"
 #include "gamedata/SkillDataRecord.h"
 #include "gamedata/PlayerDataBlock.h"

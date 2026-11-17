@@ -1,9 +1,9 @@
 #include "common.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 
-extern void *g_titleScene;
-void FUN_002c3a14(void *scene);
+void FUN_002c3a14(RenderCtx *scene);
 void FUN_002e1c04();
 
 /* Refreshes the title scene before advancing its UI callbacks. */

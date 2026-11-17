@@ -4,6 +4,7 @@
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
 #include "camp/RenderCtx.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -58,7 +59,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: skinObjectUpdateMatrices. */
-extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: camSetMatrixA. */
@@ -128,10 +128,10 @@ unsigned int FUN_0015519c(void)
       temp_v6 = -0x3c;
     }
     if (*(char *)(temp_v0 + 0x12) == '\0') {
-      unaff_r8 = asdTMTexTableEntryAt(8,0xdc);
+      unaff_r8 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0xdc));
     }
     if (*(char *)(temp_v0 + 0x12) == '\x01') {
-      unaff_r8 = asdTMTexTableEntryAt(8,0xdd);
+      unaff_r8 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0xdd));
     }
     temp_v2 = 0;
     temp_v10 = 0;
@@ -172,7 +172,7 @@ unsigned int FUN_0015519c(void)
     temp_v14 = temp_v8;
     temp_v19 = temp_v8;
     nn_math_ARMv6_MTX44MultAsm(temp_v24,temp_v24,&temp_v9);
-    temp_v1 = asdTMTexTableEntryAt(8,0x15);
+    temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0x15));
     temp_v10 = 0;
     temp_v12 = VectorSignedToFloat(-((int)**(short **)(temp_v1 + 0xc) / 2 + 4),
                                    (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -246,10 +246,10 @@ unsigned int FUN_0015519c(void)
     texDrawCompositeSprite(2,8,temp_v2,0,temp_v3,0x6a);
     if (*(char *)(temp_v0 + 0x10) != '\0') {
       if (*(char *)(temp_v0 + 0x12) == '\0') {
-        temp_v1 = asdTMTexTableEntryAt(8,0xdc);
+        temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0xdc));
       }
       if (*(char *)(temp_v0 + 0x12) == '\x01') {
-        temp_v1 = asdTMTexTableEntryAt(8,0xdd);
+        temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0xdd));
       }
       if (*(int *)(temp_v0 + 0x14) != 2) {
         if (*(int *)(temp_v0 + 0x14) != 6) {

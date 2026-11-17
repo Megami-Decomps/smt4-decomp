@@ -1,5 +1,5 @@
 /* NON_MATCHING: slot/cache register roles and early 0x3800 base hoisting differ; signed 0x38CC flag now matches folded byte access. */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "gamedata/GameDataAccess.h"
 #include "gamedata/GamePlayerData.h"
 

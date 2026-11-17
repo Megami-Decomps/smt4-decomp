@@ -1,11 +1,10 @@
 /* NON_MATCHING: initial map-global load/prologue ordering differs; the model-creation body matches. */
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 #include "map/mapDepart.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "game/GameState.h"
 
 extern "C" {
-extern MapIfGlobals g_mapIf;
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 AsdMdlObject *asdMdlManagerCreateLoaded(const char *path, u32 flags);
 void nodeSetTranslation(AsdMdlNode *node, u32 mode, const f32 *position);
@@ -13,21 +12,15 @@ void modelPartSetRotationDegrees(AsdMdlNode *node, u32 mode, f32 x, f32 y, f32 z
 
 void FUN_001a9008(f32 x, f32 y, f32 z, f32 heading)
 {
-    // The model pointer follows the shared fast-model state, without growing it.
-    struct FastModelWorkView {
-        MapIfFastModelState state;
-        AsdMdlObject *model;
-    };
-    typedef char FastModelWorkLayoutCheck[offsetof(FastModelWorkView, model) == 0x1c ? 1 : -1];
-    FastModelWorkView *work = (FastModelWorkView *)&g_mapIf.state->fastModel;
+    MapIfModelSlot *work = &g_mapIf.state->slots[0];
     char path[128];
-    work->state.active = 1;
-    work->state.first = 0;
-    work->state.second = 0;
-    work->state.position[0] = x;
-    work->state.position[1] = y;
-    work->state.position[2] = z;
-    work->state.heading = heading;
+    work->active = 1;
+    work->state = 0;
+    work->timer = 0;
+    work->position.x = x;
+    work->position.y = y;
+    work->position.z = z;
+    work->position.w = heading;
     if (g_gameState.mapId == 24) {
         textFormatBuffer(path, "map/all/m099_fast.bam");
     } else {
@@ -35,7 +28,7 @@ void FUN_001a9008(f32 x, f32 y, f32 z, f32 heading)
     }
     work->model = asdMdlManagerCreateLoaded(path, 7);
     lightOwnerRegister(work->model, 1);
-    nodeSetTranslation(work->model->node, 0, work->state.position);
-    modelPartSetRotationDegrees(work->model->node, 0, 0.0f, work->state.heading, 0.0f);
+    nodeSetTranslation(work->model->node, 0, &work->position.x);
+    modelPartSetRotationDegrees(work->model->node, 0, 0.0f, work->position.w, 0.0f);
 }
 }

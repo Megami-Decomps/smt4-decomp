@@ -2,6 +2,7 @@
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match8_TitleOverlay.h"
+#include "camp/RenderCtxTitle.h"
 
 /* The title logo: four effect elements and the flags that enable its two draw passes. */
 struct TitleLogo {
@@ -13,7 +14,6 @@ struct TitleLogo {
 };
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 scale);
 void effectRenderTransformedInstance(TitleDrawElement *element, f32 value);

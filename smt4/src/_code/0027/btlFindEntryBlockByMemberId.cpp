@@ -10,7 +10,7 @@ BtlUnitData *btlFindEntryBlockByMemberId(BtlMainState *battle, s32 id)
     BtlUnitData *result = NULL;
     for (s32 i = 0; i < 109; i++) {
         for (s32 j = 0; j < 0x32; j++) {
-            s32 value = battle->entries[i].members.ids[j];
+            s32 value = battle->entries[i].ids[j];
             if (value < 0) {
                 break;
             }

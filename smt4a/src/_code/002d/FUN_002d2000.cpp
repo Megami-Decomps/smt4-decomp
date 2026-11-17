@@ -5,6 +5,7 @@
 #include "code/Code002b.h"
 #include "gamedata/GameDataAccess_VariantG.h"
 #include "gamedata/GameDataAccess.h"
+#include "shard/W5_W5Match7_FlagBanks.h"
 
 /* Selection state of the map scene being entered. */
 struct MapSelection {

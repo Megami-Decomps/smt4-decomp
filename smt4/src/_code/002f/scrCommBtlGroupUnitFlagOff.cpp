@@ -23,7 +23,7 @@ u32 scrCommBtlGroupUnitFlagOff(void)
     for (index = start; index < count + start; index++) {
         BtlEntry *unit = &btlGetMainState()->entries[index];
 
-        if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && (unit->groupMask & (1 << (flag & 0xFF))) == 0) {
+        if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && (unit->data.statusFlags & (1 << (flag & 0xFF))) == 0) {
             scrSetResult(1);
             return 1;
         }
@@ -33,7 +33,7 @@ u32 scrCommBtlGroupUnitFlagOff(void)
 
         btlGetMainState();
         active = btlMainFindActiveEntry();
-        if (active != NULL && (active->groupMask & (1 << (flag & 0xFF))) == 0) {
+        if (active != NULL && (active->data.statusFlags & (1 << (flag & 0xFF))) == 0) {
             scrSetResult(1);
             return 1;
         }

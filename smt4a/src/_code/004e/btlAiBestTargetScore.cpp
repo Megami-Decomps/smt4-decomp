@@ -41,7 +41,7 @@ s32 btlAiBestTargetScore(BtlContextA *context)
             BtlCombatantEntryA *entry = &context->state->entries[unit->scores[i].entry];
 
             if ((entry->flags & g_btlAction.targetFlags) != 0 &&
-                FUN_004e83ac(context, unit, entry->unitIndex) == 0 && unit->scores[i].score > best) {
+                FUN_004e83ac(context, unit, entry->ids[0]) == 0 && unit->scores[i].score > best) {
                 best = unit->scores[i].score;
             }
         }

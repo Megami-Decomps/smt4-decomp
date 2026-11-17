@@ -1,4 +1,4 @@
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/btlScript.h"
 #include "battle/BattleUnitSlot.h"
@@ -20,10 +20,10 @@ u32 btlScriptDamageFirstCombatantNonlethally()
     s32 damage = scrGetArg(0);
     ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     FUN_00250720(btlGetMainState());
-    if (btlGetMainState()->entries[0].hp <= damage)
-        damage = btlGetMainState()->entries[0].hp - 1;
-    s32 maxHp = btlGetMainState()->entries[0].maxHp;
-    s32 hp = btlGetMainState()->entries[0].hp;
+    if (btlGetMainState()->entries[0].data.hp <= damage)
+        damage = btlGetMainState()->entries[0].data.hp - 1;
+    s32 maxHp = btlGetMainState()->entries[0].data.maxHp;
+    s32 hp = btlGetMainState()->entries[0].data.hp;
     FUN_002551ac(0, unit, btlGetMainState()->actions, 0, damage, -1, -1,
         hp, maxHp, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1);
     btlQueueKeyedScalarReflectAction(0, unit, reinterpret_cast<void *>(0x1000185), 0, 0, 0, 0);

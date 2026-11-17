@@ -25,7 +25,7 @@ s32 FUN_0021c1e0(void)
                 result = FUN_003f3f08(reinterpret_cast<void *>(panel->characters[i]));
         } else {
             SlotRecordA *unit = gameGetSlotRecord(reinterpret_cast<BoundIcon *>(panel->characters[i])->unitIndex);
-            if (unit->entryId == *current && FUN_003f3f08(reinterpret_cast<void *>(panel->characters[i])) != -1)
+            if (unit->id == *current && FUN_003f3f08(reinterpret_cast<void *>(panel->characters[i])) != -1)
                 result = FUN_003f3f08(reinterpret_cast<void *>(panel->characters[i]));
         }
     }
@@ -37,7 +37,7 @@ s32 FUN_0021c1e0(void)
                 result = FUN_003f3f08(reinterpret_cast<void *>(panel->demons[i]));
         } else {
             SlotRecordA *unit = gameGetSlotRecord(reinterpret_cast<BoundIcon *>(panel->demons[i])->unitIndex);
-            if (unit->entryId == *current && FUN_003f3f08(reinterpret_cast<void *>(panel->demons[i])) != -1)
+            if (unit->id == *current && FUN_003f3f08(reinterpret_cast<void *>(panel->demons[i])) != -1)
                 result = FUN_003f3f08(reinterpret_cast<void *>(panel->demons[i]));
         }
     }

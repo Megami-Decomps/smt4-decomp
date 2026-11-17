@@ -22,25 +22,13 @@ struct GaugePanelView {
     u8 unk38BA[0x41A0 - 0x38BA];
     struct Offset { s32 x; s32 y; } offset;
 };
-struct GaugeRenderContext {
-    RenderCtxA context;
-    u8 unk12D8[0x40];
-    RenderStateStack extraStack;
-};
 typedef char GaugePanelOffsets[
     offsetof(GaugePanelView, firstPosition) == 0x598 &&
     offsetof(GaugePanelView, position) == 0x12B8 &&
     offsetof(GaugePanelView, slot) == 0x3890 &&
     offsetof(GaugePanelView, hidden) == 0x38B9 &&
     offsetof(GaugePanelView, offset) == 0x41A0 &&
-    sizeof(GaugePanelView) == 0x41A8 &&
-    offsetof(GaugeRenderContext, extraStack) == 0x1318 ? 1 : -1];
-
-/* The render context's extra cached state stack (beyond RenderCtxA's known size). */
-static __inline RenderStateStack *renderCtxStackE(RenderCtxA *context)
-{
-    return &reinterpret_cast<GaugeRenderContext *>(context)->extraStack;
-}
+    sizeof(GaugePanelView) == 0x41A8 ? 1 : -1];
 
 extern "C" {
 void efctSetSpeed(f32 speed);
@@ -71,12 +59,12 @@ extern "C" void FUN_0034e784(u8 *panel, s32 rows)
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
     texDrawTableEntryAtStoredOrigin(2, 13, 0x4F, sprite->x + x, sprite->y + y, 0x2E);
     texDrawTableEntryAtStoredOrigin(2, 13, 0x4E, sprite->x + x, sprite->y + y - shrink, 0x2E);
-    renderStackSet(renderCtxStackE(g_renderCtx), 3);
+    renderStackSet(&g_renderCtx->scissor, 3);
     FUN_0035ae58(sprite->x + x, sprite->y + y, sprite->placement->width, sprite->placement->height - shrink, 1);
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
     texDrawTableEntryAtStoredOrigin(2, 13, 0x50, sprite->x + x, sprite->y + y, 0x2E);
     texDrawTableEntryAtStoredOrigin(2, 13, 0x51, sprite->x + x, sprite->y + y, 0x2E);
-    renderStackSet(renderCtxStackE(g_renderCtx), 0);
+    renderStackSet(&g_renderCtx->scissor, 0);
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 7, 0));
     efctSetSpeed(1.0f);
 }

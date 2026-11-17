@@ -2,6 +2,7 @@
 #include "shard/W6_W6Match7_TextureTransform.h"
 #include <stddef.h>
 #include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 namespace {
 struct BattleUiAnchorPair {
@@ -28,7 +29,6 @@ typedef char BattleUiLayoutOffsetsCheck[offsetof(BattleUiLayoutWork, pairedAncho
 }
 
 extern "C" {
-const PointLookupRecord *asdTMTexTableEntryAt(s32 group, s32 index);
 
 /* Sets the layout's three offset components. */
 static __inline void battleUiLayoutSetOffset(BattleUiLayoutWork *work, f32 x, f32 y, f32 z)
@@ -42,25 +42,25 @@ static __inline void battleUiLayoutSetOffset(BattleUiLayoutWork *work, f32 x, f3
 void FUN_0033cf30(BattleUiLayoutWork *work)
 {
     for (s32 i = 0; i < 4; ++i) {
-        const PointLookupRecord *point = asdTMTexTableEntryAt(0x14, i + 0x59);
+        const TextureTableEntryIV *point = asdTMTexTableEntryAt(0x14, i + 0x59);
         work->pairedAnchors[i].first.x = point->x;
         work->pairedAnchors[i].first.y = point->y;
         point = asdTMTexTableEntryAt(0x14, i + 0x5D);
         work->pairedAnchors[i].second.x = point->x;
         work->pairedAnchors[i].second.y = point->y;
     }
-    const PointLookupRecord *origin = asdTMTexTableEntryAt(0x14, 0x61);
+    const TextureTableEntryIV *origin = asdTMTexTableEntryAt(0x14, 0x61);
     work->origin.x = origin->x;
     work->origin.y = origin->y;
     for (s32 i = 0; i < 3; ++i) {
-        const PointLookupRecord *point = asdTMTexTableEntryAt(0x14, 100 - i);
+        const TextureTableEntryIV *point = asdTMTexTableEntryAt(0x14, 100 - i);
         work->steps[i].x = point->x;
         work->steps[i].y = point->y;
     }
     work->steps[3].y = work->steps[2].y;
     work->steps[3].x = (work->steps[2].x - work->steps[1].x) + work->steps[2].x;
     for (s32 i = 0; i < 4; ++i) {
-        const PointLookupRecord *point = asdTMTexTableEntryAt(0x14, i + 0x65);
+        const TextureTableEntryIV *point = asdTMTexTableEntryAt(0x14, i + 0x65);
         work->targets[i].x = point->x;
         work->targets[i].y = point->y;
     }

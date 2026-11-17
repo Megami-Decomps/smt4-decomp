@@ -3,6 +3,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -19,7 +20,6 @@ typedef struct {
 
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
-extern int asdTMTexTableEntryAt(unsigned int, int);
 
 
 void FUN_002fa4dc(int param_1,int param_2)
@@ -50,7 +50,7 @@ void FUN_002fa4dc(int param_1,int param_2)
       if ((param_2 == 0) && (*(int *)(param_1 + 0x3890) != temp_v7)) {
         efctSetSpeed();
       }
-      temp_v3 = asdTMTexTableEntryAt(0xd,temp_v7 + 0x36);
+      temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,temp_v7 + 0x36));
       temp_v9 = param_1 + temp_v7 * 0x8c + 0x73c;
       temp_v4 = vec2GetXInt(reinterpret_cast<const void *>(temp_v9));
       temp_v0 = *(short *)(temp_v3 + 8);

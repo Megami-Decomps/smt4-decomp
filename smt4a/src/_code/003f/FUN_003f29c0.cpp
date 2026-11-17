@@ -13,7 +13,7 @@ extern "C" u32 FUN_003f29c0(BtlMainStateA *state, BtlPendingCommand *output)
                     continue;
                 }
             } else if (state->pendingCommands.commands[index].kind == 4 &&
-                       (state->entries[state->pendingCommands.commands[index].unitIndex].statusFlags & 0x11C0) != 0) {
+                       (state->entries[state->pendingCommands.commands[index].unitIndex].data.statusFlags & 0x11C0) != 0) {
                 continue;
             }
             output->kind = state->pendingCommands.commands[state->pendingCommands.count].kind;

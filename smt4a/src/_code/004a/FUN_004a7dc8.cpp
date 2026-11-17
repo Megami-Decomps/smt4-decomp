@@ -1,9 +1,9 @@
 #include "shard/W5_W5Match4_BattleTransition.h"
 #include "shard/S1ListPanel.h"
 #include "code/Code004a_Smt4a.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-const SpriteInfo *layoutFindTableEntry(const AsdTextureRegion *region, s32 image);
 void efctSetSpeed(f32 opacity);
 f32 vec2GetSpeed(const void *object);
 void uiDrawTableTextureAtRectCorner(const AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 color);
@@ -21,7 +21,7 @@ typedef char TransitionSpeedViewOffsets[offsetof(TransitionSpeedView, frameSpeed
 
 void FUN_004a7dc8(BattleTransitionState *work, s32 anchor, u32 color, s32 alternate)
 {
-    const SpriteInfo *frame = layoutFindTableEntry(&work->frameDraw.region, anchor + 0x42F);
+    const TextureTableEntryIV *frame = layoutFindTableEntry(&work->frameDraw.region, anchor + 0x42F);
     s32 x = frame->x;
     s32 y = frame->y;
     efctSetSpeed(vec2GetSpeed(&reinterpret_cast<const TransitionSpeedView *>(work)->frameSpeed));

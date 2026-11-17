@@ -10,10 +10,6 @@ struct PortraitClipBounds {
     s32 left;
     s32 right;
 };
-struct PortraitImageDimensions {
-    u16 width;
-    u16 height;
-};
 extern "C" {
 extern void *g_aocSystem;
 s32 recordPrepareLinkedOwner(void *, u32, s32);
@@ -64,11 +60,11 @@ extern "C" void FUN_0031eba0(s32 unit, s32 sourceX, s32 sourceY, u32 color, s32 
         return;
     if (!recordPrepareLinkedOwner(g_aocSystem, bank, image)) {
         s32 sprite = image * 1000 + 1;
-        const PortraitImageDimensions *dimensions = reinterpret_cast<const PortraitImageDimensions *>(asdTMTexTableEntryAt(bank, sprite));
+        const TextureTableEntryIV *dimensions = asdTMTexTableEntryAt(bank, sprite);
         PortraitClipBounds clip;
-        clip.left = dimensions->width + (x - sourceX);
+        clip.left = dimensions->originX + (x - sourceX);
         clip.right = clip.left + width;
-        clip.top = dimensions->height + (y - sourceY);
+        clip.top = dimensions->originY + (y - sourceY);
         clip.bottom = clip.top + height;
         FUN_002b04e8(2, bank, sprite, x, y, color, &clip);
     } else {

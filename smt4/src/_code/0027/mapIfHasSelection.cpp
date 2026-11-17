@@ -1,8 +1,6 @@
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 
 extern "C" {
-
-extern MapIfGlobals g_mapIf;
 
 bool mapIfHasSelection(void)
 {

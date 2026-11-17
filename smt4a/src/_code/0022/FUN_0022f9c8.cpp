@@ -1,18 +1,18 @@
 /* NON_MATCHING: the pulse speed is the linker-inlined vec2GetSpeed and the option blocks now match; only the centred-label arguments are scheduled differently (retail loads anchor->y first and the anchor x after the halved width). */
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteWork.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 f32 vec2GetSpeed(const void *vector); /* linker-inlined: vldr s0, [r0, #0x20] */
 void efctSetSpeed(f32 speed);
 void texDrawCompositeSprite(u32 screen, u32 table, u32 frame, s32 x, s32 y, u32 priority);
 const char *dataTableGetEntry24Member(u32 id);
-const SpriteInfo *asdTMTexTableEntryAt(u32 table, u32 frame);
 s32 fontMeasureLineAdvance(const char *text, u32 screen);
 
-void FUN_0022f9c8(UniteWork *work, s32 index, s32 x, s32 y, s32 selected, s32 active,
+void FUN_0022f9c8(UniteWorkA *work, s32 index, s32 x, s32 y, s32 selected, s32 active,
     f32 opacity, f32 fade)
 {
     efctSetSpeed(fade);
@@ -35,9 +35,9 @@ void FUN_0022f9c8(UniteWork *work, s32 index, s32 x, s32 y, s32 selected, s32 ac
     opacity *= fade;
     efctSetSpeed(opacity);
     const char *name = dataTableGetEntry24Member(work->optionNamesA.ids[index]);
-    const SpriteInfo *anchor = asdTMTexTableEntryAt(26, 164);
+    const TextureTableEntryIV *anchor = asdTMTexTableEntryAt(26, 164);
     s32 width = fontMeasureLineAdvance(name, 2);
-    s32 drawX = anchor->x + ((anchor->size[0] - width) / 2 + x);
+    s32 drawX = anchor->x + ((anchor->placement->width - width) / 2 + x);
     s32 drawY = anchor->y + y;
     textDrawString(2, color, name, (f32)drawX, (f32)drawY, 0.55f, 0.0f, opacity);
 }

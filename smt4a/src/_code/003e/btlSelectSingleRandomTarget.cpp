@@ -2,6 +2,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "util/Random.h"
+#include "battle/BtlGlobals.h"
 
 struct RandomTargetFields {
     u8 unk000[0x6e];
@@ -18,14 +19,7 @@ struct RandomTargetState {
     s16 candidates[12]; // 0x3006
     s16 index; // 0x301e
 };
-struct RandomTargetMasks {
-    u8 unk00[0x58];
-    u64 active;
-    u8 unk60[0x20];
-    u64 excluded;
-};
 extern "C" {
-extern RandomTargetMasks g_btlMain;
 void FUN_003f2aec(BtlMainStateA *, u32);
 
 void btlSelectSingleRandomTarget(BtlMainStateA *battle)
@@ -35,8 +29,8 @@ void btlSelectSingleRandomTarget(BtlMainStateA *battle)
     for (s32 slot = 0; slot < 109; ++slot) {
         BtlCombatantEntryA *unit = &battle->entries[slot];
         RandomTargetFields *fields = (RandomTargetFields *)unit;
-        if ((unit->flags & g_btlMain.active) && !(unit->flags & g_btlMain.excluded) &&
-            fields->actionParameters[1] && !hasAnyOf3DC2(unit->statusFlags)) {
+        if ((unit->flags & g_btlMain.combatantMasks.required) && !(unit->flags & g_btlMain.exclusionMask) &&
+            fields->actionParameters[1] && !hasAnyOf3DC2(unit->data.statusFlags)) {
             state->candidates[count++] = ((RandomTargetFields *)&battle->entries[slot])->identifier;
             ((RandomTargetFields *)&battle->entries[slot])->targetMarker = 0;
         }
@@ -52,8 +46,8 @@ void btlSelectSingleRandomTarget(BtlMainStateA *battle)
     for (s32 i = 0; i < 12; ++i)
         state->candidates[i] = -1;
     state->candidates[0] = selected;
-    u64 active = g_btlMain.active;
-    u64 excluded = g_btlMain.excluded;
+    u64 active = g_btlMain.combatantMasks.required;
+    u64 excluded = g_btlMain.exclusionMask;
     for (s32 slot = 0; slot < 109; ++slot) {
         BtlCombatantEntryA *unit = &battle->entries[slot];
         RandomTargetFields *fields = (RandomTargetFields *)unit;

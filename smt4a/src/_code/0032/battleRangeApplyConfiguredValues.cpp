@@ -1,16 +1,15 @@
 #include "common.h"
+#include "battle/BtlGlobals.h"
 
-struct Flags64C;
 
 extern "C" {
 f32 scriptReadStackValueAsFloat(s32 index);
-void flags64CSetTarget(Flags64C* target, f32 x, f32 y, f32 z);
-extern Flags64C *g_btlCamera;
+void flags64CSetTarget(BtlCameraA* target, f32 x, f32 y, f32 z);
 
 // Applies the two configured values to the target's range.
 u32 battleRangeApplyConfiguredValues(void)
 {
-    Flags64C* object = g_btlCamera;
+    BtlCameraA* object = g_btlCamera;
     if (object == NULL) {
         return 1;
     }

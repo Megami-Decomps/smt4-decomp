@@ -1,8 +1,8 @@
 #include "camp/RenderCtx.h"
 #include "shard/JobWork.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 s32 gxPackFadeKindAlphaWord(u32 mode, f32 alpha);
 s32 renderCtxPackPassFlags(u32 first, u32 second);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);

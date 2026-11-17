@@ -46,7 +46,7 @@ s32 FUN_0040082c(u32 id)
             return 0;
     }
     if ((properties->target & 0x7F) == 1 || (properties->flags & 4)) {
-        SaveSlotTable *party = gameGetSlotTable();
+        SaveSlotTableA *party = gameGetSlotTable();
         for (s32 index = -1; index < party->count; ++index) {
             if (FUN_00400284(index, 0, skill, 0) == 0)
                 return 0;

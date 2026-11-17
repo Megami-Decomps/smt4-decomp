@@ -3,10 +3,10 @@
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 
-extern RenderCtxScissorA *g_renderCtx;
 
 s32 vec2GetXInt(void *vec);
 s32 vec2GetYInt(void *vec);

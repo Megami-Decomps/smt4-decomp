@@ -17,7 +17,7 @@ u32 btlScriptTestCandidateEncodedKind(void)
         if ((entry->flags & g_btlCandidateMasks.unavailable) != 0 &&
             (g_btlCandidateMasks.required & entry->flags) != 0 &&
             (entry->flags & g_btlCandidateMasks.excluded) == 0 &&
-            entry->id == id && (entry->encodedStats.values[valueIndex] >> 10) == 1) {
+            entry->data.id == id && (entry->data.values[valueIndex] >> 10) == 1) {
             scrSetResult(1);
             return 1;
         }

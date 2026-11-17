@@ -1,10 +1,10 @@
 /* NON_MATCHING: inline stack scheduling, removed target-query hooks, and VFP argument scheduling differ. */
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match3_SlotState.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 extern W6Match3SlotState DAT_004d9758[2];
-extern RenderCtx *g_titleScene;
 s32 renderCtxPackPassFlags(u32, u32);
 u32 asdGxPresetsGetByKind(u32);
 u32 asdGxPresetsGetHeightByKind(u32);

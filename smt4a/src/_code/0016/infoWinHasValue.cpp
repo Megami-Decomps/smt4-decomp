@@ -1,17 +1,12 @@
-#include "common.h"
+#include "font/InfoWinA.h"
 
 extern "C" {
 
-typedef struct Record {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s32 value;
-} Record;
-extern Record *g_infoWin;
 
 /* Returns whether the word at 0x8 of the record at 0x57F574 is nonzero. */
 u8 infoWinHasValue(void)
 {
-    return g_infoWin->value != 0;
+    return g_infoWin->state != 0;
 }
 
 } /* extern "C" */

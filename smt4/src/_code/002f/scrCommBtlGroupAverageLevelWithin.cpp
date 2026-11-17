@@ -32,7 +32,7 @@ u32 scrCommBtlGroupAverageLevelWithin(void)
 
             if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40)) {
                 units++;
-                sum += unit->level;
+                sum += unit->data.level;
             }
             index++;
         } while (index < start + count);
@@ -44,7 +44,7 @@ u32 scrCommBtlGroupAverageLevelWithin(void)
         active = btlMainFindActiveEntry();
         if (active != NULL) {
             units++;
-            sum += active->level;
+            sum += active->data.level;
         }
     }
     scrSetResult(limit <= sum / units);

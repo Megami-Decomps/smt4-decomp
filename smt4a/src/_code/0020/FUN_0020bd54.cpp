@@ -4,6 +4,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "util/BitsAndBytes.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -59,7 +60,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: texDrawCompositeSprite. */
 extern int vec2GetYInt(int);
 /* Supplied declaration required: quadSetOrderedVectors. */
-extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: fadeObjectResetIfActive. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 extern unsigned int dataTable0eSub1GetId(unsigned short);
@@ -363,7 +363,7 @@ LAB_0020c35c:
                 temp_v21 = 0xfe;
               }
               temp_v22 = 0xe;
-              temp_v2 = asdTMTexTableEntryAt(10,0x57);
+              temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(10,0x57));
               temp_v20 = (int)*(short *)(temp_v2 + 8);
             }
             if (*(char *)(temp_v8 + 0x5ac) != '\x14') {
@@ -480,7 +480,7 @@ LAB_0020c7bc:
             }
           }
           else {
-            temp_v8 = asdTMTexTableEntryAt(10,0x10b);
+            temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(10,0x10b));
             temp_v4 = (unsigned int)*(short *)(temp_v8 + 8);
             temp_v10 = temp_v10 + temp_v4;
             temp_v11 = *(char *)(temp_v2 + 0x5d4) == '\0';

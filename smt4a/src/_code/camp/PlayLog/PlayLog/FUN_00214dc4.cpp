@@ -3,6 +3,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ int textFormatBuffer(...);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
-int asdTMTexTableEntryAt(...);
 int fontMeasureLineAdvance(...);
 int FUN_002c0940(...);
 int uiDrawListScrollBar(...);
@@ -99,7 +99,7 @@ void FUN_00214dc4(void)
         uiDrawListScrollBar(temp_v0 + 0x2dc,temp_v1,0,0x25,7,8,9,3,5,4,6,(int)*(short *)(temp_v0 + 0x34c),
                      (int)*(short *)(temp_v0 + 0x348),(int)*(short *)(temp_v0 + 0x34a),0xb,0);
       }
-      temp_v2 = asdTMTexTableEntryAt(0x25,temp_v8 + 0x15);
+      temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x25,temp_v8 + 0x15));
       texDrawCompositeSprite(2,0x25,1,*(short *)(temp_v2 + 8) + temp_v1,(int)*(short *)(temp_v2 + 10),0xb);
       temp_v3 = resourceRunOperationIfUnblocked(temp_v0 + 0x2dc);
       temp_v9 = (unsigned int)*(short *)(temp_v0 + (temp_v3 + temp_v8) * 2 + 0x424);
@@ -107,14 +107,14 @@ void FUN_00214dc4(void)
       temp_v3 = dataTableGetEntries();
       temp_v5 = dataTableGetCount(temp_v4);
       if ((temp_v9 < temp_v5) && (temp_v3 = temp_v3 + temp_v9 * 0x40, temp_v3 != 0)) {
-        temp_v6 = asdTMTexTableEntryAt(0x25,0x13);
+        temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x25,0x13));
         textFormatBuffer(temp_v10,"%s",temp_v3 + 2);
         VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v6 + 10),
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v2 + 8) + temp_v1,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         textDrawString(2,0x57d8ffff,temp_v10,(int)*(short *)(temp_v6 + 10));
-        temp_v6 = asdTMTexTableEntryAt(0x25,0x14);
+        temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x25,0x14));
         if (*(char *)(temp_v3 + 0x3f) != '\x01') {
           if (*(char *)(temp_v3 + 0x37) != '0') {
             temp_v7 = resourceRunOperationIfUnblocked(temp_v0 + 0x2dc);

@@ -10,9 +10,9 @@ extern "C" void btlMarkLowestHpUnit(BtlMainState** owner)
     s32 minimumHp = 100000;
     BtlMainState* battle = *owner;
     for (s32 index = 0; index < 109; ++index) {
-        if ((battle->entries[index].flags & 0x400) != 0 && battle->entries[index].hp <= minimumHp) {
+        if ((battle->entries[index].flags & 0x400) != 0 && battle->entries[index].data.hp <= minimumHp) {
             candidates[candidateCount++] = battle->entries[index].selectionIndex;
-            minimumHp = battle->entries[index].hp;
+            minimumHp = battle->entries[index].data.hp;
         }
     }
     btlUnitGet(owner)->targets[candidates[candidateCount - 1]] = 1;

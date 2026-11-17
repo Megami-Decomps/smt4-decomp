@@ -1,4 +1,5 @@
 #include "common.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 
@@ -10,10 +11,9 @@ typedef struct TitleDraw {
 } TitleDraw;
 
 extern TitleDraw g_titleFlags;
-extern u32 g_titleScene;
 
 extern s32 asdCameraGetSavedRenderPairs(void);
-extern void effectRestoreSavedRenderPairs(u32 scene, u32 arg);
+extern void effectRestoreSavedRenderPairs(RenderCtx *scene, u32 arg);
 extern s32 gxIsStereoscopic3dEnabled(void);
 extern void asdGxCommandListBegin(u32 commandList);
 

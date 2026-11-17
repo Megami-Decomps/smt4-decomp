@@ -1,4 +1,4 @@
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 #include "status/StatusCamera.h"
 
 extern "C" {
@@ -6,18 +6,15 @@ extern "C" {
 int buttonHelpSetPreset(int arg);
 extern int scrScriptProcessStartEntry(u32 a, int b);
 
-
-extern UniteWorkIV *g_unite;
-
 u32 uniteRequestScriptEntry(int value)
 {
-    UniteWorkIV *obj = g_unite;
+    UniteWork *obj = g_unite;
 
     if (g_unite != NULL) {
-        if (g_unite->common.menu.active != 0) {
-            g_unite->common.scriptIV.pendingRequest = value;
+        if (g_unite->menu.active != 0) {
+            g_unite->scriptIV.pendingRequest = value;
         } else {
-            if (scrScriptProcessStartEntry(g_unite->common.menu.scriptProcess, value) != 0) {
+            if (scrScriptProcessStartEntry(g_unite->menu.scriptProcess, value) != 0) {
                 if (((!(value == 7 || value == 8)) && (!(value == 9 || value == 10))) &&
                     (!(value == 0xb || value == 0xd))) {
                     if (value == 0xc) {
@@ -27,9 +24,9 @@ u32 uniteRequestScriptEntry(int value)
                     FUN_002a0cc8(1);
                     buttonHelpSetPreset(0x9e);
                 }
-                obj->common.scriptIV.pendingRequest = 0xffffffff;
-                obj->common.request = value;
-                obj->common.menu.active = 1;
+                obj->scriptIV.pendingRequest = 0xffffffff;
+                obj->request = value;
+                obj->menu.active = 1;
                 return 1;
             }
         }

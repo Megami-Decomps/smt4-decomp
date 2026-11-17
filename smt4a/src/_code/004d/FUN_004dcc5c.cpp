@@ -16,20 +16,20 @@ void FUN_004dcc5c(BtlMainStateA *const *owner, u32 group)
         BtlCombatantEntryA *entry = &(*owner)->entries[i];
         u64 flags = entry->flags;
         if ((flags & g_btlAction.targetableMask) &&
-            !(flags & g_btlAction.interaction.excludedMask) && entry->unitIndex >= 0) {
-            s32 hp = (entry->maxHp * 50) / 100;
+            !(flags & g_btlAction.interaction.excludedMask) && entry->ids[0] >= 0) {
+            s32 hp = (entry->data.maxHp * 50) / 100;
             if (hp == 0)
                 hp = -1;
-            s32 mp = (entry->maxMp * 50) / 100;
+            s32 mp = (entry->data.maxMp * 50) / 100;
             if (mp == 0)
                 mp = -1;
-            if (hp > 0 && (entry->statusFlags & 8))
+            if (hp > 0 && (entry->data.statusFlags & 8))
                 hp = 1;
-            if (mp > 0 && (entry->statusFlags & 8))
+            if (mp > 0 && (entry->data.statusFlags & 8))
                 mp = 1;
             s32 delay = restored * 5;
-            FUN_004fdcd8(delay, group, entry->unitIndex, entry->unitIndex, 8, 0, 5, 0);
-            FUN_004fb798(5, group, 0, &(*owner)->roster[entry->unitIndex], 0, hp, mp, 0xFFFFFFFF, 0, delay, delay, 9, 1, 0, 1);
+            FUN_004fdcd8(delay, group, entry->ids[0], entry->ids[0], 8, 0, 5, 0);
+            FUN_004fb798(5, group, 0, &(*owner)->roster[entry->ids[0]], 0, hp, mp, 0xFFFFFFFF, 0, delay, delay, 9, 1, 0, 1);
             ++restored;
         }
     }

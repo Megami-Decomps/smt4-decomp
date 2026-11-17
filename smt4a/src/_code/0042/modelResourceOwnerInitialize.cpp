@@ -1,10 +1,10 @@
 /* NON_MATCHING: ARMCC emits a comparison chain for the two-state switch, changing retail's jump table, hint NOP, and pool layout. */
 #include "classes/Obj4209cc.h"
 #include "code/Code003f.h"
+#include "Model/MoriModelManager.h"
 
 extern "C" {
 extern const char DAT_005271fc[];
-extern void *g_handleRegistry;
 void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 ModelResourceList *modelListInit(ModelResourceList *models);
 void FUN_0040a884(ModelResourceList *models, void *source, u32 flags);
@@ -12,7 +12,6 @@ u32 ownerSlotSetText(ModelResourceItem *item, const void *name);
 void FUN_003fd924(ModelResourceItem *item, u32 index, u32 mode, f32 first, f32 second);
 u32 FUN_001a79e8(ModelResourceItem *item, const void *name);
 void moriModelUnitStartMaterialAnimation(ModelResourceItem *item, u32 index, u32 mode, f32 value);
-void handleRegistryRegisterObject(void *registry, ModelResourceItem *item);
 
 /* Build the source's model list, initialize its named channels, and register each model. */
 void modelResourceOwnerInitialize(ModelResourceOwner *owner)

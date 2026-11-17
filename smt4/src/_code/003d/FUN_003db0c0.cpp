@@ -3,10 +3,10 @@
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match7_MaterialAnimationFlags.h"
+#include "battle/BtlEntryLookup.h"
 
 extern "C" {
 s32 idSetFindSubjectIndex(BtlMainState *state, BtlActionRecord *action);
-MaterialMergeVariants *btlFindEntryBlockByMemberId(BtlMainState *state, s32 member);
 u32 FUN_00337ba0(BtlMainState *state, s16 selection, u16 kind);
 void FUN_00340ad4(BattleSpritePlacement *placement, u32 mask, u32 flags, u32 variant);
 void FUN_00340c90(BattleSpritePlacement *placement);
@@ -21,9 +21,9 @@ u32 FUN_003db0c0(MaterialMergeOwner *owner, BtlActionRecord *action)
     if (variantIndex < 0) {
         variantIndex = 0;
     }
-    MaterialMergeVariants *variants = btlFindEntryBlockByMemberId(state, action->memberId);
-    u16 kind = variants->identity.kind;
-    s32 key = variants->keys[variantIndex];
+    BtlUnitData *variants = btlFindEntryBlockByMemberId(state, action->memberId);
+    u16 kind = variants->id;
+    s32 key = variants->parts[variantIndex];
     for (s32 i = 0; i < 50; ++i) {
         if (owner->placements.entries[i].key == key && (owner->placements.entries[i].activation.flags & 1)) {
             return 1;

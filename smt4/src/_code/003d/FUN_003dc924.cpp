@@ -1,9 +1,10 @@
 /* NON_MATCHING: reserved slots are excluded directly; loop setup, cached-slot addressing and member-ID spills differ. */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match7_MaterialAnimationFlags.h"
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlEntryLookup.h"
 
 /* Preserve the shared action's 10-byte union alignment when reading its word at 0x5c. */
 struct BattleModelActionKeyView {
@@ -14,7 +15,6 @@ struct BattleModelActionKeyView {
 extern "C" {
 void modelEffectReleaseEntry(MaterialMergeOwner *owner, s32 index);
 s32 idSetFindSubjectIndex(BtlMainState *battle, const BtlActionRecord *action);
-MaterialMergeVariants *btlFindEntryBlockByMemberId(BtlMainState *battle, s32 memberId);
 MaterialMergeModel *asdMdlManagerClone(MaterialMergeModel *model, u32 flags);
 
 void FUN_003dc924(MaterialMergeOwner *owner, s32 effectKind, s32 allActors)
@@ -41,12 +41,12 @@ void FUN_003dc924(MaterialMergeOwner *owner, s32 effectKind, s32 allActors)
         s32 variant = idSetFindSubjectIndex(btlGetMainState(), action);
         if (variant < 0)
             variant = 0;
-        const MaterialMergeVariants *variants = btlFindEntryBlockByMemberId(btlGetMainState(), memberId);
+        const BtlUnitData *variants = btlFindEntryBlockByMemberId(btlGetMainState(), memberId);
         if (!variants)
             continue;
         for (s32 original = 0; original < 50; ++original) {
             MaterialMergeOriginal *cached = &owner->models.originals[original];
-            if (variants->keys[variant] == cached->key &&
+            if (variants->parts[variant] == cached->key &&
                 ((const BattleModelActionKeyView *)&btlGetMainState()->actions[index])->key == cached->context) {
                 owner->models.results[index].model = asdMdlManagerClone(cached->model, 1);
                 owner->models.results[index].group = memberId;

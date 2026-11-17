@@ -1,5 +1,6 @@
 /* NON_MATCHING: -O3 hoists all category masks into an 80-byte spill frame; retail reloads masks inside the loop. Candidate -O2 may avoid this. */
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 struct BattleEventFilter {
     /* 0x00 */ u32 mask;
@@ -15,25 +16,19 @@ struct BattleEventFilters {
     /* 0x45c0 */ BattleEventFilter entries[128];
 };
 
-struct BattleFilterMasks {
-    /* 0x00 */ u8 unk00[0x60];
-    /* 0x60 */ u64 groups[4];
-};
-
 extern "C" {
-extern BattleFilterMasks g_btlMain;
 
 static __inline bool battleEventFilterMatches(const BattleEventFilter *entry, const BtlCombatantEntryA *actor)
 {
     u64 flags = actor->flags;
-    if (flags & g_btlMain.groups[0])
-        return (entry->mask & static_cast<u32>(g_btlMain.groups[0])) && entry->id == -1;
-    if (flags & g_btlMain.groups[1])
-        return (entry->mask & static_cast<u32>(g_btlMain.groups[1])) && entry->id == actor->id;
-    if (flags & g_btlMain.groups[2])
-        return (entry->mask & static_cast<u32>(g_btlMain.groups[2])) && entry->id == actor->id;
-    if (flags & g_btlMain.groups[3])
-        return (entry->mask & static_cast<u32>(g_btlMain.groups[3])) && entry->id == actor->id;
+    if (flags & g_btlMain.actorCategories[0])
+        return (entry->mask & static_cast<u32>(g_btlMain.actorCategories[0])) && entry->id == -1;
+    if (flags & g_btlMain.actorCategories[1])
+        return (entry->mask & static_cast<u32>(g_btlMain.actorCategories[1])) && entry->id == actor->data.id;
+    if (flags & g_btlMain.actorCategories[2])
+        return (entry->mask & static_cast<u32>(g_btlMain.actorCategories[2])) && entry->id == actor->data.id;
+    if (flags & g_btlMain.actorCategories[3])
+        return (entry->mask & static_cast<u32>(g_btlMain.actorCategories[3])) && entry->id == actor->data.id;
     return false;
 }
 

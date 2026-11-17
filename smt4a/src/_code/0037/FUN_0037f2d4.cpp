@@ -18,7 +18,7 @@ u32 FUN_0037f2d4(void)
             BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
             u64 flags = entry->flags;
             if ((flags & g_btlCandidateMasks.unavailable) && (flags & g_btlCandidateMasks.required) &&
-                !(flags & g_btlCandidateMasks.excluded) && !(entry->encodedStats.values[stat] & 0xfc00)) {
+                !(flags & g_btlCandidateMasks.excluded) && !(entry->data.values[stat] & 0xfc00)) {
                 scrSetResult(1);
                 return 1;
             }

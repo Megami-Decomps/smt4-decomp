@@ -14,7 +14,7 @@ u32 FUN_003182b0(void)
     for (s32 i = 0; i < 109; ++i) {
         BtlEntry *entry = &btlGetMainState()->entries[i];
         if ((entry->flags & 0x10) && (entry->flags & 1) &&
-            !(entry->flags & 0x40) && entry->id == group &&
+            !(entry->flags & 0x40) && entry->data.id == group &&
             btlCommandOwnerHasSlotId(entry, slot)) {
             scrSetResult(1);
             return 1;

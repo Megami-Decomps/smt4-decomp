@@ -1,7 +1,7 @@
 /* NON_MATCHING: shared case-1/2 script launch, default-choice retention branch, AOC flag addressing and mode/frame store grouping differ. */
 #include "script/scrScriptProcess.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
-#include "shard/W4_Match3_InfoWindow.h"
+#include "font/InfoWinA.h"
 #include <stddef.h>
 #include "event/2dEvent/EventEffect.h"
 
@@ -19,7 +19,7 @@ struct MapMenuCompletionWork {
     u8 unk111c[0x14];
     ScriptRunState *script;
     u8 unk1134[8];
-    InfoWindow *info;
+    InfoWindowA *info;
     u8 unk1140[0x10];
     void *battleTable;
     u8 unk1154[4];

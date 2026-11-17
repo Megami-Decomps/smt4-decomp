@@ -2,6 +2,8 @@
 #include "common.h"
 #include "text/TextDraw.h"
 #include "code/Code0019.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxA.h"
 
 /* The item shown in the panel: its kind in the high byte of +2, its name text at +4. */
 struct DetailItem {
@@ -15,20 +17,12 @@ struct DetailPanel {
     /* 0x5E0 */ DetailItem *item;
 };
 
-struct DetailSpriteFrame {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-};
-
 extern "C" {
-extern void *g_renderCtx;
 
 void textFormatBuffer(char *buffer, const char *format, ...);
 void efctSetSpeed(f32 speed);
-DetailSpriteFrame *asdTMTexTableEntryAt(u32 bank, u32 sprite);
 s32 fontMeasureLineAdvance(const char *text, s32 mode);
-f32 renderCtxCalculateStereoParallax(void *context, f32 scale);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 scale);
 void FUN_003f533c(DetailPanel *panel, s32 x, s32 y, u32 layer, u32 value, u32 a, u32 b, u32 c, u32 color, u32 flags, f32 speed);
 void uiDrawStereoKindIcon(DetailPanel *panel, s32 x, s32 y, u32 layer, u32 kind, u32 sprite, f32 speed);
 void FUN_003f707c(DetailPanel *panel, s32 x, s32 y, u32 a, u32 b, u32 c, u32 d, u32 e, f32 speed);
@@ -66,7 +60,7 @@ void FUN_003f7674(DetailPanel *panel, s32 x, s32 y, f32 speed)
     char *name = panel->item->name;
     s32 stereo = (s32)renderCtxCalculateStereoParallax(g_renderCtx, DETAIL_STEREO_SCALE);
     efctSetSpeed(speed);
-    DetailSpriteFrame *frame = asdTMTexTableEntryAt(0x31, 0x46);
+    TextureTableEntryIV *frame = asdTMTexTableEntryAt(0x31, 0x46);
     fontMeasureLineAdvance(name, 3);
     s32 nameX = frame->x + x + stereo;
     textDrawString(3, 0xFF, name, (f32)nameX, (f32)(frame->y + y), 0.15625f, 0.0f, speed);

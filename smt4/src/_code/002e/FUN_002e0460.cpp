@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 namespace {
 struct FloorOverlayPalette { u32 colors[12]; };
@@ -20,7 +21,6 @@ typedef char FloorRectangleLayoutCheck[(sizeof(FloorRectangle) == 0x1C && offset
 extern "C" {
 extern const FloorPaletteStorage DAT_0040490c;
 extern FloorRectangleList g_regionTable;
-extern RenderCtx *g_titleScene;
 u32 renderCtxPackPassFlags(u32 mode, u32 option);
 void gxEmitColoredQuad(u32 color0, u32 color1, u32 color2, u32 color3,
     f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1,

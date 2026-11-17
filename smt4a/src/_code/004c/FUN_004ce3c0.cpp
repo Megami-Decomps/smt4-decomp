@@ -2,6 +2,7 @@
 #include "shard/HealingSceneWork.h"
 #include "game/GameStateA.h"
 #include "code/Code0013.h"
+#include "Model/MoriModelManager.h"
 
 struct HealingFreeCamera {
     /* 0x00 */ u8 unk00[8];
@@ -16,7 +17,6 @@ struct HealingFieldJob {
 };
 
 extern "C" {
-extern void *g_handleRegistry;
 extern HealingFreeCamera *g_freeCamera;
 extern HealingFieldJob *DAT_0057f658;
 extern f32 DAT_005f1b80[5];
@@ -29,7 +29,6 @@ void FUN_0035d03c(u32 value);
 s32 FUN_0040ab8c(HealingModel *model);
 void moriModelContentLoadBody(HealingModel *model, u32 value);
 void modelPlayClip(void *object, u32 animation, u32 mode, f32 speed, f32 blend);
-void handleRegistryRegisterObject(void *registry, void *object);
 ScriptProcess *scrScriptProcessCreate(void *heapA, void *heapB);
 void *dataTableFileGetTable(void *file, u32 index);
 void *dataTableGetEntries(void *table);

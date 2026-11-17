@@ -3,6 +3,7 @@
 #include "shard/TextureDrawCall.h"
 #include "gfx/StereoParallax.h"
 #include "code/Code0032.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 
@@ -30,7 +31,6 @@ typedef struct ListWork {
     /* 0x5C */ f32 extentY;
 } ListWork;
 
-extern void *g_titleScene;
 
 
 /* Draws the five rows of the list: each shown row sets its tag, picks its icon id from its kind

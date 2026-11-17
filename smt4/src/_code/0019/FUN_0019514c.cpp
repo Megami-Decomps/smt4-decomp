@@ -3,6 +3,7 @@
 #include "gamedata/DataTable.h"
 #include "code/Code0029_VariantA.h"
 #include "code/Code0029_VariantB.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 // One animated row widget (0x8c bytes each).
 struct RowWidget {
@@ -25,8 +26,7 @@ u16 ifTouchRegionAddRequested(u32 group, u32 index);
 s32 resourceRunOperationIfUnblocked(void* list);
 s32 FUN_0029efd8(void* list, s32 arg);
 u32 saveBlockGetPlaySeconds(void);
-u32 asdTMTexTableEntryAt(u32 group, u32 index);
-s32 uiScrollHandleActionsOrTouch(void* list, u32 a, s32 b, s32 c, s32 d, s32 e, u8* flags, s32 f, s32 g);
+s32 uiScrollHandleActionsOrTouch(void* list, const TextureTableEntryIV *touchArea, s32 b, s32 c, s32 d, s32 e, u8* flags, s32 f, s32 g);
 s32 eventQueueAddUniqueIfValid(u32 event);
 s32 FUN_002c1658(s32 a, s32 b);
 void timerStart(void* widget, s32 a, s32 b);

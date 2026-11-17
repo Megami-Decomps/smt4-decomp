@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "gamedata/GameDataAccess.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -47,7 +48,6 @@ extern unsigned int FUN_002bd068(unsigned short);
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
-extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int renderCtxPackPassFlags(unsigned int, unsigned int);
@@ -92,10 +92,10 @@ unsigned int FUN_0011aa94(void)
     renderCtxCalculateStereoParallax(g_titleScene);
     temp_v4 = vec2GetYInt(temp_v4 + 0x30);
     efctSetSpeed();
-    temp_v2 = asdTMTexTableEntryAt(0xe,0xda);
+    temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0xda));
     temp_v7 = infoWindowIsActive();
     if (temp_v7 != 0) {
-      temp_v2 = asdTMTexTableEntryAt(0xe,0xdb);
+      temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0xdb));
     }
     temp_v7 = g_titleScene;
     temp_v8 = temp_v3 + (int)temp_v9 + (int)*(short *)(temp_v2 + 8);
@@ -126,7 +126,7 @@ unsigned int FUN_0011aa94(void)
     texDrawTableEntryAtStoredOrigin(2,0xe,0xcf,temp_v8,temp_v4,0x1f);
     FUN_002be90c((int)*(short *)(temp_v1 + 0x2a),(int)*(short *)(temp_v1 + 0xe),0,0,0xe,0xd0,0xd3,0xd2,
                  0xd1,temp_v8,temp_v4,0x24,0);
-    temp_v3 = asdTMTexTableEntryAt(0xe,0xd9);
+    temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0xd9));
     temp_v2 = FUN_002b6ad0();
     if (temp_v2 != 0) {
       temp_v1 = gameGetSupportUnitData();
@@ -146,7 +146,7 @@ unsigned int FUN_0011aa94(void)
       temp_v6 = FUN_002bd068(*(unsigned short *)(temp_v1 + 0x46));
       textFormatBuffer(temp_v10,temp_v6);
     }
-    temp_v1 = asdTMTexTableEntryAt(0xe,0xd8);
+    temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0xd8));
     VectorSignedToFloat(*(short *)(temp_v1 + 10) + temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v1 + 8) + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(2,0xff,temp_v10);

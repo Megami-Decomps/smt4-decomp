@@ -1,13 +1,13 @@
 /* NON_MATCHING: shared success-block placement, saved registers and final return epilogues differ. */
 #include "camp/CampCec/CharacterRefreshWork.h"
 #include "shard/Shard0031.h"
-#include "shard/W6_W6Match1_PartySlot.h"
+#include "gamedata/GameSaveDataA.h"
 #include "event/2dEvent/EventEffect.h"
 #include "shard/W6_W6Match3_FormatBuffer.h"
+#include "gamedata/SaveSlotRecord.h"
 
 extern "C" {
 PartyStatusSlots *gameGetSlotTable();
-PartySlotA *gameGetSlotRecord(s32 index);
 void FUN_003c1060();
 void FUN_00331380(s32 value);
 void sysPlaySe(s32 sound);
@@ -43,8 +43,8 @@ u32 FUN_00387d38(CharacterRefreshWork *work)
         PartyStatusSlots *party = gameGetSlotTable();
         for (s32 index = 0; index < 3; ++index) {
             if (party->reserve[index] >= 0 &&
-                gameGetSlotRecord(party->reserve[index])->unk62 == state->selectedId &&
-                gameGetSlotRecord(party->reserve[index])->unk62 == state->source->unk60) {
+                gameGetSlotRecord(party->reserve[index])->id == state->selectedId &&
+                gameGetSlotRecord(party->reserve[index])->id == state->source->record.ailments) {
                 FUN_003c1060();
                 state->destination = 5;
                 break;
@@ -53,8 +53,8 @@ u32 FUN_00387d38(CharacterRefreshWork *work)
         if (state->destination == -1) {
             for (s32 index = 0; index < 24; ++index) {
                 if (party->active.slots[index] >= 0 &&
-                    gameGetSlotRecord(party->active.slots[index])->unk62 == state->selectedId &&
-                    gameGetSlotRecord(party->active.slots[index])->unk62 == state->source->unk60) {
+                    gameGetSlotRecord(party->active.slots[index])->id == state->selectedId &&
+                    gameGetSlotRecord(party->active.slots[index])->id == state->source->record.ailments) {
                     FUN_003c1060();
                     state->destination = 5;
                     break;

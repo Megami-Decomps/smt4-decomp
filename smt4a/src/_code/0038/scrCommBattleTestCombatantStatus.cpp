@@ -13,7 +13,7 @@ u32 scrCommBattleTestCombatantStatus(void)
     u32 bit = scrGetArg(0);
     BtlMainStateA *battle = btlGetMainState();
     BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(battle);
-    if (entry != NULL && (entry->statusFlags & (1u << bit)) != 0) {
+    if (entry != NULL && (entry->data.statusFlags & (1u << bit)) != 0) {
         scrSetResult(1);
         return 1;
     }

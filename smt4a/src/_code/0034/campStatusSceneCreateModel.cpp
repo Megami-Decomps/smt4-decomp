@@ -1,4 +1,5 @@
 #include "classes/Obj557c58.h"
+#include "Model/MoriModelManager.h"
 
 /* The camp scene that shows the status screen's model. */
 struct CampStatusScene {
@@ -9,7 +10,6 @@ struct CampStatusScene {
 };
 
 extern "C" {
-extern void *g_handleRegistry;
 
 s32 lmapSceneGetScript(void);
 s32 lmapMainIsRunning(void);

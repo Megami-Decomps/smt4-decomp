@@ -58,7 +58,7 @@ u32 FUN_003b14b8(void)
             if ((g_btlCandidateMasks.unavailable & mask) != 0 && (g_btlCandidateMasks.required & mask) != 0 &&
                 (g_btlCandidateMasks.excluded & mask) == 0) {
                 for (s32 slot = 0; slot < 21; slot++) {
-                    if (group == record->encodedStats.values[slot] >> 10) {
+                    if (group == record->data.values[slot] >> 10) {
                         u16 *id = state->ids.begin;
                         while (id != state->ids.end) {
                             CandidateIdEntry *entry = (CandidateIdEntry *)skillDataFindById(itemTableGetItemRecord(*id)->skillId);

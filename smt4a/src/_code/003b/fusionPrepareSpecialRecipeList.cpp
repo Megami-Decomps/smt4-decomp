@@ -1,5 +1,5 @@
 /* NON_MATCHING: retail retains one shared indexed work base and literal array offsets; this build rematerializes both addresses, saving one fewer register and using an 8-byte rather than 12-byte frame. -O2 candidate. */
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
 #include "map/lmapMain.h"
@@ -19,7 +19,7 @@ struct FusionRecipeEntry {
     u16 ingredients[12];
     u16 resultId;
 };
-// A view of the recipe-list span; the backing UniteWork remains unchanged.
+// A view of the recipe-list span; the backing UniteWorkA remains unchanged.
 struct FusionRecipeWorkView {
     u8 unk0000[0x48c];
     u32 soundChannel;
@@ -35,7 +35,6 @@ struct FusionRecipeWorkView {
 };
 
 extern "C" {
-extern UniteWork *g_unite;
 void soundChannelRequestIfEnabled(u32 channel, u32 mode, u32 duration);
 u32 fusionListAvailableSpecialRecipes(void *context, u16 *recipes);
 void gridNavigationConfigure(ScrollSelection *list, s32 count, s32 visible, s32 columns,
@@ -53,20 +52,20 @@ void linkHolderClearFlag(LinkHolder *holder);
 // Validate the saved ingredients and populate the special-fusion recipe/result lists.
 void fusionPrepareSpecialRecipeList()
 {
-    UniteWork *work = g_unite;
+    UniteWorkA *work = g_unite;
     FusionRecipeWorkView *recipes = reinterpret_cast<FusionRecipeWorkView *>(work);
     FusionSavedSelection *selection = &reinterpret_cast<FusionSavedPreferences *>(saveGetUserSettingsBlock())->selection;
     soundChannelRequestIfEnabled(recipes->soundChannel, 0, 60);
     if (selection->slots[0] >= 0) {
         const SlotRecordA *slot = gameGetSlotRecord(selection->slots[0]);
-        if (slot == NULL || slot->entryId != selection->ids[0]) {
+        if (slot == NULL || slot->id != selection->ids[0]) {
             selection->slots[0] = -1;
             selection->ids[0] = 0;
         }
     }
     if (selection->slots[1] >= 0) {
         const SlotRecordA *slot = gameGetSlotRecord(selection->slots[1]);
-        if (slot == NULL || slot->entryId != selection->ids[1]) {
+        if (slot == NULL || slot->id != selection->ids[1]) {
             selection->slots[1] = -1;
             selection->ids[1] = 0;
         }

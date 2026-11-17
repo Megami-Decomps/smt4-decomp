@@ -1,13 +1,9 @@
 /* NON_MATCHING: skill-array zero scheduling, battle mask loads and tier flag updates differ; -O2 candidate. */
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlEntryLookup.h"
 #include "battle/btlMain.h"
 #include "gamedata/SkillDataRecord.h"
 
-struct ActionTierUnit {
-    u64 flags;
-    u8 unk008[0xcc];
-    s32 specialCounter; // 0xd4
-};
 struct ActionTierBattleFlags {
     u8 unk0000[0x45a8];
     u64 flags;
@@ -22,18 +18,17 @@ struct ActionTierMasks {
 };
 extern "C" {
 extern ActionTierMasks DAT_005713f0;
-ActionTierUnit *btlMainFindEntryByListedId(BtlMainStateA *, u32);
-s32 btlAnyEventFilterMatches(BtlMainStateA *, ActionTierUnit *, u32);
+s32 btlAnyEventFilterMatches(BtlMainStateA *, BtlCombatantEntryA *, u32);
 s32 lcgRandomRange(u32);
 s32 gameFlagIsSet(u32);
-void source4CCopyHalves(ActionTierUnit *, u16 *);
+void source4CCopyHalves(BtlCombatantEntryA *, u16 *);
 
 u32 btlSelectActionTier(u32 unitId)
 {
-    ActionTierUnit *unit = btlMainFindEntryByListedId(btlGetMainState(), unitId);
+    BtlCombatantEntryA *unit = btlMainFindEntryByListedId(btlGetMainState(), unitId);
     s32 tier = 0;
-    ActionTierUnit *special = btlMainFindEntryByListedId(btlGetMainState(), unitId);
-    if (special && special->specialCounter > 0 && !btlAnyEventFilterMatches(btlGetMainState(), unit, 3)) {
+    BtlCombatantEntryA *special = btlMainFindEntryByListedId(btlGetMainState(), unitId);
+    if (special && special->properties[24] > 0 && !btlAnyEventFilterMatches(btlGetMainState(), unit, 3)) {
         s32 roll = lcgRandomRange(99);
         ActionTierBattleFlags *battle = (ActionTierBattleFlags *)btlGetMainState();
         if (battle->flags & DAT_005713f0.forced)

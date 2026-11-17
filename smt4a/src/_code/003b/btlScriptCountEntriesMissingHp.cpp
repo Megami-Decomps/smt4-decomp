@@ -18,7 +18,7 @@ u32 btlScriptCountEntriesMissingHp(void)
         if ((entry->flags & g_btlCandidateMasks.unavailable) &&
             (entry->flags & g_btlCandidateMasks.required) &&
             !(entry->flags & g_btlCandidateMasks.excluded) &&
-            entry->maxHp - entry->hp >= damage) {
+            entry->data.maxHp - entry->data.hp >= damage) {
             count++;
         }
     }

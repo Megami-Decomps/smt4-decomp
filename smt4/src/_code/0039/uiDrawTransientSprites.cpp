@@ -2,9 +2,9 @@
 #include "camp/RenderCtx.h"
 #include "map/mapDepart.h"
 #include "game/GameState.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 void pairCopy(const Point2 *source, Point2 *destination);
 u32 renderCtxPackPassFlags(u32 mode, u32 flags);
 void renderStackPushIndexed(RenderCtx *context, s32 stack, u32 state);

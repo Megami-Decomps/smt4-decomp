@@ -20,19 +20,19 @@ u32 scrBattleDamagePartyHp()
     for (s32 slot = 0; slot < 4; ++slot) {
         BtlMainState *battle = btlGetMainState();
         BtlEntry *target = &battle->entries[slot];
-        if ((target->flags & 1) && !(target->flags & 0x40) && target->members.ids[0] >= 0) {
+        if ((target->flags & 1) && !(target->flags & 0x40) && target->ids[0] >= 0) {
             s32 damage = 0;
             switch (mode) {
-            case 0: damage = target->maxHp * amount / 100; break;
-            case 1: damage = target->hp * amount / 100; break;
+            case 0: damage = target->data.maxHp * amount / 100; break;
+            case 1: damage = target->data.hp * amount / 100; break;
             case 2: damage = amount; break;
             }
-            if (damage >= target->hp)
-                damage = target->hp - 1;
+            if (damage >= target->data.hp)
+                damage = target->data.hp - 1;
             FUN_00250720(reinterpret_cast<SlotManager *>(btlGetMainState()));
             battle = btlGetMainState();
-            BtlActionRecord *unit = &battle->actions[target->members.ids[0]];
-            FUN_002551ac(0, source, unit, 0, damage, -1, -1, target->hp, target->maxHp,
+            BtlActionRecord *unit = &battle->actions[target->ids[0]];
+            FUN_002551ac(0, source, unit, 0, damage, -1, -1, target->data.hp, target->data.maxHp,
                           0, 0, 0, 0, 1, 0, slot << 3, slot << 3, slot << 3, slot << 3, 1, 0, 1, 1, 0, 1);
             btlQueueKeyedScalarReflectAction(0, source, 0x1000185, 0, 0, 0, 0);
         }

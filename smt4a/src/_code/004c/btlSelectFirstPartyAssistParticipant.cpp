@@ -70,7 +70,7 @@ u32 btlSelectFirstPartyAssistParticipant()
         }
         if (lcgRandomRange(99) < chance && selected < 1) {
             BattleAssistView *assist = (BattleAssistView *)btlGetMainState();
-            assist->participants[selected++] = record->entryId;
+            assist->participants[selected++] = record->id;
         }
     }
     if (selected > 0) {

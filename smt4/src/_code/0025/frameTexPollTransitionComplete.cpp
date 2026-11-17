@@ -1,33 +1,15 @@
-#include "ui/FrameTex.h"
-extern "C" FrameWork *g_frameTex;
-
-struct FrameTextureAnimationWork {
-    u8 data[0x88];
-};
-struct FrameTextureAnimation {
-    u8 unk00[0x85];
-    s8 busy; // 0x85
-    u8 unk86[6];
-    FrameTextureAnimationWork work; // 0x8c
-};
-struct FrameTextureActivity {
-    u8 unk000[0x1c];
-    u8 active; // 0x1c
-    u8 unk01d[0xccb];
-    FrameTextureAnimation animation; // 0xce8
-};
+#include "frame_tex/FrameTex.h"
 
 extern "C" {
-s32 uiSpriteAdvanceAnimation(FrameTextureAnimationWork *work);
-s8 frameAnimationGetBusy(const FrameTextureAnimation *animation);
+s32 uiSpriteAdvanceAnimation(UiSpriteState *sprite);
+s8 frameAnimationGetBusy(const UiSpriteState *sprite);
 
-// Poll active frame animation, rejecting a busy or incomplete transition.
+// Poll the CAMP transition: not complete while its last item is still animating or its frame widget has not finished.
 u32 frameTexPollTransitionComplete(void)
 {
-    FrameWork *texture = g_frameTex;
-    FrameTextureActivity *activity = (FrameTextureActivity *)texture;
-    if (texture->unkF2B != 0 && activity->active != 0) {
-        if (frameAnimationGetBusy(&activity->animation) != 0 || uiSpriteAdvanceAnimation(&activity->animation.work) == 0) {
+    FrameTexWork *work = g_frameTex;
+    if (work->campCapturedLeft != 0 && work->campActive != 0) {
+        if (frameAnimationGetBusy(&work->campItems[23]) != 0 || uiSpriteAdvanceAnimation(&work->campFrameWidget) == 0) {
             return 0;
         }
     }

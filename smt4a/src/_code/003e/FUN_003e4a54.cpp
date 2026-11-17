@@ -1,4 +1,4 @@
-#include "shard/W6_W6Match1_PartySlot.h"
+#include "gamedata/GameSaveDataA.h"
 #include "gamedata/SaveSlotTable.h"
 
 extern "C" {
@@ -31,8 +31,8 @@ extern "C" u32 FUN_003e4a54(u32 sourceId, u32 destinationId)
     PartySlotA *destination = findPartySlotById(destinationId);
     if (destination == NULL)
         return 0;
-    s32 difference = source->level - destination->level;
+    s32 difference = source->record.level - destination->record.level;
     if (difference < 0)
         return 0;
-    return FUN_003e4b2c(destinationId, source->level, difference);
+    return FUN_003e4b2c(destinationId, source->record.level, difference);
 }

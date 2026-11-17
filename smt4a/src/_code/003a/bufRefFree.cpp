@@ -1,28 +1,24 @@
 #include "shard/Shard003A.h"
+#include "font/InfoWinA.h"
 
 extern "C" {
 
-typedef struct BufOwner {
-    /* 0x000 */ u8 unk000[0x328];
-    /* 0x328 */ u32 **slot;
-} BufOwner;
 
-extern BufOwner *g_infoWin;
 
 extern void asdMemFree(void *ptr);
 
 /* Frees the buffer referenced through the owner and clears the reference. */
 void bufRefFree(void)
 {
-    BufOwner *owner = g_infoWin;
+    InfoWindowA *owner = g_infoWin;
     u32 **slot = NULL;
 
     if (owner != NULL) {
-        slot = owner->slot;
+        slot = static_cast<u32 **>(owner->text); /* the text object starts with its buffer */
     }
     if (owner != NULL && slot != NULL && *slot != NULL) {
         asdMemFree(*slot);
-        *owner->slot = NULL;
+        *static_cast<u32 **>(owner->text) = NULL;
     }
 }
 

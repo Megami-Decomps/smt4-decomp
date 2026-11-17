@@ -8,6 +8,8 @@
 #include "gfx/StereoParallax.h"
 #include "util/BitsAndBytes_VariantA.h"
 #include "camp/RenderCtx.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxTitle.h"
 
 /* The run window (only the fields read here). */
 struct RunWin {
@@ -23,17 +25,9 @@ struct RunWin {
     /* 0xC4 */ u8 label[1];
 };
 
-struct LayoutPoint {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-};
-
 extern "C" {
 extern RunWin *g_runWin;
-extern RenderCtx *g_titleScene;
 
-LayoutPoint *asdTMTexTableEntryAt(s32 group, s32 part);
 void gxResetColorQuadToWhite(void);
 s32 vec2GetYInt(void *vec);
 void efctSetSpeed(f32 alpha);
@@ -56,7 +50,7 @@ u8 runWinDraw(void)
         texDrawTableEntryAtStoredOrigin(2, 14, 0x150, x, 0, 111);
         texDrawTableEntryAtStoredOrigin(2, 14, 0x151, x, 0, 111);
         renderStackPop(&g_titleScene->stackB);
-        LayoutPoint *labelPoint = asdTMTexTableEntryAt(14, 0x153);
+        TextureTableEntryIV *labelPoint = asdTMTexTableEntryAt(14, 0x153);
         u32 color = 0xF49800FF;
         f32 labelY = (f32)(labelPoint->y + y);
         f32 labelX = (f32)(labelPoint->x + (x - 14));
@@ -68,7 +62,7 @@ u8 runWinDraw(void)
         for (s32 row = 0; row < 3; row++) {
             for (s32 column = 0; column < 3; column++) {
                 s32 index = row * 3 + column;
-                LayoutPoint *dot = asdTMTexTableEntryAt(14, 0x157 + index);
+                TextureTableEntryIV *dot = asdTMTexTableEntryAt(14, 0x157 + index);
                 if (lit == index || lit2 == index)
                     texDrawTableEntryAtStoredOrigin(2, 14, 0x155, dot->x + x, dot->y, 111);
                 else if (litPrevious == index || lit2Previous == index)

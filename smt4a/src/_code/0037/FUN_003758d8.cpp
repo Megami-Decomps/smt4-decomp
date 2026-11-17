@@ -1,5 +1,6 @@
 #include "common.h"
 #include "gamedata/SkillDataRecord.h"
+#include "gamedata/SaveSlotRecord.h"
 
 /* A sortable entry: a unit id and its slot (negative when it has none). */
 struct UnitSortEntry {
@@ -12,14 +13,8 @@ struct UnitLowRecord {
     /* 0x24 */ u16 level;
 };
 
-struct UnitSlotRecord {
-    /* 0x00 */ u8 unk00[0x62];
-    /* 0x62 */ u16 rank;
-};
-
 extern "C" {
 s32 idIsAbove400(s32 id);
-UnitSlotRecord *gameGetSlotRecord(s32 slot);
 s32 itemSortCompareByCategoryAndId(const UnitSortEntry *a, const UnitSortEntry *b);
 
 static __inline u32 unitSortLevel(const UnitSortEntry *entry)
@@ -40,12 +35,12 @@ static __inline s32 compareSlotRanks(const UnitSortEntry *a, const UnitSortEntry
     if (a->slot < 0) {
         rankA = 0;
     } else {
-        rankA = gameGetSlotRecord(a->slot)->rank;
+        rankA = gameGetSlotRecord(a->slot)->id;
     }
     if (b->slot < 0) {
         rankB = 0;
     } else {
-        rankB = gameGetSlotRecord(b->slot)->rank;
+        rankB = gameGetSlotRecord(b->slot)->id;
     }
     diff = rankB - rankA;
     if (diff != 0) {

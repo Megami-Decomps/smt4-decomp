@@ -1,13 +1,7 @@
 /* NON_MATCHING: near: 203 rows against 204; retail keeps the text colour in a callee-saved register and the work pointer in r7 (ours r8) and loads the frame/digit y offsets before the x offsets; the draw sequence and leading-zero logic agree. */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
-
-/* An image placement record (offsets 8 and 10 hold the position). */
-struct ImagePlacement {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-};
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* The work area the counter reads (observed field). */
 struct CounterWork {
@@ -21,7 +15,6 @@ struct CounterWork {
 
 extern "C" {
 
-ImagePlacement *asdTMTexTableEntryAt(s32 group, s32 image);
 void textFormatFullWidthTwoDigits(u32 digit, char *text);
 void textDrawString(s32 layer, u32 color, const char *text, f32 x, f32 y, f32 a, f32 b, f32 c);
 void gxResetColorQuadToWhite(void);
@@ -30,8 +23,8 @@ void gxResetColorQuadToWhite(void);
  * leaving out leading zeros. */
 void FUN_003b6a5c(CounterWork *work, s32 x, s32 y)
 {
-    ImagePlacement *frame = asdTMTexTableEntryAt(COUNTER_GROUP, 0xCA);
-    ImagePlacement *digit;
+    TextureTableEntryIV *frame = asdTMTexTableEntryAt(COUNTER_GROUP, 0xCA);
+    TextureTableEntryIV *digit;
     char text[0x44];
     u32 value;
     u32 thousands;

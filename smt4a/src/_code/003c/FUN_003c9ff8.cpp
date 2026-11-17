@@ -22,7 +22,7 @@ u32 FUN_003c9ff8()
         if ((flags & g_battleMaskPresets[0]) != 0
             && (flags & g_battleMaskPresets[3]) == 0
             && (flags & g_battleMaskPresets[1]) != 0
-            && entry->selection.marked != 0 && entry->id == id) {
+            && entry->data.marked != 0 && entry->data.id == id) {
             asdModelStartReferencedAnimation(battle->roster[i].motion.handle, animation);
             break;
         }

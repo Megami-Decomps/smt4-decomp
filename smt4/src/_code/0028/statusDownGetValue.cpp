@@ -1,12 +1,7 @@
-#include "common.h"
-
-namespace {
-struct State { u8 padding[0x2384]; u32 value; };
-}
+#include "status/StatusDown.h"
 
 extern "C" {
 /* Reads or forwards the current state. */
-extern State * g_statusDown;
 s32 statusDownGetValue(void)
 {
     return g_statusDown != NULL ? g_statusDown->value : 0;

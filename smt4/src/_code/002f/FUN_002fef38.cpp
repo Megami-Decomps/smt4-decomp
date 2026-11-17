@@ -1,4 +1,4 @@
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "shard/PassiveSkill.h"
 #include "gamedata/NkmBaseRecord.h"
@@ -16,27 +16,27 @@ u32 FUN_002fef38()
         BtlEntry *entry = &btlGetMainState()->entries[index];
         if ((entry->flags & BTL_ENTRY_FLAG_PRESENT) != 0 &&
             (entry->flags & BTL_ENTRY_FLAG_ACTIVE) != 0 &&
-            (entry->flags & BTL_ENTRY_FLAG_BLOCKED) == 0 && entry->id == id) {
-            if (entry->equipA != NULL) {
+            (entry->flags & BTL_ENTRY_FLAG_BLOCKED) == 0 && entry->data.id == id) {
+            if (entry->data.equipA != NULL) {
                 for (s32 slot = 0; slot < 8; ++slot) {
-                    const ActiveSkillRecord *skill = reinterpret_cast<const ActiveSkillRecord *>(skillDataFindById(entry->equipA->skillIds[slot]));
+                    const ActiveSkillRecord *skill = reinterpret_cast<const ActiveSkillRecord *>(skillDataFindById(entry->data.equipA->skillIds[slot]));
                     if (skill != NULL && skill->classification.category == 3) {
                         scrSetResult(1);
                         return 1;
                     }
                 }
             }
-            if (entry->equipB != NULL) {
+            if (entry->data.equipB != NULL) {
                 for (s32 slot = 0; slot < 8; ++slot) {
-                    const ActiveSkillRecord *skill = reinterpret_cast<const ActiveSkillRecord *>(skillDataFindById(entry->equipB->skillIds[slot]));
+                    const ActiveSkillRecord *skill = reinterpret_cast<const ActiveSkillRecord *>(skillDataFindById(entry->data.equipB->skillIds[slot]));
                     if (skill != NULL && skill->classification.category == 3) {
                         scrSetResult(1);
                         return 1;
                     }
                 }
             }
-            if (entry->devil != NULL) {
-                const NkmBaseRecord *record = reinterpret_cast<const NkmBaseRecord *>(nkmBaseGetRecord(entry->id));
+            if (entry->data.devil != NULL) {
+                const NkmBaseRecord *record = reinterpret_cast<const NkmBaseRecord *>(nkmBaseGetRecord(entry->data.id));
                 for (s32 slot = 0; slot < 8; ++slot) {
                     const ActiveSkillRecord *skill = reinterpret_cast<const ActiveSkillRecord *>(skillDataFindById(record->skills[slot]));
                     if (skill != NULL && skill->classification.category == 3) {

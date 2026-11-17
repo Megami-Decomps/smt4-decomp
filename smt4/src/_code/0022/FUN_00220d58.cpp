@@ -2,8 +2,8 @@
 #include "status/StatusCamera.h"
 #include "ui/UiControl.h"
 #include "shard/S1ListPanel.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 extern "C" {
-const SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 sprite);
 s32 uiPointerHitsRect(s32 x, s32 y, s32 width, s32 height, s32 mode);
 s32 padIsButtonPressed(u32 button);
 s32 padIsButtonRepeat(u32 button);
@@ -32,11 +32,11 @@ u32 FUN_00220d58(void *base)
     InputView *work = static_cast<InputView *>(base);
     u32 result = 0;
     bool shortTap = false;
-    const SpriteInfo *button = asdTMTexTableEntryAt(0x39, 0x97);
-    if (uiPointerHitsRect(button->x, button->y, button->size[0], button->size[1], 0)) {
+    const TextureTableEntryIV *button = asdTMTexTableEntryAt(0x39, 0x97);
+    if (uiPointerHitsRect(button->x, button->y, button->placement->width, button->placement->height, 0)) {
         ++work->heldFrames;
     } else {
-        if (uiPointerHitsRect(button->x, button->y, button->size[0], button->size[1], 3) &&
+        if (uiPointerHitsRect(button->x, button->y, button->placement->width, button->placement->height, 3) &&
             work->heldFrames - 1u < 15)
             shortTap = true;
         work->heldFrames = 0;

@@ -1,10 +1,11 @@
 /* NON_MATCHING: mechanical split of the romwright decompile of the merged function, not yet rewritten: the stub passes (0, -1) as the 2nd/3rd argument, which the decompile folded into constants */
 #include "common.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 
 int CONCAT44(double, double);
-int renderCtxCalculateStereoParallax(unsigned int);
+int renderCtxCalculateStereoParallax(RenderCtxA *);
 int FUN_0019aee4(...);
 int charCodeIsPrivateUseGlyph(...);
 int sentinelLookupGetValue(void);
@@ -41,7 +42,6 @@ typedef struct {
     unsigned int sp1A8; /* 0x1a8: local_1a8 */
 } param_1_stack;
 
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
 extern signed char g_asdTextDefaults; /* 0x5b3d54 */
 extern int DAT_005b3d64; /* 0x5b3d64 */
 extern romwright_code *DAT_005b3d74; /* 0x5b3d74 */

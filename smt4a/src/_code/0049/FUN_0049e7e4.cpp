@@ -4,10 +4,10 @@
 #include "gfx/StereoParallax.h"
 #include "gfx/StereoParallax.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 
-extern RenderCtxScissorA *g_renderCtx;
 
 void efctSetSpeed(f32 speed);
 void FUN_00168e00(s32 x, s32 y, s32 width, s32 height);

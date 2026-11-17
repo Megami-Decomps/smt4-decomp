@@ -1,5 +1,6 @@
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 #include "shard/W4_Match1b_RegisteredHandle.h"
+#include "Model/MoriModelManager.h"
 
 struct FusionCandidateOwner {
     /* 0x00 */ u32 unk00;
@@ -14,8 +15,6 @@ struct FusionPreviewObject {
     /* 0x04 */ u32 flags;
 };
 extern "C" {
-extern UniteWork *g_unite;
-extern void *g_handleRegistry;
 extern const char DAT_0052f264[];
 extern const char DAT_0052f298[];
 f32 candidateGetPreferredValue(void *candidate);
@@ -26,14 +25,13 @@ void resourceOwnerLoadFileSync(RegisteredHandle *list, const char *name);
 void FUN_0040a908(RegisteredHandle *list, u32 bytes);
 void FUN_0040a918(RegisteredHandle *list, u32 bytes);
 void moriModelContentLoadBody(RegisteredHandle *list, s32 mode);
-void handleRegistryRegisterObject(void *registry, FusionPreviewObject *object);
 void modelPlayClip(FusionPreviewObject *object, s32 index, s32 mode, f32 first, f32 second);
 }
 
 /* Lazily create and register the fusion preview model using the available VRAM budget. */
 extern "C" void uniteCreatePreviewModel()
 {
-    UniteWork *work = g_unite;
+    UniteWorkA *work = g_unite;
     if (work == NULL) {
         return;
     }

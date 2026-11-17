@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ int effectRenderTransformedInstance(unsigned int *);
 int renderCtxCalculateStereoParallax(int);
 int textDrawString(...);
 int gxResetColorQuadToWhite(void);
-int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
@@ -137,10 +137,10 @@ unsigned int FUN_0038a478(void)
         *(unsigned char *)(temp_v1 + 0x1264) = 0;
       }
       if ((int)puVar2[4] < 5) {
-        temp_v1 = asdTMTexTableEntryAt(0xe,0xe1);
+        temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0xe1));
       }
       else {
-        temp_v1 = asdTMTexTableEntryAt(0xe,0xe0);
+        temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0xe0));
       }
       if ((char)puVar2[0x105] != '\x01') {
         if ((char)puVar2[0x105] == '\x02') {
@@ -193,7 +193,7 @@ unsigned int FUN_0038a478(void)
         temp_v4 = 0;
         if (0 < (int)temp_v6) {
           do {
-            temp_v2 = asdTMTexTableEntryAt(0xe,temp_v1 + temp_v4);
+            temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,temp_v1 + temp_v4));
             FUN_002b75ec(puVar2[0x107],*(short *)(temp_v2 + 8) + temp_v11,(int)*(short *)(temp_v2 + 10),
                          0x13,6,temp_v4);
             temp_v4 = temp_v4 + 1;
@@ -207,7 +207,7 @@ unsigned int FUN_0038a478(void)
         temp_v2 = 0;
         if (0 < (int)temp_v6) {
           do {
-            temp_v3 = asdTMTexTableEntryAt(0xe,temp_v1 + temp_v2);
+            temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,temp_v1 + temp_v2));
             temp_v7 = *(short *)(temp_v3 + 8) + temp_v11;
             VectorSignedToFloat((int)*(short *)(temp_v3 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
             VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);

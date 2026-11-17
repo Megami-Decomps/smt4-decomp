@@ -27,7 +27,7 @@ s32 FUN_003c6294(void)
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
         if ((entry->flags & g_btlCandidateMasks.unavailable) != 0 &&
             (entry->flags & g_btlCandidateMasks.required) != 0 &&
-            (entry->flags & g_btlCandidateMasks.excluded) == 0 && entry->id == id) {
+            (entry->flags & g_btlCandidateMasks.excluded) == 0 && entry->data.id == id) {
             found = 1;
             // A local view avoids changing the shared combatant's still-unclassified padding.
             struct CounterView {

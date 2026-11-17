@@ -23,7 +23,7 @@ u32 FUN_0038bb80(void)
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
         if ((entry->flags & g_btlCandidateMasks.unavailable) && (g_btlCandidateMasks.required & entry->flags) &&
             !(entry->flags & g_btlCandidateMasks.excluded) &&
-            entry->id == id && (entry->statusFlags & (1 << bit))) {
+            entry->data.id == id && (entry->data.statusFlags & (1 << bit))) {
             return commandResult(1);
         }
     }

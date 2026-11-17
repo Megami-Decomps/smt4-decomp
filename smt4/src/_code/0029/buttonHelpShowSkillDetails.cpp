@@ -1,12 +1,11 @@
 /* Shows a skill's category, target, and description in the button-help panel. */
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 #include "shard/PassiveSkill.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
 #include "gamedata/SkillDataLookup.h"
 
 extern "C" {
-extern ButtonHelpGlobals g_buttonHelp;
 RelativeDirectory *FUN_002b47ec(void);
 s32 idIsAbove400(s32 id);
 void btlFormatCategoryLabel(char *buffer, u32 category);

@@ -15,7 +15,7 @@ static __inline s32 compareFusionDevils(const u32 *first, const u32 *second)
 // Sort fusion pairs lexicographically by their first and second demons.
 extern "C" s32 uniteComparePairsAscending(const u16 *first, const u16 *second)
 {
-    UniteWork *list = g_unite;
+    UniteWorkA *list = g_unite;
     u32 firstId = list->pairList.pairs[*first].packedIds & 0x7fff;
     u32 secondId = list->pairList.pairs[*second].packedIds & 0x7fff;
     s32 result = compareFusionDevils(&firstId, &secondId);

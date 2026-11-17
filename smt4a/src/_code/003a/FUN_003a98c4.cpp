@@ -22,7 +22,7 @@ extern "C" u32 FUN_003a98c4()
         u64 flags = entry->flags;
         if ((flags & g_battleMaskPresets.eligibility.active) &&
             !(flags & g_battleMaskPresets.eligibility.excluded) &&
-            (flags & g_battleMaskPresets.eligibility.required) && entry->id == unitId) {
+            (flags & g_battleMaskPresets.eligibility.required) && entry->data.id == unitId) {
             ((ScriptCombatantValueView *)entry)->value = value;
             break;
         }

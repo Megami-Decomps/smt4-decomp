@@ -1,31 +1,30 @@
-#include "shard/JobWork.h"
+#include "frame_tex/FrameTexA.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 
 s32 stateValuesGetBySelector(u32 arg);
-u8 gxCopyFramebufferToSurface(u32 arg, JobSurface *surface);
-void surfaceCopy(JobSurface *dest, JobSurface *source);
-void renderCtxSelectDisplayAreaForStereoMode(u32 renderCtx);
-extern u32 g_renderCtx;
+u8 gxCopyFramebufferToSurface(u32 arg, AsdTexture *surface);
+void surfaceCopy(AsdTexture *dest, AsdTexture *source);
 
-/* Per-frame job step: marks a pending request when stateValuesGetBySelector asks for one; otherwise, if enabled and neither done nor pending, renders once into a 0x200 x 0x200 surface, halves its size and sets `done`. Always returns 0. */
+/* "CAMPCR" capture: marks the right capture pending while a state selector is set; otherwise, once the CAMP effect is enabled, captures the right screen into the right texture at half size. Always returns 0. */
 s32 jobRenderOnce(u32 job)
 {
-    JobWork *work = jobGetWork(job);
+    FrameTexWorkA *work = (FrameTexWorkA *)jobGetWork(job);
 
     if (stateValuesGetBySelector(0) != 0) {
-        work->pending = 1;
-    } else if (work->enabled == 0) {
-        return work->enabled;
-    } else if (work->done == 0 && work->pending == 0) {
+        work->campPendingRight = 1;
+    } else if (work->campEnabled == 0) {
+        return work->campEnabled;
+    } else if (work->campCapturedRight == 0 && work->campPendingRight == 0) {
         renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
-        work->surface->width = 0x200;
-        work->surface->height = 0x200;
-        work->handle = gxCopyFramebufferToSurface(0, work->surface);
-        surfaceCopy(work->surface, work->surface);
-        work->surface->width = work->surface->width >> 1;
-        work->surface->height = work->surface->height >> 1;
-        work->done = 1;
+        work->surfaceRight->dimensions.width = 0x200;
+        work->surfaceRight->dimensions.height = 0x200;
+        work->campCaptureResult = gxCopyFramebufferToSurface(0, work->surfaceRight);
+        surfaceCopy(work->surfaceRight, work->surfaceRight);
+        work->surfaceRight->dimensions.width = work->surfaceRight->dimensions.width >> 1;
+        work->surfaceRight->dimensions.height = work->surfaceRight->dimensions.height >> 1;
+        work->campCapturedRight = 1;
     }
     return 0;
 }

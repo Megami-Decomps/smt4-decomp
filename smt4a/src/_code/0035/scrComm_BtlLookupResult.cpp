@@ -1,24 +1,18 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include "battle/BtlEntryLookup.h"
 
 extern "C" {
 
-typedef struct UnitRecord {
-    /* 0x00 */ u16 id;
-    /* 0x02 */ u16 result;
-} UnitRecord;
 
 extern u32 scrGetArg(u32 index);
-extern UnitRecord *btlFindEntryBlockByMemberId(UnitRecord *state, u32 index);
 extern int scrSetResult(u32 value);
 
 /* Script command: looks up the entry for argument 0 and pushes its result word. */
 u32 scrComm_BtlLookupResult(void)
 {
     u32 index = scrGetArg(0);
-    UnitRecord *state = reinterpret_cast<UnitRecord *>(btlGetMainState());
-
-    scrSetResult(btlFindEntryBlockByMemberId(state, index)->result);
+    scrSetResult(btlFindEntryBlockByMemberId(btlGetMainState(), index)->id);
     return 1;
 }
 

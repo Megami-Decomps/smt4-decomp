@@ -1,22 +1,12 @@
 /* NON_MATCHING: retail keeps the shown/next slots in stack slots, spills r0-r3 in the prologue and recomputes the cycle target per slot; the marker drawing is the same (180 vs 184 rows). */
 #include "common.h"
-#include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 #include "ui/UiControl.h"
 #include "gamedata/UnitRecordAccess.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
-/* The unit's slot-cycling window: the rectangle drawn around the cycling slots. */
-typedef struct SlotCycleFrame {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-    /* 0x0C */ s16 *size;               /* width, height */
-} SlotCycleFrame;
-
-extern u8 *g_titleScene;
-
-SlotCycleFrame *asdTMTexTableEntryAt(s32 a, s32 b);
 void FUN_0029a17c(s32 x, s32 y, s32 width, s32 height, s32 flag);
 
 /* Draws the slot marker of party unit `unit`: with several slots owned it cycles between the
@@ -24,7 +14,7 @@ void FUN_0029a17c(s32 x, s32 y, s32 width, s32 height, s32 flag);
  * just shows it. `work` holds the per-unit selection (0xD5E0) and cycle counter (0xD580). */
 void FUN_003b6da4(u8 *work, s32 unit, s32 x, s32 y)
 {
-    SlotCycleFrame *frame = asdTMTexTableEntryAt(0x28, 300);
+    TextureTableEntryIV *frame = asdTMTexTableEntryAt(0x28, 300);
     u32 mask = 0;
     s32 owned = 0;
     s32 shown = 0;
@@ -66,16 +56,13 @@ void FUN_003b6da4(u8 *work, s32 unit, s32 x, s32 y)
             index++;
         }
     }
-    RenderStateStack *stack = (RenderStateStack *)(g_titleScene + 0x130C);
-
-    renderStackSet(stack, 3);
-    FUN_0029a17c(frame->x + x, frame->y + y, frame->size[0], frame->size[1], 1);
+    renderStackSet(&g_titleScene->scissor, 3);
+    FUN_0029a17c(frame->x + x, frame->y + y, frame->placement->width, frame->placement->height, 1);
     s32 slide = (*counter - 20) * -3;
 
     messageKindForward(shown, frame->x + slide + x, frame->y + y, 0x7E);
     messageKindForward(nextShown, frame->x + x + slide + 13, frame->y + y, 0x7E);
-    stack = (RenderStateStack *)(g_titleScene + 0x130C);
-    renderStackSet(stack, 0);
+    renderStackSet(&g_titleScene->scissor, 0);
     if (*counter >= 24) {
         *selection = (*selection + 1) % owned;
         *counter = 0;

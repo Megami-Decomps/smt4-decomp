@@ -1,17 +1,16 @@
-#include "status/StatusDown.h"
+#include "status/StatusDownA.h"
 #include "shard/Shard0037.h"
 
 extern "C" {
-extern StatusDownStateA *g_statusDown;
 
-extern s32 objectApplyIfUnblocked(u8 *block);
+extern s32 objectApplyIfUnblocked(ScrollSelection *list);
 
 s32 stateHolderCountMinus1(void)
 {
     if (g_statusDown == NULL) {
         return 0;
     }
-    return objectApplyIfUnblocked(g_statusDown->unk5EC) - 1;
+    return objectApplyIfUnblocked(&g_statusDown->list) - 1;
 }
 
 } /* extern "C" */

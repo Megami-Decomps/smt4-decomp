@@ -1,8 +1,8 @@
 #include "camp/RenderCtx.h"
 #include "shard/W4_W4Match2_UiQuest.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 s32 renderCtxPackPassFlags(u32 mode, u32 flags);
 void FUN_001a6d98();
 

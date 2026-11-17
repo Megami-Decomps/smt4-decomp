@@ -1,9 +1,9 @@
 /* NON_MATCHING: cached-state array addressing, boolean mask lowering and command scratch registers differ. */
 #include "title/titleMain.h"
 #include "shard/S1ListPanel.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
-extern TitleScene *g_titleScene;
 extern u32 *g_modelCommandBuffer;
 extern u32 g_modelCommandWordCount;
 void cursorResetFromParam();

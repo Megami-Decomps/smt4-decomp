@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "code/Code0029.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -19,7 +20,6 @@ int fontMeasureLineAdvance(...);
 int textDrawString(...);
 int textFormatBuffer(...);
 int texDrawCompositeSprite(...);
-int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int renderCtxSelectStereoLayout(int);
 int tmnlGetEntryText(...);
@@ -131,7 +131,7 @@ unsigned int FUN_001a26dc(void)
     }
     texDrawTableEntryAtStoredOrigin(2,0x1e,0x28,0,temp_v3,0xc9);
     texDrawTableEntryAtStoredOrigin(2,0x1e,0x29,0,temp_v3,0xc9);
-    temp_v7 = asdTMTexTableEntryAt(0x1e,0x2a);
+    temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,0x2a));
     temp_v8 = terminalGetCharacterDisplayName(*(unsigned int *)(temp_v2 + 0x7ec));
     if (temp_v8 != 0) {
       textFormatBuffer(temp_v11,"%s");
@@ -152,10 +152,10 @@ unsigned int FUN_001a26dc(void)
     if ((temp_v4 == 1) || (temp_v7 = listCursorGetRowIfUnblocked(temp_v12), temp_v7 != temp_v3)) {
       efctSetSpeed();
       if (*(char *)(temp_v2 + 0x74e) != '\x02') {
-        temp_v7 = asdTMTexTableEntryAt(0x1e,temp_v3 + 7);
+        temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,temp_v3 + 7));
       }
       else {
-        temp_v7 = asdTMTexTableEntryAt(0x1e,temp_v3 + 0x2b);
+        temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,temp_v3 + 0x2b));
       }
       texDrawCompositeSprite(2,0x1e,1,(int)*(short *)(temp_v7 + 8),(int)*(short *)(temp_v7 + 10),0xd3);
       temp_v10 = 0xff;
@@ -215,7 +215,7 @@ unsigned int FUN_001a26dc(void)
           temp_v10 = 0x5a5a5aff;
         }
       }
-      temp_v8 = asdTMTexTableEntryAt(0x1e,6);
+      temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,6));
       puVar6 = temp_v11;
       fontMeasureLineAdvance(puVar6,2);
       temp_v9 = (int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v8 + 8) +
@@ -237,10 +237,10 @@ unsigned int FUN_001a26dc(void)
   if (temp_v4 != 1) {
     temp_v4 = listCursorGetRowIfUnblocked(temp_v12);
     if (*(char *)(temp_v2 + 0x74e) != '\x02') {
-      temp_v3 = asdTMTexTableEntryAt(0x1e,temp_v4 + 0x18);
+      temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,temp_v4 + 0x18));
     }
     else {
-      temp_v3 = asdTMTexTableEntryAt(0x1e,temp_v4 + 0x35);
+      temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,temp_v4 + 0x35));
     }
     efctSetSpeed();
     texDrawCompositeSprite(2,0x1e,2,(int)*(short *)(temp_v3 + 8),(int)*(short *)(temp_v3 + 10),0xdd);
@@ -303,7 +303,7 @@ unsigned int FUN_001a26dc(void)
         temp_v10 = 0x72e027ff;
       }
     }
-    temp_v4 = asdTMTexTableEntryAt(0x1e,0x17);
+    temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,0x17));
     puVar6 = temp_v11;
     fontMeasureLineAdvance(puVar6,3);
     temp_v7 = (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8) +
@@ -312,7 +312,7 @@ unsigned int FUN_001a26dc(void)
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(3,temp_v10,temp_v11,temp_v7);
-    temp_v7 = asdTMTexTableEntryAt(0x1e,0x14);
+    temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,0x14));
     temp_v4 = g_titleScene;
     piVar13 = (int *)(g_titleScene + 0x130c);
     temp_v8 = piVar13[*piVar13 + 2];

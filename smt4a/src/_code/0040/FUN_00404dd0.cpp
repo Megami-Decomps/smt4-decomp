@@ -2,6 +2,7 @@
 #include "camp/RenderCtxA.h"
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct CenteredSpriteOffsets {
     u8 unk00[0xc];
@@ -18,21 +19,20 @@ struct CenteredSpriteWork {
 
 extern "C" {
 void efctSetSpeed(f32 speed);
-SpriteInfo *asdTMTexTableEntryAt(u32 group, s32 image);
 
 /* Center the selected sprite inside a reference sprite and apply stereo parallax. */
 void FUN_00404dd0(CenteredSpriteWork *work, s32 x, s32 y, f32 speed)
 {
     efctSetSpeed(speed);
-    SpriteInfo *reference = asdTMTexTableEntryAt(0x32, 0x35);
-    SpriteInfo *sprite = asdTMTexTableEntryAt(work->group, work->index * 1000);
+    TextureTableEntryIV *reference = asdTMTexTableEntryAt(0x32, 0x35);
+    TextureTableEntryIV *sprite = asdTMTexTableEntryAt(work->group, work->index * 1000);
     s32 dx, dy;
-    if (!sprite->size) {
-        dx = (reference->size[0] - (sprite->bounds.width & 0x7fff)) / 2;
-        dy = (reference->size[1] - (sprite->bounds.height & 0x7fff)) / 2;
+    if (!sprite->placement) {
+        dx = (reference->placement->width - (sprite->width & 0x7fff)) / 2;
+        dy = (reference->placement->height - (sprite->height & 0x7fff)) / 2;
     } else {
-        dx = (reference->size[0] - sprite->size[0]) / 2;
-        dy = (reference->size[1] - sprite->size[1]) / 2;
+        dx = (reference->placement->width - sprite->placement->width) / 2;
+        dy = (reference->placement->height - sprite->placement->height) / 2;
     }
     s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
     s32 drawX = reference->x + x + parallax + dx + work->offsets->x;

@@ -1,11 +1,9 @@
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 #include "common.h"
 
 extern "C" {
 
 int mapFlagSet(u32 value);
-
-extern MapIfGlobals g_mapIf;
 
 void mapIfApplyRecordFlags(void)
 {

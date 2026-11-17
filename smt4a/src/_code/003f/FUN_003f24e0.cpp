@@ -16,7 +16,7 @@ void FUN_003f24e0(BtlMainStateA *battle, s32 group)
     u32 flags = battle->roster[group].liveFlags.unk50;
 
     if ((flags & 1) != 0 && (flags & 0x80) != 0) {
-        s16 selectionIndex = btlMainFindEntryByListedId(battle, group)->indexView.selectionIndex;
+        s16 selectionIndex = btlMainFindEntryByListedId(battle, group)->selectionIndex;
 
         for (s32 i = battle->turnOrder.position + 1; i < 12; i++) {
             if (battle->turnOrder.indices[i] < 0) {

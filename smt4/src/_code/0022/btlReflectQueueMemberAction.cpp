@@ -1,16 +1,13 @@
 #include "battle/btlReflect.h"
+#include "battle/BtlEntryLookup.h"
 #include "battle/btlAction.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlEntryLookup.h"
 
-struct ReflectedMemberActions {
-    u8 unk00[0xc];
-    u32 ids[50]; // 0x0c in the roster's embedded action subrecord
-};
 extern "C" {
 
-ReflectedMemberActions *btlFindEntryBlockByMemberId(BtlMainState *battle, s32 member);
 s32 idSetFindSubjectIndex(BtlMainState *battle, const BtlActionRecord *member);
 
 // Queue a member reflection action only when an equivalent action is not already pending.
@@ -25,14 +22,14 @@ ReflectAction *btlReflectQueueMemberAction(s32 actor, u32 options, BtlActionReco
             return NULL;
     }
     ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, options);
-    ReflectedMemberActions *members = btlFindEntryBlockByMemberId(btlGetMainState(), target->memberId);
+    BtlUnitData *members = btlFindEntryBlockByMemberId(btlGetMainState(), target->memberId);
     s32 index = idSetFindSubjectIndex(btlGetMainState(), target);
     if (index < 0)
         index = 0;
     action->kind = 38;
     action->target = (u32)target;
     action->value = value;
-    action->first = (u16)members->ids[index];
+    action->first = (u16)members->parts[index];
     action->second = (u16)target->memberId;
     return action;
 }

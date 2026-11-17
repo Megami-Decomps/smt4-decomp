@@ -4,10 +4,10 @@
 #include "camp/RenderCtx.h"
 #include "shard/JobWork.h"
 #include "code/Code0028.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 extern BtlEffectGlobals g_btlEffect;
-extern RenderCtx *g_titleScene;
 void renderCtxResetColorScale(RenderCtx *context);
 
 u32 FUN_0020ee0c(u32 process)

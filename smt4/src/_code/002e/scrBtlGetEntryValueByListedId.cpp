@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/BtlGlobals.h"
@@ -17,7 +17,7 @@ u32 scrBtlGetEntryValueByListedId(void)
     BtlEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
 
     if (entry != NULL) {
-        result = entry->hp;
+        result = entry->data.hp;
     }
     scrSetResult(result);
     return 1;

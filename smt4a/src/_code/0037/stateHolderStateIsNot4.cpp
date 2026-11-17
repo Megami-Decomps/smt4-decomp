@@ -1,8 +1,7 @@
-#include "status/StatusDown.h"
+#include "status/StatusDownA.h"
 #include "shard/Shard0037.h"
 
 extern "C" {
-extern StatusDownStateA *g_statusDown;
 
 u8 stateHolderStateIsNot4(void)
 {

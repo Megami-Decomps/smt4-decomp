@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00251d98` (_code @ 0x251d98, 0x3d0 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -57,7 +58,6 @@ extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
-extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 
 
@@ -104,7 +104,7 @@ void FUN_00251d98(fn_00251d98_arg0 *param_1,int param_2,int param_3,int param_4)
                 textFormatBuffer(temp_v10,&LAB_0025216c,temp_v5);
               }
             }
-            temp_v3 = asdTMTexTableEntryAt(0x19,0x11);
+            temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x19,0x11));
             fontMeasureLineAdvance(temp_v10,1);
             temp_v1 = *(short *)(temp_v3 + 8);
             temp_v2 = **(short **)(temp_v3 + 0xc);
@@ -144,7 +144,7 @@ void FUN_00251d98(fn_00251d98_arg0 *param_1,int param_2,int param_3,int param_4)
             }
           }
           textFormatBuffer(temp_v11,&LAB_0025217c,temp_v8);
-          temp_v3 = asdTMTexTableEntryAt(0x19,0x15);
+          temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x19,0x15));
           puStack_48 = temp_v11;
           temp_v10[0] = 2;
           temp_v10[1] = 0x79;
@@ -192,7 +192,7 @@ void FUN_00251d98(fn_00251d98_arg0 *param_1,int param_2,int param_3,int param_4)
         if (param_1->field_0x23 != '\0') {
           efctSetSpeed();
         }
-        temp_v6 = asdTMTexTableEntryAt(0x19,0x13);
+        temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x19,0x13));
         uiDrawDemonIcon(temp_v3,*(short *)(temp_v6 + 8) + param_3,*(short *)(temp_v6 + 10) + param_4,0x6a,0);
         if (param_1->field_0x23 == '\0') {
           return;

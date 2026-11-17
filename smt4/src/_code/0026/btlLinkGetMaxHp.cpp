@@ -13,8 +13,8 @@ s32 btlLinkGetMaxHp(BtlUnitLink *record)
         for (s32 index = 0; index < 0x6d; ++index) {
             BtlEntry *unit = &g_btlMainState.state->entries[index];
             if ((unit->flags & 1) && !(unit->flags & 0x40) &&
-                (unit->flags & 8) && unit->link == record) {
-                maxHp = unit->maxHp;
+                (unit->flags & 8) && unit->data.link == record) {
+                maxHp = unit->data.maxHp;
                 break;
             }
         }

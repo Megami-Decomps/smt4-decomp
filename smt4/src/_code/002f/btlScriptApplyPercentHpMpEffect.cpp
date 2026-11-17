@@ -1,4 +1,4 @@
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BattleUnitSlot.h"
 #include "battle/BtlMainAccess.h"
@@ -22,13 +22,13 @@ u32 btlScriptApplyPercentHpMpEffect(void)
     if (show > 0)
         flags = 0x3e0;
     BtlEntry *base = btlGetMainState()->entries;
-    s32 hp = base->maxHp * hpPercent / 100;
-    if ((base->groupMask & 8) && hp > 1)
+    s32 hp = base->data.maxHp * hpPercent / 100;
+    if ((base->data.statusFlags & 8) && hp > 1)
         hp = 1;
     else if (hp == 0)
         hp = -1;
-    s32 mp = base->maxMp * mpPercent / 100;
-    if ((base->groupMask & 8) && mp > 1)
+    s32 mp = base->data.maxMp * mpPercent / 100;
+    if ((base->data.statusFlags & 8) && mp > 1)
         mp = 1;
     else if (mp == 0)
         mp = -1;

@@ -17,7 +17,7 @@ u32 scrCommBtlUnitCheckForGroup(void)
     for (index = 0; index < 0x6D; index++) {
         BtlEntry *unit = &btlGetMainState()->entries[index];
 
-        if ((unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && unit->id == id
+        if ((unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && unit->data.id == id
             && btlEntryHasActionSkillCategory(unit, arg) != 0) {
             scrSetResult(1);
             return 1;

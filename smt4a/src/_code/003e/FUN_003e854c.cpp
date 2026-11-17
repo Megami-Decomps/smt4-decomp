@@ -3,6 +3,7 @@
 #include "gamedata/NkmEnemyRecord.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/NkmEnemyLookup.h"
+#include "battle/BtlGlobals.h"
 
 namespace {
 struct InitialPartySource {
@@ -23,17 +24,12 @@ struct InitialPartyWorkView {
     u8 history[0xA8];
     u32 historyCount;
 };
-struct InitialPartyGlobals {
-    u8 unk00[0x50];
-    s32 forcedUnitId;
-};
 typedef char InitialPartySourceLayoutCheck[sizeof(InitialPartySource) == 0x84 &&
     offsetof(InitialPartySource, requestSequence) == 0x64 &&
     offsetof(InitialPartyWorkView, historyCount) == 0x4C6C ? 1 : -1];
 }
 
 extern "C" {
-extern InitialPartyGlobals g_btlMain;
 void sysMemClear(void *memory, u32 size);
 void btlActionPrepareFromSource(BtlMainStateA *state, InitialPartySource *source, s32 useSaved);
 void FUN_003eb314(BtlMainStateA *state, BtlUnitRecordA *unit, const NkmEnemyRecordA *definition);
@@ -54,9 +50,9 @@ void FUN_003e854c(BtlMainStateA *state)
     work->source.scaleY = 1.0f;
     btlActionPrepareFromSource(state, &work->source, 1);
     BtlCombatantEntryA temporary;
-    BtlUnitRecordA *unit = reinterpret_cast<BtlUnitRecordA *>(&temporary.unitParameters.parameterBlock);
-    if (g_btlMain.forcedUnitId > 0) {
-        NkmEnemyRecordA *definition = nkmEnemyFindById(static_cast<u16>(g_btlMain.forcedUnitId));
+    BtlUnitRecordA *unit = reinterpret_cast<BtlUnitRecordA *>(&temporary.data);
+    if (g_btlMain.initialParty.forcedUnitId > 0) {
+        NkmEnemyRecordA *definition = nkmEnemyFindById(static_cast<u16>(g_btlMain.initialParty.forcedUnitId));
         FUN_003eb314(state, unit, definition);
         FUN_004ca63c(state, unit, 1, 4, 0);
     } else {

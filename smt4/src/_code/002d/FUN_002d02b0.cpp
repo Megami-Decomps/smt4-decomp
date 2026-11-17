@@ -1,9 +1,8 @@
 /* NON_MATCHING: pair-field address folding and saved comparator ID/record registers differ. */
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 
 extern "C" {
-extern UniteWork *g_unite;
 }
 
 static __inline s32 compareFusionDemons(u16 leftId, u16 rightId)

@@ -1,10 +1,10 @@
 /* NON_MATCHING: packed-result zero test, pair address folding and shared success-return allocation differ from retail. */
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 #include "shard/Shard0032.h"
 #include "util/BitsAndBytes_VariantB.h"
 
 // The packed pair uses a 64-bit allocation unit. Keep this view local so its
-// alignment does not change the published, partial UniteWork layout.
+// alignment does not change the published, partial UniteWorkA layout.
 struct FusionResultPairView {
     u64 firstId : 15;
     u64 secondId : 15;
@@ -16,7 +16,6 @@ struct FusionResultPairView {
 typedef char FusionResultPairViewSizeCheck[sizeof(FusionResultPairView) == 8 ? 1 : -1];
 
 extern "C" {
-extern UniteWork *g_unite;
 UnitRecord *slotRecordFindById(u32 id);
 void unitRecordBuild(s32 id, UnitRecord *out);
 void __aeabi_memcpy4(void *out, const void *source, u32 size);
@@ -27,7 +26,7 @@ void unitRecomputeDerivedStats(UnitRecord *unit);
 
 u32 FUN_002f3bc4(UnitRecord *out, s32 index, s32 mode, u32)
 {
-    UniteWork *work = g_unite;
+    UniteWorkA *work = g_unite;
     FusionResultPairView *pair = (FusionResultPairView *)&work->resultPairsA.pairs[index];
     if (mode == 0) {
         if (pair->resultId == 0)

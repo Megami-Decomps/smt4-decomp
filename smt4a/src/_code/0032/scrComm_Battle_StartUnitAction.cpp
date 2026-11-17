@@ -20,7 +20,7 @@ s32 scrComm_Battle_StartUnitAction(void)
 
     btlGetMainState();
     btlSlotManagerResetStates();
-    FUN_004fc094(0, unit, 0, target, 0, combatant->maxHp, -1, -1, combatant->hp, combatant->maxHp, 0, 0, 1, 0, 0, 0, 0, 0,
+    FUN_004fc094(0, unit, 0, target, 0, combatant->data.maxHp, -1, -1, combatant->data.hp, combatant->data.maxHp, 0, 0, 1, 0, 0, 0, 0, 0,
                  0, 0, 1, 0, 1, 1, 0, 1);
     btlQueueKeyedScalarReflectAction(0x19, unit, target, 0);
     return 1;

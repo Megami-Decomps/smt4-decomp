@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ typedef struct StateDrawWork {
     /* 0x9C */ u8 view[4];
 } StateDrawWork;
 
-extern RenderCtx *g_titleScene;
 void renderCtxSelectStereoLayout(RenderCtx *context);
 void gxResetColorQuadToWhite(void);
 u32 renderCtxPackPassFlags(u32 slot, u32 flags);

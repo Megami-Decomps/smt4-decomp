@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00486444` (_code @ 0x486444, 0x8c8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 
@@ -42,7 +43,6 @@ typedef struct {
 } param_1_stack;
 
 extern int DAT_00587f20; /* 0x587f20 */
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
 extern int DAT_005f1604; /* 0x5f1604 */
 extern signed char DAT_005f1a5e; /* 0x5f1a5e */
 extern signed char DAT_005f1c73; /* 0x5f1c73 */

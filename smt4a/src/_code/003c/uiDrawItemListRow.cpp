@@ -2,11 +2,11 @@
 #include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 s32 recordGetModeForId(u32 id);
 void campDrawFrame(s32 x, s32 y, u32 special, f32 effect);
-const SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 sprite);
 const char *dataFindKindRecordWithAocOverrides(s32 message, u32 variant);
 extern const char DAT_0052bfdc[];
 
@@ -22,9 +22,9 @@ void uiDrawItemListRow(s32 x, s32 y, s32 message, s32 category, u32 color, u32 i
     }
     campDrawFrame(x, y, special, effect);
     texDrawTableEntryAtStoredOrigin(2, 18, 1140, x, y, 196);
-    const SpriteInfo *icon = asdTMTexTableEntryAt(18, 1141);
+    const TextureTableEntryIV *icon = asdTMTexTableEntryAt(18, 1141);
     uiDrawItemCategoryIcon((s16)category, icon->x + x, icon->y + y, 196, 0);
-    const SpriteInfo *label = asdTMTexTableEntryAt(18, 1142);
+    const TextureTableEntryIV *label = asdTMTexTableEntryAt(18, 1142);
     if (message > 0) {
         const char *text = dataFindKindRecordWithAocOverrides(message, 0);
         if (text)

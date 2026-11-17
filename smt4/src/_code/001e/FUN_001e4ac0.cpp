@@ -2,6 +2,7 @@
 #include "common.h"
 #include "camp/RenderCtx.h"
 #include <stddef.h>
+#include "camp/RenderCtxTitle.h"
 
 /* The overlay color lies beyond the currently recovered BtlMainState layout. */
 struct BattleOverlayView {
@@ -12,7 +13,6 @@ typedef char BattleOverlayColorOffsetCheck[offsetof(BattleOverlayView, color) ==
 
 extern "C" {
 extern BattleOverlayView *g_btlMainState;
-extern RenderCtx *g_titleScene;
 void forwardRecoveredCallback(void);
 void gxSubmitDrawZeroExtraParams(u32 topLeft, u32 topRight, u32 bottomLeft, u32 bottomRight,
                   f32 x, f32 y, f32 width, f32 height, f32 depth);

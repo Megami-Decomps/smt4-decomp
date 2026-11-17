@@ -88,7 +88,7 @@ void FUN_003d06e4(BtlMainState **block, CommandState *state)
     }
     for (s32 i = 0; i < count; i++) {
         BtlEntry *unit = units[i];
-        if ((unit->flags & 0x400) != 0 && FUN_0029e9cc(unit->id) != 0) {
+        if ((unit->flags & 0x400) != 0 && FUN_0029e9cc(unit->data.id) != 0) {
             state->selection->kind = 6;
             state->selection->value = 0;
             return;

@@ -1,4 +1,4 @@
-#include "shard/W4_Match3_InfoWindow.h"
+#include "font/InfoWinA.h"
 
 extern "C" {
 
@@ -10,7 +10,7 @@ s32 vec2GetXInt(void *sprite);
 /* Sets the info window's message text and lays out its label around the text width. */
 void infoWinSetText(const char *entry, u32 arg)
 {
-    InfoWindow *window = g_infoWin;
+    InfoWindowA *window = g_infoWin;
     f32 width;
 
     window->hasText = false;
@@ -26,8 +26,8 @@ void infoWinSetText(const char *entry, u32 arg)
     } else {
         window->wideText = false;
     }
-    uiSpriteSetKeyframe(window->labelSprite, 2, 0);
-    window->labelX = vec2GetXInt(window->labelSprite);
+    uiSpriteSetKeyframe(&window->label, 2, 0);
+    window->labelX = vec2GetXInt(&window->label);
     window->textRight = window->labelX + window->textWidth + 42;
     if (window->state == 3) {
         window->state = 2;

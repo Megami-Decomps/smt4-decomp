@@ -3,6 +3,7 @@
 #include "shard/Shard0031.h"
 #include "code/Code002a_VariantA.h"
 #include "gamedata/FlagsB.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -42,8 +43,7 @@ void uiSpriteAdvanceAnimation(void *state, f32 scale);
 void FUN_00228b04(void *list, s32 arg);
 s32 resourceRunOperationIfUnblocked(void *list);
 s32 ifTouchGetSelectionMode(void);
-u32 asdTMTexTableEntryAt(u32 kind, u32 index);
-s32 FUN_003450d4(void *list, u32 layout, void *panel, s32 a, s32 b, s32 c, u8 *flag, s32 d, s32 e);
+s32 FUN_003450d4(void *list, const TextureTableEntryIV *touchArea, void *panel, s32 a, s32 b, s32 c, u8 *flag, s32 d, s32 e);
 s32 padQueryLogicalKey(s32 which, s32 arg);
 void eventQueueAddUniqueIfValid(u32 event);
 void FUN_003f6abc(DialogWork *work);

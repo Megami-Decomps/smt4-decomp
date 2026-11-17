@@ -1,5 +1,5 @@
 /* NON_MATCHING: written like the matched fusionComparePairsByRaceLevelAndId (shared UniteWork pairs, u16 ids); the pair loads now match except that retail reads *left into r0 first and copies both ids (mov r9, r5; mov r8, r0) before the first nkmBaseGetRecord, where this build computes the left id into r8. */
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 
 /* Tie-break two demons by descending race, then level, then descending demon id. */
@@ -28,7 +28,6 @@ static __inline s32 compareFusionDevils(u16 leftId, u16 rightId)
 }
 
 extern "C" {
-extern UniteWork *g_unite;
 
 // Sort fusion pairs lexicographically by their first and second demons, descending.
 s32 uniteComparePairsDescending(const u16 *left, const u16 *right)

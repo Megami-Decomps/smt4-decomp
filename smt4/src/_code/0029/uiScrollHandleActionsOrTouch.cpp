@@ -1,6 +1,7 @@
 /* NON_MATCHING: packed rectangle halfword loads fold into word loads (retail ORs a zero register and keeps halfword loads) and coordinate registers differ; boolean-output normalization now matches. */
 #include "shard/S1ListPanel.h"
 #include "classes/Obj422594.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct FlaggedEntry;
 
@@ -16,7 +17,7 @@ void flaggedEntrySetValueA(FlaggedEntry *, s32);
 void flaggedEntrySetValueB(FlaggedEntry *, s32);
 void eventQueueAddUnique(u32);
 
-u32 uiScrollHandleActionsOrTouch(FlaggedEntry *owner, const SpriteInfo *sprite, const s16 *actions,
+u32 uiScrollHandleActionsOrTouch(FlaggedEntry *owner, const TextureTableEntryIV *sprite, const s16 *actions,
                   s32 firstAction, s32 secondAction, s32 thirdAction, bool *specialAction,
                   s32 alternateAxis, s32 notify)
 {
@@ -55,7 +56,7 @@ u32 uiScrollHandleActionsOrTouch(FlaggedEntry *owner, const SpriteInfo *sprite, 
     } else if (sprite != NULL) {
         Obj422594Pair rectangle;
         rectangle.first = (u16)sprite->x | ((u32)(u16)sprite->y << 16);
-        rectangle.second = (u16)sprite->size[0] | ((u32)(u16)sprite->size[1] << 16);
+        rectangle.second = (u16)sprite->placement->width | ((u32)(u16)sprite->placement->height << 16);
         result = FUN_0026ab64(owner, rectangle, firstAction, secondAction,
                               thirdAction, alternateAxis, notify);
     }

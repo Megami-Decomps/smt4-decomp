@@ -1,12 +1,6 @@
 /* NON_MATCHING: recovered logic; retail re-reads marker fields after stores and keeps the -1 constant shared with the 0xffff compare, so register allocation and the fade arithmetic scheduling differ. */
 #include "common.h"
-
-/* A battle unit; only its flags and the bit set of its selectable slots are read. */
-struct BtlUnit {
-    u32 flags;              // 0x000 (bit 19: selectable)
-    u8 unk004[0x1C2];
-    u16 slotMask;           // 0x1C6
-};
+#include "battle/BtlEntryLookup.h"
 
 /* A unit marker that fades between slot colors. */
 struct BtlUnitMarker {
@@ -35,16 +29,15 @@ struct BtlMarkerConfig {
 
 extern "C" {
 extern BtlMarkerConfig DAT_00439ce0;
-BtlUnit *btlMainFindEntryByListedId(void *battle, s32 id);
 
 /* Fade a unit marker toward the color of its selected slot; cycle the slot once the fade has run. */
-void FUN_003c14e8(void *battle, BtlUnitMarker *marker)
+void FUN_003c14e8(BtlMainState *battle, BtlUnitMarker *marker)
 {
     s32 fadeSteps = DAT_00439ce0.fadeSteps;
     if ((marker->flags & 2) == 0) {
         return;
     }
-    BtlUnit *unit = btlMainFindEntryByListedId(battle, marker->listedId);
+    BtlEntry *unit = btlMainFindEntryByListedId(battle, marker->listedId);
     if (unit == NULL) {
         return;
     }
@@ -55,7 +48,7 @@ void FUN_003c14e8(void *battle, BtlUnitMarker *marker)
     s32 slot;
     for (u32 bit = 0; bit < 11; bit++) {
         slot = marker->slot;
-        if (slot == 0 && (unit->slotMask & (1 << bit)) != 0) {
+        if (slot == 0 && (unit->data.statusFlags & (1 << bit)) != 0) {
             marker->slot = bit;
             slot = bit;
             break;
@@ -103,7 +96,7 @@ void FUN_003c14e8(void *battle, BtlUnitMarker *marker)
     if ((f32)fadeSteps + 20.0f + 4.0f < (f32)(step + 1)) {
         u32 next = slot + 1;
         do {
-            if ((unit->slotMask & (1 << next)) != 0) {
+            if ((unit->data.statusFlags & (1 << next)) != 0) {
                 marker->slot = next;
                 return;
             }

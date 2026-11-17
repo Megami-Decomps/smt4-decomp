@@ -1,14 +1,10 @@
-#include "common.h"
+#include "camp/CampStateA.h"
 #include "camp/CampStateQueries.h"
 
-struct Camp {
-    u8 unk00[0x1C]; // 0x00
-    s32 state;      // 0x1C
-};
 
 extern "C" {
-extern Camp* g_camp;
 
+/* Whether the camp is open and not in state 0x55. */
 u32 campIsState85(void)
 {
     if (g_camp == NULL) {

@@ -36,7 +36,7 @@ extern "C" u32 FUN_003cccd0(void)
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
             (entry->flags & g_btlCandidateMasks.required) &&
-            !(g_btlCandidateMasks.excluded & entry->flags) && entry->id == id) {
+            !(g_btlCandidateMasks.excluded & entry->flags) && entry->data.id == id) {
             if (candidateHasPendingCounter(entry)) {
                 scrSetResult(1);
                 return 1;
@@ -45,7 +45,7 @@ extern "C" u32 FUN_003cccd0(void)
     }
     if (btlGetMainState()->unk4cd1 != 0) {
         BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
-        if (entry != NULL && entry->id == id && candidateHasPendingCounter(entry)) {
+        if (entry != NULL && entry->data.id == id && candidateHasPendingCounter(entry)) {
             scrSetResult(1);
             return 1;
         }

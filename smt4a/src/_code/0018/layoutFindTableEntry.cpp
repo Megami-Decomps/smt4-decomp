@@ -10,9 +10,9 @@ typedef struct LayoutFile {
 
 
 /* Looks up the table entry `index` in the file of a layout; the tail call to the next function is linked as a nop. */
-u16 *layoutFindTableEntry(void *layout, s32 index)
+TextureTableEntryIV *layoutFindTableEntry(void *layout, s32 index)
 {
-    return reinterpret_cast<u16 *>(asdTMTexTableEntryAt(static_cast<LayoutFile *>(layout)->file, index));
+    return asdTMTexTableEntryAt(static_cast<LayoutFile *>(layout)->file, index);
 }
 
 } /* extern "C" */

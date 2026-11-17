@@ -26,7 +26,7 @@ void FUN_003e03b0(BattleArrangementLoadState *load, BtlMainStateA *battle)
     s32 index = btlFindSelectionIndexByOrdinal(battle, 1);
     if (index >= 0) {
         battle->stateFlags64.bits |= g_btlEncount.queuedStateMask;
-        NkmEnemyRecordA *record = nkmEnemyFindById(battle->entries[index].id);
+        NkmEnemyRecordA *record = nkmEnemyFindById(battle->entries[index].data.id);
         char path[128];
         sysMemClear(path, sizeof(path));
         textFormatBuffer(path, "battle/arngmt/%02d_%02d.earg", record->bustUp, record->bustUpVariation);

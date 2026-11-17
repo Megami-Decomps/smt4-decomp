@@ -1,10 +1,9 @@
 /* NON_MATCHING: Inlined texture initialization retains heap argument registers and groups format/dimension stores differently; cleanup branch placement differs. */
-#include "ui/FrameTex.h"
+#include "frame_tex/FrameTex.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
-extern FrameWork *g_frameTex;
 AsdTexture *asdTextureCreate(u32 flags);
 void *asdMemoryAlloc(u32 heap, u32 tag, u32 mode, u32 size, u32 flags);
 u32 osVirtToPhysAddress(const void *address);
@@ -27,38 +26,26 @@ static __inline void frameTexAllocateImage(AsdTexture *texture, u32 heap, s32 wi
 
 extern "C" void FUN_00280ac0(s32 useSpecialHeap)
 {
-    /* The texture ownership fields follow the shared FrameWork prefix. */
-    struct TextureOwnerView {
-        u8 unk000[0xFDC];
-        AsdTexture *primary;
-        u8 useSystemMemory;
-        u8 unkFE1[3];
-        AsdTexture *secondary;
-        AsdTexture *tertiary;
-    };
-    typedef char TextureOwnerOffsetsCheck[offsetof(TextureOwnerView, primary) == 0xFDC &&
-        offsetof(TextureOwnerView, secondary) == 0xFE4 && offsetof(TextureOwnerView, tertiary) == 0xFE8 ? 1 : -1];
-    FrameWork *work = g_frameTex;
+    FrameTexWork *work = g_frameTex;
     AsdTexture *texture = asdTextureCreate(0);
-    TextureOwnerView *owner = (TextureOwnerView *)work;
-    if (owner->primary == NULL) {
+    if (work->sceneSurface == NULL) {
         if (useSpecialHeap != 0) {
-            owner->useSystemMemory = 0;
+            work->hdrDownsampleChain = 0;
             frameTexAllocateImage(texture, 0x30000, 512, 400, 0x64000, 352);
-            owner->primary = texture;
+            work->sceneSurface = texture;
         } else {
-            owner->useSystemMemory = 1;
+            work->hdrDownsampleChain = 1;
             frameTexAllocateImage(texture, 0x20000, 512, 400, 0x64000, 418);
-            owner->primary = texture;
+            work->sceneSurface = texture;
             texture = asdTextureCreate(0);
             frameTexAllocateImage(texture, 0x20000, 256, 256, 0x20000, 437);
-            owner->secondary = texture;
+            work->hdrSurfaceHalf = texture;
             texture = asdTextureCreate(0);
             frameTexAllocateImage(texture, 0x20000, 128, 128, 0x8000, 456);
-            owner->tertiary = texture;
+            work->hdrSurfaceQuarter = texture;
         }
-        work->unkFD8 = 0;
-        work->unkE96 = 0;
-        work->unkE95 = 0;
+        work->captureBlocked = 0;
+        work->hdr.capturedRight = 0;
+        work->hdr.capturedLeft = 0;
     }
 }

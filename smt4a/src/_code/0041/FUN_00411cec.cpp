@@ -23,8 +23,8 @@ void FUN_00411cec(void)
     for (s32 index = 0; index < 4; ++index) {
         BtlCombatantEntryA *entry = &battle->entries[index];
         if ((entry->flags & DAT_00573c58.required) != 0 &&
-            (entry->flags & DAT_00573c58.excluded) == 0 && entry->hp != 0 &&
-            (entry->statusFlags == 0 || entry->statusFlags == 4))
+            (entry->flags & DAT_00573c58.excluded) == 0 && entry->data.hp != 0 &&
+            (entry->data.statusFlags == 0 || entry->data.statusFlags == 4))
             candidates[count++] = index;
     }
     if (count != 0) {
@@ -34,7 +34,7 @@ void FUN_00411cec(void)
             if (candidate >= 0) {
                 BtlCombatantEntryA *entries = battle->entries;
                 if (lcgRandomRange(99) < 61) {
-                    FUN_004fdb18(0, 0, &battle->roster[entries[candidate].unitIndex], 0x10, 0);
+                    FUN_004fdb18(0, 0, &battle->roster[entries[candidate].ids[0]], 0x10, 0);
                     selected++;
                 }
             }
@@ -42,7 +42,7 @@ void FUN_00411cec(void)
         if (selected != 0)
             return;
         s32 choice = lcgRandomRange(static_cast<u16>(count - 1));
-        FUN_004fdb18(0, 0, &battle->roster[battle->entries[candidates[choice]].unitIndex], 0x10, 0);
+        FUN_004fdb18(0, 0, &battle->roster[battle->entries[candidates[choice]].ids[0]], 0x10, 0);
     }
 }
 }

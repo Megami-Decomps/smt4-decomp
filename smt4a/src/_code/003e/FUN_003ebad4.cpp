@@ -34,8 +34,8 @@ void FUN_003ebad4(BtlMainStateA *battle)
     BattleRosterRecordA *marked = NULL;
     for (s32 index = 4; index < 54; ++index) {
         BtlCombatantEntryA *entry = &battle->entries[index];
-        if (entry->selection.marked != 0) {
-            marked = &battle->roster[entry->unitIndex];
+        if (entry->data.marked != 0) {
+            marked = &battle->roster[entry->ids[0]];
             break;
         }
     }

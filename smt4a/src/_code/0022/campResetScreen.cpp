@@ -1,32 +1,17 @@
-#include "common.h"
+#include "camp/CampStateA.h"
 
 extern "C" {
 
-void uiSpriteSelectAnim(u8 *member, s32 flag);
-void uiSpriteSetKeyframe(u8 *unit, s32 a, s32 b);
-void uiSpriteSetImageKeyframe(u8 *unit, s32 a, s32 b);
+void uiSpriteSetKeyframe(UiSpriteState *unit, s32 a, s32 b);
+void uiSpriteSetImageKeyframe(UiSpriteState *unit, s32 a, s32 b);
 void FUN_0037c8e4(s32 a, s32 b);
 void messageRestoreBanner(void);
 
-typedef struct Unit {
-    /* 0x00 */ u8 data[0x8C];
-} Unit;
 
-typedef struct Game {
-    /* 0x0000 */ u8 unk0000[0x18];
-    /* 0x0018 */ u32 unk18;
-    /* 0x001C */ u8 unk1C[0xE70];
-    /* 0x0E8C */ Unit units[13];
-    /* 0x15A8 */ u8 member15A8[0x8C];
-    /* 0x1634 */ u8 member1634[0x348];
-    /* 0x197C */ u8 member197C[1];
-} Game;
-extern Game *g_camp;
-
-/* Resets the game screen: runs the two set-up calls, then restarts the 13 units and the three members and clears the word at 0x18. */
+/* Resets the camp screen: runs the two set-up calls, then restarts the 13 sprites at sprites[15..27] and three more, and clears the word at 0x18. */
 void campResetScreen(void)
 {
-    Game *game;
+    CampStateA *game;
     s32 i;
 
     FUN_0037c8e4(1, 0);
@@ -34,14 +19,14 @@ void campResetScreen(void)
     game = g_camp;
     i = 0;
     do {
-        uiSpriteSetKeyframe(game->units[i].data, 10, 0);
-        uiSpriteSetImageKeyframe(game->units[i].data, 0x13, 0);
+        uiSpriteSetKeyframe(&game->sprites[15 + i], 10, 0);
+        uiSpriteSetImageKeyframe(&game->sprites[15 + i], 0x13, 0);
         i = i + 1;
     } while (i < 0xD);
-    uiSpriteSetImageKeyframe(game->member15A8, 6, 0);
-    uiSpriteSelectAnim(game->member197C, 8);
-    game->unk18 = 0;
-    uiSpriteSetImageKeyframe(game->member1634, 0x16, 0);
+    uiSpriteSetImageKeyframe(&game->sprites[28], 6, 0);
+    uiSpriteSelectAnim(&game->sprites[35], 8);
+    game->unk0018 = 0;
+    uiSpriteSetImageKeyframe(&game->sprites[29], 0x16, 0);
 }
 
 } /* extern "C" */

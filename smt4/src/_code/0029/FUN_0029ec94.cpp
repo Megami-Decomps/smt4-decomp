@@ -1,8 +1,7 @@
 /* NON_MATCHING: the four membership comparisons of the first (loaded-slot) loop use reversed operands; every other instruction matches. */
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 
 extern "C" {
-extern UniteWork *g_unite;
 s32 FUN_00293f10(s32 id, s32 byDevilId);
 void statusBustUpPortraitRelease(s32 id, s32 byDevilId);
 void statusBustUpPortraitAcquire(s32 id, s32 byDevilId);

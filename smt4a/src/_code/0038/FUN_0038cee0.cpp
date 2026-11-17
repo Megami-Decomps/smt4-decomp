@@ -21,14 +21,14 @@ u32 FUN_0038cee0()
         if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
             (entry->flags & g_btlCandidateMasks.required) != 0 &&
             (entry->flags & g_btlCandidateMasks.excluded) == 0 &&
-            !(entry->statusFlags & (1u << status))) {
+            !(entry->data.statusFlags & (1u << status))) {
             scrSetResult(1);
             return 1;
         }
     }
     if (btlGetMainState()->unk4cd1) {
         BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
-        if (entry && !(entry->statusFlags & (1u << status))) {
+        if (entry && !(entry->data.statusFlags & (1u << status))) {
             scrSetResult(1);
             return 1;
         }

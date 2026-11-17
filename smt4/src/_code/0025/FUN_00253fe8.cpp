@@ -1,7 +1,6 @@
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 
 extern "C" {
-extern ButtonHelpGlobals g_buttonHelp;
 
 void FUN_00253fe8(u32 a, u8 b, u8 c, u8 d)
 {

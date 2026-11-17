@@ -1,4 +1,4 @@
-#include "shard/W4_Match3_InfoWindow.h"
+#include "font/InfoWinA.h"
 #include "shard/TextureDrawCall.h"
 #include "util/MathFunctions.h"
 
@@ -11,14 +11,14 @@ void uiSpriteSetImageKeyframe(void *sprite, s32 keyframe, s32 arg);
 
 static inline void infoWindowBeginClose()
 {
-    InfoWindow *window = g_infoWin;
+    InfoWindowA *window = g_infoWin;
     if (window->state != 0) {
         window->state = 5;
         window->timer = 30;
-        uiSpriteSetKeyframe(&window->sprites.background, 1, 0);
-        uiSpriteSetImageKeyframe(&window->sprites.background, 1, 0);
+        uiSpriteSetKeyframe(&window->background, 1, 0);
+        uiSpriteSetImageKeyframe(&window->background, 1, 0);
         if (window->active == 2) {
-            uiSpriteSetKeyframe(&window->sprites.content, 4, 0);
+            uiSpriteSetKeyframe(&window->content, 4, 0);
         }
     }
 }
@@ -26,26 +26,26 @@ static inline void infoWindowBeginClose()
 // Per-frame update of the info window: fades the frame in, scrolls a wide label, waits out its timer and fades out.
 s32 FUN_00156478(void)
 {
-    InfoWindow *window = g_infoWin;
+    InfoWindowA *window = g_infoWin;
 
     switch (window->state) {
     case 1:
         if (window->active == 2) {
-            uiSpriteAdvanceAnimation(&window->sprites.content, 1.0f);
+            uiSpriteAdvanceAnimation(&window->content, 1.0f);
         }
-        if (uiSpriteAdvanceAnimation(&window->sprites.background, 1.0f) != 0) {
+        if (uiSpriteAdvanceAnimation(&window->background, 1.0f) != 0) {
             if (window->style != 0) {
                 window->state = 4;
             } else {
                 window->state = 2;
-                uiSpriteSetKeyframe(&window->labelAnimation, 2, 0);
+                uiSpriteSetKeyframe(&window->label, 2, 0);
             }
             window->frame = 0;
         }
         break;
     case 2:
-        FUN_00167458(&window->labelAnimation, 0);
-        window->labelX = vec2GetXInt(&window->labelAnimation);
+        FUN_00167458(&window->label, 0);
+        window->labelX = vec2GetXInt(&window->label);
         if (window->labelX <= 0) {
             window->labelX = 0;
             window->state = 3;
@@ -74,13 +74,13 @@ s32 FUN_00156478(void)
         break;
     case 5:
         if (window->active == 2) {
-            uiSpriteAdvanceAnimation(&window->sprites.content, 1.0f);
+            uiSpriteAdvanceAnimation(&window->content, 1.0f);
         }
-        if (uiSpriteAdvanceAnimation(&window->sprites.background, 1.0f) != 0) {
+        if (uiSpriteAdvanceAnimation(&window->background, 1.0f) != 0) {
             window->style = 0;
             window->state = 0;
             window->frame = 0;
-            window->initialization.resetState = 0;
+            window->resetState = 0;
         }
         break;
     }

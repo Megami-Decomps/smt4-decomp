@@ -1,10 +1,11 @@
 /* NON_MATCHING: combatant/action loops use immediate bounds, fewer saved registers and folded flag stores; 105 vs 104 instructions. */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "shard/W5_W5Match2_CountPairs.h"
 #include "battle/btlAction.h"
 #include "battle/btlReflect.h"
 #include "battle/btlUI.h"
+#include "battle/BtlGlobals.h"
 
 namespace {
 struct CompletionState {
@@ -16,13 +17,12 @@ struct CompletionState {
 }
 extern "C" {
 extern ReflectContext *g_btlActionReflect;
-extern BtlMainState *g_btlMain;
 extern CountPairTable *DAT_00435d18;
 extern BtlUi *g_btlUiBlock;
 s32 nodeListCountActiveById(ReflectContext *queue, const CompletionState *id);
 s32 recordAreAllCountsNonpositive(const CountPairTable *counts);
 u32 stateBlockCall(BtlUi *ui);
-s32 FUN_00256940(BtlMainState *main, BtlMainState *battle, s32 mode);
+s32 FUN_00256940(BtlCamera *main, BtlMainState *battle, s32 mode);
 
 // Wait for reflection, count records and the UI, then publish the completed battle action.
 u32 FUN_00240678(CompletionState *completion, BtlMainState *battle)
@@ -59,7 +59,7 @@ u32 FUN_00240678(CompletionState *completion, BtlMainState *battle)
             result = 3;
         else if (kind == 3)
             result = 4;
-        g_btlMain->talk.unitIndex = result;
+        g_btlMain->unk760 = result;
     }
     completion->state = 0x10;
     completion->next = 1;

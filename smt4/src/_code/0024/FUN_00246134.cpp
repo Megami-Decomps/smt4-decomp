@@ -1,18 +1,7 @@
 /* NON_MATCHING: readable rewrite compiles (173 vs ~166 rows); retail keeps the entry pointers in callee-saved registers instead of reloading, and orders the flag tests differently */
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlEntryLookup.h"
 #include "common.h"
-
-// Battle list entry: only the fields read by the affinity lookup.
-struct AffinityEntry {
-    u8 unk000[0x96];
-    s16 guardBuff;          // 0x96
-    s16 reflectBuff;        // 0x98
-    s16 absorbBuff;         // 0x9a
-    u8 unk9c[0xc4 - 0x9c];
-    s32 forcedSlot;         // 0xc4
-    u8 unkc8[0x1f2 - 0xc8];
-    u16 affinity[1];        // 0x1f2: per-element packed (resistance rank << 10 | percent)
-};
 
 struct PassiveSkill {
     u8 unk00[0x38];
@@ -21,14 +10,13 @@ struct PassiveSkill {
 
 extern "C" {
 
-AffinityEntry* btlMainFindEntryByListedId(void* main, u32 id);
 void selectionCopySupportedValue(u32 skill, s32* out);
-void btlEntryGetPassiveSkillIds(AffinityEntry* entry, u16* passiveIds);
+void btlEntryGetPassiveSkillIds(BtlEntry* entry, u16* passiveIds);
 PassiveSkill* passiveSkillLookupRecord(u16 id);
 
-static __inline AffinityEntry* findEntry(u32 unitId)
+static __inline BtlEntry* findEntry(u32 unitId)
 {
-    return btlMainFindEntryByListedId(static_cast<void *>(btlGetMainState()), unitId);
+    return btlMainFindEntryByListedId(btlGetMainState(), unitId);
 }
 
 // Builds the hit-result flag word of skill `skillId` against unit `unitId`:
@@ -44,34 +32,34 @@ u32 FUN_00246134(u32 unitId, u32 skillId, s32 mode, s32 target)
     case 9:
         return 100;
     }
-    AffinityEntry* entry = findEntry(unitId);
+    BtlEntry* entry = findEntry(unitId);
     if (skillId == 6 || skillId == 7) {
-        AffinityEntry* e = findEntry(unitId);
+        BtlEntry* e = findEntry(unitId);
         s16 value = 0;
-        if (e != NULL) value = e->absorbBuff;
+        if (e != NULL) value = e->turn.counter;
         if (e != NULL && value != 0 && value >= 0) flags = 0x10000;
         e = findEntry(unitId);
         value = 0;
-        if (e != NULL) value = e->reflectBuff;
+        if (e != NULL) value = e->turn.unk098;
         if (e != NULL && value != 0 && value >= 0) flags |= 0x20000;
     }
     if (skillId != 0x11) {
         if (mode != 0) {
             if (mode == 1 && target != 0x11) {
-                AffinityEntry* e = findEntry(unitId);
+                BtlEntry* e = findEntry(unitId);
                 s16 value = 0;
-                if (e != NULL) value = e->reflectBuff;
+                if (e != NULL) value = e->turn.unk098;
                 if (!((e == NULL || value == 0) || value < 0)) flags |= 0x20000;
             }
         } else {
-            AffinityEntry* e = findEntry(unitId);
-            if (e != NULL && e->guardBuff >= 1) flags |= 0x20000;
+            BtlEntry* e = findEntry(unitId);
+            if (e != NULL && e->turn.value96 >= 1) flags |= 0x20000;
         }
     }
 
     s32 supported = 0;
     selectionCopySupportedValue(skillId, &supported);
-    u32 packed = entry->affinity[supported];
+    u32 packed = entry->data.values[supported];
     u32 percent = packed & 0xffff03ff;
     u32 rank = packed >> 10;
     if (rank == 1) flags |= 0x10000;
@@ -80,7 +68,7 @@ u32 FUN_00246134(u32 unitId, u32 skillId, s32 mode, s32 target)
     if (rank == 2) flags |= 0x80000000;
     if (rank == 5) flags |= 0x80000;
 
-    AffinityEntry* current = findEntry(unitId);
+    BtlEntry* current = findEntry(unitId);
     u32 passiveFlags = 0;
     u16 passiveIds[10];
     for (s32 i = 0; i < 10; i++) passiveIds[i] = 0;

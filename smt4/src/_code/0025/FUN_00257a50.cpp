@@ -1,10 +1,9 @@
 /* NON_MATCHING: work reload, result-bitfield zero test, parent registers and shared return layout differ. */
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 #include "gamedata/UnitStats.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
-extern UniteWork *g_unite;
 StatBlock *partyMemberFindById(u32 id);
 void FUN_0029dc74(u32 id, StatBlock *result);
 void uniteMergeInheritedSkillsAndStats(void *context, const StatBlock *first,

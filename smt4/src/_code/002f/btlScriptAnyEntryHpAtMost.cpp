@@ -21,7 +21,7 @@ u32 btlScriptAnyEntryHpAtMost(void)
     for (s32 index = start; index < start + count; ++index) {
         BtlEntry *entry = &btlGetMainState()->entries[index];
         if ((entry->flags & 0x10) == 0 && (entry->flags & 1) != 0 && (entry->flags & 0x40) == 0 &&
-            entry->id == kind) {
+            entry->data.id == kind) {
             BtlEntryStats *stats = btlEntryGetStats(entry);
             s32 hp = stats->hp;
             s32 maxHp = stats->maxHp;
@@ -33,7 +33,7 @@ u32 btlScriptAnyEntryHpAtMost(void)
     }
     if (btlGetMainState()->hasActiveEntry != 0) {
         BtlEntry *entry = btlMainFindActiveEntry(btlGetMainState());
-        if (entry != NULL && entry->id == kind) {
+        if (entry != NULL && entry->data.id == kind) {
             BtlEntryStats *stats = btlEntryGetStats(entry);
             s32 hp = stats->hp;
             s32 maxHp = stats->maxHp;

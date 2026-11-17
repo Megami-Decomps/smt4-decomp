@@ -1,7 +1,7 @@
 /* NON_MATCHING: the bitfield result stores, the level-search loops and the slot-table scan are scheduled and merged differently from retail; the fusion result selection is the same. */
 #include "common.h"
 #include "shard/W6_W6Match5_DevilSort.h"
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteWork.h"
 #include "battle/btlHelp.h"
 #include "util/Random.h"
 #include "gamedata/UnitRecordAccess.h"

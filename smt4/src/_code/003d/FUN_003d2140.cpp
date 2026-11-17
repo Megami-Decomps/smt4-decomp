@@ -4,7 +4,7 @@
 #include "battle/btlAction.h"
 #include "battle/ActionStateChannels.h"
 #include "AsdSDK/AsdMemUtil.h"
-#include "gamedata/SaveSlotTable.h"
+#include "gamedata/SaveSlotTableIV.h"
 #include "battle/BtlGlobals.h"
 
 /* The party member record a battle entry is linked to: its id at 0x46. */
@@ -48,7 +48,6 @@ u32 FUN_0027e3b8(void *event);
 u32 FUN_0027e38c(void *event);
 u32 FUN_003ca6c4(BtlMainState **block, CommandState *work);
 void btlUiRouteSelectedAction(u32 ui);
-SaveSlotTable *gameGetSlotTable(void);
 PartyMemberRecord *saveResolvePartySlot(s32 slot);
 s32 gameSlotFindByCategory(void);
 void FUN_00246454(s32 a, CommandState *work, BtlEntry *entry);
@@ -125,15 +124,15 @@ u32 FUN_003d2140(BtlMainState **block, u32 phase)
         // retail returns the slot table pointer the tail call leaves in r0.
         return reinterpret_cast<u32>(gameGetSlotTable());
     case 8: {
-        SaveSlotTable *slots = gameGetSlotTable();
+        SaveSlotTableIV *slots = gameGetSlotTable();
         for (s32 index = 0; index < 4; ++index) {
             BtlEntry *entry = &state->entries[index];
             if ((entry->flags & 1) != 0 && (entry->flags & 8) != 0) {
                 s32 slot = 0;
                 for (; slot < 3; ++slot) {
-                    if (reinterpret_cast<s8 *>(slots)[slot + 0x9108] >= 0) {
+                    if (slots->active[slot] >= 0) {
                         PartyMemberRecord *member = saveResolvePartySlot(slot);
-                        if (member->id == entry->id) {
+                        if (member->id == entry->data.id) {
                             reinterpret_cast<EntryLinkView *>(entry)->link = member;
                             reinterpret_cast<EntryLinkView *>(entry)->category = gameSlotFindByCategory();
                             break;
@@ -165,9 +164,9 @@ u32 FUN_003d2140(BtlMainState **block, u32 phase)
             BtlEntry *entries = state->entries;
             for (; index < 109; ++index) {
                 BtlEntry *entry = &entries[index];
-                if ((entry->flags & 1) != 0 && (entry->flags & 0x40) == 0 && entry->members.ids[0] >= 0 &&
+                if ((entry->flags & 1) != 0 && (entry->flags & 0x40) == 0 && entry->ids[0] >= 0 &&
                     (entry->flags & 0x10) != 0) {
-                    target = entry->members.ids[0];
+                    target = entry->ids[0];
                     break;
                 }
             }

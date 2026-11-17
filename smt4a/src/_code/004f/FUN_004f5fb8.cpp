@@ -5,6 +5,7 @@
 #include "shard/HandlePools.h"
 #include "shard/Shard0032.h"
 #include "status/StatusCamera.h"
+#include "battle/BtlEntryLookup.h"
 
 extern "C" {
 extern void *g_handleRegistry;
@@ -12,7 +13,6 @@ void controllerSetPositionXyz(u32 controller, f32 x, f32 y, f32 z);
 void modelPlayClip(u32 controller, u32 argument, s32 mode, f32 first, f32 second);
 void handleRegistryRegisterObject(void *registry, u32 controller);
 s32 idSetFindSubjectIndex(BtlMainStateA *battle, BattleRosterRecordA *record);
-JobPool *btlFindEntryBlockByMemberId(BtlMainStateA *battle, s32 group);
 void FUN_004019c0(void *transform, Vec3 *value, f32 scale);
 void tripleOwnerSetValue(u32 controller, const Vec3 *value);
 void FUN_00401b50(void *transform, Vec3 *position, f32 scale);
@@ -46,8 +46,8 @@ void FUN_004f5fb8(HandlePools *work, s32 index)
             offsetof(Attachment, transform) == 8 &&
             offsetof(AttachmentPoolView, attachments) == 0x1398 ? 1 : -1];
         Attachment *attachment = NULL;
-        JobPool *jobs = btlFindEntryBlockByMemberId(btlGetMainState(), record->motion.group);
-        u32 job = jobs->jobs[subject];
+        BtlUnitDataA *jobs = btlFindEntryBlockByMemberId(btlGetMainState(), record->motion.group);
+        u32 job = jobs->parts[subject];
         for (s32 i = 0; i < 50; ++i) {
             Attachment *candidate = &((AttachmentPoolView *)work)->attachments[i];
             if (candidate->job == job) {

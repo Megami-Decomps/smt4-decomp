@@ -1,22 +1,7 @@
 #include "common.h"
+#include "map/LmapGlobals.h"
 
 extern "C" {
-
-/* Effect record: the id handed to moriModelUnitStartMaterialAnimation sits at +4. */
-typedef struct {
-    u8 unk00[4];
-    u32 id;             /* 0x04 */
-} Effect;
-
-/* Global game block: a state word at 0x228 and an optional effect at 0x18c. */
-typedef struct {
-    u8 unk00[0x18c];
-    Effect *effect;     /* 0x18c */
-    u8 unk190[0x98];
-    u32 state;          /* 0x228 */
-} GameBlock;
-
-extern GameBlock *g_lmapScene;
 
 int gameFlagsGetBlock(void);
 int FUN_00162ea4(void);
@@ -26,12 +11,12 @@ int moriModelUnitStartMaterialAnimation(u32 id, int a, int b, f32 scale);
 u32 lmapStartOptionalEffect(void)
 {
     gameFlagsGetBlock();
-    if (g_lmapScene->state != 0) {
+    if (g_lmapScene->unk228 != 0) {
         if (FUN_00162ea4() == 0) {
             return 0;
         }
-        if (g_lmapScene->effect != NULL) {
-            moriModelUnitStartMaterialAnimation(g_lmapScene->effect->id, 0, 2, 85.0f);
+        if (g_lmapScene->models[7] != NULL) {
+            moriModelUnitStartMaterialAnimation(g_lmapScene->models[7]->controller, 0, 2, 85.0f);
         }
     }
     return 1;

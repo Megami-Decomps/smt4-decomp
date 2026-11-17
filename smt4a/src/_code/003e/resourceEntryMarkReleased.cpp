@@ -1,4 +1,5 @@
 #include "common.h"
+#include "Model/MoriModelManager.h"
 
 extern "C" {
 
@@ -23,10 +24,6 @@ typedef struct EntryList {
     /* 0x00 */ u8 unk00[0x1C];
     /* 0x1C */ Entry entries[1];
 } EntryList;
-
-extern u32 g_handleRegistry;
-
-extern void ptrListRemoveClearOwner(u32 registry, HandleBody *body);
 
 /* Marks entry `index` as released (state 2), flags its handle body and unregisters the body. */
 void resourceEntryMarkReleased(EntryList *list, s32 index)

@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -24,7 +25,6 @@ int FUN_002bdf94(...);
 int textDrawString(...);
 int textFormatBuffer(...);
 int texDrawCompositeSprite(...);
-int asdTMTexTableEntryAt(...);
 int efctSetSpeed(...);
 int VectorSignedToFloat(...);
 
@@ -188,8 +188,8 @@ LAB_0018733c:
           }
         }
       }
-      temp_v5 = asdTMTexTableEntryAt(0x1a,temp_v3 + 0x414);
-      temp_v14 = asdTMTexTableEntryAt(0x1a,0x40f);
+      temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,temp_v3 + 0x414));
+      temp_v14 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x40f));
       if (temp_v8 != 0) {
         textFormatBuffer(temp_v16,"\x81H\x81H\x81H");
       }
@@ -232,7 +232,7 @@ LAB_0018733c:
       VectorSignedToFloat((int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v14 + 8) + temp_v9,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       textDrawString(2,temp_v10,temp_v16,(int)*(short *)(temp_v14 + 10));
-      temp_v6 = asdTMTexTableEntryAt(0x1a,0x40e);
+      temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x40e));
       FUN_002b6c34((int)*(short *)(temp_v4 + 0x482),
                    (int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v9,
                    (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v6 + 10) + param_2,0xb5,temp_v17
@@ -254,7 +254,7 @@ LAB_0018733c:
           }
         }
         texDrawCompositeSprite(2,0x1a,7,*(short *)(temp_v5 + 8) + temp_v9,*(short *)(temp_v5 + 10) + param_2,0xb5);
-        temp_v4 = asdTMTexTableEntryAt(0x1a,0x413);
+        temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x413));
         FUN_002bdf94(0,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v9,
                      (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,1,4,0xba,
                      "%d",temp_v20);
@@ -320,7 +320,7 @@ LAB_001876ec:
           texDrawTableEntryAtStoredOrigin(2,0x1a,0x4e3,param_1,param_2,0xb3);
           texDrawTableEntryAtStoredOrigin(2,0x1a,0x4e4,param_1,param_2,0xb3);
           texDrawTableEntryAtStoredOrigin(2,0x1a,0x4e5,param_1,param_2,0xb3);
-          temp_v8 = asdTMTexTableEntryAt(0x1a,0x4e6);
+          temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x4e6));
           textFormatBuffer(temp_v16,"\x82m\x82\x8f\x82\x8e\x82\x85");
           VectorSignedToFloat(*(short *)(temp_v8 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat(*(short *)(temp_v8 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -355,7 +355,7 @@ LAB_001876ec:
                 temp_v8 = FUN_0029ee54();
               }
               if ((*(int *)(temp_v2 + 0x40c) >= 9) && (temp_v15 == temp_v8)) {
-                temp_v9 = asdTMTexTableEntryAt(0x1a,0x50b);
+                temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x50b));
                 efctSetSpeed();
                 texDrawCompositeSprite(2,0x1a,0x16,*(short *)(temp_v9 + 8) + param_1,
                              *(short *)(temp_v9 + 10) + param_2,0xbf);
@@ -388,7 +388,7 @@ LAB_001876ec:
                              *(short *)(temp_v9 + 10) + param_2,0xc4);
                 texDrawTableEntryAtStoredOrigin(2,0x1a,0x504,*(short *)(temp_v9 + 8) + param_1,
                              *(short *)(temp_v9 + 10) + param_2,0xc4);
-                temp_v5 = asdTMTexTableEntryAt(0x1a,0x500);
+                temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x500));
                 temp_v8 = g_titleScene;
                 piVar13 = (int *)(g_titleScene + 0x130c);
                 temp_v6 = piVar13[*piVar13 + 2];
@@ -413,7 +413,7 @@ LAB_001876ec:
                   (**(romwright_code **)(temp_v8 + 0x1328))();
                   *(unsigned char *)(temp_v8 + 0x1324) = 0;
                 }
-                temp_v8 = asdTMTexTableEntryAt(0x1a,0x50a);
+                temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x50a));
                 temp_v10 = aocIndexValueOrDefault(*(unsigned short *)(temp_v19 + 0xa2));
                 textFormatBuffer(temp_v16,"%s",temp_v10);
                 VectorSignedToFloat((int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v8 + 10) +
@@ -421,20 +421,20 @@ LAB_001876ec:
                 VectorSignedToFloat((int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v9 + 8) +
                                     param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
                 textDrawString(3,0xffffffff,temp_v16,(int)*(short *)(temp_v9 + 8));
-                temp_v8 = asdTMTexTableEntryAt(0x1a,0x509);
+                temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x509));
                 FUN_002b6c34((int)*(short *)(temp_v19 + 0xa2),
                              (int)*(short *)(temp_v9 + 8) + (int)*(short *)(temp_v8 + 8) + param_1,
                              (int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v8 + 10) + param_2,
                              0xc9,temp_v17,0);
                 temp_v10 = appGetRemainingCapacity(*(unsigned short *)(temp_v19 + 0xa2));
-                temp_v8 = asdTMTexTableEntryAt(0x1a,0x508);
+                temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x508));
                 FUN_002bdf94(0,(int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v9 + 8) + param_1,
                              (int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v8 + 10) + param_2,1
                              ,4,0xc9,"%d",temp_v10);
               }
               else {
-                temp_v9 = asdTMTexTableEntryAt(0x1a,0x43f);
-                temp_v6 = asdTMTexTableEntryAt(0x1a,0x4f1);
+                temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x43f));
+                temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x4f1));
                 temp_v5 = g_titleScene;
                 temp_v8 = *(int *)(temp_v2 + 0x40c) * 0x10;
                 temp_v6 = (int)**(short **)(temp_v6 + 0xc) - (int)**(short **)(temp_v9 + 0xc);
@@ -455,17 +455,17 @@ LAB_001876ec:
                 }
                 temp_v5 = param_1 + temp_v4;
                 texDrawCompositeSprite(2,0x1a,0x15,temp_v5,param_2,0xb3);
-                temp_v8 = asdTMTexTableEntryAt(0x1a,0x4f6);
+                temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x4f6));
                 FUN_002b6c34((int)*(short *)(temp_v19 + 0xa2),*(short *)(temp_v8 + 8) + temp_v5,
                              *(short *)(temp_v8 + 10) + param_2,0xb5,0,0);
-                temp_v8 = asdTMTexTableEntryAt(0x1a,0x4f7);
+                temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x4f7));
                 temp_v10 = aocIndexValueOrDefault(*(unsigned short *)(temp_v19 + 0xa2));
                 textFormatBuffer(temp_v16,"%s",temp_v10);
                 VectorSignedToFloat(*(short *)(temp_v8 + 8) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
                 VectorSignedToFloat(*(short *)(temp_v8 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
                 textDrawString(2,0xff,temp_v16);
                 temp_v10 = appGetRemainingCapacity(*(unsigned short *)(temp_v19 + 0xa2));
-                temp_v8 = asdTMTexTableEntryAt(0x1a,0x4fb);
+                temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x4fb));
                 FUN_002bdf94(0,*(short *)(temp_v8 + 8) + temp_v5,*(short *)(temp_v8 + 10) + param_2,1,4,
                              0xc9,"%d",temp_v10);
                 temp_v8 = g_titleScene;
@@ -489,10 +489,10 @@ joined_r0x00187b44:
                 }
               }
 LAB_00187b88:
-              temp_v9 = asdTMTexTableEntryAt(0x1a,temp_v8 + 0x43e);
+              temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,temp_v8 + 0x43e));
               texDrawCompositeSprite(2,0x1a,10,(int)*(short *)(temp_v9 + 8) + param_1 + temp_v4,
                            *(short *)(temp_v9 + 10) + param_2,0xb3);
-              temp_v8 = asdTMTexTableEntryAt(0x1a,0x43e);
+              temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x43e));
               FUN_002b6c34((int)*(short *)(temp_v2 + temp_v3 * 2 + 0x4a2),
                            (int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v9 + 8) +
                            param_1 + temp_v4,
@@ -539,7 +539,7 @@ LAB_001876e0:
   if (temp_v3 == 0xe) {
     temp_v8 = *(int *)(temp_v2 + 0x40c) * -0x28;
   }
-  temp_v3 = asdTMTexTableEntryAt(0x1a,0x54a);
+  temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x54a));
   temp_v8 = temp_v8 + param_1;
   texDrawTableEntryAtStoredOrigin(2,0x1a,0x4e3,temp_v8,param_2,0xb3);
   texDrawTableEntryAtStoredOrigin(2,0x1a,0x4e4,temp_v8,param_2,0xb3);
@@ -549,7 +549,7 @@ LAB_001876e0:
     FUN_0029a284(temp_v8,param_2,*(unsigned int *)(temp_v2 + 0x540) & 0xffff,0x435,temp_v17,0,0,0);
   }
   else {
-    temp_v4 = asdTMTexTableEntryAt(0x1a,0x40f);
+    temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x40f));
     temp_v10 = aocIndexValueOrDefault(*(unsigned int *)(temp_v2 + 0x540));
     textFormatBuffer(temp_v16,"%s",temp_v10);
     VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,
@@ -557,14 +557,14 @@ LAB_001876e0:
     VectorSignedToFloat((int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v8,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(2,0x8400ff,temp_v16,(int)*(short *)(temp_v4 + 8));
-    temp_v4 = asdTMTexTableEntryAt(0x1a,0x40e);
+    temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x40e));
     FUN_002b6c34((int)(short)*(unsigned int *)(temp_v2 + 0x540),
                  (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v8,
                  (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v3 + 10) + param_2,0xb5,temp_v17,0
                 );
     temp_v10 = appGetRemainingCapacity(*(unsigned int *)(temp_v2 + 0x540));
     texDrawCompositeSprite(2,0x1a,7,*(short *)(temp_v3 + 8) + temp_v8,*(short *)(temp_v3 + 10) + param_2,0xb5);
-    temp_v4 = asdTMTexTableEntryAt(0x1a,0x413);
+    temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x413));
     FUN_002bdf94(0,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v8,
                  (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,1,4,0xba,
                  "%d",temp_v10);
@@ -573,7 +573,7 @@ LAB_00187ce0:
   temp_v8 = FUN_0029ee54(temp_v18);
   if (temp_v8 < 1) {
     texDrawCompositeSprite(2,0x1a,0x1b,param_1,param_2,0xdd);
-    temp_v8 = asdTMTexTableEntryAt(0x1a,0x544);
+    temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x544));
     puVar10 = (unsigned short *)FUN_0029acb0();
     temp_v7 = (unsigned int)*puVar10;
     nkmEnemyFindById();

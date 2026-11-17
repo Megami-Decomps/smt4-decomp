@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail uses a separate model-slot address point and retains a fixed-zero debug-dispatch test whose original hook is unknown. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
+#include "camp/RenderCtxA.h"
 
 struct RenderSceneOwner {
     /* 0x00 */ u32 unk00;
@@ -40,14 +41,13 @@ struct RenderSceneLightState {
 extern "C" {
 extern RenderSceneSettings g_gfxSettings;
 extern RenderSceneLightState g_asdLightCount;
-extern void *g_renderCtx;
 void FUN_0017712c(RenderSceneOwner *owner, void *traverser, u32 mask, s32 enabled);
 void FUN_00197eb0(void *builderState, void *tree);
 void FUN_00176800(RenderSceneOwner *owner, void *traverser, s32 enabled);
 void FUN_0018e9d8(void *builder, void *tree);
 void FUN_00176e84(RenderSceneOwner *owner, u32 mask, s32 mode, s32 flags);
 void nw_gfx_RenderContext_ResetState_2B7478(void *context);
-void renderCtxResetFrameState(void *context);
+void renderCtxResetFrameState(RenderCtxA *context);
 }
 
 /* Traverse the active model scene and reset the render context after submission. */

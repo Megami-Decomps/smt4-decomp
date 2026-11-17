@@ -1,45 +1,31 @@
 /* NON_MATCHING: scissor wrapper and coordinate operand order recovered; saved directory arguments and index arithmetic differ. */
-#include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct SpriteInfo;
-// Coordinate-only view of a layout entry.
-struct LayoutEntryView { u8 prefix[8]; s16 x, y; s16* size; };
-// The scissor stack lies beyond the published IV render-context prefix.
-struct TitleSceneScissorViewIV {
-    RenderCtx context;
-    u8 unk12CC[0x40];
-    RenderStateStack scissor;
-};
-static inline void titleSceneSetScissor(TitleSceneScissorViewIV *scene, s32 state)
-{
-    renderStackSet(&scene->scissor, state);
-}
-
 extern "C" {
-extern RenderCtx* g_titleScene;
 void FUN_002598f0(u32 text, s32 x, s32 y, u32 parameter, f32 scale);
 void asdTextDrawDirectoryEntry(u32 text, u32 a, s32 b, u32 c, u32 d, u32 e, s32 f);
 void FUN_0029a17c(s32 x, s32 y, s32 width, s32 height, u32 enabled);
 void asdTextSetBaseColor(u32 text, u32 color);
 void texDrawCompositeSprite(u32 kind, u32 table, u32 sprite, s32 x, s32 y, u32 parameter);
-SpriteInfo* asdTMTexTableEntryAt(u32 table, u32 id);
 
 void FUN_002ec2e0(u32 text, u32 param2, s32 param3, s32 param4, s32 row, u32 sprite, s32 offset)
 {
     asdTMTexTableEntryAt(0x39, 0xE0);
-    LayoutEntryView* origin = reinterpret_cast<LayoutEntryView*>(asdTMTexTableEntryAt(0x39, row + 0xE6));
+    TextureTableEntryIV* origin = asdTMTexTableEntryAt(0x39, row + 0xE6);
     texDrawCompositeSprite(2, 0x39, 0x13, origin->x, origin->y, 0x1F);
     texDrawTableEntryAtStoredOrigin(2, 0x39, 0xDF, origin->x, origin->y, 0x21);
     texDrawTableEntryAtStoredOrigin(2, 0x39, sprite, origin->x, origin->y, 0x22);
-    LayoutEntryView* clip = reinterpret_cast<LayoutEntryView*>(asdTMTexTableEntryAt(0x39, 0xE0));
-    TitleSceneScissorViewIV* context = reinterpret_cast<TitleSceneScissorViewIV*>(g_titleScene);
-    titleSceneSetScissor(context, 3);
-    FUN_0029a17c(origin->x + clip->x, origin->y + clip->y, clip->size[0], clip->size[1], 1);
+    TextureTableEntryIV* clip = asdTMTexTableEntryAt(0x39, 0xE0);
+    RenderCtx* context = g_titleScene;
+    renderStackSet(&context->scissor, 3);
+    FUN_0029a17c(origin->x + clip->x, origin->y + clip->y, clip->placement->width, clip->placement->height, 1);
     texDrawTableEntryAtStoredOrigin(2, 0x39, 0xE2, origin->x + offset, origin->y, 0x65);
-    context = reinterpret_cast<TitleSceneScissorViewIV*>(g_titleScene);
-    titleSceneSetScissor(context, 0);
-    LayoutEntryView* label = reinterpret_cast<LayoutEntryView*>(asdTMTexTableEntryAt(0x39, 0xE4));
+    context = g_titleScene;
+    renderStackSet(&context->scissor, 0);
+    TextureTableEntryIV* label = asdTMTexTableEntryAt(0x39, 0xE4);
     texDrawTableEntryAtStoredOrigin(2, 0x39, 0xE3, origin->x, origin->y, 0xD);
     asdTextDrawDirectoryEntry(text, 3, -1, 0, 3, param2, param3 + row + param4);
     asdTextSetBaseColor(text, 0xFFFFFFFF);

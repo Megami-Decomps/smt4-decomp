@@ -1,21 +1,15 @@
 /* NON_MATCHING: resource-request cold block is laid out inline and compiler saves two fewer registers; -O2 candidate. */
 #include "battle/btlMain.h"
+#include "battle/BtlEntryLookup.h"
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"
 #include "code/Code0027.h"
-
-struct BattleMemberResources {
-    u16 unk00;
-    u16 id;
-    u8 unk04[8];
-    u32 identifiers[50];
-};
+#include "battle/BtlEntryLookup.h"
 
 extern "C" {
 extern void *g_btlUiBlock;
 extern BattleVersionResources *DAT_00435d18;
 s32 idSetFindSubjectIndex(BtlMainState *state, const BtlActionRecord *action);
-BattleMemberResources *btlFindEntryBlockByMemberId(BtlMainState *state, s32 memberId);
 s32 entryContainsIdentifier(BtlMainState *state, u32 id);
 u32 eventResourceCacheAcquire(u32 id, s32 mode);
 void resourceSlotsInsert(BtlMainState *state, u32 handle);
@@ -46,22 +40,22 @@ void battleActionPollMemberResources(BtlMainState *state, BtlActionRecord *actio
             s32 index = idSetFindSubjectIndex(state, action);
             if (index < 0)
                 index = 0;
-            BattleMemberResources *resources = btlFindEntryBlockByMemberId(state, action->memberId);
-            if (entryContainsIdentifier(state, resources->identifiers[index])) {
+            BtlUnitData *resources = btlFindEntryBlockByMemberId(state, action->memberId);
+            if (entryContainsIdentifier(state, resources->parts[index])) {
                 action->flags |= 0x300;
             } else {
                 action->flags &= ~0x300u;
-                u32 handle = eventResourceCacheAcquire(resources->identifiers[index], 1);
+                u32 handle = eventResourceCacheAcquire(resources->parts[index], 1);
                 resourceSlotsInsert(state, handle);
-                entryAddUniqueIdentifier(state, (s16)resources->identifiers[index]);
+                entryAddUniqueIdentifier(state, (s16)resources->parts[index]);
             }
             action->flags &= ~0x10u;
         }
         s32 index = idSetFindSubjectIndex(state, action);
         if (index < 0)
             index = 0;
-        BattleMemberResources *resources = btlFindEntryBlockByMemberId(state, action->memberId);
-        u32 handle = (u32)idSlotsFindEntryById(state, resources->identifiers[index]);
+        BtlUnitData *resources = btlFindEntryBlockByMemberId(state, action->memberId);
+        u32 handle = (u32)idSlotsFindEntryById(state, resources->parts[index]);
         bool ready = true;
         if (!(action->flags & 0x100)) {
             if (nkdwHeaderParse(handle)) {
@@ -81,7 +75,7 @@ void battleActionPollMemberResources(BtlMainState *state, BtlActionRecord *actio
         }
         if (ready) {
             btlUiAddListedId(g_btlUiBlock, resources->id);
-            effectSlotStart(DAT_00435d18, action, resources->identifiers[index]);
+            effectSlotStart(DAT_00435d18, action, resources->parts[index]);
             FUN_003db0c0(DAT_00435d18, action);
             FUN_003c0ae0(state, action);
         }

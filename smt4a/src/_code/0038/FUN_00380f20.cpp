@@ -1,5 +1,6 @@
 /* NON_MATCHING: the third mask test and the marked-entry test are predicated here; retail branches (same as FUN_00380e34). */
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlEntryLookup.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -19,21 +20,11 @@ struct EntryRef {
     /* 0x02 */ s8 slot;
 };
 
-struct SkillHp {
-    /* 0x000 */ u8 unk000[0x100];
-    /* 0x100 */ u8 unk100[0x66];
-    /* 0x166 */ u16 entryId;
-    /* 0x168 */ u8 unk168[0xf0];
-    /* 0x258 */ s32 hp;
-    /* 0x25C */ s32 maxHp;
-};
-
 extern "C" {
 
 extern const u64 g_battleMaskPresets[];
 
 s32 scrGetArg(u32 index);
-SkillHp *btlMainFindEntryByListedId(BtlMainStateA *battle, s32 index);
 EntryRef *FUN_003eca48(BtlMainStateA *battle, u32 id);
 s32 FUN_003ec668(BtlMainStateA *battle, s32 slot, s32 kind);
 void FUN_003f2638(BtlMainStateA *battle, s32 kind, BattleRosterRecordA *record, s32 flag);
@@ -51,18 +42,18 @@ u32 FUN_00380f20(void)
         BtlCombatantEntryA *entry = &battle->entries[i];
 
         if ((entry->flags & active) != 0 && (entry->flags & g_battleMaskPresets[3]) == 0 &&
-            (entry->flags & g_battleMaskPresets[1]) != 0 && entry->selection.marked != 0 && entry->id == id) {
+            (entry->flags & g_battleMaskPresets[1]) != 0 && entry->data.marked != 0 && entry->data.id == id) {
             record = &battle->roster[i];
             break;
         }
     }
-    SkillHp *skill = btlMainFindEntryByListedId(battle, record->combatant.parameterIndex);
-    EntryRef *ref = FUN_003eca48(battle, skill->entryId);
+    BtlCombatantEntryA *skill = btlMainFindEntryByListedId(battle, record->combatant.parameterIndex);
+    EntryRef *ref = FUN_003eca48(battle, skill->data.id);
 
     if (ref != NULL) {
         s32 passes = FUN_003ec668(battle, ref->slot, 2);
 
-        if (skill->hp * 100 / skill->maxHp < 20 && passes != 0) {
+        if (skill->data.hp * 100 / skill->data.maxHp < 20 && passes != 0) {
             FUN_003f2638(battle, 2, record, 0);
         } else {
             FUN_003f2638(battle, 1, record, 0);

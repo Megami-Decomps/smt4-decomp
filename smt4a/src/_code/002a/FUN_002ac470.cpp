@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ int dataFindKindRecordWithAocOverrides(int, int);
 int textDrawString(...);
 int effectDispatchSelector(...);
 int FUN_00180310(...);
-int asdTMTexTableEntryAt(...);
 int gxResetColorQuadToWhite(void);
 int drawSetColorFromRGBA8(...);
 int itemTableGetEquipmentRecord(void);
@@ -121,8 +121,8 @@ void FUN_002ac470(int param_1,int param_2,int param_3,int param_4,int param_5,un
   temp_v14 = 0;
   temp_v15 = 0;
   equipmentGetCappedUpgradeBonuses(temp_v21,&temp_v12);
-  temp_v2 = asdTMTexTableEntryAt(0x14,param_2 + 0x40d);
-  temp_v11 = asdTMTexTableEntryAt(0x14,0x514);
+  temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,param_2 + 0x40d));
+  temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x514));
   temp_v4 = temp_v21;
   dataFindKindRecordWithAocOverrides(temp_v21,0);
   if (temp_v4 != 0) {
@@ -146,7 +146,7 @@ void FUN_002ac470(int param_1,int param_2,int param_3,int param_4,int param_5,un
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(2,temp_v9,temp_v4,(int)*(short *)(temp_v11 + 8));
   }
-  temp_v11 = asdTMTexTableEntryAt(0x14,0x520);
+  temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x520));
   temp_v9 = flagValueRead(temp_v21);
   textFormatBuffer(temp_v10,&LAB_002ac904,temp_v9);
   drawSetColorFromRGBA8(param_6);
@@ -154,7 +154,7 @@ void FUN_002ac470(int param_1,int param_2,int param_3,int param_4,int param_5,un
                (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v11 + 10) + param_5,1,2,0x6f,
                temp_v10);
   gxResetColorQuadToWhite();
-  temp_v4 = asdTMTexTableEntryAt(0x14,0x513);
+  temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x513));
   uiDrawItemCategoryIcon((int)(short)temp_v21,
                (int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v2 + 8) + param_4,
                (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v4 + 10) + param_5,0x6f,1);
@@ -200,7 +200,7 @@ LAB_002aca54:
       if (temp_v7 != temp_v8) {
         drawSetColorFromRGBA8(temp_v5);
       }
-      temp_v4 = asdTMTexTableEntryAt(0x14,0x535);
+      temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x535));
       textFormatBuffer(temp_v10,&LAB_002ac904,*(unsigned int *)(temp_v6 + 0x24) & 0x3ff);
       FUN_00180310(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v4 + 8) + param_4,
                    (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v2 + 10) + param_5,1,4,0x6f,
@@ -215,7 +215,7 @@ LAB_002aca54:
       if (*(char *)(temp_v6 + 0x29) == '\x06') {
         textFormatBuffer(temp_v10,&LAB_002acd9c);
       }
-      temp_v4 = asdTMTexTableEntryAt(0x14,0x536);
+      temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x536));
       VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v4 + 10) + param_5,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v4 + 8) + param_4,
@@ -229,7 +229,7 @@ LAB_002aca54:
         textFormatBuffer(temp_v10,&LAB_002acdac,temp_v0 & 0xf,temp_v0 >> 4);
       }
       drawSetColorFromRGBA8(param_6);
-      temp_v6 = asdTMTexTableEntryAt(0x14,0x539);
+      temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x539));
       FUN_00180310(0,(int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v2 + 8) + param_4,
                    (int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v2 + 10) + param_5,1,3,0x6f,
                    temp_v10);
@@ -270,7 +270,7 @@ LAB_002acc48:
       if (temp_v4 != temp_v6) {
         drawSetColorFromRGBA8();
       }
-      temp_v6 = asdTMTexTableEntryAt(0x14,0x54f);
+      temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x54f));
       textFormatBuffer(temp_v10,&LAB_002acdbc,temp_v4);
       FUN_00180310(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v6 + 8) + param_4,
                    (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v6 + 10) + param_5,1,5,0x6f,
@@ -287,7 +287,7 @@ LAB_002acc48:
       if (temp_v16 != temp_v3) {
         drawSetColorFromRGBA8(temp_v6);
       }
-      temp_v6 = asdTMTexTableEntryAt(0x14,0x554);
+      temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x554));
       textFormatBuffer(temp_v10,&LAB_002acdbc,temp_v16);
       FUN_00180310(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v6 + 8) + param_4,
                    (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v6 + 10) + param_5,1,5,0x6f,
@@ -322,7 +322,7 @@ LAB_002ac704:
   if (temp_v7 != temp_v8) {
     drawSetColorFromRGBA8(temp_v5);
   }
-  temp_v4 = asdTMTexTableEntryAt(0x14,0x518);
+  temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x518));
   textFormatBuffer(temp_v10,&LAB_002ac904,*(unsigned int *)(temp_v6 + 0x24) & 0x3ff);
   FUN_00180310(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v4 + 8) + param_4,
                (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v2 + 10) + param_5,1,4,0x6f,
@@ -355,14 +355,14 @@ LAB_002ac704:
   if (*(unsigned int *)(temp_v6 + 0x24) >> 0x14 == 0x14) {
     textFormatBuffer(temp_v10,&LAB_002ac974);
   }
-  temp_v4 = asdTMTexTableEntryAt(0x14,0x519);
+  temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x519));
   VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v4 + 10) + param_5,
                       (unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v4 + 8) + param_4,
                       (unsigned char)(in_fpscr >> 0x16) & 3);
   textDrawString(2,param_6,temp_v10,(int)*(short *)(temp_v4 + 10));
   if (*(char *)(temp_v6 + 0x2b) != '\0') {
-    temp_v4 = asdTMTexTableEntryAt(0x14,0x51a);
+    temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x51a));
     temp_v3 = (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v2 + 10);
     temp_v4 = (int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v4 + 8);
     temp_v1 = *(unsigned char *)(temp_v6 + 0x2b);
@@ -371,7 +371,7 @@ LAB_002ac704:
     if (*(char *)(temp_v6 + 0x2d) == '\0') {
       return;
     }
-    temp_v6 = asdTMTexTableEntryAt(0x14,0x51a);
+    temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x51a));
     temp_v3 = (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v6 + 10);
     temp_v4 = (int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v2 + 8);
     temp_v1 = 0xc;

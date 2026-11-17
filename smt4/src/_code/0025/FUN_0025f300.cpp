@@ -2,12 +2,12 @@
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 struct SpriteInfo;
 // Keep the common sprite coordinate prefix without importing a conflicting render-context variant.
 struct SceneSpriteCoordinates { u8 prefix[8]; s16 x, y; };
 extern "C" {
-extern RenderCtx* g_titleScene;
 s32 vec2GetXInt(UiSpriteState* animation);
 s32 vec2GetYInt(UiSpriteState* animation);
 void efctSetSpeed(f32 speed);

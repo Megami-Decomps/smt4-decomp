@@ -3,12 +3,12 @@
 #include "camp/RenderCtx.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "camp/CommonBg/CommonBg.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 void FUN_001e071c(BtlUiObjC *);
 void renderCtxResetColorScale(RenderCtx *);
 void renderCtxSelectStereoLayout(RenderCtx *);
-extern RenderCtx *g_titleScene;
 extern BtlUiGlobals g_btlUi;
 s32 renderCtxPackPassFlags(u32, u32);
 

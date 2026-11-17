@@ -1,5 +1,5 @@
 /* NON_MATCHING: retail converts the float id once before the first call and keeps it in s17; here the conversion is placed after btlGetMainState and registers/switch offsets shift. */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/BattleUnitSlot.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/BtlGlobals.h"
@@ -31,7 +31,7 @@ f32 FUN_0022a690(s32 kind, f32 listedId)
     case 7:
     case 8:
         rate = stepRate(DAT_00439a94, stat);
-        if (entry->groupMask & 0x10)
+        if (entry->data.statusFlags & 0x10)
             rate = DAT_00439a94[6];
         break;
     case 10:

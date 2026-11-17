@@ -1,9 +1,8 @@
 /* NON_MATCHING: pair-table address folding adds a 0x13b8 literal and member-ID/record register lifetimes differ. */
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
 
 extern "C" {
-extern UniteWork *g_unite;
 }
 
 static inline s32 compareFusionPairMember(u16 first, u16 second)
@@ -31,7 +30,7 @@ extern "C" s32 fusionComparePackedPairsByMappedKey(const void *left, const void 
 {
     const u16 *first = (const u16 *)left;
     const u16 *second = (const u16 *)right;
-    UniteWork *work = g_unite;
+    UniteWorkA *work = g_unite;
     u32 firstPacked = work->pairList.pairs[*first].packedIds;
     u32 secondPacked = work->pairList.pairs[*second].packedIds;
     s32 result = compareFusionPairMember(firstPacked & 0x7fff, secondPacked & 0x7fff);

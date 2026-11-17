@@ -27,7 +27,7 @@ u32 FUN_003c46c0()
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
             (g_btlCandidateMasks.required & entry->flags) && !(entry->flags & g_btlCandidateMasks.excluded) &&
-            entry->id == id) {
+            entry->data.id == id) {
             const EffectCountersView *counters = reinterpret_cast<const EffectCountersView *>(entry);
             if (counters->primary > 0 || counters->secondary > 0) {
                 scrSetResult(1);
@@ -37,7 +37,7 @@ u32 FUN_003c46c0()
     }
     if (btlGetMainState()->unk4cd1) {
         BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
-        if (entry != NULL && entry->id == id) {
+        if (entry != NULL && entry->data.id == id) {
             const EffectCountersView *counters = reinterpret_cast<const EffectCountersView *>(entry);
             if (counters->primary > 0 || counters->secondary > 0) {
                 scrSetResult(1);

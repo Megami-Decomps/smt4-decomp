@@ -1,8 +1,7 @@
 /* NON_MATCHING: transform-clear loop is not fully unrolled and vector/default stores use different VFP/register allocation. */
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 
 extern "C" {
-extern MapIfGlobalsA g_mapIf;
 
 void FUN_002747dc()
 {

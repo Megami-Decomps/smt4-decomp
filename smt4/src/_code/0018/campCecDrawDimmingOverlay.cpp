@@ -1,6 +1,7 @@
 /* NON_MATCHING: jump table and the white colour initialisation now match retail; the VFP registers holding 0.0f and 1.0f (s16/s17) are swapped and the argument setup schedules differently. */
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match3_EffectColor.h"
+#include "camp/RenderCtxTitle.h"
 
 struct CampCecOverlayWork {
     u8 unk000[0xd28];
@@ -11,7 +12,6 @@ struct CampCecOverlayWork {
 
 extern "C" {
 extern CampCecOverlayWork *g_campCec;
-extern RenderCtx *g_titleScene;
 void gxResetColorQuadToWhite();
 s32 renderCtxPackPassFlags(u32 mode, u32 option);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);

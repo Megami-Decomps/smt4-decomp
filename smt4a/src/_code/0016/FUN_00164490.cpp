@@ -4,6 +4,7 @@
 #include "ui/MessageMainA.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 
@@ -12,7 +13,7 @@ int vec2GetXInt(...);
 int efctSetSpeed(void);
 int FUN_00169e38(...);
 int renderCtxPopState(...);
-int renderStackPushIndexed(unsigned int, int, unsigned int);
+int renderStackPushIndexed(RenderCtxA *, int, unsigned int);
 int gxResetColorQuadToWhite(void);
 int drawSetColorFromRGBA8(...);
 int renderCtxCalculateStereoParallax(...);
@@ -25,7 +26,6 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_1_stack;
 
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: texDrawCompositeSprite. */

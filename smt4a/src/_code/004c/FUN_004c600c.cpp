@@ -31,10 +31,10 @@ s32 FUN_004c600c(s32 selection)
     for (s32 index = first; first + count > index; ++index) {
         BtlCombatantEntryA *entry = &state->entries[index];
         if ((DAT_005713f0.required & entry->flags) != 0 && (entry->flags & DAT_005713f0.excluded) == 0) {
-            s16 candidateSelection = entry->indexView.selectionIndex;
+            s16 candidateSelection = entry->selectionIndex;
             BtlCombatantEntryA *candidate = btlMainFindEntryByListedId(btlGetMainState(), candidateSelection);
             if (candidate != NULL && ((CandidateValueView *)candidate)->value > 0) {
-                return entry->indexView.selectionIndex;
+                return entry->selectionIndex;
             }
         }
     }

@@ -1,7 +1,5 @@
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 #include "shard/W6_W6Match5_DevilSort.h"
-
-extern "C" UniteWork *g_unite;
 
 static __inline s32 comparePairMember(u16 firstId, u16 secondId)
 {

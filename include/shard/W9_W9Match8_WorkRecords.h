@@ -92,57 +92,6 @@ typedef char ParameterUpdatePrefixIVLayout[
     offsetof(ParameterUpdatePrefixIV, amount) == 0x30 &&
     sizeof(ParameterUpdatePrefixIV) == 0x34 ? 1 : -1];
 
-/* Observed surface prefix only; the full allocation size is unknown. */
-struct CaptureSurfacePrefixA {
-    /* 0x00 */ u8 unk00[0x14];
-    /* 0x14 */ s32 width;
-    /* 0x18 */ s32 height;
-};
-
-/* Observed job-work prefix only; sizeof is not a retail object boundary. */
-struct SurfaceCaptureWorkPrefixA {
-    /* 0x0000 */ u8 unk0000[8];
-    /* 0x0008 */ CaptureSurfacePrefixA *surface;
-    /* 0x000C */ u8 unk000C[0x1408];
-    /* 0x1414 */ u8 captureRequested;
-    /* 0x1415 */ u8 unk1415;
-    /* 0x1416 */ u8 captureResult;
-    /* 0x1417 */ u8 unk1417;
-    /* 0x1418 */ u8 captureComplete;
-    /* 0x1419 */ u8 captureSuppressed;
-    /* 0x141A */ u8 unk141A[0x33];
-    /* 0x144D */ u8 captureBlocked;
-};
-
-typedef char CaptureSurfacePrefixALayoutCheck[
-    offsetof(CaptureSurfacePrefixA, width) == 0x14 &&
-    offsetof(CaptureSurfacePrefixA, height) == 0x18 &&
-    sizeof(CaptureSurfacePrefixA) == 0x1C ? 1 : -1];
-
-typedef char SurfaceCaptureWorkPrefixALayoutCheck[
-    offsetof(SurfaceCaptureWorkPrefixA, surface) == 8 &&
-    offsetof(SurfaceCaptureWorkPrefixA, captureRequested) == 0x1414 &&
-    offsetof(SurfaceCaptureWorkPrefixA, captureResult) == 0x1416 &&
-    offsetof(SurfaceCaptureWorkPrefixA, captureComplete) == 0x1418 &&
-    offsetof(SurfaceCaptureWorkPrefixA, captureSuppressed) == 0x1419 &&
-    offsetof(SurfaceCaptureWorkPrefixA, captureBlocked) == 0x144D &&
-    sizeof(SurfaceCaptureWorkPrefixA) == 0x1450 ? 1 : -1];
-
-// Accessed prefix only; 0x18 is not an inferred allocation boundary.
-// No supplied canonical type identifies the object behind g_popupState.
-struct MapRandomPopupPrefixA {
-    /* 0x00 */ s32 state;
-    /* 0x04 */ s32 phase;
-    /* 0x08 */ u8 unk08[0x0C];
-    /* 0x14 */ s32 contentValue;
-};
-typedef char MapRandomPopupPrefixALayoutCheck[
-    offsetof(MapRandomPopupPrefixA, state) == 0 &&
-    offsetof(MapRandomPopupPrefixA, phase) == 4 &&
-    offsetof(MapRandomPopupPrefixA, unk08) == 8 &&
-    offsetof(MapRandomPopupPrefixA, contentValue) == 0x14 &&
-    sizeof(MapRandomPopupPrefixA) == 0x18 ? 1 : -1];
-
 // The reverb object is used only through the SDK's pointer interface.
 struct SoundReverbEffect;
 
@@ -601,23 +550,12 @@ typedef char BattleActionSelectionMaskPrefixALayoutCheck[
     offsetof(BattleActionSelectionMaskPrefixA, excluded) == 0x40 &&
     sizeof(BattleActionSelectionMaskPrefixA) == 0x48 ? 1 : -1];
 
-// Observed title-scene prefix, not the full scene allocation or its boundary.
-struct TitleSceneRectanglePrefixIV {
-    /* 0x0000 */ u8 unk0000[0x132C];
-    /* 0x132C */ RenderStateStack rectangleOrigin;
-    /* 0x134C */ RenderStateStack rectangleExtent;
-};
-
 typedef char TitleSceneRectangleStackLayoutCheck[
     sizeof(RenderStateStack) == 0x20 &&
     offsetof(RenderStateStack, count) == 0 &&
     offsetof(RenderStateStack, entries) == 8 &&
     offsetof(RenderStateStack, dirty) == 0x18 &&
     offsetof(RenderStateStack, apply) == 0x1C ? 1 : -1];
-typedef char TitleSceneRectanglePrefixIVLayoutCheck[
-    offsetof(TitleSceneRectanglePrefixIV, rectangleOrigin) == 0x132C &&
-    offsetof(TitleSceneRectanglePrefixIV, rectangleExtent) == 0x134C &&
-    sizeof(TitleSceneRectanglePrefixIV) == 0x136C ? 1 : -1];
 
 /* Pointer-only dependency: this function does not recover its layout. */
 struct FlaggedEntry;
@@ -1140,24 +1078,6 @@ typedef char ColoredRectangleLayoutCheck[
     offsetof(ColoredRectangle, right) == 0x10 &&
     offsetof(ColoredRectangle, bottom) == 0x14 &&
     sizeof(ColoredRectangle) == 0x18 ? 1 : -1];
-
-// Observed prefix of SMT IV's g_camp object; not its complete extent.
-// The supplied CampStateA is an Apocalypse layout, not this object layout.
-struct CampHelpPrefixIV {
-    /* 0x00 */ u8 unknown00[0x98];
-    /* 0x98 */ u8 navigationMode;
-    /* 0x99 */ u8 unknown99[0x12];
-    /* 0xAB */ u8 specialHelpActive;
-    /* 0xAC */ s8 helpCategory;
-    /* 0xAD */ s8 helpSelection;
-};
-
-typedef char CampHelpPrefixIVLayoutCheck[
-    offsetof(CampHelpPrefixIV, navigationMode) == 0x98 &&
-    offsetof(CampHelpPrefixIV, specialHelpActive) == 0xAB &&
-    offsetof(CampHelpPrefixIV, helpCategory) == 0xAC &&
-    offsetof(CampHelpPrefixIV, helpSelection) == 0xAD &&
-    sizeof(CampHelpPrefixIV) == 0xAE ? 1 : -1];
 
 // Accessed prefix of a table 05 combination result, not a full table stride.
 struct DevilCombinationTableEntryPrefixIV {

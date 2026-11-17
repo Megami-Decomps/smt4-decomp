@@ -2,9 +2,9 @@
 #include "gfx/UiControlDraw.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 sprite);
 void uiDrawTableTextureSized(s32 layer, s32 group, u32 sprite, s32 x, s32 y, s32 width, s32 height, s32 priority);
 
 static __inline void indicatorDraw(UiControlDrawPosition *position, s32 x, s32 y, u32 sprite, s32 priority)
@@ -23,11 +23,11 @@ void FUN_00309ec8(UiControlDrawPosition *position, s32 x, s32 y,
     indicatorDraw(position, x, y, secondActive ? 0xf4 : 0xf2, 0x6f);
 
     u32 trackSprite = trackActive ? 0xf7 : 0xf6;
-    SpriteInfo *track = asdTMTexTableEntryAt(0x39, trackSprite);
-    s32 height = track->size[1];
+    TextureTableEntryIV *track = asdTMTexTableEntryAt(0x39, trackSprite);
+    s32 height = track->placement->height;
     s32 rowHeight = height / 16;
     uiDrawTableTextureSized(2, 0x39, trackSprite, position->x + x,
-                 rowHeight * firstRow + y, track->size[0],
+                 rowHeight * firstRow + y, track->placement->width,
                  height - rowHeight * hiddenRows, 0x6f);
 }
 }

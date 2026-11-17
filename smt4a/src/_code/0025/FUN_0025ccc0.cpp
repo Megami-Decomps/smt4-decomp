@@ -1,9 +1,8 @@
 /* NON_MATCHING: retail reads the 0x5E2 flag through a second base (work+0x500) and keeps the first loop's call/else layout out of line; also needs uiSpriteGetCompletionState (ldrsb r0,[r0,#138]) in smt4a config/inlined.txt. */
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 
 extern "C" {
 
-extern ButtonHelpPresetGlobalsA g_buttonHelp;
 extern ButtonHelpQueuedSelections g_buttonHelpQueuedKinds;
 
 void uiSpriteAdvanceAnimation(ButtonHelpUnit *unit, f32 speed);
@@ -18,7 +17,7 @@ void buttonHelpSelectSlot(u32 index, s32 kind, s32 value, s32 queue);
  * a preset that was waiting and the queued selections, then advances the frame counter. */
 u32 FUN_0025ccc0(void)
 {
-    ButtonHelpWorkA *work = g_buttonHelp.prefix.work;
+    ButtonHelpWorkA *work = g_buttonHelp.work;
     s32 last = 0;
 
     if (work->state != 0) {
@@ -40,8 +39,8 @@ u32 FUN_0025ccc0(void)
                 }
             }
             if (work->unk0C > last && uiSpriteGetCompletionState(&work->units[last]) != 0) {
-                g_buttonHelp.prefix.work->state = 2;
-                g_buttonHelp.prefix.work->unk0C = 0;
+                g_buttonHelp.work->state = 2;
+                g_buttonHelp.work->unk0C = 0;
             }
         } else if (work->state != 2) {
             if (work->state == 3) {
@@ -61,8 +60,8 @@ u32 FUN_0025ccc0(void)
                         work->clear.active[i] = 0;
                     }
                     FUN_001a90e0(work->clear.unk5DA);
-                    g_buttonHelp.prefix.work->state = 0;
-                    g_buttonHelp.prefix.work->unk0C = 0;
+                    g_buttonHelp.work->state = 0;
+                    g_buttonHelp.work->unk0C = 0;
                 }
             }
         } else {

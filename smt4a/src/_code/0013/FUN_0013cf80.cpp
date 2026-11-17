@@ -1,34 +1,34 @@
-#include "shard/JobWork.h"
+#include "frame_tex/FrameTexA.h"
 #include "Model/MoriModelShadowMap.h"
 
 extern "C" {
 
-u8 gxCopyFramebufferToSurface(u32 mode, JobSurface *surface);
+u8 gxCopyFramebufferToSurface(u32 mode, AsdTexture *surface);
 
 
-/* Starts a 512x512 capture into the job's surface once one is requested and nothing blocks it. */
+/* "ZanCL" capture: captures the left screen into the afterimage's left texture once the layer is ready and nothing blocks it. */
 s32 FUN_0013cf80(u32 job)
 {
-    JobWork *work = jobGetWork(job);
+    FrameTexWorkA *work = (FrameTexWorkA *)jobGetWork(job);
 
-    work->captured = 0;
-    if (!work->captureEnabled) {
+    work->zan.capturedLeft = 0;
+    if (!work->zan.enabled) {
         return 0;
     }
-    if (!work->captureRequested) {
+    if (!work->zan.ready) {
         return 0;
     }
-    if (work->captureTarget == NULL) {
+    if (work->sceneSurface == NULL) {
         return 0;
     }
-    if (work->captureBlocked || work->enabled) {
+    if (work->captureBlocked || work->campEnabled) {
         return 0;
     }
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
-    ((JobSurface *)work->bufferB)->width = 512;
-    ((JobSurface *)work->bufferB)->height = 512;
-    work->captureResult = gxCopyFramebufferToSurface(0, (JobSurface *)work->bufferB);
-    work->captured = 1;
+    work->zanSurfaceLeft->dimensions.width = 512;
+    work->zanSurfaceLeft->dimensions.height = 512;
+    work->zan.captureResult = gxCopyFramebufferToSurface(0, work->zanSurfaceLeft);
+    work->zan.capturedLeft = 1;
     return 0;
 }
 

@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "status/StatusCamera.h"
 #include "code/Code0029_Smt4.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -44,7 +45,6 @@ extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: ifTouchRegionAddRequested. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
@@ -173,7 +173,7 @@ LAB_001a2150:
     }
     temp_v5 = resourceRunOperationIfUnblocked(temp_v9);
     temp_v6 = listCursorGetRowIfUnblocked(temp_v9);
-    temp_v7 = asdTMTexTableEntryAt(0x1e,0x48);
+    temp_v7 = reinterpret_cast<unsigned int>(asdTMTexTableEntryAt(0x1e,0x48));
     puVar13 = (unsigned short *)0x0;
     temp_v10 = temp_v9;
     uiScrollHandleActionsOrTouch(temp_v9,temp_v7,temp_v0 + 0x772,(int)*(short *)(temp_v0 + 0x770),

@@ -4,6 +4,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "code/Code002a.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -34,7 +35,6 @@ extern unsigned int DAT_00573bec; /* 0x573bec */
 /* Supplied declaration required: vec2GetXInt. */
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
-extern int asdTMTexTableEntryAt(unsigned int, int);
 extern int gameFlagIsSet(void);
 extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
@@ -99,10 +99,10 @@ void FUN_0028f740(int param_1)
         temp_v12 = vec2GetYInt(temp_v12 + 0x138);
         temp_v9 = vec2GetYInt(temp_v4);
         if ((temp_v8 & 1) != 0) {
-          temp_v16 = asdTMTexTableEntryAt(0xd,temp_v5 + (int)(7 - temp_v8) / 2 + 0xff);
+          temp_v16 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,temp_v5 + (int)(7 - temp_v8) / 2 + 0xff));
         }
         else {
-          temp_v16 = asdTMTexTableEntryAt(0xd,temp_v5 + (int)(8 - temp_v8) / 2 + 0x106);
+          temp_v16 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,temp_v5 + (int)(8 - temp_v8) / 2 + 0x106));
         }
         temp_v1 = '\0';
         temp_v15 = 0;
@@ -170,10 +170,10 @@ LAB_0028fb5c:
     temp_v7 = vec2GetYInt(temp_v7 + 0x138);
     temp_v4 = vec2GetYInt(temp_v4);
     if ((temp_v8 & 1) != 0) {
-      temp_v12 = asdTMTexTableEntryAt(0xd,temp_v3 + (int)(7 - temp_v8) / 2 + 0x182);
+      temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,temp_v3 + (int)(7 - temp_v8) / 2 + 0x182));
     }
     else {
-      temp_v12 = asdTMTexTableEntryAt(0xd,temp_v3 + (int)(8 - temp_v8) / 2 + 0x189);
+      temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,temp_v3 + (int)(8 - temp_v8) / 2 + 0x189));
     }
     temp_v9 = param_1;
     FUN_003da6ac(param_1,temp_v3);

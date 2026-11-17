@@ -1,4 +1,4 @@
-#include "shard/X14_StatusDown.h"
+#include "status/StatusDownA.h"
 
 extern "C" {
 
@@ -12,17 +12,17 @@ void __aeabi_memset4(void *dst, u32 size, s32 value);
 /* Tears down the status-down screen: touch regions, its slot and script, then the work area. */
 void statusDownDestroy(void)
 {
-    StatusDown *status = g_statusDown;
-    StatusDownScript *script;
+    StatusDownStateA *status = g_statusDown;
+    StatusDownSkillMenuA *script;
     s32 i;
 
     for (i = 0; i < status->touchRegionCount; i++) {
         ifTouchRegionRemove();
     }
     status->touchRegionCount = 0;
-    __aeabi_memset4(&status->touch, sizeof(status->touch), -1);
-    asdMemFreeSlot(status->slot);
-    script = &g_statusDown->script;
+    __aeabi_memset4(status->slots, sizeof(status->slots), -1);
+    asdMemFreeSlot(status->text);
+    script = &g_statusDown->menu;
     if (script->process != NULL) {
         scrScriptProcessDestroy(script->process);
         script->process = NULL;

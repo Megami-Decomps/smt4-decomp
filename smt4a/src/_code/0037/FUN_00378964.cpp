@@ -1,9 +1,8 @@
 /* NON_MATCHING: saved vector copy order and loop-index/entry core registers differ. */
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 #include "shard/S1Mover.h"
 
 extern "C" {
-extern MapIfGlobalsA g_mapIf;
 f32 distSpatial(Vec3f first, Vec3f second);
 
 // Mark the first nearby map-interface record in one of the interactive categories.

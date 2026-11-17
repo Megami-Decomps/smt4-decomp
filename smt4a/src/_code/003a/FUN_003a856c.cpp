@@ -22,7 +22,7 @@ s32 FUN_003a856c(void)
             (entry->flags & g_btlCandidateMasks.excluded) != 0) {
             continue;
         }
-        if (entry->id == id && (entry->encodedStats.values[stat] >> 10) == 3) {
+        if (entry->data.id == id && (entry->data.values[stat] >> 10) == 3) {
             scrSetResult(1);
             return 1;
         }

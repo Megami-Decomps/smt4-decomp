@@ -4,6 +4,8 @@
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
 #include <string.h>
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 
@@ -16,27 +18,17 @@ typedef struct TalkMessage {
     /* 0x10 */ char speaker[1];         /* the speaker name, "<pc 0>" for the player */
 } TalkMessage;
 
-/* A layout record (only the fields read here). */
-typedef struct TalkLayout {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-    /* 0x0C */ s16 *size;               /* width, height */
-} TalkLayout;
-
 /* The talk window (only the message pointer, at 0x664). */
 typedef struct TalkWindow {
     /* 0x000 */ u8 unk000[0x664];
     /* 0x664 */ TalkMessage *message;
 } TalkWindow;
 
-extern u8 *g_renderCtx;
 extern const char DAT_0052d134[];
 
 void efctSetSpeed(f32 speed);
 u32 FUN_004038e0(TalkWindow *window, u16 id);
 void drawSetColorFromRGBA8(u32 color);
-TalkLayout *asdTMTexTableEntryAt(u32 group, u32 id);
 void gxResetColorQuadToWhite(void);
 void *gameGetPlayerData(void);
 const char *gameGetPlayerName(void);
@@ -78,24 +70,24 @@ void FUN_004045ac(TalkWindow *window, s32 x, s32 y, f32 scale)
         }
         if (highlighted != 0) {
             drawSetColorFromRGBA8(0x57D8FFFF);
-            TalkLayout *frame = asdTMTexTableEntryAt(0x32, 0x36);
+            TextureTableEntryIV *frame = asdTMTexTableEntryAt(0x32, 0x36);
 
             texDrawTableEntryAtStoredOrigin(2, 0x32, 1000, frame->x + x + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f), frame->y + y, depth);
-            TalkLayout *face = asdTMTexTableEntryAt(0x32, 3);
+            TextureTableEntryIV *face = asdTMTexTableEntryAt(0x32, 3);
             s32 faceX = face->x + x + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
 
             texDrawTableEntryAtStoredOrigin(2, 0x32, portrait, faceX, face->y + y, depth);
             texDrawTableEntryAtStoredOrigin(2, 0x32, 0x3F1, faceX, face->y + y, depth + 1);
             gxResetColorQuadToWhite();
         } else {
-            TalkLayout *frame = asdTMTexTableEntryAt(0x32, 0x36);
+            TextureTableEntryIV *frame = asdTMTexTableEntryAt(0x32, 0x36);
 
             texDrawTableEntryAtStoredOrigin(2, 0x32, 1000, frame->x + x + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f), frame->y + y, depth);
-            TalkLayout *face = asdTMTexTableEntryAt(0x32, 3);
+            TextureTableEntryIV *face = asdTMTexTableEntryAt(0x32, 3);
 
             texDrawTableEntryAtStoredOrigin(2, 0x32, portrait, face->x + x + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f), face->y + y, depth);
         }
-        TalkLayout *plate = asdTMTexTableEntryAt(0x32, 4);
+        TextureTableEntryIV *plate = asdTMTexTableEntryAt(0x32, 4);
         const char *name = window->message->speaker;
         char text[64];
 
@@ -104,8 +96,8 @@ void FUN_004045ac(TalkWindow *window, s32 x, s32 y, f32 scale)
             name = gameGetPlayerName();
         }
         textFormatBuffer(text, "%s", name);
-        TalkLayout *nameBox = asdTMTexTableEntryAt(0x32, 5);
-        s32 labelX = nameBox->size[0] + plate->x + x + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
+        TextureTableEntryIV *nameBox = asdTMTexTableEntryAt(0x32, 5);
+        s32 labelX = nameBox->placement->width + plate->x + x + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
 
         textDrawString(3, nameColor, text, (f32)labelX, (f32)(plate->y + y), (f32)(256 - depth) * 0.00390625f, 0.0f, scale);
     }

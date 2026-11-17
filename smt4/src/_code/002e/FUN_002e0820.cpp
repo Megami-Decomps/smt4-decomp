@@ -1,6 +1,7 @@
 #include "StaffRoll/StaffRollMain.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 /* The x column straddles the existing StaffRollWork padding/lineA boundary. */
 struct StaffRollDrawView {
@@ -16,7 +17,6 @@ static __inline void titleScenePushA(RenderCtx *scene, int state)
 
 extern "C" {
 extern StaffRollWork *g_staffRoll;
-extern RenderCtx *g_titleScene;
 void gxResetColorQuadToWhite(void);
 s32 renderCtxPackPassFlags(u32 type, u32 flags);
 void efctSetSpeed(f32 speed);

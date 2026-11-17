@@ -1,16 +1,13 @@
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 
 extern "C" {
-
-
-extern UniteWorkIV *g_unite;
 
 u8 FUN_0028f670(void)
 {
     int value = 0;
 
     if (g_unite != NULL) {
-        value = g_unite->common.state;
+        value = g_unite->state;
     }
     return g_unite == NULL || value == 0x24;
 }

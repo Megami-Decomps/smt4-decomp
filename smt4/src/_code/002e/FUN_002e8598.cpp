@@ -1,8 +1,7 @@
 /* NON_MATCHING: only entry instruction scheduling and the switch-index versus sound-flags scratch registers differ. */
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 #include "addon/LookupRecord.h"
 extern "C" {
-extern MapIfGlobals g_mapIf;
 u32 FUN_002bfdd4(void);
 void textFormatFullWidthTwoDigits(s32 count, char *text);
 void textFormatBuffer(char *output, const char *format, ...);

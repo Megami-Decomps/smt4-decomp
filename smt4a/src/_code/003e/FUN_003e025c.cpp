@@ -49,13 +49,13 @@ void FUN_003e025c(BtlStep *step, BtlMainStateA *battle)
     if (record != NULL) {
         BtlCombatantEntryA *entry = btlMainFindEntryByListedId(battle, record->combatant.parameterIndex);
         if (entry != NULL) {
-            BattleCameraDefinition *definition = FUN_003eca48(battle, entry->id);
+            BattleCameraDefinition *definition = FUN_003eca48(battle, entry->data.id);
             BattleCameraAuxCamera *auxCamera = &reinterpret_cast<BattleCameraAuxView *>(g_btlAux)->camera;
             auxCamera->resource = definition->resource;
             if (definition != NULL && (definition->flags & 1) != 0) {
                 char path[64] = {0};
                 const BattleCameraCandidateView *candidate =
-                    reinterpret_cast<const BattleCameraCandidateView *>(entry->candidate.record);
+                    reinterpret_cast<const BattleCameraCandidateView *>(entry->data.candidate);
                 textFormatBuffer(path, DAT_00528568, candidate->cameraId);
                 FUN_004f2abc(g_btlCamera, path);
                 step->state = 14;

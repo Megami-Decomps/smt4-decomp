@@ -28,13 +28,13 @@ u32 btlScriptChooseRandomMatchingEntry(void)
             (g_btlCandidateMasks.required & entry->flags) != 0 &&
             (g_btlCandidateMasks.excluded & entry->flags) == 0 &&
             btlCombatantHasSkillAction(entry, condition)) {
-            candidates[candidateCount++] = entry->id;
+            candidates[candidateCount++] = entry->data.id;
         }
     }
     if (btlGetMainState()->unk4cd1) {
         BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL && btlCombatantHasSkillAction(entry, condition)) {
-            candidates[candidateCount++] = entry->id;
+            candidates[candidateCount++] = entry->data.id;
         }
     }
     if (candidateCount != 0) {

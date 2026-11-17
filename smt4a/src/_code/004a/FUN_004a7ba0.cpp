@@ -1,10 +1,10 @@
 /* NON_MATCHING: only the Y coordinate temp differs (retail ip, built r1). */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 extern PanelTextDefaultsPrefixA DAT_0057f0ac;
-const PanelTextLayoutEntryPrefixA *layoutFindTableEntry(TextLayoutContextA *context, s32 entryId);
 u32 FUN_002a4b28(u16 textId);
 u32 dataTable01GetRecordWithAocOverride(u16 textId);
 void drawTextAtSnappedRectangle(TextLayoutContextA *context, u32 style,
@@ -22,7 +22,7 @@ void FUN_004a7ba0(PanelTextOwnerPrefixA *panel, s16 textId,
 {
     const f32 opacity = static_cast<f32>(256 - fade) * (1.0f / 256.0f);
 
-    const PanelTextLayoutEntryPrefixA *base;
+    const TextureTableEntryIV *base;
     s32 offsetEntry;
     u32 style;
     u32 color;
@@ -47,7 +47,7 @@ void FUN_004a7ba0(PanelTextOwnerPrefixA *panel, s16 textId,
         textValue = DAT_0057f0ac.fallbackTextValue;
     }
 
-    const PanelTextLayoutEntryPrefixA *offset = layoutFindTableEntry(panelTextContext(panel), offsetEntry);
+    const TextureTableEntryIV *offset = layoutFindTableEntry(panelTextContext(panel), offsetEntry);
     s32 x = static_cast<s32>(offset->x) + baseX;
     s32 y = static_cast<s32>(offset->y) + baseY;
     drawTextAtSnappedRectangle(panelTextContext(panel), style, color, textValue,

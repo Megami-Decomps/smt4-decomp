@@ -4,9 +4,9 @@
 #include "shard/TextureDrawCall.h"
 #include "shard/W5_W5Match2_ScalarGetters.h"
 #include "code/Code002a.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 namespace {
-struct SpriteInfo { u8 unk00[8]; s16 x; s16 y; };
 struct SlotMenu {
     u8 unk00[8];
     s32 active;          // 0x008
@@ -31,7 +31,6 @@ extern int vec2GetYInt(void *);
 extern void efctSetSpeed(f32);
 extern f32 vec2GetSpeed(const void *animation);
 extern f32 jobGetScalarValue(void);
-extern SpriteInfo *asdTMTexTableEntryAt(u32, u32);
 extern void texDrawCompositeSprite(s32, s32, u32, s32, s32, s32);
 extern void buttonHelpSetText(s32, u32);
 extern s32 rangeGetMinimumLimit(SlotMenu *);
@@ -49,7 +48,7 @@ void FUN_004bade4(SlotMenu *menu)
         s32 y = vec2GetYInt(pos);
         texDrawTableEntryAtStoredOrigin(2, 0x1f, 0x1f, x, y, 0x1f);
         texDrawTableEntryAtStoredOrigin(2, 0x1f, 0x20, x, y, 0x1f);
-        SpriteInfo *info = asdTMTexTableEntryAt(0x1f, 0x21);
+        TextureTableEntryIV *info = asdTMTexTableEntryAt(0x1f, 0x21);
         s32 dx = info->x;
         s32 dy = info->y;
         s32 sx = vec2GetXInt(pos) + dx;

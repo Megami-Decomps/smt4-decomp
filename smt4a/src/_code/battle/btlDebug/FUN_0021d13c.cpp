@@ -6,6 +6,7 @@
 #include "gamedata/FlagValueIsPositive.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
 #include "event/2dEvent/EventEffect.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -36,7 +37,6 @@ int __aeabi_idivmod(...);
 
 int FUN_00167458(...);
 int sysPlaySe(...);
-int asdTMTexTableEntryAt(...);
 int itemTableGetItemRecord(...);
 int buttonHelpSetText(...);
 int gameGetSlotRecord(...);
@@ -1189,7 +1189,7 @@ LAB_0021e950:
         eventQueueAddUniqueIfValid(temp_v8);
       }
       else {
-        temp_v10 = asdTMTexTableEntryAt(0xd,200);
+        temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,200));
         temp_v26 = (int *)(int)*(short *)(param_1 + 0x4822);
         temp_v27 = (int *)temp_v30;
         temp_v28 = 0;
@@ -1220,7 +1220,7 @@ LAB_0021ed20:
     }
     temp_v10 = (unsigned int)temp_v23;
     if (*(char *)(param_1 + 0x38b0) != '\0') break;
-    temp_v10 = asdTMTexTableEntryAt(0xd,200);
+    temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,200));
     temp_v26 = (int *)(int)*(short *)(param_1 + 0x4822);
     temp_v27 = (int *)temp_v30;
     temp_v28 = 0;
@@ -1372,7 +1372,7 @@ LAB_0021f098:
     FUN_00270104(param_1);
 LAB_0021f10c:
     if (*(char *)(param_1 + 0x38b0) != '\0') break;
-    temp_v8 = asdTMTexTableEntryAt(0xd,200);
+    temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,200));
     temp_v26 = (int *)(int)*(short *)(param_1 + 0x4822);
     temp_v27 = (int *)temp_v30;
     temp_v28 = 0;
@@ -2312,7 +2312,7 @@ LAB_00220b54:
     break;
   case 4:
     if (*(unsigned short *)(temp_v29 + 0x4b36) < 6) {
-      temp_v9 = asdTMTexTableEntryAt(0xd,0xbba);
+      temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0xbba));
       temp_v13 = param_1 + temp_v4 * 0x8c;
       temp_v20 = *(float *)(temp_v13 + 0x16b4);
       temp_v3 = *(unsigned short *)(temp_v9 + 6);

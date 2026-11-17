@@ -1,4 +1,5 @@
 #include "shard/W6_W6Match8_AnimatedSprite.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 namespace {
 struct SpritePairWork {
@@ -12,11 +13,6 @@ struct SpritePairWork {
     UiAnimatedSprite first; // 0x268
     u8 unk2f4[0x8c];
     UiAnimatedSprite second; // 0x380
-};
-struct SpritePairLayout {
-    u8 unk00[8];
-    s16 first;
-    s16 second;
 };
 struct SpriteIndices2 { u32 ids[2]; };
 struct SpriteIndices3 { u32 ids[3]; };
@@ -39,14 +35,13 @@ struct SpritePairTwoIndexSets {
 extern "C" {
 extern const SpritePairIndexSets DAT_004040d4;
 extern const SpritePairTwoIndexSets DAT_00403cd4;
-const SpritePairLayout* asdTMTexTableEntryAt(u32 table, u32 id);
 void pairSetHalves(UiAnimatedSprite* sprite, s16 first, s16 second);
 
 // Size the selection's two sprites from the table entries chosen for a two-, three- or four-entry list.
 void uiLayoutSelectionSpritePair(SpritePairWork* work)
 {
-    const SpritePairLayout* first = NULL;
-    const SpritePairLayout* second = NULL;
+    const TextureTableEntryIV* first = NULL;
+    const TextureTableEntryIV* second = NULL;
     if (work->kind == 11) {
         switch (work->count) {
         case 2: {
@@ -74,7 +69,7 @@ void uiLayoutSelectionSpritePair(SpritePairWork* work)
     } else if (work->kind == 19) {
         return;
     }
-    pairSetHalves(&work->first, first->first, first->second);
-    pairSetHalves(&work->second, second->first, second->second);
+    pairSetHalves(&work->first, first->x, first->y);
+    pairSetHalves(&work->second, second->x, second->y);
 }
 } // extern "C"

@@ -1,4 +1,4 @@
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
@@ -26,14 +26,14 @@ extern "C" u32 btlScriptHasAlternateEffectCounter(void)
     for (s32 index = first; index < first + count; ++index) {
         BtlEntry *entry = &btlGetMainState()->entries[index];
         if ((entry->flags & 0x10) == 0 && (entry->flags & 1) != 0 &&
-            (entry->flags & 0x40) == 0 && entry->id == id && hasAlternateEffectCounter(entry)) {
+            (entry->flags & 0x40) == 0 && entry->data.id == id && hasAlternateEffectCounter(entry)) {
             scrSetResult(1);
             return 1;
         }
     }
     if (btlGetMainState()->hasActiveEntry != 0) {
         BtlEntry *entry = btlMainFindActiveEntry(btlGetMainState());
-        if (entry != NULL && entry->id == id && hasAlternateEffectCounter(entry)) {
+        if (entry != NULL && entry->data.id == id && hasAlternateEffectCounter(entry)) {
             scrSetResult(1);
             return 1;
         }

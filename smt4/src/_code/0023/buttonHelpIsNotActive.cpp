@@ -1,8 +1,7 @@
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 #include "bible/bibleAnalyze.h"
 
 extern "C" {
-extern ButtonHelpGlobals g_buttonHelp;
 
 u8 buttonHelpIsNotActive(void)
 {

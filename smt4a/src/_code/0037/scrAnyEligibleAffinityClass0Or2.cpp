@@ -24,7 +24,7 @@ u32 scrAnyEligibleAffinityClass0Or2(void)
         const u64 flags = entry->flags;
         if (!(flags & g_btlCandidateMasks.unavailable) &&
             (flags & g_btlCandidateMasks.required) && !(flags & g_btlCandidateMasks.excluded)) {
-            const u16 encoded = entry->encodedStats.values[stat];
+            const u16 encoded = entry->data.values[stat];
             if ((encoded & 0xFC00) == 0 || (encoded >> 10) == 2) {
                 scrSetResult(1);
                 return 1;
@@ -34,7 +34,7 @@ u32 scrAnyEligibleAffinityClass0Or2(void)
     if (btlGetMainState()->unk4cd1 != 0) {
         const BtlCombatantEntryA* entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL) {
-            const u16 encoded = entry->encodedStats.values[stat];
+            const u16 encoded = entry->data.values[stat];
             if ((encoded & 0xFC00) == 0 || (encoded >> 10) == 2) {
                 scrSetResult(1);
                 return 1;

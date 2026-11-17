@@ -46,7 +46,7 @@ u32 FUN_0023e32c(u32 excludedA, u32 excludedB, u32 excludedC, u32 level)
         }
         if ((record->flags & 1) == 0)
             continue;
-        SaveSlotTable *party = gameGetSlotTable();
+        SaveSlotTableA *party = gameGetSlotTable();
         s32 slot = 0;
         for (; slot < 24; ++slot) {
             if (static_cast<u32>(party->party[slot]) < 24) {

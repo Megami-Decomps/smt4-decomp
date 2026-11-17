@@ -1,4 +1,4 @@
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/BattleHelpers_Smt4.h"
 
 struct SnapshotVitals {

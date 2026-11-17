@@ -2,9 +2,9 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
+#include "battle/BtlEntryLookup.h"
 
 extern "C" {
-BattleMotionSubject *btlFindEntryBlockByMemberId(BtlMainStateA *battle, s32 parameterIndex);
 s32 idSetFindSubjectIndex(BtlMainStateA *battle, const BattleRosterRecordA *record);
 
 // Retain one identity/pose snapshot per eligible roster model, without duplicating existing entries.
@@ -27,13 +27,13 @@ void FUN_004e1f58(BtlMainGlobalsA *globals, const BtlUnitA *action, s32 alternat
         }
         if (record->liveFlags.unk10C & 2)
             continue;
-        BattleMotionSubject *subject = btlFindEntryBlockByMemberId(battle, record->combatant.parameterIndex);
+        BtlUnitDataA *subject = btlFindEntryBlockByMemberId(battle, record->combatant.parameterIndex);
         if (!subject)
             continue;
         s32 subjectIndex = idSetFindSubjectIndex(globals->state, record);
         if (subjectIndex < 0)
             subjectIndex = 0;
-        s32 id = subject->appearance.ids[subjectIndex];
+        s32 id = subject->parts[subjectIndex];
         BattleRetainedRosterEntry *entries = globals->state->retainedRoster.entries;
         u32 existing;
         for (existing = 0; existing < 109; ++existing) {

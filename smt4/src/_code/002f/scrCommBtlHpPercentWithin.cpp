@@ -18,8 +18,8 @@ u32 scrCommBtlHpPercentWithin(void)
         BtlEntry *unit = &btlGetMainState()->entries[index];
 
         if ((unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40)) {
-            maxSum += unit->maxHp;
-            curSum += unit->hp;
+            maxSum += unit->data.maxHp;
+            curSum += unit->data.hp;
         }
     }
     scrSetResult(curSum * 100 / maxSum <= limit);

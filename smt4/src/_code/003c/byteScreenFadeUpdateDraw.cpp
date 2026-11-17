@@ -1,9 +1,9 @@
 /* NON_MATCHING (b1454): pool order and divisor register now match; only the position of one `vmov.f32 s1, s0` in the argument setup differs (retail places it after `mov r2, r3`). */
 #include "ui/ByteScreenFade.h"
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
-extern RenderCtx* g_titleScene;
 void gxSubmitDrawZeroExtraParams(u32 color0, u32 color1, u32 color2, u32 color3,
                   f32 x, f32 y, f32 width, f32 height, f32 depth);
 

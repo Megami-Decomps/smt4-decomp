@@ -1,4 +1,4 @@
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
@@ -22,14 +22,14 @@ u32 btlScriptGroupHasReadyId()
         if (!(entry->flags & BTL_ENTRY_FLAG_PRESENT) &&
             (entry->flags & BTL_ENTRY_FLAG_ACTIVE) &&
             !(entry->flags & BTL_ENTRY_FLAG_BLOCKED) &&
-            entry->id == id && btlSlotsHaveReadyUnit(entry)) {
+            entry->data.id == id && btlSlotsHaveReadyUnit(entry)) {
             scrSetResult(1);
             return 1;
         }
     }
     if (btlGetMainState()->hasActiveEntry) {
         BtlEntry *entry = btlMainFindActiveEntry(btlGetMainState());
-        if (entry && entry->id == id && btlSlotsHaveReadyUnit(entry)) {
+        if (entry && entry->data.id == id && btlSlotsHaveReadyUnit(entry)) {
             scrSetResult(1);
             return 1;
         }

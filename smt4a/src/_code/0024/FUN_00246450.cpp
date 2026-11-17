@@ -1,5 +1,6 @@
 /* NON_MATCHING: logic and call sequence match; retail hoists the zero into a callee-saved register (shared by the null table entry and the popup phase store, stored with STM) and spills one more register, so the frame is 84 bytes and the popup stores are grouped differently. */
 #include "gamedata/DataTable.h"
+#include "map/PopupStateA.h"
 
 struct PopupContextRecord {
     /* 0x00 */ s32 id;
@@ -18,18 +19,8 @@ struct PopupMessageResource {
     char text[1];
 };
 
-/* Popup state fields this function drives, then the formatted text buffer. */
-struct PopupFormatView {
-    /* 0x00 */ s32 state;
-    /* 0x04 */ s32 phase;
-    /* 0x08 */ u8 unk08[0xC];
-    /* 0x14 */ const char *message;
-    /* 0x18 */ u8 unk18[0xD];
-    /* 0x25 */ char formatted[1];
-};
 
 extern "C" {
-extern PopupFormatView *g_popupState;
 s32 gameFlagIsSet(s32 flag);
 PopupMessageResource *FUN_00365bc4(s32 message);
 void rt_memcpy(void *destination, const void *source, u32 size);
@@ -56,10 +47,10 @@ void FUN_00246450(s32 context, s32 value, s32 count)
             (record->blockingFlag == 0 || gameFlagIsSet(record->blockingFlag) == 0) &&
             record->context == context) {
             PopupMessageResource *message = FUN_00365bc4(record->message);
-            PopupFormatView *popup = g_popupState;
+            PopupStateA *popup = g_popupState;
             popup->message = message->text;
             popup->state = 14;
-            popup->phase = 0;
+            popup->timer = 0;
             char format[72];
             u8 number[12];
             rt_memcpy(format, message->text, 64);
@@ -68,26 +59,26 @@ void FUN_00246450(s32 context, s32 value, s32 count)
             }
             if (context == 1 || context == 5) {
                 textFormatFullWidthTwoDigits(count, number);
-                textFormatBuffer(g_popupState->formatted, format, number);
-                g_popupState->message = g_popupState->formatted;
+                textFormatBuffer(g_popupState->text, format, number);
+                g_popupState->message = g_popupState->text;
                 return;
             }
             if (context == 2) {
-                textFormatBuffer(g_popupState->formatted, format, dataFindKindRecordWithAocOverrides(value, 0));
-                g_popupState->message = g_popupState->formatted;
+                textFormatBuffer(g_popupState->text, format, dataFindKindRecordWithAocOverrides(value, 0));
+                g_popupState->message = g_popupState->text;
                 return;
             }
             if (context == 3) {
                 const char *name = dataFindKindRecordWithAocOverrides(value, 0);
                 textFormatFullWidthTwoDigits(count, number);
-                textFormatBuffer(g_popupState->formatted, format, name, number);
-                g_popupState->message = g_popupState->formatted;
+                textFormatBuffer(g_popupState->text, format, name, number);
+                g_popupState->message = g_popupState->text;
                 return;
             }
             if (context == 6) {
                 textFormatFullWidthTwoDigits(count, number);
-                textFormatBuffer(g_popupState->formatted, format, dataTable01GetRecordWithAocOverride(value), number);
-                g_popupState->message = g_popupState->formatted;
+                textFormatBuffer(g_popupState->text, format, dataTable01GetRecordWithAocOverride(value), number);
+                g_popupState->message = g_popupState->text;
             }
             return;
         }

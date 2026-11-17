@@ -21,7 +21,7 @@ void btlActionMarkRandomTargetableUnit(BtlActionContext *context)
 
     for (s32 i = 0; i < 109; i++) {
         if ((battle->entries[i].flags & g_btlTargetableMask) != 0) {
-            candidates[count++] = battle->entries[i].indexView.selectionIndex;
+            candidates[count++] = battle->entries[i].selectionIndex;
         }
     }
     u16 remaining = btlAiFilterCandidatesByExclusionChance(&context->battle, candidates, count, 0);

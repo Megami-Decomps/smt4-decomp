@@ -1,17 +1,16 @@
 /* NON_MATCHING: block layout and effect-vector setup now match retail (scaled arm first, vector computed before the input-blocked test); remaining: callee-saved/VFP register numbering (retail loop index r4/record r5, x/y/z in s18/s16/s17) and the order of the scaling multiplies. */
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 #include "game/GameStateA.h"
 #include "map/mapDepart.h"
 
 extern "C" {
-extern MapIfStateA *g_mapIf;
 f32 distSpatial(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
 void soundActorStartOnFreeChannel(u32 effect, f32 x, f32 y, f32 z);
 
 /* Activate the first nearby eligible map record and emit its proximity effect. */
 void FUN_003659f4(f32 x, f32 y, f32 z)
 {
-    MapIfStateA *map = g_mapIf;
+    MapIfStateA *map = g_mapIf.state;
     for (s32 i = 0; i < 128; ++i) {
         MapIfRecord *record = &map->records[i];
         if (!record->active)

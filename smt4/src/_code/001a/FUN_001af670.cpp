@@ -2,6 +2,7 @@
 #include "shard/TextureDrawCall.h"
 #include "ui/PartyPanel.h"
 #include "code/Code001a_Smt4.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 u32 dataTable24Sub0GetRecordS90X(u32);
@@ -16,8 +17,6 @@ void textDrawString(s32, u32, const u16 *, f32, f32, f32, f32, f32);
 void FUN_001af670(void *owner, u32 entryId, s32 x, s32 y, s32 highlighted, f32 speed)
 {
     struct LabelOwnerView { u8 prefix[0x13C]; PartyMember effect; };
-    struct LabelOffset { u8 prefix[8]; s16 x, y; };
-    extern const LabelOffset *asdTMTexTableEntryAt(u32, u32);
     u32 record = dataTable24Sub0GetRecordS90X(entryId);
     u32 color;
     if (highlighted != 0) {
@@ -42,7 +41,7 @@ void FUN_001af670(void *owner, u32 entryId, s32 x, s32 y, s32 highlighted, f32 s
         color = 0xFF;
     }
     const u16 *text = dataTable24Sub0GetRecordS90(entryId);
-    const LabelOffset *offset = asdTMTexTableEntryAt(36, 0xA4);
+    const TextureTableEntryIV *offset = asdTMTexTableEntryAt(36, 0xA4);
     textDrawString(2, color, text, (f32)(offset->x + x), (f32)(offset->y + y), 0.55f, 0.0f, speed);
 }
 }

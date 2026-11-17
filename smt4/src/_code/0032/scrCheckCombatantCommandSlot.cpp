@@ -1,4 +1,4 @@
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 
@@ -24,14 +24,14 @@ u32 scrCheckCombatantCommandSlot(void)
         if ((flags & BTL_ENTRY_FLAG_PRESENT) == 0 &&
             (flags & BTL_ENTRY_FLAG_ACTIVE) != 0 &&
             (flags & BTL_ENTRY_FLAG_BLOCKED) == 0 &&
-            entry->id == id && btlCommandOwnerHasSlotId(entry, slotId)) {
+            entry->data.id == id && btlCommandOwnerHasSlotId(entry, slotId)) {
             scrSetResult(1);
             return 1;
         }
     }
     if (btlGetMainState()->hasActiveEntry != 0) {
         BtlEntry *entry = btlMainFindActiveEntry(btlGetMainState());
-        if (entry != NULL && entry->id == id && btlCommandOwnerHasSlotId(entry, slotId)) {
+        if (entry != NULL && entry->data.id == id && btlCommandOwnerHasSlotId(entry, slotId)) {
             scrSetResult(1);
             return 1;
         }

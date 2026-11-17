@@ -1,28 +1,19 @@
-#include "common.h"
+#include "status/StatusDownA.h"
 
 extern "C" {
 
-typedef struct StatusCursor {
-    /* 0x00 */ u8 unk00[0xB8];
-    /* 0xB8 */ s32 mode;
-} StatusCursor;
 
-typedef struct StatusDown {
-    /* 0x0000 */ u8 unk0000[0x24AC];
-    /* 0x24AC */ StatusCursor cursor;
-} StatusDown;
 
-extern StatusDown *g_statusDown;
 
-/* Whether the status screen is absent or its cursor is in mode 5. */
+/* Whether the status screen is absent or its skill menu is in state 5. */
 u32 FUN_003a7bac(void)
 {
     u32 result = 1;
 
-    if (StatusDown *down = g_statusDown) {
-        StatusCursor *cursor = &down->cursor;
+    if (StatusDownStateA *down = g_statusDown) {
+        StatusDownSkillMenuA *menu = &down->menu;
 
-        if (cursor->mode != 5) {
+        if (menu->state != 5) {
             result = 0;
         }
     }

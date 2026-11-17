@@ -5,7 +5,6 @@
 #include "shard/W6_W6Match3_ScrollSelection.h"
 
 extern "C" {
-extern StatusDownState *g_statusDown;
 void gridNavigationConfigure(GridNavigation *navigation, s32 count, s32 rows, s32 columns, s32 firstPolicy, s32 secondPolicy);
 void scrollOwnerSelectIndex(GridNavigation *navigation, s32 column);
 void statusInventorySort();
@@ -42,6 +41,6 @@ void FUN_001ee8b4(const u8 *quantities)
         scrollOwnerSelectIndex(navigation, status->inventory.column);
     }
     statusInventorySort();
-    status->unk410 = 1;
+    status->listActive = 1;
 }
 }

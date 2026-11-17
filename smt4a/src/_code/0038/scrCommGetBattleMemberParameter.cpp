@@ -12,7 +12,7 @@ extern "C" u32 scrCommGetBattleMemberParameter(void)
     s32 index = scrGetArg(1);
     BtlCombatantEntryA* entry = btlMainFindEntryByListedId(btlGetMainState(), member);
     if (entry != NULL && index >= 0 && index < 9) {
-        scrSetResult(entry->parameters.values[index]);
+        scrSetResult(entry->modifiers[index]);
     } else {
         scrSetResult(0);
     }

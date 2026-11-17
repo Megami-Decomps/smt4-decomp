@@ -22,7 +22,7 @@ s32 scrCommBtlGroupFlagOffCheck(void)
         BtlEntry *unit = &btlGetMainState()->entries[i];
 
         if ((unit->flags & 0x10) != 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0
-            && unit->id == group && (unit->groupMask & (1 << bit)) == 0) {
+            && unit->data.id == group && (unit->data.statusFlags & (1 << bit)) == 0) {
             return commandResult(0);
         }
     }

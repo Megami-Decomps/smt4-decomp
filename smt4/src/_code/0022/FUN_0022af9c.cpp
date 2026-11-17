@@ -1,18 +1,13 @@
-#include "common.h"
+#include "font/InfoWin.h"
 #include "battle/btlHelp.h"
 
 extern "C" {
 
-typedef struct Obj {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ u8 unk20;
-} Obj;
 
-extern Obj *g_infoWin;
 
 void FUN_0022af9c(u8 value)
 {
-    g_infoWin->unk20 = value;
+    g_infoWin->shown = value;
 }
 
 } /* extern "C" */

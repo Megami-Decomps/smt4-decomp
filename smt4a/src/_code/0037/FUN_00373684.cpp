@@ -25,14 +25,14 @@ u32 FUN_00373684(void)
             (g_btlCandidateMasks.required & entry->flags) != 0 &&
             (g_btlCandidateMasks.excluded & entry->flags) == 0) {
             candidates++;
-            sum += entry->thresholdView.unk27A;
+            sum += entry->data.unk116;
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
         BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL) {
             candidates++;
-            sum += entry->thresholdView.unk27A;
+            sum += entry->data.unk116;
         }
     }
     scrSetResult(threshold <= sum / candidates);

@@ -3,13 +3,13 @@
 #include "shard/TextureDrawCall.h"
 #include "shard/S3UiLookup.h"
 #include <stddef.h>
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 void texDrawCompositeSprite(s32 layer, s32 bank, s32 sprite, s32 x, s32 y, s32 depth);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *sprite);
 const u16 *dataTable24Sub0GetRecordS90(u32 id);
-const UiTextMetrics *asdTMTexTableEntryAt(u32 bank, u32 entry);
 s32 fontMeasureLineAdvance(const u16 *text, s32 font);
 void textDrawString(s32 layer, u32 color, const u16 *text,
                   f32 x, f32 y, f32 scale, f32 angle, f32 speed);
@@ -37,9 +37,9 @@ void FUN_001a7810(void *owner, u32 id, s32 x, s32 y, s32 highlighted, s32 altern
         texDrawTableEntryAtStoredOrigin(2, 0x24, 0x9C, x, y, 111);
     efctSetSpeed(speed);
     const u16 *text = dataTable24Sub0GetRecordS90(id);
-    const UiTextMetrics *position = asdTMTexTableEntryAt(0x24, 0xA4);
+    const TextureTableEntryIV *position = asdTMTexTableEntryAt(0x24, 0xA4);
     s32 textWidth = fontMeasureLineAdvance(text, 2);
-    s32 centered = (position->dimensions[0] - textWidth) / 2;
+    s32 centered = (position->placement->width - textWidth) / 2;
     s32 textY = position->y + y;
     s32 textX = position->x + (centered + x);
     textDrawString(2, color, text, (f32)textX, (f32)textY, 0.55f, 0.0f, speed);

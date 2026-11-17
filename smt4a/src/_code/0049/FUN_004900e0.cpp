@@ -1,5 +1,6 @@
 /* NON_MATCHING: refreshes the visibility, screen position and tint of the two map marker lists (full-size or half-size layout); written from the decompilation, the duplicated half/full loops are merged and scheduling not compared with retail */
 #include "common.h"
+#include "game/GameStateA.h"
 
 struct MapMarker {
     /* 0x00 */ u8 unk00[4];
@@ -53,7 +54,6 @@ struct MapMarkerScreen {
 #define MARKER_FULL_LAYOUT 0xC
 
 extern "C" {
-extern u32 DAT_005f1604;
 
 struct MapBlock0xD8E {
     u8 unk[0xD8E];
@@ -96,7 +96,7 @@ static __inline void markerListRefresh(MapMarker *list, s32 count, MapMarkerScre
             marker->drawHeight = drawHeight;
             s16 mode = marker->mode;
             u32 color;
-            if (marker->kind == DAT_005f1604)
+            if (marker->kind == g_gameState.currentObjectId)
                 color = (mode == 0 || mode == 4) ? MARKER_COLOR_SELECTED_TINT : MARKER_COLOR_WHITE;
             else
                 color = (mode != 0 && mode != 4) ? MARKER_COLOR_WHITE : MARKER_COLOR_DIM;

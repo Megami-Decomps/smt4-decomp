@@ -39,20 +39,20 @@ void FUN_004c80f0(s32 id, s32 kind, s32 delta)
             vitals->mp = clampVital(mp + delta, maxMp);
         }
         BtlCombatantEntryA *entry = btlMainFindEntryByListedId(state, id);
-        if (entry->record) {
-            reinterpret_cast<ScaledRecordValues *>(entry->record)->current = vitals->hp;
-            reinterpret_cast<ScaledRecordValues *>(entry->record)->secondaryCurrent = vitals->mp;
-        } else if (entry->secondaryRecord) {
-            reinterpret_cast<ScaledRecordValues *>(entry->secondaryRecord)->current = vitals->hp;
-            reinterpret_cast<ScaledRecordValues *>(entry->secondaryRecord)->secondaryCurrent = vitals->mp;
-        } else if (entry->specialMaximum.record) {
+        if (entry->data.record) {
+            reinterpret_cast<ScaledRecordValues *>(entry->data.record)->current = vitals->hp;
+            reinterpret_cast<ScaledRecordValues *>(entry->data.record)->secondaryCurrent = vitals->mp;
+        } else if (entry->data.secondaryRecord) {
+            reinterpret_cast<ScaledRecordValues *>(entry->data.secondaryRecord)->current = vitals->hp;
+            reinterpret_cast<ScaledRecordValues *>(entry->data.secondaryRecord)->secondaryCurrent = vitals->mp;
+        } else if (entry->data.specialRecord) {
             ScaledRecordValues *selected = reinterpret_cast<ScaledRecordValues *>(saveSlotFindSelected());
             if (!selected) {
                 return;
             }
-            if (reinterpret_cast<ScaledRecordValues *>(entry->specialMaximum.record) == selected) {
-                reinterpret_cast<ScaledRecordValues *>(entry->specialMaximum.record)->current = vitals->hp;
-                reinterpret_cast<ScaledRecordValues *>(entry->specialMaximum.record)->secondaryCurrent = vitals->mp;
+            if (reinterpret_cast<ScaledRecordValues *>(entry->data.specialRecord) == selected) {
+                reinterpret_cast<ScaledRecordValues *>(entry->data.specialRecord)->current = vitals->hp;
+                reinterpret_cast<ScaledRecordValues *>(entry->data.specialRecord)->secondaryCurrent = vitals->mp;
             } else {
                 selected->current = vitals->hp;
                 selected->secondaryCurrent = vitals->mp;

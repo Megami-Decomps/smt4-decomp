@@ -2,9 +2,9 @@
 #include "gfx/RoutedConnector.h"
 #include "title/titleMain.h"
 #include <math.h>
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
-extern TitleScene* g_titleScene;
 void FUN_002d5900(u32 firstColor, u32 secondColor, f32 startX, f32 startY,
                   f32 endX, f32 endY, f32 opacity, f32 width);
 

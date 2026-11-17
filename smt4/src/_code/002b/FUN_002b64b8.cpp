@@ -1,6 +1,6 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
-extern "C" RenderCtx *g_titleScene;
 
 extern "C" u32 FUN_002b64b8(void)
 {

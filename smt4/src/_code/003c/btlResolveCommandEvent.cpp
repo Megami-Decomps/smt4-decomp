@@ -1,5 +1,5 @@
 /* NON_MATCHING: maximum update now uses an atLeast helper (retail order/condition reproduced); remaining: battle address computed after the entry value address, flag read-modify-writes use r1 where retail uses r2, `movs` null test on the found unit, enemy-count loop registers. */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/BtlGlobals.h"
 
 struct CommandEventBattle {

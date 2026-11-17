@@ -1,4 +1,6 @@
 #include "camp/RenderCtx.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxTitle.h"
 
 /* The edit screen's layout work (observed fields). */
 struct CampCecEditWork {
@@ -47,19 +49,10 @@ struct CampCecEditVisibility {
     /* 0x41 */ u8 scrollbarVisible;
 };
 
-/* An image placement record (offsets 8 and 10 hold the position). */
-struct ImagePlacement {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-};
-
 extern "C" {
 
 extern CampCecEditWork *g_campCecEdit;
-extern RenderCtx *g_titleScene;
 
-ImagePlacement *asdTMTexTableEntryAt(s32 group, s32 image);
 u32 FUN_0025981c(void);
 void uiDrawPanelWithValue(void *panel, s32 a, s32 b, u32 value, s32 c);
 void uiDrawCenteredResourceText(u32 text, void *area, s32 a, s32 b);
@@ -78,7 +71,7 @@ void renderCtxResetColorScale(RenderCtx *context);
 u32 campCecEditDrawContents(void)
 {
     CampCecEditWork *work = g_campCecEdit;
-    ImagePlacement *placement;
+    TextureTableEntryIV *placement;
     s32 firstRow;
 
     asdTMTexTableEntryAt(0x39, 0xCF);

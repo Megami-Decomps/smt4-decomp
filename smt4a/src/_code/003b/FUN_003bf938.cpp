@@ -1,6 +1,6 @@
 /* NON_MATCHING: closing-animation loop peels its initial bound check, and the inlined replacement search adds a join NOP. */
 #include "ui/MessageMainA.h"
-#include "shard/W6_W6Match1_PartySlot.h"
+#include "gamedata/GameSaveDataA.h"
 #include "code/Code0018.h"
 
 extern "C" {

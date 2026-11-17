@@ -12,8 +12,8 @@ u32 FUN_00311ecc()
     for (s32 index = 0; index < 109; ++index) {
         BtlEntry *unit = &btlGetMainState()->entries[index];
         if ((unit->flags & 0x10) && (unit->flags & 1) &&
-            !(unit->flags & 0x40) && unit->id == group &&
-            (unit->values[slot] >> 10) == 4) {
+            !(unit->flags & 0x40) && unit->data.id == group &&
+            (unit->data.values[slot] >> 10) == 4) {
             scrSetResult(1);
             return 1;
         }

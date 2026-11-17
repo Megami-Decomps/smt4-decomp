@@ -24,7 +24,7 @@ u32 FUN_00372b80(void)
         if ((entry->flags & g_btlCandidateMasks.unavailable) &&
             (entry->flags & g_btlCandidateMasks.required) &&
             !(entry->flags & g_btlCandidateMasks.excluded) &&
-            entry->id == id && hpPercent(entry->hp, entry->maxHp) <= percent) {
+            entry->data.id == id && hpPercent(entry->data.hp, entry->data.maxHp) <= percent) {
             scrSetResult(1);
             return 1;
         }

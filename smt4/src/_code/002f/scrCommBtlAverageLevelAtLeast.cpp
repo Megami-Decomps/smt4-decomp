@@ -1,6 +1,6 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 
 extern "C" {
@@ -22,7 +22,7 @@ u32 scrCommBtlAverageLevelAtLeast(void)
 
         if ((unit->flags & 0x10) != 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0) {
             count++;
-            total += unit->level;
+            total += unit->data.level;
         }
     }
     scrSetResult(threshold <= total / count);

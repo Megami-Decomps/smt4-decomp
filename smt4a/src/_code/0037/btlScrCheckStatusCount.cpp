@@ -21,7 +21,7 @@ s32 btlScrCheckStatusCount(void)
 
         if ((entry->flags & g_btlCandidateMasks.unavailable) != 0 &&
             (entry->flags & g_btlCandidateMasks.required) != 0 &&
-            (entry->flags & g_btlCandidateMasks.excluded) == 0 && (entry->statusFlags & (1 << bit))) {
+            (entry->flags & g_btlCandidateMasks.excluded) == 0 && (entry->data.statusFlags & (1 << bit))) {
             count++;
         }
     }

@@ -25,9 +25,9 @@ extern "C" u32 FUN_003ff73c(const BtlCombatantEntryA *unit, const RestorationEff
         requested |= 2;
         requested |= 4;
     }
-    if ((requested & 1) && !(unit->statusFlags & 2) && unit->hp != unit->maxHp)
+    if ((requested & 1) && !(unit->data.statusFlags & 2) && unit->data.hp != unit->data.maxHp)
         effective |= 1;
-    if ((requested & 2) && unit->mp != unit->maxMp)
+    if ((requested & 2) && unit->data.mp != unit->data.maxMp)
         effective |= 2;
     if ((requested & 1) && (requested & 2)) {
         if ((effective & 1) && !(effective & 2))
@@ -44,11 +44,11 @@ extern "C" u32 FUN_003ff73c(const BtlCombatantEntryA *unit, const RestorationEff
             kind = rawKind & 0x7F;
         if (!(effect->flags & 4)) {
             FUN_003ff524(&ailments, kind);
-            if (ailments & unit->statusFlags)
+            if (ailments & unit->data.statusFlags)
                 effective |= 4;
         } else {
             FUN_003ff524(&ailments, kind);
-            if (ailments & unit->statusFlags)
+            if (ailments & unit->data.statusFlags)
                 effective |= 4;
         }
     }

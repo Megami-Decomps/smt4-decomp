@@ -1,7 +1,9 @@
 /* NON_MATCHING: the FUN_002a2e98 arms match retail (per-arm calls) and the scene is read directly; remaining: retail copies the position's x,y words with ldm/stm and z from a register (here one three-word ldm/stm) and orders the global loads differently. */
 #include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 #include "game/GameStateA.h"
 #include "shard/W6_W6Match2_AocTable23.h"
+#include "Model/MoriModelManager.h"
 
 struct AreaHandleOwner { u32 unk00; u32 flags; };
 struct AreaHandle { u32 unk00; AreaHandleOwner *owner; };
@@ -15,13 +17,6 @@ struct AreaMainState {
     u8 unk0f5[0x95f];
     AreaHandle *handles[32]; // 0xa54
 };
-struct AreaPosition { f32 x, y, z; };
-struct AreaScene {
-    u8 unk000[0x1c];
-    AreaPosition position, targetPosition, previousPosition;
-    u8 unk040[0xc];
-    f32 heading, targetHeading;
-};
 struct AreaSpawn {
     s8 map, area;
     u8 place;
@@ -30,8 +25,6 @@ struct AreaSpawn {
 };
 extern "C" {
 extern AreaMainState *g_lmapMainState;
-extern AreaScene *g_lmapScene;
-extern void *g_handleRegistry;
 u32 table23FindRecordByKey(s32 category, s32 subtype, u32 variant);
 Table23Record *dataTableGetRecord23(u32 index);
 void mapPlaceSet(s32, s32, s32);
@@ -48,7 +41,6 @@ void FUN_0036a434(AreaMainState *);
 void FUN_003699e4();
 void lmapApplyAreaHandleVisibility();
 void FUN_003ca5a4();
-void ptrListRemoveClearOwner(void *, AreaHandleOwner *);
 void lmapInitializeActorHandles();
 void FUN_0036aa04(AreaMainState *);
 void controllerUpdateWithIdleTimer(LmapObj *);
@@ -64,12 +56,12 @@ void lmapInitializeArea(u32 area, u32 spawnId)
     mapPlaceSet(spawn->map, spawn->area, spawn->place);
     state->area = area;
     g_gameState.areaId = area;
-    g_lmapScene->position.x = (f32)spawn->x;
-    g_lmapScene->position.y = (f32)spawn->y;
-    g_lmapScene->position.z = (f32)spawn->z;
-    g_lmapScene->previousPosition = g_lmapScene->targetPosition = g_lmapScene->position;
-    g_lmapScene->heading = 180.0f;
-    g_lmapScene->targetHeading = 180.0f;
+    g_lmapScene->pose.position.x = (f32)spawn->x;
+    g_lmapScene->pose.position.y = (f32)spawn->y;
+    g_lmapScene->pose.position.z = (f32)spawn->z;
+    g_lmapScene->pose.previousPosition = g_lmapScene->pose.targetPosition = g_lmapScene->pose.position;
+    g_lmapScene->pose.heading = 180.0f;
+    g_lmapScene->pose.targetHeading = 180.0f;
     FUN_00227a70();
     if (state->map == 101) {
         FUN_002a2e98(state->map, state->area, 101, 10);

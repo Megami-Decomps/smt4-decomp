@@ -6,7 +6,7 @@ extern "C" {
 
 SlotRecordA *gameGetSlotRecord(s32 slotIndex)
 {
-    SaveSlotTable *table = &g_gameDataBlocks.saveBlock->body.slots;
+    SaveSlotTableA *table = &g_gameDataBlocks.saveBlock->body.slots;
     return &table->entries[slotIndex];
 }
 

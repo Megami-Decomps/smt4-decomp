@@ -1,6 +1,6 @@
 #include "common.h"
 #include "battle/BtlMainAccess.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 
 extern "C" {
@@ -19,7 +19,7 @@ s32 scrLiveEntryHasBit(void)
         BtlEntry *entry = &btlGetMainState()->entries[i];
 
         if ((entry->flags & 0x10) != 0 && (entry->flags & 1) != 0 && (entry->flags & 0x40) == 0
-            && (entry->groupMask & (1 << bit)) != 0) {
+            && (entry->data.statusFlags & (1 << bit)) != 0) {
             scrSetResult(1);
             return 1;
         }

@@ -3,28 +3,18 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "bible/bibleAnalyze.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct NpcTextureSource {
     u8 unk00[0x24];
     u16 textureId;
 };
-struct NpcTextureImage {
-    u8 unk00[8];
-    s16 width, height;
-    const s16 *origin;
-};
-typedef char NpcTextureRecordOffsets[
-    offsetof(NpcTextureSource, textureId) == 0x24 &&
-    offsetof(NpcTextureImage, width) == 8 &&
-    offsetof(NpcTextureImage, height) == 0xA &&
-    offsetof(NpcTextureImage, origin) == 0xC ? 1 : -1];
 
 extern "C" {
 extern const char DAT_0040357c[], DAT_00403570[];
 extern const u8 DAT_0040356c[3];
 void memClear(void *, u32);
 NpcTextureSource *dataTable25FindById(s32);
-NpcTextureImage *asdTMTexTableEntryAt(u32, s32);
 s32 FUN_002c1d5c();
 void asdTMTexTablePrepareNodeImage(s32, s32);
 s32 FUN_001dfc64(u32);
@@ -51,12 +41,12 @@ void FUN_0032743c(s32 npcId)
     work->npc.source = dataTable25FindById(npcId);
     work->textureNode = work->npc.source->textureId;
     for (u32 index = 0; index < 3; ++index) {
-        NpcTextureImage *image = asdTMTexTableEntryAt(0x32, DAT_0040356c[index]);
-        work->npc.sizes[index][0] = image->width;
-        work->npc.sizes[index][1] = image->height;
-        if (index == 0 && image->origin != NULL) {
-            work->npc.origin[0] = image->origin[0];
-            work->npc.origin[1] = image->origin[1];
+        TextureTableEntryIV *image = asdTMTexTableEntryAt(0x32, DAT_0040356c[index]);
+        work->npc.sizes[index][0] = image->x;
+        work->npc.sizes[index][1] = image->y;
+        if (index == 0 && image->placement != NULL) {
+            work->npc.origin[0] = image->placement->width;
+            work->npc.origin[1] = image->placement->height;
         }
     }
     work->npc.sizes[1][0] = 72.0f;

@@ -3,12 +3,12 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 int textDrawString(...);
 int efctSetSpeed(void);
-int asdTMTexTableEntryAt(...);
 int FUN_00240210(...);
 int resourceRunOperationIfUnblocked(...);
 int VectorSignedToFloat(...);
@@ -66,14 +66,14 @@ void FUN_002aa038(int param_1,int param_2)
   temp_v4 = dataTableGetEntry24Byte0(*(unsigned int *)(temp_v0 + (temp_v3 + temp_v2) * 4 + 0x927c));
   efctSetSpeed();
   temp_v2 = listCursorGetRowIfUnblocked(temp_v1);
-  temp_v2 = asdTMTexTableEntryAt(0x1a,temp_v2 + 0xb6);
+  temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,temp_v2 + 0xb6));
   if (*(int *)(temp_v0 + 0x3fc) >= 4) {
     texDrawTableEntryAtStoredOrigin(2,0x1a,0xb5,param_1,param_2,0x97);
   }
   temp_v13 = resourceRunOperationIfUnblocked(temp_v0 + 0x560);
   temp_v3 = 0;
   do {
-    temp_v5 = asdTMTexTableEntryAt(0x1a,temp_v3 + 0xb6);
+    temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,temp_v3 + 0xb6));
     temp_v7 = *(int *)(temp_v0 + 0x3fc);
     temp_v11 = (int)*(short *)(temp_v5 + 8);
     if (temp_v7 >= 4) {
@@ -91,7 +91,7 @@ void FUN_002aa038(int param_1,int param_2)
     temp_v7 = objectApplyIfUnblocked(temp_v0 + 0x560);
     temp_v8 = temp_v13 + temp_v3;
     if (temp_v8 < temp_v7) {
-      temp_v6 = asdTMTexTableEntryAt(0x1a,0xb2);
+      temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0xb2));
       temp_v7 = temp_v0;
       FUN_00240210(temp_v0,temp_v4,temp_v12,temp_v8);
       if (temp_v7 == 0) {
@@ -109,11 +109,11 @@ void FUN_002aa038(int param_1,int param_2)
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 8);
   temp_v1 = listCursorGetRowIfUnblocked(temp_v1);
-  temp_v1 = asdTMTexTableEntryAt(0x1a,temp_v1 + 200);
+  temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,temp_v1 + 200));
   temp_v2 = resourceRunOperationIfUnblocked(temp_v0 + 0x560);
   temp_v3 = listCursorGetRowIfUnblocked(temp_v0 + 0x560);
   temp_v5 = listCursorGetRowIfUnblocked(temp_v0 + 0x560);
-  temp_v5 = asdTMTexTableEntryAt(0x1a,temp_v5 + 200);
+  temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,temp_v5 + 200));
   temp_v7 = *(int *)(temp_v0 + 0x3fc);
   if (temp_v7 >= 4) {
     temp_v11 = (int)*(short *)(temp_v5 + 8);
@@ -165,7 +165,7 @@ void FUN_002aa038(int param_1,int param_2)
     texDrawTableEntryAtStoredOrigin(2,0x1a,0x286,temp_v7 + temp_v11,temp_v5 + param_2,0xbf);
   }
   efctSetSpeed();
-  temp_v5 = asdTMTexTableEntryAt(0x1a,0xc5);
+  temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0xc5));
   FUN_00240210(temp_v0,temp_v4,temp_v12,temp_v2 + temp_v3);
   temp_v4 = temp_v10;
   if (temp_v0 != 0) {

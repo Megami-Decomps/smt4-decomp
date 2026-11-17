@@ -3,6 +3,7 @@
 
 #include "common.h"
 #include "battle/BtlUnitWork.h"
+#include "battle/BtlEntry.h"
 
 struct BtlMainState;
 

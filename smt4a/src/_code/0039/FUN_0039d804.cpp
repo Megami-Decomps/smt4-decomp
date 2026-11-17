@@ -1,26 +1,19 @@
 #include "common.h"
 #include "gamedata/SkillDataRecord.h"
+#include "battle/BtlEntryLookup.h"
 
 extern "C" {
 
-typedef struct UnitData {
-    /* 0x000 */ u8 unk000[0x118];
-    /* 0x118 */ u16 skillIds[8];
-} UnitData;
 
-typedef struct BattleUnit {
-    /* 0x00 */ u8 unk00[0x28];
-    /* 0x28 */ UnitData *data;
-} BattleUnit;
 
 s32 scrSetResult(s32 value);
-BattleUnit *btlUnitGet(u32 id);
 extern u32 g_btlScriptUnit;
 
 /* Script command: counts the unit's skill slots that hold an id found in data table 4. */
 u32 FUN_0039d804(void)
 {
-    UnitData *data = btlUnitGet(g_btlScriptUnit)->data;
+    /* g_btlScriptUnit is the slot block pointer; btlUnitGet takes it as the context reference. */
+    BtlUnitDataA *data = btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit))->data;
     s32 count = 0;
     s32 i;
 

@@ -1,7 +1,7 @@
 /* NON_MATCHING: typed rewrite of the battle unit removal (298 vs 310 rows); armcc merges the 0xf4/0xf8 action stores into one stm and numbers the callee-saved registers differently. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlAction.h"
-#include "gamedata/SaveSlotTable.h"
+#include "gamedata/SaveSlotTableIV.h"
 #include "AsdSDK/AsdMemUtil.h"
 
 /* The action record's words the removal clears. */
@@ -108,14 +108,14 @@ void FUN_003c0d70(s32 index, s32 unused, s32 removeLinked, s32 keepLink)
                 action->slotB = -1;
                 for (s32 k = 0; k < 6; ++k)
                     action->tail[k] = 0;
-                FUN_003390dc(state, record, entry->members.ids[0]);
+                FUN_003390dc(state, record, entry->ids[0]);
             }
         }
         entry->flags |= 0x80;
     }
 
     if ((entry->flags & 0x10) != 0) {
-        if (removeLinked != 0 && entry->devil != NULL) {
+        if (removeLinked != 0 && entry->data.devil != NULL) {
             if (words->pendingCount > 0)
                 objectTotalAdd(state);
             s32 slot = words->pendingHead;
@@ -128,30 +128,30 @@ void FUN_003c0d70(s32 index, s32 unused, s32 removeLinked, s32 keepLink)
                 if (slot < 0)
                     slot = 5;
             } while (words->pendingHead != slot);
-            entry->devil = NULL;
+            entry->data.devil = NULL;
             words->pendingCount = 0;
             words->pendingHead = 0;
         }
         --state->emergencyAction.gate;
     } else if ((entry->flags & 0x20) != 0) {
-        LinkedObject *reserve = reinterpret_cast<LinkedObject *>(entry->reserve);
+        LinkedObject *reserve = reinterpret_cast<LinkedObject *>(entry->data.reserve);
         if (reserve != NULL && removeLinked != 0) {
             reserve->state = 2;
             reserve->hp = 0;
         }
         state->unk49c4 = 0;
     } else {
-        LinkedObject *link = reinterpret_cast<LinkedObject *>(entry->link);
+        LinkedObject *link = reinterpret_cast<LinkedObject *>(entry->data.link);
         if ((oldFlags & 8) != 0) {
             if (keepLink != 0) {
                 if (link != NULL) {
                     link->state &= ~0x10;
-                    if (entry->hp > 0)
-                        recordClampCurrentCount(entry->link);
-                    entry->link = NULL;
+                    if (entry->data.hp > 0)
+                        recordClampCurrentCount(entry->data.link);
+                    entry->data.link = NULL;
                 }
             } else {
-                s8 *mark = reinterpret_cast<s8 *>(gameGetSlotTable()) + (index - 1) + 0x9108;
+                s8 *mark = &gameGetSlotTable()->active[index - 1];
                 if (*mark >= 0) {
                     *mark = -1;
                     if (removeLinked == 0) {
@@ -160,20 +160,20 @@ void FUN_003c0d70(s32 index, s32 unused, s32 removeLinked, s32 keepLink)
                     }
                     if (link != NULL) {
                         link->state &= ~0x10;
-                        if (entry->hp > 0)
-                            recordClampCurrentCount(entry->link);
+                        if (entry->data.hp > 0)
+                            recordClampCurrentCount(entry->data.link);
                     }
                 }
             }
         }
         if (removeLinked != 0) {
-            LinkedObject *source = reinterpret_cast<LinkedObject *>(entry->source);
+            LinkedObject *source = reinterpret_cast<LinkedObject *>(entry->data.source);
             if (source != NULL) {
                 source->slotState = 2;
                 source->hp = 0;
-                entry->groupMask = 2;
-                entry->hp = 0;
-                entry->maxHp = source->maxHp;
+                entry->data.statusFlags = 2;
+                entry->data.hp = 0;
+                entry->data.maxHp = source->maxHp;
                 FUN_00394b0c();
             }
             if (link != NULL) {
@@ -181,19 +181,19 @@ void FUN_003c0d70(s32 index, s32 unused, s32 removeLinked, s32 keepLink)
                 link->hp = 0;
             }
         } else if (link != NULL) {
-            if (flagWordTestBit(entry->link, 10) != 0) {
-                objectFlagsClear(entry->link, 0x10);
-                objectFlagsClear(entry->link, 0x20);
-                objectFlagsClear(entry->link, 0x40);
-                objectFlagsClear(entry->link, 0x80);
-                objectFlagsClear(entry->link, 0x100);
-                objectFlagsClear(entry->link, 0x200);
-                objectFlagsClear(entry->link, 8);
+            if (flagWordTestBit(entry->data.link, 10) != 0) {
+                objectFlagsClear(entry->data.link, 0x10);
+                objectFlagsClear(entry->data.link, 0x20);
+                objectFlagsClear(entry->data.link, 0x40);
+                objectFlagsClear(entry->data.link, 0x80);
+                objectFlagsClear(entry->data.link, 0x100);
+                objectFlagsClear(entry->data.link, 0x200);
+                objectFlagsClear(entry->data.link, 8);
             }
-            if ((entry->groupMask & 0x400) != 0)
-                entry->groupMask &= ~0x3F8;
-            if (entry->hp > 0 && link->id == entry->id)
-                recordClampCurrentCount(entry->link);
+            if ((entry->data.statusFlags & 0x400) != 0)
+                entry->data.statusFlags &= ~0x3F8;
+            if (entry->data.hp > 0 && link->id == entry->data.id)
+                recordClampCurrentCount(entry->data.link);
         }
         --state->eventCount;
     }

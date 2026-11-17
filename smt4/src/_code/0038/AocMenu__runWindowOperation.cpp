@@ -2,6 +2,7 @@
 /* NON_MATCHING: retail unpacks the pending event with an ldm/stm copy into a second 20-byte temp, keeps the state constants in r6/r7/r8 and orders the switch tests as a compare ladder (frame 72 bytes here 52); the state machine, calls and stored fields are the same. */
 #include "classes/AocMenu.h"
 #include "classes/Obj422594.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* A window operation object: slot 1 releases it, slot 3 hands out its pending event. */
 class WindowOperation {
@@ -13,13 +14,6 @@ public:
 };
 
 namespace {
-/* A region record of the layout table (position at +8, size through the pointer at +0xc). */
-struct RegionRecord {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0a */ s16 y;
-    /* 0x0c */ s16 *size;
-};
 
 /* The art-of-contents record: only the word at +0x67c is read. */
 struct AocBlock {
@@ -42,7 +36,6 @@ void ifTouchRegionClearAll(u32 *regions);
 void FUN_00233818(u32 *entries);
 void FUN_00233e70(u32 *job, s32 a, s32 b);
 void listScrollerInitialize(u32 *range, s32 a, s32 entry, s32 b, s32 c, s32 d);
-RegionRecord *asdTMTexTableEntryAt(u32 group, u32 id);
 void touchRegisterFirstRegion(Obj422594 *object, s32 x, s32 y, s32 width, s32 height);
 void touchRegisterSecondRegion(Obj422594 *object, s32 x, s32 y, s32 width, s32 height);
 void touchRegionOwnerAddRegion(Obj422594 *object, s32 x, s32 y, s32 width, s32 height);
@@ -123,12 +116,12 @@ void AocMenu::runWindowOperation()
                 Obj422594 *object = reinterpret_cast<Obj422594 *>(job + 0xba);
                 reinterpret_cast<u8 *>(job)[0x24d] = 1;
                 object->initialize(job + 0x90);
-                RegionRecord *record = asdTMTexTableEntryAt(0x3a, 0x4f);
-                touchRegisterFirstRegion(object, record->x, record->y, record->size[0], record->size[1]);
+                TextureTableEntryIV *record = asdTMTexTableEntryAt(0x3a, 0x4f);
+                touchRegisterFirstRegion(object, record->x, record->y, record->placement->width, record->placement->height);
                 record = asdTMTexTableEntryAt(0x3a, 0x50);
-                touchRegisterSecondRegion(object, record->x, record->y, record->size[0], record->size[1]);
+                touchRegisterSecondRegion(object, record->x, record->y, record->placement->width, record->placement->height);
                 record = asdTMTexTableEntryAt(0x3a, 0x4e);
-                touchRegionOwnerAddRegion(object, record->x, record->y, record->size[0], record->size[1]);
+                touchRegionOwnerAddRegion(object, record->x, record->y, record->placement->width, record->placement->height);
                 reinterpret_cast<u8 *>(job)[0x34c] = 1;
                 reinterpret_cast<u16 *>(job)[0xbb * 2] = reinterpret_cast<u16 *>(job)[0xbb * 2] | 0x1000;
                 s32 limit = rangeLimitMin(job + 0x90);

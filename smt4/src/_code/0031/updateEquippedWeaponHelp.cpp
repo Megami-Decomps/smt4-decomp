@@ -1,5 +1,5 @@
 /* NON_MATCHING: only the initial g_buttonHelp address load is scheduled two instructions later (retail loads it before `sub sp`). */
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 #include "shard/W6_W6Match2_RankedTableRecord.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
@@ -8,7 +8,6 @@
 #include "gamedata/GamePlayerData.h"
 
 extern "C" {
-extern ButtonHelpGlobals g_buttonHelp;
 void FUN_002907c4(char *, u32);
 s32 textFormatBuffer(char *, const char *, ...);
 void textEncodeFontSlot(u32, const char *);

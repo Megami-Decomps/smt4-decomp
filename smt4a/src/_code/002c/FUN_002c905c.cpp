@@ -1,8 +1,6 @@
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 
 extern "C" {
-
-extern UniteWork *g_unite;
 
 /* Returns 1 when the record is busy with request 8..0xE. */
 u32 FUN_002c905c(void)

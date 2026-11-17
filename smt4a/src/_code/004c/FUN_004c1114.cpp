@@ -1,13 +1,7 @@
 /* NON_MATCHING: readable rebuild from asm of the status-ailment infliction roll; armcc here schedules the VFP chance formula (vmla chains on s16-s18) and the two copies of the property switch differently, and retail's 32-byte name buffer is zeroed by eight stores before the per-ailment textFormatBuffer call. */
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlEntryLookup.h"
 #include "battle/BattleHelpers_Smt4a.h"
-
-/* A battle unit (only the fields read here). */
-struct BattleUnit {
-    /* 0x000 */ u8 unk000[0x74];
-    /* 0x074 */ s32 properties[0x7F];     /* property values, indexed by property id */
-    /* 0x270 */ s16 level;
-};
 
 /* The mask the flags are tested against (DAT_005713f0 + 0xA8). */
 struct AilmentMasks {
@@ -18,25 +12,24 @@ struct AilmentMasks {
 extern "C" {
 extern AilmentMasks DAT_005713f0;
 
-BattleUnit *btlMainFindEntryByListedId(BtlMainStateA *battle, u32 id);
 void textFormatBuffer(char *buffer, const char *text);
 u32 lcgRandomRange(u32 limit);
 
 /* The resistance of the unit to the property (0 without a unit). */
 static s32 resistanceOf(u32 id, s32 property)
 {
-    BattleUnit *unit = btlMainFindEntryByListedId(btlGetMainState(), id);
+    BtlCombatantEntryA *unit = btlMainFindEntryByListedId(btlGetMainState(), id);
     return unit != NULL ? unit->properties[property] : 0;
 }
 
 /* Rolls whether ailment `kind` lands on unit `id`: kinds 12 and 4 are decided by the resistance
  * property alone (positive / at its maximum); the others use a base chance raised by the unit's
- * level (capped at 70%) and the resistance, unless the battle forbids the roll, in which case a
+ * luck (capped at 70%) and the resistance, unless the battle forbids the roll, in which case a
  * resistance above 3 is required. Returns 1 when it lands. */
 u32 FUN_004c1114(u32 id, s32 kind)
 {
     BtlMainStateA *battle = btlGetMainState();
-    BattleUnit *unit = btlMainFindEntryByListedId(battle, id);
+    BtlCombatantEntryA *unit = btlMainFindEntryByListedId(battle, id);
     f32 base = 0.0f;
     s32 property;
     const char *name = NULL;
@@ -80,7 +73,7 @@ u32 FUN_004c1114(u32 id, s32 kind)
     default:
         return 1;
     }
-    f32 level = (f32)unit->level;
+    f32 luck = (f32)unit->data.luck;
     f32 resistance = (f32)resistanceOf(id, property);
     if (kind == 12)
         return (s32)resistance > 0;
@@ -89,11 +82,11 @@ u32 FUN_004c1114(u32 id, s32 kind)
     if ((battle->stateFlags64.bits & DAT_005713f0.preventMask) != 0)
         return (s32)resistance > 3;
     f32 over = 0.0f;
-    if ((s32)level > 100) {
-        over = level - 100.0f;
-        level = level - over;
+    if ((s32)luck > 100) {
+        over = luck - 100.0f;
+        luck = luck - over;
     }
-    f32 chance = base + base * (level * 0.01f + over * 0.0025f);
+    f32 chance = base + base * (luck * 0.01f + over * 0.0025f);
     if (chance > 70.0f)
         chance = 70.0f;
     chance += resistance * 15.0f;

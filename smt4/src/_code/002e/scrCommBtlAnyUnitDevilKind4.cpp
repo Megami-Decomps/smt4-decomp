@@ -14,7 +14,7 @@ u32 scrCommBtlAnyUnitDevilKind4(void)
         BtlEntry *unit = &btlGetMainState()->entries[index];
 
         if ((unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40)) {
-            if (nkmBaseGetRecord(unit->id)->category == 4) {
+            if (nkmBaseGetRecord(unit->data.id)->category == 4) {
                 scrSetResult(1);
                 return 1;
             }

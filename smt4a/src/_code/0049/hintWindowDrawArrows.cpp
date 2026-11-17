@@ -3,16 +3,9 @@
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "Model/MoriModelShadowMap.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-
-/* A layout record: its position at 8 and 10. */
-typedef struct HintLayout {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-} HintLayout;
-
 
 /* The hint window's work block (only the fields touched here). */
 typedef struct HintWindow {
@@ -28,13 +21,11 @@ typedef struct HintWindow {
     /* 0x16058 */ u32 frame;
 } HintWindow;
 
-
 void gxResetColorQuadToWhite(void);
 s32 renderCtxPackPassFlags(u32 kind, u32 arg);
 void shopMainDrawPairedJobs(HintWindow *window);
 s32 placeWinGetValue(void);
 s32 FUN_00284f70(void);
-HintLayout *asdTMTexTableEntryAt(u32 kind, u32 index);
 void texDrawCompositeSprite(s32 a, s32 b, s32 c, s32 x, s32 y, s32 z);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *ctx, f32 depth);
 f32 asdAnimGetTrackLastFrame(u32 animation, s32 track);
@@ -56,13 +47,13 @@ void hintWindowDrawArrows(HintWindow *window)
             s32 used = 0;
 
             if (window->firstArrow != 0) {
-                HintLayout *layout = asdTMTexTableEntryAt(0x20, arrowIds[0]);
+                TextureTableEntryIV *layout = asdTMTexTableEntryAt(0x20, arrowIds[0]);
 
                 texDrawCompositeSprite(2, 0x20, 6, layout->x + x, layout->y + y, 13);
                 used = 1;
             }
             if (window->secondArrow != 0) {
-                HintLayout *layout = asdTMTexTableEntryAt(0x20, arrowIds[used]);
+                TextureTableEntryIV *layout = asdTMTexTableEntryAt(0x20, arrowIds[used]);
 
                 texDrawCompositeSprite(2, 0x20, 7, layout->x + x, layout->y + y, 13);
             }

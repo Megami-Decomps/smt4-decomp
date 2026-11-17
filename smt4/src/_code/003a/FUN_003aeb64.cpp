@@ -103,7 +103,7 @@ s32 FUN_003aeb64(u32 unused, RosterRow *rows)
             row->side = 0;
             row->index = 0;
         } else if ((record->flags & 8) != 0) {
-            row->id = record->id;
+            row->id = record->data.id;
             row->isEnemy = 0;
             row->side = 0;
             for (s32 k = 1; k < 4; k++) {
@@ -127,7 +127,7 @@ s32 FUN_003aeb64(u32 unused, RosterRow *rows)
                 continue;
             }
             seen[seenCount] = record->selectionIndex;
-            row->id = record->id;
+            row->id = record->data.id;
             row->isEnemy = 1;
             seenCount++;
             if (unit->placement.slot >= 0) {
@@ -147,7 +147,7 @@ s32 FUN_003aeb64(u32 unused, RosterRow *rows)
                 }
             }
         }
-        row->level = record->groupMask;
+        row->level = record->data.statusFlags;
         row->stat7 = battleGetEntryHalfword(unit->memberId, 7);
         row->stat10 = battleGetEntryHalfword(unit->memberId, 10);
         row->stat11 = battleGetEntryHalfword(unit->memberId, 0xb);

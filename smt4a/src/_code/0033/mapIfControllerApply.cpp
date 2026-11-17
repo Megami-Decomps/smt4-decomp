@@ -4,13 +4,6 @@
 #include "map/mapDepart.h"
 #include "shard/W5_W5Match7_ControllerPose.h"
 
-namespace {
-/* The model node's controller pointer is beyond the shared NodeEnableNode view. */
-struct MapMarkerModelView {
-    u32 flags;
-    ControllerPose *controller;
-};
-}
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
 void controllerSetDestination(ControllerPose *controller, const f32 *position);
@@ -19,10 +12,10 @@ s32 slots4FGetActiveValue(ControllerPose *controller);
 void modelPlayClip(ControllerPose *controller, u32 value, s32 mode, f32 first, f32 second);
 
 /* Apply a marker's visibility, destination, heading and selected animation. */
-void mapIfControllerApply(MapIfModelMarker *marker)
+void mapIfControllerApply(MapIfModelMarkerA *marker)
 {
     if (marker->active != 0) {
-        ControllerPose *controller = reinterpret_cast<MapMarkerModelView *>(marker->model)->controller;
+        ControllerPose *controller = reinterpret_cast<ControllerPose *>(marker->resource->handle);
         if (g_gameState.loading != 0) {
             if ((controller->flags.value & 1) == 0)
                 controller->flags.value |= 3;

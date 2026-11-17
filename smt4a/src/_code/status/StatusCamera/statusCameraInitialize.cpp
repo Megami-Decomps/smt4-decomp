@@ -3,10 +3,10 @@
 #include <stddef.h>
 #include "title/titleMain.h"
 #include "shard/W6_W6Match3_EffectColor.h"
+#include "Model/MoriModelManager.h"
 
 extern "C" {
 extern StatusCameraWorkA *g_statusCamera;
-extern void *g_handleRegistry;
 void sysMemClear(void *memory, u32 size);
 void FUN_00154180(s32 x, s32 y, s32 width, s32 height);
 void FUN_0014f0dc(StatusCameraWorkA *camera, const Vec3 *eye, const Vec3 *target, const Vec3 *up);

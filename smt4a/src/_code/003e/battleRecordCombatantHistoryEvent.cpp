@@ -29,7 +29,7 @@ void battleRecordCombatantHistoryEvent(BtlMainStateA *battle, const BtlCombatant
             }
         } else if (((flags & g_btlMain.actorCategories[1]) ||
                     (flags & g_btlMain.actorCategories[2]) ||
-                    (flags & g_btlMain.actorCategories[3])) && candidate->id == unit->id) {
+                    (flags & g_btlMain.actorCategories[3])) && candidate->id == unit->data.id) {
             record = candidate;
             break;
         }
@@ -48,7 +48,7 @@ void battleRecordCombatantHistoryEvent(BtlMainStateA *battle, const BtlCombatant
             record->id = -1;
             record->category = playerCategory;
         } else {
-            record->id = unit->id;
+            record->id = unit->data.id;
             flags = unit->flags;
             if (flags & g_btlMain.actorCategories[1]) {
                 record->category = g_btlMain.actorCategories[1];

@@ -1,4 +1,4 @@
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "battle/BattleUnitSlot.h"
@@ -19,12 +19,12 @@ u32 btlScriptQueuePercentHealthChange()
     s32 percent = scrGetArg(0);
     BtlMainState *state = btlGetMainState();
     BtlEntry *entry = btlMainFindActiveEntry();
-    s32 amount = entry->maxHp * percent / 100;
+    s32 amount = entry->data.maxHp * percent / 100;
     void *unit = btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit));
-    if (entry->members.ids[0] >= 0) {
+    if (entry->ids[0] >= 0) {
         FUN_00250720(state);
-        FUN_002551ac(0, unit, &state->actions[entry->members.ids[0]], 0,
-                     amount, 0xffffffff, 0xffffffff, entry->hp, entry->maxHp,
+        FUN_002551ac(0, unit, &state->actions[entry->ids[0]], 0,
+                     amount, 0xffffffff, 0xffffffff, entry->data.hp, entry->data.maxHp,
                      0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1);
         btlQueueKeyedScalarReflectAction(0, unit, 0x10001b5, 0, 0, 0, 0);
     }

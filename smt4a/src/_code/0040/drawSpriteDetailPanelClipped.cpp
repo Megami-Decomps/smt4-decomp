@@ -4,9 +4,9 @@
 #include "shard/TextureDrawCall.h"
 #include "shard/SpriteDetailPanel.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
-extern RenderCtxScissorA* g_renderCtx;
 u32 FUN_00168e00(s32 x, s32 y, s32 width, s32 height);
 void FUN_00404dd0(SpriteDetailPanel* panel, s32 x, s32 y, f32 speed);
 void efctSetSpeed(f32 speed);

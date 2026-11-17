@@ -1,77 +1,56 @@
 /* NON_MATCHING: the gates now match (signed blocked byte gives the shared 0x1400 base); remaining: retail zeroes r0 on the blocked exit (movne r0, #0) and branches past the final `mov r0, #0`, which it schedules before the pending store, and one height copy swaps r0/r1. */
-#include "shard/JobWork.h"
+#include "frame_tex/FrameTexA.h"
 #include "camp/RenderCtx.h"
 #include "Model/MoriModelShadowMap.h"
 
-struct DownsampleWork {
-    u8 unk0000[0xfa4];
-    s8 active; // 0xfa4
-    s8 enabled; // 0xfa5
-    u8 unkfa6[2];
-    s32 levels; // 0xfa8
-    u8 copyResult; // 0xfac
-    u8 done; // 0xfad
-    u8 pending; // 0xfae
-    u8 unkfaf[0x4dd];
-    s8 blocked; // 0x148c
-    u8 unk148d[3];
-    JobSurface *source; // 0x1490
-    s8 separateBuffers; // 0x1494
-    u8 unk1495[3];
-    JobSurface *first; // 0x1498
-    JobSurface *second; // 0x149c
-};
-typedef char DownsampleWorkLayoutCheck[
-    offsetof(DownsampleWork, active) == 0xFA4 &&
-    offsetof(DownsampleWork, blocked) == 0x148C &&
-    offsetof(DownsampleWork, separateBuffers) == 0x1494 &&
-    sizeof(DownsampleWork) == 0x14A0 ? 1 : -1];
 extern "C" {
-u8 gxCopyFramebufferToSurface(u32, JobSurface *);
+u8 gxCopyFramebufferToSurface(u32, AsdTexture *);
 s32 stateValuesGetBySelector(u32);
-void surfaceCopy(JobSurface *, JobSurface *);
+void surfaceCopy(AsdTexture *, AsdTexture *);
 
+/* "HDRCL" capture: captures the left screen into the scene texture and builds its downsampled copies
+ * (through the half and quarter textures when the chain exists). */
 s32 renderSurfaceDownsampleJob(u32 job)
 {
-    DownsampleWork *work = (DownsampleWork *)jobGetWork(job);
-    work->done = 0;
-    if (work->active && work->enabled && work->source && !work->blocked) {
+    FrameTexWorkA *work = (FrameTexWorkA *)jobGetWork(job);
+    work->hdr.capturedLeft = 0;
+    if (work->hdr.enabled && work->hdr.ready && work->sceneSurface && !work->captureBlocked) {
         renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
-        work->source->width = 512;
-        work->source->height = 512;
-        work->copyResult = gxCopyFramebufferToSurface(0, work->source);
+        work->sceneSurface->dimensions.width = 512;
+        work->sceneSurface->dimensions.height = 512;
+        work->hdr.captureResult = gxCopyFramebufferToSurface(0, work->sceneSurface);
         s32 mode = stateValuesGetBySelector(0);
-        s32 levels = work->levels;
+        s32 levels = work->hdr.levels;
         if (!mode && levels > 1) {
             --levels;
             if (levels < 1)
                 levels = 1;
         }
-        if (work->separateBuffers) {
+        if (work->hdrDownsampleChain) {
             for (s32 i = 0; i < levels; ++i) {
                 if (i == 0) {
-                    surfaceCopy(work->source, work->first);
-                    work->first->width = work->source->width >> 1;
-                    work->first->height = work->source->height >> 1;
+                    surfaceCopy(work->sceneSurface, work->hdrSurfaceHalf);
+                    work->hdrSurfaceHalf->dimensions.width = work->sceneSurface->dimensions.width >> 1;
+                    work->hdrSurfaceHalf->dimensions.height = work->sceneSurface->dimensions.height >> 1;
                 } else if (i == 1) {
-                    surfaceCopy(work->first, work->second);
-                    work->second->width = work->first->width >> 1;
-                    work->second->height = work->first->height >> 1;
+                    surfaceCopy(work->hdrSurfaceHalf, work->hdrSurfaceQuarter);
+                    work->hdrSurfaceQuarter->dimensions.width = work->hdrSurfaceHalf->dimensions.width >> 1;
+                    work->hdrSurfaceQuarter->dimensions.height = work->hdrSurfaceHalf->dimensions.height >> 1;
                 } else {
-                    surfaceCopy(work->second, work->second);
-                    work->second->width >>= 1;
-                    work->second->height >>= 1;
+                    surfaceCopy(work->hdrSurfaceQuarter, work->hdrSurfaceQuarter);
+                    work->hdrSurfaceQuarter->dimensions.width >>= 1;
+                    work->hdrSurfaceQuarter->dimensions.height >>= 1;
                 }
             }
         } else {
             for (s32 i = 0; i < levels; ++i) {
-                surfaceCopy(work->source, work->source);
-                work->source->width >>= 1;
-                work->source->height >>= 1;
+                surfaceCopy(work->sceneSurface, work->sceneSurface);
+                work->sceneSurface->dimensions.width >>= 1;
+                work->sceneSurface->dimensions.height >>= 1;
             }
         }
-        work->done = 1;
-        work->pending = 0;
+        work->hdr.capturedLeft = 1;
+        work->hdr.capturedRight = 0;
     }
     return 0;
 }

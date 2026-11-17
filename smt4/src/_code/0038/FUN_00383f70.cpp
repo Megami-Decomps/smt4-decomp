@@ -2,9 +2,9 @@
 #include "ui/DebugItemList.h"
 #include "camp/RenderCtx.h"
 #include "text/TextDraw.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 extern const char DAT_00405890[];
 extern const char DAT_004058c8[];
 void gxSubmitDrawZeroExtraParams(u32 red, u32 green, u32 blue, u32 alpha, f32 x, f32 y, f32 width, f32 height, f32 scale);

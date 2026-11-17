@@ -28,7 +28,7 @@ u32 FUN_004c8ee0(BtlCombatantEntryA *entry, u32 oldStatus, u32 argument)
         (battleFlags & masks->blockedTransitions) ||
         (battleFlags & masks->blockedMessages))
         return 0;
-    u32 status = entry->statusFlags;
+    u32 status = entry->data.statusFlags;
     if ((status & 8) && !(oldStatus & 8))
         return FUN_004c9160(0x24, entry, 0, argument);
     if ((status & 0x200) && !(oldStatus & 0x200))
@@ -37,7 +37,7 @@ u32 FUN_004c8ee0(BtlCombatantEntryA *entry, u32 oldStatus, u32 argument)
         return FUN_004c9160(0x14, entry, 0, argument);
     if ((status & 0x2000) && !(oldStatus & 0x2000) && !(entry->flags & masks->restrictedEntry))
         return FUN_004c9160(0x3d, entry, 0, argument);
-    if (btlFindEntryValue(entry->unitIndex, 0xd) > 0)
+    if (btlFindEntryValue(entry->ids[0], 0xd) > 0)
         return FUN_004c9160(0x1f, entry, 0, argument);
     if ((entry->flags & masks->specialEntry) && playerHasFlagBit(1))
         return FUN_004c8e30(0x15, 0, argument);

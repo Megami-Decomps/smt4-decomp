@@ -1,12 +1,8 @@
 #include "gamedata/NkmBaseRecordA.h"
+#include "status/StatusDownA.h"
 
-struct StatusDownState {
-    /* 0x000 */ u8 unk000[0x598];
-    /* 0x598 */ s16 cursorIndex;
-};
 
 extern "C" {
-extern StatusDownState *g_statusDown;
 u8 FUN_002c7e3c(void);
 u8 FUN_002c7e54(void);
 u16 *FUN_002c7e24(void);
@@ -17,7 +13,7 @@ u32 fieldStateAllowsAction(void);
 u32 statusDownGetHelpMessage(s32 kind)
 {
     u32 message = 0;
-    StatusDownState *state = g_statusDown;
+    StatusDownStateA *state = g_statusDown;
     if (state != NULL) {
         s32 inBattle = 0;
         u8 mode = FUN_002c7e3c();
@@ -40,7 +36,7 @@ u32 statusDownGetHelpMessage(s32 kind)
                 if (fieldStateAllowsAction() != 0) {
                     message = 251;
                 }
-            } else if (state->cursorIndex < 0) {
+            } else if ((s16)state->selectedEntry < 0) {
                 message = 31;
                 if (fieldStateAllowsAction() != 0) {
                     message = 249;

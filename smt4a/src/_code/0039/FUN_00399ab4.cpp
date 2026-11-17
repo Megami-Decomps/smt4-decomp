@@ -1,12 +1,12 @@
 /* NON_MATCHING: scissor-stack address calculation, clamp registers and branch layout differ. */
 #include "shard/S1ListPanel.h"
+#include "camp/RenderCtxA.h"
 extern "C" {
 s32 asdGxGetPresetIndex(void);
 u32 FUN_00169d8c(s32 preset);
 u32 FUN_00169db4(s32 preset);
 void cursorResetFromParam(void);
 void asdModelCommandBlockRelease(void);
-extern RenderCtxScissorA *g_renderCtx;
 extern u32 *g_modelCommandBuffer;
 extern u32 g_modelCommandWordCount;
 

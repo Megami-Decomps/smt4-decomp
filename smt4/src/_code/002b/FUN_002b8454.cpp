@@ -1,8 +1,7 @@
 /* NON_MATCHING: retained queued-value base matches; saved-register allocation for queued arrays, sentinel and active flag still differs. */
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 
 extern "C" {
-extern ButtonHelpGlobals g_buttonHelp;
 extern ButtonHelpQueuedSelections DAT_0043da50;
 
 // Set an indexed help item immediately, or defer it until active help animations finish.

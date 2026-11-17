@@ -1,5 +1,5 @@
 /* NON_MATCHING: only the apply-path target calculation uses r1/r0/r5 instead of retail r0/r1/ip (112/112 rows). */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "battle/BattleUnitSlot.h"
@@ -36,21 +36,21 @@ u32 btlScriptSetPartyStatus()
     for (s32 slot = 0; slot < 4; ++slot) {
         BtlEntry* entry = &state->entries[slot];
         if (!(entry->flags & BTL_ENTRY_FLAG_ACTIVE) ||
-            (entry->flags & BTL_ENTRY_FLAG_BLOCKED) || entry->members.ids[0] < 0) {
+            (entry->flags & BTL_ENTRY_FLAG_BLOCKED) || entry->ids[0] < 0) {
             continue;
         }
         if (apply && checkResistance &&
-            (FUN_00246134(entry->members.ids[0], FUN_002463e8(status), 2, -1) &
+            (FUN_00246134(entry->ids[0], FUN_002463e8(status), 2, -1) &
              0x10000)) {
             FUN_00246080(0, 0, source,
-                         &table->actions[entry->members.ids[0]], 4);
+                         &table->actions[entry->ids[0]], 4);
             btlQueueKeyedScalarReflectAction(0, source, 0x10001ea, 0, 1, 0, 0);
             continue;
         }
         if (!apply) {
-            FUN_00246d38(0, source, &table->actions[entry->members.ids[0]], mask);
+            FUN_00246d38(0, source, &table->actions[entry->ids[0]], mask);
         } else {
-            FUN_00246e24(0, source, &table->actions[entry->members.ids[0]], mask, 1);
+            FUN_00246e24(0, source, &table->actions[entry->ids[0]], mask, 1);
             btlQueueKeyedScalarReflectAction(0, source, 0x10001bd, 0, 0, 0, 0);
         }
     }

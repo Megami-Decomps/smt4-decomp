@@ -3,6 +3,7 @@
 #include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 namespace {
 /* One row of the list (0x60 bytes). */
@@ -43,10 +44,6 @@ struct PanelColor {
     f32 r, g, b, a;
 };
 
-struct FixedRect {
-    s16 unk00[5];
-    s16 height;
-};
 }
 
 extern "C" {
@@ -55,7 +52,6 @@ void FUN_00164034(PanelColor *topLeft, PanelColor *topRight, PanelColor *bottomL
 void FUN_001692d4(void);
 void efctSetSpeed(f32 speed);
 f32 FUN_001f3f34(f32 a, f32 b, f32 c, f32 d);
-FixedRect *asdTMTexTableEntryAt(u32 group, u32 index);
 void FUN_003f8a24(void *panel, u32 id, RowEntry *row, f32 x, f32 y, f32 z);
 
 /* Draws the panel: a translucent full-screen fade, its two effect sprites and then each row at its slot. */

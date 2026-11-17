@@ -1,16 +1,12 @@
-#include "common.h"
+#include "camp/CampStateA.h"
 
-struct Camp {
-    u8 unk00[0x1C]; // 0x00
-    u32 state;     // 0x1C
-};
 
 extern "C" {
-extern Camp* g_camp;
 
+/* Whether the camp is open and in state 0x33. */
 u32 campIsState51(void)
 {
-    Camp* camp = g_camp;
+    CampStateA* camp = g_camp;
     if (camp == 0) {
         return 0;
     }

@@ -1,6 +1,6 @@
 /* NON_MATCHING: the latch is the 64-bit battle mask (branch layout now matches); retail copies the state pointer to ip and reaches the entries through add #8128 where the build uses a register offset, and the script-byte store addresses [slot, #9] differently. */
 #include "battle/btlAction.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "shard/W4_Match6_BtlScript.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
@@ -60,7 +60,7 @@ u32 btlAiWaitUiAndUpdatePartyGroup4Latch(void* work, BtlUnit* action)
     for (s32 i = 0; i < 4; ++i) {
         const BtlEntry& entry = main->entries[i];
         if ((entry.flags & BTL_ENTRY_FLAG_ACTIVE) &&
-            !(entry.flags & BTL_ENTRY_FLAG_BLOCKED) && (entry.groupMask & 0x10)) {
+            !(entry.flags & BTL_ENTRY_FLAG_BLOCKED) && (entry.data.statusFlags & 0x10)) {
             ++count;
         }
     }

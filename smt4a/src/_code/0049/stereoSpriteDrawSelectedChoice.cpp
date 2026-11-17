@@ -25,10 +25,10 @@ void stereoSpriteDrawSelectedChoice(const StereoSpriteOwner* owner, const Stereo
     if (stereoSpriteGroupIsReady(owner->resource->choices[0].group) &&
         stereoSpriteGroupIsReady(owner->resource->choices[1].group) && (s32)group > 0) {
         s32 spriteId = id + group * 1000;
-        s16 width = reinterpret_cast<SpriteInfo *>(asdTMTexTableEntryAt(0x33, spriteId))->size[0];
+        s16 width = asdTMTexTableEntryAt(0x33, spriteId)->placement->width;
         s32 parallax = renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
-        SpriteInfo* reference = reinterpret_cast<SpriteInfo *>(asdTMTexTableEntryAt(0x33, 29));
-        s32 drawX = reference->x + x + parallax + (reference->size[0] - width) / 2;
+        TextureTableEntryIV* reference = asdTMTexTableEntryAt(0x33, 29);
+        s32 drawX = reference->x + x + parallax + (reference->placement->width - width) / 2;
         s32 drawY = reference->y + y;
         efctSetSpeed(speed);
         texDrawTableEntryAtStoredOrigin(2, 0x33, spriteId, drawX, drawY, mode + 5);

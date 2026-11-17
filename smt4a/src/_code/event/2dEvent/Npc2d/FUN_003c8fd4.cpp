@@ -4,18 +4,11 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "shard/W6_W6Match8_NpcTextureEffect.h"
 #include "event/bustupEvent/BustupTex.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct NpcTableRecord {
     u8 unk00[0x24];
     u16 node; // 0x24: texture node of the NPC
-};
-
-// One entry of the texture table: the slot's anchor point and an optional second one.
-struct NpcTextureEntry {
-    u8 unk00[8];
-    s16 x;           // 0x08
-    s16 y;           // 0x0a
-    const s16 *extra; // 0x0c: optional {x, y} pair
 };
 
 extern "C" {
@@ -57,12 +50,12 @@ u32 FUN_003c8fd4(u32 id)
     work->record = FUN_00283498(id);
     work->node = work->record->node;
     for (u32 i = 0; i < 3; ++i) {
-        NpcTextureEntry *entry = reinterpret_cast<NpcTextureEntry *>(asdTMTexTableEntryAt(0x27, DAT_0052f4ec[i]));
+        TextureTableEntryIV *entry = asdTMTexTableEntryAt(0x27, DAT_0052f4ec[i]);
         work->points[i].x = entry->x;
         work->points[i].y = entry->y;
-        if (i == 0 && entry->extra != NULL) {
-            work->extra.x = entry->extra[0];
-            work->extra.y = entry->extra[1];
+        if (i == 0 && entry->placement != NULL) {
+            work->extra.x = entry->placement->width;
+            work->extra.y = entry->placement->height;
         }
     }
     work->points[1].x = 72.0f;

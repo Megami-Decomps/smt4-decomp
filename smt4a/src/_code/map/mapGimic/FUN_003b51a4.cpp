@@ -1,6 +1,7 @@
 /* NON_MATCHING: aggregate table addressing folds its prefix into indexed loads; initial register assignment and active-store order differ. */
 #include "shard/W5_W5Match7_SceneState.h"
 #include "code/Code0040.h"
+#include "Model/MoriModelManager.h"
 
 struct MapGimicIdentityView {
     u8 unk00[6];
@@ -29,7 +30,6 @@ struct MapGimicSetupGlobalsView {
 };
 
 extern "C" {
-extern void *g_handleRegistry;
 extern const char DAT_00531a48[];
 extern const char DAT_00531a78[];
 s32 gameFlagIsSet(s32 flag);
@@ -39,7 +39,6 @@ void moriModelContentLoadBody(MapGimicResource *resource, s32 index);
 void controllerSetDestination(void *controller, const MapVector *position);
 void controllerSetRotationEulerDegrees(void *controller, f32 x, f32 y, f32 z);
 void modelPlayClip(void *controller, s32 mode, s32 flags, f32 first, f32 second);
-void handleRegistryRegisterObject(void *registry, void *object);
 
 /* Find the map's matching gimmick, create its model and register the controller. */
 void FUN_003b51a4(void)

@@ -1,6 +1,6 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 
 namespace {

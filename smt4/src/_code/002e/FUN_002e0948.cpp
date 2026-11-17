@@ -1,6 +1,7 @@
 #include "camp/RenderCtx.h"
 #include "code/Code0028.h"
 #include "util/BitsAndBytes.h"
+#include "camp/RenderCtxTitle.h"
 
 /* The terminal's four slots (0xC bytes each); only the handle and its in-use flag are used here. */
 struct TerminalSlot {
@@ -19,7 +20,6 @@ typedef char TerminalScreenSlotsOffsetCheck[offsetof(TerminalScreen, slots) == 0
 
 extern "C" {
 extern TerminalScreen *g_tmnl;
-extern RenderCtx *g_titleScene;
 s32 renderCtxPackPassFlags(u32 first, u32 second);
 s32 effectNodeUpdatePlacedChildren(u32 handle);
 

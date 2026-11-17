@@ -14,8 +14,8 @@ s32 btlSourceGetMaxHp(const BtlUnitSource *source)
         for (s32 i = 0; i < 0x6d; ++i) {
             BtlEntry *unit = &g_btlMainState.state->entries[i];
             if ((unit->flags & 1) && !(unit->flags & 0x40) &&
-                (unit->flags & 2) && unit->source == source) {
-                maxHp = unit->maxHp;
+                (unit->flags & 2) && unit->data.source == source) {
+                maxHp = unit->data.maxHp;
                 break;
             }
         }

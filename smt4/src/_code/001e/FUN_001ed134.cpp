@@ -1,9 +1,9 @@
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match5_CommonBackground.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 s32 renderCtxPackPassFlags(u32 mode, u32 flags);
 void efctSetSpeed(f32 opacity);
 

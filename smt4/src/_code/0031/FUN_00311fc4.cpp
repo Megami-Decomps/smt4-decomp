@@ -1,5 +1,5 @@
 /* NON_MATCHING: btlEntryHasCategoryThreeSkill shape; only the second equipment loop swaps the base/offset registers of its id load (retail ldr r0 / add r1, built ldr r1 / add r0). */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
 #include "gamedata/SkillDataRecord.h"
 #include "gamedata/NkmBaseRecord.h"
@@ -10,24 +10,24 @@ extern "C" {
 /* Whether one of the entry's equipped skills or its demon's default skills has the encoded category. */
 static __inline u32 entryHasSkillCategory(const BtlEntry *entry, u32 category)
 {
-    if (entry->equipA != NULL) {
+    if (entry->data.equipA != NULL) {
         for (s32 index = 0; index < 8; ++index) {
-            const SkillDataRecord *skill = skillDataFindById(entry->equipA->items[index]);
+            const SkillDataRecord *skill = skillDataFindById(entry->data.equipA->items[index]);
             if (skill != NULL && skill->skillProperties.category == category) {
                 return 1;
             }
         }
     }
-    if (entry->equipB != NULL) {
+    if (entry->data.equipB != NULL) {
         for (s32 index = 0; index < 8; ++index) {
-            const SkillDataRecord *skill = skillDataFindById(entry->equipB->items[index]);
+            const SkillDataRecord *skill = skillDataFindById(entry->data.equipB->items[index]);
             if (skill != NULL && skill->skillProperties.category == category) {
                 return 1;
             }
         }
     }
-    if (entry->devil != NULL) {
-        NkmBaseRecord *demon = reinterpret_cast<NkmBaseRecord *>(nkmBaseGetRecord(entry->id));
+    if (entry->data.devil != NULL) {
+        NkmBaseRecord *demon = reinterpret_cast<NkmBaseRecord *>(nkmBaseGetRecord(entry->data.id));
         for (s32 index = 0; index < 8; ++index) {
             const SkillDataRecord *skill = skillDataFindById(demon->skills[index]);
             if (skill != NULL && skill->skillProperties.category == category) {

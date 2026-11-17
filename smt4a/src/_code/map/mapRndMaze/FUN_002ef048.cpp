@@ -2,10 +2,10 @@
 #include "map/mapRndMaze.h"
 #include "Model/ModelList.h"
 #include "code/Code0040.h"
+#include "Model/MoriModelManager.h"
 
 extern "C" {
 extern MapRndMazeA g_mapRndMaze;
-extern void *g_handleRegistry;
 void *gameFlagsGetBlock();
 f32 mathPositionHeadingDegrees(f32 x, f32 y, f32 z, f32 targetX, f32 targetY, f32 targetZ);
 f32 calcHeadingRoundedToCardinalDirection(f32 heading);
@@ -14,7 +14,6 @@ f32 libm_cosf(f32 radians);
 void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 ModelList *modelListInit(ModelList *model);
 void moriModelContentLoadBody(ModelList *model, s32 mode);
-void handleRegistryRegisterObject(void *registry, MoriModelBody *controller);
 void controllerSetDestination(MoriModelBody *controller, const f32 position[3]);
 void controllerSetRotationEulerDegrees(MoriModelBody *controller, f32 x, f32 y, f32 z);
 

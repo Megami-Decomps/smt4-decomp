@@ -27,11 +27,6 @@ struct MessageWindowDrawState {
     /* 0x17D0 */ u8 firstWindow[0x8C];
     /* 0x185C */ u8 secondWindow[0x8C];
 };
-struct MessageDrawPosition {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-};
 typedef char MessageWindowDrawStateSizeCheck[sizeof(MessageWindowDrawState) == 0x18E8 ? 1 : -1];
 
 struct MessageImageSelector {
@@ -59,15 +54,6 @@ struct MessageDrawTransform {
     /* 0x04 */ s32 x;
     /* 0x08 */ s32 y;
 };
-struct MessageDrawSize {
-    /* 0x00 */ s16 width;
-    /* 0x02 */ s16 height;
-};
-struct MessageDrawItem {
-    /* 0x00 */ MessageDrawPosition position;
-    /* 0x0C */ const MessageDrawSize *size;
-};
 typedef char MessageDrawTransformSizeCheck[sizeof(MessageDrawTransform) == 0x0C ? 1 : -1];
-typedef char MessageDrawItemSizeCheck[sizeof(MessageDrawItem) == 0x10 ? 1 : -1];
 
 #endif

@@ -1,7 +1,5 @@
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
-
-extern "C" UniteWork *g_unite;
 
 static inline s32 compareFusionDemons(u32 first, u32 second)
 {
@@ -19,7 +17,7 @@ static inline s32 compareFusionDemons(u32 first, u32 second)
 
 extern "C" s32 FUN_002b27d4(const u16 *first, const u16 *second)
 {
-    UniteWork *work = g_unite;
+    UniteWorkA *work = g_unite;
     u32 left = work->pairList.pairs[*first].packedIds;
     u32 right = work->pairList.pairs[*second].packedIds;
     s32 order = compareFusionDemons(left & 0x7FFF, right & 0x7FFF);

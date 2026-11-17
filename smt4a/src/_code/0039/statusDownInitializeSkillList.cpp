@@ -1,96 +1,66 @@
 /* NON_MATCHING: menu-owned slot copies and parent-relative selector setup match; final state/phase reset uses two stores instead of retail's paired stm. */
-#include "status/StatusDown.h"
+#include "status/StatusDownA.h"
 #include "gamedata/GamePlayerData.h"
 
-struct StatusSkillEntry {
-    union {
-        u32 idWord;
-        struct { u16 id; u16 unk02; } skill;
-    };
-    s32 level;
-};
-
-struct StatusSkillMenu {
-    StatusSkillEntry entries[8];
-    s32 count;
-    u8 changed;
-    u8 unk45[3];
-    s32 selection[2];
-    PlayerDataA *source;
-    u8 controller[0x64];
-    u32 state;
-    u32 phase;
-    u8 unkc0[0x14];
-    u8 activatedSession;
-};
-
-struct StatusSkillScreen {
-    u8 unk000[0x598];
-    s16 selectedUnit;
-    u8 unk59a[0x1f12];
-    StatusSkillMenu menu;
-};
-
-static inline void copyStatusSkillSlots(StatusSkillMenu *menu,
+static inline void copyStatusSkillSlots(StatusDownSkillMenuA *menu,
                                         const PlayerDataA *source, s32 count)
 {
     for (s32 index = 0; index < count; ++index) {
-        menu->entries[index].skill.id = source->skills[index];
-        menu->entries[index].level = source->skillRanks[index];
+        menu->rows[index].id = source->skills[index];
+        menu->rows[index].level = source->skillRanks[index];
     }
 }
 
 extern "C" {
-extern StatusDownStateA *g_statusDown;
 PlayerDataA *slotRecordFindById(u16 id);
 s32 countUnlockedSlots();
 s32 getUnlockedSlotCount();
 void fillTwoWordsWithByte(u32 *destination, u32 value);
 u8 FUN_002c7e3c();
-void gridNavigationConfigure(void *controller, s32 items, s32 visible, s32 columns,
+void gridNavigationConfigure(GridNavigation *controller, s32 items, s32 visible, s32 columns,
                   s32 option, s32 secondOption);
 s32 FUN_002857b8();
 void gameGlobalsSetMenuOpenFlag(u8 value);
 
 void statusDownInitializeSkillList()
 {
-    StatusSkillScreen *screen = (StatusSkillScreen *)g_statusDown;
-    StatusSkillMenu *menu = &screen->menu;
-    menu->entries[0].idWord = 0;
+    StatusDownStateA *screen = g_statusDown;
+    StatusDownSkillMenuA *menu = &screen->menu;
+    menu->rows[0].idWord = 0;
     menu->state = 1;
-    menu->entries[0].level = 0;
-    menu->entries[1].idWord = 0;
-    menu->entries[1].level = 0;
-    menu->entries[2].idWord = 0;
-    menu->entries[2].level = 0;
-    menu->entries[3].idWord = 0;
-    menu->entries[3].level = 0;
-    menu->entries[4].idWord = 0;
-    menu->entries[4].level = 0;
-    menu->entries[5].idWord = 0;
-    menu->entries[5].level = 0;
-    menu->entries[6].idWord = 0;
-    menu->entries[6].level = 0;
-    menu->entries[7].idWord = 0;
-    menu->entries[7].level = 0;
+    menu->rows[0].level = 0;
+    menu->rows[1].idWord = 0;
+    menu->rows[1].level = 0;
+    menu->rows[2].idWord = 0;
+    menu->rows[2].level = 0;
+    menu->rows[3].idWord = 0;
+    menu->rows[3].level = 0;
+    menu->rows[4].idWord = 0;
+    menu->rows[4].level = 0;
+    menu->rows[5].idWord = 0;
+    menu->rows[5].level = 0;
+    menu->rows[6].idWord = 0;
+    menu->rows[6].level = 0;
+    menu->rows[7].idWord = 0;
+    menu->rows[7].level = 0;
     fillTwoWordsWithByte((u32 *)screen->menu.selection, ~0u);
     menu->changed = 0;
     menu->source = NULL;
     FUN_002c7e3c();
-    if (screen->selectedUnit <= 0) {
+    if ((s16)screen->selectedEntry <= 0) {
         const PlayerDataA *source = gameGetPlayerData();
         s32 count = countUnlockedSlots();
         menu->count = count;
         copyStatusSkillSlots(menu, source, count);
     } else {
-        PlayerDataA *source = slotRecordFindById((u16)screen->selectedUnit);
+        PlayerDataA *source = slotRecordFindById(screen->selectedEntry);
         menu->source = source;
         s32 count = getUnlockedSlotCount();
         menu->count = count;
         copyStatusSkillSlots(menu, source, count);
     }
     s32 items = menu->count + 1;
-    gridNavigationConfigure(menu->controller, items, items, 1, 1, 1);
+    gridNavigationConfigure(&menu->controller, items, items, 1, 1, 1);
     menu->activatedSession = 0;
     if (FUN_002857b8() == 0) {
         gameGlobalsSetMenuOpenFlag(1);

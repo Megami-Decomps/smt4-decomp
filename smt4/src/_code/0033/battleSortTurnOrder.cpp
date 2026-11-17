@@ -16,10 +16,10 @@ extern "C" void battleSortTurnOrder(BtlMainState *state, s32 start)
                     s16 current = state->turnOrder.order[first];
                     const BtlEntry *currentUnit = &state->entries[current];
                     const BtlEntry *candidateUnit = &state->entries[candidate];
-                    s16 currentSpeed = currentUnit->speed + currentUnit->speedBonus;
-                    s16 candidateSpeed = candidateUnit->speed + candidateUnit->speedBonus;
+                    s16 currentSpeed = currentUnit->data.agility + currentUnit->data.speedBonus;
+                    s16 candidateSpeed = candidateUnit->data.agility + candidateUnit->data.speedBonus;
                     if (currentSpeed < candidateSpeed
-                        || (currentSpeed == candidateSpeed && candidateUnit->members.ids[0] < currentUnit->members.ids[0])) {
+                        || (currentSpeed == candidateSpeed && candidateUnit->ids[0] < currentUnit->ids[0])) {
                         state->turnOrder.order[first] = candidate;
                         state->turnOrder.order[second] = current;
                     }

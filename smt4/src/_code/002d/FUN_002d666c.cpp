@@ -1,8 +1,7 @@
 /* NON_MATCHING: retail recomputes the unit address (add #892; field offsets +58/+60) for each access and keeps the zero in r7 shared with the loop counter; ours folds the field offsets into one store address and keeps constants 2/1 in saved registers. */
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 
 extern "C" {
-extern ButtonHelpGlobals g_buttonHelp;
 void uiStoreTextureEntryCenter(ButtonHelpDisplayUnit *unit, s32 value, s32 option);
 
 // Address of one of the two display units.

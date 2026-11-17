@@ -2,6 +2,7 @@
 #include "common.h"
 #include <stddef.h>
 #include "network/DataStore/DataStoreMain.h"
+#include "Model/MoriModelManager.h"
 
 #define SHOP_TAB_NONE 7
 
@@ -53,7 +54,6 @@ s32 recordGetModeForId(s32 id);
 void gameSetStatusCameraHeightMode(s32 mode);
 s32 FUN_0040ab8c(ShopCursorObject *object);
 void moriModelContentLoadBody(ShopCursorObject *object, s32 mode);
-void handleRegistryRegisterObject(u32 registry, void *model);
 void controllerSetPositionXyz(void *model, f32 x, f32 y, f32 z);
 void FUN_004954e8(ShopScreen *shop);
 void messageChoiceShowCurrent(ShopScreen *shop);
@@ -72,7 +72,6 @@ void FUN_0049af90(ShopScreen *shop);
 void menuOpenCommandList(ShopScreen *shop);
 void FUN_00498de0(ShopScreen *shop);
 
-extern u32 g_handleRegistry;
 extern ShopTabNeighbors g_shopTabNeighbors;
 
 /* Tabs 3-5 each keep a marker that is cleared when the tab is left. */

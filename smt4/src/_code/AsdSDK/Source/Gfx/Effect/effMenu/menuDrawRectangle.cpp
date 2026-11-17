@@ -2,11 +2,11 @@
 #include "shard/W6_W6Match7_MenuRectangle.h"
 #include "camp/RenderCtx.h"
 #include "shard/Shard0036.h"
+#include "camp/RenderCtxTitle.h"
 
 struct AsdTexture;
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 extern MenuDrawPoint DAT_004724cc;
 
 u32 renderCtxPackPassFlags(u32 value, bool enabled);

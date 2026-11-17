@@ -1,5 +1,5 @@
 /* NON_MATCHING: condition switch lowers to comparisons, initialization stores reorder and controller registers differ; -O2 candidate. */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "shard/W4_Match6_BtlScript.h"
 #include "battle/BtlMainAccess.h"
@@ -47,11 +47,11 @@ u32 btlEventSelectTrigger(BattleEventController *controller, u32 type, s32 slot,
             BtlEntry *unit = &battle->entries[slot];
             switch (event->condition) {
             case 1:
-                if (special || unit->id != event->unitId)
+                if (special || unit->data.id != event->unitId)
                     continue;
                 break;
             case 2:
-                if (!special || unit->id != event->unitId)
+                if (!special || unit->data.id != event->unitId)
                     continue;
                 break;
             case 3:

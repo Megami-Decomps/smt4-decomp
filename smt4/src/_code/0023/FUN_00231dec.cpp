@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "game/GameState.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -53,7 +54,6 @@ extern unsigned int vec2GetXInt(int);
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
 /* Supplied declaration required: texDrawCompositeSprite. */
-extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: libc_strcpy. */
 extern int gameFlagIsSet(unsigned int);
@@ -132,7 +132,7 @@ void FUN_00231dec(int param_1)
   if (*(char *)(param_1 + 0x12268) != '\0') {
     temp_v3 = curveEvaluateStandard(temp_v9,2);
     temp_v14 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v5 = asdTMTexTableEntryAt(0x1c,0xfb4);
+    temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1c,0xfb4));
     temp_v12 = (float)VectorSignedToFloat((int)*(short *)(temp_v5 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v13 = (float)VectorSignedToFloat((int)*(short *)(temp_v5 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v12 = (float)VectorSignedToFloat((int)(temp_v12 + temp_v16) +

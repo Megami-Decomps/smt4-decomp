@@ -1,16 +1,14 @@
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 
 extern "C" {
-
-extern MapIfGlobalsA g_mapIf;
 
 void mapIfClose(void)
 {
     MapIfStateA *state = g_mapIf.state;
 
-    if (state->unkCCE8 != 0) {
-        state->unkCCE8 = 3;
-        state->unkCCEA = 0;
+    if (state->notice.state != 0) {
+        state->notice.state = 3;
+        state->notice.frame = 0;
     }
 }
 

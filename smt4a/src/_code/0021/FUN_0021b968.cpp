@@ -7,7 +7,7 @@ extern "C" void FUN_0015f490(u32 handle, s32 kind, s32 enabled, s32 flags, f32 s
 
 extern "C" void FUN_0021b968(EngineUnits *units, s32 slot, u32 handle, s32 animate)
 {
-    SaveSlotTable *table = gameGetSlotTable();
+    SaveSlotTableA *table = gameGetSlotTable();
     s32 reserve;
     for (reserve = 0; reserve < 3; ++reserve) {
         s32 member = table->reserve[reserve];

@@ -1,9 +1,9 @@
 #include "shard/Shard0034.h"
 #include "shard/W6_W6Match6_PartyPanel.h"
 #include "gamedata/GamePlayerData.h"
+#include "gamedata/SaveSlotRecord.h"
 
 extern "C" {
-PlayerData *gameGetSlotRecord(s32 slot);
 PlayerData *btlMainGetUnk14(void);
 u32 markerKindGetColor(u32 kind);
 
@@ -34,7 +34,7 @@ u32 FUN_003f3f08(const PartyPanelWidget *widget)
             markerMask = (u16)subject->unk60;
         }
     } else if (selector >= 0) {
-        markerMask = (u16)gameGetSlotRecord(selector)->unk60;
+        markerMask = gameGetSlotRecord(selector)->ailments;
     }
     s32 ordinal = 0;
     for (s32 kind = 1; kind < 14; ++kind) {

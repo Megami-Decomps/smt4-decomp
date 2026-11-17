@@ -1,9 +1,8 @@
 #include "shard/TextureDrawCall.h"
-#include "camp/CampState.h"
+#include "camp/CampStateA.h"
 #include "code/Code0026_Smt4a.h"
 
 extern "C" {
-extern CampStateA *g_camp;
 void efctSetSpeed(f32);
 f32 vec2GetSpeed(const void *object);
 void texDrawCompositeSprite(s32, s32, s32, s32, s32, s32);

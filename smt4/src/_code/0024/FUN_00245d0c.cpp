@@ -1,5 +1,5 @@
 /* NON_MATCHING: Saved float registers, zero-buffer/conversion scheduling and ailment-name block order differ. */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 #include "util/Random.h"

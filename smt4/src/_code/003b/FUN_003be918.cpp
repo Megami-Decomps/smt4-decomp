@@ -23,7 +23,7 @@ void *skillDataFindById(void *player);
 u32 playerGetSkillRank(void *player);
 s32 FUN_00283ebc(void *record, u32 rank, s32 flag);
 
-// Damage of an attack by `attackerId` on `targetId`: the level-scaled base power through the combatants' stat
+// Damage of an attack by `attackerId` on `targetId`: the magic-scaled base power through the combatants' stat
 // factors, the attack's power percent, the skill bonus and the target's resistance for the attack.
 s32 FUN_003be918(void *player, s32 attackerId, s32 targetId, s32 first, f32 base, f32 rate, s32 second)
 {
@@ -32,7 +32,7 @@ s32 FUN_003be918(void *player, s32 attackerId, s32 targetId, s32 first, f32 base
     BtlMainState *state = btlGetMainState();
     BtlUnitData *attacker = btlFindEntryBlockByMemberId(state, attackerId);
     BtlUnitData *target = btlFindEntryBlockByMemberId(state, targetId);
-    f32 level = (f32)attacker->level;
+    f32 magic = (f32)attacker->magic;
     if (attacker->flags & 4) {
         sideFactor = 0.8f;
     }
@@ -52,7 +52,7 @@ s32 FUN_003be918(void *player, s32 attackerId, s32 targetId, s32 first, f32 base
         }
     }
 
-    f32 damage = (base + level * 4.5f) * 0.33333334f * rate * stats * sideFactor * ((f32)info.powerPercent * 0.01f) /
+    f32 damage = (base + magic * 4.5f) * 0.33333334f * rate * stats * sideFactor * ((f32)info.powerPercent * 0.01f) /
                      ((f32)(first + second) * 0.5f) +
                  zero + (f32)skillBonus;
     if ((state->battleFlags & 0x40000) == 0) {

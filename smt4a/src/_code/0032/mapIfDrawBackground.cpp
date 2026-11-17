@@ -1,11 +1,10 @@
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 #include "game/GameStateA.h"
 
 extern "C" {
 
 void renderCtxSelectTexture(u32 a, MapIfWidget *widget);
 
-extern MapIfGlobalsA g_mapIf;
 extern u32 g_renderCtx;
 
 void mapIfDrawBackground(void)

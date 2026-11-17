@@ -1,4 +1,4 @@
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 
@@ -28,14 +28,14 @@ u32 FUN_002ff624(void)
     for (s32 i = first; i < first + count; ++i) {
         BtlEntry *entry = &btlGetMainState()->entries[i];
         if ((entry->flags & 0x10) == 0 && (entry->flags & 1) != 0 &&
-            (entry->flags & 0x40) == 0 && entry->id == id && entry->stat[column] == value) {
+            (entry->flags & 0x40) == 0 && entry->data.id == id && entry->stat[column] == value) {
             scrSetResult(1);
             return 1;
         }
     }
     if (btlGetMainState()->hasActiveEntry != 0) {
         BtlEntry *entry = btlMainFindActiveEntry(btlGetMainState());
-        if (entry != NULL && entry->id == id && entry->stat[column] == value) {
+        if (entry != NULL && entry->data.id == id && entry->stat[column] == value) {
             scrSetResult(1);
             return 1;
         }

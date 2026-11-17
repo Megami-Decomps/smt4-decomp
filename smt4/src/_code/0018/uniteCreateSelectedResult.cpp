@@ -1,7 +1,7 @@
 /* NON_MATCHING: packed-selection loads and three member snapshots use different registers and stack placement. */
 #include "common.h"
 #include "gamedata/NkmBaseRecord.h"
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteWork.h"
 #include <stddef.h>
 #include "gamedata/SkillFlags.h"
 

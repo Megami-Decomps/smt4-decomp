@@ -1,14 +1,9 @@
-#include "common.h"
+#include "font/InfoWin.h"
 #include "code/Code002b_Smt4.h"
 
 extern "C" {
 
-typedef struct Obj {
-    /* 0x0 */ u8 unk0[8];
-    /* 0x8 */ s32 state;
-} Obj;
 
-extern Obj *g_infoWin;
 
 u8 infoWindowIsActive(void)
 {

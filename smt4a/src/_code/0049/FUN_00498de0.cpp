@@ -2,6 +2,7 @@
 #include "common.h"
 #include "addon/AocEntryKind.h"
 #include "network/DataStore/DataStoreMain.h"
+#include "gamedata/GamePlayerData.h"
 
 /* One list entry: the item id and its detail word. */
 struct EquipListEntry {
@@ -34,7 +35,6 @@ struct PlayerEquipmentBlock {
 };
 
 extern "C" {
-void *gameGetPlayerData(void);
 s32 flaggedValueHolderGetTotal(void *holder);
 u32 uiStateHasAnyActiveFlag(void *holder);
 void FUN_002f0384(s32 mode);

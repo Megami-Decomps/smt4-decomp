@@ -1,35 +1,22 @@
 #include "title/titleMain.h"
 #include "common.h"
+#include "frame_tex/FrameTex.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 
-typedef struct Panel {
-    /* 0x00 */ u8 unk00[0x9A];
-    /* 0x9A */ u8 shown;
-    /* 0x9B */ u8 unk9B;
-    /* 0x9C */ u8 enabled;
-} Panel;
-
-typedef struct Context {
-    /* 0x000 */ u8 unk000[0xF00];
-    /* 0xF00 */ Panel panel;
-} Context;
-
-extern TitleScene *g_titleScene;
-
 int FUN_001132fc(int arg);
 int stateValuesGetBySelector(int arg);
-Context *jobGetWork(void);
 
-/* Script command: if the panel is shown and enabled and stateValuesGetBySelector reports nothing pending, runs renderCtxSelectStereoLayout/FUN_001132fc. Always returns 0. */
-u8 FUN_00109520(void)
+/* Fade set's right draw: once the fade is enabled and its left capture is done, and no state selector is set, draws the fade on the right screen. Always returns 0. */
+u8 FUN_00109520(u32 job)
 {
-    Panel *panel = &jobGetWork()->panel;
+    FrameTexWork *work = (FrameTexWork *)jobGetWork(job);
 
-    if (panel->shown == 0) {
+    if (work->fadeEnabled == 0) {
         return 0;
     }
-    if (panel->enabled == 0) {
+    if (work->fadeCapturedLeft == 0) {
         return 0;
     }
     if (stateValuesGetBySelector(0) != 0) {

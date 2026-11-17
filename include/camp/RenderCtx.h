@@ -57,6 +57,10 @@ typedef struct RenderCtx {
         } additional;
     };
     /* 0x12AC */ RenderStateStack stackB;
+    /* 0x12CC */ u8 unk12CC[0x40];
+    /* 0x130C */ RenderStateStack scissor;        /* scissoring on (RENDER_STATE_SCISSOR) or off */
+    /* 0x132C */ RenderStateStack scissorMinimum; /* y | x << 16 */
+    /* 0x134C */ RenderStateStack scissorMaximum;
 } RenderCtx;
 
 /* Apocalypse layout: the stacks are 0xC further on. */
@@ -97,7 +101,10 @@ typedef struct RenderCtxA {
             /* 0x067C */ u8 unk067C[0x80];
         } displayAreas;
     };
-    /* 0x06FC */ u32 unk6FC;
+    union {
+        /* 0x06FC */ u32 unk6FC;
+        /* 0x06FC */ u8 *camera; /* the active camera's node (view matrix at +0x38) */
+    };
     union {
         /* 0x0700 */ u8 unk0700[0xB58];
         struct {
@@ -130,10 +137,14 @@ typedef struct RenderCtxA {
         } additional;
     };
     /* 0x12B8 */ RenderStateStack stackB;
+    /* 0x12D8 */ u8 unk12D8[0x40];
+    /* 0x1318 */ RenderStateStack scissor;        /* scissoring on (RENDER_STATE_SCISSOR) or off */
+    /* 0x1338 */ RenderStateStack scissorMinimum; /* y | x << 16 */
+    /* 0x1358 */ RenderStateStack scissorMaximum;
 } RenderCtxA;
 
-typedef char RenderCtxSizeCheck[sizeof(RenderCtx) == 0x12CC ? 1 : -1];
-typedef char RenderCtxASizeCheck[sizeof(RenderCtxA) == 0x12D8 ? 1 : -1];
+typedef char RenderCtxSizeCheck[sizeof(RenderCtx) == 0x136C ? 1 : -1];
+typedef char RenderCtxASizeCheck[sizeof(RenderCtxA) == 0x1378 ? 1 : -1];
 typedef char RenderCtxCameraSelectionOffsetCheck[offsetof(RenderCtx, cameraSelection.type) == 0x5F4 ? 1 : -1];
 typedef char RenderCtxStereoOffsetCheck[
     offsetof(RenderCtx, stereo.camera) == 0x4A0 &&
@@ -144,7 +155,7 @@ typedef char RenderCtxStereoOffsetCheck[
     offsetof(RenderCtx, stereoMode) == 0x528 ? 1 : -1];
 typedef char RenderCtxDefaultViewOffsetsCheck[
     offsetof(RenderCtx, stereo.defaultView.depth) == 0x514 &&
-    offsetof(RenderCtx, stereo.defaultView.scale) == 0x518 && sizeof(RenderCtx) == 0x12CC ? 1 : -1];
+    offsetof(RenderCtx, stereo.defaultView.scale) == 0x518 && sizeof(RenderCtx) == 0x136C ? 1 : -1];
 typedef char RenderCtxAStereoOffsetCheck[
     offsetof(RenderCtxA, stereo.camera) == 0x4A0 &&
     offsetof(RenderCtxA, stereo.parameter) == 0x50C &&

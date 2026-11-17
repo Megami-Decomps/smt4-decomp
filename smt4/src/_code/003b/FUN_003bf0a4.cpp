@@ -1,5 +1,5 @@
 /* NON_MATCHING: Exclusion tests merge into one mask and event-slot writes use predication instead of retail's shared branches. */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include <stddef.h>
 #include "battle/BtlMainAccess.h"

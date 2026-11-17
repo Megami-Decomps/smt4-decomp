@@ -4,10 +4,10 @@
 #include "code/Code0037.h"
 #include "gfx/StereoParallax.h"
 #include "gfx/StereoParallax.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 extern "C" {
 s32 FUN_003e4978(void);
 void efctSetSpeed(f32 speed);
-const SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 sprite);
 s32 FUN_003e53ec(void);
 s32 FUN_003e48bc(void);
 void gxResetColorQuadToWhite(void);
@@ -33,20 +33,20 @@ void FUN_0037eb64(u32 mode, s32 x, s32 y, f32 speed)
             sprite = 0xBCB;
             placement = 0xC23;
         }
-        const SpriteInfo *origin = asdTMTexTableEntryAt(0x14, placement + i);
+        const TextureTableEntryIV *origin = asdTMTexTableEntryAt(0x14, placement + i);
         s32 spriteX = origin->x + x;
         s32 spriteY = origin->y + y;
         texDrawTableEntryAtStoredOrigin(2, 0x14, sprite, spriteX, spriteY, 0xC9);
     }
     if (FUN_003e48bc()) {
         for (s32 i = 0; i < 8; ++i) {
-            const SpriteInfo *origin = asdTMTexTableEntryAt(0x14, 0xC2B + i);
+            const TextureTableEntryIV *origin = asdTMTexTableEntryAt(0x14, 0xC2B + i);
             s32 spriteX = origin->x + x;
         s32 spriteY = origin->y + y;
         texDrawTableEntryAtStoredOrigin(2, 0x14, 0xC0D, spriteX, spriteY, 0xDD);
         }
         efctSetSpeed(speed);
-        const SpriteInfo *origin = asdTMTexTableEntryAt(0x14, 0xC14);
+        const TextureTableEntryIV *origin = asdTMTexTableEntryAt(0x14, 0xC14);
         s32 spriteX = origin->x + x;
         s32 spriteY = origin->y + y;
         texDrawTableEntryAtStoredOrigin(2, 0x14, 0xC0E, spriteX, spriteY, 0xDD);

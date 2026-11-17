@@ -8,7 +8,7 @@
 #include "battle/btlCamera.h"
 #include "battle/btlAction.h"
 #include "battle/BattleUnitSlot.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/BtlEntryLookup.h"
 
 extern "C" {

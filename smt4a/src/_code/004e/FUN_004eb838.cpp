@@ -19,7 +19,7 @@ static __inline void setScriptState(BtlMainStateA **owner, u8 command)
 void FUN_004eb838(BtlMainStateA **owner, BtlUnitA *unit)
 {
     if (!isEntryUsable(g_btlEvent)) {
-        s32 selection = unit->entry->indexView.selectionIndex;
+        s32 selection = unit->entry->selectionIndex;
         if (unit->data->actionKind != 11) {
             if (FUN_004d7a70(g_btlEvent, 3, selection, 0) != 0) {
                 setScriptState(owner, 0x1a);

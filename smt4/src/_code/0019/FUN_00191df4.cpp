@@ -1,9 +1,8 @@
 /* NON_MATCHING: preference pointer and ascending flag occupy swapped r5/r6 registers. */
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 #include "status/StatusCamera.h"
 
 extern "C" {
-extern UniteWork *g_unite;
 s32 devilCompareRaceLevelDescending(const u16 *, const u16 *);
 s32 devilCompareByRankGradeId(const u16 *, const u16 *);
 s32 FUN_001d1d78(const u16 *, const u16 *);

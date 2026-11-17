@@ -1,11 +1,9 @@
 /* NON_MATCHING: retail moves the roll to r1 before the mask test and loads the battle flag pair with ldrd (the build uses two ldr and keeps the roll in r0) */
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlEntryLookup.h"
 #include "battle/btlMain.h"
 #include "gamedata/SkillDataRecord.h"
 
-struct ChanceSkillUnit {
-    u64 flags; /* 0x00 */
-};
 struct ChanceBattleFlags {
     u8 unk0000[0x45a0];
     u64 flags; /* 0x45a0 */
@@ -17,15 +15,14 @@ struct ChanceSkillMasks {
 
 extern "C" {
 extern ChanceSkillMasks DAT_005713f0;
-ChanceSkillUnit *btlMainFindEntryByListedId(BtlMainStateA *state, u32 unitId);
-void source4CCopyHalves(ChanceSkillUnit *unit, u16 *skills);
+void source4CCopyHalves(BtlCombatantEntryA *unit, u16 *skills);
 s32 lcgRandomRange(u32 range);
 
 /* Rolls each of the unit's chance skills in order and returns the first that procs, or 0. */
 u16 FUN_004c5ec0(u32 unitId)
 {
     ChanceBattleFlags *battle = (ChanceBattleFlags *)btlGetMainState();
-    ChanceSkillUnit *unit = btlMainFindEntryByListedId((BtlMainStateA *)battle, unitId);
+    BtlCombatantEntryA *unit = btlMainFindEntryByListedId((BtlMainStateA *)battle, unitId);
     u16 skills[10] = {0};
     s32 i;
 

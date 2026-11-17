@@ -25,7 +25,7 @@ void FUN_004e7c04(BattleUnitRecordState* state, s32 unavailableOnly)
     u64 marked = g_btlAction.marked;
     for (s32 index = 0; index < 109; ++index) {
         BtlCombatantEntryA* entry = &state->battle->entries[index];
-        if (entry->indexView.selectionIndex >= 0) {
+        if (entry->selectionIndex >= 0) {
             u64 flags = entry->flags;
             if ((flags & required) && !(flags & excluded)) {
                 if (unavailableOnly != 1) {

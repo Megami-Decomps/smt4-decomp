@@ -1,7 +1,6 @@
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 
 extern "C" {
-extern ButtonHelpGlobalsA g_buttonHelp;
 
 // Check displayed button kinds, including compound actions, for an active requested action.
 u32 buttonHelpIsActionActive(u32 action)

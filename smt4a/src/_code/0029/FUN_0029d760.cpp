@@ -1,5 +1,5 @@
 /* NON_MATCHING: unkCD08 is now s8 (literal offset) and the gated return matches; the state/global loads are scheduled after the gate where retail loads them before the branch, and the (s32) coordinate pair is two vldr instead of one vldmia. */
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 #include "game/GameStateA.h"
 #include "shard/W5_W5Match7_SceneState.h"
 
@@ -9,7 +9,6 @@ void FUN_002b6cb0();
 void FUN_002b968c(MapIfGlobalsA *globals);
 void FUN_002cf8e4();
 void transitionDrawExpandingImages(u32 frame);
-extern MapIfGlobalsA g_mapIf;
 
 s32 FUN_0029d760(u32 handle)
 {

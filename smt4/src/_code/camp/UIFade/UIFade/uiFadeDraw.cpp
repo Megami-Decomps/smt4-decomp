@@ -3,6 +3,7 @@
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 #include "camp/UIFade/UIFade.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ int renderCtxResetColorScale(RenderCtx *ctx);
 int renderCtxPackPassFlags(u32 a, u32 b);
 
 extern UIFadeGlobals g_uiFade;
-extern RenderCtx *g_titleScene;
 
 void uiFadeDraw(u32 arg)
 {

@@ -3,9 +3,9 @@
 #include "util/BitsAndBytes_VariantA.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match8_TitleOverlay.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 void gxResetColorQuadToWhite(void);
 void texDrawCompositeSprite(u32 layer, u32 group, u32 image, s32 x, u32 color, s32 order);
 void efctSetSpeed(f32 speed);

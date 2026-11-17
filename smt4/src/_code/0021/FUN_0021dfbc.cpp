@@ -1,22 +1,12 @@
-#include "map/mapIf.h"
-
-struct MapIfResetState {
-    /* 0x00 */ u8 unk00[0x17];
-    /* 0x17 */ u8 unk17;
-};
-struct MapIfResetRecord {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ u32 unk08;
-};
+#include "map/MapIfGlobals.h"
 
 extern "C" {
-extern MapIfState *g_mapIf;
 
 /* Clears the interface flag and returns every active record in states 8-16 (even) to state 6, except the categories 0x1D-0x1F and 0x25-0x26. */
 void FUN_0021dfbc()
 {
-    MapIfState *state = g_mapIf;
-    ((MapIfResetState *)state)->unk17 = 0;
+    MapIfState *state = g_mapIf.state;
+    state->unk17 = 0;
     s32 index = 0;
     for (u32 left = 128; left != 0; --left) {
         if (state->records[index].active && state->records[index].display.category != 0x1d &&
@@ -25,7 +15,7 @@ void FUN_0021dfbc()
             if (state->records[index].state == 8 || state->records[index].state == 10 ||
                 state->records[index].state == 12 || state->records[index].state == 14 || state->records[index].state == 16) {
                 state->records[index].state = 6;
-                ((MapIfResetRecord *)&state->records[index])->unk08 = 1;
+                state->records[index].transition.restart = 1;
             }
         }
         index++;

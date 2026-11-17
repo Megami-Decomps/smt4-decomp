@@ -1,8 +1,7 @@
 /* NON_MATCHING: transform-clear loop unrolling, float triple stores and primary-position copy formation differ. */
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 
 extern "C" {
-extern MapIfGlobals g_mapIf;
 
 void FUN_00297a00()
 {

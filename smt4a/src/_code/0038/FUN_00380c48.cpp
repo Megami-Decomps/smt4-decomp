@@ -27,18 +27,18 @@ u32 FUN_00380c48(void)
     for (s32 index = 0; index < 4; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         if ((entry->flags & g_btlMessageFlagMasks.required) &&
-            !(entry->flags & g_btlMessageFlagMasks.excluded) && entry->unitIndex >= 0) {
-            s32 hp = (s32)((u32)entry->maxHp * hpPercent) / 100;
-            if ((entry->statusFlags & 8) && hp > 1)
+            !(entry->flags & g_btlMessageFlagMasks.excluded) && entry->ids[0] >= 0) {
+            s32 hp = (s32)((u32)entry->data.maxHp * hpPercent) / 100;
+            if ((entry->data.statusFlags & 8) && hp > 1)
                 hp = 1;
             else if (hp == 0)
                 hp = -1;
-            s32 mp = (s32)((u32)entry->maxMp * mpPercent) / 100;
-            if ((entry->statusFlags & 8) && mp > 1)
+            s32 mp = (s32)((u32)entry->data.maxMp * mpPercent) / 100;
+            if ((entry->data.statusFlags & 8) && mp > 1)
                 mp = 1;
             else if (mp == 0)
                 mp = -1;
-            BattleRosterRecordA *target = &btlGetMainState()->roster[entry->unitIndex];
+            BattleRosterRecordA *target = &btlGetMainState()->roster[entry->ids[0]];
             s32 delay = affected * 5;
             FUN_004fb798(0, unit, 0, target, 0, hp, mp, ~0u, flags, delay, delay, 9, 0, 0, 1);
             btlQueueActionMessage(delay, unit, 0x1000263, 0, 0, 0, 0);

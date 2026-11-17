@@ -1,11 +1,11 @@
 #include "title/titleMain.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 
-void renderCtxResetColorScale(TitleScene *scene);
-void renderCtxApplyTransforms(TitleScene *scene);
+void renderCtxResetColorScale(RenderCtx *scene);
+void renderCtxApplyTransforms(RenderCtx *scene);
 
-extern TitleScene *g_titleScene;
 
 void renderCtxEndPass(TitleDbgBgObj *bg)
 {

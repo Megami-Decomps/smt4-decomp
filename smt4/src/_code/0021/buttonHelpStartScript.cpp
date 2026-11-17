@@ -1,7 +1,6 @@
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 
 extern "C" {
-extern ButtonHelpGlobals g_buttonHelp;
 
 extern int scrScriptProcessStartEntry(u32 a, u32 b);
 

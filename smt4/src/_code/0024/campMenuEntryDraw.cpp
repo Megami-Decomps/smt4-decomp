@@ -1,5 +1,6 @@
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
+#include "camp/RenderCtxTitle.h"
 
 /* A menu entry's draw state: a mode, a selected row and an animation frame. */
 struct MenuEntryDraw {
@@ -11,7 +12,6 @@ struct MenuEntryDraw {
 };
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 extern const s8 DAT_0043dc48[];
 void texDrawCompositeSprite(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 priority);
 f32 floatInterpolateOverDuration(f32 start, f32 end, f32 duration, f32 time);

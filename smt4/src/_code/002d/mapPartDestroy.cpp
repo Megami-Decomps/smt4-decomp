@@ -1,16 +1,13 @@
-#include "common.h"
-
-namespace { struct MapPart { u8 active; u8 padding[0x1b]; u32 model; }; struct MapState { u8 padding[0xcbf0]; MapPart part; }; }
+#include "map/MapIfGlobals.h"
 
 extern "C" {
-/* Reads or updates the requested task state. */
-extern MapState *g_mapIf;
-void asdMdlManagerDestroy(u32 model);
+void asdMdlManagerDestroy(AsdMdlObject *model);
+/* Destroys the first action marker's model and clears its slot. */
 void mapPartDestroy(void)
 {
-    MapPart *part = &g_mapIf->part;
+    MapIfModelSlot *part = &g_mapIf.state->slots[1];
     asdMdlManagerDestroy(part->model);
-    part->model = 0;
+    part->model = NULL;
     part->active = 0;
 }
 }

@@ -15,7 +15,7 @@ extern "C" u32 FUN_0038bab8(void)
         if ((g_btlCandidateMasks.unavailable & entry->flags) &&
             (g_btlCandidateMasks.required & entry->flags) &&
             !(g_btlCandidateMasks.excluded & entry->flags) &&
-            (entry->encodedStats.values[stat] >> 10) == 3) {
+            (entry->data.values[stat] >> 10) == 3) {
             scrSetResult(1);
             return 1;
         }

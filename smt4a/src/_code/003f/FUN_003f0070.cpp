@@ -1,5 +1,5 @@
 /* NON_MATCHING: null fallback returns directly instead of retaining a zero selected ID; output stack slots and saved registers differ. */
-#include "shard/W6_W6Match1_PartySlot.h"
+#include "gamedata/GameSaveDataA.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
 #include "battle/btlDebug.h"
 #include "code/Code0018.h"

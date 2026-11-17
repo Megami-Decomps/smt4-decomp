@@ -1,7 +1,6 @@
-#include "status/StatusDown.h"
+#include "status/StatusDownA.h"
 
 extern "C" {
-extern StatusDownStateA *g_statusDown;
 
 s32 statusDownIsStateEleven(void)
 {

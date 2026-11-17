@@ -1,6 +1,6 @@
 /* NON_MATCHING: member search is not pair-unrolled; vector-return epilogues and height-kind branches merge. */
 #include "battle/btlAction.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_EnemyDrawOffset.h"
 #include "gamedata/NkmEnemyRecord.h"
@@ -11,7 +11,7 @@
 static inline s32 findAnchorMember(const BtlEntry *entry, s16 id)
 {
     for (s32 index = 0; index < 50; ++index) {
-        if (entry->members.ids[index] == id)
+        if (entry->ids[index] == id)
             return index;
     }
     return -1;

@@ -6,6 +6,7 @@
 #include "gamedata/KeyedCatalog.h"
 #include "util/BitsAndBytes.h"
 #include "code/Code0016_Smt4a.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
 int FUN_00180310(...);
-int asdTMTexTableEntryAt(...);
 int gxResetColorQuadToWhite(void);
 int drawSetColorFromRGBA8(...);
 int fadeObjectResetIfActive(...);
@@ -92,7 +92,7 @@ void FUN_003db56c(int param_1)
   texDrawTableEntryAtStoredOrigin(2,0x14,0x57d,temp_v0,temp_v1,0x6a);
   texDrawTableEntryAtStoredOrigin(2,0x14,0x57e,temp_v0,temp_v1,0x6a);
   texDrawTableEntryAtStoredOrigin(2,0x14,0x57f,temp_v0,temp_v1,0x6a);
-  temp_v2 = asdTMTexTableEntryAt(0x14,0x583);
+  temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x583));
   temp_v3 = FUN_002e5c2c();
   textFormatBuffer(temp_v12,"%u",temp_v3);
   FUN_00180310(0,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,1,4,0x6a,temp_v12);
@@ -104,14 +104,14 @@ void FUN_003db56c(int param_1)
          (temp_v2 = listCursorGetRowIfUnblocked(param_1 + 0x10), temp_v2 != temp_v5)) {
         temp_v2 = resourceRunOperationIfUnblocked(param_1 + 0x10);
         temp_v7 = *(unsigned int *)(param_1 + (temp_v2 + temp_v5) * 4 + 0x74);
-        temp_v2 = asdTMTexTableEntryAt(0x14,temp_v5 + 0x40e);
-        temp_v4 = asdTMTexTableEntryAt(0x14,0x58f);
+        temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,temp_v5 + 0x40e));
+        temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x58f));
         FUN_00168470(temp_v7 & 0xffff,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v0,
                      (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v1,0x6a);
         temp_v4 = gameDataFlagTestBit(temp_v7);
         if (temp_v4 != 0) {
           temp_v6 = 0x57d8ffff;
-          temp_v4 = asdTMTexTableEntryAt(0x14,0x595);
+          temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x595));
           texDrawCompositeSprite(2,0x14,8,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v2 + 8) + temp_v0,
                        (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v1,0x6a);
         }
@@ -144,14 +144,14 @@ void FUN_003db56c(int param_1)
             temp_v3 = dataRecordGetValue(temp_v7);
             textFormatBuffer(temp_v12,"%d",temp_v3);
           }
-          temp_v4 = asdTMTexTableEntryAt(0x14,0x594);
+          temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x594));
           drawSetColorFromRGBA8(temp_v11);
           FUN_00180310(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v0,
                        (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v1,1,4,0x6f,
                        temp_v12);
           gxResetColorQuadToWhite();
         }
-        temp_v4 = asdTMTexTableEntryAt(0x14,0x590);
+        temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x590));
         temp_v3 = reinterpret_cast<u32>(FUN_00186f54(temp_v7));
         VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v1,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -160,7 +160,7 @@ void FUN_003db56c(int param_1)
         textDrawString(2,temp_v6,temp_v3,(int)*(short *)(temp_v4 + 10));
         temp_v4 = gameDataAreaBitTest(temp_v7);
         if (temp_v4 != 0) {
-          temp_v4 = asdTMTexTableEntryAt(0x14,0x58e);
+          temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x58e));
           texDrawCompositeSprite(2,0x14,7,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v2 + 8) + temp_v0,
                        (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v2 + 10) + temp_v1,0x6a);
         }
@@ -174,7 +174,7 @@ void FUN_003db56c(int param_1)
     temp_v5 = listCursorGetRowIfUnblocked(param_1 + 0x10);
     temp_v7 = *(unsigned int *)(param_1 + (temp_v5 + temp_v2) * 4 + 0x74);
     temp_v2 = listCursorGetRowIfUnblocked(param_1 + 0x10);
-    temp_v2 = asdTMTexTableEntryAt(0x14,temp_v2 + 0x42f);
+    temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,temp_v2 + 0x42f));
     efctSetSpeed();
     texDrawCompositeSprite(2,0x14,6,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x79);
     efctSetSpeed();
@@ -202,13 +202,13 @@ void FUN_003db56c(int param_1)
       efctSetSpeed();
     }
     texDrawTableEntryAtStoredOrigin(2,0x14,0x596,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x8d);
-    temp_v5 = asdTMTexTableEntryAt(0x14,0x598);
+    temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x598));
     FUN_00168470(temp_v7 & 0xffff,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v0,
                  (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v1,0x92);
     temp_v5 = gameDataFlagTestBit(temp_v7);
     if (temp_v5 != 0) {
       temp_v6 = 0x57d8ffff;
-      temp_v5 = asdTMTexTableEntryAt(0x14,0x59e);
+      temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x59e));
       texDrawCompositeSprite(2,0x14,8,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v2 + 8) + temp_v0,
                    (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v2 + 10) + temp_v1,0x92);
     }
@@ -240,14 +240,14 @@ void FUN_003db56c(int param_1)
         temp_v3 = dataRecordGetValue(temp_v7);
         textFormatBuffer(temp_v12,"%d",temp_v3);
       }
-      temp_v5 = asdTMTexTableEntryAt(0x14,0x59d);
+      temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x59d));
       drawSetColorFromRGBA8(temp_v11);
       FUN_00180310(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v0,
                    (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v1,1,4,0x97,
                    temp_v12);
       gxResetColorQuadToWhite();
     }
-    temp_v5 = asdTMTexTableEntryAt(0x14,0x599);
+    temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x599));
     temp_v3 = reinterpret_cast<u32>(FUN_00186f54(temp_v7));
     VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v1,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -256,7 +256,7 @@ void FUN_003db56c(int param_1)
     textDrawString(3,temp_v6,temp_v3,(int)*(short *)(temp_v5 + 10));
     temp_v5 = gameDataAreaBitTest(temp_v7);
     if (temp_v5 != 0) {
-      temp_v5 = asdTMTexTableEntryAt(0x14,0x597);
+      temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x597));
       texDrawCompositeSprite(2,0x14,7,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v2 + 8) + temp_v0,
                    (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v2 + 10) + temp_v1,0x97);
     }

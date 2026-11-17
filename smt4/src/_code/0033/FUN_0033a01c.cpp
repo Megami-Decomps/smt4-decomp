@@ -1,5 +1,5 @@
 /* NON_MATCHING: member-search result lifetime and combatant key addressing use different registers. */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BattleActionHistory.h"
 #include "battle/btlAction.h"
@@ -9,7 +9,7 @@ static inline BtlEntry* findActionCombatant(BtlMainState* state,
 {
     for (s32 index = 0; index < 109; ++index) {
         for (s32 member = 0; member < 50; ++member) {
-            s16 id = state->entries[index].members.ids[member];
+            s16 id = state->entries[index].ids[member];
             if (id < 0)
                 break;
             if (id == memberId)
@@ -30,7 +30,7 @@ extern "C" void FUN_0033a01c(BtlMainState* state)
                 for (s32 entry = 0; entry < 50; ++entry) {
                     BattleActionHistoryEntry* history = &state->history[entry];
                     if (history->combatant == combatant->selectionIndex && history->member == action->memberId &&
-                        history->group == combatant->id && history->identity == combatant->identity) {
+                        history->group == combatant->data.id && history->identity == combatant->data.parts[0]) {
                         action->restoredValue = history->value;
                         action->history.value = history->value;
                         break;

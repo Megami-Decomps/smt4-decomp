@@ -1,6 +1,6 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 
 namespace {
@@ -22,7 +22,7 @@ u32 FUN_002ff1bc(void)
 
         if ((entry->flags & 0x10) != 0 && (entry->flags & 1) != 0 &&
             (entry->flags & 0x40) == 0 &&
-            (entry->values[fieldIndex] >> 10) == 4) {
+            (entry->data.values[fieldIndex] >> 10) == 4) {
             scrSetResult(1);
             return 1;
         }

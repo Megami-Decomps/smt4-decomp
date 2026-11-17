@@ -15,24 +15,24 @@ void textFormatBuffer(char *, const char *, ...);
 // Draw a value at its row anchor using the wider-number offset for three-digit values.
 void FUN_004a7814(NumericPanelView *panel, s32 value, s32 row, s32 alternate, u32 opacity, u32 color)
 {
-    const PanelTextLayoutEntryPrefixA *base;
-    const PanelTextLayoutEntryPrefixA *offset;
+    const TextureTableEntryIV *base;
+    const TextureTableEntryIV *offset;
     char text[32];
     if (!alternate) {
         if (value > 99) {
-            base = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(panel->layout, row + 0x40e));
-            offset = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(panel->layout, 0x5c5));
+            base = layoutFindTableEntry(panel->layout, row + 0x40e);
+            offset = layoutFindTableEntry(panel->layout, 0x5c5);
         } else {
-            base = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(panel->layout, row + 0x40e));
-            offset = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(panel->layout, 0x489));
+            base = layoutFindTableEntry(panel->layout, row + 0x40e);
+            offset = layoutFindTableEntry(panel->layout, 0x489);
         }
     } else {
         if (value > 99) {
-            base = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(panel->layout, row + 0x42f));
-            offset = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(panel->layout, 0x5c8));
+            base = layoutFindTableEntry(panel->layout, row + 0x42f);
+            offset = layoutFindTableEntry(panel->layout, 0x5c8);
         } else {
-            base = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(panel->layout, row + 0x42f));
-            offset = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(panel->layout, 0x497));
+            base = layoutFindTableEntry(panel->layout, row + 0x42f);
+            offset = layoutFindTableEntry(panel->layout, 0x497);
         }
     }
     s32 x = base->x + offset->x;

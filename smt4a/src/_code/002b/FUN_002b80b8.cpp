@@ -1,12 +1,9 @@
-#include "map/lmapMain.h"
-#include "map/mapDepart.h"
+#include "map/PopupStateA.h"
 
 extern "C" {
 
 void popupQueueInsertUnique(s32 state);
 s32 randRange(s32 arg);
-
-extern LmapEventA *g_popupState;
 
 void FUN_002b80b8(void)
 {

@@ -1,9 +1,9 @@
 #include "shard/Shard0032.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 
 extern StateAtF4 *g_campCecEdit;
-extern void *gameGetPlayerData(void);
 extern void __aeabi_memcpy4(void *dst, const void *src, u32 size);
 extern void asdMemFree(void *ptr);
 extern void asdMemFreeSlot(u32 handle);

@@ -1,16 +1,15 @@
-#include "ui/FrameTex.h"
-extern "C" FrameWork *g_frameTex;
+#include "frame_tex/FrameTex.h"
 
 extern "C" {
 
 void FUN_00275dc4(void)
 {
-    FrameWork *block = g_frameTex;
+    FrameTexWork *block = g_frameTex;
 
-    g_frameTex->unkF28 = 1;
-    block->unkF2B = 0;
-    block->unkF2C = 0;
-    block->unkF2D = 0;
+    g_frameTex->campEnabled = 1;
+    block->campCapturedLeft = 0;
+    block->campCapturedRight = 0;
+    block->campPendingRight = 0;
 }
 
 } /* extern "C" */

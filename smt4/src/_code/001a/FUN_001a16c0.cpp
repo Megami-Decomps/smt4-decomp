@@ -2,6 +2,7 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 
@@ -29,7 +30,6 @@ typedef struct ResultScreen {
 } ResultScreen;
 
 extern ResultScreen *g_result;
-extern RenderCtx *g_titleScene;
 
 s32 modelPairTryBind(ResultScreen *result);
 void renderCtxSelectStereoLayout(RenderCtx *context);

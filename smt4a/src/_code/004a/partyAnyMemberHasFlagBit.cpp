@@ -1,20 +1,15 @@
 #include "common.h"
 #include "gamedata/SaveSlotTable.h"
 #include "gamedata/GamePlayerData.h"
+#include "gamedata/SaveSlotRecord.h"
 
 extern "C" {
-
-typedef struct SlotFlagRecord {
-    /* 0x00 */ u8 unk00[0x60];
-    /* 0x60 */ u16 flags;
-} SlotFlagRecord;
 
 typedef struct PartySlotTable {
     /* 0x0000 */ u8 unk0000[0x1c88];
     /* 0x1C88 */ s8 party[0x18];   /* slot index of each party member, negative when empty */
     /* 0x1CA0 */ s8 reserve[3];    /* slot index of each reserve member */
 } PartySlotTable;
-SlotFlagRecord *gameGetSlotRecord(s32 slotIndex);
 s32 gameSlotTableFindFree(void);
 
 /* Whether bit `bit` is set in the mask of the player (modes 0, 2, 3), the party (modes 0, 1) or the
@@ -43,7 +38,7 @@ s32 partyAnyMemberHasFlagBit(u32 mode, u32 bit)
         return 0;
     }
     for (s32 i = 0; i < count; i++) {
-        if (slots[i] >= 0 && (gameGetSlotRecord(slots[i])->flags & mask)) {
+        if (slots[i] >= 0 && (gameGetSlotRecord(slots[i])->ailments & mask)) {
             return 1;
         }
     }

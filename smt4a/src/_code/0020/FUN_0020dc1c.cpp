@@ -6,6 +6,7 @@
 #include "camp/PartyPanel/PartyPanel.h"
 #include "code/Code002c.h"
 #include "shard/Shard004A.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -26,7 +27,6 @@ int flagValueSub(...);
 int uiSpriteAdvanceAnimation(...);
 int sysPlaySe(...);
 int gameGetPlayerData(void);
-int asdTMTexTableEntryAt(...);
 int gridNavigationConfigure(int, int, int, int);
 void campSetSpriteAnimationPreset(int, int, int, unsigned int);
 int ifTouchRegionAdd(int, int, int, int);
@@ -166,7 +166,7 @@ void FUN_0020dc1c(void)
         if (temp_v6 >= 7) {
           temp_v6 = 0;
           do {
-            temp_v3 = asdTMTexTableEntryAt(0x12,temp_v6 + 0x477);
+            temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,temp_v6 + 0x477));
             temp_v1 = (int)*(short *)(temp_v3 + 8);
             ifTouchRegionAdd(temp_v1,(int)(short)(*(short *)(temp_v3 + 10) + (short)DAT_0057f10c),
                          (int)**(short **)(temp_v3 + 0xc),(int)(*(short **)(temp_v3 + 0xc))[1]);
@@ -256,7 +256,7 @@ LAB_0020de28:
   case 2:
     temp_v17[0] = 0;
     temp_v5 = ifTouchGetSelectionMode();
-    temp_v2 = asdTMTexTableEntryAt(0x12,0x461);
+    temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x461));
     temp_v11 = 1;
     temp_v9 = temp_v17;
     temp_v8 = 0;

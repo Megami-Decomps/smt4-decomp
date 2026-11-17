@@ -91,7 +91,7 @@ void FUN_0040ca18(u32 unused, ActionStep* step)
         ActionTarget* record = FUN_002c7bf4(step->request);
         if (record == NULL) return;
         u32 flags = record->flags;
-        if ((flags & 0x20) != 0 && (unit->side->statusFlags & 0x10) == 0) return;
+        if ((flags & 0x20) != 0 && (unit->side->data.statusFlags & 0x10) == 0) return;
         if (score == 1) return;
         if (score == 2) {
             if (record->idTwo != 0) {
@@ -118,10 +118,10 @@ void FUN_0040ca18(u32 unused, ActionStep* step)
             s32 g;
             for (g = 0; g < 4; g++) {
                 BtlCombatantEntryA* other = &main->entries[g];
-                if (step->actor->indexView.selectionIndex != other->indexView.selectionIndex) {
+                if (step->actor->selectionIndex != other->selectionIndex) {
                     if ((other->flags & g_btlActionReflect.playerMask) == 0) break;
                     if ((other->flags & g_btlActionReflect.skipMask) != 0) break;
-                    if ((other->statusFlags & 0x10) == 0) break;
+                    if ((other->data.statusFlags & 0x10) == 0) break;
                 }
             }
             if (g == 4) {
@@ -132,7 +132,7 @@ void FUN_0040ca18(u32 unused, ActionStep* step)
         bool toSide = false;
         if ((flags & 0x40) != 0) {
             s32 ready = FUN_004c86ec(step->request);
-            s32 index = FUN_004c600c(step->actor->indexView.selectionIndex);
+            s32 index = FUN_004c600c(step->actor->selectionIndex);
             if (ready != 0 && index >= 0) {
                 id = 0x3e;
                 target = &main->entries[index];
@@ -145,7 +145,7 @@ void FUN_0040ca18(u32 unused, ActionStep* step)
     } else {
         id = 0x25;
         if (FUN_004ea5e8(g_btlScriptUnit) <= 1) pending = true;
-        FUN_004e699c(g_btlScriptUnit, unit->side->indexView.selectionIndex, 5);
+        FUN_004e699c(g_btlScriptUnit, unit->side->selectionIndex, 5);
         FUN_004c8e30(id, arg, 1);
     }
     if (pending) return;

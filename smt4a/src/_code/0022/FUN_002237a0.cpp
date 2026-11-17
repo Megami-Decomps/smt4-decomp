@@ -4,6 +4,7 @@
 #include "game/GameStateA.h"
 #include "code/Code0014.h"
 #include "code/Code0015.h"
+#include "map/PopupStateA.h"
 
 extern "C" {
 
@@ -22,7 +23,6 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern int *g_popupState; /* 0x58104c */
 
 
 
@@ -46,44 +46,44 @@ void FUN_002237a0(void)
 
 {
 /* irregular: 7 goto(s); 8 native warning(s); review required */
-  int *piVar1;
-  int *piVar2;
+  const char **message;
+  PopupStateA *popup;
   unsigned int temp_v0;
   unsigned int temp_v1;
   int temp_v2;
   int temp_v3;
   
   temp_v0 = FUN_00152f44();
-  piVar2 = g_popupState;
+  popup = g_popupState;
   temp_v0 = temp_v0 | 4;
   temp_v3 = 0;
-  switch(*g_popupState) {
+  switch(g_popupState->state) {
   case 0:
     g_gameState.unk3F2 = 0;
     FUN_00312af0();
   default:
     break;
   case 2:
-    g_popupState[1] = g_popupState[1] + 1;
+    g_popupState->timer = g_popupState->timer + 1;
     temp_v2 = saveSlotFindSelected();
-    piVar2 = g_popupState;
+    popup = g_popupState;
     if (temp_v2 == 0) break;
-    if (g_popupState[1] == 2) {
-      piVar1 = g_popupState + 5;
-      if (*piVar1 != 0) {
-        if (g_popupState[6] == 0) {
-          g_popupState[6] = 0xae;
+    if (g_popupState->timer == 2) {
+      message = &g_popupState->message;
+      if (*message != NULL) {
+        if (g_popupState->speakerId == 0) {
+          g_popupState->speakerId = 0xae;
         }
-        mapIfStartNavigation(piVar2[6],*piVar1,1,0,0);
+        mapIfStartNavigation(popup->speakerId,*message,1,0,0);
         temp_v1 = FUN_0014af98();
-        FUN_001628c0(g_popupState[7],temp_v1,temp_v0,1);
+        FUN_001628c0(g_popupState->messageData,temp_v1,temp_v0,1);
         g_gameState.unk3F2 = 1;
         goto LAB_002238e8;
       }
     }
     else {
 LAB_002238e8:
-      if ((g_popupState[1] >= 6) && (temp_v2 = popupHasActiveValue(), temp_v2 == 0)) {
+      if ((g_popupState->timer >= 6) && (temp_v2 = popupHasActiveValue(), temp_v2 == 0)) {
         g_gameState.unk3F2 = 0;
       }
     }
@@ -91,29 +91,29 @@ LAB_002238e8:
     if (temp_v2) {
       temp_v3 = -0x3c;
     }
-    if (g_popupState[1] <= temp_v3 + 0x5a) break;
-    piVar2 = g_popupState;
-    *g_popupState = 0;
-    piVar2[1] = 0;
+    if (g_popupState->timer <= temp_v3 + 0x5a) break;
+    popup = g_popupState;
+    g_popupState->state = 0;
+    popup->timer = 0;
     break;
   case 3:
-    temp_v2 = g_popupState[1];
-    g_popupState[1] = temp_v2 + 1;
+    temp_v2 = g_popupState->timer;
+    g_popupState->timer = temp_v2 + 1;
     if (temp_v2 + 1 == 2) {
-      if (piVar2[5] != 0) {
-        if (piVar2[6] == 0) {
-          piVar2[6] = 0xae;
+      if (popup->message != 0) {
+        if (popup->speakerId == 0) {
+          popup->speakerId = 0xae;
         }
-        mapIfStartNavigation(piVar2[6],piVar2[5],1,0,0);
+        mapIfStartNavigation(popup->speakerId,popup->message,1,0,0);
         temp_v1 = FUN_0014af98();
-        FUN_001628c0(g_popupState[7],temp_v1,temp_v0,1);
+        FUN_001628c0(g_popupState->messageData,temp_v1,temp_v0,1);
         g_gameState.unk3F2 = 1;
         goto LAB_002239b8;
       }
     }
     else {
 LAB_002239b8:
-      if (g_popupState[1] >= 6) {
+      if (g_popupState->timer >= 6) {
         g_gameState.unk3F2 = 0;
       }
     }
@@ -121,29 +121,29 @@ LAB_002239b8:
     if (temp_v2 != 0) {
       temp_v3 = -0x3c;
     }
-    if (g_popupState[1] <= temp_v3 + 0x5a) break;
-    piVar2 = g_popupState;
-    *g_popupState = 0;
-    piVar2[1] = 0;
+    if (g_popupState->timer <= temp_v3 + 0x5a) break;
+    popup = g_popupState;
+    g_popupState->state = 0;
+    popup->timer = 0;
     break;
   case 4:
-    temp_v2 = g_popupState[1];
-    g_popupState[1] = temp_v2 + 1;
+    temp_v2 = g_popupState->timer;
+    g_popupState->timer = temp_v2 + 1;
     if (temp_v2 + 1 == 2) {
-      if (piVar2[5] != 0) {
-        if (piVar2[6] == 0) {
-          piVar2[6] = 0xae;
+      if (popup->message != 0) {
+        if (popup->speakerId == 0) {
+          popup->speakerId = 0xae;
         }
-        mapIfStartNavigation(piVar2[6],piVar2[5],1,0,0);
+        mapIfStartNavigation(popup->speakerId,popup->message,1,0,0);
         temp_v1 = FUN_0014af98();
-        FUN_001628c0(g_popupState[7],temp_v1,temp_v0,1);
+        FUN_001628c0(g_popupState->messageData,temp_v1,temp_v0,1);
         g_gameState.unk3F2 = 1;
         goto LAB_00223a7c;
       }
     }
     else {
 LAB_00223a7c:
-      if ((g_popupState[1] >= 6) && (temp_v2 = popupHasActiveValue(), temp_v2 == 0)) {
+      if ((g_popupState->timer >= 6) && (temp_v2 = popupHasActiveValue(), temp_v2 == 0)) {
         g_gameState.unk3F2 = 0;
       }
     }
@@ -151,10 +151,10 @@ LAB_00223a7c:
     if (temp_v2 != 0) {
       temp_v3 = -0x3c;
     }
-    if (g_popupState[1] <= temp_v3 + 0x5a) break;
-    piVar2 = g_popupState;
-    *g_popupState = 0;
-    piVar2[1] = 0;
+    if (g_popupState->timer <= temp_v3 + 0x5a) break;
+    popup = g_popupState;
+    g_popupState->state = 0;
+    popup->timer = 0;
     break;
   case 5:
   case 6:
@@ -165,23 +165,23 @@ LAB_00223a7c:
   case 0xc:
   case 0x11:
   case 0x16:
-    temp_v2 = g_popupState[1];
-    g_popupState[1] = temp_v2 + 1;
+    temp_v2 = g_popupState->timer;
+    g_popupState->timer = temp_v2 + 1;
     if (temp_v2 + 1 == 2) {
-      if (piVar2[5] != 0) {
-        if (piVar2[6] == 0) {
-          piVar2[6] = 0xae;
+      if (popup->message != 0) {
+        if (popup->speakerId == 0) {
+          popup->speakerId = 0xae;
         }
-        mapIfStartNavigation(piVar2[6],piVar2[5],1,0,0);
+        mapIfStartNavigation(popup->speakerId,popup->message,1,0,0);
         temp_v1 = FUN_0014af98();
-        FUN_001628c0(g_popupState[7],temp_v1,temp_v0,1);
+        FUN_001628c0(g_popupState->messageData,temp_v1,temp_v0,1);
         g_gameState.unk3F2 = 1;
         goto LAB_00223b4c;
       }
     }
     else {
 LAB_00223b4c:
-      if ((g_popupState[1] >= 6) && (temp_v2 = popupHasActiveValue(), temp_v2 == 0)) {
+      if ((g_popupState->timer >= 6) && (temp_v2 = popupHasActiveValue(), temp_v2 == 0)) {
         g_gameState.unk3F2 = 0;
       }
     }
@@ -189,22 +189,22 @@ LAB_00223b4c:
     if (temp_v2 != 0) {
       temp_v3 = -0x3c;
     }
-    if (g_popupState[1] <= temp_v3 + 0x5a) break;
-    piVar2 = g_popupState;
-    *g_popupState = 0;
-    piVar2[1] = 0;
+    if (g_popupState->timer <= temp_v3 + 0x5a) break;
+    popup = g_popupState;
+    g_popupState->state = 0;
+    popup->timer = 0;
     break;
   case 8:
-    temp_v2 = g_popupState[1];
-    g_popupState[1] = temp_v2 + 1;
+    temp_v2 = g_popupState->timer;
+    g_popupState->timer = temp_v2 + 1;
     if (temp_v2 + 1 == 8) {
-      if (piVar2[5] != 0) {
-        if (piVar2[6] == 0) {
-          piVar2[6] = 0xae;
+      if (popup->message != 0) {
+        if (popup->speakerId == 0) {
+          popup->speakerId = 0xae;
         }
-        mapIfStartNavigation(piVar2[6],piVar2[5],0,0,1);
+        mapIfStartNavigation(popup->speakerId,popup->message,0,0,1);
         temp_v1 = FUN_0014af98();
-        FUN_001628c0(g_popupState[7],temp_v1,temp_v0,1);
+        FUN_001628c0(g_popupState->messageData,temp_v1,temp_v0,1);
         g_gameState.unk3F2 = 1;
         goto LAB_00223cf4;
       }
@@ -215,7 +215,7 @@ LAB_00223b4c:
     }
     else {
 LAB_00223cf4:
-      if (g_popupState[1] >= 6) {
+      if (g_popupState->timer >= 6) {
         temp_v2 = popupHasActiveValue();
         if (temp_v2 == 0) {
           g_gameState.unk3F2 = 0;
@@ -226,27 +226,27 @@ LAB_00223cf4:
     if (temp_v2 != 0) {
       temp_v3 = -0x3c;
     }
-    if (g_popupState[1] <= temp_v3 + 0x5a) break;
-    piVar2 = g_popupState;
-    *g_popupState = 0;
-    piVar2[1] = 0;
+    if (g_popupState->timer <= temp_v3 + 0x5a) break;
+    popup = g_popupState;
+    g_popupState->state = 0;
+    popup->timer = 0;
     break;
   case 0xd:
   case 0xe:
   case 0x10:
   case 0x13:
   case 0x18:
-    temp_v2 = g_popupState[1];
-    g_popupState[1] = temp_v2 + 1;
+    temp_v2 = g_popupState->timer;
+    g_popupState->timer = temp_v2 + 1;
     if (temp_v2 + 1 != 2) {
 LAB_00223df0:
-      if ((g_popupState[1] >= 6) && (temp_v2 = popupHasActiveValue(), temp_v2 == 0)) {
+      if ((g_popupState->timer >= 6) && (temp_v2 = popupHasActiveValue(), temp_v2 == 0)) {
         g_gameState.unk3F2 = 0;
       }
     }
-    else if (piVar2[5] != 0) {
+    else if (popup->message != 0) {
       mapIfStart();
-      if (*g_popupState == 0xd) {
+      if (g_popupState->state == 0xd) {
         temp_v1 = 0x10000ba;
       }
       else {
@@ -260,30 +260,30 @@ LAB_00223df0:
     if (temp_v2 != 0) {
       temp_v3 = -0x3c;
     }
-    if (g_popupState[1] <= temp_v3 + 0x5a) break;
-    piVar2 = g_popupState;
-    *g_popupState = 0;
-    piVar2[1] = 0;
+    if (g_popupState->timer <= temp_v3 + 0x5a) break;
+    popup = g_popupState;
+    g_popupState->state = 0;
+    popup->timer = 0;
     break;
   case 0xf:
   case 0x12:
-    temp_v2 = g_popupState[1];
-    g_popupState[1] = temp_v2 + 1;
+    temp_v2 = g_popupState->timer;
+    g_popupState->timer = temp_v2 + 1;
     if (temp_v2 + 1 == 2) {
-      if (piVar2[5] != 0) {
-        if (piVar2[6] == 0) {
-          piVar2[6] = 0xae;
+      if (popup->message != 0) {
+        if (popup->speakerId == 0) {
+          popup->speakerId = 0xae;
         }
-        mapIfStartNavigation(piVar2[6],piVar2[5],1,1,0);
+        mapIfStartNavigation(popup->speakerId,popup->message,1,1,0);
         temp_v1 = FUN_0014af98();
-        FUN_001628c0(g_popupState[7],temp_v1,temp_v0,1);
+        FUN_001628c0(g_popupState->messageData,temp_v1,temp_v0,1);
         g_gameState.unk3F2 = 1;
         goto LAB_00223c28;
       }
     }
     else {
 LAB_00223c28:
-      if ((g_popupState[1] >= 6) && (temp_v2 = popupHasActiveValue(), temp_v2 == 0)) {
+      if ((g_popupState->timer >= 6) && (temp_v2 = popupHasActiveValue(), temp_v2 == 0)) {
         g_gameState.unk3F2 = 0;
       }
     }
@@ -291,46 +291,46 @@ LAB_00223c28:
     if (temp_v2 != 0) {
       temp_v3 = -0x3c;
     }
-    if (g_popupState[1] <= temp_v3 + 0x5a) break;
-    piVar2 = g_popupState;
-    *g_popupState = 0;
-    piVar2[1] = 0;
+    if (g_popupState->timer <= temp_v3 + 0x5a) break;
+    popup = g_popupState;
+    g_popupState->state = 0;
+    popup->timer = 0;
     break;
   case 0x14:
   case 0x15:
-    temp_v3 = g_popupState[1];
-    g_popupState[1] = temp_v3 + 1;
+    temp_v3 = g_popupState->timer;
+    g_popupState->timer = temp_v3 + 1;
     if (temp_v3 + 1 == 2) {
-      if (piVar2[5] == 0) break;
-      if (piVar2[6] == 0) {
-        piVar2[6] = 0xae;
+      if (popup->message == 0) break;
+      if (popup->speakerId == 0) {
+        popup->speakerId = 0xae;
       }
-      mapIfStartNavigation(piVar2[6],piVar2[5],1,0,0);
+      mapIfStartNavigation(popup->speakerId,popup->message,1,0,0);
       temp_v1 = FUN_0014af98();
-      FUN_001628c0(g_popupState[7],temp_v1,temp_v0,1);
+      FUN_001628c0(g_popupState->messageData,temp_v1,temp_v0,1);
     }
-    if (g_popupState[1] < 0x5b) break;
-    piVar2 = g_popupState;
-    *g_popupState = 0;
-    piVar2[1] = 0;
+    if (g_popupState->timer < 0x5b) break;
+    popup = g_popupState;
+    g_popupState->state = 0;
+    popup->timer = 0;
     break;
   case 0x17:
-    temp_v3 = g_popupState[1];
-    g_popupState[1] = temp_v3 + 1;
-    if ((temp_v3 + 1 == 2) && (piVar2[5] != 0)) {
-      mapIfStartNavigation(piVar2[6],piVar2[5],0,0,0);
+    temp_v3 = g_popupState->timer;
+    g_popupState->timer = temp_v3 + 1;
+    if ((temp_v3 + 1 == 2) && (popup->message != 0)) {
+      mapIfStartNavigation(popup->speakerId,popup->message,0,0,0);
       temp_v1 = FUN_0014af98();
-      FUN_001628c0(g_popupState[7],temp_v1,temp_v0,1);
+      FUN_001628c0(g_popupState->messageData,temp_v1,temp_v0,1);
     }
     break;
   }
   temp_v3 = lmapSceneGetUnk0();
   if ((temp_v3 == 1) && (g_gameState.unk2E8 = g_gameState.unk2E8 + 1, g_gameState.unk2E8 >= 27000)) {
-    if (*g_popupState == 0) {
+    if (g_popupState->state == 0) {
       FUN_00295108();
       FUN_00234880();
       g_gameState.unk2E8 = 0;
-      if ((*g_popupState != 0 && *g_popupState != 0x12) &&
+      if ((g_popupState->state != 0 && g_popupState->state != 0x12) &&
          (temp_v3 = randRange(99), temp_v3 + 1 < 0xb)) {
         popupQueueInsertUnique(0x12);
       }

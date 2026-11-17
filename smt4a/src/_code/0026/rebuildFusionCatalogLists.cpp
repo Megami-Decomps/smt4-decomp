@@ -1,5 +1,5 @@
 /* NON_MATCHING: only scratch registers for the unique-race append value/address are exchanged; -O2 candidate. */
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match6_CompactSortRecord.h"
@@ -16,7 +16,6 @@ struct FusionCatalogCriteria {
     s8 levelBand; // 0x23
 };
 extern "C" {
-extern UniteWork *g_unite;
 extern const u32 DAT_0052f210[];
 void sysMemClear(void *, u32);
 void rt_memclr(void *, u32);
@@ -28,7 +27,7 @@ u32 FUN_00229210(s32);
 
 void rebuildFusionCatalogLists()
 {
-    UniteWork *work = g_unite;
+    UniteWorkA *work = g_unite;
     const FusionCatalogCriteria *filter = (const FusionCatalogCriteria *)(saveGetUserSettingsBlock() + 0x20);
     sysMemClear(work->catalogA.demons, sizeof(work->catalogA.demons));
     rt_memclr(work->catalogA.races, sizeof(work->catalogA.races));

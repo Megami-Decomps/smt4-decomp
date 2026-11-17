@@ -1,4 +1,5 @@
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlEntryLookup.h"
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 
 // The unit the marker follows (observed fields).
@@ -22,18 +23,10 @@ struct MarkerRequest {
     /* 0x28 */ s32 kind;         // 1..4
 };
 
-// The battle entry of a unit (observed fields).
-struct MarkerEntry {
-    /* 0x00 */ u32 flags;
-    /* 0x04 */ u8 unk04[0x6a];
-    /* 0x6E */ s16 style;
-};
-
 extern "C" {
 extern u32 g_btlUiBlock;
 extern BattleVector3 DAT_00493560;
 
-MarkerEntry *btlMainFindEntryByListedId(void *state, s32 id);
 BattleVector3 FUN_0023cd08(void *state, s32 id, s32 flag);
 s32 FUN_00289fa8(u32 block, s32 kind, s32 flag, BattleVector3 position);
 s32 FUN_0023c9e8(u32 block, s32 style, s32 kind, s32 x, s32 y);
@@ -49,7 +42,7 @@ static inline BattleVector3 vectorAdd(BattleVector3 left, BattleVector3 right)
 // hidden unit, or a screen marker otherwise) and the step then waits for it to appear.
 void FUN_00344cf4(void *unused, MarkerRequest *request)
 {
-    MarkerEntry *entry = btlMainFindEntryByListedId(static_cast<void *>(btlGetMainState()), request->unit->id);
+    BtlEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), request->unit->id);
     if (entry == NULL) {
         request->result = 0;
         return;
@@ -81,7 +74,7 @@ void FUN_00344cf4(void *unused, MarkerRequest *request)
                 request->result = 0;
                 return;
             }
-            s32 style = entry->style;
+            s32 style = entry->selectionIndex;
             if ((flags & 0x20) != 0) {
                 style = 4;
             }

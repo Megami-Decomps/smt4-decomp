@@ -1,4 +1,4 @@
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct HelpTextureGlobalsView {
@@ -11,7 +11,6 @@ struct HelpTextureGlobalsView {
 };
 
 extern "C" {
-extern ButtonHelpGlobalsA g_buttonHelp;
 void helpReleaseDataTable();
 void asdMemFree(void* memory);
 void asdTMTexTableReleaseNode(s32 table, s32 node);

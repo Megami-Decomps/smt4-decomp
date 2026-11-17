@@ -1,7 +1,7 @@
 #include "shard/W6_W6Match4_CampCecResumeState.h"
 #include "shard/Shard0031.h"
+#include "gamedata/SaveSlotRecord.h"
 
-struct SlotRecord;
 extern "C" {
 ScriptRunState *scrScriptProcessCreate(void *resource, u32 entry);
 void scrScriptProcessStartEntry(ScriptRunState *script, s32 entry);
@@ -13,9 +13,8 @@ void cecProcessDestroy(void);
 void FUN_002a6480(u16 value);
 void partyPanelRefreshFromSlotTable(void);
 SlotTable *gameGetSlotTable(void);
-SlotRecord *gameGetSlotRecord(s32 slot);
-s32 bitsAt60Test(SlotRecord *record, u32 flags);
-void bitsAt60Clear(SlotRecord *record, u32 flags);
+s32 bitsAt60Test(SlotRecordA *record, u32 flags);
+void bitsAt60Clear(SlotRecordA *record, u32 flags);
 
 // Run the CEC exchange scripts and clear exchanged party flags before returning to camp.
 u32 FUN_0036cfb0(CampCecResumeState *state)

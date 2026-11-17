@@ -1,5 +1,5 @@
 /* NON_MATCHING: register assignment only (151 rows each, every instruction and the schedule agree): retail keeps the owner in r7 and the list index in r5, the anchor in sl and the list base in fp; ours has owner r5, list r7, anchor fp and base sl. */
-#include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 #define SELECTOR_SLOT_COUNT 13
@@ -18,15 +18,9 @@ struct SelectorData {
 };
 
 
-/* The render context past its camp-era members: the stack the selector switches while drawing. */
-struct RenderCtxSelector {
-    /* 0x0000 */ u8 unk0000[0x1318];
-    /* 0x1318 */ RenderStateStack stack;
-};
 
 extern "C" {
 
-extern RenderCtxSelector *g_renderCtx;
 
 void efctSetSpeed(f32 speed);
 void effectDispatchSelector(s16 entry, s32 x, s32 y, s32 kind, f32 scale);
@@ -67,13 +61,13 @@ void FUN_004bda84(f32 scale, SelectorOwner *owner, SelectorData *data, s32 list,
                 availableNext++;
             }
         }
-        renderStackSet(&g_renderCtx->stack, 3);
+        renderStackSet(&g_renderCtx->scissor, 3);
         FUN_0035ae58(anchor->x, anchor->y, anchor->placement->width, anchor->placement->height, 1);
         shift = (owner->pulse[list] - 20) * -3;
         nextShift = shift + 13;
         effectDispatchSelector(current, anchor->x + (shift + x), anchor->y + y, 0x7E, 1.0f);
         effectDispatchSelector(next, anchor->x + (x + nextShift), anchor->y + y, 0x7E, 1.0f);
-        renderStackSet(&g_renderCtx->stack, 0);
+        renderStackSet(&g_renderCtx->scissor, 0);
     }
     efctSetSpeed(1.0f);
 }

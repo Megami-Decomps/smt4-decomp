@@ -4,18 +4,12 @@
 #include "shard/TextureDrawCall.h"
 #include "util/BitsAndBytes.h"
 #include "code/Code002a_VariantA.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* A pair of screen coordinates. */
 struct ScreenOffset {
     s32 x;
     s32 y;
-};
-
-/* Position record of an icon in the icon table (only the screen position). */
-struct IconPosition {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0a */ s16 y;
 };
 
 /* The slot screen's work area (only the fields read here). */
@@ -37,7 +31,6 @@ struct SlotScreen {
 
 extern "C" {
 s32 getUnlockedSlotCount(u32 argument);
-IconPosition *asdTMTexTableEntryAt(u32 table, u32 index);
 void FUN_003b6354(SlotScreen *screen, s32 slot, s32 mode, u32 argument, f32 scale, s32 iconX, s32 iconY,
                   s32 *x, s32 *y, u8 *extra);
 void FUN_003c33e8(SlotScreen *screen, s32 slot, u32 argument, u32 flags, f32 scale, s32 x, s32 y);
@@ -54,7 +47,7 @@ void FUN_0037c988(SlotScreen *screen, u32 argument, s32 drawExtra, s32 mode, u32
     s32 unlocked = getUnlockedSlotCount(argument);
     for (s32 slot = 0; slot < 8; slot++) {
         ScreenOffset position = offset;
-        IconPosition *icon = asdTMTexTableEntryAt(0x1a, slot + 0x17d);
+        TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x1a, slot + 0x17d);
         if (slot >= unlocked) {
             texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x229, icon->x + position.x, icon->y + position.y, 0x65);
             texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x16f, icon->x + position.x, icon->y + position.y, 0x65);

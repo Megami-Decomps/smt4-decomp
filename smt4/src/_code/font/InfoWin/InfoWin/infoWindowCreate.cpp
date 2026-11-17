@@ -1,4 +1,4 @@
-#include "shard/X14_InfoWindowSmt4.h"
+#include "font/InfoWin.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "ui/UiSpriteState.h"
 #include "AsdSDK/AsdDebug.h"
@@ -23,32 +23,23 @@ extern const u8 DAT_00403a04[];
 // Create the information popup process, stereo draw tasks, sprite timers and text state.
 void infoWindowCreate()
 {
-    struct InfoWindowSetupView {
-        u32 process;
-        u8 padding04[0x20];
-        UiResourceParameters parameters;
-        UiSpriteState background;
-        UiSpriteState label;
-    };
     if (g_infoWin == NULL) {
         asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\font\\InfoWin\\InfoWin.cpp", 255);
-        g_infoWin = static_cast<InfoWindowSmt4 *>(asdMemAlloc(0x100, 0x100, 0, sizeof(InfoWindowSmt4), 1));
+        g_infoWin = static_cast<InfoWindow *>(asdMemAlloc(0x100, 0x100, 0, sizeof(InfoWindow), 1));
     }
-    InfoWindowSmt4 *work = g_infoWin;
-    memClear(work, sizeof(InfoWindowSmt4));
-    InfoWindowSetupView *setup = reinterpret_cast<InfoWindowSetupView *>(work);
+    InfoWindow *work = g_infoWin;
+    memClear(work, sizeof(InfoWindow));
     u32 process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("InfoWin Calc"), 1, 0, 0, infoWindowUpdate, NULL, 0);
-    setup->process = process;
+    work->task = process;
     taskCreateDraw(reinterpret_cast<const s8 *>("InfoWin DrawUpLeft"), 0x81, 0, 0, infoWinDraw, NULL, 0, process);
-    taskCreateDraw(reinterpret_cast<const s8 *>("InfoWin DrawUpRight"), 0xDF, 0, 0, infoWinDraw, NULL, 0, setup->process);
+    taskCreateDraw(reinterpret_cast<const s8 *>("InfoWin DrawUpRight"), 0xDF, 0, 0, infoWinDraw, NULL, 0, work->task);
     work = g_infoWin;
-    setup = reinterpret_cast<InfoWindowSetupView *>(work);
-    drawParameterBlockClear(&setup->parameters);
-    paramsInit(&setup->parameters, DAT_00403a04, 0x24, 0, 0, 0, 0, 0, 0, 0, 0);
-    uiSpriteStateInitFromSource(&setup->background, 0xE, 0x87, &setup->parameters, 1, 1.0f);
-    timerStart(&setup->background, 0, 0);
-    uiSpriteStateInitFromSource(&setup->label, 0xE, 0x87, &setup->parameters, 1, 1.0f);
-    timerStart(&setup->label, 2, 0);
+    drawParameterBlockClear(&work->parameters);
+    paramsInit(&work->parameters, DAT_00403a04, 0x24, 0, 0, 0, 0, 0, 0, 0, 0);
+    uiSpriteStateInitFromSource(&work->background, 0xE, 0x87, &work->parameters, 1, 1.0f);
+    timerStart(&work->background, 0, 0);
+    uiSpriteStateInitFromSource(&work->content, 0xE, 0x87, &work->parameters, 1, 1.0f);
+    timerStart(&work->content, 2, 0);
     void *text = asdTextCreate(0);
     work->text = text;
     asdTextSetBaseColor(text, 0xFFFFFFFF);

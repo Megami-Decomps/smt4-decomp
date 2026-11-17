@@ -1,12 +1,11 @@
 /* NON_MATCHING: the Vec3 stack copies and the order of the corner/stop float computations differ from retail (168 vs 182 rows); the camera move planning is the same. */
 #include "common.h"
+#include "map/LmapGlobals.h"
 #include <math.h>
 
 extern "C" {
 
-typedef struct MapVec3 {
-    f32 x, y, z;
-} MapVec3;
+typedef MapVector MapVec3;
 
 /* The map camera view (only the fields used here). */
 typedef struct MapView {
@@ -46,14 +45,6 @@ typedef struct MapViewGlobals {
     MapView *view;
 } MapViewGlobals;
 
-/* The map scene (only the vectors read here). */
-typedef struct MapScene {
-    /* 0x000 */ u8 unk000[0x1C];
-    /* 0x01C */ MapVec3 position;
-    /* 0x028 */ MapVec3 anchor;
-    /* 0x034 */ u8 unk034[0x1BC];
-    /* 0x1F0 */ MapVec3 focus;
-} MapScene;
 
 /* The camera move request handed to the camera mover. */
 typedef struct CameraMoveRequest {
@@ -69,7 +60,6 @@ typedef struct CameraMoveRequest {
 } CameraMoveRequest;
 
 extern MapViewGlobals DAT_005806a0;
-extern MapScene *g_lmapScene;
 
 s32 FUN_003033d4(void);
 s32 FUN_0033a374(MapView *view);
@@ -124,16 +114,16 @@ void FUN_00376c64(void)
     request.from = view->target;
     request.to = view->start;
     view = DAT_005806a0.view;
-    view->heading = mathPositionHeadingDegrees(g_lmapScene->position, g_lmapScene->focus);
+    view->heading = mathPositionHeadingDegrees(g_lmapScene->pose.position, g_lmapScene->movementCurrent);
     f32 turned = (view->heading - 90.0f) * 0.017453292f;
     f32 facing = view->heading * 0.017453292f;
 
-    corner.x = g_lmapScene->anchor.x + libm_sinf(turned) * view->side[index];
-    corner.y = g_lmapScene->anchor.y + view->lift[index];
-    corner.z = g_lmapScene->anchor.z + libm_cosf(turned) * view->side[index];
-    stop.x = g_lmapScene->anchor.x - libm_sinf(facing) * view->back[index];
-    stop.z = g_lmapScene->anchor.z - libm_cosf(facing) * view->back[index];
-    stop.y = g_lmapScene->anchor.y + view->lowerLift[index] + view->heightOffset;
+    corner.x = g_lmapScene->pose.targetPosition.x + libm_sinf(turned) * view->side[index];
+    corner.y = g_lmapScene->pose.targetPosition.y + view->lift[index];
+    corner.z = g_lmapScene->pose.targetPosition.z + libm_cosf(turned) * view->side[index];
+    stop.x = g_lmapScene->pose.targetPosition.x - libm_sinf(facing) * view->back[index];
+    stop.z = g_lmapScene->pose.targetPosition.z - libm_cosf(facing) * view->back[index];
+    stop.y = g_lmapScene->pose.targetPosition.y + view->lowerLift[index] + view->heightOffset;
     stop.x += libm_sinf(turned) * view->side[index];
     stop.z += libm_cosf(turned) * view->side[index];
     FUN_00330108(&corner, &stop, &hit);

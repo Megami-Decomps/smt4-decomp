@@ -1,4 +1,4 @@
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 
@@ -17,7 +17,7 @@ u32 scrCommHasReadyBattleUnitId(void)
     for (i = 0; i < 109; i++) {
         BtlEntry *unit = &btlGetMainState()->entries[i];
 
-        if ((unit->flags & 0x10) != 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0 && unit->id == id &&
+        if ((unit->flags & 0x10) != 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0 && unit->data.id == id &&
             btlSlotsHaveReadyUnit(unit) != 0) {
             scrSetResult(1);
             return 1;

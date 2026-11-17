@@ -1,10 +1,9 @@
 /* NON_MATCHING: active-byte clear-loop counters and global/zero registers differ; grouped special-state view now reproduces retail tail-base writeback. */
 /* Releases all map-gimmick scene objects and their registered controller handles. */
 #include "map/mapGimic.h"
+#include "Model/MoriModelManager.h"
 
 extern "C" {
-void ptrListRemoveClearOwner(void *registry, void *controller);
-extern void *g_handleRegistry;
 extern MapGimic *g_mapGimic;
 
 void FUN_00294854(void)

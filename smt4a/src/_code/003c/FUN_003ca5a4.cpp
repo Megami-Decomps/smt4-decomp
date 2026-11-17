@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rewrite of the visibility refresh; the slot flag is an s8 (retail splits its address as +0x4F00/[0x84]) and the entry scan/slot loops are still laid out differently (retail tests the slot loop at the bottom, keeps the list holder in r5, g_lmapMainState in r7 and the visibility table in r9/sl). */
 #include "common.h"
 #include "classes/Obj4209cc.h"
+#include "Model/MoriModelManager.h"
 
 // One record of the 2D data table's sub-table 5: which slot is shown, and the flags that hide or show it.
 struct VisibilityEntry {
@@ -37,7 +38,6 @@ struct LmapStateAView {
 
 extern "C" {
 extern LmapStateAView *g_lmapMainState;
-extern u32 g_handleRegistry;
 extern u8 DAT_005f0c54[0x28];       // slot visibility as last applied
 extern const u8 DAT_00531270[0xa0]; // default table (copied to a local that is not used afterwards)
 
@@ -46,8 +46,6 @@ VisibilityEntry *dataTable2DGetEntry(s32 index);
 s32 gameFlagIsSet(s32 flag);
 void rt_memcpy(void *destination, const void *source, u32 bytes);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
-void ptrListRemoveClearOwner(u32 registry, void *object);
-void handleRegistryRegisterObject(u32 registry, void *object);
 void FUN_003b5c54(u32 index, s32 visible);
 
 // Recomputes which map slots are visible from the data table and the game flags, and registers or removes the slots

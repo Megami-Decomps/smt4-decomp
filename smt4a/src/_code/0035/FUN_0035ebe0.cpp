@@ -15,7 +15,7 @@ u32 FUN_0035ebe0(void)
         if ((g_btlCandidateMasks.unavailable & entry->flags) &&
             (entry->flags & g_btlCandidateMasks.required) &&
             !(entry->flags & g_btlCandidateMasks.excluded) &&
-            nkmBaseGetRecord(entry->id)->category == 4) {
+            nkmBaseGetRecord(entry->data.id)->category == 4) {
             scrSetResult(1);
             return 1;
         }

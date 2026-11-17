@@ -2,9 +2,9 @@
 #include "gamedata/SkillDataRecord.h"
 #include "code/Code0022_Smt4a.h"
 #include "gamedata/GamePlayerData.h"
+#include "gamedata/SaveSlotRecord.h"
 
 extern "C" {
-PlayerDataA *gameGetSlotRecord(s32 slot);
 s32 FUN_003df57c(u32 id, u32 kind);
 s32 skillGetAdjustedCost(PlayerDataA *record, u32 id);
 
@@ -19,8 +19,8 @@ u32 FUN_0022a030(s32 slot, u32 skill)
             usable = 1;
         }
     } else {
-        PlayerDataA *unit = gameGetSlotRecord(slot);
-        if (unit->mp >= skillGetAdjustedCost(unit, skill)) {
+        SlotRecordA *unit = gameGetSlotRecord(slot);
+        if (unit->mp >= skillGetAdjustedCost((PlayerDataA *)unit /* the cost helper reads the stats both records share */, skill)) {
             usable = 1;
         }
     }

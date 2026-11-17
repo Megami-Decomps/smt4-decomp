@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -31,7 +32,6 @@ extern unsigned int FUN_0014bd84(short);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180310. */
-extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00185e84. */
 /* Supplied declaration required: statDrawClampedDelta. */
 extern unsigned int FUN_003df57c(short, unsigned int);
@@ -73,7 +73,7 @@ void FUN_002f67c4(int param_1,int param_2,int param_3,int param_4)
     texDrawTableEntryAtStoredOrigin(2,0x12,0x55d,param_2,param_3,temp_v4);
     texDrawTableEntryAtStoredOrigin(2,0x12,0x55e,param_2,param_3,temp_v4);
     texDrawTableEntryAtStoredOrigin(2,0x12,0x55f,param_2,param_3,temp_v4);
-    temp_v4 = asdTMTexTableEntryAt(0x12,0x560);
+    temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x560));
     if (*(short *)(temp_v2 + 0x598) < 1) {
       FUN_00185e84((int)temp_v0,*(short *)(temp_v4 + 8) + param_2,*(short *)(temp_v4 + 10) + param_3,
                    param_4 + 10,1,0);
@@ -86,20 +86,20 @@ void FUN_002f67c4(int param_1,int param_2,int param_3,int param_4)
                    *(short *)(temp_v4 + 10) + param_3,param_4 + 10,0);
       temp_v1 = skillGetAdjustedCost(*(unsigned int *)(temp_v2 + 0x24fc),temp_v0);
     }
-    temp_v2 = asdTMTexTableEntryAt(0x12,0x561);
+    temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x561));
     temp_v3 = FUN_0014bd84(temp_v0);
     textFormatBuffer(temp_v6,&LAB_002f6b8c,temp_v3);
     VectorSignedToFloat(0xf9 - param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v2 + 10) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v2 + 8) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(2,temp_v5,temp_v6);
-    temp_v2 = asdTMTexTableEntryAt(0x12,0x565);
+    temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x565));
     FUN_00180310(1,*(short *)(temp_v2 + 8) + param_2,*(short *)(temp_v2 + 10) + param_3,1,4,param_4 + 7,
                  &LAB_002f6b94,temp_v1);
     efctSetSpeed();
     return;
   }
-  temp_v2 = asdTMTexTableEntryAt(0x12,0x561);
+  temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x561));
   textFormatBuffer(temp_v6,&LAB_002f6b80);
   VectorSignedToFloat(0xf9 - param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v2 + 10) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001956c4` (_code @ 0x1956c4, 0x16a4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -80,7 +81,6 @@ extern int FUN_0029ee54(int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
-extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: soundPlaySeUnpanned. */
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
 extern int gameFlagIsSet(unsigned int);
@@ -714,7 +714,7 @@ joined_r0x0019627c:
     temp_v7 = 0x12;
     break;
   case 0x12:
-    temp_v11 = asdTMTexTableEntryAt(0x29,0x56);
+    temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x29,0x56));
     temp_v14 = 0x3dcccccd;
     temp_v5 = 0;
     do {

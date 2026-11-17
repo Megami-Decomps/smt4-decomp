@@ -4,6 +4,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ int dataFindKindRecordWithAocOverrides(...);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
-int asdTMTexTableEntryAt(...);
 int jobGetScalarValue(void);
 int FUN_0037245c(...);
 void uiDrawItemListRow(int x, int y, int message, int category, unsigned int color, unsigned int id, float effect);
@@ -88,7 +88,7 @@ void FUN_00288538(int param_1)
       temp_v9 = 0;
       temp_v10 = 0;
       FUN_0037245c(temp_v2,&temp_v9,&temp_v10);
-      temp_v0 = asdTMTexTableEntryAt(0x12,temp_v2 + 0x533);
+      temp_v0 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,temp_v2 + 0x533));
       temp_v6 = 0xffffffff;
       temp_v8 = temp_v10 == 0x12d || temp_v10 == 0x1a5;
       if (temp_v10 != 0x12d && temp_v10 != 0x1a5) {
@@ -112,10 +112,10 @@ void FUN_00288538(int param_1)
       temp_v7 = *(short *)(temp_v0 + 8) + temp_v1;
       temp_v5 = *(short *)(temp_v0 + 10) + temp_v11;
       texDrawCompositeSprite(2,0x12,0xd,temp_v7,temp_v5,0xbf);
-      temp_v0 = asdTMTexTableEntryAt(0x12,0xa0);
+      temp_v0 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0xa0));
       uiDrawItemCategoryIcon((int)(short)temp_v3,*(short *)(temp_v0 + 8) + temp_v7,*(short *)(temp_v0 + 10) + temp_v5,
                    0xc4,0);
-      temp_v0 = asdTMTexTableEntryAt(0x12,0xa1);
+      temp_v0 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0xa1));
       if (temp_v4 >= 1) {
         dataFindKindRecordWithAocOverrides(temp_v4,0);
         if (temp_v4 != 0) {
@@ -173,16 +173,16 @@ void FUN_00288538(int param_1)
           }
         }
       }
-      temp_v3 = asdTMTexTableEntryAt(0x12,temp_v1 + 0x466);
+      temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,temp_v1 + 0x466));
       temp_v4 = temp_v10;
       temp_v2 = temp_v9;
       temp_v7 = *(short *)(temp_v3 + 8) + temp_v12;
       temp_v5 = *(short *)(temp_v3 + 10) + temp_v13;
       texDrawCompositeSprite(2,0x12,0xd,temp_v7,temp_v5,0xbf);
-      temp_v3 = asdTMTexTableEntryAt(0x12,0x464);
+      temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x464));
       uiDrawItemCategoryIcon((int)(short)temp_v4,*(short *)(temp_v3 + 8) + temp_v7,*(short *)(temp_v3 + 10) + temp_v5,
                    0xc4,0);
-      temp_v4 = asdTMTexTableEntryAt(0x12,0x465);
+      temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x465));
       if (temp_v2 >= 1) {
         dataFindKindRecordWithAocOverrides(temp_v2,0);
         if (temp_v2 != 0) {
@@ -200,7 +200,7 @@ void FUN_00288538(int param_1)
     do {
       temp_v1 = temp_v1 + 1;
       if (temp_v1 >= 7) {
-        temp_v1 = asdTMTexTableEntryAt(0x12,temp_v0 + 0x477);
+        temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,temp_v0 + 0x477));
         FUN_0037245c(temp_v0,&temp_v9,&temp_v10);
         temp_v6 = 0x9b9b9bff;
         temp_v8 = temp_v10 == 0x12d || temp_v10 == 0x1a5;

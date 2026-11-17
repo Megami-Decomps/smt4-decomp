@@ -3,6 +3,7 @@
 #include "script/scrScriptProcess.h"
 #include <stddef.h>
 #include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
+#include "battle/BtlGlobals.h"
 
 // Battle resource loader: the step counter, its critical section and the resource slots.
 struct BattleLoader {
@@ -24,22 +25,15 @@ struct BattleLoader {
     void *slot4d64;          // 0x4d64
 };
 
-// File buffers loaded by the battle (0x28..0x4c of the global table).
-struct BtlLoadTable {
-    u8 unk00[0x28];
-    void *files[10];        // 0x28
-};
 typedef char BattleLoaderOffsetsCheck[
     offsetof(BattleLoader, slot2280) == 0x2280 &&
     offsetof(BattleLoader, process) == 0x228C &&
     offsetof(BattleLoader, flags) == 0x4D08 &&
     offsetof(BattleLoader, slot4d64) == 0x4D64 &&
-    sizeof(BattleLoader) == 0x4D68 &&
-    offsetof(BtlLoadTable, files) == 0x28 && sizeof(BtlLoadTable) == 0x50 ? 1 : -1];
+    sizeof(BattleLoader) == 0x4D68 ? 1 : -1];
 
 extern "C" {
 
-extern BtlLoadTable g_btlMain;
 extern u32 g_aocSystem;
 extern const char DAT_0052887c[];
 extern const char DAT_00528858[];
@@ -82,57 +76,57 @@ void FUN_003f0794(BattleLoader* loader)
             loadSlotEnsureLoaded(19);
             loadSlotEnsureLoaded(72);
             FUN_00470e64(g_aocSystem);
-            g_btlMain.files[0] = asdLoadFileSyncDefault(DAT_0052887c);
-            g_btlMain.files[1] = asdLoadFileSyncDefault(DAT_00528858);
-            g_btlMain.files[2] = asdLoadFileSyncDefault(DAT_0052883c);
-            g_btlMain.files[3] = asdLoadFileSyncDefault(DAT_00528820);
-            g_btlMain.files[4] = asdLoadFileSyncDefault(DAT_00528804);
-            g_btlMain.files[5] = asdLoadFileSyncDefault(DAT_005287e4);
-            g_btlMain.files[6] = asdLoadFileSyncDefault(DAT_005287cc);
-            g_btlMain.files[7] = asdLoadFileSyncDefault(DAT_005287ac);
-            g_btlMain.files[8] = asdLoadFileSyncDefault(DAT_00528790);
-            g_btlMain.files[9] = asdLoadFileSyncDefault(DAT_00528774);
+            g_btlMain.resident.files[0] = asdLoadFileSyncDefault(DAT_0052887c);
+            g_btlMain.resident.files[1] = asdLoadFileSyncDefault(DAT_00528858);
+            g_btlMain.resident.files[2] = asdLoadFileSyncDefault(DAT_0052883c);
+            g_btlMain.resident.files[3] = asdLoadFileSyncDefault(DAT_00528820);
+            g_btlMain.resident.files[4] = asdLoadFileSyncDefault(DAT_00528804);
+            g_btlMain.resident.files[5] = asdLoadFileSyncDefault(DAT_005287e4);
+            g_btlMain.resident.files[6] = asdLoadFileSyncDefault(DAT_005287cc);
+            g_btlMain.resident.files[7] = asdLoadFileSyncDefault(DAT_005287ac);
+            g_btlMain.resident.files[8] = asdLoadFileSyncDefault(DAT_00528790);
+            g_btlMain.resident.files[9] = asdLoadFileSyncDefault(DAT_00528774);
             btlStageLoadTable();
             battleMapAccessoryLoad();
             loader->step++;
             /* fall through */
         case 1:
             if (jyoucyuEnsureResidentEntry() == 0) break;
-            loader->slot2280 = g_btlMain.files[0];
-            loader->slot2284 = g_btlMain.files[1];
-            loader->slot2288 = g_btlMain.files[2];
+            loader->slot2280 = g_btlMain.resident.files[0];
+            loader->slot2284 = g_btlMain.resident.files[1];
+            loader->slot2288 = g_btlMain.resident.files[2];
             loader->process = scrScriptProcessCreate(loader->slot2288, reinterpret_cast<u32>(loader->slot2280));
             scriptProcessSetMode(loader->process, 0);
             loader->step++;
             /* fall through */
         case 2:
             if (loader->slot2288 == 0) break;
-            loader->slot2268 = g_btlMain.files[3];
+            loader->slot2268 = g_btlMain.resident.files[3];
             loader->step++;
             /* fall through */
         case 3:
             if (loader->slot2268 == 0) break;
-            loader->slot226c = g_btlMain.files[4];
+            loader->slot226c = g_btlMain.resident.files[4];
             loader->step++;
             /* fall through */
         case 4:
             if (loader->slot226c == 0) break;
-            loader->slot2270 = g_btlMain.files[5];
+            loader->slot2270 = g_btlMain.resident.files[5];
             loader->step++;
             /* fall through */
         case 5:
             if (loader->slot2270 == 0) break;
-            loader->slot2278 = g_btlMain.files[7];
+            loader->slot2278 = g_btlMain.resident.files[7];
             loader->step++;
             /* fall through */
         case 6:
             if (loader->slot2278 == 0) break;
-            loader->slot2274 = g_btlMain.files[6];
+            loader->slot2274 = g_btlMain.resident.files[6];
             loader->step++;
             /* fall through */
         case 7:
             if (loader->slot2274 == 0) break;
-            loader->slot227c = g_btlMain.files[8];
+            loader->slot227c = g_btlMain.resident.files[8];
             loader->step++;
             /* fall through */
         case 8:
@@ -151,7 +145,7 @@ void FUN_003f0794(BattleLoader* loader)
             loader->step++;
             /* fall through */
         case 12:
-            loader->slot4d64 = g_btlMain.files[9];
+            loader->slot4d64 = g_btlMain.resident.files[9];
             loader->step++;
             /* fall through */
         case 13:

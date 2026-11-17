@@ -1,20 +1,16 @@
 /* NON_MATCHING: the marker mask uses LDM rather than LDRD, and VFP registers/coordinate scheduling and literal order differ; candidate -O2. */
 #include "battle/btlMain.h"
+#include "battle/BtlEntryLookup.h"
 #include "camp/RenderCtxA.h"
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match7_BattleEffects.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "shard/W6_W6Match8_BattleSpritePlacement.h"
 #include "shard/JobWork.h"
-
-struct BattleMarkerLookup {
-    u8 unk00[0xc];
-    s32 id;
-};
+#include "battle/BtlEntryLookup.h"
 
 extern "C" {
 extern BattleEffectGlobals g_battleEffectSettings;
-BattleMarkerLookup *btlFindEntryBlockByMemberId(BtlMainStateA *state, s16 group);
 BattleFrameSprite *stateEntryFindById(BtlMainStateA *state, s32 id);
 void gxSubmitDrawZeroExtraParams(u32 color0, u32 color1, u32 color2, u32 color3,
     f32 x, f32 y, f32 width, f32 height, f32 depth);
@@ -53,8 +49,8 @@ extern "C" u32 battleDrawRosterMarkerRects(u32 job)
                 if ((flags & 1) && (flags & 2) && !(flags & 0x200000) &&
                     (flags & 0x80) && !(flags & 0x4000) && (record->marker.flags & 0x800) &&
                     !(flags & 0x10) && record->marker.group == group) {
-                    BattleMarkerLookup *lookup = btlFindEntryBlockByMemberId(state, record->render.group);
-                    BattleSpriteFrame *frame = stateEntryFindById(state, lookup->id)->frame;
+                    BtlUnitDataA *lookup = btlFindEntryBlockByMemberId(state, record->render.group);
+                    BattleSpriteFrame *frame = stateEntryFindById(state, lookup->parts[0])->frame;
                     f32 scale = record->marker.scale;
                     u32 width = frame->width;
                     u32 height = frame->height;

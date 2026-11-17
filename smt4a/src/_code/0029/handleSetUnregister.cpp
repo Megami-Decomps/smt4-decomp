@@ -1,4 +1,5 @@
 #include "common.h"
+#include "Model/MoriModelManager.h"
 
 extern "C" {
 
@@ -23,9 +24,6 @@ struct HandleContext {
 };
 
 extern HandleContext *g_mapTrap;
-extern PtrList *g_handleRegistry;
-
-void ptrListRemoveClearOwner(PtrList *list, PtrListItem *item);
 
 /* Unregisters the list item of each of the three handle owners from the global registry. */
 void handleSetUnregister(void)

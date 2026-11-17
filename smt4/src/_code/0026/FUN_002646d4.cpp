@@ -1,8 +1,7 @@
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 #include "map/LmapGlobals.h"
 
 extern "C" {
-extern MapIfGlobals g_mapIf;
 void FUN_001e5e78(s32);
 void FUN_00280ccc(f32, f32, f32, f32, f32, f32, f32);
 

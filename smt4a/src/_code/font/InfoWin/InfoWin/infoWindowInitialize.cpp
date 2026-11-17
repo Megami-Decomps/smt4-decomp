@@ -1,5 +1,5 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
-#include "shard/W4_Match3_InfoWindow.h"
+#include "font/InfoWinA.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
@@ -36,10 +36,10 @@ void infoWindowInitialize(void)
 {
     if (!g_infoWin) {
         asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\font\\InfoWin\\InfoWin.cpp", 0x197);
-        g_infoWin = static_cast<InfoWindow*>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(InfoWindow), 1));
+        g_infoWin = static_cast<InfoWindowA*>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(InfoWindowA), 1));
     }
-    InfoWindow* window = g_infoWin;
-    sysMemClear(window, sizeof(InfoWindow));
+    InfoWindowA* window = g_infoWin;
+    sysMemClear(window, sizeof(InfoWindowA));
     window->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("InfoWin Calc"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_00156478), NULL, 0);
     taskCreateDraw("InfoWin DrawUpLeft", 0x86, 0, 0, FUN_00155ca8, 0, 0, window->task);
     taskCreateDraw("InfoWin DrawUpRight", 0xE2, 0, 0, FUN_00155ca8, 0, 0, window->task);
@@ -47,13 +47,13 @@ void infoWindowInitialize(void)
     paramsClearPacket(&window->parameters);
     paramsInit(&window->parameters, g_infoWindowParameterDefaults.primary, sizeof(g_infoWindowParameterDefaults.primary),
                g_infoWindowParameterDefaults.secondary, sizeof(g_infoWindowParameterDefaults.secondary), NULL, 0, NULL, 0, NULL, 0);
-    uiSpriteStateInitFromSource(&window->sprites.background, 8, 135, &window->parameters, 1, 1.0f);
-    uiSpriteSetKeyframe(&window->sprites.background, 0, 0);
-    uiSpriteStateInitFromSource(&window->labelAnimation, 8, 135, &window->parameters, 1, 1.0f);
-    uiSpriteSetKeyframe(&window->labelAnimation, 2, 0);
-    uiSpriteStateInitFromSource(&window->sprites.content, 27, 4000, &window->parameters, 1, 1.0f);
-    uiSpriteSetKeyframe(&window->sprites.content, 3, 0);
-    uiSpriteSetImageKeyframe(&window->sprites.content, 0, 0);
+    uiSpriteStateInitFromSource(&window->background, 8, 135, &window->parameters, 1, 1.0f);
+    uiSpriteSetKeyframe(&window->background, 0, 0);
+    uiSpriteStateInitFromSource(&window->label, 8, 135, &window->parameters, 1, 1.0f);
+    uiSpriteSetKeyframe(&window->label, 2, 0);
+    uiSpriteStateInitFromSource(&window->content, 27, 4000, &window->parameters, 1, 1.0f);
+    uiSpriteSetKeyframe(&window->content, 3, 0);
+    uiSpriteSetImageKeyframe(&window->content, 0, 0);
     window->text = spriteHandleCreate(0);
     uiObjectSetColorRgb(window->text, -1);
     positionStateSet(window->text, 0, 0x646464FF, 0.0f);
@@ -62,7 +62,7 @@ void infoWindowInitialize(void)
     window->argA = 0;
     window->argB = 0;
     window->pending = 0;
-    window->initialization.resetState = 0;
+    window->resetState = 0;
     window->unk32C = 0;
     window->unk32D = 0;
 }

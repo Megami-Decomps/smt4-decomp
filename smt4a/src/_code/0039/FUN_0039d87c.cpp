@@ -29,13 +29,13 @@ u32 FUN_0039d87c(void)
         if ((flags & g_btlCandidateMasks.unavailable) == 0 &&
             (flags & g_btlCandidateMasks.required) != 0 &&
             (flags & g_btlCandidateMasks.excluded) == 0 && FUN_003020fc(entry, category) != 0) {
-            candidates[candidateCount++] = entry->id;
+            candidates[candidateCount++] = entry->data.id;
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
         BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
         if (entry != NULL && FUN_003020fc(entry, category) != 0) {
-            candidates[candidateCount++] = entry->id;
+            candidates[candidateCount++] = entry->data.id;
         }
     }
     if (candidateCount != 0) {

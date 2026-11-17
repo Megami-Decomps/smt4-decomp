@@ -156,12 +156,12 @@ void FUN_004dd0c4(BtlMainStateA **block, CommandStateA *state)
         BtlCombatantEntryA *entry = btlMainFindEntryByListedId(*block, action->combatant.parameterIndex);
         if ((entry->flags & g_btlAction.interaction.requiredMask) == 0)
             continue;
-        if ((entry->flags & actionMask(MASK_LEADER)) != 0 && entry->unitIndex != action->combatant.parameterIndex)
+        if ((entry->flags & actionMask(MASK_LEADER)) != 0 && entry->ids[0] != action->combatant.parameterIndex)
             continue;
         const UiPositionA *position = reinterpret_cast<const UiPositionA *>(&action->initialPositionX);
-        state->windowHandles[windowCount] = FUN_004aaebc(g_btlUiBlock, entry->id, action->marker.group, entry->maxHp, entry->maxMp,
-                                                         entry->statusFlags, NULL, position->x, position->y, position->z);
-        state->windowSelections[windowCount] = entry->indexView.selectionIndex;
+        state->windowHandles[windowCount] = FUN_004aaebc(g_btlUiBlock, entry->data.id, action->marker.group, entry->data.maxHp, entry->data.maxMp,
+                                                         entry->data.statusFlags, NULL, position->x, position->y, position->z);
+        state->windowSelections[windowCount] = entry->selectionIndex;
         ++windowCount;
     }
     FUN_004aa798(g_btlUiBlock, reinterpret_cast<u8 *>(*block) + 0x1EC8, 5);
@@ -195,8 +195,8 @@ void FUN_004dd0c4(BtlMainStateA **block, CommandStateA *state)
                 if ((secondEntry->flags & aliveMask) == 0 || (secondEntry->flags & hiddenMask) != 0 ||
                     (secondEntry->flags & enemyMask) == 0 || (secondEntry->flags & leaderMask) != 0)
                     continue;
-                const BattleRosterRecordA *firstAction = &(*block)->roster[firstEntry->unitIndex];
-                const BattleRosterRecordA *secondAction = &(*block)->roster[secondEntry->unitIndex];
+                const BattleRosterRecordA *firstAction = &(*block)->roster[firstEntry->ids[0]];
+                const BattleRosterRecordA *secondAction = &(*block)->roster[secondEntry->ids[0]];
                 if (firstAction->initialPositionX > secondAction->initialPositionX) {
                     state->targetOrder[slot] = first;
                     state->targetOrder[slot - 1] = second;

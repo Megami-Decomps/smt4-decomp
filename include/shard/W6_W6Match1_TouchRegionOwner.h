@@ -13,10 +13,4 @@ struct TouchRegionOwner {
     s16 height;
 };
 
-struct TouchRegionInlineSize {
-    u8 unk00[4];
-    u16 width;
-    u16 height;
-};
-
 #endif

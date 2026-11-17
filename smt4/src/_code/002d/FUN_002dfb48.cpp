@@ -1,16 +1,15 @@
 /* NON_MATCHING: heading-offset arithmetic, radius branch layout, vector stack placement and VFP registers differ. */
 #include "map/mapEnemy.h"
+#include "game/GameState.h"
 #include "map/LmapGlobals.h"
 #include "shard/W6_W6Match6_CollisionQuad.h"
 #include "util/TrigF32.h"
 
 /* The map view: its heading at 0x18. */
 struct SpawnViewHeading { u8 prefix[0x18]; f32 heading; };
-struct SpawnModePrefix { u8 prefix[0x44]; u16 mode; };
 extern "C" {
 extern MapEnemy *g_mapEnemy;
 extern SpawnViewHeading *DAT_004474f4;
-extern SpawnModePrefix DAT_0049fb1c;
 u32 randNextInRange(u32 maximum);
 s32 FUN_0025b4b0(const MapVector *start, const MapVector *end, MapVector *hit);
 f32 mathPositionHeadingDegrees(f32 x, f32 y, f32 z, f32 targetX, f32 targetY, f32 targetZ);
@@ -23,7 +22,7 @@ u32 FUN_002dfb48(MapEnemyEncounterView *entry)
         s32 sequence = enemies->unk3044;
         f32 heading = DAT_004474f4->heading;
         f32 radius;
-        if (DAT_0049fb1c.mode != 0) {
+        if (g_gameState.map.unk44 != 0) {
             if (sequence > 0) {
                 f32 offset = static_cast<f32>((sequence + 1) / 2) * 25.0f;
                 heading += (sequence & 1) != 0 ? -offset : offset;

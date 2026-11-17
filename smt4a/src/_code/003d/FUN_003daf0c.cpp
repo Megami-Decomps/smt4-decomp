@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "gamedata/FlagValueIsPositive.h"
 #include "code/Code002a.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -44,7 +45,6 @@ extern int g_camp; /* 0x57f108 */
 /* Supplied declaration required: padQueryLogicalKey. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern unsigned short ifTouchGetButtonHelpValue(void);
-extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: campChangeState. */
@@ -105,7 +105,7 @@ void FUN_003daf0c(int param_1)
     return;
   case 1:
     temp_v8[0] = '\0';
-    temp_v2 = asdTMTexTableEntryAt(0x14,0x56d);
+    temp_v2 = reinterpret_cast<unsigned int>(asdTMTexTableEntryAt(0x14,0x56d));
     temp_v6 = temp_v7;
     FUN_003450d4(temp_v7,temp_v2,temp_v5 + 0x1b3e,(int)*(short *)(temp_v5 + 0x1b34),
                  (int)*(short *)(temp_v5 + 0x1b36),(int)*(short *)(temp_v5 + 0x1b38),temp_v8,0,1);

@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match6_ActionController.h"
 #include "shard/W6_W6Match3_ColorFade.h"
 #include "shard/W6_W6Match8_BattleSpritePlacement.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/BtlGlobals.h"

@@ -23,7 +23,7 @@ u32 FUN_003bc83c()
     typedef char CandidateListOffsets[
         offsetof(CandidateListView, candidates) == 0x4E58 &&
         sizeof(std::vector<u16>) == 12 &&
-        offsetof(BtlCombatantEntryA, encodedStats.values) == 0x2B6 ? 1 : -1];
+        offsetof(BtlCombatantEntryA, data.values) == 0x2B6 ? 1 : -1];
     s32 enabled = scrGetArg(0);
     u32 category = scrGetArg(1);
     s32 supported[21];
@@ -39,7 +39,7 @@ u32 FUN_003bc83c()
                     (flags & g_btlCandidateMasks.required) &&
                     !(flags & g_btlCandidateMasks.excluded)) {
                     const EncodedCategoryValues *values =
-                        (const EncodedCategoryValues *)entry->encodedStats.values;
+                        (const EncodedCategoryValues *)entry->data.values;
                     for (s32 column = 0; column < 21; ++column) {
                         if (category == (u32)(values->values[column] >> 10))
                             supported[column] = 1;

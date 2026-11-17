@@ -1,26 +1,15 @@
 #include "common.h"
+#include "map/LmapGlobals.h"
 
 extern "C" {
-
-typedef struct Marker {
-    /* 0x0 */ u8 unk0[4];
-    /* 0x4 */ u32 handle;
-} Marker;
-
-typedef struct LmapScene {
-    /* 0x000 */ u8 unk000[0x180];
-    /* 0x180 */ Marker *marker;
-} LmapScene;
-
-extern LmapScene *g_lmapScene;
 
 extern void moriModelUnitStartMaterialAnimation(u32 handle, u32 id, s32 mode, f32 delay);
 
 /* Starts `id` on the lmap scene's marker (no delay), if it has one. */
 void lmapSceneMarkerStart(u32 id)
 {
-    if (g_lmapScene->marker != NULL) {
-        moriModelUnitStartMaterialAnimation(g_lmapScene->marker->handle, id, 2, 0.0f);
+    if (g_lmapScene->models[4] != NULL) {
+        moriModelUnitStartMaterialAnimation(g_lmapScene->models[4]->controller, id, 2, 0.0f);
     }
 }
 

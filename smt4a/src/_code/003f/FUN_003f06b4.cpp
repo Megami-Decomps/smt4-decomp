@@ -1,15 +1,7 @@
 /* NON_MATCHING: retail derives the loop end as 4 + 50 at run time (an inlined range helper) and needs fewer saved registers */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-
-struct BtlTargetMasks {
-    u8 unk00[0x58];
-    u64 active;     /* 0x58 */
-    u8 unk60[0x10];
-    u64 targetable; /* 0x70 */
-    u8 unk78[8];
-    u64 excluded;   /* 0x80 */
-};
+#include "battle/BtlGlobals.h"
 
 struct BtlEntrySelector {
     u8 unk00[0x68];
@@ -17,7 +9,6 @@ struct BtlEntrySelector {
 };
 
 extern "C" {
-extern BtlTargetMasks g_btlMain;
 
 /* Whether another active, targetable enemy entry shares the selected entry's id but not its selection slot. */
 u32 FUN_003f06b4(BtlMainStateA *state, BtlEntrySelector *selector)
@@ -29,10 +20,10 @@ u32 FUN_003f06b4(BtlMainStateA *state, BtlEntrySelector *selector)
         for (i = 4; i < 54; i++) {
             BtlCombatantEntryA *other = &state->entries[i];
 
-            if (other != NULL && (g_btlMain.active & other->flags) &&
-                !(g_btlMain.excluded & other->flags) && (other->flags & g_btlMain.targetable) &&
-                other->indexView.selectionIndex != self->indexView.selectionIndex &&
-                other->id == self->id) {
+            if (other != NULL && (g_btlMain.combatantMasks.required & other->flags) &&
+                !(g_btlMain.exclusionMask & other->flags) && (other->flags & g_btlMain.actorCategories[2]) &&
+                other->selectionIndex != self->selectionIndex &&
+                other->data.id == self->data.id) {
                 return 1;
             }
         }

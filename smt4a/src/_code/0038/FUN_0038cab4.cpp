@@ -23,15 +23,15 @@ u32 FUN_0038cab4()
         if (!(g_btlCandidateMasks.unavailable & entry->flags) &&
             (g_btlCandidateMasks.required & entry->flags) &&
             !(entry->flags & g_btlCandidateMasks.excluded) &&
-            entry->id == unitId && threshold <= entry->thresholdView.unk27A) {
+            entry->data.id == unitId && threshold <= entry->data.unk116) {
             scrSetResult(1);
             return 1;
         }
     }
     if (btlGetMainState()->unk4cd1) {
         BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
-        if (entry != NULL && entry->id == unitId &&
-            threshold <= entry->thresholdView.unk27A) {
+        if (entry != NULL && entry->data.id == unitId &&
+            threshold <= entry->data.unk116) {
             scrSetResult(1);
             return 1;
         }

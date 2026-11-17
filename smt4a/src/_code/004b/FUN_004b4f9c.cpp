@@ -3,13 +3,13 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "util/BitsAndBytes.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
 int FUN_00180310(...);
-int asdTMTexTableEntryAt(...);
 int gxResetColorQuadToWhite(void);
 int drawSetColorFromRGBA8(...);
 
@@ -60,14 +60,14 @@ void FUN_004b4f9c(int param_1,int param_2,int param_3)
   int *piVar14;
   
   texDrawCompositeSprite(2,0x1d,4,param_2,param_3,0x65);
-  temp_v4 = asdTMTexTableEntryAt(0x1d,0x87);
+  temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x87));
   drawSetColorFromRGBA8(0x1a5c72ff);
   FUN_00180310(0,*(short *)(temp_v4 + 8) + param_2,*(short *)(temp_v4 + 10) + param_3,0,0,0x6a,
                "%d",*(unsigned int *)(param_1 + 0x75c4));
-  temp_v4 = asdTMTexTableEntryAt(0x1d,0x88);
+  temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x88));
   FUN_00180310(0,*(short *)(temp_v4 + 8) + param_2,*(short *)(temp_v4 + 10) + param_3,0,0,0x6a,
                "/");
-  temp_v4 = asdTMTexTableEntryAt(0x1d,0x8a);
+  temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x8a));
   drawSetColorFromRGBA8(0xff);
   FUN_00180310(0,*(short *)(temp_v4 + 8) + param_2,*(short *)(temp_v4 + 10) + param_3,0,0,0x6a,
                "%d",*(unsigned int *)(param_1 + 0x7558));
@@ -76,15 +76,15 @@ void FUN_004b4f9c(int param_1,int param_2,int param_3)
   piVar14 = (int *)(param_1 + 0x74c0);
   temp_v0 = *(short *)(temp_v4 + 0x1c);
   temp_v1 = *(short *)(param_1 + *piVar14 * 0x150 + 0x444c);
-  temp_v4 = asdTMTexTableEntryAt(0x1d,0x9a);
+  temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x9a));
   texDrawCompositeSprite(2,0x1d,5,*(short *)(temp_v4 + 8) + param_2,*(short *)(temp_v4 + 10) + param_3,0x65);
   texDrawTableEntryAtStoredOrigin(2,0x1d,0x8f,*(short *)(temp_v4 + 8) + param_2,*(short *)(temp_v4 + 10) + param_3,0x6a);
   texDrawTableEntryAtStoredOrigin(2,0x1d,0x91,*(short *)(temp_v4 + 8) + param_2,*(short *)(temp_v4 + 10) + param_3,0x6a);
-  temp_v5 = asdTMTexTableEntryAt(0x1d,0x95);
+  temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x95));
   FUN_00180310(0,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + param_2,
                (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + param_3,1,4,0x6a,
                "%d",(int)temp_v1);
-  temp_v5 = asdTMTexTableEntryAt(0x1d,0x99);
+  temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x99));
   drawSetColorFromRGBA8(0x72e027ff);
   FUN_00180310(0,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + param_2,
                (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + param_3,1,4,0x6a,
@@ -93,15 +93,15 @@ void FUN_004b4f9c(int param_1,int param_2,int param_3)
   temp_v4 = gameGetPlayerData();
   temp_v11 = (int)*(short *)(temp_v4 + 0x1e);
   temp_v12 = (int)*(short *)(param_1 + *piVar14 * 0x150 + 0x444e);
-  temp_v4 = asdTMTexTableEntryAt(0x1d,0x9b);
+  temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x9b));
   texDrawCompositeSprite(2,0x1d,5,*(short *)(temp_v4 + 8) + param_2,*(short *)(temp_v4 + 10) + param_3,0x65);
   texDrawTableEntryAtStoredOrigin(2,0x1d,0x90,*(short *)(temp_v4 + 8) + param_2,*(short *)(temp_v4 + 10) + param_3,0x6a);
   texDrawTableEntryAtStoredOrigin(2,0x1d,0x91,*(short *)(temp_v4 + 8) + param_2,*(short *)(temp_v4 + 10) + param_3,0x6a);
-  temp_v5 = asdTMTexTableEntryAt(0x1d,0x95);
+  temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x95));
   FUN_00180310(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + param_2,
                (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + param_3,1,4,0x6a,
                "%d",temp_v12);
-  temp_v5 = asdTMTexTableEntryAt(0x1d,0x99);
+  temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x99));
   drawSetColorFromRGBA8(0x72e027ff);
   FUN_00180310(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + param_2,
                (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + param_3,1,4,0x6a,
@@ -137,17 +137,17 @@ void FUN_004b4f9c(int param_1,int param_2,int param_3)
         temp_v11 = (int)*(short *)(temp_v5 + 0x28);
         temp_v12 = (int)*(short *)(param_1 + *piVar14 * 0x150 + 0x4458);
       }
-      temp_v5 = asdTMTexTableEntryAt(0x1d,temp_v4 + 0xba);
+      temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,temp_v4 + 0xba));
       texDrawCompositeSprite(2,0x1d,6,*(short *)(temp_v5 + 8) + param_2,*(short *)(temp_v5 + 10) + param_3,0x65);
       texDrawTableEntryAtStoredOrigin(2,0x1d,temp_v4 + 0x9e,*(short *)(temp_v5 + 8) + param_2,
                    *(short *)(temp_v5 + 10) + param_3,0x6a);
-      temp_v6 = asdTMTexTableEntryAt(0x1d,0xb6);
+      temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0xb6));
       drawSetColorFromRGBA8(0x9b9b9bff);
       FUN_00180310(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v6 + 8) + param_2,
                    (int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v5 + 10) + param_3,1,3,0x6a,
                    "%d",temp_v12);
       gxResetColorQuadToWhite();
-      temp_v6 = asdTMTexTableEntryAt(0x1d,0xb9);
+      temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0xb9));
       temp_v9 = *(short *)(temp_v5 + 10) + param_3;
       temp_v10 = *(short *)(temp_v5 + 8) + param_2;
       if (temp_v12 < temp_v11) {
@@ -171,7 +171,7 @@ void FUN_004b4f9c(int param_1,int param_2,int param_3)
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 5);
   temp_v4 = listCursorGetRowIfUnblocked(param_1 + 0x7560);
-  temp_v5 = asdTMTexTableEntryAt(0x1d,temp_v4 + 0xba);
+  temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,temp_v4 + 0xba));
   switch(temp_v4) {
   case 0:
     temp_v11 = gameGetPlayerData();
@@ -257,11 +257,11 @@ void FUN_004b4f9c(int param_1,int param_2,int param_3)
   texDrawTableEntryAtStoredOrigin(2,0x1d,temp_v4 + 0xaa,*(short *)(temp_v5 + 8) + param_2,*(short *)(temp_v5 + 10) + param_3,
                0x6a);
   gxResetColorQuadToWhite();
-  temp_v4 = asdTMTexTableEntryAt(0x1d,0xb6);
+  temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0xb6));
   FUN_00180310(0,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + param_2,
                (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v4 + 10) + param_3,1,3,0x6f,
                "%d",temp_v12);
-  temp_v4 = asdTMTexTableEntryAt(0x1d,0xb9);
+  temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0xb9));
   if (temp_v12 < temp_v11) {
     temp_v7 = 0x72e027ff;
   }

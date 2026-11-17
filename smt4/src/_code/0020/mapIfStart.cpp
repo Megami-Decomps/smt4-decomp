@@ -1,11 +1,9 @@
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 
 extern "C" {
 
 void dialogSetText(s32 arg);
 void dialogOpen(s32 a, s32 b);
-
-extern MapIfGlobals g_mapIf;
 
 void mapIfStart(s32 arg)
 {

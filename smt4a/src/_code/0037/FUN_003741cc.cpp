@@ -4,12 +4,8 @@
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 #include "util/BitsAndBytes.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
-struct SaveSlotMarkerAnchorA {
-    u8 unk00[8];
-    s16 x;
-    s16 y;
-};
 /* The animation timer embedded in the transition work. */
 static __inline UiSpriteState *slotTimer(SaveSlotTransitionPrefixA *work)
 {
@@ -20,7 +16,6 @@ extern "C" {
 s32 vec2GetYInt(const UiSpriteState *);
 void efctSetSpeed(f32);
 f32 vec2GetSpeed(const void *object);
-const SaveSlotMarkerAnchorA *asdTMTexTableEntryAt(u32, s32);
 
 void FUN_003741cc(SaveSlotTransitionPrefixA *work)
 {
@@ -30,7 +25,7 @@ void FUN_003741cc(SaveSlotTransitionPrefixA *work)
         f32 scale = vec2GetSpeed(slotTimer(work));
         UiSpriteState *base = reinterpret_cast<UiSpriteState *>(work->unk0000 + 0xAC);
         efctSetSpeed(vec2GetSpeed(base) * scale);
-        const SaveSlotMarkerAnchorA *anchor = asdTMTexTableEntryAt(13, work->transitionMode + 0x52);
+        const TextureTableEntryIV *anchor = asdTMTexTableEntryAt(13, work->transitionMode + 0x52);
         RenderCtxA *context = g_renderCtx;
         renderCtxSetB(context, packNibblesAndByte(6, 1, 0));
         texDrawTableEntryAtStoredOrigin(2, 13, 0x4B, anchor->x + x, anchor->y + y, 0x29);

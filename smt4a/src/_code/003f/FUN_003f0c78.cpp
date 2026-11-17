@@ -26,7 +26,7 @@ extern "C" void FUN_003f0c78(BtlMainStateA *state)
         BtlCombatantEntryA *descriptor = btlMainFindEntryByListedId(state, entry->motion.group);
         const BattleCombatantStatusKey *identity = &((const RosterIdentityView *)descriptor)->identity;
         BattleRosterCacheEntry *cache = state->rosterCache.entries;
-        s16 selectionIndex = descriptor->indexView.selectionIndex;
+        s16 selectionIndex = descriptor->selectionIndex;
         for (s32 cacheIndex = 0; cacheIndex < 50; ++cacheIndex) {
             const BattleRosterCacheEntry *saved = &cache[cacheIndex];
             if (saved->selectionIndex == selectionIndex && saved->group == entry->motion.group &&

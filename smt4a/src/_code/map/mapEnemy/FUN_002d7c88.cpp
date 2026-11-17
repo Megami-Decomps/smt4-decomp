@@ -1,12 +1,12 @@
 /* NON_MATCHING: count initialization and final model-flag store scheduling differ; all calls match. */
 #include "Model/ModelList.h"
 #include "shard/W9_W9Match7_EnemyModelSources.h"
+#include "Model/MoriModelManager.h"
 
 extern "C" {
 extern u8 *g_mapEnemy;
 extern u8 DAT_005f17fc[];
 extern EnemyExtraModelSource DAT_00582204[];
-extern void *g_handleRegistry;
 void textFormatBuffer(char *, const char *, ...);
 void *asdMemoryAllocTraced(u32, const char *, u32);
 ModelList *modelListInit(ModelList *);
@@ -15,7 +15,6 @@ void FUN_0040a908(ModelList *, s32);
 void FUN_0040a918(ModelList *, s32);
 void moriModelContentLoadBody(ModelList *, u32);
 void modelPlayClip(MoriModelBody *, u32, u8, f32, f32);
-void handleRegistryRegisterObject(void *, MoriModelBody *);
 }
 
 extern "C" u32 FUN_002d7c88(s32 index)

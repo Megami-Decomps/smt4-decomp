@@ -4,6 +4,7 @@
 #include "util/MathFunctions.h"
 #include "util/BitsAndBytes.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxA.h"
 
 namespace {
 struct MaskedSpriteWidget {
@@ -15,7 +16,6 @@ typedef char MaskedSpriteWidgetPositionCheck[
 }
 
 extern "C" {
-extern RenderCtxScissorA *g_renderCtx;
 void FUN_00168e00(s32 x, s32 y, s32 width, s32 height);
 s32 vec2GetYInt(const void *position);
 void renderPopStateStacks();

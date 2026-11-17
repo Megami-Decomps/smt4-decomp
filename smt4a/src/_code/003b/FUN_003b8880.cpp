@@ -15,8 +15,8 @@ u32 FUN_003b8880(void)
     for (s32 i = 0; i < 109; i++) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
         if ((entry->flags & g_btlMessageFlagMasks[1]) != 0 && (entry->flags & g_btlMessageFlagMasks[5]) == 0 &&
-            entry->unitIndex >= 0 && (entry->flags & g_btlMessageFlagMasks[4]) != 0) {
-            result = entry->unitIndex;
+            entry->ids[0] >= 0 && (entry->flags & g_btlMessageFlagMasks[4]) != 0) {
+            result = entry->ids[0];
             break;
         }
     }

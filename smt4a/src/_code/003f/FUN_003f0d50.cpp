@@ -22,7 +22,7 @@ extern "C" void FUN_003f0d50(BtlMainStateA *battle)
                     &reinterpret_cast<const CombatantStatusView *>(combatant)->status;
                 for (s32 cacheIndex = 0; cacheIndex < 50; ++cacheIndex) {
                     BattleRosterCacheEntry *cache = &battle->rosterCache.entries[cacheIndex];
-                    if (cache->selectionIndex == combatant->indexView.selectionIndex &&
+                    if (cache->selectionIndex == combatant->selectionIndex &&
                         cache->group == roster->motion.group &&
                         cache->id == status->id &&
                         cache->key == status->key) {

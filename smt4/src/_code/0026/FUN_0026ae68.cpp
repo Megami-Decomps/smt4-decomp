@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026ae68` (_code @ 0x26ae68, 0x634 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -15,7 +16,6 @@ extern int g_statusDown; /* 0x44e190 */
 extern int FUN_0029ee54(int);
 /* Supplied declaration required: ifTouchRegionAddRequested. */
 /* Supplied declaration required: ifTouchRegionRemove. */
-extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: __aeabi_memset4. */
 
@@ -112,8 +112,8 @@ void FUN_0026ae68(void)
         temp_v4 = FUN_0029ee54(temp_v0 + 0x4d4);
       } while (temp_v2 < temp_v4 - 1);
     }
-    temp_v4 = asdTMTexTableEntryAt(0x1a,0x4f1);
-    temp_v2 = asdTMTexTableEntryAt(0x1a,0x41f);
+    temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x4f1));
+    temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x41f));
     temp_v5 = (int)*(short *)(temp_v4 + 8);
     ifTouchRegionAdd(temp_v5,(int)*(short *)(temp_v4 + 10),(int)**(short **)(temp_v2 + 0xc),
                  (int)*(short *)(*(int *)(temp_v4 + 0xc) + 2));

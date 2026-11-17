@@ -1,23 +1,20 @@
 /* NON_MATCHING: register assignment (object/slot index) and the owned==NULL store is predicated instead of sharing retail's single `unk04 = 0` store */
 #include "classes/Obj557ae8.h"
+#include "Model/MoriModelManager.h"
 
 struct ModelList;
 
 extern "C" {
 
-extern u32 g_handleRegistry;
-
 void modelPlayClip(ControllerModel *model, u32 index, u8 flags, f32 time, f32 blend);
 u32 FUN_00340f80(Obj557ae8 *object);
 void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 ModelList *modelListInit(ModelList *list);
-void ptrListRemoveClearOwner(u32 registry, ControllerModel *model);
 void FUN_003e573c(Obj557ae8 *object, s32 index, const char *name, u16 kind);
 void controllerSetPositionXyz(ControllerModel *model, f32 x, f32 y, f32 z);
 void moriModelContentLoadBody(Obj557ae8Child *child, ControllerModel *parent);
 void FUN_0040ab7c(Obj557ae8Child *child, s32 mode);
 s32 FUN_0040ab8c(Obj557ae8Child *child);
-void handleRegistryRegisterObject(u32 registry, ControllerModel *model);
 
 /* Steps the player model: finishes loading the owned model, then advances each of the three slots
  * through its states (1 loading, 2 releasing, 3 released, 4 retry, 5 queued). */

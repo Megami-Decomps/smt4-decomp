@@ -18,7 +18,7 @@ u32 FUN_0038bf08(void)
         if ((entry->flags & g_btlCandidateMasks.unavailable) &&
             (entry->flags & g_btlCandidateMasks.required) &&
             !(entry->flags & g_btlCandidateMasks.excluded) &&
-            entry->id == id && entry->thresholdView.unk27A >= minimum) {
+            entry->data.id == id && entry->data.unk116 >= minimum) {
             scrSetResult(1);
             return 1;
         }

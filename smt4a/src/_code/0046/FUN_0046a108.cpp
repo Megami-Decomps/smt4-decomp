@@ -2,6 +2,7 @@
 #include "common.h"
 #include <stddef.h>
 #include "text/TextDraw.h"
+#include "camp/RenderCtxA.h"
 
 struct MessageDebugEntry {
     u16 message;
@@ -24,10 +25,8 @@ typedef char MessageDebugOverlayOffsets[
     offsetof(MessageDebugEntry, message) == 0 && sizeof(MessageDebugEntry) == 4 ? 1 : -1];
 
 extern "C" {
-extern void *g_renderCtx;
 extern const char DAT_00533528[];
 extern const char DAT_00533560[];
-void renderCtxSelectTexture(void *context, u32 state);
 void gxSubmitDrawZeroExtraParams(u32 firstColor, u32 secondColor, u32 thirdColor, u32 fourthColor, f32 x, f32 y, f32 width, f32 height, f32 depth);
 const char *FUN_00156850(u16 id, u32 variant);
 s32 FUN_0031d174(const void *queue);

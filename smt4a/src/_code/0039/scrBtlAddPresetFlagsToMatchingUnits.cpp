@@ -29,7 +29,7 @@ u32 scrBtlAddPresetFlagsToMatchingUnits(void)
     for (i = 4; i < 54; i++) {
         BtlCombatantEntryA *unit = &state->entries[i];
         if ((unit->flags & required) && !(unit->flags & excluded) &&
-            (unit->flags & requiredToo) && unit->id == id) {
+            (unit->flags & requiredToo) && unit->data.id == id) {
             unit->flags |= added;
         }
     }

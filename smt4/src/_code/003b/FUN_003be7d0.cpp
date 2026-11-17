@@ -1,4 +1,4 @@
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include <stddef.h>
 #include "battle/BtlMainAccess.h"
@@ -28,7 +28,7 @@ s32 randRange(u32);
 extern "C" void FUN_003be7d0(const BtlEntry *entry)
 {
     BattleRewardTotals *rewards = &reinterpret_cast<BattleRewardView *>(btlGetMainState())->rewards;
-    const NkmEnemyRecord *record = nkmEnemyFindById(entry->id);
+    const NkmEnemyRecord *record = nkmEnemyFindById(entry->data.id);
     if (record != NULL) {
         rewards->experience += record->experience;
         rewards->money += record->money;

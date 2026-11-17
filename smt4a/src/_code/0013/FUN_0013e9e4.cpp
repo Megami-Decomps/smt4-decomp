@@ -1,39 +1,27 @@
-#include "shard/JobWork.h"
+#include "frame_tex/FrameTexA.h"
 #include "Model/MoriModelShadowMap.h"
 
-struct RenderJobFrame {
-    u8 unk00[0x14];
-    u8 ready;
-    u8 unk15[2];
-    u8 complete;
-};
-struct RenderJobWork {
-    u8 unk0000[0xc];
-    u8 active;
-    u8 unk000d[0x13f3];
-    RenderJobFrame frame; // 0x1400
-};
-
-typedef char RenderJobFrameOffsetCheck[offsetof(RenderJobWork, frame) == 0x1400 ? 1 : -1];
-
 extern "C" {
+
 bool stateValuesGetBySelector(u32 index);
 void FUN_0014b01c(u32 value);
 
+/* "ENCEFFDR" draw: once the ENCEFF effect is enabled with its left capture done and its fade active, draws it on the right screen unless a state selector is set. */
 bool FUN_0013e9e4(u32 job)
 {
-    RenderJobWork *work = (RenderJobWork *)jobGetWork(job);
-    RenderJobFrame *frame = &work->frame;
-    if (frame->ready == 0) {
+    FrameTexWorkA *work = (FrameTexWorkA *)jobGetWork(job);
+
+    if (work->encEffEnabled == 0) {
         return false;
     }
-    if (frame->complete == 0) {
+    if (work->encEffCapturedLeft == 0) {
         return false;
     }
-    if (stateValuesGetBySelector(0) == 0 && work->active != 0) {
+    if (stateValuesGetBySelector(0) == 0 && work->encEffFadeActive != 0) {
         renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         FUN_0014b01c(0);
     }
     return false;
 }
+
 }

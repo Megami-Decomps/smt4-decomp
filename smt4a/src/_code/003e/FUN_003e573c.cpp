@@ -2,6 +2,7 @@
 #include "common.h"
 #include "code/Code001c.h"
 #include <string.h>
+#include "Model/MoriModelManager.h"
 
 struct NamedResourceObject {
     /* 0x0 */ u8 unk0[4];
@@ -32,10 +33,8 @@ struct NamedResourceTable {
 };
 
 extern "C" {
-extern void *g_handleRegistry;
 s32 FUN_0040ab8c(NamedResourceHandle *handle);
 char *strncpy(char *destination, const char *source, u32 count);
-void ptrListRemoveClearOwner(void *list, NamedResourceObject *object);
 
 /* Points slot `index` at the resource `name` of kind `kind`: an open slot showing another name
  * releases its object, an idle table opens it directly (state 4), otherwise it is queued (state 5). */

@@ -1,6 +1,6 @@
 #include "title/titleMain.h"
+#include "camp/RenderCtxTitle.h"
 
-extern "C" TitleScene *g_titleScene;
 extern "C" void FUN_002d7d84(void);
 
 /* Update the title scene's callback data and finish the title operation. */

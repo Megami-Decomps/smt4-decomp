@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 
@@ -7,13 +8,12 @@ typedef struct TitleScene {
     /* 0x528 */ s32 phase;
 } TitleScene;
 
-extern TitleScene *g_titleScene; /* 0x44ea00 */
 
 extern int renderCtxResetFrameState(int mode);
 extern void FUN_002bdb44(void);
 extern int renderTargetClear(int a, int b);
-extern int FUN_002c3a14(TitleScene *scene);
-void renderCtxSetStereoMode(TitleScene *scene, u32 mode);
+extern int FUN_002c3a14(RenderCtx *scene);
+void renderCtxSetStereoMode(RenderCtx *scene, u32 mode);
 
 /* Switches the title scene to phase 2 and refreshes it. */
 u32 FUN_00103dd8(void)

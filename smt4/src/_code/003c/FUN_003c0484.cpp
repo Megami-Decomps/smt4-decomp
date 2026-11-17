@@ -1,5 +1,5 @@
 /* NON_MATCHING: guard tests, tail calls and the shared result returns now match; retail reaches the final battleFlags read with add/add (not the literal-pool index form), sets up the btlHelpEntryCreate stack arguments in a different order and numbers the saved argument registers r6/r5. */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/btlHelp.h"
 #include "battle/BtlMainAccess.h"
@@ -18,16 +18,16 @@ u32 FUN_003c0484(BtlEntry *entry, u32 ignoredConditions, u8 context)
     if ((flags & 0x200) != 0)
         return 0;
     u32 result = 0;
-    if ((entry->groupMask & 8) != 0 && (ignoredConditions & 8) == 0) {
+    if ((entry->data.statusFlags & 8) != 0 && (ignoredConditions & 8) == 0) {
         return FUN_0022a5d8(0x24, entry, context);
     }
-    if ((entry->groupMask & 0x200) != 0) {
+    if ((entry->data.statusFlags & 0x200) != 0) {
         return FUN_0022a5d8(0x13, entry, context);
     }
-    if ((entry->groupMask & 0x20) != 0) {
+    if ((entry->data.statusFlags & 0x20) != 0) {
         return FUN_0022a5d8(0x14, entry, context);
     }
-    if (battleGetEntryHalfword(entry->members.ids[0], 13) > 0) {
+    if (battleGetEntryHalfword(entry->ids[0], 13) > 0) {
         return FUN_0022a5d8(0x1f, entry, context);
     }
     if ((entry->flags & 8) == 0 || playerPadTestBit(1) == 0) {

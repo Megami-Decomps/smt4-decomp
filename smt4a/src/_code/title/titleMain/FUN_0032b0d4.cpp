@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "util/BitsAndBytes.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -38,7 +39,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: fontMeasureTextWidth. */
 extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxSelectTexture. */
-extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: dataTableGet. */
 extern int dataTableGetEntries(void);
@@ -129,7 +129,7 @@ unsigned int FUN_0032b0d4(void)
       if (*(char *)(temp_v2 + 0x3c) == '\0') {
         temp_v13 = 0x787878ff;
       }
-      temp_v1 = asdTMTexTableEntryAt(9,0x11);
+      temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(9,0x11));
       temp_v12 = 0x3f000000;
       temp_v3 = 0;
       temp_v0 = **(short **)(temp_v1 + 0xc);

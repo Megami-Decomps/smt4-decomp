@@ -2,16 +2,16 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlUnit.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "shard/W6_W6Match1_PartySlot.h"
+#include "gamedata/GameSaveDataA.h"
 #include "gamedata/SkillDataRecord.h"
 #include "gamedata/ConsumableRecordA.h"
 #include "battle/BtlGlobals.h"
+#include "gamedata/SaveSlotRecord.h"
 
 extern "C" {
 extern const u8 DAT_005713f0[];
 void btlEntryBuildSummary(void *snapshot, BtlMainStateA *battle, BtlCombatantEntryA *subject);
 s32 FUN_004bd098(u32 source, u32 item);
-PartySlotA *gameGetSlotRecord(s32 index);
 
 u32 FUN_004bfa30(u32 itemId, u32 skillId, u32 subjectId, s32 target)
 {
@@ -33,11 +33,11 @@ u32 FUN_004bfa30(u32 itemId, u32 skillId, u32 subjectId, s32 target)
     struct Snapshot { u32 prefix[10]; u16 kind; u8 restricted; u8 tail[9]; } snapshot;
     btlEntryBuildSummary(&snapshot, battle, subject);
     if (snapshot.restricted) {
-        if (!(subject->statusFlags & 0x10))
+        if (!(subject->data.statusFlags & 0x10))
             return 0;
         struct GateMasks { u8 prefix[0x18]; u64 blocked; };
         const GateMasks *gates = reinterpret_cast<const GateMasks *>(DAT_005713f0);
-        if ((subject->flags & gates->blocked) && FUN_004bd098(subject->sourceId, itemId) < 0)
+        if ((subject->flags & gates->blocked) && FUN_004bd098(subject->data.sourceId, itemId) < 0)
             return 0;
     }
     u32 category = 0;
@@ -64,7 +64,7 @@ u32 FUN_004bfa30(u32 itemId, u32 skillId, u32 subjectId, s32 target)
     if (target < 109)
         categories = btlFindEntryBlockByMemberId(battle, target)->statusFlags;
     else
-        categories = gameGetSlotRecord(target - 109)->unk60;
+        categories = gameGetSlotRecord(target - 109)->ailments;
     return (categories & mask) ? mask : 0;
 }
 }

@@ -1,5 +1,4 @@
-#include "map/lmapMain.h"
-#include "map/mapDepart.h"
+#include "map/PopupStateA.h"
 
 extern "C" {
 
@@ -7,13 +6,11 @@ void popupQueueInsertUnique(s32 state);
 void lmapApplyMapAndArea(void);
 void FUN_003b5d1c(void);
 s32 lmapMainIsRunning(void);
-s32 popupSelectWeightedMessage(s32 a, s32 b);
-
-extern LmapEventA *g_popupState;
+const char *popupSelectWeightedMessage(s32 kind, s32 speakerId);
 
 void FUN_00295024(void)
 {
-    LmapEventA *event;
+    PopupStateA *popup;
 
     if (g_popupState->state != 0) {
         if (g_popupState->state != 0xD) {
@@ -26,10 +23,10 @@ void FUN_00295024(void)
         } else {
             FUN_003b5d1c();
         }
-        event = g_popupState;
+        popup = g_popupState;
         g_popupState->state = 0xD;
-        event->unk04 = 0;
-        g_popupState->unk14 = popupSelectWeightedMessage(0xF, 0);
+        popup->timer = 0;
+        g_popupState->message = popupSelectWeightedMessage(0xF, 0);
     }
 }
 

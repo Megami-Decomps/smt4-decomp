@@ -1,6 +1,5 @@
-#include "shard/W5_W5Match2_FrameTextureQuery.h"
+#include "frame_tex/FrameTex.h"
 extern "C" {
-extern FrameTextureQuery *g_frameTex;
-/* Read the frame texture state, or zero while absent. */
-s32 frameTextureGetState(void) { return g_frameTex != NULL ? g_frameTex->state : 0; }
+/* Whether the ENCEFF fade is active, or zero while the frame texture work is absent. */
+s32 frameTextureGetState(void) { return g_frameTex != NULL ? g_frameTex->encEffFadeActive : 0; }
 }

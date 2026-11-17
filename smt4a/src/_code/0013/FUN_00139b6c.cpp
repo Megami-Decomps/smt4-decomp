@@ -1,6 +1,7 @@
 #include "common.h"
 #include "game/GameStateA.h"
 #include "gamedata/GameDataAccess.h"
+#include "shard/W5_W5Match7_FlagBanks.h"
 
 extern "C" {
 

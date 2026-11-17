@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -22,7 +23,6 @@ int vec2GetXInt(...);
 int renderCtxPopState(...);
 int renderStackPushIndexed(...);
 int texDrawCompositeSprite(...);
-int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int VectorSignedToFloat(...);
 
@@ -116,27 +116,27 @@ unsigned int FUN_0010a9c8(void)
     renderStackPushIndexed(g_titleScene,3,temp_v3);
     efctSetSpeed();
     gxResetColorQuadToWhite();
-    temp_v4 = asdTMTexTableEntryAt(0xe,200);
+    temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,200));
     texDrawCompositeSprite(2,0xe,10,*(short *)(temp_v4 + 8) + temp_v1,*(short *)(temp_v4 + 10) + temp_v2,0xb);
     temp_v3 = *(unsigned int *)(DAT_0043e190 + 0x68);
     dataFindKindRecordWithAocOverrides(temp_v3,0);
     textFormatBuffer(temp_v9,"%s",temp_v3);
-    temp_v5 = asdTMTexTableEntryAt(0xe,0xc2);
+    temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0xc2));
     VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(2,0xff,temp_v9,(int)*(short *)(temp_v5 + 10));
-    temp_v5 = asdTMTexTableEntryAt(0xe,0xc1);
+    temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0xc1));
     itemDrawCategoryBadge((int)(short)*(unsigned int *)(DAT_0043e190 + 0x68),
                  (int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v1,
                  (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0x10,0);
     drawSetColorFromRGBA8(0xff);
-    temp_v5 = asdTMTexTableEntryAt(0xe,0xc6);
+    temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0xc6));
     FUN_002bdf94(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                  (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,1,4,0x10,
                  "%d",*(unsigned int *)(DAT_0043e190 + 0x6c));
-    temp_v5 = asdTMTexTableEntryAt(0xe,199);
+    temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,199));
     FUN_002bdf94(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                  (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0,1,0x10,
                  "*");
@@ -152,7 +152,7 @@ unsigned int FUN_0010a9c8(void)
     renderStackPushIndexed(g_titleScene,3,temp_v3);
     efctSetSpeed();
     gxResetColorQuadToWhite();
-    temp_v5 = asdTMTexTableEntryAt(0xe,0xc0);
+    temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0xc0));
     texDrawCompositeSprite(2,0xe,0x11,*(short *)(temp_v5 + 8) + temp_v4,*(short *)(temp_v5 + 10) + temp_v2,0xb);
     FUN_002bdce0(*(unsigned short *)(temp_v1 + 0x90),*(short *)(temp_v5 + 8) + temp_v4,
                  *(short *)(temp_v5 + 10) + temp_v2,0);
@@ -172,10 +172,10 @@ unsigned int FUN_0010a9c8(void)
       temp_v7 = temp_v7 / 10;
     } while (temp_v7 != 0);
     if (temp_v1 >= 0) {
-      temp_v1 = asdTMTexTableEntryAt(0xe,0x65 - temp_v1);
+      temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0x65 - temp_v1));
     }
     else {
-      temp_v1 = asdTMTexTableEntryAt(0xe,0x5d);
+      temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0x5d));
     }
     drawSetColorFromRGBA8(0xff);
     FUN_002bdf94(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v1 + 8) + temp_v4,

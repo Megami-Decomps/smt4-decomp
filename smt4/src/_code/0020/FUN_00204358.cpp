@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00204358` (_code @ 0x204358, 0xb5c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -25,7 +26,6 @@ int buttonHelpSetPreset(...);
 int uiSlidingSpriteAdvance(int, int);
 int eventQueueAddUniqueIfValid(...);
 int timerStart(...);
-int asdTMTexTableEntryAt(int, int);
 int uiSpriteAdvanceAnimation(...);
 int FUN_002c1658(...);
 
@@ -122,16 +122,16 @@ void FUN_00204358(int param_1)
     do {
       temp_v1 = ifTouchRegionAddRequested(0x28,temp_v10 + 0xba);
       *(unsigned short *)(param_1 + temp_v10 * 2 + 0x357e) = temp_v1;
-      temp_v5 = asdTMTexTableEntryAt(0x28,temp_v10 + 0xba);
-      temp_v4 = asdTMTexTableEntryAt(0x28,0x117);
+      temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x28,temp_v10 + 0xba));
+      temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x28,0x117));
       temp_v2 = **(short **)(temp_v4 + 0xc);
       temp_v3 = (int)(short)(*(short *)(temp_v5 + 8) + *(short *)(temp_v4 + 8) + temp_v2 * -2);
       ifTouchRegionAdd(temp_v3,(int)(short)(*(short *)(temp_v5 + 10) + *(short *)(temp_v4 + 10)),
                    (int)(short)(temp_v2 * 3),(int)(*(short **)(temp_v4 + 0xc))[1]);
       temp_v11 = param_1 + temp_v10 * 4;
       *(short *)(temp_v11 + 0x359e) = (short)temp_v3;
-      temp_v5 = asdTMTexTableEntryAt(0x28,temp_v10 + 0xba);
-      temp_v4 = asdTMTexTableEntryAt(0x28,0x116);
+      temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x28,temp_v10 + 0xba));
+      temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x28,0x116));
       temp_v3 = (int)(short)(*(short *)(temp_v5 + 8) + *(short *)(temp_v4 + 8));
       ifTouchRegionAdd(temp_v3,(int)(short)(*(short *)(temp_v5 + 10) + *(short *)(temp_v4 + 10)),
                    (int)(short)(**(short **)(temp_v4 + 0xc) * 3),(int)(*(short **)(temp_v4 + 0xc))[1]);

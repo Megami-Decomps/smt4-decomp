@@ -3,6 +3,7 @@
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
+#include "camp/RenderCtxTitle.h"
 
 namespace {
 struct TitleDebugBackgroundView {
@@ -14,7 +15,6 @@ struct TitleDebugBackgroundView {
 }
 extern "C" {
 extern TitleDebugBackgroundView *g_titleDbgBg;
-extern RenderCtx *g_titleScene;
 u32 renderCtxPackPassFlags(u32 mode, u32 option);
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite();

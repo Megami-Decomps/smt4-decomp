@@ -1,20 +1,15 @@
-#include "common.h"
+#include "map/MapIfGlobals.h"
 
-struct MapInterface {
-    u8 unk00[0x3C]; // 0x00
-    u32 state;      // 0x3C
-};
-
-static __inline void mapInterfaceSetState(MapInterface *map, u32 state)
+static __inline void mapInterfaceSetState(MapIfStateA *map, s32 state)
 {
-    map->state = state;
+    map->unk3C = state;
 }
 
 extern "C" {
-extern MapInterface* g_mapIf;
 
 void FUN_002342b8(void)
 {
-    mapInterfaceSetState(g_mapIf, 2);
+    mapInterfaceSetState(g_mapIf.state, 2);
 }
+
 }

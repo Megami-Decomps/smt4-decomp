@@ -1,4 +1,4 @@
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
@@ -14,7 +14,7 @@ u32 scrCommGetSelectedCombatantId(void)
     if (index < 0)
         scrSetResult(0);
     else
-        scrSetResult(state->entries[index].id);
+        scrSetResult(state->entries[index].data.id);
     return 1;
 }
 }

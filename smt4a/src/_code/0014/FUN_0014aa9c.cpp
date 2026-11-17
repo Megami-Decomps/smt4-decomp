@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "util/BitsAndBytes.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -32,7 +33,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int mapMainIsIdle(void);
 extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxSelectTexture. */
-extern int asdTMTexTableEntryAt(unsigned int, int);
 /* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_0019e3d0. */
@@ -130,7 +130,7 @@ void FUN_0014aa9c(unsigned int param_1)
     temp_v6 = temp_v2 + 0xf18;
     temp_v5 = 0;
     do {
-      temp_v7 = asdTMTexTableEntryAt(0x14,temp_v5 + 0x7d5);
+      temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,temp_v5 + 0x7d5));
       temp_v0 = *(short *)(temp_v7 + 8);
       temp_v1 = *(short *)(temp_v7 + 10);
       efctSetSpeed();

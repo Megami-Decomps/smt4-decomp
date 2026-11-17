@@ -1,5 +1,6 @@
 /* Computes the screen position of unit `index`: x is the unit's x plus the stereo parallax for `depth`, y the unit's y. */
 #include "common.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 /* A unit record (0x8C bytes); its screen position is the vec2 at +0x44. */
@@ -14,10 +15,9 @@ struct UnitTable {
 };
 
 extern UnitTable g_gameGlobals;
-extern void *g_renderCtx;
 s32 vec2GetXInt(const void *vec);
 s32 vec2GetYInt(const void *vec);
-f32 renderCtxCalculateStereoParallax(void *context, f32 depth);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 
 void unitGetStereoScreenPosition(s32 *x, s32 *y, s32 index, f32 depth)
 {

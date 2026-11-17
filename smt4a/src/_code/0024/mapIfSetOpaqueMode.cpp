@@ -1,19 +1,12 @@
-#include "common.h"
+#include "map/MapIfGlobals.h"
 
 extern "C" {
 
-struct MapInterface {
-    /* 0x00 */ u8 unk00[0x3C];
-    /* 0x3C */ u32 mode;
-    /* 0x40 */ u32 opacity;
-    /* 0x44 */ u32 targetMode;
-};
-extern MapInterface *g_mapIf;
 void mapIfSetOpaqueMode(void)
 {
-    g_mapIf->mode = 2;
-    g_mapIf->opacity = 255;
-    g_mapIf->targetMode = 2;
+    g_mapIf.state->unk3C = 2;
+    g_mapIf.state->unk40 = 255;
+    g_mapIf.state->unk44 = 2;
 }
 
 } /* extern "C" */

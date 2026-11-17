@@ -16,8 +16,8 @@ extern "C" s32 FUN_00241874(const s32 *first, const s32 *second)
     } else {
         SlotRecordA *firstRecord = gameGetSlotRecord(*first);
         SlotRecordA *secondRecord = gameGetSlotRecord(*second);
-        NkmBaseRecordA *firstInfo = nkmBaseGetRecord(firstRecord->entryId);
-        NkmBaseRecordA *secondInfo = nkmBaseGetRecord(secondRecord->entryId);
+        NkmBaseRecordA *firstInfo = nkmBaseGetRecord(firstRecord->id);
+        NkmBaseRecordA *secondInfo = nkmBaseGetRecord(secondRecord->id);
         result = firstInfo->race - secondInfo->race;
         if (result == 0)
             return FUN_0020e83c(first, second);

@@ -1,8 +1,8 @@
 /* NON_MATCHING: entry argument scheduling, table bounds comparison and null-result allocation differ. */
 #include "map/PopupChoices.h"
 #include "gamedata/DataTable.h"
+#include "map/PopupStateA.h"
 extern "C" {
-extern void *g_popupState;
 s32 randRange(u32 maximum);
 s32 gameFlagIsSet(u32 flag);
 PopupMessageRecord *FUN_00365bc4(s32 message);
@@ -31,15 +31,9 @@ const char *popupSelectWeightedMessage(s32 category, s32 id)
                     weight += record->choices[choice].weight;
                     if (roll <= weight) {
                         PopupMessageRecord *message = FUN_00365bc4(record->choices[choice].message);
-                        /* Selection fields follow the shared popup-state prefix. */
-                        struct PopupSelectionView {
-                            u8 prefix[0x18];
-                            s32 selectedId;
-                            void *selectedData;
-                        };
-                        PopupSelectionView *work = static_cast<PopupSelectionView *>(g_popupState);
-                        work->selectedId = record->id;
-                        work->selectedData = message->data;
+                        PopupStateA *popup = g_popupState;
+                        popup->speakerId = record->id;
+                        popup->messageData = message->data;
                         return message->text;
                     }
                 }

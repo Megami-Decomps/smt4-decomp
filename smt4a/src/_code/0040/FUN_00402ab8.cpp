@@ -4,14 +4,8 @@
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
 #include <string.h>
-
-// Placement record of a sprite part: position and a pointer to its extra metrics.
-struct SpriteRect {
-    u8 unk00[8];
-    s16 x;                  // 0x08
-    s16 y;                  // 0x0a
-    s16* extra;             // 0x0c
-};
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxA.h"
 
 // A named record whose id marks are tested for the highlighted entries.
 struct NameRecord {
@@ -39,7 +33,6 @@ struct CaptionPanel {
 
 extern "C" {
 
-extern u8* g_renderCtx;
 extern const char DAT_0052d134[];
 
 void efctSetSpeed(f32 speed);
@@ -47,7 +40,6 @@ void gameGetPlayerData(void);
 const char* gameGetPlayerName(void);
 void textFormatBuffer(char* out, const char* format, ...);
 s32 fontMeasureLineAdvance(const char* text, s32 font);
-SpriteRect* asdTMTexTableEntryAt(s32 group, s32 index);
 void FUN_00164168(u32 icon, s32 x, s32 y, s32 a, f32 speed, s32 b, s32 c);
 
 // Draws the caption panel at (x, y): "<name>" and a second caption string side by side with
@@ -65,14 +57,14 @@ void FUN_00402ab8(CaptionPanel* panel, s32 x, s32 y, f32 speed)
     }
     textFormatBuffer(text, "%s", name);
     s32 nameWidth = fontMeasureLineAdvance(text, 2);
-    SpriteRect* frame = asdTMTexTableEntryAt(50, 9);
+    TextureTableEntryIV* frame = asdTMTexTableEntryAt(50, 9);
     s32 shift = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
     textDrawString(2, color, text, (f32)(frame->x - nameWidth + x + shift), (f32)(frame->y + y), 0.21484375f, 0.0f, speed);
 
     textFormatBuffer(text, "\x82\x60\x82\x95\x82\x94\x82\x88\x82\x8f\x82\x92");
     s32 suffixWidth = fontMeasureLineAdvance(text, 2);
-    SpriteRect* suffix = asdTMTexTableEntryAt(50, 10);
-    s32 suffixOffset = *suffix->extra;
+    TextureTableEntryIV* suffix = asdTMTexTableEntryAt(50, 10);
+    s32 suffixOffset = suffix->placement->width;
     textDrawString(2, color, text, (f32)(frame->x - nameWidth - suffixOffset - suffixWidth + x + shift), (f32)(frame->y + y), 0.21484375f, 0.0f, speed);
     texDrawTableEntryAtStoredOrigin(2, 50, 10, frame->x - nameWidth - suffixOffset + x + shift, frame->y + y, 201);
 
@@ -96,10 +88,10 @@ void FUN_00402ab8(CaptionPanel* panel, s32 x, s32 y, f32 speed)
                 break;
             }
         }
-        SpriteRect* iconRect;
+        TextureTableEntryIV* iconRect;
         s32 iconShift;
         if (found) {
-            SpriteRect* markRect = asdTMTexTableEntryAt(50, 58 + i);
+            TextureTableEntryIV* markRect = asdTMTexTableEntryAt(50, 58 + i);
             texDrawTableEntryAtStoredOrigin(2, 50, 57, markRect->x + baseX, markRect->y + y, 201);
             iconRect = asdTMTexTableEntryAt(50, 66 + i);
             iconShift = 6;

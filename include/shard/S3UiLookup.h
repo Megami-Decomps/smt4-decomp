@@ -80,12 +80,6 @@ struct UiTextPlacement {
     /* 0x04 */ s32 x;
     /* 0x08 */ s32 y;
 };
-struct UiTextMetrics {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-    /* 0x0C */ const s16 *dimensions;
-};
 struct UiCenteredText {
     /* 0x00 */ u8 unk00[0x8C];
     /* 0x8C */ UiTextObject *text;
@@ -93,7 +87,6 @@ struct UiCenteredText {
 };
 
 typedef char UiTextPlacementSizeCheck[sizeof(UiTextPlacement) == 0xC ? 1 : -1];
-typedef char UiTextMetricsSizeCheck[sizeof(UiTextMetrics) == 0x10 ? 1 : -1];
 typedef char UiCenteredTextSizeCheck[sizeof(UiCenteredText) == 0x94 ? 1 : -1];
 
 #endif

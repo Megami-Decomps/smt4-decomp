@@ -89,8 +89,8 @@ u32 battleRosterMotionUpdate(u32 job)
                     }
                 } else {
                     BtlCombatantEntryA *unit = btlMainFindEntryByListedId(battle, motion.group);
-                    if (unit->motion.state == 0 || (motion.flags & 0x800000) != 0) {
-                        BattleMotionSelection *selection = FUN_003eca48(battle, unit->id);
+                    if (unit->data.motionState == 0 || (motion.flags & 0x800000) != 0) {
+                        BattleMotionSelection *selection = FUN_003eca48(battle, unit->data.id);
                         if (selection != NULL && FUN_003ec668(battle, selection->kind, 6)) {
                             FUN_003f2638(battle, 6, entry, 0);
                             FUN_004cae58(battle, entry);

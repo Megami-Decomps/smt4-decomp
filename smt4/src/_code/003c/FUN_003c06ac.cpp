@@ -1,6 +1,6 @@
 /* NON_MATCHING: only the first instructions differ: retail loads work->selector (`ldr r1, [r0, #32]`) before saving work in r4. */
 #include "battle/BattleAssetWork.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "gamedata/NkmBaseRecord.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"

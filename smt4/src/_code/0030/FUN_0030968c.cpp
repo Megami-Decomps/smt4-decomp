@@ -1,8 +1,8 @@
 /* NON_MATCHING: the alpha-mode test matches; retail addresses the blend stack as stacks[5] of the 0x11EC bank (index added before the literal 0x11EC offset) while the build folds the whole constant. */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 extern u32 *g_modelCommandBuffer;
 extern s32 g_modelCommandWordCount;
 void cursorResetFromParam(void);

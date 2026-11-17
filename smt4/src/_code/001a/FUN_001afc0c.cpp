@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001afc0c` (_code @ 0x1afc0c, 0x7c8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -65,7 +66,6 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
-extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: asdMemFree. */
@@ -122,7 +122,7 @@ void FUN_001afc0c(void)
     temp_v3 = listCursorGetRowIfUnblocked(temp_v11);
     temp_v0 = *(short *)(temp_v9 + (temp_v3 + temp_v2) * 2);
     temp_v14[0] = '\0';
-    temp_v6 = asdTMTexTableEntryAt(0x29,0xc1);
+    temp_v6 = reinterpret_cast<unsigned int>(asdTMTexTableEntryAt(0x29,0xc1));
     temp_v2 = temp_v11;
     uiScrollHandleActionsOrTouch(temp_v11,temp_v6,temp_v1 + 0x9dc,(int)*(short *)(temp_v1 + 0x9f6),
                  (int)*(short *)(temp_v1 + 0x9f2),(int)*(short *)(temp_v1 + 0x9f4),temp_v14,0,1);

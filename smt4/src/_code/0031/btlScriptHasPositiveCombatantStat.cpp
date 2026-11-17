@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 
@@ -33,14 +33,14 @@ u32 btlScriptHasPositiveCombatantStat()
         if ((flags & BTL_ENTRY_FLAG_PRESENT) == 0 &&
             (flags & BTL_ENTRY_FLAG_ACTIVE) != 0 &&
             (flags & BTL_ENTRY_FLAG_BLOCKED) == 0 &&
-            entry->id == id && entry->stat[stat] >= 1) {
+            entry->data.id == id && entry->stat[stat] >= 1) {
             scrSetResult(1);
             return 1;
         }
     }
     if (btlGetMainState()->hasActiveEntry) {
         BtlEntry *entry = btlMainFindActiveEntry(btlGetMainState());
-        if (entry != NULL && entry->id == id && entry->stat[stat] >= 1) {
+        if (entry != NULL && entry->data.id == id && entry->stat[stat] >= 1) {
             scrSetResult(1);
             return 1;
         }

@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "code/Code0025_Smt4.h"
 

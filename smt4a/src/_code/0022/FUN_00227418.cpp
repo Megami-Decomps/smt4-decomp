@@ -2,25 +2,7 @@
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "code/Code002a.h"
-
-struct CampDetail {
-    /* 0x000 */ u8 unk000[0x1C];
-    /* 0x01C */ s32 menu;
-    /* 0x020 */ u8 unk020[8];
-    /* 0x028 */ s32 subMenu;
-    /* 0x02C */ u8 unk02C[0x14];
-    /* 0x040 */ u8 listState[0x64];
-    /* 0x0A4 */ s8 cursor;
-    /* 0x0A5 */ u8 unk0A5[0x12];
-    /* 0x0B7 */ u8 barVisible;
-    /* 0x0B8 */ s8 barRow;
-    /* 0x0B9 */ s8 barColumn;
-    /* 0x0BA */ u8 unk0BA[0x628];
-    /* 0x6E2 */ u8 locked;
-    /* 0x6E3 */ u8 unk6E3[0x1A5];
-    /* 0x888 */ u8 barOrigin[0x12CC];
-    /* 0x1B54 */ s16 barValues[1];
-};
+#include "camp/CampStateA.h"
 
 #define CAMP_MENU_SUB 0x47
 #define CAMP_MENU_UNITE_FIRST 0x20
@@ -28,7 +10,6 @@ struct CampDetail {
 #define CAMP_MENU_UNITE_LOCKED 0x23
 
 extern "C" {
-extern CampDetail *g_camp;
 
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 s32 renderCtxPackPassFlags(u32 a, u32 b);
@@ -44,40 +25,40 @@ void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
 
 /* The id of the item under the cursor. */
-static __inline s32 campCursorItem(CampDetail *camp)
+static __inline s32 campCursorItem(CampStateA *camp)
 {
-    return FUN_003da8f4(camp->cursor, listCursorGetRowOfChildIfUnblocked(camp->listState));
+    return FUN_003da8f4(camp->menuGroup, listCursorGetRowOfChildIfUnblocked(&camp->menuGrid));
 }
 
-static __inline void campDrawBar(CampDetail *camp)
+static __inline void campDrawBar(CampStateA *camp)
 {
     s32 x = vec2GetXInt();
-    s32 y = vec2GetYInt(camp->barOrigin);
-    FUN_002aa56c(x, y, camp->barColumn, camp->barRow, *(s16 *)((u8 *)camp + camp->barColumn * 2 + 0x1B54));
+    s32 y = vec2GetYInt(&camp->sprites[4]);
+    FUN_002aa56c(x, y, camp->unitSelectIndex, camp->unitSelectSource, camp->touch.unitRegions[camp->unitSelectIndex]);
 }
 
 /* Draws the detail area for menus that show an item description. */
-static __inline void campDrawItemDetail(CampDetail *camp)
+static __inline void campDrawItemDetail(CampStateA *camp)
 {
     s32 item = campCursorItem(camp);
     if ((item >= 0x13 && item <= 0x19) || (item >= 0x48 && item <= 0x4E))
         FUN_00288538(0);
-    if (camp->barVisible != 0)
+    if (camp->unitSelectActive != 0)
         campDrawBar(camp);
     FUN_00217f14();
 }
 
 u32 FUN_00227418(void)
 {
-    CampDetail *camp = g_camp;
+    CampStateA *camp = g_camp;
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     RenderCtxA *context = g_renderCtx;
     s32 state = renderCtxPackPassFlags(1, 0);
     renderStackPush(&context->stackA, state);
 
-    s32 menu = camp->menu;
+    s32 menu = camp->state;
     if (menu == CAMP_MENU_SUB)
-        menu = camp->subMenu;
+        menu = camp->previousState;
 
     switch (menu) {
     case 1: case 2: case 3: case 6: case 7: case 9:
@@ -94,13 +75,13 @@ u32 FUN_00227418(void)
         FUN_00288538(1);
         break;
     case 0x20: case 0x21: case 0x22:
-        if (uniteGetState() == 3 || camp->locked == 0) {
+        if (uniteGetState() == 3 || camp->sprites[0].animationFlags.completed == 0) {
             campDrawBar(camp);
             FUN_00217f14();
         }
         break;
     case CAMP_MENU_UNITE_LOCKED:
-        if (camp->barVisible != 0 && camp->locked == 0) {
+        if (camp->unitSelectActive != 0 && camp->sprites[0].animationFlags.completed == 0) {
             campDrawBar(camp);
             FUN_00217f14();
         }

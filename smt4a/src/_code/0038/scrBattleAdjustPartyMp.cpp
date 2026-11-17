@@ -30,16 +30,16 @@ u32 scrBattleAdjustPartyMp()
     for (s32 slot = 0; slot < 4; ++slot) {
         BtlCombatantEntryA *target = &battle->entries[slot];
         if ((target->flags & g_btlMessageFlagMasks.active) &&
-            !(target->flags & g_btlMessageFlagMasks.excluded) && target->unitIndex >= 0) {
+            !(target->flags & g_btlMessageFlagMasks.excluded) && target->ids[0] >= 0) {
             s32 amountToApply = 0;
             switch (mode) {
-            case 0: amountToApply = target->maxMp * amount / 100; break;
-            case 1: amountToApply = target->mp * amount / 100; break;
+            case 0: amountToApply = target->data.maxMp * amount / 100; break;
+            case 1: amountToApply = target->data.mp * amount / 100; break;
             case 2: amountToApply = amount; break;
             }
             btlSlotManagerResetStates(battle);
-            FUN_004fc094(0, source, 0, &((ResourceUnit *)battle->unk1ED4)[target->unitIndex], 0, -1, amountToApply,
-                          -1, target->hp, target->maxHp, 0, 0, 0, 0, 1, 0,
+            FUN_004fc094(0, source, 0, &((ResourceUnit *)battle->unk1ED4)[target->ids[0]], 0, -1, amountToApply,
+                          -1, target->data.hp, target->data.maxHp, 0, 0, 0, 0, 1, 0,
                           slot << 3, slot << 3, slot << 3, slot << 3, 1, 0, 1, 1, 0, 1);
             btlQueueActionMessage(0, source, 0x1000257, 0, 0, 0, 0);
         }

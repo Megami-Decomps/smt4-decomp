@@ -18,26 +18,26 @@ u32 FUN_003a8790(void)
 {
     u32 category = scrGetArg(0);
     BtlCombatantEntryA *entry = reinterpret_cast<BtlUnitA *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)))->entry;
-    if (entry->record) {
+    if (entry->data.record) {
         for (s32 index = 0; index < 8; ++index) {
-            const SkillDataRecordA *skill = skillDataFindById(entry->record->skills[index]);
+            const SkillDataRecordA *skill = skillDataFindById(entry->data.record->skills[index]);
             if (skill && category == ((skill->properties >> 11) & 0x1f)) {
                 scrSetResult(1);
                 return 1;
             }
         }
     }
-    if (entry->secondaryRecord) {
+    if (entry->data.secondaryRecord) {
         for (s32 index = 0; index < 8; ++index) {
-            const SkillDataRecordA *skill = skillDataFindById(entry->secondaryRecord->skills[index]);
+            const SkillDataRecordA *skill = skillDataFindById(entry->data.secondaryRecord->skills[index]);
             if (skill && category == ((skill->properties >> 11) & 0x1f)) {
                 scrSetResult(1);
                 return 1;
             }
         }
     }
-    if (entry->candidate.record) {
-        const NkmEnemyRecordA *demon = nkmEnemyFindById(entry->id);
+    if (entry->data.candidate) {
+        const NkmEnemyRecordA *demon = nkmEnemyFindById(entry->data.id);
         for (s32 index = 0; index < 8; ++index) {
             const SkillDataRecordA *skill = skillDataFindById(demon->skills[index]);
             if (skill && category == ((skill->properties >> 11) & 0x1f)) {

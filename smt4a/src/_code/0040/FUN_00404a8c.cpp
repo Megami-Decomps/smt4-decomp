@@ -3,13 +3,8 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
-
-/* The placement record a sprite sheet gives for a part. */
-struct SpritePlacement {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-};
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxA.h"
 
 /* The panel whose frame sprites are drawn; only the fields this draw reads are named. */
 struct FramePanel {
@@ -23,9 +18,7 @@ struct FramePanel {
 };
 
 extern "C" {
-extern RenderCtx *g_renderCtx;
 void efctSetSpeed(f32 speed);
-SpritePlacement *asdTMTexTableEntryAt(s32 sheet, s32 part);
 
 /* Draws the panel's frame sprites at (x, y), shifted for the stereo depth; the effect speed comes from the caller. */
 void FUN_00404a8c(FramePanel *panel, s32 x, s32 y, f32 speed)
@@ -51,27 +44,27 @@ void FUN_00404a8c(FramePanel *panel, s32 x, s32 y, f32 speed)
             texDrawTableEntryAtStoredOrigin(2, 50, icons[i], shift + x, y, 191);
     }
     if (panel->centerFrame != 0) {
-        SpritePlacement *edge = asdTMTexTableEntryAt(50, 40);
+        TextureTableEntryIV *edge = asdTMTexTableEntryAt(50, 40);
         s32 shift = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.27f));
         s32 edgeY = edge->y + y;
         s32 edgeX = edge->x + (shift + x);
         texDrawTableEntryAtStoredOrigin(2, 50, 34, edgeX, edgeY, 191);
         texDrawTableEntryAtStoredOrigin(2, 50, 35, edgeX, edgeY, 191);
-        SpritePlacement *corner = asdTMTexTableEntryAt(50, 41);
+        TextureTableEntryIV *corner = asdTMTexTableEntryAt(50, 41);
         shift = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.27f));
         s32 cornerY = corner->y + y;
         s32 cornerX = corner->x + (shift + x);
         texDrawTableEntryAtStoredOrigin(2, 50, 37, cornerX, cornerY, 191);
         texDrawTableEntryAtStoredOrigin(2, 50, 39, cornerX, cornerY, 191);
     } else {
-        SpritePlacement *edge = asdTMTexTableEntryAt(50, 40);
+        TextureTableEntryIV *edge = asdTMTexTableEntryAt(50, 40);
         s32 shift = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.27f));
         s32 edgeY = edge->y + y;
         s32 edgeX = edge->x + (shift + x);
         texDrawTableEntryAtStoredOrigin(2, 50, 37, edgeX, edgeY, 191);
         texDrawTableEntryAtStoredOrigin(2, 50, 38, edgeX, edgeY, 191);
         if (panel->leftFrame) {
-            SpritePlacement *corner = asdTMTexTableEntryAt(50, 41);
+            TextureTableEntryIV *corner = asdTMTexTableEntryAt(50, 41);
             shift = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.27f));
             s32 cornerY = corner->y + y;
             s32 cornerX = corner->x + (shift + x);

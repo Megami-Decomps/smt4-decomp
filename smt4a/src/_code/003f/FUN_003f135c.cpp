@@ -25,20 +25,20 @@ void FUN_003f135c(BtlMainStateA *battle)
         if (entry != NULL && (entry->flags & g_btlMain.combatantMasks.required) &&
             !(entry->flags & g_btlMain.exclusionMask) &&
             !(entry->flags & g_btlMain.actorCategories[2])) {
-            if (entry->record != NULL) {
-                flagsClearActionBits(&((BattleActionFlagRecordView *)entry->record)->playerFlags);
-                BattleActionFlagRecordView *record = (BattleActionFlagRecordView *)entry->record;
+            if (entry->data.record != NULL) {
+                flagsClearActionBits(&((BattleActionFlagRecordView *)entry->data.record)->playerFlags);
+                BattleActionFlagRecordView *record = (BattleActionFlagRecordView *)entry->data.record;
                 if (!(record->playerFlags & 2))
                     continue;
                 record->hp = 0;
-            } else if (entry->secondaryRecord != NULL) {
-                flagsClearActionBits(&((BattleActionFlagRecordView *)entry->secondaryRecord)->slotFlags);
-                BattleActionFlagRecordView *record = (BattleActionFlagRecordView *)entry->secondaryRecord;
+            } else if (entry->data.secondaryRecord != NULL) {
+                flagsClearActionBits(&((BattleActionFlagRecordView *)entry->data.secondaryRecord)->slotFlags);
+                BattleActionFlagRecordView *record = (BattleActionFlagRecordView *)entry->data.secondaryRecord;
                 if (!(record->slotFlags & 2))
                     continue;
                 record->hp = 0;
-            } else if (entry->specialMaximum.record) {
-                flagsClearActionBits(&((BattleActionFlagRecordView *)entry->specialMaximum.record)->slotFlags);
+            } else if (entry->data.specialRecord) {
+                flagsClearActionBits(&((BattleActionFlagRecordView *)entry->data.specialRecord)->slotFlags);
             }
         }
     }

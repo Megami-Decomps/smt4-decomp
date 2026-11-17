@@ -16,7 +16,7 @@ void btlMarkUnitByHpRank(BtlMainState **contextHandle, s32 rank)
     for (s32 remaining = 109; remaining != 0; --remaining, ++entry) {
         if (entry->flags & 0x400) {
             candidates[count].selectionIndex = entry->selectionIndex;
-            candidates[count].hp = entry->hp;
+            candidates[count].hp = entry->data.hp;
             ++count;
         }
     }

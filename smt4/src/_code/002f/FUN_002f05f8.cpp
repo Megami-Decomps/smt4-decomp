@@ -11,7 +11,7 @@ u32 FUN_002f05f8(void)
     for (s32 index = 0; index < 109; ++index) {
         BtlEntry* unit = &btlGetMainState()->entries[index];
         if ((unit->flags & 0x10) != 0 && (unit->flags & 1) != 0 &&
-            (unit->flags & 0x40) == 0 && (unit->values[selector] >> 10) == 2) {
+            (unit->flags & 0x40) == 0 && (unit->data.values[selector] >> 10) == 2) {
             scrSetResult(1);
             return 1;
         }

@@ -15,24 +15,17 @@ void FUN_0022e538(void *object)
         u16 firstRegion;
         u16 secondRegion;
     };
-    struct FrameRect {
-        u32 unk00;
-        u16 width;
-        u16 height;
-        u16 x;
-        u16 y;
-    };
     struct TouchBounds { u32 x, y, width, height; };
     PageView *page = (PageView *)object;
-    const FrameRect *rect = (const FrameRect *)asdTMTexTableEntryAt(43, page->page + 79);
+    const TextureTableEntryIV *rect = asdTMTexTableEntryAt(43, page->page + 79);
     s32 x = rect->x;
     s32 y = rect->y;
-    rect = (const FrameRect *)asdTMTexTableEntryAt(43, 200);
+    rect = asdTMTexTableEntryAt(43, 200);
     x += rect->x;
     y += rect->y;
-    rect = (const FrameRect *)asdTMTexTableEntryAt(43, 194);
+    rect = asdTMTexTableEntryAt(43, 194);
     TouchBounds first = {x + rect->x, y + rect->y, rect->width & 0x7FFF, rect->height & 0x7FFF};
-    rect = (const FrameRect *)asdTMTexTableEntryAt(43, 195);
+    rect = asdTMTexTableEntryAt(43, 195);
     TouchBounds second = {x + rect->x, y + rect->y, rect->width & 0x7FFF, rect->height & 0x7FFF};
     page->firstRegion = (u16)ifTouchRegionAdd((s16)(first.x - first.width / 2),
         (s16)(first.y - first.height / 2), (s16)(first.width * 2), (s16)(first.height * 2));

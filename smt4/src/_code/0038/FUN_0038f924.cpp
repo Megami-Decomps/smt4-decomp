@@ -2,13 +2,13 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "code/Code0023_VariantB.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 int FUN_002347b8(unsigned int, unsigned int, unsigned char [1024]);
 int textDrawString(int, unsigned int, unsigned char [1024], int);
 int texDrawCompositeSprite(int, int, int, int, int, int);
-int asdTMTexTableEntryAt(...);
 int renderCtxSelectStereoLayout(int);
 int VectorSignedToFloat(int, int);
 
@@ -83,7 +83,7 @@ int FUN_0038f924(unsigned int task)
   FUN_0023478c(temp_v2,temp_v14[*(int *)(temp_v3 + 0x179c)]);
   FUN_002347b8(temp_v2,temp_v5,temp_v13);
   temp_v6 = curveEvaluateStandard(temp_v13,3);
-  temp_v3 = asdTMTexTableEntryAt(0x3a,0x2d);
+  temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x3a,0x2d));
   temp_v4 = (((int)*(short *)(temp_v3 + 8) + ((int)**(short **)(temp_v3 + 0xc) >> 1)) - (temp_v6 >> 1)) - 9;
   VectorSignedToFloat((int)*(short *)(temp_v3 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -98,9 +98,9 @@ int FUN_0038f924(unsigned int task)
     temp_v8 = 0;
     do {
       temp_v10 = temp_v3 * 3 + temp_v8;
-      temp_v9 = asdTMTexTableEntryAt(0x3a,0x31);
+      temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x3a,0x31));
       temp_v0 = *(short *)(temp_v9 + 8);
-      temp_v9 = asdTMTexTableEntryAt(0x3a,temp_v10 + 0x31);
+      temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x3a,temp_v10 + 0x31));
       temp_v7 = (int)*(short *)(temp_v9 + 10);
       temp_v9 = ((int)*(short *)(temp_v9 + 8) - (int)temp_v0) + temp_v4 + temp_v6 + 4;
       if (temp_v12 == temp_v10 || temp_v11 == temp_v10) {

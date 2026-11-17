@@ -1,9 +1,9 @@
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 #include "gamedata/SaveLoadProcessState.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 extern SaveByteSettings g_byteSettings;
 s32 saveLoadGetThreadStatus();
 void renderCtxSelectStereoLayout(RenderCtx *context);

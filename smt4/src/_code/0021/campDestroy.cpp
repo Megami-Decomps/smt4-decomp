@@ -1,4 +1,4 @@
-#include "common.h"
+#include "camp/CampState.h"
 
 extern "C" {
 
@@ -10,18 +10,16 @@ int uiFadeRelease(void);
 int asdMemFree(void *ptr);
 int jobStop(u32 job, int mode);
 
-extern u32 *g_camp;
-
 void campDestroy(void)
 {
-    u32 *block = g_camp;
+    CampState *block = g_camp;
 
     campReleaseTouchRegions();
     partyPanelReleaseResources();
     uiFadeRelease();
     buttonHelpRelease();
     campFreeFileSlot();
-    jobStop(*block, 0);
+    jobStop(block->job, 0);
     asdMemFree(block);
     g_camp = NULL;
 }

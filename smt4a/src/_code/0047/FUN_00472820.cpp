@@ -3,6 +3,7 @@
 #include "shard/TextureDrawCall.h"
 #include "shard/JobWork.h"
 #include "code/Code0023_Smt4a.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ int FUN_00164168(...);
 int efctSetSpeed(void);
 int renderCtxResetColorScale(...);
 int skinObjectUpdateMatrices(...);
-int asdTMTexTableEntryAt(...);
 int gxResetColorQuadToWhite(void);
 int renderCtxCalculateStereoParallax(int);
 int VectorSignedToFloat(...);
@@ -140,10 +140,10 @@ s32 FUN_00472820(u32 job)
         *(unsigned char *)(temp_v2 + 0x1270) = 0;
       }
       if ((int)puVar2[4] < 5) {
-        temp_v2 = asdTMTexTableEntryAt(8,0xe1);
+        temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0xe1));
       }
       else {
-        temp_v2 = asdTMTexTableEntryAt(8,0xe0);
+        temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0xe0));
       }
       if ((char)puVar2[0x105] != '\x01') {
         if ((char)puVar2[0x105] == '\x02') {
@@ -197,7 +197,7 @@ s32 FUN_00472820(u32 job)
         temp_v1 = 0;
         if (0 < (int)temp_v5) {
           do {
-            temp_v6 = asdTMTexTableEntryAt(8,temp_v2 + temp_v1);
+            temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,temp_v2 + temp_v1));
             FUN_00164168(puVar2[0x107],*(short *)(temp_v6 + 8) + temp_v14,(int)*(short *)(temp_v6 + 10),
                          0x13,6,temp_v1);
             temp_v1 = temp_v1 + 1;
@@ -208,7 +208,7 @@ s32 FUN_00472820(u32 job)
         temp_v1 = 0;
         if (0 < (int)temp_v5) {
           do {
-            temp_v6 = asdTMTexTableEntryAt(8,temp_v2 + temp_v1);
+            temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,temp_v2 + temp_v1));
             temp_v7 = *(short *)(temp_v6 + 8) + temp_v14;
             VectorSignedToFloat((int)*(short *)(temp_v6 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
             VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);

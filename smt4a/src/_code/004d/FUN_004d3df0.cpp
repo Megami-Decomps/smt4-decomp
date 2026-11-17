@@ -57,13 +57,13 @@ void FUN_004d3df0(CombatantEditor *editor, BtlMainStateA *battle)
     BtlCombatantEntryA *entry = FUN_003e83b4(battle, editor->entryIndex, 1);
     CombatantVitals *vitals = NULL;
     if (entry != NULL)
-        vitals = reinterpret_cast<CombatantVitals *>(&entry->hp);
+        vitals = reinterpret_cast<CombatantVitals *>(&entry->data.hp);
     switch (selected) {
     case 0:
         editor->entryIndex = *asdListBoxGetIntValuePtr(editor->listBox, selected);
         entry = FUN_003e83b4(btlGetMainState(), editor->entryIndex, 1);
         if (entry != NULL) {
-            vitals = reinterpret_cast<CombatantVitals *>(&entry->hp);
+            vitals = reinterpret_cast<CombatantVitals *>(&entry->data.hp);
             asdListBoxSetIntItem(editor->listBox, 1, vitals->hp, 1, 9999, 0);
             asdListBoxSetIntItem(editor->listBox, 2, vitals->maxHp, 1, 9999, 0);
             asdListBoxSetIntItem(editor->listBox, 3, vitals->mp, 0, 9999, 0);
@@ -76,29 +76,29 @@ void FUN_004d3df0(CombatantEditor *editor, BtlMainStateA *battle)
             asdListBoxSetToggleItem(editor->listBox, 10, (entry->flags & DAT_005715f8.toggleMaskA) != 0);
             asdListBoxSetToggleItem(editor->listBox, 11, (entry->flags & DAT_005715f8.toggleMaskB) != 0);
             if ((entry->flags & DAT_005715f8.editableMask) != 0)
-                asdListBoxSetIntItem(editor->listBox, 12, saveIsRecordValueBounded(entry->id), 0, 100, 0);
+                asdListBoxSetIntItem(editor->listBox, 12, saveIsRecordValueBounded(entry->data.id), 0, 100, 0);
             else
                 asdListBoxSetIntItem(editor->listBox, 12, 0, 0, 100, 0);
-            if (entry->unitIndex >= 0 && (DAT_005715f8.editableMask & entry->flags) != 0) {
-                BattleRosterRecordA *record = &btlGetMainState()->roster[entry->unitIndex];
+            if (entry->ids[0] >= 0 && (DAT_005715f8.editableMask & entry->flags) != 0) {
+                BattleRosterRecordA *record = &btlGetMainState()->roster[entry->ids[0]];
                 asdListBoxSetFloatItem(editor->listBox, 13, -50, 50, record->spriteOffset.x);
                 asdListBoxSetFloatItem(editor->listBox, 14, -50, 50, record->spriteOffset.y);
             }
-            asdListBoxSetIntItem(editor->listBox, 16, btlFindEntryValue(entry->unitIndex, 7), -3, 3, 0);
-            asdListBoxSetIntItem(editor->listBox, 17, btlFindEntryValue(entry->unitIndex, 8), -3, 3, 0);
-            asdListBoxSetIntItem(editor->listBox, 18, btlFindEntryValue(entry->unitIndex, 10), -3, 3, 0);
-            asdListBoxSetIntItem(editor->listBox, 19, btlFindEntryValue(entry->unitIndex, 9), -3, 3, 0);
+            asdListBoxSetIntItem(editor->listBox, 16, btlFindEntryValue(entry->ids[0], 7), -3, 3, 0);
+            asdListBoxSetIntItem(editor->listBox, 17, btlFindEntryValue(entry->ids[0], 8), -3, 3, 0);
+            asdListBoxSetIntItem(editor->listBox, 18, btlFindEntryValue(entry->ids[0], 10), -3, 3, 0);
+            asdListBoxSetIntItem(editor->listBox, 19, btlFindEntryValue(entry->ids[0], 9), -3, 3, 0);
         }
         break;
     case 1:
         if (vitals != NULL) {
             vitals->hp = *asdListBoxGetIntValuePtr(editor->listBox, selected);
-            if (entry->record != NULL)
-                reinterpret_cast<UnitRecordVitals *>(entry->record)->hp = vitals->hp;
-            if (entry->secondaryRecord != NULL)
-                reinterpret_cast<UnitRecordVitals *>(entry->secondaryRecord)->hp = vitals->hp;
-            if (entry->specialMaximum.record != NULL)
-                reinterpret_cast<UnitRecordVitals *>(entry->specialMaximum.record)->hp = vitals->hp;
+            if (entry->data.record != NULL)
+                reinterpret_cast<UnitRecordVitals *>(entry->data.record)->hp = vitals->hp;
+            if (entry->data.secondaryRecord != NULL)
+                reinterpret_cast<UnitRecordVitals *>(entry->data.secondaryRecord)->hp = vitals->hp;
+            if (entry->data.specialRecord != NULL)
+                reinterpret_cast<UnitRecordVitals *>(entry->data.specialRecord)->hp = vitals->hp;
             return;
         }
         break;
@@ -111,12 +111,12 @@ void FUN_004d3df0(CombatantEditor *editor, BtlMainStateA *battle)
     case 3:
         if (vitals != NULL) {
             vitals->mp = *asdListBoxGetIntValuePtr(editor->listBox, selected);
-            if (entry->record != NULL)
-                reinterpret_cast<UnitRecordVitals *>(entry->record)->mp = vitals->mp;
-            if (entry->secondaryRecord != NULL)
-                reinterpret_cast<UnitRecordVitals *>(entry->secondaryRecord)->mp = vitals->mp;
-            if (entry->specialMaximum.record != NULL)
-                reinterpret_cast<UnitRecordVitals *>(entry->specialMaximum.record)->mp = vitals->mp;
+            if (entry->data.record != NULL)
+                reinterpret_cast<UnitRecordVitals *>(entry->data.record)->mp = vitals->mp;
+            if (entry->data.secondaryRecord != NULL)
+                reinterpret_cast<UnitRecordVitals *>(entry->data.secondaryRecord)->mp = vitals->mp;
+            if (entry->data.specialRecord != NULL)
+                reinterpret_cast<UnitRecordVitals *>(entry->data.specialRecord)->mp = vitals->mp;
             return;
         }
         break;
@@ -176,20 +176,20 @@ void FUN_004d3df0(CombatantEditor *editor, BtlMainStateA *battle)
         break;
     case 12:
         if (entry != NULL && (entry->flags & DAT_005715f8.editableMask) != 0) {
-            gameRecordSetValueClamped(entry->id, *asdListBoxGetIntValuePtr(editor->listBox, selected));
+            gameRecordSetValueClamped(entry->data.id, *asdListBoxGetIntValuePtr(editor->listBox, selected));
             return;
         }
         break;
     case 13:
-        if (entry != NULL && entry->unitIndex >= 0 && (entry->flags & DAT_005715f8.editableMask) != 0) {
-            BattleRosterRecordA *record = &btlGetMainState()->roster[entry->unitIndex];
+        if (entry != NULL && entry->ids[0] >= 0 && (entry->flags & DAT_005715f8.editableMask) != 0) {
+            BattleRosterRecordA *record = &btlGetMainState()->roster[entry->ids[0]];
             record->spriteOffset.x = *asdListBoxGetFloatValuePtr(editor->listBox, selected);
             return;
         }
         break;
     case 14:
-        if (entry != NULL && entry->unitIndex >= 0 && (entry->flags & DAT_005715f8.editableMask) != 0) {
-            BattleRosterRecordA *record = &btlGetMainState()->roster[entry->unitIndex];
+        if (entry != NULL && entry->ids[0] >= 0 && (entry->flags & DAT_005715f8.editableMask) != 0) {
+            BattleRosterRecordA *record = &btlGetMainState()->roster[entry->ids[0]];
             record->spriteOffset.y = *asdListBoxGetFloatValuePtr(editor->listBox, selected);
             return;
         }
@@ -202,27 +202,27 @@ void FUN_004d3df0(CombatantEditor *editor, BtlMainStateA *battle)
         break;
     case 16:
         if (entry != NULL) {
-            btlSlotSetStoreValue(entry->indexView.selectionIndex, 7, *asdListBoxGetIntValuePtr(editor->listBox, selected));
+            btlSlotSetStoreValue(entry->selectionIndex, 7, *asdListBoxGetIntValuePtr(editor->listBox, selected));
             return;
         }
         break;
     case 17:
         if (entry != NULL) {
-            btlSlotSetStoreValue(entry->indexView.selectionIndex, 8, *asdListBoxGetIntValuePtr(editor->listBox, selected));
+            btlSlotSetStoreValue(entry->selectionIndex, 8, *asdListBoxGetIntValuePtr(editor->listBox, selected));
             return;
         }
         break;
     case 18:
         if (entry != NULL) {
-            btlSlotSetStoreValue(entry->indexView.selectionIndex, 10, *asdListBoxGetIntValuePtr(editor->listBox, selected));
+            btlSlotSetStoreValue(entry->selectionIndex, 10, *asdListBoxGetIntValuePtr(editor->listBox, selected));
             return;
         }
         break;
     case 19:
         if (entry != NULL) {
             u32 value = *asdListBoxGetIntValuePtr(editor->listBox, selected);
-            btlSlotSetStoreValue(entry->indexView.selectionIndex, 9, value);
-            btlSlotSetStoreValue(entry->indexView.selectionIndex, 11, value);
+            btlSlotSetStoreValue(entry->selectionIndex, 9, value);
+            btlSlotSetStoreValue(entry->selectionIndex, 11, value);
             return;
         }
         break;

@@ -1,5 +1,5 @@
 /* NON_MATCHING: skill clearing becomes memclr, shared-loop pointer setup and sort-key bitfield packing differ; -O2 candidate. */
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 #include "gamedata/NkmBaseRecord.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "gamedata/SkillFlags.h"
@@ -25,7 +25,6 @@ struct FusionSkillSortKey {
     u32 reserved : 15;
 };
 extern "C" {
-extern UniteWork *g_unite;
 void gridNavigationConfigure(void *, s32, s32, s32, s32, s32);
 void FUN_0029b130(u16 *, s32, const FusionSkillSortKey *, u32);
 }

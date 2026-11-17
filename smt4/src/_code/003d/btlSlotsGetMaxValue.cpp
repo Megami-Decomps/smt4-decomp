@@ -1,5 +1,5 @@
 #include "battle/BattleUnitSlot.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 
 extern "C" {
@@ -30,7 +30,7 @@ s32 btlSlotsGetMaxValue(BtlMainState **state)
         if (table->slots[i].entry >= 0 || table->slots[i].value != 0) {
             BtlEntry *entry = &(*state)->entries[table->slots[i].entry];
 
-            if ((entry->flags & 1) != 0 && FUN_00229914(state, table, entry->members.ids[0]) == 0 && best < table->slots[i].value) {
+            if ((entry->flags & 1) != 0 && FUN_00229914(state, table, entry->ids[0]) == 0 && best < table->slots[i].value) {
                 best = table->slots[i].value;
             }
         }

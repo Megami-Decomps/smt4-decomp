@@ -19,7 +19,7 @@ u32 FUN_003f0bd8(BtlMainStateA *state, s32 markQueued)
     if (actor == NULL) {
         return 0;
     }
-    u32 skill = FUN_004c5da4(actor->unitIndex, markQueued);
+    u32 skill = FUN_004c5da4(actor->ids[0], markQueued);
     if (skill == 0 || skillDataFindById(skill) == NULL) {
         return 0;
     }

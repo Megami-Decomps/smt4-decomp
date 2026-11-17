@@ -1,18 +1,8 @@
 /* NON_MATCHING: readable rebuild of the title button-help draw; retail's inlined state push/pop uses pointer arithmetic on the stack top (`piVar[top + 2]`) in a different register assignment and the float x/y order of textDrawString is inferred, not verified. */
 #include "gfx/RenderStateStack.h"
 #include "shard/TextureDrawCall.h"
-
-/* The title scene (its state stack lives at 0x124C). */
-struct TitleScene {
-    /* 0x0000 */ u8 unk0000[0x124C];
-    /* 0x124C */ RenderStateStack stack;
-};
-
-struct LayoutPoint {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-};
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxTitle.h"
 
 /* The button help block (g_buttonHelp + 4). */
 struct ButtonHelp {
@@ -46,17 +36,13 @@ struct ButtonHelpRef {
 
 extern "C" {
 extern ButtonHelpRef g_buttonHelp;
-extern TitleScene *g_titleScene;
 
 void FUN_00190e48(void);
 void FUN_001f40fc(void *icon, s32 x, s32 y);
 void fadeObjectResetIfActive(void *object);
 void FUN_002b75ec(u32 sprite, s32 x, s32 y, s32 a, s32 b, s32 c);
 void textDrawString(s32 a, u32 icon, void *object, f32 x, f32 y);
-LayoutPoint *asdTMTexTableEntryAt(s32 group, s32 part);
-void renderCtxResetColorScale(TitleScene *scene);
-void renderCtxApplyTransforms(TitleScene *scene);
-void renderCtxSelectStereoLayout(TitleScene *scene);
+void renderCtxResetColorScale(RenderCtx *scene);
 s32 renderCtxPackPassFlags(s32 a, s32 b);
 u32 vec2GetXInt(void *vec);
 u32 vec2GetYInt(void *vec);
@@ -67,7 +53,7 @@ u8 FUN_002109cc(void)
     ButtonHelp *help = g_buttonHelp.block;
     if (help->enabled) {
         renderCtxSelectStereoLayout(g_titleScene);
-        renderStackPush(&g_titleScene->stack, renderCtxPackPassFlags(1, 0));
+        renderStackPush(&g_titleScene->stackA, renderCtxPackPassFlags(1, 0));
         if (help->mode <= 3 && (help->mode < 2 || help->mode == 2 || help->mode == 3)) {
             FUN_00190e48();
             if (help->visible) {
@@ -81,14 +67,14 @@ u8 FUN_002109cc(void)
                     texDrawTableEntryAtStoredOrigin(2, 0x12, 1, x, y, 0x10);
                 }
                 if (help->visible && help->showIcons && help->fade >= 1.0f) {
-                    LayoutPoint *first = asdTMTexTableEntryAt(0x12, 0x1D);
+                    TextureTableEntryIV *first = asdTMTexTableEntryAt(0x12, 0x1D);
                     if (help->spriteIcons)
                         FUN_002b75ec(help->iconSprite, first->x, first->y, 0x15, 6, 0);
                     else if (help->iconMode)
                         textDrawString(3, help->icon, help->firstIcon, (f32)first->x, (f32)first->y);
                     else
                         FUN_001f40fc(help->firstIcon, first->x, first->y);
-                    LayoutPoint *second = asdTMTexTableEntryAt(0x12, 0x1E);
+                    TextureTableEntryIV *second = asdTMTexTableEntryAt(0x12, 0x1E);
                     if (help->spriteIcons)
                         FUN_002b75ec(help->iconSprite, second->x, second->y, 0x15, 6, 1);
                     else if (help->iconMode != 1)
@@ -98,7 +84,7 @@ u8 FUN_002109cc(void)
                 }
             }
         }
-        renderStackPop(&g_titleScene->stack);
+        renderStackPop(&g_titleScene->stackA);
         renderCtxApplyTransforms(g_titleScene);
         renderCtxResetColorScale(g_titleScene);
     }

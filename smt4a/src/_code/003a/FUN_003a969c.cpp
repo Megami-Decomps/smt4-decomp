@@ -34,8 +34,8 @@ u32 FUN_003a969c()
         for (s32 index = 0; index < 4; ++index) {
             BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
             if ((entry->flags & g_btlMessageFlagMasks.required) &&
-                !(entry->flags & g_btlMessageFlagMasks.excluded) && entry->unitIndex >= 0) {
-                BattleRosterRecordA *record = &battle->roster[entry->unitIndex];
+                !(entry->flags & g_btlMessageFlagMasks.excluded) && entry->ids[0] >= 0) {
+                BattleRosterRecordA *record = &battle->roster[entry->ids[0]];
                 FUN_004fb6f4(written << 3, 0, record, effect, message, index << 3, -1);
                 s32 parameter = record->combatant.parameterIndex;
                 btlEmitMessageTableEntries(message, unit, slots, written, parameter, parameter);

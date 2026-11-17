@@ -1,4 +1,4 @@
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 
@@ -22,7 +22,7 @@ u32 btlScriptGroupUnitAcceptsArgument(void)
         BtlEntry *entry = &btlGetMainState()->entries[index];
         u32 flags = entry->flags;
         if ((flags & BTL_ENTRY_FLAG_PRESENT) == 0 && (flags & BTL_ENTRY_FLAG_ACTIVE) != 0 &&
-            (flags & BTL_ENTRY_FLAG_BLOCKED) == 0 && entry->id == id &&
+            (flags & BTL_ENTRY_FLAG_BLOCKED) == 0 && entry->data.id == id &&
             btlEntryHasActionSkillCategory(entry, argument) != 0) {
             scrSetResult(1);
             return 1;
@@ -30,7 +30,7 @@ u32 btlScriptGroupUnitAcceptsArgument(void)
     }
     if (btlGetMainState()->hasActiveEntry != 0) {
         BtlEntry *entry = btlMainFindActiveEntry(btlGetMainState());
-        if (entry != NULL && entry->id == id && btlEntryHasActionSkillCategory(entry, argument) != 0) {
+        if (entry != NULL && entry->data.id == id && btlEntryHasActionSkillCategory(entry, argument) != 0) {
             scrSetResult(1);
             return 1;
         }

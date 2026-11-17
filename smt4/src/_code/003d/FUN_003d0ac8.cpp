@@ -1,5 +1,5 @@
 /* NON_MATCHING: action-record address hoisting and participant-index load scheduling differ. */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "battle/BtlGlobals.h"
@@ -26,7 +26,7 @@ u32 FUN_003d0ac8(BtlMainState **state, void *copies, s32 subject, s32 target)
         if ((status & 1) != 0 && (status & 0x80) != 0 && i != subject &&
             valueRangeSameSide(i, subject)) {
             BtlEntry *candidate = btlMainFindEntryByListedId(*state, i);
-            if ((candidate->groupMask & 0x1C0) == 0) {
+            if ((candidate->data.statusFlags & 0x1C0) == 0) {
                 u16 skill = btlEntryRollPassiveSkill(i);
                 if (skill != 0) {
                     BtlActionRecord *records = (*state)->actions;

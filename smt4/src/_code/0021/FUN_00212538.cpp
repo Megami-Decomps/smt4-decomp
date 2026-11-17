@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -70,7 +71,6 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: texDrawCompositeSprite. */
-extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: gxSubmitDrawZeroExtraParams. */
 /* Supplied declaration required: renderCtxResetColorScale. */
@@ -583,11 +583,11 @@ unsigned int FUN_00212538(void)
     drawSetColorFromRGBA8(0xf49800ff);
     temp_v10 = gameGetSlotTable();
     textFormatBuffer(temp_v19,&LAB_00213184,*(unsigned char *)(temp_v10 + 0x910b));
-    temp_v10 = asdTMTexTableEntryAt(0x19,0x2a);
+    temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x19,0x2a));
     FUN_002bdf94(2,*(short *)(temp_v10 + 8) + temp_v6,*(short *)(temp_v10 + 10) + temp_v7,0,2,0x9c,
                  temp_v19);
     textFormatBuffer(temp_v19,&LAB_00213184,*(unsigned int *)(temp_v1 + 0x28));
-    temp_v10 = asdTMTexTableEntryAt(0x19,0x2c);
+    temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x19,0x2c));
     FUN_002bdf94(2,*(short *)(temp_v10 + 8) + temp_v6,*(short *)(temp_v10 + 10) + temp_v7,1,2,0x9c,
                  temp_v19);
     gxResetColorQuadToWhite();

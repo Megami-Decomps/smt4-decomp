@@ -1,11 +1,11 @@
 /* NON_MATCHING: saved queue, actor, target and status registers differ despite matching action operations. */
 #include "battle/btlReflect.h"
+#include "battle/BtlEntryLookup.h"
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlEntryLookup.h"
 
 struct ReflectTargetA { u8 unk00[0x6a]; s16 entryIndex; };
-struct ReflectedMemberStatusA { u8 unk00[0x110]; u16 flags; };
 extern "C" {
-ReflectedMemberStatusA *btlFindEntryBlockByMemberId(void *battle, s32 member);
 
 
 // Queue a status clear followed by recovery actions when no blocking status remains.
@@ -14,9 +14,9 @@ u32 FUN_004fcffc(s32 actor, u32 options, ReflectTargetA *target, u32 mask)
     u32 flags = 0;
     bool rosterMember = target->entryIndex < 109;
     if (rosterMember) {
-        ReflectedMemberStatusA *member = btlFindEntryBlockByMemberId(btlGetMainState(), target->entryIndex);
+        BtlUnitDataA *member = btlFindEntryBlockByMemberId(btlGetMainState(), target->entryIndex);
         if (member)
-            flags = member->flags;
+            flags = member->statusFlags;
     }
     if (mask) {
         ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, options);

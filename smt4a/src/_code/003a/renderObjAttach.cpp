@@ -1,19 +1,17 @@
 #include "battle/btlPartnerAttack.h"
 #include "shard/Shard003A.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 
 typedef struct RenderRes {
     /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ u32 unk08;
+    /* 0x08 */ struct AsdTexture *texture;
 } RenderRes;
 
 extern BtlPartnerAttackA *g_btlPartnerAttack;
-extern u32 g_renderCtx;
 extern void jobGetWork(u32 job);
 extern RenderRes *asdTMTexTableGetNode(s32 a, s32 b);
-extern void renderCtxSelectTexture(u32 ctx, u32 value);
-extern void renderCtxSelectDisplayAreaForStereoMode(u32 ctx);
 extern void FUN_00416664(void *p);
 
 u32 renderObjAttach(u32 job)
@@ -25,7 +23,7 @@ u32 renderObjAttach(u32 job)
     obj = g_btlPartnerAttack;
     if (obj != NULL && obj->entries != NULL) {
         res = asdTMTexTableGetNode(8, 0);
-        renderCtxSelectTexture(g_renderCtx, res->unk08);
+        renderCtxSelectTexture(g_renderCtx, res->texture);
         renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         FUN_00416664(obj->entries);
     }

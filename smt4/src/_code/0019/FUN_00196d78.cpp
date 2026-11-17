@@ -1,4 +1,4 @@
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 #include <stdlib.h>
 #include "status/StatusCamera.h"
 
@@ -20,7 +20,6 @@ struct FusionSortPreferences {
 };
 
 extern "C" {
-extern UniteWork *g_unite;
 s32 fusionComparePairsByRaceLevelAndId(const void *a, const void *b);
 s32 FUN_002dc7a0(const void *a, const void *b);
 s32 fusionComparePairsByParentLevelRaceId(const void *a, const void *b);

@@ -3,6 +3,7 @@
 #include "camp/RenderCtx.h"
 #include "code/Code0028.h"
 #include "shard/JobWork.h"
+#include "camp/RenderCtxTitle.h"
 
 
 struct TitleJobOrigin {
@@ -26,7 +27,6 @@ struct EventTexState {
 extern "C" {
 
 extern EventTexState *g_eventTex; /* 0x43ded0 */
-extern RenderCtx *g_titleScene;   /* 0x44ea00 */
 
 s32 jobIsValid(u32 job);
 s32 jobGetStatus(u32 job);

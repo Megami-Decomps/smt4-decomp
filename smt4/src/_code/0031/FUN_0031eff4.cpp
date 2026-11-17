@@ -1,4 +1,4 @@
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "util/SlotRangeSelect.h"
 #include "battle/BtlMainAccess.h"

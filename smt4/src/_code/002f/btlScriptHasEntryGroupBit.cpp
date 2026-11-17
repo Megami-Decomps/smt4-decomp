@@ -1,4 +1,4 @@
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 
@@ -20,14 +20,14 @@ u32 btlScriptHasEntryGroupBit(void)
     for (s32 i = first; i < first + count; ++i) {
         BtlEntry *entry = &btlGetMainState()->entries[i];
         if (!(entry->flags & 0x10) && (entry->flags & 1) && !(entry->flags & 0x40) &&
-            entry->id == id && (entry->groupMask & (1u << bit))) {
+            entry->data.id == id && (entry->data.statusFlags & (1u << bit))) {
             scrSetResult(1);
             return 1;
         }
     }
     if (btlGetMainState()->hasActiveEntry) {
         BtlEntry *entry = btlMainFindActiveEntry(btlGetMainState());
-        if (entry && (entry->groupMask & (1u << bit))) {
+        if (entry && (entry->data.statusFlags & (1u << bit))) {
             scrSetResult(1);
             return 1;
         }

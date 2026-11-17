@@ -2,11 +2,10 @@
 #include "font/SearchWin/RunWin.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 extern const MessageImageChoices g_messageSelectedImagePairs;
-void renderCtxSelectStereoLayout(RenderCtx *context);
 void gxResetColorQuadToWhite(void);
 s32 renderCtxPackPassFlags(s32 first, s32 second);
 void efctSetSpeed(f32 alpha);

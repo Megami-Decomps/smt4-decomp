@@ -20,8 +20,8 @@ extern "C" u32 FUN_003c231c(void)
     u32 unit = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
     BtlCombatantEntryA *target = btlMainFindEntryByListedId(btlGetMainState(), targetId);
     btlSlotManagerResetStates(btlGetMainState());
-    BattleRosterRecordA *roster = &btlGetMainState()->roster[target->unitIndex];
-    FUN_004fc094(0, unit, 0, roster, 0, amount, -1, -1, target->hp, target->maxHp,
+    BattleRosterRecordA *roster = &btlGetMainState()->roster[target->ids[0]];
+    FUN_004fc094(0, unit, 0, roster, 0, amount, -1, -1, target->data.hp, target->data.maxHp,
                  0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1);
     return 1;
 }

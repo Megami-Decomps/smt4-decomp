@@ -387,7 +387,7 @@ local view or prototype, and keep the contract.
   `scrCommMessageSetMode` and `scrGetCommandFrame` (the frame counter).
 - **`battle/BtlMainAccess.h`** and **`battle/btlMain.h`**: IV's battle commands take the battle block
   from `btlGetMainState()`. `BtlMainState` (0x4A58 bytes as allocated; entries are `BtlEntry` from
-  `shard/W4_Match6_BtlEntry.h`) is the only definition: add fields as views of its unions with offset
+  `battle/BtlEntry.h`) is the only definition: add fields as views of its unions with offset
   asserts, never a per-function state or entry view.
 
 ## Readability standard

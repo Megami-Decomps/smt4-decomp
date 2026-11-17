@@ -57,8 +57,8 @@ extern "C" s32 FUN_004c5448(u32 entryId, u32 skillId)
     } else if (flags & DAT_005713f0.equipment) {
         const BattleModifierSkillView *skill = (const BattleModifierSkillView *)skillDataFindById(skillId);
         if (skill) {
-            s32 first = FUN_0034a304(&skill->modifiers, FUN_004bd098(reinterpret_cast<IdOwner *>(entry->secondaryRecord), skillId), 1);
-            s32 second = FUN_0034a304(&skill->modifiers, FUN_004bd098(reinterpret_cast<IdOwner *>(entry->secondaryRecord), skillId), 5);
+            s32 first = FUN_0034a304(&skill->modifiers, FUN_004bd098(reinterpret_cast<IdOwner *>(entry->data.secondaryRecord), skillId), 1);
+            s32 second = FUN_0034a304(&skill->modifiers, FUN_004bd098(reinterpret_cast<IdOwner *>(entry->data.secondaryRecord), skillId), 5);
             return first + second;
         }
     } else if (flags & DAT_005713f0.innate) {

@@ -1,5 +1,6 @@
 #include "shard/JobWork.h"
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 struct SurfaceBlit {
     f32 width;  // 0x00
@@ -9,7 +10,6 @@ struct SurfaceBlit {
 };
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 void FUN_002b7d30(f32 x, f32 y, f32 width, f32 height, f32 u0, f32 v0,
                   f32 u1, f32 v1, f32 depth);
 

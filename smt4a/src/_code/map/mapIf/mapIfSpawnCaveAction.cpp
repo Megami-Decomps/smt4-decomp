@@ -1,15 +1,14 @@
 #include "AsdSDK/AsdDebug.h"
-#include "map/MapIfSpawn.h"
+#include "map/MapIfGlobals.h"
 
 extern "C" {
 
-extern MapIfSpawns *g_mapIf;
 extern u32 g_handleRegistry;
 
 void *asdMemoryAllocTraced(u32 size, const char *file, int line);   /* allocate with source location */
-MoriModelContent *modelListInit(void *mem);                 /* content constructor */
-void resourceOwnerLoadFileSync(MoriModelContent *content, const char *name);
-void moriModelContentLoadBody(MoriModelContent *content, u32 arg);
+MapIfResource *modelListInit(void *mem);                 /* content constructor */
+void resourceOwnerLoadFileSync(MapIfResource *content, const char *name);
+void moriModelContentLoadBody(MapIfResource *content, u32 arg);
 void handleRegistryRegisterObject(u32 registry, u32 object);
 void controllerSetDestination(u32 object, const f32 *position);
 void controllerSetRotationEulerDegrees(u32 object, f32 x, f32 y, f32 z);
@@ -18,25 +17,25 @@ void modelPlayClip(u32 object, s32 first, s32 second, f32 x, f32 y);
 // Spawns the cave action model at the given position and starts it moving there.
 void mapIfSpawnCaveAction(f32 x, f32 y, f32 z, f32 w)
 {
-    MapIfSpawnBlock *block = &g_mapIf->cave;
+    MapIfModelSlotA *block = &g_mapIf.state->slots[2];
     block->active = 1;
-    block->unk04 = 0;
-    block->unk08 = 0;
-    block->position[0] = x;
-    block->position[1] = y;
-    block->position[2] = z;
-    block->position[3] = w;
+    block->state = 0;
+    block->timer = 0;
+    block->position.x = x;
+    block->position.y = y;
+    block->position.z = z;
+    block->position.w = w;
     void *mem = asdMemoryAllocTraced(0x20, "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapIf.cpp", 0x1827);
     if (mem != NULL) {
         mem = modelListInit(mem);
     }
-    block->content = (MoriModelContent *)mem;
-    resourceOwnerLoadFileSync(block->content, "map/all/action_cave.bam");
-    moriModelContentLoadBody(block->content, 0);
-    u32 object = (u32)block->content->body;
+    block->resource = (MapIfResource *)mem;
+    resourceOwnerLoadFileSync(block->resource, "map/all/action_cave.bam");
+    moriModelContentLoadBody(block->resource, 0);
+    u32 object = block->resource->handle;
     handleRegistryRegisterObject(g_handleRegistry, object);
-    controllerSetDestination(object, block->position);
-    controllerSetRotationEulerDegrees(object, 0.0f, block->position[3], 0.0f);
+    controllerSetDestination(object, &block->position.x);
+    controllerSetRotationEulerDegrees(object, 0.0f, block->position.w, 0.0f);
     modelPlayClip(object, 0, 2, 0.0f, 0.0f);
 }
 

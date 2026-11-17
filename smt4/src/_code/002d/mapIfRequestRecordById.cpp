@@ -1,8 +1,7 @@
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 #include "shard/Shard0036.h"
 
 extern "C" {
-extern MapIfGlobals g_mapIf;
 
 void mapIfRequestRecordById(s32 id)
 {

@@ -24,7 +24,7 @@ f32 btlCalcAilmentRateScale(u32 sourceId, u32 targetId)
             BattleRateAnalysis analysis;
             btlEntryBuildSummary(&analysis, battle, source);
             u16 percent = analysis.percent;
-            if (percent && statusFlagsHaveAilment(target->statusFlags))
+            if (percent && statusFlagsHaveAilment(target->data.statusFlags))
                 return (f32)percent * 0.01f;
         }
     }

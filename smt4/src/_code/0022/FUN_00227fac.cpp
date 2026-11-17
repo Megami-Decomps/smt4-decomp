@@ -1,6 +1,6 @@
 #include "common.h"
 #include "shard/PassiveSkill.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/BtlGlobals.h"
 

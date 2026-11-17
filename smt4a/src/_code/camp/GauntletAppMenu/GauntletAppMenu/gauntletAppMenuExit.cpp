@@ -1,16 +1,15 @@
 /* Gauntlet app menu: the exit step, which ends the menu's worker and returns 0. */
 #include "common.h"
 #include "camp/GauntletAppMenu/GauntletAppMenu.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 
-int renderCtxResetColorScale(u32 handle);
-int skinObjectUpdateMatrices(u32 handle);
-int renderCtxSelectTexture(u32 handle, int arg);
+int renderCtxResetColorScale(RenderCtxA *handle);
+int skinObjectUpdateMatrices(RenderCtxA *handle);
 int FUN_003db56c(GauntletAppMenuWork *menu);
 
 extern GauntletAppMenuWork *g_gauntletAppMenu;
-extern u32 g_renderCtx;
 
 u32 gauntletAppMenuExit(void)
 {

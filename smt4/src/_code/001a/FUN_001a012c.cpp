@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -15,7 +16,6 @@ int dataFindKindRecordWithAocOverrides(...);
 int vec2GetYInt(...);
 int vec2GetXInt(void);
 int texDrawCompositeSprite(...);
-int asdTMTexTableEntryAt(...);
 int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
 int renderCtxSelectStereoLayout(int);
@@ -173,13 +173,13 @@ LAB_001a03b8:
           temp_v10 = 0x3d;
           temp_v9 = (unsigned int)*puVar6;
         }
-        temp_v8 = asdTMTexTableEntryAt(0x1a,temp_v7 + 0x533);
+        temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,temp_v7 + 0x533));
         texDrawCompositeSprite(2,0x1a,0xd,*(short *)(temp_v8 + 8) + temp_v2,*(short *)(temp_v8 + 10) + temp_v3,0xbf)
         ;
-        temp_v5 = asdTMTexTableEntryAt(0x1a,0xa0);
+        temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0xa0));
         itemDrawCategoryBadge(temp_v10,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v2,
                      (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v3,0xc4,0);
-        temp_v5 = asdTMTexTableEntryAt(0x1a,0xa1);
+        temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0xa1));
         if (temp_v9 != 0) {
           dataFindKindRecordWithAocOverrides(temp_v9,0);
           if (temp_v9 != 0) {

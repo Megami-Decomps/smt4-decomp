@@ -1,10 +1,10 @@
 #pragma once
 #include "common.h"
+#include "gamedata/GameSaveDataA.h"
 
 /* GameDataAccess (declarations migrated from callers). */
 struct FlaggedEntry;
 struct ScrollSelectionOwner;
-struct Slot;
 struct AocSystemA;
 struct Entry00470080;
 extern "C" {
@@ -28,7 +28,8 @@ u32 flagSelectVariant(void);
 
 u32 gameCountersGetWord(s32 index);
 
-Slot * saveSlotFindById(u32 id);
+/* The stock slot with the given id, or NULL. */
+PartySlotA *saveSlotFindById(u32 id);
 
 Entry00470080 * contentEntryGetFromFilesByKind(AocSystemA *system, s32 slot, s32 index);
 

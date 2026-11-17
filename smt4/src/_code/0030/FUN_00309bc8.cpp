@@ -1,12 +1,11 @@
 /* NON_MATCHING: only count-label/text stack placement, frame size and prologue global-load scheduling differ. */
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 #include "shard/W6_W6Match2_RankedTableRecord.h"
 #include "bible/bibleDevil.h"
 #include "gamedata/EquipmentRecord.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
-extern ButtonHelpGlobals g_buttonHelp;
-PlayerEquipmentAppearance *gameGetPlayerData();
 void FUN_002907c4(char *buffer, u32 value);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void textEncodeFontSlot(u32 slot, const char *text);
@@ -18,8 +17,8 @@ void asdTextDrawDirectoryEntry(u32 handle, u32 directory, u32 color, s32 mode,
 void FUN_00309bc8(u32 context, u32 depth)
 {
     ButtonHelpWork *work = g_buttonHelp.work;
-    EquipmentRecord *firearm = itemTableGetEquipmentRecord(gameGetPlayerData()->equipped.firearm);
-    EquipmentRecord *ammunition = itemTableGetEquipmentRecord(gameGetPlayerData()->equipped.ammunition);
+    EquipmentRecord *firearm = itemTableGetEquipmentRecord(gameGetPlayerData()->equipped.gun);
+    EquipmentRecord *ammunition = itemTableGetEquipmentRecord(gameGetPlayerData()->equipped.bullets);
     char text[100];
     if (firearm == NULL || ammunition == NULL) {
         work->unk4CB = 0;

@@ -1,5 +1,5 @@
 /* NON_MATCHING: percentage command uses a different saved-register set and stack-argument stores. */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "battle/BattleUnitSlot.h"
@@ -24,7 +24,7 @@ extern "C" u32 FUN_002f7794(void)
     s32 percent = scrGetArg(1);
     u32 unit = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     BtlEntry *target = btlMainFindEntryByListedId(btlGetMainState(), targetId);
-    s32 amount = target->maxHp * percent / 100;
+    s32 amount = target->data.maxHp * percent / 100;
     if (amount == 0) {
         amount = -1;
     }

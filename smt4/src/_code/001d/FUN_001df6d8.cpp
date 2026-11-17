@@ -1,5 +1,5 @@
 /* NON_MATCHING: scalar-channel registers and the large timer-field address decomposition differ. */
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 #include "shard/Shard0034.h"
 
 struct UniteScalarAnimationRef {
@@ -16,12 +16,11 @@ struct UniteAnimationView {
 };
 
 extern "C" {
-extern UniteWorkIV *g_unite;
 void FUN_00210194(void *object, f32 value);
 
 void FUN_001df6d8()
 {
-    UniteWorkIV *work = g_unite;
+    UniteWork *work = g_unite;
     if (!work) {
         return;
     }

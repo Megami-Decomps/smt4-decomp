@@ -2,6 +2,7 @@
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match3_EffectColor.h"
 #include "code/Code0028.h"
+#include "camp/RenderCtxTitle.h"
 
 static __inline u32 packFadeColor(EffectColor color)
 {
@@ -35,7 +36,6 @@ typedef struct FadeJob {
     /* 0x40 */ f32 level;
 } FadeJob;
 
-extern RenderCtx *g_titleScene;
 FadeJob *jobGetWork(u32 handle);
 void FUN_001a79a8(FadeJob *job);
 s32 renderCtxPackPassFlags(u32 slot, u32 flags);

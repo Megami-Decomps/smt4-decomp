@@ -1,6 +1,6 @@
 /* NON_MATCHING: register allocation: retail keeps entry in r6 and reuses the status+0x400 base register for the constant 1, so it saves one register fewer (8-byte frame vs our 12). */
-#include "common.h"
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "status/StatusDown.h"
+#include "camp/Unite/UniteWork.h"
 
 extern "C" {
 
@@ -12,24 +12,7 @@ typedef struct StatusDownEntry {
     /* 0x0C */ u16 unk0C;
 } StatusDownEntry;
 
-/* The status-down screen's work: only the fields this unit touches are named. */
-typedef struct StatusDown {
-    /* 0x000 */ u8 unk000[0x3FC];
-    /* 0x3FC */ u8 mode;
-    /* 0x3FD */ u8 unk3FD[0x13];
-    /* 0x410 */ u8 refresh;
-    /* 0x411 */ u8 unk411[0x6D];
-    /* 0x47E */ s16 selection;      /* negative when nothing is selected */
-    /* 0x480 */ u8 unk480[0xD4];
-    /* 0x554 */ u32 entryUnk00;
-    /* 0x558 */ u32 entryUnk04;
-    /* 0x55C */ u32 entryUnk08;
-    /* 0x560 */ u16 entryUnk0C;
-    /* 0x562 */ u8 unk562[2];
-    /* 0x564 */ u8 window[1];
-} StatusDown;
 
-extern StatusDown *g_statusDown;
 
 void buttonHelpSetPreset(u32 preset);
 void gridNavigationConfigure(void *window, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
@@ -37,9 +20,9 @@ void gridNavigationConfigure(void *window, s32 arg1, s32 arg2, s32 arg3, s32 arg
 /* Opens the status-down screen on `entry`, restoring the button help when a selection was showing. */
 void FUN_00215a8c(const StatusDownEntry *entry)
 {
-    StatusDown *status = g_statusDown;
+    StatusDownState *status = g_statusDown;
 
-    if (status->selection >= 0 && status->mode == 1) {
+    if (status->selectedEntry >= 0 && status->tab == 1) {
         s32 scene = FUN_0029ac94();
 
         if (scene == 13 || scene == 6) {
@@ -48,13 +31,13 @@ void FUN_00215a8c(const StatusDownEntry *entry)
             buttonHelpSetPreset(0x1F);
         }
     }
-    status->selection = -1;
+    status->selectedEntry = -1;
     status->entryUnk00 = entry->unk00;
     status->entryUnk04 = entry->unk04;
     status->entryUnk08 = entry->unk08;
     status->entryUnk0C = entry->unk0C;
     gridNavigationConfigure(status->window, 7, 7, 1, 0, 1);
-    status->refresh = 1;
+    status->listActive = 1;
 }
 
 } /* extern "C" */

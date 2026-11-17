@@ -24,7 +24,7 @@ void FUN_003c33e8(SkillSlotScreen *screen, s32 index, u32 unit, s32 count, s32 x
 
     if (screen->slots[index] == 0) {
         textFormatBuffer(text, "\x81\x7c \x81\x7c \x81\x7c");
-        const SpriteInfo *label = reinterpret_cast<const SpriteInfo *>(asdTMTexTableEntryAt(0x1a, 0x178));
+        const TextureTableEntryIV *label = asdTMTexTableEntryAt(0x1a, 0x178);
         textDrawString(2, 0xffffffff, text, label->x + x, label->y + y, 0.0f, 0.0f, effect);
         return;
     }
@@ -35,15 +35,15 @@ void FUN_003c33e8(SkillSlotScreen *screen, s32 index, u32 unit, s32 count, s32 x
         color = 0x9fe7ffff;
     }
     textFormatBuffer(text, "%s", FUN_0014bd84(screen->slots[index]));
-    const SpriteInfo *label = reinterpret_cast<const SpriteInfo *>(asdTMTexTableEntryAt(0x1a, 0x178));
+    const TextureTableEntryIV *label = asdTMTexTableEntryAt(0x1a, 0x178);
     textDrawString(2, color, text, label->x + x, label->y + y, 0.0f, 0.0f, effect);
-    const SpriteInfo *icon = reinterpret_cast<const SpriteInfo *>(asdTMTexTableEntryAt(0x1a, 0x177));
+    const TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x1a, 0x177);
     FUN_00185e84(screen->slots[index], icon->x + x, icon->y + y, 0x74, 0, 0);
     if (recordContainsPairedId(unit, screen->slots[index]) == 0) {
         partyRecordSetEquippedItemClampRank(unit, screen->slots[index], index);
     }
     statDrawClampedDelta(unit, screen->slots[index], icon->x + x, icon->y + y, 0x74, 0);
-    const SpriteInfo *cost = reinterpret_cast<const SpriteInfo *>(asdTMTexTableEntryAt(0x1a, 0x17c));
+    const TextureTableEntryIV *cost = asdTMTexTableEntryAt(0x1a, 0x17c);
     FUN_00180310(1, cost->x + x, cost->y + y, 1, 4, 0x79, "%d", skillGetAdjustedCost(unit, screen->slots[index]));
 }
 

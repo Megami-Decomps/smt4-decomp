@@ -2,6 +2,7 @@
 #include "common.h"
 #include "Model/ModelList.h"
 #include "gamedata/GameDataAccess.h"
+#include "shard/W5_W5Match7_FlagBanks.h"
 
 struct MapPoint {
     f32 x, y, z;

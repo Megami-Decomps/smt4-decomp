@@ -23,7 +23,7 @@ u32 FUN_0039e768()
         if ((flags & g_battleMaskPresets.eligibility.active) &&
             !(flags & g_battleMaskPresets.eligibility.excluded) &&
             (flags & g_battleMaskPresets.eligibility.required) &&
-            entry->selection.marked && entry->id == id) {
+            entry->data.marked && entry->data.id == id) {
             FUN_004d888c(state->roster[index].script.holder, animation, enabled != 0, duration);
             break;
         }

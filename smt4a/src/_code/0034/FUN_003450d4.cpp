@@ -1,8 +1,9 @@
 #include "code/Code002a_VariantA.h"
 /* NON_MATCHING: packed coordinates build through 16-bit bitfields like retail; remaining: the packed-pair instruction order and the trailing call arguments copy through VFP (vldr/vstr) instead of retail's ldr + stm. */
 #include "shard/Shard0031.h"
-#include "ui/TouchRectangleRequest.h"
+#include "ui/IfTouch.h"
 #include "code/Code002a.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 union PackedPair {
     struct {
@@ -24,7 +25,7 @@ u32 FUN_002e2848(FlaggedEntry *, u32, u32, u32, u32, u32, s32, s32);
 void eventQueueAddUnique(u32);
 
 /* Apply the first accepted mode or touch selection, reporting blocked modes and optional changes. */
-u32 FUN_003450d4(FlaggedEntry *entry, const TouchRectangleRequest *rectangle,
+u32 FUN_003450d4(FlaggedEntry *entry, const TextureTableEntryIV *rectangle,
                  const s16 *ids, u32 firstKey, u32 secondKey, u32 thirdKey,
                  bool *blockedMode, s32 secondary, s32 notify)
 {
@@ -60,7 +61,7 @@ u32 FUN_003450d4(FlaggedEntry *entry, const TouchRectangleRequest *rectangle,
         result = 1;
     } else if (rectangle != NULL) {
         PackedPair position = {{ (u32)rectangle->x, (u32)rectangle->y }};
-        PackedPair dimensions = {{ (u32)rectangle->dimensions->width, (u32)rectangle->dimensions->height }};
+        PackedPair dimensions = {{ (u32)rectangle->placement->width, (u32)rectangle->placement->height }};
         result = FUN_002e2848(entry, position.word, dimensions.word, firstKey, secondKey, thirdKey,
                               secondary, notify);
     }

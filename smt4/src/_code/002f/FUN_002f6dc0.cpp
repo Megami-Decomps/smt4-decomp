@@ -1,7 +1,7 @@
 #include "common.h"
 #include "gamedata/NkmBaseRecord.h"
 #include "battle/btlMain.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
@@ -16,7 +16,7 @@ u32 FUN_002f6dc0(void)
     for (s32 i = 0; i < 109; i++) {
         BtlEntry *slot = &btlGetMainState()->entries[i];
         if ((slot->flags & 0x10) != 0 && (slot->flags & 1) != 0 && (slot->flags & 0x40) == 0) {
-            if (nkmBaseGetRecord(slot->id)->category == 5) {
+            if (nkmBaseGetRecord(slot->data.id)->category == 5) {
                 scrSetResult(1);
                 return 1;
             }

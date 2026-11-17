@@ -1,8 +1,7 @@
 /* NON_MATCHING: retail keeps the slot index in r5 and the work pointer in r4 (built swaps them), and derives the two-icon pair address after the first icon lookup; the if-chain, hoisted count pointer and call sequence are identical */
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 
 extern "C" {
-extern ButtonHelpGlobalsA g_buttonHelp;
 
 void uiSpriteSelectAnim(ButtonHelpUnit *unit, s32 animation);
 void uiSpriteSetKeyframe(ButtonHelpUnit *unit, s32 keyframe, s32 flag);

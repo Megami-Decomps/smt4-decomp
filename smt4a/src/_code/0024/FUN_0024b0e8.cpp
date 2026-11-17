@@ -3,12 +3,12 @@
 #include "title/titleConfig.h"
 #include "shard/S1ListPanel.h"
 #include "shard/Shard0031.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 extern TitleConfigA *g_titleConfig;
 void ifTouchRegionRemove();
 void fillTwoWordsWithByte(void *destination, u32 value);
-const SpriteInfo *asdTMTexTableEntryAt(s32 table, s32 image);
 s32 ifTouchRegionAdd(s32 x, s32 y, s32 width, s32 height);
 
 void FUN_0024b0e8()
@@ -23,20 +23,20 @@ void FUN_0024b0e8()
     // A word-aligned cursor cannot enter the odd-sized shared padding beginning at +0x26.
     struct CursorView { u8 prefix[0xf0]; u8 cursor[0x64]; };
     const CursorView *view = reinterpret_cast<const CursorView *>(menu);
-    const SpriteInfo *anchor = asdTMTexTableEntryAt(36, listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(view->cursor)) + 31);
-    const SpriteInfo *image = asdTMTexTableEntryAt(36, 27);
+    const TextureTableEntryIV *anchor = asdTMTexTableEntryAt(36, listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(view->cursor)) + 31);
+    const TextureTableEntryIV *image = asdTMTexTableEntryAt(36, 27);
     menu->touchRegions[0] = ifTouchRegionAdd(static_cast<s16>(anchor->x + image->x),
-        static_cast<s16>(anchor->y + image->y), image->bounds.width & 0x7fff, image->bounds.height & 0x7fff);
+        static_cast<s16>(anchor->y + image->y), image->width & 0x7fff, image->height & 0x7fff);
     ++menu->countB;
     image = asdTMTexTableEntryAt(36, 52);
     menu->touchRegions[1] = ifTouchRegionAdd(static_cast<s16>(anchor->x + image->x),
-        static_cast<s16>(anchor->y + image->y), image->bounds.width & 0x7fff, image->bounds.height & 0x7fff);
+        static_cast<s16>(anchor->y + image->y), image->width & 0x7fff, image->height & 0x7fff);
     image = asdTMTexTableEntryAt(36, 56);
     menu->touchRegions[2] = ifTouchRegionAdd(static_cast<s16>(anchor->x + image->x),
-        static_cast<s16>(anchor->y + image->y), image->bounds.width & 0x7fff, image->bounds.height & 0x7fff);
+        static_cast<s16>(anchor->y + image->y), image->width & 0x7fff, image->height & 0x7fff);
     image = asdTMTexTableEntryAt(36, 51);
     menu->touchRegions[3] = ifTouchRegionAdd(static_cast<s16>(anchor->x + image->x),
-        static_cast<s16>(anchor->y + image->y), image->size[0], image->size[1]);
+        static_cast<s16>(anchor->y + image->y), image->placement->width, image->placement->height);
     menu->countB += 3;
 }
 }

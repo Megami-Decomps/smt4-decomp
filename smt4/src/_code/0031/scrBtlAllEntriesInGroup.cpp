@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
@@ -18,7 +18,7 @@ u32 scrBtlAllEntriesInGroup(void)
         BtlEntry *entry = &btlGetMainState()->entries[i];
 
         if ((entry->flags & BTL_ENTRY_FLAG_PRESENT) != 0 && (entry->flags & BTL_ENTRY_FLAG_ACTIVE) != 0 &&
-            (entry->flags & BTL_ENTRY_FLAG_BLOCKED) == 0 && (entry->groupMask & (1 << (group & 0xFF))) == 0) {
+            (entry->flags & BTL_ENTRY_FLAG_BLOCKED) == 0 && (entry->data.statusFlags & (1 << (group & 0xFF))) == 0) {
             scrSetResult(0);
             return result;
         }

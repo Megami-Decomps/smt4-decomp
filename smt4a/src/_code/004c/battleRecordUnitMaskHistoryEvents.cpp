@@ -1,9 +1,8 @@
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlEntryLookup.h"
 #include "battle/btlMain.h"
+#include "battle/BtlEntryLookup.h"
 
-struct HistoryUnit {
-    u64 flags; /* 0x00 */
-};
 struct HistoryEventMasks {
     u8 unk00[0x48];
     u64 first;  /* 0x48 */
@@ -14,13 +13,12 @@ struct HistoryEventMasks {
 
 extern "C" {
 extern HistoryEventMasks DAT_005713f0;
-HistoryUnit *btlMainFindEntryByListedId(BtlMainStateA *state, u32 unitId);
-void battleRecordCombatantHistoryEvent(BtlMainStateA *state, HistoryUnit *unit, s32 kind);
+void battleRecordCombatantHistoryEvent(BtlMainStateA *state, BtlCombatantEntryA *unit, s32 kind);
 
 /* Records history events 1-3 for the unit according to which event masks its flags hit. */
 void battleRecordUnitMaskHistoryEvents(u32 unitId)
 {
-    HistoryUnit *unit = btlMainFindEntryByListedId(btlGetMainState(), unitId);
+    BtlCombatantEntryA *unit = btlMainFindEntryByListedId(btlGetMainState(), unitId);
 
     if (unit->flags & DAT_005713f0.first) {
         battleRecordCombatantHistoryEvent(btlGetMainState(), unit, 1);

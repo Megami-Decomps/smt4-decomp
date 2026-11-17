@@ -1,17 +1,7 @@
 /* NON_MATCHING: scissor stack addressing and packet constant scheduling differ from retail. */
-#include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
-namespace {
-/* Local view extends past the recovered shared render context. */
-struct ScissorContextView {
-    u8 unk0000[0x130C];
-    RenderStateStack enabled;
-    u8 unk132C[0x20];
-    RenderStateStack extent;
-};
-}
 extern "C" {
-extern ScissorContextView *g_titleScene;
 extern u32 *g_modelCommandBuffer;
 extern u32 g_modelCommandWordCount;
 u32 asdGxGetCurrentPresetKind(void);
@@ -27,13 +17,13 @@ void FUN_003098b4(u32 origin)
     u32 width = FUN_002ae1e8(asdGxGetCurrentPresetKind());
     cursorResetFromParam();
     u32 start, end;
-    if (g_titleScene->enabled.entries[g_titleScene->enabled.count] != 0) {
+    if (g_titleScene->scissor.entries[g_titleScene->scissor.count] != 0) {
         u32 x = origin >> 16;
         u32 y = origin & 0xFFFF;
         u32 left = x < width ? x : width - 1;
         u32 top = y < height ? y : height - 1;
         start = left | (top << 16);
-        u32 extent = g_titleScene->extent.entries[g_titleScene->extent.count];
+        u32 extent = g_titleScene->scissorMaximum.entries[g_titleScene->scissorMaximum.count];
         u32 right = x + (extent >> 16) - 1;
         if (static_cast<s32>(right) < 0)
             right = 0;

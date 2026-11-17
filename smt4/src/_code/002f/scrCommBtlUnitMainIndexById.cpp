@@ -18,9 +18,9 @@ u32 scrCommBtlUnitMainIndexById(void)
     for (;;) {
         BtlEntry *unit = &btlGetMainState()->entries[index];
 
-        if ((unit->flags & 1) && !(unit->flags & 0x40) && (unit->flags & 8) && unit->members.ids[0] >= 0
-            && unit->link != NULL && unit->link->id == id) {
-            result = unit->members.ids[0];
+        if ((unit->flags & 1) && !(unit->flags & 0x40) && (unit->flags & 8) && unit->ids[0] >= 0
+            && unit->data.link != NULL && unit->data.link->id == id) {
+            result = unit->ids[0];
             break;
         }
         index++;

@@ -1,6 +1,6 @@
 #include "battle/BattleRosterCache.h"
 #include "battle/btlAction.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 
 // This function uses an extended battle-state view not covered by BtlMainState.
 struct RosterStateView {
@@ -32,7 +32,7 @@ static __inline BtlEntry *findCombatantByMember(RosterStateView *battle, s16 mem
     BtlEntry *found = NULL;
     for (s32 unit = 0; unit < 109; ++unit) {
         for (s32 member = 0; member < 50; ++member) {
-            s16 id = battle->entries[unit].members.ids[member];
+            s16 id = battle->entries[unit].ids[member];
             if (id < 0)
                 break;
             if (id == memberId) {

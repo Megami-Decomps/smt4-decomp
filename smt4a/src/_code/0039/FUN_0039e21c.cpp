@@ -23,10 +23,10 @@ u32 FUN_0039e21c(void)
     if (entry == NULL) {
         return 1;
     }
-    BattleRosterRecordA *record = &state->roster[entry->unitIndex];
+    BattleRosterRecordA *record = &state->roster[entry->ids[0]];
     u32 unit = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
     btlSlotManagerResetStates(state);
-    FUN_004fc094(0, unit, 0, record, 0, entry->maxHp, -1, -1, entry->hp, entry->maxHp, 0, 0, 1, 0, 0, 0, 0,
+    FUN_004fc094(0, unit, 0, record, 0, entry->data.maxHp, -1, -1, entry->data.hp, entry->data.maxHp, 0, 0, 1, 0, 0, 0, 0,
                  0, 0, 0, 1, 0, 1, 1, 0, 1);
     btlQueueKeyedScalarReflectAction(0x19, unit, record, 0);
     return 1;

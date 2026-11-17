@@ -4,13 +4,7 @@
 #include "shard/TextureDrawCall.h"
 #include "util/BitsAndBytes.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-
-struct CampNotice {
-    /* 0x0000 */ u8 unk0000[0x1AB4];
-    /* 0x1AB4 */ f32 iconSpeed;
-    /* 0x1AB8 */ u8 unk1AB8[0x17F8];
-    /* 0x32B0 */ u8 flags[7];       /* one new-entry flag per camp menu */
-};
+#include "camp/CampStateA.h"
 
 
 #define CAMP_NOTICE_HEADER 0x14
@@ -20,7 +14,6 @@ struct CampNotice {
 #define CAMP_NOTICE_GLOW 0x5D6
 
 extern "C" {
-extern CampNotice *g_camp;
 
 s32 gameFlagIsSet(u32 flag);
 f32 jobGetScalarValue(void);
@@ -28,7 +21,7 @@ void efctSetSpeed(f32 speed);
 
 void FUN_0026e8b8(s32 menu, s32 x, s32 y, u32 flags, s32 plain)
 {
-    const u8 *notice = g_camp->flags;
+    const u8 *notice = g_camp->noticeFlags;
     bool shown;
     switch (menu) {
     case 3:
@@ -83,7 +76,7 @@ void FUN_0026e8b8(s32 menu, s32 x, s32 y, u32 flags, s32 plain)
     TextureTableEntryIV *frame = asdTMTexTableEntryAt(CAMP_NOTICE_HEADER, CAMP_NOTICE_FRAME_ANIMATED);
     texDrawTableEntryAtStoredOrigin(2, CAMP_NOTICE_HEADER, CAMP_NOTICE_ICON, frame->x + x, frame->y + y, flags);
     u32 active = jobGetScalarValue() != 0.0f;
-    efctSetSpeed(g_camp->iconSpeed * (f32)active);
+    efctSetSpeed(g_camp->sprites[37].unk20 * (f32)active); /* the icon sprite's speed */
     RenderCtxA *context = g_renderCtx;
     s32 state = packNibblesAndByte(6, 1, 0);
     renderStackSet(&context->stackB, state);

@@ -43,7 +43,7 @@ u32 btlTalkChooseRandomPartyTarget()
             if (slot >= 0) {
                 SlotRecordA *record = gameGetSlotRecord(slot);
                 if (!bitsAt60Test((BitsAt60 *)record, 1) &&
-                    !bitsAt60Test((BitsAt60 *)record, 10) && record->entryId != excludedId) {
+                    !bitsAt60Test((BitsAt60 *)record, 10) && record->id != excludedId) {
                     if (!FUN_004bd0d8(record)) {
                         candidates[available] = slot;
                         ++available;
@@ -63,9 +63,9 @@ u32 btlTalkChooseRandomPartyTarget()
             for (s32 entryIndex = 0; entryIndex < 0x6d; ++entryIndex) {
                 BtlCombatantEntryA *entry = &btlGetMainState()->entries[entryIndex];
                 if ((g_btlMessageFlagMasks.eligible & entry->flags) && !(entry->flags & g_btlMessageFlagMasks.excluded) &&
-                    entry->unitIndex >= 0 && (entry->flags & g_btlMessageFlagMasks.required)) {
+                    entry->ids[0] >= 0 && (entry->flags & g_btlMessageFlagMasks.required)) {
                     if (selected == seen) {
-                        result = entry->unitIndex;
+                        result = entry->ids[0];
                         break;
                     }
                     ++seen;

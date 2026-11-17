@@ -1,4 +1,4 @@
-#include "shard/X14_InfoWindowSmt4.h"
+#include "font/InfoWin.h"
 
 extern "C" {
 
@@ -10,7 +10,7 @@ s32 vec2GetXInt(void *timer);
 /* Shows a message in the info window, widening it for text over 630 pixels wide. */
 void infoWinSetMessage(const void *message, u32 arg)
 {
-    InfoWindowSmt4 *win = g_infoWin;
+    InfoWindow *win = g_infoWin;
     f32 width;
 
     win->hasText = 0;
@@ -24,8 +24,8 @@ void infoWinSetMessage(const void *message, u32 arg)
             win->wideText = 1;
             win->textWidth = (s32)width;
         }
-        timerStart(win->slideTimer, 2, 0);
-        win->labelX = vec2GetXInt(win->slideTimer);
+        timerStart(&win->content, 2, 0);
+        win->labelX = vec2GetXInt(&win->content);
         win->textRight = win->labelX + win->textWidth + 42;
         if (win->state == 3) {
             win->state = 2;

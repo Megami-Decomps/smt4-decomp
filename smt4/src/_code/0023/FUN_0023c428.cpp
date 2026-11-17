@@ -1,12 +1,13 @@
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlEntryLookup.h"
 #include "battle/btlAction.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match7_MaterialAnimationFlags.h"
+#include "battle/BtlEntryLookup.h"
 
 extern "C" {
 void lightOwnerRegister(MaterialMergeModel *model, s32 mode);
 s32 idSetFindSubjectIndex(BtlMainState *battle, BtlActionRecord *action);
-MaterialMergeVariants *btlFindEntryBlockByMemberId(BtlMainState *battle, s32 member);
 void effectComputeScaledImageBounds(const BattleSpritePlacement *placement, f32 *output, f32 scale);
 void modelSetPosition(MaterialMergePose *pose, s32 node, const f32 *position);
 void nodeSetTranslation(MaterialMergePose *pose, s32 node, const BattleVector3 *translation);
@@ -24,8 +25,8 @@ void FUN_0023c428(MaterialMergeOwner *owner, s32 index)
         if (variant < 0)
             variant = 0;
         MaterialMergePlacement *selected = NULL;
-        MaterialMergeVariants *variants = btlFindEntryBlockByMemberId(btlGetMainState(), action->memberId);
-        s32 key = variants->keys[variant];
+        BtlUnitData *variants = btlFindEntryBlockByMemberId(btlGetMainState(), action->memberId);
+        s32 key = variants->parts[variant];
         for (s32 placement = 0; placement < 50; ++placement) {
             if (owner->placements.entries[placement].key == key) {
                 selected = &owner->placements.entries[placement];

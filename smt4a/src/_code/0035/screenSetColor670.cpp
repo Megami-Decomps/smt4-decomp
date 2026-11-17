@@ -1,8 +1,7 @@
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 #include "shard/Shard0035.h"
 
 extern "C" {
-extern ButtonHelpGlobalsA g_buttonHelp;
 
 void screenSetColor670(u32 a, u8 b, u8 c, u8 d)
 {

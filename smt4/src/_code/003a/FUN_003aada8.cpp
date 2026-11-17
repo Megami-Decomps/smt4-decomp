@@ -1,5 +1,6 @@
 #include "common.h"
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 /* A selection menu whose member-callback table sits at 0xA688 (CallbackSelectionWork's is at 0xA698). */
 struct CallbackSelectionWorkA688 {
@@ -13,7 +14,6 @@ struct CallbackSelectionWorkA688 {
 };
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 void gxResetColorQuadToWhite(CallbackSelectionWorkA688 *work);
 void renderCtxResetColorScale(RenderCtx *scene);
 

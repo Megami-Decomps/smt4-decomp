@@ -2,21 +2,15 @@
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
+#include "map/PopupStateA.h"
 
-struct MapPopupState {
-    /* 0x00 */ s32 state;
-    /* 0x04 */ s32 timer;
-    /* 0x08 */ u8 unk08[0xC];
-    /* 0x14 */ u32 process;
-};
 
 extern "C" {
-extern MapPopupState* g_popupState;
 s32 randRange(s32 maximum);
 
 s32 gameFlagIsSet(u32 flag);
 s32 gameFlagStateIsOne(void);
-u32 popupSelectWeightedMessage(u32 kind, u32 resource);
+const char *popupSelectWeightedMessage(u32 kind, u32 speakerId);
 
 // Periodically open the map popup while its progress flag is enabled.
 void FUN_00223fac(void)
@@ -32,7 +26,7 @@ void FUN_00223fac(void)
             g_gameState.popupCountdown = 5;
             g_popupState->timer = 0;
             g_popupState->state = 20;
-            g_popupState->process = popupSelectWeightedMessage(21, 187);
+            g_popupState->message = popupSelectWeightedMessage(21, 187);
         } else {
             --g_gameState.popupCountdown;
         }

@@ -16,9 +16,9 @@ extern "C" u32 FUN_003f0254(BtlMainStateA *state, const BattleRosterRecordA *sub
                 if ((flags & g_btlMain.combatantMasks.required) &&
                     !(flags & g_btlMain.exclusionMask) &&
                     (flags & g_btlMain.actorCategories[2]) &&
-                    candidate->indexView.selectionIndex != selected->indexView.selectionIndex &&
+                    candidate->selectionIndex != selected->selectionIndex &&
                     !(flags & g_btlMain.compatibility.excluded) &&
-                    candidate->id == selected->id) {
+                    candidate->data.id == selected->data.id) {
                     return 0;
                 }
             }

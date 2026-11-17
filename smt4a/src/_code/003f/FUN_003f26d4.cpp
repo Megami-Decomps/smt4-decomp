@@ -55,13 +55,13 @@ void FUN_003f26d4(BtlAiState *state)
     for (s32 index = first; index < last; index++) {
         BtlCombatantEntryA *entry = &state->entries[index];
         if ((entry->flags & g_btlMain.combatantMasks.required) && !(entry->flags & g_btlMain.exclusionMask)) {
-            state->turnOrder.indices[found] = entry->indexView.selectionIndex;
-            state->entries[index].sortBonus.value = 0;
+            state->turnOrder.indices[found] = entry->selectionIndex;
+            state->entries[index].data.speedBonus = 0;
             if (state->entries[index].flags & g_btlMain.actorCategories[0]) {
-                state->entries[index].sortBonus.value = 5;
+                state->entries[index].data.speedBonus = 5;
             }
             if (!(state->stateFlags64.bits & g_btlMain.fixedScore.mask)) {
-                state->entries[index].sortBonus.value += FUN_0034ef58(-3, 3);
+                state->entries[index].data.speedBonus += FUN_0034ef58(-3, 3);
             }
             found++;
         }

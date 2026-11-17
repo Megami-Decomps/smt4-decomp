@@ -3,9 +3,9 @@
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 #include "camp/RenderCtx.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 u32 asdTMTexTableGetNodeTexture(u32 group, u32 resource);
 void FUN_002c1ac8(const f32 *first, const f32 *second, const f32 *third, const f32 *fourth,
                   f32 x, f32 y, f32 width, f32 height, f32 firstDepth, f32 secondDepth,

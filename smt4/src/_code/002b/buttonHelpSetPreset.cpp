@@ -1,10 +1,9 @@
 /* NON_MATCHING: button-order constant storage, active-slot register allocation and transition-tail scheduling differ. */
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 #include "quest_center/qcMain.h"
 
 struct ButtonHelpPresetRecord { u16 buttons[6]; u8 shown; };
 extern "C" {
-extern ButtonHelpPresetGlobals g_buttonHelp;
 const ButtonHelpPresetRecord *dataTableGetEntry0e(u32 preset);
 void buttonHelpSetContext(u32 preset);
 void FUN_002b8454(u8 slot, u8 kind, u8 value, s32 sound);
@@ -13,12 +12,12 @@ void FUN_002ae5e0();
 
 void buttonHelpSetPreset(u32 preset)
 {
-    ButtonHelpWork *work = g_buttonHelp.prefix.work;
+    ButtonHelpWork *work = g_buttonHelp.work;
     if (work->unk4C9 == preset) {
         return;
     }
     if (g_buttonHelp.pending < 0) {
-        const ButtonHelpSelectionViewIV *selection = reinterpret_cast<const ButtonHelpSelectionViewIV *>(g_buttonHelp.prefix.work);
+        const ButtonHelpSelectionViewIV *selection = reinterpret_cast<const ButtonHelpSelectionViewIV *>(g_buttonHelp.work);
         for (s32 index = 0; index < 6; ++index) {
             if (selection->active[index] != 0) {
                 g_buttonHelp.pending = preset;
@@ -44,14 +43,14 @@ void buttonHelpSetPreset(u32 preset)
     }
     if (previous->shown != 0) {
         if (next->shown != 0) {
-            g_buttonHelp.prefix.work->unk4C5 = 0;
+            g_buttonHelp.work->unk4C5 = 0;
             FUN_001385f8();
         } else {
-            g_buttonHelp.prefix.work->unk4C5 = 1;
+            g_buttonHelp.work->unk4C5 = 1;
             FUN_002ae5e0();
         }
     } else {
-        g_buttonHelp.prefix.work->unk4C5 = 1;
+        g_buttonHelp.work->unk4C5 = 1;
         FUN_001385f8();
     }
 }

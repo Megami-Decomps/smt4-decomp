@@ -5,7 +5,7 @@
 #include "battle/btlAction.h"
 #include "gamedata/SkillDataLookup.h"
 #include "AsdSDK/AsdMemUtil.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "gamedata/ConsumableRecord.h"
 #include "battle/BtlGlobals.h"
 
@@ -106,10 +106,10 @@ void FUN_003ca6c4(BtlMainState **block, CommandState *state)
         BtlEntry *entry = btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(*block), action->memberId);
         if ((entry->flags & 0x10) == 0)
             continue;
-        if ((entry->flags & 0x100) != 0 && entry->members.ids[0] != action->memberId)
+        if ((entry->flags & 0x100) != 0 && entry->ids[0] != action->memberId)
             continue;
         const CommandActionView *view = reinterpret_cast<const CommandActionView *>(action);
-        state->windowHandles[windowCount] = FUN_003aeaa4(g_btlUiBlock, entry->id, view->variant, entry->maxHp, entry->maxMp, entry->groupMask,
+        state->windowHandles[windowCount] = FUN_003aeaa4(g_btlUiBlock, entry->data.id, view->variant, entry->data.maxHp, entry->data.maxMp, entry->data.statusFlags,
                      *reinterpret_cast<const UiPosition *>(action->geometry.position));
         state->windowSelections[windowCount] = entry->selectionIndex;
         ++windowCount;
@@ -140,8 +140,8 @@ void FUN_003ca6c4(BtlMainState **block, CommandState *state)
             if ((secondEntry->flags & 1) == 0 || (secondEntry->flags & 0x40) != 0 ||
                 (secondEntry->flags & 0x10) == 0 || (secondEntry->flags & 0x100) != 0)
                 continue;
-            const BtlActionRecord *firstAction = &(*block)->actions[firstEntry->members.ids[0]];
-            const BtlActionRecord *secondAction = &(*block)->actions[secondEntry->members.ids[0]];
+            const BtlActionRecord *firstAction = &(*block)->actions[firstEntry->ids[0]];
+            const BtlActionRecord *secondAction = &(*block)->actions[secondEntry->ids[0]];
             if (firstAction->geometry.position[0] > secondAction->geometry.position[0]) {
                 state->targetOrder[slot] = first;
                 state->targetOrder[slot - 1] = second;

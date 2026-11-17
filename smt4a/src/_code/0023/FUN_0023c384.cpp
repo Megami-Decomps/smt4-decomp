@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023c384` (_code @ 0x23c384, 0x53c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -32,7 +33,6 @@ typedef struct {
 #endif
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: eventQueueAddUnique. */
-extern int asdTMTexTableEntryAt(unsigned int, int);
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: gameGetSlotRecord. */
@@ -191,7 +191,7 @@ void FUN_0023c384(int param_1)
                   uiSpriteSelectAnim(temp_v6,2);
                   pairSetFirstResetSecond(temp_v6,0x1a);
                   uiStoreTextureEntryCenter(temp_v6,0x1d,0x2f);
-                  temp_v11 = asdTMTexTableEntryAt(0x1d,temp_v12 + 0x31);
+                  temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,temp_v12 + 0x31));
                   temp_v1 = *(short *)(temp_v11 + 10);
                   temp_v2 = *(short *)(temp_v11 + 8);
                 }
@@ -214,7 +214,7 @@ void FUN_0023c384(int param_1)
                   uiSpriteSelectAnim(temp_v6,3);
                   pairSetFirstResetSecond(temp_v6,0x62);
                   uiStoreTextureEntryCenter(temp_v6,0x1d,0x67);
-                  temp_v11 = asdTMTexTableEntryAt(0x1d,temp_v14 + 0x68);
+                  temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,temp_v14 + 0x68));
                   temp_v1 = *(short *)(temp_v11 + 10);
                   temp_v2 = *(short *)(temp_v11 + 8);
                 }

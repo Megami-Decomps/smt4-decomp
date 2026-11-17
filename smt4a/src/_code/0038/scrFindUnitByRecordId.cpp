@@ -15,9 +15,9 @@ static __inline s32 scriptFindUnitByRecordId(u32 id)
     for (s32 index = 0; index < 109; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         if ((entry->flags & g_btlMessageFlagMasks.required) && !(entry->flags & g_btlMessageFlagMasks.excluded) &&
-            (g_btlMessageFlagMasks.secondRequired & entry->flags) && entry->unitIndex >= 0 &&
-            entry->sourceRecord != NULL && entry->sourceRecord->id == id) {
-            return entry->unitIndex;
+            (g_btlMessageFlagMasks.secondRequired & entry->flags) && entry->ids[0] >= 0 &&
+            entry->data.sourceRecord != NULL && entry->data.sourceRecord->id == id) {
+            return entry->ids[0];
         }
     }
     s32 partySlot = partyFindSlotById(static_cast<u16>(id));

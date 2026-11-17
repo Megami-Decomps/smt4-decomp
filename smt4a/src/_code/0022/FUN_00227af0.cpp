@@ -2,13 +2,13 @@
 #include "shard/PassiveSkill.h"
 #include "gamedata/SkillDataRecord.h"
 #include "code/Code0022_Smt4a.h"
+#include "gamedata/SaveSlotRecord.h"
 
 extern "C" {
 extern MenuState *g_menuState;
 void sysMemClear(void *destination, u32 size);
 void rt_memcpy(void *destination, const void *source, u32 size);
 s32 padGetMappedValue(s32 id);
-void *gameGetSlotRecord(s32 index);
 s32 partyFindSlotById(u32 id);
 s32 FUN_004bd098(void *unit, s32 skillId);
 s32 FUN_004c6bd0(s16 id, const ActiveSkillRecord *skill);
@@ -70,7 +70,7 @@ void FUN_00227af0(const char *text)
                     if (slot < 0) {
                         return;
                     }
-                    void *unit = gameGetSlotRecord(slot);
+                    SlotRecordA *unit = gameGetSlotRecord(slot);
                     count = FUN_004bd098(unit, menu->skillId);
                 } else {
                     const ActiveSkillRecord *skill = (const ActiveSkillRecord *)skillDataFindById(menu->skillId);

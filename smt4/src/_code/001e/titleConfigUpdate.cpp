@@ -113,9 +113,9 @@ u32 titleConfigUpdate(void)
         } else {
             button = ifTouchGetSelectionModeForRegion(work->slider);
             if (button == 1 || button == 2) {
-                const MessageDrawItem *slider = reinterpret_cast<const MessageDrawItem *>(asdTMTexTableEntryAt(0x2F, 0x33));
+                const TextureTableEntryIV *slider = asdTMTexTableEntryAt(0x2F, 0x33);
                 s32 position = FUN_001c3688() - ifTouchGetRegionX(work->slider);
-                value = position * 10 / slider->size->width;
+                value = position * 10 / slider->placement->width;
             }
         }
         g_titleConfigValues.music = indexedByteLookup(work->settings[0]);

@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -73,7 +74,6 @@ extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
-extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: mtx44Copy. */
 extern int __cxa_guard_acquire(unsigned int *);
@@ -177,10 +177,10 @@ unsigned int FUN_0011a434(void)
     }
     mtx44Copy(&temp_v9,&_ZZN2nw4math5MTX448IdentityEvE8identity);
     if (*(char *)(temp_v0 + 0x12) == '\0') {
-      unaff_r6 = asdTMTexTableEntryAt(0xe,0xdc);
+      unaff_r6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0xdc));
     }
     if (*(char *)(temp_v0 + 0x12) == '\x01') {
-      unaff_r6 = asdTMTexTableEntryAt(0xe,0xdd);
+      unaff_r6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0xdd));
     }
     temp_v10 = 0;
     temp_v9 = 0x3f800000;
@@ -220,7 +220,7 @@ unsigned int FUN_0011a434(void)
     temp_v14 = temp_v8;
     temp_v19 = temp_v8;
     nn_math_ARMv6_MTX44MultAsm(temp_v24,temp_v24,&temp_v9);
-    temp_v2 = asdTMTexTableEntryAt(0xe,0x15);
+    temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0x15));
     temp_v10 = 0;
     temp_v12 = VectorSignedToFloat(-((int)**(short **)(temp_v2 + 0xc) / 2 + 4),
                                    (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -267,10 +267,10 @@ unsigned int FUN_0011a434(void)
     texDrawCompositeSprite(2,0xe,2,0,0,0x6a);
     if (*(char *)(temp_v0 + 0x10) != '\0') {
       if (*(char *)(temp_v0 + 0x12) == '\0') {
-        temp_v2 = asdTMTexTableEntryAt(0xe,0xdc);
+        temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0xdc));
       }
       if (*(char *)(temp_v0 + 0x12) == '\x01') {
-        temp_v2 = asdTMTexTableEntryAt(0xe,0xdd);
+        temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0xdd));
       }
       temp_v1 = temp_v0 + 0x154;
       fontMeasureLineAdvance(temp_v1,4);

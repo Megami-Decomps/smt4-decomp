@@ -1,8 +1,7 @@
-#include "status/StatusDown.h"
+#include "status/StatusDownA.h"
 #include "shard/Shard0037.h"
 
 extern "C" {
-extern StatusDownStateA *g_statusDown;
 
 /* True when the global object is in state 8 or 10. */
 u32 stateHolderStateIs8Or10(void)

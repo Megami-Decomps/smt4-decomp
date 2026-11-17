@@ -4,6 +4,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "map/MapActionMarker.h"
 
 typedef struct MapIfRecord {
     /* 0x00 */ u8 active;
@@ -129,26 +130,36 @@ typedef struct MapIfWidgets {
     /* 0x00 */ MapIfWidget *widget[MAP_IF_WIDGETS];
 } MapIfWidgets;
 
-typedef struct MapIfSlot {
-    /* 0x00 */ u8 unk00[0x1C];
-    /* 0x1C */ u32 handle;
-} MapIfSlot;
-
-typedef struct MapIfFastModelState {
-    u8 active;
-    u8 unk01[3];
-    u32 first;
-    u32 second;
-    f32 position[3];
-    f32 heading;
-} MapIfFastModelState;
-
+struct AsdMdlObject;
 struct NodeEnableNode;
+struct MapIfResource;
 
+/* One of the interface's five marker model slots (0x20 bytes): slot 0 is the fast-travel marker
+ * (map/all/lmap_fast.bam), the others the action markers (action_cave, action_up, ...). */
+typedef struct MapIfModelSlot {
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ u32 state;
+    /* 0x08 */ u32 timer;
+    /* 0x0C */ MapMarkerPosition position; /* xyz and heading (w) */
+    /* 0x1C */ AsdMdlObject *model;
+} MapIfModelSlot;
+
+/* Apocalypse's marker model slot: the model is a model-list resource. */
+typedef struct MapIfModelSlotA {
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ u32 state;
+    /* 0x08 */ u32 timer;
+    /* 0x0C */ MapMarkerPosition position; /* xyz and heading (w) */
+    /* 0x1C */ MapIfResource *resource;
+} MapIfModelSlotA;
+
+/* A model marker the interface keeps in sync with the player state (0x24 bytes). */
 struct MapIfModelMarker {
     /* 0x00 */ u8 active;
-    /* 0x01 */ u8 state;
-    /* 0x02 */ u8 flags;
+    /* 0x01 */ u8 state;  /* shown */
+    /* 0x02 */ u8 flags;  /* 1 = changed since the last sync */
     /* 0x03 */ u8 unk03;
     /* 0x04 */ u32 first;
     /* 0x08 */ u32 second;
@@ -163,14 +174,57 @@ struct MapIfModelMarker {
 typedef char MapIfModelMarkerMotionOffset[
     offsetof(MapIfModelMarker, motionIndex) == 0x1c && sizeof(MapIfModelMarker) == 0x24 ? 1 : -1];
 
-/* The interface's state block (Shin Megami Tensei IV layout). */
+/* Apocalypse's model marker: the model is a model-list resource. */
+typedef struct MapIfModelMarkerA {
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 state;  /* shown */
+    /* 0x02 */ u8 flags;  /* 1 = changed since the last sync */
+    /* 0x03 */ u8 unk03;
+    /* 0x04 */ u32 first;
+    /* 0x08 */ u32 second;
+    /* 0x0C */ f32 position[3];
+    /* 0x18 */ f32 heading;
+    /* 0x1C */ u32 elapsed;   /* the clip to play */
+    /* 0x20 */ MapIfResource *resource;
+} MapIfModelMarkerA;
+
+/* A queued area notice: slides in, holds and slides out (state 0 = idle, 1 = queued). */
+typedef struct MapIfNotice {
+    /* 0x00 */ s16 state;
+    /* 0x02 */ s16 frame;
+    /* 0x04 */ s16 id;
+    /* 0x06 */ s16 arg;
+} MapIfNotice;
+
+/* The interface's fade (0x18 bytes). */
+typedef struct MapIfFade {
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 unk01;
+    /* 0x02 */ s16 id;
+    /* 0x04 */ s16 step;
+    /* 0x06 */ s16 frames;
+    /* 0x08 */ s16 stepCopy;
+    /* 0x0A */ u8 unk0A[2];
+    /* 0x0C */ f32 offset[3];
+} MapIfFade;
+
+#define MAP_IF_MODEL_SLOTS 5
+
+/* The interface's state block (Shin Megami Tensei IV layout, 0xCCE8 bytes, MapIf_Register). */
 typedef struct MapIfState {
-    /* 0x0000 */ u32 job;
-    /* 0x0004 */ u8 unk0004[0x14];
-    /* 0x0018 */ u8 unk18;
+    /* 0x0000 */ u32 job;          /* the update task */
+    /* 0x0004 */ u32 drawUpTask;
+    /* 0x0008 */ u32 meshTask;
+    /* 0x000C */ u8 unk0C[8];
+    /* 0x0014 */ u8 unk14;
+    /* 0x0015 */ u8 variant;
+    /* 0x0016 */ s8 mode;
+    /* 0x0017 */ u8 unk17;
+    /* 0x0018 */ u8 unk18;         /* set while the interface's dialog is open */
     /* 0x0019 */ u8 unk19[3];
     /* 0x001C */ s32 unk1C;
-    /* 0x0020 */ u8 unk20[0x10];
+    /* 0x0020 */ u8 unk20;
+    /* 0x0021 */ u8 unk21[0xF];
     /* 0x0030 */ s32 unk30;
     /* 0x0034 */ s32 unk34;
     /* 0x0038 */ s32 unk38;
@@ -179,25 +233,24 @@ typedef struct MapIfState {
         /* 0x003C */ MapIfRecord primary;
     };
     /* 0x01D0 */ MapIfRecord records[128];
-    union {
-        /* 0xCBD0 */ u8 unkCBD0[0x1C];
-        /* 0xCBD0 */ MapIfFastModelState fastModel;
-    };
-    /* 0xCBEC */ u32 unkCBEC;
-    /* 0xCBF0 */ MapIfSlot slots[MAP_IF_SLOTS];
+    /* 0xCBD0 */ MapIfModelSlot slots[MAP_IF_MODEL_SLOTS];
     union {
         /* 0xCC70 */ u8 unkCC70[0x48];
         /* 0xCC70 */ MapIfModelMarker modelMarkers[2];
     };
-    /* 0xCCB8 */ s16 unkCCB8;
-    /* 0xCCBA */ s16 unkCCBA;
-    /* 0xCCBC */ u8 unkCCBC[0x1C];
-    /* 0xCCD8 */ u8 unkCCD8;
+    /* 0xCCB8 */ MapIfNotice notice;
+    /* 0xCCC0 */ MapIfFade fade;
+    /* 0xCCD8 */ s8 unkCCD8;       /* counting */
     /* 0xCCD9 */ u8 unkCCD9[3];
-    /* 0xCCDC */ u32 unkCCDC;
+    /* 0xCCDC */ s32 unkCCDC;      /* counter */
+    /* 0xCCE0 */ u8 unkCCE0;
+    /* 0xCCE1 */ u8 unkCCE1[3];
+    /* 0xCCE4 */ s32 unkCCE4;
 } MapIfState;
 typedef char MapIfPrimaryRecordOffset[offsetof(MapIfState, primary) == 0x3c &&
-    sizeof(MapIfState) == 0xcce0 ? 1 : -1];
+    offsetof(MapIfState, slots) == 0xCBD0 && offsetof(MapIfState, notice) == 0xCCB8 &&
+    offsetof(MapIfState, fade) == 0xCCC0 && offsetof(MapIfState, unkCCD8) == 0xCCD8 &&
+    sizeof(MapIfState) == 0xcce8 ? 1 : -1];
 
 /* The module global: the state block and the widget table's pointers, side by side. */
 typedef struct MapIfGlobals {
@@ -205,40 +258,38 @@ typedef struct MapIfGlobals {
     /* 0x04 */ MapIfWidgets *widgets;
 } MapIfGlobals;
 
-#define MAP_IF_SLOTS_A 5
+/* A model-list resource's vtable: slot 1 releases it. */
+typedef struct MapIfResourceVtable {
+    /* 0x00 */ void (*unk00)(struct MapIfResource *self);
+    /* 0x04 */ void (*release)(struct MapIfResource *self);
+} MapIfResourceVtable;
 
-struct MapIfResourceVtable;
-
-/* A resource object whose handle sits at +4. */
+/* A model-list resource (modelListInit) whose controller handle sits at +4. */
 typedef struct MapIfResource {
-    /* 0x00 */ union {
-        u8 unk00[4];
-        MapIfResourceVtable *vtable;
-    };
+    /* 0x00 */ MapIfResourceVtable *vtable;
     /* 0x04 */ u32 handle;
 } MapIfResource;
 
-typedef struct MapIfSlotA {
-    /* 0x00 */ union {
-        u8 unk00[0x1C];
-        u8 active;
-    };
-    /* 0x1C */ MapIfResource *resource;
-} MapIfSlotA;
-
-/* The interface's state block (Apocalypse layout); only the fields read so far are named. */
+/* The interface's state block (Apocalypse layout, 0xCD30 bytes). */
 typedef struct MapIfStateA {
-    /* 0x0000 */ union {
-        u8 unk0000[0x1D];
-        struct {
-            u8 unk0000[0x1C];
-            u8 unk1C;
-        } head;
-    };
-    /* 0x001D */ u8 unk1D;
+    /* 0x0000 */ u32 job;          /* the calc task */
+    /* 0x0004 */ u32 updateTask;
+    /* 0x0008 */ u32 indicatorTask;
+    /* 0x000C */ u8 unk0C[8];
+    /* 0x0014 */ u8 unk14;
+    /* 0x0015 */ u8 mode;
+    /* 0x0016 */ u8 unk16;
+    /* 0x0017 */ u8 unk17;
+    /* 0x0018 */ u32 unk18;
+    /* 0x001C */ u8 unk1C;
+    /* 0x001D */ s8 dialogOpen;    /* set while the interface's dialog is open */
     /* 0x001E */ u8 unk1E[2];
     /* 0x0020 */ s32 unk20;
-    /* 0x0024 */ u8 unk24[0x18];
+    /* 0x0024 */ u8 unk24;
+    /* 0x0025 */ u8 unk25[0xF];
+    /* 0x0034 */ s8 unk34;
+    /* 0x0035 */ u8 unk35[3];
+    /* 0x0038 */ u32 unk38;
     /* 0x003C */ s32 unk3C;
     /* 0x0040 */ s32 unk40;
     /* 0x0044 */ s32 unk44;
@@ -247,15 +298,16 @@ typedef struct MapIfStateA {
         /* 0x0048 */ MapIfRecord primary;
     };
     /* 0x01DC */ MapIfRecord records[128];
-    /* 0xCBDC */ MapIfSlotA slots[MAP_IF_SLOTS_A];
-    /* 0xCC7C */ u8 unkCC7C[0x6C];
-    /* 0xCCE8 */ s16 unkCCE8;
-    /* 0xCCEA */ s16 unkCCEA;
-    /* 0xCCEC */ u8 unkCCEC[0x1C];
-    /* 0xCD08 */ s8 unkCD08;
+    /* 0xCBDC */ MapIfModelSlotA slots[MAP_IF_MODEL_SLOTS];
+    /* 0xCC7C */ MapIfModelMarkerA modelMarkers[3];
+    /* 0xCCE8 */ MapIfNotice notice;
+    /* 0xCCF0 */ MapIfFade fade;
+    /* 0xCD08 */ s8 unkCD08;       /* counting */
     /* 0xCD09 */ u8 unkCD09[3];
-    /* 0xCD0C */ u32 unkCD0C;
-    /* 0xCD10 */ u8 unkCD10[8];
+    /* 0xCD0C */ u32 unkCD0C;      /* counter */
+    /* 0xCD10 */ u8 unkCD10;
+    /* 0xCD11 */ u8 unkCD11[3];
+    /* 0xCD14 */ u32 unkCD14;
     union {
         /* 0xCD18 */ f32 fadeProgress;
         /* 0xCD18 */ s32 fadeProgressBits;
@@ -267,6 +319,10 @@ typedef struct MapIfStateA {
     /* 0xCD28 */ s32 fadeStep;
     /* 0xCD2C */ s32 fadeTimer;
 } MapIfStateA;
+typedef char MapIfStateAOffsetCheck[offsetof(MapIfStateA, slots) == 0xCBDC &&
+    offsetof(MapIfStateA, modelMarkers) == 0xCC7C && offsetof(MapIfStateA, notice) == 0xCCE8 &&
+    offsetof(MapIfStateA, fade) == 0xCCF0 && offsetof(MapIfStateA, unkCD08) == 0xCD08 &&
+    offsetof(MapIfStateA, fadeProgress) == 0xCD18 ? 1 : -1];
 
 typedef struct MapIfWidgetsA {
     /* 0x00 */ MapIfWidget *widget[0x2B];
@@ -280,19 +336,13 @@ typedef struct MapIfGlobalsA {
 
 /* Retail 32-bit layout invariants. */
 typedef char MapIfRecordSizeCheck[sizeof(MapIfRecord) == 0x194 ? 1 : -1];
-typedef char MapIfStateSizeCheck[sizeof(MapIfState) == 0xCCE0 ? 1 : -1];
+typedef char MapIfStateSizeCheck[sizeof(MapIfState) == 0xCCE8 ? 1 : -1];
 typedef char MapIfStateASizeCheck[sizeof(MapIfStateA) == 0xCD30 ? 1 : -1];
 typedef char MapIfGlobalsSizeCheck[sizeof(MapIfGlobals) == 0x8 ? 1 : -1];
 typedef char MapIfGlobalsASizeCheck[sizeof(MapIfGlobalsA) == 0x8 ? 1 : -1];
-typedef char MapIfStateAHeadCheck[offsetof(MapIfStateA, head.unk1C) == 0x1C ? 1 : -1];
+typedef char MapIfStateAHeadCheck[offsetof(MapIfStateA, unk1C) == 0x1C ? 1 : -1];
 typedef char MapIfStateAPrimaryOffsetCheck[
     offsetof(MapIfStateA, primary) == 0x48 && sizeof(MapIfStateA) == 0xCD30 ? 1 : -1];
-typedef char MapIfFastModelOffsetsCheck[sizeof(MapIfFastModelState) == 0x1c &&
-    offsetof(MapIfFastModelState, active) == 0 && offsetof(MapIfFastModelState, first) == 4 &&
-    offsetof(MapIfFastModelState, second) == 8 && offsetof(MapIfFastModelState, position) == 0xc &&
-    offsetof(MapIfFastModelState, heading) == 0x18 &&
-    offsetof(MapIfState, fastModel) == 0xcbd0 ? 1 : -1];
-
 typedef char MapIfModelMarkerOffsetsCheck[
     sizeof(MapIfModelMarker) == 0x24 &&
     offsetof(MapIfModelMarker, state) == 1 &&

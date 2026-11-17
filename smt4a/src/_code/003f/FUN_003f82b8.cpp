@@ -3,6 +3,7 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxA.h"
 
 
 struct RenderCtx;
@@ -23,7 +24,6 @@ struct CampStatusScreen {
 };
 
 extern "C" {
-extern RenderCtx *g_renderCtx;
 s32 vec2GetXInt(const void *position);
 s32 vec2GetYInt(const void *position);
 f32 vec2GetSpeed(const void *position);

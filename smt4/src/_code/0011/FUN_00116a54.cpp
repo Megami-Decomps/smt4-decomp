@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00116a54` (_code @ 0x116a54, 0xb80 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -19,7 +20,6 @@ int vec2GetYInt(...);
 int renderCtxPopState(...);
 int renderStackPushIndexed(...);
 int texDrawTableEntryAtStoredOrigin(...);
-int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int renderCtxSelectTexture(...);
 int renderCtxSelectStereoLayout(unsigned int);
@@ -49,7 +49,6 @@ extern int entryListCurrentIsUsable(unsigned int);
 extern int FUN_002b753c(unsigned int);
 /* Supplied declaration required: FUN_002b75ec. */
 /* Supplied declaration required: FUN_002b7638. */
-extern int asdTMTexTableCallFileB(unsigned int, unsigned int);
 /* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: asdTextSetBaseColor. */
@@ -110,7 +109,7 @@ char FUN_00116a54(void)
   if (temp_v11 && temp_v0 == '\0') {
     return temp_v0;
   }
-  temp_v5 = asdTMTexTableCallFileB(0xe,0);
+  temp_v5 = reinterpret_cast<int>(asdTMTexTableCallFileB(0xe,0));
   renderCtxSelectTexture(g_titleScene,*(unsigned int *)(temp_v5 + 8));
   renderCtxSelectStereoLayout(g_titleScene);
   switch(*(unsigned char *)(temp_v4 + 9)) {
@@ -186,7 +185,7 @@ char FUN_00116a54(void)
               }
             }
             else {
-              temp_v10 = asdTMTexTableEntryAt(0xe,0xe0);
+              temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0xe0));
               temp_v16 = (int)*(short *)(temp_v10 + 10);
               temp_v17 = 0x13;
               texDrawTableEntryAtStoredOrigin(2,0xe,0xdf,*(short *)(temp_v10 + 8) + temp_v5);
@@ -196,7 +195,7 @@ char FUN_00116a54(void)
             }
           }
           else {
-            temp_v10 = asdTMTexTableEntryAt(0xe,0xe1);
+            temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0xe1));
             temp_v16 = (int)*(short *)(temp_v10 + 10);
             temp_v17 = 0x13;
             texDrawTableEntryAtStoredOrigin(2,0xe,0xdf,*(short *)(temp_v10 + 8) + temp_v5);
@@ -299,7 +298,7 @@ LAB_00117048:
     if (*(char *)(temp_v4 + 8) == '\x01' || *(char *)(temp_v4 + 8) == '\x04') {
       temp_v9 = ifTouchIsActive();
       if (temp_v9 != 0) {
-        temp_v9 = asdTMTexTableEntryAt(0xe,0x7d8);
+        temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0x7d8));
         temp_v10 = 0;
         temp_v15 = 0x3f800000;
         temp_v6 = 0x3eccccce;
@@ -313,7 +312,7 @@ LAB_00117048:
         VectorSignedToFloat((int)(*(short **)(temp_v9 + 0xc))[1],(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)**(short **)(temp_v9 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_002b7638(&temp_v16);
-        temp_v9 = asdTMTexTableEntryAt(0xe,0x7d9);
+        temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0x7d9));
         VectorSignedToFloat((int)*(short *)(temp_v9 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v9 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)(*(short **)(temp_v9 + 0xc))[1],(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -323,13 +322,13 @@ LAB_00117048:
         temp_v17 = temp_v10;
         temp_v18 = temp_v10;
         temp_v19 = temp_v6;
-        temp_v9 = asdTMTexTableEntryAt(0xe,0x7da);
+        temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0x7da));
         VectorSignedToFloat((int)*(short *)(temp_v9 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v9 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)(*(short **)(temp_v9 + 0xc))[1],(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)**(short **)(temp_v9 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_002b7638(&temp_v16);
-        temp_v9 = asdTMTexTableEntryAt(0xe,0x7db);
+        temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0x7db));
         VectorSignedToFloat((int)*(short *)(temp_v9 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v9 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)(*(short **)(temp_v9 + 0xc))[1],(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -339,7 +338,7 @@ LAB_00117048:
         temp_v17 = temp_v15;
         temp_v18 = temp_v10;
         temp_v19 = temp_v6;
-        temp_v9 = asdTMTexTableEntryAt(0xe,0x42);
+        temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0x42));
         VectorSignedToFloat((int)*(short *)(temp_v9 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)(*(short **)(temp_v9 + 0xc))[1],(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v9 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -351,7 +350,7 @@ LAB_00117048:
       if (temp_v8 != 0) {
         temp_v14 = 0x3e8a3d7100000000;
         do {
-          temp_v10 = asdTMTexTableEntryAt(0xe,temp_v5 + temp_v9);
+          temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,temp_v5 + temp_v9));
           temp_v12 = (float)((unsigned long long)temp_v14 >> 0x20);
           renderCtxCalculateStereoParallax(g_titleScene);
           temp_v16 = 6;
@@ -362,7 +361,7 @@ LAB_00117048:
       }
       temp_v5 = FUN_001247d0(*(unsigned int *)(temp_v4 + 4));
       if (temp_v5 != 0) {
-        temp_v5 = asdTMTexTableEntryAt(0xe,0x42);
+        temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0x42));
         temp_v12 = 0.27f;
         renderCtxCalculateStereoParallax(g_titleScene);
         temp_v13 = (float)VectorSignedToFloat((int)temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -383,7 +382,7 @@ LAB_00117048:
     temp_v12 = 0.27f;
     renderCtxCalculateStereoParallax(g_titleScene);
     temp_v18 = FUN_002b753c(*(unsigned int *)(temp_v4 + 4));
-    temp_v5 = asdTMTexTableEntryAt(0xe,0x8e);
+    temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0x8e));
     temp_v1 = *(short *)(temp_v5 + 8);
     temp_v2 = *(short *)(temp_v5 + 10);
     temp_v3 = **(short **)(temp_v5 + 0xc);

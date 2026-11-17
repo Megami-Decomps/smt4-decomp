@@ -1,6 +1,6 @@
 /* NON_MATCHING: slot index and cached player pointer occupy opposite saved registers. */
 #include "gamedata/SupportUnitRecord.h"
-#include "shard/W6_W6Match1_PartySlot.h"
+#include "gamedata/GameSaveDataA.h"
 
 extern "C" {
 PartySlotA *gameGetOptions();
@@ -12,9 +12,9 @@ u32 FUN_004da024(u32 slot)
     PackedSkillSlot skill;
     PartySlotA *unit = gameGetOptions();
     PartySlotA *current = gameGetOptions();
-    if (current->unk62 && current->id) {
+    if (current->record.id && current->id) {
         const SupportUnitRecordA *record =
-            dataTableGetCategoryEntry((s16)unit->id, unit->unk12e);
+            dataTableGetCategoryEntry((s16)unit->id, unit->slotIndex);
         skill.id = record->packedSkills[slot].id;
         skill.unk00 = record->packedSkills[slot].unk00;
     } else {

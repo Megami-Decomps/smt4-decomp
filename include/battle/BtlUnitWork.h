@@ -8,65 +8,15 @@
 #include <stddef.h>
 
 struct BtlEntry;
+struct BtlUnitData;
 struct BtlCombatantEntryA;
+struct BtlUnitDataA;
 struct BtlActionRecord;
 
 /* Halfword index of the per-slot table in a unit's data block (BtlUnitDataA.values). */
 #define BTL_UNIT_SLOT_TABLE 0xA9
 /* The same table in Shin Megami Tensei IV (BtlUnitData.values). */
 #define BTL_UNIT_SLOT_TABLE_IV 0x93
-
-/* A unit's data block: the part of its battle entry from 0xCC on (Shin Megami Tensei IV layout); the
- * block btlFindEntryBlockByMemberId returns. */
-typedef struct BtlUnitData {
-    /* 0x000 */ u8 flags;          /* bit 2: the unit fights on the second side */
-    /* 0x001 */ u8 unk001;
-    /* 0x002 */ u16 id;            /* the entry's id (BtlEntry.id) */
-    /* 0x004 */ u8 unk004[8];
-    /* 0x00C */ u32 parts[50];     /* ids of the unit's part objects (idSlotsFindEntryById) */
-    /* 0x0D4 */ u8 unk0D4[0x14];
-    /* 0x0E8 */ s16 hp;
-    /* 0x0EA */ s16 maxHp;
-    /* 0x0EC */ s16 mp;
-    /* 0x0EE */ s16 maxMp;
-    /* 0x0F0 */ s16 strength;
-    /* 0x0F2 */ s16 magic;
-    /* 0x0F4 */ s16 level;         /* scales an attack's base power */
-    /* 0x0F6 */ u8 unk0F6[4];
-    /* 0x0FA */ u16 statusFlags;   /* status bits (0x800: inactive, ...) */
-    /* 0x0FC */ u8 unk0FC[4];
-    /* 0x100 */ u16 unk100;
-    /* 0x102 */ u8 unk102[0x24];
-    /* 0x126 */ u16 values[0x12];  /* bits 10 and up hold a kind (BtlEntry.values) */
-    /* 0x14A */ u8 unk14A;
-    /* 0x14B */ u8 affinityIndex;  /* index into an attack summary's resistance percents */
-    /* 0x14C */ s16 actionKind;    /* the action the unit takes next */
-    /* 0x14E */ s16 actionArg;
-} BtlUnitData;
-
-/* A unit's data block (Apocalypse layout): the part of its battle entry from 0x164 on. */
-typedef struct BtlUnitDataA {
-    /* 0x000 */ u8 flags;          /* bits 0-1: the unit's appearance animates */
-    /* 0x001 */ u8 unk001;
-    /* 0x002 */ u16 id;            /* the entry's id (BtlCombatantEntryA.id) */
-    /* 0x004 */ u8 unk004[8];
-    /* 0x00C */ u32 parts[50];     /* ids of the unit's part objects (stateEntryFindById) */
-    /* 0x0D4 */ u8 unk0D4[0x20];
-    /* 0x0F4 */ s32 hp;
-    /* 0x0F8 */ s32 maxHp;
-    /* 0x0FC */ s32 mp;
-    /* 0x100 */ s32 maxMp;
-    /* 0x104 */ u8 unk104[0xC];
-    /* 0x110 */ u16 statusFlags;  /* status bits */
-    /* 0x112 */ u8 unk112[4];
-    /* 0x116 */ u16 unk116;
-    /* 0x118 */ u8 unk118[0x3A];
-    /* 0x152 */ u16 values[0x36];  /* bits 10 and up hold a kind */
-    /* 0x1BE */ s16 actionKind;    /* the action the unit takes next */
-    /* 0x1C0 */ s16 actionArg;
-    /* 0x1C2 */ u8 unk1C2[0x66];
-    /* 0x228 */ s32 unk228;
-} BtlUnitDataA;
 
 /* One per-target pair a unit keeps (0x5A8 / 0x5B8): the battle entry and a value; entry -1 and value
  * 0 mark a free pair. */
@@ -150,12 +100,5 @@ typedef char BtlUnitALayoutCheck[
     sizeof(BtlUnitA) == 0x1250 && sizeof(BtlActionSlotA) == 0x1254 && offsetof(BtlUnitA, entry) == 0x20 &&
     offsetof(BtlUnitA, data) == 0x28 && offsetof(BtlUnitA, targets) == 0x38 &&
     offsetof(BtlUnitA, cameraMode) == 0x594 && offsetof(BtlUnitA, uiMode) == 0x59D && offsetof(BtlUnitA, pairs) == 0x5B8 ? 1 : -1];
-
-typedef char BtlUnitDataLayoutCheck[
-    offsetof(BtlUnitData, id) == 2 && offsetof(BtlUnitData, hp) == 0xE8 && offsetof(BtlUnitData, level) == 0xF4 &&
-    offsetof(BtlUnitData, statusFlags) == 0xFA && offsetof(BtlUnitData, affinityIndex) == 0x14B &&
-    offsetof(BtlUnitData, values) == 0x126 && offsetof(BtlUnitDataA, values) == 0x152 && offsetof(BtlUnitData, actionKind) == 0x14C &&
-    offsetof(BtlUnitDataA, id) == 2 && offsetof(BtlUnitDataA, hp) == 0xF4 && offsetof(BtlUnitDataA, statusFlags) == 0x110 && offsetof(BtlUnitDataA, actionKind) == 0x1BE &&
-    offsetof(BtlUnitDataA, unk228) == 0x228 ? 1 : -1];
 
 #endif

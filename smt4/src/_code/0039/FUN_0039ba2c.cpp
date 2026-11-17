@@ -2,6 +2,8 @@
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include "ui/UiSpriteState.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxTitle.h"
 struct TitleBannerView {
     u8 prefix[0x164];
     Point2 origin;
@@ -15,7 +17,6 @@ struct TitleBannerView {
 struct TitleTextColor { u8 prefix[0xC]; u32 color; };
 typedef char TitleBannerSpriteOffset[offsetof(TitleBannerView, sprite) == 0xA88 ? 1 : -1];
 extern "C" {
-extern RenderCtx *g_titleScene;
 extern const u8 DAT_00404c48[];
 extern TitleTextColor DAT_0044cdc8;
 void pairCopy(const Point2 *source, Point2 *destination);
@@ -26,7 +27,6 @@ void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite(void);
 s32 vec2GetXInt(const UiSpriteState *sprite);
 void texDrawCompositeSprite(u32 layer, u32 group, u32 index, s32 x, s32 y, u32 color);
-SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 id);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 f32 FUN_0028f4b4(const u8 *text, s32 mode, f32 scale);
 void uiSpriteAdvanceAnimation(UiSpriteState *sprite);
@@ -41,11 +41,11 @@ void FUN_0039ba2c(TitleBannerView *banner)
     efctSetSpeed(1.0f);
     gxResetColorQuadToWhite();
     texDrawCompositeSprite(2, 28, 28, (s32)((f32)vec2GetXInt(&banner->sprite) + origin.x), (s32)origin.y, 211);
-    SpriteInfo *info = asdTMTexTableEntryAt(28, 0x111B);
+    TextureTableEntryIV *info = asdTMTexTableEntryAt(28, 0x111B);
     u8 text[64];
     __aeabi_memcpy4(text, DAT_00404c48, 45);
     s32 textWidth = (s32)FUN_0028f4b4(text, 2, 0.0f);
-    f32 center = (f32)((info->size[0] - textWidth) / 2);
+    f32 center = (f32)((info->placement->width - textWidth) / 2);
     f32 x = (f32)(vec2GetXInt(&banner->sprite) + info->x) + center + origin.x;
     textDrawString(2, DAT_0044cdc8.color, reinterpret_cast<const char *>(text), x, (f32)info->y + origin.y, 0.0f, 0.0f, 1.0f);
     renderCtxPopState(g_titleScene, 3);

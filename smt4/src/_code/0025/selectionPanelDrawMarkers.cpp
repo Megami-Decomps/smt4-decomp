@@ -5,6 +5,7 @@
 #include "code/Code002a.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTableEntry.h"
+#include "camp/RenderCtxTitle.h"
 
 /* The fields of the selection panel's work area this draw function reads (IV layout). */
 struct SelectionPanelWorkIV {
@@ -35,7 +36,6 @@ f32 vec2GetSpeed(const void *position);
 s32 vec2GetYInt(const void *object);
 s32 objectPartRunUnlessLocked(void *object);
 
-extern RenderCtx *g_titleScene;
 
 /* Draws the selection panel's frame, then either every shown slot's marker or only the chosen slot's. */
 void selectionPanelDrawMarkers(SelectionPanelWorkIV *work, int drawAll)

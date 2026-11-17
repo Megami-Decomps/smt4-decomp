@@ -1,18 +1,15 @@
-#include "map/lmapMain.h"
-#include "map/mapDepart.h"
+#include "map/PopupStateA.h"
 
 extern "C" {
 
 void dialogClose(s32 arg);
 
-extern LmapEventA *g_popupState;
-
 void popupStateClose(void)
 {
-    LmapEventA *event = g_popupState;
+    PopupStateA *popup = g_popupState;
 
-    event->state = 0;
-    event->unk04 = 0;
+    popup->state = 0;
+    popup->timer = 0;
     dialogClose(1);
 }
 

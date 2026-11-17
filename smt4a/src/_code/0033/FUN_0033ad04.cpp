@@ -2,6 +2,7 @@
 #include "common.h"
 #include "game/GameStateA.h"
 #include "gamedata/NkmEnemyLookup.h"
+#include "Model/MoriModelManager.h"
 
 /* A resource the enemy slot owns or only references. */
 class EnemyResource {
@@ -72,8 +73,6 @@ struct EnemySpawnList {
 
 extern "C" {
 extern EnemySpawnList *g_mapEnemy;
-extern u32 *g_handleRegistry;
-void ptrListRemoveClearOwner(u32 *registry, u32 *owner);
 u16 FUN_004bb870(s32 index);
 }
 

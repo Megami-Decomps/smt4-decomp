@@ -1,28 +1,20 @@
 /* Returns 1 if the cursor sub-state's current position is the last one of its range. */
-#include "common.h"
+#include "status/StatusDownA.h"
 
 extern "C" {
 
-typedef struct Cursor {
-    u8 data[0x50];
-} Cursor;
 
-typedef struct Holder {
-    /* 0x000 */ u8 unk000[0x5EC];
-    /* 0x5EC */ Cursor cursor;
-} Holder;
 
-extern Holder *g_statusDown;
 
-extern s32 listCursorGetRowIfUnblocked(Cursor *cursor);
-extern s32 objectApplyIfUnblocked(Cursor *cursor);
+extern s32 listCursorGetRowIfUnblocked(ScrollSelection *list);
+extern s32 objectApplyIfUnblocked(ScrollSelection *list);
 
 u32 statusCursorIsAtLast(void)
 {
-    Holder *holder = g_statusDown;
+    StatusDownStateA *holder = g_statusDown;
     if (holder != NULL) {
-        s32 position = listCursorGetRowIfUnblocked(&holder->cursor);
-        Cursor *cursor = &holder->cursor;
+        s32 position = listCursorGetRowIfUnblocked(&holder->list);
+        ScrollSelection *cursor = &holder->list;
         s32 count = objectApplyIfUnblocked(cursor);
 
         if (position == count - 1) {

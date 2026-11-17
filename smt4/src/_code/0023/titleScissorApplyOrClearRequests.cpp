@@ -1,20 +1,13 @@
-#include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
+#include "camp/RenderCtxTitle.h"
 
 struct TitleScissorOwner {
     /* 0x000 */ u8 unk000[0x164];
     /* 0x164 */ f32 offset[2];
 };
 
-struct TitleScene : RenderCtx {
-    u8 prefix12CC[0x40];
-    RenderStateStack requests;
-};
-typedef char TitleSceneRequestsOffsetCheck[
-    offsetof(TitleScene, requests) == 0x130C ? 1 : -1];
 
 extern "C" {
-extern TitleScene *g_titleScene;
-
 void asdTMTexTableGetEntryPlacement(s32 kind, u32 size, s32 *x, s32 *y, s32 *width, s32 *height);
 void pairCopy(const f32 *source, f32 *destination);
 void gxSetClippedBottomScreenScissor(s32 x, s32 y, s32 width, s32 height);
@@ -32,7 +25,7 @@ void titleScissorApplyOrClearRequests(TitleScissorOwner *owner, s32 clip)
         y = offset[1] + y;
         gxSetClippedBottomScreenScissor(x, y, width, height);
     } else {
-        renderStackSetCounted(&g_titleScene->requests, 0);
+        renderStackSetCounted(&g_titleScene->scissor, 0);
     }
 }
 

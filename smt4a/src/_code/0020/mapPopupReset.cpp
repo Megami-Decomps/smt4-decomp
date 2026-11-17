@@ -1,20 +1,15 @@
 #include "common.h"
-
-struct PopupState {
-    u32 active; // 0x00
-    u32 unk04;  // 0x04
-};
+#include "map/PopupStateA.h"
 
 extern "C" {
-extern PopupState* g_popupState;
 void mapDialogRequestsClear(void);
 
 void mapPopupReset(void)
 {
-    PopupState* popup = g_popupState;
-    if (popup->active != 0) {
-        popup->active = 0;
-        popup->unk04 = 0;
+    PopupStateA* popup = g_popupState;
+    if (popup->state != 0) {
+        popup->state = 0;
+        popup->timer = 0;
     }
     mapDialogRequestsClear();
 }

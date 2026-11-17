@@ -2,12 +2,12 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 int drawSetColorFromRGBA8(...);
 int gxResetColorQuadToWhite(void);
-int asdTMTexTableEntryAt(...);
 
 /* stack frame of param_4: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -69,19 +69,19 @@ void FUN_002bdce0(int param_1,int param_2,int param_3,int param_4)
           temp_v5 = temp_v2;
         }
         temp_v0 = __aeabi_idivmod(temp_v4,temp_v1);
-        temp_v3 = asdTMTexTableEntryAt(0xe,100 - temp_v2);
+        temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,100 - temp_v2));
         texDrawTableEntryAtStoredOrigin(2,0xd,temp_v0,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,
                      0x10);
         temp_v4 = temp_v4 - temp_v1 * temp_v0;
         if (temp_v2 != 2) {
           if (temp_v2 == 5) {
-            temp_v3 = asdTMTexTableEntryAt(0xe,0x66);
+            temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0x66));
             texDrawTableEntryAtStoredOrigin(2,0xd,0xc,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,
                          0x10);
           }
         }
         else {
-          temp_v3 = asdTMTexTableEntryAt(0xe,0x67);
+          temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0x67));
           texDrawTableEntryAtStoredOrigin(2,0xd,0xc,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,
                        0x10);
         }
@@ -91,12 +91,12 @@ void FUN_002bdce0(int param_1,int param_2,int param_3,int param_4)
     } while (temp_v1 != 0);
   }
   else {
-    temp_v3 = asdTMTexTableEntryAt(0xe,0x5c);
+    temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0x5c));
     texDrawTableEntryAtStoredOrigin(2,0xd,0,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x10);
   }
   if (param_4 != 0) {
     if (-1 < temp_v5) {
-      temp_v3 = asdTMTexTableEntryAt(0xe,0x65 - temp_v5);
+      temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0x65 - temp_v5));
     }
     if (param_1 < 0) {
       texDrawTableEntryAtStoredOrigin(2,0xd,0xb,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x10);

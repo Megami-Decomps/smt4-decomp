@@ -13,10 +13,10 @@ u8 *FUN_00272310(u32 id)
             if (entry != NULL &&
                 (entry->flags & g_btlMain.combatantMasks.required) &&
                 !(entry->flags & g_btlMain.exclusionMask) &&
-                (entry->flags & g_btlMain.actorCategories[1]) && entry->id == id) {
+                (entry->flags & g_btlMain.actorCategories[1]) && entry->data.id == id) {
                 for (s32 stat = 0; stat < 21; ++stat)
-                    entry->encodedLevels.levels[stat] = (u8)(entry->encodedStats.values[stat] >> 10);
-                return entry->encodedLevels.levels;
+                    entry->data.levels[stat] = (u8)(entry->data.values[stat] >> 10);
+                return entry->data.levels;
             }
         }
     }

@@ -1,9 +1,9 @@
 /* Saves the active map's location and, for a local map, its scene and camera state. */
 #include "map/LmapGlobals.h"
+#include "game/GameState.h"
 #include "shard/SaveWork.h"
 
 extern "C" {
-extern u8 g_gameState;
 extern void *DAT_004474f4;
 
 void FUN_002758d8(void)
@@ -20,26 +20,19 @@ void FUN_002758d8(void)
         u8 unk018[0xDC0];
         s32 mapId;
     };
-    struct MapContext {
-        u32 mode;
-        u32 area;
-        s32 mapId;
-        u8 unk00C[8];
-        u32 type;
-    };
     struct CameraSnapshotSource {
         u8 unk00[0x18];
         u32 value;
     };
     MapSnapshot *save = (MapSnapshot *)gameGetMapBlock();
-    MapContext *context = (MapContext *)&g_gameState;
-    u8 type = (u8)context->type;
+    GameState *context = &g_gameState;
+    u8 type = (u8)context->resumeMode;
     save->type = type;
     switch (type) {
     case 1:
-        save->mode = (u8)context->mode;
-        save->area = (u8)context->area;
-        save->mapId = context->mapId;
+        save->mode = (u8)context->mapId;
+        save->area = (u8)context->areaId;
+        save->mapId = context->currentObjectId;
         save->position[0] = g_lmapScene->pose.position.x;
         save->position[1] = g_lmapScene->pose.position.y;
         save->position[2] = g_lmapScene->pose.position.z;
@@ -47,16 +40,16 @@ void FUN_002758d8(void)
         save->cameraValue = ((CameraSnapshotSource *)DAT_004474f4)->value;
         return;
     case 2:
-        save->mode = (u8)context->mode;
-        save->area = (u8)context->area;
-        save->mapId = context->mapId;
+        save->mode = (u8)context->mapId;
+        save->area = (u8)context->areaId;
+        save->mapId = context->currentObjectId;
         save->position[0] = g_lmapScene->pose.position.x;
         save->position[1] = g_lmapScene->pose.position.y;
         save->position[2] = g_lmapScene->pose.position.z;
         return;
     case 3:
-        save->mode = (u8)context->mode;
-        save->area = (u8)context->area;
+        save->mode = (u8)context->mapId;
+        save->area = (u8)context->areaId;
         save->mapId = -1;
         return;
     }

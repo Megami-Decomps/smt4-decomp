@@ -2,25 +2,7 @@
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "util/BitsAndBytes.h"
-#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
-
-struct FrameCopyTex {
-    /* 0x000 */ u8 unk000[0xFFC];
-    /* 0xFFC */ u8 unfilteredSecondary;   /* with the primary capture, selects the wide (480) horizontal extent when clear */
-    /* 0xFFD */ u8 unkFFD[3];
-    /* 0x1000 */ f32 quadX[4];
-    /* 0x1010 */ f32 quadY[4];
-    /* 0x1020 */ u8 unk1020[8];
-    /* 0x1028 */ u32 color;
-    /* 0x102C */ f32 depth;
-    /* 0x1030 */ s32 blendMode;           /* 0 normal, 1 additive, 2 subtractive */
-    /* 0x1034 */ u8 filtered;
-    /* 0x1035 */ u8 unk1035[3];
-    /* 0x1038 */ AsdTexture *primary;
-    /* 0x103C */ AsdTexture *secondary;
-    /* 0x1040 */ u8 unk1040[0x450];
-    /* 0x1490 */ AsdTexture *work;
-};
+#include "frame_tex/FrameTexA.h"
 
 #define FRAME_COPY_SIZE 0x200
 #define FRAME_COPY_WIDTH 240.0f
@@ -28,7 +10,6 @@ struct FrameCopyTex {
 #define FRAME_COPY_HEIGHT 400.0f
 
 extern "C" {
-extern FrameCopyTex *g_frameTex;
 
 void surfaceCopy(AsdTexture *source, AsdTexture *destination);
 f32 FUN_001a9698(f32 base, f32 exponent);
@@ -39,39 +20,39 @@ void FUN_0019e3d0(u32 c0, u32 c1, u32 c2, u32 c3, f32 x0, f32 y0, f32 z0, f32 x1
 
 void FUN_00150d38(s32 usePrimary)
 {
-    FrameCopyTex *tex = g_frameTex;
+    FrameTexWorkA *tex = g_frameTex;
     if (usePrimary != 0) {
-        tex->primary->dimensions.width = FRAME_COPY_SIZE;
-        tex->primary->dimensions.height = FRAME_COPY_SIZE;
-        tex->work->dimensions.width = tex->primary->dimensions.width;
-        tex->work->dimensions.height = tex->primary->dimensions.height;
-        surfaceCopy(tex->primary, tex->work);
-        tex->work->dimensions.width >>= 1;
-        tex->work->dimensions.height >>= 1;
+        tex->zanSurfaceLeft->dimensions.width = FRAME_COPY_SIZE;
+        tex->zanSurfaceLeft->dimensions.height = FRAME_COPY_SIZE;
+        tex->sceneSurface->dimensions.width = tex->zanSurfaceLeft->dimensions.width;
+        tex->sceneSurface->dimensions.height = tex->zanSurfaceLeft->dimensions.height;
+        surfaceCopy(tex->zanSurfaceLeft, tex->sceneSurface);
+        tex->sceneSurface->dimensions.width >>= 1;
+        tex->sceneSurface->dimensions.height >>= 1;
     } else {
-        tex->secondary->dimensions.width = FRAME_COPY_SIZE;
-        tex->secondary->dimensions.height = FRAME_COPY_SIZE;
-        tex->work->dimensions.width = tex->secondary->dimensions.width;
-        tex->work->dimensions.height = tex->secondary->dimensions.height;
-        surfaceCopy(tex->secondary, tex->work);
-        tex->work->dimensions.width >>= 1;
-        tex->work->dimensions.height >>= 1;
+        tex->zanSurfaceRight->dimensions.width = FRAME_COPY_SIZE;
+        tex->zanSurfaceRight->dimensions.height = FRAME_COPY_SIZE;
+        tex->sceneSurface->dimensions.width = tex->zanSurfaceRight->dimensions.width;
+        tex->sceneSurface->dimensions.height = tex->zanSurfaceRight->dimensions.height;
+        surfaceCopy(tex->zanSurfaceRight, tex->sceneSurface);
+        tex->sceneSurface->dimensions.width >>= 1;
+        tex->sceneSurface->dimensions.height >>= 1;
     }
 
     f32 extentX = FRAME_COPY_WIDTH;
     f32 extentY = FRAME_COPY_HEIGHT;
-    if (g_frameTex->unfilteredSecondary == 0 && usePrimary != 0) {
+    if (g_frameTex->zan.captureResult == 0 && usePrimary != 0) {
         extentX = FRAME_COPY_WIDE_WIDTH;
     }
-    AsdTexture *work = g_frameTex->work;
+    AsdTexture *work = g_frameTex->sceneSurface;
     f32 scale = FUN_001a9698(2.0f, 1.0f);
     f32 width = (f32)work->dimensions.width;
-    if (tex->filtered != 0) {
+    if (tex->zan.filtered != 0) {
         work->filterX = 1;
         work->filterY = 1;
     }
     f32 height = (f32)work->dimensions.height;
-    if (tex->filtered == 0) {
+    if (tex->zan.filtered == 0) {
         work->filterX = 0;
         work->filterY = 0;
     }
@@ -82,7 +63,7 @@ void FUN_00150d38(s32 usePrimary)
     s32 state = renderCtxPackPassFlags(1, 0);
     renderStackPush(&context->stackA, state);
     context = g_renderCtx;
-    switch (tex->blendMode) {
+    switch (tex->zan.blendMode) {
     case 0:
         state = packNibblesAndByte(6, 7, 0);
         renderStackSet(&context->stackB, state);
@@ -97,14 +78,14 @@ void FUN_00150d38(s32 usePrimary)
         break;
     }
     renderCtxSelectTexture(g_renderCtx, work);
-    u32 color = tex->color;
-    f32 z = tex->depth;
+    u32 color = tex->zan.color;
+    f32 z = tex->zan.depth;
     FUN_0019e3d0(color, color, color, color,
-                 tex->quadX[0], tex->quadY[0], z, tex->quadX[1], tex->quadY[1], z,
-                 tex->quadX[2], tex->quadY[2], z, tex->quadX[3], tex->quadY[3], z,
+                 tex->zan.x[0], tex->zan.y[0], z, tex->zan.x[1], tex->zan.y[1], z,
+                 tex->zan.x[2], tex->zan.y[2], z, tex->zan.x[3], tex->zan.y[3], z,
                  maxU, 0.0f, maxU, maxV, 0.0f, 0.0f, 0.0f, maxV);
     context = g_renderCtx;
-    if (tex->blendMode != 0) {
+    if (tex->zan.blendMode != 0) {
         state = packNibblesAndByte(6, 7, 0);
         renderStackSet(&context->stackB, state);
     }

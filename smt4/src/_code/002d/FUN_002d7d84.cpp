@@ -1,8 +1,8 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 
-extern RenderCtx *g_titleScene;
 u32 renderCtxPackPassFlags(u32 slot, u32 flags);
 void effMenuCallHandler(s32 handler, s32 value);
 

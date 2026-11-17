@@ -1,18 +1,13 @@
 /* NON_MATCHING: draws the icon for an element/status index in one of three icon sets and returns its width; written from the decompilation, the case tables are written as data tables and the shared draw/return tail is merged */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 #define ICON_TABLE 0x13
 #define ICON_LAYER 2
 #define ICON_FLAGS 0xB
 #define ICON_Y_OFFSET 2.0f
 #define ICON_WIDTH_MASK 0x7FFF
-
-/* A frame record of the icon table. */
-struct IconFrameRecord {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ u16 width;
-};
 
 /* Icon set 0: sprite and optional pre-composed icon (-1: draw the sprite itself). */
 struct IconEntry {
@@ -21,7 +16,6 @@ struct IconEntry {
 };
 
 extern "C" {
-IconFrameRecord *asdTMTexTableEntryAt(u32 table, u32 sprite);
 void texDrawCompositeSprite(u32 layer, u32 table, u32 composed);
 void efctSetSpeed(f32 speed);
 
@@ -53,7 +47,7 @@ u16 FUN_00109b08(s32 set, u32 index, s32 skip, f32 x, f32 y)
             sprite = iconSetMain[index].sprite;
             composed = iconSetMain[index].composed;
         }
-        IconFrameRecord *frame = asdTMTexTableEntryAt(ICON_TABLE, sprite);
+        TextureTableEntryIV *frame = asdTMTexTableEntryAt(ICON_TABLE, sprite);
         if (frame != NULL && skip == 0) {
             if (composed >= 0)
                 texDrawCompositeSprite(ICON_LAYER, ICON_TABLE, composed);
@@ -75,7 +69,7 @@ u16 FUN_00109b08(s32 set, u32 index, s32 skip, f32 x, f32 y)
         efctSetSpeed(1.0f);
         return width;
     }
-    IconFrameRecord *frame = asdTMTexTableEntryAt(ICON_TABLE, sprite);
+    TextureTableEntryIV *frame = asdTMTexTableEntryAt(ICON_TABLE, sprite);
     if (frame == NULL || skip != 0) {
         efctSetSpeed(1.0f);
         return width;

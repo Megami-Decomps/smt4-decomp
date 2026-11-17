@@ -22,7 +22,7 @@ u32 FUN_002fede0(void)
         BtlEntry *unit = &btlGetMainState()->entries[i];
 
         if ((unit->flags & 0x10) != 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0
-            && unit->id == id && (unit->groupMask & (1 << bit)) != 0) {
+            && unit->data.id == id && (unit->data.statusFlags & (1 << bit)) != 0) {
             return commandResult(1);
         }
     }

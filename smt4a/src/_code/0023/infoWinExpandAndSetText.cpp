@@ -1,4 +1,4 @@
-#include "shard/W4_Match3_InfoWindow.h"
+#include "font/InfoWinA.h"
 #include "text/TextDraw.h"
 
 extern "C" {
@@ -12,15 +12,15 @@ s32 vec2GetXInt(const void *vector);
 /* Expands popup text, updates its scrolling bounds, and resets its display timer. */
 void infoWinExpandAndSetText(const char *text)
 {
-    InfoWindow *window = g_infoWin;
+    InfoWindowA *window = g_infoWin;
     char expanded[256];
     window->hasText = 0;
     if (text != NULL) {
-        sysMemClear(window->message.buffer, sizeof(window->message.buffer));
+        sysMemClear(window->message, sizeof(window->message));
         textExpandGlyphsToBuffer(text, expanded, 0);
         for (s32 length = 0; length < 160; ++length) {
             if (expanded[length] == '\0') {
-                __aeabi_memcpy4(window->message.buffer, expanded, length + 1);
+                __aeabi_memcpy4(window->message, expanded, length + 1);
                 window->hasText = 1;
                 s32 width = (s32)fontMeasureTextWidth(expanded, 3, 0.0f);
                 if (width > 332) {
@@ -29,8 +29,8 @@ void infoWinExpandAndSetText(const char *text)
                 } else {
                     window->wideText = 0;
                 }
-                uiSpriteSetKeyframe(window->labelSprite, 2, 0);
-                s32 x = vec2GetXInt(window->labelSprite);
+                uiSpriteSetKeyframe(&window->label, 2, 0);
+                s32 x = vec2GetXInt(&window->label);
                 window->labelX = x;
                 window->textRight = window->textWidth + window->labelX + 42;
                 if (window->state == 3) {
@@ -39,7 +39,7 @@ void infoWinExpandAndSetText(const char *text)
                 break;
             }
         }
-        asdTextFormatStream(window->text, 3, 0xFFFFFFFF, 0, 3, window->message.buffer);
+        asdTextFormatStream(window->text, 3, 0xFFFFFFFF, 0, 3, window->message);
         window->timer = 30;
     }
 }

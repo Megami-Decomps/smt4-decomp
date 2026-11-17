@@ -1,12 +1,12 @@
 #include "title/titleMain.h"
 #include "shard/W6_W6Match2_TitleCommand.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 
-extern TitleScene *g_titleScene;
 
 s32 asdProcessSetCommandListRecording(s32 arg);
-s32 objResetCounters(TitleScene *scene);
+s32 objResetCounters(RenderCtx *scene);
 s32 gxIsStereoscopic3dEnabled(void);
 
 /* Runs the title scene update, first starting asdProcessSetCommandListRecording when the flags and gxIsStereoscopic3dEnabled allow it; always returns 0. */

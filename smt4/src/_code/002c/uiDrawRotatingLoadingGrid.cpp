@@ -1,8 +1,8 @@
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-const SpriteInfo *asdTMTexTableEntryAt(u32 archive, s32 index);
 
 // Draw a three-by-three loading grid with two rotating bright dots and their trails.
 void uiDrawRotatingLoadingGrid(s32 firstPosition, s32 frame)
@@ -15,7 +15,7 @@ void uiDrawRotatingLoadingGrid(s32 firstPosition, s32 frame)
     for (s32 row = 0; row < 3; ++row) {
         for (s32 column = 0; column < 3; ++column) {
             s32 index = row * 3 + column;
-            const SpriteInfo *position = asdTMTexTableEntryAt(0x24, firstPosition + index);
+            const TextureTableEntryIV *position = asdTMTexTableEntryAt(0x24, firstPosition + index);
             if (first == index || second == index)
                 texDrawTableEntryAtStoredOrigin(2, 0x24, 0x1de, position->x, position->y, 0xfb);
             else if (firstTrail == index || secondTrail == index)

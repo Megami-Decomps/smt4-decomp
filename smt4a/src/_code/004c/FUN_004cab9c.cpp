@@ -4,21 +4,21 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
+#include "battle/BtlEntryLookup.h"
 
 extern "C" {
-BattleMotionSubject *btlFindEntryBlockByMemberId(BtlMainStateA *state, s32 group);
-void halfRecClear(BtlMainStateA *state, BattleMotionSubject *source);
+void halfRecClear(BtlMainStateA *state, BtlUnitDataA *source);
 void flagSelectionRebuild(void *selection, u32 flags);
 extern u64 g_battleMotionCombatantClearMask;
 
 void FUN_004cab9c(BattleRosterRecordA *record)
 {
     BattleRosterMotionA &motion = record->motion;
-    BattleMotionSubject *source = btlFindEntryBlockByMemberId(btlGetMainState(), motion.group);
+    BtlUnitDataA *source = btlFindEntryBlockByMemberId(btlGetMainState(), motion.group);
     if (source == NULL) {
         return;
     }
-    if (source->status & 0x180) {
+    if (source->statusFlags & 0x180) {
         btlGetMainState();
         motion.state = 3;
         motion.stateFrame = 0;
@@ -32,13 +32,13 @@ void FUN_004cab9c(BattleRosterRecordA *record)
             state->entries[motion.unitIndex].flags &= ~g_battleMotionCombatantClearMask;
         }
     }
-    if (source->status & 0x3DC2) {
+    if (source->statusFlags & 0x3DC2) {
         halfRecClear(btlGetMainState(), source);
     }
     if (motion.unitIndex >= 0) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[motion.unitIndex];
         if (entry != NULL) {
-            flagSelectionRebuild(motion.selection, source->status);
+            flagSelectionRebuild(motion.selection, source->statusFlags);
         }
     }
 }

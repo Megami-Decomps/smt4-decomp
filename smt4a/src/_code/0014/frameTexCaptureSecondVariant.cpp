@@ -1,54 +1,29 @@
-#include "shard/JobWork.h"
-
-struct CaptureSurface {
-    /* 0x00 */ u8 unk00[0x14];
-    /* 0x14 */ s32 width;
-    /* 0x18 */ s32 height;
-};
-
-struct CaptureState {
-    /* 0x00 */ u8 unk00[0x14];
-    /* 0x14 */ u8 active;
-    /* 0x15 */ u8 unk15;
-    /* 0x16 */ u8 result;
-    /* 0x17 */ u8 captured;
-    /* 0x18 */ u8 unk18[0x35];
-    /* 0x4D */ u8 variant;          /* which of the two capture jobs handles this capture */
-};
-
-/* The work block of the screen capture job. */
-struct CaptureJobWork {
-    /* 0x0000 */ u8 unk0000[4];
-    /* 0x0004 */ CaptureSurface *surface;
-    /* 0x0008 */ u8 unk0008[0x13f8];
-    /* 0x1400 */ CaptureState capture;
-};
+#include "frame_tex/FrameTexA.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
-extern void *g_renderCtx;
-void renderCtxSelectDisplayAreaForStereoMode(void *context);
-u8 gxCopyFramebufferToSurface(u32 mode, CaptureSurface *surface);
-void surfaceCopy(CaptureSurface *destination, CaptureSurface *source);
 
-/* Job step for the second capture variant: once active, captures the screen into the job's 512x512
- * surface and then halves the surface's recorded size; runs only once. */
+u8 gxCopyFramebufferToSurface(u32 mode, AsdTexture *surface);
+void surfaceCopy(AsdTexture *destination, AsdTexture *source);
+
+/* "ENCEFFCL" capture of the second set: captures the left screen once into the 512x512 left texture,
+ * then halves the texture's recorded size. */
 s32 frameTexCaptureSecondVariant(u32 job)
 {
-    CaptureJobWork *work = reinterpret_cast<CaptureJobWork *>(jobGetWork(job));
+    FrameTexWorkA *work = (FrameTexWorkA *)jobGetWork(job);
 
-    CaptureState *capture = &work->capture;
-    if (!capture->active || capture->captured)
+    if (!work->encEffEnabled || work->encEffCapturedLeft)
         return 0;
-    if (!capture->variant)
+    if (!work->encEffAlternate)
         return 0;
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
-    work->surface->width = 0x200;
-    work->surface->height = 0x200;
-    work->capture.result = gxCopyFramebufferToSurface(0, work->surface);
-    surfaceCopy(work->surface, work->surface);
-    work->surface->width >>= 1;
-    work->surface->height >>= 1;
-    work->capture.captured = 1;
+    work->surfaceLeft->dimensions.width = 0x200;
+    work->surfaceLeft->dimensions.height = 0x200;
+    work->encEffCaptureResult = gxCopyFramebufferToSurface(0, work->surfaceLeft);
+    surfaceCopy(work->surfaceLeft, work->surfaceLeft);
+    work->surfaceLeft->dimensions.width >>= 1;
+    work->surfaceLeft->dimensions.height >>= 1;
+    work->encEffCapturedLeft = 1;
     return 0;
 }
 

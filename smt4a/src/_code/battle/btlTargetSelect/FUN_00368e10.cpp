@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -49,7 +50,6 @@ extern int *g_btlTargetSelect; /* 0x57a9a8 */
 /* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0014bf3c(fn_00368e10_arg1 *, unsigned int);
 /* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
-extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: nkmEnemyFindById. */
 extern unsigned int gameDataGetTableValue(void);
@@ -117,7 +117,7 @@ void FUN_00368e10(unsigned int *param_1,fn_00368e10_arg1 *param_2,unsigned int p
     }
     *(int *)(*piVar1 + 0x28) = temp_v2;
   }
-  temp_v2 = asdTMTexTableEntryAt(0xc,0x47);
+  temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xc,0x47));
   temp_v4 = *piVar1 + 0x2c;
   fontMeasureLineAdvance(temp_v4,1);
   temp_v1 = VectorSignedToFloat((int)*(short *)(temp_v2 + 8) + (**(short **)(temp_v2 + 0xc) - temp_v4) / 2,
@@ -128,7 +128,7 @@ void FUN_00368e10(unsigned int *param_1,fn_00368e10_arg1 *param_2,unsigned int p
   temp_v2 = *piVar1;
   if (*(int *)(temp_v2 + 0x28) >= 100) {
     *(unsigned int *)(temp_v2 + 0xf0) = 3;
-    temp_v2 = asdTMTexTableEntryAt(0xc,0xa2);
+    temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xc,0xa2));
     temp_v1 = VectorSignedToFloat((int)*(short *)(temp_v2 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
     *(unsigned int *)(*piVar1 + 0x80) = temp_v1;
     temp_v1 = VectorSignedToFloat((int)*(short *)(temp_v2 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -136,7 +136,7 @@ void FUN_00368e10(unsigned int *param_1,fn_00368e10_arg1 *param_2,unsigned int p
   }
   else {
     *(unsigned int *)(temp_v2 + 0xf0) = 2;
-    temp_v2 = asdTMTexTableEntryAt(0xc,0x46);
+    temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xc,0x46));
     temp_v1 = VectorSignedToFloat((int)*(short *)(temp_v2 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
     *(unsigned int *)(*piVar1 + 0x80) = temp_v1;
     temp_v1 = VectorSignedToFloat((int)*(short *)(temp_v2 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);

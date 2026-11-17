@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "shard/W6_W6Match2_ScrollList.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -28,7 +29,6 @@ int buttonHelpSetText(...);
 int FUN_002a0cc8(...);
 int FUN_002b7bca(...);
 int eventQueueAddUnique(...);
-int asdTMTexTableEntryAt(...);
 int statusInventorySort(void);
 
 int FUN_0026adb4(void);
@@ -759,7 +759,7 @@ LAB_001cb104:
         eventQueueAddUniqueIfValid(temp_v7);
         break;
       }
-      temp_v7 = asdTMTexTableEntryAt(0x1a,0x406);
+      temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x406));
       temp_v15 = temp_v2 + 0xdcc;
       temp_v6 = temp_v15;
       uiScrollHandleActionsOrTouch(temp_v15,temp_v7,temp_v2 + 0x42c,(int)*(short *)(temp_v2 + 0x474),
@@ -838,7 +838,7 @@ LAB_001cb104:
       temp_v6 = resourceRunOperationIfUnblocked();
       temp_v15 = listCursorGetRowIfUnblocked(temp_v9);
       temp_v8 = objectPartRunUnlessLocked(temp_v9);
-      temp_v10 = asdTMTexTableEntryAt(0x1a,0x406);
+      temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x406));
       temp_v7 = *(unsigned int *)(temp_v10 + 8);
       temp_v12 = **(unsigned int **)(temp_v10 + 0xc);
       if (((*(char *)(temp_v2 + 0x411) == '\0') && (temp_v10 = FUN_00288498(), temp_v10 != 0)) &&
@@ -1002,7 +1002,7 @@ LAB_001cbbac:
         *(unsigned char *)(temp_v2 + 0x481) = temp_v3;
         break;
       }
-      temp_v7 = asdTMTexTableEntryAt(0x1a,0x48c);
+      temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x48c));
       temp_v8 = temp_v6;
       uiScrollHandleActionsOrTouch(temp_v6,temp_v7,0,(int)*(short *)(temp_v2 + 0x474),(int)*(short *)(temp_v2 + 0x476),
                    (int)*(short *)(temp_v2 + 0x478),temp_v2 + 0x2388,0,0);

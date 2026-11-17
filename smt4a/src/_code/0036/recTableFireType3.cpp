@@ -1,11 +1,9 @@
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 #include "shard/Shard0036.h"
 
 extern "C" {
 
 extern void dataTable23MarkEntrySeen(u32 handle);
-
-extern "C" MapIfGlobalsA g_mapIf;
 
 /* Fires dataTable23MarkEntrySeen for every active type-3 record of the table. */
 void recTableFireType3(void)

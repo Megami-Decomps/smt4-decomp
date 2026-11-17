@@ -1,10 +1,9 @@
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match3_NodeEnable.h"
 #include "game/GameState.h"
 
 extern "C" {
-extern MapIfState *g_mapIf;
 NodeEnableNode *asdMdlManagerCreateFromSource(u32 source, u32 size, u32 flags);
 void lightOwnerRegister(NodeEnableNode *model, s32 enabled);
 void mapMarkerSynchronizeModelState(MapIfModelMarker *marker);
@@ -24,7 +23,7 @@ static inline const MarkerSources *markerSources()
 // Load and reset the two model-backed map interface markers.
 void FUN_0020d6b0()
 {
-    MapIfState *interfaceState = g_mapIf;
+    MapIfState *interfaceState = g_mapIf.state;
     MapIfModelMarker *first = &interfaceState->modelMarkers[0];
     first->model = asdMdlManagerCreateFromSource(markerSources()->firstSource, markerSources()->firstSize, 7);
     lightOwnerRegister(first->model, 1);

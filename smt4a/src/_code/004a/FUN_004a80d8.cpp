@@ -28,8 +28,8 @@ void FUN_004a80d8(PanelTextOwnerPrefixA *owner, s32 row, u32 flags, s32 alternat
         offsetof(PanelDecorationView, first) == 0x214 &&
         offsetof(PanelDecorationView, last) == 0x78C ? 1 : -1];
     PanelDecorationView *panel = reinterpret_cast<PanelDecorationView *>(owner);
-    const PanelTextLayoutEntryPrefixA *position = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(
-        reinterpret_cast<TextLayoutContextA *>(panel->layout), row + 0x42F));
+    const TextureTableEntryIV *position = layoutFindTableEntry(
+        reinterpret_cast<TextLayoutContextA *>(panel->layout), row + 0x42F);
     s32 x = position->x;
     s32 y = position->y;
     const AnimatedMember *first = &panel->first;

@@ -1,6 +1,6 @@
 /* NON_MATCHING: damage-call stack arguments use STM/scalar stores instead of retail's STRD pairs, changing constant registers. */
 #include "battle/btlAction.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
 #include "battle/BtlMainAccess.h"
@@ -29,8 +29,8 @@ u32 FUN_002177e8(void)
         BtlActionRecord *record = &btlGetMainState()->actions[id];
         BtlEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
         FUN_00250720(btlGetMainState());
-        FUN_002551ac(0, unit, record, 0, entry->maxHp, -1, -1, entry->hp,
-                      entry->maxHp, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1);
+        FUN_002551ac(0, unit, record, 0, entry->data.maxHp, -1, -1, entry->data.hp,
+                      entry->data.maxHp, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1);
         FUN_00250680(0x19, unit, record, 0);
     } else {
         BtlEquip *record = reinterpret_cast<BtlEquip *>(gameGetUnitRecord(id - BTL_ENTRY_COUNT));  /* battle code views unit records as BtlEquip */

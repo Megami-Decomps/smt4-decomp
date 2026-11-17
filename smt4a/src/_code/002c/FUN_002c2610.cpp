@@ -1,18 +1,16 @@
-#include "ui/FrameTex.h"
+#include "frame_tex/FrameTexA.h"
 
 extern "C" {
 
-extern FrameWorkA *g_frameTex;
-
-/* Sets the flag at 0x148C and clears the bytes at 0xFAE and 0xFAD of the record at 0x57F65C. */
+/* Blocks frame capture and clears the HDR layer's captured flags. */
 void FUN_002c2610(void)
 {
-    FrameWorkA *record;
+    FrameTexWorkA *record;
 
     record = g_frameTex;
-    g_frameTex->unk148C = 1;
-    record->unkFAE = 0;
-    record->unkFAD = 0;
+    g_frameTex->captureBlocked = 1;
+    record->hdr.capturedRight = 0;
+    record->hdr.capturedLeft = 0;
 }
 
 } /* extern "C" */

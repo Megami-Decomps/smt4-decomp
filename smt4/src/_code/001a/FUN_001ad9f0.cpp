@@ -2,6 +2,7 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 // Render-state stack: the current entry is slots[index]; the flush callback runs when the
 // value changed (or a flush is already pending).
@@ -46,7 +47,6 @@ f32 renderCtxCalculateStereoParallax(TitleScene* scene, f32 amount);
 s32 vec2GetXInt(void* vec);
 s32 vec2GetYInt(void* vec);
 void uiFadeDraw(u32 id);
-void* asdTMTexTableEntryAt(u32 group, u32 index);
 void drawSkillCategoryLabel(u16 id, s32 x, s32 y, u32 arg);
 u32 FUN_002bcddc(u16 id, u32 arg);
 void textFormatBuffer(char* out, const char* format, ...);
@@ -54,12 +54,6 @@ void effectRenderTransformedInstance(void* vec, f32 amount);
 u32 packNibblesAndByte(u32 a, u32 b, u32 c);
 void renderCtxApplyTransforms(TitleScene* scene);
 void renderCtxResetColorScale(TitleScene* scene);
-
-struct SpriteRect {
-    u8 unk00[8];
-    s16 x;                  // 0x08
-    s16 y;                  // 0x0a
-};
 
 static void ringPush(DrawStateRing* ring, u32 value)
 {
@@ -124,9 +118,9 @@ u32 FUN_001ad9f0(void)
         texDrawTableEntryAtStoredOrigin(2, 0x29, 0x58, x, y, 0x97);
         texDrawTableEntryAtStoredOrigin(2, 0x29, 0x59, x, y, 0x97);
         texDrawTableEntryAtStoredOrigin(2, 0x29, 0x51, x, y, 0xa1);
-        SpriteRect* labelRect = static_cast<SpriteRect*>(asdTMTexTableEntryAt(0x29, 0x54));
+        TextureTableEntryIV* labelRect = asdTMTexTableEntryAt(0x29, 0x54);
         drawSkillCategoryLabel(category, labelRect->x + x, labelRect->y + y, 0xa6);
-        SpriteRect* nameRect = static_cast<SpriteRect*>(asdTMTexTableEntryAt(0x29, 0x55));
+        TextureTableEntryIV* nameRect = asdTMTexTableEntryAt(0x29, 0x55);
         char text[64];
         textFormatBuffer(text, "%s", FUN_002bcddc(category, 0));
         textDrawString(3, -1, text, (f32)(nameRect->x + x), (f32)(nameRect->y + y), 0.375f, 0.0f, 1.0f);

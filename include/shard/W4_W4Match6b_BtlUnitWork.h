@@ -4,5 +4,6 @@
 
 #include "common.h"
 #include "battle/BtlUnitWork.h"
+#include "battle/BtlEntryA.h"
 
 #endif

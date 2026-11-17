@@ -2,6 +2,7 @@
 #include "common.h"
 #include "camp/RenderCtx.h"
 #include "gfx/StereoParallax.h"
+#include "camp/RenderCtxTitle.h"
 
 struct NumberSprite { u8 data[0x8c]; };
 struct FloatingNumber {
@@ -33,7 +34,6 @@ struct NumberDrawOrder {
     u8 active, priority, reserved;
 };
 extern "C" {
-extern void *g_titleScene;
 extern f32 DAT_00435e20;
 void effectRenderTransformedInstance(NumberSprite *, f32);
 s32 FUN_0019d734(const void *, const void *);

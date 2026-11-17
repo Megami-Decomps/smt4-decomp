@@ -99,10 +99,10 @@ f32 FUN_004c28b4(s32 group, s32 kind)
     }
     SkillInfo info;
     btlEntryBuildSummary(&info, btlGetMainState(), entry);
-    if (info.valid != 0 && (entry->statusFlags & 0x10) != 0) {
+    if (info.valid != 0 && (entry->data.statusFlags & 0x10) != 0) {
         u64 flags = entry->flags;
         u64 mask = DAT_00571408;
-        if ((mask & flags) == 0 || FUN_004bd098(entry->sourceId, info.skillId) >= 0)
+        if ((mask & flags) == 0 || FUN_004bd098(entry->data.sourceId, info.skillId) >= 0)
             rate *= 2.0f;
     }
     return rate;

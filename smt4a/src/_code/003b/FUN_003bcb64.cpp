@@ -36,17 +36,17 @@ u32 FUN_003bcb64(void)
             u64 flags = entry->flags;
             if ((flags & g_btlMessageFlagMasks.required) && !(flags & g_btlMessageFlagMasks.excluded) &&
                     (flags & g_btlMessageFlagMasks.eligible) &&
-                    entry->indexView.selectionIndex != actor->indexView.selectionIndex &&
-                    entry->thresholdView.unk27A <= actor->thresholdView.unk27A) {
-                if (!gameStockContainsEntry(entry->id) && entry->candidate.record &&
-                        (entry->candidate.record->flags & 0x40) && actor->id != entry->id) {
-                    if (fallback ? FUN_002a4b28(actor->id) : !FUN_002a4b28(actor->id))
+                    entry->selectionIndex != actor->selectionIndex &&
+                    entry->data.unk116 <= actor->data.unk116) {
+                if (!gameStockContainsEntry(entry->data.id) && entry->data.candidate &&
+                        (entry->data.candidate->flags & 0x40) && actor->data.id != entry->data.id) {
+                    if (fallback ? FUN_002a4b28(actor->data.id) : !FUN_002a4b28(actor->data.id))
                         candidates[count++] = entry;
                 }
             }
         }
         if (count) {
-            scrSetResult(candidates[randRange((u16)(count - 1))]->unitIndex);
+            scrSetResult(candidates[randRange((u16)(count - 1))]->ids[0]);
             return 1;
         }
         if (fallback) {

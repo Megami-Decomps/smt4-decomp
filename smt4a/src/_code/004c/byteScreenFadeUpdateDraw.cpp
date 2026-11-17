@@ -1,9 +1,8 @@
 /* NON_MATCHING: pool order now matches; only `vmov.f32 s1, s0` is scheduled before `mov r2, r3` (retail after). */
 #include "ui/ByteScreenFade.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
-extern void* g_renderCtx;
-void renderCtxSelectTexture(void* context, u32 target);
 void gxSubmitDrawZeroExtraParams(u32 color0, u32 color1, u32 color2, u32 color3,
                   f32 x, f32 y, f32 width, f32 height, f32 depth);
 

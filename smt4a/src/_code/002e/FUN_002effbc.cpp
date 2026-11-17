@@ -1,8 +1,7 @@
-#include "status/StatusDown.h"
+#include "status/StatusDownA.h"
 #include "code/Code002e.h"
 
 extern "C" {
-extern StatusDownStateA *g_statusDown;
 
 /* Returns 0 when the scene at 0x588FE8 is in state 2, otherwise 1. */
 u8 FUN_002effbc(void)

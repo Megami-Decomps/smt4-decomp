@@ -1,4 +1,4 @@
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "gamedata/SkillFlags.h"
 #include "AsdSDK/AsdMemUtil.h"
@@ -17,7 +17,6 @@ struct FusionCatalogState {
 typedef char FusionCatalogFilterOffsets[offsetof(FusionCatalogState, options.race) == 0x24 &&
     offsetof(FusionCatalogState, options.skillCategory) == 0x31 ? 1 : -1];
 extern "C" {
-extern UniteWork *g_unite;
 s32 devilIsAvailable(void *, u16);
 s32 itemGetFlagBit1(u16);
 s32 FUN_0029e9cc(u16);

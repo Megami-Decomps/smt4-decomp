@@ -1,46 +1,39 @@
 #include "common.h"
 #include "camp/RenderCtx.h"
-#include "shard/W9_W9Match8_WorkRecords.h"
 #include "Model/MoriModelShadowMap.h"
-#include "shard/JobWork.h"
+#include "frame_tex/FrameTexA.h"
 
-/* The capture flags at work+0x1400, read as one block. */
-struct CaptureFlagsView {
-    /* 0x00 */ u8 unk00[0x14];
-    /* 0x14 */ u8 requested;
-    /* 0x15 */ u8 unk15[3];
-    /* 0x18 */ u8 complete;
-    /* 0x19 */ u8 suppressed;
-    /* 0x1A */ u8 unk1A[0x33];
-    /* 0x4D */ u8 blocked;
-};
-
-static __inline bool captureReady(const CaptureFlagsView *flags)
+/* Whether the first ENCEFF set still has to capture the right screen. */
+static __inline bool encEffRightCapturePending(const FrameTexWorkA *work)
 {
-    return flags->requested != 0 && flags->complete == 0 && flags->suppressed == 0 && flags->blocked == 0;
+    return work->encEffEnabled != 0 && work->encEffCapturedRight == 0 && work->encEffPendingRight == 0 &&
+           work->encEffAlternate == 0;
 }
 
 extern "C" {
-s32 stateValuesGetBySelector(u32 selector);
-s32 gxCopyFramebufferToSurface(s32 mode, CaptureSurfacePrefixA *surface);
-s32 surfaceCopy(CaptureSurfacePrefixA *destination, CaptureSurfacePrefixA *source);
 
+s32 stateValuesGetBySelector(u32 selector);
+s32 gxCopyFramebufferToSurface(s32 mode, AsdTexture *surface);
+s32 surfaceCopy(AsdTexture *destination, AsdTexture *source);
+
+/* "ENCEFFCR" capture of the first set: captures the right screen once (at half size), or marks the capture pending while a state selector is set. */
 u32 surfaceCaptureUpdate(u32 process)
 {
-    SurfaceCaptureWorkPrefixA *work = (SurfaceCaptureWorkPrefixA *)jobGetWork(process);
+    FrameTexWorkA *work = (FrameTexWorkA *)jobGetWork(process);
 
     if (stateValuesGetBySelector(0) != 0) {
-        work->captureSuppressed = 1;
-    } else if (captureReady(reinterpret_cast<const CaptureFlagsView *>(reinterpret_cast<u8 *>(work) + 0x1400))) {
+        work->encEffPendingRight = 1;
+    } else if (encEffRightCapturePending(work)) {
         renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
-        work->surface->width = 512;
-        work->surface->height = 512;
-        work->captureResult = static_cast<u8>(gxCopyFramebufferToSurface(0, work->surface));
-        surfaceCopy(work->surface, work->surface);
-        work->surface->width >>= 1;
-        work->surface->height >>= 1;
-        work->captureComplete = 1;
+        work->surfaceRight->dimensions.width = 512;
+        work->surfaceRight->dimensions.height = 512;
+        work->encEffCaptureResult = static_cast<u8>(gxCopyFramebufferToSurface(0, work->surfaceRight));
+        surfaceCopy(work->surfaceRight, work->surfaceRight);
+        work->surfaceRight->dimensions.width >>= 1;
+        work->surfaceRight->dimensions.height >>= 1;
+        work->encEffCapturedRight = 1;
     }
     return 0;
 }
+
 }

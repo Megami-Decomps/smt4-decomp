@@ -2,23 +2,14 @@
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
 #include "gamedata/NkmEnemyLookup.h"
+#include "map/PopupStateA.h"
+#include "gamedata/GamePlayerData.h"
 
-struct PopupState {
-    u32 state;
-    u32 timer;
-    u8 unk08[0xC];
-    union { u32 key; const char *text; } message;
-    u32 slotId;
-    u8 unk1C[9];
-    char text[72];
-};
 extern "C" {
-extern PopupState *g_popupState;
 void FUN_00152f44(void);
 void *saveSlotFindSelected(void);
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(s32 maximum);
-void *gameGetPlayerData(void);
 const char *popupSelectWeightedMessage(u32 kind, u16 slot);
 void rt_memcpy(void *destination, const void *source, u32 bytes);
 u32 dataTable01GetRecordWithAocOverride(u32 value);
@@ -40,19 +31,19 @@ void partyTryOpenLevelLimitPopup(void)
     }
     u32 unitId = g_gameState.unk308;
     s32 tableLevel = nkmEnemyFindById((u16)unitId)->level & 0x7FFF;
-    s32 playerLevel = *(u16 *)((u8 *)gameGetPlayerData() + 0x62);
+    s32 playerLevel = gameGetPlayerData()->level;
     if (g_gameState.unk308 == 0 || (playerLevel > tableLevel && playerLevel > tableLevel + 5)) {
         return;
     }
     g_popupState->state = 12;
     g_popupState->timer = 0;
     const char *message = popupSelectWeightedMessage(14, slot->id);
-    g_popupState->message.text = message;
-    g_popupState->slotId = slot->id;
+    g_popupState->message = message;
+    g_popupState->speakerId = slot->id;
     char format[72];
     rt_memcpy(format, message, sizeof(format));
     u32 value = dataTable01GetRecordWithAocOverride((u16)unitId);
     textFormatBuffer(g_popupState->text, format, value);
-    g_popupState->message.text = g_popupState->text;
+    g_popupState->message = g_popupState->text;
 }
 }

@@ -1,5 +1,6 @@
 /* NON_MATCHING: pushes a sphere out of four lists of collision planes (two passes with radius 25, two with 50 or 60 depending on `shortReach`), recording which planes were touched and which wall plane was hit last, and returns whether the motion was changed; written from the decompilation, the packed 64-bit float pairs are plain locals, the sphere centre starts 15 above the position and the final write-back subtracts the decompiler's shared constant (25); build is 245 rows against 246 retail */
 #include "common.h"
+#include "game/GameStateA.h"
 
 #define PASS_COUNT 4
 #define PLANE_STRIDE 0xA8
@@ -42,8 +43,6 @@ extern u8 DAT_005ecf14[];     /* touched flags, wall list A */
 extern u8 DAT_005ed114[];     /* touched flags, wall list B */
 extern u8 DAT_005ed294[];     /* touched flags, floor list A */
 extern u8 DAT_005ed334[];     /* touched flags, floor list B */
-extern s32 DAT_005f1c4c;      /* pass of the last wall hit */
-extern s32 DAT_005f1c50;      /* plane index of the last wall hit */
 
 void collisionTestProjectedSpherePlanes(f32 *reach, s32 type, s32 sub, CollisionPlane *plane);
 f32 sqrtf(f32 value);
@@ -64,8 +63,8 @@ u32 FUN_0025ef68(f32 *position, f32 *previous, s32 shortReach)
     f32 dx = startX - previous[0];
     f32 dy = startY - previous[1];
     f32 dz = startZ - previous[2];
-    DAT_005f1c4c = -1;
-    DAT_005f1c50 = -1;
+    g_gameState.lastWallPass = -1;
+    g_gameState.lastWallPlane = -1;
 
     clearFlags(DAT_005ecf14, DAT_00580208);
     clearFlags(DAT_005ed114, DAT_0058020c);
@@ -133,8 +132,8 @@ u32 FUN_0025ef68(f32 *position, f32 *previous, s32 shortReach)
                     z = footZ + planes->nz * reach;
                 }
             } else {
-                DAT_005f1c4c = pass;
-                DAT_005f1c50 = i;
+                g_gameState.lastWallPass = pass;
+                g_gameState.lastWallPlane = i;
                 if (pass == PASS_WALLS_A)
                     DAT_005ecf14[i] = 1;
                 else if (pass == PASS_WALLS_B)

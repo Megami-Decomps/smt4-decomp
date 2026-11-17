@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ int FUN_00164168(...);
 int efctSetSpeed(void);
 int renderPopStateStacks(void);
 int FUN_00168e00(int, int, int, int);
-int asdTMTexTableEntryAt(...);
 int renderCtxCalculateStereoParallax(int);
 
 typedef int romwright_code(...);
@@ -146,7 +146,7 @@ char FUN_00155ca8(void)
   texDrawTableEntryAtStoredOrigin(2,8,0x88,temp_v2,temp_v3,0x15);
   efctSetSpeed();
   if (*(char *)(temp_v1 + 0x31) != '\0') {
-    temp_v7 = asdTMTexTableEntryAt(8,0x87);
+    temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0x87));
     efctSetSpeed();
     temp_v6 = g_renderCtx;
     temp_v10 = 0;
@@ -162,7 +162,7 @@ char FUN_00155ca8(void)
     }
     FUN_00168e00(*(short *)(temp_v7 + 8) + temp_v2,*(short *)(temp_v7 + 10) + temp_v3,
                  (int)**(short **)(temp_v7 + 0xc),(int)(*(short **)(temp_v7 + 0xc))[1]);
-    temp_v6 = asdTMTexTableEntryAt(8,0x89);
+    temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0x89));
     if (*(char *)(temp_v1 + 0x33) != '\0') {
       FUN_00164168(*(unsigned int *)(temp_v1 + 0x328),*(short *)(temp_v6 + 8) + temp_v2,
                    *(short *)(temp_v6 + 10) + temp_v3,0xc9,6,0);

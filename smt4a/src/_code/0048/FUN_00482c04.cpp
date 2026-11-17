@@ -1,3 +1,4 @@
+#include "game/GameStateA.h"
 /* NON_MATCHING: readable rebuild of the nearest-talk-target selection; retail keeps the best distance and id in s/r registers across the dispatch with the sphere test inlined as vsqrt and merges the three pickup branches' common stores, which armcc here schedules differently. */
 #include "shard/W5_W5Match7_SceneState.h"
 #include "map/LmapGlobals.h"
@@ -39,19 +40,10 @@ struct TalkTargetSet {
 };
 
 extern "C" {
-extern u8 DAT_005f1776;
-extern u32 DAT_005f1778;
-extern u8 DAT_005f177c;
-extern u8 DAT_005f17c9;
-extern s32 DAT_005f17e8;
-extern u32 DAT_005f17ec;
-extern u32 DAT_005f18e8;
-extern s32 DAT_005f1a58;
-extern s32 DAT_005f1be8;
 
 u8 *gameFlagsGetBlock(void);
 u8 *gameGetPlayerData(void);
-void textFormatBuffer(u8 *buffer, const char *format, u32 a, u32 b);
+void textFormatBuffer(char *buffer, const char *format, u32 a, u32 b);
 void FUN_00376fa4(u32 id);
 void sequenceRequestDefer(s32 sequence, u32 arg);
 void soundActorStartOnFreeChannel(u32 id);
@@ -77,19 +69,19 @@ u32 FUN_00482c04(TalkTargetSet *set)
         s32 distance = (s32)sqrtf(dx * dx + dy * dy + dz * dz);
         if (distance >= 150 || distance >= bestDistance)
             continue;
-        DAT_005f17c9 = 0;
+        g_gameState.unk1CD = 0;
         if (target->kind == 1) {
-            DAT_005f17e8 = 0;
-            DAT_005f17ec = 0;
+            g_gameState.talkMarker = 0;
+            g_gameState.talkMarkerArg = 0;
             if (target->hasScript) {
-                s32 flagId = DAT_005f1be8 != 0 ? target->flagId : 0;
-                if (DAT_005f1be8 != 0 && flagId != 0 && flagId >= 0)
+                s32 flagId = g_gameState.talkFlagsEnabled != 0 ? target->flagId : 0;
+                if (g_gameState.talkFlagsEnabled != 0 && flagId != 0 && flagId >= 0)
                     *(s16 *)(flagsBlock + 0x22) = (s16)flagId;
                 if (target->sequence > 0) {
                     if (target->deferred != 0) {
-                        DAT_005f1776 = 1;
-                        DAT_005f1778 = target->sequence;
-                        textFormatBuffer(&DAT_005f177c, "%d_%d", target->sequence, target->sequenceArg);
+                        g_gameState.scriptPending = 1;
+                        g_gameState.scriptId = target->sequence;
+                        textFormatBuffer(g_gameState.scriptName, "%d_%d", target->sequence, target->sequenceArg);
                     } else {
                         sequenceRequestDefer(target->sequence, target->sequenceArg);
                     }
@@ -97,8 +89,8 @@ u32 FUN_00482c04(TalkTargetSet *set)
                 FUN_00376fa4(target->id);
                 chosen = target->id;
                 if (target->marker > 0) {
-                    DAT_005f17ec = target->markerArg;
-                    DAT_005f17e8 = target->marker;
+                    g_gameState.talkMarkerArg = target->markerArg;
+                    g_gameState.talkMarker = target->marker;
                 }
             }
         } else if (target->kind == 0) {
@@ -109,13 +101,13 @@ u32 FUN_00482c04(TalkTargetSet *set)
                 affordable = target->cost >= limit;
             }
             if (!affordable) {
-                DAT_005f17c9 = 1;
+                g_gameState.unk1CD = 1;
                 soundActorStartOnFreeChannel(0x1000225);
             } else {
-                DAT_005f1a58 = 0;
-                DAT_005f18e8 = chosen;
+                g_gameState.talkRewardId = 0;
+                g_gameState.chosenTalkId = chosen;
                 if (target->rewardKind == 3 && target->rewardId != 0)
-                    DAT_005f1a58 = target->rewardId;
+                    g_gameState.talkRewardId = target->rewardId;
             }
         }
         TalkTarget *owner = set->targets[i];

@@ -1,46 +1,34 @@
 #include "title/titleMain.h"
-#include "romwright_types.h"
+#include "frame_tex/FrameTex.h"
 
 extern "C" {
 
-int FUN_00117da4(int);
-
 extern TitleScene *g_titleScene; /* 0x44ea00 */
 
-/* Supplied declaration required: FUN_00117da4. */
-extern int stateValuesGetBySelector(unsigned int);
-extern int jobGetWork(void);
-/* Supplied declaration required: renderCtxSelectStereoLayout. */
+void FUN_00117da4(s32 mode);
+s32 stateValuesGetBySelector(u32 selector);
 
-
-int FUN_0010821c(void)
-
+// "ZanDR" draw: draws the afterimage layer on the right screen once its right capture is done and the
+// scene texture exists, unless a state selector is set or capture is blocked.
+s32 FUN_0010821c(u32 job)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  char *pb;
-  int temp_v4;
-  
-  temp_v0 = jobGetWork();
-  temp_v4 = stateValuesGetBySelector(0);
-  if (((temp_v4 == 0) && (pb = (char *)(temp_v0 + 0xe00), *(char *)(temp_v0 + 0xedc) != '\0')) && (*(char *)(pb + 0xdd) != '\0')) {
-    temp_v2 = *(char *)(pb + 0xe6) == '\0';
-    temp_v1 = 0;
-    if (!temp_v2) {
-      temp_v1 = *(int *)(temp_v0 + 0xfdc);
+    FrameTexWork *work = (FrameTexWork *)jobGetWork(job);
+    if (stateValuesGetBySelector(0) == 0 && work->zan.enabled != 0 && work->zan.ready != 0) {
+        u8 notCaptured = work->zan.capturedRight == 0;
+        AsdTexture *scene = NULL;
+        if (!notCaptured) {
+            scene = work->sceneSurface;
+        }
+        if (notCaptured || scene == NULL) {
+            return (s32)scene; /* zero: retail returns the tested register */
+        }
+        if (work->captureBlocked == 0) {
+            renderCtxSelectStereoLayout(g_titleScene);
+            FUN_00117da4(0);
+            return 0;
+        }
     }
-    if (temp_v2 || temp_v1 == 0) {
-      return temp_v1;
-    }
-    if (*(char *)(temp_v0 + 0xfd8) == '\0') {
-      renderCtxSelectStereoLayout(g_titleScene);
-      FUN_00117da4(0);
-      return 0;
-    }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

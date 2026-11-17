@@ -15,7 +15,7 @@ static __inline PartySlotA *getSlot(u16 index)
 /* Returns the slot whose id is the selected id, or NULL when nothing is selected or nothing matches. */
 PartySlotA *saveSlotFindSelected(void)
 {
-    SaveSlotTable *state;
+    SaveSlotTableA *state;
     PartySlotA *slot;
     s32 i;
 

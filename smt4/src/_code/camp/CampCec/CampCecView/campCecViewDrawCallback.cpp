@@ -1,6 +1,7 @@
 /* NON_MATCHING: canonical renderCtxPushA wrapper is used; cached-stack push registers, paired selection/footer loads, and saved boolean registers still differ. */
 #include "camp/CampCec/CampCecView.h"
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 struct CecViewWidget {
     u32 unk00;
@@ -29,8 +30,6 @@ struct CecViewSavedRecord {
 
 extern "C" {
 extern CampCecView *g_campCecView;
-extern RenderCtx *g_titleScene;
-void renderCtxSelectStereoLayout(RenderCtx *);
 s32 renderCtxPackPassFlags(u32, u32);
 u32 FUN_0025981c();
 CecViewSavedRecord *saveGetIndexedMapValue(u32);

@@ -4,11 +4,11 @@
 #include "ui/UiSpriteState.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 void efctSetSpeed(f32);
 f32 vec2GetSpeed(const void *object);
-const UiLayoutEntryPrefixIV *asdTMTexTableEntryAt(u32, u32);
 void texDrawCompositeSprite(u32, u32, u32, s32, s32, s32);
 
 void FUN_0022ade4(SceneWidget *work, s32 row, s32 entryIndex, s32 state, s32 fade)
@@ -23,12 +23,12 @@ void FUN_0022ade4(SceneWidget *work, s32 row, s32 entryIndex, s32 state, s32 fad
     efctSetSpeed(scale);
     s32 x, y;
     if (state) {
-        const UiLayoutEntryPrefixIV *layout = asdTMTexTableEntryAt(42, row + 21);
+        const TextureTableEntryIV *layout = asdTMTexTableEntryAt(42, row + 21);
         x = layout->x;
         y = layout->y;
         texDrawCompositeSprite(2, 42, 1, x, y, fade);
     } else {
-        const UiLayoutEntryPrefixIV *layout = asdTMTexTableEntryAt(42, row + 5);
+        const TextureTableEntryIV *layout = asdTMTexTableEntryAt(42, row + 5);
         x = layout->x;
         y = layout->y;
         texDrawCompositeSprite(2, 42, 0, x, y, fade);
@@ -37,13 +37,13 @@ void FUN_0022ade4(SceneWidget *work, s32 row, s32 entryIndex, s32 state, s32 fad
     s32 labelX, labelY;
     u32 color, layer;
     if (state) {
-        const UiLayoutEntryPrefixIV *label = asdTMTexTableEntryAt(42, 20);
+        const TextureTableEntryIV *label = asdTMTexTableEntryAt(42, 20);
         labelX = label->x;
         labelY = label->y;
         color = state == 2 ? 0x72e027ff : 0xffffffff;
         layer = 3;
     } else {
-        const UiLayoutEntryPrefixIV *label = asdTMTexTableEntryAt(42, 4);
+        const TextureTableEntryIV *label = asdTMTexTableEntryAt(42, 4);
         labelX = label->x;
         labelY = label->y;
         color = 0x323232ff;
@@ -53,7 +53,7 @@ void FUN_0022ade4(SceneWidget *work, s32 row, s32 entryIndex, s32 state, s32 fad
                  static_cast<f32>(labelX + x), static_cast<f32>(labelY + y),
                  opacity, 0.0f, scale);
     if (state) {
-        const UiLayoutEntryPrefixIV *layout = asdTMTexTableEntryAt(42, row + 21);
+        const TextureTableEntryIV *layout = asdTMTexTableEntryAt(42, row + 21);
         s32 markX = layout->x;
         s32 markY = layout->y;
         if (work->frame < 8) {

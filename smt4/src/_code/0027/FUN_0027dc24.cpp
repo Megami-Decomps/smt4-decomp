@@ -1,5 +1,5 @@
 /* NON_MATCHING: battle sprite selector source reloads and stripped-call NOPs differ. */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match1_Table03Record.h"
 #include "gfx/PackedRenderState.h"

@@ -31,7 +31,7 @@ u32 FUN_003bbabc()
         if ((entry->flags & g_btlCandidateMasks.unavailable) &&
             (entry->flags & g_btlCandidateMasks.required) &&
             !(g_btlCandidateMasks.excluded & entry->flags) &&
-            entry->id == unitId &&
+            entry->data.id == unitId &&
             reinterpret_cast<ModifierView *>(entry)->values[index] <= -1) {
             scrSetResult(1);
             return 1;

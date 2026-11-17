@@ -2,12 +2,12 @@
 #include "shard/S1ListPanel.h"
 #include <stddef.h>
 #include "quest_center/qcMain.h"
+#include "camp/RenderCtxA.h"
 
 typedef char CheckCachedStateSize[sizeof(RenderStateStack) == 0x20 ? 1 : -1];
 typedef char CheckScissorMinimumOffset[offsetof(RenderCtxScissorA, scissorMinimum) == 0x1338 ? 1 : -1];
 typedef char CheckScissorMaximumOffset[offsetof(RenderCtxScissorA, scissorMaximum) == 0x1358 ? 1 : -1];
 
-extern "C" RenderCtxScissorA *g_renderCtx;
 extern "C" s32 asdGxPresetsGetEnable(u32 viewport);
 extern "C" s32 stateValuesGetBySelector(u32 viewport);
 

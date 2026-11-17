@@ -1,8 +1,7 @@
 /* NON_MATCHING: result/state/flags allocation and initial zero scheduling differ; -O2 candidate. */
-#include "map/mapIf.h"
+#include "map/MapIfGlobals.h"
 
 extern "C" {
-extern MapIfGlobals g_mapIf;
 u32 FUN_002bfdd4();
 u32 FUN_002bfdc4();
 void textFormatFullWidthTwoDigits(s32, char *);

@@ -1,13 +1,7 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-
-/* A layout record: its position at 8 and 10. */
-typedef struct StatLayout {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-} StatLayout;
 
 /* The stat list's work block (only the mode bytes and selection). */
 typedef struct StatListWork {
@@ -20,7 +14,6 @@ typedef struct StatListWork {
 } StatListWork;
 
 f32 jobGetScalarValue(void);
-StatLayout *asdTMTexTableEntryAt(s32 kind, s32 index);
 s32 itemIsCollectedWithRelated(u32 selection);
 void FUN_00180310(s32 a, s32 x, s32 y, s32 b, s32 c, s32 d, const char *format, ...);
 void efctSetSpeed(f32 speed);
@@ -31,8 +24,8 @@ void gxResetColorQuadToWhite(void);
 void statRowDrawValue(StatListWork *work, s32 row, s32 x, s32 y, s32 value, s32 difference)
 {
     f32 savedSpeed = jobGetScalarValue();
-    StatLayout *offset = asdTMTexTableEntryAt(18, row + 0x7B);
-    StatLayout *base = asdTMTexTableEntryAt(18, 0x7A);
+    TextureTableEntryIV *offset = asdTMTexTableEntryAt(18, row + 0x7B);
+    TextureTableEntryIV *base = asdTMTexTableEntryAt(18, 0x7A);
 
     if (work->mode == 14 || (work->mode == 7 && itemIsCollectedWithRelated(work->selection) == 0) || work->mode == 16) {
         FUN_00180310(0, base->x + x, offset->y + base->y + y, 1, 3, 0xDD, "??");
@@ -42,15 +35,15 @@ void statRowDrawValue(StatListWork *work, s32 row, s32 x, s32 y, s32 value, s32 
         FUN_00180310(0, base->x + x, base->y + offset->y + y, 1, 3, 0xDD, "%d", value);
     }
     if (work->compareEnabled != 0) {
-        StatLayout *diffOffset = asdTMTexTableEntryAt(18, row + 0x85);
-        StatLayout *diffBase = asdTMTexTableEntryAt(18, 0x84);
+        TextureTableEntryIV *diffOffset = asdTMTexTableEntryAt(18, row + 0x85);
+        TextureTableEntryIV *diffBase = asdTMTexTableEntryAt(18, 0x84);
 
         if (difference > 0) {
             FUN_00180310(0, diffBase->x + diffOffset->x + x, diffOffset->y + diffBase->y + y, 1, 1, 0xDD, "+");
         } else if (difference < 0) {
             FUN_00180310(0, diffBase->x + diffOffset->x + x, diffOffset->y + diffBase->y + y, 1, 1, 0xDD, "-");
         }
-        StatLayout *numberBase = asdTMTexTableEntryAt(18, 0x83);
+        TextureTableEntryIV *numberBase = asdTMTexTableEntryAt(18, 0x83);
 
         if (difference > 0) {
             FUN_00180310(0, diffOffset->x + numberBase->x + x, diffOffset->y + numberBase->y + y, 1, 3, 0xDD, "%d", difference);

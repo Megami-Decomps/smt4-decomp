@@ -14,7 +14,7 @@ u32 scrCommBtlGroupHasUnitFlag(void)
         BtlEntry *entry = &btlGetMainState()->entries[i];
         u32 flags = entry->flags;
         if ((flags & 0x10) != 0 && (flags & 1) != 0 && (flags & 0x40) == 0 &&
-            entry->id == group && (entry->groupMask & (1u << static_cast<u8>(flag))) != 0) {
+            entry->data.id == group && (entry->data.statusFlags & (1u << static_cast<u8>(flag))) != 0) {
             scrSetResult(1);
             return 1;
         }

@@ -1,4 +1,4 @@
-/* The battle script unit's action fields, for units that also use shard/W4_Match6_BtlEntry.h's
+/* The battle script unit's action fields, for units that also use battle/BtlEntry.h's
  * BtlMainState (battle/btlUnit.h's BtlUnit pulls in the conflicting battle/btlMain.h one). Same
  * layout as BtlUnit: the data's action kind and the per-entry target bytes. */
 #ifndef SHARD_BTLSCRIPTTARGETS_H

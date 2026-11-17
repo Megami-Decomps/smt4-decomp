@@ -1,20 +1,20 @@
 /* NON_MATCHING: Selection-ID table addressing groups its base offset differently. */
 #include "common.h"
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteWork.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-UniteWork *uniteGetWork();
+UniteWorkA *uniteGetWork();
 void efctSetSpeed(f32 speed);
 u8 recordGetModeForId(s32 recordId);
-void largeGridDrawButtonStrip(UniteWork *work, s32 x, s32 y,
+void largeGridDrawButtonStrip(UniteWorkA *work, s32 x, s32 y,
                               s32 selectedIndex, f32 speed);
 extern u8 g_layeredSpriteEffectResource[];
 
 f32 FUN_003b6250(s32 x, s32 y, f32 speed)
 {
-    UniteWork *work = uniteGetWork();
+    UniteWorkA *work = uniteGetWork();
     u32 color = 0x9fe7ffffU;
     efctSetSpeed(speed);
 

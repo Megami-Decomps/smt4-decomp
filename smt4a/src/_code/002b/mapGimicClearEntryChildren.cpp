@@ -1,5 +1,6 @@
 /* Calls ptrListRemoveClearOwner for every slot (last to first) whose entry has a linked child. */
 #include "common.h"
+#include "Model/MoriModelManager.h"
 
 extern "C" {
 
@@ -18,10 +19,7 @@ typedef struct SlotTable {
     /* 0xA8 */ Slot slots[35];
 } SlotTable;
 
-extern u32 g_handleRegistry;
 extern SlotTable *g_mapGimic;
-
-extern void ptrListRemoveClearOwner(u32 arg, void *child);
 
 void mapGimicClearEntryChildren(void)
 {

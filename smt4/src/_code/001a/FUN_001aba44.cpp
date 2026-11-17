@@ -1,5 +1,6 @@
 #include "npc_room/NpcRoom.h"
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ void texTableRecordCallWithParams(s32 a, s32 b, u32 c, s32 d, s32 e, s32 f);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 value);
 
 extern NpcRoom *g_npcRoom;
-extern RenderCtx *g_titleScene;
 
 /* Draws the NPC room: sets up its view, then refreshes the job of every occupied display cell, skipping row unkFC in state 4 once unkEC exceeds 2. */
 u32 FUN_001aba44(void)

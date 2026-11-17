@@ -2,6 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "network/DataStore/DataStoreMain.h"
 #include "code/Code002a.h"
+#include "ui/PartyPanelStateA.h"
 typedef unsigned char u8;
 typedef signed char s8;
 typedef unsigned short u16;
@@ -10,31 +11,6 @@ typedef unsigned int u32;
 typedef int s32;
 
 extern "C" {
-
-/* Row shown in the party panel (observed fields only). */
-struct PanelEntry {
-    u8 pad00[0x34];
-    u32 slot;            /* 0x34: party slot id, or -1/-2 for the special rows */
-    u8 pad38[8];
-    u32 result;          /* 0x40 */
-    s32 value;           /* 0x44 */
-};
-
-/* Party panel (observed fields only). */
-struct PartyPanel {
-    u8 pad00[0x2C];
-    s32 page;            /* 0x2C */
-    u8 pad30[6];
-    u16 skillId;         /* 0x36 */
-    s16 target;          /* 0x38 */
-    u8 pad3A[8];
-    u8 compactLayout;    /* 0x42 */
-    u8 pad43[0xA10 - 0x43];
-    PanelEntry *cursor;  /* 0xA10 */
-    PanelEntry *member[3];   /* 0xA14 */
-    PanelEntry *row[24];     /* 0xA20 */
-    s32 rowTarget[24][2];    /* 0xA80: target id at +0 of each 8-byte pair */
-};
 
 struct SlotTableView {
     u8 pad0000[0x1C9F];
@@ -46,7 +22,6 @@ struct UnitState {
     u8 *action;              /* 0x28 */
 };
 
-extern PartyPanel *g_partyPanel;   /* 0x57f268 */
 extern u32 g_btlScriptUnit;        /* 0x57113c */
 
 s32 gameGetSlotTable(void);
@@ -62,44 +37,44 @@ s32 FUN_002c7bb0(s32 target, s32 slot, u32 skillId, u32 *out);
  * entry of list position `id` (`direct` selects the unpaged layout). */
 void FUN_0028c2ec(u32 id, s32 direct)
 {
-    PartyPanel *panel = g_partyPanel;
+    PartyPanelStateA *panel = g_partyPanel;
     SlotTableView *slots = (SlotTableView *)gameGetSlotTable();
     u32 out = 0;
     s32 index;
 
     s32 skipPreview = 0;
-    if (panel->skillId == 125 && reinterpret_cast<s32>(btlGetMainState()) != 0 && g_btlScriptUnit != 0) {
+    if (panel->previewItem == 125 && reinterpret_cast<s32>(btlGetMainState()) != 0 && g_btlScriptUnit != 0) {
         UnitState *unit = btlUnitGet(g_btlScriptUnit);
         if (unit->action != 0 && *(u16 *)(unit->action + 0x1BE) == 8) {
             skipPreview = 1;
         }
     }
     if (!skipPreview) {
-        if (panel->target < 0 && panel->cursor->slot == (u32)-1) {
-            panel->cursor->value = -FUN_003df57c(panel->skillId, 1);
-        } else if (panel->target < 0 && panel->cursor->slot == (u32)-2) {
+        if (panel->selection < 0 && panel->characters[0]->slot == -1) {
+            panel->characters[0]->value = -FUN_003df57c(panel->previewItem, 1);
+        } else if (panel->selection < 0 && panel->characters[0]->slot == -2) {
             u32 unit = btlMainGetUnk14();
             if (unit != 0) {
-                panel->cursor->value = -skillGetAdjustedCost(unit, panel->skillId);
+                panel->characters[0]->value = -skillGetAdjustedCost(unit, panel->previewItem);
             }
         } else {
             for (s32 i = 0; i < 3; i++) {
-                if (slots->byIndex[i + 1] == panel->target) {
-                    u32 record = gameGetSlotRecord(panel->member[i]->slot);
-                    panel->member[i]->value = -skillGetAdjustedCost(record, panel->skillId);
+                if (slots->byIndex[i + 1] == panel->selection) {
+                    u32 record = gameGetSlotRecord(panel->characters[i + 1]->slot);
+                    panel->characters[i + 1]->value = -skillGetAdjustedCost(record, panel->previewItem);
                 }
             }
             for (s32 i = 0; i < 24; i++) {
-                if (panel->rowTarget[i][0] == panel->target) {
-                    u32 record = gameGetSlotRecord(panel->row[i]->slot);
-                    panel->row[i]->value = -skillGetAdjustedCost(record, panel->skillId);
+                if (panel->entries[i].packedIndex == panel->selection) {
+                    u32 record = gameGetSlotRecord(panel->demons[i]->slot);
+                    panel->demons[i]->value = -skillGetAdjustedCost(record, panel->previewItem);
                 }
             }
         }
     }
 
     if (direct != 0) {
-        if (panel->compactLayout != 0) {
+        if (panel->alternate != 0) {
             index = listCursorGetRowOfChildIfUnblocked((void *)(id)) + listCursorGetRowIfUnblocked(id) * 4;
         } else {
             index = listCursorGetRowIfUnblocked(id) * 4 + panel->page * 12 + listCursorGetRowOfChildIfUnblocked((void *)(id));
@@ -114,21 +89,21 @@ void FUN_0028c2ec(u32 id, s32 direct)
             } else {
                 slot = -1;
             }
-            FUN_002c7bb0(panel->target, slot, panel->skillId, &out);
-            panel->member[position]->result = out;
-            FUN_003344b4(out, panel->member[position]->value);
+            FUN_002c7bb0(panel->selection, slot, panel->previewItem, &out);
+            panel->characters[position + 1]->result = out;
+            FUN_003344b4(out, panel->characters[position + 1]->value);
             return;
         }
-        if (panel->compactLayout != 0) {
+        if (panel->alternate != 0) {
             index = listCursorGetRowOfChildIfUnblocked((void *)(id)) + count * 4;
         } else {
             index = listCursorGetRowOfChildIfUnblocked((void *)(id)) + count * 4 + panel->page * 12;
         }
         index = index - 4;
     }
-    FUN_002c7bb0(panel->target, panel->rowTarget[index][0], panel->skillId, &out);
-    panel->row[index]->result = out;
-    FUN_003344b4(out, panel->row[index]->value);
+    FUN_002c7bb0(panel->selection, panel->entries[index].packedIndex, panel->previewItem, &out);
+    panel->demons[index]->result = out;
+    FUN_003344b4(out, panel->demons[index]->value);
 }
 
 } /* extern "C" */

@@ -40,13 +40,13 @@ u32 btlCanSelectReservePartyMember(const BtlCombatantEntryA *entry)
                 }
             }
         } else if (DAT_00573c90.alternate & entry->flags) {
-            s16 id = static_cast<s16>(entry->id);
+            s16 id = static_cast<s16>(entry->data.id);
             if (id != 0) {
                 PartyReserveSlots *party = gameGetSlotTable();
                 for (s32 index = 0; index < party->count; ++index) {
                     if (party->slots[index] >= 0) {
                         SlotRecordA *record = gameGetSlotRecord(party->slots[index]);
-                        if (record != NULL && record->entryId != id && party->slots[index] >= 0) {
+                        if (record != NULL && record->id != id && party->slots[index] >= 0) {
                             return 1;
                         }
                     }

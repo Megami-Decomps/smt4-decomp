@@ -1,12 +1,12 @@
 /* NON_MATCHING: signed quotient/remainder temporaries and glyph-draw saved registers differ from retail. */
 #include "gfx/SpriteTextureRect.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct NumericDrawPosition { s32 x, y; };
 extern "C" {
 extern const u8 DAT_00533f48[];
 void drawSetColorFromRGBA8(u32 color);
-SpriteTextureRect *asdTMTexTableEntryAt(u32 group, u32 id);
 void FUN_00180310(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const void *table, s32 value);
 void gxResetColorQuadToWhite();
 
@@ -16,11 +16,11 @@ void FUN_0041af74(u32, s32 value, const NumericDrawPosition *position, u32 color
     drawSetColorFromRGBA8(color);
     texDrawTableEntryAtStoredOrigin(2, 43, 153, position->x, position->y, 2);
     s32 quotient = value / 10;
-    SpriteTextureRect *first = asdTMTexTableEntryAt(43, 154 + value % 10);
-    FUN_00180310(6, position->x + (s16)first->textureWidth, position->y + (s16)first->textureHeight,
+    TextureTableEntryIV *first = asdTMTexTableEntryAt(43, 154 + value % 10);
+    FUN_00180310(6, position->x + (s16)first->x, position->y + (s16)first->y,
         1, 1, 2, DAT_00533f48, quotient);
-    SpriteTextureRect *second = asdTMTexTableEntryAt(43, 155);
-    FUN_00180310(6, position->x + (s16)second->textureWidth, position->y + (s16)second->textureHeight,
+    TextureTableEntryIV *second = asdTMTexTableEntryAt(43, 155);
+    FUN_00180310(6, position->x + (s16)second->x, position->y + (s16)second->y,
         1, 1, 4, DAT_00533f48, quotient);
     gxResetColorQuadToWhite();
 }

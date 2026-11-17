@@ -40,11 +40,11 @@ u32 FUN_004ea0c0(BattleEventOwnerRef *owner, const BattleEventCandidate *candida
     }
     if (isEntryUsable(g_btlEvent) || btlStateHasSelectionGateFlag(owner->state))
         return 0;
-    if (FUN_004d7a70(g_btlEvent, 4, candidate->entry->indexView.selectionIndex, 0))
+    if (FUN_004d7a70(g_btlEvent, 4, candidate->entry->selectionIndex, 0))
         return 1;
     if (!btlStateHasSelectionGateFlag(owner->state) && owner->state->pending <= 0 &&
         (candidate->entry->flags & g_btlAction.interaction.reachMask) &&
-        FUN_004d7a70(g_btlEvent, 10, candidate->entry->indexView.selectionIndex, 0))
+        FUN_004d7a70(g_btlEvent, 10, candidate->entry->selectionIndex, 0))
         return 1;
     return 0;
 }

@@ -1,19 +1,14 @@
-#include "common.h"
+#include "status/StatusDown.h"
 #include "shard/TextureDrawCall.h"
 
 extern "C" {
 
-struct StatusDownPanel { u8 unk00[0x92]; u8 enabled; };
-struct StatusDown { u8 unk00[0x2300]; StatusDownPanel panel; };
-extern StatusDown *g_statusDown;
 
-extern int FUN_002881a0(void);
 extern int FUN_0029ac94(void);
 
 u32 FUN_00288498(void)
 {
-    StatusDownPanel *panel = &g_statusDown->panel;
-    if (panel->enabled == 0) return 0;
+    if (g_statusDown->panelEnabled == 0) return 0;
 
     int value = FUN_002881a0();
     u32 result;

@@ -14,8 +14,8 @@ void saveSlotApplySelected(u32 target)
     UnitSourceRecord *slot = saveSlotFindSelected();
 
     if (slot != 0) {
-        FUN_003ecfb4(target, reinterpret_cast<BattleUnitState *>(&entry.unitParameters.parameterBlock), slot, 0);
-        FUN_004ca63c(target, reinterpret_cast<BattleUnitState *>(&entry.unitParameters.parameterBlock), 2, 0x36, 0);
+        FUN_003ecfb4(target, reinterpret_cast<BattleUnitState *>(&entry.data), slot, 0);
+        FUN_004ca63c(target, reinterpret_cast<BattleUnitState *>(&entry.data), 2, 0x36, 0);
     }
 }
 

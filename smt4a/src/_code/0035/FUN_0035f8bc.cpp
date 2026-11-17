@@ -17,8 +17,8 @@ u32 FUN_0035f8bc(void)
             BtlCombatantEntryA *entry = &state->entries[i];
             if ((entry->flags & g_battleMaskPresets.eligibility.active) != 0 &&
                 (entry->flags & g_battleMaskPresets.eligibility.excluded) == 0) {
-                s32 floor = entry->maxHp * 29 / 100;
-                FUN_001f50fc(entry->id, entry->hp < floor ? floor : entry->hp);
+                s32 floor = entry->data.maxHp * 29 / 100;
+                FUN_001f50fc(entry->data.id, entry->data.hp < floor ? floor : entry->data.hp);
                 break;
             }
         }

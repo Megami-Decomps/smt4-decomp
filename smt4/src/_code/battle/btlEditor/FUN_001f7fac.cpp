@@ -1,5 +1,5 @@
 /* NON_MATCHING: the 0x1E9D field offset lands in the literal pool before DAT_00435ce8 (retail: after), so the post-alloc loads use r2/r3 the other way round. */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/EnemyEditor.h"
 #include "AsdSDK/AsdDebug.h"
@@ -7,6 +7,7 @@
 #include "map/mapDepart.h"
 #include "battle/btlEditor.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "battle/BtlGlobals.h"
 struct BtlUi;
 /* The allocated session extends beyond the shared EnemyEditorWork prefix. */
 struct EditorSessionState {
@@ -25,14 +26,13 @@ struct EditorSessionState {
 };
 typedef char EditorSessionStateLayoutCheck[(sizeof(EditorSessionState) == 0x18 && offsetof(EditorSessionState, initial.leftSelection) == 0x12) ? 1 : -1];
 extern "C" {
-extern BtlMainState *g_btlMain;
 extern BtlUi *g_btlUiBlock;
 extern void *DAT_00435ce8;
 u32 jobDispatchOptionalOwner(u32 job);
 u32 battleEditorRunForJob(u32 job);
 void FUN_002c9edc(u32 job);
 u32 taskCreateDraw(const char *name, s32 group, s32 startDelay, s32 endDelay, u32 (*update)(u32), void (*end)(u32), void *work, u32 parent);
-s32 FUN_00256940(BtlMainState *battle, BtlMainState *owner, u32 enabled);
+s32 FUN_00256940(BtlCamera *battle, BtlMainState *owner, u32 enabled);
 void btlReflectQueueKind34(s32 mode, s32 index);
 
 void FUN_001f7fac(BtlMainState *battle)
@@ -49,7 +49,7 @@ void FUN_001f7fac(BtlMainState *battle)
     session->initial.leftSelection = -1;
     session->initial.rightSelection = -1;
     if (g_btlMain) {
-        if (g_btlMain->talk.unitIndex >= 0 && FUN_00256940(g_btlMain, battle, 1))
+        if (g_btlMain->unk760 >= 0 && FUN_00256940(g_btlMain, battle, 1))
             btlReflectQueueKind34(0, 0);
         FUN_00256898(1, 0);
     }

@@ -1,59 +1,92 @@
+/* camp/Camp: SMT IV's camp (menu) work, g_camp (0x25C4 bytes, allocated by FUN_0028a420).
+ * Apocalypse's layout is CampStateA in camp/CampStateA.h. */
 #ifndef CAMP_CAMPSTATE_H
 #define CAMP_CAMPSTATE_H
 
 #include "common.h"
 #include <stddef.h>
+#include "ui/GridNavigation.h"
+#include "ui/UiSpriteState.h"
 
-typedef struct CampStateA {
-    /* 0x00000 */ u32 job;
-    union {
-        /* 0x00004 */ u8 unk00004[0x3C];
-        struct {
-            u8 unk00004BeforeMenu[0x18];
-            /* 0x0001C */ s32 current;
-            u8 unk00020[8];
-            /* 0x00028 */ s32 previous;
-        } menu;
-    };
-    /* 0x00040 */ u8 block40[0x64];
-    /* 0x000A4 */ s8 unkA4;
-    /* 0x000A5 */ u8 unk000A5[0x63F];
-    union {
-        /* 0x006E4 */ u8 primarySprite[0x118];
-        struct {
-            u8 unk6E4[0x8C];
-            struct {
-                u8 unk770[0x20];
-                /* 0x00790 */ f32 scale;
-            } properties;
-        } primaryAnimation;
-    };
-    /* 0x007FC */ u8 unk007FC[0xE38];
-    /* 0x01634 */ u8 numericBanner[1];
-    /* 0x01635 */ u8 unk01635[0x3D3];
-    union {
-        /* 0x01A08 */ u8 transitionSprite[0x118];
-        struct {
-            u8 prefix1A08[0x20];
-            f32 scale;
-        } transition;
-    };
-    /* 0x01B20 */ u8 spriteState;
-} CampStateA;
+/* A row of the skill list (grids[3]); the category screens read only the unit. */
+struct CampSkillEntry {
+    /* 0x0 */ u32 skill;
+    /* 0x4 */ s32 unit;
+};
 
-typedef char CampStateALayoutCheck[sizeof(CampStateA) == 0x1B24 ? 1 : -1];
+typedef struct CampState {
+    /* 0x0000 */ u32 job;
+    /* 0x0004 */ u8 unk0004[0x10];
+    /* 0x0014 */ u32 substep;
+    /* 0x0018 */ s32 state;
+    /* 0x001C */ s32 phase;
+    /* 0x0020 */ u32 returnState;          /* the state to come back to */
+    /* 0x0024 */ u32 previousState;
+    /* 0x0028 */ u8 unk0028[4];
+    /* 0x002C */ u32 selectedId;
+    /* 0x0030 */ u8 unk0030;
+    /* 0x0031 */ u8 helpStatus;
+    /* 0x0032 */ u8 unk0032;
+    /* 0x0033 */ u8 busy;
+    /* 0x0034 */ GridNavigation menuGrid;
+    /* 0x0098 */ s8 menuGroup;              /* 1 selects the navigation help */
+    /* 0x0099 */ u8 unk0099[2];
+    /* 0x009B */ s8 menuSelection[16];      /* the selected row of each group */
+    /* 0x00AB */ u8 unitSelectActive;        /* a unit is being picked from the party panel */
+    /* 0x00AC */ s8 unitSelectSource;
+    /* 0x00AD */ s8 unitSelectIndex;         /* 3: none */
+    /* 0x00AE */ u8 unk00AE[2];
+    /* 0x00B0 */ GridNavigation grids[12]; /* grids[3] lists skills, grids[5..11] the equipment */
+    /* 0x0560 */ u8 unk0560[0xE8];
+    /* 0x0648 */ UiSpriteState sprites[14];  /* [1] the selection timer, [2] marker, [3] background */
+    /* 0x0DF0 */ union {
+        s16 touchRegions[37];               /* registered touch-region ids, -1 when unused */
+        struct {
+            /* 0x0DF0 */ s16 unk0DF0[9];
+            /* 0x0E02 */ s16 scrollRegions[5];  /* scroll thumb, previous, next, then two buttons */
+            /* 0x0E0C */ s16 rowRegions[11];    /* one per visible list row */
+            /* 0x0E22 */ s16 unitRegions[3];
+            /* 0x0E28 */ s16 unitSlotRegions[3][3];
+        } touch;
+    };
+    /* 0x0E3A */ u8 touchRegionCount;
+    /* 0x0E3B */ u8 unitSlotsReady;
+    /* 0x0E3C */ CampSkillEntry skills[200];
+    /* 0x147C */ u16 gridIds0[60];
+    /* 0x14F4 */ u16 gridIds1[1000];
+    /* 0x1CC4 */ u16 gridIds2[120];
+    /* 0x1DB4 */ u16 gridIds4[100];
+    /* 0x1E7C */ u16 meleeIds[120];         /* grids[5..11]: the equipment categories */
+    /* 0x1F6C */ u16 rangedIds[120];
+    /* 0x205C */ u16 ammunitionIds[50];
+    /* 0x20C0 */ u16 headIds[120];
+    /* 0x21B0 */ u16 bodyIds[120];
+    /* 0x22A0 */ u16 legsIds[120];
+    /* 0x2390 */ u16 accessoryIds[120];
+    /* 0x2480 */ u8 unk2480[0x10];
+    /* 0x2490 */ s32 categoryTimers[25];   /* index 0 is the player, 1..24 the unit slots */
+    /* 0x24F4 */ s32 categoryIndices[25];
+    /* 0x2558 */ u32 categoryColors[25];
+    /* 0x25BC */ u8 unk25BC[8];
+} CampState;
 
-typedef char CampStateAOffsets[offsetof(CampStateA, numericBanner) == 0x1634 && offsetof(CampStateA, transitionSprite) == 0x1A08 && offsetof(CampStateA, spriteState) == 0x1B20 ? 1 : -1];
-typedef char CampStatePrimarySpriteOffsetCheck[offsetof(CampStateA, primarySprite) == 0x6E4 ? 1 : -1];
-typedef char CampStateTransitionScaleOffsetCheck[
-    offsetof(CampStateA, transition.scale) == 0x1A28 &&
-    sizeof(CampStateA) == 0x1B24 ? 1 : -1];
-typedef char CampStateMenuOffsets[
-    offsetof(CampStateA, menu.current) == 0x1C &&
-    offsetof(CampStateA, menu.previous) == 0x28 &&
-    sizeof(CampStateA) == 0x1B24 ? 1 : -1];
-typedef char CampStatePrimaryScaleOffsetCheck[
-    offsetof(CampStateA, primaryAnimation.properties.scale) == 0x790 &&
-    sizeof(CampStateA) == 0x1B24 ? 1 : -1];
+typedef char CampStateMenuGridOffsetCheck[offsetof(CampState, menuGrid) == 0x34 ? 1 : -1];
+typedef char CampStateHelpOffsetCheck[offsetof(CampState, unitSelectActive) == 0xAB ? 1 : -1];
+typedef char CampStateGridsOffsetCheck[offsetof(CampState, grids) == 0xB0 ? 1 : -1];
+typedef char CampStateSpritesOffsetCheck[offsetof(CampState, sprites) == 0x648 ? 1 : -1];
+typedef char CampStateTouchOffsetCheck[offsetof(CampState, touchRegions) == 0xDF0 &&
+    offsetof(CampState, touch.rowRegions) == 0xE0C && offsetof(CampState, touch.unitSlotRegions) == 0xE28 ? 1 : -1];
+typedef char CampStateSkillsOffsetCheck[offsetof(CampState, skills) == 0xE3C ? 1 : -1];
+typedef char CampStateIdsOffsetCheck[offsetof(CampState, accessoryIds) == 0x2390 ? 1 : -1];
+typedef char CampStateCategoryOffsetCheck[offsetof(CampState, categoryColors) == 0x2558 ? 1 : -1];
+typedef char CampStateSizeCheck[sizeof(CampState) == 0x25C4 ? 1 : -1];
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern CampState *g_camp;
+#ifdef __cplusplus
+}
+#endif
 
 #endif

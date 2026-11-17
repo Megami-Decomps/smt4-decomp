@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
 #include "gamedata/KeyedCatalog.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -58,7 +59,6 @@ extern int padButtonRepeat(unsigned int);
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: eventQueueAddUnique. */
-extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: gridNavigationConfigure. */
 /* Supplied declaration required: FUN_0021b1a8. */
@@ -301,7 +301,7 @@ unsigned int FUN_003ce598(void)
     temp_v3 = listCursorGetRowIfUnblocked(temp_v6 + 0x10);
     temp_v5 = *(unsigned int *)(temp_v6 + (temp_v3 + temp_v7) * 4 + 0x74);
     temp_v10[0] = '\0';
-    temp_v8 = asdTMTexTableEntryAt(0x14,0x575);
+    temp_v8 = reinterpret_cast<unsigned int>(asdTMTexTableEntryAt(0x14,0x575));
     temp_v7 = temp_v6 + 0x10;
     FUN_003450d4(temp_v7,temp_v8,temp_v6 + 0x508,(int)*(short *)(temp_v6 + 0x522),
                  (int)*(short *)(temp_v6 + 0x51e),(int)*(short *)(temp_v6 + 0x520),temp_v10,0,1);

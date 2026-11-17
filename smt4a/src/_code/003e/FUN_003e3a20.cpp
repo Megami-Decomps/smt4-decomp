@@ -2,7 +2,7 @@
 #include "shard/Shard0032.h"
 #include <stddef.h>
 #include "code/Code0033.h"
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteWork.h"
 
 struct InheritanceChoiceRecord {
     u32 unk00[2];

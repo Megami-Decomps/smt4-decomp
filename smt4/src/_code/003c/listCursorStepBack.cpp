@@ -1,6 +1,6 @@
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteWork.h"
 
 extern "C" {
 s32 resourceRunOperationIfUnblocked(FlaggedEntry *entry);

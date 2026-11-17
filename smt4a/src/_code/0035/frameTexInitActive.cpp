@@ -1,30 +1,16 @@
-#include "common.h"
+#include "frame_tex/FrameTexA.h"
 
 extern "C" {
 
-typedef struct FrameTex {
-    /* 0x0000 */ u8 unk0000[0x1414];
-    /* 0x1414 */ u8 active;
-    /* 0x1415 */ u8 unk1415[2];
-    /* 0x1417 */ u8 unk1417;
-    /* 0x1418 */ u8 unk1418;
-    /* 0x1419 */ u8 unk1419;
-    /* 0x141A */ u8 unk141A[0x33];
-    /* 0x144D */ u8 unk144D;
-} FrameTex;
-
-extern FrameTex *g_frameTex;
-
-/* Starts the frame texture (active) and clears its state bytes. */
+/* Enables the first ENCEFF capture set and clears its captures. */
 void frameTexInitActive(void)
 {
-    FrameTex *tex = g_frameTex;
-
-    tex->active = 1;
-    tex->unk1417 = 0;
-    tex->unk1418 = 0;
-    tex->unk1419 = 0;
-    tex->unk144D = 0;
+    FrameTexWorkA *tex = g_frameTex;
+    tex->encEffEnabled = 1;
+    tex->encEffCapturedLeft = 0;
+    tex->encEffCapturedRight = 0;
+    tex->encEffPendingRight = 0;
+    tex->encEffAlternate = 0;
 }
 
 } /* extern "C" */

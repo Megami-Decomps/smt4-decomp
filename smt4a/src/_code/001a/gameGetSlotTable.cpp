@@ -5,7 +5,7 @@ extern "C" {
 
 typedef struct Table {
     /* 0x0000 */ u8 unk0000[0x8C];
-    /* 0x008C */ SaveSlotTable slotTable;
+    /* 0x008C */ SaveSlotTableA slotTable;
 } Table;
 
 typedef struct GameDataBlocksView {
@@ -15,7 +15,7 @@ typedef struct GameDataBlocksView {
 extern GameDataBlocksView g_gameDataBlocks;
 
 /* Returns the slot table inside the game-data table (the table plus 0x8C). */
-SaveSlotTable *gameGetSlotTable(void)
+SaveSlotTableA *gameGetSlotTable(void)
 {
     return &g_gameDataBlocks.table->slotTable;
 }

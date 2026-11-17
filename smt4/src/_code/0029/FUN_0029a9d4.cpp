@@ -3,6 +3,7 @@
 #include "shard/Shard004B.h"
 #include "status/StatusCamera.h"
 #include "gamedata/SkillDataLookup.h"
+#include "gamedata/GamePlayerData.h"
 
 namespace {
 struct SkillCostDiscountView {
@@ -13,11 +14,11 @@ typedef char SkillCostDiscountOffsetCheck[
     offsetof(SkillCostDiscountView, discount) == 0x38 ? 1 : -1];
 }
 
-static __inline u8 findLearnedSkillRank(const ItemRankRecord *player, u32 skillId)
+static __inline u8 findLearnedSkillRank(const PlayerDataIV *player, u32 skillId)
 {
     for (s32 index = 0; index < 8; ++index) {
-        if (player->items[index] == skillId) {
-            return (u8)player->ranks[index];
+        if (player->skills[index] == skillId) {
+            return (u8)player->skillRanks[index];
         }
     }
     return 0;
@@ -27,7 +28,6 @@ extern "C" {
 s32 FUN_00283ebc(SkillDataRecord *skill, s32 rank, u32 modifier);
 s32 flagBitIsSet(u32 flag);
 SkillCostDiscountView *appCostRecordFindById(u16 id);
-ItemRankRecord *gameGetPlayerData(void);
 
 // Apply learned-rank or global cost discounts, keeping a nonzero skill's cost at least one.
 s32 FUN_0029a9d4(u32 skillId, s32 useLearnedRank)

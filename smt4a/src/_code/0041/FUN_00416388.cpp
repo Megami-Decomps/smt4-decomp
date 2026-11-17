@@ -1,5 +1,6 @@
 /* NON_MATCHING: label placement; the box-overlap test and the screen clamp are reconstructed from the decompiler's flag arithmetic and the returned offsets/clamp limits are approximate, not compared against retail */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 #define LABEL_COUNT 12
 #define LABEL_HALF_WIDTH 45.0f
@@ -24,13 +25,7 @@ struct LabelSpriteKey {
     /* 0x04 */ u32 sprite;
 };
 
-struct LabelSprite {
-    /* 0x00 */ u8 unk00[0xC];
-    /* 0x0C */ s16 *size;      /* [0] width, [1] height */
-};
-
 extern "C" {
-LabelSprite *asdTMTexTableEntryAt(u32 bank, u32 sprite);
 
 /* Moves label `index` out of the way of the other shown labels vertically and returns the offset
  * that keeps its sprite inside the screen: (dx, dy, 0). */
@@ -38,7 +33,7 @@ LabelVec3 FUN_00416388(LabelNode *labels, s32 index, const LabelSpriteKey *key)
 {
     f32 x = labels[index].x;
     f32 y = labels[index].y;
-    LabelSprite *sprite = asdTMTexTableEntryAt(key->bank, key->sprite);
+    TextureTableEntryIV *sprite = asdTMTexTableEntryAt(key->bank, key->sprite);
 
     f32 left = x - LABEL_HALF_WIDTH;
     f32 right = x + LABEL_HALF_WIDTH;
@@ -65,8 +60,8 @@ LabelVec3 FUN_00416388(LabelNode *labels, s32 index, const LabelSpriteKey *key)
         }
     }
 
-    f32 width = (f32)sprite->size[0];
-    f32 height = (f32)sprite->size[1];
+    f32 width = (f32)sprite->placement->width;
+    f32 height = (f32)sprite->placement->height;
     f32 dx = 0.0f;
     f32 dy = 0.0f;
     f32 halfWidth = width * 0.5f;

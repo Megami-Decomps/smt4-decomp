@@ -5,7 +5,6 @@
 #include "gamedata/GameSaveBlocks.h"
 #include "common.h"
 #include <stddef.h>
-#include "status/StatusDown.h"
 #include "ui/TimerSlot.h"
 #include "shard/W6_W6Match6_PartyPanel.h"
 #include "gamedata/SelectedUnitQuery.h"
@@ -266,27 +265,6 @@ typedef struct JobWorkC {
 
 
 
-typedef struct ObjectE0 {
-    /* 0x00 */ u8 unk00[0xFA4];
-    /* 0xFA4 */ u8 unkFA4;
-    /* 0xFA5 */ u8 unkFA5[0x4F];
-    /* 0xFF4 */ u8 unkFF4;
-    /* 0xFF5 */ u8 unkFF5[0x4B];
-    /* 0x1040 */ u8 unk1040;
-    /* 0x1041 */ u8 unk1041[0x2];
-    /* 0x1043 */ u8 unk1043;
-    /* 0x1044 */ u8 unk1044;
-    /* 0x1045 */ u8 unk1045;
-    /* 0x1046 */ u8 unk1046[0x408];
-    /* 0x144E */ u8 unk144E;
-    /* 0x144F */ u8 unk144F[0x1];
-    /* 0x1450 */ u8 unk1450;
-    /* 0x1451 */ u8 unk1451;
-    /* 0x1452 */ u8 unk1452;
-    /* 0x1453 */ u8 unk1453[0x31];
-    /* 0x1484 */ u32 unk1484;
-    /* 0x1488 */ u32 unk1488;
-} ObjectE0;
 
 /* The save block is GameSaveDataA in gamedata/GameSaveDataA.h. */
 

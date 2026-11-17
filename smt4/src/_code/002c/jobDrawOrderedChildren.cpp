@@ -1,5 +1,6 @@
 #include "camp/RenderCtx.h"
 #include "shard/JobWork.h"
+#include "camp/RenderCtxTitle.h"
 
 struct OrderedJobDrawWork {
     u8 unk000[0x5f2];
@@ -11,7 +12,6 @@ struct OrderedJobDrawWork {
     f32 x, y; // 0x738
 };
 extern "C" {
-extern RenderCtx *g_titleScene;
 s32 jobIsValid(u32);
 f32 jobGetScalarFrame(u32);
 s32 gxPackFadeKindAlphaWord(u32, f32);

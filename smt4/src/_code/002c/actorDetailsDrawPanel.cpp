@@ -4,17 +4,16 @@
 #include "code/Code0029.h"
 #include "font/SearchWin/RunWin.h"
 #include "camp/RenderCtx.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 extern const s32 g_actorDetailsStyleImages[2];
 void gxResetColorQuadToWhite(void);
-void renderCtxSelectStereoLayout(RenderCtx *context);
 s32 renderCtxPackPassFlags(s32 first, s32 second);
 void efctSetSpeed(f32 alpha);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 value);
 void texDrawCompositeSprite(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 depth);
-const MessageDrawItem *asdTMTexTableEntryAt(u32 group, u32 index);
 void FUN_002b659c(s32 x, s32 y, s32 width, s32 height);
 void textureLoadOptionalDemonModel(s32 portrait, s32 x, s32 y, s32 depth, s32 mode);
 void FUN_002b64b8(void);
@@ -45,12 +44,12 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
     texDrawCompositeSprite(2, 0x39, 3, x + offset, y, 0x71);
     if (texts->portrait != 0) {
         offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.3f);
-        const MessageDrawItem *portrait = asdTMTexTableEntryAt(0x39, 0x23);
-        const MessageDrawItem *clip = asdTMTexTableEntryAt(0x39, 0x22);
-        FUN_002b659c(clip->position.x + offset + x, clip->position.y + y,
-                      clip->size->width, clip->size->height);
-        textureLoadOptionalDemonModel(texts->portrait, portrait->position.x + offset + x,
-                                      portrait->position.y + y, 0x72, 1);
+        const TextureTableEntryIV *portrait = asdTMTexTableEntryAt(0x39, 0x23);
+        const TextureTableEntryIV *clip = asdTMTexTableEntryAt(0x39, 0x22);
+        FUN_002b659c(clip->x + offset + x, clip->y + y,
+                      clip->placement->width, clip->placement->height);
+        textureLoadOptionalDemonModel(texts->portrait, portrait->x + offset + x,
+                                      portrait->y + y, 0x72, 1);
         FUN_002b64b8();
     } else {
         offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.29f);
@@ -63,7 +62,7 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
     offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.3f);
     texDrawTableEntryAtStoredOrigin(2, 0x39, 0x0D, x + offset, y, 0x72);
     texDrawTableEntryAtStoredOrigin(2, 0x39, 0x0E, x + offset, y, 0x73);
-    const MessageDrawItem *position = asdTMTexTableEntryAt(0x39, 0x10);
+    const TextureTableEntryIV *position = asdTMTexTableEntryAt(0x39, 0x10);
     char text[16];
     if (record->level >= 10) {
         textFormatBuffer(text, "%d", record->level);
@@ -71,20 +70,20 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
         textFormatBuffer(text, " %d", record->level);
     }
     drawSetColorFromRGBA8(0);
-    FUN_002bdf94(0, position->position.x + x + offset, position->position.y + y, 0, 5, 0x73, text);
+    FUN_002bdf94(0, position->x + x + offset, position->y + y, 0, 5, 0x73, text);
     gxResetColorQuadToWhite();
     offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.32f);
     for (s32 index = 0; index < 8; ++index) {
-        const MessageDrawItem *row = asdTMTexTableEntryAt(0x39, index + 0x2F);
-        texDrawTableEntryAtStoredOrigin(2, 0x39, 0x2D, row->position.x + offset + x, row->position.y + y, 0x71);
-        const MessageDrawItem *cell = asdTMTexTableEntryAt(0x39, 0x2E);
-        s32 inset = cell->position.x + (cell->size->width - texts->widths[index]) / 2;
+        const TextureTableEntryIV *row = asdTMTexTableEntryAt(0x39, index + 0x2F);
+        texDrawTableEntryAtStoredOrigin(2, 0x39, 0x2D, row->x + offset + x, row->y + y, 0x71);
+        const TextureTableEntryIV *cell = asdTMTexTableEntryAt(0x39, 0x2E);
+        s32 inset = cell->x + (cell->placement->width - texts->widths[index]) / 2;
         if (record->values[index] == 0) {
             inset -= 4;
         }
         asdTextSetBaseColor(texts->values[index], 0xFFFFFF00);
-        FUN_002598f0(texts->values[index], row->position.x + x + inset + offset,
-                      row->position.y + y + cell->position.y, 0x72);
+        FUN_002598f0(texts->values[index], row->x + x + inset + offset,
+                      row->y + y + cell->y, 0x72);
     }
     if (expanded != 0) {
         offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.29f);
@@ -95,17 +94,17 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
             if (texts->skillIds[index] == 0) {
                 continue;
             }
-            const MessageDrawItem *row = asdTMTexTableEntryAt(0x39, index + 0xAC);
-            s32 rowY = row->position.y + y;
-            s32 rowX = row->position.x + transform->x + x;
+            const TextureTableEntryIV *row = asdTMTexTableEntryAt(0x39, index + 0xAC);
+            s32 rowY = row->y + y;
+            s32 rowX = row->x + transform->x + x;
             texDrawCompositeSprite(2, 0x39, 0x11, rowX + offset, rowY, 0x71);
             position = asdTMTexTableEntryAt(0x39, 0xAA);
-            itemDrawCategoryBadge(texts->skillIds[index], position->position.x + rowX + offset,
-                          position->position.y + rowY, 0x72, 0);
+            itemDrawCategoryBadge(texts->skillIds[index], position->x + rowX + offset,
+                          position->y + rowY, 0x72, 0);
             position = asdTMTexTableEntryAt(0x39, 0xAB);
             asdTextSetBaseColor(texts->skills[index], 0);
-            FUN_002598f0(texts->skills[index], offset + rowX + position->position.x,
-                          position->position.y + rowY, 0x72);
+            FUN_002598f0(texts->skills[index], offset + rowX + position->x,
+                          position->y + rowY, 0x72);
         }
     }
     u32 valueColor;
@@ -124,24 +123,24 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
     }
     position = asdTMTexTableEntryAt(0x39, 8);
     asdTextSetBaseColor(texts->name, nameColor);
-    FUN_002598f0(texts->name, position->position.x + x + offset, position->position.y + y, 0x72);
+    FUN_002598f0(texts->name, position->x + x + offset, position->y + y, 0x72);
     position = asdTMTexTableEntryAt(0x39, 9);
     asdTextSetBaseColor(texts->secondaryName, labelColor);
-    FUN_002598f0(texts->secondaryName, position->position.x + x + offset, position->position.y + y, 0x72);
+    FUN_002598f0(texts->secondaryName, position->x + x + offset, position->y + y, 0x72);
     position = asdTMTexTableEntryAt(0x39, 10);
     asdTextSetBaseColor(texts->thirdLabel, labelColor);
-    FUN_002598f0(texts->thirdLabel, position->position.x + x + offset, position->position.y + y, 0x72);
+    FUN_002598f0(texts->thirdLabel, position->x + x + offset, position->y + y, 0x72);
     offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.3f);
     position = asdTMTexTableEntryAt(0x39, 0x24);
     asdTextSetBaseColor(texts->centeredValue, valueColor);
     FUN_002598f0(texts->centeredValue,
-        x + position->position.x + (position->size->width - texts->centeredWidth) / 2 + offset,
-        y + position->position.y, 0x74);
+        x + position->x + (position->placement->width - texts->centeredWidth) / 2 + offset,
+        y + position->y, 0x74);
     position = asdTMTexTableEntryAt(0x39, 0x25);
     asdTextSetBaseColor(texts->rightAlignedValue, valueColor);
     FUN_002598f0(texts->rightAlignedValue,
-        x + position->size->width - texts->rightAlignedWidth + position->position.x + offset,
-        y + position->position.y, 0x74);
+        x + position->placement->width - texts->rightAlignedWidth + position->x + offset,
+        y + position->y, 0x74);
     position = asdTMTexTableEntryAt(0x39, 0x27);
     if (record->specialValue != 0) {
         textFormatBuffer(text, "%d", record->specialValue);
@@ -149,7 +148,7 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
         textFormatBuffer(text, "--");
     }
     drawSetColorFromRGBA8(valueColor);
-    FUN_002bdf94(0, x + offset + position->position.x, position->position.y + y, 0, 5, 0x74, text);
+    FUN_002bdf94(0, x + offset + position->x, position->y + y, 0, 5, 0x74, text);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
     renderStackPop(&g_titleScene->stackA);

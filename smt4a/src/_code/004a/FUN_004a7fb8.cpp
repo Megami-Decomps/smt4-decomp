@@ -22,12 +22,12 @@ void FUN_004a7fb8(HighlightedPanelTextView *panel, u32 textId, s32 entryIndex,
                   s32 alternateStyle, s32 highlighted, s32 fade, f32 scale)
 {
     const f32 opacity = static_cast<f32>(256 - fade) * (1.0f / 256.0f);
-    const PanelTextLayoutEntryPrefixA *base;
+    const TextureTableEntryIV *base;
     s32 offsetEntry;
     u32 style;
     u32 color;
     if (alternateStyle != 0) {
-        base = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(reinterpret_cast<TextLayoutContextA *>(panel->layout), entryIndex + 0x42F));
+        base = layoutFindTableEntry(reinterpret_cast<TextLayoutContextA *>(panel->layout), entryIndex + 0x42F);
         offsetEntry = 0x499;
         if (highlighted == 0)
             color = 0x9FE7FFFFu;
@@ -35,7 +35,7 @@ void FUN_004a7fb8(HighlightedPanelTextView *panel, u32 textId, s32 entryIndex,
             color = 0xF5FF9FFFu;
         style = 3;
     } else {
-        base = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(reinterpret_cast<TextLayoutContextA *>(panel->layout), entryIndex + 0x40E));
+        base = layoutFindTableEntry(reinterpret_cast<TextLayoutContextA *>(panel->layout), entryIndex + 0x40E);
         offsetEntry = 0x48B;
         style = 2;
         color = 0xFFFFFFFFu;
@@ -48,8 +48,8 @@ void FUN_004a7fb8(HighlightedPanelTextView *panel, u32 textId, s32 entryIndex,
     } else {
         textValue = DAT_0057f0ac.fallbackTextValue;
     }
-    const PanelTextLayoutEntryPrefixA *offset = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(
-        reinterpret_cast<TextLayoutContextA *>(panel->layout), offsetEntry));
+    const TextureTableEntryIV *offset = layoutFindTableEntry(
+        reinterpret_cast<TextLayoutContextA *>(panel->layout), offsetEntry);
     s32 y = static_cast<s32>(offset->y) + baseY;
     s32 x = static_cast<s32>(offset->x) + baseX;
     drawTextAtSnappedRectangle(reinterpret_cast<TextLayoutContextA *>(panel->layout),

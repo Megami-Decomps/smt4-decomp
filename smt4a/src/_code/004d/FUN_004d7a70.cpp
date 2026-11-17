@@ -54,12 +54,12 @@ u32 FUN_004d7a70(EventConditionSet *set, u32 kind, s32 unit, s32 dryRun)
                 BtlCombatantEntryA *entry = &battle->entries[unit];
                 switch (cond->test) {
                 case 1:
-                    if (outside != 0 || entry->id != cond->unitId) {
+                    if (outside != 0 || entry->data.id != cond->unitId) {
                         continue;
                     }
                     break;
                 case 2:
-                    if (outside == 0 || entry->id != cond->unitId) {
+                    if (outside == 0 || entry->data.id != cond->unitId) {
                         continue;
                     }
                     break;

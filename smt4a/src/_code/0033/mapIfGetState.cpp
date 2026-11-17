@@ -1,17 +1,12 @@
-#include "common.h"
+#include "map/MapIfGlobals.h"
 
 extern "C" {
 
-struct MapInterface {
-    /* 0x00 */ u8 unk00[0x1d];
-    /* 0x1d */ s8 state;
-};
-extern MapInterface *g_mapIf;
-
+/* Returns whether the map interface's dialog is open (0 without an interface). */
 s32 mapIfGetState(void)
 {
-    MapInterface *map = g_mapIf;
-    return map != NULL ? map->state : 0;
+    MapIfStateA *map = g_mapIf.state;
+    return map != NULL ? map->dialogOpen : 0;
 }
 
 } /* extern "C" */

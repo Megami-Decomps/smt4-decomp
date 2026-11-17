@@ -1,12 +1,7 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-
-typedef struct UiPos {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-} UiPos;
 
 typedef struct UiOrigin {
     /* 0x00 */ u8 unk00[4];
@@ -14,7 +9,6 @@ typedef struct UiOrigin {
     /* 0x08 */ s32 y;
 } UiOrigin;
 
-extern UiPos *asdTMTexTableEntryAt(int table, int index);
 extern int progressUnlockFindNthEarnedIndex(int slot);
 extern int gameDataToggleFlagIsSet(void);
 extern int texDrawCompositeSprite(int a, int b, int c, int x, int y, int d);
@@ -27,12 +21,12 @@ void uiSpawnSlotMarkers(UiOrigin *origin, int count, int firstSlot, int slotBase
     int originY = origin->y;
 
     for (i = 0; i < 11; i++) {
-        UiPos *slotPos = asdTMTexTableEntryAt(0x2E, i + 0xD1);
+        TextureTableEntryIV *slotPos = asdTMTexTableEntryAt(0x2E, i + 0xD1);
 
         if (count > i && i != skip && enabled == 1) {
             progressUnlockFindNthEarnedIndex(slotBase + (i + firstSlot));
             if (gameDataToggleFlagIsSet() != 0) {
-                UiPos *marker = asdTMTexTableEntryAt(0x14, 0x58E);
+                TextureTableEntryIV *marker = asdTMTexTableEntryAt(0x14, 0x58E);
 
                 texDrawCompositeSprite(2, 0x14, 7, slotPos->x + marker->x + originX, slotPos->y + marker->y + originY, 0xC);
             }

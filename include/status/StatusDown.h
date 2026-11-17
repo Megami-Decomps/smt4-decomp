@@ -1,132 +1,101 @@
-/* Status-screen state machines and owned UI work. */
+/* The status screen's work area (IV), kept by g_statusDown. Apocalypse's is status/StatusDownA.h. */
 #ifndef STATUS_STATUSDOWN_H
 #define STATUS_STATUSDOWN_H
 #include "common.h"
 #include "ui/GridNavigation.h"
+#include "status/StatusDownParts.h"
+#include "ui/UiSpriteState.h"
+#include "shard/W6_W6Match3_ScrollSelection.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 struct AsdText;
 
+/* Eight ids written as four words; the block starts two bytes past a word boundary. */
+__packed struct StatusDownIdWords {
+    u32 words[4];
+};
+
+/* The status screen's work area (IV), allocated by statusDownCreate and kept by g_statusDown. */
 typedef struct StatusDownState {
     /* 0x0000 */ u32 job;
-    /* 0x0004 */ u8 unk0004[0x24];
-    /* 0x0028 */ u8 timer[0x3D4];
-    /* 0x03FC */ u8 unk3FC;
-    /* 0x03FD */ u8 unk3FD[3];
-    /* 0x0400 */ s32 state;
-    /* 0x0404 */ s32 previousState;
-    /* 0x0408 */ u32 unk408;
-    /* 0x040C */ u32 unk40C;
-    /* 0x0410 */ u8 unk410;
+    /* 0x0004 */ u32 drawTask;
+    /* 0x0008 */ UiResourceParameters packet;
+    /* 0x0028 */ UiSpriteState sprites[7];  /* [0] slides the panels in and out (timerStart) */
+    /* 0x03FC */ u8 tab;                    /* current tab */
+    /* 0x03FD */ u8 previousTab;
+    /* 0x03FE */ u8 unk3FE[2];
+    /* 0x0400 */ StatusDownTrack track;
+    /* 0x0408 */ s32 nextState;             /* the state a transition leads to (per tab, after a skill selection) */
+    /* 0x040C */ s32 stateTimer;            /* frames in the current state */
+    /* 0x0410 */ u8 listActive;
     /* 0x0411 */ u8 unk411;
     /* 0x0412 */ u8 unk412;
-    /* 0x0413 */ u8 unk413[0x19];
-    /* 0x042C */ u8 slots[0x29];
+    /* 0x0413 */ u8 mode;                   /* skill-selection mode */
+    /* 0x0414 */ u8 unk414[0x10];
+    /* 0x0424 */ s32 indicatorFirst;
+    /* 0x0428 */ s32 indicatorSecond;
+    /* 0x042C */ u8 slots[0x29];            /* filled with 0xFF */
     /* 0x0455 */ u8 unk455[0x29];
-    /* 0x047E */ u16 unk47E;
+    /* 0x047E */ s16 selectedEntry;         /* negative when nothing is selected */
     /* 0x0480 */ u8 touchRegionCount;
     /* 0x0481 */ s8 unk481;
-    /* 0x0482 */ u8 unk482[0x52];
-    /* 0x04D4 */ u8 list[0x68];
-    /* 0x053C */ u32 unk53C;
+    /* 0x0482 */ u16 ids[16];               /* the listed skill ids (statusReplaceSkills) */
     union {
-        /* 0x0540 */ u8 unk540[0x1D60];
-        struct {
-            /* 0x0540 */ u8 prefix[0x8F0];
-            /* 0x0E30 */ u16 entries[0x500][2];
-            /* 0x2230 */ s16 count;
-            /* 0x2232 */ u16 ownedCount;
-            /* 0x2234 */ s16 column;
-            /* 0x2236 */ s16 row;
-            /* 0x2238 */ u32 unk2238;
-            /* 0x223C */ GridNavigation navigation;
-        } inventory;
+        /* 0x04A2 */ u16 selected[8];
+        /* 0x04A2 */ StatusDownIdWords selectedWords;  /* how FUN_0026a978 clears and fills them */
     };
-    /* 0x22A0 */ u32 memorySlot;
-    /* 0x22A4 */ u8 unk22A4[0xED];
+    /* 0x04B2 */ u16 pending[8];
+    /* 0x04C2 */ u8 scratch[16];            /* 1 marks a newly listed id */
+    /* 0x04D2 */ u8 unk4D2[2];
+    /* 0x04D4 */ ScrollSelection list;
+    /* 0x0538 */ u8 enabled;
+    /* 0x0539 */ u8 unk539[3];
+    /* 0x053C */ u32 unk53C;
+    /* 0x0540 */ u32 unk540;
+    /* 0x0544 */ s32 selection;             /* -1 when none */
+    /* 0x0548 */ u8 dirty;
+    /* 0x0549 */ u8 unk549[0xB];
+    /* 0x0554 */ u32 entryUnk00;            /* the selected entry's description record */
+    /* 0x0558 */ u32 entryUnk04;
+    /* 0x055C */ u32 entryUnk08;
+    /* 0x0560 */ u16 entryUnk0C;
+    /* 0x0562 */ u8 unk562[2];
+    /* 0x0564 */ u8 window[0x64];
+    /* 0x05C8 */ StatusDownFlaggedList flagged;
+    /* 0x0E30 */ StatusDownInventory inventory;
+    /* 0x22A0 */ AsdText *text;             /* the description text (asdTextCreate) */
+    /* 0x22A4 */ u8 unk22A4[4];
+    /* 0x22A8 */ GridNavigation grid;
+    /* 0x230C */ u8 selector[0x64];
+    union {
+        /* 0x2370 */ u16 skillIds[8];
+        /* 0x2370 */ u32 skillWords[4];      /* how statusOpenSkillSelection clears them */
+    };
+    /* 0x2380 */ u16 selectedId;
+    /* 0x2382 */ u8 unk2382[2];
+    /* 0x2384 */ u32 value;
+    /* 0x2388 */ s8 scrollState;            /* written by the scroll handler (uiScrollHandleActionsOrTouch) */
+    /* 0x2389 */ u8 unk2389[8];
     /* 0x2391 */ u8 unk2391;
-    /* 0x2392 */ u8 unk2392;
+    /* 0x2392 */ s8 panelEnabled;
+    /* 0x2393 */ u8 unk2393;
 } StatusDownState;
 
-/* A state with its predecessor. */
-typedef struct StatusDownTrack {
-    /* 0x00 */ u32 state;
-    /* 0x04 */ u32 previous;
-} StatusDownTrack;
+extern "C" StatusDownState *g_statusDown;
 
-typedef struct StatusDownStateA {
-    /* 0x0000 */ u8 unk0000[0xd4];
-    /* 0x00d4 */ f32 panelEffectSpeed;
-    /* 0x00d8 */ u8 unk00d8[0x114];
-    /* 0x01ec */ f32 accentEffectSpeed;
-    /* 0x01f0 */ u8 unk01f0[0x324];
-    /* 0x0514 */ u8 unk514;
-    /* 0x0515 */ u8 unk515[3];
-    /* 0x0518 */ StatusDownTrack track;
-    /* 0x0520 */ u32 unk520;
-    /* 0x0524 */ u32 timer;
-    /* 0x0528 */ u8 inventoryDirty;
-    /* 0x0529 */ u8 unk529;
-    /* 0x052a */ s8 active;
-    /* 0x052b */ u8 unk052b[0x19];
-    /* 0x0544 */ u8 slots[0x54];
-    /* 0x0598 */ u16 unk598;
-    /* 0x059A */ u8 touchRegionCount;
-    /* 0x059b */ s8 mode;
-    /* 0x059c */ u16 table59C[0x28];
-    /* 0x05EC */ u8 unk5EC[4];
-    /* 0x05F0 */ u8 unk5F0[0x64];
-    /* 0x0654 */ s32 unk654;
-    /* 0x0658 */ u8 unk658[4];
-    /* 0x065c */ s32 selection;       /* -1 when none */
-    /* 0x0660 */ union {
-        u8 unk0660[0x1e3c];
-        struct {
-            /* 0x0660 */ u8 unk0660[0x8e8];
-            union {
-                u8 entryData[0x1400]; /* 0x0f48 */
-                u16 entries[0x500][2]; /* demon ID, quantity */
-            };
-            s16 count;           /* 0x2348 */
-            /* 0x234A */ s16 ownedCount;
-            /* 0x234C */ s16 column;
-            /* 0x234E */ s16 row;
-            /* 0x2350 */ u32 unk2350;
-            u8 controller[0x148]; /* 0x2354 */
-        } inventory;
-        struct {
-            u8 prefix[0x1D58];
-            /* 0x23B8 */ AsdText *text;
-            u8 padding23BC[4];
-            /* 0x23C0 */ GridNavigation navigation;
-        } caption;
-    };
-    /* 0x249c */ u32 value249c;
-    /* 0x24a0 */ s8 state;
-    /* 0x24A1 */ u8 unk24A1[8];
-    /* 0x24A9 */ u8 unk24A9;
-    /* 0x24AA */ u8 unk24AA;
-    /* 0x24AB */ u8 unk24AB[0xD9];
-    /* 0x2584 */ u8 unk2584;
-    /* 0x2585 */ u8 unk2585[3];
-    /* 0x2588 */ u8 block2588[4];
-    /* 0x258C */ u8 unk258C[0xC];
-    /* 0x2598 */ u8 unk2598;
-} StatusDownStateA;
-
-
-
-/* Retail 32-bit layout invariants. */
-typedef char StatusDownStateSizeCheck[sizeof(StatusDownState) == 0x2394 ? 1 : -1];
-typedef char StatusDownStateASizeCheck[sizeof(StatusDownStateA) == 0x259C ? 1 : -1];
-typedef char StatusDownStateACaptionOffsetsCheck[
-    offsetof(StatusDownStateA, caption.text) == 0x23B8 &&
-    offsetof(StatusDownStateA, caption.navigation) == 0x23C0 &&
-    sizeof(StatusDownStateA) == 0x259C ? 1 : -1];
-typedef char StatusDownInventoryOffsetsCheck[
-    offsetof(StatusDownState, inventory.entries) == 0xE30 &&
+typedef char StatusDownStateLayoutCheck[
+    offsetof(StatusDownState, sprites) == 0x28 &&
+    offsetof(StatusDownState, track) == 0x400 &&
+    offsetof(StatusDownState, slots) == 0x42C &&
+    offsetof(StatusDownState, touchRegionCount) == 0x480 &&
+    offsetof(StatusDownState, list) == 0x4D4 &&
+    offsetof(StatusDownState, window) == 0x564 &&
+    offsetof(StatusDownState, flagged) == 0x5C8 &&
     offsetof(StatusDownState, inventory.count) == 0x2230 &&
-    offsetof(StatusDownState, inventory.column) == 0x2234 &&
-    offsetof(StatusDownState, inventory.row) == 0x2236 &&
     offsetof(StatusDownState, inventory.navigation) == 0x223C &&
+    offsetof(StatusDownState, text) == 0x22A0 &&
+    offsetof(StatusDownState, skillIds) == 0x2370 &&
+    offsetof(StatusDownState, value) == 0x2384 &&
+    offsetof(StatusDownState, panelEnabled) == 0x2392 &&
     sizeof(StatusDownState) == 0x2394 ? 1 : -1];
 
 #endif

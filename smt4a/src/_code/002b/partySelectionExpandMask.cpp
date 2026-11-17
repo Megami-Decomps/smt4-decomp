@@ -26,7 +26,7 @@ u32 partySelectionExpandMask(PartyMaskSelection *selection, u64 *mask, s64 *coun
     }
     *mask = 0;
     *count = 0;
-    SaveSlotTable *slots = gameGetSlotTable();
+    SaveSlotTableA *slots = gameGetSlotTable();
     if (selection->selection == 9999) {
         if (selection->selected[0]) {
             *mask += 1;

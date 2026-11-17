@@ -1,7 +1,7 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 void mapEplUpdateEntriesIfAny(void);
 void FUN_001f9f64(void);
 void MapMain_DrawMinimapIcons(void);

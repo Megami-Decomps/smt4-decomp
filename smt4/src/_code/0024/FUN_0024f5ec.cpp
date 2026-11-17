@@ -2,6 +2,7 @@
 #include "gfx/TiledIndexMesh.h"
 #include "camp/RenderCtx.h"
 #include "shard/W5_W5Match2_PlainData.h"
+#include "camp/RenderCtxTitle.h"
 
 struct TiledMeshRowDrawState {
     u32 data[4];
@@ -22,7 +23,6 @@ typedef char TiledMeshDrawOffsetsCheck[offsetof(TiledMeshDrawWork, flags) == 0x1
     offsetof(TiledMeshDrawWork, matrix) == 0x18 && offsetof(TiledMeshDrawWork, dirty) == 0x58 ? 1 : -1];
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 void camSetMatrixB(RenderCtx *context, const Matrix44 *matrix);
 void renderCtxSelectBlendPreset(u32 mode);
 s32 renderCtxPackPassFlags(u32 kind, u32 value);

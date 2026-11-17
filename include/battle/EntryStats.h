@@ -1,7 +1,7 @@
 #ifndef BATTLE_ENTRYSTATS_H
 #define BATTLE_ENTRYSTATS_H
 
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include <stddef.h>
 
 struct BtlEntryStats {

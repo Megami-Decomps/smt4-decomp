@@ -1,6 +1,7 @@
 /* NON_MATCHING: the preset symbols now match retail (g_asdGxPresets / DAT_004e3a0c); retail takes the rectangle in d0/d1, parks it in d8/d9 and stores it after the saved preset is read, the build keeps it in s0-s3. */
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 /* A rectangle passed in four float registers; it starts out as the unit rectangle. */
 struct TitleRect {
@@ -9,7 +10,6 @@ struct TitleRect {
 };
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 extern AsdGxDisplayBuffers DAT_004e3a0c; /* g_asdGxPresets.displays[1] */
 extern AsdGxDisplayBuffers *DAT_004e3b4c; /* g_asdGxPresets.selectedDisplay */
 void FUN_002c3a14(RenderCtx *scene);

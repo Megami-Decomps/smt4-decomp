@@ -16,8 +16,8 @@ u32 FUN_0030af6c(void)
     for (index = 0; index < 0x6D; index++) {
         BtlEntry *unit = &btlGetMainState()->entries[index];
 
-        if ((unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && unit->id == id
-            && unit->values[slot] >> 10 == 1) {
+        if ((unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && unit->data.id == id
+            && unit->data.values[slot] >> 10 == 1) {
             scrSetResult(1);
             return 1;
         }

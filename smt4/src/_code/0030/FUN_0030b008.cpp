@@ -1,7 +1,7 @@
 #include "battle/BtlMainAccess.h"
 #include "gamedata/NkmBaseRecord.h"
 #include "common.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "script/ScriptArgs.h"
 
@@ -16,7 +16,7 @@ u32 FUN_0030b008(void)
         BtlEntry *unit = &reinterpret_cast<BtlMainState *>(btlGetMainState())->entries[i];
 
         if ((unit->flags & 0x10) != 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0) {
-            if (nkmBaseGetRecord(unit->id)->category == 1) {
+            if (nkmBaseGetRecord(unit->data.id)->category == 1) {
                 scrSetResult(1);
                 return 1;
             }

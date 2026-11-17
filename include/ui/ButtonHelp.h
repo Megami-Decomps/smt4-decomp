@@ -157,6 +157,7 @@ typedef struct ButtonHelpGlobals {
     /* 0x04 */ ButtonHelpWork *work;
     /* 0x08 */ s32 mbm;
     /* 0x0C */ s32 bf;
+    /* 0x10 */ s32 pending;      /* the preset waiting for the active animations to finish (-1: none) */
 } ButtonHelpGlobals;
 typedef struct ButtonHelpGlobalsA {
     union {
@@ -164,14 +165,10 @@ typedef struct ButtonHelpGlobalsA {
         /* 0x00 */ s8 references;
     };
     /* 0x04 */ ButtonHelpWorkA *work;
+    /* 0x08 */ u8 unk08[8];
+    /* 0x10 */ s32 pending;      /* the preset waiting for the active animations to finish (-1: none) */
 } ButtonHelpGlobalsA;
 
-/* Apocalypse's g_buttonHelp followed by the preset waiting for the active animations to finish (-1: none). */
-struct ButtonHelpPresetGlobalsA {
-    ButtonHelpGlobalsA prefix;
-    /* 0x08 */ u8 unk08[8];
-    /* 0x10 */ s32 pending;
-};
 
 typedef struct ButtonHelpCompatibilityKind {
     /* 0x00 */ u8 kind;
@@ -194,11 +191,6 @@ struct ButtonHelpSelectionViewIV {
     /* 0x4B8 */ u8 active[6];
     /* 0x4BE */ u8 unk4BE[6];
 };
-/* g_buttonHelp followed by the preset waiting for the active animations to finish (-1: none). */
-struct ButtonHelpPresetGlobals {
-    ButtonHelpGlobals prefix;
-    /* 0x10 */ s32 pending;
-};
 struct ButtonHelpQueuedSelections {
     s32 kinds[6];
     s32 values[6];
@@ -215,8 +207,8 @@ typedef char ButtonHelpSelectionViewIVOffsetCheck[
 typedef char ButtonHelpDisplayUnitSizeCheck[sizeof(ButtonHelpDisplayUnit) == 0x8C ? 1 : -1];
 typedef char ButtonHelpWorkSizeCheck[sizeof(ButtonHelpWork) == 0x564 ? 1 : -1];
 typedef char ButtonHelpWorkASizeCheck[sizeof(ButtonHelpWorkA) == 0x684 ? 1 : -1];
-typedef char ButtonHelpGlobalsSizeCheck[sizeof(ButtonHelpGlobals) == 0x10 ? 1 : -1];
-typedef char ButtonHelpGlobalsASizeCheck[sizeof(ButtonHelpGlobalsA) == 0x8 ? 1 : -1];
+typedef char ButtonHelpGlobalsSizeCheck[sizeof(ButtonHelpGlobals) == 0x14 ? 1 : -1];
+typedef char ButtonHelpGlobalsASizeCheck[sizeof(ButtonHelpGlobalsA) == 0x14 ? 1 : -1];
 typedef char ButtonHelpJobOffsetCheck[__INTADDR__(&((ButtonHelpWorkA *)0)->job) == 0 ? 1 : -1];
 typedef char ButtonHelpReferencesOffsetCheck[__INTADDR__(&((ButtonHelpGlobalsA *)0)->references) == 0 ? 1 : -1];
 typedef char ButtonHelpTextOffsetsCheck[

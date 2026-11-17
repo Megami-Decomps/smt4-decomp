@@ -1,10 +1,9 @@
 /* NON_MATCHING: quantity/count increment registers, controller address scheduling and final cursor-clamp arithmetic differ from retail. */
-#include "status/StatusDown.h"
+#include "status/StatusDownA.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
 
 extern "C" {
-extern StatusDownStateA *g_statusDown;
 void sysMemClear(void *memory, u32 size);
 void gridNavigationConfigure(void *controller, s32 count, s32 rows, s32 columns, s32 arg4, s32 arg5);
 void scrollOwnerSelectIndex(void *controller, s32 column);
@@ -15,7 +14,7 @@ void statusDownRebuildOwnedDemonList(const u8 *quantities)
     StatusDownStateA *state = g_statusDown;
     state->inventory.count = 0;
     state->inventory.ownedCount = 0;
-    sysMemClear(state->inventory.entryData, sizeof(state->inventory.entryData));
+    sysMemClear(state->inventory.entries, sizeof(state->inventory.entries));
     for (u16 id = 0; id < 0x500; ++id) {
         const NkmBaseRecordA *record = nkmBaseGetRecord(id);
         if (record != NULL && (record->flags & 1) != 0 && quantities[record->id] != 0) {
@@ -28,7 +27,7 @@ void statusDownRebuildOwnedDemonList(const u8 *quantities)
             ++state->inventory.count;
         }
     }
-    void *controller = state->inventory.controller;
+    void *controller = &state->inventory.navigation;
     gridNavigationConfigure(controller, state->inventory.count, 9, 4, 1, 1);
     s32 count = state->inventory.count;
     if (count > 0 && count <= state->inventory.column + state->inventory.row * 4) {
@@ -42,6 +41,6 @@ void statusDownRebuildOwnedDemonList(const u8 *quantities)
         scrollOwnerSelectIndex(controller, state->inventory.column);
     }
     FUN_003d4104();
-    state->inventoryDirty = 1;
+    state->listActive = 1;
 }
 }

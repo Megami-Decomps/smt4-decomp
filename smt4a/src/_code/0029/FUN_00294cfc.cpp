@@ -4,6 +4,7 @@
 #include "code/Code0015.h"
 #include "code/Code002a_Smt4a.h"
 #include "gamedata/GamePlayerData.h"
+#include "map/PopupStateA.h"
 
 struct PopupEntry {
     /* 0x00 */ s32 id;
@@ -12,16 +13,6 @@ struct PopupEntry {
     /* 0x0A */ s16 excludeFlag;
     /* 0x0C */ s16 chance;
     /* 0x0E */ u8 unk0E[0x12];
-};
-
-struct PopupState {
-    /* 0x00 */ s32 state;
-    /* 0x04 */ s32 unk04;
-    /* 0x08 */ u8 unk08[0xC];
-    /* 0x14 */ void *record;
-    /* 0x18 */ s32 entryId;
-    /* 0x1C */ u8 unk1C[9];
-    /* 0x25 */ char text[0x80];
 };
 
 struct SaveSlotView {
@@ -52,7 +43,6 @@ struct HintRecord {
 #define HINT_TABLE 0x43
 
 extern "C" {
-extern PopupState *g_popupState;
 extern u32 DAT_005f18ec[HINT_RECENT_COUNT];   /* most recent first */
 extern u32 DAT_005f190c[HINT_KNOWN_COUNT];     /* ids already shown */
 
@@ -61,7 +51,7 @@ s32 gameFlagIsSet(s32 flag);
 s32 randRange(u32 maximum);
 HintCandidates *dataTable02GetRecordWithAocPackage(u32 owner);
 HintRecord *nkmEnemyFindById(u32 id);
-void *popupSelectWeightedMessage(s32 kind, u32 id);
+const char *popupSelectWeightedMessage(s32 kind, u32 id);
 void rt_memcpy(void *destination, const void *source, u32 size);
 const char *dataTable01GetRecordWithAocOverride(u32 id);
 void textFormatBuffer(char *out, const void *format, const char *argument);
@@ -123,15 +113,15 @@ void FUN_00294cfc(u32 owner)
         if (randRange(99) + 1 > entry->chance)
             continue;
 
-        PopupState *popup = g_popupState;
+        PopupStateA *popup = g_popupState;
         popup->state = HINT_POPUP_STATE;
-        popup->unk04 = 0;
-        void *record = popupSelectWeightedMessage(HINT_KIND, slot->id);
+        popup->timer = 0;
+        const char *message = popupSelectWeightedMessage(HINT_KIND, slot->id);
         popup = g_popupState;
-        popup->record = record;
-        popup->entryId = slot->id;
+        popup->message = message;
+        popup->speakerId = slot->id;
         u32 format[19];
-        rt_memcpy(format, record, 0x48);
+        rt_memcpy(format, message, 0x48);
         textFormatBuffer(g_popupState->text, format, dataTable01GetRecordWithAocOverride((u16)chosen));
 
         /* Move the id to the front of the recent list unless it is already there. */
@@ -149,7 +139,7 @@ void FUN_00294cfc(u32 owner)
                 DAT_005f18ec[shift] = DAT_005f18ec[shift - 1];
             DAT_005f18ec[0] = chosen;
         }
-        g_popupState->record = g_popupState->text;
+        g_popupState->message = g_popupState->text;
         return;
     }
 }

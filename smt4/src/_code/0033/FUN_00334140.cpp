@@ -1,6 +1,6 @@
 /* NON_MATCHING: arrangement entry indexing uses different registers and loaded-file handling is outlined differently. */
 #include "battle/BattleAssetWork.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "gamedata/NkmEnemyRecord.h"
 #include "AsdSDK/AsdMemUtil.h"
@@ -19,7 +19,7 @@ u32 FUN_00334140(BattleArrangementWork *work, BtlMainState *battle)
     s32 index = btlFindNthActiveSpecialEntry(battle, 1);
     if (index >= 0) {
         battle->battleMask |= 0x4000000;
-        const NkmEnemyRecord *record = nkmEnemyFindById(battle->entries[index].id);
+        const NkmEnemyRecord *record = nkmEnemyFindById(battle->entries[index].data.id);
         char path[128];
         memClear(path, sizeof(path));
         textFormatBuffer(path, DAT_00400918,

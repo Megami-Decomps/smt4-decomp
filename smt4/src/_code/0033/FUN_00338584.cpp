@@ -1,5 +1,5 @@
 /* NON_MATCHING: loop exit sharing, merged flag tests, HP division argument scheduling and chance clamp differ. */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "gamedata/NkmBaseRecord.h"
 #include "shard/W6_W6Match3_NameFormState.h"
@@ -24,16 +24,16 @@ u32 FUN_00338584(BtlMainState *state)
         if ((entry->flags & 1) && !(entry->flags & 0x40) && (entry->flags & 0x10)) {
             if (entry == NULL)
                 return 0;
-            NkmEnemyRecord *metadata = nkmEnemyFindById(entry->id);
+            NkmEnemyRecord *metadata = nkmEnemyFindById(entry->data.id);
             if (metadata->flags & 0x10)
                 return 0;
             if ((entry->flags & 0x100000) || (entry->flags & 0x10000000))
                 return 0;
             entry->flags |= 0x10000000;
-            if (entry->groupMask & 0x80)
+            if (entry->data.statusFlags & 0x80)
                 return 0;
             if (!(state->editorControl.flags & 0x200000)) {
-                if (entry->hp * 100 / entry->maxHp >= 20)
+                if (entry->data.hp * 100 / entry->data.maxHp >= 20)
                     return 0;
                 PlayerDataIV *player = gameGetPlayerData();
                 s32 chance = ((u32(player->level) + u32(metadata->level)) >> 1) + 5;

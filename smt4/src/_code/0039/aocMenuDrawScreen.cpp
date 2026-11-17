@@ -2,11 +2,11 @@
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 #include "classes/AocMenu.h"
+#include "camp/RenderCtxTitle.h"
 
 
 extern "C" {
 
-extern RenderCtx* g_titleScene;
 
 void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 speed);

@@ -3,6 +3,7 @@
 #include "network/DataStore/DataStoreMain.h"
 #include "code/Code002c.h"
 #include "shard/Shard004A.h"
+#include "gamedata/GamePlayerData.h"
 
 /* The selection screen work (accessed fields). */
 struct SelectScreen {
@@ -61,7 +62,6 @@ void FUN_0041e7c0(SelectScreen *screen);
 void FUN_0041e9d4(SelectScreen *screen);
 void FUN_0041fc24(SelectScreen *screen);
 void __aeabi_memcpy4(void *dest, const void *src, u32 size);
-void *gameGetPlayerData(void);
 }
 
 extern "C" void FUN_0041f22c(SelectScreen *screen)

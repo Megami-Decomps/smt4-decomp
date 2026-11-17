@@ -4,6 +4,7 @@
 #include "event/2dEvent/2dEventTex.h"
 #include "addon/LookupRecord.h"
 #include "code/Code0033.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -29,7 +30,6 @@ int FUN_003d4104(void);
 int qsort(...);
 int FUN_0015f490(...);
 int eventQueueAddUnique(...);
-int asdTMTexTableEntryAt(...);
 int useCounterStart(void);
 int resourceRunOperationIfUnblocked(...);
 int listCursorGetRowIfUnblocked(...);
@@ -905,7 +905,7 @@ joined_r0x002694c0:
         eventQueueAddUniqueIfValid(temp_v7);
         break;
       }
-      temp_v7 = asdTMTexTableEntryAt(0x12,0x406);
+      temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x406));
       temp_v9 = temp_v2 + 0xee4;
       temp_v6 = temp_v9;
       FUN_003450d4(temp_v9,temp_v7,temp_v2 + 0x544,(int)*(short *)(temp_v2 + 0x58c),
@@ -984,7 +984,7 @@ joined_r0x002694c0:
       temp_v6 = resourceRunOperationIfUnblocked();
       temp_v14 = listCursorGetRowIfUnblocked(temp_v9);
       temp_v8 = listCursorGetRowOfChildIfUnblocked(temp_v9);
-      temp_v10 = asdTMTexTableEntryAt(0x12,0x406);
+      temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x406));
       temp_v7 = *(unsigned int *)(temp_v10 + 8);
       temp_v12 = **(unsigned int **)(temp_v10 + 0xc);
       if (((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v10 = FUN_00230544(), temp_v10 != 0)) &&
@@ -1146,7 +1146,7 @@ LAB_00269f7c:
         *(unsigned char *)(temp_v2 + 0x59b) = temp_v3;
         break;
       }
-      temp_v7 = asdTMTexTableEntryAt(0x12,0x48c);
+      temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x48c));
       temp_v14 = temp_v2 + 0x23c0;
       FUN_003450d4(temp_v14,temp_v7,0,(int)*(short *)(temp_v2 + 0x58c),(int)*(short *)(temp_v2 + 0x58e),
                    (int)*(short *)(temp_v2 + 0x590),temp_v2 + 0x24a0,0,0);

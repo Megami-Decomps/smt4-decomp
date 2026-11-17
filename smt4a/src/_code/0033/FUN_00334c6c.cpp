@@ -1,20 +1,9 @@
 /* NON_MATCHING: recovered animation speed getters; alternate flag, owner and sprite-ID saved registers remain permuted. */
-#include "status/StatusDown.h"
+#include "status/StatusDownA.h"
 #include "shard/TextureDrawCall.h"
 #include "ui/UiSpriteState.h"
 
-struct StatusPanelAnimationsView {
-    u8 prefix[0xB4];
-    UiSpriteState background;
-    UiSpriteState middle;
-    UiSpriteState accent;
-};
-typedef char StatusPanelAnimationOffsets[
-    offsetof(StatusPanelAnimationsView, background) == 0xB4 &&
-    offsetof(StatusPanelAnimationsView, accent) == 0x1CC ? 1 : -1];
-
 extern "C" {
-extern StatusDownStateA *g_statusDown;
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *animation);
 
@@ -22,8 +11,7 @@ f32 vec2GetSpeed(const void *animation);
 void FUN_00334c6c(s32 x, s32 y, s32 alternate)
 {
     StatusDownStateA *work = g_statusDown;
-    StatusPanelAnimationsView *animations = reinterpret_cast<StatusPanelAnimationsView *>(work);
-    efctSetSpeed(vec2GetSpeed(&animations->background));
+    efctSetSpeed(vec2GetSpeed(&work->sprites[1]));
     for (s32 index = 0; index < 3; ++index)
         texDrawTableEntryAtStoredOrigin(2, 0x12, index + 0x57E, x, y, 0xBF);
     efctSetSpeed(1.0f);
@@ -48,7 +36,7 @@ void FUN_00334c6c(s32 x, s32 y, s32 alternate)
     texDrawTableEntryAtStoredOrigin(2, 0x12, topRight, x, y, 0xC1);
     texDrawTableEntryAtStoredOrigin(2, 0x12, middleLeft, x, y, 0xC2);
     texDrawTableEntryAtStoredOrigin(2, 0x12, middleRight, x, y, 0xC2);
-    efctSetSpeed(vec2GetSpeed(&animations->accent));
+    efctSetSpeed(vec2GetSpeed(&work->sprites[3]));
     texDrawTableEntryAtStoredOrigin(2, 0x12, bottomLeft, x, y, 0xC4);
     texDrawTableEntryAtStoredOrigin(2, 0x12, bottomRight, x, y, 0xC4);
     efctSetSpeed(1.0f);

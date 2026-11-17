@@ -1,13 +1,11 @@
 #include "shard/HealingSceneWork.h"
+#include "Model/MoriModelManager.h"
 
 extern "C" {
-extern void *g_handleRegistry;
 void asdMemFree(void *block);
 void scrScriptProcessDestroy(ScriptProcess *script);
 void placeWinRelease(void);
 void asdCameraInitAreas(void);
-void ptrListRemoveClearOwner(void *registry, void *object);
-void resourceOwnerReleaseAndReset(void *registry);
 void mapReleaseTableTexture(void);
 void frameTexturesRelease(void);
 void campCommonBgRelease(void);

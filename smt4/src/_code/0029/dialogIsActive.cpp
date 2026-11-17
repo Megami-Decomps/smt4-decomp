@@ -1,14 +1,9 @@
-#include "common.h"
+#include "font/InfoWin.h"
 #include "ui/UiControl.h"
 
 extern "C" {
 
-typedef struct Obj {
-    /* 0x0 */ u8 unk0[8];
-    /* 0x8 */ s32 state;
-} Obj;
 
-extern Obj *g_infoWin;
 
 /* 1 for states 1-4. */
 u32 dialogIsActive(void)

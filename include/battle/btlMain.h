@@ -683,6 +683,13 @@ typedef struct BtlMainGlobalsA {
             u8 unk28[0x30];
             /* 0x58 */ u64 required;
         } combatantMasks;
+        struct {
+            /* 0x28 */ void *files[10];  /* the resident battle files (FUN_003f0794) */
+        } resident;
+        struct {
+            u8 unk28[0x28];
+            /* 0x50 */ s32 forcedUnitId; /* the unit the initial party forces (FUN_003e854c) */
+        } initialParty;
     };
     /* 0x60 */ u64 actorCategories[4];
     /* 0x80 */ u64 exclusionMask;

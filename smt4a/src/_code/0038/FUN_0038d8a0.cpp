@@ -23,9 +23,9 @@ u32 FUN_0038d8a0(void)
     BtlCombatantEntryA *combatant = btlMainFindEntryByListedId(btlGetMainState(), skillId);
     btlSlotManagerResetStates(btlGetMainState());
     BtlMainStateA *battle = btlGetMainState();
-    BattleRosterRecordA *record = &battle->roster[combatant->unitIndex];
+    BattleRosterRecordA *record = &battle->roster[combatant->ids[0]];
     FUN_004fc094(0, unit, 0, record,
-        0, effectValue, 0xFFFFFFFF, 0xFFFFFFFF, combatant->hp, combatant->maxHp,
+        0, effectValue, 0xFFFFFFFF, 0xFFFFFFFF, combatant->data.hp, combatant->data.maxHp,
         0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1);
     btlQueueActionMessage(0, unit, 0x01000223, 0, 0, 0, 0);
     return 1;

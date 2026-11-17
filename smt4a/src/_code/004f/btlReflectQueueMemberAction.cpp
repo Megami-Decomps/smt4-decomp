@@ -1,5 +1,7 @@
 #include "battle/btlReflect.h"
+#include "battle/BtlEntryLookup.h"
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlEntryLookup.h"
 
 /* The combatant fields the kind-47 reflect action reads. */
 struct ReflectSubject {
@@ -9,16 +11,8 @@ struct ReflectSubject {
     /* 0x6A */ s16 group;
 };
 
-/* A subject group's id table. */
-struct ReflectSubjectGroup {
-    /* 0x00 */ u8 unk00[0xc];
-    /* 0x0C */ u32 ids[1];
-};
-
 extern "C" {
 
-
-ReflectSubjectGroup *btlFindEntryBlockByMemberId(void *state, s16 group);
 s32 idSetFindSubjectIndex(void *state, ReflectSubject *subject);
 
 /* Queues a kind-47 reflect action on an active subject unless one with the same options is queued. */
@@ -34,7 +28,7 @@ ReflectAction *btlReflectQueueMemberAction(s32 actor, u32 options, ReflectSubjec
             return NULL;
     }
     ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, options);
-    ReflectSubjectGroup *group = btlFindEntryBlockByMemberId(btlGetMainState(), subject->group);
+    BtlUnitDataA *group = btlFindEntryBlockByMemberId(btlGetMainState(), subject->group);
     s32 index = idSetFindSubjectIndex(btlGetMainState(), subject);
     if (index < 0) {
         index = 0;
@@ -42,7 +36,7 @@ ReflectAction *btlReflectQueueMemberAction(s32 actor, u32 options, ReflectSubjec
     action->kind = 47;
     action->target = reinterpret_cast<u32>(subject);
     action->value = value;
-    action->first = group->ids[index];
+    action->first = group->parts[index];
     return action;
 }
 

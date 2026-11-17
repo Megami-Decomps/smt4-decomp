@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "util/BitsAndBytes.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
 int renderCtxSelectTexture(int, unsigned int);
 int texTableRecordCallWithParams(...);
-int asdTMTexTableEntryAt(...);
 int effectSubmitDefaultVectors(int, int);
 int sysMemClear(...);
 int FUN_00473754(...);
@@ -87,7 +87,7 @@ void FUN_00479b6c(int param_1,int param_2,int param_3,int param_4)
   iStack_30 = param_2;
   iStack_2c = param_3;
   temp_v15 = param_4;
-  temp_v3 = asdTMTexTableEntryAt(0x2f,param_2 + 0x88);
+  temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2f,param_2 + 0x88));
   temp_v5 = g_aocMain;
   temp_v9 = (int)*(short *)(temp_v3 + 8);
   temp_v8 = (int)*(short *)(temp_v3 + 10);
@@ -97,11 +97,11 @@ void FUN_00479b6c(int param_1,int param_2,int param_3,int param_4)
     sysMemClear(temp_v11,0x100);
     texDrawCompositeSprite(2,0x2f,8,temp_v9,temp_v8,0x81);
     if (*(char *)(temp_v3 + 0x9b3) != '\0') {
-      temp_v4 = asdTMTexTableEntryAt(0x2f,0x5f);
+      temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2f,0x5f));
       texTableRecordCallWithParams(2,0x2f,2000,temp_v9 + *(short *)(temp_v4 + 8),*(short *)(temp_v4 + 10) + temp_v8,0x81);
     }
     else {
-      temp_v4 = asdTMTexTableEntryAt(0x2f,0x5f);
+      temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2f,0x5f));
       temp_v1 = *(short *)(temp_v4 + 8);
       temp_v2 = *(short *)(temp_v4 + 10);
       renderCtxSelectTexture(g_renderCtx,*(unsigned int *)(temp_v3 + 0x9c4));
@@ -122,14 +122,14 @@ void FUN_00479b6c(int param_1,int param_2,int param_3,int param_4)
     }
     temp_v13 = 0xffffffff;
     if (*(char *)(temp_v3 + 0x9b3) != '\0') {
-      temp_v4 = asdTMTexTableEntryAt(0x2f,0x61);
+      temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2f,0x61));
       texTableRecordCallWithParams(2,0xb,0x41f,temp_v9 + *(short *)(temp_v4 + 8),*(short *)(temp_v4 + 10) + temp_v8,0x81);
     }
     else {
-      temp_v4 = asdTMTexTableEntryAt(0x2f,0x61);
+      temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2f,0x61));
       texTableRecordCallWithParams(2,0xb,0x41a,temp_v9 + *(short *)(temp_v4 + 8),*(short *)(temp_v4 + 10) + temp_v8,0x81);
     }
-    temp_v4 = asdTMTexTableEntryAt(0x2f,0x62);
+    temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2f,0x62));
     VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(3,temp_v13,temp_v11);
@@ -192,7 +192,7 @@ void FUN_00479b6c(int param_1,int param_2,int param_3,int param_4)
           textFormatBuffer(temp_v11,"%ls%s%ls",temp_v5 + 0x5b8,temp_v12,temp_v5 + 0x5f8);
         }
         temp_v5 = curveEvaluateStandard(temp_v11,2);
-        temp_v4 = asdTMTexTableEntryAt(0x2f,0x68);
+        temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2f,0x68));
         temp_v5 = ((int)**(short **)(temp_v4 + 0xc) + (int)*(short *)(temp_v4 + 8) + temp_v9) - temp_v5;
         VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);

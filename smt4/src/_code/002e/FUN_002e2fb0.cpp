@@ -1,9 +1,8 @@
 /* NON_MATCHING: list initialization and newly-added-ID marking are recovered; saved registers and the initial nonzero-prefix loop's GT/LE versus NE/EQ predicates differ. */
 #include <string.h>
-#include "shard/W6_W6Match3_ScrollSelection.h"
+#include "status/StatusDown.h"
 
 extern "C" {
-extern StatusDownListIV *g_statusDown;
 void rt_memcpy(void *destination, const void *source, u32 size);
 void gridNavigationConfigure(ScrollSelection *selection, u32 count, u32 visible, u32 option, u32 first, u32 second);
 }
@@ -13,7 +12,7 @@ extern "C" void FUN_002e2fb0(const u16 *ids, u32 count)
 {
     if (count > 16)
         return;
-    StatusDownListIV *work = g_statusDown;
+    StatusDownState *work = g_statusDown;
     u16 previous[8];
     memcpy(previous, work->ids, sizeof(previous));
     memset(work->scratch, 0, sizeof(work->scratch));
@@ -24,8 +23,8 @@ extern "C" void FUN_002e2fb0(const u16 *ids, u32 count)
         if (work->ids[used] == 0)
             break;
     }
-    gridNavigationConfigure(&work->selection, used, 8, 1, 0, 1);
-    work->active = 1;
+    gridNavigationConfigure(&work->list, used, 8, 1, 0, 1);
+    work->listActive = 1;
     work->dirty = 0;
     for (s32 index = 0; index < (s32)count; ++index) {
         u16 id = work->ids[index];

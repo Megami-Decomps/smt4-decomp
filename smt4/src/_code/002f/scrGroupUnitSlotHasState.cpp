@@ -27,7 +27,7 @@ u32 scrGroupUnitSlotHasState(void)
         do {
             unit = &btlGetMainState()->entries[i];
             if (((((unit->flags & 0x10) == 0) && ((unit->flags & 1) != 0)) && ((unit->flags & 0x40) == 0)) &&
-                (unit->values[slot] >> 10 == 3)) {
+                (unit->data.values[slot] >> 10 == 3)) {
                 scrSetResult(1);
                 return 1;
             }
@@ -37,7 +37,7 @@ u32 scrGroupUnitSlotHasState(void)
     if (btlGetMainState()->hasActiveEntry != 0) {
         btlGetMainState();
         extra = btlMainFindActiveEntry();
-        if ((extra != NULL) && (extra->values[slot] >> 10 == 3)) {
+        if ((extra != NULL) && (extra->data.values[slot] >> 10 == 3)) {
             scrSetResult(1);
             return 1;
         }

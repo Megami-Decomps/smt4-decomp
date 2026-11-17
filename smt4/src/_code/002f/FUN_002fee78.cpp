@@ -1,6 +1,6 @@
 #include "common.h"
 #include "battle/BtlMainAccess.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "script/ScriptArgs.h"
 
@@ -31,7 +31,7 @@ s32 FUN_002fee78(void)
         BtlEntry *entry = &btlGetMainState()->entries[i];
 
         if ((entry->flags & 0x10) != 0 && (entry->flags & 1) != 0 && (entry->flags & 0x40) == 0
-            && entry->id == id && entry->stat[index] == value) {
+            && entry->data.id == id && entry->stat[index] == value) {
             scrSetResult(1);
             return 1;
         }

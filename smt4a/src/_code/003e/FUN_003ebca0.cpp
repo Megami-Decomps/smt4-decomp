@@ -28,7 +28,7 @@ bool FUN_003ebca0(const BtlMainStateA *state)
             return true;
         } else {
             if (kind != 4 ||
-                !(state->entries[work->conditions[index].unitIndex].statusFlags & 0x11c0)) {
+                !(state->entries[work->conditions[index].unitIndex].data.statusFlags & 0x11c0)) {
                 return true;
             }
         }

@@ -5,14 +5,8 @@
 #include "gamedata/DataTable.h"
 #include "gamedata/PlayerDataBlock.h"
 #include "gamedata/SaveSlotTable.h"
+#include "map/PopupStateA.h"
 
-struct PopupState {
-    u32 state;
-    u32 timer;
-    u8 unk08[0xC];
-    u32 handle;
-    u32 slotId;
-};
 
 struct GiftEntry {
     u32 slotId;
@@ -23,11 +17,10 @@ struct GiftEntry {
 };
 
 extern "C" {
-extern PopupState *g_popupState;
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(s32 maximum);
 s32 FUN_00480c28(void);
-u32 popupSelectWeightedMessage(u32 kind);
+const char *popupSelectWeightedMessage(u32 kind);
 
 /* Number of entries in the gift table. */
 static __inline u32 giftTableCount(void)
@@ -91,8 +84,8 @@ void FUN_00246128(void)
                 (entry->forbiddenFlag == 0 || gameFlagIsSet(entry->forbiddenFlag) == 0) &&
                 g_gameState.giftCounter == 0) {
                 g_gameState.giftCounter = 1;
-                g_popupState->slotId = slot->id;
-                g_popupState->handle = popupSelectWeightedMessage(0x12);
+                g_popupState->speakerId = slot->id;
+                g_popupState->message = popupSelectWeightedMessage(0x12);
                 g_popupState->state = 0x11;
                 g_popupState->timer = 0;
                 return;

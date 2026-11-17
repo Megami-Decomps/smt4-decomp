@@ -1,28 +1,6 @@
 /* NON_MATCHING: scale arithmetic scheduling, short-circuit guards and visibility accessor differ; -O2 candidate. */
-#include "common.h"
+#include "frame_tex/FrameTexA.h"
 
-struct PanelSprite {
-    u8 unk00[0x8a];
-    s8 visible; // 0x8a
-    u8 unk8b;
-};
-struct AnimatedPanel {
-    u8 unk00[0x1c];
-    u8 active; // 0x1c
-    u8 unk1d[3];
-    u32 frames; // 0x20
-    u8 shrinking; // 0x24
-    u8 unk25[3];
-    f32 scaleX; // 0x28
-    f32 scaleY; // 0x2c
-    f32 duration; // 0x30
-    u8 unk34[0x20];
-    PanelSprite sprites[28]; // 0x54
-    u8 unkfa4[0x9c];
-    u8 enabled; // 0x1040
-    u8 unk1041[2];
-    u8 ready; // 0x1043
-};
 static __inline s32 scaleBits(f32 scale)
 {
     union { f32 value; s32 bits; } representation;
@@ -35,49 +13,48 @@ static const s32 kExpandedXBits = 0x3ec28f5c;
 static const s32 kExpandedYBits = 0x3eb851ec;
 
 extern "C" {
-AnimatedPanel *jobGetWork();
-void uiSpriteAdvanceAnimation(PanelSprite *, f32);
-void FUN_001536e4(AnimatedPanel *);
+void uiSpriteAdvanceAnimation(UiSpriteState *, f32);
+void FUN_001536e4(FrameTexWorkA *);
 void FUN_0014aa9c(s32);
 
-// Animate the panel toward its expanded or contracted scale.
-u8 panelUpdateAnimatedScale()
+// "CAMPDL" draw: animates the CAMP panel toward its expanded or contracted scale and draws it.
+u8 panelUpdateAnimatedScale(u32 job)
 {
-    AnimatedPanel *panel = jobGetWork();
-    if (panel->enabled && panel->ready && panel->active) {
-        if (panel->shrinking) {
-            ++panel->frames;
-            f32 x = panel->scaleX;
+    FrameTexWorkA *panel = (FrameTexWorkA *)jobGetWork(job);
+    if (panel->campEnabled && panel->campCapturedLeft && panel->campActive) {
+        if (panel->campClosing) {
+            ++panel->campFrame;
+            f32 x = panel->campWidthScale;
             if (scaleBits(x) > kContractedScaleBits) {
-                x -= 0.13f / panel->duration;
-                panel->scaleX = x;
+                x -= 0.13f / panel->campSpeed;
+                panel->campWidthScale = x;
             }
-            panel->scaleX = scaleBits(x) > kContractedScaleBits ? x : 0.25f;
-            f32 y = panel->scaleY;
+            panel->campWidthScale = scaleBits(x) > kContractedScaleBits ? x : 0.25f;
+            f32 y = panel->campHeightScale;
             if (scaleBits(y) > kContractedScaleBits) {
-                y -= 0.110000014f / panel->duration;
-                panel->scaleY = y;
+                y -= 0.110000014f / panel->campSpeed;
+                panel->campHeightScale = y;
             }
-            panel->scaleY = scaleBits(y) > kContractedScaleBits ? y : 0.25f;
+            panel->campHeightScale = scaleBits(y) > kContractedScaleBits ? y : 0.25f;
             for (s32 i = 0; i < 24; ++i)
-                uiSpriteAdvanceAnimation(&panel->sprites[i], 1.0f);
-            uiSpriteAdvanceAnimation(&panel->sprites[26], 1.0f);
-            uiSpriteAdvanceAnimation(&panel->sprites[27], 1.0f);
-            if (panel->sprites[27].visible)
-                uiSpriteAdvanceAnimation(&panel->sprites[24], 1.0f);
+                uiSpriteAdvanceAnimation(&panel->campItems[i], 1.0f);
+            uiSpriteAdvanceAnimation(&panel->campWidgets[2], 1.0f);
+            uiSpriteAdvanceAnimation(&panel->campWidgets[3], 1.0f);
+            if (panel->campWidgets[3].animationFlags.completed)
+                uiSpriteAdvanceAnimation(&panel->campWidgets[0], 1.0f);
         } else {
-            f32 x = panel->scaleX;
+            f32 x = panel->campWidthScale;
             if (scaleBits(x) < kExpandedXBits) {
-                x = 0.13f / panel->duration + x;
-                panel->scaleX = x;
+                x = 0.13f / panel->campSpeed + x;
+                panel->campWidthScale = x;
             }
-            panel->scaleX = scaleBits(x) <= kExpandedXBits ? x : 0.38f;
-            f32 y = panel->scaleY;
+            panel->campWidthScale = scaleBits(x) <= kExpandedXBits ? x : 0.38f;
+            f32 y = panel->campHeightScale;
             if (scaleBits(y) < kExpandedYBits) {
-                y = 0.110000014f / panel->duration + y;
-                panel->scaleY = y;
+                y = 0.110000014f / panel->campSpeed + y;
+                panel->campHeightScale = y;
             }
-            panel->scaleY = scaleBits(y) > kExpandedYBits ? 0.36f : y;
+            panel->campHeightScale = scaleBits(y) > kExpandedYBits ? 0.36f : y;
             FUN_001536e4(panel);
         }
         FUN_0014aa9c(1);

@@ -1,28 +1,15 @@
-#include "status/StatusDown.h"
-#include "shard/W6_W6Match3_ScrollSelection.h"
-
-static inline GridNavigation *statusDownGetList(StatusDownStateA *status)
-{
-    return reinterpret_cast<GridNavigation *>(status->unk5EC);
-}
+#include "status/StatusDownA.h"
 
 static inline ScrollSelection *statusDownGetSelectionList(StatusDownStateA *status)
 {
-    return reinterpret_cast<ScrollSelection *>(status->unk5EC);
+    return &status->list;
 }
-
-typedef char StatusListViewOffsetsCheck[
-    offsetof(StatusDownStateA, unk5EC) == 0x5EC &&
-    offsetof(StatusDownStateA, unk658) == 0x658 &&
-    sizeof(GridNavigation) <= 0x68 && sizeof(ScrollSelection) <= 0x68 ? 1 : -1];
 
 extern "C" {
 
-extern StatusDownStateA *g_statusDown;
-
 extern void ifTouchRegionRemove(void);
 extern void __aeabi_memset4(void *dst, int size, u32 value);
-extern void gridNavigationConfigure(GridNavigation *list, s32 count, s32 visible, s32 columns, s32 wrap, s32 alternateKeys);
+extern void gridNavigationConfigure(ScrollSelection *list, s32 count, s32 visible, s32 columns, s32 wrap, s32 alternateKeys);
 extern void FUN_00230d30(void);
 extern void scrollListSetSelectionTracked(ScrollSelection *list, s32 index);
 extern s32 objectApplyIfUnblocked(ScrollSelection *list);
@@ -34,10 +21,10 @@ void statusDownOpenList(u32 argA, u32 argB)
     u32 previous;
 
     status->selection = argA;
-    *reinterpret_cast<u32 *>(status->unk658) = argB;
-    gridNavigationConfigure(statusDownGetList(status), objectApplyIfUnblocked(statusDownGetSelectionList(status)) + 1, 9, 1, 0, 1);
+    status->unk658 = argB;
+    gridNavigationConfigure(statusDownGetSelectionList(status), objectApplyIfUnblocked(statusDownGetSelectionList(status)) + 1, 9, 1, 0, 1);
     scrollListSetSelectionTracked(statusDownGetSelectionList(status), objectApplyIfUnblocked(statusDownGetSelectionList(status)) - 1);
-    status->inventoryDirty = 1;
+    status->listActive = 1;
     status = g_statusDown;
     for (int i = 0; i < status->touchRegionCount; i++) {
         ifTouchRegionRemove();
@@ -45,7 +32,7 @@ void statusDownOpenList(u32 argA, u32 argB)
     status->touchRegionCount = 0;
     __aeabi_memset4(status->slots, 0x54, 0xFFFFFFFF);
     status = g_statusDown;
-    status->timer = 0;
+    status->stateTimer = 0;
     previous = status->track.state;
     status->track.state = 0xE;
     status->track.previous = previous;

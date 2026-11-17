@@ -1,5 +1,5 @@
 #include "gamedata/PartySortRecord.h"
-#include "shard/W6_W6Match1_PartySlot.h"
+#include "gamedata/GameSaveDataA.h"
 #include "code/Code0019.h"
 #include "gamedata/SaveSlotTable.h"
 

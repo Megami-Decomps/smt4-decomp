@@ -2,10 +2,10 @@
 #include "common.h"
 #include "code/Code0015.h"
 #include "gamedata/SaveSlotTable.h"
+#include "map/PopupStateA.h"
 struct PopupSubstitutionNames { const char *names[12]; };
 struct PopupSelectedUnit { u8 prefix[0x12C]; u16 id; };
 extern "C" {
-extern void *g_popupState;
 extern PopupSubstitutionNames DAT_00531a98;
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(u32 maximum);
@@ -16,19 +16,8 @@ s32 textFormatBuffer(char *destination, const char *format, ...);
 /* Request a context popup for the selected unit, substituting the action's label. */
 u32 FUN_00234528(s32 action, s32 count)
 {
-    /* Formatting state follows the shared popup prefix. */
-    struct PopupFormattingView {
-        s32 state;
-        s32 phase;
-        u8 unk08[0xC];
-        const char *message;
-        s32 selectedId;
-        void *selectedData;
-        u8 unk20[5];
-        char formatted[1];
-    };
     FUN_00152f44();
-    PopupFormattingView *work = static_cast<PopupFormattingView *>(g_popupState);
+    PopupStateA *work = g_popupState;
     if (work->state != 0)
         return 0;
     PopupSelectedUnit *unit = reinterpret_cast<PopupSelectedUnit *>(saveSlotFindSelected());
@@ -42,18 +31,18 @@ u32 FUN_00234528(s32 action, s32 count)
     PopupSubstitutionNames labels = DAT_00531a98;
     if (action == 11)
         category = 23;
-    work = static_cast<PopupFormattingView *>(g_popupState);
+    work = g_popupState;
     work->state = 8;
-    work->phase = 0;
+    work->timer = 0;
     const char *message = popupSelectWeightedMessage(category, unit->id);
-    work = static_cast<PopupFormattingView *>(g_popupState);
+    work = g_popupState;
     work->message = message;
-    work->selectedId = unit->id;
+    work->speakerId = unit->id;
     char format[84];
     rt_memcpy(format, message, 72);
-    textFormatBuffer(work->formatted, format, labels.names[action]);
-    work = static_cast<PopupFormattingView *>(g_popupState);
-    work->message = work->formatted;
+    textFormatBuffer(work->text, format, labels.names[action]);
+    work = g_popupState;
+    work->message = work->text;
     return 1;
 }
 }

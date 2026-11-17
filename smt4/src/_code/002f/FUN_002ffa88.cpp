@@ -18,15 +18,15 @@ u32 FUN_002ffa88()
     btlSideGetEntryRange(group, &first, &count);
     for (s32 i = first; i < first + count; ++i) {
         BtlEntry *unit = &btlGetMainState()->entries[i];
-        if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && unit->id == groupId &&
-            (unit->values[status] >> 10) == 2) {
+        if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && unit->data.id == groupId &&
+            (unit->data.values[status] >> 10) == 2) {
             scrSetResult(1);
             return 1;
         }
     }
     if (btlGetMainState()->hasActiveEntry) {
         BtlEntry *unit = btlMainFindActiveEntry(btlGetMainState());
-        if (unit != NULL && unit->id == groupId && (unit->values[status] >> 10) == 2) {
+        if (unit != NULL && unit->data.id == groupId && (unit->data.values[status] >> 10) == 2) {
             scrSetResult(1);
             return 1;
         }

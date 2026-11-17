@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "game/GameState.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ int textFormatBuffer(...);
 int dataFindKindRecordWithAocOverrides(...);
 int gxResetColorQuadToWhite(void);
 int texDrawCompositeSprite(...);
-int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int renderCtxSelectStereoLayout(int);
 int VectorSignedToFloat(...);
@@ -98,7 +98,7 @@ unsigned int FUN_002ca09c(void)
           temp_v10 = temp_v10 + -400.0f;
         }
         if (*(int *)(g_mapDepart + 0xc) == 0) {
-          temp_v2 = asdTMTexTableEntryAt(0xe,0x10b);
+          temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0x10b));
           temp_v11 = (unsigned long long)(unsigned int)(int)temp_v10;
           temp_v9 = 0x107;
           do {
@@ -127,13 +127,13 @@ unsigned int FUN_002ca09c(void)
         temp_v2 = 0;
         if (temp_v2 < (*(short *)((unsigned char *)&DAT_0049fd38 + 0xa6))) {
           do {
-            temp_v1 = asdTMTexTableEntryAt(0x1c,temp_v2 + 0x1105);
-            temp_v7 = asdTMTexTableEntryAt(0x1c,temp_v2 + 0x110d);
-            temp_v8 = asdTMTexTableEntryAt(0x1c,0x1101);
-            temp_v4 = asdTMTexTableEntryAt(0x1c,0x1100);
-            temp_v16 = asdTMTexTableEntryAt(0x1c,0x1104);
-            temp_v15 = asdTMTexTableEntryAt(0x1c,0x1102);
-            temp_v5 = asdTMTexTableEntryAt(0x1c,0x1103);
+            temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1c,temp_v2 + 0x1105));
+            temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1c,temp_v2 + 0x110d));
+            temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1c,0x1101));
+            temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1c,0x1100));
+            temp_v16 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1c,0x1104));
+            temp_v15 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1c,0x1102));
+            temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1c,0x1103));
             temp_v9 = temp_v2 * 2;
             temp_v10 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 8),
                                                 (unsigned char)(in_fpscr >> 0x16) & 3);

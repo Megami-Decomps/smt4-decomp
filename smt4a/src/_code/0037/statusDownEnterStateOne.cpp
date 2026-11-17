@@ -1,25 +1,23 @@
-#include "common.h"
+#include "status/StatusDownA.h"
 
 extern "C" {
 
-struct Status { u8 unk000[0x518]; u32 state; u32 previous; u32 mode; u32 timer; };
-extern Status *g_statusDown;
 void statusDownSetSpriteMode(s32 mode, s32 selection, s32 flag);
 
 /* Enters `state`, remembering the previous one and restarting the state timer. */
-static __inline void statusDownEnter(Status *status, u32 state)
+static __inline void statusDownEnter(StatusDownStateA *status, u32 state)
 {
-    status->timer = 0;
-    status->previous = status->state;
-    status->state = state;
+    status->stateTimer = 0;
+    status->track.previous = status->track.state;
+    status->track.state = state;
 }
 
 void statusDownEnterStateOne(void)
 {
-    Status *status = g_statusDown;
+    StatusDownStateA *status = g_statusDown;
     statusDownSetSpriteMode(1, -1, 0);
     statusDownEnter(g_statusDown, 1);
-    status->mode = 32;
+    status->nextState = 32;
 }
 
 } /* extern "C" */

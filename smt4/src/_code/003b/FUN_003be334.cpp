@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild from asm of the battle damage/value estimate for a skill or an item-like record; armcc here orders the local action-info block and the spilled arguments differently (retail pushes r0-r3 and d0 and reloads the stack arguments), and the 0.01f/25% scaling and the random bonus are scheduled differently. */
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlEntryLookup.h"
 #include "gamedata/SkillDataLookup.h"
 #include "gamedata/ConsumableRecord.h"
 #include "gamedata/UnitRecordAccess.h"
@@ -24,25 +25,10 @@ struct ActionInfo {
     /* 0x21 */ u8 unk21[3];
 };
 
-/* A battle entry (only the fields read here). */
-struct BattleEntry {
-    /* 0x000 */ u8 unk000[0x1B8];
-    /* 0x1B8 */ s16 maxHp;
-    /* 0x1BA */ u8 unk1BA[0xC];
-    /* 0x1C6 */ u16 flags;         /* 8: value capped at 1, 0x80: takes 25% more, 0x200: deals 25% less */
-};
-
-struct UnitStats {
-    /* 0x00 */ u8 unk00[0xEE];
-    /* 0xEE */ u16 stat;
-};
-
 
 extern "C" {
-BattleEntry *btlMainFindEntryByListedId(BtlMainState *battle, s32 id);
-void btlEntryBuildSummary(ActionInfo *info, BtlMainState *battle, BattleEntry *entry);
+void btlEntryBuildSummary(ActionInfo *info, BtlMainState *battle, BtlEntry *entry);
 s32 FUN_003be918(s32 skill, s32 attacker, s32 target, s32 column, s32 row, f32 power, f32 multiplier);
-UnitStats *btlFindEntryBlockByMemberId(BtlMainState *battle, s32 id);
 s32 flagWordTestBit(void *record, u32 bit);
 s32 randRange(u32 limit);
 
@@ -54,8 +40,8 @@ s32 FUN_003be334(s32 wantDamage, s32 skillId, u32 unused, s32 recordId, f32 mult
     BtlMainState *battle = btlGetMainState();
     SkillRecord *skill = reinterpret_cast<SkillRecord *>(skillDataFindById(skillId));
     ConsumableRecord *record = itemTableGetItemRecord(recordId);
-    BattleEntry *attackerEntry = btlMainFindEntryByListedId(battle, attacker);
-    BattleEntry *targetEntry = btlMainFindEntryByListedId(battle, target);
+    BtlEntry *attackerEntry = btlMainFindEntryByListedId(battle, attacker);
+    BtlEntry *targetEntry = btlMainFindEntryByListedId(battle, target);
     ActionInfo info;
     btlEntryBuildSummary(&info, battle, attackerEntry);
     s32 damage = -1;
@@ -70,7 +56,7 @@ s32 FUN_003be334(s32 wantDamage, s32 skillId, u32 unused, s32 recordId, f32 mult
         if (skill->kind == 1) {
             if (skill->flags & 0x8000) {
                 scaled = false;
-                damage = targetEntry->maxHp / 2;
+                damage = targetEntry->data.mp / 2;
             } else if (info.flagB) {
                 damage = FUN_003be918(skillId, attacker, target, info.columnArg, info.rowArg, power, multiplier);
                 if (info.flagB) {
@@ -78,9 +64,9 @@ s32 FUN_003be334(s32 wantDamage, s32 skillId, u32 unused, s32 recordId, f32 mult
                     if (damage > 100)
                         damage = 100;
                 }
-                if (attackerEntry->flags & 0x200)
+                if (attackerEntry->data.statusFlags & 0x200)
                     damage -= damage * 25 / 100;
-                if (targetEntry->flags & 0x80)
+                if (targetEntry->data.statusFlags & 0x80)
                     damage += damage * 25 / 100;
             }
         }
@@ -89,8 +75,8 @@ s32 FUN_003be334(s32 wantDamage, s32 skillId, u32 unused, s32 recordId, f32 mult
             damage += randRange(15);
         if (wantDamage == 0)
             return value;
-        if (info.flagB && damage > targetEntry->maxHp)
-            damage = targetEntry->maxHp;
+        if (info.flagB && damage > targetEntry->data.mp)
+            damage = targetEntry->data.mp;
         return damage;
     }
     if (record == NULL)
@@ -98,12 +84,12 @@ s32 FUN_003be334(s32 wantDamage, s32 skillId, u32 unused, s32 recordId, f32 mult
     if (record->healMp != 0)
         value = record->healMp;
     if (record->curesMp != 0) {
-        s32 base = target < 109 ? btlFindEntryBlockByMemberId(battle, target)->stat : gameGetUnitRecord(target - 109)->maxMp;
+        s32 base = target < 109 ? (u16)btlFindEntryBlockByMemberId(battle, target)->maxMp /* zero-extended in retail */ : gameGetUnitRecord(target - 109)->maxMp;
         value = (s32)((f32)(s16)(base * record->curesMp) * 0.01f);
     }
     if (wantDamage != 0)
         return damage;
-    bool capped = target < 109 ? (targetEntry->flags & 8) != 0 : flagWordTestBit(gameGetUnitRecord(target - 109), 3) != 0;
+    bool capped = target < 109 ? (targetEntry->data.statusFlags & 8) != 0 : flagWordTestBit(gameGetUnitRecord(target - 109), 3) != 0;
     if (capped && value > 1)
         value = 1;
     return value;

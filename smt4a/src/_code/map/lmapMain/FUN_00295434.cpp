@@ -1,23 +1,17 @@
-/* NON_MATCHING: the step counter is now read/written as g_gameState+0x4FC with the one store through DAT_005f1af8 (as retail; the block matches). Remaining: retail takes g_lmapPopupMessages as ONE literal pointing at element 4 (r5, others by sub/add) and spills the flags block to the stack (push {r3..}); the extern array gets a literal at the base. Defining the 8-entry table here (its param is a const char* to rodata text) did not change that. */
+/* NON_MATCHING: the step counter is now read/written as g_gameState+0x4FC with the one store through g_gameState.modeCounter (as retail; the block matches). Remaining: retail takes g_lmapPopupMessages as ONE literal pointing at element 4 (r5, others by sub/add) and spills the flags block to the stack (push {r3..}); the extern array gets a literal at the base. Defining the 8-entry table here (its param is a const char* to rodata text) did not change that. */
 #include "common.h"
 #include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
 #include "gamedata/GameDataAccess_VariantG.h"
 #include "gamedata/GameDataAccess.h"
+#include "shard/W5_W5Match7_FlagBanks.h"
+#include "map/PopupStateA.h"
 
 struct PopupMessage {
-    char text[0x40];    // message resource name
-    s32 param;          // 0x40
+    char data[0x40];    // message resource name (the popup's message data)
+    const char* text;   // 0x40
 };
 
-struct PopupState {
-    s32 state;          // 0x00
-    s32 arg;            // 0x04
-    u8 unk08[0x0c];
-    s32 param;          // 0x14
-    s32 kind;           // 0x18
-    const char* text;   // 0x1c
-};
 
 struct GameFlagsBlock {
     u8 unk000[0xd8e];
@@ -26,19 +20,17 @@ struct GameFlagsBlock {
 
 extern "C" {
 
-extern PopupState* g_popupState;
 extern PopupMessage g_lmapPopupMessages[8];
-extern s32 DAT_005f1af8;
 
 // Opens the popup for the message row and marks it as shown.
-static void showPopup(const PopupMessage* message, s32 kind)
+static void showPopup(const PopupMessage* message, s32 speakerId)
 {
-    PopupState* popup = g_popupState;
-    popup->text = message->text;
-    popup->param = message->param;
-    popup->kind = kind;
+    PopupStateA* popup = g_popupState;
+    popup->messageData = message->data;
+    popup->message = message->text;
+    popup->speakerId = speakerId;
     popup = g_popupState;
-    popup->arg = 0;
+    popup->timer = 0;
     popup->state = 5;
 }
 
@@ -48,7 +40,7 @@ void FUN_00295434(void)
     if (g_popupState->state != 0) return;
     if (g_gameState.mapId != 0x1c && g_gameState.mapId != 0x1d && g_gameState.mapId != 0x1e && g_gameState.mapId != 0x1f) {
         s32 steps = g_gameState.modeCounter - 1;
-        DAT_005f1af8 = steps;
+        g_gameState.modeCounter = steps;
         if (steps <= 0) steps = 0;
         g_gameState.modeCounter = steps;
         return;

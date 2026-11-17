@@ -28,8 +28,8 @@ s32 FUN_003bf1e4(void)
     for (s32 i = 0; i < 4; i++) {
         if ((entries[i].flags & 1) != 0 && (entries[i].flags & 0x40) == 0) {
             partyCount++;
-            partyAgility += entries[i].speed;
-            partyLuck += entries[i].luck;
+            partyAgility += entries[i].data.agility;
+            partyLuck += entries[i].data.luck;
         }
     }
     s32 enemyCount = 0;
@@ -38,8 +38,8 @@ s32 FUN_003bf1e4(void)
     for (s32 i = 4; i < 54; i++) {
         if ((entries[i].flags & 1) != 0 && (entries[i].flags & 0x40) == 0) {
             enemyCount++;
-            enemyAgility += entries[i].speed;
-            enemyLuck += entries[i].luck;
+            enemyAgility += entries[i].data.agility;
+            enemyLuck += entries[i].data.luck;
         }
     }
     s32 agilityGap = partyAgility / partyCount - enemyAgility / enemyCount;

@@ -1,4 +1,4 @@
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 
 static __inline s32 compareFusionComponent(u16 leftId, u16 rightId)
@@ -15,7 +15,6 @@ static __inline s32 compareFusionComponent(u16 leftId, u16 rightId)
 }
 
 extern "C" {
-extern UniteWork *g_unite;
 
 // Sort fusion pairs by each component's race, descending level, and demon id.
 s32 fusionComparePairsByRaceLevelAndId(const u16 *left, const u16 *right)

@@ -2,15 +2,10 @@
 #include "common.h"
 #include "camp/RenderCtx.h"
 #include "ui/MessageMain.h"
-
-struct TitlePartInfo {
-    u8 unk00[8];
-    s16 x;
-    s16 y;
-};
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 s32 gameFlagIsSet(u32 flag);
 s32 vec2GetXInt(void *vec);
 s32 vec2GetYInt(void *vec);
@@ -20,7 +15,6 @@ void renderStackPushIndexed(RenderCtx *context, s32 stack, u32 value);
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite();
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 scale);
-TitlePartInfo *asdTMTexTableEntryAt(s32 sheet, s32 part);
 void texDrawCompositeSprite(s32 layer, s32 sheet, s32 part, s32 x, s32 y, s32 priority);
 void FUN_002bdce0(s32 value, s32 x, s32 y, s32 flag);
 s32 renderCtxPopState(RenderCtx *context, s32 stack);
@@ -40,7 +34,7 @@ void FUN_00124d24(s32 wide)
         efctSetSpeed(speed);
         gxResetColorQuadToWhite();
 
-        TitlePartInfo *part;
+        TextureTableEntryIV *part;
         if (wide) {
             part = asdTMTexTableEntryAt(14, 148);
             x += static_cast<s32>(renderCtxCalculateStereoParallax(g_titleScene, 0.27f));

@@ -1,5 +1,6 @@
 /* NON_MATCHING: draws a list scroll bar (frame, the two arrow buttons with their pressed variants, then the proportional thumb clipped by the scissor state); written from the decompilation, the ratio/offset math is shared between the horizontal and vertical case through one helper and the integer-to-float conversions are written as casts */
 #include "shard/S1ListPanel.h"
+#include "camp/RenderCtxTitle.h"
 #include "shard/TextureDrawCall.h"
 
 #define SCROLL_LAYER 2
@@ -19,13 +20,8 @@ struct ScrollTrack {
     /* 0x0C */ ScrollRange *range;
 };
 
-struct ScrollScissorView {
-    u8 prefix[0x130C];
-    RenderStateStack state;
-};
 
 extern "C" {
-extern ScrollScissorView *g_titleScene;
 
 s32 ifTouchGetSelectionModeForRegion(s32 region);
 ScrollTrack *asdTMTexTableEntryAt(u32 group, u32 id);
@@ -72,13 +68,13 @@ void uiDrawListScrollBar(void *list, s32 x, s32 y, u32 group, u32 frameId, u32 t
     s32 left, top, width, height;
     if (horizontal != 0) {
         width = scrollThumb(FUN_0028cfbc(list), FUN_0029e958(list), track->range->length, resourceRunEmbeddedOperationIfUnblocked(list), &offset);
-        renderStackSet(&g_titleScene->state, SCROLL_SCISSOR_ON);
+        renderStackSet(&g_titleScene->scissor, SCROLL_SCISSOR_ON);
         left = track->x + x + offset;
         top = track->y + y;
         height = track->range->thickness;
     } else {
         height = scrollThumb(FUN_0029d644(list), FUN_0029ee54(list), track->range->thickness, resourceRunOperationIfUnblocked(list), &offset);
-        renderStackSet(&g_titleScene->state, SCROLL_SCISSOR_ON);
+        renderStackSet(&g_titleScene->scissor, SCROLL_SCISSOR_ON);
         left = track->x + x;
         top = y + offset + track->y;
         width = track->range->length;
@@ -86,7 +82,7 @@ void uiDrawListScrollBar(void *list, s32 x, s32 y, u32 group, u32 frameId, u32 t
     FUN_0029a17c(left, top, width, height, 1);
 
     texDrawTableEntryAtStoredOrigin(SCROLL_LAYER, group, thumbPressed != 0 ? trackPressedId : trackId, x, y, layer + SCROLL_LAYER_THUMB_OFFSET);
-    renderStackSet(&g_titleScene->state, SCROLL_SCISSOR_OFF);
+    renderStackSet(&g_titleScene->scissor, SCROLL_SCISSOR_OFF);
 }
 
 } /* extern "C" */

@@ -1,6 +1,7 @@
 /* NON_MATCHING: refreshes visibility and screen position of the map icons (flag/ownership rules, scroll offset, 512x640 clip); written from the decompilation, the unused gameFlagsGetBlock() call is dropped and float to int conversion/scheduling is not compared with retail */
 #include "shard/W6_W6Match7_NumericStepper.h"
 #include "common.h"
+#include "game/GameStateA.h"
 #include "gamedata/FlagBitTests.h"
 #include "shard/W6_W6Match3_UnitStatusRequest.h"
 
@@ -57,8 +58,6 @@ struct MapScreenWork {
 };
 
 extern "C" {
-extern s8 DAT_005f1a5e;
-extern s32 DAT_005f1c5c;
 
 f32 *lmapSceneGetObj(void *scene);
 f32 *sub68OwnerGetBlock60(void *scene);
@@ -83,7 +82,7 @@ void FUN_0049177c(MapScreenWork *work)
     f32 offset[2];
     words2Copy(work->scroll, offset);
 
-    if (DAT_005f1a5e != 0) {
+    if (g_gameState.naviMapPending != 0) {
         map = naviMainGetRequestedMap(scene);
         cameraX = (f32)work->requestedX;
         cameraZ = (f32)work->requestedZ;
@@ -102,7 +101,7 @@ void FUN_0049177c(MapScreenWork *work)
 
     for (s32 i = 0; i < iconCount; i++) {
         MapIcon *icon = &work->icons[i];
-        if (DAT_005f1c5c == 0
+        if (g_gameState.showAllEntries == 0
             && (FUN_004083a8(icon->kind, icon->unlockType) == 0
                 || (icon->requireFlag != 0 && gameFlagIsSet(icon->requireFlag) == 0)
                 || (icon->excludeFlag != 0 && gameFlagIsSet(icon->excludeFlag) != 0)))
@@ -111,9 +110,9 @@ void FUN_0049177c(MapScreenWork *work)
             icon->visible = 1;
 
         if (icon->unlockType == MAP_ICON_TYPE_OWNED)
-            icon->visible = (gameOwnedBitTest2(icon->unlockId) != 0 || DAT_005f1c5c != 0) ? 1 : 0;
+            icon->visible = (gameOwnedBitTest2(icon->unlockId) != 0 || g_gameState.showAllEntries != 0) ? 1 : 0;
         else if (icon->unlockType == MAP_ICON_TYPE_STORY)
-            icon->visible = (FUN_00384d34(icon->unlockId) != 0 || DAT_005f1c5c != 0) ? 1 : 0;
+            icon->visible = (FUN_00384d34(icon->unlockId) != 0 || g_gameState.showAllEntries != 0) ? 1 : 0;
         else if (icon->unlockType == MAP_ICON_TYPE_FLAG)
             icon->visible = gameFlagsBitTest(icon->unlockId) != 0 ? 1 : 0;
 

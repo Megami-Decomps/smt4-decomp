@@ -2,6 +2,7 @@
 #include "game/GameStateA.h"
 #include "gfx/ObjectRegistry.h"
 #include "gamedata/GamePlayerData.h"
+#include "Model/MoriModelManager.h"
 
 /* A model of the map scene: its controller object is at +4. */
 struct SceneModel {
@@ -32,12 +33,10 @@ struct DataTableEntry {
 
 extern "C" {
 extern SceneModels *g_lmapScene;
-extern ObjectRegistry *g_handleRegistry;
 s32 dataTable2EType0Count(void);
 s32 dataTable2EType1Count(void);
 DataTableEntry *dataTable2EType0GetEntry(s32 index);
 DataTableEntry *dataTable2EType1GetEntry(s32 index);
-void handleRegistryRegisterObject(ObjectRegistry *registry, RegisteredObject *object);
 void controllerSetPosition(RegisteredObject *owner, f32 x, f32 y, f32 z);
 }
 

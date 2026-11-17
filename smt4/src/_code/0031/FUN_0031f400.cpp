@@ -27,8 +27,8 @@ u32 FUN_0031f400(void)
         u32 flags = entity->flags;
 
         if ((flags & 1) != 0 && (flags & 0x40) == 0 && (flags & 0x10) != 0 && entity->selectionIndex != player->selectionIndex
-            && entity->level <= player->level && partyHasStoredDemon(entity->id) == 0 && entity->detail != NULL
-            && (entity->detail->flags & 0x200) != 0 && player->id != entity->id) {
+            && entity->data.level <= player->data.level && partyHasStoredDemon(entity->data.id) == 0 && entity->data.detail != NULL
+            && (entity->data.detail->flags & 0x200) != 0 && player->data.id != entity->data.id) {
             candidates[count] = entity;
             count++;
         }
@@ -37,7 +37,7 @@ u32 FUN_0031f400(void)
     if (count == 0) {
         scrSetResult(-1);
     } else {
-        scrSetResult(candidates[randNextInRange((count - 1) & 0xffff)]->members.ids[0]);
+        scrSetResult(candidates[randNextInRange((count - 1) & 0xffff)]->ids[0]);
     }
     return 1;
 }

@@ -1,12 +1,11 @@
-#include "status/StatusDown.h"
+#include "status/StatusDownA.h"
 
 extern "C" {
-extern StatusDownStateA *g_statusDown;
 
 /* Enters `state`, remembering the previous one and restarting the timer. */
 static void statusEnterState(StatusDownStateA *status, u32 state)
 {
-    status->timer = 0;
+    status->stateTimer = 0;
     status->track.previous = status->track.state;
     status->track.state = state;
 }

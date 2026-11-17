@@ -1,5 +1,5 @@
 #include "battle/btlAction.h"
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "code/Code0023.h"
 #include "battle/BattleEncounter.h"

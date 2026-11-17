@@ -1,5 +1,5 @@
 /* NON_MATCHING: parameter registers (r8/r9 swapped), rank-base hoisting in the learn loop and clamp temp differ. */
-#include "shard/W6_W6Match1_PartySlot.h"
+#include "gamedata/GameSaveDataA.h"
 #include "shard/Shard004B.h"
 #include "gamedata/SkillDataRecord.h"
 #include "gamedata/SaveSlotTable.h"
@@ -27,9 +27,9 @@ u32 FUN_003e4b2c(u32 id, s32 targetLevel, s32 maximumIncrease)
             break;
         }
     }
-    if (!slot || targetLevel <= slot->level)
+    if (!slot || targetLevel <= slot->record.level)
         return 0;
-    s32 increase = targetLevel - slot->level;
+    s32 increase = targetLevel - slot->record.level;
     if (maximumIncrease < increase)
         increase = maximumIncrease;
     u16 learned[8] = {};

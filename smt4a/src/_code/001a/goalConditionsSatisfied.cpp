@@ -1,13 +1,10 @@
 /* Slot scan: a goal whose first condition is kind 5 needs one filled slot whose record has every listed bit. */
 #include "common.h"
+#include "gamedata/SaveSlotRecord.h"
+#include "gamedata/SaveSlotTable.h"
+#include "code/Code001b_Smt4a.h"
 #include "quest_center/QuestRecordA.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
-
-struct SlotTable {
-    u32 firstWord;              // 0x00
-    u8 unk04[0x1c88 - 4];
-    s8 slotIds[1];              // 0x1c88
-};
 
 struct RosterEntry {
     u8 unk00[4];
@@ -20,9 +17,6 @@ s32 gameOptionsClassifyMode(void);
 s32 FUN_001ba570(void);
 s32 gameDataTableGetFlag(void);
 s32 gameSlotTableFindFree(void);
-SlotTable* gameGetSlotTable(void);
-u8* gameGetSlotRecord(s32 slot);
-s32 bitSetTest(u8* record, u16 bit);
 u32 gameCountersGetWord(u16 counter);
 u16 flagValueRead(s32 id);
 s32 partyFindSlotById(u16 id);
@@ -48,11 +42,11 @@ s32 goalConditionsSatisfied(s32 id)
     } else if (goal->requirements[0].kind == 5) {
         // Needs one filled slot whose record satisfies every listed bit.
         s32 slotCount = gameSlotTableFindFree();
-        s8* slotIds = gameGetSlotTable()->slotIds;
+        s8* slotIds = gameGetSlotTable()->party;
         result = 0;
         for (s32 slot = 0; slot < slotCount; slot++) {
             if (slotIds[slot] < 0) continue;
-            u8* record = gameGetSlotRecord(slotIds[slot]);
+            SlotRecordA *record = gameGetSlotRecord(slotIds[slot]);
             s32 satisfied = 1;
             for (s32 i = 0; i < 4; i++) {
                 QuestRequirement *condition = &goal->requirements[i];
@@ -89,16 +83,16 @@ s32 goalConditionsSatisfied(s32 id)
                 }
                 break;
             case 3:
-                if (gameGetSlotTable()->firstWord < goal->requirements[i].count) result = 0;
+                if (gameGetSlotTable()->money < goal->requirements[i].count) result = 0;
                 break;
             case 6: {
                 s32 slotCount = gameSlotTableFindFree();
-                s8* slotIds = gameGetSlotTable()->slotIds;
+                s8* slotIds = gameGetSlotTable()->party;
                 s32 found = 0;
                 for (s32 slot = 0; slot < slotCount; slot++) {
                     if (slotIds[slot] >= 0) {
-                        u8* record = gameGetSlotRecord(slotIds[slot]);
-                        u32 count = bitArrayCountSet1to500(record + 0x68);
+                        SlotRecordA *record = gameGetSlotRecord(slotIds[slot]);
+                        u32 count = bitArrayCountSet1to500(record->inheritedFlags);
                         if (goal->requirements[i].count <= count) {
                             found = 1;
                             break;

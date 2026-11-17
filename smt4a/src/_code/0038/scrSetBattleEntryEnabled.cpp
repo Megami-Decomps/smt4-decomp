@@ -1,25 +1,20 @@
 /* Sets the flag at +0x3F4 of the entry found for id scrGetArg(0) to whether scrGetArg(1) is nonzero; always returns 1. */
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlEntryLookup.h"
 #include "common.h"
 
 extern "C" {
 
-typedef struct Entry {
-    /* 0x000 */ u8 unk000[0x3F4];
-    /* 0x3F4 */ u8 flag;
-} Entry;
-
 extern s32 scrGetArg(s32 index);
-extern Entry *btlMainFindEntryByListedId(void *owner, u32 id);
 
 u32 scrSetBattleEntryEnabled(void)
 {
     u32 id = scrGetArg(0);
     s32 enabled = scrGetArg(1);
-    Entry *entry = btlMainFindEntryByListedId(static_cast<void *>(btlGetMainState()), id);
+    BtlCombatantEntryA *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
 
     if (entry != NULL) {
-        entry->flag = enabled != 0;
+        entry->data.state = enabled != 0;
     }
     return 1;
 }

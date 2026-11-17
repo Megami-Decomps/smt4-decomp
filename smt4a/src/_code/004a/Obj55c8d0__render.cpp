@@ -1,4 +1,5 @@
 #include "common.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 
@@ -13,11 +14,10 @@ struct TitleMenu {
 
 struct TitleScene;
 
-extern TitleScene *g_renderCtx;
 
 void gxResetColorQuadToWhite(void);
-void skinObjectUpdateMatrices(TitleScene *scene);
-void renderCtxResetColorScale(TitleScene *scene);
+void skinObjectUpdateMatrices(RenderCtxA *scene);
+void renderCtxResetColorScale(RenderCtxA *scene);
 void FUN_004a559c(TitleMenu *menu);
 void FUN_004a5344(TitleMenu *menu);
 

@@ -1,15 +1,8 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include "battle/BtlEntryLookup.h"
 
-struct ScriptUnitState {
-    u8 unk000[0x1BE];  // 0x000
-    u16 mode;          // 0x1BE
-};
 
-struct ScriptUnitRef {
-    u8 unk00[0x28];          // 0x00
-    ScriptUnitState *state;  // 0x28
-};
 
 struct BtlScriptState {
     u8 unk0000[0x2008];  // 0x0000
@@ -22,7 +15,6 @@ extern "C" {
 extern u32 g_btlScriptUnit; /* 0x57113c */
 
 s32 scrGetArg(u32 index);
-ScriptUnitRef *btlUnitGet(u32 unit);
 void btlSelectCandidateEntries(s32 mode);
 
 /* Script command: puts the current unit in mode 12 and stores the two arguments (flagged 0x20000 and 0x40000) as the battle's pending values. */
@@ -31,9 +23,10 @@ u32 FUN_0037efc0(void)
     s32 first = scrGetArg(0);
     s32 second = scrGetArg(1);
 
-    ScriptUnitState *state = btlUnitGet(g_btlScriptUnit)->state;
+    /* g_btlScriptUnit is the slot block pointer; btlUnitGet takes it as the context reference. */
+    BtlUnitDataA *state = btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit))->data;
 
-    state->mode = 12;
+    state->actionKind = 12;
     reinterpret_cast<BtlScriptState *>(btlGetMainState())->firstValue = first | 0x20000;
     reinterpret_cast<BtlScriptState *>(btlGetMainState())->secondValue = second | 0x40000;
     btlSelectCandidateEntries(2);

@@ -1,23 +1,10 @@
 /* NON_MATCHING: twin of smt4 FUN_002d508c; readable rewrite compiles (175 vs 165 rows); register allocation and stack frame differ */
 #include "common.h"
+#include "map/LmapGlobals.h"
 #include "game/GameStateA.h"
 #include "shard/W6_W6Match2_TitleCommand.h"
 #include "gamedata/GameDataAccess.h"
-
-struct Vec3f {
-    f32 x, y, z;
-};
-
-// Field scene: the player's position and facing, current and previous frame.
-struct LmapScene {
-    u8 unk00[0x1c];
-    Vec3f position;         // 0x1c
-    Vec3f candidate;        // 0x28: position being tried this step
-    Vec3f previous;         // 0x34: position at the start of the frame
-    Vec3f lastPosition;     // 0x40
-    f32 lastYaw;            // 0x4c
-    f32 yaw;                // 0x50: facing in degrees
-};
+#include "shard/W5_W5Match7_FlagBanks.h"
 
 // Player controller: only the members this movement update uses.
 struct PlayerController {
@@ -36,8 +23,6 @@ struct GameFlagsBlock {
 
 extern "C" {
 
-extern LmapScene* g_lmapScene;
-
 extern s8 DAT_005f1bc4;
 extern s8 DAT_005f1c48;
 
@@ -46,7 +31,7 @@ void FUN_0033f9f4(void);
 f32 __hardfp_atan2f(f32 y, f32 x);
 f32 libm_sinf(f32 angle);
 f32 libm_cosf(f32 angle);
-s32 FUN_0036d5e0(Vec3f* candidate, Vec3f* previous);
+s32 FUN_0036d5e0(MapVector* candidate, MapVector* previous);
 
 // Moves the player on the field from the analog stick: accelerates while held,
 // turns to the stick direction and advances in one or two collision-checked steps.
@@ -60,9 +45,9 @@ void FUN_0033feb8(PlayerController* player)
         return;
     }
 
-    LmapScene* scene = g_lmapScene;
-    Vec3f start = scene->position;
-    scene->candidate = start;
+    LmapSceneA* scene = g_lmapScene;
+    MapVector start = scene->pose.position;
+    scene->pose.targetPosition = start;
 
     f32 boost = (f32)FUN_0029202c() * 0.01f;
     if (boost > 2.0f) boost = 2.0f;
@@ -85,7 +70,7 @@ void FUN_0033feb8(PlayerController* player)
         f32 heading = -(__hardfp_atan2f(stickX, stickY) * 57.29578f - player->cameraYaw);
         if (!(heading >= 0.0f)) heading += 360.0f;
         if (heading > 360.0f) heading -= 360.0f;
-        g_lmapScene->yaw = heading;
+        g_lmapScene->pose.targetHeading = heading;
         player->moving = 1;
     }
 
@@ -93,23 +78,23 @@ void FUN_0033feb8(PlayerController* player)
     if (player->speed > 35.0f) steps = 2;
     for (s32 i = 0; i < steps; i++) {
         scene = g_lmapScene;
-        Vec3f before = scene->position;
-        scene->candidate = scene->position;
+        MapVector before = scene->pose.position;
+        scene->pose.targetPosition = scene->pose.position;
         f32 stride = (player->speed / (f32)steps) * speedScale;
-        scene->candidate.x += libm_sinf(scene->yaw * 0.017453292f) * stride;
+        scene->pose.targetPosition.x += libm_sinf(scene->pose.targetHeading * 0.017453292f) * stride;
         scene = g_lmapScene;
-        scene->candidate.z += libm_cosf(scene->yaw * 0.017453292f) * stride;
+        scene->pose.targetPosition.z += libm_cosf(scene->pose.targetHeading * 0.017453292f) * stride;
         scene = g_lmapScene;
-        if (DAT_005f1c48 == 0) blocked = FUN_0036d5e0(&scene->candidate, &before);
+        if (DAT_005f1c48 == 0) blocked = FUN_0036d5e0(&scene->pose.targetPosition, &before);
         scene = g_lmapScene;
-        scene->position.x = (scene->candidate.x - scene->position.x) + scene->position.x;
-        scene->position.z = (scene->candidate.z - scene->position.z) + scene->position.z;
+        scene->pose.position.x = (scene->pose.targetPosition.x - scene->pose.position.x) + scene->pose.position.x;
+        scene->pose.position.z = (scene->pose.targetPosition.z - scene->pose.position.z) + scene->pose.position.z;
         if (blocked != 0) break;
     }
     scene = g_lmapScene;
-    scene->lastYaw = scene->yaw;
-    scene->lastPosition = scene->position;
-    scene->previous = start;
+    scene->pose.heading = scene->pose.targetHeading;
+    scene->pose.lastPosition = scene->pose.position;
+    scene->pose.previousPosition = start;
 }
 
 } /* extern "C" */

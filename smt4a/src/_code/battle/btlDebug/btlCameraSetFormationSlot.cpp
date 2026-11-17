@@ -58,7 +58,7 @@ void btlCameraSetFormationSlot(BattleActionCamera *camera, BtlMainStateA *battle
     if (entry->flags & masks->zeroHeight) {
         camera->formation.position.y = 0.0f;
     } else if (entry->flags & masks->demonHeight) {
-        const NkmBaseRecordA *demon = nkmBaseGetRecord(entry->id);
+        const NkmBaseRecordA *demon = nkmBaseGetRecord(entry->data.id);
         switch (demon->packed.formationHeight) {
         case 0: camera->formation.position.y = 0.0f; break;
         case 1: camera->formation.position.y = -3.5f; break;

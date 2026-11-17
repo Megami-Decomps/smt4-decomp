@@ -2,11 +2,11 @@
 #include "gfx/StereoParallax.h"
 #include "shard/TextureDrawCall.h"
 #include "code/Code003f.h"
+#include "camp/RenderCtxA.h"
 
 struct RenderCtx;
 
 extern "C" {
-extern RenderCtx *g_renderCtx;
 void efctSetSpeed(f32 alpha);
 
 /* Draws glyphs 0x65.. as a three-glyph row at firstX and a four-glyph row at secondX, faded by

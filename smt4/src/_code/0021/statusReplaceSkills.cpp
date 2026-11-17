@@ -1,8 +1,7 @@
 #include <string.h>
-#include "shard/W6_W6Match3_ScrollSelection.h"
+#include "status/StatusDown.h"
 
 extern "C" {
-extern StatusDownListIV *g_statusDown;
 void rt_memcpy(void *destination, const void *source, u32 size);
 void gridNavigationConfigure(ScrollSelection *selection, u32 count, u32 visible, u32 option, u32 first, u32 second);
 }
@@ -12,7 +11,7 @@ extern "C" void statusReplaceSkills(const u16 *ids, u8 count)
 {
     if (count > 16)
         return;
-    StatusDownListIV *work = g_statusDown;
+    StatusDownState *work = g_statusDown;
     memset(work->scratch, 0, sizeof(work->scratch));
     memset(work->ids, 0, 16);
     rt_memcpy(work->ids, ids, count * sizeof(u16));
@@ -21,7 +20,7 @@ extern "C" void statusReplaceSkills(const u16 *ids, u8 count)
         if (work->ids[used] == 0)
             break;
     }
-    gridNavigationConfigure(&work->selection, used, 8, 1, 0, 1);
-    work->active = 1;
+    gridNavigationConfigure(&work->list, used, 8, 1, 0, 1);
+    work->listActive = 1;
     work->dirty = 0;
 }

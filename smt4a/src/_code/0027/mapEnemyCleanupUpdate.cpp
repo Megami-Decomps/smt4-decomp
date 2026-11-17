@@ -1,10 +1,9 @@
 /* NON_MATCHING: cleanup-loop register allocation and shared teardown branch merging differ from retail. */
 #include "shard/W5_W5Match7_SceneSlots.h"
 #include "map/MapSceneAccess.h"
+#include "Model/MoriModelManager.h"
 
 extern "C" {
-extern void *g_handleRegistry;
-void ptrListRemoveClearOwner(void *registry, void *owner);
 void FUN_00303f48(void);
 void FUN_00273060(void);
 

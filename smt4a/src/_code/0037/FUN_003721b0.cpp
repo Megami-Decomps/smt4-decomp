@@ -2,6 +2,8 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxA.h"
 
 struct StatusRecord {
     /* 0x00 */ u8 unk00[0x64];
@@ -10,24 +12,15 @@ struct StatusRecord {
     /* 0x12C */ u16 iconId;
 };
 
-struct LayoutPlacement {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-    /* 0x0C */ s16 *width;
-};
-
 extern "C" {
 
-extern void *g_renderCtx; /* 0x59dbb4 */
 
-f32 renderCtxCalculateStereoParallax(void *ctx, f32 depth);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *ctx, f32 depth);
 f32 jobGetScalarValue(void);
 void efctSetSpeed(f32 speed);
 s16 dataTable10FindValue(u16 id);
 u32 FUN_00180114(void);
 void textFormatBuffer(char *buffer, const char *format, ...);
-LayoutPlacement *asdTMTexTableEntryAt(u32 table, s32 id);
 void uiDrawItemOrStatusIcon(s32 icon, s32 x, s32 y, s32 index, s32 flags);
 void drawSetColorFromRGBA8(u32 rgba);
 void FUN_00180310(s32 mode, s32 x, s32 y, s32 align, s32 digits, s32 index, const char *text);
@@ -49,7 +42,7 @@ void FUN_003721b0(u32 unused, f32 speed, StatusRecord *record, s32 slot, s32 x, 
     s32 frameY;
     s32 digits;
     s32 digitsId;
-    LayoutPlacement *placement;
+    TextureTableEntryIV *placement;
 
     renderCtxCalculateStereoParallax(g_renderCtx, depth);
     savedSpeed = jobGetScalarValue();
@@ -87,7 +80,7 @@ void FUN_003721b0(u32 unused, f32 speed, StatusRecord *record, s32 slot, s32 x, 
     FUN_00180310(0, frameX, frameY, 1, digits, 0xce, countText);
     gxResetColorQuadToWhite();
     placement = asdTMTexTableEntryAt(20, slot + 0xbe5);
-    frameX = placement->x + (*placement->width - fontMeasureLineAdvance(name, 2)) / 2 + x + parallax;
+    frameX = placement->x + (placement->placement->width - fontMeasureLineAdvance(name, 2)) / 2 + x + parallax;
     textDrawString(2, 0xff, name, (f32)frameX, (f32)(placement->y + y), 1.0f, 0.0f, speed);
     efctSetSpeed(savedSpeed);
 }

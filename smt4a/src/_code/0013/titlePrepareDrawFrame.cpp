@@ -1,5 +1,6 @@
 #include "common.h"
 #include "code/Code0015.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 
@@ -11,9 +12,8 @@ typedef struct TitleDraw {
 } TitleDraw;
 
 extern TitleDraw g_titleFlags;
-extern u32 g_renderCtx;
 
-extern void effectRestoreSavedRenderPairs(u32 scene, u32 arg);
+extern void effectRestoreSavedRenderPairs(RenderCtxA *scene, u32 arg);
 extern s32 gxIsStereoscopic3dEnabled(void);
 extern void asdGxCommandListBegin(u32 commandList);
 

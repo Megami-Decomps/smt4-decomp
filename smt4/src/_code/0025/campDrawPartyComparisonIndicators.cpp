@@ -1,6 +1,7 @@
 /* NON_MATCHING: widget address is spilled to the stack while the row base stays in fp (retail keeps the widget in r9 and spills the row base) and GPR allocation differs; the opacity read is the linker-inlined vec2GetSpeed. */
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct PartyComparisonWidget {
     u8 position[0x20];
@@ -34,7 +35,6 @@ void efctSetSpeed(f32);
 f32 vec2GetSpeed(const void *);
 s32 vec2GetXInt(const void *);
 s32 vec2GetYInt(const void *);
-SpriteInfo *asdTMTexTableEntryAt(u32, s32);
 
 void campDrawPartyComparisonIndicators(PartyComparisonScene *scene, s32 forceFull)
 {
@@ -47,7 +47,7 @@ void campDrawPartyComparisonIndicators(PartyComparisonScene *scene, s32 forceFul
             continue;
         if (forceFull == 0 && scene->selected != row)
             efctSetSpeed(0.5f);
-        SpriteInfo *sprite = asdTMTexTableEntryAt(0x15, row + 0x36);
+        TextureTableEntryIV *sprite = asdTMTexTableEntryAt(0x15, row + 0x36);
         s32 localX = vec2GetXInt(scene->widgets[row].position) + sprite->x;
         s32 localY = vec2GetYInt(scene->widgets[row].position) + sprite->y;
         s32 x = vec2GetXInt(scene->origin) + localX + offsetX;

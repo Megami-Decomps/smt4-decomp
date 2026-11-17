@@ -2,7 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/BattleUnitSlot.h"
 #include "battle/btlAction.h"
-#include "gamedata/SaveSlotTable.h"
+#include "gamedata/SaveSlotTableIV.h"
 #include "gamedata/UnitRecordAccess.h"
 
 /* The status-flag editor screen: its list box, the filters and the flag mask being edited. */
@@ -27,7 +27,6 @@ BtlEntry *FUN_002561d8(BtlMainState *state, s32 index, u32 mode);
 s32 slotIsActive(s32 mode);
 void FUN_00246e24(s32 a, BtlUnit *unit, BtlActionRecord *action, u32 mask, s32 b);
 void FUN_00246d38(s32 a, BtlUnit *unit, BtlActionRecord *action, u32 mask);
-SaveSlotTable *gameGetSlotTable(void);
 s32 slotUnitIsInActiveParty(void *record);
 void objectFlagSetBit(void *record, s32 bit);
 void objectFlagsClear(void *record, u32 flags);
@@ -36,7 +35,7 @@ void objectFlagsClear(void *record, u32 flags);
 static __inline void addEntryFlags(BtlMainState *battle, BtlEntry *entry, u32 mask)
 {
     for (s32 slot = 0; slot < 50; ++slot) {
-        s32 action = entry->members.ids[slot];
+        s32 action = entry->ids[slot];
         if (action >= 0)
             FUN_00246e24(0, btlUnitGet(g_btlScriptUnit), &battle->actions[action], mask, 1);
     }
@@ -46,7 +45,7 @@ static __inline void addEntryFlags(BtlMainState *battle, BtlEntry *entry, u32 ma
 static __inline void removeEntryFlags(BtlMainState *battle, BtlEntry *entry, u32 mask)
 {
     for (s32 slot = 0; slot < 50; ++slot) {
-        s32 action = entry->members.ids[slot];
+        s32 action = entry->ids[slot];
         if (action >= 0)
             FUN_00246d38(0, btlUnitGet(g_btlScriptUnit), &battle->actions[action], mask);
     }
@@ -136,9 +135,9 @@ void FUN_003c33c8(StatusFlagEditor *screen, BtlMainState *battle)
             } while (index < 109);
         }
         if (screen->includeParty != 0) {
-            u8 count = *(reinterpret_cast<u8 *>(gameGetSlotTable()) + 0x910b);
+            u8 count = gameGetSlotTable()->stockCount;
             for (s32 slot = 0; slot < count; ++slot) {
-                s8 unit = reinterpret_cast<s8 *>(gameGetSlotTable())[slot + 0x90f0];
+                s8 unit = gameGetSlotTable()->stock[slot];
                 if (unit >= 0) {
                     void *record = gameGetUnitRecord(unit);
                     if (record != NULL && slotUnitIsInActiveParty(record) == 0) {
@@ -169,9 +168,9 @@ void FUN_003c33c8(StatusFlagEditor *screen, BtlMainState *battle)
             } while (index < 109);
         }
         if (screen->includeParty != 0) {
-            u8 count = *(reinterpret_cast<u8 *>(gameGetSlotTable()) + 0x910b);
+            u8 count = gameGetSlotTable()->stockCount;
             for (s32 slot = 0; slot < count; ++slot) {
-                s8 unit = reinterpret_cast<s8 *>(gameGetSlotTable())[slot + 0x90f0];
+                s8 unit = gameGetSlotTable()->stock[slot];
                 if (unit >= 0) {
                     void *record = gameGetUnitRecord(unit);
                     if (record != NULL && slotUnitIsInActiveParty(record) == 0)

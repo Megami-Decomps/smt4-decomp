@@ -31,7 +31,7 @@ u32 btlHasReserveReplacement(const BtlEntry* entry)
                 }
             }
         } else if (entry->flags & 8) {
-            s32 currentId = (s16)entry->id;
+            s32 currentId = (s16)entry->data.id;
             if (currentId == 0)
                 return 0;
             ReservePartyView* party = gameGetSlotTable();

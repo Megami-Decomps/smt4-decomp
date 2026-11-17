@@ -1,6 +1,7 @@
 /* NON_MATCHING: table lookup null/bounds registers and popup-field store grouping differ. */
 #include "gamedata/DataTable.h"
 #include "gamedata/GameFlags.h"
+#include "map/PopupStateA.h"
 
 struct PopupConditionRecord {
     s32 id;
@@ -17,19 +18,8 @@ struct PopupMessageResource {
     u8 header[0x20];
     char text[1];
 };
-/* The canonical MapRandomPopupPrefixA ends at 0x18; this local view accesses
- * additional fields without extending that shared prefix. */
-struct PopupTriggerStateView {
-    s32 state;
-    s32 phase;
-    u8 unk08[0xc];
-    const char *text;
-    s32 trigger;
-    const void *header;
-};
 
 extern "C" {
-extern PopupTriggerStateView *g_popupState;
 s32 gameFlagIsSet(s32 flag);
 
 PopupMessageResource *FUN_00365bc4(s32 message);
@@ -47,12 +37,12 @@ void FUN_0023466c(s32 id, s32 argument)
             (record->blockingFlag == 0 || !gameFlagIsSet(record->blockingFlag)) &&
             record->argument == argument) {
             PopupMessageResource *message = FUN_00365bc4(record->message);
-            PopupTriggerStateView *popup = g_popupState;
+            PopupStateA *popup = g_popupState;
             popup->state = 9;
-            popup->phase = 0;
-            popup->text = message->text;
-            popup->trigger = record->id;
-            popup->header = message->header;
+            popup->timer = 0;
+            popup->message = message->text;
+            popup->speakerId = record->id;
+            popup->messageData = message->header;
             gameFlagSetValue(record->blockingFlag, 1, 1);
             return;
         }

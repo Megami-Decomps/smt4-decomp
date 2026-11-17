@@ -1,55 +1,32 @@
 #include "title/titleMain.h"
 #include "common.h"
-#include "shard/JobWork.h"
+#include "frame_tex/FrameTex.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 
-typedef struct Unit {
-    /* 0x00 */ u8 unk00[0x14];
-    /* 0x14 */ s32 width;
-    /* 0x18 */ s32 height;
-} Unit;
+int surfaceCopy(AsdTexture *a, AsdTexture *b);
+u8 FUN_002bfadc(int arg, AsdTexture *unit);
 
-typedef struct Overlay {
-    /* 0x00 */ u8 unk00[0x28];
-    /* 0x28 */ u8 shown;
-    /* 0x29 */ u8 unk29;
-    /* 0x2A */ u8 flag;
-    /* 0x2B */ u8 applied;
-} Overlay;
-
-typedef struct Context {
-    /* 0x000 */ u8 unk000[4];
-    /* 0x004 */ Unit *unit;
-    /* 0x008 */ u8 unk008[0xEF8];
-    /* 0xF00 */ Overlay overlay;
-} Context;
-
-extern TitleScene *g_titleScene;
-
-int surfaceCopy(Unit *a, Unit *b);
-u8 FUN_002bfadc(int arg, Unit *unit);
-
-/* Script command: if the overlay is shown and not yet applied, resizes the unit through FUN_002bfadc/surfaceCopy (halving its size, the flag takes FUN_002bfadc's result) and marks it applied. */
+/* "CAMPCL" capture: once the CAMP effect is enabled and the left screen not yet captured, captures it into the left texture (FUN_002bfadc/surfaceCopy, then halves the texture) and marks it captured. */
 u32 FUN_00109348(u32 job)
 {
-    Context *context = (Context *)jobGetWork(job);
-    Overlay *overlay = &context->overlay;
+    FrameTexWork *work = (FrameTexWork *)jobGetWork(job);
 
-    if (overlay->shown == 0) {
+    if (work->campEnabled == 0) {
         return 0;
     }
-    if (overlay->applied != 0) {
+    if (work->campCapturedLeft != 0) {
         return 0;
     }
     renderCtxSelectStereoLayout(g_titleScene);
-    context->unit->width = 0x200;
-    context->unit->height = 0x200;
-    context->overlay.flag = FUN_002bfadc(0, context->unit);
-    surfaceCopy(context->unit, context->unit);
-    context->unit->width >>= 1;
-    context->unit->height >>= 1;
-    context->overlay.applied = 1;
+    work->surfaceLeft->dimensions.width = 0x200;
+    work->surfaceLeft->dimensions.height = 0x200;
+    work->campCaptureResult = FUN_002bfadc(0, work->surfaceLeft);
+    surfaceCopy(work->surfaceLeft, work->surfaceLeft);
+    work->surfaceLeft->dimensions.width >>= 1;
+    work->surfaceLeft->dimensions.height >>= 1;
+    work->campCapturedLeft = 1;
     return 0;
 }
 

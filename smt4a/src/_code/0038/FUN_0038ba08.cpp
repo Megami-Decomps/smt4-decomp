@@ -16,7 +16,7 @@ u32 FUN_0038ba08(void)
             (entry->flags & g_btlCandidateMasks.required) != 0 &&
             (entry->flags & g_btlCandidateMasks.excluded) == 0 &&
             (entry->flags & g_btlCandidateMasks.unavailable) != 0) {
-            BattleCandidateRecord *record = entry->candidate.record;
+            BattleCandidateRecord *record = entry->data.candidate;
             if (record != NULL && (record->flags & 0x100) != 0) {
                 scrSetResult(1);
                 return 1;

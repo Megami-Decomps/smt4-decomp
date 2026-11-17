@@ -1,5 +1,7 @@
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlEntryLookup.h"
 #include "battle/btlReflect.h"
+#include "battle/BtlEntryLookup.h"
 
 extern "C" {
 
@@ -11,12 +13,6 @@ struct BtlActionSourceA {
     /* 0x6A */ s16 memberId;
 };
 
-struct BattleParty {
-    /* 0x00 */ u8 unk00[0xc];
-    /* 0x0C */ u32 ids[1];
-};
-
-BattleParty *btlFindEntryBlockByMemberId(void *state, s32 memberId);
 s32 idSetFindSubjectIndex(void *state, BtlActionSourceA *source);
 
 /* Queues a kind-0x30 action for an active source record unless one with the same argument is already queued. */
@@ -24,7 +20,7 @@ ReflectAction *FUN_004feb50(s32 id, u32 argument, BtlActionSourceA *source, u32 
 {
     ReflectAction *action;
     ReflectAction *next;
-    BattleParty *party;
+    BtlUnitDataA *party;
     s32 index;
 
     if (!(source->status & 1)) {
@@ -37,15 +33,15 @@ ReflectAction *FUN_004feb50(s32 id, u32 argument, BtlActionSourceA *source, u32 
         }
     }
     action = btlQueueReflectAction(g_btlActionReflect, (s16)id, 0, argument);
-    party = btlFindEntryBlockByMemberId(static_cast<void *>(btlGetMainState()), source->memberId);
-    index = idSetFindSubjectIndex(static_cast<void *>(btlGetMainState()), source);
+    party = btlFindEntryBlockByMemberId(btlGetMainState(), source->memberId);
+    index = idSetFindSubjectIndex(btlGetMainState(), source);
     if (index < 0) {
         index = 0;
     }
     action->kind = 0x30;
     action->target = reinterpret_cast<u32>(source);
     action->value = value;
-    action->first = party->ids[index];
+    action->first = party->parts[index];
     action->second = source->memberId;
     return action;
 }

@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "event/2dEvent/EventEffect.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -15,7 +16,6 @@ int uiSpriteAdvanceAnimation(...);
 int eventQueueAddUniqueIfValid(...);
 int sysPlaySe(...);
 int gameGetPlayerData(void);
-int asdTMTexTableEntryAt(int, int);
 int uiSpriteSetKeyframe(...);
 int buttonHelpSetText(...);
 int dialogOpen(...);
@@ -137,16 +137,16 @@ void FUN_002c9a8c(int param_1)
     do {
       temp_v11 = FUN_001643b4(0x1d,temp_v20 + 0xba);
       *(unsigned short *)(param_1 + temp_v20 * 2 + 0x43b6) = temp_v11;
-      temp_v14 = asdTMTexTableEntryAt(0x1d,temp_v20 + 0xba);
-      temp_v13 = asdTMTexTableEntryAt(0x1d,0x117);
+      temp_v14 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,temp_v20 + 0xba));
+      temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x117));
       temp_v0 = **(short **)(temp_v13 + 0xc);
       temp_v12 = (int)(short)(*(short *)(temp_v14 + 8) + *(short *)(temp_v13 + 8) + temp_v0 * -2);
       ifTouchRegionAdd(temp_v12,(int)(short)(*(short *)(temp_v14 + 10) + *(short *)(temp_v13 + 10)),
                    (int)(short)(temp_v0 * 3),(int)(*(short **)(temp_v13 + 0xc))[1]);
       temp_v21 = param_1 + temp_v20 * 4;
       *(short *)(temp_v21 + 0x43d8) = (short)temp_v12;
-      temp_v14 = asdTMTexTableEntryAt(0x1d,temp_v20 + 0xba);
-      temp_v13 = asdTMTexTableEntryAt(0x1d,0x116);
+      temp_v14 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,temp_v20 + 0xba));
+      temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x116));
       temp_v12 = (int)(short)(*(short *)(temp_v14 + 8) + *(short *)(temp_v13 + 8));
       ifTouchRegionAdd(temp_v12,(int)(short)(*(short *)(temp_v14 + 10) + *(short *)(temp_v13 + 10)),
                    (int)(short)(**(short **)(temp_v13 + 0xc) * 3),(int)(*(short **)(temp_v13 + 0xc))[1])

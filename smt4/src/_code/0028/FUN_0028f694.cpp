@@ -1,40 +1,24 @@
-#include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 #include "shard/TextureDrawCall.h"
 #include "code/Code0028.h"
 #include "ui/UiSpriteState.h"
-#include "shard/W9_W9Match8_WorkRecords.h"
+#include "camp/CampState.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct SpriteInfo;
-// Coordinate-only view avoids including a conflicting Apocalypse RenderCtx definition.
-struct CampButtonSpriteView { u8 prefix[8]; s16 x, y; s16* size; };
-struct CampButtonAnimationViewIV {
-    CampHelpPrefixIV prefix;
-    u8 unk0AE[0x6B2];
-    UiSpriteState marker;
-    UiSpriteState background;
-};
-// The scissor stack lies beyond the published IV render-context prefix.
-struct CampButtonRenderViewIV {
-    RenderCtx context;
-    u8 unk12CC[0x40];
-    RenderStateStack scissor;
-};
 extern "C" {
-extern CampHelpPrefixIV* g_camp;
-extern RenderCtx* g_titleScene;
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *object);
 void texDrawCompositeSprite(u32 kind, u32 table, u32 sprite, s32 x, s32 y, u32 parameter);
 s32 ifTouchGetSelectionModeForRegion(u32 region);
-SpriteInfo* asdTMTexTableEntryAt(u32 table, u32 id);
 s32 vec2GetXInt(UiSpriteState* animation);
 s32 vec2GetYInt(UiSpriteState* animation);
 void FUN_0029a17c(s32 x, s32 y, s32 width, s32 height, u32 enabled);
 
 void FUN_0028f694(s32 x, s32 y, u32 region)
 {
-    CampButtonAnimationViewIV* camp = reinterpret_cast<CampButtonAnimationViewIV*>(g_camp);
-    efctSetSpeed(vec2GetSpeed(&camp->background));
+    CampState* camp = g_camp;
+    efctSetSpeed(vec2GetSpeed(&camp->sprites[3]));
     texDrawCompositeSprite(2, 0x1D, 6, x, y, 0x79);
     efctSetSpeed(1.0f);
     texDrawTableEntryAtStoredOrigin(2, 0x1D, 0x429, x, y, 0x7E);
@@ -44,14 +28,14 @@ void FUN_0028f694(s32 x, s32 y, u32 region)
     } else {
         texDrawTableEntryAtStoredOrigin(2, 0x1D, 0x42A, x, y, 0x83);
     }
-    CampButtonSpriteView* sprite = reinterpret_cast<CampButtonSpriteView*>(asdTMTexTableEntryAt(0x1D, 0x42A));
-    s32 markerX = vec2GetXInt(&camp->marker);
-    s32 markerY = vec2GetYInt(&camp->marker);
-    CampButtonRenderViewIV* context = reinterpret_cast<CampButtonRenderViewIV*>(g_titleScene);
+    TextureTableEntryIV* sprite = asdTMTexTableEntryAt(0x1D, 0x42A);
+    s32 markerX = vec2GetXInt(&camp->sprites[2]);
+    s32 markerY = vec2GetYInt(&camp->sprites[2]);
+    RenderCtx* context = g_titleScene;
     renderStackSet(&context->scissor, 3);
-    FUN_0029a17c(sprite->x + x, sprite->y + y, sprite->size[0], sprite->size[1], 1);
+    FUN_0029a17c(sprite->x + x, sprite->y + y, sprite->placement->width, sprite->placement->height, 1);
     texDrawTableEntryAtStoredOrigin(2, 0x1D, 0x42C, x + markerX, y + markerY, 0x88);
-    context = reinterpret_cast<CampButtonRenderViewIV*>(g_titleScene);
+    context = g_titleScene;
     renderStackSet(&context->scissor, 0);
 }
 }

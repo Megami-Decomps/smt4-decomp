@@ -1,10 +1,10 @@
 #include "StaffRoll/StaffRollMain.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 extern StaffRollWork *g_staffRoll;
-extern RenderCtx *g_titleScene;
 void gxResetColorQuadToWhite(void);
 s32 renderCtxPackPassFlags(u32 preset, u32 index);
 void efctSetSpeed(f32 speed);

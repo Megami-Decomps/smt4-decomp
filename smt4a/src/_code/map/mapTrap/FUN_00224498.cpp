@@ -4,15 +4,14 @@
 #include "Model/ModelList.h"
 #include "classes/Obj4209cc.h"
 #include "code/Code0040.h"
+#include "Model/MoriModelManager.h"
 
 extern "C" {
 extern MapTrapA *g_mapTrap;
-extern void *g_handleRegistry;
 void mapTrapClearState();
 void *asdMemoryAllocTraced(u32 size, const char *source, s32 line);
 ModelList *modelListInit(ModelList *model);
 void moriModelContentLoadBody(ModelList *model, s32 index);
-void handleRegistryRegisterObject(void *registry, ModelResourceItem *model);
 }
 
 static __inline void enableTrapModel(ModelResourceItem *model)

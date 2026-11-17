@@ -6,6 +6,7 @@
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 
@@ -40,7 +41,6 @@ typedef struct {
 extern unsigned char LAB_0013fbb4; /* 0x13fbb4 */
 extern unsigned char LAB_0013fbbc; /* 0x13fbbc */
 extern unsigned char LAB_0013fbc0; /* 0x13fbc0 */
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */

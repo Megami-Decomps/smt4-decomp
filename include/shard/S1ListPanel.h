@@ -21,18 +21,12 @@ typedef struct SpriteInfo {
     /* 0x0C */ s16 *size;        /* width, height */
 } SpriteInfo;
 
-/* Apocalypse's scissor stacks extend the canonical draw-context prefix. */
-struct RenderCtxScissorA : RenderCtxA {
-    u8 unk12D8[0x40];
-    RenderStateStack scissor;
-    RenderStateStack scissorMinimum;
-    RenderStateStack scissorMaximum;
-};
+/* Apocalypse's scissor stacks are part of RenderCtxA. */
+typedef RenderCtxA RenderCtxScissorA;
 typedef char RenderCtxScissorLayoutCheck[
-    offsetof(RenderCtxScissorA, scissor) == 0x1318 &&
-    offsetof(RenderCtxScissorA, scissorMinimum) == 0x1338 &&
-    offsetof(RenderCtxScissorA, scissorMaximum) == 0x1358 &&
-    sizeof(RenderCtxScissorA) == 0x1378 ? 1 : -1];
+    offsetof(RenderCtxA, scissor) == 0x1318 &&
+    offsetof(RenderCtxA, scissorMinimum) == 0x1338 &&
+    offsetof(RenderCtxA, scissorMaximum) == 0x1358 ? 1 : -1];
 
 enum {
     RENDER_STATE_SCISSOR = 3

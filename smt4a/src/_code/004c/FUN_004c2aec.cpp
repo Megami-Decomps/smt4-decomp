@@ -21,9 +21,9 @@ s32 FUN_004c2aec(u32 skill, s32 sourceId, s32 targetId, s32 percentage, f32 amou
         if (target) {
             if (source && !(DAT_005713f0.affinity & source->flags) &&
                 (DAT_005713f0.affinity & target->flags)) {
-                bonus = target->maxHp * percentage / 200;
+                bonus = target->data.maxHp * percentage / 200;
             } else {
-                bonus = target->maxHp * percentage / 100;
+                bonus = target->data.maxHp * percentage / 100;
             }
         } else {
             bonus = recordGetScaledMaximum(gameGetSlotRecord(targetId - 109)) * percentage / 100;

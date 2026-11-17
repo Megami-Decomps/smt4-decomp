@@ -1,4 +1,4 @@
-#include "common.h"
+#include "camp/Unite/UniteGlobals.h"
 
 extern "C" {
 
@@ -7,31 +7,20 @@ s32 scrRunOpcodesStub(u32 handle);
 s32 gameGlobalsSetMenuOpenFlag(s32 value);
 s32 scrScriptProcessStartEntry(u32 handle, s32 request);
 
-typedef struct Record {
-    /* 0x000 */ u8 unk000[0x42C];
-    /* 0x42C */ u32 handle;
-    /* 0x430 */ u8 busy;
-    /* 0x431 */ u8 unk431[3];
-    /* 0x434 */ s32 request;
-    /* 0x438 */ u8 unk438[0x50];
-    /* 0x488 */ s32 pending;
-} Record;
-extern Record *g_unite;
-
 /* Queues `request`: while busy it is kept as the pending request; otherwise, if scrScriptProcessStartEntry accepts it, it starts (requests 8..0xC and 0xE also play sound effect 0xA0) and the record becomes busy. Returns whether it started. */
 u32 uniteStartOrQueueRequest(s32 request)
 {
-    Record *record;
+    UniteWorkA *record;
     s32 accepted;
 
     record = g_unite;
     if (g_unite != NULL) {
-        if (g_unite->busy != 0) {
-            g_unite->pending = request;
+        if (g_unite->menu.active != 0) {
+            g_unite->scriptA.pendingRequest = request;
         } else {
-            accepted = scrScriptProcessStartEntry(g_unite->handle, request);
+            accepted = scrScriptProcessStartEntry(g_unite->menu.scriptProcess, request);
             if (accepted != 0) {
-                scrRunOpcodesStub(record->handle);
+                scrRunOpcodesStub(record->menu.scriptProcess);
                 if (((!(request == 8 || request == 9)) && (!(request == 10 || request == 0xB))) &&
                     (!(request == 0xC || request == 0xE))) {
                     if (request == 0xD) {
@@ -41,9 +30,9 @@ u32 uniteStartOrQueueRequest(s32 request)
                     gameGlobalsSetMenuOpenFlag(1);
                     sysPlaySe(0xA0);
                 }
-                record->pending = 0xFFFFFFFF;
+                record->scriptA.pendingRequest = 0xFFFFFFFF;
                 record->request = request;
-                record->busy = 1;
+                record->menu.active = 1;
                 return 1;
             }
         }

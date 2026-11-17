@@ -3,6 +3,7 @@
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "gamedata/NkmEnemyLookup.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 namespace {
 struct ProfileEntryDrawView {
@@ -26,7 +27,6 @@ static __inline TextLayoutContextA *panelLayout(ProfileEntryDrawView *panel)
 }
 
 extern "C" {
-const PanelTextLayoutEntryPrefixA *layoutFindTableEntry(TextLayoutContextA *context, s32 entryId);
 s8 touchSelectionGetSelected(const void *selection);
 void FUN_004a7dc8(ProfileEntryDrawView *panel, s32 entry, s32 fade, s32 style);
 void demonIconPanelDrawRow(ProfileEntryDrawView *panel, s32 enabled, u32 textId, s32 entry, s32 alternate, s32 fade);
@@ -43,7 +43,7 @@ void FUN_004a5ea0(ProfileEntryDrawView *panel, s32 entry, s32 alternate, u32 tex
         fade++;
     }
     u32 opacity = (u32)(scale * 255.0f) & 0xff;
-    const PanelTextLayoutEntryPrefixA *base;
+    const TextureTableEntryIV *base;
     if (alternate == 0) {
         base = layoutFindTableEntry(panelLayout(panel), entry + 0x40E);
     } else {
@@ -72,7 +72,7 @@ void FUN_004a5ea0(ProfileEntryDrawView *panel, s32 entry, s32 alternate, u32 tex
         caption = record->maxHp;
     }
     char text[60];
-    const PanelTextLayoutEntryPrefixA *captionEntry;
+    const TextureTableEntryIV *captionEntry;
     u32 color;
     if (alternate == 0) {
         captionEntry = layoutFindTableEntry(panelLayout(panel), 0x48F);
@@ -91,7 +91,7 @@ void FUN_004a5ea0(ProfileEntryDrawView *panel, s32 entry, s32 alternate, u32 tex
     if (record != NULL) {
         detail = record->maxMp;
     }
-    const PanelTextLayoutEntryPrefixA *detailEntry;
+    const TextureTableEntryIV *detailEntry;
     if (alternate == 0) {
         detailEntry = layoutFindTableEntry(panelLayout(panel), 0x493);
     } else {

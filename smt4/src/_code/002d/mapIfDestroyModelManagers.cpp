@@ -1,21 +1,18 @@
-#include "common.h"
-
-namespace { struct Slot { u8 padding[0x20]; u32 manager; }; struct Map { u8 padding[0xcc70]; Slot slots[2]; }; }
+#include "map/MapIfGlobals.h"
 
 extern "C" {
-extern Map *g_mapIf;
-void asdMdlManagerDestroy(u32 manager);
+void asdMdlManagerDestroy(NodeEnableNode *model);
 
-static void destroySlotManager(Slot *slot)
+static void destroySlotManager(MapIfModelMarker *marker)
 {
-    asdMdlManagerDestroy(slot->manager);
-    slot->manager = 0;
+    asdMdlManagerDestroy(marker->model);
+    marker->model = NULL;
 }
 
 void mapIfDestroyModelManagers(void)
 {
-    Map *map = g_mapIf;
-    destroySlotManager(&map->slots[0]);
-    destroySlotManager(&map->slots[1]);
+    MapIfState *map = g_mapIf.state;
+    destroySlotManager(&map->modelMarkers[0]);
+    destroySlotManager(&map->modelMarkers[1]);
 }
 }

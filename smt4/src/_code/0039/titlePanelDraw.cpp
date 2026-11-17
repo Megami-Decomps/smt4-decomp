@@ -1,5 +1,6 @@
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
+#include "camp/RenderCtxTitle.h"
 
 // The panel's effect state (observed fields).
 struct TitlePanelEffect {
@@ -24,7 +25,6 @@ struct TitlePanel {
 
 extern "C" {
 
-extern RenderCtx *g_titleScene;
 
 void renderCtxSelectStereoLayout(RenderCtx *context);
 void gxResetColorQuadToWhite(void);

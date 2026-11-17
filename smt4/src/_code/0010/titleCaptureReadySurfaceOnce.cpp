@@ -1,60 +1,34 @@
 #include "common.h"
-#include "shard/JobWork.h"
+#include "frame_tex/FrameTex.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 
-typedef struct Surface {
-    /* 0x00 */ u8 unk00[0x14];
-    /* 0x14 */ s32 width;
-    /* 0x18 */ s32 height;
-} Surface;
+s32 surfaceCopy(AsdTexture *dest, AsdTexture *src);
+s32 FUN_002bfadc(s32 arg, AsdTexture *surface);
 
-typedef struct TitleState {
-    /* 0x00 */ u8 unk00[0x60];
-    /* 0x60 */ u8 active;
-    /* 0x61 */ u8 unk61;
-    /* 0x62 */ u8 unk62;
-    /* 0x63 */ u8 captured;
-    /* 0x64 */ u8 unk64[0x35];
-    /* 0x99 */ u8 ready;
-} TitleState;
-
-typedef struct TitleWork {
-    /* 0x000 */ u8 unk000[4];
-    /* 0x004 */ Surface *surface;
-    /* 0x008 */ u8 unk008[0xEF8];
-    /* 0xF00 */ TitleState state;
-} TitleWork;
-
-extern u32 g_titleScene;
-
-s32 surfaceCopy(Surface *dest, Surface *src);
-s32 FUN_002bfadc(s32 arg, Surface *surface);
-s32 renderCtxSelectStereoLayout(u32 scene);
-
-/* Title job step: once active and ready, renders the scene into the surface at half size and marks it captured. */
+/* Second ENCEFF set's left capture: renders the scene into the left surface once, then halves the surface size. */
 s32 titleCaptureReadySurfaceOnce(u32 job)
 {
-    TitleWork *work = (TitleWork *)jobGetWork(job);
-    TitleState *state = &work->state;
+    FrameTexWork *work = (FrameTexWork *)jobGetWork(job);
 
-    if (state->active == 0) {
+    if (work->encEffEnabled == 0) {
         return 0;
     }
-    if (state->captured != 0) {
+    if (work->encEffCapturedLeft != 0) {
         return 0;
     }
-    if (state->ready == 0) {
+    if (work->encEffAlternate == 0) {
         return 0;
     }
     renderCtxSelectStereoLayout(g_titleScene);
-    work->surface->width = 0x200;
-    work->surface->height = 0x200;
-    work->state.unk62 = FUN_002bfadc(0, work->surface);
-    surfaceCopy(work->surface, work->surface);
-    work->surface->width >>= 1;
-    work->surface->height >>= 1;
-    work->state.captured = 1;
+    work->surfaceLeft->dimensions.width = 0x200;
+    work->surfaceLeft->dimensions.height = 0x200;
+    work->encEffCaptureResult = FUN_002bfadc(0, work->surfaceLeft);
+    surfaceCopy(work->surfaceLeft, work->surfaceLeft);
+    work->surfaceLeft->dimensions.width >>= 1;
+    work->surfaceLeft->dimensions.height >>= 1;
+    work->encEffCapturedLeft = 1;
     return 0;
 }
 

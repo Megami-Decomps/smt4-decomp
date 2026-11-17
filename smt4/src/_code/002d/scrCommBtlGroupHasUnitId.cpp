@@ -21,7 +21,7 @@ u32 scrCommBtlGroupHasUnitId(void)
     for (index = start; index < start + count; index++) {
         BtlEntry *unit = &btlGetMainState()->entries[index];
 
-        if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && unit->id == id) {
+        if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && unit->data.id == id) {
             scrSetResult(1);
             return 1;
         }
@@ -31,7 +31,7 @@ u32 scrCommBtlGroupHasUnitId(void)
 
         btlGetMainState();
         active = btlMainFindActiveEntry();
-        if (active != NULL && active->id == id) {
+        if (active != NULL && active->data.id == id) {
             scrSetResult(1);
             return 1;
         }

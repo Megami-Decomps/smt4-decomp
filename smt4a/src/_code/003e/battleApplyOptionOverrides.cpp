@@ -76,8 +76,8 @@ void battleApplyOptionOverrides(BtlMainStateA *battle)
     PlayerSlotView *slots = (PlayerSlotView *)gameGetSlotTable();
     BattleSlotSourceRecordA *player = &slots->player;
     if (player->id != 0) {
-        FUN_003eb760(battle, &temporary.unitParameters.parameterBlock, player);
-        FUN_004ca63c(battle, &temporary.unitParameters.parameterBlock, 2, 54, 0);
+        FUN_003eb760(battle, &temporary.data, player);
+        FUN_004ca63c(battle, &temporary.data, 2, 54, 0);
     }
 }
 }

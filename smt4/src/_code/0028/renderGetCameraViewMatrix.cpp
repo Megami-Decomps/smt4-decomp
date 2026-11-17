@@ -1,8 +1,8 @@
 /* NON_MATCHING: retail 54 vs built 52 rows; camera-selection branches and matrix block-copy scheduling differ. */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
-extern RenderCtx *g_titleScene;
 void *asdCameraValueGet(s32);
 s32 gxIsStereoscopic3dEnabled(void);
 void *FUN_0034334c(RenderCtx *);

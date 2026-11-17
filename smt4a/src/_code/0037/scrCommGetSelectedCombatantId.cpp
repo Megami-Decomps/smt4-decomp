@@ -15,7 +15,7 @@ u32 scrCommGetSelectedCombatantId(void)
     if (index < 0)
         scrSetResult(0);
     else
-        scrSetResult(state->entries[index].id);
+        scrSetResult(state->entries[index].data.id);
     return 1;
 }
 }

@@ -1,7 +1,6 @@
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 
 extern "C" {
-extern ButtonHelpGlobals g_buttonHelp;
 
 /* Byte at +0x494 of the 4-byte slot `index` (0-5) of the object, or 0. */
 u8 buttonHelpGetSlotByte(u32 index)

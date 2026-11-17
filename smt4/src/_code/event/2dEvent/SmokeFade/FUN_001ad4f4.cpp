@@ -3,11 +3,11 @@
 #include "util/BitsAndBytes_VariantA.h"
 #include "gfx/StereoParallax.h"
 #include "shard/TextureDrawCall.h"
+#include "camp/RenderCtxTitle.h"
 
 extern "C" {
 extern SmokeFadeState *DAT_0043df28;
 extern SmokeFadeImage DAT_0043df40[2];
-extern RenderCtx *g_titleScene;
 void gxResetColorQuadToWhite();
 u32 renderCtxPackPassFlags(u32 value, bool enabled);
 void efctSetSpeed(f32 speed);

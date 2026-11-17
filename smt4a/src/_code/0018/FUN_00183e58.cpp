@@ -1,7 +1,6 @@
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 
 extern "C" {
-extern ButtonHelpGlobalsA g_buttonHelp;
 
 void uiSpriteSelectAnim(ButtonHelpUnit *unit, s32 flag);
 void ifTouchDecrementTimer(void);

@@ -4,6 +4,7 @@
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "text/TextDraw.h"
 #include "addon/LookupRecord.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct BattleRosterLabelMode {
     u8 unk00[4];
@@ -11,7 +12,6 @@ struct BattleRosterLabelMode {
 };
 extern "C" {
 extern const char DAT_0052d838[];
-UiTextMetrics *asdTMTexTableEntryAt(u32 texture, u32 frame);
 BattleRosterRecordA *partyGetSlot(u32 id);
 void textFormatBuffer(char *output, const char *format, ...);
 s32 fontMeasureLineAdvance(const char *text, s32 font);
@@ -19,7 +19,7 @@ s32 fontMeasureLineAdvance(const char *text, s32 font);
 /* Centers each active roster member's label in its layout slot, dimming unselected members in mode two. */
 void FUN_004bdce0(Obj25C *owner, s32 x, s32 y, f32 alpha)
 {
-    UiTextMetrics *origin = asdTMTexTableEntryAt(0x11, 0x11);
+    TextureTableEntryIV *origin = asdTMTexTableEntryAt(0x11, 0x11);
     f32 dimAlpha = alpha * 0.5f;
     s32 visible = 0;
     for (s32 slot = 0; slot < 12; ++slot) {
@@ -31,9 +31,9 @@ void FUN_004bdce0(Obj25C *owner, s32 x, s32 y, f32 alpha)
             }
             char text[64];
             textFormatBuffer(text, DAT_0052d838, reinterpret_cast<const char *>(FUN_00180114(record->label.nameId)));
-            UiTextMetrics *placement = asdTMTexTableEntryAt(0x11, visible + 0xAE);
+            TextureTableEntryIV *placement = asdTMTexTableEntryAt(0x11, visible + 0xAE);
             s32 width = fontMeasureLineAdvance(text, 1);
-            s32 labelX = origin->x + (placement->x + (placement->dimensions[0] - width) / 2 + x);
+            s32 labelX = origin->x + (placement->x + (placement->placement->width - width) / 2 + x);
             s32 labelY = placement->y + origin->y + y;
             u32 color = 0xFFFFFFFF;
             if ((record->label.flags & 2) != 0) {
