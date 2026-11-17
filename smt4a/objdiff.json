@@ -309130,13 +309130,13 @@
       "target_path": "orig/target/_code/0049/menuRequestActivate.o"
     },
     {
-      "base_path": "build/obj/_code/0049/FUN_00491c60.o",
+      "base_path": "build/obj/_code/0049/lmapRefreshDestinationAvailability.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00491c60",
+            "name": "lmapRefreshDestinationAvailability",
             "size": 996,
             "vram": "0x491c60"
           }
@@ -309144,10 +309144,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0049/FUN_00491c60.cpp"
+        "source_path": "src/_code/0049/lmapRefreshDestinationAvailability.cpp"
       },
-      "name": "_code/0049/FUN_00491c60",
-      "target_path": "orig/target/_code/0049/FUN_00491c60.o"
+      "name": "_code/0049/lmapRefreshDestinationAvailability",
+      "target_path": "orig/target/_code/0049/lmapRefreshDestinationAvailability.o"
     },
     {
       "base_path": "build/obj/_code/0049/sub20634Reset.o",

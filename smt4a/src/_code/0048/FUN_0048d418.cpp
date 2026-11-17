@@ -1,3 +1,4 @@
+#include "map/InteractionFlags.h"
 /* NON_MATCHING: for-loop counter lifetimes match; mode predicate grouping and sort/output scratch registers differ. */
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
@@ -28,7 +29,6 @@ extern "C" {
 
 TableRecord *dataTable2BType1GetEntry(u32 *view, s32 index);
 s32 gameFlagIsSet(u32 flag);
-s32 FUN_004083a8(s32 first, s32 second);
 
 /* Collects the distinct ids of the table records of one kind that are currently available, sorted in descending
  * order, into the selectable list. */

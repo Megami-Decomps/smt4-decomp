@@ -157621,12 +157621,12 @@
     },
     {
       "address": "0x491c60",
-      "function": "FUN_00491c60",
+      "function": "lmapRefreshDestinationAvailability",
       "module": "_code",
-      "object": "build/obj/_code/0049/FUN_00491c60.o",
+      "object": "build/obj/_code/0049/lmapRefreshDestinationAvailability.o",
       "size": 996,
-      "source": "src/_code/0049/FUN_00491c60.cpp",
-      "target": "orig/target/_code/0049/FUN_00491c60.o",
+      "source": "src/_code/0049/lmapRefreshDestinationAvailability.cpp",
+      "target": "orig/target/_code/0049/lmapRefreshDestinationAvailability.o",
       "thumb": false
     },
     {

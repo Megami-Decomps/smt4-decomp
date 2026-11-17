@@ -1,3 +1,4 @@
+#include "map/LmapDestinationListsA.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00486444` (_code @ 0x486444, 0x8c8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "gamedata/MapSaveBlockA.h"
@@ -21,7 +22,6 @@ int FUN_0048d67c(...);
 int FUN_0048d98c(...);
 int FUN_004900e0(...);
 int FUN_004915f0(int);
-int FUN_00491c60(int);
 float FUN_00492adc(int);
 float FUN_00492b98(void);
 int lmapSceneGetObj(...);
@@ -71,7 +71,6 @@ extern unsigned char mathHeadingToDirectionCode(int context, float angle);
 /* Supplied declaration required: FUN_0048d98c. */
 /* Supplied declaration required: FUN_004900e0. */
 /* Supplied declaration required: FUN_004915f0. */
-/* Supplied declaration required: FUN_00491c60. */
 extern unsigned long long *sub68OwnerGetBlock60(int);
 extern int naviGetActiveStateValue(int);
 /* Supplied declaration required: lmapSceneGetObj. */
@@ -224,7 +223,7 @@ LAB_004866c8:
       *piVar13 = (int)(temp_v16 + temp_v15);
     }
     if (*(char *)(param_1 + 0x7b90) != '\0') {
-      FUN_00491c60(param_1);
+      lmapRefreshDestinationAvailability(reinterpret_cast<LmapDestinationListsA *>(param_1));
       *(unsigned char *)(param_1 + 0x7b91) = 1;
       *(unsigned char *)(param_1 + 0x7b92) = 1;
       FUN_004915f0(param_1);

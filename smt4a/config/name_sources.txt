@@ -7429,3 +7429,4 @@
 002cdad4 btlEventPanelInitialize inferred Initializes BtlUiA.objB at parent+0x24BC: animation resources and seven-sprite event panel; four canonical key tables verified against original bytes.
 002c5468 mapRebuildWallAutoTiles inferred Rebuilds interior state-2 wall cells from four state-1 neighbor bits; writes MapCell.autoTile fields using two 16-byte tables. Native writable data at 005814A4/005814B4 verified byte-for-byte; source constness corrected to match segment ownership.
 002326b4 mapSystemLoadSharedFiles inferred map/mapCommon.cpp shared script/message and fifteen MoriModelContent resource initialization; same role and shared filenames as IV mapSystemLoadSharedFiles.
+00491c60 lmapRefreshDestinationAvailability inferred Refreshes normal and extra destination-list availability from native map, quest, ownership and interaction-variant rules; missing variant argument restored.

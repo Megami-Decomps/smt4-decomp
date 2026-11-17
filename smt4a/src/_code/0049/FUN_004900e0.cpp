@@ -1,3 +1,4 @@
+#include "map/InteractionFlags.h"
 /* NON_MATCHING: refreshes the visibility, screen position and tint of the two map marker lists (full-size or half-size layout); written from the decompilation, the duplicated half/full loops are merged and scheduling not compared with retail */
 #include "gamedata/MapSaveBlockA.h"
 #include "game/GameStateA.h"
@@ -56,7 +57,6 @@ struct MapMarkerScreen {
 extern "C" {
 
 f32 *sub68OwnerGetBlock60(void *scene);
-s32 FUN_004083a8(u8 kind, u8 type);
 s32 FUN_002e707c(void);
 s32 dataTableHasMatchingEntry35(u32 reference);
 

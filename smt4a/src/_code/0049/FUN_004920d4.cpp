@@ -1,3 +1,4 @@
+#include "map/InteractionFlags.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004920d4` (_code @ 0x4920d4, 0x660 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -54,7 +55,6 @@ extern int dataTableGetEntry49(unsigned char);
 extern int gameFlagsClassify(unsigned int);
 extern int FUN_00384cf4(void);
 extern unsigned int gameFlagsGetWord1590Ptr(unsigned int);
-extern int FUN_004083a8(int);
 /* Supplied declaration required: FUN_00486444. */
 /* Supplied declaration required: FUN_00487470. */
 /* Supplied declaration required: uiDrawAnimatedMessage. */
@@ -273,12 +273,12 @@ LAB_004922ec:
                   temp_v0 = *(char *)((int)piVar15 + 7) - temp_v6;
                 }
                 if (temp_v0 < 0 == temp_v11) {
-                  if ((((((short)piVar15[2] == 0) || (temp_v5 = FUN_004083a8(temp_v9), temp_v5 == 0)) &&
+                  if ((((((short)piVar15[2] == 0) || (temp_v5 = FUN_004083a8(temp_v9, (u32)(s16)piVar15[2]), temp_v5 == 0)) &&
                        ((*(short *)((int)piVar15 + 10) == 0 ||
-                        (temp_v5 = FUN_004083a8(*piVar15), temp_v5 == 0)))) &&
-                      (((short)piVar15[3] == 0 || (temp_v5 = FUN_004083a8(*piVar15), temp_v5 == 0)))) &&
+                        (temp_v5 = FUN_004083a8(*piVar15, (u32)*(s16 *)((u8*)piVar15 + 10)), temp_v5 == 0)))) &&
+                      (((short)piVar15[3] == 0 || (temp_v5 = FUN_004083a8(*piVar15, (u32)(s16)piVar15[3]), temp_v5 == 0)))) &&
                      ((temp_v15 = temp_v16, temp_v17 = temp_v18, *(short *)((int)piVar15 + 0xe) == 0 ||
-                      (temp_v5 = FUN_004083a8(*piVar15), temp_v15 = temp_v16, temp_v17 = temp_v18, temp_v5 == 0)
+                      (temp_v5 = FUN_004083a8(*piVar15, (u32)*(s16 *)((u8*)piVar15 + 14)), temp_v15 = temp_v16, temp_v17 = temp_v18, temp_v5 == 0)
                       ))) goto LAB_004925c8;
                   break;
                 }
