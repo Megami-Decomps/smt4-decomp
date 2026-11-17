@@ -1,3 +1,4 @@
+#include "quest_center/QuestText.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a6d98` (_code @ 0x1a6d98, 0x834 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "ui/UiSpriteApi.h"
@@ -46,7 +47,6 @@ extern int FUN_0029d644(int);
 extern int ifTouchGetSelectionModeForRegion(int);
 extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(int);
-extern unsigned int FUN_002bcddc(unsigned int, unsigned int);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: texDrawCompositeSprite. */
@@ -114,7 +114,7 @@ void FUN_001a6d98(void)
           FUN_001af84c(temp_v11,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                        (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0x6f,0);
           temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x29,0x9b));
-          temp_v7 = FUN_002bcddc(temp_v11,0);
+          temp_v7 = reinterpret_cast<u32>(FUN_002bcddc(temp_v11,0));
           textFormatBuffer(temp_v13,&LAB_001a7270,temp_v7);
           VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -194,7 +194,7 @@ void FUN_001a6d98(void)
     FUN_001af84c(temp_v11,(int)*(short *)(temp_v12 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v1,
                  (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v2,0xab,1);
     temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x29,0xb2));
-    temp_v7 = FUN_002bcddc(temp_v6,0);
+    temp_v7 = reinterpret_cast<u32>(FUN_002bcddc(temp_v6,0));
     textFormatBuffer(temp_v13,&LAB_001a7270,temp_v7);
     VectorSignedToFloat((int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v2,
                         (unsigned char)(in_fpscr >> 0x16) & 3);

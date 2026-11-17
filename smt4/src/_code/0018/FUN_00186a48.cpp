@@ -1,3 +1,4 @@
+#include "quest_center/QuestText.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00186a48` (_code @ 0x186a48, 0x6bc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "ui/UiSpriteApi.h"
@@ -36,7 +37,6 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: uiDrawTableTextureSized. */
 /* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
-extern unsigned int FUN_002bcddc(unsigned short, unsigned int);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -200,7 +200,7 @@ void FUN_00186a48(void)
     drawSkillCategoryLabel(temp_v0,*(short *)(temp_v11 + 8) + temp_v9 + temp_v10,*(short *)(temp_v11 + 10) + temp_v8,
                  0xa6);
     temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x29,0x55));
-    temp_v4 = FUN_002bcddc(temp_v0,0);
+    temp_v4 = reinterpret_cast<u32>(FUN_002bcddc(temp_v0,0));
     textFormatBuffer(temp_v14,&LAB_0018710c,temp_v4);
     VectorSignedToFloat(*(short *)(temp_v11 + 10) + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v11 + 8) + temp_v9 + temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);

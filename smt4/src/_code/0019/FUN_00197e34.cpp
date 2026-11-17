@@ -1,3 +1,4 @@
+#include "quest_center/QuestText.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00197e34` (_code @ 0x197e34, 0x1150 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -63,7 +64,6 @@ extern int gameGetFlagBlock(void);
 /* Supplied declaration required: FUN_002b75ec. */
 /* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
-extern unsigned int FUN_002bcddc(unsigned int, unsigned int);
 extern unsigned int FUN_002bd068(unsigned int);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
@@ -182,7 +182,7 @@ void FUN_00197e34(void)
     temp_v11 = temp_v4 + (int)temp_v17;
     drawSkillCategoryLabel(temp_v25,*(short *)(temp_v13 + 8) + temp_v11,*(short *)(temp_v13 + 10) + temp_v5,0x6a);
     temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x29,0x12));
-    temp_v19 = FUN_002bcddc(temp_v25,0);
+    temp_v19 = reinterpret_cast<u32>(FUN_002bcddc(temp_v25,0));
     textFormatBuffer(temp_v24,"%s",temp_v19);
     temp_v18 = (unsigned long long)(unsigned int)temp_v31 << 0x20;
     VectorSignedToFloat(*(short *)(temp_v13 + 8) + temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
