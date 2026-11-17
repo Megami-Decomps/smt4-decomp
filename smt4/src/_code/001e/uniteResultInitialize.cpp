@@ -43,8 +43,16 @@ struct UniteScreenWork {
 
 /* Animation tables for paramsInit; the original file defined them statically. */
 static const s32 sKeysFirst[9] = { 320, 0, 8, 1310720, 0, 8, 0, 0, 1 };
-static const f32 sKeysSecond[12] = { 0, 1.0f, 8, 1.0f, 1.0f, 1, 0, 0.3f, 15, 0.3f, 0, 5 };
-static const f32 sKeysThird[3] = { 0, 1.0f, 8 };
+struct UniteFloatKey {
+    f32 from;
+    f32 to;
+    s32 frames;
+};
+typedef char UniteFloatKeySizeCheck[sizeof(UniteFloatKey) == 12 ? 1 : -1];
+static const UniteFloatKey sKeysSecond[4] = {
+    { 0, 1.0f, 8 }, { 1.0f, 1.0f, 1 }, { 0, 0.3f, 15 }, { 0.3f, 0, 5 }
+};
+static const UniteFloatKey sKeysThird[1] = { { 0, 1.0f, 8 } };
 static const s32 sUniteResultSpriteKeys[56] = {
     1, 0, -3, 0, 0, -3, 0, -1, 0, -1, -1, 0, -1, 0,
     2, 0, -3, 1, 0, -3, 0, -1, 0, -1, -1, 0, -1, 0,

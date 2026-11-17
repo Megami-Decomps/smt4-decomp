@@ -30,5 +30,14 @@ in `battle/DevilMsg/%s.mbm`.
 
 The final `paramsInit` packet is the 224-byte static
 `sUniteResultSpriteKeys` table at `00403440`. Naming the data makes its local
-symbol and the retail relocation agree after function carving. Its full bytes
-are checked by the matched relink, not just by instruction comparison.
+symbol and the retail relocation agree after function carving. Function carving resolves that local table symbol against the original image;
+therefore the matched relink alone does **not** verify the discarded data
+sections. The uncarved compiler object's four table definitions were checked
+separately against the image at `004033e0`, `00403404`, `00403434`, and
+`00403440` (36, 48, 12, and 224 bytes respectively).
+
+That independent check found five pre-existing incorrectly typed duration
+values in the second and third packets. Each key contains two floating-point
+values and one integer frame count, not three floats. `UniteFloatKey` expresses
+that mixed layout directly. All four complete compiled tables now match the
+original bytes, and the function's instructions remain identical.
