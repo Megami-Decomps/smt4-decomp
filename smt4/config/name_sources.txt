@@ -4914,3 +4914,4 @@
 0028c040 statusAcquireSharedResources inferred Initializes shared status-screen resources on the first reference and increments the reference count; independently matched IV counterpart.
 0031c344 itemApplyPermanentStatBoost inferred Applies supported permanent stat-boost items to player or unit, or checks applicability while preserving native clamp behavior.
 002d1ce0 mapBgLoadArchivesStep inferred Advances optional sky and destination BAM archive async loads through map departure states; native path literals and shared MapDepartWork owner.
+00339b64 btlAdvanceResidentResourceLoad inferred Lock-protected worker advances resident battle resources and creates the legion script with its command owner, then marks initialization complete.

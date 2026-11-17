@@ -157462,13 +157462,13 @@
       "target_path": "orig/target/_code/0033/FUN_003398e4.o"
     },
     {
-      "base_path": "build/obj/_code/0033/FUN_00339b64.o",
+      "base_path": "build/obj/_code/0033/btlAdvanceResidentResourceLoad.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00339b64",
+            "name": "btlAdvanceResidentResourceLoad",
             "size": 596,
             "vram": "0x339b64"
           }
@@ -157476,10 +157476,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0033/FUN_00339b64.cpp"
+        "source_path": "src/_code/0033/btlAdvanceResidentResourceLoad.cpp"
       },
-      "name": "_code/0033/FUN_00339b64",
-      "target_path": "orig/target/_code/0033/FUN_00339b64.o"
+      "name": "_code/0033/btlAdvanceResidentResourceLoad",
+      "target_path": "orig/target/_code/0033/btlAdvanceResidentResourceLoad.o"
     },
     {
       "base_path": "build/obj/_code/0033/FUN_00339dc0.o",

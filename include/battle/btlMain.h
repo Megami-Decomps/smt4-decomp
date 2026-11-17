@@ -10,6 +10,7 @@
 #include <stddef.h>
 
 
+struct ScriptProcess;
 struct BtlActionRecord;
 struct BtlEntry;
 struct BattleActionHistoryEntry;
@@ -146,6 +147,19 @@ typedef struct BtlMainState {
         } actionCleanup;
         struct {
             u8 prefix1FD8[0x258];
+            void *commonMessages;
+            void *talkSystemMessages;
+            void *talkBaseData;
+            void *systematicTable;
+            void *subQuestGuestMessages;
+            void *bossDeadTable;
+            void *legionMessages;
+            void *legionMessageTable;
+            void *legionScript;
+            ScriptProcess *process;
+        } residentResources;
+        struct {
+            u8 prefix1FD8[0x258];
             /* 0x2230 */ u32 messageHandle;    /* the unit/message the battle's pending request is aimed at */
             /* 0x2234 */ u32 messageWindow;    /* the window the battle's choice is shown in */
         } dialog;
@@ -216,8 +230,23 @@ typedef struct BtlMainState {
     /* 0x49DC */ u32 word49DC;
     /* 0x49E0 */ u32 pending;
     /* 0x49E4 */ u32 effectValue;       /* the battle effect value chosen by the effect starter */
-    /* 0x49E8 */ u8 unk49E8[0x70];
+    union {
+        /* 0x49E8 */ u8 unk49E8[0x70];
+        struct {
+            u8 prefix49E8[0x14];
+            /* 0x49FC */ u16 flags;
+            /* 0x49FE */ u16 step;
+            /* 0x4A00 */ u8 lock[1];
+        } residentLoad;
+    };
 } BtlMainState;
+typedef char BtlMainStateResidentOffsets[
+    offsetof(BtlMainState,residentResources.commonMessages)==0x2230 &&
+    offsetof(BtlMainState,residentResources.legionMessages)==0x2248 &&
+    offsetof(BtlMainState,residentResources.process)==0x2254 &&
+    offsetof(BtlMainState,residentLoad.flags)==0x49FC &&
+    offsetof(BtlMainState,residentLoad.step)==0x49FE &&
+    offsetof(BtlMainState,residentLoad.lock)==0x4A00 ? 1 : -1];
 typedef char BtlMainStateLayoutCheck[
     sizeof(BtlMainState) == 0x4A58 && offsetof(BtlMainState, core.selectionIndex) == 0xC4 &&
     offsetof(BtlMainState, core.jobB) == 0x2C && offsetof(BtlMainState, core.freeOnEnd) == 0x60 &&

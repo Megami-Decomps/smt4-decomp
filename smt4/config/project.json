@@ -79815,12 +79815,12 @@
     },
     {
       "address": "0x339b64",
-      "function": "FUN_00339b64",
+      "function": "btlAdvanceResidentResourceLoad",
       "module": "_code",
-      "object": "build/obj/_code/0033/FUN_00339b64.o",
+      "object": "build/obj/_code/0033/btlAdvanceResidentResourceLoad.o",
       "size": 596,
-      "source": "src/_code/0033/FUN_00339b64.cpp",
-      "target": "orig/target/_code/0033/FUN_00339b64.o",
+      "source": "src/_code/0033/btlAdvanceResidentResourceLoad.cpp",
+      "target": "orig/target/_code/0033/btlAdvanceResidentResourceLoad.o",
       "thumb": false
     },
     {
