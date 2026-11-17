@@ -1,3 +1,7 @@
+#include "code/Code0028_Smt4.h"
+#include "code/Code0029.h"
+#include "code/Code0029_VariantA.h"
+#include "camp/Unite/UniteWork.h"
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxTitle.h"
 #include "shard/TextureDrawCall.h"
@@ -6,14 +10,11 @@
 extern "C" {
 s32 ifTouchGetSelectionModeForRegion(s32 id);
 s32 FUN_0029e958(void *widget);
-s32 FUN_0028cfbc(void *widget);
-s32 resourceRunEmbeddedOperationIfUnblocked(void *widget);
-s32 FUN_0029ee54(void *widget);
-s32 FUN_0029d644(void *widget);
 s32 resourceRunOperationIfUnblocked(void *widget);
 void gxSetMirroredClippedScissor(s32 x, s32 y, s32 width, s32 height, s32 mode);
 
 /* Re-query the controller after each callback, and refresh the render context for each state change.
+ * Interpret controller state words as signed counts/offsets before arithmetic and float conversion.
  * Draws a frame with a scroll thumb: the three backing pieces, the thumb sized and placed from the widget's
    visible/total counts (vertical when `horizontal` is 0, horizontal otherwise) under a clip rectangle, then the
    cover piece. */
@@ -39,18 +40,18 @@ void uiDrawListScrollBar(void *widget, s32 x, s32 y, u32 group, u32 frameId, u32
 
     if (horizontal != 0) {
         s32 total = FUN_0029e958(widget);
-        s32 shown = FUN_0028cfbc(widget);
+        s32 shown = FUN_0028cfbc((Widget *)widget);
         s32 length;
         if (total <= shown) {
             length = record->placement->width;
         } else {
             f32 ratio = (f32)record->placement->width / (f32)FUN_0029e958(widget);
-            length = (s32)((f32)FUN_0028cfbc(widget) * ratio);
+            length = (s32)((f32)FUN_0028cfbc((Widget *)widget) * ratio);
             if (length < 1) {
                 length = 1;
             }
-            offset = (s32)((f32)resourceRunEmbeddedOperationIfUnblocked(widget) * ratio);
-            if (resourceRunEmbeddedOperationIfUnblocked(widget) + FUN_0028cfbc(widget) == FUN_0029e958(widget) &&
+            offset = (s32)((f32)(s32)resourceRunEmbeddedOperationIfUnblocked(widget) * ratio);
+            if ((s32)resourceRunEmbeddedOperationIfUnblocked(widget) + FUN_0028cfbc((Widget *)widget) == FUN_0029e958(widget) &&
                 offset + length < record->placement->width) {
                 offset = record->placement->width - length;
             }
@@ -58,19 +59,19 @@ void uiDrawListScrollBar(void *widget, s32 x, s32 y, u32 group, u32 frameId, u32
         renderStackSet(&g_titleScene->scissor, 3);
         gxSetMirroredClippedScissor(record->x + x + offset, record->y + y, length, record->placement->height, 1);
     } else {
-        s32 total = FUN_0029ee54(widget);
-        s32 shown = FUN_0029d644(widget);
+        s32 total = (s32)FUN_0029ee54(widget);
+        s32 shown = (s32)FUN_0029d644(widget);
         s32 length;
         if (total <= shown) {
             length = record->placement->height;
         } else {
-            f32 ratio = (f32)record->placement->height / (f32)FUN_0029ee54(widget);
-            length = (s32)((f32)FUN_0029d644(widget) * ratio);
+            f32 ratio = (f32)record->placement->height / (f32)(s32)FUN_0029ee54(widget);
+            length = (s32)((f32)(s32)FUN_0029d644(widget) * ratio);
             if (length < 1) {
                 length = 1;
             }
             offset = (s32)((f32)resourceRunOperationIfUnblocked(widget) * ratio);
-            if (resourceRunOperationIfUnblocked(widget) + FUN_0029d644(widget) == FUN_0029ee54(widget) &&
+            if (resourceRunOperationIfUnblocked(widget) + (s32)FUN_0029d644(widget) == (s32)FUN_0029ee54(widget) &&
                 offset + length < record->placement->height) {
                 offset = record->placement->height - length;
             }

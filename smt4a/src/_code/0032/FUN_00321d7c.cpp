@@ -1,4 +1,4 @@
-/* NON_MATCHING: register choice of the colour copies and the compare/store scheduling differ (rgb block copy and subtraction pattern now match). */
+/* NON_MATCHING: the colour block copies keep the scratch slot address in a callee-saved register (retail recomputes it into r0 and copies through r1-r3/ip), and the alpha subtraction stores through that address. */
 #include "gfx/ParticleTransform.h"
 #include "gfx/VectorScratch.h"
 extern "C" {
@@ -30,10 +30,12 @@ void FUN_00321d7c(ParticleTransformSample *sample, ParticleTransformCurves *curv
         g_vectorScratch.first.color = *previous;
         FUN_002cf548();
         effectColorSubtract(&g_vectorScratch.first.color, &g_vectorScratch.second.color);
-        if (g_vectorScratch.first.color.red == 0.0f && g_vectorScratch.first.color.green == 0.0f) {
+        f32 x = g_vectorScratch.first.color.red;
+        f32 y = g_vectorScratch.first.color.green;
+        if (x == 0.0f && y == 0.0f) {
             sample->angle = 0.0f;
         } else {
-            sample->angle = FUN_001b640c(g_vectorScratch.first.color.green, g_vectorScratch.first.color.red) * 0.024543693f;
+            sample->angle = FUN_001b640c(y, x) * 0.024543693f;
         }
     }
 }

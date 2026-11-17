@@ -11,7 +11,9 @@ typedef struct MapMain {
     /* 0x00 */ u32 job;           /* job that runs the map mode */
     /* 0x04 */ u8 unk04[8];
     /* 0x0C */ u8 freeOnEnd;      /* 0 = keep the block after the job ends */
-    /* 0x0D */ u8 unk0D[0x1F];
+    /* 0x0D */ u8 unk0D[0x17];
+    /* 0x24 */ u32 state;        /* map-mode controller state */
+    /* 0x28 */ u32 stateTime;    /* elapsed updates within the state */
     /* 0x2C */ u32 mapId;
     /* 0x30 */ u32 areaId;
     /* 0x34 */ u8 unk34[8];
@@ -57,6 +59,8 @@ typedef struct MapMainA {
 
 typedef char MapMainASizeCheck[sizeof(MapMainA) == 0xC0 ? 1 : -1];
 typedef char MapMainSizeCheck[sizeof(MapMain) == 0xC8 ? 1 : -1];
+typedef char MapMainStateOffsets[offsetof(MapMain, state) == 0x24 &&
+    offsetof(MapMain, stateTime) == 0x28 ? 1 : -1];
 typedef char MapMainATransitionOffsets[offsetof(MapMainA, transition.mapId) == 0x30 &&
     offsetof(MapMainA, transition.areaId) == 0x34 ? 1 : -1];
 

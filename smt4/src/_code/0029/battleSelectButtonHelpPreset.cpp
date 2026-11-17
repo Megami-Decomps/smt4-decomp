@@ -1,4 +1,3 @@
-/* NON_MATCHING: -O2 candidate; only initial flags/global/constant register scheduling and literal-pool order differ. */
 #include "shard/W4_Match6_BtlScript.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainGlobals.h"
@@ -8,9 +7,11 @@ u8 flagBitIsSet(u32 bit);
 bool gameFlagIsSet(u32 bit);
 void buttonHelpSetPreset(u32 preset);
 
+// Picks the battle command menu's button-help preset from the battle mask, story flags and selection state.
 void battleSelectButtonHelpPreset(s32 selectionEnabled)
 {
-    if (g_btlMainState.state->battleFlags & 0x1004) {
+    BtlMainState *state = g_btlMainState.state;
+    if (state->battleMask & 0x1004) {
         if (gameFlagIsSet(0x525)) {
             return buttonHelpSetPreset(0xe4);
         }
