@@ -12,7 +12,7 @@ typedef struct Scene {
     /* 0x16028 */ void *secondList;
 } Scene;
 
-s32 FUN_002c7e6c(void);
+s32 statusAcquireSharedResources(void);
 s32 FUN_002c85b0(u32 arg);
 s32 statusDownSwitchTab(s32 arg);
 u32 gameGetPlayerData(void);
@@ -32,7 +32,7 @@ void FUN_00499d14(Scene *scene)
     u32 player;
     void *list;
 
-    FUN_002c7e6c();
+    statusAcquireSharedResources();
     if (scene->mode == 1) {
         value = 3;
     } else {

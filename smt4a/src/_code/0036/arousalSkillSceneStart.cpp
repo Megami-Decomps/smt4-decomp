@@ -13,7 +13,7 @@ void sceneDestroyOwnedJobObject(void);
 void engineReleaseCleanupHandle(void);
 void loadSlotRequestAsync(s32 slot, s32 flags);
 u16 ifTouchGetButtonHelpValue(void);
-void FUN_002c7e6c(void);
+void statusAcquireSharedResources(void);
 void FUN_002c85b0(s32 a);
 void statusDownSwitchTab(s32 a);
 void objBMarkAndInit20D4(void);
@@ -60,7 +60,7 @@ void arousalSkillSceneStart(s32 mode, u32 id)
     }
     loadSlotRequestAsync(37, 0);
     scene->slot = ifTouchGetButtonHelpValue();
-    FUN_002c7e6c();
+    statusAcquireSharedResources();
     FUN_002c85b0(0);
     statusDownSwitchTab(0);
     FUN_002c8538(0);

@@ -22,7 +22,7 @@ void campButtonHelpAcquire(void);
 void **asdTMTexTableGetEntry(s32 table);
 void asdTMTexTableLoadSprites(s32 table);
 void asdTMTexTablePrepareNodeImage(s32 table, s32 index);
-void FUN_002c7e6c(void);
+void statusAcquireSharedResources(void);
 void FUN_002c85b0(s32 arg);
 void FUN_002c8538(s32 arg);
 void FUN_00215bd0(void);
@@ -55,7 +55,7 @@ void Obj55c920::openScreen()
         }
         screen->loadedTexture20 = 1;
     }
-    FUN_002c7e6c();
+    statusAcquireSharedResources();
     FUN_002c85b0(2);
     FUN_002c8538(1);
     FUN_00215bd0();

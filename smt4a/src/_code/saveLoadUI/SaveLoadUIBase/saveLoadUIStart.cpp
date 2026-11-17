@@ -38,7 +38,7 @@ static inline void saveLoadSetState(SaveLoadScreen *screen, u8 state)
 extern "C" {
 extern const char DAT_00533ec0[];
 extern const char DAT_00533f34[];
-void FUN_002c7e6c(void);
+void statusAcquireSharedResources(void);
 void FUN_002c85b0(s32 value);
 void gameGlobalsSetMenuOpenFlag(s32 value);
 void FUN_0033449c(s32 value);
@@ -59,7 +59,7 @@ void saveLoadProcessCreate(s32 slot, s32 mode);
 // Start the save/load screen: build its model list on first use, then queue the process.
 void saveLoadUIStart(SaveLoadScreen *screen)
 {
-    FUN_002c7e6c();
+    statusAcquireSharedResources();
     FUN_002c85b0(10);
     gameGlobalsSetMenuOpenFlag(1);
     FUN_0033449c(0);

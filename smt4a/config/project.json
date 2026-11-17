@@ -69235,12 +69235,12 @@
     {
       "address": "0x2c7e6c",
       "file": "status/Status",
-      "function": "FUN_002c7e6c",
+      "function": "statusAcquireSharedResources",
       "module": "_code",
-      "object": "build/obj/_code/status/Status/FUN_002c7e6c.o",
+      "object": "build/obj/_code/status/Status/statusAcquireSharedResources.o",
       "size": 1736,
-      "source": "src/_code/status/Status/FUN_002c7e6c.cpp",
-      "target": "orig/target/_code/status/Status/FUN_002c7e6c.o",
+      "source": "src/_code/status/Status/statusAcquireSharedResources.cpp",
+      "target": "orig/target/_code/status/Status/statusAcquireSharedResources.o",
       "thumb": false
     },
     {

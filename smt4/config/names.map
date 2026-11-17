@@ -5255,3 +5255,4 @@
 0038a134 aocPackageClearFileRefFlagType10
 0029a17c gxSetMirroredClippedScissor
 001eea88 uniteResultInitialize
+0028c040 statusAcquireSharedResources

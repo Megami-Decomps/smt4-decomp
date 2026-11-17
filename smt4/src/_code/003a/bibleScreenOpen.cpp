@@ -7,7 +7,7 @@
 extern "C" {
 
 extern int commonBgAcquire(void);
-extern int FUN_0028c040(void);
+extern int statusAcquireSharedResources(void);
 extern int buttonHelpCreate(void);
 extern int buttonHelpAcquireResources(void);
 extern int asdLoadFileAsyncSimple(const char *path, void **buffer, int flags);
@@ -39,7 +39,7 @@ void bibleScreenOpen(BibleScreen *screen)
         }
         screen->sprites1dLoaded = 1;
     }
-    FUN_0028c040();
+    statusAcquireSharedResources();
     gameGlobalsSetSelected(2);
     gameSetIconDisplayEnabled(1);
     FUN_0029e788();

@@ -48325,12 +48325,12 @@
     {
       "address": "0x28c040",
       "file": "status/Status",
-      "function": "FUN_0028c040",
+      "function": "statusAcquireSharedResources",
       "module": "_code",
-      "object": "build/obj/_code/status/Status/FUN_0028c040.o",
+      "object": "build/obj/_code/status/Status/statusAcquireSharedResources.o",
       "size": 1448,
-      "source": "src/_code/status/Status/FUN_0028c040.cpp",
-      "target": "orig/target/_code/status/Status/FUN_0028c040.o",
+      "source": "src/_code/status/Status/statusAcquireSharedResources.cpp",
+      "target": "orig/target/_code/status/Status/statusAcquireSharedResources.o",
       "thumb": false
     },
     {

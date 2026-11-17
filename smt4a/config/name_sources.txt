@@ -7425,3 +7425,4 @@
 005806a0 g_lmapViewHolder inferred Holds the lmap view (its .view is g_lmapView's object).
 005b4028 DAT_005b4028 inferred Name withdrawn: the block is the whole allocator state (renamed g_asdMemState).
 005b4028 g_asdMemState inferred The engine allocator state; twin of smt4 g_asdMemState (region bases/sizes are only part of it).
+002c7e6c statusAcquireSharedResources inferred Initializes shared status-screen work, tasks, animation resources and partner assets on the first reference, then increments the reference count.

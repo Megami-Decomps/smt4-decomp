@@ -95543,13 +95543,13 @@
       "target_path": "orig/target/_code/0028/FUN_0028c028.o"
     },
     {
-      "base_path": "build/obj/_code/status/Status/FUN_0028c040.o",
+      "base_path": "build/obj/_code/status/Status/statusAcquireSharedResources.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0028c040",
+            "name": "statusAcquireSharedResources",
             "size": 1448,
             "vram": "0x28c040"
           }
@@ -95558,10 +95558,10 @@
           "_code",
           "status/Status"
         ],
-        "source_path": "src/_code/status/Status/FUN_0028c040.cpp"
+        "source_path": "src/_code/status/Status/statusAcquireSharedResources.cpp"
       },
-      "name": "_code/status/Status/FUN_0028c040",
-      "target_path": "orig/target/_code/status/Status/FUN_0028c040.o"
+      "name": "_code/status/Status/statusAcquireSharedResources",
+      "target_path": "orig/target/_code/status/Status/statusAcquireSharedResources.o"
     },
     {
       "base_path": "build/obj/_code/0028/playSceneIsFadeInDone.o",

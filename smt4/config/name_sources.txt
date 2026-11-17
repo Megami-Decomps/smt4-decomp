@@ -4911,3 +4911,4 @@
 004ea81c g_vectorScratch inferred Vector and matrix scratch workspace (vec4 at 0x100/0x110, matrices at 0x140/0x180) that ~50 units use for colours, vectors and quaternions. Twin of smt4a g_vectorScratch.
 004474f4 g_mapCamera inferred Pointer to the map/field camera state (eye, target and up vectors, heading at 0x18, turn transition at 0xB8, scalar tracks at 0xC4).
 00465120 g_asdMemState inferred The engine allocator state (allocation tag, lock, usage, memory-map debug processes, region bases and sizes). Twin of smt4a g_asdMemState.
+0028c040 statusAcquireSharedResources inferred Initializes shared status-screen resources on the first reference and increments the reference count; independently matched IV counterpart.
