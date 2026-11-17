@@ -1,5 +1,6 @@
 #include "ui/UiSpriteApi.h"
 #include "battle/ActorCardAnimations.h"
+#include "battle/ActorCardAnimationApi.h"
 #include "font/ComWin/ComWin.h"
 
 extern "C" {

@@ -8,6 +8,7 @@
 #include "battle/ActionStateChannels.h"
 #include "battle/BtlGlobals.h"
 #include "battle/BtlUiGlobal.h"
+#include "battle/ActorCardAnimationApi.h"
 namespace {
 union PartyPhaseState {
     BtlMainState main;
@@ -29,7 +30,6 @@ struct ScriptActorRecord {
 
 extern "C" {
 s32 nodeListCountActiveById(ReflectContext*, s32);
-s32 FUN_003ae838(BtlUi *ui, s32);
 s32 btlUiAreEntriesIdle(BtlUi *ui);
 s32 btlNodeListAnyReady();
 void FUN_00229754(void*, BtlUnit*);

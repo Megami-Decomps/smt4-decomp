@@ -1,14 +1,8 @@
 #include "battle/BtlUiGlobal.h"
-#include "code/Code003a.h"
+#include "battle/ActorCardAnimationApi.h"
 
-extern "C" {
-
-void saveIsSelectionOutsideRange(BtlUiObjC *obj);
-
-
-void FUN_003ae838(void)
+/* The UI argument is ignored; the module global owns these five animation states. */
+extern "C" s32 FUN_003ae838(BtlUi *, s32 slot)
 {
-    saveIsSelectionOutsideRange(&g_btlUi.ui->objC);
+    return saveIsSelectionOutsideRange(reinterpret_cast<ActorCardAnimations *>(&g_btlUi.ui->objC), slot);
 }
-
-} /* extern "C" */

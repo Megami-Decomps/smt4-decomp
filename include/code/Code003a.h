@@ -10,6 +10,5 @@ u32 FUN_003a7b74(void);
 
 void FUN_003ae620(void);
 
-void FUN_003ae838(void);
 
 } /* extern "C" */

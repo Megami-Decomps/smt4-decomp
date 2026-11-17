@@ -2,6 +2,7 @@
 #include "romwright_types.h"
 #include "shard/W6_W6Match3_BattleQueue.h"
 #include "battle/BattleUnitSlot.h"
+#include "battle/ActorCardAnimationApi.h"
 #include "battle/BtlGlobals.h"
 
 extern "C" {
@@ -52,7 +53,6 @@ int FUN_00338060(...);
 int FUN_003445f8(...);
 int btlUiInitializeDisplayChannel(...);
 int FUN_003ae418(...);
-int FUN_003ae574(...);
 int FUN_003bcdb0(...);
 int btlAddClampedVital(...);
 unsigned int btlDispatchTargetActionKind(int target, int kind, unsigned int argument);
@@ -782,7 +782,7 @@ LAB_00345938:
         if (temp_v5 == 0) {
           btlQueueKeyedScalarReflectAction(0,*(unsigned int *)(psVar2 + 4),0x10001d3,0,1,0,0);
         }
-        FUN_003ae574(g_btlUiBlock,(int)*(short *)((int)puVar9 + 0x6e));
+        FUN_003ae574(reinterpret_cast<BtlUi *>(g_btlUiBlock),(int)*(short *)((int)puVar9 + 0x6e));
       }
       else if ((*puVar9 & 0x10) != 0) {
         temp_v5 = FUN_00293230(unaff_r5);
