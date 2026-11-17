@@ -1,3 +1,4 @@
+#include "gamedata/EncounterSelection.h"
 /* NON_MATCHING: register allocation: retail spills the slot pointer, spawn index and list pointer around the inlined spawn block (three more stack slots, extra live registers) */
 #include "common.h"
 #include "game/GameStateA.h"
@@ -8,7 +9,6 @@
 #include "classes/Obj557b18.h"
 
 extern "C" {
-u16 FUN_004bb870(s32 index);
 }
 
 /* Drops the slot's resource: unregisters it (or marks it released), then deletes it if the slot owns it. */

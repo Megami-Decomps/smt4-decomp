@@ -1,5 +1,6 @@
 /* NON_MATCHING: scalar callback arguments use an extra VFP temporary, and the dirty-byte store is scheduled before the previous-value store. */
 #include "shard/Shard0034.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMotionControlApi.h"
 
 /* Evaluate the first scalar channel, clamping time at its endpoint. */
 extern "C" void FUN_0028703c(ScalarAnimationOwner *owner, f32 time)

@@ -1,3 +1,4 @@
+#include "gamedata/EncounterSelection.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00273060` (_code @ 0x273060, 0x708 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -63,7 +64,6 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: controllerSetPosition. */
 /* Supplied declaration required: controllerSetRotationEulerDegrees. */
 /* Supplied declaration required: modelPlayClip. */
-extern int textureEntryMeetsUnlockRequirements(unsigned int);
 
 void FUN_00273060(void)
 

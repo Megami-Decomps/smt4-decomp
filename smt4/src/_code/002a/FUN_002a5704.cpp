@@ -1,17 +1,7 @@
-#include "common.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMotionControlApi.h"
 
-extern "C" {
-
-typedef struct ChainNode {
-    u8 unk00[8];
-    struct ChainNode *link;        /* 0x08 */
-} ChainNode;
-
-__declspec(noreturn) __weak void FUN_002a5704_hook(ChainNode *node);
-
-void FUN_002a5704(ChainNode *node)
+extern "C" void FUN_002a5704(void *holder, s32 motionIndex, f32 blend)
 {
-    FUN_002a5704_hook(node->link->link);
+    AsdModelHolderPrefix *view = static_cast<AsdModelHolderPrefix *>(holder);
+    modelSelectPrimaryMotion(view->model->node, motionIndex, blend);
 }
-
-} /* extern "C" */

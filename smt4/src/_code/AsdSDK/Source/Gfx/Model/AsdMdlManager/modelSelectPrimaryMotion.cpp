@@ -1,5 +1,5 @@
 /* NON_MATCHING: retail looks the track node up as items[index * stride + 0] (mla) with the runtime type constant kept in r7, and assigns different saved registers (model r6, motion r5, node r4); ours uses mul and r4/r7/r5. Everything else, including the tail call into the record rebuild, has the same shape (139 rows against 146). */
-#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMotionControlApi.h"
 #include "util/MemoryHelpers_VariantB.h"
 #include "classes/Obj557dcc.h"
 

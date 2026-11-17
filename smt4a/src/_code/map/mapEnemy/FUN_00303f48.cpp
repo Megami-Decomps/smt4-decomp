@@ -1,3 +1,4 @@
+#include "gamedata/EncounterSelection.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00303f48` (_code @ 0x303f48, 0xd64 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "gamedata/MapSaveBlockA.h"
@@ -111,11 +112,7 @@ extern int dataTable2eSub3FindByKeyPair(int, unsigned int);
 /* Supplied declaration required: moriModelContentCopyBody. */
 extern unsigned int modelListInit(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
-extern int lookupConditionalSixBitValue(unsigned int);
-extern int FUN_004bb870(unsigned int);
 /* Supplied declaration required: FUN_004bc420. */
-extern int textureEntryMeetsUnlockRequirements(unsigned int);
-extern int dataSelectPrioritizedCandidate(int index);
 extern unsigned int __aeabi_idivmod(void);
 
 void FUN_00303f48(void)

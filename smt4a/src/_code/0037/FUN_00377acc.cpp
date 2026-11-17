@@ -1,3 +1,4 @@
+#include "gamedata/EncounterSelection.h"
 /* NON_MATCHING: signed ownership flags and record lookup shape recovered; saved pointer roles, registration guard and owned-model reset stores differ. */
 #include "shard/W4_Match1b_RegisteredHandle.h"
 #include "gamedata/NkmEnemyRecord.h"
@@ -8,7 +9,6 @@
 #include "classes/Obj557b18.h"
 
 extern "C" {
-u16 FUN_004bb870(s32 index);
 
 static __inline MapEnemySpawn *enemySelectionRecordForKind(u32 kind, s32 index)
 {

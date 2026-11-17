@@ -1,3 +1,4 @@
+#include "gamedata/EncounterSelection.h"
 #include "shard/Shard004B.h"
 
 extern "C" {

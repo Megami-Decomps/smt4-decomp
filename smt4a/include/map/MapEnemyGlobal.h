@@ -7,6 +7,9 @@ extern "C" {
 /* The map-enemy work (NULL while no map is loaded). */
 extern MapEnemyA *g_mapEnemy;
 
+/* Field-model kind indexed by the selected enemy ID. */
+extern u8 DAT_005806e0[];
+
 /* Releases the entry's previous model and binds the spawn of table `kind` (1-4) whose owner is `id`. */
 void FUN_00377acc(MapEnemyEntryA *entry, s32 id, u32 kind);
 }

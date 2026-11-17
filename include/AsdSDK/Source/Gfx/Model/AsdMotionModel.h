@@ -49,7 +49,7 @@ typedef struct AsdMotionInstance {
     /* 0x08 */ u8 unk08[0x30];
     /* 0x38 */ f32 blend;
     /* 0x3C */ f32 previousBlend;
-    /* 0x40 */ u8 unk40[4];
+    /* 0x40 */ f32 playbackSpeed;
     /* 0x44 */ f32 blendFrom;
     /* 0x48 */ f32 blendLimit;
     /* 0x4C */ f32 (*interpolate)(void *context, f32 from, f32 limit, f32 target);

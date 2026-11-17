@@ -18,7 +18,14 @@ typedef struct MapMain {
     /* 0x30 */ u32 areaId;
     /* 0x34 */ u8 unk34[8];
     /* 0x3C */ u8 unk3C;
-    /* 0x3D */ u8 unk3D[0x4f];
+    /* 0x3D */ u8 unk3D[0xF];
+    /* 0x4C */ void *systemScriptData;    /* borrowed map/all/mapsys_scr.bf buffer */
+    /* 0x50 */ void *systemMessageData;   /* borrowed map/all/mapsys_mes.mbm buffer */
+    /* 0x54 */ ScriptProcess *systemScriptProcess;
+    /* 0x58 */ void *mapScriptData;       /* owned map-specific script buffer */
+    /* 0x5C */ void *mapMessageData;      /* owned map-specific message buffer */
+    /* 0x60 */ ScriptProcess *mapScriptProcess;
+    /* 0x64 */ u8 unk64[0x28];
     /* 0x8C */ void *scriptData;
     /* 0x90 */ void *messageData;
     /* 0x94 */ ScriptProcess *scriptProcess;
@@ -59,6 +66,10 @@ typedef struct MapMainA {
 
 typedef char MapMainASizeCheck[sizeof(MapMainA) == 0xC0 ? 1 : -1];
 typedef char MapMainSizeCheck[sizeof(MapMain) == 0xC8 ? 1 : -1];
+typedef char MapMainScriptOffsets[offsetof(MapMain, systemScriptData) == 0x4C &&
+    offsetof(MapMain, systemMessageData) == 0x50 && offsetof(MapMain, systemScriptProcess) == 0x54 &&
+    offsetof(MapMain, mapScriptData) == 0x58 && offsetof(MapMain, mapMessageData) == 0x5C &&
+    offsetof(MapMain, mapScriptProcess) == 0x60 ? 1 : -1];
 typedef char MapMainStateOffsets[offsetof(MapMain, state) == 0x24 &&
     offsetof(MapMain, stateTime) == 0x28 ? 1 : -1];
 typedef char MapMainATransitionOffsets[offsetof(MapMainA, transition.mapId) == 0x30 &&

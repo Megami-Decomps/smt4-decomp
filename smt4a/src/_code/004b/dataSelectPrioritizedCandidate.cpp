@@ -1,3 +1,4 @@
+#include "gamedata/EncounterSelection.h"
 #include "common.h"
 #include "gamedata/NkmEnemyLookup.h"
 

@@ -1,3 +1,4 @@
+#include "gamedata/EncounterSelection.h"
 #include "common.h"
 #include "gamedata/GamePlayerData.h"
 #include "quest_center/QuestRecordA.h"
