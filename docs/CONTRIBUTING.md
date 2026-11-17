@@ -15,6 +15,15 @@ original source**. Both games are one build tree, so most work lands twice: fix 
    NintendoWare, NEX, Mobiclip, the ARM runtime).
 2. `python -B tools/fdiff.py <game> <function>` compiles that one source and diffs its disassembly
    and relocations against retail. Edit, rerun, until it prints `IDENTICAL`.
+   To try several shapes at once, `python -B tools/trial.py <game> <function> variants.py` (a
+   `variants(src)` generator of `(label, text)` sources, or a directory of `.cpp` files) compiles each
+   from a temporary copy with the unit's own command, in parallel, and lists them by fdiff's score
+   (`-`/`+` lines; 0 is `IDENTICAL`) next to the current source; `--show K` prints the best diffs and
+   `--keep` writes the best one only if it beats the current source. A grid holds only variants the
+   rules allow: types, real prototypes, `switch` against `if`, loop forms, helpers with evidence. Not
+   permutations of declarations or single-use wrappers: a match found that way is steering.
+   `--flags` scores the unit under other cflags and with each callee in a `multifile` run; those are
+   diagnostics, and the config changes only with the evidence below.
 3. Make it readable (below), rerunning `fdiff` after each step.
 4. Name it: add rows to a TSV and run `python -B tools/names.py apply ROWS.tsv`.
 5. Prove it, in each game you touched:
@@ -332,7 +341,9 @@ shared object, does not cast the object to a local view, and does not redeclare 
   to a unit redeclare a function, global or struct that a shared header declares. Moving a declaration
   into a shared header never fails it; `--all` counts the older local copies still to remove. A local
   declaration kept on purpose, because the shared one's types change this caller's code, carries
-  `// declcheck: local (reason)` on its line.
+  `// declcheck: local (reason)` on its line. It also lists, without failing, each `static` helper a
+  change adds that its unit calls once: give the evidence the helper rule asks for, or write the body
+  in place.
 
 ### Contracts
 

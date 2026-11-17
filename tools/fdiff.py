@@ -25,8 +25,8 @@ from pathlib import Path
 ROOT = Path(os.path.abspath(__file__)).parent.parent
 
 
-def objdump(game):
-    found = glob.glob(str(ROOT / game / "build" / "tools" / "binutils-arm-none-eabi" / "*" / "bin" / "arm-none-eabi-objdump*"))
+def objdump(game, root=ROOT):
+    found = glob.glob(str(root / game / "build" / "tools" / "binutils-arm-none-eabi" / "*" / "bin" / "arm-none-eabi-objdump*"))
     if not found:
         raise SystemExit(f"no objdump: run `python -B build.py fetch` in {game}/")
     return found[0]
@@ -148,6 +148,52 @@ def integer_words(retail, built):
     return count
 
 
+def load_build(game, root=ROOT):
+    """The game's build.py as a module: its compile command, carving and armlink steps."""
+    spec = importlib.util.spec_from_file_location(f"build_{game}", root / game / "build.py")
+    build = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(build)
+    return build
+
+
+def compile_unit(build, compiler, unit, source, obj):
+    """Compile `source` as `unit` into `obj` with the unit's exact command, then carve and apply
+    armlink's NOPs as build.py does. Returns None, or the compiler's output when it failed."""
+    obj.parent.mkdir(parents=True, exist_ok=True)
+    done = build.run_compiler(build.command(compiler, unit, source, obj))
+    if done.returncode:
+        return done.stdout + done.stderr or f"exit status {done.returncode}"
+    build.finish_object(compiler, unit, source, obj)  # carve, then armlink's NOPs
+    return None
+
+
+def compare(tool, target, obj, what):
+    """(diff, note, retail rows, built rows): the unified diff of retail's listing against the built
+    one, empty when they are identical (then `note` says what IDENTICAL carries)."""
+    retail = listing(tool, target)
+    built = listing(tool, obj)
+    for side, rows in (("retail", retail), ("built", built)):
+        if not rows:
+            raise SystemExit(f"{what}: the {side} listing is empty, nothing to compare")
+    data_as_bytes(retail, built, text_bytes(tool, target), text_bytes(tool, obj))
+    by_section = data_relocations(retail, built)
+    integer_words(retail, built)
+    note = " (data relocations by section: relink checks the address)" if by_section else ""
+    strip = lambda rows: [re.sub(r"^\s*[0-9a-f]+: ", "", r) for r in rows]
+    # armcc pads a Thumb function's section to 4 bytes: a trailing pad is not a difference.
+    while len(built) > len(retail) and strip(built)[-1] in ("movs r0, r0", "nop", ".short 0x0000"):
+        built.pop()
+    if strip(retail) == strip(built):
+        return [], note, len(retail), len(built)
+    # A string literal armcc placed after the pool: retail's function ends before it, the same bytes
+    # follow in the image. relink.py checks them against the image; here only data rows may trail.
+    extra = strip(built)[len(retail):]
+    if extra and strip(built)[:len(retail)] == strip(retail) and all(r.startswith((".word", ".short", ".byte", ".ascii")) for r in extra):
+        return [], f", plus {len(extra)} rows of trailing literal data that relink.py checks against the image{note}", len(retail), len(built)
+    diff = list(difflib.unified_diff(strip(retail), strip(built), "retail", "built", n=2, lineterm=""))
+    return diff, note, len(retail), len(built)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     parser.add_argument("game", choices=["smt4", "smt4a"])
@@ -161,44 +207,19 @@ def main():
     if not args.no_build:
         # The game's build.py gives the exact compile command; running the compiler here, not
         # build.py, leaves build/compile_report.json alone, so several fdiffs can run at once.
-        spec = importlib.util.spec_from_file_location(f"build_{args.game}", ROOT / args.game / "build.py")
-        build = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(build)
+        build = load_build(args.game)
         compiler = build.find_compiler(argparse.Namespace(armcc=None, clang=None))
-        obj = ROOT / args.game / unit["object"]
-        obj.parent.mkdir(parents=True, exist_ok=True)
-        done = subprocess.run(build.command(compiler, unit, ROOT / args.game / unit["source"], obj),
-                              capture_output=True, text=True, errors="replace", cwd=ROOT / args.game)
-        if done.returncode:
-            print("\n".join(line for line in (done.stdout + done.stderr).splitlines() if "Error" in line or line.startswith("  ")))
+        failed = compile_unit(build, compiler, unit, ROOT / args.game / unit["source"], ROOT / args.game / unit["object"])
+        if failed is not None:
+            print("\n".join(line for line in failed.splitlines() if "Error" in line or line.startswith("  ")))
             sys.exit(2)
-        build.finish_object(compiler, unit, ROOT / args.game / unit["source"], obj)  # carve, then armlink's NOPs
-    tool = objdump(args.game)
-    retail = listing(tool, ROOT / args.game / unit["target"])
-    built = listing(tool, ROOT / args.game / unit["object"])
-    for side, rows in (("retail", retail), ("built", built)):
-        if not rows:
-            raise SystemExit(f"{args.game} {args.function}: the {side} listing is empty, nothing to compare")
-    data_as_bytes(retail, built, text_bytes(tool, ROOT / args.game / unit["target"]), text_bytes(tool, ROOT / args.game / unit["object"]))
-    by_section = data_relocations(retail, built)
-    integer_words(retail, built)
-    note = " (data relocations by section: relink checks the address)" if by_section else ""
-    strip = lambda rows: [re.sub(r"^\s*[0-9a-f]+: ", "", r) for r in rows]
-    # armcc pads a Thumb function's section to 4 bytes: a trailing pad is not a difference.
-    while len(built) > len(retail) and strip(built)[-1] in ("movs r0, r0", "nop", ".short 0x0000"):
-        built.pop()
-    if strip(retail) == strip(built):
+    diff, note, retail_rows, built_rows = compare(objdump(args.game), ROOT / args.game / unit["target"],
+                                                   ROOT / args.game / unit["object"], f"{args.game} {args.function}")
+    if not diff:
         print(f"IDENTICAL: {args.game} {args.function} ({unit['source']}){note}")
         return
-    # A string literal armcc placed after the pool: retail's function ends before it, the same bytes
-    # follow in the image. relink.py checks them against the image; here only data rows may trail.
-    extra = strip(built)[len(retail):]
-    if extra and strip(built)[:len(retail)] == strip(retail) and all(r.startswith((".word", ".short", ".byte", ".ascii")) for r in extra):
-        print(f"IDENTICAL: {args.game} {args.function} ({unit['source']}), plus {len(extra)} rows of trailing literal data "
-              f"that relink.py checks against the image{note}")
-        return
-    print(f"DIFFERS: {args.game} {args.function} ({unit['source']}), retail {len(retail)} vs built {len(built)} rows")
-    for line in difflib.unified_diff(strip(retail), strip(built), "retail", "built", n=2, lineterm=""):
+    print(f"DIFFERS: {args.game} {args.function} ({unit['source']}), retail {retail_rows} vs built {built_rows} rows")
+    for line in diff:
         print(line)
     sys.exit(1)
 

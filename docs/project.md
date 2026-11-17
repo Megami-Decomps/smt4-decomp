@@ -19,6 +19,8 @@ docs/                 the contribution guide and these notes; docs/notes/ holds 
 tools/assign_tus.py   places functions in source files from assert paths and file-local data
 tools/shared.py       pairs the functions both games share and compares their progress
 tools/fdiff.py        compiles one function and diffs its disassembly and relocations against retail
+tools/trial.py        scores many source variants of one function in parallel, from temporary copies, as fdiff
+                      would; --flags probes other cflags and multifile partners (diagnostics, not evidence)
 tools/names.py        names a function or global in every file at once and records the evidence
 tools/units.py        fixes the function list: splits merged units, adds the code the analysis missed
                       (branch targets, callbacks, stub bodies), extends cut-short ones, moves late starts
@@ -29,7 +31,8 @@ tools/triage.py       sorts the unproven functions by what their fdiff shows (or
 tools/worktrees.py    git worktrees for parallel work: each links orig/ and build/tools/ to this checkout,
                       builds and relinks on its own, and hands back its changes as a patch
 tools/declcheck.py    fails when a change adds a unit-local copy of a function, global or struct that a
-                      shared header declares (CI runs it on every push and pull request)
+                      shared header declares (CI runs it on every push and pull request); also lists, without
+                      failing, new static helpers the unit calls only once
 tools/layout.py       field offsets of struct views from the compiler, and every view of one object merged
                       by offset (--anchor SYMBOL): the input for one declaration per object
 ```
