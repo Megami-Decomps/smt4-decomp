@@ -6884,3 +6884,4 @@
 00301490 onlineSocketObjectConstruct
 003450d4 uiScrollHandleActionsOrTouch
 0035ae58 gxSetMirroredClippedScissor
+002a74ac uniteResultInitialize

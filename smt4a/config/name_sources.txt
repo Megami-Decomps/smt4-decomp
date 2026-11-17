@@ -7418,3 +7418,5 @@
 001ad9b4 questDataGetRecord inferred Finds a quest record by id in event/quest/QuestData.tbb (0x1B4-byte rows in IV).
 003450d4 uiScrollHandleActionsOrTouch inferred Exact 508-byte match: applies touch/list selection, forwards a signed-halfword rectangle, reports blocked modes and optional selection-change events; SMT4 twin name.
 0035ae58 gxSetMirroredClippedScissor inferred SMT4 twin FUN_0029a17c; exact byte/relocation match with shared coordinate-packing helper and separately refreshed scene snapshots.
+002a74ac uniteResultInitialize inferred Initializes fusion-result textures, render target, stage model/camera, tone-specific script and sprites; exact IV counterpart with Apocalypse resource constructors and layout.
+0052f3c0 sUniteResultSpriteKeys inferred size:0xe0 Final sprite-command packet for uniteResultInitialize; static compiled bytes independently compared against native image.

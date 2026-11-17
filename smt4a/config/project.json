@@ -66026,12 +66026,12 @@
     {
       "address": "0x2a74ac",
       "file": "camp/Unite/UniteEffect",
-      "function": "FUN_002a74ac",
+      "function": "uniteResultInitialize",
       "module": "_code",
-      "object": "build/obj/_code/camp/Unite/UniteEffect/FUN_002a74ac.o",
+      "object": "build/obj/_code/camp/Unite/UniteEffect/uniteResultInitialize.o",
       "size": 1736,
-      "source": "src/_code/camp/Unite/UniteEffect/FUN_002a74ac.cpp",
-      "target": "orig/target/_code/camp/Unite/UniteEffect/FUN_002a74ac.o",
+      "source": "src/_code/camp/Unite/UniteEffect/uniteResultInitialize.cpp",
+      "target": "orig/target/_code/camp/Unite/UniteEffect/uniteResultInitialize.o",
       "thumb": false
     },
     {

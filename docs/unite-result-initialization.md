@@ -41,3 +41,33 @@ values in the second and third packets. Each key contains two floating-point
 values and one integer frame count, not three floats. `UniteFloatKey` expresses
 that mixed layout directly. All four complete compiled tables now match the
 original bytes, and the function's instructions remain identical.
+
+## Apocalypse counterpart
+
+Apocalypse's initializer (`002a74ac`, also `uniteResultInitialize`) uses the
+same presentation sequence with a larger work layout, canonical `ModelList`
+and `Obj557af8` camera construction, and integer-framed animation keys. Camera
+file sizes are construction-local outputs. Traced allocations are checked
+before ordinary placement construction; no custom traced-new behavior is
+invented.
+
+Its removed render-target accessor has this ordinary contract:
+
+```cpp
+void uniteRenderTargetSetTexture(UniteRenderTarget *target, u32 texture)
+{
+    target->texture = texture;
+}
+```
+
+The IV counterpart calls surviving `FUN_0021a374` at the same point. In
+Apocalypse, native code loads the texture into `r1`, forms the render-target
+address in `r0`, and executes `str r1,[r0,#4]`. The catalog records that verified
+single-instruction body (`e5801004`), not an unrelated surviving setter with
+coincidentally identical bytes. The call's argument setup remains in the
+source, as it does in the image.
+
+The Apocalypse uncarved object's four complete tables are independently equal
+to native data at `0052f360`, `0052f384`, `0052f3b4`, and `0052f3c0` (again 36,
+48, 12, and 224 bytes). Its tone field is at `0x38`; the source-visible getter
+and signed conversion use `NkmBaseRecordA` and the table-25 record payload.

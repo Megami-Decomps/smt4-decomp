@@ -130732,13 +130732,13 @@
       "target_path": "orig/target/_code/002a/FUN_002a748c.o"
     },
     {
-      "base_path": "build/obj/_code/camp/Unite/UniteEffect/FUN_002a74ac.o",
+      "base_path": "build/obj/_code/camp/Unite/UniteEffect/uniteResultInitialize.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002a74ac",
+            "name": "uniteResultInitialize",
             "size": 1736,
             "vram": "0x2a74ac"
           }
@@ -130747,10 +130747,10 @@
           "_code",
           "camp/Unite/UniteEffect"
         ],
-        "source_path": "src/_code/camp/Unite/UniteEffect/FUN_002a74ac.cpp"
+        "source_path": "src/_code/camp/Unite/UniteEffect/uniteResultInitialize.cpp"
       },
-      "name": "_code/camp/Unite/UniteEffect/FUN_002a74ac",
-      "target_path": "orig/target/_code/camp/Unite/UniteEffect/FUN_002a74ac.o"
+      "name": "_code/camp/Unite/UniteEffect/uniteResultInitialize",
+      "target_path": "orig/target/_code/camp/Unite/UniteEffect/uniteResultInitialize.o"
     },
     {
       "base_path": "build/obj/_code/002a/FUN_002a7b74.o",

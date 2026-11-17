@@ -16,7 +16,7 @@ int asdMemoryAllocTraced(...);
 int slotSetRequest(...);
 int FUN_001ff014(...);
 int statusDownRestartTransition(void);
-int FUN_002a74ac(void);
+int uniteResultInitialize(void);
 int sysMemClear(...);
 int FUN_0031db84(...);
 int arrayContainsU16(...);
@@ -281,7 +281,7 @@ extern int messageGetChoiceResult(void);
 /* Supplied declaration required: statusPanelSetOpen. */
 extern int FUN_002a7410(void);
 extern int FUN_002a748c(void);
-/* Supplied declaration required: FUN_002a74ac. */
+/* Supplied declaration required: uniteResultInitialize. */
 /* Supplied declaration required: FUN_002a7b74. */
 extern int FUN_002ac2b4(unsigned int, unsigned char);
 /* Supplied declaration required: frameTexSetValue. */
@@ -3118,7 +3118,7 @@ LAB_001f9868:
     statusDownRestartTransition();
     gameGlobalsSetMenuOpenFlag(0);
     FUN_00333dc8(0);
-    FUN_002a74ac();
+    uniteResultInitialize();
     temp_v15 = 0;
     temp_v4 = 0x18;
     break;
