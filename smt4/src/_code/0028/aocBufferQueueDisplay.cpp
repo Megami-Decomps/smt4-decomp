@@ -1,22 +1,17 @@
-#include "common.h"
+#include "addon/AocFileBufferApi.h"
 #include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
+extern FileQueue *g_aocDisplay;
 
-int fileQueueRequestAndWait(u32 a, u8 *buffer, u32 b, int c, int d, int e, int f);
-extern u32 g_aocDisplay; /* 0x433130 */
-extern int packageFindFileByTypeAndId(u32 a, u32 b, u32 c, u8 *buffer);
-
-void aocBufferQueueDisplay(u32 a, u32 b, u32 c)
+void *aocBufferQueueDisplay(AocSystem *system, s32 id, const char *secondPath)
 {
-    int result;
-    u8 buffer[128];
-
-    reinterpret_cast<int>(memClear(reinterpret_cast<void*>(buffer), 0x80));
-    result = packageFindFileByTypeAndId(a, 8, b, buffer);
-    if (result != 0) {
-        fileQueueRequestAndWait(g_aocDisplay, buffer, c, result + 8, 1, 0x80, 0);
-    }
+    char path[128];
+    memClear(path, sizeof(path));
+    AocPackageFile *file = packageFindFileByTypeAndId(system, 8, id, path);
+    if (file != NULL)
+        return reinterpret_cast<void *>(fileQueueRequestAndWait(g_aocDisplay, path,
+            secondPath, &file->result, 1, 0x80, NULL));
+    return NULL;
 }
-
-} /* extern "C" */
+}

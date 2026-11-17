@@ -37,16 +37,6 @@ u32 screenFadesAllReady(void);
 extern "C" {
 #endif
 
-void FUN_00289de4(u32 a, u32 b, u32 c);
-
-#ifdef __cplusplus
-}
-#endif
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 u8 FUN_002881a0(void);
 
 #ifdef __cplusplus

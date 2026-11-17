@@ -4,6 +4,7 @@
 #include "script/scrScriptProcess.h"
 #include "gamedata/TableGroup.h"
 #include "addon/AocSystem.h"
+#include "addon/AocFileBufferApi.h"
 
 extern "C" {
 extern MapMain *g_mapMain;
@@ -12,8 +13,6 @@ extern const char DAT_004044d4[];
 void messageSetConfirmDisplayMode(void);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 s32 aocPackageGrantsItem(AocSystem *system, u32 event, u32 kind);
-void *FUN_00289de4(AocSystem *system, u32 event, u32 kind);
-void *aocBufferQueueDisplay(AocSystem *system, u32 event, u32 kind);
 void asdMemFree(void *memory);
 void *asdLoadFileSyncDefault(const char *path);
 s32 FUN_002897f0(u32 event, char *entryName);
