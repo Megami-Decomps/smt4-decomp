@@ -38,7 +38,7 @@ int flaggedEntrySetValueA(int, unsigned int);
 int FUN_0031f718(...);
 int FUN_003343c0(...);
 int FUN_0033449c(...);
-int FUN_003450d4(...);
+int uiScrollHandleActionsOrTouch(...);
 int FUN_00372100(...);
 int FUN_0037245c(int, int, int);
 int objBSetRecord2000(...);
@@ -100,7 +100,7 @@ extern int itemSelectionCanUse(int, int);
 /* Supplied declaration required: FUN_003343c0. */
 /* Supplied declaration required: gameGlobalsSetMenuOpenFlag. */
 /* Supplied declaration required: FUN_0033449c. */
-/* Supplied declaration required: FUN_003450d4. */
+/* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: gameGlobalsQueueValues. */
 /* Supplied declaration required: FUN_00372100. */
 /* Supplied declaration required: FUN_0037245c. */
@@ -264,7 +264,7 @@ LAB_0020de28:
     temp_v3 = temp_v4 + 0x32b8;
     temp_v7 = 0;
     temp_v6 = temp_v3;
-    FUN_003450d4(temp_v3,temp_v2,temp_v4 + 0x1b3e,0);
+    uiScrollHandleActionsOrTouch(temp_v3,temp_v2,temp_v4 + 0x1b3e,0);
     if (temp_v6 != 0) {
       temp_v6 = resourceRunOperationIfUnblocked(temp_v3);
       temp_v5 = listCursorGetRowIfUnblocked(temp_v3);

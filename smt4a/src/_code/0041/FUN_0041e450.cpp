@@ -3,7 +3,7 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-s32 FUN_003450d4(void *scroll, const TextureTableEntryIV *sprite, u32 *limits, s32 width,
+s32 uiScrollHandleActionsOrTouch(void *scroll, const TextureTableEntryIV *sprite, u32 *limits, s32 width,
                   s32 left, s32 top, u8 *flags, s32 first, s32 second);
 s32 resourceRunOperationIfUnblocked(void *scroll);
 s32 flaggedEntryGetValueA(void *scroll);
@@ -39,7 +39,7 @@ void FUN_0041e450(SaveLoadControllerA *controller)
         offsetof(ScrollView, rows) == 0x6a0 ? 1 : -1];
     ScrollView *view = reinterpret_cast<ScrollView *>(controller);
     TextureTableEntryIV *sprite = asdTMTexTableEntryAt(0x2b, 0xd);
-    if (FUN_003450d4(view->control, sprite, &view->limits, view->width,
+    if (uiScrollHandleActionsOrTouch(view->control, sprite, &view->limits, view->width,
                       view->left, view->top, view->flags, 0, 1)) {
         view->scroll = resourceRunOperationIfUnblocked(view->control);
         view->row = flaggedEntryGetValueA(view->control);

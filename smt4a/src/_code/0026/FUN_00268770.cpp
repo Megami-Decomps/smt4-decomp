@@ -56,7 +56,7 @@ int statusDownSwitchTab(...);
 int flaggedEntryGetValueA(...);
 int flaggedEntrySetValueA(...);
 int FUN_003423e8(...);
-int FUN_003450d4(...);
+int uiScrollHandleActionsOrTouch(...);
 int uiStoreTextureEntryCenter(...);
 int statusDownInitializeSkillList(int);
 int FUN_003e40d0(...);
@@ -137,7 +137,7 @@ extern int FUN_00334044(void);
 /* Supplied declaration required: statusSkillsCommitOnDialogResult. */
 /* Supplied declaration required: screenShowMessage. */
 /* Supplied declaration required: FUN_003423e8. */
-/* Supplied declaration required: FUN_003450d4. */
+/* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: obj04Finish. */
 extern int asdSoundIsBankHandleLoaded(unsigned int);
 /* Supplied declaration required: skillHelpUpdateAttributeAndTarget. */
@@ -435,7 +435,7 @@ LAB_00268d68:
         }
         temp_v8 = temp_v2 + 0x5ec;
         temp_v14 = temp_v8;
-        FUN_003450d4(temp_v8,0,temp_v2 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2 + 0x24a0,0,1);
+        uiScrollHandleActionsOrTouch(temp_v8,0,temp_v2 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2 + 0x24a0,0,1);
         if (temp_v14 != 0) {
           *(unsigned char *)(temp_v2 + 0x528) = 1;
           temp_v14 = flaggedEntryGetValueA(temp_v8);
@@ -539,7 +539,7 @@ LAB_00268d68:
         temp_v14 = temp_v2 + 0x5ec;
         temp_v8 = flaggedEntryGetValueA();
         temp_v6 = temp_v14;
-        FUN_003450d4(temp_v14,0,temp_v2 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2 + 0x24a0,0,1);
+        uiScrollHandleActionsOrTouch(temp_v14,0,temp_v2 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2 + 0x24a0,0,1);
         if ((temp_v6 == 0) && (temp_v6 = temp_v14, FUN_00228b04(temp_v14,0), temp_v6 == 0)) {
           temp_v6 = 0;
           padQueryLogicalKey(0,1);
@@ -731,7 +731,7 @@ joined_r0x002694c0:
       temp_v14 = temp_v2 + 0x5ec;
       temp_v8 = flaggedEntryGetValueA();
       temp_v6 = temp_v14;
-      FUN_003450d4(temp_v14,0,temp_v2 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2 + 0x24a0,0,1);
+      uiScrollHandleActionsOrTouch(temp_v14,0,temp_v2 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2 + 0x24a0,0,1);
       if ((temp_v6 != 0) || (temp_v6 = temp_v14, FUN_00228b04(temp_v14,0), temp_v6 != 0)) {
         *(unsigned char *)(temp_v2 + 0x528) = 1;
         temp_v6 = flaggedEntryGetValueA(temp_v14);
@@ -785,7 +785,7 @@ joined_r0x002694c0:
     uiSpriteAdvanceAnimation(temp_v2 + 0x1cc);
     temp_v9 = temp_v2 + 0x5ec;
     temp_v6 = temp_v9;
-    FUN_003450d4(temp_v9,0,temp_v2 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2 + 0x24a0,0,1);
+    uiScrollHandleActionsOrTouch(temp_v9,0,temp_v2 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2 + 0x24a0,0,1);
     if (temp_v6 != 0) {
       *(unsigned char *)(temp_v2 + 0x528) = 1;
     }
@@ -827,7 +827,7 @@ joined_r0x002694c0:
       }
       if (*(int *)(temp_v2 + 0x53c) != 6) {
         temp_v8 = temp_v6;
-        FUN_003450d4(temp_v6,0,temp_v2 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2 + 0x24a0,0,1);
+        uiScrollHandleActionsOrTouch(temp_v6,0,temp_v2 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2 + 0x24a0,0,1);
         if (temp_v8 == 0) {
           temp_v8 = temp_v6;
           FUN_00228b04(temp_v6,1);
@@ -908,7 +908,7 @@ joined_r0x002694c0:
       temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x406));
       temp_v9 = temp_v2 + 0xee4;
       temp_v6 = temp_v9;
-      FUN_003450d4(temp_v9,temp_v7,temp_v2 + 0x544,(int)*(short *)(temp_v2 + 0x58c),
+      uiScrollHandleActionsOrTouch(temp_v9,temp_v7,temp_v2 + 0x544,(int)*(short *)(temp_v2 + 0x58c),
                    (int)*(short *)(temp_v2 + 0x58e),(int)*(short *)(temp_v2 + 0x590),temp_v2 + 0x24a0,0,1)
       ;
       if (temp_v6 == 0) {
@@ -1148,7 +1148,7 @@ LAB_00269f7c:
       }
       temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x48c));
       temp_v14 = temp_v2 + 0x23c0;
-      FUN_003450d4(temp_v14,temp_v7,0,(int)*(short *)(temp_v2 + 0x58c),(int)*(short *)(temp_v2 + 0x58e),
+      uiScrollHandleActionsOrTouch(temp_v14,temp_v7,0,(int)*(short *)(temp_v2 + 0x58c),(int)*(short *)(temp_v2 + 0x58e),
                    (int)*(short *)(temp_v2 + 0x590),temp_v2 + 0x24a0,0,0);
       if (temp_v14 != 0) {
         temp_v14 = resourceRunOperationIfUnblocked(temp_v2 + 0x23c0);
@@ -1228,7 +1228,7 @@ LAB_00269f7c:
   case 0x1b:
     temp_v14 = temp_v2 + 0x2424;
     temp_v6 = temp_v14;
-    FUN_003450d4(temp_v14,0,temp_v2 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2 + 0x24a0,0,1);
+    uiScrollHandleActionsOrTouch(temp_v14,0,temp_v2 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2 + 0x24a0,0,1);
     if ((temp_v6 != 0) || (FUN_00228b04(temp_v14,1), temp_v14 != 0)) {
       *(unsigned char *)(temp_v2 + 0x528) = 1;
       break;
@@ -1251,7 +1251,7 @@ LAB_00269f7c:
   case 0x1c:
     temp_v14 = temp_v2 + 0x2424;
     temp_v6 = temp_v14;
-    FUN_003450d4(temp_v14,0,temp_v2 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2 + 0x24a0,0,1);
+    uiScrollHandleActionsOrTouch(temp_v14,0,temp_v2 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2 + 0x24a0,0,1);
     if ((temp_v6 != 0) || (temp_v6 = temp_v14, FUN_00228b04(temp_v14,1), temp_v6 != 0)) {
       *(unsigned char *)(temp_v2 + 0x528) = 1;
       break;
@@ -1340,7 +1340,7 @@ LAB_00269f7c:
   case 0x1e:
     temp_v14 = temp_v2 + 0x2424;
     temp_v6 = temp_v14;
-    FUN_003450d4(temp_v14,0,temp_v2 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2 + 0x24a0,0,1);
+    uiScrollHandleActionsOrTouch(temp_v14,0,temp_v2 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2 + 0x24a0,0,1);
     if ((temp_v6 != 0) || (FUN_00228b04(temp_v14,1), temp_v14 != 0)) {
       *(unsigned char *)(temp_v2 + 0x528) = 1;
       break;

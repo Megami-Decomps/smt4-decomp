@@ -102069,12 +102069,12 @@
     },
     {
       "address": "0x3450d4",
-      "function": "FUN_003450d4",
+      "function": "uiScrollHandleActionsOrTouch",
       "module": "_code",
-      "object": "build/obj/_code/0034/FUN_003450d4.o",
+      "object": "build/obj/_code/0034/uiScrollHandleActionsOrTouch.o",
       "size": 504,
-      "source": "src/_code/0034/FUN_003450d4.cpp",
-      "target": "orig/target/_code/0034/FUN_003450d4.o",
+      "source": "src/_code/0034/uiScrollHandleActionsOrTouch.cpp",
+      "target": "orig/target/_code/0034/uiScrollHandleActionsOrTouch.o",
       "thumb": false
     },
     {

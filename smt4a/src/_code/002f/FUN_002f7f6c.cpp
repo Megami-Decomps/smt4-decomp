@@ -11,7 +11,7 @@ int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_00228b04(int, int);
 int scrScriptProcessStartEntry(...);
 int flaggedEntrySetValueA(...);
-int FUN_003450d4(int, int, int, unsigned int, unsigned int, unsigned int, char [4], int, int);
+int uiScrollHandleActionsOrTouch(int, int, int, unsigned int, unsigned int, unsigned int, char [4], int, int);
 
 /* stack frame of param_1: 4 slot(s), 13 byte(s) */
 typedef struct {
@@ -29,7 +29,7 @@ typedef struct {
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: flaggedEntrySetValueA. */
-/* Supplied declaration required: FUN_003450d4. */
+/* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 
 
 void FUN_002f7f6c(int param_1)
@@ -46,7 +46,7 @@ void FUN_002f7f6c(int param_1)
   FUN_00228b04(temp_v1,1);
   if (temp_v1 == 0) {
     temp_v1 = param_1 + 0x2500;
-    FUN_003450d4(temp_v1,0,param_1 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2,0,1);
+    uiScrollHandleActionsOrTouch(temp_v1,0,param_1 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2,0,1);
     if (temp_v1 == 0) {
       temp_v1 = 0;
       padQueryLogicalKey(0,1);

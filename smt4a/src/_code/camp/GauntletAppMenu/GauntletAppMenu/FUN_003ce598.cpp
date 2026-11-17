@@ -36,7 +36,7 @@ int campHideNumericBanner(void);
 int scrScriptProcessStartEntry(...);
 int resourceRunOperationIfUnblocked(...);
 int scrollListSetSelectionTracked(...);
-int FUN_003450d4(...);
+int uiScrollHandleActionsOrTouch(...);
 int FUN_003dc0c0(...);
 int FUN_003e41f8(...);
 int FUN_003e45bc(...);
@@ -81,7 +81,7 @@ extern unsigned int flaggedEntryGetValueA(int);
 /* Supplied declaration required: flaggedEntrySetValueA. */
 /* Supplied declaration required: FUN_0031f208. */
 /* Supplied declaration required: sortMenuAcquire. */
-/* Supplied declaration required: FUN_003450d4. */
+/* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: messageBannerRestartOrClear. */
 /* Supplied declaration required: FUN_00353b00. */
 /* Supplied declaration required: FUN_00359974. */
@@ -303,7 +303,7 @@ unsigned int FUN_003ce598(void)
     temp_v10[0] = '\0';
     temp_v8 = reinterpret_cast<unsigned int>(asdTMTexTableEntryAt(0x14,0x575));
     temp_v7 = temp_v6 + 0x10;
-    FUN_003450d4(temp_v7,temp_v8,temp_v6 + 0x508,(int)*(short *)(temp_v6 + 0x522),
+    uiScrollHandleActionsOrTouch(temp_v7,temp_v8,temp_v6 + 0x508,(int)*(short *)(temp_v6 + 0x522),
                  (int)*(short *)(temp_v6 + 0x51e),(int)*(short *)(temp_v6 + 0x520),temp_v10,0,1);
     if (temp_v7 != 0) {
       FUN_0021b1a8(temp_v6);

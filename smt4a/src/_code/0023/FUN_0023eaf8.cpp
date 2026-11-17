@@ -24,7 +24,7 @@ int FUN_00228b04(int, int);
 int FUN_0023ff10(void);
 int resourceRunOperationIfUnblocked(...);
 int questMarkSelectedSpecialDetail(void);
-int FUN_003450d4(int, unsigned int, int, int, int, int, char [8], int, int);
+int uiScrollHandleActionsOrTouch(int, unsigned int, int, int, int, int, char [8], int, int);
 int FUN_003d474c(void);
 int FUN_003d498c(...);
 unsigned int questHasSpecialDetailPage(unsigned int);
@@ -66,7 +66,7 @@ extern int FUN_002f7730(int, unsigned int);
 extern unsigned int flaggedEntryGetValueA(int);
 /* Supplied declaration required: FUN_0031f208. */
 /* Supplied declaration required: sortMenuAcquire. */
-/* Supplied declaration required: FUN_003450d4. */
+/* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: FUN_003d474c. */
 /* Supplied declaration required: FUN_003d498c. */
 extern int FUN_003de75c(unsigned int);
@@ -132,7 +132,7 @@ void FUN_0023eaf8(void)
     temp_v15[0] = '\0';
     temp_v5 = reinterpret_cast<unsigned int>(asdTMTexTableEntryAt(0x1e,0xc1));
     temp_v3 = temp_v11;
-    FUN_003450d4(temp_v11,temp_v5,temp_v2 + 0xd28,(int)*(short *)(temp_v2 + 0xd42),
+    uiScrollHandleActionsOrTouch(temp_v11,temp_v5,temp_v2 + 0xd28,(int)*(short *)(temp_v2 + 0xd42),
                  (int)*(short *)(temp_v2 + 0xd3e),(int)*(short *)(temp_v2 + 0xd40),temp_v15,0,1);
     if (temp_v3 != 0) {
       temp_v3 = resourceRunOperationIfUnblocked(temp_v11);

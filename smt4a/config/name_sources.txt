@@ -7416,3 +7416,4 @@
 00192550 itemTableGetItemRecord inferred Finds an item record by id in item/ItemTable.tbb table 1. Twin of smt4 itemTableGetItemRecord.
 00192608 itemTableGetEquipmentRecord inferred Finds an equipment record by id in item/ItemTable.tbb table 2 (0xA8-byte rows in IV: id 0x50, buy 0x9C, sell 0xA0).
 001ad9b4 questDataGetRecord inferred Finds a quest record by id in event/quest/QuestData.tbb (0x1B4-byte rows in IV).
+003450d4 uiScrollHandleActionsOrTouch inferred Exact 508-byte match: applies touch/list selection, forwards a signed-halfword rectangle, reports blocked modes and optional selection-change events; SMT4 twin name.

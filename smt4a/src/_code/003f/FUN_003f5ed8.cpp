@@ -43,7 +43,7 @@ void uiSpriteAdvanceAnimation(void *state, f32 scale);
 void FUN_00228b04(void *list, s32 arg);
 s32 resourceRunOperationIfUnblocked(void *list);
 s32 ifTouchGetSelectionMode(void);
-s32 FUN_003450d4(void *list, const TextureTableEntryIV *touchArea, void *panel, s32 a, s32 b, s32 c, u8 *flag, s32 d, s32 e);
+s32 uiScrollHandleActionsOrTouch(void *list, const TextureTableEntryIV *touchArea, void *panel, s32 a, s32 b, s32 c, u8 *flag, s32 d, s32 e);
 s32 padQueryLogicalKey(s32 which, s32 arg);
 void eventQueueAddUniqueIfValid(u32 event);
 void FUN_003f6abc(DialogWork *work);
@@ -88,7 +88,7 @@ void FUN_003f5ed8(DialogWork *work)
     u8 flag = 0;
     DialogWorkView *view = (DialogWorkView *)work;
 
-    if (FUN_003450d4(work->list, asdTMTexTableEntryAt(0x31, 0xAB), work->panel, view->panelA, view->panelB, view->panelC, &flag, 0, 1) != 0) {
+    if (uiScrollHandleActionsOrTouch(work->list, asdTMTexTableEntryAt(0x31, 0xAB), work->panel, view->panelA, view->panelB, view->panelC, &flag, 0, 1) != 0) {
         return;
     }
     if ((padQueryLogicalKey(0, 1) != 0 || touchMode == 6) && *work->selected != 0) {

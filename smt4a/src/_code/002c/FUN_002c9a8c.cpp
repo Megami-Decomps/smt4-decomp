@@ -25,7 +25,7 @@ int ifTouchRegionAdd(int, int, int, int);
 int listCursorGetRowIfUnblocked(...);
 int infoWinSetTimer(...);
 int flaggedEntrySetValueA(...);
-int FUN_003450d4(...);
+int uiScrollHandleActionsOrTouch(...);
 int FUN_00359974(int, int, unsigned int, int);
 int FUN_00372100(...);
 int FUN_003df7c4(...);
@@ -78,7 +78,7 @@ extern int messageGetChoiceResult(void);
 /* Supplied declaration required: flaggedEntrySetValueA. */
 extern int statsAreAllCapped(int);
 /* Supplied declaration required: FUN_00333dc8. */
-/* Supplied declaration required: FUN_003450d4. */
+/* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: FUN_00359974. */
 /* Supplied declaration required: FUN_00372100. */
 /* Supplied declaration required: FUN_003df7c4. */
@@ -278,7 +278,7 @@ LAB_002ca008:
       eventQueueAddUniqueIfValid(0x100020d);
     }
     temp_v19 = temp_v20;
-    FUN_003450d4(temp_v20,0,param_1 + 0x43b6,0xffffffff,0xffffffff,0xffffffff,temp_v23,0,1);
+    uiScrollHandleActionsOrTouch(temp_v20,0,param_1 + 0x43b6,0xffffffff,0xffffffff,0xffffffff,temp_v23,0,1);
     if ((temp_v19 != 0) || (temp_v19 = temp_v20, FUN_00228b04(temp_v20,0), temp_v19 != 0)) {
       temp_v15 = listCursorGetRowIfUnblocked(temp_v20);
       temp_v16 = dataTableGet(0x25,1);

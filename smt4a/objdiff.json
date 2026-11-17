@@ -199653,13 +199653,13 @@
       "target_path": "orig/target/_code/0034/FUN_00345098.o"
     },
     {
-      "base_path": "build/obj/_code/0034/FUN_003450d4.o",
+      "base_path": "build/obj/_code/0034/uiScrollHandleActionsOrTouch.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_003450d4",
+            "name": "uiScrollHandleActionsOrTouch",
             "size": 504,
             "vram": "0x3450d4"
           }
@@ -199667,10 +199667,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0034/FUN_003450d4.cpp"
+        "source_path": "src/_code/0034/uiScrollHandleActionsOrTouch.cpp"
       },
-      "name": "_code/0034/FUN_003450d4",
-      "target_path": "orig/target/_code/0034/FUN_003450d4.o"
+      "name": "_code/0034/uiScrollHandleActionsOrTouch",
+      "target_path": "orig/target/_code/0034/uiScrollHandleActionsOrTouch.o"
     },
     {
       "base_path": "build/obj/_code/0034/bitsHolderSetBit.o",
