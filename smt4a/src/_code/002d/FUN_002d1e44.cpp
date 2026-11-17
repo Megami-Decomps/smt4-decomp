@@ -7,7 +7,7 @@ void __aeabi_memcpy4(void* destination, const void* source, u32 size);
 // Install the Apocalypse camera-vector packet, retaining its extra word.
 void FUN_002d1e44(const VectorPairTransitionA* parameters)
 {
-    VectorPairTransitionA* packet = &DAT_005806a0.view->move;
+    VectorPairTransitionA* packet = &g_lmapViewHolder.view->move;
     __aeabi_memcpy4(packet, parameters, sizeof(VectorPairTransitionA));
     VectorPairTransition& transition = packet->value;
     transition.current.first = transition.start.first;

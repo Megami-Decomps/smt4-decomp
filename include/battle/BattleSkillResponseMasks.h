@@ -16,5 +16,5 @@ typedef char BattleSkillResponseMaskOffsets[
     offsetof(BattleSkillResponseMasks, affinity) == 0x20 &&
     sizeof(BattleSkillResponseMasks) == 0x28 ? 1 : -1];
 
-extern "C" BattleSkillResponseMasks DAT_005713f0;
+extern "C" BattleSkillResponseMasks g_btlSkillResponseMasks;
 #endif

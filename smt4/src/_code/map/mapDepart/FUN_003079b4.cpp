@@ -42,7 +42,7 @@ typedef struct {
     unsigned int sp98; /* 0x98: local_98 */
 } void_stack;
 
-extern int *DAT_004474f4; /* 0x4474f4 */
+extern int *g_mapCamera; /* 0x4474f4 */
 extern int g_lmapScene; /* 0x447e88 */
 extern int DAT_0049f9e0; /* 0x49f9e0 */
 extern int DAT_0049f9e4; /* 0x49f9e4 */
@@ -129,16 +129,16 @@ void FUN_003079b4(void)
   temp_v3 = DAT_0049f9e8;
   temp_v11 = DAT_0049f9e4;
   temp_v6 = g_lmapScene;
-  piVar7 = DAT_004474f4;
+  piVar7 = g_mapCamera;
   uStack_28 = in_d8;
   uStack_20 = in_d9;
   uStack_18 = in_d10;
-  switch(*DAT_004474f4) {
+  switch(*g_mapCamera) {
   case 0:
     FUN_002d1e4c();
     break;
   case 1:
-    temp_v25 = (float)DAT_004474f4[6];
+    temp_v25 = (float)g_mapCamera[6];
     mathGetShortestAngleDelta();
     temp_v0 = in_fpscr & 0xfffffff;
     temp_v24 = temp_v25;
@@ -148,24 +148,24 @@ void FUN_003079b4(void)
     temp_v26 = temp_v24 * 0.2f;
     in_fpscr = temp_v0 | ((unsigned int)(temp_v26 <= temp_v24) << 0x1d);
     if (!(u8)(in_fpscr >> 0x1d)) {
-      DAT_004474f4[6] = *(int *)(g_lmapScene + 0x50);
+      g_mapCamera[6] = *(int *)(g_lmapScene + 0x50);
     }
     else {
       in_fpscr = temp_v0 | ((unsigned int)(0.0f <= temp_v25) << 0x1d);
       if (!(u8)(in_fpscr >> 0x1d)) {
-        temp_v26 = (float)DAT_004474f4[6] - temp_v26;
+        temp_v26 = (float)g_mapCamera[6] - temp_v26;
       }
       else {
-        temp_v26 = (float)DAT_004474f4[6] + temp_v26;
+        temp_v26 = (float)g_mapCamera[6] + temp_v26;
       }
-      DAT_004474f4[6] = (int)temp_v26;
+      g_mapCamera[6] = (int)temp_v26;
     }
     break;
   case 2:
-    DAT_004474f4[6] = *(int *)(g_lmapScene + 0x50);
+    g_mapCamera[6] = *(int *)(g_lmapScene + 0x50);
     break;
   case 3:
-    DAT_004474f4[0x1c] = DAT_0049f9e0;
+    g_mapCamera[0x1c] = DAT_0049f9e0;
     piVar7[0x1d] = temp_v11;
     piVar7[0x1e] = temp_v3;
     temp_v11 = DAT_0049f9f4;
@@ -176,7 +176,7 @@ void FUN_003079b4(void)
     piVar7[0x1f] = DAT_0049f9f8;
     break;
   case 4:
-    DAT_004474f4[0x23] = DAT_0049f9fc;
+    g_mapCamera[0x23] = DAT_0049f9fc;
     piVar7[0x24] = temp_v4;
     piVar7[0x25] = temp_v5;
     temp_v11 = DAT_0049fa10;
@@ -192,7 +192,7 @@ void FUN_003079b4(void)
     temp_v25 = 0.017453292f;
     temp_v24 = *(float *)(g_lmapScene + 0x20);
     temp_v11 = *(int *)(g_lmapScene + 0x24);
-    DAT_004474f4[0x16] = *(int *)(g_lmapScene + 0x1c);
+    g_mapCamera[0x16] = *(int *)(g_lmapScene + 0x1c);
     piVar7[0x17] = (int)temp_v24;
     piVar7[0x18] = temp_v11;
     piVar7[0x17] = (int)(temp_v24 + 150.0f);
@@ -205,10 +205,10 @@ void FUN_003079b4(void)
     temp_v24 = *(float *)(temp_v6 + 0x50) * 0.017453292f;
     mathRemPio2f();
     temp_v26 = 600.0f;
-    DAT_004474f4[0x13] = (int)((float)DAT_004474f4[0x13] + temp_v24 * 600.0f);
+    g_mapCamera[0x13] = (int)((float)g_mapCamera[0x13] + temp_v24 * 600.0f);
     temp_v25 = *(float *)(g_lmapScene + 0x50) * temp_v25;
     FUN_00282390();
-    DAT_004474f4[0x15] = (int)((float)DAT_004474f4[0x15] + temp_v25 * temp_v26);
+    g_mapCamera[0x15] = (int)((float)g_mapCamera[0x15] + temp_v25 * temp_v26);
     break;
   case 7:
     temp_v24 = *(float *)(g_lmapScene + 0x4c);
@@ -219,30 +219,30 @@ void FUN_003079b4(void)
     if (temp_v11 != 0x5a) {
       temp_v6 = temp_v11 - 0x100;
     }
-    temp_v25 = (float)DAT_004474f4[0xa4] * 0.017453292f;
+    temp_v25 = (float)g_mapCamera[0xa4] * 0.017453292f;
     if (!(temp_v11 != 0x5a && temp_v6 != 0xe)) {
       mathRemPio2f();
-      piVar7 = DAT_004474f4;
-      DAT_004474f4[0xc] = (int)temp_v25;
+      piVar7 = g_mapCamera;
+      g_mapCamera[0xc] = (int)temp_v25;
       temp_v24 = (float)piVar7[0xa4] * temp_v24;
       FUN_00282390();
-      piVar7 = DAT_004474f4;
-      DAT_004474f4[0xb] = (int)temp_v24;
+      piVar7 = g_mapCamera;
+      g_mapCamera[0xb] = (int)temp_v24;
       piVar7[10] = 0;
     }
     else {
       mathRemPio2f();
-      piVar7 = DAT_004474f4;
-      DAT_004474f4[10] = (int)temp_v25;
+      piVar7 = g_mapCamera;
+      g_mapCamera[10] = (int)temp_v25;
       temp_v24 = (float)piVar7[0xa4] * temp_v24;
       FUN_00282390();
-      piVar7 = DAT_004474f4;
-      DAT_004474f4[0xb] = (int)temp_v24;
+      piVar7 = g_mapCamera;
+      g_mapCamera[0xb] = (int)temp_v24;
       piVar7[0xc] = 0;
     }
-    piVar7 = DAT_004474f4;
-    temp_v24 = (float)DAT_004474f4[0xa4] + 10.0f;
-    DAT_004474f4[0xa4] = (int)temp_v24;
+    piVar7 = g_mapCamera;
+    temp_v24 = (float)g_mapCamera[0xa4] + 10.0f;
+    g_mapCamera[0xa4] = (int)temp_v24;
     if ((int)temp_v24 >= 0x43340001) {
       temp_v24 = 180.0f;
     }
@@ -257,33 +257,33 @@ void FUN_003079b4(void)
     if (temp_v11 != 0x5a) {
       temp_v6 = temp_v11 - 0x100;
     }
-    temp_v25 = (float)DAT_004474f4[0xa4] * 0.017453292f;
+    temp_v25 = (float)g_mapCamera[0xa4] * 0.017453292f;
     if (!(temp_v11 != 0x5a && temp_v6 != 0xe)) {
       mathRemPio2f();
-      piVar7 = DAT_004474f4;
-      DAT_004474f4[0xc] = (int)temp_v25;
+      piVar7 = g_mapCamera;
+      g_mapCamera[0xc] = (int)temp_v25;
       temp_v24 = (float)piVar7[0xa4] * temp_v24;
       FUN_00282390();
-      piVar7 = DAT_004474f4;
-      DAT_004474f4[0xb] = (int)temp_v24;
+      piVar7 = g_mapCamera;
+      g_mapCamera[0xb] = (int)temp_v24;
       piVar7[10] = 0;
     }
     else {
       mathRemPio2f();
-      piVar7 = DAT_004474f4;
-      DAT_004474f4[10] = (int)temp_v25;
+      piVar7 = g_mapCamera;
+      g_mapCamera[10] = (int)temp_v25;
       temp_v24 = (float)piVar7[0xa4] * temp_v24;
       FUN_00282390();
-      piVar7 = DAT_004474f4;
-      DAT_004474f4[0xb] = (int)temp_v24;
+      piVar7 = g_mapCamera;
+      g_mapCamera[0xb] = (int)temp_v24;
       piVar7[0xc] = 0;
     }
-    temp_v24 = (float)DAT_004474f4[0xa4];
+    temp_v24 = (float)g_mapCamera[0xa4];
     temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v24 < 0.0f) << 0x1f) |
             ((unsigned int)(temp_v24 == 0.0f) << 0x1e);
     in_fpscr = temp_v0 | ((unsigned int)(temp_v24 != temp_v24) << 0x1c);
     temp_v2 = (unsigned char)(temp_v0 >> 0x18);
-    piVar7 = DAT_004474f4;
+    piVar7 = g_mapCamera;
     if ((unsigned char)((temp_v2 >> 6) & 1) || temp_v2 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
       temp_v24 = 0.0f;
     }
@@ -298,30 +298,30 @@ void FUN_003079b4(void)
     if (temp_v11 != 0x5a) {
       temp_v6 = temp_v11 - 0x100;
     }
-    temp_v25 = (float)DAT_004474f4[0xa4] * 0.017453292f;
+    temp_v25 = (float)g_mapCamera[0xa4] * 0.017453292f;
     if (!(temp_v11 != 0x5a && temp_v6 != 0xe)) {
       mathRemPio2f();
-      piVar7 = DAT_004474f4;
-      DAT_004474f4[0xc] = (int)temp_v25;
+      piVar7 = g_mapCamera;
+      g_mapCamera[0xc] = (int)temp_v25;
       temp_v24 = (float)piVar7[0xa4] * temp_v24;
       FUN_00282390();
-      piVar7 = DAT_004474f4;
-      DAT_004474f4[0xb] = (int)temp_v24;
+      piVar7 = g_mapCamera;
+      g_mapCamera[0xb] = (int)temp_v24;
       piVar7[10] = 0;
     }
     else {
       mathRemPio2f();
-      piVar7 = DAT_004474f4;
-      DAT_004474f4[10] = (int)temp_v25;
+      piVar7 = g_mapCamera;
+      g_mapCamera[10] = (int)temp_v25;
       temp_v24 = (float)piVar7[0xa4] * temp_v24;
       FUN_00282390();
-      piVar7 = DAT_004474f4;
-      DAT_004474f4[0xb] = (int)temp_v24;
+      piVar7 = g_mapCamera;
+      g_mapCamera[0xb] = (int)temp_v24;
       piVar7[0xc] = 0;
     }
-    piVar7 = DAT_004474f4;
-    temp_v24 = (float)DAT_004474f4[0xa4] - 10.0f;
-    DAT_004474f4[0xa4] = (int)temp_v24;
+    piVar7 = g_mapCamera;
+    temp_v24 = (float)g_mapCamera[0xa4] - 10.0f;
+    g_mapCamera[0xa4] = (int)temp_v24;
     temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v24 < 0.0f) << 0x1f) |
             ((unsigned int)(temp_v24 == 0.0f) << 0x1e);
     in_fpscr = temp_v0 | ((unsigned int)(temp_v24 != temp_v24) << 0x1c);
@@ -332,16 +332,16 @@ void FUN_003079b4(void)
     piVar7[0xa4] = (int)temp_v24;
     break;
   case 10:
-    temp_v6 = DAT_004474f4[1];
-    piVar7 = DAT_004474f4 + 0x88;
+    temp_v6 = g_mapCamera[1];
+    piVar7 = g_mapCamera + 0x88;
     if (temp_v6 == 0) {
-      temp_v31 = DAT_004474f4[0x16];
-      iStack_94 = DAT_004474f4[0x17];
-      iStack_90 = DAT_004474f4[0x18];
+      temp_v31 = g_mapCamera[0x16];
+      iStack_94 = g_mapCamera[0x17];
+      iStack_90 = g_mapCamera[0x18];
       temp_v25 = 0.017453292f;
-      temp_v33 = DAT_004474f4[0x15];
-      temp_v32 = DAT_004474f4[0x13];
-      iStack_88 = DAT_004474f4[0x14];
+      temp_v33 = g_mapCamera[0x15];
+      temp_v32 = g_mapCamera[0x13];
+      iStack_88 = g_mapCamera[0x14];
       temp_v26 = *(float *)(g_lmapScene + 0x28);
       temp_v30 = *(float *)(g_lmapScene + 0x2c);
       temp_v24 = *(float *)(g_lmapScene + 0x50) * 0.017453292f;
@@ -373,8 +373,8 @@ void FUN_003079b4(void)
       temp_v37 = temp_v28;
       temp_v38 = temp_v14;
       FUN_00282228(&temp_v31);
-      piVar7 = DAT_004474f4;
-      *(unsigned char *)(DAT_004474f4 + 0x87) = 1;
+      piVar7 = g_mapCamera;
+      *(unsigned char *)(g_mapCamera + 0x87) = 1;
       piVar13 = piVar7 + 1;
       *piVar13 = *piVar13 + 1;
       piVar7[2] = 0;
@@ -419,23 +419,23 @@ void FUN_003079b4(void)
         temp_v37 = temp_v24;
         temp_v38 = temp_v28;
         FUN_00282228(&temp_v31);
-        piVar7 = DAT_004474f4;
-        DAT_004474f4[1] = DAT_004474f4[1] + 1;
+        piVar7 = g_mapCamera;
+        g_mapCamera[1] = g_mapCamera[1] + 1;
         piVar7[2] = 0;
       }
       break;
     }
     if ((temp_v6 != 2) || (temp_v6 = vectorPairTransitionStep(), temp_v6 == 0)) break;
-    piVar7 = DAT_004474f4;
-    DAT_004474f4[1] = DAT_004474f4[1] + 1;
+    piVar7 = g_mapCamera;
+    g_mapCamera[1] = g_mapCamera[1] + 1;
     piVar7[2] = 0;
     break;
   case 0xb:
-    temp_v6 = DAT_004474f4[1];
-    piVar13 = DAT_004474f4 + 0x88;
+    temp_v6 = g_mapCamera[1];
+    piVar13 = g_mapCamera + 0x88;
     if (temp_v6 == 0) {
-      piVar13 = DAT_004474f4 + 0x16;
-      DAT_004474f4[3] = 0;
+      piVar13 = g_mapCamera + 0x16;
+      g_mapCamera[3] = 0;
       temp_v31 = *piVar13;
       iStack_94 = piVar7[0x17];
       iStack_90 = piVar7[0x18];
@@ -473,8 +473,8 @@ void FUN_003079b4(void)
       temp_v37 = temp_v30;
       temp_v38 = temp_v15;
       FUN_00282228(&temp_v31);
-      piVar7 = DAT_004474f4;
-      *(unsigned char *)(DAT_004474f4 + 0x87) = 1;
+      piVar7 = g_mapCamera;
+      *(unsigned char *)(g_mapCamera + 0x87) = 1;
       piVar13 = piVar7 + 1;
       *piVar13 = *piVar13 + 1;
       piVar7[2] = 0;
@@ -519,8 +519,8 @@ void FUN_003079b4(void)
         uStack_30 = (unsigned long long)(unsigned int)uStack_30;
         temp_v38 = temp_v15;
         FUN_00282228(&temp_v31);
-        piVar7 = DAT_004474f4;
-        DAT_004474f4[1] = DAT_004474f4[1] + 1;
+        piVar7 = g_mapCamera;
+        g_mapCamera[1] = g_mapCamera[1] + 1;
         piVar7[2] = 0;
       }
       break;
@@ -528,8 +528,8 @@ void FUN_003079b4(void)
     if (temp_v6 != 2) break;
     temp_v6 = vectorPairTransitionStep();
     if (temp_v6 != 0) {
-      piVar7 = DAT_004474f4;
-      DAT_004474f4[1] = DAT_004474f4[1] + 1;
+      piVar7 = g_mapCamera;
+      g_mapCamera[1] = g_mapCamera[1] + 1;
       piVar7[2] = 0;
     }
     break;
@@ -540,16 +540,16 @@ void FUN_003079b4(void)
     FUN_001f87d4();
     break;
   case 0xe:
-    temp_v6 = DAT_004474f4[1];
-    piVar7 = DAT_004474f4 + 0x88;
+    temp_v6 = g_mapCamera[1];
+    piVar7 = g_mapCamera + 0x88;
     if (temp_v6 == 0) {
-      temp_v31 = DAT_004474f4[0x16];
-      iStack_94 = DAT_004474f4[0x17];
-      iStack_90 = DAT_004474f4[0x18];
+      temp_v31 = g_mapCamera[0x16];
+      iStack_94 = g_mapCamera[0x17];
+      iStack_90 = g_mapCamera[0x18];
       temp_v25 = 0.017453292f;
-      temp_v33 = DAT_004474f4[0x15];
-      temp_v32 = DAT_004474f4[0x13];
-      iStack_88 = DAT_004474f4[0x14];
+      temp_v33 = g_mapCamera[0x15];
+      temp_v32 = g_mapCamera[0x13];
+      iStack_88 = g_mapCamera[0x14];
       temp_v29 = *(float *)(g_lmapScene + 0x28);
       temp_v28 = *(float *)(g_lmapScene + 0x2c);
       temp_v24 = *(float *)(g_lmapScene + 0x50) * 0.017453292f;
@@ -584,8 +584,8 @@ void FUN_003079b4(void)
       uStack_30 = (unsigned long long)(unsigned int)uStack_30;
       temp_v38 = temp_v24;
       FUN_00282228(&temp_v31);
-      piVar7 = DAT_004474f4;
-      *(unsigned char *)(DAT_004474f4 + 0x87) = 1;
+      piVar7 = g_mapCamera;
+      *(unsigned char *)(g_mapCamera + 0x87) = 1;
       piVar13 = piVar7 + 1;
       *piVar13 = *piVar13 + 1;
       piVar7[2] = 0;
@@ -636,8 +636,8 @@ void FUN_003079b4(void)
         temp_v37 = temp_v26;
         temp_v38 = temp_v24;
         FUN_00282228(&temp_v31);
-        piVar7 = DAT_004474f4;
-        DAT_004474f4[1] = DAT_004474f4[1] + 1;
+        piVar7 = g_mapCamera;
+        g_mapCamera[1] = g_mapCamera[1] + 1;
         piVar7[2] = 0;
       }
       break;
@@ -645,8 +645,8 @@ void FUN_003079b4(void)
     if (temp_v6 != 2) break;
     temp_v6 = vectorPairTransitionStep();
     if (temp_v6 != 0) {
-      piVar7 = DAT_004474f4;
-      DAT_004474f4[1] = DAT_004474f4[1] + 1;
+      piVar7 = g_mapCamera;
+      g_mapCamera[1] = g_mapCamera[1] + 1;
       piVar7[2] = 0;
     }
     break;

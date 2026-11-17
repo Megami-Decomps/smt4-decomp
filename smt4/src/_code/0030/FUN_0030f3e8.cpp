@@ -3,7 +3,7 @@
 #include "shard/W8Match1_MatrixRotation.h"
 
 extern "C" {
-extern MatrixRotationWork DAT_004ea81c;
+extern MatrixRotationWork g_vectorScratch;
 f32 phaseCosInterpolate(f32 phase);
 f32 mathSinFixedAngle(f32 phase);
 
@@ -13,10 +13,10 @@ void FUN_0030f3e8(f32 angle)
     f32 cosine = phaseCosInterpolate(phase);
     f32 sine = mathSinFixedAngle(phase);
     f32 complement = 1.0f - cosine;
-    f32 x = DAT_004ea81c.axisInput.values[0];
-    f32 y = DAT_004ea81c.axisInput.values[1];
-    f32 z = DAT_004ea81c.axisInput.values[2];
-    f32 *matrix = DAT_004ea81c.rotation.values;
+    f32 x = g_vectorScratch.axisInput.values[0];
+    f32 y = g_vectorScratch.axisInput.values[1];
+    f32 z = g_vectorScratch.axisInput.values[2];
+    f32 *matrix = g_vectorScratch.rotation.values;
     matrix[0] = x * x + (1.0f - x * x) * cosine;
     matrix[1] = z * sine + x * y * complement;
     matrix[2] = x * z * complement - y * sine;

@@ -23,31 +23,31 @@ void FUN_00303710(void)
         LocalCamera *camera;
     };
 
-    DAT_005806a0.view->up.x = 0.0f;
-    DAT_005806a0.view->up.y = 1.0f;
-    DAT_005806a0.view->up.z = 0.0f;
+    g_lmapViewHolder.view->up.x = 0.0f;
+    g_lmapViewHolder.view->up.y = 1.0f;
+    g_lmapViewHolder.view->up.z = 0.0f;
 
-    DAT_005806a0.view->target.x = 0.0f;
-    DAT_005806a0.view->target.y = 0.0f;
-    DAT_005806a0.view->target.z = 0.0f;
+    g_lmapViewHolder.view->target.x = 0.0f;
+    g_lmapViewHolder.view->target.y = 0.0f;
+    g_lmapViewHolder.view->target.z = 0.0f;
 
-    DAT_005806a0.view->eye.x = 0.0f;
-    DAT_005806a0.view->eye.y = 300.0f;
-    DAT_005806a0.view->eye.z = 300.0f;
+    g_lmapViewHolder.view->eye.x = 0.0f;
+    g_lmapViewHolder.view->eye.y = 300.0f;
+    g_lmapViewHolder.view->eye.z = 300.0f;
 
-    DAT_005806a0.view->savedTarget = DAT_005806a0.view->target;
-    DAT_005806a0.view->savedEye = DAT_005806a0.view->eye;
+    g_lmapViewHolder.view->savedTarget = g_lmapViewHolder.view->target;
+    g_lmapViewHolder.view->savedEye = g_lmapViewHolder.view->eye;
 
     asdCameraInitializeDefaults(reinterpret_cast<AsdCamera *>(&g_localCamera), 1);
     FUN_0014f0dc(&g_localCamera,
-                 &DAT_005806a0.view->eye,
-                 &DAT_005806a0.view->target,
-                 &DAT_005806a0.view->up);
+                 &g_lmapViewHolder.view->eye,
+                 &g_lmapViewHolder.view->target,
+                 &g_lmapViewHolder.view->up);
     FUN_001523b8(&g_localCamera, 1, 36.0f, 10.0f, 2560000.0f,
                  1.66666662693023681640625f);
     FUN_0036b824(reinterpret_cast<u32>(&g_localCamera));
 
-    LmapViewA *view = DAT_005806a0.view;
+    LmapViewA *view = g_lmapViewHolder.view;
     reinterpret_cast<ModelManagerCameraPrefix *>(view->modelManager)->camera = &g_localCamera;
     view->parameterA0 = 500.0f;
     view->parameterA4 = 0.0f;

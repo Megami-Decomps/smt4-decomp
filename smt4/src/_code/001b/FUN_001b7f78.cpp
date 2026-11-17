@@ -283,7 +283,7 @@ extern unsigned char LAB_00325f61; /* 0x325f61 */
 extern int g_aocMain; /* 0x432fc8 */
 extern int g_aocSystem; /* 0x433158 */
 extern int g_mapDepartWork; /* 0x4474d8 */
-extern int DAT_004474f4; /* 0x4474f4 */
+extern int g_mapCamera; /* 0x4474f4 */
 extern unsigned int *g_mapMain; /* 0x447e28 */
 extern int iRam00447e2c; /* 0x447e2c */
 extern int g_deferredMapModels; /* 0x447e58 */
@@ -921,7 +921,7 @@ unsigned int FUN_001b7f78(void)
         temp_v2 = DAT_0049fc4c;
         *(float *)(temp_v9 + 0x4c) = DAT_0049fc4c;
         *(float *)(temp_v9 + 0x50) = temp_v2;
-        *(float *)(DAT_004474f4 + 0x18) = DAT_0049fc50;
+        *(float *)(g_mapCamera + 0x18) = DAT_0049fc50;
       }
       else {
         puVar14[0xb] = DAT_0049fc18;
@@ -945,7 +945,7 @@ unsigned int FUN_001b7f78(void)
         temp_v2 = DAT_0049fc30;
         *(float *)(temp_v9 + 0x4c) = DAT_0049fc30;
         *(float *)(temp_v9 + 0x50) = temp_v2;
-        *(float *)(DAT_004474f4 + 0x18) = DAT_0049fc34;
+        *(float *)(g_mapCamera + 0x18) = DAT_0049fc34;
       }
       DAT_0049fc14 = '\0';
       *(unsigned char *)((int)puVar14 + 0x3d) = 1;
@@ -958,7 +958,7 @@ unsigned int FUN_001b7f78(void)
     else if (DAT_0049fd14 != 0x18) {
       if (DAT_0049fd14 == 0xffffffff) {
         DAT_0049fb9c = 0;
-        *(unsigned int *)(DAT_004474f4 + 0x18) = 0xc2b40000;
+        *(unsigned int *)(g_mapCamera + 0x18) = 0xc2b40000;
         temp_v9 = puVar14[9] + 1;
         puVar14[9] = temp_v9;
         actorApplyAlpha();
@@ -997,7 +997,7 @@ LAB_001b848c:
           *(unsigned int *)(temp_v9 + 0x4c) = temp_v16;
           *(unsigned int *)(temp_v9 + 0x50) = temp_v16;
           temp_v16 = VectorSignedToFloat((int)*(short *)(temp_v10 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-          *(unsigned int *)(DAT_004474f4 + 0x18) = temp_v16;
+          *(unsigned int *)(g_mapCamera + 0x18) = temp_v16;
         }
       }
       else {
@@ -1017,7 +1017,7 @@ LAB_001b848c:
         temp_v16 = DAT_0049fd30;
         *(unsigned int *)(temp_v9 + 0x4c) = DAT_0049fd30;
         *(unsigned int *)(temp_v9 + 0x50) = temp_v16;
-        *(unsigned int *)(DAT_004474f4 + 0x18) = DAT_0049fd34;
+        *(unsigned int *)(g_mapCamera + 0x18) = DAT_0049fd34;
       }
       if ((DAT_0049fa61 == '\0') && (DAT_0049fa38 != '\0')) {
         mapIfSetMode2();
@@ -1348,7 +1348,7 @@ LAB_001b8c80:
             *(unsigned int *)(temp_v9 + 0x4c) = temp_v16;
             *(unsigned int *)(temp_v9 + 0x50) = temp_v16;
             temp_v16 = VectorSignedToFloat((int)*(short *)(temp_v10 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-            *(unsigned int *)(DAT_004474f4 + 0x18) = temp_v16;
+            *(unsigned int *)(g_mapCamera + 0x18) = temp_v16;
           }
         }
         else {
@@ -1464,7 +1464,7 @@ LAB_001b8e80:
     lmapSetSceneId(1);
     mapEnemySelectUpdatePhase(1);
     FUN_002804ec(g_lmapScene + 0x28);
-    *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
+    *(unsigned char *)(g_mapCamera + 0xa4) = 1;
     FUN_003079b4();
     FUN_00276a3c();
     mapIfSetMode1();
@@ -1803,7 +1803,7 @@ LAB_001b9210:
         goto LAB_001bb1d4;
       }
       if (DAT_0049f954 == 5) {
-        if (*(int *)(DAT_004474f4 + 0xac) == 0) {
+        if (*(int *)(g_mapCamera + 0xac) == 0) {
           temp_v14 = lmapSceneGetUnk0();
           temp_v19 = temp_v14 == 1;
           if (temp_v19) {
@@ -1907,14 +1907,14 @@ LAB_001b9210:
           }
           temp_v2 = DAT_0049f9ac;
           *(float *)(g_lmapScene + 0x50) = DAT_0049f9ac;
-          *(float *)(DAT_004474f4 + 0x18) = temp_v2;
+          *(float *)(g_mapCamera + 0x18) = temp_v2;
           lmapSetSceneId(0x1c);
           return 0;
         }
         goto LAB_001bb1d4;
       }
       if (DAT_0049f954 == 0x19) {
-        if (*(int *)(DAT_004474f4 + 0xac) == 0) {
+        if (*(int *)(g_mapCamera + 0xac) == 0) {
           temp_v14 = lmapSceneGetUnk0();
           temp_v19 = temp_v14 == 1;
           if (temp_v19) {
@@ -1932,8 +1932,8 @@ LAB_001b9210:
         goto LAB_001bb1d4;
       }
       if (DAT_0049f954 == 0x1a) {
-        if (*(int *)(DAT_004474f4 + 0xac) != 1) {
-          if (*(int *)(DAT_004474f4 + 0xac) == 0) {
+        if (*(int *)(g_mapCamera + 0xac) != 1) {
+          if (*(int *)(g_mapCamera + 0xac) == 0) {
             temp_v14 = lmapSceneGetUnk0();
             temp_v19 = temp_v14 == 1;
             if (temp_v19) {
@@ -1941,8 +1941,8 @@ LAB_001b9210:
             }
             if ((temp_v19 && temp_v14 == 0) && (temp_v10 = padIsButtonPressed(5), temp_v10 != 0)) {
               lmapSetSceneId(0x13);
-              temp_v9 = DAT_004474f4;
-              *(unsigned int *)(DAT_004474f4 + 0xac) = 1;
+              temp_v9 = g_mapCamera;
+              *(unsigned int *)(g_mapCamera + 0xac) = 1;
               *(unsigned char *)(temp_v9 + 0xa4) = 1;
               temp_v13 = DAT_0049f9a8;
               temp_v16 = DAT_0049f9a4;
@@ -1987,8 +1987,8 @@ LAB_001b9210:
           if (((temp_v19 && temp_v14 == 0) && (temp_v10 = padIsButtonPressed(6), temp_v10 != 0)) ||
              (temp_v10 = inputIsQuestMenuPressed(), temp_v10 != 0)) {
             lmapSetSceneId(1);
-            temp_v9 = DAT_004474f4;
-            *(unsigned int *)(DAT_004474f4 + 0xac) = 0;
+            temp_v9 = g_mapCamera;
+            *(unsigned int *)(g_mapCamera + 0xac) = 0;
             *(unsigned char *)(temp_v9 + 0xa4) = 1;
             return 0;
           }
@@ -2234,7 +2234,7 @@ LAB_001ba78c:
                                                   DAT_0049f934 = 1;
                                                   DAT_0049f93c = 1;
                                                   *(float *)(g_lmapScene + 0x50) = DAT_0049f9ac;
-                                                  *(float *)(DAT_004474f4 + 0x18) = temp_v2;
+                                                  *(float *)(g_mapCamera + 0x18) = temp_v2;
                                                   lmapSetSceneId(0x1c);
                                                   if (DAT_0049f9c0 != 5) {
                                                     temp_v9 = FUN_00276060(DAT_0049f9c4);
@@ -2304,7 +2304,7 @@ LAB_001ba78c:
                                           }
                                           goto LAB_001bb1d4;
                                         }
-                                        if (*(int *)(DAT_004474f4 + 0xac) == 0) {
+                                        if (*(int *)(g_mapCamera + 0xac) == 0) {
                                           temp_v14 = lmapSceneGetUnk0();
                                           temp_v19 = temp_v14 != 1;
                                           if (!temp_v19) {
@@ -2316,7 +2316,7 @@ LAB_001ba78c:
                                         }
                                         else {
 LAB_001baf1c:
-                                          if (*(int *)(DAT_004474f4 + 0xac) != -1)
+                                          if (*(int *)(g_mapCamera + 0xac) != -1)
                                           goto LAB_001bb1d4;
                                         }
                                         if (DAT_0049f9d4 == '\0') {
@@ -2355,7 +2355,7 @@ LAB_001baf1c:
                                         return 0;
                                       }
                                     }
-                                    else if (*(int *)(DAT_004474f4 + 0xac) == 0) {
+                                    else if (*(int *)(g_mapCamera + 0xac) == 0) {
                                       temp_v14 = lmapSceneGetUnk0();
                                       temp_v19 = temp_v14 == 1;
                                       if (temp_v19) {
@@ -2386,7 +2386,7 @@ LAB_001baf1c:
                                     }
                                   }
                                   else {
-                                    if (*(int *)(DAT_004474f4 + 0xac) == 0) {
+                                    if (*(int *)(g_mapCamera + 0xac) == 0) {
                                       temp_v14 = lmapSceneGetUnk0();
                                       temp_v19 = temp_v14 == 1;
                                       if (temp_v19) {
@@ -2395,7 +2395,7 @@ LAB_001baf1c:
                                       if ((temp_v19 && temp_v14 == 0) &&
                                          (temp_v10 = padIsButtonPressed(5), temp_v10 != 0)) goto LAB_001bad4c;
                                     }
-                                    if (*(int *)(DAT_004474f4 + 0xac) == 1) {
+                                    if (*(int *)(g_mapCamera + 0xac) == 1) {
 LAB_001bad4c:
                                       DAT_0049f968 = 0;
                                       temp_v14 = DAT_0049f990;
@@ -2440,7 +2440,7 @@ LAB_001bad4c:
                                 }
                               }
                               else {
-                                if (*(int *)(DAT_004474f4 + 0xac) == 0) {
+                                if (*(int *)(g_mapCamera + 0xac) == 0) {
                                   temp_v14 = lmapSceneGetUnk0();
                                   temp_v19 = temp_v14 == 1;
                                   if (temp_v19) {
@@ -2449,7 +2449,7 @@ LAB_001bad4c:
                                   if ((temp_v19 && temp_v14 == 0) &&
                                      (temp_v10 = padIsButtonPressed(5), temp_v10 != 0)) goto LAB_001bac68;
                                 }
-                                if (*(int *)(DAT_004474f4 + 0xac) == 1) {
+                                if (*(int *)(g_mapCamera + 0xac) == 1) {
 LAB_001bac68:
                                   lmapSetSceneId(0x13);
                                   DAT_0049f934 = 1;
@@ -2460,7 +2460,7 @@ LAB_001bac68:
                                 }
                               }
                             }
-                            else if (*(int *)(DAT_004474f4 + 0xac) == 0) {
+                            else if (*(int *)(g_mapCamera + 0xac) == 0) {
                               temp_v14 = lmapSceneGetUnk0();
                               temp_v19 = temp_v14 == 1;
                               if (temp_v19) {
@@ -2478,7 +2478,7 @@ LAB_001bac68:
                             }
                           }
                           else {
-                            if (*(int *)(DAT_004474f4 + 0xac) == 0) {
+                            if (*(int *)(g_mapCamera + 0xac) == 0) {
                               temp_v14 = lmapSceneGetUnk0();
                               temp_v19 = temp_v14 == 1;
                               if (temp_v19) {
@@ -2487,7 +2487,7 @@ LAB_001bac68:
                               if ((temp_v19 && temp_v14 == 0) && (temp_v10 = padIsButtonPressed(6), temp_v10 != 0)
                                  ) goto LAB_001bab90;
                             }
-                            if (*(int *)(DAT_004474f4 + 0xac) == -1) {
+                            if (*(int *)(g_mapCamera + 0xac) == -1) {
 LAB_001bab90:
                               lmapSetSceneId(7);
                               DAT_0049f934 = 1;
@@ -2790,7 +2790,7 @@ LAB_001ba550:
 LAB_001bb1d4:
       if ((*(char *)(g_deferredMapModels + 0xe0c) != '\0') &&
          ((((temp_v10 = lmapSceneGetUnk0(), temp_v10 == 1 && (DAT_0049fab0 == 0)) &&
-           (temp_v10 = FUN_0027ee9c(), temp_v10 != 0)) && (*(char *)(DAT_004474f4 + 0xb0) == '\0')))) {
+           (temp_v10 = FUN_0027ee9c(), temp_v10 != 0)) && (*(char *)(g_mapCamera + 0xb0) == '\0')))) {
         DAT_0049f934 = 1;
         DAT_0049f93c = 1;
         puVar14[9] = 0x2d;
@@ -2798,9 +2798,9 @@ LAB_001bb1d4:
         return 0;
       }
       if (((puVar14[9] == 0x15) && (DAT_0049fc8c != 1)) &&
-         ((temp_v10 = lmapSceneGetUnk0(), temp_v10 == 1 && (*(char *)(DAT_004474f4 + 0xb0) == '\0')))) {
-        if ((*(int *)(DAT_004474f4 + 0xac) != 0) && (temp_v10 = inputIsQuestMenuPressed(), temp_v10 != 0)) {
-          *(unsigned int *)(DAT_004474f4 + 0xac) = 0;
+         ((temp_v10 = lmapSceneGetUnk0(), temp_v10 == 1 && (*(char *)(g_mapCamera + 0xb0) == '\0')))) {
+        if ((*(int *)(g_mapCamera + 0xac) != 0) && (temp_v10 = inputIsQuestMenuPressed(), temp_v10 != 0)) {
+          *(unsigned int *)(g_mapCamera + 0xac) = 0;
           buttonHelpSelectMapPreset();
           if (*(int *)(g_lmapScene + 0x188) == 0) {
             *(unsigned int *)(g_lmapScene + 0x188) = 2;
@@ -2813,8 +2813,8 @@ LAB_001bb1d4:
             temp_v14 = (unsigned int)DAT_0049fab0;
           }
           if ((!(temp_v19 || temp_v14 != 0)) &&
-             (temp_v12 = padIsButtonPressed(5), temp_v10 = DAT_004474f4, temp_v12 != 0)) {
-            *(unsigned int *)(DAT_004474f4 + 0xa8) = 10;
+             (temp_v12 = padIsButtonPressed(5), temp_v10 = g_mapCamera, temp_v12 != 0)) {
+            *(unsigned int *)(g_mapCamera + 0xa8) = 10;
             temp_v12 = *(int *)(temp_v10 + 0xac);
             if (temp_v12 == 0) {
               *(unsigned int *)(temp_v10 + 0xac) = 2;
@@ -2844,8 +2844,8 @@ LAB_001bb1d4:
               temp_v14 = (unsigned int)DAT_0049fab0;
             }
             if ((temp_v19 && temp_v14 == 0) &&
-               (temp_v12 = padIsButtonPressed(6), temp_v10 = DAT_004474f4, temp_v12 != 0)) {
-              *(unsigned int *)(DAT_004474f4 + 0xa8) = 10;
+               (temp_v12 = padIsButtonPressed(6), temp_v10 = g_mapCamera, temp_v12 != 0)) {
+              *(unsigned int *)(g_mapCamera + 0xa8) = 10;
               temp_v12 = *(int *)(temp_v10 + 0xac);
               if (temp_v12 == 2) {
                 *(unsigned int *)(temp_v10 + 0xac) = 0;
@@ -2884,7 +2884,7 @@ LAB_001bb1d4:
         if (temp_v11 != 0x1f) {
           temp_v14 = g_gameState.mapId;
         }
-        if (((temp_v11 != 0x1f && temp_v14 != 0x24) && (*(int *)(DAT_004474f4 + 0xac) == 0)) &&
+        if (((temp_v11 != 0x1f && temp_v14 != 0x24) && (*(int *)(g_mapCamera + 0xac) == 0)) &&
            (temp_v10 = naviFlag404Active(), temp_v10 != 0)) {
           DAT_0049f934 = 1;
           DAT_0049f93c = 1;
@@ -3094,7 +3094,7 @@ LAB_001bb1d4:
     else if ((int)puVar14[10] < 0x15) {
       return 0;
     }
-    *(unsigned short *)(DAT_004474f4 + 0xb2) = 0xd;
+    *(unsigned short *)(g_mapCamera + 0xb2) = 0xd;
     puVar14[9] = 0x15;
     puVar14[10] = 0;
     lmapSetSceneId(1);
@@ -3145,7 +3145,7 @@ LAB_001bb1d4:
         uStack_1c0 = *(unsigned int *)(g_lmapScene + 0x20);
         uStack_1bc = (unsigned int)*(unsigned char **)(g_lmapScene + 0x24);
         uStack_1b8 = *(int *)(g_lmapScene + 0x4c);
-        uStack_1b4 = *(unsigned int *)(DAT_004474f4 + 0x18);
+        uStack_1b4 = *(unsigned int *)(g_mapCamera + 0x18);
         saveSetNavigationPosition(&uStack_1c8);
         gameCopyPersistentSave();
         FUN_00273840(0);
@@ -3160,7 +3160,7 @@ LAB_001bb1d4:
         uStack_1c0 = *(unsigned int *)(g_lmapScene + 0x20);
         uStack_1bc = (unsigned int)*(unsigned char **)(g_lmapScene + 0x24);
         uStack_1b8 = *(int *)(g_lmapScene + 0x4c);
-        uStack_1b4 = *(unsigned int *)(DAT_004474f4 + 0x18);
+        uStack_1b4 = *(unsigned int *)(g_mapCamera + 0x18);
         saveSetNavigationPosition(&uStack_1c8);
         gameCopyPersistentSave();
         FUN_00273840(0);
@@ -3235,10 +3235,10 @@ LAB_001bbd00:
     scrLoaderFreeBuffers(g_aocMain + 0xa8);
     buttonHelpSelectMapPreset();
     mapMainEnterScene();
-    *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
+    *(unsigned char *)(g_mapCamera + 0xa4) = 1;
     lmapSetSceneId(1);
     *(unsigned char *)((int)puVar14 + 0x47) = 1;
-    *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
+    *(unsigned char *)(g_mapCamera + 0xa4) = 1;
     DAT_0049f934 = 0;
     DAT_0049f93c = 0;
     puVar14[9] = 0x15;
@@ -3322,12 +3322,12 @@ LAB_001bc008:
   case 0x23:
     mapPerFrameUpdate();
     temp_v12 = mapDepartIsRunning();
-    temp_v10 = DAT_004474f4;
+    temp_v10 = g_mapCamera;
     if (temp_v12 != 0) {
       return 0;
     }
     if (DAT_0049fd14 == 0xffffffff) {
-      *(unsigned int *)(DAT_004474f4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
+      *(unsigned int *)(g_mapCamera + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
       *(unsigned int *)(temp_v10 + 0xac) = 0;
       *(unsigned char *)(temp_v10 + 0xa4) = 1;
       FUN_0027fc14(0);
@@ -3383,9 +3383,9 @@ LAB_001bc008:
     temp_v9 = FUN_002eb134();
     if (temp_v9 == 0) {
       FUN_0027fca0(0);
-      temp_v9 = DAT_004474f4;
+      temp_v9 = g_mapCamera;
       if (DAT_0049fa3a != '\0') {
-        *(unsigned int *)(DAT_004474f4 + 0xac) = 0;
+        *(unsigned int *)(g_mapCamera + 0xac) = 0;
         *(unsigned char *)(temp_v9 + 0xa4) = 1;
         FUN_0027fc14(0);
         FUN_00273840(0);
@@ -3407,8 +3407,8 @@ LAB_001bc008:
       }
       else {
         frameTexStartFade(2);
-        temp_v9 = DAT_004474f4;
-        *(unsigned int *)(DAT_004474f4 + 0xac) = 0;
+        temp_v9 = g_mapCamera;
+        *(unsigned int *)(g_mapCamera + 0xac) = 0;
         *(unsigned char *)(temp_v9 + 0xa4) = 1;
         FUN_0027fc14(0);
         FUN_00273840(0);
@@ -3443,8 +3443,8 @@ LAB_001bc008:
       DAT_0049fa58 = '\0';
       DAT_0049fa5c = 0;
       frameTexStartFade(2);
-      temp_v9 = DAT_004474f4;
-      *(unsigned int *)(DAT_004474f4 + 0xac) = 0;
+      temp_v9 = g_mapCamera;
+      *(unsigned int *)(g_mapCamera + 0xac) = 0;
       *(unsigned char *)(temp_v9 + 0xa4) = 1;
       FUN_0027fc14(0);
       FUN_00273840(0);
@@ -3458,7 +3458,7 @@ LAB_001bc008:
     break;
   case 0x28:
     *(float *)(g_lmapScene + 0x50) = DAT_0049f9ac;
-    *(float *)(DAT_004474f4 + 0x18) = temp_v2;
+    *(float *)(g_mapCamera + 0x18) = temp_v2;
     buttonHelpSetPresetDefault();
     FUN_00273358(1);
     lmapSetSceneId(2);
@@ -3525,7 +3525,7 @@ LAB_001bc008:
     break;
   case 0x2a:
     *(float *)(g_lmapScene + 0x50) = DAT_0049f9ac;
-    *(float *)(DAT_004474f4 + 0x18) = temp_v2;
+    *(float *)(g_mapCamera + 0x18) = temp_v2;
     buttonHelpSetPresetDefault();
     FUN_00273358(1);
     lmapSetSceneId(2);
@@ -3684,7 +3684,7 @@ LAB_001bc008:
       FUN_0027fc14(0);
       FUN_00273840(0);
       *(unsigned char *)((int)puVar14 + 0x47) = 1;
-      *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
+      *(unsigned char *)(g_mapCamera + 0xa4) = 1;
       DAT_0049fb45 = 1;
       DAT_0049f934 = 0;
       DAT_0049f93c = 0;
@@ -3797,7 +3797,7 @@ LAB_001bc008:
         temp_v2 = DAT_0049f9ac;
         *(float *)(temp_v9 + 0x4c) = DAT_0049f9ac;
         *(float *)(temp_v9 + 0x50) = temp_v2;
-        *(float *)(DAT_004474f4 + 0x18) = DAT_0049f9ac;
+        *(float *)(g_mapCamera + 0x18) = DAT_0049f9ac;
       }
       FUN_0031d54c();
       mapIfSetMode1();
@@ -3874,7 +3874,7 @@ joined_r0x001bce40:
     FUN_0031d54c();
     break;
   case 0x38:
-    *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
+    *(unsigned char *)(g_mapCamera + 0xa4) = 1;
     FUN_0027fc14(3);
     lmapSetSceneId(0x1d);
     FUN_003079b4();
@@ -3957,14 +3957,14 @@ joined_r0x001bce40:
         *(unsigned int *)(temp_v9 + 0x4c) = temp_v16;
         *(unsigned int *)(temp_v9 + 0x50) = temp_v16;
         temp_v16 = VectorSignedToFloat((int)*(short *)(temp_v10 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-        *(unsigned int *)(DAT_004474f4 + 0x18) = temp_v16;
+        *(unsigned int *)(g_mapCamera + 0x18) = temp_v16;
       }
       battlePrepareEncounter();
       FUN_0027fc14(0);
       FUN_00273840(0);
       lmapSetSceneId(1);
       *(unsigned char *)((int)puVar14 + 0x47) = 1;
-      *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
+      *(unsigned char *)(g_mapCamera + 0xa4) = 1;
       DAT_0049fb45 = 1;
       DAT_0049fb46 = 1;
       DAT_0049f934 = 0;
@@ -3984,7 +3984,7 @@ joined_r0x001bce40:
       FUN_00273840(0);
       lmapSetSceneId(1);
       *(unsigned char *)((int)puVar14 + 0x47) = 1;
-      *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
+      *(unsigned char *)(g_mapCamera + 0xa4) = 1;
       DAT_0049fb45 = 1;
       DAT_0049fb46 = 1;
       DAT_0049f934 = 0;
@@ -4117,7 +4117,7 @@ joined_r0x001bce40:
     if (DAT_0049fd14 == 0xffffffff) {
       lmapSetSceneId(1);
       *(unsigned char *)((int)puVar14 + 0x47) = 1;
-      *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
+      *(unsigned char *)(g_mapCamera + 0xa4) = 1;
       DAT_0049f934 = 0;
       DAT_0049f93c = 0;
       navigationApplyOptionalValue(0);
@@ -4150,7 +4150,7 @@ joined_r0x001bce40:
           temp_v9 = FUN_00270384(0x29);
         }
         if ((temp_v9 == 2) && (DAT_0049f954 != 0xffffffff)) {
-          temp_v9 = *(int *)(DAT_004474f4 + 0x18);
+          temp_v9 = *(int *)(g_mapCamera + 0x18);
           FUN_0027eee0();
           if (temp_v9 < 0x42700001) {
             *(float *)(g_lmapScene + 0x50) = DAT_0049f9ac;
@@ -4173,10 +4173,10 @@ joined_r0x001bd7a0:
         FUN_00270358(temp_v9,2);
       }
     }
-    temp_v9 = DAT_004474f4;
+    temp_v9 = g_mapCamera;
     if (puVar14[10] == 1) {
       if (puVar14[0x30] == 2) {
-        *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
+        *(unsigned char *)(g_mapCamera + 0xa4) = 1;
         temp_v2 = DAT_0049f9ac;
         temp_v10 = g_lmapScene;
         puVar23 = (unsigned int *)(g_lmapScene + 0x38);
@@ -4385,7 +4385,7 @@ LAB_001bd824:
           *(unsigned int *)(temp_v9 + 0x4c) = temp_v16;
           *(unsigned int *)(temp_v9 + 0x50) = temp_v16;
           temp_v16 = VectorSignedToFloat((int)*(short *)(pcVar13 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-          *(unsigned int *)(DAT_004474f4 + 0x18) = temp_v16;
+          *(unsigned int *)(g_mapCamera + 0x18) = temp_v16;
           g_gameState.mapId = (unsigned int)*pcVar13;
           puVar14[0xb] = g_gameState.mapId;
           DAT_0049f920 = (unsigned int)pcVar13[1];
@@ -4463,7 +4463,7 @@ LAB_001bd824:
       battlePrepareEncounter();
     }
     *(unsigned char *)((int)puVar14 + 0x47) = 1;
-    *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
+    *(unsigned char *)(g_mapCamera + 0xa4) = 1;
     DAT_0049f934 = 0;
     DAT_0049f93c = 0;
     puVar14[9] = 0x15;
@@ -4494,7 +4494,7 @@ LAB_001bd824:
     puVar14[10] = puVar14[10] + 1;
     lmapSetSceneId(1);
     *(unsigned char *)((int)puVar14 + 0x47) = 1;
-    *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
+    *(unsigned char *)(g_mapCamera + 0xa4) = 1;
     DAT_0049f934 = 0;
     DAT_0049f93c = 0;
     puVar14[9] = 0x15;
@@ -4561,7 +4561,7 @@ LAB_001bd824:
       *(unsigned char *)((int)puVar14 + 0x47) = 1;
       DAT_0049fb45 = 1;
       DAT_0049fb46 = 1;
-      *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
+      *(unsigned char *)(g_mapCamera + 0xa4) = 1;
       DAT_0049f934 = 0;
       DAT_0049f93c = 0;
       puVar14[9] = 0x15;
@@ -4594,14 +4594,14 @@ LAB_001bd824:
         *(unsigned int *)(temp_v9 + 0x4c) = temp_v16;
         *(unsigned int *)(temp_v9 + 0x50) = temp_v16;
         temp_v16 = VectorSignedToFloat((int)*(short *)(temp_v10 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-        *(unsigned int *)(DAT_004474f4 + 0x18) = temp_v16;
+        *(unsigned int *)(g_mapCamera + 0x18) = temp_v16;
       }
       battlePrepareEncounter();
       FUN_0027fc14(0);
       FUN_00273840(0);
       lmapSetSceneId(1);
       *(unsigned char *)((int)puVar14 + 0x47) = 1;
-      *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
+      *(unsigned char *)(g_mapCamera + 0xa4) = 1;
       DAT_0049fb45 = 1;
       DAT_0049f934 = 0;
       DAT_0049f93c = 0;
@@ -4675,10 +4675,10 @@ LAB_001bd824:
       FUN_0027db24(0);
       mapMainEnterScene();
       buttonHelpSelectMapPreset();
-      *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
+      *(unsigned char *)(g_mapCamera + 0xa4) = 1;
       lmapSetSceneId(1);
       *(unsigned char *)((int)puVar14 + 0x47) = 1;
-      *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
+      *(unsigned char *)(g_mapCamera + 0xa4) = 1;
       DAT_0049f934 = 0;
       DAT_0049f93c = 0;
       puVar14[9] = 0x15;
@@ -4722,7 +4722,7 @@ LAB_001bd824:
       lmapSetSceneId(1);
       *(unsigned char *)((int)puVar14 + 0x47) = 1;
       DAT_0049fb45 = 1;
-      *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
+      *(unsigned char *)(g_mapCamera + 0xa4) = 1;
       DAT_0049f934 = 0;
       DAT_0049f93c = 0;
       puVar14[9] = 0x15;
@@ -5001,12 +5001,12 @@ LAB_001bec78:
       *(unsigned int *)(temp_v9 + 0x4c) = temp_v16;
       *(unsigned int *)(temp_v9 + 0x50) = temp_v16;
       temp_v16 = VectorSignedToFloat((int)*(short *)(temp_v10 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-      *(unsigned int *)(DAT_004474f4 + 0x18) = temp_v16;
+      *(unsigned int *)(g_mapCamera + 0x18) = temp_v16;
       DAT_0049f924 = 0xffffffff;
     }
     else {
       temp_v12 = (int)DAT_0049fb44;
-      *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
+      *(unsigned char *)(g_mapCamera + 0xa4) = 1;
       DAT_0049fb45 = 1;
       DAT_0049fb46 = 1;
       mapIfApplyRecordFlags();
@@ -5038,7 +5038,7 @@ LAB_001bec78:
       *(unsigned int *)(temp_v10 + 0x4c) = temp_v16;
       *(unsigned int *)(temp_v10 + 0x50) = temp_v16;
       temp_v16 = VectorSignedToFloat((int)*(short *)(pcVar13 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-      *(unsigned int *)(DAT_004474f4 + 0x18) = temp_v16;
+      *(unsigned int *)(g_mapCamera + 0x18) = temp_v16;
       DAT_0049f924 = (unsigned int)(unsigned char)pcVar13[3];
       if (DAT_0049f924 == 0xff) {
         DAT_0049f924 = 0xffffffff;
@@ -5142,11 +5142,11 @@ LAB_001bec78:
       navigationApplyOptionalValue(0);
       mapIfSetMode1();
       FUN_0027fc14(0);
-      *(unsigned int *)(DAT_004474f4 + 0xac) = 0;
+      *(unsigned int *)(g_mapCamera + 0xac) = 0;
       FUN_00273840(0);
       lmapSetSceneId(1);
       FUN_00273358(0xffffffff);
-      *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
+      *(unsigned char *)(g_mapCamera + 0xa4) = 1;
       if (*(char *)(puVar14 + 7) != '\0') {
         *(unsigned char *)(puVar14 + 7) = 0;
         puVar14[9] = 0x36;
@@ -5208,7 +5208,7 @@ LAB_001bec78:
       eventQueueAddSelected();
     }
     *(unsigned char *)((int)puVar14 + 0xb9) = 0;
-    *(unsigned int *)(DAT_004474f4 + 0xac) = 0;
+    *(unsigned int *)(g_mapCamera + 0xac) = 0;
     lmapSceneCreateEffect();
     FUN_001fdebc(puVar14);
     mapEntryTriggerForScene(puVar14[0xc]);
@@ -5397,10 +5397,10 @@ LAB_001bf6c8:
       DAT_0049f934 = 1;
       lmapSetSceneId(1);
       mapEnemySelectUpdatePhase(1);
-      *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
+      *(unsigned char *)(g_mapCamera + 0xa4) = 1;
       FUN_00273358(0xffffffff);
       FUN_002804ec(g_lmapScene + 0x28);
-      *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
+      *(unsigned char *)(g_mapCamera + 0xa4) = 1;
       FUN_003079b4();
       FUN_00276a3c();
       FUN_00342078(puVar14[0xb],puVar14[0xc],1);
@@ -5463,9 +5463,9 @@ LAB_001bf6c8:
     break;
   case 0x68:
     if (puVar14[10] == 0) {
-      *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
+      *(unsigned char *)(g_mapCamera + 0xa4) = 1;
       FUN_0027fc14(0);
-      *(unsigned int *)(DAT_004474f4 + 0xac) = 0;
+      *(unsigned int *)(g_mapCamera + 0xac) = 0;
       FUN_00273358(0xffffffff);
       FUN_00273840(0);
       lmapSetSceneId(0x17);
@@ -5481,9 +5481,9 @@ LAB_001bf6c8:
     goto LAB_001bfc30;
   case 0x69:
     if (puVar14[10] == 0) {
-      *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
+      *(unsigned char *)(g_mapCamera + 0xa4) = 1;
       FUN_0027fc14(0);
-      *(unsigned int *)(DAT_004474f4 + 0xac) = 0;
+      *(unsigned int *)(g_mapCamera + 0xac) = 0;
       FUN_00273358(0xffffffff);
       FUN_00273840(0);
       lmapSetSceneId(0x18);
@@ -5499,9 +5499,9 @@ LAB_001bf6c8:
     goto LAB_001bfc30;
   case 0x6a:
     if (puVar14[10] == 0) {
-      *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
+      *(unsigned char *)(g_mapCamera + 0xa4) = 1;
       FUN_0027fc14(0);
-      *(unsigned int *)(DAT_004474f4 + 0xac) = 0;
+      *(unsigned int *)(g_mapCamera + 0xac) = 0;
       FUN_00273358(0xffffffff);
       FUN_00273840(0);
       lmapSetSceneId(0x19);
@@ -5517,9 +5517,9 @@ LAB_001bf6c8:
     goto LAB_001bfc30;
   case 0x6b:
     if (puVar14[10] == 0) {
-      *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
+      *(unsigned char *)(g_mapCamera + 0xa4) = 1;
       FUN_0027fc14(0);
-      *(unsigned int *)(DAT_004474f4 + 0xac) = 0;
+      *(unsigned int *)(g_mapCamera + 0xac) = 0;
       FUN_00273358(0xffffffff);
       FUN_00273840(0);
       lmapSetSceneId(0x1a);

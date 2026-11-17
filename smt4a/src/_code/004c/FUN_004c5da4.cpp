@@ -15,10 +15,10 @@ s32 FUN_004c5da4(u32 unit, s32 rollChance)
         u8 unk00[0xa0];
         u64 blockedStates; // 0xa0
     };
-    extern TriggerMaskView DAT_005713f0;
+    extern TriggerMaskView g_btlSkillResponseMasks;
     BtlMainStateA *battle = btlGetMainState();
     u64 flags = battle->stateFlags64.bits;
-    if ((flags & DAT_005713f0.blockedStates) != 0)
+    if ((flags & g_btlSkillResponseMasks.blockedStates) != 0)
         return 0;
     Source4C *source = btlMainFindEntryByListedId(battle, unit);
     switch (battle->activity.currentAction) {

@@ -18,16 +18,16 @@ static void addCategoryPayloadBytes(u32 bytes, AllocationUsage *usage, u32 categ
 // Account for a backing allocation and append it to the active allocation list.
 void asdMemoryTrackAllocation(AllocationHeader *block)
 {
-    AllocationUsage *usage = DAT_00465120.usage;
+    AllocationUsage *usage = g_asdMemState.usage;
     ++usage->count;
     usage->bytes += block->size;
     if ((usage->tag & 0xff) < 8) {
         u32 category = FUN_002b30fc(block);
-        addCategoryBytes(block->size, DAT_00465120.usage, category);
+        addCategoryBytes(block->size, g_asdMemState.usage, category);
         category = FUN_002b30fc(block);
-        addCategoryPayloadBytes(block->size - block->alignment - sizeof(AllocationHeader), DAT_00465120.usage, category);
+        addCategoryPayloadBytes(block->size - block->alignment - sizeof(AllocationHeader), g_asdMemState.usage, category);
     }
-    usage = DAT_00465120.usage;
+    usage = g_asdMemState.usage;
     AllocationLink *link = &block->link;
     if (usage->head == NULL) {
         usage->tail = link;
@@ -36,10 +36,10 @@ void asdMemoryTrackAllocation(AllocationHeader *block)
         link->previous = NULL;
     } else {
         link->previous = usage->tail;
-        DAT_00465120.usage->tail = link;
+        g_asdMemState.usage->tail = link;
         link->previous->next = link;
         link->next = NULL;
     }
-    block->tag = DAT_00465120.usage->tag;
+    block->tag = g_asdMemState.usage->tag;
 }
 }

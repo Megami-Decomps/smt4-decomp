@@ -52,7 +52,7 @@ extern unsigned char LAB_001e59a4; /* 0x1e59a4 */
 extern unsigned char LAB_001e59b8; /* 0x1e59b8 */
 extern unsigned char LAB_001e5d3c; /* 0x1e5d3c */
 extern unsigned char LAB_001e5d54; /* 0x1e5d54 */
-extern int DAT_004474f4; /* 0x4474f4 */
+extern int g_mapCamera; /* 0x4474f4 */
 extern int g_mapDepart; /* 0x4475b8 */
 extern int DAT_004475bc; /* 0x4475bc */
 extern unsigned int DAT_0049f9c0; /* 0x49f9c0 */
@@ -317,7 +317,7 @@ unsigned int FUN_001e553c(void)
       }
     }
     if (*(int *)(temp_v2 + 0x1c) == 7) {
-      if ((*(int *)(temp_v2 + 0xc) == 0) && (*(int *)(DAT_004474f4 + 0xac) == 0)) {
+      if ((*(int *)(temp_v2 + 0xc) == 0) && (*(int *)(g_mapCamera + 0xac) == 0)) {
         FUN_00273358(1);
         goto LAB_001e5a1c;
       }
@@ -418,7 +418,7 @@ LAB_001e5a1c:
     *(unsigned int *)(temp_v2 + 0x1c) = 0;
     break;
   case 9:
-    if (*(int *)(DAT_004474f4 + 0xac) == 0) {
+    if (*(int *)(g_mapCamera + 0xac) == 0) {
       FUN_00273358(1);
     }
     buttonHelpSetPresetDefault();

@@ -47,7 +47,7 @@ struct RingVertexOwner {
 extern "C" {
 extern EffectColor g_polyDefaultColor;
 extern EffectColor g_effectRingScratchColor;
-extern EffectColorProductState DAT_006471dc;
+extern EffectColorProductState g_vectorScratch;
 f32 FUN_001a1ee0(f32 angle);
 f32 FUN_001b63b0(f32 angle);
 
@@ -85,8 +85,8 @@ void FUN_003913d8(EffectPrimitiveWork *work)
         f32 middleRadius = emitter->middleOffset + innerRadius;
         f32 outerRadius = emitter->outerOffset + middleRadius;
 
-        EffectColor *color = &DAT_006471dc.color;
-        EffectColor *direction = &DAT_006471dc.factor;
+        EffectColor *color = &g_vectorScratch.color;
+        EffectColor *direction = &g_vectorScratch.factor;
         effectColorCopy(&g_polyDefaultColor, color);
         effectColorCopy(&g_polyDefaultColor, direction);
         color->red *= innerRadius;

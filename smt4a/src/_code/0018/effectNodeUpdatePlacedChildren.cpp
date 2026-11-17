@@ -12,7 +12,7 @@ extern struct EffectScratch {
     u8 unk00[0x100];
     Vec4 position;    // 0x100
     Vec4 offset;      // 0x110
-} DAT_006471dc;
+} g_vectorScratch;
 
 
 /* An effect node (accessed fields). */
@@ -58,13 +58,13 @@ void effectNodeUpdatePlacedChildren(EffectNode *node)
     if (node->frame <= 0) {
         return;
     }
-    DAT_006471dc.position = node->origin;
-    DAT_006471dc.offset = node->offset;
-    DAT_006471dc.position.x += DAT_006471dc.offset.x;
-    DAT_006471dc.position.y += DAT_006471dc.offset.y;
-    DAT_006471dc.position.z += DAT_006471dc.offset.z;
-    DAT_006471dc.position.w += DAT_006471dc.offset.w;
-    position = DAT_006471dc.position;
+    g_vectorScratch.position = node->origin;
+    g_vectorScratch.offset = node->offset;
+    g_vectorScratch.position.x += g_vectorScratch.offset.x;
+    g_vectorScratch.position.y += g_vectorScratch.offset.y;
+    g_vectorScratch.position.z += g_vectorScratch.offset.z;
+    g_vectorScratch.position.w += g_vectorScratch.offset.w;
+    position = g_vectorScratch.position;
     flags = node->flags;
     if ((flags & 0x60) != 0 && (flags & EFFECT_NODE_PLACED) == 0) {
         Vec4 orientation = node->orientation;
@@ -85,22 +85,22 @@ void effectNodeUpdatePlacedChildren(EffectNode *node)
             if ((child->flags & 0x18) != 0) {
                 ResourceHandler *handler;
 
-                DAT_006471dc.position = position;
+                g_vectorScratch.position = position;
                 if ((child->flags & 4) != 0) {
-                    DAT_006471dc.position.y = 5.0f;
+                    g_vectorScratch.position.y = 5.0f;
                 }
-                DAT_006471dc.offset = childOffset;
+                g_vectorScratch.offset = childOffset;
                 if ((child->flags & 0x80) != 0) {
-                    DAT_006471dc.offset.x *= scale;
-                    DAT_006471dc.offset.y *= scale;
-                    DAT_006471dc.offset.z *= scale;
-                    DAT_006471dc.offset.w *= scale;
+                    g_vectorScratch.offset.x *= scale;
+                    g_vectorScratch.offset.y *= scale;
+                    g_vectorScratch.offset.z *= scale;
+                    g_vectorScratch.offset.w *= scale;
                 }
-                DAT_006471dc.position.x += DAT_006471dc.offset.x;
-                DAT_006471dc.position.y += DAT_006471dc.offset.y;
-                DAT_006471dc.position.z += DAT_006471dc.offset.z;
-                DAT_006471dc.position.w += DAT_006471dc.offset.w;
-                childOffset = DAT_006471dc.position;
+                g_vectorScratch.position.x += g_vectorScratch.offset.x;
+                g_vectorScratch.position.y += g_vectorScratch.offset.y;
+                g_vectorScratch.position.z += g_vectorScratch.offset.z;
+                g_vectorScratch.position.w += g_vectorScratch.offset.w;
+                childOffset = g_vectorScratch.position;
                 handler = &g_handlerTable[child->resource->type];
                 if (handler->setPosition != NULL) {
                     handler->setPosition(child->resource->data, &childOffset);

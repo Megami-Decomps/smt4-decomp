@@ -35,7 +35,7 @@ static __inline void cameraVecApproach(BattleVector3 *current, const BattleVecto
 /* Advances the camera move by one frame. Returns 1 when the move has finished. */
 u32 FUN_0033a374(void)
 {
-    VectorPairTransition *move = &DAT_005806a0.view->move.value;
+    VectorPairTransition *move = &g_lmapViewHolder.view->move.value;
     if (move->frame >= move->duration) {
         move->current = move->target;
         return 1;

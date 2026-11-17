@@ -14,15 +14,15 @@ void asdMemoryFreeRegion(void *payload);
 void asdMemFree(void *payload)
 {
     u32 address = (u32)payload;
-    nn_os_CriticalSection_Enter(DAT_00465120.lock);
-    u32 firstBase = DAT_00465120.regionBase[2];
-    u32 secondBase = DAT_00465120.regionBase[3];
-    if ((firstBase > address || firstBase + DAT_00465120.regionSize[2] < address) &&
-        (secondBase > address || secondBase + DAT_00465120.regionSize[3] < address)) {
+    nn_os_CriticalSection_Enter(g_asdMemState.lock);
+    u32 firstBase = g_asdMemState.regionBase[2];
+    u32 secondBase = g_asdMemState.regionBase[3];
+    if ((firstBase > address || firstBase + g_asdMemState.regionSize[2] < address) &&
+        (secondBase > address || secondBase + g_asdMemState.regionSize[3] < address)) {
         payload = FUN_001246cc(payload);
     }
     asdMemoryFreeRegion(payload);
-    nn_os_CriticalSection_Leave(DAT_00465120.lock);
+    nn_os_CriticalSection_Leave(g_asdMemState.lock);
 }
 
 } /* extern "C" */

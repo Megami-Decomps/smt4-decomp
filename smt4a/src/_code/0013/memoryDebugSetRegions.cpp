@@ -7,13 +7,13 @@ extern "C" {
 /* Records the four heap regions (main, extra, VRAM A, VRAM B) for the memory debug display. */
 void memoryDebugSetRegions(AsdMemRegion main, AsdMemRegion extra, AsdMemRegion vramA, AsdMemRegion vramB)
 {
-    g_allocationAddressRanges.regionBase[0] = main.base;
-    g_allocationAddressRanges.regionBase[1] = extra.base;
-    g_allocationAddressRanges.regionSize[0] = main.size;
-    g_allocationAddressRanges.regionSize[1] = extra.size;
-    g_allocationAddressRanges.regionBase[2] = vramA.base;
-    g_allocationAddressRanges.regionSize[2] = vramA.size;
-    g_allocationAddressRanges.regionBase[3] = vramB.base;
-    g_allocationAddressRanges.regionSize[3] = vramB.size;
+    g_asdMemState.regionBase[0] = main.base;
+    g_asdMemState.regionBase[1] = extra.base;
+    g_asdMemState.regionSize[0] = main.size;
+    g_asdMemState.regionSize[1] = extra.size;
+    g_asdMemState.regionBase[2] = vramA.base;
+    g_asdMemState.regionSize[2] = vramA.size;
+    g_asdMemState.regionBase[3] = vramB.base;
+    g_asdMemState.regionSize[3] = vramB.size;
 }
 }

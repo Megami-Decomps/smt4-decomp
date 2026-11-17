@@ -45,7 +45,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern int DAT_004474f4; /* 0x4474f4 */
+extern int g_mapCamera; /* 0x4474f4 */
 extern int g_lmapScene; /* 0x447e88 */
 
 
@@ -191,7 +191,7 @@ void FUN_0027fde4(void)
               *(unsigned int *)(g_lmapScene + 0x50) = temp_v11;
             }
             FUN_0027fc14(10);
-            *(unsigned int *)(DAT_004474f4 + 0xac) = 0xffffffff;
+            *(unsigned int *)(g_mapCamera + 0xac) = 0xffffffff;
             buttonHelpSetPreset(0xdb);
             mapIfActivateRecord(1,g_gameState.f0049f99c);
             FUN_001fa760();
@@ -232,8 +232,8 @@ void FUN_0027fde4(void)
         else {
           temp_v2 = padIsButtonPressed(5);
           if ((temp_v2 != 0) || (temp_v2 = inputIsQuestMenuPressed(), temp_v2 != 0)) {
-            temp_v2 = DAT_004474f4;
-            *(unsigned int *)(DAT_004474f4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
+            temp_v2 = g_mapCamera;
+            *(unsigned int *)(g_mapCamera + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
             *(unsigned int *)(temp_v2 + 0xac) = 0;
             FUN_0027fc14(0);
             temp_v2 = g_lmapScene;
@@ -285,8 +285,8 @@ void FUN_0027fde4(void)
     temp_v2 = mapIfHasSelection();
     if (temp_v2 == 0) {
       mapIfReleaseSlot0();
-      temp_v2 = DAT_004474f4;
-      *(unsigned int *)(DAT_004474f4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
+      temp_v2 = g_mapCamera;
+      *(unsigned int *)(g_mapCamera + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
       *(unsigned int *)(temp_v2 + 0xac) = 0;
       FUN_0027fc14(0);
       temp_v3 = *(int *)(g_lmapScene + 4);

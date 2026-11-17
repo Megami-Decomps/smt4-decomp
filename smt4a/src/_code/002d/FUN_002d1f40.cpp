@@ -4,7 +4,7 @@ extern "C" {
 
 void FUN_002d1f40(s32 id, u32 amount, s32 priority)
 {
-    LmapViewA* state = DAT_005806a0.view;
+    LmapViewA* state = g_lmapViewHolder.view;
     if (amount == 0) {
         state->requestActive = 0;
         state->priority = 0;

@@ -18,7 +18,7 @@ typedef void (*ApplyEffectRotation)(void *data, const RotationQuaternion *rotati
 }
 
 extern "C" {
-extern EffectRotationWorkspace DAT_004ea81c;
+extern EffectRotationWorkspace g_vectorScratch;
 void gfxQuaternionWorkspaceBuildMatrix(void);
 void FUN_002a2c00(void);
 void FUN_002a3ab0(EffectTimelinePart *part, const f32 *origin);
@@ -26,7 +26,7 @@ void FUN_002a3ab0(EffectTimelinePart *part, const f32 *origin);
 // Rotate the part's local position and propagate the composed rotation to its children.
 void FUN_002a3958(EffectTimelinePart *part, const RotationQuaternion *rotation)
 {
-    EffectRotationWorkspace *workspace = &DAT_004ea81c;
+    EffectRotationWorkspace *workspace = &g_vectorScratch;
     workspace->base.rotation = *rotation;
     part->transform.rotation = workspace->base.rotation;
     RotationQuaternion parentRotation = workspace->base.rotation;

@@ -6,9 +6,9 @@ extern "C" {
 /* Restores the saved halfword after leaving the outermost scope. */
 void FUN_001b4e80(void)
 {
-    if (g_allocationAddressRanges.tagDepth != 0) {
-        if (--g_allocationAddressRanges.tagDepth == 0) {
-            g_allocationAddressRanges.usage->tag = g_allocationAddressRanges.tagPrevious;
+    if (g_asdMemState.tagDepth != 0) {
+        if (--g_asdMemState.tagDepth == 0) {
+            g_asdMemState.usage->tag = g_asdMemState.tagPrevious;
         }
     }
 }

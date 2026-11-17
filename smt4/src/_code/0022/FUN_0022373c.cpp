@@ -2,7 +2,7 @@
 #include "map/MapSpawn.h"
 #include "map/LmapGlobals.h"
 extern "C" {
-extern MapHeadingState *DAT_004474f4;
+extern MapHeadingState *g_mapCamera;
 extern MapSpawnPoint DAT_00447f40[];
 MapSpawnGrid *gameGetMapBlock(void);
 
@@ -55,6 +55,6 @@ void FUN_0022373c(void)
     }
     scene->pose.heading = heading;
     scene->pose.targetHeading = heading;
-    DAT_004474f4->heading = heading;
+    g_mapCamera->heading = heading;
 }
 }

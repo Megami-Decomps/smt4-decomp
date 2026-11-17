@@ -31,7 +31,7 @@ static __inline void screenEffectSetPoint(Point2 *point, f32 x, f32 y)
 
 
 extern "C" {
-extern EffectColorProductState DAT_004ea81c;
+extern EffectColorProductState g_vectorScratch;
 void renderCtxSetPackedColor(u32 color);
 f32 FUN_00269508(const u8 *curve, s32 frame, s32 duration);
 u32 FUN_00269694(const u8 *curve, const ScreenEffectWeightTrack *weight,
@@ -64,11 +64,11 @@ void screenEffectUpdateColorGeometry(ScreenEffectJob *job)
     u32 curveColor = FUN_00269694(resource->colorCurve, &resource->weight,
                                  frame, duration);
     renderCtxSetPackedColor(job->color);
-    effectColorAssign(&DAT_004ea81c.factor, &DAT_004ea81c.color);
+    effectColorAssign(&g_vectorScratch.factor, &g_vectorScratch.color);
     renderCtxSetPackedColor(curveColor);
-    effectColorScale(&DAT_004ea81c.factor, &DAT_004ea81c.color);
+    effectColorScale(&g_vectorScratch.factor, &g_vectorScratch.color);
 
-    u32 packed = effectColorPackFrom(DAT_004ea81c.color);
+    u32 packed = effectColorPackFrom(g_vectorScratch.color);
     output->color.r = __rev(packed) >> 24;
     output->color.g = __rev(packed) >> 16;
     output->color.b = __rev(packed) >> 8;

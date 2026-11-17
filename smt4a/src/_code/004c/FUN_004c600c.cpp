@@ -11,7 +11,7 @@ struct OpposingCandidateMasks {
 typedef char OpposingCandidateMasksOffsetCheck[offsetof(OpposingCandidateMasks, excluded) == 0x30 ? 1 : -1];
 
 extern "C" {
-extern OpposingCandidateMasks DAT_005713f0;
+extern OpposingCandidateMasks g_btlSkillResponseMasks;
 
 s32 FUN_004c600c(s32 selection)
 {
@@ -30,7 +30,7 @@ s32 FUN_004c600c(s32 selection)
     BtlMainStateA *state = btlGetMainState();
     for (s32 index = first; first + count > index; ++index) {
         BtlCombatantEntryA *entry = &state->entries[index];
-        if ((DAT_005713f0.required & entry->flags) != 0 && (entry->flags & DAT_005713f0.excluded) == 0) {
+        if ((g_btlSkillResponseMasks.required & entry->flags) != 0 && (entry->flags & g_btlSkillResponseMasks.excluded) == 0) {
             s16 candidateSelection = entry->selectionIndex;
             BtlCombatantEntryA *candidate = btlMainFindEntryByListedId(btlGetMainState(), candidateSelection);
             if (candidate != NULL && ((CandidateValueView *)candidate)->value > 0) {

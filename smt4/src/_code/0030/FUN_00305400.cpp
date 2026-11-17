@@ -40,7 +40,7 @@ struct GradientWork {
 };
 
 extern "C" {
-extern EffectColorProductState DAT_004ea81c;
+extern EffectColorProductState g_vectorScratch;
 
 /* Fills a wide strip texture with a horizontal blend of four packed colors (each three-pixel group
  * mixes the first and third color in its second pixel and the second and fourth in the other two),
@@ -64,8 +64,8 @@ void FUN_00305400(GradientWork *work, const u32 *colors)
     f32 position = 0.0f;
     u32 *group = pixels;
     u32 *end = pixels;
-    EffectColor *color = &DAT_004ea81c.color;
-    EffectColor *weighted = &DAT_004ea81c.factor;
+    EffectColor *color = &g_vectorScratch.color;
+    EffectColor *weighted = &g_vectorScratch.factor;
     for (s32 i = 0; i < groups; i++) {
         f32 inverse = 1.0f - position;
         EffectColor mix;

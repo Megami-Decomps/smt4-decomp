@@ -6,7 +6,7 @@ extern "C" {
 /* Classifies an address in one of four registered graphics memory regions. */
 u32 FUN_002b30fc(u32 address)
 {
-    const AllocatorState *ranges = &DAT_00465120;
+    const AllocatorState *ranges = &g_asdMemState;
     if (address < ranges->regionBase[0] || ranges->regionBase[0] + ranges->regionSize[0] < address) {
         if (ranges->regionBase[1] <= address && address <= ranges->regionSize[1] + ranges->regionBase[1]) {
             return 1;

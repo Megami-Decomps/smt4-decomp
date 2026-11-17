@@ -8,7 +8,7 @@ extern "C" {
 int mathGetShortestAngleDelta(void);
 int mathPositionHeadingDegrees(void);
 
-extern int DAT_004474f4; /* 0x4474f4 */
+extern int g_mapCamera; /* 0x4474f4 */
 extern int g_lmapScene; /* 0x447e88 */
 extern int DAT_0049f920; /* 0x49f920 */
 
@@ -35,13 +35,13 @@ void FUN_001f8350(void)
   float temp_v11;
   float temp_v12;
   
-  temp_v0 = DAT_004474f4;
+  temp_v0 = g_mapCamera;
   temp_v5 = 900.0f;
   temp_v7 = 200.0f;
   temp_v12 = 500.0f;
   temp_v10 = -600.0f;
   temp_v9 = 0.0f;
-  *(unsigned int *)(DAT_004474f4 + 0x38) = 0xc2c80000;
+  *(unsigned int *)(g_mapCamera + 0x38) = 0xc2c80000;
   temp_v1 = g_lmapScene;
   temp_v11 = 70.0f;
   if (g_gameState.mapId != 0x19) {
@@ -134,7 +134,7 @@ void FUN_001f8350(void)
     }
   }
   mathPositionHeadingDegrees();
-  temp_v7 = *(float *)(DAT_004474f4 + 0x18);
+  temp_v7 = *(float *)(g_mapCamera + 0x18);
   mathGetShortestAngleDelta();
   temp_v8 = *(float *)(g_lmapScene + 0x20);
   if (temp_v7 < temp_v9) {
@@ -158,7 +158,7 @@ void FUN_001f8350(void)
     if ((temp_v9 <= temp_v8) && (temp_v9 = temp_v8, (int)temp_v8 >= 0x43fa0001)) {
       temp_v9 = temp_v12;
     }
-    *(float *)(DAT_004474f4 + 0x38) = *(float *)(DAT_004474f4 + 0x38) + temp_v9 * 0.002f * temp_v10;
+    *(float *)(g_mapCamera + 0x38) = *(float *)(g_mapCamera + 0x38) + temp_v9 * 0.002f * temp_v10;
   }
   return;
 }

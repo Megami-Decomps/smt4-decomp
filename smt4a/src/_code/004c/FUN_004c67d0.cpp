@@ -4,7 +4,7 @@
 #include "gamedata/GameDataAccess_Smt4a.h"
 
 extern "C" {
-extern u64 DAT_005713f0;       /* a unit is present */
+extern u64 g_btlSkillResponseMasks;       /* a unit is present */
 extern u64 DAT_00571420;       /* a unit is out of the fight */
 extern u64 DAT_00571498;       /* the battle always lets the party escape */
 extern u64 DAT_005714c8;       /* the second state always lets the party escape */
@@ -17,7 +17,7 @@ s32 __aeabi_idivmod(s32 a, s32 b);
 /* Whether a unit slot is an active fighter. */
 static __inline bool isFighting(const BtlCombatantEntryA *unit)
 {
-    return (unit->flags & DAT_005713f0) != 0 && (unit->flags & DAT_00571420) == 0;
+    return (unit->flags & g_btlSkillResponseMasks) != 0 && (unit->flags & DAT_00571420) == 0;
 }
 
 /* Returns the chance (0-100) that the party escapes: from the level and agility averages of the

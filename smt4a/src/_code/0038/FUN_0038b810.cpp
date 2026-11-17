@@ -17,7 +17,7 @@ struct EffectTransformState {
 
 extern "C" {
 
-extern EffectTransformState DAT_006471dc;
+extern EffectTransformState g_vectorScratch;
 
 // point = (point.x, point.y, point.z, 1) * matrix
 static inline void transformPoint(Vec4 *point, const Vec4 *matrix)
@@ -37,6 +37,6 @@ static inline void transformPoint(Vec4 *point, const Vec4 *matrix)
 /* Transform the working point by the shared matrix. */
 void FUN_0038b810(void)
 {
-    transformPoint(&DAT_006471dc.point, DAT_006471dc.matrix);
+    transformPoint(&g_vectorScratch.point, g_vectorScratch.matrix);
 }
 } /* extern "C" */

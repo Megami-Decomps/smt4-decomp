@@ -9,8 +9,8 @@ u32 FUN_00115cd0(s32 mode, DebugLabelCallback label, DebugDetailCallback detail)
 // Toggle the debug memory limit on button nine and refresh the callback-driven display.
 u32 memoryDebugRefresh()
 {
-    if (DAT_00465120.debugEnabled != 0 && padIsButtonPressed(9) != 0) {
-        AllocationUsage* settings = DAT_00465120.usage;
+    if (g_asdMemState.debugEnabled != 0 && padIsButtonPressed(9) != 0) {
+        AllocationUsage* settings = g_asdMemState.usage;
         settings->limit = settings->limit == 0x08800000 ? 0x14000000 : 0x08800000;
     }
     FUN_00115cd0(0, FUN_00118c38, gfxDrawSolidRectangle);

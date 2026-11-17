@@ -12,7 +12,7 @@ struct HistoryEventMasks {
 };
 
 extern "C" {
-extern HistoryEventMasks DAT_005713f0;
+extern HistoryEventMasks g_btlSkillResponseMasks;
 void battleRecordCombatantHistoryEvent(BtlMainStateA *state, BtlCombatantEntryA *unit, s32 kind);
 
 /* Records history events 1-3 for the unit according to which event masks its flags hit. */
@@ -20,13 +20,13 @@ void battleRecordUnitMaskHistoryEvents(u32 unitId)
 {
     BtlCombatantEntryA *unit = btlMainFindEntryByListedId(btlGetMainState(), unitId);
 
-    if (unit->flags & DAT_005713f0.first) {
+    if (unit->flags & g_btlSkillResponseMasks.first) {
         battleRecordCombatantHistoryEvent(btlGetMainState(), unit, 1);
     }
-    if (unit->flags & DAT_005713f0.second) {
+    if (unit->flags & g_btlSkillResponseMasks.second) {
         battleRecordCombatantHistoryEvent(btlGetMainState(), unit, 2);
     }
-    if (unit->flags & DAT_005713f0.third) {
+    if (unit->flags & g_btlSkillResponseMasks.third) {
         battleRecordCombatantHistoryEvent(btlGetMainState(), unit, 3);
     }
 }

@@ -19,7 +19,7 @@ struct SceneSpawnRecord {
     /* 0x08 */ s16 z;
     /* 0x0A */ s16 heading;
 };
-/* IV's map view as FUN_002d4e58 sees it (DAT_004474f4); Apocalypse's is LmapViewA. */
+/* IV's map view as FUN_002d4e58 sees it (g_mapCamera); Apocalypse's is LmapViewA. */
 struct SceneViewHeading {
     /* 0x00 */ u8 unk00[0x18];
     /* 0x18 */ f32 heading;

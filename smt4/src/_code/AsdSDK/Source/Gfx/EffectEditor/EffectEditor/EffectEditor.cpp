@@ -29,7 +29,7 @@ __align(16) static EffectEditorVector g_effectEditorVector;
 static EffectEditorVector g_effectEditorRotation;
 extern EffectEditorDefaultSlot DAT_0044f858;
 extern EffectSelectionCatalogEntry *DAT_0044f4d4[13];
-extern EffectRenderGlobals DAT_004ea81c;
+extern EffectRenderGlobals g_vectorScratch;
 void __aeabi_memcpy4(void *, const void *, u32);
 void randomStateSeed(u32, u32);
 EffectSelectionItem *linkedFindItemByIndex(void *, s32);
@@ -173,7 +173,7 @@ extern "C" void FUN_001dce30()
 /* NON_MATCHING: aggregate transfer classes and temporary/register allocation differ. */
 extern "C" void effectEditorApplyHandlerState(EffectHandlerRequest *request)
 {
-    EffectRenderGlobals *globals = &DAT_004ea81c;
+    EffectRenderGlobals *globals = &g_vectorScratch;
     EffectEditorSnapshot *controls = &g_effectEditorSavedSnapshot;
     FUN_002496cc(reinterpret_cast<const EffectPositionControl *>(controls));
     EffMenuPosition initial = globals->current;
@@ -278,7 +278,7 @@ u32 effectEditorEditPositionVector(EffectEditorSnapshot *record, s32 relative)
     if (DAT_0044f900.flags & 8)
         result |= 2;
 
-    EffectRenderGlobals *globals = &DAT_004ea81c;
+    EffectRenderGlobals *globals = &g_vectorScratch;
     if ((result & 2) && (record->parameters.flags & 0x18)) {
         globals->current = g_effectEditorInitialVector.value;
         if (relative) {

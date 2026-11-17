@@ -18,7 +18,7 @@ void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 region, u32 size, u32 o
     if (block != NULL) {
         rt_memclr(block, size);
     }
-    s32 result = nn::svc::ReleaseMutex(*g_allocationAddressRanges.mutex);
+    s32 result = nn::svc::ReleaseMutex(*g_asdMemState.mutex);
     if (nnResultIsFailure(result)) {
         resultHandleFailure(result);
     }

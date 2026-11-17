@@ -49,7 +49,7 @@ struct BtlAiScales {
 
 extern "C" {
 
-extern BtlAiKinds DAT_005713f0;
+extern BtlAiKinds g_btlSkillResponseMasks;
 
 s32 gameFlagIsSet(u32 flag);
 BtlAiUnit *btlMainFindEntryByListedId(BtlAiState *state, void *actor);
@@ -74,7 +74,7 @@ u32 FUN_004bf348(void *actor, s32 mode, s32 flag)
     s32 chance;
     s32 roll;
 
-    if ((state->blocked & DAT_005713f0.blockKind) != 0 || gameFlagIsSet(0x46E) != 0) {
+    if ((state->blocked & g_btlSkillResponseMasks.blockKind) != 0 || gameFlagIsSet(0x46E) != 0) {
         return 1;
     }
     if (gameFlagIsSet(0x472) != 0) {
@@ -85,54 +85,54 @@ u32 FUN_004bf348(void *actor, s32 mode, s32 flag)
     if (unit != NULL) {
         u64 input = unit->input;
 
-        if ((input & DAT_005713f0.kindA) != 0 || (input & DAT_005713f0.kindB) != 0) {
+        if ((input & g_btlSkillResponseMasks.kindA) != 0 || (input & g_btlSkillResponseMasks.kindB) != 0) {
             chance = 30;
             if (flag == 1) {
                 chance = 85;
-                if ((input & DAT_005713f0.boostKind) != 0) {
+                if ((input & g_btlSkillResponseMasks.boostKind) != 0) {
                     chance = 100;
                 }
             }
-            if (mode != 1 && mode == 2 && (input & DAT_005713f0.allyKind) != 0) {
+            if (mode != 1 && mode == 2 && (input & g_btlSkillResponseMasks.allyKind) != 0) {
                 if (btlAiUnitHasQueuedAction(actor)) {
                     return 1;
                 }
             }
-        } else if ((input & DAT_005713f0.kindD) != 0) {
-            if (mode != 1 && mode == 2 && (input & DAT_005713f0.allyKind) != 0) {
+        } else if ((input & g_btlSkillResponseMasks.kindD) != 0) {
+            if (mode != 1 && mode == 2 && (input & g_btlSkillResponseMasks.allyKind) != 0) {
                 if (btlAiUnitHasQueuedAction(actor)) {
                     return 1;
                 }
             }
-        } else if ((input & DAT_005713f0.kindC) != 0) {
+        } else if ((input & g_btlSkillResponseMasks.kindC) != 0) {
             if ((unit->category >> 10) == 1) {
                 return 0;
             }
             if (flag == 1) {
                 chance = 85;
-                if ((input & DAT_005713f0.boostKind) != 0) {
+                if ((input & g_btlSkillResponseMasks.boostKind) != 0) {
                     chance = 100;
                 }
             }
-            if (mode != 1 && mode == 2 && (input & DAT_005713f0.allyKind) != 0) {
+            if (mode != 1 && mode == 2 && (input & g_btlSkillResponseMasks.allyKind) != 0) {
                 if (btlAiUnitHasQueuedAction(actor)) {
                     return 1;
                 }
             }
         }
         input = unit->input;
-        if ((input & DAT_005713f0.kindC) != 0 && unit->hp * 100 / unit->maxHp <= 40 && chance < 80) {
+        if ((input & g_btlSkillResponseMasks.kindC) != 0 && unit->hp * 100 / unit->maxHp <= 40 && chance < 80) {
             chance = 80;
         }
-        if ((input & DAT_005713f0.kindA) != 0 || (input & DAT_005713f0.kindB) != 0) {
+        if ((input & g_btlSkillResponseMasks.kindA) != 0 || (input & g_btlSkillResponseMasks.kindB) != 0) {
             chance = (s32)(FUN_0028cb6c()->scaleA * (f32)chance);
         }
-        if ((unit->input & DAT_005713f0.kindC) != 0) {
+        if ((unit->input & g_btlSkillResponseMasks.kindC) != 0) {
             chance = (s32)(FUN_0028cb6c()->scaleC * (f32)chance);
         }
     }
     roll = lcgRandomRange(99);
-    if ((state->forced & DAT_005713f0.forceKind) != 0) {
+    if ((state->forced & g_btlSkillResponseMasks.forceKind) != 0) {
         chance = state->forcedResult != 0 ? 100 : 0;
     }
     return roll < chance;

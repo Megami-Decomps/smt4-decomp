@@ -2,7 +2,7 @@
 #include "shard/W5_W5Match2_MatrixDestination.h"
 
 extern "C" {
-extern MatrixDestination DAT_004ea81c;
+extern MatrixDestination g_vectorScratch;
 f32 phaseCosInterpolate(f32 phase);
 f32 mathSinFixedAngle(f32 phase);
 void matrix44SetIdentity(Matrix44 *matrix);
@@ -19,6 +19,6 @@ void FUN_002484e0(f32 angle)
     matrix.values[6] = sine;
     matrix.values[9] = -sine;
     matrix.values[10] = cosine;
-    DAT_004ea81c.matrix = matrix;
+    g_vectorScratch.matrix = matrix;
 }
 }

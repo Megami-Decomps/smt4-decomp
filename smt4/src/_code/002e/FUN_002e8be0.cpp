@@ -15,7 +15,7 @@ struct OverviewController {
 };
 
 extern "C" {
-extern OverviewController *DAT_004474f4;
+extern OverviewController *g_mapCamera;
 
 void mapEaseSceneHeading(void);
 void FUN_001b4478(f32 x, f32 y, f32 z, f32 direction);
@@ -55,7 +55,7 @@ void FUN_002e8be0(void)
         g_lmapScene->pose.targetPosition.z = g_lmapScene->pose.targetPosition.z + FUN_00282390(g_gameState.heading * DEGREES_TO_RADIANS) * 40.0f;
         g_lmapScene->pose.targetHeading = g_gameState.overviewHeading;
         FUN_0027fc14(11);
-        DAT_004474f4->mode = -2;
+        g_mapCamera->mode = -2;
         buttonHelpSetPreset(0xdb);
         mapIfActivateRecord(1, g_gameState.overviewRecord);
         MapVector viewPosition;
@@ -86,8 +86,8 @@ void FUN_002e8be0(void)
             g_lmapScene->state = 10;
             g_lmapScene->stateTime = 0;
         } else if (padIsButtonPressed(5) || inputIsQuestMenuPressed()) {
-            DAT_004474f4->heading = g_lmapScene->pose.targetHeading;
-            DAT_004474f4->mode = 0;
+            g_mapCamera->heading = g_lmapScene->pose.targetHeading;
+            g_mapCamera->mode = 0;
             FUN_0027fc14(0);
             g_lmapScene->moveMode = 0;
             g_lmapScene->moveSpeed = 5.0f;
@@ -116,8 +116,8 @@ void FUN_002e8be0(void)
     case 12:
         if (!mapIfHasSelection()) {
             mapIfReleaseSlot1();
-            DAT_004474f4->heading = g_lmapScene->pose.targetHeading;
-            DAT_004474f4->mode = 0;
+            g_mapCamera->heading = g_lmapScene->pose.targetHeading;
+            g_mapCamera->mode = 0;
             FUN_0027fc14(0);
             g_lmapScene->state = g_lmapScene->state + 1;
             g_lmapScene->stateTime = 0;

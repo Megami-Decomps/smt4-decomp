@@ -26,7 +26,7 @@ typedef struct {
     unsigned int sp78; /* 0x78: local_78 */
 } param_1_stack;
 
-extern int DAT_004474f4; /* 0x4474f4 */
+extern int g_mapCamera; /* 0x4474f4 */
 extern unsigned long long *g_lmapScene; /* 0x447e88 */
 extern unsigned char g_fixedCamera; /* 0x49f3f0 */
 
@@ -95,12 +95,12 @@ void FUN_00265f50(int param_1)
   temp_v4 = *(float *)(param_1 + 0x50) * 0.017453292f;
   mathRemPio2f();
   *(float *)(param_1 + 0x60) =
-       (float)temp_v10 - temp_v4 * *(float *)(DAT_004474f4 + *(int *)(DAT_004474f4 + 0xc4) * 4 + 0x188);
+       (float)temp_v10 - temp_v4 * *(float *)(g_mapCamera + *(int *)(g_mapCamera + 0xc4) * 4 + 0x188);
   temp_v9 = *(float *)(param_1 + 0x50) * temp_v9;
   FUN_00282390();
-  temp_v0 = DAT_004474f4;
+  temp_v0 = g_mapCamera;
   *(float *)(param_1 + 0x68) =
-       in_s16 - temp_v9 * *(float *)(DAT_004474f4 + *(int *)(DAT_004474f4 + 0xc4) * 4 + 0x188);
+       in_s16 - temp_v9 * *(float *)(g_mapCamera + *(int *)(g_mapCamera + 0xc4) * 4 + 0x188);
   temp_v9 = (float)((unsigned long long)temp_v10 >> 0x20);
   temp_v4 = temp_v9 + *(float *)(temp_v0 + *(int *)(temp_v0 + 0xc4) * 4 + 200);
   *(float *)(param_1 + 0x70) = temp_v4;
@@ -138,7 +138,7 @@ void FUN_00265f50(int param_1)
              (temp_v12 - temp_v17) * (temp_v12 - temp_v17) +
              (temp_v13 - temp_v18) * (temp_v13 - temp_v18);
   }
-  temp_v0 = DAT_004474f4;
+  temp_v0 = g_mapCamera;
   temp_v4 = 0.0f;
   temp_v9 = romwright_sqrt_4(temp_v9);
   if ((int)temp_v9 >= 0x38d1b718) {
@@ -151,16 +151,16 @@ void FUN_00265f50(int param_1)
     temp_v8 = 0.1f;
     temp_v7 = temp_v4;
   }
-  puVar1 = (unsigned int *)(DAT_004474f4 + 0xa0);
+  puVar1 = (unsigned int *)(g_mapCamera + 0xa0);
   if (*(char *)(param_1 + 0x94) != '\0') {
-    *(float *)(DAT_004474f4 + 0x9c) = temp_v9;
+    *(float *)(g_mapCamera + 0x9c) = temp_v9;
     *puVar1 = 0;
   }
   else {
-    temp_v5 = *(float *)(DAT_004474f4 + 0x9c);
+    temp_v5 = *(float *)(g_mapCamera + 0x9c);
     if ((temp_v5 != temp_v5) || (temp_v9 != temp_v9)) {
-      temp_v6 = *(float *)(DAT_004474f4 + 0xa0) + 10.0f;
-      *(float *)(DAT_004474f4 + 0xa0) = temp_v6;
+      temp_v6 = *(float *)(g_mapCamera + 0xa0) + 10.0f;
+      *(float *)(g_mapCamera + 0xa0) = temp_v6;
       if ((int)temp_v6 >= 0x42c80001) {
         temp_v6 = 100.0f;
       }
@@ -173,13 +173,13 @@ void FUN_00265f50(int param_1)
       *(float *)(temp_v0 + 0x9c) = temp_v5;
     }
     else {
-      *(float *)(DAT_004474f4 + 0x9c) = temp_v9;
+      *(float *)(g_mapCamera + 0x9c) = temp_v9;
       *(unsigned int *)(temp_v0 + 0xa0) = 0;
     }
   }
-  temp_v11 = temp_v16 - temp_v4 * *(float *)(DAT_004474f4 + 0x9c);
-  temp_v12 = temp_v17 - temp_v7 * *(float *)(DAT_004474f4 + 0x9c);
-  temp_v13 = temp_v18 - temp_v8 * *(float *)(DAT_004474f4 + 0x9c);
+  temp_v11 = temp_v16 - temp_v4 * *(float *)(g_mapCamera + 0x9c);
+  temp_v12 = temp_v17 - temp_v7 * *(float *)(g_mapCamera + 0x9c);
+  temp_v13 = temp_v18 - temp_v8 * *(float *)(g_mapCamera + 0x9c);
   if (*(char *)(param_1 + 0x94) != '\0') {
     *(unsigned int *)(param_1 + 0x84) = *(unsigned int *)(param_1 + 0x6c);
     *(unsigned int *)(param_1 + 0x88) = *(unsigned int *)(param_1 + 0x70);
@@ -227,10 +227,10 @@ void FUN_00265f50(int param_1)
   FUN_002c159c(&g_fixedCamera);
   FUN_002c1e30(&g_fixedCamera,1);
   FUN_002c1edc(&g_fixedCamera,param_1 + 0x78,param_1 + 0x84,param_1 + 0x54);
-  temp_v0 = DAT_004474f4;
+  temp_v0 = g_mapCamera;
   temp_v1 = *(unsigned int *)(param_1 + 0x88);
   temp_v2 = *(unsigned int *)(param_1 + 0x8c);
-  *(unsigned int *)(DAT_004474f4 + 0x58) = *(unsigned int *)(param_1 + 0x84);
+  *(unsigned int *)(g_mapCamera + 0x58) = *(unsigned int *)(param_1 + 0x84);
   *(unsigned int *)(temp_v0 + 0x5c) = temp_v1;
   *(unsigned int *)(temp_v0 + 0x60) = temp_v2;
   temp_v1 = *(unsigned int *)(param_1 + 0x7c);
@@ -240,7 +240,7 @@ void FUN_00265f50(int param_1)
   *(unsigned int *)(temp_v0 + 0x54) = temp_v2;
   *(unsigned int *)(temp_v0 + 0x18) = *(unsigned int *)(param_1 + 0x50);
   FUN_0025247c(temp_v14);
-  *(unsigned int *)(DAT_004474f4 + 700) = temp_v15;
+  *(unsigned int *)(g_mapCamera + 700) = temp_v15;
   __hardfp_atan2f();
   residentApplyFallbackValues();
   return;

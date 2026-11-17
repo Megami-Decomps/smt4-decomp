@@ -65,7 +65,7 @@ extern float DAT_00472550; /* 0x472550 */
 extern float DAT_00472554; /* 0x472554 */
 extern float DAT_00472558; /* 0x472558 */
 extern float DAT_0047255c; /* 0x47255c */
-extern unsigned char DAT_004ea81c; /* 0x4ea81c */
+extern unsigned char g_vectorScratch; /* 0x4ea81c */
 extern float DAT_004ea91c; /* 0x4ea91c */
 extern float DAT_004ea920; /* 0x4ea920 */
 extern float DAT_004ea924; /* 0x4ea924 */
@@ -327,7 +327,7 @@ void FUN_0031a9f4(fn_0031a9f4_arg0 *param_1)
               } while (temp_v4 < 5);
               puVar10 = (unsigned int *)&DAT_004ea91c;
               if (temp_v29 >= 2) {
-                puVar10 = (unsigned int *)&DAT_004ea81c;
+                puVar10 = (unsigned int *)&g_vectorScratch;
               }
               temp_v30 = 1;
               if (temp_v30 < temp_v29) {

@@ -1,12 +1,12 @@
 #include "shard/W6_W6Match5_ComponentIntegration.h"
 
-extern "C" ComponentIntegrationState DAT_006471dc;
+extern "C" ComponentIntegrationState g_vectorScratch;
 
 // Integrate all four components by their stored deltas.
 extern "C" void FUN_002f8794(void)
 {
-    const IntegrationVector4 *delta = &DAT_006471dc.delta;
-    IntegrationVector4 *values = &DAT_006471dc.values;
+    const IntegrationVector4 *delta = &g_vectorScratch.delta;
+    IntegrationVector4 *values = &g_vectorScratch.values;
     values->x += delta->x;
     values->y += delta->y;
     values->z += delta->z;

@@ -49,7 +49,7 @@ struct TintEffect {
     TintBlock *block;     /* 0x34 */
 };
 
-extern EffectColorProductState DAT_006471dc;
+extern EffectColorProductState g_vectorScratch;
 
 u32 FUN_0038136c(TintBlock *block, u32 *colorSource);
 void matrixInitializeWithScaleAndOffset(u8 *matrix, TintEffect *effect, s32 offset, f32 scale);
@@ -98,10 +98,10 @@ void FUN_003c7d1c(TintEffect *effect)
         TintColor color;
         u8 matrix[0x40];
 
-        unpackColor(effect->tint, &DAT_006471dc.factor);
-        unpackColor(blockColor, &DAT_006471dc.color);
-        multiplyColor(&DAT_006471dc.color, &DAT_006471dc.factor);
-        effectColorCopy(&DAT_006471dc.color, &saved);
+        unpackColor(effect->tint, &g_vectorScratch.factor);
+        unpackColor(blockColor, &g_vectorScratch.color);
+        multiplyColor(&g_vectorScratch.color, &g_vectorScratch.factor);
+        effectColorCopy(&g_vectorScratch.color, &saved);
         matrixInitializeWithScaleAndOffset(matrix, effect, 0, effect->scale);
 
         for (s32 n = 0; n < partCount; n++) {
@@ -109,13 +109,13 @@ void FUN_003c7d1c(TintEffect *effect)
             if (part->ready > 0) {
                 TintObject *object = part->object;
                 matrixApplyByMode(object->transform, matrix, 0);
-                unpackColor(part->color, &DAT_006471dc.color);
-                effectColorCopy(&saved, &DAT_006471dc.factor);
-                multiplyColor(&DAT_006471dc.color, &DAT_006471dc.factor);
-                u32 a = (u32)(DAT_006471dc.color.red * 255.0f);
-                u32 r = (u32)(DAT_006471dc.color.green * 255.0f);
-                u32 g = (u32)(DAT_006471dc.color.blue * 255.0f);
-                u32 b = (u32)(DAT_006471dc.color.alpha * 255.0f);
+                unpackColor(part->color, &g_vectorScratch.color);
+                effectColorCopy(&saved, &g_vectorScratch.factor);
+                multiplyColor(&g_vectorScratch.color, &g_vectorScratch.factor);
+                u32 a = (u32)(g_vectorScratch.color.red * 255.0f);
+                u32 r = (u32)(g_vectorScratch.color.green * 255.0f);
+                u32 g = (u32)(g_vectorScratch.color.blue * 255.0f);
+                u32 b = (u32)(g_vectorScratch.color.alpha * 255.0f);
                 u32 packed = (a << 24) | ((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF);
                 color.channels.red = packedColorSwap32(packed) >> 24;
                 color.channels.green = packedColorSwap32(packed) >> 16;

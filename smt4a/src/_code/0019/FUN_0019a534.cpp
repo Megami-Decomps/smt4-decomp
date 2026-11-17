@@ -15,10 +15,10 @@ static __inline void walkRanges(AllocationLink *range)
 /* Walks the active heap usage record's allocation list four times. */
 void FUN_0019a534(void)
 {
-    walkRanges(g_allocationAddressRanges.usage->head);
-    walkRanges(g_allocationAddressRanges.usage->head);
-    walkRanges(g_allocationAddressRanges.usage->head);
-    walkRanges(g_allocationAddressRanges.usage->head);
+    walkRanges(g_asdMemState.usage->head);
+    walkRanges(g_asdMemState.usage->head);
+    walkRanges(g_asdMemState.usage->head);
+    walkRanges(g_asdMemState.usage->head);
 }
 
 } /* extern "C" */

@@ -29,7 +29,7 @@ static __inline void *allocationHeaderInit(AllocationHeader *header, u32 size, u
 /* Allocates an aligned, zero-filled payload and registers its backing block. */
 void *memAlloc(u32 heap, u32 alignmentClass, u32 flags, u32 size, u32 alignment, u32 category)
 {
-    nn_os_CriticalSection_Enter(DAT_00465120.lock);
+    nn_os_CriticalSection_Enter(g_asdMemState.lock);
     if (alignment < 128)
         alignment = 128;
     u32 mask = -alignment;
@@ -37,7 +37,7 @@ void *memAlloc(u32 heap, u32 alignmentClass, u32 flags, u32 size, u32 alignment,
     AllocationHeader *block = FUN_002b24d8(heap, alignmentClass, flags, backingSize, category);
     void *payload = allocationHeaderInit(block, backingSize, alignment, 0);
     rt_memclr(payload, size);
-    nn_os_CriticalSection_Leave(DAT_00465120.lock);
+    nn_os_CriticalSection_Leave(g_asdMemState.lock);
     return payload;
 }
 }

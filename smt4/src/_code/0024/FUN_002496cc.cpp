@@ -4,7 +4,7 @@
 #include "gfx/EffectEditorStorage.h"
 
 extern "C" {
-extern EffectRenderGlobals DAT_004ea81c;
+extern EffectRenderGlobals g_vectorScratch;
 void FUN_00249678(void);
 /* Release armlink removes this optional three-argument transform hook. */
 __weak void effectEditorTransformPosition(const EffectPositionControl *, const EffMenuPosition *, EffMenuPosition *);
@@ -12,7 +12,7 @@ __weak void effectEditorTransformPosition(const EffectPositionControl *, const E
 /* Apply the position override, optional source scale, and render transforms. */
 void FUN_002496cc(const EffectPositionControl *control)
 {
-    EffectRenderGlobals *globals = &DAT_004ea81c;
+    EffectRenderGlobals *globals = &g_vectorScratch;
     if (control->flags & 0x18) {
         globals->current = g_effectEditorInitialVector.value;
         globals->vector = effectRenderSource()->origin;

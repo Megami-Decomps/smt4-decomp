@@ -26,7 +26,7 @@ typedef struct {
     unsigned int spB0; /* 0xb0: local_b0 */
 } void_stack;
 
-extern int DAT_004474f4; /* 0x4474f4 */
+extern int g_mapCamera; /* 0x4474f4 */
 extern float DAT_00447500; /* 0x447500 */
 extern int g_lmapScene; /* 0x447e88 */
 
@@ -74,19 +74,19 @@ void FUN_001f87d4(void)
   unsigned int temp_v27;
   
   temp_v0 = g_lmapScene;
-  temp_v1 = DAT_004474f4;
+  temp_v1 = g_mapCamera;
   temp_v5 = 40.0f;
   temp_v11 = 0;
-  temp_v2 = *(int *)(DAT_004474f4 + 4);
+  temp_v2 = *(int *)(g_mapCamera + 4);
   temp_v4 = 0.017453292f;
   temp_v10 = 200.0f;
   if (temp_v2 == 10) {
-    temp_v15 = *(unsigned int *)(DAT_004474f4 + 0x58);
-    fStack_ac = *(float *)(DAT_004474f4 + 0x5c);
-    uStack_a8 = *(unsigned int *)(DAT_004474f4 + 0x60);
-    temp_v16 = *(float *)(DAT_004474f4 + 0x4c);
-    temp_v17 = *(float *)(DAT_004474f4 + 0x50);
-    temp_v18 = *(float *)(DAT_004474f4 + 0x54);
+    temp_v15 = *(unsigned int *)(g_mapCamera + 0x58);
+    fStack_ac = *(float *)(g_mapCamera + 0x5c);
+    uStack_a8 = *(unsigned int *)(g_mapCamera + 0x60);
+    temp_v16 = *(float *)(g_mapCamera + 0x4c);
+    temp_v17 = *(float *)(g_mapCamera + 0x50);
+    temp_v18 = *(float *)(g_mapCamera + 0x54);
     temp_v13 = *(float *)(g_lmapScene + 0x28);
     temp_v3 = *(float *)(g_lmapScene + 0x2c);
     temp_v12 = *(float *)(g_lmapScene + 0x50) * 0.017453292f;
@@ -115,8 +115,8 @@ void FUN_001f87d4(void)
     temp_v23 = temp_v13;
     temp_v27 = temp_v11;
     FUN_00282228(&temp_v15);
-    temp_v1 = DAT_004474f4;
-    *(int *)(DAT_004474f4 + 4) = *(int *)(DAT_004474f4 + 4) + 1;
+    temp_v1 = g_mapCamera;
+    *(int *)(g_mapCamera + 4) = *(int *)(g_mapCamera + 4) + 1;
     *(unsigned int *)(temp_v1 + 8) = 0;
     return;
   }
@@ -126,8 +126,8 @@ void FUN_001f87d4(void)
     temp_v12 = 90.0f;
     temp_v13 = 100.0f;
     if (temp_v2 == 0) {
-      puVar4 = (unsigned int *)(DAT_004474f4 + 0x58);
-      *(unsigned int *)(DAT_004474f4 + 0xc) = 0;
+      puVar4 = (unsigned int *)(g_mapCamera + 0x58);
+      *(unsigned int *)(g_mapCamera + 0xc) = 0;
       temp_v15 = *puVar4;
       fStack_ac = *(float *)(temp_v1 + 0x5c);
       uStack_a8 = *(unsigned int *)(temp_v1 + 0x60);
@@ -162,8 +162,8 @@ void FUN_001f87d4(void)
       temp_v23 = temp_v7;
       temp_v27 = temp_v11;
       FUN_00282228(&temp_v15);
-      temp_v1 = DAT_004474f4;
-      *(unsigned char *)(DAT_004474f4 + 0x21c) = 1;
+      temp_v1 = g_mapCamera;
+      *(unsigned char *)(g_mapCamera + 0x21c) = 1;
       piVar2 = (int *)(temp_v1 + 4);
       *piVar2 = *piVar2 + 1;
       *(unsigned int *)(temp_v1 + 8) = 0;
@@ -172,13 +172,13 @@ void FUN_001f87d4(void)
     }
     if (temp_v2 != 1) {
       if (temp_v2 == 2) {
-        if (*(int *)(DAT_004474f4 + 0xc) == 1) {
-          *(unsigned int *)(DAT_004474f4 + 4) = 10;
+        if (*(int *)(g_mapCamera + 0xc) == 1) {
+          *(unsigned int *)(g_mapCamera + 4) = 10;
           *(unsigned int *)(temp_v1 + 8) = 0;
           return;
         }
-        if (*(int *)(DAT_004474f4 + 0xc) == 2) {
-          *(unsigned int *)(DAT_004474f4 + 4) = 0x32;
+        if (*(int *)(g_mapCamera + 0xc) == 2) {
+          *(unsigned int *)(g_mapCamera + 4) = 0x32;
           *(unsigned int *)(temp_v1 + 8) = 0;
           return;
         }
@@ -186,24 +186,24 @@ void FUN_001f87d4(void)
       }
     }
     else {
-      if (*(int *)(DAT_004474f4 + 0xc) == 1) {
-        *(unsigned int *)(DAT_004474f4 + 4) = 10;
+      if (*(int *)(g_mapCamera + 0xc) == 1) {
+        *(unsigned int *)(g_mapCamera + 4) = 10;
         *(unsigned int *)(temp_v1 + 8) = 0;
         return;
       }
-      if (*(int *)(DAT_004474f4 + 0xc) == 2) {
-        *(unsigned int *)(DAT_004474f4 + 4) = 0x32;
+      if (*(int *)(g_mapCamera + 0xc) == 2) {
+        *(unsigned int *)(g_mapCamera + 4) = 0x32;
         *(unsigned int *)(temp_v1 + 8) = 0;
         return;
       }
       temp_v1 = vectorPairTransitionStep();
       if (temp_v1 != 0) {
-        temp_v15 = *(unsigned int *)(DAT_004474f4 + 0x58);
-        fStack_ac = *(float *)(DAT_004474f4 + 0x5c);
-        uStack_a8 = *(unsigned int *)(DAT_004474f4 + 0x60);
-        temp_v18 = *(float *)(DAT_004474f4 + 0x54);
-        temp_v16 = *(float *)(DAT_004474f4 + 0x4c);
-        temp_v17 = *(float *)(DAT_004474f4 + 0x50);
+        temp_v15 = *(unsigned int *)(g_mapCamera + 0x58);
+        fStack_ac = *(float *)(g_mapCamera + 0x5c);
+        uStack_a8 = *(unsigned int *)(g_mapCamera + 0x60);
+        temp_v18 = *(float *)(g_mapCamera + 0x54);
+        temp_v16 = *(float *)(g_mapCamera + 0x4c);
+        temp_v17 = *(float *)(g_mapCamera + 0x50);
         temp_v6 = *(float *)(g_lmapScene + 0x28);
         temp_v9 = *(float *)(g_lmapScene + 0x2c);
         temp_v3 = *(float *)(g_lmapScene + 0x50) * temp_v4;
@@ -232,8 +232,8 @@ void FUN_001f87d4(void)
         temp_v23 = temp_v7;
         temp_v27 = temp_v11;
         FUN_00282228(&temp_v15);
-        temp_v1 = DAT_004474f4;
-        *(int *)(DAT_004474f4 + 4) = *(int *)(DAT_004474f4 + 4) + 1;
+        temp_v1 = g_mapCamera;
+        *(int *)(g_mapCamera + 4) = *(int *)(g_mapCamera + 4) + 1;
         *(unsigned int *)(temp_v1 + 8) = 0;
         DAT_00447500 = temp_v23;
         return;
@@ -271,18 +271,18 @@ void FUN_001f87d4(void)
       temp_v27 = temp_v11;
       FUN_00282228(&temp_v15);
       vectorPairTransitionStep();
-      temp_v1 = DAT_004474f4;
-      *(int *)(DAT_004474f4 + 4) = *(int *)(DAT_004474f4 + 4) + 1;
+      temp_v1 = g_mapCamera;
+      *(int *)(g_mapCamera + 4) = *(int *)(g_mapCamera + 4) + 1;
       *(unsigned int *)(temp_v1 + 8) = 0;
       return;
     }
     if (temp_v2 == 0x33) {
-      temp_v15 = *(unsigned int *)(DAT_004474f4 + 0x58);
-      fStack_ac = *(float *)(DAT_004474f4 + 0x5c);
-      uStack_a8 = *(unsigned int *)(DAT_004474f4 + 0x60);
-      temp_v16 = *(float *)(DAT_004474f4 + 0x4c);
-      temp_v17 = *(float *)(DAT_004474f4 + 0x50);
-      temp_v18 = *(float *)(DAT_004474f4 + 0x54);
+      temp_v15 = *(unsigned int *)(g_mapCamera + 0x58);
+      fStack_ac = *(float *)(g_mapCamera + 0x5c);
+      uStack_a8 = *(unsigned int *)(g_mapCamera + 0x60);
+      temp_v16 = *(float *)(g_mapCamera + 0x4c);
+      temp_v17 = *(float *)(g_mapCamera + 0x50);
+      temp_v18 = *(float *)(g_mapCamera + 0x54);
       temp_v19 = *(float *)(g_lmapScene + 0x28);
       temp_v21 = *(float *)(g_lmapScene + 0x30);
       temp_v20 = *(float *)(g_lmapScene + 0x2c) + 200.0f;
@@ -310,8 +310,8 @@ void FUN_001f87d4(void)
   else {
     temp_v1 = vectorPairTransitionStep();
     if (temp_v1 != 0) {
-      temp_v1 = DAT_004474f4;
-      *(int *)(DAT_004474f4 + 4) = *(int *)(DAT_004474f4 + 4) + 1;
+      temp_v1 = g_mapCamera;
+      *(int *)(g_mapCamera + 4) = *(int *)(g_mapCamera + 4) + 1;
       *(unsigned int *)(temp_v1 + 8) = 0;
       return;
     }

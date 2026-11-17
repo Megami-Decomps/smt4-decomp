@@ -7,7 +7,7 @@ void asdSetNormalizedColorRgba(u32 color);
 void FUN_00256a50(RenderSubmissionPacket *, u32 mode);
 u32 FUN_00269694(RenderSubmissionOwner *, const u32 *color, u32 frame, u32 duration);
 u32 FUN_00246c28();
-extern EffectColorProductState DAT_004ea81c;
+extern EffectColorProductState g_vectorScratch;
 
 // Apply the current owner color, transform and depth mode to an effect submission.
 void FUN_0032128c(RenderSubmission *submission)
@@ -18,7 +18,7 @@ void FUN_0032128c(RenderSubmission *submission)
         return;
     u32 ownerColor = FUN_00269694(owner, &owner->color, submission->frame, owner->frame);
     asdSetNormalizedColorRgba(submission->color);
-    effectColorCopy(&DAT_004ea81c.color, &DAT_004ea81c.factor);
+    effectColorCopy(&g_vectorScratch.color, &g_vectorScratch.factor);
     asdSetNormalizedColorRgba(ownerColor);
     FUN_00246bd4();
     u32 color = FUN_00246c28();

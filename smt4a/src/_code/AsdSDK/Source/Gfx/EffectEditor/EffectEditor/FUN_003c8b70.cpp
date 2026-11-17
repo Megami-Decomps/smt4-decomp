@@ -27,7 +27,7 @@ struct EditorView {
 
 extern "C" {
 
-extern EditorMathWork DAT_006471dc;
+extern EditorMathWork g_vectorScratch;
 extern EditorView DAT_0059efe0;
 extern f32 DAT_0059f020[];
 void asdDebugLog(s32 column, s32 row, s32 color, const char *text);
@@ -67,7 +67,7 @@ u32 FUN_003c8b70(void)
     f32 x = g_effectEditorVector.value.x;
     f32 z = g_effectEditorVector.value.z;
     if (!(x == 0.0f && z == 0.0f)) {
-        EditorMathWork *work = &DAT_006471dc;
+        EditorMathWork *work = &g_vectorScratch;
         work->axis.x = x;
         work->axis.y = 0.0f;
         work->axis.z = z;

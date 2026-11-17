@@ -38,7 +38,7 @@ typedef struct {
     unsigned int sp100; /* 0x100: local_100 */
 } param_1_stack;
 
-extern int DAT_004474f4; /* 0x4474f4 */
+extern int g_mapCamera; /* 0x4474f4 */
 extern int g_mapIf; /* 0x447a78 */
 extern int g_lmapScene; /* 0x447e88 */
 extern unsigned char DAT_0049fb1c; /* 0x49fb1c */
@@ -146,7 +146,7 @@ void FUN_001e5e78(int param_1)
     *piVar7 = *piVar7 - 1;
     *puVar10 = 1;
   }
-  temp_v12 = *(int *)(DAT_004474f4 + 0x58);
+  temp_v12 = *(int *)(g_mapCamera + 0x58);
   temp_v32 = param_1;
   mathDistanceBetweenPoints();
   temp_v6 = g_mapIf;
@@ -206,13 +206,13 @@ void FUN_001e5e78(int param_1)
       }
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 0x80);
-    temp_v17 = *(float *)(DAT_004474f4 + 0x58) - *(float *)(DAT_004474f4 + 0x4c);
-    temp_v15 = *(float *)(DAT_004474f4 + 0x5c) - *(float *)(DAT_004474f4 + 0x50);
-    temp_v14 = *(float *)(DAT_004474f4 + 0x60) - *(float *)(DAT_004474f4 + 0x54);
+    temp_v17 = *(float *)(g_mapCamera + 0x58) - *(float *)(g_mapCamera + 0x4c);
+    temp_v15 = *(float *)(g_mapCamera + 0x5c) - *(float *)(g_mapCamera + 0x50);
+    temp_v14 = *(float *)(g_mapCamera + 0x60) - *(float *)(g_mapCamera + 0x54);
     temp_v19 = (float)temp_v22 / romwright_sqrt_4(temp_v17 * temp_v17 + temp_v15 * temp_v15 + temp_v14 * temp_v14);
     temp_v17 = temp_v17 * temp_v19;
     temp_v21 = CONCAT44(temp_v15 * temp_v19,temp_v14 * temp_v19);
-    temp_v8 = *(unsigned int *)(DAT_004474f4 + 0x4c);
+    temp_v8 = *(unsigned int *)(g_mapCamera + 0x4c);
     mathPositionHeadingDegrees();
     temp_v23 = (unsigned long long)temp_v8;
     temp_v14 = 10000.0f;
@@ -260,9 +260,9 @@ LAB_001e6120:
             }
             else {
               mathPositionHeadingDegrees();
-              temp_v15 = *(float *)(temp_v12 + 0x22c) - *(float *)(DAT_004474f4 + 0x4c);
-              temp_v19 = *(float *)(temp_v12 + 0x230) - *(float *)(DAT_004474f4 + 0x50);
-              temp_v18 = *(float *)(temp_v12 + 0x234) - *(float *)(DAT_004474f4 + 0x54);
+              temp_v15 = *(float *)(temp_v12 + 0x22c) - *(float *)(g_mapCamera + 0x4c);
+              temp_v19 = *(float *)(temp_v12 + 0x230) - *(float *)(g_mapCamera + 0x50);
+              temp_v18 = *(float *)(temp_v12 + 0x234) - *(float *)(g_mapCamera + 0x54);
               temp_v20 = (float)temp_v22 / romwright_sqrt_4(temp_v15 * temp_v15 + temp_v19 * temp_v19 + temp_v18 * temp_v18);
               temp_v8 = (unsigned int)temp_v23;
               temp_v15 = temp_v17 * temp_v15 * temp_v20 +

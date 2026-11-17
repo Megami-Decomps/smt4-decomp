@@ -68,7 +68,7 @@ extern unsigned int g_sinCosTable; /* 0x407ed0 */
 extern unsigned int DAT_00407ed4; /* 0x407ed4 */
 extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
-extern int DAT_004474f4; /* 0x4474f4 */
+extern int g_mapCamera; /* 0x4474f4 */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -157,7 +157,7 @@ void FUN_0025a1fc(fn_0025a1fc_arg0 *param_1)
       if (temp_v2 != 2) {
         return;
       }
-      temp_v14 = (*(float *)(DAT_004474f4 + 0x18) + 180.0f) * 0.7111111f;
+      temp_v14 = (*(float *)(g_mapCamera + 0x18) + 180.0f) * 0.7111111f;
       temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(0.0f <= temp_v14) << 0x1d);
       for (temp_v14 = romwright_fabs_4(temp_v14); (int)temp_v14 >= 0x47800000; temp_v14 = temp_v14 - 65536.0f) {
       }
@@ -236,7 +236,7 @@ void FUN_0025a1fc(fn_0025a1fc_arg0 *param_1)
     }
   }
   else {
-    temp_v7 = *(float *)(DAT_004474f4 + 0x4c) - param_1->field_0x68;
+    temp_v7 = *(float *)(g_mapCamera + 0x4c) - param_1->field_0x68;
     __hardfp_atan2f();
     temp_v14 = temp_v7 * 57.32484f * temp_v14;
     temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v12 <= temp_v14) << 0x1d);

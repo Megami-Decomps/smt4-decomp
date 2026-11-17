@@ -88,7 +88,7 @@ extern unsigned int g_sinCosTable; /* 0x407ed0 */
 extern unsigned int DAT_00407ed4; /* 0x407ed4 */
 extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
-extern int DAT_004474f4; /* 0x4474f4 */
+extern int g_mapCamera; /* 0x4474f4 */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -204,7 +204,7 @@ void FUN_0030fb0c(fn_0030fb0c_arg0 *param_1,int param_2)
     temp_v31 = temp_v9 * temp_v13 + temp_v7 * temp_v6 * temp_v34;
   }
   else {
-    temp_v6 = *(float *)(DAT_004474f4 + 0x4c) - param_1->field_0x68;
+    temp_v6 = *(float *)(g_mapCamera + 0x4c) - param_1->field_0x68;
     __hardfp_atan2f();
     temp_v13 = temp_v6 * 57.32484f * temp_v13;
     temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v11 <= temp_v13) << 0x1d);

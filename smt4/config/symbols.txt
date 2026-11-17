@@ -11455,3 +11455,6 @@ g_padInputState = ncch:.data:0x4650a0; // type:object
 g_effFrameCounter = ncch:.data:0x4640d0; // type:object
 g_mapEplSourceFileName = ncch:.rodata:0x40442c; // type:object
 g_sndSystemState = ncch:.data:0x44e7c0; // type:object
+g_vectorScratch = ncch:.bss:0x4ea81c; // type:object
+g_mapCamera = ncch:.data:0x4474f4; // type:object
+g_asdMemState = ncch:.data:0x465120; // type:object

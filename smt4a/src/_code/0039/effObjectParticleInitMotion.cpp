@@ -5,7 +5,7 @@
 #include "code/Code0051_Smt4a.h"
 
 extern "C" {
-extern QuaternionWorkspace DAT_006471dc;
+extern QuaternionWorkspace g_vectorScratch;
 
 void effObjectParticleInitMotion(EffObjectParticle *emitter, EffObjectParticleState *particle)
 {
@@ -17,16 +17,16 @@ void effObjectParticleInitMotion(EffObjectParticle *emitter, EffObjectParticleSt
     } else {
         direction = emitter->initialMotion.direction;
     }
-    DAT_006471dc.direction = direction;
-    DAT_006471dc.rotation.w = 0.0f;
+    g_vectorScratch.direction = direction;
+    g_vectorScratch.rotation.w = 0.0f;
     f32 length = sqrtf(direction.x * direction.x + direction.y * direction.y + direction.z * direction.z);
     if (length != 0.0f) {
         if (length > 0.0f) {
-            DAT_006471dc.direction.x /= length;
-            DAT_006471dc.direction.y /= length;
-            DAT_006471dc.direction.z /= length;
+            g_vectorScratch.direction.x /= length;
+            g_vectorScratch.direction.y /= length;
+            g_vectorScratch.direction.z /= length;
         }
-        particle->motion.direction = DAT_006471dc.direction;
+        particle->motion.direction = g_vectorScratch.direction;
     } else {
         particle->motion.direction.x = 0.0f;
         particle->motion.direction.y = 1.0f;

@@ -26,7 +26,7 @@ static __inline void colorQuadSetRect(ColorQuadEffectOutput *output,
 }
 
 extern "C" {
-extern EffectColorProductState DAT_006471dc;
+extern EffectColorProductState g_vectorScratch;
 void renderCtxSetPackedColor(u32 color);
 u32 FUN_0038136c(const u8 *curve, const ScreenEffectWeightTrack *weight,
                  s32 frame, s32 duration);
@@ -53,10 +53,10 @@ void colorQuadEffectUpdateLifetimeColor(ColorQuadEffectJob *job)
     u32 sampledColor = FUN_0038136c(resource->colorCurve, &resource->weight,
                                    frame, duration);
     renderCtxSetPackedColor(job->color);
-    effectColorCopy(&DAT_006471dc.color, &DAT_006471dc.factor);
+    effectColorCopy(&g_vectorScratch.color, &g_vectorScratch.factor);
     renderCtxSetPackedColor(sampledColor);
-    effectColorScale(&DAT_006471dc.factor, &DAT_006471dc.color);
-    u32 packed = effectColorPackFrom(DAT_006471dc.color);
+    effectColorScale(&g_vectorScratch.factor, &g_vectorScratch.color);
+    u32 packed = effectColorPackFrom(g_vectorScratch.color);
     output->color.r = __rev(packed) >> 24;
     output->color.g = __rev(packed) >> 16;
     output->color.b = __rev(packed) >> 8;

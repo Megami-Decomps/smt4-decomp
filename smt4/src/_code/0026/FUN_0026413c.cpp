@@ -24,7 +24,7 @@ typedef struct MapCameraTurn {
 } MapCameraTurn;
 
 
-extern MapCameraTurn *DAT_004474f4;
+extern MapCameraTurn *g_mapCamera;
 
 s32 inputIsQuestMenuPressed(void);
 s32 padIsButtonPressed(u32 button);
@@ -36,7 +36,7 @@ f32 mathGetShortestAngleDelta(f32 angle, f32 target);
 void FUN_0026413c(void)
 {
     LmapMainState *state = g_lmapMainState;
-    MapCameraTurn *camera = DAT_004474f4;
+    MapCameraTurn *camera = g_mapCamera;
     s32 left = 0;
     s32 right = 0;
     s32 start = 0;
@@ -58,19 +58,19 @@ void FUN_0026413c(void)
     if (g_gameState.inputBlocked == 0 && g_gameState.owner == NULL) {
         if (camera->turning == 0) {
             if (camera->held != 0 && slotIsActive(8) == 0 && slotIsActive(7) == 0) {
-                DAT_004474f4->held = 0;
+                g_mapCamera->held = 0;
             }
-            if (DAT_004474f4->cooldown <= 6) {
+            if (g_mapCamera->cooldown <= 6) {
                 if (slotIsActive(8) != 0) {
                     left = 1;
                 }
                 if (slotIsActive(7) != 0) {
                     right = 1;
                 }
-                if (DAT_004474f4->cooldown == 0
+                if (g_mapCamera->cooldown == 0
                     && (inputIsQuestMenuPressed() != 0
                         || (slotIsActive(8) != 0 && slotIsActive(7) != 0 && padIsButtonPressed(8) == 0
-                            && padIsButtonPressed(7) == 0 && DAT_004474f4->held == 0))) {
+                            && padIsButtonPressed(7) == 0 && g_mapCamera->held == 0))) {
                     left = 0;
                     right = 0;
                     start = 1;
@@ -78,7 +78,7 @@ void FUN_0026413c(void)
             }
         }
     }
-    camera = DAT_004474f4;
+    camera = g_mapCamera;
     if (camera->turning == 0) {
         if (start != 0) {
             camera->turning = 1;
@@ -86,20 +86,20 @@ void FUN_0026413c(void)
             camera->unk210 = 0.0f;
             camera->turnStart = camera->angle;
             camera->turnTarget = 180.0f;
-            DAT_004474f4->unk0b4 = 0;
-            DAT_004474f4->turnDirection = mathGetShortestAngleDelta(camera->angle, 180.0f) < 0.0f ? -1.0f : 1.0f;
+            g_mapCamera->unk0b4 = 0;
+            g_mapCamera->turnDirection = mathGetShortestAngleDelta(camera->angle, 180.0f) < 0.0f ? -1.0f : 1.0f;
         }
     }
-    if (DAT_004474f4->turning == 0) {
+    if (g_mapCamera->turning == 0) {
         if (left != 0) {
-            DAT_004474f4->angle = DAT_004474f4->angle + step;
+            g_mapCamera->angle = g_mapCamera->angle + step;
         } else if (right != 0) {
-            DAT_004474f4->angle = DAT_004474f4->angle - step;
+            g_mapCamera->angle = g_mapCamera->angle - step;
         }
     } else {
-        f32 remaining = FUN_0027eee0(DAT_004474f4->angle, DAT_004474f4->turnTarget);
+        f32 remaining = FUN_0027eee0(g_mapCamera->angle, g_mapCamera->turnTarget);
 
-        camera = DAT_004474f4;
+        camera = g_mapCamera;
         if (remaining <= 15.5f) {
             camera->angle = camera->turnTarget;
             camera->turning = 0;
@@ -110,19 +110,19 @@ void FUN_0026413c(void)
         } else {
             camera->angle = camera->angle - 15.0f;
         }
-        if (DAT_004474f4->turning != 0) {
-            state->angle = DAT_004474f4->angle;
+        if (g_mapCamera->turning != 0) {
+            state->angle = g_mapCamera->angle;
             return;
         }
     }
-    camera = DAT_004474f4;
+    camera = g_mapCamera;
     if (camera->angle < 0.0f) {
         camera->angle = camera->angle + 360.0f;
     }
     if (camera->angle >= 360.0f) {
         camera->angle = camera->angle - 360.0f;
     }
-    state->angle = DAT_004474f4->angle;
+    state->angle = g_mapCamera->angle;
 }
 
 }

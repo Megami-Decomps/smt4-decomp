@@ -4905,3 +4905,6 @@
 002b4670 itemTableGetItemRecord inferred Finds an item record by id in item/ItemTable.tbb table 1 (0x80-byte rows: id 0x60, stack limit 0x71, buy 0x78, sell 0x7C). Twin of smt4a itemTableGetItemRecord.
 002b45e8 itemTableGetEquipmentRecord inferred Finds an equipment record by id in item/ItemTable.tbb table 2 (0xA8-byte rows in IV: id 0x50, buy 0x9C, sell 0xA0).
 002b63c0 questDataGetRecord inferred Finds a quest record by id in event/quest/QuestData.tbb (0x1B4-byte rows in IV).
+004ea81c g_vectorScratch inferred Vector and matrix scratch workspace (vec4 at 0x100/0x110, matrices at 0x140/0x180) that ~50 units use for colours, vectors and quaternions. Twin of smt4a g_vectorScratch.
+004474f4 g_mapCamera inferred Pointer to the map/field camera state (eye, target and up vectors, heading at 0x18, turn transition at 0xB8, scalar tracks at 0xC4).
+00465120 g_asdMemState inferred The engine allocator state (allocation tag, lock, usage, memory-map debug processes, region bases and sizes). Twin of smt4a g_asdMemState.

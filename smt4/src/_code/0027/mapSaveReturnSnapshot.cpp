@@ -16,7 +16,7 @@ struct MapSnapshotSource {
 
 extern "C" {
 extern MapMainView *g_mapMain;
-extern MapSnapshotSource *DAT_004474f4;
+extern MapSnapshotSource *g_mapCamera;
 
 // Unless a skip is pending, record the current map and scene position as both saved and target snapshots.
 void mapSaveReturnSnapshot(void)
@@ -32,12 +32,12 @@ void mapSaveReturnSnapshot(void)
         g_gameState.savedObjectId = g_gameState.currentObjectId;
         g_gameState.savedPosition = g_lmapScene->pose.position;
         g_gameState.savedHeading = g_lmapScene->pose.heading;
-        g_gameState.savedHeadingCopy = DAT_004474f4->value;
+        g_gameState.savedHeadingCopy = g_mapCamera->value;
         g_gameState.targetMapId = map->mapId;
         g_gameState.targetAreaId = map->areaId;
         g_gameState.targetPosition = g_lmapScene->pose.position;
         g_gameState.targetHeading = g_lmapScene->pose.heading;
-        g_gameState.targetHeadingCopy = DAT_004474f4->value;
+        g_gameState.targetHeadingCopy = g_mapCamera->value;
     }
 }
 }

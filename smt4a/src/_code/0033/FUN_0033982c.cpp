@@ -24,7 +24,7 @@ typedef struct {
     unsigned int sp60; /* 0x60: local_60 */
 } void_stack;
 
-extern signed char DAT_005806a0; /* 0x5806a0 */
+extern signed char g_lmapViewHolder; /* 0x5806a0 */
 extern unsigned int g_lmapView; /* 0x5806a4 */
 extern float DAT_005806a8; /* 0x5806a8 */
 extern float DAT_005806ac; /* 0x5806ac */
@@ -397,16 +397,16 @@ LAB_00339bb4:
       temp_v16 = -temp_v16;
     }
     if ((int)temp_v16 >= 0x432a0001) {
-      DAT_005806a0 = '\0';
+      g_lmapViewHolder = '\0';
     }
     else if ((int)temp_v16 >= 0x41a00001) {
-      DAT_005806a0 = '\x01';
+      g_lmapViewHolder = '\x01';
     }
   }
   else {
-    DAT_005806a0 = '\0';
+    g_lmapViewHolder = '\0';
   }
-  if (DAT_005806a0 == '\0') {
+  if (g_lmapViewHolder == '\0') {
     DAT_005806a8 = temp_v20;
     FUN_0030250c();
     return;
@@ -536,7 +536,7 @@ LAB_00339bb4:
     }
   }
   if (DAT_005806a8 > temp_v16) {
-    DAT_005806a0 = '\0';
+    g_lmapViewHolder = '\0';
     DAT_005806a8 = temp_v20;
     *(float *)(g_lmapView + 0x18) = DAT_005806ac;
     temp_v20 = DAT_005806a8;

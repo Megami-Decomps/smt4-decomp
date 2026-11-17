@@ -4,10 +4,10 @@ namespace { struct MatrixHalf { f32 values[8]; }; struct Matrix44 { MatrixHalf f
 
 extern "C" {
 /* Reads or updates the requested state. */
-extern MatrixState DAT_006471dc;
+extern MatrixState g_vectorScratch;
 void matrixCopyToGlobal(const Matrix44 *matrix)
 {
-    DAT_006471dc.matrix.first = matrix->first;
-    DAT_006471dc.matrix.second = matrix->second;
+    g_vectorScratch.matrix.first = matrix->first;
+    g_vectorScratch.matrix.second = matrix->second;
 }
 }

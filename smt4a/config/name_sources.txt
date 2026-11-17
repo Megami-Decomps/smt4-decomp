@@ -7416,3 +7416,8 @@
 00192550 itemTableGetItemRecord inferred Finds an item record by id in item/ItemTable.tbb table 1. Twin of smt4 itemTableGetItemRecord.
 00192608 itemTableGetEquipmentRecord inferred Finds an equipment record by id in item/ItemTable.tbb table 2 (0xA8-byte rows in IV: id 0x50, buy 0x9C, sell 0xA0).
 001ad9b4 questDataGetRecord inferred Finds a quest record by id in event/quest/QuestData.tbb (0x1B4-byte rows in IV).
+006471dc g_vectorScratch inferred Vector and matrix scratch workspace. Twin of smt4 g_vectorScratch.
+005713f0 g_btlSkillResponseMasks inferred Table of u64 masks the battle code tests a skill's response against (20 units).
+005806a0 g_lmapViewHolder inferred Holds the lmap view (its .view is g_lmapView's object).
+005b4028 DAT_005b4028 inferred Name withdrawn: the block is the whole allocator state (renamed g_asdMemState).
+005b4028 g_asdMemState inferred The engine allocator state; twin of smt4 g_asdMemState (region bases/sizes are only part of it).

@@ -38,17 +38,17 @@ static __inline void *alignedAllocationInit(AlignedAllocationHeader *header, u32
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 pool, u32 size, u32 flags)
 {
     if (heap != ASD_HEAP_VRAM_A && heap != ASD_HEAP_VRAM_B) {
-        nn_os_CriticalSection_Enter(DAT_00465120.lock);
+        nn_os_CriticalSection_Enter(g_asdMemState.lock);
         u32 paddedSize = (size + 0x100 + sizeof(AlignedAllocationHeader) - 1) & ~0x7f;
         void *block = FUN_002b24d8(heap, alignment, pool, paddedSize, flags);
         void *memory = alignedAllocationInit((AlignedAllocationHeader *)block, paddedSize, 0x80, 0);
         rt_memclr(memory, size);
-        nn_os_CriticalSection_Leave(DAT_00465120.lock);
+        nn_os_CriticalSection_Leave(g_asdMemState.lock);
         return memory;
     }
-    nn_os_CriticalSection_Enter(DAT_00465120.lock);
+    nn_os_CriticalSection_Enter(g_asdMemState.lock);
     void *memory = FUN_002b24d8(heap, alignment, pool, size, flags);
-    nn_os_CriticalSection_Leave(DAT_00465120.lock);
+    nn_os_CriticalSection_Leave(g_asdMemState.lock);
     return memory;
 }
 }

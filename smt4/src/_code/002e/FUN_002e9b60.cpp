@@ -29,7 +29,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } void_stack;
 
-extern int DAT_004474f4; /* 0x4474f4 */
+extern int g_mapCamera; /* 0x4474f4 */
 extern int g_lmapScene; /* 0x447e88 */
 
 
@@ -146,7 +146,7 @@ void FUN_002e9b60(void)
               else {
                 temp_v8 = 4;
               }
-              *(unsigned int *)(DAT_004474f4 + 0xc) = temp_v8;
+              *(unsigned int *)(g_mapCamera + 0xc) = temp_v8;
               nearestPoint = *(const Vec3f *)(temp_v0 + 0x28);
               lmapFindNearestMatchingTargetPoint(2, 10, 0x66, &nearestPoint, &nearestYaw, -1, nearestPoint);
               temp_v0 = g_lmapScene;
@@ -167,8 +167,8 @@ void FUN_002e9b60(void)
             else {
               temp_v0 = padIsButtonPressed(5);
               if ((temp_v0 != 0) || (temp_v0 = inputIsQuestMenuPressed(), temp_v0 != 0)) {
-                temp_v0 = DAT_004474f4;
-                *(unsigned int *)(DAT_004474f4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
+                temp_v0 = g_mapCamera;
+                *(unsigned int *)(g_mapCamera + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
                 *(unsigned int *)(temp_v0 + 0xac) = 0;
                 FUN_0027fc14(0);
                 temp_v0 = g_lmapScene;
@@ -207,7 +207,7 @@ void FUN_002e9b60(void)
         *(unsigned int *)(temp_v0 + 0x30) = temp_v3;
         *(unsigned int *)(temp_v0 + 0x50) = g_gameState.overviewHeading;
         FUN_0027fc14(0xc);
-        *(unsigned int *)(DAT_004474f4 + 0xac) = 0xfffffffd;
+        *(unsigned int *)(g_mapCamera + 0xac) = 0xfffffffd;
         buttonHelpSetPreset(0xdb);
         mapIfActivateRecord(1,g_gameState.overviewRecord);
         MapMarkerPosition marker;
@@ -273,8 +273,8 @@ void FUN_002e9b60(void)
     }
     if ((*(int *)(g_lmapScene + 8) >= 0x1f) && (temp_v0 = mapIfHasSelection(), temp_v0 == 0)) {
       mapDestroySecondaryModel();
-      temp_v0 = DAT_004474f4;
-      *(float *)(DAT_004474f4 + 0x18) = *(float *)(g_lmapScene + 0x50) + temp_v5;
+      temp_v0 = g_mapCamera;
+      *(float *)(g_mapCamera + 0x18) = *(float *)(g_lmapScene + 0x50) + temp_v5;
       *(unsigned int *)(temp_v0 + 0xac) = 0;
       FUN_0027fc14(0);
       temp_v0 = g_lmapScene;

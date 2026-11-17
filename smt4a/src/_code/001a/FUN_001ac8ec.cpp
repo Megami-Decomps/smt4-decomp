@@ -55,7 +55,7 @@ struct EmitterScratch {
 
 extern "C" {
 
-extern EmitterScratch DAT_006471dc;
+extern EmitterScratch g_vectorScratch;
 
 /* Multiplies each component of the vector by `factor`. */
 static inline void scale(Vec4 &vector, f32 factor)
@@ -98,28 +98,28 @@ void FUN_001ac8ec(EmitterSet *set, f32 deltaTime)
         } else {
             f32 factor;
 
-            DAT_006471dc.first = particle->color;
+            g_vectorScratch.first = particle->color;
             factor = particle->intensity;
             if ((particle->flags2 & PARTICLE_TIME_SCALED) != 0) {
                 factor = factor * scaledTime;
             }
-            scale(DAT_006471dc.first, factor);
-            color = DAT_006471dc.first;
+            scale(g_vectorScratch.first, factor);
+            color = g_vectorScratch.first;
             if (g_handlerTable[particle->emitter->type].setColor != NULL) {
                 g_handlerTable[particle->emitter->type].setColor(particle->emitter->data, &color);
             }
         }
         if ((particle->flags & PARTICLE_HAS_OFFSET) != 0) {
-            DAT_006471dc.first = set->offset;
-            DAT_006471dc.second = set->origin;
-            add(DAT_006471dc.first, DAT_006471dc.second);
+            g_vectorScratch.first = set->offset;
+            g_vectorScratch.second = set->origin;
+            add(g_vectorScratch.first, g_vectorScratch.second);
             if ((particle->flags & PARTICLE_FIXED_HEIGHT) != 0) {
-                DAT_006471dc.first.y = 5.0f;
+                g_vectorScratch.first.y = 5.0f;
             }
-            DAT_006471dc.second = particle->velocity;
-            scale(DAT_006471dc.second, scaledTime);
-            add(DAT_006471dc.first, DAT_006471dc.second);
-            position = DAT_006471dc.first;
+            g_vectorScratch.second = particle->velocity;
+            scale(g_vectorScratch.second, scaledTime);
+            add(g_vectorScratch.first, g_vectorScratch.second);
+            position = g_vectorScratch.first;
             if (g_handlerTable[particle->emitter->type].setPosition != NULL) {
                 g_handlerTable[particle->emitter->type].setPosition(particle->emitter->data, &position);
             }

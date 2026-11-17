@@ -9,7 +9,7 @@
 struct SpawnViewHeading { u8 prefix[0x18]; f32 heading; };
 extern "C" {
 extern MapEnemy *g_mapEnemy;
-extern SpawnViewHeading *DAT_004474f4;
+extern SpawnViewHeading *g_mapCamera;
 u32 randNextInRange(u32 maximum);
 s32 FUN_0025b4b0(const MapVector *start, const MapVector *end, MapVector *hit);
 f32 mathPositionHeadingDegrees(f32 x, f32 y, f32 z, f32 targetX, f32 targetY, f32 targetZ);
@@ -20,7 +20,7 @@ u32 FUN_002dfb48(MapEnemyEncounterView *entry)
     for (s32 attempt = 0; attempt < 4; ++attempt) {
         MapVector candidate = g_lmapScene->pose.position;
         s32 sequence = enemies->unk3044;
-        f32 heading = DAT_004474f4->heading;
+        f32 heading = g_mapCamera->heading;
         f32 radius;
         if (g_gameState.map.unk44 != 0) {
             if (sequence > 0) {

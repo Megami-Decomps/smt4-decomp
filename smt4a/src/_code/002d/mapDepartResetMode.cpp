@@ -6,11 +6,11 @@ extern "C" {
 void mapDepartResetMode(void)
 {
     if (g_gameState.unk5F0 == 1) {
-        DAT_005806a0.view->contextValue = 0;
+        g_lmapViewHolder.view->contextValue = 0;
     } else {
-        DAT_005806a0.view->mode = 0;
-        DAT_005806a0.view->contextValue = 2;
-        DAT_005806a0.view->contextMode = 0;
+        g_lmapViewHolder.view->mode = 0;
+        g_lmapViewHolder.view->contextValue = 2;
+        g_lmapViewHolder.view->contextMode = 0;
     }
 }
 }

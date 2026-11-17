@@ -16,9 +16,9 @@ void settings5BSetValue(s8 value);
 // Restore the previous static pose, load the requested camera clip, then sample its first frame.
 void FUN_0035243c(s32 mapId, s32 variant)
 {
-    if (DAT_005806a0.view->clip != NULL) {
-        delete DAT_005806a0.view->clip;
-        LmapViewA *view = DAT_005806a0.view;
+    if (g_lmapViewHolder.view->clip != NULL) {
+        delete g_lmapViewHolder.view->clip;
+        LmapViewA *view = g_lmapViewHolder.view;
         view->clip = NULL;
         const MapVector eye = view->homeEye;
         const MapVector target = view->homeTarget;
@@ -45,7 +45,7 @@ void FUN_0035243c(s32 mapId, s32 variant)
     Obj557af8 *camera = static_cast<Obj557af8 *>(storage);
     if (camera != NULL)
         camera = new (camera) Obj557af8(resource);
-    LmapViewA *view = DAT_005806a0.view;
+    LmapViewA *view = g_lmapViewHolder.view;
     view->clip = camera;
     controllerApplyAtUnitScale(camera, &view->homeEye, 0);
     if (settings5BGetValue())

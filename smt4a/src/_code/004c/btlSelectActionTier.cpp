@@ -17,7 +17,7 @@ struct ActionTierMasks {
     u64 forced;
 };
 extern "C" {
-extern ActionTierMasks DAT_005713f0;
+extern ActionTierMasks g_btlSkillResponseMasks;
 s32 btlAnyEventFilterMatches(BtlMainStateA *, BtlCombatantEntryA *, u32);
 s32 lcgRandomRange(u32);
 s32 gameFlagIsSet(u32);
@@ -31,7 +31,7 @@ u32 btlSelectActionTier(u32 unitId)
     if (special && special->properties[24] > 0 && !btlAnyEventFilterMatches(btlGetMainState(), unit, 3)) {
         s32 roll = lcgRandomRange(99);
         ActionTierBattleFlags *battle = (ActionTierBattleFlags *)btlGetMainState();
-        if (battle->flags & DAT_005713f0.forced)
+        if (battle->flags & g_btlSkillResponseMasks.forced)
             roll = 0;
         if (gameFlagIsSet(0x1fb) || roll < 70)
             tier = 3;
@@ -54,9 +54,9 @@ u32 btlSelectActionTier(u32 unitId)
     if (btlAnyEventFilterMatches(btlGetMainState(), unit, tier))
         return 0;
     switch (tier) {
-    case 1: unit->flags |= DAT_005713f0.first; break;
-    case 2: unit->flags |= DAT_005713f0.second; break;
-    case 3: unit->flags |= DAT_005713f0.third; break;
+    case 1: unit->flags |= g_btlSkillResponseMasks.first; break;
+    case 2: unit->flags |= g_btlSkillResponseMasks.second; break;
+    case 3: unit->flags |= g_btlSkillResponseMasks.third; break;
     }
     return tier;
 }

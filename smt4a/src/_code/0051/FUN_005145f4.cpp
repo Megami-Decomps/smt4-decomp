@@ -27,7 +27,7 @@ void premultiply(const Matrix44 *leftMatrix, Matrix44 *rightMatrix)
 }
 }
 extern "C" {
-extern MatrixRotationWork DAT_006471dc;
+extern MatrixRotationWork g_vectorScratch;
 
 // Premultiply the current matrix by the next matrix in the global transform work.
 void FUN_005145f4()
@@ -35,7 +35,7 @@ void FUN_005145f4()
     // The second matrix follows the documented 0x180-byte rotation-work prefix.
     struct MatrixCompositionView { MatrixRotationWork work; Matrix44 transform; };
     typedef char MatrixCompositionOffset[offsetof(MatrixCompositionView, transform) == 0x180 ? 1 : -1];
-    MatrixCompositionView *view = reinterpret_cast<MatrixCompositionView *>(&DAT_006471dc);
+    MatrixCompositionView *view = reinterpret_cast<MatrixCompositionView *>(&g_vectorScratch);
     premultiply(&view->transform, &view->work.rotation);
 }
 }
