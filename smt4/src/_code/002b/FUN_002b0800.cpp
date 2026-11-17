@@ -1,14 +1,7 @@
-#include "common.h"
-#include "code/Code002b_Smt4.h"
+#include "font/TextLayoutApi.h"
 
-extern "C" {
-
-void FUN_002b080c(int *param_1, int arg1, int arg2);
-
-/* Forwards to FUN_002b080c, the function that follows it, with its two optional arguments at their defaults. */
-void FUN_002b0800(int *param_1)
+/* Draw/layout the whole text, forwarding all four floating-point inputs. */
+extern "C" f32 FUN_002b0800(void *text, f32 x, f32 y, f32 depth, f32 opacity)
 {
-    FUN_002b080c(param_1, 0, -1);
+    return FUN_002b080c(text, 0, -1, x, y, depth, opacity);
 }
-
-} /* extern "C" */

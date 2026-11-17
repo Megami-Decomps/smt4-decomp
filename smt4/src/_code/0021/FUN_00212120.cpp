@@ -1,3 +1,4 @@
+#include "font/TextLayoutApi.h"
 /* NON_MATCHING: written with an inlined copy of infoWinSetMessage, everything matches except that retail loads the g_infoWin pool word into r9 before the FUN_002cf11c call, this build after the fileSectionGetData test. */
 #include "ui/UiSpriteApi.h"
 #include "font/InfoWin.h"
@@ -6,7 +7,6 @@ extern "C" {
 void *FUN_002cf11c(void);
 void *fileSectionGetData(void *, u32, u32);
 void asdTextDrawDirectoryEntry(void *, u32, s32, u32, u32, void *, u32);
-f32 effectSpawnDefaultArguments(void *);
 }
 
 /* infoWinSetMessage, inlined from the same file. */

@@ -9,7 +9,7 @@ extern "C" {
 
 u8 infoWindowIsActive(void);
 
-void FUN_002b0800(int *param_1);
+f32 FUN_002b0800(void *text, f32 x, f32 y, f32 depth, f32 opacity);
 
 void FUN_002b011c(void);
 
