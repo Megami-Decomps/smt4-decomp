@@ -11,7 +11,7 @@ int libm_cosf(void);
 int libm_sinf(int, int);
 int FUN_002296b0(int);
 int FUN_00281b94(...);
-int FUN_002c5468(void);
+int mapRebuildWallAutoTiles(void);
 int FUN_002c553c(void);
 int FUN_002c670c(int);
 int FUN_002ddea0(void);
@@ -45,7 +45,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002296b0. */
 extern int gameDataIsFlagByteSet(int);
 /* Supplied declaration required: FUN_00281b94. */
-/* Supplied declaration required: FUN_002c5468. */
+/* Supplied declaration required: mapRebuildWallAutoTiles. */
 /* Supplied declaration required: FUN_002c553c. */
 /* Supplied declaration required: FUN_002c670c. */
 /* Supplied declaration required: FUN_002ddea0. */
@@ -112,7 +112,7 @@ void FUN_00239c24(void)
         DAT_0060ff94 = 0;
         FUN_002edf08();
       }
-      FUN_002c5468();
+      mapRebuildWallAutoTiles();
       FUN_00398004(1);
     }
   }
@@ -189,7 +189,7 @@ void FUN_00239c24(void)
     else {
       FUN_002edf08();
     }
-    FUN_002c5468();
+    mapRebuildWallAutoTiles();
     FUN_00398004(1);
   }
   FUN_002c553c();

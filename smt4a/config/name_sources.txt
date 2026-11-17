@@ -7427,3 +7427,4 @@
 005b4028 g_asdMemState inferred The engine allocator state; twin of smt4 g_asdMemState (region bases/sizes are only part of it).
 002c7e6c statusAcquireSharedResources inferred Initializes shared status-screen work, tasks, animation resources and partner assets on the first reference, then increments the reference count.
 002cdad4 btlEventPanelInitialize inferred Initializes BtlUiA.objB at parent+0x24BC: animation resources and seven-sprite event panel; four canonical key tables verified against original bytes.
+002c5468 mapRebuildWallAutoTiles inferred Rebuilds interior state-2 wall cells from four state-1 neighbor bits; writes MapCell.autoTile fields using two 16-byte tables. Native writable data at 005814A4/005814B4 verified byte-for-byte; source constness corrected to match segment ownership.

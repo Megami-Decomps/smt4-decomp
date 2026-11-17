@@ -68951,12 +68951,12 @@
     },
     {
       "address": "0x2c5468",
-      "function": "FUN_002c5468",
+      "function": "mapRebuildWallAutoTiles",
       "module": "_code",
-      "object": "build/obj/_code/002c/FUN_002c5468.o",
+      "object": "build/obj/_code/002c/mapRebuildWallAutoTiles.o",
       "size": 208,
-      "source": "src/_code/002c/FUN_002c5468.cpp",
-      "target": "orig/target/_code/002c/FUN_002c5468.o",
+      "source": "src/_code/002c/mapRebuildWallAutoTiles.cpp",
+      "target": "orig/target/_code/002c/mapRebuildWallAutoTiles.o",
       "thumb": false
     },
     {
