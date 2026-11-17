@@ -37,10 +37,14 @@ struct MapJumpTransition {
     u32 unk24;
     u32 state;
     u32 substate;
-    u8 unk30[0x12];
+    u8 unk30[0xC];
+    u16 returnMap;      /* 0x3C: the map a return request goes back to */
+    u8 unk3E[2];
+    u16 returnEntrance; /* 0x40 */
     MapJumpDestination destination;
 };
 typedef char MapJumpTransitionLayoutCheck[offsetof(MapJumpTransition, destination) == 0x42 &&
+    offsetof(MapJumpTransition, returnMap) == 0x3C && offsetof(MapJumpTransition, returnEntrance) == 0x40 &&
     sizeof(MapJumpDestination) == 6 && sizeof(MapJumpRequest) == 0x18 &&
     offsetof(MapJumpRequest, kind) == 0 && offsetof(MapJumpRequest, map) == 1 &&
     offsetof(MapJumpRequest, entrance) == 2 && offsetof(MapJumpRequest, object) == 3 &&

@@ -1,6 +1,7 @@
 #ifndef SHARD_W6_W6MATCH7_BATTLEEFFECTS_H
 #define SHARD_W6_W6MATCH7_BATTLEEFFECTS_H
 #include "common.h"
+#include <stddef.h>
 
 struct BattleEffectSetup {
     /* 0x000 */ u8 unk00[0xc];
@@ -76,7 +77,9 @@ struct BattleRosterMotionA {
     /* 0x088 */ u32 opacity;
     /* 0x08C */ u32 colorTarget;
     /* 0x090 */ u32 colorStart;
-    /* 0x094 */ u8 unk094[0x10];
+    /* 0x094 */ u8 unk094[0xC];
+    /* 0x0A0 */ u8 useAlternateState;
+    /* 0x0A1 */ u8 unk0A1[3];
     /* 0x0A4 */ u32 pulseFrame;
     /* 0x0A8 */ u32 pulseDuration;
     /* 0x0AC */ u32 motionDuration;
@@ -130,6 +133,7 @@ static __inline u32 battleBlendColorComponent(u32 target, u32 start, u32 mask, f
     return (start + (u32)((f32)(target - start) * progress)) & mask;
 }
 typedef char BattleRosterMotionASizeCheck[sizeof(BattleRosterMotionA) == 0x1D0 ? 1 : -1];
+typedef char BattleRosterMotionAStateOffsetCheck[offsetof(BattleRosterMotionA, useAlternateState) == 0xA0 ? 1 : -1];
 typedef char BattleEffectGlobalsSizeCheck[sizeof(BattleEffectGlobals) == 0xA0 ? 1 : -1];
 
 #endif

@@ -4,10 +4,9 @@
 #include "AsdSDK/AsdMemAlloc.h"
 #include <string.h>
 
-static __inline void quaternionSetIdentity(EffLightVec4 *quaternion)
+static void quaternionSetIdentity(EffLightVec4 *quaternion)
 {
-    EffLightVec4 zero = {0, 0, 0, 0};
-    *quaternion = zero;
+    memset(quaternion, 0, sizeof(*quaternion));
     quaternion->w = 1.0f;
 }
 
@@ -16,7 +15,6 @@ extern "C" {
 extern const char DAT_005449b4[];
 
 void sysMemClear(void *block, s32 size);
-void __aeabi_memcpy4(void *dst, const void *src, s32 size);
 
 /* Creates a light effect object as a copy of `src`'s parameters. */
 EffAsdLight *effAsdLightCopy(EffAsdLight *src)
@@ -31,7 +29,7 @@ EffAsdLight *effAsdLightCopy(EffAsdLight *src)
     quaternionSetIdentity(&light->rotation1);
     light->unk24 = -1;
     light->scale = 1.0f;
-    __aeabi_memcpy4(light->params, src->params, 0xb4);
+    memcpy(light->params, src->params, 0xb4);
     return light;
 }
 

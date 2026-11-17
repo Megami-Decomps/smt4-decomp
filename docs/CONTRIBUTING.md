@@ -51,6 +51,13 @@ Every match must be one a programmer could have written for a reason.
   in `r1`/`r2` is usually an argument the decompiler dropped), signed/unsigned and width choices,
   `for`/`while`/`switch` shapes, early returns, pointer variables that a programmer would use to
   walk an array or struct, and small `static __inline` accessors in headers.
+- **A helper needs evidence besides the diff.** A `static` or `static __inline` helper belongs in the
+  source only when something other than the match supports it: it is called at two or more sites,
+  the twin or a sibling performs the same operation, a header already declares it, or its body is
+  that of a real function (a getter retail inlined elsewhere). A single-use wrapper around one store
+  or one call whose only effect is to move armcc's scheduling is register steering: the function
+  stays `NON_MATCHING`. Prove a helper by putting it in the shared header and using it at its other
+  sites (the twin, the siblings); if they match too, it was real.
 - A near miss stays as it is with a `/* NON_MATCHING: ... */` comment saying what still differs.
   Don't keep a fake match to raise the count.
   Before treating a small diff as allocation, check the actual constants, member offsets and full
@@ -249,6 +256,14 @@ a sibling setter or another user of the same lookup is usually written the same 
   the return value in a callee-saved register.
 - Conversions through `static __inline f32 get(p) { return p->field; }`; rounding as
   `f32 half = 0.5f;` declared first, then `floorf(scaled + half)`.
+- A plain `static` function that armcc inlines on its own and the same body marked `static __inline`
+  do not always schedule alike: once a helper has evidence, try both (the basename helper of
+  `FUN_003dbb40`, the same expression as in `FUN_003dadd8` and `FUN_003dba3c`; the map-camera accessor
+  of smt4a `FUN_002442ac`, read twice around a call).
+- Float and integer arguments travel in separate register banks, so a prototype that lists the floats
+  in the wrong place still links and runs, but it changes where armcc loads the float literals
+  against the integer argument moves. Settle the order from the callee's definition and all its
+  callers, not from one caller's match.
 
 **Helpers**
 - A stack key or temporary in scope at the end (a `bsearch` key, a copied struct) blocks retail's

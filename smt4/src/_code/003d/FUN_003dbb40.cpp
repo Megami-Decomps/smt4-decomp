@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the order of `mov r1, #47` against `mov r0, r5` before the libc_strrchr call differs (retail sets the path pointer first). */
 #include "common.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
@@ -29,8 +28,14 @@ void memClear(void *block, u32 size);
 void asdMemFree(void *block);
 void textFormatBuffer(char *buffer, const char *format, const char *arg);
 char *libc_strcpy(char *dst, const char *src);
-char *libc_strrchr(const char *string, s32 character);
+const u8 *libc_strrchr(const u8 *string, u32 character);
 s32 keyedRecordFindByName(const char *name);
+
+static const char *fileNameFromPath(const char *path)
+{
+    const u8 *separator = libc_strrchr(reinterpret_cast<const u8 *>(path), '/');
+    return reinterpret_cast<const char *>(separator + 1);
+}
 
 /* Reset the owner's file slot to the formatted path and start loading it unless it is already registered. */
 s32 FUN_003dbb40(LoadedFileOwner *owner)
@@ -52,7 +57,7 @@ s32 FUN_003dbb40(LoadedFileOwner *owner)
     textFormatBuffer(formatted, strings->format, strings->base);
     libc_strcpy(path, formatted);
     char *fullPath = path;
-    libc_strcpy(file->name, libc_strrchr(fullPath, '/') + 1);
+    libc_strcpy(file->name, fileNameFromPath(fullPath));
     if (keyedRecordFindByName(file->name) == 0xff) {
         asdLoadFileAsyncSimple(fullPath, reinterpret_cast<u32 *>(&file->data), 0);
         file->flags |= 1;

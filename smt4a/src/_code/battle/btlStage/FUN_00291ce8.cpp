@@ -1,4 +1,4 @@
-/* NON_MATCHING: allocation-result, selection-sentinel, and preparation-argument instruction scheduling differ. */
+/* NON_MATCHING: the -1 selection store goes through r0 instead of the stage copy in r5, and btlActionPrepareFromSource sets r0 before r1 (the smt4 twin FUN_001e2350 has the same two differences). */
 #include "battle/btlStage.h"
 #include "battle/btlMain.h"
 #include "AsdSDK/AsdDebug.h"
@@ -35,9 +35,10 @@ void FUN_00291ce8(BtlMainStateA *owner)
     StageOwnerView *work = (StageOwnerView *)owner;
     work->job = taskCreateDraw("btlStage Calc", 4, 0, 0, btlStageRunWork, btlStageDestroy, owner, owner->job);
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlStage.cpp", 472);
-    BtlStage *stage = (BtlStage *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(BtlStage), 1);
-    g_btlStage.stage = stage;
-    stage->apocalypse.parameters[0] = stage->apocalypse.parameters[1] = stage->apocalypse.parameters[2] = 0.0f;
+    BtlStage *stage = g_btlStage.stage = (BtlStage *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(BtlStage), 1);
+    for (s32 i = 2; i >= 0; --i) {
+        stage->apocalypse.parameters[i] = 0.0f;
+    }
     stage->apocalypse.selection = -1;
     if (work->identifiers.stageId < 0 || work->identifiers.stageVariant < 0) {
         btlActionPrepareFromSource(owner, &work->prepared, 0);

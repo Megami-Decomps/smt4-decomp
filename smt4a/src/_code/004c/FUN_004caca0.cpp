@@ -1,34 +1,10 @@
-/* NON_MATCHING: register allocation only (predicated state stores come out streq-first; unit address temp uses r0/r1 the other way round) */
-/* Puts every ready, unlocked unit of a unit group into state 5/6 (6 if unk A0 is set). */
-#include "common.h"
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
 extern "C" {
 
-typedef struct Unit {
-    /* 0x00 */ u8 unk00[0x48];
-    /* 0x48 */ u32 state;
-    /* 0x4C */ u32 unk4C;
-    /* 0x50 */ u32 flags;
-    /* 0x54 */ u32 unk54;
-    /* 0x58 */ u32 flags2;
-    /* 0x5C */ u32 unk5C;
-    /* 0x60 */ u16 flags3;
-    /* 0x62 */ u8 unk62[0x3E];
-    /* 0xA0 */ u8 unkA0;
-    /* 0xA1 */ u8 unkA1[0x12F];
-} Unit; /* 0x1D0 */
-
-typedef struct UnitManager {
-    /* 0x0000 */ u8 unk0000[0x1ED4];
-    /* 0x1ED4 */ Unit *units;
-} UnitManager;
-
-void FUN_004caca0(UnitManager *mgr, s32 group, s32 setBit3, s32 keepFlag)
+static void getUnitGroupRange(s32 group, s32 &first, s32 &count)
 {
-    s32 first = 0;
-    s32 count = 0;
-    s32 i;
-
     if (group == 0) {
         count = 4;
     } else if (group == 1) {
@@ -41,27 +17,40 @@ void FUN_004caca0(UnitManager *mgr, s32 group, s32 setBit3, s32 keepFlag)
         first = 0x43;
         count = 0x2a;
     }
+}
+
+// Put the ready, unlocked members of the group into their normal or alternate state.
+void FUN_004caca0(BtlMainStateA *battle, s32 group, s32 enableMotion, s32 keepStatus)
+{
+    s32 first = 0;
+    s32 count = 0;
+    s32 i;
+
+    getUnitGroupRange(group, first, count);
     for (i = first; i < first + count; i++) {
-        Unit *unit = &mgr->units[i];
-        u32 flags = unit->flags;
+        BattleRosterMotionA *motion = &battle->roster[i].motion;
+        u32 flags = motion->flags;
 
         if ((flags & 1) != 0 && (flags & 0x80) != 0 && (flags & 2) == 0) {
-            if (unit->unkA0 == 0) {
-                unit->state = 5;
-            } else {
-                unit->state = 6;
+            switch (motion->useAlternateState) {
+            case 0:
+                motion->state = 5;
+                break;
+            default:
+                motion->state = 6;
+                break;
             }
-            u32 flags2 = (unit->flags2 & ~6) | 1;
-            unit->flags2 = flags2;
-            if (setBit3 != 0) {
-                flags2 |= 8;
+            u32 renderFlags = (motion->renderFlags & ~6) | 1;
+            motion->renderFlags = renderFlags;
+            if (enableMotion != 0) {
+                renderFlags |= 8;
             }
-            unit->unk4C = 0;
-            if (setBit3 != 0) {
-                unit->flags2 = flags2;
+            motion->stateFrame = 0;
+            if (enableMotion != 0) {
+                motion->renderFlags = renderFlags;
             }
-            if (keepFlag == 0) {
-                unit->flags3 |= 0x200;
+            if (keepStatus == 0) {
+                motion->statusFlags |= 0x200;
             }
         }
     }

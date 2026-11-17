@@ -1,4 +1,3 @@
-/* NON_MATCHING: instructions now match; only the literal pool order differs (armcc puts the reused 100/0/1/50 floats before the global address, retail keeps first-use order). */
 #include "map/LmapViewGlobals.h"
 
 extern "C" {
@@ -6,10 +5,15 @@ void FUN_00303710(void);
 void FUN_00352a14(void);
 extern Obj557c48 *g_handleRegistry;
 
+static LmapViewA *mapCameraView()
+{
+    return g_lmapViewHolder.view;
+}
+
 // Reset the map camera's defaults, transitions, and tracked resource handle.
 void FUN_002442ac(void)
 {
-    LmapViewA *camera = g_lmapViewHolder.view;
+    LmapViewA *camera = mapCameraView();
     camera->mode = 0;
     camera->phase = 0;
     camera->unk008 = 0;
@@ -58,7 +62,7 @@ void FUN_002442ac(void)
     camera->axis.y = 0.0f;
     camera->axis.z = 1.0f;
     FUN_00352a14();
-    camera = g_lmapViewHolder.view;
+    camera = mapCameraView();
     camera->clip = NULL;
     camera->modelManager = g_handleRegistry;
     FUN_00303710();
