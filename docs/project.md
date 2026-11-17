@@ -15,7 +15,7 @@ smt4/, smt4a/     one project per game: config/, include/, src/, objdiff.json, b
   tools/relink.py          links the whole .code from the compiled objects and compares it with retail;
                            --matched writes build/relink/proof.json, what the progress site credits
 include/              headers both games share: structs and accessors, by original source file
-docs/                 the contribution guide and these notes
+docs/                 the contribution guide and these notes; docs/notes/ holds the evidence for single matches
 tools/assign_tus.py   places functions in source files from assert paths and file-local data
 tools/shared.py       pairs the functions both games share and compares their progress
 tools/fdiff.py        compiles one function and diffs its disassembly and relocations against retail

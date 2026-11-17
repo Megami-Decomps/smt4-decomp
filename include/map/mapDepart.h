@@ -3,6 +3,17 @@
 #define MAP_MAPDEPART_H
 
 #include "common.h"
+
+/* Request consumed by MapDepart_Init; the second argument is its byte size. */
+struct MapDepartureRequest {
+    s32 mode;
+    s32 map;
+    s32 entry;
+    u32 unk0C;
+    u32 destinationState[4];
+};
+typedef char MapDepartureRequestSize[sizeof(MapDepartureRequest) == 0x20 ? 1 : -1];
+
 #include <stddef.h>
 struct BtlUi;
 
@@ -34,7 +45,10 @@ typedef struct MapDepartWork {
         /* 0x10 */ AsdMdlObject *nodeB;
     };
     /* 0x14 */ s16 state;
-    /* 0x16 */ u8 unk16[10];
+    /* 0x16 */ u8 unk16[2];
+    /* 0x18 */ s32 skyId;        /* optional asynchronous sky archive */
+    /* 0x1C */ s16 loadMapId;
+    /* 0x1E */ s16 loadAreaId;
     /* 0x20 */ void *dataA;      /* heap block */
     /* 0x24 */ u32 sizeA;
     /* 0x28 */ void *dataB;      /* heap block */
@@ -44,6 +58,11 @@ typedef char MapDepartWorkVisibilityOffsetsCheck[
     offsetof(MapDepartWork, modelsVisible) == 0xA &&
     offsetof(MapDepartWork, nodeA) == 0xC &&
     offsetof(MapDepartWork, nodeB) == 0x10 &&
+    offsetof(MapDepartWork, skyId) == 0x18 &&
+    offsetof(MapDepartWork, loadMapId) == 0x1C &&
+    offsetof(MapDepartWork, loadAreaId) == 0x1E &&
+    offsetof(MapDepartWork, dataA) == 0x20 &&
+    offsetof(MapDepartWork, dataB) == 0x28 &&
     sizeof(MapDepartWork) == 0x30 ? 1 : -1];
 
 /* A polymorphic object: slot 1 of its vtable destroys it. */

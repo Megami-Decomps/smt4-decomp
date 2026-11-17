@@ -24,7 +24,7 @@ int FUN_002a7b74(void);
 int flaggedEntrySetValueA(int, int);
 int arrayContainsU16(...);
 int unitRecordBuild(...);
-int FUN_003450d4(int, unsigned int, int, int);
+int uiScrollHandleActionsOrTouch(int, unsigned int, int, int);
 int skillHelpUpdateAttributeAndTarget(...);
 int screenStartOrClear(unsigned int, int);
 int FUN_003b0558(void);
@@ -63,7 +63,7 @@ extern unsigned int *objectApplyIfUnblocked(int);
 /* Supplied declaration required: flaggedEntrySetValueA. */
 /* Supplied declaration required: arrayContainsU16. */
 /* Supplied declaration required: unitRecordBuild. */
-/* Supplied declaration required: FUN_003450d4. */
+/* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 extern int uiSearchPrimary(int);
 /* Supplied declaration required: skillHelpUpdateAttributeAndTarget. */
 /* Supplied declaration required: screenStartOrClear. */
@@ -114,7 +114,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
   temp_v10 = (int)*(short *)(param_1 + 0x472);
   temp_v4 = param_1 + 0x8e14;
   temp_v14 = temp_v4;
-  FUN_003450d4(temp_v4,temp_v3,param_1 + 0x438,(int)*(short *)(param_1 + 0x476));
+  uiScrollHandleActionsOrTouch(temp_v4,temp_v3,param_1 + 0x438,(int)*(short *)(param_1 + 0x476));
   piVar11 = (int *)(param_1 + 0x8e84);
   puVar12 = (unsigned char *)(param_1 + 0x8eac);
   if ((temp_v4 != 0) || (temp_v4 = temp_v14, FUN_00228b04(temp_v14,1), temp_v4 != 0)) {

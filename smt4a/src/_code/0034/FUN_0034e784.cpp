@@ -28,7 +28,7 @@ typedef char GaugePanelOffsets[
 
 extern "C" {
 void efctSetSpeed(f32 speed);
-void FUN_0035ae58(s32 x, s32 y, s32 width, s32 height, s32 flag);
+void gxSetMirroredClippedScissor(s32 x, s32 y, s32 width, s32 height, s32 flag);
 }
 
 /* Draw the two-part gauge frame at the slot position, with the lower part shortened by `shrink` rows. */
@@ -54,7 +54,7 @@ extern "C" void FUN_0034e784(u8 *panel, s32 rows)
     texDrawTableEntryAtStoredOrigin(2, 13, 0x4F, sprite->x + x, sprite->y + y, 0x2E);
     texDrawTableEntryAtStoredOrigin(2, 13, 0x4E, sprite->x + x, sprite->y + y - shrink, 0x2E);
     renderStackSet(&g_renderCtx->scissor, 3);
-    FUN_0035ae58(sprite->x + x, sprite->y + y, sprite->placement->width, sprite->placement->height - shrink, 1);
+    gxSetMirroredClippedScissor(sprite->x + x, sprite->y + y, sprite->placement->width, sprite->placement->height - shrink, 1);
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
     texDrawTableEntryAtStoredOrigin(2, 13, 0x50, sprite->x + x, sprite->y + y, 0x2E);
     texDrawTableEntryAtStoredOrigin(2, 13, 0x51, sprite->x + x, sprite->y + y, 0x2E);

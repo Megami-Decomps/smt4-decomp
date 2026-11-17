@@ -15,7 +15,7 @@ int efctSetSpeed(...);
 int FUN_00180310(...);
 int fontMeasureLineAdvance(...);
 int nkmBaseGetRecord(void);
-int FUN_0035ae58(...);
+int gxSetMirroredClippedScissor(...);
 int devilDispatchTextureResource(...);
 int VectorSignedToFloat(...);
 
@@ -51,7 +51,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: nkmBaseGetRecord. */
-/* Supplied declaration required: FUN_0035ae58. */
+/* Supplied declaration required: gxSetMirroredClippedScissor. */
 /* Supplied declaration required: devilDispatchTextureResource. */
 
 
@@ -127,7 +127,7 @@ void FUN_002199fc(int param_1,int param_2,int param_3)
         (**(romwright_code **)(temp_v3 + 0x1334))();
         *(unsigned char *)(temp_v3 + 0x1330) = 0;
       }
-      FUN_0035ae58((int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v7 + 8) + temp_v1,
+      gxSetMirroredClippedScissor((int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v7 + 8) + temp_v1,
                    (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v7 + 10) + temp_v8,
                    (int)**(short **)(temp_v7 + 0xc),
                    (int)(*(short **)(temp_v7 + 0xc))[1] + *(int *)(temp_v5 + param_1 * 4 + 0x74),1);
@@ -214,7 +214,7 @@ void FUN_002199fc(int param_1,int param_2,int param_3)
           (**(romwright_code **)(temp_v3 + 0x1334))();
           *(unsigned char *)(temp_v3 + 0x1330) = 0;
         }
-        FUN_0035ae58((int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v7 + 8) + temp_v8,
+        gxSetMirroredClippedScissor((int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v7 + 8) + temp_v8,
                      (int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v2 + 10) + temp_v9,
                      *(unsigned int *)(temp_v1 + 100),(int)*(short *)(*(int *)(temp_v7 + 0xc) + 2),1);
         texDrawTableEntryAtStoredOrigin(2,0x1a,0x20b,(int)*(short *)(temp_v2 + 8),*(short *)(temp_v2 + 10) + temp_v9,0x79);

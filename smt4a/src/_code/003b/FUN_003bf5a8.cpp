@@ -1,8 +1,8 @@
+#include "map/InteractionFlags.h"
 /* NON_MATCHING: compiler interleaves each special gate with its unlock check; retail outlines the checks. */
 #include "shard/W5_W5Match7_SceneState.h"
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
-s32 FUN_004083a8(u32 id, u32 kind);
 
 // Gate map entries by their unlock flags and the special encounter requirements.
 u32 FUN_003bf5a8(s32 index)

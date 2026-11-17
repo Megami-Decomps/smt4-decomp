@@ -52,7 +52,7 @@ extern int flagWordTestBit(int, unsigned int);
 extern int gameGetUnitRecord(void);
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002e33f4. */
-extern fn_00232b68_arg0 *FUN_0031c344(fn_00232b68_arg0 *, fn_00232b68_arg1 *);
+extern fn_00232b68_arg0 *itemApplyPermanentStatBoost(fn_00232b68_arg0 *, fn_00232b68_arg1 *);
 extern int recordFilterMaskByKind(fn_00232b68_arg1 *, unsigned short);
 
 
@@ -136,7 +136,7 @@ int itemApplyToMember(fn_00232b68_arg0 *param_1,fn_00232b68_arg1 *param_2,unsign
     }
     if ((param_2[1].field_0x2 & 2) != 0) {
       puVar6 = param_3;
-      pfVar11 = (fn_00232b68_arg0 *)FUN_0031c344(param_1,param_2);
+      pfVar11 = (fn_00232b68_arg0 *)itemApplyPermanentStatBoost(param_1,param_2);
     }
     if (temp_v5 != 0) {
       temp_v6 = recordFilterMaskByKind(param_2,*(unsigned short *)(temp_v5 + 0x72));

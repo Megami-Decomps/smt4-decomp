@@ -28,7 +28,7 @@ int drawSetColorFromRGBA8(...);
 int slotRecordFindById(...);
 int FUN_002a4b28(...);
 int uiDrawListScrollBar(...);
-int FUN_0035ae58(...);
+int gxSetMirroredClippedScissor(...);
 int contentEntryFindById(void);
 int VectorSignedToFloat(...);
 
@@ -102,7 +102,7 @@ extern int listCursorGetRowIfUnblocked(unsigned int *);
 /* Supplied declaration required: uiDrawListScrollBar. */
 extern int uiSearchSecondary(unsigned int *);
 extern int uiSearchPrimary(unsigned int *);
-/* Supplied declaration required: FUN_0035ae58. */
+/* Supplied declaration required: gxSetMirroredClippedScissor. */
 /* Supplied declaration required: devilDispatchTextureResource. */
 /* Supplied declaration required: contentEntryFindById. */
 extern int fusionClassifyRecipeAvailability(unsigned int, unsigned int, unsigned char *);
@@ -254,7 +254,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
           (**(romwright_code **)(temp_v6 + 0x1334))();
           *(unsigned char *)(temp_v6 + 0x1330) = 0;
         }
-        FUN_0035ae58((int)&param_1->field_0x0 +
+        gxSetMirroredClippedScissor((int)&param_1->field_0x0 +
                      (int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v4 + 8),
                      (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,
                      (int)**(short **)(temp_v4 + 0xc),(int)(*(short **)(temp_v4 + 0xc))[1],1);

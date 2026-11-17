@@ -10,7 +10,7 @@ extern "C" {
 
 int FUN_0026a9cc(...);
 int uiDrawListScrollBar(...);
-int FUN_0029a17c(...);
+int gxSetMirroredClippedScissor(...);
 int arrayContainsU16(...);
 int FUN_0029dc74(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
@@ -67,7 +67,7 @@ extern int g_titleScene; /* 0x44ea00 */
 extern int uniteGetWork(void);
 /* Supplied declaration required: FUN_0026a9cc. */
 /* Supplied declaration required: uiDrawListScrollBar. */
-/* Supplied declaration required: FUN_0029a17c. */
+/* Supplied declaration required: gxSetMirroredClippedScissor. */
 extern unsigned int appGetRemainingCapacity(unsigned short);
 extern int flagCountUnlockedSlots(unsigned char *);
 /* Supplied declaration required: arrayContainsU16. */
@@ -507,7 +507,7 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
         (**(romwright_code **)(temp_v7 + 0x1328))();
         *(unsigned char *)(temp_v7 + 0x1324) = 0;
       }
-      FUN_0029a17c((int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v13,
+      gxSetMirroredClippedScissor((int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v13,
                    (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v8 + 10) + temp_v2,
                    (int)**(short **)(temp_v8 + 0xc),(int)(*(short **)(temp_v8 + 0xc))[1],1);
       temp_v7 = vec2GetYInt((UiSpriteState *)(temp_v1 + 0xb0));

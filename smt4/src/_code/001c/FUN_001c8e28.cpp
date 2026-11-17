@@ -33,7 +33,7 @@ unsigned int FUN_001c8e28(void)
   case 1:
     switch(puVar2[4]) {
     case 0:
-      FUN_0028c040();
+      statusAcquireSharedResources();
       FUN_0029a128(9);
       FUN_0029c4c8(0);
       FUN_0029dfc0(1);

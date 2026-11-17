@@ -8,7 +8,7 @@ extern "C" {
 
 int dataTable0cLookupById(void);
 int uiDrawListScrollBar(...);
-int FUN_0029a17c(...);
+int gxSetMirroredClippedScissor(...);
 int FUN_0029ab54(int, int);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int textDrawString(...);
@@ -38,7 +38,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: dataTable0cLookupById. */
 /* Supplied declaration required: uiDrawListScrollBar. */
-/* Supplied declaration required: FUN_0029a17c. */
+/* Supplied declaration required: gxSetMirroredClippedScissor. */
 /* Supplied declaration required: FUN_0029ab54. */
 extern int FUN_0029ac94(void);
 extern unsigned short *FUN_0029acb0(void);
@@ -188,7 +188,7 @@ void FUN_0032bc00(int param_1,int param_2)
       (**(romwright_code **)(temp_v3 + 0x1328))();
       *(unsigned char *)(temp_v3 + 0x1324) = 0;
     }
-    FUN_0029a17c((int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v6 + 8) + param_1,
+    gxSetMirroredClippedScissor((int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v6 + 8) + param_1,
                  (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v6 + 10) + param_2,
                  (int)**(short **)(temp_v6 + 0xc),(int)(*(short **)(temp_v6 + 0xc))[1],1);
     temp_v3 = vec2GetYInt(temp_v2 + 0x1cc);

@@ -1,9 +1,9 @@
+#include "map/InteractionFlags.h"
 #include "shard/Shard0032.h"
 
 extern "C" {
 
 extern void FUN_00408338(s32 group, u32 bit, s32 value);
-extern u8 FUN_004083a8(s32 group, u32 bit);
 
 /* Sets each (group, bit) flag that is given (non-zero pair) and not yet set. */
 void flagsSetIfUnset3(s32 group0, s32 bit0, s32 group1, s32 bit1, s32 group2, s32 bit2)

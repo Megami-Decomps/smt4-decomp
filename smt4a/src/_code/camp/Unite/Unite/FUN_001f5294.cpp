@@ -16,7 +16,7 @@ int asdMemoryAllocTraced(...);
 int slotSetRequest(...);
 int FUN_001ff014(...);
 int statusDownRestartTransition(void);
-int FUN_002a74ac(void);
+int uniteResultInitialize(void);
 int sysMemClear(...);
 int FUN_0031db84(...);
 int arrayContainsU16(...);
@@ -129,7 +129,7 @@ int FUN_00231574(void);
 int resourceRunOperationIfUnblocked(...);
 int listCursorGetRowIfUnblocked(...);
 int objectApplyIfUnblocked(...);
-int FUN_003450d4(...);
+int uiScrollHandleActionsOrTouch(...);
 int bitsHolderSetBit(...);
 int FUN_00359974(...);
 
@@ -281,7 +281,7 @@ extern int messageGetChoiceResult(void);
 /* Supplied declaration required: statusPanelSetOpen. */
 extern int FUN_002a7410(void);
 extern int FUN_002a748c(void);
-/* Supplied declaration required: FUN_002a74ac. */
+/* Supplied declaration required: uniteResultInitialize. */
 /* Supplied declaration required: FUN_002a7b74. */
 extern int FUN_002ac2b4(unsigned int, unsigned char);
 /* Supplied declaration required: frameTexSetValue. */
@@ -326,7 +326,7 @@ extern int gameGlobalsGetState(void);
 /* Supplied declaration required: uniteSelectedFusionIsEnabled. */
 extern unsigned int asdVramBGetFreeBytes(void);
 /* Supplied declaration required: buttonHelpGetValue. */
-/* Supplied declaration required: FUN_003450d4. */
+/* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: bitsHolderSetBit. */
 extern int uiSearchPrimary(int *);
 /* Supplied declaration required: FUN_0034a9c4. */
@@ -791,7 +791,7 @@ unsigned int FUN_001f5294(void)
         temp_v25 = (int *)(int)*(short *)((int)piVar3 + 0x472);
         piVar17 = piVar3 + 0x2452;
         piVar19 = piVar17;
-        FUN_003450d4(piVar17,temp_v15,piVar3 + 0x10e,(int)*(short *)((int)piVar3 + 0x476));
+        uiScrollHandleActionsOrTouch(piVar17,temp_v15,piVar3 + 0x10e,(int)*(short *)((int)piVar3 + 0x476));
         if ((piVar19 == (int *)0x0) &&
            (piVar19 = piVar17, FUN_00228b04(piVar17,1), piVar19 == (int *)0x0)) {
           temp_v4 = 0;
@@ -1041,7 +1041,7 @@ unsigned int FUN_001f5294(void)
         temp_v25 = (int *)(int)*(short *)((int)piVar3 + 0x472);
         piVar17 = piVar3 + 0x13f;
         piVar19 = piVar17;
-        FUN_003450d4(piVar17,temp_v15,piVar3 + 0x10e,(int)*(short *)((int)piVar3 + 0x476));
+        uiScrollHandleActionsOrTouch(piVar17,temp_v15,piVar3 + 0x10e,(int)*(short *)((int)piVar3 + 0x476));
         if (piVar19 != (int *)0x0) {
           temp_v5 = resourceRunOperationIfUnblocked(piVar17);
           temp_v6 = listCursorGetRowIfUnblocked(piVar17);
@@ -1348,7 +1348,7 @@ LAB_001f6b9c:
     temp_v28 = (int *)0x0;
     temp_v25 = (int *)(int)*(short *)((int)piVar3 + 0x472);
     piVar19 = piVar3 + 0x158;
-    FUN_003450d4(piVar19,temp_v15,piVar3 + 0x113,(int)*(short *)((int)piVar3 + 0x476));
+    uiScrollHandleActionsOrTouch(piVar19,temp_v15,piVar3 + 0x113,(int)*(short *)((int)piVar3 + 0x476));
     if (piVar19 == (int *)0x0) {
       piVar19 = piVar3 + 0x158;
       FUN_00228b04(piVar19,1);
@@ -1814,7 +1814,7 @@ LAB_001f732c:
       temp_v25 = (int *)(int)*(short *)((int)piVar3 + 0x472);
       piVar17 = piVar3 + 0x188f;
       piVar19 = piVar17;
-      FUN_003450d4(piVar17,temp_v15,piVar3 + 0x10e,(int)*(short *)((int)piVar3 + 0x476));
+      uiScrollHandleActionsOrTouch(piVar17,temp_v15,piVar3 + 0x10e,(int)*(short *)((int)piVar3 + 0x476));
       if ((piVar19 != (int *)0x0) ||
          (piVar19 = piVar17, FUN_00228b04(piVar17,1), piVar19 != (int *)0x0)) {
         temp_v4 = resourceRunEmbeddedOperationIfUnblocked(piVar17);
@@ -1835,7 +1835,7 @@ LAB_001f77ec:
       temp_v25 = (int *)(int)*(short *)((int)piVar3 + 0x472);
       piVar17 = piVar3 + 0x1876;
       piVar19 = piVar17;
-      FUN_003450d4(piVar17,temp_v15,piVar3 + 0x10e,(int)*(short *)((int)piVar3 + 0x476));
+      uiScrollHandleActionsOrTouch(piVar17,temp_v15,piVar3 + 0x10e,(int)*(short *)((int)piVar3 + 0x476));
       if ((piVar19 != (int *)0x0) ||
          (piVar19 = piVar17, FUN_00228b04(piVar17,1), piVar19 != (int *)0x0)) {
         temp_v4 = resourceRunOperationIfUnblocked(piVar17);
@@ -2251,7 +2251,7 @@ LAB_001f77ec:
       temp_v28 = (int *)0x0;
       temp_v25 = (int *)(int)*(short *)((int)piVar3 + 0x472);
       piVar19 = temp_v40[0];
-      FUN_003450d4(temp_v40[0],temp_v15,piVar3 + 0x10e,(int)*(short *)((int)piVar3 + 0x476));
+      uiScrollHandleActionsOrTouch(temp_v40[0],temp_v15,piVar3 + 0x10e,(int)*(short *)((int)piVar3 + 0x476));
       if ((piVar19 != (int *)0x0) ||
          (piVar19 = temp_v40[0], FUN_00228b04(temp_v40[0],1), piVar19 != (int *)0x0)) {
         temp_v5 = resourceRunOperationIfUnblocked(temp_v40[0]);
@@ -3118,7 +3118,7 @@ LAB_001f9868:
     statusDownRestartTransition();
     gameGlobalsSetMenuOpenFlag(0);
     FUN_00333dc8(0);
-    FUN_002a74ac();
+    uniteResultInitialize();
     temp_v15 = 0;
     temp_v4 = 0x18;
     break;
@@ -3329,7 +3329,7 @@ LAB_001f9868:
       temp_v25 = (int *)(int)*(short *)((int)piVar3 + 0x472);
       piVar17 = piVar3 + 0x23c5;
       piVar19 = piVar17;
-      FUN_003450d4(piVar17,temp_v15,piVar3 + 0x10e,(int)*(short *)((int)piVar3 + 0x476));
+      uiScrollHandleActionsOrTouch(piVar17,temp_v15,piVar3 + 0x10e,(int)*(short *)((int)piVar3 + 0x476));
       if ((piVar19 == (int *)0x0) &&
          (piVar19 = piVar17, FUN_00228b04(piVar17,1), piVar19 == (int *)0x0)) {
         if (*(char *)(temp_v4 + 0x38) != '\0') goto LAB_001fab44;
@@ -3353,7 +3353,7 @@ LAB_001fab44:
       temp_v25 = (int *)(int)*(short *)((int)piVar3 + 0x472);
       piVar17 = piVar3 + 0x23ac;
       piVar19 = piVar17;
-      FUN_003450d4(piVar17,temp_v15,piVar3 + 0x10e,(int)*(short *)((int)piVar3 + 0x476));
+      uiScrollHandleActionsOrTouch(piVar17,temp_v15,piVar3 + 0x10e,(int)*(short *)((int)piVar3 + 0x476));
       if ((piVar19 != (int *)0x0) ||
          (piVar19 = piVar17, FUN_00228b04(piVar17,1), piVar19 != (int *)0x0)) {
         temp_v5 = resourceRunOperationIfUnblocked(piVar17);
@@ -3683,7 +3683,7 @@ LAB_001fac1c:
       temp_v28 = (int *)0x0;
       temp_v29 = (int *)0x1;
       piVar19 = temp_v43;
-      FUN_003450d4(temp_v43,0,piVar3 + 0x10e,0xffffffff);
+      uiScrollHandleActionsOrTouch(temp_v43,0,piVar3 + 0x10e,0xffffffff);
       if ((piVar19 != (int *)0x0) ||
          (piVar19 = temp_v43, FUN_00228b04(temp_v43,1), piVar19 != (int *)0x0)) {
         piVar3[0xff] = piVar3[0xff] + 1;

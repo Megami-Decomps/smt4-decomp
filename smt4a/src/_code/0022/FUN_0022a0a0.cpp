@@ -15,7 +15,7 @@ int buttonHelpSetText(...);
 int FUN_00228b04(int, int);
 int objectApplyIfUnblocked(...);
 int buttonHelpSetHelpState(int);
-int FUN_003450d4(int, unsigned int, int, int, int, int, char [16], int, int);
+int uiScrollHandleActionsOrTouch(int, unsigned int, int, int, int, int, char [16], int, int);
 int buttonHelpSetMode(...);
 
 /* stack frame of void: 4 slot(s), 13 byte(s) */
@@ -40,7 +40,7 @@ extern int resourceRunOperationIfUnblocked(int);
 extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: objectApplyIfUnblocked. */
 /* Supplied declaration required: buttonHelpSetHelpState. */
-/* Supplied declaration required: FUN_003450d4. */
+/* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 extern int uiSearchPrimary(int);
 /* Supplied declaration required: buttonHelpSetMode. */
 
@@ -147,7 +147,7 @@ unsigned int FUN_0022a0a0(void)
     temp_v6 = listCursorGetRowIfUnblocked(temp_v8);
     temp_v7 = reinterpret_cast<unsigned int>(asdTMTexTableEntryAt(0x15,0x48));
     temp_v9 = temp_v8;
-    FUN_003450d4(temp_v8,temp_v7,temp_v0 + 0x772,(int)*(short *)(temp_v0 + 0x770),
+    uiScrollHandleActionsOrTouch(temp_v8,temp_v7,temp_v0 + 0x772,(int)*(short *)(temp_v0 + 0x770),
                  (int)*(short *)(temp_v0 + 0x76c),(int)*(short *)(temp_v0 + 0x76e),temp_v10,0,1);
     if (temp_v9 != 0) {
       temp_v9 = listCursorGetRowIfUnblocked(temp_v8);

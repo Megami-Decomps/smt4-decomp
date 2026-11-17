@@ -1,3 +1,4 @@
+#include "map/InteractionFlags.h"
 /* NON_MATCHING: register allocation only: retail scales the entry index (index * 3) in r0, the build uses r2 for that temporary. */
 #include "ui/NaviCategorySelection.h"
 
@@ -27,7 +28,6 @@ typedef char NaviAvailabilityLayoutCheck[
     offsetof(NaviAvailabilityView, mode) == 0x204FC ? 1 : -1];
 
 extern "C" {
-s32 FUN_004083a8(u32 kind, u32 condition);
 s32 FUN_00408240(u32 flag);
 
 // Re-evaluate entries in the current category and derive the selected kind's special display mode.

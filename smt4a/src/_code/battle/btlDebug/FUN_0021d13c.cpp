@@ -83,7 +83,7 @@ int listCursorGetRowOfChildIfUnblocked(...);
 int scrollListSetSelectionTracked(int *, int);
 int screenSetContextHint(...);
 int FUN_002cc9e0(...);
-int FUN_003450d4(...);
+int uiScrollHandleActionsOrTouch(...);
 int FUN_003756c8(...);
 int gameDataFlagTestBit(...);
 int btlQueueActionMessage(int, int, int, int);
@@ -198,7 +198,7 @@ extern int useCounterGetCurrentValue(void);
 /* Supplied declaration required: sortMenuAcquire. */
 extern int buttonHelpGetPanelMode(void);
 /* Supplied declaration required: gameGlobalsReleaseReference. */
-/* Supplied declaration required: FUN_003450d4. */
+/* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 extern int uiSearchSecondary(int);
 extern int uiSearchPrimary(int *);
 /* Supplied declaration required: useCounterRelease. */
@@ -589,7 +589,7 @@ LAB_0021d964:
     temp_v25 = (short **)0xffffffff;
     temp_v29 = 1;
     temp_v7 = param_1 + *piVar16 * 100 + 0x38bc;
-    FUN_003450d4(temp_v7,0,param_1 + 0x480e,0xffffffff);
+    uiScrollHandleActionsOrTouch(temp_v7,0,param_1 + 0x480e,0xffffffff);
     if (temp_v7 != 0) {
       temp_v8 = FUN_002cc9e0(param_1,1);
       screenSetContextHint(param_1,temp_v8,*piVar16);
@@ -1059,7 +1059,7 @@ LAB_0021e880:
               temp_v26 = (int *)0xffffffff;
               temp_v25 = (short **)0xffffffff;
               temp_v7 = param_1 + *piVar16 * 100 + 0x38bc;
-              FUN_003450d4(temp_v7,0,param_1 + 0x480e,0xffffffff);
+              uiScrollHandleActionsOrTouch(temp_v7,0,param_1 + 0x480e,0xffffffff);
               if (temp_v7 != 0) {
                 temp_v7 = listCursorGetRowOfChildIfUnblocked(param_1 + *piVar16 * 100 + 0x38bc);
                 if (temp_v7 != temp_v4) {
@@ -1196,7 +1196,7 @@ LAB_0021e950:
         temp_v29 = 1;
         temp_v25 = (short **)(int)*(short *)(param_1 + 0x4820);
         temp_v7 = *(int *)(param_1 + 0x3c40);
-        FUN_003450d4(temp_v7,temp_v10,param_1 + 0x4824,(int)*(short *)(param_1 + 0x481e));
+        uiScrollHandleActionsOrTouch(temp_v7,temp_v10,param_1 + 0x4824,(int)*(short *)(param_1 + 0x481e));
         temp_v10 = (unsigned int)temp_v23;
         if (temp_v7 == 0) {
           temp_v7 = *(int *)(param_1 + 0x3c40);
@@ -1228,7 +1228,7 @@ LAB_0021ed20:
     piVar19 = (int *)(param_1 + 0x3c40);
     temp_v25 = (short **)(int)*(short *)(param_1 + 0x4820);
     temp_v4 = *piVar19;
-    FUN_003450d4(temp_v4,temp_v10,param_1 + 0x4824,(int)*(short *)(param_1 + 0x481e));
+    uiScrollHandleActionsOrTouch(temp_v4,temp_v10,param_1 + 0x4824,(int)*(short *)(param_1 + 0x481e));
     temp_v10 = (unsigned int)temp_v23;
     if (temp_v4 != 0) {
       FUN_00270104(param_1);
@@ -1340,7 +1340,7 @@ LAB_0021ed20:
       temp_v26 = (int *)0xffffffff;
       temp_v25 = (short **)0xffffffff;
       temp_v7 = param_1 + *piVar16 * 100 + 0x38bc;
-      FUN_003450d4(temp_v7,0,param_1 + 0x480e,0xffffffff);
+      uiScrollHandleActionsOrTouch(temp_v7,0,param_1 + 0x480e,0xffffffff);
       temp_v9 = param_1 + *piVar16 * 100 + 0x38bc;
       if (temp_v7 == 0) {
         FUN_00228b04(temp_v9,1);
@@ -1379,7 +1379,7 @@ LAB_0021f10c:
     temp_v29 = 1;
     temp_v25 = (short **)(int)*(short *)(param_1 + 0x4820);
     temp_v4 = *(int *)(param_1 + 0x3c40);
-    FUN_003450d4(temp_v4,temp_v8,param_1 + 0x4824,(int)*(short *)(param_1 + 0x481e));
+    uiScrollHandleActionsOrTouch(temp_v4,temp_v8,param_1 + 0x4824,(int)*(short *)(param_1 + 0x481e));
     if (temp_v4 != 0) {
       FUN_00270104(param_1);
       break;
@@ -1425,7 +1425,7 @@ LAB_0021f28c:
         temp_v25 = (short **)0xffffffff;
         temp_v29 = 1;
         temp_v7 = param_1 + *piVar16 * 100 + 0x38bc;
-        FUN_003450d4(temp_v7,0,param_1 + 0x480e,0xffffffff);
+        uiScrollHandleActionsOrTouch(temp_v7,0,param_1 + 0x480e,0xffffffff);
         temp_v9 = param_1 + *piVar16 * 100 + 0x38bc;
         if (temp_v7 == 0) {
           FUN_00228b04(temp_v9,1);
@@ -1772,7 +1772,7 @@ LAB_0021fbdc:
     temp_v26 = (int *)0xffffffff;
     temp_v25 = (short **)0xffffffff;
     temp_v4 = temp_v7;
-    FUN_003450d4(temp_v7,0,param_1 + 0x4846,0xffffffff);
+    uiScrollHandleActionsOrTouch(temp_v7,0,param_1 + 0x4846,0xffffffff);
     temp_v10 = (unsigned int)temp_v23;
     if (temp_v4 != 0) {
       temp_v4 = listCursorGetRowOfChildIfUnblocked(temp_v7);
@@ -2046,7 +2046,7 @@ joined_r0x0022027c:
     temp_v26 = (int *)0xffffffff;
     temp_v25 = (short **)0xffffffff;
     temp_v4 = temp_v7;
-    FUN_003450d4(temp_v7,0,param_1 + 0x4846,0xffffffff);
+    uiScrollHandleActionsOrTouch(temp_v7,0,param_1 + 0x4846,0xffffffff);
     temp_v10 = (unsigned int)temp_v23;
     if (temp_v4 != 0) {
       temp_v4 = listCursorGetRowOfChildIfUnblocked(temp_v7);

@@ -20,7 +20,7 @@ int textFormatBuffer(...);
 
 int FUN_00187114(int, int);
 int uiDrawListScrollBar(...);
-int FUN_0029a17c(...);
+int gxSetMirroredClippedScissor(...);
 int FUN_0029ab54(...);
 int listCursorGetRowIfUnblocked(...);
 int resourceRunOperationIfUnblocked(...);
@@ -67,7 +67,7 @@ extern int g_titleScene; /* 0x44ea00 */
 extern unsigned long long statusGetAvailableChoiceCount(void);
 /* Supplied declaration required: table8Type5GetValue. */
 /* Supplied declaration required: uiDrawListScrollBar. */
-/* Supplied declaration required: FUN_0029a17c. */
+/* Supplied declaration required: gxSetMirroredClippedScissor. */
 /* Supplied declaration required: fadeObjectResetIfActive. */
 /* Supplied declaration required: FUN_0029a284. */
 /* Supplied declaration required: FUN_0029ab54. */
@@ -263,7 +263,7 @@ LAB_001ccb9c:
         (**(romwright_code **)(temp_v12 + 0x1328))();
         *(unsigned char *)(temp_v12 + 0x1324) = 0;
       }
-      FUN_0029a17c((int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v13 + 8) + temp_v1,
+      gxSetMirroredClippedScissor((int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v13 + 8) + temp_v1,
                    (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v13 + 10) + temp_v2,
                    (int)**(short **)(temp_v13 + 0xc),(int)(*(short **)(temp_v13 + 0xc))[1],1);
       temp_v12 = vec2GetYInt((UiSpriteState *)(temp_v19 + 600));

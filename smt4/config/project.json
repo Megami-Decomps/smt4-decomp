@@ -26393,12 +26393,12 @@
     },
     {
       "address": "0x1eea88",
-      "function": "FUN_001eea88",
+      "function": "uniteResultInitialize",
       "module": "_code",
-      "object": "build/obj/_code/001e/FUN_001eea88.o",
+      "object": "build/obj/_code/001e/uniteResultInitialize.o",
       "size": 1004,
-      "source": "src/_code/001e/FUN_001eea88.cpp",
-      "target": "orig/target/_code/001e/FUN_001eea88.o",
+      "source": "src/_code/001e/uniteResultInitialize.cpp",
+      "target": "orig/target/_code/001e/uniteResultInitialize.o",
       "thumb": false
     },
     {
@@ -48325,12 +48325,12 @@
     {
       "address": "0x28c040",
       "file": "status/Status",
-      "function": "FUN_0028c040",
+      "function": "statusAcquireSharedResources",
       "module": "_code",
-      "object": "build/obj/_code/status/Status/FUN_0028c040.o",
+      "object": "build/obj/_code/status/Status/statusAcquireSharedResources.o",
       "size": 1448,
-      "source": "src/_code/status/Status/FUN_0028c040.cpp",
-      "target": "orig/target/_code/status/Status/FUN_0028c040.o",
+      "source": "src/_code/status/Status/statusAcquireSharedResources.cpp",
+      "target": "orig/target/_code/status/Status/statusAcquireSharedResources.o",
       "thumb": false
     },
     {
@@ -51017,12 +51017,12 @@
     },
     {
       "address": "0x29a17c",
-      "function": "FUN_0029a17c",
+      "function": "gxSetMirroredClippedScissor",
       "module": "_code",
-      "object": "build/obj/_code/0029/FUN_0029a17c.o",
+      "object": "build/obj/_code/0029/gxSetMirroredClippedScissor.o",
       "size": 232,
-      "source": "src/_code/0029/FUN_0029a17c.cpp",
-      "target": "orig/target/_code/0029/FUN_0029a17c.o",
+      "source": "src/_code/0029/gxSetMirroredClippedScissor.cpp",
+      "target": "orig/target/_code/0029/gxSetMirroredClippedScissor.o",
       "thumb": false
     },
     {
@@ -63467,12 +63467,12 @@
     },
     {
       "address": "0x2d1ce0",
-      "function": "FUN_002d1ce0",
+      "function": "mapBgLoadArchivesStep",
       "module": "_code",
-      "object": "build/obj/_code/002d/FUN_002d1ce0.o",
+      "object": "build/obj/_code/002d/mapBgLoadArchivesStep.o",
       "size": 308,
-      "source": "src/_code/002d/FUN_002d1ce0.cpp",
-      "target": "orig/target/_code/002d/FUN_002d1ce0.o",
+      "source": "src/_code/002d/mapBgLoadArchivesStep.cpp",
+      "target": "orig/target/_code/002d/mapBgLoadArchivesStep.o",
       "thumb": false
     },
     {
@@ -75889,12 +75889,12 @@
     },
     {
       "address": "0x31c344",
-      "function": "FUN_0031c344",
+      "function": "itemApplyPermanentStatBoost",
       "module": "_code",
-      "object": "build/obj/_code/0031/FUN_0031c344.o",
+      "object": "build/obj/_code/0031/itemApplyPermanentStatBoost.o",
       "size": 852,
-      "source": "src/_code/0031/FUN_0031c344.cpp",
-      "target": "orig/target/_code/0031/FUN_0031c344.o",
+      "source": "src/_code/0031/itemApplyPermanentStatBoost.cpp",
+      "target": "orig/target/_code/0031/itemApplyPermanentStatBoost.o",
       "thumb": false
     },
     {
@@ -79815,12 +79815,12 @@
     },
     {
       "address": "0x339b64",
-      "function": "FUN_00339b64",
+      "function": "btlAdvanceResidentResourceLoad",
       "module": "_code",
-      "object": "build/obj/_code/0033/FUN_00339b64.o",
+      "object": "build/obj/_code/0033/btlAdvanceResidentResourceLoad.o",
       "size": 596,
-      "source": "src/_code/0033/FUN_00339b64.cpp",
-      "target": "orig/target/_code/0033/FUN_00339b64.o",
+      "source": "src/_code/0033/btlAdvanceResidentResourceLoad.cpp",
+      "target": "orig/target/_code/0033/btlAdvanceResidentResourceLoad.o",
       "thumb": false
     },
     {

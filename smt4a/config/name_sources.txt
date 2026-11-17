@@ -7416,8 +7416,17 @@
 00192550 itemTableGetItemRecord inferred Finds an item record by id in item/ItemTable.tbb table 1. Twin of smt4 itemTableGetItemRecord.
 00192608 itemTableGetEquipmentRecord inferred Finds an equipment record by id in item/ItemTable.tbb table 2 (0xA8-byte rows in IV: id 0x50, buy 0x9C, sell 0xA0).
 001ad9b4 questDataGetRecord inferred Finds a quest record by id in event/quest/QuestData.tbb (0x1B4-byte rows in IV).
+003450d4 uiScrollHandleActionsOrTouch inferred Exact 508-byte match: applies touch/list selection, forwards a signed-halfword rectangle, reports blocked modes and optional selection-change events; SMT4 twin name.
+0035ae58 gxSetMirroredClippedScissor inferred SMT4 twin FUN_0029a17c; exact byte/relocation match with shared coordinate-packing helper and separately refreshed scene snapshots.
+002a74ac uniteResultInitialize inferred Initializes fusion-result textures, render target, stage model/camera, tone-specific script and sprites; exact IV counterpart with Apocalypse resource constructors and layout.
+0052f3c0 sUniteResultSpriteKeys inferred size:0xe0 Final sprite-command packet for uniteResultInitialize; static compiled bytes independently compared against native image.
 006471dc g_vectorScratch inferred Vector and matrix scratch workspace. Twin of smt4 g_vectorScratch.
 005713f0 g_btlSkillResponseMasks inferred Table of u64 masks the battle code tests a skill's response against (20 units).
 005806a0 g_lmapViewHolder inferred Holds the lmap view (its .view is g_lmapView's object).
 005b4028 DAT_005b4028 inferred Name withdrawn: the block is the whole allocator state (renamed g_asdMemState).
 005b4028 g_asdMemState inferred The engine allocator state; twin of smt4 g_asdMemState (region bases/sizes are only part of it).
+002c7e6c statusAcquireSharedResources inferred Initializes shared status-screen work, tasks, animation resources and partner assets on the first reference, then increments the reference count.
+002cdad4 btlEventPanelInitialize inferred Initializes BtlUiA.objB at parent+0x24BC: animation resources and seven-sprite event panel; four canonical key tables verified against original bytes.
+002c5468 mapRebuildWallAutoTiles inferred Rebuilds interior state-2 wall cells from four state-1 neighbor bits; writes MapCell.autoTile fields using two 16-byte tables. Native writable data at 005814A4/005814B4 verified byte-for-byte; source constness corrected to match segment ownership.
+002326b4 mapSystemLoadSharedFiles inferred map/mapCommon.cpp shared script/message and fifteen MoriModelContent resource initialization; same role and shared filenames as IV mapSystemLoadSharedFiles.
+00491c60 lmapRefreshDestinationAvailability inferred Refreshes normal and extra destination-list availability from native map, quest, ownership and interaction-variant rules; missing variant argument restored.

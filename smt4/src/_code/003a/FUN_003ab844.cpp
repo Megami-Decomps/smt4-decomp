@@ -21,7 +21,7 @@ int buttonHelpAcquireResources(void);
 int buttonHelpCreate(void);
 s32 *asdTMTexTableGetEntry(u32 id);
 int asdTMTexTablePrepareNodeImage(u32 id, s32 index);
-int FUN_0028c040(void);
+int statusAcquireSharedResources(void);
 int gameGlobalsSetSelected(s32 arg);
 int gameSetIconDisplayEnabled(s32 arg);
 int FUN_0029e788(void);
@@ -49,7 +49,7 @@ void FUN_003ab844(BibleScreen *screen)
         }
         screen->loadedTex1D = 1;
     }
-    FUN_0028c040();
+    statusAcquireSharedResources();
     gameGlobalsSetSelected(8);
     gameSetIconDisplayEnabled(1);
     FUN_0029e788();

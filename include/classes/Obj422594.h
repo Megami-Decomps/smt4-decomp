@@ -11,8 +11,8 @@ void ifTouchRegionRemove(void);
 }
 
 struct Obj422594Pair {
-    u32 first;
-    u32 second;
+    s16 x, y;
+    s16 width, height;
 };
 
 extern "C" int FUN_0026ab64(void *screen, Obj422594Pair pair, int width, int left, int top, int c, int d);

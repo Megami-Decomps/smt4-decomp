@@ -1,3 +1,4 @@
+#include "map/mapCommon.h"
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
@@ -16,7 +17,6 @@ extern LoadTask *g_jyoucyu;
 extern u8 DAT_00446db4;
 void FUN_00192884(void);
 void configSettingsResetDefaults(void);
-void mapSystemLoadSharedFiles(void);
 void spriteTableRefAcquire(void);
 void texTableLoadWithEntries(void);
 void commonBgLoadSpritesOnFirstUse(void);

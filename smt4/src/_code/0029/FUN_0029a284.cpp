@@ -7,7 +7,7 @@
 
 extern "C" {
 
-int FUN_0029a17c(int, int, int, int, int);
+int gxSetMirroredClippedScissor(int, int, int, int, int);
 int skillDataFindById(void);
 int FUN_002b6c34(...);
 int FUN_002bdf94(...);
@@ -37,7 +37,7 @@ extern int g_statusDown; /* 0x44e190 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0029a17c. */
+/* Supplied declaration required: gxSetMirroredClippedScissor. */
 extern unsigned int appGetRemainingCapacity(void);
 extern unsigned int FUN_0029a9d4(int, unsigned int);
 extern int FUN_0029ac94(void);
@@ -116,7 +116,7 @@ void FUN_0029a284(int param_1,int param_2,int param_3,unsigned int param_4,unsig
     (**(romwright_code **)(temp_v2 + 0x1328))();
     *(unsigned char *)(temp_v2 + 0x1324) = 0;
   }
-  FUN_0029a17c((int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v11 + 8) + param_1,
+  gxSetMirroredClippedScissor((int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v11 + 8) + param_1,
                (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v11 + 10) + param_2,
                (int)**(short **)(temp_v11 + 0xc),(int)(*(short **)(temp_v11 + 0xc))[1],1);
   temp_v2 = vec2GetYInt(temp_v3 + 0x1cc);

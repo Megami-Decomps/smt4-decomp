@@ -35,7 +35,7 @@ extern u8 *g_renderCtx;
 
 void efctSetSpeed(f32 speed);
 void texDrawCompositeSprite(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
-void FUN_0035ae58(s32 x, s32 y, s32 width, s32 height, s32 flag);
+void gxSetMirroredClippedScissor(s32 x, s32 y, s32 width, s32 height, s32 flag);
 
 /* Draws the party panel's pop-up: positions it from the phase (rising in, held with a texture
  * preview, then sliding out), draws its frame and the clipped texture preview, then the two
@@ -84,7 +84,7 @@ void FUN_0034ea70(PartyPopup *popup)
     TextureTableEntryIV *window = asdTMTexTableEntryAt(13, 0x1DD);
 
     renderStackSet((RenderStateStack *)(g_renderCtx + 0x1318), 3);
-    FUN_0035ae58(window->x + x, window->y + y, window->placement->width, window->placement->height + y, 1);
+    gxSetMirroredClippedScissor(window->x + x, window->y + y, window->placement->width, window->placement->height + y, 1);
     devilDispatchTextureResource(popup->textureId, frame->x + x, frame->y + y, 0x15, 1);
     renderStackSet((RenderStateStack *)(g_renderCtx + 0x1318), 0);
     texDrawCompositeSprite(2, 13, 13, x, y, 0x56);

@@ -12,7 +12,7 @@ void textureLoadOptionalDemonModel(s32 id, s32 x, s32 y, u32 layer, s32 mapped);
 int uiDrawListScrollBar(...);
 
 int FUN_002580d4(...);
-int FUN_0029a17c(...);
+int gxSetMirroredClippedScissor(...);
 int itemGetFlagBit1(...);
 int resourceRunOperationIfUnblocked(...);
 int dataTable54FindById(void);
@@ -75,7 +75,7 @@ extern int g_titleScene; /* 0x44ea00 */
 extern unsigned int *uniteGetWork(void);
 extern int FUN_0028cfbc(unsigned int *);
 /* Supplied declaration required: uiDrawListScrollBar. */
-/* Supplied declaration required: FUN_0029a17c. */
+/* Supplied declaration required: gxSetMirroredClippedScissor. */
 extern int partyClassifyRequestedSources(unsigned int, unsigned int, unsigned char *);
 extern int FUN_0029d644(unsigned int *);
 extern int ifTouchGetSelectionModeForRegion(int);
@@ -342,7 +342,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
           (**(romwright_code **)(temp_v4 + 0x1328))();
           *(unsigned char *)(temp_v4 + 0x1324) = 0;
         }
-        FUN_0029a17c((int)&param_1->field_0x0 +
+        gxSetMirroredClippedScissor((int)&param_1->field_0x0 +
                      (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v13 + 8),
                      (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v13 + 10) + param_2,
                      (int)**(short **)(temp_v13 + 0xc),(int)(*(short **)(temp_v13 + 0xc))[1],1);
@@ -511,7 +511,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
             (**(romwright_code **)(temp_v10 + 0x1328))();
             *(unsigned char *)(temp_v10 + 0x1324) = 0;
           }
-          FUN_0029a17c((int)&param_1->field_0x0 +
+          gxSetMirroredClippedScissor((int)&param_1->field_0x0 +
                        (int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v8 + 8),
                        (int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v8 + 10) + param_2,
                        (int)**(short **)(temp_v8 + 0xc),(int)(*(short **)(temp_v8 + 0xc))[1],1);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only: the y/x offset loads use r1/r2/r3 where retail reuses the pool-constant register (r2, r1); the FUN_0029a17c argument loads are scheduled in a different order. */
+/* NON_MATCHING: register allocation only: the y/x offset loads use r1/r2/r3 where retail reuses the pool-constant register (r2, r1); the gxSetMirroredClippedScissor argument loads are scheduled in a different order. */
 #include "camp/RenderCtxTitle.h"
 #include "util/BitsAndBytes_VariantA.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
@@ -30,7 +30,7 @@ extern "C" {
 
 void efctSetSpeed(f32 speed);
 void texDrawTableEntryAtStoredOrigin(u32 flags, u32 table, s32 entry, u32 argument, TextureDrawPayloadIV payload);
-void FUN_0029a17c(s32 x, s32 y, u32 width, s32 height, s32 useNarrowScreen);
+void gxSetMirroredClippedScissor(s32 x, s32 y, u32 width, s32 height, s32 useNarrowScreen);
 
 static __inline TextureDrawPayloadIV payloadAt(s32 y)
 {
@@ -63,7 +63,7 @@ void FUN_002dc120(IconScroller *scroller, s32 amount)
     texDrawTableEntryAtStoredOrigin(2, 0x15, 0x4f, entry->x + x, payloadAt(entry->y + y));
     texDrawTableEntryAtStoredOrigin(2, 0x15, 0x4e, entry->x + x, payloadAt(entry->y + y - amount));
     renderStackSetCounted(&g_titleScene->scissor, 3);
-    FUN_0029a17c(entry->x + x, entry->y + y, entry->placement->width, entry->placement->height - amount, 1);
+    gxSetMirroredClippedScissor(entry->x + x, entry->y + y, entry->placement->width, entry->placement->height - amount, 1);
     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
     texDrawTableEntryAtStoredOrigin(2, 0x15, 0x50, entry->x + x, payloadAt(entry->y + y));
     texDrawTableEntryAtStoredOrigin(2, 0x15, 0x51, entry->x + x, payloadAt(entry->y + y));

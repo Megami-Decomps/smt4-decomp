@@ -14,7 +14,7 @@ int FUN_0020b490(...);
 int FUN_00228b04(...);
 int FUN_002685cc(void);
 int btlTalkBustUpSetDemonTexture(...);
-int FUN_003450d4(...);
+int uiScrollHandleActionsOrTouch(...);
 int obj04Finish(void);
 int skillHelpUpdateAttributeAndTarget(...);
 int btlTalkBustUpSetUnk2F4(...);
@@ -118,7 +118,7 @@ extern int flaggedEntryGetValueA(void);
 extern int btlTalkBustUpGetValue(void);
 /* Supplied declaration required: arrayContainsU16. */
 /* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
-/* Supplied declaration required: FUN_003450d4. */
+/* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 extern int uiSearchPrimary(unsigned int);
 /* Supplied declaration required: obj04Finish. */
 /* Supplied declaration required: skillHelpUpdateAttributeAndTarget. */
@@ -907,7 +907,7 @@ LAB_0026e66c:
     temp_v28 = listCursorGetRowIfUnblocked(temp_v26);
     temp_v23 = 1;
     temp_v7 = temp_v26;
-    FUN_003450d4(temp_v26,0,param_1 + 0x43c6,0xffffffff,0xffffffff,0xffffffff,temp_v31,0);
+    uiScrollHandleActionsOrTouch(temp_v26,0,param_1 + 0x43c6,0xffffffff,0xffffffff,0xffffffff,temp_v31,0);
     if ((temp_v7 != 0) || (temp_v7 = temp_v26, FUN_00228b04(temp_v26,0), temp_v7 != 0)) {
       temp_v6 = listCursorGetRowIfUnblocked(temp_v26);
       if (temp_v6 != temp_v28) {
@@ -1086,7 +1086,7 @@ LAB_0026d4c4:
     temp_v6 = listCursorGetRowIfUnblocked(temp_v30);
     temp_v23 = 1;
     temp_v7 = temp_v30;
-    FUN_003450d4(temp_v30,0,param_1 + 0x43b6,0xffffffff,0xffffffff,0xffffffff,temp_v31,0);
+    uiScrollHandleActionsOrTouch(temp_v30,0,param_1 + 0x43b6,0xffffffff,0xffffffff,0xffffffff,temp_v31,0);
     if ((temp_v7 != 0) || (temp_v7 = temp_v30, FUN_00228b04(temp_v30,0), temp_v7 != 0)) {
       temp_v9 = listCursorGetRowIfUnblocked(temp_v30);
       if (temp_v9 != temp_v6) {

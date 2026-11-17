@@ -14,7 +14,7 @@ struct CyclingPanel {
 
 extern "C" {
 
-void FUN_0035ae58(s32 x, s32 y, s32 width, s32 height, s32 bottomScreen);
+void gxSetMirroredClippedScissor(s32 x, s32 y, s32 width, s32 height, s32 bottomScreen);
 void effectDispatchSelector(s32 icon, s32 x, s32 y, s32 z, f32 scale);
 }
 
@@ -55,7 +55,7 @@ extern "C" void FUN_004b42b0(CyclingPanel *panel, s32 slot, s32 x, s32 y)
                 }
             }
             renderStackSet(&g_renderCtx->scissor, 3);
-            FUN_0035ae58(x + entry->x, y + entry->y, entry->placement->width, entry->placement->height, 1);
+            gxSetMirroredClippedScissor(x + entry->x, y + entry->y, entry->placement->width, entry->placement->height, 1);
             s32 slide = (*timer - 20) * -3;
             effectDispatchSelector(current, entry->x + slide + x, entry->y + y, 0x7e, 1.0f);
             effectDispatchSelector(next, entry->x + x + slide + 13, entry->y + y, 0x7e, 1.0f);

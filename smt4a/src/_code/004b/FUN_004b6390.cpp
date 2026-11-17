@@ -11,7 +11,7 @@ extern "C" {
 
 int asdTMTexLoadMainHeap(int, int);
 int asdLoadFileAsyncSimple(...);
-int FUN_002c7e6c(void);
+int statusAcquireSharedResources(void);
 int FUN_002c85b0(...);
 int campButtonHelpAcquire(void);
 int statusBustUpPortraitAcquire(...);
@@ -42,7 +42,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: statusDownSwitchTab. */
-/* Supplied declaration required: FUN_002c7e6c. */
+/* Supplied declaration required: statusAcquireSharedResources. */
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_002c85b0. */
 /* Supplied declaration required: campButtonHelpAcquire. */
@@ -229,7 +229,7 @@ void FUN_004b6390(int param_1)
   *(unsigned int *)(param_1 + 0x438c) = 0;
   *(unsigned int *)(param_1 + 0x4390) = 0;
   *(unsigned int *)(param_1 + 0x4394) = 0;
-  FUN_002c7e6c();
+  statusAcquireSharedResources();
   FUN_002c85b0(0);
   statusDownSwitchTab(0);
   FUN_002c8538(0);

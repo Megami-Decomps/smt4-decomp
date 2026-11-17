@@ -57,7 +57,7 @@ int FUN_0021d13c(int);
 int FUN_00280030(void);
 int FUN_002b1838(int);
 int FUN_002b24dc(int);
-int FUN_002c7e6c(void);
+int statusAcquireSharedResources(void);
 int FUN_002c85b0(int);
 int FUN_002cc36c(int);
 int FUN_002cdd18(int);
@@ -127,7 +127,7 @@ extern int FUN_00284e94(void);
 /* Supplied declaration required: FUN_002b1838. */
 /* Supplied declaration required: FUN_002b24dc. */
 /* Supplied declaration required: FUN_002c39dc. */
-/* Supplied declaration required: FUN_002c7e6c. */
+/* Supplied declaration required: statusAcquireSharedResources. */
 /* Supplied declaration required: FUN_002c85b0. */
 /* Supplied declaration required: FUN_002cc36c. */
 /* Supplied declaration required: FUN_002ccde8. */
@@ -412,7 +412,7 @@ unsigned int FUN_002248f8(void)
     else {
       temp_v9 = menu32State387CIs6(temp_v10);
       if (temp_v9 != 0) {
-        FUN_002c7e6c();
+        statusAcquireSharedResources();
         FUN_002c85b0(4);
         *(unsigned int *)(temp_v0 + 0x74a0) = 0xe;
         temp_v10 = g_btlUiBlock;

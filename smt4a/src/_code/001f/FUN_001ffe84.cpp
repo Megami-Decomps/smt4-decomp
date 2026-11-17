@@ -18,7 +18,7 @@ int FUN_0031f208(...);
 int sortMenuAcquire(...);
 int flagBanksResetPendingState(...);
 int gameGlobalsSetMenuOpenFlag(...);
-int FUN_003450d4(...);
+int uiScrollHandleActionsOrTouch(...);
 int FUN_003da8f4(...);
 
 int padQueryLogicalKey(...);
@@ -89,7 +89,7 @@ extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: statusDisplayBindUnitRecord. */
 /* Supplied declaration required: gameGlobalsSetMenuOpenFlag. */
 /* Supplied declaration required: FUN_003344b4. */
-/* Supplied declaration required: FUN_003450d4. */
+/* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 extern int uiSearchPrimary(int);
 extern int FUN_0035db94(void);
 /* Supplied declaration required: FUN_0035dbd4. */
@@ -253,7 +253,7 @@ void FUN_001ffe84(void)
   temp_v9[0] = '\0';
   temp_v7 = reinterpret_cast<unsigned int>(asdTMTexTableEntryAt(0x14,0x56d));
   temp_v4 = temp_v8 + 0x1ec;
-  FUN_003450d4(temp_v4,temp_v7,temp_v8 + 0x1b3e,(int)*(short *)(temp_v8 + 0x1b34),
+  uiScrollHandleActionsOrTouch(temp_v4,temp_v7,temp_v8 + 0x1b3e,(int)*(short *)(temp_v8 + 0x1b34),
                (int)*(short *)(temp_v8 + 0x1b36),(int)*(short *)(temp_v8 + 0x1b38),temp_v9,0,1);
   if (temp_v4 != 0) {
     temp_v7 = listCursorGetRowOfChildIfUnblocked(temp_v8 + 0x40);

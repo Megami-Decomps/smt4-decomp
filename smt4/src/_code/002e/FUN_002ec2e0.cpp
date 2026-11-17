@@ -7,7 +7,7 @@ struct SpriteInfo;
 extern "C" {
 void FUN_002598f0(u32 text, s32 x, s32 y, u32 parameter, f32 scale);
 void asdTextDrawDirectoryEntry(u32 text, u32 a, s32 b, u32 c, u32 d, u32 e, s32 f);
-void FUN_0029a17c(s32 x, s32 y, s32 width, s32 height, u32 enabled);
+void gxSetMirroredClippedScissor(s32 x, s32 y, s32 width, s32 height, u32 enabled);
 void asdTextSetBaseColor(u32 text, u32 color);
 void texDrawCompositeSprite(u32 kind, u32 table, u32 sprite, s32 x, s32 y, u32 parameter);
 
@@ -21,7 +21,7 @@ void FUN_002ec2e0(u32 text, u32 param2, s32 param3, s32 param4, s32 row, u32 spr
     TextureTableEntryIV* clip = asdTMTexTableEntryAt(0x39, 0xE0);
     RenderCtx* context = g_titleScene;
     renderStackSet(&context->scissor, 3);
-    FUN_0029a17c(origin->x + clip->x, origin->y + clip->y, clip->placement->width, clip->placement->height, 1);
+    gxSetMirroredClippedScissor(origin->x + clip->x, origin->y + clip->y, clip->placement->width, clip->placement->height, 1);
     texDrawTableEntryAtStoredOrigin(2, 0x39, 0xE2, origin->x + offset, origin->y, 0x65);
     context = g_titleScene;
     renderStackSet(&context->scissor, 0);

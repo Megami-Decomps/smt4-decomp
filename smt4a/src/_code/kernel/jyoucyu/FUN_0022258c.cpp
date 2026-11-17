@@ -1,3 +1,4 @@
+#include "map/mapCommon.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include "event/bustupEvent/BustupTex.h"
 
@@ -21,7 +22,6 @@ void campButtonHelpLoad(void);
 void configSettingsResetDefaults(void);
 void FUN_00283d74(s32 value);
 void FUN_00137848(void);
-void FUN_002326b4(void);
 void asdSequenceRequest(s32 sequence, s32 a, s32 b);
 void FUN_00387454(void);
 void dataTableReloadLocked(void);
@@ -57,7 +57,7 @@ void FUN_0022258c(u32 group)
             configSettingsResetDefaults();
             FUN_00283d74(0);
             FUN_00137848();
-            FUN_002326b4();
+            mapSystemLoadSharedFiles();
             asdSequenceRequest(0x16, 0, 0);
             g_jyoucyu.system = 1;
         }

@@ -9,7 +9,7 @@
 extern "C" {
 
 int FUN_001b079c(...);
-int FUN_0029a17c(...);
+int gxSetMirroredClippedScissor(...);
 int resourceRunOperationIfUnblocked(...);
 int textDrawString(...);
 int efctSetSpeed(void);
@@ -32,7 +32,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_001b079c. */
 extern int uniteGetWork(void);
 extern unsigned int dataTable24Sub0GetRecordS90X(int);
-/* Supplied declaration required: FUN_0029a17c. */
+/* Supplied declaration required: gxSetMirroredClippedScissor. */
 extern int ifTouchGetSelectionModeForRegion(int);
 extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
@@ -156,7 +156,7 @@ void FUN_001f1bc4(int param_1,int param_2)
       (**(romwright_code **)(temp_v11 + 0x1328))();
       *(unsigned char *)(temp_v11 + 0x1324) = 0;
     }
-    FUN_0029a17c(*(short *)(temp_v5 + 8) + param_1,*(short *)(temp_v5 + 10) + temp_v1,
+    gxSetMirroredClippedScissor(*(short *)(temp_v5 + 8) + param_1,*(short *)(temp_v5 + 10) + temp_v1,
                  (int)**(short **)(temp_v5 + 0xc),(int)(*(short **)(temp_v5 + 0xc))[1],1);
     temp_v11 = vec2GetYInt((UiSpriteState *)(temp_v0 + 0xb0));
     temp_v5 = vec2GetXInt((UiSpriteState *)(temp_v0 + 0xb0));

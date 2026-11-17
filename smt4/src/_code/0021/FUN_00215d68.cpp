@@ -11,7 +11,7 @@ extern "C" {
 int FUN_001ce224(...);
 int FUN_002580d4(...);
 int gameRecordCopy(...);
-int FUN_0029a17c(...);
+int gxSetMirroredClippedScissor(...);
 int dataTable54FindById(...);
 int partyMemberFindById(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
@@ -66,7 +66,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002580d4. */
 extern unsigned int *uniteGetWork(void);
 /* Supplied declaration required: gameRecordCopy. */
-/* Supplied declaration required: FUN_0029a17c. */
+/* Supplied declaration required: gxSetMirroredClippedScissor. */
 extern int partyClassifyRequestedSources(unsigned int, unsigned short, unsigned char *);
 extern int ifTouchGetSelectionModeForRegion(int);
 extern unsigned int FUN_0029dde0(void);
@@ -245,7 +245,7 @@ void FUN_00215d68(fn_00215d68_arg0 *param_1,int param_2)
       (**(romwright_code **)(temp_v8 + 0x1328))();
       *(unsigned char *)(temp_v8 + 0x1324) = 0;
     }
-    FUN_0029a17c((int)&param_1->field_0x0 + (int)*(short *)(temp_v2 + 8),
+    gxSetMirroredClippedScissor((int)&param_1->field_0x0 + (int)*(short *)(temp_v2 + 8),
                  *(short *)(temp_v2 + 10) + param_2,(int)**(short **)(temp_v2 + 0xc),
                  (int)(*(short **)(temp_v2 + 0xc))[1],1);
     temp_v8 = vec2GetYInt((const UiSpriteState *)(puVar2 + 0x2c));

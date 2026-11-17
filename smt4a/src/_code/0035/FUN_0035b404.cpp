@@ -16,7 +16,7 @@ u32 taskCreateDraw(const char *, s32, u16, u16, s32 (*)(void), void (*)(u32), u3
 s32 loadSlotIsLoaded(u32 slot);
 void loadSlotRequestAsync(u32 slot, u32 flags);
 void campButtonHelpAcquire(void);
-void FUN_002c7e6c(void);
+void statusAcquireSharedResources(void);
 void FUN_002c85b0(s32 enabled);
 void FUN_003c607c(u8 value);
 
@@ -44,7 +44,7 @@ void FUN_0035b404(u32 argument)
         work->ownsLoadSlot = 1;
     }
     campButtonHelpAcquire();
-    FUN_002c7e6c();
+    statusAcquireSharedResources();
     FUN_002c85b0(0);
     FUN_002c8538(0);
     FUN_003c607c(1);

@@ -9,7 +9,7 @@
 extern "C" {
 
 void textureLoadOptionalDemonModel(s32 id, s32 x, s32 y, u32 layer, s32 mapped);
-int FUN_0029a17c(...);
+int gxSetMirroredClippedScissor(...);
 int fontMeasureLineAdvance(...);
 int nkmBaseGetRecord(void);
 int FUN_002bdf94(...);
@@ -36,7 +36,7 @@ extern int g_screenStateWork; /* 0x43dd90 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0029a17c. */
+/* Supplied declaration required: gxSetMirroredClippedScissor. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: nkmBaseGetRecord. */
 extern unsigned int demonGetRaceLabel(short, unsigned int);
@@ -137,7 +137,7 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
         (**(romwright_code **)(temp_v5 + 0x1328))();
         *(unsigned char *)(temp_v5 + 0x1324) = 0;
       }
-      FUN_0029a17c((int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
+      gxSetMirroredClippedScissor((int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                    (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,
                    (int)**(short **)(temp_v4 + 0xc),
                    (int)(*(short **)(temp_v4 + 0xc))[1] + *(int *)(temp_v7 + param_1 * 4 + 0x68),1);
@@ -224,7 +224,7 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
           (**(romwright_code **)(temp_v9 + 0x1328))();
           *(unsigned char *)(temp_v9 + 0x1324) = 0;
         }
-        FUN_0029a17c((int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v2,
+        gxSetMirroredClippedScissor((int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v2,
                      (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v8,
                      *(unsigned int *)(temp_v1 + 0x58),(int)*(short *)(*(int *)(temp_v5 + 0xc) + 2),1);
         texDrawTableEntryAtStoredOrigin(2,0x24,0x20b,(int)*(short *)(temp_v3 + 8),*(short *)(temp_v3 + 10) + temp_v8,0x79);

@@ -9,7 +9,7 @@ extern "C" {
 
 int FUN_001af84c(...);
 int uiDrawListScrollBar(...);
-int FUN_0029a17c(...);
+int gxSetMirroredClippedScissor(...);
 void drawSkillCategoryLabel(unsigned short, int, int, unsigned int);
 int textDrawString(...);
 int textFormatBuffer(...);
@@ -40,7 +40,7 @@ extern int g_titleScene; /* 0x44ea00 */
 extern int FUN_002886c8(unsigned int);
 /* Supplied declaration required: uiDrawListScrollBar. */
 extern int questIsCompleted(unsigned int);
-/* Supplied declaration required: FUN_0029a17c. */
+/* Supplied declaration required: gxSetMirroredClippedScissor. */
 /* Supplied declaration required: drawSkillCategoryLabel. */
 extern int FUN_0029d644(int);
 extern int ifTouchGetSelectionModeForRegion(int);
@@ -176,7 +176,7 @@ void FUN_001a6d98(void)
       (**(romwright_code **)(temp_v12 + 0x1328))();
       *(unsigned char *)(temp_v12 + 0x1324) = 0;
     }
-    FUN_0029a17c((int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
+    gxSetMirroredClippedScissor((int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                  (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,
                  (int)**(short **)(temp_v4 + 0xc),(int)(*(short **)(temp_v4 + 0xc))[1],1,temp_v8);
     texDrawTableEntryAtStoredOrigin(2,0x29,0xae,(int)*(short *)(temp_v10 + 8) + temp_v5 + temp_v1,

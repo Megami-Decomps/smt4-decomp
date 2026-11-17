@@ -9,7 +9,7 @@
 
 extern "C" {
 
-int FUN_0029a17c(...);
+int gxSetMirroredClippedScissor(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int fontMeasureLineAdvance(...);
 int nkmBaseGetRecord(void);
@@ -39,7 +39,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002580d4. */
 extern int uniteGetWork(void);
-/* Supplied declaration required: FUN_0029a17c. */
+/* Supplied declaration required: gxSetMirroredClippedScissor. */
 extern int ifTouchGetSelectionModeForRegion(unsigned int);
 extern unsigned int FUN_0029dde0(void);
 /* Supplied declaration required: fontMeasureLineAdvance. */
@@ -249,7 +249,7 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
             (**(romwright_code **)(temp_v4 + 0x1328))();
             *(unsigned char *)(temp_v4 + 0x1324) = 0;
           }
-          FUN_0029a17c((int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v5 + 8) + param_1,
+          gxSetMirroredClippedScissor((int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v5 + 8) + param_1,
                        (int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v5 + 10) + param_2,
                        (int)**(short **)(temp_v5 + 0xc),(int)(*(short **)(temp_v5 + 0xc))[1],1);
           temp_v4 = vec2GetYInt((UiSpriteState *)(temp_v1 + 0xb0));

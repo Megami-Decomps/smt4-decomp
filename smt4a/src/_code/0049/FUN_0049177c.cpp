@@ -1,3 +1,4 @@
+#include "map/InteractionFlags.h"
 /* NON_MATCHING: refreshes visibility and screen position of the map icons (flag/ownership rules, scroll offset, 512x640 clip); written from the decompilation, the unused gameFlagsGetBlock() call is dropped and float to int conversion/scheduling is not compared with retail */
 #include "gamedata/MapSaveBlockA.h"
 #include "shard/W6_W6Match7_NumericStepper.h"
@@ -64,7 +65,6 @@ f32 *lmapSceneGetObj(void *scene);
 f32 *sub68OwnerGetBlock60(void *scene);
 void words2Copy(void *source, f32 *out);
 s32 naviMainGetRequestedMap(void *scene);
-s32 FUN_004083a8(u8 kind, s8 type);
 s32 gameFlagIsSet(s32 flag);
 s32 gameOwnedBitTest2(s32 id);
 

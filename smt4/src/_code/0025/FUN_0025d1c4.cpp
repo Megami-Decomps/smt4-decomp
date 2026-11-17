@@ -12,7 +12,7 @@ int FUN_0025cc04(...);
 int mapGetSelectedRecordCategoryTable(void);
 int playerGetMappedCategory(void);
 int uiDrawListScrollBar(...);
-int FUN_0029a17c(...);
+int gxSetMirroredClippedScissor(...);
 int FUN_002b6db0(...);
 int nkmBaseGetRecord(void);
 
@@ -68,7 +68,7 @@ extern unsigned int flagValueRead(int);
 extern int flagBitIsSet(int);
 /* Supplied declaration required: btlGetMainState. */
 extern int FUN_00297ca4(int, unsigned int);
-/* Supplied declaration required: FUN_0029a17c. */
+/* Supplied declaration required: gxSetMirroredClippedScissor. */
 extern unsigned int appGetRemainingCapacity(int);
 extern unsigned int FUN_0029a9d4(int, unsigned int);
 extern int FUN_0029d644(unsigned int);
@@ -495,7 +495,7 @@ void FUN_0025d1c4(int param_1)
     (**(romwright_code **)(temp_v4 + 0x1328))();
     *(unsigned char *)(temp_v4 + 0x1324) = 0;
   }
-  FUN_0029a17c((int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v6,
+  gxSetMirroredClippedScissor((int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v6,
                (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v8 + 10) + temp_v7,
                (int)**(short **)(temp_v8 + 0xc),(int)(*(short **)(temp_v8 + 0xc))[1],1);
   temp_v4 = vec2GetYInt(param_1 + 0x6b0);

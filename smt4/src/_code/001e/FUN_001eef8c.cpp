@@ -15,7 +15,7 @@ extern "C" {
 int uiDrawListScrollBar(...);
 
 int gameRecordCopy(...);
-int FUN_0029a17c(...);
+int gxSetMirroredClippedScissor(...);
 int FUN_0029e6f0(void);
 int resourceRunOperationIfUnblocked(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
@@ -57,7 +57,7 @@ extern int g_titleScene; /* 0x44ea00 */
 extern int uniteGetWork(void);
 /* Supplied declaration required: gameRecordCopy. */
 /* Supplied declaration required: uiDrawListScrollBar. */
-/* Supplied declaration required: FUN_0029a17c. */
+/* Supplied declaration required: gxSetMirroredClippedScissor. */
 extern int ifTouchGetSelectionModeForRegion(int);
 extern unsigned int FUN_0029dde0(void);
 /* Supplied declaration required: FUN_0029e6f0. */
@@ -350,7 +350,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         (**(romwright_code **)(temp_v6 + 0x1328))();
         *(unsigned char *)(temp_v6 + 0x1324) = 0;
       }
-      FUN_0029a17c((int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v13 + 8) + temp_v9,
+      gxSetMirroredClippedScissor((int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v13 + 8) + temp_v9,
                    (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v13 + 10) + temp_v8,
                    (int)**(short **)(temp_v13 + 0xc),(int)(*(short **)(temp_v13 + 0xc))[1],1);
       temp_v6 = vec2GetYInt((UiSpriteState *)(temp_v2 + 0xb0));

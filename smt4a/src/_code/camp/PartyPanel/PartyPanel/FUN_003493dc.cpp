@@ -17,7 +17,7 @@ int gameGetSlotTable(...);
 int gridNavigationConfigure(...);
 int FUN_00230ac0(...);
 int asdLoadFileAsyncSimple(...);
-int FUN_002c7e6c(...);
+int statusAcquireSharedResources(...);
 int FUN_002c8538(...);
 int sysMemClear(...);
 int partyPanelRefreshFromSlotTable(...);
@@ -63,7 +63,7 @@ extern unsigned int *g_partyPanel; /* 0x57f268 */
 /* Supplied declaration required: FUN_00230ac0. */
 extern int saveGetUserSettingsBlock(void);
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: FUN_002c7e6c. */
+/* Supplied declaration required: statusAcquireSharedResources. */
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: partyPanelRefreshFromSlotTable. */
@@ -106,7 +106,7 @@ void FUN_003493dc(int param_1)
   puVar2[2] = (unsigned int)puVar5;
   asdLoadFileAsyncSimple(&LAB_00349814,puVar2 + 3,1);
   asdLoadFileAsyncSimple(&LAB_00349828,puVar2 + 4,1);
-  FUN_002c7e6c();
+  statusAcquireSharedResources();
   if (param_1 != 0) {
     FUN_002c8538(1);
     FUN_00215bd0();

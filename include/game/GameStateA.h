@@ -21,8 +21,8 @@ struct GameStateCameraPoseA {
     /* 0x0C */ MapVector target;
 };
 
-struct SceneModel;
 class MoriModelContent;
+struct TableGroupHeader;
 
 /* Only the fields read so far are named; unkXXX fields are accessed but not yet understood. */
 struct GameStateA {
@@ -289,19 +289,21 @@ struct GameStateA {
     /* 0x501 */ u8 unk501[3];
     /* 0x504 */ u32 mapNameId;
     /* 0x508 */ u8 unk508[4];
-    /* 0x50C */ u32 unk50C;
-    /* 0x510 */ u8 unk510[8];
-    /* 0x518 */ SceneModel *areaModels[4];
-    /* 0x528 */ SceneModel *model528;
-    /* 0x52C */ SceneModel *model52C;
-    /* 0x530 */ SceneModel *model530;
+    /* 0x50C */ TableGroupHeader *mapCommonScript;
+    /* 0x510 */ void *mapCommonMessages;
+    /* 0x514 */ MoriModelContent *mapDamage;
+    /* 0x518 */ MoriModelContent *areaModels[4];
+    /* 0x528 */ MoriModelContent *model528;
+    /* 0x52C */ MoriModelContent *model52C;
+    /* 0x530 */ MoriModelContent *model530;
     /* 0x534 */ MoriModelContent *sceneControllerResources[3];
     /* 0x540 */ u8 unk540[0x10];
-    /* 0x550 */ SceneModel *model550;
+    /* 0x550 */ MoriModelContent *model550;
     /* 0x554 */ u8 unk554[0x10];
-    /* 0x564 */ SceneModel *model564;
-    /* 0x568 */ u8 unk568[8];
-    /* 0x570 */ SceneModel *model570;
+    /* 0x564 */ MoriModelContent *model564;
+    /* 0x568 */ MoriModelContent *mapLightEstoma;
+    /* 0x56C */ u8 unk56C[4];
+    /* 0x570 */ MoriModelContent *model570;
     /* 0x574 */ u8 savedLocationSet;
     /* 0x575 */ u8 unk575[3];
     /* 0x578 */ u32 savedMapId;
@@ -374,5 +376,19 @@ typedef char GameStateAOffsetsCheck[
     sizeof(GameStateA) == 0x698 ? 1 : -1];
 
 extern "C" GameStateA g_gameState;
+
+typedef char GameStateAMapResourceOffsetCheck[
+    offsetof(GameStateA, mapCommonScript) == 0x50C &&
+    offsetof(GameStateA, mapCommonMessages) == 0x510 &&
+    offsetof(GameStateA, mapDamage) == 0x514 &&
+    offsetof(GameStateA, areaModels) == 0x518 &&
+    offsetof(GameStateA, model528) == 0x528 &&
+    offsetof(GameStateA, model52C) == 0x52C &&
+    offsetof(GameStateA, model530) == 0x530 &&
+    offsetof(GameStateA, sceneControllerResources) == 0x534 &&
+    offsetof(GameStateA, model550) == 0x550 &&
+    offsetof(GameStateA, model564) == 0x564 &&
+    offsetof(GameStateA, mapLightEstoma) == 0x568 &&
+    offsetof(GameStateA, model570) == 0x570 ? 1 : -1];
 
 #endif

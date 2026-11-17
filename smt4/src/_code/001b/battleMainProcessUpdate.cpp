@@ -1,3 +1,4 @@
+#include "map/mapBg.h"
 /* NON_MATCHING: shared phase helpers outline differently, state-null checks merge, and round-reset/effect aggregate scheduling differs from retail. */
 #include "battle/BattleUnitSlot.h"
 #include "addon/aocMain.h"
@@ -177,7 +178,6 @@ void FUN_00338cfc(BattleTaskContext *work, u32 enabled);
 void FUN_0027dbc8(u32 kind, u32 enabled);
 void jobStopIfValidC(BattleTaskContext *work);
 s32 sys43e188GetState();
-s32 FUN_002d1ce0();
 s32 screenFadesAllReady();
 void frameTexResetFlags();
 void soundChannelStopAll(u32 channels);
@@ -606,7 +606,7 @@ extern "C" s32 battleMainProcessUpdate()
             setBattleTaskState(21);
         break;
     case 21:
-        if (FUN_002d1ce0() && !jobIsValid(work->endJob))
+        if (mapBgLoadArchivesStep() && !jobIsValid(work->endJob))
             setBattleTaskState(22);
         break;
     case 22:

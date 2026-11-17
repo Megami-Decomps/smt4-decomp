@@ -230,7 +230,25 @@ typedef struct BtlUiObjAA {
         } tail;
     };
 } BtlUiObjAA;
-typedef struct BtlUiObjBA { /* 0x0000 */ u8 unk[0x408]; } BtlUiObjBA;
+/* The seven-sprite battle event panel, bounded by objC at parent offset 0x28C4. */
+struct BtlUiPanelTimerA {
+    s32 frame;
+    s32 state;
+};
+typedef struct BtlUiObjBA {
+    /* 0x000 */ UiResourceParameters parameters;
+    /* 0x020 */ UiSpriteState sprites[7];
+    /* 0x3F4 */ BtlUiPanelTimerA timer;
+    /* 0x3FC */ s32 mode;
+    /* 0x400 */ u8 optionA;
+    /* 0x401 */ u8 optionB;
+    /* 0x402 */ u8 initialized;
+    /* 0x403 */ u8 animated;
+    /* 0x404 */ s32 delay;
+} BtlUiObjBA;
+typedef char BtlUiObjBALayoutCheck[
+    sizeof(BtlUiObjBA) == 0x408 && offsetof(BtlUiObjBA, sprites) == 0x20 &&
+    offsetof(BtlUiObjBA, timer) == 0x3F4 && offsetof(BtlUiObjBA, delay) == 0x404 ? 1 : -1];
 typedef struct BtlUiObjCA { /* 0x0000 */ u8 unk[0x38B0]; } BtlUiObjCA;
 typedef struct BtlUiObjDA {
     union {
@@ -375,7 +393,8 @@ typedef char BtlUiPositionRequestOffsetsCheck[
 extern "C" {
 #endif
 
-void FUN_004a9a50(void);
+/* Apocalypse: selects the global turn-icon panel; the supplied owner is unused. */
+void FUN_004a9a50(void *owner, s32 totalChange, s32 partialChange);
 
 #ifdef __cplusplus
 }

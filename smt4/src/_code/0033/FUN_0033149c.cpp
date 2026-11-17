@@ -10,7 +10,7 @@ int dataTable0BGetValueById(...);
 int dataTable0BFindById(...);
 int appCheckPurchaseRequirements(void);
 int uiDrawListScrollBar(...);
-int FUN_0029a17c(...);
+int gxSetMirroredClippedScissor(...);
 int fadeObjectResetIfActive(...);
 int FUN_002b6b8c(...);
 int FUN_002bdf94(...);
@@ -43,7 +43,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: uiDrawListScrollBar. */
 extern int flagBitIsSet(unsigned int);
 extern unsigned int FUN_00295cec(void);
-/* Supplied declaration required: FUN_0029a17c. */
+/* Supplied declaration required: gxSetMirroredClippedScissor. */
 /* Supplied declaration required: fadeObjectResetIfActive. */
 extern int FUN_0029d644(int);
 extern int ifTouchGetSelectionModeForRegion(int);
@@ -198,7 +198,7 @@ void FUN_0033149c(int param_1)
       (**(romwright_code **)(temp_v9 + 0x1328))();
       *(unsigned char *)(temp_v9 + 0x1324) = 0;
     }
-    FUN_0029a17c((int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v0,
+    gxSetMirroredClippedScissor((int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v0,
                  (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v1,
                  (int)**(short **)(temp_v2 + 0xc),(int)(*(short **)(temp_v2 + 0xc))[1],1,temp_v6);
     texDrawTableEntryAtStoredOrigin(2,0x1d,0x42c,(int)*(short *)(temp_v2 + 8) + temp_v8 + temp_v0,

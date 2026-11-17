@@ -26,7 +26,7 @@ int FUN_002cb278(int, int);
 int buttonHelpScriptStart(...);
 int FUN_0031f208(...);
 int sortMenuAcquire(int, int);
-int FUN_003450d4(int, unsigned int, int, int, int, int, char [8], int, int);
+int uiScrollHandleActionsOrTouch(int, unsigned int, int, int, int, int, char [8], int, int);
 int messageDismissNumericBanner(...);
 int FUN_003da8f4(int, unsigned int);
 int FUN_0048144c(void);
@@ -62,7 +62,7 @@ extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_0031f208. */
 /* Supplied declaration required: sortMenuAcquire. */
 /* Supplied declaration required: flagBanksResetPendingState. */
-/* Supplied declaration required: FUN_003450d4. */
+/* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: FUN_003a7c00. */
 /* Supplied declaration required: messageMainSetTargetFlags. */
@@ -107,7 +107,7 @@ void FUN_003daf0c(int param_1)
     temp_v8[0] = '\0';
     temp_v2 = reinterpret_cast<unsigned int>(asdTMTexTableEntryAt(0x14,0x56d));
     temp_v6 = temp_v7;
-    FUN_003450d4(temp_v7,temp_v2,temp_v5 + 0x1b3e,(int)*(short *)(temp_v5 + 0x1b34),
+    uiScrollHandleActionsOrTouch(temp_v7,temp_v2,temp_v5 + 0x1b3e,(int)*(short *)(temp_v5 + 0x1b34),
                  (int)*(short *)(temp_v5 + 0x1b36),(int)*(short *)(temp_v5 + 0x1b38),temp_v8,0,1);
     if ((temp_v6 != 0) || (temp_v6 = temp_v7, FUN_00228b04(temp_v7,1), temp_v6 != 0)) {
       temp_v2 = listCursorGetRowOfChildIfUnblocked((void *)(temp_v5 + 0x40));

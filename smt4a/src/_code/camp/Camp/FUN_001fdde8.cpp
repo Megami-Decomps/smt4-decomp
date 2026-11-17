@@ -30,7 +30,7 @@ int campShowSelectedEntryHelp(...);
 int FUN_0031f208(...);
 int sortMenuAcquire(...);
 int stateAtF4Apply(void);
-int FUN_003450d4(...);
+int uiScrollHandleActionsOrTouch(...);
 int engineForwardVariadicCommand(...);
 int FUN_0036cf98(...);
 int FUN_0038b57c(...);
@@ -112,7 +112,7 @@ extern int widgetSubCallIfVisible(int);
 /* Supplied declaration required: FUN_003343d8. */
 /* Supplied declaration required: FUN_0033449c. */
 /* Supplied declaration required: stateAtF4Apply. */
-/* Supplied declaration required: FUN_003450d4. */
+/* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: objBSetWordByIndex. */
 /* Supplied declaration required: engineForwardVariadicCommand. */
 extern int FUN_0036cf78(void);
@@ -375,7 +375,7 @@ void FUN_001fdde8(int param_1)
     temp_v3 = reinterpret_cast<unsigned int>(asdTMTexTableEntryAt(0x14,0x572));
     temp_v8 = (int)*(short *)(temp_v5 + 0x1b36);
     temp_v4 = temp_v13;
-    FUN_003450d4(temp_v13,temp_v3,temp_v5 + 0x1b3e,(int)*(short *)(temp_v5 + 0x1b34),temp_v8,
+    uiScrollHandleActionsOrTouch(temp_v13,temp_v3,temp_v5 + 0x1b3e,(int)*(short *)(temp_v5 + 0x1b34),temp_v8,
                  (int)*(short *)(temp_v5 + 0x1b38),temp_v14,0,1);
     temp_v2 = (unsigned short)((unsigned int)temp_v8 >> 0x10);
     if (temp_v4 != 0) {

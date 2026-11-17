@@ -1,3 +1,4 @@
+#include "map/InteractionFlags.h"
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
 #include <stddef.h>

@@ -3,12 +3,7 @@
 #include "gfx/ObjectRegistry.h"
 #include "gamedata/GamePlayerData.h"
 #include "Model/MoriModelManager.h"
-
-/* A model of the map scene: its controller object is at +4. */
-struct SceneModel {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ RegisteredObject *object;
-};
+#include "Model/MoriModelContent.h"
 
 /* The scene's model slots. */
 struct SceneModels {
@@ -16,14 +11,14 @@ struct SceneModels {
     /* 0x164 */ s32 unk164;
     /* 0x168 */ s32 unk168;
     /* 0x16C */ u8 unk16C[4];
-    /* 0x170 */ SceneModel *area;
+    /* 0x170 */ MoriModelContent *area;
     /* 0x174 */ u8 unk174[4];
-    /* 0x178 */ SceneModel *model178;
-    /* 0x17C */ SceneModel *model17C;
-    /* 0x180 */ SceneModel *model180;
-    /* 0x184 */ SceneModel *model184;
-    /* 0x188 */ SceneModel *model188;
-    /* 0x18C */ SceneModel *model18C;
+    /* 0x178 */ MoriModelContent *model178;
+    /* 0x17C */ MoriModelContent *model17C;
+    /* 0x180 */ MoriModelContent *model180;
+    /* 0x184 */ MoriModelContent *model184;
+    /* 0x188 */ MoriModelContent *model188;
+    /* 0x18C */ MoriModelContent *model18C;
 };
 
 struct DataTableEntry {
@@ -41,9 +36,9 @@ void controllerSetPosition(RegisteredObject *owner, f32 x, f32 y, f32 z);
 }
 
 /* Registers the model's object with the handle registry and marks it active (bits 0 and 1). */
-static __inline RegisteredObject *registerModel(SceneModel *model)
+static __inline RegisteredObject *registerModel(MoriModelContent *model)
 {
-    RegisteredObject *object = model->object;
+    RegisteredObject *object = reinterpret_cast<RegisteredObject *>(model->body);
     handleRegistryRegisterObject(g_handleRegistry, object);
     object->flags |= 3;
     return object;

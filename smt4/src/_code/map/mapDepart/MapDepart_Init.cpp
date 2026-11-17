@@ -17,13 +17,6 @@ struct MapDepartureInitView {
     u32 destinationState[4];
     u8 unk58[0x28];
 };
-struct MapDepartureRequest {
-    s32 mode;
-    s32 map;
-    s32 entry;
-    u32 unk0C;
-    u32 destinationState[4];
-};
 typedef char MapDepartureInitLayout[sizeof(MapDepartureInitView) == 0x80 &&
     offsetof(MapDepartureInitView, mode) == 0xC && offsetof(MapDepartureInitView, destinationState) == 0x48 ? 1 : -1];
 
@@ -38,7 +31,7 @@ void FUN_002f4b2c(u32 process);
 u32 taskCreateDraw(const s8 *name, s32 priority, u16 firstDelay, u16 lastDelay,
     AsdProcUpdateFunc update, AsdProcFunc end, void *work, u32 parent);
 
-/* From map 100 on the request also carries the destination's state. */
+/* Past story stage 100 the request also carries the destination's state. */
 static __inline void mapDepartCopyDestination(MapDepartureInitView *work, const MapDepartureRequest *request)
 {
     if (g_gameState.mapId >= 100) {
@@ -49,13 +42,11 @@ static __inline void mapDepartCopyDestination(MapDepartureInitView *work, const 
     }
 }
 
-/* Allocates the departure work from the request (or a default departure) and starts its process and the
- * 3D and 2D search tasks. */
-void MapDepart_Init(const MapDepartureRequest *request)
+void MapDepart_Init(const MapDepartureRequest *request, u32 requestSize)
 {
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\map\\mapDepart.cpp", 173);
-    g_mapDepart = (MapDepart *)asdMemAlloc(0x100, 0x100, 0, sizeof(MapDepartureInitView), 1);
-    MapDepartureInitView *work = (MapDepartureInitView *)g_mapDepart;
+    g_mapDepart = static_cast<MapDepart *>(asdMemAlloc(0x100, 0x100, 0, sizeof(MapDepartureInitView), 1));
+    MapDepartureInitView *work = reinterpret_cast<MapDepartureInitView *>(g_mapDepart);
     MapSaveBlock *location = gameGetMapBlock();
     if (request != NULL) {
         if (request->mode == 0) {

@@ -72,7 +72,7 @@ void FUN_00228b04(void *listbox, s32 mode);
 u32 resourceRunOperationIfUnblocked(void *listbox);
 s32 listCursorGetRowIfUnblocked(void *listbox);
 void flagsSetOrClearBit(void *flags, s32 bit);
-s32 FUN_003450d4(void *listbox, u32 handle, void *position, s32 width, s32 x, s32 y, u8 *result, s32, s32);
+s32 uiScrollHandleActionsOrTouch(void *listbox, u32 handle, void *position, s32 width, s32 x, s32 y, u8 *result, s32, s32);
 void FUN_003fd690(u16 id, s32 mode);
 s32 flagsAtGetBit1(u16 id);
 void FUN_0049d140(DirectoryScreenWork *work, s32 state, s32 arg);
@@ -94,7 +94,7 @@ void FUN_0049df84(DirectoryScreenWork *work)
     work->definition = &work->definitions[work->index];
     result = 0;
     mode = ifTouchGetSelectionMode();
-    if (FUN_003450d4(work->listbox, reinterpret_cast<u32>(asdTMTexTableEntryAt(0x33, 0x57)), work->touchPosition, work->touchWidth, work->touchX,
+    if (uiScrollHandleActionsOrTouch(work->listbox, reinterpret_cast<u32>(asdTMTexTableEntryAt(0x33, 0x57)), work->touchPosition, work->touchWidth, work->touchX,
                      work->touchY, &result, 0, 1) != 0) {
         return;
     }

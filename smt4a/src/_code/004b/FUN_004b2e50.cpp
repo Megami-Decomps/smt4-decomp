@@ -12,7 +12,7 @@ extern "C" {
 int effectRenderTransformedInstance(...);
 int efctSetSpeed(void);
 int gxResetColorQuadToWhite(void);
-int FUN_0035ae58(...);
+int gxSetMirroredClippedScissor(...);
 int partyGetSlotPreferredFirst(...);
 int FUN_004b3a4c(...);
 int FUN_004b5db8(...);
@@ -44,7 +44,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_0035ae58. */
+/* Supplied declaration required: gxSetMirroredClippedScissor. */
 extern int partySlotMatchesSelected(void);
 /* Supplied declaration required: partyGetSlotPreferredFirst. */
 /* Supplied declaration required: FUN_004b3a4c. */
@@ -263,7 +263,7 @@ void FUN_004b2e50(int param_1,int param_2,int param_3)
           (**(romwright_code **)(temp_v13 + 0x1334))();
           *(unsigned char *)(temp_v13 + 0x1330) = 0;
         }
-        FUN_0035ae58(*(short *)(temp_v2 + 8) + temp_v7,*(short *)(temp_v2 + 10) + temp_v1,
+        gxSetMirroredClippedScissor(*(short *)(temp_v2 + 8) + temp_v7,*(short *)(temp_v2 + 10) + temp_v1,
                      (int)**(short **)(temp_v2 + 0xc),(int)(*(short **)(temp_v2 + 0xc))[1],1);
         temp_v13 = g_renderCtx;
         temp_v10 = packNibblesAndByte(6, 1, 0);
@@ -340,7 +340,7 @@ void FUN_004b2e50(int param_1,int param_2,int param_3)
             (**(romwright_code **)(temp_v11 + 0x1334))();
             *(unsigned char *)(temp_v11 + 0x1330) = 0;
           }
-          FUN_0035ae58(*(short *)(temp_v2 + 8) + temp_v7,*(short *)(temp_v2 + 10) + temp_v1,
+          gxSetMirroredClippedScissor(*(short *)(temp_v2 + 8) + temp_v7,*(short *)(temp_v2 + 10) + temp_v1,
                        (int)**(short **)(temp_v2 + 0xc),(int)(*(short **)(temp_v2 + 0xc))[1],1);
           temp_v11 = g_renderCtx;
           temp_v3 = packNibblesAndByte(6, 1, 0);

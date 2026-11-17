@@ -7,7 +7,7 @@
 
 extern "C" {
 
-int FUN_0028c040(void);
+int statusAcquireSharedResources(void);
 int buttonHelpCreate(void);
 int statusDownSwitchTab(...);
 int statusBustUpPortraitAcquire(...);
@@ -35,7 +35,7 @@ extern unsigned char DAT_004059c4; /* 0x4059c4 */
 extern unsigned char DAT_00405a30; /* 0x405a30 */
 extern unsigned char DAT_00405a4c; /* 0x405a4c */
 
-/* Supplied declaration required: FUN_0028c040. */
+/* Supplied declaration required: statusAcquireSharedResources. */
 /* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: statusDownSwitchTab. */
 /* Supplied declaration required: statusBustUpPortraitAcquire. */
@@ -192,7 +192,7 @@ void FUN_003b7b58(int param_1)
   *(unsigned int *)(param_1 + 0x3554) = 0;
   *(unsigned int *)(param_1 + 0x3558) = 0;
   *(unsigned int *)(param_1 + 0x355c) = 0;
-  FUN_0028c040();
+  statusAcquireSharedResources();
   gameGlobalsSetSelected(0);
   statusDownSwitchTab(0);
   gameSetIconDisplayEnabled(0);

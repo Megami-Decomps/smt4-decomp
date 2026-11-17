@@ -44,7 +44,7 @@ int FUN_0025e704(...);
 int FUN_002b4dcc(...);
 int FUN_002b4e7c(void);
 int heldAmountLessThan(...);
-int FUN_0035ae58(...);
+int gxSetMirroredClippedScissor(...);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -138,7 +138,7 @@ extern int valueAtMostFifthOfTotal(int, int);
 /* Supplied declaration required: heldAmountLessThan. */
 /* Supplied declaration required: efctCallRoutineWithSpeedOverride. */
 /* Supplied declaration required: FUN_0034ea70. */
-/* Supplied declaration required: FUN_0035ae58. */
+/* Supplied declaration required: gxSetMirroredClippedScissor. */
 /* Supplied declaration required: devilDispatchTextureResource. */
 /* Supplied declaration required: FUN_003a6404. */
 /* Supplied declaration required: devilIsTextureLoaded. */
@@ -291,7 +291,7 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
         (**(romwright_code **)(temp_v7 + 0x1334))(3);
         *(unsigned char *)(temp_v7 + 0x1330) = 0;
       }
-      FUN_0035ae58((int)*(short *)(temp_v15 + 8),(int)*(short *)(temp_v15 + 10),
+      gxSetMirroredClippedScissor((int)*(short *)(temp_v15 + 8),(int)*(short *)(temp_v15 + 10),
                    (int)**(short **)(temp_v15 + 0xc),(*(short **)(temp_v15 + 0xc))[1] - temp_v28,1);
     }
     temp_v15 = temp_v34;
@@ -308,7 +308,7 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
           (**(romwright_code **)(temp_v15 + 0x1334))();
           *(unsigned char *)(temp_v15 + 0x1330) = 0;
         }
-        FUN_0035ae58(*(short *)(temp_v7 + 8) + temp_v6,*(short *)(temp_v7 + 10) + temp_v5,
+        gxSetMirroredClippedScissor(*(short *)(temp_v7 + 8) + temp_v6,*(short *)(temp_v7 + 10) + temp_v5,
                      (int)**(short **)(temp_v7 + 0xc),(*(short **)(temp_v7 + 0xc))[1] - temp_v28,1);
         texDrawTableEntryAtStoredOrigin(2,0xd,0x3a,temp_v6,temp_v5,6);
         temp_v15 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x45));
@@ -347,7 +347,7 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
             (**(romwright_code **)(temp_v7 + 0x1334))(3);
             *(unsigned char *)(temp_v7 + 0x1330) = 0;
           }
-          FUN_0035ae58(*(short *)(temp_v8 + 8) + temp_v6,*(short *)(temp_v8 + 10) + temp_v5,
+          gxSetMirroredClippedScissor(*(short *)(temp_v8 + 8) + temp_v6,*(short *)(temp_v8 + 10) + temp_v5,
                        (int)**(short **)(temp_v8 + 0xc),(*(short **)(temp_v8 + 0xc))[1] - temp_v28,1)
           ;
         }
@@ -637,7 +637,7 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
             (**(romwright_code **)(temp_v13 + 0x1334))(3);
             *(unsigned char *)(temp_v13 + 0x1330) = 0;
           }
-          FUN_0035ae58(*(short *)(temp_v8 + 8) + temp_v6,*(short *)(temp_v8 + 10) + temp_v5,
+          gxSetMirroredClippedScissor(*(short *)(temp_v8 + 8) + temp_v6,*(short *)(temp_v8 + 10) + temp_v5,
                        (int)**(short **)(temp_v8 + 0xc),temp_v17 - temp_v28,1);
         }
       }
@@ -649,7 +649,7 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
           (**(romwright_code **)(temp_v13 + 0x1334))(3);
           *(unsigned char *)(temp_v13 + 0x1330) = 0;
         }
-        FUN_0035ae58(*(short *)(temp_v8 + 8) + temp_v6,*(short *)(temp_v8 + 10) + temp_v5,
+        gxSetMirroredClippedScissor(*(short *)(temp_v8 + 8) + temp_v6,*(short *)(temp_v8 + 10) + temp_v5,
                      (int)**(short **)(temp_v8 + 0xc),(*(short **)(temp_v8 + 0xc))[1] - temp_v28,1);
       }
       temp_v11 = *(unsigned int *)(temp_v7 + 0x4178);
@@ -969,7 +969,7 @@ LAB_002afb00:
         (**(romwright_code **)(temp_v5 + 0x1334))();
         *(unsigned char *)(temp_v5 + 0x1330) = 0;
       }
-      FUN_0035ae58((int)*(short *)(temp_v6 + 8),(int)*(short *)(temp_v6 + 10),
+      gxSetMirroredClippedScissor((int)*(short *)(temp_v6 + 8),(int)*(short *)(temp_v6 + 10),
                    (int)**(short **)(temp_v6 + 0xc),(*(short **)(temp_v6 + 0xc))[1] - temp_v28,1);
       temp_v5 = g_renderCtx;
       temp_v15 = packNibblesAndByte(6,1,0);
@@ -1175,7 +1175,7 @@ LAB_002afb00:
               (**(romwright_code **)(temp_v4 + 0x1334))(3);
               *(unsigned char *)(temp_v4 + 0x1330) = 0;
             }
-            FUN_0035ae58(*(short *)(temp_v5 + 8) + temp_v16,(int)*(short *)(temp_v5 + 10),
+            gxSetMirroredClippedScissor(*(short *)(temp_v5 + 8) + temp_v16,(int)*(short *)(temp_v5 + 10),
                          (int)**(short **)(temp_v5 + 0xc),(int)(*(short **)(temp_v5 + 0xc))[1],1);
             temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x1ba));
             temp_v4 = *(int *)(*piVar6 + 0x4d68);
@@ -1272,7 +1272,7 @@ LAB_002afb00:
       else {
         temp_v16 = temp_v16 - 0x28;
       }
-      FUN_0035ae58((int)*(short *)(temp_v5 + 8),(int)*(short *)(temp_v5 + 10),
+      gxSetMirroredClippedScissor((int)*(short *)(temp_v5 + 8),(int)*(short *)(temp_v5 + 10),
                    (int)**(short **)(temp_v5 + 0xc),temp_v16,1);
       texDrawTableEntryAtStoredOrigin(2,0xd,temp_v12,(int)*(short *)(temp_v5 + 8),(int)*(short *)(temp_v5 + 10),0xe7);
       temp_v16 = g_renderCtx;

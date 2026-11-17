@@ -15,7 +15,7 @@ typedef struct Scene {
 
 extern const char DAT_00407648[];  /* "player/pl_dammy.bam" */
 
-s32 FUN_0028c040(void);
+s32 statusAcquireSharedResources(void);
 s32 gameGlobalsSetSelected(u32 arg);
 s32 statusDownSwitchTab(s32 arg);
 s32 FUN_0029c4c8(s32 arg);
@@ -31,7 +31,7 @@ void FUN_00230234(Scene *scene)
     u32 value;
     PlayerDataIV *player;
 
-    FUN_0028c040();
+    statusAcquireSharedResources();
     if (scene->mode == 1) {
         value = 3;
     } else {

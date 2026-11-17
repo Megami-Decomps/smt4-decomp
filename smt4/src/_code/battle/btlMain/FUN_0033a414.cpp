@@ -1,3 +1,4 @@
+#include "battle/BtlResidentLoader.h"
 /* NON_MATCHING: worker wait-result and argument descriptor stack slots and result-predicate lowering differ. */
 #include "battle/btlMain.h"
 #include "nn/os/ThreadLaunch.h"
@@ -10,7 +11,7 @@ extern const char DAT_00400b68[];
 void nn_os_CriticalSection_Initialize(void *section);
 void *memAlloc(u32 heap, u32 alignment, u32 mode, u32 bytes, u32 pageSize, u32 flags);
 s32 FUN_002c40f8(s32 *index, const u32 *handles, s32 count, bool waitAll, s64 timeout);
-void FUN_00339b64(void *argument);
+
 void FUN_003f6e74(void);
 void FUN_003f6fe0(void);
 void FUN_003f6f44(void);
@@ -69,7 +70,7 @@ void FUN_0033a414(BtlMainState *state)
     descriptor.callbacks[1] = FUN_003f6fe0;
     descriptor.callbacks[2] = FUN_003f6f44;
     BattleWorkerView *argument = worker;
-    s32 result = FUN_002bcc60(&worker->thread, &descriptor, FUN_00339b64, &argument,
+    s32 result = FUN_002bcc60(&worker->thread, &descriptor, btlAdvanceResidentResourceLoad, &argument,
         worker->stack->info.address + worker->stack->info.size, 17, 0, 0);
     bool failed = nnResultIsFailure(result);
     if (failed)

@@ -8,7 +8,7 @@
 extern "C" {
 
 int uiDrawListScrollBar(...);
-int FUN_0029a17c(...);
+int gxSetMirroredClippedScissor(...);
 int vec2GetYInt(...);
 int vec2GetXInt(...);
 int renderCtxResetColorScale(...);
@@ -46,7 +46,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: gameDataGetPlayerName. */
 /* Supplied declaration required: uiDrawListScrollBar. */
-/* Supplied declaration required: FUN_0029a17c. */
+/* Supplied declaration required: gxSetMirroredClippedScissor. */
 extern int ifTouchGetSelectionModeForRegion(int);
 extern int FUN_0029ee54(int);
 extern int listCursorGetRowIfUnblocked(int);
@@ -321,7 +321,7 @@ unsigned int FUN_001a26dc(void)
       (**(romwright_code **)(temp_v4 + 0x1328))();
       *(unsigned char *)(temp_v4 + 0x1324) = 0;
     }
-    FUN_0029a17c((int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v7 + 8),
+    gxSetMirroredClippedScissor((int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v7 + 8),
                  (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v7 + 10),
                  (int)**(short **)(temp_v7 + 0xc),(int)(*(short **)(temp_v7 + 0xc))[1],1);
     temp_v4 = vec2GetYInt();

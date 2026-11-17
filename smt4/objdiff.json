@@ -52570,13 +52570,13 @@
       "target_path": "orig/target/_code/001e/screenIsStateEight.o"
     },
     {
-      "base_path": "build/obj/_code/001e/FUN_001eea88.o",
+      "base_path": "build/obj/_code/001e/uniteResultInitialize.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001eea88",
+            "name": "uniteResultInitialize",
             "size": 1004,
             "vram": "0x1eea88"
           }
@@ -52584,10 +52584,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/001e/FUN_001eea88.cpp"
+        "source_path": "src/_code/001e/uniteResultInitialize.cpp"
       },
-      "name": "_code/001e/FUN_001eea88",
-      "target_path": "orig/target/_code/001e/FUN_001eea88.o"
+      "name": "_code/001e/uniteResultInitialize",
+      "target_path": "orig/target/_code/001e/uniteResultInitialize.o"
     },
     {
       "base_path": "build/obj/_code/001e/FUN_001eef8c.o",
@@ -95543,13 +95543,13 @@
       "target_path": "orig/target/_code/0028/FUN_0028c028.o"
     },
     {
-      "base_path": "build/obj/_code/status/Status/FUN_0028c040.o",
+      "base_path": "build/obj/_code/status/Status/statusAcquireSharedResources.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0028c040",
+            "name": "statusAcquireSharedResources",
             "size": 1448,
             "vram": "0x28c040"
           }
@@ -95558,10 +95558,10 @@
           "_code",
           "status/Status"
         ],
-        "source_path": "src/_code/status/Status/FUN_0028c040.cpp"
+        "source_path": "src/_code/status/Status/statusAcquireSharedResources.cpp"
       },
-      "name": "_code/status/Status/FUN_0028c040",
-      "target_path": "orig/target/_code/status/Status/FUN_0028c040.o"
+      "name": "_code/status/Status/statusAcquireSharedResources",
+      "target_path": "orig/target/_code/status/Status/statusAcquireSharedResources.o"
     },
     {
       "base_path": "build/obj/_code/0028/playSceneIsFadeInDone.o",
@@ -100856,13 +100856,13 @@
       "target_path": "orig/target/_code/0029/FUN_0029a164.o"
     },
     {
-      "base_path": "build/obj/_code/0029/FUN_0029a17c.o",
+      "base_path": "build/obj/_code/0029/gxSetMirroredClippedScissor.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0029a17c",
+            "name": "gxSetMirroredClippedScissor",
             "size": 232,
             "vram": "0x29a17c"
           }
@@ -100870,10 +100870,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0029/FUN_0029a17c.cpp"
+        "source_path": "src/_code/0029/gxSetMirroredClippedScissor.cpp"
       },
-      "name": "_code/0029/FUN_0029a17c",
-      "target_path": "orig/target/_code/0029/FUN_0029a17c.o"
+      "name": "_code/0029/gxSetMirroredClippedScissor",
+      "target_path": "orig/target/_code/0029/gxSetMirroredClippedScissor.o"
     },
     {
       "base_path": "build/obj/_code/0029/fadeObjectResetIfActive.o",
@@ -125304,13 +125304,13 @@
       "target_path": "orig/target/_code/002d/lmapMainGetFlag.o"
     },
     {
-      "base_path": "build/obj/_code/002d/FUN_002d1ce0.o",
+      "base_path": "build/obj/_code/002d/mapBgLoadArchivesStep.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002d1ce0",
+            "name": "mapBgLoadArchivesStep",
             "size": 308,
             "vram": "0x2d1ce0"
           }
@@ -125318,10 +125318,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002d/FUN_002d1ce0.cpp"
+        "source_path": "src/_code/002d/mapBgLoadArchivesStep.cpp"
       },
-      "name": "_code/002d/FUN_002d1ce0",
-      "target_path": "orig/target/_code/002d/FUN_002d1ce0.o"
+      "name": "_code/002d/mapBgLoadArchivesStep",
+      "target_path": "orig/target/_code/002d/mapBgLoadArchivesStep.o"
     },
     {
       "base_path": "build/obj/_code/002d/FUN_002d1e4c.o",
@@ -149716,13 +149716,13 @@
       "target_path": "orig/target/_code/0031/scrComm_QuestUI_OpenWithArg.o"
     },
     {
-      "base_path": "build/obj/_code/0031/FUN_0031c344.o",
+      "base_path": "build/obj/_code/0031/itemApplyPermanentStatBoost.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0031c344",
+            "name": "itemApplyPermanentStatBoost",
             "size": 852,
             "vram": "0x31c344"
           }
@@ -149730,10 +149730,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0031/FUN_0031c344.cpp"
+        "source_path": "src/_code/0031/itemApplyPermanentStatBoost.cpp"
       },
-      "name": "_code/0031/FUN_0031c344",
-      "target_path": "orig/target/_code/0031/FUN_0031c344.o"
+      "name": "_code/0031/itemApplyPermanentStatBoost",
+      "target_path": "orig/target/_code/0031/itemApplyPermanentStatBoost.o"
     },
     {
       "base_path": "build/obj/_code/0031/FUN_0031c69c.o",
@@ -157462,13 +157462,13 @@
       "target_path": "orig/target/_code/0033/FUN_003398e4.o"
     },
     {
-      "base_path": "build/obj/_code/0033/FUN_00339b64.o",
+      "base_path": "build/obj/_code/0033/btlAdvanceResidentResourceLoad.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00339b64",
+            "name": "btlAdvanceResidentResourceLoad",
             "size": 596,
             "vram": "0x339b64"
           }
@@ -157476,10 +157476,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0033/FUN_00339b64.cpp"
+        "source_path": "src/_code/0033/btlAdvanceResidentResourceLoad.cpp"
       },
-      "name": "_code/0033/FUN_00339b64",
-      "target_path": "orig/target/_code/0033/FUN_00339b64.o"
+      "name": "_code/0033/btlAdvanceResidentResourceLoad",
+      "target_path": "orig/target/_code/0033/btlAdvanceResidentResourceLoad.o"
     },
     {
       "base_path": "build/obj/_code/0033/FUN_00339dc0.o",

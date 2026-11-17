@@ -26,7 +26,7 @@ int FUN_00228b04(int, int);
 int scrScriptProcessCreate(void);
 int scrScriptProcessStartEntry(...);
 int ifTouchRegionAdd(int, int, int, int);
-int FUN_003450d4(...);
+int uiScrollHandleActionsOrTouch(...);
 int messageMainSetFlag(...);
 int fillThreeWordsWithByte(int, unsigned int);
 
@@ -64,7 +64,7 @@ extern int dataTableGetEntries(void);
 /* Supplied declaration required: ifTouchRegionAdd. */
 extern int messageGetChoiceResult(void);
 /* Supplied declaration required: scrSetStringSlot. */
-/* Supplied declaration required: FUN_003450d4. */
+/* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 extern int uiSearchPrimary(int);
 /* Supplied declaration required: obj04Finish. */
 /* Supplied declaration required: messageMainSetFlag. */
@@ -196,7 +196,7 @@ void FUN_00202ea4(void)
     FUN_00228b04(temp_v7,1);
     if ((temp_v6 != 0) ||
        (temp_v6 = temp_v7,
-       FUN_003450d4(temp_v7,0,temp_v7 + 0x6e,0xffffffff,0xffffffff,0xffffffff,temp_v12,0,1), temp_v6 != 0)
+       uiScrollHandleActionsOrTouch(temp_v7,0,temp_v7 + 0x6e,0xffffffff,0xffffffff,0xffffffff,temp_v12,0,1), temp_v6 != 0)
        ) {
       temp_v6 = listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(temp_v7));
       *(int *)(temp_v7 + 0x88) = temp_v6;

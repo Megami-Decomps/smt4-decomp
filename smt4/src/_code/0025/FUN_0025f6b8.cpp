@@ -54,7 +54,7 @@ extern "C" {
 extern PulseColor DAT_00435e00;
 
 /* Sets the scissor rectangle. */
-void FUN_0029a17c(s32 x, s32 y, u32 width, s32 height, s32 useNarrowScreen);
+void gxSetMirroredClippedScissor(s32 x, s32 y, u32 width, s32 height, s32 useNarrowScreen);
 s32 btlLinkGetMaxHp(BtlUnitLink *record);
 u8 isLowThreshold(s32 current, s16 max);
 void drawSetColorFromRGBA8(u32 packed);
@@ -183,14 +183,14 @@ void FUN_0025f6b8(PlayScene *scene, s32 expanded, s32 allLit, s32 lift, s32 dimG
             }
             efctSetSpeed(alpha);
             hudSetScissor(3);
-            FUN_0029a17c(plate->x, plate->y, plate->placement->width, plate->placement->height - shift, 1);
+            gxSetMirroredClippedScissor(plate->x, plate->y, plate->placement->width, plate->placement->height - shift, 1);
         }
 
         if (scene->party.vacant[member] != 0 && member > 0) {
             if (expanded != 0) {
                 entry = asdTMTexTableEntryAt(21, 0x3A);
                 hudSetScissor(3);
-                FUN_0029a17c(entry->x + x, entry->y + y, entry->placement->width, entry->placement->height - shift, 1);
+                gxSetMirroredClippedScissor(entry->x + x, entry->y + y, entry->placement->width, entry->placement->height - shift, 1);
                 renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
                 texDrawTableEntryAtStoredOrigin(2, 21, 0x3A, x, y, 6);
                 renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
@@ -211,7 +211,7 @@ void FUN_0025f6b8(PlayScene *scene, s32 expanded, s32 allLit, s32 lift, s32 dimG
                 entry = asdTMTexTableEntryAt(21, 0x3A);
                 if (scene->slideShown[member] == 0) {
                     hudSetScissor(3);
-                    FUN_0029a17c(entry->x + x, entry->y + y, entry->placement->width, entry->placement->height - shift, 1);
+                    gxSetMirroredClippedScissor(entry->x + x, entry->y + y, entry->placement->width, entry->placement->height - shift, 1);
                 }
                 renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
                 texDrawTableEntryAtStoredOrigin(2, 21, 0x3A, x, y, 6);
@@ -376,11 +376,11 @@ void FUN_0025f6b8(PlayScene *scene, s32 expanded, s32 allLit, s32 lift, s32 dimG
                     }
                     hudSetScissor(0);
                     hudSetScissor(3);
-                    FUN_0029a17c(gauge->x + x, gauge->y + y, gauge->placement->width, height - shift, 1);
+                    gxSetMirroredClippedScissor(gauge->x + x, gauge->y + y, gauge->placement->width, height - shift, 1);
                 }
             } else {
                 hudSetScissor(3);
-                FUN_0029a17c(gauge->x + x, gauge->y + y, gauge->placement->width, gauge->placement->height - shift, 1);
+                gxSetMirroredClippedScissor(gauge->x + x, gauge->y + y, gauge->placement->width, gauge->placement->height - shift, 1);
             }
 
             s32 shakeX;
@@ -526,7 +526,7 @@ void FUN_0025f6b8(PlayScene *scene, s32 expanded, s32 allLit, s32 lift, s32 dimG
                 texDrawTableEntryAtStoredOrigin(2, 21, 0x4F, entry->x, entry->y, 46);
                 texDrawTableEntryAtStoredOrigin(2, 21, 0x4E, entry->x, entry->y - shift, 46);
                 hudSetScissor(3);
-                FUN_0029a17c(entry->x, entry->y, entry->placement->width, entry->placement->height - shift, 1);
+                gxSetMirroredClippedScissor(entry->x, entry->y, entry->placement->width, entry->placement->height - shift, 1);
                 renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
                 texDrawTableEntryAtStoredOrigin(2, 21, 0x50, entry->x, entry->y, 46);
                 texDrawTableEntryAtStoredOrigin(2, 21, 0x51, entry->x, entry->y, 46);
@@ -655,7 +655,7 @@ void FUN_0025f6b8(PlayScene *scene, s32 expanded, s32 allLit, s32 lift, s32 dimG
                     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
                     entry = asdTMTexTableEntryAt(21, 0x1B9);
                     hudSetScissor(3);
-                    FUN_0029a17c(entry->x + flashX, entry->y, entry->placement->width, entry->placement->height, 1);
+                    gxSetMirroredClippedScissor(entry->x + flashX, entry->y, entry->placement->width, entry->placement->height, 1);
                     entry = asdTMTexTableEntryAt(21, 0x1BA);
                     u16 index = ((GameOptions *)gameGetSupportUnitData())->supportIndex;
                     SupportUnitRecord *record =
@@ -690,7 +690,7 @@ void FUN_0025f6b8(PlayScene *scene, s32 expanded, s32 allLit, s32 lift, s32 dimG
             }
             hudSetScissor(3);
             s32 height = entry->placement->height;
-            FUN_0029a17c(entry->x, entry->y, entry->placement->width, expanded != 0 ? height - shift : height - 40, 1);
+            gxSetMirroredClippedScissor(entry->x, entry->y, entry->placement->width, expanded != 0 ? height - shift : height - 40, 1);
             texDrawTableEntryAtStoredOrigin(2, 21, image, entry->x, entry->y, 231);
             hudSetScissor(0);
             gxResetColorQuadToWhite();

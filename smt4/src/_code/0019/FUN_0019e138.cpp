@@ -63,7 +63,7 @@ int playSceneTimerSubStartReverse(unsigned int);
 int playSceneFadeOutStart(unsigned int);
 int FUN_0028bfe4(int);
 int FUN_0028c028(...);
-int FUN_0028c040(void);
+int statusAcquireSharedResources(void);
 int gameGlobalsSetSelected(int);
 int spriteStartAnimationByIndex(int, int);
 int uiSpriteAdvanceAnimation(...);
@@ -127,7 +127,7 @@ extern int playSceneIsFadeOutDone(int);
 /* Supplied declaration required: playSceneFadeOutStart. */
 /* Supplied declaration required: FUN_0028bfe4. */
 /* Supplied declaration required: FUN_0028c028. */
-/* Supplied declaration required: FUN_0028c040. */
+/* Supplied declaration required: statusAcquireSharedResources. */
 extern int playSceneIsFadeInDone(int);
 extern int FUN_0028c600(int);
 /* Supplied declaration required: btlCommandMenuResolveLayout. */
@@ -355,7 +355,7 @@ int FUN_0019e138(unsigned int job)
     else {
       temp_v11 = FUN_002d0080(temp_v12);
       if (temp_v11 != 0) {
-        FUN_0028c040();
+        statusAcquireSharedResources();
         gameGlobalsSetSelected(4);
         *(unsigned int *)(temp_v0 + 0x7e38) = 10;
         temp_v8 = g_btlUiBlock;

@@ -6882,3 +6882,11 @@
 001f3eec floatInterpolateOverDuration
 00432104 ipcServiceSessionRelease
 00301490 onlineSocketObjectConstruct
+003450d4 uiScrollHandleActionsOrTouch
+0035ae58 gxSetMirroredClippedScissor
+002a74ac uniteResultInitialize
+002c7e6c statusAcquireSharedResources
+002cdad4 btlEventPanelInitialize
+002c5468 mapRebuildWallAutoTiles
+002326b4 mapSystemLoadSharedFiles
+00491c60 lmapRefreshDestinationAvailability

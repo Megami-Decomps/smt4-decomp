@@ -7,3 +7,5 @@
   games share code, where names and source-file placements come from, and what counts as proven.
 - Per game: [smt4](../smt4/README.md) and [smt4a](../smt4a/README.md) describe each project's dump,
   build commands, configuration files and tools.
+- [Notes](notes/README.md): the retail evidence behind individual matches whose fix changed a shared
+  contract, a header or the configuration (an inlined helper, a corrected argument list, a data table).

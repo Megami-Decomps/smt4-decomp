@@ -9,7 +9,7 @@ void scrWorkSetValue(u32 index, s32 value);
 void flagBitmapSetBit(u32 id, s32 value);
 void flagValueAdd(u32 id, s32 value);
 void flagValueSub(u32 id, s32 value);
-void FUN_002c7e6c(void);
+void statusAcquireSharedResources(void);
 void FUN_002c8538(s32 mode);
 void statusDownEnterState1(u16 id, s32 mode);
 void FUN_002fb404(BtlUiObjCA *widget);
@@ -37,7 +37,7 @@ u32 scrBattleRunStatusOperation(void)
         break;
     case 1:
         scrWorkSetValue(0, 2);
-        FUN_002c7e6c();
+        statusAcquireSharedResources();
         FUN_002c8538(0);
         statusDownEnterState1(static_cast<u16>(id), 0);
         FUN_002fb404(&g_btlUiBlock->objC);

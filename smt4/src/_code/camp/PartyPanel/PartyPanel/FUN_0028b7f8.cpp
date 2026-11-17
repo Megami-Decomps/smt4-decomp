@@ -9,7 +9,7 @@ extern "C" {
 int slotPlacementSetSlot(...);
 int FUN_0026b9bc(...);
 int partyPanelSortEntries(...);
-int FUN_0028c040(...);
+int statusAcquireSharedResources(...);
 int asdLoadFileAsyncSimple(...);
 int FUN_0029e788(...);
 int gridNavigationConfigure(...);
@@ -49,7 +49,7 @@ extern unsigned int *g_partyPanel; /* 0x43dcf0 */
 /* Supplied declaration required: slotPlacementSetSlot. */
 /* Supplied declaration required: FUN_0026b9bc. */
 /* Supplied declaration required: partyPanelSortEntries. */
-/* Supplied declaration required: FUN_0028c040. */
+/* Supplied declaration required: statusAcquireSharedResources. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: FUN_0029e788. */
 /* Supplied declaration required: gameSetIconDisplayEnabled. */
@@ -99,7 +99,7 @@ void FUN_0028b7f8(int param_1)
   puVar2[2] = (unsigned int)puVar5;
   asdLoadFileAsyncSimple("camp/partypanel.mbm",puVar2 + 3,1);
   asdLoadFileAsyncSimple("camp/partypanel.bf",puVar2 + 4,1);
-  FUN_0028c040();
+  statusAcquireSharedResources();
   if (param_1 != 0) {
     gameSetIconDisplayEnabled(1);
     FUN_0029e788();
